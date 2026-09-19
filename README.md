@@ -34,13 +34,12 @@ assets/js/audit-engine.js        Motor de la aplicación
 Dependencias externas por CDN: Leaflet 1.9.4 (mapas) y Google Fonts
 (Playfair Display, Source Serif 4, JetBrains Mono, Inter).
 
-## Estado de la migración
+## Contexto y estado
 
-Este repositorio se creó al migrar el proyecto desde su entorno de
-desarrollo anterior. Por ahora **solo contiene `index.html`**; los cuatro
-archivos de `assets/` están pendientes de subir. Sin ellos la página carga
-sin estilos y sin funcionalidad, ya que el HTML invoca `AuditEngine` en más
-de 300 puntos.
+Antes de trabajar en el proyecto, lee [CONTEXT.md](CONTEXT.md): documenta el
+estado actual, lo que está pendiente, el criterio editorial y cómo verificar un
+cambio. Está escrito para que cualquier persona o asistente de IA pueda retomar
+el trabajo sin contexto previo.
 
 ## Ejecución local
 
