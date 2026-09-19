@@ -2522,6 +2522,89 @@
             refNum: '2'
           }
         ]
+      },
+      {
+        nivel: 'Nivel 5: Administración, Disciplina y Carrera Judicial (Reforma 2024)',
+        nodos: [
+          {
+            id: 'scjn_oaj',
+            titulo: 'Órgano de Administración Judicial (OAJ)',
+            icono: '🏢',
+            badge: '5 Integrantes · 6 Años Improrrogables',
+            badgeTipo: 'badge-gold',
+            desc: 'Órgano que sustituye al Consejo de la Judicatura Federal en las funciones de administración, vigilancia y manejo de los recursos del Poder Judicial de la Federación, conforme a la reforma constitucional publicada en el DOF el 15 de septiembre de 2024.',
+            titular: 'Cinco personas titulares: una designada por el Ejecutivo Federal, una por el Senado y tres por el Pleno de la SCJN',
+            plazasPresupuesto: 'Administra el Ramo 03 del PEF, salvo el presupuesto propio de la Suprema Corte y del Tribunal Electoral',
+            marco: 'Art. 100 CPEUM reformado · Reforma Judicial DOF 15-09-2024',
+            quehacer: 'Concentra la administración del Poder Judicial de la Federación: elabora y ejerce el presupuesto de los órganos jurisdiccionales, determina la adscripción y el número de juzgados de distrito y tribunales de circuito, opera la carrera judicial, gestiona los recursos humanos y materiales, y rinde cuentas de ese ejercicio ante la Auditoría Superior de la Federación. No ejerce funciones jurisdiccionales ni disciplinarias.',
+            distincionEspecialidad: {
+              tipo: 'sustitucion_cjf',
+              titulo: 'Separación entre Administrar y Sancionar',
+              detalle: 'La reforma dividió en dos las atribuciones que antes concentraba el Consejo de la Judicatura Federal: la administración quedó en este Órgano y la disciplina pasó al Tribunal de Disciplina Judicial. El objetivo declarado fue evitar que quien administra el presupuesto sea también quien sanciona a las personas juzgadoras.'
+            },
+            fundamentoDetallado: [
+              'Art. 100 de la Constitución Política de los Estados Unidos Mexicanos (texto reformado)',
+              'Decreto de Reforma Judicial publicado en el DOF el 15 de septiembre de 2024',
+              'Artículos transitorios del Decreto de Reforma sobre la extinción del Consejo de la Judicatura Federal',
+              'Presupuesto de Egresos de la Federación - Ramo 03'
+            ],
+            glosario: 'Reforma Constitucional del Poder Judicial',
+            refKey: 'ref-reforma-judicial',
+            refNum: '20'
+          },
+          {
+            id: 'scjn_tdj',
+            titulo: 'Tribunal de Disciplina Judicial (TDJ)',
+            icono: '⚖️',
+            badge: '5 Magistraturas Electas por Voto Popular · 6 Años',
+            badgeTipo: 'badge-amber',
+            desc: 'Órgano encargado de investigar y sancionar las faltas de las personas servidoras públicas del Poder Judicial de la Federación, incluidas las ministras y ministros de la Suprema Corte. Asume la función disciplinaria que antes correspondía al Consejo de la Judicatura Federal.',
+            titular: 'Cinco magistradas y magistrados electos mediante voto popular directo',
+            plazasPresupuesto: 'Presupuesto propio dentro del Ramo 03 · Ponencias de instrucción y órgano de investigación adscrito',
+            marco: 'Arts. 100 y 101 CPEUM reformados · Reforma Judicial DOF 15-09-2024',
+            quehacer: 'Recibe denuncias ciudadanas y de oficio contra personal jurisdiccional, instruye los procedimientos de responsabilidad administrativa y resuelve sobre amonestaciones, suspensiones, destituciones e inhabilitaciones. Puede ordenar la remoción de personas juzgadoras y dar vista al Ministerio Público cuando advierta hechos posiblemente constitutivos de delito.',
+            distincionEspecialidad: {
+              tipo: 'control_disciplinario',
+              titulo: 'Resoluciones Definitivas e Inatacables',
+              detalle: 'La Constitución establece que las determinaciones de este Tribunal son definitivas e inatacables, por lo que no admiten juicio de amparo ni recurso ordinario. Es el punto de mayor debate jurídico de la reforma, por su tensión con el derecho de acceso a la justicia y con la independencia judicial.'
+            },
+            fundamentoDetallado: [
+              'Arts. 100 y 101 de la Constitución Política de los Estados Unidos Mexicanos (texto reformado)',
+              'Decreto de Reforma Judicial publicado en el DOF el 15 de septiembre de 2024',
+              'Ley General de Responsabilidades Administrativas (aplicación supletoria)',
+              'Ley Orgánica del Poder Judicial de la Federación'
+            ],
+            glosario: 'Tribunal de Disciplina Judicial',
+            refKey: 'ref-reforma-judicial',
+            refNum: '20'
+          },
+          {
+            id: 'scjn_effj',
+            titulo: 'Escuela Federal de Formación Judicial (EFFJ)',
+            icono: '🎓',
+            badge: 'Formación y Carrera Judicial · Adscrita al OAJ',
+            badgeTipo: 'badge-cyan',
+            desc: 'Órgano auxiliar responsable de la formación, capacitación y evaluación del personal jurisdiccional del Poder Judicial de la Federación. Tras la reforma de 2024 quedó adscrita al Órgano de Administración Judicial.',
+            titular: 'Dirección General de la Escuela Federal de Formación Judicial',
+            plazasPresupuesto: 'Programa presupuestario propio dentro del Ramo 03 · Sede central y extensiones regionales',
+            marco: 'Art. 100 CPEUM · Ley de Carrera Judicial del Poder Judicial de la Federación',
+            quehacer: 'Diseña e imparte los programas de especialización judicial, organiza los concursos de oposición para el ingreso y la promoción en las categorías de la carrera judicial, evalúa el desempeño del personal y publica investigación aplicada en materia de impartición de justicia.',
+            distincionEspecialidad: {
+              tipo: 'carrera_judicial',
+              titulo: 'Filtro Técnico de Ingreso y Promoción',
+              detalle: 'Aunque la reforma trasladó a elección popular la designación de ministras, ministros, magistraturas y jueces de distrito, la Escuela conserva la formación y la evaluación técnica del resto del personal jurisdiccional: secretarías de estudio y cuenta, actuarías y oficialías.'
+            },
+            fundamentoDetallado: [
+              'Art. 100 de la Constitución Política de los Estados Unidos Mexicanos',
+              'Ley de Carrera Judicial del Poder Judicial de la Federación',
+              'Acuerdos Generales del Órgano de Administración Judicial en materia de formación',
+              'Presupuesto de Egresos de la Federación - Ramo 03'
+            ],
+            glosario: 'Ramo 03',
+            refKey: 'ref-pef-ramo03',
+            refNum: '21'
+          }
+        ]
       }
     ],
     pjf: [
