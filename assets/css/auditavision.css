@@ -8519,3 +8519,147 @@ nav.tabbar button.active .num {
   color: var(--text-secondary);
 }
 
+/* ====================================================================
+   SUBPESTANA 4.5 - SELECTOR DE PARTES Y LINEA DE TIEMPO DE LA REFORMA
+   ==================================================================== */
+
+.calculos-parte-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.calculos-parte-btn {
+  flex: 1 1 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  font-family: inherit;
+}
+
+.calculos-parte-btn:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-1px);
+}
+
+.calculos-parte-btn.active {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.18);
+}
+
+.calculos-parte-btn .cp-num {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.calculos-parte-btn.active .cp-num {
+  color: var(--crimson-bright);
+}
+
+.calculos-parte-btn .cp-txt {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.calculos-parte-btn.active .cp-txt {
+  color: var(--gold-bright);
+}
+
+.reforma-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.reforma-hito-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  position: relative;
+  padding: 11px 12px 11px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--border-subtle);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.reforma-hito-pill:hover {
+  border-color: var(--border-gold);
+  border-left-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.reforma-hito-pill.active {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: var(--gold);
+  border-left-color: var(--crimson-bright);
+}
+
+.reforma-hito-pill .rh-step {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+.reforma-hito-pill .rh-icono {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.reforma-hito-pill .rh-fecha {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--crimson-bright);
+}
+
+.reforma-hito-pill .rh-titulo {
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.reforma-hito-pill.active .rh-titulo {
+  color: var(--text-main);
+}
+
+.reforma-hito-detalle {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .calculos-parte-btn {
+    flex: 1 1 100%;
+  }
+}

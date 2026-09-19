@@ -115,6 +115,13 @@ de los 32 circuitos.
   - Nivel 5 (nuevo): Órgano de Administración Judicial, Tribunal de Disciplina
     Judicial y Escuela Federal de Formación Judicial.
 
+- **Pestaña 4.5 dividida en dos partes.** La Parte 1 (cálculos globales, salas y
+  focos rojos) quedó intacta. Se añadió una **Parte 2: «Costo y Resultado de la
+  Reforma Judicial (2024–2028)»** con línea de tiempo de seis hitos, auditor de
+  costo electoral, gráfica de tres vistas (presupuesto federal, participación y
+  costo por voto, costo en las entidades), balance de resultados y hoja de ruta
+  hacia la segunda elección, hoy diferida a junio de 2028.
+
 ### Pendiente
 
 - **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
@@ -123,6 +130,13 @@ de los 32 circuitos.
   corresponden a la estructura de once ponencias y al tope salarial anterior.
   Hay una advertencia metodológica visible en la ficha. Deben contrastarse
   contra el Manual de Remuneraciones vigente antes de citarse.
+- **Contraste en tema claro**: varios paneles de la pestaña 4 usan
+  `rgba(0,0,0,0.3)` en línea, lo que en tema claro produce texto atenuado sobre
+  fondo gris. Es un comportamiento previo a los cambios recientes y afecta por
+  igual a las dos partes de 4.5; conviene resolverlo en una pasada propia.
+- **Cifra federal ejercida del proceso electoral judicial**: se publica como
+  aproximada (≈$7,200 mdp) a la espera de la cuenta pública y de la
+  fiscalización de la ASF.
 - **Decisión editorial abierta**: si las Salas suprimidas deben permanecer
   documentadas como estructura histórica o desaparecer del organigrama.
 

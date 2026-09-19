@@ -7577,6 +7577,409 @@
     }
   }
 
+  /* ====================================================================
+     SUBPESTANA 4.5 - PARTE 2: COSTO Y RESULTADO DE LA REFORMA JUDICIAL
+     Fuentes: DOF 15-09-2024; acuerdos presupuestales del Consejo General
+     del INE; estimacion de participacion ciudadana del PEEPJF 2024-2025;
+     computos distritales judiciales 2025; declaratoria de
+     constitucionalidad del 1 de junio de 2026 (eleccion diferida a 2028).
+     ==================================================================== */
+
+  const REFORMA_JUDICIAL_COSTO_DATA = {
+    kpis: [
+      {
+        id: 'federal',
+        lbl: 'Costo Federal del Proceso (INE)',
+        valor: 7200,
+        sufijo: ' mdp',
+        prefijo: '$',
+        color: 'var(--gold-bright)',
+        sub: '≈ Presupuesto asignado más ampliación',
+        subReposo: '⚪ Ramo 22 · Proceso extraordinario',
+        estado: 'aproximado'
+      },
+      {
+        id: 'local',
+        lbl: 'Costo en las 19 Entidades (OPLE)',
+        valor: 3600,
+        sufijo: ' mdp',
+        prefijo: '$',
+        color: 'var(--cyan)',
+        sub: 'Suma de presupuestos asignados',
+        subReposo: '⚪ 19 elecciones judiciales locales',
+        estado: 'asignado'
+      },
+      {
+        id: 'participacion',
+        lbl: 'Participación Ciudadana',
+        valor: 12.86,
+        sufijo: ' %',
+        prefijo: '',
+        decimales: 2,
+        color: '#c0392b',
+        sub: '12.4 millones de 99.7 millones en lista nominal',
+        subReposo: '⚪ Estimación INE: 12.57 % – 13.32 %',
+        estado: 'oficial'
+      },
+      {
+        id: 'costovoto',
+        lbl: 'Costo por Voto Emitido',
+        valor: 586,
+        sufijo: ' pesos',
+        prefijo: '$',
+        color: '#f59e0b',
+        sub: 'Contra $206 por voto en la elección de 2024',
+        subReposo: '⚪ Rango reportado: $531 – $586',
+        estado: 'rango'
+      }
+    ],
+
+    hitos: [
+      {
+        id: 'hito_iniciativa',
+        fecha: '5 feb 2024',
+        titulo: 'Iniciativa presidencial',
+        icono: '📜',
+        color: 'var(--gold-bright)',
+        monto: 'Sin costo presupuestal directo',
+        detalle: 'El titular del Ejecutivo Federal presenta ante la Cámara de Diputados un paquete de iniciativas de reforma constitucional que incluye la elección por voto popular de ministras, ministros, magistraturas y juzgados de Distrito. Es el acto que origina toda la cadena de gasto documentada en esta ficha.',
+        fuente: 'Gaceta Parlamentaria de la Cámara de Diputados'
+      },
+      {
+        id: 'hito_dof',
+        fecha: '15 sep 2024',
+        titulo: 'Publicación del decreto en el DOF',
+        icono: '⚖️',
+        color: 'var(--gold-bright)',
+        monto: 'Obligación constitucional de organizar la elección',
+        detalle: 'Se publica el decreto de reforma al Poder Judicial. A partir de esta fecha el INE queda obligado a organizar un proceso electoral extraordinario sin precedente: seis elecciones simultáneas, candidaturas sin partido, sin financiamiento público de campaña y sin acceso a radio y televisión.',
+        fuente: 'Diario Oficial de la Federación, 15 de septiembre de 2024'
+      },
+      {
+        id: 'hito_presupuesto',
+        fecha: '31 dic 2024',
+        titulo: 'Asignación presupuestal al INE',
+        icono: '💰',
+        color: '#c0392b',
+        monto: '$6,219.2 mdp aprobados',
+        detalle: 'El Consejo General del INE aprueba el presupuesto del proceso extraordinario por 6 mil 219 millones 213 mil 262 pesos, muy por debajo de lo solicitado originalmente. El instituto advierte que garantizará la elección pese al recorte y anuncia que gestionará una ampliación.',
+        fuente: 'Acuerdo del Consejo General del INE, 31 de diciembre de 2024'
+      },
+      {
+        id: 'hito_ampliacion',
+        fecha: '16 ene 2025',
+        titulo: 'Solicitud de ampliación a Hacienda',
+        icono: '📈',
+        color: '#f59e0b',
+        monto: '$7,670 mdp solicitados (+23.3 %)',
+        detalle: 'El INE solicita a la Secretaría de Hacienda una ampliación de 1,511 millones de pesos para llegar a 7,670 mdp. Hacienda autoriza posteriormente cerca de mil millones adicionales, con lo que el costo federal se aproxima a los 7,200 mdp.',
+        fuente: 'Consejo General del INE · Secretaría de Hacienda y Crédito Público'
+      },
+      {
+        id: 'hito_jornada',
+        fecha: '1 jun 2025',
+        titulo: 'Jornada electoral extraordinaria',
+        icono: '🗳️',
+        color: '#c0392b',
+        monto: '881 cargos federales · 1,081 cargos locales',
+        detalle: 'Se eligen por voto popular nueve ministras y ministros de la SCJN, magistraturas del Tribunal de Disciplina Judicial, de la Sala Superior y salas regionales del TEPJF, magistraturas de Circuito y juzgados de Distrito. Participan 12.4 millones de personas de una lista nominal de 99.7 millones: la participación más baja registrada en una elección nacional.',
+        fuente: 'Cómputos distritales judiciales 2025 del INE'
+      },
+      {
+        id: 'hito_diferimiento',
+        fecha: '1 jun 2026',
+        titulo: 'La segunda elección se difiere a 2028',
+        icono: '⏳',
+        color: 'var(--cyan)',
+        monto: '853 cargos federales + 3,255 locales pendientes',
+        detalle: 'El Congreso de la Unión declara constitucional la reforma que recorre la segunda elección judicial del primer domingo de junio de 2027 al de 2028, tras el aval de 25 congresos locales y la Ciudad de México. En la Cámara de Diputados se aprobó con 322 votos a favor, 132 en contra y 22 abstenciones.',
+        fuente: 'Declaratoria de constitucionalidad del Congreso de la Unión, 1 de junio de 2026'
+      }
+    ],
+
+    vistas: {
+      costos: {
+        titulo: 'Presupuesto federal del proceso extraordinario',
+        maxVal: 7670,
+        unidad: 'mdp',
+        items: [
+          { id: 'c_asignado', nombre: 'Asignado por el Consejo General (31 dic 2024)', icono: '📋', valor: 6219, txt: '$6,219 mdp', color: 'var(--gold-bright)', nota: 'Monto exacto: 6,219 millones 213 mil 262 pesos.', estado: 'Cifra oficial', fuente: 'Acuerdo del Consejo General del INE' },
+          { id: 'c_solicitado', nombre: 'Ampliación solicitada a Hacienda (ene 2025)', icono: '📈', valor: 7670, txt: '$7,670 mdp', color: '#f59e0b', nota: 'Representa 23.3 % por encima de lo aprobado en diciembre: 1,511 mdp adicionales.', estado: 'Cifra oficial', fuente: 'Solicitud del INE a la SHCP' },
+          { id: 'c_ejercido', nombre: 'Costo federal aproximado del proceso', icono: '💸', valor: 7200, txt: '≈$7,200 mdp', color: '#c0392b', nota: 'Hacienda autorizó cerca de mil millones adicionales sobre el presupuesto original. La cifra definitiva debe contrastarse con la cuenta pública y la fiscalización de la ASF.', estado: 'Aproximado · pendiente de fiscalización', fuente: 'SHCP · INE' },
+          { id: 'c_local', nombre: 'Presupuestos de los 19 OPLE estatales', icono: '🗺️', valor: 3600, txt: '≈$3,600 mdp', color: 'var(--cyan)', nota: 'Suma de los presupuestos asignados para las elecciones judiciales locales. Corresponde a recursos asignados, no necesariamente devengados: al cierre del proceso, doce gobiernos estatales mantenían adeudos con sus organismos electorales.', estado: 'Asignado · no devengado', fuente: 'Presupuestos estatales de los 19 OPLE' }
+        ]
+      },
+      participacion: {
+        titulo: 'Legitimidad y costo unitario frente a la elección de 2024',
+        maxVal: 100,
+        unidad: '%',
+        items: [
+          { id: 'p_2024', nombre: 'Elección federal ordinaria 2024', icono: '🟢', valor: 61.0, txt: '61.0 % de participación', color: '#10b981', nota: 'La elección presidencial y legislativa de 2024 alcanzó una participación cercana al 61 % de la lista nominal, con un costo estimado de 206 pesos por voto emitido.', estado: 'Cifra oficial', fuente: 'Cómputos distritales del INE, 2024' },
+          { id: 'p_2025', nombre: 'Elección judicial extraordinaria 2025', icono: '🔴', valor: 12.86, txt: '12.86 % de participación', color: '#c0392b', nota: 'La estimación del INE sitúa la participación entre 12.57 % y 13.32 %. Del registro vigente, 12.8630 % de las personas en lista nominal acudió a las urnas: 12.4 millones de 99.7 millones.', estado: 'Cifra oficial', fuente: 'Estimación de participación del INE, PEEPJF 2024–2025' },
+          { id: 'p_costo2024', nombre: 'Costo por voto en 2024 (escala relativa)', icono: '🪙', valor: 35.2, txt: '$206 por voto', color: 'var(--gold-bright)', nota: 'Escala relativa: la barra representa el costo por voto de 2024 como proporción del de 2025, para hacer comparables ambas magnitudes.', estado: 'Cifra reportada', fuente: 'Cálculos periodísticos sobre presupuesto INE 2024' },
+          { id: 'p_costo2025', nombre: 'Costo por voto en 2025 (escala relativa)', icono: '💥', valor: 100, txt: '$531 – $586 por voto', color: '#f59e0b', nota: 'El rango depende de la base considerada: 531 pesos si se toma únicamente el presupuesto federal del proceso, 586 si se incorpora el consolidado. En cualquiera de los dos supuestos, el costo unitario casi se triplica respecto de 2024. El encarecimiento no proviene de un gasto mayor, sino del bajo número de votos entre los que se reparte.', estado: 'Rango · según metodología', fuente: 'Cálculos sobre cómputos distritales y presupuesto INE' }
+        ]
+      },
+      entidades: {
+        titulo: 'Dispersión del costo entre las entidades federativas',
+        maxVal: 941,
+        unidad: 'mdp',
+        items: [
+          { id: 'e_edomex', nombre: 'Estado de México (presupuesto más alto)', icono: '🔺', valor: 941, txt: '$941 mdp', color: '#c0392b', nota: 'La entidad con el mayor presupuesto asignado para su elección judicial local, más de cuatro veces el promedio nacional.', estado: 'Cifra reportada', fuente: 'Presupuesto del OPLE del Estado de México' },
+          { id: 'e_promedio', nombre: 'Promedio de las 19 entidades', icono: '➖', valor: 200.85, txt: '$200.85 mdp', color: 'var(--gold-bright)', nota: 'Promedio aritmético de los presupuestos asignados: 200 millones 853 mil 109 pesos por entidad. No existe una fórmula homologada por cargo ni por elector, lo que impide comparar eficiencia entre estados.', estado: 'Cifra reportada', fuente: 'Compilación de presupuestos de los 19 OPLE' },
+          { id: 'e_nayarit', nombre: 'Nayarit (presupuesto más bajo)', icono: '🔻', valor: 30, txt: '≈$30 mdp', color: 'var(--cyan)', nota: 'Poco más de 30 millones de pesos: la asignación más baja del conjunto. La brecha de más de treinta veces frente al Estado de México no se explica únicamente por el tamaño del padrón.', estado: 'Cifra reportada', fuente: 'Presupuesto del OPLE de Nayarit' }
+        ]
+      }
+    },
+
+    balance: [
+      { lbl: 'Cargos Judiciales Renovados', val: '1,962 cargos', color: 'var(--gold-bright)', sub: '881 federales y 1,081 locales en una sola jornada' },
+      { lbl: 'Personas que Acudieron a Votar', val: '12.4 millones', color: 'var(--cyan)', sub: 'De una lista nominal de 99.7 millones' },
+      { lbl: 'Ciudadanía que No Participó', val: '87.1 %', color: '#c0392b', sub: 'Cerca de 87 millones de personas no acudieron' },
+      { lbl: 'Pendiente para 2028', val: '4,108 cargos', color: '#f59e0b', sub: '853 federales y 3,255 locales por renovar' }
+    ]
+  };
+
+  let currentReformaView = 'costos';
+  let selectedReformaHito = null;
+  let isReformaEvaluated = false;
+  let isReformaAnimating = false;
+  let isReformaHoverEnabled = false;
+  let reformaAnimFrameId = null;
+
+  function setCalculosParte(parte) {
+    const esUno = parte !== 'dos';
+    const p1 = document.getElementById('calculosParte1');
+    const p2 = document.getElementById('calculosParte2');
+    const b1 = document.getElementById('btnCalculosParte1');
+    const b2 = document.getElementById('btnCalculosParte2');
+
+    if (p1) p1.style.display = esUno ? 'block' : 'none';
+    if (p2) p2.style.display = esUno ? 'none' : 'block';
+    if (b1) {
+      b1.classList.toggle('active', esUno);
+      b1.setAttribute('aria-selected', esUno ? 'true' : 'false');
+    }
+    if (b2) {
+      b2.classList.toggle('active', !esUno);
+      b2.setAttribute('aria-selected', esUno ? 'false' : 'true');
+    }
+
+    if (!esUno) renderReformaCosto();
+  }
+
+  function setReformaView(viewMode) {
+    currentReformaView = viewMode;
+    ['costos', 'participacion', 'entidades'].forEach(k => {
+      const btn = document.getElementById('btnReformaView' + k.charAt(0).toUpperCase() + k.slice(1));
+      if (btn) btn.classList.toggle('active', k === viewMode);
+    });
+    renderReformaChart();
+  }
+
+  function renderReformaCosto() {
+    renderReformaKpis();
+    renderReformaTimeline();
+    renderReformaChart();
+    renderReformaBalance();
+  }
+
+  function renderReformaKpis() {
+    const strip = document.getElementById('reformaKpisStrip');
+    if (!strip) return;
+
+    strip.innerHTML = REFORMA_JUDICIAL_COSTO_DATA.kpis.map(k => {
+      const dec = k.decimales || 0;
+      const valTxt = isReformaEvaluated
+        ? `${k.prefijo}${k.valor.toLocaleString('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec })}${k.sufijo}`
+        : `${k.prefijo}0${k.sufijo}`;
+      const subTxt = isReformaEvaluated ? k.sub : k.subReposo;
+      return `
+        <div class="globales-kpi-card">
+          <div class="globales-kpi-lbl">${k.lbl}</div>
+          <div class="globales-kpi-val" id="kpiReforma_${k.id}" style="color:${k.color};">${valTxt}</div>
+          <div class="globales-kpi-sub" id="kpiReformaSub_${k.id}">${subTxt}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderReformaTimeline() {
+    const strip = document.getElementById('reformaTimelineStrip');
+    if (!strip) return;
+
+    strip.innerHTML = REFORMA_JUDICIAL_COSTO_DATA.hitos.map((h, i) => `
+      <button type="button" class="reforma-hito-pill${selectedReformaHito === h.id ? ' active' : ''}" id="reformaHito_${h.id}" onclick="window.AuditEngine.selectReformaHito('${h.id}')" title="${h.titulo}">
+        <span class="rh-step">${i + 1}</span>
+        <span class="rh-icono">${h.icono}</span>
+        <span class="rh-fecha">${h.fecha}</span>
+        <span class="rh-titulo">${h.titulo}</span>
+      </button>
+    `).join('');
+  }
+
+  function selectReformaHito(id) {
+    selectedReformaHito = id;
+    renderReformaTimeline();
+
+    const hito = REFORMA_JUDICIAL_COSTO_DATA.hitos.find(h => h.id === id);
+    const box = document.getElementById('reformaHitoDetalle');
+    if (!hito || !box) return;
+
+    box.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
+        <div>
+          <strong style="color:${hito.color}; font-size:13.5px;">${hito.icono} ${hito.titulo}</strong>
+          <div style="font-size:11px; color:var(--text-dim); margin-top:2px; font-family:var(--font-mono);">${hito.fecha}</div>
+        </div>
+        <span style="font-family:var(--font-mono); font-size:11.5px; color:var(--gold-bright); font-weight:700; background:rgba(212,175,55,0.12); padding:3px 8px; border-radius:4px; border:1px solid var(--border-gold);">
+          ${hito.monto}
+        </span>
+      </div>
+      <p style="margin:9px 0 6px; font-size:12.5px; line-height:1.6; color:var(--text-secondary);">${hito.detalle}</p>
+      <div style="border-top:1px dashed var(--border-subtle); padding-top:6px; margin-top:6px; font-size:11px; font-family:var(--font-mono); color:var(--text-dim);">
+        📑 Fuente: ${hito.fuente}
+      </div>
+    `;
+  }
+
+  function renderReformaChart() {
+    const stage = document.getElementById('reformaChartStage');
+    if (!stage) return;
+
+    const vista = REFORMA_JUDICIAL_COSTO_DATA.vistas[currentReformaView];
+    if (!vista) return;
+
+    stage.innerHTML = `
+      <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">
+        ${vista.titulo}
+      </div>
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        ${vista.items.map(item => {
+          const targetW = (item.valor / vista.maxVal) * 100;
+          const barWidth = isReformaEvaluated ? Math.max(6, targetW) : 0;
+          const valTxt = isReformaEvaluated ? item.txt : (vista.unidad === '%' ? '0 %' : '$0 ' + vista.unidad);
+          return `
+            <div class="globales-bar-item" onclick="window.AuditEngine.selectReformaItem('${item.id}')" title="Clic para ver el origen y el estado de verificación de la cifra">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:5px; font-size:12.5px; gap:10px;">
+                <span style="color:var(--text-main); font-weight:600;">${item.icono} ${item.nombre}</span>
+                <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:${item.color}; white-space:nowrap;">${valTxt}</span>
+              </div>
+              <div style="height:10px; background:rgba(255,255,255,0.06); border-radius:5px; overflow:hidden;">
+                <div class="globales-bar-fill${isReformaEvaluated ? '' : ' bar-zero'}" style="width:${barWidth}%; background:${item.color};"></div>
+              </div>
+              <div style="font-size:10.5px; color:var(--text-dim); margin-top:3px; font-family:var(--font-mono);">${item.estado}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+
+  function selectReformaItem(id) {
+    const vista = REFORMA_JUDICIAL_COSTO_DATA.vistas[currentReformaView];
+    const box = document.getElementById('reformaDetailBox');
+    if (!vista || !box) return;
+    const item = vista.items.find(i => i.id === id);
+    if (!item) return;
+
+    box.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
+        <strong style="color:${item.color}; font-size:13.5px;">${item.icono} ${item.nombre}</strong>
+        <span style="font-family:var(--font-mono); font-size:12px; font-weight:700; color:${item.color};">${item.txt}</span>
+      </div>
+      <p style="margin:8px 0 6px; font-size:12px; line-height:1.55; color:var(--text-secondary);">${item.nota}</p>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; font-size:11px; border-top:1px dashed var(--border-subtle); padding-top:6px; margin-top:6px; font-family:var(--font-mono); color:var(--text-dim);">
+        <span>🔎 Estado: <strong style="color:var(--text-secondary);">${item.estado}</strong></span>
+        <span>📑 Fuente: ${item.fuente}</span>
+      </div>
+    `;
+  }
+
+  function renderReformaBalance() {
+    const grid = document.getElementById('reformaBalanceGrid');
+    if (!grid) return;
+
+    grid.innerHTML = REFORMA_JUDICIAL_COSTO_DATA.balance.map(b => `
+      <div class="data-block-col" style="background:var(--bg-card); border:1px solid var(--border-subtle); padding:16px; border-radius:8px;">
+        <div class="data-col-lbl">${b.lbl}</div>
+        <div class="data-col-val" style="color:${b.color}; font-size:18px;">${isReformaEvaluated ? b.val : '—'}</div>
+        <div style="font-size:10.5px; color:var(--text-dim); margin-top:3px;">${b.sub}</div>
+      </div>
+    `).join('');
+  }
+
+  function evaluarReformaCosto(duracionMs = 1400) {
+    if (isReformaAnimating) return;
+    isReformaAnimating = true;
+    isReformaEvaluated = true;
+
+    renderReformaChart();
+    renderReformaBalance();
+    renderReformaKpis();
+
+    const statusEl = document.getElementById('reformaEvalStatusText');
+    const btnEval = document.getElementById('btnEvaluarReforma');
+    if (btnEval) btnEval.innerHTML = '<span>⏳</span> Auditando…';
+
+    const inicio = performance.now();
+
+    function animateStep(ahora) {
+      const avance = Math.min((ahora - inicio) / duracionMs, 1);
+      const suavizado = 1 - Math.pow(1 - avance, 3);
+
+      REFORMA_JUDICIAL_COSTO_DATA.kpis.forEach(k => {
+        const el = document.getElementById('kpiReforma_' + k.id);
+        if (!el) return;
+        const dec = k.decimales || 0;
+        const parcial = k.valor * suavizado;
+        el.textContent = `${k.prefijo}${parcial.toLocaleString('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec })}${k.sufijo}`;
+      });
+
+      if (avance < 1) {
+        reformaAnimFrameId = requestAnimationFrame(animateStep);
+      } else {
+        isReformaAnimating = false;
+        reformaAnimFrameId = null;
+        renderReformaKpis();
+        if (statusEl) {
+          statusEl.innerHTML = '🔴 Consolidado ≈$10,800 mdp entre la Federación y las 19 entidades, frente a una participación de 12.86 %. El costo por voto pasó de $206 en 2024 a entre $531 y $586 en 2025.';
+        }
+        if (btnEval) btnEval.innerHTML = '<span>✔️</span> Auditoría Completada';
+      }
+    }
+
+    reformaAnimFrameId = requestAnimationFrame(animateStep);
+  }
+
+  function resetReformaCosto() {
+    if (reformaAnimFrameId) {
+      cancelAnimationFrame(reformaAnimFrameId);
+      reformaAnimFrameId = null;
+    }
+    isReformaAnimating = false;
+    isReformaEvaluated = false;
+
+    renderReformaCosto();
+
+    const statusEl = document.getElementById('reformaEvalStatusText');
+    if (statusEl) {
+      statusEl.innerHTML = '⚪ Cifras en reposo ($0 mdp / participación sin calcular). Presiona «Auditar Costo de la Reforma» o pasa el cursor para desplegar el consolidado.';
+    }
+    const btnEval = document.getElementById('btnEvaluarReforma');
+    if (btnEval) btnEval.innerHTML = '<span>▶️</span> Auditar Costo de la Reforma';
+  }
+
+  function toggleHoverReforma(enabled) {
+    isReformaHoverEnabled = !!enabled;
+  }
+
+  function handleReformaHover() {
+    if (isReformaHoverEnabled && !isReformaEvaluated && !isReformaAnimating) {
+      evaluarReformaCosto();
+    }
+  }
+
   function renderJudicialMinisters() {
     const jr = DB.judicial_reservado;
     if (!jr || !jr.scjn_analisis_salarial) return;
@@ -13348,6 +13751,7 @@
     safeRun(() => renderJudicialPrestacionesSimulator('distribucion'), 'renderJudicialPrestacionesSimulator');
     safeRun(() => renderJudicialAsesoresSimulator('cargos'), 'renderJudicialAsesoresSimulator');
     safeRun(() => renderJudicialGlobalesSimulator('balanza'), 'renderJudicialGlobalesSimulator');
+    safeRun(() => renderReformaCosto(), 'renderReformaCosto');
     safeRun(initFactCheckModule, 'initFactCheckModule');
     safeRun(renderFinanzasPublicas, 'renderFinanzasPublicas');
     safeRun(renderSimuladorMegaobras, 'renderSimuladorMegaobras');
@@ -15490,6 +15894,14 @@
     // Simulador Comparativo de Cálculos Globales & Salud Financiera SCJN (Subpestaña 4.4)
     renderJudicialGlobalesSimulator: renderJudicialGlobalesSimulator,
     setGlobalesView: setGlobalesView,
+    setCalculosParte: setCalculosParte,
+    setReformaView: setReformaView,
+    selectReformaHito: selectReformaHito,
+    selectReformaItem: selectReformaItem,
+    evaluarReformaCosto: evaluarReformaCosto,
+    resetReformaCosto: resetReformaCosto,
+    toggleHoverReforma: toggleHoverReforma,
+    handleReformaHover: handleReformaHover,
     setChoqueSalario: setChoqueSalario,
     setChoqueRegimen: setChoqueRegimen,
     selectGlobalesItem: selectGlobalesItem,

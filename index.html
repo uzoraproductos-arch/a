@@ -3379,7 +3379,21 @@
            SUBPANEL 4.5: CÁLCULOS GLOBALES, SALAS & FOCOS ROJOS
            ==================================================================== -->
       <div class="subtab-panel" data-parent="judicial" data-subpanel="calculos">
-        
+
+        <!-- SELECTOR DE PARTES DEL SUBPANEL 4.5 -->
+        <div class="calculos-parte-switch" role="tablist" aria-label="Partes del módulo 4.5">
+          <button type="button" class="calculos-parte-btn active" id="btnCalculosParte1" role="tab" aria-selected="true" aria-controls="calculosParte1" onclick="window.AuditEngine.setCalculosParte('uno')">
+            <span class="cp-num">Parte 1</span>
+            <span class="cp-txt">Cálculos Globales, Salas &amp; Focos Rojos</span>
+          </button>
+          <button type="button" class="calculos-parte-btn" id="btnCalculosParte2" role="tab" aria-selected="false" aria-controls="calculosParte2" onclick="window.AuditEngine.setCalculosParte('dos')">
+            <span class="cp-num">Parte 2</span>
+            <span class="cp-txt">Costo y Resultado de la Reforma Judicial (2024–2028)</span>
+          </button>
+        </div>
+
+        <div id="calculosParte1" class="calculos-parte-view" role="tabpanel" aria-labelledby="btnCalculosParte1">
+
         <div class="sexenio-card" style="padding:28px; border:1px solid var(--border-gold); border-radius:10px;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:20px;">
             <div>
@@ -3534,7 +3548,137 @@
 
         </div>
 
-      </div><!-- FIN SUBPANEL 4.4 -->
+        </div><!-- FIN PARTE 1 -->
+
+        <!-- ====================================================================
+             PARTE 2: COSTO Y RESULTADO DE LA REFORMA JUDICIAL (2024-2028)
+             ==================================================================== -->
+        <div id="calculosParte2" class="calculos-parte-view" role="tabpanel" aria-labelledby="btnCalculosParte2" style="display:none;">
+
+          <div class="sexenio-card" style="padding:28px; border:1px solid var(--border-gold); border-radius:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:20px;">
+              <div>
+                <span style="font-family:var(--font-mono); font-size:11px; color:var(--crimson-bright); text-transform:uppercase; letter-spacing:1.5px;">Ficha 4</span>
+                <h4 style="font-family:var(--font-serif); font-size:22px; color:var(--gold-bright); margin-top:2px;">
+                  🗳️ El Costo de la Reforma Judicial: de la Iniciativa Presidencial a las Urnas
+                </h4>
+                <p style="font-size:13px; color:var(--text-secondary); margin-top:4px; max-width:860px; line-height:1.6;">
+                  Trazabilidad del gasto público comprometido para materializar la reforma al Poder Judicial: desde la iniciativa presentada el 5 de febrero de 2024 hasta la jornada extraordinaria del 1 de junio de 2025, contrastada contra la participación ciudadana efectivamente registrada y contra el calendario de la segunda elección, hoy diferida a 2028.
+                </p>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:11px; color:var(--crimson-bright); background:rgba(192,57,43,0.1); border:1px solid rgba(192,57,43,0.25); padding:5px 10px; border-radius:4px;">
+                Costo consolidado ≈ $10,800 mdp · Participación 12.9%
+              </span>
+            </div>
+
+            <!-- BARRA DE CONTROL DEL AUDITOR DE COSTO ELECTORAL -->
+            <div class="evaluacion-controls-bar" id="reformaCostoControls" style="margin-top:10px; margin-bottom:18px;">
+              <div class="eval-info-group">
+                <span class="eval-badge" style="border-color:var(--crimson-bright); color:var(--crimson-bright);">AUDITOR DEL COSTO ELECTORAL JUDICIAL</span>
+                <span class="eval-status-text" id="reformaEvalStatusText">⚪ Cifras en reposo ($0 mdp / participación sin calcular). Presiona «Auditar Costo de la Reforma» o pasa el cursor para desplegar el consolidado.</span>
+              </div>
+              <div class="eval-actions-group">
+                <button type="button" class="eval-btn-primary" id="btnEvaluarReforma" onclick="window.AuditEngine.evaluarReformaCosto()" style="background:linear-gradient(135deg, #c0392b, #962d22); border-color:var(--crimson-bright);">
+                  <span>▶️</span> Auditar Costo de la Reforma
+                </button>
+                <button type="button" class="eval-btn-secondary" id="btnResetReforma" onclick="window.AuditEngine.resetReformaCosto()">
+                  <span>↺</span> Reiniciar a Ceros
+                </button>
+                <label class="eval-toggle-label" title="Iniciar la auditoría automáticamente al interactuar con el cursor">
+                  <input type="checkbox" id="evalReformaHoverToggle" onchange="window.AuditEngine.toggleHoverReforma(this.checked)">
+                  <span>Activar al pasar cursor</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- TIRA DE KPIS DEL PROCESO ELECTORAL EXTRAORDINARIO -->
+            <div class="globales-kpis-grid" id="reformaKpisStrip"></div>
+
+            <!-- LINEA DE TIEMPO DE LA REFORMA -->
+            <div style="background:rgba(0,0,0,0.3); border:1px solid var(--border-subtle); border-radius:10px; padding:18px; margin:22px 0 24px;">
+              <div style="margin-bottom:14px;">
+                <span style="font-family:var(--font-mono); font-size:10px; color:var(--crimson-bright); text-transform:uppercase; letter-spacing:1px; display:block;">Ruta Crítica Institucional</span>
+                <h5 style="font-family:var(--font-serif); font-size:17px; color:var(--gold-bright); margin:2px 0 0;">
+                  🕰️ Del Decreto al Voto: Seis Hitos que Fijaron la Factura
+                </h5>
+              </div>
+              <div class="reforma-timeline" id="reformaTimelineStrip"></div>
+              <div id="reformaHitoDetalle" class="reforma-hito-detalle">
+                💡 <em>Selecciona cualquier hito de la línea de tiempo para desplegar su contenido normativo, el monto asociado y la fuente oficial que lo respalda.</em>
+              </div>
+            </div>
+
+            <!-- GRAFICA COMPARATIVA DEL COSTO ELECTORAL -->
+            <div style="background:rgba(0,0,0,0.3); border:1px solid var(--border-subtle); border-radius:10px; padding:18px; margin-bottom:24px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+                <div>
+                  <span style="font-family:var(--font-mono); font-size:10px; color:var(--crimson-bright); text-transform:uppercase; letter-spacing:1px; display:block;">Contraste Presupuestal y de Legitimidad</span>
+                  <h5 style="font-family:var(--font-serif); font-size:17px; color:var(--gold-bright); margin:2px 0 0;">
+                    📉 Cuánto se Pidió, Cuánto se Gastó y Cuánta Gente Votó
+                  </h5>
+                </div>
+                <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                  <button class="jerarquia-btn active" id="btnReformaViewCostos" onclick="window.AuditEngine.setReformaView('costos')" style="font-size:11.5px; padding:6px 12px;">
+                    💰 Presupuesto Federal
+                  </button>
+                  <button class="jerarquia-btn" id="btnReformaViewParticipacion" onclick="window.AuditEngine.setReformaView('participacion')" style="font-size:11.5px; padding:6px 12px;">
+                    🗳️ Participación y Costo por Voto
+                  </button>
+                  <button class="jerarquia-btn" id="btnReformaViewEntidades" onclick="window.AuditEngine.setReformaView('entidades')" style="font-size:11.5px; padding:6px 12px;">
+                    🗺️ Costo en las Entidades
+                  </button>
+                </div>
+              </div>
+              <div id="reformaChartStage" onmouseenter="window.AuditEngine.handleReformaHover()" ontouchstart="window.AuditEngine.handleReformaHover()" style="min-height:220px; margin-bottom:12px;"></div>
+              <div id="reformaDetailBox" style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:6px; padding:12px 14px; font-size:12px; color:var(--text-secondary); line-height:1.5;">
+                💡 <em>Haz clic sobre cualquier barra para conocer el origen de la cifra, la autoridad que la reportó y su estado de verificación.</em>
+              </div>
+            </div>
+
+            <!-- BALANCE: LO QUE SE COMPRO CON ESE DINERO -->
+            <div style="margin-bottom:10px;">
+              <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:8px;">
+                Balance de Resultados del Proceso Electoral Extraordinario 2024–2025:
+              </span>
+            </div>
+            <div id="reformaBalanceGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:14px; margin-bottom:22px;"></div>
+
+            <!-- HOJA DE RUTA HACIA LA SEGUNDA ELECCION JUDICIAL -->
+            <div class="reform-points-box" style="margin-top:15px;">
+              <h4 style="font-family:var(--font-serif); font-size:18px; color:var(--gold-bright); margin-bottom:6px;">🧭 Qué Corregir Antes de la Segunda Elección Judicial:</h4>
+              <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:10px;">
+                La segunda mitad de la renovación no ocurrirá en 2027. El 1 de junio de 2026 el Congreso declaró constitucional la reforma que la recorre al primer domingo de junio de 2028, tras el aval de 25 congresos locales y la Ciudad de México. Ese diferimiento abre una ventana de dos años para corregir lo que la primera jornada exhibió.
+              </p>
+              <ul style="line-height:1.7; font-size:13px; color:var(--text-secondary);">
+                <li><strong>Magnitud de la segunda jornada:</strong> quedan por renovarse <strong>853 cargos judiciales federales</strong> y <strong>3,255 cargos locales</strong>, casi cuatro veces el volumen de 2025. El proyecto de presupuesto 2027 del INE ya contempla <strong>$775.8 mdp</strong> solo para iniciar los trabajos preparatorios.</li>
+                <li><strong>Deuda de los estados con sus OPLE:</strong> concluida la jornada de 2025, <strong>doce gobiernos estatales</strong> mantenían adeudos de ministraciones con sus Organismos Públicos Locales Electorales. Financiar la elección con recursos no entregados traslada el costo al ejercicio siguiente.</li>
+                <li><strong>Disparidad presupuestal entre entidades:</strong> el promedio asignado por estado fue de <strong>$200.85 mdp</strong>, pero el rango va de los <strong>$941 mdp</strong> del Estado de México a los poco más de <strong>$30 mdp</strong> de Nayarit. Sin una fórmula homologada por cargo y por elector, el costo unitario seguirá siendo inauditable entre entidades.</li>
+                <li><strong>Diseño de la boleta y voto nulo:</strong> seis boletas simultáneas con centenares de candidaturas sin filiación partidista produjeron un volumen de boletas nulas o no utilizadas superior a la votación de cualquier candidatura a ministro. Es el indicador más directo de que el instrumento de votación no fue comprensible.</li>
+                <li><strong>Trazabilidad del gasto de campaña:</strong> con un tope de <strong>$220 mil pesos</strong> por candidatura y sin financiamiento público ni acceso a radio y televisión, la fiscalización depende casi por completo del autorreporte. La distribución de listas de apoyo («acordeones»), impugnada ante el TEPJF, no tiene todavía un costo cuantificado <em>(dato en verificación)</em>.</li>
+                <li><strong>Costo de oportunidad:</strong> los ≈$10,800 mdp del proceso equivalen, en orden de magnitud, a cerca de un año y medio del gasto consolidado del Pleno de la SCJN estimado en la Parte 1 de este módulo.</li>
+              </ul>
+            </div>
+
+            <!-- NOTA METODOLOGICA Y FUENTES -->
+            <div class="pj-anexo-nota" style="max-width:none; margin:20px 0;">
+              <strong>⚠️ Nota metodológica.</strong> Las cifras federales provienen de los acuerdos presupuestales del INE y de su solicitud de ampliación ante la Secretaría de Hacienda; el monto finalmente ejercido se presenta como <strong>aproximado (≈$7,200 mdp)</strong> porque la cuenta pública definitiva del proceso extraordinario aún debe contrastarse con la fiscalización de la ASF. El costo en las entidades (≈$3,600 mdp) corresponde a la suma de presupuestos asignados a los 19 OPLE, no al gasto devengado. El costo por voto varía entre <strong>$531 y $586</strong> según se considere únicamente el presupuesto federal o el consolidado con las entidades. Ninguna cifra de esta ficha se estima por interpolación: cuando un dato no está confirmado por una fuente oficial, se etiqueta como pendiente de verificación.
+            </div>
+
+            <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:8px; padding:16px 18px; font-size:12px; line-height:1.7; color:var(--text-secondary); margin-top:16px;">
+              <strong style="color:var(--text-main); display:block; margin-bottom:6px; font-size:13px;">📑 Fuentes primarias de esta ficha:</strong>
+              Decreto de reforma constitucional en materia de Poder Judicial, <strong>DOF 15 de septiembre de 2024</strong> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-reforma-judicial')">[19]</a> ·
+              Acuerdos del Consejo General del INE sobre el presupuesto del Proceso Electoral Extraordinario del Poder Judicial de la Federación 2024–2025 ·
+              Estimación de participación ciudadana del INE para el PEEPJF (12.57 %–13.32 %) ·
+              Cómputos distritales judiciales 2025 del INE ·
+              Presupuesto de Egresos de la Federación 2025, Ramo 22 (Instituto Nacional Electoral) ·
+              Declaratoria de constitucionalidad de la reforma que difiere la elección judicial a 2028, Congreso de la Unión, 1 de junio de 2026 ·
+              Proyecto de presupuesto 2027 del INE.
+            </div>
+
+          </div>
+
+        </div><!-- FIN PARTE 2 -->
+      </div><!-- FIN SUBPANEL 4.5 -->
 
     </div><!-- FIN PESTAÑA 4 -->
 
