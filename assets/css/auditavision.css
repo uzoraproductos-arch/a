@@ -133,6 +133,11 @@ body {
   border-radius: 2px;
   margin: 0 15px;
   display: inline-flex;
+  /* Se mantiene por encima de la cinta y no se encoge: antes el texto
+     en movimiento se le encimaba y ambos quedaban ilegibles. */
+  position: relative;
+  z-index: 3;
+  flex: 0 0 auto;
   align-items: center;
   gap: 6px;
   box-shadow: 0 0 8px var(--crimson-glow);
@@ -155,6 +160,8 @@ body {
 .telemetry-track {
   display: inline-flex;
   gap: 30px;
+  flex: 0 0 auto;
+  will-change: transform;
   animation: scrollTicker 60s linear infinite;
 }
 
@@ -277,7 +284,11 @@ body {
   gap: 8px;
   margin-left: auto;
   text-align: right;
-  flex-shrink: 0;
+  /* Antes: flex-shrink:0 sin min-width. El bloque no podia encogerse y
+     empujaba el documento a 1026px en pantallas de telefono. */
+  flex: 1 1 400px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .creator-box {
@@ -1107,9 +1118,12 @@ nav.tabbar button.active .num {
 
 .audit-drawer {
   position: fixed;
-  top: 0; right: -750px;
+  top: 0; right: 0;
   width: 100%;
   max-width: 740px;
+  /* Antes se ocultaba con right:-750px, lo que ensanchaba el documento y
+     generaba desplazamiento lateral. Con transform no ocupa espacio. */
+  transform: translateX(calc(100% + 60px));
   height: 100vh;
   background: var(--bg-card);
   border-left: 1px solid var(--border-gold);
@@ -1117,12 +1131,13 @@ nav.tabbar button.active .num {
   box-shadow: -15px 0 40px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
-  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .audit-drawer.active {
   right: 0;
+  transform: none;
 }
 
 .drawer-header {
@@ -5649,7 +5664,6 @@ nav.tabbar button.active .num {
 #santaAnnaArgumentoDrawer,
 #juarezArgumentoDrawer {
   max-width: 780px;
-  right: -820px;
 }
 
 #garciaLunaArgumentoDrawer.active,
@@ -5657,6 +5671,7 @@ nav.tabbar button.active .num {
 #santaAnnaArgumentoDrawer.active,
 #juarezArgumentoDrawer.active {
   right: 0;
+  transform: none;
 }
 
 @media (max-width: 820px) {
@@ -5665,7 +5680,6 @@ nav.tabbar button.active .num {
   #santaAnnaArgumentoDrawer,
   #juarezArgumentoDrawer {
     max-width: 100%;
-    right: -100%;
   }
 }
 
@@ -8671,4 +8685,270 @@ nav.tabbar button.active .num {
 
 .glos-link.auto-glos {
   border-bottom-style: dotted;
+}
+
+/* ==========================================================================
+   PASADA DE ACCESIBILIDAD, ADAPTACION MOVIL E IMPRESION
+   Anadida tras la auditoria integral de la plataforma. No sustituye reglas
+   previas: solo corrige defectos medidos y cubre lo que faltaba.
+   ========================================================================== */
+
+/* --- 1. Contencion horizontal -------------------------------------------
+   Red de seguridad. Las causas se corrigieron en origen (.top-right y los
+   cajones laterales); esto impide que un bloque nuevo vuelva a romperlo. */
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  min-width: 0;
+}
+
+img, svg, video, canvas, table {
+  max-width: 100%;
+}
+
+/* --- 2. Encabezado adaptable --------------------------------------------
+   Debajo de 1100px el bloque derecho deja de competir por el ancho y se
+   acomoda; debajo de 720px se alinea a la izquierda como el resto. */
+@media (max-width: 1100px) {
+  .site-header { padding: 18px 20px 14px; }
+  .top-right { flex: 1 1 100%; align-items: flex-start; text-align: left; margin-left: 0; }
+  .creator-row, .prov { justify-content: flex-start; }
+  .creator-box { align-items: flex-start; }
+  .search-command-bar { max-width: 100%; }
+}
+
+/* En telefono el encabezado ocupaba 610px: el 77% de la primera pantalla
+   antes de que se vieran las pestanas. Se compacta sin quitar nada: los
+   sellos de procedencia pasan a una fila deslizable y el credito de autoria
+   a una sola linea. */
+@media (max-width: 900px) {
+  .header-top { gap: 12px; }
+  .top-right { gap: 6px; }
+  .creator-box { gap: 4px; width: 100%; }
+  .creator-row { gap: 6px; width: 100%; }
+  .creator-badge { font-size: 10px; padding: 3px 8px; }
+  .creator-seal { padding: 3px 8px; }
+  .creator-seal .cs-ico { font-size: 14px; }
+  .creator-seal .cs-tag { display: none; }
+  .creator-subtitle { display: none; }
+  .prov {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    padding-bottom: 2px;
+    gap: 10px;
+  }
+  .prov::-webkit-scrollbar { display: none; }
+  .prov > span { flex: 0 0 auto; white-space: nowrap; }
+  .search-command-bar { margin-top: 2px; }
+}
+
+@media (max-width: 720px) {
+  .site-header { padding: 14px 16px 12px; }
+  .brand-wrapper { flex: 1 1 100%; max-width: 100%; }
+  .brand-titles h1 { font-size: 30px; }
+  .eyebrow { font-size: 10px; letter-spacing: 0.08em; }
+  .header-top .sub { font-size: 13px; }
+  .prov { font-size: 9.5px; gap: 8px; }
+  .creator-subtitle { font-size: 10px; }
+  nav.tabbar { margin: 12px auto 0; border-radius: 10px; }
+  .main-wrapper { padding-left: 14px; padding-right: 14px; }
+  .tabintro { padding: 14px 16px; }
+  .tabintro h2 { font-size: 18px; }
+}
+
+/* En telefono el mosaico del cartograma y la columna lateral del mapa
+   se apilan; el grid en linea 1fr 340px no cabe. */
+@media (max-width: 860px) {
+  .map-workspace { grid-template-columns: 1fr !important; }
+}
+
+/* --- 3. Foco visible -----------------------------------------------------
+   Antes de esta pasada no existia ninguna regla de foco: quien navega con
+   teclado no podia saber donde estaba parado. */
+:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+nav.tabbar button:focus-visible,
+.subtab-btn:focus-visible,
+.lens-btn:focus-visible,
+.view-btn:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: -2px;
+}
+
+.glos-link:focus-visible,
+.ref-link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 1px;
+}
+
+/* --- 4. Enlace para saltar al contenido ---------------------------------- */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100000;
+  background: var(--gold);
+  color: #0a0b0f;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.18s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* --- 5. Respeto a quien pide menos movimiento ----------------------------
+   La plataforma tiene nueve animaciones y una cinta en marcha continua.
+   Para personas con vertigo o sensibilidad vestibular eso es un obstaculo
+   real, no un detalle estetico. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .telemetry-track {
+    animation: none !important;
+    transform: none !important;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  .telemetry-bar {
+    overflow-x: auto;
+  }
+}
+
+/* --- 6. Aviso sin JavaScript --------------------------------------------- */
+.noscript-aviso {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 24px 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-left: 4px solid var(--crimson-bright);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  line-height: 1.7;
+}
+
+.noscript-aviso h2 {
+  font-family: var(--font-serif);
+  color: var(--gold-bright);
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* --- 7. Contraste en tema claro ------------------------------------------
+   Varias fichas llevan fondo rgba(0,0,0,0.3) escrito en linea. En tema
+   oscuro se lee bien; en tema claro produce texto atenuado sobre gris.
+   Se neutraliza sin tocar el HTML, que es donde vive el contenido. */
+[data-theme="light"] [style*="rgba(0,0,0,0.3)"],
+[data-theme="light"] [style*="rgba(0, 0, 0, 0.3)"],
+[data-theme="light"] [style*="rgba(0,0,0,0.25)"],
+[data-theme="light"] [style*="rgba(0,0,0,0.35)"],
+[data-theme="light"] [style*="rgba(0,0,0,0.4)"] {
+  background-color: rgba(120, 100, 55, 0.07) !important;
+}
+
+[data-theme="light"] [style*="var(--text-dim)"] {
+  color: #6a6558 !important;
+}
+
+/* --- 8. Impresion y guardado en PDF --------------------------------------
+   Una plataforma de fiscalizacion tiene que poder imprimirse: es la forma
+   en que una ficha se anexa a una solicitud de transparencia o a una queja.
+   Se imprime el contenido, no la interfaz. */
+@media print {
+  .telemetry-bar,
+  nav.tabbar,
+  .site-header .top-right,
+  .noise-overlay,
+  .audit-drawer,
+  .audit-drawer-overlay,
+  .search-command-bar,
+  .skip-link,
+  button {
+    display: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  .site-header {
+    position: static;
+    background: none !important;
+    border-bottom: 2px solid #000;
+    padding: 0 0 12pt;
+    backdrop-filter: none;
+  }
+
+  .brand-titles h1 { color: #000 !important; font-size: 24pt; }
+
+  /* Se imprime la pestana visible; el resto no se arrastra al papel. */
+  .tab-panel { display: none !important; }
+  .tab-panel.active { display: block !important; }
+
+  .main-wrapper { padding: 0 !important; max-width: none !important; }
+
+  .card, .panel-stat-box, .casilla-bloque, .tabintro {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #bbb !important;
+    background: #fff !important;
+  }
+
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; color: #000 !important; }
+
+  /* Las notas al pie conservan su numero, y los enlaces del glosario
+     dejan de parecer enlaces porque en papel no lo son. */
+  .glos-link, .ref-link {
+    color: #111 !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+  }
+
+  .ref-link::after { content: ""; }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #555;
+    word-break: break-all;
+  }
+
+  /* Pie de pagina de procedencia en cada impresion. */
+  .main-wrapper::after {
+    content: "Auditavision - Fiscalizacion ciudadana del gasto publico en Mexico. Consultado el documento en linea para verificar cifras y fuentes.";
+    display: block;
+    margin-top: 18pt;
+    padding-top: 8pt;
+    border-top: 1px solid #999;
+    font-size: 8.5pt;
+    color: #555;
+  }
 }
