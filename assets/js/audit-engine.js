@@ -2334,23 +2334,24 @@
             id: 'scjn_pleno',
             titulo: 'Pleno de la Suprema Corte de Justicia de la Nación',
             icono: '🏛️',
-            badge: '11 Ministras y Ministros (9 en Reforma 2024)',
+            badge: '9 Ministras y Ministros · Electos por Voto Popular',
             badgeTipo: 'badge-gold',
-            desc: 'Órgano supremo depositario del control constitucional directo concentrado en México. Ejerce la salvaguarda última del pacto federal y la supremacía de la Carta Magna.',
-            titular: 'Presidido por la Ministra Presidenta Norma Lucía Piña Hernández',
-            plazasPresupuesto: '11 Despachos de Ministros · $7,329 mdp presupuesto SCJN',
-            marco: 'Arts. 94 y 105 CPEUM · Ley Orgánica del PJF (Art. 2)',
-            quehacer: 'Resuelve de manera exclusiva los medios de control abstracto y difuso de mayor jerarquía: Acciones de Inconstitucionalidad (demandas contra leyes federales o locales que contradigan la Constitución), Controversias Constitucionales (litigios competenciales entre la Federación, Estados, Municipios o Poderes de la Unión), Declaratorias Generales de Inconstitucionalidad y contradicciones de criterios entre las Salas de la Corte o entre Plenos Regionales.',
+            desc: 'Órgano supremo depositario del control constitucional directo concentrado en México. Tras la reforma judicial funciona exclusivamente en Pleno, con nueve integrantes electos por voto popular y sesiones públicas.',
+            titular: 'Presidido por el Ministro Presidente Hugo Aguilar Ortiz (periodo 2025-2027)',
+            plazasPresupuesto: '9 Despachos de Ministras y Ministros · Remuneración topada al sueldo de la Presidencia de la República',
+            marco: 'Arts. 94, 96 y 105 CPEUM reformados · Reforma Judicial DOF 15-09-2024',
+            quehacer: 'Resuelve de manera exclusiva los medios de control constitucional de mayor jerarquía: Acciones de Inconstitucionalidad (demandas contra leyes federales o locales que contradigan la Constitución), Controversias Constitucionales (litigios competenciales entre la Federación, Estados, Municipios o Poderes de la Unión), Declaratorias Generales de Inconstitucionalidad y contradicciones de criterios entre Plenos Regionales. Al haberse suprimido las Salas, la totalidad de los asuntos se resuelve en sesión plenaria pública.',
             distincionEspecialidad: {
               tipo: 'exclusividad_pleno',
-              titulo: 'Competencia Constitucional Exclusiva del Tribunal Pleno',
-              detalle: 'A diferencia de las Salas (que conocen de materias específicas en amparos en revisión), el Pleno actúa como tribunal constitucional único y colegiado para invalidar con efectos generales normas contrarias a la Constitución con mayoría calificada (8 votos actualmente, reducida a 6 votos en la reforma de 2024).'
+              titulo: 'Pleno Único, Elección Popular y Mayoría de Seis Votos',
+              detalle: 'La reforma de 2024 transformó tres rasgos estructurales del máximo tribunal: redujo su integración de once a nueve personas juzgadoras, sustituyó la designación por el Senado a propuesta del Ejecutivo por la elección mediante voto popular directo con encargos de doce años, y suprimió las Salas, de modo que el Pleno concentra ahora la totalidad de la función jurisdiccional. Para invalidar una norma con efectos generales se requiere mayoría calificada de seis votos.'
             },
             fundamentoDetallado: [
-              'Art. 94 párrafos primero, segundo y quinto de la CPEUM',
+              'Art. 94 párrafos primero, segundo y quinto de la CPEUM (texto reformado)',
               'Art. 105 fracciones I y II de la Constitución Política de los Estados Unidos Mexicanos',
               'Art. 107 fracción XIII de la CPEUM (contradicciones de criterios trascendentes)',
-              'Arts. 2, 10 y 11 de la Ley Orgánica del Poder Judicial de la Federación (atribuciones plenarias)'
+              'Arts. 2, 10 y 11 de la Ley Orgánica del Poder Judicial de la Federación (atribuciones plenarias)',
+              'Decreto de Reforma Judicial publicado en el DOF el 15 de septiembre de 2024'
             ],
             glosario: 'Pleno de la Suprema Corte',
             refKey: 'ref-cpeum-art94',
@@ -2368,14 +2369,14 @@
             badge: 'Mando Institucional & Representación',
             badgeTipo: 'badge-gold',
             desc: 'Representación legal de la SCJN ante los demás Poderes de la Unión, conducción del debate en sesiones plenarias y supervisión de la política judicial interna.',
-            titular: 'Ministra Presidenta Norma Lucía Piña Hernández (38 plazas directas adscritas)',
+            titular: 'Ministro Presidente Hugo Aguilar Ortiz (periodo 2025-2027, con plazas directas adscritas)',
             plazasPresupuesto: '38 plazas tabulares directas de soporte administrativo y técnico',
             marco: 'Ley Orgánica del PJF (Arts. 12 y 14) · Reglamento Interior SCJN',
-            quehacer: 'Tramita los expedientes de competencia plenaria, somete a votación los proyectos de sentencia, nombra y remueve al personal de confianza de la Presidencia, supervisa la administración interna de la Corte, autoriza las listas de acuerdos y turna los asuntos por riguroso orden a las ponencias.',
+            quehacer: 'Tramita los expedientes de competencia plenaria, somete a votación los proyectos de sentencia, nombra y remueve al personal de confianza de la Presidencia, autoriza las listas de acuerdos y turna los asuntos por riguroso orden a las ponencias. La administración de los recursos del Poder Judicial dejó de ser atribución de la Presidencia y pasó al Órgano de Administración Judicial.',
             distincionEspecialidad: {
               tipo: 'mando_institucional',
-              titulo: 'Atribuciones de Dirección Plenaria (Sin Integrar Sala)',
-              detalle: 'La Presidencia de la Corte no integra ninguna de las dos Salas ordinarias. Su labor se focaliza en la dirección plenaria, el turno transparente de expedientes a las y los 11 ministros y el despacho de acuerdos de admisión o desechamiento preliminar.'
+              titulo: 'Presidencia Rotativa Cada Dos Años',
+              detalle: 'Con la reforma de 2024 la Presidencia dejó de elegirse por votación interna del Pleno: corresponde a quien haya obtenido el mayor número de sufragios en la elección judicial y rota cada dos años siguiendo ese orden de votación. Su labor se centra en la dirección plenaria, el turno transparente de expedientes a las nueve ponencias y el despacho de acuerdos de admisión o desechamiento preliminar.'
             },
             fundamentoDetallado: [
               'Art. 94 párrafo sexto de la CPEUM',
@@ -2414,23 +2415,23 @@
         ]
       },
       {
-        nivel: 'Nivel 3: Salas Jurisdiccionales Especializadas de la Corte',
+        nivel: 'Nivel 3: Salas Jurisdiccionales (Estructura Suprimida por la Reforma 2024)',
         nodos: [
           {
             id: 'scjn_sala1',
-            titulo: 'Primera Sala (Materia Civil y Penal)',
+            titulo: 'Primera Sala, Materia Civil y Penal (Suprimida)',
             icono: '⚖️',
-            badge: '5 Ministros · $192.0 mdp/año',
+            badge: 'Suprimida · Vigente hasta el 31 de agosto de 2025',
             badgeTipo: 'badge-amber',
-            desc: 'Especializada en libertades civiles, derechos humanos, debido proceso en el sistema penal acusatorio, presunción de inocencia y controversias de derecho familiar y mercantil.',
-            titular: '5 Despachos Jurisdiccionales (Pardo, Gutiérrez Ortiz Mena, González Alcántara, Ortiz Ahlf, Ríos Farjat)',
-            plazasPresupuesto: '~170 plazas técnicas de estudio y cuenta · $192.0 mdp anuales de operación',
+            desc: 'Estructura histórica. Estuvo especializada en libertades civiles, derechos humanos, debido proceso en el sistema penal acusatorio, presunción de inocencia y controversias de derecho familiar y mercantil. Dejó de existir con la instalación de la nueva Corte; sus asuntos y criterios pasaron al Pleno.',
+            titular: 'Integración histórica: cinco despachos jurisdiccionales (Pardo, Gutiérrez Ortiz Mena, González Alcántara, Ortiz Ahlf, Ríos Farjat)',
+            plazasPresupuesto: 'Cifra histórica: ~170 plazas técnicas de estudio y cuenta · $192.0 mdp anuales de operación',
             marco: 'Art. 94 CPEUM · Ley Orgánica del PJF (Art. 21, Fracc. I)',
             quehacer: 'Conoce de recursos de revisión en amparos directos sobre la constitucionalidad de leyes penales y civiles o la interpretación de tratados internacionales de derechos humanos (prohibición de tortura, arraigo, legalidad de detenciones, interés superior de la niñez, equidad de género y contratos civiles).',
             distincionEspecialidad: {
               tipo: 'especialidad_materia',
-              titulo: 'Especialización Temática en Materias Civil y Penal',
-              detalle: 'Competencia estricta por materia: No conoce de litigios fiscales ni laborales. Fija los criterios que rigen la actuación de los jueces penales en todo el país y los derechos de las víctimas y procesados en el sistema adversarial oral.'
+              titulo: 'Por Qué se Conserva esta Ficha',
+              detalle: 'La Sala ya no forma parte del organigrama vigente. Se documenta porque la jurisprudencia que emitió sigue siendo aplicable mientras el Pleno no la sustituya, y porque permite rastrear cómo se reorganizó la función jurisdiccional del máximo tribunal tras la reforma.'
             },
             fundamentoDetallado: [
               'Art. 94 y Art. 107 fracción VIII inciso a) de la CPEUM',
@@ -2443,19 +2444,19 @@
           },
           {
             id: 'scjn_sala2',
-            titulo: 'Segunda Sala (Materia Administrativa y Laboral)',
+            titulo: 'Segunda Sala, Materia Administrativa y Laboral (Suprimida)',
             icono: '🏛️',
-            badge: '4 a 5 Ministros · $188.4 mdp/año',
+            badge: 'Suprimida · Vigente hasta el 31 de agosto de 2025',
             badgeTipo: 'badge-amber',
-            desc: 'Especializada en el control de legalidad de los actos del Poder Ejecutivo Federal, derecho tributario, fiscal, ambiental, seguridad social y derecho individual y colectivo del trabajo.',
-            titular: 'Despachos Jurisdiccionales (Pérez Dayán -Presidente-, Laynez Potisek, Batres Guadarrama, Esquivel Mossa)',
-            plazasPresupuesto: '~171 plazas técnicas de estudio y cuenta · $188.4 mdp anuales de operación',
+            desc: 'Estructura histórica. Estuvo especializada en el control de legalidad de los actos del Poder Ejecutivo Federal, derecho tributario, fiscal, ambiental, seguridad social y derecho del trabajo. Dejó de existir con la instalación de la nueva Corte; sus asuntos y criterios pasaron al Pleno.',
+            titular: 'Integración histórica: despachos jurisdiccionales (Pérez Dayán -Presidente-, Laynez Potisek, Batres Guadarrama, Esquivel Mossa)',
+            plazasPresupuesto: 'Cifra histórica: ~171 plazas técnicas de estudio y cuenta · $188.4 mdp anuales de operación',
             marco: 'Art. 94 CPEUM · Ley Orgánica del PJF (Art. 21, Fracc. II)',
             quehacer: 'Resuelve litigios contra actos de dependencias federales (SAT, IMSS, ISSSTE, SEMARNAT, CRE, CFE), amparos en materia de impuestos (ISR, IVA, IEPS, Código Fiscal), concesiones mineras, telecomunicaciones en segunda instancia y amparos sobre huelgas y contratos colectivos.',
             distincionEspecialidad: {
               tipo: 'especialidad_materia',
-              titulo: 'Especialización Temática en Materias Administrativa y Laboral',
-              detalle: 'Fija los límites constitucionales de la facultad recaudadora y sancionadora de la administración pública federal, y armoniza las relaciones obrero-patronales ante el nuevo modelo de justicia laboral federal.'
+              titulo: 'Por Qué se Conserva esta Ficha',
+              detalle: 'La Sala ya no forma parte del organigrama vigente. Se documenta porque fijó los límites constitucionales de la facultad recaudadora y sancionadora de la administración pública federal, y esos criterios siguen rigiendo mientras el Pleno no los sustituya.'
             },
             fundamentoDetallado: [
               'Art. 94 y Art. 107 de la Constitución Política de los Estados Unidos Mexicanos',
@@ -2473,19 +2474,19 @@
         nodos: [
           {
             id: 'scjn_ponencias_red',
-            titulo: 'Despachos Técnicos de Ponencia (11 Ponencias)',
+            titulo: 'Despachos Técnicos de Ponencia (9 Ponencias)',
             icono: '👥',
-            badge: '385 Plazas Directas · $376.2 mdp/año',
+            badge: '9 Ponencias · Cifras de plazas en actualización',
             badgeTipo: 'badge-gold',
-            desc: 'Equipos proyectistas de alta especialización técnica jurídica encargados de formular los proyectos de sentencia sometidos a debate en el Pleno y Salas.',
-            titular: 'Cuerpo Técnico Proyectista Jurisdiccional (35 plazas por Ponencia)',
+            desc: 'Equipos proyectistas de alta especialización técnica jurídica encargados de formular los proyectos de sentencia sometidos a debate en el Pleno. Con la supresión de las Salas, la totalidad de su trabajo se dirige a la sesión plenaria.',
+            titular: 'Cuerpo Técnico Proyectista Jurisdiccional, una ponencia por cada integrante del Pleno',
             plazasPresupuesto: '1 Coordinador(a) ($128.5k neto), 14 Secretarios de Estudio y Cuenta Proyectistas ($98.2k c/u), 10 Secretarios Auxiliares ($58.4k), 10 Oficiales',
             marco: 'Manual de Remuneraciones del PJF · DOF',
             quehacer: 'Estudian a fondo cada expediente, confrontan las normas impugnadas con los tratados internacionales de derechos humanos, redactan los proyectos de resolución, elaboran los engroses definitivos de las sentencias aprobadas y preparan los votos concurrentes o particulares de las y los ministros.',
             distincionEspecialidad: {
               tipo: 'cuerpo_tecnico',
-              titulo: 'Estructura Tabular Técnica de Alto Rendimiento',
-              detalle: 'Constituyen el soporte operativo e intelectual directo de las y los Ministros. Su trabajo garantiza que las sentencias cuenten con fundamentación jurisprudencial exhaustiva antes de ser votadas en sesiones públicas transmitidas por JusticiaTV.'
+              titulo: 'Estructura Técnica y Reserva sobre las Cifras',
+              detalle: 'Constituyen el soporte operativo e intelectual directo de las y los Ministros, y garantizan que las sentencias cuenten con fundamentación jurisprudencial exhaustiva antes de votarse en sesión pública. Advertencia metodológica: las cifras de plazas y remuneraciones de esta ficha corresponden a la estructura de once ponencias anterior a la reforma y al tope salarial previo; deben contrastarse con el Manual de Remuneraciones vigente antes de citarse.'
             },
             fundamentoDetallado: [
               'Manual que Regula las Remuneraciones de las y los Servidores Públicos del PJF (DOF)',
