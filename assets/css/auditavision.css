@@ -668,7 +668,7 @@ nav.tabbar button.active .num {
   color: var(--text-secondary);
   font-size: 13.5px;
   line-height: 1.55;
-  max-width: 92ch;
+  max-width: 80ch;
   margin: 0;
 }
 
@@ -8950,5 +8950,76 @@ nav.tabbar button:focus-visible,
     border-top: 1px solid #999;
     font-size: 8.5pt;
     color: #555;
+  }
+}
+
+/* ==========================================================================
+   MEDIDA DE LECTURA
+   Varios parrafos corrian a 204 caracteres por linea. El intervalo comodo
+   para leer texto seguido esta entre 45 y 75 caracteres; pasados los 90 el
+   ojo pierde el renglon al regresar a la izquierda. Se limita la medida sin
+   tocar el ancho de tarjetas, tablas ni graficas.
+   ========================================================================== */
+.section-hero p,
+.banxico-box p,
+.reply-item-card p,
+.com-card-panel p.sub,
+.portal-title-group p,
+.tab-panel .card > p,
+.tab-panel .casilla-bloque > p,
+.civic-hub-header p,
+.sexenio-card p,
+.banner-protocolo-citacion p {
+  max-width: 78ch;
+}
+
+/* El parrafo de entrada de cada seccion va centrado por diseno: se conserva
+   centrado, pero como bloque estrecho y no como linea de borde a borde. */
+.section-hero p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 860px) {
+  .section-hero p,
+  .banxico-box p,
+  .reply-item-card p,
+  .com-card-panel p.sub,
+  .portal-title-group p,
+  .tab-panel .card > p,
+  .tab-panel .casilla-bloque > p,
+  .civic-hub-header p,
+  .sexenio-card p,
+  .banner-protocolo-citacion p {
+    max-width: none;
+  }
+  /* En telefono el texto centrado largo es especialmente dificil de seguir. */
+  .section-hero p { text-align: left; }
+}
+
+/* ==========================================================================
+   PISTA DE DESPLAZAMIENTO LATERAL
+   La barra de pestanas y la fila de sellos se deslizan en pantallas
+   estrechas, pero nada lo indicaba: el contenido cortado parecia un error
+   de maquetacion. Un degradado en el borde derecho avisa que hay mas.
+   ========================================================================== */
+@media (max-width: 900px) {
+  nav.tabbar,
+  .prov {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 34px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 34px), transparent 100%);
+  }
+
+  /* Al llegar al final del recorrido se retira el degradado. */
+  nav.tabbar:not([data-scroll="mas"]),
+  .prov:not([data-scroll="mas"]) {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  nav.tabbar[data-scroll="mas"],
+  .prov[data-scroll="mas"] {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 34px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 34px), transparent 100%);
   }
 }

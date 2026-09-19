@@ -135,6 +135,40 @@ de los 32 circuitos.
     por completo las pestañas de glosario y referencias.
   - El glosario pasó de 53 a 77 términos y el catálogo de referencias de 27 a 32.
 
+- **Auditoría integral de formato, diseño y distribución** (pasada completa
+  sobre las nueve pestañas). Se corrigieron defectos medidos, no supuestos:
+  - *Desbordamiento horizontal en teléfono.* El bloque `.top-right` del
+    encabezado llevaba `flex-shrink: 0` sin `min-width`, y los cajones
+    laterales se ocultaban con `right: -750px`. Entre los dos empujaban el
+    documento a 1026 px: las nueve pestañas se desplazaban de lado. Hoy el
+    ancho del documento coincide con el de la pantalla en las nueve.
+  - *Colisión del distintivo con la cinta de telemetría.* El texto en marcha
+    pasaba por encima de «Auditoría en vivo».
+  - *Encabezado compacto.* De 610 px a 467 px en teléfono y de 475 px a 360 px
+    en tableta, sin retirar ningún elemento: los sellos de procedencia pasan
+    a una fila deslizable.
+  - *Medida de lectura.* Había párrafos de hasta 208 caracteres por renglón.
+    Todas las pestañas quedaron en 80 o menos.
+  - *Accesibilidad.* Enlace para saltar al contenido, foco visible (antes no
+    existía ninguna regla), soporte de `prefers-reduced-motion`, aviso para
+    quien navega sin JavaScript y ocultamiento de la mitad duplicada de la
+    cinta a los lectores de pantalla.
+  - *Descubrimiento.* Descripción, Open Graph, tarjeta de X, color de tema,
+    datos estructurados JSON-LD e icono de sitio en SVG embebido. Antes, al
+    pegar el enlace en cualquier red no aparecía ni título ni resumen.
+  - *Impresión.* Hoja `@media print`: se imprime el contenido y no la
+    interfaz, con pie de procedencia.
+  - *Contraste en tema claro.* Neutralizados los fondos `rgba(0,0,0,0.3)`
+    escritos en línea, que producían texto atenuado sobre gris.
+  - *Pista de deslizamiento.* La barra de pestañas y la fila de sellos se
+    deslizan en pantallas estrechas; un degradado avisa que hay más a la
+    derecha y desaparece al llegar al final.
+
+- **Reescritura de las nueve introducciones de pestaña** (`TAB_METADATA` en
+  `audit-engine.js`). Eran inventarios de contenido en una sola oración de
+  hasta 68 palabras. Ahora cada una abre con una idea y después enumera los
+  instrumentos. No se retiró ninguna cifra.
+
 ### Pendiente
 
 - **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
@@ -143,10 +177,19 @@ de los 32 circuitos.
   corresponden a la estructura de once ponencias y al tope salarial anterior.
   Hay una advertencia metodológica visible en la ficha. Deben contrastarse
   contra el Manual de Remuneraciones vigente antes de citarse.
-- **Contraste en tema claro**: varios paneles de la pestaña 4 usan
-  `rgba(0,0,0,0.3)` en línea, lo que en tema claro produce texto atenuado sobre
-  fondo gris. Es un comportamiento previo a los cambios recientes y afecta por
-  igual a las dos partes de 4.5; conviene resolverlo en una pasada propia.
+- **Contenido de la pestaña 1 (Presupuesto)**: es la puerta de entrada y solo
+  tiene 350 caracteres de texto —un párrafo de introducción— frente a los
+  29,833 de la pestaña 3. El panel es mapa y botones, sin nada que explique
+  qué está viendo el lector ni cómo leerlo. Es la brecha de contenido más
+  grande de la plataforma.
+- **Estilos en línea**: hay 1,326 atributos `style=` en el HTML. Ganan a
+  cualquier regla de la hoja de estilos, que es justo el origen del problema
+  de contraste en tema claro y de los párrafos demasiado anchos. Conviene
+  migrarlos a clases por módulo conforme se vaya tocando cada pestaña.
+- **Título duplicado**: en varias pestañas el encabezado de `#tabintro` y el
+  título del panel dicen casi lo mismo, uno debajo del otro.
+- **Material gráfico**: la plataforma no tiene una sola etiqueta `<img>`.
+  Falta la capa de fotografía, ilustración y animación prevista.
 - **Cifra federal ejercida del proceso electoral judicial**: se publica como
   aproximada (≈$7,200 mdp) a la espera de la cuenta pública y de la
   fiscalización de la ASF.

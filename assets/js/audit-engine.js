@@ -1681,39 +1681,39 @@
   const TAB_METADATA = {
     'presupuesto': {
       t: '1. Presupuesto y Gasto Público (Poder Ejecutivo Federal & Subnacional)',
-      d: 'Explora cómo la federación distribuye el erario federalizado ($2.81 billones) a las 32 entidades y más de 2,400 municipios. Verifica transferencias de libre disposición (Ramo 28), aportaciones condicionadas (Ramo 33), semáforo de deuda de la SHCP y alertas de la ASF.'
+      d: 'De cada peso del presupuesto federal, una parte viaja a los estados y a los municipios: $2.81 billones repartidos entre 32 entidades y más de 2,400 ayuntamientos. Aquí se ve a dónde llega ese dinero, cuánto es de libre disposición (Ramo 28) y cuánto viene etiquetado (Ramo 33), junto al semáforo de deuda de la SHCP y las alertas de la ASF.'
     },
     'accion-financiera': {
       t: '2. Acción Financiera del Estado & Finanzas Públicas',
-      d: 'Seguimiento integral a los instrumentos del erario: simulador de inversiones públicas y pérdidas en tiempo real de megaobras presidenciales (1988–actualidad), colocación de deuda soberana vía Banco de México (CETES y Bonos M), calculadora cívica del contribuyente y bitácora de alertas ASF.'
+      d: 'El Estado no solo gasta: también invierte, se endeuda y recauda. Este módulo sigue esos tres movimientos con el simulador de megaobras presidenciales desde 1988, la colocación de deuda soberana en Banxico (CETES y Bonos M), una calculadora que reparte tus impuestos peso por peso y la bitácora de alertas de la ASF.'
     },
     'legislativo': {
       t: '3. Poder Legislativo, Periodos de Sesiones & Elecciones Concurrentes (+19,600 Cargos)',
-      d: 'Importancia del Poder Legislativo y de sus periodos de sesiones: el erario se aprueba en el Congreso. Descubre cómo operan las elecciones concurrentes en las 32 entidades (+19,600 cargos renovados), la diferencia entre mayoría relativa y representación proporcional (plurinominales), el calendario cívico y la guía ciudadana para fiscalizar perfiles.'
+      d: 'El presupuesto no lo decide quien lo gasta: lo aprueba el Congreso. Aquí están los periodos de sesiones que marcan ese calendario, cómo operan las elecciones concurrentes que renuevan más de 19,600 cargos en las 32 entidades, la diferencia entre mayoría relativa y representación proporcional —los plurinominales— y una guía para revisar perfiles antes de votar.'
     },
     'judicial': {
       t: '4. Suprema Corte de Justicia de la Nación: Presupuesto, Fiscalización & Nueva Estructura',
-      d: 'Balance presupuestal auditado del Poder Judicial de la Federación ($78,327 mdp), fideicomisos en litigio, tarjeta y análisis comparativo de remuneraciones de la Suprema Corte de Justicia de la Nación (SCJN) y desglose de ponencias y asesores.'
+      d: 'El Poder Judicial de la Federación ejerce $78,327 mdp al año y cambió de forma con la reforma de 2024. Este módulo desglosa ese presupuesto, el estado procesal de sus fideicomisos en litigio, las remuneraciones de la Suprema Corte con su análisis comparativo y el costo real de la elección judicial de 2025.'
     },
     'politicos': {
       t: '5. Personajes Políticos & Radiografía Sexenal (1988–Actualidad)',
-      d: 'Evaluación comparativa de presidentes de la República y personajes relevantes desde Carlos Salinas de Gortari hasta Claudia Sheinbaum: crecimiento real del gasto, deuda pública, empresas fantasma (EFOS), grandes desfalcos y datos curiosos de personajes secundarios.'
+      d: 'Seis sexenios y una misma pregunta: ¿cuánto creció el gasto, cuánto creció la deuda y qué quedó sin aclarar? De Carlos Salinas de Gortari a Claudia Sheinbaum, con crecimiento real del gasto, deuda pública, empresas fantasma (EFOS), los grandes desfalcos documentados y los personajes secundarios que rara vez aparecen en la cuenta pública.'
     },
     'verificador': {
       t: '6. Modo Inspector (Auditoría Forense Hacendaria en Vivo)',
-      d: 'Herramienta cívica de verificación y auditoría en vivo contra notas de prensa, medios digitales o documentos oficiales (PDF/URL). Evalúa declaraciones sobre dependencias públicas y finanzas hacendarias contrastándolas con ingresos federales (PEF/LIF), egresos devengados, auditorías de la ASF y cuentas públicas pendientes de rendir.'
+      d: 'Una cifra dicha en una nota de prensa o en un discurso puede contrastarse. Pega una liga, un PDF o una declaración y este módulo la confronta contra los ingresos aprobados (PEF y LIF), el gasto devengado, las auditorías de la ASF y las cuentas públicas que aún están pendientes de rendir.'
     },
     'faq': {
       t: '7. Preguntas, Glosario & Marco Legal Hacendario (LIF, CPEUM & Deuda)',
-      d: 'Formación cívica integral dividida en tres subpestañas: Casillas temáticas de preguntas ciudadanas, Glosario enciclopédico de conceptos clave del erario en constante actualización, y el Marco Legal Hacendario con las disposiciones de la Ley de Ingresos (LIF) y preceptos constitucionales vigentes con acceso a su texto íntegro.'
+      d: 'Tres puertas de entrada al vocabulario del erario: casillas temáticas con las preguntas que la gente hace de verdad, un glosario enciclopédico en actualización constante, y el marco legal hacendario con el texto íntegro de la Ley de Ingresos y los preceptos constitucionales vigentes.'
     },
     'referencias': {
       t: '8. Referencias & Fuentes Oficiales',
-      d: 'Compilación exhaustiva, clasificada y numerada de las fuentes bibliográficas e institucionales consultadas: SHCP, Banco de México, Auditoría Superior de la Federación (ASF), INEGI, IMCO y Diario Oficial de la Federación (DOF).'
+      d: 'Ninguna cifra de esta plataforma se sostiene sola. Aquí está el catálogo numerado y clasificado de todo lo consultado —SHCP, Banco de México, Auditoría Superior de la Federación, INEGI, IMCO y el Diario Oficial de la Federación— con liga al documento original para que cualquiera pueda ir a comprobarlo.'
     },
     'comunidad': {
       t: '9. Comunidad & Contraloría Cívica Ciudadana',
-      d: 'Buzón ciudadano de observaciones de obras públicas, directorio oficial de canales de denuncia anónima ante la ASF, SFP y SAT, y decálogo de vigilancia cívica sobre el erario.'
+      d: 'Fiscalizar no termina en leer. Este módulo reúne el buzón para reportar observaciones sobre obra pública, el directorio oficial de denuncia anónima ante la ASF, la SFP y el SAT, y un decálogo de vigilancia cívica del erario.'
     }
   };
 
@@ -1783,6 +1783,7 @@
     }
 
     programarAutolink();
+    setTimeout(actualizarPistasDeslizamiento, 60);
   }
 
   // ==========================================================================
@@ -2067,6 +2068,28 @@
         console.warn('[Auditavisión] Vinculación automática omitida:', err);
       }
     }, retardoMs);
+  }
+
+  // ==========================================================================
+  // PISTA DE DESPLAZAMIENTO LATERAL
+  // En pantallas estrechas la barra de pestañas y la fila de sellos se
+  // deslizan, pero el contenido cortado parecía un defecto de maquetación.
+  // Se marca con data-scroll="mas" mientras quede recorrido a la derecha;
+  // la hoja de estilos dibuja el degradado y lo retira al llegar al final.
+  // ==========================================================================
+  function actualizarPistasDeslizamiento() {
+    document.querySelectorAll('nav.tabbar, .prov').forEach(el => {
+      const restante = el.scrollWidth - el.clientWidth - el.scrollLeft;
+      el.dataset.scroll = restante > 8 ? 'mas' : 'fin';
+    });
+  }
+
+  function iniciarPistasDeslizamiento() {
+    document.querySelectorAll('nav.tabbar, .prov').forEach(el => {
+      el.addEventListener('scroll', actualizarPistasDeslizamiento, { passive: true });
+    });
+    window.addEventListener('resize', actualizarPistasDeslizamiento, { passive: true });
+    actualizarPistasDeslizamiento();
   }
 
   function goToGlossary(term) {
@@ -13984,7 +14007,8 @@
     safeRun(() => renderAsfIrregularidadesChart('tipologia'), 'renderAsfIrregularidadesChart');
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
-    safeRun(() => programarAutolink(400), 'programarAutolink');
+    safeRun(() => programarAutolink(400), 'programarAutolink');
+    safeRun(iniciarPistasDeslizamiento, 'iniciarPistasDeslizamiento');
 
     // Eventos de botones de subpestañas (.subtabs-bar)
     document.querySelectorAll('.subtabs-bar .subtab-btn').forEach(btn => {
@@ -15920,7 +15944,8 @@
     switchSubtab: switchSubtab,
     toggleTheme: toggleTheme,
     aplicarAutolink: aplicarAutolink,
-    programarAutolink: programarAutolink,
+    programarAutolink: programarAutolink,
+    actualizarPistasDeslizamiento: actualizarPistasDeslizamiento,
     goToGlossary: goToGlossary,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
