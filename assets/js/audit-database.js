@@ -2699,8 +2699,151 @@ window.AUDIT_DB = {
       "categoria": "🗳️ Poder Legislativo & Elecciones",
       "definicion": "Órganos colegiados integrados por 10 concejales en cada una de las 16 alcaldías de la CDMX (6 por mayoría y 4 por representación proporcional) encargados de supervisar el presupuesto y las obras vecinales.",
       "ley": "Constitución Política de la Ciudad de México, Art. 53"
-    }
-  ],
+    },
+    {
+      "termino": "Gasto Público",
+      "definicion": "Conjunto de erogaciones que realizan la Federación, los estados y los municipios para cumplir sus funciones: servicios personales, obra pública, transferencias, subsidios y pago de deuda. No es sinónimo de presupuesto: el presupuesto es lo autorizado, el gasto público es lo efectivamente erogado. Debe administrarse con eficiencia, eficacia, economía, transparencia y honradez.",
+      "ley": "Art. 134 CPEUM · Art. 1° Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)",
+      "definicion": "Las cuatro fotografías del dinero público a lo largo del año. Aprobado: lo que autorizó la Cámara de Diputados. Modificado: lo autorizado más ampliaciones y menos reducciones. Devengado: la obligación de pago ya nacida, aunque no se haya pagado. Ejercido: el pago efectivamente realizado. Comparar la cifra equivocada entre dos momentos es la causa más común de una conclusión falsa sobre el gasto.",
+      "ley": "Art. 2° frac. XV Ley General de Contabilidad Gubernamental",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ejercicio Fiscal",
+      "definicion": "Periodo de doce meses, del 1 de enero al 31 de diciembre, en el que se ejecuta el presupuesto autorizado. Lo que no se gasta dentro del ejercicio, salvo excepciones legales, debe reintegrarse a la Tesorería de la Federación.",
+      "ley": "Art. 11 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ramo Presupuestario",
+      "definicion": "Unidad de mayor jerarquía en que se divide el Presupuesto de Egresos. Cada dependencia, poder u organismo autónomo tiene el suyo: Ramo 03 corresponde al Poder Judicial, Ramo 22 al Instituto Nacional Electoral, Ramo 28 a las participaciones y Ramo 33 a las aportaciones federales. Localizar el ramo es el primer paso para rastrear cualquier peso.",
+      "ley": "Clasificador por Objeto del Gasto · PEF del ejercicio correspondiente",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Cuenta Pública",
+      "definicion": "Informe anual que el Ejecutivo entrega a la Cámara de Diputados con el resultado del ejercicio presupuestario: cuánto se recaudó, cuánto se gastó, en qué y con qué resultados. Es el documento que la Auditoría Superior de la Federación fiscaliza y, por tanto, la fuente primaria de casi toda auditoría ciudadana seria.",
+      "ley": "Art. 74 frac. VI CPEUM · Art. 53 Ley General de Contabilidad Gubernamental",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Déficit y Superávit Público",
+      "definicion": "Déficit: el gobierno gastó más de lo que ingresó en el periodo y la diferencia se cubre con deuda. Superávit: ingresó más de lo que gastó. No es un juicio moral automático: un déficit puede financiar inversión productiva y un superávit puede esconder subejercicio. Lo relevante es su tamaño frente al PIB y su sostenibilidad en el tiempo.",
+      "ley": "Art. 17 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Balance Primario",
+      "definicion": "Diferencia entre ingresos y gastos del gobierno sin contar el pago de intereses de la deuda. Sirve para saber si el desequilibrio proviene de la operación corriente o del costo financiero heredado. Un balance primario positivo significa que, descontando intereses, las cuentas cierran.",
+      "ley": "Criterios Generales de Política Económica · Art. 2° LFPRH",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deuda Pública y SHRFSP",
+      "definicion": "Obligaciones financieras contraídas por el sector público. La medida más amplia y honesta es el Saldo Histórico de los Requerimientos Financieros del Sector Público (SHRFSP), que incluye deuda tradicional, pasivos de empresas productivas del Estado, pensiones y proyectos de inversión diferidos. Citar solo la deuda del gobierno federal subestima el compromiso real.",
+      "ley": "Art. 73 frac. VIII CPEUM · Ley General de Deuda Pública · Criterios Generales de Política Económica",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "PIB (Producto Interno Bruto)",
+      "definicion": "Valor de todos los bienes y servicios finales producidos en el país durante un periodo. En fiscalización se usa como denominador: expresar la deuda o el déficit como porcentaje del PIB permite comparar años y países, porque neutraliza el tamaño de la economía y la inflación.",
+      "ley": "Sistema de Cuentas Nacionales de México, INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Inflación e INPC",
+      "definicion": "La inflación es el aumento generalizado y sostenido de los precios; el Índice Nacional de Precios al Consumidor (INPC) es el instrumento que la mide. Sin deflactar por INPC, comparar un presupuesto de 2018 con uno de 2026 es comparar dos monedas distintas: la diferencia nominal exagera el crecimiento real.",
+      "ley": "Art. 20 Código Fiscal de la Federación · Banco de México e INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Pesos Corrientes vs. Pesos Constantes",
+      "definicion": "Pesos corrientes son las cifras tal como aparecen en el documento de su año. Pesos constantes son esas mismas cifras ajustadas por inflación a un año base, y son las únicas que permiten afirmar que un gasto creció o cayó en términos reales. Toda comparación multianual de esta plataforma debe indicar cuál de las dos usa.",
+      "ley": "Metodología de deflactación del INEGI · Criterios Generales de Política Económica",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "UMA (Unidad de Medida y Actualización)",
+      "definicion": "Referencia económica en pesos que sustituyó al salario mínimo para calcular multas, créditos, cuotas y obligaciones legales. La actualiza el INEGI cada año. Su desvinculación del salario mínimo evitó que los aumentos salariales encarecieran automáticamente multas y trámites.",
+      "ley": "Art. 26 apartado B CPEUM · Ley para Determinar el Valor de la UMA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "ISR, IVA e IEPS",
+      "definicion": "Los tres impuestos federales que sostienen la mayor parte de la recaudación. ISR grava la ganancia de personas y empresas; IVA grava el consumo a una tasa general del 16 %; IEPS grava bienes y servicios específicos como combustibles, tabaco y bebidas azucaradas. De su bolsa común se calcula la Recaudación Federal Participable que se reparte a estados y municipios.",
+      "ley": "Ley del ISR · Ley del IVA · Ley del IEPS · Art. 2° Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Fiscalización Superior",
+      "definicion": "Revisión técnica y externa del uso de los recursos públicos que realiza la Auditoría Superior de la Federación por encargo de la Cámara de Diputados. No es una auditoría contable cualquiera: puede revisar desempeño, legalidad y resultados, y derivar en responsabilidades administrativas o penales.",
+      "ley": "Arts. 74 frac. VI y 79 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Observación, Recomendación y Promoción de Responsabilidad",
+      "definicion": "Los tres desenlaces de una auditoría, en orden de gravedad. Observación: se detectó una irregularidad y se pide aclararla. Recomendación: se sugiere corregir un procedimiento sin imputar falta. Promoción de responsabilidad: se turna el caso a la autoridad competente porque hay presunta falta administrativa o delito. Confundirlas infla o desinfla artificialmente la gravedad de un hallazgo.",
+      "ley": "Arts. 49 a 52 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Conflicto de Interés",
+      "definicion": "Situación en la que el interés personal, familiar o de negocios de una persona servidora pública puede afectar el ejercicio imparcial de sus funciones. No requiere que exista daño consumado: basta la posibilidad razonable de que el juicio se vea comprometido, y debe declararse aunque no se materialice.",
+      "ley": "Art. 3° frac. VI y Art. 58 Ley General de Responsabilidades Administrativas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Transparencia Proactiva y Datos Abiertos",
+      "definicion": "Obligación de publicar información de oficio en formatos que permitan procesarla, no solo leerla. Un PDF escaneado cumple la letra y traiciona el propósito: sin datos abiertos, la verificación ciudadana depende de transcribir a mano lo que la autoridad ya tenía en hoja de cálculo.",
+      "ley": "Arts. 70 y 71 Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Juicio de Amparo",
+      "definicion": "Medio de defensa por el que cualquier persona puede reclamar ante un juez federal un acto de autoridad que viole sus derechos humanos. En materia presupuestal se ha usado para impugnar recortes, extinciones de fideicomisos y actos de fiscalización.",
+      "ley": "Arts. 103 y 107 CPEUM · Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Jurisprudencia",
+      "definicion": "Criterio de interpretación de la ley que resulta obligatorio para los tribunales inferiores. La emite el Pleno de la Suprema Corte, y antes también sus Salas, por reiteración o por contradicción de criterios. La jurisprudencia dictada por las Salas suprimidas en 2025 sigue vigente mientras el Pleno no la sustituya.",
+      "ley": "Arts. 94 y 217 CPEUM · Ley de Amparo, Título Cuarto",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Órgano de Administración Judicial (OAJ)",
+      "definicion": "Órgano creado por la reforma judicial de 2024 que asumió la administración, la carrera judicial y el manejo presupuestal del Poder Judicial de la Federación, funciones que antes correspondían al Consejo de la Judicatura Federal. Separar la administración de la disciplina fue uno de los cambios estructurales de la reforma.",
+      "ley": "Art. 100 CPEUM reformado · Decreto DOF 15 de septiembre de 2024",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Lista Nominal y Padrón Electoral",
+      "definicion": "El padrón electoral reúne a quienes solicitaron su credencial para votar; la lista nominal, solo a quienes ya la recogieron y pueden votar. La participación siempre se calcula sobre la lista nominal, no sobre el padrón ni sobre la población total: usar una base distinta altera el porcentaje.",
+      "ley": "Arts. 126 a 148 Ley General de Instituciones y Procedimientos Electorales",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "OPLE (Organismo Público Local Electoral)",
+      "definicion": "Autoridad electoral de cada entidad federativa, encargada de organizar las elecciones locales en coordinación con el INE. Su presupuesto lo aprueba el congreso estatal y lo ministra el gobierno del estado, lo que en la práctica condiciona su autonomía operativa.",
+      "ley": "Art. 41 base V apartado C CPEUM · Art. 98 LGIPE",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Tope de Gastos de Campaña",
+      "definicion": "Monto máximo que una candidatura puede erogar en su campaña, fijado por la autoridad electoral. Rebasarlo en forma determinante puede anular la elección. En la elección judicial de 2025 el tope fue de 220 mil pesos por candidatura, sin financiamiento público ni acceso a radio y televisión.",
+      "ley": "Arts. 41 y 116 CPEUM · Arts. 243 y 445 LGIPE",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "DOF (Diario Oficial de la Federación)",
+      "definicion": "Órgano oficial de difusión del Estado mexicano. Una norma existe jurídicamente a partir de su publicación en el DOF, y la fecha de publicación —no la de aprobación ni la del anuncio— es la que determina su entrada en vigor. Cuando una cifra o una facultad se disputa, el DOF es la fuente que zanja la discusión.",
+      "ley": "Art. 2° Ley del Diario Oficial de la Federación y Gacetas Gubernamentales",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    }],
   "legislativo": {
     "federal": {
       "diputados": {
@@ -4321,6 +4464,51 @@ window.AUDIT_DB = {
       "cita_apa": "United States District Court for the Eastern District of New York. (2020–2024). United States v. Genaro Garcia Luna (Criminal Docket No. 1:19-cr-00576-BMC). Brooklyn, NY: Federal Judicial Center / CourtListener PACER Records.",
       "url": "https://www.courtlistener.com/docket/16559363/united-states-v-garcia-luna/",
       "descripcion": "Expediente judicial federal radicado ante el Juez Brian M. Cogan en la Corte de Distrito Este de Nueva York. Contiene el pliego acusatorio (indictment), transcripciones taquigráficas de las audiencias testimoniales de exoperadores delictivos cooperantes, minutas de evidencia admitida (exhibits), mociones sobre la ausencia de rastro financiero directo incautado en cuentas bancarias a su nombre, y la sentencia dictada el 16 de octubre de 2024 a más de 38 años de prisión y $2 mdd de multa."
+    },
+    {
+      "num": 28,
+      "id": "ref-lamparo",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos. Diario Oficial de la Federación, 2 de abril de 2013 (México). Títulos Primero a Cuarto.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
+      "descripcion": "Ordenamiento que regula el juicio de amparo, el medio de defensa por el que cualquier persona puede reclamar ante un juez federal actos de autoridad que violen sus derechos. Su Título Cuarto fija las reglas de formación, interrupción y sustitución de la jurisprudencia, determinantes para saber qué criterios de las Salas suprimidas en 2025 siguen siendo obligatorios."
+    },
+    {
+      "num": 29,
+      "id": "ref-lgra",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Ley General de Responsabilidades Administrativas [LGRA]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Artículos 3, 49 a 64 y 108 a 115.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf",
+      "descripcion": "Norma que define las faltas administrativas graves y no graves de las personas servidoras públicas, la obligación de presentar las declaraciones patrimonial, de intereses y fiscal, y el concepto de conflicto de interés. Es el vínculo entre un hallazgo de auditoría y una sanción efectiva."
+    },
+    {
+      "num": 30,
+      "id": "ref-lgtaip",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Ley General de Transparencia y Acceso a la Información Pública [LGTAIP]. Diario Oficial de la Federación, 4 de mayo de 2015 (México). Artículos 70 a 83.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf",
+      "descripcion": "Establece las obligaciones de transparencia que todos los sujetos obligados deben publicar de oficio, incluidos presupuesto asignado y ejercido, remuneraciones, contrataciones y resultados de auditorías, así como el mandato de difundirlas en formatos de datos abiertos que permitan su procesamiento."
+    },
+    {
+      "num": 31,
+      "id": "ref-lgipe",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Instituciones y Procedimientos Electorales [LGIPE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Artículos 98, 126 a 148, 243 y 445.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf",
+      "descripcion": "Regula la integración del padrón electoral y de la lista nominal, la naturaleza y el financiamiento de los Organismos Públicos Locales Electorales, los topes de gastos de campaña y las causales de nulidad por rebase. Es la base normativa para auditar el costo de cualquier proceso electoral, incluido el judicial."
+    },
+    {
+      "num": 32,
+      "id": "ref-inegi-cuentas",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Sistema de Cuentas Nacionales de México e Índice Nacional de Precios al Consumidor. Banco de Información Económica (BIE).",
+      "url": "https://www.inegi.org.mx/temas/pib/",
+      "descripcion": "Fuente oficial del Producto Interno Bruto y del Índice Nacional de Precios al Consumidor, así como del valor anual de la Unidad de Medida y Actualización. Es el insumo obligado para expresar el gasto y la deuda como porcentaje del PIB y para deflactar cifras de distintos años a pesos constantes."
     }
   ],
   "preguntas_casillas": [

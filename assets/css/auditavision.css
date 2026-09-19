@@ -8663,3 +8663,12 @@ nav.tabbar button.active .num {
     flex: 1 1 100%;
   }
 }
+
+/* Vinculacion automatica: nota al pie pegada a su palabra */
+.ref-link.auto-ref {
+  margin-left: 1px;
+}
+
+.glos-link.auto-glos {
+  border-bottom-style: dotted;
+}

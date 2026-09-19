@@ -1781,6 +1781,8 @@
     } else if (tabKey === 'referencias') {
       renderReferencias('todas');
     }
+
+    programarAutolink();
   }
 
   // ==========================================================================
@@ -1849,11 +1851,224 @@
       else if (subKey === 'faq-glosario') renderGlossary();
       else if (subKey === 'faq-marco-legal') renderPreceptosLegales();
     }
+
+    programarAutolink();
   }
 
   // ==========================================================================
   // HIPERVÍNCULOS INTERNOS A GLOSARIO Y REFERENCIAS CON ANIMACIÓN
   // ==========================================================================
+  /* ====================================================================
+     VINCULACION AUTOMATICA A GLOSARIO Y REFERENCIAS (NOTAS AL PIE)
+     --------------------------------------------------------------------
+     Recorre el texto visible de la pestana activa y enlaza la primera
+     aparicion de cada concepto clave en cada subpanel: la palabra queda
+     ligada al glosario y, a su derecha, se inserta la nota al pie con el
+     numero de la referencia de dominio publico que la respalda.
+     No toca enlaces existentes, encabezados, botones ni formularios, ni
+     las propias pestanas de glosario y referencias.
+     ==================================================================== */
+
+  const AUTOLINK_TERMINOS = [
+    // --- Presupuesto y gasto ---
+    { a: ['gasto público', 'gasto publico'], t: 'Gasto Público', r: 'ref-cpeum', n: 1 },
+    { a: ['momentos contables'], t: 'Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)', r: 'ref-lgcg', n: 12 },
+    { a: ['gasto devengado', 'presupuesto devengado', 'presupuesto modificado', 'presupuesto ejercido'], t: 'Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)', r: 'ref-lgcg', n: 12 },
+    { a: ['ejercicio fiscal'], t: 'Ejercicio Fiscal', r: 'ref-lfprh', n: 2 },
+    { a: ['ramo presupuestario', 'ramos presupuestarios'], t: 'Ramo Presupuestario', r: 'ref-pef2026', n: 11 },
+    { a: ['Cuenta Pública'], t: 'Cuenta Pública', r: 'ref-asf-cp', n: 14, cs: true },
+    { a: ['Presupuesto de Egresos de la Federación'], t: 'PEF (Presupuesto de Egresos de la Federación)', r: 'ref-pef2026', n: 11 },
+    { a: ['PEF'], t: 'PEF (Presupuesto de Egresos de la Federación)', r: 'ref-pef2026', n: 11, cs: true },
+    { a: ['Ley de Ingresos de la Federación'], t: 'LIF (Ley de Ingresos de la Federación)', r: 'ref-lif2026', n: 10 },
+    { a: ['LIF'], t: 'LIF (Ley de Ingresos de la Federación)', r: 'ref-lif2026', n: 10, cs: true },
+    { a: ['subejercicio'], t: 'Subejercicio Presupuestal', r: 'ref-lfprh', n: 2 },
+    { a: ['ADEFAS'], t: 'ADEFAS (Adeudos de Ejercicios Fiscales Anteriores)', r: 'ref-lfprh', n: 2, cs: true },
+    { a: ['Tesorería de la Federación'], t: 'TESOFE (Tesorería de la Federación)', r: 'ref-lfprh', n: 2 },
+    { a: ['TESOFE'], t: 'TESOFE (Tesorería de la Federación)', r: 'ref-lfprh', n: 2, cs: true },
+    { a: ['gasto programable', 'gasto no programable'], t: 'Gasto Programable vs No Programable', r: 'ref-lfprh', n: 2 },
+
+    // --- Hacienda y deuda ---
+    { a: ['déficit público', 'déficit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
+    { a: ['superávit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
+    { a: ['balance primario'], t: 'Balance Primario', r: 'ref-lfprh', n: 2 },
+    { a: ['deuda pública'], t: 'Deuda Pública y SHRFSP', r: 'ref-lgdp', n: 4 },
+    { a: ['SHRFSP'], t: 'Deuda Pública y SHRFSP', r: 'ref-lgdp', n: 4, cs: true },
+    { a: ['Producto Interno Bruto'], t: 'PIB (Producto Interno Bruto)', r: 'ref-inegi-cuentas', n: 32 },
+    { a: ['PIB'], t: 'PIB (Producto Interno Bruto)', r: 'ref-inegi-cuentas', n: 32, cs: true },
+    { a: ['inflación'], t: 'Inflación e INPC', r: 'ref-inegi-cuentas', n: 32 },
+    { a: ['INPC'], t: 'Inflación e INPC', r: 'ref-inegi-cuentas', n: 32, cs: true },
+    { a: ['pesos constantes', 'pesos corrientes'], t: 'Pesos Corrientes vs. Pesos Constantes', r: 'ref-inegi-cuentas', n: 32 },
+    { a: ['Unidad de Medida y Actualización'], t: 'UMA (Unidad de Medida y Actualización)', r: 'ref-inegi-cuentas', n: 32 },
+    { a: ['UMA'], t: 'UMA (Unidad de Medida y Actualización)', r: 'ref-inegi-cuentas', n: 32, cs: true },
+    { a: ['ISR', 'IVA', 'IEPS'], t: 'ISR, IVA e IEPS', r: 'ref-cff', n: 9, cs: true },
+    { a: ['Recaudación Federal Participable'], t: 'Recaudación Federal Participable (RFP)', r: 'ref-lcf', n: 5 },
+    { a: ['RFP'], t: 'Recaudación Federal Participable (RFP)', r: 'ref-lcf', n: 5, cs: true },
+    { a: ['Ramo 28'], t: 'Ramo 28 (Participaciones Federales)', r: 'ref-lcf', n: 5, cs: true },
+    { a: ['Ramo 33'], t: 'Ramo 33 (Aportaciones Federales)', r: 'ref-lcf', n: 5, cs: true },
+    { a: ['Ley de Disciplina Financiera'], t: 'Ley de Disciplina Financiera (LDF)', r: 'ref-ldf', n: 6 },
+    { a: ['costo financiero de la deuda'], t: 'Costo Financiero de la Deuda', r: 'ref-lgdp', n: 4 },
+    { a: ['impuesto predial', 'predial'], t: 'Impuesto Predial', r: 'ref-cpeum', n: 1 },
+
+    // --- Fiscalizacion ---
+    { a: ['fiscalización superior'], t: 'Fiscalización Superior', r: 'ref-lfrcf', n: 7 },
+    { a: ['Auditoría Superior de la Federación'], t: 'Fiscalización Superior', r: 'ref-asf-cp', n: 14 },
+    { a: ['ASF'], t: 'Fiscalización Superior', r: 'ref-asf-cp', n: 14, cs: true },
+    { a: ['pliego de observaciones'], t: 'Pliego de Observaciones', r: 'ref-lfrcf', n: 7 },
+    { a: ['promoción de responsabilidad', 'promociones de responsabilidad'], t: 'Observación, Recomendación y Promoción de Responsabilidad', r: 'ref-lgra', n: 29 },
+    { a: ['conflicto de interés'], t: 'Conflicto de Interés', r: 'ref-lgra', n: 29 },
+    { a: ['datos abiertos'], t: 'Transparencia Proactiva y Datos Abiertos', r: 'ref-lgtaip', n: 30 },
+    { a: ['auditoría forense'], t: 'Auditoría Forense', r: 'ref-lfrcf', n: 7 },
+    { a: ['EFOS', 'EDOS', 'factureras'], t: 'EFOS y EDOS (Factureras)', r: 'ref-cff', n: 9, cs: true },
+    { a: ['Declaración 3 de 3'], t: 'Declaración 3 de 3 (Patrimonial, Intereses y Fiscal)', r: 'ref-lgra', n: 29 },
+
+    // --- Judicial ---
+    { a: ['juicio de amparo'], t: 'Juicio de Amparo', r: 'ref-lamparo', n: 28 },
+    { a: ['jurisprudencia'], t: 'Jurisprudencia', r: 'ref-lamparo', n: 28 },
+    { a: ['Órgano de Administración Judicial'], t: 'Órgano de Administración Judicial (OAJ)', r: 'ref-reforma-judicial', n: 19 },
+    { a: ['OAJ'], t: 'Órgano de Administración Judicial (OAJ)', r: 'ref-reforma-judicial', n: 19, cs: true },
+    { a: ['Tribunal de Disciplina Judicial'], t: 'Tribunal de Disciplina Judicial (TDJ)', r: 'ref-reforma-judicial', n: 19 },
+    { a: ['Consejo de la Judicatura Federal'], t: 'Consejo de la Judicatura Federal (CJF)', r: 'ref-reforma-judicial', n: 19 },
+    { a: ['CJF'], t: 'Consejo de la Judicatura Federal (CJF)', r: 'ref-reforma-judicial', n: 19, cs: true },
+    { a: ['reforma judicial'], t: 'Reforma Constitucional del Poder Judicial (2024–2025)', r: 'ref-reforma-judicial', n: 19 },
+    { a: ['haber de retiro'], t: 'Haber de Retiro', r: 'ref-manual-remun-pjf', n: 22 },
+    { a: ['Capítulo 1000'], t: 'Capítulo 1000 (Servicios Personales)', r: 'ref-pef-ramo03', n: 21, cs: true },
+    { a: ['Ramo 03'], t: 'Ramo 03 (Poder Judicial de la Federación)', r: 'ref-pef-ramo03', n: 21, cs: true },
+    { a: ['tope salarial'], t: 'Artículo 127 Constitucional (Tope Salarial)', r: 'ref-cpeum-art127', n: 20 },
+    { a: ['secretario de estudio y cuenta', 'secretaria de estudio y cuenta', 'secretarios de estudio y cuenta'], t: 'Secretario(a) de Estudio y Cuenta', r: 'ref-pnt-asesores-scjn', n: 25 },
+    { a: ['seguro de separación individualizado'], t: 'Seguro de Separación Individualizado (SSI)', r: 'ref-manual-remun-pjf', n: 22 },
+
+    // --- Electoral ---
+    { a: ['lista nominal'], t: 'Lista Nominal y Padrón Electoral', r: 'ref-lgipe', n: 31 },
+    { a: ['padrón electoral'], t: 'Lista Nominal y Padrón Electoral', r: 'ref-lgipe', n: 31 },
+    { a: ['Organismo Público Local Electoral', 'Organismos Públicos Locales Electorales'], t: 'OPLE (Organismo Público Local Electoral)', r: 'ref-lgipe', n: 31 },
+    { a: ['OPLE'], t: 'OPLE (Organismo Público Local Electoral)', r: 'ref-lgipe', n: 31, cs: true },
+    { a: ['tope de gastos de campaña', 'topes de gastos de campaña'], t: 'Tope de Gastos de Campaña', r: 'ref-lgipe', n: 31 },
+    { a: ['representación proporcional'], t: 'Representación Proporcional (RP) / Plurinominales', r: 'ref-cpeum', n: 1 },
+    { a: ['sobrerrepresentación'], t: 'Tope a la Sobrerrepresentación del 8% (Art. 54 CPEUM)', r: 'ref-cpeum', n: 1 },
+
+    // --- Marco legal ---
+    { a: ['Diario Oficial de la Federación'], t: 'DOF (Diario Oficial de la Federación)', r: 'ref-cpeum', n: 1 },
+    { a: ['DOF'], t: 'DOF (Diario Oficial de la Federación)', r: 'ref-cpeum', n: 1, cs: true }
+  ];
+
+  const AUTOLINK_OMITIR_TAGS = new Set(['A', 'BUTTON', 'SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'LABEL', 'SVG', 'CODE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6']);
+  const AUTOLINK_OMITIR_PANELES = new Set(['tab-panel-faq', 'tab-panel-referencias']);
+
+  let autolinkIndice = null;
+
+  function construirIndiceAutolink() {
+    if (autolinkIndice) return autolinkIndice;
+    const entradas = [];
+    AUTOLINK_TERMINOS.forEach(def => {
+      def.a.forEach(alias => {
+        const escapado = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        entradas.push({
+          alias: alias,
+          largo: alias.length,
+          termino: def.t,
+          refKey: def.r,
+          refNum: def.n,
+          re: new RegExp('(?<![\\p{L}\\p{N}_])' + escapado + '(?![\\p{L}\\p{N}_])', def.cs ? 'u' : 'iu')
+        });
+      });
+    });
+    entradas.sort((x, y) => y.largo - x.largo);
+    autolinkIndice = entradas;
+    return entradas;
+  }
+
+  function autolinkNodoValido(nodo) {
+    let el = nodo.parentElement;
+    while (el && el.nodeType === 1) {
+      if (AUTOLINK_OMITIR_TAGS.has(el.tagName)) return false;
+      if (el.classList && (el.classList.contains('glos-link') || el.classList.contains('ref-link') || el.classList.contains('no-autolink'))) return false;
+      if (el.hasAttribute && el.hasAttribute('data-no-autolink')) return false;
+      el = el.parentElement;
+    }
+    return true;
+  }
+
+  function autolinkAmbito(raiz) {
+    if (!raiz) return 0;
+    const indice = construirIndiceAutolink();
+    let insertados = 0;
+
+    indice.forEach(entrada => {
+      const caminante = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
+        acceptNode(nodo) {
+          if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+          return autolinkNodoValido(nodo) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+
+      let nodo;
+      while ((nodo = caminante.nextNode())) {
+        const coincidencia = entrada.re.exec(nodo.nodeValue);
+        if (!coincidencia) continue;
+
+        const texto = nodo.nodeValue;
+        const inicio = coincidencia.index;
+        const fin = inicio + coincidencia[0].length;
+
+        const antes = document.createTextNode(texto.slice(0, inicio));
+        const despues = document.createTextNode(texto.slice(fin));
+
+        const enlace = document.createElement('a');
+        enlace.className = 'glos-link auto-glos';
+        enlace.textContent = coincidencia[0];
+        enlace.title = 'Ver «' + entrada.termino + '» en el glosario';
+        enlace.addEventListener('click', () => goToGlossary(entrada.termino));
+
+        const nota = document.createElement('a');
+        nota.className = 'ref-link auto-ref';
+        nota.textContent = '[' + String(entrada.refNum).padStart(2, '0') + ']';
+        nota.title = 'Ir a la referencia ' + entrada.refNum + ' del catálogo de fuentes';
+        nota.addEventListener('click', () => goToRef(entrada.refKey));
+
+        const padre = nodo.parentNode;
+        padre.insertBefore(antes, nodo);
+        padre.insertBefore(enlace, nodo);
+        padre.insertBefore(nota, nodo);
+        padre.insertBefore(despues, nodo);
+        padre.removeChild(nodo);
+
+        insertados++;
+        break; // una sola vez por ambito: nota al pie, no subrayado masivo
+      }
+    });
+
+    return insertados;
+  }
+
+  function aplicarAutolink(panelId) {
+    const panel = panelId ? document.getElementById(panelId) : document.querySelector('.tab-panel.active');
+    if (!panel || AUTOLINK_OMITIR_PANELES.has(panel.id)) return 0;
+
+    // La introduccion dinamica se reescribe en cada cambio de pestana:
+    // es un ambito propio y vuelve a enlazarse cada vez.
+    let total = autolinkAmbito(document.getElementById('tabintro'));
+
+    // Cada subpanel es un ambito propio; si no hay subpaneles, el panel entero lo es.
+    const subpaneles = panel.querySelectorAll('.subtab-panel');
+    if (subpaneles.length) {
+      subpaneles.forEach(sp => { total += autolinkAmbito(sp); });
+    } else {
+      total += autolinkAmbito(panel);
+    }
+    return total;
+  }
+
+  function programarAutolink(retardoMs = 240) {
+    clearTimeout(programarAutolink._id);
+    programarAutolink._id = setTimeout(() => {
+      try {
+        aplicarAutolink();
+      } catch (err) {
+        console.warn('[Auditavisión] Vinculación automática omitida:', err);
+      }
+    }, retardoMs);
+  }
+
   function goToGlossary(term) {
     switchTab('faq');
     switchSubtab('faq', 'faq-glosario');
@@ -13769,6 +13984,7 @@
     safeRun(() => renderAsfIrregularidadesChart('tipologia'), 'renderAsfIrregularidadesChart');
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
+    safeRun(() => programarAutolink(400), 'programarAutolink');
 
     // Eventos de botones de subpestañas (.subtabs-bar)
     document.querySelectorAll('.subtabs-bar .subtab-btn').forEach(btn => {
@@ -15703,6 +15919,8 @@
     switchTab: switchTab,
     switchSubtab: switchSubtab,
     toggleTheme: toggleTheme,
+    aplicarAutolink: aplicarAutolink,
+    programarAutolink: programarAutolink,
     goToGlossary: goToGlossary,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,

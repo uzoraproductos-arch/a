@@ -122,6 +122,19 @@ de los 32 circuitos.
   costo por voto, costo en las entidades), balance de resultados y hoja de ruta
   hacia la segunda elección, hoy diferida a junio de 2028.
 
+- **Vinculación automática a glosario y referencias.** El motor recorre el texto
+  visible de la pestaña activa y enlaza la primera aparición de cada concepto
+  clave en cada subpanel: la palabra queda ligada al glosario y, a su derecha,
+  se inserta la nota al pie con el número de la referencia que la respalda.
+  - Catálogo de términos: `AUTOLINK_TERMINOS` en `audit-engine.js`. Añadir un
+    concepto es añadir una línea con sus alias, el término exacto del glosario,
+    la clave de referencia y su número.
+  - Los acrónimos (PIB, IVA, ASF, DOF) se declaran con `cs: true` para exigir
+    coincidencia de mayúsculas; sin eso, «IVA» se activaría dentro de «privada».
+  - No toca enlaces ya existentes, encabezados, botones ni formularios, y omite
+    por completo las pestañas de glosario y referencias.
+  - El glosario pasó de 53 a 77 términos y el catálogo de referencias de 27 a 32.
+
 ### Pendiente
 
 - **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
