@@ -14,3 +14,6 @@ Thumbs.db
 *.log
 .vscode/
 .idea/
+
+# Respaldos manuales: el historial de Git cumple esta funcion
+backups/
