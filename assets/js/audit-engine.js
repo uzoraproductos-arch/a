@@ -2415,62 +2415,7 @@
         ]
       },
       {
-        nivel: 'Nivel 3: Salas Jurisdiccionales (Estructura Suprimida por la Reforma 2024)',
-        nodos: [
-          {
-            id: 'scjn_sala1',
-            titulo: 'Primera Sala, Materia Civil y Penal (Suprimida)',
-            icono: '⚖️',
-            badge: 'Suprimida · Vigente hasta el 31 de agosto de 2025',
-            badgeTipo: 'badge-amber',
-            desc: 'Estructura histórica. Estuvo especializada en libertades civiles, derechos humanos, debido proceso en el sistema penal acusatorio, presunción de inocencia y controversias de derecho familiar y mercantil. Dejó de existir con la instalación de la nueva Corte; sus asuntos y criterios pasaron al Pleno.',
-            titular: 'Integración histórica: cinco despachos jurisdiccionales (Pardo, Gutiérrez Ortiz Mena, González Alcántara, Ortiz Ahlf, Ríos Farjat)',
-            plazasPresupuesto: 'Cifra histórica: ~170 plazas técnicas de estudio y cuenta · $192.0 mdp anuales de operación',
-            marco: 'Art. 94 CPEUM · Ley Orgánica del PJF (Art. 21, Fracc. I)',
-            quehacer: 'Conoce de recursos de revisión en amparos directos sobre la constitucionalidad de leyes penales y civiles o la interpretación de tratados internacionales de derechos humanos (prohibición de tortura, arraigo, legalidad de detenciones, interés superior de la niñez, equidad de género y contratos civiles).',
-            distincionEspecialidad: {
-              tipo: 'especialidad_materia',
-              titulo: 'Por Qué se Conserva esta Ficha',
-              detalle: 'La Sala ya no forma parte del organigrama vigente. Se documenta porque la jurisprudencia que emitió sigue siendo aplicable mientras el Pleno no la sustituya, y porque permite rastrear cómo se reorganizó la función jurisdiccional del máximo tribunal tras la reforma.'
-            },
-            fundamentoDetallado: [
-              'Art. 94 y Art. 107 fracción VIII inciso a) de la CPEUM',
-              'Art. 21 fracción I de la Ley Orgánica del PJF (competencias de la Primera Sala)',
-              'Arts. 81 fracción II, 83 y 86 de la Ley de Amparo'
-            ],
-            glosario: 'Pleno de la Suprema Corte',
-            refKey: 'ref-pef-ramo03',
-            refNum: '21'
-          },
-          {
-            id: 'scjn_sala2',
-            titulo: 'Segunda Sala, Materia Administrativa y Laboral (Suprimida)',
-            icono: '🏛️',
-            badge: 'Suprimida · Vigente hasta el 31 de agosto de 2025',
-            badgeTipo: 'badge-amber',
-            desc: 'Estructura histórica. Estuvo especializada en el control de legalidad de los actos del Poder Ejecutivo Federal, derecho tributario, fiscal, ambiental, seguridad social y derecho del trabajo. Dejó de existir con la instalación de la nueva Corte; sus asuntos y criterios pasaron al Pleno.',
-            titular: 'Integración histórica: despachos jurisdiccionales (Pérez Dayán -Presidente-, Laynez Potisek, Batres Guadarrama, Esquivel Mossa)',
-            plazasPresupuesto: 'Cifra histórica: ~171 plazas técnicas de estudio y cuenta · $188.4 mdp anuales de operación',
-            marco: 'Art. 94 CPEUM · Ley Orgánica del PJF (Art. 21, Fracc. II)',
-            quehacer: 'Resuelve litigios contra actos de dependencias federales (SAT, IMSS, ISSSTE, SEMARNAT, CRE, CFE), amparos en materia de impuestos (ISR, IVA, IEPS, Código Fiscal), concesiones mineras, telecomunicaciones en segunda instancia y amparos sobre huelgas y contratos colectivos.',
-            distincionEspecialidad: {
-              tipo: 'especialidad_materia',
-              titulo: 'Por Qué se Conserva esta Ficha',
-              detalle: 'La Sala ya no forma parte del organigrama vigente. Se documenta porque fijó los límites constitucionales de la facultad recaudadora y sancionadora de la administración pública federal, y esos criterios siguen rigiendo mientras el Pleno no los sustituya.'
-            },
-            fundamentoDetallado: [
-              'Art. 94 y Art. 107 de la Constitución Política de los Estados Unidos Mexicanos',
-              'Art. 21 fracción II de la Ley Orgánica del PJF (competencias de la Segunda Sala)',
-              'Arts. 81 fracción II y 84 de la Ley de Amparo'
-            ],
-            glosario: 'Pleno de la Suprema Corte',
-            refKey: 'ref-pef-ramo03',
-            refNum: '21'
-          }
-        ]
-      },
-      {
-        nivel: 'Nivel 4: Equipos Técnicos de Ponencia & Órganos Auxiliares',
+        nivel: 'Nivel 3: Equipos Técnicos de Ponencia & Órganos Auxiliares',
         nodos: [
           {
             id: 'scjn_ponencias_red',
@@ -2525,7 +2470,7 @@
         ]
       },
       {
-        nivel: 'Nivel 5: Administración, Disciplina y Carrera Judicial (Reforma 2024)',
+        nivel: 'Nivel 4: Administración, Disciplina y Carrera Judicial (Reforma 2024)',
         nodos: [
           {
             id: 'scjn_oaj',
@@ -2602,6 +2547,66 @@
               'Presupuesto de Egresos de la Federación - Ramo 03'
             ],
             glosario: 'Ramo 03',
+            refKey: 'ref-pef-ramo03',
+            refNum: '21'
+          }
+        ]
+      },
+      {
+        nivel: 'Anexo histórico: Salas Jurisdiccionales suprimidas por la Reforma 2024',
+        esAnexo: true,
+        colapsadoPorDefecto: true,
+        notaAnexo: 'Estas Salas dejaron de existir el 31 de agosto de 2025. No forman parte del organigrama vigente y se conservan porque su jurisprudencia sigue siendo aplicable mientras el Pleno no la sustituya.',
+        nodos: [
+          {
+            id: 'scjn_sala1',
+            specialClass: 'card-archivo',
+            titulo: 'Primera Sala, Materia Civil y Penal (Suprimida)',
+            icono: '⚖️',
+            badge: 'Suprimida · Vigente hasta el 31 de agosto de 2025',
+            badgeTipo: 'badge-amber',
+            desc: 'Estructura histórica. Estuvo especializada en libertades civiles, derechos humanos, debido proceso en el sistema penal acusatorio, presunción de inocencia y controversias de derecho familiar y mercantil. Dejó de existir con la instalación de la nueva Corte; sus asuntos y criterios pasaron al Pleno.',
+            titular: 'Integración histórica: cinco despachos jurisdiccionales (Pardo, Gutiérrez Ortiz Mena, González Alcántara, Ortiz Ahlf, Ríos Farjat)',
+            plazasPresupuesto: 'Cifra histórica: ~170 plazas técnicas de estudio y cuenta · $192.0 mdp anuales de operación',
+            marco: 'Art. 94 CPEUM · Ley Orgánica del PJF (Art. 21, Fracc. I)',
+            quehacer: 'Conoce de recursos de revisión en amparos directos sobre la constitucionalidad de leyes penales y civiles o la interpretación de tratados internacionales de derechos humanos (prohibición de tortura, arraigo, legalidad de detenciones, interés superior de la niñez, equidad de género y contratos civiles).',
+            distincionEspecialidad: {
+              tipo: 'especialidad_materia',
+              titulo: 'Por Qué se Conserva esta Ficha',
+              detalle: 'La Sala ya no forma parte del organigrama vigente. Se documenta porque la jurisprudencia que emitió sigue siendo aplicable mientras el Pleno no la sustituya, y porque permite rastrear cómo se reorganizó la función jurisdiccional del máximo tribunal tras la reforma.'
+            },
+            fundamentoDetallado: [
+              'Art. 94 y Art. 107 fracción VIII inciso a) de la CPEUM',
+              'Art. 21 fracción I de la Ley Orgánica del PJF (competencias de la Primera Sala)',
+              'Arts. 81 fracción II, 83 y 86 de la Ley de Amparo'
+            ],
+            glosario: 'Pleno de la Suprema Corte',
+            refKey: 'ref-pef-ramo03',
+            refNum: '21'
+          },
+          {
+            id: 'scjn_sala2',
+            specialClass: 'card-archivo',
+            titulo: 'Segunda Sala, Materia Administrativa y Laboral (Suprimida)',
+            icono: '🏛️',
+            badge: 'Suprimida · Vigente hasta el 31 de agosto de 2025',
+            badgeTipo: 'badge-amber',
+            desc: 'Estructura histórica. Estuvo especializada en el control de legalidad de los actos del Poder Ejecutivo Federal, derecho tributario, fiscal, ambiental, seguridad social y derecho del trabajo. Dejó de existir con la instalación de la nueva Corte; sus asuntos y criterios pasaron al Pleno.',
+            titular: 'Integración histórica: despachos jurisdiccionales (Pérez Dayán -Presidente-, Laynez Potisek, Batres Guadarrama, Esquivel Mossa)',
+            plazasPresupuesto: 'Cifra histórica: ~171 plazas técnicas de estudio y cuenta · $188.4 mdp anuales de operación',
+            marco: 'Art. 94 CPEUM · Ley Orgánica del PJF (Art. 21, Fracc. II)',
+            quehacer: 'Resuelve litigios contra actos de dependencias federales (SAT, IMSS, ISSSTE, SEMARNAT, CRE, CFE), amparos en materia de impuestos (ISR, IVA, IEPS, Código Fiscal), concesiones mineras, telecomunicaciones en segunda instancia y amparos sobre huelgas y contratos colectivos.',
+            distincionEspecialidad: {
+              tipo: 'especialidad_materia',
+              titulo: 'Por Qué se Conserva esta Ficha',
+              detalle: 'La Sala ya no forma parte del organigrama vigente. Se documenta porque fijó los límites constitucionales de la facultad recaudadora y sancionadora de la administración pública federal, y esos criterios siguen rigiendo mientras el Pleno no los sustituya.'
+            },
+            fundamentoDetallado: [
+              'Art. 94 y Art. 107 de la Constitución Política de los Estados Unidos Mexicanos',
+              'Art. 21 fracción II de la Ley Orgánica del PJF (competencias de la Segunda Sala)',
+              'Arts. 81 fracción II y 84 de la Ley de Amparo'
+            ],
+            glosario: 'Pleno de la Suprema Corte',
             refKey: 'ref-pef-ramo03',
             refNum: '21'
           }
@@ -4886,7 +4891,7 @@
             <div class="pj-level-pills-bar" id="pjLevelPills_${view}">
               <button type="button" class="pj-level-pill active" onclick="window.AuditEngine.filterPjConceptLevel('todos', '${view}')">🌐 Todo el Organigrama</button>
               ${dataTree.map((lvl, idx) => `
-                <button type="button" class="pj-level-pill" onclick="window.AuditEngine.filterPjConceptLevel(${idx + 1}, '${view}')">Nivel ${idx + 1}</button>
+                <button type="button" class="pj-level-pill${lvl.esAnexo ? ' pill-archivo' : ''}" onclick="window.AuditEngine.filterPjConceptLevel(${idx + 1}, '${view}')">${lvl.esAnexo ? '📁 Anexo' : 'Nivel ' + (idx + 1)}</button>
               `).join('')}
             </div>
           </div>
@@ -4904,16 +4909,22 @@
         <!-- Niveles del Mapa Conceptual Jerárquico -->
         <div class="pj-concept-levels-wrapper">
           ${dataTree.map((lvl, idx) => `
-            <div class="pj-concept-level-block" data-level="${idx + 1}" id="pjLevel_${view}_${idx + 1}">
+            <div class="pj-concept-level-block${lvl.esAnexo ? ' nivel-archivo' : ''}" data-level="${idx + 1}" id="pjLevel_${view}_${idx + 1}">
               
               <!-- Insignia Conectora del Nivel -->
               <div class="pj-level-badge-header">
-                <div class="pj-level-pill-badge">
-                  <span>🏛️ NIVEL ${idx + 1}</span>
+                <div class="pj-level-pill-badge${lvl.esAnexo ? ' badge-archivo' : ''}">
+                  <span>${lvl.esAnexo ? '📁 ANEXO HISTÓRICO' : '🏛️ NIVEL ' + (idx + 1)}</span>
                   <span style="color:var(--text-dim);">·</span>
                   <span style="color:var(--text-main);">${lvl.nivel.split(':')[1] ? lvl.nivel.split(':')[1].trim() : lvl.nivel}</span>
                 </div>
               </div>
+
+              ${lvl.notaAnexo ? `
+                <div class="pj-anexo-nota">
+                  <strong>⚠️ Estructura derogada.</strong> ${lvl.notaAnexo}
+                </div>
+              ` : ''}
 
               <!-- Grilla de Tarjetas Conceptuales del Nivel -->
               <div class="pj-concept-cards-grid">
@@ -5133,7 +5144,7 @@
                 <span>🏛️</span> Tribunal Pleno de la SCJN
               </div>
               <span class="pj-tree-node-badge badge-gold" style="align-self:center;">
-                11 Ministras y Ministros (9 en Reforma 2024) · Órgano Supremo del PJF
+                9 Ministras y Ministros electos por voto popular · Órgano Supremo del PJF
               </span>
               <p class="pj-tree-node-desc">
                 Máximo órgano colegiado del Estado mexicano en materia jurisdiccional. Ejerce el <strong>control concentrado de constitucionalidad</strong>: 
@@ -5177,8 +5188,8 @@
                 turna expedientes por orden riguroso a las ponencias y supervisa la administración interna de la Corte.
               </p>
               <div style="font-size:11px; color:#cbd5e1; margin-top:4px;">
-                • <strong>No integra ninguna Sala</strong> — su función es dirección y representación.<br>
-                • Turno transparente de asuntos a las 11 ponencias.<br>
+                • <strong>Presidencia rotativa cada dos años</strong> según la votación obtenida en la elección judicial.<br>
+                • Turno transparente de asuntos a las 9 ponencias.<br>
                 • Nombra y remueve personal de confianza adscrito.
               </div>
               <div class="pj-tree-node-law">
@@ -5210,82 +5221,17 @@
           <div class="pj-tree-connector-down"></div>
         </div>
 
-        <!-- ═══ NIVEL 3: SALAS JURISDICCIONALES ═══ -->
+        <!-- ═══ NIVEL 3: DESPACHOS TÉCNICOS Y CULTURA JURÍDICA ═══ -->
         <div class="pj-tree-level-wrapper">
           <div class="pj-tree-level-label">
-            ⚖️ NIVEL 3 · SALAS JURISDICCIONALES ESPECIALIZADAS
-          </div>
-          <div class="pj-tree-row">
-            
-            <!-- Primera Sala -->
-            <div class="pj-tree-node node-amber">
-              <div class="pj-tree-node-title">
-                <span>⚖️</span> Primera Sala
-              </div>
-              <span class="pj-tree-node-badge badge-amber">5 Ministros · $192.0 mdp/año · Materia Civil y Penal</span>
-              <p class="pj-tree-node-desc">
-                Especializada en libertades civiles, derechos humanos, debido proceso penal acusatorio, presunción de inocencia, 
-                derecho familiar y mercantil.
-              </p>
-              <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06); padding:8px; border-radius:6px; font-size:11px; margin-top:6px;">
-                <div style="color:var(--cyan); margin-bottom:4px;">
-                  <strong>Competencia específica:</strong>
-                </div>
-                <div style="color:#cbd5e1;">
-                  • Amparos en revisión sobre constitucionalidad de leyes penales y civiles<br>
-                  • Interpretación de tratados internacionales de DDHH<br>
-                  • Prohibición de tortura, legalidad de detenciones<br>
-                  • Interés superior de la niñez, equidad de género<br>
-                  • <strong>No conoce</strong> de materias fiscal, administrativa ni laboral
-                </div>
-              </div>
-              <div class="pj-tree-node-law">
-                📜 Art. 21 Fr. I LOPJF · Arts. 81, 83 y 86 Ley de Amparo
-              </div>
-            </div>
-
-            <!-- Segunda Sala -->
-            <div class="pj-tree-node node-amber">
-              <div class="pj-tree-node-title">
-                <span>🏛️</span> Segunda Sala
-              </div>
-              <span class="pj-tree-node-badge badge-amber">4–5 Ministros · $188.4 mdp/año · Materia Admin. y Laboral</span>
-              <p class="pj-tree-node-desc">
-                Especializada en control de legalidad de actos del Ejecutivo Federal, derecho tributario, fiscal, ambiental, 
-                seguridad social y derecho laboral.
-              </p>
-              <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06); padding:8px; border-radius:6px; font-size:11px; margin-top:6px;">
-                <div style="color:var(--cyan); margin-bottom:4px;">
-                  <strong>Competencia específica:</strong>
-                </div>
-                <div style="color:#cbd5e1;">
-                  • Litigios contra SAT, IMSS, ISSSTE, SEMARNAT, CRE, CFE<br>
-                  • Amparos en materia de ISR, IVA, IEPS, Código Fiscal<br>
-                  • Concesiones mineras y telecomunicaciones (2ª instancia)<br>
-                  • Huelgas, contratos colectivos y justicia laboral federal<br>
-                  • <strong>No conoce</strong> de materias penal ni civil
-                </div>
-              </div>
-              <div class="pj-tree-node-law">
-                📜 Art. 21 Fr. II LOPJF · Arts. 81 y 84 Ley de Amparo
-              </div>
-            </div>
-
-          </div>
-          <div class="pj-tree-connector-down"></div>
-        </div>
-
-        <!-- ═══ NIVEL 4: DESPACHOS TÉCNICOS Y CULTURA JURÍDICA ═══ -->
-        <div class="pj-tree-level-wrapper">
-          <div class="pj-tree-level-label">
-            👥 NIVEL 4 · PONENCIAS TÉCNICAS, DIFUSIÓN Y ACERVO JUDICIAL
+            👥 NIVEL 3 · PONENCIAS TÉCNICAS, DIFUSIÓN Y ACERVO JUDICIAL
           </div>
           <div class="pj-tree-row">
             
             <!-- Despachos de Ponencia -->
             <div class="pj-tree-node node-gold" style="flex:1.3;">
               <div class="pj-tree-node-title">
-                <span>👥</span> 11 Despachos Técnicos de Ponencia
+                <span>👥</span> 9 Despachos Técnicos de Ponencia
               </div>
               <span class="pj-tree-node-badge badge-gold">385 Plazas Directas · $376.2 mdp/año</span>
               <p class="pj-tree-node-desc">
@@ -5344,10 +5290,10 @@
           <div class="pj-tree-connector-down"></div>
         </div>
 
-        <!-- ═══ NIVEL 5: ÓRGANO DE ADMINISTRACIÓN JUDICIAL (OAJ) ═══ -->
+        <!-- ═══ NIVEL 4: ÓRGANO DE ADMINISTRACIÓN JUDICIAL (OAJ) ═══ -->
         <div class="pj-tree-level-wrapper">
           <div class="pj-tree-level-label">
-            🏢 NIVEL 5 · ÓRGANOS DE ADMINISTRACIÓN, DISCIPLINA Y GOBIERNO (REFORMA 2024)
+            🏢 NIVEL 4 · ÓRGANOS DE ADMINISTRACIÓN, DISCIPLINA Y GOBIERNO (REFORMA 2024)
           </div>
           <div class="pj-tree-row">
             
@@ -5413,6 +5359,75 @@
 
       </div>
 
+        <div class="pj-anexo-nota" style="margin-top:34px;">
+          <strong>⚠️ Estructura derogada.</strong> Las dos Salas dejaron de existir el 31 de agosto de 2025 con la
+          instalación de la nueva Corte. No forman parte del organigrama vigente: se conservan porque su
+          jurisprudencia sigue siendo aplicable mientras el Pleno no la sustituya.
+        </div>
+        <!-- ═══ ANEXO HISTÓRICO: SALAS SUPRIMIDAS ═══ -->
+        <div class="pj-tree-level-wrapper nivel-archivo">
+          <div class="pj-tree-level-label">
+            📁 ANEXO HISTÓRICO · SALAS JURISDICCIONALES SUPRIMIDAS
+          </div>
+          <div class="pj-tree-row">
+            
+            <!-- Primera Sala -->
+            <div class="pj-tree-node card-archivo node-amber">
+              <div class="pj-tree-node-title">
+                <span>⚖️</span> Primera Sala
+              </div>
+              <span class="pj-tree-node-badge badge-amber">5 Ministros · $192.0 mdp/año · Materia Civil y Penal</span>
+              <p class="pj-tree-node-desc">
+                Especializada en libertades civiles, derechos humanos, debido proceso penal acusatorio, presunción de inocencia, 
+                derecho familiar y mercantil.
+              </p>
+              <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06); padding:8px; border-radius:6px; font-size:11px; margin-top:6px;">
+                <div style="color:var(--cyan); margin-bottom:4px;">
+                  <strong>Competencia específica:</strong>
+                </div>
+                <div style="color:#cbd5e1;">
+                  • Amparos en revisión sobre constitucionalidad de leyes penales y civiles<br>
+                  • Interpretación de tratados internacionales de DDHH<br>
+                  • Prohibición de tortura, legalidad de detenciones<br>
+                  • Interés superior de la niñez, equidad de género<br>
+                  • <strong>No conoce</strong> de materias fiscal, administrativa ni laboral
+                </div>
+              </div>
+              <div class="pj-tree-node-law">
+                📜 Art. 21 Fr. I LOPJF · Arts. 81, 83 y 86 Ley de Amparo
+              </div>
+            </div>
+
+            <!-- Segunda Sala -->
+            <div class="pj-tree-node card-archivo node-amber">
+              <div class="pj-tree-node-title">
+                <span>🏛️</span> Segunda Sala
+              </div>
+              <span class="pj-tree-node-badge badge-amber">4–5 Ministros · $188.4 mdp/año · Materia Admin. y Laboral</span>
+              <p class="pj-tree-node-desc">
+                Especializada en control de legalidad de actos del Ejecutivo Federal, derecho tributario, fiscal, ambiental, 
+                seguridad social y derecho laboral.
+              </p>
+              <div style="background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06); padding:8px; border-radius:6px; font-size:11px; margin-top:6px;">
+                <div style="color:var(--cyan); margin-bottom:4px;">
+                  <strong>Competencia específica:</strong>
+                </div>
+                <div style="color:#cbd5e1;">
+                  • Litigios contra SAT, IMSS, ISSSTE, SEMARNAT, CRE, CFE<br>
+                  • Amparos en materia de ISR, IVA, IEPS, Código Fiscal<br>
+                  • Concesiones mineras y telecomunicaciones (2ª instancia)<br>
+                  • Huelgas, contratos colectivos y justicia laboral federal<br>
+                  • <strong>No conoce</strong> de materias penal ni civil
+                </div>
+              </div>
+              <div class="pj-tree-node-law">
+                📜 Art. 21 Fr. II LOPJF · Arts. 81 y 84 Ley de Amparo
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       <!-- Leyenda Explicativa -->
       <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:11.5px; font-family:var(--font-mono);">
         <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
@@ -5420,7 +5435,7 @@
           <span><span style="display:inline-block; width:10px; height:10px; background:var(--gold-bright); border-radius:2px; margin-right:5px;"></span> Pleno, Presidencia & Ponencias</span>
           <span><span style="display:inline-block; width:10px; height:10px; background:var(--cyan); border-radius:2px; margin-right:5px;"></span> Órganos de Apoyo Técnico & Administración</span>
           <span><span style="display:inline-block; width:10px; height:10px; background:var(--crimson-bright); border-radius:2px; margin-right:5px;"></span> Disciplina Judicial (Reforma 2024)</span>
-          <span><span style="display:inline-block; width:10px; height:10px; background:var(--amber); border-radius:2px; margin-right:5px;"></span> Salas Jurisdiccionales (1ª y 2ª)</span>
+          <span><span style="display:inline-block; width:10px; height:10px; background:var(--amber); border-radius:2px; margin-right:5px;"></span> Salas Jurisdiccionales (suprimidas, anexo histórico)</span>
         </div>
         <button type="button" class="btn-auditoria" onclick="window.AuditEngine.closePjHierarchicalModal()" style="font-size:11px; padding:5px 12px; background:rgba(255,255,255,0.08); border:1px solid var(--border-subtle); color:var(--text-main); border-radius:6px; cursor:pointer;">
           ✕ Cerrar Diagrama

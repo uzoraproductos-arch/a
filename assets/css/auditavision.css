@@ -2976,7 +2976,6 @@ nav.tabbar button.active .num {
   color: #9aa2b4;
 }
 
-
 /* ==========================================================================
    SUBPESTAÑAS (FORMATO FORTUVISIÓN & DIAGNÓSTICO COMPARATIVO)
    ========================================================================== */
@@ -6591,11 +6590,6 @@ nav.tabbar button.active .num {
   animation: fadeInPower 0.3s ease;
 }
 
-
-
-
-
-
 /* Hover y animaciones para Radiografía de Irregularidades ASF (Bloque 3) */
 .asf-irreg-item:hover {
   background: rgba(255, 255, 255, 0.08) !important;
@@ -7672,13 +7666,6 @@ nav.tabbar button.active .num {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-
-
-
-
-
-
-
 /* ==========================================================================
    SUBPESTAÑA 4.1: MAPA GEOGRÁFICO, CARTOGRAMA Y DRAWER DE CIRCUITOS JUDICIALES
    ========================================================================== */
@@ -7827,7 +7814,6 @@ nav.tabbar button.active .num {
 .pj-drawer-table tr:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
-
 
 /* ==========================================================================
    MAPA CONCEPTUAL JERÁRQUICO INTERACTIVO: SCJN & PODER JUDICIAL FEDERAL
@@ -8412,5 +8398,124 @@ nav.tabbar button.active .num {
   height: 20px;
   background: linear-gradient(180deg, var(--gold) 0%, rgba(212, 175, 55, 0.2) 100%);
   margin: 0 auto;
+}
+
+/* ==========================================================================
+   ANEXO HISTORICO: ESTRUCTURAS DEROGADAS
+   Tratamiento visual de archivo para organos que ya no operan, de modo que
+   se distingan de los vigentes sin necesidad de leer el texto.
+   ========================================================================== */
+.pj-concept-level-block.nivel-archivo {
+  margin-top: 44px;
+  padding: 26px 20px 20px;
+  border: 1px dashed var(--border-accent);
+  border-radius: 14px;
+  /* Fondo opaco y z-index superior: el anexo esta fuera del flujo jerarquico,
+     asi que la espina conectora del organigrama no debe atravesarlo. */
+  background: var(--bg-surface);
+  position: relative;
+  z-index: 5;
+  opacity: 0.94;
+}
+
+[data-theme="light"] .pj-concept-level-block.nivel-archivo {
+  background: var(--bg-surface);
+}
+
+/* Insignia del anexo: gris, no dorada, para romper la jerarquia visual */
+.pj-level-pill-badge.badge-archivo {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-accent);
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+/* Aviso de vigencia al inicio del anexo */
+.pj-anexo-nota {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  padding: 11px 16px;
+  border-left: 3px solid var(--amber);
+  border-radius: 6px;
+  background: rgba(243, 156, 18, 0.08);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.pj-anexo-nota strong {
+  color: var(--amber);
+}
+
+/* Fichas archivadas: sin realce y con borde discontinuo */
+.pj-concept-card.card-archivo {
+  background: rgba(255, 255, 255, 0.02);
+  border-style: dashed;
+  border-color: var(--border-accent);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .pj-concept-card.card-archivo {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+/* El titulo pierde el realce dorado del resto del organigrama */
+.pj-concept-card.card-archivo .pj-concept-card-title {
+  color: var(--text-secondary);
+}
+
+.pj-concept-card.card-archivo:hover {
+  border-color: var(--amber);
+  transform: none;
+}
+
+/* Pildora de filtro correspondiente al anexo */
+.pj-level-pill.pill-archivo {
+  border-style: dashed;
+  color: var(--text-dim);
+}
+
+.pj-level-pill.pill-archivo.active {
+  border-color: var(--amber);
+  color: var(--amber);
+  background: rgba(243, 156, 18, 0.12);
+  box-shadow: none;
+}
+
+/* Equivalentes de archivo dentro de la piramide jerarquica */
+.pj-tree-level-wrapper.nivel-archivo {
+  margin-top: 10px;
+  padding: 22px 18px 18px;
+  border: 1px dashed var(--border-accent);
+  border-radius: 14px;
+  background: var(--bg-surface);
+  position: relative;
+  z-index: 5;
+  opacity: 0.94;
+}
+
+[data-theme="light"] .pj-tree-level-wrapper.nivel-archivo {
+  background: var(--bg-surface);
+}
+
+.pj-tree-level-wrapper.nivel-archivo .pj-tree-level-label {
+  color: var(--text-secondary);
+}
+
+.pj-tree-node.card-archivo {
+  border-style: dashed;
+  border-color: var(--border-accent);
+  background: rgba(255, 255, 255, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .pj-tree-node.card-archivo {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.pj-tree-node.card-archivo .pj-tree-node-title {
+  color: var(--text-secondary);
 }
 
