@@ -2135,6 +2135,9 @@
   // Etiquetas, distintivos y celdas de dato: son rótulos, no prosa. Vincular
   // dentro de ellos rompe su maquetación y no ayuda a leer.
   const AUTOLINK_OMITIR_CLASES = new Set([
+    'sim-sec-t', 'sim-sec-n', 'sim-sec-ico', 'sim-sec-meta', 'sim-sec-pct',
+    'sim-sec-cuota', 'sim-sec-b', 'sim-sec-ob-ico',
+    'sim-dc-l', 'sim-dc-v', 'sim-dc-s',
     'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
     'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
     'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
@@ -14809,17 +14812,20 @@
     };
   }
 
+  /* Unidades sin ambiguedad. La etiqueta "mil mdp" se leia como "mil
+     millones de pesos" cuando en realidad significaba mil MILLONES de
+     pesos multiplicados por mil: $461.4 mil mdp son 461,392 millones,
+     no 461 millones. Se abandona esa forma. Regla: 1 mdp = un millon;
+     1,000 mdp = mil millones; 1,000,000 mdp = un billon. */
   function simMdp(n) {
-    if (Math.abs(n) >= 1000000) return '$' + (n / 1000000).toFixed(2) + ' billones';
-    if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(1) + ' mil mdp';
-    return '$' + formatNumber(Math.round(n * 100) / 100) + ' mdp';
+    const a = Math.abs(n);
+    if (a >= 1000000) return '$' + (n / 1000000).toFixed(2) + ' billones';
+    if (a >= 1000) return '$' + formatNumber(Math.round(n / 100) / 10) + ' mil millones';
+    return '$' + formatNumber(Math.round(n * 100) / 100) + ' millones';
   }
 
   function simPerdidaPeriodo(anual, pInfo) {
-    const v = anual * pInfo.factor;
-    if (v === 0) return '$0.00 mdp' + pInfo.sufijo;
-    if (Math.abs(v) >= 1000) return '$' + (v / 1000).toFixed(2) + ' mil mdp' + pInfo.sufijo;
-    return '$' + v.toFixed(2) + ' mdp' + pInfo.sufijo;
+    return simMdp(anual * pInfo.factor) + pInfo.sufijo;
   }
 
   function renderSimuladorOrden() {
@@ -15009,9 +15015,7 @@
         '<div class="sim-dial">' +
           Object.keys(sim.periodos).map(k => {
             const p = sim.periodos[k];
-            const v = anual * p.factor;
-            const texto = Math.abs(v) >= 1000 ? '$' + (v / 1000).toFixed(2) + ' mil mdp'
-                                              : '$' + v.toFixed(2) + ' mdp';
+            const texto = simMdp(anual * p.factor);
             return '<button type="button" class="sim-dial-b' + (k === actual ? ' on' : '') + '" ' +
               'onclick="window.AuditEngine.setSimuladorPeriodo(\'' + k + '\')">' +
               '<span class="sim-dial-ico">' + (SIM_PERIODO_ICONOS[k] || '⏱️') + '</span>' +
@@ -15117,6 +15121,9 @@
   }
 
   /* --- Cabecera del desglose: que se esta viendo y como replegarlo --- */
+  /* Cabecera del desglose. Aqui viven las cifras DEL FILTRO, separadas a
+     proposito de la tira superior, que siempre mide el universo completo:
+     asi se ve de un vistazo que parte del todo se esta mirando. */
   function renderSimuladorDesgloseCab() {
     const cont = document.getElementById('simDesgloseCab');
     if (!cont) return;
@@ -15124,18 +15131,33 @@
     const sec = sim.sectores.find(s => s.id === (state.simuladorSector || 'todos'));
     const sx = SIM_SEXENIOS.find(x => x.k === state.simuladorSexenio);
     const obras = simFiltradas();
+    const ag = simAgregados(obras);
+    const agT = simAgregados(sim.obras);
+    const cuota = agT.real > 0 ? (ag.real / agT.real) * 100 : 0;
+
     cont.innerHTML =
       '<div class="sim-desg-cab">' +
         '<div class="sim-desg-quien">' +
           '<span class="sim-desg-ico">' + (sec ? sec.icono : '🌐') + '</span>' +
           '<div>' +
             '<h3 class="sim-desg-tit">' + (sec ? sec.nombre : 'Todos los sectores') + '</h3>' +
-            '<p class="sim-desg-sub">' + obras.length + (obras.length === 1 ? ' obra' : ' obras') +
+            '<p class="sim-desg-sub">' + ag.n + (ag.n === 1 ? ' obra' : ' obras') +
               (sx ? ' · ' + sx.nom + ' (' + sx.ini + '–' + sx.fin + ')' : ' · 1988–2024') +
               '. Debajo: la comparativa, las tres mesas de cálculo y la ficha de cada obra.</p>' +
           '</div>' +
         '</div>' +
         '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Replegar el desglose</button>' +
+      '</div>' +
+      '<div class="sim-desg-cifras">' +
+        '<div class="sim-dc"><span class="sim-dc-l">Costo real del filtro</span>' +
+          '<span class="sim-dc-v">' + simMdp(ag.real) + '</span>' +
+          '<span class="sim-dc-s">' + cuota.toFixed(1) + '% del costo real de las ' + agT.n + ' obras</span></div>' +
+        '<div class="sim-dc"><span class="sim-dc-l">Aprobado frente a erogado</span>' +
+          '<span class="sim-dc-v">' + simMdp(ag.presu) + '</span>' +
+          '<span class="sim-dc-s">' + simMdp(ag.brecha) + ' de más, un ' + (ag.sobrecosto > 0 ? '+' : '') + ag.sobrecosto.toFixed(1) + '%</span></div>' +
+        '<div class="sim-dc"><span class="sim-dc-l">Pérdida operativa anual</span>' +
+          '<span class="sim-dc-v sim-dc-rojo">' + simMdp(ag.perdidaAnual) + '</span>' +
+          '<span class="sim-dc-s">equivale a $' + formatNumber(Math.round(ag.perdidaSegundo * 100) / 100) + ' por segundo</span></div>' +
       '</div>';
   }
 
@@ -15247,9 +15269,7 @@
       '<div class="sim-cadena">' +
         cadena.map(c => {
           const v = ag.perdidaAnual / c.div;
-          const txt = v >= 1000 ? '$' + (v / 1000).toFixed(2) + ' mil mdp'
-                    : v >= 1 ? '$' + v.toFixed(2) + ' mdp'
-                    : '$' + formatNumber(Math.round(v * 1000000)) + ' pesos';
+          const txt = v >= 1 ? simMdp(v) : '$' + formatNumber(Math.round(v * 1000000)) + ' pesos';
           return '<div class="sim-cad-p">' +
             '<span class="sim-cad-et">' + c.et + '</span>' +
             '<span class="sim-cad-op">' + (c.n || 'cifra base') + '</span>' +
@@ -15346,48 +15366,144 @@
     }, 180);
   }
 
+  /* ====================================================================
+     TODO EL DINERO, DIVIDIDO POR SECTOR
+     Siempre visible y siempre completo: las doce obras evaluadas, con su
+     presupuesto, su costo real y su brecha, agrupadas por sector. No
+     depende del filtro, porque su papel es justamente ser el inventario
+     contra el cual se lee cualquier recorte.
+     ==================================================================== */
+
+  function renderSimuladorPorSector() {
+    const cont = document.getElementById('simPorSector');
+    const sim = DB.simulador_megaobras;
+    if (!cont || !sim) return;
+    const todas = sim.obras.slice();
+    const agT = simAgregados(todas);
+
+    const grupos = sim.sectores.filter(s => s.id !== 'todos').map(s => {
+      const obras = todas.filter(o => o.sector_id === s.id)
+        .sort((a, b) => (b.inversion_real_mdp - b.inversion_presupuestada_mdp) -
+                        (a.inversion_real_mdp - a.inversion_presupuestada_mdp));
+      return { s: s, obras: obras, ag: simAgregados(obras) };
+    }).filter(g => g.obras.length > 0)
+      .sort((a, b) => b.ag.real - a.ag.real);
+
+    const filas = grupos.map(g =>
+      '<tbody class="sim-sec-grupo">' +
+        '<tr class="sim-sec-cab">' +
+          '<td class="sim-sec-nom" colspan="2">' +
+            '<span class="sim-sec-ico">' + g.s.icono + '</span>' +
+            '<span class="sim-sec-t">' + g.s.nombre + '</span>' +
+            '<span class="sim-sec-n">' + g.obras.length + (g.obras.length === 1 ? ' obra' : ' obras') + '</span>' +
+            vsxRefLink('ref-asf-cp') +
+          '</td>' +
+          '<td class="sim-t-num">' + formatNumber(g.ag.presu) + '</td>' +
+          '<td class="sim-t-num">' + formatNumber(g.ag.real) + '</td>' +
+          '<td class="sim-t-num sim-t-dif">+' + formatNumber(g.ag.brecha) + '</td>' +
+          '<td class="sim-t-num sim-sec-pct">+' + g.ag.sobrecosto.toFixed(1) + '%</td>' +
+          '<td class="sim-t-num sim-sec-cuota">' + ((g.ag.real / agT.real) * 100).toFixed(1) + '%</td>' +
+        '</tr>' +
+        g.obras.map(o => {
+          const dif = o.inversion_real_mdp - o.inversion_presupuestada_mdp;
+          return '<tr class="sim-sec-obra">' +
+            '<td class="sim-sec-ob-ico">' + o.icono + '</td>' +
+            '<td class="sim-sec-ob-nom">' +
+              '<button type="button" class="sim-sec-b" onclick="window.AuditEngine.simVerSector(\'' + o.sector_id + '\', \'' + o.id + '\')">' +
+                o.nombre + '</button>' +
+              '<span class="sim-sec-meta">' + o.presidente + ' · ' + o.periodo_sexenal + '</span>' +
+            '</td>' +
+            '<td class="sim-t-num">' + formatNumber(o.inversion_presupuestada_mdp) + '</td>' +
+            '<td class="sim-t-num">' + formatNumber(o.inversion_real_mdp) + '</td>' +
+            '<td class="sim-t-num sim-t-dif">' + (dif > 0 ? '+' : '') + formatNumber(dif) + '</td>' +
+            '<td class="sim-t-num sim-sec-pct">' + (o.sobrecosto_pct > 0 ? '+' : '') + o.sobrecosto_pct + '%</td>' +
+            '<td class="sim-t-num sim-sec-cuota">' + ((o.inversion_real_mdp / agT.real) * 100).toFixed(1) + '%</td>' +
+          '</tr>';
+        }).join('') +
+      '</tbody>').join('');
+
+    cont.innerHTML =
+      '<section class="sim-sector-tabla">' +
+        '<div class="sim-sel-cab">' +
+          '<span class="sim-sel-ico">🧾</span>' +
+          '<div><h3 class="sim-sel-tit">Todo el dinero, obra por obra y dividido por sector</h3>' +
+          '<p class="sim-sel-sub">Las ' + agT.n + ' inversiones evaluadas, completas y sin recortar por ningún filtro. ' +
+            'Pulse el nombre de una obra para abrir su sector en el desglose y llegar a su ficha.</p></div>' +
+        '</div>' +
+        '<p class="sim-unidades"><strong>Unidades.</strong> Las columnas de esta tabla están en <strong>millones de pesos</strong> (mdp). ' +
+          'Mil millones son 1,000 mdp; un billón de pesos son 1,000,000 mdp. Las cifras son nominales del año de cada erogación, sin deflactar.</p>' +
+        '<div class="sim-t-marco"><table class="sim-t sim-sec-t-tabla">' +
+          '<thead><tr>' +
+            '<th colspan="2">Sector y obra</th>' +
+            '<th>Aprobado (mdp)</th><th>Erogado (mdp)</th><th>Diferencia</th><th>Sobrecosto</th><th>% del total</th>' +
+          '</tr></thead>' +
+          filas +
+          '<tfoot><tr>' +
+            '<td colspan="2" class="sim-t-nom">Total de las ' + agT.n + ' obras evaluadas</td>' +
+            '<td class="sim-t-num">' + formatNumber(agT.presu) + '</td>' +
+            '<td class="sim-t-num">' + formatNumber(agT.real) + '</td>' +
+            '<td class="sim-t-num sim-t-dif">+' + formatNumber(agT.brecha) + '</td>' +
+            '<td class="sim-t-num sim-sec-pct">+' + agT.sobrecosto.toFixed(1) + '%</td>' +
+            '<td class="sim-t-num sim-sec-cuota">100%</td>' +
+          '</tr></tfoot>' +
+        '</table></div>' +
+        '<p class="sim-mesa-aviso"><strong>De dónde salen estas cifras y qué falta.</strong> ' +
+          'Provienen de la fiscalización de la Cuenta Pública de la Auditoría Superior de la Federación ' +
+          'y de información presupuestaria de dominio público. <strong>Pendiente declarado:</strong> cada renglón todavía no lleva ' +
+          'el número de informe individual que sustenta su cifra, así que se presentan como consolidación documental y no como dato ' +
+          'auditado renglón por renglón. Mientras ese trabajo no esté hecho, esta tabla se lee como inventario, no como dictamen. ' +
+          'El universo son doce obras emblemáticas de 1988 a 2024; no pretende ser el catálogo completo de la inversión pública del periodo.</p>' +
+      '</section>';
+  }
+
+  /* Del inventario al desglose: abre el sector de la obra y salta a su ficha. */
+  function simVerSector(sectorId, obraId) {
+    state.simuladorSector = sectorId;
+    state.simuladorDesglose = true;
+    renderSimuladorMegaobras();
+    setTimeout(() => simIrAObra(obraId), 120);
+  }
+
   function renderSimuladorMegaobras() {
     const kpisContainer = document.getElementById('simuladorKpisStrip');
     const sim = DB.simulador_megaobras;
     if (!sim) return;
 
-    // 1. Tira de indicadores. Se calcula sobre las obras que el filtro dejo
-    //    en pie: antes eran cadenas fijas que no cambiaban al filtrar y que
-    //    ademas no coincidian con la suma de la base.
-    const obrasVis = simFiltradas();
-    const ag = simAgregados(obrasVis);
+    // 1. Tira de indicadores. Mide SIEMPRE el universo completo de obras
+    //    evaluadas, no el filtro: es la cifra de referencia contra la que
+    //    se lee todo lo demas. Lo unico que la altera es la cadencia
+    //    temporal, que es una forma de presentar, no un recorte. Los
+    //    filtros de sector y sexenio actuan del desglose hacia abajo.
+    const obrasTodas = sim.obras.slice();
+    const agT = simAgregados(obrasTodas);
     if (kpisContainer) {
       const pInfo = sim.periodos[state.simuladorPeriodo] || sim.periodos['dia'];
-      const alcance = (state.simuladorSector && state.simuladorSector !== 'todos') ||
-                      (state.simuladorSexenio && state.simuladorSexenio !== 'todos')
-        ? ag.n + (ag.n === 1 ? ' obra del filtro' : ' obras del filtro')
-        : 'las ' + ag.n + ' inversiones evaluadas';
 
       kpisContainer.innerHTML = `
         <div class="sim-kpi-card">
-          <div class="sim-kpi-lbl">🏗️ Costo Real Erogado</div>
-          <div class="sim-kpi-val">${simMdp(ag.real)}</div>
-          <div class="sim-kpi-sub">Suma de ${alcance}</div>
+          <div class="sim-kpi-lbl">🏗️ Costo Real Erogado · universo completo</div>
+          <div class="sim-kpi-val">${simMdp(agT.real)}</div>
+          <div class="sim-kpi-sub">Suma de las ${agT.n} inversiones evaluadas entre 1988 y 2024${vsxRefLink('ref-asf-cp')}</div>
         </div>
 
         <div class="sim-kpi-card alert-kpi">
           <div class="sim-kpi-lbl">
             <span class="pulsing-dot"></span> Pérdida Operativa (${pInfo.label})
           </div>
-          <div class="sim-kpi-val loss-val">${simPerdidaPeriodo(ag.perdidaAnual, pInfo)}</div>
-          <div class="sim-kpi-sub">Subsidio continuo del erario para cubrir déficit operativo</div>
+          <div class="sim-kpi-val loss-val">${simPerdidaPeriodo(agT.perdidaAnual, pInfo)}</div>
+          <div class="sim-kpi-sub">Subsidio continuo del erario para cubrir el déficit de operación de las ${agT.n} obras</div>
         </div>
 
         <div class="sim-kpi-card">
           <div class="sim-kpi-lbl">📈 Sobrecosto del Conjunto</div>
-          <div class="sim-kpi-val" style="color:#f39c12;">${ag.sobrecosto > 0 ? '+' : ''}${ag.sobrecosto.toFixed(1)}%</div>
-          <div class="sim-kpi-sub">${simMdp(ag.presu)} aprobados frente a ${simMdp(ag.real)} erogados: ${simMdp(ag.brecha)} de más</div>
+          <div class="sim-kpi-val" style="color:#f39c12;">${agT.sobrecosto > 0 ? '+' : ''}${agT.sobrecosto.toFixed(1)}%</div>
+          <div class="sim-kpi-sub">${simMdp(agT.presu)} aprobados frente a ${simMdp(agT.real)} erogados: ${simMdp(agT.brecha)} de más</div>
         </div>
 
         <div class="sim-kpi-card alert-kpi">
           <div class="sim-kpi-lbl">🔴 Telemetría Viva Acumulada</div>
-          <div class="sim-kpi-val loss-val" id="simLiveGlobalCounter" data-rate="${ag.perdidaSegundo.toFixed(2)}">+$0.00</div>
-          <div class="sim-kpi-sub">Al ritmo de $${ag.perdidaSegundo.toFixed(2)} por segundo, desde que abrió esta vista</div>
+          <div class="sim-kpi-val loss-val" id="simLiveGlobalCounter" data-rate="${agT.perdidaSegundo.toFixed(2)}">+$0.00</div>
+          <div class="sim-kpi-sub">Al ritmo de $${agT.perdidaSegundo.toFixed(2)} por segundo, desde que abrió esta vista</div>
         </div>
       `;
     }
@@ -15398,6 +15514,7 @@
     renderSimuladorPeriodoDial();
     renderSimuladorSectorMosaico();
     renderSimuladorSexenioLinea();
+    renderSimuladorPorSector();
 
     // 3. El desglose solo se arma si el usuario lo abrio. La escala y la
     //    procedencia se quedan siempre: son las que dan sentido al total.
@@ -15438,14 +15555,7 @@
 
     grid.innerHTML = obras.map(o => {
       const perdidaPeriodo = o.perdida_anual_mdp * factor;
-      let perdidaDisplay = '';
-      if (perdidaPeriodo === 0) {
-        perdidaDisplay = `$0.00 mdp${sufijo}`;
-      } else if (perdidaPeriodo >= 1000) {
-        perdidaDisplay = `$${(perdidaPeriodo / 1000).toFixed(2)} mil mdp${sufijo}`;
-      } else {
-        perdidaDisplay = `$${perdidaPeriodo.toFixed(2)} mdp${sufijo}`;
-      }
+      const perdidaDisplay = simMdp(perdidaPeriodo) + sufijo;
 
       const isDeficit = o.proyeccion_tipo === 'deficit_cronico' || o.proyeccion_tipo === 'subsidio_permanente' || o.proyeccion_tipo === 'deuda_perpetua' || o.proyeccion_tipo === 'perdida_patrimonial';
 
@@ -19210,6 +19320,7 @@
     init: init,
     setSimuladorOrden: setSimuladorOrden,
     simIrAObra: simIrAObra,
+    simVerSector: simVerSector,
     cerrarSimuladorDesglose: cerrarSimuladorDesglose,
     simLlevarACalculadora: simLlevarACalculadora,
     renderConstitucionEconomica: renderConstitucionEconomica,

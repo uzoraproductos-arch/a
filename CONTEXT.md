@@ -533,6 +533,19 @@ de los 32 circuitos.
 - Selectores comprimidos de 1,127 px a 811 px: loseta de sector a dos renglones, torres de la linea
   del tiempo mas bajas, cabeceras y rellenos mas ajustados.
 
+### Hecho - 2.2: unidades legibles, tira global e inventario por sector
+
+- DEFECTO DE UNIDADES corregido. La etiqueta "mil mdp" se leia como "mil millones de pesos" cuando
+  significaba mil millones multiplicados por mil: `$461.4 mil mdp` son 461,392 millones de pesos, mil
+  veces mas de lo que sugeria. `simMdp` pasa a una escala explicita: millones / mil millones / billones.
+  Se elimina "mil mdp" del dial, la cadena de la mesa 2 y las fichas de obra.
+- La tira de cuatro indicadores mide SIEMPRE las 12 obras evaluadas. Solo la cadencia temporal la altera;
+  sector y sexenio ya no la tocan. Las cifras del filtro pasan a la cabecera del desglose, en tres
+  tarjetas propias que ademas dicen que cuota del universo representa el recorte.
+- Bloque nuevo `#simPorSector`: las 12 obras completas agrupadas por sector, con aprobado, erogado,
+  diferencia, sobrecosto y cuota del total; cabecera de sector con nota al pie y salto a la ficha desde
+  cada renglon. Incluye leyenda de unidades y el pendiente declarado del informe puntual por obra.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

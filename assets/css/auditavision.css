@@ -13617,3 +13617,138 @@ body.con-regreso { padding-bottom: 96px; }
     background: none;
   }
 }
+
+/* ====================================================================
+   2.2 - INVENTARIO POR SECTOR Y CIFRAS DEL FILTRO
+   ==================================================================== */
+
+.sim-sector-tabla {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 13px 15px 15px;
+  margin-bottom: 11px;
+}
+
+.sim-unidades {
+  margin: 0 0 11px;
+  padding: 9px 12px;
+  background: rgba(78, 205, 196, 0.05);
+  border-left: 3px solid var(--cyan);
+  border-radius: 0 8px 8px 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.sim-sec-t-tabla { min-width: 760px; }
+
+.sim-sec-grupo + .sim-sec-grupo .sim-sec-cab td { border-top: 1px solid var(--border-accent); }
+
+.sim-sec-cab td {
+  background: var(--bg-card-alt);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sim-sec-nom { white-space: nowrap; }
+
+.sim-sec-ico { font-size: 16px; margin-right: 7px; }
+
+.sim-sec-t {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--text-gold);
+}
+
+.sim-sec-n {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-left: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sim-sec-obra td { padding-top: 6px; padding-bottom: 6px; }
+
+.sim-sec-ob-ico { width: 30px; text-align: center; font-size: 14px; }
+
+.sim-sec-ob-nom { min-width: 220px; }
+
+.sim-sec-b {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  border-bottom: 1px dotted var(--border-accent);
+  transition: color 0.16s, border-color 0.16s;
+}
+
+.sim-sec-b:hover { color: var(--gold-bright); border-color: var(--gold); }
+
+.sim-sec-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.sim-sec-pct { color: var(--amber); font-weight: 700; }
+
+.sim-sec-cuota { color: var(--text-dim); }
+
+.sim-sec-cab .sim-sec-pct, .sim-sec-cab .sim-sec-cuota,
+.sim-sec-cab .sim-t-num { font-weight: 800; }
+
+/* --- Cifras del filtro, en la cabecera del desglose --- */
+
+.sim-desg-cifras {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 11px;
+  margin: -6px 0 16px;
+}
+
+.sim-dc {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 11px 13px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+}
+
+.sim-dc-l {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.sim-dc-v {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold-bright);
+}
+
+.sim-dc-rojo { color: var(--crimson-bright); }
+
+.sim-dc-s { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+
+@media (max-width: 860px) {
+  .sim-desg-cifras { grid-template-columns: 1fr; margin-top: 0; }
+  .sim-sector-tabla { padding: 12px 11px 13px; }
+}
