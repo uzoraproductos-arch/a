@@ -5825,8 +5825,8 @@ nav.tabbar button.active .num {
 @media (prefers-reduced-motion: reduce) { .sim-tel-punto { animation: none; } }
 
 /* Partes A y B dentro del bloque 2: dos puertas a la misma informacion. */
-.sim-parte { margin-bottom: 26px; }
-.sim-parte:last-child { margin-bottom: 0; }
+.sim-parte-panel { margin-bottom: 0; }
+.sim-parte-panel[hidden] { display: none; }
 .sim-parte-et {
   display: flex;
   align-items: center;
@@ -5870,6 +5870,76 @@ nav.tabbar button.active .num {
 .sim-comp .sim-rank-barra { transition: none; }
 
 .sim-sex-barra { margin: 4px 0 14px; }
+
+/* ===== 2.2 - SUBPESTANAS A / B / C ==================================
+   Las tres partes dejan de apilarse y pasan a ser subpestanas: una sola
+   a la vista, con el filtro compartido entre todas. Lo elegido en A
+   sigue senalado en B y sigue rigiendo las mesas de C. */
+.sim-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 0 20px;
+}
+.sim-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-card-alt);
+  color: var(--text-secondary);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s, transform 0.18s;
+}
+.sim-tab-btn:hover { transform: translateY(-2px); border-color: var(--border-accent); }
+.sim-tab-btn.active {
+  border-color: var(--border-gold);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.14), rgba(201, 168, 76, 0.02));
+  color: var(--text-main);
+}
+.sim-tab-let {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--border-accent);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--gold, #c9a227);
+}
+.sim-tab-btn.active .sim-tab-let {
+  background: var(--gold, #c9a227);
+  border-color: var(--gold, #c9a227);
+  color: var(--bg-void, #0b0e13);
+}
+.sim-tab-tx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sim-tab-tx strong { font-size: 0.9rem; line-height: 1.25; }
+.sim-tab-tx small { font-size: 0.72rem; line-height: 1.3; color: var(--text-dim, #9aa3b2); }
+
+@media (max-width: 900px) {
+  .sim-tabs { grid-template-columns: 1fr; gap: 8px; }
+  .sim-tab-tx small { display: none; }
+}
+
+/* Pastillas de mandato dentro de la parte A: la fusion de industria y
+   mandato sobre una misma lista de fichas. */
+.sim-mandato { margin: 14px 0 16px; }
+.sim-pill-n {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+}
+.sim-pill-vacia { opacity: 0.35; cursor: not-allowed; }
 
 .sim-kpis-strip {
   display: grid;

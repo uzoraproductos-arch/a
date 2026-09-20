@@ -566,6 +566,14 @@ de los 32 circuitos.
 - Carril `.sim-seg-riel` de altura fija (92 px): la torre crece desde la base sin mover el resto de la loseta. Se retiran de `.sim-seg-torre` el `min-height: 12px` (impedia llegar a cero) y la `transition: height`, que competia con la animacion por fotograma.
 - Las torres pasan de 12–46 px a 0–90 px, para que el crecimiento se lea.
 
+**Hecho — la 2.2 pasa a subpestanas A / B / C y se recupera el filtrado fusionado.**
+- Los bloques 2 y 3 dejan de apilarse: ahora son subpestanas dentro de la 2.2, con `#simTabs` y `state.simParte`. El bloque 1 (el pulso) se queda arriba, siempre visible.
+- **Parte A, «Sector e industria»**: se recupera la forma de filtrar que se prefirio. El mosaico de industria y una tira nueva de pastillas de mandato (`renderSimuladorMandatoPills`) filtran **a la vez** sobre la misma lista, y las fichas de obra estan **siempre a la vista**, sin replegarse. Cada pastilla de mandato lleva el numero de obras que tiene dentro de la industria elegida, y se deshabilita si no tiene ninguna.
+- **Parte B**: linea presidencial con su simulador sexenal y el simulador comparativo de las 12 obras.
+- **Parte C**: las tres mesas de calculo, el inventario por sector, la escala y la procedencia.
+- Se retira `state.simuladorDesglose` y toda la mecanica de replegar: «Quitar los filtros» devuelve las doce obras en lugar de esconderlas. `simVerSector` lleva ahora a la parte A con el sector puesto y salta a la ficha.
+- Cambiar de subpestana no reinicia nada: el filtro es compartido, de modo que lo elegido en A sigue senalado en B y sigue rigiendo las mesas de C.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

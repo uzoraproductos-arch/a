@@ -637,56 +637,44 @@
             <div id="simPeriodoDial"></div>
           </section>
 
-          <!-- ================= BLOQUE 2: LOS FILTROS ================= -->
-          <section class="sim-bloque" id="simBloque2">
-            <header class="sim-bloque-cab">
-              <span class="sim-bloque-num">2</span>
-              <div>
-                <h3 class="sim-bloque-tit">¿Por dónde quiere entrar?</h3>
-                <p class="sim-bloque-sub">Dos puertas a la misma información: por el sector que le interesa, o por la administración que la contrató.</p>
-              </div>
-            </header>
+          <!-- =========== SUBPESTANAS A / B / C DE LA 2.2 =========== -->
+          <div class="sim-tabs" role="tablist" id="simTabs">
+            <button type="button" class="sim-tab-btn active" data-parte="a" role="tab"
+                    onclick="window.AuditEngine.setSimParte('a')">
+              <span class="sim-tab-let">A</span>
+              <span class="sim-tab-tx"><strong>Sector e industria</strong><small>Filtre por industria y por mandato; salen las fichas</small></span>
+            </button>
+            <button type="button" class="sim-tab-btn" data-parte="b" role="tab"
+                    onclick="window.AuditEngine.setSimParte('b')">
+              <span class="sim-tab-let">B</span>
+              <span class="sim-tab-tx"><strong>Administración presidencial</strong><small>Simulador sexenal y comparativo de las 12 obras</small></span>
+            </button>
+            <button type="button" class="sim-tab-btn" data-parte="c" role="tab"
+                    onclick="window.AuditEngine.setSimParte('c')">
+              <span class="sim-tab-let">C</span>
+              <span class="sim-tab-tx"><strong>De cero al resultado</strong><small>Mesas de cálculo, inventario y escala</small></span>
+            </button>
+          </div>
 
-            <!-- Parte A: el sector estrategico abre el desglose con sus fichas -->
-            <article class="sim-parte">
-              <div class="sim-parte-et"><span class="sim-parte-let">A</span> Por sector estratégico</div>
-              <div id="simSectorMosaico"></div>
-
-              <!-- Desglose: cifras del filtro y fichas vivas de cada obra -->
-              <div id="simDesglose" class="sim-desglose" hidden>
-                <div id="simDesgloseCab"></div>
-                <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
-              </div>
-            </article>
-
-            <!-- Parte B: la administracion presidencial y el simulador comparativo -->
-            <article class="sim-parte">
-              <div class="sim-parte-et"><span class="sim-parte-let">B</span> Por administración presidencial</div>
-              <div id="simSexenioLinea"></div>
-              <div id="simComparativo"></div>
-            </article>
+          <!-- ---------- PARTE A: industria y mandato, fusionados ---------- -->
+          <section class="sim-parte-panel active" id="simPanelA" data-parte="a">
+            <div id="simSectorMosaico"></div>
+            <div id="simMandatoPills"></div>
+            <div id="simDesgloseCab"></div>
+            <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
           </section>
 
-          <!-- ================= BLOQUE 3: OBRA POR OBRA ================= -->
-          <section class="sim-bloque" id="simBloque3">
-            <header class="sim-bloque-cab">
-              <span class="sim-bloque-num">3</span>
-              <div>
-                <h3 class="sim-bloque-tit">De cero al resultado final</h3>
-                <p class="sim-bloque-sub">Las tres mesas de cálculo paso a paso, el inventario completo obra por obra dividido por sector, y contra qué se compara ese dinero.</p>
-              </div>
-            </header>
+          <!-- ---------- PARTE B: administracion presidencial ---------- -->
+          <section class="sim-parte-panel" id="simPanelB" data-parte="b" hidden>
+            <div id="simSexenioLinea"></div>
+            <div id="simComparativo"></div>
+          </section>
 
-            <!-- Tres mesas de calculo: de cero al resultado final -->
+          <!-- ---------- PARTE C: de cero al resultado final ---------- -->
+          <section class="sim-parte-panel" id="simPanelC" data-parte="c" hidden>
             <div id="simTablas"></div>
-
-            <!-- Inventario completo: todas las obras, divididas por sector -->
             <div id="simPorSector"></div>
-
-            <!-- Escala: contra que se compara este dinero -->
             <div id="simEscala"></div>
-
-            <!-- Procedencia y advertencias metodologicas -->
             <div id="simProcedencia"></div>
           </section>
 

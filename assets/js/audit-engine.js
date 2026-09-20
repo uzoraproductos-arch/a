@@ -41,7 +41,6 @@
     simuladorPeriodo: 'dia',
     simuladorSector: 'todos',
     simuladorOrden: 'perdida',
-    simuladorDesglose: false,
     simuladorSexenio: 'todos',
     simuladorTickerTimer: null,
     simuladorElapsedSeconds: 0,
@@ -57,7 +56,10 @@
     simCompHover: true,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
        sexenios arrancan en cero y crecen a su escala real al evaluar. */
-    simSexEvaluado: false
+    simSexEvaluado: false,
+    /* Parte visible de la 2.2: A industria y mandato, B administracion
+       presidencial, C de cero al resultado final. */
+    simParte: 'a'
   };
 
   // ==========================================================================
@@ -2151,7 +2153,7 @@
     'sim-sec-t', 'sim-sec-n', 'sim-sec-ico', 'sim-sec-meta', 'sim-sec-pct',
     'sim-sec-cuota', 'sim-sec-b', 'sim-sec-ob-ico',
     'sim-dc-l', 'sim-dc-v', 'sim-dc-s',
-    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge',
+    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-tab-let', 'sim-pill-n',
     'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
     'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
     'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
@@ -15227,7 +15229,7 @@
       const real = obras.reduce((a, o) => a + o.inversion_real_mdp, 0);
       const cuota = (real / totalReal) * 100;
       const vacio = obras.length === 0;
-      return '<button type="button" class="sim-los' + (s.id === activo && state.simuladorDesglose ? ' on' : '') +
+      return '<button type="button" class="sim-los' + (s.id === activo ? ' on' : '') +
           (vacio ? ' sim-los-vacia' : '') + '" ' +
           (vacio ? 'disabled ' : '') +
           'data-sector="' + s.id + '" ' +
@@ -15250,8 +15252,8 @@
         '<div class="sim-sel-cab">' +
           '<span class="sim-sel-ico">🏢</span>' +
           '<div><h3 class="sim-sel-tit">Sector estratégico</h3>' +
-          '<p class="sim-sel-sub">Pulse una loseta para desplegar el desglose completo de ese sector: comparativa, mesas de cálculo y fichas obra por obra.</p></div>' +
-          '<button type="button" class="sim-vertodas' + (activo === 'todos' && state.simuladorDesglose ? ' on' : '') + '" ' +
+          '<p class="sim-sel-sub">Elija la industria y, debajo, el mandato. Ambos filtran a la vez sobre la misma lista: las fichas de obra responden a los dos criterios sin cambiar de pantalla.</p></div>' +
+          '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
             'onclick="window.AuditEngine.setSimuladorSector(\'todos\')">🌐 Ver todas</button>' +
         '</div>' +
         '<div class="sim-mosaico">' + losetas + '</div>' +
@@ -15405,6 +15407,38 @@
     if (btn) btn.innerHTML = '<span>▶️</span> Evaluar los seis sexenios';
   }
 
+  /* Selector de mandato dentro de la parte A. Aqui vive la fusion: la
+     industria y el mandato filtran a la vez sobre la misma lista, de
+     modo que las fichas responden a ambos criterios sin cambiar de
+     pantalla, como en la version que se prefirio. */
+  function renderSimuladorMandatoPills() {
+    const cont = document.getElementById('simMandatoPills');
+    if (!cont) return;
+    const sector = state.simuladorSector || 'todos';
+    const activo = state.simuladorSexenio || 'todos';
+
+    const pastillas = SIM_SEXENIOS.map(x => {
+      const n = simObrasDe(sector, x.k).length;
+      return '<button type="button" class="sim-pill-btn' + (x.k === activo ? ' active' : '') +
+          (n === 0 ? ' sim-pill-vacia' : '') + '" ' + (n === 0 ? 'disabled ' : '') +
+          'onclick="window.AuditEngine.setSimuladorSexenio(\'' + x.k + '\')">' +
+        x.nom + ' <span class="sim-pill-n">' + n + '</span></button>';
+    }).join('');
+
+    const totalSector = simObrasDe(sector, 'todos').length;
+
+    cont.innerHTML =
+      '<div class="sim-control-group sim-mandato">' +
+        '<span class="sim-group-label">🏛️ Y dentro de esa industria, ¿qué mandato?</span>' +
+        '<div class="sim-pill-group">' +
+          '<button type="button" class="sim-pill-btn' + (activo === 'todos' ? ' active' : '') + '" ' +
+            'onclick="window.AuditEngine.setSimuladorSexenio(\'todos\')">Todos los mandatos ' +
+            '<span class="sim-pill-n">' + totalSector + '</span></button>' +
+          pastillas +
+        '</div>' +
+      '</div>';
+  }
+
   /* --- Cabecera del desglose: que se esta viendo y como replegarlo --- */
   /* Cabecera del desglose. Aqui viven las cifras DEL FILTRO, separadas a
      proposito de la tira superior, que siempre mide el universo completo:
@@ -15428,10 +15462,10 @@
             '<h3 class="sim-desg-tit">' + (sec ? sec.nombre : 'Todos los sectores') + '</h3>' +
             '<p class="sim-desg-sub">' + ag.n + (ag.n === 1 ? ' obra' : ' obras') +
               (sx ? ' · ' + sx.nom + ' (' + sx.ini + '–' + sx.fin + ')' : ' · 1988–2024') +
-              '. Debajo: la comparativa, las tres mesas de cálculo y la ficha de cada obra.</p>' +
+              '. Debajo, la ficha viva de cada una.</p>' +
           '</div>' +
         '</div>' +
-        '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Replegar el desglose</button>' +
+        '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Quitar los filtros</button>' +
       '</div>' +
       '<div class="sim-desg-cifras">' +
         '<div class="sim-dc"><span class="sim-dc-l">Costo real del filtro</span>' +
@@ -15446,8 +15480,28 @@
       '</div>';
   }
 
+  /* Las tres partes de la 2.2 son subpestanas: solo una a la vista, con
+     el filtro compartido entre todas. Cambiar de parte no reinicia nada;
+     lo elegido en A sigue senalado en B y sigue rigiendo las mesas de C. */
+  function setSimParte(parte) {
+    state.simParte = parte;
+    document.querySelectorAll('#simTabs .sim-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.parte === parte);
+      b.setAttribute('aria-selected', b.dataset.parte === parte ? 'true' : 'false');
+    });
+    document.querySelectorAll('.sim-parte-panel').forEach(p => {
+      const visible = p.dataset.parte === parte;
+      p.hidden = !visible;
+      p.classList.toggle('active', visible);
+    });
+  }
+
+  /* Ya no se repliega el desglose: en la parte A las fichas estan
+     siempre a la vista y responden al filtro. Quitar el filtro devuelve
+     las doce obras en lugar de esconderlas. */
   function cerrarSimuladorDesglose() {
-    state.simuladorDesglose = false;
+    state.simuladorSector = 'todos';
+    state.simuladorSexenio = 'todos';
     renderSimuladorMegaobras();
   }
 
@@ -15713,7 +15767,7 @@
           '<span class="sim-sel-ico">🧾</span>' +
           '<div><h3 class="sim-sel-tit">Todo el dinero, obra por obra y dividido por sector</h3>' +
           '<p class="sim-sel-sub">Las ' + agT.n + ' inversiones evaluadas, completas y sin recortar por ningún filtro. ' +
-            'Pulse el nombre de una obra para abrir su sector en el desglose y llegar a su ficha.</p></div>' +
+            'Pulse el nombre de una obra para ir a la parte A con su sector puesto y llegar a su ficha.</p></div>' +
         '</div>' +
         '<p class="sim-unidades"><strong>Unidades.</strong> Las columnas de esta tabla están en <strong>millones de pesos</strong> (mdp). ' +
           'Mil millones son 1,000 mdp; un billón de pesos son 1,000,000 mdp. Las cifras son nominales del año de cada erogación, sin deflactar.</p>' +
@@ -15742,11 +15796,13 @@
   }
 
   /* Del inventario al desglose: abre el sector de la obra y salta a su ficha. */
+  /* Desde el inventario de la parte C o desde el comparativo de la B:
+     lleva a la parte A con ese sector puesto y salta a la ficha. */
   function simVerSector(sectorId, obraId) {
     state.simuladorSector = sectorId;
-    state.simuladorDesglose = true;
+    state.simParte = 'a';
     renderSimuladorMegaobras();
-    setTimeout(() => simIrAObra(obraId), 120);
+    setTimeout(() => simIrAObra(obraId), 140);
   }
 
   function renderSimuladorMegaobras() {
@@ -15801,14 +15857,13 @@
     renderSimuladorSexenioLinea();
     renderSimuladorPorSector();
 
-    // 3. El desglose solo se arma si el usuario lo abrio. La escala y la
-    //    procedencia se quedan siempre: son las que dan sentido al total.
-    const desg = document.getElementById('simDesglose');
-    if (desg) desg.hidden = !state.simuladorDesglose;
-    if (state.simuladorDesglose) {
-      renderSimuladorDesgloseCab();
-      renderSimuladorObrasGrid();
-    }
+    // 3. Parte A: industria y mandato filtran a la vez y las fichas
+    //    estan siempre a la vista, sin replegarse. Las otras dos partes
+    //    se pintan igual aunque esten ocultas, para que al conmutar de
+    //    subpestana ya esten listas y no parpadeen.
+    renderSimuladorMandatoPills();
+    renderSimuladorDesgloseCab();
+    renderSimuladorObrasGrid();
     renderSimuladorComparativo();
     renderSimuladorTablas();
     renderSimuladorEscala();
@@ -15820,6 +15875,7 @@
     // 4. Iniciar Ticker en Vivo
     initLiveLossTicker();
     initSimTelemetriaFlotante();
+    setSimParte(state.simParte || 'a');
   }
 
   function renderSimuladorObrasGrid() {
@@ -15953,13 +16009,11 @@
      ella el contador en vivo, que es justo lo que no debe perderse. */
   function setSimuladorSector(sectorId) {
     state.simuladorSector = sectorId;
-    state.simuladorDesglose = true;
     renderSimuladorMegaobras();
   }
 
   function setSimuladorSexenio(sexenio) {
     state.simuladorSexenio = sexenio;
-    if (sexenio && sexenio !== 'todos') state.simuladorDesglose = true;
     renderSimuladorMegaobras();
   }
 
@@ -19636,6 +19690,7 @@
     setSimuladorOrden: setSimuladorOrden,
     simIrAObra: simIrAObra,
     simVerSector: simVerSector,
+    setSimParte: setSimParte,
     simCompEvaluar: simCompEvaluar,
     simCompReiniciar: simCompReiniciar,
     simCompToggleHover: simCompToggleHover,
