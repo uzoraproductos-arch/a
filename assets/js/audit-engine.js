@@ -2153,7 +2153,7 @@
     'sim-sec-t', 'sim-sec-n', 'sim-sec-ico', 'sim-sec-meta', 'sim-sec-pct',
     'sim-sec-cuota', 'sim-sec-b', 'sim-sec-ob-ico',
     'sim-dc-l', 'sim-dc-v', 'sim-dc-s',
-    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-tab-let', 'sim-pill-n',
+    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-tab-let', 'sim-pill-n', 'sim-vacio-t',
     'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
     'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
     'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
@@ -14851,11 +14851,14 @@
     state.simuladorOrden = id;
     const estaba = state.simCompEvaluado;
     state.simCompEvaluado = false;
+    renderSimuladorRankingFiltro();
     renderSimuladorComparativo();
     renderSimuladorTablas();
     renderSimuladorObrasGrid();
-    autolinkAmbito(document.getElementById('simBloque2'));
-    autolinkAmbito(document.getElementById('simBloque3'));
+    renderSimuladorEscala();
+    autolinkAmbito(document.getElementById('simPanelA'));
+    autolinkAmbito(document.getElementById('simPanelB'));
+    autolinkAmbito(document.getElementById('simPanelC'));
     if (estaba) simCompEvaluar(900);
   }
 
@@ -15088,6 +15091,16 @@
     const cont = document.getElementById('simEscala');
     if (!cont) return;
     const a = simAgregados(simFiltradas());
+    /* Con la combinacion vacia no tiene sentido una tabla de ceros:
+       cero veces el Ramo 33 no dice nada. */
+    if (a.n === 0) {
+      cont.innerHTML =
+        '<section class="sim-escala">' +
+          '<h3 class="sim-esc-tit">Contra qué se compara este dinero</h3>' +
+          '<p class="sim-esc-sub">Sin obras en el filtro no hay monto que comparar. Elija otra combinación de industria y mandato.</p>' +
+        '</section>';
+      return;
+    }
     const m = DB.macro || {};
     const ce = DB.cuentas_ecologicas;
     const anclas = [
@@ -15228,10 +15241,13 @@
       const obras = simObrasDe(s.id, sexenio);
       const real = obras.reduce((a, o) => a + o.inversion_real_mdp, 0);
       const cuota = (real / totalReal) * 100;
+      /* Igual que en las pastillas de mandato: una industria sin obras
+         bajo el mandato elegido se atenua, pero NO se desactiva. Al
+         desactivarla, elegir un presidente mataba media rejilla y el
+         filtro parecia roto en ambas direcciones. */
       const vacio = obras.length === 0;
       return '<button type="button" class="sim-los' + (s.id === activo ? ' on' : '') +
           (vacio ? ' sim-los-vacia' : '') + '" ' +
-          (vacio ? 'disabled ' : '') +
           'data-sector="' + s.id + '" ' +
           'onclick="window.AuditEngine.setSimuladorSector(\'' + s.id + '\')">' +
         '<span class="sim-los-fila">' +
@@ -15407,6 +15423,62 @@
     if (btn) btn.innerHTML = '<span>▶️</span> Evaluar los seis sexenios';
   }
 
+  /* Comparativa de las obras que dejaron en pie los dos filtros. Es el
+     eslabon que faltaba: el mandato y la industria mueven esta lista,
+     la lista se reordena con los cinco criterios, y de ahi cuelgan las
+     fichas vivas y la escala de comparacion. */
+  function renderSimuladorRankingFiltro() {
+    const cont = document.getElementById('simRankingFiltro');
+    if (!cont) return;
+    const obras = simFiltradas();
+    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
+
+    if (obras.length < 2) {
+      cont.innerHTML = obras.length === 1
+        ? '<p class="sim-mesa-aviso">Con estos filtros queda <strong>una sola obra</strong>, así que no hay nada que comparar todavía. ' +
+          'Quite uno de los dos filtros para volver a ver la comparativa.</p>'
+        : '';
+      return;
+    }
+
+    const rotulo = orden.id === 'cronologia' ? 'costo real, en orden cronológico' : orden.et.toLowerCase();
+    const maximo = Math.max.apply(null, obras.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
+
+    const chips = SIM_ORDENES.map(o =>
+      '<button type="button" class="sim-pill-btn' + (o.id === orden.id ? ' active' : '') + '" ' +
+        'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('');
+
+    cont.innerHTML =
+      '<section class="sim-rank sim-rank-filtro">' +
+        '<div class="sim-rank-cab">' +
+          '<h3 class="sim-rank-tit">Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo + '</h3>' +
+          '<span class="sim-rank-sub">La barra mide el tamaño de la cifra. Pulse cualquier renglón para ir a su ficha, aquí abajo.</span>' +
+        '</div>' +
+        '<div class="sim-control-group">' +
+          '<span class="sim-group-label">&#8645; Ordenar la lista por:</span>' +
+          '<div class="sim-pill-group">' + chips + '</div>' +
+        '</div>' +
+        '<ol class="sim-rank-filas">' +
+          obras.map((o, i) => {
+            const v = simCompValor(o, orden.id);
+            return '<li class="sim-rank-fila">' +
+              '<button type="button" class="sim-rank-b" onclick="window.AuditEngine.simIrAObra(\'' + o.id + '\')">' +
+                '<span class="sim-rank-n">' + (i + 1) + '</span>' +
+                '<span class="sim-rank-ico">' + o.icono + '</span>' +
+                '<span class="sim-rank-nom">' + o.nombre +
+                  '<span class="sim-comp-pres">' + o.presidente + ' · ' + o.periodo_sexenal + '</span>' +
+                '</span>' +
+                '<span class="sim-rank-riel">' +
+                  '<span class="sim-rank-barra" style="width:' + ((Math.abs(v) / maximo) * 100).toFixed(1) + '%; background:' + o.badge_color + ';"></span>' +
+                '</span>' +
+                '<span class="sim-rank-val">' + simCompFormato(v, orden.id) + '</span>' +
+              '</button>' +
+            '</li>';
+          }).join('') +
+        '</ol>' +
+      '</section>';
+  }
+
   /* Selector de mandato dentro de la parte A. Aqui vive la fusion: la
      industria y el mandato filtran a la vez sobre la misma lista, de
      modo que las fichas responden a ambos criterios sin cambiar de
@@ -15417,10 +15489,15 @@
     const sector = state.simuladorSector || 'todos';
     const activo = state.simuladorSexenio || 'todos';
 
+    /* Ninguna pastilla se desactiva. Desactivarlas dejaba el mandato
+       muerto en cuanto habia una industria elegida: cuatro de siete
+       pastillas no respondian al clic y parecia que el filtro estaba
+       roto. Ahora todas responden; si la combinacion no tiene obras, la
+       lista lo dice y ofrece la salida. */
     const pastillas = SIM_SEXENIOS.map(x => {
       const n = simObrasDe(sector, x.k).length;
       return '<button type="button" class="sim-pill-btn' + (x.k === activo ? ' active' : '') +
-          (n === 0 ? ' sim-pill-vacia' : '') + '" ' + (n === 0 ? 'disabled ' : '') +
+          (n === 0 ? ' sim-pill-cero' : '') + '" ' +
           'onclick="window.AuditEngine.setSimuladorSexenio(\'' + x.k + '\')">' +
         x.nom + ' <span class="sim-pill-n">' + n + '</span></button>';
     }).join('');
@@ -15863,6 +15940,7 @@
     //    subpestana ya esten listas y no parpadeen.
     renderSimuladorMandatoPills();
     renderSimuladorDesgloseCab();
+    renderSimuladorRankingFiltro();
     renderSimuladorObrasGrid();
     renderSimuladorComparativo();
     renderSimuladorTablas();
@@ -15890,7 +15968,22 @@
     const sufijo = pInfo.sufijo;
 
     if (obras.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-dim);">No se encontraron megaobras con los filtros seleccionados.</div>`;
+      const sec = sim.sectores.find(x => x.id === (state.simuladorSector || 'todos'));
+      const sx = SIM_SEXENIOS.find(x => x.k === state.simuladorSexenio);
+      const nomSec = sec ? sec.nombre : 'esa industria';
+      const nomMan = sx ? sx.nom : 'ese mandato';
+      grid.innerHTML =
+        '<div class="sim-vacio">' +
+          '<p class="sim-vacio-t">Esa combinación no tiene obras evaluadas</p>' +
+          '<p class="sim-vacio-s">No hay ninguna obra de <strong>' + nomSec + '</strong> contratada bajo <strong>' + nomMan + '</strong> ' +
+            'dentro de las ' + sim.obras.length + ' que evalúa esta plataforma. No significa que no haya existido: significa que no está en este universo.</p>' +
+          '<div class="sim-vacio-b">' +
+            '<button type="button" class="sim-vertodas" onclick="window.AuditEngine.setSimuladorSector(\'todos\')">' +
+              '🏭 Ver ' + nomMan + ' en todas las industrias</button>' +
+            '<button type="button" class="sim-vertodas" onclick="window.AuditEngine.setSimuladorSexenio(\'todos\')">' +
+              '🏛️ Ver ' + nomSec + ' en todos los mandatos</button>' +
+          '</div>' +
+        '</div>';
       return;
     }
 

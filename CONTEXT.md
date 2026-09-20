@@ -574,6 +574,12 @@ de los 32 circuitos.
 - Se retira `state.simuladorDesglose` y toda la mecanica de replegar: «Quitar los filtros» devuelve las doce obras en lugar de esconderlas. `simVerSector` lleva ahora a la parte A con el sector puesto y salta a la ficha.
 - Cambiar de subpestana no reinicia nada: el filtro es compartido, de modo que lo elegido en A sigue senalado en B y sigue rigiendo las mesas de C.
 
+**Corregido — los filtros de la parte A se mataban entre si; cadena del filtro restituida.**
+- **Defecto (reproducido):** con una industria elegida, cuatro de las siete pastillas de mandato llevaban `disabled` y no respondian al clic; simetricamente, al elegir un mandato quedaban desactivadas las industrias sin obras en ese periodo. El filtro parecia roto en ambas direcciones. Ahora ningun control se desactiva: el que no tiene obras se atenua y recupera opacidad al pasar el cursor.
+- Cuando la combinacion queda vacia, la cuadricula muestra un aviso que lo dice con todas sus letras y ofrece dos salidas de un clic (ver ese mandato en todas las industrias, o esa industria en todos los mandatos). La escala deja de dibujar una tabla de ceros y explica que no hay monto que comparar.
+- **Cadena restituida:** vuelve `renderSimuladorRankingFiltro()` a la parte A, entre las cifras del filtro y las fichas: «Las N obras del filtro, comparadas por …», con los cinco criterios de orden. El criterio es compartido con el simulador comparativo de la parte B, de modo que ordenar en un sitio reordena en el otro.
+- El bloque de escala «Contra que se compara este dinero» baja de la parte C a la parte A, que es donde cierra la cadena: mandato e industria → comparativa → fichas vivas → escala.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

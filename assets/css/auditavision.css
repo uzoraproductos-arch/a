@@ -5939,7 +5939,25 @@ nav.tabbar button.active .num {
   font-family: var(--font-mono);
   font-size: 0.72em;
 }
-.sim-pill-vacia { opacity: 0.35; cursor: not-allowed; }
+/* Un mandato sin obras dentro de la industria elegida se atenua, pero
+   sigue siendo pulsable: antes se desactivaba y el filtro parecia roto. */
+.sim-pill-cero { opacity: 0.5; }
+.sim-pill-cero:hover { opacity: 1; }
+
+.sim-rank-filtro { margin: 0 0 18px; }
+
+/* Combinacion sin obras: se dice con claridad y se ofrece la salida. */
+.sim-vacio {
+  grid-column: 1 / -1;
+  padding: 26px 22px;
+  border: 1px dashed var(--border-accent, rgba(201, 162, 39, 0.4));
+  border-radius: 14px;
+  background: var(--bg-card-alt);
+  text-align: center;
+}
+.sim-vacio-t { margin: 0 0 8px; font-size: 1.02rem; font-weight: 700; color: var(--text-main); }
+.sim-vacio-s { margin: 0 auto 16px; max-width: 64ch; font-size: 0.88rem; line-height: 1.6; color: var(--text-secondary); }
+.sim-vacio-b { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
 
 .sim-kpis-strip {
   display: grid;
@@ -13292,7 +13310,8 @@ body.con-regreso { padding-bottom: 96px; }
   background: linear-gradient(180deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.02));
 }
 
-.sim-los-vacia { opacity: 0.33; cursor: not-allowed; }
+.sim-los-vacia { opacity: 0.45; }
+.sim-los-vacia:hover { opacity: 1; }
 
 .sim-los-fila { display: flex; align-items: center; gap: 9px; }
 
