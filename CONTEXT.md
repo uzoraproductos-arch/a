@@ -298,7 +298,71 @@ de los 32 circuitos.
   de teléfono (`flex-wrap: nowrap`). Verificado en barrido de 1600 a 360 px de
   veinte en veinte: cero desbordes y cero solapamientos.
 
+- **Pestaña 9 reestructurada (Comunidad y Contraloría Social).** Las tres
+  funciones que ya existían se conservan íntegras y ahora se distinguen: una
+  capa de orientación (`#comOrientacion`, `renderComunidadOrientacion`) abre
+  con tres tarjetas-ruta —aportar, denunciar, debatir— que saltan a su bloque,
+  y debajo un cuadro de tres columnas dice **a dónde va a parar cada texto**.
+  El contenido se reordenó en tres bloques `.fj-bloque` con ancla
+  (`#bloqueAportar`, `#bloqueCanales`, `#bloquePortal`).
+
+- **Corrección de honestidad en la pestaña 9.** El formulario respondía «tu
+  observación ha sido registrada para revisión» y el foro «publicado con éxito
+  en el Portal Público Digital», cuando ambos guardan en `localStorage`: nadie
+  más los ve. Los mensajes ahora dicen que el texto queda en ese navegador y
+  que los hilos serán públicos cuando haya servidor. Es la misma regla que
+  rige los datos: prometer lo que no ocurre descalifica todo lo demás.
+
+- **Inyección de HTML cerrada.** Todo lo que escribía una persona se pintaba
+  con `innerHTML` sin escapar: un texto con `<img src=x onerror=…>` se
+  ejecutaba. Se añadió `escHtml()` y se aplicó a los nueve puntos donde entra
+  texto de la persona (observaciones, tesis, contenido, nick, réplicas, tipo
+  de réplica, fuente, avatares). Verificado: el mismo intento de inyección que
+  antes ejecutaba ahora se muestra como texto literal.
+
+- **Canales oficiales: de 3 a 6, y uno estaba extinto.** La ficha de la
+  Secretaría de la Función Pública describía un órgano que dejó de existir con
+  ese nombre: la sustituyó la **Secretaría Anticorrupción y Buen Gobierno**
+  (DOF 28/11/2024, en operación desde el 1 de enero de 2025) y la plataforma
+  de alertadores cambió de dominio. Se corrigió y se añadieron la Fiscalía
+  Especializada en Combate a la Corrupción, la Plataforma Nacional de
+  Transparencia —que no es un canal de denuncia sino la herramienta para
+  conseguir la prueba— y los órganos internos de control. Cada ficha responde
+  ahora cuatro preguntas: para qué sirve, si admite anonimato, qué hay que
+  tener a la mano y qué produce la denuncia.
+
+- **El «decálogo» tenía cuatro puntos.** Ahora tiene diez, cada uno con su
+  fundamento normativo concreto (arts. 134 y 6º CPEUM, arts. 33 y 37 de la Ley
+  de Coordinación Fiscal, LGTAIP, LOPSRM, LGMDE, LGRA).
+
+- **El foro dejó de envejecer mal.** Los hilos sembrados traían fecha fija y
+  «hace 1 día» escrito a mano. Ahora guardan su antigüedad en días y la fecha
+  se calcula al pintar (`fechaRelativa`). Además el selector de temas afirmaba
+  que la deuda estaba en la pestaña 6, que es el Modo Inspector: se corrigió a
+  la 2 y cada hilo lleva un botón que abre la pestaña con los datos que
+  discute (`PORTAL_TEMA_PESTANA`).
+
+- **Puente entre aportar y denunciar.** Cada observación guardada tiene un
+  botón que la copia ya redactada —fecha, tipo, entidad, hechos— para pegarla
+  en el formulario de un canal oficial, y otro para borrarla. El selector de
+  entidades pasó de doce escritas a mano a las 32 de la base.
+
+- **Referencias 39 a 42 y ocho términos nuevos de glosario.** Se añadieron el
+  decreto de creación de la SABG, la Plataforma Nacional de Transparencia, la
+  Ley de Obras Públicas y la Ley General en Materia de Delitos Electorales; y
+  los términos Contraloría Social, Denuncia Ciudadana, Alertador, Falta
+  Administrativa Grave, Solicitud de Acceso a la Información, Recurso de
+  Revisión en Transparencia, Órgano Interno de Control y Empresa Fantasma
+  (EFOS), todos registrados en `AUTOLINK_TERMINOS`. También se actualizó la
+  referencia 13: la LAASSP del año 2000 quedó abrogada el 16 de abril de 2025.
+
 ### Pendiente
+
+- **La pestaña 9 necesita servidor.** Las tres funciones están completas en
+  interfaz, pero el formulario y el foro guardan en `localStorage`: sólo en el
+  navegador de quien escribe. Para que el portal sea de verdad un espacio
+  público hace falta persistencia compartida, moderación y una política de
+  datos. La interfaz ya lo advierte en vez de fingir lo contrario.
 
 - **Fotografía e ilustración**: la plataforma sigue sin una sola etiqueta
   `<img>`. Las «figuritas» de 4.1 y 4.2 son iconos tipográficos y bloques de

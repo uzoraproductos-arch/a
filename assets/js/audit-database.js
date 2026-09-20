@@ -3046,6 +3046,54 @@ window.AUDIT_DB = {
   ],
   "glosario": [
     {
+      "termino": "Contraloría Social",
+      "definicion": "Vigilancia organizada de la ciudadanía sobre la aplicación de recursos públicos en programas y obras que la afectan directamente. No es una figura simbólica: los comités de contraloría social están previstos en la normativa de los programas federales y tienen derecho a recibir información, recorrer la obra y levantar constancias. Su fuerza no está en sancionar, sino en documentar.",
+      "ley": "Art. 134 CPEUM · Ley General de Desarrollo Social",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Denuncia Ciudadana",
+      "definicion": "Acto por el que una persona pone en conocimiento de una autoridad fiscalizadora hechos que pueden constituir un uso irregular de recursos públicos. Puede presentarse de forma anónima ante la Auditoría Superior de la Federación o los órganos internos de control. No requiere abogado ni formalidades procesales, pero su utilidad depende por completo de que aporte datos verificables: fecha, lugar, monto, dependencia y documento.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación · Ley General de Responsabilidades Administrativas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Alertador",
+      "definicion": "Persona, servidora pública o no, que informa sobre un acto grave de corrupción y queda amparada por medidas de protección frente a represalias laborales o de otro tipo. El mecanismo federal opera mediante una plataforma que asigna una clave de seguimiento, de modo que quien alerta puede conocer el avance de su caso sin revelar su identidad.",
+      "ley": "Ley General de Responsabilidades Administrativas · mecanismo de la Secretaría Anticorrupción y Buen Gobierno",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Falta Administrativa Grave",
+      "definicion": "Conducta de una persona servidora pública que la ley califica de mayor entidad: cohecho, peculado, desvío de recursos públicos, abuso de funciones, tráfico de influencias, enriquecimiento oculto, entre otras. Su calificación importa porque determina quién juzga: las faltas no graves las resuelve el órgano interno de control, mientras que las graves se sustancian ante el Tribunal Federal de Justicia Administrativa y pueden derivar en inhabilitación o en responsabilidad penal.",
+      "ley": "Arts. 51 a 64 de la Ley General de Responsabilidades Administrativas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Solicitud de Acceso a la Información",
+      "definicion": "Petición formal dirigida a una institución pública para que entregue un documento o dato que obra en su poder. No hay que acreditar interés jurídico ni explicar para qué se quiere: la ley prohíbe condicionar la entrega a los motivos. Genera folio y plazo de respuesta, y la negativa o el silencio se impugnan mediante recurso de revisión. Es el instrumento con el que se consigue la prueba documental que sostiene una denuncia.",
+      "ley": "Art. 6º apartado A CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Recurso de Revisión en Transparencia",
+      "definicion": "Medio de impugnación contra la respuesta de una institución a una solicitud de información: procede cuando se niega el documento, se entrega incompleto, se clasifica como reservado sin justificación o simplemente no se responde. Lo resuelve la autoridad garante, hoy Transparencia para el Pueblo en el ámbito federal, y su resolución puede ordenar la entrega.",
+      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Órgano Interno de Control",
+      "definicion": "Unidad de vigilancia que existe dentro de cada dependencia, entidad y ayuntamiento, encargada de recibir quejas, investigar faltas administrativas de su propio personal y sustanciar los procedimientos de responsabilidad. Es la instancia más cercana y la más rápida para un hecho local, aunque su independencia respecto de la institución que vigila es una de las críticas recurrentes del sistema anticorrupción.",
+      "ley": "Ley General de Responsabilidades Administrativas · Ley Orgánica de la Administración Pública Federal",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Empresa Fantasma (EFOS)",
+      "definicion": "Sociedad que emite comprobantes fiscales por operaciones que nunca existieron. La autoridad tributaria las identifica como Empresas que Facturan Operaciones Simuladas y las publica en un listado; a partir de esa publicación, las facturas que emitieron pierden efecto fiscal. Es uno de los mecanismos más documentados para vaciar contratos de obra y de servicios pagados con dinero público.",
+      "ley": "Art. 69-B del Código Fiscal de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
       "termino": "Amparo Indirecto",
       "definicion": "Vía del juicio de amparo que se promueve ante un Juzgado de Distrito contra actos, omisiones o normas generales de cualquier autoridad, cuando no se trata de una sentencia definitiva. Se tramita en dos cuadernos paralelos: el principal, que resuelve el fondo en la audiencia constitucional, y el incidental, donde se decide la suspensión del acto. Admite recurso de revisión.",
       "ley": "Art. 107 Ley de Amparo · art. 107 fracc. VII CPEUM",
@@ -5006,6 +5054,42 @@ window.AUDIT_DB = {
   },
   "referencias_legales": [
     {
+      "num": 39,
+      "id": "ref-sabg",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Orgánica de la Administración Pública Federal. Diario Oficial de la Federación, 28 de noviembre de 2024 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/loapf.htm",
+      "descripcion": "Reforma que sustituyó a la Secretaría de la Función Pública por la Secretaría Anticorrupción y Buen Gobierno (SABG), la cual inició operaciones el 1 de enero de 2025. La dependencia concentra la prevención, detección y sanción de actos de corrupción en la Administración Pública Federal, y a través de su Coordinación de Denuncias y Atención Ciudadana administra la plataforma Ciudadanos Alertadores Internos y Externos de la Corrupción, cuyo portal cambió a alertadores.buengobierno.gob.mx. La mención de la «SFP» en documentos posteriores a esa fecha corresponde a un órgano que ya no existe con ese nombre."
+    },
+    {
+      "num": 40,
+      "id": "ref-pnt",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Plataforma Nacional de Transparencia [PNT]. Sistema de solicitudes de acceso a la información pública. Transparencia para el Pueblo, Secretaría Anticorrupción y Buen Gobierno (México).",
+      "url": "https://www.plataformadetransparencia.org.mx/",
+      "descripcion": "Portal único desde el cual se presentan solicitudes de acceso a la información a los sujetos obligados de los tres órdenes de gobierno, se consultan las obligaciones de transparencia y se interponen recursos de revisión. Tras la extinción del INAI en mayo de 2025, la autoridad garante federal es Transparencia para el Pueblo, órgano desconcentrado de la Secretaría Anticorrupción y Buen Gobierno; la plataforma y el derecho no desaparecieron, cambió quién los vigila. Es la herramienta con la que un particular obtiene el contrato, la factura o el acta que después sostiene una denuncia."
+    },
+    {
+      "num": 41,
+      "id": "ref-lopsrm",
+      "categoria": "adquisiciones_compras",
+      "categoria_nombre": "Compras Públicas y Contrataciones",
+      "cita_apa": "Ley de Obras Públicas y Servicios Relacionados con las Mismas [LOPSRM]. Diario Oficial de la Federación (México). Última reforma publicada el 16 de abril de 2025. Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOPSRM.pdf",
+      "descripcion": "Regula la contratación, ejecución y finiquito de la obra pública federal. Establece el expediente único de obra y la bitácora como registro obligatorio de su ejecución: son los documentos que permiten contrastar lo contratado contra lo construido, y por tanto los primeros que conviene solicitar antes de señalar una obra. Fue reformada el 16 de abril de 2025, el mismo día en que se publicó la nueva Ley de Adquisiciones."
+    },
+    {
+      "num": 42,
+      "id": "ref-lgmde",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General en Materia de Delitos Electorales [LGMDE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGMDE.pdf",
+      "descripcion": "Tipifica como delito el condicionamiento de programas sociales, obras o apoyos gubernamentales a cambio del voto, así como el desvío de recursos públicos con fines electorales. Es la norma que convierte una práctica clientelar habitual en una conducta penalmente perseguible, y el fundamento por el que el uso partidista de un padrón de beneficiarios se denuncia ante la Fiscalía Especializada en Delitos Electorales y no sólo ante una contraloría."
+    },
+    {
       "num": 33,
       "id": "ref-ley-amparo",
       "categoria": "judicial",
@@ -5172,9 +5256,9 @@ window.AUDIT_DB = {
       "id": "ref-laassp",
       "categoria": "adquisiciones_compras",
       "categoria_nombre": "Compras Públicas y Contrataciones",
-      "cita_apa": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público [LAASSP]. Diario Oficial de la Federación, 4 de enero de 2000 (México). Última reforma publicada el 20 de mayo de 2021. Cámara de Diputados.",
+      "cita_apa": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público [LAASSP]. Diario Oficial de la Federación, 16 de abril de 2025 (México). Cámara de Diputados. Abroga la ley del 4 de enero de 2000. En la misma fecha se publicaron reformas a la Ley de Obras Públicas y Servicios Relacionados con las Mismas.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/14_200521.pdf",
-      "descripcion": "Norma el procedimiento de licitaciones públicas, compraventa y adquisición de insumos del Estado, restringiendo las adjudicaciones directas e invitaciones restringidas."
+      "descripcion": "Norma el procedimiento de licitaciones públicas, compraventa y adquisición de insumos del Estado, y acota las adjudicaciones directas y las invitaciones restringidas. El marco vigente desde el 16 de abril de 2025 sustituyó por completo a la ley del año 2000 e introdujo un Sistema Nacional de Contrataciones Públicas con una plataforma digital única en la que las propuestas y los contratos se firman electrónicamente, pensada para dejar rastro de cada modificación contractual."
     },
     {
       "num": 14,
@@ -5436,32 +5520,152 @@ window.AUDIT_DB = {
   "comunidad": {
     "canales_denuncia_oficial": [
       {
-        "organismo": "Auditoría Superior de la Federación (ASF)",
-        "herramienta": "Sistema de Denuncia Ciudadana (SIDEC)",
-        "alcance": "Denuncias anónimas sobre desvío de recursos federalizados, Ramo 28, Ramo 33 y contratos del PEF.",
+        "id": "ch-asf",
+        "organismo": "Auditoría Superior de la Federación",
+        "siglas": "ASF",
+        "icono": "⚖️",
+        "tono": "gold",
+        "herramienta": "Sistema de Denuncias Ciudadanas (SIDEC)",
+        "paraQue": "Desvío, uso indebido o aplicación irregular de recursos federales: participaciones del Ramo 28, aportaciones del Ramo 33, subsidios y contratos pagados con el Presupuesto de Egresos.",
+        "anonimo": "Sí. La denuncia puede presentarse sin revelar identidad.",
+        "queNecesitas": "El nombre del ente que ejerció el dinero, el año, el fondo o el número de contrato, y la descripción de lo que observó. Si tiene fotografías o documentos, adjúntelos.",
+        "efecto": "Puede originar una auditoría específica y, si hay presunción de delito, una denuncia de la propia ASF ante la Fiscalía.",
         "url": "https://www.asf.gob.mx/Section/262_Denuncias_Ciudadanas",
-        "icono": "⚖️"
+        "refId": "ref-lfrcf"
       },
       {
-        "organismo": "Secretaría de la Función Pública (SFP)",
-        "herramienta": "Plataforma Ciudadanos Alertadores Internos y Externos",
-        "alcance": "Protección a denunciantes de cohecho, soborno, desvío de recursos y violaciones a la Ley de Adquisiciones.",
-        "url": "https://alertadores.funcionpublica.gob.mx/",
-        "icono": "🛡️"
+        "id": "ch-sabg",
+        "organismo": "Secretaría Anticorrupción y Buen Gobierno",
+        "siglas": "SABG",
+        "icono": "🛡️",
+        "tono": "emerald",
+        "herramienta": "Plataforma Ciudadanos Alertadores Internos y Externos de la Corrupción",
+        "paraQue": "Actos graves de corrupción de personas servidoras públicas federales: cohecho, peculado, desvío de recursos, abuso de funciones, y también acoso y hostigamiento sexual.",
+        "anonimo": "Sí, y con protección expresa: el mecanismo está diseñado para resguardar a quien alerta frente a represalias.",
+        "queNecesitas": "Relato de los hechos con fecha y lugar, el nombre o cargo de la persona involucrada y cualquier evidencia. El sistema entrega una clave para dar seguimiento sin identificarse.",
+        "efecto": "Abre una investigación administrativa. Si la falta es grave, el expediente se turna al Tribunal Federal de Justicia Administrativa.",
+        "url": "https://alertadores.buengobierno.gob.mx/",
+        "refId": "ref-sabg"
       },
       {
-        "organismo": "Servicio de Administración Tributaria (SAT)",
-        "herramienta": "Buzón de Denuncias contra EFOS (Empresas Fantasmas)",
-        "alcance": "Reportes de emisión y deducción de facturas falsas (Art. 69-B CFF) en obras y compras gubernamentales.",
+        "id": "ch-fgr",
+        "organismo": "Fiscalía General de la República",
+        "siglas": "FGR",
+        "icono": "⚔️",
+        "tono": "crimson",
+        "herramienta": "Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)",
+        "paraQue": "Cuando el hecho ya no es sólo una falta administrativa sino un delito: enriquecimiento ilícito, cohecho, peculado, uso ilícito de atribuciones, tráfico de influencias.",
+        "anonimo": "No del todo. La denuncia penal requiere datos de quien la presenta, aunque existen medidas de protección para testigos y denunciantes.",
+        "queNecesitas": "Narración de los hechos en orden cronológico, identificación de las personas involucradas y todos los documentos o pruebas de que disponga.",
+        "efecto": "Abre una carpeta de investigación penal. Es la única vía que puede terminar en prisión.",
+        "url": "https://fgr.org.mx/es/FGR/FEMCC",
+        "refId": "ref-lgra"
+      },
+      {
+        "id": "ch-sat",
+        "organismo": "Servicio de Administración Tributaria",
+        "siglas": "SAT",
+        "icono": "📑",
+        "tono": "cyan",
+        "herramienta": "Buzón de denuncias contra EFOS (empresas que facturan operaciones simuladas)",
+        "paraQue": "Facturación falsa: empresas fantasma que emiten comprobantes por servicios que nunca se prestaron, un mecanismo habitual para vaciar contratos de obra pública.",
+        "anonimo": "Sí.",
+        "queNecesitas": "El RFC o la razón social de la empresa, el tipo de operación simulada y, si la conoce, la dependencia que pagó.",
+        "efecto": "Puede derivar en la publicación de la empresa en el listado del artículo 69-B del Código Fiscal, lo que anula el efecto fiscal de sus facturas.",
         "url": "https://www.sat.gob.mx/aplicacion/operacion/50409/denuncias-sat",
-        "icono": "📑"
+        "refId": "ref-cff"
+      },
+      {
+        "id": "ch-pnt",
+        "organismo": "Transparencia para el Pueblo",
+        "siglas": "PNT",
+        "icono": "🔎",
+        "tono": "gold",
+        "herramienta": "Plataforma Nacional de Transparencia · solicitud de acceso a la información",
+        "paraQue": "Esto no es una denuncia: es la herramienta para conseguir la prueba. Con una solicitud se pide el contrato, la factura, el acta de entrega o el padrón de beneficiarios que después sostendrá la denuncia.",
+        "anonimo": "Casi. Hay que registrar una cuenta con un correo, pero no es necesario dar el nombre real ni explicar para qué se quiere el documento: la ley prohíbe condicionar la entrega a los motivos.",
+        "queNecesitas": "Saber a qué institución pedirle y describir el documento con la mayor precisión posible. Entre más concreta la solicitud, más difícil es evadirla.",
+        "efecto": "La institución está obligada a responder en los plazos que fija la ley. Si no responde o la respuesta es insatisfactoria, procede un recurso de revisión.",
+        "url": "https://www.plataformadetransparencia.org.mx/",
+        "refId": "ref-pnt"
+      },
+      {
+        "id": "ch-oic",
+        "organismo": "Órganos Internos de Control y contralorías estatales o municipales",
+        "siglas": "OIC",
+        "icono": "🏢",
+        "tono": "neutro",
+        "herramienta": "Buzón de quejas y denuncias de cada dependencia, estado o municipio",
+        "paraQue": "La vía más cercana y la más rápida cuando el hecho es local: una obra de su colonia, un trámite condicionado, un cobro indebido en la ventanilla, una falta administrativa de personal del ayuntamiento.",
+        "anonimo": "Depende de cada contraloría; la mayoría admite denuncia anónima.",
+        "queNecesitas": "El nombre de la dependencia o el ayuntamiento, la fecha y el lugar del hecho, y lo que pueda documentar.",
+        "efecto": "Procedimiento de responsabilidad administrativa contra la persona servidora pública. Es la escala más baja, pero también la que menos tarda.",
+        "url": null,
+        "notaSinUrl": "No existe un portal único: cada dependencia federal tiene su propio Órgano Interno de Control y cada estado su contraloría. Búsquelo por el nombre de la institución más «Órgano Interno de Control» o «Contraloría» en el sitio oficial de la entidad.",
+        "refId": "ref-lgra"
       }
     ],
     "principios_contraloria_social": [
-      "Vigilar que los recursos asignados en el PEF a tu municipio se apliquen en obras reales y verificables.",
-      "Solicitar contratos, facturas y estimaciones de obra mediante la Plataforma Nacional de Transparencia (PNT).",
-      "Verificar que las obras del FISMDF beneficien directamente a colonias y comunidades con rezago social CONEVAL.",
-      "Denunciar el uso electoral o partidista de programas sociales y partidas de gestión de los congresos locales."
+      {
+        "n": 1,
+        "titulo": "El dinero público no es del gobierno",
+        "texto": "Es el producto del tributo de todas las personas. Quien lo administra lo hace por encargo y debe rendir cuentas de cada peso.",
+        "fundamento": "Art. 134 CPEUM: los recursos se administran con eficiencia, eficacia, economía, transparencia y honradez."
+      },
+      {
+        "n": 2,
+        "titulo": "Todo contrato público es público",
+        "texto": "El monto, el proveedor, el plazo y el objeto de un contrato pagado con dinero público son información obligatoria. Que no estén publicados no los vuelve secretos: los vuelve exigibles.",
+        "fundamento": "Ley General de Transparencia y Acceso a la Información Pública, obligaciones comunes de publicación."
+      },
+      {
+        "n": 3,
+        "titulo": "Pregunte por escrito",
+        "texto": "Una llamada telefónica no deja constancia y una respuesta verbal no se puede impugnar. Una solicitud de acceso a la información sí: genera folio, plazo y recurso.",
+        "fundamento": "Art. 6º CPEUM, apartado A: toda persona tiene derecho al acceso a la información sin acreditar interés ni justificar su uso."
+      },
+      {
+        "n": 4,
+        "titulo": "Una obra sin expediente no es una obra fiscalizable",
+        "texto": "Antes de opinar sobre una obra, pida su número de contrato, su monto y su plazo de ejecución. Sin esos tres datos no hay comparación posible entre lo prometido y lo entregado.",
+        "fundamento": "Ley de Obras Públicas y Servicios Relacionados con las Mismas: bitácora y expediente único de obra."
+      },
+      {
+        "n": 5,
+        "titulo": "El FISMDF debe llegar a donde hay rezago",
+        "texto": "El Fondo de Infraestructura Social sólo puede financiar obras que beneficien directamente a población en pobreza extrema y rezago social. Una banqueta en la zona acomodada del municipio no cumple la ley.",
+        "fundamento": "Art. 33 de la Ley de Coordinación Fiscal."
+      },
+      {
+        "n": 6,
+        "titulo": "El FORTAMUN también tiene destino",
+        "texto": "Prioritariamente obligaciones financieras, pago de derechos de agua y seguridad pública. No es una bolsa libre para nómina administrativa.",
+        "fundamento": "Art. 37 de la Ley de Coordinación Fiscal."
+      },
+      {
+        "n": 7,
+        "titulo": "Un programa social no es del partido que gobierna",
+        "texto": "Condicionar una despensa, un apoyo o una obra a cambio del voto no es una práctica política: es un delito electoral y se denuncia.",
+        "fundamento": "Ley General en Materia de Delitos Electorales, arts. 7 y 11."
+      },
+      {
+        "n": 8,
+        "titulo": "La sospecha no basta: documente",
+        "texto": "Fecha, lugar, monto, nombre de la dependencia y el documento que lo respalde. Una denuncia sin datos verificables se desecha y desgasta la causa de quienes sí los aportan.",
+        "fundamento": "Criterio operativo común de la ASF y de los órganos internos de control."
+      },
+      {
+        "n": 9,
+        "titulo": "Denunciar de buena fe está protegido",
+        "texto": "La ley contempla mecanismos de protección para quien alerta sobre corrupción, precisamente porque la represalia es el costo que más desalienta la denuncia.",
+        "fundamento": "Ley General de Responsabilidades Administrativas y mecanismo de alertadores de la SABG."
+      },
+      {
+        "n": 10,
+        "titulo": "El silencio también se impugna",
+        "texto": "Si no le responden, no se acabó el camino: la falta de respuesta y la respuesta incompleta se recurren, y ese recurso obliga a una revisión por un tercero.",
+        "fundamento": "Recurso de revisión previsto en la legislación de transparencia."
+      }
     ],
     "debates_semilla": [
       {
@@ -5473,9 +5677,8 @@ window.AUDIT_DB = {
         "postura_icono": "🟡",
         "autor_nick": "@AuditorSureste",
         "autor_avatar_color": "#f59e0b",
-        "fecha": "17 sep 2026",
-        "tiempo_relativo": "Hace 1 día",
-        "tesis": "¿Subsidio operativo permanente o palanca indispensable de desarrollo territorial en el sureste?",
+        "dias_atras": 3,
+                "tesis": "¿Subsidio operativo permanente o palanca indispensable de desarrollo territorial en el sureste?",
         "contenido": "Revisando los datos de la Pestaña 2 sobre la pérdida diaria de $71.2 mdp y el costo operativo anual de más de $26,000 mdp, considero fundamental distinguir dos dimensiones: financieramente es un hecho que la paraestatal Tren Maya S.A. requerirá subsidios presupuestales por los próximos 15 años. Sin embargo, en el análisis macroeconómico no toda infraestructura debe evaluarse bajo criterios de rentabilidad corporativa inmediata; las redes de trenes de pasajeros en el mundo operan con subsidio del Estado por su impacto indirecto en integración regional, turismo y reducción de costos de fletes para comunidades históricamente marginadas.",
         "fuente": "Cuenta Pública ASF (Ramo 07 / Fonatur Tren Maya) & PEF 2026",
         "fuente_url": "https://www.transparenciapresupuestaria.gob.mx/",
@@ -5485,7 +5688,7 @@ window.AUDIT_DB = {
             "id": "rep-1-1",
             "autor_nick": "@EconomistaLibre",
             "autor_avatar_color": "#ef4444",
-            "fecha": "17 sep 2026",
+            "dias_atras": 3,
             "tipo_replica": "Crítica Presupuestal",
             "contenido": "El argumento del beneficio social es atendible, pero no justifica un sobrecosto acumulado del 320% frente al costo proyectado original ($511,000 mdp reales vs. $120,000 mdp presupuestados). Esos más de $390,000 mdp de desviación presupuestal comprometieron recursos urgentes que debieron destinarse al mantenimiento de la red carretera federal y hospitales del IMSS-Bienestar."
           },
@@ -5493,7 +5696,7 @@ window.AUDIT_DB = {
             "id": "rep-1-2",
             "autor_nick": "@YucatanProductivo",
             "autor_avatar_color": "#10b981",
-            "fecha": "18 sep 2026",
+            "dias_atras": 2,
             "tipo_replica": "Aporte en Territorio",
             "contenido": "Totalmente de acuerdo en auditar a las constructoras contratistas, pero como ciudadano de Mérida les comparto que por primera vez en medio siglo el sureste cuenta con una alternativa de transporte masivo que ya comenzó a bajar los tiempos de traslado de trabajadores turísticos y los fletes de abasto agroalimentario en la península."
           }
@@ -5508,9 +5711,8 @@ window.AUDIT_DB = {
         "postura_icono": "🟢",
         "autor_nick": "@AbogadoConstitucional",
         "autor_avatar_color": "#10b981",
-        "fecha": "16 sep 2026",
-        "tiempo_relativo": "Hace 2 días",
-        "tesis": "El mandato del Artículo 127 debe ser universal: ningún poder de la Unión por encima del tope presidencial",
+        "dias_atras": 4,
+                "tesis": "El mandato del Artículo 127 debe ser universal: ningún poder de la Unión por encima del tope presidencial",
         "contenido": "La fiscalización ciudadana del Ramo 03 documentada en la Pestaña 4 es demoledora: un gasto consolidado de más de $78,000 mdp donde el 80% es Capítulo 1000, 11 ponencias costando $376 mdp al año y fideicomisos fiduciarios por más de $15,400 mdp alimentados con subejercicios. La autonomía judicial del Art. 94 debe entenderse como independencia en sentencias y criterios, jamás como un salvoconducto de excepción para ganar $206,000 netos mensuales y gozar de seguros médicos privados de $50 mdp pagados con el erario de un país con 40% de pobreza.",
         "fuente": "Constitución Política de los Estados Unidos Mexicanos (Artículos 94 y 127) y Dictámenes ASF",
         "fuente_url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
@@ -5520,7 +5722,7 @@ window.AUDIT_DB = {
             "id": "rep-2-1",
             "autor_nick": "@LitiganteColegiado",
             "autor_avatar_color": "#f59e0b",
-            "fecha": "17 sep 2026",
+            "dias_atras": 3,
             "tipo_replica": "Matiz Dogmático",
             "contenido": "Coincido en que los excesos en gastos suntuarios debían eliminarse, pero alerto sobre un punto fino: la irreductibilidad salarial histórica de los juzgadores en el derecho comparado internacional no es un privilegio personal, sino un blindaje contra presiones económicas del Poder Ejecutivo o de grupos fácticos de poder. Al tasar sueldos al rasero del presidente de turno, se crea una dependencia indirecta de la nómina judicial hacia las políticas de Los Pinos o Palacio Nacional."
           },
@@ -5528,7 +5730,7 @@ window.AUDIT_DB = {
             "id": "rep-2-2",
             "autor_nick": "@AuditorCiudadanoMX",
             "autor_avatar_color": "#00b4d8",
-            "fecha": "18 sep 2026",
+            "dias_atras": 2,
             "tipo_replica": "Aporte Técnico",
             "contenido": "Con $134,310 pesos netos al mes que marca el tope del Art. 127 más prestaciones de ley, un juzgador en México sigue ubicándose en el decil superior del 0.5% de ingresos de todo el país. La garantía de probidad no emana de bonos ilimitados, sino de controles éticos y sanciones efectivas del Tribunal de Disciplina Judicial."
           }
@@ -5543,9 +5745,8 @@ window.AUDIT_DB = {
         "postura_icono": "📄",
         "autor_nick": "@FinanzasPublicasMX",
         "autor_avatar_color": "#00b4d8",
-        "fecha": "15 sep 2026",
-        "tiempo_relativo": "Hace 3 días",
-        "tesis": "La composición de la deuda soberana en moneda nacional: fortalezas y riesgos del costo financiero",
+        "dias_atras": 5,
+                "tesis": "La composición de la deuda soberana en moneda nacional: fortalezas y riesgos del costo financiero",
         "contenido": "Una de las lecciones más valiosas que arroja el simulador de deuda de la plataforma es la transición que vivió México tras la crisis de 1994: el 80% de la deuda pública federal se emite hoy en moneda nacional (CETES, Bonos M y Udibonos colocados por Banco de México), blindándonos de los 'tesobonos' que quebraron al país en dólares. Sin embargo, el gran foco rojo actual no es el saldo total sobre el PIB (que ronda el 49-51%), sino el altísimo costo financiero del servicio de la deuda, que absorbe más de $1.2 billones anuales en el PEF debido a la persistencia de tasas de referencia restrictivas.",
         "fuente": "Banco de México: Sistema de Información Económica (SIE) & Estadísticas Oportunas SHCP",
         "fuente_url": "https://www.banxico.org.mx/SieInternet/",
@@ -5555,7 +5756,7 @@ window.AUDIT_DB = {
             "id": "rep-3-1",
             "autor_nick": "@ObservadorFiscal",
             "autor_avatar_color": "#eab308",
-            "fecha": "16 sep 2026",
+            "dias_atras": 4,
             "tipo_replica": "Aclaración Ciudadana",
             "contenido": "Exactamente. Mientras el Banco de México mantenga tasas altas para controlar la inflación, el erario tiene que pagar rendimientos de dos dígitos a los inversionistas de CETES. Ese dinero sale directo de los impuestos recaudados por el SAT en vez de ir a inversión física."
           }
@@ -5570,9 +5771,8 @@ window.AUDIT_DB = {
         "postura_icono": "🟡",
         "autor_nick": "@CriminologiaJuridica",
         "autor_avatar_color": "#e056fd",
-        "fecha": "14 sep 2026",
-        "tiempo_relativo": "Hace 4 días",
-        "tesis": "El valor convictivo de los cooperantes en Brooklyn frente a la doctrina de sospecha de la SCJN",
+        "dias_atras": 6,
+                "tesis": "El valor convictivo de los cooperantes en Brooklyn frente a la doctrina de sospecha de la SCJN",
         "contenido": "La tesis planteada en el módulo especial de Genaro García Luna aborda un tema medular de política criminal y geopolítica: en Estados Unidos, el sistema acusatorio con jurado lego permite condenas basadas predominantemente en el testimonio de delincuentes confesos que negociaron rebajas de penas ('plea bargains'). En México, el Código Nacional de Procedimientos Penales (CNPP) y la jurisprudencia de la Primera Sala de la SCJN prohíben condenar únicamente con base en el dicho de un coimputado si no existen pruebas materiales corroboratorias (trazabilidad financiera, contratos o transferencias bancarias). El reto es discutir el estándar de verdad sin apasionamientos partidistas.",
         "fuente": "Código Nacional de Procedimientos Penales (Art. 13 y 20 Constitucional) & Expediente EDNY 1:19-cr-00576",
         "fuente_url": "https://www.courtlistener.com/docket/16559363/united-states-v-garcia-luna/",
@@ -5582,7 +5782,7 @@ window.AUDIT_DB = {
             "id": "rep-4-1",
             "autor_nick": "@PenalistaDelNorte",
             "autor_avatar_color": "#10b981",
-            "fecha": "15 sep 2026",
+            "dias_atras": 5,
             "tipo_replica": "Coincidencia Técnica",
             "contenido": "Impecable el paralelismo. En la dogmática penal mexicana rige la regla 'testis unus, testis nullus' respecto a testigos con interés espurio. La paradoja expuesta en la plataforma es real: si los testimonios de 'El Rey' Zambada eran verdad absoluta, ¿por qué no se indagó de oficio el señalamiento de entregas de dinero a funcionarios de la campaña de 2006? La credibilidad no puede ser selectiva."
           },
@@ -5590,7 +5790,7 @@ window.AUDIT_DB = {
             "id": "rep-4-2",
             "autor_nick": "@JusticiaTransparente",
             "autor_avatar_color": "#ef4444",
-            "fecha": "16 sep 2026",
+            "dias_atras": 4,
             "tipo_replica": "Contrapunto Procesal",
             "contenido": "No hay que perder de vista que el jurado popular en EE.UU. analizó también bitácoras de vuelo, testimonios cruzados de agentes de la DEA que operaban en campo y la incongruencia patrimonial de los inmuebles en Miami que la UIF de México actualmente litiga para recuperar $600 mdd."
           }

@@ -4837,25 +4837,46 @@
          PESTAÑA 9: COMUNIDAD & CONTRALORÍA CÍVICA
          ======================================================================== -->
     <div id="tab-panel-comunidad" class="tab-panel">
-      
+
       <div class="section-hero">
-        <span class="hero-tag">Participación Cívica &amp; Denuncia Social</span>
+        <span class="hero-tag">Contraloría Social &middot; Denuncia &middot; Ágora Ciudadana</span>
         <h2>9. Comunidad, Contraloría Social &amp; Buzón Ciudadano</h2>
-        <p>
-          La fiscalización del dinero público no termina en los despachos de los auditores: se consolida con la participación ciudadana en cada colonia, municipio y entidad federativa.
+        <p style="max-width:78ch;">
+          La fiscalización no termina en el despacho del auditor. Termina —o empieza— en la colonia donde la obra quedó a medias, en el contrato que nadie leyó y en la pregunta que alguien se atrevió a hacer por escrito. Esta pestaña existe para eso: convertir la indignación en un documento que una autoridad esté obligada a responder.
+        </p>
+        <p style="max-width:78ch; margin-top:10px;">
+          Hace tres cosas distintas y conviene no confundirlas. Puede <strong>aportarnos un dato</strong> para que lo investiguemos; puede <strong>denunciar ante el Estado</strong> por la vía que sí produce consecuencias jurídicas; y puede <strong>debatir en público</strong>, con seudónimo, incluso para contradecirnos. Abajo está la diferencia entre las tres, y a dónde va a parar lo que escriba en cada una.
         </p>
       </div>
 
-      <div class="comunidad-layout">
-        
-        <!-- Formulario de Aportaciones Cívicas -->
-        <div class="com-card-panel">
-          <h3>💬 Ayúdanos a Fiscalizar · Deja tu Observación o Reporte</h3>
-          <p class="sub">
-            Esta plataforma ciudadana se enriquece con lo que nos compartes: solicitudes de transparencia, obras con irregularidades en tu municipio o sugerencias. 
-            <b>No compartas información privada ni datos bancarios.</b>
-          </p>
+      <!-- CAPA DE ORIENTACIÓN: LAS TRES FUNCIONES Y EL DESTINO DE CADA TEXTO -->
+      <div id="comOrientacion"></div>
 
+      <!-- ====================================================================
+           BLOQUE 1: AYÚDANOS A FISCALIZAR
+           ==================================================================== -->
+      <div class="fj-bloque" id="bloqueAportar">
+        <div class="fj-bloque-head">
+          <span class="fj-kicker">Función 1</span>
+          <h3>Ayúdanos a fiscalizar: comparta lo que vio</h3>
+        </div>
+        <p class="fj-bloque-sub">
+          No necesita ser contador ni abogado. Necesita haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. Lo que registre aquí queda guardado en su navegador y podrá copiarlo con un botón para presentarlo, ya redactado, en cualquiera de los canales oficiales del bloque siguiente.
+          <strong>No comparta datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</strong>
+        </p>
+
+        <div class="com-util">
+          <div class="com-util-tit">Qué vuelve útil un reporte</div>
+          <ul class="com-util-lista">
+            <li><strong>Qué.</strong> La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</li>
+            <li><strong>Dónde.</strong> Municipio, colonia y referencia física. Una dirección vale más que un adjetivo.</li>
+            <li><strong>Cuándo.</strong> La fecha o el periodo. Los fondos se fiscalizan por ejercicio anual.</li>
+            <li><strong>Con qué dinero.</strong> Si lo sabe: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</li>
+            <li><strong>Con qué prueba.</strong> Una foto con fecha, un número de contrato, una factura, un acta de entrega.</li>
+          </ul>
+        </div>
+
+        <div class="com-card-panel">
           <form id="comunidadForm">
             <div class="com-form-row">
               <label for="comNombre">Nombre o Pseudónimo (Opcional)</label>
@@ -4866,28 +4887,19 @@
               <div class="com-form-row">
                 <label for="comTipo">Tipo de Participación</label>
                 <select id="comTipo">
-                  <option value="Sugerencia">Sugerencia de Plataforma</option>
-                  <option value="Denuncia Obra">Reporte de Obra Pública</option>
-                  <option value="Duda Fiscal">Duda sobre Gasto o Presupuesto</option>
-                  <option value="Observación ASF">Observación en Municipio</option>
+                  <option value="Obra pública">Una obra que no cuadra</option>
+                  <option value="Contrato o compra">Un contrato o una compra sospechosa</option>
+                  <option value="Programa social">Uso electoral de un programa social</option>
+                  <option value="Trámite o cobro">Un cobro o trámite indebido</option>
+                  <option value="Corrección de dato">Corrección a un dato de esta plataforma</option>
+                  <option value="Duda presupuestal">Duda sobre gasto o presupuesto</option>
+                  <option value="Sugerencia">Sugerencia para la plataforma</option>
                 </select>
               </div>
               <div class="com-form-row">
                 <label for="comEstadoSel">Entidad Relacionada</label>
                 <select id="comEstadoSel">
                   <option value="Nacional">Nacional / Federal</option>
-                  <option value="JAL">Jalisco</option>
-                  <option value="NL">Nuevo León</option>
-                  <option value="CDMX">Ciudad de México</option>
-                  <option value="MÉX">Estado de México</option>
-                  <option value="VER">Veracruz</option>
-                  <option value="PUE">Puebla</option>
-                  <option value="GTO">Guanajuato</option>
-                  <option value="CHIS">Chiapas</option>
-                  <option value="OAX">Oaxaca</option>
-                  <option value="YUC">Yucatán</option>
-                  <option value="COAH">Coahuila</option>
-                  <option value="OTRO">Otra Entidad</option>
                 </select>
               </div>
             </div>
@@ -4906,43 +4918,40 @@
             </div>
           </form>
 
-          <!-- Lista de Comentarios / Aportaciones -->
-          <div style="margin-top: 30px; border-top:1px solid var(--border-subtle); padding-top:20px;">
-            <h4 style="font-family:var(--font-serif); font-size:16px; color:var(--text-main); margin-bottom:12px;">
-              Últimas Aportaciones Ciudadanas Registradas
-            </h4>
+          <div class="com-obs-wrap">
+            <h4 class="com-obs-h4">Observaciones que ha registrado en este navegador</h4>
             <div id="comentariosListContainer"></div>
           </div>
         </div>
+      </div>
 
-        <!-- Canales Oficiales de Denuncia Ciudadana Directa -->
-        <div class="com-card-panel">
-          <h3>🏛️ Canales Oficiales de Denuncia</h3>
-          <p class="sub">
-            Para presentar denuncias con valor probatorio legal ante los órganos constitucionales de fiscalización:
-          </p>
-          <div id="canalesOficialesContainer" class="canales-denuncia-list"></div>
-
-          <!-- Principios de Contraloría Social -->
-          <div style="margin-top: 26px; background:var(--bg-surface); border:1px solid var(--border-gold); border-radius:10px; padding:18px;">
-            <h4 style="font-family:var(--font-serif); color:var(--gold); font-size:14px; margin-bottom:8px;">
-              🛡️ Decálogo del Ciudadano Auditor
-            </h4>
-            <ul style="padding-left:18px; font-size:12px; color:var(--text-secondary); line-height:1.6;">
-              <li>El dinero público no es del gobierno: es del tributo de la ciudadanía.</li>
-              <li>Exige contratos y facturas en la Plataforma Nacional de Transparencia (PNT).</li>
-              <li>Revisa que las obras del FISMDF se ejecuten en polígonos de pobreza real.</li>
-              <li>Supervisa que el FORTAMUN equipe policías y no se desvíe a nómina inflada.</li>
-            </ul>
-          </div>
+      <!-- ====================================================================
+           BLOQUE 2: CANALES OFICIALES DE DENUNCIA
+           ==================================================================== -->
+      <div class="fj-bloque" id="bloqueCanales">
+        <div class="fj-bloque-head">
+          <span class="fj-kicker">Función 2</span>
+          <h3>Las seis puertas donde un señalamiento se vuelve expediente</h3>
         </div>
+        <p class="fj-bloque-sub">
+          Esta es la parte que sí tiene efecto jurídico, y la que casi nadie usa porque no se sabe cuál toca. Cada ficha responde lo mismo: qué investiga ese órgano, si admite denuncia anónima, qué debe tener a la mano antes de empezar y qué produce su denuncia una vez presentada. Una de las seis no es un canal de denuncia sino la herramienta para conseguir la prueba: léala primero si todavía no tiene documentos.
+        </p>
+        <div id="canalesOficialesContainer" class="canales-denuncia-list"></div>
 
-      </div><!-- FIN COMUNIDAD LAYOUT -->
+        <div class="dec-wrap">
+          <div class="dec-head">
+            <span class="dec-kicker">Decálogo del ciudadano auditor</span>
+            <h4>Diez reglas que hacen la diferencia entre una queja y una denuncia</h4>
+            <p>No son consignas: cada una tiene detrás una norma concreta. Están ordenadas de lo general a lo práctico, y la última es la que más se olvida.</p>
+          </div>
+          <div id="decalogoContainer" class="dec-grid"></div>
+        </div>
+      </div>
 
       <!-- ========================================================================
            BLOQUE 3: PORTAL PÚBLICO DIGITAL · ¿QUIERES DIALOGAR O REPLICAR?
            ======================================================================== -->
-      <div class="portal-digital-block" id="portalDigitalBlock">
+      <div class="portal-digital-block" id="bloquePortal">
         
         <!-- Banner Hero del Portal & Garantía de Privacidad -->
         <div class="portal-banner-hero">
@@ -4998,7 +5007,7 @@
                   <option value="legislativo">🏛️ Poder Legislativo (Pestaña 3)</option>
                   <option value="judicial">⚖️ Suprema Corte SCJN (Pestaña 4)</option>
                   <option value="politicos">👥 Personajes &amp; Sexenios (Pestaña 5)</option>
-                  <option value="deuda">📈 Deuda, CETES &amp; Banxico (Pestaña 6)</option>
+                  <option value="deuda">📈 Deuda, CETES &amp; Banxico (Pestaña 2)</option>
                   <option value="general">🌐 Debate Cívico General</option>
                 </select>
               </div>
@@ -5090,7 +5099,7 @@
 
       </div><!-- FIN BLOQUE 3 PORTAL DIGITAL -->
 
-    </div><!-- FIN PESTAÑA 8 -->
+    </div><!-- FIN PESTAÑA 9 -->
 
   </main>
 

@@ -1997,6 +1997,16 @@
     { a: ['principio de relatividad', 'fórmula Otero'], t: 'Principio de Relatividad', r: 'ref-cpeum-control-constitucional', n: 34 },
     { a: ['Semanario Judicial de la Federación', 'Duodécima Época'], t: 'Semanario Judicial de la Federación', r: 'ref-sjf-duodecima', n: 37 },
 
+    // --- Contraloria social y denuncia (pestana 9) ---
+    { a: ['contraloría social', 'contraloria social'], t: 'Contraloría Social', r: 'ref-cpeum', n: 1 },
+    { a: ['denuncia ciudadana', 'denuncias ciudadanas'], t: 'Denuncia Ciudadana', r: 'ref-lfrcf', n: 7 },
+    { a: ['alertador', 'alertadores'], t: 'Alertador', r: 'ref-sabg', n: 39 },
+    { a: ['falta administrativa grave', 'faltas administrativas graves'], t: 'Falta Administrativa Grave', r: 'ref-lgra', n: 29 },
+    { a: ['solicitud de acceso a la información', 'solicitud de transparencia', 'solicitudes de acceso a la información'], t: 'Solicitud de Acceso a la Información', r: 'ref-pnt', n: 40 },
+    { a: ['recurso de revisión'], t: 'Recurso de Revisión en Transparencia', r: 'ref-lgtaip', n: 30 },
+    { a: ['órgano interno de control', 'organo interno de control', 'órganos internos de control'], t: 'Órgano Interno de Control', r: 'ref-lgra', n: 29 },
+    { a: ['empresa fantasma', 'empresas fantasma'], t: 'Empresa Fantasma (EFOS)', r: 'ref-cff', n: 9 },
+
     // --- Electoral ---
     { a: ['lista nominal'], t: 'Lista Nominal y Padrón Electoral', r: 'ref-lgipe', n: 31 },
     { a: ['padrón electoral'], t: 'Lista Nominal y Padrón Electoral', r: 'ref-lgipe', n: 31 },
@@ -2036,7 +2046,11 @@
     'pj-peldano-cta', 'pj-peldano-n', 'pj-escalera-tit', 'pj-node-badge',
     'min-avatar', 'min-num', 'min-nom', 'min-cargo', 'min-badge',
     'min-dato-lab', 'min-dato-val', 'min-dato-pie', 'min-chip', 'min-ver',
-    'min-grupo-tit', 'pleno-modo-btn'
+    'min-grupo-tit', 'pleno-modo-btn',
+    'com-ruta-tit', 'com-ruta-efecto', 'com-ruta-aviso', 'com-ruta-num',
+    'com-destino-k', 'com-obs-meta', 'com-obs-autor', 'com-obs-btn',
+    'canal-num', 'canal-siglas', 'canal-cta', 'com-util-tit',
+    'dec-n', 'dec-kicker', 'dec-tit'
   ]);
 
   let autolinkIndice = null;
@@ -13757,6 +13771,117 @@
     });
   }
 
+  /* ======================================================================
+     PESTANA 9 - CAPA DE ORIENTACION Y UTILIDADES COMUNES
+     Tres funciones conviven en esta pestana y hasta ahora no se distinguian:
+     aportar a la plataforma, denunciar ante el Estado y debatir en publico.
+     Solo una de las tres tiene efecto juridico. Esta capa lo dice antes de
+     que la persona escriba una sola palabra.
+     ====================================================================== */
+
+  /* Todo lo que escribe una persona se pinta con innerHTML. Sin escapar, un
+     texto con etiquetas se ejecuta como HTML: rompe la maquetacion y abre la
+     puerta a inyeccion. Esta funcion es obligatoria en cualquier dato que
+     provenga del formulario o del almacenamiento local. */
+  function escHtml(v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /* Los debates de ejemplo guardan su antiguedad en dias, no una fecha fija:
+     asi el foro no envejece mal cuando pasan semanas sin tocar el proyecto. */
+  function fechaRelativa(diasAtras) {
+    const d = new Date();
+    d.setDate(d.getDate() - (parseInt(diasAtras, 10) || 0));
+    const fecha = d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' });
+    const n = parseInt(diasAtras, 10) || 0;
+    let rel;
+    if (n <= 0) rel = 'Hoy';
+    else if (n === 1) rel = 'Hace 1 día';
+    else if (n < 7) rel = 'Hace ' + n + ' días';
+    else if (n < 30) rel = 'Hace ' + Math.floor(n / 7) + (Math.floor(n / 7) === 1 ? ' semana' : ' semanas');
+    else rel = 'Hace ' + Math.floor(n / 30) + (Math.floor(n / 30) === 1 ? ' mes' : ' meses');
+    return { fecha: fecha, relativo: rel };
+  }
+
+  const COM_RUTAS = [
+    { id: 'aportar', n: '1', ico: '🔍', ancla: 'bloqueAportar',
+      tit: 'Ayúdanos a fiscalizar',
+      txt: 'Comparta un dato, una obra de su municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.',
+      efecto: 'Alimenta el trabajo de esta plataforma',
+      aviso: 'No es una denuncia legal', tono: 'gold' },
+    { id: 'denunciar', n: '2', ico: '🏛️', ancla: 'bloqueCanales',
+      tit: 'Canales oficiales de denuncia',
+      txt: 'Las seis puertas del Estado donde un señalamiento se convierte en expediente: qué investiga cada una, si admite anonimato y qué debe tener a la mano.',
+      efecto: 'La única ruta con efecto jurídico',
+      aviso: 'Aquí sí hay consecuencias', tono: 'emerald' },
+    { id: 'debatir', n: '3', ico: '💬', ancla: 'bloquePortal',
+      tit: 'Portal público de diálogo y réplica',
+      txt: 'Ágora abierta con seudónimo para contrastar posturas, citar fuentes y replicar a cualquier argumento, incluidos los nuestros.',
+      efecto: 'Conversación pública argumentada',
+      aviso: 'No sustituye a las dos anteriores', tono: 'cyan' }
+  ];
+
+  function irABloqueComunidad(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 90;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: y, behavior: reduce ? 'instant' : 'smooth' });
+    el.classList.add('pj-nivel-destacado');
+    setTimeout(() => el.classList.remove('pj-nivel-destacado'), 1400);
+  }
+
+  function renderComunidadOrientacion() {
+    const cont = document.getElementById('comOrientacion');
+    if (!cont) return;
+
+    const canales = (DB.comunidad && DB.comunidad.canales_denuncia_oficial) || [];
+    const decalogo = (DB.comunidad && DB.comunidad.principios_contraloria_social) || [];
+
+    cont.innerHTML =
+      '<div class="pjo-wrap">' +
+
+        '<div class="com-rutas" role="list">' +
+          COM_RUTAS.map(r =>
+            '<button type="button" class="com-ruta" data-tono="' + r.tono + '" role="listitem"' +
+            ' onclick="window.AuditEngine.irABloqueComunidad(\'' + r.ancla + '\')">' +
+              '<span class="com-ruta-num" aria-hidden="true">' + r.n + '</span>' +
+              '<span class="com-ruta-ico" aria-hidden="true">' + r.ico + '</span>' +
+              '<span class="com-ruta-tit">' + r.tit + '</span>' +
+              '<span class="com-ruta-txt">' + r.txt + '</span>' +
+              '<span class="com-ruta-efecto">' + r.efecto + '</span>' +
+              '<span class="com-ruta-aviso">' + r.aviso + '</span>' +
+            '</button>').join('') +
+        '</div>' +
+
+        '<div class="com-destino">' +
+          '<div class="com-destino-tit">Antes de escribir: a dónde va a parar lo que escriba</div>' +
+          '<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si su esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>' +
+          '<div class="com-destino-cols">' +
+            '<div class="com-destino-col" data-tono="gold">' +
+              '<div class="com-destino-k">El formulario de esta página</div>' +
+              '<p>Se guarda <strong>únicamente en su propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borra los datos del sitio se pierde. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial con el botón de copiar.</p>' +
+            '</div>' +
+            '<div class="com-destino-col" data-tono="emerald">' +
+              '<div class="com-destino-k">Un canal oficial</div>' +
+              '<p>Ahí sí se abre un expediente con número de folio ante un órgano del Estado, con plazos y con obligación de responder. Es <strong>la única vía que produce consecuencias jurídicas</strong>.</p>' +
+            '</div>' +
+            '<div class="com-destino-col" data-tono="cyan">' +
+              '<div class="com-destino-k">El portal de debate</div>' +
+              '<p>También vive <strong>en su navegador</strong> por ahora. Los hilos que vea publicados son ejemplos sembrados para mostrar cómo funcionará el ágora cuando tenga servidor.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="com-destino-pie"><strong>Lo decimos sin adornos porque es lo honesto:</strong> esta plataforma todavía no aloja lo que usted escribe. Prometer lo contrario sería exactamente el tipo de dato falso que nos descalificaría. Lo que sí está completo y verificado son los ' + canales.length + ' canales oficiales y los ' + decalogo.length + ' puntos del decálogo: ahí cada enlace lleva a una institución real.</div>' +
+        '</div>' +
+
+      '</div>';
+  }
+
   // ==========================================================================
   // GESTOR DEL FORMULARIO DE COMUNIDAD & CONTRALORÍA SOCIAL
   // ==========================================================================
@@ -13795,7 +13920,9 @@
         localStorage.setItem('auditavision_comentarios', JSON.stringify(savedComments));
 
         if (msgStatus) {
-          msgStatus.innerHTML = '✓ ¡Gracias por tu participación! Tu observación cívica ha sido registrada para revisión en la bitácora.';
+          // Decir la verdad sobre el destino del texto: se guarda en este
+          // navegador, no viaja a ningun servidor todavia.
+          msgStatus.textContent = '✓ Guardado en este navegador. Use «Copiar para un canal oficial» si quiere presentarlo ante la ASF, la SABG o una contraloría.';
           msgStatus.style.color = 'var(--emerald-bright)';
         }
         form.reset();
@@ -13804,7 +13931,10 @@
       });
     }
 
+    renderComunidadOrientacion();
+    poblarSelectorEntidades();
     renderCanalesOficiales();
+    renderDecalogoContraloria();
     renderComentariosList();
     initPortalDigital();
   }
@@ -13813,41 +13943,131 @@
     const container = document.getElementById('canalesOficialesContainer');
     if (!container || !DB.comunidad || !DB.comunidad.canales_denuncia_oficial) return;
 
-    container.innerHTML = DB.comunidad.canales_denuncia_oficial.map(c => `
-      <div class="canal-item-card">
-        <div class="canal-ico">${c.icono}</div>
-        <div class="canal-info">
-          <h4>${c.organismo}</h4>
-          <p><strong>${c.herramienta}</strong>: ${c.alcance}</p>
-          <a href="${c.url}" target="_blank" rel="noopener noreferrer">↗ Acceder a la plataforma de denuncia oficial</a>
-        </div>
-      </div>
-    `).join('');
+    container.innerHTML = DB.comunidad.canales_denuncia_oficial.map((c, i) => {
+      const acceso = c.url
+        ? '<a class="canal-cta" href="' + c.url + '" target="_blank" rel="noopener noreferrer">Abrir el canal oficial ↗</a>'
+        : '<span class="canal-sin-url">' + (c.notaSinUrl || 'Consulte el sitio oficial de la institución.') + '</span>';
+      const cita = c.refId
+        ? ' <a class="ref-link" onclick="window.AuditEngine.goToRef(\'' + c.refId + '\')">[fuente]</a>'
+        : '';
+      return '' +
+        '<article class="canal-item-card" data-tono="' + (c.tono || 'neutro') + '">' +
+          '<div class="canal-top">' +
+            '<span class="canal-ico" aria-hidden="true">' + (c.icono || '🏛️') + '</span>' +
+            '<div class="canal-ident">' +
+              '<span class="canal-num" aria-hidden="true">Canal ' + (i + 1) + ' de ' + DB.comunidad.canales_denuncia_oficial.length + '</span>' +
+              '<h4>' + c.organismo + (c.siglas ? ' <span class="canal-siglas">' + c.siglas + '</span>' : '') + '</h4>' +
+              '<span class="canal-herramienta">' + c.herramienta + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<dl class="canal-datos">' +
+            '<div><dt>Para qué sirve</dt><dd>' + c.paraQue + '</dd></div>' +
+            '<div><dt>¿Admite anonimato?</dt><dd>' + c.anonimo + '</dd></div>' +
+            '<div><dt>Qué debe tener a la mano</dt><dd>' + c.queNecesitas + '</dd></div>' +
+            '<div><dt>Qué produce su denuncia</dt><dd>' + c.efecto + cita + '</dd></div>' +
+          '</dl>' +
+          '<div class="canal-pie">' + acceso + '</div>' +
+        '</article>';
+    }).join('');
+  }
+
+  function renderDecalogoContraloria() {
+    const cont = document.getElementById('decalogoContainer');
+    if (!cont || !DB.comunidad || !DB.comunidad.principios_contraloria_social) return;
+    const lista = DB.comunidad.principios_contraloria_social;
+    cont.innerHTML = lista.map(d =>
+      '<article class="dec-punto">' +
+        '<span class="dec-n" aria-hidden="true">' + d.n + '</span>' +
+        '<div class="dec-cuerpo">' +
+          '<h5 class="dec-tit">' + d.titulo + '</h5>' +
+          '<p class="dec-txt">' + d.texto + '</p>' +
+          '<p class="dec-fund"><span aria-hidden="true">📜</span> ' + d.fundamento + '</p>' +
+        '</div>' +
+      '</article>').join('');
   }
 
   function renderComentariosList() {
     const list = document.getElementById('comentariosListContainer');
     if (!list) return;
 
-    const saved = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]');
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]'); } catch (e) { saved = []; }
+
     if (saved.length === 0) {
-      list.innerHTML = `
-        <div style="padding:18px; border:1px dashed var(--border-accent); border-radius:8px; text-align:center; color:var(--text-dim); font-size:12px;">
-          Sé la primera persona en enviar una propuesta de fiscalización o reporte cívico para tu municipio.
-        </div>
-      `;
+      list.innerHTML =
+        '<div class="com-vacio">' +
+          '<span aria-hidden="true">📝</span>' +
+          '<p>Todavía no ha registrado ninguna observación. Lo que escriba aquí queda guardado en este navegador y podrá copiarlo después para presentarlo en un canal oficial.</p>' +
+        '</div>';
       return;
     }
 
-    list.innerHTML = saved.slice(0, 10).map(c => `
-      <div style="background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:8px; padding:14px; margin-bottom:10px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:11px;">
-          <strong style="color:var(--gold-bright); font-family:var(--font-serif);">${c.nombre}</strong>
-          <span style="color:var(--text-dim); font-family:var(--font-mono);">${c.fecha} · <span style="color:var(--cyan);">${c.tipo}</span> (${c.estado})</span>
-        </div>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.5; margin:0;">${c.texto}</p>
-      </div>
-    `).join('');
+    list.innerHTML = saved.slice(0, 10).map(c =>
+      '<article class="com-obs">' +
+        '<div class="com-obs-top">' +
+          '<strong class="com-obs-autor">' + escHtml(c.nombre) + '</strong>' +
+          '<span class="com-obs-meta">' + escHtml(c.fecha) + ' · <span class="com-obs-tipo">' + escHtml(c.tipo) + '</span> · ' + escHtml(c.estado) + '</span>' +
+        '</div>' +
+        '<p class="com-obs-txt">' + escHtml(c.texto) + '</p>' +
+        '<div class="com-obs-acciones">' +
+          '<button type="button" class="com-obs-btn" onclick="window.AuditEngine.copiarObservacion(' + Number(c.id) + ')">Copiar para un canal oficial</button>' +
+          '<button type="button" class="com-obs-btn borrar" onclick="window.AuditEngine.borrarObservacion(' + Number(c.id) + ')">Borrar</button>' +
+        '</div>' +
+      '</article>').join('');
+  }
+
+  /* Puente entre la funcion 1 y la funcion 2: lo que la persona redacto aqui
+     queda listo para pegarse en el formulario de la ASF, la SABG o un OIC. */
+  function copiarObservacion(id) {
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]'); } catch (e) { return; }
+    const c = saved.find(x => String(x.id) === String(id));
+    if (!c) return;
+    const texto =
+      'Observación ciudadana\n' +
+      'Fecha de registro: ' + c.fecha + '\n' +
+      'Tipo: ' + c.tipo + '\n' +
+      'Entidad relacionada: ' + c.estado + '\n' +
+      'Presenta: ' + (c.nombre || 'Ciudadano auditor') + '\n\n' +
+      'Hechos que se señalan:\n' + c.texto + '\n';
+    const avisar = ok => {
+      const el = document.getElementById('comStatusMsg');
+      if (!el) return;
+      el.textContent = ok
+        ? '✓ Texto copiado. Péguelo en el formulario del canal oficial que corresponda.'
+        : 'No se pudo copiar automáticamente. Seleccione el texto de la tarjeta y cópielo a mano.';
+      el.style.color = ok ? 'var(--emerald-bright)' : 'var(--crimson-bright)';
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(() => avisar(true)).catch(() => avisar(false));
+    } else {
+      avisar(false);
+    }
+  }
+
+  function borrarObservacion(id) {
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]'); } catch (e) { return; }
+    saved = saved.filter(x => String(x.id) !== String(id));
+    localStorage.setItem('auditavision_comentarios', JSON.stringify(saved));
+    renderComentariosList();
+  }
+
+  /* El selector traia doce entidades escritas a mano. Se arma con las 32 de
+     la base para que nadie quede fuera de su propio reporte. */
+  function poblarSelectorEntidades() {
+    const sel = document.getElementById('comEstadoSel');
+    if (!sel || !Array.isArray(DB.estados)) return;
+    if (sel.dataset.poblado === 'si') return;
+    const previos = sel.value;
+    const ordenadas = DB.estados.slice().sort((a, b) =>
+      String(a.name || '').localeCompare(String(b.name || ''), 'es'));
+    sel.innerHTML =
+      '<option value="Nacional">Nacional / Federal</option>' +
+      ordenadas.map(e =>
+        '<option value="' + escHtml(e.abbr) + '">' + escHtml(e.name) + '</option>').join('');
+    sel.dataset.poblado = 'si';
+    if (previos) sel.value = previos;
   }
 
   // ==========================================================================
@@ -13855,6 +14075,23 @@
   // ==========================================================================
   let activePortalForumFilter = 'todos';
   let activeStanceSelected = 'matiz';
+
+  /* El foro dice de que pestana habla cada hilo; este mapa lo lleva alli.
+     Antes el selector afirmaba que la deuda estaba en la pestana 6, que es
+     el Modo Inspector: la maquinaria financiera vive en la pestana 2. */
+  const PORTAL_TEMA_PESTANA = {
+    'presupuesto': { tab: 'presupuesto',       etiqueta: 'pestaña 1' },
+    'megaobras':   { tab: 'accion-financiera', etiqueta: 'pestaña 2' },
+    'deuda':       { tab: 'accion-financiera', etiqueta: 'pestaña 2' },
+    'legislativo': { tab: 'legislativo',       etiqueta: 'pestaña 3' },
+    'judicial':    { tab: 'judicial',          etiqueta: 'pestaña 4' },
+    'politicos':   { tab: 'politicos',         etiqueta: 'pestaña 5' }
+  };
+
+  function irAPestanaDesdeDebate(tab) {
+    if (typeof switchTab === 'function') switchTab(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   const NICK_PREFIXES = ['@Auditor', '@Fiscalizador', '@Observador', '@Ciudadano', '@Analista', '@Constitucionalista', '@Economista', '@Vigilante', '@VozCívica', '@Criterio'];
   const NICK_SUFFIXES = ['MX', 'Norte', 'Sureste', 'Regio', 'Libre', 'Crítico', 'Informado', 'Federal', 'Poblano', 'Jalisciense', 'Digital', 'Cívico'];
@@ -13948,34 +14185,39 @@
       const isLiked = likedDebates.includes(d.id);
       const stanceClass = `stance-${d.postura || 'matiz'}`;
       const repliesCount = (d.replicas && d.replicas.length) || 0;
+      // Los hilos sembrados guardan antiguedad, no fecha fija: se calcula aqui.
+      const fechas = (d.dias_atras !== undefined && d.dias_atras !== null)
+        ? fechaRelativa(d.dias_atras)
+        : { fecha: d.fecha || 'Reciente', relativo: d.tiempo_relativo || 'Reciente' };
+      const destino = PORTAL_TEMA_PESTANA[d.tema_id];
 
       return `
         <article class="debate-post-card ${stanceClass}" id="${d.id}">
           <div class="debate-header-row">
             <div class="debate-author-info">
               <div class="user-avatar-circle" style="background:${d.autor_avatar_color || 'var(--gold)'};">
-                ${(d.autor_nick || '@U').replace('@', '').substring(0, 2).toUpperCase()}
+                ${escHtml((d.autor_nick || '@U').replace('@', '').substring(0, 2).toUpperCase())}
               </div>
               <div>
-                <span class="user-nick-text">${d.autor_nick}</span>
-                <div class="debate-time-text">${d.fecha} · ${d.tiempo_relativo || 'Reciente'}</div>
+                <span class="user-nick-text">${escHtml(d.autor_nick)}</span>
+                <div class="debate-time-text">${fechas.fecha} · ${fechas.relativo}</div>
               </div>
             </div>
 
             <div class="debate-badges-row">
               <span class="stance-badge ${d.postura}">
-                ${d.postura_icono || '⚖️'} ${d.postura_nombre || 'Postura'}
+                ${escHtml(d.postura_icono || '⚖️')} ${escHtml(d.postura_nombre || 'Postura')}
               </span>
-              <span class="topic-badge">${d.tema_nombre}</span>
+              <span class="topic-badge">${escHtml(d.tema_nombre)}</span>
             </div>
           </div>
 
-          <h4 class="debate-title-h4">${d.tesis}</h4>
-          <div class="debate-content-body">${d.contenido}</div>
+          <h4 class="debate-title-h4">${escHtml(d.tesis)}</h4>
+          <div class="debate-content-body">${escHtml(d.contenido)}</div>
 
           ${d.fuente ? `
             <div class="debate-source-box">
-              <span>📚 <strong>Fuente citada:</strong> ${d.fuente}</span>
+              <span>📚 <strong>Fuente citada:</strong> ${escHtml(d.fuente)}</span>
               ${d.fuente_url ? `<a href="${d.fuente_url}" target="_blank" rel="noopener noreferrer" style="color:var(--cyan); text-decoration:none;">↗ Consultar documento oficial</a>` : ''}
             </div>
           ` : ''}
@@ -13992,6 +14234,11 @@
             <button class="action-civic-btn" onclick="window.AuditEngine.copyDebateLink('${d.id}')" title="Copiar enlace a este debate">
               <span>🔗</span> <span>Compartir</span>
             </button>
+
+            ${destino ? `
+            <button class="action-civic-btn" onclick="window.AuditEngine.irAPestanaDesdeDebate('${destino.tab}')" title="Abrir los datos que discute este hilo">
+              <span>📂</span> <span>Ver los datos (${destino.etiqueta})</span>
+            </button>` : ''}
           </div>
 
           <!-- Caja desplegable de réplicas e hilo -->
@@ -14001,16 +14248,16 @@
                 <div class="reply-header-row">
                   <div style="display:flex; align-items:center; gap:8px;">
                     <div class="user-avatar-circle" style="width:24px; height:24px; font-size:9.5px; background:${r.autor_avatar_color || '#3b82f6'};">
-                      ${(r.autor_nick || '@R').replace('@', '').substring(0, 2).toUpperCase()}
+                      ${escHtml((r.autor_nick || '@R').replace('@', '').substring(0, 2).toUpperCase())}
                     </div>
-                    <strong style="color:var(--gold-bright); font-family:var(--font-mono); font-size:12px;">${r.autor_nick}</strong>
-                    <span style="font-size:10.5px; color:var(--text-dim); font-family:var(--font-mono);">${r.fecha || 'Reciente'}</span>
+                    <strong style="color:var(--gold-bright); font-family:var(--font-mono); font-size:12px;">${escHtml(r.autor_nick)}</strong>
+                    <span style="font-size:10.5px; color:var(--text-dim); font-family:var(--font-mono);">${fechaRelativa(r.dias_atras).fecha}</span>
                   </div>
                   <span style="font-size:10px; font-family:var(--font-mono); color:var(--cyan); background:rgba(0,180,216,0.1); padding:2px 6px; border-radius:4px; border:1px solid rgba(0,180,216,0.2);">
-                    ${r.tipo_replica || 'Réplica'}
+                    ${escHtml(r.tipo_replica || 'Réplica')}
                   </span>
                 </div>
-                <p style="margin:0; color:var(--text-secondary); font-size:12px; line-height:1.55;">${r.contenido}</p>
+                <p style="margin:0; color:var(--text-secondary); font-size:12px; line-height:1.55;">${escHtml(r.contenido)}</p>
               </div>
             `).join('') : '<div style="font-size:11.5px; color:var(--text-dim); font-style:italic;">Aún no hay réplicas en este hilo. ¡Sé la primera persona en replicar o formular una pregunta!</div>'}
 
@@ -14090,8 +14337,7 @@
       postura_icono: POSTURAS_MAP[postura]?.icono || '⚖️',
       autor_nick: nick.startsWith('@') ? nick : `@${nick}`,
       autor_avatar_color: randomColor,
-      fecha: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }),
-      tiempo_relativo: 'Justo ahora',
+      dias_atras: 0,
       tesis: tesis,
       contenido: contenido,
       fuente: fuente || null,
@@ -14104,7 +14350,7 @@
     savePortalDebates(debates);
 
     if (statusMsg) {
-      statusMsg.innerHTML = '✓ ¡Tu argumento ha sido publicado con éxito en el Portal Público Digital!';
+      statusMsg.textContent = '✓ Publicado en este navegador. Cuando la plataforma tenga servidor, los hilos serán visibles para todas las personas.';
       statusMsg.style.color = '#2ecc71';
       setTimeout(() => { statusMsg.innerHTML = ''; }, 4000);
     }
@@ -14171,7 +14417,7 @@
         id: `rep-${Date.now()}`,
         autor_nick: nick.startsWith('@') ? nick : `@${nick}`,
         autor_avatar_color: randomColor,
-        fecha: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }),
+        dias_atras: 0,
         tipo_replica: tipo,
         contenido: text
       };
@@ -17188,6 +17434,12 @@
     toggleFaq: toggleFaq,
     setMetric: setMetric,
     // Portal Público Digital · Métodos Cívicos
+    renderComunidadOrientacion: renderComunidadOrientacion,
+    irABloqueComunidad: irABloqueComunidad,
+    renderDecalogoContraloria: renderDecalogoContraloria,
+    copiarObservacion: copiarObservacion,
+    borrarObservacion: borrarObservacion,
+    irAPestanaDesdeDebate: irAPestanaDesdeDebate,
     submitNuevoDebate: submitNuevoDebate,
     selectStance: selectStance,
     generarRandomNick: generarRandomNick,

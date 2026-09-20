@@ -10539,3 +10539,556 @@ nav.tabbar button:focus-visible,
   .min-ficha { transition: none; }
   .min-ficha:hover { transform: none; }
 }
+
+/* ==========================================================================
+   PESTANA 9 - COMUNIDAD, CONTRALORIA SOCIAL Y AGORA
+   Tres funciones que antes se mezclaban. La capa de orientacion las separa
+   y dice a donde va a parar lo que cada persona escribe.
+   ========================================================================== */
+
+.com-rutas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.com-ruta {
+  appearance: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 18px 20px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.com-ruta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+}
+
+.com-ruta[data-tono="gold"]    { border-top-color: var(--gold-bright); }
+.com-ruta[data-tono="emerald"] { border-top-color: #2ecc71; }
+.com-ruta[data-tono="cyan"]    { border-top-color: var(--cyan); }
+
+.com-ruta[data-tono="gold"]:hover    { border-color: var(--gold-bright); }
+.com-ruta[data-tono="emerald"]:hover { border-color: rgba(46, 204, 113, 0.6); }
+.com-ruta[data-tono="cyan"]:hover    { border-color: rgba(0, 180, 216, 0.6); }
+
+.com-ruta-num {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.07);
+}
+
+.com-ruta-ico { font-size: 26px; line-height: 1; }
+
+.com-ruta-tit {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  line-height: 1.25;
+}
+
+.com-ruta-txt {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.com-ruta-efecto {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-top: 2px;
+}
+
+.com-ruta-aviso {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+.com-ruta[data-tono="gold"] .com-ruta-aviso    { color: var(--gold-bright); background: rgba(201, 168, 76, 0.13); border: 1px solid var(--border-gold); }
+.com-ruta[data-tono="emerald"] .com-ruta-aviso { color: #2ecc71; background: rgba(46, 204, 113, 0.13); border: 1px solid rgba(46, 204, 113, 0.38); }
+.com-ruta[data-tono="cyan"] .com-ruta-aviso    { color: var(--cyan); background: rgba(0, 180, 216, 0.13); border: 1px solid rgba(0, 180, 216, 0.35); }
+
+.com-destino {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 30px;
+}
+
+.com-destino-tit {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  color: var(--gold-bright);
+  margin-bottom: 4px;
+}
+
+.com-destino-sub {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 78ch;
+  margin: 0 0 16px;
+}
+
+.com-destino-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.com-destino-col {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--border-subtle);
+  border-radius: 9px;
+  padding: 13px 15px;
+}
+
+.com-destino-col[data-tono="gold"]    { border-left-color: var(--gold-bright); }
+.com-destino-col[data-tono="emerald"] { border-left-color: #2ecc71; }
+.com-destino-col[data-tono="cyan"]    { border-left-color: var(--cyan); }
+
+.com-destino-k {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.com-destino-col p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.com-destino-pie {
+  margin-top: 14px;
+  padding: 12px 15px;
+  background: rgba(231, 76, 60, 0.06);
+  border-left: 3px solid var(--crimson-bright);
+  border-radius: 0 8px 8px 0;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 78ch;
+}
+
+.com-destino-pie strong { color: var(--crimson-bright); }
+
+/* --- Bloque 1: guia de lo que vuelve util un reporte --------------------- */
+
+.com-util {
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.com-util-tit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  margin-bottom: 9px;
+}
+
+.com-util-lista {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 5px;
+}
+
+.com-util-lista li {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 78ch;
+}
+
+.com-util-lista strong { color: var(--text-main); }
+
+.com-obs-wrap {
+  margin-top: 26px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 18px;
+}
+
+.com-obs-h4 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.com-vacio {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px dashed var(--border-gold);
+  border-radius: 9px;
+}
+
+.com-vacio span { font-size: 22px; line-height: 1; }
+
+.com-vacio p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-dim);
+  max-width: 78ch;
+}
+
+.com-obs {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.com-obs-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.com-obs-autor {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--gold-bright);
+}
+
+.com-obs-meta {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+}
+
+.com-obs-tipo { color: var(--cyan); }
+
+.com-obs-txt {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  max-width: 78ch;
+  overflow-wrap: anywhere;
+}
+
+.com-obs-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.com-obs-btn {
+  appearance: none;
+  border: 1px solid var(--border-gold);
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--gold-bright);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.com-obs-btn:hover { background: rgba(201, 168, 76, 0.22); color: var(--text-main); }
+
+.com-obs-btn.borrar {
+  border-color: rgba(231, 76, 60, 0.4);
+  background: rgba(231, 76, 60, 0.08);
+  color: var(--crimson-bright);
+}
+
+.com-obs-btn.borrar:hover { background: rgba(231, 76, 60, 0.18); }
+
+/* --- Bloque 2: fichas de los canales oficiales --------------------------- */
+
+.canales-denuncia-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 14px;
+}
+
+.canal-item-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 17px 19px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.canal-item-card:hover { transform: translateY(-2px); border-color: var(--border-gold); }
+
+.canal-item-card[data-tono="gold"]    { border-left-color: var(--gold-bright); }
+.canal-item-card[data-tono="emerald"] { border-left-color: #2ecc71; }
+.canal-item-card[data-tono="crimson"] { border-left-color: var(--crimson-bright); }
+.canal-item-card[data-tono="cyan"]    { border-left-color: var(--cyan); }
+
+.canal-top { display: flex; align-items: flex-start; gap: 12px; }
+
+.canal-ico {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid var(--border-gold);
+}
+
+.canal-ident { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.canal-num {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.canal-ident h4 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.canal-siglas {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  background: rgba(201, 168, 76, 0.13);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+
+.canal-herramienta {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--cyan);
+}
+
+.canal-datos { margin: 0; display: grid; gap: 9px; }
+
+.canal-datos > div {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.canal-datos > div:last-child { border-bottom: none; padding-bottom: 0; }
+
+.canal-datos dt {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.canal-datos dd {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 78ch;
+}
+
+.canal-pie { margin-top: auto; }
+
+.canal-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid var(--border-gold);
+  border-radius: 6px;
+  padding: 7px 14px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.canal-cta:hover { background: rgba(201, 168, 76, 0.22); color: var(--text-main); }
+
+.canal-sin-url {
+  display: block;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--text-dim);
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 7px;
+  padding: 9px 12px;
+  max-width: 78ch;
+}
+
+/* --- Decalogo ------------------------------------------------------------ */
+
+.dec-wrap {
+  margin-top: 26px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+
+.dec-kicker {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.dec-head h4 {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  color: var(--gold-bright);
+  margin: 3px 0 5px;
+}
+
+.dec-head p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 78ch;
+  margin: 0 0 16px;
+}
+
+.dec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.dec-punto {
+  display: flex;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.dec-n {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  color: #0d0f17;
+  background: var(--gold-gradient);
+}
+
+.dec-cuerpo { min-width: 0; }
+
+.dec-tit {
+  font-family: var(--font-serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-main);
+  margin: 0 0 4px;
+}
+
+.dec-txt {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 7px;
+  max-width: 78ch;
+}
+
+.dec-fund {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  margin: 0;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-subtle);
+  max-width: 78ch;
+}
+
+@media (max-width: 720px) {
+  .com-rutas,
+  .canales-denuncia-list,
+  .dec-grid { grid-template-columns: 1fr; }
+  .com-destino,
+  .dec-wrap { padding: 16px; }
+  .com-util-lista li,
+  .com-destino-sub,
+  .com-destino-pie,
+  .canal-datos dd,
+  .dec-txt,
+  .dec-fund,
+  .dec-head p,
+  .com-obs-txt { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .com-ruta,
+  .canal-item-card { transition: none; }
+  .com-ruta:hover,
+  .canal-item-card:hover { transform: none; }
+}
