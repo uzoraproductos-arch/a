@@ -624,44 +624,78 @@
             </p>
           </div>
 
-          <!-- Tira de 4 KPIs Consolidados -->
-          <div id="simuladorKpisStrip" class="sim-kpis-strip"></div>
+          <!-- ================= BLOQUE 1: EL PULSO ================= -->
+          <section class="sim-bloque" id="simBloque1">
+            <header class="sim-bloque-cab">
+              <span class="sim-bloque-num">1</span>
+              <div>
+                <h3 class="sim-bloque-tit">El pulso del gasto</h3>
+                <p class="sim-bloque-sub">Las cuatro cifras de referencia del conjunto completo y la cadencia con la que quiere leerlas. Nada de lo que elija más abajo altera este bloque.</p>
+              </div>
+            </header>
+            <div id="simuladorKpisStrip" class="sim-kpis-strip"></div>
+            <div id="simPeriodoDial"></div>
+          </section>
 
-          <!-- Selectores visuales: temporalidad, sector estrategico y sexenio -->
-          <div id="simPeriodoDial"></div>
-          <div id="simSectorMosaico"></div>
-          <div id="simSexenioLinea"></div>
+          <!-- ================= BLOQUE 2: LOS FILTROS ================= -->
+          <section class="sim-bloque" id="simBloque2">
+            <header class="sim-bloque-cab">
+              <span class="sim-bloque-num">2</span>
+              <div>
+                <h3 class="sim-bloque-tit">¿Por dónde quiere entrar?</h3>
+                <p class="sim-bloque-sub">Elija un sector estratégico o una administración presidencial: al pulsar se abren las fichas vivas de las obras que le corresponden.</p>
+              </div>
+            </header>
+            <div id="simSectorMosaico"></div>
+            <div id="simSexenioLinea"></div>
 
-          <!-- Inventario completo: todas las obras, divididas por sector -->
-          <div id="simPorSector"></div>
+            <!-- Desglose: se despliega al elegir un sector, un sexenio o "Ver todas" -->
+            <div id="simDesglose" class="sim-desglose" hidden>
 
-          <!-- Desglose: se despliega al elegir un sector, un sexenio o "Ver todas" -->
-          <div id="simDesglose" class="sim-desglose" hidden>
+              <div id="simDesgloseCab"></div>
 
-            <div id="simDesgloseCab"></div>
+              <!-- Fichas vivas de las obras: primero, porque son la prioridad -->
+              <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
 
-            <!-- Ordenamiento de la lista -->
-            <div class="sim-control-group" id="simOrdenGrupo">
-              <span class="sim-group-label">&#8645; Ordenar la lista por:</span>
-              <div id="simOrdenChips" class="sim-pill-group"></div>
+              <!-- Ordenamiento de la lista -->
+              <div class="sim-control-group" id="simOrdenGrupo">
+                <span class="sim-group-label">&#8645; Ordenar la lista por:</span>
+                <div id="simOrdenChips" class="sim-pill-group"></div>
+              </div>
+
+              <!-- Comparativa de las obras filtradas -->
+              <div id="simRanking"></div>
+
+              <!-- Tres mesas de calculo: de cero al resultado final -->
+              <div id="simTablas"></div>
+
             </div>
+          </section>
 
-            <!-- Comparativa de las obras filtradas -->
-            <div id="simRanking"></div>
+          <!-- ================= BLOQUE 3: OBRA POR OBRA ================= -->
+          <section class="sim-bloque" id="simBloque3">
+            <header class="sim-bloque-cab">
+              <span class="sim-bloque-num">3</span>
+              <div>
+                <h3 class="sim-bloque-tit">Obra por obra, peso por peso</h3>
+                <p class="sim-bloque-sub">El inventario completo dividido por sector, con lo aprobado, lo erogado y la diferencia de cada obra, y contra qué se compara ese dinero.</p>
+              </div>
+            </header>
+            <div id="simPorSector"></div>
 
-            <!-- Tres mesas de calculo: de cero al resultado final -->
-            <div id="simTablas"></div>
+            <!-- Escala: contra que se compara este dinero -->
+            <div id="simEscala"></div>
 
-            <!-- Cuadricula de fichas de obras e inversiones -->
-            <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
+            <!-- Procedencia y advertencias metodologicas -->
+            <div id="simProcedencia"></div>
+          </section>
 
+          <!-- Contador flotante: aparece cuando la tira del bloque 1 sale de vista -->
+          <div id="simTelFlota" class="sim-tel-flota" hidden>
+            <span class="sim-tel-punto"></span>
+            <span class="sim-tel-lbl">Telemetría viva acumulada</span>
+            <span class="sim-tel-val" id="simTelFlotaVal">+$0.00</span>
           </div>
-
-          <!-- Escala: contra que se compara este dinero (siempre visible) -->
-          <div id="simEscala"></div>
-
-          <!-- Procedencia y advertencias metodologicas -->
-          <div id="simProcedencia"></div>
 
         </div>
       </div><!-- FIN SUBPANEL 2.2 -->

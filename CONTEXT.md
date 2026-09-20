@@ -546,6 +546,13 @@ de los 32 circuitos.
   diferencia, sobrecosto y cuota del total; cabecera de sector con nota al pie y salto a la ficha desde
   cada renglon. Incluye leyenda de unidades y el pendiente declarado del informe puntual por obra.
 
+**Hecho — 2.2 en tres bloques y telemetria contra reloj.**
+- La subpestana 2.2 se reorganiza en tres secciones numeradas: (1) *El pulso del gasto* con la tira de cuatro indicadores y la temporalidad; (2) *¿Por donde quiere entrar?* con sector estrategico, administracion presidencial y el desglose que abren; (3) *Obra por obra, peso por peso* con el inventario por sector, la escala y la procedencia.
+- Las fichas vivas de obra suben al primer lugar dentro del desglose: al pulsar un sector o un sexenio aparecen antes que el ordenamiento, la comparativa y las mesas.
+- **Defecto corregido:** el contador de telemetria viva se reiniciaba a cero en cada re-dibujo (elegir sector, sexenio o cadencia) porque el `innerHTML` de la tira lo reescribia en `+$0.00` y los segundos se contaban por pulsos de `setInterval`. Ahora se calcula contra el reloj desde `state.simuladorInicioVista` y se repinta en el mismo render, asi que ningun filtro lo toca.
+- Pastilla flotante `#simTelFlota`: cuando la tira del bloque 1 sale de vista, el acumulado se reduce a una pastilla anclada a la esquina inferior; un `IntersectionObserver` la muestra y la oculta, y desaparece al salir de la 2.2.
+- Se retiran tres notas al pie manuales que duplicaban al autolink (`[14] [14]` en procedencia y en los cierres de las mesas 1 y 2).
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

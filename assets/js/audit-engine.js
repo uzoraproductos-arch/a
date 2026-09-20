@@ -44,7 +44,12 @@
     simuladorDesglose: false,
     simuladorSexenio: 'todos',
     simuladorTickerTimer: null,
-    simuladorElapsedSeconds: 0
+    simuladorElapsedSeconds: 0,
+    /* Marca de tiempo en que se abrio la vista 2.2. El acumulado se
+       calcula contra el reloj, no contando pulsos: asi ningun re-dibujo
+       (elegir sector, sexenio o cadencia) lo devuelve a cero ni lo
+       atrasa cuando la pestana pierde el foco. */
+    simuladorInicioVista: null
   };
 
   // ==========================================================================
@@ -2138,6 +2143,7 @@
     'sim-sec-t', 'sim-sec-n', 'sim-sec-ico', 'sim-sec-meta', 'sim-sec-pct',
     'sim-sec-cuota', 'sim-sec-b', 'sim-sec-ob-ico',
     'sim-dc-l', 'sim-dc-v', 'sim-dc-s',
+    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val',
     'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
     'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
     'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
@@ -14952,7 +14958,7 @@
           '<li><strong>Los agregados se suman, no se escriben.</strong> ' + (t.nota_totales || '') + '</li>' +
           '<li><strong>La pérdida por segundo.</strong> Se obtiene dividiendo la pérdida anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que usted lleva mirando.</li>' +
           '<li><strong>El sobrecosto del conjunto.</strong> Compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>' +
-          '<li><strong>Los hallazgos de auditoría</strong> que cita cada ficha provienen de la fiscalización de la Cuenta Pública de la Auditoría Superior de la Federación.' + vsxRefLink('ref-asf-cp') + '</li>' +
+          '<li><strong>Los hallazgos de auditoría</strong> que cita cada ficha provienen de la fiscalización de la Cuenta Pública de la Auditoría Superior de la Federación.</li>' +
           '<li><strong>Pendiente declarado.</strong> Cada obra todavía no lleva la referencia puntual del informe que sustenta su cifra. Mientras eso no exista, estas cifras se presentan como consolidación documental y no como dato auditado renglón por renglón.</li>' +
         '</ul>' +
       '</section>';
@@ -15225,7 +15231,7 @@
       '</table></div>' +
       '<p class="sim-mesa-cierre">Se aprobaron <strong>' + simMdp(ag.presu) + '</strong> y se erogaron <strong>' + simMdp(ag.real) +
         '</strong>. La diferencia es de <strong>' + simMdp(ag.brecha) + '</strong>, un <strong>' +
-        (ag.sobrecosto > 0 ? '+' : '') + ag.sobrecosto.toFixed(1) + '%</strong> sobre lo autorizado. Las cifras de obra provienen de la fiscalización de la Cuenta Pública.' + vsxRefLink('ref-asf-cp') + '</p>' +
+        (ag.sobrecosto > 0 ? '+' : '') + ag.sobrecosto.toFixed(1) + '%</strong> sobre lo autorizado. Las cifras de obra provienen de la fiscalización de la Cuenta Pública.</p>' +
     '</article>';
   }
 
@@ -15278,7 +15284,7 @@
         }).join('<span class="sim-cad-fl">→</span>') +
       '</div>' +
       '<p class="sim-mesa-cierre">Ese último eslabón, <strong>$' + ag.perdidaSegundo.toFixed(2) +
-        ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.' + vsxRefLink('ref-asf-cp') + '</p>' +
+        ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>' +
     '</article>';
   }
 
@@ -15502,7 +15508,7 @@
 
         <div class="sim-kpi-card alert-kpi">
           <div class="sim-kpi-lbl">🔴 Telemetría Viva Acumulada</div>
-          <div class="sim-kpi-val loss-val" id="simLiveGlobalCounter" data-rate="${agT.perdidaSegundo.toFixed(2)}">+$0.00</div>
+          <div class="sim-kpi-val loss-val" id="simLiveGlobalCounter" data-rate="${agT.perdidaSegundo.toFixed(2)}">${simTelemetriaTexto(agT.perdidaSegundo)}</div>
           <div class="sim-kpi-sub">Al ritmo de $${agT.perdidaSegundo.toFixed(2)} por segundo, desde que abrió esta vista</div>
         </div>
       `;
@@ -15535,6 +15541,7 @@
 
     // 4. Iniciar Ticker en Vivo
     initLiveLossTicker();
+    initSimTelemetriaFlotante();
   }
 
   function renderSimuladorObrasGrid() {
@@ -15678,23 +15685,53 @@
     renderSimuladorMegaobras();
   }
 
+  /* Segundos transcurridos desde que se abrio la 2.2, medidos contra el
+     reloj del sistema. */
+  function simSegundosEnVista() {
+    if (!state.simuladorInicioVista) state.simuladorInicioVista = Date.now();
+    return (Date.now() - state.simuladorInicioVista) / 1000;
+  }
+
+  function simTelemetriaTexto(ritmo) {
+    const total = simSegundosEnVista() * (parseFloat(ritmo) || 0);
+    return '+$' + total.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* La pastilla flotante solo tiene sentido cuando la tira del bloque 1
+     ya no se ve y mientras la 2.2 esta en pantalla. */
+  let simTelObs = null;
+  function initSimTelemetriaFlotante() {
+    const tira = document.getElementById('simuladorKpisStrip');
+    const flota = document.getElementById('simTelFlota');
+    if (!tira || !flota || simTelObs) return;
+    if (typeof IntersectionObserver !== 'function') return;
+    simTelObs = new IntersectionObserver((entradas) => {
+      const panel = document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]');
+      const enVista = panel && panel.offsetParent !== null;
+      flota.hidden = !enVista || entradas[0].isIntersecting;
+    }, { threshold: 0 });
+    simTelObs.observe(tira);
+  }
+
   function initLiveLossTicker() {
+    if (!state.simuladorInicioVista) state.simuladorInicioVista = Date.now();
     if (state.simuladorTickerTimer) {
       clearInterval(state.simuladorTickerTimer);
     }
 
     state.simuladorTickerTimer = setInterval(() => {
-      state.simuladorElapsedSeconds++;
-      const seconds = state.simuladorElapsedSeconds;
+      const seconds = simSegundosEnVista();
+      state.simuladorElapsedSeconds = Math.floor(seconds);
 
-      // 1. Contador global. El ritmo lo trae el propio elemento, calculado
-      //    sobre las obras que el filtro dejo en pie: si se filtra un sector,
-      //    el contador pasa a medir ese sector y no el consolidado.
+      // 1. Contador global. Mide SIEMPRE el ritmo del universo completo y
+      //    acumula desde que se abrio la vista: los filtros de sector y de
+      //    sexenio no lo tocan, y un re-dibujo tampoco lo regresa a cero.
       const globalEl = document.getElementById('simLiveGlobalCounter');
       if (globalEl) {
-        const consolidatedRate = parseFloat(globalEl.dataset.rate) || 0;
-        const totalPesos = seconds * consolidatedRate;
-        globalEl.textContent = `+$${totalPesos.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        const texto = simTelemetriaTexto(globalEl.dataset.rate);
+        globalEl.textContent = texto;
+        const flotaVal = document.getElementById('simTelFlotaVal');
+        if (flotaVal) flotaVal.textContent = texto;
       }
 
       // 2. Contadores individuales de cada tarjeta
