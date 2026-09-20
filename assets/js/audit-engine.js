@@ -54,7 +54,10 @@
        comportamiento del de la 5.1: las barras nacen en cero y crecen a
        su escala real al evaluar. */
     simCompEvaluado: false,
-    simCompHover: true
+    simCompHover: true,
+    /* Simulador de la linea presidencial, al modo de la 5.4: los seis
+       sexenios arrancan en cero y crecen a su escala real al evaluar. */
+    simSexEvaluado: false
   };
 
   // ==========================================================================
@@ -15265,30 +15268,54 @@
     const tope = Math.max.apply(null, conteos) || 1;
     const compartida = simObrasDe('todos', 'todos').some(o => o.presidente.indexOf('/') > -1);
 
+    const ev = state.simSexEvaluado;
+    const estado = ev
+      ? '<span style="color:var(--emerald-bright);">✓ Evaluación completada: los seis periodos a escala real.</span>'
+      : '⚪ Periodos en reposo (0 obras / $0). Pulse «Evaluar» para levantarlos desde cero.';
+
     cont.innerHTML =
       '<section class="sim-sel sim-sel-sex">' +
         '<div class="sim-sel-cab">' +
           '<span class="sim-sel-ico">🏛️</span>' +
           '<div><h3 class="sim-sel-tit">Administración presidencial</h3>' +
-          '<p class="sim-sel-sub">Treinta y seis años de obra pública en una sola línea. La altura de cada bloque es el número de obras evaluadas en ese periodo.</p></div>' +
+          '<p class="sim-sel-sub">Treinta y seis años de obra pública en una sola línea. La altura de cada bloque es el número de obras evaluadas en ese periodo. ' +
+            'Todos arrancan en cero: pulse «Evaluar» para verlos levantarse a su escala real.</p></div>' +
           '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
             'onclick="window.AuditEngine.setSimuladorSexenio(\'todos\')">🕰️ Todo el periodo</button>' +
         '</div>' +
+
+        '<div class="evaluacion-controls-bar sim-sex-barra">' +
+          '<div class="eval-info-group">' +
+            '<span class="eval-badge">SIMULADOR SEXENAL</span>' +
+            '<span class="eval-status-text" id="simSexEstado">' + estado + '</span>' +
+          '</div>' +
+          '<div class="eval-actions-group">' +
+            '<button type="button" class="eval-btn-primary" id="simSexBtn" onclick="window.AuditEngine.simSexEvaluar()">' +
+              '<span>' + (ev ? '🔄' : '▶️') + '</span> ' + (ev ? 'Volver a evaluar' : 'Evaluar los seis sexenios') + '</button>' +
+            '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.simSexReiniciar()">' +
+              '<span>↺</span> Reiniciar a ceros</button>' +
+          '</div>' +
+        '</div>' +
+
         '<div class="sim-linea">' +
           SIM_SEXENIOS.map((x, i) => {
             const n = conteos[i];
             const obras = simObrasDe(sector, x.k);
             const real = obras.reduce((a, o) => a + o.inversion_real_mdp, 0);
-            const alto = 12 + (n / tope) * 34;
+            const alto = n === 0 ? 0 : 14 + (n / tope) * 76;
             return '<button type="button" class="sim-seg' + (x.k === activo ? ' on' : '') + (n === 0 ? ' sim-seg-vacio' : '') + '" ' +
                 (n === 0 ? 'disabled ' : '') +
                 'data-sexenio="' + x.k + '" ' +
                 'onclick="window.AuditEngine.setSimuladorSexenio(\'' + x.k + '\')">' +
-              '<span class="sim-seg-n">' + n + '</span>' +
-              '<span class="sim-seg-torre" style="height:' + alto.toFixed(0) + 'px; background:' + x.color + ';"></span>' +
+              '<span class="sim-seg-n" id="simSexN_' + i + '" data-n="' + n + '">' + (ev ? n : 0) + '</span>' +
+              '<span class="sim-seg-riel">' +
+                '<span class="sim-seg-torre" id="simSexTorre_' + i + '" data-alto="' + alto.toFixed(0) + '" ' +
+                  'style="height:' + (ev ? alto.toFixed(0) : '0') + 'px; background:' + x.color + ';"></span>' +
+              '</span>' +
               '<span class="sim-seg-nom">' + x.nom + '</span>' +
               '<span class="sim-seg-anios">' + x.ini + '–' + x.fin + '</span>' +
-              '<span class="sim-seg-cif">' + (n ? simMdp(real) : 'sin obras aquí') + '</span>' +
+              '<span class="sim-seg-cif" id="simSexCif_' + i + '" data-real="' + real + '">' +
+                (n === 0 ? 'sin obras aquí' : (ev ? simMdp(real) : simMdp(0))) + '</span>' +
             '</button>';
           }).join('') +
         '</div>' +
@@ -15298,6 +15325,84 @@
             'así que aparece en ambos bloques. Por eso la suma de los seis periodos da trece obras y no doce: una misma obra tiene dos responsables, no medio responsable cada uno.</p>'
           : '') +
       '</section>';
+  }
+
+  /* ---------------------------------------------------------------
+     SIMULADOR SEXENAL (bloque 2, parte B)
+
+     Al modo del simulador de la 5.4: las seis torres nacen en cero y
+     se levantan hasta su altura real, con el numero de obras y el
+     costo contando en paralelo. Sin casilla de cursor: solo evaluar y
+     reiniciar, como se pidio.
+     --------------------------------------------------------------- */
+
+  let simSexAnimFrame = null;
+
+  function simSexEvaluar(duracionMs) {
+    const dur = duracionMs || 1400;
+    if (simSexAnimFrame) { cancelAnimationFrame(simSexAnimFrame); simSexAnimFrame = null; }
+
+    const estadoEl = document.getElementById('simSexEstado');
+    const btn = document.getElementById('simSexBtn');
+    if (estadoEl) estadoEl.innerHTML = '<span style="color:var(--gold-bright);">⚡ Levantando los seis periodos desde cero…</span>';
+    if (btn) btn.innerHTML = '<span>⏳</span> Evaluando…';
+
+    const inicio = performance.now();
+    const suavizar = t => (--t) * t * t + 1;
+
+    function paso(ahora) {
+      const avance = Math.min(1, (ahora - inicio) / dur);
+      const e = suavizar(avance);
+      SIM_SEXENIOS.forEach((x, i) => {
+        const torre = document.getElementById('simSexTorre_' + i);
+        const num = document.getElementById('simSexN_' + i);
+        const cif = document.getElementById('simSexCif_' + i);
+        if (torre) torre.style.height = ((parseFloat(torre.dataset.alto) || 0) * e).toFixed(0) + 'px';
+        if (num) num.textContent = Math.round((parseFloat(num.dataset.n) || 0) * e);
+        if (cif && cif.dataset.real !== undefined) {
+          const real = parseFloat(cif.dataset.real) || 0;
+          if (real > 0) cif.textContent = simMdp(real * e);
+        }
+      });
+      if (avance < 1) {
+        simSexAnimFrame = requestAnimationFrame(paso);
+      } else {
+        simSexAnimFrame = null;
+        state.simSexEvaluado = true;
+        // Valores finales exactos, sin arrastre de redondeo.
+        SIM_SEXENIOS.forEach((x, i) => {
+          const torre = document.getElementById('simSexTorre_' + i);
+          const num = document.getElementById('simSexN_' + i);
+          const cif = document.getElementById('simSexCif_' + i);
+          if (torre) torre.style.height = torre.dataset.alto + 'px';
+          if (num) num.textContent = num.dataset.n;
+          if (cif && cif.dataset.real !== undefined) {
+            const real = parseFloat(cif.dataset.real) || 0;
+            if (real > 0) cif.textContent = simMdp(real);
+          }
+        });
+        if (estadoEl) estadoEl.innerHTML = '<span style="color:var(--emerald-bright);">✓ Evaluación completada: los seis periodos a escala real.</span>';
+        if (btn) btn.innerHTML = '<span>🔄</span> Volver a evaluar';
+      }
+    }
+    simSexAnimFrame = requestAnimationFrame(paso);
+  }
+
+  function simSexReiniciar() {
+    if (simSexAnimFrame) { cancelAnimationFrame(simSexAnimFrame); simSexAnimFrame = null; }
+    state.simSexEvaluado = false;
+    SIM_SEXENIOS.forEach((x, i) => {
+      const torre = document.getElementById('simSexTorre_' + i);
+      const num = document.getElementById('simSexN_' + i);
+      const cif = document.getElementById('simSexCif_' + i);
+      if (torre) torre.style.height = '0px';
+      if (num) num.textContent = '0';
+      if (cif && (parseFloat(cif.dataset.real) || 0) > 0) cif.textContent = simMdp(0);
+    });
+    const estadoEl = document.getElementById('simSexEstado');
+    const btn = document.getElementById('simSexBtn');
+    if (estadoEl) estadoEl.textContent = '⚪ Periodos en reposo (0 obras / $0). Pulse «Evaluar» para levantarlos desde cero.';
+    if (btn) btn.innerHTML = '<span>▶️</span> Evaluar los seis sexenios';
   }
 
   /* --- Cabecera del desglose: que se esta viendo y como replegarlo --- */
@@ -19535,6 +19640,8 @@
     simCompReiniciar: simCompReiniciar,
     simCompToggleHover: simCompToggleHover,
     simCompHoverEntra: simCompHoverEntra,
+    simSexEvaluar: simSexEvaluar,
+    simSexReiniciar: simSexReiniciar,
     cerrarSimuladorDesglose: cerrarSimuladorDesglose,
     simLlevarACalculadora: simLlevarACalculadora,
     renderConstitucionEconomica: renderConstitucionEconomica,

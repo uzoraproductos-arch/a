@@ -560,6 +560,12 @@ de los 32 circuitos.
 - Los cinco criterios (perdida anual, sobrecosto, costo real, pesos de mas, cronologia) suben al simulador comparativo; cambiar de criterio reordena y vuelve a animar si ya estaba evaluado. Se retira `renderSimuladorOrden()` y el contenedor `#simOrdenChips`.
 - Las tres mesas de calculo bajan al bloque 3, que queda como: mesas, inventario por sector, escala y procedencia.
 
+**Hecho — simulador sexenal en la linea presidencial (2.2, bloque 2, parte B).**
+- La linea del tiempo 1988–2024 se vuelve simulador al modo de la 5.4: las seis torres nacen en cero y se levantan a su altura real con `requestAnimationFrame` y suavizado cubico, mientras el numero de obras y el costo del periodo cuentan en paralelo.
+- Barra de control con solo dos mandos, como se pidio: «Evaluar los seis sexenios» y «Reiniciar a ceros». Sin casilla de evaluacion al pasar el cursor.
+- Carril `.sim-seg-riel` de altura fija (92 px): la torre crece desde la base sin mover el resto de la loseta. Se retiran de `.sim-seg-torre` el `min-height: 12px` (impedia llegar a cero) y la `transition: height`, que competia con la animacion por fotograma.
+- Las torres pasan de 12–46 px a 0–90 px, para que el crecimiento se lea.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
