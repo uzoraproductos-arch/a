@@ -4243,10 +4243,10 @@
            ==================================================================== -->
       <div class="subtab-panel" data-parent="politicos" data-subpanel="versus-porfirio">
         
-        <div class="versus-porfirio-container">
+        <div class="versus-porfirio-container" id="versus54Raiz">
           
           <!-- Hero Institucional de la Comparativa Histórica -->
-          <div class="versus-hero-box">
+          <div class="versus-hero-box vfoco-ocultar">
             <span class="hero-tag" style="background:rgba(201,168,76,0.18); color:var(--gold-bright); border:1px solid var(--gold);">
               👑 La Gran Balanza Histórica · 1876–1911 vs 1833–2026
             </span>
@@ -4283,7 +4283,10 @@
           </div>
 
           <!-- Capa de orientación: cómo se juega y qué cuidados exige la comparación -->
-          <div id="versusOrientacion"></div>
+          <div id="versusOrientacion" class="vfoco-ocultar"></div>
+
+          <!-- Aviso de modo desglose: se llena cuando una variable queda en pantalla completa -->
+          <div id="versusFoco"></div>
 
           <!-- Barra de Herramientas: Selector de Métricas y Controles de Gráfica -->
           <div class="versus-toolbar">
@@ -4341,6 +4344,9 @@
             <div id="versusChartStage" onmouseenter="window.AuditEngine.handleVersusStageHover()" ontouchstart="window.AuditEngine.handleVersusStageHover()"></div>
           </div>
 
+          <!-- Desglose de la variable seleccionada: ranking, brechas y procedencia -->
+          <div id="versusDesglose"></div>
+
           <!-- Selector Rápido de Presidentes para Comparación Directa -->
           <div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
@@ -4355,7 +4361,7 @@
           <div id="versusScorecardContainer" style="display:none; margin-top:20px; margin-bottom:24px; scroll-margin-top:80px;"></div>
 
           <!-- Tabla / Matriz General Comparativa Multidimensional -->
-          <div class="casilla-bloque" style="padding:22px; border:1px solid var(--border-gold); background:var(--bg-card); border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+          <div class="casilla-bloque vfoco-ocultar" style="padding:22px; border:1px solid var(--border-gold); background:var(--bg-card); border-radius:14px; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
               <div>
                 <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); text-transform:uppercase; letter-spacing:1px; font-weight:700;">
@@ -4373,16 +4379,16 @@
           </div>
 
           <!-- La cifra detrás de la cifra: verificación de las tres estadísticas más citadas -->
-          <div id="versusPrecisiones"></div>
+          <div id="versusPrecisiones" class="vfoco-ocultar"></div>
 
           <!-- El otro balance: los indicadores sociales que el tablero hacendario no mide -->
-          <div id="versusBalanceSocial"></div>
+          <div id="versusBalanceSocial" class="vfoco-ocultar"></div>
 
           <!-- Trazabilidad: de dónde sale cada cifra de la subpestaña -->
-          <div id="versusFuentes"></div>
+          <div id="versusFuentes" class="vfoco-ocultar"></div>
 
           <!-- Muelle de Navegación Rápida -->
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:10px; padding:16px 20px; background:var(--bg-card); border:1px solid var(--border-gold); border-radius:12px;">
+          <div class="vfoco-ocultar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:10px; padding:16px 20px; background:var(--bg-card); border:1px solid var(--border-gold); border-radius:12px;">
             <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim);">
               🏛️ Auditavisión · Subpestaña 5.4: Versus General Don Porfirio Díaz
             </div>

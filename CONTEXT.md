@@ -406,6 +406,44 @@ de los 32 circuitos.
   la reconstrucción del salario mínimo real en pesos de 2018 con datos de la
   CONASAMI.
 
+- **Modo desglose en la 5.4.** Al elegir una variable en la barra de
+  herramientas, la subpestaña se reduce a esa sola variable: la raíz
+  `#versus54Raiz` recibe la clase `.vfoco-on` y los siete bloques marcados con
+  `.vfoco-ocultar` —portada, capa de orientación, matriz comparativa, las tres
+  cifras verificadas, el balance social, la trazabilidad y el muelle de
+  navegación— se repliegan. Quedan en pantalla el aviso de desglose, los chips
+  de variables, la gráfica y el nuevo bloque `#versusDesglose`. Nada se
+  destruye: «Volver al tablero completo» lo devuelve todo, y `switchSubtab`
+  apaga el modo para que nadie encuentre la 5.4 a medio replegar.
+- **Bloque de desglose.** Cuatro tarjetas de cabecera —quién encabeza, quién
+  cierra, dónde queda Don Porfirio Díaz y su distancia contra el promedio de
+  los otros nueve—, el orden de los diez mandatarios con riel divergente
+  anclado en el cero, la distancia de cada uno frente a Díaz y la procedencia
+  del dato con su referencia. Cada renglón abre el marcador cara a cara.
+- **El gasto público no lleva medallas.** Su `sentido_positivo` es nulo, así
+  que la lista se ordena de mayor a menor y lo dice con todas sus letras: el
+  tamaño del gasto depende de qué funciones asume el Estado, no del mérito de
+  quien gobierna.
+- **La métrica ferroviaria estaba mal nombrada.** Se llamaba «km acumulados»
+  pero los datos son kilómetros atribuibles a cada periodo, y el −19,000 de
+  1994–2000 es la extinción de Ferrocarriles Nacionales y el retiro del
+  servicio de pasajeros, no vía levantada. Corregidos el nombre y la
+  descripción; los 19,280 km de Díaz son de 31 años, no de un sexenio.
+- **La gráfica de barras dibujaba los negativos como logros.** La altura se
+  calcula con el valor absoluto, así que −19,000 km levantaba una barra casi
+  tan alta como la de Díaz. Ahora esas barras van rayadas en diagonal y con
+  filo rojo, y un pie de gráfica explica que la altura mide tamaño, no
+  dirección. En el desglose esas mismas cifras sí quedan ordenadas.
+- **La línea «Nivel Díaz» estaba entre 116 y 148 px fuera de lugar.** Las
+  columnas llevan una transición CSS de 0.5 s, de modo que al cerrar la
+  animación de JS todavía estaban creciendo y la línea se medía contra una
+  altura intermedia. Se vuelve a medir 560 ms después, y la fórmula descuenta
+  el filo inferior del escenario. El rótulo ya no se corta: se parte en dos
+  líneas dentro de su canaleta.
+- **Sin barra de desplazamiento visible.** El escenario de la gráfica, el
+  contenedor lineal y la matriz siguen desplazándose con el dedo o la rueda,
+  pero ya no dibujan la barra gris.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

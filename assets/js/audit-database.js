@@ -7028,12 +7028,12 @@ window.AUDIT_DB = {
           "ref_fuente": "ref-pef2026"
         },
         "ferrocarriles_km": {
-          "nombre": "Infraestructura Ferroviaria (km acumulados)",
+          "nombre": "Tendido Ferroviario Atribuible al Periodo (km)",
           "icono": "🛤️",
           "unidad": "km de vías",
           "diaz_val": 19280,
           "diaz_str": "19,280 km construidos",
-          "descripcion": "Kilómetros de tendido férreo construidos, rescatados o impulsados para pasajeros y carga.",
+          "descripcion": "Kilómetros de vía férrea construidos, rescatados o impulsados durante el periodo, no el acervo del país. La cifra negativa de 1994–2000 corresponde a la extinción de Ferrocarriles Nacionales y al retiro del servicio de pasajeros, no a vía levantada; y los 19,280 km de Don Porfirio Díaz son el resultado de 31 años, no de un sexenio.",
           "sentido_positivo": true,
           "fuente_dato": "Kilometraje de vía férrea del INEGI y de la Agencia Reguladora del Transporte Ferroviario; la cifra de 1910 procede de Ferrocarriles Nacionales de México.",
           "ref_fuente": "ref-inegi-social-porfiriato"

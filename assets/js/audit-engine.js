@@ -1837,6 +1837,7 @@
       else if (subKey === 'curiosos') renderPoliticosCuriosos();
         else if (subKey === 'versus-porfirio') {
           vsxReiniciarAutoArranque();
+          vfocoApagar();
           renderVersusPorfirio();
         }
     } else if (parentTab === 'accion-financiera') {
@@ -2030,6 +2031,9 @@
   // Etiquetas, distintivos y celdas de dato: son rótulos, no prosa. Vincular
   // dentro de ellos rompe su maquetación y no ayuda a leer.
   const AUTOLINK_OMITIR_CLASES = new Set([
+    'versus-nota-signo', 'vfoco-volver', 'vdg-kicker', 'vdg-tar-k', 'vdg-tar-v', 'vdg-tar-n',
+    'vdg-orden-k', 'vdg-lugar', 'vdg-medalla', 'vdg-val', 'vdg-dist',
+    'vdg-pista', 'vdg-proc-k',
     'vsx-paso-n', 'vsx-paso-tit', 'vsx-paso-pista', 'vsx-cj-kicker',
     'vsx-cau-h', 'vsx-fuente-n', 'vsx-fuentes-tit',
     'vpr-kicker', 'vpr-item-n', 'vpr-item-tit', 'vpr-leccion-k',
@@ -11409,6 +11413,245 @@
     Object.keys(vsxYaArrancado).forEach(k => { delete vsxYaArrancado[k]; });
   }
 
+  /* ============================================================================
+     SUBPESTANA 5.4 - MODO DESGLOSE DE UNA SOLA VARIABLE
+     Al elegir una variable en la barra de herramientas, el tablero completo se
+     repliega y la subpestana queda reducida a esa variable: la grafica sola, el
+     orden de los diez mandatarios, las brechas y la procedencia del dato. Los
+     demas bloques se ocultan con la clase .vfoco-on sobre la raiz y regresan
+     con «Volver al tablero completo». Nada se destruye: solo se esconde.
+     ============================================================================ */
+
+  let vfocoActivo = false;
+
+  function vfocoDatos() {
+    return DB.personajes_politicos ? DB.personajes_politicos.porfirio_diaz_versus : null;
+  }
+
+  /* Reune a los diez mandatarios en una sola lista ordenada por la variable
+     vigente. El sentido de la metrica decide que extremo encabeza: en deuda va
+     primero quien menos debe, en crecimiento quien mas crece, y el tamano del
+     gasto no se ordena por merito porque no lo tiene. */
+  function vfocoRanking() {
+    const data = vfocoDatos();
+    if (!data) return null;
+    const metric = data.metricas_catalogo[currentVersusMetric];
+    if (!metric) return null;
+
+    const fila = (p, esDiaz) => ({
+      id: p.id,
+      nombre: p.nombre,
+      periodo: p.periodo,
+      color: p.color,
+      simbolo: p.avatar_simbolo || '👑',
+      valor: Number(p.metricas[currentVersusMetric]),
+      esDiaz: !!esDiaz
+    });
+
+    const lista = [fila(data.general_diaz, true)]
+      .concat(data.mandatarios_comparativa.map(p => fila(p, false)))
+      .filter(f => !isNaN(f.valor));
+
+    const mayorEsMejor = metric.sentido_positivo !== false;
+    lista.sort((a, b) => mayorEsMejor ? b.valor - a.valor : a.valor - b.valor);
+    lista.forEach((f, i) => { f.lugar = i + 1; });
+
+    const valores = lista.map(f => f.valor);
+    const otros = lista.filter(f => !f.esDiaz);
+
+    return {
+      metric: metric,
+      lista: lista,
+      diaz: lista.find(f => f.esDiaz),
+      encabeza: lista[0],
+      cierra: lista[lista.length - 1],
+      maximo: Math.max.apply(null, valores),
+      minimo: Math.min.apply(null, valores),
+      promedioOtros: otros.length ? otros.reduce((s, f) => s + f.valor, 0) / otros.length : 0,
+      normativa: metric.sentido_positivo !== null
+    };
+  }
+
+  /* Geometria de la barra de cada fila. Cuando la variable tiene valores
+     negativos —el balance fiscal, o la extincion de Ferronales— la barra no
+     puede arrancar en el piso de la escala: un «0 km» dibujaria media barra y
+     pareceria un resultado intermedio. El riel se ancla en el cero y las
+     cifras negativas crecen hacia la izquierda. */
+  function vfocoGeometria(r, valor) {
+    const piso = Math.min(0, r.minimo);
+    const techo = Math.max(0, r.maximo);
+    const rango = techo - piso;
+    if (!rango) return { izq: 0, ancho: 0, cero: 0, neg: false };
+    const cero = ((0 - piso) / rango) * 100;
+    const largo = (Math.abs(valor) / rango) * 100;
+    const visible = valor === 0 ? 0 : Math.max(0.8, largo);
+    if (valor >= 0) return { izq: cero, ancho: visible, cero: cero, neg: false };
+    return { izq: Math.max(0, cero - visible), ancho: visible, cero: cero, neg: true };
+  }
+
+  function vfocoMedalla(lugar) {
+    return lugar === 1 ? '🥇' : (lugar === 2 ? '🥈' : (lugar === 3 ? '🥉' : ''));
+  }
+
+  function renderVersusDesglose() {
+    const cont = document.getElementById('versusDesglose');
+    if (!cont) return;
+    if (!vfocoActivo) { cont.innerHTML = ''; return; }
+
+    const r = vfocoRanking();
+    if (!r) { cont.innerHTML = ''; return; }
+    const m = r.metric;
+
+    const cifra = v => versusFormatoCifra(m, v, currentVersusMetric);
+
+    const tarjeta = (k, val, nota, tono) =>
+      '<div class="vdg-tar" data-tono="' + tono + '">' +
+        '<span class="vdg-tar-k">' + k + '</span>' +
+        '<span class="vdg-tar-v">' + val + '</span>' +
+        '<span class="vdg-tar-n">' + nota + '</span>' +
+      '</div>';
+
+    const brecha = r.diaz.valor - r.promedioOtros;
+    const brechaTxt = (brecha > 0 ? '+' : '') +
+      (versusEsKm(m) ? Math.round(brecha).toLocaleString('es-MX') + ' km' : brecha.toFixed(1));
+
+    const tarjetas =
+      tarjeta(r.normativa ? 'Encabeza la variable' : 'Cifra más alta',
+              r.encabeza.simbolo + ' ' + cifra(r.encabeza.valor),
+              r.encabeza.nombre, 'alto') +
+      tarjeta(r.normativa ? 'Cierra la tabla' : 'Cifra más baja',
+              r.cierra.simbolo + ' ' + cifra(r.cierra.valor),
+              r.cierra.nombre, 'bajo') +
+      tarjeta('Don Porfirio Díaz',
+              cifra(r.diaz.valor),
+              'Lugar ' + r.diaz.lugar + ' de ' + r.lista.length, 'diaz') +
+      tarjeta('Distancia contra el promedio de los otros nueve',
+              brechaTxt,
+              'El promedio de los demás es ' + cifra(r.promedioOtros), 'brecha');
+
+    const filas = r.lista.map(f => {
+      const medalla = r.normativa ? vfocoMedalla(f.lugar) : '';
+      const dist = f.esDiaz ? '' : (function () {
+        const d = f.valor - r.diaz.valor;
+        const txt = (d > 0 ? '+' : '') +
+          (versusEsKm(m) ? Math.round(d).toLocaleString('es-MX') : d.toFixed(1));
+        const flecha = d === 0 ? '=' : (d > 0 ? '▲' : '▼');
+        let estado = 'neutro';
+        if (r.normativa) {
+          const mejor = m.sentido_positivo ? d > 0 : d < 0;
+          estado = d === 0 ? 'neutro' : (mejor ? 'mejor' : 'peor');
+        }
+        return '<span class="vdg-dist" data-estado="' + estado + '">' + flecha + ' ' + txt + '</span>';
+      })();
+
+      const clic = f.esDiaz ? '' :
+        ' onclick="window.AuditEngine.selectVersusPresident(\'' + f.id + '\')" title="Abrir el marcador cara a cara contra Don Porfirio Díaz"';
+
+      return '<li class="vdg-fila" data-diaz="' + (f.esDiaz ? '1' : '0') + '"' + clic + '>' +
+        '<span class="vdg-lugar">' + f.lugar + '</span>' +
+        '<span class="vdg-medalla">' + medalla + '</span>' +
+        '<span class="vdg-nom"><strong>' + f.simbolo + ' ' + f.nombre + '</strong><em>' + f.periodo + '</em></span>' +
+        vfocoRiel(r, f) +
+        '<span class="vdg-val">' + cifra(f.valor) + '</span>' +
+        dist +
+      '</li>';
+    }).join('');
+
+    const sentido = m.sentido_positivo === true
+      ? 'En esta variable, <strong>más es mejor</strong>: por eso encabeza quien registra la cifra más alta.'
+      : (m.sentido_positivo === false
+        ? 'En esta variable, <strong>menos es mejor</strong>: por eso encabeza quien registra la cifra más baja.'
+        : 'Esta variable <strong>no tiene un sentido bueno o malo</strong>. El tamaño del gasto depende de qué funciones asume el Estado: un gobierno que paga pensiones, salud y educación masiva gasta más que uno que no las paga. Por eso aquí no hay medallas: la lista solo va de mayor a menor.');
+
+    const proc = m.fuente_dato
+      ? '<div class="vdg-proc"><span class="vdg-proc-k">Procedencia del dato</span>' + m.fuente_dato + vsxRefLink(m.ref_fuente) + '</div>'
+      : '';
+
+    cont.innerHTML =
+      '<section class="vdg-wrap" aria-label="Desglose de la variable seleccionada">' +
+        '<div class="vdg-head">' +
+          '<span class="vdg-kicker">Desglose de una sola variable</span>' +
+          '<h3 class="vdg-tit">' + m.icono + ' ' + m.nombre + '</h3>' +
+          '<p class="vdg-sub">' + m.descripcion + '</p>' +
+        '</div>' +
+        '<div class="vdg-cifras">' + tarjetas + '</div>' +
+        '<div class="vdg-orden">' +
+          '<span class="vdg-orden-k">Orden de los diez mandatarios</span>' +
+          '<span class="vdg-orden-t">' + sentido + '</span>' +
+        '</div>' +
+        '<ol class="vdg-tabla">' + filas + '</ol>' +
+        '<p class="vdg-pista">Toque cualquier renglón —salvo el de Don Porfirio Díaz— para abrir su marcador cara a cara.</p>' +
+        proc +
+        '<div class="vdg-salida">' +
+          '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">↩︎ Volver al tablero completo</button>' +
+        '</div>' +
+      '</section>';
+  }
+
+  function vfocoRiel(r, f) {
+    const g = vfocoGeometria(r, f.valor);
+    const conCero = r.minimo < 0;
+    return '<span class="vdg-riel' + (conCero ? ' con-cero' : '') + '" style="--cero:' + g.cero.toFixed(2) + '%">' +
+      '<span class="vdg-barra' + (g.neg ? ' es-neg' : '') + '" style="left:' + g.izq.toFixed(2) + '%; width:' + g.ancho.toFixed(2) + '%; background:' + f.color + ';"></span>' +
+    '</span>';
+  }
+
+  function renderVersusFocoBanner() {
+    const cont = document.getElementById('versusFoco');
+    if (!cont) return;
+    if (!vfocoActivo) { cont.innerHTML = ''; return; }
+    const data = vfocoDatos();
+    const m = data ? data.metricas_catalogo[currentVersusMetric] : null;
+    if (!m) { cont.innerHTML = ''; return; }
+    cont.innerHTML =
+      '<div class="vfoco-bar">' +
+        '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">↩︎ Volver al tablero completo</button>' +
+        '<span class="vfoco-txt">Está viendo una sola variable: <strong>' + m.icono + ' ' + m.nombre + '</strong>. El resto de la subpestaña se repliega para no estorbar; puede cambiar de variable aquí abajo sin salir.</span>' +
+      '</div>';
+  }
+
+  /* Enciende el modo desglose. Se llama al pulsar una variable, nunca al cargar
+     la subpestana: quien llega por primera vez ve el tablero completo. */
+  function entrarDesgloseVersus() {
+    const raiz = document.getElementById('versus54Raiz');
+    if (!raiz) return;
+    const yaEstaba = vfocoActivo;
+    vfocoActivo = true;
+    raiz.classList.add('vfoco-on');
+    renderVersusFocoBanner();
+    renderVersusDesglose();
+    vsxReiniciarAutoArranque();
+    vsxAutoArranque();
+    if (!yaEstaba) {
+      const ancla = document.getElementById('versusFoco');
+      if (ancla && typeof ancla.scrollIntoView === 'function') {
+        ancla.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  /* Apaga el modo sin mover la pagina. Lo usa switchSubtab al volver a entrar a
+     la subpestana, para que nadie la encuentre a medio replegar. */
+  function vfocoApagar() {
+    vfocoActivo = false;
+    const raiz = document.getElementById('versus54Raiz');
+    if (raiz) raiz.classList.remove('vfoco-on');
+    const b = document.getElementById('versusFoco');
+    if (b) b.innerHTML = '';
+    const d = document.getElementById('versusDesglose');
+    if (d) d.innerHTML = '';
+  }
+
+  function salirDesgloseVersus() {
+    vfocoApagar();
+    vsxReiniciarAutoArranque();
+    vsxAutoArranque();
+    const ancla = document.querySelector('#versus54Raiz .versus-toolbar');
+    if (ancla && typeof ancla.scrollIntoView === 'function') {
+      ancla.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   function renderVersusPorfirio() {
     const data = DB.personajes_politicos ? DB.personajes_politicos.porfirio_diaz_versus : null;
     if (!data) return;
@@ -11479,12 +11722,15 @@
     if (isVersusScorecardOpen && currentVersusPresidentId) {
       renderVersusScorecard();
     }
+    // Elegir una variable deja la subpestana reducida a esa sola variable.
+    entrarDesgloseVersus();
   }
 
   function setVersusChartType(type) {
     currentVersusChartType = type;
     renderVersusToolbar();
     renderVersusChart();
+    if (vfocoActivo) renderVersusDesglose();
   }
 
   function selectVersusPresident(presId) {
@@ -11612,7 +11858,10 @@
     if (!stage || !barra || !linea) return;
     const rs = stage.getBoundingClientRect();
     const rb = barra.getBoundingClientRect();
-    linea.style.bottom = Math.max(0, rs.bottom - rb.top) + 'px';
+    /* El bloque contenedor de la linea es la caja de relleno del escenario, no
+       su caja de borde: hay que descontar el filo inferior. */
+    const filo = parseFloat(getComputedStyle(stage).borderBottomWidth) || 0;
+    linea.style.bottom = Math.max(0, rs.bottom - filo - rb.top) + 'px';
     if (visible !== undefined) linea.style.opacity = visible ? '1' : '0';
   }
 
@@ -11639,7 +11888,7 @@
           <div id="versusBubble_diaz" class="versus-bar-val-bubble ${diazBubbleZeroClass}" style="color:var(--gold-bright);">
             👑 ${isDiazZero ? diazZeroLabel : diazFinalLabel}
           </div>
-          <div id="versusBar_diaz" class="versus-bar-col ${diazZeroClass}" style="height: ${diazHeight}px;"></div>
+          <div id="versusBar_diaz" class="versus-bar-col ${diazZeroClass}" data-signo="${diazVal < 0 ? 'neg' : 'pos'}" style="height: ${diazHeight}px;"></div>
           <div class="versus-bar-lbl">
             <strong style="color:var(--gold-bright);">Porfirio Díaz</strong>
             <div style="font-size:9.5px; color:var(--text-dim);">1876–1911</div>
@@ -11687,7 +11936,7 @@
           <div id="versusBubble_${p.id}" class="versus-bar-val-bubble ${pBubbleZeroClass}" style="color:${isPZero ? 'var(--text-dim)' : valColor};">
             ${isPZero ? pZeroLabel : pFinalLabel}
           </div>
-          <div id="versusBar_${p.id}" class="versus-bar-col ${pZeroClass}" style="height: ${pHeight}px; background: ${p.color}; opacity: ${isSelected ? '1' : '0.85'};"></div>
+          <div id="versusBar_${p.id}" class="versus-bar-col ${pZeroClass}" data-signo="${val < 0 ? 'neg' : 'pos'}" style="height: ${pHeight}px; background: ${p.color}; opacity: ${isSelected ? '1' : '0.85'};"></div>
           <div class="versus-bar-lbl">
             ${deltaHtml}
             <strong style="color:${isSelected ? 'var(--gold-bright)' : 'var(--text-main)'};">${p.nombre.split(' ')[0]} ${p.nombre.split(' ')[1] || ''}</strong>
@@ -11699,6 +11948,24 @@
     });
 
     html += `</div>`;
+
+    /* La altura de cada barra se calcula con el valor absoluto, de modo que una
+       cifra negativa levantaria una barra igual de alta que su equivalente
+       positivo. Cuando la variable tiene negativos hay que decirlo: la barra se
+       raya en diagonal y el pie de la grafica lo explica. */
+    const hayNegativos = [diazVal, ...presList.map(p => p.metricas[currentVersusMetric])]
+      .some(v => Number(v) < 0);
+    if (hayNegativos) {
+      html += `
+        <p class="versus-nota-signo">
+          <strong>Cómo leer las barras.</strong> La altura mide el <em>tamaño</em> de la cifra, no su dirección.
+          Las barras rayadas en diagonal y con filo rojo corresponden a valores <strong>negativos</strong>:
+          son grandes porque la cifra es grande, no porque el resultado sea bueno.
+          En el desglose de abajo esas mismas cifras sí aparecen ordenadas de mejor a peor.
+        </p>
+      `;
+    }
+
     stage.innerHTML = html;
     requestAnimationFrame(() => vsxColocarLineaDiaz(isVersusEvaluated));
   }
@@ -11832,6 +12099,12 @@
         if (btnEval) {
           btnEval.innerHTML = '<span>🔄</span> Volver a Evaluar';
         }
+
+        /* Las columnas llevan una transicion CSS de 0.5 s, de modo que al
+           cerrar la animacion de JS todavia estan creciendo. La linea guia se
+           media contra esa altura intermedia y quedaba mas de cien pixeles por
+           debajo de la cima real. Se vuelve a medir cuando ya se detuvieron. */
+        setTimeout(() => vsxColocarLineaDiaz(true), 560);
       }
     }
 
@@ -17783,6 +18056,8 @@
     renderVersusPrecisiones: renderVersusPrecisiones,
     renderVersusBalanceSocial: renderVersusBalanceSocial,
     renderVersusFuentes: renderVersusFuentes,
+    renderVersusDesglose: renderVersusDesglose,
+    salirDesgloseVersus: salirDesgloseVersus,
     setVersusMetric: setVersusMetric,
     setVersusChartType: setVersusChartType,
     selectVersusPresident: selectVersusPresident,
