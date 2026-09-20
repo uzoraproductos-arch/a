@@ -2075,6 +2075,50 @@
     { a: ['artículo 134 constitucional', 'artículo 134'], t: 'Artículo 134 Constitucional', r: 'ref-cpeum', n: 1 },
     { a: ['artículo 126 constitucional', 'artículo 126'], t: 'Artículo 126 Constitucional', r: 'ref-cpeum', n: 1 },
 
+    // --- Constitucion economica: rectoria, planeacion y competencia ---
+    { a: ['rectoría económica del Estado', 'rectoría del desarrollo nacional', 'rectoría del Estado', 'rectoría económica'], t: 'Rectoría Económica del Estado', r: 'ref-cpeum', n: 1 },
+    { a: ['economía mixta'], t: 'Economía Mixta', r: 'ref-cpeum', n: 1 },
+    { a: ['sector social de la economía'], t: 'Sector Social de la Economía', r: 'ref-cpeum', n: 1 },
+    { a: ['Sistema Nacional de Planeación Democrática', 'planeación democrática'], t: 'Sistema Nacional de Planeación Democrática', r: 'ref-ley-planeacion', n: 50 },
+    { a: ['Plan Nacional de Desarrollo'], t: 'Plan Nacional de Desarrollo', r: 'ref-ley-planeacion', n: 50 },
+    { a: ['PND'], t: 'Plan Nacional de Desarrollo', r: 'ref-ley-planeacion', n: 50, cs: true },
+    { a: ['planeación indicativa'], t: 'Planeación Indicativa', r: 'ref-ley-planeacion', n: 50 },
+    { a: ['propiedad originaria de la Nación', 'propiedad originaria'], t: 'Propiedad Originaria de la Nación', r: 'ref-cpeum', n: 1 },
+    { a: ['modalidades a la propiedad privada'], t: 'Modalidades a la Propiedad Privada', r: 'ref-cpeum', n: 1 },
+    { a: ['áreas estratégicas', 'área estratégica'], t: 'Áreas Estratégicas', r: 'ref-cpeum', n: 1 },
+    { a: ['prácticas monopólicas absolutas', 'práctica monopólica absoluta'], t: 'Práctica Monopólica Absoluta', r: 'ref-cpeum', n: 1 },
+    { a: ['prácticas monopólicas relativas', 'práctica monopólica relativa'], t: 'Práctica Monopólica Relativa', r: 'ref-cpeum', n: 1 },
+    { a: ['autonomía del banco central', 'autonomía de Banxico', 'autonomía del Banco de México'], t: 'Autonomía del Banco Central', r: 'ref-lbm', n: 8 },
+    { a: ['índice Herfindahl-Hirschman', 'Herfindahl-Hirschman'], t: 'Índice Herfindahl-Hirschman', r: 'ref-cpeum', n: 1 },
+
+    // --- Cuentas economicas y ecologicas (CEEM / INEGI) ---
+    { a: ['desarrollo sustentable', 'sustentabilidad'], t: 'Desarrollo Sustentable', r: 'ref-cpeum', n: 1 },
+    { a: ['Producto Interno Neto Ecológico', 'PIB Ecológico'], t: 'Producto Interno Neto Ecológico', r: 'ref-ceem-2024', n: 48 },
+    { a: ['PINE'], t: 'Producto Interno Neto Ecológico', r: 'ref-ceem-2024', n: 48, cs: true },
+    { a: ['Costos Totales por Agotamiento y Degradación Ambiental'], t: 'Costos Totales por Agotamiento y Degradación Ambiental', r: 'ref-ceem-2024', n: 48 },
+    { a: ['CTADA'], t: 'Costos Totales por Agotamiento y Degradación Ambiental', r: 'ref-ceem-2024', n: 48, cs: true },
+    { a: ['agotamiento de recursos naturales', 'agotamiento de los recursos naturales'], t: 'Agotamiento de Recursos Naturales', r: 'ref-ceem-2024', n: 48 },
+    { a: ['degradación ambiental', 'degradación del ambiente', 'degradación del medio ambiente'], t: 'Degradación Ambiental', r: 'ref-ceem-2024', n: 48 },
+    { a: ['externalidades negativas', 'externalidad negativa'], t: 'Externalidad Negativa', r: 'ref-lgeepa', n: 51 },
+    { a: ['impuestos pigouvianos', 'impuesto pigouviano'], t: 'Impuesto Pigouviano', r: 'ref-cpeum', n: 1 },
+    { a: ['Manifestación de Impacto Ambiental', 'Manifestaciones de Impacto Ambiental'], t: 'Manifestación de Impacto Ambiental', r: 'ref-lgeepa', n: 51 },
+    { a: ['MIA'], t: 'Manifestación de Impacto Ambiental', r: 'ref-lgeepa', n: 51, cs: true },
+    { a: ['capital natural'], t: 'Capital Natural', r: 'ref-inegi-ceem', n: 47 },
+    { a: ['consumo de capital fijo'], t: 'Consumo de Capital Fijo', r: 'ref-inegi-ceem', n: 47 },
+    { a: ['gasto en protección ambiental'], t: 'Gasto en Protección Ambiental', r: 'ref-ceem-2024', n: 48 },
+    { a: ['estrés hídrico'], t: 'Estrés Hídrico', r: 'ref-cpeum', n: 1 },
+    { a: ['matriz energética'], t: 'Matriz Energética', r: 'ref-cpeum', n: 1 },
+
+    // --- Dimension social del desarrollo ---
+    { a: ['coeficiente de Gini', 'índice de Gini'], t: 'Coeficiente de Gini', r: 'ref-cpeum', n: 1 },
+    { a: ['pobreza multidimensional'], t: 'Pobreza Multidimensional', r: 'ref-cpeum', n: 1 },
+
+    // --- Preceptos constitucionales economicos ---
+    { a: ['artículo 25 constitucional', 'artículo 25'], t: 'Rectoría Económica del Estado', r: 'ref-cpeum', n: 1 },
+    { a: ['artículo 26 constitucional', 'artículo 26'], t: 'Sistema Nacional de Planeación Democrática', r: 'ref-cpeum', n: 1 },
+    { a: ['artículo 27 constitucional', 'artículo 27'], t: 'Propiedad Originaria de la Nación', r: 'ref-cpeum', n: 1 },
+    { a: ['artículo 28 constitucional', 'artículo 28'], t: 'Áreas Estratégicas', r: 'ref-cpeum', n: 1 },
+
     // --- Marco legal ---
     { a: ['Diario Oficial de la Federación'], t: 'DOF (Diario Oficial de la Federación)', r: 'ref-cpeum', n: 1 },
     { a: ['DOF'], t: 'DOF (Diario Oficial de la Federación)', r: 'ref-cpeum', n: 1, cs: true }
@@ -2188,12 +2232,15 @@
         enlace.className = 'glos-link auto-glos';
         enlace.textContent = coincidencia[0];
         enlace.title = 'Ver «' + entrada.termino + '» en el glosario';
+        enlace.dataset.termino = entrada.termino;
         enlace.addEventListener('click', () => goToGlossary(entrada.termino));
 
         const nota = document.createElement('a');
         nota.className = 'ref-link auto-ref';
         nota.textContent = '[' + String(entrada.refNum).padStart(2, '0') + ']';
         nota.title = 'Ir a la referencia ' + entrada.refNum + ' del catálogo de fuentes';
+        nota.dataset.ref = entrada.refKey;
+        nota.dataset.termino = entrada.termino;
         nota.addEventListener('click', () => goToRef(entrada.refKey));
 
         const padre = nodo.parentNode;

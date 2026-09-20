@@ -3806,6 +3806,174 @@ window.AUDIT_DB = {
       "definicion": "Norma de una sola línea y consecuencias enormes: no puede hacerse pago alguno que no esté comprendido en el presupuesto o determinado por ley posterior. Es el fundamento de que un gasto no previsto sea, por definición, un gasto que alguien debe explicar.",
       "ley": "Art. 126 CPEUM",
       "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Rectoría Económica del Estado",
+      "definicion": "Facultad constitucional del Estado para conducir y orientar el desarrollo nacional sin ser dueño de toda la economía. No significa que el gobierno produzca todo, sino que fija el rumbo y coordina a quienes producen. El texto le pone dos condiciones que suelen olvidarse: que el desarrollo sea sustentable y que la distribución del ingreso sea más justa. Crecer incumpliendo cualquiera de las dos es crecer fuera del mandato.",
+      "ley": "Art. 25 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Economía Mixta",
+      "definicion": "Sistema en el que conviven la propiedad privada y la rectoría del Estado, con tres sectores que concurren al desarrollo: el público, el social y el privado. Es el modelo que México adopta expresamente. El sector social —ejidos, comunidades, cooperativas— tiene rango constitucional: no es una categoría residual ni una concesión, es uno de los tres pilares nombrados en el texto.",
+      "ley": "Art. 25 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sector Social de la Economía",
+      "definicion": "Conjunto de formas de organización productiva de propiedad colectiva: ejidos, comunidades, cooperativas, empresas de trabajadores. La Constitución lo nombra junto al público y al privado, con los mismos derechos de concurrencia al desarrollo. En la práctica es el sector con menor acceso a crédito y a contratación pública, brecha que la propia norma manda cerrar mediante fomento.",
+      "ley": "Art. 25 CPEUM · Ley de la Economía Social y Solidaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sistema Nacional de Planeación Democrática",
+      "definicion": "Mecanismo por el cual el Estado organiza sus metas de desarrollo recogiendo las aspiraciones de la sociedad mediante consulta popular. El adjetivo «democrática» no es adorno: distingue este modelo de la planeación centralizada, porque el resultado obliga a la Administración Pública Federal pero para el particular es apenas indicativo.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Plan Nacional de Desarrollo",
+      "definicion": "Documento rector sexenal al que deben sujetarse obligatoriamente los programas de la Administración Pública Federal. Se elabora con consulta y se publica en los primeros meses del sexenio. Su punto débil no es el contenido sino la trazabilidad: el eslabón que va del objetivo del Plan al Programa presupuestario y de ahí a la partida del Presupuesto de Egresos es donde una meta puede evaporarse sin dejar rastro contable.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Planeación Indicativa",
+      "definicion": "Carácter que tiene el Plan Nacional de Desarrollo frente a los particulares: es una guía, no una orden. El mismo documento es obligatorio hacia adentro del gobierno e indicativo hacia afuera. Esta doble naturaleza es exactamente lo que separa la planeación democrática mexicana de una economía centralmente planificada.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Propiedad Originaria de la Nación",
+      "definicion": "Principio según el cual las tierras y aguas del territorio nacional pertenecen originariamente a la Nación, que transmitió su dominio a los particulares para constituir la propiedad privada. La consecuencia práctica es que la propiedad privada deriva de esa transmisión y no la antecede, por lo que puede sujetarse a modalidades cuando lo exija el interés público.",
+      "ley": "Art. 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Modalidades a la Propiedad Privada",
+      "definicion": "Límites que la Nación puede imponer al dominio privado cuando lo dicte el interés público, incluyendo la regulación del aprovechamiento de los recursos naturales. Es el fundamento jurídico de que se niegue una concesión de agua o se rechace una autorización ambiental: la propiedad no es absoluta frente al interés colectivo.",
+      "ley": "Art. 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Áreas Estratégicas",
+      "definicion": "Actividades que el Estado ejerce de manera exclusiva sin que ello constituya monopolio, por disposición constitucional expresa. Su consecuencia práctica se pasa por alto con frecuencia: una entidad que opera en área estratégica no se juzga con la vara de la rentabilidad privada, porque su razón de existir no es el margen sino la función.",
+      "ley": "Art. 28 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Práctica Monopólica Absoluta",
+      "definicion": "Acuerdo entre competidores para fijar precios, restringir la oferta, repartirse el mercado o coordinar posturas en licitaciones. Se sanciona por sí misma, sin necesidad de probar daño: el acuerdo es la infracción. En compras públicas es la figura que explica por qué varias empresas presentan ofertas sospechosamente parecidas.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Práctica Monopólica Relativa",
+      "definicion": "Conducta con la que una empresa con poder sustancial en el mercado desplaza indebidamente a sus competidores o impide su entrada. A diferencia de la absoluta, aquí sí debe acreditarse el poder de mercado y el efecto. Es la categoría que se invoca cuando un proveedor dominante del sector público bloquea el acceso de otros.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autonomía del Banco Central",
+      "definicion": "Régimen constitucional que impide a cualquier autoridad ordenar al Banco de México conceder financiamiento. Su objetivo prioritario es procurar la estabilidad del poder adquisitivo de la moneda. Esa última línea es el candado que impide cubrir el déficit imprimiendo dinero, y la razón de que la deuda soberana tenga que colocarse en subasta.",
+      "ley": "Art. 28 CPEUM · Ley del Banco de México",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Desarrollo Sustentable",
+      "definicion": "Fórmula de equilibrio entre tres dimensiones que deben cumplirse a la vez: crecimiento económico, equidad social y preservación ambiental. No es una cuestión sólo ecológica. En el orden jurídico mexicano es un mandato derivado de los artículos 25, 26 y 27, lo que significa que un crecimiento que agota el capital natural no satisface la norma aunque el PIB suba.",
+      "ley": "Art. 25, 26 y 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Producto Interno Neto Ecológico",
+      "definicion": "Indicador que el INEGI calcula restando al Producto Interno Bruto el consumo de capital fijo y los costos totales por agotamiento y degradación ambiental. Responde a la pregunta que el PIB no puede contestar: cuánto creció realmente la riqueza si se descuenta el daño causado para producirla. En 2024 ascendió a 25.7 billones de pesos, 76.6% del PIB.",
+      "ley": "Sistema de Cuentas Nacionales de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Costos Totales por Agotamiento y Degradación Ambiental",
+      "definicion": "Valoración monetaria del impacto ambiental de la actividad económica, con dos componentes: lo que se acabó (agotamiento de hidrocarburos, bosques y agua subterránea) y lo que se ensució (aire, suelo, residuos, aguas residuales). En 2024 sumaron $1,382,214 millones de pesos, 4.1% del PIB.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Agotamiento de Recursos Naturales",
+      "definicion": "Consumo de capital natural que no se repone dentro del periodo: barriles extraídos, bosque perdido por encima de la regeneración, agua sacada de un acuífero por arriba de su recarga. En 2024 costó $144,020 millones de pesos. El reparto oficial lo encabezan los hidrocarburos con 46%, seguidos por los recursos forestales con 28% y el agua subterránea con 26%.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Degradación Ambiental",
+      "definicion": "Costo de que el entorno empeore, a diferencia del agotamiento, donde el recurso desaparece. Incluye emisiones al aire, degradación del suelo, residuos sólidos urbanos y tratamiento insuficiente de aguas residuales. En 2024 costó $1,238,194 millones de pesos, y las emisiones al aire por sí solas representaron 2.5% del PIB.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Externalidad Negativa",
+      "definicion": "Costo que quien produce no paga y traslada a terceros o a la sociedad entera: el aire que otros respiran, el acuífero que otros dejarán de usar. Las cuentas ecológicas del INEGI son precisamente el ejercicio de ponerle precio a esas externalidades, y ese precio es el que da sustento jurídico a gravarlas.",
+      "ley": "Art. 25 y 27 CPEUM · LGEEPA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuesto Pigouviano",
+      "definicion": "Gravamen diseñado para que quien genera un costo ambiental lo internalice, bajo la premisa de que quien contamina y agota, paga. No busca principalmente recaudar sino corregir un precio que estaba mal puesto. En México la discusión sobre estos impuestos suele confundirse con la recaudatoria, y son cosas distintas.",
+      "ley": "Art. 31 fracción IV y Art. 73 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Manifestación de Impacto Ambiental",
+      "definicion": "Documento con el que quien pretende realizar una obra debe acreditar ante la autoridad ambiental los efectos que causará y cómo los mitigará. Es el punto donde una cifra estadística se vuelve una decisión exigible: si el agotamiento hídrico de una región ya es crítico, la autoridad tiene sustento para negarla.",
+      "ley": "Art. 27 CPEUM · LGEEPA",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Capital Natural",
+      "definicion": "Acervo de recursos que la naturaleza aporta a la economía: agua, suelo, bosques, hidrocarburos, capacidad de absorber contaminantes. Se comporta como cualquier otro capital en un aspecto decisivo: si se consume por encima de su reposición, la producción futura se reduce aunque las cuentas presentes se vean bien.",
+      "ley": "Art. 27 CPEUM · Sistema de Cuentas Nacionales",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Coeficiente de Gini",
+      "definicion": "Medida de desigualdad en la distribución del ingreso que va de 0, donde todos reciben lo mismo, a 1, donde una sola persona concentra todo. Importa jurídicamente porque el artículo 25 exige una más justa distribución del ingreso y la riqueza: sin esta medición, el cumplimiento de ese mandato no es verificable.",
+      "ley": "Art. 25 CPEUM · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Pobreza Multidimensional",
+      "definicion": "Medición que no se limita al ingreso, sino que considera carencias en acceso a salud, educación, seguridad social, vivienda digna, servicios básicos y alimentación. Es la metodología oficial en México. Su virtud es que impide declarar superada la pobreza por el solo hecho de que un ingreso rebase un umbral.",
+      "ley": "Ley General de Desarrollo Social · CONEVAL",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Estrés Hídrico",
+      "definicion": "Situación en que la demanda de agua de una cuenca supera su disponibilidad renovable. Es el indicador que debería anteceder a la autorización de cualquier polo industrial o desarrollo habitacional, porque proyectar crecimiento sin datos de recarga de acuíferos convierte la inversión en un pasivo futuro.",
+      "ley": "Art. 27 CPEUM · Ley de Aguas Nacionales",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Matriz Energética",
+      "definicion": "Composición de las fuentes con que un país genera y consume energía, medida como la proporción entre fósiles y limpias. Es un dato de soberanía y de sustentabilidad a la vez, y la base sobre la que se justifica jurídicamente que el Estado regule el mercado eléctrico y de combustibles como asunto de rectoría.",
+      "ley": "Art. 25, 27 y 28 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Índice Herfindahl-Hirschman",
+      "definicion": "Medida de concentración de un mercado que se obtiene sumando los cuadrados de las participaciones de cada competidor. Cuanto más alto, más concentrado. Se emplea para detectar poder sustancial de mercado y es una de las herramientas técnicas con las que se aplica la prohibición constitucional de monopolios.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Gasto en Protección Ambiental",
+      "definicion": "Recursos que la economía destina a prevenir, reducir o reparar el daño al entorno. En 2024 ascendió a $232,882 millones de pesos, 0.7% del PIB, frente a un deterioro de 4.1%. La proporción entre ambas cifras, y no el monto absoluto, es lo que revela la seriedad del compromiso.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Consumo de Capital Fijo",
+      "definicion": "Desgaste de la infraestructura creada por el hombre —maquinaria, fábricas, carreteras— durante un periodo. Restarlo al Producto Interno Bruto da el Producto Interno Neto, y reconoce que una parte de lo producido apenas repuso lo que se gastó en producirlo.",
+      "ley": "Sistema de Cuentas Nacionales de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
     }],
   "legislativo": {
     "federal": {
@@ -5598,6 +5766,51 @@ window.AUDIT_DB = {
       "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Sistema de Cuentas Nacionales de México e Índice Nacional de Precios al Consumidor. Banco de Información Económica (BIE).",
       "url": "https://www.inegi.org.mx/temas/pib/",
       "descripcion": "Fuente oficial del Producto Interno Bruto y del Índice Nacional de Precios al Consumidor, así como del valor anual de la Unidad de Medida y Actualización. Es el insumo obligado para expresar el gasto y la deuda como porcentaje del PIB y para deflactar cifras de distintos años a pesos constantes."
+    },
+    {
+      "num": 47,
+      "id": "ref-inegi-ceem",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Cuentas Económicas y Ecológicas de México (CEEM). Sistema de Cuentas Nacionales de México. INEGI.",
+      "url": "https://www.inegi.org.mx/temas/ee/",
+      "descripcion": "Programa estadístico con el que el INEGI mide, en pesos, cuánto capital natural se agota y cuánto se degrada el entorno para producir el PIB. Es la respuesta contable al mandato de desarrollo sustentable de los artículos 25 y 27 constitucionales, y la fuente del Producto Interno Neto Ecológico (PINE) y de los Costos Totales por Agotamiento y Degradación Ambiental (CTADA)."
+    },
+    {
+      "num": 48,
+      "id": "ref-ceem-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf",
+      "descripcion": "Edición 2024 de las cuentas verdes, publicada el 1 de diciembre de 2025. Reporta un Producto Interno Neto Ecológico de 25.7 billones de pesos, equivalente a 76.6% del PIB, y costos totales por agotamiento y degradación ambiental de $1,382,214 millones de pesos, es decir 4.1% del PIB. Es la fuente de todas las cifras ambientales que esta plataforma presenta."
+    },
+    {
+      "num": 49,
+      "id": "ref-inegi-pib-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Producto Interno Bruto por Entidad Federativa (PIBE) 2024. Comunicado de prensa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf",
+      "descripcion": "Fuente del PIB nacional a precios de mercado de 2024: $33,506,847 millones de pesos corrientes. Es el denominador contra el que se calculan todos los porcentajes ambientales, de deuda y de gasto que esta plataforma expresa como proporción del PIB."
+    },
+    {
+      "num": 50,
+      "id": "ref-ley-planeacion",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley de Planeación. Diario Oficial de la Federación, 5 de enero de 1983, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPlan.pdf",
+      "descripcion": "Ley reglamentaria del artículo 26 constitucional. Define el Sistema Nacional de Planeación Democrática, el procedimiento de consulta popular, el plazo para publicar el Plan Nacional de Desarrollo y la regla que separa lo obligatorio para la Administración Pública Federal de lo meramente indicativo para los particulares."
+    },
+    {
+      "num": 51,
+      "id": "ref-lgeepa",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General del Equilibrio Ecológico y la Protección al Ambiente. Diario Oficial de la Federación, 28 de enero de 1988, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf",
+      "descripcion": "Norma que aterriza el mandato de sustentabilidad del artículo 27 constitucional. Regula la evaluación del impacto ambiental, las áreas naturales protegidas y los instrumentos económicos de política ambiental. Es el fundamento de la Manifestación de Impacto Ambiental (MIA), que la autoridad puede negar cuando una obra compromete la capacidad de carga de una región."
     }
   ],
   "preguntas_casillas": [
@@ -9816,6 +10029,42 @@ window.AUDIT_DB = {
   },
   "preceptos_legales": [
     {
+      "id": "cpeum_art_25",
+      "icono": "🏛️",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "precepto": "Artículo 25 Constitucional",
+      "denominacion": "Rectoría Económica del Estado & Economía Mixta",
+      "precepto_resumen": "Atribuye al Estado la rectoría del desarrollo nacional y ordena que éste sea integral y sustentable. Reconoce la concurrencia de tres sectores —público, social y privado— y manda una más justa distribución del ingreso y la riqueza.",
+      "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales... Al desarrollo económico nacional concurrirán, con responsabilidad social, el sector público, el sector social y el sector privado, sin menoscabo de otras formas de actividad económica que contribuyan al desarrollo de la Nación.",
+      "analisis_civico": "Es el artículo que responde a la pregunta anterior a todas las demás: ¿con qué facultad interviene el Estado en la economía? Aquí están las dos palabras que esta plataforma audita renglón por renglón. «Sustentable» significa que el crecimiento que agota el capital natural no cumple el mandato, y por eso importan las cuentas ecológicas del INEGI. «Más justa distribución» significa que crecer concentrando no basta, y por eso importan el coeficiente de Gini y la medición de pobreza del CONEVAL. Un gobierno puede reportar crecimiento y estar incumpliendo este artículo por ambos flancos a la vez.",
+      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica y Circuito del Dinero), Pestaña 2 (Acción Financiera y Cuentas Ecológicas) y Pestaña 5 (Radiografía Sexenal).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    },
+    {
+      "id": "cpeum_art_27",
+      "icono": "🌎",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "precepto": "Artículo 27 Constitucional",
+      "denominacion": "Propiedad Originaria de la Nación & Modalidades al Dominio Privado",
+      "precepto_resumen": "Declara que las tierras y aguas del territorio nacional corresponden originariamente a la Nación y reserva a ésta el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, cuidando la conservación de los recursos.",
+      "texto_oficial": "La propiedad de las tierras y aguas comprendidas dentro de los límites del territorio nacional, corresponde originariamente a la Nación, la cual ha tenido y tiene el derecho de transmitir el dominio de ellas a los particulares, constituyendo la propiedad privada... La Nación tendrá en todo tiempo el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, así como el de regular, en beneficio social, el aprovechamiento de los elementos naturales susceptibles de apropiación, con objeto de hacer una distribución equitativa de la riqueza pública, cuidar de su conservación, lograr el desarrollo equilibrado del país y el mejoramiento de las condiciones de vida de la población rural y urbana.",
+      "analisis_civico": "Aquí está el fundamento jurídico de que una concesión de agua pueda negarse y de que una Manifestación de Impacto Ambiental pueda rechazarse. La propiedad privada no es absoluta frente al interés público, y la conservación de los recursos no es una aspiración retórica sino un fin expreso del texto constitucional. Cuando el INEGI documenta que el agotamiento de agua subterránea tuvo un costo medible, este artículo convierte ese dato estadístico en una obligación exigible a la autoridad.",
+      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica) y Pestaña 2 (Cuentas Económicas y Ecológicas).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    },
+    {
+      "id": "cpeum_art_28",
+      "icono": "⚖️",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "precepto": "Artículo 28 Constitucional",
+      "denominacion": "Prohibición de Monopolios, Áreas Estratégicas & Autonomía del Banco Central",
+      "precepto_resumen": "Prohíbe los monopolios, las prácticas monopólicas y las condonaciones de impuestos; reserva al Estado ciertas áreas estratégicas sin que ello constituya monopolio; y ordena que el banco central sea autónomo con el objetivo prioritario de procurar la estabilidad del poder adquisitivo de la moneda.",
+      "texto_oficial": "En los Estados Unidos Mexicanos quedan prohibidos los monopolios, las prácticas monopólicas, los estancos, las condonaciones de impuestos y las exenciones de impuestos en los términos y condiciones que fijan las leyes... No constituirán monopolios las funciones que el Estado ejerza de manera exclusiva en las áreas estratégicas a que se refiere este precepto... El Estado tendrá un banco central que será autónomo en el ejercicio de sus funciones y en su administración. Su objetivo prioritario será procurar la estabilidad del poder adquisitivo de la moneda nacional, fortaleciendo con ello la rectoría del desarrollo nacional que corresponde al Estado. Ninguna autoridad podrá ordenar al banco conceder financiamiento.",
+      "analisis_civico": "Tres mandatos que suelen leerse por separado y que este artículo une a propósito. La prohibición de condonar impuestos explica por qué una condonación masiva es un asunto constitucional y no sólo de política fiscal. Las áreas estratégicas explican por qué ciertas empresas del Estado no se juzgan con la vara de la rentabilidad privada. Y la última línea —ninguna autoridad podrá ordenar al banco conceder financiamiento— es el candado que impide pagar el déficit imprimiendo dinero: la razón por la que la deuda soberana se coloca en subasta y no se decreta.",
+      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica), Pestaña 2 (Maquinaria Financiera y Banxico) y Pestaña 7 (Marco Legal).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    },
+    {
       "id": "cpeum_art_26",
       "icono": "📜",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
@@ -10118,6 +10367,336 @@ window.AUDIT_DB = {
     }
   ]
 ,
+  "constitucion_economica": {
+    "titulo": "La Constitución Económica",
+    "entrada": "Cuatro artículos responden, entre los cuatro, a la pregunta que antecede a toda auditoría: ¿con qué facultad interviene el Estado en la economía? El 25 dice quién manda; el 26, hacia dónde; el 27, con qué recursos; el 28, bajo qué reglas. Ningún peso del erario se explica sin alguno de los cuatro.",
+    "ref_fuente": "ref-cpeum",
+    "pilares": [
+      {
+        "id": "art25",
+        "articulo": "Artículo 25",
+        "icono": "🏛️",
+        "color": "#c9a227",
+        "titulo": "Rectoría del Desarrollo Nacional",
+        "pregunta": "¿Quién manda en la economía?",
+        "respuesta": "El Estado, y no como dueño de todo sino como rector: fija el rumbo y coordina a tres sectores que concurren al desarrollo.",
+        "facultad": "Planear, conducir, coordinar y orientar la actividad económica nacional.",
+        "organo": "Poder Ejecutivo Federal, a través de la Secretaría de Hacienda y Crédito Público y las dependencias sectoriales.",
+        "ley_secundaria": "Ley de Planeación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+        "precepto_id": "cpeum_art_25",
+        "claves": [
+          {
+            "k": "Integral y sustentable",
+            "v": "El crecimiento que agota el capital natural no cumple el mandato. Es el enganche constitucional de las cuentas ecológicas."
+          },
+          {
+            "k": "Más justa distribución",
+            "v": "Crecer concentrando tampoco cumple. Es el enganche del coeficiente de Gini y de la medición de pobreza."
+          },
+          {
+            "k": "Tres sectores",
+            "v": "Público, social y privado. El sector social —ejidos, cooperativas, comunidades— tiene rango constitucional, no es residual."
+          }
+        ],
+        "punto_ciego": "El discurso público suele reducir este artículo a «el Estado rector» y omitir los dos adjetivos que lo condicionan. Un informe de gobierno puede presumir crecimiento y estar incumpliendo el artículo 25 por sustentabilidad y por distribución al mismo tiempo, sin que la cifra de PIB lo delate."
+      },
+      {
+        "id": "art26",
+        "articulo": "Artículo 26",
+        "icono": "🧭",
+        "color": "#4a90d9",
+        "titulo": "Sistema Nacional de Planeación Democrática",
+        "pregunta": "¿Hacia dónde va la economía?",
+        "respuesta": "Hacia donde diga el Plan Nacional de Desarrollo, que se elabora con consulta popular y dura un sexenio.",
+        "facultad": "Organizar la planeación democrática y expedir el Plan Nacional de Desarrollo.",
+        "organo": "Poder Ejecutivo Federal, con aprobación y seguimiento de la Cámara de Diputados.",
+        "ley_secundaria": "Ley de Planeación",
+        "precepto_id": "cpeum_art_26",
+        "claves": [
+          {
+            "k": "Obligatorio hacia adentro",
+            "v": "El Plan vincula a toda la Administración Pública Federal: ningún programa puede contradecirlo."
+          },
+          {
+            "k": "Indicativo hacia afuera",
+            "v": "Para el particular es una guía, no una orden. Esta distinción separa la planeación democrática de la economía centralmente planificada."
+          },
+          {
+            "k": "Consulta popular",
+            "v": "La ley exige recoger las aspiraciones de la sociedad. Es el adjetivo «democrática» del sistema."
+          }
+        ],
+        "punto_ciego": "Se discute mucho el contenido del Plan y casi nunca su cumplimiento. El eslabón que nadie audita es el que va del objetivo del Plan al Programa presupuestario y de ahí a la partida del Presupuesto de Egresos: es justo ahí donde una meta se evapora sin dejar rastro contable."
+      },
+      {
+        "id": "art27",
+        "articulo": "Artículo 27",
+        "icono": "🌎",
+        "color": "#3fa373",
+        "titulo": "Propiedad Originaria y Recursos Naturales",
+        "pregunta": "¿Con qué recursos cuenta la Nación?",
+        "respuesta": "Las tierras y aguas del territorio le pertenecen originariamente, y puede imponer modalidades a la propiedad privada cuando lo exija el interés público.",
+        "facultad": "Regular el aprovechamiento de los elementos naturales, expropiar por causa de utilidad pública y cuidar su conservación.",
+        "organo": "Ejecutivo Federal, a través de SEMARNAT, CONAGUA y la Secretaría de Energía.",
+        "ley_secundaria": "Ley General del Equilibrio Ecológico y la Protección al Ambiente · Ley de Aguas Nacionales",
+        "precepto_id": "cpeum_art_27",
+        "claves": [
+          {
+            "k": "Propiedad originaria",
+            "v": "La propiedad privada de la tierra deriva de una transmisión que hizo la Nación, no la antecede."
+          },
+          {
+            "k": "Modalidades por interés público",
+            "v": "Fundamento de que una concesión de agua se niegue o una Manifestación de Impacto Ambiental se rechace."
+          },
+          {
+            "k": "Cuidar su conservación",
+            "v": "Es un fin expreso del texto, no una aspiración. Aquí se ancla jurídicamente el dato del INEGI sobre agotamiento."
+          }
+        ],
+        "punto_ciego": "La conversación pública sobre el 27 casi siempre gira en torno al petróleo y al litio. El renglón que el INEGI señala como el más costoso del agotamiento después de los hidrocarburos —los bosques— y el que compromete la viabilidad de regiones enteras —el agua subterránea— casi no aparecen en el debate."
+      },
+      {
+        "id": "art28",
+        "articulo": "Artículo 28",
+        "icono": "⚖️",
+        "color": "#c0504d",
+        "titulo": "Competencia, Áreas Estratégicas y Banco Central",
+        "pregunta": "¿Bajo qué reglas se juega?",
+        "respuesta": "Sin monopolios ni condonaciones de impuestos, con ciertas áreas reservadas al Estado y con un banco central que nadie puede obligar a prestar.",
+        "facultad": "Prohibir prácticas monopólicas, reservar áreas estratégicas y garantizar la autonomía del banco central.",
+        "organo": "COFECE e IFT como órganos autónomos · Banco de México · SHCP.",
+        "ley_secundaria": "Ley Federal de Competencia Económica · Ley del Banco de México",
+        "precepto_id": "cpeum_art_28",
+        "claves": [
+          {
+            "k": "Condonaciones prohibidas",
+            "v": "Perdonar impuestos de manera general no es sólo mala política fiscal: el texto constitucional lo prohíbe expresamente."
+          },
+          {
+            "k": "Áreas estratégicas",
+            "v": "No son monopolios. Por eso ciertas empresas del Estado no se juzgan con la vara de la rentabilidad privada."
+          },
+          {
+            "k": "Ninguna autoridad podrá ordenar al banco conceder financiamiento",
+            "v": "El candado que impide pagar el déficit imprimiendo dinero. Es la razón de que la deuda se coloque en subasta."
+          }
+        ],
+        "punto_ciego": "La autonomía de Banxico se discute como si fuera una política revocable por decisión administrativa. Es texto constitucional, y la prohibición de ordenarle financiamiento es la última línea del párrafo que casi nunca se cita completo."
+      }
+    ]
+  },
+  "cuentas_ecologicas": {
+    "titulo": "Cuentas Económicas y Ecológicas de México",
+    "ejercicio": 2024,
+    "publicacion": "1 de diciembre de 2025",
+    "ref_fuente": "ref-ceem-2024",
+    "ref_programa": "ref-inegi-ceem",
+    "ref_pib": "ref-inegi-pib-2024",
+    "entrada": "El Producto Interno Bruto es un indicador ciego: puede crecer mientras el país se queda sin acuíferos, pierde bosque y ensucia el aire que respira. El INEGI calcula, desde el Sistema de Cuentas Nacionales, cuánto de ese crecimiento se paga con capital natural. El resultado se llama Producto Interno Neto Ecológico.",
+    "nota_metodologica": "Las cifras marcadas como oficiales provienen del comunicado de prensa de las CEEM 2024 del INEGI y del PIB a precios de mercado de 2024. Las marcadas como derivadas se obtienen por diferencia aritmética a partir de las oficiales, y se identifican como tales en cada tarjeta. Esta plataforma no estima ninguna cifra ambiental.",
+    "pib_mdp": 33506847,
+    "pib_estado": "oficial",
+    "cascada": [
+      {
+        "id": "pib",
+        "etiqueta": "Producto Interno Bruto",
+        "monto_mdp": 33506847,
+        "pct_pib": 100.0,
+        "signo": "base",
+        "estado": "oficial",
+        "glosa": "Valor de todo lo producido en el país en 2024, a precios de mercado. Es el número que se anuncia cada trimestre."
+      },
+      {
+        "id": "ccf",
+        "etiqueta": "− Consumo de capital fijo",
+        "monto_mdp": 6424633,
+        "pct_pib": 19.2,
+        "signo": "resta",
+        "estado": "derivado",
+        "glosa": "Desgaste de lo que construimos nosotros: máquinas, fábricas, carreteras. Restarlo reconoce que parte de lo producido sólo repuso lo que se gastó."
+      },
+      {
+        "id": "pin",
+        "etiqueta": "= Producto Interno Neto",
+        "monto_mdp": 27082214,
+        "pct_pib": 80.8,
+        "signo": "subtotal",
+        "estado": "derivado",
+        "glosa": "Lo que queda después de reponer el capital hecho por el hombre. Todavía no descuenta nada de la naturaleza."
+      },
+      {
+        "id": "agotamiento",
+        "etiqueta": "− Agotamiento de recursos naturales",
+        "monto_mdp": 144020,
+        "pct_pib": 0.4,
+        "signo": "resta",
+        "estado": "oficial",
+        "glosa": "Capital natural que ya no está: hidrocarburos extraídos, bosque perdido, agua subterránea sacada por encima de la recarga."
+      },
+      {
+        "id": "degradacion",
+        "etiqueta": "− Degradación del ambiente",
+        "monto_mdp": 1238194,
+        "pct_pib": 3.7,
+        "signo": "resta",
+        "estado": "oficial",
+        "glosa": "Lo que cuesta el daño: aire contaminado, suelo degradado, residuos sin gestionar, aguas residuales sin tratar."
+      },
+      {
+        "id": "pine",
+        "etiqueta": "= Producto Interno Neto Ecológico",
+        "monto_mdp": 25700000,
+        "pct_pib": 76.6,
+        "signo": "resultado",
+        "estado": "oficial",
+        "glosa": "La riqueza que de verdad quedó en 2024, una vez pagado lo que la naturaleza puso. Poco más de tres cuartas partes del PIB anunciado."
+      }
+    ],
+    "ctada": {
+      "total_mdp": 1382214,
+      "pct_pib": 4.1,
+      "estado": "oficial",
+      "nombre": "Costos Totales por Agotamiento y Degradación Ambiental",
+      "lectura": "En 2024 el país gastó ambientalmente $1,382,214 millones de pesos para producir su PIB. Es 4.1% de todo lo que produjo: más que muchos presupuestos sectoriales completos."
+    },
+    "agotamiento": {
+      "total_mdp": 144020,
+      "pct_pib": 0.4,
+      "estado": "oficial",
+      "definicion": "Capital natural que se consumió y no vuelve por sí solo dentro del periodo. Se mide por lo que se extrajo por encima de la capacidad de reposición.",
+      "componentes": [
+        {
+          "id": "hidrocarburos",
+          "nombre": "Agotamiento de hidrocarburos",
+          "icono": "🛢️",
+          "pct_del_rubro": 46,
+          "monto_mdp": 66249,
+          "estado": "derivado",
+          "glosa": "El renglón más caro del agotamiento. Cada barril extraído es una reserva que deja de existir."
+        },
+        {
+          "id": "forestal",
+          "nombre": "Agotamiento de recursos forestales",
+          "icono": "🌲",
+          "pct_del_rubro": 28,
+          "monto_mdp": 40326,
+          "estado": "derivado",
+          "glosa": "Bosque perdido por encima de lo que se regenera. Casi nunca aparece en el debate público sobre recursos."
+        },
+        {
+          "id": "agua",
+          "nombre": "Agotamiento de agua subterránea",
+          "icono": "💧",
+          "pct_del_rubro": 26,
+          "monto_mdp": 37445,
+          "estado": "derivado",
+          "glosa": "Agua extraída de acuíferos por encima de su recarga. Es el dato que debería condicionar cualquier polo industrial nuevo."
+        }
+      ],
+      "nota": "Los porcentajes de reparto (46%, 28% y 26%) son oficiales; los montos en pesos se derivan aplicándolos al total del rubro."
+    },
+    "degradacion": {
+      "total_mdp": 1238194,
+      "pct_pib": 3.7,
+      "estado": "oficial",
+      "definicion": "Lo que cuesta reparar o soportar el daño hecho al entorno. No es capital que se acabó, es entorno que empeoró.",
+      "componentes": [
+        {
+          "id": "aire",
+          "nombre": "Emisiones al aire",
+          "icono": "🏭",
+          "monto_mdp": 832799,
+          "pct_pib": 2.5,
+          "estado": "oficial",
+          "glosa": "Por sí solo, el renglón más costoso de toda la cuenta ambiental: más que el agotamiento completo multiplicado por cinco."
+        },
+        {
+          "id": "suelo",
+          "nombre": "Degradación del suelo",
+          "icono": "🏜️",
+          "monto_mdp": 212348,
+          "pct_pib": 0.6,
+          "estado": "oficial",
+          "glosa": "Erosión y pérdida de capacidad productiva de la tierra. Golpea primero al campo y a la seguridad alimentaria."
+        },
+        {
+          "id": "residuos",
+          "nombre": "Residuos sólidos urbanos",
+          "icono": "🗑️",
+          "monto_mdp": 124438,
+          "pct_pib": 0.4,
+          "estado": "oficial",
+          "glosa": "La basura que no se gestiona adecuadamente. Es competencia municipal, y el municipio es el orden de gobierno con menos ingreso propio."
+        },
+        {
+          "id": "aguas_residuales",
+          "nombre": "Tratamiento insuficiente de aguas residuales",
+          "icono": "🚱",
+          "monto_mdp": 68609,
+          "pct_pib": 0.2,
+          "estado": "oficial",
+          "glosa": "Agua que se devuelve al ciclo sin tratar. El costo lo paga quien está río abajo."
+        }
+      ]
+    },
+    "gasto_proteccion_ambiental": {
+      "monto_mdp": 232882,
+      "pct_pib": 0.7,
+      "estado": "oficial",
+      "lectura": "México gastó $232,882 millones de pesos en proteger el ambiente y causó un daño de $1,382,214 millones. Por cada peso destinado a proteger, se deterioraron cerca de seis.",
+      "ratio_dano_sobre_gasto": 5.94,
+      "ratio_estado": "derivado"
+    },
+    "puntos_ciegos": [
+      {
+        "titulo": "Un crecimiento que en términos ecológicos puede ser negativo",
+        "texto": "Si en un año la economía crece 3% y el costo ambiental es de 4.1% del PIB, el país produjo más de lo que su capital natural repuso. El indicador que se anuncia no permite ver esa resta, porque el PIB no la hace."
+      },
+      {
+        "titulo": "La cuenta ambiental no aparece en el Presupuesto de Egresos",
+        "texto": "El daño de $1,382,214 millones de pesos no tiene una partida ni un responsable con nombre. No es una deuda que alguien vaya a pagar: es un costo que se traslada a quien viene después."
+      },
+      {
+        "titulo": "Seis pesos de daño por cada peso de protección",
+        "texto": "El gasto en protección ambiental equivale a 0.7% del PIB frente a un deterioro de 4.1%. La proporción, y no el monto absoluto, es lo que mide la seriedad del compromiso."
+      },
+      {
+        "titulo": "El aire concentra el problema y el debate mira a otro lado",
+        "texto": "Las emisiones al aire cuestan 2.5% del PIB, casi dos terceras partes de toda la cuenta ambiental. La discusión pública sobre recursos naturales suele centrarse en petróleo y litio, que juntos pesan mucho menos."
+      }
+    ],
+    "implicaciones_juridicas": [
+      {
+        "id": "fiscal",
+        "icono": "💰",
+        "titulo": "Justifica los impuestos ambientales",
+        "texto": "El PINE demuestra con contabilidad nacional que existen externalidades negativas: costos que quien produce traslada a la sociedad. Eso da sustento jurídico a que el Congreso establezca gravámenes ambientales bajo la premisa de que quien contamina y agota, paga.",
+        "fundamento": "Art. 31 fracción IV y Art. 73 CPEUM"
+      },
+      {
+        "id": "mia",
+        "icono": "🚫",
+        "titulo": "Respalda negar una Manifestación de Impacto Ambiental",
+        "texto": "Si el costo de agotamiento hídrico de una región ya es crítico según el INEGI, la autoridad ambiental cuenta con sustento técnico para negar concesiones o autorizaciones a nuevas industrias en esa zona.",
+        "fundamento": "Art. 27 CPEUM · LGEEPA"
+      },
+      {
+        "id": "pnd",
+        "icono": "🧭",
+        "titulo": "Obliga a que el Plan Nacional de Desarrollo lleve metas ambientales",
+        "texto": "La planeación democrática no puede guiarse sólo por el PIB. Al existir una medición oficial del deterioro, omitirla en el Plan deja de ser una decisión técnica y pasa a ser una omisión revisable.",
+        "fundamento": "Art. 26 CPEUM · Ley de Planeación"
+      },
+      {
+        "id": "energia",
+        "icono": "⚡",
+        "titulo": "Legitima la intervención en el mercado energético",
+        "texto": "Al poner precio a la degradación del aire y al agotamiento de hidrocarburos, la cuenta ecológica sostiene jurídicamente que el Estado regule la matriz energética como asunto de rectoría y no de preferencia política.",
+        "fundamento": "Art. 25 y Art. 28 CPEUM"
+      }
+    ]
+  },
   "simulador_megaobras": {
   "sectores": [
     {
