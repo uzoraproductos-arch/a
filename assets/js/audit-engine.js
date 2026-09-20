@@ -55,6 +55,12 @@
     return '$' + num.toLocaleString('es-MX') + ' mdp';
   }
 
+  // Dentro de una misma gráfica la unidad no debe cambiar: mezclar billones y
+  // millones obliga al lector a convertir de cabeza para comparar dos barras.
+  function formatMdpFijo(num) {
+    return '$' + Math.round(num).toLocaleString('es-MX') + ' mdp';
+  }
+
   function formatNumber(num) {
     return num.toLocaleString('es-MX');
   }
@@ -1755,6 +1761,7 @@
 
     // Acciones al activar pestañas
     if (tabKey === 'presupuesto') {
+      renderPanoramaErario();
       if (state.activeView === 'geo' && state.leafletMap) {
         setTimeout(() => state.leafletMap.invalidateSize(), 60);
       }
@@ -1803,7 +1810,16 @@
     });
 
     // Acciones específicas de subpestaña
-    if (parentTab === 'politicos') {
+    if (parentTab === 'presupuesto') {
+      if (subKey === 'panoramica') {
+        renderPanoramaErario();
+        if (state.activeView === 'geo' && state.leafletMap) {
+          setTimeout(() => state.leafletMap.invalidateSize(), 80);
+        }
+      } else if (subKey === 'territorio') {
+        renderTerritorioErario();
+      }
+    } else if (parentTab === 'politicos') {
       if (subKey === 'mandatarios') renderPoliticosMandatarios();
       else if (subKey === 'secundarios') renderPoliticosSecundarios();
       else if (subKey === 'curiosos') renderPoliticosCuriosos();
@@ -1952,8 +1968,21 @@
     { a: ['DOF'], t: 'DOF (Diario Oficial de la Federación)', r: 'ref-cpeum', n: 1, cs: true }
   ];
 
-  const AUTOLINK_OMITIR_TAGS = new Set(['A', 'BUTTON', 'SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'LABEL', 'SVG', 'CODE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6']);
+  const AUTOLINK_OMITIR_TAGS = new Set(['A', 'BUTTON', 'SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'LABEL', 'SVG', 'CODE', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DT', 'TH', 'SUP', 'SUB']);
   const AUTOLINK_OMITIR_PANELES = new Set(['tab-panel-faq', 'tab-panel-referencias']);
+
+  // Etiquetas, distintivos y celdas de dato: son rótulos, no prosa. Vincular
+  // dentro de ellos rompe su maquetación y no ayuda a leer.
+  const AUTOLINK_OMITIR_CLASES = new Set([
+    'hero-tag', 'est-chip', 'cd-lab', 'cd-ley', 'cd-val', 'cd-inst',
+    'ce-inst', 'ce-tit', 'ce-num', 'ets-k', 'ets-v', 'ets-s',
+    'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
+    'fed-monto', 'fed-pct', 'ec-nom', 'ec-val', 'ec-rk', 'ec-rv',
+    'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
+    'ef-tit', 'ciego-dato', 'legend-caption', 'legend-ticks',
+    'tel-item', 'telemetry-badge', 'prov', 'creator-box', 'chip', 'pill',
+    'kpi-label', 'kpi-value', 'box-title', 'stat-label', 'stat-value'
+  ]);
 
   let autolinkIndice = null;
 
@@ -1982,7 +2011,12 @@
     let el = nodo.parentElement;
     while (el && el.nodeType === 1) {
       if (AUTOLINK_OMITIR_TAGS.has(el.tagName)) return false;
-      if (el.classList && (el.classList.contains('glos-link') || el.classList.contains('ref-link') || el.classList.contains('no-autolink'))) return false;
+      if (el.classList) {
+        if (el.classList.contains('glos-link') || el.classList.contains('ref-link') || el.classList.contains('no-autolink')) return false;
+        for (let k = 0; k < el.classList.length; k++) {
+          if (AUTOLINK_OMITIR_CLASES.has(el.classList[k])) return false;
+        }
+      }
       if (el.hasAttribute && el.hasAttribute('data-no-autolink')) return false;
       el = el.parentElement;
     }
@@ -2068,6 +2102,338 @@
         console.warn('[Auditavisión] Vinculación automática omitida:', err);
       }
     }, retardoMs);
+  }
+
+  // ==========================================================================
+  // PESTAÑA 1 — PANORÁMICA DEL ERARIO
+  // Vista de conjunto, no de auditoría: cuánto dinero es, de dónde sale, en
+  // qué se va, hacia dónde baja y qué ley gobierna cada paso. El detalle
+  // operativo vive en la pestaña 2.
+  // ==========================================================================
+  const PANORAMA = (DB && DB.panoramaErario) ? DB.panoramaErario : null;
+
+  let etapaCircuitoSel = null;
+  let itemIngresoSel = null;
+  let itemEgresoSel = null;
+  let entidadCircuitoSel = null;
+
+  function chipEstado(estado) {
+    const texto = estado === 'oficial' ? 'oficial' : 'derivado';
+    return '<span class="est-chip est-' + texto + '">' + texto + '</span>';
+  }
+
+  function pctDe(monto, total) {
+    return total ? (monto / total * 100) : 0;
+  }
+
+  // --- Etapas del circuito ---------------------------------------------------
+  function renderCircuito() {
+    const cont = document.getElementById('circuitoGrid');
+    if (!cont || !PANORAMA) return;
+    cont.innerHTML = PANORAMA.circuito.map(e => `
+      <button type="button" class="circuito-etapa${etapaCircuitoSel === e.id ? ' active' : ''}"
+              data-etapa="${e.id}" onclick="window.AuditEngine.selectCircuitoEtapa('${e.id}')">
+        <span class="ce-num">${e.orden}</span>
+        <span class="ce-ico" aria-hidden="true">${e.icono}</span>
+        <span class="ce-tit">${e.titulo}</span>
+        <span class="ce-inst">${e.instrumento}</span>
+      </button>
+    `).join('');
+    renderCircuitoDetalle();
+  }
+
+  function renderCircuitoDetalle() {
+    const box = document.getElementById('circuitoDetalle');
+    if (!box || !PANORAMA) return;
+    const e = PANORAMA.circuito.find(x => x.id === etapaCircuitoSel);
+    if (!e) {
+      box.innerHTML = '<p class="cd-vacio">Seleccione una etapa para ver su fundamento legal, su plazo y quién responde por ella.</p>';
+      return;
+    }
+    box.innerHTML = `
+      <div class="cd-head">
+        <span class="cd-ico" aria-hidden="true">${e.icono}</span>
+        <div>
+          <div class="cd-tit">Etapa ${e.orden} · ${e.titulo}</div>
+          <div class="cd-inst">${e.instrumento}</div>
+        </div>
+      </div>
+      <p class="cd-que">${e.que}</p>
+      <div class="cd-meta">
+        <div><span class="cd-lab">Quién responde</span><span class="cd-val">${e.quien}</span></div>
+        <div><span class="cd-lab">Plazo legal</span><span class="cd-val">${e.cuando}</span></div>
+      </div>
+      <div class="cd-leyes">
+        <span class="cd-lab">Fundamento</span>
+        ${e.leyes.map(l => '<span class="cd-ley">' + l + '</span>').join('')}
+      </div>
+    `;
+  }
+
+  function selectCircuitoEtapa(id) {
+    etapaCircuitoSel = (etapaCircuitoSel === id) ? null : id;
+    renderCircuito();
+  }
+
+  // --- Cifra total -----------------------------------------------------------
+  function renderErarioTotal() {
+    const cont = document.getElementById('erarioTotalStrip');
+    if (!cont || !PANORAMA) return;
+    const deuda = PANORAMA.ingresos.find(i => i.id === 'ing-deuda');
+    const prog = PANORAMA.egresos.filter(e => e.grupo === 'Programable').reduce((a, b) => a + b.montoMdp, 0);
+    const noProg = PANORAMA.egresos.filter(e => e.grupo === 'No programable').reduce((a, b) => a + b.montoMdp, 0);
+    const tarjetas = [
+      { k: 'Ingreso autorizado', v: formatMoneyMdp(PANORAMA.totalLIF), s: 'Ley de Ingresos ' + PANORAMA.ejercicio, c: 'gold' },
+      { k: 'Gasto aprobado', v: formatMoneyMdp(PANORAMA.totalPEF), s: 'Presupuesto de Egresos ' + PANORAMA.ejercicio, c: 'gold' },
+      { k: 'De eso, prestado', v: formatMoneyMdp(deuda.montoMdp), s: pctDe(deuda.montoMdp, PANORAMA.totalLIF).toFixed(1) + '% del ingreso', c: 'red' },
+      { k: 'Se decide cada año', v: formatMoneyMdp(prog), s: 'Gasto programable', c: 'green' },
+      { k: 'Ya está comprometido', v: formatMoneyMdp(noProg), s: 'Gasto no programable', c: 'red' }
+    ];
+    cont.innerHTML = tarjetas.map(t => `
+      <div class="ets-card">
+        <div class="ets-k">${t.k}</div>
+        <div class="ets-v ${t.c}">${t.v}</div>
+        <div class="ets-s">${t.s}</div>
+      </div>
+    `).join('');
+  }
+
+  // --- Barras de ingresos y egresos -----------------------------------------
+  function renderFlujo(tipo) {
+    if (!PANORAMA) return;
+    const esIngreso = tipo === 'ingresos';
+    const datos = esIngreso ? PANORAMA.ingresos : PANORAMA.egresos;
+    const cont = document.getElementById(esIngreso ? 'ingresosChart' : 'egresosChart');
+    if (!cont) return;
+    const sel = esIngreso ? itemIngresoSel : itemEgresoSel;
+    const total = datos.reduce((a, b) => a + b.montoMdp, 0);
+    const maxVal = Math.max.apply(null, datos.map(d => d.montoMdp));
+
+    let grupoPrevio = null;
+    cont.innerHTML = datos.map(d => {
+      let cabecera = '';
+      if (d.grupo !== grupoPrevio) {
+        grupoPrevio = d.grupo;
+        const subtotal = datos.filter(x => x.grupo === d.grupo).reduce((a, b) => a + b.montoMdp, 0);
+        cabecera = `<div class="fc-grupo"><span>${d.grupo}</span>
+                      <span class="fc-grupo-monto">${formatMdpFijo(subtotal)} · ${pctDe(subtotal, total).toFixed(1)}%</span>
+                    </div>`;
+      }
+      const pct = pctDe(d.montoMdp, total);
+      return cabecera + `
+        <button type="button" class="fc-fila${sel === d.id ? ' active' : ''}" role="listitem"
+                onclick="window.AuditEngine.selectFlujoItem('${tipo}','${d.id}')"
+                aria-label="${d.nombre}: ${formatMoneyMdp(d.montoMdp)}">
+          <span class="fc-ico" aria-hidden="true">${d.icono}</span>
+          <span class="fc-nom">${d.nombre}</span>
+          <span class="fc-barra"><span class="fc-relleno ${esIngreso ? 'ing' : 'egr'}${d.id === 'ing-deuda' || d.grupo === 'No programable' ? ' alerta' : ''}"
+                style="width:${(d.montoMdp / maxVal * 100).toFixed(2)}%"></span></span>
+          <span class="fc-monto">${formatMdpFijo(d.montoMdp)}</span>
+          <span class="fc-pct">${pct.toFixed(1)}%</span>
+        </button>`;
+    }).join('');
+    renderFlujoDetalle(tipo);
+  }
+
+  function renderFlujoDetalle(tipo) {
+    const esIngreso = tipo === 'ingresos';
+    const box = document.getElementById(esIngreso ? 'ingresosDetalle' : 'egresosDetalle');
+    if (!box || !PANORAMA) return;
+    const sel = esIngreso ? itemIngresoSel : itemEgresoSel;
+    const datos = esIngreso ? PANORAMA.ingresos : PANORAMA.egresos;
+    const d = datos.find(x => x.id === sel);
+    if (!d) {
+      box.innerHTML = '<p class="cd-vacio">Pulse cualquier renglón para ver qué incluye y qué ley lo sustenta.</p>';
+      return;
+    }
+    box.innerHTML = `
+      <div class="fd-head">
+        <span class="fd-ico" aria-hidden="true">${d.icono}</span>
+        <div>
+          <div class="fd-tit">${d.nombreLargo || d.nombre}</div>
+          <div class="fd-monto">${formatMdpFijo(d.montoMdp)} <span class="fd-equiv">${formatMoneyMdp(d.montoMdp)}</span> ${chipEstado(d.estado)}</div>
+        </div>
+      </div>
+      <p class="fd-txt">${esIngreso ? d.quePaga : d.queCubre}</p>
+      ${d.ley ? '<div class="fd-ley"><span class="cd-lab">Fundamento</span><span class="cd-ley">' + d.ley + '</span></div>' : ''}
+    `;
+  }
+
+  function selectFlujoItem(tipo, id) {
+    if (tipo === 'ingresos') {
+      itemIngresoSel = (itemIngresoSel === id) ? null : id;
+    } else {
+      itemEgresoSel = (itemEgresoSel === id) ? null : id;
+    }
+    renderFlujo(tipo);
+  }
+
+  // --- Puntos ciegos ---------------------------------------------------------
+  function renderCiegos() {
+    const cont = document.getElementById('ciegosGrid');
+    if (!cont || !PANORAMA) return;
+    cont.innerHTML = PANORAMA.puntosCiegos.map(pc => `
+      <article class="ciego-card">
+        <div class="ciego-dato">${pc.dato}</div>
+        <h4>${pc.titulo}</h4>
+        <p>${pc.texto}</p>
+      </article>
+    `).join('');
+  }
+
+  // --- Subpanel 1.2: los tres pisos -----------------------------------------
+  function renderPisos() {
+    const cont = document.getElementById('pisosGrid');
+    if (!cont || !PANORAMA) return;
+    cont.innerHTML = PANORAMA.pisos.map(p => `
+      <article class="piso-card piso-${p.color}">
+        <header>
+          <span class="pi-ico" aria-hidden="true">${p.icono}</span>
+          <h4>${p.nivel}</h4>
+        </header>
+        <dl>
+          <dt>Qué cobra por su cuenta</dt><dd>${p.recauda}</dd>
+          <dt>Quién aprueba su ingreso</dt><dd>${p.apruebaIngreso}</dd>
+          <dt>Quién aprueba su gasto</dt><dd>${p.apruebaGasto}</dd>
+          <dt>Quién lo fiscaliza</dt><dd>${p.fiscaliza}</dd>
+        </dl>
+        <footer>${p.fundamento}</footer>
+      </article>
+    `).join('');
+  }
+
+  function renderFederalizadoGrid() {
+    const cont = document.getElementById('federalizadoGrid');
+    if (!cont || !PANORAMA) return;
+    const f = PANORAMA.federalizado;
+    cont.innerHTML = f.componentes.map(c => {
+      const pct = pctDe(c.montoMdp, f.totalMdp);
+      return `
+      <article class="fed-card">
+        <div class="fed-top">
+          <h4>${c.nombre}</h4>
+          <span class="fed-monto">${formatMdpFijo(c.montoMdp)} ${chipEstado(c.estado)}</span>
+        </div>
+        <div class="fed-barra"><span style="width:${pct.toFixed(1)}%"></span></div>
+        <div class="fed-pct">${pct.toFixed(1)}% del gasto federalizado</div>
+        <p class="fed-regla">${c.regla}</p>
+        <footer>${c.ley}</footer>
+      </article>`;
+    }).join('');
+  }
+
+  // --- Subpanel 1.2: circuito de una entidad --------------------------------
+  function initEntidadCircuito() {
+    const sel = document.getElementById('entidadCircuitoSelect');
+    if (!sel || !DB.estados) return;
+    if (!sel.options.length) {
+      sel.innerHTML = DB.estados.slice()
+        .sort((a, b) => a.name.localeCompare(b.name, 'es'))
+        .map(e => `<option value="${e.abbr}">${e.name}</option>`).join('');
+      sel.addEventListener('change', function () {
+        renderEntidadCircuito(this.value);
+      });
+    }
+    if (!entidadCircuitoSel) entidadCircuitoSel = sel.value || 'AGS';
+    sel.value = entidadCircuitoSel;
+    renderEntidadCircuito(entidadCircuitoSel);
+  }
+
+  function renderEntidadCircuito(abbr) {
+    entidadCircuitoSel = abbr;
+    const box = document.getElementById('entidadCircuito');
+    if (!box || !DB.estados) return;
+    const e = DB.estados.find(x => x.abbr === abbr);
+    if (!e) { box.innerHTML = ''; return; }
+
+    const recibido = (e.ramo28 || 0) + (e.ramo33 || 0) + (e.convenios || 0);
+    const propio = e.recaudacionPropia || 0;
+    const totalDisponible = recibido + propio;
+    const filas = [
+      { n: 'Ramo 28 — participaciones', v: e.ramo28, c: 'gold', d: 'De libre disposición' },
+      { n: 'Ramo 33 — aportaciones', v: e.ramo33, c: 'cyan', d: 'Etiquetado por ley' },
+      { n: 'Convenios', v: e.convenios, c: 'blue', d: 'Pactados caso por caso' },
+      { n: 'Recaudación propia', v: propio, c: 'green', d: 'Lo que el estado cobra por su cuenta' }
+    ];
+    const maxV = Math.max.apply(null, filas.map(f => f.v || 0));
+
+    box.innerHTML = `
+      <div class="ec-head">
+        <div>
+          <h4>${e.name}</h4>
+          <span class="ec-sub">${e.capital} · ${e.pob} millones de habitantes · gobierna ${e.gobernador}</span>
+        </div>
+        <div class="ec-dep">
+          <span class="ec-dep-num">${e.dep}%</span>
+          <span class="ec-dep-lab">de dependencia federal</span>
+        </div>
+      </div>
+      <div class="ec-filas">
+        ${filas.map(f => `
+          <div class="ec-fila">
+            <span class="ec-nom">${f.n}<em>${f.d}</em></span>
+            <span class="ec-barra"><span class="ec-rell ec-${f.c}" style="width:${maxV ? ((f.v || 0) / maxV * 100).toFixed(1) : 0}%"></span></span>
+            <span class="ec-val">${formatMoneyMdp(f.v || 0)}</span>
+          </div>`).join('')}
+      </div>
+      <div class="ec-resumen">
+        <div><span class="ec-rk">Le baja de la Federación</span><span class="ec-rv">${formatMoneyMdp(recibido)}</span></div>
+        <div><span class="ec-rk">Cobra por su cuenta</span><span class="ec-rv">${formatMoneyMdp(propio)}</span></div>
+        <div><span class="ec-rk">Por cada peso propio, recibe</span><span class="ec-rv">${propio ? (recibido / propio).toFixed(1) : '—'} pesos</span></div>
+        <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv">${formatMoneyMdp(e.deuda || 0)} · ${e.semaforoDeuda}</span></div>
+      </div>
+      <p class="ec-nota">
+        La dependencia federal mide qué proporción del dinero que ejerce la entidad no proviene
+        de su propia recaudación. Total disponible estimado: ${formatMoneyMdp(totalDisponible)}.
+      </p>
+    `;
+    renderMunicipiosCircuito(abbr);
+  }
+
+  function renderMunicipiosCircuito(abbr) {
+    const cont = document.getElementById('municipiosCircuito');
+    if (!cont || !DB.estados) return;
+    const e = DB.estados.find(x => x.abbr === abbr);
+    if (!e || !e.municipios || !e.municipios.length) {
+      cont.innerHTML = '<p class="cd-vacio">No hay municipios cargados para esta entidad en la base.</p>';
+      return;
+    }
+    cont.innerHTML = e.municipios.map(m => `
+      <article class="mun-card">
+        <header>
+          <h5>${m.nombre}</h5>
+          <span class="mun-part" style="background:${getPartyColor(m.partido)}">${m.partido}</span>
+        </header>
+        <div class="mun-alcalde">${m.alcalde}</div>
+        <div class="mun-cifras">
+          <div><span>Presupuesto</span><b>${formatMoneyMdp(m.presupuestoTotal)}</b></div>
+          <div><span>Predial propio</span><b>${formatMoneyMdp(m.predial)}</b></div>
+          <div><span>FORTAMUN</span><b>${formatMoneyMdp(m.fortamun)}</b></div>
+          <div><span>FISMDF</span><b>${formatMoneyMdp(m.fismdf)}</b></div>
+        </div>
+        <div class="mun-dep">
+          <span class="mun-dep-lab">Dependencia de transferencias</span>
+          <span class="mun-dep-barra"><span style="width:${Math.min(100, m.dependencia)}%"></span></span>
+          <span class="mun-dep-num">${m.dependencia}%</span>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  // --- Orquestación ----------------------------------------------------------
+  function renderPanoramaErario() {
+    if (!PANORAMA) return;
+    renderCircuito();
+    renderErarioTotal();
+    renderFlujo('ingresos');
+    renderFlujo('egresos');
+    renderCiegos();
+  }
+
+  function renderTerritorioErario() {
+    renderPisos();
+    renderFederalizadoGrid();
+    initEntidadCircuito();
   }
 
   // ==========================================================================
@@ -14007,6 +14373,7 @@
     safeRun(() => renderAsfIrregularidadesChart('tipologia'), 'renderAsfIrregularidadesChart');
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
+    safeRun(renderPanoramaErario, 'renderPanoramaErario');
     safeRun(() => programarAutolink(400), 'programarAutolink');
     safeRun(iniciarPistasDeslizamiento, 'iniciarPistasDeslizamiento');
 
@@ -15944,6 +16311,12 @@
     switchSubtab: switchSubtab,
     toggleTheme: toggleTheme,
     aplicarAutolink: aplicarAutolink,
+    selectCircuitoEtapa: selectCircuitoEtapa,
+    selectFlujoItem: selectFlujoItem,
+    renderPanoramaErario: renderPanoramaErario,
+    renderTerritorioErario: renderTerritorioErario,
+    renderEntidadCircuito: renderEntidadCircuito,
+
     programarAutolink: programarAutolink,
     actualizarPistasDeslizamiento: actualizarPistasDeslizamiento,
     goToGlossary: goToGlossary,

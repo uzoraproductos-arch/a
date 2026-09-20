@@ -211,67 +211,272 @@
          PESTAÑA 1: PRESUPUESTO Y GASTO PÚBLICO
          ======================================================================== -->
     <div id="tab-panel-presupuesto" class="tab-panel active">
-      
-      <!-- Lentes de Fiscalización y Controles del Mapa -->
-      <div class="audit-lens-bar">
-        <div class="lens-label">
-          <span>🔎 Lente de Fiscalización:</span>
-        </div>
-        <div class="lens-buttons">
-          <button class="lens-btn active" data-metric="gasto">Gasto Federalizado Total</button>
-          <button class="lens-btn" data-metric="ramo28">Ramo 28 (Libre Disposición)</button>
-          <button class="lens-btn" data-metric="ramo33">Ramo 33 (Aportaciones Etiquetadas)</button>
-          <button class="lens-btn" data-metric="pc">Gasto Per Cápita ($/hab)</button>
-          <button class="lens-btn" data-metric="asf" style="color:var(--crimson-bright);">⚠️ Alertas ASF (Irregularidades)</button>
-          <button class="lens-btn" data-metric="deuda">Semáforo Deuda SHCP</button>
-          <button class="lens-btn" data-metric="dep">Dependencia Federal (%)</button>
-        </div>
-        <div class="map-view-toggle">
-          <button class="view-btn active" data-view="geo">Mapa Geográfico</button>
-          <button class="view-btn" data-view="cartogram">Cartograma Mosaico</button>
-        </div>
+
+      <div class="subtabs-bar" data-parent="presupuesto">
+        <button class="subtab-btn active" data-sub="panoramica" role="tab" aria-selected="true">1.1 El Circuito del Dinero P&uacute;blico: De D&oacute;nde Sale y En Qu&eacute; se Va</button>
+        <button class="subtab-btn" data-sub="territorio" role="tab" aria-selected="false">1.2 Del Peso Federal al Peso Local: Estados y Municipios</button>
       </div>
 
-      <!-- Contenedor Cartográfico Maestro -->
-      <div class="map-workspace" style="display:grid; grid-template-columns: 1fr 340px; gap:20px; align-items:start;">
-        <div class="map-render-container" style="position:relative;">
-          <div id="geoMapContainer"></div>
-          <div id="cartogramContainer" style="display:none;">
-            <div id="cartogramGrid" class="cartogram-grid"></div>
+      <!-- ====================================================================
+           SUBPANEL 1.1: EL CIRCUITO DEL DINERO PUBLICO
+           ==================================================================== -->
+      <div class="subtab-panel active" data-parent="presupuesto" data-subpanel="panoramica">
+
+        <div class="section-hero">
+          <span class="hero-tag">Panor&aacute;mica del Erario &middot; Ejercicio Fiscal 2026</span>
+          <h2>El Circuito del Dinero P&uacute;blico</h2>
+          <p>
+            Antes de auditar una cifra hay que saber por d&oacute;nde pas&oacute;. El dinero p&uacute;blico recorre
+            siempre el mismo camino: alguien autoriza cobrarlo, alguien decide en qu&eacute; gastarlo,
+            alguien lo ejerce y alguien lo revisa. Cada uno de esos cuatro pasos tiene una ley que
+            lo manda, una fecha l&iacute;mite y un responsable con nombre. Esta pesta&ntilde;a es el mapa de ese
+            recorrido; la siguiente entra al detalle de cada operaci&oacute;n.
+          </p>
+        </div>
+
+        <!-- LAS CUATRO ETAPAS -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Las cuatro etapas, y qu&eacute; ley gobierna cada una</h3>
+            <p class="erario-bloque-sub">Pulse una etapa para ver su fundamento legal, su plazo y qui&eacute;n responde por ella.</p>
           </div>
-          
-          <div class="map-legend-bar" style="margin-top:14px;">
-            <span class="legend-caption" id="legendCaption">Gasto Federalizado Total</span>
-            <div class="legend-gradient-bar" id="legendGradient"></div>
-            <div class="legend-ticks">
-              <span id="legendMin">Mínimo</span>
-              <span id="legendMid">Medio</span>
-              <span id="legendMax">Máximo</span>
-            </div>
+          <div class="circuito-grid" id="circuitoGrid"></div>
+          <div class="circuito-detalle" id="circuitoDetalle"></div>
+        </div>
+
+        <!-- CUANTO ES -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Cu&aacute;nto dinero es</h3>
+            <p class="erario-bloque-sub">
+              La Ley de Ingresos y el Presupuesto de Egresos de 2026 suman la misma cifra:
+              <b class="gold">$10.19 billones de pesos</b>. No es coincidencia, es construcci&oacute;n contable,
+              y m&aacute;s abajo se explica por qu&eacute;.
+            </p>
+          </div>
+          <div class="erario-total-strip" id="erarioTotalStrip"></div>
+        </div>
+
+        <!-- DE DONDE SALE -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>1 &middot; De d&oacute;nde sale</h3>
+            <p class="erario-bloque-sub">
+              Nueve or&iacute;genes componen el ingreso federal de 2026. Pulse cualquiera para ver
+              qu&eacute; grava y qu&eacute; ley lo faculta.
+            </p>
+          </div>
+          <div class="flujo-chart" id="ingresosChart" role="list"></div>
+          <div class="flujo-detalle" id="ingresosDetalle"></div>
+        </div>
+
+        <!-- EN QUE SE VA -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>2 &middot; En qu&eacute; se va</h3>
+            <p class="erario-bloque-sub">
+              El gasto se parte en dos mundos. El <b>programable</b> se decide cada a&ntilde;o y compra
+              cosas: pensiones, escuelas, hospitales, carreteras. El <b>no programable</b> no se
+              decide, se debe: intereses, participaciones que ya son de los estados y cuentas del
+              a&ntilde;o pasado.
+            </p>
+          </div>
+          <div class="flujo-chart" id="egresosChart" role="list"></div>
+          <div class="flujo-detalle" id="egresosDetalle"></div>
+        </div>
+
+        <!-- A DONDE BAJA -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>3 &middot; A d&oacute;nde baja</h3>
+            <p class="erario-bloque-sub">
+              De ese gasto, <b class="gold">$2.81 billones</b> no se quedan en la Federaci&oacute;n: viajan a
+              las 32 entidades y a m&aacute;s de 2,400 municipios. El mapa muestra c&oacute;mo se reparte.
+              Cambie de lente para ver el mismo territorio bajo otra pregunta.
+            </p>
           </div>
         </div>
 
-        <!-- Columna Lateral: Tablero Resumen y Ranking de Entidades -->
-        <div class="side-analytics-column">
-          <div class="panel-stat-box">
-            <div class="box-title">
-              <span>Mayor Asignación</span>
-              <span style="font-size:10px; color:var(--gold); font-family:var(--font-mono);">TOP 5</span>
-            </div>
-            <div id="topRankingsContainer"></div>
-          </div>
-
-          <div class="panel-stat-box alert-box">
-            <div class="box-title">
-              <span>Menor Asignación</span>
-              <span style="font-size:10px; color:var(--crimson-bright); font-family:var(--font-mono);">BOTTOM 5</span>
-            </div>
-            <div id="bottomRankingsContainer"></div>
-          </div>
+<!-- Lentes de Fiscalización y Controles del Mapa -->
+      <div class="audit-lens-bar">
+        <div class="lens-label">
+          <span>🔎 Lente de Fiscalización:</span>
+        </div>
+        <div class="lens-buttons">
+          <button class="lens-btn active" data-metric="gasto">Gasto Federalizado Total</button>
+          <button class="lens-btn" data-metric="ramo28">Ramo 28 (Libre Disposición)</button>
+          <button class="lens-btn" data-metric="ramo33">Ramo 33 (Aportaciones Etiquetadas)</button>
+          <button class="lens-btn" data-metric="pc">Gasto Per Cápita ($/hab)</button>
+          <button class="lens-btn" data-metric="asf" style="color:var(--crimson-bright);">⚠️ Alertas ASF (Irregularidades)</button>
+          <button class="lens-btn" data-metric="deuda">Semáforo Deuda SHCP</button>
+          <button class="lens-btn" data-metric="dep">Dependencia Federal (%)</button>
+        </div>
+        <div class="map-view-toggle">
+          <button class="view-btn active" data-view="geo">Mapa Geográfico</button>
+          <button class="view-btn" data-view="cartogram">Cartograma Mosaico</button>
+        </div>
+      </div>
+
+      <!-- Contenedor Cartográfico Maestro -->
+      <div class="map-workspace" style="display:grid; grid-template-columns: 1fr 340px; gap:20px; align-items:start;">
+        <div class="map-render-container" style="position:relative;">
+          <div id="geoMapContainer"></div>
+          <div id="cartogramContainer" style="display:none;">
+            <div id="cartogramGrid" class="cartogram-grid"></div>
+          </div>
+          
+          <div class="map-legend-bar" style="margin-top:14px;">
+            <span class="legend-caption" id="legendCaption">Gasto Federalizado Total</span>
+            <div class="legend-gradient-bar" id="legendGradient"></div>
+            <div class="legend-ticks">
+              <span id="legendMin">Mínimo</span>
+              <span id="legendMid">Medio</span>
+              <span id="legendMax">Máximo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Lateral: Tablero Resumen y Ranking de Entidades -->
+        <div class="side-analytics-column">
+          <div class="panel-stat-box">
+            <div class="box-title">
+              <span>Mayor Asignación</span>
+              <span style="font-size:10px; color:var(--gold); font-family:var(--font-mono);">TOP 5</span>
+            </div>
+            <div id="topRankingsContainer"></div>
+          </div>
+
+          <div class="panel-stat-box alert-box">
+            <div class="box-title">
+              <span>Menor Asignación</span>
+              <span style="font-size:10px; color:var(--crimson-bright); font-family:var(--font-mono);">BOTTOM 5</span>
+            </div>
+            <div id="bottomRankingsContainer"></div>
+          </div>
         </div>
+        </div>
+
+        <!-- PUNTOS CIEGOS -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Lo que la cifra grande no dice</h3>
+            <p class="erario-bloque-sub">
+              Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido
+              de la cifra total.
+            </p>
+          </div>
+          <div class="ciegos-grid" id="ciegosGrid"></div>
+        </div>
+
+        <!-- FUENTES -->
+        <div class="erario-fuentes">
+          <div class="ef-tit">Fuentes de esta secci&oacute;n</div>
+          <ul>
+            <li><b>Ley de Ingresos de la Federaci&oacute;n para el Ejercicio Fiscal 2026</b>, art&iacute;culo 1. Total de ingresos: $10,193,683.7 millones de pesos.</li>
+            <li><b>Presupuesto de Egresos de la Federaci&oacute;n 2026</b>, publicado en el Diario Oficial de la Federaci&oacute;n. Gasto programable $7,094,708.8 mdp y no programable $3,098,974.9 mdp.</li>
+            <li><b>Centro de Estudios de las Finanzas P&uacute;blicas de la C&aacute;mara de Diputados</b>, notas sobre gasto federalizado y decreto de PEF 2026. Ramo 28: $1,456,045.9 mdp. Ramo 33: $1,127,075.3 mdp.</li>
+          </ul>
+          <p class="ef-nota">
+            Las cifras marcadas como <span class="est-chip est-derivado">derivado</span> no aparecen
+            as&iacute; en el documento oficial: se obtienen por diferencia o a partir de los porcentajes
+            publicados, y se identifican como tales para que cualquiera pueda rehacer la cuenta.
+            Las marcadas como <span class="est-chip est-oficial">oficial</span> se leen directamente
+            del texto de la ley o del an&aacute;lisis del CEFP.
+          </p>
+        </div>
+
       </div>
+      <!-- FIN SUBPANEL 1.1 -->
 
-    </div><!-- FIN PESTAÑA 1 -->
+      <!-- ====================================================================
+           SUBPANEL 1.2: DEL PESO FEDERAL AL PESO LOCAL
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="presupuesto" data-subpanel="territorio">
+
+        <div class="section-hero">
+          <span class="hero-tag">Hacienda P&uacute;blica en Tres Pisos &middot; Federaci&oacute;n, Estado y Municipio</span>
+          <h2>Del Peso Federal al Peso Local</h2>
+          <p>
+            M&eacute;xico no tiene una hacienda p&uacute;blica, tiene tres superpuestas. Cada piso cobra sus
+            propios impuestos, aprueba su propia ley de ingresos y su propio presupuesto, y
+            responde ante un fiscalizador distinto. Entender qui&eacute;n cobra qu&eacute; y qui&eacute;n revisa a
+            qui&eacute;n es lo que permite saber a qu&eacute; puerta tocar cuando algo no cuadra.
+          </p>
+        </div>
+
+        <!-- LOS TRES PISOS -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Los tres pisos de la hacienda p&uacute;blica</h3>
+            <p class="erario-bloque-sub">
+              Note una asimetr&iacute;a que casi nunca se menciona: la ley de ingresos del municipio
+              no la aprueba el municipio, la aprueba el congreso del estado.
+            </p>
+          </div>
+          <div class="pisos-grid" id="pisosGrid"></div>
+        </div>
+
+        <!-- RAMO 28 VS RAMO 33 -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Lo que baja, y con qu&eacute; libertad baja</h3>
+            <p class="erario-bloque-sub">
+              La distinci&oacute;n entre Ramo 28 y Ramo 33 es la m&aacute;s importante de todo el gasto
+              federalizado, y la que m&aacute;s se confunde en la conversaci&oacute;n p&uacute;blica.
+            </p>
+          </div>
+          <div class="federalizado-grid" id="federalizadoGrid"></div>
+        </div>
+
+        <!-- CIRCUITO DE UNA ENTIDAD -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>El circuito de una entidad, paso a paso</h3>
+            <p class="erario-bloque-sub">
+              Elija un estado para ver cu&aacute;nto recibe de la Federaci&oacute;n, cu&aacute;nto recauda por su
+              cuenta y qu&eacute; tan dependiente resulta la suma.
+            </p>
+          </div>
+          <div class="entidad-selector-bar">
+            <label for="entidadCircuitoSelect">Entidad federativa</label>
+            <select id="entidadCircuitoSelect" aria-label="Seleccionar entidad federativa"></select>
+          </div>
+          <div class="entidad-circuito" id="entidadCircuito"></div>
+        </div>
+
+        <!-- ESLABON MUNICIPAL -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>El eslab&oacute;n municipal</h3>
+            <p class="erario-bloque-sub">
+              Es el piso m&aacute;s cercano al ciudadano y el que menos capacidad tiene de sostenerse
+              solo. Estos son los municipios de la entidad seleccionada arriba.
+            </p>
+          </div>
+          <div class="municipios-grid" id="municipiosCircuito"></div>
+        </div>
+
+        <!-- FUENTES -->
+        <div class="erario-fuentes">
+          <div class="ef-tit">Fuentes de esta secci&oacute;n</div>
+          <ul>
+            <li><b>Constituci&oacute;n Pol&iacute;tica de los Estados Unidos Mexicanos</b>, art&iacute;culos 115 fracci&oacute;n IV, 116, 117 y 124.</li>
+            <li><b>Ley de Coordinaci&oacute;n Fiscal</b>: art&iacute;culos 2 a 3-B para participaciones y cap&iacute;tulo V, art&iacute;culos 25 a 51, para aportaciones.</li>
+            <li><b>Base de datos subnacional de Auditavisi&oacute;n</b>: montos por entidad y municipio, con su origen indicado en cada ficha.</li>
+          </ul>
+          <p class="ef-nota">
+            Las cifras por entidad y municipio proceden de la base interna de la plataforma y
+            corresponden al &uacute;ltimo corte cargado. Los totales federales de Ramo 28 y Ramo 33 de
+            2026 aparecen en la subpesta&ntilde;a anterior con su fuente oficial; la distribuci&oacute;n
+            entidad por entidad para 2026 se actualizar&aacute; contra el acuerdo de distribuci&oacute;n
+            publicado en el Diario Oficial de la Federaci&oacute;n.
+          </p>
+        </div>
+
+      </div>
+      <!-- FIN SUBPANEL 1.2 -->
+
+    </div>><!-- FIN PESTAÑA 1 -->
 
     <!-- ========================================================================
          PESTAÑA 2: ACCIÓN FINANCIERA DEL ESTADO (CON SUBPESTAÑAS)

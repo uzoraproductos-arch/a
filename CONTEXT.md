@@ -169,6 +169,37 @@ de los 32 circuitos.
   hasta 68 palabras. Ahora cada una abre con una idea y después enumera los
   instrumentos. No se retiró ninguna cifra.
 
+- **Pestaña 1 reconstruida como panorámica del erario**, dividida en dos
+  subpestañas. El alcance es deliberado: es vista de conjunto y marco legal,
+  no auditoría. El detalle operativo corresponde a la pestaña 2.
+  - **1.1 El Circuito del Dinero Público.** Las cuatro etapas del ciclo
+    presupuestario —se recauda, se aprueba, se ejerce, se rinden cuentas— cada
+    una con su instrumento, su plazo constitucional, su responsable y su
+    fundamento legal. Luego, de dónde sale (nueve orígenes de la Ley de
+    Ingresos 2026), en qué se va (gasto programable y no programable) y a
+    dónde baja (el mapa y sus lentes, conservados sin un solo cambio).
+    Cierra con cinco puntos ciegos y el bloque de fuentes.
+  - **1.2 Del Peso Federal al Peso Local.** Los tres pisos de la hacienda
+    pública con quién cobra, quién aprueba y quién fiscaliza en cada uno; la
+    diferencia entre Ramo 28 y Ramo 33; un selector que arma el circuito de
+    cualquiera de las 32 entidades; y las fichas municipales de esa entidad.
+  - Los datos viven en `panoramaErario`, dentro de `audit-database.js`.
+    Ingresos, egresos y gasto federalizado **cuadran al peso** con sus
+    totales oficiales; hay una comprobación aritmética en el commit.
+  - Cada cifra lleva un distintivo de trazabilidad: `oficial` cuando se lee
+    directo del texto de la ley o del análisis del CEFP, y `derivado` cuando
+    se obtiene por diferencia o a partir de porcentajes publicados. Esto es
+    lo que permite que cualquiera rehaga la cuenta.
+
+- **Afinaciones del vinculador automático.** Se añadió
+  `AUTOLINK_OMITIR_CLASES`: las etiquetas compactas, los distintivos y las
+  celdas de dato ya no reciben nota al pie, porque rompían su maquetación sin
+  aportar nada. También se omiten `DT`, `TH`, `SUP` y `SUB`.
+
+- **Unidad consistente dentro de cada gráfica** (`formatMdpFijo`). Mezclar
+  «billones» y «mdp» en la misma columna obligaba a convertir de cabeza para
+  comparar dos barras.
+
 ### Pendiente
 
 - **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
@@ -177,11 +208,18 @@ de los 32 circuitos.
   corresponden a la estructura de once ponencias y al tope salarial anterior.
   Hay una advertencia metodológica visible en la ficha. Deben contrastarse
   contra el Manual de Remuneraciones vigente antes de citarse.
-- **Contenido de la pestaña 1 (Presupuesto)**: es la puerta de entrada y solo
-  tiene 350 caracteres de texto —un párrafo de introducción— frente a los
-  29,833 de la pestaña 3. El panel es mapa y botones, sin nada que explique
-  qué está viendo el lector ni cómo leerlo. Es la brecha de contenido más
-  grande de la plataforma.
+- **Ramo 28 y Ramo 33 por entidad**: los totales federales de 2026 que hoy se
+  muestran en la subpestaña 1.1 son los oficiales ($1,456,045.9 mdp y
+  $1,127,075.3 mdp). Los montos **por entidad** de la colección `estados`
+  corresponden a un corte anterior y suman totales distintos ($1,385,200 y
+  $1,114,800 mdp). La base es internamente consistente, así que el mapa y los
+  comparativos funcionan bien, pero la distribución entidad por entidad debe
+  actualizarse contra el acuerdo de distribución publicado en el Diario
+  Oficial el 12 de diciembre de 2025. Hasta entonces, la subpestaña 1.2 lo
+  advierte en su bloque de fuentes.
+- **Colección `impuestos`**: sus montos de ISR, IVA e IEPS son anteriores a la
+  Ley de Ingresos 2026 y difieren de los que muestra `panoramaErario`. Alimenta
+  la calculadora de la pestaña 2; conviene alinearla al tocar ese módulo.
 - **Estilos en línea**: hay 1,326 atributos `style=` en el HTML. Ganan a
   cualquier regla de la hoja de estilos, que es justo el origen del problema
   de contraste en tema claro y de los párrafos demasiado anchos. Conviene
