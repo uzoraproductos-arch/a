@@ -5824,6 +5824,51 @@ nav.tabbar button.active .num {
 }
 @media (prefers-reduced-motion: reduce) { .sim-tel-punto { animation: none; } }
 
+/* Partes A y B dentro del bloque 2: dos puertas a la misma informacion. */
+.sim-parte { margin-bottom: 26px; }
+.sim-parte:last-child { margin-bottom: 0; }
+.sim-parte-et {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border-subtle);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim, #9aa3b2);
+}
+.sim-parte-let {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--border-accent, rgba(201, 162, 39, 0.4));
+  color: var(--gold, #c9a227);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+}
+
+/* Simulador comparativo de las obras (bloque 2, parte B). */
+.sim-comp { margin-top: 4px; }
+.sim-comp .evaluacion-controls-bar { margin-bottom: 14px; }
+.sim-comp-pres {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim, #9aa3b2);
+}
+/* Las obras que el sector o la administracion elegidos no senalan siguen
+   presentes, para que la comparacion no pierda el universo, pero cede el
+   primer plano a las que si. */
+.sim-comp-fuera { opacity: 0.42; }
+.sim-comp-fuera:hover { opacity: 0.85; }
+.sim-comp .sim-rank-barra { transition: none; }
+
 .sim-kpis-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

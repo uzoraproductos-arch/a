@@ -643,33 +643,28 @@
               <span class="sim-bloque-num">2</span>
               <div>
                 <h3 class="sim-bloque-tit">¿Por dónde quiere entrar?</h3>
-                <p class="sim-bloque-sub">Elija un sector estratégico o una administración presidencial: al pulsar se abren las fichas vivas de las obras que le corresponden.</p>
+                <p class="sim-bloque-sub">Dos puertas a la misma información: por el sector que le interesa, o por la administración que la contrató.</p>
               </div>
             </header>
-            <div id="simSectorMosaico"></div>
-            <div id="simSexenioLinea"></div>
 
-            <!-- Desglose: se despliega al elegir un sector, un sexenio o "Ver todas" -->
-            <div id="simDesglose" class="sim-desglose" hidden>
+            <!-- Parte A: el sector estrategico abre el desglose con sus fichas -->
+            <article class="sim-parte">
+              <div class="sim-parte-et"><span class="sim-parte-let">A</span> Por sector estratégico</div>
+              <div id="simSectorMosaico"></div>
 
-              <div id="simDesgloseCab"></div>
-
-              <!-- Fichas vivas de las obras: primero, porque son la prioridad -->
-              <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
-
-              <!-- Ordenamiento de la lista -->
-              <div class="sim-control-group" id="simOrdenGrupo">
-                <span class="sim-group-label">&#8645; Ordenar la lista por:</span>
-                <div id="simOrdenChips" class="sim-pill-group"></div>
+              <!-- Desglose: cifras del filtro y fichas vivas de cada obra -->
+              <div id="simDesglose" class="sim-desglose" hidden>
+                <div id="simDesgloseCab"></div>
+                <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
               </div>
+            </article>
 
-              <!-- Comparativa de las obras filtradas -->
-              <div id="simRanking"></div>
-
-              <!-- Tres mesas de calculo: de cero al resultado final -->
-              <div id="simTablas"></div>
-
-            </div>
+            <!-- Parte B: la administracion presidencial y el simulador comparativo -->
+            <article class="sim-parte">
+              <div class="sim-parte-et"><span class="sim-parte-let">B</span> Por administración presidencial</div>
+              <div id="simSexenioLinea"></div>
+              <div id="simComparativo"></div>
+            </article>
           </section>
 
           <!-- ================= BLOQUE 3: OBRA POR OBRA ================= -->
@@ -677,10 +672,15 @@
             <header class="sim-bloque-cab">
               <span class="sim-bloque-num">3</span>
               <div>
-                <h3 class="sim-bloque-tit">Obra por obra, peso por peso</h3>
-                <p class="sim-bloque-sub">El inventario completo dividido por sector, con lo aprobado, lo erogado y la diferencia de cada obra, y contra qué se compara ese dinero.</p>
+                <h3 class="sim-bloque-tit">De cero al resultado final</h3>
+                <p class="sim-bloque-sub">Las tres mesas de cálculo paso a paso, el inventario completo obra por obra dividido por sector, y contra qué se compara ese dinero.</p>
               </div>
             </header>
+
+            <!-- Tres mesas de calculo: de cero al resultado final -->
+            <div id="simTablas"></div>
+
+            <!-- Inventario completo: todas las obras, divididas por sector -->
             <div id="simPorSector"></div>
 
             <!-- Escala: contra que se compara este dinero -->

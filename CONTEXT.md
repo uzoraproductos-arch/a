@@ -553,6 +553,13 @@ de los 32 circuitos.
 - Pastilla flotante `#simTelFlota`: cuando la tira del bloque 1 sale de vista, el acumulado se reduce a una pastilla anclada a la esquina inferior; un `IntersectionObserver` la muestra y la oculta, y desaparece al salir de la 2.2.
 - Se retiran tres notas al pie manuales que duplicaban al autolink (`[14] [14]` en procedencia y en los cierres de las mesas 1 y 2).
 
+**Hecho — bloque 2 en dos partes y simulador comparativo de obras.**
+- El bloque 2 se divide en parte A (sector estrategico: la loseta abre el desglose con las cifras del filtro y las fichas vivas de cada obra) y parte B (administracion presidencial: la linea del tiempo mas el simulador comparativo).
+- `renderSimuladorComparativo()` sustituye a `renderSimuladorRanking()`. Replica el mecanismo del simulador comparativo de la 5.1: barra de control con distintivo, texto de estado, boton «Evaluar», «Reiniciar a ceros» y casilla de evaluacion al pasar el cursor; las barras nacen en cero y escalan con `requestAnimationFrame` y suavizado cubico.
+- A diferencia del ranking anterior, **no se recorta con los filtros**: compara siempre las 12 obras. El sector y el sexenio elegidos resaltan los renglones que les tocan y atenuan el resto (`.sim-comp-fuera`), de modo que la comparacion nunca pierde el universo.
+- Los cinco criterios (perdida anual, sobrecosto, costo real, pesos de mas, cronologia) suben al simulador comparativo; cambiar de criterio reordena y vuelve a animar si ya estaba evaluado. Se retira `renderSimuladorOrden()` y el contenedor `#simOrdenChips`.
+- Las tres mesas de calculo bajan al bloque 3, que queda como: mesas, inventario por sector, escala y procedencia.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
