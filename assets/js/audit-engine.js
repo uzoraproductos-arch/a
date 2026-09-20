@@ -1853,6 +1853,8 @@
         }
       } else if (subKey === 'territorio') {
         renderTerritorioErario();
+      } else if (subKey === 'constitucion') {
+        renderConstitucionEconomica();
       }
     } else if (parentTab === 'politicos') {
       if (subKey === 'mandatarios') renderPoliticosMandatarios();
@@ -1865,6 +1867,7 @@
         }
     } else if (parentTab === 'accion-financiera') {
       if (subKey === 'simulador-megaobras') renderSimuladorMegaobras();
+      else if (subKey === 'cuentas-verdes') renderCuentasEcologicas();
       else if (subKey === 'calculadora') calculateTaxBreakdown(30000);
       else if (subKey === 'bitacora') renderNews();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
@@ -2161,7 +2164,14 @@
     'com-ruta-tit', 'com-ruta-efecto', 'com-ruta-aviso', 'com-ruta-num',
     'com-destino-k', 'com-obs-meta', 'com-obs-autor', 'com-obs-btn',
     'canal-num', 'canal-siglas', 'canal-cta', 'com-util-tit',
-    'dec-n', 'dec-kicker', 'dec-tit'
+    'dec-n', 'dec-kicker', 'dec-tit',
+    'ce-bru-art', 'ce-bru-preg', 'ce-pil-art', 'ce-pil-k', 'ce-cad-n', 'ce-cad-et',
+    'ce-ciego-et', 'ce-pil-texto', 'ce-bru-ico', 'ce-pil-ico',
+    'cee-sello', 'cee-casc-et', 'cee-casc-cifra', 'cee-casc-pct', 'cee-mando-et',
+    'cee-mando-val', 'cee-res-k', 'cee-res-v', 'cee-res-sub', 'cee-atajo', 'cee-atajo-et',
+    'cee-comp-nom', 'cee-comp-val', 'cee-comp-ico', 'cee-rub-tot', 'cee-bal-k',
+    'cee-bal-v', 'cee-bal-p', 'cee-bal-vs', 'cee-cie-n', 'cee-jur-fund', 'cee-jur-ico',
+    'cee-rub-ico'
   ]);
 
   let autolinkIndice = null;
@@ -14325,6 +14335,422 @@
   // ==========================================================================
   // SUBPESTAÑA 2.2: SIMULADOR DE INVERSIONES, MEGAOBRAS & PÉRDIDAS EN TIEMPO REAL
   // ==========================================================================
+  /* ====================================================================
+     SUBPESTANA 1.3 - LA CONSTITUCION ECONOMICA
+     Cuatro articulos que, entre los cuatro, responden con que facultad
+     interviene el Estado en la economia.
+     ==================================================================== */
+
+  function renderConstitucionEconomica() {
+    const ce = DB.constitucion_economica;
+    if (!ce) return;
+
+    const entrada = document.getElementById('ceEntrada');
+    if (entrada) entrada.innerHTML = ce.entrada;
+
+    const brujula = document.getElementById('ceBrujula');
+    if (brujula) {
+      brujula.innerHTML =
+        '<div class="ce-brujula">' +
+          '<div class="ce-bru-tit">Las cuatro preguntas, y el artículo que contesta cada una</div>' +
+          '<div class="ce-bru-fila">' +
+            ce.pilares.map(p =>
+              '<button type="button" class="ce-bru-item" data-ir="' + p.id + '" ' +
+                'onclick="window.AuditEngine.ceIrAPilar(\'' + p.id + '\')" ' +
+                'style="--tono:' + p.color + '">' +
+                '<span class="ce-bru-ico">' + p.icono + '</span>' +
+                '<span class="ce-bru-art">' + p.articulo + '</span>' +
+                '<span class="ce-bru-preg">' + p.pregunta + '</span>' +
+              '</button>').join('') +
+          '</div>' +
+        '</div>';
+    }
+
+    const cont = document.getElementById('cePilares');
+    if (cont) {
+      cont.innerHTML = ce.pilares.map(p =>
+        '<article class="ce-pilar" id="ce-pilar-' + p.id + '" style="--tono:' + p.color + '">' +
+          '<header class="ce-pil-cab">' +
+            '<span class="ce-pil-ico">' + p.icono + '</span>' +
+            '<div>' +
+              '<div class="ce-pil-art">' + p.articulo + ' constitucional</div>' +
+              '<h3 class="ce-pil-tit">' + p.titulo + '</h3>' +
+            '</div>' +
+          '</header>' +
+          '<p class="ce-pil-resp"><strong class="ce-pil-preg">' + p.pregunta + '</strong> ' + p.respuesta + '</p>' +
+          '<div class="ce-pil-ficha">' +
+            '<div class="ce-pil-campo"><span class="ce-pil-k">Facultad</span><span class="ce-pil-v">' + p.facultad + '</span></div>' +
+            '<div class="ce-pil-campo"><span class="ce-pil-k">Quién la ejerce</span><span class="ce-pil-v">' + p.organo + '</span></div>' +
+            '<div class="ce-pil-campo"><span class="ce-pil-k">Ley que la desarrolla</span><span class="ce-pil-v">' + p.ley_secundaria + '</span></div>' +
+          '</div>' +
+          '<ul class="ce-pil-claves">' +
+            p.claves.map(c => '<li><strong class="ce-clave-k">' + c.k + '.</strong> <span class="ce-clave-v">' + c.v + '</span></li>').join('') +
+          '</ul>' +
+          '<div class="ce-pil-ciego">' +
+            '<span class="ce-ciego-et">Punto ciego</span>' +
+            '<p class="ce-ciego-tx">' + p.punto_ciego + '</p>' +
+          '</div>' +
+          '<button type="button" class="ce-pil-texto" onclick="window.AuditEngine.goToPrecepto(\'' + p.precepto_id + '\')">' +
+            '📜 Leer el texto del precepto' +
+          '</button>' +
+        '</article>').join('');
+    }
+
+    const cadena = document.getElementById('ceCadena');
+    if (cadena) {
+      const pasos = [
+        { n: 'Art. 25', t: 'Rectoría', d: 'El Estado asume la conducción del desarrollo.' },
+        { n: 'Art. 26', t: 'Plan Nacional de Desarrollo', d: 'El rumbo se escribe y obliga a la Administración.' },
+        { n: 'Programa', t: 'Programa presupuestario', d: 'El objetivo se convierte en una unidad de gasto con clave.' },
+        { n: 'PEF', t: 'Partida del Presupuesto de Egresos', d: 'La unidad de gasto recibe pesos y un responsable.' },
+        { n: 'ASF', t: 'Fiscalización', d: 'Alguien revisa si el peso hizo lo que el Plan prometió.' }
+      ];
+      cadena.innerHTML =
+        '<section class="ce-cadena">' +
+          '<h3 class="ce-cad-tit">Del artículo al peso ejercido</h3>' +
+          '<p class="ce-cad-sub">La rectoría y la planeación no son declaraciones: son el primer eslabón de una cadena que termina en una partida con nombre. Donde la cadena se rompe, una meta desaparece sin dejar rastro contable.</p>' +
+          '<ol class="ce-cad-pasos">' +
+            pasos.map((p, i) =>
+              '<li class="ce-cad-paso">' +
+                '<span class="ce-cad-n">' + (i + 1) + '</span>' +
+                '<span class="ce-cad-et">' + p.n + '</span>' +
+                '<strong class="ce-cad-nom">' + p.t + '</strong>' +
+                '<span class="ce-cad-d">' + p.d + '</span>' +
+              '</li>').join('') +
+          '</ol>' +
+          '<p class="ce-cad-pie">Procedencia: Constitución Política de los Estados Unidos Mexicanos' + vsxRefLink('ref-cpeum') +
+            ' y Ley de Planeación' + vsxRefLink('ref-ley-planeacion') + '.</p>' +
+        '</section>';
+    }
+
+    autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="constitucion"]'));
+  }
+
+  function ceIrAPilar(id) {
+    const el = document.getElementById('ce-pilar-' + id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.remove('ce-destaca');
+    void el.offsetWidth;
+    el.classList.add('ce-destaca');
+  }
+
+  /* Salta al precepto dentro de la subpestana 7.3, dejando marcado el origen
+     para que la barra de regreso pueda devolver al lector donde estaba. */
+  function goToPrecepto(preceptoId) {
+    navMarcarOrigen();
+    navSaltoEnCurso = true;
+    switchTab('faq');
+    switchSubtab('faq', 'faq-marco-legal');
+    navSaltoEnCurso = false;
+    navPintarBarra();
+    setTimeout(() => {
+      const destino = document.getElementById('precepto-' + preceptoId) ||
+        document.querySelector('[data-precepto="' + preceptoId + '"]');
+      if (destino) {
+        destino.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        destino.classList.remove('ce-destaca');
+        void destino.offsetWidth;
+        destino.classList.add('ce-destaca');
+      }
+    }, 160);
+  }
+
+  /* ====================================================================
+     SUBPESTANA 2.5 - CUENTAS ECONOMICAS Y ECOLOGICAS (CEEM / INEGI)
+     El PIB no descuenta lo que se agota ni lo que se degrada. Aqui se
+     hace esa resta con las cifras oficiales del INEGI, y el simulador
+     compara el crecimiento del PIB contra el del PINE, que es una
+     identidad contable y no una analogia.
+     ==================================================================== */
+
+  const CEEM_TONOS = {
+    base: '#c9a227', resta: '#c0504d', subtotal: '#6b7a8f', resultado: '#3fa373'
+  };
+
+  function ceeMdp(n) {
+    return '$' + formatNumber(Math.round(n)) + ' mdp';
+  }
+
+  /* Un monto de siete cifras no se lee de un vistazo; en billones si. */
+  function ceeBillones(mdp) {
+    return '$' + (mdp / 1000000).toFixed(2) + ' billones';
+  }
+
+  function ceeSello(estado) {
+    const oficial = estado === 'oficial';
+    return '<span class="cee-sello" data-estado="' + estado + '">' +
+      (oficial ? '✓ Cifra oficial' : 'ƒ Derivada por diferencia') + '</span>';
+  }
+
+  function renderCuentasEcologicas() {
+    const c = DB.cuentas_ecologicas;
+    if (!c) return;
+
+    const entrada = document.getElementById('ceeEntrada');
+    if (entrada) entrada.innerHTML = c.entrada;
+
+    renderCeeCascada(c);
+    renderCeeSimulador(c);
+    renderCeeDesglose(c);
+    renderCeeCiegos(c);
+    renderCeeJuridico(c);
+
+    const proc = document.getElementById('ceeProcedencia');
+    if (proc) {
+      proc.innerHTML =
+        '<section class="cee-proc">' +
+          '<h3 class="cee-proc-tit">Procedencia de cada cifra</h3>' +
+          '<p class="cee-proc-tx">' + c.nota_metodologica + '</p>' +
+          '<ul class="cee-proc-lista">' +
+            '<li>Cuentas Económicas y Ecológicas de México ' + c.ejercicio + ', publicadas el ' + c.publicacion + '.' + vsxRefLink(c.ref_fuente) + '</li>' +
+            '<li>Programa estadístico de las cuentas verdes del INEGI.' + vsxRefLink(c.ref_programa) + '</li>' +
+            '<li>Producto Interno Bruto nacional a precios de mercado de ' + c.ejercicio + '.' + vsxRefLink(c.ref_pib) + '</li>' +
+          '</ul>' +
+        '</section>';
+    }
+
+    autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="cuentas-verdes"]'));
+  }
+
+  /* La cascada: cada renglon arranca donde termino el anterior, de modo que
+     la resta se ve como un descuento y no como seis barras sueltas. */
+  function renderCeeCascada(c) {
+    const cont = document.getElementById('ceeCascada');
+    if (!cont) return;
+    const pib = c.pib_mdp;
+    let tope = 100;
+
+    const filas = c.cascada.map(p => {
+      const ancho = (p.monto_mdp / pib) * 100;
+      let izq;
+      if (p.signo === 'resta') { izq = tope - ancho; tope = izq; }
+      else { izq = 0; tope = ancho; }
+      return { p: p, izq: izq, ancho: ancho };
+    });
+
+    cont.innerHTML =
+      '<section class="cee-casc">' +
+        '<h3 class="cee-casc-tit">De los $33.5 billones anunciados a los $25.7 que quedaron</h3>' +
+        '<p class="cee-casc-sub">Cada renglón arranca donde terminó el anterior. Lo que se resta es lo que la naturaleza puso y nadie pagó.</p>' +
+        '<ol class="cee-casc-filas">' +
+          filas.map(f =>
+            '<li class="cee-casc-fila" data-signo="' + f.p.signo + '">' +
+              '<span class="cee-casc-et">' + f.p.etiqueta + '</span>' +
+              '<span class="cee-casc-riel">' +
+                '<span class="cee-casc-barra" style="left:' + f.izq.toFixed(3) + '%; width:' + Math.max(0.35, f.ancho).toFixed(3) + '%; background:' + CEEM_TONOS[f.p.signo] + ';"></span>' +
+              '</span>' +
+              '<span class="cee-casc-cifra">' + ceeMdp(f.p.monto_mdp) + '</span>' +
+              '<span class="cee-casc-pct">' + f.p.pct_pib.toFixed(1) + '% del PIB</span>' +
+              '<span class="cee-casc-glosa">' + f.p.glosa + ' ' + ceeSello(f.p.estado) + '</span>' +
+            '</li>').join('') +
+        '</ol>' +
+        '<p class="cee-casc-remate">De cada $100 que el país anunció haber producido en ' + c.ejercicio + ', ' +
+          '<strong>$' + c.cascada[c.cascada.length - 1].pct_pib.toFixed(1) + '</strong> quedaron después de reponer la maquinaria y de pagar la cuenta ambiental.</p>' +
+      '</section>';
+  }
+
+  /* Simulador. No se resta un flujo contra un nivel: se calcula el PINE del
+     ano siguiente con las participaciones que el usuario elige y se compara
+     su crecimiento contra el del PIB. Eso si es una identidad contable. */
+  function renderCeeSimulador(c) {
+    const cont = document.getElementById('ceeSimulador');
+    if (!cont) return;
+    const ccfPct = (c.cascada.find(x => x.id === 'ccf').monto_mdp / c.pib_mdp) * 100;
+    const ctadaPct = (c.ctada.total_mdp / c.pib_mdp) * 100;
+
+    cont.innerHTML =
+      '<section class="cee-sim" id="ceeSimCaja">' +
+        '<div class="cee-sim-cab">' +
+          '<h3 class="cee-sim-tit">Simulador: ¿cuánto de ese crecimiento es real?</h3>' +
+          '<p class="cee-sim-sub">Mueva los tres controles y vea qué le pasa al Producto Interno Neto Ecológico. El punto de partida son las cifras de ' + c.ejercicio + '.</p>' +
+        '</div>' +
+        '<div class="cee-sim-mandos">' +
+          ceeMando('ceeGrow', 'Crecimiento nominal del PIB', -6, 14, 0.1, 5.0, '%') +
+          ceeMando('ceeCtada', 'Costo ambiental del año siguiente', 0, 10, 0.1, +ctadaPct.toFixed(1), '% del PIB') +
+          ceeMando('ceeCcf', 'Consumo de capital fijo', 10, 28, 0.1, +ccfPct.toFixed(1), '% del PIB') +
+        '</div>' +
+        '<div class="cee-sim-salida" id="ceeSimSalida"></div>' +
+        '<div class="cee-sim-atajos">' +
+          '<span class="cee-atajo-et">Escenarios:</span>' +
+          '<button type="button" class="cee-atajo" onclick="window.AuditEngine.ceeEscenario(\'base\')">Como ' + c.ejercicio + '</button>' +
+          '<button type="button" class="cee-atajo" onclick="window.AuditEngine.ceeEscenario(\'espejismo\')">Crece el PIB, crece el daño</button>' +
+          '<button type="button" class="cee-atajo" onclick="window.AuditEngine.ceeEscenario(\'limpio\')">Crece el PIB, baja el daño</button>' +
+        '</div>' +
+        '<p class="cee-sim-honesto"><strong>Qué hace y qué no hace este simulador.</strong> No predice nada ni estima cifras: toma el año ' + c.ejercicio + ' como base real y aplica la misma resta del INEGI a las participaciones que usted elige. El crecimiento del PINE se obtiene comparando el resultado contra el PINE de ' + c.ejercicio + '. Es aritmética de cuentas nacionales, no un modelo econométrico.</p>' +
+      '</section>';
+
+    ['ceeGrow', 'ceeCtada', 'ceeCcf'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', ceeRecalcular);
+    });
+    ceeRecalcular();
+  }
+
+  function ceeMando(id, etiqueta, min, max, paso, valor, unidad) {
+    return '<label class="cee-mando" for="' + id + '">' +
+      '<span class="cee-mando-et">' + etiqueta + '</span>' +
+      '<input type="range" class="cee-mando-rango" id="' + id + '" min="' + min + '" max="' + max + '" step="' + paso + '" value="' + valor + '">' +
+      '<output class="cee-mando-val" id="' + id + 'Val">' + valor.toFixed(1) + ' ' + unidad + '</output>' +
+    '</label>';
+  }
+
+  function ceeEscenario(cual) {
+    const c = DB.cuentas_ecologicas;
+    const ccfPct = +((c.cascada.find(x => x.id === 'ccf').monto_mdp / c.pib_mdp) * 100).toFixed(1);
+    const ctadaPct = +((c.ctada.total_mdp / c.pib_mdp) * 100).toFixed(1);
+    const conf = {
+      base:       { g: 5.0, ct: ctadaPct,     cf: ccfPct },
+      espejismo:  { g: 5.0, ct: ctadaPct + 2, cf: ccfPct },
+      limpio:     { g: 5.0, ct: Math.max(0, ctadaPct - 2), cf: ccfPct }
+    }[cual];
+    if (!conf) return;
+    const poner = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+    poner('ceeGrow', conf.g); poner('ceeCtada', conf.ct); poner('ceeCcf', conf.cf);
+    ceeRecalcular();
+  }
+
+  function ceeRecalcular() {
+    const c = DB.cuentas_ecologicas;
+    const salida = document.getElementById('ceeSimSalida');
+    if (!c || !salida) return;
+    const leer = id => { const el = document.getElementById(id); return el ? parseFloat(el.value) : 0; };
+    const g = leer('ceeGrow'), ct = leer('ceeCtada'), cf = leer('ceeCcf');
+
+    const rot = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+    rot('ceeGrowVal', g.toFixed(1) + ' %');
+    rot('ceeCtadaVal', ct.toFixed(1) + ' % del PIB');
+    rot('ceeCcfVal', cf.toFixed(1) + ' % del PIB');
+
+    const pib0 = c.pib_mdp;
+    const pine0 = c.cascada[c.cascada.length - 1].monto_mdp;
+    const pib1 = pib0 * (1 + g / 100);
+    const pine1 = pib1 * (1 - cf / 100 - ct / 100);
+    const gPine = (pine1 / pine0 - 1) * 100;
+    const brecha = g - gPine;
+    const ambiental1 = pib1 * (ct / 100);
+
+    let veredicto, tono;
+    if (gPine < 0 && g > 0) {
+      veredicto = 'El PIB crece y la riqueza real se encoge. Es el caso que el indicador tradicional no deja ver: se anuncia expansión mientras el capital natural se consume más rápido de lo que la economía avanza.';
+      tono = 'malo';
+    } else if (brecha > 0.15) {
+      veredicto = 'El PIB crece más rápido que la riqueza real. Parte de lo que se anuncia como crecimiento se está pagando con capital natural que no se repone.';
+      tono = 'alerta';
+    } else if (brecha < -0.15) {
+      veredicto = 'La riqueza real crece más rápido que el PIB. Es lo que ocurre cuando la economía avanza y al mismo tiempo reduce el daño que causa para avanzar.';
+      tono = 'bueno';
+    } else {
+      veredicto = 'El PIB y la riqueza real avanzan casi al mismo paso: la cuenta ambiental se mantiene en la misma proporción del producto.';
+      tono = 'neutro';
+    }
+
+    salida.innerHTML =
+      '<div class="cee-res-cifras">' +
+        ceeTarjeta('Crecimiento del PIB', (g >= 0 ? '+' : '') + g.toFixed(1) + '%', 'Lo que se anunciaría', 'pib') +
+        ceeTarjeta('Crecimiento del PINE', (gPine >= 0 ? '+' : '') + gPine.toFixed(1) + '%', 'La riqueza que de verdad queda', gPine < 0 ? 'malo' : 'pine') +
+        ceeTarjeta('Brecha entre ambos', (brecha >= 0 ? '+' : '') + brecha.toFixed(1) + ' pp', 'Puntos porcentuales de diferencia', 'brecha') +
+        ceeTarjeta('Cuenta ambiental del año', ceeBillones(ambiental1), 'Lo que costaría el deterioro', 'costo') +
+      '</div>' +
+      '<p class="cee-res-veredicto" data-tono="' + tono + '">' + veredicto + '</p>';
+  }
+
+  function ceeTarjeta(k, v, sub, tono) {
+    return '<div class="cee-res-tar" data-tono="' + tono + '">' +
+      '<span class="cee-res-k">' + k + '</span>' +
+      '<span class="cee-res-v">' + v + '</span>' +
+      '<span class="cee-res-sub">' + sub + '</span>' +
+    '</div>';
+  }
+
+  function renderCeeDesglose(c) {
+    const cont = document.getElementById('ceeDesglose');
+    if (!cont) return;
+    const bloque = (d, titulo, icono) => {
+      const mayor = Math.max.apply(null, d.componentes.map(x => x.monto_mdp));
+      return '<article class="cee-rubro">' +
+        '<header class="cee-rub-cab">' +
+          '<span class="cee-rub-ico">' + icono + '</span>' +
+          '<div>' +
+            '<h4 class="cee-rub-tit">' + titulo + '</h4>' +
+            '<div class="cee-rub-tot">' + ceeMdp(d.total_mdp) + ' · ' + d.pct_pib.toFixed(1) + '% del PIB ' + ceeSello(d.estado) + '</div>' +
+          '</div>' +
+        '</header>' +
+        '<p class="cee-rub-def">' + d.definicion + '</p>' +
+        '<ul class="cee-rub-comps">' +
+          d.componentes.map(x =>
+            '<li class="cee-comp">' +
+              '<span class="cee-comp-ico">' + x.icono + '</span>' +
+              '<span class="cee-comp-nom">' + x.nombre + '</span>' +
+              '<span class="cee-comp-riel"><span class="cee-comp-barra" style="width:' + ((x.monto_mdp / mayor) * 100).toFixed(1) + '%"></span></span>' +
+              '<span class="cee-comp-val">' + ceeMdp(x.monto_mdp) + '</span>' +
+              '<span class="cee-comp-glosa">' + x.glosa + ' ' + ceeSello(x.estado) + '</span>' +
+            '</li>').join('') +
+        '</ul>' +
+        (d.nota ? '<p class="cee-rub-nota">' + d.nota + '</p>' : '') +
+      '</article>';
+    };
+    const gpa = c.gasto_proteccion_ambiental;
+    cont.innerHTML =
+      '<section class="cee-desg">' +
+        '<h3 class="cee-desg-tit">Qué se acabó y qué se ensució</h3>' +
+        '<div class="cee-desg-rejilla">' +
+          bloque(c.agotamiento, 'Agotamiento: lo que ya no está', '📉') +
+          bloque(c.degradacion, 'Degradación: lo que empeoró', '🌫️') +
+        '</div>' +
+        '<div class="cee-balanza">' +
+          '<div class="cee-bal-lado" data-lado="gasto">' +
+            '<span class="cee-bal-k">Se gastó en proteger</span>' +
+            '<span class="cee-bal-v">' + ceeMdp(gpa.monto_mdp) + '</span>' +
+            '<span class="cee-bal-p">' + gpa.pct_pib.toFixed(1) + '% del PIB</span>' +
+          '</div>' +
+          '<div class="cee-bal-vs">frente a</div>' +
+          '<div class="cee-bal-lado" data-lado="dano">' +
+            '<span class="cee-bal-k">Se deterioró</span>' +
+            '<span class="cee-bal-v">' + ceeMdp(c.ctada.total_mdp) + '</span>' +
+            '<span class="cee-bal-p">' + c.ctada.pct_pib.toFixed(1) + '% del PIB</span>' +
+          '</div>' +
+          '<p class="cee-bal-lectura">' + gpa.lectura + ' ' + ceeSello(gpa.ratio_estado) + '</p>' +
+        '</div>' +
+      '</section>';
+  }
+
+  function renderCeeCiegos(c) {
+    const cont = document.getElementById('ceeCiegos');
+    if (!cont) return;
+    cont.innerHTML =
+      '<section class="cee-ciegos">' +
+        '<h3 class="cee-cie-tit">Cuatro puntos ciegos del indicador que se anuncia</h3>' +
+        '<div class="cee-cie-rejilla">' +
+          c.puntos_ciegos.map((p, i) =>
+            '<article class="cee-cie-tar">' +
+              '<span class="cee-cie-n">' + (i + 1) + '</span>' +
+              '<h4 class="cee-cie-h">' + p.titulo + '</h4>' +
+              '<p class="cee-cie-tx">' + p.texto + '</p>' +
+            '</article>').join('') +
+        '</div>' +
+      '</section>';
+  }
+
+  function renderCeeJuridico(c) {
+    const cont = document.getElementById('ceeJuridico');
+    if (!cont) return;
+    cont.innerHTML =
+      '<section class="cee-jur">' +
+        '<h3 class="cee-jur-tit">Por qué esto no es sólo estadística</h3>' +
+        '<p class="cee-jur-sub">Una cifra que mide el daño convierte un principio en una obligación exigible. Estas son las cuatro consecuencias jurídicas de que el deterioro tenga precio oficial.</p>' +
+        '<div class="cee-jur-rejilla">' +
+          c.implicaciones_juridicas.map(x =>
+            '<article class="cee-jur-tar">' +
+              '<span class="cee-jur-ico">' + x.icono + '</span>' +
+              '<h4 class="cee-jur-h">' + x.titulo + '</h4>' +
+              '<p class="cee-jur-tx">' + x.texto + '</p>' +
+              '<span class="cee-jur-fund">' + x.fundamento + '</span>' +
+            '</article>').join('') +
+        '</div>' +
+      '</section>';
+  }
+
   function renderSimuladorMegaobras() {
     const kpisContainer = document.getElementById('simuladorKpisStrip');
     const sectorsContainer = document.getElementById('simSectorChips');
@@ -18200,6 +18626,12 @@
 
   window.AuditEngine = {
     init: init,
+    renderConstitucionEconomica: renderConstitucionEconomica,
+    ceIrAPilar: ceIrAPilar,
+    goToPrecepto: goToPrecepto,
+    renderCuentasEcologicas: renderCuentasEcologicas,
+    ceeEscenario: ceeEscenario,
+    ceeRecalcular: ceeRecalcular,
     switchTab: switchTab,
     switchSubtab: switchSubtab,
     toggleTheme: toggleTheme,

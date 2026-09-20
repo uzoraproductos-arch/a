@@ -215,6 +215,7 @@
       <div class="subtabs-bar" data-parent="presupuesto">
         <button class="subtab-btn active" data-sub="panoramica" role="tab" aria-selected="true">1.1 El Circuito del Dinero P&uacute;blico: De D&oacute;nde Sale y En Qu&eacute; se Va</button>
         <button class="subtab-btn" data-sub="territorio" role="tab" aria-selected="false">1.2 Del Peso Federal al Peso Local: Estados y Municipios</button>
+        <button class="subtab-btn" data-sub="constitucion" role="tab" aria-selected="false">1.3 La Constituci&oacute;n Econ&oacute;mica: Con Qu&eacute; Facultad</button>
       </div>
 
       <!-- ====================================================================
@@ -476,7 +477,26 @@
       </div>
       <!-- FIN SUBPANEL 1.2 -->
 
-    </div>><!-- FIN PESTAÑA 1 -->
+      <!-- ====================================================================
+           SUBPANEL 1.3: LA CONSTITUCION ECONOMICA
+           El contenido lo pinta renderConstitucionEconomica() desde
+           DB.constitucion_economica; aqui solo van los contenedores.
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="presupuesto" data-subpanel="constitucion">
+
+        <div class="section-hero">
+          <span class="hero-tag">Constituci&oacute;n Econ&oacute;mica &middot; Art&iacute;culos 25, 26, 27 y 28</span>
+          <h2>Con Qu&eacute; Facultad Interviene el Estado en la Econom&iacute;a</h2>
+          <p id="ceEntrada"></p>
+        </div>
+
+        <div id="ceBrujula"></div>
+        <div id="cePilares"></div>
+        <div id="ceCadena"></div>
+
+      </div>
+
+    </div><!-- FIN PESTAÑA 1 -->
 
     <!-- ========================================================================
          PESTAÑA 2: ACCIÓN FINANCIERA DEL ESTADO (CON SUBPESTAÑAS)
@@ -489,6 +509,7 @@
         <button class="subtab-btn" data-sub="simulador-megaobras">2.2 Inversión por Sectores, Megaobras &amp; Simulador de Pérdidas</button>
         <button class="subtab-btn" data-sub="calculadora">2.3 Calculadora Cívica del Contribuyente</button>
         <button class="subtab-btn" data-sub="bitacora">2.4 Bitácora &amp; Alertas ASF</button>
+        <button class="subtab-btn" data-sub="cuentas-verdes">2.5 El PIB No Alcanza: Cuentas Econ&oacute;micas y Ecol&oacute;gicas</button>
       </div>
 
       <!-- SUBPANEL 2.1: MAQUINARIA FINANCIERA, DEUDA & BANXICO -->
@@ -693,6 +714,29 @@
           <div id="newsCardsGrid" class="news-grid"></div>
         </section>
       </div><!-- FIN SUBPANEL 2.4 -->
+
+      <!-- ====================================================================
+           SUBPANEL 2.5: CUENTAS ECONOMICAS Y ECOLOGICAS (CEEM / INEGI)
+           Lo pinta renderCuentasEcologicas() desde DB.cuentas_ecologicas.
+           La cascada y el simulador se dibujan en SVG generado por codigo:
+           sin peticiones de red y nitido en cualquier pantalla.
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="cuentas-verdes">
+
+        <div class="section-hero">
+          <span class="hero-tag">Cuentas Econ&oacute;micas y Ecol&oacute;gicas &middot; INEGI &middot; Ejercicio 2024</span>
+          <h2>El PIB No Alcanza</h2>
+          <p id="ceeEntrada"></p>
+        </div>
+
+        <div id="ceeCascada"></div>
+        <div id="ceeSimulador"></div>
+        <div id="ceeDesglose"></div>
+        <div id="ceeCiegos"></div>
+        <div id="ceeJuridico"></div>
+        <div id="ceeProcedencia"></div>
+
+      </div><!-- FIN SUBPANEL 2.5 -->
 
     </div><!-- FIN PESTAÑA 2 -->
 
