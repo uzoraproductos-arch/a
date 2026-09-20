@@ -11293,10 +11293,14 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 4066853,
-    "perdida_anual_consolidada_mdp": 78685.1,
-    "perdida_diaria_consolidada_mdp": 215.58,
-    "perdida_segundo_consolidada": 2495.14
+    "inversion_total_mdp": 4116153,
+    "inversion_presupuestada_total_mdp": 1046506,
+    "perdida_anual_consolidada_mdp": 80200.1,
+    "perdida_diaria_consolidada_mdp": 219.73,
+    "perdida_segundo_consolidada": 2543.13,
+    "obras_evaluadas": 12,
+    "sobrecosto_conjunto_pct": 293.3,
+    "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   }
 }
 };

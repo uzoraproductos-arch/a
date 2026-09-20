@@ -5728,6 +5728,17 @@ nav.tabbar button.active .num {
   gap: 14px;
 }
 
+/* La clase existia en el HTML desde el principio pero nunca tuvo regla:
+   las cuatro tarjetas se apilaban a lo alto en cualquier pantalla. */
+.sim-kpis-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+  margin-bottom: 22px;
+}
+@media (max-width: 1080px) { .sim-kpis-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .sim-kpis-strip { grid-template-columns: 1fr; } }
+
 .sim-kpi-card {
   background: var(--bg-card);
   border: 1px solid var(--border-gold);
@@ -12795,4 +12806,108 @@ body.con-regreso { padding-bottom: 96px; }
 @media (prefers-reduced-motion: reduce) {
   .ce-destaca { animation: none; }
   .ce-bru-item:hover { transform: none; }
+}
+
+/* ==========================================================================
+   SUBPESTANA 2.2 - COMPARATIVA, ESCALA Y PROCEDENCIA
+   ========================================================================== */
+
+.sim-rank, .sim-escala, .sim-proc {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 19px 20px;
+  margin: 0 0 22px;
+}
+.sim-rank-cab { margin-bottom: 15px; }
+.sim-rank-tit, .sim-esc-tit, .sim-proc-tit {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  margin: 0 0 5px;
+  color: var(--text-main);
+}
+.sim-rank-sub { font-size: 13px; color: var(--text-dim); }
+
+.sim-rank-filas { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; counter-reset: none; }
+.sim-rank-b {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 26px 24px minmax(120px, 1.5fr) 3fr minmax(96px, auto);
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 9px 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.16s, background 0.16s;
+}
+.sim-rank-b:hover, .sim-rank-b:focus-visible { border-color: var(--border-gold); background: var(--bg-card-hover); }
+.sim-rank-n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-dim);
+  text-align: center;
+}
+.sim-rank-ico { font-size: 17px; }
+.sim-rank-nom { font-size: 13.4px; color: var(--text-main); line-height: 1.3; }
+.sim-rank-riel {
+  display: block;
+  height: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.sim-rank-barra { display: block; height: 100%; border-radius: 4px; }
+.sim-rank-val { font-family: var(--font-mono); font-size: 12.6px; color: var(--text-gold); text-align: right; }
+
+.sim-esc-sub { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 16px; }
+.sim-esc-lista { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 11px; }
+.sim-esc-fila {
+  display: grid;
+  grid-template-columns: 78px minmax(150px, 1.6fr) 2fr minmax(104px, auto);
+  align-items: center;
+  gap: 11px;
+}
+.sim-esc-veces {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  text-align: right;
+}
+.sim-esc-k { font-size: 13.2px; color: var(--text-main); line-height: 1.35; }
+.sim-esc-ej { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+.sim-esc-riel { display: block; height: 9px; background: var(--bg-card-alt); border: 1px solid var(--border-subtle); border-radius: 5px; overflow: hidden; }
+.sim-esc-barra { display: block; height: 100%; background: var(--gold); border-radius: 4px; }
+.sim-esc-v { font-family: var(--font-mono); font-size: 12.2px; color: var(--text-secondary); text-align: right; }
+.sim-esc-aviso {
+  margin: 0;
+  padding: 13px 15px;
+  background: rgba(243, 156, 18, 0.07);
+  border: 1px solid rgba(243, 156, 18, 0.32);
+  border-radius: 9px;
+  font-size: 12.9px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.sim-esc-aviso strong { color: var(--amber); }
+
+.sim-proc-lista { margin: 0; padding-left: 20px; display: grid; gap: 9px; }
+.sim-proc-lista li { font-size: 13.2px; line-height: 1.58; color: var(--text-secondary); }
+.sim-proc-lista strong { color: var(--text-main); }
+
+@media (max-width: 860px) {
+  .sim-rank-b { grid-template-columns: 24px 22px 1fr; grid-template-areas: "n ico nom" "riel riel riel" "val val val"; gap: 6px 9px; }
+  .sim-rank-n { grid-area: n; } .sim-rank-ico { grid-area: ico; } .sim-rank-nom { grid-area: nom; }
+  .sim-rank-riel { grid-area: riel; } .sim-rank-val { grid-area: val; text-align: left; }
+  .sim-esc-fila { grid-template-columns: 70px 1fr; grid-template-areas: "veces k" "riel riel" "v v"; }
+  .sim-esc-veces { grid-area: veces; } .sim-esc-k { grid-area: k; }
+  .sim-esc-riel { grid-area: riel; } .sim-esc-v { grid-area: v; text-align: left; }
+}
+@media (max-width: 480px) {
+  .sim-rank-tit, .sim-esc-tit, .sim-proc-tit { font-size: 17px; }
 }

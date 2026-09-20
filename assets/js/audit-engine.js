@@ -40,6 +40,7 @@
     curiososSearchQuery: '',
     simuladorPeriodo: 'dia',
     simuladorSector: 'todos',
+    simuladorOrden: 'perdida',
     simuladorSexenio: 'todos',
     simuladorTickerTimer: null,
     simuladorElapsedSeconds: 0
@@ -2171,7 +2172,9 @@
     'cee-mando-val', 'cee-res-k', 'cee-res-v', 'cee-res-sub', 'cee-atajo', 'cee-atajo-et',
     'cee-comp-nom', 'cee-comp-val', 'cee-comp-ico', 'cee-rub-tot', 'cee-bal-k',
     'cee-bal-v', 'cee-bal-p', 'cee-bal-vs', 'cee-cie-n', 'cee-jur-fund', 'cee-jur-ico',
-    'cee-rub-ico'
+    'cee-rub-ico',
+    'sim-esc-k', 'sim-esc-veces', 'sim-esc-v', 'sim-esc-ej',
+    'sim-rank-nom', 'sim-rank-val', 'sim-rank-n', 'sim-rank-ico'
   ]);
 
   let autolinkIndice = null;
@@ -14751,51 +14754,236 @@
       '</section>';
   }
 
+  /* ====================================================================
+     SUBPESTANA 2.2 - AGREGADOS, ORDEN, COMPARATIVA Y ESCALA
+     Ninguna cifra de esta subpestana se escribe a mano: todas salen de
+     sumar las obras que el filtro dejo en pie.
+     ==================================================================== */
+
+  const SIM_ORDENES = [
+    { id: 'perdida',    et: 'Pérdida anual',      f: (a, b) => b.perdida_anual_mdp - a.perdida_anual_mdp },
+    { id: 'sobrecosto', et: 'Sobrecosto',         f: (a, b) => b.sobrecosto_pct - a.sobrecosto_pct },
+    { id: 'inversion',  et: 'Costo real',         f: (a, b) => b.inversion_real_mdp - a.inversion_real_mdp },
+    { id: 'brecha',     et: 'Pesos de más',       f: (a, b) => (b.inversion_real_mdp - b.inversion_presupuestada_mdp) - (a.inversion_real_mdp - a.inversion_presupuestada_mdp) },
+    { id: 'cronologia', et: 'Cronología',         f: (a, b) => String(a.periodo_sexenal).localeCompare(String(b.periodo_sexenal)) }
+  ];
+
+  /* Las obras que sobreviven a los filtros vigentes. Es la base de todo lo
+     que se pinta: indicadores, comparativa, fichas y escala. */
+  function simFiltradas() {
+    const sim = DB.simulador_megaobras;
+    if (!sim) return [];
+    let obras = sim.obras.slice();
+    if (state.simuladorSector && state.simuladorSector !== 'todos') {
+      obras = obras.filter(o => o.sector_id === state.simuladorSector);
+    }
+    if (state.simuladorSexenio && state.simuladorSexenio !== 'todos') {
+      obras = obras.filter(o => o.presidente.toLowerCase().includes(state.simuladorSexenio.toLowerCase()));
+    }
+    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
+    return obras.sort(orden.f);
+  }
+
+  function simAgregados(obras) {
+    const sum = f => obras.reduce((a, o) => a + (Number(o[f]) || 0), 0);
+    const real = sum('inversion_real_mdp');
+    const presu = sum('inversion_presupuestada_mdp');
+    const anual = sum('perdida_anual_mdp');
+    return {
+      n: obras.length,
+      real: real,
+      presu: presu,
+      brecha: real - presu,
+      sobrecosto: presu > 0 ? (real / presu - 1) * 100 : 0,
+      perdidaAnual: anual,
+      perdidaSegundo: anual * 1000000 / (365 * 86400)
+    };
+  }
+
+  function simMdp(n) {
+    if (Math.abs(n) >= 1000000) return '$' + (n / 1000000).toFixed(2) + ' billones';
+    if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(1) + ' mil mdp';
+    return '$' + formatNumber(Math.round(n * 100) / 100) + ' mdp';
+  }
+
+  function simPerdidaPeriodo(anual, pInfo) {
+    const v = anual * pInfo.factor;
+    if (v === 0) return '$0.00 mdp' + pInfo.sufijo;
+    if (Math.abs(v) >= 1000) return '$' + (v / 1000).toFixed(2) + ' mil mdp' + pInfo.sufijo;
+    return '$' + v.toFixed(2) + ' mdp' + pInfo.sufijo;
+  }
+
+  function renderSimuladorOrden() {
+    const cont = document.getElementById('simOrdenChips');
+    if (!cont) return;
+    const actual = state.simuladorOrden || 'perdida';
+    cont.innerHTML = SIM_ORDENES.map(o =>
+      '<button class="sim-pill-btn' + (o.id === actual ? ' active' : '') + '" data-orden="' + o.id + '" ' +
+        'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('');
+  }
+
+  function setSimuladorOrden(id) {
+    state.simuladorOrden = id;
+    renderSimuladorOrden();
+    renderSimuladorObrasGrid();
+    renderSimuladorRanking();
+  }
+
+  /* Comparativa de un vistazo: la misma variable por la que esta ordenada
+     la lista, en barras, para ver la distancia entre obras. */
+  function renderSimuladorRanking() {
+    const cont = document.getElementById('simRanking');
+    if (!cont) return;
+    const obras = simFiltradas();
+    if (obras.length < 2) { cont.innerHTML = ''; return; }
+    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
+    const valor = o => ({
+      perdida: o.perdida_anual_mdp,
+      sobrecosto: o.sobrecosto_pct,
+      inversion: o.inversion_real_mdp,
+      brecha: o.inversion_real_mdp - o.inversion_presupuestada_mdp,
+      cronologia: o.inversion_real_mdp
+    })[orden.id];
+    const fmt = v => orden.id === 'sobrecosto' ? (v > 0 ? '+' : '') + v.toFixed(1) + '%' : simMdp(v);
+    const maximo = Math.max.apply(null, obras.map(o => Math.abs(valor(o)))) || 1;
+    const rotulo = orden.id === 'cronologia' ? 'Costo real' : orden.et;
+
+    cont.innerHTML =
+      '<section class="sim-rank">' +
+        '<div class="sim-rank-cab">' +
+          '<h3 class="sim-rank-tit">Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo.toLowerCase() + '</h3>' +
+          '<span class="sim-rank-sub">La barra mide el tamaño de la cifra. Pulse cualquier renglón para ir a su ficha.</span>' +
+        '</div>' +
+        '<ol class="sim-rank-filas">' +
+          obras.map((o, i) =>
+            '<li class="sim-rank-fila">' +
+              '<button type="button" class="sim-rank-b" onclick="window.AuditEngine.simIrAObra(\'' + o.id + '\')">' +
+                '<span class="sim-rank-n">' + (i + 1) + '</span>' +
+                '<span class="sim-rank-ico">' + o.icono + '</span>' +
+                '<span class="sim-rank-nom">' + o.nombre + '</span>' +
+                '<span class="sim-rank-riel">' +
+                  '<span class="sim-rank-barra" style="width:' + ((Math.abs(valor(o)) / maximo) * 100).toFixed(1) + '%; background:' + o.badge_color + ';"></span>' +
+                '</span>' +
+                '<span class="sim-rank-val">' + fmt(valor(o)) + '</span>' +
+              '</button>' +
+            '</li>').join('') +
+        '</ol>' +
+      '</section>';
+  }
+
+  function simIrAObra(id) {
+    const el = document.getElementById('card-sim-' + id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.remove('ce-destaca');
+    void el.offsetWidth;
+    el.classList.add('ce-destaca');
+  }
+
+  /* Un billon de pesos no significa nada hasta que se pone junto a algo
+     conocido. Las anclas salen de la propia base y llevan su ejercicio. */
+  function renderSimuladorEscala() {
+    const cont = document.getElementById('simEscala');
+    if (!cont) return;
+    const a = simAgregados(simFiltradas());
+    const m = DB.macro || {};
+    const ce = DB.cuentas_ecologicas;
+    const anclas = [
+      { k: 'Ramo 33 · aportaciones federales a estados y municipios', v: m.ramo33Total, ej: '2026', ref: 'ref-pef2026' },
+      { k: 'Gasto federalizado completo', v: m.gastoFederalizadoTotal, ej: '2026', ref: 'ref-pef2026' },
+      { k: 'Deuda subnacional de las 32 entidades', v: m.deudaSubnacionalTotal, ej: '2026', ref: 'ref-shcp-alertas' },
+      { k: 'Costo ambiental de un año completo', v: ce ? ce.ctada.total_mdp : null, ej: '2024', ref: 'ref-ceem-2024' },
+      { k: 'Presupuesto de Egresos de la Federación', v: m.pefNetoTotal, ej: '2026', ref: 'ref-pef2026' }
+    ].filter(x => x.v);
+
+    cont.innerHTML =
+      '<section class="sim-escala">' +
+        '<h3 class="sim-esc-tit">Contra qué se compara este dinero</h3>' +
+        '<p class="sim-esc-sub">El costo real de las obras filtradas suma <strong>' + simMdp(a.real) + '</strong>. ' +
+          'Puesto junto a cifras conocidas, equivale a:</p>' +
+        '<ul class="sim-esc-lista">' +
+          (() => {
+          // La barra saturaba en 100% para todo lo que superara 1x, asi que
+          // 1.46 veces y 5.75 veces se dibujaban identicas. Escala relativa.
+          const mayor = Math.max.apply(null, anclas.map(y => a.real / y.v)) || 1;
+          return anclas.map(x => {
+            const veces = a.real / x.v;
+            return '<li class="sim-esc-fila">' +
+              '<span class="sim-esc-veces">' + (veces >= 1 ? veces.toFixed(2) + '×' : (veces * 100).toFixed(1) + '%') + '</span>' +
+              '<span class="sim-esc-k">' + x.k + ' <span class="sim-esc-ej">(' + x.ej + ')</span>' + vsxRefLink(x.ref) + '</span>' +
+              '<span class="sim-esc-riel"><span class="sim-esc-barra" style="width:' + ((veces / mayor) * 100).toFixed(1) + '%"></span></span>' +
+              '<span class="sim-esc-v">' + simMdp(x.v) + '</span>' +
+            '</li>';
+          }).join('');
+          })() +
+        '</ul>' +
+        '<p class="sim-esc-aviso"><strong>Cómo leer esta comparación.</strong> El costo de las obras es una suma de pesos de años distintos, ' +
+          'entre 1988 y 2024, que no están deflactados a un año común; las cifras de contraste son de un solo ejercicio. ' +
+          'La comparación sirve para dimensionar el orden de magnitud, no para afirmar una equivalencia exacta de poder adquisitivo. ' +
+          'Un peso de 1997 no compra lo mismo que uno de 2026, y esta plataforma prefiere decirlo a ocultarlo.</p>' +
+      '</section>';
+  }
+
+  function renderSimuladorProcedencia() {
+    const cont = document.getElementById('simProcedencia');
+    if (!cont) return;
+    const t = DB.simulador_megaobras.totales_consolidados || {};
+    cont.innerHTML =
+      '<section class="sim-proc">' +
+        '<h3 class="sim-proc-tit">Cómo se calcula lo que usted ve</h3>' +
+        '<ul class="sim-proc-lista">' +
+          '<li><strong>Los agregados se suman, no se escriben.</strong> ' + (t.nota_totales || '') + '</li>' +
+          '<li><strong>La pérdida por segundo.</strong> Se obtiene dividiendo la pérdida anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que usted lleva mirando.</li>' +
+          '<li><strong>El sobrecosto del conjunto.</strong> Compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>' +
+          '<li><strong>Los hallazgos de auditoría</strong> que cita cada ficha provienen de la fiscalización de la Cuenta Pública de la Auditoría Superior de la Federación.' + vsxRefLink('ref-asf-cp') + '</li>' +
+          '<li><strong>Pendiente declarado.</strong> Cada obra todavía no lleva la referencia puntual del informe que sustenta su cifra. Mientras eso no exista, estas cifras se presentan como consolidación documental y no como dato auditado renglón por renglón.</li>' +
+        '</ul>' +
+      '</section>';
+  }
+
   function renderSimuladorMegaobras() {
     const kpisContainer = document.getElementById('simuladorKpisStrip');
     const sectorsContainer = document.getElementById('simSectorChips');
     const sim = DB.simulador_megaobras;
     if (!sim) return;
 
-    // 1. Tira de 4 KPIs Consolidados
+    // 1. Tira de indicadores. Se calcula sobre las obras que el filtro dejo
+    //    en pie: antes eran cadenas fijas que no cambiaban al filtrar y que
+    //    ademas no coincidian con la suma de la base.
+    const obrasVis = simFiltradas();
+    const ag = simAgregados(obrasVis);
     if (kpisContainer) {
       const pInfo = sim.periodos[state.simuladorPeriodo] || sim.periodos['dia'];
-      const factor = pInfo.factor;
-      const sufijo = pInfo.sufijo;
-      const perdidaConsolidada = sim.totales_consolidados.perdida_anual_consolidada_mdp * factor;
-      
-      let perdidaDisplay = '';
-      if (perdidaConsolidada >= 1000) {
-        perdidaDisplay = `$${(perdidaConsolidada / 1000).toFixed(2)} mil mdp${sufijo}`;
-      } else {
-        perdidaDisplay = `$${perdidaConsolidada.toFixed(2)} mdp${sufijo}`;
-      }
+      const alcance = (state.simuladorSector && state.simuladorSector !== 'todos') ||
+                      (state.simuladorSexenio && state.simuladorSexenio !== 'todos')
+        ? ag.n + (ag.n === 1 ? ' obra del filtro' : ' obras del filtro')
+        : 'las ' + ag.n + ' inversiones evaluadas';
 
       kpisContainer.innerHTML = `
         <div class="sim-kpi-card">
-          <div class="sim-kpi-lbl">🏗️ Inversión Total en Megaobras</div>
-          <div class="sim-kpi-val">$4.06 billones</div>
-          <div class="sim-kpi-sub">Costo real consolidado de las 12 inversiones evaluadas</div>
+          <div class="sim-kpi-lbl">🏗️ Costo Real Erogado</div>
+          <div class="sim-kpi-val">${simMdp(ag.real)}</div>
+          <div class="sim-kpi-sub">Suma de ${alcance}</div>
         </div>
 
         <div class="sim-kpi-card alert-kpi">
           <div class="sim-kpi-lbl">
             <span class="pulsing-dot"></span> Pérdida Operativa (${pInfo.label})
           </div>
-          <div class="sim-kpi-val loss-val">${perdidaDisplay}</div>
+          <div class="sim-kpi-val loss-val">${simPerdidaPeriodo(ag.perdidaAnual, pInfo)}</div>
           <div class="sim-kpi-sub">Subsidio continuo del erario para cubrir déficit operativo</div>
         </div>
 
         <div class="sim-kpi-card">
-          <div class="sim-kpi-lbl">📈 Sobrecosto Promedio</div>
-          <div class="sim-kpi-val" style="color:#f39c12;">+185.3%</div>
-          <div class="sim-kpi-sub">Desvío presupuestal respecto al monto original aprobado</div>
+          <div class="sim-kpi-lbl">📈 Sobrecosto del Conjunto</div>
+          <div class="sim-kpi-val" style="color:#f39c12;">${ag.sobrecosto > 0 ? '+' : ''}${ag.sobrecosto.toFixed(1)}%</div>
+          <div class="sim-kpi-sub">${simMdp(ag.presu)} aprobados frente a ${simMdp(ag.real)} erogados: ${simMdp(ag.brecha)} de más</div>
         </div>
 
         <div class="sim-kpi-card alert-kpi">
           <div class="sim-kpi-lbl">🔴 Telemetría Viva Acumulada</div>
-          <div class="sim-kpi-val loss-val" id="simLiveGlobalCounter">+$0.00</div>
-          <div class="sim-kpi-sub">Pérdida acumulada en vivo desde que abriste esta vista</div>
+          <div class="sim-kpi-val loss-val" id="simLiveGlobalCounter" data-rate="${ag.perdidaSegundo.toFixed(2)}">+$0.00</div>
+          <div class="sim-kpi-sub">Al ritmo de $${ag.perdidaSegundo.toFixed(2)} por segundo, desde que abrió esta vista</div>
         </div>
       `;
     }
@@ -14811,8 +14999,12 @@
       `).join('');
     }
 
-    // 3. Renderizar Obras
+    // 3. Orden, comparativa, fichas, escala y procedencia
+    renderSimuladorOrden();
+    renderSimuladorRanking();
     renderSimuladorObrasGrid();
+    renderSimuladorEscala();
+    renderSimuladorProcedencia();
 
     // 4. Iniciar Ticker en Vivo
     initLiveLossTicker();
@@ -14823,17 +15015,7 @@
     const sim = DB.simulador_megaobras;
     if (!grid || !sim) return;
 
-    let obras = sim.obras;
-
-    // Filtro por Sector
-    if (state.simuladorSector && state.simuladorSector !== 'todos') {
-      obras = obras.filter(o => o.sector_id === state.simuladorSector);
-    }
-
-    // Filtro por Sexenio
-    if (state.simuladorSexenio && state.simuladorSexenio !== 'todos') {
-      obras = obras.filter(o => o.presidente.toLowerCase().includes(state.simuladorSexenio.toLowerCase()));
-    }
+    const obras = simFiltradas();
 
     const pInfo = sim.periodos[state.simuladorPeriodo] || sim.periodos['dia'];
     const factor = pInfo.factor;
@@ -14977,7 +15159,7 @@
     document.querySelectorAll('#simSectorChips .sim-pill-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.sector === sectorId);
     });
-    renderSimuladorObrasGrid();
+    renderSimuladorMegaobras();
   }
 
   function setSimuladorSexenio(sexenio) {
@@ -14985,7 +15167,7 @@
     document.querySelectorAll('#simSexenioChips .sim-pill-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.sexenio === sexenio);
     });
-    renderSimuladorObrasGrid();
+    renderSimuladorMegaobras();
   }
 
   function initLiveLossTicker() {
@@ -14997,10 +15179,12 @@
       state.simuladorElapsedSeconds++;
       const seconds = state.simuladorElapsedSeconds;
 
-      // 1. Contador Global Consolidado ($2,495.14 pesos por segundo)
+      // 1. Contador global. El ritmo lo trae el propio elemento, calculado
+      //    sobre las obras que el filtro dejo en pie: si se filtra un sector,
+      //    el contador pasa a medir ese sector y no el consolidado.
       const globalEl = document.getElementById('simLiveGlobalCounter');
       if (globalEl) {
-        const consolidatedRate = (DB.simulador_megaobras && DB.simulador_megaobras.totales_consolidados) ? DB.simulador_megaobras.totales_consolidados.perdida_segundo_consolidada : 2495.14;
+        const consolidatedRate = parseFloat(globalEl.dataset.rate) || 0;
         const totalPesos = seconds * consolidatedRate;
         globalEl.textContent = `+$${totalPesos.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
       }
@@ -18626,6 +18810,8 @@
 
   window.AuditEngine = {
     init: init,
+    setSimuladorOrden: setSimuladorOrden,
+    simIrAObra: simIrAObra,
     renderConstitucionEconomica: renderConstitucionEconomica,
     ceIrAPilar: ceIrAPilar,
     goToPrecepto: goToPrecepto,
