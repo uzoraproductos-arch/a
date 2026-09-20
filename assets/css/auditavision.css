@@ -91,7 +91,12 @@ body {
   color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.65;
+  /* 'clip' recorta el desborde horizontal igual que 'hidden' pero NO
+     convierte al cuerpo en contenedor de desplazamiento. Con 'hidden',
+     position:sticky quedaba inerte en toda la plataforma: ni la barra
+     de pestanas se anclaba, pese a tener la regla desde el principio. */
   overflow-x: hidden;
+  overflow-x: clip;
   background-image: 
     radial-gradient(ellipse at 15% 10%, rgba(201, 168, 76, 0.04) 0%, transparent 45%),
     radial-gradient(ellipse at 85% 25%, rgba(139, 26, 26, 0.05) 0%, transparent 50%),
@@ -5735,6 +5740,18 @@ nav.tabbar button.active .num {
   grid-template-columns: repeat(4, 1fr);
   gap: 13px;
   margin-bottom: 22px;
+  /* Anclada bajo la barra de pestanas (sticky en top:10px, 38px de alto):
+     los cuatro bloques y el contador en vivo quedan siempre a la vista
+     mientras se exploran los filtros y las mesas de calculo. */
+  position: sticky;
+  top: 0;
+  z-index: 880;
+  /* Sin hueco por arriba: el relleno llega al borde de la ventana para
+     que el contenido no asome por detras de la tira anclada. */
+  padding: 12px 10px 13px;
+  margin: -12px -10px 22px;
+  background: var(--bg-void);
+  box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.75);
 }
 @media (max-width: 1080px) { .sim-kpis-strip { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px)  { .sim-kpis-strip { grid-template-columns: 1fr; } }
@@ -12922,19 +12939,19 @@ body.con-regreso { padding-bottom: 96px; }
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
-  padding: 18px 18px 20px;
-  margin-bottom: 16px;
+  padding: 13px 15px 14px;
+  margin-bottom: 11px;
 }
 
 .sim-sel-cab {
   display: flex;
-  align-items: flex-start;
-  gap: 13px;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 11px;
 }
 
 .sim-sel-ico {
-  font-size: 26px;
+  font-size: 21px;
   line-height: 1;
   flex-shrink: 0;
   margin-top: 2px;
@@ -12942,7 +12959,7 @@ body.con-regreso { padding-bottom: 96px; }
 
 .sim-sel-tit {
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--text-gold);
   margin: 0 0 3px;
@@ -12950,7 +12967,7 @@ body.con-regreso { padding-bottom: 96px; }
 }
 
 .sim-sel-sub {
-  font-size: 12.5px;
+  font-size: 11.5px;
   color: var(--text-secondary);
   margin: 0;
   line-height: 1.55;
@@ -12992,8 +13009,8 @@ body.con-regreso { padding-bottom: 96px; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 14px 8px 12px;
+  gap: 2px;
+  padding: 9px 8px 8px;
   background: var(--bg-card-alt);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
@@ -13010,7 +13027,7 @@ body.con-regreso { padding-bottom: 96px; }
   box-shadow: 0 0 0 1px var(--gold-glow);
 }
 
-.sim-dial-ico { font-size: 22px; line-height: 1; }
+.sim-dial-ico { font-size: 17px; line-height: 1; }
 
 .sim-dial-et {
   font-family: var(--font-sans);
@@ -13047,9 +13064,9 @@ body.con-regreso { padding-bottom: 96px; }
 .sim-los {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-  padding: 16px 15px 14px;
+  align-items: stretch;
+  gap: 6px;
+  padding: 11px 13px 10px;
   background: var(--bg-card-alt);
   border: 1px solid var(--border-subtle);
   border-radius: 13px;
@@ -13071,14 +13088,19 @@ body.con-regreso { padding-bottom: 96px; }
 
 .sim-los-vacia { opacity: 0.33; cursor: not-allowed; }
 
-.sim-los-ico { font-size: 27px; line-height: 1; margin-bottom: 2px; }
+.sim-los-fila { display: flex; align-items: center; gap: 9px; }
+
+.sim-los-ico { font-size: 21px; line-height: 1; flex-shrink: 0; }
 
 .sim-los-nom {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 800;
   color: var(--text-main);
-  line-height: 1.3;
+  line-height: 1.25;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .sim-los-n {
@@ -13091,20 +13113,22 @@ body.con-regreso { padding-bottom: 96px; }
 
 .sim-los-cif {
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 14.5px;
   font-weight: 800;
   color: var(--gold-bright);
-  margin-top: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
+
+.sim-los-pie { display: flex; justify-content: space-between; gap: 8px; }
 
 .sim-los-riel {
   display: block;
   width: 100%;
-  height: 5px;
+  height: 4px;
   background: var(--bg-void);
   border-radius: 3px;
   overflow: hidden;
-  margin-top: 5px;
 }
 
 .sim-los-barra {
@@ -13134,8 +13158,8 @@ body.con-regreso { padding-bottom: 96px; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  gap: 4px;
-  padding: 10px 6px 12px;
+  gap: 2px;
+  padding: 8px 6px 9px;
   background: var(--bg-card-alt);
   border: 1px solid var(--border-subtle);
   border-radius: 11px;
@@ -13162,8 +13186,8 @@ body.con-regreso { padding-bottom: 96px; }
 
 .sim-seg-torre {
   display: block;
-  width: 60%;
-  min-height: 18px;
+  width: 62%;
+  min-height: 12px;
   border-radius: 4px 4px 0 0;
   opacity: 0.88;
   transition: height 0.4s ease;
@@ -13171,11 +13195,11 @@ body.con-regreso { padding-bottom: 96px; }
 
 .sim-seg-nom {
   font-family: var(--font-sans);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--text-main);
-  line-height: 1.25;
-  margin-top: 4px;
+  line-height: 1.2;
+  margin-top: 3px;
 }
 
 .sim-seg-anios {
@@ -13210,8 +13234,8 @@ body.con-regreso { padding-bottom: 96px; }
 }
 
 .sim-linea-nota {
-  margin: 12px 0 0;
-  padding: 11px 13px;
+  margin: 10px 0 0;
+  padding: 9px 12px;
   background: rgba(231, 76, 60, 0.06);
   border-left: 3px solid var(--crimson-bright);
   border-radius: 0 8px 8px 0;
@@ -13579,4 +13603,17 @@ body.con-regreso { padding-bottom: 96px; }
 @media (prefers-reduced-motion: reduce) {
   .sim-dial-b, .sim-los, .sim-seg, .sim-puente-b { transition: none; }
   .sim-seg-torre { transition: none; }
+}
+
+/* El anclaje de la tira de indicadores solo tiene sentido donde sobra
+   alto. En movil las cuatro tarjetas se apilan y ocuparian la pantalla
+   entera, asi que ahi vuelven al flujo normal. */
+@media (max-width: 1080px) {
+  .sim-kpis-strip {
+    position: static;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    background: none;
+  }
 }

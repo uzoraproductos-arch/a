@@ -15045,12 +15045,16 @@
           (vacio ? 'disabled ' : '') +
           'data-sector="' + s.id + '" ' +
           'onclick="window.AuditEngine.setSimuladorSector(\'' + s.id + '\')">' +
-        '<span class="sim-los-ico">' + s.icono + '</span>' +
-        '<span class="sim-los-nom">' + s.nombre + '</span>' +
-        '<span class="sim-los-n">' + obras.length + (obras.length === 1 ? ' obra' : ' obras') + '</span>' +
-        '<span class="sim-los-cif">' + simMdp(real) + '</span>' +
+        '<span class="sim-los-fila">' +
+          '<span class="sim-los-ico">' + s.icono + '</span>' +
+          '<span class="sim-los-nom">' + s.nombre + '</span>' +
+          '<span class="sim-los-cif">' + simMdp(real) + '</span>' +
+        '</span>' +
         '<span class="sim-los-riel"><span class="sim-los-barra" style="width:' + cuota.toFixed(1) + '%"></span></span>' +
-        '<span class="sim-los-cuota">' + cuota.toFixed(1) + '% del costo real</span>' +
+        '<span class="sim-los-pie">' +
+          '<span class="sim-los-n">' + obras.length + (obras.length === 1 ? ' obra' : ' obras') + '</span>' +
+          '<span class="sim-los-cuota">' + cuota.toFixed(1) + '% del costo real</span>' +
+        '</span>' +
       '</button>';
     }).join('');
 
@@ -15091,7 +15095,7 @@
             const n = conteos[i];
             const obras = simObrasDe(sector, x.k);
             const real = obras.reduce((a, o) => a + o.inversion_real_mdp, 0);
-            const alto = 18 + (n / tope) * 62;
+            const alto = 12 + (n / tope) * 34;
             return '<button type="button" class="sim-seg' + (x.k === activo ? ' on' : '') + (n === 0 ? ' sim-seg-vacio' : '') + '" ' +
                 (n === 0 ? 'disabled ' : '') +
                 'data-sexenio="' + x.k + '" ' +
@@ -15138,8 +15142,6 @@
   function cerrarSimuladorDesglose() {
     state.simuladorDesglose = false;
     renderSimuladorMegaobras();
-    const ancla = document.getElementById('simSectorMosaico');
-    if (ancla) ancla.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   /* ====================================================================
@@ -15551,24 +15553,19 @@
     renderSimuladorMegaobras();
   }
 
-  /* Elegir un sector es la puerta de entrada al desglose: abre la seccion
-     y lleva la vista al encabezado para que no quede fuera de pantalla. */
+  /* Elegir un sector abre el desglose. No se mueve la vista: el salto
+     automatico empujaba la tira de indicadores fuera de pantalla y con
+     ella el contador en vivo, que es justo lo que no debe perderse. */
   function setSimuladorSector(sectorId) {
     state.simuladorSector = sectorId;
     state.simuladorDesglose = true;
     renderSimuladorMegaobras();
-    const cab = document.getElementById('simDesgloseCab');
-    if (cab) setTimeout(() => cab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
   }
 
   function setSimuladorSexenio(sexenio) {
     state.simuladorSexenio = sexenio;
     if (sexenio && sexenio !== 'todos') state.simuladorDesglose = true;
     renderSimuladorMegaobras();
-    if (state.simuladorDesglose) {
-      const cab = document.getElementById('simDesgloseCab');
-      if (cab) setTimeout(() => cab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
-    }
   }
 
   function initLiveLossTicker() {

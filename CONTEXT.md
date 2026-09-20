@@ -520,6 +520,19 @@ de los 32 circuitos.
 - Notas al pie y glosario aplicados al panel con `autolinkAmbito`; las etiquetas compactas nuevas
   (`sim-dial-*`, `sim-los-*`, `sim-seg-*`, `sim-t-*`, `sim-cad-*`, `sim-pr-*`) van en la lista de omision.
 
+### Hecho - La tira de indicadores vuelve a estar siempre a la vista (2.2)
+
+- Defecto de raiz encontrado al perseguirlo: `body` tenia `overflow-x: hidden`, que convierte al cuerpo
+  en contenedor de desplazamiento y deja inerte a `position: sticky` en toda la plataforma. Ni la barra
+  de pestanas se anclaba, pese a tener la regla desde el principio. Se cambia a `overflow-x: clip`,
+  que recorta igual pero no crea contenedor de desplazamiento, dejando `hidden` como respaldo.
+- `.sim-kpis-strip` se ancla arriba: los cuatro bloques y el contador en vivo acompanan al usuario
+  mientras explora selectores, mesas y fichas. En pantallas de 1080 px o menos vuelve al flujo normal.
+- Se retira el salto automatico al desglose que introdujo la reorganizacion: era lo que empujaba la
+  tira fuera de pantalla al elegir un sector.
+- Selectores comprimidos de 1,127 px a 811 px: loseta de sector a dos renglones, torres de la linea
+  del tiempo mas bajas, cabeceras y rellenos mas ajustados.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
