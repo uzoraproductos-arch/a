@@ -627,56 +627,34 @@
           <!-- Tira de 4 KPIs Consolidados -->
           <div id="simuladorKpisStrip" class="sim-kpis-strip"></div>
 
-          <!-- Panel de Controles: Selector de Temporalidad y Filtros -->
-          <div class="sim-controls-panel">
-            
-            <!-- Selector de Temporalidad (Día, Mes, Trimestre, Semestre, Año) -->
-            <div class="sim-control-group">
-              <span class="sim-group-label">⏱️ Temporalidad de Pérdidas &amp; Subsidios:</span>
-              <div id="simPeriodoPills" class="sim-pill-group">
-                <button class="sim-pill-btn sim-pill-periodo active" onclick="window.AuditEngine.setSimuladorPeriodo('dia')">Día con Día ($/día)</button>
-                <button class="sim-pill-btn sim-pill-periodo" onclick="window.AuditEngine.setSimuladorPeriodo('mes')">Mes con Mes ($/mes)</button>
-                <button class="sim-pill-btn sim-pill-periodo" onclick="window.AuditEngine.setSimuladorPeriodo('trimestre')">Trimestral ($/trimestre)</button>
-                <button class="sim-pill-btn sim-pill-periodo" onclick="window.AuditEngine.setSimuladorPeriodo('semestre')">Semestral ($/semestre)</button>
-                <button class="sim-pill-btn sim-pill-periodo" onclick="window.AuditEngine.setSimuladorPeriodo('ano')">Anual ($/año)</button>
-              </div>
+          <!-- Selectores visuales: temporalidad, sector estrategico y sexenio -->
+          <div id="simPeriodoDial"></div>
+          <div id="simSectorMosaico"></div>
+          <div id="simSexenioLinea"></div>
+
+          <!-- Desglose: se despliega al elegir un sector, un sexenio o "Ver todas" -->
+          <div id="simDesglose" class="sim-desglose" hidden>
+
+            <div id="simDesgloseCab"></div>
+
+            <!-- Ordenamiento de la lista -->
+            <div class="sim-control-group" id="simOrdenGrupo">
+              <span class="sim-group-label">&#8645; Ordenar la lista por:</span>
+              <div id="simOrdenChips" class="sim-pill-group"></div>
             </div>
 
-            <!-- Selector de Sectores Estratégicos -->
-            <div class="sim-control-group">
-              <span class="sim-group-label">🏢 Filtrar por Sector Estratégico:</span>
-              <div id="simSectorChips" class="sim-pill-group"></div>
-            </div>
+            <!-- Comparativa de las obras filtradas -->
+            <div id="simRanking"></div>
 
-            <!-- Selector de Sexenios / Administraciones -->
-            <div class="sim-control-group">
-              <span class="sim-group-label">🏛️ Filtrar por Administración Presidencial (1988–2026):</span>
-              <div id="simSexenioChips" class="sim-pill-group">
-                <button class="sim-pill-btn active" data-sexenio="todos" onclick="window.AuditEngine.setSimuladorSexenio('todos')">Todos los Mandatarios</button>
-                <button class="sim-pill-btn" data-sexenio="López Obrador" onclick="window.AuditEngine.setSimuladorSexenio('López Obrador')">AMLO (2018–2024)</button>
-                <button class="sim-pill-btn" data-sexenio="Peña Nieto" onclick="window.AuditEngine.setSimuladorSexenio('Peña Nieto')">Peña Nieto (2012–2018)</button>
-                <button class="sim-pill-btn" data-sexenio="Calderón" onclick="window.AuditEngine.setSimuladorSexenio('Calderón')">Calderón (2006–2012)</button>
-                <button class="sim-pill-btn" data-sexenio="Fox" onclick="window.AuditEngine.setSimuladorSexenio('Fox')">Fox (2000–2006)</button>
-                <button class="sim-pill-btn" data-sexenio="Zedillo" onclick="window.AuditEngine.setSimuladorSexenio('Zedillo')">Zedillo (1994–2000)</button>
-                <button class="sim-pill-btn" data-sexenio="Salinas" onclick="window.AuditEngine.setSimuladorSexenio('Salinas')">Salinas (1988–1994)</button>
-              </div>
-            </div>
+            <!-- Tres mesas de calculo: de cero al resultado final -->
+            <div id="simTablas"></div>
+
+            <!-- Cuadricula de fichas de obras e inversiones -->
+            <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
 
           </div>
 
-          <!-- Ordenamiento de la lista -->
-          <div class="sim-control-group" id="simOrdenGrupo">
-            <span class="sim-group-label">&#8645; Ordenar la lista por:</span>
-            <div id="simOrdenChips" class="sim-pill-group"></div>
-          </div>
-
-          <!-- Comparativa de las obras filtradas -->
-          <div id="simRanking"></div>
-
-          <!-- Cuadrícula de Fichas de Obras e Inversiones -->
-          <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
-
-          <!-- Escala: contra que se compara este dinero -->
+          <!-- Escala: contra que se compara este dinero (siempre visible) -->
           <div id="simEscala"></div>
 
           <!-- Procedencia y advertencias metodologicas -->

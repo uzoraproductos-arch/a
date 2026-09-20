@@ -41,6 +41,7 @@
     simuladorPeriodo: 'dia',
     simuladorSector: 'todos',
     simuladorOrden: 'perdida',
+    simuladorDesglose: false,
     simuladorSexenio: 'todos',
     simuladorTickerTimer: null,
     simuladorElapsedSeconds: 0
@@ -2134,6 +2135,14 @@
   // Etiquetas, distintivos y celdas de dato: son rótulos, no prosa. Vincular
   // dentro de ellos rompe su maquetación y no ayuda a leer.
   const AUTOLINK_OMITIR_CLASES = new Set([
+    'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
+    'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
+    'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
+    'sim-vertodas', 'sim-replegar', 'sim-desg-tit', 'sim-desg-ico',
+    'sim-mesa-num', 'sim-t-n', 'sim-t-nom', 'sim-t-num', 'sim-t-acum',
+    'sim-t-dif', 'sim-t-op', 'sim-t-ico',
+    'sim-cad-et', 'sim-cad-op', 'sim-cad-v', 'sim-cad-fl',
+    'sim-pr-lbl', 'sim-pr-val', 'sim-pr-sub', 'sim-puente-b',
     'versus-nota-signo', 'vfoco-volver', 'vdg-kicker', 'vdg-tar-k', 'vdg-tar-v', 'vdg-tar-n',
     'vdg-orden-k', 'vdg-lugar', 'vdg-medalla', 'vdg-val', 'vdg-dist',
     'vdg-pista', 'vdg-proc-k',
@@ -14825,8 +14834,10 @@
   function setSimuladorOrden(id) {
     state.simuladorOrden = id;
     renderSimuladorOrden();
-    renderSimuladorObrasGrid();
     renderSimuladorRanking();
+    renderSimuladorTablas();
+    renderSimuladorObrasGrid();
+    autolinkAmbito(document.getElementById('simDesglose'));
   }
 
   /* Comparativa de un vistazo: la misma variable por la que esta ordenada
@@ -14941,9 +14952,400 @@
       '</section>';
   }
 
+  /* ====================================================================
+     SUBPESTANA 2.2 - SELECTORES VISUALES Y MESAS DE CALCULO
+     Los tres filtros dejan de ser tiras de pastillas y pasan a ser
+     tableros con cifra propia: cada control dice, antes de pulsarlo,
+     que va a mostrar. El desglose permanece replegado hasta que el
+     usuario elige, para que la subpestana abra ligera.
+     ==================================================================== */
+
+  const SIM_PERIODO_ICONOS = {
+    dia: '🕐', mes: '📅', trimestre: '📆', semestre: '⏳', ano: '🗓️'
+  };
+
+  const SIM_SEXENIOS = [
+    { k: 'Salinas',        nom: 'Carlos Salinas',   ini: 1988, fin: 1994, color: '#8e6cb0' },
+    { k: 'Zedillo',        nom: 'Ernesto Zedillo',  ini: 1994, fin: 2000, color: '#4a90d9' },
+    { k: 'Fox',            nom: 'Vicente Fox',      ini: 2000, fin: 2006, color: '#3fa373' },
+    { k: 'Calderón',       nom: 'Felipe Calderón',  ini: 2006, fin: 2012, color: '#c9a227' },
+    { k: 'Peña Nieto',     nom: 'Enrique Peña',     ini: 2012, fin: 2018, color: '#d98032' },
+    { k: 'López Obrador',  nom: 'López Obrador',    ini: 2018, fin: 2024, color: '#c0504d' }
+  ];
+
+  /* Un solo criterio de filtrado para toda la subpestana: los contadores
+     que se pintan en los selectores usan exactamente esta funcion, de modo
+     que ninguna etiqueta puede contradecir a la lista que abre debajo. */
+  function simObrasDe(sectorId, sexenio) {
+    const sim = DB.simulador_megaobras;
+    if (!sim) return [];
+    let obras = sim.obras.slice();
+    if (sectorId && sectorId !== 'todos') obras = obras.filter(o => o.sector_id === sectorId);
+    if (sexenio && sexenio !== 'todos') {
+      obras = obras.filter(o => o.presidente.toLowerCase().includes(sexenio.toLowerCase()));
+    }
+    return obras;
+  }
+
+  function simPesos(mdp) {
+    return '$' + formatNumber(Math.round(mdp * 1000000));
+  }
+
+  /* --- Selector 1: temporalidad, con la cifra de cada cadencia a la vista --- */
+  function renderSimuladorPeriodoDial() {
+    const cont = document.getElementById('simPeriodoDial');
+    const sim = DB.simulador_megaobras;
+    if (!cont || !sim) return;
+    const anual = simAgregados(simFiltradas()).perdidaAnual;
+    const actual = state.simuladorPeriodo || 'dia';
+
+    cont.innerHTML =
+      '<section class="sim-sel sim-sel-periodo">' +
+        '<div class="sim-sel-cab">' +
+          '<span class="sim-sel-ico">⏱️</span>' +
+          '<div><h3 class="sim-sel-tit">Temporalidad de pérdidas y subsidios</h3>' +
+          '<p class="sim-sel-sub">La misma pérdida anual, repartida en cinco cadencias. Elija el ritmo con el que quiere leerla.</p></div>' +
+        '</div>' +
+        '<div class="sim-dial">' +
+          Object.keys(sim.periodos).map(k => {
+            const p = sim.periodos[k];
+            const v = anual * p.factor;
+            const texto = Math.abs(v) >= 1000 ? '$' + (v / 1000).toFixed(2) + ' mil mdp'
+                                              : '$' + v.toFixed(2) + ' mdp';
+            return '<button type="button" class="sim-dial-b' + (k === actual ? ' on' : '') + '" ' +
+              'onclick="window.AuditEngine.setSimuladorPeriodo(\'' + k + '\')">' +
+              '<span class="sim-dial-ico">' + (SIM_PERIODO_ICONOS[k] || '⏱️') + '</span>' +
+              '<span class="sim-dial-et">' + p.label + '</span>' +
+              '<span class="sim-dial-cif">' + texto + '</span>' +
+              '<span class="sim-dial-suf">' + p.sufijo + '</span>' +
+            '</button>';
+          }).join('') +
+        '</div>' +
+      '</section>';
+  }
+
+  /* --- Selector 2: mosaico de sectores. Cada loseta lleva su peso real --- */
+  function renderSimuladorSectorMosaico() {
+    const cont = document.getElementById('simSectorMosaico');
+    const sim = DB.simulador_megaobras;
+    if (!cont || !sim) return;
+    const sexenio = state.simuladorSexenio || 'todos';
+    const activo = state.simuladorSector || 'todos';
+    const universo = simObrasDe('todos', sexenio);
+    const totalReal = universo.reduce((a, o) => a + o.inversion_real_mdp, 0) || 1;
+    const sectores = sim.sectores.filter(s => s.id !== 'todos');
+
+    const losetas = sectores.map(s => {
+      const obras = simObrasDe(s.id, sexenio);
+      const real = obras.reduce((a, o) => a + o.inversion_real_mdp, 0);
+      const cuota = (real / totalReal) * 100;
+      const vacio = obras.length === 0;
+      return '<button type="button" class="sim-los' + (s.id === activo && state.simuladorDesglose ? ' on' : '') +
+          (vacio ? ' sim-los-vacia' : '') + '" ' +
+          (vacio ? 'disabled ' : '') +
+          'data-sector="' + s.id + '" ' +
+          'onclick="window.AuditEngine.setSimuladorSector(\'' + s.id + '\')">' +
+        '<span class="sim-los-ico">' + s.icono + '</span>' +
+        '<span class="sim-los-nom">' + s.nombre + '</span>' +
+        '<span class="sim-los-n">' + obras.length + (obras.length === 1 ? ' obra' : ' obras') + '</span>' +
+        '<span class="sim-los-cif">' + simMdp(real) + '</span>' +
+        '<span class="sim-los-riel"><span class="sim-los-barra" style="width:' + cuota.toFixed(1) + '%"></span></span>' +
+        '<span class="sim-los-cuota">' + cuota.toFixed(1) + '% del costo real</span>' +
+      '</button>';
+    }).join('');
+
+    cont.innerHTML =
+      '<section class="sim-sel sim-sel-sector">' +
+        '<div class="sim-sel-cab">' +
+          '<span class="sim-sel-ico">🏢</span>' +
+          '<div><h3 class="sim-sel-tit">Sector estratégico</h3>' +
+          '<p class="sim-sel-sub">Pulse una loseta para desplegar el desglose completo de ese sector: comparativa, mesas de cálculo y fichas obra por obra.</p></div>' +
+          '<button type="button" class="sim-vertodas' + (activo === 'todos' && state.simuladorDesglose ? ' on' : '') + '" ' +
+            'onclick="window.AuditEngine.setSimuladorSector(\'todos\')">🌐 Ver todas</button>' +
+        '</div>' +
+        '<div class="sim-mosaico">' + losetas + '</div>' +
+      '</section>';
+  }
+
+  /* --- Selector 3: la linea del tiempo 1988-2024 --- */
+  function renderSimuladorSexenioLinea() {
+    const cont = document.getElementById('simSexenioLinea');
+    if (!cont) return;
+    const sector = state.simuladorSector || 'todos';
+    const activo = state.simuladorSexenio || 'todos';
+    const conteos = SIM_SEXENIOS.map(x => simObrasDe(sector, x.k).length);
+    const tope = Math.max.apply(null, conteos) || 1;
+    const compartida = simObrasDe('todos', 'todos').some(o => o.presidente.indexOf('/') > -1);
+
+    cont.innerHTML =
+      '<section class="sim-sel sim-sel-sex">' +
+        '<div class="sim-sel-cab">' +
+          '<span class="sim-sel-ico">🏛️</span>' +
+          '<div><h3 class="sim-sel-tit">Administración presidencial</h3>' +
+          '<p class="sim-sel-sub">Treinta y seis años de obra pública en una sola línea. La altura de cada bloque es el número de obras evaluadas en ese periodo.</p></div>' +
+          '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
+            'onclick="window.AuditEngine.setSimuladorSexenio(\'todos\')">🕰️ Todo el periodo</button>' +
+        '</div>' +
+        '<div class="sim-linea">' +
+          SIM_SEXENIOS.map((x, i) => {
+            const n = conteos[i];
+            const obras = simObrasDe(sector, x.k);
+            const real = obras.reduce((a, o) => a + o.inversion_real_mdp, 0);
+            const alto = 18 + (n / tope) * 62;
+            return '<button type="button" class="sim-seg' + (x.k === activo ? ' on' : '') + (n === 0 ? ' sim-seg-vacio' : '') + '" ' +
+                (n === 0 ? 'disabled ' : '') +
+                'data-sexenio="' + x.k + '" ' +
+                'onclick="window.AuditEngine.setSimuladorSexenio(\'' + x.k + '\')">' +
+              '<span class="sim-seg-n">' + n + '</span>' +
+              '<span class="sim-seg-torre" style="height:' + alto.toFixed(0) + 'px; background:' + x.color + ';"></span>' +
+              '<span class="sim-seg-nom">' + x.nom + '</span>' +
+              '<span class="sim-seg-anios">' + x.ini + '–' + x.fin + '</span>' +
+              '<span class="sim-seg-cif">' + (n ? simMdp(real) : 'sin obras aquí') + '</span>' +
+            '</button>';
+          }).join('') +
+        '</div>' +
+        '<div class="sim-linea-eje"><span>1988</span><span class="sim-linea-riel"></span><span>2024</span></div>' +
+        (compartida
+          ? '<p class="sim-linea-nota"><strong>Punto ciego declarado.</strong> El rescate carretero FARAC se contrató bajo Salinas y se asumió como deuda pública bajo Zedillo, ' +
+            'así que aparece en ambos bloques. Por eso la suma de los seis periodos da trece obras y no doce: una misma obra tiene dos responsables, no medio responsable cada uno.</p>'
+          : '') +
+      '</section>';
+  }
+
+  /* --- Cabecera del desglose: que se esta viendo y como replegarlo --- */
+  function renderSimuladorDesgloseCab() {
+    const cont = document.getElementById('simDesgloseCab');
+    if (!cont) return;
+    const sim = DB.simulador_megaobras;
+    const sec = sim.sectores.find(s => s.id === (state.simuladorSector || 'todos'));
+    const sx = SIM_SEXENIOS.find(x => x.k === state.simuladorSexenio);
+    const obras = simFiltradas();
+    cont.innerHTML =
+      '<div class="sim-desg-cab">' +
+        '<div class="sim-desg-quien">' +
+          '<span class="sim-desg-ico">' + (sec ? sec.icono : '🌐') + '</span>' +
+          '<div>' +
+            '<h3 class="sim-desg-tit">' + (sec ? sec.nombre : 'Todos los sectores') + '</h3>' +
+            '<p class="sim-desg-sub">' + obras.length + (obras.length === 1 ? ' obra' : ' obras') +
+              (sx ? ' · ' + sx.nom + ' (' + sx.ini + '–' + sx.fin + ')' : ' · 1988–2024') +
+              '. Debajo: la comparativa, las tres mesas de cálculo y la ficha de cada obra.</p>' +
+          '</div>' +
+        '</div>' +
+        '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Replegar el desglose</button>' +
+      '</div>';
+  }
+
+  function cerrarSimuladorDesglose() {
+    state.simuladorDesglose = false;
+    renderSimuladorMegaobras();
+    const ancla = document.getElementById('simSectorMosaico');
+    if (ancla) ancla.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* ====================================================================
+     LAS TRES MESAS DE CALCULO
+     Cada mesa arranca en cero y avanza renglon por renglon hasta el
+     resultado final, para que el total de arriba no sea un numero que
+     haya que creer sino uno que se pueda seguir con el dedo.
+     ==================================================================== */
+
+  function renderSimuladorTablas() {
+    const cont = document.getElementById('simTablas');
+    if (!cont) return;
+    const obras = simFiltradas();
+    if (obras.length === 0) { cont.innerHTML = ''; return; }
+    cont.innerHTML =
+      '<section class="sim-mesas">' +
+        '<div class="sim-mesas-cab">' +
+          '<h3 class="sim-mesas-tit">Las tres mesas de cálculo</h3>' +
+          '<p class="sim-mesas-sub">Ninguna cifra de esta subpestaña se escribe a mano. Aquí está la aritmética completa, ' +
+            'de cero al resultado: primero cómo se acumuló el sobrecosto, después cómo se arma la pérdida de cada año, ' +
+            'y por último cuánto de eso corresponde a cada contribuyente. Esa última cifra es la que alimenta la calculadora cívica.</p>' +
+        '</div>' +
+        simMesaUno(obras) +
+        simMesaDos(obras) +
+        simMesaTres(obras) +
+      '</section>';
+  }
+
+  function simMesaUno(obras) {
+    let acum = 0;
+    const filas = obras.map((o, i) => {
+      const dif = o.inversion_real_mdp - o.inversion_presupuestada_mdp;
+      acum += dif;
+      return '<tr>' +
+        '<td class="sim-t-n">' + (i + 1) + '</td>' +
+        '<td class="sim-t-nom"><span class="sim-t-ico">' + o.icono + '</span>' + o.nombre + '</td>' +
+        '<td class="sim-t-num">' + formatNumber(o.inversion_presupuestada_mdp) + '</td>' +
+        '<td class="sim-t-num">' + formatNumber(o.inversion_real_mdp) + '</td>' +
+        '<td class="sim-t-num sim-t-dif">' + (dif > 0 ? '+' : '') + formatNumber(dif) + '</td>' +
+        '<td class="sim-t-num sim-t-acum">' + formatNumber(Math.round(acum)) + '</td>' +
+      '</tr>';
+    }).join('');
+    const ag = simAgregados(obras);
+    return '<article class="sim-mesa">' +
+      '<h4 class="sim-mesa-tit"><span class="sim-mesa-num">1</span> De lo aprobado a lo erogado</h4>' +
+      '<p class="sim-mesa-pie">Cada renglón suma su diferencia a la columna acumulada. La última celda de esa columna es el sobrecosto del conjunto, en millones de pesos.</p>' +
+      '<div class="sim-t-marco"><table class="sim-t">' +
+        '<thead><tr><th>#</th><th>Obra</th><th>Aprobado (mdp)</th><th>Erogado (mdp)</th><th>Diferencia</th><th>Acumulado</th></tr></thead>' +
+        '<tbody>' +
+          '<tr class="sim-t-cero"><td class="sim-t-n">0</td><td class="sim-t-nom">Punto de partida</td>' +
+            '<td class="sim-t-num">0</td><td class="sim-t-num">0</td><td class="sim-t-num">0</td><td class="sim-t-num sim-t-acum">0</td></tr>' +
+          filas +
+        '</tbody>' +
+        '<tfoot><tr><td></td><td class="sim-t-nom">Total del filtro</td>' +
+          '<td class="sim-t-num">' + formatNumber(ag.presu) + '</td>' +
+          '<td class="sim-t-num">' + formatNumber(ag.real) + '</td>' +
+          '<td class="sim-t-num sim-t-dif">+' + formatNumber(ag.brecha) + '</td>' +
+          '<td class="sim-t-num sim-t-acum">' + formatNumber(ag.brecha) + '</td></tr></tfoot>' +
+      '</table></div>' +
+      '<p class="sim-mesa-cierre">Se aprobaron <strong>' + simMdp(ag.presu) + '</strong> y se erogaron <strong>' + simMdp(ag.real) +
+        '</strong>. La diferencia es de <strong>' + simMdp(ag.brecha) + '</strong>, un <strong>' +
+        (ag.sobrecosto > 0 ? '+' : '') + ag.sobrecosto.toFixed(1) + '%</strong> sobre lo autorizado. Las cifras de obra provienen de la fiscalización de la Cuenta Pública.' + vsxRefLink('ref-asf-cp') + '</p>' +
+    '</article>';
+  }
+
+  function simMesaDos(obras) {
+    let acum = 0;
+    const filas = obras.map((o, i) => {
+      acum += o.perdida_anual_mdp;
+      const cero = o.perdida_anual_mdp === 0;
+      return '<tr' + (cero ? ' class="sim-t-nula"' : '') + '>' +
+        '<td class="sim-t-n">' + (i + 1) + '</td>' +
+        '<td class="sim-t-nom"><span class="sim-t-ico">' + o.icono + '</span>' + o.nombre + '</td>' +
+        '<td class="sim-t-num">' + formatNumber(o.ingresos_anuales_mdp) + '</td>' +
+        '<td class="sim-t-num">' + formatNumber(o.costo_operativo_anual_mdp) + '</td>' +
+        '<td class="sim-t-num sim-t-dif">' + (cero ? '—' : formatNumber(o.perdida_anual_mdp)) + '</td>' +
+        '<td class="sim-t-num sim-t-acum">' + formatNumber(Math.round(acum * 10) / 10) + '</td>' +
+      '</tr>';
+    }).join('');
+    const ag = simAgregados(obras);
+    const cadena = [
+      { et: 'Un año', div: 1, n: '' },
+      { et: 'Un semestre', div: 2, n: '÷ 2 semestres' },
+      { et: 'Un trimestre', div: 4, n: '÷ 4 trimestres' },
+      { et: 'Un mes', div: 12, n: '÷ 12 meses' },
+      { et: 'Un día', div: 365, n: '÷ 365 días' },
+      { et: 'Un segundo', div: 31536000, n: '÷ 31,536,000 segundos' }
+    ];
+    return '<article class="sim-mesa">' +
+      '<h4 class="sim-mesa-tit"><span class="sim-mesa-num">2</span> Cómo se arma la pérdida operativa de un año</h4>' +
+      '<p class="sim-mesa-pie">La pérdida de cada obra es lo que su operación cuesta menos lo que su operación ingresa. Las obras concluidas sin déficit declarado entran con cero y no inflan el total.</p>' +
+      '<div class="sim-t-marco"><table class="sim-t">' +
+        '<thead><tr><th>#</th><th>Obra</th><th>Ingresos año (mdp)</th><th>Costo operativo (mdp)</th><th>Pérdida anual</th><th>Acumulado</th></tr></thead>' +
+        '<tbody>' +
+          '<tr class="sim-t-cero"><td class="sim-t-n">0</td><td class="sim-t-nom">Punto de partida</td>' +
+            '<td class="sim-t-num">0</td><td class="sim-t-num">0</td><td class="sim-t-num">0</td><td class="sim-t-num sim-t-acum">0</td></tr>' +
+          filas +
+        '</tbody>' +
+        '<tfoot><tr><td></td><td class="sim-t-nom">Pérdida anual del filtro</td><td></td><td></td>' +
+          '<td class="sim-t-num sim-t-dif">' + formatNumber(Math.round(ag.perdidaAnual * 10) / 10) + '</td>' +
+          '<td class="sim-t-num sim-t-acum">' + formatNumber(Math.round(ag.perdidaAnual * 10) / 10) + '</td></tr></tfoot>' +
+      '</table></div>' +
+      '<div class="sim-cadena">' +
+        cadena.map(c => {
+          const v = ag.perdidaAnual / c.div;
+          const txt = v >= 1000 ? '$' + (v / 1000).toFixed(2) + ' mil mdp'
+                    : v >= 1 ? '$' + v.toFixed(2) + ' mdp'
+                    : '$' + formatNumber(Math.round(v * 1000000)) + ' pesos';
+          return '<div class="sim-cad-p">' +
+            '<span class="sim-cad-et">' + c.et + '</span>' +
+            '<span class="sim-cad-op">' + (c.n || 'cifra base') + '</span>' +
+            '<span class="sim-cad-v">' + txt + '</span>' +
+          '</div>';
+        }).join('<span class="sim-cad-fl">→</span>') +
+      '</div>' +
+      '<p class="sim-mesa-cierre">Ese último eslabón, <strong>$' + ag.perdidaSegundo.toFixed(2) +
+        ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.' + vsxRefLink('ref-asf-cp') + '</p>' +
+    '</article>';
+  }
+
+  function simMesaTres(obras) {
+    const ag = simAgregados(obras);
+    const padron = (DB.macro && DB.macro.padronContribuyentes) || 0;
+    if (!padron) return '';
+    const pasos = [];
+    let total = 0;
+    total += ag.brecha;
+    pasos.push({ et: 'Pesos pagados de más sobre lo aprobado', op: 'resultado de la mesa 1', v: simMdp(ag.brecha), acum: total });
+    total += ag.perdidaAnual;
+    pasos.push({ et: 'Pérdida operativa de un año', op: '+ resultado de la mesa 2', v: simMdp(ag.perdidaAnual), acum: total });
+
+    const porContrib = (total * 1000000) / (padron * 1000000);
+    const brechaContrib = (ag.brecha * 1000000) / (padron * 1000000);
+    const perdidaContrib = (ag.perdidaAnual * 1000000) / (padron * 1000000);
+
+    return '<article class="sim-mesa sim-mesa-puente">' +
+      '<h4 class="sim-mesa-tit"><span class="sim-mesa-num">3</span> De la cifra agregada a su bolsillo</h4>' +
+      '<p class="sim-mesa-pie">Un billón de pesos no se siente. Dividido entre quienes sostienen el erario, sí. Esta mesa es el puente hacia la calculadora cívica de la 2.3.</p>' +
+      '<div class="sim-t-marco"><table class="sim-t sim-t-puente">' +
+        '<thead><tr><th>Paso</th><th>Concepto</th><th>Operación</th><th>Importe</th><th>Acumulado</th></tr></thead>' +
+        '<tbody>' +
+          '<tr class="sim-t-cero"><td class="sim-t-n">0</td><td class="sim-t-nom">Punto de partida</td>' +
+            '<td class="sim-t-op">—</td><td class="sim-t-num">$0</td><td class="sim-t-num sim-t-acum">$0</td></tr>' +
+          pasos.map((p, i) =>
+            '<tr><td class="sim-t-n">' + (i + 1) + '</td>' +
+              '<td class="sim-t-nom">' + p.et + '</td>' +
+              '<td class="sim-t-op">' + p.op + '</td>' +
+              '<td class="sim-t-num">' + p.v + '</td>' +
+              '<td class="sim-t-num sim-t-acum">' + simMdp(p.acum) + '</td></tr>').join('') +
+          '<tr class="sim-t-div"><td class="sim-t-n">3</td>' +
+            '<td class="sim-t-nom">Padrón de contribuyentes activos</td>' +
+            '<td class="sim-t-op">÷ ' + padron + ' millones</td>' +
+            '<td class="sim-t-num">—</td>' +
+            '<td class="sim-t-num sim-t-acum">$' + formatNumber(Math.round(porContrib)) + '</td></tr>' +
+        '</tbody>' +
+      '</table></div>' +
+      '<div class="sim-puente-res">' +
+        '<div class="sim-pr-card">' +
+          '<span class="sim-pr-lbl">Sobrecosto histórico por contribuyente</span>' +
+          '<span class="sim-pr-val">$' + formatNumber(Math.round(brechaContrib)) + '</span>' +
+          '<span class="sim-pr-sub">acumulado de 1988 a 2024, una sola vez</span>' +
+        '</div>' +
+        '<div class="sim-pr-card sim-pr-alta">' +
+          '<span class="sim-pr-lbl">Aportación total por contribuyente</span>' +
+          '<span class="sim-pr-val">$' + formatNumber(Math.round(porContrib)) + '</span>' +
+          '<span class="sim-pr-sub">las dos mesas anteriores, divididas entre el padrón</span>' +
+        '</div>' +
+        '<div class="sim-pr-card">' +
+          '<span class="sim-pr-lbl">Pérdida operativa por contribuyente</span>' +
+          '<span class="sim-pr-val">$' + formatNumber(Math.round(perdidaContrib)) + '</span>' +
+          '<span class="sim-pr-sub">cada año, mientras las obras sigan operando así</span>' +
+        '</div>' +
+      '</div>' +
+      '<button type="button" class="sim-puente-b" onclick="window.AuditEngine.simLlevarACalculadora(' + Math.round(porContrib) + ')">' +
+        '🧮 Llevar $' + formatNumber(Math.round(porContrib)) + ' a la Calculadora Cívica (2.3)</button>' +
+      '<p class="sim-mesa-aviso"><strong>Cómo leer esta mesa, y qué no dice.</strong> La división reparte el agregado entre el padrón de contribuyentes activos ' +
+        'para darle escala humana a una cifra que de otro modo es abstracta. No afirma que cada persona haya pagado esa cantidad: el erario se nutre de manera desigual, ' +
+        'y una parte del sobrecosto se cubrió con deuda que aún se está amortizando. Además, el sobrecosto suma pesos nominales de años distintos, entre 1988 y 2024, ' +
+        'sin deflactar a un año común. <strong>Pendiente declarado:</strong> la cifra del padrón todavía no lleva en nuestro catálogo la referencia oficial que la sustenta.</p>' +
+    '</article>';
+  }
+
+  /* El puente real: deja la cifra cargada en la calculadora de la 2.3 y
+     la ejecuta, para que el usuario no tenga que teclearla de memoria. */
+  function simLlevarACalculadora(monto) {
+    navMarcarOrigen();
+    navSaltoEnCurso = true;
+    switchTab('accion-financiera');
+    switchSubtab('accion-financiera', 'calculadora');
+    navSaltoEnCurso = false;
+    navPintarBarra();
+    setTimeout(() => {
+      const input = document.getElementById('calcTaxInput');
+      if (input) {
+        input.value = monto;
+        calculateTaxBreakdown(monto);
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        input.classList.remove('ce-destaca');
+        void input.offsetWidth;
+        input.classList.add('ce-destaca');
+      }
+    }, 180);
+  }
+
   function renderSimuladorMegaobras() {
     const kpisContainer = document.getElementById('simuladorKpisStrip');
-    const sectorsContainer = document.getElementById('simSectorChips');
     const sim = DB.simulador_megaobras;
     if (!sim) return;
 
@@ -14988,23 +15390,29 @@
       `;
     }
 
-    // 2. Chips de Sectores
-    if (sectorsContainer && sectorsContainer.children.length === 0) {
-      sectorsContainer.innerHTML = sim.sectores.map(sec => `
-        <button class="sim-pill-btn ${state.simuladorSector === sec.id ? 'active' : ''}" 
-          data-sector="${sec.id}" 
-          onclick="window.AuditEngine.setSimuladorSector('${sec.id}')">
-          <span>${sec.icono}</span> <span>${sec.nombre}</span>
-        </button>
-      `).join('');
-    }
+    // 2. Los tres selectores visuales. Sustituyen a las tiras de pastillas:
+    //    cada control lleva ahora su propia cifra, de modo que se puede
+    //    comparar antes de pulsar.
+    renderSimuladorPeriodoDial();
+    renderSimuladorSectorMosaico();
+    renderSimuladorSexenioLinea();
 
-    // 3. Orden, comparativa, fichas, escala y procedencia
-    renderSimuladorOrden();
-    renderSimuladorRanking();
-    renderSimuladorObrasGrid();
+    // 3. El desglose solo se arma si el usuario lo abrio. La escala y la
+    //    procedencia se quedan siempre: son las que dan sentido al total.
+    const desg = document.getElementById('simDesglose');
+    if (desg) desg.hidden = !state.simuladorDesglose;
+    if (state.simuladorDesglose) {
+      renderSimuladorDesgloseCab();
+      renderSimuladorOrden();
+      renderSimuladorRanking();
+      renderSimuladorTablas();
+      renderSimuladorObrasGrid();
+    }
     renderSimuladorEscala();
     renderSimuladorProcedencia();
+
+    // Glosario y notas al pie sobre todo lo que se acaba de pintar.
+    autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]'));
 
     // 4. Iniciar Ticker en Vivo
     initLiveLossTicker();
@@ -15140,34 +15548,27 @@
 
   function setSimuladorPeriodo(periodo) {
     state.simuladorPeriodo = periodo;
-    document.querySelectorAll('.sim-pill-periodo').forEach(btn => {
-      const txt = btn.textContent.toLowerCase();
-      let match = false;
-      if (periodo === 'dia' && txt.includes('día')) match = true;
-      else if (periodo === 'mes' && txt.includes('mes')) match = true;
-      else if (periodo === 'trimestre' && txt.includes('trimestre')) match = true;
-      else if (periodo === 'semestre' && txt.includes('semestre')) match = true;
-      else if (periodo === 'ano' && txt.includes('anual')) match = true;
-      btn.classList.toggle('active', match);
-    });
-
     renderSimuladorMegaobras();
   }
 
+  /* Elegir un sector es la puerta de entrada al desglose: abre la seccion
+     y lleva la vista al encabezado para que no quede fuera de pantalla. */
   function setSimuladorSector(sectorId) {
     state.simuladorSector = sectorId;
-    document.querySelectorAll('#simSectorChips .sim-pill-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.sector === sectorId);
-    });
+    state.simuladorDesglose = true;
     renderSimuladorMegaobras();
+    const cab = document.getElementById('simDesgloseCab');
+    if (cab) setTimeout(() => cab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
   }
 
   function setSimuladorSexenio(sexenio) {
     state.simuladorSexenio = sexenio;
-    document.querySelectorAll('#simSexenioChips .sim-pill-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.sexenio === sexenio);
-    });
+    if (sexenio && sexenio !== 'todos') state.simuladorDesglose = true;
     renderSimuladorMegaobras();
+    if (state.simuladorDesglose) {
+      const cab = document.getElementById('simDesgloseCab');
+      if (cab) setTimeout(() => cab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    }
   }
 
   function initLiveLossTicker() {
@@ -18812,6 +19213,8 @@
     init: init,
     setSimuladorOrden: setSimuladorOrden,
     simIrAObra: simIrAObra,
+    cerrarSimuladorDesglose: cerrarSimuladorDesglose,
+    simLlevarACalculadora: simLlevarACalculadora,
     renderConstitucionEconomica: renderConstitucionEconomica,
     ceIrAPilar: ceIrAPilar,
     goToPrecepto: goToPrecepto,

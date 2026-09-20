@@ -12911,3 +12911,672 @@ body.con-regreso { padding-bottom: 96px; }
 @media (max-width: 480px) {
   .sim-rank-tit, .sim-esc-tit, .sim-proc-tit { font-size: 17px; }
 }
+
+/* ====================================================================
+   SUBPESTANA 2.2 - SELECTORES VISUALES Y MESAS DE CALCULO
+   Los tres filtros pasan de tiras de pastillas a tableros con cifra
+   propia; el desglose vive replegado hasta que el usuario lo pide.
+   ==================================================================== */
+
+.sim-sel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px 18px 20px;
+  margin-bottom: 16px;
+}
+
+.sim-sel-cab {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.sim-sel-ico {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sim-sel-tit {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-gold);
+  margin: 0 0 3px;
+  letter-spacing: 0.2px;
+}
+
+.sim-sel-sub {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.55;
+  max-width: 70ch;
+}
+
+.sim-vertodas {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-accent);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.sim-vertodas:hover { background: var(--bg-card-hover); color: var(--text-main); }
+
+.sim-vertodas.on {
+  background: var(--gold-glow);
+  border-color: var(--border-gold);
+  color: var(--text-gold);
+}
+
+/* --- Selector de temporalidad --- */
+
+.sim-dial {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.sim-dial-b {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px 12px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.sim-dial-b:hover { transform: translateY(-3px); border-color: var(--border-accent); }
+
+.sim-dial-b.on {
+  border-color: var(--border-gold);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.13), rgba(201, 168, 76, 0.03));
+  box-shadow: 0 0 0 1px var(--gold-glow);
+}
+
+.sim-dial-ico { font-size: 22px; line-height: 1; }
+
+.sim-dial-et {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sim-dial-b.on .sim-dial-et { color: var(--text-gold); }
+
+.sim-dial-cif {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--crimson-bright);
+}
+
+.sim-dial-suf {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* --- Mosaico de sectores --- */
+
+.sim-mosaico {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sim-los {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 16px 15px 14px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.sim-los:hover:not(:disabled) {
+  transform: translateY(-3px);
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+}
+
+.sim-los.on {
+  border-color: var(--border-gold);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.02));
+}
+
+.sim-los-vacia { opacity: 0.33; cursor: not-allowed; }
+
+.sim-los-ico { font-size: 27px; line-height: 1; margin-bottom: 2px; }
+
+.sim-los-nom {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.sim-los-n {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.sim-los-cif {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  margin-top: 2px;
+}
+
+.sim-los-riel {
+  display: block;
+  width: 100%;
+  height: 5px;
+  background: var(--bg-void);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.sim-los-barra {
+  display: block;
+  height: 100%;
+  background: var(--gold-gradient);
+  border-radius: 3px;
+}
+
+.sim-los-cuota {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* --- Linea del tiempo de administraciones --- */
+
+.sim-linea {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 9px;
+  align-items: end;
+}
+
+.sim-seg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 10px 6px 12px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.sim-seg:hover:not(:disabled) { transform: translateY(-3px); border-color: var(--border-accent); }
+
+.sim-seg.on {
+  border-color: var(--border-gold);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.02));
+}
+
+.sim-seg-vacio { opacity: 0.3; cursor: not-allowed; }
+
+.sim-seg-n {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.sim-seg-torre {
+  display: block;
+  width: 60%;
+  min-height: 18px;
+  border-radius: 4px 4px 0 0;
+  opacity: 0.88;
+  transition: height 0.4s ease;
+}
+
+.sim-seg-nom {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-top: 4px;
+}
+
+.sim-seg-anios {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.sim-seg-cif {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+
+.sim-seg-vacio .sim-seg-cif { color: var(--text-dim); font-weight: 400; }
+
+.sim-linea-eje {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+}
+
+.sim-linea-riel {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-accent) 12%, var(--border-accent) 88%, transparent);
+}
+
+.sim-linea-nota {
+  margin: 12px 0 0;
+  padding: 11px 13px;
+  background: rgba(231, 76, 60, 0.06);
+  border-left: 3px solid var(--crimson-bright);
+  border-radius: 0 8px 8px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* --- Cabecera del desglose --- */
+
+.sim-desglose[hidden] { display: none; }
+
+.sim-desg-cab {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 15px 17px;
+  margin: 6px 0 16px;
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.1), transparent 70%);
+  border: 1px solid var(--border-gold);
+  border-radius: 13px;
+}
+
+.sim-desg-quien { display: flex; align-items: center; gap: 13px; flex: 1; min-width: 240px; }
+
+.sim-desg-ico { font-size: 28px; line-height: 1; }
+
+.sim-desg-tit {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  color: var(--text-gold);
+  margin: 0 0 2px;
+}
+
+.sim-desg-sub {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sim-replegar {
+  background: transparent;
+  border: 1px solid var(--border-accent);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.sim-replegar:hover {
+  background: rgba(231, 76, 60, 0.1);
+  border-color: var(--crimson-bright);
+  color: var(--crimson-bright);
+}
+
+/* --- Las tres mesas de calculo --- */
+
+.sim-mesas { margin: 22px 0; }
+
+.sim-mesas-cab { margin-bottom: 16px; }
+
+.sim-mesas-tit {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  color: var(--text-gold);
+  margin: 0 0 6px;
+}
+
+.sim-mesas-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 88ch;
+}
+
+.sim-mesa {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+}
+
+.sim-mesa-puente { border-color: var(--border-gold); }
+
+.sim-mesa-tit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 6px;
+}
+
+.sim-mesa-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  color: #100d05;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.sim-mesa-pie {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 13px;
+  max-width: 88ch;
+}
+
+.sim-t-marco {
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+
+.sim-t {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  min-width: 620px;
+}
+
+.sim-t thead th {
+  background: var(--bg-card-alt);
+  color: var(--text-dim);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  padding: 9px 10px;
+  text-align: right;
+  border-bottom: 1px solid var(--border-accent);
+  white-space: nowrap;
+}
+
+.sim-t thead th:nth-child(1),
+.sim-t thead th:nth-child(2) { text-align: left; }
+
+.sim-t tbody td, .sim-t tfoot td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.sim-t tbody tr:hover { background: var(--bg-card-alt); }
+
+.sim-t-n { color: var(--text-dim); width: 34px; }
+
+.sim-t-nom {
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sim-t-ico { margin-right: 6px; }
+
+.sim-t-num { text-align: right; white-space: nowrap; }
+
+.sim-t-op {
+  text-align: right;
+  color: var(--text-dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.sim-t-dif { color: var(--crimson-bright); font-weight: 700; }
+
+.sim-t-acum {
+  color: var(--gold-bright);
+  font-weight: 800;
+  background: rgba(201, 168, 76, 0.05);
+}
+
+.sim-t-cero td { color: var(--text-dim); font-style: italic; }
+
+.sim-t-nula td { opacity: 0.55; }
+
+.sim-t-div td { background: rgba(201, 168, 76, 0.07); }
+
+.sim-t tfoot td {
+  background: var(--bg-card-alt);
+  color: var(--text-main);
+  font-weight: 800;
+  border-bottom: none;
+  border-top: 1px solid var(--border-accent);
+}
+
+.sim-mesa-cierre {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 13px 0 0;
+  max-width: 88ch;
+}
+
+.sim-mesa-cierre strong { color: var(--text-gold); }
+
+.sim-mesa-aviso {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  background: rgba(78, 205, 196, 0.05);
+  border-left: 3px solid var(--cyan);
+  border-radius: 0 8px 8px 0;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* --- Cadena de conversion del ano al segundo --- */
+
+.sim-cadena {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.sim-cad-p {
+  flex: 1 1 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 11px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+
+.sim-cad-et {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sim-cad-op { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); }
+
+.sim-cad-v {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--crimson-bright);
+}
+
+.sim-cad-fl {
+  align-self: center;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* --- Puente a la calculadora civica --- */
+
+.sim-puente-res {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.sim-pr-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 15px 14px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.sim-pr-alta {
+  border-color: var(--border-gold);
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.11), rgba(201, 168, 76, 0.02));
+}
+
+.sim-pr-lbl {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  line-height: 1.35;
+}
+
+.sim-pr-val {
+  font-family: var(--font-mono);
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  line-height: 1.1;
+}
+
+.sim-pr-alta .sim-pr-val { color: var(--crimson-bright); }
+
+.sim-pr-sub { font-size: 11.5px; color: var(--text-secondary); line-height: 1.45; }
+
+.sim-puente-b {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px 18px;
+  background: var(--gold-gradient);
+  border: none;
+  border-radius: 11px;
+  color: #100d05;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: transform 0.18s, filter 0.18s;
+}
+
+.sim-puente-b:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+/* --- Adaptacion a pantallas menores --- */
+
+@media (max-width: 1000px) {
+  .sim-mosaico { grid-template-columns: repeat(2, 1fr); }
+  .sim-puente-res { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .sim-dial { grid-template-columns: repeat(3, 1fr); }
+  .sim-linea { grid-template-columns: repeat(3, 1fr); }
+  .sim-vertodas { margin-left: 0; width: 100%; }
+  .sim-sel-cab { flex-wrap: wrap; }
+}
+
+@media (max-width: 560px) {
+  .sim-sel { padding: 15px 13px 16px; }
+  .sim-dial { grid-template-columns: repeat(2, 1fr); }
+  .sim-mosaico { grid-template-columns: 1fr; }
+  .sim-linea { grid-template-columns: repeat(2, 1fr); }
+  .sim-mesa { padding: 15px 13px; }
+  .sim-mesas-tit { font-size: 18px; }
+  .sim-desg-cab { padding: 13px; }
+  .sim-replegar { width: 100%; }
+  .sim-cad-fl { display: none; }
+  .sim-cad-p { flex: 1 1 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sim-dial-b, .sim-los, .sim-seg, .sim-puente-b { transition: none; }
+  .sim-seg-torre { transition: none; }
+}

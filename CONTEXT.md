@@ -504,6 +504,22 @@ de los 32 circuitos.
   - Sobre el contador en vivo: se sospechó una fuga de temporizadores al refiltrar y se descartó instrumentando `setInterval`. Hay exactamente un reloj activo tras 4 cambios de sector, 2 de sexenio, 3 de orden y 6 idas y vueltas a la subpestaña. La aparente duplicación era un artefacto de medición.
   - Verificado: 447 enlaces de glosario con sus 447 notas, 0 huérfanos, 0 anclas anidadas, 0 desbordes de 1600 a 360 px en la 2.2, 0 errores de JavaScript. Los agregados mostrados coinciden con el cálculo independiente sobre la base.
 
+### Hecho - Reorganizacion visual de la subpestana 2.2
+
+- Los tres filtros dejan de ser tiras de pastillas. Temporalidad: cinco losetas con la cifra de cada
+  cadencia a la vista, para comparar antes de pulsar. Sector: mosaico de seis losetas con icono grande,
+  numero de obras, costo real y cuota del total. Administracion: linea del tiempo 1988-2024 con torre
+  proporcional al numero de obras del periodo.
+- El desglose (orden, comparativa, mesas y fichas) nace replegado en `#simDesglose` y se abre al elegir
+  sector o sexenio, o con el boton "Ver todas". La escala y la procedencia quedan siempre visibles.
+- Tres mesas de calculo nuevas, cada una de cero al resultado: (1) de lo aprobado a lo erogado, con
+  columna acumulada; (2) como se arma la perdida operativa anual, mas la cadena de conversion del ano
+  al segundo; (3) de la cifra agregada al bolsillo, con boton que carga el importe en la calculadora 2.3.
+- Punto ciego declarado: FARAC aparece en Salinas y en Zedillo, asi que los seis periodos suman trece
+  obras y no doce. Se dice en la propia linea del tiempo.
+- Notas al pie y glosario aplicados al panel con `autolinkAmbito`; las etiquetas compactas nuevas
+  (`sim-dial-*`, `sim-los-*`, `sim-seg-*`, `sim-t-*`, `sim-cad-*`, `sim-pr-*`) van en la lista de omision.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
