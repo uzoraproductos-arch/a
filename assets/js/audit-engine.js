@@ -1726,6 +1726,7 @@
   let activeTabKey = 'presupuesto';
 
   function switchTab(tabKey) {
+    fjDetenerPlay();
     // Compatibilidad de claves anteriores
     if (tabKey === 'mapa') tabKey = 'presupuesto';
     if (tabKey === 'flujo') tabKey = 'accion-financiera';
@@ -1851,7 +1852,9 @@
         updateJerarquiaSimulator();
       }
     } else if (parentTab === 'judicial') {
-      if (subKey === 'estructura') {
+      if (subKey === 'jurisdiccional') {
+        renderFuncionJurisdiccional();
+      } else if (subKey === 'estructura') {
         setPjView(currentPjView);
       } else {
         renderJudicialMinisters();
@@ -1981,7 +1984,13 @@
     'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
     'ef-tit', 'ciego-dato', 'legend-caption', 'legend-ticks',
     'tel-item', 'telemetry-badge', 'prov', 'creator-box', 'chip', 'pill',
-    'kpi-label', 'kpi-value', 'box-title', 'stat-label', 'stat-value'
+    'kpi-label', 'kpi-value', 'box-title', 'stat-label', 'stat-value',
+    'fj-kicker', 'fj-inst-lema', 'fj-inst-fund', 'fj-inst-nom', 'fj-idet-k',
+    'fj-idet-fund', 'fj-rb-sub', 'fj-rb-tit', 'fj-nodo-num', 'fj-nodo-tit',
+    'fj-tl-estado', 'fj-etapa-paso', 'fj-em-k', 'fj-em-v', 'fj-claves-tit',
+    'fj-rec-nom', 'fj-rec-plazo', 'fj-rec-fund', 'fj-rec-lab', 'fj-esc-fund',
+    'fj-ju-peso', 'fj-ju-k', 'fj-ju-via', 'fj-ju-fund', 'fj-det-cifra',
+    'fj-det-antes', 'fj-det-fund', 'fj-nav-btn', 'fj-tl-play'
   ]);
 
   let autolinkIndice = null;
@@ -14374,6 +14383,7 @@
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
     safeRun(renderPanoramaErario, 'renderPanoramaErario');
+    safeRun(renderFuncionJurisdiccional, 'renderFuncionJurisdiccional');
     safeRun(() => programarAutolink(400), 'programarAutolink');
     safeRun(iniciarPistasDeslizamiento, 'iniciarPistasDeslizamiento');
 
@@ -16305,6 +16315,305 @@
     }
   }
 
+
+  /* ======================================================================
+     SUBPESTANA 4.6 - LA FUNCION JURISDICCIONAL
+     Instrumentos de control constitucional, ruta procesal del amparo,
+     escalera hacia la Suprema Corte y sistema de jurisprudencia.
+     ====================================================================== */
+
+  const FJ = (DB && DB.funcionJurisdiccional) ? DB.funcionJurisdiccional : null;
+
+  let fjInstrumentoSel = null;
+  let fjRutaSel = 'indirecto';
+  let fjEtapaSel = 0;
+  let fjPlayTimer = null;
+
+  function fjChip(estado) {
+    const val = ['oficial', 'derivado', 'analisis', 'contexto'].indexOf(estado) >= 0 ? estado : 'derivado';
+    const texto = val === 'analisis' ? 'análisis' : val;
+    return '<span class="est-chip est-' + val + '">' + texto + '</span>';
+  }
+
+  function fjRutaActual() {
+    if (!FJ) return [];
+    return fjRutaSel === 'directo' ? FJ.rutaDirecto : FJ.rutaIndirecto;
+  }
+
+  /* --- Instrumentos de control constitucional --------------------------- */
+
+  function renderFjInstrumentos() {
+    const cont = document.getElementById('fjInstrumentos');
+    if (!cont || !FJ) return;
+    cont.innerHTML = FJ.instrumentos.map(it =>
+      '<button type="button" class="fj-inst-card' + (fjInstrumentoSel === it.id ? ' active' : '') + '"' +
+      ' data-color="' + it.color + '" aria-expanded="' + (fjInstrumentoSel === it.id) + '"' +
+      ' onclick="window.AuditEngine.selectFjInstrumento(\'' + it.id + '\')">' +
+        '<span class="fj-inst-mas" aria-hidden="true">+</span>' +
+        '<span class="fj-inst-ico" aria-hidden="true">' + it.icono + '</span>' +
+        '<span class="fj-inst-nom">' + it.nombre + '</span>' +
+        '<span class="fj-inst-lema">' + it.lema + '</span>' +
+        '<span class="fj-inst-fund">' + it.fundamento + '</span>' +
+      '</button>'
+    ).join('');
+    renderFjInstrumentoDetalle();
+  }
+
+  function renderFjInstrumentoDetalle() {
+    const box = document.getElementById('fjInstrumentoDetalle');
+    if (!box || !FJ) return;
+    if (!fjInstrumentoSel) {
+      box.innerHTML = '';
+      box.hidden = true;
+      return;
+    }
+    const it = FJ.instrumentos.filter(x => x.id === fjInstrumentoSel)[0];
+    if (!it) { box.innerHTML = ''; box.hidden = true; return; }
+    box.hidden = false;
+    const fila = (k, v) => '<div class="fj-idet-fila"><div class="fj-idet-k">' + k + '</div><div class="fj-idet-v">' + v + '</div></div>';
+    box.innerHTML =
+      '<div class="fj-idet-tit">' + it.icono + ' ' + it.nombre + '</div>' +
+      '<div class="fj-idet-fund">' + it.fundamento + '</div>' +
+      '<div class="fj-idet-filas">' +
+        fila('Qué protege', it.queProtege) +
+        fila('Quién lo promueve', it.quienLoPromueve) +
+        fila('Alcance del fallo', it.efecto) +
+        fila('Plazo clave', it.plazoClave) +
+        fila('Quién resuelve', it.resuelve) +
+      '</div>' +
+      '<div class="fj-idet-dato">' + it.dato + ' ' + fjChip(it.datoEstado) + '</div>';
+  }
+
+  function selectFjInstrumento(id) {
+    fjInstrumentoSel = (fjInstrumentoSel === id) ? null : id;
+    renderFjInstrumentos();
+  }
+
+  /* --- Linea de tiempo procesal ----------------------------------------- */
+
+  function renderFjRutaSwitch() {
+    const cont = document.getElementById('fjRutaSwitch');
+    if (!cont) return;
+    const opciones = [
+      { id: 'indirecto', tit: 'Amparo indirecto', sub: 'Contra actos, omisiones y normas · Juzgados de Distrito' },
+      { id: 'directo', tit: 'Amparo directo', sub: 'Contra sentencias definitivas · Tribunales Colegiados' }
+    ];
+    cont.innerHTML = opciones.map(o =>
+      '<button type="button" class="fj-ruta-btn' + (fjRutaSel === o.id ? ' active' : '') + '"' +
+      ' role="tab" aria-selected="' + (fjRutaSel === o.id) + '"' +
+      ' onclick="window.AuditEngine.setFjRuta(\'' + o.id + '\')">' +
+        '<span class="fj-rb-tit">' + o.tit + '</span>' +
+        '<span class="fj-rb-sub">' + o.sub + '</span>' +
+      '</button>'
+    ).join('');
+  }
+
+  function setFjRuta(ruta) {
+    fjDetenerPlay();
+    fjRutaSel = ruta;
+    fjEtapaSel = 0;
+    renderFjRutaSwitch();
+    renderFjRail();
+    renderFjEtapa();
+  }
+
+  function renderFjRail() {
+    const cont = document.getElementById('fjRail');
+    if (!cont) return;
+    const etapas = fjRutaActual();
+    cont.innerHTML = etapas.map((e, i) =>
+      '<button type="button" class="fj-nodo' + (i === fjEtapaSel ? ' active' : (i < fjEtapaSel ? ' visitado' : '')) + '"' +
+      ' aria-current="' + (i === fjEtapaSel ? 'step' : 'false') + '"' +
+      ' onclick="window.AuditEngine.selectFjEtapa(' + i + ')">' +
+        '<span class="fj-nodo-top">' +
+          '<span class="fj-nodo-num">' + e.n + '</span>' +
+          '<span class="fj-nodo-ico" aria-hidden="true">' + e.icono + '</span>' +
+        '</span>' +
+        '<span class="fj-nodo-tit">' + e.titulo + '</span>' +
+      '</button>'
+    ).join('');
+
+    const barra = document.getElementById('fjProgresoBarra');
+    if (barra && etapas.length) {
+      barra.style.width = (((fjEtapaSel + 1) / etapas.length) * 100).toFixed(1) + '%';
+    }
+    const estado = document.getElementById('fjTimelineEstado');
+    if (estado && etapas.length) {
+      estado.textContent = 'Etapa ' + (fjEtapaSel + 1) + ' de ' + etapas.length + ' · ' + etapas[fjEtapaSel].titulo;
+    }
+  }
+
+  function renderFjEtapa() {
+    const box = document.getElementById('fjEtapaDetalle');
+    if (!box) return;
+    const etapas = fjRutaActual();
+    const e = etapas[fjEtapaSel];
+    if (!e) { box.innerHTML = ''; return; }
+    const claves = (e.claves || []).map(c => '<li>' + c + '</li>').join('');
+    box.innerHTML =
+      '<div class="fj-etapa-head">' +
+        '<div class="fj-etapa-sello" aria-hidden="true">' + e.icono + '</div>' +
+        '<div class="fj-etapa-htxt">' +
+          '<div class="fj-etapa-paso">Etapa ' + e.n + ' de ' + etapas.length + '</div>' +
+          '<div class="fj-etapa-tit">' + e.titulo + '</div>' +
+          '<div class="fj-etapa-sub">' + e.subtitulo + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="fj-etapa-meta">' +
+        '<div class="fj-em"><span class="fj-em-k">Ante quién</span><span class="fj-em-v">' + e.organo + '</span></div>' +
+        '<div class="fj-em"><span class="fj-em-k">Plazo</span><span class="fj-em-v fj-em-plazo">' + e.plazo + '</span></div>' +
+        '<div class="fj-em"><span class="fj-em-k">Fundamento</span><span class="fj-em-v">' + e.fundamento + '</span></div>' +
+      '</div>' +
+      '<p class="fj-etapa-texto">' + e.detalle + '</p>' +
+      (claves ? '<div class="fj-claves-tit">Lo que hay que saber de esta etapa</div><ul class="fj-claves">' + claves + '</ul>' : '') +
+      '<div class="fj-etapa-nav">' +
+        '<button type="button" class="fj-nav-btn" onclick="window.AuditEngine.fjEtapaAvanzar(-1)"' + (fjEtapaSel === 0 ? ' disabled' : '') + '>&#8592; Etapa anterior</button>' +
+        '<button type="button" class="fj-nav-btn" onclick="window.AuditEngine.fjEtapaAvanzar(1)"' + (fjEtapaSel >= etapas.length - 1 ? ' disabled' : '') + '>Etapa siguiente &#8594;</button>' +
+      '</div>';
+  }
+
+  function selectFjEtapa(i) {
+    const etapas = fjRutaActual();
+    if (i < 0 || i >= etapas.length) return;
+    fjEtapaSel = i;
+    renderFjRail();
+    renderFjEtapa();
+  }
+
+  function fjEtapaAvanzar(delta) {
+    fjDetenerPlay();
+    selectFjEtapa(fjEtapaSel + delta);
+  }
+
+  function fjDetenerPlay() {
+    if (fjPlayTimer) {
+      clearInterval(fjPlayTimer);
+      fjPlayTimer = null;
+    }
+    const btn = document.getElementById('fjPlayBtn');
+    if (btn) {
+      btn.classList.remove('playing');
+      btn.innerHTML = '<span aria-hidden="true">&#9654;</span> Recorrer el juicio';
+    }
+  }
+
+  function toggleFjPlay() {
+    if (fjPlayTimer) { fjDetenerPlay(); return; }
+    const etapas = fjRutaActual();
+    if (!etapas.length) return;
+    if (fjEtapaSel >= etapas.length - 1) selectFjEtapa(0);
+    const btn = document.getElementById('fjPlayBtn');
+    if (btn) {
+      btn.classList.add('playing');
+      btn.innerHTML = '<span aria-hidden="true">&#9632;</span> Detener recorrido';
+    }
+    fjPlayTimer = setInterval(() => {
+      const total = fjRutaActual().length;
+      if (fjEtapaSel >= total - 1) { fjDetenerPlay(); return; }
+      selectFjEtapa(fjEtapaSel + 1);
+    }, 3400);
+  }
+
+  /* --- Recursos, escalera, jurisprudencia y deterioro -------------------- */
+
+  function renderFjRecursos() {
+    const cont = document.getElementById('fjRecursos');
+    if (!cont || !FJ) return;
+    cont.innerHTML = FJ.recursos.map(r =>
+      '<div class="fj-rec-card" data-color="' + r.color + '">' +
+        '<div class="fj-rec-top"><span class="fj-rec-nom">' + r.nombre + '</span>' +
+        '<span class="fj-rec-plazo">' + r.plazo + '</span></div>' +
+        '<div class="fj-rec-fund">' + r.fundamento + ' Ley de Amparo</div>' +
+        '<span class="fj-rec-lab">Procede contra</span>' +
+        '<p class="fj-rec-txt">' + r.contra + '</p>' +
+        '<span class="fj-rec-lab">Quién resuelve</span>' +
+        '<p class="fj-rec-txt">' + r.resuelve + '</p>' +
+      '</div>'
+    ).join('');
+  }
+
+  function renderFjEscalera() {
+    const cont = document.getElementById('fjEscalera');
+    if (!cont || !FJ) return;
+    cont.innerHTML = FJ.escalera.map(v =>
+      '<div class="fj-esc-fila">' +
+        '<div class="fj-esc-ico" aria-hidden="true">' + v.icono + '</div>' +
+        '<div>' +
+          '<div class="fj-esc-via">' + v.via + '</div>' +
+          '<p class="fj-esc-cuando">' + v.cuando + '</p>' +
+          '<div class="fj-esc-filtro">' + v.filtro + '</div>' +
+          '<div class="fj-esc-fund">' + v.fundamento + '</div>' +
+        '</div>' +
+      '</div>'
+    ).join('');
+  }
+
+  function renderFjJurisprudencia() {
+    const cont = document.getElementById('fjJurisprudencia');
+    if (!cont || !FJ) return;
+    cont.innerHTML = FJ.jurisprudencia.map(j =>
+      '<div class="fj-juris-card">' +
+        '<div class="fj-ju-top">' +
+          '<span class="fj-ju-ico" aria-hidden="true">' + j.icono + '</span>' +
+          '<span class="fj-ju-via">' + j.via + '</span>' +
+        '</div>' +
+        '<span class="fj-ju-peso">' + j.peso + '</span>' +
+        '<p class="fj-ju-txt">' + j.comoNace + '</p>' +
+        '<div class="fj-ju-filas">' +
+          '<div class="fj-ju-fila"><span class="fj-ju-k">Quién</span><span class="fj-ju-v">' + j.quienLaCrea + '</span></div>' +
+          '<div class="fj-ju-fila"><span class="fj-ju-k">Votos</span><span class="fj-ju-v">' + j.votos + '</span></div>' +
+          '<div class="fj-ju-fila"><span class="fj-ju-k">Obliga a</span><span class="fj-ju-v">' + j.obligaA + '</span></div>' +
+        '</div>' +
+        '<div class="fj-ju-nota">' + j.nota + '</div>' +
+        '<div class="fj-ju-fund">' + j.fundamento + '</div>' +
+      '</div>'
+    ).join('');
+  }
+
+  function renderFjDeterioro() {
+    const cont = document.getElementById('fjDeterioro');
+    if (!cont || !FJ) return;
+    cont.innerHTML = FJ.deterioro.map(d =>
+      '<div class="fj-det-card" data-estado="' + d.estado + '">' +
+        '<div class="fj-det-cifras">' +
+          '<span class="fj-det-cifra">' + d.cifra + '</span>' +
+          '<span class="fj-det-antes' + (/^Antes:/.test(d.antes) ? ' tachado' : '') + '">' + d.antes + '</span>' +
+        '</div>' +
+        '<div class="fj-det-tit">' + d.titulo + '</div>' +
+        '<p class="fj-det-txt">' + d.texto + '</p>' +
+        '<div class="fj-det-pie">' +
+          '<span class="fj-det-fund">' + d.fundamento + '</span>' +
+          fjChip(d.estado) +
+        '</div>' +
+      '</div>'
+    ).join('');
+  }
+
+  function renderFjFuentes() {
+    const cont = document.getElementById('fjFuentes');
+    if (!cont || !FJ) return;
+    cont.innerHTML =
+      '<div class="ef-tit">Fuentes consultadas</div>' +
+      '<ul>' + FJ.fuentes.map(f => '<li>' + f + '</li>').join('') + '</ul>' +
+      '<p class="ef-nota">' + FJ.notaFuentes + '</p>';
+  }
+
+  function renderFuncionJurisdiccional() {
+    if (!FJ) return;
+    fjDetenerPlay();
+    renderFjInstrumentos();
+    renderFjRutaSwitch();
+    renderFjRail();
+    renderFjEtapa();
+    renderFjRecursos();
+    renderFjEscalera();
+    renderFjJurisprudencia();
+    renderFjDeterioro();
+    renderFjFuentes();
+    programarAutolink(320);
+  }
+
+
   window.AuditEngine = {
     init: init,
     switchTab: switchTab,
@@ -16316,6 +16625,13 @@
     renderPanoramaErario: renderPanoramaErario,
     renderTerritorioErario: renderTerritorioErario,
     renderEntidadCircuito: renderEntidadCircuito,
+    // Subpestana 4.6: La Funcion Jurisdiccional
+    renderFuncionJurisdiccional: renderFuncionJurisdiccional,
+    selectFjInstrumento: selectFjInstrumento,
+    setFjRuta: setFjRuta,
+    selectFjEtapa: selectFjEtapa,
+    fjEtapaAvanzar: fjEtapaAvanzar,
+    toggleFjPlay: toggleFjPlay,
 
     programarAutolink: programarAutolink,
     actualizarPistasDeslizamiento: actualizarPistasDeslizamiento,

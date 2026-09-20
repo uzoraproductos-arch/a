@@ -156,6 +156,530 @@ window.AUDIT_DB = {
     ]
   },
 
+  "funcionJurisdiccional": {
+    "actualizadoAl": "septiembre de 2026",
+    "nota": "Marco vigente tras la reforma constitucional del Poder Judicial (DOF 15/09/2024), la nueva integracion de la SCJN (1 de septiembre de 2025) y las dos reformas a la Ley de Amparo de 2025 (DOF 13/03/2025 y DOF 16/10/2025).",
+    "instrumentos": [
+      {
+        "id": "fj-amparo",
+        "nombre": "Juicio de amparo",
+        "lema": "Protege a la persona",
+        "icono": "🛡️",
+        "color": "gold",
+        "fundamento": "Arts. 103 y 107 CPEUM · Ley de Amparo",
+        "queProtege": "Los derechos humanos de una persona concreta frente a actos, omisiones o normas de cualquier autoridad. Es el instrumento que usa el ciudadano de a pie.",
+        "quienLoPromueve": "La persona agraviada —el quejoso— por sí misma o por representante.",
+        "efecto": "Relativo. Ampara sólo a quien lo pidió: la norma sigue viva para todos los demás. Es la llamada fórmula Otero.",
+        "plazoClave": "15 días hábiles como regla general (art. 17 Ley de Amparo).",
+        "resuelve": "Juzgados de Distrito (amparo indirecto) y Tribunales Colegiados de Circuito (amparo directo).",
+        "dato": "834,518 amparos ingresaron en 2024: 640,161 indirectos y 194,357 directos.",
+        "datoEstado": "oficial"
+      },
+      {
+        "id": "fj-controversia",
+        "nombre": "Controversia constitucional",
+        "lema": "Protege el reparto del poder",
+        "icono": "⚖️",
+        "color": "cyan",
+        "fundamento": "Art. 105 fracc. I CPEUM · Ley Reglamentaria del art. 105",
+        "queProtege": "Las fronteras de competencia: quién puede hacer qué entre la Federación, los estados, los municipios, los poderes y los órganos autónomos.",
+        "quienLoPromueve": "Los propios entes públicos en conflicto. El ciudadano no tiene acceso a esta vía.",
+        "efecto": "Entre las partes. Alcanza efectos generales sólo en los supuestos del artículo 105 y con mayoría calificada.",
+        "plazoClave": "30 días para actos; 30 días desde la publicación cuando se impugnan normas generales.",
+        "resuelve": "El Pleno de la Suprema Corte, en única instancia.",
+        "dato": "Es la vía por la que un municipio puede defenderse de su propio congreso estatal.",
+        "datoEstado": "contexto"
+      },
+      {
+        "id": "fj-accion",
+        "nombre": "Acción de inconstitucionalidad",
+        "lema": "Protege la supremacía de la Constitución",
+        "icono": "📜",
+        "color": "crimson",
+        "fundamento": "Art. 105 fracc. II CPEUM · Ley Reglamentaria del art. 105",
+        "queProtege": "Confronta en abstracto una norma general con la Constitución. No hace falta un caso concreto ni una víctima: basta que la norma exista.",
+        "quienLoPromueve": "El 33% de los integrantes de la Cámara de Diputados, del Senado o de un congreso local; el Ejecutivo Federal; los partidos políticos contra leyes electorales; la CNDH y los organismos locales de derechos humanos; la Fiscalía General en materia penal.",
+        "efecto": "Invalidez con efectos generales: la norma desaparece del orden jurídico para todos.",
+        "plazoClave": "30 días naturales siguientes a la publicación de la norma. Vencido el plazo, la norma queda inatacable por esta vía.",
+        "resuelve": "El Pleno de la Suprema Corte. Se requiere el voto de al menos 6 de los 9 ministros.",
+        "dato": "El umbral era de 8 votos de 11 hasta la reforma de 2024; hoy es de 6 de 9.",
+        "datoEstado": "oficial"
+      },
+      {
+        "id": "fj-dgi",
+        "nombre": "Declaratoria general de inconstitucionalidad",
+        "lema": "Convierte el amparo individual en efecto general",
+        "icono": "📣",
+        "color": "amber",
+        "fundamento": "Art. 107 fracc. II CPEUM · arts. 231 a 235 Ley de Amparo",
+        "queProtege": "Es el puente entre el caso particular y el interés de todos. Cuando la Corte establece jurisprudencia de que una norma general es inconstitucional, lo notifica a la autoridad que la emitió.",
+        "quienLoPromueve": "Nadie la pide: se activa de oficio a partir de la jurisprudencia de la Suprema Corte.",
+        "efecto": "Si en 90 días naturales la autoridad emisora no supera el problema, la Corte puede expulsar la norma del orden jurídico con efectos generales.",
+        "plazoClave": "90 días naturales para que el legislador corrija antes de la declaratoria.",
+        "resuelve": "El Pleno de la Suprema Corte, por mayoría calificada.",
+        "dato": "No procede en materia tributaria: los impuestos declarados inconstitucionales sólo dejan de aplicarse a quien se amparó.",
+        "datoEstado": "oficial"
+      }
+    ],
+    "rutaIndirecto": [
+      {
+        "n": 1,
+        "id": "ri-acto",
+        "titulo": "El agravio",
+        "subtitulo": "Algo ocurre y el reloj empieza a correr",
+        "icono": "⚠️",
+        "organo": "Autoridad responsable",
+        "plazo": "Día cero",
+        "detalle": "Una autoridad hace, ordena o deja de hacer algo que lastima a una persona: una clausura, una detención, un cobro, la negativa de un servicio, o una norma que al entrar en vigor ya de suyo perjudica sin necesidad de acto de aplicación.",
+        "fundamento": "Art. 103 CPEUM · art. 17 Ley de Amparo",
+        "claves": [
+          "15 días hábiles: regla general",
+          "30 días: norma autoaplicativa o extradición",
+          "8 años: sentencia penal condenatoria con pena de prisión",
+          "7 años: despojo de derechos agrarios a núcleos ejidales o comunales",
+          "En cualquier tiempo: peligro de la vida, ataque a la libertad fuera de procedimiento, incomunicación, deportación, desaparición forzada o actos prohibidos por el art. 22"
+        ]
+      },
+      {
+        "n": 2,
+        "id": "ri-demanda",
+        "titulo": "La demanda de amparo",
+        "subtitulo": "El escrito que abre el juicio",
+        "icono": "📝",
+        "organo": "Juzgado de Distrito",
+        "plazo": "Dentro del plazo del paso 1",
+        "detalle": "Se presenta por escrito o por vía electrónica ante el Juzgado de Distrito que corresponda. No es un formato libre: la ley exige un contenido mínimo y la falta de cualquiera de sus elementos detiene el juicio antes de empezar.",
+        "fundamento": "Art. 108 Ley de Amparo",
+        "claves": [
+          "Nombre y domicilio del quejoso y de quien promueve en su nombre",
+          "Nombre y domicilio del tercero interesado",
+          "La autoridad o autoridades responsables",
+          "La norma o el acto que se reclama",
+          "Bajo protesta de decir verdad, los hechos que constan al quejoso",
+          "Los preceptos constitucionales violados",
+          "Los conceptos de violación: el argumento de por qué el acto es contrario a la Constitución"
+        ]
+      },
+      {
+        "n": 3,
+        "id": "ri-auto",
+        "titulo": "El auto inicial",
+        "subtitulo": "Admite, previene o desecha",
+        "icono": "🚪",
+        "organo": "Juez de Distrito",
+        "plazo": "Al recibir la demanda",
+        "detalle": "El juez tiene tres salidas. Admitir y arrancar el juicio. Prevenir, cuando falta un requisito subsanable, dando 5 días para corregir bajo apercibimiento de tener la demanda por no presentada. O desechar de plano, pero sólo cuando exista un motivo manifiesto e indudable de improcedencia —un estándar alto, no una sospecha.",
+        "fundamento": "Arts. 112 a 115 Ley de Amparo",
+        "claves": [
+          "Admisión: se fija fecha de audiencia constitucional y se pide informe a la responsable",
+          "Prevención: 5 días para subsanar",
+          "Desechamiento: exige improcedencia manifiesta e indudable, no discutible",
+          "Contra el desechamiento procede el recurso de queja"
+        ]
+      },
+      {
+        "n": 4,
+        "id": "ri-suspension",
+        "titulo": "La suspensión",
+        "subtitulo": "El cuaderno paralelo donde se juega casi todo",
+        "icono": "✋",
+        "organo": "Juez de Distrito · cuaderno incidental",
+        "plazo": "Provisional: de inmediato · Definitiva: tras la audiencia incidental",
+        "detalle": "La suspensión congela el acto mientras se resuelve el fondo. En la práctica es la etapa decisiva: un amparo ganado tres años después, sobre una casa ya demolida, no restituye nada. Se tramita en un cuaderno aparte y tiene dos momentos: la provisional, que se concede de entrada, y la definitiva, que se decide en audiencia incidental.",
+        "fundamento": "Arts. 125 a 158 Ley de Amparo · arts. 128, 129 y 138",
+        "claves": [
+          "Se pondera la apariencia del buen derecho y el peligro en la demora frente al interés social",
+          "No se concede cuando se sigue perjuicio al interés social o se contravienen disposiciones de orden público (art. 129)",
+          "La reforma del 16 de octubre de 2025 endureció estas causales y prohibió expresamente que la suspensión tenga efectos generales frente a normas",
+          "En algunos supuestos se exige garantía para que surta efectos"
+        ]
+      },
+      {
+        "n": 5,
+        "id": "ri-informe",
+        "titulo": "El informe justificado",
+        "subtitulo": "La autoridad responde",
+        "icono": "📄",
+        "organo": "Autoridad responsable",
+        "plazo": "15 días, prorrogables hasta 10 más",
+        "detalle": "La autoridad señalada como responsable debe decir si el acto existe y por qué lo considera constitucional, acompañando las constancias. Si no rinde informe, se presume cierto el acto reclamado, salvo prueba en contrario.",
+        "fundamento": "Art. 117 Ley de Amparo",
+        "claves": [
+          "La omisión de informe hace presumir cierto el acto",
+          "La autoridad debe remitir copia certificada de las constancias",
+          "Procede multa a la autoridad omisa"
+        ]
+      },
+      {
+        "n": 6,
+        "id": "ri-pruebas",
+        "titulo": "Pruebas y audiencia constitucional",
+        "subtitulo": "El único día en que el juicio se ve y se oye",
+        "icono": "🔎",
+        "organo": "Juzgado de Distrito",
+        "plazo": "Fecha fijada en el auto admisorio",
+        "detalle": "La audiencia constitucional tiene tres periodos encadenados en una sola diligencia: probatorio, de alegatos y de sentencia. No es un debate abierto: casi todo llega por escrito y lo que no se ofreció a tiempo, simplemente no entra.",
+        "fundamento": "Art. 119 Ley de Amparo",
+        "claves": [
+          "Documental e inspección de constancias: pueden ofrecerse hasta la propia audiencia",
+          "Testimonial, pericial e inspección judicial: deben anunciarse 5 días hábiles antes, sin contar el del ofrecimiento ni el de la audiencia",
+          "No se admite la confesional por posiciones",
+          "Cerrado el periodo probatorio se formulan alegatos y el juez cita para sentencia"
+        ]
+      },
+      {
+        "n": 7,
+        "id": "ri-sentencia",
+        "titulo": "La sentencia",
+        "subtitulo": "Sobresee, niega o concede",
+        "icono": "⚖️",
+        "organo": "Juez de Distrito",
+        "plazo": "En la audiencia o dentro de los días siguientes",
+        "detalle": "Tres desenlaces posibles. Sobreseer: el juicio muere sin que nadie diga si el acto era constitucional. Negar: el acto se declara ajustado a la Constitución. Conceder: el amparo protege. Conviene entender que el sobreseimiento no es una victoria de la autoridad sobre el fondo, sino una puerta que se cierra antes de llegar a él.",
+        "fundamento": "Arts. 73 a 77 Ley de Amparo",
+        "claves": [
+          "Conceder implica restituir a la persona en el pleno goce del derecho violado",
+          "Frente a actos negativos, obliga a la autoridad a actuar conforme al derecho vulnerado",
+          "La sentencia sólo se ocupa de quienes fueron parte: principio de relatividad",
+          "El sobreseimiento deja intacto el acto sin pronunciarse sobre su constitucionalidad"
+        ]
+      },
+      {
+        "n": 8,
+        "id": "ri-recursos",
+        "titulo": "Los recursos",
+        "subtitulo": "La segunda oportunidad",
+        "icono": "↩️",
+        "organo": "Tribunal Colegiado o Suprema Corte",
+        "plazo": "3, 5, 10 o 15 días según el recurso",
+        "detalle": "En el amparo sólo caben tres recursos: revisión, queja y reclamación. No hay apelación ni casación. Elegir mal el recurso equivale a no haberlo interpuesto.",
+        "fundamento": "Art. 80 Ley de Amparo",
+        "claves": [
+          "Revisión: 10 días, contra sentencias y resoluciones de fondo",
+          "Queja: 5 o 15 días según el supuesto, contra lo que no admite revisión y contra el exceso o defecto en la suspensión",
+          "Reclamación: 3 días, contra acuerdos de trámite de los presidentes",
+          "Existe además la inconformidad, en la etapa de cumplimiento"
+        ]
+      },
+      {
+        "n": 9,
+        "id": "ri-cumplimiento",
+        "titulo": "El cumplimiento",
+        "subtitulo": "Donde muchos amparos se pierden",
+        "icono": "🔓",
+        "organo": "Juez de Distrito · Suprema Corte",
+        "plazo": "3 días para cumplir, salvo plazo mayor razonable",
+        "detalle": "Ganar el amparo no es lo mismo que obtener lo que el amparo ordena. Si la autoridad no cumple, el juez requiere, luego requiere al superior jerárquico y finalmente abre el incidente de inejecución, que sube a la Suprema Corte. La Constitución prevé el remedio más severo del sistema: separar del cargo a la autoridad y consignarla ante un juez penal.",
+        "fundamento": "Arts. 192 a 198 Ley de Amparo · art. 107 fracc. XVI CPEUM",
+        "claves": [
+          "Requerimiento al titular y después al superior jerárquico",
+          "Incidente de inejecución de sentencia ante la Suprema Corte",
+          "Separación del cargo y consignación penal de la autoridad contumaz",
+          "Cumplimiento sustituto: cuando la restitución es imposible, se traduce en pago de daños",
+          "Recurso de inconformidad contra el acuerdo que tiene por cumplida la sentencia"
+        ]
+      }
+    ],
+    "rutaDirecto": [
+      {
+        "n": 1,
+        "id": "rd-acto",
+        "titulo": "La sentencia que cierra el juicio",
+        "subtitulo": "Ya hubo un proceso y terminó",
+        "icono": "🏁",
+        "organo": "Tribunal ordinario",
+        "plazo": "Día cero",
+        "detalle": "El amparo directo no ataca cualquier acto: ataca sentencias definitivas, laudos laborales y resoluciones que ponen fin a un juicio, cuando ya no exista recurso ordinario que las pueda modificar.",
+        "fundamento": "Art. 170 Ley de Amparo · art. 107 fracc. V y VI CPEUM",
+        "claves": [
+          "Debe estar agotado el principio de definitividad",
+          "Cabe contra violaciones cometidas en el procedimiento y en la propia sentencia",
+          "Existe el amparo directo adhesivo para quien obtuvo sentencia favorable"
+        ]
+      },
+      {
+        "n": 2,
+        "id": "rd-demanda",
+        "titulo": "La demanda por conducto de la responsable",
+        "subtitulo": "Una peculiaridad que sorprende",
+        "icono": "📮",
+        "organo": "Se presenta ante el tribunal que dictó la sentencia",
+        "plazo": "15 días hábiles",
+        "detalle": "A diferencia del indirecto, la demanda de amparo directo no se presenta ante el tribunal que va a resolver, sino ante la misma autoridad cuya sentencia se combate. Ella la recibe, emplaza al tercero interesado y remite el expediente.",
+        "fundamento": "Arts. 175 a 178 Ley de Amparo",
+        "claves": [
+          "La responsable emplaza a los terceros interesados",
+          "Remite la demanda y los autos al Tribunal Colegiado dentro de 5 días",
+          "La suspensión en amparo directo la decide la propia autoridad responsable (art. 190)"
+        ]
+      },
+      {
+        "n": 3,
+        "id": "rd-admision",
+        "titulo": "Admisión en el Tribunal Colegiado",
+        "subtitulo": "Sin audiencia, sin pruebas nuevas",
+        "icono": "🏛️",
+        "organo": "Tribunal Colegiado de Circuito",
+        "plazo": "Tres días para proveer sobre la admisión",
+        "detalle": "Aquí no hay audiencia constitucional ni periodo probatorio. El Tribunal Colegiado resuelve con las constancias del juicio de origen: revisa si el proceso y la sentencia respetaron la Constitución, no vuelve a juzgar los hechos.",
+        "fundamento": "Arts. 179 a 181 Ley de Amparo",
+        "claves": [
+          "No se admiten pruebas distintas a las del juicio de origen",
+          "El Ministerio Público puede formular pedimento",
+          "Se turna a un magistrado ponente que elabora el proyecto"
+        ]
+      },
+      {
+        "n": 4,
+        "id": "rd-sentencia",
+        "titulo": "La sentencia del Colegiado",
+        "subtitulo": "Una sola instancia",
+        "icono": "⚖️",
+        "organo": "Tribunal Colegiado de Circuito",
+        "plazo": "Sesión pública",
+        "detalle": "El Colegiado concede, niega o sobresee. Cuando concede por violaciones procesales, ordena reponer el procedimiento; cuando concede por el fondo, fija los efectos que la responsable debe acatar al dictar nueva sentencia.",
+        "fundamento": "Arts. 182 a 189 Ley de Amparo",
+        "claves": [
+          "Debe resolver todas las violaciones procesales alegadas para evitar amparos sucesivos",
+          "Los efectos de la concesión vinculan a la autoridad responsable",
+          "Contra esta sentencia no procede recurso, salvo la excepción del paso 5"
+        ]
+      },
+      {
+        "n": 5,
+        "id": "rd-revision",
+        "titulo": "La puerta estrecha a la Suprema Corte",
+        "subtitulo": "La excepción, no la regla",
+        "icono": "🚪",
+        "organo": "Suprema Corte de Justicia de la Nación",
+        "plazo": "10 días",
+        "detalle": "La revisión en amparo directo es excepcional. Sólo procede si en la sentencia subsiste un problema de constitucionalidad —interpretación directa de un precepto de la Constitución o de un derecho humano de fuente internacional— y además el caso reúne importancia y trascendencia. La inmensa mayoría de los asuntos termina en el Colegiado.",
+        "fundamento": "Art. 81 fracc. II Ley de Amparo · art. 107 fracc. IX CPEUM",
+        "claves": [
+          "No basta el problema constitucional: se exige importancia y trascendencia",
+          "La Corte puede desechar sin entrar al fondo",
+          "Es la vía por la que se han fijado los grandes precedentes de derechos humanos"
+        ]
+      }
+    ],
+    "recursos": [
+      {
+        "nombre": "Revisión",
+        "plazo": "10 días",
+        "fundamento": "Arts. 81 a 96",
+        "contra": "Sentencias de amparo indirecto, resoluciones que sobreseen, interlocutorias de suspensión y, por excepción, sentencias de amparo directo con problema de constitucionalidad.",
+        "resuelve": "Tribunal Colegiado o Suprema Corte, según la materia.",
+        "color": "gold"
+      },
+      {
+        "nombre": "Queja",
+        "plazo": "5 o 15 días",
+        "fundamento": "Arts. 97 a 103",
+        "contra": "Lo que no admite revisión: el desechamiento de la demanda, la omisión de proveer sobre la suspensión, el exceso o defecto en su cumplimiento y las resoluciones dictadas durante el trámite.",
+        "resuelve": "El órgano jurisdiccional superior al que dictó la resolución.",
+        "color": "cyan"
+      },
+      {
+        "nombre": "Reclamación",
+        "plazo": "3 días",
+        "fundamento": "Arts. 104 a 106",
+        "contra": "Acuerdos de trámite dictados por la presidencia de la Suprema Corte o por las presidencias de los Tribunales Colegiados.",
+        "resuelve": "El propio órgano colegiado, en pleno.",
+        "color": "amber"
+      },
+      {
+        "nombre": "Inconformidad",
+        "plazo": "15 días",
+        "fundamento": "Arts. 201 a 203",
+        "contra": "La resolución que tiene por cumplida la sentencia de amparo, la que declara sin materia el incidente o la que resuelve el cumplimiento sustituto.",
+        "resuelve": "La Suprema Corte de Justicia de la Nación.",
+        "color": "crimson"
+      }
+    ],
+    "escalera": [
+      {
+        "id": "esc-revind",
+        "via": "Revisión en amparo indirecto",
+        "icono": "⬆️",
+        "cuando": "Cuando subsiste un problema de constitucionalidad de normas generales o la interpretación directa de un precepto de la Constitución.",
+        "fundamento": "Art. 107 fracc. VIII CPEUM · art. 83 Ley de Amparo",
+        "filtro": "Si sólo quedan cuestiones de legalidad, el asunto se queda en el Tribunal Colegiado."
+      },
+      {
+        "id": "esc-revdir",
+        "via": "Revisión en amparo directo",
+        "icono": "🎯",
+        "cuando": "Cuando la sentencia del Colegiado decide sobre la constitucionalidad de una norma o interpreta directamente la Constitución, y el caso reúne importancia y trascendencia.",
+        "fundamento": "Art. 107 fracc. IX CPEUM · art. 81 fracc. II Ley de Amparo",
+        "filtro": "Doble llave: problema constitucional más relevancia. Es la vía más estrecha del sistema."
+      },
+      {
+        "id": "esc-atraccion",
+        "via": "Facultad de atracción",
+        "icono": "🧲",
+        "cuando": "La Corte decide, de oficio o a petición fundada, conocer de un amparo que ordinariamente no le tocaba, por su interés y trascendencia.",
+        "fundamento": "Art. 107 fracc. V y VIII CPEUM · art. 40 Ley de Amparo",
+        "filtro": "Es discrecional: la Corte elige. Ahí reside buena parte de su poder de agenda."
+      },
+      {
+        "id": "esc-contradiccion",
+        "via": "Contradicción de criterios",
+        "icono": "⚔️",
+        "cuando": "Dos o más órganos resuelven lo mismo de manera distinta. Alguien debe decidir cuál criterio prevalece y volverlo obligatorio.",
+        "fundamento": "Art. 107 fracc. XIII CPEUM · arts. 225 a 227 Ley de Amparo",
+        "filtro": "La resolución no afecta las situaciones ya juzgadas, pero fija la regla hacia adelante."
+      },
+      {
+        "id": "esc-originaria",
+        "via": "Competencia originaria",
+        "icono": "🏛️",
+        "cuando": "Controversias constitucionales y acciones de inconstitucionalidad. No suben: nacen en la Corte.",
+        "fundamento": "Art. 105 CPEUM",
+        "filtro": "Aquí la Corte actúa como tribunal constitucional puro, sin instancias previas."
+      },
+      {
+        "id": "esc-inejecucion",
+        "via": "Incidente de inejecución",
+        "icono": "🔒",
+        "cuando": "Una autoridad se niega a cumplir una sentencia de amparo firme.",
+        "fundamento": "Arts. 193 a 198 Ley de Amparo · art. 107 fracc. XVI CPEUM",
+        "filtro": "Puede terminar con la separación del cargo y la consignación penal del funcionario."
+      }
+    ],
+    "jurisprudencia": [
+      {
+        "id": "ju-precedente",
+        "via": "Precedente obligatorio",
+        "icono": "⭐",
+        "peso": "Una sola sentencia basta",
+        "comoNace": "Las razones que justifican la decisión —la ratio decidendi— contenidas en una sentencia del Pleno de la Suprema Corte aprobada por mayoría calificada se vuelven obligatorias de inmediato.",
+        "quienLaCrea": "El Pleno de la Suprema Corte de Justicia de la Nación.",
+        "votos": "Al menos 6 de los 9 ministros",
+        "obligaA": "Todas las autoridades jurisdiccionales de la Federación y de las entidades federativas.",
+        "fundamento": "Art. 94 CPEUM (reforma de 11 de marzo de 2021, ajustada en 2024)",
+        "nota": "Antes de 2021 hacían falta cinco sentencias en el mismo sentido. Hoy basta una. El sistema ganó velocidad y perdió decantación."
+      },
+      {
+        "id": "ju-reiteracion",
+        "via": "Reiteración de criterios",
+        "icono": "🔁",
+        "peso": "Cinco sentencias en el mismo sentido",
+        "comoNace": "Un mismo órgano sostiene el mismo criterio en cinco sentencias no interrumpidas por otra en contrario, aprobadas por unanimidad.",
+        "quienLaCrea": "Plenos Regionales y Tribunales Colegiados de Circuito.",
+        "votos": "Unanimidad en cada una de las cinco",
+        "obligaA": "Los órganos jurisdiccionales de menor jerarquía dentro de su ámbito.",
+        "fundamento": "Art. 224 Ley de Amparo",
+        "nota": "Es la vía clásica, la que construyó el derecho mexicano durante casi un siglo. Hoy subsiste sólo fuera de la Suprema Corte."
+      },
+      {
+        "id": "ju-contradiccion",
+        "via": "Contradicción de criterios",
+        "icono": "⚔️",
+        "peso": "Resuelve un desacuerdo entre tribunales",
+        "comoNace": "Cuando dos órganos del mismo nivel sostienen criterios discrepantes sobre el mismo punto, se denuncia la contradicción y el órgano superior decide cuál prevalece.",
+        "quienLaCrea": "El Pleno de la Suprema Corte o los Plenos Regionales, según quiénes contiendan.",
+        "votos": "Mayoría del órgano que resuelve",
+        "obligaA": "Todos los órganos sujetos al que resuelve la contradicción.",
+        "fundamento": "Arts. 225 a 227 Ley de Amparo · art. 107 fracc. XIII CPEUM",
+        "nota": "Puede denunciarla cualquiera de las partes, los propios órganos, sus integrantes o el Ejecutivo Federal por conducto de la Consejería Jurídica."
+      },
+      {
+        "id": "ju-cambio",
+        "via": "Interrupción y sustitución",
+        "icono": "♻️",
+        "peso": "Cómo se cambia una regla ya fijada",
+        "comoNace": "La jurisprudencia se interrumpe cuando el propio órgano que la fijó resuelve en sentido contrario y expresa las razones del cambio. La sustitución es el procedimiento formal para pedir que se reemplace.",
+        "quienLaCrea": "El mismo órgano que emitió el criterio.",
+        "votos": "La misma mayoría exigida para crearla",
+        "obligaA": "Desde que se publica el nuevo criterio.",
+        "fundamento": "Arts. 228 y 230 Ley de Amparo",
+        "nota": "Un juez de menor jerarquía no puede apartarse del precedente, pero sí puede solicitar su sustitución exponiendo razones."
+      }
+    ],
+    "deterioro": [
+      {
+        "id": "det-umbral",
+        "titulo": "La mayoría para invalidar una ley bajó",
+        "cifra": "6 de 9",
+        "antes": "Antes: 8 de 11",
+        "texto": "Hasta 2024 hacían falta ocho votos de once —el 72.7% del Pleno— para expulsar una norma del orden jurídico. Hoy bastan seis de nueve: 66.7%. Menos personas y un umbral proporcionalmente más bajo deciden la validez de las leyes de todo el país.",
+        "fundamento": "Art. 105 fracc. II CPEUM, texto vigente",
+        "estado": "oficial"
+      },
+      {
+        "id": "det-desestimacion",
+        "titulo": "Siete votos no alcanzaron",
+        "cifra": "7 de 11",
+        "antes": "Se necesitaban 8",
+        "texto": "En noviembre de 2024, siete de once ministros votaron por invalidar partes de la reforma judicial. Como el umbral vigente era de ocho, la acción se desestimó sin estudio de fondo. Una mayoría absoluta del tribunal constitucional no bastó para detener la reforma que lo transformaba.",
+        "fundamento": "Acción de inconstitucionalidad 164/2024 y acumuladas",
+        "estado": "oficial"
+      },
+      {
+        "id": "det-unsolo",
+        "titulo": "Un solo órgano fija todo el precedente",
+        "cifra": "9",
+        "antes": "Antes: Pleno + 2 Salas",
+        "texto": "Al desaparecer la Primera y la Segunda Sala tras doscientos años de funcionamiento, la Corte resuelve únicamente en Pleno. Se perdió la deliberación en dos foros especializados —uno civil y penal, otro administrativo y laboral— y con ella la contradicción interna que obligaba a afinar los criterios antes de volverlos obligatorios.",
+        "fundamento": "Reforma constitucional DOF 15/09/2024 · nueva integración desde el 1 de septiembre de 2025",
+        "estado": "oficial"
+      },
+      {
+        "id": "det-unasentencia",
+        "titulo": "Una sentencia crea una regla nacional",
+        "cifra": "1",
+        "antes": "Antes: 5 sentencias",
+        "texto": "Desde 2021 no hacen falta cinco casos para fijar jurisprudencia en la Suprema Corte: basta una sentencia con la mayoría calificada. El sistema responde más rápido, pero una regla obligatoria para todos los jueces del país puede nacer de un solo expediente, sin el contraste de casos sucesivos que antes la depuraba.",
+        "fundamento": "Art. 94 CPEUM · reforma de 11 de marzo de 2021",
+        "estado": "oficial"
+      },
+      {
+        "id": "det-suspension",
+        "titulo": "La suspensión se estrechó",
+        "cifra": "17 oct 2025",
+        "antes": "Vigente al día siguiente de su publicación",
+        "texto": "La reforma publicada el 16 de octubre de 2025 exige que el interés legítimo se traduzca en una afectación real, actual y diferenciada —el interés simple deja de servir—, refuerza las causales para negar la suspensión por orden público e interés social y prohíbe que la suspensión tenga efectos generales frente a normas. Su artículo tercero transitorio la aplica a las actuaciones posteriores en juicios ya en trámite; la Barra Mexicana, Colegio de Abogados, sostuvo públicamente que esa aplicación es retroactiva y contraria al artículo 14 constitucional.",
+        "fundamento": "Decreto DOF 16/10/2025 · posicionamiento BMA de 20/10/2025",
+        "estado": "oficial"
+      },
+      {
+        "id": "det-improcedencia",
+        "titulo": "Zonas fuera del alcance del amparo",
+        "cifra": "Art. 61-III",
+        "antes": "Reforma DOF 13/03/2025",
+        "texto": "El amparo se declaró improcedente contra los actos del Tribunal de Disciplina Judicial y del Órgano de Administración Judicial, los dos órganos que sustituyeron al Consejo de la Judicatura. Sumado a que las resoluciones del Tribunal de Disciplina son definitivas e inatacables por mandato constitucional, se configura un espacio de poder público sin control judicial por la vía del amparo.",
+        "fundamento": "Art. 61 fracc. III Ley de Amparo · art. 100 CPEUM",
+        "estado": "oficial"
+      },
+      {
+        "id": "det-embudo",
+        "titulo": "El embudo: cuántos amparos llegan arriba",
+        "cifra": "2 de cada 100",
+        "antes": "834,518 amparos ingresados en 2024",
+        "texto": "En 2024 ingresaron 640,161 amparos indirectos a los Juzgados de Distrito y 194,357 amparos directos a los Tribunales Colegiados. En el mismo año, la Suprema Corte recibió 16,370 asuntos jurisdiccionales de todo tipo. La proporción es de aproximadamente dos por cada cien: el control constitucional de última instancia es, por diseño, un cuello de botella.",
+        "fundamento": "INEGI, Censo Nacional de Impartición de Justicia Federal 2025 (datos 2024)",
+        "estado": "derivado"
+      },
+      {
+        "id": "det-disciplina",
+        "titulo": "El disenso judicial bajo vigilancia",
+        "cifra": "Análisis",
+        "antes": "Crítica académica documentada",
+        "texto": "Un juez puede apartarse de un precedente sólo si argumenta suficientemente por qué. Al mismo tiempo, el Tribunal de Disciplina Judicial —electo por voto popular y con resoluciones inatacables— concentra la potestad sancionadora sobre los juzgadores. La literatura especializada advierte que esa combinación puede convertir el precedente en un instrumento de disciplina vertical y desincentivar el disenso razonado, que es la forma en que la jurisprudencia evoluciona. Se presenta como análisis doctrinal, no como dato verificado.",
+        "fundamento": "Crítica académica (Nexos, El Juego de la Corte; Instituto de Investigaciones Jurídicas UNAM)",
+        "estado": "analisis"
+      }
+    ],
+    "fuentes": [
+      "Constitución Política de los Estados Unidos Mexicanos, arts. 94, 100, 103, 105 y 107 (texto vigente tras la reforma DOF 15/09/2024).",
+      "Ley de Amparo, reglamentaria de los arts. 103 y 107 constitucionales, con las reformas publicadas en el DOF el 13 de marzo y el 16 de octubre de 2025.",
+      "Suprema Corte de Justicia de la Nación, Acción de inconstitucionalidad 164/2024 y acumuladas, resuelta el 5 de noviembre de 2024.",
+      "Suprema Corte de Justicia de la Nación, Acuerdo General 7/2025: inicio de la Duodécima Época del Semanario Judicial de la Federación, 1 de septiembre de 2025.",
+      "INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025 (información del ejercicio 2024).",
+      "Barra Mexicana, Colegio de Abogados, posicionamiento público sobre la reforma a la Ley de Amparo, 20 de octubre de 2025."
+    ],
+    "notaFuentes": "Los portales oficiales del DOF, la Suprema Corte y la Cámara de Diputados estuvieron bloqueados por el proxy de red durante la elaboración de esta ficha; el articulado se contrastó contra resúmenes de esas mismas fuentes. Todo dato calculado por proporción aparece marcado como derivado y todo juicio interpretativo como análisis."
+  },
   "impuestos": [
     {
       "id": "isr",

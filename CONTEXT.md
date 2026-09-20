@@ -200,6 +200,27 @@ de los 32 circuitos.
   «billones» y «mdp» en la misma columna obligaba a convertir de cabeza para
   comparar dos barras.
 
+- **Subpestaña 4.6 — La Función Jurisdiccional** (`funcionJurisdiccional` en
+  la base, módulo `fj-*` en el motor y en la hoja de estilos). Explica cómo
+  decide el Poder Judicial, no cuánto cuesta. Seis bloques:
+  1. Los cuatro instrumentos de control constitucional (amparo, controversia,
+     acción de inconstitucionalidad y declaratoria general), en fichas que se
+     despliegan con quién los promueve, plazo, alcance del fallo y órgano.
+  2. La ruta procesal completa, conmutable entre **amparo indirecto** (9
+     etapas) y **amparo directo** (5 etapas), con rail de nodos, barra de
+     progreso y un botón «Recorrer el juicio» que avanza solo cada 3.4 s.
+  3. Los cuatro recursos con su plazo y su fundamento.
+  4. Las seis puertas de entrada a la Suprema Corte y el filtro de cada una.
+  5. Las cuatro vías de creación de jurisprudencia y cómo se cambia una regla.
+  6. Ocho puntos ciegos etiquetados `oficial`, `derivado` o `análisis`.
+
+- **Nueva introducción de la pestaña 4.** El párrafo que abría con «A petición
+  y requerimientos de la Auditoría Civil…» hablaba sólo de cifras. Se trasladó
+  a 4.5, reescrito, dentro de un bloque «Balance presupuestal auditado». El
+  hero de la pestaña 4 ahora presenta las dos dimensiones que se auditan
+  —cuánto cuesta y cómo decide— y enumera lo que hace cada una de las seis
+  subpestañas.
+
 ### Pendiente
 
 - **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
@@ -231,6 +252,16 @@ de los 32 circuitos.
 - **Cifra federal ejercida del proceso electoral judicial**: se publica como
   aproximada (≈$7,200 mdp) a la espera de la cuenta pública y de la
   fiscalización de la ASF.
+- **Umbral de votos de la declaratoria general de inconstitucionalidad**: la
+  ficha 4.6 la describe como «mayoría calificada» sin fijar el número, porque
+  el art. 105 pasó de ocho a seis votos con la reforma de 2024 pero no se pudo
+  verificar el texto vigente del art. 107 fracc. II (los portales del DOF, la
+  SCJN y la Cámara de Diputados están bloqueados por el proxy). Precisar al
+  tener acceso al articulado.
+- **Riesgo disciplinario del precedente** (tarjeta `det-disciplina` de 4.6):
+  se publica marcada como `análisis`, no como dato. Procede de crítica
+  académica, no de un artículo que sancione expresamente el apartarse de un
+  precedente. Si aparece la norma concreta, reetiquetar como `oficial`.
 - **Decisión editorial abierta**: si las Salas suprimidas deben permanecer
   documentadas como estructura histórica o desaparecer del organigrama.
 
