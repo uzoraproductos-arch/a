@@ -1835,7 +1835,10 @@
       if (subKey === 'mandatarios') renderPoliticosMandatarios();
       else if (subKey === 'secundarios') renderPoliticosSecundarios();
       else if (subKey === 'curiosos') renderPoliticosCuriosos();
-        else if (subKey === 'versus-porfirio') renderVersusPorfirio();
+        else if (subKey === 'versus-porfirio') {
+          vsxReiniciarAutoArranque();
+          renderVersusPorfirio();
+        }
     } else if (parentTab === 'accion-financiera') {
       if (subKey === 'simulador-megaobras') renderSimuladorMegaobras();
       else if (subKey === 'calculadora') calculateTaxBreakdown(30000);
@@ -2027,6 +2030,11 @@
   // Etiquetas, distintivos y celdas de dato: son rótulos, no prosa. Vincular
   // dentro de ellos rompe su maquetación y no ayuda a leer.
   const AUTOLINK_OMITIR_CLASES = new Set([
+    'vsx-paso-n', 'vsx-paso-tit', 'vsx-paso-pista', 'vsx-cj-kicker',
+    'vsx-cau-h', 'vsx-fuente-n', 'vsx-fuentes-tit',
+    'vpr-kicker', 'vpr-item-n', 'vpr-item-tit', 'vpr-leccion-k',
+    'vbs-kicker', 'vbs-ind-nom', 'vbs-ind-brecha', 'vbs-lado-k', 'vbs-lado-v',
+    'vbs-sincomp', 'versus-delta', 'versus-linea-diaz-rotulo', 'versus-proc-k',
     'hero-tag', 'est-chip', 'cd-lab', 'cd-ley', 'cd-val', 'cd-inst',
     'ce-inst', 'ce-tit', 'ce-num', 'ets-k', 'ets-v', 'ets-s',
     'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
@@ -11098,10 +11106,314 @@
   let isRankingHoverEnabled = false;
   let rankingAnimFrameId = null;
 
+
+  // ==========================================================================
+  // SUBPESTANA 5.4 - CAPA DE ORIENTACION, TRAZABILIDAD Y BALANCE SOCIAL
+  // ==========================================================================
+  /* La 5.4 tenia cuatro simuladores y ninguna instruccion. Peor: los cuatro
+     arrancaban en cero, de modo que quien abria la pestana veia graficas
+     planas y tableros vacios, como si la pagina estuviera rota. Esta capa
+     resuelve tres cosas distintas:
+       1. decir en tres pasos como se juega;
+       2. advertir por que comparar porcentajes del PIB de 1900 con los de
+          2026 exige cuidado, antes de que alguien cite la cifra;
+       3. poner al lado del tablero hacendario los indicadores sociales que
+          ese tablero no mide, que es donde estaba el punto ciego. */
+
+  const VSX_PASOS = [
+    {
+      n: '1', ico: '🎛️', tono: 'gold',
+      tit: 'Elija la variable',
+      txt: 'Seis indicadores macroeconómicos: crecimiento, deuda, balance, ingresos, gasto y ferrocarriles. Cada uno reescala la gráfica completa.',
+      pista: 'Los botones dorados de arriba'
+    },
+    {
+      n: '2', ico: '📊', tono: 'emerald',
+      tit: 'Mire crecer las barras',
+      txt: 'La gráfica se anima desde cero hasta la cifra real y traza la línea de referencia de Díaz. Puede repetirla cuantas veces quiera con «Reiniciar a ceros».',
+      pista: 'Arranca sola al entrar'
+    },
+    {
+      n: '3', ico: '🥊', tono: 'cyan',
+      tit: 'Abra el cara a cara',
+      txt: 'Un clic en cualquier barra, punto o retrato abre la ficha bilateral: qué avanzó, qué retrocedió y el veredicto cívico de ese mandatario frente al Porfiriato.',
+      pista: 'Clic en cualquier barra'
+    }
+  ];
+
+  const VSX_CAUTELAS = [
+    {
+      ico: '📐',
+      tit: 'El PIB de 1900 no se midió: se reconstruyó',
+      txt: 'México no tuvo cuentas nacionales hasta el siglo XX. Las cifras porfirianas de PIB, deuda y balance son <b>reconstrucciones historiográficas</b> hechas a partir de las memorias de Hacienda y los presupuestos anuales, no registros contables equivalentes a los de hoy. Son las mejores disponibles; no son de la misma naturaleza.'
+    },
+    {
+      ico: '⚖️',
+      tit: 'Un Estado de 7.4% del PIB no hace lo mismo que uno de 25%',
+      txt: 'El Porfiriato no pagaba salud pública, pensiones, educación masiva ni participaciones a estados y municipios. Comparar su gasto con el actual sin decir esto convierte una diferencia de <b>funciones</b> en una supuesta diferencia de <b>disciplina</b>.'
+    },
+    {
+      ico: '🕰️',
+      tit: 'Treinta y un años contra seis',
+      txt: 'Díaz gobernó 31 años efectivos; un sexenio dura seis. Un promedio anual calculado sobre tres décadas absorbe crisis que un sexenio concentra. La gráfica lo respeta usando promedios, pero conviene tenerlo presente.'
+    }
+  ];
+
+  function vsxRefLink(refId) {
+    if (!refId) return '';
+    const ref = (DB.referencias_legales || []).find(r => r.id === refId);
+    if (!ref) return '';
+    return ' <a class="ref-link" onclick="window.AuditEngine.goToRef(\'' + refId + '\')">[' + ref.num + ']</a>';
+  }
+
+  function renderVersusOrientacion() {
+    const cont = document.getElementById('versusOrientacion');
+    if (!cont) return;
+    const data = DB.personajes_politicos ? DB.personajes_politicos.porfirio_diaz_versus : null;
+    if (!data) return;
+
+    // Cifras derivadas del propio catalogo: si cambia el dato, cambia el rotulo.
+    const nMetricas = Object.keys(data.metricas_catalogo).length;
+    const nMandatarios = data.mandatarios_comparativa.length + 1;
+    const arranques = data.mandatarios_comparativa
+      .map(p => parseInt(String(p.periodo).slice(0, 4), 10))
+      .filter(a => !isNaN(a));
+    const desde = arranques.length ? Math.min.apply(null, arranques) : 1833;
+
+    cont.innerHTML =
+      '<div class="vsx-wrap">' +
+
+        '<div class="vsx-comojugar">' +
+          '<div class="vsx-cj-head">' +
+            '<span class="vsx-cj-kicker">Cómo se juega esta balanza</span>' +
+            '<h3 class="vsx-cj-tit">Tres movimientos y la comparación queda armada</h3>' +
+            '<p class="vsx-cj-sub">' + nMandatarios + ' mandatarios, ' + nMetricas +
+              ' variables hacendarias y ' + (2026 - desde) +
+              ' años de historia fiscal en un mismo tablero. No hace falta saber economía para usarlo: cada cifra viene con su fuente y cada comparación con su advertencia.</p>' +
+          '</div>' +
+          '<div class="vsx-pasos">' +
+            VSX_PASOS.map(p =>
+              '<div class="vsx-paso" data-tono="' + p.tono + '">' +
+                '<span class="vsx-paso-n">' + p.n + '</span>' +
+                '<span class="vsx-paso-ico" aria-hidden="true">' + p.ico + '</span>' +
+                '<span class="vsx-paso-tit">' + p.tit + '</span>' +
+                '<span class="vsx-paso-txt">' + p.txt + '</span>' +
+                '<span class="vsx-paso-pista">' + p.pista + '</span>' +
+              '</div>').join('') +
+          '</div>' +
+        '</div>' +
+
+        '<div class="vsx-cautelas">' +
+          '<div class="vsx-cau-tit">Antes de citar una de estas cifras, lea esto</div>' +
+          '<p class="vsx-cau-sub">La comparación es legítima y las cifras son las oficiales disponibles. También tiene tres límites que conviene declarar de frente, porque a quien use estos números en una discusión pública se los van a señalar.</p>' +
+          '<div class="vsx-cau-grid">' +
+            VSX_CAUTELAS.map(c =>
+              '<div class="vsx-cau">' +
+                '<span class="vsx-cau-ico" aria-hidden="true">' + c.ico + '</span>' +
+                '<div class="vsx-cau-cuerpo">' +
+                  '<span class="vsx-cau-h">' + c.tit + '</span>' +
+                  '<span class="vsx-cau-txt">' + c.txt + '</span>' +
+                '</div>' +
+              '</div>').join('') +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+  }
+
+  function renderVersusPrecisiones() {
+    const cont = document.getElementById('versusPrecisiones');
+    if (!cont) return;
+    const data = DB.personajes_politicos ? DB.personajes_politicos.porfirio_diaz_versus : null;
+    if (!data || !data.precisiones) return;
+    const pr = data.precisiones;
+
+    cont.innerHTML =
+      '<div class="vpr-wrap">' +
+        '<div class="vpr-head">' +
+          '<span class="vpr-kicker">Verificación de las cifras estelares</span>' +
+          '<h3 class="vpr-tit">' + pr.titulo + '</h3>' +
+          '<p class="vpr-entrada">' + pr.entrada + '</p>' +
+        '</div>' +
+        '<div class="vpr-grid">' +
+          pr.items.map((it, i) =>
+            '<article class="vpr-item">' +
+              '<header class="vpr-item-top">' +
+                '<span class="vpr-item-ico" aria-hidden="true">' + it.ico + '</span>' +
+                '<span class="vpr-item-n">' + (i + 1) + ' de ' + pr.items.length + '</span>' +
+                '<h4 class="vpr-item-tit">' + it.titular + '</h4>' +
+              '</header>' +
+              '<p class="vpr-item-cuerpo">' + it.cuerpo + '</p>' +
+              '<div class="vpr-leccion">' +
+                '<span class="vpr-leccion-k">Qué se aprende</span>' +
+                '<span class="vpr-leccion-t">' + it.leccion + '</span>' +
+              '</div>' +
+            '</article>').join('') +
+        '</div>' +
+      '</div>';
+  }
+
+  function renderVersusBalanceSocial() {
+    const cont = document.getElementById('versusBalanceSocial');
+    if (!cont) return;
+    const data = DB.personajes_politicos ? DB.personajes_politicos.porfirio_diaz_versus : null;
+    if (!data || !data.balance_social) return;
+    const bs = data.balance_social;
+
+    const filas = bs.indicadores.map(ind => {
+      const max = ind.escala_max || 100;
+      const pctP = Math.max(2, Math.min(100, (ind.escala_porfiriato / max) * 100));
+      const pctH = Math.max(2, Math.min(100, (ind.escala_hoy / max) * 100));
+      /* Cuando las dos cifras no viven en la misma escala, no se dibuja
+         barra: una barra llena bajo un rotulo que no es un porcentaje afirma
+         visualmente algo que el dato no sostiene. */
+      const rielP = ind.sin_barras ? '' :
+        '<div class="vbs-riel"><span class="vbs-barra" data-lado="antes" style="width:' + pctP.toFixed(1) + '%"></span></div>';
+      const rielH = ind.sin_barras ? '' :
+        '<div class="vbs-riel"><span class="vbs-barra" data-lado="hoy" style="width:' + pctH.toFixed(1) + '%"></span></div>';
+
+      const notaEsc = ind.nota_escala
+        ? '<div class="vbs-nota-escala">' + ind.nota_escala + '</div>' : '';
+      const sinComp = ind.sin_comparativo_moderno
+        ? '<span class="vbs-sincomp">sin equivalente directo hoy</span>' : '';
+
+      return '' +
+        '<article class="vbs-ind" data-tono="' + (ind.tono || 'gold') + '">' +
+          '<header class="vbs-ind-top">' +
+            '<span class="vbs-ind-ico" aria-hidden="true">' + ind.icono + '</span>' +
+            '<h4 class="vbs-ind-nom">' + ind.nombre + '</h4>' +
+            '<span class="vbs-ind-brecha">' + ind.brecha + '</span>' +
+          '</header>' +
+
+          '<div class="vbs-duelo">' +
+            '<div class="vbs-lado" data-lado="antes">' +
+              '<span class="vbs-lado-k">Porfiriato · 1876–1911</span>' +
+              '<span class="vbs-lado-v">' + ind.porfiriato_val + '</span>' +
+              rielP +
+              '<span class="vbs-lado-n">' + ind.porfiriato_nota + '</span>' +
+            '</div>' +
+            '<div class="vbs-lado" data-lado="hoy">' +
+              '<span class="vbs-lado-k">México hoy ' + sinComp + '</span>' +
+              '<span class="vbs-lado-v">' + ind.hoy_val + '</span>' +
+              rielH +
+              '<span class="vbs-lado-n">' + ind.hoy_nota + '</span>' +
+            '</div>' +
+          '</div>' +
+          notaEsc +
+
+          '<p class="vbs-lectura">' + ind.lectura + vsxRefLink(ind.ref) + '</p>' +
+        '</article>';
+    }).join('');
+
+    cont.innerHTML =
+      '<div class="vbs-wrap">' +
+        '<div class="vbs-head">' +
+          '<span class="vbs-kicker">Punto ciego de la comparación</span>' +
+          '<h3 class="vbs-tit">' + bs.titulo + '</h3>' +
+          '<p class="vbs-entrada">' + bs.entrada + '</p>' +
+        '</div>' +
+        '<div class="vbs-grid">' + filas + '</div>' +
+        '<div class="vbs-cierre">' +
+          '<span class="vbs-cierre-ico" aria-hidden="true">⚠️</span>' +
+          '<p>' + bs.advertencia + '</p>' +
+        '</div>' +
+      '</div>';
+  }
+
+  /* Fuentes de la subpestana: la misma disciplina que en la 4.2. Cada bloque
+     que afirma una cifra termina diciendo de donde la saco. */
+  const VSX_FUENTES = [
+    'ref-inegi-cuentas', 'ref-pef2026', 'ref-banxico-sie',
+    'ref-inegi-social-porfiriato', 'ref-conapo-esperanza-vida',
+    'ref-inegi-censo-2020', 'ref-salario-real-historico'
+  ];
+
+  function renderVersusFuentes() {
+    const cont = document.getElementById('versusFuentes');
+    if (!cont) return;
+    const refs = (DB.referencias_legales || []).filter(r => VSX_FUENTES.indexOf(r.id) !== -1);
+    if (!refs.length) return;
+    refs.sort((a, b) => a.num - b.num);
+
+    cont.innerHTML =
+      '<div class="vsx-fuentes">' +
+        '<div class="vsx-fuentes-tit">De dónde sale cada cifra de esta subpestaña</div>' +
+        '<ul class="vsx-fuentes-lista">' +
+          refs.map(r =>
+            '<li><button type="button" class="vsx-fuente-b" onclick="window.AuditEngine.goToRef(\'' + r.id + '\')">' +
+              '<span class="vsx-fuente-n">[' + r.num + ']</span>' +
+              '<span class="vsx-fuente-t">' + r.cita_apa + '</span>' +
+            '</button></li>').join('') +
+        '</ul>' +
+        '<p class="vsx-fuentes-nota">Las cifras del periodo 1988–2026 provienen de series oficiales del INEGI, la SHCP y el Banco de México. Las del Porfiriato son reconstrucciones historiográficas a partir de las memorias de Hacienda y de los censos de 1895, 1900 y 1910: se presentan como tales, no como registros contables equivalentes. Cuando una cifra no pudo verificarse en una fuente oficial, no aparece en el tablero.</p>' +
+      '</div>';
+  }
+
+  /* Arranque automatico de los simuladores. El problema de origen no era que
+     los simuladores estuvieran mal hechos, sino que exigian tres clics en tres
+     lugares distintos antes de mostrar un solo dato. Ahora la grafica principal
+     se anima al entrar y los tableros de abajo lo hacen cuando entran en
+     pantalla, con IntersectionObserver: nadie ve una tarjeta en ceros sin
+     saber por que. Los botones «Reiniciar» siguen ahi para volver a jugarlo. */
+  let vsxObservador = null;
+  const vsxYaArrancado = {};
+
+  function vsxAutoArranque() {
+    if (typeof window.IntersectionObserver !== 'function') {
+      // Navegador sin soporte: se evalua todo de una vez, sin escalonar.
+      ['versus', 'salud', 'cards'].forEach(k => vsxDispararSimulador(k));
+      return;
+    }
+
+    if (vsxObservador) vsxObservador.disconnect();
+    vsxObservador = new IntersectionObserver(entradas => {
+      entradas.forEach(e => {
+        if (!e.isIntersecting) return;
+        vsxDispararSimulador(e.target.dataset.vsxAuto);
+        vsxObservador.unobserve(e.target);
+      });
+    }, { threshold: 0.25 });
+
+    [['versusChartStage', 'versus'],
+     ['versusHealthConsoleContainer', 'salud'],
+     ['versusActiveViewContainer', 'cards']].forEach(par => {
+      const el = document.getElementById(par[0]);
+      if (!el) return;
+      el.dataset.vsxAuto = par[1];
+      vsxObservador.observe(el);
+    });
+  }
+
+  function vsxDispararSimulador(clave) {
+    if (!clave || vsxYaArrancado[clave]) return;
+    vsxYaArrancado[clave] = true;
+    // Retardo corto: deja que el navegador pinte el estado en cero, para que
+    // la animacion se lea como un movimiento y no como un salto.
+    setTimeout(() => {
+      try {
+        if (clave === 'versus') {
+          if (!isVersusEvaluated && currentVersusChartType === 'bars') evaluarMetricasVersus();
+        } else if (clave === 'salud') {
+          if (!isHealthEvaluated) evaluarSaludFinanciera();
+        } else if (clave === 'cards') {
+          if (currentVersusTableView === 'cards' && !isCardsEvaluated) evaluarTarjetasEjecutivas();
+          else if (currentVersusTableView === 'ranking' && !isRankingEvaluated) evaluarRankingHacendario();
+        }
+      } catch (err) {
+        console.warn('[5.4] arranque automatico omitido:', clave, err);
+      }
+    }, 260);
+  }
+
+  function vsxReiniciarAutoArranque() {
+    Object.keys(vsxYaArrancado).forEach(k => { delete vsxYaArrancado[k]; });
+  }
+
   function renderVersusPorfirio() {
     const data = DB.personajes_politicos ? DB.personajes_politicos.porfirio_diaz_versus : null;
     if (!data) return;
 
+    renderVersusOrientacion();
     renderVersusToolbar();
     renderVersusChart();
     renderVersusPresidentSelector();
@@ -11112,6 +11424,10 @@
       if (container) container.style.display = 'none';
     }
     renderVersusTable();
+    renderVersusPrecisiones();
+    renderVersusBalanceSocial();
+    renderVersusFuentes();
+    vsxAutoArranque();
   }
 
   function renderVersusToolbar() {
@@ -11250,14 +11566,54 @@
     // Actualizar encabezados
     const titleEl = document.getElementById('versusChartActiveTitle');
     const descEl = document.getElementById('versusChartActiveDesc');
-    if (titleEl) titleEl.innerHTML = `${metric.icono} ${metric.nombre} — Don Porfirio Díaz vs Sexenios (1988–2026)`;
-    if (descEl) descEl.innerHTML = `${metric.descripcion} · <em>Referencia Porfiriana: <strong>${diaz.metricas[currentVersusMetric + '_label'] || (diazVal + ' ' + metric.unidad)}</strong></em>`;
+    if (titleEl) titleEl.innerHTML = `${metric.icono} ${metric.nombre} — Don Porfirio Díaz frente a nueve mandatarios (1833–2026)`;
+    if (descEl) {
+      const proc = metric.fuente_dato
+        ? `<span class="versus-proc"><span class="versus-proc-k">Procedencia del dato</span>${metric.fuente_dato}${vsxRefLink(metric.ref_fuente)}</span>`
+        : '';
+      descEl.innerHTML = `${metric.descripcion} · <em>Referencia porfiriana: <strong>${diaz.metricas[currentVersusMetric + '_label'] || (diazVal + ' ' + metric.unidad)}</strong></em>${proc}`;
+    }
 
     if (currentVersusChartType === 'bars') {
       renderVersusBarsChart(stage, metric, diaz, diazVal, presList);
     } else {
       renderVersusLineChart(stage, metric, diaz, diazVal, presList);
     }
+  }
+
+  /* Coloca la linea guia justo en la cima de la barra de Diaz. Se mide contra
+     el escenario en lugar de calcularse con una constante, porque la altura de
+     los rotulos cambia con el nombre y con la insignia de distancia. */
+  /* Formato de cifra de metrica. Cada punto del codigo comparaba
+     versusEsKm(metric), pero la unidad real de la metrica ferroviaria es
+     «km de vías», asi que la rama nunca entraba y los kilometros se pintaban
+     como «19280»: sin unidad y sin separador de miles. Con estas tres
+     funciones el formato ya no puede divergir entre un punto y otro. */
+  function versusEsKm(metric) {
+    return !!(metric && metric.unidad && metric.unidad.indexOf('km') !== -1);
+  }
+
+  function versusFormatoCifra(metric, valor, claveMetrica) {
+    if (versusEsKm(metric)) return Math.round(valor).toLocaleString('es-MX') + ' km';
+    const signo = (claveMetrica === 'balance_fiscal' && valor > 0) ? '+' : '';
+    const num = Number.isInteger(valor) ? valor : Number(Number(valor).toFixed(1));
+    return signo + num + (metric.unidad.includes('%') ? '%' : '');
+  }
+
+  function versusCifraCero(metric) {
+    if (versusEsKm(metric)) return '0 km';
+    return metric.unidad.includes('%') ? '0.0%' : '0.0';
+  }
+
+  function vsxColocarLineaDiaz(visible) {
+    const stage = document.querySelector('.versus-bars-stage');
+    const barra = document.getElementById('versusBar_diaz');
+    const linea = document.getElementById('versusLineaDiaz');
+    if (!stage || !barra || !linea) return;
+    const rs = stage.getBoundingClientRect();
+    const rb = barra.getBoundingClientRect();
+    linea.style.bottom = Math.max(0, rs.bottom - rb.top) + 'px';
+    if (visible !== undefined) linea.style.opacity = visible ? '1' : '0';
   }
 
   function renderVersusBarsChart(stage, metric, diaz, diazVal, presList) {
@@ -11270,11 +11626,14 @@
     const diazHeight = isDiazZero ? 6 : targetHeightDiaz;
     const diazZeroClass = isDiazZero ? 'versus-bar-zero' : '';
     const diazBubbleZeroClass = isDiazZero ? 'bubble-zero' : '';
-    const diazZeroLabel = metric.unidad.includes('%') ? '0.0%' : (metric.unidad === 'km' ? '0 km' : '0.0');
-    const diazFinalLabel = `${diazVal > 0 && currentVersusMetric === 'balance_fiscal' ? '+' : ''}${diazVal}${metric.unidad.includes('%') ? '%' : (metric.unidad === 'km' ? ' km' : '')}`;
+    const diazZeroLabel = versusCifraCero(metric);
+    const diazFinalLabel = `${versusFormatoCifra(metric, diazVal, currentVersusMetric)}`;
 
     let html = `
-      <div class="versus-bars-stage" style="border-bottom: 2px solid var(--border-gold); padding-bottom: 12px;">
+      <div class="versus-bars-stage ${isVersusEvaluated ? 'evaluado' : ''}" style="border-bottom: 2px solid var(--border-gold); padding-bottom: 12px;">
+        <div class="versus-linea-diaz" id="versusLineaDiaz" style="bottom: 0; opacity: 0;">
+          <span class="versus-linea-diaz-rotulo">👑 Nivel Díaz · ${diazFinalLabel}</span>
+        </div>
         <!-- Barra de Porfirio Díaz -->
         <div class="versus-bar-item versus-bar-porfirio" title="Gral. Porfirio Díaz (Referencia Histórica: ${diazVal} ${metric.unidad})">
           <div id="versusBubble_diaz" class="versus-bar-val-bubble ${diazBubbleZeroClass}" style="color:var(--gold-bright);">
@@ -11299,15 +11658,27 @@
       const pHeight = isPZero ? 6 : targetHeightP;
       const pZeroClass = isPZero ? 'versus-bar-zero' : '';
       const pBubbleZeroClass = isPZero ? 'bubble-zero' : '';
-      const pZeroLabel = metric.unidad.includes('%') ? '0.0%' : (metric.unidad === 'km' ? '0 km' : '0.0');
-      const pFinalLabel = `${val > 0 && currentVersusMetric === 'balance_fiscal' ? '+' : ''}${val}${metric.unidad.includes('%') ? '%' : (metric.unidad === 'km' ? ' km' : '')}`;
+      const pZeroLabel = versusCifraCero(metric);
+      const pFinalLabel = `${versusFormatoCifra(metric, val, currentVersusMetric)}`;
 
       let valColor = 'var(--text-main)';
+      let mejor = null;
       if (metric.sentido_positivo === true) {
-        valColor = val >= diazVal ? '#2ecc71' : '#e74c3c';
+        mejor = val >= diazVal;
+        valColor = mejor ? '#2ecc71' : '#e74c3c';
       } else if (metric.sentido_positivo === false) {
-        valColor = val <= diazVal ? '#2ecc71' : '#e74c3c';
+        mejor = val <= diazVal;
+        valColor = mejor ? '#2ecc71' : '#e74c3c';
       }
+
+      const delta = val - diazVal;
+      const deltaTxt = (delta > 0 ? '+' : '') +
+        (versusEsKm(metric) ? Math.round(delta).toLocaleString('es-MX') : delta.toFixed(1));
+      const flecha = delta === 0 ? '=' : (delta > 0 ? '▲' : '▼');
+      const deltaEstado = mejor === null ? 'neutro' : (mejor ? 'mejor' : 'peor');
+      /* La insignia se pinta siempre: su valor no depende de la animación.
+         La clase «evaluado» del escenario es la que la revela al terminar. */
+      const deltaHtml = `<span class="versus-delta" data-estado="${deltaEstado}" title="Distancia frente a Don Porfirio Díaz (${diazVal}${metric.unidad.includes('%') ? '%' : ''})">${flecha} ${deltaTxt}</span>`;
 
       html += `
         <div class="versus-bar-item ${isSelected ? 'selected' : ''}" 
@@ -11318,6 +11689,7 @@
           </div>
           <div id="versusBar_${p.id}" class="versus-bar-col ${pZeroClass}" style="height: ${pHeight}px; background: ${p.color}; opacity: ${isSelected ? '1' : '0.85'};"></div>
           <div class="versus-bar-lbl">
+            ${deltaHtml}
             <strong style="color:${isSelected ? 'var(--gold-bright)' : 'var(--text-main)'};">${p.nombre.split(' ')[0]} ${p.nombre.split(' ')[1] || ''}</strong>
             <div style="font-size:9.5px; color:var(--text-dim);">${p.periodo}</div>
             <span class="versus-bar-badge" style="background:rgba(255,255,255,0.06); color:${p.color}; border:1px solid rgba(255,255,255,0.15);">${p.partido}</span>
@@ -11328,6 +11700,7 @@
 
     html += `</div>`;
     stage.innerHTML = html;
+    requestAnimationFrame(() => vsxColocarLineaDiaz(isVersusEvaluated));
   }
 
   function evaluarMetricasVersus(duracionMs = 1400) {
@@ -11394,7 +11767,7 @@
         const curD = diazVal * eased;
         if (metric.unidad.includes('%')) {
           bubD.textContent = `👑 ${currentVersusMetric === 'balance_fiscal' && curD > 0 ? '+' : ''}${curD.toFixed(1)}%`;
-        } else if (metric.unidad === 'km') {
+        } else if (versusEsKm(metric)) {
           bubD.textContent = `👑 ${Math.round(curD).toLocaleString('es-MX')} km`;
         } else {
           bubD.textContent = `👑 ${curD.toFixed(1)}`;
@@ -11413,13 +11786,15 @@
           const curP = val * eased;
           if (metric.unidad.includes('%')) {
             bubP.textContent = `${currentVersusMetric === 'balance_fiscal' && curP > 0 ? '+' : ''}${curP.toFixed(1)}%`;
-          } else if (metric.unidad === 'km') {
+          } else if (versusEsKm(metric)) {
             bubP.textContent = `${Math.round(curP).toLocaleString('es-MX')} km`;
           } else {
             bubP.textContent = `${curP.toFixed(1)}`;
           }
         }
       });
+
+      vsxColocarLineaDiaz(true);
 
       if (progress < 1) {
         versusAnimFrameId = requestAnimationFrame(animateVersusStep);
@@ -11431,7 +11806,7 @@
         // Asignar finales exactos
         if (barD) barD.style.height = `${targetHeightDiaz}px`;
         if (bubD) {
-          bubD.textContent = `👑 ${diazVal > 0 && currentVersusMetric === 'balance_fiscal' ? '+' : ''}${diazVal}${metric.unidad.includes('%') ? '%' : (metric.unidad === 'km' ? ' km' : '')}`;
+          bubD.textContent = `👑 ${versusFormatoCifra(metric, diazVal, currentVersusMetric)}`;
         }
 
         presList.forEach(p => {
@@ -11441,12 +11816,18 @@
           const bubP = document.getElementById(`versusBubble_${p.id}`);
           if (barP) barP.style.height = `${targetH}px`;
           if (bubP) {
-            bubP.textContent = `${val > 0 && currentVersusMetric === 'balance_fiscal' ? '+' : ''}${val}${metric.unidad.includes('%') ? '%' : (metric.unidad === 'km' ? ' km' : '')}`;
+            bubP.textContent = `${versusFormatoCifra(metric, val, currentVersusMetric)}`;
           }
         });
 
+        /* La insignia de distancia se pinta siempre, porque su valor no
+           depende de la animación; sólo se revela al cerrar la
+           evaluación, con una clase en el escenario. */
+        const escenario = document.querySelector('.versus-bars-stage');
+        if (escenario) escenario.classList.add('evaluado');
+
         if (statusEl) {
-          statusEl.innerHTML = '<span style="color:var(--emerald-bright);">✓ Evaluación completada: Contraste oficial versus Porfirio Díaz desplegado al 100%.</span>';
+          statusEl.innerHTML = '<span style="color:var(--emerald-bright);">✓ Evaluación completada: cada barra muestra ya su distancia frente a Don Porfirio Díaz.</span>';
         }
         if (btnEval) {
           btnEval.innerHTML = '<span>🔄</span> Volver a Evaluar';
@@ -11458,6 +11839,9 @@
   }
 
   function resetMetricasVersus() {
+    // Reiniciar a mano desarma el candado del arranque automatico: si la
+    // persona vuelve a salir y entrar, la animacion se repite.
+    vsxReiniciarAutoArranque();
     if (versusAnimFrameId) {
       cancelAnimationFrame(versusAnimFrameId);
       versusAnimFrameId = null;
@@ -11470,6 +11854,11 @@
     const metric = data.metricas_catalogo[currentVersusMetric];
     const presList = data.mandatarios_comparativa;
 
+    const escenarioReset = document.querySelector('.versus-bars-stage');
+    if (escenarioReset) escenarioReset.classList.remove('evaluado');
+    const lineaReset = document.getElementById('versusLineaDiaz');
+    if (lineaReset) lineaReset.style.opacity = '0';
+
     const barD = document.getElementById('versusBar_diaz');
     const bubD = document.getElementById('versusBubble_diaz');
     if (barD) {
@@ -11478,7 +11867,7 @@
     }
     if (bubD) {
       bubD.classList.add('bubble-zero');
-      bubD.textContent = `👑 ${metric.unidad.includes('%') ? '0.0%' : (metric.unidad === 'km' ? '0 km' : '0.0')}`;
+      bubD.textContent = `👑 ${versusCifraCero(metric)}`;
     }
 
     presList.forEach(p => {
@@ -11491,7 +11880,7 @@
       if (bubP) {
         bubP.classList.add('bubble-zero');
         bubP.style.color = 'var(--text-dim)';
-        bubP.textContent = `${metric.unidad.includes('%') ? '0.0%' : (metric.unidad === 'km' ? '0 km' : '0.0')}`;
+        bubP.textContent = `${versusCifraCero(metric)}`;
       }
     });
 
@@ -12374,10 +12763,10 @@
               <span id="versusHealthLeaderAvatar" style="font-size:32px;">${isHealthEvaluated ? leader.avatar : '🏛️'}</span>
               <div>
                 <h4 id="versusHealthLeaderName" style="font-family:var(--font-serif); font-size:18px; color:var(--text-main); margin:0;">
-                  ${isHealthEvaluated ? leader.nombre : '<span style="color:var(--text-dim); font-style:italic;">--- Ningún Mandatario Seleccionado ---</span>'}
+                  ${isHealthEvaluated ? leader.nombre : `<span style="color:var(--text-dim); font-style:italic;">${leader.nombre} · sin calibrar</span>`}
                 </h4>
                 <div id="versusHealthLeaderPeriod" style="font-family:var(--font-mono); font-size:11px; color:${isHealthEvaluated ? leader.color : 'var(--text-dim)'}; margin-top:2px;">
-                  ${isHealthEvaluated ? `${leader.periodo} · <strong>${leader.partido}</strong>` : 'Periodo por calibrar · <strong style="color:var(--text-dim);">Esperando selección</strong>'}
+                  ${isHealthEvaluated ? `${leader.periodo} · <strong>${leader.partido}</strong>` : `${leader.periodo} · <strong style="color:var(--text-dim);">La aguja sube al evaluar</strong>`}
                 </div>
               </div>
               <div style="margin-left:auto; text-align:right;">
@@ -12536,6 +12925,14 @@
         else numEl.style.color = '#e74c3c';
       }
 
+      // El índice global de la derecha acompaña a la aguja: si se quedaba
+      // en 0/100 mientras el tacómetro marcaba 94, el tablero se desmentía.
+      const pillNum = document.getElementById('versusHealthIndexPill');
+      if (pillNum) {
+        pillNum.textContent = `${curScore}/100`;
+        pillNum.style.color = curScore > 0 ? leader.semaforo_color : 'var(--text-dim)';
+      }
+
       // Actualizar barras de pilares
       const clampFactor = Math.min(1, Math.max(0, factor));
       updatePillarBarsDOM(leader, clampFactor);
@@ -12553,6 +12950,11 @@
         if (numEl) {
           numEl.textContent = targetScore;
           numEl.style.color = leader.semaforo_color;
+        }
+        const pillFin = document.getElementById('versusHealthIndexPill');
+        if (pillFin) {
+          pillFin.textContent = `${targetScore}/100`;
+          pillFin.style.color = leader.semaforo_color;
         }
 
         updatePillarBarsDOM(leader, 1.0, true);
@@ -12610,6 +13012,9 @@
   }
 
   function resetSaludFinanciera() {
+    // El rotulo en reposo nombra al mandatario que sigue seleccionado, asi
+    // que hace falta tenerlo a la mano tambien al reiniciar.
+    const leader = VERSUS_SALUD_FINANCIERA[currentVersusHealthId] || VERSUS_SALUD_FINANCIERA['porfirio_diaz'];
     if (healthAnimFrameId) {
       cancelAnimationFrame(healthAnimFrameId);
       healthAnimFrameId = null;
@@ -12620,6 +13025,7 @@
     }
     isHealthEvaluating = false;
     isHealthEvaluated = false;
+    vsxReiniciarAutoArranque();
 
     const startAngle = currentNeedleAngle;
     const startTime = performance.now();
@@ -12689,8 +13095,8 @@
         const indexPill = document.getElementById('versusHealthIndexPill');
 
         if (headerAvatar) headerAvatar.textContent = '🏛️';
-        if (headerName) headerName.innerHTML = '<span style="color:var(--text-dim); font-style:italic;">--- Ningún Mandatario Seleccionado ---</span>';
-        if (headerPeriod) headerPeriod.innerHTML = 'Periodo por calibrar · <strong style="color:var(--text-dim);">Esperando selección</strong>';
+        if (headerName) headerName.innerHTML = `<span style="color:var(--text-dim); font-style:italic;">${leader.nombre} · sin calibrar</span>`;
+        if (headerPeriod) headerPeriod.innerHTML = `${leader.periodo} · <strong style="color:var(--text-dim);">La aguja sube al evaluar</strong>`;
         if (diagText) diagText.textContent = 'Consola termostática en reposo (0 pts). Selecciona un mandatario en los botones o presiona «Evaluar Salud Financiera» para calibrar la aguja física analógica y desplegar el diagnóstico hacendario.';
         if (indexPill) {
           indexPill.textContent = '0/100';
@@ -17373,6 +17779,10 @@
     renderPoliticosSecundarios: renderPoliticosSecundarios,
     renderPoliticosCuriosos: renderPoliticosCuriosos,
     renderVersusPorfirio: renderVersusPorfirio,
+    renderVersusOrientacion: renderVersusOrientacion,
+    renderVersusPrecisiones: renderVersusPrecisiones,
+    renderVersusBalanceSocial: renderVersusBalanceSocial,
+    renderVersusFuentes: renderVersusFuentes,
     setVersusMetric: setVersusMetric,
     setVersusChartType: setVersusChartType,
     selectVersusPresident: selectVersusPresident,

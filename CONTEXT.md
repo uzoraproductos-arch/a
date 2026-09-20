@@ -356,6 +356,56 @@ de los 32 circuitos.
   (EFOS), todos registrados en `AUTOLINK_TERMINOS`. También se actualizó la
   referencia 13: la LAASSP del año 2000 quedó abrogada el 16 de abril de 2025.
 
+- **La 5.4 dejó de arrancar en ceros.** Los cuatro simuladores (barras versus,
+  tacómetro de salud, tarjetas y ranking) exigían pulsar «Evaluar» en tres
+  lugares distintos antes de mostrar un solo dato: quien abría la pestaña veía
+  gráficas planas, como si estuviera rota. Ahora cada bloque se anima solo
+  cuando entra en pantalla, con `IntersectionObserver` y un candado
+  (`vsxYaArrancado`) que se libera al pulsar «Reiniciar» o al volver a entrar.
+- **Capa de orientación de la 5.4.** `renderVersusOrientacion()` pinta los tres
+  pasos de juego y, debajo, tres cautelas metodológicas declaradas de frente:
+  el PIB porfiriano es reconstrucción historiográfica y no cuentas nacionales;
+  un Estado de 7.4% del PIB no hace lo mismo que uno de 25%; y 31 años de
+  gobierno no se promedian igual que un sexenio.
+- **Trazabilidad por métrica.** Cada una de las seis variables del catálogo
+  lleva `fuente_dato` y `ref_fuente`, y el encabezado de la gráfica muestra la
+  procedencia con enlace a la referencia. Antes la gráfica afirmaba cifras sin
+  decir de dónde salían.
+- **Línea guía «Nivel Díaz» sobre las barras y distancia por mandatario.** La
+  referencia porfiriana sólo existía en la vista lineal; en barras había que
+  comparar diez alturas a ojo. La línea se mide del DOM (`vsxColocarLineaDiaz`),
+  no con una constante, porque la altura de los rótulos cambia. Cada barra
+  lleva ahora su insignia ▲/▼ con la distancia frente a Díaz.
+- **Bloque «La cifra detrás de la cifra».** Verificación aplicada a las tres
+  estadísticas estelares de la propia pestaña: el célebre primer superávit de
+  1894–1895 fue de $19,861.06 sobre ingresos de $43,074,052.93 (0.05% del
+  presupuesto); el 70.6% de la vía férrea se tendió antes de 1900; y el «0% de
+  ISR» no era una política sino una ausencia, porque el impuesto sobre la renta
+  aparece en 1921 y se vuelve permanente entre 1924 y 1925.
+- **Bloque «El otro balance».** Es el punto ciego que tenía la comparación: el
+  tablero medía cómo se administró el dinero y nada sobre la gente. Cinco
+  indicadores sociales con fuente censal —esperanza de vida (30 años en 1910
+  contra 72.8 y 79.2 en 2026), analfabetismo (82.1% en 1895 y 73% en 1910
+  contra 4.7% en 2020), salario mínimo real ($64.3 en 1877 a $60.1 en 1911, en
+  pesos de 2018), campesinos con tierra propia (15% en 1910) y quién pagaba el
+  Estado. Los dos indicadores cuyas cifras no viven en la misma escala llevan
+  `sin_barras` y no se grafican: una barra llena bajo un rótulo que no es un
+  porcentaje afirma visualmente lo que el dato no sostiene.
+- **Defectos corregidos de paso en la 5.4.** El «Índice Global» de la consola
+  de salud se quedaba en 0/100 mientras el tacómetro marcaba 94, de modo que
+  el tablero se desmentía a sí mismo. El rótulo decía «Ningún Mandatario
+  Seleccionado» cuando sí había uno elegido y lo que faltaba era evaluar. El
+  título de la tabla anunciaba «7 Mandatarios Contemporáneos» cuando la base
+  trae nueve, dos de ellos del siglo XIX, y el de la gráfica acotaba
+  «1988–2026» incluyendo a Santa Anna y a Juárez. Y la métrica ferroviaria se
+  pintaba como «19280» porque el código comparaba `metric.unidad === 'km'`
+  mientras la unidad real es «km de vías»: el formato quedó centralizado en
+  `versusFormatoCifra`, `versusCifraCero` y `versusEsKm`.
+- **Referencias 43 a 46.** Estadísticas sociales del Porfiriato del INEGI,
+  serie de esperanza de vida de CONAPO, Censo de Población y Vivienda 2020 y
+  la reconstrucción del salario mínimo real en pesos de 2018 con datos de la
+  CONASAMI.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

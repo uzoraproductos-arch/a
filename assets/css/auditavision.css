@@ -4853,9 +4853,20 @@ nav.tabbar button.active .num {
   justify-content: space-around;
   gap: 8px;
   min-height: 280px;
-  padding: 24px 8px 10px;
+  /* El canal derecho de 104 px aloja el rótulo de la línea guía «Nivel Díaz»
+     para que no quede encima de la última barra. */
+  padding: 24px 132px 10px 8px;
   position: relative;
   overflow-x: auto;
+}
+
+@media (max-width: 860px) {
+  .versus-bars-stage { padding-right: 8px; }
+  .versus-linea-diaz-rotulo {
+    right: auto;
+    left: 0;
+    top: -17px;
+  }
 }
 
 .versus-bar-item {
@@ -11091,4 +11102,713 @@ nav.tabbar button:focus-visible,
   .canal-item-card { transition: none; }
   .com-ruta:hover,
   .canal-item-card:hover { transform: none; }
+}
+
+/* ==========================================================================
+   SUBPESTANA 5.4 - ORIENTACION, LINEA GUIA Y BALANCE SOCIAL
+   La 5.4 ya tenia cuatro simuladores; lo que no tenia era una entrada que
+   dijera como se juegan, una advertencia sobre los limites de la comparacion
+   ni la contraparte social de las cifras hacendarias. Este bloque los viste.
+   ========================================================================== */
+
+.vsx-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 18px 0 22px;
+}
+
+/* --- Como se juega: los tres pasos --- */
+.vsx-comojugar {
+  background: linear-gradient(160deg, rgba(201, 168, 76, 0.07), rgba(0, 0, 0, 0));
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  padding: 20px 22px 22px;
+}
+
+.vsx-cj-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.vsx-cj-tit {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  color: var(--gold-bright);
+  margin: 5px 0 6px;
+  line-height: 1.25;
+}
+
+.vsx-cj-sub {
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+  max-width: 78ch;
+}
+
+.vsx-pasos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.vsx-paso {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "n   ico"
+    "tit tit"
+    "txt txt"
+    "pis pis";
+  align-items: center;
+  gap: 4px 10px;
+  padding: 15px 16px 13px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--gold);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vsx-paso:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+}
+
+.vsx-paso[data-tono="gold"]    { border-top-color: var(--gold); }
+.vsx-paso[data-tono="emerald"] { border-top-color: var(--emerald-bright); }
+.vsx-paso[data-tono="cyan"]    { border-top-color: var(--cyan); }
+
+.vsx-paso-n {
+  grid-area: n;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--bg-deep, #0b0d14);
+  background: var(--gold);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vsx-paso[data-tono="emerald"] .vsx-paso-n { background: var(--emerald-bright); }
+.vsx-paso[data-tono="cyan"]    .vsx-paso-n { background: var(--cyan); }
+
+.vsx-paso-ico  { grid-area: ico; font-size: 21px; justify-self: end; opacity: 0.9; }
+
+.vsx-paso-tit {
+  grid-area: tit;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text-main);
+  margin-top: 6px;
+}
+
+.vsx-paso-txt {
+  grid-area: txt;
+  font-size: 12.8px;
+  line-height: 1.58;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.vsx-paso-pista {
+  grid-area: pis;
+  justify-self: start;
+  margin-top: 9px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+.vsx-paso[data-tono="emerald"] .vsx-paso-pista {
+  color: var(--emerald-bright);
+  background: var(--emerald-glow);
+  border-color: rgba(46, 204, 113, 0.32);
+}
+
+.vsx-paso[data-tono="cyan"] .vsx-paso-pista {
+  color: var(--cyan);
+  background: rgba(78, 205, 196, 0.12);
+  border-color: rgba(78, 205, 196, 0.32);
+}
+
+/* --- Cautelas metodologicas --- */
+.vsx-cautelas {
+  border: 1px dashed rgba(231, 76, 60, 0.4);
+  border-radius: 14px;
+  background: rgba(231, 76, 60, 0.05);
+  padding: 18px 20px 20px;
+}
+
+.vsx-cau-tit {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--crimson-bright);
+  margin-bottom: 5px;
+}
+
+.vsx-cau-sub {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+  max-width: 78ch;
+}
+
+.vsx-cau-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 12px;
+}
+
+.vsx-cau {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 11px;
+  align-items: start;
+  padding: 13px 14px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+
+.vsx-cau-ico    { font-size: 19px; line-height: 1.2; }
+.vsx-cau-cuerpo { display: flex; flex-direction: column; gap: 4px; }
+
+.vsx-cau-h {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.vsx-cau-txt {
+  font-size: 12.5px;
+  line-height: 1.58;
+  color: var(--text-secondary);
+}
+
+/* --- Procedencia del dato bajo el titulo de la grafica --- */
+.versus-proc {
+  display: block;
+  margin-top: 7px;
+  padding-top: 7px;
+  border-top: 1px dotted rgba(201, 168, 76, 0.3);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 82ch;
+}
+
+.versus-proc-k {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-right: 7px;
+}
+
+/* --- Linea guia del nivel Diaz sobre las barras --- */
+.versus-linea-diaz {
+  position: absolute;
+  left: 10px;
+  right: 132px;
+  height: 0;
+  border-top: 2px dashed rgba(201, 168, 76, 0.75);
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.35s ease;
+}
+
+.versus-linea-diaz-rotulo {
+  position: absolute;
+  left: 100%;
+  margin-left: 8px;
+  top: -10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--gold-bright);
+  background: rgba(10, 12, 20, 0.88);
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+/* --- Insignia de distancia frente a Diaz --- */
+.versus-delta {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.versus-bars-stage.evaluado .versus-delta { opacity: 1; }
+
+.versus-delta[data-estado="mejor"] {
+  color: var(--emerald-bright);
+  background: var(--emerald-glow);
+  border: 1px solid rgba(46, 204, 113, 0.38);
+}
+
+.versus-delta[data-estado="peor"] {
+  color: var(--crimson-bright);
+  background: var(--crimson-glow);
+  border: 1px solid rgba(231, 76, 60, 0.38);
+}
+
+.versus-delta[data-estado="neutro"] {
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+}
+
+/* --- El otro balance: indicadores sociales --- */
+.vbs-wrap {
+  margin: 26px 0 8px;
+  padding: 24px;
+  border: 1px solid rgba(231, 76, 60, 0.35);
+  border-radius: 16px;
+  background:
+    radial-gradient(1100px 240px at 12% -12%, rgba(231, 76, 60, 0.09), transparent 62%),
+    var(--bg-card);
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.3);
+}
+
+.vbs-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--crimson-bright);
+  background: var(--crimson-glow);
+  border: 1px solid rgba(231, 76, 60, 0.35);
+  border-radius: 20px;
+  padding: 3px 11px;
+}
+
+.vbs-tit {
+  font-family: var(--font-serif);
+  font-size: 23px;
+  color: var(--gold-bright);
+  margin: 10px 0 7px;
+  line-height: 1.25;
+}
+
+.vbs-entrada {
+  font-size: 13.8px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+  max-width: 78ch;
+}
+
+.vbs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 14px;
+}
+
+.vbs-ind {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 16px 17px 15px;
+  border-radius: 13px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--gold);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vbs-ind:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+}
+
+.vbs-ind[data-tono="rojo"]  { border-left-color: var(--crimson-bright); }
+.vbs-ind[data-tono="ambar"] { border-left-color: #f1c40f; }
+.vbs-ind[data-tono="cian"]  { border-left-color: var(--cyan); }
+
+.vbs-ind-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 5px 11px;
+}
+
+.vbs-ind-ico { font-size: 22px; grid-row: span 2; }
+
+.vbs-ind-nom {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.vbs-ind-brecha {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.vbs-duelo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.vbs-lado {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 11px 12px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+}
+
+.vbs-lado[data-lado="antes"] { border-color: rgba(201, 168, 76, 0.28); }
+.vbs-lado[data-lado="hoy"]   { border-color: rgba(78, 205, 196, 0.26); }
+
+.vbs-lado-k {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.vbs-sincomp {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 8.5px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--gold);
+  font-style: italic;
+}
+
+.vbs-lado-v {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--gold-bright);
+}
+
+.vbs-lado[data-lado="hoy"] .vbs-lado-v { color: var(--cyan); }
+
+.vbs-riel {
+  height: 7px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.vbs-barra {
+  display: block;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #856a21, var(--gold-bright));
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vbs-barra[data-lado="hoy"] {
+  background: linear-gradient(90deg, #1e7f78, var(--cyan));
+}
+
+.vbs-lado-n {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.vbs-nota-escala {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  font-style: italic;
+  border-left: 2px solid rgba(201, 168, 76, 0.35);
+  padding-left: 9px;
+}
+
+.vbs-lectura {
+  font-size: 13px;
+  line-height: 1.62;
+  color: var(--text-secondary);
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px dotted var(--border-subtle);
+  max-width: 78ch;
+}
+
+.vbs-cierre {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 11px;
+  background: rgba(231, 76, 60, 0.07);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.vbs-cierre-ico { font-size: 19px; }
+
+.vbs-cierre p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.62;
+  color: var(--text-secondary);
+  max-width: 78ch;
+}
+
+/* --- Fuentes de la subpestana --- */
+.vsx-fuentes {
+  margin: 18px 0 6px;
+  padding: 20px 22px;
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  background: var(--bg-card);
+}
+
+.vsx-fuentes-tit {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--gold-bright);
+  margin-bottom: 11px;
+}
+
+.vsx-fuentes-lista {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.vsx-fuente-b {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 7px 9px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.vsx-fuente-b:hover {
+  background: rgba(201, 168, 76, 0.08);
+  border-color: rgba(201, 168, 76, 0.3);
+}
+
+.vsx-fuente-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.vsx-fuente-t {
+  font-size: 12.3px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.vsx-fuentes-nota {
+  margin: 0;
+  padding-top: 11px;
+  border-top: 1px dotted var(--border-subtle);
+  font-size: 11.8px;
+  line-height: 1.6;
+  color: var(--text-dim);
+  max-width: 82ch;
+}
+
+/* --- Reacomodo en pantallas angostas --- */
+@media (max-width: 720px) {
+  .vbs-duelo      { grid-template-columns: 1fr; }
+  .vbs-grid       { grid-template-columns: 1fr; }
+  .vsx-cau-grid   { grid-template-columns: 1fr; }
+  .vsx-pasos      { grid-template-columns: 1fr; }
+  .vbs-wrap       { padding: 18px 15px; }
+  .vsx-comojugar  { padding: 16px 15px 18px; }
+  .vsx-fuentes    { padding: 16px 15px; }
+  .vbs-tit        { font-size: 20px; }
+  .versus-linea-diaz-rotulo { font-size: 9px; padding: 1px 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vsx-paso,
+  .vbs-ind { transition: none; }
+  .vsx-paso:hover,
+  .vbs-ind:hover { transform: none; }
+  .vbs-barra,
+  .versus-linea-diaz,
+  .versus-delta { transition: none; }
+}
+
+/* --- La cifra detras de la cifra: verificacion de las cifras estelares --- */
+.vpr-wrap {
+  margin: 22px 0 8px;
+  padding: 24px;
+  border: 1px solid rgba(78, 205, 196, 0.32);
+  border-radius: 16px;
+  background:
+    radial-gradient(1000px 220px at 88% -14%, rgba(78, 205, 196, 0.08), transparent 60%),
+    var(--bg-card);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+.vpr-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--cyan);
+  background: rgba(78, 205, 196, 0.1);
+  border: 1px solid rgba(78, 205, 196, 0.32);
+  border-radius: 20px;
+  padding: 3px 11px;
+}
+
+.vpr-tit {
+  font-family: var(--font-serif);
+  font-size: 23px;
+  color: var(--gold-bright);
+  margin: 10px 0 7px;
+  line-height: 1.25;
+}
+
+.vpr-entrada {
+  font-size: 13.8px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+  max-width: 78ch;
+}
+
+.vpr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.vpr-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 17px 15px;
+  border-radius: 13px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--cyan);
+}
+
+.vpr-item-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 4px 11px;
+}
+
+.vpr-item-ico { font-size: 22px; grid-row: span 2; }
+
+.vpr-item-n {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.vpr-item-tit {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.28;
+}
+
+.vpr-item-cuerpo {
+  font-size: 13px;
+  line-height: 1.64;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 78ch;
+}
+
+.vpr-leccion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding: 11px 13px;
+  border-radius: 9px;
+  background: rgba(201, 168, 76, 0.08);
+  border-left: 3px solid var(--gold);
+}
+
+.vpr-leccion-k {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.vpr-leccion-t {
+  font-size: 12.5px;
+  line-height: 1.58;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 720px) {
+  .vpr-grid { grid-template-columns: 1fr; }
+  .vpr-wrap { padding: 18px 15px; }
+  .vpr-tit  { font-size: 20px; }
 }

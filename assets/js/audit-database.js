@@ -5081,6 +5081,42 @@ window.AUDIT_DB = {
       "descripcion": "Regula la contratación, ejecución y finiquito de la obra pública federal. Establece el expediente único de obra y la bitácora como registro obligatorio de su ejecución: son los documentos que permiten contrastar lo contratado contra lo construido, y por tanto los primeros que conviene solicitar antes de señalar una obra. Fue reformada el 16 de abril de 2025, el mismo día en que se publicó la nueva Ley de Adquisiciones."
     },
     {
+        "num": 43,
+        "id": "ref-inegi-social-porfiriato",
+        "categoria": "fuentes_oficiales",
+        "categoria_nombre": "Fuentes Estadísticas Oficiales",
+        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Estadísticas sociales del Porfiriato, 1877–1910. Reedición de la obra de la Dirección General de Estadística. Acervo histórico del INEGI (México).",
+        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf",
+        "descripcion": "Compilación oficial de los indicadores sociales del régimen porfirista levantados en los tres primeros censos nacionales (1895, 1900 y 1910). Es la fuente que permite contrastar las cifras hacendarias del Porfiriato —superávit, deuda, ferrocarriles— contra lo que ocurría con la población: alfabetización, mortalidad, escuelas y condiciones de vida. Sin esta contraparte, el balance fiscal del régimen se lee como un éxito sin costo."
+      },
+    {
+        "num": 44,
+        "id": "ref-conapo-esperanza-vida",
+        "categoria": "fuentes_oficiales",
+        "categoria_nombre": "Fuentes Estadísticas Oficiales",
+        "cita_apa": "Consejo Nacional de Población [CONAPO] e Instituto Nacional de Estadística y Geografía [INEGI]. Esperanza de vida al nacimiento por entidad federativa según sexo, serie anual 2010–2026. Tabulados interactivos de mortalidad (México).",
+        "url": "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648",
+        "descripcion": "Serie oficial de esperanza de vida al nacer que publica el INEGI con las proyecciones de CONAPO. Para 2026 estima 72.8 años en hombres y 79.2 en mujeres, frente a los 30 años que registraba el país en 1910. Es el indicador que mide, en años de vida, la distancia entre un Estado que gastaba 7.4% del PIB y uno que gasta cerca de 25%."
+      },
+    {
+        "num": 45,
+        "id": "ref-inegi-censo-2020",
+        "categoria": "fuentes_oficiales",
+        "categoria_nombre": "Fuentes Estadísticas Oficiales",
+        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. (2021). Censo de Población y Vivienda 2020: características educativas de la población. Resultados definitivos (México).",
+        "url": "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/",
+        "descripcion": "Censo que fija el analfabetismo nacional en 4.7% de la población de 15 años y más (4,456,431 personas), frente al 6.9% de 2010. Es el punto de comparación censo contra censo con el 82.1% que registró el primer censo nacional de 1895 y con el 73% estimado para 1910, y el dato que impide leer el Porfiriato como una etapa de progreso social."
+      },
+    {
+        "num": 46,
+        "id": "ref-salario-real-historico",
+        "categoria": "investigacion_civica",
+        "categoria_nombre": "Investigación Civica & Periodística",
+        "cita_apa": "Urzúa, C. M. (23 de diciembre de 2019). Salario justo. El Universal, sección Opinión. Serie de salario mínimo real reconstruida con datos de la Comisión Nacional de los Salarios Mínimos [CONASAMI] (México).",
+        "url": "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/",
+        "descripcion": "Reconstrucción del salario mínimo real mexicano en pesos constantes de 2018 desde 1877. Documenta que el jornal equivalía a $64.3 en 1877 y había caído a $60.1 en 1911: tras 34 años de crecimiento, ferrocarriles y superávit, el trabajador compraba menos que al principio. El máximo porfiriano fue $78.3 en 1899 y el mínimo $57.1 en 1910, el año anterior a la caída del régimen."
+      },
+    {
       "num": 42,
       "id": "ref-lgmde",
       "categoria": "leyes_federales",
@@ -6814,6 +6850,127 @@ window.AUDIT_DB = {
           "sombras": "Despojo de tierras comunales por las Leyes de Deslinde (85% de campesinos sin tierra), analfabetismo del 82%, explotación inhumana en henequeneras y minas, tiendas de raya y nula democracia electoral."
         }
       },
+      "precisiones": {
+        "titulo": "La cifra detrás de la cifra",
+        "entrada": "Las tres estadísticas más citadas del Porfiriato son ciertas. También son más frágiles de lo que parecen cuando se las mira de cerca. Quien vaya a usarlas en una discusión pública conviene que conozca el matiz antes que su contraparte.",
+        "items": [
+          {
+            "ico": "⚖️",
+            "titular": "El superávit histórico fue de $19,861 pesos",
+            "cuerpo": "El célebre primer superávit de la hacienda mexicana, el del ejercicio 1894–1895, cerró con ingresos por $43,074,052.93 y gastos por $43,054,371.87. El sobrante fue de <b>$19,861.06</b>: cinco centésimas de punto porcentual del presupuesto. El logro es real —era la primera vez en la vida independiente del país—, pero el margen fue del grosor de un cabello. Los años siguientes sí lo consolidaron: 5.5 millones en 1895–1896 y catorce millones acumulados en el Tesoro para 1898–1899.",
+            "leccion": "Un superávit no mide prosperidad: mide que los ingresos superaron a los gastos. Con un gasto público del 7.4% del PIB, superar los ingresos era más fácil."
+          },
+          {
+            "ico": "🛤️",
+            "titular": "Siete de cada diez kilómetros se tendieron antes de 1900",
+            "cuerpo": "La red pasó de <b>640 km en 1876</b> a <b>19,280 km en 1910</b>, y la cifra es exacta. Pero el reparto en el tiempo importa: 1,073 km en 1880, 5,731 en 1884, 9,544 en 1890 y <b>13,615 en 1900</b>, es decir el 70.6% del total. El gran salto ocurre en la década de 1880, cuando se otorgaron las concesiones a las compañías estadounidenses; la última década del régimen aporta menos de seis mil kilómetros.",
+            "leccion": "Atribuir los 19,280 km a «treinta años de estabilidad» invierte el orden: la expansión ferroviaria es anterior al periodo de mayor estabilidad, no su consecuencia."
+          },
+          {
+            "ico": "🧾",
+            "titular": "«0% de ISR» no era una política: era una ausencia",
+            "cuerpo": "El tablero marca 0% de impuesto sobre la renta bajo Díaz, y es correcto. La razón es que <b>esa figura fiscal no existía en México</b>: aparece en 1921 como el Impuesto del Centenario, un gravamen extraordinario de un mes, y se vuelve permanente entre 1924 y 1925. El Estado porfiriano se financiaba gravando el comercio exterior —52% de sus ingresos venía de aduanas— y el consumo interno a través del timbre.",
+            "leccion": "Un Estado que grava importaciones en lugar de ingresos recauda poco y redistribuye menos. El 0% no alivió al trabajador: significó que no había nada que repartirle."
+          }
+        ]
+      },
+      "balance_social": {
+        "titulo": "El otro balance: lo que las cifras hacendarias no miden",
+        "entrada": "Las seis variables del simulador miden cómo se administró el dinero público. Ninguna mide qué pasaba con la gente. Un Estado puede alcanzar superávit justamente porque no paga escuelas, hospitales ni pensiones: el Porfiriato gastaba 7.4% del PIB y destinaba 4% de ese gasto a educación. Estos cinco indicadores son la contraparte, y están tomados de censos y series oficiales, no de interpretaciones.",
+        "advertencia": "Este bloque no invalida las cifras fiscales del Porfiriato: son correctas. Muestra el precio que no aparece en la contabilidad, y que ninguna comparación honesta entre 1910 y 2026 puede omitir.",
+        "indicadores": [
+          {
+            "id": "vida",
+            "icono": "🫀",
+            "nombre": "Esperanza de vida al nacer",
+            "porfiriato_val": "30 años",
+            "porfiriato_nota": "En 1910, apenas cinco años más que en 1870.",
+            "hoy_val": "72.8 · 79.2 años",
+            "hoy_nota": "Hombres y mujeres, proyección CONAPO para 2026.",
+            "brecha": "Más del doble de vida",
+            "lectura": "La diferencia entre un Estado que no sostenía sistema de salud y uno que destina cerca de una cuarta parte del PIB al gasto público. El superávit de 1894 convivía con una vida promedio de treinta años.",
+            "tono": "rojo",
+            "ref": "ref-conapo-esperanza-vida",
+            "escala_porfiriato": 30,
+            "escala_hoy": 76,
+            "escala_max": 80,
+            "escala_unidad": "años"
+          },
+          {
+            "id": "alfabetismo",
+            "icono": "📖",
+            "nombre": "Analfabetismo",
+            "porfiriato_val": "82.1% → 73%",
+            "porfiriato_nota": "Censo de 1895 (mayores de 6 años); estimación para 1910.",
+            "hoy_val": "4.7%",
+            "hoy_nota": "Censo de Población y Vivienda 2020, población de 15 años y más.",
+            "brecha": "De mayoría a excepción",
+            "lectura": "El régimen sí redujo el analfabetismo, y conviene decirlo: la tasa anual de reducción entre 1895 y 1910 fue mayor que la de 1910 a 1940. Pero partía de un país donde ocho de cada diez personas no sabían leer, y lo dejó donde siete de cada diez seguían sin saber.",
+            "tono": "ambar",
+            "ref": "ref-inegi-censo-2020",
+            "escala_porfiriato": 73,
+            "escala_hoy": 4.7,
+            "escala_max": 100,
+            "escala_unidad": "%",
+            "invertido": true
+          },
+          {
+            "id": "salario",
+            "icono": "💼",
+            "nombre": "Salario mínimo real",
+            "porfiriato_val": "$64.3 → $60.1",
+            "porfiriato_nota": "Pesos de 2018. Pico de $78.3 en 1899; piso de $57.1 en 1910.",
+            "hoy_val": "+110% real",
+            "hoy_nota": "Incremento real acumulado del salario mínimo entre 2018 y 2024.",
+            "brecha": "34 años para perder poder de compra",
+            "lectura": "Es el dato más incómodo de la balanza. Tras tres décadas de ferrocarriles, inversión extranjera y crédito de primera categoría, el jornal compraba menos en 1911 que en 1877. El crecimiento fue real; no llegó al salario.",
+            "tono": "rojo",
+            "ref": "ref-salario-real-historico",
+            "escala_porfiriato": 60.1,
+            "escala_hoy": 64.3,
+            "escala_max": 80,
+            "escala_unidad": "pesos de 2018",
+            "sin_barras": true,
+            "nota_escala": "Las dos cifras del Porfiriato son puntos de una misma serie en pesos de 2018; la de hoy es una variación porcentual sobre otra base. No se grafican juntas porque no son comparables en una sola escala, y fingir que lo fueran sería justo el atajo que esta plataforma no se permite."
+          },
+          {
+            "id": "tierra",
+            "icono": "🌾",
+            "nombre": "Campesinos dueños de su tierra",
+            "porfiriato_val": "15%",
+            "porfiriato_nota": "En 1910, 85% de los campesinos no poseía tierra propia.",
+            "hoy_val": "Reparto agrario",
+            "hoy_nota": "El artículo 27 constitucional de 1917 y el ejido nacen como respuesta directa a esta cifra.",
+            "brecha": "1% de propietarios con tres cuartas partes del suelo agrícola",
+            "lectura": "Las leyes de deslinde de 1883 convirtieron tierra comunal en propiedad privada: del 40% de suelo comunal en la primera mitad del siglo XIX quedaba 5% en 1910, y 267 latifundistas concentraban 120 millones de hectáreas. No es un efecto colateral del modelo: es el modelo.",
+            "tono": "rojo",
+            "ref": "ref-inegi-social-porfiriato",
+            "escala_porfiriato": 15,
+            "escala_hoy": 100,
+            "escala_max": 100,
+            "escala_unidad": "% con tierra propia",
+            "sin_barras": true,
+            "sin_comparativo_moderno": true
+          },
+          {
+            "id": "impuesto",
+            "icono": "🧾",
+            "nombre": "Quién pagaba el Estado",
+            "porfiriato_val": "0% ISR",
+            "porfiriato_nota": "52% aduanas y 28% timbres. El impuesto sobre la renta no existía: aparece en 1921 como gravamen extraordinario de un mes y se vuelve permanente entre 1924 y 1925.",
+            "hoy_val": "ISR + IVA",
+            "hoy_nota": "Más del 88% de los ingresos tributarios no petroleros.",
+            "brecha": "Del comercio exterior al salario",
+            "lectura": "El «0% de ISR» del tablero no significa que el Porfiriato fuera un paraíso fiscal para el trabajador: significa que el Estado se financiaba gravando el comercio exterior y el consumo, y que por eso podía ser pequeño. Un Estado que no cobra renta tampoco reparte.",
+            "tono": "cian",
+            "ref": "ref-inegi-social-porfiriato",
+            "escala_porfiriato": 0,
+            "escala_hoy": 88,
+            "escala_max": 100,
+            "escala_unidad": "% de ingresos vía renta y consumo"
+          }
+        ]
+      },
       "metricas_catalogo": {
         "pib_crecimiento": {
           "nombre": "Crecimiento del PIB (% Promedio Anual)",
@@ -6822,7 +6979,9 @@ window.AUDIT_DB = {
           "diaz_val": 3.3,
           "diaz_str": "+3.3% anual",
           "descripcion": "Tasa promedio geométrica de expansión del Producto Interno Bruto durante la gestión.",
-          "sentido_positivo": true
+          "sentido_positivo": true,
+          "fuente_dato": "Serie de PIB del INEGI para el periodo contemporáneo; para el Porfiriato, reconstrucción historiográfica de El Colegio de México, no cuentas nacionales.",
+          "ref_fuente": "ref-inegi-cuentas"
         },
         "deuda_pib": {
           "nombre": "Saldo de Deuda Pública (% del PIB)",
@@ -6831,7 +6990,9 @@ window.AUDIT_DB = {
           "diaz_val": 30.5,
           "diaz_str": "30.5% del PIB",
           "descripcion": "Saldo histórico de los requerimientos financieros del sector público respecto al PIB.",
-          "sentido_positivo": false
+          "sentido_positivo": false,
+          "fuente_dato": "Saldo Histórico de los Requerimientos Financieros del Sector Público, SHCP; la cifra porfiriana proviene de la deuda consolidada de 1899 en patrón oro.",
+          "ref_fuente": "ref-inegi-cuentas"
         },
         "balance_fiscal": {
           "nombre": "Balance Fiscal: Superávit (+) o Déficit (-)",
@@ -6840,7 +7001,9 @@ window.AUDIT_DB = {
           "diaz_val": 0.8,
           "diaz_str": "+0.8% del PIB (Superávit)",
           "descripcion": "Diferencia neta entre ingresos públicos y egresos totales del gobierno.",
-          "sentido_positivo": true
+          "sentido_positivo": true,
+          "fuente_dato": "Balance público como proporción del PIB, SHCP e Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública; el superávit de 1894–1895 está documentado en las memorias de Hacienda de Limantour.",
+          "ref_fuente": "ref-inegi-cuentas"
         },
         "ingresos_pib": {
           "nombre": "Ingresos Públicos Totales (% del PIB)",
@@ -6849,7 +7012,9 @@ window.AUDIT_DB = {
           "diaz_val": 8.2,
           "diaz_str": "8.2% del PIB",
           "descripcion": "Presión fiscal y recaudación total de recursos propios respecto a la economía.",
-          "sentido_positivo": true
+          "sentido_positivo": true,
+          "fuente_dato": "Ley de Ingresos de la Federación y estadísticas oportunas de finanzas públicas de la SHCP; la estructura tributaria porfiriana procede de las memorias de Hacienda.",
+          "ref_fuente": "ref-inegi-cuentas"
         },
         "gasto_pib": {
           "nombre": "Tamaño del Gasto Público Neto (% del PIB)",
@@ -6858,7 +7023,9 @@ window.AUDIT_DB = {
           "diaz_val": 7.4,
           "diaz_str": "7.4% del PIB",
           "descripcion": "Volumen de gasto ejercido por el Estado en relación al tamaño del PIB.",
-          "sentido_positivo": null
+          "sentido_positivo": null,
+          "fuente_dato": "Cuenta Pública y Presupuesto de Egresos de la Federación; el gasto porfiriano se reconstruye a partir de los presupuestos anuales del periodo.",
+          "ref_fuente": "ref-pef2026"
         },
         "ferrocarriles_km": {
           "nombre": "Infraestructura Ferroviaria (km acumulados)",
@@ -6867,7 +7034,9 @@ window.AUDIT_DB = {
           "diaz_val": 19280,
           "diaz_str": "19,280 km construidos",
           "descripcion": "Kilómetros de tendido férreo construidos, rescatados o impulsados para pasajeros y carga.",
-          "sentido_positivo": true
+          "sentido_positivo": true,
+          "fuente_dato": "Kilometraje de vía férrea del INEGI y de la Agencia Reguladora del Transporte Ferroviario; la cifra de 1910 procede de Ferrocarriles Nacionales de México.",
+          "ref_fuente": "ref-inegi-social-porfiriato"
         }
       },
       "mandatarios_comparativa": [
