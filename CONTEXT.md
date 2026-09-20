@@ -258,10 +258,53 @@ de los 32 circuitos.
   inserción. Y la búsqueda del glosario prioriza la coincidencia exacta del
   término: antes, saltar desde una nota al pie abría la ficha vecina.
 
+- **Subpestaña 4.2 reorganizada (Pleno y Ministros).** Se aplicó la misma
+  receta de 4.1 sin reescribir el contenido: una capa de orientación arriba
+  (`#plenoOrientacion`, función `renderPlenoOrientacion`) con cinco cifras de
+  entrada, el contraste antes/hoy del régimen de la Corte y las dos
+  composiciones convertidas en tarjetas grandes; debajo, una **ficha cerrada
+  por cada integrante** (`renderPlenoFichas`, clases `.min-*`) con avatar de
+  iniciales, insignia de origen, especialidad y tres cifras: sueldo neto,
+  plazas de la ponencia y costo mensual del despacho. La tabla comparativa
+  anterior se conserva íntegra como **vista alterna** mediante el conmutador
+  `.pleno-modo-btn` (`setPlenoModoVista`). La gráfica comparativa y el bloque
+  de cálculos siguen intactos, ahora dentro de bloques `.fj-bloque` con
+  encabezado y entradilla. Las cuatro tarjetas métricas sueltas del encabezado
+  se disolvieron en la capa de cifras, y la cinta de fuentes se convirtió en un
+  bloque 4 con nota metodológica.
+
+- **Dos cifras de 4.2 se calculan de la base, no se escriben a mano**: las
+  plazas totales de las nueve ponencias (226) y el costo anual agregado
+  ($217 mdp) se derivan sumando `asesores_plazas` y `costo_mensual_ponencia`.
+  Si la base cambia, la cifra cambia sola. La nota metodológica advierte que
+  ese costo es una suma a tabulador y no una partida etiquetada del PEF.
+
+- **Corrección factual sobre la duración del encargo.** Tanto 4.1 como 4.2
+  afirmaban que las ministras y ministros electos tienen encargos de doce
+  años. Es incorrecto para esta primera Corte: el artículo tercero transitorio
+  del decreto del 15 de septiembre de 2024 fijó periodos **escalonados de 8 y
+  11 años** según los votos obtenidos, y las tres ministras que ya estaban en
+  funciones agotan lo que resta de su periodo original de quince años. La
+  regla general de doce años del artículo 94 corre a partir de 2033. Corregido
+  en los tres lugares donde aparecía.
+
+- **Barra de pestañas: se encimaban los rótulos al cambiar el tamaño.** Los
+  botones tenían `flex: 1 1 auto` con `white-space: nowrap`. Entre 880 y
+  1130 px de ancho se encogían por debajo del ancho de su propio texto y el
+  rótulo se salía de la caja, montándose sobre el vecino: nueve de nueve
+  botones desbordados a 880 px. Ahora es `flex: 1 0 auto` con `flex-wrap: wrap`
+  y tope de crecimiento del 22%: la fila baja a un segundo renglón centrado en
+  lugar de comprimir, y por debajo de 860 px se conserva la pista horizontal
+  de teléfono (`flex-wrap: nowrap`). Verificado en barrido de 1600 a 360 px de
+  veinte en veinte: cero desbordes y cero solapamientos.
+
 ### Pendiente
 
-- **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
-  previos a la reforma. El usuario pidió expresamente no tocarla todavía.
+- **Fotografía e ilustración**: la plataforma sigue sin una sola etiqueta
+  `<img>`. Las «figuritas» de 4.1 y 4.2 son iconos tipográficos y bloques de
+  color. Antes de incorporar imágenes hay que decidir su procedencia (banco
+  libre o ilustración propia): una imagen de origen dudoso desacredita tanto
+  como un dato inventado.
 - **Cifras presupuestales del Nivel 4 de 4.1**: las plazas y remuneraciones
   corresponden a la estructura de once ponencias y al tope salarial anterior.
   Hay una advertencia metodológica visible en la ficha. Deben contrastarse

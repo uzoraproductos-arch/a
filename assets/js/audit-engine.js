@@ -1868,6 +1868,11 @@
       } else if (subKey === 'estructura') {
         renderPjOrientacion();
         setPjView(currentPjView);
+      } else if (subKey === 'pleno') {
+        renderPlenoOrientacion();
+        renderPlenoFichas();
+        renderJudicialMinisters();
+        renderJudicialMinistersChart();
       } else {
         renderJudicialMinisters();
         if (subKey === 'prestaciones') {
@@ -2028,7 +2033,10 @@
     'fj-det-antes', 'fj-det-fund', 'fj-nav-btn', 'fj-tl-play',
     'pjo-kpi-num', 'pjo-kpi-lab', 'pjo-kpi-sub', 'pjo-modo-pie',
     'pjo-modo-tit', 'pjo-col-tit', 'pjo-col-fecha', 'pj-peldano-tit',
-    'pj-peldano-cta', 'pj-peldano-n', 'pj-escalera-tit', 'pj-node-badge'
+    'pj-peldano-cta', 'pj-peldano-n', 'pj-escalera-tit', 'pj-node-badge',
+    'min-avatar', 'min-num', 'min-nom', 'min-cargo', 'min-badge',
+    'min-dato-lab', 'min-dato-val', 'min-dato-pie', 'min-chip', 'min-ver',
+    'min-grupo-tit', 'pleno-modo-btn'
   ]);
 
   let autolinkIndice = null;
@@ -2589,6 +2597,261 @@
   }
 
 
+  /* ======================================================================
+     SUBPESTANA 4.2 - CAPA VISUAL DEL PLENO
+     Cifras de entrada, contraste antes/hoy del regimen de la Corte y las
+     dos composiciones como tarjetas grandes. Debajo, cada integrante en
+     su propia ficha cerrada, con la tabla comparativa como vista alterna.
+     No cambia el contenido: lo ordena para poder leerlo.
+     ====================================================================== */
+
+  let plenoModoVista = 'fichas'; // 'fichas' o 'tabla'
+
+  const PLENO_VISTAS = [
+    { id: 'nuevo', n: '1', ico: '🏛️', tit: 'El Pleno que resuelve hoy',
+      txt: 'Las nueve personas que desde el 1 de septiembre de 2025 deciden los asuntos constitucionales del país, cada una con su equipo, su sueldo y lo que cuesta su ponencia.',
+      pie: '9 integrantes · electos por voto popular' },
+    { id: 'transicion', n: '2', ico: '📜', tit: 'El Pleno que se fue',
+      txt: 'La composición anterior y cómo salió cada quien: siete renuncias presentadas al Senado, un periodo constitucional concluido y tres ministras que sí compitieron en la elección.',
+      pie: '11 integrantes · 7 renuncias y 1 periodo concluido' }
+  ];
+
+  function plenoLista(vista) {
+    const jr = DB.judicial_reservado;
+    if (!jr || !jr.scjn_analisis_salarial) return [];
+    const sa = jr.scjn_analisis_salarial;
+    return vista === 'nuevo'
+      ? (sa.nuevo_pleno_oficial_scjn || sa.ministros || [])
+      : (sa.pleno_transicion_2024_2025 || []);
+  }
+
+  function plenoNum(txt) {
+    return parseInt(String(txt || '').replace(/[^0-9]/g, ''), 10) || 0;
+  }
+
+  function plenoIniciales(nombre) {
+    const partes = String(nombre || '').trim().split(/\s+/);
+    const a = partes[0] ? partes[0].charAt(0) : '';
+    const b = partes[1] ? partes[1].charAt(0) : '';
+    return (a + b).toUpperCase();
+  }
+
+  function plenoEsPresidencia(m) {
+    return m.tipo_cargo === 'presidente' ||
+      (m.cargo && /presidenta?\s+de\s+la\s+(suprema|scjn)/i.test(m.cargo)) ||
+      (m.cargo && /ministra?\s+presidenta?/i.test(m.cargo));
+  }
+
+  function renderPlenoOrientacion() {
+    const cont = document.getElementById('plenoOrientacion');
+    if (!cont) return;
+
+    const nuevos = plenoLista('nuevo');
+    const plazas = nuevos.reduce((a, m) => a + (parseInt(m.asesores_plazas, 10) || 0), 0);
+    const costoMes = nuevos.reduce((a, m) => a + plenoNum(m.costo_mensual_ponencia), 0);
+    const costoAnio = Math.round((costoMes * 12) / 1000000);
+
+    const kpis = [
+      { ico: '⚖️', num: String(nuevos.length), lab: 'Integran el Pleno',
+        sub: 'Electas y electos por voto popular · desde el 1 sep 2025', tono: 'gold' },
+      { ico: '💵', num: '$134,310', lab: 'Tope neto al mes por persona',
+        sub: 'Artículo 127 constitucional · antes eran $206,948', tono: 'emerald' },
+      { ico: '👥', num: String(plazas), lab: 'Plazas de apoyo en las 9 ponencias',
+        sub: 'De 24 a 28 por ponencia · antes de 32 a 38', tono: 'cyan' },
+      { ico: '🏛️', num: '$' + costoAnio, lab: 'Millones al año cuestan las ponencias',
+        sub: 'Suma de los nueve despachos · antes $376.2 mdp', tono: 'gold' },
+      { ico: '🔴', num: '$15,434', lab: 'Millones en fideicomisos observados',
+        sub: '13 fondos judiciales señalados por la ASF', tono: 'crimson' }
+    ];
+
+    const antes = [
+      '<b>11</b> ministras y ministros, repartidos en un Pleno y <b>dos Salas</b> <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-reforma-judicial\')">[19]</a>',
+      'Sueldo neto de <b>$206,948</b> al mes: 54% por encima del tope constitucional <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-manual-remun-pjf\')">[22]</a>',
+      'Designados por el <b>Senado</b> a propuesta del Ejecutivo, por quince años',
+      'Seguro de gastos médicos privado y <b>seguro de separación individualizado</b> con cargo al erario',
+      'De <b>32 a 38 plazas</b> por ponencia · <b>$376.2 mdp</b> al año en los once despachos <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-pnt-asesores-scjn\')">[25]</a>'
+    ];
+    const hoy = [
+      '<b>9</b> ministras y ministros que sesionan <b>sólo en Pleno</b> <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-reforma-judicial\')">[19]</a>',
+      'Sueldo neto de <b>$134,310</b> al mes: el mismo tope que rige para la Presidencia de la República <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-cpeum-art127\')">[20]</a>',
+      'Electas y electos por <b>voto popular</b>. Esta primera Corte tiene encargos <b>escalonados de 8 y 11 años</b> según los votos obtenidos; las tres ministras que ya estaban en funciones agotan lo que les resta de su periodo original de quince años <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-reforma-judicial\')">[19]</a>',
+      'Sin seguros privados ni seguro de separación pagados con dinero público',
+      'De <b>24 a 28 plazas</b> por ponencia · <b>$' + costoAnio + ' mdp</b> al año en los nueve despachos'
+    ];
+
+    cont.innerHTML =
+      '<div class="pjo-wrap">' +
+
+        '<div class="pjo-kpis">' +
+          kpis.map(k =>
+            '<div class="pjo-kpi" data-tono="' + k.tono + '">' +
+              '<span class="pjo-kpi-ico" aria-hidden="true">' + k.ico + '</span>' +
+              '<span class="pjo-kpi-num">' + k.num + '</span>' +
+              '<span class="pjo-kpi-lab">' + k.lab + '</span>' +
+              '<span class="pjo-kpi-sub">' + k.sub + '</span>' +
+            '</div>').join('') +
+        '</div>' +
+
+        '<div class="pjo-cambio">' +
+          '<div class="pjo-cambio-tit">Qué cambió en el sueldo y en la integración</div>' +
+          '<p class="pjo-cambio-sub">Las cifras que circulan sobre lo que gana una ministra o un ministro suelen ser las del régimen anterior. Aquí están las dos, una junto a la otra, para que quede claro de qué año habla cada número.</p>' +
+          '<div class="pjo-cambio-cols">' +
+            '<div class="pjo-col" data-lado="antes">' +
+              '<div class="pjo-col-tit">Como era</div>' +
+              '<div class="pjo-col-fecha">Hasta el 31 de agosto de 2025</div>' +
+              '<ul>' + antes.map(x => '<li>' + x + '</li>').join('') + '</ul>' +
+            '</div>' +
+            '<div class="pjo-flecha" aria-hidden="true">&#10142;</div>' +
+            '<div class="pjo-col" data-lado="hoy">' +
+              '<div class="pjo-col-tit">Como es hoy</div>' +
+              '<div class="pjo-col-fecha">Desde el 1 de septiembre de 2025</div>' +
+              '<ul>' + hoy.map(x => '<li>' + x + '</li>').join('') + '</ul>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pjo-cambio-pie"><strong>Cómo leer el ahorro:</strong> los $' + costoAnio + ' millones anuales no son un recorte decretado, sino la suma de los nueve despachos tal como están integrados hoy (' + plazas + ' plazas en total). La cifra del régimen anterior, $376.2 mdp, corresponde a once ponencias con plantillas de 32 a 38 personas. La comparación es entre estructuras distintas, no entre presupuestos aprobados. <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-pef-ramo03\')">[21]</a></div>' +
+        '</div>' +
+
+        '<div class="pjo-modos" role="tablist" aria-label="Composiciones del Pleno de la Suprema Corte">' +
+          PLENO_VISTAS.map(v =>
+            '<button type="button" class="pjo-modo' + (activeJudicialPlenoTab === v.id ? ' active' : '') + '"' +
+            ' id="plenoVista_' + v.id + '" role="tab" aria-selected="' + (activeJudicialPlenoTab === v.id) + '"' +
+            ' onclick="window.AuditEngine.setJudicialPlenoView(\'' + v.id + '\')">' +
+              '<span class="pjo-modo-num" aria-hidden="true">' + v.n + '</span>' +
+              '<span class="pjo-modo-ico" aria-hidden="true">' + v.ico + '</span>' +
+              '<span class="pjo-modo-tit">' + v.tit + '</span>' +
+              '<span class="pjo-modo-txt">' + v.txt + '</span>' +
+              '<span class="pjo-modo-pie">' + v.pie + '</span>' +
+            '</button>').join('') +
+        '</div>' +
+
+      '</div>';
+  }
+
+  function actualizarPlenoVistas() {
+    PLENO_VISTAS.forEach(v => {
+      const el = document.getElementById('plenoVista_' + v.id);
+      if (el) {
+        el.classList.toggle('active', activeJudicialPlenoTab === v.id);
+        el.setAttribute('aria-selected', String(activeJudicialPlenoTab === v.id));
+      }
+    });
+  }
+
+  function setPlenoModoVista(modo) {
+    plenoModoVista = (modo === 'tabla') ? 'tabla' : 'fichas';
+    const fichas = document.getElementById('plenoFichasWrap');
+    const tabla = document.getElementById('plenoTablaWrap');
+    if (fichas) fichas.hidden = (plenoModoVista !== 'fichas');
+    if (tabla) tabla.hidden = (plenoModoVista !== 'tabla');
+    document.querySelectorAll('.pleno-modo-btn').forEach(b => {
+      const on = b.dataset.modo === plenoModoVista;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', String(on));
+    });
+    if (plenoModoVista === 'fichas') renderPlenoFichas();
+  }
+
+  function plenoFichaHtml(m, idx, vista) {
+    const pres = plenoEsPresidencia(m);
+    const topado = plenoNum(m.sueldo_neto_mensual) <= 135000;
+    const plazas = parseInt(m.asesores_plazas, 10) || 0;
+    const costo = plenoNum(m.costo_mensual_ponencia);
+    const modalId = (m.id || m.nombre || '').replace(/'/g, "\\'");
+
+    let badge;
+    if (vista === 'nuevo') {
+      badge = pres
+        ? '<span class="min-badge" data-tipo="pres">⭐ Presidencia · electo por voto popular</span>'
+        : '<span class="min-badge" data-tipo="electo">🗳️ Electa o electo por voto popular</span>';
+    } else if (m.continua_eleccion === false && /concluido/i.test(m.estatus_laboral || '')) {
+      badge = '<span class="min-badge" data-tipo="concluido">⚪ Periodo constitucional concluido</span>';
+    } else if (/renuncia/i.test(m.tipo_salida || m.estatus_reforma || '')) {
+      badge = '<span class="min-badge" data-tipo="renuncia">🟠 Renuncia presentada al Senado</span>';
+    } else {
+      badge = '<span class="min-badge" data-tipo="sigue">🟢 No renunció · compitió en la elección</span>';
+    }
+
+    const cuerpo = m.especialidad
+      ? '<p class="min-esp"><strong>Especialidad.</strong> ' + m.especialidad + '</p>'
+      : (m.estatus_reforma ? '<p class="min-esp"><strong>Cómo salió.</strong> ' + m.estatus_reforma + '</p>' : '');
+
+    const salida = (vista === 'transicion' && m.fecha_efectiva)
+      ? '<p class="min-salida"><strong>Efectos:</strong> ' + m.fecha_efectiva + (m.tipo_salida ? ' · ' + m.tipo_salida : '') + '</p>'
+      : '';
+
+    return '<article class="min-ficha" data-rol="' + (pres ? 'pres' : 'min') + '" data-estado="' + (topado ? 'topado' : 'historico') + '">' +
+      '<div class="min-ficha-top">' +
+        '<span class="min-avatar" aria-hidden="true">' + plenoIniciales(m.nombre) + '</span>' +
+        '<div class="min-ident">' +
+          '<span class="min-num" aria-hidden="true">' + idx + '</span>' +
+          '<span class="min-nom">' + m.nombre + '</span>' +
+          '<span class="min-cargo">' + (m.cargo || 'Integrante del Pleno de la SCJN') + '</span>' +
+        '</div>' +
+      '</div>' +
+      badge +
+      cuerpo +
+      salida +
+      '<div class="min-datos">' +
+        '<div class="min-dato" data-tono="' + (topado ? 'ok' : 'alerta') + '">' +
+          '<span class="min-dato-lab">Sueldo neto al mes</span>' +
+          '<span class="min-dato-val">' + String(m.sueldo_neto_mensual || '').replace(' pesos', '') + '</span>' +
+          '<span class="min-dato-pie">' + String(m.sueldo_bruto_mensual || '').replace(' pesos', '') + ' bruto</span>' +
+        '</div>' +
+        '<div class="min-dato" data-tono="neutro">' +
+          '<span class="min-dato-lab">Plazas de la ponencia</span>' +
+          '<span class="min-dato-val">' + plazas + '</span>' +
+          '<span class="min-dato-pie">Equipo técnico y proyectistas</span>' +
+        '</div>' +
+        '<div class="min-dato" data-tono="neutro">' +
+          '<span class="min-dato-lab">Cuesta al mes</span>' +
+          '<span class="min-dato-val">$' + (costo / 1000000).toFixed(2) + ' M</span>' +
+          '<span class="min-dato-pie">Nómina completa del despacho</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="min-ficha-pie">' +
+        '<span class="min-chip" data-tono="' + (topado ? 'ok' : 'alerta') + '">' +
+          (topado ? '✓ Topado al Art. 127' : '✗ Sueldo del régimen anterior') + '</span>' +
+        '<button type="button" class="min-ver" onclick="window.AuditEngine.openMinisterModal(\'' + modalId + '\', \'' + vista + '\')">' +
+          'Ver expediente completo →</button>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function renderPlenoFichas() {
+    const cont = document.getElementById('plenoFichas');
+    if (!cont) return;
+    const vista = activeJudicialPlenoTab;
+    const lista = plenoLista(vista);
+    if (!lista.length) { cont.innerHTML = ''; return; }
+
+    const pres = lista.filter(plenoEsPresidencia);
+    const resto = lista.filter(m => !plenoEsPresidencia(m));
+
+    const grupo = (titulo, pie, items, desde) =>
+      !items.length ? '' :
+      '<div class="min-grupo">' +
+        '<div class="min-grupo-tit">' + titulo + '</div>' +
+        '<div class="min-grupo-pie">' + pie + '</div>' +
+        '<div class="min-fichas">' +
+          items.map((m, i) => plenoFichaHtml(m, desde + i, vista)).join('') +
+        '</div>' +
+      '</div>';
+
+    cont.innerHTML =
+      grupo(
+        vista === 'nuevo' ? 'Quien preside el tribunal' : 'Quien presidía el tribunal',
+        vista === 'nuevo'
+          ? 'Además de su propia ponencia, conduce las sesiones del Pleno y representa al Poder Judicial de la Federación.'
+          : 'Encabezó la Corte y el extinto Consejo de la Judicatura Federal hasta el cierre de la transición.',
+        pres, 1) +
+      grupo(
+        vista === 'nuevo' ? 'Las ocho ponencias restantes' : 'El resto del Pleno saliente',
+        vista === 'nuevo'
+          ? 'Cada ficha corresponde a una ponencia: la persona juzgadora, su equipo y lo que cuesta sostenerlo cada mes.'
+          : 'Diez integrantes más: siete renunciaron con efectos al 31 de agosto de 2025, uno concluyó su periodo de quince años y tres ministras compitieron en la elección.',
+        resto, pres.length + 1);
+  }
+
   // ==========================================================================
   // RENDERIZADO: MINISTROS DE LA SCJN, SUELDOS Y ASESORES
   // ==========================================================================
@@ -2718,6 +2981,8 @@
       }
     }
 
+    actualizarPlenoVistas();
+    renderPlenoFichas();
     renderJudicialMinisters();
     renderJudicialMinistersChart();
   }
@@ -2995,7 +3260,7 @@
             distincionEspecialidad: {
               tipo: 'exclusividad_pleno',
               titulo: 'Pleno Único, Elección Popular y Mayoría de Seis Votos',
-              detalle: 'La reforma de 2024 transformó tres rasgos estructurales del máximo tribunal: redujo su integración de once a nueve personas juzgadoras, sustituyó la designación por el Senado a propuesta del Ejecutivo por la elección mediante voto popular directo con encargos de doce años, y suprimió las Salas, de modo que el Pleno concentra ahora la totalidad de la función jurisdiccional. Para invalidar una norma con efectos generales se requiere mayoría calificada de seis votos.'
+              detalle: 'La reforma de 2024 transformó tres rasgos estructurales del máximo tribunal: redujo su integración de once a nueve personas juzgadoras, sustituyó la designación por el Senado a propuesta del Ejecutivo por la elección mediante voto popular directo (con encargos escalonados de 8 y 11 años para esta primera Corte electa, según los votos obtenidos, y de doce años a partir de 2033), y suprimió las Salas, de modo que el Pleno concentra ahora la totalidad de la función jurisdiccional. Para invalidar una norma con efectos generales se requiere mayoría calificada de seis votos.'
             },
             fundamentoDetallado: [
               'Art. 94 párrafos primero, segundo y quinto de la CPEUM (texto reformado)',
@@ -5287,7 +5552,7 @@
     const hoy = [
       '<b>9</b> ministras y ministros',
       '<b>Sólo Pleno.</b> Las Salas dejaron de existir: todo se resuelve en sesión plenaria pública',
-      'Electos por <b>voto popular</b>, con encargos de doce años',
+      'Electas y electos por <b>voto popular</b>. Esta primera Corte tiene encargos <b>escalonados de 8 y 11 años</b> según los votos obtenidos; la regla general de doce años del artículo 94 corre a partir de 2033 <a class="ref-link" onclick="window.AuditEngine.goToRef(\'ref-reforma-judicial\')">[19]</a>',
       'Dos órganos separados: <b>Administración Judicial</b> por un lado, <b>Disciplina Judicial</b> por el otro',
       'Bastan <b>6 de 9 votos</b> para invalidar una ley'
     ];
@@ -14572,6 +14837,8 @@
     safeRun(renderPanoramaErario, 'renderPanoramaErario');
     safeRun(renderFuncionJurisdiccional, 'renderFuncionJurisdiccional');
     safeRun(renderPjOrientacion, 'renderPjOrientacion');
+    safeRun(renderPlenoOrientacion, 'renderPlenoOrientacion');
+    safeRun(renderPlenoFichas, 'renderPlenoFichas');
     safeRun(() => programarAutolink(400), 'programarAutolink');
     safeRun(iniciarPistasDeslizamiento, 'iniciarPistasDeslizamiento');
 
@@ -16834,6 +17101,9 @@
     renderJudicialConceptualMap: renderJudicialConceptualMap,
     renderPjOrientacion: renderPjOrientacion,
     irANivelPj: irANivelPj,
+    renderPlenoOrientacion: renderPlenoOrientacion,
+    renderPlenoFichas: renderPlenoFichas,
+    setPlenoModoVista: setPlenoModoVista,
     filterPjConceptLevel: filterPjConceptLevel,
     setPjView: setPjView,
     setPjMapMode: setPjMapMode,

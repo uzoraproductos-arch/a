@@ -522,8 +522,16 @@ body {
    ========================================================================== */
 nav.tabbar {
   display: flex;
-  justify-content: space-between;
+  /* Antes: justify-content:space-between y los botones con flex:1 1 auto.
+     Entre ~880 y ~1130 px de ancho los botones se encogian por debajo del
+     ancho de su propio texto y, como el texto no puede partirse
+     (white-space:nowrap), se salia de la caja y se encimaba con el rotulo
+     vecino. Ahora la fila baja a un segundo renglon antes de comprimir. */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
   gap: 3px;
+  row-gap: 4px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
@@ -562,7 +570,14 @@ nav.tabbar button {
   gap: 5px;
   white-space: nowrap;
   transition: all 0.2s ease;
-  flex: 1 1 auto;
+  /* flex-shrink en 0: el boton crece para repartir el espacio sobrante,
+     pero nunca se hace mas angosto que su propio rotulo. */
+  flex: 1 0 auto;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  /* Tope de crecimiento: evita que los dos o tres rotulos que caen en el
+     segundo renglon se estiren a lo ancho de media barra. */
+  max-width: 22%;
   text-align: center;
 }
 
@@ -635,12 +650,16 @@ nav.tabbar button.active .num {
 
 @media (max-width: 860px) {
   nav.tabbar {
+    /* En telefono si conviene la pista horizontal: una sola fila que se
+       desliza. Para eso hay que desactivar el salto de renglon. */
+    flex-wrap: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
     scrollbar-width: none;
   }
   nav.tabbar button {
     flex: 0 0 auto;
+    max-width: none;
     font-size: 11.5px;
     padding: 6px 10px;
   }
@@ -10177,4 +10196,346 @@ nav.tabbar button:focus-visible,
 .pj-concept-card-desc, .pj-concept-card-meta > div { max-width: 78ch; }
 @media (max-width: 860px) {
   .pj-concept-card-desc, .pj-concept-card-meta > div { max-width: none; }
+}
+
+/* ==========================================================================
+   PESTANA 4.2 - FICHAS DEL PLENO DE LA SUPREMA CORTE
+   Una tarjeta cerrada por integrante. La tabla comparativa se conserva
+   como vista alterna: la misma informacion, ordenada de otra forma.
+   ========================================================================== */
+
+.pleno-modo-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+
+.pleno-modo-btn {
+  appearance: none;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.2s ease;
+}
+
+.pleno-modo-btn:hover {
+  border-color: var(--border-gold);
+  color: var(--text-main);
+}
+
+.pleno-modo-btn.active {
+  background: var(--gold-gradient);
+  border-color: var(--gold-bright);
+  color: #0d0f17;
+  font-weight: 700;
+  box-shadow: 0 4px 14px var(--gold-glow);
+}
+
+.min-grupo { margin: 0 0 26px; }
+
+.min-grupo-tit {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--gold-bright);
+  margin-bottom: 3px;
+}
+
+.min-grupo-pie {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 78ch;
+  margin-bottom: 14px;
+}
+
+.min-fichas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.min-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.min-ficha:hover {
+  border-color: var(--border-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+.min-ficha[data-rol="pres"] {
+  border-left-color: var(--gold-bright);
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.07) 0%, var(--bg-card) 62%);
+}
+
+.min-ficha[data-estado="historico"] { border-left-color: rgba(231, 76, 60, 0.55); }
+
+/* La presidencia va sola en su grupo: si conserva el ancho de una columna
+   deja media pantalla vacia. Ocupa el renglon completo y reparte su
+   contenido en dos columnas: identidad y texto a la izquierda, cifras a
+   la derecha. */
+.min-ficha[data-rol="pres"] { grid-column: 1 / -1; }
+
+@media (min-width: 980px) {
+  .min-ficha[data-rol="pres"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+    grid-template-areas:
+      "cab    datos"
+      "badge  datos"
+      "txt    datos"
+      "salida datos"
+      "pie    pie";
+    column-gap: 26px;
+    row-gap: 9px;
+    align-items: start;
+  }
+
+  .min-ficha[data-rol="pres"] .min-ficha-top { grid-area: cab; }
+  .min-ficha[data-rol="pres"] .min-badge    { grid-area: badge; justify-self: start; }
+  .min-ficha[data-rol="pres"] .min-esp      { grid-area: txt; }
+  .min-ficha[data-rol="pres"] .min-salida   { grid-area: salida; }
+  .min-ficha[data-rol="pres"] .min-datos    { grid-area: datos; margin-top: 0; }
+  .min-ficha[data-rol="pres"] .min-ficha-pie { grid-area: pie; }
+
+  .min-ficha[data-rol="pres"] .min-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 17px;
+  }
+
+  .min-ficha[data-rol="pres"] .min-nom { font-size: 19px; }
+}
+
+.min-ficha-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.min-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--gold-bright);
+  background: rgba(201, 168, 76, 0.13);
+  border: 1px solid var(--border-gold);
+}
+
+.min-ficha[data-rol="pres"] .min-avatar {
+  background: var(--gold-gradient);
+  color: #0d0f17;
+}
+
+.min-ident {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.min-num {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+}
+
+.min-nom {
+  font-family: var(--font-serif);
+  font-size: 16.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-main);
+}
+
+.min-cargo {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--text-dim);
+}
+
+.min-badge {
+  align-self: flex-start;
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  padding: 3px 9px;
+  border-radius: 4px;
+  white-space: normal;
+}
+
+.min-badge[data-tipo="pres"]      { color: #0d0f17; background: var(--gold); }
+.min-badge[data-tipo="electo"]    { color: #2ecc71; background: rgba(46, 204, 113, 0.14); border: 1px solid rgba(46, 204, 113, 0.38); }
+.min-badge[data-tipo="renuncia"]  { color: #f39c12; background: rgba(243, 156, 18, 0.12); border: 1px solid rgba(243, 156, 18, 0.38); }
+.min-badge[data-tipo="concluido"] { color: var(--text-dim); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); }
+.min-badge[data-tipo="sigue"]     { color: var(--cyan); background: rgba(0, 180, 216, 0.12); border: 1px solid rgba(0, 180, 216, 0.35); }
+
+.min-esp,
+.min-salida {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 78ch;
+  margin: 0;
+}
+
+.min-esp strong,
+.min-salida strong { color: var(--text-main); }
+
+.min-datos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.min-dato {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.min-dato-lab {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  line-height: 1.35;
+}
+
+.min-dato-val {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+.min-dato[data-tono="ok"] .min-dato-val     { color: var(--emerald-bright); }
+.min-dato[data-tono="alerta"] .min-dato-val { color: var(--crimson-bright); }
+
+.min-dato-pie {
+  font-size: 9.5px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+
+.min-ficha-pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.min-chip {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+.min-chip[data-tono="ok"]     { color: #2ecc71; background: rgba(46, 204, 113, 0.14); border: 1px solid rgba(46, 204, 113, 0.38); }
+.min-chip[data-tono="alerta"] { color: #e74c3c; background: rgba(231, 76, 60, 0.12); border: 1px solid rgba(231, 76, 60, 0.38); }
+
+.min-ver {
+  appearance: none;
+  border: 1px solid var(--border-gold);
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--gold-bright);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.min-ver:hover {
+  background: rgba(201, 168, 76, 0.22);
+  color: var(--text-main);
+}
+
+.pleno-fuentes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid var(--border-gold);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 12px;
+}
+
+.pleno-fuentes-nota {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 78ch;
+  margin: 12px 0 0;
+}
+
+.pleno-fuentes-nota strong { color: var(--gold-bright); }
+
+@media (max-width: 720px) {
+  .min-fichas { grid-template-columns: 1fr; }
+  .min-datos { grid-template-columns: 1fr 1fr; }
+  .min-esp,
+  .min-salida,
+  .min-grupo-pie,
+  .pleno-fuentes-nota { max-width: none; }
+}
+
+@media (max-width: 420px) {
+  .min-datos { grid-template-columns: 1fr; }
+  .min-nom { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .min-ficha { transition: none; }
+  .min-ficha:hover { transform: none; }
 }

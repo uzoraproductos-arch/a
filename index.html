@@ -3159,225 +3159,229 @@
            SUBPANEL 4.2: PLENO Y MINISTROS SCJN (ANÁLISIS COMPARATIVO)
            ==================================================================== -->
       <div class="subtab-panel" data-parent="judicial" data-subpanel="pleno">
-        
-        <!-- 4 Datos Clave del PJF -->
-        <div class="judicial-preview-grid">
-          <div class="judicial-metric-card">
-            <div class="j-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Ramo 03')">Presupuesto Global PJF</a></div>
-            <div class="j-val">$78,327 mdp</div>
-            <div style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('PEF')">PEF</a> Aprobado (SCJN + CJF + TEPJF) <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03')">[21]</a></div>
+
+        <div class="section-hero">
+          <span class="hero-tag">Pleno &middot; Remuneraciones &middot; Art. 127 Constitucional</span>
+          <h3 style="font-family:var(--font-serif); font-size:25px; color:var(--gold-bright); line-height:1.25; margin:2px 0 8px;">
+            Quiénes Deciden en la Suprema Corte y Cuánto Cuesta Cada Ponencia
+          </h3>
+          <p style="max-width:78ch; font-size:14.5px; line-height:1.75; color:var(--text-secondary);">
+            Nueve personas resuelven los asuntos constitucionales de un país de 130 millones. Quiénes son, de dónde vienen, cuánto ganan y con cuánta gente trabajan no es un dato curioso: es la información mínima para saber quién está juzgando y con qué recursos públicos.
+          </p>
+          <p style="max-width:78ch; font-size:14.5px; line-height:1.75; color:var(--text-secondary); margin-top:10px;">
+            Esta ficha abre el Pleno en cuatro capas: las cifras de entrada y el contraste entre el régimen anterior y el vigente; la ficha individual de cada integrante con su equipo y su costo; la comparativa gráfica de sueldos, plazas y despachos; y el balance presupuestal con los topes constitucionales que hoy rigen.
+          </p>
+        </div>
+
+        <!-- CAPA DE ORIENTACIÓN: CIFRAS, ANTES/HOY Y SELECTOR DE COMPOSICIÓN -->
+        <div id="plenoOrientacion"></div>
+
+        <!-- BLOQUE 1: FICHA POR CADA INTEGRANTE DEL PLENO -->
+        <div class="fj-bloque">
+          <div class="fj-bloque-head">
+            <span class="fj-kicker">Bloque 1</span>
+            <h3>Una ficha por cada integrante del Pleno</h3>
           </div>
-          <div class="judicial-metric-card">
-            <div class="j-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Fideicomisos del Poder Judicial')">Fideicomisos en Litigio</a></div>
-            <div class="j-val" style="color:var(--crimson-bright);">$15,434 mdp</div>
-            <div style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);">13 Fondos Judiciales observados <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-asf-fideicomisos-pjf')">[23]</a></div>
+          <p class="fj-bloque-sub">
+            Cada tarjeta es una ponencia completa: la persona juzgadora, su especialidad, el tamaño de su equipo, su sueldo neto y lo que cuesta sostener el despacho cada mes. Pulse <em>Ver expediente completo</em> para la trayectoria, la formación y el origen del nombramiento. Si prefiere comparar todo en una sola pantalla, cambie a la vista de tabla.
+          </p>
+
+          <div class="pleno-modo-switch" role="tablist" aria-label="Forma de ver a las y los integrantes">
+            <button type="button" class="pleno-modo-btn active" data-modo="fichas" role="tab" aria-selected="true" onclick="window.AuditEngine.setPlenoModoVista('fichas')">
+              <span aria-hidden="true">🗂️</span> Fichas individuales
+            </button>
+            <button type="button" class="pleno-modo-btn" data-modo="tabla" role="tab" aria-selected="false" onclick="window.AuditEngine.setPlenoModoVista('tabla')">
+              <span aria-hidden="true">📋</span> Tabla comparativa
+            </button>
           </div>
-          <div class="judicial-metric-card">
-            <div class="j-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Pleno de la Suprema Corte')">Suprema Corte (SCJN)</a></div>
-            <div class="j-val">$5,900 mdp</div>
-            <div style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);">11 Ponencias / Pleno y Salas <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03')">[21]</a></div>
+
+          <div id="plenoFichasWrap">
+            <div id="plenoFichas"></div>
           </div>
-          <div class="judicial-metric-card">
-            <div class="j-lbl">Plazas y Empleados</div>
-            <div class="j-val">54,500</div>
-            <div style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);">Juzgados de Distrito y Tribunales <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-ciep-pjf')">[26]</a></div>
+
+          <div id="plenoTablaWrap" hidden>
+<div class="table-responsive-card" style="border:1px solid var(--border-gold); border-radius:10px; padding:20px; background:var(--bg-card);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+              <div>
+                <span id="scjnPlenoHeaderTag" style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); letter-spacing:1.5px; text-transform:uppercase;">Nuevo Pleno Constitucional SCJN (Vigente · Portal scjn.gob.mx)</span>
+                <h4 id="scjnPlenoHeaderTitle" style="font-family:var(--font-serif); font-size:19px; color:var(--gold-bright); margin-top:2px;">
+                  ⚖️ Análisis Comparativo del Nuevo Pleno Oficial (9 Ministras y Ministros Electos)
+                </h4>
+              </div>
+              <span id="scjnPlenoHeaderCount" style="font-family:var(--font-mono); font-size:10.5px; color:var(--emerald-bright); background:rgba(46,204,113,0.1); padding:4px 10px; border-radius:4px; border:1px solid rgba(46,204,113,0.3);">
+                9 integrantes electos en funciones plenas · 100% Topados Art. 127
+              </span>
+            </div>
+
+            <div class="table-responsive" style="overflow-x:auto;">
+              <table class="audit-table">
+                <thead>
+                  <tr>
+                    <th>Integrantes &amp; Cargo Oficial</th>
+                    <th>Acreditación &amp; Especialidad</th>
+                    <th style="text-align:right;">Equipo</th>
+                    <th style="text-align:right;">Sueldo Neto</th>
+                    <th style="text-align:right;">Costo Ponencia</th>
+                    <th style="text-align:center;">Tope Art. 127</th>
+                  </tr>
+                </thead>
+                <tbody id="scjnMinistersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
           </div>
         </div>
 
-        <!-- Cintillo de Citas y Fuentes Oficiales Judiciales -->
-        <div class="judicial-refs-ribbon" style="display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; background:rgba(212,175,55,0.05); border:1px solid var(--border-gold); padding:10px 16px; border-radius:8px; margin-top:16px; font-size:12px; color:var(--text-secondary);">
-          <strong style="color:var(--gold-bright); display:inline-flex; align-items:center; gap:6px;">📚 Citas &amp; Fuentes Oficiales:</strong>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-reforma-judicial')">↗ [Ref. 19] Reforma Judicial DOF</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cpeum-art127')">↗ [Ref. 20] Art. 127 Tope Salarial</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03')">↗ [Ref. 21] Ramo 03 PEF ($78,327 mdp)</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-manual-remun-pjf')">↗ [Ref. 22] Tabulador de Remuneraciones</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-asf-fideicomisos-pjf')">↗ [Ref. 23] Auditoría ASF Fideicomisos</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-scjn-conoce-corte')">↗ [Ref. 24] Directorio Oficial Conoce la Corte</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pnt-asesores-scjn')">↗ [Ref. 25] PNT Nómina &amp; 70+ Asesores</a>
-          <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-ciep-pjf')">↗ [Ref. 26] Análisis CIEP Presupuesto PJF</a>
-        </div>
-
-        <!-- Radiografía Salarial y Tarjetas de Resumen -->
-        <div style="margin-top: 28px; border-top: 1px solid var(--border-gold); padding-top: 22px;">
-          
-          <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px; margin-bottom: 18px;">
-            <div>
-              <span style="font-family:var(--font-mono); font-size:11px; color:var(--gold); letter-spacing:2px; text-transform:uppercase;">Radiografía Salarial &amp; Pleno de la SCJN</span>
-              <h3 style="font-family:var(--font-serif); font-size:24px; color:var(--gold-bright); margin-top:3px;">
-                🏛️ Tarjeta de los Ministros de la Suprema Corte
-              </h3>
-            </div>
-            <span style="font-family:var(--font-mono); font-size:11.5px; color:var(--text-dim);">
-              Fuente: PEF, Manual de Remuneraciones del PJF, DOF 15/Sep/2024 y Portal Oficial scjn.gob.mx
-            </span>
+        <!-- BLOQUE 2: COMPARATIVA GRÁFICA -->
+        <div class="fj-bloque">
+          <div class="fj-bloque-head">
+            <span class="fj-kicker">Bloque 2</span>
+            <h3>La comparación de un vistazo: sueldo, plazas y costo del despacho</h3>
           </div>
-
-          <!-- Selector de Vista del Pleno de la SCJN -->
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom: 20px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); padding:14px 18px; border-radius:8px;">
-            <div>
-              <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); text-transform:uppercase; letter-spacing:1px; display:block;">Alternancia de Fiscalización Plenaria:</span>
-              <strong style="color:var(--text-main); font-size:13px;">Selecciona la composición de la Corte a examinar:</strong>
-            </div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <button class="view-btn judicial-view-btn active" data-view="nuevo" onclick="window.AuditEngine.setJudicialPlenoView('nuevo')" style="font-size:12px; padding:7px 14px; border:1px solid var(--gold-bright); color:var(--gold-bright); background:rgba(201,168,76,0.18); border-radius:6px; cursor:pointer; font-weight:700;">
-                🏛️ Nuevo Pleno Oficial SCJN (9 Ministros electos · scjn.gob.mx)
-              </button>
-              <button class="view-btn judicial-view-btn" data-view="transicion" onclick="window.AuditEngine.setJudicialPlenoView('transicion')" style="font-size:12px; padding:7px 14px; border:1px solid var(--border-subtle); color:var(--text-secondary); background:rgba(255,255,255,0.03); border-radius:6px; cursor:pointer; font-weight:600;">
-                📜 Pleno en Transición y Saliente (Gestión 2024–2025 · 10 Ministros y Renuncias)
-              </button>
-            </div>
-          </div>
-
-          <!-- CONTENEDOR DIVIDIDO: TABLA A LA IZQUIERDA Y GRÁFICA COMPARATIVA A LA DERECHA -->
-          <div class="scjn-split-container">
-            
-            <!-- COLUMNA IZQUIERDA: TABLA COMPARATIVA DE MINISTROS -->
-            <div class="table-responsive-card" style="border:1px solid var(--border-gold); border-radius:10px; padding:20px; background:var(--bg-card);">
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+          <p class="fj-bloque-sub">
+            Las mismas cifras de las fichas, puestas una junto a otra. Elija la métrica y compare: la línea vertical marca el tope del Artículo 127 y permite ver, sin cálculos, quién está por debajo y quién lo rebasaba. Cada barra abre el expediente de esa persona.
+          </p>
+<div class="scjn-chart-card" id="scjnComparativeChartCard">
+            <div class="scjn-chart-header">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
                 <div>
-                  <span id="scjnPlenoHeaderTag" style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); letter-spacing:1.5px; text-transform:uppercase;">Nuevo Pleno Constitucional SCJN (Vigente · Portal scjn.gob.mx)</span>
-                  <h4 id="scjnPlenoHeaderTitle" style="font-family:var(--font-serif); font-size:19px; color:var(--gold-bright); margin-top:2px;">
-                    ⚖️ Análisis Comparativo del Nuevo Pleno Oficial (9 Ministras y Ministros Electos)
+                  <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">Visualización Comparativa</span>
+                  <h4 id="scjnChartTitle" style="font-family:var(--font-serif); font-size:18px; color:var(--gold-bright); margin:2px 0 0 0;">
+                    📊 Gráfica Comparativa · Nuevo Pleno SCJN
                   </h4>
                 </div>
-                <span id="scjnPlenoHeaderCount" style="font-family:var(--font-mono); font-size:10.5px; color:var(--emerald-bright); background:rgba(46,204,113,0.1); padding:4px 10px; border-radius:4px; border:1px solid rgba(46,204,113,0.3);">
-                  9 integrantes electos en funciones plenas · 100% Topados Art. 127
+                <span id="scjnChartBadge" style="font-family:var(--font-mono); font-size:10px; color:var(--cyan); background:rgba(0,180,216,0.1); border:1px solid rgba(0,180,216,0.25); padding:3px 8px; border-radius:4px;">
+                  9 Integrantes Electos
                 </span>
               </div>
 
-              <div class="table-responsive" style="overflow-x:auto;">
-                <table class="audit-table">
-                  <thead>
-                    <tr>
-                      <th>Integrantes &amp; Cargo Oficial</th>
-                      <th>Acreditación &amp; Especialidad</th>
-                      <th style="text-align:right;">Equipo</th>
-                      <th style="text-align:right;">Sueldo Neto</th>
-                      <th style="text-align:right;">Costo Ponencia</th>
-                      <th style="text-align:center;">Tope Art. 127</th>
-                    </tr>
-                  </thead>
-                  <tbody id="scjnMinistersTableBody"></tbody>
-                </table>
+              <!-- Botones de métricas -->
+              <div class="scjn-metric-pills">
+                <button class="scjn-metric-pill active" data-metric="sueldo" onclick="window.AuditEngine.setJudicialChartMetric('sueldo')">
+                  💰 Sueldo Neto vs. Art. 127
+                </button>
+                <button class="scjn-metric-pill" data-metric="costo_ponencia" onclick="window.AuditEngine.setJudicialChartMetric('costo_ponencia')">
+                  🏛️ Costo Mensual Ponencia
+                </button>
+                <button class="scjn-metric-pill" data-metric="plazas" onclick="window.AuditEngine.setJudicialChartMetric('plazas')">
+                  👥 Plazas por Ponencia
+                </button>
               </div>
             </div>
 
-            <!-- COLUMNA DERECHA: GRÁFICA COMPARATIVA + CÁLCULOS MACRO (MISMA DIMENSIÓN DE ANCHO) -->
-            <div class="scjn-right-col">
-              
-              <!-- BLOQUE 2: GRÁFICA COMPARATIVA DE LOS MINISTROS -->
-              <div class="scjn-chart-card" id="scjnComparativeChartCard">
-                <div class="scjn-chart-header">
-                  <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
-                    <div>
-                      <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">Visualización Comparativa</span>
-                      <h4 id="scjnChartTitle" style="font-family:var(--font-serif); font-size:18px; color:var(--gold-bright); margin:2px 0 0 0;">
-                        📊 Gráfica Comparativa · Nuevo Pleno SCJN
-                      </h4>
-                    </div>
-                    <span id="scjnChartBadge" style="font-family:var(--font-mono); font-size:10px; color:var(--cyan); background:rgba(0,180,216,0.1); border:1px solid rgba(0,180,216,0.25); padding:3px 8px; border-radius:4px;">
-                      9 Integrantes Electos
-                    </span>
-                  </div>
+            <!-- Benchmark de referencia -->
+            <div id="scjnChartBenchmark" class="scjn-chart-benchmark"></div>
 
-                  <!-- Botones de métricas -->
-                  <div class="scjn-metric-pills">
-                    <button class="scjn-metric-pill active" data-metric="sueldo" onclick="window.AuditEngine.setJudicialChartMetric('sueldo')">
-                      💰 Sueldo Neto vs. Art. 127
-                    </button>
-                    <button class="scjn-metric-pill" data-metric="costo_ponencia" onclick="window.AuditEngine.setJudicialChartMetric('costo_ponencia')">
-                      🏛️ Costo Mensual Ponencia
-                    </button>
-                    <button class="scjn-metric-pill" data-metric="plazas" onclick="window.AuditEngine.setJudicialChartMetric('plazas')">
-                      👥 Plazas por Ponencia
-                    </button>
-                  </div>
-                </div>
+            <!-- Lista dinámica de barras -->
+            <div id="scjnChartBarsList" class="scjn-chart-bars-list"></div>
 
-                <!-- Benchmark de referencia -->
-                <div id="scjnChartBenchmark" class="scjn-chart-benchmark"></div>
-
-                <!-- Lista dinámica de barras -->
-                <div id="scjnChartBarsList" class="scjn-chart-bars-list"></div>
-
-                <!-- Nota al pie de la gráfica -->
-                <div id="scjnChartFooterNote" class="scjn-chart-footer-note"></div>
-              </div>
-
-              <!-- BLOQUE 3: BALANCE GENERAL & CÁLCULOS DE PONENCIAS (MISMO ANCHO, OCUPA EL ESPACIO LATERAL) -->
-              <div class="scjn-calculos-card" id="scjnCalculosContainerCard">
-                <div style="margin-bottom: 14px; border-bottom:1px solid var(--border-subtle); padding-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                  <div>
-                    <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">Marco Presupuestal &amp; Plenario</span>
-                    <h4 style="font-family:var(--font-serif); font-size:18px; color:var(--gold-bright); margin:2px 0 0 0;">
-                      📈 Balance General &amp; Cálculos de Ponencias
-                    </h4>
-                  </div>
-                  <span style="font-family:var(--font-mono); font-size:10px; color:var(--emerald-bright); background:rgba(46,204,113,0.1); border:1px solid rgba(46,204,113,0.3); padding:3px 8px; border-radius:4px;">
-                    Auditoría SCJN
-                  </span>
-                </div>
-
-                <!-- 4 Tarjetas de Cálculo y Topes Constitucionales en grid responsivo -->
-                <div id="scjnCalculosCardsGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap:12px; margin-bottom: 16px;">
-                  <div class="data-block-col">
-                    <div class="data-col-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Artículo 127')">Tope Constitucional Art. 127</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cpeum-art127'); return false;">[20]</a></div>
-                    <div id="scjnCalcCard1Val" class="data-col-val" style="color:var(--emerald-bright); font-size:16px;">$134,310 netos</div>
-                    <div id="scjnCalcCard1Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">$191,657 pesos brutos / mes (100% apego)</div>
-                  </div>
-
-                  <div class="data-block-col">
-                    <div id="scjnCalcCard2Lbl" class="data-col-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Pleno de la Suprema Corte')">Nuevo Pleno Constitucional</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-reforma-judicial'); return false;">[19]</a></div>
-                    <div id="scjnCalcCard2Val" class="data-col-val" style="color:var(--gold-bright); font-size:16px;">9 Integrantes</div>
-                    <div id="scjnCalcCard2Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">1 Presidente + 8 Ministras y Ministros</div>
-                  </div>
-
-                  <div class="data-block-col">
-                    <div class="data-col-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Ponencia de Ministro(a)')">Plazas de Apoyo por Ponencia</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pnt-asesores-scjn'); return false;">[25]</a></div>
-                    <div id="scjnCalcCard3Val" class="data-col-val" style="color:var(--cyan); font-size:16px;">24 a 28 Plazas</div>
-                    <div id="scjnCalcCard3Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">Esquema de austeridad de Estado</div>
-                  </div>
-
-                  <div class="data-block-col red-accent">
-                    <div class="data-col-lbl">Nómina Total Anual Ponencias <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03'); return false;">[21]</a></div>
-                    <div id="scjnCalcCard4Val" class="data-col-val" style="color:var(--crimson-bright); font-size:16px;">~$216 millones</div>
-                    <div id="scjnCalcCard4Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">Ahorro sustancial vs. $376 mdp régimen previo</div>
-                  </div>
-                </div>
-
-                <!-- 3 Ventanas de Estatus / Badges Resumen -->
-                <div id="scjnPlenoBadgesBanner" style="display:flex; flex-direction:column; gap:10px;">
-                  <div style="background:rgba(201,168,76,0.1); border:1px solid var(--border-gold); border-radius:6px; padding:10px 14px; display:flex; align-items:center; gap:12px;">
-                    <span style="font-size:20px;">⭐</span>
-                    <div>
-                      <strong style="color:var(--gold-bright); font-size:12.5px; display:block;">Ministro Presidente Electo</strong>
-                      <span style="font-size:11px; color:var(--text-secondary);">Hugo Aguilar Ortiz (Presidencia del Máximo Tribunal)</span>
-                    </div>
-                  </div>
-                  <div style="background:rgba(46,204,113,0.08); border:1px solid rgba(46,204,113,0.3); border-radius:6px; padding:10px 14px; display:flex; align-items:center; gap:12px;">
-                    <span style="font-size:20px;">🟢</span>
-                    <div>
-                      <strong style="color:#2ecc71; font-size:12.5px; display:block;">8 Ministras y Ministros del Pleno</strong>
-                      <span style="font-size:11px; color:var(--text-secondary);">Batres, Esquivel, Ortiz, Ríos, Figueroa, Espinosa, Guerrero, Herrerías</span>
-                    </div>
-                  </div>
-                  <div style="background:rgba(0,180,216,0.08); border:1px solid rgba(0,180,216,0.3); border-radius:6px; padding:10px 14px; display:flex; align-items:center; gap:12px;">
-                    <span style="font-size:20px;">📜</span>
-                    <div>
-                      <strong style="color:var(--cyan); font-size:12.5px; display:block;">100% Tope Salarial Art. 127</strong>
-                      <span style="font-size:11px; color:var(--text-secondary);">$134,310 netos / mes · Eliminación de fideicomisos y privilegios</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div><!-- FIN COLUMNA DERECHA -->
-
-          </div><!-- FIN SCJN SPLIT CONTAINER -->
-
+            <!-- Nota al pie de la gráfica -->
+            <div id="scjnChartFooterNote" class="scjn-chart-footer-note"></div>
+          </div>
         </div>
 
-      </div><!-- FIN SUBPANEL 4.1 -->
+        <!-- BLOQUE 3: BALANCE PRESUPUESTAL Y TOPES -->
+        <div class="fj-bloque">
+          <div class="fj-bloque-head">
+            <span class="fj-kicker">Bloque 3</span>
+            <h3>El balance: topes constitucionales y costo agregado de las ponencias</h3>
+          </div>
+          <p class="fj-bloque-sub">
+            Qué manda el Artículo 127, cómo quedó integrado el Pleno, cuántas plazas sostiene cada ponencia y cuánto suma el conjunto al año. Las cifras cambian según la composición que haya elegido arriba. Para ubicar las proporciones: la Suprema Corte ejerce de manera directa cerca de <strong>$5,900 millones de pesos al año</strong>, dentro de los <strong>$78,327 millones</strong> del Ramo 03 que sostienen a todo el Poder Judicial de la Federación <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03')">[21]</a>, y el <strong>80.2%</strong> de ese gasto se concentra en el Capítulo 1000, es decir, en servicios personales <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-ciep-pjf')">[26]</a>.
+          </p>
+<div class="scjn-calculos-card" id="scjnCalculosContainerCard">
+            <div style="margin-bottom: 14px; border-bottom:1px solid var(--border-subtle); padding-bottom:10px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <div>
+                <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">Marco Presupuestal &amp; Plenario</span>
+                <h4 style="font-family:var(--font-serif); font-size:18px; color:var(--gold-bright); margin:2px 0 0 0;">
+                  📈 Balance General &amp; Cálculos de Ponencias
+                </h4>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:10px; color:var(--emerald-bright); background:rgba(46,204,113,0.1); border:1px solid rgba(46,204,113,0.3); padding:3px 8px; border-radius:4px;">
+                Auditoría SCJN
+              </span>
+            </div>
+
+            <!-- 4 Tarjetas de Cálculo y Topes Constitucionales en grid responsivo -->
+            <div id="scjnCalculosCardsGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap:12px; margin-bottom: 16px;">
+              <div class="data-block-col">
+                <div class="data-col-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Artículo 127')">Tope Constitucional Art. 127</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cpeum-art127'); return false;">[20]</a></div>
+                <div id="scjnCalcCard1Val" class="data-col-val" style="color:var(--emerald-bright); font-size:16px;">$134,310 netos</div>
+                <div id="scjnCalcCard1Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">$191,657 pesos brutos / mes (100% apego)</div>
+              </div>
+
+              <div class="data-block-col">
+                <div id="scjnCalcCard2Lbl" class="data-col-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Pleno de la Suprema Corte')">Nuevo Pleno Constitucional</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-reforma-judicial'); return false;">[19]</a></div>
+                <div id="scjnCalcCard2Val" class="data-col-val" style="color:var(--gold-bright); font-size:16px;">9 Integrantes</div>
+                <div id="scjnCalcCard2Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">1 Presidente + 8 Ministras y Ministros</div>
+              </div>
+
+              <div class="data-block-col">
+                <div class="data-col-lbl"><a class="glos-link" onclick="window.AuditEngine.goToGlossary('Ponencia de Ministro(a)')">Plazas de Apoyo por Ponencia</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pnt-asesores-scjn'); return false;">[25]</a></div>
+                <div id="scjnCalcCard3Val" class="data-col-val" style="color:var(--cyan); font-size:16px;">24 a 28 Plazas</div>
+                <div id="scjnCalcCard3Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">Esquema de austeridad de Estado</div>
+              </div>
+
+              <div class="data-block-col red-accent">
+                <div class="data-col-lbl">Nómina Total Anual Ponencias <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03'); return false;">[21]</a></div>
+                <div id="scjnCalcCard4Val" class="data-col-val" style="color:var(--crimson-bright); font-size:16px;">~$216 millones</div>
+                <div id="scjnCalcCard4Sub" style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono); margin-top:2px;">Ahorro sustancial vs. $376 mdp régimen previo</div>
+              </div>
+            </div>
+
+            <!-- 3 Ventanas de Estatus / Badges Resumen -->
+            <div id="scjnPlenoBadgesBanner" style="display:flex; flex-direction:column; gap:10px;">
+              <div style="background:rgba(201,168,76,0.1); border:1px solid var(--border-gold); border-radius:6px; padding:10px 14px; display:flex; align-items:center; gap:12px;">
+                <span style="font-size:20px;">⭐</span>
+                <div>
+                  <strong style="color:var(--gold-bright); font-size:12.5px; display:block;">Ministro Presidente Electo</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Hugo Aguilar Ortiz (Presidencia del Máximo Tribunal)</span>
+                </div>
+              </div>
+              <div style="background:rgba(46,204,113,0.08); border:1px solid rgba(46,204,113,0.3); border-radius:6px; padding:10px 14px; display:flex; align-items:center; gap:12px;">
+                <span style="font-size:20px;">🟢</span>
+                <div>
+                  <strong style="color:#2ecc71; font-size:12.5px; display:block;">8 Ministras y Ministros del Pleno</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Batres, Esquivel, Ortiz, Ríos, Figueroa, Espinosa, Guerrero, Herrerías</span>
+                </div>
+              </div>
+              <div style="background:rgba(0,180,216,0.08); border:1px solid rgba(0,180,216,0.3); border-radius:6px; padding:10px 14px; display:flex; align-items:center; gap:12px;">
+                <span style="font-size:20px;">📜</span>
+                <div>
+                  <strong style="color:var(--cyan); font-size:12.5px; display:block;">100% Tope Salarial Art. 127</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">$134,310 netos / mes · Eliminación de fideicomisos y privilegios</span>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOQUE 4: FUENTES -->
+        <div class="fj-bloque">
+          <div class="fj-bloque-head">
+            <span class="fj-kicker">Bloque 4</span>
+            <h3>De dónde sale cada cifra</h3>
+          </div>
+          <p class="fj-bloque-sub">
+            Ningún número de esta ficha es una estimación de la plataforma. Cada uno proviene de un documento público consultable; el enlace lleva a la ficha completa de la fuente en la pestaña de Referencias.
+          </p>
+          <div class="pleno-fuentes">
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-reforma-judicial')">[19] Reforma Judicial &middot; DOF 15/sep/2024</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cpeum-art127')">[20] Artículo 127 constitucional &middot; tope salarial</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef-ramo03')">[21] Ramo 03 del PEF &middot; $78,327 mdp</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-manual-remun-pjf')">[22] Manual de Remuneraciones del PJF</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-asf-fideicomisos-pjf')">[23] Auditoría ASF &middot; fideicomisos judiciales</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-scjn-conoce-corte')">[24] Directorio oficial &middot; Conoce la Corte</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pnt-asesores-scjn')">[25] Plataforma Nacional de Transparencia &middot; nómina y asesores</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-ciep-pjf')">[26] Análisis CIEP &middot; presupuesto del PJF</a>
+          </div>
+          <p class="pleno-fuentes-nota">
+            <strong>Una precisión sobre el costo de las ponencias:</strong> el sueldo neto y bruto provienen del Manual de Remuneraciones y del tabulador publicado; el número de plazas, de las respuestas de transparencia. El costo mensual de cada despacho es una <strong>suma de esas plazas a tabulador</strong>, no una partida presupuestal etiquetada con ese nombre: el PEF no desglosa el gasto ponencia por ponencia. Se presenta como cálculo derivado y así debe citarse.
+          </p>
+        </div>
+
+      </div><!-- FIN SUBPANEL 4.2 -->
 
       <!-- ====================================================================
            SUBPANEL 4.3: PRESTACIONES Y PAQUETE DE COMPENSACIONES
