@@ -5852,8 +5852,7 @@ nav.tabbar button.active .num {
   letter-spacing: 0;
 }
 
-/* Pie de cada renglon de la comparativa del filtro: quien mandaba y en
-   que periodo. Sobrevive al retiro del simulador comparativo. */
+/* Pie de cada renglon de la comparativa: quien mandaba y en que periodo. */
 .sim-comp-pres {
   display: block;
   margin-top: 2px;
@@ -5861,6 +5860,24 @@ nav.tabbar button.active .num {
   font-size: 10.5px;
   color: var(--text-dim, #9aa3b2);
 }
+/* Vista «en contexto»: las obras que el filtro no señala siguen en la
+   lista, para no perder la escala, pero ceden el primer plano. */
+.sim-comp-fuera { opacity: 0.42; }
+.sim-comp-fuera:hover { opacity: 0.85; }
+/* La barra la conduce requestAnimationFrame: una transicion propia
+   competiria con el conteo. */
+.sim-rank-filtro .sim-rank-barra { transition: none; }
+.sim-rank-filtro .evaluacion-controls-bar { margin: 10px 0 14px; }
+.sim-rank-enlace {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--gold-bright, #d4af37);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .sim-sex-barra { margin: 4px 0 14px; }
 
 /* ===== 2.2 - SUBPESTANAS A / B / C ==================================

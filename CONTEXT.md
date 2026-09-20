@@ -588,7 +588,24 @@ de los 32 circuitos.
 - Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
 - **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
 
-### Hecho (retiro del simulador comparativo en 2.2 A)
+### Hecho (fusión de las dos listas comparativas de 2.2 A)
+- La parte A tenía dos listas que decían casi lo mismo. Ahora es **una
+  sola**, que reúne las funciones de ambas:
+  - de la lista del filtro: que la industria y el mandato la recorten, y
+    que de ella cuelguen las fichas vivas y la escala;
+  - del simulador comparativo: **Evaluar**, **Reiniciar a ceros**,
+    **Activar al pasar cursor**, el arranque en cero con conteo, y
+    **«Ver las 12 en contexto»**, que devuelve el universo completo con
+    lo que queda fuera del filtro atenuado.
+- El interruptor «en contexto» es lo que evita volver a tener dos listas:
+  una misma lista, dos alcances. En esa vista, pulsar una obra atenuada
+  pone su industria en el filtro.
+- `simAnimarZona` acepta un aviso de término, para que la lista sepa
+  cuándo pasar a «evaluación completada».
+- Nuevas funciones: `simRankEvaluar`, `simRankReiniciar`,
+  `simRankToggleHover`, `simRankHoverEntra`, `simRankUniverso`.
+
+### Hecho (paso previo: retiro del simulador comparativo en 2.2 A)
 - Se eliminó de la parte A el **simulador comparativo** completo (barra de
   «Evaluar / Reiniciar a ceros / Activar al pasar cursor», rótulo
   «Las 12 obras medidas por pérdida anual» y su lista del universo entero).

@@ -49,6 +49,14 @@
        (elegir sector, sexenio o cadencia) lo devuelve a cero ni lo
        atrasa cuando la pestana pierde el foco. */
     simuladorInicioVista: null,
+    /* Lista comparativa fusionada de la parte A. Es a la vez la lista
+       del filtro y el simulador comparativo: de la primera hereda que
+       la industria y el mandato la recorten, del segundo los mandos de
+       evaluacion, el arranque en cero y la vista del universo completo
+       con lo no seleccionado atenuado. */
+    simRankEvaluado: false,
+    simRankHover: true,
+    simRankUniverso: false,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
        sexenios arrancan en cero y crecen a su escala real al evaluar. */
     simSexEvaluado: false,
@@ -2148,7 +2156,7 @@
     'sim-sec-t', 'sim-sec-n', 'sim-sec-ico', 'sim-sec-meta', 'sim-sec-pct',
     'sim-sec-cuota', 'sim-sec-b', 'sim-sec-ob-ico',
     'sim-dc-l', 'sim-dc-v', 'sim-dc-s',
-    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-tab-let', 'sim-pill-n', 'sim-vacio-t', 'sim-recontar',
+    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-rank-enlace', 'sim-tab-let', 'sim-pill-n', 'sim-vacio-t', 'sim-recontar',
     'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
     'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
     'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
@@ -15248,7 +15256,7 @@
   /* Anima todo lo que lleve data-anim-v o data-anim-w dentro de una
      raiz. La clave evita que dos animaciones de la misma zona se
      pisen. */
-  function simAnimarZona(raiz, clave, duracionMs) {
+  function simAnimarZona(raiz, clave, duracionMs, alTerminar) {
     if (!raiz) return;
     const cifras = [].slice.call(raiz.querySelectorAll('[data-anim-v]'));
     const barras = [].slice.call(raiz.querySelectorAll('[data-anim-w]'));
@@ -15269,7 +15277,7 @@
     }
 
     // Quien pidio menos movimiento recibe el dato, no la animacion.
-    if (simMovimientoReducido() || !duracionMs) { pintar(1); return; }
+    if (simMovimientoReducido() || !duracionMs) { pintar(1); if (alTerminar) alTerminar(); return; }
 
     const dur = duracionMs;
     const ini = performance.now();
@@ -15284,6 +15292,7 @@
       } else {
         delete simAnimFrames[clave];
         pintar(1); // valor exacto, sin arrastre de redondeo
+        if (alTerminar) alTerminar();
       }
     }
     simAnimFrames[clave] = requestAnimationFrame(paso);
@@ -15292,50 +15301,126 @@
   /* Volver a contar a peticion, desde el boton de la cabecera. */
   function simRecontar() {
     simAnimarZona(document.getElementById('simDesgloseCab'), 'cab', 1100);
-    simAnimarZona(document.getElementById('simRankingFiltro'), 'rank', 1200);
+    simRankEvaluar(1200);
   }
 
-  /* Comparativa de las obras que dejaron en pie los dos filtros. Es el
-     eslabon que faltaba: el mandato y la industria mueven esta lista,
-     la lista se reordena con los cinco criterios, y de ahi cuelgan las
-     fichas vivas y la escala de comparacion. */
+  /* ---------------------------------------------------------------
+     LISTA COMPARATIVA DE LA PARTE A  (fusion de las dos que habia)
+
+     Antes convivian dos listas que decian casi lo mismo: la del filtro,
+     que la industria y el mandato recortaban, y el simulador
+     comparativo, que media siempre las doce obras y se limitaba a
+     atenuar las no seleccionadas. Ahora es una sola y reune las dos
+     funciones:
+
+       - del filtro, que el mandato y la industria la gobiernen y que de
+         ella cuelguen las fichas vivas y la escala;
+       - del simulador, los mandos de evaluar y reiniciar en ceros, el
+         arranque con el cursor y la posibilidad de ver el universo
+         completo con lo que queda fuera del filtro atenuado, sin
+         perderlo de vista.
+
+     El interruptor «ver las doce en contexto» es lo que evita volver a
+     tener dos listas: una misma lista, dos alcances.
+     --------------------------------------------------------------- */
   function renderSimuladorRankingFiltro() {
     const cont = document.getElementById('simRankingFiltro');
     if (!cont) return;
-    const obras = simFiltradas();
+    const sim = DB.simulador_megaobras;
+    if (!sim) return;
     const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
+    const delFiltro = simFiltradas();
+    const hayFiltro = (state.simuladorSector && state.simuladorSector !== 'todos') ||
+                      (state.simuladorSexenio && state.simuladorSexenio !== 'todos');
+    const universo = !!state.simRankUniverso;
+
+    /* En contexto se miden las doce; si no, solo las que el filtro dejo
+       en pie. En ambos casos manda el mismo criterio de ordenacion. */
+    const obras = (universo ? sim.obras.slice() : delFiltro.slice()).sort(orden.f);
+    const dentro = {};
+    delFiltro.forEach(o => { dentro[o.id] = true; });
 
     if (obras.length < 2) {
-      cont.innerHTML = obras.length === 1
-        ? '<p class="sim-mesa-aviso">Con estos filtros queda <strong>una sola obra</strong>, así que no hay nada que comparar todavía. ' +
-          'Quite uno de los dos filtros para volver a ver la comparativa.</p>'
-        : '';
+      cont.innerHTML =
+        '<p class="sim-mesa-aviso">Con estos filtros queda <strong>' +
+          (obras.length === 1 ? 'una sola obra' : 'ninguna obra') + '</strong>, así que no hay nada que comparar todavía. ' +
+          'Quite uno de los dos filtros, o ' +
+          '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.simRankUniverso(true)">' +
+          'vea las ' + sim.obras.length + ' obras en contexto</button>.</p>';
       return;
     }
 
     const rotulo = orden.id === 'cronologia' ? 'costo real, en orden cronológico' : orden.et.toLowerCase();
     const maximo = Math.max.apply(null, obras.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
     const fmtOrden = orden.id === 'sobrecosto' ? 'pctS' : 'mdp';
+    const marcadas = obras.filter(o => dentro[o.id]).length;
 
     const chips = SIM_ORDENES.map(o =>
       '<button type="button" class="sim-pill-btn' + (o.id === orden.id ? ' active' : '') + '" ' +
         'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('');
 
+    const titulo = universo
+      ? 'Las ' + obras.length + ' obras, comparadas por ' + rotulo
+      : 'Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo;
+
+    const subtitulo = universo
+      ? (hayFiltro
+          ? 'Está viendo el universo completo. Su selección señala <strong>' + marcadas + '</strong> de las ' +
+            obras.length + ' obras; las demás siguen presentes, atenuadas, para no perder la escala de comparación.'
+          : 'Está viendo el universo completo. Elija una industria o un mandato para que la lista resalte las obras que le tocan.')
+      : 'La barra mide el tamaño de la cifra frente a la mayor de esta lista. ' +
+        'Pulse cualquier renglón para ir a su ficha, aquí abajo.';
+
     cont.innerHTML =
       '<section class="sim-rank sim-rank-filtro">' +
         '<div class="sim-rank-cab">' +
-          '<h3 class="sim-rank-tit">Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo + '</h3>' +
-          '<span class="sim-rank-sub">La barra mide el tamaño de la cifra. Pulse cualquier renglón para ir a su ficha, aquí abajo.</span>' +
+          '<h3 class="sim-rank-tit">' + titulo + '</h3>' +
+          '<span class="sim-rank-sub">' + subtitulo + '</span>' +
         '</div>' +
+
         '<div class="sim-control-group">' +
           '<span class="sim-group-label">&#8645; Ordenar y medir por:</span>' +
           '<div class="sim-pill-group">' + chips + '</div>' +
         '</div>' +
-        '<ol class="sim-rank-filas">' +
+
+        /* Los mandos que venian del simulador comparativo, ahora al
+           servicio de esta unica lista. */
+        '<div class="evaluacion-controls-bar">' +
+          '<div class="eval-info-group">' +
+            '<span class="eval-badge">SIMULADOR COMPARATIVO</span>' +
+            '<span class="eval-status-text" id="simRankEstado">' + simRankTextoEstado(obras.length) + '</span>' +
+          '</div>' +
+          '<div class="eval-actions-group">' +
+            '<button type="button" class="eval-btn-primary" id="simRankBtn" ' +
+              'onclick="window.AuditEngine.simRankEvaluar()">' +
+              '<span>' + (state.simRankEvaluado ? '🔄' : '▶️') + '</span> ' +
+              (state.simRankEvaluado ? 'Volver a evaluar' : 'Evaluar las ' + obras.length + ' obras') + '</button>' +
+            '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.simRankReiniciar()">' +
+              '<span>↺</span> Reiniciar a ceros</button>' +
+            '<label class="eval-toggle-label" title="Empezar a medir en cuanto el cursor entre en la lista">' +
+              '<input type="checkbox" ' + (state.simRankHover ? 'checked' : '') + ' ' +
+                'onchange="window.AuditEngine.simRankToggleHover(this.checked)">' +
+              '<span>Activar al pasar cursor</span>' +
+            '</label>' +
+            '<label class="eval-toggle-label" title="Mantener a la vista las doce obras, con las que no entran en el filtro atenuadas">' +
+              '<input type="checkbox" ' + (universo ? 'checked' : '') + ' ' +
+                'onchange="window.AuditEngine.simRankUniverso(this.checked)">' +
+              '<span>Ver las ' + sim.obras.length + ' en contexto</span>' +
+            '</label>' +
+          '</div>' +
+        '</div>' +
+
+        '<ol class="sim-rank-filas" onmouseenter="window.AuditEngine.simRankHoverEntra()" ' +
+          'ontouchstart="window.AuditEngine.simRankHoverEntra()">' +
           obras.map((o, i) => {
             const v = simCompValor(o, orden.id);
-            return '<li class="sim-rank-fila">' +
-              '<button type="button" class="sim-rank-b" onclick="window.AuditEngine.simIrAObra(\'' + o.id + '\')">' +
+            const fuera = universo && hayFiltro && !dentro[o.id];
+            return '<li class="sim-rank-fila' + (fuera ? ' sim-comp-fuera' : '') + '">' +
+              '<button type="button" class="sim-rank-b" ' +
+                'onclick="window.AuditEngine.' +
+                  (fuera ? 'simVerSector(\'' + o.sector_id + '\', \'' + o.id + '\')'
+                         : 'simIrAObra(\'' + o.id + '\')') + '" ' +
+                'title="' + (fuera ? 'Poner esta industria en el filtro e ir a su ficha' : 'Ir a la ficha de esta obra') + '">' +
                 '<span class="sim-rank-n">' + (i + 1) + '</span>' +
                 '<span class="sim-rank-ico">' + o.icono + '</span>' +
                 '<span class="sim-rank-nom">' + o.nombre +
@@ -15351,12 +15436,72 @@
             '</li>';
           }).join('') +
         '</ol>' +
+
+        '<p class="sim-mesa-aviso"><strong>Cómo leer la barra.</strong> Mide el tamaño de la cifra frente a la mayor de la lista, no su dirección. ' +
+          'En cronología el orden es por periodo sexenal y la barra sigue midiendo el costo real, ' +
+          'para que la escala no cambie de significado a media lista.</p>' +
       '</section>';
 
-    /* Cada vez que se cambia de criterio la lista vuelve a contar desde
-       cero: se ve la barra crecer hasta su nuevo porcentaje en lugar de
-       saltar ya puesta. */
-    simAnimarZona(cont, 'rank', 1200);
+    /* Cada vez que la lista se rehace vuelve a contar desde cero: se ve
+       la barra crecer hasta su porcentaje en lugar de saltar ya puesta. */
+    simRankEvaluar(1200);
+  }
+
+  function simRankTextoEstado(cuantas) {
+    return state.simRankEvaluado
+      ? '<span style="color:var(--emerald-bright);">✓ Evaluación completada: las ' + cuantas + ' obras a escala real.</span>'
+      : '⚪ Barras en reposo (0.0%). Pulse «Evaluar» o pase el cursor para medir la escala real.';
+  }
+
+  /* Evaluar: las barras nacen en cero y suben a su escala real. */
+  function simRankEvaluar(duracionMs) {
+    const cont = document.getElementById('simRankingFiltro');
+    if (!cont) return;
+    const cuantas = cont.querySelectorAll('.sim-rank-fila').length;
+    if (!cuantas) return;
+    const estadoEl = document.getElementById('simRankEstado');
+    const btn = document.getElementById('simRankBtn');
+    state.simRankEvaluado = false;
+    if (estadoEl) estadoEl.innerHTML = '<span style="color:var(--gold-bright);">⚡ Escalando las ' + cuantas + ' obras…</span>';
+    if (btn) btn.innerHTML = '<span>⏳</span> Evaluando…';
+    simAnimarZona(cont, 'rank', duracionMs || 1400, function () {
+      state.simRankEvaluado = true;
+      if (estadoEl) estadoEl.innerHTML = simRankTextoEstado(cuantas);
+      if (btn) btn.innerHTML = '<span>🔄</span> Volver a evaluar';
+    });
+  }
+
+  /* Reiniciar en ceros sin rehacer la lista: el orden se queda, las
+     cifras se vacian y la medicion vuelve a estar por hacerse. */
+  function simRankReiniciar() {
+    const cont = document.getElementById('simRankingFiltro');
+    if (!cont) return;
+    if (simAnimFrames['rank']) { cancelAnimationFrame(simAnimFrames['rank']); delete simAnimFrames['rank']; }
+    state.simRankEvaluado = false;
+    cont.querySelectorAll('[data-anim-w]').forEach(el => { el.style.width = '0%'; });
+    cont.querySelectorAll('[data-anim-v]').forEach(el => { el.textContent = simFmt(0, el.dataset.animF); });
+    const estadoEl = document.getElementById('simRankEstado');
+    const btn = document.getElementById('simRankBtn');
+    if (estadoEl) estadoEl.innerHTML = simRankTextoEstado(cont.querySelectorAll('.sim-rank-fila').length);
+    if (btn) btn.innerHTML = '<span>▶️</span> Evaluar las ' + cont.querySelectorAll('.sim-rank-fila').length + ' obras';
+  }
+
+  function simRankToggleHover(activo) {
+    state.simRankHover = !!activo;
+  }
+
+  function simRankHoverEntra() {
+    if (!state.simRankHover || state.simRankEvaluado) return;
+    if (simAnimFrames['rank']) return;
+    simRankEvaluar();
+  }
+
+  /* Alcance de la lista: solo el filtro, o las doce con lo no
+     seleccionado atenuado. */
+  function simRankUniversoSet(activo) {
+    state.simRankUniverso = !!activo;
+    renderSimuladorRankingFiltro();
+    autolinkAmbito(document.getElementById('simRankingFiltro'));
   }
 
   /* Selector de mandato dentro de la parte A. Aqui vive la fusion: la
@@ -19677,6 +19822,11 @@
     simVerSector: simVerSector,
     setSimParte: setSimParte,
     simRecontar: simRecontar,
+    simRankEvaluar: simRankEvaluar,
+    simRankReiniciar: simRankReiniciar,
+    simRankToggleHover: simRankToggleHover,
+    simRankHoverEntra: simRankHoverEntra,
+    simRankUniverso: simRankUniversoSet,
     simSexEvaluar: simSexEvaluar,
     simSexReiniciar: simSexReiniciar,
     cerrarSimuladorDesglose: cerrarSimuladorDesglose,
