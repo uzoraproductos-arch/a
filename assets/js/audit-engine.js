@@ -721,6 +721,17 @@
         const l = (g.ley || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         return t.includes(q) || d.includes(q) || l.includes(q);
       });
+      // El termino exacto va primero, luego los que empiezan por la busqueda y
+      // al final los que solo la mencionan en su definicion. Sin esto, saltar
+      // desde una nota al pie abria la ficha vecina en lugar de la buscada.
+      const rango = g => {
+        const t = (g.termino || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (t === q) return 0;
+        if (t.startsWith(q)) return 1;
+        if (t.includes(q)) return 2;
+        return 3;
+      };
+      list = list.slice().sort((a, b) => rango(a) - rango(b));
     }
 
     if (list.length === 0) {
@@ -1855,6 +1866,7 @@
       if (subKey === 'jurisdiccional') {
         renderFuncionJurisdiccional();
       } else if (subKey === 'estructura') {
+        renderPjOrientacion();
         setPjView(currentPjView);
       } else {
         renderJudicialMinisters();
@@ -1957,6 +1969,29 @@
     { a: ['secretario de estudio y cuenta', 'secretaria de estudio y cuenta', 'secretarios de estudio y cuenta'], t: 'Secretario(a) de Estudio y Cuenta', r: 'ref-pnt-asesores-scjn', n: 25 },
     { a: ['seguro de separación individualizado'], t: 'Seguro de Separación Individualizado (SSI)', r: 'ref-manual-remun-pjf', n: 22 },
 
+
+    // --- Funcion jurisdiccional: amparo, control constitucional y precedente ---
+    { a: ['amparo indirecto'], t: 'Amparo Indirecto', r: 'ref-ley-amparo', n: 33 },
+    { a: ['amparo directo'], t: 'Amparo Directo', r: 'ref-ley-amparo', n: 33 },
+    { a: ['suspensión del acto reclamado', 'suspensión provisional', 'suspensión definitiva'], t: 'Suspensión del Acto Reclamado', r: 'ref-ley-amparo', n: 33 },
+    { a: ['interés legítimo'], t: 'Interés Legítimo', r: 'ref-ley-amparo', n: 33 },
+    { a: ['audiencia constitucional'], t: 'Audiencia Constitucional', r: 'ref-ley-amparo', n: 33 },
+    { a: ['informe justificado'], t: 'Informe Justificado', r: 'ref-ley-amparo', n: 33 },
+    { a: ['sobreseimiento'], t: 'Sobreseimiento', r: 'ref-ley-amparo', n: 33 },
+    { a: ['conceptos de violación', 'concepto de violación'], t: 'Concepto de Violación', r: 'ref-ley-amparo', n: 33 },
+    { a: ['contradicción de criterios'], t: 'Contradicción de Criterios', r: 'ref-ley-amparo', n: 33 },
+    { a: ['Ley de Amparo'], t: 'Ley de Amparo', r: 'ref-ley-amparo', n: 33, cs: true },
+    { a: ['acciones de inconstitucionalidad', 'acción de inconstitucionalidad'], t: 'Acción de Inconstitucionalidad', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['controversias constitucionales', 'controversia constitucional'], t: 'Controversia Constitucional', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['declaratoria general de inconstitucionalidad'], t: 'Declaratoria General de Inconstitucionalidad', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['precedentes obligatorios', 'precedente obligatorio'], t: 'Precedente Obligatorio', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['facultad de atracción'], t: 'Facultad de Atracción', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['Plenos Regionales', 'Pleno Regional'], t: 'Plenos Regionales', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['Tribunales Colegiados de Circuito', 'Tribunal Colegiado de Circuito', 'Tribunales Colegiados'], t: 'Tribunal Colegiado de Circuito', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['Juzgados de Distrito', 'Juzgado de Distrito'], t: 'Juzgado de Distrito', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['principio de relatividad', 'fórmula Otero'], t: 'Principio de Relatividad', r: 'ref-cpeum-control-constitucional', n: 34 },
+    { a: ['Semanario Judicial de la Federación', 'Duodécima Época'], t: 'Semanario Judicial de la Federación', r: 'ref-sjf-duodecima', n: 37 },
+
     // --- Electoral ---
     { a: ['lista nominal'], t: 'Lista Nominal y Padrón Electoral', r: 'ref-lgipe', n: 31 },
     { a: ['padrón electoral'], t: 'Lista Nominal y Padrón Electoral', r: 'ref-lgipe', n: 31 },
@@ -1990,7 +2025,10 @@
     'fj-tl-estado', 'fj-etapa-paso', 'fj-em-k', 'fj-em-v', 'fj-claves-tit',
     'fj-rec-nom', 'fj-rec-plazo', 'fj-rec-fund', 'fj-rec-lab', 'fj-esc-fund',
     'fj-ju-peso', 'fj-ju-k', 'fj-ju-via', 'fj-ju-fund', 'fj-det-cifra',
-    'fj-det-antes', 'fj-det-fund', 'fj-nav-btn', 'fj-tl-play'
+    'fj-det-antes', 'fj-det-fund', 'fj-nav-btn', 'fj-tl-play',
+    'pjo-kpi-num', 'pjo-kpi-lab', 'pjo-kpi-sub', 'pjo-modo-pie',
+    'pjo-modo-tit', 'pjo-col-tit', 'pjo-col-fecha', 'pj-peldano-tit',
+    'pj-peldano-cta', 'pj-peldano-n', 'pj-escalera-tit', 'pj-node-badge'
   ]);
 
   let autolinkIndice = null;
@@ -3237,7 +3275,7 @@
             badge: 'Cabeza del Poder Judicial Federal',
             badgeTipo: 'badge-gold',
             desc: 'Tribunal constitucional supremo de México. Ejerce control concentrado de la Constitución y tutela los derechos humanos consagrados en la Carta Magna.',
-            titular: 'Presidencia SCJN · 11 Ministros (9 en transición 2024)',
+            titular: 'Presidencia del Ministro Hugo Aguilar Ortiz · 9 Ministras y Ministros electos por voto popular (desde el 1 de septiembre de 2025)',
             plazasPresupuesto: '3,850 plazas totales en el tribunal supremo · $7,329 mdp anuales',
             marco: 'Art. 94 y Art. 105 CPEUM',
             quehacer: 'Cúspide de la judicatura federal. Resuelve controversias constitucionales, acciones de inconstitucionalidad, amparos directos en revisión con temas de constitucionalidad trascendente y establece precedentes obligatorios para todos los tribunales y juzgados del país.',
@@ -5202,6 +5240,149 @@
     setPjView(currentPjView);
   }
 
+
+  /* ======================================================================
+     SUBPESTANA 4.1 - CAPA VISUAL DE ORIENTACION
+     Cifras de entrada, contraste antes/despues de la reforma y selector de
+     vistas en tarjetas. No altera el contenido: lo ordena para leerlo.
+     ====================================================================== */
+
+  const PJ_MODOS = [
+    { id: 'scjn', n: '1', ico: '🏛️', tit: 'La Suprema Corte por dentro',
+      txt: 'El organigrama del máximo tribunal: quién resuelve, quién da fe de lo resuelto y quién sostiene técnicamente cada ponencia.',
+      pie: 'Organigrama SCJN' },
+    { id: 'pjf', n: '2', ico: '⚖️', tit: 'Todo el Poder Judicial Federal',
+      txt: 'De la Suprema Corte al último juzgado: órganos ordinarios, especializados, auxiliares, de disciplina y de administración.',
+      pie: 'Estructura completa del PJF' },
+    { id: 'territorio', n: '3', ico: '🗺️', tit: 'Dónde está cada tribunal',
+      txt: 'Los 32 circuitos federales sobre el mapa y los partidos judiciales de cada entidad, con su expediente completo.',
+      pie: '32 circuitos · mapa y cartograma' }
+  ];
+
+  function pjContarNodos(arbol) {
+    return arbol.reduce((acc, lvl) => acc + (lvl.nodos ? lvl.nodos.length : 0), 0);
+  }
+
+  function renderPjOrientacion() {
+    const cont = document.getElementById('pjOrientacion');
+    if (!cont || typeof PJF_ESTRUCTURA_DATA === 'undefined') return;
+
+    const totalOrganos = pjContarNodos(PJF_ESTRUCTURA_DATA.scjn) + pjContarNodos(PJF_ESTRUCTURA_DATA.pjf);
+
+    const kpis = [
+      { ico: '⚖️', num: '9', lab: 'Ministras y ministros', sub: 'Electos por voto popular · desde el 1 sep 2025', tono: 'gold' },
+      { ico: '🗺️', num: '32', lab: 'Circuitos judiciales federales', sub: 'Uno por entidad federativa', tono: 'cyan' },
+      { ico: '🏛️', num: String(totalOrganos), lab: 'Órganos documentados', sub: 'Fichas de esta subpestaña', tono: 'gold' },
+      { ico: '👥', num: '54,500', lab: 'Plazas y personas empleadas', sub: 'Juzgados y tribunales federales', tono: 'emerald' },
+      { ico: '💰', num: '$78,327', lab: 'Millones de pesos al año', sub: 'Ramo 03 aprobado en el PEF', tono: 'crimson' }
+    ];
+
+    const antes = [
+      '<b>11</b> ministras y ministros',
+      'Un Pleno <b>y dos Salas</b>: Primera (civil y penal) y Segunda (administrativa y laboral)',
+      'Designados por el <b>Senado</b> a propuesta del Ejecutivo',
+      'El <b>Consejo de la Judicatura Federal</b> administraba y sancionaba a la vez',
+      'Hacían falta <b>8 de 11 votos</b> para invalidar una ley'
+    ];
+    const hoy = [
+      '<b>9</b> ministras y ministros',
+      '<b>Sólo Pleno.</b> Las Salas dejaron de existir: todo se resuelve en sesión plenaria pública',
+      'Electos por <b>voto popular</b>, con encargos de doce años',
+      'Dos órganos separados: <b>Administración Judicial</b> por un lado, <b>Disciplina Judicial</b> por el otro',
+      'Bastan <b>6 de 9 votos</b> para invalidar una ley'
+    ];
+
+    cont.innerHTML =
+      '<div class="pjo-wrap">' +
+
+        '<div class="pjo-kpis">' +
+          kpis.map(k =>
+            '<div class="pjo-kpi" data-tono="' + k.tono + '">' +
+              '<span class="pjo-kpi-ico" aria-hidden="true">' + k.ico + '</span>' +
+              '<span class="pjo-kpi-num">' + k.num + '</span>' +
+              '<span class="pjo-kpi-lab">' + k.lab + '</span>' +
+              '<span class="pjo-kpi-sub">' + k.sub + '</span>' +
+            '</div>').join('') +
+        '</div>' +
+
+        '<div class="pjo-cambio">' +
+          '<div class="pjo-cambio-tit">Antes de seguir: este organigrama cambió hace poco</div>' +
+          '<p class="pjo-cambio-sub">Casi todo lo que se encuentra escrito sobre la Suprema Corte describe una institución que ya no existe con esa forma. Compare las dos columnas antes de recorrer las fichas: es la diferencia entre entender el organigrama y confundirse con él.</p>' +
+          '<div class="pjo-cambio-cols">' +
+            '<div class="pjo-col" data-lado="antes">' +
+              '<div class="pjo-col-tit">Como era</div>' +
+              '<div class="pjo-col-fecha">Hasta el 31 de agosto de 2025</div>' +
+              '<ul>' + antes.map(x => '<li>' + x + '</li>').join('') + '</ul>' +
+            '</div>' +
+            '<div class="pjo-flecha" aria-hidden="true">&#10142;</div>' +
+            '<div class="pjo-col" data-lado="hoy">' +
+              '<div class="pjo-col-tit">Como es hoy</div>' +
+              '<div class="pjo-col-fecha">Desde el 1 de septiembre de 2025</div>' +
+              '<ul>' + hoy.map(x => '<li>' + x + '</li>').join('') + '</ul>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pjo-cambio-pie"><strong>Sobre las Salas:</strong> la Primera y la Segunda Sala funcionaron durante décadas como dos tribunales especializados dentro de la Corte y hoy <strong>ya no operan</strong>. Sus fichas se conservan al final del organigrama de la Suprema Corte, marcadas como anexo histórico, porque miles de sentencias vigentes fueron dictadas por ellas y siguen produciendo efectos.</div>' +
+        '</div>' +
+
+        '<div class="pjo-modos" role="tablist" aria-label="Vistas de la estructura judicial">' +
+          PJ_MODOS.map(m =>
+            '<button type="button" class="pjo-modo' + (currentPjView === m.id ? ' active' : '') + '"' +
+            ' id="pjoModo_' + m.id + '" role="tab" aria-selected="' + (currentPjView === m.id) + '"' +
+            ' onclick="window.AuditEngine.setPjView(\'' + m.id + '\')">' +
+              '<span class="pjo-modo-num" aria-hidden="true">' + m.n + '</span>' +
+              '<span class="pjo-modo-ico" aria-hidden="true">' + m.ico + '</span>' +
+              '<span class="pjo-modo-tit">' + m.tit + '</span>' +
+              '<span class="pjo-modo-txt">' + m.txt + '</span>' +
+              '<span class="pjo-modo-pie">' + m.pie + '</span>' +
+            '</button>').join('') +
+        '</div>' +
+
+      '</div>';
+  }
+
+  function actualizarPjModos() {
+    PJ_MODOS.forEach(m => {
+      const el = document.getElementById('pjoModo_' + m.id);
+      if (el) {
+        el.classList.toggle('active', currentPjView === m.id);
+        el.setAttribute('aria-selected', String(currentPjView === m.id));
+      }
+    });
+  }
+
+  function irANivelPj(view, idx) {
+    const el = document.getElementById('pjLevel_' + view + '_' + idx);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 90;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: y, behavior: reduce ? 'instant' : 'smooth' });
+    el.classList.add('pj-nivel-destacado');
+    setTimeout(() => el.classList.remove('pj-nivel-destacado'), 1400);
+  }
+
+  function pjEscaleraHtml(dataTree, view) {
+    const total = dataTree.length;
+    return '<div class="pj-escalera-wrap">' +
+      '<div class="pj-escalera-tit">Mapa jerárquico</div>' +
+      '<p class="pj-escalera-sub">La estructura baja de arriba hacia abajo: cada peldaño es un nivel y su ancho indica qué tan cerca está de la cúspide. Pulse cualquiera para saltar directo a sus fichas.</p>' +
+      '<div class="pj-escalera">' +
+      dataTree.map((lvl, i) => {
+        const partes = lvl.nivel.split(':');
+        const titulo = partes[1] ? partes[1].trim() : lvl.nivel;
+        const ancho = lvl.esAnexo ? 62 : Math.round(100 - (i * (34 / Math.max(1, total - 1))));
+        const cuenta = lvl.nodos ? lvl.nodos.length : 0;
+        return '<button type="button" class="pj-peldano" data-anexo="' + (lvl.esAnexo ? 'si' : 'no') + '"' +
+          ' style="--ancho:' + ancho + '%"' +
+          ' onclick="window.AuditEngine.irANivelPj(\'' + view + '\', ' + (i + 1) + ')">' +
+            '<span class="pj-peldano-n">' + (lvl.esAnexo ? '⚑' : (i + 1)) + '</span>' +
+            '<span class="pj-peldano-tit">' + titulo + '</span>' +
+            '<span class="pj-peldano-cta">' + cuenta + (cuenta === 1 ? ' ficha' : ' fichas') + ' →</span>' +
+          '</button>';
+      }).join('') +
+      '</div></div>';
+  }
+
+
   function setPjView(viewMode) {
     currentPjView = viewMode;
 
@@ -5212,6 +5393,7 @@
     if (btnScjn) btnScjn.classList.toggle('active', viewMode === 'scjn');
     if (btnPjf) btnPjf.classList.toggle('active', viewMode === 'pjf');
     if (btnTerritorio) btnTerritorio.classList.toggle('active', viewMode === 'territorio');
+    actualizarPjModos();
 
     const stageScjn = document.getElementById('pjStageScjn');
     const stagePjf = document.getElementById('pjStagePjf');
@@ -5495,6 +5677,8 @@
         <!-- Espina conectora vertical central -->
         <div class="pj-concept-spine"></div>
 
+        ${pjEscaleraHtml(dataTree, view)}
+
         <!-- Barra de herramientas y filtros por nivel -->
         <div class="pj-concept-toolbar" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); padding:12px 16px; border-radius:8px; position:relative; z-index:3;">
           <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
@@ -5555,8 +5739,8 @@
                     </div>
 
                     <div class="pj-concept-card-meta">
-                      <div>👤 <strong>Titularidad / Integración:</strong> ${n.titular}</div>
-                      <div>📜 <strong>Fundamento:</strong> ${n.marco}</div>
+                      <div><span aria-hidden="true">👤</span><span><strong>Quién lo integra</strong>${n.titular}</span></div>
+                      <div><span aria-hidden="true">📜</span><span><strong>Fundamento legal</strong>${n.marco}</span></div>
                     </div>
 
                     <div class="pj-concept-card-action">
@@ -6075,7 +6259,7 @@
                 <span>🏛️</span> Suprema Corte de Justicia de la Nación (SCJN)
               </div>
               <span class="pj-tree-node-badge badge-gold" style="align-self:center;">
-                11 Ministros (9 en Reforma 2024) · Cabeza del PJF
+                9 Ministras y Ministros · Cabeza del PJF
               </span>
               <p class="pj-tree-node-desc">
                 Tribunal constitucional supremo. Ejerce el control concentrado: Acciones de Inconstitucionalidad, Controversias Constitucionales y Precedentes Obligatorios.
@@ -13281,6 +13465,9 @@
     if (!container || !DB.referencias_legales) return;
 
     let items = DB.referencias_legales;
+    // Se ordena por numero de cita para que el catalogo siga la numeracion
+    // de las notas al pie, sin depender del orden de insercion en la base.
+    items = items.slice().sort((a, b) => (a.num || 0) - (b.num || 0));
     if (filter !== 'todas') {
       items = items.filter(ref => ref.categoria === filter);
     }
@@ -14384,6 +14571,7 @@
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
     safeRun(renderPanoramaErario, 'renderPanoramaErario');
     safeRun(renderFuncionJurisdiccional, 'renderFuncionJurisdiccional');
+    safeRun(renderPjOrientacion, 'renderPjOrientacion');
     safeRun(() => programarAutolink(400), 'programarAutolink');
     safeRun(iniciarPistasDeslizamiento, 'iniciarPistasDeslizamiento');
 
@@ -16644,6 +16832,8 @@
     // Subpestaña 4.1: Estructura Orgánica y Territorial del PJF
     initJudicialEstructuraModule: initJudicialEstructuraModule,
     renderJudicialConceptualMap: renderJudicialConceptualMap,
+    renderPjOrientacion: renderPjOrientacion,
+    irANivelPj: irANivelPj,
     filterPjConceptLevel: filterPjConceptLevel,
     setPjView: setPjView,
     setPjMapMode: setPjMapMode,

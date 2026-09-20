@@ -7502,10 +7502,15 @@ nav.tabbar button.active .num {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 4px 9px;
   border-radius: 4px;
-  white-space: nowrap;
+  /* Antes: white-space:nowrap. Las insignias largas se salian de la tarjeta
+     y quedaban cortadas a la mitad. Ahora se acomodan en varias lineas. */
+  white-space: normal;
+  line-height: 1.4;
   letter-spacing: 0.5px;
+  align-self: flex-start;
+  max-width: 100%;
 }
 
 .badge-gold {
@@ -7933,11 +7938,13 @@ nav.tabbar button.active .num {
 }
 
 .pj-concept-card-top {
+  /* Titulo arriba, insignia debajo: en una rejilla de dos columnas las
+     insignias largas invadian el titulo vecino. */
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 11px;
 }
 
 .pj-concept-card-title {
@@ -9935,4 +9942,239 @@ nav.tabbar button:focus-visible,
   .fj-inst-detalle, .fj-etapa { animation: none; }
   .fj-inst-card:hover, .fj-nodo:hover, .fj-juris-card:hover, .fj-det-card:hover { transform: none; }
   .fj-tl-barra span { transition: none; }
+}
+
+
+/* ==========================================================================
+   PESTANA 4.1 - CAPA VISUAL DE ORIENTACION
+   Cifras de entrada, contraste antes/despues de la reforma, selector de
+   vistas en tarjetas y escalera jerarquica navegable.
+   ========================================================================== */
+
+.pjo-wrap { margin-bottom: 26px; }
+
+/* --- Cifras de un vistazo ------------------------------------------------ */
+.pjo-kpis {
+  display: grid; gap: 10px; margin-bottom: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+}
+.pjo-kpi {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--gold); border-radius: 9px;
+  padding: 14px 13px 12px; text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.pjo-kpi:hover { transform: translateY(-3px); border-color: var(--border-gold); }
+.pjo-kpi[data-tono="cyan"] { border-top-color: var(--cyan); }
+.pjo-kpi[data-tono="crimson"] { border-top-color: var(--crimson-bright); }
+.pjo-kpi[data-tono="emerald"] { border-top-color: var(--emerald-bright); }
+.pjo-kpi-ico { font-size: 20px; line-height: 1; display: block; margin-bottom: 6px; }
+.pjo-kpi-num {
+  display: block; font-family: var(--font-mono); font-weight: 700;
+  font-size: 26px; line-height: 1.05; color: var(--gold-bright);
+  letter-spacing: -0.5px;
+}
+.pjo-kpi[data-tono="cyan"] .pjo-kpi-num { color: var(--cyan); }
+.pjo-kpi[data-tono="crimson"] .pjo-kpi-num { color: var(--crimson-bright); }
+.pjo-kpi[data-tono="emerald"] .pjo-kpi-num { color: var(--emerald-bright); }
+.pjo-kpi-lab {
+  display: block; font-size: 12px; color: var(--text-main);
+  line-height: 1.35; margin-top: 5px; font-weight: 600;
+}
+.pjo-kpi-sub {
+  display: block; font-family: var(--font-mono); font-size: 9.5px;
+  color: var(--text-dim); line-height: 1.4; margin-top: 4px;
+}
+
+/* --- Antes / despues de la reforma --------------------------------------- */
+.pjo-cambio {
+  background: var(--bg-card-alt); border: 1px solid var(--border-gold);
+  border-radius: 10px; padding: 18px 20px; margin-bottom: 18px;
+}
+.pjo-cambio-tit {
+  font-family: var(--font-serif); font-size: 19px; color: var(--gold-bright);
+  line-height: 1.3; margin-bottom: 4px;
+}
+.pjo-cambio-sub {
+  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+  max-width: 78ch; margin-bottom: 16px;
+}
+.pjo-cambio-cols {
+  display: grid; gap: 12px; align-items: stretch;
+  grid-template-columns: 1fr 44px 1fr;
+}
+.pjo-col {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 8px; padding: 14px 15px;
+}
+.pjo-col[data-lado="antes"] { border-left: 3px solid var(--text-dim); }
+.pjo-col[data-lado="hoy"] { border-left: 3px solid var(--emerald-bright); }
+.pjo-col-tit {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.4px;
+  text-transform: uppercase; margin-bottom: 3px; color: var(--text-dim);
+}
+.pjo-col[data-lado="hoy"] .pjo-col-tit { color: var(--emerald-bright); }
+.pjo-col-fecha {
+  font-size: 11.5px; color: var(--text-dim); font-style: italic; margin-bottom: 11px;
+}
+.pjo-col ul { list-style: none; display: grid; gap: 8px; }
+.pjo-col li {
+  position: relative; padding-left: 19px;
+  font-size: 12.8px; line-height: 1.55; color: var(--text-secondary);
+}
+.pjo-col[data-lado="antes"] li::before {
+  content: '\2715'; position: absolute; left: 2px; top: 1px;
+  color: var(--text-dim); font-size: 10px;
+}
+.pjo-col[data-lado="hoy"] li::before {
+  content: '\2713'; position: absolute; left: 2px; top: 0;
+  color: var(--emerald-bright); font-size: 11px; font-weight: 700;
+}
+.pjo-col li b { color: var(--text-main); font-weight: 600; }
+.pjo-flecha {
+  display: grid; place-items: center;
+  font-size: 22px; color: var(--gold); line-height: 1;
+}
+.pjo-cambio-pie {
+  margin-top: 14px; padding: 11px 13px; border-radius: 6px;
+  background: rgba(231, 76, 60, 0.07); border-left: 3px solid var(--crimson-bright);
+  font-size: 12.8px; line-height: 1.6; color: var(--text-main); max-width: 78ch;
+}
+
+/* --- Selector de vistas en tarjetas -------------------------------------- */
+.pjo-modos {
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.pjo-modo {
+  cursor: pointer; font: inherit; color: inherit; text-align: left;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 10px; padding: 16px; position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.pjo-modo:hover { transform: translateY(-3px); background: var(--bg-card-hover); }
+.pjo-modo.active {
+  border-color: var(--gold); background: var(--bg-card-alt);
+  box-shadow: 0 0 0 1px var(--gold-glow), 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+.pjo-modo-num {
+  position: absolute; top: 12px; right: 14px;
+  font-family: var(--font-mono); font-size: 30px; font-weight: 700;
+  color: var(--border-accent); line-height: 1;
+}
+.pjo-modo.active .pjo-modo-num { color: rgba(201, 168, 76, 0.38); }
+.pjo-modo-ico { font-size: 25px; line-height: 1; display: block; margin-bottom: 9px; }
+.pjo-modo-tit {
+  display: block; font-family: var(--font-serif); font-size: 16.5px;
+  line-height: 1.3; color: var(--text-main); margin-bottom: 5px; padding-right: 34px;
+}
+.pjo-modo.active .pjo-modo-tit { color: var(--gold-bright); }
+.pjo-modo-txt {
+  display: block; font-size: 12.5px; line-height: 1.55;
+  color: var(--text-secondary); margin-bottom: 9px;
+}
+.pjo-modo-pie {
+  display: block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.7px; text-transform: uppercase; color: var(--text-dim);
+}
+.pjo-modo.active .pjo-modo-pie { color: var(--gold); }
+
+/* --- Escalera jerarquica navegable --------------------------------------- */
+.pj-escalera-wrap {
+  background: rgba(255, 255, 255, 0.015); border: 1px solid var(--border-subtle);
+  border-radius: 9px; padding: 15px 17px; margin-bottom: 20px;
+  position: relative; z-index: 3;
+}
+.pj-escalera-tit {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 1.4px;
+  text-transform: uppercase; color: var(--gold-bright); margin-bottom: 3px;
+}
+.pj-escalera-sub {
+  font-size: 12.3px; color: var(--text-secondary); line-height: 1.55;
+  margin-bottom: 13px; max-width: 78ch;
+}
+.pj-escalera { display: grid; gap: 6px; }
+.pj-peldano {
+  cursor: pointer; font: inherit; color: inherit; text-align: left;
+  width: var(--ancho, 100%); min-width: 0;
+  display: grid; grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 11px; align-items: center;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--gold); border-radius: 7px;
+  padding: 10px 13px;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+.pj-peldano:hover { background: var(--bg-card-hover); border-color: var(--gold); transform: translateX(3px); }
+.pj-peldano[data-anexo="si"] { border-left-color: var(--amber); opacity: 0.85; }
+.pj-peldano-n {
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 700;
+  background: rgba(201, 168, 76, 0.16); color: var(--gold-bright);
+}
+.pj-peldano[data-anexo="si"] .pj-peldano-n { background: rgba(243, 156, 18, 0.16); color: var(--amber); }
+.pj-peldano-tit {
+  font-size: 13px; line-height: 1.4; color: var(--text-main);
+  font-family: var(--font-sans); font-weight: 600;
+}
+.pj-peldano-cta {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.6px;
+  color: var(--text-dim); white-space: nowrap;
+}
+
+/* --- Tarjeta de organo: jerarquia visual mas clara ----------------------- */
+.pj-concept-card-title {
+  display: flex; align-items: flex-start; gap: 9px;
+}
+.pj-concept-card-title > span:first-child {
+  flex: 0 0 auto; width: 31px; height: 31px; border-radius: 8px;
+  display: grid; place-items: center; font-size: 16px;
+  background: rgba(201, 168, 76, 0.1); border: 1px solid var(--border-gold);
+}
+.pj-concept-card-meta {
+  display: grid !important; gap: 7px !important;
+  font-family: var(--font-sans) !important; font-size: 11.8px !important;
+  color: var(--text-secondary) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  padding-top: 10px !important;
+}
+.pj-concept-card-meta > div {
+  display: grid; grid-template-columns: 17px minmax(0, 1fr);
+  gap: 8px; align-items: start; line-height: 1.55;
+}
+.pj-concept-card-meta strong {
+  color: var(--text-dim); font-family: var(--font-mono);
+  font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase;
+  display: block; margin-bottom: 1px; font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .pjo-cambio-cols { grid-template-columns: 1fr; }
+  .pjo-flecha { transform: rotate(90deg); font-size: 19px; }
+  .pj-peldano { width: 100% !important; }
+  .pjo-kpis { grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); }
+  .pjo-kpi-num { font-size: 22px; }
+  .pjo-cambio-sub, .pjo-cambio-pie, .pj-escalera-sub { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pjo-kpi:hover, .pjo-modo:hover, .pj-peldano:hover { transform: none; }
+}
+
+/* Destello al saltar a un nivel desde la escalera jerarquica */
+.pj-concept-level-block.pj-nivel-destacado {
+  animation: pjDestello 1.4s ease-out 1;
+  border-radius: 10px;
+}
+@keyframes pjDestello {
+  0%   { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+  18%  { box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.45); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pj-concept-level-block.pj-nivel-destacado { animation: none; }
+}
+
+/* Medida de lectura en las fichas del organigrama */
+.pj-concept-card-desc, .pj-concept-card-meta > div { max-width: 78ch; }
+@media (max-width: 860px) {
+  .pj-concept-card-desc, .pj-concept-card-meta > div { max-width: none; }
 }

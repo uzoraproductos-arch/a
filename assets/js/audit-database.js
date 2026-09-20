@@ -172,7 +172,7 @@ window.AUDIT_DB = {
         "efecto": "Relativo. Ampara sólo a quien lo pidió: la norma sigue viva para todos los demás. Es la llamada fórmula Otero.",
         "plazoClave": "15 días hábiles como regla general (art. 17 Ley de Amparo).",
         "resuelve": "Juzgados de Distrito (amparo indirecto) y Tribunales Colegiados de Circuito (amparo directo).",
-        "dato": "834,518 amparos ingresaron en 2024: 640,161 indirectos y 194,357 directos.",
+        "dato": "834,518 amparos ingresaron en 2024: 640,161 indirectos y 194,357 directos. <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-inegi-cnijf')\">[36]</a>",
         "datoEstado": "oficial"
       },
       {
@@ -202,7 +202,7 @@ window.AUDIT_DB = {
         "efecto": "Invalidez con efectos generales: la norma desaparece del orden jurídico para todos.",
         "plazoClave": "30 días naturales siguientes a la publicación de la norma. Vencido el plazo, la norma queda inatacable por esta vía.",
         "resuelve": "El Pleno de la Suprema Corte. Se requiere el voto de al menos 6 de los 9 ministros.",
-        "dato": "El umbral era de 8 votos de 11 hasta la reforma de 2024; hoy es de 6 de 9.",
+        "dato": "El umbral era de 8 votos de 11 hasta la reforma de 2024; hoy es de 6 de 9. <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-cpeum-control-constitucional')\">[34]</a>",
         "datoEstado": "oficial"
       },
       {
@@ -603,7 +603,7 @@ window.AUDIT_DB = {
         "cifra": "6 de 9",
         "antes": "Antes: 8 de 11",
         "texto": "Hasta 2024 hacían falta ocho votos de once —el 72.7% del Pleno— para expulsar una norma del orden jurídico. Hoy bastan seis de nueve: 66.7%. Menos personas y un umbral proporcionalmente más bajo deciden la validez de las leyes de todo el país.",
-        "fundamento": "Art. 105 fracc. II CPEUM, texto vigente",
+        "fundamento": "Art. 105 fracc. II CPEUM, texto vigente <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-cpeum-control-constitucional')\">[34]</a>",
         "estado": "oficial"
       },
       {
@@ -612,7 +612,7 @@ window.AUDIT_DB = {
         "cifra": "7 de 11",
         "antes": "Se necesitaban 8",
         "texto": "En noviembre de 2024, siete de once ministros votaron por invalidar partes de la reforma judicial. Como el umbral vigente era de ocho, la acción se desestimó sin estudio de fondo. Una mayoría absoluta del tribunal constitucional no bastó para detener la reforma que lo transformaba.",
-        "fundamento": "Acción de inconstitucionalidad 164/2024 y acumuladas",
+        "fundamento": "Acción de inconstitucionalidad 164/2024 y acumuladas <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-ai-164-2024')\">[35]</a>",
         "estado": "oficial"
       },
       {
@@ -621,7 +621,7 @@ window.AUDIT_DB = {
         "cifra": "9",
         "antes": "Antes: Pleno + 2 Salas",
         "texto": "Al desaparecer la Primera y la Segunda Sala tras doscientos años de funcionamiento, la Corte resuelve únicamente en Pleno. Se perdió la deliberación en dos foros especializados —uno civil y penal, otro administrativo y laboral— y con ella la contradicción interna que obligaba a afinar los criterios antes de volverlos obligatorios.",
-        "fundamento": "Reforma constitucional DOF 15/09/2024 · nueva integración desde el 1 de septiembre de 2025",
+        "fundamento": "Reforma constitucional DOF 15/09/2024 <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-reforma-judicial')\">[19]</a> · nueva integración desde el 1 de septiembre de 2025",
         "estado": "oficial"
       },
       {
@@ -630,7 +630,7 @@ window.AUDIT_DB = {
         "cifra": "1",
         "antes": "Antes: 5 sentencias",
         "texto": "Desde 2021 no hacen falta cinco casos para fijar jurisprudencia en la Suprema Corte: basta una sentencia con la mayoría calificada. El sistema responde más rápido, pero una regla obligatoria para todos los jueces del país puede nacer de un solo expediente, sin el contraste de casos sucesivos que antes la depuraba.",
-        "fundamento": "Art. 94 CPEUM · reforma de 11 de marzo de 2021",
+        "fundamento": "Art. 94 CPEUM · reforma de 11 de marzo de 2021 <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-cpeum-control-constitucional')\">[34]</a>",
         "estado": "oficial"
       },
       {
@@ -639,7 +639,7 @@ window.AUDIT_DB = {
         "cifra": "17 oct 2025",
         "antes": "Vigente al día siguiente de su publicación",
         "texto": "La reforma publicada el 16 de octubre de 2025 exige que el interés legítimo se traduzca en una afectación real, actual y diferenciada —el interés simple deja de servir—, refuerza las causales para negar la suspensión por orden público e interés social y prohíbe que la suspensión tenga efectos generales frente a normas. Su artículo tercero transitorio la aplica a las actuaciones posteriores en juicios ya en trámite; la Barra Mexicana, Colegio de Abogados, sostuvo públicamente que esa aplicación es retroactiva y contraria al artículo 14 constitucional.",
-        "fundamento": "Decreto DOF 16/10/2025 · posicionamiento BMA de 20/10/2025",
+        "fundamento": "Decreto DOF 16/10/2025 <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-ley-amparo')\">[33]</a> · posicionamiento BMA de 20/10/2025 <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-bma-amparo')\">[38]</a>",
         "estado": "oficial"
       },
       {
@@ -648,7 +648,7 @@ window.AUDIT_DB = {
         "cifra": "Art. 61-III",
         "antes": "Reforma DOF 13/03/2025",
         "texto": "El amparo se declaró improcedente contra los actos del Tribunal de Disciplina Judicial y del Órgano de Administración Judicial, los dos órganos que sustituyeron al Consejo de la Judicatura. Sumado a que las resoluciones del Tribunal de Disciplina son definitivas e inatacables por mandato constitucional, se configura un espacio de poder público sin control judicial por la vía del amparo.",
-        "fundamento": "Art. 61 fracc. III Ley de Amparo · art. 100 CPEUM",
+        "fundamento": "Art. 61 fracc. III Ley de Amparo <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-ley-amparo')\">[33]</a> · art. 100 CPEUM <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-cpeum-control-constitucional')\">[34]</a>",
         "estado": "oficial"
       },
       {
@@ -657,7 +657,7 @@ window.AUDIT_DB = {
         "cifra": "2 de cada 100",
         "antes": "834,518 amparos ingresados en 2024",
         "texto": "En 2024 ingresaron 640,161 amparos indirectos a los Juzgados de Distrito y 194,357 amparos directos a los Tribunales Colegiados. En el mismo año, la Suprema Corte recibió 16,370 asuntos jurisdiccionales de todo tipo. La proporción es de aproximadamente dos por cada cien: el control constitucional de última instancia es, por diseño, un cuello de botella.",
-        "fundamento": "INEGI, Censo Nacional de Impartición de Justicia Federal 2025 (datos 2024)",
+        "fundamento": "INEGI, Censo Nacional de Impartición de Justicia Federal 2025 (datos 2024) <a class=\"ref-link\" onclick=\"window.AuditEngine.goToRef('ref-inegi-cnijf')\">[36]</a>",
         "estado": "derivado"
       },
       {
@@ -666,7 +666,7 @@ window.AUDIT_DB = {
         "cifra": "Análisis",
         "antes": "Crítica académica documentada",
         "texto": "Un juez puede apartarse de un precedente sólo si argumenta suficientemente por qué. Al mismo tiempo, el Tribunal de Disciplina Judicial —electo por voto popular y con resoluciones inatacables— concentra la potestad sancionadora sobre los juzgadores. La literatura especializada advierte que esa combinación puede convertir el precedente en un instrumento de disciplina vertical y desincentivar el disenso razonado, que es la forma en que la jurisprudencia evoluciona. Se presenta como análisis doctrinal, no como dato verificado.",
-        "fundamento": "Crítica académica (Nexos, El Juego de la Corte; Instituto de Investigaciones Jurídicas UNAM)",
+        "fundamento": "Crítica académica (Nexos, El Juego de la Corte; Instituto de Investigaciones Jurídicas UNAM) · sin cita oficial equivalente",
         "estado": "analisis"
       }
     ],
@@ -3046,6 +3046,126 @@ window.AUDIT_DB = {
   ],
   "glosario": [
     {
+      "termino": "Amparo Indirecto",
+      "definicion": "Vía del juicio de amparo que se promueve ante un Juzgado de Distrito contra actos, omisiones o normas generales de cualquier autoridad, cuando no se trata de una sentencia definitiva. Se tramita en dos cuadernos paralelos: el principal, que resuelve el fondo en la audiencia constitucional, y el incidental, donde se decide la suspensión del acto. Admite recurso de revisión.",
+      "ley": "Art. 107 Ley de Amparo · art. 107 fracc. VII CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Amparo Directo",
+      "definicion": "Vía del juicio de amparo que se promueve contra sentencias definitivas, laudos laborales y resoluciones que ponen fin a un juicio, cuando ya no procede recurso ordinario. Se presenta por conducto de la propia autoridad que dictó la sentencia y lo resuelve un Tribunal Colegiado de Circuito en una sola instancia, sin audiencia ni pruebas nuevas.",
+      "ley": "Arts. 170 a 189 Ley de Amparo · art. 107 fracc. V y VI CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Suspensión del Acto Reclamado",
+      "definicion": "Medida cautelar que congela los efectos del acto impugnado mientras se resuelve el amparo. Tiene dos momentos: la provisional, que se concede de entrada, y la definitiva, que se decide tras la audiencia incidental. El juez pondera la apariencia del buen derecho y el peligro en la demora frente al interés social. En la práctica es la etapa decisiva del juicio, porque un amparo ganado sobre un daño ya consumado no restituye nada.",
+      "ley": "Arts. 125 a 158 Ley de Amparo · arts. 128, 129 y 138",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Interés Legítimo",
+      "definicion": "Condición que debe acreditar quien promueve un amparo sin ser titular directo de un derecho subjetivo. Tras la reforma del 16 de octubre de 2025 exige demostrar una afectación real, actual y diferenciada del resto de las personas, de modo que la anulación del acto produzca un beneficio cierto y no hipotético. El interés simple —el de cualquier ciudadano en la legalidad general— no basta.",
+      "ley": "Art. 5 fracc. I Ley de Amparo · art. 107 fracc. I CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Acción de Inconstitucionalidad",
+      "definicion": "Medio de control constitucional que confronta en abstracto una norma general con la Constitución, sin necesidad de un caso concreto ni de una víctima. La pueden promover el 33% de los integrantes de una cámara o de un congreso local, el Ejecutivo Federal, los partidos políticos contra leyes electorales, los organismos de derechos humanos y la Fiscalía General en materia penal, dentro de los 30 días naturales siguientes a la publicación de la norma. Invalida con efectos generales si la aprueban al menos seis de los nueve ministros.",
+      "ley": "Art. 105 fracc. II CPEUM · Ley Reglamentaria del art. 105",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Controversia Constitucional",
+      "definicion": "Juicio que resuelve los conflictos de competencia entre órdenes de gobierno y poderes: Federación contra estados, estados contra municipios, un poder contra otro, o un órgano autónomo contra quien invada sus atribuciones. Lo resuelve el Pleno de la Suprema Corte en única instancia. No está al alcance de los particulares: sólo la promueven entes públicos.",
+      "ley": "Art. 105 fracc. I CPEUM · Ley Reglamentaria del art. 105",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Declaratoria General de Inconstitucionalidad",
+      "definicion": "Mecanismo que convierte un triunfo individual en beneficio general. Cuando la Suprema Corte establece jurisprudencia de que una norma es inconstitucional, lo notifica a la autoridad que la emitió; si en 90 días naturales ésta no supera el problema, la Corte puede expulsar la norma del orden jurídico con efectos para todos. No procede en materia tributaria: los impuestos declarados inconstitucionales sólo dejan de aplicarse a quien se amparó.",
+      "ley": "Art. 107 fracc. II CPEUM · arts. 231 a 235 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Precedente Obligatorio",
+      "definicion": "Sistema vigente desde la reforma de 2021: las razones que justifican la decisión de una sentencia del Pleno de la Suprema Corte, aprobadas por mayoría calificada, obligan de inmediato a todas las autoridades jurisdiccionales del país. A diferencia de la jurisprudencia por reiteración, basta una sola sentencia. Un juez de menor jerarquía no puede apartarse del precedente, aunque sí puede solicitar su sustitución exponiendo razones.",
+      "ley": "Art. 94 CPEUM · reforma de 11 de marzo de 2021",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Contradicción de Criterios",
+      "definicion": "Procedimiento para resolver cuando dos o más órganos jurisdiccionales del mismo nivel sostienen criterios opuestos sobre el mismo punto de derecho. La denuncia puede hacerla cualquiera de las partes, los propios órganos, sus integrantes o el Ejecutivo Federal, y quien la resuelve fija cuál criterio prevalece con carácter obligatorio. La resolución no afecta las situaciones ya juzgadas, pero ordena el criterio hacia adelante.",
+      "ley": "Arts. 225 a 227 Ley de Amparo · art. 107 fracc. XIII CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Audiencia Constitucional",
+      "definicion": "Diligencia única del amparo indirecto en la que se encadenan tres periodos: probatorio, de alegatos y de sentencia. La prueba documental puede ofrecerse hasta ese mismo momento, pero la testimonial, la pericial y la inspección judicial deben anunciarse cinco días hábiles antes. No se admite la confesional por posiciones. Lo que no se ofreció a tiempo, no entra.",
+      "ley": "Art. 119 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Informe Justificado",
+      "definicion": "Escrito con el que la autoridad señalada como responsable contesta la demanda de amparo: manifiesta si el acto reclamado existe y por qué lo considera constitucional, acompañando copia certificada de las constancias. Debe rendirlo en quince días, prorrogables hasta diez más. Si no lo rinde, se presume cierto el acto reclamado.",
+      "ley": "Art. 117 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Sobreseimiento",
+      "definicion": "Resolución que da por terminado el juicio de amparo sin pronunciarse sobre si el acto era o no constitucional, por actualizarse una causa de improcedencia. No es una victoria de la autoridad sobre el fondo, sino una puerta que se cierra antes de llegar a él. Conviene distinguirlo de la negativa del amparo, donde el juez sí examina el acto y lo declara ajustado a la Constitución.",
+      "ley": "Arts. 61, 63 y 73 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Facultad de Atracción",
+      "definicion": "Potestad discrecional de la Suprema Corte para conocer de un amparo que ordinariamente correspondía a un Tribunal Colegiado, cuando el asunto reúne interés y trascendencia. Puede ejercerla de oficio o a petición fundada. Es una de las palancas más relevantes de su poder de agenda: la Corte decide qué temas discute el país.",
+      "ley": "Art. 107 fracc. V y VIII CPEUM · art. 40 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Plenos Regionales",
+      "definicion": "Órganos creados por la reforma de 2021 en sustitución de los Plenos de Circuito. Resuelven las contradicciones de criterios entre Tribunales Colegiados de su región y fijan jurisprudencia obligatoria en su ámbito territorial, descargando de ese trabajo a la Suprema Corte.",
+      "ley": "Art. 107 fracc. XIII CPEUM · Ley Orgánica del Poder Judicial de la Federación",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Tribunal Colegiado de Circuito",
+      "definicion": "Órgano integrado por tres magistradas o magistrados que resuelve los amparos directos contra sentencias definitivas y los recursos de revisión en materia de legalidad. Es el destino final de la inmensa mayoría de los juicios de amparo del país: sólo una fracción mínima escala hasta la Suprema Corte.",
+      "ley": "Art. 94 CPEUM · Ley Orgánica del Poder Judicial de la Federación",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Juzgado de Distrito",
+      "definicion": "Órgano unipersonal de primera instancia del Poder Judicial de la Federación. Conoce de los juicios de amparo indirecto y de los procesos federales ordinarios. Es la puerta de entrada del ciudadano al control constitucional: ahí se presenta la demanda, se resuelve la suspensión y se celebra la audiencia constitucional.",
+      "ley": "Art. 94 CPEUM · arts. 107 y 108 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Concepto de Violación",
+      "definicion": "Núcleo argumentativo de la demanda de amparo: el razonamiento con el que la persona quejosa explica por qué el acto reclamado contraría la Constitución. No basta afirmar que un acto es injusto; hay que confrontarlo con un precepto constitucional y demostrar la contradicción. Un amparo bien fundado con conceptos mal planteados se pierde.",
+      "ley": "Art. 108 fracc. VIII Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Principio de Relatividad",
+      "definicion": "Regla histórica del amparo mexicano, conocida como fórmula Otero: la sentencia sólo protege a quien promovió el juicio y no hace una declaración general sobre la norma impugnada. De ahí que una ley pueda seguir aplicándose a millones de personas después de haber sido declarada inconstitucional en casos particulares, salvo que se emita una declaratoria general de inconstitucionalidad.",
+      "ley": "Art. 107 fracc. II CPEUM · art. 73 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Ley de Amparo",
+      "definicion": "Ley reglamentaria de los artículos 103 y 107 constitucionales que regula todo el juicio de amparo: quién puede promoverlo, en qué plazos, cómo se tramita, qué recursos proceden y cómo se cumplen las sentencias. Fue expedida en 2013 y reformada dos veces durante 2025, el 13 de marzo y el 16 de octubre.",
+      "ley": "DOF 2 de abril de 2013, con reformas de 13/03/2025 y 16/10/2025",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Semanario Judicial de la Federación",
+      "definicion": "Publicación oficial donde se difunden las sentencias, los precedentes y la jurisprudencia obligatoria del Poder Judicial de la Federación. Se organiza por épocas: el 1 de septiembre de 2025 inició la Duodécima Época, que marca el corte entre los criterios de la Corte anterior y los de la Corte electa por voto popular.",
+      "ley": "Art. 220 Ley de Amparo · Acuerdo General 7/2025 del Pleno de la SCJN",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
       "termino": "PEF (Presupuesto de Egresos de la Federación)",
       "definicion": "Documento jurídico aprobado anualmente en exclusiva por la Cámara de Diputados que detalla el monto, destino y distribución del gasto público del gobierno federal durante un ejercicio fiscal.",
       "ley": "Art. 74 frac. IV Constitución Política / Ley Federal de Presupuesto y Responsabilidad Hacendaria",
@@ -4885,6 +5005,60 @@ window.AUDIT_DB = {
     }
   },
   "referencias_legales": [
+    {
+      "num": 33,
+      "id": "ref-ley-amparo",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Congreso de la Unión. (2013–2025). Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos, con las reformas publicadas el 13 de marzo y el 16 de octubre de 2025. Diario Oficial de la Federación (México).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
+      "descripcion": "Ley que regula el juicio de amparo en sus dos vías. Fija el plazo general de quince días hábiles para demandar (art. 17) con excepciones de treinta días para normas autoaplicativas, ocho años para sentencias penales condenatorias, siete años para núcleos ejidales y plazo abierto cuando está en juego la vida o la libertad. Regula la suspensión del acto reclamado (arts. 125 a 158), la audiencia constitucional (art. 119), los tres recursos admisibles —revisión, queja y reclamación (art. 80)— y el sistema de jurisprudencia por reiteración y contradicción (arts. 224 a 230). Dos reformas la modificaron en 2025: la del 13 de marzo declaró improcedente el amparo contra actos del Tribunal de Disciplina Judicial y del Órgano de Administración Judicial (art. 61 fracc. III), y la del 16 de octubre, vigente desde el día siguiente, exigió que el interés legítimo se traduzca en una afectación real, actual y diferenciada, endureció las causales para negar la suspensión y prohibió que ésta tenga efectos generales frente a normas."
+    },
+    {
+      "num": 34,
+      "id": "ref-cpeum-control-constitucional",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Congreso Constituyente. (1917–2024). Constitución Política de los Estados Unidos Mexicanos, artículos 94, 100, 103, 105 y 107, texto vigente tras la reforma publicada el 15 de septiembre de 2024. Diario Oficial de la Federación (México).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "descripcion": "Base constitucional de la función jurisdiccional. El artículo 94 sostiene el sistema de precedentes obligatorios; el 100 crea el Tribunal de Disciplina Judicial y el Órgano de Administración Judicial en sustitución del Consejo de la Judicatura Federal; el 103 abre el juicio de amparo; el 105 regula las controversias constitucionales y las acciones de inconstitucionalidad, y establece que la Suprema Corte sólo puede declarar la invalidez de una norma con el voto de al menos seis de sus nueve integrantes —umbral que antes de la reforma era de ocho de once—; el 107 fija las reglas del amparo, la declaratoria general de inconstitucionalidad, la facultad de atracción, la contradicción de criterios y la separación del cargo de la autoridad que incumple una sentencia."
+    },
+    {
+      "num": 35,
+      "id": "ref-ai-164-2024",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2024). Acción de inconstitucionalidad 164/2024 y sus acumuladas, resuelta por el Tribunal Pleno el 5 de noviembre de 2024. SCJN (México).",
+      "url": "https://www.scjn.gob.mx/",
+      "descripcion": "Impugnación de la reforma constitucional del Poder Judicial promovida por partidos políticos. Siete de los once ministros entonces en funciones votaron a favor de invalidar diversas porciones de la reforma, pero como el umbral constitucional exigía ocho votos, el Pleno desestimó los conceptos de invalidez sin entrar al estudio de fondo. Es el precedente que ilustra con mayor claridad el efecto práctico de las mayorías calificadas: una mayoría absoluta del tribunal constitucional no bastó para detener la reforma que transformaba al propio tribunal."
+    },
+    {
+      "num": 36,
+      "id": "ref-inegi-cnijf",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Censo Nacional de Impartición de Justicia Federal y Estatal (CNIJF-E) 2025, con información del ejercicio 2024. INEGI (México).",
+      "url": "https://www.inegi.org.mx/programas/cnijf/",
+      "descripcion": "Fuente estadística oficial sobre la carga de trabajo del Poder Judicial de la Federación. Durante 2024 ingresaron 640,161 juicios de amparo indirecto a los Juzgados de Distrito y 194,357 amparos directos a los Tribunales Colegiados de Circuito —caídas de 5.4% y 6.9% respecto de 2023—, mientras que la Suprema Corte de Justicia de la Nación recibió 16,370 asuntos jurisdiccionales de todo tipo, 4.9% menos que el año anterior. El contraste entre los 834,518 amparos ingresados y los asuntos que alcanzan al máximo tribunal dimensiona el embudo del control constitucional de última instancia."
+    },
+    {
+      "num": 37,
+      "id": "ref-sjf-duodecima",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2025). Acuerdo General número 7/2025 del Pleno: inicio del Tercer Periodo de Jurisprudencia y de la Duodécima Época del Semanario Judicial de la Federación, a partir del 1 de septiembre de 2025. SCJN (México).",
+      "url": "https://sjf2.scjn.gob.mx/",
+      "descripcion": "Acuerdo que abre una nueva época del Semanario Judicial de la Federación, el órgano oficial donde se publican los criterios obligatorios. Marca el corte entre la jurisprudencia de la Suprema Corte anterior a la reforma y la de la Corte electa por voto popular, e incorpora por primera vez una sección dedicada a las resoluciones de autoridades de pueblos y comunidades indígenas y afromexicanas. Para el usuario que consulta un criterio, la época indica si el precedente pertenece al sistema vigente o al anterior."
+    },
+    {
+      "num": 38,
+      "id": "ref-bma-amparo",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Barra Mexicana, Colegio de Abogados. (2025, 20 de octubre). Posicionamiento público sobre la reforma a la Ley de Amparo publicada el 16 de octubre de 2025. BMA (México).",
+      "url": "https://www.bma.org.mx/",
+      "descripcion": "Postura del colegio de abogados de mayor antigüedad del país frente a la reforma. Sostiene que el artículo tercero transitorio del decreto parte de una premisa inconstitucional al disponer su aplicación a juicios ya en trámite, lo que vulneraría los derechos adquiridos y el artículo 14 constitucional; que la restricción de la suspensión provisional y definitiva reduce la posibilidad real de defensa, y que ninguna reforma debería contravenir el principio de progresividad de los derechos humanos. Se cita como fuente de opinión técnica calificada, no como dato oficial."
+    },
     {
       "num": 1,
       "id": "ref-cpeum",

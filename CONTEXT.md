@@ -221,6 +221,43 @@ de los 32 circuitos.
   —cuánto cuesta y cómo decide— y enumera lo que hace cada una de las seis
   subpestañas.
 
+- **Capa visual de la subpestaña 4.1** (`pjo-*` y `pj-escalera` / `pj-peldano`).
+  El contenido no cambió; cambió cómo se sirve. Antes de las fichas hay ahora
+  tres capas de entrada:
+  1. Cinco cifras de tamaño (9 ministras y ministros, 32 circuitos, órganos
+     documentados calculados del propio árbol de datos, 54,500 plazas y
+     $78,327 mdp del Ramo 03).
+  2. Un contraste **antes / hoy** de la reforma, con la aclaración explícita
+     de que la Primera y la Segunda Sala **ya no operan** y por qué se
+     conservan sus fichas como anexo histórico.
+  3. Las tres vistas convertidas de píldoras en tarjetas grandes con número,
+     icono y una línea que dice qué se va a encontrar.
+  Dentro de cada vista se añadió una **escalera jerárquica navegable**: un
+  peldaño por nivel, con ancho decreciente y el número de fichas, que salta
+  al nivel y lo destaca un instante.
+
+- **Correcciones de forma en 4.1.** `.pj-node-badge` tenía `white-space:nowrap`
+  y las insignias largas se cortaban a media palabra; ahora fluyen en varias
+  líneas bajo el título. Los metadatos de cada ficha pasaron de un renglón
+  corrido en monoespaciada a etiqueta y valor en bloque. Se actualizó el dato
+  obsoleto «11 Ministros (9 en transición 2024)» en la vista del PJF.
+
+- **Capa de citas (referencias 33 a 38 y 20 términos nuevos de glosario).**
+  Se añadieron al catálogo la Ley de Amparo con sus dos reformas de 2025, los
+  artículos 94, 100, 103, 105 y 107 constitucionales, la acción de
+  inconstitucionalidad 164/2024, el Censo Nacional de Impartición de Justicia
+  Federal del INEGI, el Acuerdo General 7/2025 de la Duodécima Época y el
+  posicionamiento de la Barra Mexicana. El glosario creció de 77 a 97 términos
+  con el vocabulario procesal del amparo. Se registraron 20 entradas nuevas en
+  `AUTOLINK_TERMINOS`, de modo que esos términos quedan enlazados
+  automáticamente en toda la plataforma, cada uno con su nota al pie al
+  catálogo de fuentes.
+
+- **Dos arreglos de navegación que benefician a todo el sitio.** El catálogo de
+  referencias ahora se ordena por número de cita en lugar de por orden de
+  inserción. Y la búsqueda del glosario prioriza la coincidencia exacta del
+  término: antes, saltar desde una nota al pie abría la ficha vecina.
+
 ### Pendiente
 
 - **Pestaña 4.2** (Pleno y Ministros, análisis comparativo): sigue con datos
