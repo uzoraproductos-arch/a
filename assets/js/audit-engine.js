@@ -49,11 +49,6 @@
        (elegir sector, sexenio o cadencia) lo devuelve a cero ni lo
        atrasa cuando la pestana pierde el foco. */
     simuladorInicioVista: null,
-    /* Simulador comparativo de la parte 2 del bloque 2. Replica el
-       comportamiento del de la 5.1: las barras nacen en cero y crecen a
-       su escala real al evaluar. */
-    simCompEvaluado: false,
-    simCompHover: true,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
        sexenios arrancan en cero y crecen a su escala real al evaluar. */
     simSexEvaluado: false,
@@ -14849,33 +14844,19 @@
      cambio de posiciones y no aparezca hecho. */
   function setSimuladorOrden(id) {
     state.simuladorOrden = id;
-    const estaba = state.simCompEvaluado;
-    state.simCompEvaluado = false;
     renderSimuladorRankingFiltro();
-    renderSimuladorComparativo();
     renderSimuladorTablas();
     renderSimuladorObrasGrid();
     renderSimuladorEscala();
     autolinkAmbito(document.getElementById('simPanelA'));
     autolinkAmbito(document.getElementById('simPanelB'));
     autolinkAmbito(document.getElementById('simPanelC'));
-    if (estaba) simCompEvaluar(900);
   }
 
-  /* ---------------------------------------------------------------
-     SIMULADOR COMPARATIVO DE LAS OBRAS (bloque 2, segunda parte)
-
-     Mismo mecanismo que el simulador comparativo de la 5.1: las barras
-     arrancan en cero y escalan a su valor real al evaluar, de modo que
-     la distancia entre obras se ve crecer en lugar de aparecer hecha.
-     A diferencia del ranking anterior, no se recorta con los filtros:
-     compara SIEMPRE el universo completo, y lo que hacen el sector y la
-     administracion elegidos es resaltar los renglones que les tocan.
-     --------------------------------------------------------------- */
-
-  let simCompAnimFrame = null;
-  let simCompAnimando = false;
-
+  /* Valor de una obra segun el criterio de ordenacion vigente. Lo usa
+     la comparativa del filtro, que desde ahora es la unica lista
+     comparativa de la parte A: el simulador comparativo del universo
+     completo se retiro por duplicar esa misma lectura. */
   function simCompValor(o, ordenId) {
     return ({
       perdida: o.perdida_anual_mdp,
@@ -14884,187 +14865,6 @@
       brecha: o.inversion_real_mdp - o.inversion_presupuestada_mdp,
       cronologia: o.inversion_real_mdp
     })[ordenId];
-  }
-
-  function simCompFormato(v, ordenId) {
-    if (ordenId === 'sobrecosto') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
-    return simMdp(v);
-  }
-
-  /* El universo completo, ordenado por el criterio vigente. */
-  function simCompObras() {
-    const sim = DB.simulador_megaobras;
-    if (!sim) return [];
-    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
-    return sim.obras.slice().sort(orden.f);
-  }
-
-  /* Que obras quedan senaladas por el sector y el sexenio elegidos. */
-  function simCompEnFiltro(o) {
-    let dentro = true;
-    if (state.simuladorSector && state.simuladorSector !== 'todos') {
-      dentro = dentro && o.sector_id === state.simuladorSector;
-    }
-    if (state.simuladorSexenio && state.simuladorSexenio !== 'todos') {
-      dentro = dentro && o.presidente.toLowerCase().includes(state.simuladorSexenio.toLowerCase());
-    }
-    return dentro;
-  }
-
-  function simCompHayFiltro() {
-    return (state.simuladorSector && state.simuladorSector !== 'todos') ||
-           (state.simuladorSexenio && state.simuladorSexenio !== 'todos');
-  }
-
-  function renderSimuladorComparativo() {
-    const cont = document.getElementById('simComparativo');
-    if (!cont) return;
-    const obras = simCompObras();
-    if (obras.length < 2) { cont.innerHTML = ''; return; }
-
-    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
-    const rotulo = orden.id === 'cronologia' ? 'costo real, en orden cronológico' : orden.et.toLowerCase();
-    const maximo = Math.max.apply(null, obras.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
-    const hayFiltro = simCompHayFiltro();
-    const ev = state.simCompEvaluado;
-    const marcadas = hayFiltro ? obras.filter(simCompEnFiltro).length : 0;
-
-    const estado = ev
-      ? '<span style="color:var(--emerald-bright);">✓ Evaluación completada: las ' + obras.length + ' obras a escala real.</span>'
-      : '⚪ Barras en reposo (0.0%). Pulse «Evaluar» o pase el cursor para medir la escala real.';
-
-    const filas = obras.map((o, i) => {
-      const v = simCompValor(o, orden.id);
-      const ancho = ((Math.abs(v) / maximo) * 100).toFixed(1);
-      const dentro = !hayFiltro || simCompEnFiltro(o);
-      return '<li class="sim-rank-fila' + (dentro ? '' : ' sim-comp-fuera') + '">' +
-        '<button type="button" class="sim-rank-b" onclick="window.AuditEngine.simVerSector(\'' + o.sector_id + '\', \'' + o.id + '\')" ' +
-          'title="Abrir el sector de esta obra y saltar a su ficha">' +
-          '<span class="sim-rank-n">' + (i + 1) + '</span>' +
-          '<span class="sim-rank-ico">' + o.icono + '</span>' +
-          '<span class="sim-rank-nom">' + o.nombre +
-            '<span class="sim-comp-pres">' + o.presidente + ' · ' + o.periodo_sexenal + '</span>' +
-          '</span>' +
-          '<span class="sim-rank-riel">' +
-            '<span class="sim-rank-barra" id="simCompBarra_' + o.id + '" data-ancho="' + ancho + '" ' +
-              'style="width:' + (ev ? ancho + '%' : '0%') + '; background:' + o.badge_color + ';"></span>' +
-          '</span>' +
-          '<span class="sim-rank-val" id="simCompVal_' + o.id + '" data-valor="' + v + '">' +
-            (ev ? simCompFormato(v, orden.id) : simCompFormato(0, orden.id)) + '</span>' +
-        '</button>' +
-      '</li>';
-    }).join('');
-
-    cont.innerHTML =
-      '<section class="sim-comp">' +
-        '<div class="sim-sel-cab">' +
-          '<span class="sim-sel-ico">📊</span>' +
-          '<div><h3 class="sim-sel-tit">Simulador comparativo: las ' + obras.length + ' obras medidas por ' + rotulo + '</h3>' +
-          '<p class="sim-sel-sub">Las barras nacen en cero y crecen hasta su escala real, para ver la distancia entre una obra y otra. ' +
-            'Este comparativo no se recorta con los filtros: siempre están las ' + obras.length + ' obras. ' +
-            (hayFiltro
-              ? 'Su selección actual señala <strong>' + marcadas + '</strong> de ellas; las demás quedan atenuadas.'
-              : 'Elija un sector o una administración para resaltar las que le corresponden.') +
-            ' Se mide con el mismo criterio que eligió arriba. Pulse cualquier renglón para poner su sector en el filtro e ir a su ficha.</p></div>' +
-        '</div>' +
-
-        '<div class="evaluacion-controls-bar">' +
-          '<div class="eval-info-group">' +
-            '<span class="eval-badge">SIMULADOR COMPARATIVO</span>' +
-            '<span class="eval-status-text" id="simCompEstado">' + estado + '</span>' +
-          '</div>' +
-          '<div class="eval-actions-group">' +
-            '<button type="button" class="eval-btn-primary" id="simCompBtn" onclick="window.AuditEngine.simCompEvaluar()">' +
-              '<span>' + (ev ? '🔄' : '▶️') + '</span> ' + (ev ? 'Volver a evaluar' : 'Evaluar las ' + obras.length + ' obras') + '</button>' +
-            '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.simCompReiniciar()">' +
-              '<span>↺</span> Reiniciar a ceros</button>' +
-            '<label class="eval-toggle-label" title="Iniciar la evaluación automáticamente al pasar el cursor">' +
-              '<input type="checkbox" ' + (state.simCompHover ? 'checked' : '') + ' ' +
-                'onchange="window.AuditEngine.simCompToggleHover(this.checked)">' +
-              '<span>Activar al pasar cursor</span>' +
-            '</label>' +
-          '</div>' +
-        '</div>' +
-
-        '<ol class="sim-rank-filas" onmouseenter="window.AuditEngine.simCompHoverEntra()" ontouchstart="window.AuditEngine.simCompHoverEntra()">' +
-          filas +
-        '</ol>' +
-
-        '<p class="sim-mesa-aviso"><strong>Cómo leer la barra.</strong> Mide el tamaño de la cifra frente a la mayor de la lista, no su dirección. ' +
-          'En cronología el orden es por periodo sexenal y la barra sigue midiendo el costo real, para que la escala no cambie de significado a media lista.</p>' +
-      '</section>';
-  }
-
-  function simCompEvaluar(duracionMs) {
-    const dur = duracionMs || 1400;
-    const obras = simCompObras();
-    if (!obras.length) return;
-    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
-
-    if (simCompAnimFrame) { cancelAnimationFrame(simCompAnimFrame); simCompAnimFrame = null; }
-
-    const estadoEl = document.getElementById('simCompEstado');
-    const btn = document.getElementById('simCompBtn');
-    if (estadoEl) estadoEl.innerHTML = '<span style="color:var(--gold-bright);">⚡ Escalando las ' + obras.length + ' obras…</span>';
-    if (btn) btn.innerHTML = '<span>⏳</span> Evaluando…';
-
-    simCompAnimando = true;
-    const inicio = performance.now();
-    const suavizar = t => (--t) * t * t + 1;
-
-    function paso(ahora) {
-      const avance = Math.min(1, (ahora - inicio) / dur);
-      const e = suavizar(avance);
-      obras.forEach(o => {
-        const barra = document.getElementById('simCompBarra_' + o.id);
-        const val = document.getElementById('simCompVal_' + o.id);
-        if (barra) barra.style.width = ((parseFloat(barra.dataset.ancho) || 0) * e).toFixed(1) + '%';
-        if (val) val.textContent = simCompFormato((parseFloat(val.dataset.valor) || 0) * e, orden.id);
-      });
-      if (avance < 1) {
-        simCompAnimFrame = requestAnimationFrame(paso);
-      } else {
-        simCompAnimando = false;
-        state.simCompEvaluado = true;
-        simCompAnimFrame = null;
-        // Valores finales exactos, sin arrastre de redondeo de la animacion.
-        obras.forEach(o => {
-          const barra = document.getElementById('simCompBarra_' + o.id);
-          const val = document.getElementById('simCompVal_' + o.id);
-          if (barra) barra.style.width = barra.dataset.ancho + '%';
-          if (val) val.textContent = simCompFormato(parseFloat(val.dataset.valor) || 0, orden.id);
-        });
-        if (estadoEl) estadoEl.innerHTML = '<span style="color:var(--emerald-bright);">✓ Evaluación completada: las ' + obras.length + ' obras a escala real.</span>';
-        if (btn) btn.innerHTML = '<span>🔄</span> Volver a evaluar';
-      }
-    }
-    simCompAnimFrame = requestAnimationFrame(paso);
-  }
-
-  function simCompReiniciar() {
-    if (simCompAnimFrame) { cancelAnimationFrame(simCompAnimFrame); simCompAnimFrame = null; }
-    simCompAnimando = false;
-    state.simCompEvaluado = false;
-    const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
-    simCompObras().forEach(o => {
-      const barra = document.getElementById('simCompBarra_' + o.id);
-      const val = document.getElementById('simCompVal_' + o.id);
-      if (barra) barra.style.width = '0%';
-      if (val) val.textContent = simCompFormato(0, orden.id);
-    });
-    const estadoEl = document.getElementById('simCompEstado');
-    const btn = document.getElementById('simCompBtn');
-    if (estadoEl) estadoEl.textContent = '⚪ Barras en reposo (0.0%). Pulse «Evaluar» o pase el cursor para medir la escala real.';
-    if (btn) btn.innerHTML = '<span>▶️</span> Evaluar las ' + simCompObras().length + ' obras';
-  }
-
-  function simCompToggleHover(activo) {
-    state.simCompHover = !!activo;
-  }
-
-  function simCompHoverEntra() {
-    if (!state.simCompHover || state.simCompEvaluado || simCompAnimando) return;
-    simCompEvaluar();
   }
 
   function simIrAObra(id) {
@@ -16035,7 +15835,6 @@
     renderSimuladorDesgloseCab();
     renderSimuladorRankingFiltro();
     renderSimuladorObrasGrid();
-    renderSimuladorComparativo();
     renderSimuladorTablas();
     renderSimuladorEscala();
     renderSimuladorProcedencia();
@@ -19878,10 +19677,6 @@
     simVerSector: simVerSector,
     setSimParte: setSimParte,
     simRecontar: simRecontar,
-    simCompEvaluar: simCompEvaluar,
-    simCompReiniciar: simCompReiniciar,
-    simCompToggleHover: simCompToggleHover,
-    simCompHoverEntra: simCompHoverEntra,
     simSexEvaluar: simSexEvaluar,
     simSexReiniciar: simSexReiniciar,
     cerrarSimuladorDesglose: cerrarSimuladorDesglose,

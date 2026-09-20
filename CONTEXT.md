@@ -588,6 +588,21 @@ de los 32 circuitos.
 - Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
 - **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
 
+### Hecho (retiro del simulador comparativo en 2.2 A)
+- Se eliminó de la parte A el **simulador comparativo** completo (barra de
+  «Evaluar / Reiniciar a ceros / Activar al pasar cursor», rótulo
+  «Las 12 obras medidas por pérdida anual» y su lista del universo entero).
+  Duplicaba la lectura de la comparativa que ya vive arriba.
+- Queda una sola lista en A: **«Las obras del filtro comparadas por…»**,
+  gobernada por los chips «Ordenar y medir por» y por los filtros de
+  industria y mandato, con su conteo desde cero.
+- Retirados: `renderSimuladorComparativo`, `simCompFormato`, `simCompObras`,
+  `simCompEnFiltro`, `simCompHayFiltro`, `simCompEvaluar`, `simCompReiniciar`,
+  `simCompToggleHover`, `simCompHoverEntra`, el estado `simCompEvaluado` /
+  `simCompHover`, el div `#simComparativo` y las reglas `.sim-comp`,
+  `.sim-comp-fuera`. Se conserva `simCompValor` porque lo usa la lista que
+  se queda, y `.sim-comp-pres` por el pie de cada renglón.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
