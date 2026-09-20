@@ -4641,7 +4641,7 @@
       <!-- Barra de Subpestañas (Formato Fortuvisión) -->
       <div class="subtabs-bar" data-parent="faq">
         <button class="subtab-btn active" data-sub="faq-preguntas">7.1 Preguntas Frecuentes en Casillas</button>
-        <button class="subtab-btn" data-sub="faq-glosario">7.2 Glosario de Términos Hacendarios &amp; Conceptos Clave (53)</button>
+        <button class="subtab-btn" data-sub="faq-glosario">7.2 Glosario de Términos Hacendarios &amp; Conceptos Clave</button>
         <button class="subtab-btn" data-sub="faq-marco-legal">7.3 Marco Legal Hacendario &amp; Fundamento Jurídico (25)</button>
       </div>
 
@@ -4675,14 +4675,14 @@
             <div>
               <h3 style="margin:0;">Glosario de Términos Hacendarios y Conceptos Clave</h3>
               <p style="font-size:12px; color:var(--text-dim); margin:3px 0 0; font-family:var(--font-mono);">
-                Compendio enciclopédico de 53 conceptos técnicos, jurídicos y políticos integrados y actualizados a lo largo de toda la plataforma.
+                Compendio enciclopédico de <span id="glosarioConteo">—</span> conceptos técnicos, jurídicos y políticos integrados y actualizados a lo largo de toda la plataforma. Cada término se alcanza también desde su hipervínculo en el texto de cualquier pestaña.
               </p>
             </div>
           </div>
           <div class="casilla-body">
             <!-- Filtros de Categorías del Glosario -->
             <div class="presets-bar" style="margin-bottom: 16px; justify-content: center; flex-wrap:wrap; gap:8px;" id="glossaryFilterChips">
-              <button class="chip on active" data-gcat="todas">Todos los Términos (53)</button>
+              <button class="chip on active" data-gcat="todas">Todos los Términos</button>
               <button class="chip" data-gcat="⚖️ Poder Judicial">⚖️ Poder Judicial &amp; SCJN</button>
               <button class="chip" data-gcat="🏛️ Presupuesto & ASF">🏛️ Presupuesto &amp; ASF</button>
               <button class="chip" data-gcat="💰 Hacendario & Deuda">💰 Hacendario &amp; Deuda</button>
@@ -4691,7 +4691,7 @@
               <button class="chip" data-gcat="🗳️ Poder Legislativo & Elecciones">🗳️ Legislativo &amp; Elecciones</button>
             </div>
 
-            <div style="max-width: 520px; margin: 0 auto 20px;">
+            <div style="width: 100%; max-width: 520px; margin: 0 auto 20px;">
               <input type="text" id="glossarySearchInput" class="search-input-box" placeholder="Buscar concepto (ej. LIF, Techo de Deuda, Art. 18, FONE, Ramo 28, EFOS, RP)...">
             </div>
             <div id="glossaryGrid" class="glossary-grid"></div>

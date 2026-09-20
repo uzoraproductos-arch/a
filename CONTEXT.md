@@ -444,6 +444,37 @@ de los 32 circuitos.
   contenedor lineal y la matriz siguen desplazándose con el dedo o la rueda,
   pero ya no dibujan la barra gris.
 
+- **Barra de regreso asistido.** Al saltar al glosario, a las referencias o al
+  marco legal desde cualquier hipervínculo, se anota de dónde venía la persona
+  —pestaña, subpestaña y altura de la página— y aparece una barra fija con
+  «Volver a donde estaba», «Inicio de la pestaña» y un cierre. Restituye el
+  punto exacto de lectura. La barra se retira sola cuando alguien navega por
+  su cuenta con la barra de pestañas o de subpestañas, y el cuerpo recibe un
+  respiro al pie para que no tape la última ficha.
+- **Las pestañas del glosario ya funcionan.** Sí filtraban, pero
+  `filterGlossaryByCategory` leía el buscador, y quien llegaba por un
+  hipervínculo lo tenía lleno con el término: cada categoría devolvía cero
+  fichas y los botones parecían muertos. Ahora elegir una categoría vacía el
+  buscador.
+- **Los conteos del glosario se calculan de la base.** El rótulo decía «(53)»
+  con 105 fichas cargadas. Cada pestaña muestra su propio número y el
+  encabezado el total, todo derivado de `DB.glosario`.
+- **La caja de búsqueda del glosario medía 208 px.** Su contenedor es un
+  elemento flexible que se encogía al contenido; con `width: 100%` recupera
+  los 520 px previstos.
+- **22 definiciones nuevas** (105 → 127): Acción Financiera del Estado,
+  Federalismo Fiscal, Hacienda Pública, Ingresos Presupuestarios, Deuda
+  Subnacional, Sistema de Alertas (SHCP), Adecuación Presupuestaria, Anexo
+  Transversal, Programa Presupuestario, Fideicomiso Público, Licitación
+  Pública, Adjudicación Directa, Invitación a Cuando Menos Tres Personas,
+  Testigo Social, Obra Pública, Convenio Modificatorio, Sistema Nacional
+  Anticorrupción, Sujeto Obligado, Versión Pública, Auditoría de Desempeño,
+  Artículo 134 Constitucional y Artículo 126 Constitucional.
+- **22 entradas nuevas de autoenlace** más los alias «déficit fiscal»,
+  «déficit presupuestal», «superávit fiscal» y «superávit presupuestal». El
+  recorrido pasa de 180 a 232 hipervínculos de glosario con su nota al pie, sin
+  anclas anidadas y sin términos enlazados que carezcan de ficha.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

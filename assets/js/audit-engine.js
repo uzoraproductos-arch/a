@@ -688,6 +688,9 @@
 
   let currentGlossaryCategory = 'todas';
 
+  /* Elegir una categoria vacia el buscador. Sin esto, quien llegaba por un
+     hipervinculo se quedaba con el termino escrito y cada pestana del glosario
+     devolvia cero fichas: parecian botones muertos. */
   function filterGlossaryByCategory(cat) {
     currentGlossaryCategory = cat;
     document.querySelectorAll('#glossaryFilterChips .chip').forEach(btn => {
@@ -696,8 +699,28 @@
       btn.classList.toggle('on', isSel);
     });
     const searchInput = document.getElementById('glossarySearchInput');
-    const term = searchInput ? searchInput.value : '';
-    renderGlossary(term, cat);
+    if (searchInput) searchInput.value = '';
+    renderGlossary('', cat);
+  }
+
+  /* Las cuentas de cada pestana del glosario se sacan de la base, nunca se
+     escriben a mano: el rotulo decia «(53)» con 105 fichas cargadas. */
+  function actualizarConteosGlosario() {
+    const barra = document.getElementById('glossaryFilterChips');
+    if (!barra || !DB.glosario) return;
+    const norm = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    barra.querySelectorAll('.chip').forEach(btn => {
+      const cat = btn.dataset.gcat;
+      const n = cat === 'todas'
+        ? DB.glosario.length
+        : DB.glosario.filter(g => norm(g.categoria).includes(norm(cat))).length;
+      const base = (btn.dataset.rotulo || btn.textContent).replace(/\s*\(\d+\)\s*$/, '').trim();
+      btn.dataset.rotulo = base;
+      btn.textContent = base + ' (' + n + ')';
+    });
+
+    const pie = document.getElementById('glosarioConteo');
+    if (pie) pie.textContent = DB.glosario.length;
   }
 
   function renderGlossary(filterTerm = '', category = currentGlossaryCategory) {
@@ -1929,8 +1952,8 @@
     { a: ['gasto programable', 'gasto no programable'], t: 'Gasto Programable vs No Programable', r: 'ref-lfprh', n: 2 },
 
     // --- Hacienda y deuda ---
-    { a: ['déficit público', 'déficit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
-    { a: ['superávit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
+    { a: ['déficit fiscal', 'déficit presupuestal', 'déficit público', 'déficit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
+    { a: ['superávit fiscal', 'superávit presupuestal', 'superávit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
     { a: ['balance primario'], t: 'Balance Primario', r: 'ref-lfprh', n: 2 },
     { a: ['deuda pública'], t: 'Deuda Pública y SHRFSP', r: 'ref-lgdp', n: 4 },
     { a: ['SHRFSP'], t: 'Deuda Pública y SHRFSP', r: 'ref-lgdp', n: 4, cs: true },
@@ -2019,6 +2042,38 @@
     { a: ['tope de gastos de campaña', 'topes de gastos de campaña'], t: 'Tope de Gastos de Campaña', r: 'ref-lgipe', n: 31 },
     { a: ['representación proporcional'], t: 'Representación Proporcional (RP) / Plurinominales', r: 'ref-cpeum', n: 1 },
     { a: ['sobrerrepresentación'], t: 'Tope a la Sobrerrepresentación del 8% (Art. 54 CPEUM)', r: 'ref-cpeum', n: 1 },
+
+    // --- Accion financiera, federalismo y deuda subnacional ---
+    { a: ['acción financiera del Estado', 'acción financiera'], t: 'Acción Financiera del Estado', r: 'ref-cpeum', n: 1 },
+    { a: ['federalismo fiscal'], t: 'Federalismo Fiscal', r: 'ref-lcf', n: 5 },
+    { a: ['hacienda pública'], t: 'Hacienda Pública', r: 'ref-cpeum', n: 1 },
+    { a: ['ingresos presupuestarios'], t: 'Ingresos Presupuestarios', r: 'ref-lif2026', n: 10 },
+    { a: ['deuda subnacional'], t: 'Deuda Subnacional', r: 'ref-ldf', n: 6 },
+    { a: ['Sistema de Alertas'], t: 'Sistema de Alertas (SHCP)', r: 'ref-shcp-alertas', n: 15, cs: true },
+
+    // --- Mecanica del presupuesto ---
+    { a: ['adecuaciones presupuestarias', 'adecuación presupuestaria'], t: 'Adecuación Presupuestaria', r: 'ref-lfprh', n: 2 },
+    { a: ['anexos transversales', 'anexo transversal'], t: 'Anexo Transversal', r: 'ref-pef2026', n: 11 },
+    { a: ['programas presupuestarios', 'programa presupuestario'], t: 'Programa Presupuestario (Pp)', r: 'ref-lfprh', n: 2 },
+    { a: ['fideicomisos públicos', 'fideicomiso público'], t: 'Fideicomiso Público', r: 'ref-lfprh', n: 2 },
+
+    // --- Contratacion publica ---
+    { a: ['licitaciones públicas', 'licitación pública'], t: 'Licitación Pública', r: 'ref-laassp', n: 13 },
+    { a: ['adjudicaciones directas', 'adjudicación directa'], t: 'Adjudicación Directa', r: 'ref-laassp', n: 13 },
+    { a: ['invitación a cuando menos tres personas'], t: 'Invitación a Cuando Menos Tres Personas', r: 'ref-laassp', n: 13 },
+    { a: ['testigos sociales', 'testigo social'], t: 'Testigo Social', r: 'ref-laassp', n: 13 },
+    { a: ['obras públicas', 'obra pública'], t: 'Obra Pública', r: 'ref-lopsrm', n: 41 },
+    { a: ['convenios modificatorios', 'convenio modificatorio'], t: 'Convenio Modificatorio', r: 'ref-lopsrm', n: 41 },
+
+    // --- Anticorrupcion y transparencia ---
+    { a: ['Sistema Nacional Anticorrupción'], t: 'Sistema Nacional Anticorrupción', r: 'ref-lgra', n: 29 },
+    { a: ['sujetos obligados', 'sujeto obligado'], t: 'Sujeto Obligado', r: 'ref-lgtaip', n: 30 },
+    { a: ['versión pública', 'versiones públicas'], t: 'Versión Pública', r: 'ref-lgtaip', n: 30 },
+    { a: ['auditoría de desempeño', 'auditorías de desempeño'], t: 'Auditoría de Desempeño', r: 'ref-lfrcf', n: 7 },
+
+    // --- Preceptos constitucionales del gasto ---
+    { a: ['artículo 134 constitucional', 'artículo 134'], t: 'Artículo 134 Constitucional', r: 'ref-cpeum', n: 1 },
+    { a: ['artículo 126 constitucional', 'artículo 126'], t: 'Artículo 126 Constitucional', r: 'ref-cpeum', n: 1 },
 
     // --- Marco legal ---
     { a: ['Diario Oficial de la Federación'], t: 'DOF (Diario Oficial de la Federación)', r: 'ref-cpeum', n: 1 },
@@ -2539,9 +2594,100 @@
     actualizarPistasDeslizamiento();
   }
 
+  /* ============================================================================
+     REGRESO ASISTIDO: «VOLVER A DONDE ESTABA»
+     ----------------------------------------------------------------------------
+     Un hipervinculo de glosario o una nota al pie mandan a la persona a otra
+     pestana. Antes de saltar se anota de donde venia —pestana, subpestana y
+     altura de la pagina— y aparece una barra fija que la devuelve exactamente
+     a ese punto. La barra se retira sola cuando alguien navega por su cuenta
+     con la barra de pestanas.
+     ============================================================================ */
+
+  let navOrigen = null;
+  let navSaltoEnCurso = false;
+
+  function navSubtabActiva(tab) {
+    const b = document.querySelector('.subtabs-bar[data-parent="' + tab + '"] .subtab-btn.active');
+    return b ? b.dataset.sub : null;
+  }
+
+  function navEtiquetaActual() {
+    const bs = document.querySelector('.subtabs-bar[data-parent="' + activeTabKey + '"] .subtab-btn.active');
+    if (bs) return bs.textContent.trim().replace(/\s+/g, ' ');
+    const bt = document.querySelector('.tabbar button[role="tab"].active');
+    if (!bt) return 'la pestaña anterior';
+    const num = bt.querySelector('.num');
+    const n = num ? num.textContent.trim() : '';
+    const txt = bt.textContent.trim().replace(/\s+/g, ' ');
+    return n ? n + '. ' + txt.slice(n.length).trim() : txt;
+  }
+
+  function navMarcarOrigen() {
+    navOrigen = {
+      tab: activeTabKey,
+      sub: navSubtabActiva(activeTabKey),
+      y: window.scrollY || document.documentElement.scrollTop || 0,
+      etiqueta: navEtiquetaActual()
+    };
+  }
+
+  function navVolverAlOrigen() {
+    if (!navOrigen) return;
+    const o = navOrigen;
+    navSaltoEnCurso = true;
+    switchTab(o.tab);
+    if (o.sub) switchSubtab(o.tab, o.sub);
+    navSaltoEnCurso = false;
+    navOrigen = null;
+    navPintarBarra();
+    setTimeout(() => window.scrollTo({ top: o.y, behavior: 'smooth' }), 110);
+  }
+
+  function navIrAlInicio() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function navCerrarRegreso() {
+    navOrigen = null;
+    navPintarBarra();
+  }
+
+  /* La barra vive en el cuerpo del documento, no dentro de un panel: asi
+     sobrevive a los cambios de pestana y nunca queda tapada por el contenido. */
+  function navPintarBarra() {
+    let barra = document.getElementById('navRegresoBarra');
+    /* La barra es fija: sin este respiro al pie, tapa la ultima ficha. */
+    document.body.classList.toggle('con-regreso', !!navOrigen);
+    if (!navOrigen) {
+      if (barra) barra.remove();
+      return;
+    }
+    if (!barra) {
+      barra = document.createElement('div');
+      barra.id = 'navRegresoBarra';
+      barra.className = 'nav-regreso';
+      barra.setAttribute('role', 'navigation');
+      barra.setAttribute('aria-label', 'Regresar al punto de lectura');
+      document.body.appendChild(barra);
+    }
+    barra.innerHTML =
+      '<span class="nav-regreso-txt">Llegó aquí desde <strong>' + navOrigen.etiqueta + '</strong></span>' +
+      '<button type="button" class="nav-regreso-b principal" onclick="window.AuditEngine.navVolverAlOrigen()">' +
+        '↩︎ Volver a donde estaba</button>' +
+      '<button type="button" class="nav-regreso-b" onclick="window.AuditEngine.navIrAlInicio()">' +
+        '⬆️ Inicio de la pestaña</button>' +
+      '<button type="button" class="nav-regreso-x" title="Cerrar este aviso" aria-label="Cerrar" ' +
+        'onclick="window.AuditEngine.navCerrarRegreso()">✕</button>';
+  }
+
   function goToGlossary(term) {
+    navMarcarOrigen();
+    navSaltoEnCurso = true;
     switchTab('faq');
     switchSubtab('faq', 'faq-glosario');
+    navSaltoEnCurso = false;
+    navPintarBarra();
     currentGlossaryCategory = 'todas';
     document.querySelectorAll('#glossaryFilterChips .chip').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.gcat === 'todas');
@@ -2576,8 +2722,12 @@
 
   function goToRef(refId) {
     if (refId && (refId.startsWith('ref-marcolg') || refId.startsWith('precepto-'))) {
+      navMarcarOrigen();
+      navSaltoEnCurso = true;
       switchTab('faq');
       switchSubtab('faq', 'faq-marco-legal');
+      navSaltoEnCurso = false;
+      navPintarBarra();
       renderPreceptosLegales();
       setTimeout(() => {
         const targetPrecept = document.getElementById(refId) || document.querySelector('.precepto-card');
@@ -2593,7 +2743,11 @@
       }, 150);
       return;
     }
+    navMarcarOrigen();
+    navSaltoEnCurso = true;
     switchTab('referencias');
+    navSaltoEnCurso = false;
+    navPintarBarra();
     renderReferencias('todas');
     setTimeout(() => {
       let el = document.getElementById(refId);
@@ -15732,6 +15886,7 @@
     safeRun(renderNews, 'renderNews');
     safeRun(renderFaqs, 'renderFaqs');
     safeRun(renderGlossary, 'renderGlossary');
+    safeRun(actualizarConteosGlosario, 'actualizarConteosGlosario');
     safeRun(initSearch, 'initSearch');
     safeRun(renderCongresosTable, 'renderCongresosTable');
     safeRun(initElectoralModule, 'initElectoralModule');
@@ -15772,6 +15927,7 @@
       btn.addEventListener('click', function() {
         const parent = this.closest('.subtabs-bar').dataset.parent;
         const sub = this.dataset.sub;
+        if (!navSaltoEnCurso) navCerrarRegreso();
         switchSubtab(parent, sub);
       });
     });
@@ -15779,6 +15935,7 @@
     // Eventos de botones de la barra de pestañas maestras
     document.querySelectorAll('.tabbar button[role="tab"]').forEach(btn => {
       btn.addEventListener('click', function() {
+        if (!navSaltoEnCurso) navCerrarRegreso();
         switchTab(this.dataset.tab);
       });
     });
@@ -18018,6 +18175,10 @@
     goToGlossary: goToGlossary,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
+    actualizarConteosGlosario: actualizarConteosGlosario,
+    navVolverAlOrigen: navVolverAlOrigen,
+    navIrAlInicio: navIrAlInicio,
+    navCerrarRegreso: navCerrarRegreso,
     selectPresident: (id) => openPresidentCard(id),
     openPresidentCard: openPresidentCard,
     closePresidentCard: closePresidentCard,

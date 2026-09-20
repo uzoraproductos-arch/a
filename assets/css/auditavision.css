@@ -12221,3 +12221,115 @@ nav.tabbar button:focus-visible,
 }
 
 .versus-nota-signo strong { color: var(--text-primary); }
+
+
+/* ============================================================================
+   BARRA DE REGRESO ASISTIDO
+   Aparece al saltar a glosario, referencias o marco legal desde cualquier
+   hipervinculo, y devuelve a la persona al punto exacto del que salio.
+   ============================================================================ */
+
+body.con-regreso { padding-bottom: 96px; }
+
+.nav-regreso {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 4000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: min(94vw, 880px);
+  padding: 10px 14px;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: rgba(12, 14, 22, 0.96);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  animation: navRegresoEntra 0.28s ease both;
+}
+
+@keyframes navRegresoEntra {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.nav-regreso-txt {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  max-width: 340px;
+}
+
+.nav-regreso-txt strong { color: var(--gold-bright); }
+
+.nav-regreso-b {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 8px 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+
+.nav-regreso-b:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.nav-regreso-b.principal {
+  color: var(--gold-bright);
+  background: rgba(201, 168, 76, 0.18);
+  border-color: var(--gold);
+}
+
+.nav-regreso-b.principal:hover { background: rgba(201, 168, 76, 0.32); }
+
+.nav-regreso-x {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 7px;
+  padding: 7px 9px;
+  cursor: pointer;
+  transition: color 0.16s ease, border-color 0.16s ease;
+}
+
+.nav-regreso-x:hover { color: var(--text-primary); border-color: var(--gold); }
+
+@media (max-width: 720px) {
+  body.con-regreso { padding-bottom: 150px; }
+
+  .nav-regreso {
+    left: 8px;
+    right: 8px;
+    bottom: 10px;
+    max-width: none;
+    transform: none;
+    gap: 8px;
+    padding: 9px 11px;
+  }
+  .nav-regreso-txt { flex: 1 1 100%; max-width: none; font-size: 11.5px; }
+  .nav-regreso-b { flex: 1 1 auto; font-size: 11px; padding: 8px 10px; }
+  @keyframes navRegresoEntra {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-regreso { animation: none; }
+  .nav-regreso-b:hover { transform: none; }
+}

@@ -3674,6 +3674,138 @@ window.AUDIT_DB = {
       "definicion": "Órgano oficial de difusión del Estado mexicano. Una norma existe jurídicamente a partir de su publicación en el DOF, y la fecha de publicación —no la de aprobación ni la del anuncio— es la que determina su entrada en vigor. Cuando una cifra o una facultad se disputa, el DOF es la fuente que zanja la discusión.",
       "ley": "Art. 2° Ley del Diario Oficial de la Federación y Gacetas Gubernamentales",
       "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Acción Financiera del Estado",
+      "definicion": "Conjunto de operaciones con las que el Estado obtiene recursos, los administra y los aplica. Tiene tres movimientos y ninguno se entiende sin los otros dos: el ingreso (impuestos, derechos, aprovechamientos y venta de petróleo), el gasto (lo que se ejerce y en qué) y el financiamiento (la deuda que cubre la diferencia cuando el ingreso no alcanza). Auditar sólo uno de los tres deja fuera la mitad de la historia.",
+      "ley": "Arts. 73, 74, 126 y 134 CPEUM · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Federalismo Fiscal",
+      "definicion": "Reparto de facultades para cobrar impuestos y para gastar entre la Federación, las entidades federativas y los municipios. En México la recaudación está muy centralizada y el gasto muy descentralizado: la Federación cobra la mayor parte y después transfiere; de ahí que estados y municipios dependan de las participaciones y aportaciones para operar.",
+      "ley": "Arts. 40, 115, 117 y 124 CPEUM · Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Hacienda Pública",
+      "definicion": "Conjunto de bienes, derechos, ingresos y obligaciones económicas del Estado, y la actividad de administrarlos. No es sinónimo de «la Secretaría de Hacienda»: es el patrimonio y la actividad económica del Estado en su conjunto, de la cual esa Secretaría es sólo la conductora en el ámbito federal.",
+      "ley": "Arts. 31 fracción IV y 73 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ingresos Presupuestarios",
+      "definicion": "Recursos que la Federación estima captar durante el ejercicio y que la Ley de Ingresos enumera año con año: tributarios (ISR, IVA, IEPS), no tributarios (derechos, productos y aprovechamientos), los de organismos y empresas del Estado, y los de financiamiento, es decir, deuda. La distinción importa: un ingreso por deuda hoy es un gasto por intereses mañana.",
+      "ley": "Ley de Ingresos de la Federación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deuda Subnacional",
+      "definicion": "Obligaciones financieras contratadas por las entidades federativas y los municipios. La Constitución sólo les permite endeudarse para inversión pública productiva, nunca para gasto corriente, y su registro y seguimiento corresponden al sistema que establece la Ley de Disciplina Financiera.",
+      "ley": "Art. 117 fracción VIII CPEUM · Ley de Disciplina Financiera de las Entidades Federativas y los Municipios",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sistema de Alertas (SHCP)",
+      "definicion": "Semáforo con el que la Secretaría de Hacienda clasifica el endeudamiento de cada entidad federativa y de los municipios con obligaciones inscritas. El color —verde, amarillo o rojo— no es una opinión: determina cuánto más pueden endeudarse en el siguiente ejercicio. Se publica de forma periódica y es consultable por cualquier persona.",
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios · Secretaría de Hacienda y Crédito Público",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Adecuación Presupuestaria",
+      "definicion": "Movimiento que traslada recursos de una partida a otra durante el ejercicio, una vez que el presupuesto ya fue aprobado. Es legal y a menudo necesario, pero es también el punto donde un presupuesto aprobado deja de parecerse al presupuesto ejercido: por eso conviene leer siempre el dato modificado junto al aprobado.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Anexo Transversal",
+      "definicion": "Agrupación de recursos que persiguen un mismo objetivo pero están repartidos en varios ramos y programas: igualdad entre mujeres y hombres, pueblos indígenas, atención a la niñez, cambio climático. El anexo no crea presupuesto nuevo: etiqueta y hace visible el que ya está disperso.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Presupuesto de Egresos de la Federación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Programa Presupuestario (Pp)",
+      "definicion": "Unidad mínima a la que se asigna dinero y a la que se le puede exigir un resultado. Cada peso del Presupuesto de Egresos cuelga de un programa presupuestario con clave propia, y es el nivel en el que tiene sentido preguntar «¿cuánto costó y qué produjo?».",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Sistema de Evaluación del Desempeño",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Fideicomiso Público",
+      "definicion": "Figura en la que una dependencia o entidad aporta recursos públicos a un patrimonio que administra una institución fiduciaria para un fin determinado. Su rasgo fiscalizable es que el dinero sale del ejercicio anual y puede permanecer años fuera del escrutinio presupuestario ordinario, sin dejar de ser público.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Ley Federal de las Entidades Paraestatales",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Licitación Pública",
+      "definicion": "Procedimiento de contratación abierto mediante convocatoria pública, en el que compiten quienes cumplan los requisitos y gana la propuesta que ofrezca las mejores condiciones. La Constitución la establece como la regla general para adquisiciones, arrendamientos, servicios y obra pública; todo lo demás es excepción y debe justificarse.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Adjudicación Directa",
+      "definicion": "Contratación sin concurso, en la que la autoridad elige directamente a quien la ejecutará. La ley la permite en supuestos tasados y por debajo de ciertos montos, y obliga a fundar y motivar la decisión. Su uso reiterado para contratos grandes es uno de los indicadores más citados de riesgo de corrupción en la contratación pública.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Invitación a Cuando Menos Tres Personas",
+      "definicion": "Procedimiento intermedio entre la licitación pública y la adjudicación directa: la autoridad invita a un número acotado de proveedores en lugar de convocar abiertamente. Como la adjudicación directa, es una excepción y exige justificación expresa.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Testigo Social",
+      "definicion": "Persona u organización acreditada que participa en procedimientos de contratación de monto relevante y emite un testimonio público sobre lo que observó. No decide ni sanciona: deja constancia, y esa constancia queda disponible para quien quiera revisarla.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Obra Pública",
+      "definicion": "Trabajos de construcción, ampliación, conservación o demolición de bienes inmuebles con recursos públicos, y los servicios relacionados con ellos, como proyectos y supervisión. Se rige por su propia ley, distinta de la de adquisiciones, aunque comparte con ella el mandato constitucional de licitar.",
+      "ley": "Art. 134 CPEUM · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Convenio Modificatorio",
+      "definicion": "Instrumento que cambia el monto, el plazo o el alcance de un contrato ya adjudicado. Es una figura legal y a veces inevitable, pero también el lugar donde suele alojarse el sobrecosto: un contrato que se gana barato y se termina caro casi siempre pasó por aquí.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sistema Nacional Anticorrupción",
+      "definicion": "Instancia de coordinación entre las autoridades de todos los órdenes de gobierno encargadas de prevenir, detectar y sancionar hechos de corrupción y faltas administrativas, así como de fiscalizar y controlar recursos públicos. Incluye un Comité de Participación Ciudadana, de modo que la sociedad tiene asiento y voto y no sólo derecho de petición.",
+      "ley": "Art. 113 CPEUM · Ley General del Sistema Nacional Anticorrupción",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sujeto Obligado",
+      "definicion": "Toda autoridad, entidad, órgano, partido político, sindicato, fideicomiso o persona que recibe o ejerce recursos públicos, y que por esa razón debe documentar y entregar información. La definición es amplia a propósito: quien toca dinero público entra en ella, sea o no parte del gobierno.",
+      "ley": "Art. 6 CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Versión Pública",
+      "definicion": "Documento del que se han eliminado los datos clasificados como reservados o confidenciales para poder entregarlo. Es la salida ordinaria a la negativa total: la regla es entregar lo que sí puede entregarse, no callar el documento entero porque una parte esté protegida.",
+      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Auditoría de Desempeño",
+      "definicion": "Revisión que no pregunta si el dinero se gastó conforme a la norma, sino si sirvió de algo: si el programa cumplió su objetivo, a qué costo y con qué resultados verificables. Es la que responde la pregunta que más le importa a quien paga impuestos y la que más incomoda a quien ejerce el gasto.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Artículo 134 Constitucional",
+      "definicion": "Norma que ordena que los recursos económicos de que dispone el Estado se administren con eficiencia, eficacia, economía, transparencia y honradez, y que las contrataciones se adjudiquen por licitación pública mediante convocatoria abierta. Es el artículo que se invoca cuando se discute una adjudicación directa, un sobrecosto o el uso de propaganda gubernamental.",
+      "ley": "Art. 134 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Artículo 126 Constitucional",
+      "definicion": "Norma de una sola línea y consecuencias enormes: no puede hacerse pago alguno que no esté comprendido en el presupuesto o determinado por ley posterior. Es el fundamento de que un gasto no previsto sea, por definición, un gasto que alguien debe explicar.",
+      "ley": "Art. 126 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
     }],
   "legislativo": {
     "federal": {
