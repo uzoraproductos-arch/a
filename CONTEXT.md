@@ -588,6 +588,16 @@ de los 32 circuitos.
 - Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
 - **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
 
+### Hecho (bloque 2 de la 2.2: por qué 12 y no 13)
+- Nuevo bloque de texto entre el pulso del gasto y las subpestañas A/B/C,
+  numerado **2**, que explica el caso **FARAC**: concesionado por Salinas
+  y rescatado por Zedillo, su registro dice «Carlos Salinas / Ernesto
+  Zedillo», así que al repartir por mandato aparece en dos columnas y las
+  seis torres de la parte B suman 13 sobre un universo de 12.
+- Declara las tres opciones que había y por qué se eligió contarlo doble
+  en lo político y una sola vez en lo monetario.
+- La cabecera que abre las subpestañas queda numerada **3**.
+
 ### Hecho (fusión de las dos listas comparativas de 2.2 A)
 - La parte A tenía dos listas que decían casi lo mismo. Ahora es **una
   sola**, que reúne las funciones de ambas:

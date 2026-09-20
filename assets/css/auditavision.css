@@ -5878,6 +5878,56 @@ nav.tabbar button.active .num {
   cursor: pointer;
 }
 
+/* Aclaracion de conteo (bloque 2 de la 2.2): por que 12 y no 13. */
+.sim-conteo {
+  border-left: 3px solid var(--gold-bright, #d4af37);
+  padding: 2px 0 2px 16px;
+  margin: 12px 0 4px;
+}
+.sim-conteo-p {
+  margin: 0 0 11px;
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--text-soft, #c9d1d9);
+}
+.sim-conteo-caso {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 14px 0;
+  padding: 13px 15px;
+  border-radius: 8px;
+  background: rgba(212, 175, 55, 0.07);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+}
+.sim-conteo-caso .sim-conteo-p { margin: 0; }
+.sim-conteo-ico { font-size: 21px; line-height: 1.2; }
+.sim-conteo-ol {
+  margin: 0 0 12px;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-soft, #c9d1d9);
+}
+.sim-conteo-ol li { margin-bottom: 6px; }
+.sim-conteo-regla {
+  margin: 14px 0 0;
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-primary, #e6edf3);
+}
+/* La cabecera que abre las subpestanas no lleva cuerpo debajo: solo
+   anuncia el bloque, asi que no necesita el aire inferior habitual. */
+.sim-bloque-abre { padding-bottom: 6px; margin-bottom: 8px; }
+@media (max-width: 640px) {
+  .sim-conteo { padding-left: 12px; }
+  .sim-conteo-caso { flex-direction: column; gap: 7px; }
+}
+
 .sim-sex-barra { margin: 4px 0 14px; }
 
 /* ===== 2.2 - SUBPESTANAS A / B / C ==================================
