@@ -642,12 +642,12 @@
             <button type="button" class="sim-tab-btn active" data-parte="a" role="tab"
                     onclick="window.AuditEngine.setSimParte('a')">
               <span class="sim-tab-let">A</span>
-              <span class="sim-tab-tx"><strong>Sector e industria</strong><small>Filtre por industria y por mandato; salen las fichas</small></span>
+              <span class="sim-tab-tx"><strong>Sector e industria</strong><small>Industria, mandato, comparativas y fichas vivas</small></span>
             </button>
             <button type="button" class="sim-tab-btn" data-parte="b" role="tab"
                     onclick="window.AuditEngine.setSimParte('b')">
               <span class="sim-tab-let">B</span>
-              <span class="sim-tab-tx"><strong>Administración presidencial</strong><small>Simulador sexenal y comparativo de las 12 obras</small></span>
+              <span class="sim-tab-tx"><strong>Administración presidencial</strong><small>La línea del tiempo 1988–2024 como simulador</small></span>
             </button>
             <button type="button" class="sim-tab-btn" data-parte="c" role="tab"
                     onclick="window.AuditEngine.setSimParte('c')">
@@ -665,6 +665,9 @@
             <!-- Comparativa de las obras que dejaron en pie los filtros -->
             <div id="simRankingFiltro"></div>
 
+            <!-- Simulador comparativo de las 12 obras, con el filtro resaltado -->
+            <div id="simComparativo"></div>
+
             <!-- Fichas vivas de cada obra del filtro -->
             <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
 
@@ -675,7 +678,6 @@
           <!-- ---------- PARTE B: administracion presidencial ---------- -->
           <section class="sim-parte-panel" id="simPanelB" data-parte="b" hidden>
             <div id="simSexenioLinea"></div>
-            <div id="simComparativo"></div>
           </section>
 
           <!-- ---------- PARTE C: de cero al resultado final ---------- -->

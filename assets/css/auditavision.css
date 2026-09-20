@@ -13514,6 +13514,27 @@ body.con-regreso { padding-bottom: 96px; }
   line-height: 1.5;
 }
 
+/* Mandos de la cabecera del filtro: volver a contar y quitar filtros. */
+.sim-desg-mandos { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.sim-recontar {
+  background: transparent;
+  border: 1px solid var(--border-gold, rgba(201, 162, 39, 0.55));
+  color: var(--text-gold, #d9b74a);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.sim-recontar:hover { background: rgba(201, 162, 39, 0.12); }
+
+/* Las cifras que cuentan llevan ancho tabular para que el renglon no
+   baile mientras suben los digitos. */
+.sim-dc-v, .sim-dc-s, .sim-rank-val { font-variant-numeric: tabular-nums; }
+
 .sim-replegar {
   background: transparent;
   border: 1px solid var(--border-accent);

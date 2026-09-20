@@ -2153,7 +2153,7 @@
     'sim-sec-t', 'sim-sec-n', 'sim-sec-ico', 'sim-sec-meta', 'sim-sec-pct',
     'sim-sec-cuota', 'sim-sec-b', 'sim-sec-ob-ico',
     'sim-dc-l', 'sim-dc-v', 'sim-dc-s',
-    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-tab-let', 'sim-pill-n', 'sim-vacio-t',
+    'sim-bloque-num', 'sim-bloque-tit', 'sim-tel-lbl', 'sim-tel-val', 'sim-comp-pres', 'eval-badge', 'sim-tab-let', 'sim-pill-n', 'sim-vacio-t', 'sim-recontar',
     'sim-dial-et', 'sim-dial-cif', 'sim-dial-suf', 'sim-dial-ico',
     'sim-los-nom', 'sim-los-n', 'sim-los-cif', 'sim-los-cuota', 'sim-los-ico',
     'sim-seg-n', 'sim-seg-nom', 'sim-seg-anios', 'sim-seg-cif',
@@ -14933,10 +14933,6 @@
       ? '<span style="color:var(--emerald-bright);">✓ Evaluación completada: las ' + obras.length + ' obras a escala real.</span>'
       : '⚪ Barras en reposo (0.0%). Pulse «Evaluar» o pase el cursor para medir la escala real.';
 
-    const chips = SIM_ORDENES.map(o =>
-      '<button type="button" class="sim-pill-btn' + (o.id === orden.id ? ' active' : '') + '" ' +
-        'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('');
-
     const filas = obras.map((o, i) => {
       const v = simCompValor(o, orden.id);
       const ancho = ((Math.abs(v) / maximo) * 100).toFixed(1);
@@ -14969,7 +14965,7 @@
             (hayFiltro
               ? 'Su selección actual señala <strong>' + marcadas + '</strong> de ellas; las demás quedan atenuadas.'
               : 'Elija un sector o una administración para resaltar las que le corresponden.') +
-            ' Pulse cualquier renglón para abrir su sector e ir a su ficha.</p></div>' +
+            ' Se mide con el mismo criterio que eligió arriba. Pulse cualquier renglón para poner su sector en el filtro e ir a su ficha.</p></div>' +
         '</div>' +
 
         '<div class="evaluacion-controls-bar">' +
@@ -14988,11 +14984,6 @@
               '<span>Activar al pasar cursor</span>' +
             '</label>' +
           '</div>' +
-        '</div>' +
-
-        '<div class="sim-control-group">' +
-          '<span class="sim-group-label">&#8645; Ordenar y medir por:</span>' +
-          '<div class="sim-pill-group">' + chips + '</div>' +
         '</div>' +
 
         '<ol class="sim-rank-filas" onmouseenter="window.AuditEngine.simCompHoverEntra()" ontouchstart="window.AuditEngine.simCompHoverEntra()">' +
@@ -15423,6 +15414,87 @@
     if (btn) btn.innerHTML = '<span>▶️</span> Evaluar los seis sexenios';
   }
 
+  /* ====================================================================
+     MOTOR DE CONTEO DE LA 2.2
+
+     Toda cifra que cambia al mover un filtro arranca en cero y sube
+     hasta su valor. No es adorno: ver la cuenta subir es lo que hace
+     legible la diferencia entre un mandato y otro. Un solo motor sirve
+     a las tarjetas del filtro y a las barras de la comparativa, para
+     que ambas usen la misma curva y el mismo respeto por quien pide
+     movimiento reducido.
+
+     Cada elemento animable declara su destino en el marcado:
+       data-anim-v  valor final
+       data-anim-f  como se escribe (mdp, pct, pctS, pesos, entero)
+       data-anim-w  ancho final de barra, en por ciento
+     ==================================================================== */
+
+  const simAnimFrames = {};
+
+  function simMovimientoReducido() {
+    return typeof matchMedia === 'function' &&
+           matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function simFmt(v, f) {
+    if (f === 'pct') return v.toFixed(1) + '%';
+    if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+    if (f === 'pesos') return '$' + formatNumber(Math.round(v * 100) / 100);
+    if (f === 'entero') return formatNumber(Math.round(v));
+    return simMdp(v);
+  }
+
+  /* Anima todo lo que lleve data-anim-v o data-anim-w dentro de una
+     raiz. La clave evita que dos animaciones de la misma zona se
+     pisen. */
+  function simAnimarZona(raiz, clave, duracionMs) {
+    if (!raiz) return;
+    const cifras = [].slice.call(raiz.querySelectorAll('[data-anim-v]'));
+    const barras = [].slice.call(raiz.querySelectorAll('[data-anim-w]'));
+    if (!cifras.length && !barras.length) return;
+
+    const pintar = (e) => {
+      cifras.forEach(el => {
+        el.textContent = simFmt((parseFloat(el.dataset.animV) || 0) * e, el.dataset.animF);
+      });
+      barras.forEach(el => {
+        el.style.width = ((parseFloat(el.dataset.animW) || 0) * e).toFixed(2) + '%';
+      });
+    };
+
+    if (simAnimFrames[clave]) {
+      cancelAnimationFrame(simAnimFrames[clave]);
+      delete simAnimFrames[clave];
+    }
+
+    // Quien pidio menos movimiento recibe el dato, no la animacion.
+    if (simMovimientoReducido() || !duracionMs) { pintar(1); return; }
+
+    const dur = duracionMs;
+    const ini = performance.now();
+    const suavizar = t => (--t) * t * t + 1;
+    pintar(0);
+
+    function paso(ahora) {
+      const avance = Math.min(1, (ahora - ini) / dur);
+      pintar(suavizar(avance));
+      if (avance < 1) {
+        simAnimFrames[clave] = requestAnimationFrame(paso);
+      } else {
+        delete simAnimFrames[clave];
+        pintar(1); // valor exacto, sin arrastre de redondeo
+      }
+    }
+    simAnimFrames[clave] = requestAnimationFrame(paso);
+  }
+
+  /* Volver a contar a peticion, desde el boton de la cabecera. */
+  function simRecontar() {
+    simAnimarZona(document.getElementById('simDesgloseCab'), 'cab', 1100);
+    simAnimarZona(document.getElementById('simRankingFiltro'), 'rank', 1200);
+  }
+
   /* Comparativa de las obras que dejaron en pie los dos filtros. Es el
      eslabon que faltaba: el mandato y la industria mueven esta lista,
      la lista se reordena con los cinco criterios, y de ahi cuelgan las
@@ -15443,6 +15515,7 @@
 
     const rotulo = orden.id === 'cronologia' ? 'costo real, en orden cronológico' : orden.et.toLowerCase();
     const maximo = Math.max.apply(null, obras.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
+    const fmtOrden = orden.id === 'sobrecosto' ? 'pctS' : 'mdp';
 
     const chips = SIM_ORDENES.map(o =>
       '<button type="button" class="sim-pill-btn' + (o.id === orden.id ? ' active' : '') + '" ' +
@@ -15455,7 +15528,7 @@
           '<span class="sim-rank-sub">La barra mide el tamaño de la cifra. Pulse cualquier renglón para ir a su ficha, aquí abajo.</span>' +
         '</div>' +
         '<div class="sim-control-group">' +
-          '<span class="sim-group-label">&#8645; Ordenar la lista por:</span>' +
+          '<span class="sim-group-label">&#8645; Ordenar y medir por:</span>' +
           '<div class="sim-pill-group">' + chips + '</div>' +
         '</div>' +
         '<ol class="sim-rank-filas">' +
@@ -15469,14 +15542,21 @@
                   '<span class="sim-comp-pres">' + o.presidente + ' · ' + o.periodo_sexenal + '</span>' +
                 '</span>' +
                 '<span class="sim-rank-riel">' +
-                  '<span class="sim-rank-barra" style="width:' + ((Math.abs(v) / maximo) * 100).toFixed(1) + '%; background:' + o.badge_color + ';"></span>' +
+                  '<span class="sim-rank-barra" data-anim-w="' + ((Math.abs(v) / maximo) * 100).toFixed(2) + '" ' +
+                    'style="width:0%; background:' + o.badge_color + ';"></span>' +
                 '</span>' +
-                '<span class="sim-rank-val">' + simCompFormato(v, orden.id) + '</span>' +
+                '<span class="sim-rank-val" data-anim-v="' + v + '" data-anim-f="' + fmtOrden + '">' +
+                  simFmt(0, fmtOrden) + '</span>' +
               '</button>' +
             '</li>';
           }).join('') +
         '</ol>' +
       '</section>';
+
+    /* Cada vez que se cambia de criterio la lista vuelve a contar desde
+       cero: se ve la barra crecer hasta su nuevo porcentaje en lugar de
+       saltar ya puesta. */
+    simAnimarZona(cont, 'rank', 1200);
   }
 
   /* Selector de mandato dentro de la parte A. Aqui vive la fusion: la
@@ -15542,19 +15622,32 @@
               '. Debajo, la ficha viva de cada una.</p>' +
           '</div>' +
         '</div>' +
-        '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Quitar los filtros</button>' +
+        '<div class="sim-desg-mandos">' +
+          '<button type="button" class="sim-recontar" onclick="window.AuditEngine.simRecontar()" ' +
+            'title="Volver a contar estas cifras desde cero">↺ Contar de nuevo</button>' +
+          '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Quitar los filtros</button>' +
+        '</div>' +
       '</div>' +
+      /* Las cifras nacen en cero y el motor de conteo las sube hasta su
+         valor cada vez que cambia el filtro: asi se ve la diferencia
+         entre un mandato y otro, en vez de que el numero solo aparezca
+         cambiado. */
       '<div class="sim-desg-cifras">' +
         '<div class="sim-dc"><span class="sim-dc-l">Costo real del filtro</span>' +
-          '<span class="sim-dc-v">' + simMdp(ag.real) + '</span>' +
-          '<span class="sim-dc-s">' + cuota.toFixed(1) + '% del costo real de las ' + agT.n + ' obras</span></div>' +
+          '<span class="sim-dc-v" data-anim-v="' + ag.real + '" data-anim-f="mdp">' + simMdp(0) + '</span>' +
+          '<span class="sim-dc-s"><span data-anim-v="' + cuota + '" data-anim-f="pct">0.0%</span>' +
+            ' del costo real de las ' + agT.n + ' obras</span></div>' +
         '<div class="sim-dc"><span class="sim-dc-l">Aprobado frente a erogado</span>' +
-          '<span class="sim-dc-v">' + simMdp(ag.presu) + '</span>' +
-          '<span class="sim-dc-s">' + simMdp(ag.brecha) + ' de más, un ' + (ag.sobrecosto > 0 ? '+' : '') + ag.sobrecosto.toFixed(1) + '%</span></div>' +
+          '<span class="sim-dc-v" data-anim-v="' + ag.presu + '" data-anim-f="mdp">' + simMdp(0) + '</span>' +
+          '<span class="sim-dc-s"><span data-anim-v="' + ag.brecha + '" data-anim-f="mdp">' + simMdp(0) + '</span>' +
+            ' de más, un <span data-anim-v="' + ag.sobrecosto + '" data-anim-f="pctS">0.0%</span></span></div>' +
         '<div class="sim-dc"><span class="sim-dc-l">Pérdida operativa anual</span>' +
-          '<span class="sim-dc-v sim-dc-rojo">' + simMdp(ag.perdidaAnual) + '</span>' +
-          '<span class="sim-dc-s">equivale a $' + formatNumber(Math.round(ag.perdidaSegundo * 100) / 100) + ' por segundo</span></div>' +
+          '<span class="sim-dc-v sim-dc-rojo" data-anim-v="' + ag.perdidaAnual + '" data-anim-f="mdp">' + simMdp(0) + '</span>' +
+          '<span class="sim-dc-s">equivale a <span data-anim-v="' + ag.perdidaSegundo + '" data-anim-f="pesos">$0</span>' +
+            ' por segundo</span></div>' +
       '</div>';
+
+    simAnimarZona(cont, 'cab', 1100);
   }
 
   /* Las tres partes de la 2.2 son subpestanas: solo una a la vista, con
@@ -19784,6 +19877,7 @@
     simIrAObra: simIrAObra,
     simVerSector: simVerSector,
     setSimParte: setSimParte,
+    simRecontar: simRecontar,
     simCompEvaluar: simCompEvaluar,
     simCompReiniciar: simCompReiniciar,
     simCompToggleHover: simCompToggleHover,

@@ -580,6 +580,14 @@ de los 32 circuitos.
 - **Cadena restituida:** vuelve `renderSimuladorRankingFiltro()` a la parte A, entre las cifras del filtro y las fichas: «Las N obras del filtro, comparadas por …», con los cinco criterios de orden. El criterio es compartido con el simulador comparativo de la parte B, de modo que ordenar en un sitio reordena en el otro.
 - El bloque de escala «Contra que se compara este dinero» baja de la parte C a la parte A, que es donde cierra la cadena: mandato e industria → comparativa → fichas vivas → escala.
 
+**Hecho — motor de conteo en la parte A y reacomodo de A / B.**
+- Motor de conteo compartido (`simAnimarZona`): cualquier elemento que declare `data-anim-v` (con `data-anim-f`: mdp, pct, pctS, pesos, entero) o `data-anim-w` arranca en cero y sube a su valor con `requestAnimationFrame` y suavizado cubico. Es el mismo mecanismo del simulador comparativo, generalizado.
+- Las tres tarjetas del filtro (costo real, aprobado frente a erogado, perdida operativa anual) cuentan desde cero cada vez que cambia la industria o el mandato, incluidos sus subtextos: cuota, brecha, sobrecosto y pesos por segundo. Boton «↺ Contar de nuevo» en la cabecera para repetirlo a peticion.
+- La comparativa del filtro hace lo mismo: al cambiar de criterio las barras nacen en cero y crecen, y los valores cuentan. Se ve la barra llegar a su porcentaje en lugar de aparecer puesta.
+- `prefers-reduced-motion: reduce` entrega el dato de golpe, sin animacion. Verificado con `emulateMedia`.
+- Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
+- **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
