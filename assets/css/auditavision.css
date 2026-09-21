@@ -9470,14 +9470,16 @@ nav.tabbar button:focus-visible,
 }
 
 .circuito-detalle,
+/* Antes alojaba la ficha entera y por eso pedia altura minima. Hoy la
+   ficha vive en la ventana lateral y aqui solo queda la invitacion a
+   abrirla: una linea que no empuja nada. */
 .flujo-detalle {
-  margin-top: 14px;
-  padding: 18px 20px;
+  margin-top: 12px;
+  padding: 11px 16px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-left: 3px solid var(--gold);
-  border-radius: 10px;
-  min-height: 78px;
+  border-radius: 8px;
 }
 
 .cd-vacio {
@@ -9762,9 +9764,131 @@ nav.tabbar button:focus-visible,
 .fd-enlace-glos b { color: var(--text-gold); font-weight: 600; }
 .fd-enlace-n { font-family: var(--font-mono); font-size: 11px; color: var(--text-gold); }
 
+/* ==========================================================================
+   VENTANA LATERAL DE LA FICHA (1.1)
+
+   Hereda el mecanismo de .audit-drawer —el de los argumentos particulares
+   de la 5.2— con dos diferencias: va mas ancha, porque la ficha trae tabla
+   de componentes y una tabla estrecha se parte en dos lineas por renglon;
+   y su cuerpo lleva barra de desplazamiento visible, porque la ficha se
+   lee de arriba abajo y conviene saber cuanto falta.
+   ========================================================================== */
+.audit-drawer.audit-drawer-ancha { max-width: 980px; }
+
+.audit-drawer-ancha .drawer-header { padding: 20px 28px; }
+.audit-drawer-ancha .fd-cab { min-width: 0; }
+
+.audit-drawer-ancha .fd-kicker {
+  font-size: 10.5px;
+  letter-spacing: 1.4px;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+
+/* .fd-tit vale 18px dentro de la caja; aqui es el titulo de la ventana. */
+.audit-drawer-ancha .fd-tit {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.18;
+  color: var(--gold-bright);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.audit-drawer-ancha .fd-tit .fd-ico { font-size: 25px; line-height: 1; }
+.audit-drawer-ancha .fd-monto { margin-top: 7px; font-size: 15px; }
+
+/* La cabecera de toda ventana lateral lleva un degradado oscuro fijo,
+   igual en el tema claro que en el oscuro. Sus letras, por tanto, no
+   pueden colgar de las variables del tema: en claro --text-main es casi
+   negro y la cifra del renglon se perdia sobre el fondo oscuro. Aqui se
+   fijan los tonos de esa franja, y solo de esa franja. */
+.audit-drawer-ancha .drawer-header { color: #f0ede6; }
+.audit-drawer-ancha .fd-kicker { color: #d7b85d; }
+.audit-drawer-ancha .fd-tit { color: #f3cf65; }
+.audit-drawer-ancha .fd-monto { color: #f0ede6; }
+.audit-drawer-ancha .fd-equiv { color: #8e8b85; }
+.audit-drawer-ancha .fd-clave { color: #a8a59e; border-color: rgba(255, 255, 255, 0.18); }
+.audit-drawer-ancha .drawer-close-btn { color: #d5d2cb; }
+
+.flujo-ficha-body {
+  gap: 16px;
+  scrollbar-color: var(--gold-bright) var(--bg-void);
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+
+/* El marco existe para colgar de el las dos franjas de aviso: si
+   colgaran del cuerpo, viajarian con el texto en vez de quedarse en el
+   borde. */
+.flujo-ficha-marco {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.flujo-ficha-marco > .flujo-ficha-body { flex: 1; }
+
+/* La barra del navegador no siempre se ve: en macOS y en el movil se
+   esconde hasta que alguien la mueve, y entonces nada avisa de que la
+   ficha sigue mas abajo. Estas dos franjas lo dicen, y solo aparecen
+   cuando de verdad queda recorrido en esa direccion: una franja fija
+   seria un aviso falso al llegar al final. */
+.flujo-ficha-marco::before,
+.flujo-ficha-marco::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 26px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  z-index: 3;
+}
+
+.flujo-ficha-marco::before {
+  top: 0;
+  background: linear-gradient(180deg, rgba(201, 168, 76, 0.34), rgba(201, 168, 76, 0));
+}
+
+.flujo-ficha-marco::after {
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(201, 168, 76, 0.34), rgba(201, 168, 76, 0));
+}
+
+.flujo-ficha-marco.hay-arriba::before,
+.flujo-ficha-marco.hay-abajo::after { opacity: 1; }
+
+.flujo-ficha-body::-webkit-scrollbar { width: 11px; }
+.flujo-ficha-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+}
+.flujo-ficha-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  border-radius: 6px;
+  border: 2px solid var(--bg-card);
+}
+.flujo-ficha-body::-webkit-scrollbar-thumb:hover { background: var(--gold-bright); }
+
+/* Los margenes propios sobran donde manda el gap del contenedor. */
+.flujo-ficha-body > * { margin: 0; }
+.flujo-ficha-body .fd-txt { font-size: 14px; max-width: 82ch; }
+.flujo-ficha-body .fd-comp,
+.flujo-ficha-body .fd-enlaces { margin-top: 0; }
+
 @media (max-width: 620px) {
   .fdc-fila { grid-template-columns: 1fr auto 48px; }
   .fdc-barra { display: none; }
+  .audit-drawer-ancha .drawer-header { padding: 16px 18px; }
+  .audit-drawer-ancha .fd-tit { font-size: 19px; }
+  .flujo-ficha-body { padding: 18px; }
 }
 
 /* --- Distintivo de trazabilidad del dato --- */

@@ -836,6 +836,67 @@ de los 32 circuitos.
   anterior: 20 colecciones intactas, 57 referencias y 163 términos previos
   idénticos, `panoramaErario` sin cambios fuera de `ingresos`.
 
+### Hecho (1.1: la ficha del renglón pasa a ventana lateral)
+
+- **El desglose se abre como los argumentos particulares de la 5.2**:
+  cubierta oscura, panel lateral que entra desde la derecha y cierre por
+  Escape, por la cruz, por la cubierta o volviendo a pulsar el mismo
+  renglón. Motivo: al nombrar los dieciséis orígenes con su clave de ley,
+  su efecto jurídico y su desglose interno, la caja de debajo de la
+  gráfica llegó a medir más que la gráfica que la invoca. Abrirla empujaba
+  media página hacia abajo y obligaba a buscar otra vez el renglón que se
+  venía leyendo. Verificado: la gráfica no se mueve un píxel al abrir.
+- **Más ancha que las demás ventanas: 980 px** frente a los 740 del lateral
+  estándar y los 780 del argumento de García Luna. La ficha trae tabla de
+  componentes; a 740 px los nombres largos se partían en dos líneas.
+- **Desplazamiento vertical propio**, con barra dorada
+  (`scrollbar-color` sobre `var(--bg-void)`; se conservan las reglas
+  `::-webkit-scrollbar` para los navegadores que aún no leen la propiedad
+  estándar) y `scrollbar-gutter: stable` para que el texto no salte cuando
+  aparece.
+- **Dos franjas de aviso en los bordes**, encendidas por
+  `flujoFichaSombras()` según el recorrido que quede: arriba si hay texto
+  por encima, abajo si lo hay por debajo, ninguna si la ficha cabe entera.
+  La barra del navegador no basta como aviso —en macOS y en el móvil se
+  esconde hasta que alguien la mueve—. Primer intento: sombras por fondo
+  con `background-attachment: local`. **No sirvió**: el fondo del
+  contenedor queda detrás de las tarjetas opacas de la ficha y no se veía.
+  De ahí el marco `.flujo-ficha-marco`, que es a quien cuelgan.
+- **Defecto de tema corregido.** La cabecera de toda ventana lateral lleva
+  un degradado oscuro fijo, igual en claro que en oscuro. Al llevar la
+  cifra del renglón a esa franja, en tema claro `--text-main` es casi negro
+  y **el monto desaparecía**. Los tonos de esa franja —y sólo de esa
+  franja— quedan fijados en `.audit-drawer-ancha .drawer-header`.
+- **Debajo de la gráfica queda la invitación**, una línea de 45 px que ya
+  no empuja nada, en vez de la ficha entera.
+- **Una ventana, un renglón encendido.** Saltar de un renglón de ingresos a
+  uno de egresos apaga el primero: dos barras marcadas como activas con una
+  sola ficha a la vista mentirían sobre el estado de la pantalla.
+- **La cuenta sigue arrancando en ceros** y empieza 300 ms después de
+  pulsar, cuando el panel ya entró: contar detrás del borde sería mover el
+  dato donde nadie lo ve. Quien pidió menos movimiento recibe el dato de
+  golpe, sin espera.
+- **Accesibilidad**: `role="dialog"`, `aria-modal`, `aria-labelledby`,
+  `aria-hidden` sincronizado, `aria-expanded` en cada renglón, el foco va a
+  la cruz al abrir y vuelve al renglón al cerrar, y el fondo se bloquea
+  mientras la ventana está arriba.
+- **Los enlaces de la ficha cierran la ventana antes de saltar** (captura
+  en `.glos-link, .ref-link, .fd-enlace`): si la ventana siguiera encima,
+  el glosario o la referencia quedarían detrás de la cubierta y parecería
+  que el enlace no hizo nada.
+- **El texto de la ficha se autoenlaza aquí**, con `autolinkAmbito(p.body)`,
+  porque la ventana cuelga del `<body>` y la pasada general sólo recorre el
+  panel activo.
+- **Otro rótulo que mentía**: los mandos de ingresos decían «frente al mayor
+  de los nueve» con dieciséis renglones en pantalla. Ahora sale de la base.
+- Verificado: la ventana abre, cierra por las cuatro vías y no se abre sola
+  al volver a la pestaña; el cuerpo se desplaza hasta el tope; las franjas
+  encienden y apagan donde deben y ninguna aparece si la ficha cabe;
+  16/16 fichas con efecto, glosario y referencia; la cuenta arranca en
+  $0 mdp y 0 % y llega al dato de la ley; 0 desbordes de 1600 a 360 px con
+  la ventana abierta; las cuatro ventanas de argumento particular de la 5.2
+  y las nueve pestañas siguen abriendo; 0 errores de JavaScript.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

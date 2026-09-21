@@ -2458,7 +2458,7 @@
   }
 
   // --- Barras de ingresos y egresos -----------------------------------------
-  function renderFlujo(tipo) {
+  function renderFlujo(tipo, abrirFicha) {
     if (!PANORAMA) return;
     const esIngreso = tipo === 'ingresos';
     const datos = esIngreso ? PANORAMA.ingresos : PANORAMA.egresos;
@@ -2482,6 +2482,7 @@
       const pct = pctDe(d.montoMdp, total);
       return cabecera + `
         <button type="button" class="fc-fila${sel === d.id ? ' active' : ''}" role="listitem"
+                data-id="${d.id}" aria-expanded="${sel === d.id}"
                 onclick="window.AuditEngine.selectFlujoItem('${tipo}','${d.id}')"
                 aria-label="${d.nombre}: ${formatMoneyMdp(d.montoMdp)}">
           <span class="fc-ico" aria-hidden="true">${d.icono}</span>
@@ -2495,20 +2496,124 @@
     erarioSincronizarZona(cont, 'flujo-' + tipo,
       esIngreso ? state.erarioIngContado : state.erarioEgrContado);
     renderFlujoMandos(tipo);
-    renderFlujoDetalle(tipo);
+    renderFlujoDetalle(tipo, abrirFicha);
   }
 
-  function renderFlujoDetalle(tipo) {
+  /* ====================================================================
+     LA FICHA DE CADA RENGLON, EN VENTANA LATERAL
+
+     El desglose nacio como una caja debajo de la grafica. Al nombrar
+     los dieciseis origenes con su clave de ley, su efecto juridico y
+     su desglose interno, la caja llego a medir mas que la grafica que
+     la invoca: abrirla empujaba media pagina hacia abajo y obligaba a
+     buscar otra vez el renglon que se venia leyendo.
+
+     Se adopta el mismo mecanismo de las ventanas de argumento
+     particular de la 5.2 —cubierta oscura, panel lateral, cierre por
+     Escape—, con dos diferencias pedidas: el panel va mas ancho,
+     porque aqui la ficha trae tabla, y su cuerpo tiene desplazamiento
+     vertical propio, porque es lectura larga. La grafica se queda
+     quieta donde estaba.
+     ==================================================================== */
+  let flujoFichaTipo = null;
+  let flujoFichaEnlazada = false;
+
+  function flujoFichaPartes() {
+    return {
+      drawer: document.getElementById('flujoFichaDrawer'),
+      overlay: document.getElementById('flujoFichaOverlay'),
+      head: document.getElementById('flujoFichaHead'),
+      body: document.getElementById('flujoFichaBody')
+    };
+  }
+
+  /* Un enlace de glosario o de referencia manda a otra pestana. Si la
+     ventana siguiera encima, el destino quedaria detras de la cubierta
+     y pareceria que el enlace no hizo nada. Se cierra en fase de
+     captura, antes de que corra el salto. */
+  function flujoFichaEnlazar(body) {
+    if (!body || flujoFichaEnlazada) return;
+    body.addEventListener('click', (ev) => {
+      const a = ev.target.closest && ev.target.closest('.glos-link, .ref-link, .fd-enlace');
+      if (a) closeFlujoFicha(false);
+    }, true);
+    body.addEventListener('scroll', flujoFichaSombras, { passive: true });
+    window.addEventListener('resize', flujoFichaSombras);
+    flujoFichaEnlazada = true;
+  }
+
+  /* Las dos franjas del borde se encienden solas segun el recorrido que
+     quede. Sin esto, una franja fija seguiria prometiendo texto al
+     llegar al final de la ficha. */
+  function flujoFichaSombras() {
+    const body = document.getElementById('flujoFichaBody');
+    const marco = body && body.parentElement;
+    if (!body || !marco || !marco.classList.contains('flujo-ficha-marco')) return;
+    const resto = body.scrollHeight - body.clientHeight - body.scrollTop;
+    marco.classList.toggle('hay-arriba', body.scrollTop > 4);
+    marco.classList.toggle('hay-abajo', resto > 4);
+  }
+
+  function abrirFlujoFicha() {
+    const p = flujoFichaPartes();
+    if (!p.drawer || !p.overlay) return;
+    p.drawer.classList.add('active');
+    p.overlay.classList.add('active');
+    p.drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (p.body) p.body.scrollTop = 0;
+    flujoFichaSombras();
+    setTimeout(flujoFichaSombras, 420);
+    const cerrar = p.drawer.querySelector('.drawer-close-btn');
+    if (cerrar) setTimeout(() => { try { cerrar.focus(); } catch (e) {} }, 80);
+  }
+
+  function closeFlujoFicha(devolverFoco) {
+    const p = flujoFichaPartes();
+    if (!p.drawer) return;
+    const estabaAbierta = p.drawer.classList.contains('active');
+    p.drawer.classList.remove('active');
+    if (p.overlay) p.overlay.classList.remove('active');
+    p.drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (!estabaAbierta) return;
+
+    /* Al cerrar, el renglon deja de estar encendido: una barra marcada
+       como activa sin ficha a la vista mentiria sobre el estado de la
+       pantalla. */
+    const tipo = flujoFichaTipo;
+    const id = tipo === 'ingresos' ? itemIngresoSel : itemEgresoSel;
+    itemIngresoSel = null;
+    itemEgresoSel = null;
+    flujoFichaTipo = null;
+    if (!tipo) return;
+    renderFlujo(tipo);
+    if (devolverFoco === false) return;
+    const fila = document.querySelector('#' + (tipo === 'ingresos' ? 'ingresosChart' : 'egresosChart') +
+      ' .fc-fila[data-id="' + id + '"]');
+    if (fila) { try { fila.focus({ preventScroll: true }); } catch (e) { fila.focus(); } }
+  }
+
+  function renderFlujoDetalle(tipo, abrir) {
+    if (!PANORAMA) return;
     const esIngreso = tipo === 'ingresos';
-    const box = document.getElementById(esIngreso ? 'ingresosDetalle' : 'egresosDetalle');
-    if (!box || !PANORAMA) return;
+    const pista = document.getElementById(esIngreso ? 'ingresosDetalle' : 'egresosDetalle');
     const sel = esIngreso ? itemIngresoSel : itemEgresoSel;
     const datos = esIngreso ? PANORAMA.ingresos : PANORAMA.egresos;
     const d = datos.find(x => x.id === sel);
-    if (!d) {
-      box.innerHTML = '<p class="cd-vacio">Pulse cualquier renglón para ver qué incluye y qué ley lo sustenta.</p>';
-      return;
+
+    /* Debajo de la grafica ya no queda la ficha, sino la invitacion a
+       abrirla. Ocupa una linea y no se mueve. */
+    if (pista) {
+      pista.innerHTML = '<p class="cd-vacio">Pulse cualquier rengl\u00f3n para abrir su ficha en una ventana lateral: ' +
+        'qu\u00e9 ' + (esIngreso ? 'grava' : 'cubre') + ', qu\u00e9 ley lo sustenta, qu\u00e9 efecto jur\u00eddico produce ' +
+        'y qu\u00e9 incluye por dentro.</p>';
     }
+    if (!d) return;
+
+    const p = flujoFichaPartes();
+    if (!p.body || !p.head) return;
+
     /* El desglose que la propia ley trae dentro del renglon. Las cifras
        nacen en cero y cuentan al abrirse, como todo lo demas. */
     /* La barra se escala con el valor absoluto, porque una partida que
@@ -2528,28 +2633,49 @@
           ${c.d ? '<span class="fdc-det">' + c.d + '</span>' : ''}
         </li>`).join('');
 
-    box.innerHTML = `
-      <div class="fd-head">
-        <span class="fd-ico" aria-hidden="true">${d.icono}</span>
-        <div>
-          <div class="fd-tit">${d.nombreLargo || d.nombre}</div>
-          <div class="fd-monto">${formatMdpFijo(d.montoMdp)} <span class="fd-equiv">${formatMoneyMdp(d.montoMdp)}</span> ${chipEstado(d.estado)}${
-            d.claveLIF ? '<span class="fd-clave" title="Clave del concepto en el Artículo 1º de la Ley de Ingresos">LIF ' + d.claveLIF + '</span>' : ''}</div>
-        </div>
+    p.head.innerHTML = `
+      <div class="fd-cab">
+        <div class="drawer-state-tag fd-kicker">${esIngreso ? 'De d\u00f3nde sale \u00b7 Ley de Ingresos 2026' : 'En qu\u00e9 se va \u00b7 Presupuesto de Egresos 2026'}${
+          d.grupo ? ' \u00b7 ' + d.grupo : ''}</div>
+        <h3 class="drawer-state-name fd-tit" id="flujoFichaTitulo">
+          <span class="fd-ico" aria-hidden="true">${d.icono}</span> ${d.nombreLargo || d.nombre}
+        </h3>
+        <div class="fd-monto">${formatMdpFijo(d.montoMdp)} <span class="fd-equiv">${formatMoneyMdp(d.montoMdp)}</span> ${chipEstado(d.estado)}${
+          d.claveLIF ? '<span class="fd-clave" title="Clave del concepto en el Art\u00edculo 1\u00ba de la Ley de Ingresos">LIF ' + d.claveLIF + '</span>' : ''}</div>
       </div>
+      <button class="drawer-close-btn" onclick="window.AuditEngine.closeFlujoFicha()"
+              title="Cerrar ficha (Esc)" aria-label="Cerrar ficha">\u2715</button>`;
+
+    p.body.innerHTML = `
       <p class="fd-txt">${esIngreso ? d.quePaga : d.queCubre}</p>
-      ${d.efecto ? '<div class="fd-efecto"><span class="fd-efecto-k">Qué efecto jurídico tiene</span><p>' + d.efecto + '</p></div>' : ''}
+      ${d.efecto ? '<div class="fd-efecto"><span class="fd-efecto-k">Qu\u00e9 efecto jur\u00eddico tiene</span><p>' + d.efecto + '</p></div>' : ''}
       ${d.ley ? '<div class="fd-ley"><span class="cd-lab">Fundamento</span><span class="cd-ley">' + d.ley + '</span></div>' : ''}
-      ${comps ? '<div class="fd-comp"><span class="fd-efecto-k">Qué incluye, según la propia ley</span><ul class="fdc-lista">' + comps + '</ul>' +
-        (hayNeg ? '<p class="fdc-pie">Las partidas rayadas <b>restan</b>. La barra mide el tamaño de la cifra, no su dirección.</p>' : '') +
+      ${comps ? '<div class="fd-comp"><span class="fd-efecto-k">Qu\u00e9 incluye, seg\u00fan la propia ley</span><ul class="fdc-lista">' + comps + '</ul>' +
+        (hayNeg ? '<p class="fdc-pie">Las partidas rayadas <b>restan</b>. La barra mide el tama\u00f1o de la cifra, no su direcci\u00f3n.</p>' : '') +
         '</div>' : ''}
       ${(d.glos || d.refKey) ? '<div class="fd-enlaces">' +
-        (d.glos ? '<button type="button" class="fd-enlace fd-enlace-glos" onclick="window.AuditEngine.goToGlossary(' + JSON.stringify(d.glos).replace(/"/g, '&quot;') + ')">📖 Qué significa: <b>' + d.glos + '</b></button>' : '') +
-        (d.refKey ? '<button type="button" class="fd-enlace fd-enlace-ref" onclick="window.AuditEngine.goToRef(\'' + d.refKey + '\')">⚖️ Fuente y fundamento <span class="fd-enlace-n">[' + String(d.refNum).padStart(2, '0') + ']</span></button>' : '') +
+        (d.glos ? '<button type="button" class="fd-enlace fd-enlace-glos" onclick="window.AuditEngine.goToGlossary(' + JSON.stringify(d.glos).replace(/"/g, '&quot;') + ')">\ud83d\udcd6 Qu\u00e9 significa: <b>' + d.glos + '</b></button>' : '') +
+        (d.refKey ? '<button type="button" class="fd-enlace fd-enlace-ref" onclick="window.AuditEngine.goToRef(\'' + d.refKey + '\')">\u2696\ufe0f Fuente y fundamento <span class="fd-enlace-n">[' + String(d.refNum).padStart(2, '0') + ']</span></button>' : '') +
         '</div>' : ''}
     `;
-    /* Cada vez que se abre una ficha, su desglose vuelve a contar. */
-    if (comps) simAnimarZona(box, 'flujodet-' + tipo, 900);
+
+    /* El texto de la ficha se vincula aqui y no por la pasada general:
+       la ventana cuelga del <body>, fuera del panel que aquella
+       recorre. */
+    try { autolinkAmbito(p.body); } catch (e) { console.warn('[Auditavisi\u00f3n] Vinculaci\u00f3n de la ficha omitida:', e); }
+    flujoFichaEnlazar(p.body);
+    flujoFichaSombras();
+
+    if (abrir) abrirFlujoFicha();
+
+    /* Cada vez que se abre una ficha, su desglose vuelve a contar.
+       Arranca cuando el panel ya entro: contar detras del borde seria
+       mover el dato donde nadie lo ve. */
+    clearTimeout(renderFlujoDetalle._t);
+    if (!comps) return;
+    if (!abrir || simMovimientoReducido()) { simAnimarZona(p.body, 'flujodet-' + tipo, 0); return; }
+    simPonerEnCeros(p.body, 'flujodet-' + tipo);
+    renderFlujoDetalle._t = setTimeout(() => simAnimarZona(p.body, 'flujodet-' + tipo, 900), 300);
   }
 
   /* Los rubros que el Articulo 1o. enumera y deja en cero. No se
@@ -2600,12 +2726,18 @@
   }
 
   function selectFlujoItem(tipo, id) {
-    if (tipo === 'ingresos') {
-      itemIngresoSel = (itemIngresoSel === id) ? null : id;
-    } else {
-      itemEgresoSel = (itemEgresoSel === id) ? null : id;
-    }
-    renderFlujo(tipo);
+    /* Segundo toque sobre el mismo renglon: se cierra la ventana. */
+    if ((tipo === 'ingresos' ? itemIngresoSel : itemEgresoSel) === id) { closeFlujoFicha(); return; }
+    /* La ventana es una sola. Si quedara encendido un renglon de la
+       grafica de al lado, la pantalla marcaria dos fichas abiertas y
+       solo habria una. */
+    const otro = tipo === 'ingresos' ? 'egresos' : 'ingresos';
+    const habiaOtro = (otro === 'ingresos' ? itemIngresoSel : itemEgresoSel) !== null;
+    if (tipo === 'ingresos') { itemIngresoSel = id; itemEgresoSel = null; }
+    else { itemEgresoSel = id; itemIngresoSel = null; }
+    flujoFichaTipo = tipo;
+    if (habiaOtro) renderFlujo(otro);
+    renderFlujo(tipo, true);
   }
 
   /* ====================================================================
@@ -2674,7 +2806,7 @@
       reiniciar: "flujoReiniciar('" + tipo + "')",
       estado: contado
         ? (esIngreso
-            ? '✅ Contabilizado. Cada barra mide su origen frente al mayor de los nueve; el porcentaje es su parte del ingreso total.'
+            ? '✅ Contabilizado. Cada barra mide su origen frente al mayor de los ' + n + '; el porcentaje es su parte del ingreso total.'
             : '✅ Contabilizado. El porcentaje es la parte de cada renglón en el gasto total aprobado.')
         : '⚪ Los ' + n + ' renglones están en ceros ($0 / 0.0%). Pulse «Contabilizar» para ver crecer las barras y sus porcentajes.'
     });
@@ -20615,6 +20747,7 @@
     aplicarAutolink: aplicarAutolink,
     selectCircuitoEtapa: selectCircuitoEtapa,
     selectFlujoItem: selectFlujoItem,
+    closeFlujoFicha: closeFlujoFicha,
     erarioContar: erarioContar,
     erarioReiniciar: erarioReiniciar,
     flujoContar: flujoContar,
@@ -20880,6 +21013,7 @@
       closePorfirioDiazArgumento();
       closeSantaAnnaArgumento();
       closeJuarezArgumento();
+      closeFlujoFicha();
       closeStateDrawer();
     }
   });

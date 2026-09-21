@@ -264,8 +264,7 @@
           <div class="erario-bloque-head">
             <h3>1 &middot; De d&oacute;nde sale</h3>
             <p class="erario-bloque-sub">
-              <span id="ingresosConteo">Los or&iacute;genes</span> que componen el ingreso federal de 2026, tal como los enumera el Art&iacute;culo 1&ordm; de la Ley de Ingresos. Pulse cualquiera para ver
-              qu&eacute; grava y qu&eacute; ley lo faculta.
+              <span id="ingresosConteo">Los or&iacute;genes</span> que componen el ingreso federal de 2026, tal como los enumera el Art&iacute;culo 1&ordm; de la Ley de Ingresos.
             </p>
           </div>
           <div class="erario-mandos" id="ingresosMandos"></div>
@@ -5419,6 +5418,24 @@
       <!-- Contenido inyectado dinámicamente por renderPjHierarchicalModalContent() -->
     </div>
   </div>
+
+  <!-- ==========================================================================
+       VENTANA LATERAL: FICHA DE UN RENGL&Oacute;N DEL ERARIO (1.1)
+       El desglose de cada origen del ingreso y cada destino del gasto se lee
+       aqu&iacute;, con el mismo mecanismo de las ventanas de argumento particular de
+       la 5.2: cubierta oscura, panel lateral y cierre por Escape. Va m&aacute;s ancha
+       que aqu&eacute;llas porque la ficha trae tabla, y su cuerpo lleva desplazamiento
+       vertical propio porque es lectura larga.
+       ========================================================================== -->
+  <div id="flujoFichaOverlay" class="audit-drawer-overlay" onclick="window.AuditEngine.closeFlujoFicha()"></div>
+
+  <aside id="flujoFichaDrawer" class="audit-drawer audit-drawer-ancha"
+         role="dialog" aria-modal="true" aria-labelledby="flujoFichaTitulo" aria-hidden="true">
+    <div class="drawer-header" id="flujoFichaHead"></div>
+    <div class="flujo-ficha-marco">
+      <div class="drawer-body flujo-ficha-body" id="flujoFichaBody"></div>
+    </div>
+  </aside>
 
   <!-- ==========================================================================
        DRAWER LATERAL: ARGUMENTO PARTICULAR - CASO GENARO GARCÍA LUNA
