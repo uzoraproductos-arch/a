@@ -507,9 +507,9 @@
       <div class="subtabs-bar" data-parent="accion-financiera">
         <button class="subtab-btn active" data-sub="ejes-deuda">2.1 Maquinaria Financiera, Deuda &amp; Banxico</button>
         <button class="subtab-btn" data-sub="simulador-megaobras">2.2 Inversión por Sectores, Megaobras &amp; Simulador de Pérdidas</button>
-        <button class="subtab-btn" data-sub="calculadora">2.3 Calculadora Cívica del Contribuyente</button>
-        <button class="subtab-btn" data-sub="bitacora">2.4 Bitácora &amp; Alertas ASF</button>
-        <button class="subtab-btn" data-sub="cuentas-verdes">2.5 El PIB No Alcanza: Cuentas Econ&oacute;micas y Ecol&oacute;gicas</button>
+        <button class="subtab-btn" data-sub="cuentas-verdes">2.3 El PIB No Alcanza: Cuentas Econ&oacute;micas y Ecol&oacute;gicas</button>
+        <button class="subtab-btn" data-sub="calculadora">2.4 Calculadora Cívica del Contribuyente</button>
+        <button class="subtab-btn" data-sub="bitacora">2.5 Bitácora &amp; Alertas ASF</button>
       </div>
 
       <!-- SUBPANEL 2.1: MAQUINARIA FINANCIERA, DEUDA & BANXICO -->
@@ -747,53 +747,8 @@
         </div>
       </div><!-- FIN SUBPANEL 2.2 -->
 
-      <!-- SUBPANEL 2.3: CALCULADORA CÍVICA DEL CONTRIBUYENTE -->
-      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="calculadora">
-        <section class="calculator-box">
-          <div class="section-hero" style="margin-bottom: 20px;">
-            <span class="hero-tag">Herramienta de Auditoría Cívica</span>
-            <h2>2.3 Calculadora Cívica del Contribuyente: ¿A dónde va cada peso que pagas?</h2>
-            <p>
-              Ingresa tu aportación anual aproximada de impuestos (o tu sueldo mensual) y nuestro motor descompondrá con exactitud 
-              matemática en qué dependencias, niveles de gobierno y programas públicos se gasta tu dinero.
-            </p>
-          </div>
-
-          <div class="calc-input-group">
-            <input type="number" id="calcTaxInput" class="calc-input" value="30000" placeholder="Ej. 30000 (pesos de impuestos anuales)">
-            <button id="calcTriggerBtn" class="calc-btn">Auditar Mi Dinero</button>
-          </div>
-
-          <div id="calcBreakdownGrid" class="calc-breakdown-grid"></div>
-        </section>
-      </div><!-- FIN SUBPANEL 2.3 -->
-
-      <!-- SUBPANEL 2.4: BITÁCORA & ALERTAS ASF -->
-      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="bitacora">
-        <section class="news-section">
-          <div class="section-hero">
-            <span class="hero-tag">Investigación &amp; Periodismo de Datos</span>
-            <h2>2.4 Bitácora de Fiscalización &amp; Alertas al Día</h2>
-            <p>
-              Informes periódicos, pliegos de observaciones de la Auditoría Superior <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-08')">[08]</a>, investigaciones sobre huachicol fiscal y semáforos de deuda subnacional.
-            </p>
-          </div>
-
-          <div class="news-filter-pills">
-            <button class="lens-btn news-filter-btn active" data-filter="todos">Todas las Alertas</button>
-            <button class="lens-btn news-filter-btn" data-filter="ASF">ASF Cuenta Pública</button>
-            <button class="lens-btn news-filter-btn" data-filter="Pacto Fiscal">Pacto Fiscal &amp; PEF</button>
-            <button class="lens-btn news-filter-btn" data-filter="Deuda">Deuda Subnacional</button>
-            <button class="lens-btn news-filter-btn" data-filter="SAT">SAT &amp; Huachicol Fiscal</button>
-            <button class="lens-btn news-filter-btn" data-filter="Municipios">Municipios &amp; Predial</button>
-          </div>
-
-          <div id="newsCardsGrid" class="news-grid"></div>
-        </section>
-      </div><!-- FIN SUBPANEL 2.4 -->
-
       <!-- ====================================================================
-           SUBPANEL 2.5: CUENTAS ECONOMICAS Y ECOLOGICAS (CEEM / INEGI)
+           SUBPANEL 2.3: CUENTAS ECONOMICAS Y ECOLOGICAS (CEEM / INEGI)
            Lo pinta renderCuentasEcologicas() desde DB.cuentas_ecologicas.
            La cascada y el simulador se dibujan en SVG generado por codigo:
            sin peticiones de red y nitido en cualquier pantalla.
@@ -813,6 +768,51 @@
         <div id="ceeJuridico"></div>
         <div id="ceeProcedencia"></div>
 
+      </div><!-- FIN SUBPANEL 2.3 -->
+
+      <!-- SUBPANEL 2.4: CALCULADORA CÍVICA DEL CONTRIBUYENTE -->
+      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="calculadora">
+        <section class="calculator-box">
+          <div class="section-hero" style="margin-bottom: 20px;">
+            <span class="hero-tag">Herramienta de Auditoría Cívica</span>
+            <h2>2.4 Calculadora Cívica del Contribuyente: ¿A dónde va cada peso que pagas?</h2>
+            <p>
+              Ingresa tu aportación anual aproximada de impuestos (o tu sueldo mensual) y nuestro motor descompondrá con exactitud 
+              matemática en qué dependencias, niveles de gobierno y programas públicos se gasta tu dinero.
+            </p>
+          </div>
+
+          <div class="calc-input-group">
+            <input type="number" id="calcTaxInput" class="calc-input" value="30000" placeholder="Ej. 30000 (pesos de impuestos anuales)">
+            <button id="calcTriggerBtn" class="calc-btn">Auditar Mi Dinero</button>
+          </div>
+
+          <div id="calcBreakdownGrid" class="calc-breakdown-grid"></div>
+        </section>
+      </div><!-- FIN SUBPANEL 2.4 -->
+
+      <!-- SUBPANEL 2.5: BITÁCORA & ALERTAS ASF -->
+      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="bitacora">
+        <section class="news-section">
+          <div class="section-hero">
+            <span class="hero-tag">Investigación &amp; Periodismo de Datos</span>
+            <h2>2.5 Bitácora de Fiscalización &amp; Alertas al Día</h2>
+            <p>
+              Informes periódicos, pliegos de observaciones de la Auditoría Superior <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-08')">[08]</a>, investigaciones sobre huachicol fiscal y semáforos de deuda subnacional.
+            </p>
+          </div>
+
+          <div class="news-filter-pills">
+            <button class="lens-btn news-filter-btn active" data-filter="todos">Todas las Alertas</button>
+            <button class="lens-btn news-filter-btn" data-filter="ASF">ASF Cuenta Pública</button>
+            <button class="lens-btn news-filter-btn" data-filter="Pacto Fiscal">Pacto Fiscal &amp; PEF</button>
+            <button class="lens-btn news-filter-btn" data-filter="Deuda">Deuda Subnacional</button>
+            <button class="lens-btn news-filter-btn" data-filter="SAT">SAT &amp; Huachicol Fiscal</button>
+            <button class="lens-btn news-filter-btn" data-filter="Municipios">Municipios &amp; Predial</button>
+          </div>
+
+          <div id="newsCardsGrid" class="news-grid"></div>
+        </section>
       </div><!-- FIN SUBPANEL 2.5 -->
 
     </div><!-- FIN PESTAÑA 2 -->

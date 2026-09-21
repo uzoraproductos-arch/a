@@ -588,6 +588,13 @@ de los 32 circuitos.
 - Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
 - **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
 
+### Hecho (nuevo orden de las subpestañas de la pestaña 2)
+- 2.1 Maquinaria Financiera · 2.2 Inversión por Sectores · **2.3 El PIB
+  No Alcanza** · **2.4 Calculadora Cívica** · **2.5 Bitácora y Alertas**.
+- Se reordenaron también los paneles en el DOM, no sólo los botones, y se
+  renumeraron sus comentarios y títulos internos.
+- La mesa 3 de la 2.2 apunta ahora a «la calculadora cívica de la 2.4».
+
 ### Hecho (pastillas de mandato y arranque en ceros)
 - **Defecto:** con un mandato de una sola obra (Salinas, Fox) la lista
   comparativa se escondía tras un aviso y parecía que el botón no

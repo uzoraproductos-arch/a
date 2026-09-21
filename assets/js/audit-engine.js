@@ -15798,7 +15798,7 @@
 
     return '<article class="sim-mesa sim-mesa-puente">' +
       '<h4 class="sim-mesa-tit"><span class="sim-mesa-num">3</span> De la cifra agregada a su bolsillo</h4>' +
-      '<p class="sim-mesa-pie">Un billón de pesos no se siente. Dividido entre quienes sostienen el erario, sí. Esta mesa es el puente hacia la calculadora cívica de la 2.3.</p>' +
+      '<p class="sim-mesa-pie">Un billón de pesos no se siente. Dividido entre quienes sostienen el erario, sí. Esta mesa es el puente hacia la calculadora cívica de la 2.4.</p>' +
       '<div class="sim-t-marco"><table class="sim-t sim-t-puente">' +
         '<thead><tr><th>Paso</th><th>Concepto</th><th>Operación</th><th>Importe</th><th>Acumulado</th></tr></thead>' +
         '<tbody>' +
@@ -15843,7 +15843,7 @@
     '</article>';
   }
 
-  /* El puente real: deja la cifra cargada en la calculadora de la 2.3 y
+  /* El puente real: deja la cifra cargada en la calculadora de la 2.4 y
      la ejecuta, para que el usuario no tenga que teclearla de memoria. */
   function simLlevarACalculadora(monto) {
     navMarcarOrigen();
