@@ -1288,6 +1288,48 @@ por debajo del billón, porque `formatMoneyMdp` y `formatMdpFijo` devuelven lo
 mismo en ese rango. La equivalencia ahora sólo se escribe cuando cambia de
 unidad. Afecta a las cuatro vistas de fichas, no sólo a la 1.1.
 
+### Hecho (1.4: el paquete, leído ahora contra sus textos legales)
+
+Hasta aquí la 1.4 se apoyaba en tres anexos de la Gaceta Parlamentaria 7121:
+la Ley de Ingresos, el decreto de Egresos y los Criterios. Resultó que el
+paquete tiene **catorce**. El índice del día los enumera, y de ahí salieron
+las dos iniciativas de reforma —ISR y Ley Federal de Derechos— que antes sólo
+conocíamos por la descripción que los Criterios hacen de ellas.
+
+**Lo verificado.** Las once medidas fiscales publicadas resisten el texto
+legal: el tope del 96.67% con su variante del 99%, el umbral de cincuenta
+millones y cinco ejercicios, el límite del 50% a las pérdidas con el plazo de
+diez a quince años, la baja de intereses netos del 30% al 20%, la derogación
+del Capítulo VI donde vivía el Régimen Opcional para Grupos de Sociedades, los
+umbrales del RESICO con su opción de IVA al 7% sin acreditamiento, la
+retención de intereses que pasa de 0.90% a 0.68% y la repatriación al 7.5%.
+Ninguna hubo que corregir.
+
+**Lo que el texto legal añade.** La exposición de motivos de la reforma al ISR
+explica el mecanismo que faltaba: de las 318 mil empresas que no pagaron el
+impuesto, 223 mil —el 70.3%— no lo hicieron porque sus deducciones igualaron o
+superaron sus ingresos. Y mide el sesgo: las que más ISR pagan registran
+operaciones con contribuyentes de perfil facturero en el 3.5% de sus
+deducciones; las que menos pagan, en el 10%. De ahí sale el 96.67%, que no era
+una cifra arbitraria. Los dos datos entran al punto ciego 4 y a la ficha de la
+medida.
+
+**El punto ciego nuevo, el once.** Cuatro de los catorce anexos se publican
+como imagen escaneada, sin capa de texto: la reforma a la Ley Aduanera, las
+dos leyes enteramente nuevas —la de Economía Digital y la catastral y
+registral— y el informe sobre la facultad arancelaria. Los archivos del portal
+de Hacienda sí traen texto, pero salen con los permisos bloqueados, incluida
+la casilla de extracción para accesibilidad: la que consultan los lectores de
+pantalla. Tres de los cuatro escaneados son leyes, y una toca la base del
+predial.
+
+**Un defecto que salió de paso.** El pie de cada punto ciego resolvía su
+fuente con una cadena de ternarios que reconocía tres claves; cualquier otra
+se acreditaba a los Criterios aunque el dato viniera de otro documento. Ahora
+es una tabla, y los once pies citan lo que de verdad los respalda. Tres
+referencias nuevas: 68 (reforma al ISR), 69 (reforma a la Ley Federal de
+Derechos) y 70 (el índice de la Gaceta 7121).
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

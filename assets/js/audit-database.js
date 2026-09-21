@@ -6470,6 +6470,33 @@ window.AUDIT_DB = {
       "descripcion": "Presentación oficial del paquete. De aquí proceden el monto del Plan de Inversión en Infraestructura para el Desarrollo con Bienestar 2026-2030 —5.7 billones de pesos de inversión pública y mixta— y los incrementos reales anunciados por sector: educación 10.7%, salud 11.3%, seguridad 11.5% y ciencia 13%."
     },
     {
+      "num": 68,
+      "id": "ref-lisr2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Ejecutivo Federal. (2026). Iniciativa de Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley del Impuesto sobre la Renta y se expiden disposiciones de vigencia transitoria. Gaceta Parlamentaria, año XXIX, número 7121, Anexo E, 8 de septiembre de 2026. Cámara de Diputados, LXVI Legislatura.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-E.pdf",
+      "descripcion": "Texto legal de la reforma al impuesto sobre la renta: el tope del 96.67% a las deducciones autorizadas, el límite a las pérdidas fiscales de ejercicios anteriores, la baja del 30% al 20% en la deducción de intereses netos y la derogación del Capítulo VI, donde vivía el Régimen Opcional para Grupos de Sociedades. Su exposición de motivos publica la evidencia de evasión en la que el Ejecutivo funda la reforma."
+    },
+    {
+      "num": 69,
+      "id": "ref-lfd2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Ejecutivo Federal. (2026). Iniciativa de Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Federal de Derechos. Gaceta Parlamentaria, año XXIX, número 7121, Anexo D, 8 de septiembre de 2026. Cámara de Diputados, LXVI Legislatura.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-D.pdf",
+      "descripcion": "Texto legal de la actualización de los derechos que el Estado cobra por prestar un servicio o por permitir el uso de un bien público: migración, espacio aéreo, vías férreas, trámites sanitarios, medio ambiente, puertos, zona federal marítimo terrestre, museos y zonas arqueológicas, armas, extracción de materiales y la inspección que la Comisión Nacional Bancaria y de Valores cobra a las emisoras de valores."
+    },
+    {
+      "num": 70,
+      "id": "ref-gaceta7121",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Cámara de Diputados, LXVI Legislatura. (2026). Gaceta Parlamentaria, año XXIX, número 7121, 8 de septiembre de 2026. Índice del día, con los catorce anexos del Paquete Económico 2027.",
+      "url": "https://gaceta.diputados.gob.mx/Gaceta/66/2026/sep/20260908.html",
+      "descripcion": "El índice del día en que el Ejecutivo entregó el paquete. Enumera los catorce anexos y permite comprobar cuáles se publicaron como texto y cuáles como imagen escaneada."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -12459,7 +12486,7 @@ window.AUDIT_DB = {
         "n": "Deducciones empresariales estandarizadas",
         "tipo": "Recauda más",
         "icono": "🧾",
-        "d": "Las deducciones autorizadas se topan al 96.67% de los ingresos acumulables de la empresa (99% para las que hoy deducen menos). Aplica sólo a empresas con ingresos mayores a 50 millones de pesos y al menos cinco años de operación.",
+        "d": "Las deducciones autorizadas se topan al 96.67% de los ingresos acumulables de la empresa (99% para las que hoy deducen menos). Aplica sólo a empresas con ingresos mayores a 50 millones de pesos y al menos cinco años de operación. El umbral no es arbitrario: la iniciativa explica que, por encima del 96.67%, las operaciones con contribuyentes de perfil facturero representan en promedio el 10% de las erogaciones.",
         "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta, Anexo E del paquete"
       },
       {
@@ -12562,9 +12589,9 @@ window.AUDIT_DB = {
         "id": "c-reforma",
         "titulo": "«Sin nuevos impuestos» es literal y, a la vez, esconde una reforma de base",
         "dice": "El paquete no crea impuestos ni sube tasas generales. Los Criterios lo dicen con esas palabras.",
-        "documento": "En la misma sección, Hacienda propone estandarizar las deducciones empresariales al <b>96.67%</b> de los ingresos acumulables, topar las pérdidas fiscales al 50% de la utilidad, bajar la deducción de intereses netos del 30% al 20% y eliminar el Régimen Opcional para Grupos de Sociedades cobrando el impuesto diferido. Y lo justifica con un dato propio: en 2025, «de <b>524 mil empresas</b> que declararon ingresos positivos, el 60.7% (<b>318 mil empresas</b>) no registró un pago del ISR».",
+        "documento": "En la misma sección, Hacienda propone estandarizar las deducciones empresariales al <b>96.67%</b> de los ingresos acumulables, topar las pérdidas fiscales al 50% de la utilidad, bajar la deducción de intereses netos del 30% al 20% y eliminar el Régimen Opcional para Grupos de Sociedades cobrando el impuesto diferido. Y lo justifica con un dato propio: en 2025, «de <b>524 mil empresas</b> que declararon ingresos positivos, el 60.7% (<b>318 mil empresas</b>) no registró un pago del ISR». La iniciativa que lleva ese diagnóstico a la ley explica el mecanismo: de esas 318 mil, <b>223 mil —el 70.3%— no pagaron porque sus deducciones igualaron o superaron sus ingresos</b>; el resto se explica por pérdidas de ejercicios anteriores. Y mide el sesgo: las empresas que más ISR pagan registran operaciones con contribuyentes de perfil facturero en el <b>3.5%</b> de sus deducciones; las que menos pagan o declaran pérdidas, en el <b>10%</b>.",
         "porque": "No subir la tasa y ensanchar la base recaudan de forma distinta pero pesan igual en el bolsillo. Llamar «sin reforma» a un cambio permanente de la base gravable describe el titular, no el contenido.",
-        "ref": "cgpe"
+        "ref": "lisr"
       },
       {
         "id": "c-diferimiento",
@@ -12614,6 +12641,14 @@ window.AUDIT_DB = {
         "documento": "En la clasificación funcional del gasto programable, la línea «Fondos de estabilización» recibe <b>$6.0 mil millones de pesos</b> para 2027, <b>12.2% real menos</b> que en 2026.",
         "porque": "Es menos de una milésima parte del presupuesto, y es la aportación anual del ejercicio a los colchones que el propio documento presenta como la defensa del país ante un choque externo.",
         "ref": "cgpe"
+      },
+      {
+        "id": "c-legible",
+        "titulo": "Cuatro de los catorce anexos se publican como fotografía, no como texto",
+        "dice": "El paquete económico se entregó completo y está publicado para consulta de cualquiera.",
+        "documento": "Publicado está, y eso es cierto. Pero de los <b>catorce anexos</b> de la Gaceta Parlamentaria 7121, <b>cuatro no tienen capa de texto</b>: son imágenes escaneadas que ningún buscador indexa, de las que no se puede copiar un renglón y que ningún lector de pantalla puede leer en voz alta. Son el <b>Anexo F</b>, reforma a la Ley Aduanera; el <b>Anexo G</b>, que expide la Ley de Economía Digital para Pagos Digitales y Electrónicos; el <b>Anexo H</b>, que expide la Ley General para el Fortalecimiento y Armonización Catastral y Registral, y el <b>Anexo J</b>, el informe sobre el uso de la facultad arancelaria. Los archivos equivalentes del portal de Hacienda sí traen texto, pero salen con los permisos del documento bloqueados, <b>incluida la casilla de extracción para accesibilidad</b>: la que los lectores de pantalla consultan antes de leer.",
+        "porque": "Tres de los cuatro escaneados son leyes: dos enteramente nuevas y una reformada. Y una de ellas, la catastral y registral, toca la base del impuesto predial, que es el tributo peor cobrado del país. Un documento que la Constitución obliga a entregar no queda entregado del todo si no se puede buscar dentro de él, citar un renglón ni oírlo leer: la forma de publicar decide quién alcanza a revisar.",
+        "ref": "gaceta"
       }
     ],
     "refs": {
@@ -12621,6 +12656,9 @@ window.AUDIT_DB = {
       "ppef": "ref-ppef2027",
       "ilif": "ref-ilif2027",
       "com": "ref-shcp-c71",
+      "lisr": "ref-lisr2027",
+      "lfd": "ref-lfd2027",
+      "gaceta": "ref-gaceta7121",
       "lfprh": "ref-lfprh"
     }
   },

@@ -15596,6 +15596,25 @@
     return (P && P.refs && P.refs[clave]) ? vsxRefLink(P.refs[clave]) : '';
   }
 
+  /* Como se nombra cada fuente en el pie de un punto ciego. Antes esto
+     era una cadena de ternarios con tres casos, de modo que cualquier
+     referencia nueva se acreditaba a los Criterios. */
+  const PE_FUENTE = {
+    cgpe: 'los Criterios Generales de Política Económica 2027',
+    ppef: 'el decreto del proyecto de Presupuesto de Egresos 2027',
+    ilif: 'la iniciativa de Ley de Ingresos 2027',
+    com: 'el comunicado 71 de la Secretaría de Hacienda',
+    lisr: 'la iniciativa de reforma a la Ley del Impuesto sobre la Renta',
+    lfd: 'la iniciativa de reforma a la Ley Federal de Derechos',
+    gaceta: 'la Gaceta Parlamentaria 7121, que publicó el paquete completo',
+    lfprh: 'la Ley Federal de Presupuesto y Responsabilidad Hacendaria'
+  };
+
+  function peFuente(clave) {
+    const k = PE_FUENTE[clave] ? clave : 'cgpe';
+    return PE_FUENTE[k] + peRef(k);
+  }
+
   /* Los Criterios publican en miles de millones; el resto de la
      plataforma cuenta en millones. Se conserva la unidad del documento
      y se dice cual es, en vez de convertir a espaldas del lector. */
@@ -16071,10 +16090,8 @@
               '<div class="pe-ciego-bloque doc"><span class="pe-et">Lo que dice el documento</span><p>' + c.documento + '</p></div>' +
               '<div class="pe-ciego-bloque porque"><span class="pe-et">Por qué importa</span><p>' + c.porque + '</p></div>' +
               '<p class="pe-ciego-ref">Verificado contra ' +
-                (c.ref === 'ppef' ? 'el decreto del proyecto de Presupuesto de Egresos 2027' + peRef('ppef')
-                 : c.ref === 'lfprh' ? 'la Ley Federal de Presupuesto y Responsabilidad Hacendaria' + peRef('lfprh')
-                 : 'los Criterios Generales de Política Económica 2027' + peRef('cgpe')) +
-                (c.ref2 ? ' y la Ley Federal de Presupuesto y Responsabilidad Hacendaria' + peRef(c.ref2) : '') + '.</p>' +
+                peFuente(c.ref) +
+                (c.ref2 ? ' y ' + peFuente(c.ref2) : '') + '.</p>' +
             '</div>'
           : '<p class="pe-ciego-avance">' + c.dice + '</p>') +
       '</article>').join('');
