@@ -14989,3 +14989,478 @@ body.con-regreso { padding-bottom: 96px; }
   .insp-exp-cuerpo { grid-template-columns: 1fr; }
   .insp-exp-circulo { max-width: 260px; margin: 0 auto; }
 }
+
+/* ==========================================================================
+   SUBPESTANA 1.4, SEGUNDA PARTE: EL PAQUETE ECONOMICO 2027
+   ========================================================================== */
+
+.pe-hero { margin-top: 3.5rem; }
+.pe-et {
+  display: block; font-family: var(--font-sans); font-size: 0.66rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-secondary); margin-bottom: 0.35rem;
+}
+.pe-fuente-nota {
+  margin: 0.9rem 0 0; font-family: var(--font-sans); font-size: 0.78rem;
+  line-height: 1.6; color: var(--text-secondary);
+  border-top: 1px solid var(--border-subtle); padding-top: 0.7rem;
+}
+
+/* --- 5. Itinerario -------------------------------------------------------- */
+.pe-itin { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.pe-itin-paso {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); margin-bottom: 0.55rem; overflow: hidden;
+}
+.pe-itin-paso.abierto { border-color: var(--border-gold); }
+.pe-itin-cab {
+  display: grid; width: 100%; text-align: left; cursor: pointer;
+  grid-template-columns: 2.1rem 9.5rem 1fr 13rem 1.6rem;
+  align-items: center; gap: 0.75rem;
+  background: none; border: 0; padding: 0.8rem 1rem; color: inherit;
+}
+.pe-itin-cab:hover { background: var(--bg-card-hover); }
+.pe-itin-n {
+  width: 2.1rem; height: 2.1rem; border-radius: 50%;
+  display: grid; place-items: center; font-family: var(--font-mono);
+  font-size: 0.78rem; background: var(--gold-glow); color: var(--text-gold);
+  border: 1px solid var(--border-gold);
+}
+.pe-itin-fecha {
+  font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-gold);
+  font-weight: 600;
+}
+.pe-itin-hito { font-family: var(--font-serif); font-size: 1rem; color: var(--text-main); }
+.pe-itin-quien {
+  font-family: var(--font-sans); font-size: 0.76rem; color: var(--text-secondary);
+  text-align: right;
+}
+.pe-itin-mas {
+  font-family: var(--font-mono); font-size: 1.15rem; color: var(--text-secondary);
+  text-align: center;
+}
+.pe-itin-cuerpo { padding: 0 1rem 1rem 3.85rem; }
+.pe-itin-ley {
+  font-family: var(--font-mono); font-size: 0.76rem; color: var(--cyan);
+  margin: 0 0 0.5rem;
+}
+.pe-itin-texto {
+  font-family: var(--font-body); font-size: 0.93rem; line-height: 1.65;
+  color: var(--text-main); margin: 0 0 0.75rem;
+}
+.pe-itin-ciego {
+  margin: 0; padding: 0.65rem 0.85rem; border-radius: 8px;
+  background: var(--bg-card-alt); border-left: 3px solid var(--amber);
+  font-family: var(--font-body); font-size: 0.88rem; line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* --- Tablas comunes de la seccion ---------------------------------------- */
+.pe-tabla-marco {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  overflow-x: auto; background: var(--bg-card);
+}
+.pe-tabla { width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 640px; }
+.pe-tabla col.c-var { width: 38%; }
+.pe-tabla col.c-n { width: 15.5%; }
+.pe-tabla col.c-serie { width: 26%; }
+.pe-tabla thead th {
+  font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-secondary); text-align: right;
+  padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border-accent);
+  background: var(--bg-card-alt); position: sticky; top: 0;
+}
+.pe-tabla thead th:first-child { text-align: left; }
+.pe-tabla tbody th {
+  text-align: left; padding: 0.6rem 0.8rem; font-weight: 500;
+  border-bottom: 1px solid var(--border-subtle); vertical-align: top;
+}
+.pe-tabla tbody td {
+  text-align: right; padding: 0.6rem 0.8rem; font-family: var(--font-mono);
+  font-size: 0.85rem; color: var(--text-main);
+  border-bottom: 1px solid var(--border-subtle); vertical-align: top;
+}
+.pe-tabla tbody tr:hover { background: var(--bg-card-hover); }
+.pe-tabla .pe-destaca { color: var(--text-gold); font-weight: 600; }
+.pe-tabla th.pe-destaca-col { color: var(--text-gold); }
+.pe-var {
+  display: block; font-family: var(--font-body); font-size: 0.93rem;
+  color: var(--text-main);
+}
+.pe-uni {
+  display: block; font-family: var(--font-sans); font-size: 0.7rem;
+  color: var(--text-secondary); margin-top: 0.1rem;
+}
+.pe-nota-var {
+  display: block; font-family: var(--font-body); font-size: 0.78rem;
+  color: var(--text-secondary); margin-top: 0.3rem; line-height: 1.5;
+}
+
+/* --- 6b. Finanzas publicas ------------------------------------------------ */
+.pe-fin-grupo { margin-top: 1.6rem; }
+.pe-fin-tit {
+  font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-gold); margin: 0 0 0.7rem;
+}
+.pe-fin-rejilla {
+  display: grid; gap: 0.7rem;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+}
+.pe-fin-tarjeta {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.85rem 0.95rem;
+  border-top: 3px solid var(--emerald);
+}
+.pe-fin-tarjeta.neg { border-top-color: var(--crimson-bright); }
+.pe-fin-nom {
+  margin: 0 0 0.4rem; font-family: var(--font-sans); font-size: 0.8rem;
+  color: var(--text-secondary); font-weight: 600;
+}
+.pe-fin-cifra {
+  margin: 0; font-family: var(--font-mono); font-size: 1.02rem;
+  color: var(--text-main); font-weight: 600;
+}
+.pe-fin-pib {
+  margin: 0.25rem 0 0.5rem; font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--text-gold); display: flex; justify-content: space-between; gap: 0.5rem;
+}
+.pe-fin-ant { color: var(--text-secondary); }
+.pe-fin-d {
+  margin: 0; font-family: var(--font-body); font-size: 0.83rem;
+  line-height: 1.55; color: var(--text-secondary);
+}
+
+/* --- 7. Gasto ------------------------------------------------------------- */
+.pe-sub { margin-top: 2rem; }
+.pe-sub-tit {
+  font-family: var(--font-serif); font-size: 1.12rem; color: var(--text-main);
+  margin: 0 0 0.35rem;
+}
+.pe-sub-sub {
+  font-family: var(--font-body); font-size: 0.9rem; line-height: 1.6;
+  color: var(--text-secondary); margin: 0 0 1rem;
+}
+.pe-func { display: grid; gap: 0.5rem; }
+.pe-func-fila {
+  display: grid; align-items: center; gap: 0.5rem 0.8rem;
+  grid-template-columns: 15rem 1fr 8rem 6.5rem;
+  grid-template-areas: "nom barra m var" "d d d d";
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.75rem 0.9rem;
+}
+.pe-func-nom { grid-area: nom; font-family: var(--font-body); font-size: 0.92rem; color: var(--text-main); }
+.pe-func-barra {
+  grid-area: barra; height: 12px; border-radius: 6px;
+  background: var(--bg-card-alt); overflow: hidden;
+}
+.pe-func-relleno { display: block; height: 100%; background: var(--gold-gradient); }
+.pe-func-relleno.baja { background: linear-gradient(90deg, var(--crimson), var(--crimson-bright)); }
+.pe-func-m { grid-area: m; text-align: right; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-main); }
+.pe-func-var { grid-area: var; text-align: right; font-family: var(--font-mono); font-size: 0.8rem; }
+.pe-func-var.sube { color: var(--emerald-bright); }
+.pe-func-var.baja { color: var(--crimson-bright); }
+.pe-func-d {
+  grid-area: d; font-family: var(--font-body); font-size: 0.83rem;
+  line-height: 1.55; color: var(--text-secondary);
+  border-top: 1px dashed var(--border-subtle); padding-top: 0.5rem;
+}
+.pe-func-ant {
+  display: block; font-family: var(--font-mono); font-size: 0.74rem;
+  color: var(--text-dim); margin-top: 0.25rem;
+}
+
+.pe-lista { display: grid; gap: 0.3rem; }
+.pe-lista-fila {
+  display: grid; align-items: center; gap: 0.6rem;
+  grid-template-columns: 6.5rem 16rem 1fr 8.5rem;
+  padding: 0.42rem 0.7rem; border-radius: 8px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+}
+.pe-lista-g {
+  font-family: var(--font-sans); font-size: 0.64rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-secondary);
+  border: 1px solid var(--border-subtle); border-radius: 999px;
+  padding: 0.15rem 0.45rem; text-align: center;
+}
+.pe-lista-n { font-family: var(--font-body); font-size: 0.88rem; color: var(--text-main); }
+.pe-lista-d {
+  display: block; font-family: var(--font-body); font-size: 0.76rem;
+  color: var(--text-secondary); margin-top: 0.12rem;
+}
+.pe-lista-barra { height: 9px; border-radius: 5px; background: var(--bg-card-alt); overflow: hidden; }
+.pe-lista-relleno { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--blue)); }
+.pe-lista-relleno.inv { background: linear-gradient(90deg, var(--amber), var(--orange)); }
+.pe-lista-m { text-align: right; font-family: var(--font-mono); font-size: 0.83rem; color: var(--text-main); }
+
+/* El ancho lo anima el motor cuadro por cuadro: una transicion de CSS
+   compitiendo por la misma propiedad hace que la cuenta se vea a saltos. */
+.pe-func-relleno[data-anim-w],
+.pe-lista-relleno[data-anim-w] { transition: none; }
+
+/* --- 8. El simulador ------------------------------------------------------ */
+.pe-esc { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem; }
+.pe-esc-btn {
+  display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer;
+  border: 1px solid var(--border-subtle); border-radius: 999px;
+  background: var(--bg-card); color: var(--text-secondary);
+  padding: 0.42rem 0.9rem; font-family: var(--font-sans); font-size: 0.8rem;
+}
+.pe-esc-btn:hover { border-color: var(--border-gold); color: var(--text-main); }
+.pe-esc-btn.active {
+  background: var(--gold-glow); border-color: var(--border-gold);
+  color: var(--text-gold); font-weight: 600;
+}
+.pe-esc-ico { font-size: 0.95rem; }
+.pe-esc-d {
+  margin: 0 0 1.1rem; font-family: var(--font-body); font-size: 0.86rem;
+  color: var(--text-secondary); font-style: italic;
+}
+.pe-palancas {
+  display: grid; gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+}
+.pe-palanca {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.85rem 0.95rem;
+  border-left: 3px solid var(--border-subtle);
+}
+.pe-palanca.movida { border-left-color: var(--gold); background: var(--bg-card-alt); }
+.pe-pal-cab { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.55rem; }
+.pe-pal-ico { font-size: 1.05rem; }
+.pe-pal-n {
+  flex: 1; font-family: var(--font-sans); font-size: 0.85rem;
+  color: var(--text-main); font-weight: 600; cursor: pointer;
+}
+.pe-pal-v {
+  font-family: var(--font-mono); font-size: 1rem; color: var(--text-gold);
+  font-weight: 600; min-width: 4.2rem; text-align: right;
+}
+.pe-pal-rango { width: 100%; accent-color: var(--gold); cursor: pointer; margin: 0; }
+.pe-pal-rango:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+.pe-pal-escala {
+  display: flex; justify-content: space-between; gap: 0.4rem;
+  font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+.pe-pal-base { color: var(--text-gold); }
+.pe-pal-u {
+  margin: 0.45rem 0 0; font-family: var(--font-sans); font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+.pe-pal-cita {
+  margin: 0.55rem 0 0; padding: 0.5rem 0.65rem; border-radius: 7px;
+  background: var(--bg-surface); border-left: 2px solid var(--cyan);
+  font-family: var(--font-body); font-size: 0.79rem; line-height: 1.5;
+  color: var(--text-secondary);
+}
+.pe-pal-porque {
+  margin: 0.45rem 0 0; font-family: var(--font-body); font-size: 0.82rem;
+  line-height: 1.55; color: var(--text-secondary);
+}
+
+.pe-res { margin-top: 1.3rem; }
+.pe-res-fila {
+  display: grid; gap: 0.7rem; margin-bottom: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+}
+.pe-res-panel {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.9rem 1rem;
+  border-top: 3px solid var(--border-accent);
+}
+.pe-res-panel.mejora { border-top-color: var(--emerald-bright); }
+.pe-res-panel.empeora { border-top-color: var(--crimson-bright); }
+.pe-res-panel h5 {
+  margin: 0 0 0.35rem; font-family: var(--font-sans); font-size: 0.78rem;
+  color: var(--text-secondary); font-weight: 600;
+}
+.pe-res-cifra { margin: 0; font-family: var(--font-mono); font-size: 1.22rem; color: var(--text-main); font-weight: 600; }
+.pe-res-pib { margin: 0.2rem 0 0; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-gold); }
+.pe-res-dif { margin: 0.35rem 0 0; font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-secondary); }
+.pe-res-meta {
+  border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.9rem;
+  border: 1px solid var(--border-subtle); background: var(--bg-card-alt);
+}
+.pe-res-meta.ok { border-left: 4px solid var(--emerald); }
+.pe-res-meta.alerta { border-left: 4px solid var(--crimson-bright); }
+.pe-res-meta.fuera { border-left: 4px solid var(--amber); }
+.pe-res-meta-et {
+  display: block; font-family: var(--font-sans); font-size: 0.7rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-secondary); margin-bottom: 0.4rem;
+}
+.pe-res-meta p { margin: 0 0 0.4rem; font-family: var(--font-body); font-size: 0.9rem; line-height: 1.6; color: var(--text-main); }
+.pe-res-meta p:last-child { margin-bottom: 0; }
+.pe-res-meta-obj { color: var(--text-secondary) !important; font-size: 0.85rem !important; }
+.pe-res-tabla-marco {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  overflow-x: auto; background: var(--bg-card);
+}
+.pe-res-tabla {
+  width: 100%; border-collapse: collapse; background: transparent; min-width: 480px;
+}
+.pe-res-tabla th, .pe-res-tabla td {
+  padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono); font-size: 0.81rem; text-align: right;
+}
+.pe-res-tabla thead th {
+  font-family: var(--font-sans); font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-secondary);
+  background: var(--bg-card-alt);
+}
+.pe-res-tabla tbody th { text-align: left; font-family: var(--font-body); font-size: 0.87rem; color: var(--text-main); font-weight: 500; }
+.pe-res-tabla thead th:first-child { text-align: left; }
+.pe-res-tabla .pos { color: var(--emerald-bright); }
+.pe-res-tabla .neg { color: var(--crimson-bright); }
+.pe-res-tabla tr.pe-quieta { opacity: 0.5; }
+.pe-res-tabla tr.pe-res-total th, .pe-res-tabla tr.pe-res-total td {
+  border-top: 2px solid var(--border-accent); border-bottom: 0;
+  font-weight: 700; background: var(--bg-card-alt);
+}
+.pe-res-neto { font-weight: 600; }
+.pe-limite {
+  margin: 1.1rem 0 0; padding: 0.85rem 1rem; border-radius: 10px;
+  background: var(--bg-card-alt); border-left: 4px solid var(--cyan);
+  font-family: var(--font-body); font-size: 0.87rem; line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* --- 9. Medidas fiscales -------------------------------------------------- */
+.pe-fis-grupo { margin-top: 1.4rem; }
+.pe-fis-tit {
+  font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.14em;
+  text-transform: uppercase; margin: 0 0 0.7rem;
+}
+.pe-fis-mas .pe-fis-tit { color: var(--emerald-bright); }
+.pe-fis-menos .pe-fis-tit { color: var(--crimson-bright); }
+.pe-fis-estr .pe-fis-tit { color: var(--text-gold); }
+.pe-fis-rejilla { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.pe-fis-tarjeta {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.9rem 1rem;
+}
+.pe-fis-mas .pe-fis-tarjeta { border-left: 3px solid var(--emerald); }
+.pe-fis-menos .pe-fis-tarjeta { border-left: 3px solid var(--crimson); }
+.pe-fis-estr .pe-fis-tarjeta { border-left: 3px solid var(--gold); }
+.pe-fis-ico { font-size: 1.2rem; }
+.pe-fis-n { margin: 0.35rem 0 0.4rem; font-family: var(--font-serif); font-size: 1rem; color: var(--text-main); }
+.pe-fis-d { margin: 0 0 0.6rem; font-family: var(--font-body); font-size: 0.86rem; line-height: 1.6; color: var(--text-secondary); }
+.pe-fis-ley { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan); }
+
+/* --- 10. Colchon y pasivos ------------------------------------------------ */
+.pe-amort { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); }
+.pe-amort-tarjeta {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.85rem 0.95rem;
+  border-top: 3px solid var(--emerald);
+}
+.pe-amort-tarjeta.dolares { border-top-color: var(--blue); }
+.pe-amort-ico { font-size: 1.15rem; }
+.pe-amort-tarjeta h5 { margin: 0.3rem 0 0.4rem; font-family: var(--font-sans); font-size: 0.83rem; color: var(--text-main); font-weight: 600; }
+.pe-amort-m { margin: 0 0 0.45rem; font-family: var(--font-mono); font-size: 1.05rem; color: var(--text-gold); font-weight: 600; }
+.pe-amort-d { margin: 0; font-family: var(--font-body); font-size: 0.83rem; line-height: 1.55; color: var(--text-secondary); }
+
+.pe-conting { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
+.pe-cont-tarjeta {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); padding: 0.9rem 1rem;
+  border-top: 3px solid var(--amber);
+}
+.pe-cont-cab { display: flex; align-items: flex-start; gap: 0.5rem; }
+.pe-cont-ico { font-size: 1.15rem; }
+.pe-cont-cab h5 { margin: 0; font-family: var(--font-serif); font-size: 1rem; color: var(--text-main); }
+.pe-cont-m {
+  margin: 0.55rem 0 0.5rem; display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 0.6rem; font-family: var(--font-mono); font-size: 1.05rem;
+  color: var(--text-main); font-weight: 600;
+}
+.pe-cont-pib { font-size: 0.83rem; color: var(--text-gold); font-weight: 500; }
+.pe-cont-d { margin: 0 0 0.55rem; font-family: var(--font-body); font-size: 0.84rem; line-height: 1.6; color: var(--text-secondary); }
+.pe-cont-ciego {
+  margin: 0; padding: 0.6rem 0.75rem; border-radius: 8px;
+  background: var(--bg-card-alt); border-left: 3px solid var(--amber);
+  font-family: var(--font-body); font-size: 0.83rem; line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* --- 11. La senda --------------------------------------------------------- */
+.pe-senda-tabla tbody tr.pe-senda-deterioro td:last-child { color: var(--crimson-bright); font-weight: 600; }
+.pe-senda-tabla tbody tr.pe-senda-mejora td:last-child { color: var(--emerald-bright); font-weight: 600; }
+.pe-senda-lectura {
+  margin-top: 1rem; display: grid; gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.pe-senda-lectura p {
+  margin: 0; padding: 0.85rem 1rem; border-radius: 10px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--gold);
+  font-family: var(--font-body); font-size: 0.89rem; line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* --- 12. Puntos ciegos ---------------------------------------------------- */
+.pe-ciego {
+  border: 1px solid var(--border-subtle); border-radius: 10px;
+  background: var(--bg-card); margin-bottom: 0.55rem; overflow: hidden;
+}
+.pe-ciego.abierto { border-color: var(--border-gold); }
+.pe-ciego-cab {
+  display: grid; grid-template-columns: 2.1rem 1fr 1.6rem; align-items: center;
+  gap: 0.75rem; width: 100%; text-align: left; cursor: pointer;
+  background: none; border: 0; padding: 0.85rem 1rem; color: inherit;
+}
+.pe-ciego-cab:hover { background: var(--bg-card-hover); }
+.pe-ciego-n {
+  width: 2.1rem; height: 2.1rem; border-radius: 50%;
+  display: grid; place-items: center; font-family: var(--font-mono);
+  font-size: 0.8rem; background: var(--crimson-glow); color: var(--crimson-bright);
+  border: 1px solid var(--crimson);
+}
+.pe-ciego-tit { margin: 0; font-family: var(--font-serif); font-size: 1.04rem; color: var(--text-main); line-height: 1.35; }
+.pe-ciego-mas { font-family: var(--font-mono); font-size: 1.15rem; color: var(--text-secondary); text-align: center; }
+.pe-ciego-avance {
+  margin: 0; padding: 0 1rem 0.85rem 3.85rem;
+  font-family: var(--font-body); font-size: 0.85rem; line-height: 1.55;
+  color: var(--text-secondary);
+}
+.pe-ciego-cuerpo { padding: 0 1rem 1rem 3.85rem; display: grid; gap: 0.6rem; }
+.pe-ciego-bloque { padding: 0.7rem 0.9rem; border-radius: 8px; background: var(--bg-card-alt); }
+.pe-ciego-bloque.dice { border-left: 3px solid var(--text-dim); }
+.pe-ciego-bloque.doc { border-left: 3px solid var(--cyan); }
+.pe-ciego-bloque.porque { border-left: 3px solid var(--gold); }
+.pe-ciego-bloque p { margin: 0; font-family: var(--font-body); font-size: 0.9rem; line-height: 1.65; color: var(--text-main); }
+.pe-ciego-bloque.dice p { color: var(--text-secondary); font-style: italic; }
+.pe-ciego-ref { margin: 0; font-family: var(--font-sans); font-size: 0.76rem; color: var(--text-secondary); }
+
+/* --- Fuentes -------------------------------------------------------------- */
+.pe-fuentes {
+  margin-top: 2rem; padding: 1.2rem 1.4rem; border-radius: 12px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--gold);
+}
+.pe-fuentes h4 { margin: 0 0 0.8rem; font-family: var(--font-serif); font-size: 1.08rem; color: var(--text-main); }
+.pe-fuentes ol { margin: 0 0 0.9rem; padding-left: 1.3rem; }
+.pe-fuentes li { font-family: var(--font-body); font-size: 0.87rem; line-height: 1.65; color: var(--text-secondary); margin-bottom: 0.5rem; }
+.pe-fuentes-pie {
+  margin: 0; padding-top: 0.8rem; border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-body); font-size: 0.87rem; line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* --- Pantallas angostas --------------------------------------------------- */
+@media (max-width: 860px) {
+  .pe-itin-cab { grid-template-columns: 1.9rem 1fr 1.5rem; grid-template-areas: "n fecha mas" ". hito hito" ". quien quien"; row-gap: 0.2rem; }
+  .pe-itin-n { grid-area: n; }
+  .pe-itin-fecha { grid-area: fecha; }
+  .pe-itin-hito { grid-area: hito; }
+  .pe-itin-quien { grid-area: quien; text-align: left; }
+  .pe-itin-mas { grid-area: mas; }
+  .pe-itin-cuerpo, .pe-ciego-cuerpo, .pe-ciego-avance { padding-left: 1rem; }
+  .pe-func-fila { grid-template-columns: 1fr 7rem; grid-template-areas: "nom m" "barra barra" "var var" "d d"; }
+  .pe-func-var { text-align: left; }
+  .pe-lista-fila { grid-template-columns: 1fr 7.5rem; grid-template-areas: "g g" "n m" "barra barra"; row-gap: 0.25rem; }
+  .pe-lista-g { grid-area: g; justify-self: start; }
+  .pe-lista-n { grid-area: n; }
+  .pe-lista-m { grid-area: m; }
+  .pe-lista-barra { grid-area: barra; }
+}

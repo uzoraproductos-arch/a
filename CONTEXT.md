@@ -1130,6 +1130,103 @@ explican que la cifra se contrastó contra el Anexo 1 reconstruyendo la
 finalidad ramo por ramo, y anuncian que se sustituirá por la del tomo
 analítico en cuanto pueda citarse.
 
+### Hecho (1.4: el Paquete Económico 2027, leído contra sus documentos)
+
+La 1.4 tenía la parte dogmática —los artículos 25, 26, 27 y 28— y se quedaba
+ahí. Ahora sigue con lo que el Estado hizo con esa facultad: el paquete que el
+Ejecutivo entregó a la Cámara de Diputados el **8 de septiembre de 2026**.
+
+**De dónde salen las cifras.** El portal `ppef.hacienda.gob.mx` responde 503
+desde este entorno, igual que `transparenciapresupuestaria` y `cefp.gob.mx`.
+La ruta que sí funciona es la **Gaceta Parlamentaria de la Cámara de
+Diputados**, que publica el paquete íntegro el día que lo recibe:
+
+```
+https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf   Ley de Ingresos
+https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-B.pdf   Proyecto de PEF
+https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf   Criterios Generales
+```
+
+Esos PDF guardan sus objetos dentro de flujos comprimidos (`/Type/ObjStm`) y
+separan líneas con `\r`, de modo que el extractor `pdftxt.py` de la sesión
+anterior encontraba **cero** páginas. El módulo `pdfobjstm.py` del cuaderno de
+trabajo resuelve ambas cosas: reindexa sin anclar a `\n` y descomprime los 228
+flujos de objetos. Con eso salen 77 páginas de Criterios, 310 de Ley de
+Ingresos y 254 del decreto, todas legibles.
+
+**Qué se añadió.** Ocho bloques nuevos, numerados del 5 al 12 dentro de la
+misma subpestaña, más el bloque de fuentes:
+
+| Bloque | Contenido |
+|---|---|
+| 5 | El itinerario que manda la ley: seis fechas, del 1 de abril al Diario Oficial, cada una con su precepto textual |
+| 6 | Marco macroeconómico y estimación de finanzas públicas, 2026 contra 2027 |
+| 7 | En qué se irá: clasificación funcional, 20 programas sociales y 20 prioridades de inversión |
+| 8 | **Simulador de sensibilidades** con los seis coeficientes oficiales de Hacienda |
+| 9 | Las once medidas fiscales, ordenadas por lo que recaudan |
+| 10 | Amortiguadores y pasivos contingentes |
+| 11 | La senda 2026-2032 |
+| 12 | Diez puntos ciegos |
+
+**El simulador no inventa un solo coeficiente.** Los Criterios publican en su
+página 48 un cuadro de sensibilidades: medio punto de crecimiento vale 30.2
+mmp de recaudación, un dólar de petróleo 9.6 mmp, cincuenta mil barriles 21.8
+mmp, veinte centavos de tipo de cambio 8.1 mmp de ingresos petroleros y 2.1 de
+costo financiero, cien puntos base de tasa 37.9 mmp y cien puntos base de
+inflación 1.3 mmp. Las seis palancas usan esos números y cada una lleva su cita
+textual debajo. El simulador **hereda a propósito** la limitación que la propia
+fuente declara: mide el efecto aislado de cada variable, sin interacciones, y
+mantiene fijo el PIB nominal. Añadir interacciones exigiría inventar
+coeficientes que nadie publicó.
+
+El veredicto se mide contra el **artículo 17 de la Ley Federal de Presupuesto**:
+sólo una desviación mayor al 2% del gasto neto total —$212,729.8 mdp— obliga a
+la Secretaría a justificarse en el informe trimestral. La ley dice
+«desviación», sin signo: recaudar de más también obliga a explicarse.
+
+**Identidades que cuadran al peso** (comprobadas con el decreto en mano):
+
+```
+gasto neto total (art. 2 del PPEF)      10,636,488.1
+  - diferimiento de pagos                 -121,400.4
+  = gasto neto pagado                  10,515,087.7  ✔ cuadro II.6
+
+total de la Ley de Ingresos (art. 1)    10,636,488.1
+  - ingresos presupuestarios            -9,156,528.9
+  = financiamiento                       1,479,959.2
+  = déficit 1,358,558.8 + diferimiento 121,400.4     ✔
+
+programable devengado 7,432,529.7 + no programable 3,203,958.4
+  = 10,636,488.1                                      ✔
+```
+
+**Hallazgo que confirma el trabajo anterior.** El cuadro II.6 de los Criterios
+trae la columna «2026 aprobado», y coincide al décimo con lo que la sesión
+pasada se corrigió en la 1.1 a partir del Anexo 8 del PEF: costo financiero
+**1,572,073.3**, ADEFAS **70,855.7**, participaciones 1,456,045.9, programable
+devengado 7,094,708.8 y no programable 3,098,974.9. La corrección de aquella
+sesión queda confirmada por una fuente independiente.
+
+**Novedades de código.**
+
+- `simFmt` gana dos formatos: `mmp` (miles de millones, la unidad de los
+  Criterios) y `mdd` (millones de dólares). Convertir a la unidad de la casa
+  escondería de qué documento viene el dato.
+- Tres zonas de conteo nuevas en `ZONAS_SIMPLES`: `pefin`, `pegasto` y
+  `pecolchon`, con su estado inicial en `state.zonaContado`.
+- `renderPaquete2027()` se llama desde dentro de `renderConstitucionEconomica`,
+  **antes** de `autolinkAmbito`, para que los términos hacendarios nuevos
+  entren en el mismo barrido de autoenlace.
+- Cuatro referencias nuevas: **64** Criterios 2027, **65** PPEF 2027, **66**
+  Iniciativa de Ley de Ingresos 2027 y **67** comunicado 71 de Hacienda.
+- Las barras nuevas llevan `[data-anim-w] { transition: none; }`, por el
+  defecto ya conocido: una transición de CSS compitiendo con la animación por
+  cuadro hace que la cuenta se vea a saltos.
+
+**Lo que el paquete todavía no es.** Ley. La Cámara puede modificarlo hasta el
+15 de noviembre. El bloque de fuentes lo dice con todas sus letras y anuncia
+que la sección se contrastará contra el decreto publicado en el Diario Oficial.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

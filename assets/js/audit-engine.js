@@ -65,7 +65,7 @@
     barrasContado: { ingresos: false, egresos: false, federalizado: false, municipal: false },
     /* Las dos zonas que dependen de la entidad elegida y no de un
        catalogo fijo: el circuito del estado y la reja de sus municipios. */
-    zonaContado: { entidad: false, munent: false },
+    zonaContado: { entidad: false, munent: false, pefin: false, pegasto: false, pecolchon: false },
     simRankHover: false,
     simRankUniverso: false,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
@@ -3028,6 +3028,21 @@
       cont: 'municipiosCircuito', mandos: 'munEntidadMandos', sello: 'MUNICIPIOS DE LA ENTIDAD',
       listo: 'Contabilizado. De cada municipio se ve lo que ingres\u00f3, lo que cobr\u00f3 de predial, lo que recibi\u00f3 de los dos fondos del Ramo 33 y qu\u00e9 tanto de eso no lo recaud\u00f3 \u00e9l.',
       ceros: 'El padr\u00f3n municipal est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para llenarlo con las cifras del INEGI.'
+    },
+    pefin: {
+      cont: 'peCifras', mandos: 'peFinMandos', sello: 'PAQUETE ECON\u00d3MICO 2027',
+      listo: 'Contabilizado. Son las cifras que Hacienda entreg\u00f3 el 8 de septiembre de 2026; todav\u00eda no son ley.',
+      ceros: 'El Paquete Econ\u00f3mico 2027 est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para ver c\u00f3mo se proyecta el a\u00f1o entrante.'
+    },
+    pegasto: {
+      cont: 'peGasto', mandos: 'peGastoMandos', sello: 'EN QU\u00c9 SE IR\u00c1 EN 2027',
+      listo: 'Contabilizado. Tres lecturas del mismo gasto: por finalidad, por programa social y por obra prioritaria.',
+      ceros: 'El gasto propuesto para 2027 est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para repartirlo.'
+    },
+    pecolchon: {
+      cont: 'peColchon', mandos: 'peColchonMandos', sello: 'COLCH\u00d3N Y PASIVOS',
+      listo: 'Contabilizado. Arriba, con qu\u00e9 se amortigua un golpe; abajo, los compromisos que no cuentan como deuda.',
+      ceros: 'Los amortiguadores y los pasivos contingentes est\u00e1n en ceros. Pulse \u00abContabilizar\u00bb para verlos.'
     }
   };
 
@@ -15545,7 +15560,546 @@
         '</section>';
     }
 
+    /* La segunda mitad de la 1.4 se pinta antes del autoenlace para que
+       sus terminos hacendarios entren en el mismo barrido. */
+    renderPaquete2027();
     autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="constitucion"]'));
+  }
+
+
+  /* ====================================================================
+     SUBPESTANA 1.4, SEGUNDA PARTE - EL PAQUETE ECONOMICO 2027
+
+     La primera parte responde con que facultad interviene el Estado.
+     Esta responde que hizo con esa facultad el 8 de septiembre de 2026,
+     cuando entrego a la Camara el paquete del ano entrante.
+
+     Todo lo que se pinta aqui sale de tres documentos primarios de la
+     Gaceta Parlamentaria numero 7121 y del comunicado 71 de Hacienda.
+     No hay una sola cifra reconstruida ni redondeada por esta
+     plataforma: donde el documento publica una decima, aqui va la
+     decima.
+     ==================================================================== */
+
+  const peSim = {};
+  let peItinSel = null;
+  let peCiegoSel = null;
+
+  function peDB() { return DB.paquete_2027 || null; }
+
+  function peRef(clave) {
+    const P = peDB();
+    return (P && P.refs && P.refs[clave]) ? vsxRefLink(P.refs[clave]) : '';
+  }
+
+  /* Los Criterios publican en miles de millones; el resto de la
+     plataforma cuenta en millones. Se conserva la unidad del documento
+     y se dice cual es, en vez de convertir a espaldas del lector. */
+  function peMmp(mdp) {
+    return '$' + (mdp / 1000).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mmp';
+  }
+
+  function peSigno(v, dec) {
+    const d = dec === undefined ? 1 : dec;
+    return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(d);
+  }
+
+  function renderPaquete2027() {
+    const P = peDB();
+    if (!P) return;
+    peSimArranque(P);
+    pePintarItinerario(P);
+    pePintarMarco(P);
+    pePintarFinanzas(P);
+    pePintarGasto(P);
+    pePintarSimulador(P);
+    pePintarFiscal(P);
+    pePintarColchon(P);
+    pePintarSenda(P);
+    pePintarCiegos(P);
+    pePintarFuentes(P);
+    ['pefin', 'pegasto', 'pecolchon'].forEach(zonaSincronizar);
+  }
+
+  /* --- 5. El itinerario constitucional ------------------------------- */
+  function pePintarItinerario(P) {
+    const cont = document.getElementById('peItinerario');
+    if (!cont) return;
+    cont.innerHTML =
+      '<ol class="pe-itin">' +
+      P.itinerario.map((h, i) =>
+        '<li class="pe-itin-paso' + (peItinSel === i ? ' abierto' : '') + '">' +
+          '<button type="button" class="pe-itin-cab" aria-expanded="' + (peItinSel === i) + '" ' +
+            'onclick="window.AuditEngine.peAbrirItin(' + i + ')">' +
+            '<span class="pe-itin-n">' + (i + 1) + '</span>' +
+            '<span class="pe-itin-fecha">' + h.fecha + '</span>' +
+            '<span class="pe-itin-hito">' + h.hito + '</span>' +
+            '<span class="pe-itin-quien">' + h.quien + '</span>' +
+            '<span class="pe-itin-mas" aria-hidden="true">' + (peItinSel === i ? '−' : '+') + '</span>' +
+          '</button>' +
+          (peItinSel === i
+            ? '<div class="pe-itin-cuerpo">' +
+                '<p class="pe-itin-ley">' + h.ley + '</p>' +
+                '<p class="pe-itin-texto">' + h.texto + '</p>' +
+                '<p class="pe-itin-ciego"><span class="pe-et">Lo que no se suele decir</span>' + h.ciego + '</p>' +
+              '</div>'
+            : '') +
+        '</li>').join('') +
+      '</ol>';
+  }
+
+  function peAbrirItin(i) {
+    peItinSel = (peItinSel === i) ? null : i;
+    pePintarItinerario(peDB());
+  }
+
+  /* --- 6. Marco macroeconomico --------------------------------------- */
+  function pePintarMarco(P) {
+    const cont = document.getElementById('peMarco');
+    if (!cont) return;
+    cont.innerHTML =
+      '<div class="pe-tabla-marco"><table class="pe-tabla pe-tabla-marco-macro">' +
+        '<colgroup><col class="c-var"><col class="c-n"><col class="c-n"><col class="c-n"></colgroup>' +
+        '<thead><tr>' +
+          '<th scope="col">Variable</th>' +
+          '<th scope="col">2026 aprobado</th>' +
+          '<th scope="col">2026 estimado</th>' +
+          '<th scope="col">2027 propuesto</th>' +
+        '</tr></thead><tbody>' +
+        P.marco.map(m =>
+          '<tr><th scope="row"><span class="pe-var">' + m.v + '</span>' +
+            '<span class="pe-uni">' + m.u + '</span>' +
+            '<span class="pe-nota-var">' + m.n + '</span></th>' +
+            '<td>' + m.a26 + '</td><td>' + m.e26 + '</td><td class="pe-destaca">' + m.p27 + '</td></tr>').join('') +
+        '</tbody></table></div>' +
+      '<p class="pe-fuente-nota">Criterios Generales de Política Económica 2027, anexos II.5 y III.1' + peRef('cgpe') +
+        '. El rango de crecimiento se publica como rango: la estimación de ingresos usa su punto medio.</p>';
+  }
+
+  /* --- 6b. Estimacion de finanzas publicas ---------------------------- */
+  function pePintarFinanzas(P) {
+    const cont = document.getElementById('peFinanzas');
+    if (!cont) return;
+    const grupos = [];
+    P.finanzas.forEach(f => {
+      let g = grupos.find(x => x.n === f.g);
+      if (!g) { g = { n: f.g, filas: [] }; grupos.push(g); }
+      g.filas.push(f);
+    });
+    cont.innerHTML = grupos.map(g =>
+      '<section class="pe-fin-grupo"><h4 class="pe-fin-tit">' + g.n + '</h4>' +
+      '<div class="pe-fin-rejilla">' +
+      g.filas.map(f => {
+        const neg = f.m < 0;
+        return '<article class="pe-fin-tarjeta' + (neg ? ' neg' : '') + '">' +
+          '<h5 class="pe-fin-nom">' + f.n + '</h5>' +
+          '<p class="pe-fin-cifra"><span data-anim-v="' + f.m + '" data-anim-f="mdpfijo">$0 mdp</span></p>' +
+          '<p class="pe-fin-pib"><span data-anim-v="' + f.pib + '" data-anim-f="pctS">0.0%</span> del PIB' +
+            '<span class="pe-fin-ant">2026: ' + f.pib26.toFixed(1) + '%</span></p>' +
+          '<p class="pe-fin-d">' + f.d + '</p>' +
+        '</article>';
+      }).join('') +
+      '</div></section>').join('') +
+      '<p class="pe-fuente-nota">Criterios Generales de Política Económica 2027, anexo II.6' + peRef('cgpe') +
+        '. La columna de 2026 es la aprobada en el Presupuesto vigente, no el cierre estimado.</p>';
+  }
+
+  /* --- 7. En que se ira: funcional, social e inversion ---------------- */
+  function pePintarGasto(P) {
+    const cont = document.getElementById('peGasto');
+    if (!cont) return;
+    const F = P.funcional;
+    const maxF = Math.max.apply(null, F.filas.map(f => f.ppef27));
+
+    const funcional =
+      '<section class="pe-sub"><h4 class="pe-sub-tit">La clasificación funcional, publicada al fin renglón por renglón</h4>' +
+      '<p class="pe-sub-sub">Hasta ahora esta plataforma sólo podía reconstruirla desde el Anexo 1 del decreto. Los Criterios 2027 la publican completa, y de paso dan la cifra aprobada de 2026.</p>' +
+      '<div class="pe-func">' +
+      F.filas.map(f =>
+        '<div class="pe-func-fila">' +
+          '<div class="pe-func-nom">' + f.n + '</div>' +
+          '<div class="pe-func-barra"><span class="pe-func-relleno' + (f.var < 0 ? ' baja' : '') + '" ' +
+            'data-anim-w="' + (f.ppef27 / maxF * 100).toFixed(2) + '" style="width:0%"></span></div>' +
+          '<div class="pe-func-m"><span data-anim-v="' + f.ppef27 + '" data-anim-f="mmp">0</span></div>' +
+          '<div class="pe-func-var' + (f.var < 0 ? ' baja' : ' sube') + '">' +
+            '<span data-anim-v="' + f.var + '" data-anim-f="pctS">0.0%</span> real</div>' +
+          '<div class="pe-func-d">' + f.d + '<span class="pe-func-ant">2026 aprobado: ' +
+            f.pef26.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mmp</span></div>' +
+        '</div>').join('') +
+      '</div>' +
+      '<p class="pe-fuente-nota">' + F.nota + peRef('cgpe') + '</p></section>';
+
+    const S = P.sociales;
+    const maxS = Math.max.apply(null, S.filas.map(f => f.m));
+    const sociales =
+      '<section class="pe-sub"><h4 class="pe-sub-tit">Los veinte programas sociales prioritarios</h4>' +
+      '<p class="pe-sub-sub">Suman <b class="gold">$1,025,388.5 millones de pesos</b>, el 2.6% del PIB. Una sola línea —la Pensión para Adultos Mayores— vale más que las otras diecinueve juntas.</p>' +
+      '<div class="pe-lista">' +
+      S.filas.map(f =>
+        '<div class="pe-lista-fila"><span class="pe-lista-g">' + f.g + '</span>' +
+          '<span class="pe-lista-n">' + f.n + '</span>' +
+          '<span class="pe-lista-barra"><span class="pe-lista-relleno" data-anim-w="' +
+            (f.m / maxS * 100).toFixed(2) + '" style="width:0%"></span></span>' +
+          '<span class="pe-lista-m" data-anim-v="' + f.m + '" data-anim-f="mdpfijo">$0 mdp</span></div>').join('') +
+      '</div>' +
+      '<p class="pe-fuente-nota">' + S.nota + peRef('cgpe') + '</p></section>';
+
+    const I = P.inversion;
+    const maxI = Math.max.apply(null, I.filas.map(f => f.m));
+    const inversion =
+      '<section class="pe-sub"><h4 class="pe-sub-tit">Las prioridades de inversión</h4>' +
+      '<p class="pe-sub-sub">Suman <b class="gold">$560,172.6 millones</b>. Pemex y la Comisión Federal de Electricidad se llevan <b>56.5%</b> de ese total: la inversión prioritaria del país es, sobre todo, energía.</p>' +
+      '<div class="pe-lista">' +
+      I.filas.map(f =>
+        '<div class="pe-lista-fila"><span class="pe-lista-g g-' + f.g.toLowerCase().replace(/[^a-z]/g, '') + '">' + f.g + '</span>' +
+          '<span class="pe-lista-n">' + f.n + (f.d ? '<span class="pe-lista-d">' + f.d + '</span>' : '') + '</span>' +
+          '<span class="pe-lista-barra"><span class="pe-lista-relleno inv" data-anim-w="' +
+            (f.m / maxI * 100).toFixed(2) + '" style="width:0%"></span></span>' +
+          '<span class="pe-lista-m" data-anim-v="' + f.m + '" data-anim-f="mdpfijo">$0 mdp</span></div>').join('') +
+      '</div>' +
+      '<p class="pe-fuente-nota">' + I.nota + peRef('cgpe') +
+        '. La suma de los veinte renglones da $560,172.5 mmp; el cuadro publica $560,172.6 por redondeo de sus propias decimales.</p></section>';
+
+    cont.innerHTML = funcional + sociales + inversion;
+  }
+
+  /* --- 8. El simulador de sensibilidades -----------------------------
+     Las seis palancas no las inventa esta plataforma: son los seis
+     coeficientes que la propia Secretaria de Hacienda publica en el
+     cuadro de sensibilidades de los Criterios. Se respetan tal cual,
+     incluida su limitacion declarada: miden «el efecto aislado de cada
+     variable, sin incorporar sus posibles interacciones». Anadir
+     interacciones seria inventar un numero.
+     ------------------------------------------------------------------ */
+
+  const PE_ESCENARIOS = [
+    { id: 'pe-base', n: 'Como lo proyecta Hacienda', icono: '\u{1F4CB}', v: {},
+      d: 'Las seis variables en el valor que los Criterios suponen para 2027.' },
+    { id: 'pe-tasas', n: 'Choque de tasas', icono: '\u{1F4C8}',
+      v: { 's-tasa': 8.6 },
+      d: 'La tasa de referencia sube 250 puntos base y no baja en todo el año.' },
+    { id: 'pe-crudo', n: 'Petróleo a 45 dólares', icono: '\u{1F6E2}️',
+      v: { 's-precio': 45, 's-plataforma': 1700 },
+      d: 'La mezcla cae a 45 dólares y la plataforma se queda cien mil barriles por debajo de la meta.' },
+    { id: 'pe-frenon', n: 'Frenón económico', icono: '\u{1F53B}',
+      v: { 's-crec': 0.5, 's-tasa': 7.1, 's-tipocambio': 19.5 },
+      d: 'El PIB crece medio punto, el peso se deprecia a 19.50 y la tasa sube cien puntos base.' },
+    { id: 'pe-cola', n: 'Viento de cola', icono: '\u{1F31E}',
+      v: { 's-crec': 3.0, 's-precio': 78, 's-tasa': 5.1 },
+      d: 'Crecimiento de 3%, petróleo en 78 dólares y cien puntos base menos de tasa.' }
+  ];
+  let peEscenarioSel = 'pe-base';
+
+  function peSimArranque(P) {
+    P.sensibilidades.forEach(s => {
+      if (peSim[s.id] === undefined) peSim[s.id] = s.base;
+    });
+  }
+
+  function peSimEfecto(s, v) {
+    const pasos = (v - s.base) / s.tramo;
+    if (s.destino === 'costofin') return { ing: 0, fin: pasos * s.coef };
+    if (s.destino === 'ambos') return { ing: pasos * s.coef, fin: pasos * s.coef2 };
+    return { ing: pasos * s.coef, fin: 0 };
+  }
+
+  function peSimCuenta(P) {
+    const b = P.simBase;
+    let dIng = 0, dFin = 0;
+    const detalle = P.sensibilidades.map(s => {
+      const v = peSim[s.id];
+      const e = peSimEfecto(s, v);
+      dIng += e.ing; dFin += e.fin;
+      return { s: s, v: v, ing: e.ing, fin: e.fin, neto: e.ing - e.fin };
+    });
+    const ingresos = b.ingresos + dIng;
+    const costofin = b.costofin + dFin;
+    const balance = b.balance + dIng - dFin;
+    const rfsp = balance + b.extrapres;
+    return {
+      detalle: detalle, dIng: dIng, dFin: dFin, desvio: dIng - dFin,
+      ingresos: ingresos, costofin: costofin, balance: balance, rfsp: rfsp,
+      balancePib: balance / b.pib * 100, rfspPib: rfsp / b.pib * 100,
+      costofinPib: costofin / b.pib * 100, ingresosPib: ingresos / b.pib * 100
+    };
+  }
+
+  function pePintarSimulador(P) {
+    const cont = document.getElementById('peSimPalancas');
+    if (!cont) return;
+    cont.innerHTML =
+      '<div class="pe-esc">' +
+        PE_ESCENARIOS.map(e =>
+          '<button type="button" class="pe-esc-btn' + (peEscenarioSel === e.id ? ' active' : '') + '" ' +
+            'onclick="window.AuditEngine.peEscenario(\'' + e.id + '\')" title="' + e.d + '">' +
+            '<span class="pe-esc-ico" aria-hidden="true">' + e.icono + '</span>' +
+            '<span class="pe-esc-n">' + e.n + '</span>' +
+          '</button>').join('') +
+      '</div>' +
+      '<p class="pe-esc-d" id="peEscDesc">' + (PE_ESCENARIOS.find(e => e.id === peEscenarioSel) || PE_ESCENARIOS[0]).d + '</p>' +
+      '<div class="pe-palancas">' +
+      P.sensibilidades.map(s => {
+        const v = peSim[s.id];
+        return '<div class="pe-palanca' + (Math.abs(v - s.base) > 1e-9 ? ' movida' : '') + '" id="pepal-' + s.id + '">' +
+          '<div class="pe-pal-cab">' +
+            '<span class="pe-pal-ico" aria-hidden="true">' + s.icono + '</span>' +
+            '<label class="pe-pal-n" for="perng-' + s.id + '">' + s.n + '</label>' +
+            '<output class="pe-pal-v" id="peval-' + s.id + '">' + v.toFixed(s.dec) + '</output>' +
+          '</div>' +
+          '<input type="range" class="pe-pal-rango" id="perng-' + s.id + '" ' +
+            'min="' + s.min + '" max="' + s.max + '" step="' + s.paso + '" value="' + v + '" ' +
+            'aria-describedby="pedesc-' + s.id + '" ' +
+            'oninput="window.AuditEngine.peMover(\'' + s.id + '\', this.value)">' +
+          '<div class="pe-pal-escala"><span>' + s.min.toFixed(s.dec) + '</span>' +
+            '<span class="pe-pal-base">Criterios: ' + s.base.toFixed(s.dec) + '</span>' +
+            '<span>' + s.max.toFixed(s.dec) + '</span></div>' +
+          '<p class="pe-pal-u" id="pedesc-' + s.id + '">' + s.unidad + '</p>' +
+          '<p class="pe-pal-cita"><span class="pe-et">Coeficiente oficial</span>' + s.cita + '</p>' +
+          '<p class="pe-pal-porque">' + s.porque + '</p>' +
+        '</div>';
+      }).join('') +
+      '</div>';
+    pePintarResultado(P);
+  }
+
+  function peMover(id, valor) {
+    const P = peDB();
+    if (!P) return;
+    const s = P.sensibilidades.find(x => x.id === id);
+    if (!s) return;
+    peSim[id] = parseFloat(valor);
+    peEscenarioSel = null;
+    const out = document.getElementById('peval-' + id);
+    if (out) out.textContent = peSim[id].toFixed(s.dec);
+    const caja = document.getElementById('pepal-' + id);
+    if (caja) caja.classList.toggle('movida', Math.abs(peSim[id] - s.base) > 1e-9);
+    document.querySelectorAll('.pe-esc-btn').forEach(b => b.classList.remove('active'));
+    const desc = document.getElementById('peEscDesc');
+    if (desc) desc.textContent = 'Escenario propio: las palancas ya no están donde las dejaron los Criterios.';
+    pePintarResultado(P);
+  }
+
+  function peEscenario(id) {
+    const P = peDB();
+    const e = PE_ESCENARIOS.find(x => x.id === id);
+    if (!P || !e) return;
+    peEscenarioSel = id;
+    P.sensibilidades.forEach(s => { peSim[s.id] = (e.v[s.id] !== undefined) ? e.v[s.id] : s.base; });
+    pePintarSimulador(P);
+  }
+
+  function pePintarResultado(P) {
+    const cont = document.getElementById('peSimResultado');
+    if (!cont) return;
+    const b = P.simBase;
+    const r = peSimCuenta(P);
+    const dentro = Math.abs(r.desvio) <= b.tolerancia;
+    const mejor = r.desvio > 0;
+
+    const veredicto = Math.abs(r.desvio) < 1
+      ? 'Sin movimiento: las seis variables están donde los Criterios las suponen.'
+      : (dentro
+          ? 'La desviación es de ' + peMmp(Math.abs(r.desvio)) + '. Cabe dentro del 2% del gasto neto total —' +
+            peMmp(b.tolerancia) + '— que el artículo 17 de la Ley Federal de Presupuesto tolera <b>sin obligar siquiera a una explicación</b> en el informe trimestral.'
+          : 'La desviación es de ' + peMmp(Math.abs(r.desvio)) + ' y <b>rebasa</b> el 2% del gasto neto total —' +
+            peMmp(b.tolerancia) + '—. A partir de aquí, el artículo 17 de la Ley Federal de Presupuesto obliga a la Secretaría a justificarla en el último informe trimestral del ejercicio. La ley habla de «desviación» sin distinguir el signo: recaudar de más también obliga a explicarse.');
+
+    cont.innerHTML =
+      '<div class="pe-res">' +
+        '<div class="pe-res-fila">' +
+          pePanelRes('Ingresos presupuestarios', r.ingresos, b.ingresos, r.ingresosPib, '% del PIB', false) +
+          pePanelRes('Costo financiero', r.costofin, b.costofin, r.costofinPib, '% del PIB', true) +
+        '</div>' +
+        '<div class="pe-res-fila">' +
+          pePanelRes('Balance presupuestario', r.balance, b.balance, r.balancePib, '% del PIB', true) +
+          pePanelRes('RFSP · balance público amplio', r.rfsp, b.rfsp, r.rfspPib, '% del PIB', true) +
+        '</div>' +
+        '<div class="pe-res-meta ' + (dentro ? 'ok' : (mejor ? 'fuera' : 'alerta')) + '">' +
+          '<span class="pe-res-meta-et">' + (mejor ? '▲ Mejora sobre lo proyectado' : (Math.abs(r.desvio) < 1 ? '● Escenario base' : '▼ Deterioro sobre lo proyectado')) + '</span>' +
+          '<p>' + veredicto + '</p>' +
+          '<p class="pe-res-meta-obj">La meta publicada para 2027 es un RFSP de ' + b.meta.toFixed(1) +
+            '% del PIB y un balance presupuestario de ' + b.metaBalance.toFixed(1) + '%. ' +
+            'Este escenario da <b>' + r.rfspPib.toFixed(2) + '%</b> y <b>' + r.balancePib.toFixed(2) + '%</b>. Van con dos decimales para que un movimiento peque\u00f1o no se pierda en el redondeo; el documento publica una sola.</p>' +
+        '</div>' +
+        '<div class="pe-res-tabla-marco"><table class="pe-res-tabla"><caption class="sr-only">Aporte de cada variable al resultado</caption>' +
+          '<thead><tr><th scope="col">Variable</th><th scope="col">Valor</th>' +
+            '<th scope="col">Ingresos</th><th scope="col">Costo financiero</th><th scope="col">Efecto neto</th></tr></thead><tbody>' +
+          r.detalle.map(d =>
+            '<tr' + (Math.abs(d.neto) < 1 ? ' class="pe-quieta"' : '') + '>' +
+              '<th scope="row">' + d.s.icono + ' ' + d.s.n + '</th>' +
+              '<td>' + d.v.toFixed(d.s.dec) + '</td>' +
+              '<td class="' + (d.ing > 0 ? 'pos' : d.ing < 0 ? 'neg' : '') + '">' + (d.ing ? peSigno(d.ing / 1000) + ' mmp' : '—') + '</td>' +
+              '<td class="' + (d.fin > 0 ? 'neg' : d.fin < 0 ? 'pos' : '') + '">' + (d.fin ? peSigno(d.fin / 1000) + ' mmp' : '—') + '</td>' +
+              '<td class="pe-res-neto ' + (d.neto > 0 ? 'pos' : d.neto < 0 ? 'neg' : '') + '">' + (d.neto ? peSigno(d.neto / 1000) + ' mmp' : '—') + '</td>' +
+            '</tr>').join('') +
+          '<tr class="pe-res-total"><th scope="row">Total</th><td></td>' +
+            '<td class="' + (r.dIng > 0 ? 'pos' : r.dIng < 0 ? 'neg' : '') + '">' + peSigno(r.dIng / 1000) + ' mmp</td>' +
+            '<td class="' + (r.dFin > 0 ? 'neg' : r.dFin < 0 ? 'pos' : '') + '">' + peSigno(r.dFin / 1000) + ' mmp</td>' +
+            '<td class="pe-res-neto ' + (r.desvio > 0 ? 'pos' : r.desvio < 0 ? 'neg' : '') + '">' + peSigno(r.desvio / 1000) + ' mmp</td></tr>' +
+          '</tbody></table></div>' +
+      '</div>';
+  }
+
+  function pePanelRes(nombre, valor, base, pib, unidad, malSiSube) {
+    const dif = valor - base;
+    const sinCambio = Math.abs(dif) < 1;
+    /* En balance y RFSP la cifra es negativa: «mejor» significa menos
+       negativo, es decir, subir. En el costo financiero, al reves. En los
+       ingresos, subir es subir. */
+    const saldo = (nombre.indexOf('Balance') === 0 || nombre.indexOf('RFSP') === 0);
+    const sentido = saldo ? (dif > 0) : (malSiSube ? (dif < 0) : (dif > 0));
+    return '<div class="pe-res-panel' + (sinCambio ? '' : (sentido ? ' mejora' : ' empeora')) + '">' +
+      '<h5>' + nombre + '</h5>' +
+      '<p class="pe-res-cifra">' + formatMdpFijo(valor) + '</p>' +
+      '<p class="pe-res-pib">' + pib.toFixed(1) + unidad + '</p>' +
+      '<p class="pe-res-dif">' + (sinCambio ? 'sin cambio respecto de los Criterios'
+        : peSigno(dif / 1000) + ' mmp respecto de los Criterios') + '</p>' +
+    '</div>';
+  }
+
+  /* --- 9. Lo que cambia en los impuestos ----------------------------- */
+  function pePintarFiscal(P) {
+    const cont = document.getElementById('peFiscal');
+    if (!cont) return;
+    const orden = ['Recauda más', 'Recauda menos', 'Estructural'];
+    cont.innerHTML = orden.map(t => {
+      const filas = P.fiscal.filter(f => f.tipo === t);
+      if (!filas.length) return '';
+      return '<section class="pe-fis-grupo pe-fis-' + (t === 'Recauda más' ? 'mas' : t === 'Recauda menos' ? 'menos' : 'estr') + '">' +
+        '<h4 class="pe-fis-tit">' + t + '</h4>' +
+        '<div class="pe-fis-rejilla">' +
+        filas.map(f =>
+          '<article class="pe-fis-tarjeta">' +
+            '<span class="pe-fis-ico" aria-hidden="true">' + f.icono + '</span>' +
+            '<h5 class="pe-fis-n">' + f.n + '</h5>' +
+            '<p class="pe-fis-d">' + f.d + '</p>' +
+            '<p class="pe-fis-ley">' + f.ley + '</p>' +
+          '</article>').join('') +
+        '</div></section>';
+    }).join('') +
+    '<p class="pe-fuente-nota">Criterios Generales de Política Económica 2027, apartados 3.3.2 y 3.3.3' + peRef('cgpe') +
+      ', e iniciativas de los anexos D a H de la Gaceta Parlamentaria 7121' + peRef('ilif') + '.</p>';
+  }
+
+  /* --- 10. Amortiguadores y pasivos contingentes --------------------- */
+  function pePintarColchon(P) {
+    const cont = document.getElementById('peColchon');
+    if (!cont) return;
+    cont.innerHTML =
+      '<section class="pe-sub"><h4 class="pe-sub-tit">Con qué se amortigua un golpe</h4>' +
+      '<p class="pe-sub-sub">Lo que los Criterios enumeran como defensa del país ante un choque externo, con el saldo que cada instrumento tenía a mitad de 2026.</p>' +
+      '<div class="pe-amort">' +
+      P.amortiguadores.map(a =>
+        '<article class="pe-amort-tarjeta' + (a.u === 'mdd' ? ' dolares' : '') + '">' +
+          '<span class="pe-amort-ico" aria-hidden="true">' + a.icono + '</span>' +
+          '<h5>' + a.n + '</h5>' +
+          '<p class="pe-amort-m"><span data-anim-v="' + a.m + '" data-anim-f="' + (a.u === 'mdd' ? 'mdd' : 'mdpfijo') + '">' +
+            (a.u === 'mdd' ? '$0 mdd' : '$0 mdp') + '</span></p>' +
+          '<p class="pe-amort-d">' + a.d + '</p>' +
+        '</article>').join('') +
+      '</div>' +
+      '<p class="pe-fuente-nota">Criterios Generales de Política Económica 2027, apartado 4.3.1' + peRef('cgpe') + '.</p></section>' +
+
+      '<section class="pe-sub"><h4 class="pe-sub-tit">Los pasivos que no cuentan como deuda</h4>' +
+      '<p class="pe-sub-sub">La deuda pública se declara en 55.0% del PIB. Estos compromisos existen, los cuantifica el propio documento y no están dentro de esa cifra.</p>' +
+      '<div class="pe-conting">' +
+      P.contingentes.map(c =>
+        '<article class="pe-cont-tarjeta">' +
+          '<header class="pe-cont-cab"><span class="pe-cont-ico" aria-hidden="true">' + c.icono + '</span>' +
+            '<h5>' + c.n + '</h5></header>' +
+          '<p class="pe-cont-m"><span data-anim-v="' + c.m + '" data-anim-f="mdpfijo">$0 mdp</span>' +
+            (c.pib === null ? '' : '<span class="pe-cont-pib"><span data-anim-v="' + c.pib + '" data-anim-f="pct">0.0%</span> del PIB</span>') +
+          '</p>' +
+          '<p class="pe-cont-d">' + c.d + '</p>' +
+          '<p class="pe-cont-ciego"><span class="pe-et">Punto ciego</span>' + c.ciego + '</p>' +
+        '</article>').join('') +
+      '</div>' +
+      '<p class="pe-fuente-nota">Criterios Generales de Política Económica 2027, apartado 4.3.2' + peRef('cgpe') +
+        '. Las cifras en dólares no se animan junto a las de pesos porque no son la misma unidad.</p></section>';
+  }
+
+  /* --- 11. La ruta a 2032 -------------------------------------------- */
+  function pePintarSenda(P) {
+    const cont = document.getElementById('peSenda');
+    if (!cont) return;
+    const S = P.senda;
+    cont.innerHTML =
+      '<div class="pe-tabla-marco"><table class="pe-tabla pe-senda-tabla">' +
+        '<colgroup><col class="c-serie">' + S.anios.map(() => '<col class="c-n">').join('') + '</colgroup>' +
+        '<thead><tr><th scope="col">Indicador</th>' +
+          S.anios.map((a, i) => '<th scope="col"' + (i === 1 ? ' class="pe-destaca-col"' : '') + '>' + a + '</th>').join('') +
+        '</tr></thead><tbody>' +
+        S.series.map(s =>
+          '<tr class="pe-senda-' + s.sentido + '">' +
+            '<th scope="row">' + s.n + '<span class="pe-uni">' + s.u + '</span></th>' +
+            s.v.map((v, i) => '<td' + (i === 1 ? ' class="pe-destaca"' : '') + '>' + v.toFixed(1) + '</td>').join('') +
+          '</tr>').join('') +
+        '</tbody></table></div>' +
+      '<div class="pe-senda-lectura">' +
+        '<p><b>Lo que enseña la fila de la deuda.</b> El déficit amplio baja todos los años, de 4.1% a 3.1% del PIB. ' +
+        'Y la deuda sube todos los años: 55.0, 55.6, 56.1, 56.4, 56.5 y 56.5. <b>En ningún año del horizonte proyectado baja.</b> ' +
+        'Se estabiliza hasta 2031, cuatro puntos y medio del PIB por encima de donde estaba en 2026.</p>' +
+        '<p><b>Y la del costo financiero.</b> Se queda clavada en 3.7% del PIB hasta 2032. El superávit primario crece hasta 1.0%, ' +
+        'pero nunca alcanza a cubrir los intereses: por eso el balance sigue en déficit y por eso la deuda sigue subiendo.</p>' +
+      '</div>' +
+      '<p class="pe-fuente-nota">' + S.nota + peRef('cgpe') + '</p>';
+  }
+
+  /* --- 12. Los puntos ciegos ----------------------------------------- */
+  function pePintarCiegos(P) {
+    const cont = document.getElementById('peCiegos');
+    if (!cont) return;
+    cont.innerHTML = P.ciegos.map((c, i) =>
+      '<article class="pe-ciego' + (peCiegoSel === c.id ? ' abierto' : '') + '" id="pe-ciego-' + c.id + '">' +
+        '<button type="button" class="pe-ciego-cab" aria-expanded="' + (peCiegoSel === c.id) + '" ' +
+          'onclick="window.AuditEngine.peAbrirCiego(\'' + c.id + '\')">' +
+          '<span class="pe-ciego-n">' + (i + 1) + '</span>' +
+          '<h4 class="pe-ciego-tit">' + c.titulo + '</h4>' +
+          '<span class="pe-ciego-mas" aria-hidden="true">' + (peCiegoSel === c.id ? '−' : '+') + '</span>' +
+        '</button>' +
+        (peCiegoSel === c.id
+          ? '<div class="pe-ciego-cuerpo">' +
+              '<div class="pe-ciego-bloque dice"><span class="pe-et">Lo que se dijo</span><p>' + c.dice + '</p></div>' +
+              '<div class="pe-ciego-bloque doc"><span class="pe-et">Lo que dice el documento</span><p>' + c.documento + '</p></div>' +
+              '<div class="pe-ciego-bloque porque"><span class="pe-et">Por qué importa</span><p>' + c.porque + '</p></div>' +
+              '<p class="pe-ciego-ref">Verificado contra ' +
+                (c.ref === 'ppef' ? 'el decreto del proyecto de Presupuesto de Egresos 2027' + peRef('ppef')
+                 : c.ref === 'lfprh' ? 'la Ley Federal de Presupuesto y Responsabilidad Hacendaria' + peRef('lfprh')
+                 : 'los Criterios Generales de Política Económica 2027' + peRef('cgpe')) + '.</p>' +
+            '</div>'
+          : '<p class="pe-ciego-avance">' + c.dice + '</p>') +
+      '</article>').join('');
+  }
+
+  function peAbrirCiego(id) {
+    peCiegoSel = (peCiegoSel === id) ? null : id;
+    pePintarCiegos(peDB());
+    const el = document.getElementById('pe-ciego-' + id);
+    if (el && peCiegoSel) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* --- Fuentes de toda la seccion ------------------------------------ */
+  function pePintarFuentes(P) {
+    const cont = document.getElementById('peFuentes');
+    if (!cont) return;
+    cont.innerHTML =
+      '<div class="pe-fuentes">' +
+        '<h4>De dónde sale cada cifra de esta sección</h4>' +
+        '<ol>' +
+          '<li><b>Criterios Generales de Política Económica 2027</b>' + peRef('cgpe') +
+            ' &mdash; Anexo C de la Gaceta Parlamentaria número 7121. Marco macroeconómico, finanzas públicas, clasificación funcional, sensibilidades, amortiguadores, pasivos contingentes y proyecciones a 2032.</li>' +
+          '<li><b>Proyecto de Presupuesto de Egresos de la Federación 2027</b>' + peRef('ppef') +
+            ' &mdash; Anexo B. Su artículo 2º fija el gasto neto total y el déficit presupuestario.</li>' +
+          '<li><b>Iniciativa de Ley de Ingresos de la Federación 2027</b>' + peRef('ilif') +
+            ' &mdash; Anexo A. Su artículo 1º enumera los ingresos estimados y los techos de endeudamiento.</li>' +
+          '<li><b>Comunicado 71 de la Secretaría de Hacienda</b>' + peRef('com') +
+            ' &mdash; Presentación oficial del paquete: el Plan de Inversión en Infraestructura 2026-2030 por 5.7 billones de pesos y los incrementos reales por sector.</li>' +
+          '<li><b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b>' + peRef('lfprh') +
+            ' &mdash; artículos 16, 17, 31 y 42, que mandan el contenido del paquete, su calendario y la tolerancia de desviación.</li>' +
+        '</ol>' +
+        '<p class="pe-fuentes-pie">El paquete se entregó el <b>' + P.entregado + '</b> y se publicó en la ' + P.gaceta +
+          '. <b>Todavía no es ley</b>: la Cámara de Diputados puede modificarlo. Cuando se apruebe, esta sección se contrastará renglón por renglón contra el decreto publicado en el Diario Oficial.</p>' +
+      '</div>';
   }
 
   function ceIrAPilar(id) {
@@ -16343,6 +16897,11 @@
     /* Las tablas municipales llegan a 570 renglones: el separador
        propio evita miles de llamadas a toLocaleString por cuadro. */
     if (f === 'munmdp') return '$' + munMiles(v.toFixed(1));
+    /* Los Criterios de Hacienda publican en miles de millones de pesos
+       y sus amortiguadores externos en millones de dolares. Convertir a
+       la unidad de la casa escondería de qué documento viene el dato. */
+    if (f === 'mmp') return munMiles(v.toFixed(1)) + ' mmp';
+    if (f === 'mdd') return '$' + munMiles(Math.round(v).toFixed(0)) + ' mdd';
     if (f === 'pct') return v.toFixed(1) + '%';
     if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
     if (f === 'pesos') return '$' + formatNumber(Math.round(v * 100) / 100);
@@ -21486,6 +22045,11 @@
     simLlevarACalculadora: simLlevarACalculadora,
     renderConstitucionEconomica: renderConstitucionEconomica,
     ceIrAPilar: ceIrAPilar,
+    renderPaquete2027: renderPaquete2027,
+    peAbrirItin: peAbrirItin,
+    peAbrirCiego: peAbrirCiego,
+    peMover: peMover,
+    peEscenario: peEscenario,
     goToPrecepto: goToPrecepto,
     renderCuentasEcologicas: renderCuentasEcologicas,
     ceeEscenario: ceeEscenario,

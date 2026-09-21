@@ -6412,6 +6412,42 @@ window.AUDIT_DB = {
       "descripcion": "Estadística anual que integra el origen y la aplicación de los recursos financieros de los gobiernos municipales, concepto por concepto y municipio por municipio, a partir de las cuentas públicas que cada ayuntamiento rinde. Es la única fuente nacional que permite saber cuánto ingresó realmente cada municipio del país: ni el Presupuesto de Egresos ni la Ley de Ingresos descienden a ese nivel. De ella proceden las cifras del padrón municipal de esta plataforma y los agregados de predial, derechos y participaciones municipales. Su cobertura de 2024 es de 2,380 de los 2,479 municipios del catálogo; las dieciséis demarcaciones territoriales de la Ciudad de México no forman parte de la estadística municipal porque no llevan hacienda propia."
     },
     {
+      "num": 64,
+      "id": "ref-cgpe2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto de Egresos de la Federación correspondientes al ejercicio fiscal de 2027. Gaceta Parlamentaria, año XXIX, número 7121, Anexo C, 8 de septiembre de 2026. Cámara de Diputados, LXVI Legislatura.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+      "descripcion": "Documento que la Ley Federal de Presupuesto exige en su artículo 16: marco macroeconómico, proyecciones de finanzas públicas a cinco años, sensibilidades ante cambios en las variables, amortiguadores fiscales y pasivos contingentes. Es la fuente de las cifras de esta plataforma sobre 2027 y sobre el cierre estimado de 2026."
+    },
+    {
+      "num": 65,
+      "id": "ref-ppef2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Proyecto de Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2027 [PPEF 2027]. Gaceta Parlamentaria, año XXIX, número 7121, Anexo B, 8 de septiembre de 2026 (México). Poder Ejecutivo Federal.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-B.pdf",
+      "descripcion": "Decreto propuesto por el Ejecutivo. Su artículo 2º fija el gasto neto total en $10,636,488,100,000 y el déficit presupuestario en $1,358,558,800,000. Todavía no es ley: la Cámara de Diputados debe aprobarlo, con o sin modificaciones, a más tardar el 15 de noviembre."
+    },
+    {
+      "num": 66,
+      "id": "ref-ilif2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Iniciativa de Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 [ILIF 2027]. Gaceta Parlamentaria, año XXIX, número 7121, Anexo A, 8 de septiembre de 2026 (México). Poder Ejecutivo Federal.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf",
+      "descripcion": "Su artículo 1º enumera los ingresos estimados para 2027 por un total de $10,636,488.1 millones de pesos, cifra que coincide con el gasto neto total del proyecto de Presupuesto porque incluye los ingresos derivados de financiamiento. También fija los techos de endeudamiento del Gobierno Federal, Pemex y CFE."
+    },
+    {
+      "num": 67,
+      "id": "ref-shcp-c71",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística y Documentos Oficiales",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026, 8 de septiembre). Comunicado No. 71: La Secretaría de Hacienda y Crédito Público entrega el Paquete Económico 2027 al H. Congreso de la Unión. Gobierno de México.",
+      "url": "https://www.gob.mx/shcp/prensa/comunicado-no-71-la-secretaria-de-hacienda-y-credito-publico-entrega-el-paquete-economico-2027-al-h-congreso-de-la-union",
+      "descripcion": "Presentación oficial del paquete. De aquí proceden el monto del Plan de Inversión en Infraestructura para el Desarrollo con Bienestar 2026-2030 —5.7 billones de pesos de inversión pública y mixta— y los incrementos reales anunciados por sector: educación 10.7%, salud 11.3%, seguridad 11.5% y ciencia 13%."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -11516,6 +11552,1048 @@ window.AUDIT_DB = {
         "punto_ciego": "La autonomía de Banxico se discute como si fuera una política revocable por decisión administrativa. Es texto constitucional, y la prohibición de ordenarle financiamiento es la última línea del párrafo que casi nunca se cita completo."
       }
     ]
+  },
+  "paquete_2027": {
+    "titulo": "El Paquete Económico 2027",
+    "entregado": "8 de septiembre de 2026",
+    "gaceta": "Gaceta Parlamentaria, año XXIX, número 7121, martes 8 de septiembre de 2026",
+    "entrada": "El 8 de septiembre de 2026 el Ejecutivo entregó a la Cámara de Diputados el paquete del año entrante: la iniciativa de Ley de Ingresos, el proyecto de Presupuesto de Egresos y los Criterios Generales de Política Económica. No es un anuncio: es un acto con fecha constitucional, contenido tasado por ley y un plazo de respuesta. Lo que sigue lee esos tres documentos renglón por renglón —no la nota de prensa que los resumió— y señala dónde la cifra publicada y la cifra comentada dejan de coincidir.",
+    "itinerario": [
+      {
+        "fecha": "1 de abril",
+        "hito": "Pre-criterios",
+        "quien": "Ejecutivo → Congreso",
+        "ley": "LFPRH, art. 42, fracc. I",
+        "texto": "Un documento con los objetivos de la Ley de Ingresos y del Presupuesto del año siguiente, los escenarios de crecimiento, inflación, tasa de interés y precio del petróleo, el monto total del gasto y su déficit, y la enumeración de los programas prioritarios con sus montos.",
+        "ciego": "Es el único momento del año en que el Congreso ve los supuestos antes de que vengan amarrados a una cifra. Casi nunca se discute en público."
+      },
+      {
+        "fecha": "8 de septiembre",
+        "hito": "Entrega del paquete",
+        "quien": "Ejecutivo → Cámara de Diputados",
+        "ley": "CPEUM, art. 74, fracc. IV, párrafo segundo · LFPRH, art. 42, fracc. III",
+        "texto": "«El Ejecutivo Federal hará llegar a la Cámara la Iniciativa de Ley de Ingresos y el Proyecto de Presupuesto de Egresos de la Federación a más tardar el día 8 del mes de septiembre». La ley reglamentaria añade qué debe venir dentro: los criterios generales de política económica, la estimación del precio de la mezcla y, en su caso, las reformas fiscales.",
+        "ciego": "En el año en que entra un nuevo Ejecutivo la fecha se recorre al 15 de noviembre. El plazo largo es la excepción, no la regla."
+      },
+      {
+        "fecha": "20 de octubre",
+        "hito": "Ley de Ingresos · Diputados",
+        "quien": "Cámara de Diputados",
+        "ley": "LFPRH, art. 42, fracc. IV",
+        "texto": "«La Ley de Ingresos será aprobada por la Cámara de Diputados a más tardar el 20 de octubre».",
+        "ciego": "Primero los ingresos y después el gasto, y no al revés: el artículo 74 manda aprobar el Presupuesto «una vez aprobadas las contribuciones que, a su juicio, deben decretarse para cubrirlo»."
+      },
+      {
+        "fecha": "31 de octubre",
+        "hito": "Ley de Ingresos · Senado",
+        "quien": "Cámara de Senadores",
+        "ley": "LFPRH, art. 42, fracc. IV",
+        "texto": "«…y por la Cámara de Senadores, a más tardar el 31 de octubre».",
+        "ciego": "Es el único tramo del paquete en que el Senado vota. En el Presupuesto de Egresos no interviene: ahí la Cámara de Diputados decide sola."
+      },
+      {
+        "fecha": "15 de noviembre",
+        "hito": "Presupuesto de Egresos",
+        "quien": "Cámara de Diputados, en exclusiva",
+        "ley": "CPEUM, art. 74, fracc. IV, párrafo tercero · LFPRH, art. 42, fracc. V",
+        "texto": "«La Cámara de Diputados deberá aprobar el Presupuesto de Egresos de la Federación a más tardar el día 15 del mes de noviembre». Y en el mismo artículo: «No podrá haber partidas secretas en el Presupuesto de Egresos de la Federación».",
+        "ciego": "La facultad es exclusiva y también es modificatoria: la Cámara puede examinar, discutir y modificar el proyecto. Que en los hechos lo modifique poco es una decisión política, no una limitación jurídica."
+      },
+      {
+        "fecha": "20 días naturales después",
+        "hito": "Publicación en el Diario Oficial",
+        "quien": "Ejecutivo Federal",
+        "ley": "LFPRH, art. 42, fracc. VI",
+        "texto": "«La Ley de Ingresos y el Presupuesto de Egresos de la Federación deberán publicarse en el Diario Oficial de la Federación a más tardar 20 días naturales después de aprobados». Otros veinte días después deben llegar a la Cámara todos los tomos y anexos con sus modificaciones.",
+        "ciego": "Entre la votación y la llegada de los tomos analíticos pueden pasar cuarenta días. En ese lapso existe un presupuesto aprobado cuyo detalle todavía no es público."
+      }
+    ],
+    "marco": [
+      {
+        "v": "Crecimiento real del PIB",
+        "u": "rango %",
+        "a26": "1.8 a 2.8",
+        "e26": "1.0 a 2.0",
+        "p27": "1.5 a 2.5",
+        "n": "Rango, no cifra puntual. La estimación de ingresos usa el punto medio: 2.0%."
+      },
+      {
+        "v": "PIB nominal",
+        "u": "miles de millones de pesos",
+        "a26": "38,715.9",
+        "e26": "37,160.7",
+        "p27": "39,419.4",
+        "n": "Es el denominador de todo porcentaje «del PIB» que aparece en el paquete."
+      },
+      {
+        "v": "Inflación, diciembre contra diciembre",
+        "u": "%",
+        "a26": "3.0",
+        "e26": "3.5",
+        "p27": "3.0",
+        "n": "Coincide con el objetivo puntual del Banco de México."
+      },
+      {
+        "v": "Tasa de interés, Cetes 28 días",
+        "u": "% fin de periodo",
+        "a26": "6.0",
+        "e26": "6.5",
+        "p27": "6.0",
+        "n": "El promedio anual proyectado es 6.1%."
+      },
+      {
+        "v": "Tipo de cambio",
+        "u": "pesos por dólar, fin de periodo",
+        "a26": "18.9",
+        "e26": "17.8",
+        "p27": "18.0",
+        "n": "Los Criterios advierten que no es un pronóstico, sino «un supuesto para la elaboración de las proyecciones»."
+      },
+      {
+        "v": "Mezcla mexicana de exportación",
+        "u": "dólares por barril",
+        "a26": "54.9",
+        "e26": "78.4",
+        "p27": "61.8",
+        "n": "Se determina con la fórmula del artículo 31 de la Ley Federal de Presupuesto y el 15 de su Reglamento."
+      },
+      {
+        "v": "Plataforma de producción de líquidos",
+        "u": "miles de barriles diarios",
+        "a26": "1,794.0",
+        "e26": "1,800.0",
+        "p27": "1,800.1",
+        "n": "Incluye Pemex, condensados, socios y privados. La meta de 1.8 millones se repite sin cambio hasta 2032."
+      },
+      {
+        "v": "Plataforma de exportación",
+        "u": "miles de barriles diarios",
+        "a26": "521.0",
+        "e26": "522.4",
+        "p27": "426.6",
+        "n": "Cae 18% respecto del cierre estimado de 2026. Más crudo se queda en el país y menos se vende afuera."
+      },
+      {
+        "v": "Cuenta corriente",
+        "u": "% del PIB",
+        "a26": "-0.6",
+        "e26": "-0.5",
+        "p27": "-0.6",
+        "n": "Déficit moderado; se explica sobre todo por la balanza comercial."
+      },
+      {
+        "v": "Crecimiento del PIB de Estados Unidos",
+        "u": "% real",
+        "a26": "1.9",
+        "e26": "2.3",
+        "p27": "2.0",
+        "n": "Variable de apoyo. De ella depende buena parte de la exportación mexicana."
+      }
+    ],
+    "finanzas": [
+      {
+        "id": "f-rfsp",
+        "n": "RFSP · balance público amplio",
+        "m": -1555655.8,
+        "pib": -3.9,
+        "m26": -1587349.9,
+        "pib26": -4.1,
+        "g": "Balance",
+        "d": "La medida más amplia del déficit: todo lo que el sector público necesita financiar, dentro y fuera del presupuesto."
+      },
+      {
+        "id": "f-balance",
+        "n": "Balance presupuestario",
+        "m": -1358558.8,
+        "pib": -3.4,
+        "m26": -1393770.6,
+        "pib26": -3.6,
+        "g": "Balance",
+        "d": "El déficit estricto del presupuesto. Es la cifra que el decreto del Presupuesto fija en su artículo 2º."
+      },
+      {
+        "id": "f-extra",
+        "n": "Requerimientos fuera del presupuesto",
+        "m": -197097.0,
+        "pib": -0.5,
+        "m26": -193579.3,
+        "pib26": -0.5,
+        "g": "Balance",
+        "d": "Pidiregas de CFE, IPAB, FONADIN, banca de desarrollo y adecuaciones a los registros presupuestarios."
+      },
+      {
+        "id": "f-primario",
+        "n": "Superávit primario",
+        "m": 216891.3,
+        "pib": 0.6,
+        "m26": 178802.6,
+        "pib26": 0.5,
+        "g": "Balance",
+        "d": "El balance antes de pagar intereses. En positivo: sin la deuda heredada, el presupuesto cerraría con sobrante."
+      },
+      {
+        "id": "f-ing",
+        "n": "Ingresos presupuestarios",
+        "m": 9156528.9,
+        "pib": 23.2,
+        "m26": 8721057.3,
+        "pib26": 22.5,
+        "g": "Ingreso",
+        "d": "Todo lo que entra sin endeudarse. Crece 3.9% real contra el cierre estimado de 2026."
+      },
+      {
+        "id": "f-trib",
+        "n": "Ingresos tributarios",
+        "m": 6263886.8,
+        "pib": 15.9,
+        "m26": 5838571.0,
+        "pib26": 15.1,
+        "g": "Ingreso",
+        "d": "Máximo histórico como proporción del PIB, según los propios Criterios."
+      },
+      {
+        "id": "f-petro",
+        "n": "Ingresos petroleros",
+        "m": 984539.7,
+        "pib": 2.5,
+        "m26": 1204277.7,
+        "pib26": 3.1,
+        "g": "Ingreso",
+        "d": "Caen 14.4% real. Bajan de un billón de pesos por primera vez en la serie reciente."
+      },
+      {
+        "id": "f-gasto",
+        "n": "Gasto neto pagado",
+        "m": 10515087.7,
+        "pib": 26.7,
+        "m26": 10114827.9,
+        "pib26": 26.1,
+        "g": "Gasto",
+        "d": "Lo que efectivamente sale de caja. Crece 0.7% real contra lo aprobado para 2026."
+      },
+      {
+        "id": "f-prog",
+        "n": "Gasto programable devengado",
+        "m": 7432529.7,
+        "pib": 18.9,
+        "m26": 7094708.8,
+        "pib26": 18.3,
+        "g": "Gasto",
+        "d": "Lo que compra bienes y servicios. Crece 1.5% real."
+      },
+      {
+        "id": "f-noprog",
+        "n": "Gasto no programable",
+        "m": 3203958.4,
+        "pib": 8.1,
+        "m26": 3098974.9,
+        "pib26": 8.0,
+        "g": "Gasto",
+        "d": "Intereses, participaciones y adeudos del año anterior. No se decide: se debe."
+      },
+      {
+        "id": "f-costofin",
+        "n": "Costo financiero de la deuda",
+        "m": 1574950.2,
+        "pib": 4.0,
+        "m26": 1572073.3,
+        "pib26": 4.1,
+        "g": "Gasto",
+        "d": "Cuesta 4.0% del PIB. El déficit amplio es 3.9%. Los intereses solos pesan más que todo el faltante."
+      },
+      {
+        "id": "f-defer",
+        "n": "Diferimiento de pagos",
+        "m": -121400.4,
+        "pib": -0.3,
+        "m26": -78855.7,
+        "pib26": -0.2,
+        "g": "Gasto",
+        "d": "La diferencia entre lo devengado y lo pagado. Crece 49.1% real: es gasto autorizado que se empuja al año siguiente."
+      },
+      {
+        "id": "f-shrfsp",
+        "n": "Deuda pública (SHRFSP)",
+        "m": 21665995.8,
+        "pib": 55.0,
+        "m26": 20259590.7,
+        "pib26": 52.3,
+        "g": "Deuda",
+        "d": "Sube 1.0 punto del PIB respecto del cierre estimado de 2026, aun con el déficit a la baja."
+      }
+    ],
+    "funcional": {
+      "nota": "Clasificación funcional del gasto programable. Publicada en los Criterios Generales de Política Económica 2027, cuadro de la página 39, en miles de millones de pesos.",
+      "filas": [
+        {
+          "n": "Desarrollo social",
+          "pef26": 4929.4,
+          "ppef27": 5384.9,
+          "var": 5.8,
+          "d": "Educación, salud, protección social, vivienda y medio ambiente. Tres de cada cuatro pesos del gasto de la Administración Pública Federal."
+        },
+        {
+          "n": "Desarrollo económico",
+          "pef26": 1695.7,
+          "ppef27": 1518.7,
+          "var": -13.2,
+          "d": "Energía, comunicaciones, transporte, agropecuario y ciencia. Cae 13.2% real, y la caída tiene un solo nombre: Pemex."
+        },
+        {
+          "n": "Gobierno",
+          "pef26": 320.7,
+          "ppef27": 357.1,
+          "var": 7.9,
+          "d": "Seguridad nacional, justicia, orden público y servicios generales del Ejecutivo. Es la finalidad que más crece en términos relativos."
+        },
+        {
+          "n": "Poderes, órganos autónomos, INEGI y Tribunal Federal de Justicia Administrativa",
+          "pef26": 142.3,
+          "ppef27": 165.8,
+          "var": 12.9,
+          "d": "Fuera de la Administración Pública Federal. La Cámara aprueba su techo pero no reparte su interior: la autonomía presupuestaria es condición de su independencia."
+        },
+        {
+          "n": "Fondos de estabilización",
+          "pef26": 6.6,
+          "ppef27": 6.0,
+          "var": -12.2,
+          "d": "La aportación anual a los fondos que deben amortiguar una caída de ingresos. Seis mil millones de pesos: menos de una milésima del presupuesto."
+        }
+      ]
+    },
+    "sensibilidades": [
+      {
+        "id": "s-crec",
+        "n": "Crecimiento económico",
+        "icono": "📈",
+        "base": 2.0,
+        "min": 0.0,
+        "max": 4.0,
+        "paso": 0.1,
+        "unidad": "% real anual",
+        "dec": 1,
+        "tramo": 0.5,
+        "coef": 30200.0,
+        "destino": "ingresos",
+        "cita": "Efecto de un incremento de medio punto real de crecimiento económico sobre los ingresos tributarios: 30.2 mmp.",
+        "porque": "Más actividad económica significa más IVA y más ISR sin cambiar una sola tasa."
+      },
+      {
+        "id": "s-precio",
+        "n": "Precio de la mezcla mexicana",
+        "icono": "🛢️",
+        "base": 61.8,
+        "min": 25.0,
+        "max": 110.0,
+        "paso": 1.0,
+        "unidad": "dólares por barril",
+        "dec": 1,
+        "tramo": 1.0,
+        "coef": 9600.0,
+        "destino": "ingresos",
+        "cita": "Efecto de un dólar adicional en promedio anual del precio del petróleo sobre los ingresos petroleros: 9.6 mmp.",
+        "porque": "Sube lo que se cobra por exportar crudo más de lo que sube el costo de importar hidrocarburos."
+      },
+      {
+        "id": "s-plataforma",
+        "n": "Plataforma de producción",
+        "icono": "⛽",
+        "base": 1800.0,
+        "min": 1400.0,
+        "max": 2200.0,
+        "paso": 25.0,
+        "unidad": "miles de barriles diarios",
+        "dec": 0,
+        "tramo": 50.0,
+        "coef": 21800.0,
+        "destino": "ingresos",
+        "cita": "Efecto de un aumento de 50 mil barriles diarios de extracción de crudo sobre los ingresos petroleros: 21.8 mmp.",
+        "porque": "Más barriles extraídos, más ventas. La meta de 1.8 millones se repite sin cambio de 2026 a 2032."
+      },
+      {
+        "id": "s-tipocambio",
+        "n": "Tipo de cambio promedio",
+        "icono": "💱",
+        "base": 17.9,
+        "min": 14.0,
+        "max": 26.0,
+        "paso": 0.1,
+        "unidad": "pesos por dólar",
+        "dec": 2,
+        "tramo": 0.2,
+        "coef": 8100.0,
+        "coef2": 2100.0,
+        "destino": "ambos",
+        "cita": "Efecto de una apreciación de 20 centavos en el tipo de cambio promedio: −6.0 mmp netos. Ingresos petroleros −8.1; costo financiero +2.1.",
+        "porque": "Un peso más fuerte vale menos crudo exportado, pero también abarata en pesos la deuda contratada en dólares. Gana el primer efecto."
+      },
+      {
+        "id": "s-tasa",
+        "n": "Tasa de interés",
+        "icono": "🏦",
+        "base": 6.1,
+        "min": 2.0,
+        "max": 14.0,
+        "paso": 0.25,
+        "unidad": "% Cetes 28 días, promedio",
+        "dec": 2,
+        "tramo": 1.0,
+        "coef": 37900.0,
+        "destino": "costofin",
+        "cita": "Efecto de un aumento de 100 puntos base en la tasa de interés sobre el costo financiero: 37.9 mmp.",
+        "porque": "Encarece la deuda a tasa variable y el refinanciamiento de la que va venciendo. Es la palanca más cara del cuadro."
+      },
+      {
+        "id": "s-inflacion",
+        "n": "Inflación",
+        "icono": "🌡️",
+        "base": 3.2,
+        "min": 0.0,
+        "max": 12.0,
+        "paso": 0.1,
+        "unidad": "% promedio anual",
+        "dec": 1,
+        "tramo": 1.0,
+        "coef": 1300.0,
+        "destino": "costofin",
+        "cita": "Efecto de un aumento de 100 puntos base en la tasa de inflación sobre el costo financiero: 1.3 mmp.",
+        "porque": "Encarece los Udibonos y la deuda indexada a la unidad de inversión."
+      }
+    ],
+    "simBase": {
+      "ingresos": 9156528.9,
+      "costofin": 1574950.2,
+      "balance": -1358558.8,
+      "extrapres": -197097.0,
+      "rfsp": -1555655.8,
+      "pib": 39419400.0,
+      "gastoNeto": 10636488.1,
+      "tolerancia": 212729.762,
+      "meta": -3.9,
+      "metaBalance": -3.4
+    },
+    "amortiguadores": [
+      {
+        "n": "Fondo de Estabilización de los Ingresos Presupuestarios (FEIP)",
+        "m": 136600.0,
+        "u": "mdp",
+        "icono": "🛟",
+        "d": "El colchón de la Federación ante una caída de ingresos. Saldo al cierre de junio de 2026."
+      },
+      {
+        "n": "Fondo de Estabilización de los Ingresos de las Entidades Federativas (FEIEF)",
+        "m": 13300.0,
+        "u": "mdp",
+        "icono": "🗺️",
+        "d": "El colchón equivalente para las 32 entidades, cuando caen las participaciones."
+      },
+      {
+        "n": "Fondo Mexicano del Petróleo",
+        "m": 22100.0,
+        "u": "mdp",
+        "icono": "🛢️",
+        "d": "El fideicomiso que recibe la renta petrolera del Estado."
+      },
+      {
+        "n": "Reservas internacionales del Banco de México",
+        "m": 258700.0,
+        "u": "mdd",
+        "icono": "🏛️",
+        "d": "Al 28 de agosto de 2026. No son del Gobierno Federal: son del banco central, y su uso no es presupuestario."
+      },
+      {
+        "n": "Línea de Crédito Flexible con el FMI",
+        "m": 24000.0,
+        "u": "mdd",
+        "icono": "🌐",
+        "d": "Crédito contingente por 17.8 mil millones de Derechos Especiales de Giro. Es deuda si se usa."
+      },
+      {
+        "n": "Línea swap con el Tesoro de Estados Unidos",
+        "m": 9000.0,
+        "u": "mdd",
+        "icono": "🤝",
+        "d": "Intercambio de divisas de emergencia con el Tesoro estadounidense."
+      },
+      {
+        "n": "Seguro para catástrofes",
+        "m": 10400.0,
+        "u": "mdp",
+        "icono": "🌀",
+        "d": "Vigente del 5 de junio de 2026 al 5 de mayo de 2027. Cubre lo presupuestado para atender fenómenos naturales."
+      },
+      {
+        "n": "Cuatro bonos catastróficos",
+        "m": 595.0,
+        "u": "mdd",
+        "icono": "📜",
+        "d": "Con vigencia hasta abril de 2028, contra sismos y huracanes de distintas magnitudes."
+      }
+    ],
+    "contingentes": [
+      {
+        "n": "Pasivo pensionario del sector público",
+        "m": 13214200.0,
+        "pib": 37.4,
+        "icono": "👵",
+        "d": "ISSSTE $7,403.3 mmp, IMSS régimen de jubilaciones $3,297.6, Pemex $1,462.3, CFE $773.9 y otras entidades $277.0. Cifras de 2025.",
+        "ciego": "No está dentro del 55.0% del PIB de deuda pública, porque no es deuda contratada sino obligación de pago futura. Las dos proporciones se publican con años base distintos, de modo que sumarlas es indicativo y no contable; aun así, el orden de magnitud del compromiso declarado ronda los noventa puntos del PIB."
+      },
+      {
+        "n": "Depósitos bancarios garantizados por el IPAB",
+        "m": 8800000.0,
+        "pib": 23.3,
+        "icono": "🏧",
+        "d": "Saldo de depósitos a la vista y a plazo al cierre de junio de 2026. La garantía cubre hasta 400 mil UDIs por persona e institución: $3.5 millones de pesos.",
+        "ciego": "El compromiso se activa sólo si una institución quiebra, pero existe todos los días."
+      },
+      {
+        "n": "Activos netos de las AFORE",
+        "m": 8963700.0,
+        "pib": 25.3,
+        "icono": "💼",
+        "d": "Junio de 2026. Es ahorro de los trabajadores, no dinero público; aparece aquí porque es la otra mitad del sistema de pensiones.",
+        "ciego": "Convive con un pasivo pensionario de 37.4% del PIB que corresponde al viejo sistema de reparto, el que no tiene fondo detrás."
+      },
+      {
+        "n": "Cartera de la banca de desarrollo",
+        "m": 2188500.0,
+        "pib": null,
+        "icono": "🏦",
+        "d": "Crédito directo e impulsado al sector privado a junio de 2026. Capitalización de 30.6% y cartera vencida de $38.3 mmp.",
+        "ciego": "El riesgo se declara bajo. Eso depende de que las garantías otorgadas no se ejerzan al mismo tiempo."
+      },
+      {
+        "n": "Pidiregas de la Comisión Federal de Electricidad",
+        "m": 96600.0,
+        "pib": null,
+        "icono": "⚡",
+        "d": "Exposición máxima contingente, repartida en unos 20 años, en el supuesto extremo de que los activos adquiridos valieran cero.",
+        "ciego": "Son inversiones con registro diferido: obra que ya existe y deuda que todavía no se contabiliza como tal."
+      },
+      {
+        "n": "Pérdida esperada por desastres naturales",
+        "m": 62100.0,
+        "pib": null,
+        "icono": "🌪️",
+        "d": "Para un evento con 1% de probabilidad anual. Para uno con 5% de probabilidad, $22.3 mmp; para los frecuentes y menores, $20.3 mmp al año.",
+        "ciego": "El seguro catastrófico y los cuatro bonos suman alrededor de $21 mmp. Un evento de los grandes rebasaría por tres veces toda la cobertura."
+      }
+    ],
+    "senda": {
+      "nota": "Proyecciones de mediano plazo presentadas en cumplimiento del artículo 16 de la Ley Federal de Presupuesto. Los propios Criterios advierten que «las cifras tienen carácter informativo y no constituyen un compromiso presupuestario vinculante para la SHCP». En la última columna, verde señala el indicador que mejora a lo largo del periodo y rojo el que empeora.",
+      "anios": [
+        "2026",
+        "2027",
+        "2028",
+        "2029",
+        "2030",
+        "2031",
+        "2032"
+      ],
+      "series": [
+        {
+          "n": "RFSP",
+          "u": "% del PIB",
+          "v": [
+            -4.1,
+            -3.9,
+            -3.7,
+            -3.6,
+            -3.4,
+            -3.2,
+            -3.1
+          ],
+          "sentido": "mejora"
+        },
+        {
+          "n": "Balance presupuestario",
+          "u": "% del PIB",
+          "v": [
+            -3.6,
+            -3.4,
+            -3.2,
+            -3.1,
+            -2.9,
+            -2.7,
+            -2.6
+          ],
+          "sentido": "mejora"
+        },
+        {
+          "n": "Balance primario",
+          "u": "% del PIB",
+          "v": [
+            0.1,
+            0.6,
+            0.5,
+            0.5,
+            0.7,
+            0.9,
+            1.0
+          ],
+          "sentido": "mejora"
+        },
+        {
+          "n": "Costo financiero",
+          "u": "% del PIB",
+          "v": [
+            3.7,
+            4.0,
+            3.7,
+            3.6,
+            3.7,
+            3.7,
+            3.7
+          ],
+          "sentido": "plano"
+        },
+        {
+          "n": "Deuda pública (SHRFSP)",
+          "u": "% del PIB",
+          "v": [
+            54.0,
+            55.0,
+            55.6,
+            56.1,
+            56.4,
+            56.5,
+            56.5
+          ],
+          "sentido": "deterioro"
+        },
+        {
+          "n": "Gasto neto pagado",
+          "u": "% del PIB",
+          "v": [
+            26.6,
+            26.7,
+            26.0,
+            25.9,
+            25.7,
+            25.5,
+            25.4
+          ],
+          "sentido": "plano"
+        },
+        {
+          "n": "Ingresos presupuestarios",
+          "u": "% del PIB",
+          "v": [
+            23.0,
+            23.2,
+            22.8,
+            22.8,
+            22.8,
+            22.8,
+            22.8
+          ],
+          "sentido": "plano"
+        }
+      ]
+    },
+    "sociales": {
+      "total": 1025388.5,
+      "pibPct": 2.6,
+      "nota": "Programas sociales prioritarios del proyecto de Presupuesto 2027, tal como los enumera el cuadro de la página 33 de los Criterios Generales. Equivalen a 2.6% del PIB.",
+      "filas": [
+        {
+          "n": "Pensión para Adultos Mayores",
+          "m": 543498.4,
+          "g": "Pensiones"
+        },
+        {
+          "n": "Pensión Mujeres Bienestar",
+          "m": 59356.3,
+          "g": "Pensiones"
+        },
+        {
+          "n": "Pensión Personas con Discapacidad",
+          "m": 37436.3,
+          "g": "Pensiones"
+        },
+        {
+          "n": "Beca Rita Cetina (básica)",
+          "m": 133561.3,
+          "g": "Becas"
+        },
+        {
+          "n": "Beca de Nivel Medio Superior",
+          "m": 43932.4,
+          "g": "Becas"
+        },
+        {
+          "n": "Jóvenes Escribiendo el Futuro",
+          "m": 13058.2,
+          "g": "Becas"
+        },
+        {
+          "n": "Jóvenes Construyendo el Futuro",
+          "m": 25985.3,
+          "g": "Becas"
+        },
+        {
+          "n": "Sembrando Vida",
+          "m": 40500.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Producción para el Bienestar",
+          "m": 17000.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Fertilizantes",
+          "m": 17000.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Acopio para el Bienestar",
+          "m": 8445.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Comercio Justo",
+          "m": 8995.6,
+          "g": "Campo"
+        },
+        {
+          "n": "Leche para el Bienestar",
+          "m": 6866.9,
+          "g": "Campo"
+        },
+        {
+          "n": "Comercio Justo (incentivos)",
+          "m": 2862.8,
+          "g": "Campo"
+        },
+        {
+          "n": "Pesca",
+          "m": 2118.1,
+          "g": "Campo"
+        },
+        {
+          "n": "Maíz es la Raíz",
+          "m": 2000.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Programa de Vivienda Social",
+          "m": 34353.9,
+          "g": "Territorio"
+        },
+        {
+          "n": "La Escuela es Nuestra",
+          "m": 20000.0,
+          "g": "Territorio"
+        },
+        {
+          "n": "Salud Casa por Casa",
+          "m": 5000.0,
+          "g": "Territorio"
+        },
+        {
+          "n": "Niñas y Niños, hijos de madres trabajadoras",
+          "m": 3418.0,
+          "g": "Territorio"
+        }
+      ]
+    },
+    "inversion": {
+      "total": 560172.6,
+      "nota": "Prioridades de inversión del proyecto de Presupuesto 2027, cuadro de la página 33 de los Criterios Generales.",
+      "filas": [
+        {
+          "n": "Pemex",
+          "m": 255529.2,
+          "g": "Energía",
+          "d": "Incluye los $81,100.0 mdp del Ramo 18 para amortizar deuda."
+        },
+        {
+          "n": "CFE",
+          "m": 60991.6,
+          "g": "Energía",
+          "d": "Generación, transmisión y distribución eléctrica."
+        },
+        {
+          "n": "Tren Saltillo – Nuevo Laredo",
+          "m": 41985.8,
+          "g": "Trenes",
+          "d": "El tramo con mayor asignación del programa ferroviario."
+        },
+        {
+          "n": "Istmo de Tehuantepec",
+          "m": 25000.0,
+          "g": "Trenes",
+          "d": "Corredor interoceánico."
+        },
+        {
+          "n": "Tren Querétaro – Saltillo",
+          "m": 24025.5,
+          "g": "Trenes",
+          "d": "Comprende Querétaro – San Luis Potosí y San Luis Potosí – Saltillo."
+        },
+        {
+          "n": "Tren Querétaro – Irapuato",
+          "m": 20054.7,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Tren Maya",
+          "m": 17158.8,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Material rodante",
+          "m": 14629.5,
+          "g": "Trenes",
+          "d": "Los trenes mismos, no las vías."
+        },
+        {
+          "n": "Tren México – Querétaro",
+          "m": 5682.2,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Tren AIFA – Pachuca",
+          "m": 1339.0,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Tren Irapuato – Guadalajara",
+          "m": 1000.0,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Carreteras y caminos",
+          "m": 24121.2,
+          "g": "Carreteras",
+          "d": ""
+        },
+        {
+          "n": "Toluca – Zihuatanejo",
+          "m": 7700.0,
+          "g": "Carreteras",
+          "d": ""
+        },
+        {
+          "n": "Puentes y distribuidores",
+          "m": 3598.8,
+          "g": "Carreteras",
+          "d": ""
+        },
+        {
+          "n": "Obras hidráulicas de Conagua",
+          "m": 22761.9,
+          "g": "Agua",
+          "d": "Distritos de riego y acueductos."
+        },
+        {
+          "n": "Proyecto Sargazo",
+          "m": 1866.9,
+          "g": "Agua",
+          "d": ""
+        },
+        {
+          "n": "Defensa Nacional",
+          "m": 12781.5,
+          "g": "Seguridad",
+          "d": ""
+        },
+        {
+          "n": "Marina",
+          "m": 10030.8,
+          "g": "Seguridad",
+          "d": ""
+        },
+        {
+          "n": "Inversión de Seguridad y Protección Ciudadana",
+          "m": 8370.8,
+          "g": "Seguridad",
+          "d": ""
+        },
+        {
+          "n": "Asociaciones público-privadas y PPS",
+          "m": 1544.3,
+          "g": "Seguridad",
+          "d": "Recursos para servicios de seguridad y educación."
+        }
+      ]
+    },
+    "fiscal": [
+      {
+        "n": "Deducciones empresariales estandarizadas",
+        "tipo": "Recauda más",
+        "icono": "🧾",
+        "d": "Las deducciones autorizadas se topan al 96.67% de los ingresos acumulables de la empresa (99% para las que hoy deducen menos). Aplica sólo a empresas con ingresos mayores a 50 millones de pesos y al menos cinco años de operación.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta, Anexo E del paquete"
+      },
+      {
+        "n": "Tope a las pérdidas fiscales",
+        "tipo": "Recauda más",
+        "icono": "📉",
+        "d": "Las pérdidas de ejercicios anteriores sólo podrán disminuir hasta el 50% de la utilidad fiscal del año, a cambio de ampliar el plazo para usarlas de 10 a 15 años.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Deducción de intereses netos",
+        "tipo": "Recauda más",
+        "icono": "🏦",
+        "d": "Baja del 30% al 20% de la utilidad fiscal ajustada. Lo no deducido se puede arrastrar diez ejercicios.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Fin del Régimen Opcional para Grupos de Sociedades",
+        "tipo": "Recauda más",
+        "icono": "🏢",
+        "d": "Se elimina y se cobra íntegro el impuesto diferido. Los Criterios lo llaman «un subsidio implícito» derivado de un esquema transitorio de 2013 que «ya cumplió con su objetivo».",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Catorce derechos actualizados",
+        "tipo": "Recauda más",
+        "icono": "📋",
+        "d": "Visas y servicios migratorios, espacio aéreo, vías férreas, trámites sanitarios, medio ambiente, puertos, zona federal marítimo terrestre, museos y zonas arqueológicas, armas, extracción de materiales, AFORE y un aumento de 16% a la inspección bursátil.",
+        "ley": "Iniciativa de reforma a la Ley Federal de Derechos, Anexo D"
+      },
+      {
+        "n": "RESICO con umbrales más altos",
+        "tipo": "Recauda menos",
+        "icono": "🧑‍🔧",
+        "d": "El régimen simplificado sube de 3.5 a 5 millones de pesos para personas físicas y de 35 a 50 millones para morales, con opción de pagar el IVA aplicando 7% al valor de lo cobrado, sin acreditamiento.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Tasa de retención de intereses a la baja",
+        "tipo": "Recauda menos",
+        "icono": "🐖",
+        "d": "Pasa de 0.90% en 2026 a 0.68% en 2027, calculada con la metodología que la propia Ley de Ingresos incorpora a partir del marco macroeconómico.",
+        "ley": "Iniciativa de Ley de Ingresos 2027"
+      },
+      {
+        "n": "Repatriación de capitales al 7.5%",
+        "tipo": "Recauda menos",
+        "icono": "✈️",
+        "d": "Programa temporal con tasa preferente de ISR, a condición de invertir los recursos en el país en activos y gastos estratégicos.",
+        "ley": "Iniciativa de Ley de Ingresos 2027"
+      },
+      {
+        "n": "Tasa cero de IVA a libros, periódicos y revistas",
+        "tipo": "Recauda menos",
+        "icono": "📚",
+        "d": "Hoy están exentos; pasar a tasa cero permite a los editores acreditar el IVA que pagan en sus insumos. Aplica a quienes obtengan al menos el 90% de sus ingresos de esa venta.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta y disposiciones de vigencia temporal"
+      },
+      {
+        "n": "Estímulo del 10% a ofertas públicas iniciales",
+        "tipo": "Recauda menos",
+        "icono": "📈",
+        "d": "Tasa reducida a la ganancia por vender acciones en una oferta pública inicial, si la emisora vale 50 mil millones de pesos o menos.",
+        "ley": "Iniciativa de Ley de Ingresos 2027"
+      },
+      {
+        "n": "Dos leyes nuevas",
+        "tipo": "Estructural",
+        "icono": "⚖️",
+        "d": "El paquete incluye la Ley de Economía Digital para Pagos Digitales y Electrónicos (Anexo G) y la Ley General para el Fortalecimiento y Armonización Catastral y Registral (Anexo H). Esta última toca directamente la base del impuesto predial, el tributo peor cobrado del país.",
+        "ley": "Anexos G y H de la Gaceta Parlamentaria 7121"
+      }
+    ],
+    "ciegos": [
+      {
+        "id": "c-deficit",
+        "titulo": "«Déficit de 3.9%» nombra la medida amplia, no el déficit del presupuesto",
+        "dice": "La cobertura resumió el paquete como un déficit fiscal de 3.9% del PIB.",
+        "documento": "Los Criterios distinguen dos cifras: el <b>balance presupuestario</b> se propone en <b>3.4% del PIB</b> ($1,358,558.8 mdp, la cifra que el artículo 2º del decreto fija) y los <b>Requerimientos Financieros del Sector Público</b> —el balance público amplio— en <b>3.9%</b> ($1,555,655.8 mdp). La diferencia, medio punto del PIB, son necesidades de financiamiento que ocurren fuera del presupuesto.",
+        "porque": "Las dos cifras son correctas y nombran cosas distintas. Usar la amplia al hablar de «el déficit» y la estrecha al hablar de «lo aprobado» permite elegir el número conveniente según la frase.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-deuda",
+        "titulo": "El déficit baja todos los años y la deuda sube todos los años",
+        "dice": "La reducción gradual del déficit se presenta como el eje de la responsabilidad hacendaria.",
+        "documento": "Es cierto: los RFSP bajan de 4.1% a 3.9% y siguen bajando hasta 3.1% en 2032. Y en el mismo cuadro, la deuda pública medida por el SHRFSP sube de 54.0% a <b>55.0%</b> en 2027 y sigue subiendo: 55.6, 56.1, 56.4, 56.5 y 56.5% del PIB. <b>En ningún año del horizonte proyectado la deuda baja.</b>",
+        "porque": "Un déficit menor sigue siendo un déficit: la deuda crece más despacio, no deja de crecer. Se estabiliza hasta 2031, a 4.2 puntos del PIB por encima de donde está hoy.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-pemex",
+        "titulo": "Los 81 mil millones para Pemex no son un apoyo nuevo: son el 31% del apoyo anterior",
+        "dice": "Se informó que Pemex recibirá 81,100 millones de pesos porque no alcanzó la autosuficiencia financiera.",
+        "documento": "Los Criterios explican de dónde sale esa cifra: el programa del Ramo 18 «Articulación de la Política de Hidrocarburos» «en 2026 contó con recursos por <b>263,476.0 millones de pesos</b>, y para 2027 se proponen únicamente <b>81,100.0 millones</b>». Es una caída de $182,376 millones, el 69%. Esa sola línea hace que el gasto de inversión total del presupuesto caiga <b>12.3% real</b> y que la finalidad de desarrollo económico caiga 13.2%.",
+        "porque": "Presentado como apoyo, el dato sugiere que el erario se abre a Pemex. Presentado como movimiento presupuestal, es el mayor recorte del paquete. La inversión física, en cambio, sí sube: 3.5% real.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-reforma",
+        "titulo": "«Sin nuevos impuestos» es literal y, a la vez, esconde una reforma de base",
+        "dice": "El paquete no crea impuestos ni sube tasas generales. Los Criterios lo dicen con esas palabras.",
+        "documento": "En la misma sección, Hacienda propone estandarizar las deducciones empresariales al <b>96.67%</b> de los ingresos acumulables, topar las pérdidas fiscales al 50% de la utilidad, bajar la deducción de intereses netos del 30% al 20% y eliminar el Régimen Opcional para Grupos de Sociedades cobrando el impuesto diferido. Y lo justifica con un dato propio: en 2025, «de <b>524 mil empresas</b> que declararon ingresos positivos, el 60.7% (<b>318 mil empresas</b>) no registró un pago del ISR».",
+        "porque": "No subir la tasa y ensanchar la base recaudan de forma distinta pero pesan igual en el bolsillo. Llamar «sin reforma» a un cambio permanente de la base gravable describe el titular, no el contenido.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-diferimiento",
+        "titulo": "Hay 121 mil millones que el presupuesto autoriza y no paga",
+        "dice": "El gasto neto total de 2027 es de $10.64 billones de pesos.",
+        "documento": "El decreto lo confirma: «el gasto neto total previsto en el presente Presupuesto de Egresos importa la cantidad de $10,636,488,100,000». Pero el cuadro de finanzas públicas separa el gasto <b>devengado</b> del <b>pagado</b>, y entre ambos hay un <b>diferimiento de pagos de $121,400.4 mdp</b> que crece <b>49.1% real</b> frente a los $78,855.7 de 2026. Lo que saldrá de caja son $10,515,087.7 millones.",
+        "porque": "El diferimiento es gasto comprometido que se empuja al ejercicio siguiente, donde reaparece como adeudo. Las ADEFAS de 2027 ya están presupuestadas en $81,400.4 mdp.",
+        "ref": "ppef"
+      },
+      {
+        "id": "c-riesgos",
+        "titulo": "La lista de siete riesgos existe; el cuadro tiene dos columnas",
+        "dice": "Hacienda identificó siete riesgos para la economía en 2027.",
+        "documento": "El cuadro de los Criterios es simétrico: <b>siete riesgos a la baja y seis al alza</b>. Entre los de baja aparece uno que casi no se citó —«menor dinamismo de la economía y la producción industrial de EE. UU.»— y otro nuevo: «corrección significativa en la valuación de activos vinculados con la inteligencia artificial».",
+        "porque": "Leer sólo la columna izquierda convierte un ejercicio de escenarios en un pronóstico sombrío. Leer sólo la derecha haría lo contrario. El documento presenta las dos.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-pensiones",
+        "titulo": "El pasivo que no cuenta como deuda vale 37 puntos del PIB",
+        "dice": "La deuda pública se ubicará en 55.0% del PIB, por debajo de otras economías emergentes.",
+        "documento": "En el apartado de pasivos contingentes, los mismos Criterios cuantifican el pasivo pensionario del sector público en <b>$13,214.2 mil millones de pesos, 37.4% del PIB</b>: ISSSTE 21.0 puntos, IMSS 9.3, Pemex 4.1, CFE 2.2 y otras entidades 0.8.",
+        "porque": "No es deuda contratada y por eso no entra en el SHRFSP; es una obligación de pago cierta y creciente. La población de 60 años y más pasará de 17.8 a 35.4 millones entre 2026 y 2050, según CONAPO.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-colchon",
+        "titulo": "Los amortiguadores caben en lo que cuesta un punto de tasa",
+        "dice": "El gobierno cuenta con fondos de estabilización, coberturas petroleras, línea con el FMI y reservas internacionales.",
+        "documento": "Los tres fondos suman <b>$172.0 mil millones de pesos</b> a junio de 2026: FEIP $136.6, FEIEF $13.3 y Fondo Mexicano del Petróleo $22.1. En el cuadro de sensibilidades de la página siguiente, un alza de 100 puntos base en la tasa de interés cuesta <b>$37.9 mil millones</b> y medio punto menos de crecimiento resta <b>$30.2 mil millones</b> de recaudación.",
+        "porque": "El FEIP equivale al 1.5% de los ingresos presupuestarios de 2027. Alcanza para un golpe, no para una racha.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-tolerancia",
+        "titulo": "La ley tolera desviarse 212 mil millones antes de pedir una explicación",
+        "dice": "El presupuesto debe contribuir a la meta anual de los requerimientos financieros del sector público.",
+        "documento": "El artículo 17 de la Ley Federal de Presupuesto añade el umbral: sólo «en caso de que, al cierre del ejercicio fiscal, se observe una desviación respecto a la meta de los requerimientos financieros del sector público mayor al equivalente a un <b>2 por ciento del gasto neto total aprobado</b>, la Secretaría deberá presentar una justificación». Dos por ciento de $10,636,488.1 mdp son <b>$212,729.8 millones de pesos</b>.",
+        "porque": "Por debajo de esa raya, incumplir la meta no obliga siquiera a una nota en el informe trimestral.",
+        "ref": "lfprh"
+      },
+      {
+        "id": "c-fondos",
+        "titulo": "Al fondo que debe amortiguar la próxima caída se le asignan seis mil millones",
+        "dice": "El presupuesto mantiene la estrategia de estabilización macroeconómica.",
+        "documento": "En la clasificación funcional del gasto programable, la línea «Fondos de estabilización» recibe <b>$6.0 mil millones de pesos</b> para 2027, <b>12.2% real menos</b> que en 2026.",
+        "porque": "Es menos de una milésima parte del presupuesto, y es la aportación anual del ejercicio a los colchones que el propio documento presenta como la defensa del país ante un choque externo.",
+        "ref": "cgpe"
+      }
+    ],
+    "refs": {
+      "cgpe": "ref-cgpe2027",
+      "ppef": "ref-ppef2027",
+      "ilif": "ref-ilif2027",
+      "com": "ref-shcp-c71",
+      "lfprh": "ref-lfprh"
+    }
   },
   "cuentas_ecologicas": {
     "titulo": "Cuentas Económicas y Ecológicas de México",
