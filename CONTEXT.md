@@ -1227,6 +1227,67 @@ sesión queda confirmada por una fuente independiente.
 15 de noviembre. El bloque de fuentes lo dice con todas sus letras y anuncia
 que la sección se contrastará contra el decreto publicado en el Diario Oficial.
 
+### Hecho (1.1: la clasificación funcional, por fin citable, y una cifra que no era)
+
+La investigación de la 1.4 trajo de rebote la fuente que a la 1.1 le faltaba.
+Los Criterios Generales de Política Económica 2027 publican, en el cuadro de su
+página 39, la **clasificación funcional del gasto programable** con una columna
+«PEF 2026 aprobado». Es justo lo que las tres fichas programables declaraban
+como pendiente: «no viene en el decreto, sino en los tomos analíticos».
+
+**Lo que decía la base contra lo que publica la fuente** (miles de millones):
+
+| Renglón | Antes | Criterios 2027, p. 39 |
+|---|---:|---:|
+| Desarrollo social | 4,916.1 | **4,929.4** |
+| Desarrollo económico | 1,697.6 | **1,695.7** |
+| Gobierno | 481.0 | **320.7** |
+| Poderes, autónomos, INEGI y TFJA | — | **142.3** |
+| Fondos de estabilización | — | **6.6** |
+| Total | 7,094.7 | 7,094.7 |
+
+El «Gobierno» de 481.0 no existía: la finalidad de la Administración Pública
+Federal vale 320.7 y los poderes y órganos autónomos van en renglón aparte con
+142.3. Juntos son 463.0, que es el 1.2% del PIB que la serie funcional
+2020-2026 del mismo documento reporta para gobierno. La sesión anterior acertó
+al invertir Gobierno y Desarrollo Económico —la dirección era esa— pero las
+magnitudes venían de una reconstrucción, y ya no hace falta reconstruir.
+
+**El bloque de egresos de la 1.1 pasa de seis fichas a ocho.** Las dos nuevas:
+
+- **Poderes y órganos autónomos**, con el artículo 5º fracción I de la Ley
+  Federal de Presupuesto, que enumera qué comprende la autonomía presupuestaria:
+  aprobar su propio proyecto, ejercerlo sin sujetarse a las disposiciones de
+  Hacienda, autorizar sus adecuaciones, pagar por su tesorería y determinar sus
+  propios ajustes si caen los ingresos.
+- **Fondos de estabilización**, con el artículo 19: los excedentes se destinan
+  *primero* a cubrir el aumento del gasto no programable y sólo lo que sobre se
+  reparte 25/65/10 entre FEIEF, FEIP e infraestructura de las entidades.
+
+**Precisión.** La fuente publica en miles de millones, así que los cinco
+renglones suman $7,094,700.0 mdp y no los $7,094,708.8 del cuadro de finanzas
+públicas: 8.8 millones de redondeo de la fuente. La 1.1 lo dice en el subtítulo
+del bloque y cada ficha lo repite en su «cómo se obtuvo». La cifra de portada
+sigue siendo la del decreto, al peso.
+
+**Hallazgo añadido a la 1.4.** El artículo 19 fracción IV define la «reserva
+adecuada» de los fondos: 0.08 por la suma de impuestos totales y transferencias
+del Fondo Mexicano del Petróleo estimados en la Ley de Ingresos para el FEIP, y
+0.04 para el FEIEF. Con las cifras del artículo 1º de la Iniciativa de Ley de
+Ingresos 2027 —$6,263,886.8 mdp de impuestos y $210,774.0 de transferencias—:
+
+```
+FEIP   meta legal  517,972.9 mdp   saldo 136,600.0   =  26.4%
+FEIEF  meta legal  258,986.4 mdp   saldo  13,300.0   =   5.1%
+```
+
+Las dos tarjetas de amortiguadores y el punto ciego 8 lo llevan.
+
+**De paso.** La ficha lateral repetía la misma cifra dos veces en todo renglón
+por debajo del billón, porque `formatMoneyMdp` y `formatMdpFijo` devuelven lo
+mismo en ese rango. La equivalencia ahora sólo se escribe cuando cambia de
+unidad. Afecta a las cuatro vistas de fichas, no sólo a la 1.1.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

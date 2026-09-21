@@ -15348,7 +15348,10 @@ body.con-regreso { padding-bottom: 96px; }
 .pe-fis-ley { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan); }
 
 /* --- 10. Colchon y pasivos ------------------------------------------------ */
-.pe-amort { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); }
+.pe-amort {
+  display: grid; gap: 0.7rem; align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+}
 .pe-amort-tarjeta {
   border: 1px solid var(--border-subtle); border-radius: 10px;
   background: var(--bg-card); padding: 0.85rem 0.95rem;
@@ -15359,8 +15362,18 @@ body.con-regreso { padding-bottom: 96px; }
 .pe-amort-tarjeta h5 { margin: 0.3rem 0 0.4rem; font-family: var(--font-sans); font-size: 0.83rem; color: var(--text-main); font-weight: 600; }
 .pe-amort-m { margin: 0 0 0.45rem; font-family: var(--font-mono); font-size: 1.05rem; color: var(--text-gold); font-weight: 600; }
 .pe-amort-d { margin: 0; font-family: var(--font-body); font-size: 0.83rem; line-height: 1.55; color: var(--text-secondary); }
+.pe-amort-meta {
+  margin: 0.6rem 0 0; padding: 0.6rem 0.7rem; border-radius: 8px;
+  background: var(--bg-card-alt); border-left: 3px solid var(--crimson-bright);
+}
+.pe-amort-meta-c { font-family: var(--font-mono); font-size: 0.92rem; color: var(--text-main); font-weight: 600; }
+.pe-amort-meta-p { font-family: var(--font-mono); font-size: 0.82rem; color: var(--crimson-bright); margin-left: 0.5rem; }
+.pe-amort-meta-t { display: block; margin-top: 0.35rem; font-family: var(--font-body); font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary); }
 
-.pe-conting { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
+.pe-conting {
+  display: grid; gap: 0.7rem; align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+}
 .pe-cont-tarjeta {
   border: 1px solid var(--border-subtle); border-radius: 10px;
   background: var(--bg-card); padding: 0.9rem 1rem;

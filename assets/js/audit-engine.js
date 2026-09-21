@@ -2743,7 +2743,11 @@
           <span class="fd-ico" aria-hidden="true">${d.icono}</span> ${d.nombreLargo || d.nombre}
         </h3>
         <div class="fd-monto">${tieneMonto
-            ? formatMdpFijo(d.montoMdp) + ' <span class="fd-equiv">' + formatMoneyMdp(d.montoMdp) + '</span> '
+            /* La equivalencia en billones sólo se escribe cuando cambia de
+               unidad. Por debajo del billón repetía la misma cifra dos veces,
+               a veces con distinto redondeo, que es peor que no decirla. */
+            ? formatMdpFijo(d.montoMdp) + (Math.abs(d.montoMdp) >= 1000000
+                ? ' <span class="fd-equiv">' + formatMoneyMdp(d.montoMdp) + '</span> ' : ' ')
             : '<span class="fd-equiv">Facultad sin cifra nacional publicada</span> '}${chipEstado(d.estado)}${
           d.claveLIF ? '<span class="fd-clave" title="Clave del concepto en el Art\u00edculo 1\u00ba de la Ley de Ingresos">LIF ' + d.claveLIF + '</span>' : ''}${
           d.clave ? '<span class="fd-clave" title="De d\u00f3nde sale la cifra o el precepto">' + d.clave + '</span>' : ''}</div>
@@ -15996,6 +16000,10 @@
           '<p class="pe-amort-m"><span data-anim-v="' + a.m + '" data-anim-f="' + (a.u === 'mdd' ? 'mdd' : 'mdpfijo') + '">' +
             (a.u === 'mdd' ? '$0 mdd' : '$0 mdp') + '</span></p>' +
           '<p class="pe-amort-d">' + a.d + '</p>' +
+          (a.meta ? '<p class="pe-amort-meta"><span class="pe-et">Lo que la ley llama reserva adecuada</span>'
+            + '<span class="pe-amort-meta-c">' + formatMdpFijo(a.meta) + '</span>'
+            + '<span class="pe-amort-meta-p">tiene el ' + a.metaPct.toFixed(1) + '%</span>'
+            + '<span class="pe-amort-meta-t">' + a.metaTexto + '</span></p>' : '') +
         '</article>').join('') +
       '</div>' +
       '<p class="pe-fuente-nota">Criterios Generales de Política Económica 2027, apartado 4.3.1' + peRef('cgpe') + '.</p></section>' +
@@ -16065,7 +16073,8 @@
               '<p class="pe-ciego-ref">Verificado contra ' +
                 (c.ref === 'ppef' ? 'el decreto del proyecto de Presupuesto de Egresos 2027' + peRef('ppef')
                  : c.ref === 'lfprh' ? 'la Ley Federal de Presupuesto y Responsabilidad Hacendaria' + peRef('lfprh')
-                 : 'los Criterios Generales de Política Económica 2027' + peRef('cgpe')) + '.</p>' +
+                 : 'los Criterios Generales de Política Económica 2027' + peRef('cgpe')) +
+                (c.ref2 ? ' y la Ley Federal de Presupuesto y Responsabilidad Hacendaria' + peRef(c.ref2) : '') + '.</p>' +
             '</div>'
           : '<p class="pe-ciego-avance">' + c.dice + '</p>') +
       '</article>').join('');
