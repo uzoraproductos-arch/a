@@ -1348,7 +1348,53 @@ por el barrido de terminos, porque no existia cuando corrio el anterior.
 Los cuatro botones de la brujula siguen llevando a su pilar, y ahora ademas
 lo abren.
 
+### Hecho (1.1: de dónde sale, en qué se va y a dónde baja se pliegan)
+
+La subpestaña abría con los tres capítulos desplegados a la vez: dos gráficas
+con su simulador y un mapa con su columna de rankings, uno detrás de otro.
+Entre el encabezado y el último punto ciego mediaban cinco o seis pantallas, y
+quien llegaba buscando el mapa tenía que recorrerlas todas. Ahora cada capítulo
+anuncia su nombre y espera el clic.
+
+**Se pliegan por separado, no en acordeón.** Es la diferencia con los pilares de
+la 1.4: allí abrir uno cierra el anterior, porque los cuatro artículos se leen
+de uno en uno. Aquí el origen y el destino del dinero se leen comparándolos, y
+cerrar uno para ver el otro le quitaría al lector justo la operación que la
+subpestaña propone. Los tres pueden estar abiertos a la vez.
+
+**El cuerpo se oculta, no se repinta.** También distinto de la 1.4. Dentro viven
+un mapa de Leaflet y dos simuladores que nacen en ceros y suben cuando alguien
+pulsa «Contabilizar»: volver a pintarlos al plegar el capítulo le borraría al
+lector la cuenta que acaba de mandar hacer. Comprobado: se contabiliza, se
+cierra, se reabre y las barras siguen donde estaban.
+
+**Una corrección de estructura, de paso.** La barra de lentes y el área del mapa
+vivían *fuera* de su bloque, como hermanos sueltos del subpanel: el encabezado
+«3 · A dónde baja» no gobernaba nada más que su propio párrafo. Ahora quedan
+dentro del cuerpo que ese encabezado despliega.
+
+**El detalle que el cambio exigía.** Leaflet mide su contenedor cuando se
+construye, y el mapa nace dentro de un cuerpo oculto: cree tener cero píxeles de
+alto. Al abrir el capítulo se le pide volver a medir —`invalidateSize()`, el
+mismo remedio que la plataforma ya usaba al cambiar de pestaña—. Medido en el
+navegador: el lienzo pasa de 0×0 a 1140×646 y los 32 estados aparecen.
+
+**El cuerpo no lleva relleno lateral**, a propósito: la gráfica y el mapa miden
+abiertos exactamente lo mismo que cuando colgaban sueltos del subpanel. Un marco
+alrededor del mapa habría supuesto una tarjeta dentro de otra —la barra de
+lentes ya trae la suya— y le habría quitado cuarenta píxeles al territorio.
+
 ### Pendiente
+
+- **La leyenda del mapa de la 1.1 no dice la verdad.** Salió al probar los
+  capítulos plegables, y es anterior a ellos: `legendCaption`, `legendMin`,
+  `legendMid`, `legendMax` y `legendGradient` están escritos a mano en el HTML y
+  **ningún renglón del motor los toca**. El rótulo dice «Gasto Federalizado
+  Total» aunque el lector haya elegido Ramo 28, alertas ASF o dependencia
+  federal, y las marcas de la escala son las palabras «Mínimo», «Medio» y
+  «Máximo», sin cifra. El mapa sí cambia de color al cambiar de lente; lo que
+  miente es el pie. Pendiente de decisión: rotular la escala con los valores
+  reales de la métrica activa o retirarla.
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
   interfaz, pero el formulario y el foro guardan en `localStorage`: sólo en el

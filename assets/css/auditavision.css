@@ -9409,6 +9409,60 @@ nav.tabbar button:focus-visible,
   margin: 0;
 }
 
+/* --- Los tres capitulos plegables: de donde sale, en que se va, a donde baja ---
+
+   La subpestana abria con las dos graficas y el mapa desplegados a la vez:
+   media docena de pantallas antes de que el lector supiera que habia dentro.
+   Ahora cada capitulo anuncia su nombre y espera el clic. Se pliegan por
+   separado -no es un acordeon-, de modo que se pueden tener los tres
+   abiertos para compararlos.
+
+   A diferencia de los pilares de la 1.4, el cuerpo no se repinta: se oculta.
+   Dentro viven un mapa de Leaflet y dos simuladores con estado propio, y un
+   repintado los devolveria a ceros cada vez que alguien cierra el capitulo. */
+.erario-pleg-h { margin: 0; font: inherit; font-weight: inherit; }
+
+.erario-pleg-cab {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  padding: 15px 18px; text-align: left; cursor: pointer;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 12px; color: inherit; font: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.erario-pleg-cab:hover { background: var(--bg-card-hover); }
+.erario-pleg-cab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.erario-pleg.abierto .erario-pleg-cab { border-color: var(--border-gold); }
+
+.erario-pleg-n {
+  flex: none; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700;
+  color: var(--gold-bright); background: var(--bg-card-alt);
+  border: 1px solid var(--border-gold);
+}
+.erario-pleg-tx { flex: 1; min-width: 0; }
+.erario-pleg-tit {
+  display: block; font-family: var(--font-serif); font-size: 22px;
+  font-weight: 700; color: var(--gold-bright); line-height: 1.25;
+}
+.erario-pleg-av {
+  display: block; margin-top: 3px; font-size: 13.5px;
+  line-height: 1.5; color: var(--text-secondary);
+}
+.erario-pleg-mas {
+  flex: none; width: 1.3rem; text-align: center;
+  font-family: var(--font-mono); font-size: 22px; line-height: 1;
+  color: var(--text-secondary);
+}
+.erario-pleg-cab:hover .erario-pleg-mas,
+.erario-pleg.abierto .erario-pleg-mas { color: var(--gold-bright); }
+
+/* Sin relleno lateral a proposito: la grafica y el mapa miden lo mismo
+   abiertos aqui dentro que cuando colgaban sueltos del subpanel. */
+.erario-pleg-cuerpo { padding: 20px 0 0; }
+.erario-pleg-cuerpo[hidden] { display: none; }
+.erario-pleg-cuerpo > .erario-bloque-sub { margin-bottom: 16px; }
+
 /* --- Las cuatro etapas --- */
 .circuito-grid {
   display: grid;
@@ -10492,6 +10546,10 @@ nav.tabbar button:focus-visible,
   .ec-head { flex-direction: column; }
   .ec-dep { text-align: left; }
   .erario-bloque-head h3 { font-size: 19px; }
+  .erario-pleg-cab { gap: 10px; padding: 13px 14px; align-items: flex-start; }
+  .erario-pleg-tit { font-size: 19px; }
+  .erario-pleg-n { width: 2rem; height: 2rem; font-size: 0.85rem; }
+  .erario-pleg-mas { align-self: center; }
 }
 
 

@@ -261,23 +261,45 @@
         </div>
 
         <!-- DE DONDE SALE -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>1 &middot; De d&oacute;nde sale</h3>
+        <div class="erario-bloque erario-pleg" id="eb-ingresos">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-ingresos"
+                    onclick="window.AuditEngine.erarioPlegToggle('ingresos')">
+              <span class="erario-pleg-n" aria-hidden="true">1</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">De d&oacute;nde sale</span>
+                <span class="erario-pleg-av">El origen de cada peso que la Federaci&oacute;n tiene autorizado cobrar en 2026, rengl&oacute;n por rengl&oacute;n.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-ingresos" hidden>
             <p class="erario-bloque-sub">
               <span id="ingresosConteo">Los or&iacute;genes</span> que componen el ingreso federal de 2026, tal como los enumera el Art&iacute;culo 1&ordm; de la Ley de Ingresos.
             </p>
+            <div class="erario-mandos" id="ingresosMandos"></div>
+            <div class="flujo-chart" id="ingresosChart" role="list"></div>
+            <div class="flujo-detalle" id="ingresosDetalle"></div>
+            <div class="erario-ceros" id="ingresosCeros"></div>
           </div>
-          <div class="erario-mandos" id="ingresosMandos"></div>
-          <div class="flujo-chart" id="ingresosChart" role="list"></div>
-          <div class="flujo-detalle" id="ingresosDetalle"></div>
-          <div class="erario-ceros" id="ingresosCeros"></div>
         </div>
 
         <!-- EN QUE SE VA -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>2 &middot; En qu&eacute; se va</h3>
+        <div class="erario-bloque erario-pleg" id="eb-egresos">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-egresos"
+                    onclick="window.AuditEngine.erarioPlegToggle('egresos')">
+              <span class="erario-pleg-n" aria-hidden="true">2</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">En qu&eacute; se va</span>
+                <span class="erario-pleg-av">El gasto aprobado, partido entre lo que se decide cada a&ntilde;o y lo que ya se debe.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-egresos" hidden>
             <p class="erario-bloque-sub">
               El gasto se parte en dos mundos. El <b>programable</b> se decide cada a&ntilde;o y compra
               cosas: pensiones, escuelas, hospitales, carreteras. El <b>no programable</b> no se
@@ -290,23 +312,32 @@
               diferencia de 8.8 millones es redondeo de la fuente, no un faltante. La cifra de
               portada &mdash;$10.19 billones&mdash; es la del decreto, al peso.
             </p>
+            <div class="erario-mandos" id="egresosMandos"></div>
+            <div class="flujo-chart" id="egresosChart" role="list"></div>
+            <div class="flujo-detalle" id="egresosDetalle"></div>
           </div>
-          <div class="erario-mandos" id="egresosMandos"></div>
-          <div class="flujo-chart" id="egresosChart" role="list"></div>
-          <div class="flujo-detalle" id="egresosDetalle"></div>
         </div>
 
         <!-- A DONDE BAJA -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>3 &middot; A d&oacute;nde baja</h3>
+        <div class="erario-bloque erario-pleg" id="eb-mapa">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-mapa"
+                    onclick="window.AuditEngine.erarioPlegToggle('mapa')">
+              <span class="erario-pleg-n" aria-hidden="true">3</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">A d&oacute;nde baja</span>
+                <span class="erario-pleg-av">El tramo del gasto que viaja a las 32 entidades y a m&aacute;s de 2,400 municipios, visto sobre el territorio.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-mapa" hidden>
             <p class="erario-bloque-sub">
               De ese gasto, <b class="gold">$2.81 billones</b> no se quedan en la Federaci&oacute;n: viajan a
               las 32 entidades y a m&aacute;s de 2,400 municipios. El mapa muestra c&oacute;mo se reparte.
               Cambie de lente para ver el mismo territorio bajo otra pregunta.
             </p>
-          </div>
-        </div>
 
 <!-- Lentes de Fiscalización y Controles del Mapa -->
       <div class="audit-lens-bar">
@@ -365,6 +396,8 @@
             <div id="bottomRankingsContainer"></div>
           </div>
         </div>
+        </div>
+          </div>
         </div>
 
         <!-- PUNTOS CIEGOS -->

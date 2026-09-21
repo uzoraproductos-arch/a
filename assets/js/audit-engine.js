@@ -3755,6 +3755,55 @@
     renderCiegos();
   }
 
+  /* ====================================================================
+     LOS TRES CAPITULOS PLEGABLES DE LA 1.1
+
+     «De donde sale», «En que se va» y «A donde baja» se desplegaban los
+     tres a la vez, de modo que entre el encabezado de la subpestana y el
+     ultimo punto ciego mediaban varias pantallas. Ahora cada capitulo
+     anuncia su nombre y espera el clic.
+
+     Se pliegan por separado, no en acordeon: el origen y el destino del
+     dinero se leen comparandolos, y cerrar uno para ver el otro seria
+     quitarle al lector justo la operacion que la subpestana propone.
+
+     Y aqui el cuerpo se oculta, no se repinta. Dentro viven un mapa de
+     Leaflet y dos simuladores que nacen en ceros y suben cuando alguien
+     pulsa «Contabilizar»: repintarlos al plegar el capitulo le borraria
+     al lector la cuenta que acaba de mandar hacer.
+     ==================================================================== */
+  function erarioPlegToggle(clave) {
+    const bloque = document.getElementById('eb-' + clave);
+    const cuerpo = document.getElementById('eb-cuerpo-' + clave);
+    if (!bloque || !cuerpo) return;
+
+    const abrir = cuerpo.hidden;
+    cuerpo.hidden = !abrir;
+    bloque.classList.toggle('abierto', abrir);
+
+    const boton = bloque.querySelector('.erario-pleg-cab');
+    if (boton) {
+      boton.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      const mas = boton.querySelector('.erario-pleg-mas');
+      if (mas) mas.textContent = abrir ? '\u2212' : '+';
+      /* Al cerrar un capitulo largo la cabecera puede quedar fuera de
+         cuadro; «nearest» no mueve nada si ya se ve. */
+      boton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    /* Leaflet mide su contenedor al construirse, y el mapa nace dentro de
+       un cuerpo oculto: cree tener cero pixeles de alto hasta que se le
+       pide volver a medir. El cartograma se dibuja con el mismo retraso
+       por la misma razon. */
+    if (abrir && clave === 'mapa') {
+      if (state.activeView === 'cartogram') {
+        renderCartogram();
+      } else if (state.leafletMap) {
+        setTimeout(() => state.leafletMap.invalidateSize(), 60);
+      }
+    }
+  }
+
   function renderTerritorioErario() {
     renderPisos();
     renderFederalizado();
@@ -22121,6 +22170,7 @@
     toggleTheme: toggleTheme,
     aplicarAutolink: aplicarAutolink,
     selectCircuitoEtapa: selectCircuitoEtapa,
+    erarioPlegToggle: erarioPlegToggle,
     selectFlujoItem: selectFlujoItem,
     closeFlujoFicha: closeFlujoFicha,
     selectMunicipio: selectMunicipio,
