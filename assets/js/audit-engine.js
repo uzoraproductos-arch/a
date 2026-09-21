@@ -1836,6 +1836,7 @@
       renderPoliticosMandatarios();
     } else if (tabKey === 'verificador') {
       renderFactCheckModule();
+      initInspectorExplorador();
     } else if (tabKey === 'faq') {
       renderCasillasFaq();
       renderGlossary();
@@ -17236,6 +17237,497 @@
   let factCheckAnimTimer = null;
   let factCheckProgressStep = 0;
 
+  /* Copiado en texto plano, compartido por el expediente y el dictamen. */
+  function copiarTextoPlano(texto, aviso) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto)
+        .then(() => alert('✓ ' + aviso))
+        .catch(() => alert('No se pudo copiar automáticamente. Puede seleccionar el texto en pantalla.'));
+    } else {
+      alert('✓ ' + aviso);
+    }
+  }
+
+  /* ====================================================================
+     MODO INSPECTOR · EXPLORADOR DE LOS TRES NIVELES DE GOBIERNO
+
+     El objetivo de esta pestana es la curiosidad: que cualquiera pueda
+     escoger una oficina publica y verle las cuentas sin saber de
+     contabilidad. Por eso hay un solo numero al frente, el circulo de
+     salud financiera, y debajo los tres ejes que lo forman, con su
+     formula a la vista.
+
+     IMPORTANTE, Y SE DICE EN PANTALLA: el indice es una construccion
+     nuestra a partir de datos oficiales, no una calificacion crediticia
+     ni un dictamen de la ASF. Los insumos no se estiman: salen de la
+     base (Ramo 28 y 33, recaudacion propia, deuda, monto observado) y
+     cada expediente enseña de donde viene cada uno.
+     ==================================================================== */
+
+  /* Pesos del indice. Se declaran aqui y se imprimen en pantalla para
+     que nadie tenga que confiar a ciegas. */
+  const INSP_PESOS = { autonomia: 40, observado: 35, holgura: 25 };
+
+  let inspNivel = 'federal';
+  let inspFiltro = '';
+  let inspSel = null;          // { nivel, id }
+  let inspAnimFrame = null;
+
+  function inspPct(x) { return Math.max(0, Math.min(100, x)); }
+
+  /* --- Universo de entes auditables, armado desde la base --- */
+  function inspEntes(nivel) {
+    const E = DB.estados || [];
+    if (nivel === 'federal') {
+      return Object.keys(FACTCHECK_KNOWLEDGE_BASE.dependencias).map(k => {
+        const d = FACTCHECK_KNOWLEDGE_BASE.dependencias[k];
+        return { nivel: 'federal', id: k, nombre: d.nombre, icono: d.icono,
+                 sub: d.ramo, buscar: (d.nombre + ' ' + d.ramo).toLowerCase(), dep: d };
+      });
+    }
+    if (nivel === 'estatal') {
+      return E.map(e => ({ nivel: 'estatal', id: e.abbr, nombre: e.name, icono: '🗺️',
+        sub: 'Gobierno de ' + e.name + ' · ' + e.partido + ' · ' + e.gobernador,
+        buscar: (e.name + ' ' + e.abbr + ' ' + e.gobernador + ' ' + e.partido + ' ' + e.capital).toLowerCase(), est: e }));
+    }
+    const out = [];
+    E.forEach(e => (e.municipios || []).forEach((m, i) => {
+      out.push({ nivel: 'municipal', id: e.abbr + '::' + i, nombre: m.nombre, icono: '🏙️',
+        sub: e.name + ' · ' + m.partido + ' · ' + m.alcalde,
+        buscar: (m.nombre + ' ' + e.name + ' ' + m.alcalde + ' ' + m.partido).toLowerCase(), mun: m, est: e });
+    }));
+    return out;
+  }
+
+  function inspTotalEntes() {
+    return inspEntes('federal').length + inspEntes('estatal').length + inspEntes('municipal').length;
+  }
+
+  function inspBuscarEnte(nivel, id) {
+    return inspEntes(nivel).find(x => x.id === id) || null;
+  }
+
+  /* --- Los tres ejes del indice, con su insumo y su explicacion --- */
+  /* Cada eje devuelve: valor 0-100, el dato crudo y como se leyo. Si un
+     insumo falta, el eje lo declara en lugar de suponerlo. */
+  function inspEjes(ente) {
+    if (ente.nivel === 'estatal') {
+      const e = ente.est;
+      const obsPct = e.gasto > 0 ? (e.asfMontoObservado / e.gasto) * 100 : 0;
+      const deudaPct = e.gasto > 0 ? (e.deuda / e.gasto) * 100 : 0;
+      return [
+        { k: 'autonomia', et: 'Autonomía financiera', ico: '🪙', v: inspPct(100 - e.dep),
+          crudo: e.dep.toFixed(1) + '% de dependencia federal',
+          expl: 'De cada 100 pesos que gasta, ' + e.dep.toFixed(1) + ' llegan de la Federación por Ramo 28, Ramo 33 y convenios. ' +
+                'El eje mide lo contrario: lo que el estado recauda por su cuenta.' },
+        { k: 'observado', et: 'Limpieza en la cuenta', ico: '⚠️', v: inspPct(100 - obsPct * 20),
+          crudo: simMdp(e.asfMontoObservado) + ' observados en ' + e.asfAuditorias + ' auditorías',
+          expl: 'Lo observado por la ASF equivale al ' + obsPct.toFixed(2) + '% de su gasto. ' +
+                'Observado no es robado: es dinero cuyo destino no quedó acreditado y que hay que aclarar.' },
+        { k: 'holgura', et: 'Holgura frente a la deuda', ico: '⚖️', v: inspPct(100 - deudaPct * 2),
+          crudo: simMdp(e.deuda) + ' de deuda · semáforo ' + e.semaforoDeuda,
+          expl: 'Su deuda equivale al ' + deudaPct.toFixed(1) + '% de un año de gasto. ' +
+                'El semáforo es el del Sistema de Alertas de la SHCP, no nuestro.' }
+      ];
+    }
+    if (ente.nivel === 'municipal') {
+      const m = ente.mun;
+      const obsPct = m.presupuestoTotal > 0 ? (m.observacionesASF / m.presupuestoTotal) * 100 : 0;
+      const predialPct = m.presupuestoTotal > 0 ? (m.predial / m.presupuestoTotal) * 100 : 0;
+      return [
+        { k: 'autonomia', et: 'Autonomía financiera', ico: '🪙', v: inspPct(100 - m.dependencia),
+          crudo: m.dependencia.toFixed(1) + '% de dependencia de participaciones',
+          expl: 'De cada 100 pesos de su presupuesto, ' + m.dependencia.toFixed(1) + ' bajan de la Federación y del estado ' +
+                '(FORTAMUN y FISMDF, sobre todo).' },
+        { k: 'observado', et: 'Limpieza en la cuenta', ico: '⚠️', v: inspPct(100 - obsPct * 20),
+          crudo: simMdp(m.observacionesASF) + ' observados por la ASF',
+          expl: 'Equivale al ' + obsPct.toFixed(2) + '% de su presupuesto. ' + m.estatusAuditoria },
+        { k: 'holgura', et: 'Esfuerzo recaudatorio', ico: '🏠', v: inspPct(predialPct * 4),
+          crudo: simMdp(m.predial) + ' de predial, el ' + predialPct.toFixed(1) + '% del presupuesto',
+          expl: 'El predial es el impuesto que un municipio sí controla. Cuanto más pesa, menos depende de que le manden dinero. ' +
+                'Aquí no hay dato de deuda municipal, así que este eje mide esfuerzo propio en su lugar.' }
+      ];
+    }
+    /* Federal: los insumos son los cuatro pilares del expediente, que
+       son cifras redactadas y no series numericas comparables. El
+       circulo no se calcula a la fuerza: se declara que no aplica. */
+    return null;
+  }
+
+  function inspIndice(ejes) {
+    if (!ejes) return null;
+    const p = INSP_PESOS;
+    const total = p.autonomia + p.observado + p.holgura;
+    return (ejes[0].v * p.autonomia + ejes[1].v * p.observado + ejes[2].v * p.holgura) / total;
+  }
+
+  function inspVeredicto(n) {
+    if (n >= 75) return { t: 'Salud financiera sólida', c: 'var(--emerald-bright)', ico: '🟢',
+      d: 'Se sostiene en buena medida con lo suyo y lo observado es marginal frente a su tamaño.' };
+    if (n >= 55) return { t: 'Salud financiera aceptable', c: '#8bc34a', ico: '🟢',
+      d: 'Sin focos rojos evidentes, pero con margen claro de mejora en alguno de los tres ejes.' };
+    if (n >= 40) return { t: 'Salud financiera frágil', c: 'var(--amber)', ico: '🟡',
+      d: 'Depende demasiado de lo que le transfieren, o arrastra observaciones que no ha aclarado.' };
+    if (n >= 25) return { t: 'Salud financiera comprometida', c: 'var(--orange)', ico: '🟠',
+      d: 'Dos de los tres ejes están por debajo de lo razonable. Conviene revisar su cuenta pública con calma.' };
+    return { t: 'Salud financiera crítica', c: 'var(--crimson-bright)', ico: '🔴',
+      d: 'Sobrevive de transferencias y con un volumen de observaciones alto para su tamaño.' };
+  }
+
+  /* --- El circulo: SVG generado por codigo, sin imagenes ni red --- */
+  function inspCirculoSVG(valor, color) {
+    const R = 54, C = 2 * Math.PI * R;
+    return '' +
+      '<svg class="insp-circulo" viewBox="0 0 140 140" role="img" ' +
+           'aria-label="Índice de salud financiera: ' + Math.round(valor) + ' de 100">' +
+        '<circle cx="70" cy="70" r="' + R + '" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="13"/>' +
+        '<circle id="inspAro" cx="70" cy="70" r="' + R + '" fill="none" stroke="' + color + '" stroke-width="13" ' +
+          'stroke-linecap="round" transform="rotate(-90 70 70)" ' +
+          'stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + C.toFixed(1) + '" ' +
+          'data-circ="' + C.toFixed(1) + '" data-val="' + valor.toFixed(2) + '"/>' +
+        '<text id="inspAroNum" x="70" y="74" text-anchor="middle" class="insp-aro-num" fill="' + color + '">0</text>' +
+        '<text x="70" y="93" text-anchor="middle" class="insp-aro-pie">de 100</text>' +
+      '</svg>';
+  }
+
+  /* Animacion del aro y de sus tres barras, con la misma curva que usa
+     el resto de la plataforma. */
+  function inspAnimarCirculo(ms) {
+    const aro = document.getElementById('inspAro');
+    const num = document.getElementById('inspAroNum');
+    if (!aro) return;
+    const circ = parseFloat(aro.dataset.circ) || 1;
+    const val = parseFloat(aro.dataset.val) || 0;
+    const barras = [].slice.call(document.querySelectorAll('#inspExpediente [data-eje-w]'));
+    const cifras = [].slice.call(document.querySelectorAll('#inspExpediente [data-eje-v]'));
+    const pintar = (e) => {
+      aro.setAttribute('stroke-dashoffset', (circ * (1 - (val / 100) * e)).toFixed(2));
+      if (num) num.textContent = Math.round(val * e);
+      barras.forEach(b => { b.style.width = ((parseFloat(b.dataset.ejeW) || 0) * e).toFixed(1) + '%'; });
+      cifras.forEach(c => { c.textContent = Math.round((parseFloat(c.dataset.ejeV) || 0) * e); });
+    };
+    if (inspAnimFrame) { cancelAnimationFrame(inspAnimFrame); inspAnimFrame = null; }
+    if (simMovimientoReducido() || !ms) { pintar(1); return; }
+    const ini = performance.now();
+    const suavizar = t => (--t) * t * t + 1;
+    pintar(0);
+    (function paso(ahora) {
+      const av = Math.min(1, (ahora - ini) / ms);
+      pintar(suavizar(av));
+      if (av < 1) inspAnimFrame = requestAnimationFrame(paso);
+      else { inspAnimFrame = null; pintar(1); }
+    })(performance.now());
+  }
+
+  /* --- Barra de niveles --- */
+  function renderInspNiveles() {
+    const cont = document.getElementById('inspNiveles');
+    if (!cont) return;
+    const niveles = [
+      { k: 'federal',   et: 'Federal',   ico: '🇲🇽', d: 'Dependencias y empresas del Estado' },
+      { k: 'estatal',   et: 'Estatal',   ico: '🗺️', d: 'Las 32 entidades federativas' },
+      { k: 'municipal', et: 'Municipal', ico: '🏙️', d: 'Ayuntamientos con expediente' }
+    ];
+    cont.innerHTML = niveles.map(x => {
+      const n = inspEntes(x.k).length;
+      return '<button type="button" class="insp-nivel' + (x.k === inspNivel ? ' active' : '') + '" role="tab" ' +
+        'aria-selected="' + (x.k === inspNivel ? 'true' : 'false') + '" ' +
+        'onclick="window.AuditEngine.inspSetNivel(\'' + x.k + '\')">' +
+        '<span class="insp-nivel-ico">' + x.ico + '</span>' +
+        '<span class="insp-nivel-tx"><strong>' + x.et + '</strong><small>' + x.d + '</small></span>' +
+        '<span class="insp-nivel-n">' + n + '</span></button>';
+    }).join('');
+  }
+
+  /* --- Lista de resultados --- */
+  function renderInspResultados() {
+    const cont = document.getElementById('inspResultados');
+    if (!cont) return;
+    const q = (inspFiltro || '').trim().toLowerCase();
+    const todos = inspEntes(inspNivel);
+    const lista = q ? todos.filter(x => x.buscar.indexOf(q) > -1) : todos;
+
+    if (!lista.length) {
+      cont.innerHTML = '<p class="insp-vacio">Nadie con ese nombre en el nivel <strong>' + inspNivel + '</strong>. ' +
+        'Pruebe en otro nivel, o <button type="button" class="sim-rank-enlace" ' +
+        'onclick="window.AuditEngine.inspLimpiarBusqueda()">vea la lista completa</button>.</p>';
+      return;
+    }
+
+    cont.innerHTML =
+      '<p class="insp-conteo">' + lista.length + (lista.length === 1 ? ' ente' : ' entes') +
+        (q ? ' coinciden con «' + q + '»' : ' con expediente en este nivel') + '. Pulse uno para abrir su expediente.</p>' +
+      '<div class="insp-tarjetas">' +
+      lista.map(x => {
+        const ejes = inspEjes(x);
+        const idx = inspIndice(ejes);
+        const v = idx === null ? null : inspVeredicto(idx);
+        const abierto = inspSel && inspSel.nivel === x.nivel && inspSel.id === x.id;
+        return '<button type="button" class="insp-tarjeta' + (abierto ? ' active' : '') + '" ' +
+          'onclick="window.AuditEngine.inspAbrir(\'' + x.nivel + '\', \'' + x.id.replace(/'/g, "\\'") + '\')">' +
+          '<span class="insp-t-ico">' + x.icono + '</span>' +
+          '<span class="insp-t-tx"><strong>' + x.nombre + '</strong><small>' + x.sub + '</small></span>' +
+          (idx === null
+            ? '<span class="insp-t-idx insp-t-idx-na" title="Este nivel no lleva índice comparable">expediente</span>'
+            : '<span class="insp-t-idx" style="color:' + v.c + ';">' + Math.round(idx) + '</span>') +
+        '</button>';
+      }).join('') +
+      '</div>';
+  }
+
+  function inspSetNivel(k) {
+    inspNivel = k;
+    renderInspNiveles();
+    renderInspResultados();
+  }
+
+  function inspBuscar(v) {
+    inspFiltro = v || '';
+    renderInspResultados();
+  }
+
+  function inspLimpiarBusqueda() {
+    inspFiltro = '';
+    const el = document.getElementById('inspBuscador');
+    if (el) el.value = '';
+    renderInspResultados();
+  }
+
+  function inspAbrir(nivel, id) {
+    inspSel = { nivel: nivel, id: id };
+    renderInspResultados();
+    renderInspExpediente();
+    /* Si el ente es federal y coincide con el modulo de contraste, se
+       sincroniza: asi la afirmacion se audita contra el mismo ente. */
+    if (nivel === 'federal') {
+      const sel = document.getElementById('factcheckSelectDep');
+      if (sel && sel.value !== id) { sel.value = id; onFactCheckDependenciaChange(id); }
+    }
+    const exp = document.getElementById('inspExpediente');
+    if (exp) exp.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* --- El expediente --- */
+  function renderInspExpediente() {
+    const cont = document.getElementById('inspExpediente');
+    if (!cont) return;
+    if (!inspSel) {
+      cont.innerHTML =
+        '<div class="insp-exp-vacio">' +
+          '<span class="insp-exp-vacio-ico">🗂️</span>' +
+          '<p><strong>Ningún expediente abierto todavía.</strong> Elija arriba un ente y aquí aparecerá su círculo de salud financiera, ' +
+            'con los tres ejes que lo forman y la fórmula a la vista.</p>' +
+        '</div>';
+      return;
+    }
+    const ente = inspBuscarEnte(inspSel.nivel, inspSel.id);
+    if (!ente) { inspSel = null; renderInspExpediente(); return; }
+
+    const ejes = inspEjes(ente);
+    const idx = inspIndice(ejes);
+    cont.innerHTML = ejes
+      ? inspExpedienteConIndice(ente, ejes, idx)
+      : inspExpedienteFederal(ente);
+    autolinkAmbito(cont);
+    if (ejes) inspAnimarCirculo(1300);
+  }
+
+  function inspFilaEje(e, peso) {
+    return '<li class="insp-eje">' +
+      '<div class="insp-eje-cab">' +
+        '<span class="insp-eje-et">' + e.ico + ' ' + e.et + '</span>' +
+        '<span class="insp-eje-peso">' + peso + '% del índice</span>' +
+        '<span class="insp-eje-v"><span data-eje-v="' + e.v.toFixed(1) + '">0</span>/100</span>' +
+      '</div>' +
+      '<div class="insp-eje-riel"><span class="insp-eje-barra" data-eje-w="' + e.v.toFixed(1) + '" style="width:0%"></span></div>' +
+      '<p class="insp-eje-crudo">' + e.crudo + '</p>' +
+      '<p class="insp-eje-expl">' + e.expl + '</p>' +
+    '</li>';
+  }
+
+  function inspExpedienteConIndice(ente, ejes, idx) {
+    const v = inspVeredicto(idx);
+    const esEstado = ente.nivel === 'estatal';
+    const e = ente.est, m = ente.mun;
+
+    const identidad = esEstado
+      ? [['Quien gobierna', e.gobernador + ' (' + e.partido + ')'],
+         ['Capital', e.capital],
+         ['Población', e.pob.toFixed(2) + ' millones'],
+         ['Gasto anual', simMdp(e.gasto)],
+         ['Gasto por habitante', '$' + formatNumber(e.pc)],
+         ['Recaudación propia', simMdp(e.recaudacionPropia)]]
+      : [['Quien gobierna', m.alcalde + ' (' + m.partido + ')'],
+         ['Estado', ente.est.name],
+         ['Población', formatNumber(m.pob) + ' habitantes'],
+         ['Presupuesto', simMdp(m.presupuestoTotal)],
+         ['FORTAMUN', simMdp(m.fortamun)],
+         ['FISMDF', simMdp(m.fismdf)]];
+
+    const extra = esEstado
+      ? '<div class="insp-nota"><strong>Lo que la ASF le observa.</strong> ' + e.asfTipologia + '</div>' +
+        '<div class="insp-nota"><strong>Rasgo del estado.</strong> ' + e.destacados + '</div>'
+      : '<div class="insp-nota"><strong>Estatus de auditoría.</strong> ' + m.estatusAuditoria + '</div>' +
+        (m.proyectosAuditados && m.proyectosAuditados.length
+          ? '<div class="insp-nota"><strong>Obras bajo revisión.</strong> ' + m.proyectosAuditados.join(' · ') + '</div>'
+          : '');
+
+    return '' +
+      '<div class="insp-exp-marco">' +
+        '<header class="insp-exp-head">' +
+          '<span class="insp-exp-ico">' + ente.icono + '</span>' +
+          '<div>' +
+            '<span class="insp-exp-nivel">Expediente ' + (esEstado ? 'estatal' : 'municipal') + '</span>' +
+            '<h3 class="insp-exp-nom">' + ente.nombre + '</h3>' +
+            '<p class="insp-exp-sub">' + ente.sub + '</p>' +
+          '</div>' +
+          '<button type="button" class="insp-exp-cerrar" onclick="window.AuditEngine.inspCerrar()" title="Cerrar el expediente">✕</button>' +
+        '</header>' +
+
+        '<div class="insp-exp-cuerpo">' +
+          '<div class="insp-exp-circulo">' +
+            inspCirculoSVG(idx, v.c) +
+            '<div class="insp-vered" style="border-color:' + v.c + ';">' +
+              '<strong style="color:' + v.c + ';">' + v.ico + ' ' + v.t + '</strong>' +
+              '<span>' + v.d + '</span>' +
+            '</div>' +
+            '<button type="button" class="sim-recontar" onclick="window.AuditEngine.inspRecontar()">↺ Volver a medir</button>' +
+          '</div>' +
+
+          '<div class="insp-exp-ejes">' +
+            '<h4 class="insp-ejes-tit">Los tres ejes que forman ese número</h4>' +
+            '<ol class="insp-ejes-lista">' +
+              inspFilaEje(ejes[0], INSP_PESOS.autonomia) +
+              inspFilaEje(ejes[1], INSP_PESOS.observado) +
+              inspFilaEje(ejes[2], INSP_PESOS.holgura) +
+            '</ol>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="insp-ident">' +
+          identidad.map(p => '<div class="insp-ident-c"><span class="insp-ident-k">' + p[0] + '</span>' +
+            '<span class="insp-ident-v">' + p[1] + '</span></div>').join('') +
+        '</div>' +
+
+        extra +
+
+        '<div class="insp-formula">' +
+          '<strong>Cómo se calcula, sin caja negra.</strong> Índice = ' +
+          'autonomía × ' + INSP_PESOS.autonomia + '% + limpieza × ' + INSP_PESOS.observado + '% + ' +
+          (esEstado ? 'holgura frente a la deuda' : 'esfuerzo recaudatorio') + ' × ' + INSP_PESOS.holgura + '%. ' +
+          '<br><span class="insp-formula-det">Cómo se normaliza cada eje, con los números de arriba: ' +
+          '<b>autonomía</b> = 100 − dependencia. ' +
+          '<b>limpieza</b> = 100 − (observado ÷ ' + (esEstado ? 'gasto' : 'presupuesto') + ' × 100) × 20. ' +
+          (esEstado
+            ? '<b>holgura</b> = 100 − (deuda ÷ gasto × 100) × 2. '
+            : '<b>esfuerzo</b> = (predial ÷ presupuesto × 100) × 4. ') +
+          'Los tres se recortan al rango 0–100.</span> ' +
+          '<em>Este índice es una construcción de Auditavisión para hacer comparable lo que de otro modo son cifras sueltas. ' +
+          'No es una calificación crediticia, ni una sanción, ni un dictamen de la Auditoría Superior de la Federación.</em>' +
+        '</div>' +
+
+        '<div class="insp-acciones">' +
+          '<button type="button" class="factcheck-copy-btn" onclick="window.AuditEngine.inspCopiarFicha()">' +
+            '<span>📋</span> Copiar esta ficha</button>' +
+          '<span class="insp-fuentes">🔗 Fuentes: Presupuesto de Egresos y Cuenta Pública (SHCP) · ' +
+            'Informes de la Auditoría Superior de la Federación · Sistema de Alertas de la SHCP · ' +
+            'Plataforma Nacional de Transparencia.</span>' +
+        '</div>' +
+      '</div>';
+  }
+
+  /* El nivel federal conserva su matriz de cuatro pilares: son cifras
+     redactadas, no series comparables, y forzarlas a un indice unico
+     seria inventar una equivalencia que no existe. */
+  function inspExpedienteFederal(ente) {
+    const d = ente.dep;
+    const pilares = [
+      ['💰', 'Ingresos y asignación', d.ingresosVal, d.ingresosDesc],
+      ['📉', 'Egresos y Cuenta Pública', d.egresosVal, d.egresosDesc],
+      ['⚠️', 'Irregularidades ASF', d.irregVal, d.irregDesc],
+      ['🔍', 'Pendientes y transparencia', d.transpVal, d.transpDesc]
+    ];
+    return '' +
+      '<div class="insp-exp-marco">' +
+        '<header class="insp-exp-head">' +
+          '<span class="insp-exp-ico">' + ente.icono + '</span>' +
+          '<div>' +
+            '<span class="insp-exp-nivel">Expediente federal</span>' +
+            '<h3 class="insp-exp-nom">' + ente.nombre + '</h3>' +
+            '<p class="insp-exp-sub">' + d.ramo + '</p>' +
+          '</div>' +
+          '<button type="button" class="insp-exp-cerrar" onclick="window.AuditEngine.inspCerrar()" title="Cerrar el expediente">✕</button>' +
+        '</header>' +
+
+        '<p class="insp-sin-indice"><strong>Aquí no verá el círculo, y es a propósito.</strong> ' +
+          'Los estados y los municipios se pueden comparar entre sí porque miden lo mismo: participaciones, deuda, predial. ' +
+          'Una empresa del Estado, un ramo administrativo y un poder autónomo no comparten esa regla, y ponerlos en la misma ' +
+          'escala daría un número con apariencia de rigor y sin sustento. En su lugar va el expediente en cuatro ejes, ' +
+          'que es lo que sí se puede afirmar con la Cuenta Pública en la mano.</p>' +
+
+        '<div class="insp-pilares">' +
+          pilares.map(p => '<div class="insp-pilar">' +
+            '<span class="insp-pilar-t">' + p[0] + ' ' + p[1] + '</span>' +
+            '<span class="insp-pilar-v">' + p[2] + '</span>' +
+            '<span class="insp-pilar-d">' + p[3] + '</span>' +
+          '</div>').join('') +
+        '</div>' +
+
+        '<div class="insp-acciones">' +
+          '<button type="button" class="factcheck-copy-btn" onclick="window.AuditEngine.inspCopiarFicha()">' +
+            '<span>📋</span> Copiar esta ficha</button>' +
+          '<span class="insp-fuentes">🔗 Fuentes: Presupuesto de Egresos y Cuenta Pública (SHCP) · ' +
+            'Informes de la Auditoría Superior de la Federación · Plataforma Nacional de Transparencia.</span>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function inspCerrar() {
+    inspSel = null;
+    renderInspResultados();
+    renderInspExpediente();
+  }
+
+  function inspRecontar() { inspAnimarCirculo(1300); }
+
+  /* Copiar la ficha en texto plano: la misma cortesia que el dictamen,
+     para que se pueda pegar en una denuncia, un hilo o un correo. */
+  function inspCopiarFicha() {
+    if (!inspSel) return;
+    const ente = inspBuscarEnte(inspSel.nivel, inspSel.id);
+    if (!ente) return;
+    const ejes = inspEjes(ente);
+    const idx = inspIndice(ejes);
+    let t = 'AUDITAVISIÓN · Modo Inspector\n' + ente.nombre + '\n' + ente.sub + '\n\n';
+    if (ejes) {
+      const v = inspVeredicto(idx);
+      t += 'Índice de salud financiera: ' + Math.round(idx) + '/100 — ' + v.t + '\n' + v.d + '\n\n';
+      ejes.forEach((e, i) => {
+        const peso = [INSP_PESOS.autonomia, INSP_PESOS.observado, INSP_PESOS.holgura][i];
+        t += '• ' + e.et + ' (' + peso + '%): ' + Math.round(e.v) + '/100 — ' + e.crudo + '\n';
+      });
+      t += '\nEl índice es una construcción de Auditavisión a partir de datos oficiales. ' +
+           'No es una calificación crediticia ni un dictamen de la ASF.\n';
+    } else {
+      const d = ente.dep;
+      t += 'Expediente federal (sin índice comparable).\n' +
+           '• Ingresos: ' + d.ingresosVal + '\n' +
+           '• Egresos: ' + d.egresosVal + '\n' +
+           '• Irregularidades ASF: ' + d.irregVal + '\n' +
+           '• Pendientes: ' + d.transpVal + '\n';
+    }
+    t += '\nFuentes: PEF y Cuenta Pública (SHCP), informes de la ASF, Sistema de Alertas de la SHCP y PNT.';
+    copiarTextoPlano(t, 'Ficha del expediente copiada.');
+  }
+
+  function initInspectorExplorador() {
+    const tot = document.getElementById('inspTotalEntes');
+    if (tot) tot.textContent = inspTotalEntes();
+    renderInspNiveles();
+    renderInspResultados();
+    renderInspExpediente();
+  }
+
   function initFactCheckModule() {
     renderFactCheckPresets();
     setupFactCheckDropzone();
@@ -19867,6 +20359,13 @@
     simVerSector: simVerSector,
     setSimParte: setSimParte,
     simRecontar: simRecontar,
+    inspSetNivel: inspSetNivel,
+    inspBuscar: inspBuscar,
+    inspLimpiarBusqueda: inspLimpiarBusqueda,
+    inspAbrir: inspAbrir,
+    inspCerrar: inspCerrar,
+    inspRecontar: inspRecontar,
+    inspCopiarFicha: inspCopiarFicha,
     simRankEvaluar: simRankEvaluar,
     simRankReiniciar: simRankReiniciar,
     simRankToggleHover: simRankToggleHover,

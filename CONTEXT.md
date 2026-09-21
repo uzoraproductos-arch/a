@@ -588,6 +588,28 @@ de los 32 circuitos.
 - Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
 - **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
 
+### Hecho (pestaña 6: Modo Inspector potenciado)
+- **Objetivo declarado arriba de todo**, en tres pasos: elija a quién
+  mirar, lea su círculo de salud financiera, contraste lo que se dijo.
+  Con la lista de fuentes y la regla de que nada se estima.
+- **Explorador de los tres niveles**: 8 entes federales, 32 estados y 83
+  municipios —123 expedientes— con buscador por nombre, estado,
+  municipio, partido o gobernante.
+- **Círculo de salud financiera** en SVG generado por código, animado
+  con la curva de siempre. Índice 0–100 de tres ejes con pesos
+  declarados: autonomía 40 %, limpieza en la cuenta 35 %, holgura ante
+  la deuda (o esfuerzo recaudatorio en municipios) 25 %. Las
+  normalizaciones se imprimen en pantalla; el índice se declara como
+  construcción propia, no como calificación crediticia ni dictamen ASF.
+- **El nivel federal no lleva círculo, a propósito**: sus insumos son
+  cifras redactadas y no series comparables entre una empresa del
+  Estado, un ramo y un poder autónomo. Se dice en pantalla y se
+  conserva su matriz de cuatro pilares.
+- Abrir un ente federal **sincroniza** el selector del módulo de
+  contraste, para auditar la afirmación contra el mismo ente.
+- Ficha copiable en texto plano; el módulo de afirmaciones se conserva
+  íntegro bajo un separador que lo anuncia como tercer paso.
+
 ### Hecho (nuevo orden de las subpestañas de la pestaña 2)
 - 2.1 Maquinaria Financiera · 2.2 Inversión por Sectores · **2.3 El PIB
   No Alcanza** · **2.4 Calculadora Cívica** · **2.5 Bitácora y Alertas**.

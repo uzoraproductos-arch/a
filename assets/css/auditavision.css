@@ -14080,3 +14080,287 @@ body.con-regreso { padding-bottom: 96px; }
   .sim-desg-cifras { grid-template-columns: 1fr; margin-top: 0; }
   .sim-sector-tabla { padding: 12px 11px 13px; }
 }
+
+/* ==========================================================================
+   MODO INSPECTOR (pestana 6): mision, explorador de tres niveles y
+   circulo de salud financiera. El circulo es SVG generado por codigo:
+   sin imagenes, sin peticiones de red y nitido en cualquier pantalla.
+   ========================================================================== */
+.insp-mision {
+  background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(255,255,255,0.02));
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+.insp-mision-cab { display: flex; gap: 14px; align-items: flex-start; }
+.insp-mision-ico { font-size: 30px; line-height: 1; }
+.insp-mision-tit {
+  margin: 0 0 5px; font-family: var(--font-serif);
+  font-size: 21px; color: var(--gold-bright);
+}
+.insp-mision-sub {
+  margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--text-secondary);
+}
+.insp-pasos {
+  list-style: none; margin: 16px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.insp-paso {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9px; padding: 12px 13px;
+  font-size: 13px; line-height: 1.6; color: var(--text-secondary);
+}
+.insp-paso-n {
+  flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--gold-gradient); color: #0c0f16;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 800;
+}
+.insp-mision-pie {
+  margin: 14px 0 0; padding-top: 13px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 13px; line-height: 1.65; color: var(--text-secondary);
+}
+
+/* --- Explorador --- */
+.insp-explorador {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px; padding: 18px 20px; margin-bottom: 18px;
+}
+.insp-exp-tit {
+  margin: 0 0 4px; font-family: var(--font-serif);
+  font-size: 18px; color: var(--text-main);
+}
+.insp-exp-sub { margin: 0 0 14px; font-size: 13px; color: var(--text-secondary); }
+.insp-niveles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.insp-nivel {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle);
+  border-radius: 9px; padding: 11px 13px; cursor: pointer;
+  text-align: left; color: var(--text-secondary);
+  transition: border-color .18s ease, background .18s ease;
+}
+.insp-nivel:hover { border-color: var(--border-gold); background: var(--bg-card-hover); }
+.insp-nivel.active { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+.insp-nivel-ico { font-size: 19px; }
+.insp-nivel-tx { display: flex; flex-direction: column; line-height: 1.3; flex: 1; }
+.insp-nivel-tx strong { font-size: 14px; color: var(--text-main); }
+.insp-nivel-tx small { font-size: 11px; color: var(--text-dim); }
+.insp-nivel-n {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  color: var(--gold-bright); background: rgba(201,168,76,0.12);
+  border-radius: 20px; padding: 2px 9px;
+}
+
+.insp-buscador {
+  display: flex; align-items: center; gap: 9px; margin: 14px 0 4px;
+  background: var(--bg-void); border: 1px solid var(--border-accent);
+  border-radius: 9px; padding: 3px 12px;
+}
+.insp-buscador:focus-within { border-color: var(--gold); }
+.insp-buscador-ico { font-size: 14px; opacity: .75; }
+.insp-buscador-input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text-main); font-family: var(--font-sans);
+  font-size: 14px; padding: 10px 0;
+}
+.insp-buscador-x {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-dim); font-size: 14px; padding: 4px 6px;
+}
+.insp-buscador-x:hover { color: var(--crimson-bright); }
+
+.insp-conteo {
+  margin: 12px 0 9px; font-family: var(--font-mono);
+  font-size: 11.5px; color: var(--text-dim);
+}
+.insp-tarjetas {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 9px; max-height: 340px; overflow-y: auto; padding-right: 4px;
+}
+.insp-tarjeta {
+  display: flex; align-items: center; gap: 11px;
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle);
+  border-radius: 9px; padding: 10px 13px; cursor: pointer; text-align: left;
+  transition: border-color .16s ease, transform .16s ease;
+}
+.insp-tarjeta:hover { border-color: var(--border-gold); transform: translateX(2px); }
+.insp-tarjeta.active { border-color: var(--gold); background: rgba(201,168,76,0.09); }
+.insp-t-ico { font-size: 18px; }
+.insp-t-tx { display: flex; flex-direction: column; line-height: 1.35; flex: 1; min-width: 0; }
+.insp-t-tx strong { font-size: 13.5px; color: var(--text-main); }
+.insp-t-tx small {
+  font-size: 11px; color: var(--text-dim);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.insp-t-idx {
+  font-family: var(--font-mono); font-size: 17px; font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.insp-t-idx-na { font-size: 10px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; }
+.insp-vacio { margin: 14px 0 0; font-size: 13.5px; color: var(--text-secondary); }
+
+/* --- Expediente --- */
+.insp-expediente { margin-bottom: 20px; }
+.insp-exp-vacio {
+  display: flex; gap: 14px; align-items: center;
+  border: 1px dashed var(--border-accent); border-radius: 11px;
+  padding: 20px 22px; color: var(--text-secondary); font-size: 13.5px; line-height: 1.65;
+}
+.insp-exp-vacio-ico { font-size: 30px; }
+.insp-exp-vacio p { margin: 0; }
+.insp-exp-marco {
+  background: var(--bg-card); border: 1px solid var(--border-gold);
+  border-radius: 12px; padding: 20px 22px;
+}
+.insp-exp-head { display: flex; gap: 14px; align-items: flex-start; }
+.insp-exp-ico { font-size: 28px; }
+.insp-exp-head > div { flex: 1; }
+.insp-exp-nivel {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.4px;
+  text-transform: uppercase; color: var(--gold-bright);
+}
+.insp-exp-nom {
+  margin: 2px 0 3px; font-family: var(--font-serif);
+  font-size: 22px; color: var(--text-main);
+}
+.insp-exp-sub { margin: 0; font-size: 12.5px; color: var(--text-secondary); }
+.insp-exp-cerrar {
+  background: none; border: 1px solid var(--border-subtle); border-radius: 6px;
+  color: var(--text-dim); cursor: pointer; padding: 4px 9px; font-size: 13px;
+}
+.insp-exp-cerrar:hover { border-color: var(--crimson-bright); color: var(--crimson-bright); }
+
+.insp-exp-cuerpo {
+  display: grid; grid-template-columns: 210px 1fr; gap: 22px;
+  margin-top: 16px; align-items: start;
+}
+.insp-exp-circulo { display: flex; flex-direction: column; align-items: center; gap: 11px; }
+.insp-circulo { width: 100%; max-width: 168px; height: auto; display: block; }
+.insp-aro-num {
+  font-family: var(--font-mono); font-size: 34px; font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.insp-aro-pie { font-family: var(--font-mono); font-size: 10px; fill: var(--text-dim); }
+.insp-vered {
+  border: 1px solid; border-radius: 9px; padding: 10px 12px;
+  background: rgba(255,255,255,0.02); text-align: center;
+}
+.insp-vered strong { display: block; font-size: 13.5px; margin-bottom: 4px; }
+.insp-vered span { font-size: 12px; line-height: 1.55; color: var(--text-secondary); }
+
+.insp-ejes-tit {
+  margin: 0 0 11px; font-family: var(--font-serif);
+  font-size: 15px; color: var(--gold-bright);
+}
+.insp-ejes-lista { list-style: none; margin: 0; padding: 0; }
+.insp-eje {
+  padding: 11px 0; border-top: 1px solid var(--border-subtle);
+}
+.insp-eje:first-child { border-top: none; padding-top: 0; }
+.insp-eje-cab { display: flex; align-items: baseline; gap: 9px; }
+.insp-eje-et { font-size: 13.5px; font-weight: 600; color: var(--text-main); flex: 1; }
+.insp-eje-peso {
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-dim);
+  background: rgba(255,255,255,0.05); border-radius: 4px; padding: 2px 7px;
+}
+.insp-eje-v {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  color: var(--gold-bright); font-variant-numeric: tabular-nums;
+}
+.insp-eje-riel {
+  height: 7px; border-radius: 4px; background: rgba(255,255,255,0.06);
+  overflow: hidden; margin: 7px 0 6px;
+}
+.insp-eje-barra {
+  display: block; height: 100%; border-radius: 4px;
+  background: var(--gold-gradient);
+}
+.insp-eje-crudo {
+  margin: 0 0 3px; font-family: var(--font-mono);
+  font-size: 11.5px; color: var(--cyan);
+}
+.insp-eje-expl { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
+
+.insp-ident {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 9px; margin-top: 18px;
+}
+.insp-ident-c {
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle);
+  border-radius: 8px; padding: 9px 11px; display: flex; flex-direction: column; gap: 3px;
+}
+.insp-ident-k {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .8px;
+  text-transform: uppercase; color: var(--text-dim);
+}
+.insp-ident-v { font-size: 13px; color: var(--text-main); font-weight: 600; }
+
+.insp-nota {
+  margin-top: 11px; padding: 11px 13px; border-radius: 8px;
+  background: rgba(255,255,255,0.03); border-left: 3px solid var(--border-accent);
+  font-size: 13px; line-height: 1.65; color: var(--text-secondary);
+}
+.insp-formula {
+  margin-top: 16px; padding: 13px 15px; border-radius: 9px;
+  background: rgba(78,205,196,0.06); border: 1px solid rgba(78,205,196,0.2);
+  font-size: 12.5px; line-height: 1.7; color: var(--text-secondary);
+}
+.insp-formula-det {
+  display: block; margin-top: 6px; font-family: var(--font-mono);
+  font-size: 11.5px; line-height: 1.7; color: var(--text-dim);
+}
+.insp-formula-det b { color: var(--cyan); font-weight: 600; }
+
+.insp-sin-indice {
+  margin: 16px 0 0; padding: 13px 15px; border-radius: 9px;
+  background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.22);
+  font-size: 13px; line-height: 1.7; color: var(--text-secondary);
+}
+.insp-pilares {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px; margin-top: 14px;
+}
+.insp-pilar {
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle);
+  border-radius: 9px; padding: 12px 13px; display: flex; flex-direction: column; gap: 5px;
+}
+.insp-pilar-t { font-size: 12.5px; font-weight: 700; color: var(--text-main); }
+.insp-pilar-v {
+  font-family: var(--font-mono); font-size: 13px; color: var(--gold-bright); line-height: 1.45;
+}
+.insp-pilar-d { font-size: 12px; line-height: 1.6; color: var(--text-secondary); }
+
+.insp-acciones {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle);
+}
+.insp-fuentes { font-size: 11.5px; line-height: 1.6; color: var(--text-dim); flex: 1; min-width: 220px; }
+
+/* Separador que anuncia el tercer paso, el contraste de afirmaciones. */
+.insp-sep {
+  display: flex; gap: 13px; align-items: flex-start;
+  margin: 26px 0 16px; padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+.insp-sep-n {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--gold-gradient); color: #0c0f16;
+  font-family: var(--font-mono); font-size: 14px; font-weight: 800;
+}
+.insp-sep-tit {
+  margin: 0 0 3px; font-family: var(--font-serif);
+  font-size: 19px; color: var(--text-main);
+}
+.insp-sep-sub { margin: 0; font-size: 13px; line-height: 1.6; color: var(--text-secondary); }
+
+@media (max-width: 900px) {
+  .insp-pasos, .insp-niveles { grid-template-columns: 1fr; }
+  .insp-exp-cuerpo { grid-template-columns: 1fr; }
+  .insp-exp-circulo { max-width: 260px; margin: 0 auto; }
+}

@@ -4540,6 +4540,73 @@
         </p>
       </div>
 
+      <!-- ====================================================================
+           BLOQUE 0: PARA QUE SIRVE ESTA PESTANA
+           El objetivo declarado, en tres pasos, antes de cualquier control.
+           ==================================================================== -->
+      <section class="insp-mision">
+        <div class="insp-mision-cab">
+          <span class="insp-mision-ico">🔎</span>
+          <div>
+            <h3 class="insp-mision-tit">Curiosee las finanzas de cualquier oficina pública</h3>
+            <p class="insp-mision-sub">Aquí usted elige la dependencia que le dé curiosidad —federal, estatal o municipal—, nosotros abrimos su expediente con datos oficiales y le decimos, en una sola figura, cómo anda de salud financiera. Después, si alguien afirmó algo sobre ella, lo contrastamos.</p>
+          </div>
+        </div>
+        <ol class="insp-pasos">
+          <li class="insp-paso">
+            <span class="insp-paso-n">1</span>
+            <div><strong>Elija a quién mirar.</strong> Empiece por el nivel de gobierno y escriba lo que busque. Hay <span id="inspTotalEntes">—</span> entes con expediente abierto.</div>
+          </li>
+          <li class="insp-paso">
+            <span class="insp-paso-n">2</span>
+            <div><strong>Lea su círculo de salud financiera.</strong> Un solo número, de 0 a 100, con los tres ejes que lo forman a la vista y la fórmula declarada. Nada es una caja negra.</div>
+          </li>
+          <li class="insp-paso">
+            <span class="insp-paso-n">3</span>
+            <div><strong>Contraste lo que se dijo.</strong> Pegue un titular, un enlace o un documento y compárelo contra el expediente. Al final, copie el dictamen y compártalo.</div>
+          </li>
+        </ol>
+        <p class="insp-mision-pie"><strong>De dónde sale todo esto.</strong> Presupuesto de Egresos y Cuenta Pública de la SHCP, informes y pliegos de la Auditoría Superior de la Federación, y la Plataforma Nacional de Transparencia. Ninguna cifra es estimación nuestra: la que no tiene fuente pública, se marca como pendiente y no se inventa.</p>
+      </section>
+
+      <!-- ====================================================================
+           BLOQUE 1: EXPLORADOR DE LOS TRES NIVELES DE GOBIERNO
+           ==================================================================== -->
+      <section class="insp-explorador" id="inspExplorador">
+        <div class="insp-exp-cab">
+          <h3 class="insp-exp-tit">🏛️ ¿A quién le quiere ver las cuentas?</h3>
+          <p class="insp-exp-sub">Filtre por nivel y escriba un nombre. Puede buscar por dependencia, estado, municipio o por quien lo gobierna.</p>
+        </div>
+
+        <div class="insp-niveles" id="inspNiveles" role="tablist"></div>
+
+        <div class="insp-buscador">
+          <span class="insp-buscador-ico">🔍</span>
+          <input type="search" id="inspBuscador" class="insp-buscador-input" autocomplete="off"
+                 placeholder="Escriba un nombre: Pemex, Jalisco, Monterrey, un gobernador…"
+                 oninput="window.AuditEngine.inspBuscar(this.value)">
+          <button type="button" class="insp-buscador-x" onclick="window.AuditEngine.inspLimpiarBusqueda()" title="Borrar la búsqueda">✕</button>
+        </div>
+
+        <div class="insp-resultados" id="inspResultados"></div>
+      </section>
+
+      <!-- ====================================================================
+           BLOQUE 2: EXPEDIENTE Y CIRCULO DE SALUD FINANCIERA
+           ==================================================================== -->
+      <section id="inspExpediente" class="insp-expediente"></section>
+
+      <!-- ====================================================================
+           BLOQUE 3: CONTRASTE DE AFIRMACIONES (el modulo original)
+           ==================================================================== -->
+      <div class="insp-sep">
+        <span class="insp-sep-n">3</span>
+        <div>
+          <h3 class="insp-sep-tit">Y ahora, ¿alguien dijo algo sobre esto?</h3>
+          <p class="insp-sep-sub">Con el expediente abierto, pase a contrastar una afirmación concreta: un titular, un comunicado o una declaración, frente a lo que dicen las cuentas.</p>
+        </div>
+      </div>
+
       <!-- Barra de Control del Simulador & Auditoría en Vivo -->
       <div class="evaluacion-controls-bar" id="factcheckControlsBar" style="margin-bottom:20px;">
         <div class="eval-info-group">
