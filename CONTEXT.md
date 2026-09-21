@@ -588,6 +588,22 @@ de los 32 circuitos.
 - Las cifras animadas llevan `font-variant-numeric: tabular-nums` para que el renglon no baile mientras suben los digitos.
 - **Reacomodo:** el simulador comparativo de las 12 obras baja de la parte B a la parte A, entre la comparativa del filtro y las fichas. La parte B queda terminando en el simulador sexenal. Queda una sola fila de criterios en A, rotulada «Ordenar y medir por», que gobierna las dos listas.
 
+### Hecho (pastillas de mandato y arranque en ceros)
+- **Defecto:** con un mandato de una sola obra (Salinas, Fox) la lista
+  comparativa se escondía tras un aviso y parecía que el botón no
+  respondía. Ahora se dibuja el renglón único, medido contra la obra
+  mayor del universo, que es la única escala con sentido cuando no hay
+  con quién comparar dentro del filtro.
+- **Segunda causa, y es dato real:** Enciclomedia y la Refinería
+  Bicentenario tienen `perdida_anual_mdp: 0`. Bajo el criterio por
+  omisión su barra mide cero. Se añade un aviso que lo dice —cero de
+  registro, no hueco— y ofrece el criterio de costo real.
+- **Arranque en ceros.** Las tarjetas del filtro y la lista ya no cuentan
+  solas: nacen en cero y sólo se llenan al pulsar «↺ Contar de nuevo» o
+  «Evaluar». El arranque por cursor queda apagado por omisión.
+- Con `prefers-reduced-motion` las cifras se entregan puestas, porque
+  para esa persona la animación no es el medio de lectura.
+
 ### Hecho (bloque 2 de la 2.2: por qué 12 y no 13)
 - Nuevo bloque de texto entre el pulso del gasto y las subpestañas A/B/C,
   numerado **2**, que explica el caso **FARAC**: concesionado por Salinas

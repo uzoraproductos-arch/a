@@ -5878,6 +5878,18 @@ nav.tabbar button.active .num {
   cursor: pointer;
 }
 
+/* Aviso de valor cero legitimo en la lista comparativa. */
+.sim-rank-cero {
+  margin: 10px 0 0;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-soft, #c9d1d9);
+}
+
 /* Aclaracion de conteo (bloque 2 de la 2.2): por que 12 y no 13. */
 .sim-conteo {
   border-left: 3px solid var(--gold-bright, #d4af37);

@@ -55,7 +55,7 @@
        evaluacion, el arranque en cero y la vista del universo completo
        con lo no seleccionado atenuado. */
     simRankEvaluado: false,
-    simRankHover: true,
+    simRankHover: false,
     simRankUniverso: false,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
        sexenios arrancan en cero y crecen a su escala real al evaluar. */
@@ -15298,6 +15298,17 @@
     simAnimFrames[clave] = requestAnimationFrame(paso);
   }
 
+  /* Dejar una zona en ceros, sin animarla. Es el estado de arranque:
+     las cifras solo se llenan cuando alguien pulsa contar. */
+  function simPonerEnCeros(raiz, clave) {
+    if (!raiz) return;
+    if (simAnimFrames[clave]) { cancelAnimationFrame(simAnimFrames[clave]); delete simAnimFrames[clave]; }
+    raiz.querySelectorAll('[data-anim-v]').forEach(el => {
+      el.textContent = simFmt(0, el.dataset.animF);
+    });
+    raiz.querySelectorAll('[data-anim-w]').forEach(el => { el.style.width = '0%'; });
+  }
+
   /* Volver a contar a peticion, desde el boton de la cabecera. */
   function simRecontar() {
     simAnimarZona(document.getElementById('simDesgloseCab'), 'cab', 1100);
@@ -15340,18 +15351,30 @@
     const dentro = {};
     delFiltro.forEach(o => { dentro[o.id] = true; });
 
-    if (obras.length < 2) {
+    /* Con una sola obra la lista NO desaparece: antes se escondia y
+       parecia que el boton del mandato no respondia. Se dibuja el unico
+       renglon y se mide contra la obra mayor del universo, que es la
+       unica escala que dice algo cuando no hay con quien comparar
+       dentro del filtro. */
+    if (obras.length === 0) {
       cont.innerHTML =
-        '<p class="sim-mesa-aviso">Con estos filtros queda <strong>' +
-          (obras.length === 1 ? 'una sola obra' : 'ninguna obra') + '</strong>, así que no hay nada que comparar todavía. ' +
+        '<p class="sim-mesa-aviso">Con estos filtros no queda <strong>ninguna obra</strong>. ' +
           'Quite uno de los dos filtros, o ' +
           '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.simRankUniverso(true)">' +
           'vea las ' + sim.obras.length + ' obras en contexto</button>.</p>';
       return;
     }
+    const sola = obras.length === 1;
 
     const rotulo = orden.id === 'cronologia' ? 'costo real, en orden cronológico' : orden.et.toLowerCase();
-    const maximo = Math.max.apply(null, obras.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
+    /* Hay obras cuyo valor es cero de verdad bajo el criterio vigente:
+       Enciclomedia y la Refineria Bicentenario no registran perdida
+       anual porque no operan. Con el filtro en una de ellas la lista
+       salia en blanco y parecia averiada. Se dice con todas sus letras
+       y se ofrece el criterio que si tiene cifra. */
+    const todoCero = obras.every(o => !simCompValor(o, orden.id));
+    const escalaSobre = sola ? sim.obras : obras;
+    const maximo = Math.max.apply(null, escalaSobre.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
     const fmtOrden = orden.id === 'sobrecosto' ? 'pctS' : 'mdp';
     const marcadas = obras.filter(o => dentro[o.id]).length;
 
@@ -15359,17 +15382,23 @@
       '<button type="button" class="sim-pill-btn' + (o.id === orden.id ? ' active' : '') + '" ' +
         'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('');
 
-    const titulo = universo
-      ? 'Las ' + obras.length + ' obras, comparadas por ' + rotulo
-      : 'Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo;
+    const titulo = sola
+      ? 'La única obra del filtro, medida por ' + rotulo
+      : (universo
+          ? 'Las ' + obras.length + ' obras, comparadas por ' + rotulo
+          : 'Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo);
 
     const subtitulo = universo
       ? (hayFiltro
           ? 'Está viendo el universo completo. Su selección señala <strong>' + marcadas + '</strong> de las ' +
             obras.length + ' obras; las demás siguen presentes, atenuadas, para no perder la escala de comparación.'
           : 'Está viendo el universo completo. Elija una industria o un mandato para que la lista resalte las obras que le tocan.')
-      : 'La barra mide el tamaño de la cifra frente a la mayor de esta lista. ' +
-        'Pulse cualquier renglón para ir a su ficha, aquí abajo.';
+      : (sola
+          ? 'El filtro dejó una sola obra, así que no hay con quién compararla dentro de la lista: ' +
+            'la barra la mide contra la obra mayor de las ' + sim.obras.length + ' del universo. ' +
+            'Si quiere verla junto a las demás, encienda «Ver las ' + sim.obras.length + ' en contexto».'
+          : 'La barra mide el tamaño de la cifra frente a la mayor de esta lista. ' +
+            'Pulse cualquier renglón para ir a su ficha, aquí abajo.');
 
     cont.innerHTML =
       '<section class="sim-rank sim-rank-filtro">' +
@@ -15437,14 +15466,25 @@
           }).join('') +
         '</ol>' +
 
+        (todoCero
+          ? '<p class="sim-rank-cero"><strong>Sin cifra bajo este criterio, y no por falta de datos.</strong> ' +
+            (sola ? 'Esta obra no registra ' : 'Ninguna de estas obras registra ') + rotulo +
+            ': el registro es cero, no un hueco. Enciclomedia se extinguió y la Refinería Bicentenario nunca operó, ' +
+            'así que no hay pérdida de operación que contar. Lo que sí costaron se ve ' +
+            '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.setSimuladorOrden(\'inversion\')">' +
+            'midiendo por costo real</button>.</p>'
+          : '') +
+
         '<p class="sim-mesa-aviso"><strong>Cómo leer la barra.</strong> Mide el tamaño de la cifra frente a la mayor de la lista, no su dirección. ' +
           'En cronología el orden es por periodo sexenal y la barra sigue midiendo el costo real, ' +
           'para que la escala no cambie de significado a media lista.</p>' +
       '</section>';
 
-    /* Cada vez que la lista se rehace vuelve a contar desde cero: se ve
-       la barra crecer hasta su porcentaje en lugar de saltar ya puesta. */
-    simRankEvaluar(1200);
+    /* Arranque en reposo: las barras nacen en cero y ahi se quedan
+       hasta que alguien pulse «Evaluar» o «Contar de nuevo». Quien pidio
+       menos movimiento recibe las cifras puestas. */
+    if (simMovimientoReducido()) { simAnimarZona(cont, 'rank', 0); state.simRankEvaluado = true; }
+    else { state.simRankEvaluado = false; simPonerEnCeros(cont, 'rank'); }
   }
 
   function simRankTextoEstado(cuantas) {
@@ -15592,7 +15632,12 @@
             ' por segundo</span></div>' +
       '</div>';
 
-    simAnimarZona(cont, 'cab', 1100);
+    /* Arranque en ceros: la contabilidad no corre sola. Quien quiera la
+       cifra pulsa «Contar de nuevo», y entonces sube desde cero. A quien
+       pidio menos movimiento se le entrega el dato de una vez, porque
+       para esa persona la animacion no es el medio de lectura. */
+    if (simMovimientoReducido()) simAnimarZona(cont, 'cab', 0);
+    else simPonerEnCeros(cont, 'cab');
   }
 
   /* Las tres partes de la 2.2 son subpestanas: solo una a la vista, con
