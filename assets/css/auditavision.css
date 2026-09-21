@@ -10190,6 +10190,256 @@ nav.tabbar button:focus-visible,
 .ec-rv { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
 .ec-nota { font-size: 12px; color: var(--text-dim); line-height: 1.6; margin: 0; max-width: 80ch; }
 
+/* --- Municipios: padron completo (bloque 4 de la 1.3) ---------------------
+   El padron va en tabla y no en reja de tarjetas porque Oaxaca tiene 570
+   municipios: en tarjetas serian veinte pantallas de desplazamiento y
+   ninguna comparacion posible entre dos renglones. */
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.mun-filtros { align-items: flex-end; gap: 14px; }
+.mun-filtro { display: flex; flex-direction: column; gap: 5px; }
+
+.entidad-selector-bar input[type="search"] {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-accent);
+  border-radius: 7px;
+  padding: 8px 14px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  min-width: 230px;
+}
+
+.entidad-selector-bar input[type="search"]:focus-visible,
+.entidad-selector-bar select:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
+/* --- Resumen de la entidad --- */
+.mun-resumen {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 15px 18px;
+  margin-bottom: 14px;
+}
+
+.mre-cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin-bottom: 13px; }
+.mre-tit { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--text-main); }
+.mre-sub { font-size: 12px; color: var(--text-dim); }
+.mre-sub b { color: var(--text-secondary); }
+.mre-falta { color: var(--crimson-bright); }
+
+.mre-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 11px; }
+.mre-c { display: flex; flex-direction: column; gap: 2px; }
+.mre-c span {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.mre-c b {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  font-variant-numeric: tabular-nums;
+}
+
+.mre-dep {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 11px;
+  margin-top: 13px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+.mre-dep-lab {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.mre-dep-barra { display: block; height: 7px; background: var(--bg-void); border-radius: 4px; overflow: hidden; }
+.mre-dep-barra > span { display: block; height: 100%; background: linear-gradient(90deg, #e67e22, #e74c3c); border-radius: 4px; }
+.mre-dep-barra > span[data-anim-w] { transition: none; }
+.mre-dep-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--crimson-bright);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Tabla del padron --- */
+.mun-tabla-marco {
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 680px;
+  background: var(--bg-card);
+  scrollbar-color: var(--gold-bright) var(--bg-void);
+}
+
+/* Ancho fijo por dos razones. La primera es de lectura: con ancho
+   automatico las columnas se ensanchan mientras el contador sube, y la
+   tabla entera tiembla al contabilizar. La segunda es de maquina: cada
+   cifra nueva obligaria a recalcular el ancho de toda la tabla, y con
+   los 570 municipios de Oaxaca eso son decimas de segundo por cuadro. */
+.mun-tabla { width: 100%; border-collapse: collapse; font-size: 12.5px; table-layout: fixed; }
+.mun-tabla col.c-nom { width: 25%; }
+.mun-tabla col.c-num { width: 11.5%; }
+.mun-tabla col.c-dep { width: 17.5%; }
+
+.mun-tabla thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg-card-alt);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: right;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-accent);
+  white-space: nowrap;
+}
+.mun-tabla thead th.mf-c-nom { text-align: left; }
+.mun-tabla thead th.mf-c-dep { text-align: left; min-width: 130px; }
+
+/* Las filas fuera de la ventana de desplazamiento no se disponen hasta
+   que asoman. Sin esto, tocar una cifra obliga a recalcular las 570 de
+   Oaxaca aunque solo se vean veinticinco. */
+.mun-tabla tbody tr { content-visibility: auto; contain-intrinsic-size: auto 44px; }
+.mun-fila { border-bottom: 1px solid var(--border-subtle); }
+.mun-fila:last-child { border-bottom: 0; }
+.mun-fila[tabindex] { cursor: pointer; }
+.mun-fila[tabindex]:hover { background: var(--bg-card-alt); }
+.mun-fila[tabindex]:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: -2px; }
+.mun-fila[aria-expanded="true"] { background: var(--bg-card-alt); box-shadow: inset 3px 0 0 var(--gold-bright); }
+
+.mun-tabla th.mf-nom {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 8px 12px;
+  line-height: 1.3;
+}
+.mf-cve {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.mun-tabla td { padding: 8px 12px; }
+.mf-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.mf-fuerte { color: var(--text-main); font-weight: 600; }
+.mf-nada { color: var(--text-dim); text-align: right; }
+
+.mf-dep { display: flex; align-items: center; gap: 9px; min-width: 130px; }
+.mf-dep-barra { flex: 1; display: block; height: 6px; background: var(--bg-void); border-radius: 3px; overflow: hidden; }
+.mf-dep-barra > span { display: block; height: 100%; background: linear-gradient(90deg, #e67e22, #e74c3c); border-radius: 3px; }
+.mf-dep-barra > span[data-anim-w] { transition: none; }
+.mf-dep > i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--crimson-bright);
+  font-variant-numeric: tabular-nums;
+  min-width: 46px;
+  text-align: right;
+}
+
+/* El municipio que no rindio cuenta sigue en la lista. Se marca con
+   rayado y letra apagada: no es un cero, es un hueco. */
+.mf-sin th.mf-nom { color: var(--text-secondary); }
+.mf-sinrep {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  font-style: italic;
+  background: repeating-linear-gradient(135deg,
+    rgba(127, 140, 141, 0.07) 0 6px, transparent 6px 12px);
+}
+
+.muni-sincifra { color: var(--text-dim); font-style: italic; font-weight: 400; }
+
+/* La cifra derivada se distingue del efecto juridico: filo verde, no
+   dorado, para que se vea de un golpe que es cuenta y no precepto. */
+.fd-derivada { border-left-color: #2ecc71; }
+
+.mpf-monto {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  font-variant-numeric: tabular-nums;
+}
+.mpf-monto i { font-size: 11.5px; font-weight: 400; color: var(--text-dim); font-family: var(--font-sans); }
+
+.mre-aviso {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 86ch;
+}
+.mre-aviso b { color: var(--text-main); }
+
+.mun-fuente-nota {
+  margin: 11px 0 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 92ch;
+}
+.mun-fuente-nota b { color: var(--text-secondary); }
+
+.fd-dossier { border-left-color: var(--crimson-bright); }
+.fd-proy { display: block; margin-top: 5px; font-size: 12px; color: var(--text-dim); }
+
+@media (max-width: 720px) {
+  .mun-tabla thead th:nth-child(3),
+  .mun-tabla tbody td:nth-child(3),
+  .mun-tabla thead th:nth-child(6),
+  .mun-tabla tbody td:nth-child(6) { display: none; }
+  .mun-tabla { font-size: 11.5px; }
+  .entidad-selector-bar input[type="search"],
+  .entidad-selector-bar select { min-width: 0; width: 100%; }
+  .mun-filtro { width: 100%; }
+}
+
 /* --- Municipios --- */
 .municipios-grid {
   display: grid;

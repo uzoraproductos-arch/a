@@ -379,7 +379,7 @@
           <ul>
             <li><b>Ley de Ingresos de la Federaci&oacute;n para el Ejercicio Fiscal 2026</b>, art&iacute;culo 1. Total de ingresos: $10,193,683.7 millones de pesos.</li>
             <li><b>Presupuesto de Egresos de la Federaci&oacute;n 2026</b>, publicado en el Diario Oficial de la Federaci&oacute;n. Gasto programable $7,094,708.8 mdp y no programable $3,098,974.9 mdp.</li>
-            <li><b>Centro de Estudios de las Finanzas P&uacute;blicas de la C&aacute;mara de Diputados</b>, notas sobre gasto federalizado y decreto de PEF 2026. Ramo 28: $1,456,045.9 mdp. Ramo 33: $1,127,075.3 mdp.</li>
+            <li><b>Centro de Estudios de las Finanzas P&uacute;blicas de la C&aacute;mara de Diputados</b>, notas sobre gasto federalizado y decreto de PEF 2026. Ramo 28: $1,456,045.9 mdp. La cifra de $1,127,075.3 mdp que el an&aacute;lisis rotula como Ramo 33 comprende en realidad el Ramo 33 ($1,041,892.9) <b>m&aacute;s</b> el Ramo 25 ($85,182.4), que el Presupuesto presenta por separado.</li>
           </ul>
           <p class="ef-nota">
             Las cifras marcadas como <span class="est-chip est-derivado">derivado</span> no aparecen
@@ -521,9 +521,10 @@
             <h3>2 &middot; Lo que cobra por su cuenta</h3>
             <p class="erario-bloque-sub">
               El art&iacute;culo 115, fracci&oacute;n IV, enumera tres ingresos que el municipio percibe
-              &laquo;en todo caso&raquo;. No llevan barra porque su total nacional no vive en el Presupuesto
-              de Egresos: se reconstruye sumando las cuentas p&uacute;blicas de m&aacute;s de 2,400 municipios.
-              Cada ficha dice qu&eacute; es, con qu&eacute; fundamento y qu&eacute; efecto jur&iacute;dico produce.
+              &laquo;en todo caso&raquo;. Su total nacional no vive en el Presupuesto de Egresos: se
+              reconstruye sumando las cuentas p&uacute;blicas que los municipios rinden al INEGI, y por eso
+              va marcado como <b>derivado</b>. Cada ficha dice qu&eacute; es, con qu&eacute; fundamento, qu&eacute;
+              efecto jur&iacute;dico produce y c&oacute;mo se obtuvo la cifra.
             </p>
           </div>
           <div class="mpf-grid" id="munPropiosGrid"></div>
@@ -542,17 +543,36 @@
           <div class="erario-bloque-head">
             <h3>4 &middot; Municipio por municipio</h3>
             <p class="erario-bloque-sub">
-              Elija una entidad para ver los municipios que la base trae cargados, con su
-              presupuesto, su predial propio, sus dos fondos del Ramo 33 y qu&eacute; tan dependiente
+              Los <b>2,479 municipios</b> del cat&aacute;logo oficial del INEGI, entidad por
+              entidad, con lo que de verdad ingres&oacute; cada uno: su predial, sus
+              participaciones, sus dos fondos del Ramo&nbsp;33 y qu&eacute; tan dependiente
               resulta la suma. <span id="munEntidadRotulo"></span>
             </p>
           </div>
-          <div class="entidad-selector-bar">
-            <label for="munEntidadSelect">Entidad federativa</label>
-            <select id="munEntidadSelect" aria-label="Seleccionar entidad federativa para ver sus municipios"></select>
+          <div class="entidad-selector-bar mun-filtros">
+            <div class="mun-filtro">
+              <label for="munEntidadSelect">Entidad federativa</label>
+              <select id="munEntidadSelect" aria-label="Seleccionar entidad federativa para ver sus municipios"></select>
+            </div>
+            <div class="mun-filtro">
+              <label for="munBuscar">Buscar municipio</label>
+              <input type="search" id="munBuscar" placeholder="Escriba un nombre&hellip;" autocomplete="off"
+                     aria-label="Filtrar por nombre los municipios de la entidad">
+            </div>
+            <div class="mun-filtro">
+              <label for="munOrden">Ordenar por</label>
+              <select id="munOrden" aria-label="Criterio para ordenar los municipios">
+                <option value="nombre">Nombre (A&ndash;Z)</option>
+                <option value="ing">Ingreso total</option>
+                <option value="predial">Predial cobrado</option>
+                <option value="fortamun">FORTAMUN recibido</option>
+                <option value="fismdf">FISMDF recibido</option>
+                <option value="dep">Dependencia de transferencias</option>
+              </select>
+            </div>
           </div>
           <div class="erario-mandos" id="munEntidadMandos"></div>
-          <div class="municipios-grid" id="municipiosCircuito"></div>
+          <div id="municipiosCircuito"></div>
         </div>
 
         <!-- FUENTES -->
@@ -562,15 +582,21 @@
             <li><b>Constituci&oacute;n Pol&iacute;tica de los Estados Unidos Mexicanos</b>, art&iacute;culo 115, fracciones III y IV.</li>
             <li><b>Ley de Coordinaci&oacute;n Fiscal</b>: art&iacute;culos 2-A y 6&ordm; para participaciones municipales; 32 a 35 para el FISMDF; 36 y 37 para el FORTAMUN.</li>
             <li><b>Presupuesto de Egresos de la Federaci&oacute;n 2026</b>, Anexo 22: cifra al peso de los ocho fondos del Ramo 33.</li>
-            <li><b>Base de datos subnacional de Auditavisi&oacute;n</b>: montos por municipio, con su origen indicado en cada ficha.</li>
+            <li><b>INEGI, Estad&iacute;stica de Finanzas P&uacute;blicas Estatales y Municipales (EFIPEM)</b>,
+              conjunto de datos municipal, ejercicio 2024, cifras definitivas: lo que ingres&oacute;
+              cada municipio del pa&iacute;s, concepto por concepto.</li>
+            <li><b>Cat&aacute;logo de Entidades, Municipios y Localidades del INEGI</b>: el padr&oacute;n de los
+              2,479 municipios, con su clave oficial.</li>
           </ul>
           <p class="ef-nota">
-            El FORTAMUN y el FISMDF son cifras oficiales del Anexo 22 del Presupuesto de Egresos
-            2026. El predial, los derechos por servicios y las participaciones municipales aparecen
-            <b>sin cifra nacional</b> porque no existe una publicada en el Presupuesto: el predial y
-            los derechos se consolidan desde las cuentas p&uacute;blicas municipales que el INEGI re&uacute;ne con
-            rezago, y el reparto de participaciones lo fija cada congreso estatal. Cada ficha dice
-            exactamente qu&eacute; falta y por qu&eacute;.
+            El FORTAMUN y el FISMDF del cuadro nacional son cifras oficiales del Anexo 22 del
+            Presupuesto de Egresos 2026. El padr&oacute;n municipal y los agregados de predial, derechos y
+            participaciones proceden de la <b>EFIPEM 2024</b> del INEGI, que es la &uacute;nica fuente
+            nacional que desciende al municipio: el Presupuesto de Egresos no lo hace. Son
+            cifras de ejercicios distintos y no deben sumarse entre s&iacute;. Los agregados nacionales
+            van marcados como <b>derivados</b> porque son la suma de las cuentas de los
+            <b>2,380 municipios que rindieron la suya</b>, de los 2,479 del cat&aacute;logo; los 99
+            restantes aparecen en la lista sin cifra, no en ceros.
           </p>
         </div>
 
@@ -5535,6 +5561,22 @@
   </aside>
 
   <!-- ==========================================================================
+       VENTANA LATERAL: FICHA DE UN MUNICIPIO (1.3)
+       Misma ventana que la de los renglones del erario. Se abre al pulsar
+       cualquier rengl&oacute;n del padr&oacute;n municipal y trae, para ese municipio,
+       de d&oacute;nde vino cada peso que ingres&oacute; en el ejercicio.
+       ========================================================================== -->
+  <div id="munFichaOverlay" class="audit-drawer-overlay" onclick="window.AuditEngine.closeMunFicha()"></div>
+
+  <aside id="munFichaDrawer" class="audit-drawer audit-drawer-ancha"
+         role="dialog" aria-modal="true" aria-labelledby="munFichaTitulo" aria-hidden="true">
+    <div class="drawer-header" id="munFichaHead"></div>
+    <div class="flujo-ficha-marco">
+      <div class="drawer-body flujo-ficha-body" id="munFichaBody"></div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
        DRAWER LATERAL: ARGUMENTO PARTICULAR - CASO GENARO GARCÍA LUNA
        ========================================================================== -->
   <div id="garciaLunaArgumentoOverlay" class="audit-drawer-overlay" onclick="window.AuditEngine.closeGarciaLunaArgumento()"></div>
@@ -6351,6 +6393,9 @@
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
   <script src="assets/js/audit-database.js"></script>
+  
+  <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
+  <script src="assets/js/municipios-efipem.js"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
   <script src="assets/js/audit-engine.js"></script>

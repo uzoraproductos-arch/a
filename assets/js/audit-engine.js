@@ -522,6 +522,12 @@
       if (st.municipios && st.municipios.length > 0) {
         muniList.innerHTML = st.municipios.map(m => {
           const partyColor = getPartyColor(m.partido);
+          /* Cinco municipios de la base no tienen cifra oficial: las
+             alcaldias de la Ciudad de Mexico, que no rinden cuenta
+             municipal, y Juchitan, que no la rindio en 2024. Se dice
+             que no hay dato; no se les pone una cifra de relleno. */
+          const sinCifra = m.presupuestoTotal === null || m.presupuestoTotal === undefined;
+          const mdp = v => (v === null || v === undefined) ? '<span class="muni-sincifra">sin cifra</span>' : '$' + formatNumber(v) + ' mdp';
           const projTags = m.proyectosAuditados ? m.proyectosAuditados.map(p => `<span class="project-tag">🔍 ${p}</span>`).join('') : '';
 
           return `
@@ -533,27 +539,27 @@
                 </div>
                 <div style="text-align:right;">
                   <span style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);">Presupuesto Total</span>
-                  <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; color:var(--gold-bright);">$${formatNumber(m.presupuestoTotal)} mdp</div>
+                  <div style="font-family:var(--font-mono); font-size:15px; font-weight:700; color:var(--gold-bright);">${mdp(m.presupuestoTotal)}</div>
                 </div>
               </div>
 
               <div class="muni-stats-row">
                 <div class="muni-stat">
                   FORTAMUN (Seguridad)
-                  <strong>$${formatNumber(m.fortamun)} mdp</strong>
+                  <strong>${mdp(m.fortamun)}</strong>
                 </div>
                 <div class="muni-stat">
                   FISMDF (Infraestructura)
-                  <strong>$${formatNumber(m.fismdf)} mdp</strong>
+                  <strong>${mdp(m.fismdf)}</strong>
                 </div>
                 <div class="muni-stat">
                   Predial Recaudado
-                  <strong style="color:var(--cyan);">$${formatNumber(m.predial)} mdp</strong>
+                  <strong style="color:var(--cyan);">${mdp(m.predial)}</strong>
                 </div>
               </div>
 
               <div class="muni-audit-status">
-                <strong>Alerta Auditoría ASF / Local:</strong> $${formatNumber(m.observacionesASF)} mdp en revisión.<br>
+                <strong>Alerta Auditoría ASF / Local:</strong> $${formatNumber(m.observacionesASF)} mdp en revisión.${sinCifra ? ' <em>Sus finanzas no aparecen en la estadística municipal del INEGI.</em>' : ''}<br>
                 <em>${m.estatusAuditoria}</em>
               </div>
 
@@ -992,7 +998,9 @@
               results.push({
                 type: 'Municipio',
                 title: `${m.nombre} (${st.abbr})`,
-                sub: `Alcalde: ${m.alcalde} · FORTAMUN: $${m.fortamun} mdp`,
+                sub: `Alcalde: ${m.alcalde}` + (m.fortamun === null || m.fortamun === undefined
+                       ? ' · sin cifra en la estadística del INEGI'
+                       : ` · FORTAMUN: $${m.fortamun} mdp`),
                 badge: 'MUN',
                 action: () => openStateDrawer(st)
               });
@@ -2751,6 +2759,7 @@
         (hayNeg ? '<p class="fdc-pie">Las partidas rayadas <b>restan</b>. La barra mide el tama\u00f1o de la cifra, no su direcci\u00f3n.</p>' : '') +
         '</div>' : ''}
       ${reglas ? '<div class="fd-comp"><span class="fd-efecto-k">C\u00f3mo lo reparte la ley</span><ul class="fdr-lista">' + reglas + '</ul></div>' : ''}
+      ${d.comoSeObtuvo ? '<div class="fd-efecto fd-derivada"><span class="fd-efecto-k">C\u00f3mo se obtuvo esta cifra</span><p>' + d.comoSeObtuvo + '</p></div>' : ''}
       ${d.pendiente ? '<div class="fd-pendiente"><span class="fd-efecto-k">Lo que aqu\u00ed falta, y por qu\u00e9</span><p>' + d.pendiente + '</p></div>' : ''}
       ${(d.glos || d.refKey) ? '<div class="fd-enlaces">' +
         (d.glos ? '<button type="button" class="fd-enlace fd-enlace-glos" onclick="window.AuditEngine.goToGlossary(' + JSON.stringify(d.glos).replace(/"/g, '&quot;') + ')">\ud83d\udcd6 Qu\u00e9 significa: <b>' + d.glos + '</b></button>' : '') +
@@ -3017,8 +3026,8 @@
     },
     munent: {
       cont: 'municipiosCircuito', mandos: 'munEntidadMandos', sello: 'MUNICIPIOS DE LA ENTIDAD',
-      listo: 'Contabilizado. De cada municipio se ve su presupuesto, lo que cobra de predial y lo que recibe de los dos fondos municipales del Ramo 33.',
-      ceros: 'Las fichas municipales est\u00e1n en ceros. Pulse \u00abContabilizar\u00bb para llenarlas.'
+      listo: 'Contabilizado. De cada municipio se ve lo que ingres\u00f3, lo que cobr\u00f3 de predial, lo que recibi\u00f3 de los dos fondos del Ramo 33 y qu\u00e9 tanto de eso no lo recaud\u00f3 \u00e9l.',
+      ceros: 'El padr\u00f3n municipal est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para llenarlo con las cifras del INEGI.'
     }
   };
 
@@ -3050,7 +3059,21 @@
     if (!cont) return;
     state.zonaContado[z] = true;
     renderZonaMandos(z);
-    simAnimarZona(cont, 'zona-' + z, duracionMs === undefined ? 1300 : duracionMs);
+    const dur = duracionMs === undefined ? 1300 : duracionMs;
+    if (z === 'munent' && munTablaGrande(cont)) {
+      const res = cont.querySelector('.mun-resumen');
+      const tab = cont.querySelector('.mun-tabla-marco');
+      if (res && tab) {
+        simAnimarZona(tab, 'zona-munent-tabla', 0);
+        simAnimarZona(res, 'zona-' + z, dur);
+        return;
+      }
+    }
+    simAnimarZona(cont, 'zona-' + z, dur);
+  }
+
+  function munTablaGrande(cont) {
+    return cont.querySelectorAll('.mun-tabla tbody tr').length > MUN_TOPE_ANIM;
   }
 
   function zonaReiniciar(z) {
@@ -3156,6 +3179,146 @@
      ley garantiza sin cifrar, y fichas de facultad para lo que el
      municipio cobra por su cuenta.
      ==================================================================== */
+  /* ====================================================================
+     Bloque 4 de la 1.3 - Padron municipal completo
+     --------------------------------------------------------------------
+     Aqui vivian los pocos municipios que la base traia a mano, con
+     cifras redondeadas a ojo. Ahora estan los 2,479 del Catalogo de
+     Entidades, Municipios y Localidades del INEGI y, junto a cada uno,
+     lo que de verdad ingreso en 2024 segun la Estadistica de Finanzas
+     Publicas Estatales y Municipales.
+
+     El municipio que no rindio cuenta sigue en la lista, dicho como lo
+     que es: sin reporte. Borrarlo falsearia el padron; ponerle cero
+     falsearia la cifra.
+     ==================================================================== */
+  /* Arriba de este corte el padron ya no cabe en pantalla. Animar
+     renglon por renglon obliga al navegador a recalcular la disposicion
+     de la tabla entera en cada cuadro -en Oaxaca son 82 ms por cuadro,
+     cinco veces el presupuesto de uno- y lo que se anima esta fuera de
+     la vista de todos modos. Sobre el corte se cuenta el resumen, que
+     si esta a la vista, y la tabla recibe su cifra ya hecha. */
+  const MUN_TOPE_ANIM = 130;
+
+  let munFiltro = '';
+  let munOrdenCri = 'nombre';
+  let munFichaSel = null;
+  let munFichaEnlazada = false;
+
+  /* Separador de miles a mano: toLocaleString cuesta microsegundos que
+     no se notan en veinte celdas y si en las tres mil de Oaxaca. */
+  function munMiles(t) {
+    const s = String(t);
+    const pt = s.indexOf('.');
+    const ent = pt === -1 ? s : s.slice(0, pt);
+    const dec = pt === -1 ? '' : s.slice(pt);
+    const neg = ent.charCodeAt(0) === 45;
+    const d = neg ? ent.slice(1) : ent;
+    if (d.length < 4) return s;
+    let r = '';
+    for (let i = d.length; i > 0; i -= 3) r = (i > 3 ? ',' : '') + d.slice(Math.max(0, i - 3), i) + r;
+    return (neg ? '-' : '') + r + dec;
+  }
+
+  function munPlano(t) {
+    return String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  }
+
+  /* La Ciudad de Mexico no tiene municipios: tiene dieciseis
+     demarcaciones territoriales gobernadas por alcaldias, y esas no
+     llevan hacienda propia. El articulo 122 constitucional manda que su
+     presupuesto lo apruebe el Congreso local con cargo a la hacienda de
+     la Ciudad. Por eso el INEGI no las levanta en la estadistica
+     municipal, y por eso aqui no reciben un cero: un cero se leeria
+     como que no recibieron nada, y lo que pasa es otra cosa. */
+  const MUN_SIN_HACIENDA = {
+    CDMX: {
+      voz: 'demarcaciones territoriales',
+      fila: 'Su presupuesto lo aprueba el Congreso de la Ciudad',
+      aviso: '<b>La Ciudad de México no tiene municipios.</b> Tiene dieciséis ' +
+        '<b>demarcaciones territoriales</b> a cargo de alcaldías, y el artículo 122, ' +
+        'apartado A, fracción VI de la Constitución dispone que, «sujeto a las previsiones ' +
+        'de ingresos de la hacienda pública de la Ciudad de México, la Legislatura aprobará ' +
+        'el presupuesto de las Alcaldías, las cuales lo ejercerán de manera autónoma». No ' +
+        'tienen la hacienda propia que el artículo 115 reconoce a los municipios: ejercen la ' +
+        'asignación que les aprueba el Congreso capitalino. De ahí que el INEGI no las levante ' +
+        'en su estadística municipal, y que aquí aparezcan sin cifra en lugar de en ceros.'
+    }
+  };
+
+  function munBase() {
+    return window.AUDIT_MUNICIPIOS || null;
+  }
+
+  /* Los 83 municipios que la base ya describia conservan su ficha
+     politica y de auditoria. Se casan por nombre sin acentos ni
+     parentesis, porque la base escribe «Aguascalientes (Capital)» y el
+     catalogo del INEGI escribe «Aguascalientes». */
+  function munCurado(abbr, nombre) {
+    const e = DB.estados && DB.estados.find(x => x.abbr === abbr);
+    if (!e || !e.municipios) return null;
+    const q = munPlano(nombre);
+    const norm = m => munPlano(String(m.nombre).replace(/\s*\(.*?\)\s*/g, ' '));
+    let r = e.municipios.find(m => norm(m) === q);
+    if (r) return r;
+    /* El catalogo del INEGI escribe «Heroica Ciudad de Juchitan de
+       Zaragoza» donde la redaccion escribe «Juchitan de Zaragoza», y
+       «Chilpancingo de los Bravo» donde escribe «Chilpancingo». Se
+       acepta la coincidencia por extremo o por contencion, y solo
+       cuando es unica: dos candidatos significan que no se sabe. */
+    const uno = f => { const c = e.municipios.filter(f); return c.length === 1 ? c[0] : null; };
+    return uno(m => norm(m).startsWith(q) || q.startsWith(norm(m))) ||
+           uno(m => norm(m).indexOf(q) !== -1 || q.indexOf(norm(m)) !== -1);
+  }
+
+  /* Un renglon por municipio, ya en millones y con la dependencia
+     derivada. Se deriva aqui y no en el archivo de datos para que el
+     archivo sea copia fiel de la fuente y nada mas. */
+  function munDatos(abbr) {
+    const F = munBase();
+    const e = F && F.ent && F.ent[abbr];
+    if (!e) return [];
+    return e.lista.map(f => {
+      const hay = f.length === 10;
+      const ing = hay ? f[2] / 1e6 : null;
+      const part = hay ? f[3] / 1e6 : null;
+      const aport = hay ? f[4] / 1e6 : null;
+      return {
+        cve: e.cve + f[0],
+        nombre: f[1],
+        hay: hay,
+        ing: ing, part: part, aport: aport,
+        fortamun: hay ? f[5] / 1e6 : null,
+        fismdf: hay ? f[6] / 1e6 : null,
+        predial: hay ? f[7] / 1e6 : null,
+        propios: hay ? f[8] / 1e6 : null,
+        egr: hay ? f[9] / 1e6 : null,
+        dep: (hay && ing > 0) ? ((part + aport) / ing) * 100 : null
+      };
+    });
+  }
+
+  function munListaVisible(abbr) {
+    let d = munDatos(abbr);
+    if (munFiltro) {
+      const q = munPlano(munFiltro);
+      d = d.filter(m => munPlano(m.nombre).indexOf(q) !== -1);
+    }
+    const c = munOrdenCri;
+    if (c === 'nombre') {
+      d.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    } else {
+      /* Quien no reporto no compite por el primer lugar de una columna
+         que no tiene: va al final, no al fondo del ranking. */
+      d.sort((a, b) => {
+        if (a.hay !== b.hay) return a.hay ? -1 : 1;
+        if (!a.hay) return a.nombre.localeCompare(b.nombre, 'es');
+        return (b[c] || 0) - (a[c] || 0);
+      });
+    }
+    return d;
+  }
+
   function initMunEntidad() {
     const sel = document.getElementById('munEntidadSelect');
     if (!sel || !DB.estados) return;
@@ -3165,9 +3328,28 @@
         .map(e => `<option value="${e.abbr}">${e.name}</option>`).join('');
       sel.addEventListener('change', function () {
         entidadCircuitoSel = this.value;
+        munFiltro = '';
+        const b = document.getElementById('munBuscar');
+        if (b) b.value = '';
         renderMunicipiosCircuito(this.value);
         renderEntidadCircuito(this.value);
         sincronizarSelectoresEntidad();
+      });
+    }
+    const busca = document.getElementById('munBuscar');
+    if (busca && !busca.dataset.listo) {
+      busca.dataset.listo = '1';
+      busca.addEventListener('input', function () {
+        munFiltro = this.value || '';
+        renderMunicipiosCircuito(entidadCircuitoSel);
+      });
+    }
+    const orden = document.getElementById('munOrden');
+    if (orden && !orden.dataset.listo) {
+      orden.dataset.listo = '1';
+      orden.addEventListener('change', function () {
+        munOrdenCri = this.value || 'nombre';
+        renderMunicipiosCircuito(entidadCircuitoSel);
       });
     }
     if (!entidadCircuitoSel) entidadCircuitoSel = sel.value || 'AGS';
@@ -3175,41 +3357,306 @@
     renderMunicipiosCircuito(entidadCircuitoSel);
   }
 
+  function munCelda(v, clase) {
+    if (v === null) return '<td class="' + clase + ' mf-nada">&mdash;</td>';
+    return '<td class="' + clase + '"><span data-anim-v="' + v.toFixed(3) +
+           '" data-anim-f="munmdp">$0.0</span></td>';
+  }
+
   function renderMunicipiosCircuito(abbr) {
     const cont = document.getElementById('municipiosCircuito');
-    if (!cont || !DB.estados) return;
-    const e = DB.estados.find(x => x.abbr === abbr);
-    if (!e || !e.municipios || !e.municipios.length) {
-      cont.innerHTML = '<p class="cd-vacio">No hay municipios cargados para esta entidad en la base.</p>';
+    if (!cont) return;
+    const F = munBase();
+    const e = F && F.ent && F.ent[abbr];
+    const est = DB.estados && DB.estados.find(x => x.abbr === abbr);
+    const nombreEnt = est ? est.name : abbr;
+
+    if (!e) {
+      cont.innerHTML = '<p class="cd-vacio">No se pudo cargar el padrón municipal ' +
+        'de esta entidad. Falta el archivo de datos del INEGI.</p>';
       return;
     }
-    cont.innerHTML = e.municipios.map(m => `
-      <article class="mun-card">
-        <header>
-          <h5>${m.nombre}</h5>
-          <span class="mun-part" style="background:${getPartyColor(m.partido)}">${m.partido}</span>
-        </header>
-        <div class="mun-alcalde">${m.alcalde}</div>
-        <div class="mun-cifras">
-          <div><span>Presupuesto</span><b data-anim-v="${m.presupuestoTotal}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
-          <div><span>Predial propio</span><b data-anim-v="${m.predial}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
-          <div><span>FORTAMUN</span><b data-anim-v="${m.fortamun}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
-          <div><span>FISMDF</span><b data-anim-v="${m.fismdf}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
-        </div>
-        <div class="mun-dep">
-          <span class="mun-dep-lab">Dependencia de transferencias</span>
-          <span class="mun-dep-barra"><span data-anim-w="${Math.min(100, m.dependencia)}" style="width:0%"></span></span>
-          <span class="mun-dep-num" data-anim-v="${m.dependencia}" data-anim-f="pct">0.0%</span>
-        </div>
-      </article>
-    `).join('');
+
+    const filas = munListaVisible(abbr);
+    const t = e.tot;
+    const depEnt = t.ing > 0 ? ((t.part + t.aport) / t.ing) * 100 : 0;
+    const sinRep = e.n - e.conCifra;
+    const exc = MUN_SIN_HACIENDA[abbr] || null;
+    const voz = exc ? exc.voz : 'municipios';
+
+    /* Resumen de la entidad: la suma de lo que reportaron sus
+       municipios, no una cifra aparte. Si faltan municipios, la suma lo
+       dice en la misma linea, no en una nota al pie. */
+    let h = '<div class="mun-resumen">' +
+      '<div class="mre-cab">' +
+        '<span class="mre-tit">' + nombreEnt + '</span>' +
+        '<span class="mre-sub">' + e.n + ' ' + voz + ' en el catálogo del INEGI' +
+          (e.conCifra
+            ? ' &middot; <b>' + e.conCifra + '</b> rindieron cuenta en ' + F.anio +
+              (sinRep ? ' &middot; <span class="mre-falta">' + sinRep + ' sin reporte</span>' : '')
+            : '') +
+        '</span>' +
+      '</div>' +
+      (exc && !e.conCifra ? '<p class="mre-aviso">' + exc.aviso + '</p>' : '') +
+      (e.conCifra ? (
+      '<div class="mre-cifras">' +
+        '<div class="mre-c"><span>Ingreso total</span><b data-anim-v="' + (t.ing / 1e6).toFixed(3) + '" data-anim-f="munmdp">$0.0</b></div>' +
+        '<div class="mre-c"><span>Participaciones</span><b data-anim-v="' + (t.part / 1e6).toFixed(3) + '" data-anim-f="munmdp">$0.0</b></div>' +
+        '<div class="mre-c"><span>Predial cobrado</span><b data-anim-v="' + (t.predial / 1e6).toFixed(3) + '" data-anim-f="munmdp">$0.0</b></div>' +
+        '<div class="mre-c"><span>FORTAMUN</span><b data-anim-v="' + (t.fortamun / 1e6).toFixed(3) + '" data-anim-f="munmdp">$0.0</b></div>' +
+        '<div class="mre-c"><span>FISMDF</span><b data-anim-v="' + (t.fismdf / 1e6).toFixed(3) + '" data-anim-f="munmdp">$0.0</b></div>' +
+      '</div>' +
+      '<div class="mre-dep">' +
+        '<span class="mre-dep-lab">Dependencia de transferencias de la entidad</span>' +
+        '<span class="mre-dep-barra"><span data-anim-w="' + Math.min(100, depEnt).toFixed(2) + '" style="width:0%"></span></span>' +
+        '<span class="mre-dep-num" data-anim-v="' + depEnt.toFixed(2) + '" data-anim-f="pct">0.0%</span>' +
+      '</div>') : '') +
+    '</div>';
+
+    if (!filas.length) {
+      h += '<p class="cd-vacio">Ningún municipio de ' + nombreEnt +
+           ' coincide con «' + munFiltro + '».</p>';
+      cont.innerHTML = h;
+      zonaSincronizar('munent');
+      return;
+    }
+
+    h += '<div class="mun-tabla-marco"><table class="mun-tabla">' +
+      '<caption class="sr-only">Ingresos de los municipios de ' + nombreEnt +
+        ' en ' + F.anio + ', en millones de pesos</caption>' +
+      '<colgroup><col class="c-nom"><col class="c-num"><col class="c-num"><col class="c-num">' +
+        '<col class="c-num"><col class="c-num"><col class="c-dep"></colgroup>' +
+      '<thead><tr>' +
+        '<th scope="col" class="mf-c-nom">Municipio</th>' +
+        '<th scope="col">Ingreso total</th>' +
+        '<th scope="col">Participaciones</th>' +
+        '<th scope="col">Predial</th>' +
+        '<th scope="col">FORTAMUN</th>' +
+        '<th scope="col">FISMDF</th>' +
+        '<th scope="col" class="mf-c-dep">Dependencia</th>' +
+      '</tr></thead><tbody>';
+
+    h += filas.map(m => {
+      if (!m.hay) {
+        return '<tr class="mun-fila mf-sin"><th scope="row" class="mf-nom">' +
+          '<span class="mf-cve">' + m.cve + '</span>' + m.nombre + '</th>' +
+          '<td colspan="6" class="mf-sinrep">' +
+          (exc ? exc.fila : 'No rindió cuenta pública ' + F.anio + ' ante el INEGI') +
+          '</td></tr>';
+      }
+      return '<tr class="mun-fila" tabindex="0" data-cve="' + m.cve + '"' +
+        ' aria-expanded="' + (munFichaSel === m.cve) + '"' +
+        ' onclick="window.AuditEngine.selectMunicipio(\'' + m.cve + '\')"' +
+        ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.AuditEngine.selectMunicipio(\'' + m.cve + '\');}">' +
+        '<th scope="row" class="mf-nom"><span class="mf-cve">' + m.cve + '</span>' + m.nombre + '</th>' +
+        munCelda(m.ing, 'mf-num mf-fuerte') +
+        munCelda(m.part, 'mf-num') +
+        munCelda(m.predial, 'mf-num') +
+        munCelda(m.fortamun, 'mf-num') +
+        munCelda(m.fismdf, 'mf-num') +
+        '<td class="mf-dep">' +
+          '<span class="mf-dep-barra"><span data-anim-w="' + Math.min(100, m.dep).toFixed(2) + '" style="width:0%"></span></span>' +
+          '<i data-anim-v="' + m.dep.toFixed(2) + '" data-anim-f="pct">0.0%</i>' +
+        '</td></tr>';
+    }).join('');
+
+    h += '</tbody></table></div>' +
+      '<p class="mun-fuente-nota">' + F.fuente +
+      ' Cifras en millones de pesos. La <b>dependencia</b> es cuanto de cada cien pesos que ingresó ' +
+      'el municipio vino de participaciones y aportaciones, no de lo que cobró por su cuenta.</p>';
+
+    cont.innerHTML = h;
+
     const rot = document.getElementById('munEntidadRotulo');
     if (rot) {
-      const n = e.municipios.length;
-      rot.textContent = 'La base trae cargado' + (n === 1 ? ' 1 municipio de ' : 's ' + n + ' municipios de ') +
-        e.name + ', no su padr\u00f3n completo.';
+      rot.textContent = e.conCifra
+        ? nombreEnt + ' tiene ' + e.n + ' ' + voz + '; ' + e.conCifra +
+          ' reportaron sus finanzas de ' + F.anio + '.'
+        : nombreEnt + ' tiene ' + e.n + ' ' + voz + ', y ninguna rinde cuenta municipal al INEGI.';
     }
     zonaSincronizar('munent');
+  }
+
+  /* ---- Ficha lateral de un municipio ---------------------------------
+     Misma ventana que la de los renglones de la 1.1: lo que cambia es
+     el contenido, no el trato. */
+  function munFichaPartes() {
+    return {
+      drawer: document.getElementById('munFichaDrawer'),
+      overlay: document.getElementById('munFichaOverlay'),
+      head: document.getElementById('munFichaHead'),
+      body: document.getElementById('munFichaBody')
+    };
+  }
+
+  function munFichaSombras() {
+    const body = document.getElementById('munFichaBody');
+    const marco = body && body.parentElement;
+    if (!body || !marco || !marco.classList.contains('flujo-ficha-marco')) return;
+    const resto = body.scrollHeight - body.clientHeight - body.scrollTop;
+    marco.classList.toggle('hay-arriba', body.scrollTop > 4);
+    marco.classList.toggle('hay-abajo', resto > 4);
+  }
+
+  function selectMunicipio(cve) {
+    if (munFichaSel === cve) { closeMunFicha(); return; }
+    munFichaSel = cve;
+    renderMunFicha();
+    const p = munFichaPartes();
+    if (!p.drawer || !p.overlay) return;
+    p.drawer.classList.add('active');
+    p.overlay.classList.add('active');
+    p.drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (p.body) p.body.scrollTop = 0;
+    munFichaSombras();
+    setTimeout(munFichaSombras, 420);
+    const cerrar = p.drawer.querySelector('.drawer-close-btn');
+    if (cerrar) setTimeout(() => { try { cerrar.focus(); } catch (err) {} }, 80);
+    const fila = document.querySelector('#municipiosCircuito [data-cve="' + cve + '"]');
+    if (fila) fila.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMunFicha(devolverFoco) {
+    const p = munFichaPartes();
+    if (!p.drawer) return;
+    const estaba = p.drawer.classList.contains('active');
+    p.drawer.classList.remove('active');
+    if (p.overlay) p.overlay.classList.remove('active');
+    p.drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (!estaba) return;
+    const cve = munFichaSel;
+    munFichaSel = null;
+    const fila = document.querySelector('#municipiosCircuito [data-cve="' + cve + '"]');
+    if (fila) {
+      fila.setAttribute('aria-expanded', 'false');
+      if (devolverFoco !== false) { try { fila.focus({ preventScroll: true }); } catch (err) { fila.focus(); } }
+    }
+  }
+
+  function munRenglon(nom, v, tot, det, clase) {
+    const pct = tot > 0 ? (v / tot) * 100 : 0;
+    return '<li class="fdc-fila' + (clase ? ' ' + clase : '') + '">' +
+      '<span class="fdc-nom">' + nom + '</span>' +
+      '<span class="fdc-barra"><span class="fdc-relleno" data-anim-w="' +
+        Math.min(100, pct).toFixed(2) + '" style="width:0%"></span></span>' +
+      '<span class="fdc-monto" data-anim-v="' + v.toFixed(3) + '" data-anim-f="munmdp">$0.0</span>' +
+      '<span class="fdc-pct" data-anim-v="' + pct.toFixed(2) + '" data-anim-f="pct">0.0%</span>' +
+      (det ? '<span class="fdc-det">' + det + '</span>' : '') +
+    '</li>';
+  }
+
+  function renderMunFicha() {
+    const p = munFichaPartes();
+    const F = munBase();
+    if (!p.body || !p.head || !F || !munFichaSel) return;
+    const abbr = entidadCircuitoSel;
+    const m = munDatos(abbr).find(x => x.cve === munFichaSel);
+    if (!m) return;
+    const est = DB.estados && DB.estados.find(x => x.abbr === abbr);
+    const nombreEnt = est ? est.name : abbr;
+    const cur = munCurado(abbr, m.nombre);
+
+    p.head.innerHTML =
+      '<div class="fd-cab">' +
+        '<span class="fd-kicker">Municipio &middot; ' + nombreEnt + '</span>' +
+        '<h3 class="fd-tit" id="munFichaTitulo">' + m.nombre + '</h3>' +
+        '<div class="fd-monto" data-anim-v="' + m.ing.toFixed(3) + '" data-anim-f="munmdp">$0.0</div>' +
+        '<div class="fd-equiv">ingresó en ' + F.anio + ', cifras definitivas del INEGI</div>' +
+        '<span class="fd-clave">Clave INEGI ' + m.cve + '</span>' +
+      '</div>' +
+      '<button type="button" class="drawer-close-btn" aria-label="Cerrar la ficha del municipio" ' +
+        'onclick="window.AuditEngine.closeMunFicha()">&times;</button>';
+
+    const otros = Math.max(0, m.ing - m.part - m.aport - m.propios);
+    let b = '<div class="fd-comp"><span class="fd-efecto-k">De dónde vino cada peso</span>' +
+      '<ul class="fdc-lista">' +
+        munRenglon('Participaciones federales', m.part, m.ing,
+          'Ramo 28. Dinero de libre disposición: el municipio decide en qué lo gasta, ' +
+          'pero quién se lo reparte es la legislatura de su estado.') +
+        munRenglon('Aportaciones federales y estatales', m.aport, m.ing,
+          'Ramo 33 y transferencias estatales. Vienen etiquetadas: cada peso trae escrito su destino.') +
+        munRenglon('Ingresos propios', m.propios, m.ing,
+          'Impuestos, derechos, productos y aprovechamientos que el municipio cobra por su cuenta ' +
+          'al amparo del artículo 115 constitucional.') +
+        (otros > 0.05 ? munRenglon('Financiamiento y otros', otros, m.ing,
+          'Deuda contratada, recursos reasignados y demás conceptos que no son ni transferencia ni cobro propio.') : '') +
+      '</ul></div>';
+
+    b += '<div class="fd-comp"><span class="fd-efecto-k">Los fondos que la ley le reserva</span>' +
+      '<ul class="fdc-lista">' +
+        munRenglon('FORTAMUN', m.fortamun, m.ing,
+          'Fondo de Aportaciones para el Fortalecimiento de los Municipios. ' +
+          'Artículos 36 y 37 de la Ley de Coordinación Fiscal.') +
+        munRenglon('FISMDF', m.fismdf, m.ing,
+          'Fondo de Infraestructura Social Municipal. Sólo puede gastarse en obra para ' +
+          'población en pobreza extrema o rezago social. Artículos 33 a 35 de la misma ley.') +
+        munRenglon('Impuesto predial', m.predial, m.ing,
+          'Lo único verdaderamente suyo de esta lista: el artículo 115, fracción IV, ' +
+          'inciso a) se lo reserva, pero la tabla de valores la aprueba el congreso del estado.') +
+      '</ul></div>';
+
+    const dep = m.dep;
+    const lectura = dep >= 90
+      ? 'De cada cien pesos que ingresó, <b>' + dep.toFixed(1) + '</b> no los recaudó él. ' +
+        'Es dependencia casi total: sin las transferencias no habría municipio.'
+      : dep >= 75
+        ? 'De cada cien pesos que ingresó, <b>' + dep.toFixed(1) + '</b> llegaron de fuera. ' +
+          'Es el rango en el que vive la mayoría de los municipios del país.'
+        : dep >= 50
+          ? 'De cada cien pesos que ingresó, <b>' + dep.toFixed(1) + '</b> vinieron de transferencias. ' +
+            'Recauda una parte apreciable de lo que gasta.'
+          : 'De cada cien pesos que ingresó, sólo <b>' + dep.toFixed(1) + '</b> vinieron de ' +
+            'transferencias: financia con recursos propios más de la mitad de lo que ejerce. ' +
+            'Es la excepción, no la regla.';
+
+    b += '<div class="fd-efecto"><span class="fd-efecto-k">Qué dice esta cuenta</span>' +
+      '<p>' + lectura + ' Su recaudación propia fue de ' +
+      '<b>$' + munMiles(m.propios.toFixed(1)) + ' mdp</b>, de los cuales ' +
+      '<b>$' + munMiles(m.predial.toFixed(1)) + ' mdp</b> salieron del predial.</p></div>';
+
+    if (cur) {
+      /* Lo que la plataforma ya documentaba de este municipio. Es
+         trabajo propio de la redaccion, no cifra del INEGI, y va
+         separado para que no se confundan las dos cosas. */
+      b += '<div class="fd-efecto fd-dossier"><span class="fd-efecto-k">Ficha de la redacción</span>' +
+        '<p><b>' + cur.alcalde + '</b> &middot; ' + cur.partido +
+        (cur.estatusAuditoria ? '<br>' + cur.estatusAuditoria : '') +
+        (cur.proyectosAuditados && cur.proyectosAuditados.length
+          ? '<br><span class="fd-proy">Obras revisadas: ' + cur.proyectosAuditados.join(' &middot; ') + '</span>'
+          : '') +
+        '</p></div>';
+    }
+
+    b += '<div class="fd-nota">' + F.fuente +
+      ' Los municipios que no aparecen con cifra no rindieron su cuenta pública a esa fuente; ' +
+      'la plataforma los deja en la lista sin número antes que suponerles uno.</div>';
+
+    p.body.innerHTML = b;
+    autolinkAmbito(p.body);
+    munFichaEnlazar(p.body);
+    munFichaSombras();
+
+    if (simMovimientoReducido()) { simAnimarZona(p.body, 'munficha', 0); simAnimarZona(p.head, 'munfichacab', 0); return; }
+    simPonerEnCeros(p.body, 'munficha');
+    simPonerEnCeros(p.head, 'munfichacab');
+    clearTimeout(renderMunFicha._t);
+    renderMunFicha._t = setTimeout(() => {
+      simAnimarZona(p.body, 'munficha', 900);
+      simAnimarZona(p.head, 'munfichacab', 900);
+    }, 280);
+  }
+
+  function munFichaEnlazar(body) {
+    if (!body || munFichaEnlazada) return;
+    body.addEventListener('click', (ev) => {
+      const a = ev.target.closest && ev.target.closest('.glos-link, .ref-link, .fd-enlace');
+      if (a) closeMunFicha(false);
+    }, true);
+    body.addEventListener('scroll', munFichaSombras, { passive: true });
+    window.addEventListener('resize', munFichaSombras);
+    munFichaEnlazada = true;
   }
 
   /* Lo que la ley le garantiza al municipio y el Presupuesto no cifra.
@@ -3224,8 +3671,10 @@
         '<h4>Y lo que la ley le garantiza sin ponerle cifra</h4>' +
         '<p>El Presupuesto de Egresos s\u00f3lo cifra como municipales los dos fondos de arriba. ' +
         'El resto del dinero federal del municipio llega por participaciones, y ah\u00ed el reparto no lo ' +
-        'fija la Federaci\u00f3n sino <b>la legislatura de cada estado</b>: por eso no existe un agregado ' +
-        'nacional publicado, sino treinta y dos.</p>' +
+        'fija la Federaci\u00f3n sino <b>la legislatura de cada estado</b>: no hay una regla de reparto, ' +
+        'hay treinta y dos. Cu\u00e1nto recibieron en total s\u00ed puede saberse, sumando las cuentas que ' +
+        'los municipios rinden al INEGI, y esa suma est\u00e1 en las fichas de abajo; c\u00f3mo se reparte ' +
+        'sigue estando en 32 peri\u00f3dicos oficiales distintos.</p>' +
       '</div>' +
       '<ul class="erario-ceros-lista">' +
         PANORAMA.municipal.sinCifra.map(r =>
@@ -3253,6 +3702,9 @@
           <span class="mpf-clave">Art. ${d.clave}</span>
         </span>
         <span class="mpf-nom">${d.nombre}</span>
+        <span class="mpf-monto">${d.montoMdp === null || d.montoMdp === undefined
+            ? '<i>sin cifra nacional publicada</i>'
+            : formatMdpFijo(d.montoMdp) + ' ' + chipEstado(d.estado)}</span>
         <span class="mpf-que">${d.queEs}</span>
         <span class="mpf-mas">Ver fundamento y efecto jur\u00eddico \u2197</span>
       </button>`).join('');
@@ -15888,6 +16340,9 @@
        a «$10.19 billones»— el salto se leería como un salto del dato. */
     if (f === 'billones') return '$' + (v / 1000000).toFixed(2) + ' billones';
     if (f === 'mdpfijo') return formatMdpFijo(v);
+    /* Las tablas municipales llegan a 570 renglones: el separador
+       propio evita miles de llamadas a toLocaleString por cuadro. */
+    if (f === 'munmdp') return '$' + munMiles(v.toFixed(1));
     if (f === 'pct') return v.toFixed(1) + '%';
     if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
     if (f === 'pesos') return '$' + formatNumber(Math.round(v * 100) / 100);
@@ -15904,13 +16359,22 @@
     const barras = [].slice.call(raiz.querySelectorAll('[data-anim-w]'));
     if (!cifras.length && !barras.length) return;
 
+    /* Los valores y los formatos se leen una sola vez. El padron de
+       Oaxaca trae 570 renglones: releer dataset en cada cuadro son
+       miles de accesos al DOM por cuadro y la cuenta se veia a
+       tirones. Leidos de golpe, el conteo corre parejo. */
+    const nCif = cifras.length, nBar = barras.length;
+    const vals = new Float64Array(nCif), anchos = new Float64Array(nBar);
+    const fmts = new Array(nCif);
+    for (let i = 0; i < nCif; i++) {
+      vals[i] = parseFloat(cifras[i].dataset.animV) || 0;
+      fmts[i] = cifras[i].dataset.animF;
+    }
+    for (let i = 0; i < nBar; i++) anchos[i] = parseFloat(barras[i].dataset.animW) || 0;
+
     const pintar = (e) => {
-      cifras.forEach(el => {
-        el.textContent = simFmt((parseFloat(el.dataset.animV) || 0) * e, el.dataset.animF);
-      });
-      barras.forEach(el => {
-        el.style.width = ((parseFloat(el.dataset.animW) || 0) * e).toFixed(2) + '%';
-      });
+      for (let i = 0; i < nCif; i++) cifras[i].textContent = simFmt(vals[i] * e, fmts[i]);
+      for (let i = 0; i < nBar; i++) barras[i].style.width = (anchos[i] * e).toFixed(2) + '%';
     };
 
     if (simAnimFrames[clave]) {
@@ -17973,6 +18437,10 @@
     }
     if (ente.nivel === 'municipal') {
       const m = ente.mun;
+      /* Sin presupuesto publicado no hay tres ejes que medir. Antes que
+         dibujar un circulo sobre un supuesto, se declara que no aplica,
+         igual que en el caso federal. */
+      if (m.presupuestoTotal === null || m.presupuestoTotal === undefined) return null;
       const obsPct = m.presupuestoTotal > 0 ? (m.observacionesASF / m.presupuestoTotal) * 100 : 0;
       const predialPct = m.presupuestoTotal > 0 ? (m.predial / m.presupuestoTotal) * 100 : 0;
       return [
@@ -21029,6 +21497,8 @@
     selectCircuitoEtapa: selectCircuitoEtapa,
     selectFlujoItem: selectFlujoItem,
     closeFlujoFicha: closeFlujoFicha,
+    selectMunicipio: selectMunicipio,
+    closeMunFicha: closeMunFicha,
     barrasContar: barrasContar,
     barrasReiniciar: barrasReiniciar,
     zonaContar: zonaContar,
@@ -21298,6 +21768,7 @@
       closeSantaAnnaArgumento();
       closeJuarezArgumento();
       closeFlujoFicha();
+      closeMunFicha();
       closeStateDrawer();
     }
   });

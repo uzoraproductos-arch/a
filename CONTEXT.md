@@ -991,6 +991,91 @@ commit anterior: 20 colecciones intactas, `estados` idéntica, los 170
 términos previos del glosario sin cambios, `panoramaErario` sin cambios
 fuera de `federalizado` y del nuevo `municipal`.
 
+### Hecho (1.3: el padrón municipal completo, con cifras del INEGI)
+
+El bloque «4 · Municipio por municipio» mostraba **83 municipios** de los
+2,479 del país: cuatro de Jalisco, tres de Aguascalientes. Era una muestra
+presentada como si fuera el padrón. Ahora están los **2,479**, entidad por
+entidad, y cada uno con lo que de verdad ingresó.
+
+**La fuente.** INEGI, *Estadística de Finanzas Públicas Estatales y
+Municipales* (EFIPEM), conjunto de datos municipal, ejercicio 2024, cifras
+definitivas. Es la única fuente nacional que desciende al municipio: ni el
+Presupuesto de Egresos ni la Ley de Ingresos lo hacen. Se descargó el paquete
+de datos abiertos (96 MB) y se extrajeron, para cada municipio, el total de
+ingresos, participaciones, aportaciones, FORTAMUN, FISMDF, predial, ingresos
+propios y el total de egresos. El padrón de nombres y claves viene del
+*Catálogo de Entidades, Municipios y Localidades* del mismo instituto.
+
+Vive en `assets/js/municipios-efipem.js` (258 KB), aparte de
+`audit-database.js`, y expone `window.AUDIT_MUNICIPIOS`. Los valores están en
+**pesos enteros**, copia fiel de la fuente; la conversión a millones y la
+dependencia se derivan en el motor, para que el archivo de datos no contenga
+ni una operación propia. Los 11,900 valores publicados se cotejaron uno a uno
+contra el CSV original: cero diferencias.
+
+**Lo que se corrigió de paso.** Las cifras que la base traía de esos 83
+municipios eran aproximaciones. En los totales fallaban poco, pero en predial
+fallaban mucho: Aguascalientes capital figuraba con $890 mdp y recaudó
+$522.3; Campeche con $210 y recaudó $48.2; Los Cabos con $1,450 y recaudó
+$648.0. Se sustituyeron por las oficiales en la colección `estados`, de modo
+que el cajón estatal, el buscador y el círculo del inspector digan lo mismo
+que la tabla nueva. Se reescribieron 389 campos y ninguno fuera del arreglo
+`estados`.
+
+Cinco municipios quedaron **sin cifra** en vez de con cifra inventada: las
+cuatro alcaldías de la Ciudad de México que la base traía y Juchitán de
+Zaragoza, que no rindió cuenta en 2024. Los tres consumidores de esos campos
+llevan ahora guarda de nulo.
+
+**Tres fichas que estaban en blanco, ya cifradas.** Las fichas de facultad del
+artículo 115 prometían: «se incorporará cuando pueda citarse contra esa
+fuente». La fuente llegó, y con ella:
+
+| Ficha | 2024 | de dónde sale |
+|---|---|---|
+| Predial y contribuciones sobre la propiedad | $52,543.2 mdp | suma EFIPEM |
+| Derechos por servicios públicos | $48,348.2 mdp | suma EFIPEM |
+| Participaciones federales municipales | $268,861.2 mdp | suma EFIPEM |
+
+Van marcadas **derivado**, no oficial: por la definición de la propia
+plataforma, una suma de cifras publicadas no se lee directamente de un
+documento. Cada ficha lleva un bloque nuevo, «Cómo se obtuvo esta cifra», que
+dice que son 2,380 municipios de 2,479 y qué falta en la suma. Se añadió la
+referencia **63**, `ref-inegi-efipem`.
+
+**La Ciudad de México, dicha como es.** Sus dieciséis demarcaciones aparecen
+en el catálogo pero nunca en la estadística municipal, en ningún año. No es
+omisión del INEGI: el artículo 122, apartado A, fracción VI constitucional
+manda que «sujeto a las previsiones de ingresos de la hacienda pública de la
+Ciudad de México, la Legislatura aprobará el presupuesto de las Alcaldías». No
+tienen la hacienda del 115. Ponerles un cero se leería como que no recibieron
+nada; se les pone la explicación (`MUN_SIN_HACIENDA` en el motor).
+
+**Forma.** Tabla y no reja de tarjetas: Oaxaca tiene 570 municipios y en
+tarjetas serían veinte pantallas sin comparación posible. Trae buscador por
+nombre (sin acentos), seis criterios de orden, resumen animado de la entidad
+y ficha lateral por municipio —misma ventana que la de la 1.1, con su propio
+`munFichaDrawer`—. La ficha conserva el dossier de la redacción para los 83
+municipios que ya lo tenían, en bloque aparte y con filo rojo, para que no se
+confunda con la cifra del INEGI.
+
+**Tres defectos de rendimiento, medidos y corregidos.** Con 570 municipios,
+tocar una cifra obligaba a recalcular la disposición de la tabla entera: 82.7
+ms por cuadro, cinco veces el presupuesto de uno. Se corrigió con tres cosas:
+`table-layout: fixed` con `<colgroup>` (que además quita el temblor de las
+columnas mientras sube el contador), `content-visibility: auto` en las filas
+—las que no asoman no se disponen— y un corte, `MUN_TOPE_ANIM = 130`: arriba
+de ahí se cuenta el resumen, que sí está a la vista, y la tabla recibe su
+cifra ya hecha. Animar 545 renglones que nadie ve costaba y no comunicaba
+nada. De paso, `simAnimarZona` lee ahora los valores una sola vez en lugar de
+releer `dataset` en cada cuadro, lo que beneficia a todas las zonas del
+sitio. Medido: p90 de 83.3 ms a 16.8 ms.
+
+**Nota sobre el entorno de prueba.** El navegador sin GPU de este contenedor
+corre la página en reposo a ~47 ms por cuadro. Cualquier medición de
+rendimiento hecha aquí debe compararse contra ese piso, no contra 16 ms.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
