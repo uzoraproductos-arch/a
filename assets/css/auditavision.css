@@ -1851,6 +1851,12 @@ nav.tabbar button.active .num {
   font-size: 11px;
 }
 
+/* Sello de version a la vista. Sin el no hay modo de saber si el lector esta
+   viendo lo que acabamos de publicar o una copia que su navegador guardo hace
+   rato: basta con mirar el pie para salir de dudas. */
+.footer-sello { display: block; margin-top: 7px; color: var(--text-dim); letter-spacing: 0.04em; }
+.footer-sello b { color: var(--gold); font-weight: 700; }
+
 /* ==========================================================================
    DIVISIÓN DE PODERES: SELECTOR MAESTRO
    ========================================================================== */

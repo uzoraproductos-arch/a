@@ -1402,6 +1402,13 @@ letra cuando hay varias publicaciones el mismo día: `20260921a`, `20260921b`.
 El guion `scratchpad/sello.py` lo cambia en los cinco de golpe y comprueba que
 sigan siendo cinco.
 
+**Y el sello, a la vista.** Al pie de la página, bajo el aviso de
+transparencia, aparece «Versión publicada: 20260921b». Sin ese renglón no hay
+modo de saber si quien reporta un problema está viendo lo que acabamos de
+publicar o una copia guardada por su navegador: la respuesta deja de ser una
+conjetura y pasa a ser un dato que el lector puede leer en voz alta.
+
+
 ### Pendiente
 
 - **La leyenda del mapa de la 1.1 no dice la verdad.** Salió al probar los
