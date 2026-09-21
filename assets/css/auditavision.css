@@ -13348,9 +13348,28 @@ body.con-regreso { padding-bottom: 96px; }
   0%, 100% { box-shadow: none; }
   22%      { box-shadow: 0 0 0 3px var(--gold-glow), 0 0 26px var(--gold-glow); }
 }
-.ce-pil-cab { display: flex; align-items: flex-start; gap: 13px; margin-bottom: 12px; }
+.ce-pil-cab-h { margin: 0; font: inherit; font-weight: inherit; }
+.ce-pil-cab {
+  display: flex; align-items: flex-start; gap: 13px;
+  width: calc(100% + 40px); margin: -20px -20px 0; padding: 18px 20px 12px;
+  background: none; border: 0; color: inherit; font: inherit;
+  text-align: left; cursor: pointer; border-radius: 9px 9px 0 0;
+  transition: background 0.15s ease;
+}
+.ce-pil-cab:hover { background: var(--bg-card-hover); }
+.ce-pil-cab:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
+.ce-pil-cab-tx { flex: 1; min-width: 0; }
+.ce-pil-mas {
+  align-self: center; width: 1.2rem; text-align: center;
+  font-family: var(--font-mono); font-size: 22px; line-height: 1;
+  color: var(--text-secondary);
+}
+.ce-pil-cab:hover .ce-pil-mas,
+.ce-pilar.abierto .ce-pil-mas { color: var(--tono, var(--gold)); }
+.ce-pilar.abierto { border-color: var(--border-gold); }
 .ce-pil-ico { font-size: 27px; line-height: 1.1; }
 .ce-pil-art {
+  display: block;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 1.1px;
@@ -13358,9 +13377,18 @@ body.con-regreso { padding-bottom: 96px; }
   color: var(--tono, var(--gold));
   font-weight: 800;
 }
-.ce-pil-tit { font-family: var(--font-serif); font-size: 21px; margin: 2px 0 0; color: var(--text-main); }
+.ce-pil-tit { display: block; font-family: var(--font-serif); font-size: 21px;
+  margin: 2px 0 0; color: var(--text-main); font-weight: 600; line-height: 1.3; }
 .ce-pil-resp { font-size: 15px; line-height: 1.6; color: var(--text-secondary); margin: 0 0 15px; }
 .ce-pil-preg { color: var(--text-gold); font-weight: 700; }
+
+/* Cerrado, el pilar ensena solo la pregunta que contesta: lo justo para
+   decidir si vale la pena abrirlo. */
+.ce-pil-avance {
+  margin: 0; font-size: 14.4px; line-height: 1.5;
+  color: var(--text-gold); font-weight: 700;
+}
+.ce-pil-cuerpo { margin-top: 10px; }
 
 .ce-pil-ficha {
   display: grid;
@@ -13490,6 +13518,8 @@ body.con-regreso { padding-bottom: 96px; }
 @media (max-width: 560px) {
   .ce-bru-fila, .ce-cad-pasos { grid-template-columns: 1fr; }
   .ce-pil-tit { font-size: 18px; }
+  .ce-pil-cab { gap: 10px; padding: 15px 20px 10px; width: calc(100% + 40px); }
+  .ce-pil-ico { font-size: 23px; }
 }
 
 /* ==========================================================================

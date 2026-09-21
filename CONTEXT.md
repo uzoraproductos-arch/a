@@ -1330,6 +1330,24 @@ es una tabla, y los once pies citan lo que de verdad los respalda. Tres
 referencias nuevas: 68 (reforma al ISR), 69 (reforma a la Ley Federal de
 Derechos) y 70 (el índice de la Gaceta 7121).
 
+### Hecho (1.4: los cuatro pilares se despliegan al pulsarlos)
+
+Los articulos 25, 26, 27 y 28 venian los cuatro abiertos, asi que la
+subpestana arrancaba con cuatro fichas completas -respuesta, facultad,
+organo, ley secundaria, tres claves y punto ciego- antes de la primera cifra
+del paquete economico. El lector llegaba cansado a lo que venia a ver.
+
+Ahora la cabecera declara que articulo es, como se titula y que pregunta
+contesta; lo demas espera al clic. Se usa el mismo acordeon que ya emplean
+los puntos ciegos y el itinerario en esta misma subpestana, y la estructura
+que la guia de accesibilidad recomienda: el encabezado envuelve al boton, con
+`aria-expanded` y `aria-controls`. Al repintar se devuelve el foco al boton
+pulsado, o el teclado quedaria a la deriva; y el cuerpo recien revelado pasa
+por el barrido de terminos, porque no existia cuando corrio el anterior.
+
+Los cuatro botones de la brujula siguen llevando a su pilar, y ahora ademas
+lo abren.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

@@ -15507,35 +15507,7 @@
         '</div>';
     }
 
-    const cont = document.getElementById('cePilares');
-    if (cont) {
-      cont.innerHTML = ce.pilares.map(p =>
-        '<article class="ce-pilar" id="ce-pilar-' + p.id + '" style="--tono:' + p.color + '">' +
-          '<header class="ce-pil-cab">' +
-            '<span class="ce-pil-ico">' + p.icono + '</span>' +
-            '<div>' +
-              '<div class="ce-pil-art">' + p.articulo + ' constitucional</div>' +
-              '<h3 class="ce-pil-tit">' + p.titulo + '</h3>' +
-            '</div>' +
-          '</header>' +
-          '<p class="ce-pil-resp"><strong class="ce-pil-preg">' + p.pregunta + '</strong> ' + p.respuesta + '</p>' +
-          '<div class="ce-pil-ficha">' +
-            '<div class="ce-pil-campo"><span class="ce-pil-k">Facultad</span><span class="ce-pil-v">' + p.facultad + '</span></div>' +
-            '<div class="ce-pil-campo"><span class="ce-pil-k">Quién la ejerce</span><span class="ce-pil-v">' + p.organo + '</span></div>' +
-            '<div class="ce-pil-campo"><span class="ce-pil-k">Ley que la desarrolla</span><span class="ce-pil-v">' + p.ley_secundaria + '</span></div>' +
-          '</div>' +
-          '<ul class="ce-pil-claves">' +
-            p.claves.map(c => '<li><strong class="ce-clave-k">' + c.k + '.</strong> <span class="ce-clave-v">' + c.v + '</span></li>').join('') +
-          '</ul>' +
-          '<div class="ce-pil-ciego">' +
-            '<span class="ce-ciego-et">Punto ciego</span>' +
-            '<p class="ce-ciego-tx">' + p.punto_ciego + '</p>' +
-          '</div>' +
-          '<button type="button" class="ce-pil-texto" onclick="window.AuditEngine.goToPrecepto(\'' + p.precepto_id + '\')">' +
-            '📜 Leer el texto del precepto' +
-          '</button>' +
-        '</article>').join('');
-    }
+    cePintarPilares();
 
     const cadena = document.getElementById('ceCadena');
     if (cadena) {
@@ -15568,6 +15540,67 @@
        sus terminos hacendarios entren en el mismo barrido. */
     renderPaquete2027();
     autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="constitucion"]'));
+  }
+
+  /* Cual de los cuatro pilares esta desplegado. Null los deja todos cerrados,
+     que es como abre la subpestana. */
+  let cePilarSel = null;
+
+  function cePintarPilares() {
+    const ce = DB.constitucion_economica;
+    const cont = document.getElementById('cePilares');
+    if (!ce || !cont) return;
+    cont.innerHTML = ce.pilares.map(p => {
+      const abierto = cePilarSel === p.id;
+      return '<article class="ce-pilar' + (abierto ? ' abierto' : '') + '" id="ce-pilar-' + p.id + '" style="--tono:' + p.color + '">' +
+        '<h3 class="ce-pil-cab-h">' +
+          '<button type="button" class="ce-pil-cab" aria-expanded="' + abierto + '" ' +
+            'aria-controls="ce-cuerpo-' + p.id + '" ' +
+            'onclick="window.AuditEngine.cePilarToggle(\'' + p.id + '\')">' +
+            '<span class="ce-pil-ico" aria-hidden="true">' + p.icono + '</span>' +
+            '<span class="ce-pil-cab-tx">' +
+              '<span class="ce-pil-art">' + p.articulo + ' constitucional</span>' +
+              '<span class="ce-pil-tit">' + p.titulo + '</span>' +
+            '</span>' +
+            '<span class="ce-pil-mas" aria-hidden="true">' + (abierto ? '\u2212' : '+') + '</span>' +
+          '</button>' +
+        '</h3>' +
+        (abierto
+          ? '<div class="ce-pil-cuerpo" id="ce-cuerpo-' + p.id + '">' +
+              '<p class="ce-pil-resp"><strong class="ce-pil-preg">' + p.pregunta + '</strong> ' + p.respuesta + '</p>' +
+              '<div class="ce-pil-ficha">' +
+                '<div class="ce-pil-campo"><span class="ce-pil-k">Facultad</span><span class="ce-pil-v">' + p.facultad + '</span></div>' +
+                '<div class="ce-pil-campo"><span class="ce-pil-k">Qui\u00e9n la ejerce</span><span class="ce-pil-v">' + p.organo + '</span></div>' +
+                '<div class="ce-pil-campo"><span class="ce-pil-k">Ley que la desarrolla</span><span class="ce-pil-v">' + p.ley_secundaria + '</span></div>' +
+              '</div>' +
+              '<ul class="ce-pil-claves">' +
+                p.claves.map(c => '<li><strong class="ce-clave-k">' + c.k + '.</strong> <span class="ce-clave-v">' + c.v + '</span></li>').join('') +
+              '</ul>' +
+              '<div class="ce-pil-ciego">' +
+                '<span class="ce-ciego-et">Punto ciego</span>' +
+                '<p class="ce-ciego-tx">' + p.punto_ciego + '</p>' +
+              '</div>' +
+              '<button type="button" class="ce-pil-texto" onclick="window.AuditEngine.goToPrecepto(\'' + p.precepto_id + '\')">' +
+                '\ud83d\udcdc Leer el texto del precepto' +
+              '</button>' +
+            '</div>'
+          : '<p class="ce-pil-avance" id="ce-cuerpo-' + p.id + '">' + p.pregunta + '</p>') +
+      '</article>';
+    }).join('');
+    /* El cuerpo recien revelado no ha pasado por el barrido de terminos. */
+    autolinkAmbito(cont);
+  }
+
+  /* Repintar sustituye el boton que el lector acaba de pulsar, asi que hay
+     que devolverle el foco o el teclado queda a la deriva. */
+  function cePilarToggle(id) {
+    cePilarSel = (cePilarSel === id) ? null : id;
+    cePintarPilares();
+    const art = document.getElementById('ce-pilar-' + id);
+    if (!art) return;
+    const boton = art.querySelector('.ce-pil-cab');
+    if (boton) boton.focus({ preventScroll: true });
+    if (cePilarSel === id) art.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
 
@@ -16129,6 +16162,8 @@
   }
 
   function ceIrAPilar(id) {
+    cePilarSel = id;
+    cePintarPilares();
     const el = document.getElementById('ce-pilar-' + id);
     if (!el) return;
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -22071,6 +22106,7 @@
     simLlevarACalculadora: simLlevarACalculadora,
     renderConstitucionEconomica: renderConstitucionEconomica,
     ceIrAPilar: ceIrAPilar,
+    cePilarToggle: cePilarToggle,
     renderPaquete2027: renderPaquete2027,
     peAbrirItin: peAbrirItin,
     peAbrirCiego: peAbrirCiego,
