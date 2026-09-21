@@ -1384,6 +1384,24 @@ abiertos exactamente lo mismo que cuando colgaban sueltos del subpanel. Un marco
 alrededor del mapa habría supuesto una tarjeta dentro de otra —la barra de
 lentes ya trae la suya— y le habría quitado cuarenta píxeles al territorio.
 
+### Hecho (el sello de versión de las hojas y los guiones)
+
+GitHub Pages sirve cada archivo con `cache-control: max-age=600`: el navegador
+puede seguir enseñando la versión anterior hasta diez minutos después de
+publicar, y más si el lector recarga de forma normal —una recarga revalida el
+documento, pero no siempre sus dependencias—. El efecto práctico era que un
+cambio publicado y correcto parecía no haber ocurrido.
+
+Ahora las cinco dependencias de `index.html` llevan sello: `?v=20260921a`. Cada
+publicación que toque `assets/` cambia la dirección del archivo y el navegador
+no tiene nada cacheado que reutilizar.
+
+**Hay que subir el sello a mano en cada cambio que toque `assets/`.** Es el
+precio de no tener un paso de compilación. El formato es `AAAAMMDD` más una
+letra cuando hay varias publicaciones el mismo día: `20260921a`, `20260921b`.
+El guion `scratchpad/sello.py` lo cambia en los cinco de golpe y comprueba que
+sigan siendo cinco.
+
 ### Pendiente
 
 - **La leyenda del mapa de la 1.1 no dice la verdad.** Salió al probar los
