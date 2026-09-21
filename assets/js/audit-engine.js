@@ -1994,7 +1994,13 @@
     { a: ['pesos constantes', 'pesos corrientes'], t: 'Pesos Corrientes vs. Pesos Constantes', r: 'ref-inegi-cuentas', n: 32 },
     { a: ['Unidad de Medida y Actualización'], t: 'UMA (Unidad de Medida y Actualización)', r: 'ref-inegi-cuentas', n: 32 },
     { a: ['UMA'], t: 'UMA (Unidad de Medida y Actualización)', r: 'ref-inegi-cuentas', n: 32, cs: true },
-    { a: ['ISR', 'IVA', 'IEPS'], t: 'ISR, IVA e IEPS', r: 'ref-cff', n: 9, cs: true },
+    { a: ['ISR'], t: 'ISR (Impuesto Sobre la Renta)', r: 'ref-lisr', n: 52, cs: true },
+    { a: ['IVA'], t: 'IVA (Impuesto al Valor Agregado)', r: 'ref-liva', n: 53, cs: true },
+    { a: ['IEPS'], t: 'IEPS (Impuesto Especial sobre Producción y Servicios)', r: 'ref-lieps', n: 54, cs: true },
+    { a: ['ISAN'], t: 'ISAN (Impuesto Sobre Automóviles Nuevos)', r: 'ref-lfisan', n: 56, cs: true },
+    { a: ['impuestos al comercio exterior', 'aranceles', 'arancel'], t: 'Impuestos al Comercio Exterior (Aranceles)', r: 'ref-ligie', n: 55 },
+    { a: ['accesorios de las contribuciones', 'accesorios de impuestos', 'recargos'], t: 'Accesorios de las Contribuciones', r: 'ref-cff', n: 9 },
+    { a: ['rezago fiscal', 'rezagos fiscales'], t: 'Rezago Fiscal', r: 'ref-cff', n: 9 },
     { a: ['Recaudación Federal Participable'], t: 'Recaudación Federal Participable (RFP)', r: 'ref-lcf', n: 5 },
     { a: ['RFP'], t: 'Recaudación Federal Participable (RFP)', r: 'ref-lcf', n: 5, cs: true },
     { a: ['Ramo 28'], t: 'Ramo 28 (Participaciones Federales)', r: 'ref-lcf', n: 5, cs: true },
@@ -2183,6 +2189,9 @@
     'hero-tag', 'est-chip', 'cd-lab', 'cd-ley', 'cd-val', 'cd-inst',
     'ce-inst', 'ce-tit', 'ce-num', 'ets-k', 'ets-v', 'ets-s',
     'eval-status-text', 'fc-grupo-monto',
+    'fd-clave', 'fd-efecto-k', 'fdc-nom', 'fdc-monto', 'fdc-pct', 'fdc-det',
+    'fd-enlace', 'fd-enlace-glos', 'fd-enlace-ref', 'fd-enlace-n',
+    'ecz-clave', 'ecz-nom', 'ecz-monto',
     'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
     'fed-monto', 'fed-pct', 'ec-nom', 'ec-val', 'ec-rk', 'ec-rv',
     'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
@@ -2492,17 +2501,75 @@
       box.innerHTML = '<p class="cd-vacio">Pulse cualquier renglón para ver qué incluye y qué ley lo sustenta.</p>';
       return;
     }
+    /* El desglose que la propia ley trae dentro del renglon. Las cifras
+       nacen en cero y cuentan al abrirse, como todo lo demas. */
+    const maxComp = d.componentes && d.componentes.length
+      ? Math.max.apply(null, d.componentes.map(c => c.m)) : 0;
+    const comps = (d.componentes || []).map(c => `
+        <li class="fdc-fila">
+          <span class="fdc-nom">${c.n}</span>
+          <span class="fdc-barra"><span class="fdc-relleno"
+                data-anim-w="${maxComp ? (c.m / maxComp * 100).toFixed(2) : 0}" style="width:0%"></span></span>
+          <span class="fdc-monto" data-anim-v="${c.m}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
+          <span class="fdc-pct" data-anim-v="${pctDe(c.m, d.montoMdp)}" data-anim-f="pct">0.0%</span>
+          ${c.d ? '<span class="fdc-det">' + c.d + '</span>' : ''}
+        </li>`).join('');
+
     box.innerHTML = `
       <div class="fd-head">
         <span class="fd-ico" aria-hidden="true">${d.icono}</span>
         <div>
           <div class="fd-tit">${d.nombreLargo || d.nombre}</div>
-          <div class="fd-monto">${formatMdpFijo(d.montoMdp)} <span class="fd-equiv">${formatMoneyMdp(d.montoMdp)}</span> ${chipEstado(d.estado)}</div>
+          <div class="fd-monto">${formatMdpFijo(d.montoMdp)} <span class="fd-equiv">${formatMoneyMdp(d.montoMdp)}</span> ${chipEstado(d.estado)}${
+            d.claveLIF ? '<span class="fd-clave" title="Clave del concepto en el Artículo 1º de la Ley de Ingresos">LIF ' + d.claveLIF + '</span>' : ''}</div>
         </div>
       </div>
       <p class="fd-txt">${esIngreso ? d.quePaga : d.queCubre}</p>
+      ${d.efecto ? '<div class="fd-efecto"><span class="fd-efecto-k">Qué efecto jurídico tiene</span><p>' + d.efecto + '</p></div>' : ''}
       ${d.ley ? '<div class="fd-ley"><span class="cd-lab">Fundamento</span><span class="cd-ley">' + d.ley + '</span></div>' : ''}
+      ${comps ? '<div class="fd-comp"><span class="fd-efecto-k">Qué incluye, según la propia ley</span><ul class="fdc-lista">' + comps + '</ul></div>' : ''}
+      ${(d.glos || d.refKey) ? '<div class="fd-enlaces">' +
+        (d.glos ? '<button type="button" class="fd-enlace fd-enlace-glos" onclick="window.AuditEngine.goToGlossary(' + JSON.stringify(d.glos).replace(/"/g, '&quot;') + ')">📖 Qué significa: <b>' + d.glos + '</b></button>' : '') +
+        (d.refKey ? '<button type="button" class="fd-enlace fd-enlace-ref" onclick="window.AuditEngine.goToRef(\'' + d.refKey + '\')">⚖️ Fuente y fundamento <span class="fd-enlace-n">[' + String(d.refNum).padStart(2, '0') + ']</span></button>' : '') +
+        '</div>' : ''}
     `;
+    /* Cada vez que se abre una ficha, su desglose vuelve a contar. */
+    if (comps) simAnimarZona(box, 'flujodet-' + tipo, 900);
+  }
+
+  /* Los rubros que el Articulo 1o. enumera y deja en cero. No se
+     dibujan como barra porque una barra de cero no se ve y pareceria
+     un defecto; pero callarlos seria peor: que el catalogo legal
+     contemple un impuesto y la Federacion no presupueste un peso es,
+     en si mismo, un dato sobre el sistema fiscal mexicano. */
+  const ERARIO_RUBROS_CERO = [
+    { clave: '1.12', nombre: 'Impuestos sobre el patrimonio',
+      que: 'La Federación no grava la riqueza acumulada. No existe hoy un impuesto federal al patrimonio neto, a la herencia ni a las donaciones.' },
+    { clave: '1.15', nombre: 'Impuestos sobre nóminas y asimilables',
+      que: 'El impuesto sobre nóminas existe, pero es estatal: lo cobran las 32 entidades, no la Federación. Por eso aparece en el catálogo federal con cero.' },
+    { clave: '1.16', nombre: 'Impuestos ecológicos',
+      que: 'El catálogo federal los contempla y los presupuesta en cero. Los gravámenes ambientales que sí recauda la Federación viven dentro del IEPS —combustibles fósiles y plaguicidas—, no en este rubro.' }
+  ];
+
+  function renderFlujoCeros() {
+    const cont = document.getElementById('ingresosCeros');
+    if (!cont) return;
+    cont.innerHTML =
+      '<div class="erario-ceros-cab">' +
+        '<h4>Y los que la ley enumera, pero deja en cero</h4>' +
+        '<p>El Artículo 1º de la Ley de Ingresos lista tres categorías más de impuesto. ' +
+        'Las tres están presupuestadas en <b>$0.0 mdp</b> para 2026. No se grafican porque una barra de cero no se ve; ' +
+        'se dicen porque su ausencia explica tanto como las cifras de arriba.</p>' +
+      '</div>' +
+      '<ul class="erario-ceros-lista">' +
+        ERARIO_RUBROS_CERO.map(r =>
+          '<li class="ecz-item">' +
+            '<span class="ecz-clave">LIF ' + r.clave + '</span>' +
+            '<span class="ecz-nom">' + r.nombre + '</span>' +
+            '<span class="ecz-monto">$0.0 mdp</span>' +
+            '<span class="ecz-que">' + r.que + '</span>' +
+          '</li>').join('') +
+      '</ul>';
   }
 
   function selectFlujoItem(tipo, id) {
@@ -2781,6 +2848,7 @@
     renderErarioTotal();
     renderFlujo('ingresos');
     renderFlujo('egresos');
+    renderFlujoCeros();
     renderCiegos();
   }
 

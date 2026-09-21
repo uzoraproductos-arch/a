@@ -725,6 +725,64 @@ de los 32 circuitos.
   idéntico al de antes del cambio (11 enlaces de glosario, 11 notas al
   pie, 0 anidadas, 0 huérfanos).
 
+### Hecho (1.1: el grupo de impuestos, completo y con fundamento)
+
+- **Se acabó «Otros impuestos».** El renglón que agrupaba cuatro conceptos
+  distintos se abre en los que la ley enumera, con la cifra oficial de cada
+  uno: **Accesorios de impuestos** ($135,769.4), **ISAN** ($20,161.8),
+  **Exploración y extracción de hidrocarburos** ($7,070.4) e **Impuestos de
+  ejercicios anteriores** ($62.7). La gráfica pasa de 9 a 12 renglones.
+- **Defecto de dato corregido, y era real.** La base daba $162,523.2 mdp a
+  «Otros impuestos». El residual oficial es **$163,064.3**: faltaban 541.1
+  mdp, que estaban inflando la línea de derechos, productos y
+  aprovechamientos. Con la corrección el grupo Impuestos cierra en
+  **$5,838,541.1 mdp**, exactamente el total del Artículo 1º de la LIF 2026,
+  y el arreglo de ingresos sigue cuadrando al peso con `totalLIF`. Los 541.1
+  los absorbe la línea marcada `derivado`, que es justo la que se obtiene por
+  diferencia.
+- **Fuente.** Ley de Ingresos de la Federación para el Ejercicio Fiscal de
+  2026, Artículo 1º, publicada en el DOF el 7 de noviembre de 2025. Se
+  descargó el texto de la Cámara de Diputados y se extrajeron las cifras del
+  cuadro; la suma de los nueve rubros de impuestos reproduce el total
+  publicado sin ajuste.
+- **Cada impuesto responde ahora tres preguntas**, no una: qué grava (ya
+  estaba), **qué efecto jurídico produce** (campo `efecto`, nuevo) y de dónde
+  sale la cifra. La ficha lleva la clave del concepto en la LIF, el
+  fundamento legal y dos botones: uno al **glosario** y otro a la
+  **referencia** del catálogo de fuentes.
+- **Desglose dentro del desglose.** Los rubros que la propia ley abre traen
+  su tabla: el IEPS con sus **once** componentes —de combustibles
+  automotrices ($473,279.1) a bebidas energetizantes ($100.2)— y comercio
+  exterior con importación y exportación. Las once cifras del IEPS suman
+  $761,501.9 al peso. Nacen en cero y cuentan al abrirse la ficha, con el
+  motor `simAnimarZona`.
+- **Bloque nuevo: «Y los que la ley enumera, pero deja en cero».** El
+  Artículo 1º contempla impuestos **sobre el patrimonio** (1.12), **sobre
+  nóminas** (1.15) y **ecológicos** (1.16), los tres presupuestados en $0.0.
+  No se grafican —una barra de cero se lee como defecto de maquetación— pero
+  se declaran con su explicación: no hay impuesto federal al patrimonio, el
+  de nóminas es estatal, y los gravámenes ambientales que sí recauda la
+  Federación viven dentro del IEPS.
+- **Referencias 52 a 57**: Ley del ISR, Ley del IVA, Ley del IEPS, LIGIE
+  2022 (con la Ley Aduanera y el art. 131 CPEUM), Ley Federal del ISAN y Ley
+  de Ingresos sobre Hidrocarburos. Las seis URL se verificaron contra el
+  portal de la Cámara de Diputados antes de citarse.
+- **Glosario 155 → 163.** ISR, IVA e IEPS dejan de compartir una sola ficha
+  agrupada y tienen la suya; se suman ISAN, Impuestos al Comercio Exterior
+  (Aranceles), Accesorios de las Contribuciones, Impuesto por la Actividad de
+  Exploración y Extracción de Hidrocarburos y Rezago Fiscal. El autoenlace se
+  repartió en consecuencia: cada acrónimo apunta a su ficha y a su ley, no al
+  Código Fiscal genérico.
+- Los enlaces van en la **ficha de detalle**, no en el renglón de la gráfica:
+  el renglón ya es un botón y anidar un enlace dentro rompe la navegación por
+  teclado. Verificado: 0 enlaces dentro de botón.
+- Verificado: los 8 renglones de impuestos abren ficha con efecto jurídico,
+  enlace a glosario y enlace a referencia; el de glosario abre la ficha
+  correcta en la pestaña 7 y el de referencia lleva a la 8; los porcentajes
+  de la gráfica suman 100.0 % y los subtotales de grupo 57.3 % + 28.3 % +
+  14.4 %; 14 enlaces de glosario con sus 14 notas al pie en la 1.1, 0
+  anidadas; 0 desbordes de 1600 a 360 px; 0 errores de JavaScript.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
