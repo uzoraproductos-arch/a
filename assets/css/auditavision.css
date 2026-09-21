@@ -9614,6 +9614,13 @@ nav.tabbar button:focus-visible,
 
 .fc-relleno.ing { background: linear-gradient(90deg, #1e824c, #2ecc71); }
 .fc-relleno.egr { background: linear-gradient(90deg, #2980b9, #4ecdc4); }
+/* Cada subpestaña con su color, para que al cambiar de una a otra se vea
+   que se cambió de cuadro y no sólo de cifras. El aviso va después: si
+   fuera al revés, el color de la vista ganaría por orden de hoja y la
+   cifra que merece cautela se leería como una más. */
+.fc-relleno.fed { background: linear-gradient(90deg, #7d6608, #d4ac0d); }
+.fc-relleno.mun { background: linear-gradient(90deg, #4a235a, #9b59b6); }
+
 .fc-relleno.alerta { background: linear-gradient(90deg, #8b1a1a, #e74c3c); }
 
 .fc-monto { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-main); white-space: nowrap; }
@@ -9741,6 +9748,45 @@ nav.tabbar button:focus-visible,
 
 .fdc-neg .fdc-monto, .fdc-neg .fdc-pct { color: var(--crimson-bright); }
 .fdc-pie { margin: 8px 0 0; font-size: 11.5px; line-height: 1.55; color: var(--text-dim); }
+
+/* --- Cómo lo reparte la ley ---
+   Porcentajes de la recaudación federal participable, no pesos: no se
+   convierten porque convertirlos exigiría una estimación que nadie ha
+   publicado. Sin barra, por lo mismo. --- */
+.fdr-lista { list-style: none; margin: 7px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+
+.fdr-fila {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.6fr) auto;
+  align-items: baseline;
+  gap: 10px 14px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: var(--bg-card);
+}
+
+.fdr-nom { font-size: 12.5px; color: var(--text-main); }
+.fdr-val {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-gold);
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.fdr-det { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-dim); line-height: 1.55; }
+
+/* --- Lo que falta, y por qué ---
+   Un hueco declarado vale más que una cifra inventada, pero sólo si se
+   declara: de ahí el borde discontinuo, que se lee como provisional. --- */
+.fd-pendiente {
+  padding: 11px 13px;
+  background: rgba(127, 140, 141, 0.07);
+  border: 1px dashed var(--border-accent);
+  border-radius: 6px;
+}
+
+.fd-pendiente p { margin: 5px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); max-width: 78ch; }
 
 .fd-enlaces { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
 
@@ -9905,6 +9951,8 @@ nav.tabbar button:focus-visible,
 .est-oficial { background: rgba(46, 204, 113, 0.12); color: var(--emerald-bright); border: 1px solid rgba(46, 204, 113, 0.35); }
 .est-derivado { background: rgba(243, 156, 18, 0.12); color: var(--amber); border: 1px solid rgba(243, 156, 18, 0.35); }
 .est-analisis { background: rgba(155, 89, 182, 0.12); color: #c39bd3; border: 1px solid rgba(155, 89, 182, 0.4); }
+/* Ni oficial ni derivado: dato que la fuente sencillamente no publica. */
+.est-pendiente { background: rgba(127, 140, 141, 0.14); color: var(--text-secondary); border: 1px dashed var(--border-accent); }
 .est-contexto { background: rgba(78, 205, 196, 0.12); color: var(--cyan); border: 1px solid rgba(78, 205, 196, 0.35); }
 
 /* --- Puntos ciegos --- */
@@ -10011,28 +10059,59 @@ nav.tabbar button:focus-visible,
 }
 
 /* --- Gasto federalizado --- */
-.federalizado-grid {
+/* La reja .federalizado-grid / .fed-card se retiró: el gasto federalizado
+   pasó a leerse con la misma gráfica de barras y la misma ficha lateral de
+   la 1.1, de modo que las cuatro vistas de la pestaña 1 comparten forma. */
+
+/* --- Fichas de facultad del municipio (1.3) ---
+   Lo que el artículo 115 reconoce al municipio no lleva barra: no hay cifra
+   nacional publicada, y una barra inventada valdría menos que el hueco. --- */
+.mpf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 14px;
 }
 
-.fed-card {
+.mpf-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-align: left;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--cyan);
   border-radius: 10px;
-  padding: 18px 20px;
+  padding: 16px 18px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.18s, background 0.18s, transform 0.18s;
 }
 
-.fed-top { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
-.fed-card h4 { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--text-main); margin: 0; }
-.fed-monto { font-family: var(--font-mono); font-size: 14px; color: var(--gold-bright); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mpf-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); }
+.mpf-card.active { border-color: var(--gold-bright); border-left-color: var(--gold-bright); }
 
-.fed-barra { height: 8px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; margin-bottom: 5px; }
-.fed-barra > span { display: block; height: 100%; background: var(--gold-gradient); border-radius: 3px; }
-.fed-pct { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-bottom: 10px; }
-.fed-regla { color: var(--text-secondary); font-size: 13px; line-height: 1.6; margin: 0 0 10px; }
-.fed-card footer { font-family: var(--font-mono); font-size: 10.5px; color: var(--cyan); padding-top: 9px; border-top: 1px solid var(--border-subtle); }
+.mpf-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.mpf-ico { font-size: 23px; line-height: 1; }
+
+.mpf-clave {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-dim);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+.mpf-nom { font-family: var(--font-serif); font-size: 16.5px; font-weight: 700; color: var(--text-main); }
+.mpf-que { font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
+
+.mpf-mas {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-gold);
+  margin-top: 2px;
+}
 
 /* --- Circuito de una entidad --- */
 .entidad-selector-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
@@ -10078,7 +10157,7 @@ nav.tabbar button:focus-visible,
 .ec-head h4 { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--gold-bright); margin: 0 0 3px; }
 .ec-sub { font-size: 12.5px; color: var(--text-secondary); }
 .ec-dep { text-align: right; }
-.ec-dep-num { display: block; font-family: var(--font-mono); font-size: 26px; font-weight: 800; color: var(--crimson-bright); line-height: 1; }
+.ec-dep-num { display: block; font-family: var(--font-mono); font-size: 26px; font-weight: 800; color: var(--crimson-bright); line-height: 1; font-variant-numeric: tabular-nums; }
 .ec-dep-lab { font-size: 10.5px; color: var(--text-dim); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.07em; }
 
 .ec-filas { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
@@ -10088,11 +10167,15 @@ nav.tabbar button:focus-visible,
 .ec-nom em { font-style: normal; font-size: 10.5px; color: var(--text-dim); font-family: var(--font-mono); }
 .ec-barra { display: block; height: 14px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; min-width: 40px; }
 .ec-rell { display: block; height: 100%; border-radius: 3px; transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+/* Mientras la anchura la gobierne el motor de conteo, la transicion sobra:
+   si no, la barra sigue creciendo por su cuenta y el ancho final se mide
+   contra un valor intermedio. */
+.ec-rell[data-anim-w] { transition: none; }
 .ec-gold { background: linear-gradient(90deg, #9a7828, #f3cf65); }
 .ec-cyan { background: linear-gradient(90deg, #2980b9, #4ecdc4); }
 .ec-blue { background: linear-gradient(90deg, #1a5276, #3498db); }
 .ec-green { background: linear-gradient(90deg, #1e824c, #2ecc71); }
-.ec-val { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-main); white-space: nowrap; }
+.ec-val { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-main); white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 .ec-resumen {
   display: grid;
@@ -10104,7 +10187,7 @@ nav.tabbar button:focus-visible,
 
 .ec-resumen > div { display: flex; flex-direction: column; gap: 3px; }
 .ec-rk { font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-dim); font-family: var(--font-mono); }
-.ec-rv { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--gold-bright); }
+.ec-rv { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
 .ec-nota { font-size: 12px; color: var(--text-dim); line-height: 1.6; margin: 0; max-width: 80ch; }
 
 /* --- Municipios --- */
@@ -10140,13 +10223,14 @@ nav.tabbar button:focus-visible,
 .mun-cifras { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 12px; }
 .mun-cifras > div { display: flex; flex-direction: column; gap: 1px; }
 .mun-cifras span { font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-dim); font-family: var(--font-mono); }
-.mun-cifras b { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-main); font-weight: 600; }
+.mun-cifras b { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-main); font-weight: 600; font-variant-numeric: tabular-nums; }
 
 .mun-dep { display: grid; grid-template-columns: 1fr; gap: 4px; padding-top: 10px; border-top: 1px solid var(--border-subtle); }
 .mun-dep-lab { font-size: 9.5px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-dim); font-family: var(--font-mono); }
 .mun-dep-barra { display: block; height: 6px; background: var(--bg-surface); border-radius: 3px; overflow: hidden; }
 .mun-dep-barra > span { display: block; height: 100%; background: linear-gradient(90deg, #e67e22, #e74c3c); border-radius: 3px; }
-.mun-dep-num { font-family: var(--font-mono); font-size: 11.5px; color: var(--crimson-bright); text-align: right; }
+.mun-dep-barra > span[data-anim-w] { transition: none; }
+.mun-dep-num { font-family: var(--font-mono); font-size: 11.5px; color: var(--crimson-bright); text-align: right; font-variant-numeric: tabular-nums; }
 
 /* --- Adaptacion a pantallas estrechas --- */
 @media (max-width: 860px) {

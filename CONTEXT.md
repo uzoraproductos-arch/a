@@ -897,6 +897,100 @@ de los 32 circuitos.
   la ventana abierta; las cuatro ventanas de argumento particular de la 5.2
   y las nueve pestañas siguen abriendo; 0 errores de JavaScript.
 
+### Hecho (la pestaña 1 pasa de tres a cuatro subpestañas)
+
+- **Nueva numeración.** 1.1 sigue igual · **1.2** se queda sólo con los
+  estados · **1.3 es nueva**, dedicada al municipio · **1.4** es la que era
+  1.3, la Constitución Económica. El eslabón municipal, que era el último
+  bloque de la 1.2, se mudó a la 1.3 con subpestaña propia.
+- **El tratamiento de la 1.1 se replicó en las dos.** Barras que nacen en
+  ceros, dos mandos —«Contabilizar» y «Reiniciar a ceros»—, ficha lateral
+  por renglón con fundamento, efecto jurídico, desglose y enlaces a
+  glosario y referencias. **31 fichas** en la pestaña 1; 25 completas, las
+  6 pendientes son las de egresos de la 1.1, que ya venían así.
+- **Una sola maquinaria para las cuatro gráficas.** En vez de triplicar
+  ciento veinte líneas, se extrajo un registro (`FICHA_CTX`) que dice, para
+  cada vista, de dónde salen sus renglones, qué rótulo lleva su ficha y de
+  qué color van sus barras. `renderFlujo` quedó como alias de
+  `renderBarras`; `renderFlujoDetalle` se volvió `renderFicha`;
+  `itemIngresoSel`/`itemEgresoSel` se volvieron el mapa `fichaSel`. La 1.1
+  se verificó renglón por renglón después del refactor: 16/16 intactas.
+
+#### Los datos: todo lo nuevo sale del PEF 2026 y de la LCF
+
+- Se extrajo el **Presupuesto de Egresos de la Federación 2026** (PDF de
+  8.6 MB, DOF 21/11/2025) con el extractor propio en Python puro —no hay
+  `pdftotext` ni `pypdf` en el entorno—, y de ahí salieron el **Anexo 1**
+  (gasto neto por ramo) y el **Anexo 22** (Ramo 33 fondo por fondo).
+- **DEFECTO DE FONDO CORREGIDO.** La base traía «Ramo 33 — Aportaciones» en
+  $1,127,075.3 mdp. El PEF cifra el Ramo 33 en **$1,041,892.9** y el
+  **Ramo 25** en **$85,182.4**: la base sumaba dos ramos distintos bajo el
+  nombre de uno. Ahora son cuatro renglones —28, 33, 25 y convenios— y los
+  tres primeros son `oficial`. El total del gasto federalizado no se movió:
+  $2,810,800.0 mdp.
+- **Ramo 33 con sus ocho fondos, al peso**: FONE $546,396.8 · FORTAMUN
+  $136,817.4 · FAIS $135,060.7 · FASSA $84,635.9 · FAFEF $74,754.9 · FAM
+  $43,464.6 · FAETA $10,811.4 · FASP $9,951.1. Suman exactamente
+  $1,041,892.906925. Se guardan con los seis decimales del PEF porque a una
+  sola cifra decimal la suma cerraba en .8 y no en .9.
+- **Ramo 28 sin cifras inventadas.** El PEF publica su total, no su reparto
+  por fondo. En vez de estimarlo, la ficha muestra **cómo lo reparte la ley**
+  —20 % de la RFP al Fondo General, 1.25 % al de Fiscalización, 1 % al de
+  Fomento Municipal, 9/11 del IEPS de gasolinas, 100 % del ISR del personal
+  local, 0.136 % a municipios de frontera— y una nota que dice qué falta y
+  dónde se publica. Campo nuevo `reglas` y bloque `.fd-pendiente`.
+- **Tercer distintivo de trazabilidad: `pendiente`.** Ni oficial ni derivado:
+  dato que la fuente sencillamente no publica. Lo llevan las tres fichas de
+  facultad municipal.
+- **La 1.3 en cifras**: FORTAMUN $136,817.4 y FISMDF $118,689.4 (Anexo 22)
+  son lo único que el PEF cifra como municipal. Aparte va la lista de lo que
+  **la ley garantiza sin cifrar**: el ≥20 % del Fondo General (LCF art. 6º),
+  el Fondo de Fomento Municipal (art. 2-A III), el IEPS de gasolinas
+  (art. 4-A) y el 0.136 % de frontera y litoral (art. 2-A I). Y tres fichas
+  de facultad del artículo 115 fracc. IV: predial, derechos por servicios y
+  participaciones.
+- **El punto ciego del tercer piso**, citado literal del artículo 115: «Las
+  legislaturas de los Estados aprobarán las leyes de ingresos de los
+  municipios […] Los presupuestos de egresos serán aprobados por los
+  ayuntamientos». Es el único piso donde quien aprueba el ingreso no es
+  quien responde por el gasto. Verificado contra el PDF de la CPEUM.
+- **Glosario 170 → 180**: Gasto Federalizado, Recursos de Libre Disposición,
+  Recursos Etiquetados, Sistema Nacional de Coordinación Fiscal, Hacienda
+  Municipal, Ramo 25, FAFEF, FAM, FAETA y FASP.
+
+#### Enlaces muertos en el catálogo de fuentes
+
+Un barrido de las 62 referencias encontró **seis URL de diputados.gob.mx
+rotas** (404). Una cita que no abre vale menos que ninguna, así que se
+corrigieron todas y se recomprobaron: `ref-lcf` (Ley de Coordinación
+Fiscal, la más citada por este cambio), `ref-lgcg`, `ref-laassp`,
+`ref-lgmde`, `ref-lgdp` y `ref-lpcgpf`, esta última apuntada ahora a la
+versión histórica entre las leyes abrogadas. **Las 62 URL de
+diputados.gob.mx devuelven 200.** Las demás (DOF, CIEP, IMCO, INAI,
+CourtListener) no son alcanzables desde este entorno y no pudieron
+comprobarse.
+
+**Pendiente de cotejo:** la Cámara publica hoy la Ley General de Deuda
+Pública bajo el título **«Ley Federal de Deuda Pública»**, con el nombre
+original como subtítulo, pero su PDF sigue diciendo «última reforma DOF
+30-01-2018». No se renombró en la base porque el decreto que la renombra no
+pudo citarse: el DOF no es alcanzable desde este entorno. Hay 8 menciones
+en la base y 2 en `index.html` esperando esa comprobación.
+
+#### Verificado
+
+Las cuatro subpestañas abren; los mandos de las cuatro gráficas y de las
+dos zonas por entidad arrancan en ceros y cuentan; el federalizado suma
+100.0 % y $2,810,800 mdp; los ocho fondos del Ramo 33 cierran en
+$1,041,893; la ficha del Ramo 28 muestra seis reglas y cero barras; los
+selectores de entidad de la 1.2 y la 1.3 quedan sincronizados; la 1.4 sigue
+pintando brújula, cuatro pilares y cadena; las cuatro ventanas de argumento
+particular de la 5.2 y las nueve pestañas siguen abriendo; 0 desbordes de
+1600 a 360 px; 0 errores de JavaScript. Comparación estructural contra el
+commit anterior: 20 colecciones intactas, `estados` idéntica, los 170
+términos previos del glosario sin cambios, `panoramaErario` sin cambios
+fuera de `federalizado` y del nuevo `municipal`.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

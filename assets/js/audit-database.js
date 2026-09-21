@@ -493,17 +493,318 @@ window.AUDIT_DB = {
 
     "federalizado": {
       "totalMdp": 2810800,
+      "nota": "Los tres primeros renglones salen del Anexo 1 del Presupuesto de Egresos de la Federación 2026, que los nombra y cifra ramo por ramo. El cuarto es el residuo contra la estimación de gasto federalizado total y por eso va marcado como derivado.",
       "componentes": [
-        { "id": "fed-r28", "nombre": "Ramo 28 \u2014 Participaciones", "montoMdp": 1456045.9, "estado": "oficial",
-          "regla": "Libre disposici\u00f3n. El estado decide en qu\u00e9 lo gasta y responde ante su propio congreso.",
-          "ley": "Ley de Coordinaci\u00f3n Fiscal, arts. 2 a 3-B" },
-        { "id": "fed-r33", "nombre": "Ramo 33 \u2014 Aportaciones", "montoMdp": 1127075.3, "estado": "oficial",
-          "regla": "Etiquetado. Llega con destino fijado por ley: educaci\u00f3n, salud, infraestructura social, seguridad.",
-          "ley": "Ley de Coordinaci\u00f3n Fiscal, cap\u00edtulo V, arts. 25 a 51" },
-        { "id": "fed-conv", "nombre": "Convenios y otros recursos", "montoMdp": 227678.8, "estado": "derivado",
-          "regla": "Se pactan caso por caso entre la Federaci\u00f3n y cada entidad. Es la bolsa menos previsible de las tres.",
-          "ley": "LFPRH, art. 82" }
+        {
+          "id": "fed-r28",
+          "icono": "🪙",
+          "grupo": "No programable · el estado decide",
+          "nombre": "Ramo 28 — Participaciones",
+          "nombreLargo": "Ramo 28 · Participaciones a Entidades Federativas y Municipios",
+          "montoMdp": 1456045.89428,
+          "estado": "oficial",
+          "clave": "PEF Anexo 1",
+          "queEs": "La parte de la recaudación federal que, por pertenecer a un sistema de coordinación fiscal, regresa a los estados y municipios como ingreso propio. No es un subsidio ni un apoyo: es lo que las entidades reciben a cambio de haber dejado de cobrar por su cuenta los impuestos que hoy cobra la Federación.",
+          "efecto": "Es <b>ingreso propio de la entidad</b>, no transferencia condicionada. Una vez entregado deja de ser dinero federal: el estado lo gasta en lo que decida y responde ante su propio congreso y su propio órgano de fiscalización, no ante la Cámara de Diputados. Por eso el Ramo 28 aparece como gasto <b>no programable</b> de la Federación: no se decide cada año, se debe. El artículo 9º de la Ley de Coordinación Fiscal lo declara además <b>inembargable</b> y prohíbe afectarlo a fines específicos, salvo los fondos que la propia ley autoriza dar en garantía de deuda.",
+          "ley": "Ley de Coordinación Fiscal, arts. 2º a 4-A y 9º",
+          "glos": "Ramo 28 (Participaciones Federales)",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "reglas": [
+            {
+              "n": "Fondo General de Participaciones",
+              "v": "20 % de la RFP",
+              "d": "El fondo mayor del ramo. Se reparte entre las 32 entidades con una fórmula que pesa población, crecimiento económico y recaudación local. LCF art. 2º."
+            },
+            {
+              "n": "Fondo de Fiscalización y Recaudación",
+              "v": "1.25 % de la RFP",
+              "d": "Premia a las entidades que fiscalizan y recaudan mejor. LCF art. 4º."
+            },
+            {
+              "n": "Fondo de Fomento Municipal",
+              "v": "1 % de la RFP",
+              "d": "Su 16.8 % lo forma directamente; el 83.2 % restante sólo corresponde a las entidades coordinadas en materia de derechos. Es dinero municipal. LCF art. 2-A, fracc. III."
+            },
+            {
+              "n": "IEPS de gasolinas y diésel",
+              "v": "9/11 a las entidades",
+              "d": "Los 2/11 restantes forman el Fondo de Compensación para las diez entidades de menor PIB per cápita no minero y no petrolero. LCF art. 4-A."
+            },
+            {
+              "n": "ISR del personal de estados y municipios",
+              "v": "100 % a quien lo paga",
+              "d": "Si el sueldo lo paga el estado o el municipio con cargo a sus propios recursos, el ISR retenido regresa completo a esa hacienda. LCF art. 3-B."
+            },
+            {
+              "n": "Municipios de frontera y litoral",
+              "v": "0.136 % de la RFP",
+              "d": "Para los municipios por los que entran o salen materialmente del país las mercancías de comercio exterior. LCF art. 2-A, fracc. I."
+            }
+          ],
+          "pendiente": "El Presupuesto de Egresos publica el total del Ramo 28, no su reparto fondo por fondo ni entidad por entidad. Ese desglose lo da a conocer la Secretaría de Hacienda en el acuerdo de distribución que publica el Diario Oficial cada diciembre; se incorporará cuando pueda cotejarse contra la fuente."
+        },
+        {
+          "id": "fed-r33",
+          "icono": "🎯",
+          "grupo": "Programable · llega con destino fijado",
+          "nombre": "Ramo 33 — Aportaciones",
+          "nombreLargo": "Ramo 33 · Aportaciones Federales para Entidades Federativas y Municipios",
+          "montoMdp": 1041892.906925,
+          "estado": "oficial",
+          "clave": "PEF Anexo 22",
+          "queEs": "Ocho fondos que la Federación transfiere a estados y municipios con el gasto condicionado por ley: cada peso trae escrito en qué puede gastarse. Nómina magisterial, salud, infraestructura social, seguridad pública y fortalecimiento de las haciendas locales.",
+          "efecto": "A diferencia de las participaciones, las aportaciones <b>no dejan de ser recursos federales</b> al entregarse: el artículo 25 de la Ley de Coordinación Fiscal condiciona su gasto al cumplimiento de los objetivos que la propia ley fija para cada fondo, y el artículo 49 somete su ejercicio a la fiscalización de la Auditoría Superior de la Federación. De ahí que un municipio pueda ser auditado por la ASF sin ser autoridad federal: lo que se audita es el fondo, no el ente. Desviar un fondo de su destino legal no es mala administración, es <b>responsabilidad administrativa y, en su caso, delito</b>.",
+          "ley": "Ley de Coordinación Fiscal, capítulo V, arts. 25 a 51",
+          "glos": "Ramo 33 (Aportaciones Federales)",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "componentes": [
+            {
+              "n": "FONE — Nómina Educativa y Gasto Operativo",
+              "m": 546396.822994,
+              "d": "Servicios personales $500,367.1 · gasto de operación $19,340.5 · fondo de compensación $13,915.7 · otros de gasto corriente $12,773.6. Es el 52.4 % del ramo: uno de cada dos pesos del Ramo 33 es nómina magisterial. LCF arts. 26 a 28."
+            },
+            {
+              "n": "FORTAMUN — Fortalecimiento de los Municipios",
+              "m": 136817.441982,
+              "d": "Equivale al 2.35 % de la recaudación federal participable. Es el único fondo del ramo que es 100 % municipal y llega sin más restricción que su destino legal. LCF arts. 36 y 37."
+            },
+            {
+              "n": "FAIS — Infraestructura Social",
+              "m": 135060.702396,
+              "d": "2.5294 % de la RFP: 0.3066 % a las entidades ($16,371.3 mdp) y 2.2228 % a los municipios y demarcaciones ($118,689.4 mdp). Sólo puede gastarse en obra que beneficie a población en pobreza extrema o rezago social. LCF arts. 32 a 35."
+            },
+            {
+              "n": "FASSA — Servicios de Salud",
+              "m": 84635.885593,
+              "d": "Financia los servicios estatales de salud. Su peso relativo cayó con la absorción de los servicios estatales por el IMSS-Bienestar. LCF arts. 29 a 31."
+            },
+            {
+              "n": "FAFEF — Fortalecimiento de las Entidades Federativas",
+              "m": 74754.876,
+              "d": "1.40 % de la RFP. Se destina a inversión en infraestructura, saneamiento financiero y pago de deuda de la entidad. LCF art. 46."
+            },
+            {
+              "n": "FAM — Aportaciones Múltiples",
+              "m": 43464.62076,
+              "d": "Asistencia social $19,993.7 (46 % por ley) e infraestructura educativa $23,470.9 (54 %). Paga desayunos escolares y construcción de escuelas. LCF arts. 39 a 41."
+            },
+            {
+              "n": "FAETA — Educación Tecnológica y de Adultos",
+              "m": 10811.443171,
+              "d": "Educación tecnológica $6,858.3 y educación de adultos $3,953.1. LCF arts. 42 a 44."
+            },
+            {
+              "n": "FASP — Seguridad Pública de los Estados",
+              "m": 9951.114029,
+              "d": "El fondo más pequeño del ramo: el 0.96 %. El Presupuesto de Egresos promueve que al menos el 20 % se reparta entre municipios y demarcaciones. LCF arts. 45 y 45-Bis."
+            }
+          ]
+        },
+        {
+          "id": "fed-r25",
+          "icono": "🏫",
+          "grupo": "Programable · llega con destino fijado",
+          "nombre": "Ramo 25 — Previsiones educativas",
+          "nombreLargo": "Ramo 25 · Previsiones y Aportaciones para los Sistemas de Educación Básica, Normal, Tecnológica y de Adultos",
+          "montoMdp": 85182.409042,
+          "estado": "oficial",
+          "clave": "PEF Anexo 21",
+          "queEs": "El ramo que financia la educación básica y normal de la Ciudad de México —que nunca se descentralizó como en el resto del país— y guarda las previsiones salariales del magisterio que después se trasladan al FONE y al FAETA.",
+          "efecto": "Es <b>gasto federalizado que no aparece en el Ramo 33</b>, y ahí está su interés: quien compare años o entidades sumando sólo el Ramo 33 deja fuera $85,182.4 mdp de dinero magisterial. La Ciudad de México recibe por este ramo lo que las demás entidades reciben por el FONE, porque su servicio educativo básico siguió a cargo de la Federación cuando el Acuerdo Nacional para la Modernización de la Educación Básica de 1992 transfirió el de los estados.",
+          "ley": "Presupuesto de Egresos de la Federación 2026, Anexo 21 · Ley de Coordinación Fiscal, arts. 26-A y 42",
+          "glos": "Ramo 25 (Previsiones y Aportaciones Educativas)",
+          "refKey": "ref-pef2026",
+          "refNum": 11,
+          "componentes": [
+            {
+              "n": "Aportaciones para la educación básica y normal en la Ciudad de México",
+              "m": 50292.389634,
+              "d": "Lo que en las otras 31 entidades llega por el FONE."
+            },
+            {
+              "n": "Previsiones para servicios personales del FONE y del FAETA",
+              "m": 34890.019408,
+              "d": "Bolsa de reserva para las medidas salariales del año, que se traslada a los fondos del Ramo 33 conforme se ejerce."
+            }
+          ]
+        },
+        {
+          "id": "fed-conv",
+          "icono": "🤝",
+          "grupo": "Programable · pactado caso por caso",
+          "nombre": "Convenios y otros recursos",
+          "nombreLargo": "Convenios de descentralización, reasignación y otros recursos federalizados",
+          "montoMdp": 227678.789753,
+          "estado": "derivado",
+          "clave": "residuo",
+          "queEs": "Lo que la Federación transfiere a las entidades sin pasar por los ramos 28, 33 ni 25: convenios de descentralización y de reasignación que firman las secretarías con cada gobierno estatal, caso por caso y año por año.",
+          "efecto": "Es la bolsa <b>menos previsible y menos comparable</b> de las cuatro. No la fija una fórmula de ley sino un convenio administrativo, de modo que puede crecer, encogerse o desaparecer sin que cambie una sola norma. El artículo 82 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria exige que se sujeten a la disponibilidad del ramo que los origina y que se informe de ellos; no garantiza su continuidad. Para una entidad, planear con esta bolsa es planear con un ingreso que nadie le debe.",
+          "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 82",
+          "glos": "Gasto Federalizado",
+          "refKey": "ref-lfprh",
+          "refNum": 2,
+          "pendiente": "Esta cifra es un residuo: la diferencia entre la estimación de gasto federalizado total y la suma de los ramos 28, 33 y 25, que sí están cifrados en el Presupuesto de Egresos. Se sustituirá por la suma de los convenios reportados en los informes trimestrales de la Secretaría de Hacienda en cuanto puedan cotejarse uno por uno."
+        }
       ]
+    },
+    "municipal": {
+      "etiquetadoMdp": 255506.826534,
+      "nota": "Las dos cifras salen del Anexo 22 del Presupuesto de Egresos de la Federación 2026, que cifra fondo por fondo el Ramo 33. Son los únicos recursos federales que el Presupuesto identifica como municipales de origen; todo lo demás que llega al municipio pasa antes por la hacienda de su estado.",
+      "fuentes": [
+        {
+          "id": "mun-fortamun",
+          "icono": "🏛️",
+          "grupo": "Lo que el Presupuesto de Egresos cifra como municipal",
+          "nombre": "FORTAMUN",
+          "nombreLargo": "Fondo de Aportaciones para el Fortalecimiento de los Municipios y de las Demarcaciones Territoriales",
+          "montoMdp": 136817.441982,
+          "estado": "oficial",
+          "clave": "PEF Anexo 22",
+          "queEs": "El fondo municipal por excelencia del Ramo 33. Equivale al 2.35 % de la recaudación federal participable y se entrega mensualmente, por partes iguales, a través de los estados, sin más restricción que su destino legal.",
+          "efecto": "Es el único fondo del Ramo 33 que llega <b>«de manera ágil y directa sin más limitaciones ni restricciones, incluyendo aquellas de carácter administrativo»</b>, según el propio artículo 36 de la Ley de Coordinación Fiscal: el estado es conducto, no filtro, y retenerlo genera intereses a la tasa de recargos del Congreso. Su destino, en cambio, sí está fijado por el artículo 37, y en un orden revelador: <b>primero las obligaciones financieras</b> del municipio, después el agua, la modernización de la recaudación, el mantenimiento de infraestructura y la seguridad pública. Es decir, la ley da por supuesto que el municipio llega endeudado. El Presupuesto de Egresos añade que se promoverá destinar al menos el 20 % a seguridad pública.",
+          "ley": "Ley de Coordinación Fiscal, arts. 36 y 37",
+          "glos": "FORTAMUN",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "reglas": [
+            {
+              "n": "Municipios de los estados",
+              "v": "2.35 % de la RFP",
+              "d": "Se reparte en proporción directa al número de habitantes de cada entidad, y de ahí entre sus municipios. LCF art. 36, inciso a)."
+            },
+            {
+              "n": "Demarcaciones de la Ciudad de México",
+              "v": "0.2123 % de la RFP",
+              "d": "Las alcaldías reciben por una vía propia, calculada aparte. LCF art. 36, inciso b)."
+            },
+            {
+              "n": "Plazo de entrega",
+              "v": "mensual",
+              "d": "El estado es conducto: si retrasa la entrega paga intereses a la tasa de recargos que fija el Congreso de la Unión."
+            }
+          ]
+        },
+        {
+          "id": "mun-fismdf",
+          "icono": "🚧",
+          "grupo": "Lo que el Presupuesto de Egresos cifra como municipal",
+          "nombre": "FISMDF",
+          "nombreLargo": "Fondo de Aportaciones para la Infraestructura Social Municipal y de las Demarcaciones Territoriales",
+          "montoMdp": 118689.384552,
+          "estado": "oficial",
+          "clave": "PEF Anexo 22",
+          "queEs": "La parte municipal del Fondo de Aportaciones para la Infraestructura Social. De cada 2.5294 % de la recaudación federal participable que forma el FAIS, 2.2228 puntos son municipales y 0.3066 quedan en la entidad.",
+          "efecto": "Es el fondo <b>más condicionado</b> de todos los que llegan al municipio. El artículo 33 de la Ley de Coordinación Fiscal lo reserva «exclusivamente» a obras y acciones que beneficien de forma directa a población en pobreza extrema, localidades de alto o muy alto rezago social y zonas de atención prioritaria; el artículo 35 obliga a repartirlo entre municipios con una fórmula redistributiva que pesa la profundidad de la pobreza. El Presupuesto de Egresos 2026 agrega un piso: al menos el <b>10 % debe entregarse a pueblos y comunidades indígenas y afromexicanas</b>. Gastarlo en otra cosa, por útil que parezca, es desvío de recursos con destino legal.",
+          "ley": "Ley de Coordinación Fiscal, arts. 32, 33 y 35",
+          "glos": "FISMDF / FAIS",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "reglas": [
+            {
+              "n": "Parte municipal del FAIS",
+              "v": "2.2228 % de la RFP",
+              "d": "El FAIS completo equivale al 2.5294 % de la recaudación federal participable. LCF art. 32."
+            },
+            {
+              "n": "Parte estatal (FISE)",
+              "v": "0.3066 % de la RFP",
+              "d": "Los $16,371.3 mdp que se quedan en la entidad y no bajan al municipio. LCF art. 32."
+            },
+            {
+              "n": "Piso para pueblos indígenas y afromexicanos",
+              "v": "10 % del fondo",
+              "d": "Lo fija el Presupuesto de Egresos de la Federación 2026, no la Ley de Coordinación Fiscal."
+            },
+            {
+              "n": "Criterio de reparto",
+              "v": "pobreza extrema",
+              "d": "Fórmula redistributiva con la medición de pobreza municipal más reciente. LCF arts. 34 y 35."
+            }
+          ]
+        }
+      ],
+      "sinCifra": [
+        {
+          "clave": "LCF art. 6º",
+          "nombre": "Participaciones del Fondo General",
+          "que": "Al municipio le corresponde <b>cuando menos el 20 %</b> de lo que su estado reciba del Fondo General de Participaciones. Quién recibe cuánto lo decide la legislatura local, no la Federación: por eso no existe una cifra municipal nacional en el Presupuesto de Egresos."
+        },
+        {
+          "clave": "LCF art. 2-A, III",
+          "nombre": "Fondo de Fomento Municipal",
+          "que": "El 1 % de la recaudación federal participable, íntegramente municipal. Su fórmula premia a los municipios que más recaudan de predial y de derechos de agua: el municipio que cobra, recibe más."
+        },
+        {
+          "clave": "LCF art. 4-A",
+          "nombre": "IEPS de gasolinas y diésel",
+          "que": "De la cuota que se paga en cada litro, 9 de cada 11 pesos corresponden a la entidad donde se consumió, y una parte de esos recursos debe llegar a sus municipios."
+        },
+        {
+          "clave": "LCF art. 2-A, I",
+          "nombre": "Municipios de frontera y de litoral",
+          "que": "El 0.136 % de la recaudación federal participable, para los municipios por los que entran o salen materialmente del país las mercancías de comercio exterior."
+        }
+      ],
+      "propios": [
+        {
+          "id": "mp-predial",
+          "icono": "🏠",
+          "grupo": "Lo que cobra por su cuenta · Art. 115, fracc. IV CPEUM",
+          "nombre": "Predial y contribuciones sobre la propiedad",
+          "nombreLargo": "Contribuciones sobre la propiedad inmobiliaria",
+          "montoMdp": null,
+          "estado": "pendiente",
+          "clave": "115-IV-a",
+          "queEs": "El impuesto predial y las contribuciones sobre el fraccionamiento, división, consolidación, traslación y mejora de inmuebles, más las que tengan por base el cambio de valor de la propiedad.",
+          "efecto": "Es la única fuente que la Constitución reserva al municipio <b>en exclusiva y por mandato</b>: el artículo 115, fracción IV, inciso a), dice «en todo caso», y el mismo precepto prohíbe que las leyes federales limiten esa facultad o concedan exenciones sobre ella. Sólo quedan exentos los bienes de dominio público, y aun ésos pierden la exención si un particular o una paraestatal los usa para fines distintos de su objeto público. A cambio, el municipio <b>no fija la tasa</b>: propone cuotas, tarifas y tablas de valores, y es el congreso del estado quien las aprueba. Puede además convenir con el estado que éste administre el cobro.",
+          "ley": "Constitución Política, art. 115, fracc. IV, inciso a)",
+          "glos": "Impuesto Predial",
+          "refKey": "ref-cpeum",
+          "refNum": 1,
+          "pendiente": "El total nacional de recaudación predial no vive en el Presupuesto de Egresos: se construye sumando las cuentas públicas de más de 2,400 municipios, y el INEGI lo consolida con rezago en su programa de Finanzas Públicas Estatales y Municipales. Se incorporará cuando pueda citarse contra esa fuente, ejercicio por ejercicio."
+        },
+        {
+          "id": "mp-servicios",
+          "icono": "🚰",
+          "grupo": "Lo que cobra por su cuenta · Art. 115, fracc. IV CPEUM",
+          "nombre": "Derechos por servicios públicos",
+          "nombreLargo": "Ingresos derivados de la prestación de servicios públicos a su cargo",
+          "montoMdp": null,
+          "estado": "pendiente",
+          "clave": "115-IV-c",
+          "queEs": "Agua potable y alcantarillado, alumbrado, limpia y disposición de residuos, mercados, panteones, rastro, calles, parques y seguridad pública: los servicios que la fracción III del artículo 115 pone a cargo del municipio, y cuyo cobro la fracción IV le reconoce como ingreso.",
+          "efecto": "Aquí el municipio cobra por lo que hace, no por lo que alguien posee, y esa es la diferencia jurídica entre un <b>derecho</b> y un impuesto: el derecho supone una contraprestación. De ahí una consecuencia que rara vez se discute: si el municipio deja de prestar el servicio, pierde la base del cobro. Como en el predial, las tarifas las propone el ayuntamiento y las aprueba el congreso del estado, de modo que un municipio puede quedar atrapado entre un costo que sube y una tarifa que no le toca mover.",
+          "ley": "Constitución Política, art. 115, fraccs. III y IV, inciso c)",
+          "glos": "Derechos (Contribución)",
+          "refKey": "ref-cpeum",
+          "refNum": 1,
+          "pendiente": "El agregado nacional de derechos municipales sigue la misma suerte que el predial: se reconstruye desde las cuentas públicas municipales que el INEGI consolida, no desde el Presupuesto de Egresos."
+        },
+        {
+          "id": "mp-participaciones",
+          "icono": "🔗",
+          "grupo": "Lo que cobra por su cuenta · Art. 115, fracc. IV CPEUM",
+          "nombre": "Participaciones federales",
+          "nombreLargo": "Participaciones federales cubiertas por conducto del estado",
+          "montoMdp": null,
+          "estado": "pendiente",
+          "clave": "115-IV-b",
+          "queEs": "La parte del Ramo 28 que toca al municipio. La Constitución la enumera junto al predial y a los derechos, como uno de los tres ingresos que el municipio tiene «en todo caso».",
+          "efecto": "La Constitución la garantiza, pero deja el <b>cuánto, el cómo y el cuándo</b> a las legislaturas de los estados: «con arreglo a las bases, montos y plazos que anualmente se determinen por las Legislaturas de los Estados». La Ley de Coordinación Fiscal pone un piso —nunca menos del 20 % del Fondo General que reciba la entidad— y obliga al estado a entregarlas dentro de los cinco días siguientes a recibirlas, con intereses si se retrasa. Aun así, el municipio no negocia con la Federación: negocia con su congreso local. Es la razón de que dos municipios iguales en población y pobreza reciban cantidades distintas según el estado en que estén.",
+          "ley": "Constitución Política, art. 115, fracc. IV, inciso b) · Ley de Coordinación Fiscal, art. 6º",
+          "glos": "Ramo 28 (Participaciones Federales)",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "pendiente": "El reparto municipal de participaciones lo fija cada congreso estatal en su propia ley de coordinación fiscal, de modo que no hay un solo agregado nacional publicado: hay 32. Se incorporará por entidad conforme puedan citarse sus acuerdos de distribución."
+        }
+      ],
+      "asimetria": {
+        "titulo": "El municipio aprueba en qué gasta, pero no de dónde cobra",
+        "texto": "El mismo párrafo del artículo 115 que reconoce la hacienda municipal contiene la asimetría: «<b>Las legislaturas de los Estados aprobarán las leyes de ingresos de los municipios</b>, revisarán y fiscalizarán sus cuentas públicas. Los presupuestos de egresos serán aprobados por los ayuntamientos». El cabildo decide el gasto; el congreso del estado decide el ingreso y después revisa la cuenta. Es el único de los tres pisos de la hacienda pública mexicana donde quien aprueba el ingreso no es el mismo órgano que responde por el gasto.",
+        "consecuencia": "De ahí que subir el predial sea, para un presidente municipal, una decisión que no depende de él: puede proponer la tabla de valores, pero la aprueba un congreso cuyo costo político es distinto del suyo. La consecuencia medible es un predial de los más bajos de la OCDE frente al PIB y municipios que dependen de transferencias para gasto corriente."
+      }
     },
 
     "circuito": [
@@ -3462,1027 +3763,1087 @@ window.AUDIT_DB = {
     }
   ],
   "glosario": [
-      {
-        "termino": "Contraloría Social",
-        "definicion": "Vigilancia organizada de la ciudadanía sobre la aplicación de recursos públicos en programas y obras que la afectan directamente. No es una figura simbólica: los comités de contraloría social están previstos en la normativa de los programas federales y tienen derecho a recibir información, recorrer la obra y levantar constancias. Su fuerza no está en sancionar, sino en documentar.",
-        "ley": "Art. 134 CPEUM · Ley General de Desarrollo Social",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Denuncia Ciudadana",
-        "definicion": "Acto por el que una persona pone en conocimiento de una autoridad fiscalizadora hechos que pueden constituir un uso irregular de recursos públicos. Puede presentarse de forma anónima ante la Auditoría Superior de la Federación o los órganos internos de control. No requiere abogado ni formalidades procesales, pero su utilidad depende por completo de que aporte datos verificables: fecha, lugar, monto, dependencia y documento.",
-        "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación · Ley General de Responsabilidades Administrativas",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Alertador",
-        "definicion": "Persona, servidora pública o no, que informa sobre un acto grave de corrupción y queda amparada por medidas de protección frente a represalias laborales o de otro tipo. El mecanismo federal opera mediante una plataforma que asigna una clave de seguimiento, de modo que quien alerta puede conocer el avance de su caso sin revelar su identidad.",
-        "ley": "Ley General de Responsabilidades Administrativas · mecanismo de la Secretaría Anticorrupción y Buen Gobierno",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Falta Administrativa Grave",
-        "definicion": "Conducta de una persona servidora pública que la ley califica de mayor entidad: cohecho, peculado, desvío de recursos públicos, abuso de funciones, tráfico de influencias, enriquecimiento oculto, entre otras. Su calificación importa porque determina quién juzga: las faltas no graves las resuelve el órgano interno de control, mientras que las graves se sustancian ante el Tribunal Federal de Justicia Administrativa y pueden derivar en inhabilitación o en responsabilidad penal.",
-        "ley": "Arts. 51 a 64 de la Ley General de Responsabilidades Administrativas",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Solicitud de Acceso a la Información",
-        "definicion": "Petición formal dirigida a una institución pública para que entregue un documento o dato que obra en su poder. No hay que acreditar interés jurídico ni explicar para qué se quiere: la ley prohíbe condicionar la entrega a los motivos. Genera folio y plazo de respuesta, y la negativa o el silencio se impugnan mediante recurso de revisión. Es el instrumento con el que se consigue la prueba documental que sostiene una denuncia.",
-        "ley": "Art. 6º apartado A CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Recurso de Revisión en Transparencia",
-        "definicion": "Medio de impugnación contra la respuesta de una institución a una solicitud de información: procede cuando se niega el documento, se entrega incompleto, se clasifica como reservado sin justificación o simplemente no se responde. Lo resuelve la autoridad garante, hoy Transparencia para el Pueblo en el ámbito federal, y su resolución puede ordenar la entrega.",
-        "ley": "Ley General de Transparencia y Acceso a la Información Pública",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Órgano Interno de Control",
-        "definicion": "Unidad de vigilancia que existe dentro de cada dependencia, entidad y ayuntamiento, encargada de recibir quejas, investigar faltas administrativas de su propio personal y sustanciar los procedimientos de responsabilidad. Es la instancia más cercana y la más rápida para un hecho local, aunque su independencia respecto de la institución que vigila es una de las críticas recurrentes del sistema anticorrupción.",
-        "ley": "Ley General de Responsabilidades Administrativas · Ley Orgánica de la Administración Pública Federal",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Empresa Fantasma (EFOS)",
-        "definicion": "Sociedad que emite comprobantes fiscales por operaciones que nunca existieron. La autoridad tributaria las identifica como Empresas que Facturan Operaciones Simuladas y las publica en un listado; a partir de esa publicación, las facturas que emitieron pierden efecto fiscal. Es uno de los mecanismos más documentados para vaciar contratos de obra y de servicios pagados con dinero público.",
-        "ley": "Art. 69-B del Código Fiscal de la Federación",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Amparo Indirecto",
-        "definicion": "Vía del juicio de amparo que se promueve ante un Juzgado de Distrito contra actos, omisiones o normas generales de cualquier autoridad, cuando no se trata de una sentencia definitiva. Se tramita en dos cuadernos paralelos: el principal, que resuelve el fondo en la audiencia constitucional, y el incidental, donde se decide la suspensión del acto. Admite recurso de revisión.",
-        "ley": "Art. 107 Ley de Amparo · art. 107 fracc. VII CPEUM",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Amparo Directo",
-        "definicion": "Vía del juicio de amparo que se promueve contra sentencias definitivas, laudos laborales y resoluciones que ponen fin a un juicio, cuando ya no procede recurso ordinario. Se presenta por conducto de la propia autoridad que dictó la sentencia y lo resuelve un Tribunal Colegiado de Circuito en una sola instancia, sin audiencia ni pruebas nuevas.",
-        "ley": "Arts. 170 a 189 Ley de Amparo · art. 107 fracc. V y VI CPEUM",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Suspensión del Acto Reclamado",
-        "definicion": "Medida cautelar que congela los efectos del acto impugnado mientras se resuelve el amparo. Tiene dos momentos: la provisional, que se concede de entrada, y la definitiva, que se decide tras la audiencia incidental. El juez pondera la apariencia del buen derecho y el peligro en la demora frente al interés social. En la práctica es la etapa decisiva del juicio, porque un amparo ganado sobre un daño ya consumado no restituye nada.",
-        "ley": "Arts. 125 a 158 Ley de Amparo · arts. 128, 129 y 138",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Interés Legítimo",
-        "definicion": "Condición que debe acreditar quien promueve un amparo sin ser titular directo de un derecho subjetivo. Tras la reforma del 16 de octubre de 2025 exige demostrar una afectación real, actual y diferenciada del resto de las personas, de modo que la anulación del acto produzca un beneficio cierto y no hipotético. El interés simple —el de cualquier ciudadano en la legalidad general— no basta.",
-        "ley": "Art. 5 fracc. I Ley de Amparo · art. 107 fracc. I CPEUM",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Acción de Inconstitucionalidad",
-        "definicion": "Medio de control constitucional que confronta en abstracto una norma general con la Constitución, sin necesidad de un caso concreto ni de una víctima. La pueden promover el 33% de los integrantes de una cámara o de un congreso local, el Ejecutivo Federal, los partidos políticos contra leyes electorales, los organismos de derechos humanos y la Fiscalía General en materia penal, dentro de los 30 días naturales siguientes a la publicación de la norma. Invalida con efectos generales si la aprueban al menos seis de los nueve ministros.",
-        "ley": "Art. 105 fracc. II CPEUM · Ley Reglamentaria del art. 105",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Controversia Constitucional",
-        "definicion": "Juicio que resuelve los conflictos de competencia entre órdenes de gobierno y poderes: Federación contra estados, estados contra municipios, un poder contra otro, o un órgano autónomo contra quien invada sus atribuciones. Lo resuelve el Pleno de la Suprema Corte en única instancia. No está al alcance de los particulares: sólo la promueven entes públicos.",
-        "ley": "Art. 105 fracc. I CPEUM · Ley Reglamentaria del art. 105",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Declaratoria General de Inconstitucionalidad",
-        "definicion": "Mecanismo que convierte un triunfo individual en beneficio general. Cuando la Suprema Corte establece jurisprudencia de que una norma es inconstitucional, lo notifica a la autoridad que la emitió; si en 90 días naturales ésta no supera el problema, la Corte puede expulsar la norma del orden jurídico con efectos para todos. No procede en materia tributaria: los impuestos declarados inconstitucionales sólo dejan de aplicarse a quien se amparó.",
-        "ley": "Art. 107 fracc. II CPEUM · arts. 231 a 235 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Precedente Obligatorio",
-        "definicion": "Sistema vigente desde la reforma de 2021: las razones que justifican la decisión de una sentencia del Pleno de la Suprema Corte, aprobadas por mayoría calificada, obligan de inmediato a todas las autoridades jurisdiccionales del país. A diferencia de la jurisprudencia por reiteración, basta una sola sentencia. Un juez de menor jerarquía no puede apartarse del precedente, aunque sí puede solicitar su sustitución exponiendo razones.",
-        "ley": "Art. 94 CPEUM · reforma de 11 de marzo de 2021",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Contradicción de Criterios",
-        "definicion": "Procedimiento para resolver cuando dos o más órganos jurisdiccionales del mismo nivel sostienen criterios opuestos sobre el mismo punto de derecho. La denuncia puede hacerla cualquiera de las partes, los propios órganos, sus integrantes o el Ejecutivo Federal, y quien la resuelve fija cuál criterio prevalece con carácter obligatorio. La resolución no afecta las situaciones ya juzgadas, pero ordena el criterio hacia adelante.",
-        "ley": "Arts. 225 a 227 Ley de Amparo · art. 107 fracc. XIII CPEUM",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Audiencia Constitucional",
-        "definicion": "Diligencia única del amparo indirecto en la que se encadenan tres periodos: probatorio, de alegatos y de sentencia. La prueba documental puede ofrecerse hasta ese mismo momento, pero la testimonial, la pericial y la inspección judicial deben anunciarse cinco días hábiles antes. No se admite la confesional por posiciones. Lo que no se ofreció a tiempo, no entra.",
-        "ley": "Art. 119 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Informe Justificado",
-        "definicion": "Escrito con el que la autoridad señalada como responsable contesta la demanda de amparo: manifiesta si el acto reclamado existe y por qué lo considera constitucional, acompañando copia certificada de las constancias. Debe rendirlo en quince días, prorrogables hasta diez más. Si no lo rinde, se presume cierto el acto reclamado.",
-        "ley": "Art. 117 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Sobreseimiento",
-        "definicion": "Resolución que da por terminado el juicio de amparo sin pronunciarse sobre si el acto era o no constitucional, por actualizarse una causa de improcedencia. No es una victoria de la autoridad sobre el fondo, sino una puerta que se cierra antes de llegar a él. Conviene distinguirlo de la negativa del amparo, donde el juez sí examina el acto y lo declara ajustado a la Constitución.",
-        "ley": "Arts. 61, 63 y 73 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Facultad de Atracción",
-        "definicion": "Potestad discrecional de la Suprema Corte para conocer de un amparo que ordinariamente correspondía a un Tribunal Colegiado, cuando el asunto reúne interés y trascendencia. Puede ejercerla de oficio o a petición fundada. Es una de las palancas más relevantes de su poder de agenda: la Corte decide qué temas discute el país.",
-        "ley": "Art. 107 fracc. V y VIII CPEUM · art. 40 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Plenos Regionales",
-        "definicion": "Órganos creados por la reforma de 2021 en sustitución de los Plenos de Circuito. Resuelven las contradicciones de criterios entre Tribunales Colegiados de su región y fijan jurisprudencia obligatoria en su ámbito territorial, descargando de ese trabajo a la Suprema Corte.",
-        "ley": "Art. 107 fracc. XIII CPEUM · Ley Orgánica del Poder Judicial de la Federación",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Tribunal Colegiado de Circuito",
-        "definicion": "Órgano integrado por tres magistradas o magistrados que resuelve los amparos directos contra sentencias definitivas y los recursos de revisión en materia de legalidad. Es el destino final de la inmensa mayoría de los juicios de amparo del país: sólo una fracción mínima escala hasta la Suprema Corte.",
-        "ley": "Art. 94 CPEUM · Ley Orgánica del Poder Judicial de la Federación",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Juzgado de Distrito",
-        "definicion": "Órgano unipersonal de primera instancia del Poder Judicial de la Federación. Conoce de los juicios de amparo indirecto y de los procesos federales ordinarios. Es la puerta de entrada del ciudadano al control constitucional: ahí se presenta la demanda, se resuelve la suspensión y se celebra la audiencia constitucional.",
-        "ley": "Art. 94 CPEUM · arts. 107 y 108 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Concepto de Violación",
-        "definicion": "Núcleo argumentativo de la demanda de amparo: el razonamiento con el que la persona quejosa explica por qué el acto reclamado contraría la Constitución. No basta afirmar que un acto es injusto; hay que confrontarlo con un precepto constitucional y demostrar la contradicción. Un amparo bien fundado con conceptos mal planteados se pierde.",
-        "ley": "Art. 108 fracc. VIII Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Principio de Relatividad",
-        "definicion": "Regla histórica del amparo mexicano, conocida como fórmula Otero: la sentencia sólo protege a quien promovió el juicio y no hace una declaración general sobre la norma impugnada. De ahí que una ley pueda seguir aplicándose a millones de personas después de haber sido declarada inconstitucional en casos particulares, salvo que se emita una declaratoria general de inconstitucionalidad.",
-        "ley": "Art. 107 fracc. II CPEUM · art. 73 Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Ley de Amparo",
-        "definicion": "Ley reglamentaria de los artículos 103 y 107 constitucionales que regula todo el juicio de amparo: quién puede promoverlo, en qué plazos, cómo se tramita, qué recursos proceden y cómo se cumplen las sentencias. Fue expedida en 2013 y reformada dos veces durante 2025, el 13 de marzo y el 16 de octubre.",
-        "ley": "DOF 2 de abril de 2013, con reformas de 13/03/2025 y 16/10/2025",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Semanario Judicial de la Federación",
-        "definicion": "Publicación oficial donde se difunden las sentencias, los precedentes y la jurisprudencia obligatoria del Poder Judicial de la Federación. Se organiza por épocas: el 1 de septiembre de 2025 inició la Duodécima Época, que marca el corte entre los criterios de la Corte anterior y los de la Corte electa por voto popular.",
-        "ley": "Art. 220 Ley de Amparo · Acuerdo General 7/2025 del Pleno de la SCJN",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "PEF (Presupuesto de Egresos de la Federación)",
-        "definicion": "Documento jurídico aprobado anualmente en exclusiva por la Cámara de Diputados que detalla el monto, destino y distribución del gasto público del gobierno federal durante un ejercicio fiscal.",
-        "ley": "Art. 74 frac. IV Constitución Política / Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "LIF (Ley de Ingresos de la Federación)",
-        "definicion": "Ordenamiento legal aprobado por ambas Cámaras del Congreso que establece los montos y conceptos que la federación podrá recaudar en el año (impuestos, derechos, aprovechamientos y deuda).",
-        "ley": "Art. 73 frac. VII Constitución / Código Fiscal de la Federación",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Recaudación Federal Participable (RFP)",
-        "definicion": "Bolsa común de impuestos y derechos federales (principalmente ISR e IVA, menos devoluciones) sobre la cual se calcula el 20% que por mandato legal debe repartirse a los estados y municipios vía Ramo 28.",
-        "ley": "Art. 2° Ley de Coordinación Fiscal",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Ramo 28 (Participaciones Federales)",
-        "definicion": "Recursos transferidos en efectivo a los estados y municipios sin etiquetar, en compensación por su adhesión al Pacto Fiscal. Es de libre disposición presupuestaria.",
-        "ley": "Ley de Coordinación Fiscal, Capítulos I y II",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Ramo 33 (Aportaciones Federales)",
-        "definicion": "Fondos federales transferidos a entidades y municipios condicionados y etiquetados exclusivamente para salud, educación, seguridad, infraestructura social y asistencia.",
-        "ley": "Ley de Coordinación Fiscal, Capítulo V (Arts. 25 al 51)",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "FONE (Fondo de Aportaciones para la Nómina Educativa)",
-        "definicion": "El fondo más grande del Ramo 33. Administrado centralmente por la SEP y Hacienda para pagar los sueldos y prestaciones del magisterio federalizado en las 32 entidades.",
-        "ley": "Art. 26 y 27 Ley de Coordinación Fiscal",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "FASSA / IMSS-Bienestar",
-        "definicion": "Fondo de Aportaciones para los Servicios de Salud. Recientemente absorbido en la mayoría de los estados por el organismo descentralizado IMSS-Bienestar para centralizar clínicas y hospitales.",
-        "ley": "Art. 29 Ley de Coordinación Fiscal",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "FORTAMUN",
-        "definicion": "Fondo de Aportaciones para el Fortalecimiento de los Municipios. Transferido a tesorerías municipales para seguridad pública, homologación salarial policial y compromisos financieros.",
-        "ley": "Art. 36 y 37 Ley de Coordinación Fiscal",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "FISMDF / FAIS",
-        "definicion": "Fondo de Aportaciones para la Infraestructura Social Municipal y de las Demarcaciones Territoriales del D.F. Recursos para combate al rezago social y pobreza extrema.",
-        "ley": "Art. 32 al 35 Ley de Coordinación Fiscal",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Pliego de Observaciones",
-        "definicion": "Documento de determinación de presunto daño patrimonial emitido por la ASF cuando una entidad no comprueba el destino legítimo o legal de los recursos auditados.",
-        "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "EFOS y EDOS (Factureras)",
-        "definicion": "EFOS: Empresas que Facturan Operaciones Simuladas (vendedoras de facturas falsas). EDOS: Empresas que Deducen Operaciones Simuladas (compradoras de facturas para inflar gastos y lavar dinero).",
-        "ley": "Artículo 69-B del Código Fiscal de la Federación",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Impuesto Predial",
-        "definicion": "Gravamen municipal directo sobre la propiedad o posesión inmobiliaria. Potestad tributaria constitucional fundamental de los ayuntamientos.",
-        "ley": "Artículo 115 constitucional, fracción IV",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Costo Financiero de la Deuda",
-        "definicion": "Monto destinado exclusivamente a pagar intereses, comisiones y gastos de amortización de la deuda pública adquirida por el gobierno federal o local, sin amortizar capital sustancial.",
-        "ley": "Ley General de Deuda Pública",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Ley de Disciplina Financiera (LDF)",
-        "definicion": "Ley nacional que regula el endeudamiento de estados y municipios, impone techos al gasto en nómina y crea el Sistema de Alertas de la SHCP.",
-        "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (2016)",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Gasto Programable vs No Programable",
-        "definicion": "Gasto Programable: Recursos destinados a programas gubernamentales, servicios públicos e inversión (salud, escuelas, obras). Gasto No Programable: Pagos ineludibles por ley (deuda, participaciones a estados, ADEFAS).",
-        "ley": "Clasificación Económica del Gasto Público (SHCP)",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "ADEFAS (Adeudos de Ejercicios Fiscales Anteriores)",
-        "definicion": "Compromisos devengados y pasivos contraídos en años fiscales previos que se liquidan con cargo al presupuesto del año en curso.",
-        "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Partida de Gestión Social (Congresos)",
-        "definicion": "Bolsas discrecionales y opacas asignadas a legisladores federales y locales para entrega de despensas, tinacos o apoyos directos sin control de fiscalización.",
-        "ley": "Reglamentos Interiores de los Congresos Estatales",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Ponencia de Ministro(a) (SCJN)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Despacho y equipo técnico-jurídico asignado en exclusividad a cada ministra o ministro de la Suprema Corte. Está integrado por secretarios de estudio y cuenta, secretarios auxiliares y asesores encargados de estudiar expedientes, analizar precedentes y redactar los proyectos de sentencia que se someten a votación en el Pleno. Su costo operativo directo promediaba entre $2.6 y $3.1 millones de pesos mensuales en el régimen previo.",
-        "ley": "Art. 94 CPEUM / Reglamento Interior de la SCJN / Manual de Remuneraciones del PJF"
-      },
-      {
-        "termino": "Secretario(a) de Estudio y Cuenta",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Funcionario judicial de altísima jerarquía y especialización técnica adscrito a la ponencia de un ministro. Tiene a su cargo el análisis dogmático de amparos, controversias constitucionales y acciones de inconstitucionalidad, así como la redacción formal de los proyectos de sentencia. Históricamente sus percepciones brutas oscilaban entre $145,000 y $185,000 pesos mensuales, con prestaciones equiparables a mandos medios y superiores.",
-        "ley": "Ley Orgánica del PJF / Tabulador Oficial de Sueldos SCJN"
-      },
-      {
-        "termino": "Asesoría de Ponencia y Récord de Plazas (Más de 70 asesores)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Personal contratado bajo plazas de confianza o contratos por honorarios asimilados para investigación jurídica y apoyo directo a las ponencias. Durante revisiones de auditoría ciudadana y solicitudes de transparencia (PNT) se documentó que, sumando secretarios de acuerdos, proyectistas, auxiliares y asesores comisionados en comités y coordinaciones, cada ministro llegó a disponer de más de 60 a 70 personas de apoyo técnico, disparando el gasto del Capítulo 1000 a niveles históricos.",
-        "ley": "Art. 134 CPEUM / Presupuesto de Egresos de la Federación / PNT Art. 70 Fracc. XI"
-      },
-      {
-        "termino": "Artículo 127 Constitucional (Tope Salarial)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Precepto de la Constitución General (Fracción II) que establece que ningún servidor público de la Federación, estados o municipios podrá recibir una remuneración mayor a la fijada para el Presidente de la República ($134,310 netos mensuales en 2025-2026). Fue el núcleo del diferendo salarial con la SCJN, cuyos integrantes percibían más de $206,000 netos invocando la irreductibilidad salarial del artículo 94.",
-        "ley": "Artículos 127 y 94 CPEUM / Ley Federal de Remuneraciones de los Servidores Públicos"
-      },
-      {
-        "termino": "Fideicomisos del Poder Judicial (Extinción y Litigio)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Instrumentos fiduciarios constituidos por la SCJN y el Consejo de la Judicatura Federal que acumularon más de $15,400 a $21,500 millones de pesos del erario público para pensiones complementarias de mandos, gastos médicos privados y mantenimiento de viviendas. Su extinción por decreto legislativo para reintegrar los fondos a la Tesorería de la Federación (TESOFE) fue impugnada mediante juicios de amparo.",
-        "ley": "Decreto DOF 27/10/2023 / Ley Federal de Presupuesto y Responsabilidad Hacendaria Art. 54"
-      },
-      {
-        "termino": "Pleno de la Suprema Corte de Justicia (SCJN)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Órgano supremo de decisión del tribunal constitucional. Tradicionalmente integrado por 11 ministros divididos en dos Salas (Primera y Segunda). A partir de la Reforma Constitucional publicada el 15 de septiembre de 2024, el Pleno se redujo a 9 integrantes, se suprimieron las Salas y todas las deliberaciones y sentencias se resuelven en sesiones públicas plenarias.",
-        "ley": "Art. 94 CPEUM reformado / Decreto DOF 15/09/2024"
-      },
-      {
-        "termino": "Reforma Constitucional del Poder Judicial (2024–2025)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Decreto publicado en el Diario Oficial de la Federación el 15 de septiembre de 2024 que transformó la estructura del Poder Judicial mexicano: instaura la elección popular por voto ciudadano directo de ministras, ministros, magistrados y jueces; reduce el Pleno de la SCJN de 11 a 9 integrantes suprimiendo las Salas; extingue el Consejo de la Judicatura Federal creando en su lugar el Tribunal de Disciplina Judicial y el Órgano de Administración Judicial; y mandata el cumplimiento irrestricto del tope salarial del Artículo 127 Constitucional.",
-        "ley": "Decreto DOF 15/09/2024 / Artículos 94, 96, 97, 98, 99 y 100 de la CPEUM"
-      },
-      {
-        "termino": "Autonomía Presupuestal Judicial (Art. 94)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Facultad constitucional del Poder Judicial de la Federación para elaborar su propio proyecto de presupuesto de egresos y remitirlo a la SHCP para su incorporación directa al PEF sin modificaciones del Poder Ejecutivo. Históricamente fue el argumento empleado por la SCJN para defender remuneraciones superiores al tope presidencial y mantener 13 fideicomisos complementarios.",
-        "ley": "Artículo 94 CPEUM / Art. 74 frac. IV CPEUM / Ley Federal de Presupuesto y Responsabilidad Hacendaria"
-      },
-      {
-        "termino": "Tribunal de Disciplina Judicial (TDJ)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Órgano constitucional creado por la Reforma Judicial de 2024 para sustituir las facultades de control y disciplina del extinto CJF. Cuenta con amplias facultades para investigar faltas administrativas, ordenar auditorías patrimoniales a jueces, magistrados y ministros, y dar vista al Ministerio Público Federal en casos de corrupción o conflicto de interés.",
-        "ley": "Art. 100 CPEUM reformado / Ley Orgánica del Tribunal de Disciplina Judicial"
-      },
-      {
-        "termino": "Consejo de la Judicatura Federal (CJF)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Órgano colegiado encargado históricamente de la administración, vigilancia, adscripción y disciplina de los juzgados de distrito y tribunales de circuito federales. Administraba más del 85% del presupuesto global del Ramo 03 (más de $68,000 mdp). La reforma de 2024 determinó su sustitución por el Órgano de Administración Judicial y el Tribunal de Disciplina.",
-        "ley": "Art. 100 CPEUM (régimen previo) / Artículos Transitorios Reforma Judicial 2024"
-      },
-      {
-        "termino": "Haber de Retiro",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Pensión económica vitalicia y paquete de prerrogativas (vehículos blindados, asistentes y escoltas) que se otorgaba a las y los ministros de la Corte al concluir su periodo o presentar su renuncia anticipada. La reforma constitucional de 2024 acotó estas prerrogativas extraordinarias en aras del principio de austeridad republicana.",
-        "ley": "Ley Orgánica del PJF (abrogada) / Art. 94 CPEUM y Art. 7° Transitorio"
-      },
-      {
-        "termino": "Seguro de Separación Individualizado (SSI)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Prestación económica extraordinaria contratada con aseguradoras privadas donde el servidor judicial aportaba entre 2% y 10% de su sueldo base, y la institución aportaba una cantidad idéntica con dinero público. Prohibida en el Ejecutivo por la Ley de Austeridad Republicana, su permanencia en el PJF generó observaciones de la ASF.",
-        "ley": "Ley Federal de Austeridad Republicana Art. 22 / Manual de Remuneraciones PJF"
-      },
-      {
-        "termino": "Seguro de Gastos Médicos Mayores (SGMM)",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Póliza privada con cargo al presupuesto institucional que otorgaba cobertura médica integral en hospitales privados de alta gama para ministros, magistrados, jueces y familiares directos, con sumas aseguradas ilimitadas, sustituyendo la atención en instituciones públicas de seguridad social (ISSSTE).",
-        "ley": "Manual de Remuneraciones de los Servidores Públicos del PJF"
-      },
-      {
-        "termino": "Ramo 03 (Poder Judicial de la Federación)",
-        "categoria": "🏛️ Presupuesto & ASF",
-        "definicion": "Clave presupuestaria del Presupuesto de Egresos de la Federación (PEF) asignada a la SCJN, CJF y TEPJF. Es un ramo autónomo que ha alcanzado cifras récord superiores a los $78,000 - $84,000 millones de pesos anuales, caracterizado por concentrar más del 80% de su gasto en el Capítulo 1000 (Servicios Personales).",
-        "ley": "Art. 74 fracc. IV CPEUM / Presupuesto de Egresos de la Federación"
-      },
-      {
-        "termino": "Capítulo 1000 (Servicios Personales)",
-        "categoria": "🏛️ Presupuesto & ASF",
-        "definicion": "Agrupador presupuestal del clasificador por objeto del gasto del CONAC que concentra todos los sueldos, salarios base, honorarios asimilados, gratificaciones de fin de año, bonos de riesgo y aportaciones de seguridad social de los servidores públicos. En el Poder Judicial representa 8 de cada 10 pesos del presupuesto.",
-        "ley": "Clasificador por Objeto del Gasto (CONAC) / LGCG"
-      },
-      {
-        "termino": "Capítulo 3000 (Servicios Generales)",
-        "categoria": "🏛️ Presupuesto & ASF",
-        "definicion": "Partida presupuestal destinada a contratar servicios operativos indispensables: arrendamiento de inmuebles, vigilancia, seguridad patrimonial, asesorías técnicas externas, telefonía, informática, pasajes y viáticos oficiales.",
-        "ley": "Clasificador por Objeto del Gasto (CONAC) / Ley de Adquisiciones"
-      },
-      {
-        "termino": "Subejercicio Presupuestal",
-        "categoria": "🏛️ Presupuesto & ASF",
-        "definicion": "Monto de recursos públicos autorizados en el PEF que, al concluir el ejercicio fiscal, no fueron devengados ni comprometidos por la unidad responsable. La ley obliga a reintegrarlos a la TESOFE; la controversia del PJF derivó de enviar esos recursos no ejercidos a fideicomisos propios.",
-        "ley": "Art. 54 Ley Federal de Presupuesto y Responsabilidad Hacendaria"
-      },
-      {
-        "termino": "TESOFE (Tesorería de la Federación)",
-        "categoria": "💰 Hacendario & Deuda",
-        "definicion": "Unidad de la Secretaría de Hacienda y Crédito Público encargada de la gestión financiera, custodia y administración de los recursos del erario federal. Custodia la cuenta general del país en el Banco de México y es la receptora legal obligatoria de todos los reintegros y fondos públicos extintos.",
-        "ley": "Ley de Tesorería de la Federación / Art. 73 fracc. XXIV CPEUM"
-      },
-      {
-        "termino": "Cuentas por Liquidar Certificadas (CLC)",
-        "categoria": "💰 Hacendario & Deuda",
-        "definicion": "Documento oficial de control presupuestal y contable que emiten las dependencias y poderes públicos para solicitar a la TESOFE la liquidación de compromisos de pago devengados (nóminas, proveedores y subsidios).",
-        "ley": "Reglamento de la Ley Federal de Presupuesto y Responsabilidad Hacendaria"
-      },
-      {
-        "termino": "Auditoría Forense",
-        "categoria": "🔍 Fiscalización Superior",
-        "definicion": "Técnica avanzada de investigación fiscal y contable aplicada por la Auditoría Superior de la Federación (ASF) para documentar presuntos actos ilícitos, redes de empresas fachada (factureras) y desvío de caudales públicos con validez probatoria ante tribunales penales y administrativos.",
-        "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación"
-      },
-      {
-        "termino": "Amparo en Revisión y Controversia Constitucional",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Procesos jurisdiccionales tramitados ante la SCJN. El juicio de amparo protege garantías y derechos humanos frente a leyes o actos de autoridad. La controversia constitucional dirime litigios entre los Poderes de la Unión o entre los órdenes federal, estatal y municipal sobre la invasión de competencias.",
-        "ley": "Artículos 103 y 105 CPEUM / Ley de Amparo / Ley Reglamentaria del Art. 105"
-      },
-      {
-        "termino": "Irreductibilidad Salarial vs. Armonización Constitucional",
-        "categoria": "⚖️ Poder Judicial",
-        "definicion": "Tensión jurídica entre el principio clásico del Art. 94 (los sueldos de los jueces no podrán ser disminuidos durante su encargo) y el principio de supremacía salarial del Art. 127 (nadie puede ganar más que el Presidente). La Reforma Constitucional de 2024 zanjó esta disputa estableciendo la primacía irrestricta del tope del Art. 127 para todos los integrantes del PJF.",
-        "ley": "Art. 94 párrafo décimo y Art. 127 fracc. II CPEUM / DOF 15/09/2024"
-      },
-      {
-        "termino": "Disposiciones Sustantivas de la LIF",
-        "categoria": "📜 Ley de Ingresos & Marco Legal",
-        "definicion": "Conjunto de mandatos y autorizaciones aprobados por el Congreso en la Ley de Ingresos de la Federación que establecen las metas de recaudación tributaria (ISR, IVA, IEPS) y petrolera, autorizan el techo de endeudamiento soberano y prohíben expresamente las condonaciones de impuestos.",
-        "ley": "Art. 73 frac. VII CPEUM / Ley de Ingresos de la Federación"
-      },
-      {
-        "termino": "Techo de Endeudamiento Neto (LIF)",
-        "categoria": "📜 Ley de Ingresos & Marco Legal",
-        "definicion": "Límite máximo en pesos y moneda extranjera que el Congreso de la Unión autoriza a la Secretaría de Hacienda para contratar pasivos soberanos internos (vía colocación de CETES y Bonos por Banxico) y externos durante el ejercicio fiscal.",
-        "ley": "Ley de Ingresos de la Federación / Ley General de Deuda Pública"
-      },
-      {
-        "termino": "Subastas Primarias Banxico (CETES y Bonos M)",
-        "categoria": "💰 Hacendario & Deuda",
-        "definicion": "Mecanismo financiero semanal operado por el Banco de México como agente colocador de deuda del Gobierno Federal, donde intermediarios financieros autorizados pujan por adquirir valores soberanos a descuento o tasa de interés fija.",
-        "ley": "Ley del Banco de México / Ley General de Deuda Pública"
-      },
-      {
-        "termino": "Tasa de Referencia de Deuda (Banxico)",
-        "categoria": "💰 Hacendario & Deuda",
-        "definicion": "Tasa de interés interbancaria a un día que fija la Junta de Gobierno de Banxico para contener la inflación; impacta directamente en el costo financiero que debe cubrir el Estado para pagar los intereses de su deuda pública.",
-        "ley": "Ley del Banco de México / Criterios Generales de Política Económica"
-      },
-      {
-        "termino": "Mayoría Relativa (MR) / Voto Directo",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Mecanismo electoral democrático donde la ciudadanía vota directamente en urnas por una fórmula con nombre y apellido en un distrito uninominal. Resulta electa la persona que obtiene la mayor cantidad de sufragios válidos.",
-        "ley": "Arts. 51, 52, 53 y 116 Fracción II de la CPEUM"
-      },
-      {
-        "termino": "Representación Proporcional (RP) / Plurinominales",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Asignación de curules legislativas a los partidos en proporción al porcentaje de votos obtenidos en 5 circunscripciones federales o listas locales. Creados en la Reforma de 1977 para garantizar pluralidad y voz a las minorías opositoras.",
-        "ley": "Arts. 52, 54 y 116 Fracción II de la CPEUM"
-      },
-      {
-        "termino": "Tope a la Sobrerrepresentación del 8% (Art. 54 CPEUM)",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Candado constitucional que prohíbe que cualquier fuerza política tenga más de 300 diputados federales por ambos principios o un porcentaje de curules que supere en más de 8 puntos porcentuales su votación nacional emitida.",
-        "ley": "Artículo 54 Fracción V de la CPEUM"
-      },
-      {
-        "termino": "Circunscripciones Electorales Federales",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Cinco regiones geográficas plurinominales en que se divide el país (con cabeceras en Guadalajara, Monterrey, Xalapa, Ciudad de México y Toluca). Cada una aporta 40 diputados de lista para sumar 200 en San Lázaro.",
-        "ley": "Artículo 53 de la CPEUM / Acuerdo INE/CG130/2023"
-      },
-      {
-        "termino": "Periodos Ordinarios de Sesiones del Congreso",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Los dos periodos constitucionales obligatorios del Congreso: el 1º (1 sept – 15 dic) enfocado en aprobar el Paquete Económico (LIF y PEF); el 2º (1 feb – 30 abr) enfocado en fiscalizar la Cuenta Pública de la ASF y desahogar reformas sustantivas.",
-        "ley": "Artículos 65 y 66 de la CPEUM"
-      },
-      {
-        "termino": "Comisión Permanente del Congreso",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Órgano constitucional integrado por 37 legisladores (19 diputados y 18 senadores) que opera durante los recesos del Congreso para mantener la conducción parlamentaria, convocar a periodos extraordinarios y ratificar nombramientos.",
-        "ley": "Artículo 78 de la CPEUM"
-      },
-      {
-        "termino": "Declaración 3 de 3 (Patrimonial, Intereses y Fiscal)",
-        "categoria": "🔍 Fiscalización Superior",
-        "definicion": "Instrumento cívico de rendición de cuentas que obliga a los servidores y candidatos a transparentar sus propiedades y cuentas bancarias (patrimonial), empresas y socios (intereses) y cumplimiento tributario ante el SAT (fiscal).",
-        "ley": "Art. 108 CPEUM / Ley General de Responsabilidades Administrativas"
-      },
-      {
-        "termino": "Estudio de Impacto Presupuestario (Art. 18 LFPRH)",
-        "categoria": "📜 Ley de Ingresos & Marco Legal",
-        "definicion": "Dictamen financiero que debe acompañar a toda propuesta legislativa para cuantificar su costo hacendario y precisar qué partida compensatoria financiará el gasto, evitando desbalances fiscales.",
-        "ley": "Artículo 18 de la LFPRH"
-      },
-      {
-        "termino": "Partida Secreta / Ramo 23 / Subvenciones Opacas",
-        "categoria": "🏛️ Presupuesto & ASF",
-        "definicion": "Bolsas presupuestales discrecionales del erario sin reglas de operación claras (antiguo Ramo 23 y subvenciones a grupos parlamentarios) empleadas históricamente para sobornos o moches, extinguidas formalmente por la ley.",
-        "ley": "Art. 74 fracc. IV CPEUM / Ley de Fiscalización de la Federación"
-      },
-      {
-        "termino": "Concejalías de las Alcaldías CDMX",
-        "categoria": "🗳️ Poder Legislativo & Elecciones",
-        "definicion": "Órganos colegiados integrados por 10 concejales en cada una de las 16 alcaldías de la CDMX (6 por mayoría y 4 por representación proporcional) encargados de supervisar el presupuesto y las obras vecinales.",
-        "ley": "Constitución Política de la Ciudad de México, Art. 53"
-      },
-      {
-        "termino": "Gasto Público",
-        "definicion": "Conjunto de erogaciones que realizan la Federación, los estados y los municipios para cumplir sus funciones: servicios personales, obra pública, transferencias, subsidios y pago de deuda. No es sinónimo de presupuesto: el presupuesto es lo autorizado, el gasto público es lo efectivamente erogado. Debe administrarse con eficiencia, eficacia, economía, transparencia y honradez.",
-        "ley": "Art. 134 CPEUM · Art. 1° Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)",
-        "definicion": "Las cuatro fotografías del dinero público a lo largo del año. Aprobado: lo que autorizó la Cámara de Diputados. Modificado: lo autorizado más ampliaciones y menos reducciones. Devengado: la obligación de pago ya nacida, aunque no se haya pagado. Ejercido: el pago efectivamente realizado. Comparar la cifra equivocada entre dos momentos es la causa más común de una conclusión falsa sobre el gasto.",
-        "ley": "Art. 2° frac. XV Ley General de Contabilidad Gubernamental",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Ejercicio Fiscal",
-        "definicion": "Periodo de doce meses, del 1 de enero al 31 de diciembre, en el que se ejecuta el presupuesto autorizado. Lo que no se gasta dentro del ejercicio, salvo excepciones legales, debe reintegrarse a la Tesorería de la Federación.",
-        "ley": "Art. 11 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Ramo Presupuestario",
-        "definicion": "Unidad de mayor jerarquía en que se divide el Presupuesto de Egresos. Cada dependencia, poder u organismo autónomo tiene el suyo: Ramo 03 corresponde al Poder Judicial, Ramo 22 al Instituto Nacional Electoral, Ramo 28 a las participaciones y Ramo 33 a las aportaciones federales. Localizar el ramo es el primer paso para rastrear cualquier peso.",
-        "ley": "Clasificador por Objeto del Gasto · PEF del ejercicio correspondiente",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Cuenta Pública",
-        "definicion": "Informe anual que el Ejecutivo entrega a la Cámara de Diputados con el resultado del ejercicio presupuestario: cuánto se recaudó, cuánto se gastó, en qué y con qué resultados. Es el documento que la Auditoría Superior de la Federación fiscaliza y, por tanto, la fuente primaria de casi toda auditoría ciudadana seria.",
-        "ley": "Art. 74 frac. VI CPEUM · Art. 53 Ley General de Contabilidad Gubernamental",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Déficit y Superávit Público",
-        "definicion": "Déficit: el gobierno gastó más de lo que ingresó en el periodo y la diferencia se cubre con deuda. Superávit: ingresó más de lo que gastó. No es un juicio moral automático: un déficit puede financiar inversión productiva y un superávit puede esconder subejercicio. Lo relevante es su tamaño frente al PIB y su sostenibilidad en el tiempo.",
-        "ley": "Art. 17 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Balance Primario",
-        "definicion": "Diferencia entre ingresos y gastos del gobierno sin contar el pago de intereses de la deuda. Sirve para saber si el desequilibrio proviene de la operación corriente o del costo financiero heredado. Un balance primario positivo significa que, descontando intereses, las cuentas cierran.",
-        "ley": "Criterios Generales de Política Económica · Art. 2° LFPRH",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Deuda Pública y SHRFSP",
-        "definicion": "Obligaciones financieras contraídas por el sector público. La medida más amplia y honesta es el Saldo Histórico de los Requerimientos Financieros del Sector Público (SHRFSP), que incluye deuda tradicional, pasivos de empresas productivas del Estado, pensiones y proyectos de inversión diferidos. Citar solo la deuda del gobierno federal subestima el compromiso real.",
-        "ley": "Art. 73 frac. VIII CPEUM · Ley General de Deuda Pública · Criterios Generales de Política Económica",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "PIB (Producto Interno Bruto)",
-        "definicion": "Valor de todos los bienes y servicios finales producidos en el país durante un periodo. En fiscalización se usa como denominador: expresar la deuda o el déficit como porcentaje del PIB permite comparar años y países, porque neutraliza el tamaño de la economía y la inflación.",
-        "ley": "Sistema de Cuentas Nacionales de México, INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Inflación e INPC",
-        "definicion": "La inflación es el aumento generalizado y sostenido de los precios; el Índice Nacional de Precios al Consumidor (INPC) es el instrumento que la mide. Sin deflactar por INPC, comparar un presupuesto de 2018 con uno de 2026 es comparar dos monedas distintas: la diferencia nominal exagera el crecimiento real.",
-        "ley": "Art. 20 Código Fiscal de la Federación · Banco de México e INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Pesos Corrientes vs. Pesos Constantes",
-        "definicion": "Pesos corrientes son las cifras tal como aparecen en el documento de su año. Pesos constantes son esas mismas cifras ajustadas por inflación a un año base, y son las únicas que permiten afirmar que un gasto creció o cayó en términos reales. Toda comparación multianual de esta plataforma debe indicar cuál de las dos usa.",
-        "ley": "Metodología de deflactación del INEGI · Criterios Generales de Política Económica",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "UMA (Unidad de Medida y Actualización)",
-        "definicion": "Referencia económica en pesos que sustituyó al salario mínimo para calcular multas, créditos, cuotas y obligaciones legales. La actualiza el INEGI cada año. Su desvinculación del salario mínimo evitó que los aumentos salariales encarecieran automáticamente multas y trámites.",
-        "ley": "Art. 26 apartado B CPEUM · Ley para Determinar el Valor de la UMA",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "ISR, IVA e IEPS",
-        "definicion": "Los tres impuestos federales que sostienen la mayor parte de la recaudación. ISR grava la ganancia de personas y empresas; IVA grava el consumo a una tasa general del 16 %; IEPS grava bienes y servicios específicos como combustibles, tabaco y bebidas azucaradas. De su bolsa común se calcula la Recaudación Federal Participable que se reparte a estados y municipios.",
-        "ley": "Ley del ISR · Ley del IVA · Ley del IEPS · Art. 2° Ley de Coordinación Fiscal",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Fiscalización Superior",
-        "definicion": "Revisión técnica y externa del uso de los recursos públicos que realiza la Auditoría Superior de la Federación por encargo de la Cámara de Diputados. No es una auditoría contable cualquiera: puede revisar desempeño, legalidad y resultados, y derivar en responsabilidades administrativas o penales.",
-        "ley": "Arts. 74 frac. VI y 79 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Observación, Recomendación y Promoción de Responsabilidad",
-        "definicion": "Los tres desenlaces de una auditoría, en orden de gravedad. Observación: se detectó una irregularidad y se pide aclararla. Recomendación: se sugiere corregir un procedimiento sin imputar falta. Promoción de responsabilidad: se turna el caso a la autoridad competente porque hay presunta falta administrativa o delito. Confundirlas infla o desinfla artificialmente la gravedad de un hallazgo.",
-        "ley": "Arts. 49 a 52 Ley de Fiscalización y Rendición de Cuentas de la Federación",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Conflicto de Interés",
-        "definicion": "Situación en la que el interés personal, familiar o de negocios de una persona servidora pública puede afectar el ejercicio imparcial de sus funciones. No requiere que exista daño consumado: basta la posibilidad razonable de que el juicio se vea comprometido, y debe declararse aunque no se materialice.",
-        "ley": "Art. 3° frac. VI y Art. 58 Ley General de Responsabilidades Administrativas",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Transparencia Proactiva y Datos Abiertos",
-        "definicion": "Obligación de publicar información de oficio en formatos que permitan procesarla, no solo leerla. Un PDF escaneado cumple la letra y traiciona el propósito: sin datos abiertos, la verificación ciudadana depende de transcribir a mano lo que la autoridad ya tenía en hoja de cálculo.",
-        "ley": "Arts. 70 y 71 Ley General de Transparencia y Acceso a la Información Pública",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Juicio de Amparo",
-        "definicion": "Medio de defensa por el que cualquier persona puede reclamar ante un juez federal un acto de autoridad que viole sus derechos humanos. En materia presupuestal se ha usado para impugnar recortes, extinciones de fideicomisos y actos de fiscalización.",
-        "ley": "Arts. 103 y 107 CPEUM · Ley de Amparo",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Jurisprudencia",
-        "definicion": "Criterio de interpretación de la ley que resulta obligatorio para los tribunales inferiores. La emite el Pleno de la Suprema Corte, y antes también sus Salas, por reiteración o por contradicción de criterios. La jurisprudencia dictada por las Salas suprimidas en 2025 sigue vigente mientras el Pleno no la sustituya.",
-        "ley": "Arts. 94 y 217 CPEUM · Ley de Amparo, Título Cuarto",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Órgano de Administración Judicial (OAJ)",
-        "definicion": "Órgano creado por la reforma judicial de 2024 que asumió la administración, la carrera judicial y el manejo presupuestal del Poder Judicial de la Federación, funciones que antes correspondían al Consejo de la Judicatura Federal. Separar la administración de la disciplina fue uno de los cambios estructurales de la reforma.",
-        "ley": "Art. 100 CPEUM reformado · Decreto DOF 15 de septiembre de 2024",
-        "categoria": "⚖️ Poder Judicial"
-      },
-      {
-        "termino": "Lista Nominal y Padrón Electoral",
-        "definicion": "El padrón electoral reúne a quienes solicitaron su credencial para votar; la lista nominal, solo a quienes ya la recogieron y pueden votar. La participación siempre se calcula sobre la lista nominal, no sobre el padrón ni sobre la población total: usar una base distinta altera el porcentaje.",
-        "ley": "Arts. 126 a 148 Ley General de Instituciones y Procedimientos Electorales",
-        "categoria": "🗳️ Poder Legislativo & Elecciones"
-      },
-      {
-        "termino": "OPLE (Organismo Público Local Electoral)",
-        "definicion": "Autoridad electoral de cada entidad federativa, encargada de organizar las elecciones locales en coordinación con el INE. Su presupuesto lo aprueba el congreso estatal y lo ministra el gobierno del estado, lo que en la práctica condiciona su autonomía operativa.",
-        "ley": "Art. 41 base V apartado C CPEUM · Art. 98 LGIPE",
-        "categoria": "🗳️ Poder Legislativo & Elecciones"
-      },
-      {
-        "termino": "Tope de Gastos de Campaña",
-        "definicion": "Monto máximo que una candidatura puede erogar en su campaña, fijado por la autoridad electoral. Rebasarlo en forma determinante puede anular la elección. En la elección judicial de 2025 el tope fue de 220 mil pesos por candidatura, sin financiamiento público ni acceso a radio y televisión.",
-        "ley": "Arts. 41 y 116 CPEUM · Arts. 243 y 445 LGIPE",
-        "categoria": "🗳️ Poder Legislativo & Elecciones"
-      },
-      {
-        "termino": "DOF (Diario Oficial de la Federación)",
-        "definicion": "Órgano oficial de difusión del Estado mexicano. Una norma existe jurídicamente a partir de su publicación en el DOF, y la fecha de publicación —no la de aprobación ni la del anuncio— es la que determina su entrada en vigor. Cuando una cifra o una facultad se disputa, el DOF es la fuente que zanja la discusión.",
-        "ley": "Art. 2° Ley del Diario Oficial de la Federación y Gacetas Gubernamentales",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Acción Financiera del Estado",
-        "definicion": "Conjunto de operaciones con las que el Estado obtiene recursos, los administra y los aplica. Tiene tres movimientos y ninguno se entiende sin los otros dos: el ingreso (impuestos, derechos, aprovechamientos y venta de petróleo), el gasto (lo que se ejerce y en qué) y el financiamiento (la deuda que cubre la diferencia cuando el ingreso no alcanza). Auditar sólo uno de los tres deja fuera la mitad de la historia.",
-        "ley": "Arts. 73, 74, 126 y 134 CPEUM · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Federalismo Fiscal",
-        "definicion": "Reparto de facultades para cobrar impuestos y para gastar entre la Federación, las entidades federativas y los municipios. En México la recaudación está muy centralizada y el gasto muy descentralizado: la Federación cobra la mayor parte y después transfiere; de ahí que estados y municipios dependan de las participaciones y aportaciones para operar.",
-        "ley": "Arts. 40, 115, 117 y 124 CPEUM · Ley de Coordinación Fiscal",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Hacienda Pública",
-        "definicion": "Conjunto de bienes, derechos, ingresos y obligaciones económicas del Estado, y la actividad de administrarlos. No es sinónimo de «la Secretaría de Hacienda»: es el patrimonio y la actividad económica del Estado en su conjunto, de la cual esa Secretaría es sólo la conductora en el ámbito federal.",
-        "ley": "Arts. 31 fracción IV y 73 CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Ingresos Presupuestarios",
-        "definicion": "Recursos que la Federación estima captar durante el ejercicio y que la Ley de Ingresos enumera año con año: tributarios (ISR, IVA, IEPS), no tributarios (derechos, productos y aprovechamientos), los de organismos y empresas del Estado, y los de financiamiento, es decir, deuda. La distinción importa: un ingreso por deuda hoy es un gasto por intereses mañana.",
-        "ley": "Ley de Ingresos de la Federación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Deuda Subnacional",
-        "definicion": "Obligaciones financieras contratadas por las entidades federativas y los municipios. La Constitución sólo les permite endeudarse para inversión pública productiva, nunca para gasto corriente, y su registro y seguimiento corresponden al sistema que establece la Ley de Disciplina Financiera.",
-        "ley": "Art. 117 fracción VIII CPEUM · Ley de Disciplina Financiera de las Entidades Federativas y los Municipios",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Sistema de Alertas (SHCP)",
-        "definicion": "Semáforo con el que la Secretaría de Hacienda clasifica el endeudamiento de cada entidad federativa y de los municipios con obligaciones inscritas. El color —verde, amarillo o rojo— no es una opinión: determina cuánto más pueden endeudarse en el siguiente ejercicio. Se publica de forma periódica y es consultable por cualquier persona.",
-        "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios · Secretaría de Hacienda y Crédito Público",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Adecuación Presupuestaria",
-        "definicion": "Movimiento que traslada recursos de una partida a otra durante el ejercicio, una vez que el presupuesto ya fue aprobado. Es legal y a menudo necesario, pero es también el punto donde un presupuesto aprobado deja de parecerse al presupuesto ejercido: por eso conviene leer siempre el dato modificado junto al aprobado.",
-        "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Anexo Transversal",
-        "definicion": "Agrupación de recursos que persiguen un mismo objetivo pero están repartidos en varios ramos y programas: igualdad entre mujeres y hombres, pueblos indígenas, atención a la niñez, cambio climático. El anexo no crea presupuesto nuevo: etiqueta y hace visible el que ya está disperso.",
-        "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Presupuesto de Egresos de la Federación",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Programa Presupuestario (Pp)",
-        "definicion": "Unidad mínima a la que se asigna dinero y a la que se le puede exigir un resultado. Cada peso del Presupuesto de Egresos cuelga de un programa presupuestario con clave propia, y es el nivel en el que tiene sentido preguntar «¿cuánto costó y qué produjo?».",
-        "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Sistema de Evaluación del Desempeño",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Fideicomiso Público",
-        "definicion": "Figura en la que una dependencia o entidad aporta recursos públicos a un patrimonio que administra una institución fiduciaria para un fin determinado. Su rasgo fiscalizable es que el dinero sale del ejercicio anual y puede permanecer años fuera del escrutinio presupuestario ordinario, sin dejar de ser público.",
-        "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Ley Federal de las Entidades Paraestatales",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Licitación Pública",
-        "definicion": "Procedimiento de contratación abierto mediante convocatoria pública, en el que compiten quienes cumplan los requisitos y gana la propuesta que ofrezca las mejores condiciones. La Constitución la establece como la regla general para adquisiciones, arrendamientos, servicios y obra pública; todo lo demás es excepción y debe justificarse.",
-        "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Adjudicación Directa",
-        "definicion": "Contratación sin concurso, en la que la autoridad elige directamente a quien la ejecutará. La ley la permite en supuestos tasados y por debajo de ciertos montos, y obliga a fundar y motivar la decisión. Su uso reiterado para contratos grandes es uno de los indicadores más citados de riesgo de corrupción en la contratación pública.",
-        "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Invitación a Cuando Menos Tres Personas",
-        "definicion": "Procedimiento intermedio entre la licitación pública y la adjudicación directa: la autoridad invita a un número acotado de proveedores en lugar de convocar abiertamente. Como la adjudicación directa, es una excepción y exige justificación expresa.",
-        "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Testigo Social",
-        "definicion": "Persona u organización acreditada que participa en procedimientos de contratación de monto relevante y emite un testimonio público sobre lo que observó. No decide ni sanciona: deja constancia, y esa constancia queda disponible para quien quiera revisarla.",
-        "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Obra Pública",
-        "definicion": "Trabajos de construcción, ampliación, conservación o demolición de bienes inmuebles con recursos públicos, y los servicios relacionados con ellos, como proyectos y supervisión. Se rige por su propia ley, distinta de la de adquisiciones, aunque comparte con ella el mandato constitucional de licitar.",
-        "ley": "Art. 134 CPEUM · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Convenio Modificatorio",
-        "definicion": "Instrumento que cambia el monto, el plazo o el alcance de un contrato ya adjudicado. Es una figura legal y a veces inevitable, pero también el lugar donde suele alojarse el sobrecosto: un contrato que se gana barato y se termina caro casi siempre pasó por aquí.",
-        "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Sistema Nacional Anticorrupción",
-        "definicion": "Instancia de coordinación entre las autoridades de todos los órdenes de gobierno encargadas de prevenir, detectar y sancionar hechos de corrupción y faltas administrativas, así como de fiscalizar y controlar recursos públicos. Incluye un Comité de Participación Ciudadana, de modo que la sociedad tiene asiento y voto y no sólo derecho de petición.",
-        "ley": "Art. 113 CPEUM · Ley General del Sistema Nacional Anticorrupción",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Sujeto Obligado",
-        "definicion": "Toda autoridad, entidad, órgano, partido político, sindicato, fideicomiso o persona que recibe o ejerce recursos públicos, y que por esa razón debe documentar y entregar información. La definición es amplia a propósito: quien toca dinero público entra en ella, sea o no parte del gobierno.",
-        "ley": "Art. 6 CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Versión Pública",
-        "definicion": "Documento del que se han eliminado los datos clasificados como reservados o confidenciales para poder entregarlo. Es la salida ordinaria a la negativa total: la regla es entregar lo que sí puede entregarse, no callar el documento entero porque una parte esté protegida.",
-        "ley": "Ley General de Transparencia y Acceso a la Información Pública",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Auditoría de Desempeño",
-        "definicion": "Revisión que no pregunta si el dinero se gastó conforme a la norma, sino si sirvió de algo: si el programa cumplió su objetivo, a qué costo y con qué resultados verificables. Es la que responde la pregunta que más le importa a quien paga impuestos y la que más incomoda a quien ejerce el gasto.",
-        "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Artículo 134 Constitucional",
-        "definicion": "Norma que ordena que los recursos económicos de que dispone el Estado se administren con eficiencia, eficacia, economía, transparencia y honradez, y que las contrataciones se adjudiquen por licitación pública mediante convocatoria abierta. Es el artículo que se invoca cuando se discute una adjudicación directa, un sobrecosto o el uso de propaganda gubernamental.",
-        "ley": "Art. 134 CPEUM",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Artículo 126 Constitucional",
-        "definicion": "Norma de una sola línea y consecuencias enormes: no puede hacerse pago alguno que no esté comprendido en el presupuesto o determinado por ley posterior. Es el fundamento de que un gasto no previsto sea, por definición, un gasto que alguien debe explicar.",
-        "ley": "Art. 126 CPEUM",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Rectoría Económica del Estado",
-        "definicion": "Facultad constitucional del Estado para conducir y orientar el desarrollo nacional sin ser dueño de toda la economía. No significa que el gobierno produzca todo, sino que fija el rumbo y coordina a quienes producen. El texto le pone dos condiciones que suelen olvidarse: que el desarrollo sea sustentable y que la distribución del ingreso sea más justa. Crecer incumpliendo cualquiera de las dos es crecer fuera del mandato.",
-        "ley": "Art. 25 CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Economía Mixta",
-        "definicion": "Sistema en el que conviven la propiedad privada y la rectoría del Estado, con tres sectores que concurren al desarrollo: el público, el social y el privado. Es el modelo que México adopta expresamente. El sector social —ejidos, comunidades, cooperativas— tiene rango constitucional: no es una categoría residual ni una concesión, es uno de los tres pilares nombrados en el texto.",
-        "ley": "Art. 25 CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Sector Social de la Economía",
-        "definicion": "Conjunto de formas de organización productiva de propiedad colectiva: ejidos, comunidades, cooperativas, empresas de trabajadores. La Constitución lo nombra junto al público y al privado, con los mismos derechos de concurrencia al desarrollo. En la práctica es el sector con menor acceso a crédito y a contratación pública, brecha que la propia norma manda cerrar mediante fomento.",
-        "ley": "Art. 25 CPEUM · Ley de la Economía Social y Solidaria",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Sistema Nacional de Planeación Democrática",
-        "definicion": "Mecanismo por el cual el Estado organiza sus metas de desarrollo recogiendo las aspiraciones de la sociedad mediante consulta popular. El adjetivo «democrática» no es adorno: distingue este modelo de la planeación centralizada, porque el resultado obliga a la Administración Pública Federal pero para el particular es apenas indicativo.",
-        "ley": "Art. 26 CPEUM · Ley de Planeación",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Plan Nacional de Desarrollo",
-        "definicion": "Documento rector sexenal al que deben sujetarse obligatoriamente los programas de la Administración Pública Federal. Se elabora con consulta y se publica en los primeros meses del sexenio. Su punto débil no es el contenido sino la trazabilidad: el eslabón que va del objetivo del Plan al Programa presupuestario y de ahí a la partida del Presupuesto de Egresos es donde una meta puede evaporarse sin dejar rastro contable.",
-        "ley": "Art. 26 CPEUM · Ley de Planeación",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Planeación Indicativa",
-        "definicion": "Carácter que tiene el Plan Nacional de Desarrollo frente a los particulares: es una guía, no una orden. El mismo documento es obligatorio hacia adentro del gobierno e indicativo hacia afuera. Esta doble naturaleza es exactamente lo que separa la planeación democrática mexicana de una economía centralmente planificada.",
-        "ley": "Art. 26 CPEUM · Ley de Planeación",
-        "categoria": "🏛️ Presupuesto & ASF"
-      },
-      {
-        "termino": "Propiedad Originaria de la Nación",
-        "definicion": "Principio según el cual las tierras y aguas del territorio nacional pertenecen originariamente a la Nación, que transmitió su dominio a los particulares para constituir la propiedad privada. La consecuencia práctica es que la propiedad privada deriva de esa transmisión y no la antecede, por lo que puede sujetarse a modalidades cuando lo exija el interés público.",
-        "ley": "Art. 27 CPEUM",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Modalidades a la Propiedad Privada",
-        "definicion": "Límites que la Nación puede imponer al dominio privado cuando lo dicte el interés público, incluyendo la regulación del aprovechamiento de los recursos naturales. Es el fundamento jurídico de que se niegue una concesión de agua o se rechace una autorización ambiental: la propiedad no es absoluta frente al interés colectivo.",
-        "ley": "Art. 27 CPEUM",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Áreas Estratégicas",
-        "definicion": "Actividades que el Estado ejerce de manera exclusiva sin que ello constituya monopolio, por disposición constitucional expresa. Su consecuencia práctica se pasa por alto con frecuencia: una entidad que opera en área estratégica no se juzga con la vara de la rentabilidad privada, porque su razón de existir no es el margen sino la función.",
-        "ley": "Art. 28 CPEUM",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Práctica Monopólica Absoluta",
-        "definicion": "Acuerdo entre competidores para fijar precios, restringir la oferta, repartirse el mercado o coordinar posturas en licitaciones. Se sanciona por sí misma, sin necesidad de probar daño: el acuerdo es la infracción. En compras públicas es la figura que explica por qué varias empresas presentan ofertas sospechosamente parecidas.",
-        "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Práctica Monopólica Relativa",
-        "definicion": "Conducta con la que una empresa con poder sustancial en el mercado desplaza indebidamente a sus competidores o impide su entrada. A diferencia de la absoluta, aquí sí debe acreditarse el poder de mercado y el efecto. Es la categoría que se invoca cuando un proveedor dominante del sector público bloquea el acceso de otros.",
-        "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Autonomía del Banco Central",
-        "definicion": "Régimen constitucional que impide a cualquier autoridad ordenar al Banco de México conceder financiamiento. Su objetivo prioritario es procurar la estabilidad del poder adquisitivo de la moneda. Esa última línea es el candado que impide cubrir el déficit imprimiendo dinero, y la razón de que la deuda soberana tenga que colocarse en subasta.",
-        "ley": "Art. 28 CPEUM · Ley del Banco de México",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Desarrollo Sustentable",
-        "definicion": "Fórmula de equilibrio entre tres dimensiones que deben cumplirse a la vez: crecimiento económico, equidad social y preservación ambiental. No es una cuestión sólo ecológica. En el orden jurídico mexicano es un mandato derivado de los artículos 25, 26 y 27, lo que significa que un crecimiento que agota el capital natural no satisface la norma aunque el PIB suba.",
-        "ley": "Art. 25, 26 y 27 CPEUM",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Producto Interno Neto Ecológico",
-        "definicion": "Indicador que el INEGI calcula restando al Producto Interno Bruto el consumo de capital fijo y los costos totales por agotamiento y degradación ambiental. Responde a la pregunta que el PIB no puede contestar: cuánto creció realmente la riqueza si se descuenta el daño causado para producirla. En 2024 ascendió a 25.7 billones de pesos, 76.6% del PIB.",
-        "ley": "Sistema de Cuentas Nacionales de México · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Costos Totales por Agotamiento y Degradación Ambiental",
-        "definicion": "Valoración monetaria del impacto ambiental de la actividad económica, con dos componentes: lo que se acabó (agotamiento de hidrocarburos, bosques y agua subterránea) y lo que se ensució (aire, suelo, residuos, aguas residuales). En 2024 sumaron $1,382,214 millones de pesos, 4.1% del PIB.",
-        "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Agotamiento de Recursos Naturales",
-        "definicion": "Consumo de capital natural que no se repone dentro del periodo: barriles extraídos, bosque perdido por encima de la regeneración, agua sacada de un acuífero por arriba de su recarga. En 2024 costó $144,020 millones de pesos. El reparto oficial lo encabezan los hidrocarburos con 46%, seguidos por los recursos forestales con 28% y el agua subterránea con 26%.",
-        "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Degradación Ambiental",
-        "definicion": "Costo de que el entorno empeore, a diferencia del agotamiento, donde el recurso desaparece. Incluye emisiones al aire, degradación del suelo, residuos sólidos urbanos y tratamiento insuficiente de aguas residuales. En 2024 costó $1,238,194 millones de pesos, y las emisiones al aire por sí solas representaron 2.5% del PIB.",
-        "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Externalidad Negativa",
-        "definicion": "Costo que quien produce no paga y traslada a terceros o a la sociedad entera: el aire que otros respiran, el acuífero que otros dejarán de usar. Las cuentas ecológicas del INEGI son precisamente el ejercicio de ponerle precio a esas externalidades, y ese precio es el que da sustento jurídico a gravarlas.",
-        "ley": "Art. 25 y 27 CPEUM · LGEEPA",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Impuesto Pigouviano",
-        "definicion": "Gravamen diseñado para que quien genera un costo ambiental lo internalice, bajo la premisa de que quien contamina y agota, paga. No busca principalmente recaudar sino corregir un precio que estaba mal puesto. En México la discusión sobre estos impuestos suele confundirse con la recaudatoria, y son cosas distintas.",
-        "ley": "Art. 31 fracción IV y Art. 73 CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Manifestación de Impacto Ambiental",
-        "definicion": "Documento con el que quien pretende realizar una obra debe acreditar ante la autoridad ambiental los efectos que causará y cómo los mitigará. Es el punto donde una cifra estadística se vuelve una decisión exigible: si el agotamiento hídrico de una región ya es crítico, la autoridad tiene sustento para negarla.",
-        "ley": "Art. 27 CPEUM · LGEEPA",
-        "categoria": "📜 Ley de Ingresos & Marco Legal"
-      },
-      {
-        "termino": "Capital Natural",
-        "definicion": "Acervo de recursos que la naturaleza aporta a la economía: agua, suelo, bosques, hidrocarburos, capacidad de absorber contaminantes. Se comporta como cualquier otro capital en un aspecto decisivo: si se consume por encima de su reposición, la producción futura se reduce aunque las cuentas presentes se vean bien.",
-        "ley": "Art. 27 CPEUM · Sistema de Cuentas Nacionales",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Coeficiente de Gini",
-        "definicion": "Medida de desigualdad en la distribución del ingreso que va de 0, donde todos reciben lo mismo, a 1, donde una sola persona concentra todo. Importa jurídicamente porque el artículo 25 exige una más justa distribución del ingreso y la riqueza: sin esta medición, el cumplimiento de ese mandato no es verificable.",
-        "ley": "Art. 25 CPEUM · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Pobreza Multidimensional",
-        "definicion": "Medición que no se limita al ingreso, sino que considera carencias en acceso a salud, educación, seguridad social, vivienda digna, servicios básicos y alimentación. Es la metodología oficial en México. Su virtud es que impide declarar superada la pobreza por el solo hecho de que un ingreso rebase un umbral.",
-        "ley": "Ley General de Desarrollo Social · CONEVAL",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Estrés Hídrico",
-        "definicion": "Situación en que la demanda de agua de una cuenca supera su disponibilidad renovable. Es el indicador que debería anteceder a la autorización de cualquier polo industrial o desarrollo habitacional, porque proyectar crecimiento sin datos de recarga de acuíferos convierte la inversión en un pasivo futuro.",
-        "ley": "Art. 27 CPEUM · Ley de Aguas Nacionales",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Matriz Energética",
-        "definicion": "Composición de las fuentes con que un país genera y consume energía, medida como la proporción entre fósiles y limpias. Es un dato de soberanía y de sustentabilidad a la vez, y la base sobre la que se justifica jurídicamente que el Estado regule el mercado eléctrico y de combustibles como asunto de rectoría.",
-        "ley": "Art. 25, 27 y 28 CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Índice Herfindahl-Hirschman",
-        "definicion": "Medida de concentración de un mercado que se obtiene sumando los cuadrados de las participaciones de cada competidor. Cuanto más alto, más concentrado. Se emplea para detectar poder sustancial de mercado y es una de las herramientas técnicas con las que se aplica la prohibición constitucional de monopolios.",
-        "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
-        "categoria": "🔍 Fiscalización Superior"
-      },
-      {
-        "termino": "Gasto en Protección Ambiental",
-        "definicion": "Recursos que la economía destina a prevenir, reducir o reparar el daño al entorno. En 2024 ascendió a $232,882 millones de pesos, 0.7% del PIB, frente a un deterioro de 4.1%. La proporción entre ambas cifras, y no el monto absoluto, es lo que revela la seriedad del compromiso.",
-        "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Consumo de Capital Fijo",
-        "definicion": "Desgaste de la infraestructura creada por el hombre —maquinaria, fábricas, carreteras— durante un periodo. Restarlo al Producto Interno Bruto da el Producto Interno Neto, y reconoce que una parte de lo producido apenas repuso lo que se gastó en producirlo.",
-        "ley": "Sistema de Cuentas Nacionales de México · INEGI",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "ISR (Impuesto Sobre la Renta)",
-        "definicion": "Impuesto directo sobre el ingreso de personas físicas y sobre la utilidad de personas morales. Directo quiere decir que lo soporta quien lo causa: no puede trasladarse a otro, a diferencia del IVA. Grava la utilidad fiscal —ingresos menos deducciones autorizadas—, de modo que un estímulo o una deducción reducen la recaudación sin cambiar la tasa. Es el mayor ingreso tributario del país y el componente principal de la Recaudación Federal Participable, de la que salen las participaciones del Ramo 28.",
-        "ley": "Ley del ISR · Art. 31 fracc. IV CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "IVA (Impuesto al Valor Agregado)",
-        "definicion": "Impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % en alimentos y medicinas y una lista de actos exentos. Funciona por traslado y acreditamiento: quien vende lo cobra por separado y lo entera, pero acredita el que pagó a sus proveedores, de modo que cada eslabón tributa sólo por el valor que añade y el consumidor final lo soporta íntegro. Su incidencia es regresiva: la tasa es la misma para quien gana poco y para quien gana mucho.",
-        "ley": "Ley del IVA",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "IEPS (Impuesto Especial sobre Producción y Servicios)",
-        "definicion": "Impuesto indirecto sobre consumos específicos —combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones— cuyo fin no es sólo recaudar sino encarecer aquello que impone un costo a terceros o a la salud pública. Es un impuesto pigouviano. Su recaudación es la más volátil del cuadro fiscal porque la cuota de combustibles se ajusta según el precio de referencia.",
-        "ley": "Ley del IEPS",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "ISAN (Impuesto Sobre Automóviles Nuevos)",
-        "definicion": "Impuesto federal sobre la enajenación de automóviles nuevos de producción nacional y sobre su importación definitiva. Su rasgo distintivo es que, siendo federal, lo administran las entidades federativas: ellas lo recaudan y conservan su rendimiento por convenio de colaboración administrativa en el marco de la Ley de Coordinación Fiscal. Por eso aparece a la vez en la Ley de Ingresos de la Federación y en las haciendas locales.",
-        "ley": "Ley Federal del ISAN · Ley de Coordinación Fiscal",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Impuestos al Comercio Exterior (Aranceles)",
-        "definicion": "Gravámenes que se causan al importar o exportar mercancía, liquidados en la aduana conforme a la tarifa de fracciones arancelarias. Su particularidad jurídica es la excepción del artículo 131 constitucional: el Congreso puede facultar al Ejecutivo para aumentar, disminuir o suprimir las cuotas por decreto, sujeto a aprobación posterior. Es, por tanto, instrumento de política comercial antes que fuente estable de ingreso. México presupuesta en cero el impuesto a la exportación.",
-        "ley": "LIGIE · Ley Aduanera · Art. 131 CPEUM",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Accesorios de las Contribuciones",
-        "definicion": "Recargos por mora, multas por infracciones fiscales, gastos de ejecución e indemnización por cheque devuelto. El último párrafo del artículo 2º del Código Fiscal ordena que participen de la naturaleza de la suerte principal: un recargo del ISR es jurídicamente ISR. De ahí que se cobren por el mismo procedimiento administrativo de ejecución y que prescriban junto con el crédito que los originó. No son una sanción separada: son el precio legal del incumplimiento.",
-        "ley": "Código Fiscal de la Federación, arts. 2º, 20, 21 y 70 a 91",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Impuesto por la Actividad de Exploración y Extracción de Hidrocarburos",
-        "definicion": "Gravamen que no mide la ganancia ni el volumen extraído, sino la superficie del área contractual o de asignación, con una cuota por kilómetro cuadrado que se eleva cuando el área lleva más de sesenta meses sin producir. Su diseño busca desincentivar que se retengan áreas ociosas. Su recaudación se destina al Fondo para Entidades Federativas y Municipios Productores de Hidrocarburos.",
-        "ley": "Ley de Ingresos sobre Hidrocarburos, arts. 55 a 57",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Rezago Fiscal",
-        "definicion": "Impuestos causados en ejercicios anteriores que siguen pendientes de liquidarse o de pagarse, incluidos los de contribuciones ya derogadas. Demuestran que la obligación tributaria sobrevive a la ley que la creó: se extingue por pago, por caducidad de la facultad de la autoridad para determinarla —cinco años, artículo 67 del Código Fiscal— o por prescripción del crédito ya determinado —cinco años, artículo 146—.",
-        "ley": "Código Fiscal de la Federación, arts. 67 y 146",
-        "categoria": "💰 Hacendario & Deuda"
-      },
-      {
-        "termino": "Aportaciones de Seguridad Social",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Art. 2º fracc. II CFF · Ley del Seguro Social · Ley del ISSSTE",
-        "definicion": "Contribuciones a cargo de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social, o de quienes se benefician de servicios de previsión social. Su rasgo decisivo es el destino específico: financian las prestaciones del IMSS y del ISSSTE, no entran a la bolsa común del gasto y no integran la Recaudación Federal Participable, de modo que no se reparten a estados ni municipios."
-      },
-      {
-        "termino": "Contribuciones de Mejoras",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Art. 2º fracc. III CFF · Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica",
-        "definicion": "Contribuciones a cargo de quienes se benefician de manera directa de una obra pública. Responden al principio de beneficio y no al de capacidad contributiva: no se paga por tener con qué, sino por recibir una ventaja particular y medible. En el ámbito federal sólo subsiste la referida a obras de infraestructura hidráulica."
-      },
-      {
-        "termino": "Derechos (Contribución)",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Art. 2º fracc. IV CFF · Ley Federal de Derechos",
-        "definicion": "Contribuciones que se pagan por usar o aprovechar bienes del dominio público de la Nación, o por recibir servicios que presta el Estado en sus funciones de derecho público. A diferencia del impuesto, aquí existe contraprestación identificable. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio: si lo excede de manera desproporcionada, el derecho se convierte en un impuesto encubierto y resulta inconstitucional."
-      },
-      {
-        "termino": "Productos (Ingresos del Estado)",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Art. 3º párrafo tercero CFF",
-        "definicion": "Contraprestaciones que recibe el Estado por los servicios que presta en sus funciones de derecho privado, y por el uso, aprovechamiento o enajenación de bienes que no son del dominio público: rentas, intereses de valores, venta de muebles e inmuebles y utilidades. Aquí el Estado no actúa como autoridad sino como particular, razón por la cual el Código Fiscal los excluye de las contribuciones."
-      },
-      {
-        "termino": "Aprovechamientos",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Art. 3º párrafo primero CFF",
-        "definicion": "Ingresos que percibe el Estado por funciones de derecho público distintos de las contribuciones, de los ingresos derivados de financiamientos y de los que obtienen los organismos descentralizados y las empresas del Estado. Es una categoría residual definida por exclusión: caben ahí multas no fiscales, cuotas compensatorias, decomisos, recuperaciones de capital y remanentes. Esa textura abierta la vuelve el rubro más heterogéneo de la Ley de Ingresos."
-      },
-      {
-        "termino": "Empresas Públicas del Estado",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Arts. 25 y 28 CPEUM · Ley de la Empresa Pública del Estado, Pemex · Ley de la Empresa Pública del Estado, CFE",
-        "definicion": "Figura jurídica que sustituyó a las empresas productivas del Estado con la reforma energética de 2024-2025. Pemex y la CFE dejan de regirse por una lógica de competencia en el mercado, creada en 2013, y pasan a operar bajo la rectoría del Estado en áreas estratégicas. Lo que aportan al erario no es recaudación sino venta: cobran un precio por un bien o un servicio, no un tributo por mandato de ley."
-      },
-      {
-        "termino": "Fondo Mexicano del Petróleo (FMP)",
-        "categoria": "💰 Hacendario & Deuda",
-        "ley": "Art. 28 párrafo sexto CPEUM · Ley del FMP para la Estabilización y el Desarrollo",
-        "definicion": "Fideicomiso público constituido en el Banco de México por mandato constitucional. Recibe los ingresos del Estado derivados de las asignaciones y contratos de hidrocarburos y los transfiere al presupuesto hasta un tope equivalente al 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Cuando la transferencia se agota en gasto corriente del ejercicio, la función estabilizadora prevista en su diseño no llega a operar."
-      }
-    ],
+    {
+      "termino": "Contraloría Social",
+      "definicion": "Vigilancia organizada de la ciudadanía sobre la aplicación de recursos públicos en programas y obras que la afectan directamente. No es una figura simbólica: los comités de contraloría social están previstos en la normativa de los programas federales y tienen derecho a recibir información, recorrer la obra y levantar constancias. Su fuerza no está en sancionar, sino en documentar.",
+      "ley": "Art. 134 CPEUM · Ley General de Desarrollo Social",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Denuncia Ciudadana",
+      "definicion": "Acto por el que una persona pone en conocimiento de una autoridad fiscalizadora hechos que pueden constituir un uso irregular de recursos públicos. Puede presentarse de forma anónima ante la Auditoría Superior de la Federación o los órganos internos de control. No requiere abogado ni formalidades procesales, pero su utilidad depende por completo de que aporte datos verificables: fecha, lugar, monto, dependencia y documento.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación · Ley General de Responsabilidades Administrativas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Alertador",
+      "definicion": "Persona, servidora pública o no, que informa sobre un acto grave de corrupción y queda amparada por medidas de protección frente a represalias laborales o de otro tipo. El mecanismo federal opera mediante una plataforma que asigna una clave de seguimiento, de modo que quien alerta puede conocer el avance de su caso sin revelar su identidad.",
+      "ley": "Ley General de Responsabilidades Administrativas · mecanismo de la Secretaría Anticorrupción y Buen Gobierno",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Falta Administrativa Grave",
+      "definicion": "Conducta de una persona servidora pública que la ley califica de mayor entidad: cohecho, peculado, desvío de recursos públicos, abuso de funciones, tráfico de influencias, enriquecimiento oculto, entre otras. Su calificación importa porque determina quién juzga: las faltas no graves las resuelve el órgano interno de control, mientras que las graves se sustancian ante el Tribunal Federal de Justicia Administrativa y pueden derivar en inhabilitación o en responsabilidad penal.",
+      "ley": "Arts. 51 a 64 de la Ley General de Responsabilidades Administrativas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Solicitud de Acceso a la Información",
+      "definicion": "Petición formal dirigida a una institución pública para que entregue un documento o dato que obra en su poder. No hay que acreditar interés jurídico ni explicar para qué se quiere: la ley prohíbe condicionar la entrega a los motivos. Genera folio y plazo de respuesta, y la negativa o el silencio se impugnan mediante recurso de revisión. Es el instrumento con el que se consigue la prueba documental que sostiene una denuncia.",
+      "ley": "Art. 6º apartado A CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Recurso de Revisión en Transparencia",
+      "definicion": "Medio de impugnación contra la respuesta de una institución a una solicitud de información: procede cuando se niega el documento, se entrega incompleto, se clasifica como reservado sin justificación o simplemente no se responde. Lo resuelve la autoridad garante, hoy Transparencia para el Pueblo en el ámbito federal, y su resolución puede ordenar la entrega.",
+      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Órgano Interno de Control",
+      "definicion": "Unidad de vigilancia que existe dentro de cada dependencia, entidad y ayuntamiento, encargada de recibir quejas, investigar faltas administrativas de su propio personal y sustanciar los procedimientos de responsabilidad. Es la instancia más cercana y la más rápida para un hecho local, aunque su independencia respecto de la institución que vigila es una de las críticas recurrentes del sistema anticorrupción.",
+      "ley": "Ley General de Responsabilidades Administrativas · Ley Orgánica de la Administración Pública Federal",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Empresa Fantasma (EFOS)",
+      "definicion": "Sociedad que emite comprobantes fiscales por operaciones que nunca existieron. La autoridad tributaria las identifica como Empresas que Facturan Operaciones Simuladas y las publica en un listado; a partir de esa publicación, las facturas que emitieron pierden efecto fiscal. Es uno de los mecanismos más documentados para vaciar contratos de obra y de servicios pagados con dinero público.",
+      "ley": "Art. 69-B del Código Fiscal de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Amparo Indirecto",
+      "definicion": "Vía del juicio de amparo que se promueve ante un Juzgado de Distrito contra actos, omisiones o normas generales de cualquier autoridad, cuando no se trata de una sentencia definitiva. Se tramita en dos cuadernos paralelos: el principal, que resuelve el fondo en la audiencia constitucional, y el incidental, donde se decide la suspensión del acto. Admite recurso de revisión.",
+      "ley": "Art. 107 Ley de Amparo · art. 107 fracc. VII CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Amparo Directo",
+      "definicion": "Vía del juicio de amparo que se promueve contra sentencias definitivas, laudos laborales y resoluciones que ponen fin a un juicio, cuando ya no procede recurso ordinario. Se presenta por conducto de la propia autoridad que dictó la sentencia y lo resuelve un Tribunal Colegiado de Circuito en una sola instancia, sin audiencia ni pruebas nuevas.",
+      "ley": "Arts. 170 a 189 Ley de Amparo · art. 107 fracc. V y VI CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Suspensión del Acto Reclamado",
+      "definicion": "Medida cautelar que congela los efectos del acto impugnado mientras se resuelve el amparo. Tiene dos momentos: la provisional, que se concede de entrada, y la definitiva, que se decide tras la audiencia incidental. El juez pondera la apariencia del buen derecho y el peligro en la demora frente al interés social. En la práctica es la etapa decisiva del juicio, porque un amparo ganado sobre un daño ya consumado no restituye nada.",
+      "ley": "Arts. 125 a 158 Ley de Amparo · arts. 128, 129 y 138",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Interés Legítimo",
+      "definicion": "Condición que debe acreditar quien promueve un amparo sin ser titular directo de un derecho subjetivo. Tras la reforma del 16 de octubre de 2025 exige demostrar una afectación real, actual y diferenciada del resto de las personas, de modo que la anulación del acto produzca un beneficio cierto y no hipotético. El interés simple —el de cualquier ciudadano en la legalidad general— no basta.",
+      "ley": "Art. 5 fracc. I Ley de Amparo · art. 107 fracc. I CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Acción de Inconstitucionalidad",
+      "definicion": "Medio de control constitucional que confronta en abstracto una norma general con la Constitución, sin necesidad de un caso concreto ni de una víctima. La pueden promover el 33% de los integrantes de una cámara o de un congreso local, el Ejecutivo Federal, los partidos políticos contra leyes electorales, los organismos de derechos humanos y la Fiscalía General en materia penal, dentro de los 30 días naturales siguientes a la publicación de la norma. Invalida con efectos generales si la aprueban al menos seis de los nueve ministros.",
+      "ley": "Art. 105 fracc. II CPEUM · Ley Reglamentaria del art. 105",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Controversia Constitucional",
+      "definicion": "Juicio que resuelve los conflictos de competencia entre órdenes de gobierno y poderes: Federación contra estados, estados contra municipios, un poder contra otro, o un órgano autónomo contra quien invada sus atribuciones. Lo resuelve el Pleno de la Suprema Corte en única instancia. No está al alcance de los particulares: sólo la promueven entes públicos.",
+      "ley": "Art. 105 fracc. I CPEUM · Ley Reglamentaria del art. 105",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Declaratoria General de Inconstitucionalidad",
+      "definicion": "Mecanismo que convierte un triunfo individual en beneficio general. Cuando la Suprema Corte establece jurisprudencia de que una norma es inconstitucional, lo notifica a la autoridad que la emitió; si en 90 días naturales ésta no supera el problema, la Corte puede expulsar la norma del orden jurídico con efectos para todos. No procede en materia tributaria: los impuestos declarados inconstitucionales sólo dejan de aplicarse a quien se amparó.",
+      "ley": "Art. 107 fracc. II CPEUM · arts. 231 a 235 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Precedente Obligatorio",
+      "definicion": "Sistema vigente desde la reforma de 2021: las razones que justifican la decisión de una sentencia del Pleno de la Suprema Corte, aprobadas por mayoría calificada, obligan de inmediato a todas las autoridades jurisdiccionales del país. A diferencia de la jurisprudencia por reiteración, basta una sola sentencia. Un juez de menor jerarquía no puede apartarse del precedente, aunque sí puede solicitar su sustitución exponiendo razones.",
+      "ley": "Art. 94 CPEUM · reforma de 11 de marzo de 2021",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Contradicción de Criterios",
+      "definicion": "Procedimiento para resolver cuando dos o más órganos jurisdiccionales del mismo nivel sostienen criterios opuestos sobre el mismo punto de derecho. La denuncia puede hacerla cualquiera de las partes, los propios órganos, sus integrantes o el Ejecutivo Federal, y quien la resuelve fija cuál criterio prevalece con carácter obligatorio. La resolución no afecta las situaciones ya juzgadas, pero ordena el criterio hacia adelante.",
+      "ley": "Arts. 225 a 227 Ley de Amparo · art. 107 fracc. XIII CPEUM",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Audiencia Constitucional",
+      "definicion": "Diligencia única del amparo indirecto en la que se encadenan tres periodos: probatorio, de alegatos y de sentencia. La prueba documental puede ofrecerse hasta ese mismo momento, pero la testimonial, la pericial y la inspección judicial deben anunciarse cinco días hábiles antes. No se admite la confesional por posiciones. Lo que no se ofreció a tiempo, no entra.",
+      "ley": "Art. 119 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Informe Justificado",
+      "definicion": "Escrito con el que la autoridad señalada como responsable contesta la demanda de amparo: manifiesta si el acto reclamado existe y por qué lo considera constitucional, acompañando copia certificada de las constancias. Debe rendirlo en quince días, prorrogables hasta diez más. Si no lo rinde, se presume cierto el acto reclamado.",
+      "ley": "Art. 117 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Sobreseimiento",
+      "definicion": "Resolución que da por terminado el juicio de amparo sin pronunciarse sobre si el acto era o no constitucional, por actualizarse una causa de improcedencia. No es una victoria de la autoridad sobre el fondo, sino una puerta que se cierra antes de llegar a él. Conviene distinguirlo de la negativa del amparo, donde el juez sí examina el acto y lo declara ajustado a la Constitución.",
+      "ley": "Arts. 61, 63 y 73 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Facultad de Atracción",
+      "definicion": "Potestad discrecional de la Suprema Corte para conocer de un amparo que ordinariamente correspondía a un Tribunal Colegiado, cuando el asunto reúne interés y trascendencia. Puede ejercerla de oficio o a petición fundada. Es una de las palancas más relevantes de su poder de agenda: la Corte decide qué temas discute el país.",
+      "ley": "Art. 107 fracc. V y VIII CPEUM · art. 40 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Plenos Regionales",
+      "definicion": "Órganos creados por la reforma de 2021 en sustitución de los Plenos de Circuito. Resuelven las contradicciones de criterios entre Tribunales Colegiados de su región y fijan jurisprudencia obligatoria en su ámbito territorial, descargando de ese trabajo a la Suprema Corte.",
+      "ley": "Art. 107 fracc. XIII CPEUM · Ley Orgánica del Poder Judicial de la Federación",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Tribunal Colegiado de Circuito",
+      "definicion": "Órgano integrado por tres magistradas o magistrados que resuelve los amparos directos contra sentencias definitivas y los recursos de revisión en materia de legalidad. Es el destino final de la inmensa mayoría de los juicios de amparo del país: sólo una fracción mínima escala hasta la Suprema Corte.",
+      "ley": "Art. 94 CPEUM · Ley Orgánica del Poder Judicial de la Federación",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Juzgado de Distrito",
+      "definicion": "Órgano unipersonal de primera instancia del Poder Judicial de la Federación. Conoce de los juicios de amparo indirecto y de los procesos federales ordinarios. Es la puerta de entrada del ciudadano al control constitucional: ahí se presenta la demanda, se resuelve la suspensión y se celebra la audiencia constitucional.",
+      "ley": "Art. 94 CPEUM · arts. 107 y 108 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Concepto de Violación",
+      "definicion": "Núcleo argumentativo de la demanda de amparo: el razonamiento con el que la persona quejosa explica por qué el acto reclamado contraría la Constitución. No basta afirmar que un acto es injusto; hay que confrontarlo con un precepto constitucional y demostrar la contradicción. Un amparo bien fundado con conceptos mal planteados se pierde.",
+      "ley": "Art. 108 fracc. VIII Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Principio de Relatividad",
+      "definicion": "Regla histórica del amparo mexicano, conocida como fórmula Otero: la sentencia sólo protege a quien promovió el juicio y no hace una declaración general sobre la norma impugnada. De ahí que una ley pueda seguir aplicándose a millones de personas después de haber sido declarada inconstitucional en casos particulares, salvo que se emita una declaratoria general de inconstitucionalidad.",
+      "ley": "Art. 107 fracc. II CPEUM · art. 73 Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Ley de Amparo",
+      "definicion": "Ley reglamentaria de los artículos 103 y 107 constitucionales que regula todo el juicio de amparo: quién puede promoverlo, en qué plazos, cómo se tramita, qué recursos proceden y cómo se cumplen las sentencias. Fue expedida en 2013 y reformada dos veces durante 2025, el 13 de marzo y el 16 de octubre.",
+      "ley": "DOF 2 de abril de 2013, con reformas de 13/03/2025 y 16/10/2025",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Semanario Judicial de la Federación",
+      "definicion": "Publicación oficial donde se difunden las sentencias, los precedentes y la jurisprudencia obligatoria del Poder Judicial de la Federación. Se organiza por épocas: el 1 de septiembre de 2025 inició la Duodécima Época, que marca el corte entre los criterios de la Corte anterior y los de la Corte electa por voto popular.",
+      "ley": "Art. 220 Ley de Amparo · Acuerdo General 7/2025 del Pleno de la SCJN",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "PEF (Presupuesto de Egresos de la Federación)",
+      "definicion": "Documento jurídico aprobado anualmente en exclusiva por la Cámara de Diputados que detalla el monto, destino y distribución del gasto público del gobierno federal durante un ejercicio fiscal.",
+      "ley": "Art. 74 frac. IV Constitución Política / Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "LIF (Ley de Ingresos de la Federación)",
+      "definicion": "Ordenamiento legal aprobado por ambas Cámaras del Congreso que establece los montos y conceptos que la federación podrá recaudar en el año (impuestos, derechos, aprovechamientos y deuda).",
+      "ley": "Art. 73 frac. VII Constitución / Código Fiscal de la Federación",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Recaudación Federal Participable (RFP)",
+      "definicion": "Bolsa común de impuestos y derechos federales (principalmente ISR e IVA, menos devoluciones) sobre la cual se calcula el 20% que por mandato legal debe repartirse a los estados y municipios vía Ramo 28.",
+      "ley": "Art. 2° Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ramo 28 (Participaciones Federales)",
+      "definicion": "Recursos transferidos en efectivo a los estados y municipios sin etiquetar, en compensación por su adhesión al Pacto Fiscal. Es de libre disposición presupuestaria.",
+      "ley": "Ley de Coordinación Fiscal, Capítulos I y II",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ramo 33 (Aportaciones Federales)",
+      "definicion": "Fondos federales transferidos a entidades y municipios condicionados y etiquetados exclusivamente para salud, educación, seguridad, infraestructura social y asistencia.",
+      "ley": "Ley de Coordinación Fiscal, Capítulo V (Arts. 25 al 51)",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "FONE (Fondo de Aportaciones para la Nómina Educativa)",
+      "definicion": "El fondo más grande del Ramo 33. Administrado centralmente por la SEP y Hacienda para pagar los sueldos y prestaciones del magisterio federalizado en las 32 entidades.",
+      "ley": "Art. 26 y 27 Ley de Coordinación Fiscal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FASSA / IMSS-Bienestar",
+      "definicion": "Fondo de Aportaciones para los Servicios de Salud. Recientemente absorbido en la mayoría de los estados por el organismo descentralizado IMSS-Bienestar para centralizar clínicas y hospitales.",
+      "ley": "Art. 29 Ley de Coordinación Fiscal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FORTAMUN",
+      "definicion": "Fondo de Aportaciones para el Fortalecimiento de los Municipios. Transferido a tesorerías municipales para seguridad pública, homologación salarial policial y compromisos financieros.",
+      "ley": "Art. 36 y 37 Ley de Coordinación Fiscal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FISMDF / FAIS",
+      "definicion": "Fondo de Aportaciones para la Infraestructura Social Municipal y de las Demarcaciones Territoriales del D.F. Recursos para combate al rezago social y pobreza extrema.",
+      "ley": "Art. 32 al 35 Ley de Coordinación Fiscal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Pliego de Observaciones",
+      "definicion": "Documento de determinación de presunto daño patrimonial emitido por la ASF cuando una entidad no comprueba el destino legítimo o legal de los recursos auditados.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "EFOS y EDOS (Factureras)",
+      "definicion": "EFOS: Empresas que Facturan Operaciones Simuladas (vendedoras de facturas falsas). EDOS: Empresas que Deducen Operaciones Simuladas (compradoras de facturas para inflar gastos y lavar dinero).",
+      "ley": "Artículo 69-B del Código Fiscal de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Impuesto Predial",
+      "definicion": "Gravamen municipal directo sobre la propiedad o posesión inmobiliaria. Potestad tributaria constitucional fundamental de los ayuntamientos.",
+      "ley": "Artículo 115 constitucional, fracción IV",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Costo Financiero de la Deuda",
+      "definicion": "Monto destinado exclusivamente a pagar intereses, comisiones y gastos de amortización de la deuda pública adquirida por el gobierno federal o local, sin amortizar capital sustancial.",
+      "ley": "Ley General de Deuda Pública",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ley de Disciplina Financiera (LDF)",
+      "definicion": "Ley nacional que regula el endeudamiento de estados y municipios, impone techos al gasto en nómina y crea el Sistema de Alertas de la SHCP.",
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (2016)",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Gasto Programable vs No Programable",
+      "definicion": "Gasto Programable: Recursos destinados a programas gubernamentales, servicios públicos e inversión (salud, escuelas, obras). Gasto No Programable: Pagos ineludibles por ley (deuda, participaciones a estados, ADEFAS).",
+      "ley": "Clasificación Económica del Gasto Público (SHCP)",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "ADEFAS (Adeudos de Ejercicios Fiscales Anteriores)",
+      "definicion": "Compromisos devengados y pasivos contraídos en años fiscales previos que se liquidan con cargo al presupuesto del año en curso.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Partida de Gestión Social (Congresos)",
+      "definicion": "Bolsas discrecionales y opacas asignadas a legisladores federales y locales para entrega de despensas, tinacos o apoyos directos sin control de fiscalización.",
+      "ley": "Reglamentos Interiores de los Congresos Estatales",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ponencia de Ministro(a) (SCJN)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Despacho y equipo técnico-jurídico asignado en exclusividad a cada ministra o ministro de la Suprema Corte. Está integrado por secretarios de estudio y cuenta, secretarios auxiliares y asesores encargados de estudiar expedientes, analizar precedentes y redactar los proyectos de sentencia que se someten a votación en el Pleno. Su costo operativo directo promediaba entre $2.6 y $3.1 millones de pesos mensuales en el régimen previo.",
+      "ley": "Art. 94 CPEUM / Reglamento Interior de la SCJN / Manual de Remuneraciones del PJF"
+    },
+    {
+      "termino": "Secretario(a) de Estudio y Cuenta",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Funcionario judicial de altísima jerarquía y especialización técnica adscrito a la ponencia de un ministro. Tiene a su cargo el análisis dogmático de amparos, controversias constitucionales y acciones de inconstitucionalidad, así como la redacción formal de los proyectos de sentencia. Históricamente sus percepciones brutas oscilaban entre $145,000 y $185,000 pesos mensuales, con prestaciones equiparables a mandos medios y superiores.",
+      "ley": "Ley Orgánica del PJF / Tabulador Oficial de Sueldos SCJN"
+    },
+    {
+      "termino": "Asesoría de Ponencia y Récord de Plazas (Más de 70 asesores)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Personal contratado bajo plazas de confianza o contratos por honorarios asimilados para investigación jurídica y apoyo directo a las ponencias. Durante revisiones de auditoría ciudadana y solicitudes de transparencia (PNT) se documentó que, sumando secretarios de acuerdos, proyectistas, auxiliares y asesores comisionados en comités y coordinaciones, cada ministro llegó a disponer de más de 60 a 70 personas de apoyo técnico, disparando el gasto del Capítulo 1000 a niveles históricos.",
+      "ley": "Art. 134 CPEUM / Presupuesto de Egresos de la Federación / PNT Art. 70 Fracc. XI"
+    },
+    {
+      "termino": "Artículo 127 Constitucional (Tope Salarial)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Precepto de la Constitución General (Fracción II) que establece que ningún servidor público de la Federación, estados o municipios podrá recibir una remuneración mayor a la fijada para el Presidente de la República ($134,310 netos mensuales en 2025-2026). Fue el núcleo del diferendo salarial con la SCJN, cuyos integrantes percibían más de $206,000 netos invocando la irreductibilidad salarial del artículo 94.",
+      "ley": "Artículos 127 y 94 CPEUM / Ley Federal de Remuneraciones de los Servidores Públicos"
+    },
+    {
+      "termino": "Fideicomisos del Poder Judicial (Extinción y Litigio)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Instrumentos fiduciarios constituidos por la SCJN y el Consejo de la Judicatura Federal que acumularon más de $15,400 a $21,500 millones de pesos del erario público para pensiones complementarias de mandos, gastos médicos privados y mantenimiento de viviendas. Su extinción por decreto legislativo para reintegrar los fondos a la Tesorería de la Federación (TESOFE) fue impugnada mediante juicios de amparo.",
+      "ley": "Decreto DOF 27/10/2023 / Ley Federal de Presupuesto y Responsabilidad Hacendaria Art. 54"
+    },
+    {
+      "termino": "Pleno de la Suprema Corte de Justicia (SCJN)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Órgano supremo de decisión del tribunal constitucional. Tradicionalmente integrado por 11 ministros divididos en dos Salas (Primera y Segunda). A partir de la Reforma Constitucional publicada el 15 de septiembre de 2024, el Pleno se redujo a 9 integrantes, se suprimieron las Salas y todas las deliberaciones y sentencias se resuelven en sesiones públicas plenarias.",
+      "ley": "Art. 94 CPEUM reformado / Decreto DOF 15/09/2024"
+    },
+    {
+      "termino": "Reforma Constitucional del Poder Judicial (2024–2025)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Decreto publicado en el Diario Oficial de la Federación el 15 de septiembre de 2024 que transformó la estructura del Poder Judicial mexicano: instaura la elección popular por voto ciudadano directo de ministras, ministros, magistrados y jueces; reduce el Pleno de la SCJN de 11 a 9 integrantes suprimiendo las Salas; extingue el Consejo de la Judicatura Federal creando en su lugar el Tribunal de Disciplina Judicial y el Órgano de Administración Judicial; y mandata el cumplimiento irrestricto del tope salarial del Artículo 127 Constitucional.",
+      "ley": "Decreto DOF 15/09/2024 / Artículos 94, 96, 97, 98, 99 y 100 de la CPEUM"
+    },
+    {
+      "termino": "Autonomía Presupuestal Judicial (Art. 94)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Facultad constitucional del Poder Judicial de la Federación para elaborar su propio proyecto de presupuesto de egresos y remitirlo a la SHCP para su incorporación directa al PEF sin modificaciones del Poder Ejecutivo. Históricamente fue el argumento empleado por la SCJN para defender remuneraciones superiores al tope presidencial y mantener 13 fideicomisos complementarios.",
+      "ley": "Artículo 94 CPEUM / Art. 74 frac. IV CPEUM / Ley Federal de Presupuesto y Responsabilidad Hacendaria"
+    },
+    {
+      "termino": "Tribunal de Disciplina Judicial (TDJ)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Órgano constitucional creado por la Reforma Judicial de 2024 para sustituir las facultades de control y disciplina del extinto CJF. Cuenta con amplias facultades para investigar faltas administrativas, ordenar auditorías patrimoniales a jueces, magistrados y ministros, y dar vista al Ministerio Público Federal en casos de corrupción o conflicto de interés.",
+      "ley": "Art. 100 CPEUM reformado / Ley Orgánica del Tribunal de Disciplina Judicial"
+    },
+    {
+      "termino": "Consejo de la Judicatura Federal (CJF)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Órgano colegiado encargado históricamente de la administración, vigilancia, adscripción y disciplina de los juzgados de distrito y tribunales de circuito federales. Administraba más del 85% del presupuesto global del Ramo 03 (más de $68,000 mdp). La reforma de 2024 determinó su sustitución por el Órgano de Administración Judicial y el Tribunal de Disciplina.",
+      "ley": "Art. 100 CPEUM (régimen previo) / Artículos Transitorios Reforma Judicial 2024"
+    },
+    {
+      "termino": "Haber de Retiro",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Pensión económica vitalicia y paquete de prerrogativas (vehículos blindados, asistentes y escoltas) que se otorgaba a las y los ministros de la Corte al concluir su periodo o presentar su renuncia anticipada. La reforma constitucional de 2024 acotó estas prerrogativas extraordinarias en aras del principio de austeridad republicana.",
+      "ley": "Ley Orgánica del PJF (abrogada) / Art. 94 CPEUM y Art. 7° Transitorio"
+    },
+    {
+      "termino": "Seguro de Separación Individualizado (SSI)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Prestación económica extraordinaria contratada con aseguradoras privadas donde el servidor judicial aportaba entre 2% y 10% de su sueldo base, y la institución aportaba una cantidad idéntica con dinero público. Prohibida en el Ejecutivo por la Ley de Austeridad Republicana, su permanencia en el PJF generó observaciones de la ASF.",
+      "ley": "Ley Federal de Austeridad Republicana Art. 22 / Manual de Remuneraciones PJF"
+    },
+    {
+      "termino": "Seguro de Gastos Médicos Mayores (SGMM)",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Póliza privada con cargo al presupuesto institucional que otorgaba cobertura médica integral en hospitales privados de alta gama para ministros, magistrados, jueces y familiares directos, con sumas aseguradas ilimitadas, sustituyendo la atención en instituciones públicas de seguridad social (ISSSTE).",
+      "ley": "Manual de Remuneraciones de los Servidores Públicos del PJF"
+    },
+    {
+      "termino": "Ramo 03 (Poder Judicial de la Federación)",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Clave presupuestaria del Presupuesto de Egresos de la Federación (PEF) asignada a la SCJN, CJF y TEPJF. Es un ramo autónomo que ha alcanzado cifras récord superiores a los $78,000 - $84,000 millones de pesos anuales, caracterizado por concentrar más del 80% de su gasto en el Capítulo 1000 (Servicios Personales).",
+      "ley": "Art. 74 fracc. IV CPEUM / Presupuesto de Egresos de la Federación"
+    },
+    {
+      "termino": "Capítulo 1000 (Servicios Personales)",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Agrupador presupuestal del clasificador por objeto del gasto del CONAC que concentra todos los sueldos, salarios base, honorarios asimilados, gratificaciones de fin de año, bonos de riesgo y aportaciones de seguridad social de los servidores públicos. En el Poder Judicial representa 8 de cada 10 pesos del presupuesto.",
+      "ley": "Clasificador por Objeto del Gasto (CONAC) / LGCG"
+    },
+    {
+      "termino": "Capítulo 3000 (Servicios Generales)",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Partida presupuestal destinada a contratar servicios operativos indispensables: arrendamiento de inmuebles, vigilancia, seguridad patrimonial, asesorías técnicas externas, telefonía, informática, pasajes y viáticos oficiales.",
+      "ley": "Clasificador por Objeto del Gasto (CONAC) / Ley de Adquisiciones"
+    },
+    {
+      "termino": "Subejercicio Presupuestal",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Monto de recursos públicos autorizados en el PEF que, al concluir el ejercicio fiscal, no fueron devengados ni comprometidos por la unidad responsable. La ley obliga a reintegrarlos a la TESOFE; la controversia del PJF derivó de enviar esos recursos no ejercidos a fideicomisos propios.",
+      "ley": "Art. 54 Ley Federal de Presupuesto y Responsabilidad Hacendaria"
+    },
+    {
+      "termino": "TESOFE (Tesorería de la Federación)",
+      "categoria": "💰 Hacendario & Deuda",
+      "definicion": "Unidad de la Secretaría de Hacienda y Crédito Público encargada de la gestión financiera, custodia y administración de los recursos del erario federal. Custodia la cuenta general del país en el Banco de México y es la receptora legal obligatoria de todos los reintegros y fondos públicos extintos.",
+      "ley": "Ley de Tesorería de la Federación / Art. 73 fracc. XXIV CPEUM"
+    },
+    {
+      "termino": "Cuentas por Liquidar Certificadas (CLC)",
+      "categoria": "💰 Hacendario & Deuda",
+      "definicion": "Documento oficial de control presupuestal y contable que emiten las dependencias y poderes públicos para solicitar a la TESOFE la liquidación de compromisos de pago devengados (nóminas, proveedores y subsidios).",
+      "ley": "Reglamento de la Ley Federal de Presupuesto y Responsabilidad Hacendaria"
+    },
+    {
+      "termino": "Auditoría Forense",
+      "categoria": "🔍 Fiscalización Superior",
+      "definicion": "Técnica avanzada de investigación fiscal y contable aplicada por la Auditoría Superior de la Federación (ASF) para documentar presuntos actos ilícitos, redes de empresas fachada (factureras) y desvío de caudales públicos con validez probatoria ante tribunales penales y administrativos.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación"
+    },
+    {
+      "termino": "Amparo en Revisión y Controversia Constitucional",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Procesos jurisdiccionales tramitados ante la SCJN. El juicio de amparo protege garantías y derechos humanos frente a leyes o actos de autoridad. La controversia constitucional dirime litigios entre los Poderes de la Unión o entre los órdenes federal, estatal y municipal sobre la invasión de competencias.",
+      "ley": "Artículos 103 y 105 CPEUM / Ley de Amparo / Ley Reglamentaria del Art. 105"
+    },
+    {
+      "termino": "Irreductibilidad Salarial vs. Armonización Constitucional",
+      "categoria": "⚖️ Poder Judicial",
+      "definicion": "Tensión jurídica entre el principio clásico del Art. 94 (los sueldos de los jueces no podrán ser disminuidos durante su encargo) y el principio de supremacía salarial del Art. 127 (nadie puede ganar más que el Presidente). La Reforma Constitucional de 2024 zanjó esta disputa estableciendo la primacía irrestricta del tope del Art. 127 para todos los integrantes del PJF.",
+      "ley": "Art. 94 párrafo décimo y Art. 127 fracc. II CPEUM / DOF 15/09/2024"
+    },
+    {
+      "termino": "Disposiciones Sustantivas de la LIF",
+      "categoria": "📜 Ley de Ingresos & Marco Legal",
+      "definicion": "Conjunto de mandatos y autorizaciones aprobados por el Congreso en la Ley de Ingresos de la Federación que establecen las metas de recaudación tributaria (ISR, IVA, IEPS) y petrolera, autorizan el techo de endeudamiento soberano y prohíben expresamente las condonaciones de impuestos.",
+      "ley": "Art. 73 frac. VII CPEUM / Ley de Ingresos de la Federación"
+    },
+    {
+      "termino": "Techo de Endeudamiento Neto (LIF)",
+      "categoria": "📜 Ley de Ingresos & Marco Legal",
+      "definicion": "Límite máximo en pesos y moneda extranjera que el Congreso de la Unión autoriza a la Secretaría de Hacienda para contratar pasivos soberanos internos (vía colocación de CETES y Bonos por Banxico) y externos durante el ejercicio fiscal.",
+      "ley": "Ley de Ingresos de la Federación / Ley General de Deuda Pública"
+    },
+    {
+      "termino": "Subastas Primarias Banxico (CETES y Bonos M)",
+      "categoria": "💰 Hacendario & Deuda",
+      "definicion": "Mecanismo financiero semanal operado por el Banco de México como agente colocador de deuda del Gobierno Federal, donde intermediarios financieros autorizados pujan por adquirir valores soberanos a descuento o tasa de interés fija.",
+      "ley": "Ley del Banco de México / Ley General de Deuda Pública"
+    },
+    {
+      "termino": "Tasa de Referencia de Deuda (Banxico)",
+      "categoria": "💰 Hacendario & Deuda",
+      "definicion": "Tasa de interés interbancaria a un día que fija la Junta de Gobierno de Banxico para contener la inflación; impacta directamente en el costo financiero que debe cubrir el Estado para pagar los intereses de su deuda pública.",
+      "ley": "Ley del Banco de México / Criterios Generales de Política Económica"
+    },
+    {
+      "termino": "Mayoría Relativa (MR) / Voto Directo",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Mecanismo electoral democrático donde la ciudadanía vota directamente en urnas por una fórmula con nombre y apellido en un distrito uninominal. Resulta electa la persona que obtiene la mayor cantidad de sufragios válidos.",
+      "ley": "Arts. 51, 52, 53 y 116 Fracción II de la CPEUM"
+    },
+    {
+      "termino": "Representación Proporcional (RP) / Plurinominales",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Asignación de curules legislativas a los partidos en proporción al porcentaje de votos obtenidos en 5 circunscripciones federales o listas locales. Creados en la Reforma de 1977 para garantizar pluralidad y voz a las minorías opositoras.",
+      "ley": "Arts. 52, 54 y 116 Fracción II de la CPEUM"
+    },
+    {
+      "termino": "Tope a la Sobrerrepresentación del 8% (Art. 54 CPEUM)",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Candado constitucional que prohíbe que cualquier fuerza política tenga más de 300 diputados federales por ambos principios o un porcentaje de curules que supere en más de 8 puntos porcentuales su votación nacional emitida.",
+      "ley": "Artículo 54 Fracción V de la CPEUM"
+    },
+    {
+      "termino": "Circunscripciones Electorales Federales",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Cinco regiones geográficas plurinominales en que se divide el país (con cabeceras en Guadalajara, Monterrey, Xalapa, Ciudad de México y Toluca). Cada una aporta 40 diputados de lista para sumar 200 en San Lázaro.",
+      "ley": "Artículo 53 de la CPEUM / Acuerdo INE/CG130/2023"
+    },
+    {
+      "termino": "Periodos Ordinarios de Sesiones del Congreso",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Los dos periodos constitucionales obligatorios del Congreso: el 1º (1 sept – 15 dic) enfocado en aprobar el Paquete Económico (LIF y PEF); el 2º (1 feb – 30 abr) enfocado en fiscalizar la Cuenta Pública de la ASF y desahogar reformas sustantivas.",
+      "ley": "Artículos 65 y 66 de la CPEUM"
+    },
+    {
+      "termino": "Comisión Permanente del Congreso",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Órgano constitucional integrado por 37 legisladores (19 diputados y 18 senadores) que opera durante los recesos del Congreso para mantener la conducción parlamentaria, convocar a periodos extraordinarios y ratificar nombramientos.",
+      "ley": "Artículo 78 de la CPEUM"
+    },
+    {
+      "termino": "Declaración 3 de 3 (Patrimonial, Intereses y Fiscal)",
+      "categoria": "🔍 Fiscalización Superior",
+      "definicion": "Instrumento cívico de rendición de cuentas que obliga a los servidores y candidatos a transparentar sus propiedades y cuentas bancarias (patrimonial), empresas y socios (intereses) y cumplimiento tributario ante el SAT (fiscal).",
+      "ley": "Art. 108 CPEUM / Ley General de Responsabilidades Administrativas"
+    },
+    {
+      "termino": "Estudio de Impacto Presupuestario (Art. 18 LFPRH)",
+      "categoria": "📜 Ley de Ingresos & Marco Legal",
+      "definicion": "Dictamen financiero que debe acompañar a toda propuesta legislativa para cuantificar su costo hacendario y precisar qué partida compensatoria financiará el gasto, evitando desbalances fiscales.",
+      "ley": "Artículo 18 de la LFPRH"
+    },
+    {
+      "termino": "Partida Secreta / Ramo 23 / Subvenciones Opacas",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Bolsas presupuestales discrecionales del erario sin reglas de operación claras (antiguo Ramo 23 y subvenciones a grupos parlamentarios) empleadas históricamente para sobornos o moches, extinguidas formalmente por la ley.",
+      "ley": "Art. 74 fracc. IV CPEUM / Ley de Fiscalización de la Federación"
+    },
+    {
+      "termino": "Concejalías de las Alcaldías CDMX",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "Órganos colegiados integrados por 10 concejales en cada una de las 16 alcaldías de la CDMX (6 por mayoría y 4 por representación proporcional) encargados de supervisar el presupuesto y las obras vecinales.",
+      "ley": "Constitución Política de la Ciudad de México, Art. 53"
+    },
+    {
+      "termino": "Gasto Público",
+      "definicion": "Conjunto de erogaciones que realizan la Federación, los estados y los municipios para cumplir sus funciones: servicios personales, obra pública, transferencias, subsidios y pago de deuda. No es sinónimo de presupuesto: el presupuesto es lo autorizado, el gasto público es lo efectivamente erogado. Debe administrarse con eficiencia, eficacia, economía, transparencia y honradez.",
+      "ley": "Art. 134 CPEUM · Art. 1° Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)",
+      "definicion": "Las cuatro fotografías del dinero público a lo largo del año. Aprobado: lo que autorizó la Cámara de Diputados. Modificado: lo autorizado más ampliaciones y menos reducciones. Devengado: la obligación de pago ya nacida, aunque no se haya pagado. Ejercido: el pago efectivamente realizado. Comparar la cifra equivocada entre dos momentos es la causa más común de una conclusión falsa sobre el gasto.",
+      "ley": "Art. 2° frac. XV Ley General de Contabilidad Gubernamental",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ejercicio Fiscal",
+      "definicion": "Periodo de doce meses, del 1 de enero al 31 de diciembre, en el que se ejecuta el presupuesto autorizado. Lo que no se gasta dentro del ejercicio, salvo excepciones legales, debe reintegrarse a la Tesorería de la Federación.",
+      "ley": "Art. 11 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ramo Presupuestario",
+      "definicion": "Unidad de mayor jerarquía en que se divide el Presupuesto de Egresos. Cada dependencia, poder u organismo autónomo tiene el suyo: Ramo 03 corresponde al Poder Judicial, Ramo 22 al Instituto Nacional Electoral, Ramo 28 a las participaciones y Ramo 33 a las aportaciones federales. Localizar el ramo es el primer paso para rastrear cualquier peso.",
+      "ley": "Clasificador por Objeto del Gasto · PEF del ejercicio correspondiente",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Cuenta Pública",
+      "definicion": "Informe anual que el Ejecutivo entrega a la Cámara de Diputados con el resultado del ejercicio presupuestario: cuánto se recaudó, cuánto se gastó, en qué y con qué resultados. Es el documento que la Auditoría Superior de la Federación fiscaliza y, por tanto, la fuente primaria de casi toda auditoría ciudadana seria.",
+      "ley": "Art. 74 frac. VI CPEUM · Art. 53 Ley General de Contabilidad Gubernamental",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Déficit y Superávit Público",
+      "definicion": "Déficit: el gobierno gastó más de lo que ingresó en el periodo y la diferencia se cubre con deuda. Superávit: ingresó más de lo que gastó. No es un juicio moral automático: un déficit puede financiar inversión productiva y un superávit puede esconder subejercicio. Lo relevante es su tamaño frente al PIB y su sostenibilidad en el tiempo.",
+      "ley": "Art. 17 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Balance Primario",
+      "definicion": "Diferencia entre ingresos y gastos del gobierno sin contar el pago de intereses de la deuda. Sirve para saber si el desequilibrio proviene de la operación corriente o del costo financiero heredado. Un balance primario positivo significa que, descontando intereses, las cuentas cierran.",
+      "ley": "Criterios Generales de Política Económica · Art. 2° LFPRH",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deuda Pública y SHRFSP",
+      "definicion": "Obligaciones financieras contraídas por el sector público. La medida más amplia y honesta es el Saldo Histórico de los Requerimientos Financieros del Sector Público (SHRFSP), que incluye deuda tradicional, pasivos de empresas productivas del Estado, pensiones y proyectos de inversión diferidos. Citar solo la deuda del gobierno federal subestima el compromiso real.",
+      "ley": "Art. 73 frac. VIII CPEUM · Ley General de Deuda Pública · Criterios Generales de Política Económica",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "PIB (Producto Interno Bruto)",
+      "definicion": "Valor de todos los bienes y servicios finales producidos en el país durante un periodo. En fiscalización se usa como denominador: expresar la deuda o el déficit como porcentaje del PIB permite comparar años y países, porque neutraliza el tamaño de la economía y la inflación.",
+      "ley": "Sistema de Cuentas Nacionales de México, INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Inflación e INPC",
+      "definicion": "La inflación es el aumento generalizado y sostenido de los precios; el Índice Nacional de Precios al Consumidor (INPC) es el instrumento que la mide. Sin deflactar por INPC, comparar un presupuesto de 2018 con uno de 2026 es comparar dos monedas distintas: la diferencia nominal exagera el crecimiento real.",
+      "ley": "Art. 20 Código Fiscal de la Federación · Banco de México e INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Pesos Corrientes vs. Pesos Constantes",
+      "definicion": "Pesos corrientes son las cifras tal como aparecen en el documento de su año. Pesos constantes son esas mismas cifras ajustadas por inflación a un año base, y son las únicas que permiten afirmar que un gasto creció o cayó en términos reales. Toda comparación multianual de esta plataforma debe indicar cuál de las dos usa.",
+      "ley": "Metodología de deflactación del INEGI · Criterios Generales de Política Económica",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "UMA (Unidad de Medida y Actualización)",
+      "definicion": "Referencia económica en pesos que sustituyó al salario mínimo para calcular multas, créditos, cuotas y obligaciones legales. La actualiza el INEGI cada año. Su desvinculación del salario mínimo evitó que los aumentos salariales encarecieran automáticamente multas y trámites.",
+      "ley": "Art. 26 apartado B CPEUM · Ley para Determinar el Valor de la UMA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "ISR, IVA e IEPS",
+      "definicion": "Los tres impuestos federales que sostienen la mayor parte de la recaudación. ISR grava la ganancia de personas y empresas; IVA grava el consumo a una tasa general del 16 %; IEPS grava bienes y servicios específicos como combustibles, tabaco y bebidas azucaradas. De su bolsa común se calcula la Recaudación Federal Participable que se reparte a estados y municipios.",
+      "ley": "Ley del ISR · Ley del IVA · Ley del IEPS · Art. 2° Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Fiscalización Superior",
+      "definicion": "Revisión técnica y externa del uso de los recursos públicos que realiza la Auditoría Superior de la Federación por encargo de la Cámara de Diputados. No es una auditoría contable cualquiera: puede revisar desempeño, legalidad y resultados, y derivar en responsabilidades administrativas o penales.",
+      "ley": "Arts. 74 frac. VI y 79 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Observación, Recomendación y Promoción de Responsabilidad",
+      "definicion": "Los tres desenlaces de una auditoría, en orden de gravedad. Observación: se detectó una irregularidad y se pide aclararla. Recomendación: se sugiere corregir un procedimiento sin imputar falta. Promoción de responsabilidad: se turna el caso a la autoridad competente porque hay presunta falta administrativa o delito. Confundirlas infla o desinfla artificialmente la gravedad de un hallazgo.",
+      "ley": "Arts. 49 a 52 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Conflicto de Interés",
+      "definicion": "Situación en la que el interés personal, familiar o de negocios de una persona servidora pública puede afectar el ejercicio imparcial de sus funciones. No requiere que exista daño consumado: basta la posibilidad razonable de que el juicio se vea comprometido, y debe declararse aunque no se materialice.",
+      "ley": "Art. 3° frac. VI y Art. 58 Ley General de Responsabilidades Administrativas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Transparencia Proactiva y Datos Abiertos",
+      "definicion": "Obligación de publicar información de oficio en formatos que permitan procesarla, no solo leerla. Un PDF escaneado cumple la letra y traiciona el propósito: sin datos abiertos, la verificación ciudadana depende de transcribir a mano lo que la autoridad ya tenía en hoja de cálculo.",
+      "ley": "Arts. 70 y 71 Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Juicio de Amparo",
+      "definicion": "Medio de defensa por el que cualquier persona puede reclamar ante un juez federal un acto de autoridad que viole sus derechos humanos. En materia presupuestal se ha usado para impugnar recortes, extinciones de fideicomisos y actos de fiscalización.",
+      "ley": "Arts. 103 y 107 CPEUM · Ley de Amparo",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Jurisprudencia",
+      "definicion": "Criterio de interpretación de la ley que resulta obligatorio para los tribunales inferiores. La emite el Pleno de la Suprema Corte, y antes también sus Salas, por reiteración o por contradicción de criterios. La jurisprudencia dictada por las Salas suprimidas en 2025 sigue vigente mientras el Pleno no la sustituya.",
+      "ley": "Arts. 94 y 217 CPEUM · Ley de Amparo, Título Cuarto",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Órgano de Administración Judicial (OAJ)",
+      "definicion": "Órgano creado por la reforma judicial de 2024 que asumió la administración, la carrera judicial y el manejo presupuestal del Poder Judicial de la Federación, funciones que antes correspondían al Consejo de la Judicatura Federal. Separar la administración de la disciplina fue uno de los cambios estructurales de la reforma.",
+      "ley": "Art. 100 CPEUM reformado · Decreto DOF 15 de septiembre de 2024",
+      "categoria": "⚖️ Poder Judicial"
+    },
+    {
+      "termino": "Lista Nominal y Padrón Electoral",
+      "definicion": "El padrón electoral reúne a quienes solicitaron su credencial para votar; la lista nominal, solo a quienes ya la recogieron y pueden votar. La participación siempre se calcula sobre la lista nominal, no sobre el padrón ni sobre la población total: usar una base distinta altera el porcentaje.",
+      "ley": "Arts. 126 a 148 Ley General de Instituciones y Procedimientos Electorales",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "OPLE (Organismo Público Local Electoral)",
+      "definicion": "Autoridad electoral de cada entidad federativa, encargada de organizar las elecciones locales en coordinación con el INE. Su presupuesto lo aprueba el congreso estatal y lo ministra el gobierno del estado, lo que en la práctica condiciona su autonomía operativa.",
+      "ley": "Art. 41 base V apartado C CPEUM · Art. 98 LGIPE",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Tope de Gastos de Campaña",
+      "definicion": "Monto máximo que una candidatura puede erogar en su campaña, fijado por la autoridad electoral. Rebasarlo en forma determinante puede anular la elección. En la elección judicial de 2025 el tope fue de 220 mil pesos por candidatura, sin financiamiento público ni acceso a radio y televisión.",
+      "ley": "Arts. 41 y 116 CPEUM · Arts. 243 y 445 LGIPE",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "DOF (Diario Oficial de la Federación)",
+      "definicion": "Órgano oficial de difusión del Estado mexicano. Una norma existe jurídicamente a partir de su publicación en el DOF, y la fecha de publicación —no la de aprobación ni la del anuncio— es la que determina su entrada en vigor. Cuando una cifra o una facultad se disputa, el DOF es la fuente que zanja la discusión.",
+      "ley": "Art. 2° Ley del Diario Oficial de la Federación y Gacetas Gubernamentales",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Acción Financiera del Estado",
+      "definicion": "Conjunto de operaciones con las que el Estado obtiene recursos, los administra y los aplica. Tiene tres movimientos y ninguno se entiende sin los otros dos: el ingreso (impuestos, derechos, aprovechamientos y venta de petróleo), el gasto (lo que se ejerce y en qué) y el financiamiento (la deuda que cubre la diferencia cuando el ingreso no alcanza). Auditar sólo uno de los tres deja fuera la mitad de la historia.",
+      "ley": "Arts. 73, 74, 126 y 134 CPEUM · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Federalismo Fiscal",
+      "definicion": "Reparto de facultades para cobrar impuestos y para gastar entre la Federación, las entidades federativas y los municipios. En México la recaudación está muy centralizada y el gasto muy descentralizado: la Federación cobra la mayor parte y después transfiere; de ahí que estados y municipios dependan de las participaciones y aportaciones para operar.",
+      "ley": "Arts. 40, 115, 117 y 124 CPEUM · Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Hacienda Pública",
+      "definicion": "Conjunto de bienes, derechos, ingresos y obligaciones económicas del Estado, y la actividad de administrarlos. No es sinónimo de «la Secretaría de Hacienda»: es el patrimonio y la actividad económica del Estado en su conjunto, de la cual esa Secretaría es sólo la conductora en el ámbito federal.",
+      "ley": "Arts. 31 fracción IV y 73 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ingresos Presupuestarios",
+      "definicion": "Recursos que la Federación estima captar durante el ejercicio y que la Ley de Ingresos enumera año con año: tributarios (ISR, IVA, IEPS), no tributarios (derechos, productos y aprovechamientos), los de organismos y empresas del Estado, y los de financiamiento, es decir, deuda. La distinción importa: un ingreso por deuda hoy es un gasto por intereses mañana.",
+      "ley": "Ley de Ingresos de la Federación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deuda Subnacional",
+      "definicion": "Obligaciones financieras contratadas por las entidades federativas y los municipios. La Constitución sólo les permite endeudarse para inversión pública productiva, nunca para gasto corriente, y su registro y seguimiento corresponden al sistema que establece la Ley de Disciplina Financiera.",
+      "ley": "Art. 117 fracción VIII CPEUM · Ley de Disciplina Financiera de las Entidades Federativas y los Municipios",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sistema de Alertas (SHCP)",
+      "definicion": "Semáforo con el que la Secretaría de Hacienda clasifica el endeudamiento de cada entidad federativa y de los municipios con obligaciones inscritas. El color —verde, amarillo o rojo— no es una opinión: determina cuánto más pueden endeudarse en el siguiente ejercicio. Se publica de forma periódica y es consultable por cualquier persona.",
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios · Secretaría de Hacienda y Crédito Público",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Adecuación Presupuestaria",
+      "definicion": "Movimiento que traslada recursos de una partida a otra durante el ejercicio, una vez que el presupuesto ya fue aprobado. Es legal y a menudo necesario, pero es también el punto donde un presupuesto aprobado deja de parecerse al presupuesto ejercido: por eso conviene leer siempre el dato modificado junto al aprobado.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Anexo Transversal",
+      "definicion": "Agrupación de recursos que persiguen un mismo objetivo pero están repartidos en varios ramos y programas: igualdad entre mujeres y hombres, pueblos indígenas, atención a la niñez, cambio climático. El anexo no crea presupuesto nuevo: etiqueta y hace visible el que ya está disperso.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Presupuesto de Egresos de la Federación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Programa Presupuestario (Pp)",
+      "definicion": "Unidad mínima a la que se asigna dinero y a la que se le puede exigir un resultado. Cada peso del Presupuesto de Egresos cuelga de un programa presupuestario con clave propia, y es el nivel en el que tiene sentido preguntar «¿cuánto costó y qué produjo?».",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Sistema de Evaluación del Desempeño",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Fideicomiso Público",
+      "definicion": "Figura en la que una dependencia o entidad aporta recursos públicos a un patrimonio que administra una institución fiduciaria para un fin determinado. Su rasgo fiscalizable es que el dinero sale del ejercicio anual y puede permanecer años fuera del escrutinio presupuestario ordinario, sin dejar de ser público.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Ley Federal de las Entidades Paraestatales",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Licitación Pública",
+      "definicion": "Procedimiento de contratación abierto mediante convocatoria pública, en el que compiten quienes cumplan los requisitos y gana la propuesta que ofrezca las mejores condiciones. La Constitución la establece como la regla general para adquisiciones, arrendamientos, servicios y obra pública; todo lo demás es excepción y debe justificarse.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Adjudicación Directa",
+      "definicion": "Contratación sin concurso, en la que la autoridad elige directamente a quien la ejecutará. La ley la permite en supuestos tasados y por debajo de ciertos montos, y obliga a fundar y motivar la decisión. Su uso reiterado para contratos grandes es uno de los indicadores más citados de riesgo de corrupción en la contratación pública.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Invitación a Cuando Menos Tres Personas",
+      "definicion": "Procedimiento intermedio entre la licitación pública y la adjudicación directa: la autoridad invita a un número acotado de proveedores en lugar de convocar abiertamente. Como la adjudicación directa, es una excepción y exige justificación expresa.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Testigo Social",
+      "definicion": "Persona u organización acreditada que participa en procedimientos de contratación de monto relevante y emite un testimonio público sobre lo que observó. No decide ni sanciona: deja constancia, y esa constancia queda disponible para quien quiera revisarla.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Obra Pública",
+      "definicion": "Trabajos de construcción, ampliación, conservación o demolición de bienes inmuebles con recursos públicos, y los servicios relacionados con ellos, como proyectos y supervisión. Se rige por su propia ley, distinta de la de adquisiciones, aunque comparte con ella el mandato constitucional de licitar.",
+      "ley": "Art. 134 CPEUM · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Convenio Modificatorio",
+      "definicion": "Instrumento que cambia el monto, el plazo o el alcance de un contrato ya adjudicado. Es una figura legal y a veces inevitable, pero también el lugar donde suele alojarse el sobrecosto: un contrato que se gana barato y se termina caro casi siempre pasó por aquí.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sistema Nacional Anticorrupción",
+      "definicion": "Instancia de coordinación entre las autoridades de todos los órdenes de gobierno encargadas de prevenir, detectar y sancionar hechos de corrupción y faltas administrativas, así como de fiscalizar y controlar recursos públicos. Incluye un Comité de Participación Ciudadana, de modo que la sociedad tiene asiento y voto y no sólo derecho de petición.",
+      "ley": "Art. 113 CPEUM · Ley General del Sistema Nacional Anticorrupción",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sujeto Obligado",
+      "definicion": "Toda autoridad, entidad, órgano, partido político, sindicato, fideicomiso o persona que recibe o ejerce recursos públicos, y que por esa razón debe documentar y entregar información. La definición es amplia a propósito: quien toca dinero público entra en ella, sea o no parte del gobierno.",
+      "ley": "Art. 6 CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Versión Pública",
+      "definicion": "Documento del que se han eliminado los datos clasificados como reservados o confidenciales para poder entregarlo. Es la salida ordinaria a la negativa total: la regla es entregar lo que sí puede entregarse, no callar el documento entero porque una parte esté protegida.",
+      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Auditoría de Desempeño",
+      "definicion": "Revisión que no pregunta si el dinero se gastó conforme a la norma, sino si sirvió de algo: si el programa cumplió su objetivo, a qué costo y con qué resultados verificables. Es la que responde la pregunta que más le importa a quien paga impuestos y la que más incomoda a quien ejerce el gasto.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Artículo 134 Constitucional",
+      "definicion": "Norma que ordena que los recursos económicos de que dispone el Estado se administren con eficiencia, eficacia, economía, transparencia y honradez, y que las contrataciones se adjudiquen por licitación pública mediante convocatoria abierta. Es el artículo que se invoca cuando se discute una adjudicación directa, un sobrecosto o el uso de propaganda gubernamental.",
+      "ley": "Art. 134 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Artículo 126 Constitucional",
+      "definicion": "Norma de una sola línea y consecuencias enormes: no puede hacerse pago alguno que no esté comprendido en el presupuesto o determinado por ley posterior. Es el fundamento de que un gasto no previsto sea, por definición, un gasto que alguien debe explicar.",
+      "ley": "Art. 126 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Rectoría Económica del Estado",
+      "definicion": "Facultad constitucional del Estado para conducir y orientar el desarrollo nacional sin ser dueño de toda la economía. No significa que el gobierno produzca todo, sino que fija el rumbo y coordina a quienes producen. El texto le pone dos condiciones que suelen olvidarse: que el desarrollo sea sustentable y que la distribución del ingreso sea más justa. Crecer incumpliendo cualquiera de las dos es crecer fuera del mandato.",
+      "ley": "Art. 25 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Economía Mixta",
+      "definicion": "Sistema en el que conviven la propiedad privada y la rectoría del Estado, con tres sectores que concurren al desarrollo: el público, el social y el privado. Es el modelo que México adopta expresamente. El sector social —ejidos, comunidades, cooperativas— tiene rango constitucional: no es una categoría residual ni una concesión, es uno de los tres pilares nombrados en el texto.",
+      "ley": "Art. 25 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sector Social de la Economía",
+      "definicion": "Conjunto de formas de organización productiva de propiedad colectiva: ejidos, comunidades, cooperativas, empresas de trabajadores. La Constitución lo nombra junto al público y al privado, con los mismos derechos de concurrencia al desarrollo. En la práctica es el sector con menor acceso a crédito y a contratación pública, brecha que la propia norma manda cerrar mediante fomento.",
+      "ley": "Art. 25 CPEUM · Ley de la Economía Social y Solidaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sistema Nacional de Planeación Democrática",
+      "definicion": "Mecanismo por el cual el Estado organiza sus metas de desarrollo recogiendo las aspiraciones de la sociedad mediante consulta popular. El adjetivo «democrática» no es adorno: distingue este modelo de la planeación centralizada, porque el resultado obliga a la Administración Pública Federal pero para el particular es apenas indicativo.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Plan Nacional de Desarrollo",
+      "definicion": "Documento rector sexenal al que deben sujetarse obligatoriamente los programas de la Administración Pública Federal. Se elabora con consulta y se publica en los primeros meses del sexenio. Su punto débil no es el contenido sino la trazabilidad: el eslabón que va del objetivo del Plan al Programa presupuestario y de ahí a la partida del Presupuesto de Egresos es donde una meta puede evaporarse sin dejar rastro contable.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Planeación Indicativa",
+      "definicion": "Carácter que tiene el Plan Nacional de Desarrollo frente a los particulares: es una guía, no una orden. El mismo documento es obligatorio hacia adentro del gobierno e indicativo hacia afuera. Esta doble naturaleza es exactamente lo que separa la planeación democrática mexicana de una economía centralmente planificada.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Propiedad Originaria de la Nación",
+      "definicion": "Principio según el cual las tierras y aguas del territorio nacional pertenecen originariamente a la Nación, que transmitió su dominio a los particulares para constituir la propiedad privada. La consecuencia práctica es que la propiedad privada deriva de esa transmisión y no la antecede, por lo que puede sujetarse a modalidades cuando lo exija el interés público.",
+      "ley": "Art. 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Modalidades a la Propiedad Privada",
+      "definicion": "Límites que la Nación puede imponer al dominio privado cuando lo dicte el interés público, incluyendo la regulación del aprovechamiento de los recursos naturales. Es el fundamento jurídico de que se niegue una concesión de agua o se rechace una autorización ambiental: la propiedad no es absoluta frente al interés colectivo.",
+      "ley": "Art. 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Áreas Estratégicas",
+      "definicion": "Actividades que el Estado ejerce de manera exclusiva sin que ello constituya monopolio, por disposición constitucional expresa. Su consecuencia práctica se pasa por alto con frecuencia: una entidad que opera en área estratégica no se juzga con la vara de la rentabilidad privada, porque su razón de existir no es el margen sino la función.",
+      "ley": "Art. 28 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Práctica Monopólica Absoluta",
+      "definicion": "Acuerdo entre competidores para fijar precios, restringir la oferta, repartirse el mercado o coordinar posturas en licitaciones. Se sanciona por sí misma, sin necesidad de probar daño: el acuerdo es la infracción. En compras públicas es la figura que explica por qué varias empresas presentan ofertas sospechosamente parecidas.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Práctica Monopólica Relativa",
+      "definicion": "Conducta con la que una empresa con poder sustancial en el mercado desplaza indebidamente a sus competidores o impide su entrada. A diferencia de la absoluta, aquí sí debe acreditarse el poder de mercado y el efecto. Es la categoría que se invoca cuando un proveedor dominante del sector público bloquea el acceso de otros.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autonomía del Banco Central",
+      "definicion": "Régimen constitucional que impide a cualquier autoridad ordenar al Banco de México conceder financiamiento. Su objetivo prioritario es procurar la estabilidad del poder adquisitivo de la moneda. Esa última línea es el candado que impide cubrir el déficit imprimiendo dinero, y la razón de que la deuda soberana tenga que colocarse en subasta.",
+      "ley": "Art. 28 CPEUM · Ley del Banco de México",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Desarrollo Sustentable",
+      "definicion": "Fórmula de equilibrio entre tres dimensiones que deben cumplirse a la vez: crecimiento económico, equidad social y preservación ambiental. No es una cuestión sólo ecológica. En el orden jurídico mexicano es un mandato derivado de los artículos 25, 26 y 27, lo que significa que un crecimiento que agota el capital natural no satisface la norma aunque el PIB suba.",
+      "ley": "Art. 25, 26 y 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Producto Interno Neto Ecológico",
+      "definicion": "Indicador que el INEGI calcula restando al Producto Interno Bruto el consumo de capital fijo y los costos totales por agotamiento y degradación ambiental. Responde a la pregunta que el PIB no puede contestar: cuánto creció realmente la riqueza si se descuenta el daño causado para producirla. En 2024 ascendió a 25.7 billones de pesos, 76.6% del PIB.",
+      "ley": "Sistema de Cuentas Nacionales de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Costos Totales por Agotamiento y Degradación Ambiental",
+      "definicion": "Valoración monetaria del impacto ambiental de la actividad económica, con dos componentes: lo que se acabó (agotamiento de hidrocarburos, bosques y agua subterránea) y lo que se ensució (aire, suelo, residuos, aguas residuales). En 2024 sumaron $1,382,214 millones de pesos, 4.1% del PIB.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Agotamiento de Recursos Naturales",
+      "definicion": "Consumo de capital natural que no se repone dentro del periodo: barriles extraídos, bosque perdido por encima de la regeneración, agua sacada de un acuífero por arriba de su recarga. En 2024 costó $144,020 millones de pesos. El reparto oficial lo encabezan los hidrocarburos con 46%, seguidos por los recursos forestales con 28% y el agua subterránea con 26%.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Degradación Ambiental",
+      "definicion": "Costo de que el entorno empeore, a diferencia del agotamiento, donde el recurso desaparece. Incluye emisiones al aire, degradación del suelo, residuos sólidos urbanos y tratamiento insuficiente de aguas residuales. En 2024 costó $1,238,194 millones de pesos, y las emisiones al aire por sí solas representaron 2.5% del PIB.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Externalidad Negativa",
+      "definicion": "Costo que quien produce no paga y traslada a terceros o a la sociedad entera: el aire que otros respiran, el acuífero que otros dejarán de usar. Las cuentas ecológicas del INEGI son precisamente el ejercicio de ponerle precio a esas externalidades, y ese precio es el que da sustento jurídico a gravarlas.",
+      "ley": "Art. 25 y 27 CPEUM · LGEEPA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuesto Pigouviano",
+      "definicion": "Gravamen diseñado para que quien genera un costo ambiental lo internalice, bajo la premisa de que quien contamina y agota, paga. No busca principalmente recaudar sino corregir un precio que estaba mal puesto. En México la discusión sobre estos impuestos suele confundirse con la recaudatoria, y son cosas distintas.",
+      "ley": "Art. 31 fracción IV y Art. 73 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Manifestación de Impacto Ambiental",
+      "definicion": "Documento con el que quien pretende realizar una obra debe acreditar ante la autoridad ambiental los efectos que causará y cómo los mitigará. Es el punto donde una cifra estadística se vuelve una decisión exigible: si el agotamiento hídrico de una región ya es crítico, la autoridad tiene sustento para negarla.",
+      "ley": "Art. 27 CPEUM · LGEEPA",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Capital Natural",
+      "definicion": "Acervo de recursos que la naturaleza aporta a la economía: agua, suelo, bosques, hidrocarburos, capacidad de absorber contaminantes. Se comporta como cualquier otro capital en un aspecto decisivo: si se consume por encima de su reposición, la producción futura se reduce aunque las cuentas presentes se vean bien.",
+      "ley": "Art. 27 CPEUM · Sistema de Cuentas Nacionales",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Coeficiente de Gini",
+      "definicion": "Medida de desigualdad en la distribución del ingreso que va de 0, donde todos reciben lo mismo, a 1, donde una sola persona concentra todo. Importa jurídicamente porque el artículo 25 exige una más justa distribución del ingreso y la riqueza: sin esta medición, el cumplimiento de ese mandato no es verificable.",
+      "ley": "Art. 25 CPEUM · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Pobreza Multidimensional",
+      "definicion": "Medición que no se limita al ingreso, sino que considera carencias en acceso a salud, educación, seguridad social, vivienda digna, servicios básicos y alimentación. Es la metodología oficial en México. Su virtud es que impide declarar superada la pobreza por el solo hecho de que un ingreso rebase un umbral.",
+      "ley": "Ley General de Desarrollo Social · CONEVAL",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Estrés Hídrico",
+      "definicion": "Situación en que la demanda de agua de una cuenca supera su disponibilidad renovable. Es el indicador que debería anteceder a la autorización de cualquier polo industrial o desarrollo habitacional, porque proyectar crecimiento sin datos de recarga de acuíferos convierte la inversión en un pasivo futuro.",
+      "ley": "Art. 27 CPEUM · Ley de Aguas Nacionales",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Matriz Energética",
+      "definicion": "Composición de las fuentes con que un país genera y consume energía, medida como la proporción entre fósiles y limpias. Es un dato de soberanía y de sustentabilidad a la vez, y la base sobre la que se justifica jurídicamente que el Estado regule el mercado eléctrico y de combustibles como asunto de rectoría.",
+      "ley": "Art. 25, 27 y 28 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Índice Herfindahl-Hirschman",
+      "definicion": "Medida de concentración de un mercado que se obtiene sumando los cuadrados de las participaciones de cada competidor. Cuanto más alto, más concentrado. Se emplea para detectar poder sustancial de mercado y es una de las herramientas técnicas con las que se aplica la prohibición constitucional de monopolios.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Gasto en Protección Ambiental",
+      "definicion": "Recursos que la economía destina a prevenir, reducir o reparar el daño al entorno. En 2024 ascendió a $232,882 millones de pesos, 0.7% del PIB, frente a un deterioro de 4.1%. La proporción entre ambas cifras, y no el monto absoluto, es lo que revela la seriedad del compromiso.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Consumo de Capital Fijo",
+      "definicion": "Desgaste de la infraestructura creada por el hombre —maquinaria, fábricas, carreteras— durante un periodo. Restarlo al Producto Interno Bruto da el Producto Interno Neto, y reconoce que una parte de lo producido apenas repuso lo que se gastó en producirlo.",
+      "ley": "Sistema de Cuentas Nacionales de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "ISR (Impuesto Sobre la Renta)",
+      "definicion": "Impuesto directo sobre el ingreso de personas físicas y sobre la utilidad de personas morales. Directo quiere decir que lo soporta quien lo causa: no puede trasladarse a otro, a diferencia del IVA. Grava la utilidad fiscal —ingresos menos deducciones autorizadas—, de modo que un estímulo o una deducción reducen la recaudación sin cambiar la tasa. Es el mayor ingreso tributario del país y el componente principal de la Recaudación Federal Participable, de la que salen las participaciones del Ramo 28.",
+      "ley": "Ley del ISR · Art. 31 fracc. IV CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "IVA (Impuesto al Valor Agregado)",
+      "definicion": "Impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % en alimentos y medicinas y una lista de actos exentos. Funciona por traslado y acreditamiento: quien vende lo cobra por separado y lo entera, pero acredita el que pagó a sus proveedores, de modo que cada eslabón tributa sólo por el valor que añade y el consumidor final lo soporta íntegro. Su incidencia es regresiva: la tasa es la misma para quien gana poco y para quien gana mucho.",
+      "ley": "Ley del IVA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "IEPS (Impuesto Especial sobre Producción y Servicios)",
+      "definicion": "Impuesto indirecto sobre consumos específicos —combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones— cuyo fin no es sólo recaudar sino encarecer aquello que impone un costo a terceros o a la salud pública. Es un impuesto pigouviano. Su recaudación es la más volátil del cuadro fiscal porque la cuota de combustibles se ajusta según el precio de referencia.",
+      "ley": "Ley del IEPS",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "ISAN (Impuesto Sobre Automóviles Nuevos)",
+      "definicion": "Impuesto federal sobre la enajenación de automóviles nuevos de producción nacional y sobre su importación definitiva. Su rasgo distintivo es que, siendo federal, lo administran las entidades federativas: ellas lo recaudan y conservan su rendimiento por convenio de colaboración administrativa en el marco de la Ley de Coordinación Fiscal. Por eso aparece a la vez en la Ley de Ingresos de la Federación y en las haciendas locales.",
+      "ley": "Ley Federal del ISAN · Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuestos al Comercio Exterior (Aranceles)",
+      "definicion": "Gravámenes que se causan al importar o exportar mercancía, liquidados en la aduana conforme a la tarifa de fracciones arancelarias. Su particularidad jurídica es la excepción del artículo 131 constitucional: el Congreso puede facultar al Ejecutivo para aumentar, disminuir o suprimir las cuotas por decreto, sujeto a aprobación posterior. Es, por tanto, instrumento de política comercial antes que fuente estable de ingreso. México presupuesta en cero el impuesto a la exportación.",
+      "ley": "LIGIE · Ley Aduanera · Art. 131 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Accesorios de las Contribuciones",
+      "definicion": "Recargos por mora, multas por infracciones fiscales, gastos de ejecución e indemnización por cheque devuelto. El último párrafo del artículo 2º del Código Fiscal ordena que participen de la naturaleza de la suerte principal: un recargo del ISR es jurídicamente ISR. De ahí que se cobren por el mismo procedimiento administrativo de ejecución y que prescriban junto con el crédito que los originó. No son una sanción separada: son el precio legal del incumplimiento.",
+      "ley": "Código Fiscal de la Federación, arts. 2º, 20, 21 y 70 a 91",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuesto por la Actividad de Exploración y Extracción de Hidrocarburos",
+      "definicion": "Gravamen que no mide la ganancia ni el volumen extraído, sino la superficie del área contractual o de asignación, con una cuota por kilómetro cuadrado que se eleva cuando el área lleva más de sesenta meses sin producir. Su diseño busca desincentivar que se retengan áreas ociosas. Su recaudación se destina al Fondo para Entidades Federativas y Municipios Productores de Hidrocarburos.",
+      "ley": "Ley de Ingresos sobre Hidrocarburos, arts. 55 a 57",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Rezago Fiscal",
+      "definicion": "Impuestos causados en ejercicios anteriores que siguen pendientes de liquidarse o de pagarse, incluidos los de contribuciones ya derogadas. Demuestran que la obligación tributaria sobrevive a la ley que la creó: se extingue por pago, por caducidad de la facultad de la autoridad para determinarla —cinco años, artículo 67 del Código Fiscal— o por prescripción del crédito ya determinado —cinco años, artículo 146—.",
+      "ley": "Código Fiscal de la Federación, arts. 67 y 146",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Aportaciones de Seguridad Social",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 2º fracc. II CFF · Ley del Seguro Social · Ley del ISSSTE",
+      "definicion": "Contribuciones a cargo de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social, o de quienes se benefician de servicios de previsión social. Su rasgo decisivo es el destino específico: financian las prestaciones del IMSS y del ISSSTE, no entran a la bolsa común del gasto y no integran la Recaudación Federal Participable, de modo que no se reparten a estados ni municipios."
+    },
+    {
+      "termino": "Contribuciones de Mejoras",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 2º fracc. III CFF · Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica",
+      "definicion": "Contribuciones a cargo de quienes se benefician de manera directa de una obra pública. Responden al principio de beneficio y no al de capacidad contributiva: no se paga por tener con qué, sino por recibir una ventaja particular y medible. En el ámbito federal sólo subsiste la referida a obras de infraestructura hidráulica."
+    },
+    {
+      "termino": "Derechos (Contribución)",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 2º fracc. IV CFF · Ley Federal de Derechos",
+      "definicion": "Contribuciones que se pagan por usar o aprovechar bienes del dominio público de la Nación, o por recibir servicios que presta el Estado en sus funciones de derecho público. A diferencia del impuesto, aquí existe contraprestación identificable. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio: si lo excede de manera desproporcionada, el derecho se convierte en un impuesto encubierto y resulta inconstitucional."
+    },
+    {
+      "termino": "Productos (Ingresos del Estado)",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 3º párrafo tercero CFF",
+      "definicion": "Contraprestaciones que recibe el Estado por los servicios que presta en sus funciones de derecho privado, y por el uso, aprovechamiento o enajenación de bienes que no son del dominio público: rentas, intereses de valores, venta de muebles e inmuebles y utilidades. Aquí el Estado no actúa como autoridad sino como particular, razón por la cual el Código Fiscal los excluye de las contribuciones."
+    },
+    {
+      "termino": "Aprovechamientos",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 3º párrafo primero CFF",
+      "definicion": "Ingresos que percibe el Estado por funciones de derecho público distintos de las contribuciones, de los ingresos derivados de financiamientos y de los que obtienen los organismos descentralizados y las empresas del Estado. Es una categoría residual definida por exclusión: caben ahí multas no fiscales, cuotas compensatorias, decomisos, recuperaciones de capital y remanentes. Esa textura abierta la vuelve el rubro más heterogéneo de la Ley de Ingresos."
+    },
+    {
+      "termino": "Empresas Públicas del Estado",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Arts. 25 y 28 CPEUM · Ley de la Empresa Pública del Estado, Pemex · Ley de la Empresa Pública del Estado, CFE",
+      "definicion": "Figura jurídica que sustituyó a las empresas productivas del Estado con la reforma energética de 2024-2025. Pemex y la CFE dejan de regirse por una lógica de competencia en el mercado, creada en 2013, y pasan a operar bajo la rectoría del Estado en áreas estratégicas. Lo que aportan al erario no es recaudación sino venta: cobran un precio por un bien o un servicio, no un tributo por mandato de ley."
+    },
+    {
+      "termino": "Fondo Mexicano del Petróleo (FMP)",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 28 párrafo sexto CPEUM · Ley del FMP para la Estabilización y el Desarrollo",
+      "definicion": "Fideicomiso público constituido en el Banco de México por mandato constitucional. Recibe los ingresos del Estado derivados de las asignaciones y contratos de hidrocarburos y los transfiere al presupuesto hasta un tope equivalente al 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Cuando la transferencia se agota en gasto corriente del ejercicio, la función estabilizadora prevista en su diseño no llega a operar."
+    },
+    {
+      "termino": "Gasto Federalizado",
+      "definicion": "El dinero federal que no se queda en la Federación: participaciones del Ramo 28, aportaciones del Ramo 33, el Ramo 25 educativo y los convenios que las secretarías firman con cada estado. Para 2026 suma alrededor de $2.81 billones, más de una cuarta parte del gasto neto total. No es un ramo del presupuesto sino una suma de ramos, y por eso dos análisis pueden dar cifras distintas según qué incluyan.",
+      "ley": "PEF 2026, Anexo 1 · Ley de Coordinación Fiscal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Recursos de Libre Disposición",
+      "definicion": "Ingresos que la entidad o el municipio pueden gastar en lo que decidan, sin destino fijado por ley: las participaciones del Ramo 28, sus impuestos propios y sus derechos. La Ley de Disciplina Financiera los usa como denominador de los techos de endeudamiento, de modo que una hacienda con pocos ingresos de libre disposición puede endeudarse menos aunque reciba mucho dinero etiquetado.",
+      "ley": "Ley de Disciplina Financiera, art. 2 fracc. XXIII",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Recursos Etiquetados",
+      "definicion": "Transferencias federales cuyo destino ya viene fijado por la ley que las crea: los ocho fondos del Ramo 33 y los convenios. Siguen siendo recursos federales después de entregarse, de modo que la Auditoría Superior de la Federación puede fiscalizar su ejercicio aunque el ejecutor sea un municipio. Gastarlos en un fin distinto del legal genera responsabilidad administrativa y, en su caso, penal.",
+      "ley": "Ley de Coordinación Fiscal, arts. 25 y 49",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sistema Nacional de Coordinación Fiscal",
+      "definicion": "El acuerdo por el que las 32 entidades renunciaron a cobrar ciertos impuestos a cambio de participar en lo que recauda la Federación. Se formaliza con un convenio de adhesión: quien se adhiere recibe participaciones, quien no, conserva sus facultades tributarias pero pierde el reparto. Explica por qué México tiene una recaudación tan centralizada y por qué el ingreso estatal depende tanto de una fórmula federal.",
+      "ley": "Ley de Coordinación Fiscal, arts. 1º y 10",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Hacienda Municipal",
+      "definicion": "El conjunto de bienes e ingresos que el artículo 115 constitucional reconoce al municipio: los rendimientos de sus bienes, el predial y demás contribuciones sobre la propiedad, las participaciones federales y los derechos por los servicios públicos a su cargo. El ayuntamiento la administra libremente y aprueba su presupuesto de egresos, pero su ley de ingresos la aprueba el congreso del estado.",
+      "ley": "Constitución Política, art. 115 fracc. IV",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ramo 25 (Previsiones y Aportaciones Educativas)",
+      "definicion": "Ramo general que financia la educación básica y normal de la Ciudad de México —que nunca se descentralizó— y guarda las previsiones salariales del magisterio que después se trasladan al FONE y al FAETA. Para 2026 asciende a $85,182.4 mdp. Es gasto federalizado que no aparece en el Ramo 33: quien compara años sumando sólo ese ramo deja fuera esta bolsa.",
+      "ley": "PEF 2026, Anexo 21",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FAFEF",
+      "definicion": "Fondo de Aportaciones para el Fortalecimiento de las Entidades Federativas. Equivale al 1.40 % de la recaudación federal participable —$74,754.9 mdp en 2026— y se destina a inversión en infraestructura, saneamiento financiero y amortización de deuda estatal. Junto con el FAIS, es uno de los dos fondos del Ramo 33 que pueden darse en garantía de crédito hasta por el 25 % anual.",
+      "ley": "Ley de Coordinación Fiscal, art. 46",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "FAM",
+      "definicion": "Fondo de Aportaciones Múltiples. Por ley se parte en dos: 46 % a desayunos escolares, apoyos alimentarios y asistencia social, y 54 % a construcción, equipamiento y rehabilitación de escuelas. Para 2026 suma $43,464.6 mdp. Es el fondo con el que se compran los desayunos escolares del DIF y se levantan aulas.",
+      "ley": "Ley de Coordinación Fiscal, arts. 39 a 41",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FAETA",
+      "definicion": "Fondo de Aportaciones para la Educación Tecnológica y de Adultos. Paga los servicios de educación tecnológica ($6,858.3 mdp) y de educación para adultos ($3,953.1 mdp) que los estados asumieron por convenio con la Federación. Con $10,811.4 mdp en 2026 es el segundo fondo más pequeño del Ramo 33.",
+      "ley": "Ley de Coordinación Fiscal, arts. 42 a 44",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FASP",
+      "definicion": "Fondo de Aportaciones para la Seguridad Pública de los Estados y del Distrito Federal. Con $9,951.1 mdp es el fondo más pequeño del Ramo 33: el 0.96 % del ramo. Se destina a profesionalización policial, equipamiento, sistemas de información y percepciones extraordinarias del Ministerio Público. El Presupuesto de Egresos promueve que al menos el 20 % se reparta entre municipios.",
+      "ley": "Ley de Coordinación Fiscal, arts. 45 y 45-Bis",
+      "categoria": "🏛️ Presupuesto & ASF"
+    }
+  ],
   "legislativo": {
     "federal": {
       "diputados": {
@@ -5861,565 +6222,565 @@ window.AUDIT_DB = {
     }
   },
   "referencias_legales": [
-      {
-        "num": 39,
-        "id": "ref-sabg",
-        "categoria": "fiscalizacion_auditoria",
-        "categoria_nombre": "Fiscalización Superior y Auditoría",
-        "cita_apa": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Orgánica de la Administración Pública Federal. Diario Oficial de la Federación, 28 de noviembre de 2024 (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/loapf.htm",
-        "descripcion": "Reforma que sustituyó a la Secretaría de la Función Pública por la Secretaría Anticorrupción y Buen Gobierno (SABG), la cual inició operaciones el 1 de enero de 2025. La dependencia concentra la prevención, detección y sanción de actos de corrupción en la Administración Pública Federal, y a través de su Coordinación de Denuncias y Atención Ciudadana administra la plataforma Ciudadanos Alertadores Internos y Externos de la Corrupción, cuyo portal cambió a alertadores.buengobierno.gob.mx. La mención de la «SFP» en documentos posteriores a esa fecha corresponde a un órgano que ya no existe con ese nombre."
-      },
-      {
-        "num": 40,
-        "id": "ref-pnt",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Plataforma Nacional de Transparencia [PNT]. Sistema de solicitudes de acceso a la información pública. Transparencia para el Pueblo, Secretaría Anticorrupción y Buen Gobierno (México).",
-        "url": "https://www.plataformadetransparencia.org.mx/",
-        "descripcion": "Portal único desde el cual se presentan solicitudes de acceso a la información a los sujetos obligados de los tres órdenes de gobierno, se consultan las obligaciones de transparencia y se interponen recursos de revisión. Tras la extinción del INAI en mayo de 2025, la autoridad garante federal es Transparencia para el Pueblo, órgano desconcentrado de la Secretaría Anticorrupción y Buen Gobierno; la plataforma y el derecho no desaparecieron, cambió quién los vigila. Es la herramienta con la que un particular obtiene el contrato, la factura o el acta que después sostiene una denuncia."
-      },
-      {
-        "num": 41,
-        "id": "ref-lopsrm",
-        "categoria": "adquisiciones_compras",
-        "categoria_nombre": "Compras Públicas y Contrataciones",
-        "cita_apa": "Ley de Obras Públicas y Servicios Relacionados con las Mismas [LOPSRM]. Diario Oficial de la Federación (México). Última reforma publicada el 16 de abril de 2025. Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOPSRM.pdf",
-        "descripcion": "Regula la contratación, ejecución y finiquito de la obra pública federal. Establece el expediente único de obra y la bitácora como registro obligatorio de su ejecución: son los documentos que permiten contrastar lo contratado contra lo construido, y por tanto los primeros que conviene solicitar antes de señalar una obra. Fue reformada el 16 de abril de 2025, el mismo día en que se publicó la nueva Ley de Adquisiciones."
-      },
-      {
-        "num": 43,
-        "id": "ref-inegi-social-porfiriato",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Estadísticas Oficiales",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Estadísticas sociales del Porfiriato, 1877–1910. Reedición de la obra de la Dirección General de Estadística. Acervo histórico del INEGI (México).",
-        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf",
-        "descripcion": "Compilación oficial de los indicadores sociales del régimen porfirista levantados en los tres primeros censos nacionales (1895, 1900 y 1910). Es la fuente que permite contrastar las cifras hacendarias del Porfiriato —superávit, deuda, ferrocarriles— contra lo que ocurría con la población: alfabetización, mortalidad, escuelas y condiciones de vida. Sin esta contraparte, el balance fiscal del régimen se lee como un éxito sin costo."
-      },
-      {
-        "num": 44,
-        "id": "ref-conapo-esperanza-vida",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Estadísticas Oficiales",
-        "cita_apa": "Consejo Nacional de Población [CONAPO] e Instituto Nacional de Estadística y Geografía [INEGI]. Esperanza de vida al nacimiento por entidad federativa según sexo, serie anual 2010–2026. Tabulados interactivos de mortalidad (México).",
-        "url": "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648",
-        "descripcion": "Serie oficial de esperanza de vida al nacer que publica el INEGI con las proyecciones de CONAPO. Para 2026 estima 72.8 años en hombres y 79.2 en mujeres, frente a los 30 años que registraba el país en 1910. Es el indicador que mide, en años de vida, la distancia entre un Estado que gastaba 7.4% del PIB y uno que gasta cerca de 25%."
-      },
-      {
-        "num": 45,
-        "id": "ref-inegi-censo-2020",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Estadísticas Oficiales",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. (2021). Censo de Población y Vivienda 2020: características educativas de la población. Resultados definitivos (México).",
-        "url": "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/",
-        "descripcion": "Censo que fija el analfabetismo nacional en 4.7% de la población de 15 años y más (4,456,431 personas), frente al 6.9% de 2010. Es el punto de comparación censo contra censo con el 82.1% que registró el primer censo nacional de 1895 y con el 73% estimado para 1910, y el dato que impide leer el Porfiriato como una etapa de progreso social."
-      },
-      {
-        "num": 46,
-        "id": "ref-salario-real-historico",
-        "categoria": "investigacion_civica",
-        "categoria_nombre": "Investigación Civica & Periodística",
-        "cita_apa": "Urzúa, C. M. (23 de diciembre de 2019). Salario justo. El Universal, sección Opinión. Serie de salario mínimo real reconstruida con datos de la Comisión Nacional de los Salarios Mínimos [CONASAMI] (México).",
-        "url": "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/",
-        "descripcion": "Reconstrucción del salario mínimo real mexicano en pesos constantes de 2018 desde 1877. Documenta que el jornal equivalía a $64.3 en 1877 y había caído a $60.1 en 1911: tras 34 años de crecimiento, ferrocarriles y superávit, el trabajador compraba menos que al principio. El máximo porfiriano fue $78.3 en 1899 y el mínimo $57.1 en 1910, el año anterior a la caída del régimen."
-      },
-      {
-        "num": 42,
-        "id": "ref-lgmde",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley General en Materia de Delitos Electorales [LGMDE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGMDE.pdf",
-        "descripcion": "Tipifica como delito el condicionamiento de programas sociales, obras o apoyos gubernamentales a cambio del voto, así como el desvío de recursos públicos con fines electorales. Es la norma que convierte una práctica clientelar habitual en una conducta penalmente perseguible, y el fundamento por el que el uso partidista de un padrón de beneficiarios se denuncia ante la Fiscalía Especializada en Delitos Electorales y no sólo ante una contraloría."
-      },
-      {
-        "num": 33,
-        "id": "ref-ley-amparo",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Congreso de la Unión. (2013–2025). Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos, con las reformas publicadas el 13 de marzo y el 16 de octubre de 2025. Diario Oficial de la Federación (México).",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
-        "descripcion": "Ley que regula el juicio de amparo en sus dos vías. Fija el plazo general de quince días hábiles para demandar (art. 17) con excepciones de treinta días para normas autoaplicativas, ocho años para sentencias penales condenatorias, siete años para núcleos ejidales y plazo abierto cuando está en juego la vida o la libertad. Regula la suspensión del acto reclamado (arts. 125 a 158), la audiencia constitucional (art. 119), los tres recursos admisibles —revisión, queja y reclamación (art. 80)— y el sistema de jurisprudencia por reiteración y contradicción (arts. 224 a 230). Dos reformas la modificaron en 2025: la del 13 de marzo declaró improcedente el amparo contra actos del Tribunal de Disciplina Judicial y del Órgano de Administración Judicial (art. 61 fracc. III), y la del 16 de octubre, vigente desde el día siguiente, exigió que el interés legítimo se traduzca en una afectación real, actual y diferenciada, endureció las causales para negar la suspensión y prohibió que ésta tenga efectos generales frente a normas."
-      },
-      {
-        "num": 34,
-        "id": "ref-cpeum-control-constitucional",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Congreso Constituyente. (1917–2024). Constitución Política de los Estados Unidos Mexicanos, artículos 94, 100, 103, 105 y 107, texto vigente tras la reforma publicada el 15 de septiembre de 2024. Diario Oficial de la Federación (México).",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
-        "descripcion": "Base constitucional de la función jurisdiccional. El artículo 94 sostiene el sistema de precedentes obligatorios; el 100 crea el Tribunal de Disciplina Judicial y el Órgano de Administración Judicial en sustitución del Consejo de la Judicatura Federal; el 103 abre el juicio de amparo; el 105 regula las controversias constitucionales y las acciones de inconstitucionalidad, y establece que la Suprema Corte sólo puede declarar la invalidez de una norma con el voto de al menos seis de sus nueve integrantes —umbral que antes de la reforma era de ocho de once—; el 107 fija las reglas del amparo, la declaratoria general de inconstitucionalidad, la facultad de atracción, la contradicción de criterios y la separación del cargo de la autoridad que incumple una sentencia."
-      },
-      {
-        "num": 35,
-        "id": "ref-ai-164-2024",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Suprema Corte de Justicia de la Nación. (2024). Acción de inconstitucionalidad 164/2024 y sus acumuladas, resuelta por el Tribunal Pleno el 5 de noviembre de 2024. SCJN (México).",
-        "url": "https://www.scjn.gob.mx/",
-        "descripcion": "Impugnación de la reforma constitucional del Poder Judicial promovida por partidos políticos. Siete de los once ministros entonces en funciones votaron a favor de invalidar diversas porciones de la reforma, pero como el umbral constitucional exigía ocho votos, el Pleno desestimó los conceptos de invalidez sin entrar al estudio de fondo. Es el precedente que ilustra con mayor claridad el efecto práctico de las mayorías calificadas: una mayoría absoluta del tribunal constitucional no bastó para detener la reforma que transformaba al propio tribunal."
-      },
-      {
-        "num": 36,
-        "id": "ref-inegi-cnijf",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Censo Nacional de Impartición de Justicia Federal y Estatal (CNIJF-E) 2025, con información del ejercicio 2024. INEGI (México).",
-        "url": "https://www.inegi.org.mx/programas/cnijf/",
-        "descripcion": "Fuente estadística oficial sobre la carga de trabajo del Poder Judicial de la Federación. Durante 2024 ingresaron 640,161 juicios de amparo indirecto a los Juzgados de Distrito y 194,357 amparos directos a los Tribunales Colegiados de Circuito —caídas de 5.4% y 6.9% respecto de 2023—, mientras que la Suprema Corte de Justicia de la Nación recibió 16,370 asuntos jurisdiccionales de todo tipo, 4.9% menos que el año anterior. El contraste entre los 834,518 amparos ingresados y los asuntos que alcanzan al máximo tribunal dimensiona el embudo del control constitucional de última instancia."
-      },
-      {
-        "num": 37,
-        "id": "ref-sjf-duodecima",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Suprema Corte de Justicia de la Nación. (2025). Acuerdo General número 7/2025 del Pleno: inicio del Tercer Periodo de Jurisprudencia y de la Duodécima Época del Semanario Judicial de la Federación, a partir del 1 de septiembre de 2025. SCJN (México).",
-        "url": "https://sjf2.scjn.gob.mx/",
-        "descripcion": "Acuerdo que abre una nueva época del Semanario Judicial de la Federación, el órgano oficial donde se publican los criterios obligatorios. Marca el corte entre la jurisprudencia de la Suprema Corte anterior a la reforma y la de la Corte electa por voto popular, e incorpora por primera vez una sección dedicada a las resoluciones de autoridades de pueblos y comunidades indígenas y afromexicanas. Para el usuario que consulta un criterio, la época indica si el precedente pertenece al sistema vigente o al anterior."
-      },
-      {
-        "num": 38,
-        "id": "ref-bma-amparo",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Barra Mexicana, Colegio de Abogados. (2025, 20 de octubre). Posicionamiento público sobre la reforma a la Ley de Amparo publicada el 16 de octubre de 2025. BMA (México).",
-        "url": "https://www.bma.org.mx/",
-        "descripcion": "Postura del colegio de abogados de mayor antigüedad del país frente a la reforma. Sostiene que el artículo tercero transitorio del decreto parte de una premisa inconstitucional al disponer su aplicación a juicios ya en trámite, lo que vulneraría los derechos adquiridos y el artículo 14 constitucional; que la restricción de la suspensión provisional y definitiva reduce la posibilidad real de defensa, y que ninguna reforma debería contravenir el principio de progresividad de los derechos humanos. Se cita como fuente de opinión técnica calificada, no como dato oficial."
-      },
-      {
-        "num": 1,
-        "id": "ref-cpeum",
-        "categoria": "constitucional",
-        "categoria_nombre": "Constitución Política de los Estados Unidos Mexicanos",
-        "cita_apa": "Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (México). Artículos 31 (fracc. IV), 73 (fracc. VII y VIII), 74 (fracc. IV), 115 (fracc. IV), 126 y 134. Última reforma publicada el 15 de septiembre de 2024.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
-        "descripcion": "Norma suprema que establece la obligación ciudadana de contribuir al gasto público, la facultad exclusiva de la Cámara de Diputados para aprobar el PEF, el régimen de autonomía y hacienda municipal (Art. 115), y los principios de eficiencia, eficacia, economía, transparencia y honradez en las compras públicas (Art. 134)."
-      },
-      {
-        "num": 2,
-        "id": "ref-lfprh",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley Federal de Presupuesto y Responsabilidad Hacendaria [LFPRH]. Diario Oficial de la Federación, 30 de marzo de 2006 (México). Última reforma publicada el 9 de abril de 2026. Cámara de Diputados del H. Congreso de la Unión.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
-        "descripcion": "Regula de forma exhaustiva la programación, presupuestación, aprobación, ejercicio, control y evaluación de los ingresos y egresos públicos federales, imponiendo reglas de disciplina de balance fiscal cero y fondos de estabilización."
-      },
-      {
-        "num": 3,
-        "id": "ref-lpcgpf",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley de Presupuesto, Contabilidad y Gasto Público Federal [LPCGPF]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Texto histórico y principios compilados por el Centro de Documentación de la Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_historicos/LPCGPF.pdf",
-        "descripcion": "Ordenamiento rector precursor que sentó las bases de la contabilidad gubernamental, la estructura programática y el catálogo de cuentas de la hacienda pública en México."
-      },
-      {
-        "num": 4,
-        "id": "ref-lgdp",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley General de Deuda Pública [LGDP]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/136.pdf",
-        "descripcion": "Rige la contratación de empréstitos y la emisión de valores de deuda soberana nacional e internacional; faculta a la SHCP a normar las emisiones y celebrar con Banco de México los convenios de colocación de CETES y Bonos."
-      },
-      {
-        "num": 5,
-        "id": "ref-lcf",
-        "categoria": "coordinacion_fiscal",
-        "categoria_nombre": "Federalismo y Coordinación Fiscal",
-        "cita_apa": "Ley de Coordinación Fiscal [LCF]. Diario Oficial de la Federación, 27 de diciembre de 1978 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/31_300118.pdf",
-        "descripcion": "Establece el Sistema Nacional de Coordinación Fiscal, regula el Fondo General de Participaciones (Ramo 28 - libre disposición) y los ocho fondos de Aportaciones Federales (Ramo 33 - etiquetados: FONE, FASSA, FAIS, FORTAMUN)."
-      },
-      {
-        "num": 6,
-        "id": "ref-ldf",
-        "categoria": "coordinacion_fiscal",
-        "categoria_nombre": "Federalismo y Coordinación Fiscal",
-        "cita_apa": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios [LDF]. Diario Oficial de la Federación, 27 de abril de 2016 (México). Última reforma publicada el 10 de mayo de 2022. Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf",
-        "descripcion": "Crea el Sistema de Alertas de la SHCP (Semáforos Verde, Amarillo y Rojo), impone techos al endeudamiento subnacional bancario, topes al gasto en servicios personales (nómina) y reglas de balance presupuestario sostenible."
-      },
-      {
-        "num": 7,
-        "id": "ref-lfrcf",
-        "categoria": "fiscalizacion_auditoria",
-        "categoria_nombre": "Fiscalización Superior y Auditoría",
-        "cita_apa": "Ley de Fiscalización y Rendición de Cuentas de la Federación [LFRCF]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Última reforma publicada el 20 de mayo de 2021. Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
-        "descripcion": "Otorga facultades a la Auditoría Superior de la Federación (ASF) para auditar en tiempo real y posterior la Cuenta Pública de los tres Poderes de la Unión, los Ramos 28 y 33 en las 32 entidades, y emitir Pliegos de Observaciones."
-      },
-      {
-        "num": 8,
-        "id": "ref-lbm",
-        "categoria": "banca_central",
-        "categoria_nombre": "Banca Central y Mercado de Dinero",
-        "cita_apa": "Ley del Banco de México [LBM]. Diario Oficial de la Federación, 23 de diciembre de 1993 (México). Última reforma publicada el 10 de enero de 2014. Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/74.pdf",
-        "descripcion": "Establece la autonomía del Banco Central, sus funciones de agente colocador de deuda del gobierno federal, regulador de sistemas de pago y administrador de la cuenta general de la TESOFE."
-      },
-      {
-        "num": 9,
-        "id": "ref-cff",
-        "categoria": "tributario",
-        "categoria_nombre": "Marco Tributario y Fiscal",
-        "cita_apa": "Código Fiscal de la Federación [CFF]. Diario Oficial de la Federación, 31 de diciembre de 1981 (México). Última reforma publicada el 9 de abril de 2026. Artículo 69-B (operaciones inexistentes y factureras).",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
-        "descripcion": "Regula las facultades de comprobación del SAT, infracciones fiscales, delitos y el listado de Empresas que Facturan Operaciones Simuladas (EFOS)."
-      },
-      {
-        "num": 10,
-        "id": "ref-lif2026",
-        "categoria": "leyes_anuales",
-        "categoria_nombre": "Paquete Económico Anual",
-        "cita_apa": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026 [LIF 2026]. Diario Oficial de la Federación, 7 de noviembre de 2025 (México). Cámara de Diputados y Senado de la República.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
-        "descripcion": "Establece los conceptos e importes que el gobierno federal recaudará en el ejercicio fiscal (ingresos tributarios, no tributarios, hidrocarburos y techo de endeudamiento neto)."
-      },
-      {
-        "num": 11,
-        "id": "ref-pef2026",
-        "categoria": "leyes_anuales",
-        "categoria_nombre": "Paquete Económico Anual",
-        "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf",
-        "descripcion": "Decreto emitido en exclusiva por la Cámara de Diputados que aprueba el gasto público de $10.19 billones de pesos, asignando partidas por ramo, programas de trabajo y gasto federalizado."
-      },
-      {
-        "num": 12,
-        "id": "ref-lgcg",
-        "categoria": "contabilidad_gubernamental",
-        "categoria_nombre": "Contabilidad y Armonización",
-        "cita_apa": "Ley General de Contabilidad Gubernamental [LGCG]. Diario Oficial de la Federación, 31 de diciembre de 2008 (México). Última reforma publicada el 30 de enero de 2018. Consejo Nacional de Armonización Contable (CONAC).",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG_300118.pdf",
-        "descripcion": "Obliga a los tres órdenes de gobierno (Federación, Estados y Municipios) a emitir información patrimonial y presupuestaria en tiempo real bajo criterios y clasificadores contables homogéneos."
-      },
-      {
-        "num": 13,
-        "id": "ref-laassp",
-        "categoria": "adquisiciones_compras",
-        "categoria_nombre": "Compras Públicas y Contrataciones",
-        "cita_apa": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público [LAASSP]. Diario Oficial de la Federación, 16 de abril de 2025 (México). Cámara de Diputados. Abroga la ley del 4 de enero de 2000. En la misma fecha se publicaron reformas a la Ley de Obras Públicas y Servicios Relacionados con las Mismas.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/14_200521.pdf",
-        "descripcion": "Norma el procedimiento de licitaciones públicas, compraventa y adquisición de insumos del Estado, y acota las adjudicaciones directas y las invitaciones restringidas. El marco vigente desde el 16 de abril de 2025 sustituyó por completo a la ley del año 2000 e introdujo un Sistema Nacional de Contrataciones Públicas con una plataforma digital única en la que las propuestas y los contratos se firman electrónicamente, pensada para dejar rastro de cada modificación contractual."
-      },
-      {
-        "num": 14,
-        "id": "ref-asf-cp",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Auditoría Superior de la Federación. (2025). Informes Individuales y General del Resultado de la Fiscalización Superior de la Cuenta Pública 2024. Cámara de Diputados.",
-        "url": "https://www.asf.gob.mx/",
-        "descripcion": "Repositorio oficial con los 2,100 pliegos de auditoría practicados al gasto federalizado, dependencias centralizadas y empresas productivas del Estado."
-      },
-      {
-        "num": 15,
-        "id": "ref-shcp-alertas",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Sistema de Alertas de las Entidades Federativas y Municipios. Unidad de Coordinación con Entidades Federativas (UCEF).",
-        "url": "https://www.disciplinafinanciera.hacienda.gob.mx/",
-        "descripcion": "Evaluación trimestral de la deuda subnacional de los 32 estados y municipios deudores con clasificación semafórica de sostenibilidad."
-      },
-      {
-        "num": 16,
-        "id": "ref-banxico-sie",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Banco de México. (2026). Sistema de Información Económica (SIE): Resultados de las subastas de valores gubernamentales (CETES, Bonos M, Udibonos, Bondes F) y Tasa de Interés Interbancaria de Equilibrio (TIIE).",
-        "url": "https://www.banxico.org.mx/SieInternet/",
-        "descripcion": "Base de datos histórica de tasas de colocación de deuda federal soberana, saldos en circulación y operaciones monetarias del banco central."
-      },
-      {
-        "num": 17,
-        "id": "ref-imco-iipe",
-        "categoria": "investigacion_civica",
-        "categoria_nombre": "Investigación & Contraloría Cívica",
-        "cita_apa": "Instituto Mexicano para la Competitividad A.C. (2025). Índice de Información Presupuestal Estatal y Municipal: Diagnóstico del desvío, la opacidad y el gasto en congresos locales.",
-        "url": "https://imco.org.mx/finanzas-publicas/",
-        "descripcion": "Estudio independiente sobre calidad del gasto, costos por legislador local en los 32 congresos y debilidad de recaudación del impuesto predial."
-      },
-      {
-        "num": 18,
-        "id": "ref-ciep-transf",
-        "categoria": "investigacion_civica",
-        "categoria_nombre": "Investigación & Contraloría Cívica",
-        "cita_apa": "Centro de Investigación Económica y Presupuestaria. (2025). Análisis del Gasto Federalizado en el PEF: Evolución del Ramo 28 y Ramo 33 y la dependencia presupuestal de los estados.",
-        "url": "https://ciep.mx/",
-        "descripcion": "Investigación académica y fiscal sobre equidad distributiva de las transferencias federales hacia las regiones del país."
-      },
-      {
-        "num": 19,
-        "id": "ref-reforma-judicial",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Presidencia de la República. (2024, 15 de septiembre). Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de reforma del Poder Judicial. Diario Oficial de la Federación (México).",
-        "url": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
-        "descripcion": "Reforma constitucional estructural que reduce el Pleno de la SCJN de 11 a 9 ministros; extingue las dos Salas colegiadas para sesionar únicamente en Pleno; mandata la elección por sufragio popular directo de ministros, magistrados y jueces (iniciando el 1 de junio de 2025); extingue al Consejo de la Judicatura Federal para sustituirlo por el Tribunal de Disciplina Judicial (TDJ) y el Órgano de Administración Judicial (OAJ); ordena la extinción de los 13 fideicomisos fiduciarios con reintegro a la TESOFE; e impone el tope salarial estricto del Artículo 127 Constitucional."
-      },
-      {
-        "num": 20,
-        "id": "ref-cpeum-art127",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Congreso de la Unión. (2024). Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (última reforma publicada el 15 de septiembre de 2024). Artículos 127 (fracciones I a VI) y 94 (párrafo décimo).",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
-        "descripcion": "Principio supremo de remuneración máxima que prohíbe a cualquier persona servidora pública percibir ingresos mayores a los del Presidente de la República ($134,310 pesos netos / $191,657 pesos brutos al mes). Pone fin a los sueldos tabulares previos de ministros que alcanzaban $206,948 netos ($297,404 brutos), vedando bonos discrecionales, pago de seguros médicos privados y seguros de separación con cargo a fondos públicos."
-      },
-      {
-        "num": 21,
-        "id": "ref-pef-ramo03",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Cámara de Diputados. (2024–2026). Presupuesto de Egresos de la Federación: Tomo VII, Ramo 03 'Poder Judicial de la Federación' (SCJN, CJF, TEPJF). Secretaría de Hacienda y Crédito Público (SHCP).",
-        "url": "https://www.transparenciapresupuestaria.gob.mx/",
-        "descripcion": "Asignación presupuestaria histórica consolidada del Ramo 03 ($78,327 millones de pesos aprobados), de los cuales la Suprema Corte de Justicia de la Nación ejerce directamente cerca de $5,900 millones anuales. Documenta que el 80.2% del presupuesto del Poder Judicial se concentra en el Capítulo 1000 (Servicios Personales), con un costo consolidado anual de $376.2 millones de pesos para las 11 ponencias (~$34.2 mdp anuales por ministro ponente), proyectado a reducirse a ~$216 mdp anuales con el nuevo Pleno austero de 9 ministros."
-      },
-      {
-        "num": 22,
-        "id": "ref-manual-remun-pjf",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Suprema Corte de Justicia de la Nación, & Consejo de la Judicatura Federal. (2024–2025). Manual que regula las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación. Diario Oficial de la Federación (México).",
-        "url": "https://www.dof.gob.mx/",
-        "descripcion": "Tabulador oficial institucional que desglosa sueldos base, compensaciones garantizadas y el paquete de compensaciones extraordinarias complementario, estimado en más de $1.7 millones de pesos anuales por ministro por encima del salario tabular. Incluye el Seguro de Separación Individualizado (SSI de hasta 10% del sueldo con aportación idéntica del erario), Seguro de Gastos Médicos Mayores (SGMM con pólizas privadas de $30 a $50 mdp), aguinaldo y asignación de vehículos blindados de alta gama."
-      },
-      {
-        "num": 23,
-        "id": "ref-asf-fideicomisos-pjf",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Auditoría Superior de la Federación. (2023–2025). Auditoría Financiera y de Cumplimiento a los Fideicomisos y Fondos del Poder Judicial de la Federación: Cuentas Públicas 2018–2023. Informes Individuales de Fiscalización. Cámara de Diputados.",
-        "url": "https://www.asf.gob.mx/",
-        "descripcion": "Dictamen de fiscalización superior que documentó la acumulación de $15,434 millones de pesos en 13 fideicomisos fiduciarios del PJF en Nacional Financiera (Nafin) nutridos por subejercicios presupuestales anuales no devengados. Dictaminó que dichos recursos no comprometidos debieron reintegrarse a la Tesorería de la Federación conforme al Artículo 54 de la LFPRH, ordenando su extinción definitiva conforme a los decretos de reforma constitucional."
-      },
-      {
-        "num": 24,
-        "id": "ref-scjn-conoce-corte",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Suprema Corte de Justicia de la Nación. (2025). Portal Institucional Conoce la Corte: Directorio de Ministras y Ministros del Pleno, Estructura Orgánica, Salas Jurisdiccionales y Semblanzas Curriculares Oficiales. SCJN.",
-        "url": "https://www.scjn.gob.mx/conoce-la-corte",
-        "descripcion": "Directorio oficial con las semblanzas curriculares, trayectoria jurisdiccional, grados académicos y adscripción a Salas (Primera Sala Civil/Penal y Segunda Sala Administrativa/Laboral). Incluye el seguimiento a las renuncias con efectos al 31 de agosto de 2025, el pase de ministras en funciones a la boleta electoral de junio de 2025 y la transición a la Presidencia electa del máximo tribunal."
-      },
-      {
-        "num": 25,
-        "id": "ref-pnt-asesores-scjn",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Plataforma Nacional de Transparencia (PNT), & Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales. (2024–2025). Sistema de Portales de Obligaciones de Transparencia (SIPOT): Estructura Orgánica, Padrón de Personal Técnico y Contratos de Honorarios Asimilados del Ramo 03 (SCJN). Obligaciones del Artículo 70 Fracciones VIII y XI (LGTAIP).",
-        "url": "https://www.plataformadetransparencia.org.mx/",
-        "descripcion": "Auditoría ciudadana y registros oficiales de transparencia que documentan la conformación de los despachos de ministros. Constata un organigrama nuclear de 32 a 38 plazas directas por ponencia (con promedio de 14 secretarios proyectistas de estudio y cuenta) y una red ampliada que rebasó los 70 colaboradores por ministro a través de comisiones técnicas, asesores externos y contratos de servicios profesionales por honorarios asimilados (Capítulo 3000), elevando el costo real de operación por despacho a entre $35 y $42 millones de pesos anuales."
-      },
-      {
-        "num": 26,
-        "id": "ref-ciep-pjf",
-        "categoria": "investigacion_civica",
-        "categoria_nombre": "Investigación & Contraloría Cívica",
-        "cita_apa": "Centro de Investigación Económica y Presupuestaria. (2024). El Presupuesto del Poder Judicial de la Federación: Análisis de su Evolución Histórica, Costo por Juzgador y Masa Salarial de Mandos Superiores. CIEP.",
-        "url": "https://ciep.mx/",
-        "descripcion": "Investigación económica independiente que evalúa el crecimiento del gasto judicial en México en la última década, analizando la nómina de 54,500 plazas en tribunales y juzgados, el impacto del Capítulo 1000 en el balance del erario nacional y el elevado costo por juzgador frente a estándares internacionales de la OCDE y América Latina."
-      },
-      {
-        "num": 27,
-        "id": "ref-garcia-luna-edny",
-        "categoria": "internacional",
-        "categoria_nombre": "Internacional & Cortes EE. UU.",
-        "cita_apa": "United States District Court for the Eastern District of New York. (2020–2024). United States v. Genaro Garcia Luna (Criminal Docket No. 1:19-cr-00576-BMC). Brooklyn, NY: Federal Judicial Center / CourtListener PACER Records.",
-        "url": "https://www.courtlistener.com/docket/16559363/united-states-v-garcia-luna/",
-        "descripcion": "Expediente judicial federal radicado ante el Juez Brian M. Cogan en la Corte de Distrito Este de Nueva York. Contiene el pliego acusatorio (indictment), transcripciones taquigráficas de las audiencias testimoniales de exoperadores delictivos cooperantes, minutas de evidencia admitida (exhibits), mociones sobre la ausencia de rastro financiero directo incautado en cuentas bancarias a su nombre, y la sentencia dictada el 16 de octubre de 2024 a más de 38 años de prisión y $2 mdd de multa."
-      },
-      {
-        "num": 28,
-        "id": "ref-lamparo",
-        "categoria": "judicial",
-        "categoria_nombre": "Poder Judicial & SCJN",
-        "cita_apa": "Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos. Diario Oficial de la Federación, 2 de abril de 2013 (México). Títulos Primero a Cuarto.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
-        "descripcion": "Ordenamiento que regula el juicio de amparo, el medio de defensa por el que cualquier persona puede reclamar ante un juez federal actos de autoridad que violen sus derechos. Su Título Cuarto fija las reglas de formación, interrupción y sustitución de la jurisprudencia, determinantes para saber qué criterios de las Salas suprimidas en 2025 siguen siendo obligatorios."
-      },
-      {
-        "num": 29,
-        "id": "ref-lgra",
-        "categoria": "fiscalizacion_auditoria",
-        "categoria_nombre": "Fiscalización Superior y Auditoría",
-        "cita_apa": "Ley General de Responsabilidades Administrativas [LGRA]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Artículos 3, 49 a 64 y 108 a 115.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf",
-        "descripcion": "Norma que define las faltas administrativas graves y no graves de las personas servidoras públicas, la obligación de presentar las declaraciones patrimonial, de intereses y fiscal, y el concepto de conflicto de interés. Es el vínculo entre un hallazgo de auditoría y una sanción efectiva."
-      },
-      {
-        "num": 30,
-        "id": "ref-lgtaip",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Ley General de Transparencia y Acceso a la Información Pública [LGTAIP]. Diario Oficial de la Federación, 4 de mayo de 2015 (México). Artículos 70 a 83.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf",
-        "descripcion": "Establece las obligaciones de transparencia que todos los sujetos obligados deben publicar de oficio, incluidos presupuesto asignado y ejercido, remuneraciones, contrataciones y resultados de auditorías, así como el mandato de difundirlas en formatos de datos abiertos que permitan su procesamiento."
-      },
-      {
-        "num": 31,
-        "id": "ref-lgipe",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley General de Instituciones y Procedimientos Electorales [LGIPE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Artículos 98, 126 a 148, 243 y 445.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf",
-        "descripcion": "Regula la integración del padrón electoral y de la lista nominal, la naturaleza y el financiamiento de los Organismos Públicos Locales Electorales, los topes de gastos de campaña y las causales de nulidad por rebase. Es la base normativa para auditar el costo de cualquier proceso electoral, incluido el judicial."
-      },
-      {
-        "num": 32,
-        "id": "ref-inegi-cuentas",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Sistema de Cuentas Nacionales de México e Índice Nacional de Precios al Consumidor. Banco de Información Económica (BIE).",
-        "url": "https://www.inegi.org.mx/temas/pib/",
-        "descripcion": "Fuente oficial del Producto Interno Bruto y del Índice Nacional de Precios al Consumidor, así como del valor anual de la Unidad de Medida y Actualización. Es el insumo obligado para expresar el gasto y la deuda como porcentaje del PIB y para deflactar cifras de distintos años a pesos constantes."
-      },
-      {
-        "num": 47,
-        "id": "ref-inegi-ceem",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Cuentas Económicas y Ecológicas de México (CEEM). Sistema de Cuentas Nacionales de México. INEGI.",
-        "url": "https://www.inegi.org.mx/temas/ee/",
-        "descripcion": "Programa estadístico con el que el INEGI mide, en pesos, cuánto capital natural se agota y cuánto se degrada el entorno para producir el PIB. Es la respuesta contable al mandato de desarrollo sustentable de los artículos 25 y 27 constitucionales, y la fuente del Producto Interno Neto Ecológico (PINE) y de los Costos Totales por Agotamiento y Degradación Ambiental (CTADA)."
-      },
-      {
-        "num": 48,
-        "id": "ref-ceem-2024",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.",
-        "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf",
-        "descripcion": "Edición 2024 de las cuentas verdes, publicada el 1 de diciembre de 2025. Reporta un Producto Interno Neto Ecológico de 25.7 billones de pesos, equivalente a 76.6% del PIB, y costos totales por agotamiento y degradación ambiental de $1,382,214 millones de pesos, es decir 4.1% del PIB. Es la fuente de todas las cifras ambientales que esta plataforma presenta."
-      },
-      {
-        "num": 49,
-        "id": "ref-inegi-pib-2024",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Producto Interno Bruto por Entidad Federativa (PIBE) 2024. Comunicado de prensa. INEGI.",
-        "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf",
-        "descripcion": "Fuente del PIB nacional a precios de mercado de 2024: $33,506,847 millones de pesos corrientes. Es el denominador contra el que se calculan todos los porcentajes ambientales, de deuda y de gasto que esta plataforma expresa como proporción del PIB."
-      },
-      {
-        "num": 50,
-        "id": "ref-ley-planeacion",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley de Planeación. Diario Oficial de la Federación, 5 de enero de 1983, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPlan.pdf",
-        "descripcion": "Ley reglamentaria del artículo 26 constitucional. Define el Sistema Nacional de Planeación Democrática, el procedimiento de consulta popular, el plazo para publicar el Plan Nacional de Desarrollo y la regla que separa lo obligatorio para la Administración Pública Federal de lo meramente indicativo para los particulares."
-      },
-      {
-        "num": 51,
-        "id": "ref-lgeepa",
-        "categoria": "leyes_federales",
-        "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-        "cita_apa": "Ley General del Equilibrio Ecológico y la Protección al Ambiente. Diario Oficial de la Federación, 28 de enero de 1988, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf",
-        "descripcion": "Norma que aterriza el mandato de sustentabilidad del artículo 27 constitucional. Regula la evaluación del impacto ambiental, las áreas naturales protegidas y los instrumentos económicos de política ambiental. Es el fundamento de la Manifestación de Impacto Ambiental (MIA), que la autoridad puede negar cuando una obra compromete la capacidad de carga de una región."
-      },
-      {
-        "num": 52,
-        "id": "ref-lisr",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley del Impuesto Sobre la Renta. Diario Oficial de la Federación, 11 de diciembre de 2013, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
-        "descripcion": "Ley que regula el impuesto directo sobre el ingreso de personas físicas y morales. Es la mayor fuente tributaria del Estado mexicano: $3,070,149.1 mdp estimados para 2026, el 52.6 % de todos los impuestos. Su base es la utilidad fiscal, no el ingreso bruto, de modo que deducciones y estímulos inciden directamente en lo recaudado."
-      },
-      {
-        "num": 53,
-        "id": "ref-liva",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley del Impuesto al Valor Agregado. Diario Oficial de la Federación, 29 de diciembre de 1978, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/liva.htm",
-        "descripcion": "Ley del impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % para alimentos y medicinas y actos exentos. Funciona por traslado y acreditamiento: cada eslabón entera el impuesto sobre el valor que añade y el consumidor final lo soporta íntegro. Estimado en $1,589,069.0 mdp para 2026."
-      },
-      {
-        "num": 54,
-        "id": "ref-lieps",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley del Impuesto Especial sobre Producción y Servicios. Diario Oficial de la Federación, 30 de diciembre de 1980, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm",
-        "descripcion": "Ley del impuesto con fin extrafiscal sobre consumos específicos: combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones. Estimado en $761,501.9 mdp para 2026, de los cuales $473,279.1 corresponden a combustibles automotrices."
-      },
-      {
-        "num": 55,
-        "id": "ref-ligie",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley de los Impuestos Generales de Importación y de Exportación. Diario Oficial de la Federación, 7 de junio de 2022, última reforma vigente (México). Cámara de Diputados. En relación con la Ley Aduanera y el artículo 131 constitucional.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/ligie_2022.htm",
-        "descripcion": "Tarifa arancelaria de México, organizada por fracciones del Sistema Armonizado. Es el único gravamen cuyas tasas puede modificar el Ejecutivo por decreto, conforme al artículo 131 constitucional, con aprobación posterior del Congreso. En 2026 se estiman $254,756.8 mdp, todos por importación: la exportación se presupuesta en cero."
-      },
-      {
-        "num": 56,
-        "id": "ref-lfisan",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley Federal del Impuesto sobre Automóviles Nuevos. Diario Oficial de la Federación, 30 de diciembre de 1996, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfisan.htm",
-        "descripcion": "Impuesto federal sobre la enajenación de automóviles nuevos y su importación definitiva. Es de administración estatal: las entidades lo recaudan y conservan su rendimiento por convenio de colaboración en el marco de la Ley de Coordinación Fiscal. Estimado en $20,161.8 mdp para 2026."
-      },
-      {
-        "num": 57,
-        "id": "ref-lih",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley de Ingresos sobre Hidrocarburos, artículos 55 a 57. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lih.htm",
-        "descripcion": "Régimen fiscal de la actividad petrolera. Sus artículos 55 a 57 establecen el impuesto por la actividad de exploración y extracción de hidrocarburos, que se calcula por kilómetro cuadrado de área contractual o de asignación y cuya cuota se eleva pasados sesenta meses sin producción. Estimado en $7,070.4 mdp para 2026."
-      },
-      {
-        "num": 58,
-        "id": "ref-lss",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley del Seguro Social. Diario Oficial de la Federación, 21 de diciembre de 1995, última reforma vigente (México). Cámara de Diputados. En relación con la Ley del ISSSTE (DOF 31 de marzo de 2007).",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss.htm",
-        "descripcion": "Régimen de las cuotas obrero-patronales que financian las prestaciones del IMSS. Junto con las del ISSSTE constituyen las aportaciones de seguridad social del artículo 2º fracción II del Código Fiscal: contribuciones con destino específico, que no integran la Recaudación Federal Participable y por tanto no se reparten a estados y municipios. Estimadas en $641,782.1 mdp para 2026."
-      },
-      {
-        "num": 59,
-        "id": "ref-lcmopfih",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica. Diario Oficial de la Federación, 26 de diciembre de 1990, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lcmopfih.htm",
-        "descripcion": "Única ley vigente de contribución de mejoras en el ámbito federal. Grava a quienes se benefician de manera directa de obras públicas de infraestructura hidráulica, conforme al principio de beneficio del artículo 2º fracción III del Código Fiscal. Con $39.6 mdp estimados para 2026 es la partida más pequeña de toda la Ley de Ingresos."
-      },
-      {
-        "num": 60,
-        "id": "ref-lfd",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley Federal de Derechos. Diario Oficial de la Federación, 31 de diciembre de 1981, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
-        "descripcion": "Catálogo de los derechos federales: pagos por servicios que presta el Estado en funciones de derecho público y por el uso o aprovechamiento de bienes del dominio de la Nación —agua, espectro radioeléctrico, zona federal, puertos—. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio; si lo excede, el derecho se convierte en un impuesto encubierto. Estimados en $157,081.7 mdp para 2026."
-      },
-      {
-        "num": 61,
-        "id": "ref-lepe",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley de la Empresa Pública del Estado, Petróleos Mexicanos, y Ley de la Empresa Pública del Estado, Comisión Federal de Electricidad. Diario Oficial de la Federación, 18 de marzo de 2025 (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lepepm.htm",
-        "descripcion": "Leyes que rigen a Pemex y a la CFE tras la reforma energética de 2024-2025. El cambio no es de nombre: dejan de ser «empresas productivas del Estado», figura creada en 2013 con lógica de competencia, para volverse «empresas públicas del Estado», con el Estado como rector del sector. Sus ingresos propios suman $1,507,154.4 mdp estimados para 2026."
-      },
-      {
-        "num": 62,
-        "id": "ref-lfmped",
-        "categoria": "hacendario_fiscal",
-        "categoria_nombre": "Hacendario y Fiscal",
-        "cita_apa": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
-        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm",
-        "descripcion": "Fideicomiso público en el Banco de México, previsto en el párrafo sexto del artículo 28 constitucional, que recibe la renta petrolera del Estado y la transfiere al presupuesto hasta un tope de 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Para 2026 se presupuestan $232,630.4 mdp de transferencias ordinarias y cero extraordinarias."
-      }
-    ],
+    {
+      "num": 39,
+      "id": "ref-sabg",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Orgánica de la Administración Pública Federal. Diario Oficial de la Federación, 28 de noviembre de 2024 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/loapf.htm",
+      "descripcion": "Reforma que sustituyó a la Secretaría de la Función Pública por la Secretaría Anticorrupción y Buen Gobierno (SABG), la cual inició operaciones el 1 de enero de 2025. La dependencia concentra la prevención, detección y sanción de actos de corrupción en la Administración Pública Federal, y a través de su Coordinación de Denuncias y Atención Ciudadana administra la plataforma Ciudadanos Alertadores Internos y Externos de la Corrupción, cuyo portal cambió a alertadores.buengobierno.gob.mx. La mención de la «SFP» en documentos posteriores a esa fecha corresponde a un órgano que ya no existe con ese nombre."
+    },
+    {
+      "num": 40,
+      "id": "ref-pnt",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Plataforma Nacional de Transparencia [PNT]. Sistema de solicitudes de acceso a la información pública. Transparencia para el Pueblo, Secretaría Anticorrupción y Buen Gobierno (México).",
+      "url": "https://www.plataformadetransparencia.org.mx/",
+      "descripcion": "Portal único desde el cual se presentan solicitudes de acceso a la información a los sujetos obligados de los tres órdenes de gobierno, se consultan las obligaciones de transparencia y se interponen recursos de revisión. Tras la extinción del INAI en mayo de 2025, la autoridad garante federal es Transparencia para el Pueblo, órgano desconcentrado de la Secretaría Anticorrupción y Buen Gobierno; la plataforma y el derecho no desaparecieron, cambió quién los vigila. Es la herramienta con la que un particular obtiene el contrato, la factura o el acta que después sostiene una denuncia."
+    },
+    {
+      "num": 41,
+      "id": "ref-lopsrm",
+      "categoria": "adquisiciones_compras",
+      "categoria_nombre": "Compras Públicas y Contrataciones",
+      "cita_apa": "Ley de Obras Públicas y Servicios Relacionados con las Mismas [LOPSRM]. Diario Oficial de la Federación (México). Última reforma publicada el 16 de abril de 2025. Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOPSRM.pdf",
+      "descripcion": "Regula la contratación, ejecución y finiquito de la obra pública federal. Establece el expediente único de obra y la bitácora como registro obligatorio de su ejecución: son los documentos que permiten contrastar lo contratado contra lo construido, y por tanto los primeros que conviene solicitar antes de señalar una obra. Fue reformada el 16 de abril de 2025, el mismo día en que se publicó la nueva Ley de Adquisiciones."
+    },
+    {
+      "num": 43,
+      "id": "ref-inegi-social-porfiriato",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Estadísticas sociales del Porfiriato, 1877–1910. Reedición de la obra de la Dirección General de Estadística. Acervo histórico del INEGI (México).",
+      "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf",
+      "descripcion": "Compilación oficial de los indicadores sociales del régimen porfirista levantados en los tres primeros censos nacionales (1895, 1900 y 1910). Es la fuente que permite contrastar las cifras hacendarias del Porfiriato —superávit, deuda, ferrocarriles— contra lo que ocurría con la población: alfabetización, mortalidad, escuelas y condiciones de vida. Sin esta contraparte, el balance fiscal del régimen se lee como un éxito sin costo."
+    },
+    {
+      "num": 44,
+      "id": "ref-conapo-esperanza-vida",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Consejo Nacional de Población [CONAPO] e Instituto Nacional de Estadística y Geografía [INEGI]. Esperanza de vida al nacimiento por entidad federativa según sexo, serie anual 2010–2026. Tabulados interactivos de mortalidad (México).",
+      "url": "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648",
+      "descripcion": "Serie oficial de esperanza de vida al nacer que publica el INEGI con las proyecciones de CONAPO. Para 2026 estima 72.8 años en hombres y 79.2 en mujeres, frente a los 30 años que registraba el país en 1910. Es el indicador que mide, en años de vida, la distancia entre un Estado que gastaba 7.4% del PIB y uno que gasta cerca de 25%."
+    },
+    {
+      "num": 45,
+      "id": "ref-inegi-censo-2020",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. (2021). Censo de Población y Vivienda 2020: características educativas de la población. Resultados definitivos (México).",
+      "url": "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/",
+      "descripcion": "Censo que fija el analfabetismo nacional en 4.7% de la población de 15 años y más (4,456,431 personas), frente al 6.9% de 2010. Es el punto de comparación censo contra censo con el 82.1% que registró el primer censo nacional de 1895 y con el 73% estimado para 1910, y el dato que impide leer el Porfiriato como una etapa de progreso social."
+    },
+    {
+      "num": 46,
+      "id": "ref-salario-real-historico",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación Civica & Periodística",
+      "cita_apa": "Urzúa, C. M. (23 de diciembre de 2019). Salario justo. El Universal, sección Opinión. Serie de salario mínimo real reconstruida con datos de la Comisión Nacional de los Salarios Mínimos [CONASAMI] (México).",
+      "url": "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/",
+      "descripcion": "Reconstrucción del salario mínimo real mexicano en pesos constantes de 2018 desde 1877. Documenta que el jornal equivalía a $64.3 en 1877 y había caído a $60.1 en 1911: tras 34 años de crecimiento, ferrocarriles y superávit, el trabajador compraba menos que al principio. El máximo porfiriano fue $78.3 en 1899 y el mínimo $57.1 en 1910, el año anterior a la caída del régimen."
+    },
+    {
+      "num": 42,
+      "id": "ref-lgmde",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General en Materia de Delitos Electorales [LGMDE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_General_en_Materia_de_Delitos_Electorales.pdf",
+      "descripcion": "Tipifica como delito el condicionamiento de programas sociales, obras o apoyos gubernamentales a cambio del voto, así como el desvío de recursos públicos con fines electorales. Es la norma que convierte una práctica clientelar habitual en una conducta penalmente perseguible, y el fundamento por el que el uso partidista de un padrón de beneficiarios se denuncia ante la Fiscalía Especializada en Delitos Electorales y no sólo ante una contraloría."
+    },
+    {
+      "num": 33,
+      "id": "ref-ley-amparo",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Congreso de la Unión. (2013–2025). Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos, con las reformas publicadas el 13 de marzo y el 16 de octubre de 2025. Diario Oficial de la Federación (México).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
+      "descripcion": "Ley que regula el juicio de amparo en sus dos vías. Fija el plazo general de quince días hábiles para demandar (art. 17) con excepciones de treinta días para normas autoaplicativas, ocho años para sentencias penales condenatorias, siete años para núcleos ejidales y plazo abierto cuando está en juego la vida o la libertad. Regula la suspensión del acto reclamado (arts. 125 a 158), la audiencia constitucional (art. 119), los tres recursos admisibles —revisión, queja y reclamación (art. 80)— y el sistema de jurisprudencia por reiteración y contradicción (arts. 224 a 230). Dos reformas la modificaron en 2025: la del 13 de marzo declaró improcedente el amparo contra actos del Tribunal de Disciplina Judicial y del Órgano de Administración Judicial (art. 61 fracc. III), y la del 16 de octubre, vigente desde el día siguiente, exigió que el interés legítimo se traduzca en una afectación real, actual y diferenciada, endureció las causales para negar la suspensión y prohibió que ésta tenga efectos generales frente a normas."
+    },
+    {
+      "num": 34,
+      "id": "ref-cpeum-control-constitucional",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Congreso Constituyente. (1917–2024). Constitución Política de los Estados Unidos Mexicanos, artículos 94, 100, 103, 105 y 107, texto vigente tras la reforma publicada el 15 de septiembre de 2024. Diario Oficial de la Federación (México).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "descripcion": "Base constitucional de la función jurisdiccional. El artículo 94 sostiene el sistema de precedentes obligatorios; el 100 crea el Tribunal de Disciplina Judicial y el Órgano de Administración Judicial en sustitución del Consejo de la Judicatura Federal; el 103 abre el juicio de amparo; el 105 regula las controversias constitucionales y las acciones de inconstitucionalidad, y establece que la Suprema Corte sólo puede declarar la invalidez de una norma con el voto de al menos seis de sus nueve integrantes —umbral que antes de la reforma era de ocho de once—; el 107 fija las reglas del amparo, la declaratoria general de inconstitucionalidad, la facultad de atracción, la contradicción de criterios y la separación del cargo de la autoridad que incumple una sentencia."
+    },
+    {
+      "num": 35,
+      "id": "ref-ai-164-2024",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2024). Acción de inconstitucionalidad 164/2024 y sus acumuladas, resuelta por el Tribunal Pleno el 5 de noviembre de 2024. SCJN (México).",
+      "url": "https://www.scjn.gob.mx/",
+      "descripcion": "Impugnación de la reforma constitucional del Poder Judicial promovida por partidos políticos. Siete de los once ministros entonces en funciones votaron a favor de invalidar diversas porciones de la reforma, pero como el umbral constitucional exigía ocho votos, el Pleno desestimó los conceptos de invalidez sin entrar al estudio de fondo. Es el precedente que ilustra con mayor claridad el efecto práctico de las mayorías calificadas: una mayoría absoluta del tribunal constitucional no bastó para detener la reforma que transformaba al propio tribunal."
+    },
+    {
+      "num": 36,
+      "id": "ref-inegi-cnijf",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Censo Nacional de Impartición de Justicia Federal y Estatal (CNIJF-E) 2025, con información del ejercicio 2024. INEGI (México).",
+      "url": "https://www.inegi.org.mx/programas/cnijf/",
+      "descripcion": "Fuente estadística oficial sobre la carga de trabajo del Poder Judicial de la Federación. Durante 2024 ingresaron 640,161 juicios de amparo indirecto a los Juzgados de Distrito y 194,357 amparos directos a los Tribunales Colegiados de Circuito —caídas de 5.4% y 6.9% respecto de 2023—, mientras que la Suprema Corte de Justicia de la Nación recibió 16,370 asuntos jurisdiccionales de todo tipo, 4.9% menos que el año anterior. El contraste entre los 834,518 amparos ingresados y los asuntos que alcanzan al máximo tribunal dimensiona el embudo del control constitucional de última instancia."
+    },
+    {
+      "num": 37,
+      "id": "ref-sjf-duodecima",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2025). Acuerdo General número 7/2025 del Pleno: inicio del Tercer Periodo de Jurisprudencia y de la Duodécima Época del Semanario Judicial de la Federación, a partir del 1 de septiembre de 2025. SCJN (México).",
+      "url": "https://sjf2.scjn.gob.mx/",
+      "descripcion": "Acuerdo que abre una nueva época del Semanario Judicial de la Federación, el órgano oficial donde se publican los criterios obligatorios. Marca el corte entre la jurisprudencia de la Suprema Corte anterior a la reforma y la de la Corte electa por voto popular, e incorpora por primera vez una sección dedicada a las resoluciones de autoridades de pueblos y comunidades indígenas y afromexicanas. Para el usuario que consulta un criterio, la época indica si el precedente pertenece al sistema vigente o al anterior."
+    },
+    {
+      "num": 38,
+      "id": "ref-bma-amparo",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Barra Mexicana, Colegio de Abogados. (2025, 20 de octubre). Posicionamiento público sobre la reforma a la Ley de Amparo publicada el 16 de octubre de 2025. BMA (México).",
+      "url": "https://www.bma.org.mx/",
+      "descripcion": "Postura del colegio de abogados de mayor antigüedad del país frente a la reforma. Sostiene que el artículo tercero transitorio del decreto parte de una premisa inconstitucional al disponer su aplicación a juicios ya en trámite, lo que vulneraría los derechos adquiridos y el artículo 14 constitucional; que la restricción de la suspensión provisional y definitiva reduce la posibilidad real de defensa, y que ninguna reforma debería contravenir el principio de progresividad de los derechos humanos. Se cita como fuente de opinión técnica calificada, no como dato oficial."
+    },
+    {
+      "num": 1,
+      "id": "ref-cpeum",
+      "categoria": "constitucional",
+      "categoria_nombre": "Constitución Política de los Estados Unidos Mexicanos",
+      "cita_apa": "Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (México). Artículos 31 (fracc. IV), 73 (fracc. VII y VIII), 74 (fracc. IV), 115 (fracc. IV), 126 y 134. Última reforma publicada el 15 de septiembre de 2024.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "descripcion": "Norma suprema que establece la obligación ciudadana de contribuir al gasto público, la facultad exclusiva de la Cámara de Diputados para aprobar el PEF, el régimen de autonomía y hacienda municipal (Art. 115), y los principios de eficiencia, eficacia, economía, transparencia y honradez en las compras públicas (Art. 134)."
+    },
+    {
+      "num": 2,
+      "id": "ref-lfprh",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley Federal de Presupuesto y Responsabilidad Hacendaria [LFPRH]. Diario Oficial de la Federación, 30 de marzo de 2006 (México). Última reforma publicada el 9 de abril de 2026. Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "descripcion": "Regula de forma exhaustiva la programación, presupuestación, aprobación, ejercicio, control y evaluación de los ingresos y egresos públicos federales, imponiendo reglas de disciplina de balance fiscal cero y fondos de estabilización."
+    },
+    {
+      "num": 3,
+      "id": "ref-lpcgpf",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley de Presupuesto, Contabilidad y Gasto Público Federal [LPCGPF]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Texto histórico y principios compilados por el Centro de Documentación de la Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/abro/LPCGPF_abro.pdf",
+      "descripcion": "Ordenamiento rector precursor que sentó las bases de la contabilidad gubernamental, la estructura programática y el catálogo de cuentas de la hacienda pública en México. Ordenamiento abrogado: el enlace apunta a la versión histórica que conserva la Cámara de Diputados entre las leyes abrogadas."
+    },
+    {
+      "num": 4,
+      "id": "ref-lgdp",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Deuda Pública [LGDP]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_de_Deuda_Publica.pdf",
+      "descripcion": "Rige la contratación de empréstitos y la emisión de valores de deuda soberana nacional e internacional; faculta a la SHCP a normar las emisiones y celebrar con Banco de México los convenios de colocación de CETES y Bonos. La Cámara de Diputados la publica hoy bajo el título «Ley Federal de Deuda Pública», con el nombre original como subtítulo."
+    },
+    {
+      "num": 5,
+      "id": "ref-lcf",
+      "categoria": "coordinacion_fiscal",
+      "categoria_nombre": "Federalismo y Coordinación Fiscal",
+      "cita_apa": "Ley de Coordinación Fiscal [LCF]. Diario Oficial de la Federación, 27 de diciembre de 1978 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
+      "descripcion": "Ley que reparte entre los tres pisos de gobierno lo que la Federación recauda. Fija el Fondo General de Participaciones en el 20 % de la recaudación federal participable (art. 2º), crea los ocho fondos del Ramo 33 (arts. 25 a 51) y garantiza al municipio cuando menos el 20 % de las participaciones que reciba su estado (art. 6º). Para 2026, el Presupuesto de Egresos asigna $1,456,045.9 mdp al Ramo 28 y $1,041,892.9 mdp al Ramo 33."
+    },
+    {
+      "num": 6,
+      "id": "ref-ldf",
+      "categoria": "coordinacion_fiscal",
+      "categoria_nombre": "Federalismo y Coordinación Fiscal",
+      "cita_apa": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios [LDF]. Diario Oficial de la Federación, 27 de abril de 2016 (México). Última reforma publicada el 10 de mayo de 2022. Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf",
+      "descripcion": "Crea el Sistema de Alertas de la SHCP (Semáforos Verde, Amarillo y Rojo), impone techos al endeudamiento subnacional bancario, topes al gasto en servicios personales (nómina) y reglas de balance presupuestario sostenible."
+    },
+    {
+      "num": 7,
+      "id": "ref-lfrcf",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Ley de Fiscalización y Rendición de Cuentas de la Federación [LFRCF]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Última reforma publicada el 20 de mayo de 2021. Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
+      "descripcion": "Otorga facultades a la Auditoría Superior de la Federación (ASF) para auditar en tiempo real y posterior la Cuenta Pública de los tres Poderes de la Unión, los Ramos 28 y 33 en las 32 entidades, y emitir Pliegos de Observaciones."
+    },
+    {
+      "num": 8,
+      "id": "ref-lbm",
+      "categoria": "banca_central",
+      "categoria_nombre": "Banca Central y Mercado de Dinero",
+      "cita_apa": "Ley del Banco de México [LBM]. Diario Oficial de la Federación, 23 de diciembre de 1993 (México). Última reforma publicada el 10 de enero de 2014. Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/74.pdf",
+      "descripcion": "Establece la autonomía del Banco Central, sus funciones de agente colocador de deuda del gobierno federal, regulador de sistemas de pago y administrador de la cuenta general de la TESOFE."
+    },
+    {
+      "num": 9,
+      "id": "ref-cff",
+      "categoria": "tributario",
+      "categoria_nombre": "Marco Tributario y Fiscal",
+      "cita_apa": "Código Fiscal de la Federación [CFF]. Diario Oficial de la Federación, 31 de diciembre de 1981 (México). Última reforma publicada el 9 de abril de 2026. Artículo 69-B (operaciones inexistentes y factureras).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+      "descripcion": "Regula las facultades de comprobación del SAT, infracciones fiscales, delitos y el listado de Empresas que Facturan Operaciones Simuladas (EFOS)."
+    },
+    {
+      "num": 10,
+      "id": "ref-lif2026",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026 [LIF 2026]. Diario Oficial de la Federación, 7 de noviembre de 2025 (México). Cámara de Diputados y Senado de la República.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "descripcion": "Establece los conceptos e importes que el gobierno federal recaudará en el ejercicio fiscal (ingresos tributarios, no tributarios, hidrocarburos y techo de endeudamiento neto)."
+    },
+    {
+      "num": 11,
+      "id": "ref-pef2026",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf",
+      "descripcion": "Decreto emitido en exclusiva por la Cámara de Diputados que aprueba el gasto público de $10.19 billones de pesos, asignando partidas por ramo, programas de trabajo y gasto federalizado."
+    },
+    {
+      "num": 12,
+      "id": "ref-lgcg",
+      "categoria": "contabilidad_gubernamental",
+      "categoria_nombre": "Contabilidad y Armonización",
+      "cita_apa": "Ley General de Contabilidad Gubernamental [LGCG]. Diario Oficial de la Federación, 31 de diciembre de 2008 (México). Última reforma publicada el 30 de enero de 2018. Consejo Nacional de Armonización Contable (CONAC).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf",
+      "descripcion": "Obliga a los tres órdenes de gobierno (Federación, Estados y Municipios) a emitir información patrimonial y presupuestaria en tiempo real bajo criterios y clasificadores contables homogéneos."
+    },
+    {
+      "num": 13,
+      "id": "ref-laassp",
+      "categoria": "adquisiciones_compras",
+      "categoria_nombre": "Compras Públicas y Contrataciones",
+      "cita_apa": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público [LAASSP]. Diario Oficial de la Federación, 16 de abril de 2025 (México). Cámara de Diputados. Abroga la ley del 4 de enero de 2000. En la misma fecha se publicaron reformas a la Ley de Obras Públicas y Servicios Relacionados con las Mismas.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAASSP.pdf",
+      "descripcion": "Norma el procedimiento de licitaciones públicas, compraventa y adquisición de insumos del Estado, y acota las adjudicaciones directas y las invitaciones restringidas. El marco vigente desde el 16 de abril de 2025 sustituyó por completo a la ley del año 2000 e introdujo un Sistema Nacional de Contrataciones Públicas con una plataforma digital única en la que las propuestas y los contratos se firman electrónicamente, pensada para dejar rastro de cada modificación contractual."
+    },
+    {
+      "num": 14,
+      "id": "ref-asf-cp",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Auditoría Superior de la Federación. (2025). Informes Individuales y General del Resultado de la Fiscalización Superior de la Cuenta Pública 2024. Cámara de Diputados.",
+      "url": "https://www.asf.gob.mx/",
+      "descripcion": "Repositorio oficial con los 2,100 pliegos de auditoría practicados al gasto federalizado, dependencias centralizadas y empresas productivas del Estado."
+    },
+    {
+      "num": 15,
+      "id": "ref-shcp-alertas",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Sistema de Alertas de las Entidades Federativas y Municipios. Unidad de Coordinación con Entidades Federativas (UCEF).",
+      "url": "https://www.disciplinafinanciera.hacienda.gob.mx/",
+      "descripcion": "Evaluación trimestral de la deuda subnacional de los 32 estados y municipios deudores con clasificación semafórica de sostenibilidad."
+    },
+    {
+      "num": 16,
+      "id": "ref-banxico-sie",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Banco de México. (2026). Sistema de Información Económica (SIE): Resultados de las subastas de valores gubernamentales (CETES, Bonos M, Udibonos, Bondes F) y Tasa de Interés Interbancaria de Equilibrio (TIIE).",
+      "url": "https://www.banxico.org.mx/SieInternet/",
+      "descripcion": "Base de datos histórica de tasas de colocación de deuda federal soberana, saldos en circulación y operaciones monetarias del banco central."
+    },
+    {
+      "num": 17,
+      "id": "ref-imco-iipe",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Instituto Mexicano para la Competitividad A.C. (2025). Índice de Información Presupuestal Estatal y Municipal: Diagnóstico del desvío, la opacidad y el gasto en congresos locales.",
+      "url": "https://imco.org.mx/finanzas-publicas/",
+      "descripcion": "Estudio independiente sobre calidad del gasto, costos por legislador local en los 32 congresos y debilidad de recaudación del impuesto predial."
+    },
+    {
+      "num": 18,
+      "id": "ref-ciep-transf",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Centro de Investigación Económica y Presupuestaria. (2025). Análisis del Gasto Federalizado en el PEF: Evolución del Ramo 28 y Ramo 33 y la dependencia presupuestal de los estados.",
+      "url": "https://ciep.mx/",
+      "descripcion": "Investigación académica y fiscal sobre equidad distributiva de las transferencias federales hacia las regiones del país."
+    },
+    {
+      "num": 19,
+      "id": "ref-reforma-judicial",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Presidencia de la República. (2024, 15 de septiembre). Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de reforma del Poder Judicial. Diario Oficial de la Federación (México).",
+      "url": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "descripcion": "Reforma constitucional estructural que reduce el Pleno de la SCJN de 11 a 9 ministros; extingue las dos Salas colegiadas para sesionar únicamente en Pleno; mandata la elección por sufragio popular directo de ministros, magistrados y jueces (iniciando el 1 de junio de 2025); extingue al Consejo de la Judicatura Federal para sustituirlo por el Tribunal de Disciplina Judicial (TDJ) y el Órgano de Administración Judicial (OAJ); ordena la extinción de los 13 fideicomisos fiduciarios con reintegro a la TESOFE; e impone el tope salarial estricto del Artículo 127 Constitucional."
+    },
+    {
+      "num": 20,
+      "id": "ref-cpeum-art127",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Congreso de la Unión. (2024). Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (última reforma publicada el 15 de septiembre de 2024). Artículos 127 (fracciones I a VI) y 94 (párrafo décimo).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "descripcion": "Principio supremo de remuneración máxima que prohíbe a cualquier persona servidora pública percibir ingresos mayores a los del Presidente de la República ($134,310 pesos netos / $191,657 pesos brutos al mes). Pone fin a los sueldos tabulares previos de ministros que alcanzaban $206,948 netos ($297,404 brutos), vedando bonos discrecionales, pago de seguros médicos privados y seguros de separación con cargo a fondos públicos."
+    },
+    {
+      "num": 21,
+      "id": "ref-pef-ramo03",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Cámara de Diputados. (2024–2026). Presupuesto de Egresos de la Federación: Tomo VII, Ramo 03 'Poder Judicial de la Federación' (SCJN, CJF, TEPJF). Secretaría de Hacienda y Crédito Público (SHCP).",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/",
+      "descripcion": "Asignación presupuestaria histórica consolidada del Ramo 03 ($78,327 millones de pesos aprobados), de los cuales la Suprema Corte de Justicia de la Nación ejerce directamente cerca de $5,900 millones anuales. Documenta que el 80.2% del presupuesto del Poder Judicial se concentra en el Capítulo 1000 (Servicios Personales), con un costo consolidado anual de $376.2 millones de pesos para las 11 ponencias (~$34.2 mdp anuales por ministro ponente), proyectado a reducirse a ~$216 mdp anuales con el nuevo Pleno austero de 9 ministros."
+    },
+    {
+      "num": 22,
+      "id": "ref-manual-remun-pjf",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación, & Consejo de la Judicatura Federal. (2024–2025). Manual que regula las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación. Diario Oficial de la Federación (México).",
+      "url": "https://www.dof.gob.mx/",
+      "descripcion": "Tabulador oficial institucional que desglosa sueldos base, compensaciones garantizadas y el paquete de compensaciones extraordinarias complementario, estimado en más de $1.7 millones de pesos anuales por ministro por encima del salario tabular. Incluye el Seguro de Separación Individualizado (SSI de hasta 10% del sueldo con aportación idéntica del erario), Seguro de Gastos Médicos Mayores (SGMM con pólizas privadas de $30 a $50 mdp), aguinaldo y asignación de vehículos blindados de alta gama."
+    },
+    {
+      "num": 23,
+      "id": "ref-asf-fideicomisos-pjf",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Auditoría Superior de la Federación. (2023–2025). Auditoría Financiera y de Cumplimiento a los Fideicomisos y Fondos del Poder Judicial de la Federación: Cuentas Públicas 2018–2023. Informes Individuales de Fiscalización. Cámara de Diputados.",
+      "url": "https://www.asf.gob.mx/",
+      "descripcion": "Dictamen de fiscalización superior que documentó la acumulación de $15,434 millones de pesos en 13 fideicomisos fiduciarios del PJF en Nacional Financiera (Nafin) nutridos por subejercicios presupuestales anuales no devengados. Dictaminó que dichos recursos no comprometidos debieron reintegrarse a la Tesorería de la Federación conforme al Artículo 54 de la LFPRH, ordenando su extinción definitiva conforme a los decretos de reforma constitucional."
+    },
+    {
+      "num": 24,
+      "id": "ref-scjn-conoce-corte",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2025). Portal Institucional Conoce la Corte: Directorio de Ministras y Ministros del Pleno, Estructura Orgánica, Salas Jurisdiccionales y Semblanzas Curriculares Oficiales. SCJN.",
+      "url": "https://www.scjn.gob.mx/conoce-la-corte",
+      "descripcion": "Directorio oficial con las semblanzas curriculares, trayectoria jurisdiccional, grados académicos y adscripción a Salas (Primera Sala Civil/Penal y Segunda Sala Administrativa/Laboral). Incluye el seguimiento a las renuncias con efectos al 31 de agosto de 2025, el pase de ministras en funciones a la boleta electoral de junio de 2025 y la transición a la Presidencia electa del máximo tribunal."
+    },
+    {
+      "num": 25,
+      "id": "ref-pnt-asesores-scjn",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Plataforma Nacional de Transparencia (PNT), & Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales. (2024–2025). Sistema de Portales de Obligaciones de Transparencia (SIPOT): Estructura Orgánica, Padrón de Personal Técnico y Contratos de Honorarios Asimilados del Ramo 03 (SCJN). Obligaciones del Artículo 70 Fracciones VIII y XI (LGTAIP).",
+      "url": "https://www.plataformadetransparencia.org.mx/",
+      "descripcion": "Auditoría ciudadana y registros oficiales de transparencia que documentan la conformación de los despachos de ministros. Constata un organigrama nuclear de 32 a 38 plazas directas por ponencia (con promedio de 14 secretarios proyectistas de estudio y cuenta) y una red ampliada que rebasó los 70 colaboradores por ministro a través de comisiones técnicas, asesores externos y contratos de servicios profesionales por honorarios asimilados (Capítulo 3000), elevando el costo real de operación por despacho a entre $35 y $42 millones de pesos anuales."
+    },
+    {
+      "num": 26,
+      "id": "ref-ciep-pjf",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Centro de Investigación Económica y Presupuestaria. (2024). El Presupuesto del Poder Judicial de la Federación: Análisis de su Evolución Histórica, Costo por Juzgador y Masa Salarial de Mandos Superiores. CIEP.",
+      "url": "https://ciep.mx/",
+      "descripcion": "Investigación económica independiente que evalúa el crecimiento del gasto judicial en México en la última década, analizando la nómina de 54,500 plazas en tribunales y juzgados, el impacto del Capítulo 1000 en el balance del erario nacional y el elevado costo por juzgador frente a estándares internacionales de la OCDE y América Latina."
+    },
+    {
+      "num": 27,
+      "id": "ref-garcia-luna-edny",
+      "categoria": "internacional",
+      "categoria_nombre": "Internacional & Cortes EE. UU.",
+      "cita_apa": "United States District Court for the Eastern District of New York. (2020–2024). United States v. Genaro Garcia Luna (Criminal Docket No. 1:19-cr-00576-BMC). Brooklyn, NY: Federal Judicial Center / CourtListener PACER Records.",
+      "url": "https://www.courtlistener.com/docket/16559363/united-states-v-garcia-luna/",
+      "descripcion": "Expediente judicial federal radicado ante el Juez Brian M. Cogan en la Corte de Distrito Este de Nueva York. Contiene el pliego acusatorio (indictment), transcripciones taquigráficas de las audiencias testimoniales de exoperadores delictivos cooperantes, minutas de evidencia admitida (exhibits), mociones sobre la ausencia de rastro financiero directo incautado en cuentas bancarias a su nombre, y la sentencia dictada el 16 de octubre de 2024 a más de 38 años de prisión y $2 mdd de multa."
+    },
+    {
+      "num": 28,
+      "id": "ref-lamparo",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos. Diario Oficial de la Federación, 2 de abril de 2013 (México). Títulos Primero a Cuarto.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
+      "descripcion": "Ordenamiento que regula el juicio de amparo, el medio de defensa por el que cualquier persona puede reclamar ante un juez federal actos de autoridad que violen sus derechos. Su Título Cuarto fija las reglas de formación, interrupción y sustitución de la jurisprudencia, determinantes para saber qué criterios de las Salas suprimidas en 2025 siguen siendo obligatorios."
+    },
+    {
+      "num": 29,
+      "id": "ref-lgra",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Ley General de Responsabilidades Administrativas [LGRA]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Artículos 3, 49 a 64 y 108 a 115.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf",
+      "descripcion": "Norma que define las faltas administrativas graves y no graves de las personas servidoras públicas, la obligación de presentar las declaraciones patrimonial, de intereses y fiscal, y el concepto de conflicto de interés. Es el vínculo entre un hallazgo de auditoría y una sanción efectiva."
+    },
+    {
+      "num": 30,
+      "id": "ref-lgtaip",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Ley General de Transparencia y Acceso a la Información Pública [LGTAIP]. Diario Oficial de la Federación, 4 de mayo de 2015 (México). Artículos 70 a 83.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf",
+      "descripcion": "Establece las obligaciones de transparencia que todos los sujetos obligados deben publicar de oficio, incluidos presupuesto asignado y ejercido, remuneraciones, contrataciones y resultados de auditorías, así como el mandato de difundirlas en formatos de datos abiertos que permitan su procesamiento."
+    },
+    {
+      "num": 31,
+      "id": "ref-lgipe",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Instituciones y Procedimientos Electorales [LGIPE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Artículos 98, 126 a 148, 243 y 445.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf",
+      "descripcion": "Regula la integración del padrón electoral y de la lista nominal, la naturaleza y el financiamiento de los Organismos Públicos Locales Electorales, los topes de gastos de campaña y las causales de nulidad por rebase. Es la base normativa para auditar el costo de cualquier proceso electoral, incluido el judicial."
+    },
+    {
+      "num": 32,
+      "id": "ref-inegi-cuentas",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Sistema de Cuentas Nacionales de México e Índice Nacional de Precios al Consumidor. Banco de Información Económica (BIE).",
+      "url": "https://www.inegi.org.mx/temas/pib/",
+      "descripcion": "Fuente oficial del Producto Interno Bruto y del Índice Nacional de Precios al Consumidor, así como del valor anual de la Unidad de Medida y Actualización. Es el insumo obligado para expresar el gasto y la deuda como porcentaje del PIB y para deflactar cifras de distintos años a pesos constantes."
+    },
+    {
+      "num": 47,
+      "id": "ref-inegi-ceem",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Cuentas Económicas y Ecológicas de México (CEEM). Sistema de Cuentas Nacionales de México. INEGI.",
+      "url": "https://www.inegi.org.mx/temas/ee/",
+      "descripcion": "Programa estadístico con el que el INEGI mide, en pesos, cuánto capital natural se agota y cuánto se degrada el entorno para producir el PIB. Es la respuesta contable al mandato de desarrollo sustentable de los artículos 25 y 27 constitucionales, y la fuente del Producto Interno Neto Ecológico (PINE) y de los Costos Totales por Agotamiento y Degradación Ambiental (CTADA)."
+    },
+    {
+      "num": 48,
+      "id": "ref-ceem-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf",
+      "descripcion": "Edición 2024 de las cuentas verdes, publicada el 1 de diciembre de 2025. Reporta un Producto Interno Neto Ecológico de 25.7 billones de pesos, equivalente a 76.6% del PIB, y costos totales por agotamiento y degradación ambiental de $1,382,214 millones de pesos, es decir 4.1% del PIB. Es la fuente de todas las cifras ambientales que esta plataforma presenta."
+    },
+    {
+      "num": 49,
+      "id": "ref-inegi-pib-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Producto Interno Bruto por Entidad Federativa (PIBE) 2024. Comunicado de prensa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf",
+      "descripcion": "Fuente del PIB nacional a precios de mercado de 2024: $33,506,847 millones de pesos corrientes. Es el denominador contra el que se calculan todos los porcentajes ambientales, de deuda y de gasto que esta plataforma expresa como proporción del PIB."
+    },
+    {
+      "num": 50,
+      "id": "ref-ley-planeacion",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley de Planeación. Diario Oficial de la Federación, 5 de enero de 1983, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPlan.pdf",
+      "descripcion": "Ley reglamentaria del artículo 26 constitucional. Define el Sistema Nacional de Planeación Democrática, el procedimiento de consulta popular, el plazo para publicar el Plan Nacional de Desarrollo y la regla que separa lo obligatorio para la Administración Pública Federal de lo meramente indicativo para los particulares."
+    },
+    {
+      "num": 51,
+      "id": "ref-lgeepa",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General del Equilibrio Ecológico y la Protección al Ambiente. Diario Oficial de la Federación, 28 de enero de 1988, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf",
+      "descripcion": "Norma que aterriza el mandato de sustentabilidad del artículo 27 constitucional. Regula la evaluación del impacto ambiental, las áreas naturales protegidas y los instrumentos económicos de política ambiental. Es el fundamento de la Manifestación de Impacto Ambiental (MIA), que la autoridad puede negar cuando una obra compromete la capacidad de carga de una región."
+    },
+    {
+      "num": 52,
+      "id": "ref-lisr",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Impuesto Sobre la Renta. Diario Oficial de la Federación, 11 de diciembre de 2013, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
+      "descripcion": "Ley que regula el impuesto directo sobre el ingreso de personas físicas y morales. Es la mayor fuente tributaria del Estado mexicano: $3,070,149.1 mdp estimados para 2026, el 52.6 % de todos los impuestos. Su base es la utilidad fiscal, no el ingreso bruto, de modo que deducciones y estímulos inciden directamente en lo recaudado."
+    },
+    {
+      "num": 53,
+      "id": "ref-liva",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Impuesto al Valor Agregado. Diario Oficial de la Federación, 29 de diciembre de 1978, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/liva.htm",
+      "descripcion": "Ley del impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % para alimentos y medicinas y actos exentos. Funciona por traslado y acreditamiento: cada eslabón entera el impuesto sobre el valor que añade y el consumidor final lo soporta íntegro. Estimado en $1,589,069.0 mdp para 2026."
+    },
+    {
+      "num": 54,
+      "id": "ref-lieps",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Impuesto Especial sobre Producción y Servicios. Diario Oficial de la Federación, 30 de diciembre de 1980, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm",
+      "descripcion": "Ley del impuesto con fin extrafiscal sobre consumos específicos: combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones. Estimado en $761,501.9 mdp para 2026, de los cuales $473,279.1 corresponden a combustibles automotrices."
+    },
+    {
+      "num": 55,
+      "id": "ref-ligie",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de los Impuestos Generales de Importación y de Exportación. Diario Oficial de la Federación, 7 de junio de 2022, última reforma vigente (México). Cámara de Diputados. En relación con la Ley Aduanera y el artículo 131 constitucional.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/ligie_2022.htm",
+      "descripcion": "Tarifa arancelaria de México, organizada por fracciones del Sistema Armonizado. Es el único gravamen cuyas tasas puede modificar el Ejecutivo por decreto, conforme al artículo 131 constitucional, con aprobación posterior del Congreso. En 2026 se estiman $254,756.8 mdp, todos por importación: la exportación se presupuesta en cero."
+    },
+    {
+      "num": 56,
+      "id": "ref-lfisan",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley Federal del Impuesto sobre Automóviles Nuevos. Diario Oficial de la Federación, 30 de diciembre de 1996, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfisan.htm",
+      "descripcion": "Impuesto federal sobre la enajenación de automóviles nuevos y su importación definitiva. Es de administración estatal: las entidades lo recaudan y conservan su rendimiento por convenio de colaboración en el marco de la Ley de Coordinación Fiscal. Estimado en $20,161.8 mdp para 2026."
+    },
+    {
+      "num": 57,
+      "id": "ref-lih",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de Ingresos sobre Hidrocarburos, artículos 55 a 57. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lih.htm",
+      "descripcion": "Régimen fiscal de la actividad petrolera. Sus artículos 55 a 57 establecen el impuesto por la actividad de exploración y extracción de hidrocarburos, que se calcula por kilómetro cuadrado de área contractual o de asignación y cuya cuota se eleva pasados sesenta meses sin producción. Estimado en $7,070.4 mdp para 2026."
+    },
+    {
+      "num": 58,
+      "id": "ref-lss",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Seguro Social. Diario Oficial de la Federación, 21 de diciembre de 1995, última reforma vigente (México). Cámara de Diputados. En relación con la Ley del ISSSTE (DOF 31 de marzo de 2007).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss.htm",
+      "descripcion": "Régimen de las cuotas obrero-patronales que financian las prestaciones del IMSS. Junto con las del ISSSTE constituyen las aportaciones de seguridad social del artículo 2º fracción II del Código Fiscal: contribuciones con destino específico, que no integran la Recaudación Federal Participable y por tanto no se reparten a estados y municipios. Estimadas en $641,782.1 mdp para 2026."
+    },
+    {
+      "num": 59,
+      "id": "ref-lcmopfih",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica. Diario Oficial de la Federación, 26 de diciembre de 1990, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lcmopfih.htm",
+      "descripcion": "Única ley vigente de contribución de mejoras en el ámbito federal. Grava a quienes se benefician de manera directa de obras públicas de infraestructura hidráulica, conforme al principio de beneficio del artículo 2º fracción III del Código Fiscal. Con $39.6 mdp estimados para 2026 es la partida más pequeña de toda la Ley de Ingresos."
+    },
+    {
+      "num": 60,
+      "id": "ref-lfd",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley Federal de Derechos. Diario Oficial de la Federación, 31 de diciembre de 1981, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
+      "descripcion": "Catálogo de los derechos federales: pagos por servicios que presta el Estado en funciones de derecho público y por el uso o aprovechamiento de bienes del dominio de la Nación —agua, espectro radioeléctrico, zona federal, puertos—. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio; si lo excede, el derecho se convierte en un impuesto encubierto. Estimados en $157,081.7 mdp para 2026."
+    },
+    {
+      "num": 61,
+      "id": "ref-lepe",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de la Empresa Pública del Estado, Petróleos Mexicanos, y Ley de la Empresa Pública del Estado, Comisión Federal de Electricidad. Diario Oficial de la Federación, 18 de marzo de 2025 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lepepm.htm",
+      "descripcion": "Leyes que rigen a Pemex y a la CFE tras la reforma energética de 2024-2025. El cambio no es de nombre: dejan de ser «empresas productivas del Estado», figura creada en 2013 con lógica de competencia, para volverse «empresas públicas del Estado», con el Estado como rector del sector. Sus ingresos propios suman $1,507,154.4 mdp estimados para 2026."
+    },
+    {
+      "num": 62,
+      "id": "ref-lfmped",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm",
+      "descripcion": "Fideicomiso público en el Banco de México, previsto en el párrafo sexto del artículo 28 constitucional, que recibe la renta petrolera del Estado y la transfiere al presupuesto hasta un tope de 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Para 2026 se presupuestan $232,630.4 mdp de transferencias ordinarias y cero extraordinarias."
+    }
+  ],
   "preguntas_casillas": [
     {
       "casilla_id": "c-finanzas-basicas",

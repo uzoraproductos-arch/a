@@ -59,8 +59,13 @@
        cero y solo se contabilizan a peticion, con los dos mandos de
        siempre: contabilizar y reiniciar a ceros. */
     erarioTotalContado: false,
-    erarioIngContado: false,
-    erarioEgrContado: false,
+    /* Una marca por grafica de barras de la pestana 1: de donde sale, en
+       que se va, lo que baja al territorio y lo que llega al municipio.
+       Cada una nace en ceros y sube cuando alguien lo pide. */
+    barrasContado: { ingresos: false, egresos: false, federalizado: false, municipal: false },
+    /* Las dos zonas que dependen de la entidad elegida y no de un
+       catalogo fijo: el circuito del estado y la reja de sus municipios. */
+    zonaContado: { entidad: false, munent: false },
     simRankHover: false,
     simRankUniverso: false,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
@@ -1883,6 +1888,8 @@
         }
       } else if (subKey === 'territorio') {
         renderTerritorioErario();
+      } else if (subKey === 'municipios') {
+        renderMunicipioErario();
       } else if (subKey === 'constitucion') {
         renderConstitucionEconomica();
       }
@@ -2200,6 +2207,11 @@
     'fd-clave', 'fd-efecto-k', 'fdc-nom', 'fdc-monto', 'fdc-pct', 'fdc-det',
     'fd-enlace', 'fd-enlace-glos', 'fd-enlace-ref', 'fd-enlace-n',
     'ecz-clave', 'ecz-nom', 'ecz-monto', 'fdc-pie',
+    /* Rotulos y cifras de la 1.2 y la 1.3: son datos, no prosa, y una
+       nota al pie dentro de una cifra que cuenta la parte en dos. */
+    'fdr-nom', 'fdr-val', 'fdr-det', 'mpf-clave', 'mpf-nom', 'mpf-mas',
+    'ec-nom', 'ec-val', 'ec-rk', 'ec-rv', 'ec-dep-num', 'ec-dep-lab', 'ec-sub',
+    'mun-part', 'mun-alcalde', 'mun-dep-lab', 'mun-dep-num', 'mun-cifras',
     'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
     'fed-monto', 'fed-pct', 'ec-nom', 'ec-val', 'ec-rk', 'ec-rv',
     'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
@@ -2365,12 +2377,75 @@
   const PANORAMA = (DB && DB.panoramaErario) ? DB.panoramaErario : null;
 
   let etapaCircuitoSel = null;
-  let itemIngresoSel = null;
-  let itemEgresoSel = null;
   let entidadCircuitoSel = null;
 
+  /* ====================================================================
+     UNA SOLA MAQUINARIA PARA LAS CUATRO GRAFICAS DE LA PESTANA 1
+
+     La 1.1 estreno el patron: barras que nacen en ceros, dos mandos
+     —contabilizar y reiniciar— y una ficha lateral por renglon con su
+     fundamento, su efecto juridico y su desglose. Al replicarlo en la
+     1.2 y en la 1.3 habria hecho falta triplicar ciento veinte lineas,
+     y con ellas el riesgo de que las tres versiones se separaran. El
+     registro dice, para cada grafica, de donde salen sus renglones, que
+     rotulo lleva su ficha y de que color van sus barras; el resto del
+     codigo es el mismo para todas.
+     ==================================================================== */
+  const FICHA_CTX = {
+    ingresos: {
+      kicker: 'De d\u00f3nde sale \u00b7 Ley de Ingresos 2026',
+      campo: 'quePaga', verbo: 'grava', color: 'ing',
+      chart: 'ingresosChart', pista: 'ingresosDetalle', mandos: 'ingresosMandos',
+      sello: 'ORIGEN DEL INGRESO',
+      datos: () => (PANORAMA ? PANORAMA.ingresos : []),
+      alerta: d => d.id === 'ing-deuda' || d.grupo === 'No programable'
+    },
+    egresos: {
+      kicker: 'En qu\u00e9 se va \u00b7 Presupuesto de Egresos 2026',
+      campo: 'queCubre', verbo: 'cubre', color: 'egr',
+      chart: 'egresosChart', pista: 'egresosDetalle', mandos: 'egresosMandos',
+      sello: 'DESTINO DEL GASTO',
+      datos: () => (PANORAMA ? PANORAMA.egresos : []),
+      alerta: d => d.id === 'ing-deuda' || d.grupo === 'No programable'
+    },
+    federalizado: {
+      kicker: 'Lo que baja al territorio \u00b7 Presupuesto de Egresos 2026',
+      campo: 'queEs', verbo: 'financia', color: 'fed',
+      chart: 'federalizadoChart', pista: 'federalizadoPista', mandos: 'federalizadoMandos',
+      sello: 'GASTO FEDERALIZADO',
+      datos: () => (PANORAMA ? PANORAMA.federalizado.componentes : []),
+      /* Aqui el aviso no es la deuda sino la cifra que nadie publica
+         renglon por renglon: el residuo de convenios. */
+      alerta: d => d.estado === 'derivado'
+    },
+    municipal: {
+      kicker: 'Lo que llega al municipio \u00b7 Presupuesto de Egresos 2026',
+      campo: 'queEs', verbo: 'financia', color: 'mun',
+      chart: 'municipalChart', pista: 'municipalPista', mandos: 'municipalMandos',
+      sello: 'APORTACIONES MUNICIPALES',
+      datos: () => (PANORAMA && PANORAMA.municipal ? PANORAMA.municipal.fuentes : []),
+      alerta: () => false
+    },
+    munpropios: {
+      kicker: 'Lo que el municipio cobra por su cuenta \u00b7 Art\u00edculo 115 constitucional',
+      campo: 'queEs', verbo: 'cobra', color: 'mun',
+      chart: 'munPropiosGrid', pista: null, mandos: null,
+      sinBarras: true,
+      datos: () => (PANORAMA && PANORAMA.municipal ? PANORAMA.municipal.propios : []),
+      alerta: () => false
+    }
+  };
+
+  const fichaSel = {
+    ingresos: null, egresos: null, federalizado: null, municipal: null, munpropios: null
+  };
+
   function chipEstado(estado) {
-    const texto = estado === 'oficial' ? 'oficial' : 'derivado';
+    /* Tres estados y no dos: hay cifras que la fuente oficial publica,
+       cifras que esta plataforma deriva y datos que sencillamente no
+       estan publicados. Llamar «derivado» al tercero seria fingir que
+       existe un calculo detras. */
+    const texto = (estado === 'oficial' || estado === 'pendiente') ? estado : 'derivado';
     return '<span class="est-chip est-' + texto + '">' + texto + '</span>';
   }
 
@@ -2457,47 +2532,50 @@
     renderErarioTotalMandos();
   }
 
-  // --- Barras de ingresos y egresos -----------------------------------------
-  function renderFlujo(tipo, abrirFicha) {
-    if (!PANORAMA) return;
-    const esIngreso = tipo === 'ingresos';
-    const datos = esIngreso ? PANORAMA.ingresos : PANORAMA.egresos;
-    const cont = document.getElementById(esIngreso ? 'ingresosChart' : 'egresosChart');
-    if (!cont) return;
-    const sel = esIngreso ? itemIngresoSel : itemEgresoSel;
-    const total = datos.reduce((a, b) => a + b.montoMdp, 0);
-    const maxVal = Math.max.apply(null, datos.map(d => d.montoMdp));
+  // --- Grafica de barras, la misma para las cuatro vistas --------------------
+  function renderBarras(ctx, abrirFicha) {
+    const cfg = FICHA_CTX[ctx];
+    if (!cfg || !PANORAMA) return;
+    const datos = cfg.datos();
+    const cont = document.getElementById(cfg.chart);
+    if (!cont || !datos.length) return;
+    const sel = fichaSel[ctx];
+    const total = datos.reduce((a, b) => a + (b.montoMdp || 0), 0);
+    const maxVal = Math.max.apply(null, datos.map(d => d.montoMdp || 0));
 
     let grupoPrevio = null;
     cont.innerHTML = datos.map(d => {
       let cabecera = '';
       if (d.grupo !== grupoPrevio) {
         grupoPrevio = d.grupo;
-        const subtotal = datos.filter(x => x.grupo === d.grupo).reduce((a, b) => a + b.montoMdp, 0);
+        const subtotal = datos.filter(x => x.grupo === d.grupo).reduce((a, b) => a + (b.montoMdp || 0), 0);
         cabecera = `<div class="fc-grupo"><span>${d.grupo}</span>
                       <span class="fc-grupo-monto"><span data-anim-v="${subtotal}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
-                        · <span data-anim-v="${pctDe(subtotal, total)}" data-anim-f="pct">0.0%</span></span>
+                        \u00b7 <span data-anim-v="${pctDe(subtotal, total)}" data-anim-f="pct">0.0%</span></span>
                     </div>`;
       }
-      const pct = pctDe(d.montoMdp, total);
+      const pct = pctDe(d.montoMdp || 0, total);
       return cabecera + `
         <button type="button" class="fc-fila${sel === d.id ? ' active' : ''}" role="listitem"
                 data-id="${d.id}" aria-expanded="${sel === d.id}"
-                onclick="window.AuditEngine.selectFlujoItem('${tipo}','${d.id}')"
-                aria-label="${d.nombre}: ${formatMoneyMdp(d.montoMdp)}">
+                onclick="window.AuditEngine.selectFlujoItem('${ctx}','${d.id}')"
+                aria-label="${d.nombre}: ${formatMoneyMdp(d.montoMdp || 0)}">
           <span class="fc-ico" aria-hidden="true">${d.icono}</span>
           <span class="fc-nom">${d.nombre}</span>
-          <span class="fc-barra"><span class="fc-relleno ${esIngreso ? 'ing' : 'egr'}${d.id === 'ing-deuda' || d.grupo === 'No programable' ? ' alerta' : ''}"
-                data-anim-w="${(d.montoMdp / maxVal * 100).toFixed(2)}" style="width:0%"></span></span>
-          <span class="fc-monto" data-anim-v="${d.montoMdp}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
+          <span class="fc-barra"><span class="fc-relleno ${cfg.color}${cfg.alerta(d) ? ' alerta' : ''}"
+                data-anim-w="${maxVal ? ((d.montoMdp || 0) / maxVal * 100).toFixed(2) : 0}" style="width:0%"></span></span>
+          <span class="fc-monto" data-anim-v="${d.montoMdp || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
           <span class="fc-pct" data-anim-v="${pct}" data-anim-f="pct">0.0%</span>
         </button>`;
     }).join('');
-    erarioSincronizarZona(cont, 'flujo-' + tipo,
-      esIngreso ? state.erarioIngContado : state.erarioEgrContado);
-    renderFlujoMandos(tipo);
-    renderFlujoDetalle(tipo, abrirFicha);
+    erarioSincronizarZona(cont, 'barras-' + ctx, !!state.barrasContado[ctx]);
+    renderBarrasMandos(ctx);
+    renderFicha(ctx, abrirFicha);
   }
+
+  /* La 1.1 sigue llamandose por su nombre: es la unica grafica cuyo
+     re-dibujo depende tambien de sus rotulos derivados. */
+  function renderFlujo(tipo, abrirFicha) { renderBarras(tipo, abrirFicha); }
 
   /* ====================================================================
      LA FICHA DE CADA RENGLON, EN VENTANA LATERAL
@@ -2581,32 +2659,37 @@
     /* Al cerrar, el renglon deja de estar encendido: una barra marcada
        como activa sin ficha a la vista mentiria sobre el estado de la
        pantalla. */
-    const tipo = flujoFichaTipo;
-    const id = tipo === 'ingresos' ? itemIngresoSel : itemEgresoSel;
-    itemIngresoSel = null;
-    itemEgresoSel = null;
+    const ctx = flujoFichaTipo;
+    const id = ctx ? fichaSel[ctx] : null;
+    Object.keys(fichaSel).forEach(k => { fichaSel[k] = null; });
     flujoFichaTipo = null;
-    if (!tipo) return;
-    renderFlujo(tipo);
+    if (!ctx) return;
+    redibujarVista(ctx);
     if (devolverFoco === false) return;
-    const fila = document.querySelector('#' + (tipo === 'ingresos' ? 'ingresosChart' : 'egresosChart') +
-      ' .fc-fila[data-id="' + id + '"]');
+    const cfg = FICHA_CTX[ctx];
+    const fila = document.querySelector('#' + cfg.chart + ' [data-id="' + id + '"]');
     if (fila) { try { fila.focus({ preventScroll: true }); } catch (e) { fila.focus(); } }
   }
 
-  function renderFlujoDetalle(tipo, abrir) {
-    if (!PANORAMA) return;
-    const esIngreso = tipo === 'ingresos';
-    const pista = document.getElementById(esIngreso ? 'ingresosDetalle' : 'egresosDetalle');
-    const sel = esIngreso ? itemIngresoSel : itemEgresoSel;
-    const datos = esIngreso ? PANORAMA.ingresos : PANORAMA.egresos;
-    const d = datos.find(x => x.id === sel);
+  /* Cada vista se repinta por su propia via: la 1.1 arrastra rotulos
+     derivados, la 1.3 tiene una reja de fichas en vez de barras. */
+  function redibujarVista(ctx, abrir) {
+    if (ctx === 'munpropios') renderMunPropios(abrir);
+    else renderBarras(ctx, abrir);
+  }
+
+  function renderFicha(ctx, abrir) {
+    const cfg = FICHA_CTX[ctx];
+    if (!cfg || !PANORAMA) return;
+    const pista = cfg.pista ? document.getElementById(cfg.pista) : null;
+    const sel = fichaSel[ctx];
+    const d = cfg.datos().find(x => x.id === sel);
 
     /* Debajo de la grafica ya no queda la ficha, sino la invitacion a
        abrirla. Ocupa una linea y no se mueve. */
     if (pista) {
       pista.innerHTML = '<p class="cd-vacio">Pulse cualquier rengl\u00f3n para abrir su ficha en una ventana lateral: ' +
-        'qu\u00e9 ' + (esIngreso ? 'grava' : 'cubre') + ', qu\u00e9 ley lo sustenta, qu\u00e9 efecto jur\u00eddico produce ' +
+        'qu\u00e9 ' + cfg.verbo + ', qu\u00e9 ley lo sustenta, qu\u00e9 efecto jur\u00eddico produce ' +
         'y qu\u00e9 incluye por dentro.</p>';
     }
     if (!d) return;
@@ -2633,26 +2716,42 @@
           ${c.d ? '<span class="fdc-det">' + c.d + '</span>' : ''}
         </li>`).join('');
 
+    /* Hay renglones cuyo reparto no lo fija una cifra sino un porcentaje
+       de ley. Se muestran tal cual: no se convierten a pesos, porque
+       convertirlos exigiria una estimacion que nadie ha publicado. */
+    const reglas = (d.reglas || []).map(r => `
+        <li class="fdr-fila">
+          <span class="fdr-nom">${r.n}</span>
+          <span class="fdr-val">${r.v}</span>
+          ${r.d ? '<span class="fdr-det">' + r.d + '</span>' : ''}
+        </li>`).join('');
+
+    const tieneMonto = d.montoMdp !== null && d.montoMdp !== undefined;
+
     p.head.innerHTML = `
       <div class="fd-cab">
-        <div class="drawer-state-tag fd-kicker">${esIngreso ? 'De d\u00f3nde sale \u00b7 Ley de Ingresos 2026' : 'En qu\u00e9 se va \u00b7 Presupuesto de Egresos 2026'}${
-          d.grupo ? ' \u00b7 ' + d.grupo : ''}</div>
+        <div class="drawer-state-tag fd-kicker">${cfg.kicker}${d.grupo ? ' \u00b7 ' + d.grupo : ''}</div>
         <h3 class="drawer-state-name fd-tit" id="flujoFichaTitulo">
           <span class="fd-ico" aria-hidden="true">${d.icono}</span> ${d.nombreLargo || d.nombre}
         </h3>
-        <div class="fd-monto">${formatMdpFijo(d.montoMdp)} <span class="fd-equiv">${formatMoneyMdp(d.montoMdp)}</span> ${chipEstado(d.estado)}${
-          d.claveLIF ? '<span class="fd-clave" title="Clave del concepto en el Art\u00edculo 1\u00ba de la Ley de Ingresos">LIF ' + d.claveLIF + '</span>' : ''}</div>
+        <div class="fd-monto">${tieneMonto
+            ? formatMdpFijo(d.montoMdp) + ' <span class="fd-equiv">' + formatMoneyMdp(d.montoMdp) + '</span> '
+            : '<span class="fd-equiv">Facultad sin cifra nacional publicada</span> '}${chipEstado(d.estado)}${
+          d.claveLIF ? '<span class="fd-clave" title="Clave del concepto en el Art\u00edculo 1\u00ba de la Ley de Ingresos">LIF ' + d.claveLIF + '</span>' : ''}${
+          d.clave ? '<span class="fd-clave" title="De d\u00f3nde sale la cifra o el precepto">' + d.clave + '</span>' : ''}</div>
       </div>
       <button class="drawer-close-btn" onclick="window.AuditEngine.closeFlujoFicha()"
               title="Cerrar ficha (Esc)" aria-label="Cerrar ficha">\u2715</button>`;
 
     p.body.innerHTML = `
-      <p class="fd-txt">${esIngreso ? d.quePaga : d.queCubre}</p>
+      <p class="fd-txt">${d[cfg.campo] || d.quePaga || d.queCubre || d.queEs || ''}</p>
       ${d.efecto ? '<div class="fd-efecto"><span class="fd-efecto-k">Qu\u00e9 efecto jur\u00eddico tiene</span><p>' + d.efecto + '</p></div>' : ''}
       ${d.ley ? '<div class="fd-ley"><span class="cd-lab">Fundamento</span><span class="cd-ley">' + d.ley + '</span></div>' : ''}
       ${comps ? '<div class="fd-comp"><span class="fd-efecto-k">Qu\u00e9 incluye, seg\u00fan la propia ley</span><ul class="fdc-lista">' + comps + '</ul>' +
         (hayNeg ? '<p class="fdc-pie">Las partidas rayadas <b>restan</b>. La barra mide el tama\u00f1o de la cifra, no su direcci\u00f3n.</p>' : '') +
         '</div>' : ''}
+      ${reglas ? '<div class="fd-comp"><span class="fd-efecto-k">C\u00f3mo lo reparte la ley</span><ul class="fdr-lista">' + reglas + '</ul></div>' : ''}
+      ${d.pendiente ? '<div class="fd-pendiente"><span class="fd-efecto-k">Lo que aqu\u00ed falta, y por qu\u00e9</span><p>' + d.pendiente + '</p></div>' : ''}
       ${(d.glos || d.refKey) ? '<div class="fd-enlaces">' +
         (d.glos ? '<button type="button" class="fd-enlace fd-enlace-glos" onclick="window.AuditEngine.goToGlossary(' + JSON.stringify(d.glos).replace(/"/g, '&quot;') + ')">\ud83d\udcd6 Qu\u00e9 significa: <b>' + d.glos + '</b></button>' : '') +
         (d.refKey ? '<button type="button" class="fd-enlace fd-enlace-ref" onclick="window.AuditEngine.goToRef(\'' + d.refKey + '\')">\u2696\ufe0f Fuente y fundamento <span class="fd-enlace-n">[' + String(d.refNum).padStart(2, '0') + ']</span></button>' : '') +
@@ -2671,11 +2770,11 @@
     /* Cada vez que se abre una ficha, su desglose vuelve a contar.
        Arranca cuando el panel ya entro: contar detras del borde seria
        mover el dato donde nadie lo ve. */
-    clearTimeout(renderFlujoDetalle._t);
+    clearTimeout(renderFicha._t);
     if (!comps) return;
-    if (!abrir || simMovimientoReducido()) { simAnimarZona(p.body, 'flujodet-' + tipo, 0); return; }
-    simPonerEnCeros(p.body, 'flujodet-' + tipo);
-    renderFlujoDetalle._t = setTimeout(() => simAnimarZona(p.body, 'flujodet-' + tipo, 900), 300);
+    if (!abrir || simMovimientoReducido()) { simAnimarZona(p.body, 'flujodet-' + ctx, 0); return; }
+    simPonerEnCeros(p.body, 'flujodet-' + ctx);
+    renderFicha._t = setTimeout(() => simAnimarZona(p.body, 'flujodet-' + ctx, 900), 300);
   }
 
   /* Los rubros que el Articulo 1o. enumera y deja en cero. No se
@@ -2725,19 +2824,18 @@
       '</ul>';
   }
 
-  function selectFlujoItem(tipo, id) {
+  function selectFlujoItem(ctx, id) {
+    if (!FICHA_CTX[ctx]) return;
     /* Segundo toque sobre el mismo renglon: se cierra la ventana. */
-    if ((tipo === 'ingresos' ? itemIngresoSel : itemEgresoSel) === id) { closeFlujoFicha(); return; }
-    /* La ventana es una sola. Si quedara encendido un renglon de la
-       grafica de al lado, la pantalla marcaria dos fichas abiertas y
-       solo habria una. */
-    const otro = tipo === 'ingresos' ? 'egresos' : 'ingresos';
-    const habiaOtro = (otro === 'ingresos' ? itemIngresoSel : itemEgresoSel) !== null;
-    if (tipo === 'ingresos') { itemIngresoSel = id; itemEgresoSel = null; }
-    else { itemEgresoSel = id; itemIngresoSel = null; }
-    flujoFichaTipo = tipo;
-    if (habiaOtro) renderFlujo(otro);
-    renderFlujo(tipo, true);
+    if (fichaSel[ctx] === id) { closeFlujoFicha(); return; }
+    /* La ventana es una sola. Si quedara encendido un renglon de otra
+       grafica, la pantalla marcaria dos fichas abiertas y solo hay una. */
+    const otros = Object.keys(fichaSel).filter(k => k !== ctx && fichaSel[k] !== null);
+    Object.keys(fichaSel).forEach(k => { fichaSel[k] = null; });
+    fichaSel[ctx] = id;
+    flujoFichaTipo = ctx;
+    otros.forEach(k => redibujarVista(k));
+    redibujarVista(ctx, true);
   }
 
   /* ====================================================================
@@ -2793,21 +2891,27 @@
     });
   }
 
-  function renderFlujoMandos(tipo) {
-    const esIngreso = tipo === 'ingresos';
-    const cont = document.getElementById(esIngreso ? 'ingresosMandos' : 'egresosMandos');
-    if (!cont || !PANORAMA) return;
-    const contado = esIngreso ? state.erarioIngContado : state.erarioEgrContado;
-    const n = (esIngreso ? PANORAMA.ingresos : PANORAMA.egresos).length;
+  const BARRAS_LISTO = {
+    ingresos: 'Cada barra mide su origen frente al mayor del cuadro; el porcentaje es su parte del ingreso total.',
+    egresos: 'El porcentaje es la parte de cada rengl\u00f3n en el gasto total aprobado.',
+    federalizado: 'El porcentaje es la parte de cada ramo en el gasto federalizado total. Tres de los cuatro renglones salen del Presupuesto de Egresos; el cuarto es un residuo.',
+    municipal: 'Son los dos fondos que el Presupuesto de Egresos identifica como municipales de origen. Todo lo dem\u00e1s que llega al municipio pasa antes por la hacienda de su estado.'
+  };
+
+  function renderBarrasMandos(ctx) {
+    const cfg = FICHA_CTX[ctx];
+    if (!cfg || !cfg.mandos || !PANORAMA) return;
+    const cont = document.getElementById(cfg.mandos);
+    if (!cont) return;
+    const contado = !!state.barrasContado[ctx];
+    const n = cfg.datos().length;
     cont.innerHTML = erarioBarraMandos({
-      sello: esIngreso ? 'ORIGEN DEL INGRESO' : 'DESTINO DEL GASTO',
+      sello: cfg.sello,
       contado: contado,
-      contar: "flujoContar('" + tipo + "')",
-      reiniciar: "flujoReiniciar('" + tipo + "')",
+      contar: "barrasContar('" + ctx + "')",
+      reiniciar: "barrasReiniciar('" + ctx + "')",
       estado: contado
-        ? (esIngreso
-            ? '✅ Contabilizado. Cada barra mide su origen frente al mayor de los ' + n + '; el porcentaje es su parte del ingreso total.'
-            : '✅ Contabilizado. El porcentaje es la parte de cada renglón en el gasto total aprobado.')
+        ? '✅ Contabilizado. ' + BARRAS_LISTO[ctx]
         : '⚪ Los ' + n + ' renglones están en ceros ($0 / 0.0%). Pulse «Contabilizar» para ver crecer las barras y sus porcentajes.'
     });
   }
@@ -2828,24 +2932,22 @@
     simPonerEnCeros(cont, 'erarioTotal');
   }
 
-  function flujoContar(tipo, duracionMs) {
-    const esIngreso = tipo === 'ingresos';
-    const cont = document.getElementById(esIngreso ? 'ingresosChart' : 'egresosChart');
+  function barrasContar(ctx, duracionMs) {
+    const cfg = FICHA_CTX[ctx];
+    const cont = cfg && document.getElementById(cfg.chart);
     if (!cont) return;
-    if (esIngreso) state.erarioIngContado = true;
-    else state.erarioEgrContado = true;
-    renderFlujoMandos(tipo);
-    simAnimarZona(cont, 'flujo-' + tipo, duracionMs === undefined ? 1300 : duracionMs);
+    state.barrasContado[ctx] = true;
+    renderBarrasMandos(ctx);
+    simAnimarZona(cont, 'barras-' + ctx, duracionMs === undefined ? 1300 : duracionMs);
   }
 
-  function flujoReiniciar(tipo) {
-    const esIngreso = tipo === 'ingresos';
-    const cont = document.getElementById(esIngreso ? 'ingresosChart' : 'egresosChart');
+  function barrasReiniciar(ctx) {
+    const cfg = FICHA_CTX[ctx];
+    const cont = cfg && document.getElementById(cfg.chart);
     if (!cont) return;
-    if (esIngreso) state.erarioIngContado = false;
-    else state.erarioEgrContado = false;
-    renderFlujoMandos(tipo);
-    simPonerEnCeros(cont, 'flujo-' + tipo);
+    state.barrasContado[ctx] = false;
+    renderBarrasMandos(ctx);
+    simPonerEnCeros(cont, 'barras-' + ctx);
   }
 
   // --- Puntos ciegos ---------------------------------------------------------
@@ -2882,24 +2984,82 @@
     `).join('');
   }
 
-  function renderFederalizadoGrid() {
-    const cont = document.getElementById('federalizadoGrid');
-    if (!cont || !PANORAMA) return;
-    const f = PANORAMA.federalizado;
-    cont.innerHTML = f.componentes.map(c => {
-      const pct = pctDe(c.montoMdp, f.totalMdp);
-      return `
-      <article class="fed-card">
-        <div class="fed-top">
-          <h4>${c.nombre}</h4>
-          <span class="fed-monto">${formatMdpFijo(c.montoMdp)} ${chipEstado(c.estado)}</span>
-        </div>
-        <div class="fed-barra"><span style="width:${pct.toFixed(1)}%"></span></div>
-        <div class="fed-pct">${pct.toFixed(1)}% del gasto federalizado</div>
-        <p class="fed-regla">${c.regla}</p>
-        <footer>${c.ley}</footer>
-      </article>`;
-    }).join('');
+  /* ====================================================================
+     1.2 — LO QUE BAJA AL TERRITORIO
+
+     La reja de tarjetas se convierte en la misma grafica de barras de la
+     1.1: los cuatro ramos que componen el gasto federalizado, con su
+     ficha lateral, su fundamento y su desglose. El Ramo 33 abre sus ocho
+     fondos con la cifra al peso que publica el Anexo 22 del Presupuesto
+     de Egresos.
+     ==================================================================== */
+  function renderFederalizado(abrir) {
+    renderBarras('federalizado', abrir);
+    const nota = document.getElementById('federalizadoNota');
+    if (nota && PANORAMA.federalizado.nota) {
+      nota.innerHTML = '<p class="ef-nota">' + PANORAMA.federalizado.nota + '</p>';
+    }
+  }
+
+  /* ====================================================================
+     ZONAS DE CONTEO SIN CATALOGO PROPIO
+
+     El circuito de una entidad y la reja de sus municipios no salen de un
+     catalogo fijo: cambian con el estado que se elija. No tienen ficha
+     lateral, pero si deben nacer en ceros y contar a peticion, como todo
+     lo demas de la pestana.
+     ==================================================================== */
+  const ZONAS_SIMPLES = {
+    entidad: {
+      cont: 'entidadCircuito', mandos: 'entidadMandos', sello: 'CIRCUITO DE LA ENTIDAD',
+      listo: 'Contabilizado. Cada barra compara las cuatro fuentes de la entidad entre s\u00ed; la dependencia federal mide qu\u00e9 parte del dinero que ejerce no recaud\u00f3 ella.',
+      ceros: 'El circuito de la entidad est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para ver de d\u00f3nde viene cada peso que ejerce.'
+    },
+    munent: {
+      cont: 'municipiosCircuito', mandos: 'munEntidadMandos', sello: 'MUNICIPIOS DE LA ENTIDAD',
+      listo: 'Contabilizado. De cada municipio se ve su presupuesto, lo que cobra de predial y lo que recibe de los dos fondos municipales del Ramo 33.',
+      ceros: 'Las fichas municipales est\u00e1n en ceros. Pulse \u00abContabilizar\u00bb para llenarlas.'
+    }
+  };
+
+  function renderZonaMandos(z) {
+    const cfg = ZONAS_SIMPLES[z];
+    const cont = cfg && document.getElementById(cfg.mandos);
+    if (!cont) return;
+    const contado = !!state.zonaContado[z];
+    cont.innerHTML = erarioBarraMandos({
+      sello: cfg.sello,
+      contado: contado,
+      contar: "zonaContar('" + z + "')",
+      reiniciar: "zonaReiniciar('" + z + "')",
+      estado: (contado ? '\u2705 ' : '\u26aa ') + (contado ? cfg.listo : cfg.ceros)
+    });
+  }
+
+  function zonaSincronizar(z) {
+    const cfg = ZONAS_SIMPLES[z];
+    const cont = cfg && document.getElementById(cfg.cont);
+    if (!cont) return;
+    erarioSincronizarZona(cont, 'zona-' + z, !!state.zonaContado[z]);
+    renderZonaMandos(z);
+  }
+
+  function zonaContar(z, duracionMs) {
+    const cfg = ZONAS_SIMPLES[z];
+    const cont = cfg && document.getElementById(cfg.cont);
+    if (!cont) return;
+    state.zonaContado[z] = true;
+    renderZonaMandos(z);
+    simAnimarZona(cont, 'zona-' + z, duracionMs === undefined ? 1300 : duracionMs);
+  }
+
+  function zonaReiniciar(z) {
+    const cfg = ZONAS_SIMPLES[z];
+    const cont = cfg && document.getElementById(cfg.cont);
+    if (!cont) return;
+    state.zonaContado[z] = false;
+    renderZonaMandos(z);
+    simPonerEnCeros(cont, 'zona-' + z);
   }
 
   // --- Subpanel 1.2: circuito de una entidad --------------------------------
@@ -2912,11 +3072,23 @@
         .map(e => `<option value="${e.abbr}">${e.name}</option>`).join('');
       sel.addEventListener('change', function () {
         renderEntidadCircuito(this.value);
+        renderMunicipiosCircuito(this.value);
+        sincronizarSelectoresEntidad();
       });
     }
     if (!entidadCircuitoSel) entidadCircuitoSel = sel.value || 'AGS';
     sel.value = entidadCircuitoSel;
     renderEntidadCircuito(entidadCircuitoSel);
+  }
+
+  /* Las dos subpestanas miran la misma entidad: si la 1.2 cambia de
+     estado y la 1.3 se queda en el anterior, el lector cree estar viendo
+     los municipios del estado que acaba de elegir y no es asi. */
+  function sincronizarSelectoresEntidad() {
+    ['entidadCircuitoSelect', 'munEntidadSelect'].forEach(id => {
+      const s2 = document.getElementById(id);
+      if (s2 && s2.value !== entidadCircuitoSel) s2.value = entidadCircuitoSel;
+    });
   }
 
   function renderEntidadCircuito(abbr) {
@@ -2930,10 +3102,10 @@
     const propio = e.recaudacionPropia || 0;
     const totalDisponible = recibido + propio;
     const filas = [
-      { n: 'Ramo 28 — participaciones', v: e.ramo28, c: 'gold', d: 'De libre disposición' },
-      { n: 'Ramo 33 — aportaciones', v: e.ramo33, c: 'cyan', d: 'Etiquetado por ley' },
+      { n: 'Ramo 28 \u2014 participaciones', v: e.ramo28, c: 'gold', d: 'De libre disposici\u00f3n' },
+      { n: 'Ramo 33 \u2014 aportaciones', v: e.ramo33, c: 'cyan', d: 'Etiquetado por ley' },
       { n: 'Convenios', v: e.convenios, c: 'blue', d: 'Pactados caso por caso' },
-      { n: 'Recaudación propia', v: propio, c: 'green', d: 'Lo que el estado cobra por su cuenta' }
+      { n: 'Recaudaci\u00f3n propia', v: propio, c: 'green', d: 'Lo que el estado cobra por su cuenta' }
     ];
     const maxV = Math.max.apply(null, filas.map(f => f.v || 0));
 
@@ -2941,10 +3113,10 @@
       <div class="ec-head">
         <div>
           <h4>${e.name}</h4>
-          <span class="ec-sub">${e.capital} · ${e.pob} millones de habitantes · gobierna ${e.gobernador}</span>
+          <span class="ec-sub">${e.capital} \u00b7 ${e.pob} millones de habitantes \u00b7 gobierna ${e.gobernador}</span>
         </div>
         <div class="ec-dep">
-          <span class="ec-dep-num">${e.dep}%</span>
+          <span class="ec-dep-num" data-anim-v="${e.dep}" data-anim-f="pct">0.0%</span>
           <span class="ec-dep-lab">de dependencia federal</span>
         </div>
       </div>
@@ -2952,22 +3124,55 @@
         ${filas.map(f => `
           <div class="ec-fila">
             <span class="ec-nom">${f.n}<em>${f.d}</em></span>
-            <span class="ec-barra"><span class="ec-rell ec-${f.c}" style="width:${maxV ? ((f.v || 0) / maxV * 100).toFixed(1) : 0}%"></span></span>
-            <span class="ec-val">${formatMoneyMdp(f.v || 0)}</span>
+            <span class="ec-barra"><span class="ec-rell ec-${f.c}"
+                  data-anim-w="${maxV ? ((f.v || 0) / maxV * 100).toFixed(2) : 0}" style="width:0%"></span></span>
+            <span class="ec-val" data-anim-v="${f.v || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
           </div>`).join('')}
       </div>
       <div class="ec-resumen">
-        <div><span class="ec-rk">Le baja de la Federación</span><span class="ec-rv">${formatMoneyMdp(recibido)}</span></div>
-        <div><span class="ec-rk">Cobra por su cuenta</span><span class="ec-rv">${formatMoneyMdp(propio)}</span></div>
-        <div><span class="ec-rk">Por cada peso propio, recibe</span><span class="ec-rv">${propio ? (recibido / propio).toFixed(1) : '—'} pesos</span></div>
-        <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv">${formatMoneyMdp(e.deuda || 0)} · ${e.semaforoDeuda}</span></div>
+        <div><span class="ec-rk">Le baja de la Federaci\u00f3n</span><span class="ec-rv" data-anim-v="${recibido}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
+        <div><span class="ec-rk">Cobra por su cuenta</span><span class="ec-rv" data-anim-v="${propio}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
+        <div><span class="ec-rk">Por cada peso propio, recibe</span><span class="ec-rv">${propio ? (recibido / propio).toFixed(1) : '\u2014'} pesos</span></div>
+        <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv"><span data-anim-v="${e.deuda || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span> \u00b7 ${e.semaforoDeuda}</span></div>
       </div>
       <p class="ec-nota">
-        La dependencia federal mide qué proporción del dinero que ejerce la entidad no proviene
-        de su propia recaudación. Total disponible estimado: ${formatMoneyMdp(totalDisponible)}.
+        La dependencia federal mide qu\u00e9 proporci\u00f3n del dinero que ejerce la entidad no proviene
+        de su propia recaudaci\u00f3n. Total disponible estimado:
+        <span data-anim-v="${totalDisponible}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>.
+        Estas cifras proceden de la base interna de la plataforma, no del Presupuesto de Egresos:
+        el reparto entidad por entidad lo publica la Secretar\u00eda de Hacienda en acuerdos aparte.
       </p>
     `;
-    renderMunicipiosCircuito(abbr);
+    zonaSincronizar('entidad');
+  }
+
+  /* ====================================================================
+     1.3 — EL MUNICIPIO
+
+     El eslabon municipal tenia una reja de fichas al final de la 1.2 y
+     nada mas. Aqui recibe subpestana propia y el mismo trato que la 1.1:
+     grafica con mandos para los dos fondos que el Presupuesto cifra como
+     municipales, ficha lateral por cada uno, lista aparte de lo que la
+     ley garantiza sin cifrar, y fichas de facultad para lo que el
+     municipio cobra por su cuenta.
+     ==================================================================== */
+  function initMunEntidad() {
+    const sel = document.getElementById('munEntidadSelect');
+    if (!sel || !DB.estados) return;
+    if (!sel.options.length) {
+      sel.innerHTML = DB.estados.slice()
+        .sort((a, b) => a.name.localeCompare(b.name, 'es'))
+        .map(e => `<option value="${e.abbr}">${e.name}</option>`).join('');
+      sel.addEventListener('change', function () {
+        entidadCircuitoSel = this.value;
+        renderMunicipiosCircuito(this.value);
+        renderEntidadCircuito(this.value);
+        sincronizarSelectoresEntidad();
+      });
+    }
+    if (!entidadCircuitoSel) entidadCircuitoSel = sel.value || 'AGS';
+    sel.value = entidadCircuitoSel;
+    renderMunicipiosCircuito(entidadCircuitoSel);
   }
 
   function renderMunicipiosCircuito(abbr) {
@@ -2986,18 +3191,85 @@
         </header>
         <div class="mun-alcalde">${m.alcalde}</div>
         <div class="mun-cifras">
-          <div><span>Presupuesto</span><b>${formatMoneyMdp(m.presupuestoTotal)}</b></div>
-          <div><span>Predial propio</span><b>${formatMoneyMdp(m.predial)}</b></div>
-          <div><span>FORTAMUN</span><b>${formatMoneyMdp(m.fortamun)}</b></div>
-          <div><span>FISMDF</span><b>${formatMoneyMdp(m.fismdf)}</b></div>
+          <div><span>Presupuesto</span><b data-anim-v="${m.presupuestoTotal}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
+          <div><span>Predial propio</span><b data-anim-v="${m.predial}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
+          <div><span>FORTAMUN</span><b data-anim-v="${m.fortamun}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
+          <div><span>FISMDF</span><b data-anim-v="${m.fismdf}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</b></div>
         </div>
         <div class="mun-dep">
           <span class="mun-dep-lab">Dependencia de transferencias</span>
-          <span class="mun-dep-barra"><span style="width:${Math.min(100, m.dependencia)}%"></span></span>
-          <span class="mun-dep-num">${m.dependencia}%</span>
+          <span class="mun-dep-barra"><span data-anim-w="${Math.min(100, m.dependencia)}" style="width:0%"></span></span>
+          <span class="mun-dep-num" data-anim-v="${m.dependencia}" data-anim-f="pct">0.0%</span>
         </div>
       </article>
     `).join('');
+    const rot = document.getElementById('munEntidadRotulo');
+    if (rot) {
+      const n = e.municipios.length;
+      rot.textContent = 'La base trae cargado' + (n === 1 ? ' 1 municipio de ' : 's ' + n + ' municipios de ') +
+        e.name + ', no su padr\u00f3n completo.';
+    }
+    zonaSincronizar('munent');
+  }
+
+  /* Lo que la ley le garantiza al municipio y el Presupuesto no cifra.
+     Callarlo seria peor que decirlo sin numero: el lector creeria que el
+     municipio vive de dos fondos, cuando la mayor parte de su dinero
+     federal llega por participaciones que reparte su propio congreso. */
+  function renderMunSinCifra() {
+    const cont = document.getElementById('municipalSinCifra');
+    if (!cont || !PANORAMA || !PANORAMA.municipal) return;
+    cont.innerHTML =
+      '<div class="erario-ceros-cab">' +
+        '<h4>Y lo que la ley le garantiza sin ponerle cifra</h4>' +
+        '<p>El Presupuesto de Egresos s\u00f3lo cifra como municipales los dos fondos de arriba. ' +
+        'El resto del dinero federal del municipio llega por participaciones, y ah\u00ed el reparto no lo ' +
+        'fija la Federaci\u00f3n sino <b>la legislatura de cada estado</b>: por eso no existe un agregado ' +
+        'nacional publicado, sino treinta y dos.</p>' +
+      '</div>' +
+      '<ul class="erario-ceros-lista">' +
+        PANORAMA.municipal.sinCifra.map(r =>
+          '<li class="ecz-item">' +
+            '<span class="ecz-clave">' + r.clave + '</span>' +
+            '<span class="ecz-nom">' + r.nombre + '</span>' +
+            '<span class="ecz-monto">sin cifra</span>' +
+            '<span class="ecz-que">' + r.que + '</span>' +
+          '</li>').join('') +
+      '</ul>';
+  }
+
+  /* Fichas de facultad: aqui no hay barra porque no hay cifra nacional
+     publicada, y una barra inventada valdria menos que el hueco. */
+  function renderMunPropios(abrir) {
+    const cont = document.getElementById('munPropiosGrid');
+    if (!cont || !PANORAMA || !PANORAMA.municipal) return;
+    const sel = fichaSel.munpropios;
+    cont.innerHTML = PANORAMA.municipal.propios.map(d => `
+      <button type="button" class="mpf-card${sel === d.id ? ' active' : ''}"
+              data-id="${d.id}" aria-expanded="${sel === d.id}"
+              onclick="window.AuditEngine.selectFlujoItem('munpropios','${d.id}')">
+        <span class="mpf-top">
+          <span class="mpf-ico" aria-hidden="true">${d.icono}</span>
+          <span class="mpf-clave">Art. ${d.clave}</span>
+        </span>
+        <span class="mpf-nom">${d.nombre}</span>
+        <span class="mpf-que">${d.queEs}</span>
+        <span class="mpf-mas">Ver fundamento y efecto jur\u00eddico \u2197</span>
+      </button>`).join('');
+    renderFicha('munpropios', abrir);
+  }
+
+  function renderMunAsimetria() {
+    const cont = document.getElementById('munAsimetria');
+    if (!cont || !PANORAMA || !PANORAMA.municipal) return;
+    const a = PANORAMA.municipal.asimetria;
+    cont.innerHTML =
+      '<article class="ciego-card">' +
+        '<div class="ciego-dato">Art. 115, fracc. IV</div>' +
+        '<h4>' + a.titulo + '</h4>' +
+        '<p>' + a.texto + '</p>' +
+        '<p>' + a.consecuencia + '</p>' +
+      '</article>';
   }
 
   // --- Orquestación ----------------------------------------------------------
@@ -3014,8 +3286,17 @@
 
   function renderTerritorioErario() {
     renderPisos();
-    renderFederalizadoGrid();
+    renderFederalizado();
     initEntidadCircuito();
+  }
+
+  function renderMunicipioErario() {
+    if (!PANORAMA || !PANORAMA.municipal) return;
+    renderBarras('municipal');
+    renderMunSinCifra();
+    renderMunPropios();
+    renderMunAsimetria();
+    initMunEntidad();
   }
 
   // ==========================================================================
@@ -20748,12 +21029,15 @@
     selectCircuitoEtapa: selectCircuitoEtapa,
     selectFlujoItem: selectFlujoItem,
     closeFlujoFicha: closeFlujoFicha,
+    barrasContar: barrasContar,
+    barrasReiniciar: barrasReiniciar,
+    zonaContar: zonaContar,
+    zonaReiniciar: zonaReiniciar,
     erarioContar: erarioContar,
     erarioReiniciar: erarioReiniciar,
-    flujoContar: flujoContar,
-    flujoReiniciar: flujoReiniciar,
     renderPanoramaErario: renderPanoramaErario,
     renderTerritorioErario: renderTerritorioErario,
+    renderMunicipioErario: renderMunicipioErario,
     renderEntidadCircuito: renderEntidadCircuito,
     // Subpestana 4.6: La Funcion Jurisdiccional
     renderFuncionJurisdiccional: renderFuncionJurisdiccional,

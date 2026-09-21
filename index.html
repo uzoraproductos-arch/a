@@ -214,8 +214,9 @@
 
       <div class="subtabs-bar" data-parent="presupuesto">
         <button class="subtab-btn active" data-sub="panoramica" role="tab" aria-selected="true">1.1 El Circuito del Dinero P&uacute;blico: De D&oacute;nde Sale y En Qu&eacute; se Va</button>
-        <button class="subtab-btn" data-sub="territorio" role="tab" aria-selected="false">1.2 Del Peso Federal al Peso Local: Estados y Municipios</button>
-        <button class="subtab-btn" data-sub="constitucion" role="tab" aria-selected="false">1.3 La Constituci&oacute;n Econ&oacute;mica: Con Qu&eacute; Facultad</button>
+        <button class="subtab-btn" data-sub="territorio" role="tab" aria-selected="false">1.2 Del Peso Federal al Peso Estatal: Las 32 Entidades</button>
+        <button class="subtab-btn" data-sub="municipios" role="tab" aria-selected="false">1.3 El Eslab&oacute;n Municipal: Predial, FORTAMUN y FISMDF</button>
+        <button class="subtab-btn" data-sub="constitucion" role="tab" aria-selected="false">1.4 La Constituci&oacute;n Econ&oacute;mica: Con Qu&eacute; Facultad</button>
       </div>
 
       <!-- ====================================================================
@@ -399,12 +400,14 @@
 
         <div class="section-hero">
           <span class="hero-tag">Hacienda P&uacute;blica en Tres Pisos &middot; Federaci&oacute;n, Estado y Municipio</span>
-          <h2>Del Peso Federal al Peso Local</h2>
+          <h2>Del Peso Federal al Peso Estatal</h2>
           <p>
             M&eacute;xico no tiene una hacienda p&uacute;blica, tiene tres superpuestas. Cada piso cobra sus
             propios impuestos, aprueba su propia ley de ingresos y su propio presupuesto, y
             responde ante un fiscalizador distinto. Entender qui&eacute;n cobra qu&eacute; y qui&eacute;n revisa a
             qui&eacute;n es lo que permite saber a qu&eacute; puerta tocar cuando algo no cuadra.
+            Esta subpesta&ntilde;a sigue el dinero hasta las 32 entidades; el piso municipal tiene la suya,
+            la <b>1.3</b>.
           </p>
         </div>
 
@@ -425,11 +428,17 @@
           <div class="erario-bloque-head">
             <h3>Lo que baja, y con qu&eacute; libertad baja</h3>
             <p class="erario-bloque-sub">
-              La distinci&oacute;n entre Ramo 28 y Ramo 33 es la m&aacute;s importante de todo el gasto
-              federalizado, y la que m&aacute;s se confunde en la conversaci&oacute;n p&uacute;blica.
+              La distinci&oacute;n entre <b>Ramo 28</b> y <b>Ramo 33</b> es la m&aacute;s importante de todo el gasto
+              federalizado, y la que m&aacute;s se confunde en la conversaci&oacute;n p&uacute;blica: el primero es
+              dinero del estado, el segundo sigue siendo dinero federal despu&eacute;s de entregarse.
+              Pulse cualquier ramo para ver qu&eacute; ley lo sustenta, qu&eacute; efecto jur&iacute;dico produce y
+              qu&eacute; fondos lo componen.
             </p>
           </div>
-          <div class="federalizado-grid" id="federalizadoGrid"></div>
+          <div class="erario-mandos" id="federalizadoMandos"></div>
+          <div class="flujo-chart" id="federalizadoChart" role="list"></div>
+          <div class="flujo-detalle" id="federalizadoPista"></div>
+          <div id="federalizadoNota"></div>
         </div>
 
         <!-- CIRCUITO DE UNA ENTIDAD -->
@@ -445,19 +454,8 @@
             <label for="entidadCircuitoSelect">Entidad federativa</label>
             <select id="entidadCircuitoSelect" aria-label="Seleccionar entidad federativa"></select>
           </div>
+          <div class="erario-mandos" id="entidadMandos"></div>
           <div class="entidad-circuito" id="entidadCircuito"></div>
-        </div>
-
-        <!-- ESLABON MUNICIPAL -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>El eslab&oacute;n municipal</h3>
-            <p class="erario-bloque-sub">
-              Es el piso m&aacute;s cercano al ciudadano y el que menos capacidad tiene de sostenerse
-              solo. Estos son los municipios de la entidad seleccionada arriba.
-            </p>
-          </div>
-          <div class="municipios-grid" id="municipiosCircuito"></div>
         </div>
 
         <!-- FUENTES -->
@@ -469,11 +467,12 @@
             <li><b>Base de datos subnacional de Auditavisi&oacute;n</b>: montos por entidad y municipio, con su origen indicado en cada ficha.</li>
           </ul>
           <p class="ef-nota">
-            Las cifras por entidad y municipio proceden de la base interna de la plataforma y
-            corresponden al &uacute;ltimo corte cargado. Los totales federales de Ramo 28 y Ramo 33 de
-            2026 aparecen en la subpesta&ntilde;a anterior con su fuente oficial; la distribuci&oacute;n
-            entidad por entidad para 2026 se actualizar&aacute; contra el acuerdo de distribuci&oacute;n
-            publicado en el Diario Oficial de la Federaci&oacute;n.
+            Los totales de los ramos 28, 33 y 25 son los del <b>Anexo 1 del Presupuesto de Egresos
+            de la Federaci&oacute;n 2026</b>, y el desglose del Ramo 33 fondo por fondo es el de su
+            <b>Anexo 22</b>. Las cifras por entidad proceden de la base interna de la plataforma
+            y corresponden al &uacute;ltimo corte cargado: la distribuci&oacute;n entidad por entidad para 2026
+            se actualizar&aacute; contra el acuerdo de distribuci&oacute;n que publica la Secretar&iacute;a de Hacienda
+            en el Diario Oficial de la Federaci&oacute;n.
           </p>
         </div>
 
@@ -481,7 +480,105 @@
       <!-- FIN SUBPANEL 1.2 -->
 
       <!-- ====================================================================
-           SUBPANEL 1.3: LA CONSTITUCION ECONOMICA
+           SUBPANEL 1.3: EL ESLABON MUNICIPAL
+           El piso mas cercano al ciudadano y el que menos capacidad tiene de
+           sostenerse solo. Los contenedores los llena renderMunicipioErario().
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="presupuesto" data-subpanel="municipios">
+
+        <div class="section-hero">
+          <span class="hero-tag">Tercer Piso &middot; Art&iacute;culo 115 Constitucional &middot; M&aacute;s de 2,400 Municipios</span>
+          <h2>El Eslab&oacute;n Municipal</h2>
+          <p>
+            Es el piso que recoge la basura, cobra el agua, abre la calle y entierra a los muertos,
+            y el que menos capacidad tiene de sostenerse solo. La Constituci&oacute;n le reconoce hacienda
+            propia y le entrega el predial &laquo;en todo caso&raquo;, pero le deja al congreso de su estado
+            la aprobaci&oacute;n de su ley de ingresos. Aqu&iacute; se ve de d&oacute;nde sale cada peso municipal, con
+            qu&eacute; ley y con cu&aacute;nta libertad.
+          </p>
+        </div>
+
+        <!-- LO QUE EL PRESUPUESTO CIFRA COMO MUNICIPAL -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>1 &middot; Lo que el Presupuesto le entrega con nombre</h3>
+            <p class="erario-bloque-sub">
+              De los ocho fondos del Ramo 33, s&oacute;lo dos llegan cifrados como municipales en el
+              Presupuesto de Egresos: el <b>FORTAMUN</b>, que el municipio puede aplicar con
+              holgura, y el <b>FISMDF</b>, que s&oacute;lo puede tocar obra para poblaci&oacute;n en pobreza.
+              Pulse cualquiera para ver su fundamento, su efecto jur&iacute;dico y c&oacute;mo lo reparte la ley.
+            </p>
+          </div>
+          <div class="erario-mandos" id="municipalMandos"></div>
+          <div class="flujo-chart" id="municipalChart" role="list"></div>
+          <div class="flujo-detalle" id="municipalPista"></div>
+          <div class="erario-ceros" id="municipalSinCifra"></div>
+        </div>
+
+        <!-- LO QUE COBRA POR SU CUENTA -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>2 &middot; Lo que cobra por su cuenta</h3>
+            <p class="erario-bloque-sub">
+              El art&iacute;culo 115, fracci&oacute;n IV, enumera tres ingresos que el municipio percibe
+              &laquo;en todo caso&raquo;. No llevan barra porque su total nacional no vive en el Presupuesto
+              de Egresos: se reconstruye sumando las cuentas p&uacute;blicas de m&aacute;s de 2,400 municipios.
+              Cada ficha dice qu&eacute; es, con qu&eacute; fundamento y qu&eacute; efecto jur&iacute;dico produce.
+            </p>
+          </div>
+          <div class="mpf-grid" id="munPropiosGrid"></div>
+        </div>
+
+        <!-- PUNTO CIEGO -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>3 &middot; El punto ciego del tercer piso</h3>
+          </div>
+          <div id="munAsimetria"></div>
+        </div>
+
+        <!-- MUNICIPIOS DE LA ENTIDAD -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>4 &middot; Municipio por municipio</h3>
+            <p class="erario-bloque-sub">
+              Elija una entidad para ver los municipios que la base trae cargados, con su
+              presupuesto, su predial propio, sus dos fondos del Ramo 33 y qu&eacute; tan dependiente
+              resulta la suma. <span id="munEntidadRotulo"></span>
+            </p>
+          </div>
+          <div class="entidad-selector-bar">
+            <label for="munEntidadSelect">Entidad federativa</label>
+            <select id="munEntidadSelect" aria-label="Seleccionar entidad federativa para ver sus municipios"></select>
+          </div>
+          <div class="erario-mandos" id="munEntidadMandos"></div>
+          <div class="municipios-grid" id="municipiosCircuito"></div>
+        </div>
+
+        <!-- FUENTES -->
+        <div class="erario-fuentes">
+          <div class="ef-tit">Fuentes de esta secci&oacute;n</div>
+          <ul>
+            <li><b>Constituci&oacute;n Pol&iacute;tica de los Estados Unidos Mexicanos</b>, art&iacute;culo 115, fracciones III y IV.</li>
+            <li><b>Ley de Coordinaci&oacute;n Fiscal</b>: art&iacute;culos 2-A y 6&ordm; para participaciones municipales; 32 a 35 para el FISMDF; 36 y 37 para el FORTAMUN.</li>
+            <li><b>Presupuesto de Egresos de la Federaci&oacute;n 2026</b>, Anexo 22: cifra al peso de los ocho fondos del Ramo 33.</li>
+            <li><b>Base de datos subnacional de Auditavisi&oacute;n</b>: montos por municipio, con su origen indicado en cada ficha.</li>
+          </ul>
+          <p class="ef-nota">
+            El FORTAMUN y el FISMDF son cifras oficiales del Anexo 22 del Presupuesto de Egresos
+            2026. El predial, los derechos por servicios y las participaciones municipales aparecen
+            <b>sin cifra nacional</b> porque no existe una publicada en el Presupuesto: el predial y
+            los derechos se consolidan desde las cuentas p&uacute;blicas municipales que el INEGI re&uacute;ne con
+            rezago, y el reparto de participaciones lo fija cada congreso estatal. Cada ficha dice
+            exactamente qu&eacute; falta y por qu&eacute;.
+          </p>
+        </div>
+
+      </div>
+      <!-- FIN SUBPANEL 1.3 -->
+
+      <!-- ====================================================================
+           SUBPANEL 1.4: LA CONSTITUCION ECONOMICA
            El contenido lo pinta renderConstitucionEconomica() desde
            DB.constitucion_economica; aqui solo van los contenedores.
            ==================================================================== -->
