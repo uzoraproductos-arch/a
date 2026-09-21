@@ -675,6 +675,56 @@ de los 32 circuitos.
   `.sim-comp-fuera`. Se conserva `simCompValor` porque lo usa la lista que
   se queda, y `.sim-comp-pres` por el pie de cada renglón.
 
+### Hecho (1.1: las cifras de la panorámica arrancan en ceros)
+
+- Los tres bloques de cifras de la subpestaña 1.1 —**«Cuánto dinero es»**,
+  **«1 · De dónde sale»** y **«2 · En qué se va»**— dejan de aparecer
+  puestas al abrir la pestaña. Nacen en cero y sólo se contabilizan a
+  petición, con la misma mecánica que ya rige la 2.2 y la 5.4.
+- **Dos mandos por bloque y nada más**, como se pidió: «Contabilizar» y
+  «↺ Reiniciar a ceros». Sin arranque por cursor y sin criterios que
+  elegir, porque aquí la cuenta es una sola y se lee de arriba abajo.
+  Contenedores nuevos `#erarioTotalMandos`, `#ingresosMandos` y
+  `#egresosMandos` en el HTML; barra generada por `erarioBarraMandos()`,
+  que reutiliza `.evaluacion-controls-bar` sin estilos nuevos.
+- Se anima **todo lo que es dato**: las cinco tarjetas de la cifra total y
+  el porcentaje de deuda sobre el ingreso; y en las dos gráficas, el
+  subtotal y el porcentaje de cada cabecera de grupo, el ancho de cada
+  barra, el monto y el porcentaje de cada renglón.
+- **Motor compartido, no uno nuevo.** Se usan `simAnimarZona` y
+  `simPonerEnCeros` tal cual: misma curva, mismo suavizado cúbico, mismo
+  respeto por `prefers-reduced-motion` y mismo valor exacto al cerrar,
+  sin arrastre de redondeo. Funciones nuevas: `erarioSincronizarZona`,
+  `erarioBarraMandos`, `renderErarioTotalMandos`, `renderFlujoMandos`,
+  `erarioContar`, `erarioReiniciar`, `flujoContar`, `flujoReiniciar`.
+- **Defecto corregido de paso: la unidad cambiaba a media cuenta.** La
+  cifra de portada usaba `formatMoneyMdp`, que escribe en mdp por debajo
+  del billón y en billones por encima. Al contar desde cero la tarjeta
+  pasaba de «$0 mdp» a «$10.19 billones», y ese salto de unidad se lee
+  como un salto del dato. Se añade el formato `billones`, de unidad fija
+  de principio a fin. Es la misma regla que ya obligó a `formatMdpFijo`:
+  dentro de una misma gráfica la unidad no cambia.
+- **Segundo defecto corregido: la transición de CSS competía con la
+  animación por fotograma.** `.fc-relleno` llevaba
+  `transition: width 0.5s`, de modo que al cerrar el conteo la barra
+  seguía creciendo por su cuenta. Mismo defecto que tuvieron las torres
+  sexenales de la 2.2. Se retira mientras la barra la gobierne el motor
+  (`.fc-relleno[data-anim-w]`).
+- El `aria-label` de cada renglón conserva la cifra real: quien navega
+  con lector de pantalla recibe el dato, no la animación.
+- `eval-status-text` y `fc-grupo-monto` se suman a
+  `AUTOLINK_OMITIR_CLASES`, por la regla ya establecida de que las
+  etiquetas compactas y las celdas de dato no reciben nota al pie.
+- Verificado en navegador: las tres zonas arrancan en ceros y con las
+  barras a 0 %; los dos botones responden en los tres bloques; los
+  porcentajes de ingreso suman 100.0 % y los de egreso 69.6 % + 30.4 %;
+  el reinicio devuelve todo a cero; abrir el detalle de un renglón **no**
+  borra la cuenta ya hecha; con `prefers-reduced-motion` el dato se
+  entrega de golpe a los 60 ms; 0 desbordes en 32 anchos de 1600 a
+  360 px; 0 errores de JavaScript; y el autoenlace de la 1.1 queda
+  idéntico al de antes del cambio (11 enlaces de glosario, 11 notas al
+  pie, 0 anidadas, 0 huérfanos).
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

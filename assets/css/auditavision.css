@@ -9511,6 +9511,19 @@ nav.tabbar button:focus-visible,
 }
 
 /* --- Cifra total --- */
+/* Barra de mandos de la panorámica del erario (1.1).
+   Reutiliza .evaluacion-controls-bar, que ya viste los mandos de la 2.2
+   y de la 5.4; aquí sólo se le da su respiro respecto de la cuadrícula
+   de cifras que gobierna. */
+.erario-mandos { margin: 0 0 12px; }
+.erario-mandos .evaluacion-controls-bar { margin: 0; }
+
+/* Mientras los dígitos suben, el renglón no debe bailar. */
+.ets-v[data-anim-v],
+.fc-monto[data-anim-v],
+.fc-pct[data-anim-v],
+.fc-grupo-monto [data-anim-v] { font-variant-numeric: tabular-nums; }
+
 .erario-total-strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
@@ -9589,6 +9602,13 @@ nav.tabbar button:focus-visible,
   border-radius: 3px;
   transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* La transición de CSS competía con la animación por fotograma: al
+   cerrar el conteo la barra seguía creciendo por su cuenta y el ancho
+   final se medía contra un valor intermedio. Mismo defecto que tenían
+   las torres sexenales de la 2.2. Mientras la barra la gobierne el
+   motor de conteo, la transición se retira. */
+.fc-relleno[data-anim-w] { transition: none; }
 
 .fc-relleno.ing { background: linear-gradient(90deg, #1e824c, #2ecc71); }
 .fc-relleno.egr { background: linear-gradient(90deg, #2980b9, #4ecdc4); }

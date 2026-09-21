@@ -55,6 +55,12 @@
        evaluacion, el arranque en cero y la vista del universo completo
        con lo no seleccionado atenuado. */
     simRankEvaluado: false,
+    /* Panoramica del erario (1.1). Los tres bloques de cifras nacen en
+       cero y solo se contabilizan a peticion, con los dos mandos de
+       siempre: contabilizar y reiniciar a ceros. */
+    erarioTotalContado: false,
+    erarioIngContado: false,
+    erarioEgrContado: false,
     simRankHover: false,
     simRankUniverso: false,
     /* Simulador de la linea presidencial, al modo de la 5.4: los seis
@@ -2176,6 +2182,7 @@
     'vbs-sincomp', 'versus-delta', 'versus-linea-diaz-rotulo', 'versus-proc-k',
     'hero-tag', 'est-chip', 'cd-lab', 'cd-ley', 'cd-val', 'cd-inst',
     'ce-inst', 'ce-tit', 'ce-num', 'ets-k', 'ets-v', 'ets-s',
+    'eval-status-text', 'fc-grupo-monto',
     'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
     'fed-monto', 'fed-pct', 'ec-nom', 'ec-val', 'ec-rk', 'ec-rv',
     'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
@@ -2410,20 +2417,27 @@
     const deuda = PANORAMA.ingresos.find(i => i.id === 'ing-deuda');
     const prog = PANORAMA.egresos.filter(e => e.grupo === 'Programable').reduce((a, b) => a + b.montoMdp, 0);
     const noProg = PANORAMA.egresos.filter(e => e.grupo === 'No programable').reduce((a, b) => a + b.montoMdp, 0);
+    /* Cada cifra declara su destino en el marcado y se pinta en cero.
+       Sube a su valor cuando alguien pulsa contabilizar, con el mismo
+       motor y la misma curva que el resto de la plataforma. */
     const tarjetas = [
-      { k: 'Ingreso autorizado', v: formatMoneyMdp(PANORAMA.totalLIF), s: 'Ley de Ingresos ' + PANORAMA.ejercicio, c: 'gold' },
-      { k: 'Gasto aprobado', v: formatMoneyMdp(PANORAMA.totalPEF), s: 'Presupuesto de Egresos ' + PANORAMA.ejercicio, c: 'gold' },
-      { k: 'De eso, prestado', v: formatMoneyMdp(deuda.montoMdp), s: pctDe(deuda.montoMdp, PANORAMA.totalLIF).toFixed(1) + '% del ingreso', c: 'red' },
-      { k: 'Se decide cada año', v: formatMoneyMdp(prog), s: 'Gasto programable', c: 'green' },
-      { k: 'Ya está comprometido', v: formatMoneyMdp(noProg), s: 'Gasto no programable', c: 'red' }
+      { k: 'Ingreso autorizado', v: PANORAMA.totalLIF, s: 'Ley de Ingresos ' + PANORAMA.ejercicio, c: 'gold' },
+      { k: 'Gasto aprobado', v: PANORAMA.totalPEF, s: 'Presupuesto de Egresos ' + PANORAMA.ejercicio, c: 'gold' },
+      { k: 'De eso, prestado', v: deuda.montoMdp, pct: pctDe(deuda.montoMdp, PANORAMA.totalLIF), c: 'red' },
+      { k: 'Se decide cada año', v: prog, s: 'Gasto programable', c: 'green' },
+      { k: 'Ya está comprometido', v: noProg, s: 'Gasto no programable', c: 'red' }
     ];
     cont.innerHTML = tarjetas.map(t => `
       <div class="ets-card">
         <div class="ets-k">${t.k}</div>
-        <div class="ets-v ${t.c}">${t.v}</div>
-        <div class="ets-s">${t.s}</div>
+        <div class="ets-v ${t.c}" data-anim-v="${t.v}" data-anim-f="billones">$0.00 billones</div>
+        <div class="ets-s">${t.pct !== undefined
+          ? '<span data-anim-v="' + t.pct + '" data-anim-f="pct">0.0%</span> del ingreso'
+          : t.s}</div>
       </div>
     `).join('');
+    erarioSincronizarZona(cont, 'erarioTotal', state.erarioTotalContado);
+    renderErarioTotalMandos();
   }
 
   // --- Barras de ingresos y egresos -----------------------------------------
@@ -2444,7 +2458,8 @@
         grupoPrevio = d.grupo;
         const subtotal = datos.filter(x => x.grupo === d.grupo).reduce((a, b) => a + b.montoMdp, 0);
         cabecera = `<div class="fc-grupo"><span>${d.grupo}</span>
-                      <span class="fc-grupo-monto">${formatMdpFijo(subtotal)} · ${pctDe(subtotal, total).toFixed(1)}%</span>
+                      <span class="fc-grupo-monto"><span data-anim-v="${subtotal}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
+                        · <span data-anim-v="${pctDe(subtotal, total)}" data-anim-f="pct">0.0%</span></span>
                     </div>`;
       }
       const pct = pctDe(d.montoMdp, total);
@@ -2455,11 +2470,14 @@
           <span class="fc-ico" aria-hidden="true">${d.icono}</span>
           <span class="fc-nom">${d.nombre}</span>
           <span class="fc-barra"><span class="fc-relleno ${esIngreso ? 'ing' : 'egr'}${d.id === 'ing-deuda' || d.grupo === 'No programable' ? ' alerta' : ''}"
-                style="width:${(d.montoMdp / maxVal * 100).toFixed(2)}%"></span></span>
-          <span class="fc-monto">${formatMdpFijo(d.montoMdp)}</span>
-          <span class="fc-pct">${pct.toFixed(1)}%</span>
+                data-anim-w="${(d.montoMdp / maxVal * 100).toFixed(2)}" style="width:0%"></span></span>
+          <span class="fc-monto" data-anim-v="${d.montoMdp}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
+          <span class="fc-pct" data-anim-v="${pct}" data-anim-f="pct">0.0%</span>
         </button>`;
     }).join('');
+    erarioSincronizarZona(cont, 'flujo-' + tipo,
+      esIngreso ? state.erarioIngContado : state.erarioEgrContado);
+    renderFlujoMandos(tipo);
     renderFlujoDetalle(tipo);
   }
 
@@ -2494,6 +2512,114 @@
       itemEgresoSel = (itemEgresoSel === id) ? null : id;
     }
     renderFlujo(tipo);
+  }
+
+  /* ====================================================================
+     MANDOS DE CONTEO DE LA PANORÁMICA DEL ERARIO (1.1)
+
+     Las cifras de esta subpestaña ya no se llenan solas al abrirla:
+     nacen en cero y suben a su valor cuando alguien lo pide. Son dos
+     mandos y nada más —contabilizar y reiniciar a ceros—, porque aquí
+     no hay criterio que elegir ni universo que recortar: la cuenta es
+     una sola y se lee de arriba abajo.
+
+     El motor es el mismo de la 2.2 (simAnimarZona / simPonerEnCeros),
+     de modo que la curva, el respeto por prefers-reduced-motion y el
+     valor exacto al cerrar son idénticos en toda la plataforma.
+     ==================================================================== */
+
+  /* Tras cada re-dibujo hay que devolver la zona al estado en que
+     estaba: en ceros si nadie ha contabilizado, con el valor puesto si
+     ya se contabilizó. Se pinta de golpe, sin animar, porque abrir el
+     detalle de un renglón no es volver a contar. */
+  function erarioSincronizarZona(cont, clave, contado) {
+    if (contado) simAnimarZona(cont, clave, 0);
+    else simPonerEnCeros(cont, clave);
+  }
+
+  function erarioBarraMandos(cfg) {
+    return '<div class="evaluacion-controls-bar">' +
+      '<div class="eval-info-group">' +
+        '<span class="eval-badge">' + cfg.sello + '</span>' +
+        '<span class="eval-status-text">' + cfg.estado + '</span>' +
+      '</div>' +
+      '<div class="eval-actions-group">' +
+        '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.' + cfg.contar + '">' +
+          '<span>' + (cfg.contado ? '\u{1F504}' : '\u25B6\uFE0F') + '</span> ' +
+          (cfg.contado ? 'Volver a contabilizar' : 'Contabilizar') + '</button>' +
+        '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.' + cfg.reiniciar + '">' +
+          '<span>\u21BA</span> Reiniciar a ceros</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderErarioTotalMandos() {
+    const cont = document.getElementById('erarioTotalMandos');
+    if (!cont) return;
+    cont.innerHTML = erarioBarraMandos({
+      sello: 'CONSTRUCCIÓN CONTABLE',
+      contado: state.erarioTotalContado,
+      contar: 'erarioContar()',
+      reiniciar: 'erarioReiniciar()',
+      estado: state.erarioTotalContado
+        ? '✅ Contabilizado. El ingreso autorizado y el gasto aprobado cierran en la misma cifra: eso es lo que explica el resto de la subpestaña.'
+        : '⚪ Las cinco cifras están en ceros ($0). Pulse «Contabilizar» para verlas subir hasta el cierre del ejercicio.'
+    });
+  }
+
+  function renderFlujoMandos(tipo) {
+    const esIngreso = tipo === 'ingresos';
+    const cont = document.getElementById(esIngreso ? 'ingresosMandos' : 'egresosMandos');
+    if (!cont || !PANORAMA) return;
+    const contado = esIngreso ? state.erarioIngContado : state.erarioEgrContado;
+    const n = (esIngreso ? PANORAMA.ingresos : PANORAMA.egresos).length;
+    cont.innerHTML = erarioBarraMandos({
+      sello: esIngreso ? 'ORIGEN DEL INGRESO' : 'DESTINO DEL GASTO',
+      contado: contado,
+      contar: "flujoContar('" + tipo + "')",
+      reiniciar: "flujoReiniciar('" + tipo + "')",
+      estado: contado
+        ? (esIngreso
+            ? '✅ Contabilizado. Cada barra mide su origen frente al mayor de los nueve; el porcentaje es su parte del ingreso total.'
+            : '✅ Contabilizado. El porcentaje es la parte de cada renglón en el gasto total aprobado.')
+        : '⚪ Los ' + n + ' renglones están en ceros ($0 / 0.0%). Pulse «Contabilizar» para ver crecer las barras y sus porcentajes.'
+    });
+  }
+
+  function erarioContar(duracionMs) {
+    const cont = document.getElementById('erarioTotalStrip');
+    if (!cont) return;
+    state.erarioTotalContado = true;
+    renderErarioTotalMandos();
+    simAnimarZona(cont, 'erarioTotal', duracionMs === undefined ? 1200 : duracionMs);
+  }
+
+  function erarioReiniciar() {
+    const cont = document.getElementById('erarioTotalStrip');
+    if (!cont) return;
+    state.erarioTotalContado = false;
+    renderErarioTotalMandos();
+    simPonerEnCeros(cont, 'erarioTotal');
+  }
+
+  function flujoContar(tipo, duracionMs) {
+    const esIngreso = tipo === 'ingresos';
+    const cont = document.getElementById(esIngreso ? 'ingresosChart' : 'egresosChart');
+    if (!cont) return;
+    if (esIngreso) state.erarioIngContado = true;
+    else state.erarioEgrContado = true;
+    renderFlujoMandos(tipo);
+    simAnimarZona(cont, 'flujo-' + tipo, duracionMs === undefined ? 1300 : duracionMs);
+  }
+
+  function flujoReiniciar(tipo) {
+    const esIngreso = tipo === 'ingresos';
+    const cont = document.getElementById(esIngreso ? 'ingresosChart' : 'egresosChart');
+    if (!cont) return;
+    if (esIngreso) state.erarioIngContado = false;
+    else state.erarioEgrContado = false;
+    renderFlujoMandos(tipo);
+    simPonerEnCeros(cont, 'flujo-' + tipo);
   }
 
   // --- Puntos ciegos ---------------------------------------------------------
@@ -15247,6 +15373,12 @@
   }
 
   function simFmt(v, f) {
+    /* La 1.1 escribe en dos unidades propias, ambas fijas: la cifra de
+       portada siempre en billones y los renglones de las gráficas
+       siempre en mdp. Si la unidad cambiara a media cuenta —de «$0 mdp»
+       a «$10.19 billones»— el salto se leería como un salto del dato. */
+    if (f === 'billones') return '$' + (v / 1000000).toFixed(2) + ' billones';
+    if (f === 'mdpfijo') return formatMdpFijo(v);
     if (f === 'pct') return v.toFixed(1) + '%';
     if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
     if (f === 'pesos') return '$' + formatNumber(Math.round(v * 100) / 100);
@@ -20387,6 +20519,10 @@
     aplicarAutolink: aplicarAutolink,
     selectCircuitoEtapa: selectCircuitoEtapa,
     selectFlujoItem: selectFlujoItem,
+    erarioContar: erarioContar,
+    erarioReiniciar: erarioReiniciar,
+    flujoContar: flujoContar,
+    flujoReiniciar: flujoReiniciar,
     renderPanoramaErario: renderPanoramaErario,
     renderTerritorioErario: renderTerritorioErario,
     renderEntidadCircuito: renderEntidadCircuito,
