@@ -225,34 +225,205 @@ window.AUDIT_DB = {
         "id": "ing-cuotas",
         "nombre": "Cuotas de seguridad social",
         "nombreLargo": "Cuotas y aportaciones de seguridad social",
-        "grupo": "No tributarios",
+        "grupo": "Otras contribuciones",
         "montoMdp": 641782.1,
         "estado": "oficial",
-        "quePaga": "Lo que patrones y trabajadores aportan al IMSS y al ISSSTE. No es impuesto, es contribución con destino propio.",
-        "ley": "Ley del Seguro Social · Ley del ISSSTE",
-        "icono": "🏥"
+        "quePaga": "Lo que patrones y trabajadores aportan al IMSS y al ISSSTE para financiar las prestaciones de seguridad social.",
+        "icono": "🏥",
+        "ley": "Ley del Seguro Social · Ley del ISSSTE · Art. 2º fracc. II CFF",
+        "claveLIF": "2.22.01",
+        "glos": "Aportaciones de Seguridad Social",
+        "refKey": "ref-lss",
+        "refNum": 58,
+        "efecto": "Es <b>contribución, no impuesto</b>: el artículo 2º del Código Fiscal la define como la aportación de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social. De ahí su rasgo decisivo: tiene <b>destino específico</b>. No entra a la bolsa común del gasto ni forma parte de la Recaudación Federal Participable, así que no se reparte a estados y municipios.",
+        "componentes": [
+          {
+            "n": "Cuotas para el Seguro Social a cargo de patrones y trabajadores",
+            "m": 641782.1,
+            "d": "La totalidad del rubro"
+          },
+          {
+            "n": "Aportaciones para fondos de vivienda (INFONAVIT)",
+            "m": 0.0,
+            "d": "Presupuestado en cero: no ingresa al erario federal, va directo al fondo"
+          },
+          {
+            "n": "Cuotas del Sistema de Ahorro para el Retiro",
+            "m": 0.0,
+            "d": "Presupuestado en cero: van a las cuentas individuales, no a la Federación"
+          }
+        ]
       },
       {
-        "id": "ing-dpa",
-        "nombre": "Derechos, productos y aprovechamientos",
-        "nombreLargo": "Derechos, productos y aprovechamientos",
-        "grupo": "No tributarios",
-        "montoMdp": 939655.6,
-        "estado": "derivado",
-        "quePaga": "Pagos por usar bienes de la nación —entre ellos los hidrocarburos—, por trámites y por rendimientos del patrimonio público.",
-        "ley": "Ley Federal de Derechos",
-        "icono": "🛢️"
-      },
-      {
-        "id": "ing-organismos",
-        "nombre": "Organismos y empresas del Estado",
-        "nombreLargo": "Ingresos de organismos y empresas productivas",
-        "grupo": "No tributarios",
-        "montoMdp": 1301078.5,
+        "id": "ing-mejoras",
+        "nombre": "Contribuciones de mejoras",
+        "nombreLargo": "Contribuciones de mejoras por obras públicas de infraestructura hidráulica",
+        "grupo": "Otras contribuciones",
+        "montoMdp": 39.6,
         "estado": "oficial",
-        "quePaga": "Lo que generan por su cuenta el IMSS, el ISSSTE, la CFE y Pemex con su propia operación.",
-        "ley": "Art. 25 y 28 CPEUM · LFPRH",
-        "icono": "⚡"
+        "quePaga": "Lo que pagan quienes se benefician de forma directa de una obra pública federal de infraestructura hidráulica.",
+        "icono": "💧",
+        "ley": "Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica · Art. 2º fracc. III CFF",
+        "claveLIF": "3.31.01",
+        "glos": "Contribuciones de Mejoras",
+        "refKey": "ref-lcmopfih",
+        "refNum": 59,
+        "efecto": "Es la contribución que mejor ilustra el principio de <b>beneficio</b>: no se paga por tener capacidad económica, sino por recibir una ventaja particular y medible de una obra pública. Con $39.6 mdp es la partida más pequeña de toda la Ley de Ingresos, y sin embargo es una de las cuatro especies de contribución que reconoce el Código Fiscal."
+      },
+      {
+        "id": "ing-derechos",
+        "nombre": "Derechos",
+        "nombreLargo": "Derechos",
+        "grupo": "Otras contribuciones",
+        "montoMdp": 157081.7,
+        "estado": "oficial",
+        "quePaga": "Pagos por usar o aprovechar bienes del dominio público de la Nación y por recibir servicios que presta el Estado en funciones de derecho público.",
+        "icono": "📋",
+        "ley": "Ley Federal de Derechos · Art. 2º fracc. IV CFF",
+        "claveLIF": "4",
+        "glos": "Derechos (Contribución)",
+        "refKey": "ref-lfd",
+        "refNum": 60,
+        "efecto": "Contribución de <b>contraprestación</b>: a diferencia del impuesto, aquí el particular recibe algo identificable a cambio —un pasaporte, una concesión, el uso de agua o del espectro—. La Suprema Corte ha sostenido que su cuota debe guardar relación razonable con el costo del servicio; si excede ese costo, el derecho se vuelve un impuesto encubierto y es inconstitucional.",
+        "componentes": [
+          {
+            "n": "Por el uso, goce o aprovechamiento de bienes del dominio público",
+            "m": 81380.2,
+            "d": "Agua, espectro radioeléctrico, zona federal, puertos y carreteras"
+          },
+          {
+            "n": "Por prestación de servicios del Estado en funciones de derecho público",
+            "m": 75701.5,
+            "d": "Trámites migratorios, consulares, sanitarios, registrales y de seguridad"
+          }
+        ]
+      },
+      {
+        "id": "ing-productos",
+        "nombre": "Productos",
+        "nombreLargo": "Productos",
+        "grupo": "No tributarios",
+        "montoMdp": 16488.3,
+        "estado": "oficial",
+        "quePaga": "Lo que el Estado gana por usar, aprovechar o vender bienes que NO son del dominio público, y por los rendimientos de su patrimonio.",
+        "icono": "🏷️",
+        "ley": "Art. 3º párrafo tercero CFF",
+        "claveLIF": "5.51",
+        "glos": "Productos (Ingresos del Estado)",
+        "refKey": "ref-cff",
+        "refNum": 9,
+        "efecto": "El Estado aquí <b>no actúa como autoridad, sino como particular</b>: cobra rentas, intereses y precios de venta igual que cualquier propietario. Por eso el artículo 3º del Código Fiscal los saca de la categoría de contribuciones. La consecuencia práctica: no se rigen por el principio de legalidad tributaria con el mismo rigor, y su cobro es de derecho privado.",
+        "componentes": [
+          {
+            "n": "Derivados del uso, aprovechamiento o enajenación de bienes no sujetos al régimen de dominio público",
+            "m": 16322.7,
+            "d": "Intereses de valores $11,736.9 · enajenación de bienes $3,985.6 · utilidades $600.0"
+          },
+          {
+            "n": "Por servicios que no corresponden a funciones de derecho público",
+            "m": 165.6,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-aprovech",
+        "nombre": "Aprovechamientos",
+        "nombreLargo": "Aprovechamientos",
+        "grupo": "No tributarios",
+        "montoMdp": 203520.5,
+        "estado": "oficial",
+        "quePaga": "Ingresos que percibe el Estado por funciones de derecho público distintos de las contribuciones: multas no fiscales, cuotas compensatorias, decomisos, recuperaciones y remanentes.",
+        "icono": "⚖️",
+        "ley": "Art. 3º párrafo primero CFF",
+        "claveLIF": "6",
+        "glos": "Aprovechamientos",
+        "refKey": "ref-cff",
+        "refNum": 9,
+        "efecto": "Es la <b>categoría residual</b> del sistema: el artículo 3º los define por exclusión, como lo que percibe el Estado por funciones de derecho público y no es contribución, ni ingreso de organismos, ni empresa del Estado. Esa textura abierta los vuelve el rubro más heterogéneo de la ley y el más difícil de auditar renglón por renglón.",
+        "componentes": [
+          {
+            "n": "Aprovechamientos",
+            "m": 201723.3,
+            "d": "Cuotas compensatorias $1,807.2 · juegos y sorteos $2,578.3 · obras hidráulicas $4,304.7 · servicios energéticos $1,948.0 · decomisos $337.0"
+          },
+          {
+            "n": "Aprovechamientos patrimoniales",
+            "m": 1176.2,
+            "d": "Recuperaciones de capital"
+          },
+          {
+            "n": "Accesorios de aprovechamientos",
+            "m": 621.0,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-ventas",
+        "nombre": "Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE)",
+        "nombreLargo": "Ingresos por ventas de bienes, prestación de servicios y otros ingresos",
+        "grupo": "No tributarios",
+        "montoMdp": 1630973.6,
+        "estado": "oficial",
+        "quePaga": "Lo que generan con su propia operación el IMSS, el ISSSTE, Petróleos Mexicanos y la Comisión Federal de Electricidad.",
+        "icono": "⚡",
+        "ley": "Ley de la Empresa Pública del Estado, Petróleos Mexicanos · Ley de la Empresa Pública del Estado, CFE · Arts. 25 y 28 CPEUM",
+        "claveLIF": "7",
+        "glos": "Empresas Públicas del Estado",
+        "refKey": "ref-lepe",
+        "refNum": 61,
+        "efecto": "No es recaudación: es <b>venta</b>. El Estado cobra aquí un precio por un bien o un servicio en el mercado, no un tributo por mandato de ley. La reforma de 2024–2025 cambió su naturaleza jurídica: Pemex y CFE dejaron de ser «empresas productivas del Estado» para volverse <b>empresas públicas del Estado</b>, con el Estado como rector y no sólo como accionista.",
+        "componentes": [
+          {
+            "n": "Petróleos Mexicanos",
+            "m": 971677.2,
+            "d": ""
+          },
+          {
+            "n": "Comisión Federal de Electricidad",
+            "m": 535477.2,
+            "d": ""
+          },
+          {
+            "n": "Instituto Mexicano del Seguro Social",
+            "m": 62799.2,
+            "d": ""
+          },
+          {
+            "n": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+            "m": 61020.0,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-transf",
+        "nombre": "Transferencias del Fondo Mexicano del Petróleo",
+        "nombreLargo": "Transferencias, asignaciones, subsidios y subvenciones, y pensiones y jubilaciones",
+        "grupo": "No tributarios",
+        "montoMdp": 232630.4,
+        "estado": "oficial",
+        "quePaga": "Lo que el Fondo Mexicano del Petróleo entrega al Gobierno Federal para el gasto del año.",
+        "icono": "🛢️",
+        "ley": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo · Art. 28 párrafo sexto CPEUM",
+        "claveLIF": "9.97.01",
+        "glos": "Fondo Mexicano del Petróleo (FMP)",
+        "refKey": "ref-lfmped",
+        "refNum": 62,
+        "efecto": "El FMP es un <b>fideicomiso público en el Banco de México</b> con mandato constitucional: recibe toda la renta petrolera y la entrega al presupuesto hasta un tope de 4.7 % del PIB. Lo que exceda debe ahorrarse. En 2026 la transferencia va íntegra al gasto corriente, de modo que el ahorro de largo plazo previsto en su diseño no se materializa.",
+        "componentes": [
+          {
+            "n": "Transferencias ordinarias",
+            "m": 232630.4,
+            "d": "La totalidad del rubro"
+          },
+          {
+            "n": "Transferencias extraordinarias",
+            "m": 0.0,
+            "d": "Presupuestado en cero"
+          }
+        ]
       },
       {
         "id": "ing-deuda",
@@ -262,8 +433,40 @@ window.AUDIT_DB = {
         "montoMdp": 1472626.4,
         "estado": "oficial",
         "quePaga": "Dinero prestado, no recaudado. Entra como ingreso del año y sale como obligación de los años siguientes.",
+        "icono": "🏦",
         "ley": "Art. 73 fracc. VIII CPEUM · Ley General de Deuda Pública",
-        "icono": "🏦"
+        "claveLIF": "0",
+        "glos": "Techo de Endeudamiento Neto (LIF)",
+        "refKey": "ref-lgdp",
+        "refNum": 4,
+        "efecto": "Es lo que hace que la Ley de Ingresos y el Presupuesto de Egresos <b>cierren en la misma cifra</b>: el presupuesto cuadra porque lo prestado se cuenta como ingreso. La cifra neta esconde un bruto mayor: se contratan $1,858,397.4 mdp de endeudamiento interno y se restan los déficits de organismos y de empresas públicas.",
+        "componentes": [
+          {
+            "n": "Endeudamiento interno del Gobierno Federal",
+            "m": 1779541.7,
+            "d": "Endeudamiento neto del Gobierno Federal, según la nota informativa de la propia ley"
+          },
+          {
+            "n": "Otros financiamientos (diferimiento de pagos)",
+            "m": 78855.7,
+            "d": "Pagos que se recorren al ejercicio siguiente"
+          },
+          {
+            "n": "Endeudamiento externo",
+            "m": 0.0,
+            "d": "Presupuestado en cero para 2026"
+          },
+          {
+            "n": "Déficit de organismos y empresas de control directo",
+            "m": -101616.2,
+            "d": "Se resta: reduce el financiamiento neto"
+          },
+          {
+            "n": "Déficit de empresas públicas del Estado",
+            "m": -284154.8,
+            "d": "Se resta: reduce el financiamiento neto"
+          }
+        ]
       }
     ],
 
@@ -4236,6 +4439,48 @@ window.AUDIT_DB = {
         "definicion": "Impuestos causados en ejercicios anteriores que siguen pendientes de liquidarse o de pagarse, incluidos los de contribuciones ya derogadas. Demuestran que la obligación tributaria sobrevive a la ley que la creó: se extingue por pago, por caducidad de la facultad de la autoridad para determinarla —cinco años, artículo 67 del Código Fiscal— o por prescripción del crédito ya determinado —cinco años, artículo 146—.",
         "ley": "Código Fiscal de la Federación, arts. 67 y 146",
         "categoria": "💰 Hacendario & Deuda"
+      },
+      {
+        "termino": "Aportaciones de Seguridad Social",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Art. 2º fracc. II CFF · Ley del Seguro Social · Ley del ISSSTE",
+        "definicion": "Contribuciones a cargo de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social, o de quienes se benefician de servicios de previsión social. Su rasgo decisivo es el destino específico: financian las prestaciones del IMSS y del ISSSTE, no entran a la bolsa común del gasto y no integran la Recaudación Federal Participable, de modo que no se reparten a estados ni municipios."
+      },
+      {
+        "termino": "Contribuciones de Mejoras",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Art. 2º fracc. III CFF · Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica",
+        "definicion": "Contribuciones a cargo de quienes se benefician de manera directa de una obra pública. Responden al principio de beneficio y no al de capacidad contributiva: no se paga por tener con qué, sino por recibir una ventaja particular y medible. En el ámbito federal sólo subsiste la referida a obras de infraestructura hidráulica."
+      },
+      {
+        "termino": "Derechos (Contribución)",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Art. 2º fracc. IV CFF · Ley Federal de Derechos",
+        "definicion": "Contribuciones que se pagan por usar o aprovechar bienes del dominio público de la Nación, o por recibir servicios que presta el Estado en sus funciones de derecho público. A diferencia del impuesto, aquí existe contraprestación identificable. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio: si lo excede de manera desproporcionada, el derecho se convierte en un impuesto encubierto y resulta inconstitucional."
+      },
+      {
+        "termino": "Productos (Ingresos del Estado)",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Art. 3º párrafo tercero CFF",
+        "definicion": "Contraprestaciones que recibe el Estado por los servicios que presta en sus funciones de derecho privado, y por el uso, aprovechamiento o enajenación de bienes que no son del dominio público: rentas, intereses de valores, venta de muebles e inmuebles y utilidades. Aquí el Estado no actúa como autoridad sino como particular, razón por la cual el Código Fiscal los excluye de las contribuciones."
+      },
+      {
+        "termino": "Aprovechamientos",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Art. 3º párrafo primero CFF",
+        "definicion": "Ingresos que percibe el Estado por funciones de derecho público distintos de las contribuciones, de los ingresos derivados de financiamientos y de los que obtienen los organismos descentralizados y las empresas del Estado. Es una categoría residual definida por exclusión: caben ahí multas no fiscales, cuotas compensatorias, decomisos, recuperaciones de capital y remanentes. Esa textura abierta la vuelve el rubro más heterogéneo de la Ley de Ingresos."
+      },
+      {
+        "termino": "Empresas Públicas del Estado",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Arts. 25 y 28 CPEUM · Ley de la Empresa Pública del Estado, Pemex · Ley de la Empresa Pública del Estado, CFE",
+        "definicion": "Figura jurídica que sustituyó a las empresas productivas del Estado con la reforma energética de 2024-2025. Pemex y la CFE dejan de regirse por una lógica de competencia en el mercado, creada en 2013, y pasan a operar bajo la rectoría del Estado en áreas estratégicas. Lo que aportan al erario no es recaudación sino venta: cobran un precio por un bien o un servicio, no un tributo por mandato de ley."
+      },
+      {
+        "termino": "Fondo Mexicano del Petróleo (FMP)",
+        "categoria": "💰 Hacendario & Deuda",
+        "ley": "Art. 28 párrafo sexto CPEUM · Ley del FMP para la Estabilización y el Desarrollo",
+        "definicion": "Fideicomiso público constituido en el Banco de México por mandato constitucional. Recibe los ingresos del Estado derivados de las asignaciones y contratos de hidrocarburos y los transfiere al presupuesto hasta un tope equivalente al 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Cuando la transferencia se agota en gasto corriente del ejercicio, la función estabilizadora prevista en su diseño no llega a operar."
       }
     ],
   "legislativo": {
@@ -6128,6 +6373,51 @@ window.AUDIT_DB = {
         "cita_apa": "Ley de Ingresos sobre Hidrocarburos, artículos 55 a 57. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lih.htm",
         "descripcion": "Régimen fiscal de la actividad petrolera. Sus artículos 55 a 57 establecen el impuesto por la actividad de exploración y extracción de hidrocarburos, que se calcula por kilómetro cuadrado de área contractual o de asignación y cuya cuota se eleva pasados sesenta meses sin producción. Estimado en $7,070.4 mdp para 2026."
+      },
+      {
+        "num": 58,
+        "id": "ref-lss",
+        "categoria": "hacendario_fiscal",
+        "categoria_nombre": "Hacendario y Fiscal",
+        "cita_apa": "Ley del Seguro Social. Diario Oficial de la Federación, 21 de diciembre de 1995, última reforma vigente (México). Cámara de Diputados. En relación con la Ley del ISSSTE (DOF 31 de marzo de 2007).",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss.htm",
+        "descripcion": "Régimen de las cuotas obrero-patronales que financian las prestaciones del IMSS. Junto con las del ISSSTE constituyen las aportaciones de seguridad social del artículo 2º fracción II del Código Fiscal: contribuciones con destino específico, que no integran la Recaudación Federal Participable y por tanto no se reparten a estados y municipios. Estimadas en $641,782.1 mdp para 2026."
+      },
+      {
+        "num": 59,
+        "id": "ref-lcmopfih",
+        "categoria": "hacendario_fiscal",
+        "categoria_nombre": "Hacendario y Fiscal",
+        "cita_apa": "Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica. Diario Oficial de la Federación, 26 de diciembre de 1990, última reforma vigente (México). Cámara de Diputados.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lcmopfih.htm",
+        "descripcion": "Única ley vigente de contribución de mejoras en el ámbito federal. Grava a quienes se benefician de manera directa de obras públicas de infraestructura hidráulica, conforme al principio de beneficio del artículo 2º fracción III del Código Fiscal. Con $39.6 mdp estimados para 2026 es la partida más pequeña de toda la Ley de Ingresos."
+      },
+      {
+        "num": 60,
+        "id": "ref-lfd",
+        "categoria": "hacendario_fiscal",
+        "categoria_nombre": "Hacendario y Fiscal",
+        "cita_apa": "Ley Federal de Derechos. Diario Oficial de la Federación, 31 de diciembre de 1981, última reforma vigente (México). Cámara de Diputados.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
+        "descripcion": "Catálogo de los derechos federales: pagos por servicios que presta el Estado en funciones de derecho público y por el uso o aprovechamiento de bienes del dominio de la Nación —agua, espectro radioeléctrico, zona federal, puertos—. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio; si lo excede, el derecho se convierte en un impuesto encubierto. Estimados en $157,081.7 mdp para 2026."
+      },
+      {
+        "num": 61,
+        "id": "ref-lepe",
+        "categoria": "hacendario_fiscal",
+        "categoria_nombre": "Hacendario y Fiscal",
+        "cita_apa": "Ley de la Empresa Pública del Estado, Petróleos Mexicanos, y Ley de la Empresa Pública del Estado, Comisión Federal de Electricidad. Diario Oficial de la Federación, 18 de marzo de 2025 (México). Cámara de Diputados.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lepepm.htm",
+        "descripcion": "Leyes que rigen a Pemex y a la CFE tras la reforma energética de 2024-2025. El cambio no es de nombre: dejan de ser «empresas productivas del Estado», figura creada en 2013 con lógica de competencia, para volverse «empresas públicas del Estado», con el Estado como rector del sector. Sus ingresos propios suman $1,507,154.4 mdp estimados para 2026."
+      },
+      {
+        "num": 62,
+        "id": "ref-lfmped",
+        "categoria": "hacendario_fiscal",
+        "categoria_nombre": "Hacendario y Fiscal",
+        "cita_apa": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm",
+        "descripcion": "Fideicomiso público en el Banco de México, previsto en el párrafo sexto del artículo 28 constitucional, que recibe la renta petrolera del Estado y la transfiere al presupuesto hasta un tope de 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Para 2026 se presupuestan $232,630.4 mdp de transferencias ordinarias y cero extraordinarias."
       }
     ],
   "preguntas_casillas": [

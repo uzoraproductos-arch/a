@@ -783,6 +783,59 @@ de los 32 circuitos.
   14.4 %; 14 enlaces de glosario con sus 14 notas al pie en la 1.1, 0
   anidadas; 0 desbordes de 1600 a 360 px; 0 errores de JavaScript.
 
+### Hecho (1.1: los ingresos no tributarios, al mismo nivel)
+
+- **Los cuatro renglones restantes reciben el trato de los impuestos**:
+  efecto jurídico, clave del concepto en la LIF, fundamento legal, enlace a
+  glosario y enlace a referencia. La 1.1 queda con **16 de 16 fichas**
+  completas.
+- **Corrección de clasificación, y era de fondo.** La base ponía las cuotas de
+  seguridad social y los derechos bajo «No tributarios». El artículo 2º del
+  Código Fiscal dice que las contribuciones son cuatro especies: impuestos,
+  **aportaciones de seguridad social**, **contribuciones de mejoras** y
+  **derechos**. Productos y aprovechamientos sí son no tributarios (art. 3º).
+  Las familias pasan de tres a cuatro: Impuestos · Otras contribuciones ·
+  No tributarios · Financiamiento.
+- **Se acabaron las cifras derivadas en la gráfica de ingresos.** El renglón
+  agregado «Derechos, productos y aprovechamientos» ($939,655.6, `derivado`)
+  y «Organismos y empresas del Estado» se abren en los rubros que la ley
+  enumera: contribuciones de mejoras $39.6, derechos $157,081.7, productos
+  $16,488.3, aprovechamientos $203,520.5, venta de bienes y servicios
+  $1,630,973.6 y transferencias del FMP $232,630.4. **Los 16 renglones son
+  ahora `oficial`**: no queda una sola cifra obtenida por diferencia.
+- **Corrección de vigencia.** La ficha decía «empresas productivas del
+  Estado», figura creada en 2013. La reforma de 2024-2025 las convirtió en
+  **empresas públicas del Estado**, con leyes propias publicadas el 18 de
+  marzo de 2025.
+- **Partidas que restan.** La ficha de deuda muestra los cinco componentes,
+  dos de ellos negativos: los déficits de organismos (−$101,616.2) y de
+  empresas públicas (−$284,154.8). Se dibujan **rayadas y con filo rojo**,
+  escaladas por valor absoluto, con pie que aclara que la barra mide tamaño y
+  no dirección. Es la misma solución que se aplicó a los negativos de la 5.4.
+  La ficha deja ver que el bruto ($1,858,397.4 de endeudamiento interno) es
+  mayor que el neto que aparece en la gráfica.
+- **Defecto de forma corregido:** `formatMdpFijo` escribía «$-101,616». El
+  signo va delante del peso, no entre el peso y la cifra.
+- **El rótulo dejó de mentir.** Decía «Nueve orígenes componen el ingreso
+  federal» con la gráfica mostrando dieciséis. Ahora lo pinta
+  `renderFlujoConteo()` a partir de la base, así que no puede volver a
+  desmentirse.
+- **Referencias 58 a 62**: Ley del Seguro Social (con la del ISSSTE), Ley de
+  Contribución de Mejoras por Obras Públicas Federales de Infraestructura
+  Hidráulica, Ley Federal de Derechos, Leyes de la Empresa Pública del Estado
+  (Pemex y CFE) y Ley del Fondo Mexicano del Petróleo. Las cinco URL
+  verificadas contra el portal de la Cámara de Diputados.
+- **Glosario 163 → 170**: Aportaciones de Seguridad Social, Contribuciones de
+  Mejoras, Derechos (Contribución), Productos (Ingresos del Estado),
+  Aprovechamientos, Empresas Públicas del Estado y Fondo Mexicano del
+  Petróleo (FMP).
+- Verificado: 16/16 fichas con efecto, glosario y referencia; los porcentajes
+  de renglón suman 100.0 % y las cuatro familias 57.3 + 7.8 + 20.4 + 14.4;
+  todos los desgloses cuadran con su renglón al peso; 0 desbordes de 1600 a
+  360 px; 0 errores de JavaScript. Comparación estructural contra el commit
+  anterior: 20 colecciones intactas, 57 referencias y 163 términos previos
+  idénticos, `panoramaErario` sin cambios fuera de `ingresos`.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en

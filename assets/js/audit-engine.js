@@ -84,7 +84,10 @@
   // Dentro de una misma gráfica la unidad no debe cambiar: mezclar billones y
   // millones obliga al lector a convertir de cabeza para comparar dos barras.
   function formatMdpFijo(num) {
-    return '$' + Math.round(num).toLocaleString('es-MX') + ' mdp';
+    // El signo va delante del peso, no entre el peso y la cifra:
+    // "$-101,616" se lee mal; "-$101,616" se lee a la primera.
+    const n = Math.round(num);
+    return (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('es-MX') + ' mdp';
   }
 
   function formatNumber(num) {
@@ -2001,6 +2004,11 @@
     { a: ['impuestos al comercio exterior', 'aranceles', 'arancel'], t: 'Impuestos al Comercio Exterior (Aranceles)', r: 'ref-ligie', n: 55 },
     { a: ['accesorios de las contribuciones', 'accesorios de impuestos', 'recargos'], t: 'Accesorios de las Contribuciones', r: 'ref-cff', n: 9 },
     { a: ['rezago fiscal', 'rezagos fiscales'], t: 'Rezago Fiscal', r: 'ref-cff', n: 9 },
+    { a: ['aportaciones de seguridad social', 'cuotas de seguridad social'], t: 'Aportaciones de Seguridad Social', r: 'ref-lss', n: 58 },
+    { a: ['contribuciones de mejoras', 'contribución de mejoras'], t: 'Contribuciones de Mejoras', r: 'ref-lcmopfih', n: 59 },
+    { a: ['aprovechamientos'], t: 'Aprovechamientos', r: 'ref-cff', n: 9 },
+    { a: ['empresas públicas del Estado', 'empresa pública del Estado'], t: 'Empresas Públicas del Estado', r: 'ref-lepe', n: 61 },
+    { a: ['Fondo Mexicano del Petróleo', 'FMP'], t: 'Fondo Mexicano del Petróleo (FMP)', r: 'ref-lfmped', n: 62 },
     { a: ['Recaudación Federal Participable'], t: 'Recaudación Federal Participable (RFP)', r: 'ref-lcf', n: 5 },
     { a: ['RFP'], t: 'Recaudación Federal Participable (RFP)', r: 'ref-lcf', n: 5, cs: true },
     { a: ['Ramo 28'], t: 'Ramo 28 (Participaciones Federales)', r: 'ref-lcf', n: 5, cs: true },
@@ -2191,7 +2199,7 @@
     'eval-status-text', 'fc-grupo-monto',
     'fd-clave', 'fd-efecto-k', 'fdc-nom', 'fdc-monto', 'fdc-pct', 'fdc-det',
     'fd-enlace', 'fd-enlace-glos', 'fd-enlace-ref', 'fd-enlace-n',
-    'ecz-clave', 'ecz-nom', 'ecz-monto',
+    'ecz-clave', 'ecz-nom', 'ecz-monto', 'fdc-pie',
     'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
     'fed-monto', 'fed-pct', 'ec-nom', 'ec-val', 'ec-rk', 'ec-rv',
     'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
@@ -2503,13 +2511,18 @@
     }
     /* El desglose que la propia ley trae dentro del renglon. Las cifras
        nacen en cero y cuentan al abrirse, como todo lo demas. */
+    /* La barra se escala con el valor absoluto, porque una partida que
+       resta tambien tiene tamano. Para que no se lea como un logro, la
+       negativa va rayada y con filo rojo: es la misma solucion que se
+       aplico a las barras negativas de la 5.4. */
     const maxComp = d.componentes && d.componentes.length
-      ? Math.max.apply(null, d.componentes.map(c => c.m)) : 0;
+      ? Math.max.apply(null, d.componentes.map(c => Math.abs(c.m))) : 0;
+    const hayNeg = (d.componentes || []).some(c => c.m < 0);
     const comps = (d.componentes || []).map(c => `
-        <li class="fdc-fila">
+        <li class="fdc-fila${c.m < 0 ? ' fdc-neg' : ''}">
           <span class="fdc-nom">${c.n}</span>
           <span class="fdc-barra"><span class="fdc-relleno"
-                data-anim-w="${maxComp ? (c.m / maxComp * 100).toFixed(2) : 0}" style="width:0%"></span></span>
+                data-anim-w="${maxComp ? (Math.abs(c.m) / maxComp * 100).toFixed(2) : 0}" style="width:0%"></span></span>
           <span class="fdc-monto" data-anim-v="${c.m}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
           <span class="fdc-pct" data-anim-v="${pctDe(c.m, d.montoMdp)}" data-anim-f="pct">0.0%</span>
           ${c.d ? '<span class="fdc-det">' + c.d + '</span>' : ''}
@@ -2527,7 +2540,9 @@
       <p class="fd-txt">${esIngreso ? d.quePaga : d.queCubre}</p>
       ${d.efecto ? '<div class="fd-efecto"><span class="fd-efecto-k">Qué efecto jurídico tiene</span><p>' + d.efecto + '</p></div>' : ''}
       ${d.ley ? '<div class="fd-ley"><span class="cd-lab">Fundamento</span><span class="cd-ley">' + d.ley + '</span></div>' : ''}
-      ${comps ? '<div class="fd-comp"><span class="fd-efecto-k">Qué incluye, según la propia ley</span><ul class="fdc-lista">' + comps + '</ul></div>' : ''}
+      ${comps ? '<div class="fd-comp"><span class="fd-efecto-k">Qué incluye, según la propia ley</span><ul class="fdc-lista">' + comps + '</ul>' +
+        (hayNeg ? '<p class="fdc-pie">Las partidas rayadas <b>restan</b>. La barra mide el tamaño de la cifra, no su dirección.</p>' : '') +
+        '</div>' : ''}
       ${(d.glos || d.refKey) ? '<div class="fd-enlaces">' +
         (d.glos ? '<button type="button" class="fd-enlace fd-enlace-glos" onclick="window.AuditEngine.goToGlossary(' + JSON.stringify(d.glos).replace(/"/g, '&quot;') + ')">📖 Qué significa: <b>' + d.glos + '</b></button>' : '') +
         (d.refKey ? '<button type="button" class="fd-enlace fd-enlace-ref" onclick="window.AuditEngine.goToRef(\'' + d.refKey + '\')">⚖️ Fuente y fundamento <span class="fd-enlace-n">[' + String(d.refNum).padStart(2, '0') + ']</span></button>' : '') +
@@ -2550,6 +2565,18 @@
     { clave: '1.16', nombre: 'Impuestos ecológicos',
       que: 'El catálogo federal los contempla y los presupuesta en cero. Los gravámenes ambientales que sí recauda la Federación viven dentro del IEPS —combustibles fósiles y plaguicidas—, no en este rubro.' }
   ];
+
+  /* El rotulo decia "Nueve origenes" con nueve renglones en la base.
+     Al crecer el desglose la frase quedo desmentida por la pantalla que
+     la acompana, que es el peor sitio donde puede fallar una cifra. */
+  function renderFlujoConteo() {
+    const el = document.getElementById('ingresosConteo');
+    if (!el || !PANORAMA) return;
+    const n = PANORAMA.ingresos.length;
+    const grupos = [];
+    PANORAMA.ingresos.forEach(x => { if (grupos.indexOf(x.grupo) < 0) grupos.push(x.grupo); });
+    el.textContent = 'Los ' + n + ' orígenes, agrupados en ' + grupos.length + ' familias,';
+  }
 
   function renderFlujoCeros() {
     const cont = document.getElementById('ingresosCeros');
@@ -2849,6 +2876,7 @@
     renderFlujo('ingresos');
     renderFlujo('egresos');
     renderFlujoCeros();
+    renderFlujoConteo();
     renderCiegos();
   }
 
