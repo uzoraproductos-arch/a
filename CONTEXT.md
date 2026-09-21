@@ -1076,6 +1076,60 @@ sitio. Medido: p90 de 83.3 ms a 16.8 ms.
 corre la página en reposo a ~47 ms por cuadro. Cualquier medición de
 rendimiento hecha aquí debe compararse contra ese piso, no contra 16 ms.
 
+### Hecho (1.1: las seis fichas de egresos, completas — y dos cifras corregidas)
+
+Los seis renglones de «2 · En qué se va» tenían monto y una línea de
+descripción, pero ninguno tenía efecto jurídico, fundamento, glosario ni
+referencia. Ahora los seis los tienen, y la pestaña 1 cierra en **31 de 31
+fichas completas**.
+
+Todo se fundamentó contra texto primario, descargado y leído en esta sesión:
+la Ley Federal de Presupuesto y Responsabilidad Hacendaria (última reforma
+DOF 09-04-2026), la Constitución, la Ley de Coordinación Fiscal y el decreto
+del Presupuesto de Egresos 2026.
+
+| Ficha | Fundamento | Lo que se dice |
+|---|---|---|
+| Desarrollo Social | LFPRH 2º-XXVII y 28-II | La ley misma excluye pensiones y programas sociales universales del gasto ajustable (2º-XXIV Bis) |
+| Gobierno | LFPRH 2º-XXVII y 28-II · CPEUM 126 | Los ramos autónomos reciben techo, no distribución: la Cámara no los reasigna |
+| Desarrollo Económico | LFPRH 2º-XXVII y 28-II · CPEUM 25 y 28 | Pemex y CFE son dos tercios de la finalidad |
+| Costo financiero | CPEUM 73-VIII · LFPRH 2º-XXV y XXVIII | El gasto neto total «no incluye las amortizaciones»: esto paga intereses, no capital |
+| Participaciones | LCF 1º, 2º y 9º | Inembargables, salvo el 25 % afectable en garantía: la puerta de la deuda estatal |
+| ADEFAS | LFPRH 54 · CPEUM 126 | Lo no devengado al 31 de diciembre no puede ejercerse; ADEFAS es la excepción |
+
+**Dos cifras que no resistieron la comprobación.**
+
+*Primera.* «Costo financiero» decía $1,571,652.6 mdp y ADEFAS $71,276.4. El
+**Anexo 8 del decreto** —«Costo financiero de la deuda y otras
+erogaciones»— cierra en $1,572,073,260,826, y el Ramo General 30 del Anexo 1
+en $70,855,700,000. Ambas estaban desviadas **exactamente $420.7 mdp**, en
+sentidos opuestos, de modo que el subtotal no programable salía bien y el
+error se escondía. Quedan en la cifra del decreto, marcadas `oficial` en vez
+de `derivado`, y el costo financiero estrena desglose exacto del Anexo 8:
+Ramo 24 ($1,297,681.1), costo financiero de Pemex y CFE ($238,838.8), Ramo 34
+de apoyo a ahorradores ($35,553.4) y Ramo 29 en ceros.
+
+*Segunda.* «Gobierno» figuraba con $1,697,583.6 mdp y «Desarrollo Económico»
+con $481,012.4. Estaban **intercambiadas**, y se demuestra con el propio
+Anexo 1: Pemex ($517,362.1) y CFE ($554,567.5) suman $1,071,929.6 mdp, más
+del doble de lo que la base asignaba a la finalidad que contiene energía. La
+reconstrucción ramo por ramo confirma el orden correcto —Gobierno ≈ $493,068
+frente a $481,012.4; Desarrollo Económico ≈ $1,644,048 frente a
+$1,697,583.6—, dentro del 3 % en ambos casos, mientras que con la asignación
+anterior el desfase de Desarrollo Económico era del 242 %.
+
+La suma de los seis renglones sigue siendo exacta: $7,094,708.8 mdp de gasto
+programable, $3,098,974.9 de no programable, **$10,193,683.7 de gasto neto
+total**, los tres al peso del Presupuesto.
+
+**Lo que queda dicho como pendiente.** La clasificación funcional no viene en
+el decreto sino en los tomos analíticos de Hacienda, y los portales de la
+Secretaría y del CEFP no se alcanzan desde este entorno. Las tres fichas
+programables lo declaran en su bloque «Lo que aquí falta, y por qué»,
+explican que la cifra se contrastó contra el Anexo 1 reconstruyendo la
+finalidad ramo por ramo, y anuncian que se sustituirá por la del tomo
+analítico en cuanto pueda citarse.
+
 ### Pendiente
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
