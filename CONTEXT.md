@@ -10,13 +10,26 @@
 en ninguna otra parte: ni en un chat, ni en una carpeta local, ni en el
 historial de otra IA.
 
+### La rama de trabajo no es `main`
+
+**Todo el proyecto vive en `claude/funny-turing-imtm54`.** `main` se quedó
+atrás y no tiene la calculadora cívica, ni el padrón municipal, ni las 32
+entidades bajo el mapa, ni el Paquete Económico 2027 leído contra sus textos
+legales. **Clonar `main` es empezar sin el trabajo hecho.**
+
+```bash
+git clone --branch claude/funny-turing-imtm54 \
+  https://github.com/uzoraproductos-arch/a.git
+cd a
+```
+
 El ciclo, sin excepciones:
 
 ```bash
-git pull origin main     # ANTES de empezar a trabajar
+git pull origin claude/funny-turing-imtm54   # ANTES de empezar a trabajar
 # ...cambios...
 git add -A && git commit -m "Describe el cambio"
-git push origin main     # AL TERMINAR, aunque quede a medias
+git push origin claude/funny-turing-imtm54   # AL TERMINAR, aunque quede a medias
 ```
 
 Si te quedas sin créditos, sin tokens o se cae la sesión, lo único que se
@@ -30,7 +43,37 @@ Para verificar que una copia está al día:
 git fetch origin && git status
 ```
 
-Si dice `Your branch is up to date with 'origin/main'`, esa copia es la buena.
+Si dice `up to date with 'origin/claude/funny-turing-imtm54'`, esa copia es la
+buena. **No empujes a `main` sin permiso expreso del autor.**
+
+### Dónde está cada cosa
+
+| Qué | Dónde |
+|---|---|
+| Repositorio | `https://github.com/uzoraproductos-arch/a` |
+| Rama de trabajo | `claude/funny-turing-imtm54` |
+| Publicado y en vivo | `https://uzoraproductos-arch.github.io/a/` |
+| Revisión abierta | Pull request #1 del repositorio |
+| Copia comprimida | `.../a/archive/refs/heads/claude/funny-turing-imtm54.zip` |
+
+La página publicada lleva su sello al pie: **Versión publicada: 20260922b**.
+Si lo que ves en el navegador no coincide con el sello del `index.html` que
+tienes delante, estás mirando una copia guardada por tu navegador, no la
+publicación. Recarga forzando (`Ctrl+Shift+R`) o añade `?v=` a la dirección.
+
+### Si trabajas con un agente de IA
+
+`AGENTS.md`, en la raíz, es el archivo que Antigravity, Astra/Codex, Cursor y
+los demás leen solos al abrir el proyecto: lleva las reglas duras —la rama, el
+criterio editorial, las convenciones que rompen el archivo y los criterios de
+terminado— en menos de 6,000 caracteres, por debajo del tope de 12,000 que
+Antigravity impone a los archivos de reglas. Este documento, CONTEXT.md, es el
+largo: el estado, lo hecho, lo pendiente y el porqué de cada decisión.
+
+Si tu herramienta no toma `AGENTS.md` sola, cárgalo a mano: en Antigravity, como
+regla de espacio de trabajo (`.agents/rules/`); en otras, pégalo al inicio de la
+conversación. Dos frases bastan para arrancar: «lee AGENTS.md y CONTEXT.md antes
+de tocar nada» y «trabajamos en la rama claude/funny-turing-imtm54».
 
 ## Qué es el proyecto
 
@@ -52,6 +95,8 @@ assets/css/auditavision.css      Diseño: temas claro y oscuro
 assets/js/mexico-states-geo.js   Geometría de las 32 entidades (window.MEXICO_GEOJSON)
 assets/js/audit-database.js      Datos fiscales, 16 colecciones (window.AUDIT_DB)
 assets/js/audit-engine.js        Motor y controlador (window.AuditEngine)
+herramientas/sello.py            Sube el sello de versión de las cinco hojas
+AGENTS.md                        Reglas para agentes de IA (rama, criterio, límites)
 ```
 
 El orden de carga importa: geometría y base de datos **antes** que el motor. El
@@ -64,11 +109,22 @@ Dependencias externas por CDN: Leaflet 1.9.4 para mapas y Google Fonts
 ### Convenciones que conviene respetar
 
 - El archivo usa saltos de línea **CRLF**. Al editar con scripts, presérvalos o
-  el diff se llena de ruido.
-- El texto va **con acentos**. Es contenido de cara al público.
+  el diff se llena de ruido. Cuentas de CR sueltos que deben conservarse:
+  `index.html` 56, `audit-engine.js` 2, `audit-database.js` 2,
+  `auditavision.css` 1.
+- El texto va **con acentos**. Es contenido de cara al público. Ojo:
+  `audit-engine.js` mezcla acentos reales y secuencias `\u00e1`; al anclar un
+  reemplazo, usa fragmentos cortos y sin acentos.
 - `audit-engine.js` es un IIFE que expone su API en `window.AuditEngine` al
   final del archivo. Todo método invocado desde el HTML debe estar en ese
-  objeto.
+  objeto: si no, el botón no hace nada y la consola calla.
+- La base de datos se llama **`window.AUDIT_DB`**, no `AuditDB`.
+- **El sello de versión se sube a mano en todo cambio que toque `assets/`**,
+  con `python3 herramientas/sello.py AAAAMMDD[letra]`. Sin eso el lector sigue
+  viendo la copia que guardó su navegador. Si no tocaste `assets/`, no hace
+  falta.
+- La navegación usa `data-tab` en las pestañas y `data-sub` en las
+  subpestañas; los paneles llevan `data-subpanel`.
 
 ## Cómo ejecutarlo
 
@@ -1399,8 +1455,9 @@ no tiene nada cacheado que reutilizar.
 **Hay que subir el sello a mano en cada cambio que toque `assets/`.** Es el
 precio de no tener un paso de compilación. El formato es `AAAAMMDD` más una
 letra cuando hay varias publicaciones el mismo día: `20260921a`, `20260921b`.
-El guion `scratchpad/sello.py` lo cambia en los cinco de golpe y comprueba que
-sigan siendo cinco.
+El guion `herramientas/sello.py` lo cambia en los cinco de golpe, sube también
+el renglón del pie y comprueba que los saltos CRLF queden intactos. Sin
+argumento dice cuál es el sello vigente y sugiere el siguiente.
 
 **Y el sello, a la vista.** Al pie de la página, bajo el aviso de
 transparencia, aparece «Versión publicada: 20260921b». Sin ese renglón no hay
@@ -1523,6 +1580,44 @@ desviación son **dos centavos en el décimo renglón del cuadro anual**, que
 vienen de la fuente y se comprobaron contra el PDF del SAT. Las tres cascadas
 cuadran, los seis regímenes rinden cifra, el reloj avanza, el móvil de 390 px
 no desborda y la consola no arroja errores.
+
+### Hecho (el respaldo, listo para cambiar de plataforma)
+
+El proyecto va a seguir desarrollándose en otras herramientas —Antigravity de
+Google y Astra de OpenAI—, y el traspaso tenía una trampa puesta por este mismo
+documento: la regla de oro mandaba `git pull origin main` y `git push origin
+main`. **Es la rama equivocada.** Todo el trabajo vive en
+`claude/funny-turing-imtm54`, que va treinta y siete commits por delante:
+quien hubiera seguido la instrucción al pie de la letra habría clonado una
+copia sin la calculadora cívica, sin el padrón municipal, sin las 32 entidades
+bajo el mapa y sin el Paquete Económico leído contra sus textos legales. Habría
+trabajado sobre un fantasma y creído que el trabajo anterior se perdió.
+Corregido: la regla de oro nombra ahora la rama real, advierte de `main` y
+prohíbe empujar ahí sin permiso.
+
+**`AGENTS.md`, en la raíz.** Es el archivo que Antigravity, Astra/Codex,
+Cursor y prácticamente cualquier agente salido de 2025 en adelante leen solos
+al abrir el proyecto: el estándar abierto que sustituyó a los `.cursorrules` de
+cada casa. Lleva seis apartados —la rama, el criterio editorial, cómo está
+construido, las convenciones que rompen el archivo, los criterios de terminado
+y el tono— en 5,769 caracteres. El tamaño no es capricho: Antigravity corta los
+archivos de reglas a 12,000 caracteres, y el equipo de Codex documentó que
+Astra rinde peor con archivos largos, porque todo lo que se carga siempre
+compite con la instrucción del momento. Lo largo se queda aquí, en CONTEXT.md,
+que el agente lee cuando lo necesita.
+
+**`herramientas/sello.py`, dentro del repositorio.** El guion que sube el sello
+de versión vivía en el cuaderno de trabajo de la sesión, que no viaja con el
+código: la convención más fácil de romper era justo la que no tenía
+herramienta que la sostuviera fuera de aquí. Ahora está versionado, encuentra
+la raíz por sí mismo, preserva los CRLF, verifica que sigan siendo cinco
+dependencias y un renglón al pie, y sin argumento dice cuál es el sello vigente
+y sugiere el siguiente.
+
+Y una tabla de enlaces en la regla de oro: repositorio, rama, dirección
+publicada, revisión abierta y copia comprimida, con el sello vigente al lado,
+para que cualquiera pueda comprobar en diez segundos si lo que tiene delante es
+la versión buena.
 
 ### Pendiente
 
