@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260922a">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260922b">
 </head>
 <body>
 
@@ -1088,24 +1088,68 @@
       </div><!-- FIN SUBPANEL 2.3 -->
 
       <!-- SUBPANEL 2.4: CALCULADORA CÍVICA DEL CONTRIBUYENTE -->
+      <!-- SUBPANEL 2.4: CALCULADORA CÍVICA DEL CONTRIBUYENTE -->
       <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="calculadora">
-        <section class="calculator-box">
-          <div class="section-hero" style="margin-bottom: 20px;">
-            <span class="hero-tag">Herramienta de Auditoría Cívica</span>
-            <h2>2.4 Calculadora Cívica del Contribuyente: ¿A dónde va cada peso que pagas?</h2>
-            <p>
-              Ingresa tu aportación anual aproximada de impuestos (o tu sueldo mensual) y nuestro motor descompondrá con exactitud 
-              matemática en qué dependencias, niveles de gobierno y programas públicos se gasta tu dinero.
-            </p>
+
+        <div class="section-hero">
+          <span class="hero-tag">Herramienta de Auditoría Cívica &middot; Ejercicio fiscal 2026</span>
+          <h2>2.4 Calculadora Cívica del Contribuyente</h2>
+          <p id="ccEntrada"></p>
+        </div>
+
+        <!-- BLOQUE 1 · SU INGRESO. El campo de captura vive en el HTML y no
+             se repinta nunca: si el motor lo redibujara, el foco se perdería
+             a media cifra. Lo demás del formulario sí lo dibuja el motor. -->
+        <section class="cc-bloque" id="cc-b1">
+          <div class="cc-cab">
+            <span class="cc-cab-n" aria-hidden="true">1</span>
+            <div class="cc-cab-tx">
+              <h3 class="cc-cab-tit">Su ingreso</h3>
+              <p class="cc-cab-sub">Escriba lo que gana y diga cómo tributa. Nada de esto sale de su navegador: la plataforma no guarda ni envía lo que usted teclee.</p>
+            </div>
           </div>
 
-          <div class="calc-input-group">
-            <input type="number" id="calcTaxInput" class="calc-input" value="30000" placeholder="Ej. 30000 (pesos de impuestos anuales)">
-            <button id="calcTriggerBtn" class="calc-btn">Auditar Mi Dinero</button>
+          <div class="cc-campos">
+            <div class="cc-campo cc-campo-monto">
+              <label class="cc-campo-et" for="ccMonto">¿Cuánto gana?</label>
+              <div class="cc-caja">
+                <span class="cc-caja-sig" aria-hidden="true">$</span>
+                <input type="text" id="ccMonto" class="cc-input" value="15,000"
+                       inputmode="decimal" autocomplete="off" spellcheck="false"
+                       aria-describedby="ccMontoPista">
+              </div>
+              <p class="cc-campo-pista" id="ccMontoPista">En pesos, sin centavos.</p>
+            </div>
+
+            <div class="cc-campo">
+              <span class="cc-campo-et" id="ccPeriodoEt">¿Cada cuándo?</span>
+              <div class="cc-seg" id="ccPeriodicidad" role="group" aria-labelledby="ccPeriodoEt"></div>
+            </div>
+
+            <div class="cc-campo">
+              <span class="cc-campo-et" id="ccNaturalezaEt">¿Esa cifra es antes o después de descuentos?</span>
+              <div class="cc-seg" id="ccNaturaleza" role="group" aria-labelledby="ccNaturalezaEt"></div>
+            </div>
           </div>
 
-          <div id="calcBreakdownGrid" class="calc-breakdown-grid"></div>
+          <p class="cc-reg-et" id="ccRegEt">¿En qué régimen tributa?</p>
+          <div class="cc-regimenes" id="ccRegimenes" role="group" aria-labelledby="ccRegEt"></div>
+          <div id="ccOpciones"></div>
+          <div class="erario-mandos" id="ccMandos"></div>
         </section>
+
+        <!-- BLOQUE 2 · LO QUE LE RETIENEN -->
+        <div id="ccRetencion"></div>
+
+        <!-- BLOQUE 3 · A DÓNDE VA CADA PESO -->
+        <div id="ccReparto"></div>
+
+        <!-- BLOQUE 4 · EL RELOJ DE LA DEUDA Y DE LO PERDIDO -->
+        <div id="ccReloj"></div>
+
+        <div id="ccCiegos"></div>
+        <div id="ccProcedencia"></div>
+
       </div><!-- FIN SUBPANEL 2.4 -->
 
       <!-- SUBPANEL 2.5: BITÁCORA & ALERTAS ASF -->
@@ -6570,7 +6614,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260922a</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260922b</b></span>
     </div>
   </footer>
 
@@ -6581,16 +6625,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260922a"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260922b"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260922a"></script>
+  <script src="assets/js/audit-database.js?v=20260922b"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260922a"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260922b"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260922a"></script>
+  <script src="assets/js/audit-engine.js?v=20260922b"></script>
 
 </body>
 </html>

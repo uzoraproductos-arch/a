@@ -76,7 +76,25 @@
     simSexEvaluado: false,
     /* Parte visible de la 2.2: A industria y mandato, B administracion
        presidencial, C de cero al resultado final. */
-    simParte: 'a'
+    simParte: 'a',
+    /* Calculadora civica (2.4). El formulario recuerda lo que el lector
+       eligio; el resultado nace vacio y solo se llena cuando lo pide, con
+       los mismos dos mandos del resto de la plataforma. */
+    cc: {
+      monto: 15000,
+      periodicidad: 'mes',      // 'mes' o 'ano'
+      naturaleza: 'bruto',      // 'bruto' o 'neto': que cifra escribio el lector
+      regimen: 'sueldos',
+      deducciones: 0,           // solo para actividad empresarial y profesional
+      plataforma: 'transporte',
+      escenarioIva: 50,         // escenario que fija el lector, no un dato
+      calculado: false,
+      resultado: null,
+      relojCadencia: 'dia',
+      relojDenominador: 'habitante',
+      relojInicio: null,
+      relojTimer: null
+    }
   };
 
   // ==========================================================================
@@ -806,39 +824,1020 @@
   // ==========================================================================
   // CALCULADORA CÍVICA DEL CONTRIBUYENTE
   // ==========================================================================
-  function calculateTaxBreakdown(incomeAmount) {
-    const container = document.getElementById('calcBreakdownGrid');
-    if (!container) return;
+  /* ====================================================================
+     CALCULADORA CIVICA DEL CONTRIBUYENTE (2.4)
 
-    const amount = parseFloat(incomeAmount);
-    if (isNaN(amount) || amount <= 0) {
-      container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--crimson-bright);">Por favor ingresa un monto válido de impuestos o salario anual estimado.</div>`;
-      return;
+     La version anterior repartia el dinero del lector entre nueve rubros
+     con porcentajes escritos a mano y sin fuente declarada. Aqui no queda
+     ninguno: las dos tarifas salen del Anexo 8 de la Resolucion
+     Miscelanea publicado el 28 de diciembre de 2025, la tabla del RESICO
+     del propio articulo 113-E, las cuotas obreras de cinco articulos de
+     la Ley del Seguro Social y el subsidio del decreto del 31 de
+     diciembre. El reparto del gasto usa los ocho renglones del
+     Presupuesto que ya publica la 1.1.
+     ==================================================================== */
+
+  /* Dias con que se eleva al mes un salario diario en materia laboral y de
+     seguridad social: treinta, no los del calendario. */
+  const CC_DIAS_MES = 30;
+  const CC_SEG_ANO = 31536000;   // 365 dias, la misma base que usa la 2.2
+
+  function ccDatos() { return DB.calculadora_civica; }
+  function ccPar() { return ccDatos().parametros; }
+
+  function ccRegimen(id) {
+    const c = ccDatos();
+    if (!c) return null;
+    return c.regimenes.find(r => r.id === (id || state.cc.regimen)) || c.regimenes[0];
+  }
+
+  /* El regimen «no se» no inventa reglas: hereda las de sueldos y salarios,
+     que es como tributa la mayoria, y lo declara en pantalla. */
+  function ccRegimenEfectivo() {
+    const r = ccRegimen();
+    return (r && r.hereda) ? ccRegimen(r.hereda) : r;
+  }
+
+  /* Tarifa progresiva por tramos: cuota fija del renglon mas el porcentaje
+     sobre lo que excede su limite inferior. Es el mecanismo del articulo 96
+     y el mismo del 152; solo cambian los numeros del cuadro. */
+  function ccTarifa(base, renglones) {
+    if (!(base > 0)) return { isr: 0, renglon: null, indice: -1 };
+    for (let i = 0; i < renglones.length; i++) {
+      const r = renglones[i];
+      if (r.ls === null || base <= r.ls) {
+        return { isr: Math.max(0, r.cf + (base - r.li) * r.pct / 100), renglon: r, indice: i };
+      }
+    }
+    const u = renglones[renglones.length - 1];
+    return { isr: Math.max(0, u.cf + (base - u.li) * u.pct / 100), renglon: u, indice: renglones.length - 1 };
+  }
+
+  /* Lo que el Seguro Social descuenta al trabajador, ramo por ramo. Cuatro
+     ramos se calculan sobre todo el salario base y uno solo sobre la parte
+     que excede tres veces la referencia diaria. */
+  function ccCuotasIMSS(sbcMensual) {
+    const p = ccPar(), im = ccDatos().imss_obrero;
+    const topeMes = im.tope_sbc_uma * p.uma.diaria * CC_DIAS_MES;
+    const tresUma = 3 * p.uma.diaria * CC_DIAS_MES;
+    const base = Math.min(Math.max(0, sbcMensual), topeMes);
+    const detalle = im.ramos.map(r => {
+      const b = r.base === 'excedente_3_uma' ? Math.max(0, base - tresUma) : base;
+      return { ramo: r.ramo, pct: r.pct, ley: r.ley, base: b, monto: b * r.pct / 100 };
+    });
+    return {
+      detalle: detalle,
+      total: detalle.reduce((a, x) => a + x.monto, 0),
+      base: base, topeMes: topeMes, tresUma: tresUma,
+      topado: sbcMensual > topeMes
+    };
+  }
+
+  /* Cantidad fija desde la reforma de 2024: el valor mensual de la UMA por
+     15.02%, y solo para quien no rebasa el tope de ingreso del decreto. */
+  function ccSubsidioEmpleo(ingresoMensual) {
+    const p = ccPar(), s = p.subsidio_empleo;
+    if (!(ingresoMensual > 0) || ingresoMensual > s.tope_ingreso_mensual) return 0;
+    return p.uma.mensual * s.pct_uma / 100;
+  }
+
+  function ccResicoRenglon(mensual) {
+    const t = ccDatos().resico.renglones;
+    for (let i = 0; i < t.length; i++) if (mensual <= t[i].hasta) return t[i];
+    return t[t.length - 1];
+  }
+
+  /* El calculo de un mes a partir del ingreso bruto. Todo lo demas -el ano,
+     la inversion desde el neto- se construye sobre esta funcion. */
+  function ccDesdeBruto(bruto) {
+    const c = ccDatos();
+    const reg = ccRegimenEfectivo();
+    const r = {
+      bruto: bruto, regimen: reg, base: bruto, deducido: 0, motivoDeduccion: null,
+      isrTarifa: 0, subsidio: 0, isr: 0, tasa: null, renglon: null,
+      cuotas: null, cuotasTotal: 0, retencionCliente: 0, quienRetiene: reg ? reg.retiene : ''
+    };
+    if (!reg) return r;
+
+    if (reg.id === 'sueldos') {
+      const t = ccTarifa(bruto, c.tarifa_mensual.renglones);
+      r.renglon = t.renglon;
+      r.isrTarifa = t.isr;
+      r.subsidio = Math.min(ccSubsidioEmpleo(bruto), t.isr);
+      r.isr = Math.max(0, t.isr - r.subsidio);
+      r.cuotas = ccCuotasIMSS(bruto);
+      /* Quien gana un salario minimo no paga ninguna de las dos cosas, y
+         por dos leyes distintas: el ultimo parrafo del articulo 96 de la
+         Ley del ISR prohibe retenerle el impuesto, y el articulo 36 de la
+         Ley del Seguro Social manda que el patron cubra integramente
+         tambien la cuota obrera. Sin esta salvedad la cuenta le cobraria
+         a un salario minimo lo que la ley no le cobra. */
+      r.salarioMinimo = bruto > 0 && bruto <= c.parametros.salario_minimo.mensual_general + 0.005;
+      if (r.salarioMinimo) {
+        r.isr = 0;
+        r.subsidio = 0;
+        r.cuotas.detalle.forEach(x => { x.monto = 0; });
+        r.cuotas.total = 0;
+        r.cuotas.exenta = true;
+      }
+    } else if (reg.id === 'resico') {
+      const tr = ccResicoRenglon(bruto);
+      r.tasa = tr.tasa;
+      r.isr = bruto * tr.tasa / 100;
+      r.isrTarifa = r.isr;
+    } else if (reg.id === 'honorarios') {
+      const ded = Math.min(Math.max(0, state.cc.deducciones || 0), bruto);
+      r.deducido = ded;
+      r.motivoDeduccion = 'Deducciones autorizadas que usted declaró';
+      r.base = bruto - ded;
+      const t = ccTarifa(r.base, c.tarifa_mensual.renglones);
+      r.renglon = t.renglon; r.isr = t.isr; r.isrTarifa = t.isr;
+      r.retencionCliente = bruto * 0.10;
+    } else if (reg.id === 'arrendamiento') {
+      r.deducido = bruto * 0.35;
+      r.motivoDeduccion = 'Deducción opcional del 35% del artículo 115, sin comprobar gasto alguno';
+      r.base = bruto - r.deducido;
+      const t = ccTarifa(r.base, c.tarifa_mensual.renglones);
+      r.renglon = t.renglon; r.isr = t.isr; r.isrTarifa = t.isr;
+      r.retencionCliente = bruto * 0.10;
+    } else if (reg.id === 'plataformas') {
+      const op = (reg.tasas || []).find(x => x.id === state.cc.plataforma) || reg.tasas[0];
+      r.plataforma = op; r.tasa = op.pct;
+      r.isr = bruto * op.pct / 100; r.isrTarifa = r.isr;
     }
 
-    // Proporciones del Presupuesto de Egresos de la Federación (PEF)
-    const breakdown = [
-      { dest: 'Transferencias a Estados y Municipios (Ramo 28/33)', pct: 27.6, desc: 'Fondos directos para tu gobierno estatal y ayuntamiento' },
-      { dest: 'Costo Financiero de la Deuda Pública', pct: 13.2, desc: 'Intereses y servicio de compromisos bancarios de la nación' },
-      { dest: 'Pensiones y Programas del Bienestar', pct: 12.8, desc: 'Adultos mayores, personas con discapacidad y becas' },
-      { dest: 'Energía y Rescate de Empresas Públicas', pct: 11.5, desc: 'Pemex y Comisión Federal de Electricidad' },
-      { dest: 'Educación Pública (SEP y FONE)', pct: 10.4, desc: 'Nómina de maestros de escuelas públicas e infraestructura' },
-      { dest: 'Salud y Hospitales (IMSS-Bienestar/ISSSTE)', pct: 9.6, desc: 'Medicamentos, médicos, clínicas y hospitales generales' },
-      { dest: 'Seguridad Nacional (Defensa, Marina, GN)', pct: 5.8, desc: 'Operativos militares, vigilancia costera y Guardia Nacional' },
-      { dest: 'Infraestructura Carretera, Hídrica y Trenes', pct: 4.8, desc: 'Caminos, presas de Conagua y vías férreas' },
-      { dest: 'Poder Judicial, INE y Órganos Autónomos', pct: 4.3, desc: 'Jueces, tribunales, elecciones, CNDH e Inegi' }
-    ];
+    r.cuotasTotal = r.cuotas ? r.cuotas.total : 0;
+    r.retenido = r.isr + r.cuotasTotal;
+    r.neto = bruto - r.retenido;
+    r.pctRetenido = bruto > 0 ? (r.retenido / bruto * 100) : 0;
+    r.pctIsr = bruto > 0 ? (r.isr / bruto * 100) : 0;
+    /* Tasa marginal: lo que pagaria por el siguiente peso ganado. No es la
+       misma que la efectiva, y confundirlas es el error mas comun al leer
+       una tarifa progresiva. */
+    r.marginal = r.renglon ? r.renglon.pct : (r.tasa || 0);
+    return r;
+  }
 
-    container.innerHTML = breakdown.map(item => {
-      const piece = (amount * (item.pct / 100)).toFixed(2);
-      return `
-        <div class="calc-item">
-          <div class="dest">${item.dest}</div>
-          <div class="amount">$${Number(piece).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-          <div class="pct">${item.pct}% de tu aportación · <span style="color:var(--text-secondary); font-size:9px;">${item.desc}</span></div>
-        </div>
-      `;
-    }).join('');
+  /* Quien conoce su deposito y no su sueldo escribe el neto. Como el neto
+     crece de manera monotona con el bruto, se invierte por biseccion: mas
+     honesto que despejar a mano una tarifa que tiene once tramos, un
+     subsidio con tope y una cuota con dos bases distintas. */
+  function ccDesdeNeto(neto) {
+    if (!(neto > 0)) return ccDesdeBruto(0);
+    let lo = neto, hi = neto * 3 + 100000;
+    for (let i = 0; i < 90; i++) {
+      const m = (lo + hi) / 2;
+      if (ccDesdeBruto(m).neto < neto) lo = m; else hi = m;
+    }
+    return ccDesdeBruto((lo + hi) / 2);
+  }
+
+  /* El resultado completo: el mes, el ano y el reparto del gasto. Con un
+     ingreso parejo la tarifa anual es la mensual elevada al ano, de modo
+     que multiplicar por doce no deforma nada: los dos cuadros del Anexo 8
+     guardan esa proporcion renglon por renglon. */
+  function ccCalcularResultado() {
+    const cc = state.cc;
+    const monto = Math.max(0, parseFloat(cc.monto) || 0);
+    const mensualEntrada = cc.periodicidad === 'ano' ? monto / 12 : monto;
+    const mes = cc.naturaleza === 'neto' ? ccDesdeNeto(mensualEntrada) : ccDesdeBruto(mensualEntrada);
+    const x = v => v * 12;
+    return {
+      mes: mes,
+      ano: {
+        bruto: x(mes.bruto), isr: x(mes.isr), cuotasTotal: x(mes.cuotasTotal),
+        subsidio: x(mes.subsidio), retenido: x(mes.retenido), neto: x(mes.neto),
+        base: x(mes.base), deducido: x(mes.deducido), retencionCliente: x(mes.retencionCliente)
+      },
+      reparto: ccReparto(x(mes.isr)),
+      entrada: { monto: monto, periodicidad: cc.periodicidad, naturaleza: cc.naturaleza }
+    };
+  }
+
+  /* El reparto se aplica solo al impuesto sobre la renta. Las cuotas de
+     seguridad social quedan fuera a proposito: la propia Ley de Ingresos
+     dice que tienen destino especifico, que no entran a la bolsa comun y
+     que no forman parte de la Recaudacion Federal Participable. Repartirlas
+     como si fueran gasto general seria repetir el error que este bloque
+     vino a corregir. */
+  function ccReparto(isrAnual) {
+    if (!PANORAMA) return [];
+    const total = PANORAMA.egresos.reduce((a, e) => a + e.montoMdp, 0);
+    return PANORAMA.egresos.map(e => ({
+      id: e.id, nombre: e.nombre, icono: e.icono, grupo: e.grupo,
+      queCubre: e.queCubre, estado: e.estado, refKey: e.refKey,
+      pct: total ? (e.montoMdp / total * 100) : 0,
+      monto: total ? (isrAnual * e.montoMdp / total) : 0,
+      totalMdp: e.montoMdp
+    })).sort((a, b) => b.monto - a.monto);
+  }
+
+  /* Lo que cada quien debe al ano por cada reloj, segun el denominador que
+     el lector elija: todos los habitantes o solo quienes tributan. */
+  function ccDenominador() {
+    const p = ccPar();
+    return state.cc.relojDenominador === 'padron'
+      ? { millones: p.padron.millones, rotulo: 'por contribuyente', fuente: p.padron, clave: 'padron' }
+      : { millones: p.poblacion.millones, rotulo: 'por habitante', fuente: p.poblacion, clave: 'habitante' };
+  }
+
+  function ccCadencia() {
+    const c = ccDatos().cadencias;
+    return c.find(x => x.id === state.cc.relojCadencia) || c[0];
+  }
+
+  /* Un reloj, resuelto: lo anual del pais, lo anual por persona y lo que
+     toca en la cadencia elegida. */
+  function ccReloj(f) {
+    const den = ccDenominador(), cad = ccCadencia();
+    const anualPais = f.anual_mdp * 1000000;
+    const anualPersona = anualPais / (den.millones * 1000000);
+    return {
+      fuente: f,
+      anualPais: anualPais,
+      porSegundoPais: anualPais / CC_SEG_ANO,
+      anualPersona: anualPersona,
+      enCadencia: anualPersona * cad.dias / 365
+    };
+  }
+
+  function ccRelojes() {
+    return ccDatos().relojes.fuentes.map(ccReloj);
+  }
+
+  /* --- utilerias de escritura ---------------------------------------- */
+
+  function ccPesos(v) { return '$' + formatNumber(Math.round(v)); }
+
+  /* Dos decimales siempre. Lo usa todo lo que el lector pueda comparar
+     contra su propio recibo, y el cuadro de la tarifa, que es una
+     transcripcion del Diario Oficial y no admite redondeo. */
+  function ccPesosExacto(v) {
+    return '$' + (Math.round(v * 100) / 100).toLocaleString('es-MX',
+      { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  /* Dos decimales cuando la cifra es chica: en una cuenta personal la
+     diferencia entre $12 y $12.40 al dia importa, y redondearla a secas
+     haria desaparecer los relojes mas pequenos. */
+  function ccPesosFinos(v) {
+    return Math.abs(v) < 1000 ? ccPesosExacto(v) : '$' + formatNumber(Math.round(v));
+  }
+
+  function ccSeg(contenedor, opciones, valor, accion) {
+    const cont = document.getElementById(contenedor);
+    if (!cont) return;
+    cont.innerHTML = opciones.map(o =>
+      '<button type="button" class="cc-seg-b' + (o.id === valor ? ' activo' : '') + '" ' +
+        'aria-pressed="' + (o.id === valor ? 'true' : 'false') + '" ' +
+        'onclick="window.AuditEngine.' + accion + '(\'' + o.id + '\')">' +
+        (o.icono ? '<span class="cc-seg-ico" aria-hidden="true">' + o.icono + '</span>' : '') +
+        '<span class="cc-seg-tx">' + o.nombre + '</span>' +
+      '</button>').join('');
+  }
+
+  /* --- bloque 1: el formulario --------------------------------------- */
+
+  function ccPintarEntrada() {
+    const el = document.getElementById('ccEntrada');
+    if (!el) return;
+    const p = ccPar();
+    el.innerHTML = 'Escriba lo que gana, diga cómo tributa y esta página hará tres cuentas con el ' +
+      'aparato legal de 2026: <strong>cuánto le retienen y con qué regla</strong>, <strong>a dónde iría ' +
+      'esa aportación</strong> según el reparto del Presupuesto aprobado, y <strong>cuánto se endeuda el ' +
+      'país por cada habitante</strong> mientras usted lee. Las tarifas salen del Anexo 8 de la Resolución ' +
+      'Miscelánea publicado el 28 de diciembre de 2025; las cuotas del Seguro Social, de cinco artículos de ' +
+      'su ley; la UMA de $' + formatNumber(p.uma.mensual) + ' al mes, del Instituto Nacional de Estadística. ' +
+      'Nada de lo que usted escriba sale de su navegador.';
+  }
+
+  function ccPintarFormulario() {
+    ccSeg('ccPeriodicidad', [
+      { id: 'mes', nombre: 'Al mes', icono: '📅' },
+      { id: 'ano', nombre: 'Al año', icono: '🗓️' }
+    ], state.cc.periodicidad, 'ccFijarPeriodicidad');
+
+    ccSeg('ccNaturaleza', [
+      { id: 'bruto', nombre: 'Bruto, antes de descuentos' },
+      { id: 'neto', nombre: 'Neto, lo que recibo' }
+    ], state.cc.naturaleza, 'ccFijarNaturaleza');
+
+    const cont = document.getElementById('ccRegimenes');
+    if (cont) {
+      cont.innerHTML = ccDatos().regimenes.map(r =>
+        '<button type="button" class="cc-reg' + (r.id === state.cc.regimen ? ' activo' : '') + '" ' +
+          'aria-pressed="' + (r.id === state.cc.regimen ? 'true' : 'false') + '" ' +
+          'onclick="window.AuditEngine.ccFijarRegimen(\'' + r.id + '\')">' +
+          '<span class="cc-reg-ico" aria-hidden="true">' + r.icono + '</span>' +
+          '<span class="cc-reg-nom">' + r.nombre + '</span>' +
+          '<span class="cc-reg-corto">' + r.corto + '</span>' +
+        '</button>').join('');
+    }
+    ccPintarOpciones();
+    ccPintarMandos();
+  }
+
+  /* Cada regimen pide lo suyo: el general necesita saber cuanto deduce, el
+     de plataformas de que actividad se trata, y los demas no piden nada. */
+  function ccPintarOpciones() {
+    const cont = document.getElementById('ccOpciones');
+    if (!cont) return;
+    const reg = ccRegimen();
+    const efe = ccRegimenEfectivo();
+    let h = '';
+
+    if (efe.id === 'honorarios') {
+      h += '<div class="cc-opcion">' +
+        '<label class="cc-campo-et" for="ccDeducciones">¿Cuánto deduce al ' +
+          (state.cc.periodicidad === 'ano' ? 'año' : 'mes') + '?</label>' +
+        '<div class="cc-caja cc-caja-chica">' +
+          '<span class="cc-caja-sig" aria-hidden="true">$</span>' +
+          '<input type="text" id="ccDeducciones" class="cc-input" inputmode="decimal" ' +
+            'autocomplete="off" value="' + formatNumber(state.cc.deducciones || 0) + '">' +
+        '</div>' +
+        '<p class="cc-campo-pista">Gastos autorizados con factura. Si lo deja en cero, el impuesto se calcula ' +
+          'sobre todo lo que facturó, que es el peor de los casos y también el más frecuente entre ' +
+          'quienes no llevan contabilidad.</p>' +
+      '</div>';
+    } else if (efe.id === 'plataformas') {
+      h += '<div class="cc-opcion">' +
+        '<span class="cc-campo-et" id="ccPlatEt">¿Qué hace en la plataforma?</span>' +
+        '<div class="cc-seg" id="ccPlataforma" role="group" aria-labelledby="ccPlatEt"></div>' +
+      '</div>';
+    }
+
+    if (reg.id === 'nose') {
+      h += '<p class="cc-aviso cc-aviso-suave"><strong>Seguimos adelante.</strong> ' + reg.nota +
+        ' Mientras tanto se calcula como <strong>sueldos y salarios</strong>, que es el régimen de la ' +
+        'mayoría; el resultado lo dirá en cada renglón.</p>';
+    }
+    cont.innerHTML = h;
+
+    if (efe.id === 'plataformas') {
+      ccSeg('ccPlataforma', (efe.tasas || []).map(t => ({ id: t.id, nombre: t.nombre + ' · ' + t.pct + '%' })),
+        state.cc.plataforma, 'ccFijarPlataforma');
+    }
+    const ded = document.getElementById('ccDeducciones');
+    if (ded) {
+      ded.addEventListener('input', () => {
+        state.cc.deducciones = ccLeerNumero(ded.value);
+      });
+      ded.addEventListener('keypress', e => { if (e.key === 'Enter') ccCalcular(); });
+    }
+  }
+
+  function ccPintarMandos() {
+    const cont = document.getElementById('ccMandos');
+    if (!cont) return;
+    const listo = state.cc.calculado;
+    cont.innerHTML = '<div class="evaluacion-controls-bar">' +
+      '<div class="eval-info-group">' +
+        '<span class="eval-badge">CUENTA PERSONAL</span>' +
+        '<span class="eval-status-text">' + (listo
+          ? '✅ Cuenta hecha con el régimen de ' + ccRegimenEfectivo().nombre.toLowerCase() +
+            '. Cambie cualquier dato y vuelva a pulsar para rehacerla.'
+          : '⚪ Todo está en ceros ($0). Escriba su ingreso, elija su régimen y pulse «Sacar la cuenta».') +
+        '</span>' +
+      '</div>' +
+      '<div class="eval-actions-group">' +
+        '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.ccCalcular()">' +
+          '<span>' + (listo ? '🔄' : '🧮') + '</span> ' +
+          (listo ? 'Rehacer la cuenta' : 'Sacar la cuenta') + '</button>' +
+        '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.ccReiniciar()">' +
+          '<span>↺</span> Reiniciar a ceros</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  /* --- bloque 2: lo que le retienen ---------------------------------- */
+
+  function ccCaja(rotulo, valor, formato, nota, clase) {
+    return '<div class="cc-caja-res' + (clase ? ' ' + clase : '') + '">' +
+      '<span class="cc-res-et">' + rotulo + '</span>' +
+      '<span class="cc-res-v" data-anim-v="' + valor + '" data-anim-f="' + (formato || 'pesos2') + '">$0.00</span>' +
+      (nota ? '<span class="cc-res-sub">' + nota + '</span>' : '') +
+    '</div>';
+  }
+
+  function ccPintarRetencion() {
+    const cont = document.getElementById('ccRetencion');
+    if (!cont) return;
+    const res = state.cc.resultado;
+    if (!res) { cont.innerHTML = ''; return; }
+    const m = res.mes, a = res.ano, reg = ccRegimenEfectivo(), elegido = ccRegimen();
+    const anual = state.cc.periodicidad === 'ano';
+    const per = anual ? 'al año' : 'al mes';
+    const v = anual ? a : m;
+
+    /* La cascada: de lo que cuesta al patron o al cliente hasta lo que
+       llega al bolsillo, renglon por renglon y sin saltos. */
+    const filas = [];
+    filas.push({ k: 'Ingreso bruto ' + per, v: v.bruto, tipo: 'base',
+                 d: state.cc.naturaleza === 'neto'
+                    ? 'Calculado hacia atrás desde el neto que usted escribió.'
+                    : 'La cifra que usted escribió.' });
+    if (v.deducido > 0) {
+      /* Este dinero no sale del bolsillo: se queda en el. Lo unico que hace
+         es achicar la base sobre la que corre la tarifa. Por eso no lleva
+         signo de resta ni entra en la suma de la cascada. */
+      filas.push({ k: m.motivoDeduccion, v: v.deducido, tipo: 'fiscal',
+                   d: 'No es dinero que usted pierda: se lo queda. Lo \u00fanico que hace es achicar la ' +
+                      'cantidad sobre la que corre la tarifa.' });
+      filas.push({ k: 'Base gravable', v: v.base, tipo: 'subtotal',
+                   d: 'Sobre esta cantidad, y no sobre el ingreso, corre la tarifa. ' +
+                      'Es un subtotal: no se suma aparte, resume los dos rengl\u00f3nes de arriba.' });
+    }
+    if (m.renglon) {
+      filas.push({ k: 'Impuesto de la tarifa', v: -(m.isrTarifa * (anual ? 12 : 1)), tipo: 'impuesto',
+                   d: 'Cuota fija de ' + ccPesosExacto(m.renglon.cf) + ' más ' + m.renglon.pct +
+                      '% sobre lo que excede ' + ccPesosExacto(m.renglon.li) + ' mensuales.' });
+    } else if (m.tasa !== null) {
+      filas.push({ k: 'Impuesto sobre la renta', v: -(m.isr * (anual ? 12 : 1)), tipo: 'impuesto',
+                   d: 'Tasa única de ' + m.tasa + '% sobre el ingreso, sin deducción alguna.' });
+    }
+    if (m.salarioMinimo && m.isrTarifa > 0) {
+      /* Sin este renglon la cascada restaba el impuesto de la tarifa y acto
+         seguido devolvia el bruto intacto, sin decir en virtud de que. */
+      filas.push({ k: 'Exenci\u00f3n por salario m\u00ednimo', v: m.isrTarifa * (anual ? 12 : 1), tipo: 'suma',
+                   d: '\u00daltimo p\u00e1rrafo del art\u00edculo 96 de la Ley del ISR: no se efect\u00faa ' +
+                      'retenci\u00f3n a quien en el mes \u00fanicamente percibe un salario m\u00ednimo general.' });
+    }
+    if (m.subsidio > 0) {
+      filas.push({ k: 'Subsidio para el empleo', v: v.subsidio, tipo: 'suma',
+                   d: 'El valor mensual de la UMA por ' + ccPar().subsidio_empleo.pct_uma +
+                      '%. Se resta del impuesto; si lo rebasa, no se entrega la diferencia.' });
+    }
+    if (m.cuotas && m.cuotas.exenta) {
+      filas.push({ k: 'Cuota obrera del Seguro Social', v: 0, tipo: 'suma',
+                   d: 'Art\u00edculo 36 de la Ley del Seguro Social: cuando el trabajador percibe como cuota ' +
+                      'diaria el salario m\u00ednimo, el patr\u00f3n paga \u00edntegramente tambi\u00e9n la ' +
+                      'cuota que normalmente le tocar\u00eda a \u00e9l.' });
+    } else if (m.cuotas) {
+      m.cuotas.detalle.forEach(x => {
+        if (x.monto <= 0) return;
+        filas.push({ k: x.ramo, v: -(x.monto * (anual ? 12 : 1)), tipo: 'cuota', d: x.ley });
+      });
+    }
+    filas.push({ k: 'Le queda ' + per, v: v.neto, tipo: 'neto',
+                 d: state.cc.naturaleza === 'neto'
+                    ? 'La cifra que usted escribió.'
+                    : 'Lo que efectivamente recibe.' });
+
+    const mayor = Math.max.apply(null, filas.map(f => Math.abs(f.v))) || 1;
+
+    cont.innerHTML =
+      '<section class="cc-bloque" id="cc-b2">' +
+        '<div class="cc-cab">' +
+          '<span class="cc-cab-n" aria-hidden="true">2</span>' +
+          '<div class="cc-cab-tx">' +
+            '<h3 class="cc-cab-tit">Lo que le retienen</h3>' +
+            '<p class="cc-cab-sub">' + (elegido.id === 'nose'
+              ? 'Calculado como sueldos y salarios, que es el supuesto que usted aceptó al no saber su régimen. '
+              : '') + reg.quien_es + ' ' + '<strong>Retiene:</strong> ' + reg.retiene + '</p>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="cc-resumen">' +
+          ccCaja('Ingreso bruto ' + per, v.bruto, 'pesos2',
+                 'Antes de cualquier descuento', 'cc-r-bruto') +
+          ccCaja('Impuesto sobre la renta', v.isr, 'pesos2',
+                 'Tasa efectiva sobre el bruto: <b>' + m.pctIsr.toFixed(2) + '%</b>', 'cc-r-isr') +
+          (m.cuotas
+            ? ccCaja('Cuotas al Seguro Social', v.cuotasTotal, 'pesos2',
+                     'Cuota obrera: 2.375% del salario base más 0.40% del excedente de tres UMA', 'cc-r-imss')
+            : ccCaja('Cuotas al Seguro Social', 0, 'pesos2',
+                     'Este régimen no cotiza por sí mismo', 'cc-r-imss cc-r-nula')) +
+          ccCaja('Le queda ' + per, v.neto, 'pesos2',
+                 'Se le va el <b>' + m.pctRetenido.toFixed(2) + '%</b> de lo que gana', 'cc-r-neto') +
+        '</div>' +
+
+        '<h4 class="cc-sub-tit">Renglón por renglón, ' + per + '</h4>' +
+        '<ol class="cc-cascada">' +
+          filas.map(f =>
+            '<li class="cc-casc-fila cc-casc-' + f.tipo + '">' +
+              '<span class="cc-casc-k"><span class="cc-casc-sig" aria-hidden="true">' +
+                (f.tipo === 'fiscal' ? '\u00b7'
+                  : (f.tipo === 'base' || f.tipo === 'subtotal' || f.tipo === 'neto'
+                    ? '=' : (f.v < 0 ? '\u2212' : '+'))) + '</span>' + f.k + '</span>' +
+              '<span class="cc-casc-riel"><span class="cc-casc-barra" ' +
+                'data-anim-w="' + (Math.abs(f.v) / mayor * 100).toFixed(2) + '"></span></span>' +
+              '<span class="cc-casc-v" data-anim-v="' + f.v + '" data-anim-f="pesos2">$0.00</span>' +
+              '<span class="cc-casc-d">' + f.d + '</span>' +
+            '</li>').join('') +
+        '</ol>' +
+
+        '<p class="cc-casc-leyenda"><b>\u2212</b> y <b>+</b> son movimientos: dinero que sale o que ' +
+          'vuelve. <b>=</b> es un subtotal, no se suma aparte. <b>\u00b7</b> es un rengl\u00f3n que ' +
+          'explica c\u00f3mo se llega a la base gravable y <strong>no toca su bolsillo</strong>.</p>' +
+
+        ccTarifaCuadro(m) +
+        ccEscenarioIva(a) +
+
+        '<p class="cc-aviso"><strong>Efectiva y marginal no son lo mismo.</strong> Su tasa <em>efectiva</em> ' +
+          'de impuesto sobre la renta es <strong>' + m.pctIsr.toFixed(2) + '%</strong>: lo que paga entre lo que gana. ' +
+          'Su tasa <em>marginal</em> es <strong>' + m.marginal.toFixed(2) + '%</strong>: lo que pagaría por el ' +
+          'siguiente peso que ganara. La segunda siempre es mayor en una tarifa progresiva, y confundirlas es el ' +
+          'error más frecuente al leer un cuadro como el de arriba.</p>' +
+
+        (m.retencionCliente > 0
+          ? '<p class="cc-aviso"><strong>Ojo con la retención del cliente.</strong> Si quien le paga es una ' +
+            'persona moral, le retendrá ' + ccPesosExacto(m.retencionCliente * (anual ? 12 : 1)) + ' ' + per +
+            ' —el 10% de lo facturado, sin deducción alguna—. <strong>Eso no es el impuesto: es un ' +
+            'anticipo</strong> que se acredita contra lo que aquí aparece. ' + reg.punto_ciego + '</p>'
+          : '') +
+
+        (m.salarioMinimo
+          ? '<p class="cc-aviso cc-aviso-bueno"><strong>No le retienen nada, y por dos leyes distintas.</strong> ' +
+            'Su ingreso equivale a un salario m\u00ednimo general, hoy $' + ccPar().salario_minimo.general +
+            ' diarios. El \u00faltimo p\u00e1rrafo del art\u00edculo 96 de la Ley del ISR prohibe retener el ' +
+            'impuesto a quien en el mes \u00fanicamente percibe un salario m\u00ednimo, y el art\u00edculo 36 de ' +
+            'la Ley del Seguro Social ordena que en ese caso el patr\u00f3n pague \u00edntegramente tambi\u00e9n ' +
+            'la cuota obrera. <strong>Lo bruto y lo neto coinciden.</strong> En la Zona Libre de la Frontera Norte ' +
+            'el m\u00ednimo es $' + ccPar().salario_minimo.frontera_norte + ' diarios y la misma regla opera a ' +
+            'partir de ' + ccPesosExacto(ccPar().salario_minimo.mensual_frontera) + ' al mes; esta cuenta usa el ' +
+            'm\u00ednimo general del resto del pa\u00eds.</p>'
+          : '') +
+
+        (m.cuotas && m.cuotas.topado
+          ? '<p class="cc-aviso"><strong>Su salario rebasa el tope de cotización.</strong> El artículo 28 ' +
+            'de la Ley del Seguro Social fija el límite superior en veinticinco veces la referencia diaria, hoy ' +
+            ccPesosExacto(m.cuotas.topeMes) + ' al mes. De ahí hacia arriba el sueldo sube y la cuota ya no: por eso ' +
+            'la carga de seguridad social pesa proporcionalmente más sobre los salarios bajos.</p>'
+          : '') +
+
+        '<p class="cc-pie">' + reg.punto_ciego + '</p>' +
+      '</section>';
+
+    autolinkAmbito(cont);
+    erarioSincronizarZona(cont, 'cc-ret', state.cc.calculado);
+  }
+
+  /* El renglon de la tarifa en que cayo el lector, con los vecinos a la
+     vista: una tarifa progresiva solo se entiende viendo el escalon. */
+  function ccTarifaCuadro(m) {
+    if (!m.renglon) {
+      if (m.tasa === null) return '';
+      const rs = ccDatos().resico;
+      const esResico = ccRegimenEfectivo().id === 'resico';
+      if (!esResico) return '';
+      return '<h4 class="cc-sub-tit">La tabla en que cayó</h4>' +
+        '<div class="cc-tabla-caja"><table class="cc-tabla"><thead><tr>' +
+          '<th>Ingresos mensuales hasta</th><th>Tasa</th></tr></thead><tbody>' +
+          rs.renglones.map(r =>
+            '<tr' + (r.tasa === m.tasa ? ' class="cc-tr-suyo"' : '') + '>' +
+              '<td>' + ccPesosExacto(r.hasta) + '</td><td>' + r.tasa.toFixed(2) + '%</td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="cc-fuente">' + rs.ley + chipEstado(rs.estado) + ' &middot; ' + rs.nota + '</p>';
+    }
+    const t = ccDatos().tarifa_mensual;
+    const idx = t.renglones.indexOf(m.renglon);
+    const desde = Math.max(0, idx - 2), hasta = Math.min(t.renglones.length, idx + 3);
+    return '<h4 class="cc-sub-tit">El renglón de la tarifa en que cayó</h4>' +
+      '<div class="cc-tabla-caja"><table class="cc-tabla"><thead><tr>' +
+        '<th>Límite inferior</th><th>Límite superior</th><th>Cuota fija</th>' +
+        '<th>% sobre el excedente</th></tr></thead><tbody>' +
+        t.renglones.slice(desde, hasta).map(r =>
+          '<tr' + (r === m.renglon ? ' class="cc-tr-suyo"' : '') + '>' +
+            '<td>' + ccPesosExacto(r.li) + '</td>' +
+            '<td>' + (r.ls === null ? 'En adelante' : ccPesosExacto(r.ls)) + '</td>' +
+            '<td>' + ccPesosExacto(r.cf) + '</td>' +
+            '<td>' + r.pct.toFixed(2) + '%</td></tr>').join('') +
+      '</tbody></table></div>' +
+      '<p class="cc-fuente">' + t.ley + chipEstado(t.estado) + ' &middot; ' + t.fuente +
+        '. Se muestran los renglónes vecinos para que se vea el escalón; el cuadro completo tiene once.</p>';
+  }
+
+  /* El IVA no se puede calcular: depende de en que gasta cada quien. Por
+     eso aqui no se presenta como dato sino como escenario, con la cifra que
+     el lector mueve y la advertencia por delante. */
+  function ccEscenarioIva(a) {
+    const p = ccPar();
+    const pct = state.cc.escenarioIva;
+    const gastado = a.neto * pct / 100;
+    const iva = gastado - (gastado / (1 + p.iva.tasa / 100));
+    const sobreBruto = a.bruto > 0 ? (iva / a.bruto * 100) : 0;
+    return '<div class="cc-escenario">' +
+      '<div class="cc-esc-cab">' +
+        '<h4 class="cc-esc-tit">🛒 El impuesto que nadie le retiene</h4>' +
+        '<span class="cc-esc-sello">Escenario, no dato</span>' +
+      '</div>' +
+      '<p class="cc-esc-nota">Esta plataforma <strong>no puede saber</strong> cuánto IVA paga usted: ' +
+        'depende de en qué gasta, y una parte del gasto —alimentos básicos, medicinas, ' +
+        'colegiaturas, renta de casa habitación— está a tasa cero o exenta. Por eso este renglón ' +
+        'es el único de la subpestaña que usted fija y nosotros no afirmamos.</p>' +
+      '<label class="cc-esc-mando" for="ccIvaRango">' +
+        '<span>Supongamos que gasta el <b id="ccIvaPct">' + pct + '%</b> de lo que le queda en cosas gravadas al ' +
+          p.iva.tasa + '%</span>' +
+        '<input type="range" id="ccIvaRango" class="cc-rango" min="0" max="100" step="5" value="' + pct + '" ' +
+          'oninput="window.AuditEngine.ccFijarIva(this.value)">' +
+      '</label>' +
+      '<div class="cc-esc-res">' +
+        '<div class="cc-esc-c"><span class="cc-esc-k">IVA al año en ese escenario</span>' +
+          '<span class="cc-esc-v">' + ccPesos(iva) + '</span></div>' +
+        '<div class="cc-esc-c"><span class="cc-esc-k">Sobre su ingreso bruto</span>' +
+          '<span class="cc-esc-v">' + sobreBruto.toFixed(2) + '%</span></div>' +
+        '<div class="cc-esc-c"><span class="cc-esc-k">Sumado a lo que ya le retienen</span>' +
+          '<span class="cc-esc-v">' + (state.cc.resultado.mes.pctRetenido + sobreBruto).toFixed(2) + '%</span></div>' +
+      '</div>' +
+      '<p class="cc-esc-pie">El IVA va dentro del precio: de cada $116 pagados por un bien gravado, $16 son ' +
+        'impuesto. Como la tasa no distingue quién compra, quien gana poco entrega al fisco una proporción ' +
+        'mayor de su ingreso que quien gana mucho. Eso es lo que la doctrina llama un impuesto regresivo.</p>' +
+    '</div>';
+  }
+
+  /* --- bloque 3: a donde va cada peso -------------------------------- */
+
+  function ccPintarReparto() {
+    const cont = document.getElementById('ccReparto');
+    if (!cont) return;
+    const res = state.cc.resultado;
+    if (!res) { cont.innerHTML = ''; return; }
+    const rep = res.reparto;
+    if (!rep.length) { cont.innerHTML = ''; return; }
+    const mayor = rep[0].pct || 1;
+    const isrAnual = res.ano.isr;
+    const ciego = ccDatos().puntos_ciegos[0];
+
+    cont.innerHTML =
+      '<section class="cc-bloque" id="cc-b3">' +
+        '<div class="cc-cab">' +
+          '<span class="cc-cab-n" aria-hidden="true">3</span>' +
+          '<div class="cc-cab-tx">' +
+            '<h3 class="cc-cab-tit">A dónde iría cada peso</h3>' +
+            '<p class="cc-cab-sub">Sus ' + ccPesos(isrAnual) + ' de impuesto sobre la renta al año, ' +
+              'repartidos con las mismas proporciones del Presupuesto de Egresos aprobado para 2026. ' +
+              'Los ocho renglónes y sus montos son los que ya publica la subpestaña 1.1.</p>' +
+          '</div>' +
+        '</div>' +
+
+        '<ol class="cc-reparto">' +
+          rep.map((x, i) =>
+            '<li class="cc-rep-fila">' +
+              '<span class="cc-rep-n">' + (i + 1) + '</span>' +
+              '<span class="cc-rep-ico" aria-hidden="true">' + x.icono + '</span>' +
+              '<span class="cc-rep-nom">' + x.nombre +
+                '<span class="cc-rep-grupo">' + x.grupo + '</span></span>' +
+              '<span class="cc-rep-riel"><span class="cc-rep-barra" ' +
+                'data-anim-w="' + (x.pct / mayor * 100).toFixed(2) + '"></span></span>' +
+              '<span class="cc-rep-pct">' + x.pct.toFixed(1) + '%</span>' +
+              '<span class="cc-rep-v" data-anim-v="' + x.monto + '" data-anim-f="pesos2">$0.00</span>' +
+              '<span class="cc-rep-que">' + x.queCubre + '</span>' +
+            '</li>').join('') +
+        '</ol>' +
+
+        (res.ano.cuotasTotal > 0
+          ? '<div class="cc-aparte">' +
+              '<h4 class="cc-aparte-tit">🏥 Sus cuotas al Seguro Social van aparte, y por ley</h4>' +
+              '<p>Los ' + ccPesos(res.ano.cuotasTotal) + ' que cotiza al año <strong>no entran en el reparto ' +
+                'de arriba</strong>. El artículo 2º del Código Fiscal las define como contribución ' +
+                'con <strong>destino específico</strong>: no van a la bolsa común del gasto, no forman parte ' +
+                'de la Recaudación Federal Participable y, por lo mismo, no se reparten a estados ni a ' +
+                'municipios. Financian su servicio médico, sus incapacidades y su pensión. Es la única ' +
+                'parte de lo que se le descuenta que tiene un destino declarado en la ley.</p>' +
+            '</div>'
+          : '') +
+
+        '<p class="cc-aviso cc-aviso-ciego"><span class="cc-aviso-ico" aria-hidden="true">' + ciego.icono +
+          '</span><strong>' + ciego.titulo + '.</strong> ' + ciego.texto + '</p>' +
+
+        '<p class="cc-fuente">Clasificación del gasto del Presupuesto de Egresos de la Federación 2026' +
+          chipEstado('oficial') + vsxRefLink('ref-pef2026') +
+          ' &middot; los porcentajes se calculan dividiendo cada renglón entre la suma de los ocho, no se ' +
+          'escriben a mano.</p>' +
+      '</section>';
+
+    autolinkAmbito(cont);
+    erarioSincronizarZona(cont, 'cc-rep', state.cc.calculado);
+  }
+
+  /* --- bloque 4: el reloj de la deuda y de lo perdido ----------------- */
+
+  function ccSegundosEnVista() {
+    if (!state.cc.relojInicio) state.cc.relojInicio = Date.now();
+    return (Date.now() - state.cc.relojInicio) / 1000;
+  }
+
+  function ccPintarReloj() {
+    const cont = document.getElementById('ccReloj');
+    if (!cont) return;
+    const rel = ccDatos().relojes;
+    const relojes = ccRelojes();
+    const den = ccDenominador(), cad = ccCadencia();
+    const totalPais = relojes.reduce((a, r) => a + r.anualPais, 0);
+    const totalSeg = relojes.reduce((a, r) => a + r.porSegundoPais, 0);
+    const totalPersona = relojes.reduce((a, r) => a + r.anualPersona, 0);
+    const totalCadencia = relojes.reduce((a, r) => a + r.enCadencia, 0);
+    const mayor = Math.max.apply(null, relojes.map(r => r.enCadencia)) || 1;
+    const sob = rel.sobrecosto_acumulado;
+    const res = state.cc.resultado;
+
+    cont.innerHTML =
+      '<section class="cc-bloque cc-bloque-reloj" id="cc-b4">' +
+        '<div class="cc-cab">' +
+          '<span class="cc-cab-n" aria-hidden="true">4</span>' +
+          '<div class="cc-cab-tx">' +
+            '<h3 class="cc-cab-tit">' + rel.titulo + '</h3>' +
+            '<p class="cc-cab-sub">Cuatro cuentas que no aparecen en ningún recibo y que, sin embargo, ' +
+              'alguien paga: lo que el país pide prestado este año, lo que cuestan los intereses de lo ya ' +
+              'prestado, lo que pierden al año doce obras que ingresan menos de lo que gastan y lo que la ' +
+              'Auditoría Superior observó como no justificado.</p>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="cc-reloj-mandos">' +
+          '<div class="cc-campo"><span class="cc-campo-et" id="ccCadEt">¿Cada cuándo?</span>' +
+            '<div class="cc-seg" id="ccCadencia" role="group" aria-labelledby="ccCadEt"></div></div>' +
+          '<div class="cc-campo"><span class="cc-campo-et" id="ccDenEt">¿Repartido entre quiénes?</span>' +
+            '<div class="cc-seg" id="ccDenominador" role="group" aria-labelledby="ccDenEt"></div></div>' +
+        '</div>' +
+
+        '<div class="cc-vivo-tira">' +
+          '<span class="cc-vivo-et">Desde que usted abrió esta página, el país lleva</span>' +
+          '<span class="cc-vivo-num cc-vivo" id="ccVivoTotal" data-rate="' + totalSeg + '">+$0.00</span>' +
+          '<span class="cc-vivo-sub">entre deuda nueva, intereses, pérdida operativa y montos observados ' +
+            '· <b>' + ccPesosFinos(totalSeg) + ' por segundo</b> · su parte: ' +
+            '<b class="cc-vivo" data-rate="' + (totalSeg / (den.millones * 1000000)) + '">+$0.00</b></span>' +
+        '</div>' +
+
+        '<ul class="cc-relojes">' +
+          relojes.map(r =>
+            '<li class="cc-rel-card' + (r.fuente.culpa ? ' cc-rel-culpa' : '') + '">' +
+              '<div class="cc-rel-cab">' +
+                '<span class="cc-rel-ico" aria-hidden="true">' + r.fuente.icono + '</span>' +
+                '<span class="cc-rel-nom">' + r.fuente.nombre + chipEstado(r.fuente.estado) + '</span>' +
+              '</div>' +
+              '<span class="cc-rel-cif">' + ccPesosFinos(r.enCadencia) + '</span>' +
+              '<span class="cc-rel-cad">' + cad.nombre.toLowerCase() + ', ' + den.rotulo + '</span>' +
+              '<span class="cc-rel-riel"><span class="cc-rel-barra" style="width:' +
+                (r.enCadencia / mayor * 100).toFixed(1) + '%"></span></span>' +
+              '<span class="cc-rel-ano">' + ccPesos(r.anualPersona) + ' al año ' + den.rotulo +
+                ' · ' + simMdp(r.fuente.anual_mdp) + ' en todo el país</span>' +
+              '<p class="cc-rel-que">' + r.fuente.que + '</p>' +
+              '<p class="cc-rel-fte">' + r.fuente.fuente + (r.fuente.refKey ? vsxRefLink(r.fuente.refKey) : '') + '</p>' +
+            '</li>').join('') +
+        '</ul>' +
+
+        '<div class="cc-rel-total">' +
+          '<span class="cc-rel-total-k">Las cuatro juntas, ' + cad.nombre.toLowerCase() + ' y ' + den.rotulo + '</span>' +
+          '<span class="cc-rel-total-v">' + ccPesosFinos(totalCadencia) + '</span>' +
+          '<span class="cc-rel-total-s">' + ccPesos(totalPersona) + ' al año ' + den.rotulo +
+            ' · ' + simMdp(totalPais / 1000000) + ' en todo el país</span>' +
+        '</div>' +
+
+        (res && res.ano.neto > 0
+          ? '<p class="cc-rel-personal"><strong>Puesto junto a lo suyo.</strong> Su parte de estas cuatro cuentas ' +
+            'es <strong>' + ccPesos(totalPersona) + ' al año</strong>. Con el ingreso neto de ' +
+            ccPesos(res.ano.neto) + ' anuales que arrojó el bloque 2, equivale a <strong>' +
+            (totalPersona / (res.ano.neto / 365)).toFixed(1) + ' días</strong> de todo lo que usted gana; ' +
+            'y frente a los ' + ccPesos(res.ano.isr) + ' que paga de impuesto sobre la renta, es <strong>' +
+            (res.ano.isr > 0 ? (totalPersona / res.ano.isr).toFixed(2) + ' veces' : 'una cifra sin comparación posible, porque no paga ISR') +
+            '</strong> esa cantidad.</p>'
+          : '<p class="cc-rel-personal cc-rel-personal-vacia">Saque la cuenta en el bloque 1 y esta línea ' +
+            'dirá a cuántos días de <em>su</em> ingreso equivale su parte de estas cuatro cuentas.</p>') +
+
+        '<div class="cc-sobrecosto">' +
+          '<h4 class="cc-sob-tit">🧱 Y aparte, lo ya gastado de más</h4>' +
+          '<p>Construir las doce obras costó <strong>' + simMdp(sob.mdp) + '</strong> más de lo ' +
+            'presupuestado, o <strong>' + ccPesos(sob.mdp * 1000000 / (den.millones * 1000000)) + ' ' +
+            den.rotulo + '</strong>. ' + sob.nota + chipEstado(sob.estado) + '</p>' +
+        '</div>' +
+
+        '<p class="cc-fuente">' + rel.nota + '</p>' +
+      '</section>';
+
+    ccSeg('ccCadencia', ccDatos().cadencias, state.cc.relojCadencia, 'ccFijarCadencia');
+    ccSeg('ccDenominador', [
+      { id: 'habitante', nombre: 'Entre los ' + ccPar().poblacion.millones + ' millones de habitantes' },
+      { id: 'padron', nombre: 'Entre los ' + ccPar().padron.millones + ' millones que tributan' }
+    ], state.cc.relojDenominador, 'ccFijarDenominador');
+    autolinkAmbito(cont);
+    ccTictac();
+  }
+
+  /* El acumulado se mide contra el reloj del sistema y no contando pulsos:
+     asi ningun repintado -cambiar la cadencia o el denominador- lo devuelve
+     a cero ni lo atrasa cuando la pestana pierde el foco. */
+  function ccTictac() {
+    if (state.cc.relojTimer) clearInterval(state.cc.relojTimer);
+    const pintar = () => {
+      const s = ccSegundosEnVista();
+      document.querySelectorAll('#ccReloj .cc-vivo').forEach(el => {
+        const r = parseFloat(el.dataset.rate) || 0;
+        el.textContent = '+$' + (s * r).toLocaleString('es-MX',
+          { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      });
+    };
+    pintar();
+    state.cc.relojTimer = setInterval(pintar, 1000);
+  }
+
+  /* --- cierre: puntos ciegos y procedencia ---------------------------- */
+
+  function ccPintarCiegos() {
+    const cont = document.getElementById('ccCiegos');
+    if (!cont) return;
+    /* El primero ya se muestra pegado al reparto, donde hace falta. */
+    const lista = ccDatos().puntos_ciegos.slice(1);
+    cont.innerHTML =
+      '<section class="cc-ciegos">' +
+        '<h3 class="cc-ciegos-tit">Lo que esta cuenta no dice</h3>' +
+        '<div class="cc-ciegos-reja">' +
+          lista.map(c =>
+            '<article class="cc-ciego">' +
+              '<h4 class="cc-ciego-tit"><span aria-hidden="true">' + c.icono + '</span> ' + c.titulo + '</h4>' +
+              '<p class="cc-ciego-tx">' + c.texto + '</p>' +
+              (c.excepcion ? '<p class="cc-ciego-exc">' + c.excepcion + '</p>' : '') +
+            '</article>').join('') +
+        '</div>' +
+      '</section>';
+    autolinkAmbito(cont);
+  }
+
+  function ccPintarProcedencia() {
+    const cont = document.getElementById('ccProcedencia');
+    if (!cont) return;
+    const p = ccPar(), c = ccDatos();
+    const fila = (k, v, estado, extra) =>
+      '<li><strong>' + k + '.</strong> ' + v + chipEstado(estado) + (extra ? ' ' + extra : '') + '</li>';
+    cont.innerHTML =
+      '<section class="sim-proc">' +
+        '<h3 class="sim-proc-tit">De dónde sale cada número de esta calculadora</h3>' +
+        '<ul class="sim-proc-lista">' +
+          fila('Las dos tarifas del impuesto sobre la renta', c.tarifa_mensual.ley + ' y ' + c.tarifa_anual.ley +
+               ', publicadas en el ' + c.tarifa_mensual.fuente + '. Se transcribieron renglón por renglón ' +
+               'del documento del Servicio de Administración Tributaria', 'oficial') +
+          fila('La tabla del Régimen Simplificado de Confianza', 'Está en el texto del propio ' +
+               c.resico.ley + ': cinco tramos, de 1% a 2.5%', 'oficial') +
+          fila('Las cuotas del Seguro Social', c.imss_obrero.fuente + '. Cuatro ramos sobre el salario base ' +
+               'completo —que suman 2.375%— y uno solo sobre la parte que excede tres veces la ' +
+               'referencia diaria. Ese último quedó en 0.40% tras la baja gradual que ordenó el ' +
+               'artículo Décimo Noveno transitorio del decreto de 1995', 'oficial', vsxRefLink('ref-lss')) +
+          fila('La UMA', '$' + formatNumber(p.uma.mensual) + ' al mes. ' + p.uma.fuente + '. ' + p.uma.vigencia,
+               p.uma.estado) +
+          fila('El subsidio para el empleo', 'El valor mensual de la UMA por ' + p.subsidio_empleo.pct_uma +
+               '%, para quien no rebasa ' + ccPesosExacto(p.subsidio_empleo.tope_ingreso_mensual) + ' al mes. ' +
+               p.subsidio_empleo.fuente + '. Si el subsidio supera al impuesto, no hay impuesto a cargo y ' +
+               'tampoco se entrega la diferencia', p.subsidio_empleo.estado) +
+          fila('El salario mínimo', '$' + p.salario_minimo.general + ' diarios en el país y $' +
+               p.salario_minimo.frontera_norte + ' en la franja fronteriza. ' + p.salario_minimo.fuente,
+               p.salario_minimo.estado) +
+          fila('El reparto del gasto', 'Los ocho renglónes del Presupuesto de Egresos 2026 que ya publica ' +
+               'la subpestaña 1.1, con sus montos. El porcentaje de cada uno se obtiene dividiendo su monto ' +
+               'entre la suma de los ocho', 'oficial', vsxRefLink('ref-pef2026')) +
+          fila('El cálculo desde el neto', 'Cuando usted escribe lo que recibe en lugar de lo que gana, el ' +
+               'bruto se busca por aproximaciones sucesivas hasta que el neto calculado coincide con el suyo. ' +
+               'Se hace así porque la tarifa tiene once tramos, el subsidio un tope y la cuota obrera dos ' +
+               'bases distintas: despejarla a mano daría una fórmula falsa', 'derivado') +
+          fila('Los relojes', 'Cada uno toma una cifra anual de su documento y la divide entre los segundos del ' +
+               'año. <strong>No miden un gasto que ocurra en el instante en que usted mira</strong>: ' +
+               'proyectan un ritmo anual sobre el tiempo que lleva en esta página', 'derivado') +
+          fila('El poblacional', p.poblacion.fuente, p.poblacion.estado,
+               '<em>' + p.poblacion.pendiente + '</em>') +
+          fila('El padrón de contribuyentes', p.padron.fuente, p.padron.estado,
+               '<em>' + p.padron.pendiente + '</em>') +
+        '</ul>' +
+        '<p class="cc-fuente">Lo que esta calculadora <strong>no</strong> hace: no considera aguinaldo, prima ' +
+          'vacacional, horas extra ni ninguna de las exenciones del artículo 93; no aplica deducciones ' +
+          'personales de la declaración anual —gastos médicos, colegiaturas, intereses ' +
+          'hipotecarios, aportaciones voluntarias al retiro— que pueden devolverle una parte de lo ' +
+          'retenido; y supone un ingreso parejo los doce meses. Es una cuenta de orden de magnitud hecha con ' +
+          'la regla correcta, no una declaración fiscal.</p>' +
+      '</section>';
+    autolinkAmbito(cont);
+  }
+
+  /* --- mandos ---------------------------------------------------------- */
+
+  /* El campo admite «15,000», «15000» y «15 000». Quien escribe su sueldo
+     no tiene por que pelearse con el separador de miles. */
+  function ccLeerNumero(txt) {
+    const n = parseFloat(String(txt == null ? '' : txt).replace(/[^0-9.\-]/g, ''));
+    return isFinite(n) && n > 0 ? n : 0;
+  }
+
+  function ccLeerFormulario() {
+    const el = document.getElementById('ccMonto');
+    if (el) state.cc.monto = ccLeerNumero(el.value);
+    const ded = document.getElementById('ccDeducciones');
+    if (ded) state.cc.deducciones = ccLeerNumero(ded.value);
+  }
+
+  function ccCalcular() {
+    ccLeerFormulario();
+    if (!(state.cc.monto > 0)) {
+      state.cc.calculado = false;
+      state.cc.resultado = null;
+      ccPintarMandos();
+      const cont = document.getElementById('ccRetencion');
+      if (cont) {
+        cont.innerHTML = '<p class="cc-aviso cc-aviso-error">Escriba una cantidad mayor que cero para sacar ' +
+          'la cuenta. Puede usarse con o sin separador de miles.</p>';
+      }
+      const rep = document.getElementById('ccReparto');
+      if (rep) rep.innerHTML = '';
+      ccPintarReloj();
+      return;
+    }
+    state.cc.resultado = ccCalcularResultado();
+    state.cc.calculado = true;
+    ccPintarMandos();
+    ccPintarRetencion();
+    ccPintarReparto();
+    ccPintarReloj();
+    simAnimarZona(document.getElementById('ccRetencion'), 'cc-ret', 1200);
+    simAnimarZona(document.getElementById('ccReparto'), 'cc-rep', 1400);
+    const b2 = document.getElementById('cc-b2');
+    if (b2) b2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function ccReiniciar() {
+    state.cc.calculado = false;
+    ccPintarMandos();
+    simPonerEnCeros(document.getElementById('ccRetencion'), 'cc-ret');
+    simPonerEnCeros(document.getElementById('ccReparto'), 'cc-rep');
+  }
+
+  /* Cambiar cualquier dato invalida la cuenta hecha: dejar en pantalla el
+     resultado de un regimen mientras el boton muestra otro seria mentir
+     por omision. */
+  function ccInvalidar() {
+    if (!state.cc.calculado) { ccPintarMandos(); return; }
+    ccCalcular();
+  }
+
+  function ccFijarPeriodicidad(v) {
+    state.cc.periodicidad = v;
+    ccLeerFormulario();
+    ccPintarFormulario();
+    ccInvalidar();
+  }
+
+  function ccFijarNaturaleza(v) {
+    state.cc.naturaleza = v;
+    ccLeerFormulario();
+    ccPintarFormulario();
+    ccInvalidar();
+  }
+
+  function ccFijarRegimen(v) {
+    state.cc.regimen = v;
+    ccLeerFormulario();
+    ccPintarFormulario();
+    ccInvalidar();
+  }
+
+  function ccFijarPlataforma(v) {
+    state.cc.plataforma = v;
+    ccLeerFormulario();
+    ccPintarOpciones();
+    ccInvalidar();
+  }
+
+  function ccFijarIva(v) {
+    state.cc.escenarioIva = parseInt(v, 10) || 0;
+    const et = document.getElementById('ccIvaPct');
+    if (et) et.textContent = state.cc.escenarioIva + '%';
+    if (state.cc.resultado) {
+      /* Solo se repinta el escenario, no el bloque entero: repintar
+         mientras alguien arrastra la barra le quitaria el control debajo
+         del dedo. */
+      const caja = document.querySelector('#ccRetencion .cc-escenario');
+      if (caja) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = ccEscenarioIva(state.cc.resultado.ano);
+        const nuevo = tmp.firstChild;
+        caja.parentNode.replaceChild(nuevo, caja);
+        const r = document.getElementById('ccIvaRango');
+        if (r) r.focus({ preventScroll: true });
+      }
+    }
+  }
+
+  function ccFijarCadencia(v) { state.cc.relojCadencia = v; ccPintarReloj(); }
+  function ccFijarDenominador(v) { state.cc.relojDenominador = v; ccPintarReloj(); }
+
+  function renderCalculadora() {
+    if (!DB.calculadora_civica) return;
+    if (!state.cc.relojInicio) state.cc.relojInicio = Date.now();
+    ccPintarEntrada();
+    ccPintarFormulario();
+    ccPintarRetencion();
+    ccPintarReparto();
+    ccPintarReloj();
+    ccPintarCiegos();
+    ccPintarProcedencia();
+
+    const monto = document.getElementById('ccMonto');
+    if (monto && !monto.dataset.ligado) {
+      monto.dataset.ligado = '1';
+      monto.addEventListener('input', () => { state.cc.monto = ccLeerNumero(monto.value); });
+      monto.addEventListener('keypress', e => { if (e.key === 'Enter') ccCalcular(); });
+      /* Al salir del campo se reescribe con separador de miles: la cifra
+         se lee de un golpe y el valor guardado no cambia. */
+      monto.addEventListener('blur', () => {
+        if (state.cc.monto > 0) monto.value = formatNumber(state.cc.monto);
+      });
+    }
   }
 
   // ==========================================================================
@@ -2126,7 +3125,7 @@
     } else if (parentTab === 'accion-financiera') {
       if (subKey === 'simulador-megaobras') renderSimuladorMegaobras();
       else if (subKey === 'cuentas-verdes') renderCuentasEcologicas();
-      else if (subKey === 'calculadora') calculateTaxBreakdown(30000);
+      else if (subKey === 'calculadora') renderCalculadora();
       else if (subKey === 'bitacora') renderNews();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
     } else if (parentTab === 'legislativo') {
@@ -17229,6 +18228,10 @@
     if (f === 'pct') return v.toFixed(1) + '%';
     if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
     if (f === 'pesos') return '$' + formatNumber(Math.round(v * 100) / 100);
+    /* La 2.4 lleva cuentas personales, donde los centavos se ven: «$9,451.2»
+       se lee como una cifra mal capturada y «$-37.5» como media cuota. Dos
+       decimales siempre, tambien cuando terminan en cero. */
+    if (f === 'pesos2') return ccPesosExacto(v);
     if (f === 'entero') return formatNumber(Math.round(v));
     return simMdp(v);
   }
@@ -17823,8 +18826,9 @@
           '<span class="sim-pr-sub">cada año, mientras las obras sigan operando así</span>' +
         '</div>' +
       '</div>' +
-      '<button type="button" class="sim-puente-b" onclick="window.AuditEngine.simLlevarACalculadora(' + Math.round(porContrib) + ')">' +
-        '🧮 Llevar $' + formatNumber(Math.round(porContrib)) + ' a la Calculadora Cívica (2.3)</button>' +
+      '<button type="button" class="sim-puente-b" onclick="window.AuditEngine.simLlevarACalculadora()">' +
+        '🧮 Ver qué significan estos $' + formatNumber(Math.round(porContrib)) +
+        ' en la Calculadora Cívica (2.4)</button>' +
       '<p class="sim-mesa-aviso"><strong>Cómo leer esta mesa, y qué no dice.</strong> La división reparte el agregado entre el padrón de contribuyentes activos ' +
         'para darle escala humana a una cifra que de otro modo es abstracta. No afirma que cada persona haya pagado esa cantidad: el erario se nutre de manera desigual, ' +
         'y una parte del sobrecosto se cubrió con deuda que aún se está amortizando. Además, el sobrecosto suma pesos nominales de años distintos, entre 1988 y 2024, ' +
@@ -17832,9 +18836,11 @@
     '</article>';
   }
 
-  /* El puente real: deja la cifra cargada en la calculadora de la 2.4 y
-     la ejecuta, para que el usuario no tenga que teclearla de memoria. */
-  function simLlevarACalculadora(monto) {
+  /* El puente a la 2.4. Antes metia la cifra del sobrecosto en el campo
+     de la calculadora, que pide un ingreso: eran dos cosas distintas
+     leidas como una. Ahora lleva a donde esa cifra si significa algo, el
+     reloj de la deuda y de lo perdido, y la deja resaltada. */
+  function simLlevarACalculadora() {
     navMarcarOrigen();
     navSaltoEnCurso = true;
     switchTab('accion-financiera');
@@ -17842,15 +18848,12 @@
     navSaltoEnCurso = false;
     navPintarBarra();
     setTimeout(() => {
-      const input = document.getElementById('calcTaxInput');
-      if (input) {
-        input.value = monto;
-        calculateTaxBreakdown(monto);
-        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        input.classList.remove('ce-destaca');
-        void input.offsetWidth;
-        input.classList.add('ce-destaca');
-      }
+      const caja = document.getElementById('cc-b4');
+      if (!caja) return;
+      caja.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      caja.classList.remove('ce-destaca');
+      void caja.offsetWidth;
+      caja.classList.add('ce-destaca');
     }, 180);
   }
 
@@ -20100,7 +21103,7 @@
     safeRun(renderCasillasFaq, 'renderCasillasFaq');
     safeRun(() => renderReferencias('todas'), 'renderReferencias');
     safeRun(initComunidad, 'initComunidad');
-    safeRun(() => calculateTaxBreakdown(30000), 'calculateTaxBreakdown');
+    safeRun(renderCalculadora, 'renderCalculadora');
     safeRun(updateDiputadosSimulator, 'updateDiputadosSimulator');
     safeRun(updateSenadoSimulator, 'updateSenadoSimulator');
     safeRun(updateASFSimulator, 'updateASFSimulator');
@@ -20184,15 +21187,9 @@
       });
     });
 
-    // Evento del botón de la calculadora
-    const calcBtn = document.getElementById('calcTriggerBtn');
-    const calcInput = document.getElementById('calcTaxInput');
-    if (calcBtn && calcInput) {
-      calcBtn.addEventListener('click', () => calculateTaxBreakdown(calcInput.value));
-      calcInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') calculateTaxBreakdown(calcInput.value);
-      });
-    }
+    /* La calculadora civica liga sus propios campos al pintarse, dentro
+       de renderCalculadora: el formulario lo dibuja el motor y no existe
+       todavia cuando corre este arranque. */
 
     // Evento de búsqueda de glosario
     const glossInput = document.getElementById('glossarySearchInput');
@@ -22367,6 +23364,16 @@
     simSexReiniciar: simSexReiniciar,
     cerrarSimuladorDesglose: cerrarSimuladorDesglose,
     simLlevarACalculadora: simLlevarACalculadora,
+    renderCalculadora: renderCalculadora,
+    ccCalcular: ccCalcular,
+    ccReiniciar: ccReiniciar,
+    ccFijarPeriodicidad: ccFijarPeriodicidad,
+    ccFijarNaturaleza: ccFijarNaturaleza,
+    ccFijarRegimen: ccFijarRegimen,
+    ccFijarPlataforma: ccFijarPlataforma,
+    ccFijarIva: ccFijarIva,
+    ccFijarCadencia: ccFijarCadencia,
+    ccFijarDenominador: ccFijarDenominador,
     renderConstitucionEconomica: renderConstitucionEconomica,
     ceIrAPilar: ceIrAPilar,
     cePilarToggle: cePilarToggle,

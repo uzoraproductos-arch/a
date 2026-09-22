@@ -13478,6 +13478,321 @@ window.AUDIT_DB = {
     "sobrecosto_conjunto_pct": 293.3,
     "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   }
+},
+"calculadora_civica": {
+  "ejercicio": 2026,
+  "nota_general": "Toda esta subpesta\u00f1a calcula con el aparato legal vigente en 2026 y con el Presupuesto aprobado para ese ejercicio. No hay un solo porcentaje escrito a mano: las dos tarifas del impuesto sobre la renta se transcribieron del Anexo 8 de la Resoluci\u00f3n Miscel\u00e1nea Fiscal publicado en el Diario Oficial el 28 de diciembre de 2025, la tabla del r\u00e9gimen simplificado est\u00e1 en el texto del art\u00edculo 113-E de la Ley del ISR, y las cuotas que se descuentan al trabajador vienen de cinco art\u00edculos de la Ley del Seguro Social.",
+
+  "parametros": {
+    "uma": {
+      "diaria": 117.31, "mensual": 3566.22, "anual": 42794.64,
+      "vigencia": "Del 1 de febrero de 2026 al 31 de enero de 2027",
+      "fuente": "INEGI \u00b7 Valor de la Unidad de Medida y Actualizaci\u00f3n, DOF 9 de enero de 2026",
+      "estado": "oficial",
+      "que": "La referencia en pesos que sustituy\u00f3 al salario m\u00ednimo para calcular multas, cuotas y obligaciones legales. Aqu\u00ed fija dos cosas: el tope del salario con el que se cotiza al Seguro Social y el monto del subsidio para el empleo."
+    },
+    "salario_minimo": {
+      "general": 315.04, "frontera_norte": 440.87,
+      "mensual_general": 9451.20, "mensual_frontera": 13226.10,
+      "fuente": "CONASAMI \u00b7 Resoluci\u00f3n publicada en el DOF el 9 de diciembre de 2025, vigente desde el 1 de enero de 2026",
+      "estado": "oficial",
+      "que": "El piso legal del salario. El mensual se obtiene multiplicando el diario por 30, que es como lo eleva al mes la legislaci\u00f3n laboral y de seguridad social."
+    },
+    "subsidio_empleo": {
+      "pct_uma": 15.02, "pct_enero": 15.59, "tope_ingreso_mensual": 11492.66,
+      "fuente": "Decreto que reforma el diverso por el que se otorga el subsidio para el empleo \u00b7 DOF 31 de diciembre de 2025",
+      "estado": "oficial",
+      "que": "Desde 2024 el subsidio dej\u00f3 de ser una tabla por tramos y es una cantidad fija: el valor mensual de la UMA multiplicado por 15.02%. Se resta del impuesto retenido a quien gana hasta $11,492.66 al mes. Para enero de 2026 el decreto orden\u00f3 usar 15.59%, porque la UMA se actualiza hasta febrero."
+    },
+    "iva": {
+      "tasa": 16, "tasa_frontera": 8,
+      "fuente": "Ley del Impuesto al Valor Agregado, art. 1\u00ba \u00b7 Decreto de est\u00edmulos fiscales regi\u00f3n fronteriza norte",
+      "estado": "oficial",
+      "que": "El impuesto que nadie retiene y todos pagan: va dentro del precio de casi todo lo que se compra. No distingue cu\u00e1nto gana quien compra, y por eso pesa m\u00e1s sobre el ingreso bajo."
+    },
+    "poblacion": {
+      "millones": 134.4,
+      "fuente": "CONAPO \u00b7 Proyecciones de la Poblaci\u00f3n de M\u00e9xico y las entidades federativas 2020-2070, poblaci\u00f3n a mitad de 2026",
+      "estado": "oficial",
+      "pendiente": "La base de datos abierta del Consejo no result\u00f3 accesible al integrar esta cifra, de modo que la referencia puntual al cuadro de la proyecci\u00f3n queda declarada como pendiente. La cifra es la que el propio Consejo dio a conocer para mediados de 2026."
+    },
+    "padron": {
+      "millones": 63.2,
+      "fuente": "Padr\u00f3n de contribuyentes activos, cat\u00e1logo macro de esta plataforma",
+      "estado": "pendiente",
+      "pendiente": "Esta cifra todav\u00eda no lleva en nuestro cat\u00e1logo la referencia oficial que la sustenta. Se ofrece como segundo denominador porque repartir entre quienes efectivamente tributan da una lectura distinta a repartir entre todos los habitantes, y ocultar esa diferencia ser\u00eda peor que declarar el pendiente."
+    }
+  },
+
+  "tarifa_mensual": {
+    "titulo": "Tarifa mensual del impuesto sobre la renta",
+    "ley": "Art. 96 de la Ley del ISR \u00b7 Anexo 8 de la RMF 2026, apartado B fracci\u00f3n V",
+    "fuente": "Diario Oficial de la Federaci\u00f3n, 28 de diciembre de 2025",
+    "estado": "oficial",
+    "nota": "Para 2026 los renglones se actualizaron por inflaci\u00f3n acumulada: el primer tramo pas\u00f3 de $746.04 a $844.59 y la cuota fija del \u00faltimo, de $117,912.32 a $133,488.54.",
+    "renglones": [
+      { "li": 0.01, "ls": 844.59, "cf": 0.0, "pct": 1.92 },
+      { "li": 844.6, "ls": 7168.51, "cf": 16.22, "pct": 6.4 },
+      { "li": 7168.52, "ls": 12598.02, "cf": 420.95, "pct": 10.88 },
+      { "li": 12598.03, "ls": 14644.64, "cf": 1011.68, "pct": 16.0 },
+      { "li": 14644.65, "ls": 17533.64, "cf": 1339.14, "pct": 17.92 },
+      { "li": 17533.65, "ls": 35362.83, "cf": 1856.84, "pct": 21.36 },
+      { "li": 35362.84, "ls": 55736.68, "cf": 5665.16, "pct": 23.52 },
+      { "li": 55736.69, "ls": 106410.5, "cf": 10457.09, "pct": 30.0 },
+      { "li": 106410.51, "ls": 141880.66, "cf": 25659.23, "pct": 32.0 },
+      { "li": 141880.67, "ls": 425641.99, "cf": 37009.69, "pct": 34.0 },
+      { "li": 425642.0, "ls": null, "cf": 133488.54, "pct": 35.0 }
+    ]
+  },
+
+  "tarifa_anual": {
+    "titulo": "Tarifa anual del impuesto sobre la renta",
+    "ley": "Arts. 97 y 152 de la Ley del ISR \u00b7 Anexo 8 de la RMF 2026, apartado C fracci\u00f3n II",
+    "fuente": "Diario Oficial de la Federaci\u00f3n, 28 de diciembre de 2025",
+    "estado": "oficial",
+    "nota": "Es la tarifa mensual elevada al a\u00f1o: cada l\u00edmite y cada cuota fija son doce veces los del cuadro mensual.",
+    "renglones": [
+      { "li": 0.01, "ls": 10135.11, "cf": 0.0, "pct": 1.92 },
+      { "li": 10135.12, "ls": 86022.11, "cf": 194.59, "pct": 6.4 },
+      { "li": 86022.12, "ls": 151176.19, "cf": 5051.37, "pct": 10.88 },
+      { "li": 151176.2, "ls": 175735.66, "cf": 12140.13, "pct": 16.0 },
+      { "li": 175735.67, "ls": 210403.69, "cf": 16069.64, "pct": 17.92 },
+      { "li": 210403.7, "ls": 424353.97, "cf": 22282.14, "pct": 21.36 },
+      { "li": 424353.98, "ls": 668840.14, "cf": 67981.92, "pct": 23.52 },
+      { "li": 668840.15, "ls": 1276925.98, "cf": 125485.07, "pct": 30.0 },
+      { "li": 1276925.99, "ls": 1702567.97, "cf": 307910.81, "pct": 32.0 },
+      { "li": 1702567.98, "ls": 5107703.92, "cf": 444116.23, "pct": 34.0 },
+      { "li": 5107703.93, "ls": null, "cf": 1601862.46, "pct": 35.0 }
+    ]
+  },
+
+  "resico": {
+    "titulo": "Tabla mensual del R\u00e9gimen Simplificado de Confianza",
+    "ley": "Art. 113-E de la Ley del ISR, T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n IV",
+    "fuente": "Texto vigente de la Ley del Impuesto sobre la Renta",
+    "estado": "oficial",
+    "tope_anual": 3500000,
+    "nota": "La tasa se aplica al total de lo efectivamente cobrado y amparado con factura, sin el IVA y <b>sin deducci\u00f3n alguna</b>. Esa es la diferencia de fondo con el r\u00e9gimen general: aqu\u00ed no se resta ning\u00fan gasto, y a cambio la tasa es una fracci\u00f3n de la del cuadro com\u00fan.",
+    "renglones": [
+      { "hasta": 25000.00, "tasa": 1.00 },
+      { "hasta": 50000.00, "tasa": 1.10 },
+      { "hasta": 83333.33, "tasa": 1.50 },
+      { "hasta": 208333.33, "tasa": 2.00 },
+      { "hasta": 3500000.00, "tasa": 2.50 }
+    ]
+  },
+
+  "imss_obrero": {
+    "titulo": "Lo que el Seguro Social descuenta al trabajador",
+    "fuente": "Ley del Seguro Social, \u00faltima reforma publicada en el DOF el 15 de enero de 2026",
+    "estado": "oficial",
+    "tope_sbc_uma": 25,
+    "nota_tope": "El art\u00edculo 28 fija el l\u00edmite superior del salario con el que se cotiza en veinticinco veces la referencia diaria. De ah\u00ed hacia arriba, el sueldo sube y la cuota ya no.",
+    "ramos": [
+      { "ramo": "Enfermedades y maternidad \u00b7 prestaciones en dinero", "pct": 0.25, "base": "sbc",
+        "ley": "Art. 107, fracci\u00f3n II: al trabajador le toca el 25% de la cuota total del 1% sobre el salario base de cotizaci\u00f3n." },
+      { "ramo": "Gastos m\u00e9dicos de personas pensionadas", "pct": 0.375, "base": "sbc",
+        "ley": "Art. 25: de la cuota conjunta de 1.5%, al patr\u00f3n le corresponde 1.05%, al trabajador 0.375% y al Estado 0.075%." },
+      { "ramo": "Invalidez y vida", "pct": 0.625, "base": "sbc",
+        "ley": "Art. 147: patr\u00f3n 1.75% y trabajador 0.625% sobre el salario base de cotizaci\u00f3n." },
+      { "ramo": "Cesant\u00eda en edad avanzada y vejez", "pct": 1.125, "base": "sbc",
+        "ley": "Art. 168, fracci\u00f3n II, inciso b): el trabajador cubre 1.125% sobre el salario base de cotizaci\u00f3n." },
+      { "ramo": "Enfermedades y maternidad \u00b7 prestaciones en especie", "pct": 0.40, "base": "excedente_3_uma",
+        "ley": "Art. 106, fracci\u00f3n II, le\u00eddo con el art\u00edculo D\u00e9cimo Noveno transitorio del decreto de 1995: la cuota obrera arranc\u00f3 en 2% y baj\u00f3 dieciseis cent\u00e9simas cada 1\u00ba de julio de 1998 a 2007, hasta quedar en 0.40%. Se causa s\u00f3lo sobre la parte del salario que excede tres veces la referencia diaria." }
+    ],
+    "no_los_paga_el_trabajador": [
+      { "ramo": "Retiro", "pct": 2.00, "ley": "Art. 168, fracci\u00f3n I: \u00edntegramente a cargo del patr\u00f3n." },
+      { "ramo": "Guarder\u00edas y prestaciones sociales", "pct": 1.00, "ley": "Arts. 211 y 212: la prima es de 1% y el patr\u00f3n la cubre \u00edntegramente." },
+      { "ramo": "Vivienda (INFONAVIT)", "pct": 5.00, "ley": "Art. 29 de la Ley del INFONAVIT: aportaci\u00f3n patronal del 5% sobre el salario base." },
+      { "ramo": "Riesgos de trabajo", "pct": null, "ley": "Arts. 70 a 74: prima variable seg\u00fan la siniestralidad de cada empresa, a cargo del patr\u00f3n." }
+    ]
+  },
+
+  "regimenes": [
+    {
+      "id": "sueldos",
+      "nombre": "Sueldos y salarios",
+      "corto": "Trabajo con un patr\u00f3n que me retiene",
+      "icono": "\ud83d\udc54",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo I de la Ley del ISR",
+      "articulos": "Arts. 94 a 99",
+      "quien_es": "Quien recibe un sueldo de un patr\u00f3n, est\u00e1 en la n\u00f3mina y ve el descuento ya hecho en su recibo.",
+      "base": "El sueldo completo del periodo.",
+      "retiene": "El patr\u00f3n. El trabajador no presenta pago alguno: se lo descuentan antes de cobrar.",
+      "seguridad_social": true,
+      "subsidio": true,
+      "nota": "Es el \u00fanico r\u00e9gimen en el que el impuesto llega ya descontado. Por eso quien est\u00e1 en n\u00f3mina casi nunca sabe cu\u00e1nto paga: nunca tuvo el dinero en la mano.",
+      "punto_ciego": "El recibo de n\u00f3mina muestra la cuota obrera del Seguro Social, pero no la patronal ni la del Estado. El costo completo de una plaza es bastante mayor que el bruto que aparece arriba del recibo, y ese dato el trabajador no lo ve nunca."
+    },
+    {
+      "id": "resico",
+      "nombre": "R\u00e9gimen Simplificado de Confianza",
+      "corto": "Facturo y pago una tasa baja sobre lo cobrado",
+      "icono": "\ud83e\uddd1\u200d\ud83d\udd27",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n IV de la Ley del ISR",
+      "articulos": "Arts. 113-E a 113-J",
+      "quien_es": "Personas f\u00edsicas con actividad empresarial, profesional o de arrendamiento que no rebasan tres millones y medio de pesos al a\u00f1o.",
+      "base": "El total cobrado en el mes y amparado con factura, sin IVA y sin restar ning\u00fan gasto.",
+      "retiene": "Nadie: el propio contribuyente declara y paga a m\u00e1s tardar el d\u00eda 17 del mes siguiente.",
+      "seguridad_social": false,
+      "subsidio": false,
+      "nota": "La tasa va de 1% a 2.5%. Es, con diferencia, el r\u00e9gimen m\u00e1s barato para una persona f\u00edsica, y ese es justamente el motivo por el que existe.",
+      "punto_ciego": "Pagar poco impuesto no es lo mismo que estar protegido. Quien tributa aqu\u00ed no cotiza al Seguro Social por ese solo hecho: ni servicio m\u00e9dico, ni incapacidades, ni semanas para pensionarse, salvo que se inscriba por su cuenta y pague ambas cuotas."
+    },
+    {
+      "id": "honorarios",
+      "nombre": "Actividad empresarial y profesional",
+      "corto": "Honorarios o negocio propio, con deducciones",
+      "icono": "\ud83e\uddfe",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n I de la Ley del ISR",
+      "articulos": "Arts. 100 a 110",
+      "quien_es": "Profesionistas independientes y due\u00f1os de un negocio que tributan en el r\u00e9gimen general.",
+      "base": "Los ingresos del periodo menos las deducciones autorizadas. El impuesto se calcula sobre la utilidad, no sobre lo facturado.",
+      "retiene": "Si el cliente es una persona moral, retiene 10% como pago provisional (art. 106). El resto lo entera el contribuyente.",
+      "seguridad_social": false,
+      "subsidio": false,
+      "nota": "Se le aplica la misma tarifa que a los sueldos, pero sobre la utilidad. Deducir bien puede cambiar el impuesto por completo; no deducir nada lo deja igual al de un asalariado.",
+      "punto_ciego": "La retenci\u00f3n del 10% que hace el cliente no es el impuesto final: es un anticipo. Quien la confunde con el pago definitivo llega a la declaraci\u00f3n anual con una diferencia a cargo que no esperaba."
+    },
+    {
+      "id": "arrendamiento",
+      "nombre": "Arrendamiento de inmuebles",
+      "corto": "Rento una casa, un local o un terreno",
+      "icono": "\ud83c\udfe0",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo III de la Ley del ISR",
+      "articulos": "Arts. 114 a 118",
+      "quien_es": "Quien obtiene ingresos por dar en uso o goce temporal un bien inmueble.",
+      "base": "La renta cobrada menos las deducciones. El art\u00edculo 115 permite optar por restar 35% a ciegas, sin comprobar gasto alguno, m\u00e1s el predial pagado.",
+      "retiene": "Si el inquilino es persona moral, retiene 10% sobre la renta sin deducci\u00f3n alguna (art. 116).",
+      "seguridad_social": false,
+      "subsidio": false,
+      "nota": "La deducci\u00f3n ciega de 35% es una de las pocas del sistema que no exige comprobar nada. Esta calculadora la aplica por ser la opci\u00f3n m\u00e1s com\u00fan, y lo dice en el resultado.",
+      "punto_ciego": "El predial se deduce, pero la calculadora no lo conoce: har\u00eda falta el recibo del municipio. El impuesto que aqu\u00ed se muestra es, por eso, un techo: el real puede ser algo menor."
+    },
+    {
+      "id": "plataformas",
+      "nombre": "Plataformas tecnol\u00f3gicas",
+      "corto": "Reparto, transporte, hospedaje o ventas por app",
+      "icono": "\ud83d\udcf1",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n III de la Ley del ISR",
+      "articulos": "Art. 113-A",
+      "quien_es": "Quien vende o presta servicios por internet a trav\u00e9s de una aplicaci\u00f3n: transporte de pasajeros, entrega de bienes, hospedaje o comercio.",
+      "base": "El total efectivamente percibido por conducto de la plataforma, sin IVA.",
+      "retiene": "La propia plataforma, y entera la retenci\u00f3n al fisco.",
+      "seguridad_social": false,
+      "subsidio": false,
+      "tasas": [
+        { "id": "transporte", "nombre": "Transporte de pasajeros y entrega de bienes", "pct": 2.1 },
+        { "id": "hospedaje", "nombre": "Servicios de hospedaje", "pct": 4.0 },
+        { "id": "bienes", "nombre": "Venta de bienes y prestaci\u00f3n de servicios", "pct": 1.0 }
+      ],
+      "nota": "Las tres tasas son las del propio art\u00edculo 113-A. La retenci\u00f3n tiene car\u00e1cter de pago provisional, salvo que se opte por considerarla definitiva.",
+      "punto_ciego": "La tasa se aplica al ingreso bruto que pasa por la app, antes de descontar gasolina, mantenimiento o la comisi\u00f3n de la propia plataforma. El porcentaje se ve peque\u00f1o sobre el bruto y bastante m\u00e1s grande sobre lo que realmente queda."
+    },
+    {
+      "id": "nose",
+      "nombre": "No s\u00e9 en cu\u00e1l estoy",
+      "corto": "No estoy seguro, o no estoy registrado",
+      "icono": "\ud83e\udd14",
+      "capitulo": "\u2014",
+      "articulos": "\u2014",
+      "quien_es": "Quien no sabe c\u00f3mo tributa, o no tributa.",
+      "base": "La calculadora sigue adelante con el supuesto m\u00e1s com\u00fan en M\u00e9xico: sueldos y salarios.",
+      "retiene": "Se calcula como si hubiera un patr\u00f3n que retiene.",
+      "seguridad_social": true,
+      "subsidio": true,
+      "hereda": "sueldos",
+      "nota": "No pasa nada por no saberlo. El r\u00e9gimen aparece en la constancia de situaci\u00f3n fiscal que expide el SAT, y se puede cambiar la elecci\u00f3n aqu\u00ed arriba en cuanto se sepa.",
+      "punto_ciego": "Quien no est\u00e1 registrado no deja de pagar impuestos: paga el IVA y el IEPS que van dentro del precio de lo que compra, sin excepci\u00f3n y sin recibo que se lo diga."
+    }
+  ],
+
+  "relojes": {
+    "titulo": "Lo que se endeuda y lo que se pierde, por segundo",
+    "nota": "Ninguno de estos relojes mide un gasto que ocurra en el instante en que usted lo mira. Cada uno toma una cifra anual de un documento oficial y la proyecta sobre el tiempo que usted lleva en esta p\u00e1gina. Es una regla de tres con el reloj del sistema, no una lectura en tiempo real del erario.",
+    "fuentes": [
+      {
+        "id": "deuda-nueva",
+        "nombre": "Deuda nueva autorizada para 2026",
+        "icono": "\ud83c\udfe6",
+        "anual_mdp": 1472626.4,
+        "estado": "oficial",
+        "fuente": "Ley de Ingresos de la Federaci\u00f3n 2026 \u00b7 ingresos derivados de financiamientos",
+        "refKey": "ref-lif2026",
+        "que": "No es lo que el pa\u00eds debe: es lo que se agrega este a\u00f1o a lo que ya deb\u00eda. Entra al presupuesto como ingreso y sale como obligaci\u00f3n de los a\u00f1os siguientes.",
+        "culpa": false
+      },
+      {
+        "id": "intereses",
+        "nombre": "Intereses de la deuda ya contratada",
+        "icono": "\ud83d\udcc9",
+        "anual_mdp": 1572073.3,
+        "estado": "oficial",
+        "fuente": "Presupuesto de Egresos de la Federaci\u00f3n 2026 \u00b7 Anexo 8, costo financiero de la deuda",
+        "refKey": "ref-pef2026",
+        "que": "El precio de lo prestado en ejercicios anteriores. No compra nada y no amortiza capital: s\u00f3lo paga intereses. Es la factura de las decisiones de gobiernos pasados, y la paga el presupuesto de hoy.",
+        "culpa": true
+      },
+      {
+        "id": "megaobras",
+        "nombre": "P\u00e9rdida operativa de las doce megaobras",
+        "icono": "\ud83c\udfd7\ufe0f",
+        "anual_mdp": 80200.1,
+        "estado": "derivado",
+        "fuente": "Suma de las doce obras evaluadas en la subpesta\u00f1a 2.2",
+        "que": "Lo que cuesta cada a\u00f1o mantener andando obras cuya operaci\u00f3n ingresa menos de lo que gasta. No es el sobrecosto de construirlas: es el d\u00e9ficit de tenerlas abiertas.",
+        "culpa": true
+      },
+      {
+        "id": "asf",
+        "nombre": "Monto observado por la ASF a las 32 entidades",
+        "icono": "\ud83d\udd0d",
+        "anual_mdp": 46122.0,
+        "estado": "derivado",
+        "fuente": "Suma de los montos observados a las 32 entidades en el cat\u00e1logo de la pesta\u00f1a 1",
+        "que": "Lo que la Auditor\u00eda Superior de la Federaci\u00f3n se\u00f1al\u00f3 como no justificado en el gasto de las entidades. Observado no es lo mismo que perdido: parte se aclara y parte se recupera.",
+        "culpa": true
+      }
+    ],
+    "sobrecosto_acumulado": {
+      "mdp": 3069647.0,
+      "estado": "derivado",
+      "fuente": "Subpesta\u00f1a 2.2 \u00b7 inversi\u00f3n real menos inversi\u00f3n presupuestada de las doce obras",
+      "nota": "No entra en los relojes porque no es un ritmo anual sino una suma de pesos de a\u00f1os distintos, entre 1988 y 2024, sin deflactar a un a\u00f1o com\u00fan. Se muestra aparte, como lo que es: una cuenta acumulada."
+    }
+  },
+
+  "cadencias": [
+    { "id": "dia", "nombre": "Al d\u00eda", "dias": 1, "icono": "\ud83d\udd50" },
+    { "id": "mes", "nombre": "Al mes", "dias": 30.4167, "icono": "\ud83d\udcc5" },
+    { "id": "trimestre", "nombre": "Al trimestre", "dias": 91.25, "icono": "\ud83d\udcc6" },
+    { "id": "semestre", "nombre": "Al semestre", "dias": 182.5, "icono": "\u23f3" },
+    { "id": "ano", "nombre": "Al a\u00f1o", "dias": 365, "icono": "\ud83d\uddd3\ufe0f" }
+  ],
+
+  "puntos_ciegos": [
+    {
+      "titulo": "El impuesto que usted paga no tiene destino",
+      "icono": "\ud83e\udded",
+      "texto": "El reparto que esta calculadora muestra no significa que su dinero vaya a esos rubros. El sistema mexicano funciona bajo unidad de caja: todo lo recaudado entra a una sola bolsa y de ah\u00ed sale todo el gasto. Su ISR no est\u00e1 etiquetado. Lo que el reparto dice, con precisi\u00f3n, es otra cosa: si el gasto del a\u00f1o se reparte as\u00ed, entonces a su aportaci\u00f3n le corresponde esta proporci\u00f3n.",
+      "excepcion": "Hay una excepci\u00f3n, y la Ley de Ingresos la marca expresamente: las cuotas de seguridad social s\u00ed tienen destino espec\u00edfico. No entran a la bolsa com\u00fan ni forman parte de la Recaudaci\u00f3n Federal Participable, de modo que tampoco se reparten a estados y municipios."
+    },
+    {
+      "titulo": "De cada peso que se gasta, catorce centavos son prestados",
+      "icono": "\ud83c\udfe6",
+      "texto": "El Presupuesto de Egresos y la Ley de Ingresos cierran en la misma cifra porque lo prestado se cuenta como ingreso. De los $10.19 billones que el Estado tiene autorizado gastar en 2026, $1.47 billones son endeudamiento neto. Dicho de otro modo: el reparto del gasto que usted ve no se financia s\u00f3lo con impuestos, y la parte que no, alguien la pagar\u00e1 despu\u00e9s."
+    },
+    {
+      "titulo": "El impuesto que no se ve es el m\u00e1s parejo y el m\u00e1s injusto",
+      "icono": "\ud83d\uded2",
+      "texto": "La retenci\u00f3n sobre el ingreso se declara, se calcula y aparece en un recibo. El IVA no: va dentro del precio. Es de tasa \u00fanica, as\u00ed que quien gana poco le entrega al fisco una proporci\u00f3n mayor de su ingreso que quien gana mucho. Esta calculadora no puede saber cu\u00e1nto IVA paga usted, porque eso depende de en qu\u00e9 gasta; por eso lo ofrece como escenario que usted fija, y no como dato."
+    },
+    {
+      "titulo": "El costo completo de una plaza no est\u00e1 en el recibo",
+      "icono": "\ud83e\uddfe",
+      "texto": "Al trabajador se le descuenta 2.375% del salario base m\u00e1s 0.40% de la parte que excede tres UMA. El patr\u00f3n aporta, por el mismo trabajador, el retiro, las guarder\u00edas, la vivienda, los riesgos de trabajo y la parte mayor de cada ramo compartido. Nada de eso aparece en la n\u00f3mina que el trabajador recibe."
+    }
+  ]
 }
 };
 

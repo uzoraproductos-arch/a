@@ -1444,7 +1444,105 @@ barra fiel de dos píxeles no se vería. El cuadro de las 32, donde el lector s�
 compara, usa la proporción real con un mínimo del 0.8 %, y un valor de cero
 —Tlaxcala, sin deuda registrada— se dibuja sin barra.
 
+### Hecho (2.4: la calculadora cívica, con el aparato legal de 2026)
+
+La subpestaña repartía el dinero del lector entre **nueve rubros con
+porcentajes escritos a mano y sin una sola fuente declarada** —27.6 % a
+transferencias, 13.2 % a deuda, 12.8 % a pensiones…—. No venían de ningún
+documento. Se retiraron por completo.
+
+**Lo que hay ahora, en cuatro bloques.**
+
+1. **Su ingreso.** Monto, periodicidad (al mes o al año), naturaleza (bruto o
+   neto) y régimen fiscal, entre seis: sueldos y salarios, RESICO, actividad
+   empresarial y profesional, arrendamiento, plataformas tecnológicas y *no sé
+   en cuál estoy*, que sigue adelante con el supuesto de sueldos y lo declara
+   en cada renglón. El campo admite «15,000», «15000» y «15 000».
+2. **Lo que le retienen.** Cuatro cajas —bruto, ISR, cuotas del Seguro Social,
+   neto— y la cascada renglón por renglón, cada uno con el artículo que lo
+   funda. Debajo, el renglón de la tarifa en que cayó el lector con sus dos
+   vecinos, para que se vea el escalón.
+3. **A dónde iría cada peso.** Su ISR anual repartido con las proporciones de
+   los ocho renglones del Presupuesto de Egresos 2026 que ya publica la 1.1.
+4. **El reloj de la deuda y de lo perdido.** Cuatro cuentas anuales divididas
+   entre habitantes o entre contribuyentes, en cinco cadencias, con un contador
+   en vivo del acumulado nacional.
+
+**De dónde sale cada número.** Las dos tarifas del ISR se transcribieron del
+**Anexo 8 de la Resolución Miscelánea Fiscal 2026, DOF del 28 de diciembre de
+2025** (apartado B fracción V la mensual, C fracción II la anual), descargado
+del sitio del SAT. La tabla del RESICO está en el texto del **artículo 113-E**.
+Las cuotas obreras vienen de cinco artículos de la **Ley del Seguro Social**
+(25, 106 II, 107 II, 147 y 168 II b), que suman **2.375 %** del salario base
+más **0.40 %** del excedente de tres UMA. La **UMA** ($117.31 diarios,
+$3,566.22 al mes) del INEGI, DOF 9 de enero de 2026. El **salario mínimo**
+($315.04 y $440.87) de la CONASAMI, DOF 9 de diciembre de 2025. El **subsidio
+para el empleo** —el valor mensual de la UMA por 15.02 %, hasta $11,492.66 de
+ingreso— del decreto publicado el 31 de diciembre de 2025.
+
+**Dos reglas que dejan el descuento en cero, y que la primera versión no
+tenía.** Al salario mínimo no se le retiene nada, y por dos leyes distintas: el
+último párrafo del **artículo 96 de la Ley del ISR** prohíbe la retención a
+quien en el mes únicamente percibe un salario mínimo, y el **artículo 36 de la
+Ley del Seguro Social** ordena que en ese caso el patrón cubra íntegramente
+también la cuota obrera. Sin ellas la calculadora le cobraba a un salario
+mínimo $133.66 de impuesto y $224.46 de cuotas que la ley no le cobra.
+
+**Tres decisiones de método.**
+
+- **Las cuotas de seguridad social no entran en el reparto del gasto.** El
+  artículo 2º del Código Fiscal las define como contribución con destino
+  específico: no van a la bolsa común, no forman parte de la Recaudación
+  Federal Participable y no se reparten a estados ni municipios. Repartirlas
+  como gasto general habría repetido el error que este bloque vino a corregir.
+- **El IVA se presenta como escenario, no como dato.** Cuánto IVA paga cada
+  quien depende de en qué gasta, y parte del consumo está a tasa cero o exenta.
+  El bloque lleva sello propio —«escenario, no dato»— y una barra que el lector
+  mueve. Es el único renglón de la subpestaña que la plataforma no afirma.
+- **La deducción no es dinero que salga del bolsillo.** La cascada la mostraba
+  restada junto al impuesto, de modo que el arrendador parecía perder el 35 %
+  que en realidad se queda. Ahora hay tres clases de renglón con su signo:
+  movimientos (− y +), subtotales (=) y renglones que sólo explican cómo se
+  llega a la base gravable (·).
+
+**El cálculo desde el neto.** Quien conoce su depósito y no su sueldo escribe
+el neto y la página busca el bruto por aproximaciones sucesivas. Se hace así, y
+no despejando, porque la tarifa tiene once tramos, el subsidio un tope y la
+cuota obrera dos bases distintas: una fórmula cerrada sería falsa.
+
+**El puente desde la 2.2, corregido.** El botón llevaba una cifra de sobrecosto
+por contribuyente al campo de un formulario que pide un ingreso —dos cosas
+distintas leídas como una— y anunciaba la subpestaña 2.3. Ahora lleva al reloj
+del bloque 4, que es donde esa cifra significa algo, y dice 2.4.
+
+**Comprobado.** La prueba de la tarifa no compara contra cifras escritas a
+mano: verifica que la cuota fija de cada renglón sea el impuesto acumulado de
+todos los anteriores, que es la propiedad que el cuadro del Diario Oficial debe
+cumplir. Los veintidós renglones de las dos tarifas la cumplen; la única
+desviación son **dos centavos en el décimo renglón del cuadro anual**, que
+vienen de la fuente y se comprobaron contra el PDF del SAT. Las tres cascadas
+cuadran, los seis regímenes rinden cifra, el reloj avanza, el móvil de 390 px
+no desborda y la consola no arroja errores.
+
 ### Pendiente
+
+- **El poblacional de la 2.4 no lleva referencia puntual.** Los relojes dividen
+  entre **134.4 millones de habitantes**, la proyección de CONAPO a mitad de
+  2026. La base de datos abierta del Consejo no resultó accesible desde este
+  entorno al integrar la cifra (la conexión se corta), de modo que la
+  referencia al cuadro exacto de las *Proyecciones de la Población de México y
+  las entidades federativas 2020-2070* queda declarada como pendiente en la
+  propia ficha. El segundo denominador —63.2 millones de contribuyentes— ya
+  venía marcado como pendiente en el catálogo macro y lo sigue estando.
+- **La 2.4 no considera las exenciones del artículo 93 ni las deducciones
+  personales.** No entran aguinaldo, prima vacacional, horas extra, gastos
+  médicos, colegiaturas, intereses hipotecarios ni aportaciones voluntarias al
+  retiro, y se supone un ingreso parejo los doce meses. Está dicho al pie de la
+  subpestaña. Incorporarlas exigiría un formulario bastante mayor; la decisión
+  de hasta dónde llegar es del autor.
+- **El predial del régimen de arrendamiento no se conoce.** El artículo 115
+  permite deducirlo además del 35 % a ciegas, pero haría falta el recibo del
+  municipio. El impuesto que la calculadora muestra es, por eso, un techo.
 
 - **Los 32 renglones no cuadran con el total nacional, y ahora se ve.** Salió
   al sumar el cuadro de entidades. El Presupuesto de Egresos cifra el gasto
