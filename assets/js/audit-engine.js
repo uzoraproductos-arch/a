@@ -3215,8 +3215,8 @@
     { a: ['déficit fiscal', 'déficit presupuestal', 'déficit público', 'déficit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
     { a: ['superávit fiscal', 'superávit presupuestal', 'superávit'], t: 'Déficit y Superávit Público', r: 'ref-lfprh', n: 2 },
     { a: ['balance primario'], t: 'Balance Primario', r: 'ref-lfprh', n: 2 },
-    { a: ['deuda pública'], t: 'Deuda Pública y SHRFSP', r: 'ref-lgdp', n: 4 },
-    { a: ['SHRFSP'], t: 'Deuda Pública y SHRFSP', r: 'ref-lgdp', n: 4, cs: true },
+    { a: ['deuda pública'], t: 'Deuda Pública y SHRFSP', r: 'ref-lfdp', n: 4 },
+    { a: ['SHRFSP'], t: 'Deuda Pública y SHRFSP', r: 'ref-lfdp', n: 4, cs: true },
     { a: ['Producto Interno Bruto'], t: 'PIB (Producto Interno Bruto)', r: 'ref-inegi-cuentas', n: 32 },
     { a: ['PIB'], t: 'PIB (Producto Interno Bruto)', r: 'ref-inegi-cuentas', n: 32, cs: true },
     { a: ['inflación'], t: 'Inflación e INPC', r: 'ref-inegi-cuentas', n: 32 },
@@ -3241,7 +3241,7 @@
     { a: ['Ramo 28'], t: 'Ramo 28 (Participaciones Federales)', r: 'ref-lcf', n: 5, cs: true },
     { a: ['Ramo 33'], t: 'Ramo 33 (Aportaciones Federales)', r: 'ref-lcf', n: 5, cs: true },
     { a: ['Ley de Disciplina Financiera'], t: 'Ley de Disciplina Financiera (LDF)', r: 'ref-ldf', n: 6 },
-    { a: ['costo financiero de la deuda'], t: 'Costo Financiero de la Deuda', r: 'ref-lgdp', n: 4 },
+    { a: ['costo financiero de la deuda'], t: 'Costo Financiero de la Deuda', r: 'ref-lfdp', n: 4 },
     { a: ['impuesto predial', 'predial'], t: 'Impuesto Predial', r: 'ref-cpeum', n: 1 },
 
     // --- Fiscalizacion ---

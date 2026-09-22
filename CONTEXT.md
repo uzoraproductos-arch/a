@@ -1633,19 +1633,52 @@ publicada, revisión abierta y copia comprimida, con el sello vigente al lado,
 para que cualquiera pueda comprobar en diez segundos si lo que tiene delante es
 la versión buena.
 
+### Hecho (el primer lote de arreglos baratos)
+
+Cuatro asuntos del inventario, escogidos por ser los de menor costo.
+
+**La ley de deuda llevaba el nombre equivocado, y ahora está citada.** La
+plataforma decía «Ley General de Deuda Pública» diez veces —ocho en la base y
+dos en el HTML— contra una sola «Ley Federal». El pendiente llevaba tiempo
+esperando una cita del Diario Oficial y por fin se consiguió: el texto vigente
+que publica la Cámara de Diputados lleva al margen la nota **«Denominación de
+la Ley reformada DOF 27-04-2016»**. El nombre vigente es **Ley Federal de Deuda
+Pública**; el original, de la publicación del 31 de diciembre de 1976, era el
+General. Corregidas las diez menciones, el acrónimo (LGDP → LFDP) y el
+identificador interno de la referencia. La ficha de la referencia 04 no borra
+el nombre viejo: cuenta el linaje completo, que es lo que manda el criterio
+editorial sobre estructuras derogadas.
+
+**Retirada la colección `impuestos`.** Nadie la leía desde que se reescribió la
+2.4 y cargaba cifras hasta 33.3 % por debajo de la Ley de Ingresos 2026. Son
+1,621 bytes menos de base y una trampa menos para quien la consulte.
+
+**El icono de la misión de la pestaña 6 se encogía por debajo de su propio
+contenido.** Era un elemento flexible sin `flex-shrink: 0`: la caja medía 28 px
+y el glifo, 37. Con `flex: 0 0 auto` mide los 37 que necesita.
+
+**Cuatro títulos que se repetían a sí mismos.** En las pestañas 3, 4, 6 y 7 el
+encabezado del panel repetía el de la pestaña, en dos casos palabra por palabra
+y con el número de módulo incluido. Ahora siguen el patrón que ya tenían las
+otras cinco: la pestaña se nombra, el panel se titula.
+
+| | Antes | Ahora |
+|---|---|---|
+| 3 | Poder Legislativo: Periodos de Sesiones, Elecciones… | Quién Aprueba el Dinero, y Cada Cuándo |
+| 4 | Suprema Corte de Justicia de la Nación: Presupuesto… | El Poder que También se Fiscaliza |
+| 6 | 6. Modo Inspector (Auditoría Forense Hacendaria en Vivo) | Contraste una Afirmación Contra su Fuente |
+| 7 | 7. Preguntas, Glosario & Marco Legal Hacendario | El Diccionario del Dinero Público |
+
+**Y uno que no era defecto.** El barrido señalaba la cabecera de los pilares de
+la 1.3 como desbordada en 20 px. Al corregirla, la cabecera se encogió de 1,230
+a 437 px: esos 20 px eran el sangrado completo con que la cabecera entra en el
+relleno de su tarjeta, escrito a propósito con `width: calc(100% + 40px)` y
+márgenes negativos. Revertido. Queda anotado para que nadie vuelva a
+«arreglarlo»: una medición de desbordamiento no distingue un error de un
+sangrado deliberado, y quien lo toque tiene que mirar la pantalla antes.
+
 ### Pendiente
 
-- **La colección `impuestos` quedó huérfana, y además desfasada.** Salió al
-  inventariar los pendientes. Alimentaba la calculadora vieja de la pestaña 2;
-  al reescribir la 2.4 sobre `calculadora_civica` esa función desapareció y
-  **ningún renglón del motor la lee ya**: sus ocho apariciones de la palabra
-  en `audit-engine.js` son prosa, no acceso a datos. Sigue viajando en la base
-  con cifras anteriores a la Ley de Ingresos 2026: ISR $2,684,495 mdp contra
-  $3,070,149.1 (−12.6 %), IVA $1,407,983 contra $1,589,069.0 (−11.4 %) e IEPS
-  $508,000 contra $761,501.9 (−33.3 %). Son 56 renglones que nadie pinta pero
-  que cualquiera que lea la base tomaría por buenos. Dos salidas: retirarla, o
-  actualizarla contra la Ley de Ingresos y darle uso. Retirarla es lo barato y
-  lo honesto mientras no tenga destino.
 - **Los 83 montos observados por la ASF en municipios no llevan referencia.**
   El campo `observacionesASF` de `estados[].municipios[]` guarda un número
   —42, 15, 8…— y **ni un solo campo de fuente o de informe que lo sustente**:
@@ -1654,12 +1687,6 @@ la versión buena.
   la pestaña 6, así que un número sin respaldo se convierte en calificación.
   Hay que anclarlos al informe individual de la ASF que los reporta o marcarlos
   como pendientes en la ficha.
-- **El nombre de la ley de deuda no es consistente.** La base dice «Ley General
-  de Deuda Pública» ocho veces y el HTML dos; «Ley Federal de Deuda Pública»
-  aparece una sola vez. Uno de los dos nombres está mal y no se ha podido
-  resolver por falta de acceso al Diario Oficial desde este entorno. Es una
-  cita legal: o se unifica con el nombre vigente y su fecha de publicación, o
-  no debería citarse.
 
 - **El poblacional de la 2.4 no lleva referencia puntual.** Los relojes dividen
   entre **134.4 millones de habitantes**, la proyección de CONAPO a mitad de
@@ -1741,8 +1768,6 @@ la versión buena.
   cualquier regla de la hoja de estilos, que es justo el origen del problema
   de contraste en tema claro y de los párrafos demasiado anchos. Conviene
   migrarlos a clases por módulo conforme se vaya tocando cada pestaña.
-- **Título duplicado**: en varias pestañas el encabezado de `#tabintro` y el
-  título del panel dicen casi lo mismo, uno debajo del otro.
 - **Material gráfico**: la plataforma no tiene una sola etiqueta `<img>`.
   Falta la capa de fotografía, ilustración y animación prevista.
 - **Cifra federal ejercida del proceso electoral judicial**: se publica como

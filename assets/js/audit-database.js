@@ -434,10 +434,10 @@ window.AUDIT_DB = {
         "estado": "oficial",
         "quePaga": "Dinero prestado, no recaudado. Entra como ingreso del año y sale como obligación de los años siguientes.",
         "icono": "🏦",
-        "ley": "Art. 73 fracc. VIII CPEUM · Ley General de Deuda Pública",
+        "ley": "Art. 73 fracc. VIII CPEUM · Ley Federal de Deuda Pública",
         "claveLIF": "0",
         "glos": "Techo de Endeudamiento Neto (LIF)",
-        "refKey": "ref-lgdp",
+        "refKey": "ref-lfdp",
         "refNum": 4,
         "efecto": "Es lo que hace que la Ley de Ingresos y el Presupuesto de Egresos <b>cierren en la misma cifra</b>: el presupuesto cuadra porque lo prestado se cuenta como ingreso. La cifra neta esconde un bruto mayor: se contratan $1,858,397.4 mdp de endeudamiento interno y se restan los déficits de organismos y de empresas públicas.",
         "componentes": [
@@ -1474,62 +1474,6 @@ window.AUDIT_DB = {
     ],
     "notaFuentes": "Los portales oficiales del DOF, la Suprema Corte y la Cámara de Diputados estuvieron bloqueados por el proxy de red durante la elaboración de esta ficha; el articulado se contrastó contra resúmenes de esas mismas fuentes. Todo dato calculado por proporción aparece marcado como derivado y todo juicio interpretativo como análisis."
   },
-  "impuestos": [
-    {
-      "id": "isr",
-      "nombre": "Impuesto Sobre la Renta (ISR)",
-      "nivel": "Federal",
-      "monto": 2684495,
-      "share": 54.2,
-      "descripcion": "Grava directamente los ingresos y utilidades de personas físicas y empresas.",
-      "icono": "💼"
-    },
-    {
-      "id": "iva",
-      "nombre": "Impuesto al Valor Agregado (IVA)",
-      "nivel": "Federal",
-      "monto": 1407983,
-      "share": 28.4,
-      "descripcion": "Impuesto al consumo del 16% (8% franja fronteriza).",
-      "icono": "🛒"
-    },
-    {
-      "id": "ieps",
-      "nombre": "IEPS (Gasolinas, Refrescos, Tabacos)",
-      "nivel": "Federal",
-      "monto": 508000,
-      "share": 10.3,
-      "descripcion": "Impuesto especial sobre combustibles y bienes de impacto a la salud.",
-      "icono": "⛽"
-    },
-    {
-      "id": "comext",
-      "nombre": "Comercio Exterior (Aranceles)",
-      "nivel": "Federal",
-      "monto": 87000,
-      "share": 1.8,
-      "descripcion": "Aranceles y derechos aduanales en puertos y fronteras.",
-      "icono": "🚢"
-    },
-    {
-      "id": "isn",
-      "nombre": "Impuesto Sobre Nóminas (ISN)",
-      "nivel": "Estatal",
-      "monto": 210000,
-      "share": 4.2,
-      "descripcion": "Grava del 2% al 3% la nómina pagada en cada estado.",
-      "icono": "👥"
-    },
-    {
-      "id": "predial",
-      "nombre": "Impuesto Predial y Catastro",
-      "nivel": "Municipal",
-      "monto": 55000,
-      "share": 1.1,
-      "descripcion": "Grava inmuebles. Es la fuente propia central del municipio.",
-      "icono": "🏛️"
-    }
-  ],
   "estados": [
     {
       "abbr": "AGS",
@@ -4082,7 +4026,7 @@ window.AUDIT_DB = {
     {
       "termino": "Costo Financiero de la Deuda",
       "definicion": "Monto destinado exclusivamente a pagar intereses, comisiones y gastos de amortización de la deuda pública adquirida por el gobierno federal o local, sin amortizar capital sustancial.",
-      "ley": "Ley General de Deuda Pública",
+      "ley": "Ley Federal de Deuda Pública",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -4251,13 +4195,13 @@ window.AUDIT_DB = {
       "termino": "Techo de Endeudamiento Neto (LIF)",
       "categoria": "📜 Ley de Ingresos & Marco Legal",
       "definicion": "Límite máximo en pesos y moneda extranjera que el Congreso de la Unión autoriza a la Secretaría de Hacienda para contratar pasivos soberanos internos (vía colocación de CETES y Bonos por Banxico) y externos durante el ejercicio fiscal.",
-      "ley": "Ley de Ingresos de la Federación / Ley General de Deuda Pública"
+      "ley": "Ley de Ingresos de la Federación / Ley Federal de Deuda Pública"
     },
     {
       "termino": "Subastas Primarias Banxico (CETES y Bonos M)",
       "categoria": "💰 Hacendario & Deuda",
       "definicion": "Mecanismo financiero semanal operado por el Banco de México como agente colocador de deuda del Gobierno Federal, donde intermediarios financieros autorizados pujan por adquirir valores soberanos a descuento o tasa de interés fija.",
-      "ley": "Ley del Banco de México / Ley General de Deuda Pública"
+      "ley": "Ley del Banco de México / Ley Federal de Deuda Pública"
     },
     {
       "termino": "Tasa de Referencia de Deuda (Banxico)",
@@ -4370,7 +4314,7 @@ window.AUDIT_DB = {
     {
       "termino": "Deuda Pública y SHRFSP",
       "definicion": "Obligaciones financieras contraídas por el sector público. La medida más amplia y honesta es el Saldo Histórico de los Requerimientos Financieros del Sector Público (SHRFSP), que incluye deuda tradicional, pasivos de empresas productivas del Estado, pensiones y proyectos de inversión diferidos. Citar solo la deuda del gobierno federal subestima el compromiso real.",
-      "ley": "Art. 73 frac. VIII CPEUM · Ley General de Deuda Pública · Criterios Generales de Política Económica",
+      "ley": "Art. 73 frac. VIII CPEUM · Ley Federal de Deuda Pública · Criterios Generales de Política Económica",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -6154,7 +6098,7 @@ window.AUDIT_DB = {
         "eje": 2,
         "nombre": "Deuda Pública, Crédito y Mercado Financiero",
         "icono": "📈",
-        "descripcion": "Cuando los ingresos ordinarios no bastan para cubrir el presupuesto aprobado, el Estado recurre a empréstitos y a la emisión de títulos soberanos en el mercado de valores nacional e internacional, regulado por la Ley General de Deuda Pública.",
+        "descripcion": "Cuando los ingresos ordinarios no bastan para cubrir el presupuesto aprobado, el Estado recurre a empréstitos y a la emisión de títulos soberanos en el mercado de valores nacional e internacional, regulado por la Ley Federal de Deuda Pública.",
         "instrumentos": [
           {
             "nombre": "Empréstitos y Crédito Público",
@@ -6525,12 +6469,12 @@ window.AUDIT_DB = {
     },
     {
       "num": 4,
-      "id": "ref-lgdp",
+      "id": "ref-lfdp",
       "categoria": "leyes_federales",
       "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-      "cita_apa": "Ley General de Deuda Pública [LGDP]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
+      "cita_apa": "Ley Federal de Deuda Pública [LFDP]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Publicada originalmente como Ley General de Deuda Pública; la denominación de la ley fue reformada por decreto publicado en el Diario Oficial el 27 de abril de 2016. Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_de_Deuda_Publica.pdf",
-      "descripcion": "Rige la contratación de empréstitos y la emisión de valores de deuda soberana nacional e internacional; faculta a la SHCP a normar las emisiones y celebrar con Banco de México los convenios de colocación de CETES y Bonos. La Cámara de Diputados la publica hoy bajo el título «Ley Federal de Deuda Pública», con el nombre original como subtítulo."
+      "descripcion": "Rige la contratación de empréstitos y la emisión de valores de deuda soberana nacional e internacional; faculta a la SHCP a normar las emisiones y celebrar con Banco de México los convenios de colocación de CETES y Bonos. Nació en 1976 como <em>Ley General de Deuda Pública</em>; el decreto publicado en el Diario Oficial el 27 de abril de 2016 reformó su denominación y desde entonces se llama <em>Ley Federal de Deuda Pública</em>. El nombre viejo sigue circulando en documentos y notas, pero no es el vigente."
     },
     {
       "num": 5,
@@ -6952,7 +6896,7 @@ window.AUDIT_DB = {
       "items": [
         {
           "q": "¿Qué son los CETES y qué relación directa tienen con la Tesorería y Banxico?",
-          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda pública emitidos por la SHCP al amparo de la <em>Ley General de Deuda Pública</em>. El <strong>Banco de México</strong> actúa por mandato de ley como su agente financiero colocador mediante subastas primarias semanales. El gobierno los vende a descuento para captar dinero inmediato de los ahorradores y financiar su gasto corriente; al vencimiento, el Estado devuelve el valor nominal íntegro ($10 pesos), pagando la diferencia como rendimiento."
+          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda pública emitidos por la SHCP al amparo de la <em>Ley Federal de Deuda Pública</em>. El <strong>Banco de México</strong> actúa por mandato de ley como su agente financiero colocador mediante subastas primarias semanales. El gobierno los vende a descuento para captar dinero inmediato de los ahorradores y financiar su gasto corriente; al vencimiento, el Estado devuelve el valor nominal íntegro ($10 pesos), pagando la diferencia como rendimiento."
         },
         {
           "q": "¿Cuál es la diferencia entre CETES, Bonos M, Udibonos y Bondes F?",

@@ -15224,7 +15224,7 @@ body.con-regreso { padding-bottom: 96px; }
   margin-bottom: 20px;
 }
 .insp-mision-cab { display: flex; gap: 14px; align-items: flex-start; }
-.insp-mision-ico { font-size: 30px; line-height: 1; }
+.insp-mision-ico { flex: 0 0 auto; font-size: 30px; line-height: 1; }
 .insp-mision-tit {
   margin: 0 0 5px; font-family: var(--font-serif);
   font-size: 21px; color: var(--gold-bright);
