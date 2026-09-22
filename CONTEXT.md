@@ -1635,6 +1635,32 @@ la versión buena.
 
 ### Pendiente
 
+- **La colección `impuestos` quedó huérfana, y además desfasada.** Salió al
+  inventariar los pendientes. Alimentaba la calculadora vieja de la pestaña 2;
+  al reescribir la 2.4 sobre `calculadora_civica` esa función desapareció y
+  **ningún renglón del motor la lee ya**: sus ocho apariciones de la palabra
+  en `audit-engine.js` son prosa, no acceso a datos. Sigue viajando en la base
+  con cifras anteriores a la Ley de Ingresos 2026: ISR $2,684,495 mdp contra
+  $3,070,149.1 (−12.6 %), IVA $1,407,983 contra $1,589,069.0 (−11.4 %) e IEPS
+  $508,000 contra $761,501.9 (−33.3 %). Son 56 renglones que nadie pinta pero
+  que cualquiera que lea la base tomaría por buenos. Dos salidas: retirarla, o
+  actualizarla contra la Ley de Ingresos y darle uso. Retirarla es lo barato y
+  lo honesto mientras no tenga destino.
+- **Los 83 montos observados por la ASF en municipios no llevan referencia.**
+  El campo `observacionesASF` de `estados[].municipios[]` guarda un número
+  —42, 15, 8…— y **ni un solo campo de fuente o de informe que lo sustente**:
+  la búsqueda de `fuenteObservaciones` o `refObservaciones` en la base da cero.
+  Alimentan el eje «limpieza en la cuenta» del círculo de salud financiera de
+  la pestaña 6, así que un número sin respaldo se convierte en calificación.
+  Hay que anclarlos al informe individual de la ASF que los reporta o marcarlos
+  como pendientes en la ficha.
+- **El nombre de la ley de deuda no es consistente.** La base dice «Ley General
+  de Deuda Pública» ocho veces y el HTML dos; «Ley Federal de Deuda Pública»
+  aparece una sola vez. Uno de los dos nombres está mal y no se ha podido
+  resolver por falta de acceso al Diario Oficial desde este entorno. Es una
+  cita legal: o se unifica con el nombre vigente y su fecha de publicación, o
+  no debería citarse.
+
 - **El poblacional de la 2.4 no lleva referencia puntual.** Los relojes dividen
   entre **134.4 millones de habitantes**, la proyección de CONAPO a mitad de
   2026. La base de datos abierta del Consejo no resultó accesible desde este
