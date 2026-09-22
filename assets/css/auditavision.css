@@ -1118,7 +1118,116 @@ nav.tabbar button.active .num {
   font-size: 9px;
   font-weight: 700;
   color: #000;
-  transition: width 0.6s ease;
+  transition: width 0.35s ease;
+}
+/* Quien pide menos movimiento recibe el dato, no la animacion: el motor de
+   conteo ya lo respeta, y la transicion de CSS lo desmentiria. */
+@media (prefers-reduced-motion: reduce) { .rank-bar-fill { transition: none; } }
+
+/* --- Las 32 entidades, bajo el mapa de la 1.1 -----------------------------
+
+   El mapa colorea y la columna lateral resume los cinco extremos de cada
+   lado; entre el quinto y el vigesimoctavo quedaban veintidos entidades que
+   nadie podia leer. Este cuadro las pone las treinta y dos, de mayor a menor
+   por la lente vigente. En pantalla ancha van en dos columnas: treinta y dos
+   renglones en fila unica obligarian a rodar media pantalla para llegar al
+   ultimo. */
+.entidades-panel { margin-top: 28px; }
+
+.ent-cab { margin-bottom: 14px; }
+.ent-tit {
+  margin: 0 0 5px; font-family: var(--font-serif); font-size: 19px;
+  font-weight: 700; color: var(--gold-bright);
+}
+.ent-sub { margin: 0; font-size: 13px; line-height: 1.6; color: var(--text-secondary); max-width: 82ch; }
+
+.ent-resumen {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 10px; margin: 14px 0;
+}
+.ent-res-caja {
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 10px; padding: 12px 14px;
+}
+.ent-res-rot {
+  display: block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-secondary);
+}
+.ent-res-cif {
+  display: block; margin-top: 6px; font-family: var(--font-mono);
+  font-size: 16px; font-weight: 700; color: var(--gold-bright);
+}
+.ent-res-pie { display: block; margin-top: 7px; }
+
+.ent-cuadre {
+  margin: 0 0 16px; padding: 11px 15px;
+  border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+  background: var(--bg-card-alt);
+  font-size: 12.8px; line-height: 1.7; color: var(--text-secondary); max-width: 92ch;
+}
+.ent-cuadre[hidden] { display: none; }
+.ent-cuadre b { color: var(--text-main); }
+
+.ent-lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  gap: 1px 26px;
+}
+.ent-lista.con-sem { grid-template-columns: repeat(auto-fit, minmax(475px, 1fr)); }
+.ent-lista.con-sem .ent-btn { grid-template-columns: 1.9rem 12.6rem 1fr 7.4rem; }
+.ent-fila { margin: 0; }
+.ent-btn {
+  display: grid; grid-template-columns: 1.9rem 9.2rem 1fr 7.4rem;
+  align-items: center; gap: 10px; width: 100%;
+  padding: 5px 8px; border: 0; border-radius: 6px;
+  background: none; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.ent-btn:hover { background: var(--bg-card-hover); }
+.ent-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+.ent-pos {
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--text-dim); text-align: right;
+}
+.ent-ident { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+.ent-abbr { flex: none; font-family: var(--font-mono); font-size: 11px; color: var(--gold); }
+.ent-nom {
+  font-size: 12.5px; color: var(--text-secondary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ent-sem {
+  flex: none; font-family: var(--font-mono); font-size: 8.5px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 1px 5px; border-radius: 4px; border: 1px solid;
+}
+.ent-sem.sem-verde { color: #4ec07a; border-color: rgba(78,192,122,0.45); }
+.ent-sem.sem-amarillo { color: #e2a53c; border-color: rgba(226,165,60,0.45); }
+.ent-sem.sem-rojo { color: var(--crimson-bright); border-color: rgba(212,56,44,0.5); }
+
+.ent-barra-bg {
+  height: 13px; border-radius: 3px; overflow: hidden;
+  background: rgba(255,255,255,0.05);
+}
+.ent-barra { display: block; height: 100%; border-radius: 3px; }
+.ent-val {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  color: var(--text-main); text-align: right;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+@media (max-width: 980px) {
+  .ent-lista { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  /* En telefono la barra baja a su propio renglon: con el nombre, la cifra y
+     la barra en la misma linea no queda ancho para ninguno de los tres. */
+  .ent-btn { grid-template-columns: 1.7rem 1fr auto; row-gap: 5px; padding: 8px; }
+  .ent-pos { grid-column: 1; grid-row: 1; }
+  .ent-ident { grid-column: 2; grid-row: 1; }
+  .ent-val { grid-column: 3; grid-row: 1; }
+  .ent-barra-bg { grid-column: 1 / -1; grid-row: 2; height: 10px; }
+  .ent-res-cif { font-size: 15px; }
+  .ent-tit { font-size: 17px; }
 }
 
 /* ==========================================================================

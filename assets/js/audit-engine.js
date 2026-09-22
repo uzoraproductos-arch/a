@@ -63,6 +63,9 @@
        que se va, lo que baja al territorio y lo que llega al municipio.
        Cada una nace en ceros y sube cuando alguien lo pide. */
     barrasContado: { ingresos: false, egresos: false, federalizado: false, municipal: false },
+    /* El bloque del mapa cuenta como una sola zona: la columna de
+       extremos y el cuadro de las 32 suben juntos. */
+    mapaContado: false,
     /* Las dos zonas que dependen de la entidad elegida y no de un
        catalogo fijo: el circuito del estado y la reja de sus municipios. */
     zonaContado: { entidad: false, munent: false, pefin: false, pegasto: false, pecolchon: false },
@@ -412,8 +415,8 @@
     // Actualizar cartograma
     renderCartogram();
 
-    // Actualizar rankings del panel lateral
-    updateRankingsList();
+    // Actualizar la columna de extremos y el cuadro de las 32
+    renderBloqueMapa();
   }
 
   function setMapView(viewType) {
@@ -442,51 +445,261 @@
   // ==========================================================================
   // PANEL LATERAL: RANKINGS
   // ==========================================================================
+  /* ====================================================================
+     LAS 32 ENTIDADES DEL BLOQUE 3 DE LA 1.1
+
+     El mapa colorea y la columna lateral resume los cinco extremos de
+     cada lado, pero entre el quinto y el vigesimoctavo quedaban veintidos
+     entidades que nadie podia leer. Ahora estan las treinta y dos,
+     ordenadas de mayor a menor por la misma lente que colorea el mapa.
+
+     Antes cada renglon repetia una cadena de siete ternarios para saber
+     que campo mirar, y la lente de deuda no figuraba en ninguna: elegirla
+     ensenaba, en silencio, el ranking de gasto federalizado. El registro
+     de lentes pone cada cosa en su sitio y hace que anadir una lente no
+     exija tocar el codigo que la pinta.
+     ==================================================================== */
+
+  const LENTES = {
+    gasto: {
+      rotulo: 'Gasto Federalizado Total', corto: 'el gasto federalizado que reciben',
+      campo: st => st.gasto, fmt: 'mdpfijo', aditiva: true,
+      oficial: 'total', cuadre: 'el gasto federalizado total'
+    },
+    ramo28: {
+      rotulo: 'Ramo 28 \u00b7 Participaciones de libre disposici\u00f3n',
+      corto: 'las participaciones del Ramo 28',
+      campo: st => st.ramo28, fmt: 'mdpfijo', aditiva: true,
+      oficial: 'fed-r28', cuadre: 'el Ramo 28'
+    },
+    ramo33: {
+      rotulo: 'Ramo 33 \u00b7 Aportaciones etiquetadas',
+      corto: 'las aportaciones del Ramo 33',
+      campo: st => st.ramo33, fmt: 'mdpfijo', aditiva: true
+    },
+    pc: {
+      rotulo: 'Gasto federalizado por habitante', corto: 'el gasto por habitante',
+      campo: st => st.pc, fmt: 'pesos', aditiva: false
+    },
+    asf: {
+      rotulo: 'Monto observado por la Auditor\u00eda Superior de la Federaci\u00f3n',
+      corto: 'el monto que la ASF les observ\u00f3',
+      campo: st => st.asfMontoObservado, fmt: 'mdpfijo', aditiva: true
+    },
+    deuda: {
+      rotulo: 'Deuda p\u00fablica registrada ante Hacienda', corto: 'la deuda registrada',
+      campo: st => st.deuda, fmt: 'mdpfijo', aditiva: true, semaforo: true
+    },
+    dep: {
+      rotulo: 'Dependencia de las transferencias federales', corto: 'su dependencia federal',
+      campo: st => st.dep, fmt: 'pct', aditiva: false
+    }
+  };
+
+  function lenteActual() {
+    return LENTES[state.currentMetric] || LENTES.gasto;
+  }
+
+  function entidadesOrdenadas(L) {
+    return [].slice.call(DB.estados).sort((a, b) => L.campo(b) - L.campo(a));
+  }
+
+  /* --- La columna lateral: los cinco de arriba y los cinco de abajo --- */
   function updateRankingsList() {
-    const topContainer = document.getElementById('topRankingsContainer');
-    const botContainer = document.getElementById('bottomRankingsContainer');
-    if (!topContainer || !botContainer) return;
+    const arriba = document.getElementById('topRankingsContainer');
+    const abajo = document.getElementById('bottomRankingsContainer');
+    if (!arriba || !abajo || !DB.estados) return;
 
-    const metric = state.currentMetric;
-    const sorted = [...DB.estados].sort((a, b) => {
-      const valA = (metric === 'asf') ? a.asfMontoObservado : (metric === 'pc') ? a.pc : (metric === 'dep') ? a.dep : (metric === 'ramo28') ? a.ramo28 : (metric === 'ramo33') ? a.ramo33 : a.gasto;
-      const valB = (metric === 'asf') ? b.asfMontoObservado : (metric === 'pc') ? b.pc : (metric === 'dep') ? b.dep : (metric === 'ramo28') ? b.ramo28 : (metric === 'ramo33') ? b.ramo33 : b.gasto;
-      return valB - valA;
+    const L = lenteActual();
+    const orden = entidadesOrdenadas(L);
+    const mayor = L.campo(orden[0]) || 1;
+
+    /* El suelo del 15 % viene de esta columna desde el principio: con
+       cinco renglones y un solo extremo a la vista, una barra fiel de
+       dos pixeles no se veria. El cuadro de las 32, que si permite
+       comparar, usa la proporcion real. */
+    const fila = st => {
+      const v = L.campo(st);
+      return '<div class="rank-item" role="button" tabindex="0" title="' + st.name + '" ' +
+        'onclick="window.AuditEngine.openDrawer(\'' + st.abbr + '\')" ' +
+        'onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.AuditEngine.openDrawer(\'' + st.abbr + '\');}">' +
+        '<span class="rank-name">' + st.abbr + '</span>' +
+        '<div class="rank-bar-bg">' +
+          '<div class="rank-bar-fill" data-anim-w="' + Math.max(15, v / mayor * 100).toFixed(2) + '" ' +
+            'style="width:0%;background:' + getMetricColor(st, state.currentMetric) + ';">' +
+            '<span data-anim-v="' + v + '" data-anim-f="' + L.fmt + '">' + simFmt(0, L.fmt) + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    };
+
+    arriba.innerHTML = orden.slice(0, 5).map(fila).join('');
+    abajo.innerHTML = orden.slice(-5).reverse().map(fila).join('');
+  }
+
+  /* --- El cuadro de las 32, de mayor a menor --- */
+  function renderEntidades() {
+    const lista = document.getElementById('entidadesLista');
+    if (!lista || !DB.estados) return;
+
+    const L = lenteActual();
+    const orden = entidadesOrdenadas(L);
+    const mayor = L.campo(orden[0]) || 1;
+
+    /* Con semaforo el renglon lleva un rotulo mas, y sin ensanchar la
+       columna del nombre «Ciudad de Mexico» se cortaria en «Ciudad de...». */
+    lista.className = 'ent-lista' + (L.semaforo ? ' con-sem' : '');
+
+    const lente = document.getElementById('entidadesLente');
+    if (lente) {
+      lente.innerHTML = 'Lente vigente: <b>' + L.rotulo + '</b>. Es la misma que colorea el mapa ' +
+        'y el cartograma; al cambiarla cambia tambi\u00e9n este cuadro. Pulse cualquier entidad ' +
+        'para abrir su expediente.';
+    }
+
+    lista.innerHTML = orden.map((st, i) => {
+      const v = L.campo(st);
+      /* Proporcion real, con un suelo minimo para que la barra mas corta
+         siga siendo visible: aqui el lector compara treinta y dos
+         renglones entre si y un suelo generoso mentiria. */
+      const ancho = v > 0 ? Math.max(0.8, v / mayor * 100) : 0;
+      return '<li class="ent-fila">' +
+        '<button type="button" class="ent-btn" title="Abrir el expediente de ' + st.name + '" ' +
+          'onclick="window.AuditEngine.openDrawer(\'' + st.abbr + '\')">' +
+          '<span class="ent-pos">' + (i + 1) + '</span>' +
+          '<span class="ent-ident">' +
+            '<b class="ent-abbr">' + st.abbr + '</b>' +
+            '<span class="ent-nom">' + st.name + '</span>' +
+            (L.semaforo ? '<span class="ent-sem sem-' + st.semaforoDeuda.toLowerCase() + '">' + st.semaforoDeuda + '</span>' : '') +
+          '</span>' +
+          '<span class="ent-barra-bg">' +
+            '<span class="ent-barra" data-anim-w="' + ancho.toFixed(2) + '" ' +
+              'style="width:0%;background:' + getMetricColor(st, state.currentMetric) + '"></span>' +
+          '</span>' +
+          '<span class="ent-val" data-anim-v="' + v + '" data-anim-f="' + L.fmt + '">' + simFmt(0, L.fmt) + '</span>' +
+        '</button>' +
+      '</li>';
+    }).join('');
+
+    renderEntidadesResumen(L, orden);
+  }
+
+  /* --- Suma, promedio, mediana y los dos extremos --- */
+  function renderEntidadesResumen(L, orden) {
+    const cont = document.getElementById('entidadesResumen');
+    if (!cont) return;
+
+    const vals = orden.map(L.campo);
+    const suma = vals.reduce((a, b) => a + b, 0);
+    const creciente = [].slice.call(vals).sort((a, b) => a - b);
+    /* Los pesos por habitante se publican al peso: un promedio con
+       centavos fingiria una precision que la fuente no tiene. */
+    const redondear = v => (L.fmt === 'pesos' ? Math.round(v) : v);
+    const prom = redondear(suma / vals.length);
+    const mediana = redondear((creciente[15] + creciente[16]) / 2);
+    const may = orden[0], men = orden[orden.length - 1];
+
+    const caja = (rot, v, pie) =>
+      '<div class="ent-res-caja">' +
+        '<span class="ent-res-rot">' + rot + '</span>' +
+        '<span class="ent-res-cif" data-anim-v="' + v + '" data-anim-f="' + L.fmt + '">' + simFmt(0, L.fmt) + '</span>' +
+        (pie ? '<span class="ent-res-pie">' + pie + '</span>' : '') +
+      '</div>';
+
+    /* Sumar pesos por habitante o porcentajes de dependencia daria una
+       cifra sin significado: en esas dos lentes el primer recuadro es el
+       promedio y el segundo la mediana. */
+    cont.innerHTML =
+      (L.aditiva
+        ? caja('Suma de los 32 renglones', suma, chipEstado('derivado'))
+        : caja('Promedio de las 32', prom, chipEstado('derivado'))) +
+      (L.aditiva
+        ? caja('Promedio por entidad', prom, chipEstado('derivado'))
+        : caja('Mediana', mediana, chipEstado('derivado'))) +
+      caja('La mayor \u00b7 ' + may.name, L.campo(may)) +
+      caja('La menor \u00b7 ' + men.name, L.campo(men));
+
+    const cuadre = document.getElementById('entidadesCuadre');
+    if (cuadre) {
+      const texto = entidadesCuadre(L, suma);
+      cuadre.innerHTML = texto;
+      cuadre.hidden = !texto;
+    }
+  }
+
+  /* Donde el Presupuesto publica un total nacional, va junto a la suma de
+     los renglones. Que no coincidan no es un descuido de captura: el
+     decreto cifra cada ramo, no su reparto entidad por entidad, y ese
+     reparto lo da a conocer Hacienda en acuerdos posteriores. Ensenar la
+     suma y callar la diferencia seria peor que no ensenar la suma. */
+  function entidadesCuadre(L, suma) {
+    const F = PANORAMA && PANORAMA.federalizado;
+    if (!F || !L.oficial) return '';
+    const oficial = (L.oficial === 'total')
+      ? F.totalMdp
+      : (F.componentes.filter(c => c.id === L.oficial)[0] || {}).montoMdp;
+    if (!oficial) return '';
+    const dif = oficial - suma;
+    const pct = Math.abs(dif / oficial * 100);
+    return 'El Presupuesto de Egresos cifra ' + L.cuadre + ' en <b>' + formatMdpFijo(oficial) +
+      '</b>. Los 32 renglones de este cuadro suman <b>' + formatMdpFijo(suma) + '</b>: ' +
+      (dif >= 0 ? 'quedan ' : 'sobran ') + '<b>' + formatMdpFijo(Math.abs(dif)) + '</b> \u2014el ' +
+      pct.toFixed(1) + '%\u2014 que el reparto entidad por entidad no explica. El decreto publica ' +
+      'el total de cada ramo, no su distribuci\u00f3n estatal: \u00e9sa la da a conocer la Secretar\u00eda ' +
+      'de Hacienda en acuerdos posteriores, y se incorporar\u00e1 aqu\u00ed cuando pueda cotejarse contra ' +
+      'esa fuente.';
+  }
+
+  /* --- Los mandos de conteo del bloque --- */
+  function renderMapaMandos() {
+    const cont = document.getElementById('mapaMandos');
+    if (!cont) return;
+    const L = lenteActual();
+    cont.innerHTML = erarioBarraMandos({
+      sello: 'LAS 32 ENTIDADES',
+      contado: state.mapaContado,
+      contar: 'mapaContar()',
+      reiniciar: 'mapaReiniciar()',
+      estado: state.mapaContado
+        ? '\u2705 Contabilizado. Las 32 entidades, de mayor a menor por ' + L.corto + '.'
+        : '\u26AA Las 32 entidades est\u00e1n en ceros ($0). Pulse \u00abContabilizar\u00bb para verlas subir y ordenarse por ' + L.corto + '.'
     });
+  }
 
-    const maxVal = (metric === 'asf') ? sorted[0].asfMontoObservado : (metric === 'pc') ? sorted[0].pc : (metric === 'dep') ? sorted[0].dep : (metric === 'ramo28') ? sorted[0].ramo28 : (metric === 'ramo33') ? sorted[0].ramo33 : sorted[0].gasto;
+  /* La zona de conteo es el cuerpo entero del bloque: la columna de
+     extremos y el cuadro de las 32 suben a la vez. El mapa no lleva
+     ninguna cifra animable, de modo que el barrido no lo toca. */
+  function mapaZona() {
+    return document.getElementById('eb-cuerpo-mapa');
+  }
 
-    // Render Top 5
-    topContainer.innerHTML = sorted.slice(0, 5).map(st => {
-      const val = (metric === 'asf') ? st.asfMontoObservado : (metric === 'pc') ? st.pc : (metric === 'dep') ? st.dep : (metric === 'ramo28') ? st.ramo28 : (metric === 'ramo33') ? st.ramo33 : st.gasto;
-      const pct = Math.max(15, (val / maxVal) * 100);
-      const display = (metric === 'dep') ? val + '%' : (metric === 'pc') ? '$' + formatNumber(val) : '$' + Math.round(val).toLocaleString('es-MX');
+  function mapaSincronizar() {
+    erarioSincronizarZona(mapaZona(), 'mapa32', state.mapaContado);
+  }
 
-      return `
-        <div class="rank-item" onclick="window.AuditEngine.openDrawer('${st.abbr}')" style="cursor:pointer;">
-          <span class="rank-name">${st.abbr}</span>
-          <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: ${pct}%; background: ${getMetricColor(st, metric)};">${display}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
+  function mapaContar(duracionMs) {
+    const cont = mapaZona();
+    if (!cont) return;
+    state.mapaContado = true;
+    renderMapaMandos();
+    simAnimarZona(cont, 'mapa32', duracionMs === undefined ? 1400 : duracionMs);
+  }
 
-    // Render Bottom 5
-    botContainer.innerHTML = sorted.slice(-5).reverse().map(st => {
-      const val = (metric === 'asf') ? st.asfMontoObservado : (metric === 'pc') ? st.pc : (metric === 'dep') ? st.dep : (metric === 'ramo28') ? st.ramo28 : (metric === 'ramo33') ? st.ramo33 : st.gasto;
-      const pct = Math.max(15, (val / maxVal) * 100);
-      const display = (metric === 'dep') ? val + '%' : (metric === 'pc') ? '$' + formatNumber(val) : '$' + Math.round(val).toLocaleString('es-MX');
+  function mapaReiniciar() {
+    const cont = mapaZona();
+    if (!cont) return;
+    state.mapaContado = false;
+    renderMapaMandos();
+    simPonerEnCeros(cont, 'mapa32');
+  }
 
-      return `
-        <div class="rank-item" onclick="window.AuditEngine.openDrawer('${st.abbr}')" style="cursor:pointer;">
-          <span class="rank-name">${st.abbr}</span>
-          <div class="rank-bar-bg">
-            <div class="rank-bar-fill" style="width: ${pct}%; background: ${getMetricColor(st, metric)};">${display}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
+  /* Un solo punto de entrada: quien cambie de lente, abra la subpestana o
+     arranque la plataforma repinta los tres y deja la zona como estaba. */
+  function renderBloqueMapa() {
+    renderEntidades();
+    updateRankingsList();
+    renderMapaMandos();
+    mapaSincronizar();
   }
 
   // ==========================================================================
@@ -3753,6 +3966,7 @@
     renderFlujoCeros();
     renderFlujoConteo();
     renderCiegos();
+    renderBloqueMapa();
   }
 
   /* ====================================================================
@@ -19861,7 +20075,7 @@
     safeRun(initTheme, 'initTheme');
     safeRun(initLeafletMap, 'initLeafletMap');
     safeRun(renderCartogram, 'renderCartogram');
-    safeRun(updateRankingsList, 'updateRankingsList');
+    safeRun(renderBloqueMapa, 'renderBloqueMapa');
     safeRun(renderNews, 'renderNews');
     safeRun(renderFaqs, 'renderFaqs');
     safeRun(renderGlossary, 'renderGlossary');
@@ -22181,6 +22395,8 @@
     zonaReiniciar: zonaReiniciar,
     erarioContar: erarioContar,
     erarioReiniciar: erarioReiniciar,
+    mapaContar: mapaContar,
+    mapaReiniciar: mapaReiniciar,
     renderPanoramaErario: renderPanoramaErario,
     renderTerritorioErario: renderTerritorioErario,
     renderMunicipioErario: renderMunicipioErario,

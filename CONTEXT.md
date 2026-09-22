@@ -1409,7 +1409,63 @@ publicar o una copia guardada por su navegador: la respuesta deja de ser una
 conjetura y pasa a ser un dato que el lector puede leer en voz alta.
 
 
+### Hecho (1.1: las 32 entidades, una por una, bajo el mapa)
+
+El mapa coloreaba y la columna lateral resumía los cinco extremos de cada
+lado. Entre el quinto y el vigesimoctavo quedaban veintidós entidades que
+nadie podía leer: se veían en el mapa como un tono, pero su cifra no aparecía
+en ninguna parte. Ahora están las treinta y dos, ordenadas de mayor a menor
+por la lente vigente, con su barra en proporción real y su cifra al canto.
+Pulsar cualquiera abre su expediente, igual que en el mapa.
+
+**Con los mandos de la casa.** Nacen en ceros y suben cuando alguien pulsa
+«Contabilizar», como las gráficas de los bloques 1 y 2. La zona de conteo es
+el cuerpo entero del bloque, de modo que la columna de extremos y el cuadro de
+las 32 suben a la vez: es un solo bloque y se comporta como uno. Los dos mapas
+—geográfico y cartograma— quedan intactos; no llevan cifra animable y el
+barrido no los toca.
+
+**Un registro de lentes en lugar de siete ternarios.** Cada renglón repetía
+una cadena de condicionales para saber qué campo mirar, y **la lente de deuda
+no figuraba en ninguna**: elegirla enseñaba, en silencio, el ranking de gasto
+federalizado. Ahora hay una tabla —rótulo, campo, formato, si la métrica se
+puede sumar— y añadir una lente no obliga a tocar el código que la pinta. La
+deuda, además, trae su semáforo en cada renglón.
+
+**Sumar sólo lo que se puede sumar.** En gasto, Ramo 28, Ramo 33, ASF y deuda
+el primer recuadro es la suma de los 32 renglones; en gasto por habitante y en
+dependencia federal sumar daría una cifra sin significado, así que el recuadro
+es el promedio y el segundo la mediana. Las cuatro cifras del resumen van
+marcadas como **derivadas**: se calculan aquí, no se leen de la fuente.
+
+**El suelo de la barra, distinto en cada sitio.** La columna lateral conserva
+su mínimo del 15 %: con cinco renglones y un solo extremo a la vista, una
+barra fiel de dos píxeles no se vería. El cuadro de las 32, donde el lector sí
+compara, usa la proporción real con un mínimo del 0.8 %, y un valor de cero
+—Tlaxcala, sin deuda registrada— se dibuja sin barra.
+
 ### Pendiente
+
+- **Los 32 renglones no cuadran con el total nacional, y ahora se ve.** Salió
+  al sumar el cuadro de entidades. El Presupuesto de Egresos cifra el gasto
+  federalizado en **$2,810,800 mdp**; los 32 renglones de la base suman
+  **$2,506,179 mdp**. Faltan **$304,621 mdp**, el 10.8 %. En el Ramo 28 la
+  distancia es mayor: **$1,456,046 mdp** oficiales contra **$1,187,900 mdp**
+  repartidos, un 18.4 %. La razón está en la propia base: el decreto publica el
+  total de cada ramo, no su distribución estatal, y ésa la da a conocer
+  Hacienda en acuerdos posteriores —la ficha del Ramo 28 ya lo advertía como
+  pendiente—. Mientras tanto, **las cifras por entidad no tienen fuente
+  citable**: no llevan chip de estado y no deberían llevar el de «oficial».
+  El cuadro publica la diferencia al pie del resumen en lugar de callarla.
+  Dos caminos: incorporar el acuerdo de distribución del Diario Oficial cuando
+  esté, o marcar las 32 cifras como estimación y decirlo en la ficha. Lo
+  primero es lo correcto; lo segundo es lo mínimo.
+
+- **El Ramo 33 por entidad no se coteja todavía.** Los 32 renglones suman
+  $1,114,100 mdp. El Presupuesto cifra el Ramo 33 en $1,041,892.9 mdp y el
+  Ramo 25 en $85,182.4 mdp: juntos, $1,127,075.3 mdp. No consta si la cifra
+  por entidad incluye el Ramo 25, así que esta lente no lleva la línea de
+  cuadre que sí llevan gasto y Ramo 28. Resolverlo exige la misma fuente.
 
 - **La leyenda del mapa de la 1.1 no dice la verdad.** Salió al probar los
   capítulos plegables, y es anterior a ellos: `legendCaption`, `legendMin`,
