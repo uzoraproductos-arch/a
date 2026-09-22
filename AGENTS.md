@@ -103,6 +103,8 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
   llena de ruido y se pierde la trazabilidad del cambio.
   Cuentas de CR sueltos que deben conservarse: `index.html` 56,
   `audit-engine.js` 2, `audit-database.js` 2, `auditavision.css` 1.
+  El `.gitattributes` fija `* -text` para que Git no los convierta al clonar
+  ni al commitear, en Windows tampoco. **No lo quites.**
 - **El texto va con acentos.** Es contenido de cara al público mexicano.
   Ojo: `audit-engine.js` mezcla acentos reales y secuencias `á`. Al
   anclar un reemplazo, usa fragmentos cortos y sin acentos.

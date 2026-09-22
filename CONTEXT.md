@@ -111,7 +111,10 @@ Dependencias externas por CDN: Leaflet 1.9.4 para mapas y Google Fonts
 - El archivo usa saltos de línea **CRLF**. Al editar con scripts, presérvalos o
   el diff se llena de ruido. Cuentas de CR sueltos que deben conservarse:
   `index.html` 56, `audit-engine.js` 2, `audit-database.js` 2,
-  `auditavision.css` 1.
+  `auditavision.css` 1. El `.gitattributes` fija `* -text` para que Git no los
+  convierta al clonar ni al commitear: sin esa línea, un clon en Windows con
+  `core.autocrlf=true` normalizaría las más de 48,000 líneas del proyecto al
+  primer commit y el diff dejaría de ser legible.
 - El texto va **con acentos**. Es contenido de cara al público. Ojo:
   `audit-engine.js` mezcla acentos reales y secuencias `\u00e1`; al anclar un
   reemplazo, usa fragmentos cortos y sin acentos.
@@ -1613,6 +1616,17 @@ herramienta que la sostuviera fuera de aquí. Ahora está versionado, encuentra
 la raíz por sí mismo, preserva los CRLF, verifica que sigan siendo cinco
 dependencias y un renglón al pie, y sin argumento dice cuál es el sello vigente
 y sugiere el siguiente.
+
+**`.gitattributes` con `* -text`.** Salió al revisar el traspaso y es el riesgo
+más silencioso de todos. Los CRLF no están sólo en el disco: están dentro de
+los objetos de Git. No había `.gitattributes`, y en Windows `core.autocrlf=true`
+viene activado por omisión: el primer commit hecho desde ahí habría normalizado
+las más de 48,000 líneas del proyecto. Donde debía verse un cambio de tres
+renglones se habría visto un diff del tamaño del repositorio entero, y con él
+se habría perdido la trazabilidad de qué se tocó y por qué —que en una
+plataforma de fiscalización es justamente lo que hay que poder demostrar—.
+`-text` apaga toda conversión y conserva los bytes tal cual, en cualquier
+sistema y con cualquier configuración local.
 
 Y una tabla de enlaces en la regla de oro: repositorio, rama, dirección
 publicada, revisión abierta y copia comprimida, con el sello vigente al lado,
