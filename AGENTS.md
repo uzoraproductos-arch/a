@@ -12,9 +12,10 @@ antes de tocar código.
 ## 1. La rama de trabajo no es `main`
 
 **Todo el proyecto vive en la rama `claude/funny-turing-imtm54`.**
-`main` se quedó 37 commits atrás: no tiene la calculadora cívica, ni el padrón
-municipal, ni las 32 entidades, ni el Paquete Económico. **No sirve como punto
-de partida y clonarla es perder el trabajo.**
+`main` se quedó decenas de commits atrás: no tiene la calculadora cívica, ni el
+padrón municipal, ni las 32 entidades, ni el Paquete Económico. **No sirve como
+punto de partida y clonarla es perder el trabajo.** Para ver cuánto le falta:
+`git rev-list --count origin/main..origin/claude/funny-turing-imtm54`.
 
 ```bash
 git clone --branch claude/funny-turing-imtm54 \
