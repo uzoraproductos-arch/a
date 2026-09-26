@@ -2101,6 +2101,24 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (Auditoría en imágenes: regreso desde el expediente)
+
+- Los botones internos de la ventana de cada obra (abrir el expediente,
+  el padrón municipal, la ficha de la deuda o del Ramo 33, la calculadora)
+  ahora encienden la barra de regreso: «Llegó aquí desde Auditoría en
+  imágenes · <obra>», con «↩︎ Volver a donde estaba», «⬆️ Inicio» y ✕ para
+  descartarla.
+- «Volver a donde estaba» cierra la ficha lateral que se hubiera abierto,
+  regresa a la altura de la página y reabre la ventana de la misma obra. Si
+  el lector ya había pulsado «Ver gasto», las cuentas aparecen hechas
+  (`scMostrarCuentas`); si no, en cero. `navOrigen` admite ahora una receta
+  `retorno` para orígenes que no son una pestaña.
+- La barra sube a `z-index: 99998`: antes la tapaban las fichas laterales
+  (99995). Con una ficha abierta en pantalla ancha se corre a la izquierda.
+- Las ligas «↗» a los informes de la ASF abren el PDF en otra pestaña; la
+  plataforma se queda donde estaba.
+- Probado: 11 botones de las 8 obras, ida y vuelta, sin errores.
+
 ### Hecho (glosario en ventana lateral, al estilo de USAspending)
 
 - **La palabra enlazada ya no lleva nota al pie en línea.** El enlazado

@@ -13676,13 +13676,20 @@ nav.tabbar button:focus-visible,
    ============================================================================ */
 
 body.con-regreso { padding-bottom: 96px; }
+/* Con una ficha lateral abierta en pantalla ancha, la barra se corre a la
+   izquierda para no tapar el pie de la ficha. */
+@media (min-width: 1100px) {
+  body:has(.audit-drawer.active) .nav-regreso { left: 20px; transform: none; animation: none; max-width: calc(100vw - 800px); }
+}
 
 .nav-regreso {
   position: fixed;
   left: 50%;
   bottom: 18px;
   transform: translateX(-50%);
-  z-index: 4000;
+  /* Por encima de las fichas laterales (99995): el regreso nunca queda
+     tapado por la ficha que abrio el salto. */
+  z-index: 99998;
   display: flex;
   align-items: center;
   gap: 10px;

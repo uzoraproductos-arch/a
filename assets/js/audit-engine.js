@@ -7473,6 +7473,14 @@
   function navVolverAlOrigen() {
     if (!navOrigen) return;
     const o = navOrigen;
+    /* Origen fuera de las pestañas (la ventana de una obra en Auditoria en
+       imagenes): se vuelve con su propia receta. */
+    if (o.retorno) {
+      navOrigen = null;
+      navPintarBarra();
+      o.retorno();
+      return;
+    }
     navSaltoEnCurso = true;
     switchTab(o.tab);
     if (o.sub) switchSubtab(o.tab, o.sub);
@@ -26796,8 +26804,26 @@
       elAcc.querySelectorAll('[data-sc-acc]').forEach(function (b) {
         b.addEventListener('click', function () {
           var a = p.acciones[+b.dataset.scAcc];
+          /* Se anota de donde sale el lector (esta obra, con sus cuentas
+             hechas o en cero) para que la barra de regreso lo devuelva
+             aqui mismo desde el expediente, el padron o la ficha. */
+          var previo = scEstado, y = window.scrollY || 0, sid = spec.id;
           cerrarDescubrimiento(true);
           a.fn();
+          navOrigen = {
+            etiqueta: 'Auditoría en imágenes · ' + spec.titulo,
+            y: y,
+            retorno: function () {
+              /* La ficha lateral que abrio el boton (deuda, Ramo 33,
+                 municipio) se cierra antes de volver a la obra. */
+              closeFlujoFicha(false);
+              closeMunFicha(false);
+              window.scrollTo({ top: y, behavior: 'instant' });
+              abrirDescubrimiento(sid);
+              if (previo === 'listo') scMostrarCuentas();
+            }
+          };
+          navPintarBarra();
         });
       });
     }
@@ -26837,6 +26863,21 @@
       btn.textContent = '↺ Reiniciar a ceros';
       if (est) est.textContent = 'Cuenta terminada: cada cifra lleva su fuente y su estado.';
     });
+  }
+
+  /* Pinta las cuentas ya terminadas, sin animacion: es el regreso de un
+     lector que ya las habia visto contar. */
+  function scMostrarCuentas() {
+    var raiz = document.querySelector('#descModalSim .sc-sim');
+    var btn = document.getElementById('scBtn');
+    var est = document.getElementById('scEstado');
+    if (!raiz) return;
+    raiz.querySelectorAll('[data-anim-v]').forEach(function (el) { el.textContent = simFmt(parseFloat(el.dataset.animV) || 0, el.dataset.animF); });
+    raiz.querySelectorAll('[data-anim-w]').forEach(function (el) { el.style.width = (parseFloat(el.dataset.animW) || 0).toFixed(2) + '%'; });
+    raiz.classList.add('sc-listo');
+    scEstado = 'listo';
+    if (btn) { btn.disabled = false; btn.textContent = '↺ Reiniciar a ceros'; }
+    if (est) est.textContent = 'Así lo dejó: cada cifra lleva su fuente y su estado.';
   }
 
   function cerrarDescubrimiento(sinReanudar) {
