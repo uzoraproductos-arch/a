@@ -2114,9 +2114,12 @@ vuelve a correrse si cambian los libros.
 - El párrafo largo bajo el título se redujo a una frase; su contenido vive en
   la nota.
 - Los tres botones que iban entre el título y los módulos (Enciclopedia,
-  Comienza a explorar y Pase Auditor Cívico) salieron del encabezado a una
-  franja propia, «Más formas de explorar» (`.explorer-extra`), debajo de las
-  cinco tarjetas. «Comienza a explorar» abre el Módulo 1 con su proemio.
+  Comienza a explorar y Pase Auditor Cívico) se retiraron de la portada, por
+  decisión del autor: la Enciclopedia sigue en «Consultar Recursos», el Pase
+  en su menú y las cinco tarjetas hacen de «comenzar».
+- El recuadro «Fiscalización ciudadana del gasto público» es translúcido y sin
+  desenfoque (deja ver la ciudad del fondo); título y frase llevan una sombra
+  suave para leerse. Las tarjetas de módulo conservan fondo sólido.
 
 ### Hecho (la ASF en cifras oficiales 2019-2024 y la cinta de datos verificada)
 
