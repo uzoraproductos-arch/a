@@ -399,7 +399,13 @@ def main():
     if cierre < 0 or b[cierre + 4:].strip():
         sys.exit('No encuentro el cierre de window.AUDIT_DB; no toco nada.')
     if marca in b:
-        b = b[:b.index(marca)] + '\r\n' + bloque + b[cierre:]
+        # la coleccion termina en la siguiente clave de primer nivel (otras
+        # colecciones, como «ambiente», pueden venir despues) o en el cierre
+        ini = b.index(marca)
+        sig = b.find('\r\n"', ini + len(marca))
+        fin = sig if 0 <= sig < cierre else cierre
+        coma = ',' if b[fin:].startswith('\r\n"') else ''
+        b = b[:ini] + '\r\n' + bloque + coma + b[fin:]
     else:
         # la ultima coleccion cierra con "}"; se le agrega la coma
         previo = b[:cierre].rstrip()

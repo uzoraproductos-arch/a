@@ -1892,8 +1892,43 @@ vuelve a correrse si cambian los libros.
 - Al abrir una sección larga desde el menú, el desplazamiento se corrige una
   vez a los 900 ms si la página siguió creciendo.
 
+### Hecho (El Costo Ambiental, en Acción Financiera)
+
+- **Sección nueva `costo-ambiental`** (quinto renglón de «Presupuesto
+  Federal» en el menú de Acción Financiera), en siete capítulos con índice
+  de tarjetas: reloj en vivo del daño ambiental y de la basura; estado de
+  cuenta ecológico (basura por persona, parte del daño y su peso contra el
+  ISR de la calculadora); la basura como servicio municipal; protección
+  contra daño y presupuesto del Ramo 16 (aprobado 2026, pagado al 30 de
+  junio y proyecto 2027 por órgano); huella de las megaobras (pendiente);
+  leyes aplicables; quién mide hoy cada dato.
+- **Colección `ambiente`** en la base, generada por
+  `herramientas/integrar_ambiente.py` a partir de
+  `investigaciones/presupuesto-ambiental.json`
+  (`herramientas/extraer_presupuesto_ambiental.py AVANCE.csv PPEF_2027.xlsx`).
+  El costo del daño no se duplica: se lee de `cuentas_ecologicas`.
+- **Fuentes nuevas:** Diagnóstico Básico para la Gestión Integral de los
+  Residuos (SEMARNAT-INECC, abril de 2026); Censo de Gobiernos Municipales
+  2023 (INEGI); proyecto de PEF 2027 en datos abiertos; Ley General de
+  Residuos (reforma DOF 19-01-2026) y Ley General de Cambio Climático.
+  Referencias 76 a 79.
+- **Controles:** el Ramo 16 aprobado de Hacienda coincide al peso con el
+  Anexo 1 del PEF 2026 ($45,564,073,902).
+- **Nota técnica:** el CSV del proyecto 2027 que publica Hacienda viene
+  cortado (1.1 MB, sólo los ramos 1 a 3); se usa el Excel.
+- `integrar_poderes.py` ya no borra colecciones que vengan después de
+  «poderes».
+
 ### Pendiente
 
+- **Megaobras y su huella ambiental:** falta el documento oficial de cada
+  Manifestación de Impacto Ambiental (portal dgiraDocs de la SEMARNAT, no
+  accesible desde el entorno de trabajo). No se muestran hectáreas de prensa
+  ni de organizaciones civiles.
+- **Concesión y costo del servicio de basura por municipio:** microdatos del
+  módulo de residuos del Censo de Gobiernos Municipales 2023 (INEGI).
+- **Cuentas Ecológicas 2025:** el INEGI las publica en diciembre de 2026;
+  actualizar `cuentas_ecologicas` y el reloj tomará el nuevo ritmo.
 - **El capítulo «Paquete Económico 2027 y Costo Ambiental» mide unos
   19,500 px:** es el mejor candidato para la lectura por capítulos (índice de
   tarjetas), en cuanto el autor apruebe extenderla.

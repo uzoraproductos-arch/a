@@ -7258,6 +7258,42 @@ window.AUDIT_DB = {
       "descripcion": "Presupuesto asignado y pagado del \u00d3rgano de Administraci\u00f3n Judicial entre el 1 de abril y el 30 de junio de 2026, por cap\u00edtulo, por unidad ejecutora y por partida."
     },
     {
+      "num": 76,
+      "id": "ref-lgpgir",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General para la Prevenci\u00f3n y Gesti\u00f3n Integral de los Residuos. Diario Oficial de la Federaci\u00f3n, 8 de octubre de 2003, \u00faltima reforma 19 de enero de 2026 (M\u00e9xico). C\u00e1mara de Diputados del H. Congreso de la Uni\u00f3n.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPGIR.pdf",
+      "descripcion": "Reparte la gesti\u00f3n de los residuos entre Federaci\u00f3n, estados y municipios. Su art\u00edculo 10 deja al municipio la recolecci\u00f3n, el traslado, el tratamiento y la disposici\u00f3n final de la basura, y le permite prestar el servicio por s\u00ed o por gestores y otorgar concesiones."
+    },
+    {
+      "num": 77,
+      "id": "ref-lgcc",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Cambio Clim\u00e1tico. Diario Oficial de la Federaci\u00f3n, 6 de junio de 2012, \u00faltima reforma 1 de abril de 2024 (M\u00e9xico). C\u00e1mara de Diputados del H. Congreso de la Uni\u00f3n.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCC.pdf",
+      "descripcion": "Establece las disposiciones para enfrentar los efectos adversos del cambio clim\u00e1tico y reglamenta la protecci\u00f3n al ambiente en esa materia."
+    },
+    {
+      "num": 78,
+      "id": "ref-dbgir2026",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estad\u00edstica Oficial del Estado Mexicano",
+      "cita_apa": "Secretar\u00eda de Medio Ambiente y Recursos Naturales e Instituto Nacional de Ecolog\u00eda y Cambio Clim\u00e1tico. (2026). Diagn\u00f3stico B\u00e1sico para la Gesti\u00f3n Integral de los Residuos. SEMARNAT.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf",
+      "descripcion": "Diagn\u00f3stico nacional de residuos publicado en abril de 2026: generaci\u00f3n de 139,902 toneladas diarias de residuos s\u00f3lidos urbanos (1.076 kg por habitante), recolecci\u00f3n, disposici\u00f3n final e infraestructura."
+    },
+    {
+      "num": 79,
+      "id": "ref-cngmd2023",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estad\u00edstica Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda. (2024). Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales de la Ciudad de M\u00e9xico 2023: presentaci\u00f3n de resultados generales. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/programas/cngmd/2023/doc/cngmd2023_resultados_geogr_amb.pdf",
+      "descripcion": "Censo de los gobiernos municipales. Su m\u00f3dulo de residuos s\u00f3lidos urbanos reporta la basura recolectada cada d\u00eda (108,146 toneladas en 2022), el sistema de recolecci\u00f3n y la disposici\u00f3n final."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -16449,6 +16485,306 @@ window.AUDIT_DB = {
         "N\u00famero de legisladores de cada congreso con su fuente, para el costo por legislador"
       ]
     }
+  },
+"ambiente": {
+    "consulta": "26 de septiembre de 2026",
+    "nota": "Pesos nominales. El costo del da\u00f1o ambiental es del INEGI (Cuentas Econ\u00f3micas y Ecol\u00f3gicas 2024); los relojes lo reparten por segundo y por persona, y esas cuentas son derivadas. Esta plataforma no estima ninguna cifra ambiental propia.",
+    "fuentes": {
+      "DBGIR": {
+        "corto": "SEMARNAT, Diagn\u00f3stico de residuos, abril 2026",
+        "doc": "SEMARNAT-INECC, Diagn\u00f3stico B\u00e1sico para la Gesti\u00f3n Integral de los Residuos, abril de 2026",
+        "url": "https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf",
+        "sha256": "af47fb7034805c1822832af441d9bc3ad672abcaa558c8089f3bfe2bd2a0bb5e"
+      },
+      "CNGMD": {
+        "corto": "INEGI, Censo de Gobiernos Municipales 2023",
+        "doc": "INEGI, Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales de la Ciudad de M\u00e9xico 2023, presentaci\u00f3n de resultados, 28 de febrero de 2024",
+        "url": "https://www.inegi.org.mx/contenidos/programas/cngmd/2023/doc/cngmd2023_resultados_geogr_amb.pdf",
+        "sha256": "37e26cff2604a710fe94c76ea4a4fcbc31f2cb119986edb7a843c6ced136424d"
+      },
+      "PEF": {
+        "corto": "PEF 2026, DOF 21-11-2025",
+        "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n 2026, DOF 21-11-2025 (edici\u00f3n vespertina)",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf",
+        "sha256": "6db4a86b588a0f76928e5d61298579c4aff2c29c3ace68fdedbfa5afceb8f2bc"
+      },
+      "AV2T2026": {
+        "corto": "SHCP, avance del gasto al 2.\u00ba trimestre 2026",
+        "doc": "SHCP, Presupuesto de Egresos 2026, avance del gasto (AC01) al segundo trimestre, base de datos abierta (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
+        "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511"
+      },
+      "PPEF2027": {
+        "corto": "SHCP, Proyecto de PEF 2027, datos abiertos",
+        "doc": "SHCP, Proyecto de Presupuesto de Egresos de la Federaci\u00f3n 2027, base de datos abierta (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/XLSX/PPEF_2027.xlsx",
+        "sha256": "8cb9cd83fc2e2b9f2ff0beb46fe33337ee266b02c813d0d6eeccad14842bc327"
+      },
+      "LGPGIR": {
+        "corto": "Ley General de Residuos, reforma DOF 19-01-2026",
+        "doc": "Ley General para la Prevenci\u00f3n y Gesti\u00f3n Integral de los Residuos, \u00faltima reforma DOF 19-01-2026",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPGIR.pdf",
+        "sha256": "b34326588bd6e7519e33411d3658239e3aefb56cef0fae5d775bc894af64a565"
+      }
+    },
+    "residuos": {
+      "generacionTdia": {
+        "valor": 139902,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31
+      },
+      "perCapitaKg": {
+        "valor": 1.076,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 34
+      },
+      "recolectadaTdia": {
+        "valor": 108146,
+        "pct": 77.3,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31,
+        "nota": "Dato del Censo de Gobiernos Municipales 2023 (recolecci\u00f3n promedio de 2022)."
+      },
+      "separadaTdia": {
+        "valor": 14679,
+        "pct": 10.4,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31
+      },
+      "sitiosDisposicion": {
+        "valor": 2250,
+        "tdia": 98047,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 32
+      },
+      "rellenosSanitarios": {
+        "valor": 52,
+        "tdia": 15254.605,
+        "pct": 15.6,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 32,
+        "nota": "El resto de los sitios de disposici\u00f3n final se clasifica como no controlado conforme a la NOM-083-SEMARNAT-2003."
+      },
+      "municipiosSinRecoleccion": {
+        "valor": 150,
+        "tdia": 528.3,
+        "oaxaca": 127,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 49
+      },
+      "vehiculos": {
+        "valor": 17593,
+        "pctAntes2002": 25.15,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31
+      },
+      "sinPartidaFederal": {
+        "texto": "Despu\u00e9s del periodo 2013\u20132018, no se cuenta con ninguna partida presupuestal federal para la gesti\u00f3n de residuos; Banobras es la \u00fanica fuente de recursos financieros disponible.",
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 32
+      },
+      "recolectadaSerie": {
+        "anios": [
+          2010,
+          2012,
+          2014,
+          2016,
+          2018,
+          2020,
+          2022
+        ],
+        "tdia": [
+          86342,
+          99770,
+          102887,
+          104734,
+          107055,
+          106523,
+          108146
+        ],
+        "estado": "oficial",
+        "fuente": "CNGMD",
+        "pagina": 31
+      }
+    },
+    "presupuesto": {
+      "ramo": "16",
+      "nombre": "Medio Ambiente y Recursos Naturales",
+      "aprobado2026": {
+        "valor": 45564073902.0,
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 1, DOF p. 32"
+      },
+      "modificado2026": {
+        "valor": 45622718863.4,
+        "estado": "oficial",
+        "fuente": "AV2T2026",
+        "pagina": "base de datos"
+      },
+      "pagado2026": {
+        "valor": 18854778532.41,
+        "corte": "30 de junio de 2026",
+        "estado": "oficial",
+        "fuente": "AV2T2026",
+        "pagina": "base de datos"
+      },
+      "proyecto2027": {
+        "valor": 49508305994.0,
+        "estado": "oficial",
+        "fuente": "PPEF2027",
+        "pagina": "base de datos",
+        "nota": "Proyecto enviado por el Ejecutivo el 8 de septiembre de 2026; la C\u00e1mara de Diputados puede modificarlo hasta el 15 de noviembre."
+      },
+      "unidades": [
+        {
+          "ur": "B00",
+          "nombre": "Comisi\u00f3n Nacional del Agua",
+          "aprobado": 37689110439.0,
+          "modificado": 37601659493.38,
+          "pagado": 14947644450.41,
+          "proyecto2027": 39797423959.0
+        },
+        {
+          "ur": "RHQ",
+          "nombre": "Comisi\u00f3n Nacional Forestal",
+          "aprobado": 2589652339.0,
+          "modificado": 2586715424.0,
+          "pagado": 1521949887.35,
+          "proyecto2027": 2781404837.0
+        },
+        {
+          "ur": "F00",
+          "nombre": "Comisi\u00f3n Nacional de \u00c1reas Naturales Protegidas",
+          "aprobado": 1502268352.0,
+          "modificado": 1555438166.43,
+          "pagado": 656664568.4,
+          "proyecto2027": 1590790225.0
+        },
+        {
+          "ur": "E00",
+          "nombre": "Procuradur\u00eda Federal de Protecci\u00f3n al Ambiente",
+          "aprobado": 827072298.0,
+          "modificado": 879335926.86,
+          "pagado": 409266860.43,
+          "proyecto2027": 981308335.0
+        },
+        {
+          "ur": "G00",
+          "nombre": "Agencia Nacional de Seguridad Industrial y de Protecci\u00f3n al Medio Ambiente del Sector Hidrocarburos",
+          "aprobado": 353465344.0,
+          "modificado": 353465344.0,
+          "pagado": 159904112.88,
+          "proyecto2027": 409917156.0
+        },
+        {
+          "ur": "RJJ",
+          "nombre": "Instituto Nacional de Ecolog\u00eda y Cambio Clim\u00e1tico",
+          "aprobado": 159259589.0,
+          "modificado": 159241506.0,
+          "pagado": 72535953.13,
+          "proyecto2027": 198188803.0
+        },
+        {
+          "ur": "RESTO",
+          "nombre": "Resto de la SEMARNAT (oficinas centrales y representaciones)",
+          "aprobado": 2443245541.0,
+          "modificado": 2486863002.73,
+          "pagado": 1086812699.81,
+          "proyecto2027": 3749272679.0
+        }
+      ]
+    },
+    "leyes": [
+      {
+        "norma": "Constituci\u00f3n, art\u00edculo 4\u00ba",
+        "dice": "Toda persona tiene derecho a un medio ambiente sano para su desarrollo y bienestar; el da\u00f1o y deterioro ambiental genera responsabilidad para quien lo provoque.",
+        "refKey": "ref-cpeum"
+      },
+      {
+        "norma": "Constituci\u00f3n, art\u00edculo 115, fracci\u00f3n III, inciso c)",
+        "dice": "Limpia, recolecci\u00f3n, traslado, tratamiento y disposici\u00f3n final de residuos: es un servicio p\u00fablico a cargo del municipio.",
+        "refKey": "ref-cpeum"
+      },
+      {
+        "norma": "Ley General de Residuos, art\u00edculo 10, fracciones IV y V",
+        "dice": "El municipio presta el servicio por s\u00ed o a trav\u00e9s de gestores, y otorga las autorizaciones y concesiones de una o m\u00e1s actividades del servicio. Por eso la concesi\u00f3n de la basura se decide en el cabildo.",
+        "refKey": "ref-lgpgir"
+      },
+      {
+        "norma": "Ley General del Equilibrio Ecol\u00f3gico, art\u00edculo 28",
+        "dice": "Las obras que puedan causar desequilibrio ecol\u00f3gico requieren evaluaci\u00f3n de impacto ambiental previa por la SEMARNAT: la Manifestaci\u00f3n de Impacto Ambiental.",
+        "refKey": "ref-lgeepa"
+      },
+      {
+        "norma": "Ley General de Cambio Clim\u00e1tico",
+        "dice": "Establece las obligaciones para enfrentar los efectos adversos del cambio clim\u00e1tico y reglamenta la protecci\u00f3n al ambiente en esa materia.",
+        "refKey": "ref-lgcc"
+      },
+      {
+        "norma": "Ley del IEPS, art\u00edculo 2\u00ba, fracci\u00f3n I, inciso H)",
+        "dice": "Grava los combustibles f\u00f3siles: es el llamado impuesto al carbono, un impuesto con justificaci\u00f3n ambiental que entra a la bolsa general.",
+        "refKey": "ref-lieps"
+      }
+    ],
+    "quienMide": [
+      {
+        "dato": "Costo del da\u00f1o ambiental (PIB ecol\u00f3gico)",
+        "mide": "INEGI",
+        "estado": "vigente",
+        "nota": "Organismo aut\u00f3nomo; desde 2025 tambi\u00e9n mide la pobreza que med\u00eda el CONEVAL."
+      },
+      {
+        "dato": "Generaci\u00f3n y manejo de residuos",
+        "mide": "SEMARNAT e INECC",
+        "estado": "vigente",
+        "nota": "Diagn\u00f3stico nacional, edici\u00f3n de abril de 2026."
+      },
+      {
+        "dato": "Servicio de basura por municipio",
+        "mide": "INEGI (Censo de Gobiernos Municipales)",
+        "estado": "vigente",
+        "nota": "Levantamiento cada dos a\u00f1os; el \u00faltimo publicado es el de 2023."
+      },
+      {
+        "dato": "Permisos ambientales de las obras (MIA)",
+        "mide": "SEMARNAT, Direcci\u00f3n General de Impacto y Riesgo Ambiental",
+        "estado": "vigente",
+        "nota": ""
+      },
+      {
+        "dato": "Presupuesto ambiental",
+        "mide": "SHCP y C\u00e1mara de Diputados",
+        "estado": "vigente",
+        "nota": "El proyecto 2027 se aprueba a m\u00e1s tardar el 15 de noviembre de 2026."
+      },
+      {
+        "dato": "Acceso a la informaci\u00f3n",
+        "mide": "Secretar\u00eda Anticorrupci\u00f3n y Buen Gobierno (\u00abTransparencia para el Pueblo\u00bb)",
+        "estado": "cambi\u00f3",
+        "nota": "Antes el INAI, extinto en marzo de 2025."
+      },
+      {
+        "dato": "Contrataciones p\u00fablicas",
+        "mide": "ComprasMX",
+        "estado": "cambi\u00f3",
+        "nota": "Antes CompraNet, sustituido en abril de 2025."
+      }
+    ],
+    "pendientes": [
+      "Huella ambiental de las megaobras: las Manifestaciones de Impacto Ambiental est\u00e1n en el portal de la SEMARNAT (dgiraDocs), que no fue accesible al integrar. Ninguna cifra de hect\u00e1reas se muestra hasta tener el documento oficial.",
+      "Concesi\u00f3n y costo del servicio de basura, municipio por municipio: vienen en los microdatos del m\u00f3dulo de residuos del Censo de Gobiernos Municipales 2023 del INEGI; falta descargarlos.",
+      "Costo del da\u00f1o ambiental 2025: el INEGI publica las Cuentas Econ\u00f3micas y Ecol\u00f3gicas cada diciembre; la de 2025 se espera en diciembre de 2026."
+    ]
   }
 };
 

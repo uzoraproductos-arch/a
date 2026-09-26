@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926f">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926g">
 </head>
 <body>
 
@@ -168,8 +168,12 @@
               <span class="mega-link-desc">Costos, sobrecostos y subsidios de Tren Maya, Dos Bocas y AIFA.</span>
             </a>
             <a href="#accion-financiera/proyeccion2027" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('proyeccion2027'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Paquete Económico 2027 y Costo Ambiental</span>
+              <span class="mega-link-name">Paquete Económico 2027 y Cuentas Ecológicas</span>
               <span class="mega-link-desc">La proyección de ingresos y gasto para 2027, la Constitución económica y lo que el PIB no descuenta: el agotamiento y la degradación ambiental.</span>
+            </a>
+            <a href="#accion-financiera/costo-ambiental" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('costo-ambiental'); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">🌎 El Costo Ambiental</span>
+              <span class="mega-link-desc">Reloj en vivo del daño ambiental, tu basura y tu parte del daño, el servicio municipal de basura y el presupuesto ambiental 2026-2027.</span>
             </a>
           </div>
           <div class="mega-menu-col">
@@ -1896,6 +1900,21 @@
         <div id="ceeProcedencia"></div>
       </div><!-- FIN SUBPANEL PROYECCION 2027 -->
 
+      <!-- ====================================================================
+           EL COSTO AMBIENTAL: reloj del dano, huella personal, basura
+           municipal, presupuesto ambiental 2026-2027 y leyes aplicables.
+           Lo pinta renderCostoAmbiental() desde DB.ambiente y
+           DB.cuentas_ecologicas.
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="costo-ambiental">
+        <div class="section-hero">
+          <span class="hero-tag">Medio ambiente &middot; INEGI, SEMARNAT y Hacienda &middot; 2024&ndash;2027</span>
+          <h2>El Costo Ambiental</h2>
+          <p>El deterioro del ambiente tambi&eacute;n es gasto: lo pagamos en agua, aire, suelo y basura, aunque no aparezca en el recibo. Aqu&iacute; se mide en pesos, con cifras oficiales, y se compara con lo que el Estado destina a protegerlo.</p>
+        </div>
+        <div id="ambienteRaiz" class="pd-raiz am-raiz"></div>
+      </div><!-- FIN SUBPANEL COSTO AMBIENTAL -->
+
     </div><!-- FIN PESTAÑA 2 -->
 
 
@@ -2424,7 +2443,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926f</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926g</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2568,16 +2587,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926f"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926g"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926f"></script>
+  <script src="assets/js/audit-database.js?v=20260926g"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926f"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926g"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926f"></script>
+  <script src="assets/js/audit-engine.js?v=20260926g"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

@@ -1746,6 +1746,226 @@
   }
 
   /* ====================================================================
+     EL COSTO AMBIENTAL (Accion Financiera)
+
+     Pone el deterioro ambiental en el mismo idioma que el gasto: pesos.
+     El costo del dano es del INEGI (Cuentas Economicas y Ecologicas 2024,
+     coleccion cuentas_ecologicas); la basura, la SEMARNAT (diagnostico de
+     abril de 2026) y el INEGI (censo municipal 2023); el presupuesto
+     ambiental, Hacienda (PEF 2026, avance al 30 de junio y proyecto 2027).
+     Los relojes y la huella personal son derivados: reparten una cifra
+     oficial por segundo o por persona, y lo dicen.
+     ==================================================================== */
+  const amb = { reloj: null, t0: 0 };
+
+  function amFuente(clave, pagina) {
+    const A = DB.ambiente;
+    const f = A && A.fuentes[clave];
+    if (!f) return '<span class="pd-fuente">' + chipEstado('pendiente') + ' fuente por documentar</span>';
+    const pag = (pagina === undefined || pagina === null || pagina === '') ? '' :
+      (/^\d+$/.test(String(pagina)) ? ', p. ' + pagina : ', ' + pagina);
+    return '<a class="pd-fuente no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer" title="' +
+      pdEsc(f.doc) + '">' + pdEsc(f.corto || f.doc) + pdEsc(pag) + ' ↗</a>';
+  }
+
+  /* Enlace a una ficha del catalogo de referencias, por su id. */
+  function amRef(id, texto) {
+    const r = (DB.referencias_legales || []).find(x => x.id === id);
+    if (!r) return '<span class="pd-fuente">' + chipEstado('pendiente') + ' ' + pdEsc(texto) + '</span>';
+    return '<a class="pd-fuente no-autolink" href="' + pdEsc(r.url) + '" target="_blank" rel="noopener noreferrer" title="' +
+      pdEsc(r.cita_apa) + '">' + pdEsc(texto) + ' ↗</a>';
+  }
+
+  function amNum(v, dec) {
+    return v.toLocaleString('es-MX', { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+  }
+
+  function amTarjeta(valor, rotulo, estado, pie) {
+    return '<div class="am-dato"><strong class="num-tabular">' + valor + '</strong><span>' + rotulo + ' ' + chipEstado(estado) + '</span>' +
+      (pie ? '<small>' + pie + '</small>' : '') + '</div>';
+  }
+
+  function renderCostoAmbiental() {
+    const raiz = document.getElementById('ambienteRaiz');
+    const A = DB.ambiente, C = DB.cuentas_ecologicas;
+    if (!raiz) return;
+    if (!A || !C) {
+      raiz.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base de datos no trae la colección ambiental.</p>';
+      return;
+    }
+    const R = A.residuos, P = A.presupuesto;
+    const danoAnual = C.ctada.total_mdp * 1e6;             // pesos, INEGI 2024
+    const porSeg = danoAnual / CC_SEG_ANO;                  // derivado
+    const basuraKgSeg = R.generacionTdia.valor * 1000 / 86400; // derivado
+    const pob = (DB.calculadora_civica && DB.calculadora_civica.parametros.poblacion) || null;
+    const porPersona = pob ? danoAnual / (pob.millones * 1e6) : 0;
+    const kgAnio = R.perCapitaKg.valor * 365;
+    const residuosCee = (C.degradacion.componentes || []).find(x => x.id === 'residuos');
+    const ceem = amRef('ref-ceem-2024', 'INEGI, Cuentas Económicas y Ecológicas 2024');
+
+    /* 1. El reloj */
+    const reloj =
+      '<section class="pd-bloque am-reloj-b">' +
+        '<h3 class="pd-tit">🌎 El reloj del daño ambiental</h3>' +
+        '<p class="pd-lead">El INEGI calcula cuánto le cuesta al país agotar sus recursos y dañar su ambiente: <b>' + pdMdp(danoAnual) + '</b> en 2024, el <b>' + amNum(C.ctada.pct_pib, 1) + ' % del PIB</b>. Repartido en el tiempo, se ve así:</p>' +
+        '<div class="am-reloj">' +
+          '<div class="am-reloj-c"><span class="am-reloj-t">Desde que abrió esta página, daño ambiental</span><strong class="num-tabular" id="amRelojDano">$0</strong></div>' +
+          '<div class="am-reloj-c"><span class="am-reloj-t">Basura generada en el país en ese mismo tiempo</span><strong class="num-tabular" id="amRelojBasura">0 kg</strong></div>' +
+          '<div class="am-reloj-c"><span class="am-reloj-t">En lo que va de 2026, al ritmo de 2024</span><strong class="num-tabular" id="amRelojAnio">$0</strong></div>' +
+        '</div>' +
+        '<p class="pd-nota">' + chipEstado('derivado') + ' ' + pdPesos(porSeg) + ' por segundo (costo anual ÷ segundos del año) y ' + amNum(basuraKgSeg, 0) +
+          ' kg de basura por segundo (' + amNum(R.generacionTdia.valor) + ' toneladas diarias ÷ 86,400 segundos). Fuentes: ' + ceem + ' y ' + amFuente('DBGIR', R.generacionTdia.pagina) +
+          '. El dato de 2025 lo publica el INEGI en diciembre de 2026; mientras, el reloj usa el ritmo de 2024.</p>' +
+      '</section>';
+
+    /* 2. Tu huella */
+    const res = state.cc && state.cc.calculado ? state.cc.resultado : null;
+    const isr = res ? res.ano.isr : 0;
+    const huella =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🧍 Su estado de cuenta ecológico</h3>' +
+        '<p class="pd-lead">Lo que a cada persona le toca, en promedio, de la basura y del daño ambiental del país.</p>' +
+        '<div class="am-datos">' +
+          amTarjeta(amNum(R.perCapitaKg.valor, 3) + ' kg', 'de basura al día por persona', 'oficial', amFuente('DBGIR', R.perCapitaKg.pagina)) +
+          amTarjeta(amNum(kgAnio, 0) + ' kg', 'al año: su basura', 'derivado', '1.076 kg × 365 días') +
+          (pob ? amTarjeta(pdPesos(porPersona), 'al año: su parte del daño ambiental', 'derivado', 'Costo 2024 del INEGI ÷ ' + amNum(pob.millones, 1) + ' millones de habitantes (CONAPO, 2026)') : '') +
+          (isr > 0 ? amTarjeta(pdPct(porPersona / isr * 100), 'de su ISR anual', 'derivado', 'Su parte del daño comparada con el ISR que calculó en la 2.4') : '') +
+        '</div>' +
+        (isr > 0 ? '' : '<p class="pd-nota">Saque la cuenta de su sueldo en la calculadora (2.4) y aquí verá su parte del daño ambiental contra el ISR que paga. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>') +
+        '<p class="pd-nota">Es un promedio nacional: reparte entre todos un costo que no generamos por igual. La población usada es la de 2026 y el costo el de 2024, el más reciente publicado.</p>' +
+      '</section>';
+
+    /* 3. La basura */
+    const serie = R.recolectadaSerie;
+    const maxS = Math.max.apply(null, serie.tdia);
+    const barras = serie.anios.map((a, i) =>
+      '<div class="am-serie-c"><span class="am-serie-b" style="height:' + (serie.tdia[i] / maxS * 100).toFixed(1) + '%"></span><small>' + a + '</small></div>').join('');
+    const basura =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🗑️ La basura: un servicio municipal sin dinero federal</h3>' +
+        '<p class="pd-lead">Recoger, trasladar, tratar y disponer la basura es obligación del municipio (artículo 115 constitucional). El diagnóstico nacional de la SEMARNAT, publicado en abril de 2026, retrata cómo se cumple:</p>' +
+        '<div class="am-datos">' +
+          amTarjeta(amNum(R.generacionTdia.valor) + ' t', 'de basura al día en el país', 'oficial', amFuente('DBGIR', R.generacionTdia.pagina)) +
+          amTarjeta(amNum(R.recolectadaTdia.pct, 1) + ' %', 'se recolecta (' + amNum(R.recolectadaTdia.valor) + ' t/día)', 'oficial', amFuente('DBGIR', R.recolectadaTdia.pagina)) +
+          amTarjeta(amNum(R.rellenosSanitarios.pct, 1) + ' %', 'llega a uno de los ' + R.rellenosSanitarios.valor + ' rellenos sanitarios', 'oficial', amFuente('DBGIR', R.rellenosSanitarios.pagina)) +
+          amTarjeta(amNum(R.separadaTdia.pct, 1) + ' %', 'se recolecta separada', 'oficial', amFuente('DBGIR', R.separadaTdia.pagina)) +
+          amTarjeta(String(R.municipiosSinRecoleccion.valor), 'municipios sin servicio de recolección', 'oficial', R.municipiosSinRecoleccion.oaxaca + ' de ellos en Oaxaca · ' + amFuente('DBGIR', R.municipiosSinRecoleccion.pagina)) +
+          (residuosCee ? amTarjeta(pdMdp(residuosCee.monto_mdp * 1e6), 'costo anual del daño por basura mal gestionada', residuosCee.estado, ceem) : '') +
+        '</div>' +
+        '<div class="am-alerta">' + chipEstado('oficial') + ' <b>Sin partida federal.</b> ' + pdEsc(R.sinPartidaFederal.texto) + ' ' + amFuente('DBGIR', R.sinPartidaFederal.pagina) + '</div>' +
+        '<p class="pd-nota">' + pdEsc(R.rellenosSanitarios.nota) + ' Hay ' + amNum(R.sitiosDisposicion.valor) + ' sitios de disposición final; ' + amNum(R.vehiculos.valor) + ' camiones recolectores, de los cuales el ' + amNum(R.vehiculos.pctAntes2002, 2) + ' % son anteriores a 2002.</p>' +
+        '<div class="am-serie" aria-label="Basura recolectada al día, 2010 a 2022"><div class="am-serie-cab">Basura recolectada al día, en toneladas: de ' + amNum(serie.tdia[0]) + ' en ' + serie.anios[0] + ' a ' + amNum(serie.tdia[serie.tdia.length - 1]) + ' en ' + serie.anios[serie.anios.length - 1] + ' ' + chipEstado('oficial') + '</div><div class="am-serie-g">' + barras + '</div><div class="pd-nota">' + amFuente('CNGMD', serie.pagina) + '</div></div>' +
+        '<details class="pd-sub pd-det"><summary class="pd-sub-t">¿Quién recoge la basura de su municipio? Las concesiones</summary>' +
+          '<p class="pd-nota">La Ley General de Residuos (artículo 10, fracciones IV y V) permite al municipio prestar el servicio por sí mismo o a través de gestores, y le da la facultad de otorgar concesiones. La decisión se toma en el cabildo y debe constar en sus actas. ' + amRef('ref-lgpgir', 'Ley General de Residuos, reforma DOF 19-01-2026') + '</p>' +
+          '<p class="pd-nota">' + chipEstado('pendiente') + ' Qué municipios tienen el servicio concesionado y cuánto cuesta vienen en los microdatos del censo municipal del INEGI; se integrarán municipio por municipio.</p>' +
+        '</details>' +
+      '</section>';
+
+    /* 4. Proteccion contra dano, y el presupuesto 2026-2027 */
+    const gpa = C.gasto_proteccion_ambiental;
+    const maxU = Math.max.apply(null, P.unidades.map(u => Math.max(u.aprobado, u.proyecto2027)));
+    const filasU = P.unidades.map(u => {
+      const av = u.modificado > 0 ? u.pagado / u.modificado * 100 : 0;
+      const varP = u.aprobado > 0 ? (u.proyecto2027 / u.aprobado - 1) * 100 : 0;
+      return '<tr><td>' + pdEsc(u.nombre) + '</td><td class="num-tabular">' + pdMdp(u.aprobado) + '</td><td class="num-tabular">' + pdMdp(u.pagado) +
+        ' <small>' + pdPct(av) + '</small></td><td class="num-tabular">' + pdMdp(u.proyecto2027) +
+        ' <small class="pd-var ' + (varP >= 0 ? 'pd-var-sube' : 'pd-var-baja') + '">' + (varP >= 0 ? '+' : '') + pdPct(varP) + '</small></td></tr>';
+    }).join('');
+    const var27 = (P.proyecto2027.valor / P.aprobado2026.valor - 1) * 100;
+    const proteccion =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">💸 Lo que se gasta en proteger, contra lo que cuesta el daño</h3>' +
+        '<div class="am-balanza">' +
+          '<div><span>Gasto en protección ambiental, 2024</span><strong class="num-tabular">' + pdMdp(gpa.monto_mdp * 1e6) + '</strong>' + chipEstado(gpa.estado || 'oficial') + '</div>' +
+          '<div class="am-balanza-x">× ' + amNum(gpa.ratio_dano_sobre_gasto, 2) + '</div>' +
+          '<div><span>Costo del daño ambiental, 2024</span><strong class="num-tabular">' + pdMdp(danoAnual) + '</strong>' + chipEstado('oficial') + '</div>' +
+        '</div>' +
+        '<p class="pd-nota">Por cada peso destinado a proteger el ambiente, se deterioraron ' + amNum(gpa.ratio_dano_sobre_gasto, 2) + ' ' + chipEstado('derivado') + '. ' + ceem + '</p>' +
+        '<h4 class="pd-sub-t">El presupuesto del sector ambiental: 2026 y el proyecto 2027</h4>' +
+        '<div class="am-datos">' +
+          amTarjeta(pdMdp(P.aprobado2026.valor), 'aprobado 2026 (Ramo ' + P.ramo + ')', 'oficial', amFuente('PEF', P.aprobado2026.pagina)) +
+          amTarjeta(pdMdp(P.pagado2026.valor), 'pagado al 30 de junio de 2026', 'oficial', pdPct(P.pagado2026.valor / P.modificado2026.valor * 100) + ' del modificado · ' + amFuente('AV2T2026', 'base de datos')) +
+          amTarjeta(pdMdp(P.proyecto2027.valor), 'proyecto 2027', 'oficial', (var27 >= 0 ? '+' : '') + pdPct(var27) + ' nominal contra 2026 ' + chipEstado('derivado') + ' · ' + amFuente('PPEF2027', 'base de datos')) +
+        '</div>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Órgano</th><th>Aprobado 2026</th><th>Pagado al 30-jun</th><th>Proyecto 2027</th></tr></thead><tbody>' + filasU + '</tbody></table></div>' +
+        '<p class="pd-nota">' + pdEsc(P.proyecto2027.nota) + ' La Comisión Nacional del Agua concentra la mayor parte del ramo. Comparar el presupuesto de 2026 con el daño de 2024 es ilustrativo: son años distintos.</p>' +
+      '</section>';
+
+    /* 5. Megaobras */
+    const megaobras =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🏗️ La huella de las megaobras</h3>' +
+        '<p class="pd-lead">Toda obra que pueda causar desequilibrio ecológico necesita, antes de empezar, una Manifestación de Impacto Ambiental aprobada por la SEMARNAT (Ley General del Equilibrio Ecológico, artículo 28). En ese documento la propia obra reconoce cuánta vegetación retirará, qué especies afecta y qué medidas promete.</p>' +
+        '<div class="am-alerta am-alerta-p">' + chipEstado('pendiente') + ' ' + pdEsc(A.pendientes[0]) + '</div>' +
+        '<p class="pd-nota">Aquí irá, obra por obra: lo que su permiso ambiental autorizó, lo que la Auditoría Superior o la PROFEPA hayan documentado después y lo que la obra costó. ' + amRef('ref-lgeepa', 'Ley General del Equilibrio Ecológico') + ' <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'megaobras\')">Ver el costo de las megaobras (2.2)</button></p>' +
+      '</section>';
+
+    /* 6. Leyes */
+    const leyes =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">⚖️ Las leyes que aplican</h3>' +
+        '<ul class="am-leyes">' + A.leyes.map(l => '<li><b>' + pdEsc(l.norma) + '.</b> ' + pdEsc(l.dice) + ' ' + amRef(l.refKey, 'texto vigente') + '</li>').join('') + '</ul>' +
+      '</section>';
+
+    /* 7. Quien lo mide hoy y documentos */
+    const quien =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🏛️ Quién lo mide hoy</h3>' +
+        '<p class="pd-lead">Varias instituciones cambiaron con las reformas de 2024 y 2025. Así queda cada dato de esta sección:</p>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla am-quien"><thead><tr><th>Dato</th><th>Quién lo mide hoy</th><th></th></tr></thead><tbody>' +
+          A.quienMide.map(q => '<tr><td>' + pdEsc(q.dato) + '</td><td>' + pdEsc(q.mide) + '</td><td><span class="am-est am-est-' + (q.estado === 'vigente' ? 'v' : 'c') + '">' + (q.estado === 'vigente' ? 'vigente' : 'cambió') + '</span> <small>' + pdEsc(q.nota) + '</small></td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<h4 class="pd-sub-t">Los documentos de esta sección</h4>' +
+        '<ol class="pd-docs">' + Object.keys(A.fuentes).map(k => {
+          const f = A.fuentes[k];
+          return '<li><a class="no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(f.doc) + ' ↗</a>' +
+            (f.sha256 ? '<code title="SHA-256">' + f.sha256.slice(0, 16) + '…</code>' : '') + '</li>';
+        }).join('') + '<li>' + ceem + '</li></ol>' +
+        '<ul class="pd-lista">' + A.pendientes.map(t => '<li>' + chipEstado('pendiente') + ' ' + pdEsc(t) + '</li>').join('') + '</ul>' +
+        '<p class="pd-nota">' + pdEsc(A.nota) + ' Consulta: ' + pdEsc(A.consulta) + '. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'proyeccion2027\')">Ver el detalle de las cuentas ecológicas</button></p>' +
+      '</section>';
+
+    raiz.innerHTML = reloj + huella + basura + proteccion + megaobras + leyes + quien;
+    raiz.querySelectorAll('.am-dato, .am-reloj, .am-balanza, .pd-tabla-w, .am-serie, summary, .pd-docs, .am-quien')
+      .forEach(el => el.setAttribute('data-no-autolink', ''));
+    autolinkAmbito(raiz);
+    capMontar(raiz, 'ambiente', [
+      { ico: '🌎', tit: 'El reloj en vivo', cifra: pdPesos(porSeg), cifraPie: 'de daño ambiental por segundo', estado: 'derivado', res: 'Lo que el país pierde mientras usted lee.' },
+      { ico: '🧍', tit: 'Su estado de cuenta ecológico', cifra: amNum(kgAnio, 0) + ' kg', cifraPie: 'de basura al año por persona', estado: 'derivado', res: 'Su basura y su parte del daño, contra su ISR.' },
+      { ico: '🗑️', tit: 'La basura', cifra: amNum(R.rellenosSanitarios.pct, 1) + ' %', cifraPie: 'llega a un relleno sanitario', estado: 'oficial', res: 'Un servicio municipal sin partida federal, y las concesiones.' },
+      { ico: '💸', tit: 'Protección contra daño', cifra: '× ' + amNum(gpa.ratio_dano_sobre_gasto, 2), cifraPie: 'el daño contra lo que se gasta en proteger', estado: 'derivado', res: 'El presupuesto ambiental 2026 y el proyecto 2027.' },
+      { ico: '🏗️', tit: 'La huella de las megaobras', cifra: '', cifraPie: 'en integración', estado: 'pendiente', res: 'Lo que cada obra reconoce en su permiso ambiental.' },
+      { ico: '⚖️', tit: 'Las leyes que aplican', cifra: A.leyes.length + ' normas', cifraPie: 'con su texto vigente', estado: 'oficial', res: 'Constitución, Ley de Residuos, LGEEPA, cambio climático, IEPS.' },
+      { ico: '🏛️', tit: 'Quién lo mide hoy', cifra: Object.keys(A.fuentes).length + 1 + ' documentos', cifraPie: 'oficiales, con liga', estado: 'oficial', res: 'Qué institución publica cada dato tras las reformas.' }
+    ]);
+    amArrancarReloj(danoAnual);
+  }
+
+  /* El reloj corre mientras su contenedor exista. Se reinicia al volver a
+     dibujar la seccion, y respeta a quien pidio menos movimiento. */
+  function amArrancarReloj(danoAnual) {
+    if (amb.reloj) clearInterval(amb.reloj);
+    const C = DB.ambiente.residuos;
+    const porMs = danoAnual / (CC_SEG_ANO * 1000);
+    const kgMs = C.generacionTdia.valor * 1000 / 86400000;
+    const inicioAnio = new Date(new Date().getFullYear(), 0, 1).getTime();
+    if (!amb.t0) amb.t0 = Date.now();
+    const quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pintar = () => {
+      const d = document.getElementById('amRelojDano');
+      if (!d) { clearInterval(amb.reloj); amb.reloj = null; return; }
+      const ms = Date.now() - amb.t0;
+      d.textContent = pdPesos(ms * porMs);
+      const b = document.getElementById('amRelojBasura');
+      if (b) b.textContent = amNum(ms * kgMs, 0) + ' kg';
+      const a = document.getElementById('amRelojAnio');
+      if (a) a.textContent = pdMdp((Date.now() - inicioAnio) * porMs, 1);
+    };
+    pintar();
+    amb.reloj = setInterval(pintar, quieto ? 5000 : 100);
+  }
+
+  /* ====================================================================
      CAPITULOS: una seccion larga, en piezas que se leen de una en una.
 
      Toma los bloques hijos directos de `raiz` (uno por capitulo) y monta
@@ -4280,7 +4500,7 @@
     }
     /* Las 32 entidades y los municipios viven en Accion Financiera de la
        plataforma. Desde una pagina que no los tiene, se va a buscarlos. */
-    if (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') {
+    if (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027' || tabKey === 'costo-ambiental') {
       if (document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]')) {
         switchTab('accion-financiera', skipPush);
         switchSubtab('accion-financiera', tabKey);
@@ -4419,6 +4639,7 @@
       else if (subKey === 'poderes') renderPoderes();
       else if (subKey === 'territorio') renderTerritorioErario();
       else if (subKey === 'proyeccion2027') { renderConstitucionEconomica(); renderCuentasEcologicas(); }
+      else if (subKey === 'costo-ambiental') renderCostoAmbiental();
       else if (subKey === 'municipios') renderMunicipioErario();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
     } else if (parentTab === 'legislativo') {
@@ -25523,7 +25744,7 @@
     
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
                          (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
-                         (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
+                         (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027' || tabKey === 'costo-ambiental') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
     var targetScroll = targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) {
@@ -26629,6 +26850,7 @@
     irComparadorChoque: irComparadorChoque,
     descargarEstadoCuenta: descargarEstadoCuenta,
     capIr: capIr,
+    renderCostoAmbiental: renderCostoAmbiental,
     capTodo: capTodo,
     efosAbrir: efosAbrir,
     efosBuscar: efosBuscar,

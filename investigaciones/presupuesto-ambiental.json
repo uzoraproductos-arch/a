@@ -1,0 +1,72 @@
+{
+ "ramo": "16",
+ "nombre": "Medio Ambiente y Recursos Naturales",
+ "total2026": {
+  "aprobado": 45564073902.0,
+  "modificado": 45622718863.4,
+  "pagado": 18854778532.41
+ },
+ "proyecto2027": 49508305994.0,
+ "unidades": [
+  {
+   "ur": "B00",
+   "nombre": "Comisión Nacional del Agua",
+   "aprobado": 37689110439.0,
+   "modificado": 37601659493.38,
+   "pagado": 14947644450.41,
+   "proyecto2027": 39797423959.0
+  },
+  {
+   "ur": "RHQ",
+   "nombre": "Comisión Nacional Forestal",
+   "aprobado": 2589652339.0,
+   "modificado": 2586715424.0,
+   "pagado": 1521949887.35,
+   "proyecto2027": 2781404837.0
+  },
+  {
+   "ur": "F00",
+   "nombre": "Comisión Nacional de Áreas Naturales Protegidas",
+   "aprobado": 1502268352.0,
+   "modificado": 1555438166.43,
+   "pagado": 656664568.4,
+   "proyecto2027": 1590790225.0
+  },
+  {
+   "ur": "E00",
+   "nombre": "Procuraduría Federal de Protección al Ambiente",
+   "aprobado": 827072298.0,
+   "modificado": 879335926.86,
+   "pagado": 409266860.43,
+   "proyecto2027": 981308335.0
+  },
+  {
+   "ur": "G00",
+   "nombre": "Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos",
+   "aprobado": 353465344.0,
+   "modificado": 353465344.0,
+   "pagado": 159904112.88,
+   "proyecto2027": 409917156.0
+  },
+  {
+   "ur": "RJJ",
+   "nombre": "Instituto Nacional de Ecología y Cambio Climático",
+   "aprobado": 159259589.0,
+   "modificado": 159241506.0,
+   "pagado": 72535953.13,
+   "proyecto2027": 198188803.0
+  },
+  {
+   "ur": "RESTO",
+   "nombre": "Resto de la SEMARNAT (oficinas centrales y representaciones)",
+   "aprobado": 2443245541.0,
+   "modificado": 2486863002.73,
+   "pagado": 1086812699.81,
+   "proyecto2027": 3749272679.0
+  }
+ ],
+ "sha256": {
+  "AV2T2026": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511",
+  "PPEF2027": "8cb9cd83fc2e2b9f2ff0beb46fe33337ee266b02c813d0d6eeccad14842bc327"
+ }
+}
