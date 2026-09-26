@@ -2101,6 +2101,45 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 5, Costo Ambiental, en cuatro bloques; simulación y ticket en negativo)
+
+- **Cuatro bloques** con la mecánica de los módulos 1 a 4 (claves `amreloj`,
+  `amticket`, `ambasura`, `ampib`; el 1 nace abierto porque el reloj corre;
+  el proemio lleva a cada uno):
+  1. **El reloj del daño y un año en veinte segundos.** El reloj en vivo de
+     siempre (`#amReloj`) y una simulación animada nueva (`renderAmCarrera`,
+     `amCarreraPlay`, `amCarreraFin`): cuatro cifras anuales oficiales se
+     acumulan día por día en una sola escala en pesos, con fecha, barra de
+     avance, pausa, cierre del año, tabla con documento y remate derivado
+     («por cada peso del Ramo 16, $34.5 de intereses y $30.3 de daño»).
+     Series: intereses de la deuda 2026 (PEF, Anexo 8), daño ambiental 2024
+     y gasto en protección ambiental 2024 (INEGI, CEEM) y presupuesto del
+     Ramo 16 2026 (PEF). La nota dice que mezcla 2024 y 2026 y que reparte
+     parejo por día.
+  2. **Su ticket ciudadano en negativo** (`renderAmTicket`, `amTicketEmitir`,
+     `amTicketCopiar`): con el ingreso neto del lector (lo toma del módulo 3
+     si ya lo calculó) reparte por habitante (CONAPO 2026): intereses de la
+     deuda, daño ambiental y, dentro, el de la basura; total del año en días
+     de ingreso y en «de cada $100»; saldo de la deuda pública total en meses
+     de ingreso; abonos (Ramo 16 y protección ambiental); basura en kilos; y
+     el balance por cada peso abonado. Se imprime renglón por renglón y las
+     cifras cuentan hacia el negativo. Sustituye a la «huella» del capítulo 2.
+  3. **La basura y lo que se gasta en proteger:** el resto de
+     `renderCostoAmbiental`, ya sin el índice de capítulos (`capMontar` solo
+     se usa si la página no trae los bloques).
+  4. **El PIB no alcanza:** la cascada y el desglose crecen al abrir el
+     bloque (animación CSS); el simulador suma una gráfica PIB contra PINE
+     que se mueve con transición desde el cero al mover los controles.
+- **Dato nuevo:** colección `ticket_negativo`
+  (`herramientas/integrar_ticket_negativo.py`) con el SHRFSP estimado al
+  cierre de 2026, $20,062,321.6 mdp, 54.0 % del PIB, oficial: CGPE 2027,
+  p. 67, cuadro «Estimación de las finanzas públicas, 2026-2027» (extracto y
+  SHA-256 en `investigaciones/fuentes-ambiente/`).
+- **Corrección:** en el Paquete 2027 la cifra «2026» de cada renglón es la
+  del presupuesto aprobado, no el cierre estimado; ahora dice «2026 aprobado».
+- Colores de serie `--am-c1..4`, validados en claro y oscuro (banda de
+  luminosidad, croma, daltonismo y contraste).
+
 ### Hecho (módulo 4, Modo Inspector, en tres bloques; tarjetas 4 y 5)
 
 - **Tarjeta 4:** se llama «Modo Inspector» y, en lugar del monto por aclarar,
@@ -2568,8 +2607,14 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **Lista de pendientes de la plataforma:** a petición del autor, cada tarea
   que quede abierta al reorganizar los módulos se anota aquí. Se trabajará a
   fondo cuando los cinco módulos estén reorganizados.
-- **Módulo 5, Costo Ambiental:** solo cambiaron el nombre y la cifra de la
-  tarjeta; falta reorganizar su interior en bloques, como los módulos 1 a 4.
+- **Módulo 5, ticket en negativo:** reparte entre habitantes; la opción
+  «por contribuyente» espera la cifra oficial del padrón del SAT (hoy
+  `pendiente`), y la población CONAPO 2026 aún no cita su cuadro. El daño
+  ambiental es de 2024: al salir la CEEM 2025 (diciembre de 2026) hay que
+  actualizar el reloj, la simulación y el ticket.
+- **Módulo 5, paquete 2027:** la descripción del renglón SHRFSP compara el
+  55.0 % de 2027 con el cierre estimado 2026 (54.0 %), mientras la tarjeta
+  muestra el aprobado (52.3 %); valorar mostrar las dos columnas.
 - **Módulo 4, tarjeta:** la cifra «5,417 irregularidades» cuenta acciones
   correctivas de la ASF, y una acción puede agrupar varias irregularidades.
   Cuando se publique el Informe General de la CP 2024 o la ASF dé su propio

@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zk">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zl">
 </head>
 <body>
 
@@ -2073,26 +2073,111 @@
         <h2>Módulo 5: Costo Ambiental</h2>
         <p>El deterioro del ambiente tambi&eacute;n es gasto: lo pagamos en agua, aire, suelo y basura, aunque no aparezca en el recibo. Aqu&iacute; se mide en pesos, con cifras oficiales, y se compara con lo que el Estado destina a protegerlo.</p>
       </div>
-      <div id="ambienteRaiz" class="pd-raiz am-raiz"></div>
+      <!-- ==================================================================
+           MÓDULO 5 EN CUATRO BLOQUES, con la mecánica de los módulos 1 a 4
+           (erarioPlegToggle / erarioIr): 1 el reloj y la simulación de un
+           año (renderCostoAmbiental: amRelojHtml y amCarrera), 2 el ticket
+           ciudadano en negativo (amTicket), 3 la basura y lo que se gasta en
+           proteger (#ambienteRaiz) y 4 el PIB no alcanza
+           (renderCuentasEcologicas). El bloque 1 nace abierto: el reloj corre.
+           ================================================================== -->
+      <nav class="erario-indice" aria-label="Los cuatro bloques del Costo Ambiental">
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('amreloj')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">⏱️</span><span class="ei-tx"><b>El reloj y el año</b><small>El daño en vivo y un año simulado</small></span></button>
+        <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('amticket')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Su ticket en negativo</b><small>Deuda y daño, a su nombre</small></span></button>
+        <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ambasura')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">🗑️</span><span class="ei-tx"><b>Basura y protección</b><small>Lo que se tira y lo que se gasta</small></span></button>
+        <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ampib')"><span class="ei-n">4</span><span class="ei-ico" aria-hidden="true">📉</span><span class="ei-tx"><b>El PIB no alcanza</b><small>La riqueza que de verdad queda</small></span></button>
+      </nav>
 
-      <div class="am-profundizar">
-        <!-- ==================================================================
-             PARA PROFUNDIZAR: EL PIB NO ALCANZA (CUENTAS ECOLOGICAS, INEGI)
-             ================================================================== -->
-
-        <div class="section-hero">
-          <span class="hero-tag">Cuentas Econ&oacute;micas y Ecol&oacute;gicas &middot; INEGI &middot; Ejercicio 2024</span>
-          <h2>El PIB No Alcanza</h2>
-          <p id="ceeEntrada"></p>
+      <!-- BLOQUE 1 · EL RELOJ Y UN AÑO EN 20 SEGUNDOS -->
+      <div class="erario-bloque erario-pleg erario-pleg-mayor abierto" id="eb-amreloj">
+        <h3 class="erario-pleg-h">
+          <button type="button" class="erario-pleg-cab" aria-expanded="true"
+                  aria-controls="eb-cuerpo-amreloj"
+                  onclick="window.AuditEngine.erarioPlegToggle('amreloj')">
+            <span class="erario-pleg-n" aria-hidden="true">1</span>
+            <span class="erario-pleg-ico" aria-hidden="true">⏱️</span>
+            <span class="erario-pleg-tx">
+              <span class="erario-pleg-tit">El reloj del daño y un año en veinte segundos</span>
+              <span class="erario-pleg-av">El daño ambiental que corre mientras usted lee y una simulación animada que acumula, día por día, lo que cuestan los intereses de la deuda y el daño al ambiente contra lo que se gasta en protegerlo.</span>
+            </span>
+            <span class="erario-pleg-mas" aria-hidden="true">−</span>
+          </button>
+        </h3>
+        <div class="erario-pleg-cuerpo" id="eb-cuerpo-amreloj">
+          <div id="amReloj"></div>
+          <div id="amCarrera"></div>
         </div>
+      </div><!-- /eb -->
 
-        <div id="ceeCascada"></div>
-        <div id="ceeSimulador"></div>
-        <div id="ceeDesglose"></div>
-        <div id="ceeCiegos"></div>
-        <div id="ceeJuridico"></div>
-        <div id="ceeProcedencia"></div>
-      </div>
+      <!-- BLOQUE 2 · SU TICKET CIUDADANO EN NEGATIVO -->
+      <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-amticket">
+        <h3 class="erario-pleg-h">
+          <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                  aria-controls="eb-cuerpo-amticket"
+                  onclick="window.AuditEngine.erarioPlegToggle('amticket')">
+            <span class="erario-pleg-n" aria-hidden="true">2</span>
+            <span class="erario-pleg-ico" aria-hidden="true">🧾</span>
+            <span class="erario-pleg-tx">
+              <span class="erario-pleg-tit">Su ticket ciudadano en negativo</span>
+              <span class="erario-pleg-av">Escriba lo que gana y la página emite lo que ya le cargaron a su nombre: su parte de la deuda pública, de sus intereses y del daño ambiental del país, con su basura en kilos.</span>
+            </span>
+            <span class="erario-pleg-mas" aria-hidden="true">+</span>
+          </button>
+        </h3>
+        <div class="erario-pleg-cuerpo" id="eb-cuerpo-amticket" hidden>
+          <div id="amTicket"></div>
+        </div>
+      </div><!-- /eb -->
+
+      <!-- BLOQUE 3 · LA BASURA Y LO QUE SE GASTA EN PROTEGER -->
+      <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-ambasura">
+        <h3 class="erario-pleg-h">
+          <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                  aria-controls="eb-cuerpo-ambasura"
+                  onclick="window.AuditEngine.erarioPlegToggle('ambasura')">
+            <span class="erario-pleg-n" aria-hidden="true">3</span>
+            <span class="erario-pleg-ico" aria-hidden="true">🗑️</span>
+            <span class="erario-pleg-tx">
+              <span class="erario-pleg-tit">La basura y lo que se gasta en proteger</span>
+              <span class="erario-pleg-av">Un servicio municipal sin partida federal, el presupuesto ambiental 2026 y 2027, la huella de las megaobras, las leyes que aplican y quién mide cada dato.</span>
+            </span>
+            <span class="erario-pleg-mas" aria-hidden="true">+</span>
+          </button>
+        </h3>
+        <div class="erario-pleg-cuerpo" id="eb-cuerpo-ambasura" hidden>
+          <div id="ambienteRaiz" class="pd-raiz am-raiz"></div>
+        </div>
+      </div><!-- /eb -->
+
+      <!-- BLOQUE 4 · EL PIB NO ALCANZA (CUENTAS ECOLÓGICAS, INEGI) -->
+      <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-ampib">
+        <h3 class="erario-pleg-h">
+          <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                  aria-controls="eb-cuerpo-ampib"
+                  onclick="window.AuditEngine.erarioPlegToggle('ampib')">
+            <span class="erario-pleg-n" aria-hidden="true">4</span>
+            <span class="erario-pleg-ico" aria-hidden="true">📉</span>
+            <span class="erario-pleg-tx">
+              <span class="erario-pleg-tit">El PIB no alcanza</span>
+              <span class="erario-pleg-av">De los $33.5 billones anunciados a los $25.7 que quedaron: la cascada animada, el simulador del crecimiento real y el desglose de lo que se acabó y lo que se ensució.</span>
+            </span>
+            <span class="erario-pleg-mas" aria-hidden="true">+</span>
+          </button>
+        </h3>
+        <div class="erario-pleg-cuerpo" id="eb-cuerpo-ampib" hidden>
+          <p class="am-pib-entrada" id="ceeEntrada"></p>
+          <div id="ceeCascada"></div>
+          <div id="ceeSimulador"></div>
+          <div id="ceeDesglose"></div>
+          <div id="ceeCiegos"></div>
+          <div id="ceeJuridico"></div>
+          <div id="ceeProcedencia"></div>
+        </div>
+      </div><!-- /eb -->
+
     </div><!-- FIN MODULO 5 -->
 
 
@@ -2770,7 +2855,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zk</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zl</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2914,16 +2999,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926zk"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926zl"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926zk"></script>
+  <script src="assets/js/audit-database.js?v=20260926zl"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926zk"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926zl"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926zk"></script>
+  <script src="assets/js/audit-engine.js?v=20260926zl"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

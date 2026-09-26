@@ -1898,7 +1898,8 @@
           '. El dato de 2025 lo publica el INEGI en diciembre de 2026; mientras, el reloj usa el ritmo de 2024.</p>' +
       '</section>';
 
-    /* 2. Tu huella */
+    /* 2. Tu huella: desde que el modulo va en bloques vive en el ticket en
+       negativo (bloque 2), que la reparte contra el ingreso del lector. */
     const res = state.cc && state.cc.calculado ? state.cc.resultado : null;
     const isr = res ? res.ano.isr : 0;
     const huella =
@@ -2002,13 +2003,27 @@
             (f.sha256 ? '<code title="SHA-256">' + f.sha256.slice(0, 16) + '…</code>' : '') + '</li>';
         }).join('') + '<li>' + ceem + '</li></ol>' +
         '<ul class="pd-lista">' + A.pendientes.map(t => '<li>' + chipEstado('pendiente') + ' ' + pdEsc(t) + '</li>').join('') + '</ul>' +
-        '<p class="pd-nota">' + pdEsc(A.nota) + ' Consulta: ' + pdEsc(A.consulta) + '. <button type="button" class="pd-btn" onclick="var e=document.getElementById(\'ceeCascada\'); if(e) e.scrollIntoView({behavior:\'smooth\'});">Ver el detalle de las cuentas ecológicas</button></p>' +
+        '<p class="pd-nota">' + pdEsc(A.nota) + ' Consulta: ' + pdEsc(A.consulta) + '. <button type="button" class="pd-btn" onclick="if(document.getElementById(\'eb-ampib\')) window.AuditEngine.erarioIr(\'ampib\'); else { var e=document.getElementById(\'ceeCascada\'); if(e) e.scrollIntoView({behavior:\'smooth\'}); }">Ver el detalle de las cuentas ecológicas</button></p>' +
       '</section>';
 
-    raiz.innerHTML = reloj + huella + basura + proteccion + megaobras + leyes + quien;
+    /* En la plataforma el modulo va en cuatro bloques: el reloj abre el
+       bloque 1, junto a la simulacion del ano; el bloque 3 (esta raiz) lleva
+       basura, proteccion, megaobras, leyes y quien mide; la huella se volvio
+       el ticket en negativo del bloque 2. Sin esos contenedores, todo va
+       junto, como antes. */
+    const cajaReloj = document.getElementById('amReloj');
+    const enBloques = !!cajaReloj;
+    if (enBloques) cajaReloj.innerHTML = reloj;
+    raiz.innerHTML = (enBloques ? '' : reloj + huella) + basura + proteccion + megaobras + leyes + quien;
     raiz.querySelectorAll('.am-dato, .am-reloj, .am-balanza, .pd-tabla-w, .am-serie, summary, .pd-docs, .am-quien')
       .forEach(el => el.setAttribute('data-no-autolink', ''));
     autolinkAmbito(raiz);
+    if (enBloques) {
+      renderAmCarrera();
+      renderAmTicket();
+      amArrancarReloj(danoAnual);
+      return;
+    }
     capMontar(raiz, 'ambiente', [
       { ico: '🌎', tit: 'El reloj en vivo', cifra: pdPesos(porSeg), cifraPie: 'de daño ambiental por segundo', estado: 'derivado', res: 'Lo que el país pierde mientras usted lee.' },
       { ico: '🧍', tit: 'Su estado de cuenta ecológico', cifra: amNum(kgAnio, 0) + ' kg', cifraPie: 'de basura al año por persona', estado: 'derivado', res: 'Su basura y su parte del daño, contra su ISR.' },
@@ -2043,6 +2058,262 @@
     };
     pintar();
     amb.reloj = setInterval(pintar, quieto ? 5000 : 100);
+  }
+
+  /* ====================================================================
+     MODULO 5, BLOQUE 1: UN AÑO DE CUENTAS EN VEINTE SEGUNDOS
+     Cuatro cifras anuales oficiales se reparten en partes iguales por dia y
+     se acumulan en pantalla, en una sola escala (pesos). Es una simulacion
+     de ritmo, no un registro diario: ni los intereses ni el dano ocurren
+     parejo a lo largo del ano, y dos de las cifras son de 2024. Los colores
+     siguen a cada concepto (am-c1..am-c4), no a su lugar.
+     ==================================================================== */
+  const amCar = { raf: 0, t: 0 };
+  const AM_CAR_MS = 20000;
+
+  function amSeries() {
+    const A = DB.ambiente, C = DB.cuentas_ecologicas;
+    const rel = ((ccDatos().relojes || {}).fuentes || []).find(x => x.id === 'intereses');
+    const ceem = amRef('ref-ceem-2024', 'INEGI, Cuentas Económicas y Ecológicas 2024');
+    const s = [];
+    if (rel) s.push({ id: 'intereses', nom: 'Intereses de la deuda pública', anio: '2026', mdp: rel.anual_mdp, estado: rel.estado, c: 1,
+      fuente: amRef(rel.refKey, 'PEF 2026, Anexo 8'), que: 'Lo que el presupuesto paga por lo prestado en años anteriores.' });
+    s.push({ id: 'dano', nom: 'Daño ambiental del país', anio: '2024', mdp: C.ctada.total_mdp, estado: C.ctada.estado, c: 3,
+      fuente: ceem, que: 'Lo que costó agotar los recursos y ensuciar aire, agua y suelo.' });
+    s.push({ id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: C.gasto_proteccion_ambiental.monto_mdp, estado: 'oficial', c: 4,
+      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron a proteger el ambiente.' });
+    s.push({ id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: A.presupuesto.aprobado2026.valor / 1e6, estado: A.presupuesto.aprobado2026.estado, c: 2,
+      fuente: amFuente('PEF', A.presupuesto.aprobado2026.pagina), que: 'Lo aprobado a la SEMARNAT, la Conagua y sus órganos.' });
+    return s;
+  }
+
+  function renderAmCarrera() {
+    const cont = document.getElementById('amCarrera');
+    if (!cont) return;
+    const S = amSeries();
+    const max = Math.max.apply(null, S.map(x => x.mdp));
+    const filas = S.map(x =>
+      '<li class="am-car-fila" title="' + escHtml(x.nom + ', ' + x.anio + ': ' + formatMdpFijo(x.mdp) + ' al año. ' + x.que) + '">' +
+        '<span class="am-car-nom"><i class="am-sw am-c' + x.c + '" aria-hidden="true"></i>' + escHtml(x.nom) + ' <small>' + x.anio + '</small></span>' +
+        '<span class="am-car-riel"><span class="am-car-barra am-c' + x.c + '" data-w="' + (x.mdp / max * 100).toFixed(3) + '"></span></span>' +
+        '<span class="am-car-v num-tabular" data-v="' + x.mdp + '">$0 mdp</span>' +
+      '</li>').join('');
+    const tabla = S.map(x => '<tr><td>' + escHtml(x.nom) + '</td><td>' + x.anio + '</td><td class="num-tabular">' + formatMdpFijo(x.mdp) + '</td><td class="num-tabular">' +
+      pdPesos(x.mdp * 1e6 / CC_SEG_ANO) + '</td><td>' + chipEstado(x.estado) + ' ' + x.fuente + '</td></tr>').join('');
+    cont.innerHTML =
+      '<section class="pd-bloque am-car" data-no-autolink>' +
+        '<h3 class="pd-tit">📊 Un año de cuentas en veinte segundos</h3>' +
+        '<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>' +
+        '<div class="am-car-mandos">' +
+          '<button type="button" class="hero-pillar-btn hero-pillar-calc am-car-play" id="amCarPlay" onclick="window.AuditEngine.amCarreraPlay()">▶ Simular un año</button>' +
+          '<button type="button" class="pd-btn" onclick="window.AuditEngine.amCarreraFin()">Ver el cierre del año</button>' +
+          '<span class="am-car-fecha num-tabular" id="amCarFecha" aria-live="polite">1 de enero</span>' +
+        '</div>' +
+        '<div class="am-car-avance" aria-hidden="true"><i id="amCarAvance"></i></div>' +
+        '<ol class="am-car-barras">' + filas + '</ol>' +
+        '<p class="am-car-remate" id="amCarRemate" aria-live="polite"></p>' +
+        '<details class="pd-sub pd-det"><summary class="pd-sub-t">Ver las cuatro cifras en tabla, con su documento</summary>' +
+          '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Concepto</th><th>Año</th><th>Al año</th><th>Por segundo</th><th>Documento</th></tr></thead><tbody>' + tabla + '</tbody></table></div>' +
+        '</details>' +
+        '<p class="pd-nota">' + chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.</p>' +
+      '</section>';
+    amCarreraPintar(amCar.t || 0);
+  }
+
+  function amCarreraPintar(t) {
+    const cont = document.getElementById('amCarrera');
+    if (!cont) return;
+    cont.querySelectorAll('.am-car-barra').forEach(el => { el.style.width = (parseFloat(el.dataset.w) * t).toFixed(3) + '%'; });
+    cont.querySelectorAll('.am-car-v').forEach(el => { el.textContent = formatMdpFijo(parseFloat(el.dataset.v) * t); });
+    const dia = Math.min(364, Math.floor(t * 365));
+    const f = new Date(2026, 0, 1 + dia);
+    const fecha = document.getElementById('amCarFecha');
+    if (fecha) fecha.textContent = t >= 1 ? '31 de diciembre · año completo' : f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long' }) + ' · día ' + (dia + 1);
+    const av = document.getElementById('amCarAvance');
+    if (av) av.style.width = (t * 100).toFixed(2) + '%';
+    const rem = document.getElementById('amCarRemate');
+    if (rem) {
+      if (t < 1) { rem.innerHTML = ''; return; }
+      const S = amSeries(), por = id => (S.find(x => x.id === id) || {}).mdp || 0;
+      const r16 = por('ramo16');
+      rem.innerHTML = r16 ? 'Al cerrar el año, por cada peso del presupuesto federal de Medio Ambiente, el país pagó <b>$' + amNum(por('intereses') / r16, 1) +
+        '</b> de intereses de su deuda y perdió <b>$' + amNum(por('dano') / r16, 1) + '</b> por daño ambiental. ' + chipEstado('derivado') : '';
+    }
+  }
+
+  function amCarreraPlay() {
+    if (amCar.raf) { cancelAnimationFrame(amCar.raf); amCar.raf = 0; amCarBoton('▶ Seguir'); return; }
+    if (simMovimientoReducido()) { amCarreraFin(); return; }
+    if (amCar.t >= 1) amCar.t = 0;
+    const ini = performance.now() - amCar.t * AM_CAR_MS;
+    amCarBoton('❚❚ Pausa');
+    const paso = ahora => {
+      amCar.t = Math.min(1, (ahora - ini) / AM_CAR_MS);
+      amCarreraPintar(amCar.t);
+      if (amCar.t < 1 && document.getElementById('amCarrera')) amCar.raf = requestAnimationFrame(paso);
+      else { amCar.raf = 0; amCarBoton('↻ Simular otra vez'); }
+    };
+    amCar.raf = requestAnimationFrame(paso);
+  }
+
+  function amCarreraFin() {
+    if (amCar.raf) { cancelAnimationFrame(amCar.raf); amCar.raf = 0; }
+    amCar.t = 1;
+    amCarreraPintar(1);
+    amCarBoton('↻ Simular otra vez');
+  }
+
+  function amCarBoton(txt) {
+    const b = document.getElementById('amCarPlay');
+    if (b) b.textContent = txt;
+  }
+
+  /* ====================================================================
+     MODULO 5, BLOQUE 2: EL TICKET CIUDADANO EN NEGATIVO
+     El estado de cuenta del modulo 3 dice a donde va lo que el lector paga;
+     este dice lo que ya le cargaron a su nombre. Reparte por habitante
+     (CONAPO 2026) cuatro cifras oficiales y las mide contra su ingreso:
+     intereses de la deuda (PEF 2026, Anexo 8), dano ambiental (INEGI 2024),
+     deuda publica total (SHRFSP estimado al cierre de 2026, CGPE 2027) y
+     la basura (SEMARNAT). Todo lo del ticket es derivado, y lo dice.
+     ==================================================================== */
+  const amTk = { ingreso: 0, emitido: false };
+
+  function amTkIngresoSugerido() {
+    const l = comparadorIngresoLector();
+    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de su estado de cuenta del módulo 3 (neto).' } : null;
+  }
+
+  function renderAmTicket() {
+    const cont = document.getElementById('amTicket');
+    if (!cont) return;
+    const sug = amTkIngresoSugerido();
+    if (!amTk.ingreso && sug) amTk.ingreso = sug.mes;
+    cont.innerHTML =
+      '<section class="pd-bloque am-tk-b">' +
+        '<p class="pd-lead">El estado de cuenta del módulo 3 le dice a dónde va lo que usted paga. Este ticket le dice lo contrario: lo que ya le cargaron a su nombre sin preguntarle. Su parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que usted gana.</p>' +
+        '<div class="am-tk-form" data-no-autolink>' +
+          '<label class="am-tk-campo" for="amTkIngreso"><span>Su ingreso neto al mes</span>' +
+            '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="Por ejemplo, 15000" value="' + (amTk.ingreso || '') + '" ' +
+            'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
+          '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
+          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que le queda después de impuestos. Si no lo sabe, sáquelo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
+        '</div>' +
+        '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : '<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>') + '</div>' +
+      '</section>';
+    if (amTk.emitido) amTicketEmitir(true);
+  }
+
+  function amTkCuentas(ingresoMes) {
+    const T = DB.ticket_negativo, C = DB.cuentas_ecologicas, A = DB.ambiente;
+    const pob = ccPar().poblacion;
+    const hab = pob.millones * 1e6;
+    const rel = ((ccDatos().relojes || {}).fuentes || []).find(x => x.id === 'intereses');
+    const resid = (C.degradacion.componentes || []).find(x => x.id === 'residuos');
+    const dia = ingresoMes * 12 / 365;
+    const c = {
+      pob: pob, dia: dia, anual: ingresoMes * 12,
+      intereses: rel ? rel.anual_mdp * 1e6 / hab : 0,
+      dano: C.ctada.total_mdp * 1e6 / hab,
+      basuraPesos: resid ? resid.monto_mdp * 1e6 / hab : 0,
+      deuda: T.shrfsp.estimado2026_mdp * 1e6 / hab,
+      ramo16: A.presupuesto.aprobado2026.valor / hab,
+      gpa: C.gasto_proteccion_ambiental.monto_mdp * 1e6 / hab,
+      kg: A.residuos.perCapitaKg.valor * 365,
+      rel: rel, resid: resid
+    };
+    c.cargoAnual = c.intereses + c.dano;
+    c.abono = c.ramo16;
+    return c;
+  }
+
+  function amTicketEmitir(sinAnimar) {
+    const campo = document.getElementById('amTkIngreso');
+    const salida = document.getElementById('amTkSalida');
+    if (!salida) return;
+    const v = campo ? parseFloat(String(campo.value).replace(/[^0-9.]/g, '')) : amTk.ingreso;
+    if (!(v > 0)) {
+      salida.innerHTML = '<p class="pd-nota am-tk-vacio">' + chipEstado('pendiente') + ' Escriba un ingreso mensual mayor que cero.</p>';
+      return;
+    }
+    amTk.ingreso = v; amTk.emitido = true;
+    const T = DB.ticket_negativo, C = DB.cuentas_ecologicas, A = DB.ambiente;
+    const c = amTkCuentas(v);
+    const ceem = amRef('ref-ceem-2024', 'INEGI, CEEM 2024');
+    const dias = x => amNum(x / c.dia, x / c.dia < 10 ? 1 : 0) + ' días de su ingreso';
+    const folio = new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+    let n = 0;
+    const lin = (txt, val, fmt, nota, clase) =>
+      '<div class="am-tk-l ' + (clase || '') + '" style="--i:' + (n++) + '"><span class="am-tk-c">' + txt + (nota ? '<small>' + nota + '</small>' : '') + '</span>' +
+        '<span class="am-tk-p"></span><b class="am-tk-v num-tabular" data-anim-v="' + val + '" data-anim-f="' + fmt + '">' + simFmt(sinAnimar ? val : 0, fmt) + '</b></div>';
+    const sec = t => '<div class="am-tk-sec" style="--i:' + (n++) + '">' + t + '</div>';
+    const pctCargo = c.cargoAnual / c.anual * 100;
+    const ancho = Math.min(100, pctCargo);
+
+    salida.innerHTML =
+      '<div class="am-tk" id="amTkImprimible" data-no-autolink>' +
+        '<div class="am-tk-cab" style="--i:' + (n++) + '"><b>AUDITAVISIÓN</b><span>Ticket ciudadano en negativo</span><small>Emitido el ' + folio + ' · por habitante · ' + amNum(c.pob.millones, 1) + ' millones de personas (CONAPO 2026)</small></div>' +
+        lin('Su ingreso neto de referencia', v, 'pesos', 'al mes · ' + ccPesos(c.anual) + ' al año', 'am-tk-ref') +
+        sec('Cargos de este año a su nombre') +
+        lin('Intereses de la deuda pública', -c.intereses, 'neg', '2026 · ' + dias(c.intereses)) +
+        lin('Daño ambiental del país', -c.dano, 'neg', '2024 · ' + dias(c.dano)) +
+        lin('· de él, por basura mal gestionada', -c.basuraPesos, 'neg', 'incluido en el renglón anterior', 'am-tk-sub') +
+        lin('TOTAL CARGADO EN EL AÑO', -c.cargoAnual, 'neg', dias(c.cargoAnual) + ' · ' + amNum(pctCargo, 1) + ' % de lo que gana al año', 'am-tk-total') +
+        '<div class="am-tk-graf" style="--i:' + (n++) + '" role="img" aria-label="De cada 100 pesos que gana al año, ' + amNum(pctCargo, 1) + ' equivalen a lo cargado a su nombre">' +
+          '<span class="am-tk-graf-t">De cada $100 que usted gana al año</span>' +
+          '<span class="am-tk-graf-r"><i class="am-c1" style="width:' + (c.intereses / c.anual * 100 * (ancho / pctCargo)).toFixed(2) + '%" title="Intereses de la deuda"></i><i class="am-c3" style="width:' + (c.dano / c.anual * 100 * (ancho / pctCargo)).toFixed(2) + '%" title="Daño ambiental"></i></span>' +
+          '<span class="am-tk-graf-l"><span><i class="am-sw am-c1"></i>intereses $' + amNum(c.intereses / c.anual * 100, 1) + '</span><span><i class="am-sw am-c3"></i>daño ambiental $' + amNum(c.dano / c.anual * 100, 1) + '</span></span>' +
+        '</div>' +
+        sec('Saldo acumulado a su nombre') +
+        lin('Deuda pública total (SHRFSP)', -c.deuda, 'neg', 'cierre estimado 2026 · ' + amNum(c.deuda / v, 1) + ' meses de su ingreso', 'am-tk-total') +
+        sec('Lo que se abona para reparar') +
+        lin('Presupuesto federal de Medio Ambiente', c.ramo16, 'pos', 'Ramo 16, aprobado 2026') +
+        lin('Gasto en protección ambiental del país', c.gpa, 'pos', '2024 · gobiernos, empresas y hogares') +
+        sec('Su huella física') +
+        lin('Basura que usted genera al año', -c.kg, 'negkg', amNum(A.residuos.perCapitaKg.valor, 3) + ' kg al día × 365') +
+        '<div class="am-tk-bal" style="--i:' + (n++) + '">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a su nombre, se le cargan <b>$' + amNum(c.intereses / c.ramo16, 0) + '</b> de intereses y <b>$' + amNum(c.dano / c.ramo16, 0) + '</b> de daño ambiental.</div>' +
+        '<div class="am-tk-pie" style="--i:' + (n++) + '">' + chipEstado('derivado') + ' ' + pdEsc(T.nota) + ' Los días y los meses dividen cada cargo entre su ingreso.' + '</div>' +
+      '</div>' +
+      '<div class="am-tk-acciones">' +
+        '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.amTicketCopiar()"><span>📋</span> Copiar mi ticket</button>' +
+      '</div>' +
+      '<details class="pd-sub pd-det"><summary class="pd-sub-t">De dónde sale cada renglón</summary><ul class="pd-lista">' +
+        '<li>Intereses: ' + formatMdpFijo(c.rel ? c.rel.anual_mdp : 0) + ' de costo financiero de la deuda ' + chipEstado('oficial') + ' ' + (c.rel ? amRef(c.rel.refKey, 'PEF 2026, Anexo 8') : '') + '</li>' +
+        '<li>Daño ambiental: ' + formatMdpFijo(C.ctada.total_mdp) + ' de costos por agotamiento y degradación; basura, ' + formatMdpFijo(c.resid ? c.resid.monto_mdp : 0) + ' ' + chipEstado('oficial') + ' ' + ceem + '</li>' +
+        '<li>Deuda total: ' + formatMdpFijo(T.shrfsp.estimado2026_mdp) + ', ' + amNum(T.shrfsp.estimado2026_pib, 1) + ' % del PIB ' + chipEstado(T.shrfsp.estado) + ' ' + amTkFuente(T.shrfsp.fuente, T.shrfsp.pagina) + '. ' + pdEsc(T.shrfsp.que) + '</li>' +
+        '<li>Presupuesto de Medio Ambiente: ' + pdMdp(A.presupuesto.aprobado2026.valor) + ' ' + chipEstado('oficial') + ' ' + amFuente('PEF', A.presupuesto.aprobado2026.pagina) + '; protección ambiental: ' + formatMdpFijo(C.gasto_proteccion_ambiental.monto_mdp) + ' ' + ceem + '</li>' +
+        '<li>Basura: ' + amNum(A.residuos.perCapitaKg.valor, 3) + ' kg por persona al día ' + chipEstado('oficial') + ' ' + amFuente('DBGIR', A.residuos.perCapitaKg.pagina) + '</li>' +
+        '<li>Población: ' + amNum(c.pob.millones, 1) + ' millones, ' + pdEsc(c.pob.fuente) + ' ' + chipEstado(c.pob.estado) + '</li>' +
+      '</ul></details>';
+    const tk = document.getElementById('amTkImprimible');
+    if (!sinAnimar && tk) {
+      tk.classList.add('am-tk-anim');
+      simAnimarZona(tk, 'amTicket', 1600 + n * 90);
+    }
+  }
+
+  function amTkFuente(clave, pagina) {
+    const f = (DB.ticket_negativo.fuentes || {})[clave];
+    if (!f) return '<span class="pd-fuente">' + chipEstado('pendiente') + ' fuente por documentar</span>';
+    return '<a class="pd-fuente no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer" title="' + pdEsc(f.doc) + '">' +
+      pdEsc(f.corto) + ', p. ' + pdEsc(pagina) + ' ↗</a>';
+  }
+
+  function amTicketCopiar() {
+    if (!amTk.ingreso) return;
+    const c = amTkCuentas(amTk.ingreso), A = DB.ambiente;
+    const p = x => '−' + ccPesos(Math.abs(x));
+    const t = 'TICKET CIUDADANO EN NEGATIVO · Auditavisión\n' +
+      'Ingreso neto de referencia: ' + ccPesos(amTk.ingreso) + ' al mes\n\n' +
+      'CARGOS DE ESTE AÑO A SU NOMBRE (por habitante)\n' +
+      '- Intereses de la deuda pública 2026: ' + p(c.intereses) + '\n' +
+      '- Daño ambiental del país 2024: ' + p(c.dano) + ' (de él, basura: ' + p(c.basuraPesos) + ')\n' +
+      '= Total del año: ' + p(c.cargoAnual) + ', ' + amNum(c.cargoAnual / c.dia, 1) + ' días de su ingreso\n\n' +
+      'SALDO ACUMULADO: deuda pública total (SHRFSP, cierre estimado 2026): ' + p(c.deuda) + ', ' + amNum(c.deuda / amTk.ingreso, 1) + ' meses de su ingreso\n' +
+      'ABONOS: presupuesto de Medio Ambiente 2026 +' + ccPesos(c.ramo16) + '; protección ambiental del país 2024 +' + ccPesos(c.gpa) + '\n' +
+      'HUELLA: ' + amNum(c.kg, 0) + ' kg de basura al año\n\n' +
+      'Fuentes: PEF 2026 (Anexo 8), INEGI Cuentas Económicas y Ecológicas 2024, SHCP Criterios Generales de Política Económica 2027 (p. 67), SEMARNAT Diagnóstico Básico para la Gestión Integral de los Residuos, CONAPO. Cifras oficiales repartidas por habitante (derivado).';
+    copiarTextoPlano(t, 'Ticket copiado con sus fuentes.');
   }
 
   /* ====================================================================
@@ -5002,7 +5273,7 @@
       n: 5, icono: '🌎', titulo: 'Costo Ambiental',
       subtitulo: 'El gasto que no aparece en el recibo',
       texto: 'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí se mide en pesos con cifras oficiales (INEGI, SEMARNAT y Hacienda), se calcula tu parte y se compara con el presupuesto ambiental 2026-2027 y las leyes que aplican.',
-      temas: ['Reloj del daño', 'Tu basura y tu parte', 'Servicio municipal', 'Presupuesto ambiental']
+      temas: [['⏱️ 1 · El reloj y el año', 'amreloj'], ['🧾 2 · Su ticket en negativo', 'amticket'], ['🗑️ 3 · Basura y protección', 'ambasura'], ['📉 4 · El PIB no alcanza', 'ampib']]
     }
   };
 
@@ -20111,7 +20382,7 @@
           '<h5 class="pe-fin-nom">' + f.n + '</h5>' +
           '<p class="pe-fin-cifra"><span data-anim-v="' + f.m + '" data-anim-f="mdpfijo">$0 mdp</span></p>' +
           '<p class="pe-fin-pib"><span data-anim-v="' + f.pib + '" data-anim-f="pctS">0.0%</span> del PIB' +
-            '<span class="pe-fin-ant">2026: ' + f.pib26.toFixed(1) + '%</span></p>' +
+            '<span class="pe-fin-ant">2026 aprobado: ' + f.pib26.toFixed(1) + '%</span></p>' +
           '<p class="pe-fin-d">' + f.d + '</p>' +
         '</article>';
       }).join('') +
@@ -20668,6 +20939,10 @@
           ceeMando('ceeCtada', 'Costo ambiental del año siguiente', 0, 10, 0.1, +ctadaPct.toFixed(1), '% del PIB') +
           ceeMando('ceeCcf', 'Consumo de capital fijo', 10, 28, 0.1, +ccfPct.toFixed(1), '% del PIB') +
         '</div>' +
+        '<div class="cee-graf" id="ceeGraf" data-no-autolink role="img" aria-label="Crecimiento del PIB contra crecimiento del PINE">' +
+          '<div class="cee-graf-f"><span class="cee-graf-et"><i class="am-sw am-c3"></i>PIB</span><span class="cee-graf-riel"><i class="cee-graf-cero"></i><span class="cee-graf-b am-c3" id="ceeGrafPib"></span></span><b class="cee-graf-v num-tabular" id="ceeGrafPibV"></b></div>' +
+          '<div class="cee-graf-f"><span class="cee-graf-et"><i class="am-sw am-c2"></i>PINE</span><span class="cee-graf-riel"><i class="cee-graf-cero"></i><span class="cee-graf-b am-c2" id="ceeGrafPine"></span></span><b class="cee-graf-v num-tabular" id="ceeGrafPineV"></b></div>' +
+        '</div>' +
         '<div class="cee-sim-salida" id="ceeSimSalida"></div>' +
         '<div class="cee-sim-atajos">' +
           '<span class="cee-atajo-et">Escenarios:</span>' +
@@ -20751,6 +21026,22 @@
         ceeTarjeta('Cuenta ambiental del año', ceeBillones(ambiental1), 'Lo que costaría el deterioro', 'costo') +
       '</div>' +
       '<p class="cee-res-veredicto" data-tono="' + tono + '">' + veredicto + '</p>';
+
+    /* Las dos barras se mueven con transicion desde el cero del centro: a la
+       derecha si crece, a la izquierda si se encoge. La escala no baja de
+       15 puntos, para que un cambio chico se vea chico. */
+    const escala = Math.max(15, Math.abs(g), Math.abs(gPine));
+    const barra = (id, v) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const w = Math.abs(v) / escala * 50;
+      el.style.width = w.toFixed(2) + '%';
+      el.style.left = (v >= 0 ? 50 : 50 - w).toFixed(2) + '%';
+      const val = document.getElementById(id + 'V');
+      if (val) val.textContent = (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
+    };
+    barra('ceeGrafPib', g);
+    barra('ceeGrafPine', gPine);
   }
 
   function ceeTarjeta(k, v, sub, tono) {
@@ -21677,6 +21968,11 @@
        decimales siempre, tambien cuando terminan en cero. */
     if (f === 'pesos2') return ccPesosExacto(v);
     if (f === 'entero') return formatNumber(Math.round(v));
+    /* El ticket en negativo del modulo 5: signo menos tipografico delante
+       del peso, signo mas en los abonos y kilos para la basura. */
+    if (f === 'neg') return (Math.round(v) < 0 ? '−' : '') + '$' + formatNumber(Math.abs(Math.round(v)));
+    if (f === 'pos') return '+$' + formatNumber(Math.round(v));
+    if (f === 'negkg') return (Math.round(v) < 0 ? '−' : '') + formatNumber(Math.abs(Math.round(v))) + ' kg';
     return simMdp(v);
   }
 
@@ -28058,6 +28354,10 @@
     notificarEnDesarrollo: notificarEnDesarrollo,
     switchApartadoCalculadora: switchApartadoCalculadora,
     cmpFiltrar: cmpFiltrar,
+    amCarreraPlay: amCarreraPlay,
+    amCarreraFin: amCarreraFin,
+    amTicketEmitir: amTicketEmitir,
+    amTicketCopiar: amTicketCopiar,
     renderComparadorSalarial: renderComparadorSalarial,
     renderPoderes: renderPoderes,
     irComparadorChoque: irComparadorChoque,

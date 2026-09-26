@@ -22106,6 +22106,29 @@ window.AUDIT_DB = {
       },
       "nota": "M\u00ednimos de la Ley Federal del Trabajo para el primer a\u00f1o de servicios. La referencia de 40 d\u00edas de aguinaldo y 10 de prima vacacional es la que fijan los Manuales de la C\u00e1mara de Diputados (Anexo 1) y del PJF (numeral 8.2.8)."
     }
+  },
+"ticket_negativo": {
+    "consulta": "26 de septiembre de 2026",
+    "nota": "Cada rengl\u00f3n del ticket reparte una cifra oficial entre los habitantes del pa\u00eds. Es un promedio: nadie firma la deuda p\u00fablica ni causa el da\u00f1o ambiental a partes iguales, pero todos lo pagamos con impuestos, servicios y salud.",
+    "fuentes": {
+      "CGPE27": {
+        "corto": "SHCP, Criterios Generales de Pol\u00edtica Econ\u00f3mica 2027",
+        "doc": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico, Criterios Generales de Pol\u00edtica Econ\u00f3mica para 2027, Gaceta Parlamentaria, a\u00f1o XXIX, n\u00fam. 7121-C, 8 de septiembre de 2026",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+        "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+      }
+    },
+    "shrfsp": {
+      "nombre": "Saldo Hist\u00f3rico de los Requerimientos Financieros del Sector P\u00fablico (SHRFSP)",
+      "que": "La medida m\u00e1s amplia de la deuda p\u00fablica: deuda del Gobierno Federal, de Pemex y CFE, de la banca de desarrollo, pasivos del IPAB y de los proyectos de inversi\u00f3n diferida. Es lo que el sector p\u00fablico debe, acumulado a lo largo de los a\u00f1os.",
+      "estimado2026_mdp": 20062321.6,
+      "estimado2026_pib": 54.0,
+      "aprobado2026_mdp": 20259590.7,
+      "estimado2027_mdp": 21665995.8,
+      "estado": "oficial",
+      "fuente": "CGPE27",
+      "pagina": "67, cuadro \u00abEstimaci\u00f3n de las finanzas p\u00fablicas, 2026-2027\u00bb, columna 2026 estimado"
+    }
   }
 };
 
