@@ -20567,3 +20567,17 @@ body.con-regreso { padding-bottom: 96px; }
   .cap-bloque { animation: none; }
   .cap-tarjeta { transition: none; }
 }
+
+/* 2.6 · Lo ya gastado: avance del año con marca de la mitad */
+.pd-tabla-gasto td, .pd-tabla-gasto th { white-space: nowrap; }
+.pd-tabla-gasto td:first-child { white-space: normal; min-width: 150px; }
+.pd-avance-c { display: flex; align-items: center; gap: 8px; min-width: 150px; }
+.pd-avance { position: relative; flex: 1; height: 10px; background: var(--bg-card-alt, rgba(255,255,255,0.08)); border-radius: 5px; overflow: hidden; min-width: 70px; }
+.pd-avance-v { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-bright)); border-radius: 5px; }
+.pd-avance-mitad { position: absolute; top: -2px; bottom: -2px; left: 50%; width: 2px; background: #fff; opacity: 0.85; }
+[data-theme="light"] .pd-avance-mitad { background: #16203a; }
+.pd-var { font-family: var(--font-mono); font-size: 11px; padding: 1px 5px; border-radius: 4px; }
+.pd-var-sube { color: #f7b955; background: rgba(245,165,36,0.14); }
+.pd-var-baja { color: #8fb3d9; background: rgba(120,160,210,0.14); }
+[data-theme="light"] .pd-var-sube { color: #8a5a00; }
+[data-theme="light"] .pd-var-baja { color: #2b527a; }

@@ -1850,12 +1850,20 @@
     const cpu = P.judicial.capitulosPorUR || {};
     (cpu.RAMO03 || []).forEach(c => { todo += c.aprobado; if (c.cap === '1000') nomina += c.aprobado; });
     const tope = (P.remuneraciones2026 || []).reduce((m, r) => r.netoAnual > m.netoAnual ? r : m, { netoAnual: 0 });
+    const gastoCifra = { txt: '', pie: '' };
+    if (P.ejercicio && P.ejercicio.avance2026) {
+      const leg = P.ejercicio.avance2026.unidades.filter(u => u.ramo === '01');
+      const pag = leg.reduce((s, u) => s + u.pagado, 0), apr = leg.reduce((s, u) => s + u.modificado, 0);
+      if (apr > 0) { gastoCifra.txt = pdPct(pag / apr * 100); gastoCifra.pie = 'del año pagado por el Congreso al 30 de junio'; }
+    }
     const pm = v => '$' + (v / total * 1000).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return [
       { ico: '🧾', tit: 'Su parte', cifra: pm(L.aprobado) + ' y ' + pm(J.aprobado), cifraPie: 'de cada $1,000 del gasto federal', estado: 'derivado',
         res: 'Cuánto de lo que usted paga llega al Congreso y cuánto a la Judicatura.' },
       { ico: '🏛️', tit: 'Los dos Poderes en 2026', cifra: pdMdp(L.aprobado + J.aprobado), cifraPie: 'aprobados entre ambos', estado: 'derivado',
         res: 'Lo que la Cámara aprobó a cada uno, y lo que le recortó al Poder Judicial.' },
+      { ico: '📊', tit: 'Lo ya gastado', cifra: gastoCifra.txt, cifraPie: gastoCifra.pie, estado: 'derivado',
+        res: 'Lo que ejercieron en 2025 y lo que llevan pagado al 30 de junio de 2026.' },
       { ico: '⚖️', tit: 'Poder Judicial: en qué se va', cifra: todo ? pdPct(nomina / todo * 100) : '', cifraPie: 'se va en servicios personales (nómina)', estado: 'derivado',
         res: 'Órgano por órgano y capítulo por capítulo, con lo ya ejercido.' },
       { ico: '🔎', tit: 'Congreso: lo que la ASF revisó', cifra: 'Cuenta Pública 2024', cifraPie: 'último año auditado', estado: 'oficial',
@@ -1991,6 +1999,64 @@
         '<p class="pd-nota">Suma de las unidades ejecutoras de cada circuito. ' + pdFuente('OAJ_UEG') + '</p>' +
       '</details>';
 
+    /* --- 2 bis. Lo ya gastado: cierre 2025 y avance 2026, de Hacienda --- */
+    const EJ = P.ejercicio;
+    let gastado = '';
+    if (EJ && EJ.cp2025 && EJ.avance2026) {
+      const cp = EJ.cp2025.unidades, av = EJ.avance2026.unidades;
+      const busca = (lista, ramo, ur) => lista.find(u => u.ramo === ramo && u.ur === ur);
+      const orden = { '01': ['100', '200', '101'], '03': ['100', '120', '110', '300', '210', '211'] };
+      const fila = (ramo, ur) => {
+        const a = busca(cp, ramo, ur), b = busca(av, ramo, ur);
+        const nombre = (a || b).nombre;
+        /* Sin variacion para quien nacio o desaparecio a media ano: no es un
+           sobre o subejercicio, es un cambio de estructura. */
+        const varPct = a && b && a.original > 0 ? (a.ejercido / a.original - 1) * 100 : null;
+        const avPct = b && b.modificado > 0 ? b.pagado / b.modificado * 100 : null;
+        return '<tr>' +
+          '<td>' + pdEsc(nombre) + '</td>' +
+          '<td class="num-tabular">' + (a ? (a.original > 0 ? pdMdp(a.original) : '<small>creado en 2025</small>') : '—') + '</td>' +
+          '<td class="num-tabular">' + (a ? pdMdp(a.ejercido) : '—') +
+            (varPct !== null ? ' <small class="pd-var ' + (varPct > 0 ? 'pd-var-sube' : 'pd-var-baja') + '">' + (varPct > 0 ? '+' : '') + pdPct(varPct) + '</small>' : '') + '</td>' +
+          '<td class="num-tabular">' + (b ? pdMdp(b.aprobado) + (Math.abs(b.modificado - b.aprobado) > 1 ? '<br><small>modificado: ' + pdMdp(b.modificado) + '</small>' : '') : '—') + '</td>' +
+          '<td class="num-tabular">' + (b ? pdMdp(b.pagado) : '—') + '</td>' +
+          '<td><div class="pd-avance-c">' + (avPct !== null
+            ? '<span class="pd-avance"><span class="pd-avance-v" style="width:' + Math.min(100, avPct).toFixed(1) + '%"></span><span class="pd-avance-mitad" title="Mitad del año"></span></span><span class="num-tabular">' + pdPct(avPct) + '</span>'
+            : '<small>dejó de operar en 2025</small>') + '</div></td>' +
+        '</tr>';
+      };
+      const tabla = (ramo, titulo) =>
+        '<div class="pd-tabla-w"><table class="pd-tabla pd-tabla-gasto"><thead>' +
+          '<tr><th rowspan="2">' + titulo + '</th><th colspan="2">2025 · Cuenta Pública</th><th colspan="3">2026 · al 30 de junio</th></tr>' +
+          '<tr><th>Original</th><th>Ejercido</th><th>Aprobado</th><th>Pagado</th><th>Avance (pagado ÷ modificado)</th></tr>' +
+        '</thead><tbody>' + orden[ramo].filter(ur => busca(cp, ramo, ur) || busca(av, ramo, ur)).map(ur => fila(ramo, ur)).join('') + '</tbody></table></div>';
+      const sumaLeg = (lista, campo) => lista.filter(u => u.ramo === '01').reduce((s, u) => s + u[campo], 0);
+      const legOrig = sumaLeg(cp, 'original'), legEj = sumaLeg(cp, 'ejercido');
+      const asfCp = busca(cp, '01', '101'), asfAv = busca(av, '01', '101');
+      const caps = EJ.cp2025.capitulosLegislativo || {};
+      const capFilas = ['100', '200'].filter(ur => caps[ur]).map(ur => {
+        const u = busca(cp, '01', ur), tot = caps[ur].reduce((s, c) => s + c.ejercido, 0);
+        return '<div class="pd-pila-cab">' + pdEsc(u.nombre) + ' · ' + pdMdp(tot) + ' ejercidos en 2025</div>' +
+          caps[ur].map(c => '<div class="pd-fila"><span class="pd-fila-n">' + pdEsc(c.cap + ' · ' + c.concepto) + '</span>' + pdBarra(c.ejercido, tot, 'pd-v-leg') +
+            '<span class="pd-fila-v">' + pdMdp(c.ejercido) + ' · ' + pdPct(c.ejercido / tot * 100) + '</span></div>').join('');
+      }).join('');
+      gastado =
+        '<section class="pd-bloque">' +
+          '<h3 class="pd-tit">Lo ya gastado: el cierre de 2025 y lo que va de 2026</h3>' +
+          '<p class="pd-lead">El presupuesto aprobado es un permiso para gastar. Lo que de verdad salió está en dos documentos de Hacienda: la <b>Cuenta Pública 2025</b>, que cierra el año pasado, y el <b>avance del gasto al 30 de junio de 2026</b>. A mitad del año, lo esperable ronda la mitad; la marca blanca de cada barra señala ese punto.</p>' +
+          tabla('01', '🏛️ Poder Legislativo') +
+          '<p class="pd-nota">En 2025 el Congreso tenía ' + pdMdp(legOrig) + ' aprobados y ejerció ' + pdMdp(legEj) +
+            ' (' + (legEj >= legOrig ? '+' : '') + pdPct((legEj / legOrig - 1) * 100) + ') ' + chipEstado('derivado') +
+            (asfCp && asfAv ? '. La Auditoría Superior es la que más creció respecto de lo aprobado: ' + pdMdp(asfCp.original) + ' a ' + pdMdp(asfCp.ejercido) +
+              ' en 2025, y en 2026 su presupuesto ya se amplió a ' + pdMdp(asfAv.modificado) + '.' : '.') + '</p>' +
+          tabla('03', '⚖️ Poder Judicial') +
+          '<p class="pd-nota">En 2025 conviven el Consejo de la Judicatura Federal, que operó hasta el cambio de estructura de ese año, y los dos órganos que lo sustituyeron: el Órgano de Administración Judicial y el Tribunal de Disciplina Judicial. Por eso estos dos aparecen con original en cero.</p>' +
+          (capFilas ? '<details class="pd-sub pd-det"><summary class="pd-sub-t">En qué gastaron las cámaras en 2025, capítulo por capítulo</summary>' + capFilas + '</details>' : '') +
+          '<p class="pd-nota">' + chipEstado('oficial') + ' Montos: ' + pdFuente('CP2025', 'base de datos') + ' y ' + pdFuente('AV2T2026', 'base de datos') +
+            '. Variaciones y avance: ' + chipEstado('derivado') + ' (ejercido ÷ original − 1; pagado ÷ presupuesto modificado). ' + pdEsc(EJ.nota) + '</p>' +
+        '</section>';
+    }
+
     const judicial =
       '<section class="pd-bloque">' +
         '<h3 class="pd-tit">⚖️ Poder Judicial: en qué se va el dinero</h3>' +
@@ -2054,7 +2120,7 @@
     const legislativo =
       '<section class="pd-bloque">' +
         '<h3 class="pd-tit">🏛️ Poder Legislativo: lo que la Auditoría ya revisó</h3>' +
-        '<p class="pd-lead">Para 2026 sólo existe el presupuesto aprobado. El año más reciente con el gasto ya ejercido <b>y auditado</b> es 2024: la Auditoría Superior de la Federación ya publicó sus informes de la revisión de la Cuenta Pública 2024.</p>' +
+        '<p class="pd-lead">Lo gastado en 2025 y en lo que va de 2026 está en el capítulo «Lo ya gastado». Aquí va lo <b>auditado</b>, y el año más reciente con auditoría terminada es 2024: la Auditoría Superior de la Federación ya publicó sus informes de la revisión de la Cuenta Pública 2024.</p>' +
         '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th colspan="4">Cámara de Diputados · 2024</th></tr></thead><tbody>' +
           filaEj('Diputados', 'Aprobado') + filaEj('Diputados', 'Modificado') + filaEj('Diputados', 'Pagado') + filaEj('Diputados', 'Muestra') +
         '</tbody><thead><tr><th colspan="4">Cámara de Senadores · 2024</th></tr></thead><tbody>' +
@@ -2093,7 +2159,7 @@
         '<p class="pd-nota">' + pdEsc(P.nota) + '</p>' +
       '</section>';
 
-    raiz.innerHTML = tuParte + lado + judicial + legislativo + rem + docs;
+    raiz.innerHTML = tuParte + lado + gastado + judicial + legislativo + rem + docs;
     /* El glosario se enlaza en el texto corrido; etiquetas, tablas y
        resumenes plegables se quedan limpios. */
     raiz.querySelectorAll('.pd-fila, .pd-leyenda, .pd-tabla-w, .pd-lado-cab, .pd-duo, .pd-pila-cab, summary, .pd-docs')

@@ -14559,6 +14559,18 @@ window.AUDIT_DB = {
     "consulta": "2026-09-25",
     "nota": "Pesos nominales. \u00abAprobado\u00bb es autorizaci\u00f3n de gasto, no dinero pagado. Cada cifra conserva su documento, su p\u00e1gina y su estado: oficial (transcrita), derivado (calculada, con la operaci\u00f3n dicha) o pendiente. Las vistas de un mismo dinero no se suman entre s\u00ed.",
     "fuentes": {
+      "CP2025": {
+        "corto": "Cuenta P\u00fablica 2025, datos abiertos SHCP",
+        "doc": "SHCP, Cuenta P\u00fablica 2025, base de datos abierta de ramos administrativos, generales y aut\u00f3nomos (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv",
+        "sha256": "973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0"
+      },
+      "AV2T2026": {
+        "corto": "SHCP, avance del gasto al 2.\u00ba trimestre 2026",
+        "doc": "SHCP, Presupuesto de Egresos 2026, avance del gasto (AC01) al segundo trimestre, base de datos abierta (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
+        "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511"
+      },
       "PEF": {
         "corto": "PEF 2026, DOF 21-11-2025",
         "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n 2026, DOF 21-11-2025 (edici\u00f3n vespertina)",
@@ -14787,6 +14799,264 @@ window.AUDIT_DB = {
         "nota": "Cifra parcial: el Manual publica el sueldo neto tabulado y el aguinaldo con la prima; no incluye seguros ni aportaciones de seguridad social, que s\u00ed entran en la remuneraci\u00f3n total de los otros cargos. En el Decreto, los tabuladores de la Corte vienen como imagen (Anexo 23.5)."
       }
     ],
+    "ejercicio": {
+      "cp2025": {
+        "fuente": "CP2025",
+        "unidades": [
+          {
+            "ramo": "01",
+            "ur": "100",
+            "nombre": "H. C\u00e1mara de Diputados",
+            "original": 9602671330.0,
+            "modificado": 9926921396.51,
+            "devengado": 9926921396.51,
+            "pagado": 9926921396.51,
+            "ejercido": 9926921396.51
+          },
+          {
+            "ramo": "01",
+            "ur": "101",
+            "nombre": "Auditor\u00eda Superior de la Federaci\u00f3n",
+            "original": 2822588134.0,
+            "modificado": 3356780869.5,
+            "devengado": 3356780869.5,
+            "pagado": 3356780869.5,
+            "ejercido": 3356780869.5
+          },
+          {
+            "ramo": "01",
+            "ur": "200",
+            "nombre": "H. C\u00e1mara de Senadores",
+            "original": 5103817038.0,
+            "modificado": 5335926794.82,
+            "devengado": 5335926794.82,
+            "pagado": 5241887433.52,
+            "ejercido": 5335926794.82
+          },
+          {
+            "ramo": "03",
+            "ur": "100",
+            "nombre": "Suprema Corte de Justicia de la Naci\u00f3n",
+            "original": 5208511164.0,
+            "modificado": 5273784802.32,
+            "devengado": 5273784802.32,
+            "pagado": 5032120579.92,
+            "ejercido": 5273784802.32
+          },
+          {
+            "ramo": "03",
+            "ur": "110",
+            "nombre": "Consejo de la Judicatura Federal",
+            "original": 62025503862.0,
+            "modificado": 38684932301.08,
+            "devengado": 38684932301.08,
+            "pagado": 38591877063.18,
+            "ejercido": 38684932301.08
+          },
+          {
+            "ramo": "03",
+            "ur": "120",
+            "nombre": "\u00d3rgano de Administraci\u00f3n Judicial",
+            "original": 0.0,
+            "modificado": 34703602896.1,
+            "devengado": 34701722979.43,
+            "pagado": 30820909860.18,
+            "ejercido": 34701722979.43
+          },
+          {
+            "ramo": "03",
+            "ur": "210",
+            "nombre": "Sala Superior",
+            "original": 2883840440.0,
+            "modificado": 2553780617.73,
+            "devengado": 2547413115.73,
+            "pagado": 2456004989.09,
+            "ejercido": 2547413115.73
+          },
+          {
+            "ramo": "03",
+            "ur": "211",
+            "nombre": "Salas Regionales",
+            "original": 865750836.0,
+            "modificado": 839311292.58,
+            "devengado": 837568194.76,
+            "pagado": 806584253.18,
+            "ejercido": 837568194.76
+          },
+          {
+            "ramo": "03",
+            "ur": "300",
+            "nombre": "Tribunal de Disciplina Judicial",
+            "original": 0.0,
+            "modificado": 241168922.2,
+            "devengado": 241168922.2,
+            "pagado": 230764033.17,
+            "ejercido": 241168922.2
+          }
+        ],
+        "capitulosLegislativo": {
+          "100": [
+            {
+              "cap": "1000",
+              "concepto": "Servicios personales",
+              "ejercido": 5672924645.2
+            },
+            {
+              "cap": "2000",
+              "concepto": "Materiales y suministros",
+              "ejercido": 170633499.95
+            },
+            {
+              "cap": "3000",
+              "concepto": "Servicios generales",
+              "ejercido": 1630339334.33
+            },
+            {
+              "cap": "4000",
+              "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+              "ejercido": 1994082499.63
+            },
+            {
+              "cap": "5000",
+              "concepto": "Bienes muebles, inmuebles e intangibles",
+              "ejercido": 220239688.76
+            },
+            {
+              "cap": "6000",
+              "concepto": "Inversi\u00f3n p\u00fablica",
+              "ejercido": 238701728.64
+            }
+          ],
+          "200": [
+            {
+              "cap": "1000",
+              "concepto": "Servicios personales",
+              "ejercido": 3153196682.12
+            },
+            {
+              "cap": "2000",
+              "concepto": "Materiales y suministros",
+              "ejercido": 93549278.8
+            },
+            {
+              "cap": "3000",
+              "concepto": "Servicios generales",
+              "ejercido": 919329292.18
+            },
+            {
+              "cap": "4000",
+              "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+              "ejercido": 1156873218.73
+            },
+            {
+              "cap": "5000",
+              "concepto": "Bienes muebles, inmuebles e intangibles",
+              "ejercido": 12978322.99
+            }
+          ],
+          "101": [
+            {
+              "cap": "1000",
+              "concepto": "Servicios personales",
+              "ejercido": 2873830290.41
+            },
+            {
+              "cap": "2000",
+              "concepto": "Materiales y suministros",
+              "ejercido": 17580520.81
+            },
+            {
+              "cap": "3000",
+              "concepto": "Servicios generales",
+              "ejercido": 433618134.15
+            },
+            {
+              "cap": "4000",
+              "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+              "ejercido": 18200614.89
+            },
+            {
+              "cap": "5000",
+              "concepto": "Bienes muebles, inmuebles e intangibles",
+              "ejercido": 13551309.24
+            }
+          ]
+        },
+        "estado": "oficial"
+      },
+      "avance2026": {
+        "fuente": "AV2T2026",
+        "corte": "30 de junio de 2026",
+        "unidades": [
+          {
+            "ramo": "01",
+            "ur": "100",
+            "nombre": "H. C\u00e1mara de Diputados",
+            "aprobado": 9602671330.0,
+            "modificado": 9602671330.0,
+            "pagado": 3908689295.55
+          },
+          {
+            "ramo": "01",
+            "ur": "101",
+            "nombre": "Auditor\u00eda Superior de la Federaci\u00f3n",
+            "aprobado": 2822588131.0,
+            "modificado": 3371031329.2,
+            "pagado": 1338514011.38
+          },
+          {
+            "ramo": "01",
+            "ur": "200",
+            "nombre": "H. C\u00e1mara de Senadores",
+            "aprobado": 5103817038.0,
+            "modificado": 5103817038.0,
+            "pagado": 2187188742.79
+          },
+          {
+            "ramo": "03",
+            "ur": "100",
+            "nombre": "Suprema Corte de Justicia de la Naci\u00f3n",
+            "aprobado": 5208743404.0,
+            "modificado": 5208743404.0,
+            "pagado": 1939062490.66
+          },
+          {
+            "ramo": "03",
+            "ur": "120",
+            "nombre": "\u00d3rgano de Administraci\u00f3n Judicial",
+            "aprobado": 59190814696.0,
+            "modificado": 59190814696.0,
+            "pagado": 24963321913.56
+          },
+          {
+            "ramo": "03",
+            "ur": "210",
+            "nombre": "Sala Superior",
+            "aprobado": 2931820871.0,
+            "modificado": 2931820871.0,
+            "pagado": 809533548.65
+          },
+          {
+            "ramo": "03",
+            "ur": "211",
+            "nombre": "Salas Regionales",
+            "aprobado": 817672006.0,
+            "modificado": 817672006.0,
+            "pagado": 255269006.74
+          },
+          {
+            "ramo": "03",
+            "ur": "300",
+            "nombre": "Tribunal de Disciplina Judicial",
+            "aprobado": 1856577669.0,
+            "modificado": 1856577669.0,
+            "pagado": 1047775628.17
+          }
+        ],
+        "estado": "oficial"
+      },
+      "nota": "Hacienda consolida lo que cada ente le reporta; el propio ente puede publicar cifras distintas para el mismo periodo por fechas de registro. \u00abEjercido\u00bb incluye lo devengado y no pagado al cierre."
+    },
     "judicial": {
       "capitulosPorUR": {
         "RAMO03": [

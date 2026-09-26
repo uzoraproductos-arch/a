@@ -33,6 +33,16 @@ CONSULTA = '2026-09-25'
 # la huella SHA-256 del archivo descargado.
 # ---------------------------------------------------------------------------
 FUENTES = {
+    'CP2025': {
+        'corto': 'Cuenta Pública 2025, datos abiertos SHCP',
+        'doc': 'SHCP, Cuenta Pública 2025, base de datos abierta de ramos administrativos, generales y autónomos (Transparencia Presupuestaria)',
+        'url': 'https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv',
+        'sha256': '973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0'},
+    'AV2T2026': {
+        'corto': 'SHCP, avance del gasto al 2.º trimestre 2026',
+        'doc': 'SHCP, Presupuesto de Egresos 2026, avance del gasto (AC01) al segundo trimestre, base de datos abierta (Transparencia Presupuestaria)',
+        'url': 'https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv',
+        'sha256': 'faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511'},
     'PEF': {
         'corto': 'PEF 2026, DOF 21-11-2025',
         'doc': 'Decreto de Presupuesto de Egresos de la Federación 2026, DOF 21-11-2025 (edición vespertina)',
@@ -158,6 +168,21 @@ def filas(ws, desde):
             yield r
 
 
+def ejercicio_hacienda():
+    """Cierre 2025 y avance 2026 de los dos Poderes, de los datos abiertos de
+    Hacienda (lo produce extraer_ejercicio_poderes.py)."""
+    ruta = RAIZ / 'investigaciones' / 'ejercicio-poderes.json'
+    j = json.loads(ruta.read_text(encoding='utf-8'))
+    for k in ('cp2025', 'avance2026'):
+        j[k].pop('sha256', None)
+        j[k]['estado'] = 'oficial'
+    j.pop('urls', None)
+    j['nota'] = ('Hacienda consolida lo que cada ente le reporta; el propio ente puede publicar cifras '
+                 'distintas para el mismo periodo por fechas de registro. «Ejercido» incluye lo devengado '
+                 'y no pagado al cierre.')
+    return j
+
+
 def construir():
     pjf = openpyxl.load_workbook(XLS_PJF, data_only=True)
     d24 = openpyxl.load_workbook(XLS_2024, data_only=True)
@@ -258,6 +283,7 @@ def construir():
                               pagina='Anexo 1, DOF p. 32; proyecto y recorte: Anexo 32, DOF p. 108')
                       for k, v in RAMOS_2026.items()},
         'remuneraciones2026': REMUNERACIONES,
+        'ejercicio': ejercicio_hacienda(),
         'judicial': {
             'capitulosPorUR': capitulos,
             'scjnCortes': cortes,

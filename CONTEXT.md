@@ -1858,8 +1858,33 @@ vuelve a correrse si cambian los libros.
 - Un enlace `index.html#pestaña/subpestaña` abre los módulos plegados de la
   portada y baja a la subpestaña.
 
+### Hecho (2.6: lo ya gastado, cierre 2025 y avance 2026)
+
+- **Capítulo nuevo «Lo ya gastado»** en la 2.6 (ahora son siete): por cada
+  unidad del Congreso y del Poder Judicial, el original y el ejercido de 2025
+  (Cuenta Pública) y el aprobado, modificado y pagado al 30 de junio de 2026
+  (avance del gasto AC01), con barra de avance y marca de la mitad del año.
+  Lo legislativo trae además el ejercido 2025 por capítulo.
+- **Fuentes:** bases de datos abiertas de Transparencia Presupuestaria
+  (`CP2025`, `AV2T2026` en `poderes.fuentes`, con SHA-256). Se extraen con
+  `python3 herramientas/extraer_ejercicio_poderes.py CP.csv AVANCE.csv` a
+  `investigaciones/ejercicio-poderes.json`, que `integrar_poderes.py` lee.
+- **Controles:** el aprobado 2026 del avance coincide al peso con el Anexo 1
+  del PEF (Diputados 9,602,671,330; Senado 5,103,817,038; ASF 2,822,588,131);
+  el cierre 2025 de la SCJN coincide al peso con su propio estado analítico
+  (5,273,784,802 ejercidos).
+- **Nota técnica:** el servidor de Transparencia Presupuestaria manda una
+  cadena de certificados incompleta. Se descarga con `curl --http1.1
+  --cacert` y un paquete que agrega el intermedio YR1 y Root YR de Let's
+  Encrypt (del repositorio `letsencrypt/website`); nunca sin verificar.
+
 ### Pendiente
 
+- **El avance de 2026 se actualiza por trimestre:** cuando Hacienda publique
+  el tercer trimestre (fin de octubre), bajar el CSV y correr los dos
+  scripts. El pagado de Hacienda y el que publica cada ente pueden no
+  coincidir por fechas de registro (la SCJN reporta $2,101.3 mdp pagados al
+  30 de junio; Hacienda, $1,939.1 mdp).
 - **Extender la lectura por capítulos** al resto de las secciones largas,
   empezando por la 2.2 (megaobras: 7,666 px y 3,451 palabras), la 1.1, la
   2.4 y el Inspector. Espera el visto bueno del autor sobre el piloto.
