@@ -2039,8 +2039,38 @@ vuelve a correrse si cambian los libros.
   escriben a mano: se leen de la base con `data-cuenta`. El pie decía «más de
   120 conceptos» y «25 preceptos»; hoy son 212 y 28.
 
+### Hecho (Búsqueda Forense: Radar y Expedientes separados; íconos en los menús)
+
+- El Radar de Banderas Rojas y los Expedientes caían en el mismo lugar: la
+  barra de filtros de los expedientes estaba arriba del radar y el radar quedó
+  metido entre esa barra y las fichas. Ahora cada uno tiene su encabezado
+  (`#radarBanderasNacional` 🚩 y `#expedientesCasos` 📂), la barra de filtros
+  va pegada a sus fichas y el menú lleva a cada uno por separado.
+- El radar se reconstruyó con la Matriz de Datos Básicos de la ASF (CP 2024):
+  los 32 estados ordenados, a elección, por lo que quedó por aclarar por cada
+  $100 de muestra auditada (derivado; promedio nacional $2.58), por monto
+  por aclarar (oficial) o por la parte que corresponde a los municipios
+  (derivado). Cada tarjeta lleva a su estado en Informes de la Cuenta Pública.
+  Se retiró la tabla `PCT_ADJUDICACIONES_ESTATALES` (porcentaje de
+  adjudicación directa por estado): no tenía fuente y rellenaba con 60 % a
+  quien no tuviera dato.
+- `herramientas/integrar_asf_estados.py` (idempotente) reescribe en
+  `DB.estados` los campos `asfMontoObservado`, `asfAuditorias` y
+  `asfTipologia` con la matriz oficial y agrega `asfFuente`. Los montos
+  anteriores no cuadraban con la ASF (Aguascalientes decía $428 mdp; la ASF,
+  $343.3 mdp; Morelos, $890 contra $3,168.9) y las tipologías eran prosa sin
+  fuente. Eso corrige a la vez el mapa, el comparador, el Auditor de Entes y
+  el cajón de cada estado. El semáforo del cajón compara al estado contra el
+  promedio nacional y ya no usa el porcentaje de adjudicaciones.
+- Menús: «Módulo 5 · El Costo Ambiental» pasa a «El Costo Ambiental», y todos
+  los vínculos de Búsqueda Forense, Acción Financiera y Descargar Datos llevan
+  ícono, como ya los tenía Consultar Recursos. La descripción de Expedientes
+  decía «$51,024 mdp observados»: cifra que no es la de la ASF; se retiró.
+
 ### Pendiente
 
+- **Expedientes de casos (las seis fichas):** siguen con cifras propias sin
+  verificar contra los informes individuales; ver el renglón de abajo.
 - **Ligas de la FGR y del SAT (fichas 87 y 88):** no se pudieron volver a
   abrir desde el entorno de trabajo. `fgr.org.mx` lo bloquea la política de
   red del entorno (se permite en la configuración de red del entorno) y
@@ -2058,8 +2088,6 @@ vuelve a correrse si cambian los libros.
 - **Segunda entrega de la Cuenta Pública 2025 (30 de octubre de 2026):**
   bajar su matriz de datos básicos y actualizar `cp2025`; el 20 de febrero
   de 2027, la tercera y el Informe General.
-- **El radar de banderas rojas** tiene cifras propias por estado que no
-  siempre coinciden con la matriz de la ASF: revisarlas contra `cuenta_publica_asf`.
 - **Expedientes de Casos por Aclarar (Auditoría Forense):** las seis fichas
   no llevan chip ni número de auditoría, el botón «Informe ASF» abre la
   portada de la ASF y varias cifras no se pueden sostener como están (Tren

@@ -2199,9 +2199,10 @@ window.AUDIT_DB = {
       "partido": "PAN",
       "deuda": 3650,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 428,
-      "asfAuditorias": 38,
-      "asfTipologia": "Inconsistencias en licitación de insumos hospitalarios y comprobación de viáticos en seguridad.",
+      "asfMontoObservado": 343.3,
+      "asfAuditorias": 34,
+      "asfTipologia": "La ASF practicó 34 auditorías al dinero federal que recibió el estado y promovió 63 acciones, entre ellas 31 pliegos de observaciones y 24 promociones de responsabilidad administrativa. Quedaron $343.3 mdp por aclarar y se recuperaron $2.2 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Economía automotriz dinámica; alta dependencia federal mitigada por recaudación eficiente de ISN.",
       "municipios": [
         {
@@ -2274,9 +2275,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 22800,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1840,
-      "asfAuditorias": 54,
-      "asfTipologia": "Observaciones en asignación directa de obras del Fondo Metropolitano y pagos duplicados en nómina magisterial.",
+      "asfMontoObservado": 558.4,
+      "asfAuditorias": 29,
+      "asfTipologia": "La ASF practicó 29 auditorías al dinero federal que recibió el estado y promovió 59 acciones, entre ellas 28 pliegos de observaciones y 21 promociones de responsabilidad administrativa. Quedaron $558.4 mdp por aclarar y se recuperaron $10.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Potencia maquiladora y fronteriza. Elevada presión por servicio de deuda reestructurada de sexenios anteriores.",
       "municipios": [
         {
@@ -2349,9 +2351,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 3100,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 312,
-      "asfAuditorias": 32,
-      "asfTipologia": "Retrasos en ejecución de fondos para infraestructura hídrica y desalinizadoras.",
+      "asfMontoObservado": 225.1,
+      "asfAuditorias": 30,
+      "asfTipologia": "La ASF practicó 30 auditorías al dinero federal que recibió el estado y promovió 39 acciones, entre ellas 20 pliegos de observaciones y 9 promociones de responsabilidad administrativa. Quedaron $225.1 mdp por aclarar y se recuperaron $65.4 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Sector turismo de ultra lujo en Los Cabos genera alta derrama pero con fuerte contraste en colonias populares.",
       "municipios": [
         {
@@ -2407,9 +2410,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 2850,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 580,
+      "asfMontoObservado": 759.7,
       "asfAuditorias": 36,
-      "asfTipologia": "Fondos petroleros no comprobados y retenciones salariales no enteradas al SAT.",
+      "asfTipologia": "La ASF practicó 36 auditorías al dinero federal que recibió el estado y promovió 102 acciones, entre ellas 44 pliegos de observaciones y 44 promociones de responsabilidad administrativa. Quedaron $759.7 mdp por aclarar y se recuperaron $27.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Impactado por declive de producción de Cantarell; alta dependencia de transferencias federales de rescate.",
       "municipios": [
         {
@@ -2464,9 +2468,10 @@ window.AUDIT_DB = {
       "partido": "VERDE",
       "deuda": 21200,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 2667,
-      "asfAuditorias": 82,
-      "asfTipologia": "Uno de los estados con mayores irregularidades: desvío en nómina FONE, empresas fantasmas en municipios indígenas y obras de agua pagadas no concluidas.",
+      "asfMontoObservado": 4499.7,
+      "asfAuditorias": 64,
+      "asfTipologia": "La ASF practicó 64 auditorías al dinero federal que recibió el estado y promovió 227 acciones, entre ellas 122 pliegos de observaciones y 70 promociones de responsabilidad administrativa. Quedaron $4,499.7 mdp por aclarar y se recuperaron $19.3 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Estado con la mayor dependencia fiscal (95.3%). El 61% de sus recursos son Ramo 33 condicionado a pobreza extrema.",
       "municipios": [
         {
@@ -2555,9 +2560,10 @@ window.AUDIT_DB = {
       "partido": "PAN",
       "deuda": 49800,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1240,
-      "asfAuditorias": 58,
-      "asfTipologia": "Costo financiero exorbitante por deuda de administraciones previas; observaciones en fondos de seguridad pública y presas agrícolas.",
+      "asfMontoObservado": 2521.9,
+      "asfAuditorias": 60,
+      "asfTipologia": "La ASF practicó 60 auditorías al dinero federal que recibió el estado y promovió 234 acciones, entre ellas 95 pliegos de observaciones y 123 promociones de responsabilidad administrativa. Quedaron $2,521.9 mdp por aclarar y se recuperaron $5.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El estado más extenso territorialmente. Gran recaudación de ISN por clúster aeroespacial y maquilador pero lastrado por pasivos bancarios.",
       "municipios": [
         {
@@ -2613,9 +2619,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 98500,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1750,
-      "asfAuditorias": 88,
-      "asfTipologia": "Observaciones en subsidios de transporte masivo (Metro / Cablebús) y contratos de centros comunitarios UTOPÍAS.",
+      "asfMontoObservado": 2143.5,
+      "asfAuditorias": 31,
+      "asfTipologia": "La ASF practicó 31 auditorías al dinero federal que recibió el estado y promovió 104 acciones, entre ellas 36 pliegos de observaciones y 51 promociones de responsabilidad administrativa. Quedaron $2,143.5 mdp por aclarar y se recuperaron $1.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "La capital del país ostenta el mayor gasto per cápita ($34,874) y la menor dependencia fiscal (65%) gracias a una formidable recaudación de predial y nómina.",
       "municipios": [
         {
@@ -2705,9 +2712,10 @@ window.AUDIT_DB = {
       "partido": "PRI",
       "deuda": 42100,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 890,
-      "asfAuditorias": 46,
-      "asfTipologia": "Servicio de deuda bancaria comprometida; observaciones en compras policiales y apoyos a la región carbonífera.",
+      "asfMontoObservado": 1379.1,
+      "asfAuditorias": 62,
+      "asfTipologia": "La ASF practicó 62 auditorías al dinero federal que recibió el estado y promovió 183 acciones, entre ellas 120 pliegos de observaciones y 48 promociones de responsabilidad administrativa. Quedaron $1,379.1 mdp por aclarar y se recuperaron $9.5 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran dinamismo automotriz; alto compromiso de participaciones federales en garantía de pasivos financieros.",
       "municipios": [
         {
@@ -2762,9 +2770,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 4800,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 340,
-      "asfAuditorias": 30,
-      "asfTipologia": "Inconsistencias en adquisiciones de chalecos balísticos y equipo de peritaje forense.",
+      "asfMontoObservado": 485.7,
+      "asfAuditorias": 32,
+      "asfTipologia": "La ASF practicó 32 auditorías al dinero federal que recibió el estado y promovió 78 acciones, entre ellas 44 pliegos de observaciones y 16 promociones de responsabilidad administrativa. Quedaron $485.7 mdp por aclarar y se recuperaron $1.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El estado con el menor monto total de gasto federalizado por ser la entidad con menor población continental.",
       "municipios": [
         {
@@ -2819,9 +2828,10 @@ window.AUDIT_DB = {
       "partido": "PRI",
       "deuda": 12400,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 950,
-      "asfAuditorias": 44,
-      "asfTipologia": "Investigaciones penales en curso por desvío de participaciones federales en el cierre de la administración estatal previa.",
+      "asfMontoObservado": 1370.5,
+      "asfAuditorias": 41,
+      "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 117 acciones, entre ellas 59 pliegos de observaciones y 30 promociones de responsabilidad administrativa. Quedaron $1,370.5 mdp por aclarar y se recuperaron $7.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Estado con severa estrechez fiscal y necesidad recurrente de adelanto de participaciones para pagar aguinaldos.",
       "municipios": [
         {
@@ -2875,9 +2885,10 @@ window.AUDIT_DB = {
       "partido": "PAN",
       "deuda": 11800,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1350,
-      "asfAuditorias": 62,
-      "asfTipologia": "El estado con el MENOR gasto federalizado per cápita de México ($15,271); observaciones en contratos de seguridad y FONE.",
+      "asfMontoObservado": 2422.2,
+      "asfAuditorias": 70,
+      "asfTipologia": "La ASF practicó 70 auditorías al dinero federal que recibió el estado y promovió 146 acciones, entre ellas 77 pliegos de observaciones y 57 promociones de responsabilidad administrativa. Quedaron $2,422.2 mdp por aclarar y se recuperaron $208.1 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Potencia manufacturera castigada históricamente por la fórmula de la Ley de Coordinación Fiscal.",
       "municipios": [
         {
@@ -2950,9 +2961,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 4900,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 2180,
-      "asfAuditorias": 68,
-      "asfTipologia": "Auditorías críticas post-huracanes; fondos de emergencia con adjudicaciones directas no comprobadas e irregularidades en plazas docentes.",
+      "asfMontoObservado": 505.3,
+      "asfAuditorias": 49,
+      "asfTipologia": "La ASF practicó 49 auditorías al dinero federal que recibió el estado y promovió 125 acciones, entre ellas 48 pliegos de observaciones y 49 promociones de responsabilidad administrativa. Quedaron $505.3 mdp por aclarar y se recuperaron $27.4 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Dependencia fiscal extrema (95.5%). La mayor parte de su presupuesto se consume en gasto corriente e irreductible magisterial.",
       "municipios": [
         {
@@ -3008,9 +3020,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 4600,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 820,
-      "asfAuditorias": 48,
-      "asfTipologia": "Investigaciones derivadas del esquema de desvío de recursos conocido como 'Estafa Siniestra' en municipios rurales.",
+      "asfMontoObservado": 2152.7,
+      "asfAuditorias": 65,
+      "asfTipologia": "La ASF practicó 65 auditorías al dinero federal que recibió el estado y promovió 163 acciones, entre ellas 96 pliegos de observaciones y 46 promociones de responsabilidad administrativa. Quedaron $2,152.7 mdp por aclarar y se recuperaron $5.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Proceso de fiscalización y recuperación de recursos tras el cambio de régimen político estatal.",
       "municipios": [
         {
@@ -3065,9 +3078,10 @@ window.AUDIT_DB = {
       "partido": "MC",
       "deuda": 37500,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1890,
-      "asfAuditorias": 64,
-      "asfTipologia": "Observaciones recurrentes en FONE magisterial, sobrecostos en tramos de la Línea 4 del Tren Ligero y compras de insumos de salud en centros rurales.",
+      "asfMontoObservado": 2196.8,
+      "asfAuditorias": 77,
+      "asfTipologia": "La ASF practicó 77 auditorías al dinero federal que recibió el estado y promovió 228 acciones, entre ellas 109 pliegos de observaciones y 97 promociones de responsabilidad administrativa. Quedaron $2,196.8 mdp por aclarar y se recuperaron $102.1 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Pilar en el debate del Pacto Fiscal y la defensa del federalismo tributario; potente clúster agroindustrial y tecnológico.",
       "municipios": [
         {
@@ -3158,9 +3172,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 62000,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 7068,
-      "asfAuditorias": 112,
-      "asfTipologia": "El estado que MÁS dinero recibe y que MÁS irregularidades acumula ($7,068 mdp observados por ASF): desvíos en el sector salud (ISEM), nóminas opacas y obras viales inconclusas.",
+      "asfMontoObservado": 13198.7,
+      "asfAuditorias": 151,
+      "asfTipologia": "La ASF practicó 151 auditorías al dinero federal que recibió el estado y promovió 453 acciones, entre ellas 255 pliegos de observaciones y 166 promociones de responsabilidad administrativa. Quedaron $13,198.7 mdp por aclarar y se recuperaron $283.5 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El gigante demográfico nacional (17.5M hab). Recibe más presupuesto que 10 estados combinados pero enfrenta retos titánicos de opacidad.",
       "municipios": [
         {
@@ -3250,9 +3265,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 34200,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1820,
-      "asfAuditorias": 56,
-      "asfTipologia": "Auditorías focalizadas en el rescate de la nómina educativa no reconocida por FONE y compras de maquinaria agrícola.",
+      "asfMontoObservado": 1003.6,
+      "asfAuditorias": 48,
+      "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 108 acciones, entre ellas 44 pliegos de observaciones y 45 promociones de responsabilidad administrativa. Quedaron $1,003.6 mdp por aclarar y se recuperaron $62.1 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran potencia agrícola y puerto marítimo (Lázaro Cárdenas); severa debilidad en recaudación fiscal municipal y local.",
       "municipios": [
         {
@@ -3307,9 +3323,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 8200,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 890,
-      "asfAuditorias": 40,
-      "asfTipologia": "Investigaciones a fideicomisos turísticos del sexenio previo y pagos sin comprobante en seguridad pública.",
+      "asfMontoObservado": 3168.9,
+      "asfAuditorias": 58,
+      "asfTipologia": "La ASF practicó 58 auditorías al dinero federal que recibió el estado y promovió 233 acciones, entre ellas 113 pliegos de observaciones y 100 promociones de responsabilidad administrativa. Quedaron $3,168.9 mdp por aclarar y se recuperaron $3.7 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Reestructuración administrativa tras años de tensión institucional; rescate de servicios públicos básicos.",
       "municipios": [
         {
@@ -3364,9 +3381,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 6400,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 490,
-      "asfAuditorias": 34,
-      "asfTipologia": "Observaciones en la Universidad Autónoma de Nayarit (UAN) por pensiones no sustentadas y desvío de subsidios.",
+      "asfMontoObservado": 915.0,
+      "asfAuditorias": 41,
+      "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 118 acciones, entre ellas 54 pliegos de observaciones y 41 promociones de responsabilidad administrativa. Quedaron $915.0 mdp por aclarar y se recuperaron $2.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Fuerte inversión federal en autopistas turísticas; baja recaudación tributaria local.",
       "municipios": [
         {
@@ -3421,9 +3439,10 @@ window.AUDIT_DB = {
       "partido": "MC",
       "deuda": 88000,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 2204,
-      "asfAuditorias": 72,
-      "asfTipologia": "Uno de los estados con más observaciones en obras estratégicas: Líneas 4, 5 y 6 del Metrorrey, Presa Libertad y contratos de comunicación social.",
+      "asfMontoObservado": 4539.7,
+      "asfAuditorias": 73,
+      "asfTipologia": "La ASF practicó 73 auditorías al dinero federal que recibió el estado y promovió 215 acciones, entre ellas 123 pliegos de observaciones y 80 promociones de responsabilidad administrativa. Quedaron $4,539.7 mdp por aclarar y se recuperaron $28.5 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "La capital industrial de México. Tiene la menor dependencia federal de provincia (62%) pero una deuda pública abultada en el límite de la Ley de Disciplina Financiera.",
       "municipios": [
         {
@@ -3514,9 +3533,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 18500,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1950,
-      "asfAuditorias": 78,
-      "asfTipologia": "El estado con más municipios del país (570, 417 por Usos y Costumbres). Observaciones en obras comunitarias del Corredor Interoceánico y transferencias directas sin comprobantes.",
+      "asfMontoObservado": 2024.4,
+      "asfAuditorias": 60,
+      "asfTipologia": "La ASF practicó 60 auditorías al dinero federal que recibió el estado y promovió 159 acciones, entre ellas 92 pliegos de observaciones y 46 promociones de responsabilidad administrativa. Quedaron $2,024.4 mdp por aclarar y se recuperaron $10.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Dependencia extrema de la federación (95%). El Ramo 33 representa más del doble que sus participaciones libres.",
       "municipios": [
         {
@@ -3588,9 +3608,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 41500,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1680,
-      "asfAuditorias": 70,
-      "asfTipologia": "Comprobación de pagos de deuda oculta bajo esquemas PPS (Museo Barroco, Plataforma Audi, RUTA); observaciones en nóminas del CAPCEE.",
+      "asfMontoObservado": 931.2,
+      "asfAuditorias": 62,
+      "asfTipologia": "La ASF practicó 62 auditorías al dinero federal que recibió el estado y promovió 145 acciones, entre ellas 66 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $931.2 mdp por aclarar y se recuperaron $15.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran polarización económica entre la zona metropolitana automotriz (Volkswagen/Audi) y la Sierra Norte con alta marginación.",
       "municipios": [
         {
@@ -3663,9 +3684,10 @@ window.AUDIT_DB = {
       "partido": "PAN",
       "deuda": 4200,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 410,
-      "asfAuditorias": 42,
-      "asfTipologia": "Uno de los estados con MENOR índice de observaciones del país; revisiones en la magna obra de Av. 5 de Febrero.",
+      "asfMontoObservado": 243.7,
+      "asfAuditorias": 38,
+      "asfTipologia": "La ASF practicó 38 auditorías al dinero federal que recibió el estado y promovió 68 acciones, entre ellas 33 pliegos de observaciones y 26 promociones de responsabilidad administrativa. Quedaron $243.7 mdp por aclarar y se recuperaron $4.3 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran polo de atracción aeroespacial y de centros de datos; finanzas públicas de las más sólidas de la federación.",
       "municipios": [
         {
@@ -3738,9 +3760,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 23500,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 980,
-      "asfAuditorias": 45,
-      "asfTipologia": "Contratos de fideicomisos turísticos (CPTQ), derechos de saneamiento ambiental y obras de mitigación de sargazo.",
+      "asfMontoObservado": 428.3,
+      "asfAuditorias": 38,
+      "asfTipologia": "La ASF practicó 38 auditorías al dinero federal que recibió el estado y promovió 24 acciones, entre ellas 13 pliegos de observaciones y 2 promociones de responsabilidad administrativa. Quedaron $428.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El gigante turístico de México (Cancún, Riviera Maya, Tulum); alta deuda heredada de administraciones pasadas.",
       "municipios": [
         {
@@ -3813,9 +3836,10 @@ window.AUDIT_DB = {
       "partido": "VERDE",
       "deuda": 8900,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1120,
-      "asfAuditorias": 50,
-      "asfTipologia": "Auditorías al sistema estatal de transporte metrored y entrega de despensas alimentarias en zonas marginadas.",
+      "asfMontoObservado": 592.5,
+      "asfAuditorias": 82,
+      "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 206 acciones, entre ellas 123 pliegos de observaciones y 63 promociones de responsabilidad administrativa. Quedaron $592.5 mdp por aclarar y se recuperaron $24.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran crecimiento industrial automotriz (BMW/GM); finanzas con fuerte orientación a subsidios sociales directos.",
       "municipios": [
         {
@@ -3871,9 +3895,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 9800,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1290,
-      "asfAuditorias": 52,
-      "asfTipologia": "Auditorías en compras emergentes de granos (maíz estatal) y gastos operativos policiales.",
+      "asfMontoObservado": 574.6,
+      "asfAuditorias": 42,
+      "asfTipologia": "La ASF practicó 42 auditorías al dinero federal que recibió el estado y promovió 73 acciones, entre ellas 41 pliegos de observaciones y 23 promociones de responsabilidad administrativa. Quedaron $574.6 mdp por aclarar y se recuperaron $3.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El granero de México (maíz, tomate); tensiones en gasto corriente por contingencias de seguridad.",
       "municipios": [
         {
@@ -3929,9 +3954,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 31200,
       "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1420,
-      "asfAuditorias": 54,
-      "asfTipologia": "Revisión en proyectos del Plan Sonora de Energía Renovable y modernización del puerto de Guaymas.",
+      "asfMontoObservado": 619.6,
+      "asfAuditorias": 48,
+      "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 108 acciones, entre ellas 49 pliegos de observaciones y 38 promociones de responsabilidad administrativa. Quedaron $619.6 mdp por aclarar y se recuperaron $2.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Pilar en la transición energética con plantas fotovoltaicas gigantes y reservas de litio.",
       "municipios": [
         {
@@ -3987,9 +4013,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 6500,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1850,
-      "asfAuditorias": 60,
-      "asfTipologia": "Observaciones por miles de millones en la refinería Olmeca (Dos Bocas), dragado de ríos y obras de protección de Conagua.",
+      "asfMontoObservado": 1586.0,
+      "asfAuditorias": 41,
+      "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 172 acciones, entre ellas 53 pliegos de observaciones y 102 promociones de responsabilidad administrativa. Quedaron $1,586.0 mdp por aclarar y se recuperaron $12.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El estado con el mayor gasto federalizado per cápita de toda la república ($38,467) por impacto de las megaobras energéticas.",
       "municipios": [
         {
@@ -4044,9 +4071,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 18500,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1580,
-      "asfAuditorias": 58,
-      "asfTipologia": "Investigaciones penales sobre fideicomisos de seguridad de administraciones previas; fiscalización aduanera de hidrocarburos.",
+      "asfMontoObservado": 401.7,
+      "asfAuditorias": 66,
+      "asfTipologia": "La ASF practicó 66 auditorías al dinero federal que recibió el estado y promovió 106 acciones, entre ellas 52 pliegos de observaciones y 44 promociones de responsabilidad administrativa. Quedaron $401.7 mdp por aclarar y se recuperaron $33.2 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Líder en cruces fronterizos de comercio exterior (Nuevo Laredo recauda el 25% de todo el IVA nacional en aduanas).",
       "municipios": [
         {
@@ -4118,9 +4146,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 0,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 390,
-      "asfAuditorias": 32,
-      "asfTipologia": "Único estado de México por mandato constitucional con CERO deuda bancaria; observaciones concentradas en el FONE.",
+      "asfMontoObservado": 418.3,
+      "asfAuditorias": 82,
+      "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 191 acciones, entre ellas 108 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $418.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Modelo fiscal sin deuda bancaria pública; alta dependencia de transferencias federales y baja recaudación propia.",
       "municipios": [
         {
@@ -4174,9 +4203,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 48500,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 2523,
-      "asfAuditorias": 86,
-      "asfTipologia": "El tercer estado con más observaciones de la república: empresas fantasma en servicios de salud, desvíos en el Fondo de Aportaciones Múltiples (FAM) y subejercicio deliberado de recursos.",
+      "asfMontoObservado": 4460.8,
+      "asfAuditorias": 126,
+      "asfTipologia": "La ASF practicó 126 auditorías al dinero federal que recibió el estado y promovió 357 acciones, entre ellas 207 pliegos de observaciones y 134 promociones de responsabilidad administrativa. Quedaron $4,460.8 mdp por aclarar y se recuperaron $3.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gigante costero y petrolero. El 90% de sus ingresos provienen de la federación; gran rezago en infraestructura municipal.",
       "municipios": [
         {
@@ -4249,9 +4279,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 11200,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 480,
-      "asfAuditorias": 44,
-      "asfTipologia": "Observaciones por adquisición de unidades de transporte Va y Ven e Ie-Tram, y apoyos agrícolas al henequén.",
+      "asfMontoObservado": 1989.7,
+      "asfAuditorias": 48,
+      "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 134 acciones, entre ellas 81 pliegos de observaciones y 28 promociones de responsabilidad administrativa. Quedaron $1,989.7 mdp por aclarar y se recuperaron $5.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Referente nacional en seguridad ciudadana y certidumbre jurídica; finanzas en crecimiento sostenido.",
       "municipios": [
         {
@@ -4307,9 +4338,10 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 7900,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 740,
-      "asfAuditorias": 42,
-      "asfTipologia": "Falta de comprobación en fondo de aportaciones mineras y pliegos por retraso en el viaducto elevado de la capital.",
+      "asfMontoObservado": 702.2,
+      "asfAuditorias": 39,
+      "asfTipologia": "La ASF practicó 39 auditorías al dinero federal que recibió el estado y promovió 92 acciones, entre ellas 40 pliegos de observaciones y 41 promociones de responsabilidad administrativa. Quedaron $702.2 mdp por aclarar y se recuperaron $3.4 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Líder en minería de metales preciosos; paradoja de enorme riqueza extraída pero muy precaria captación tributaria local.",
       "municipios": [
         {

@@ -739,7 +739,7 @@
     // Alerta ASF
     document.getElementById('dAsfAmount').innerText = `$${formatNumber(st.asfMontoObservado)} mdp`;
     document.getElementById('dAsfAuditCount').innerText = `${st.asfAuditorias} auditorías`;
-    document.getElementById('dAsfDesc').innerText = st.asfTipologia;
+    document.getElementById('dAsfDesc').innerHTML = escHtml(st.asfTipologia) + (st.asfFuente ? ' ' + chipEstado('oficial') + ' <small>' + escHtml(st.asfFuente) + '.</small>' : '');
 
     // Semáforo Forense de Banderas Rojas (Estilo Operación Serenata de Amor)
     const rfPanel = document.getElementById('dRedFlagsPanel');
@@ -26772,75 +26772,47 @@
   // ==========================================================================
   // BANDERAS ROJAS FORENSES ASF (ESTILO OPERACIÓN SERENATA DE AMOR / ROSIE)
   // ==========================================================================
-  const PCT_ADJUDICACIONES_ESTATALES = {
-    "AGS": 48.5, "BC": 64.2, "BCS": 58.0, "CAM": 68.4, "COAH": 62.5,
-    "COL": 54.8, "CHIS": 81.2, "CHIH": 59.4, "CDMX": 67.8, "DGO": 63.0,
-    "GTO": 45.2, "GRO": 84.5, "HGO": 66.0, "JAL": 65.4, "MEX": 76.8,
-    "MICH": 72.1, "MOR": 69.5, "NAY": 66.8, "NL": 61.2, "OAX": 79.5,
-    "PUE": 68.0, "QRO": 42.1, "QROO": 65.0, "SLP": 61.5, "SIN": 58.6,
-    "SON": 63.8, "TAB": 71.4, "TAM": 64.0, "TLAX": 52.3, "VER": 82.6,
-    "YUC": 51.0, "ZAC": 73.2
-  };
+  /* El radar y el semaforo del estado leen la Matriz de Datos Basicos de la
+     ASF (DB.cuenta_publica_asf). Antes usaban un porcentaje de adjudicacion
+     directa por estado que no tenia fuente: se retiro. */
+  function radarNorm(t) { return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/^estado de /, ''); }
+
+  function cpEntidadDeEstado(st) {
+    const C = DB.cuenta_publica_asf;
+    if (!C || !st) return null;
+    const n = radarNorm(st.name);
+    return C.cp2024.entidades.find(e => { const m = radarNorm(e.entidad); return m === n || m.startsWith(n + ' '); }) || null;
+  }
+
+  /* Por aclarar por cada $100 de muestra auditada, en todo el pais. */
+  function radarPromedioNacional() {
+    const L = DB.cuenta_publica_asf.cp2024.entidades;
+    const pa = L.reduce((s, e) => s + e.total.porAclarar, 0), mu = L.reduce((s, e) => s + e.total.muestra, 0);
+    return pa / mu * 100;
+  }
 
   function obtenerBanderasRojasEstado(st) {
     if (!st) return [];
     const flags = [];
-    const padj = PCT_ADJUDICACIONES_ESTATALES[st.abbr] || 60.0;
-    const obs = st.asfMontoObservado || 0;
+    const mdb = cpEntidadDeEstado(st);
 
-    // 1. Observaciones ASF
-    if (obs >= 500) {
-      flags.append ? null : null;
+    // 1. Monto por aclarar ante la ASF (Matriz de Datos Basicos, CP 2024)
+    if (mdb) {
+      const t = mdb.total, r = t.porAclarar / t.muestra * 100, prom = radarPromedioNacional();
+      const tipo = r >= prom * 1.5 ? 'critica' : (r >= prom ? 'alerta' : 'ok');
       flags.push({
-        tipo: 'critica',
-        icono: '🔴',
-        categoria: 'Observaciones ASF',
-        titulo: `Monto Crítico por Aclarar: $${formatNumber(obs)} mdp`,
-        detalle: st.asfTipologia || 'Expedientes de presunto daño patrimonial en revisión por la ASF.',
-        fuente: 'ASF · Informe del Resultado de la Fiscalización Superior'
-      });
-    } else if (obs >= 100) {
-      flags.push({
-        tipo: 'alerta',
-        icono: '🟡',
-        categoria: 'Observaciones ASF',
-        titulo: `Observaciones Medias ASF: $${formatNumber(obs)} mdp`,
-        detalle: st.asfTipologia || 'Pliegos de observaciones y solicitudes de aclaración en trámite.',
-        fuente: 'ASF · Fiscalización del Gasto Federalizado'
-      });
-    } else {
-      flags.push({
-        tipo: 'ok',
-        icono: '🟢',
-        categoria: 'Observaciones ASF',
-        titulo: `Margen Favorable: $${formatNumber(obs)} mdp observados`,
-        detalle: 'Observaciones por debajo de la media nacional subnacional.',
-        fuente: 'ASF · Cuenta Pública'
+        tipo: tipo,
+        icono: tipo === 'critica' ? '🔴' : (tipo === 'alerta' ? '🟡' : '🟢'),
+        categoria: 'Por aclarar ante la ASF',
+        titulo: 'Por aclarar: ' + pdMdp(t.porAclarar) + ' en la Cuenta Pública 2024',
+        detalle: 'De cada $100 que la ASF revisó del dinero federal que recibió el estado, quedaron $' + r.toFixed(2) + ' por aclarar; el promedio nacional es $' + prom.toFixed(2) + '. ' +
+          (tipo === 'critica' ? 'Es al menos una vez y media el promedio.' : (tipo === 'alerta' ? 'Está por encima del promedio.' : 'Está por debajo del promedio.')) +
+          ' Un monto por aclarar puede solventarse con documentos: no es un daño probado.',
+        fuente: 'ASF, Matriz de Datos Básicos CP 2024 (corte feb. 2026) · cálculo de Auditavisión'
       });
     }
 
-    // 2. Adjudicaciones directas
-    if (padj >= 70) {
-      flags.push({
-        tipo: 'critica',
-        icono: '🚩',
-        categoria: 'Adjudicación Directa',
-        titulo: `Riesgo Alto de Compras a Modo: ${padj}% sin concurso`,
-        detalle: 'Siete de cada diez pesos de gasto estatal se asignan de forma directa evitando la licitación pública abierta.',
-        fuente: 'ASF · Auditoría de Cumplimiento a Adquisiciones'
-      });
-    } else if (padj >= 55) {
-      flags.push({
-        tipo: 'alerta',
-        icono: '⚠️',
-        categoria: 'Adjudicación Directa',
-        titulo: `Concentración Moderada: ${padj}% en asignación directa`,
-        detalle: 'Uso frecuente de causales de excepción a la ley de adquisiciones.',
-        fuente: 'ASF · Fiscalización Superior'
-      });
-    }
-
-    // 3. Dependencia extrema
+    // 2. Dependencia extrema
     if (st.dep >= 88) {
       flags.push({
         tipo: 'critica',
@@ -26852,7 +26824,7 @@
       });
     }
 
-    // 4. Semáforo de deuda
+    // 3. Semáforo de deuda
     if (st.semaforoDeuda === 'Rojo') {
       flags.push({
         tipo: 'critica',
@@ -26928,7 +26900,7 @@
           <div class="red-flag-summary-counts">
             ${criticas > 0 ? `<span class="flag-count-pill critica">🔴 ${criticas} Críticas</span>` : ''}
             ${alertas > 0 ? `<span class="flag-count-pill alerta">🟡 ${alertas} Alertas</span>` : ''}
-            ${ok > 0 ? `<span class="flag-count-pill ok">🟢 ${ok} Solventadas</span>` : ''}
+            ${ok > 0 ? `<span class="flag-count-pill ok">🟢 ${ok} Sin alerta</span>` : ''}
           </div>
         </div>
 
@@ -26956,45 +26928,66 @@
     }
   }
 
+  /* Radar de banderas rojas por entidad: los 32 estados de la Matriz de
+     Datos Basicos de la ASF (CP 2024), ordenados por el criterio elegido. */
+  const RADAR_CRITERIOS = {
+    intensidad: { etq: 'Por cada $100 revisados', val: t => t.porAclarar / t.muestra * 100, fmt: v => '$' + v.toFixed(2) },
+    monto: { etq: 'Monto por aclarar', val: t => t.porAclarar, fmt: v => pdMdp(v) },
+    municipios: { etq: 'Peso de los municipios', val: (t, e) => radarMunicipal(e), fmt: v => pdPct(v) }
+  };
+  let radarCriterio = 'intensidad';
+
+  function radarMunicipal(e) {
+    const m = e.desglose.find(d => /^Municipios/.test(d.ente));
+    return m && e.total.porAclarar ? m.porAclarar / e.total.porAclarar * 100 : 0;
+  }
+
+  function radarOrdenar(criterio) {
+    if (RADAR_CRITERIOS[criterio]) radarCriterio = criterio;
+    renderRadarBanderasNacional();
+  }
+
+  function radarVerEstado(entidad) {
+    cpElegirEntidad(entidad);
+    if (capEstado.cuentapublica) capIr('cuentapublica', 3);
+  }
+
   function renderRadarBanderasNacional() {
     const container = document.getElementById('radarBanderasNacionalContainer');
-    if (!container || !window.AUDIT_DB || !window.AUDIT_DB.estados) return;
+    const C = DB.cuenta_publica_asf;
+    if (!container) return;
+    if (!C) {
+      container.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base no trae la Matriz de Datos Básicos de la ASF.</p>';
+      return;
+    }
+    const crit = RADAR_CRITERIOS[radarCriterio];
+    const lista = C.cp2024.entidades.map(e => ({ e: e, v: crit.val(e.total, e) })).sort((a, b) => b.v - a.v);
+    const prom = radarPromedioNacional();
 
-    // Ordenar estados por monto observado ASF descendente
-    const sorted = [...window.AUDIT_DB.estados].sort((a, b) => (b.asfMontoObservado || 0) - (a.asfMontoObservado || 0));
-    const top6 = sorted.slice(0, 6);
+    const botones = document.getElementById('radarCriterios');
+    if (botones) botones.innerHTML = '<span class="radar-criterios-etq">Ordenar por:</span>' + Object.keys(RADAR_CRITERIOS).map(k =>
+      '<button type="button" class="forensic-chip-btn' + (k === radarCriterio ? ' active' : '') + '" aria-pressed="' + (k === radarCriterio) + '" onclick="window.AuditEngine.radarOrdenar(\'' + k + '\')">' + RADAR_CRITERIOS[k].etq + '</button>').join('');
 
-    container.innerHTML = top6.map(st => {
-      const padj = PCT_ADJUDICACIONES_ESTATALES[st.abbr] || 60.0;
-      return `
-        <div class="radar-state-flag-card" onclick="window.AuditEngine.abrirExpedienteEstado('${st.abbr}')" title="Clic para abrir expediente forense de ${st.name}">
-          <div class="radar-state-flag-top">
-            <span class="radar-state-name">${st.name} (${st.abbr})</span>
-            <span class="chip chip-${st.asfMontoObservado >= 1000 ? 'derivado' : 'oficial'}">
-              ${st.asfMontoObservado >= 1000 ? '🚨 Crítico' : '⚠️ Observado'}
-            </span>
-          </div>
-          <div class="radar-state-metric-row">
-            <span>Observaciones ASF:</span>
-            <strong style="color:var(--red); font-size:13px;">$${formatNumber(st.asfMontoObservado)} mdp</strong>
-          </div>
-          <div class="radar-state-metric-row">
-            <span>Adjudicaciones directas:</span>
-            <strong style="color:var(--amber);">${padj}% sin licitar</strong>
-          </div>
-          <div class="radar-state-metric-row">
-            <span>Dependencia federal:</span>
-            <span>${st.dep}%</span>
-          </div>
-          <div style="font-size:11px; color:var(--text-dim); margin-top:6px; line-height:1.3;">
-            <em>${st.asfTipologia}</em>
-          </div>
-          <div style="font-family:var(--font-mono); font-size:11px; color:var(--gold-bright); margin-top:8px; text-align:right;">
-            Ver expediente completo ➔
-          </div>
-        </div>
-      `;
+    container.innerHTML = lista.slice(0, 6).map((x, i) => {
+      const t = x.e.total, r = t.porAclarar / t.muestra * 100, ent = pdEsc(x.e.entidad).replace(/'/g, '\\\'');
+      return '<button type="button" class="radar-state-flag-card" onclick="window.AuditEngine.radarVerEstado(\'' + ent + '\')" title="Ver ' + pdEsc(cpNombre(x.e.entidad)) + ' en los Informes de la Cuenta Pública">' +
+          '<div class="radar-state-flag-top">' +
+            '<span class="radar-state-name">' + (i + 1) + '. ' + pdEsc(cpNombre(x.e.entidad)) + '</span>' +
+            '<span class="radar-state-valor num-tabular">' + crit.fmt(x.v) + '</span>' +
+          '</div>' +
+          '<div class="radar-state-metric-row"><span>Por aclarar ' + chipEstado('oficial') + '</span><strong class="num-tabular">' + pdMdp(t.porAclarar) + '</strong></div>' +
+          '<div class="radar-state-metric-row"><span>Por cada $100 revisados ' + chipEstado('derivado') + '</span><strong class="num-tabular">$' + r.toFixed(2) + '</strong></div>' +
+          '<div class="radar-state-metric-row"><span>Parte de los municipios ' + chipEstado('derivado') + '</span><strong class="num-tabular">' + pdPct(radarMunicipal(x.e)) + '</strong></div>' +
+          '<div class="radar-state-metric-row"><span>Auditorías y acciones ' + chipEstado('oficial') + '</span><strong class="num-tabular">' + amNum(t.auditorias) + ' · ' + amNum(t.acciones) + '</strong></div>' +
+          '<span class="radar-state-ir">Ver su estado en la Cuenta Pública ➔</span>' +
+        '</button>';
     }).join('');
+
+    const nota = document.getElementById('radarNota');
+    if (nota) nota.innerHTML = chipEstado('oficial') + ' Monto por aclarar, auditorías y acciones: ' + cpFuente('MDB2024', C.cp2024.paginaEntidades) + '. ' +
+      chipEstado('derivado') + ' «Por cada $100 revisados» divide el monto por aclarar entre la muestra auditada del estado (promedio nacional: $' + prom.toFixed(2) + '); «parte de los municipios» divide lo que quedó por aclarar a los municipios entre el total del estado. ' +
+      'Una bandera roja no es una acusación: un monto por aclarar puede solventarse con documentos. Los 32 estados, con su desglose, están en ' +
+      '<a href="#cuentaPublicaASF" class="radar-ir-cp" onclick="event.preventDefault(); window.AuditEngine.radarVerEstado(\'' + pdEsc(lista[0].e.entidad).replace(/'/g, '\\\'') + '\')">Informes de la Cuenta Pública</a>.';
   }
 
   /* Notificación cívica para módulos en proceso de evaluación y desarrollo nativo */
@@ -27407,6 +27400,8 @@
     renderPanelBanderasRojas: renderPanelBanderasRojas,
     abrirExpedienteEstado: abrirExpedienteEstado,
     renderRadarBanderasNacional: renderRadarBanderasNacional,
+    radarOrdenar: radarOrdenar,
+    radarVerEstado: radarVerEstado,
   };
 
   document.addEventListener('DOMContentLoaded', init);

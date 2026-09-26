@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926n">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926o">
 </head>
 <body>
 
@@ -121,26 +121,26 @@
           <div class="mega-menu-col">
             <span class="mega-col-title">🔍 Asignaciones y Contratos</span>
             <a href="#inspExplorador" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'inspExplorador'); window.AuditEngine.cerrarMegaMenus(); setTimeout(function(){ var i=document.getElementById('inspBuscador'); if(i) i.focus({preventScroll:true}); }, 1000);" class="mega-link-item">
-              <span class="mega-link-name">Auditor de Entes Públicos</span>
+              <span class="mega-link-name">🏛️ Auditor de Entes Públicos</span>
               <span class="mega-link-desc">Busque una dependencia, un estado o un municipio y abra su expediente: autonomía, deuda y observaciones de la ASF.</span>
             </a>
             <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Contratos federales en ComprasMX ↗</span>
+              <span class="mega-link-name">📝 Contratos federales en ComprasMX ↗</span>
               <span class="mega-link-desc">La plataforma oficial que sustituyó a CompraNet en 2025. Tome de ahí el RFC del proveedor y verifíquelo aquí.</span>
             </a>
             <a href="#radarBanderasNacional" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'radarBanderasNacional'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Radar de Banderas Rojas por Entidad</span>
-              <span class="mega-link-desc">Montos por aclarar ante la ASF, adjudicación directa y dependencia del dinero federal, estado por estado.</span>
+              <span class="mega-link-name">🚩 Radar de Banderas Rojas por Entidad</span>
+              <span class="mega-link-desc">Qué estados dejaron más dinero federal por aclarar ante la ASF en la Cuenta Pública 2024, ordenados a su elección.</span>
             </a>
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">⚠️ Detección y Riesgos ASF</span>
-            <a href="#forensicDossiersGrid" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'forensicHeaderBar'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Expedientes de Casos por Aclarar</span>
-              <span class="mega-link-desc">$51,024 mdp observados por la ASF pendientes de solventar.</span>
+            <a href="#expedientesCasos" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'expedientesCasos'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+              <span class="mega-link-name">📂 Expedientes de Casos por Aclarar</span>
+              <span class="mega-link-desc">Seis casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.</span>
             </a>
             <a href="#efosVerificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.efosAbrir();">
-              <span class="mega-link-name">¿Su proveedor está en la lista negra del SAT? (69-B)</span>
+              <span class="mega-link-name">🧾 ¿Su proveedor está en la lista negra del SAT? (69-B)</span>
               <span class="mega-link-desc">14,234 registros del listado oficial: presuntos, definitivos, desvirtuados y con sentencia favorable.</span>
             </a>
           </div>
@@ -156,42 +156,42 @@
           <div class="mega-menu-col">
             <span class="mega-col-title">📊 Presupuesto Federal</span>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('presupuesto'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Explorador del PEF 2026</span>
+              <span class="mega-link-name">💰 Explorador del PEF 2026</span>
               <span class="mega-link-desc">Desglose de los $10.19 billones aprobados en el Circuito del Dinero.</span>
             </a>
             <a href="#eb-egresos" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.seleccionarModuloExplorer('presupuesto', 'eb-egresos'); setTimeout(function(){ var c=document.querySelector('#eb-egresos .erario-pleg-cab'); if(c && c.getAttribute('aria-expanded')==='false') window.AuditEngine.erarioPlegToggle('egresos'); }, 150);">
-              <span class="mega-link-name">Ramos y Dependencias del PEF 2026</span>
+              <span class="mega-link-name">🏢 Ramos y Dependencias del PEF 2026</span>
               <span class="mega-link-desc">Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Inversión Pública & Megaobras</span>
+              <span class="mega-link-name">🏗️ Inversión Pública & Megaobras</span>
               <span class="mega-link-desc">Costos, sobrecostos y subsidios de Tren Maya, Dos Bocas y AIFA.</span>
             </a>
             <a href="#accion-financiera/proyeccion2027" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('proyeccion2027'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Paquete Económico 2027</span>
+              <span class="mega-link-name">📈 Paquete Económico 2027</span>
               <span class="mega-link-desc">La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos, y la Constitución económica que lo sustenta.</span>
             </a>
             <a href="#ambiente" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('ambiente'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🌎 Módulo 5 · El Costo Ambiental</span>
+              <span class="mega-link-name">🌎 El Costo Ambiental</span>
               <span class="mega-link-desc">Reloj en vivo del daño ambiental, tu basura y tu parte del daño, el servicio municipal de basura y el presupuesto ambiental 2026-2027.</span>
             </a>
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">🗺️ Entidades y Municipios</span>
             <a href="#accion-financiera/territorio" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('territorio'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Las 32 Entidades: del Peso Federal al Estatal</span>
+              <span class="mega-link-name">🗺️ Las 32 Entidades: del Peso Federal al Estatal</span>
               <span class="mega-link-desc">Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.</span>
             </a>
             <a href="#accion-financiera/municipios" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('municipios'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Los 2,479 Municipios: Predial y Transferencias</span>
+              <span class="mega-link-name">🏘️ Los 2,479 Municipios: Predial y Transferencias</span>
               <span class="mega-link-desc">Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Calculadora Cívica de Tu Sueldo</span>
+              <span class="mega-link-name">🧮 Calculadora Cívica de Tu Sueldo</span>
               <span class="mega-link-desc">A qué rubros y fondos se van los impuestos de tu nómina.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('poderes'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Lo que Cuestan el Congreso y la Judicatura</span>
+              <span class="mega-link-name">⚖️ Lo que Cuestan el Congreso y la Judicatura</span>
               <span class="mega-link-desc">Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.</span>
             </a>
           </div>
@@ -207,22 +207,22 @@
           <div class="mega-menu-col">
             <span class="mega-col-title">💾 Datos Abiertos</span>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas();">
-              <span class="mega-link-name">Descarga en CSV (abre en Excel)</span>
+              <span class="mega-link-name">📥 Descarga en CSV (abre en Excel)</span>
               <span class="mega-link-desc">Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.</span>
             </a>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.descargarCSV('municipios');">
-              <span class="mega-link-name">Base de Datos Municipal EFIPEM (INEGI)</span>
+              <span class="mega-link-name">🏘️ Base de Datos Municipal EFIPEM (INEGI)</span>
               <span class="mega-link-desc">Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.</span>
             </a>
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">📑 Informes Oficiales</span>
             <a href="#verificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Informes de la Cuenta Pública (ASF)</span>
+              <span class="mega-link-name">🔎 Informes de la Cuenta Pública (ASF)</span>
               <span class="mega-link-desc">Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en su estado y cuándo sale la siguiente entrega.</span>
             </a>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas('diccionario');">
-              <span class="mega-link-name">Diccionario de Datos</span>
+              <span class="mega-link-name">📋 Diccionario de Datos</span>
               <span class="mega-link-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
             </a>
           </div>
@@ -1970,6 +1970,30 @@
         <div id="cpRaiz"></div>
       </div>
 
+      <!-- Radar de banderas rojas por entidad: lo pinta renderRadarBanderasNacional()
+           con la Matriz de Datos Basicos de la ASF (DB.cuenta_publica_asf). -->
+      <div class="insp-sep" id="radarBanderasNacional" style="margin-top:28px;">
+        <span class="insp-sep-n">🚩</span>
+        <div>
+          <h3 class="insp-sep-tit">Radar de Banderas Rojas por Entidad</h3>
+          <p class="insp-sep-sub">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024. Elija cómo ordenarlos: por cada $100 que la ASF revisó, por monto total o por el peso de los municipios.</p>
+        </div>
+      </div>
+      <div class="radar-banderas-national">
+        <div class="radar-criterios" id="radarCriterios" role="group" aria-label="Cómo ordenar el radar"></div>
+        <div class="radar-banderas-grid" id="radarBanderasNacionalContainer"></div>
+        <p class="pd-nota" id="radarNota"></p>
+      </div>
+
+      <!-- Expedientes de casos por aclarar: seis casos de alto impacto -->
+      <div class="insp-sep" id="expedientesCasos" style="margin-top:28px;">
+        <span class="insp-sep-n">📂</span>
+        <div>
+          <h3 class="insp-sep-tit">Expedientes de Casos por Aclarar</h3>
+          <p class="insp-sep-sub">Seis casos de alto impacto, uno por ficha: megaobras, energía, salud, Segalmex y deuda de los estados. Filtre por tema y abra el expediente.</p>
+        </div>
+      </div>
+
       <!-- Barra de Filtros Temáticos de Expedientes -->
       <div class="forensic-header-bar" id="forensicHeaderBar">
         <div>
@@ -1984,27 +2008,6 @@
           <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('salud', this)">Salud &amp; Fármacos</button>
           <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('alimentos', this)">Segalmex</button>
           <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('deuda', this)">Deuda de Estados</button>
-        </div>
-      </div>
-
-      <!-- Radar Nacional de Banderas Rojas Subnacionales (Estilo Operación Serenata de Amor / Rosie) -->
-      <div class="radar-banderas-national" id="radarBanderasNacional">
-        <div class="radar-banderas-header">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <span class="red-flag-pulse-dot"></span>
-            <h3 style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--red); text-transform:uppercase; margin:0; letter-spacing:0.5px;">
-              Radar Forense: Banderas Rojas Subnacionales (Estilo Operación Serenata de Amor)
-            </h3>
-          </div>
-          <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim);">
-            TOP ENTIDADES CON MAYOR MONTO OBSERVADO POR LA ASF
-          </span>
-        </div>
-        <p style="font-size:12px; color:var(--text-secondary); margin-bottom:14px; line-height:1.45;">
-          Algoritmo analítico de detección de irregularidades: correlación entre montos observados por solventar de la Cuenta Pública ASF, porcentaje de contrataciones asignadas por adjudicación directa sin licitar y grado de dependencia del erario federal. Haz clic en cualquier entidad para consultar su expediente forense completo.
-        </p>
-        <div class="radar-banderas-grid" id="radarBanderasNacionalContainer">
-          <!-- Renderizado dinámicamente por renderRadarBanderasNacional() -->
         </div>
       </div>
 
@@ -2575,7 +2578,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926n</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926o</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2605,7 +2608,7 @@
       <!-- Alerta ASF -->
       <div class="asf-alert-banner">
         <div class="asf-banner-header">
-          <span class="asf-badge">OBSERVACIONES ASF (CUENTA PÚBLICA)</span>
+          <span class="asf-badge">POR ACLARAR ANTE LA ASF · CUENTA PÚBLICA 2024</span>
           <span id="dAsfAmount" class="asf-amount">$0 mdp</span>
         </div>
         <div style="font-size:11px; color:#d8b8b8; margin-bottom:6px;">
@@ -2719,16 +2722,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926n"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926o"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926n"></script>
+  <script src="assets/js/audit-database.js?v=20260926o"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926n"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926o"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926n"></script>
+  <script src="assets/js/audit-engine.js?v=20260926o"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

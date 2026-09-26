@@ -20315,6 +20315,55 @@ body.con-regreso { padding-bottom: 96px; }
   color: var(--text-secondary);
 }
 
+/* Radar con la Matriz de Datos Basicos: las tarjetas son botones. */
+button.radar-state-flag-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+.radar-state-flag-card:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.radar-state-valor {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--red);
+}
+.radar-state-metric-row { align-items: center; gap: 8px; }
+.radar-state-metric-row strong { color: var(--text-main); }
+.radar-state-name { color: var(--text-main); }
+[data-theme="light"] .radar-banderas-national { background: var(--bg-card-hover); }
+[data-theme="light"] .radar-state-flag-card { background: var(--bg-card); }
+.radar-state-ir {
+  display: block;
+  margin-top: 10px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold-bright);
+}
+.radar-criterios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.radar-criterios-etq {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.radar-banderas-national .pd-nota { margin-top: 14px; }
+.radar-ir-cp { color: var(--gold-bright); font-weight: 600; }
+@media (max-width: 640px) {
+  .radar-banderas-national { padding: 14px; }
+  .radar-banderas-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 900px) {
   .treemap-span-8, .treemap-span-7, .treemap-span-6, .treemap-span-5, .treemap-span-4, .treemap-span-3 {
     grid-column: span 12;
@@ -20673,9 +20722,9 @@ body.con-regreso { padding-bottom: 96px; }
 
 /* Aterrizaje desde el menu: que el destino no quede bajo la barra fija
    (unos 145 px en escritorio). En telefono la barra no es fija. */
-.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
+.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
 @media (max-width: 700px) {
-  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
+  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
 }
 
 /* Pase Civico: si la ficha es mas alta que la pantalla, se desplaza dentro
