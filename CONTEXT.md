@@ -2101,6 +2101,25 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (un solo botón en los simuladores y la tarjeta del módulo 1 sin cifra)
+
+- **Tarjeta del módulo 1 en la portada:** en lugar de «$10.19 billones» dice
+  «¿Cuántos billones? · Descúbrelo al comenzar»; la cifra se entrega dentro
+  del módulo. No se usó «récord» o «presupuesto histórico» porque la base no
+  tiene los totales del PEF de años anteriores con su fuente (ver Pendiente).
+- **Botón único, como en Auditoría en imágenes:** todos los simuladores
+  arrancan en ceros y tienen un solo botón. El primer toque cuenta o evalúa y
+  el botón pasa a decir «↺ Reiniciar a ceros»; el segundo regresa a cero.
+  `erarioBarraMandos` (las siete barras del módulo 1 y del mapa) lo hace de
+  origen; los demás (megaobras, sexenios, tablero de Díaz, San Lázaro,
+  Senado, prestaciones y los otros de la Enciclopedia) los funde
+  `botonUnicoAplicar`, que esconde el botón de reinicio y lo invoca desde el
+  principal. La calculadora cívica se deja con sus dos botones: ahí el botón
+  rehace la cuenta con los datos que el lector cambia.
+- **Sin arranque automático:** los tableros de la Enciclopedia que se
+  animaban solos al entrar en pantalla (`vsxAutoArranque`) ahora esperan el
+  botón (`VSX_ARRANQUE_AUTOMATICO = false`).
+
 ### Hecho (módulo 1, Circuito del Dinero, en tres bloques)
 
 - **Párrafo del proemio:** «auditar», «presupuesto federal», «Ley de Ingresos
@@ -2382,6 +2401,9 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
 - **Titular de la ASF:** confirmar si sigue David Colmenares tras marzo de 2026.
+- **«Presupuesto récord» en la tarjeta del módulo 1:** para decirlo hace
+  falta la serie del PEF aprobado de años anteriores (DOF) en la base, con
+  fuente, y decidir si el récord es en pesos corrientes o reales.
 - **Equivalencias del módulo 1 (bloque 1.2):** el costo de un hospital
   general de zona ($550 mdp), el monto de la beca universitaria ($2,800 al
   mes) y el Tren Maya ($120,000 → $515,000 mdp, $79.27 por segundo) no tienen

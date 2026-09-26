@@ -6193,12 +6193,11 @@
         '<span class="eval-badge">' + cfg.sello + '</span>' +
         '<span class="eval-status-text">' + cfg.estado + '</span>' +
       '</div>' +
+      /* Un solo boton, como en Auditoria en imagenes: en ceros dice
+         «Contabilizar»; ya contado, el mismo boton regresa todo a ceros. */
       '<div class="eval-actions-group">' +
-        '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.' + cfg.contar + '">' +
-          '<span>' + (cfg.contado ? '\u{1F504}' : '\u25B6\uFE0F') + '</span> ' +
-          (cfg.contado ? 'Volver a contabilizar' : 'Contabilizar') + '</button>' +
-        '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.' + cfg.reiniciar + '">' +
-          '<span>\u21BA</span> Reiniciar a ceros</button>' +
+        '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.' + (cfg.contado ? cfg.reiniciar : cfg.contar) + '">' +
+          (cfg.contado ? '<span>\u21BA</span> Reiniciar a ceros' : '<span>\u25B6\uFE0F</span> Contabilizar') + '</button>' +
       '</div>' +
     '</div>';
   }
@@ -16943,10 +16942,15 @@
      se anima al entrar y los tableros de abajo lo hacen cuando entran en
      pantalla, con IntersectionObserver: nadie ve una tarjeta en ceros sin
      saber por que. Los botones «Reiniciar» siguen ahi para volver a jugarlo. */
+  const VSX_ARRANQUE_AUTOMATICO = false;
   let vsxObservador = null;
   const vsxYaArrancado = {};
 
   function vsxAutoArranque() {
+    /* Por decision del autor (sept. 2026) ningun simulador cuenta solo:
+       todos esperan en ceros a que el lector pulse su boton, como en
+       Auditoria en imagenes. Se conserva el mecanismo por si se retoma. */
+    if (!VSX_ARRANQUE_AUTOMATICO) return;
     if (typeof window.IntersectionObserver !== 'function') {
       // Navegador sin soporte: se evalua todo de una vez, sin escalonar.
       ['versus', 'salud', 'cards'].forEach(k => vsxDispararSimulador(k));
@@ -27546,6 +27550,91 @@
   };
 
   document.addEventListener('DOMContentLoaded', init);
+
+  /* ==========================================================================
+     BOTON UNICO EN LOS SIMULADORES
+     Los simuladores que no usan erarioBarraMandos traen dos botones: el que
+     cuenta o evalua y «Reiniciar a ceros». Aqui se funden en uno, como en
+     Auditoria en imagenes: el primer toque cuenta y el boton pasa a decir
+     «Reiniciar a ceros»; el segundo regresa todo a cero. El boton de
+     reinicio se queda en la pagina, oculto, y es el que se invoca: cada
+     simulador sigue reiniciandose con su propia funcion.
+     La calculadora queda fuera: ahi el boton rehace la cuenta con los datos
+     que el lector cambia, y reiniciarla en cada segundo toque le borraria
+     lo que escribio.
+     ========================================================================== */
+  const botonUnicoEstado = {};
+  const BOTON_UNICO_EXCLUIR = /ccReiniciar/;
+  const BOTON_UNICO_REINICIO = '<span>\u21BA</span> Reiniciar a ceros';
+
+  function botonUnicoRotular(prim) {
+    const hecho = botonUnicoEstado[prim._buClave] === 'hecho';
+    const actual = prim.innerHTML;
+    const diceReinicio = actual.indexOf('Reiniciar a ceros') !== -1;
+    if (hecho) {
+      if (!diceReinicio) prim.innerHTML = BOTON_UNICO_REINICIO;
+    } else if (diceReinicio) {
+      prim.innerHTML = prim._buOriginal;
+    } else {
+      prim._buOriginal = actual;
+    }
+  }
+
+  function botonUnicoAplicar(raiz) {
+    (raiz || document).querySelectorAll('button').forEach(function(reset) {
+      if (reset._buVisto || !/Reiniciar/i.test(reset.textContent || '')) return;
+      reset._buVisto = true;
+      const clave = reset.getAttribute('onclick') || reset.id;
+      if (!clave || BOTON_UNICO_EXCLUIR.test(clave)) return;
+      let prim = reset.previousElementSibling;
+      while (prim && prim.tagName !== 'BUTTON') prim = prim.previousElementSibling;
+      if (!prim || prim._buClave || /Reiniciar/i.test(prim.textContent || '')) return;
+      reset.hidden = true;
+      reset.setAttribute('aria-hidden', 'true');
+      prim._buClave = clave;
+      prim._buOriginal = prim.innerHTML;
+      const original = prim.onclick;
+      prim.onclick = function(ev) {
+        if (botonUnicoEstado[clave] === 'hecho') {
+          botonUnicoEstado[clave] = 'cero';
+          if (reset.onclick) reset.onclick.call(reset, ev); else reset.click();
+        } else {
+          botonUnicoEstado[clave] = 'hecho';
+          if (original) original.call(prim, ev);
+        }
+        if (prim.isConnected) botonUnicoRotular(prim);
+      };
+      botonUnicoRotular(prim);
+    });
+  }
+
+  /* Los simuladores se repintan solos (cambio de lente, de vista o de
+     pestaña): cada boton nuevo se funde en cuanto aparece, y el que ya
+     estaba se vuelve a rotular si el simulador le cambio el texto. */
+  document.addEventListener('DOMContentLoaded', function () {
+    botonUnicoAplicar(document);
+    let pendiente = false;
+    new MutationObserver(function (registros) {
+      if (pendiente) return;
+      /* Solo interesan los cambios que tocan botones: la cinta y el radar
+         reescriben cifras varias veces por segundo y no deben costar nada. */
+      const toca = registros.some(function(r) {
+        if (r.target.closest && r.target.closest('button')) return true;
+        for (let i = 0; i < r.addedNodes.length; i++) {
+          const n = r.addedNodes[i];
+          if (n.nodeType === 1 && (n.tagName === 'BUTTON' || n.querySelector('button'))) return true;
+        }
+        return false;
+      });
+      if (!toca) return;
+      pendiente = true;
+      requestAnimationFrame(function () {
+        pendiente = false;
+        botonUnicoAplicar(document);
+        document.querySelectorAll('button').forEach(function(b) { if (b._buClave) botonUnicoRotular(b); });
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+  });
   /* Menus superiores: acomodo al pasar el cursor, cierre al pulsar fuera y
      reacomodo si cambia el ancho de la ventana. */
   document.addEventListener('DOMContentLoaded', function () {
