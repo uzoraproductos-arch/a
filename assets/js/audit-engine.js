@@ -23162,7 +23162,7 @@
             <span>🏛️</span> Informe ASF
           </a>
           <button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.openPaseCivicoModal()" title="Menos que dos caguamas al mes · Descarga el expediente pericial">
-            <span>🍺</span> Dossier Completo ($79)
+            <span>🍺</span> Expediente Completo ($79)
           </button>
         </div>
       </article>
