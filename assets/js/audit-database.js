@@ -4604,10 +4604,10 @@ window.AUDIT_DB = {
   ],
   "glosario": [
     {
-      "termino": "Remuneraci\u00f3n Total Anual Neta",
-      "definicion": "Lo que una persona servidora p\u00fablica recibe en un a\u00f1o despu\u00e9s del impuesto sobre la renta: su sueldo, sus prestaciones y los pagos que se cubren una vez al a\u00f1o, como el aguinaldo. El Presupuesto de Egresos la publica para los cargos de mayor rango en su Anexo 23. Es la medida que permite comparar cargos entre s\u00ed, porque todos se cuentan igual: en neto y por a\u00f1o.",
-      "ley": "Art. 127 CPEUM \u00b7 Ley Federal de Remuneraciones de los Servidores P\u00fablicos \u00b7 PEF 2026, Anexo 23",
-      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+      "termino": "Remuneración Total Anual Neta",
+      "definicion": "Lo que una persona servidora pública recibe en un año después del impuesto sobre la renta: su sueldo, sus prestaciones y los pagos que se cubren una vez al año, como el aguinaldo. El Presupuesto de Egresos la publica para los cargos de mayor rango en su Anexo 23. Es la medida que permite comparar cargos entre sí, porque todos se cuentan igual: en neto y por año.",
+      "ley": "Art. 127 CPEUM · Ley Federal de Remuneraciones de los Servidores Públicos · PEF 2026, Anexo 23",
+      "categoria": "👷 Trabajo y Salario"
     },
     {
       "termino": "Dieta Legislativa",
@@ -4646,10 +4646,10 @@ window.AUDIT_DB = {
       "categoria": "\ud83d\udd0d Fiscalizaci\u00f3n Superior"
     },
     {
-      "termino": "Tribunal Electoral del Poder Judicial de la Federaci\u00f3n (TEPJF)",
-      "definicion": "M\u00e1xima autoridad jurisdiccional en materia electoral, salvo las acciones de inconstitucionalidad, que resuelve la Suprema Corte. Funciona con una Sala Superior y Salas Regionales. Para 2026 se le aprobaron $3,749.5 millones de pesos.",
-      "ley": "Art. 99 CPEUM \u00b7 PEF 2026, Anexo 1",
-      "categoria": "\u2696\ufe0f Poder Judicial"
+      "termino": "Tribunal Electoral del Poder Judicial de la Federación (TEPJF)",
+      "definicion": "Máxima autoridad jurisdiccional en materia electoral, salvo las acciones de inconstitucionalidad, que resuelve la Suprema Corte. Funciona con una Sala Superior y Salas Regionales. Para 2026 se le aprobaron $3,749.5 millones de pesos.",
+      "ley": "Art. 99 CPEUM · PEF 2026, Anexo 1",
+      "categoria": "🏢 Instituciones"
     },
     {
       "termino": "Contraloría Social",
@@ -4856,9 +4856,9 @@ window.AUDIT_DB = {
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
-      "termino": "FASSA / IMSS-Bienestar",
-      "definicion": "Fondo de Aportaciones para los Servicios de Salud. Recientemente absorbido en la mayoría de los estados por el organismo descentralizado IMSS-Bienestar para centralizar clínicas y hospitales.",
-      "ley": "Art. 29 Ley de Coordinación Fiscal",
+      "termino": "FASSA e IMSS-Bienestar",
+      "definicion": "El Fondo de Aportaciones para los Servicios de Salud es el fondo del Ramo 33 que financia la salud de los estados. Desde 2024 la ley distingue dos casos: la entidad que no firma convenio con los Servicios de Salud del IMSS para el Bienestar (IMSS-Bienestar) ejerce el fondo por sí misma; la que lo firma transfiere a ese organismo el personal, la infraestructura y los recursos que acuerden, y conserva del fondo sólo lo necesario para las obligaciones que le quedan.",
+      "ley": "Arts. 25 y 29 Ley de Coordinación Fiscal (reforma DOF 03-01-2024) · Art. 77 bis 16 A Ley General de Salud",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
@@ -4893,8 +4893,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Costo Financiero de la Deuda",
-      "definicion": "Monto destinado exclusivamente a pagar intereses, comisiones y gastos de amortización de la deuda pública adquirida por el gobierno federal o local, sin amortizar capital sustancial.",
-      "ley": "Ley Federal de Deuda Pública",
+      "definicion": "Lo que el sector público paga cada año por deber: intereses, comisiones y gastos de la deuda, sin contar lo que se abona al capital. El Presupuesto 2026 lo reúne en su Anexo 8: $1,297,681.1 millones de pesos del Gobierno Federal (Ramo 24), $238,838.8 millones de las empresas públicas y $35,553.4 millones de los programas de apoyo a ahorradores y deudores de la banca (Ramo 34). En total, $1,572,073.3 millones: es gasto no programable, se paga antes que cualquier programa.",
+      "ley": "PEF 2026 (DOF 21-11-2025), Anexo 8 · Ley Federal de Deuda Pública",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -4917,39 +4917,39 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Partida de Gestión Social (Congresos)",
-      "definicion": "Bolsas discrecionales y opacas asignadas a legisladores federales y locales para entrega de despensas, tinacos o apoyos directos sin control de fiscalización.",
-      "ley": "Reglamentos Interiores de los Congresos Estatales",
+      "definicion": "Recursos que algunos congresos asignan a sus legisladores para atender peticiones de su distrito: despensas, apoyos o pequeñas obras. Su riesgo está en la discrecionalidad: cuando no hay reglas públicas de quién recibe y por qué, se vuelven difíciles de fiscalizar. La plataforma no tiene todavía un documento oficial que cuantifique estas partidas por congreso.",
+      "ley": "Presupuestos y reglamentos de cada congreso (sin documento integrado en la plataforma)",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
       "termino": "Ponencia de Ministro(a) (SCJN)",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Despacho y equipo técnico-jurídico asignado en exclusividad a cada ministra o ministro de la Suprema Corte. Está integrado por secretarios de estudio y cuenta, secretarios auxiliares y asesores encargados de estudiar expedientes, analizar precedentes y redactar los proyectos de sentencia que se someten a votación en el Pleno. Su costo operativo directo promediaba entre $2.6 y $3.1 millones de pesos mensuales en el régimen previo.",
-      "ley": "Art. 94 CPEUM / Reglamento Interior de la SCJN / Manual de Remuneraciones del PJF"
+      "definicion": "El despacho y el equipo jurídico de cada ministra o ministro de la Suprema Corte: secretarias y secretarios de estudio y cuenta, auxiliares y personal de apoyo que estudian los expedientes, revisan precedentes y redactan los proyectos de sentencia que se votan en el Pleno. Desde la reforma judicial, el Pleno tiene nueve integrantes y por tanto nueve ponencias.",
+      "ley": "Art. 94 CPEUM (reforma DOF 15-09-2024) · Presupuesto analítico de plazas del Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)"
     },
     {
       "termino": "Secretario(a) de Estudio y Cuenta",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Funcionario judicial de altísima jerarquía y especialización técnica adscrito a la ponencia de un ministro. Tiene a su cargo el análisis dogmático de amparos, controversias constitucionales y acciones de inconstitucionalidad, así como la redacción formal de los proyectos de sentencia. Históricamente sus percepciones brutas oscilaban entre $145,000 y $185,000 pesos mensuales, con prestaciones equiparables a mandos medios y superiores.",
-      "ley": "Ley Orgánica del PJF / Tabulador Oficial de Sueldos SCJN"
+      "definicion": "Persona funcionaria judicial adscrita a una ponencia que analiza amparos, controversias y acciones de inconstitucionalidad y redacta los proyectos de sentencia. Su remuneración se fija en el manual anual del Poder Judicial según su nivel; la plataforma la cita de ese documento y no de estimaciones.",
+      "ley": "Ley Orgánica del Poder Judicial de la Federación · Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)"
     },
     {
-      "termino": "Asesoría de Ponencia y Récord de Plazas (Más de 70 asesores)",
+      "termino": "Asesoría de Ponencia",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Personal contratado bajo plazas de confianza o contratos por honorarios asimilados para investigación jurídica y apoyo directo a las ponencias. Durante revisiones de auditoría ciudadana y solicitudes de transparencia (PNT) se documentó que, sumando secretarios de acuerdos, proyectistas, auxiliares y asesores comisionados en comités y coordinaciones, cada ministro llegó a disponer de más de 60 a 70 personas de apoyo técnico, disparando el gasto del Capítulo 1000 a niveles históricos.",
-      "ley": "Art. 134 CPEUM / Presupuesto de Egresos de la Federación / PNT Art. 70 Fracc. XI"
+      "definicion": "Personal de confianza o por honorarios que apoya a las ponencias con investigación jurídica. Cuántas plazas tiene cada ponencia se lee en el presupuesto analítico de plazas del manual anual del Poder Judicial; la cifra de «más de 70 asesores por ministro» que circuló en el debate público no tiene documento citado en la plataforma y no se usa.",
+      "ley": "Manual de remuneraciones del PJF 2026 (DOF 27-02-2026), Anexo B · Plataforma Nacional de Transparencia"
     },
     {
       "termino": "Artículo 127 Constitucional (Tope Salarial)",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Precepto de la Constitución General (Fracción II) que establece que ningún servidor público de la Federación, estados o municipios podrá recibir una remuneración mayor a la fijada para el Presidente de la República ($134,310 netos mensuales en 2025-2026). Fue el núcleo del diferendo salarial con la SCJN, cuyos integrantes percibían más de $206,000 netos invocando la irreductibilidad salarial del artículo 94.",
-      "ley": "Artículos 127 y 94 CPEUM / Ley Federal de Remuneraciones de los Servidores Públicos"
+      "definicion": "El precepto que prohíbe a cualquier persona servidora pública de la Federación, los estados y los municipios ganar más que la Presidencia de la República. Para 2026, la remuneración ordinaria neta de la Presidenta es de $134,290 al mes ($193,706 brutos). La reforma judicial de 2024 ordenó ajustar a ese tope los sueldos del Poder Judicial en funciones, sin excepción.",
+      "ley": "Art. 127 fr. II CPEUM · Transitorio séptimo del decreto DOF 15-09-2024 · PEF 2026 (DOF 21-11-2025), Anexo 23.1.2"
     },
     {
       "termino": "Fideicomisos del Poder Judicial (Extinción y Litigio)",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Instrumentos fiduciarios constituidos por la SCJN y el Consejo de la Judicatura Federal que acumularon más de $15,400 a $21,500 millones de pesos del erario público para pensiones complementarias de mandos, gastos médicos privados y mantenimiento de viviendas. Su extinción por decreto legislativo para reintegrar los fondos a la Tesorería de la Federación (TESOFE) fue impugnada mediante juicios de amparo.",
-      "ley": "Decreto DOF 27/10/2023 / Ley Federal de Presupuesto y Responsabilidad Hacendaria Art. 54"
+      "definicion": "Los fideicomisos que la Suprema Corte y el Consejo de la Judicatura Federal constituyeron con recursos públicos para pensiones complementarias, vivienda y otros fines. El Congreso ordenó extinguirlos y reintegrar su dinero a la Tesorería de la Federación mediante reforma publicada en octubre de 2023, y la extinción se impugnó en tribunales.",
+      "ley": "Decreto de reforma a la Ley Orgánica del Poder Judicial de la Federación (DOF 27-10-2023)"
     },
     {
       "termino": "Pleno de la Suprema Corte de Justicia (SCJN)",
@@ -4978,38 +4978,38 @@ window.AUDIT_DB = {
     {
       "termino": "Consejo de la Judicatura Federal (CJF)",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Órgano colegiado encargado históricamente de la administración, vigilancia, adscripción y disciplina de los juzgados de distrito y tribunales de circuito federales. Administraba más del 85% del presupuesto global del Ramo 03 (más de $68,000 mdp). La reforma de 2024 determinó su sustitución por el Órgano de Administración Judicial y el Tribunal de Disciplina.",
-      "ley": "Art. 100 CPEUM (régimen previo) / Artículos Transitorios Reforma Judicial 2024"
+      "definicion": "El órgano que administraba, vigilaba y disciplinaba a los juzgados de distrito y tribunales de circuito. La reforma judicial de 2024 lo sustituyó por dos órganos: el Tribunal de Disciplina Judicial, que sanciona, y el Órgano de Administración Judicial, que administra. En el Presupuesto 2026 ya no tiene asignación: el Ramo 03 incluye en su lugar al Órgano de Administración Judicial.",
+      "ley": "Art. 100 CPEUM (régimen previo y reforma DOF 15-09-2024)"
     },
     {
       "termino": "Haber de Retiro",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Pensión económica vitalicia y paquete de prerrogativas (vehículos blindados, asistentes y escoltas) que se otorgaba a las y los ministros de la Corte al concluir su periodo o presentar su renuncia anticipada. La reforma constitucional de 2024 acotó estas prerrogativas extraordinarias en aras del principio de austeridad republicana.",
-      "ley": "Ley Orgánica del PJF (abrogada) / Art. 94 CPEUM y Art. 7° Transitorio"
+      "definicion": "La pensión que recibían las ministras y los ministros de la Suprema Corte al concluir su encargo. La reforma judicial de 2024 dispuso que quienes dejaran la Corte por no postularse o no ser electos en 2025 no la recibirían, salvo si renunciaban antes del cierre de la convocatoria, en cuyo caso sería proporcional al tiempo servido. Los haberes ya concedidos se conservan.",
+      "ley": "Transitorio séptimo del decreto de reforma judicial (DOF 15-09-2024) · Art. 127 fr. IV CPEUM"
     },
     {
       "termino": "Seguro de Separación Individualizado (SSI)",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Prestación económica extraordinaria contratada con aseguradoras privadas donde el servidor judicial aportaba entre 2% y 10% de su sueldo base, y la institución aportaba una cantidad idéntica con dinero público. Prohibida en el Ejecutivo por la Ley de Austeridad Republicana, su permanencia en el PJF generó observaciones de la ASF.",
-      "ley": "Ley Federal de Austeridad Republicana Art. 22 / Manual de Remuneraciones PJF"
+      "definicion": "Un seguro al que el personal de mando medio del Poder Judicial puede incorporarse voluntariamente, para tener un ahorro si se separa del servicio. La persona aporta el 2, 4, 5 o 10 % de su sueldo básico y el Poder Judicial aporta una prima igual, con dinero público.",
+      "ley": "Manual de remuneraciones del PJF 2026 (DOF 27-02-2026), numeral 8.1.4"
     },
     {
       "termino": "Seguro de Gastos Médicos Mayores (SGMM)",
       "categoria": "⚖️ Poder Judicial",
-      "definicion": "Póliza privada con cargo al presupuesto institucional que otorgaba cobertura médica integral en hospitales privados de alta gama para ministros, magistrados, jueces y familiares directos, con sumas aseguradas ilimitadas, sustituyendo la atención en instituciones públicas de seguridad social (ISSSTE).",
-      "ley": "Manual de Remuneraciones de los Servidores Públicos del PJF"
+      "definicion": "Un seguro con cargo al presupuesto que cubre accidentes y enfermedades que requieren cirugía u hospitalización, para la persona servidora pública y su familia directa. En el Poder Judicial lo reciben el personal de mando medio y el operativo, con una suma asegurada básica de hasta 333 UMA mensuales, que la persona puede ampliar a su cargo.",
+      "ley": "Manual de remuneraciones del PJF 2026 (DOF 27-02-2026), numeral 8.1.3"
     },
     {
       "termino": "Ramo 03 (Poder Judicial de la Federación)",
       "categoria": "🏛️ Presupuesto & ASF",
-      "definicion": "Clave presupuestaria del Presupuesto de Egresos de la Federación (PEF) asignada a la SCJN, CJF y TEPJF. Es un ramo autónomo que ha alcanzado cifras récord superiores a los $78,000 - $84,000 millones de pesos anuales, caracterizado por concentrar más del 80% de su gasto en el Capítulo 1000 (Servicios Personales).",
-      "ley": "Art. 74 fracc. IV CPEUM / Presupuesto de Egresos de la Federación"
+      "definicion": "El ramo del Presupuesto de Egresos del Poder Judicial de la Federación: la Suprema Corte, el Tribunal Electoral, el Tribunal de Disciplina Judicial y el Órgano de Administración Judicial. Para 2026 se le aprobaron $70,005.6 millones de pesos. Como ramo autónomo, el Poder Judicial elabora su propio proyecto y Hacienda lo integra al Presupuesto.",
+      "ley": "Art. 74 fr. IV CPEUM · PEF 2026 (DOF 21-11-2025), Anexo 1"
     },
     {
       "termino": "Capítulo 1000 (Servicios Personales)",
       "categoria": "🏛️ Presupuesto & ASF",
-      "definicion": "Agrupador presupuestal del clasificador por objeto del gasto del CONAC que concentra todos los sueldos, salarios base, honorarios asimilados, gratificaciones de fin de año, bonos de riesgo y aportaciones de seguridad social de los servidores públicos. En el Poder Judicial representa 8 de cada 10 pesos del presupuesto.",
-      "ley": "Clasificador por Objeto del Gasto (CONAC) / LGCG"
+      "definicion": "El capítulo del clasificador por objeto del gasto que reúne todo lo que se paga a las personas: sueldos, honorarios asimilados, aguinaldo, primas, estímulos y aportaciones de seguridad social. Es la nómina del Estado, y en las instituciones que prestan servicios con personal —tribunales, escuelas, hospitales— suele ser la mayor parte de su presupuesto.",
+      "ley": "Clasificador por Objeto del Gasto (CONAC) · Ley General de Contabilidad Gubernamental"
     },
     {
       "termino": "Capítulo 3000 (Servicios Generales)",
@@ -5025,7 +5025,7 @@ window.AUDIT_DB = {
     },
     {
       "termino": "TESOFE (Tesorería de la Federación)",
-      "categoria": "💰 Hacendario & Deuda",
+      "categoria": "🏢 Instituciones",
       "definicion": "Unidad de la Secretaría de Hacienda y Crédito Público encargada de la gestión financiera, custodia y administración de los recursos del erario federal. Custodia la cuenta general del país en el Banco de México y es la receptora legal obligatoria de todos los reintegros y fondos públicos extintos.",
       "ley": "Ley de Tesorería de la Federación / Art. 73 fracc. XXIV CPEUM"
     },
@@ -5038,8 +5038,8 @@ window.AUDIT_DB = {
     {
       "termino": "Auditoría Forense",
       "categoria": "🔍 Fiscalización Superior",
-      "definicion": "Técnica avanzada de investigación fiscal y contable aplicada por la Auditoría Superior de la Federación (ASF) para documentar presuntos actos ilícitos, redes de empresas fachada (factureras) y desvío de caudales públicos con validez probatoria ante tribunales penales y administrativos.",
-      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación"
+      "definicion": "Tipo de auditoría que la ASF clasifica como «de cumplimiento forense»: revisa con técnicas de investigación operaciones en las que hay indicios de irregularidad, para documentar los hechos y, en su caso, sostener una denuncia o una promoción de responsabilidad. En la Matriz de Datos Básicos de la Cuenta Pública 2024 aparece en auditorías al Consejo de la Judicatura Federal, al Tribunal Electoral y al INAI, entre otras.",
+      "ley": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (tipo de auditoría «De Cumplimiento Forense») · Ley de Fiscalización y Rendición de Cuentas de la Federación"
     },
     {
       "termino": "Amparo en Revisión y Controversia Constitucional",
@@ -5104,8 +5104,8 @@ window.AUDIT_DB = {
     {
       "termino": "Periodos Ordinarios de Sesiones del Congreso",
       "categoria": "🗳️ Poder Legislativo & Elecciones",
-      "definicion": "Los dos periodos constitucionales obligatorios del Congreso: el 1º (1 sept – 15 dic) enfocado en aprobar el Paquete Económico (LIF y PEF); el 2º (1 feb – 30 abr) enfocado en fiscalizar la Cuenta Pública de la ASF y desahogar reformas sustantivas.",
-      "ley": "Artículos 65 y 66 de la CPEUM"
+      "definicion": "Los dos periodos en que el Congreso sesiona cada año: el primero empieza el 1 de septiembre y puede durar hasta el 15 de diciembre (hasta el 31 cuando la Presidencia inicia su encargo ese año); el segundo empieza el 1 de febrero y no puede pasar del 30 de abril. En el primero caen la Ley de Ingresos y el Presupuesto de Egresos del año siguiente.",
+      "ley": "Arts. 65 y 66 CPEUM"
     },
     {
       "termino": "Comisión Permanente del Congreso",
@@ -5116,8 +5116,8 @@ window.AUDIT_DB = {
     {
       "termino": "Declaración 3 de 3 (Patrimonial, Intereses y Fiscal)",
       "categoria": "🔍 Fiscalización Superior",
-      "definicion": "Instrumento cívico de rendición de cuentas que obliga a los servidores y candidatos a transparentar sus propiedades y cuentas bancarias (patrimonial), empresas y socios (intereses) y cumplimiento tributario ante el SAT (fiscal).",
-      "ley": "Art. 108 CPEUM / Ley General de Responsabilidades Administrativas"
+      "definicion": "Las tres declaraciones que toda persona servidora pública debe presentar: la de situación patrimonial (lo que tiene), la de intereses (los vínculos que podrían chocar con su cargo) y la constancia de su declaración fiscal anual. Se presentan bajo protesta de decir verdad ante la Secretaría Anticorrupción o el órgano interno de control, al entrar, cada año y al salir del cargo.",
+      "ley": "Art. 108 CPEUM · Arts. 32 y 33 Ley General de Responsabilidades Administrativas"
     },
     {
       "termino": "Estudio de Impacto Presupuestario (Art. 18 LFPRH)",
@@ -5126,16 +5126,16 @@ window.AUDIT_DB = {
       "ley": "Artículo 18 de la LFPRH"
     },
     {
-      "termino": "Partida Secreta / Ramo 23 / Subvenciones Opacas",
+      "termino": "Ramo 23 (Provisiones Salariales y Económicas) y la Partida Secreta",
       "categoria": "🏛️ Presupuesto & ASF",
-      "definicion": "Bolsas presupuestales discrecionales del erario sin reglas de operación claras (antiguo Ramo 23 y subvenciones a grupos parlamentarios) empleadas históricamente para sobornos o moches, extinguidas formalmente por la ley.",
-      "ley": "Art. 74 fracc. IV CPEUM / Ley de Fiscalización de la Federación"
+      "definicion": "Dos cosas que conviene no confundir. La partida secreta era una bolsa del Presupuesto que el Ejecutivo podía gastar sin decir en qué; la Constitución la prohibió en 2021: «no podrá haber partidas secretas en el Presupuesto de Egresos de la Federación». El Ramo 23, en cambio, sigue vivo y es público: guarda las provisiones salariales y económicas —ajustes de sueldos, fondos para estados y municipios, reservas— que después se reparten a otros ramos. Para 2026 se le aprobaron $167,652.2 millones de pesos. Es un ramo de reasignación, y por eso conviene seguir a dónde va a dar.",
+      "ley": "Art. 74 fr. IV CPEUM (reforma DOF 17-05-2021) · PEF 2026 (DOF 21-11-2025), Anexos 1 y 20"
     },
     {
       "termino": "Concejalías de las Alcaldías CDMX",
       "categoria": "🗳️ Poder Legislativo & Elecciones",
-      "definicion": "Órganos colegiados integrados por 10 concejales en cada una de las 16 alcaldías de la CDMX (6 por mayoría y 4 por representación proporcional) encargados de supervisar el presupuesto y las obras vecinales.",
-      "ley": "Constitución Política de la Ciudad de México, Art. 53"
+      "definicion": "Cada alcaldía de la Ciudad de México se integra por su titular y un concejo de concejales electos, con mayoría y representación proporcional, que supervisa y evalúa la acción de gobierno, el presupuesto y el gasto de la alcaldía. El número de concejales por alcaldía está en la Constitución de la Ciudad; la plataforma aún no lo cita de su texto.",
+      "ley": "Constitución Política de la Ciudad de México, art. 53"
     },
     {
       "termino": "Gasto Público",
@@ -5183,7 +5183,7 @@ window.AUDIT_DB = {
       "termino": "Auditoría Superior de la Federación (ASF)",
       "definicion": "Órgano técnico de la Cámara de Diputados, con autonomía técnica y de gestión, que fiscaliza la Cuenta Pública: revisa los ingresos, los egresos y la deuda de la Federación, y también el gasto federalizado que ejercen los estados y municipios. Cuando encuentra irregularidades emite acciones —recomendaciones, solicitudes de aclaración, pliegos de observaciones, promociones de responsabilidad y denuncias— y reporta el monto que queda por aclarar.",
       "ley": "Arts. 74 frac. VI y 79 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
-      "categoria": "🔍 Fiscalización Superior"
+      "categoria": "🏢 Instituciones"
     },
     {
       "termino": "Déficit y Superávit Público",
@@ -5225,7 +5225,7 @@ window.AUDIT_DB = {
       "termino": "UMA (Unidad de Medida y Actualización)",
       "definicion": "Referencia económica en pesos que sustituyó al salario mínimo para calcular multas, créditos, cuotas y obligaciones legales. La actualiza el INEGI cada año. Su desvinculación del salario mínimo evitó que los aumentos salariales encarecieran automáticamente multas y trámites.",
       "ley": "Art. 26 apartado B CPEUM · Ley para Determinar el Valor de la UMA",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "👷 Trabajo y Salario"
     },
     {
       "termino": "ISR, IVA e IEPS",
@@ -5507,55 +5507,55 @@ window.AUDIT_DB = {
       "termino": "Desarrollo Sustentable",
       "definicion": "Fórmula de equilibrio entre tres dimensiones que deben cumplirse a la vez: crecimiento económico, equidad social y preservación ambiental. No es una cuestión sólo ecológica. En el orden jurídico mexicano es un mandato derivado de los artículos 25, 26 y 27, lo que significa que un crecimiento que agota el capital natural no satisface la norma aunque el PIB suba.",
       "ley": "Art. 25, 26 y 27 CPEUM",
-      "categoria": "📜 Ley de Ingresos & Marco Legal"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Producto Interno Neto Ecológico",
       "definicion": "Indicador que el INEGI calcula restando al Producto Interno Bruto el consumo de capital fijo y los costos totales por agotamiento y degradación ambiental. Responde a la pregunta que el PIB no puede contestar: cuánto creció realmente la riqueza si se descuenta el daño causado para producirla. En 2024 ascendió a 25.7 billones de pesos, 76.6% del PIB.",
       "ley": "Sistema de Cuentas Nacionales de México · INEGI",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Costos Totales por Agotamiento y Degradación Ambiental",
       "definicion": "Valoración monetaria del impacto ambiental de la actividad económica, con dos componentes: lo que se acabó (agotamiento de hidrocarburos, bosques y agua subterránea) y lo que se ensució (aire, suelo, residuos, aguas residuales). En 2024 sumaron $1,382,214 millones de pesos, 4.1% del PIB.",
       "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Agotamiento de Recursos Naturales",
       "definicion": "Consumo de capital natural que no se repone dentro del periodo: barriles extraídos, bosque perdido por encima de la regeneración, agua sacada de un acuífero por arriba de su recarga. En 2024 costó $144,020 millones de pesos. El reparto oficial lo encabezan los hidrocarburos con 46%, seguidos por los recursos forestales con 28% y el agua subterránea con 26%.",
       "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Degradación Ambiental",
       "definicion": "Costo de que el entorno empeore, a diferencia del agotamiento, donde el recurso desaparece. Incluye emisiones al aire, degradación del suelo, residuos sólidos urbanos y tratamiento insuficiente de aguas residuales. En 2024 costó $1,238,194 millones de pesos, y las emisiones al aire por sí solas representaron 2.5% del PIB.",
       "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Externalidad Negativa",
       "definicion": "Costo que quien produce no paga y traslada a terceros o a la sociedad entera: el aire que otros respiran, el acuífero que otros dejarán de usar. Las cuentas ecológicas del INEGI son precisamente el ejercicio de ponerle precio a esas externalidades, y ese precio es el que da sustento jurídico a gravarlas.",
       "ley": "Art. 25 y 27 CPEUM · LGEEPA",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Impuesto Pigouviano",
       "definicion": "Gravamen diseñado para que quien genera un costo ambiental lo internalice, bajo la premisa de que quien contamina y agota, paga. No busca principalmente recaudar sino corregir un precio que estaba mal puesto. En México la discusión sobre estos impuestos suele confundirse con la recaudatoria, y son cosas distintas.",
       "ley": "Art. 31 fracción IV y Art. 73 CPEUM",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Manifestación de Impacto Ambiental",
       "definicion": "Documento con el que quien pretende realizar una obra debe acreditar ante la autoridad ambiental los efectos que causará y cómo los mitigará. Es el punto donde una cifra estadística se vuelve una decisión exigible: si el agotamiento hídrico de una región ya es crítico, la autoridad tiene sustento para negarla.",
       "ley": "Art. 27 CPEUM · LGEEPA",
-      "categoria": "📜 Ley de Ingresos & Marco Legal"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Capital Natural",
       "definicion": "Acervo de recursos que la naturaleza aporta a la economía: agua, suelo, bosques, hidrocarburos, capacidad de absorber contaminantes. Se comporta como cualquier otro capital en un aspecto decisivo: si se consume por encima de su reposición, la producción futura se reduce aunque las cuentas presentes se vean bien.",
       "ley": "Art. 27 CPEUM · Sistema de Cuentas Nacionales",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Coeficiente de Gini",
@@ -5573,13 +5573,13 @@ window.AUDIT_DB = {
       "termino": "Estrés Hídrico",
       "definicion": "Situación en que la demanda de agua de una cuenca supera su disponibilidad renovable. Es el indicador que debería anteceder a la autorización de cualquier polo industrial o desarrollo habitacional, porque proyectar crecimiento sin datos de recarga de acuíferos convierte la inversión en un pasivo futuro.",
       "ley": "Art. 27 CPEUM · Ley de Aguas Nacionales",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Matriz Energética",
       "definicion": "Composición de las fuentes con que un país genera y consume energía, medida como la proporción entre fósiles y limpias. Es un dato de soberanía y de sustentabilidad a la vez, y la base sobre la que se justifica jurídicamente que el Estado regule el mercado eléctrico y de combustibles como asunto de rectoría.",
       "ley": "Art. 25, 27 y 28 CPEUM",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Índice Herfindahl-Hirschman",
@@ -5591,7 +5591,7 @@ window.AUDIT_DB = {
       "termino": "Gasto en Protección Ambiental",
       "definicion": "Recursos que la economía destina a prevenir, reducir o reparar el daño al entorno. En 2024 ascendió a $232,882 millones de pesos, 0.7% del PIB, frente a un deterioro de 4.1%. La proporción entre ambas cifras, y no el monto absoluto, es lo que revela la seriedad del compromiso.",
       "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
-      "categoria": "💰 Hacendario & Deuda"
+      "categoria": "🌎 Medio Ambiente"
     },
     {
       "termino": "Consumo de Capital Fijo",
@@ -5649,7 +5649,7 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Aportaciones de Seguridad Social",
-      "categoria": "💰 Hacendario & Deuda",
+      "categoria": "👷 Trabajo y Salario",
       "ley": "Art. 2º fracc. II CFF · Ley del Seguro Social · Ley del ISSSTE",
       "definicion": "Contribuciones a cargo de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social, o de quienes se benefician de servicios de previsión social. Su rasgo decisivo es el destino específico: financian las prestaciones del IMSS y del ISSSTE, no entran a la bolsa común del gasto y no integran la Recaudación Federal Participable, de modo que no se reparten a estados ni municipios."
     },
@@ -5885,13 +5885,181 @@ window.AUDIT_DB = {
       "termino": "Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)",
       "definicion": "La fiscalía de la Fiscalía General de la República que investiga los delitos de corrupción: peculado, cohecho, uso ilícito de atribuciones, enriquecimiento ilícito. La Constitución obliga a que exista. Recibe las denuncias de hechos de la ASF y también las de cualquier persona; a diferencia de otras vías, la denuncia penal pide identificarse.",
       "ley": "Art. 102 apartado A CPEUM · Arts. 4 fr. XV y 40 fr. VI Ley de Fiscalización y Rendición de Cuentas de la Federación",
-      "categoria": "🔍 Fiscalización Superior"
+      "categoria": "🏢 Instituciones"
     },
     {
       "termino": "Transparencia para el Pueblo (Autoridad Garante)",
       "definicion": "El órgano desconcentrado de la Secretaría Anticorrupción y Buen Gobierno que, desde la nueva ley de 2025, es la autoridad garante federal del acceso a la información: la que resuelve los recursos de revisión cuando una dependencia niega o no entrega lo que se le pidió. Ocupó el lugar del extinto INAI. No es la única: el Poder Judicial, el Congreso y los órganos autónomos tienen su propia autoridad garante, y en los estados la función la tienen las contralorías u órganos equivalentes del Ejecutivo local.",
       "ley": "Art. 3 frs. III, IV y V Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025)",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Paquete Económico",
+      "definicion": "Los documentos que el Ejecutivo entrega cada año al Congreso para el año siguiente, a más tardar el 8 de septiembre: los Criterios Generales de Política Económica, la iniciativa de Ley de Ingresos con las reformas fiscales que proponga y el proyecto de Presupuesto de Egresos. En el año en que cambia la Presidencia, el plazo corre hasta el 15 de noviembre. Después, la Cámara de Diputados aprueba la Ley de Ingresos a más tardar el 20 de octubre y el Senado a más tardar el 31; el Presupuesto lo aprueba sólo la Cámara de Diputados, a más tardar el 15 de noviembre. El Paquete de 2027 se entregó el 8 de septiembre de 2026.",
+      "ley": "Art. 74 fr. IV CPEUM · Art. 42 frs. III a V Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Criterios Generales de Política Económica (CGPE)",
+      "definicion": "El documento del Paquete Económico en el que Hacienda dice con qué supuestos armó los ingresos y el gasto del año siguiente —crecimiento, inflación, tasa de interés, tipo de cambio y precio del petróleo— y proyecta las finanzas públicas cinco años hacia adelante, incluidos los requerimientos financieros del sector público y su saldo histórico (SHRFSP). Por eso es la fuente oficial de la deuda total estimada: los CGPE 2027 estiman el SHRFSP al cierre de 2026 en 54.0 % del PIB (p. 67).",
+      "ley": "Arts. 16 y 42 fr. III inciso a) Ley Federal de Presupuesto y Responsabilidad Hacendaria · CGPE 2027, p. 67",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Resolución Miscelánea Fiscal (RMF)",
+      "definicion": "Las reglas generales que el SAT publica cada año en el Diario Oficial para aplicar las leyes fiscales: trámites, plazos, formatos y, en sus anexos, las tablas de cálculo. El Anexo 8 de la RMF 2026 trae las tarifas mensuales y anuales del impuesto sobre la renta que usa la Calculadora Cívica. El Código Fiscal les pone un límite: cuando tocan sujeto, objeto, base, tasa o tarifa, no pueden crear obligaciones o cargas que las leyes no establezcan.",
+      "ley": "Art. 33 fr. I inciso g) Código Fiscal de la Federación · RMF 2026 y su Anexo 8 (DOF 28-12-2025)",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Aguinaldo",
+      "definicion": "El pago anual que todo patrón debe hacer antes del 20 de diciembre: por lo menos quince días de salario, o la parte proporcional a quien no completó el año. Es un mínimo, no un tope: los manuales de remuneraciones de la Cámara de Diputados y del Poder Judicial fijan 40 días. Para el impuesto sobre la renta, una parte queda exenta: la ley habla de 30 días de salario mínimo, y desde la desindexación de 2016 ese límite se calcula con la UMA. Lo que pasa de ahí paga el impuesto.",
+      "ley": "Art. 87 Ley Federal del Trabajo · Art. 93 fr. XIV Ley del Impuesto sobre la Renta",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Prima Vacacional",
+      "definicion": "El pago extra que acompaña a las vacaciones: no menos del 25 % del salario de los días de descanso. Desde la reforma que entró en vigor en 2023, el primer año de trabajo da derecho a doce días de vacaciones pagadas, así que la prima mínima equivale a tres días de salario. Hasta el equivalente a quince días de salario mínimo al año queda libre del impuesto sobre la renta.",
+      "ley": "Arts. 76 y 80 Ley Federal del Trabajo (reforma DOF 27-12-2022) · Art. 93 fr. XIV Ley del Impuesto sobre la Renta",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Salario Mínimo (CONASAMI)",
+      "definicion": "La cantidad menor que debe recibir en efectivo una persona por una jornada de trabajo; la ley pide que alcance para las necesidades normales de una familia y que su revisión anual nunca quede por debajo de la inflación observada. Lo fija una comisión tripartita —trabajadores, patrones y gobierno—: la Comisión Nacional de los Salarios Mínimos. Para 2026 es de $315.04 diarios en el país y de $440.87 en la zona libre de la frontera norte.",
+      "ley": "Art. 123 apartado A fr. VI CPEUM · Arts. 90 y 94 Ley Federal del Trabajo · Resolución de la CONASAMI (DOF 9-12-2025)",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Subsidio para el Empleo",
+      "definicion": "Una cantidad que se resta del impuesto que se retiene a quien gana poco. Desde 2024 dejó de ser una tabla por tramos y es un monto fijo: el valor mensual de la UMA multiplicado por 15.02 %, para quien no rebasa $11,492.66 al mes en 2026. Si el subsidio es mayor que el impuesto, no hay impuesto a cargo, pero tampoco se entrega la diferencia.",
+      "ley": "Decreto que reforma el diverso por el que se otorga el subsidio para el empleo (DOF 31-12-2025)",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Retención del ISR (Tarifa del Artículo 96)",
+      "definicion": "El impuesto que el patrón descuenta cada mes del salario y entrega al SAT como pago provisional del impuesto anual. Se calcula con una tarifa de once tramos: cada tramo tiene una cuota fija y un porcentaje que se aplica sobre lo que el ingreso excede su límite inferior. A quien sólo gana un salario mínimo no se le retiene. Las tablas vigentes se publican en el Anexo 8 de la Resolución Miscelánea Fiscal.",
+      "ley": "Art. 96 Ley del Impuesto sobre la Renta · Anexo 8 de la RMF 2026 (DOF 28-12-2025)",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Cuota Obrera del IMSS",
+      "definicion": "La parte de las cuotas de seguridad social que paga la propia persona trabajadora y que el patrón le descuenta del salario: por enfermedades y maternidad, invalidez y vida, y cesantía en edad avanzada y vejez. Se calcula sobre el salario base de cotización, con porcentajes distintos por seguro y un tope medido en UMA. El patrón y el gobierno pagan su propia parte aparte.",
+      "ley": "Arts. 25, 106 fr. II, 107, 147 y 168 fr. II Ley del Seguro Social",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Secretaría de Hacienda y Crédito Público (SHCP)",
+      "definicion": "La dependencia del Ejecutivo que calcula los ingresos de la Federación, redacta las iniciativas de leyes fiscales y de ingresos, maneja la deuda pública y formula el proyecto de Presupuesto de Egresos. De ella dependen el SAT y la Tesorería de la Federación, y es quien publica los informes trimestrales, la Cuenta Pública y los datos abiertos del presupuesto.",
+      "ley": "Art. 31 frs. II, III, V y XV Ley Orgánica de la Administración Pública Federal",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Servicio de Administración Tributaria (SAT)",
+      "definicion": "Órgano desconcentrado de la Secretaría de Hacienda con carácter de autoridad fiscal. Aplica la legislación fiscal y aduanera, fiscaliza a los contribuyentes y publica, entre otras cosas, la Resolución Miscelánea Fiscal y los listados del artículo 69-B del Código Fiscal: las empresas que facturan operaciones simuladas.",
+      "ley": "Arts. 1o. y 2o. Ley del Servicio de Administración Tributaria",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Instituto Nacional de Estadística y Geografía (INEGI)",
+      "definicion": "Organismo con autonomía técnica y de gestión que norma y coordina el Sistema Nacional de Información Estadística y Geográfica. Produce el PIB, el INPC, los censos y, para esta plataforma, las Cuentas Económicas y Ecológicas y la estadística de finanzas públicas estatales y municipales. También calcula el valor de la UMA.",
+      "ley": "Art. 26 apartado B CPEUM · Art. 52 Ley del Sistema Nacional de Información Estadística y Geográfica",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Consejo Nacional de Población (CONAPO)",
+      "definicion": "El órgano a cargo de la planeación demográfica del país. Publica las proyecciones de población que se usan para repartir cifras entre habitantes: el número de personas que la plataforma usa como denominador (134.4 millones a mitad de 2026) viene de sus proyecciones.",
+      "ley": "Art. 5o. Ley General de Población",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT)",
+      "definicion": "La dependencia que fomenta la protección, restauración y aprovechamiento sustentable de los ecosistemas y recursos naturales para garantizar el derecho a un medio ambiente sano. Evalúa las manifestaciones de impacto ambiental de las obras federales y encabeza el Ramo 16 del Presupuesto.",
+      "ley": "Art. 32 Bis Ley Orgánica de la Administración Pública Federal",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Comisión Nacional del Agua (CONAGUA)",
+      "definicion": "Órgano desconcentrado de la SEMARNAT que ejerce la autoridad federal en materia de aguas nacionales: administra concesiones, cuencas y acuíferos, y es el órgano técnico y normativo de la Federación en la gestión del agua. Su presupuesto forma parte del Ramo 16.",
+      "ley": "Art. 9 Ley de Aguas Nacionales",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Instituto Mexicano del Seguro Social (IMSS)",
+      "definicion": "Organismo público descentralizado, de integración tripartita —sector público, social y privado—, que organiza y administra el Seguro Social. Es también organismo fiscal autónomo: cobra las cuotas obrero-patronales. Su registro de puestos de trabajo afiliados es la serie con la que la plataforma mide el empleo formal al comparar sexenios.",
+      "ley": "Art. 5 Ley del Seguro Social",
+      "categoria": "🏢 Instituciones"
+    },
+    {
+      "termino": "Rescate Bancario: FOBAPROA e IPAB",
+      "definicion": "El FOBAPROA era el fideicomiso de protección al ahorro de la Ley de Instituciones de Crédito con el que el gobierno sostuvo a los bancos en la crisis de 1994-1995. En 1999 la Ley de Protección al Ahorro Bancario creó el Instituto para la Protección al Ahorro Bancario (IPAB), que administra el sistema de protección al ahorro, y dejó al viejo fideicomiso sólo para liquidar sus operaciones. Lo que el rescate sigue costando se paga cada año con el Ramo 34: $35,553.4 millones de pesos en 2026.",
+      "ley": "Arts. 1o. y 2o. y transitorio quinto Ley de Protección al Ahorro Bancario (DOF 19-01-1999) · PEF 2026 (DOF 21-11-2025), Anexo 8",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ramo 16 (Medio Ambiente y Recursos Naturales)",
+      "definicion": "El ramo del Presupuesto de Egresos de la SEMARNAT y los órganos de su sector, entre ellos la Comisión Nacional del Agua. Para 2026 se le aprobaron $45,564.1 millones de pesos. Es lo que la Federación destina a esa secretaría, no todo lo que el país gasta en proteger el ambiente: ese dato más amplio lo mide el INEGI como gasto en protección ambiental.",
+      "ley": "PEF 2026 (DOF 21-11-2025), Anexo 1 · Art. 32 Bis Ley Orgánica de la Administración Pública Federal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Sobrecosto",
+      "definicion": "La diferencia entre lo que una obra terminó costando y lo que se presupuestó al aprobarla. No es por sí mismo una irregularidad: puede venir de cambios de proyecto, de precios o de plazos. Pero cada aumento debe pasar por un convenio justificado de manera fundada y explícita, sin cambiar la naturaleza de la obra, y se informa al órgano interno de control. La reforma de abril de 2025 a la Ley de Obras Públicas quitó del artículo 59 el antiguo tope del 25 % para esos convenios.",
+      "ley": "Art. 59 Ley de Obras Públicas y Servicios Relacionados con las Mismas (reforma DOF 16-04-2025)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Ente Público",
+      "definicion": "Todo órgano que maneja dinero público y debe llevar contabilidad gubernamental: los poderes Ejecutivo, Legislativo y Judicial de la Federación y de los estados, los órganos autónomos, los ayuntamientos, las alcaldías de la Ciudad de México y las entidades paraestatales federales, estatales o municipales.",
+      "ley": "Art. 4 fr. XII Ley General de Contabilidad Gubernamental",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Sexenio",
+      "definicion": "El periodo de seis años de un gobierno federal. La Presidencia de la República empieza el 1 de octubre y dura seis años, sin reelección posible. Cuando la plataforma compara sexenios, cada uno se cuenta por los años completos de su gobierno y la fuente de cada cifra se dice aparte.",
+      "ley": "Art. 83 CPEUM",
+      "categoria": "🗳️ Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Promedio por Habitante (Per Cápita)",
+      "definicion": "Una cifra nacional dividida entre el número de habitantes. Sirve para traer un monto de billones a una escala que se entiende, pero es un promedio: nadie paga, debe ni contamina a partes iguales. En esta plataforma el denominador es la población de CONAPO a mitad de 2026 (134.4 millones), y toda cifra por habitante lleva el chip «derivado» con la operación dicha.",
+      "ley": "Método de la plataforma · CONAPO, Proyecciones de la Población de México y las entidades federativas 2020-2070",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Bandera Roja (Radar de la Plataforma)",
+      "definicion": "En esta plataforma, una bandera roja no es una acusación: es una señal para mirar primero. El radar ordena a las entidades según el dinero federal que dejaron por aclarar ante la Auditoría Superior en la Cuenta Pública 2024: por cada $100 revisados, por monto total o por la parte que toca a sus municipios. Un monto por aclarar todavía puede solventarse con documentos; por eso la bandera invita a leer el informe individual antes de concluir.",
+      "ley": "Método de la plataforma · ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (montos por aclarar por entidad federativa)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Residuos Sólidos Urbanos",
+      "definicion": "La basura de todos los días: lo que se genera en las casas al desechar materiales, productos, envases y empaques, lo que sale de otros lugares con características domiciliarias y lo que deja la limpieza de calles y lugares públicos. Recogerla, trasladarla, tratarla y darle disposición final es servicio público del municipio, por mandato constitucional.",
+      "ley": "Art. 115 fr. III inciso c) CPEUM · Arts. 5 fr. XXXIII y 10 Ley General para la Prevención y Gestión Integral de los Residuos",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Cambio Climático",
+      "definicion": "La variación del clima atribuida directa o indirectamente a la actividad humana, que altera la composición de la atmósfera global y se suma a la variabilidad natural del clima. La ley la distingue de la variación natural: lo que la política pública puede atender es la parte que provocamos.",
+      "ley": "Art. 3 fr. IV Ley General de Cambio Climático",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Gases de Efecto Invernadero",
+      "definicion": "Los componentes gaseosos de la atmósfera, naturales o producidos por la actividad humana, que absorben y emiten radiación infrarroja; su acumulación es la causa principal del cambio climático. Su emisión se estima en el inventario nacional que prevé la Ley General de Cambio Climático.",
+      "ley": "Art. 3 fr. XXIII Ley General de Cambio Climático",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Impuesto al Carbono (IEPS a Combustibles Fósiles)",
+      "definicion": "La parte del IEPS que grava la venta e importación de combustibles fósiles —propano, butano, gasolinas, turbosina, diésel, combustóleo, coque y carbón— con una cuota fija por unidad de cada combustible. Es el impuesto federal más cercano a la idea de que quien contamina paga, aunque su cuota es de centavos por litro.",
+      "ley": "Art. 2 fr. I inciso H) Ley del Impuesto Especial sobre Producción y Servicios",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Cuentas Económicas y Ecológicas de México (CEEM)",
+      "definicion": "La estadística del INEGI que pone en pesos lo que la economía le cuesta al ambiente: el agotamiento de recursos naturales, la degradación del aire, el agua y el suelo, y lo que se gasta en proteger el ambiente. De ellas salen el PIB ecológico (PINE) y los costos totales por agotamiento y degradación: $1,382,214 millones de pesos en 2024. Se publican cada diciembre con los datos del año anterior.",
+      "ley": "INEGI, Cuentas Económicas y Ecológicas de México 2024 (1-12-2025) · Art. 26 apartado B CPEUM",
+      "categoria": "🌎 Medio Ambiente"
     }
   ],
   "legislativo": {
@@ -7642,6 +7810,141 @@ window.AUDIT_DB = {
       "descripcion": "Portal de Hacienda con las bases de datos abiertas del presupuesto: el aprobado, su avance trimestral, los proyectos de presupuesto y los programas. De aquí salen varias de las descargas de la plataforma."
     },
     {
+      "num": 90,
+      "id": "ref-lft",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley Federal del Trabajo [LFT]. Diario Oficial de la Federación, 1 de abril de 1970, última reforma 14 de mayo de 2026 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf",
+      "descripcion": "Fija los mínimos de toda relación de trabajo. La plataforma cita sus artículos 76 (vacaciones), 80 (prima vacacional), 87 (aguinaldo), 90 (salario mínimo) y 94 (la comisión que lo fija). Es la regla con la que la Calculadora Cívica compara las prestaciones de quien la usa con las de los altos cargos."
+    },
+    {
+      "num": 91,
+      "id": "ref-loapf",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley Orgánica de la Administración Pública Federal [LOAPF]. Diario Oficial de la Federación, 29 de diciembre de 1976, última reforma 7 de mayo de 2026 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf",
+      "descripcion": "Reparte los asuntos entre las secretarías de Estado. Su artículo 31 dice qué hace Hacienda (ingresos, deuda y proyecto de presupuesto) y el 32 Bis qué hace la SEMARNAT."
+    },
+    {
+      "num": 92,
+      "id": "ref-lsnieg",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley del Sistema Nacional de Información Estadística y Geográfica [LSNIEG]. Diario Oficial de la Federación, 16 de abril de 2008, última reforma 14 de noviembre de 2025 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSNIEG.pdf",
+      "descripcion": "Regula al INEGI y la información de interés nacional. Su artículo 52 le da autonomía técnica y de gestión. De ese sistema salen el PIB, el INPC, los censos y las Cuentas Económicas y Ecológicas que usa la plataforma."
+    },
+    {
+      "num": 93,
+      "id": "ref-lgpob",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Población. Diario Oficial de la Federación, 7 de enero de 1974, última reforma 16 de julio de 2025 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGP.pdf",
+      "descripcion": "Su artículo 5o. crea el Consejo Nacional de Población, a cargo de la planeación demográfica. De sus proyecciones sale el número de habitantes con que la plataforma reparte cifras por persona."
+    },
+    {
+      "num": 94,
+      "id": "ref-lan",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley de Aguas Nacionales [LAN]. Diario Oficial de la Federación, 1 de diciembre de 1992, última reforma 11 de diciembre de 2025 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAN.pdf",
+      "descripcion": "Regula las aguas nacionales. Su artículo 9 define a la Comisión Nacional del Agua como órgano desconcentrado de la SEMARNAT y autoridad federal en materia hídrica."
+    },
+    {
+      "num": 95,
+      "id": "ref-lpab",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de Protección al Ahorro Bancario [LPAB]. Diario Oficial de la Federación, 19 de enero de 1999, última reforma 11 de mayo de 2022 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPAB.pdf",
+      "descripcion": "Crea el Instituto para la Protección al Ahorro Bancario (IPAB) y, en su transitorio quinto, deja al fideicomiso del FOBAPROA sólo para liquidar sus operaciones. Es el marco legal del rescate bancario que el Presupuesto sigue pagando con el Ramo 34."
+    },
+    {
+      "num": 96,
+      "id": "ref-lgs",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Salud. Diario Oficial de la Federación, 7 de febrero de 1984, última reforma 15 de enero de 2026 (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf",
+      "descripcion": "Su artículo 77 bis 16 A regula los convenios con los que los estados pasan sus servicios de salud a IMSS-Bienestar. Explica por qué el FASSA se reparte distinto según si la entidad firmó o no."
+    },
+    {
+      "num": 97,
+      "id": "ref-rmf2026",
+      "categoria": "tributario",
+      "categoria_nombre": "Marco Tributario y Fiscal",
+      "cita_apa": "Servicio de Administración Tributaria. (2025, 28 de diciembre). Resolución Miscelánea Fiscal para 2026 y sus Anexos 4, 5, 6, 8, 15 y 25. Diario Oficial de la Federación.",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025",
+      "descripcion": "El Anexo 8 contiene las tarifas mensuales y anuales del impuesto sobre la renta de 2026 que la Calculadora Cívica transcribió renglón por renglón. La resolución misma está en https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025."
+    },
+    {
+      "num": 98,
+      "id": "ref-uma2026",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2026, 9 de enero). Unidad de Medida y Actualización. Diario Oficial de la Federación.",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5778072&fecha=09/01/2026",
+      "descripcion": "Da a conocer el valor de la UMA vigente del 1 de febrero de 2026 al 31 de enero de 2027: $117.31 diarios y $3,566.22 mensuales. Con ella se calculan el tope de cotización al Seguro Social, el subsidio para el empleo y los límites exentos del ISR."
+    },
+    {
+      "num": 99,
+      "id": "ref-conasami2026",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Comisión Nacional de los Salarios Mínimos. (2025). Salarios mínimos vigentes a partir del 1 de enero de 2026 [tabla de la resolución publicada en el DOF el 9 de diciembre de 2025]. CONASAMI.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1041076/Tabla_de_Salarios_M_nimos_2026.pdf",
+      "descripcion": "El salario mínimo general de 2026 es de $315.04 diarios (13.0 % más que en 2025) y el de la zona libre de la frontera norte, de $440.87 (5.0 % más). La tabla incluye también los salarios mínimos profesionales."
+    },
+    {
+      "num": 100,
+      "id": "ref-dip-manual2026",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Cámara de Diputados. (2026, 27 de febrero). Manual que Regula las Remuneraciones para las y los Diputados Federales, Personal de Mando y Homólogos de la Cámara de Diputados, de la Unidad de Evaluación y Control y del Canal del Congreso, para el ejercicio fiscal 2026. Diario Oficial de la Federación.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_manual_remun_27feb26.pdf",
+      "descripcion": "Fija la dieta, las prestaciones y los días de aguinaldo del personal de la Cámara (Anexo 1). Es la fuente de las cifras de San Lázaro en la Calculadora Cívica."
+    },
+    {
+      "num": 101,
+      "id": "ref-sen-manual2026",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Cámara de Senadores. (2026, 27 de febrero). Manual de Remuneraciones de las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos, y la información relativa al Capítulo de Servicios Personales. Diario Oficial de la Federación.",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5781138&fecha=27/02/2026",
+      "descripcion": "Fija la dieta y las prestaciones de las senadoras y los senadores para 2026. La plataforma lo coteja con el Anexo 23.2 del Presupuesto de Egresos."
+    },
+    {
+      "num": 102,
+      "id": "ref-sat-69b",
+      "categoria": "tributario",
+      "categoria_nombre": "Marco Tributario y Fiscal",
+      "cita_apa": "Servicio de Administración Tributaria. (s. f.). Notificación a contribuyentes con operaciones presuntamente inexistentes y listados definitivos [artículo 69-B del Código Fiscal de la Federación]. Gobierno de México.",
+      "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336",
+      "descripcion": "Los listados oficiales de empresas que facturan operaciones simuladas. De aquí sale la copia que consulta el verificador del Modo Inspector; se actualiza a mano con cada corte del SAT."
+    },
+    {
+      "num": 103,
+      "id": "ref-comprasmx",
+      "categoria": "adquisiciones_compras",
+      "categoria_nombre": "Compras Públicas y Contrataciones",
+      "cita_apa": "Secretaría Anticorrupción y Buen Gobierno. (s. f.). ComprasMX: Plataforma Digital de Contrataciones Públicas. Gobierno de México.",
+      "url": "https://comprasmx.buengobierno.gob.mx/",
+      "descripcion": "El portal federal donde se publican los procedimientos de contratación: licitaciones, invitaciones y adjudicaciones, con sus contratos. Es el lugar para buscar a quién se le pagó una obra o un servicio."
+    },
+    {
+      "num": 104,
+      "id": "ref-imss-empleo",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Mexicano del Seguro Social. (2025, enero). Puestos de trabajo afiliados al Instituto Mexicano del Seguro Social [boletín de prensa]. IMSS.",
+      "url": "https://www.imss.gob.mx/prensa/archivo/202501/009",
+      "descripcion": "El registro de puestos de trabajo afiliados al IMSS al cierre de 2024, serie oficial de empleo formal. La plataforma la usa para comparar sexenios junto con el boletín del cierre de 2018 (https://www.imss.gob.mx/prensa/archivo/201901/008)."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -7819,7 +8122,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Poder Judicial & SCJN",
       "cita_apa": "Congreso de la Unión. (2024). Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (última reforma publicada el 15 de septiembre de 2024). Artículos 127 (fracciones I a VI) y 94 (párrafo décimo).",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
-      "descripcion": "Principio supremo de remuneración máxima que prohíbe a cualquier persona servidora pública percibir ingresos mayores a los del Presidente de la República ($134,310 pesos netos / $191,657 pesos brutos al mes). Pone fin a los sueldos tabulares previos de ministros que alcanzaban $206,948 netos ($297,404 brutos), vedando bonos discrecionales, pago de seguros médicos privados y seguros de separación con cargo a fondos públicos."
+      "descripcion": "Principio de remuneración máxima: ninguna persona servidora pública puede ganar más que la Presidencia de la República. Para 2026, la remuneración ordinaria neta de la Presidenta es de $134,290 al mes y la bruta de $193,706 (PEF 2026, Anexo 23.1.2). La reforma judicial de 2024 ordenó ajustar a ese tope los sueldos del Poder Judicial en funciones (transitorio séptimo)."
     },
     {
       "num": 21,

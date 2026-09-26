@@ -2101,6 +2101,69 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (glosario y bibliografía al día con los cinco módulos)
+
+- **Rastreo de palabras sin subrayar.** Se abrieron todos los bloques de los
+  cinco módulos, se leyó su texto y se buscaron los conceptos que aparecían
+  sin enlace al glosario. Los enlaces automáticos pasaron de 31 a 45 en el
+  módulo 1, de 67 a 121 en Acción Financiera (módulos 2 y 3), de 20 a 33 en
+  el Inspector y de 16 a 30 en Costo Ambiental.
+- **28 términos nuevos** (`herramientas/integrar_glosario_modulos.py`,
+  idempotente): Paquete Económico, CGPE, Resolución Miscelánea Fiscal,
+  aguinaldo, prima vacacional, salario mínimo (CONASAMI), subsidio para el
+  empleo, retención del ISR, cuota obrera del IMSS, SHCP, SAT, INEGI, CONAPO,
+  SEMARNAT, CONAGUA, IMSS, rescate bancario (FOBAPROA e IPAB), Ramo 16,
+  sobrecosto, ente público, sexenio, promedio por habitante, bandera roja,
+  residuos sólidos urbanos, cambio climático, gases de efecto invernadero,
+  impuesto al carbono y CEEM. Cada definición cita el artículo vigente,
+  leído del texto de la Cámara de Diputados (septiembre de 2026), o el
+  documento oficial (PEF 2026, CGPE 2027, Manual del PJF 2026, tabla de la
+  CONASAMI). El glosario pasa de 215 a 243 términos.
+- **19 definiciones corregidas.** Afirmaban cifras sin documento o cosas que
+  la ley vigente ya no dice:
+  - «Partida Secreta / Ramo 23 / Subvenciones Opacas» decía que eran bolsas
+    «para sobornos o moches, extinguidas». La partida secreta la prohibió la
+    Constitución en 2021 (art. 74 fr. IV) y el Ramo 23 sigue vivo: $167,652.2
+    mdp en 2026. Ahora se llama «Ramo 23 (Provisiones Salariales y
+    Económicas) y la Partida Secreta».
+  - Costo financiero: ahora con el Anexo 8 del PEF 2026 (Ramo 24, empresas
+    públicas y Ramo 34; total $1,572,073.3 mdp).
+  - FASSA: con el art. 29 de la LCF y el 77 bis 16 A de la LGS (convenios
+    con IMSS-Bienestar), en lugar de «recientemente absorbido».
+  - Ramo 03: decía «cifras récord de $78,000 a $84,000 mdp»; el aprobado
+    2026 es $70,005.6 mdp.
+  - Tope salarial (art. 127): la Presidenta gana $134,290 netos al mes en
+    2026 (PEF, Anexo 23.1.2), no $134,310. Se corrigió también la ficha 20,
+    que además decía que el 127 prohíbe seguros médicos y de separación.
+  - SGMM y SSI: ahora con los numerales 8.1.3 y 8.1.4 del Manual del PJF
+    2026 (mando medio y operativo; aportación del 2 al 10 %). Antes hablaban
+    de «hospitales de alta gama» y «sumas ilimitadas» sin fuente.
+  - Haber de retiro: con el transitorio séptimo de la reforma de 2024.
+  - Ponencia, secretario de estudio y cuenta, asesoría de ponencia (antes
+    «Récord de Plazas (Más de 70 asesores)»), capítulo 1000, fideicomisos,
+    CJF y gestión social: se retiraron cifras y adjetivos sin documento.
+  - Auditoría forense: con el tipo «De Cumplimiento Forense» de la MDB 2024.
+  - Declaración 3 de 3 (arts. 32 y 33 LGRA: no obliga a candidatos),
+    periodos de sesiones (arts. 65 y 66) y concejalías (sin cifras sin cita).
+- **Hallazgo legal al redactar «Sobrecosto»:** la reforma a la Ley de Obras
+  Públicas del 16 de abril de 2025 quitó del art. 59 el tope del 25 % para
+  los convenios modificatorios. La definición lo dice.
+- **Tres categorías nuevas** en el glosario: 🌎 Medio Ambiente (17 términos,
+  12 de ellos movidos de Hacendario), 👷 Trabajo y Salario (9) y
+  🏢 Instituciones (12). Sus chips están en la plataforma y en la
+  Enciclopedia; los conteos se leen de la base.
+- **15 fichas bibliográficas nuevas (90 a 104):** LFT, LOAPF, LSNIEG, Ley
+  General de Población, Ley de Aguas Nacionales, Ley de Protección al Ahorro
+  Bancario, Ley General de Salud, RMF 2026 y su Anexo 8 (DOF), UMA 2026
+  (DOF), tabla de salarios mínimos 2026 (CONASAMI), manuales de
+  remuneraciones de Diputados y Senado 2026, listados 69-B del SAT, ComprasMX
+  y el boletín de empleo del IMSS. Todas las ligas se abrieron desde el
+  entorno de trabajo. Eran documentos que la plataforma ya citaba sin ficha.
+- **Autoenlazado:** 75 entradas nuevas o corregidas en `AUTOLINK_TERMINOS`
+  (de 199 a 268). «ASF» y «Auditoría Superior de la Federación» abren ahora
+  su propia entrada y no la de «Fiscalización Superior». Se comprobó que
+  cada término existe y que cada número de nota coincide con su ficha.
+
 ### Hecho (módulo 5, Costo Ambiental, en cuatro bloques; simulación y ticket en negativo)
 
 - **Cuatro bloques** con la mecánica de los módulos 1 a 4 (claves `amreloj`,
@@ -2604,6 +2667,25 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 
 ### Pendiente
 
+- **Glosario y bibliografía, lo que quedó abierto:**
+  - El decreto del subsidio para el empleo (DOF 31-12-2025) no apareció en el
+    índice del DOF consultado desde el entorno; el término lo cita por su
+    nombre y su enlace apunta a la ficha de la UMA. Conseguir la liga.
+  - Concejalías de la CDMX: el número de concejales por alcaldía está en el
+    art. 53 de la Constitución de la Ciudad, cuyo portal no respondió.
+  - Siguen definiciones antiguas con fundamento genérico (sin artículo):
+    Tasa de Referencia, Techo de Endeudamiento, Subastas de Banxico,
+    Contraloría Social, Denuncia Ciudadana, Órgano Interno de Control, entre
+    otras. Revisarlas una por una.
+  - Las fichas 38 (Barra Mexicana de Abogados) y 46 (columna de El
+    Universal) siguen siendo las únicas no oficiales; 14 fichas apuntan aún a
+    la página de inicio de su institución.
+- **Código muerto con ligas de prensa inventadas:** `FACTCHECK_KNOWLEDGE_BASE`
+  en el motor guarda seis «noticias» con titulares, ligas a El Universal,
+  Reforma, Animal Político, El Economista, Proceso y El Financiero que no
+  corresponden a notas reales, y puntajes de «falso». No se pinta (su
+  contenedor no existe en el HTML), pero está en el archivo público.
+  Retirarlo con el visto bueno del autor.
 - **Lista de pendientes de la plataforma:** a petición del autor, cada tarea
   que quede abierta al reorganizar los módulos se anota aquí. Se trabajará a
   fondo cuando los cinco módulos estén reorganizados.
