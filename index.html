@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926v">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926w">
 </head>
 <body>
 
@@ -402,17 +402,17 @@
       </div>
 
       <div class="radar-live-items" id="radarLiveItems">
-        <div class="radar-stat-item" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras')" style="cursor:pointer;" title="Equivalencia: $80,200.1 mdp al año (simulador, fuentes pendientes) repartidos por segundo durante tu visita. No es dinero que se mueva en este instante.">
+        <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('megaobras', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('megaobras', this);}" title="Qué es esta cifra y cómo se calcula">
           <span class="radar-stat-lbl">🚅 Megaobras (equivalencia):</span>
           <strong class="radar-stat-val val-amber" id="radarMegaobrasVal">+$0.00</strong>
           <span class="radar-stat-rate">(+$2,543.13/seg)</span>
         </div>
-        <div class="radar-stat-item" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora')" style="cursor:pointer;" title="Equivalencia: $1,572,073.3 mdp al año (PEF 2026, Anexo 8) repartidos por segundo durante tu visita. No es dinero que se mueva en este instante.">
+        <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('deuda', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('deuda', this);}" title="Qué es esta cifra y cómo se calcula">
           <span class="radar-stat-lbl">📉 Costo de la deuda (equivalencia):</span>
           <strong class="radar-stat-val val-red" id="radarDeudaVal">+$0.00</strong>
           <span class="radar-stat-rate">(+$49,850.12/seg)</span>
         </div>
-        <div class="radar-stat-item highlight-item" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF')" style="cursor:pointer;" title="Cifra fija, no corre por segundo: monto por aclarar de la Cuenta Pública 2024 (ASF, Matriz de Datos Básicos, feb. 2026, p. 11)">
+        <div class="radar-stat-item highlight-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('asf', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('asf', this);}" title="Qué es esta cifra y cómo se calcula">
         <span class="radar-stat-lbl">⚖️ Por aclarar ante la ASF (CP 2024):</span>
         <strong class="radar-stat-val val-gold">$65,169.1 mdp</strong>
         <span class="radar-stat-rate">(cifra al corte, no por segundo)</span>
@@ -2566,7 +2566,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926v</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926w</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2710,16 +2710,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926v"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926w"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926v"></script>
+  <script src="assets/js/audit-database.js?v=20260926w"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926v"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926w"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926v"></script>
+  <script src="assets/js/audit-engine.js?v=20260926w"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

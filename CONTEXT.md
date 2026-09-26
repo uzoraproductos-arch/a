@@ -2101,6 +2101,29 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (radar: cada cifra explica qué es y cómo se calcula)
+
+- Pulsar una cifra del radar (o su ícono) ya no salta a otra sección: abre
+  la ventana lateral del glosario (`abrirRadarConcepto(clave, origen)`) con
+  «Qué significa», «En qué consiste», «Cómo se calcula» y la fuente. Se
+  abre también con Enter o espacio; Escape cierra y el foco vuelve a la
+  cifra.
+- **Megaobras:** las 12 obras del simulador ordenadas por pérdida, cada una
+  con «operar − ingresos»; los cuatro pasos del cálculo hasta la
+  equivalencia de la visita, y el aviso de que FOBAPROA/IPAB aporta el
+  61.4 % del total y es un rescate, no una obra. Estado `pendiente`.
+- **Costo de la deuda:** definición del glosario, los cuatro componentes del
+  Anexo 8 (`DB.panoramaErario.egresos` → `egr-costofin`, suman
+  $1,572,073.3 mdp), la equivalencia por segundo, minuto, hora y día, y
+  «Qué no incluye» (amortizaciones, art. 2º fr. XXV LFPRH).
+- **Por aclarar ante la ASF:** definición del glosario, los seis grupos de
+  la matriz de la CP 2024 (el gasto federalizado concentra el 91.1 %), cómo
+  se obtiene la cifra, por qué no corre por segundo y los plazos de
+  solventación con su fundamento.
+- Todo se lee de la base; los botones del pie llevan a la sección o al
+  glosario completo si el lector quiere seguir. La ventana es la misma del
+  glosario (`glosDrawerShell`, `glosDrawerAbrir`).
+
 ### Hecho (guion editorial, entrega A: significado y promesas)
 
 El autor entregó un guion editorial (sobre la versión 20260926q). Su

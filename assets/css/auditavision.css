@@ -21279,3 +21279,32 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .glos-drawer, .glos-drawer.abierto, .glos-drawer-overlay { transition: none; }
 }
+/* Radar hacendario en la ventana lateral: que es, en que consiste y como
+   se calcula cada cifra. Reutiliza .glos-drawer. */
+.rc-filas { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.rc-fila { display: flex; flex-direction: column; gap: 4px; }
+.rc-fila-cab { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.rc-fila-n { flex: 1 1 auto; min-width: 0; font-size: 13.5px; color: var(--text-main); line-height: 1.35; }
+.rc-fila-m { flex: 0 0 auto; font-family: var(--font-mono); font-size: 12.5px; font-weight: 700; color: var(--gold-bright); white-space: nowrap; }
+[data-theme="light"] .rc-fila-m { color: #0b3a6e; }
+.rc-fila-d { font-size: 12px; line-height: 1.5; color: var(--text-dim); }
+.rc-barra { display: block; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.07); overflow: hidden; }
+.rc-barra > span { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #f59e0b, #ef4444); }
+[data-theme="light"] .rc-barra { background: rgba(0, 0, 0, 0.07); }
+.rc-nota { font-size: 13px !important; margin-top: 10px !important; color: var(--text-secondary) !important; }
+.rc-pasos { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; counter-reset: none; }
+.rc-paso { display: flex; gap: 10px; align-items: flex-start; }
+.rc-paso-n {
+  flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  color: #0c0e15; background: var(--gold);
+}
+[data-theme="light"] .rc-paso-n { background: #0b3a6e; color: #fff; }
+.rc-paso-t { font-size: 14px; line-height: 1.6; color: var(--text-main); }
+.rc-plazos { padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.rc-plazos li { font-size: 13.5px; line-height: 1.55; color: var(--text-main); }
+.rc-fund { color: var(--text-dim); font-size: 12px; }
+.glos-drawer-pie { display: flex; flex-direction: column; gap: 8px; }
+.glos-drawer-todo-2 { border-color: var(--border-subtle); color: var(--text-main); font-weight: 600; }
+.radar-stat-item[role="button"]:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; border-radius: 6px; }

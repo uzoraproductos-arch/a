@@ -7622,9 +7622,9 @@
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function abrirGlosarioDrawer(term, refKey, origen) {
-    var g = glosarioBuscar(term);
-    if (!g) { irAlGlosario(term); return; }
+  /* La ventana lateral es una sola para el glosario y para el radar: se
+     construye la primera vez y despues solo cambia su contenido. */
+  function glosDrawerShell() {
     var ov = document.getElementById('glosDrawerOverlay');
     var dr = document.getElementById('glosDrawer');
     if (!dr) {
@@ -7644,6 +7644,24 @@
         if (ev.key === 'Escape' && dr.classList.contains('abierto')) cerrarGlosarioDrawer();
       });
     }
+    return { ov: ov, dr: dr };
+  }
+
+  function glosDrawerAbrir(ov, dr, origen) {
+    glosDrawerOrigen = origen || document.activeElement;
+    ov.classList.add('abierto');
+    dr.classList.add('abierto');
+    document.body.classList.add('glos-drawer-bloqueo');
+    var cuerpo = dr.querySelector('.glos-drawer-cuerpo');
+    if (cuerpo) cuerpo.scrollTop = 0;
+    var x = dr.querySelector('.glos-drawer-x');
+    if (x) setTimeout(function() { x.focus(); }, 30);
+  }
+
+  function abrirGlosarioDrawer(term, refKey, origen) {
+    var g = glosarioBuscar(term);
+    if (!g) { irAlGlosario(term); return; }
+    var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
     var ref = null;
     if (refKey && DB.referencias_legales) ref = DB.referencias_legales.find(function(r) { return r.id === refKey; }) || null;
     var fuenteHtml = '';
@@ -7678,12 +7696,160 @@
       cerrarGlosarioDrawer(true);
       irAlGlosario(t);
     });
-    glosDrawerOrigen = origen || document.activeElement;
-    ov.classList.add('abierto');
-    dr.classList.add('abierto');
-    document.body.classList.add('glos-drawer-bloqueo');
-    var x = dr.querySelector('.glos-drawer-x');
-    if (x) setTimeout(function() { x.focus(); }, 30);
+    glosDrawerAbrir(ov, dr, origen);
+  }
+
+  /* ------------------------------------------------------------------
+     Radar hacendario: cada cifra abre su explicacion en la ventana
+     lateral (que es, en que consiste, como se calcula y de donde sale),
+     en lugar de saltar a otra seccion. Todo se lee de la base.
+     ------------------------------------------------------------------ */
+  var RADAR_SEG_ANIO = 31536000;
+
+  function radarMdp(v, dec) {
+    return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: dec == null ? 1 : dec, maximumFractionDigits: dec == null ? 1 : dec }) + ' mdp';
+  }
+  function radarPesos(v, dec) {
+    return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: dec || 0, maximumFractionDigits: dec || 0 });
+  }
+  function radarFila(nombre, monto, det, pct) {
+    return '<li class="rc-fila"><div class="rc-fila-cab"><span class="rc-fila-n">' + nombre + '</span>' +
+      '<span class="rc-fila-m">' + monto + '</span></div>' +
+      (pct != null ? '<span class="rc-barra"><span style="width:' + Math.max(0.5, pct).toFixed(1) + '%"></span></span>' : '') +
+      (det ? '<span class="rc-fila-d">' + det + '</span>' : '') + '</li>';
+  }
+  function radarPaso(n, txt, est) {
+    return '<li class="rc-paso"><span class="rc-paso-n">' + n + '</span><span class="rc-paso-t">' + txt + (est ? ' ' + chipEstado(est) : '') + '</span></li>';
+  }
+  function radarSec(tit, html) {
+    return '<section class="glos-drawer-sec"><h4>' + tit + '</h4>' + html + '</section>';
+  }
+
+  function radarConcepto(clave) {
+    var seg = Math.floor(simSegundosEnVista());
+    var g, ref, filas, total;
+    if (clave === 'megaobras') {
+      var sm = DB.simulador_megaobras || { obras: [], totales_consolidados: {} };
+      total = sm.totales_consolidados.perdida_anual_consolidada_mdp || 0;
+      var obras = sm.obras.slice().sort(function(a, b) { return (b.perdida_anual_mdp || 0) - (a.perdida_anual_mdp || 0); });
+      var mayor = obras.length ? obras[0].perdida_anual_mdp || 1 : 1;
+      filas = obras.map(function(o) {
+        var p = o.perdida_anual_mdp || 0;
+        return radarFila(glosEsc(o.nombre), radarMdp(p),
+          p ? 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0) : 'Sin costo de operación anual registrado en el simulador.',
+          p / mayor * 100);
+      }).join('');
+      var fob = sm.obras.find(function(o) { return /FOBAPROA/.test(o.nombre); });
+      var pctFob = fob && total ? (fob.perdida_anual_mdp / total * 100) : 0;
+      return {
+        icono: '🚅', estado: 'pendiente',
+        titulo: 'Pérdida operativa de las megaobras',
+        cuerpo:
+          radarSec('Qué significa', '<p>Lo que cuesta mantener funcionando cada obra en un año, menos lo que ingresa por operar. Cuando el resultado es negativo, la diferencia se cubre con dinero público: subsidios, transferencias o aportaciones de capital.</p>') +
+          radarSec('En qué consiste · las 12 obras del simulador', '<ul class="rc-filas">' + filas + '</ul>') +
+          radarSec('Cómo se calcula', '<ol class="rc-pasos">' +
+            radarPaso(1, 'Pérdida de cada obra = costo de operación anual − ingresos anuales.', 'pendiente') +
+            radarPaso(2, 'Se suman las ' + sm.obras.length + ' obras: <b>' + radarMdp(total) + ' al año</b>.', 'derivado') +
+            radarPaso(3, radarMdp(total) + ' ÷ ' + RADAR_SEG_ANIO.toLocaleString('es-MX') + ' segundos del año = <b>' + radarPesos(total * 1e6 / RADAR_SEG_ANIO, 2) + ' por segundo</b>.', 'derivado') +
+            radarPaso(4, 'En los ' + seg.toLocaleString('es-MX') + ' segundos que llevas aquí: ' + radarPesos(total * 1e6 / RADAR_SEG_ANIO, 2) + ' × ' + seg.toLocaleString('es-MX') + ' = <b>' + radarPesos(total * 1e6 / RADAR_SEG_ANIO * seg, 2) + '</b>. Es una equivalencia, no un pago que ocurra en este instante.', 'derivado') +
+          '</ol>') +
+          radarSec('Qué conviene saber', '<p>' + (fob ? 'Una sola partida, <b>' + glosEsc(fob.nombre) + '</b>, aporta ' + radarMdp(fob.perdida_anual_mdp) + ': el ' + pctFob.toFixed(1) + ' % del total. Es un rescate financiero, no una obra de infraestructura, y conviene leerla aparte. ' : '') + 'La cifra lleva estado <b>pendiente</b> porque el simulador todavía no documenta la fuente de cada costo y cada ingreso obra por obra: tómela como orden de magnitud, no como dato oficial.</p>'),
+        acciones: [{ txt: 'Revisar las 12 obras en el módulo 2', fn: function() { seleccionarModuloExplorer('megaobras'); } }]
+      };
+    }
+    if (clave === 'deuda') {
+      var eg = ((DB.panoramaErario && DB.panoramaErario.egresos) || []).find(function(x) { return x.id === 'egr-costofin'; });
+      if (!eg) return null;
+      g = glosarioBuscar('Costo Financiero de la Deuda');
+      ref = (DB.referencias_legales || []).find(function(r) { return r.id === eg.refKey; });
+      total = eg.montoMdp;
+      filas = (eg.componentes || []).map(function(c) { return radarFila(glosEsc(c.n), radarMdp(c.m), c.d, total ? c.m / total * 100 : 0); }).join('');
+      var ps = total * 1e6 / RADAR_SEG_ANIO;
+      return {
+        icono: '📉', estado: 'oficial',
+        titulo: 'Costo financiero de la deuda',
+        cuerpo:
+          radarSec('Qué significa', '<p>' + glosEsc(g ? g.definicion : eg.queCubre) + '</p>') +
+          radarSec('En qué consiste · ' + glosEsc(eg.clave), '<ul class="rc-filas">' + filas + '</ul>' +
+            '<p class="rc-nota">Suma de los componentes: <b>' + radarMdp(total) + '</b> ' + chipEstado('oficial') + '</p>') +
+          radarSec('Cómo se calcula la equivalencia', '<ol class="rc-pasos">' +
+            radarPaso(1, 'Monto anual aprobado: <b>' + radarMdp(total) + '</b> (' + glosEsc(eg.clave) + ').', 'oficial') +
+            radarPaso(2, radarMdp(total) + ' ÷ ' + RADAR_SEG_ANIO.toLocaleString('es-MX') + ' segundos = <b>' + radarPesos(ps, 2) + ' por segundo</b>.', 'derivado') +
+            radarPaso(3, 'Por minuto: ' + radarPesos(ps * 60) + ' · por hora: ' + radarPesos(ps * 3600) + ' · por día: ' + radarPesos(ps * 86400) + '.', 'derivado') +
+            radarPaso(4, 'En los ' + seg.toLocaleString('es-MX') + ' segundos que llevas aquí: <b>' + radarPesos(ps * seg, 2) + '</b>. Es una equivalencia: los intereses se pagan en fechas fijas, no segundo a segundo.', 'derivado') +
+          '</ol>') +
+          radarSec('Qué no incluye', '<p>Paga <b>intereses</b>, no capital. El artículo 2º, fracción XXV, de la Ley Federal de Presupuesto deja fuera del gasto neto total las amortizaciones de la deuda: lo que se devuelve del principal no aparece en los $10.19 billones del presupuesto.</p>') +
+          (ref ? radarSec('Fuente', '<p class="glos-drawer-apa"><span class="glos-drawer-num">[' + String(ref.num).padStart(2, '0') + ']</span> ' + glosEsc(ref.cita_apa) + '</p>' + (ref.url ? '<a class="glos-drawer-doc" href="' + glosEsc(ref.url) + '" target="_blank" rel="noopener">Abrir el documento oficial ↗</a>' : '')) : ''),
+        acciones: [
+          { txt: 'Ver la ficha en el Panorama del Erario', fn: function() { scAbrirFlujo('egresos', 'eb-egresos', 'egr-costofin'); } },
+          g ? { txt: 'Ver en el glosario completo', fn: function() { irAlGlosario(g.termino); } } : null
+        ]
+      };
+    }
+    if (clave === 'asf') {
+      var cp = DB.cuenta_publica_asf;
+      if (!cp || !cp.cp2024) return null;
+      var t = cp.cp2024.total;
+      var f = cp.fuentes[cp.cp2024.fuente] || {};
+      g = glosarioBuscar('Monto por Aclarar');
+      total = t.porAclarar / 1e6;
+      var grupos = cp.cp2024.grupos.slice().sort(function(a, b) { return b.subtotal.porAclarar - a.subtotal.porAclarar; });
+      filas = grupos.map(function(gr) {
+        var m = gr.subtotal.porAclarar / 1e6;
+        return radarFila(glosEsc(gr.grupo), radarMdp(m), gr.subtotal.auditorias.toLocaleString('es-MX') + ' auditorías · ' + (total ? (m / total * 100).toFixed(1) : '0') + ' % del total', total ? m / total * 100 : 0);
+      }).join('');
+      var plazos = (cp.plazos || []).map(function(p) { return '<li><b>' + glosEsc(p.plazo) + '</b> ' + glosEsc(p.que) + ' <span class="rc-fund">(' + glosEsc(p.fundamento) + ')</span></li>'; }).join('');
+      return {
+        icono: '⚖️', estado: 'oficial',
+        titulo: 'Por aclarar ante la ASF · Cuenta Pública 2024',
+        cuerpo:
+          radarSec('Qué significa', '<p>' + glosEsc(g ? g.definicion : cp.nota) + '</p>') +
+          radarSec('En qué consiste · por grupo funcional', '<ul class="rc-filas">' + filas + '</ul>' +
+            '<p class="rc-nota">Suma de los grupos: <b>' + radarMdp(total) + '</b> ' + chipEstado('oficial') + '</p>') +
+          radarSec('Cómo se obtiene', '<ol class="rc-pasos">' +
+            radarPaso(1, 'La ASF practicó <b>' + t.auditorias.toLocaleString('es-MX') + ' auditorías</b> a la Cuenta Pública 2024 y revisó una muestra de ' + radarMdp(t.muestra / 1e6) + ' (' + t.representatividad + ' % del universo seleccionado).', 'oficial') +
+            radarPaso(2, 'Al cierre de cada auditoría anota lo que carecía de documentación que acreditara su uso. Sumado: <b>' + radarMdp(total) + '</b>.', 'oficial') +
+            radarPaso(3, 'Durante las auditorías ya se recuperaron ' + radarMdp(t.recuperaciones / 1e6) + ', y se promovieron ' + t.PO.toLocaleString('es-MX') + ' pliegos de observaciones.', 'oficial') +
+            radarPaso(4, 'No se reparte por segundo: es el resultado de un procedimiento con fecha de corte (' + glosEsc(cp.cp2024.corte) + '), no dinero que se pierda a cada instante.') +
+          '</ol>') +
+          (plazos ? radarSec('Qué sigue después', '<ul class="rc-plazos">' + plazos + '</ul>') : '') +
+          radarSec('Fuente', '<p class="glos-drawer-apa">' + glosEsc(f.doc || f.corto || '') + ', p. ' + cp.cp2024.pagina + '.</p>' + (f.url ? '<a class="glos-drawer-doc" href="' + glosEsc(f.url) + '" target="_blank" rel="noopener">Abrir el documento oficial ↗</a>' : '')),
+        acciones: [
+          { txt: 'Ver lo que encontró la ASF', fn: function() { seleccionarModuloExplorer('verificador', 'cuentaPublicaASF'); } },
+          g ? { txt: 'Ver en el glosario completo', fn: function() { irAlGlosario(g.termino); } } : null
+        ]
+      };
+    }
+    return null;
+  }
+
+  function abrirRadarConcepto(clave, origen) {
+    var c = null;
+    try { c = radarConcepto(clave); } catch (err) { c = null; }
+    if (!c) return;
+    var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
+    var acc = c.acciones.filter(Boolean);
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">📊</span> Radar hacendario</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar la explicación" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        '<span class="glos-drawer-cat">' + c.icono + ' Qué es esta cifra · ' + chipEstado(c.estado) + '</span>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">' + c.titulo + '</h3>' +
+        c.cuerpo +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        acc.map(function(a, i) { return '<button type="button" class="glos-drawer-todo' + (i ? ' glos-drawer-todo-2' : '') + '" data-rc="' + i + '">' + a.txt + ' ➔</button>'; }).join('') +
+      '</footer>';
+    dr.querySelectorAll('[data-rc]').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var a = acc[+b.dataset.rc];
+        cerrarGlosarioDrawer(true);
+        a.fn();
+      });
+    });
+    glosDrawerAbrir(ov, dr, origen);
   }
 
   function cerrarGlosarioDrawer(sinFoco) {
@@ -27516,6 +27682,7 @@
     irAlGlosario: irAlGlosario,
     abrirGlosarioDrawer: abrirGlosarioDrawer,
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
+    abrirRadarConcepto: abrirRadarConcepto,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
     actualizarConteosGlosario: actualizarConteosGlosario,
