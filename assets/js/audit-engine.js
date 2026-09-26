@@ -4887,7 +4887,7 @@
       n: 1, icono: '⚖️', titulo: 'Circuito del Dinero',
       subtitulo: 'Por dónde pasa cada peso antes de llegar a tu calle',
       texto: 'El dinero público recorre siempre el mismo camino: la Ley de Ingresos (LIF) autoriza cobrarlo, el Presupuesto de Egresos (PEF 2026: $10.19 billones) decide en qué se gasta, el gasto federalizado lo reparte a los 32 estados ($2.81 billones) y las participaciones y aportaciones lo llevan a los municipios. Aquí se audita cada una de esas cuatro etapas.',
-      temas: ['Ingresos: la LIF', 'Egresos: el PEF', 'Gasto federalizado', 'Participaciones municipales']
+      temas: [['🏛️ 1 · Arquitectura del flujo', 'arquitectura'], ['💰 2 · Cuánto dinero es', 'cuanto'], ['🔦 3 · Lo que la cifra grande no dice', 'ciegos']]
     },
     megaobras: {
       n: 2, icono: '🏗️', titulo: 'Inversión &amp; Megaobras',
@@ -4958,7 +4958,7 @@
         '<p class="mod-proemio-sub">' + p.subtitulo + '</p>' +
         '<div class="mod-proemio-texto"></div>' +
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
-          p.temas.map(function(t) { return '<li>' + t + '</li>'; }).join('') +
+          p.temas.map(function(t) { return Array.isArray(t) ? '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>' : '<li>' + t + '</li>'; }).join('') +
         '</ul>' +
         '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
       '</div>';
@@ -5764,8 +5764,17 @@
 
   // --- Etapas del circuito ---------------------------------------------------
   function renderCircuito() {
+    if (!PANORAMA) return;
+    /* Las cuatro etapas viven ahora dentro del esquema del flujo (bloque 1
+       del modulo): cada tarjeta lleva su boton «Que ley la gobierna». */
+    document.querySelectorAll('.civic-flow-step[data-etapa]').forEach(function(paso) {
+      const sel = paso.getAttribute('data-etapa') === etapaCircuitoSel;
+      paso.classList.toggle('active', sel);
+      const btn = paso.querySelector('.civic-step-ley');
+      if (btn) btn.setAttribute('aria-expanded', sel ? 'true' : 'false');
+    });
     const cont = document.getElementById('circuitoGrid');
-    if (!cont || !PANORAMA) return;
+    if (!cont) { renderCircuitoDetalle(); return; }
     cont.innerHTML = PANORAMA.circuito.map(e => `
       <button type="button" class="circuito-etapa${etapaCircuitoSel === e.id ? ' active' : ''}"
               data-etapa="${e.id}" onclick="window.AuditEngine.selectCircuitoEtapa('${e.id}')">
@@ -5782,6 +5791,9 @@
     const box = document.getElementById('circuitoDetalle');
     if (!box || !PANORAMA) return;
     const e = PANORAMA.circuito.find(x => x.id === etapaCircuitoSel);
+    /* Sin la cuadricula vieja, el recuadro vacio solo estorba: se oculta
+       hasta que alguien pide la ley de una etapa. */
+    box.hidden = !e && !document.getElementById('circuitoGrid');
     if (!e) {
       box.innerHTML = '<p class="cd-vacio">Seleccione una etapa para ver su fundamento legal, su plazo y quién responde por ella.</p>';
       return;
@@ -7405,7 +7417,7 @@
      pulsa «Contabilizar»: repintarlos al plegar el capitulo le borraria
      al lector la cuenta que acaba de mandar hacer.
      ==================================================================== */
-  function erarioPlegToggle(clave) {
+  function erarioPlegToggle(clave, sinScroll) {
     const bloque = document.getElementById('eb-' + clave);
     const cuerpo = document.getElementById('eb-cuerpo-' + clave);
     if (!bloque || !cuerpo) return;
@@ -7421,20 +7433,49 @@
       if (mas) mas.textContent = abrir ? '\u2212' : '+';
       /* Al cerrar un capitulo largo la cabecera puede quedar fuera de
          cuadro; «nearest» no mueve nada si ya se ve. */
-      boton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (!sinScroll) boton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     /* Leaflet mide su contenedor al construirse, y el mapa nace dentro de
        un cuerpo oculto: cree tener cero pixeles de alto hasta que se le
        pide volver a medir. El cartograma se dibuja con el mismo retraso
        por la misma razon. */
-    if (abrir && clave === 'mapa') {
+    const mapaVisible = clave === 'mapa' ||
+      (clave === 'cuanto' && !(document.getElementById('eb-cuerpo-mapa') || {}).hidden);
+    if (abrir && mapaVisible) {
       if (state.activeView === 'cartogram') {
         renderCartogram();
       } else if (state.leafletMap) {
         setTimeout(() => state.leafletMap.invalidateSize(), 60);
       }
     }
+  }
+
+  /* Abre los bloques plegados que envuelven a un elemento, del mas externo
+     al mas interno, para que un salto desde un menu o desde el radar no
+     aterrice sobre algo oculto. */
+  function erarioAbrirAncestros(el) {
+    const cadena = [];
+    let n = el && el.parentElement;
+    while (n) {
+      if (n.classList && n.classList.contains('erario-pleg') && n.id && n.id.indexOf('eb-') === 0) cadena.unshift(n.id.slice(3));
+      n = n.parentElement;
+    }
+    cadena.forEach(function(clave) {
+      const cuerpo = document.getElementById('eb-cuerpo-' + clave);
+      if (cuerpo && cuerpo.hidden) erarioPlegToggle(clave, true);
+    });
+  }
+
+  /* El indice de tres pasos del modulo 1: abre el bloque (si estaba
+     cerrado) y lo trae a la vista. */
+  function erarioIr(clave) {
+    const bloque = document.getElementById('eb-' + clave);
+    if (!bloque) return;
+    erarioAbrirAncestros(bloque);
+    const cuerpo = document.getElementById('eb-cuerpo-' + clave);
+    if (cuerpo && cuerpo.hidden) erarioPlegToggle(clave, true);
+    setTimeout(function() { bloque.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 40);
   }
 
   function renderTerritorioErario() {
@@ -26034,7 +26075,8 @@
     switchTab('presupuesto');
     switchSubtab('presupuesto', 'panoramica');
     setTimeout(() => {
-      const el = document.getElementById('circuitoGrid') || document.getElementById('tab-panel-presupuesto');
+      if (document.getElementById('eb-arquitectura')) { erarioIr('arquitectura'); return; }
+      const el = document.getElementById('tab-panel-presupuesto');
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   }
@@ -26084,6 +26126,7 @@
                          (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
     var targetScroll = (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
+    if (targetScroll) erarioAbrirAncestros(targetScroll);
     if (targetScroll) {
       setTimeout(function() {
         targetScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -27168,6 +27211,7 @@
     aplicarAutolink: aplicarAutolink,
     selectCircuitoEtapa: selectCircuitoEtapa,
     erarioPlegToggle: erarioPlegToggle,
+    erarioIr: erarioIr,
     selectFlujoItem: selectFlujoItem,
     closeFlujoFicha: closeFlujoFicha,
     selectMunicipio: selectMunicipio,

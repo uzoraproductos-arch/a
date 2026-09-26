@@ -2101,6 +2101,36 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 1, Circuito del Dinero, en tres bloques)
+
+- **Párrafo del proemio:** «auditar», «presupuesto federal», «Ley de Ingresos
+  de la Federación», «ramos», «Ramo 28», «Ramo 33», «Cuenta Pública» y
+  «Auditoría Superior de la Federación» abren su definición en la ventana
+  lateral. Las siglas se escriben completas y se explica qué es un ramo y qué
+  distingue al 28 (participaciones de libre uso) del 33 (aportaciones
+  etiquetadas). El glosario suma «Auditar (Auditoría Gubernamental)» y
+  «Auditoría Superior de la Federación (ASF)» (214 términos).
+- **Índice de tres pasos** bajo el proemio y, en el proemio, tres botones que
+  abren cada bloque (`erarioIr`).
+- **Bloque 1 · Arquitectura del flujo del erario federal:** el esquema del
+  flujo y «Las cuatro etapas» se fundieron en una sola tira de cuatro
+  tarjetas con flecha (se recauda → se aprueba → se ejerce → se rinden
+  cuentas). Cada una lleva su cifra y el botón «Qué ley la gobierna», que
+  abre debajo el fundamento, el plazo y quién responde (datos de
+  `panoramaErario.circuito`). La etapa 4 muestra lo por aclarar de la CP 2024
+  ($65,169.1 mdp, oficial, ref. [80]). Dentro: 1.1 «¿Cuánto margen tiene el
+  presupuesto?» (barra proporcional y termostato) y 1.2 «¿A qué equivale?».
+- **Bloque 2 · Cuánto dinero es:** la tira de cinco cifras y, dentro, 2.1 De
+  dónde sale, 2.2 En qué se va y 2.3 A dónde baja (mapa y 32 entidades).
+- **Bloque 3 · Lo que la cifra grande no dice:** los cinco puntos ciegos.
+- Los saltos desde menús, radar y proemio abren los bloques que envuelven al
+  destino (`erarioAbrirAncestros`); el mapa se vuelve a medir al abrirse.
+- **Equivalencias corregidas y marcadas pendiente:** decía «12.5 millones» de
+  becas, pero $2,810,800 mdp ÷ $33,600 da 83.6 millones; y «2,850
+  hospitales», cuando $1,572,073.3 ÷ $550 mdp da 2,858. Ahora se muestra la
+  operación, y las tres llevan el chip `pendiente` porque sus supuestos no
+  tienen documento citado (ver Pendiente).
+
 ### Hecho (logotipo propio: el billete inspector, con su presentación)
 
 - El ⚖️ de la cabecera se sustituyó por un logotipo en SVG
@@ -2352,6 +2382,11 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
 - **Titular de la ASF:** confirmar si sigue David Colmenares tras marzo de 2026.
+- **Equivalencias del módulo 1 (bloque 1.2):** el costo de un hospital
+  general de zona ($550 mdp), el monto de la beca universitaria ($2,800 al
+  mes) y el Tren Maya ($120,000 → $515,000 mdp, $79.27 por segundo) no tienen
+  documento oficial citado. Conseguir la fuente (IMSS, reglas de operación
+  de la beca, ASF/FONATUR) o retirar la tarjeta.
 - **Guion editorial, entregas B a E** (portada, glosario ampliado,
   diccionario de sustituciones, reescritura por módulos): esperan decisiones
   del autor sobre «tú» o «usted», nombres de menús y el Pase.

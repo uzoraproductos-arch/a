@@ -21411,3 +21411,151 @@ body.glos-drawer-bloqueo { overflow: hidden; }
   line-height: 1.55;
 }
 .pres-lista li { margin: 6px 0; font-size: 14px; color: var(--text-main); }
+
+/* ==========================================================================
+   MÓDULO 1 EN TRES BLOQUES
+   Un índice de tres pasos arriba; debajo, tres bloques mayores que se
+   despliegan por separado y, dentro, sus capítulos (1.1, 2.1...) que se
+   despliegan a su vez. La línea punteada a la izquierda amarra cada
+   capítulo con su bloque.
+   ========================================================================== */
+.erario-indice {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 4px 0 22px;
+}
+.erario-indice-paso {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: var(--text-main);
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.erario-indice-paso:hover { transform: translateY(-2px); background: var(--bg-card-hover); }
+.erario-indice-paso:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.ei-n {
+  flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--font-mono); font-weight: 800; font-size: 0.9rem;
+  color: #0c0e15; background: var(--gold);
+}
+.ei-ico { font-size: 26px; line-height: 1; }
+.ei-tx { display: flex; flex-direction: column; min-width: 0; }
+.ei-tx b { font-family: var(--font-serif); font-size: 15px; color: var(--gold-bright); line-height: 1.25; }
+[data-theme="light"] .ei-tx b { color: var(--navy, #0b3a6e); }
+.ei-tx small { font-size: 12px; color: var(--text-secondary); line-height: 1.35; }
+.erario-indice-flecha {
+  align-self: center;
+  color: var(--gold);
+  font-size: 18px;
+}
+
+.erario-pleg-mayor { margin-bottom: 18px; }
+.erario-pleg-mayor > .erario-pleg-h .erario-pleg-cab {
+  padding: 18px 20px;
+  border-color: var(--border-gold);
+  border-left: 4px solid var(--gold);
+}
+.erario-pleg-ico { flex: none; font-size: 34px; line-height: 1; }
+.erario-pleg-mayor > .erario-pleg-cuerpo {
+  margin-left: 22px;
+  padding: 20px 0 6px 20px;
+  border-left: 2px dashed var(--border-gold);
+}
+
+.erario-pleg-sub { margin: 0 0 14px; }
+.erario-pleg-sub > .erario-pleg-h .erario-pleg-cab { padding: 12px 16px; background: var(--bg-card-alt); }
+.erario-pleg-sub .erario-pleg-tit { font-size: 18px; }
+.erario-pleg-sub .erario-pleg-av { font-size: 13px; }
+.erario-pleg-sub .erario-pleg-n {
+  width: auto; min-width: 2.2rem; padding: 0 8px; border-radius: 999px; font-size: 0.85rem;
+}
+
+/* Bloque 1: las cuatro etapas en una sola tira, con flecha entre ellas */
+.erario-pleg-cuerpo .civic-flow-schematic { margin-top: 0; }
+.civic-flow-header .erario-bloque-sub { flex: 1 1 380px; }
+.civic-flow-badge {
+  font-family: var(--font-mono); font-size: 11px; color: var(--gold);
+  background: rgba(201, 168, 76, 0.1); border: 1px solid var(--border-gold);
+  padding: 4px 10px; border-radius: 12px;
+}
+.civic-flow-4 {
+  list-style: none;
+  padding: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 12px;
+}
+.civic-flow-4 .civic-flow-step { display: flex; flex-direction: column; padding-top: 20px; }
+.civic-flow-4 .civic-flow-step:not(:last-child)::after {
+  content: "➜";
+  position: absolute;
+  right: -21px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 16px;
+}
+.civic-flow-4 .civic-flow-step.active { border-color: var(--gold-bright); box-shadow: 0 0 0 1px var(--gold-bright) inset; }
+.civic-step-verbo {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  display: flex; align-items: center; gap: 8px;
+}
+[data-theme="light"] .civic-step-verbo { color: var(--navy, #0b3a6e); }
+.civic-step-ico { font-size: 26px; line-height: 1; }
+.civic-flow-4 .civic-step-title { font-size: 12.5px; color: var(--text-secondary); font-weight: 600; }
+.civic-flow-4 .civic-step-desc { flex: 1; font-size: 12px; }
+.civic-step-fijo .est-chip { font-size: 9.5px; vertical-align: middle; }
+.civic-step-ley {
+  margin-top: 10px;
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  font: inherit; font-size: 12px; font-weight: 700;
+  color: var(--gold-bright);
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: 999px;
+  cursor: pointer;
+}
+[data-theme="light"] .civic-step-ley { color: var(--navy, #0b3a6e); }
+.civic-step-ley:hover { background: rgba(201, 168, 76, 0.18); }
+.civic-step-ley[aria-expanded="true"] .civic-step-ley-flecha { display: inline-block; transform: rotate(180deg); }
+.civic-flow-schematic .circuito-detalle[hidden] { display: none; }
+
+/* El proemio del módulo 1 enlista los tres bloques y los abre */
+.mod-proemio-tema-ir { padding: 0 !important; }
+.mod-proemio-tema-ir button {
+  font: inherit; font-size: 12px; color: inherit;
+  padding: 5px 12px; border: 0; background: none; cursor: pointer; border-radius: 999px;
+}
+.mod-proemio-tema-ir:hover { border-color: var(--gold) !important; }
+
+@media (max-width: 1100px) {
+  .civic-flow-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .civic-flow-4 .civic-flow-step:nth-child(2)::after { display: none; }
+}
+@media (max-width: 760px) {
+  .erario-indice { flex-direction: column; }
+  .erario-indice-flecha { transform: rotate(90deg); }
+  .erario-pleg-mayor > .erario-pleg-cuerpo { margin-left: 8px; padding-left: 12px; }
+  .erario-pleg-ico { font-size: 26px; }
+  .civic-flow-4 { grid-template-columns: 1fr; gap: 24px; }
+  .civic-flow-4 .civic-flow-step::after { display: none; }
+  .civic-flow-4 .civic-flow-step:not(:last-child)::before {
+    content: "➜"; position: absolute; bottom: -21px; left: 50%;
+    transform: translateX(-50%) rotate(90deg); color: var(--gold);
+  }
+}

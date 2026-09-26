@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926za">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zb">
 </head>
 <body>
 
@@ -815,54 +815,104 @@
           <span class="hero-tag">Panorámica del Erario · Ejercicio Fiscal 2026</span>
           <h2>1. El Circuito del Dinero Público</h2>
           <p>
-            Antes de auditar una cifra hay que saber por dónde pasó. De cada peso del presupuesto federal ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). El dinero público recorre siempre el mismo camino: alguien autoriza cobrarlo en la Ley de Ingresos (<a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación">LIF</a>, $10.19 B), alguien aprueba en qué gastarlo en el <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación">PEF</a> ($10.19 B), alguien lo ejerce y distribuye en el territorio entre <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ramo 28 Participaciones">Ramo 28</a> y <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ramo 33 Aportaciones">Ramo 33</a>, y alguien lo revisa en la Cuenta Pública ante la ASF. Esta sección es el mapa integral de ese recorrido.
+            Antes de <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditar (Auditoría Gubernamental)', null, this)" title="Qué significa «Auditar (Auditoría Gubernamental)»" aria-haspopup="dialog">auditar<span class="glos-term-ico" aria-hidden="true">📖</span></button> una cifra hay que saber por dónde pasó. Del <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('PEF (Presupuesto de Egresos de la Federación)', null, this)" title="Qué significa «PEF (Presupuesto de Egresos de la Federación)»" aria-haspopup="dialog">presupuesto federal<span class="glos-term-ico" aria-hidden="true">📖</span></button> de 2026 ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). El dinero público recorre siempre el mismo camino: el Congreso autoriza cobrarlo en la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('LIF (Ley de Ingresos de la Federación)', null, this)" title="Qué significa «LIF (Ley de Ingresos de la Federación)»" aria-haspopup="dialog">Ley de Ingresos de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación 2026">[10]</a>; la Cámara de Diputados aprueba en qué gastarlo en el Presupuesto de Egresos <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">[11]</a>; el gobierno lo ejerce y lo reparte en el territorio por medio de dos <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo Presupuestario', null, this)" title="Qué significa «Ramo Presupuestario»" aria-haspopup="dialog">ramos<span class="glos-term-ico" aria-hidden="true">📖</span></button> (así se llaman los grandes apartados del presupuesto): el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 28 (Participaciones Federales)', null, this)" title="Qué significa «Ramo 28 (Participaciones Federales)»" aria-haspopup="dialog">Ramo 28<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de participaciones que los estados gastan con libertad, y el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 33 (Aportaciones Federales)', null, this)" title="Qué significa «Ramo 33 (Aportaciones Federales)»" aria-haspopup="dialog">Ramo 33<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de aportaciones etiquetadas para educación, salud, agua o seguridad <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a>; y al año siguiente se rinde la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Cuenta Pública', null, this)" title="Qué significa «Cuenta Pública»" aria-haspopup="dialog">Cuenta Pública<span class="glos-term-ico" aria-hidden="true">📖</span></button>, que revisa la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditoría Superior de la Federación (ASF)', null, this)" title="Qué significa «Auditoría Superior de la Federación (ASF)»" aria-haspopup="dialog">Auditoría Superior de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> (ASF). Esta sección es el mapa de ese recorrido, en tres bloques.
           </p>
         </div>
 
         <!-- ====================================================================
-             ESQUEMA PROPORCIONAL DEL FLUJO PRESUPUESTAL (ESTILO USASPENDING & CIVIO)
+             MÓDULO 1 EN TRES BLOQUES: arquitectura del flujo, cuánto dinero es
+             y lo que la cifra grande no dice. Cada bloque se despliega por
+             separado; dentro, sus capítulos se despliegan a su vez.
              ==================================================================== -->
-        <div class="civic-flow-schematic">
-          <div class="civic-flow-header">
-            <h3 class="civic-flow-title">
-              <span>🏛️</span> Arquitectura del Flujo del Erario Federal (PEF 2026)
-            </h3>
-            <span style="font-family:var(--font-mono); font-size:11px; color:var(--gold); background:rgba(201,168,76,0.1); border:1px solid var(--border-gold); padding:4px 10px; border-radius:12px;">
-              Unidad de Caja · Art. 1° LIF &amp; Art. 74 CPEUM
-            </span>
+        <nav class="erario-indice" aria-label="Los tres bloques de esta sección">
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('arquitectura')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">🏛️</span><span class="ei-tx"><b>Arquitectura del flujo</b><small>Por dónde pasa y qué ley lo gobierna</small></span></button>
+          <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('cuanto')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">💰</span><span class="ei-tx"><b>Cuánto dinero es</b><small>Lo que entra, lo que sale y a dónde baja</small></span></button>
+          <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ciegos')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">🔦</span><span class="ei-tx"><b>Lo que la cifra no dice</b><small>Cinco lecturas que cambian el sentido</small></span></button>
+        </nav>
+
+        <!-- BLOQUE 1 · ARQUITECTURA DEL FLUJO (esquema + las cuatro etapas y su ley) -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-arquitectura">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-arquitectura"
+                    onclick="window.AuditEngine.erarioPlegToggle('arquitectura')">
+              <span class="erario-pleg-n" aria-hidden="true">1</span>
+              <span class="erario-pleg-ico" aria-hidden="true">🏛️</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Arquitectura del flujo del erario federal</span>
+                <span class="erario-pleg-av">Las cuatro etapas del dinero público —se recauda, se aprueba, se ejerce y se revisa—, cuánto mueve cada una y qué ley la gobierna.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-arquitectura" hidden>
+          <div class="civic-flow-schematic">
+            <div class="civic-flow-header">
+              <p class="erario-bloque-sub">Pulse «Contabilizar» para ver pasar el dinero por las tres primeras etapas, y «Qué ley la gobierna» para leer el fundamento, el plazo y quién responde por cada una.</p>
+              <span class="civic-flow-badge">Unidad de Caja · Art. 1° LIF &amp; Art. 74 CPEUM</span>
+            </div>
+            <div class="erario-mandos" id="flujoContableMandos"></div>
+            <ol class="civic-flow-pipeline civic-flow-4" id="flujoContablePipeline">
+              <li class="civic-flow-step" data-etapa="cir-1">
+                <span class="civic-step-num">ETAPA 1</span>
+                <div class="civic-step-verbo"><span class="civic-step-ico" aria-hidden="true">💰</span> Se recauda</div>
+                <div class="civic-step-title">Ingresos totales · Ley de Ingresos (LIF) <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación 2026">[10]</a></div>
+                <div class="civic-step-amount" id="flujoMontoEtapa1" data-target="10.19">$0.00 Billones</div>
+                <p class="civic-step-desc">
+                  Impuestos (ISR <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lisr')" title="Ley del Impuesto sobre la Renta">[52]</a> <span id="flujoIsr" data-target="3.07">$0.00 B</span>, IVA <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-liva')" title="Ley del Impuesto al Valor Agregado">[53]</a> <span id="flujoIva" data-target="1.59">$0.00 B</span>, IEPS <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lieps')" title="Ley del Impuesto Especial sobre Producción y Servicios">[54]</a> <span id="flujoIeps" data-target="0.76">$0.00 B</span>), ingresos petroleros y <strong>endeudamiento neto aprobado <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfdp')" title="Ley Federal de Deuda Pública">[04]</a> (<span id="flujoDeuda" data-target="1.47">$0.00 B</span>)</strong>.
+                </p>
+                <button type="button" class="civic-step-ley" aria-expanded="false" aria-controls="circuitoDetalle" onclick="window.AuditEngine.selectCircuitoEtapa('cir-1')">⚖️ Qué ley la gobierna <span class="civic-step-ley-flecha" aria-hidden="true">▾</span></button>
+              </li>
+              <li class="civic-flow-step" data-etapa="cir-2">
+                <span class="civic-step-num">ETAPA 2</span>
+                <div class="civic-step-verbo"><span class="civic-step-ico" aria-hidden="true">⚖️</span> Se aprueba el gasto</div>
+                <div class="civic-step-title">Destino federal · Presupuesto de Egresos (PEF) <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">[11]</a></div>
+                <div class="civic-step-amount" id="flujoMontoEtapa2" data-target="10.19">$0.00 Billones</div>
+                <p class="civic-step-desc">
+                  <strong>Gasto programable <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfprh')" title="Ley Federal de Presupuesto y Responsabilidad Hacendaria">[02]</a> (<span id="flujoProgMonto" data-target="7.09">$0.00 B</span> / <span id="flujoProgPct" data-target="69.6">0.0%</span>)</strong> para salud, educación, pensiones e inversión; y <strong>no programable (<span id="flujoNoProgMonto" data-target="3.10">$0.00 B</span> / <span id="flujoNoProgPct" data-target="30.4">0.0%</span>)</strong>: intereses, participaciones y adeudos.
+                </p>
+                <button type="button" class="civic-step-ley" aria-expanded="false" aria-controls="circuitoDetalle" onclick="window.AuditEngine.selectCircuitoEtapa('cir-2')">⚖️ Qué ley la gobierna <span class="civic-step-ley-flecha" aria-hidden="true">▾</span></button>
+              </li>
+              <li class="civic-flow-step" data-etapa="cir-3">
+                <span class="civic-step-num">ETAPA 3</span>
+                <div class="civic-step-verbo"><span class="civic-step-ico" aria-hidden="true">🗺️</span> Se ejerce y se distribuye</div>
+                <div class="civic-step-title">Transferencias a estados y municipios</div>
+                <div class="civic-step-amount" id="flujoMontoEtapa3" data-target="2.81">$0.00 Billones</div>
+                <p class="civic-step-desc">
+                  <span id="flujoFedPct" data-target="27.6">0.0%</span> del erario viaja a los 32 estados y 2,479 municipios: <strong>Ramo 28, participaciones <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> (<span id="flujoRamo28" data-target="1.46">$0.00 B</span>)</strong> y <strong>Ramo 33, aportaciones <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> (<span id="flujoRamo33" data-target="1.04">$0.00 B</span>)</strong>.
+                </p>
+                <button type="button" class="civic-step-ley" aria-expanded="false" aria-controls="circuitoDetalle" onclick="window.AuditEngine.selectCircuitoEtapa('cir-3')">⚖️ Qué ley la gobierna <span class="civic-step-ley-flecha" aria-hidden="true">▾</span></button>
+              </li>
+              <li class="civic-flow-step" data-etapa="cir-4">
+                <span class="civic-step-num">ETAPA 4</span>
+                <div class="civic-step-verbo"><span class="civic-step-ico" aria-hidden="true">🔎</span> Se rinden cuentas</div>
+                <div class="civic-step-title">Revisión de la Cuenta Pública · ASF <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-asf-mdb2024')" title="Auditoría Superior de la Federación: Matriz de Datos Básicos, Cuenta Pública 2024">[80]</a></div>
+                <div class="civic-step-amount civic-step-fijo">$65,169.1 mdp <span class="est-chip est-oficial">oficial</span></div>
+                <p class="civic-step-desc">
+                  Quedó <strong>por aclarar</strong> al revisar la Cuenta Pública 2024, la más reciente ya fiscalizada: dinero observado que las instituciones auditadas aún deben justificar o reintegrar. Esta etapa ocurre al año siguiente; por eso su cifra es de 2024 y no de 2026.
+                </p>
+                <button type="button" class="civic-step-ley" aria-expanded="false" aria-controls="circuitoDetalle" onclick="window.AuditEngine.selectCircuitoEtapa('cir-4')">⚖️ Qué ley la gobierna <span class="civic-step-ley-flecha" aria-hidden="true">▾</span></button>
+              </li>
+            </ol>
+            <div class="circuito-detalle" id="circuitoDetalle"></div>
           </div>
 
-          <!-- Mandos del Simulador Contable del Flujo (Inicia en ceros, cuenta a peticion) -->
-          <div class="erario-mandos" id="flujoContableMandos"></div>
-
-          <!-- 3 Etapas Conectadas (Contabilizador Dinamico con Citas Oficiales) -->
-          <div class="civic-flow-pipeline" id="flujoContablePipeline">
-            <div class="civic-flow-step">
-              <span class="civic-step-num">ETAPA 1</span>
-              <div class="civic-step-title">Ingresos Totales (<a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación 2026">LIF [10]</a>)</div>
-              <div class="civic-step-amount" id="flujoMontoEtapa1" data-target="10.19">$0.00 Billones</div>
-              <p class="civic-step-desc">
-                Recaudación tributaria (ISR <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lisr')" title="Ley del Impuesto sobre la Renta">[52]</a> <span id="flujoIsr" data-target="3.07">$0.00 B</span>, IVA <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-liva')" title="Ley del Impuesto al Valor Agregado">[53]</a> <span id="flujoIva" data-target="1.59">$0.00 B</span>, IEPS <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lieps')" title="Ley del Impuesto Especial sobre Producción y Servicios">[54]</a> <span id="flujoIeps" data-target="0.76">$0.00 B</span>), petrolera y <strong>endeudamiento neto aprobado <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfdp')" title="Ley Federal de Deuda Pública">[04]</a> (<span id="flujoDeuda" data-target="1.47">$0.00 B</span>)</strong>.
-              </p>
-            </div>
-            <div class="civic-flow-step">
-              <span class="civic-step-num">ETAPA 2</span>
-              <div class="civic-step-title">Destino Federal (<a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">PEF [11]</a>)</div>
-              <div class="civic-step-amount" id="flujoMontoEtapa2" data-target="10.19">$0.00 Billones</div>
-              <p class="civic-step-desc">
-                <strong>Gasto Programable <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfprh')" title="Ley Federal de Presupuesto y Responsabilidad Hacendaria">[02]</a> (<span id="flujoProgMonto" data-target="7.09">$0.00 B</span> / <span id="flujoProgPct" data-target="69.6">0.0%</span>)</strong> para salud, educación, pensiones e inversión; y <strong>No Programable (<span id="flujoNoProgMonto" data-target="3.10">$0.00 B</span> / <span id="flujoNoProgPct" data-target="30.4">0.0%</span>)</strong>.
-              </p>
-            </div>
-            <div class="civic-flow-step">
-              <span class="civic-step-num">ETAPA 3</span>
-              <div class="civic-step-title">Transferencias Federalizadas</div>
-              <div class="civic-step-amount" id="flujoMontoEtapa3" data-target="2.81">$0.00 Billones</div>
-              <p class="civic-step-desc">
-                <span id="flujoFedPct" data-target="27.6">0.0%</span> del erario viaja a los 32 estados y 2,479 municipios: <strong>Ramo 28 <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> (<span id="flujoRamo28" data-target="1.46">$0.00 B</span>)</strong> y <strong>Ramo 33 <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> (<span id="flujoRamo33" data-target="1.04">$0.00 B</span>)</strong>.
-              </p>
-            </div>
-          </div>
-
+          <div class="erario-bloque erario-pleg erario-pleg-sub" id="eb-salud">
+          <h4 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-salud"
+                    onclick="window.AuditEngine.erarioPlegToggle('salud')">
+              <span class="erario-pleg-n" aria-hidden="true">1.1</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">¿Cuánto margen tiene el presupuesto?</span>
+                <span class="erario-pleg-av">La proporción del gasto de un vistazo y el termostato que mide cuánto está comprometido antes de empezar.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h4>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-salud" hidden>
           <!-- ====================================================================
                SIMULADOR DE SALUD FINANCIERA & DESGLOSE PROPORCIONAL DEL PEF 2026
                ==================================================================== -->
@@ -946,6 +996,23 @@
             </div>
           </div>
 
+          </div>
+          </div>
+
+          <div class="erario-bloque erario-pleg erario-pleg-sub" id="eb-equivale">
+          <h4 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-equivale"
+                    onclick="window.AuditEngine.erarioPlegToggle('equivale')">
+              <span class="erario-pleg-n" aria-hidden="true">1.2</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">¿A qué equivale?</span>
+                <span class="erario-pleg-av">Tres comparaciones para dimensionar las cifras, con la operación y sus supuestos a la vista.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h4>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-equivale" hidden>
           <!-- Cajas de Equivalencias Ciudadanas (Civio "¿A qué equivale?") -->
           <div class="civio-equiv-grid">
             <div class="civio-equiv-card">
@@ -953,9 +1020,9 @@
                 <span class="civio-equiv-ico">🏥</span>
               </div>
               <div>
-                <div class="civio-equiv-val">2,850 Hospitales</div>
+                <div class="civio-equiv-val">2,858 hospitales <span class="est-chip est-pendiente">pendiente</span></div>
                 <div class="civio-equiv-lbl">
-                  El <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Costo Financiero de la Deuda')">costo financiero de la deuda</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfdp')" title="Ley Federal de Deuda Pública">[04]</a> ($1.57 B) equivale a construir y equipar 2,850 hospitales generales de zona.
+                  El <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Costo Financiero de la Deuda')">costo financiero de la deuda</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfdp')" title="Ley Federal de Deuda Pública">[04]</a> ($1.57 B) equivale a construir y equipar unos 2,858 hospitales generales de zona ($1,572,073.3 mdp ÷ $550 mdp por hospital).
                 </div>
               </div>
             </div>
@@ -964,9 +1031,9 @@
                 <span class="civio-equiv-ico">🎓</span>
               </div>
               <div>
-                <div class="civio-equiv-val">12.5 Millones</div>
+                <div class="civio-equiv-val">83.6 millones <span class="est-chip est-pendiente">pendiente</span></div>
                 <div class="civio-equiv-lbl">
-                  De becas universitarias anuales completas financiables con el <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Federalizado')">gasto federalizado</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> transferido a los estados ($2.81 B).
+                  De becas universitarias anuales completas ($33,600 cada una) equivalen al <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Federalizado')">gasto federalizado</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> transferido a los estados ($2,810,800 mdp ÷ $33,600).
                 </div>
               </div>
             </div>
@@ -975,7 +1042,7 @@
                 <span class="civio-equiv-ico">🛤️</span>
               </div>
               <div>
-                <div class="civio-equiv-val">329% Sobrecosto</div>
+                <div class="civio-equiv-val">329% sobrecosto <span class="est-chip est-pendiente">pendiente</span></div>
                 <div class="civio-equiv-lbl">
                   El Tren Maya <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfrcf')" title="Auditoría Superior de la Federación">[07]</a> pasó de $120,000 mdp a más de $515,000 mdp erogados, con un subsidio vitalicio de $79.27/seg.
                 </div>
@@ -990,53 +1057,56 @@
               <strong>Nota metodológica y fuentes de equivalencia:</strong>
             </div>
             <p class="civio-nota-body">
-              Las equivalencias ciudadanas son modelos de coste de oportunidad calculados con base en tabuladores y costos paramétricos oficiales:
+              Las tres equivalencias están marcadas <span class="est-chip est-pendiente">pendiente</span>: la operación está a la vista, pero el costo por hospital, el monto de la beca y las cifras del Tren Maya todavía no tienen su documento oficial citado en esta plataforma. Son modelos de costo de oportunidad con estos supuestos:
               un hospital general de zona del IMSS tipo HGZ-144 camas ($550 mdp de obra civil y equipamiento electromédico especializado),
               una beca completa de manutención universitaria tipo Jóvenes Escribiendo el Futuro ($2,800 mensuales = $33,600 anuales)
               y las auditorías de desempeño y cumplimiento de la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación')">Auditoría Superior de la Federación</a> sobre megaobras de infraestructura.
               Para profundizar en cada concepto técnico, explore el <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Público')">📖 Glosario Hacendario</a> y el catálogo de <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')">📑 Referencias Oficiales</a>.
             </p>
           </div>
-        </div>
-
-        <!-- LAS CUATRO ETAPAS -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>Las cuatro etapas, y qu&eacute; ley gobierna cada una</h3>
-            <p class="erario-bloque-sub">Pulse una etapa para ver su fundamento legal, su plazo y qui&eacute;n responde por ella.</p>
           </div>
-          <div class="circuito-grid" id="circuitoGrid"></div>
-          <div class="circuito-detalle" id="circuitoDetalle"></div>
+          </div>
+          </div>
         </div>
 
-        <!-- CUANTO ES -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>Cu&aacute;nto dinero es</h3>
+        <!-- BLOQUE 2 · CUÁNTO DINERO ES (cifra total + de dónde sale, en qué se va, a dónde baja) -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-cuanto">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-cuanto"
+                    onclick="window.AuditEngine.erarioPlegToggle('cuanto')">
+              <span class="erario-pleg-n" aria-hidden="true">2</span>
+              <span class="erario-pleg-ico" aria-hidden="true">💰</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Cuánto dinero es</span>
+                <span class="erario-pleg-av">La cifra total de 2026 y su desglose en tres capítulos: de dónde sale, en qué se va y a dónde baja.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-cuanto" hidden>
             <p class="erario-bloque-sub">
               La Ley de Ingresos y el Presupuesto de Egresos de 2026 suman la misma cifra:
               <b class="gold">$10.19 billones de pesos</b>. No es coincidencia, es construcci&oacute;n contable,
               y m&aacute;s abajo se explica por qu&eacute;.
             </p>
-          </div>
-          <div class="erario-mandos" id="erarioTotalMandos"></div>
-          <div class="erario-total-strip" id="erarioTotalStrip"></div>
-        </div>
+            <div class="erario-mandos" id="erarioTotalMandos"></div>
+            <div class="erario-total-strip" id="erarioTotalStrip"></div>
 
         <!-- DE DONDE SALE -->
-        <div class="erario-bloque erario-pleg" id="eb-ingresos">
-          <h3 class="erario-pleg-h">
+        <div class="erario-bloque erario-pleg erario-pleg-sub" id="eb-ingresos">
+          <h4 class="erario-pleg-h">
             <button type="button" class="erario-pleg-cab" aria-expanded="false"
                     aria-controls="eb-cuerpo-ingresos"
                     onclick="window.AuditEngine.erarioPlegToggle('ingresos')">
-              <span class="erario-pleg-n" aria-hidden="true">1</span>
+              <span class="erario-pleg-n" aria-hidden="true">2.1</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">De d&oacute;nde sale</span>
                 <span class="erario-pleg-av">El origen de cada peso que la Federaci&oacute;n tiene autorizado cobrar en 2026, rengl&oacute;n por rengl&oacute;n.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
-          </h3>
+          </h4>
           <div class="erario-pleg-cuerpo" id="eb-cuerpo-ingresos" hidden>
             <p class="erario-bloque-sub">
               <span id="ingresosConteo">Los or&iacute;genes</span> que componen el ingreso federal de 2026, tal como los enumera el Art&iacute;culo 1&ordm; de la Ley de Ingresos.
@@ -1049,19 +1119,19 @@
         </div>
 
         <!-- EN QUE SE VA -->
-        <div class="erario-bloque erario-pleg" id="eb-egresos">
-          <h3 class="erario-pleg-h">
+        <div class="erario-bloque erario-pleg erario-pleg-sub" id="eb-egresos">
+          <h4 class="erario-pleg-h">
             <button type="button" class="erario-pleg-cab" aria-expanded="false"
                     aria-controls="eb-cuerpo-egresos"
                     onclick="window.AuditEngine.erarioPlegToggle('egresos')">
-              <span class="erario-pleg-n" aria-hidden="true">2</span>
+              <span class="erario-pleg-n" aria-hidden="true">2.2</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">En qu&eacute; se va</span>
                 <span class="erario-pleg-av">El gasto aprobado, partido entre lo que se decide cada a&ntilde;o y lo que ya se debe.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
-          </h3>
+          </h4>
           <div class="erario-pleg-cuerpo" id="eb-cuerpo-egresos" hidden>
             <p class="erario-bloque-sub">
               El gasto se parte en dos mundos. El <b>programable</b> se decide cada a&ntilde;o y compra
@@ -1121,19 +1191,19 @@
         </div>
 
         <!-- A DONDE BAJA -->
-        <div class="erario-bloque erario-pleg" id="eb-mapa">
-          <h3 class="erario-pleg-h">
+        <div class="erario-bloque erario-pleg erario-pleg-sub" id="eb-mapa">
+          <h4 class="erario-pleg-h">
             <button type="button" class="erario-pleg-cab" aria-expanded="false"
                     aria-controls="eb-cuerpo-mapa"
                     onclick="window.AuditEngine.erarioPlegToggle('mapa')">
-              <span class="erario-pleg-n" aria-hidden="true">3</span>
+              <span class="erario-pleg-n" aria-hidden="true">2.3</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">A d&oacute;nde baja</span>
                 <span class="erario-pleg-av">El tramo del gasto que viaja a las 32 entidades y a m&aacute;s de 2,400 municipios, visto sobre el territorio.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
-          </h3>
+          </h4>
           <div class="erario-pleg-cuerpo" id="eb-cuerpo-mapa" hidden>
             <p class="erario-bloque-sub">
               De ese gasto, <b class="gold">$2.81 billones</b> no se quedan en la Federaci&oacute;n: viajan a
@@ -1213,17 +1283,27 @@
 
           </div>
         </div>
-
-        <!-- PUNTOS CIEGOS -->
-        <div class="erario-bloque">
-          <div class="erario-bloque-head">
-            <h3>Lo que la cifra grande no dice</h3>
-            <p class="erario-bloque-sub">
-              Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido
-              de la cifra total.
-            </p>
           </div>
-          <div class="ciegos-grid" id="ciegosGrid"></div>
+        </div>
+
+        <!-- BLOQUE 3 · LO QUE LA CIFRA GRANDE NO DICE -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-ciegos">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-ciegos"
+                    onclick="window.AuditEngine.erarioPlegToggle('ciegos')">
+              <span class="erario-pleg-n" aria-hidden="true">3</span>
+              <span class="erario-pleg-ico" aria-hidden="true">🔦</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Lo que la cifra grande no dice</span>
+                <span class="erario-pleg-av">Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido de la cifra total.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-ciegos" hidden>
+            <div class="ciegos-grid" id="ciegosGrid"></div>
+          </div>
         </div>
 
         <!-- FUENTES -->
@@ -2548,7 +2628,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926za</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zb</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2692,16 +2772,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926za"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926zb"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926za"></script>
+  <script src="assets/js/audit-database.js?v=20260926zb"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926za"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926zb"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926za"></script>
+  <script src="assets/js/audit-engine.js?v=20260926zb"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

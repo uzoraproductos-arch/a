@@ -5168,6 +5168,18 @@ window.AUDIT_DB = {
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
+      "termino": "Auditar (Auditoría Gubernamental)",
+      "definicion": "Revisar, con método y con evidencia documental, que el dinero público se obtuvo, se administró y se gastó conforme a lo autorizado: que el gasto exista, que esté comprobado, que se haya hecho con apego a la ley y que haya logrado lo que prometía. La auditoría gubernamental puede ser financiera y de cumplimiento, de desempeño (si el programa sirvió para lo que se diseñó) o forense (cuando se investigan posibles actos ilícitos).",
+      "ley": "Art. 134 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Auditoría Superior de la Federación (ASF)",
+      "definicion": "Órgano técnico de la Cámara de Diputados, con autonomía técnica y de gestión, que fiscaliza la Cuenta Pública: revisa los ingresos, los egresos y la deuda de la Federación, y también el gasto federalizado que ejercen los estados y municipios. Cuando encuentra irregularidades emite acciones —recomendaciones, solicitudes de aclaración, pliegos de observaciones, promociones de responsabilidad y denuncias— y reporta el monto que queda por aclarar.",
+      "ley": "Arts. 74 frac. VI y 79 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
       "termino": "Déficit y Superávit Público",
       "definicion": "Déficit: el gobierno gastó más de lo que ingresó en el periodo y la diferencia se cubre con deuda. Superávit: ingresó más de lo que gastó. No es un juicio moral automático: un déficit puede financiar inversión productiva y un superávit puede esconder subejercicio. Lo relevante es su tamaño frente al PIB y su sostenibilidad en el tiempo.",
       "ley": "Art. 17 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
