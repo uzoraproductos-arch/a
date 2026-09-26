@@ -4822,7 +4822,7 @@
     },
     'portal': {
       t: 'Portal Público Digital · ¿Quieres Dialogar o Replicar?',
-      d: 'Espacio cívico abierto y plural para contrastar posturas, plantear tesis críticas, compartir fuentes oficiales y debatir con réplicas directas sobre cualquier contenido de la plataforma. Tus datos están 100% protegidos: participa con tu nick ciudadano.'
+      d: 'Un espacio para ordenar posturas y sostenerlas con fuentes oficiales. Por ahora lo que escribas se guarda sólo en este navegador; no se piden correos ni nombres reales, basta un nick.'
     },
     'referencias': {
       t: '8. Referencias & Fuentes Oficiales',
@@ -21798,10 +21798,12 @@
      Las alertas de los adeudos de las megaobras y deuda pública se acumulan
      por segundo desde que se inicia sesión en la plataforma.
      ========================================================================== */
-  const MEGAOBRAS_LOSS_RATE = 2543.13; // $80,200.1 mdp anuales / 31,536,000 segs (Pérdida operativa 12 megaobras)
-  const DEUDA_INTEREST_RATE = 49849.80; // $1,572,073.3 mdp anuales / 31,536,000 segs (Costo de deuda Anexo 8 PEF)
-  const ASF_IRREGULARITY_RATE = 1617.96; // $51,024 mdp anuales / 31,536,000 segs (ASF pendientes de aclarar)
-  const TOTAL_EROSION_RATE = MEGAOBRAS_LOSS_RATE + DEUDA_INTEREST_RATE + ASF_IRREGULARITY_RATE;
+  /* Equivalencias: una cifra anual repartida entre los 31,536,000 segundos
+     del año. No se suman entre si (miden cosas distintas) y el monto por
+     aclarar de la ASF no entra aqui: es el resultado de un procedimiento
+     con fecha de corte, no dinero que corra por segundo. */
+  const MEGAOBRAS_LOSS_RATE = 2543.13; // $80,200.1 mdp anuales / 31,536,000 segs (simulador de megaobras; fuentes pendientes)
+  const DEUDA_INTEREST_RATE = 49850.12; // $1,572,073.3 mdp anuales / 31,536,000 segs (PEF 2026, Anexo 8)
 
   function initGlobalSessionTime() {
     if (!state.sessionStartTime) {
@@ -21930,20 +21932,12 @@
 
     const megaVal = seconds * MEGAOBRAS_LOSS_RATE;
     const deudaVal = seconds * DEUDA_INTEREST_RATE;
-    const asfVal = seconds * ASF_IRREGULARITY_RATE;
-    const totalVal = seconds * TOTAL_EROSION_RATE;
-
     const megaEl = document.getElementById('desgloseLiveMega');
     if (megaEl) megaEl.textContent = '+$' + megaVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     const deudaEl = document.getElementById('desgloseLiveDeuda');
     if (deudaEl) deudaEl.textContent = '+$' + deudaVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    const asfEl = document.getElementById('desgloseLiveAsf');
-    if (asfEl) asfEl.textContent = '+$' + asfVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-    const totalEl = document.getElementById('desgloseLiveTotal');
-    if (totalEl) totalEl.textContent = '+$' + totalVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function initRadarControlsState() {
@@ -21980,7 +21974,6 @@
 
     const megaVal = seconds * MEGAOBRAS_LOSS_RATE;
     const deudaVal = seconds * DEUDA_INTEREST_RATE;
-    const totalVal = seconds * TOTAL_EROSION_RATE;
 
     const megaEl = document.getElementById('radarMegaobrasVal');
     if (megaEl) megaEl.textContent = '+$' + megaVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -21988,8 +21981,6 @@
     const deudaEl = document.getElementById('radarDeudaVal');
     if (deudaEl) deudaEl.textContent = '+$' + deudaVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-    const totalEl = document.getElementById('radarTotalVal');
-    if (totalEl) totalEl.textContent = '+$' + totalVal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     updateRadarDesgloseNumbers(seconds);
   }
@@ -24183,6 +24174,12 @@
     }
 
     // Eventos de chips de filtro de preceptos legales
+    /* El conteo del chip sale de la base: escrito a mano se quedo en 25
+       cuando la base ya tenia 28. */
+    const chipTodosPrec = document.querySelector('[data-pcat="todas"]');
+    if (chipTodosPrec && DB.preceptos_legales) {
+      chipTodosPrec.textContent = 'Todos los preceptos (' + DB.preceptos_legales.length + ')';
+    }
     document.querySelectorAll('[data-pcat]').forEach(btn => {
       btn.addEventListener('click', function() {
         filterPreceptos(this.dataset.pcat);

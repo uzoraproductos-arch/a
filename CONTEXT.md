@@ -2101,6 +2101,39 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (guion editorial, entrega A: significado y promesas)
+
+El autor entregó un guion editorial (sobre la versión 20260926q). Su
+prioridad 1, corregir lo que dice más de lo que es, queda así:
+
+- **Radar sin suma.** Se retiró «Erosión patrimonial», que sumaba el déficit
+  de megaobras, el costo de la deuda y lo observado por la ASF como si fuera
+  una sola pérdida. Ahora son tres conceptos separados, cada uno con su
+  estado: megaobras (`pendiente`: la cifra de $80,200.1 mdp viene del
+  simulador, sin fuentes por obra), costo financiero de la deuda (`oficial`,
+  PEF 2026 Anexo 8) y lo por aclarar ante la ASF (`oficial`, $65,169.1 mdp
+  CP 2024, MDB p. 11), este último **fijo, sin contador por segundo**.
+- **Tasa corregida:** $1,572,073.3 mdp ÷ 31,536,000 s = $49,850.12/s (decía
+  $49,849.80). La tira del desglose muestra ahora esa sola cifra oficial
+  repartida por segundo, minuto, hora y día, cada una `derivada`. Antes
+  rotulaba «Monto Anual PEF $1,703,297 mdp» a la suma de los tres conceptos.
+- La tarjeta de megaobras citaba Mexicana de Aviación y el Corredor
+  Interoceánico, que no están entre las 12 obras del simulador. Corregida.
+- Rótulos: «Radar hacendario · cifras en perspectiva», «Datos de
+  referencia» (antes «Notificación en vivo»), «Equivalencia durante tu
+  visita». La cinta dice $65,169.1 mdp por aclarar (CP 2024) en lugar de
+  $51,024 mdp.
+- **Botones honestos:** «Enviar Observación Cívica» → «Guardar en este
+  navegador»; «Publicar argumento en el Portal» → «Guardar argumento en este
+  navegador». El Portal ya no promete «100% protegidos» ni diálogo en vivo:
+  dice que lo escrito se guarda sólo en este navegador.
+- **Frases absolutas:** «Toda cifra está respaldada», «Cero
+  especulaciones», «rigor inexpugnable» y la «Regla de Diseño Permanente»
+  pasan a «cada cifra muestra su fuente o su estado de verificación», con los
+  tres estados explicados.
+- El chip de preceptos cuenta desde la base (28); decía 25.
+- «Audita en tiempo real» y «Pérdidas en tiempo real» se reescribieron.
+
 ### Hecho (un solo encabezado por módulo e íconos más grandes)
 
 - **Sin título repetido.** Al pulsar «Comenzar», el proemio absorbe el
@@ -2213,6 +2246,17 @@ vuelve a correrse si cambian los libros.
 
 ### Pendiente
 
+- **Simulador de la ASF en la Enciclopedia (6 · Modo Inspector):** gira
+  alrededor de «$51,024 mdp observados» (tipologías, serie histórica y metas de
+  recuperación en `ASF_IRREGULARIDADES_DATA`), cifra que no es la de la ASF
+  para la CP 2024. Rehacerlo con la matriz de la CP 2024 (`DB.cuenta_publica_asf`).
+- **Cinta de datos de referencia:** «Recaudación SAT récord $4.95 billones»,
+  «Deuda subnacional $715,420 mdp», «12,867 empresas aportan el 52%»,
+  «Dependencia fiscal 84.0%» y «Predial 0.16% del PIB» no traen fuente visible.
+  Verificarlas una por una o retirarlas.
+- **Guion editorial, entregas B a E** (portada, glosario ampliado,
+  diccionario de sustituciones, reescritura por módulos): esperan decisiones
+  del autor sobre «tú» o «usted», nombres de menús y el Pase.
 - **`--navy` sin definir:** unas 20 reglas del tema claro la usan sin
   valor de respaldo y se pintan con el color heredado. Definirla en
   `[data-theme="light"]` y revisar esas secciones una por una.
