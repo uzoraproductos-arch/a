@@ -2101,6 +2101,30 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 2, bloque 3: la evaluación de los presidentes con trivia)
+
+- El bloque 3 queda en dos partes: 3.1 «Las megaobras de cada sexenio» (el
+  simulador sexenal de siempre) y 3.2 «La evaluación de los presidentes:
+  adivine y compruebe» (`renderPresEval`, traída de la 5.1 de la
+  Enciclopedia y reorganizada).
+- Seis métricas en pestañas: economía (PIB), deuda al cierre, déficit,
+  tamaño del gasto, ingresos y lo que la ASF dejó por aclarar. Cada una hace
+  primero una pregunta de trivia con los seis presidentes (o las seis Cuentas
+  Públicas, en la de la ASF); el contabilizador está bloqueado 🔒 y las
+  barras veladas hasta responder. Después, un solo botón «Ver resultados» /
+  «Reiniciar a ceros»; reiniciar reabre la pregunta para volver a jugar. Un
+  marcador lleva los aciertos. Claudia Sheinbaum no entra: sexenio en curso.
+- **Estado de los datos:** la métrica de la ASF es oficial (Matrices de Datos
+  Básicos 2019–2024, con liga por renglón). Las cinco macro vienen de
+  `porfirio_diaz_versus.mandatarios_comparativa`, que declara su serie
+  (INEGI, SHCP) pero no se ha cotejado cifra por cifra: llevan el chip
+  `pendiente` y lo dicen al pie (ver Pendiente).
+- Las gráficas de la 5.1 con «irregularidades ASF acumuladas» por sexenio no
+  se trajeron: no tienen fuente (ya estaba en Pendiente). El expediente de
+  cada presidente se consulta en la 5.1 de la Enciclopedia, que sigue igual.
+- Corrección: el periodo de López Obrador terminaba el 30 de septiembre de
+  2024, no el 30 de noviembre (art. 83 CPEUM, reforma DOF 10-feb-2014).
+
 ### Hecho (módulo 2, bloque 2: filtros en dos pasos y simulación en vivo)
 
 - **Panel de filtros** (`.sim-filtros`): «Paso 1 · Industria» (el mosaico de
@@ -2445,6 +2469,13 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
 - **Titular de la ASF:** confirmar si sigue David Colmenares tras marzo de 2026.
+- **Evaluación de los presidentes (módulo 2, 3.2):** cotejar con su documento
+  el PIB (INEGI, Sistema de Cuentas Nacionales), la deuda al cierre (SHCP,
+  SHRFSP; la serie oficial empieza en 2000, así que Salinas y Zedillo
+  necesitan otra fuente), el balance, el gasto y los ingresos como % del PIB
+  (SHCP, Estadísticas Oportunas). Faltan también series de empleo (IMSS,
+  puestos de trabajo afiliados) para una métrica de empleo que el autor
+  pidió: no se agregó porque la base no la tiene.
 - **«Presupuesto récord» en la tarjeta del módulo 1:** para decirlo hace
   falta la serie del PEF aprobado de años anteriores (DOF) en la base, con
   fuente, y decidir si el récord es en pesos corrientes o reales.

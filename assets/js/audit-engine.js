@@ -21059,6 +21059,185 @@
       '</section>';
   }
 
+  /* ==========================================================================
+     MÓDULO 2 · BLOQUE 3: LA EVALUACIÓN DE LOS PRESIDENTES, CON TRIVIA
+     Traída de la pestaña 5.1 de la Enciclopedia y reorganizada. Cada
+     métrica se juega en dos tiempos: primero el lector adivina quién
+     encabeza la lista; solo entonces se abre el botón único que sube las
+     barras de cero a su cifra, y ese mismo botón las regresa a cero (y
+     reabre la pregunta, para volver a jugar).
+     Las cinco métricas macro vienen del tablero comparativo de la
+     Enciclopedia, que declara su serie (INEGI, SHCP) pero aún no se coteja
+     cifra por cifra: llevan el estado «pendiente» y así se dice. La de la
+     ASF sale de las Matrices de Datos Básicos, oficial y con su página.
+     Claudia Sheinbaum no entra: su sexenio está en curso.
+     ========================================================================== */
+  const PE_MANDATOS = ['salinas', 'zedillo', 'fox', 'calderon', 'epn', 'amlo'];
+  const PE_CORTOS = { salinas: 'Carlos Salinas', zedillo: 'Ernesto Zedillo', fox: 'Vicente Fox', calderon: 'Felipe Calderón', epn: 'Enrique Peña Nieto', amlo: 'López Obrador' };
+  const PE_METRICAS = [
+    { k: 'pib', ico: '📈', et: 'Economía', campo: 'pib_crecimiento', fmt: 'pctS', criterio: 'max',
+      tit: 'Crecimiento de la economía', sub: 'PIB real, % promedio anual del sexenio',
+      pregunta: '¿Con qué presidente creció más la economía?' },
+    { k: 'deuda', ico: '💳', et: 'Deuda', campo: 'deuda_pib', fmt: 'pct', criterio: 'max',
+      tit: 'Deuda pública al cierre', sub: 'Saldo de la deuda como % del PIB al terminar el sexenio',
+      pregunta: '¿Quién entregó la deuda más alta como proporción de la economía?' },
+    { k: 'balance', ico: '⚖️', et: 'Déficit', campo: 'balance_fiscal', fmt: 'pctS', criterio: 'min',
+      tit: 'Balance fiscal', sub: 'Superávit (+) o déficit (−), % del PIB, promedio del sexenio',
+      pregunta: '¿Con qué gobierno fue más profundo el déficit?' },
+    { k: 'gasto', ico: '🏛️', et: 'Gasto', campo: 'gasto_pib', fmt: 'pct', criterio: 'max',
+      tit: 'Tamaño del gasto público', sub: 'Gasto neto como % del PIB',
+      pregunta: '¿Bajo qué gobierno pesó más el gasto público en la economía?' },
+    { k: 'ingresos', ico: '🧾', et: 'Ingresos', campo: 'ingresos_pib', fmt: 'pct', criterio: 'min',
+      tit: 'Ingresos públicos', sub: 'Ingresos totales como % del PIB',
+      pregunta: '¿Qué gobierno recaudó menos en proporción al tamaño de la economía?' },
+    { k: 'asf', ico: '🔎', et: 'ASF', asf: true, fmt: 'mdp1', criterio: 'max',
+      tit: 'Lo que la ASF dejó por aclarar', sub: 'Monto por aclarar en cada Cuenta Pública, millones de pesos',
+      pregunta: '¿En qué Cuenta Pública dejó la Auditoría Superior más dinero por aclarar?' }
+  ];
+  state.presEval = { m: 'pib', resp: {}, contado: {} };
+
+  function peFilas(M) {
+    if (M.asf) {
+      const S = (DB.cuenta_publica_asf && DB.cuenta_publica_asf.serie) || [];
+      return S.map(r => ({
+        id: 'cp' + r.cp, corto: 'CP ' + r.cp, nombre: 'Cuenta Pública ' + r.cp,
+        periodo: r.cp <= 2023 ? 'López Obrador' : 'López Obrador (ene–sep) y Sheinbaum (oct–dic)',
+        color: '#c0504d', v: (r.porAclarar || 0) / 1e6, fuente: cpFuente(r.fuente, r.pagina)
+      }));
+    }
+    const V = DB.personajes_politicos && DB.personajes_politicos.porfirio_diaz_versus;
+    const lista = (V && V.mandatarios_comparativa) || [];
+    return PE_MANDATOS.map(id => lista.find(x => x.id === id)).filter(Boolean).map(x => ({
+      id: x.id, corto: PE_CORTOS[x.id] || x.nombre, nombre: x.nombre, periodo: x.periodo,
+      color: x.color, v: x.metricas[M.campo], nota: x.metricas[M.campo + '_display'] || ''
+    }));
+  }
+
+  function peGanador(M, filas) {
+    return filas.reduce((a, b) => (M.criterio === 'min' ? (b.v < a.v ? b : a) : (b.v > a.v ? b : a)));
+  }
+
+  function renderPresEval() {
+    const cont = document.getElementById('presEval');
+    if (!cont) return;
+    const E = state.presEval;
+    const M = PE_METRICAS.find(x => x.k === E.m) || PE_METRICAS[0];
+    const filas = peFilas(M);
+    if (!filas.length) { cont.innerHTML = ''; return; }
+    const gana = peGanador(M, filas);
+    const resp = E.resp[M.k];
+    const contado = !!E.contado[M.k];
+    const respondidas = Object.keys(E.resp).length;
+    const aciertos = Object.keys(E.resp).filter(k => E.resp[k].ok).length;
+    const max = Math.max.apply(null, filas.map(f => Math.abs(f.v))) || 1;
+    const ordenadas = filas.slice().sort((a, b) => M.criterio === 'min' ? a.v - b.v : b.v - a.v);
+    const V = DB.personajes_politicos && DB.personajes_politicos.porfirio_diaz_versus;
+    const cat = V && V.metricas_catalogo && V.metricas_catalogo[M.campo];
+
+    const tabs = PE_METRICAS.map(x => {
+      const r = E.resp[x.k];
+      return '<button type="button" role="tab" aria-selected="' + (x.k === M.k) + '" class="pe-tab' + (x.k === M.k ? ' on' : '') + '" ' +
+        'onclick="window.AuditEngine.peMetrica(\'' + x.k + '\')"><span aria-hidden="true">' + x.ico + '</span> ' + x.et +
+        (r ? ' <span class="pe-tab-marca ' + (r.ok ? 'ok' : 'no') + '">' + (r.ok ? '✓' : '✗') + '</span>' : '') + '</button>';
+    }).join('');
+
+    const opciones = filas.map(f => {
+      let cls = 'pe-op';
+      if (resp) {
+        if (f.id === gana.id) cls += ' correcta';
+        else if (f.id === resp.id) cls += ' errada';
+      }
+      return '<button type="button" class="' + cls + '" style="--pe:' + f.color + '" ' + (resp ? 'disabled ' : '') +
+        'onclick="window.AuditEngine.peResponder(\'' + f.id + '\')"><b>' + f.corto + '</b><small>' + f.periodo + '</small></button>';
+    }).join('');
+
+    const veredicto = !resp ? '' :
+      '<p class="pe-veredicto ' + (resp.ok ? 'ok' : 'no') + '" role="status">' +
+        (resp.ok ? '✓ ¡Acertó! ' : '✗ No fue así. ') + 'La respuesta es <b>' + gana.nombre + '</b>. ' +
+        'Pulse «Ver resultados» para ver a todos en la misma escala.</p>';
+
+    const boton = !resp
+      ? '<button type="button" class="eval-btn-primary pe-bloqueado" disabled title="Responda la trivia para abrir el contabilizador">🔒 Responda la trivia para ver los resultados</button>'
+      : '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.peAlternar()">' +
+          (contado ? '<span>↺</span> Reiniciar a ceros' : '<span>▶️</span> Ver resultados') + '</button>';
+
+    const estadoChip = M.asf ? chipEstado('oficial') : chipEstado('pendiente');
+    const fuente = M.asf
+      ? 'Auditoría Superior de la Federación, Matrices de Datos Básicos de cada Cuenta Pública (renglón Total, monto por aclarar). La Cuenta Pública 2024 abarca el cambio de gobierno.'
+      : ((cat && cat.fuente_dato) || 'Tablero comparativo de la Enciclopedia') +
+        ' <b>Estado pendiente:</b> la serie está declarada, pero estas cifras aún no se cotejan una por una con el documento oficial.';
+
+    cont.innerHTML =
+      '<section class="pe">' +
+        '<header class="pe-cab">' +
+          '<div><h3 class="pe-tit">🎯 La evaluación de los presidentes</h3>' +
+          '<p class="pe-sub">Primero adivine; después vea el resultado. Cada métrica abre su contabilizador solo cuando responde la pregunta. Claudia Sheinbaum no entra: su sexenio está en curso.</p></div>' +
+          '<span class="pe-marcador" aria-live="polite">Aciertos <b>' + aciertos + '</b> de ' + respondidas + (respondidas === 1 ? ' respondida' : ' respondidas') + '</span>' +
+        '</header>' +
+        '<div class="pe-tabs" role="tablist" aria-label="Métrica a evaluar">' + tabs + '</div>' +
+        '<div class="pe-panel">' +
+          '<div class="pe-q">' +
+            '<span class="pe-q-lbl">Trivia · ' + M.tit + '</span>' +
+            '<h4 class="pe-q-tit">' + M.pregunta + '</h4>' +
+            '<div class="pe-opciones">' + opciones + '</div>' +
+            veredicto +
+          '</div>' +
+          '<div class="evaluacion-controls-bar">' +
+            '<div class="eval-info-group"><span class="eval-badge">RESULTADOS</span>' +
+              '<span class="eval-status-text">' + (!resp ? '🔒 Bloqueado hasta que responda.' : (contado ? '✅ ' + M.sub + '.' : '⚪ Todo en ceros. Pulse «Ver resultados».')) + '</span></div>' +
+            '<div class="eval-actions-group">' + boton + '</div>' +
+          '</div>' +
+          '<ol class="pe-barras' + (resp ? '' : ' pe-velo') + '" id="peBarras">' +
+            ordenadas.map(f =>
+              '<li class="pe-fila' + (resp && f.id === gana.id ? ' pe-gana' : '') + '">' +
+                '<span class="pe-nom"><b>' + f.corto + '</b><small>' + f.periodo + '</small>' + (f.fuente ? '<small class="pe-nom-fuente">' + f.fuente + '</small>' : '') + '</span>' +
+                '<span class="pe-riel"><span class="pe-barra" style="width:0%; background:' + f.color + '" data-anim-w="' + (Math.abs(f.v) / max * 100).toFixed(2) + '"></span></span>' +
+                '<span class="pe-val" data-anim-v="' + f.v + '" data-anim-f="' + M.fmt + '">' + simFmt(0, M.fmt) + '</span>' +
+              '</li>').join('') +
+          '</ol>' +
+          '<p class="pe-fuente">' + estadoChip + ' ' + fuente + '</p>' +
+        '</div>' +
+        '<p class="pe-ficha">¿Quiere el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
+          '<a href="enciclopedia.html#politicos/mandatarios" target="_blank" rel="noopener">Abrir la pestaña 5.1 de la Enciclopedia ↗</a></p>' +
+      '</section>';
+
+    const barras = document.getElementById('peBarras');
+    if (contado) simAnimarZona(barras, 'pe', 0);
+  }
+
+  function peMetrica(k) {
+    state.presEval.m = k;
+    renderPresEval();
+  }
+
+  function peResponder(id) {
+    const E = state.presEval;
+    const M = PE_METRICAS.find(x => x.k === E.m);
+    if (!M || E.resp[M.k]) return;
+    const gana = peGanador(M, peFilas(M));
+    E.resp[M.k] = { id: id, ok: id === gana.id };
+    renderPresEval();
+  }
+
+  /* Botón único: sube las barras; ya contadas, las regresa a cero y
+     reabre la pregunta para volver a jugar. */
+  function peAlternar() {
+    const E = state.presEval;
+    const k = E.m;
+    if (!E.resp[k]) return;
+    if (E.contado[k]) {
+      delete E.contado[k];
+      delete E.resp[k];
+      renderPresEval();
+      return;
+    }
+    E.contado[k] = true;
+    renderPresEval();
+    const barras = document.getElementById('peBarras');
+    simPonerEnCeros(barras, 'pe');
+    simAnimarZona(barras, 'pe', 1400);
+  }
+
   /* --- Selector 3: la linea del tiempo 1988-2024 --- */
   function renderSimuladorSexenioLinea() {
     const cont = document.getElementById('simSexenioLinea');
@@ -22096,6 +22275,7 @@
     initLiveLossTicker();
     initSimTelemetriaFlotante();
     setSimParte(state.simParte || 'a');
+    if (document.getElementById('presEval') && !document.getElementById('peBarras')) renderPresEval();
   }
 
   function renderSimuladorObrasGrid() {
@@ -27263,6 +27443,9 @@
     setSimParte: setSimParte,
     simRecontar: simRecontar,
     simCabAlternar: simCabAlternar,
+    peMetrica: peMetrica,
+    peResponder: peResponder,
+    peAlternar: peAlternar,
     inspSetNivel: inspSetNivel,
     inspBuscar: inspBuscar,
     inspLimpiarBusqueda: inspLimpiarBusqueda,

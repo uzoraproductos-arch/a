@@ -8716,7 +8716,7 @@ window.AUDIT_DB = {
       {
         "id": "amlo",
         "nombre": "Andrés Manuel López Obrador",
-        "periodo": "1 DIC 2018 — 30 NOV 2024",
+        "periodo": "1 DIC 2018 — 30 SEP 2024",
         "partido": "MORENA",
         "partido_clase": "morena",
         "color": "#8b1a1a",
