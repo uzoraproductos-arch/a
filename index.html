@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zj">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zk">
 </head>
 <body>
 
@@ -172,7 +172,7 @@
               <span class="mega-link-desc">La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos, y la Constitución económica que lo sustenta.</span>
             </a>
             <a href="#ambiente" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('ambiente'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🌎 El Costo Ambiental</span>
+              <span class="mega-link-name">🌎 Costo Ambiental</span>
               <span class="mega-link-desc">El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.</span>
             </a>
           </div>
@@ -771,10 +771,10 @@
         <!-- Módulo 4 -->
         <div class="explorer-card" id="cardModInspector">
           <span class="explorer-card-icon" aria-hidden="true">🔍</span>
-          <h3 class="explorer-card-title">Inspector Forense</h3>
+          <h3 class="explorer-card-title">Modo Inspector</h3>
           <p class="explorer-card-desc">Lo que la ASF observó y sigue sin aclararse.</p>
-          <div class="explorer-card-stat" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11"><strong>$65,169.1 mdp</strong><span>Por aclarar · CP 2024 · ASF</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador', 'moduloProemio')" aria-label="Comenzar: Inspector Forense">
+          <div class="explorer-card-stat" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11: acciones correctivas promovidas, 174 solicitudes de aclaración + 2,762 pliegos de observaciones + 2,203 promociones de responsabilidad administrativa + 278 avisos al SAT = 5,417 (derivado)"><strong>5,417 irregularidades</strong><span>Señaladas por la ASF · CP 2024</span></div>
+          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador', 'moduloProemio')" aria-label="Comenzar: Modo Inspector">
             <span>Comenzar</span> ➔
           </button>
         </div>
@@ -782,10 +782,10 @@
         <!-- Módulo 5 -->
         <div class="explorer-card explorer-card-eco" id="cardModAmbiente">
           <span class="explorer-card-icon" aria-hidden="true">🌎</span>
-          <h3 class="explorer-card-title">El Costo Ambiental</h3>
+          <h3 class="explorer-card-title">Costo Ambiental</h3>
           <p class="explorer-card-desc">Lo que el deterioro del ambiente nos cuesta a todos.</p>
-          <div class="explorer-card-stat" title="INEGI, Cuentas Económicas y Ecológicas de México 2024"><strong>$1.38 billones</strong><span>Daño ambiental 2024 · INEGI</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('ambiente', 'moduloProemio')" aria-label="Comenzar: El Costo Ambiental">
+          <div class="explorer-card-stat" title="La cifra del INEGI (Cuentas Económicas y Ecológicas de México 2024) se descubre dentro del módulo"><strong>¿Cuántos billones?</strong><span>Descúbrelo al comenzar</span></div>
+          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('ambiente', 'moduloProemio')" aria-label="Comenzar: Costo Ambiental">
             <span>Comenzar</span> ➔
           </button>
         </div>
@@ -2070,7 +2070,7 @@
     <div id="tab-panel-ambiente" class="tab-panel">
       <div class="section-hero">
         <span class="hero-tag">M&oacute;dulo 5 &middot; Medio ambiente &middot; INEGI, SEMARNAT y Hacienda &middot; 2024&ndash;2027</span>
-        <h2>El Costo Ambiental</h2>
+        <h2>Módulo 5: Costo Ambiental</h2>
         <p>El deterioro del ambiente tambi&eacute;n es gasto: lo pagamos en agua, aire, suelo y basura, aunque no aparezca en el recibo. Aqu&iacute; se mide en pesos, con cifras oficiales, y se compara con lo que el Estado destina a protegerlo.</p>
       </div>
       <div id="ambienteRaiz" class="pd-raiz am-raiz"></div>
@@ -2103,70 +2103,110 @@
       
       <div class="section-hero">
         <span class="hero-tag">FISCALIZACIÓN CIUDADANA &middot; CORTE CUENTA PÚBLICA &amp; ASF</span>
-        <h2>Auditoría Forense: ¿Dónde Quedó el Dinero?</h2>
+        <h2>Módulo 4: Modo Inspector</h2>
         <p>
           Expedientes periciales documentados sobre las mayores inversiones, sobrecostos y pliegos de observaciones del Estado mexicano. Cada cifra indica su documento: los informes individuales de la Auditoría Superior de la Federación (ASF), la Cuenta Pública de la SHCP o el registro público de contratos. Lo que todavía no se ha podido verificar se marca como pendiente, no se presenta como dato.
         </p>
       </div>
 
       <!-- ====================================================================
-           INFORMES DE LA CUENTA PÚBLICA (ASF): lo pinta renderCuentaPublica()
-           desde DB.cuenta_publica_asf, en capítulos.
+           MÓDULO 4 EN TRES BLOQUES, con la mecánica de los módulos 1 a 3
+           (erarioPlegToggle / erarioIr): 1 lo que encontró la ASF en el gasto
+           de 2024 (renderCuentaPublica), 2 el radar por entidad
+           (renderRadarBanderasNacional) y 3 los expedientes, en lista
+           numerada de renglones que se despliegan (renderForensicDossiers).
+           Las secciones que siguen a los bloques no cambian.
            ==================================================================== -->
-      <div class="cp-seccion" id="cuentaPublicaASF">
-        <div class="cp-cab">
-          <span class="hero-tag">Informes de la Cuenta Pública &middot; ASF</span>
-          <h3>¿Qué encontró la Auditoría Superior en el gasto de 2024?</h3>
-          <p>Cifras oficiales de la Auditoría Superior de la Federación, con su documento y su página: cuánto revisó, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a su estado.</p>
-        </div>
-        <div id="cpRaiz"></div>
-      </div>
+      <nav class="erario-indice" aria-label="Los tres bloques del Modo Inspector">
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('inspasf')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">🏛️</span><span class="ei-tx"><b>Qué encontró la ASF</b><small>El gasto de 2024, revisado</small></span></button>
+        <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('inspradar')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">🚩</span><span class="ei-tx"><b>Radar por entidad</b><small>Los estados con más por aclarar</small></span></button>
+        <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('inspexp')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">📂</span><span class="ei-tx"><b>Expedientes de casos</b><small>Diez casos, uno por renglón</small></span></button>
+      </nav>
 
-      <!-- Radar de banderas rojas por entidad: lo pinta renderRadarBanderasNacional()
-           con la Matriz de Datos Basicos de la ASF (DB.cuenta_publica_asf). -->
-      <div class="insp-sep" id="radarBanderasNacional" style="margin-top:28px;">
-        <span class="insp-sep-n">🚩</span>
-        <div>
-          <h3 class="insp-sep-tit">Radar de Banderas Rojas por Entidad</h3>
-          <p class="insp-sep-sub">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024. Elija cómo ordenarlos: por cada $100 que la ASF revisó, por monto total o por el peso de los municipios.</p>
-        </div>
-      </div>
-      <div class="radar-banderas-national">
-        <div class="radar-criterios" id="radarCriterios" role="group" aria-label="Cómo ordenar el radar"></div>
-        <div class="radar-banderas-grid" id="radarBanderasNacionalContainer"></div>
-        <p class="pd-nota" id="radarNota"></p>
-      </div>
+      <!-- BLOQUE 1 · QUÉ ENCONTRÓ LA ASF EN EL GASTO DE 2024 -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-inspasf">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-inspasf"
+                    onclick="window.AuditEngine.erarioPlegToggle('inspasf')">
+              <span class="erario-pleg-n" aria-hidden="true">1</span>
+              <span class="erario-pleg-ico" aria-hidden="true">🏛️</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">¿Qué encontró la Auditoría Superior en el gasto de 2024?</span>
+                <span class="erario-pleg-av">Cifras oficiales de la Auditoría Superior de la Federación, con su documento y su página: cuánto revisó, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a su estado.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-inspasf" hidden>
+            <div class="cp-seccion" id="cuentaPublicaASF">
+              <div id="cpRaiz"></div>
+            </div>
+          </div>
+        </div><!-- /eb -->
 
-      <!-- Expedientes de casos por aclarar: diez casos de alto impacto -->
-      <div class="insp-sep" id="expedientesCasos" style="margin-top:28px;">
-        <span class="insp-sep-n">📂</span>
-        <div>
-          <h3 class="insp-sep-tit">Expedientes de Casos por Aclarar</h3>
-          <p class="insp-sep-sub">Diez casos de alto impacto, uno por ficha: megaobras, energía, salud, Segalmex y deuda de los estados. Filtre por tema y abra el expediente.</p>
-        </div>
-      </div>
+      <!-- BLOQUE 2 · RADAR DE BANDERAS ROJAS POR ENTIDAD -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-inspradar">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-inspradar"
+                    onclick="window.AuditEngine.erarioPlegToggle('inspradar')">
+              <span class="erario-pleg-n" aria-hidden="true">2</span>
+              <span class="erario-pleg-ico" aria-hidden="true">🚩</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Radar de banderas rojas por entidad</span>
+                <span class="erario-pleg-av">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024. Elija cómo ordenarlos: por cada $100 que la ASF revisó, por monto total o por el peso de los municipios.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-inspradar" hidden>
+            <div class="radar-banderas-national" id="radarBanderasNacional">
+              <div class="radar-criterios" id="radarCriterios" role="group" aria-label="Cómo ordenar el radar"></div>
+              <div class="radar-banderas-grid" id="radarBanderasNacionalContainer"></div>
+              <p class="pd-nota" id="radarNota"></p>
+            </div>
+          </div>
+        </div><!-- /eb -->
 
-      <!-- Barra de Filtros Temáticos de Expedientes -->
-      <div class="forensic-header-bar" id="forensicHeaderBar">
-        <div>
-          <span style="font-family:var(--font-mono); font-size:11px; color:var(--gold-bright); text-transform:uppercase; letter-spacing:1px; font-weight:700;">
-            📂 EXPEDIENTES FORENSES AUDITADOS (<span id="forensicCountLabel">6</span> CASOS CLAVE)
-          </span>
-        </div>
-        <div class="forensic-filter-chips" id="forensicFilterChips">
-          <button type="button" class="forensic-chip-btn active" onclick="window.AuditEngine.filtrarDossiers('todos', this)">Todos</button>
-          <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('megaobras', this)">Megaobras</button>
-          <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('energia', this)">Energía (Pemex)</button>
-          <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('salud', this)">Salud &amp; Fármacos</button>
-          <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('alimentos', this)">Segalmex</button>
-          <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('deuda', this)">Deuda de Estados</button>
-        </div>
-      </div>
-
-      <!-- Rejilla de Expedientes Forenses de Gran Impacto -->
-      <div class="forensic-dossiers-grid" id="forensicDossiersGrid">
-        <!-- Renderizado dinámicamente por renderForensicDossiers() -->
-      </div>
+      <!-- BLOQUE 3 · EXPEDIENTES DE CASOS POR ACLARAR -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-inspexp">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-inspexp"
+                    onclick="window.AuditEngine.erarioPlegToggle('inspexp')">
+              <span class="erario-pleg-n" aria-hidden="true">3</span>
+              <span class="erario-pleg-ico" aria-hidden="true">📂</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Expedientes de casos por aclarar</span>
+                <span class="erario-pleg-av">Diez casos de alto impacto, numerados y uno por renglón: megaobras, energía, salud, Segalmex y deuda de los estados. Filtre por tema y pulse un caso para abrir su desglose.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-inspexp" hidden>
+            <div id="expedientesCasos">
+              <div class="forensic-header-bar" id="forensicHeaderBar">
+                <div>
+                  <span class="exp-conteo">📂 Casos en la lista: <span id="forensicCountLabel">10</span></span>
+                </div>
+                <div class="forensic-filter-chips" id="forensicFilterChips">
+                  <button type="button" class="forensic-chip-btn active" onclick="window.AuditEngine.filtrarDossiers('todos', this)">Todos</button>
+                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('megaobras', this)">Megaobras</button>
+                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('energia', this)">Energía (Pemex)</button>
+                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('salud', this)">Salud &amp; Fármacos</button>
+                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('alimentos', this)">Segalmex</button>
+                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('deuda', this)">Deuda de Estados</button>
+                </div>
+              </div>
+              <ol class="exp-lista" id="forensicDossiersGrid">
+                <!-- Renderizado dinámicamente por renderForensicDossiers() -->
+              </ol>
+            </div>
+          </div>
+        </div><!-- /eb -->
 
       <!-- Separador: Explorador de Entes Públicos (3 Niveles de Gobierno) -->
       <div class="insp-sep" style="margin-top:28px;">
@@ -2730,7 +2770,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zj</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zk</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2874,16 +2914,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926zj"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926zk"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926zj"></script>
+  <script src="assets/js/audit-database.js?v=20260926zk"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926zj"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926zk"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926zj"></script>
+  <script src="assets/js/audit-engine.js?v=20260926zk"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

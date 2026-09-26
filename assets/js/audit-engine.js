@@ -4943,7 +4943,7 @@
       d: 'Seis sexenios y una misma pregunta: ¿cuánto creció el gasto, cuánto creció la deuda y qué quedó sin aclarar? De Carlos Salinas de Gortari a Claudia Sheinbaum, con crecimiento real del gasto, deuda pública, empresas fantasma (EFOS), los grandes desfalcos documentados y los personajes secundarios que rara vez aparecen en la cuenta pública.'
     },
     'ambiente': {
-      t: '5. El Costo Ambiental',
+      t: '5. Costo Ambiental',
       d: 'El deterioro del ambiente en pesos: reloj en vivo del daño, tu huella, la basura municipal, el presupuesto ambiental 2026-2027 y las leyes que aplican.'
     },
     'verificador': {
@@ -4990,16 +4990,16 @@
       n: 3, icono: '💳', titulo: 'Calculadora Cívica',
       subtitulo: 'Tu sueldo, tus impuestos y el rubro al que llegan',
       texto: 'Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu estado y tu municipio con los 2,479 del padrón nacional.',
-      temas: ['Tu ticket fiscal', 'ISR, IVA y predial', 'Comparador salarial', 'Tu estado y tu municipio']
+      temas: [['🧾 1 · Su estado de cuenta', 'ccticket'], ['⚡ 2 · Usted contra ellos', 'cccompara'], ['⏱️ 3 · El reloj de la deuda', 'ccreloj']]
     },
     verificador: {
-      n: 4, icono: '🔍', titulo: 'Inspector Forense',
+      n: 4, icono: '🔍', titulo: 'Modo Inspector',
       subtitulo: 'Dónde quedó el dinero que nadie ha podido explicar',
       texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
-      temas: ['Radar de banderas rojas', 'Expedientes ASF', 'Verificador de EFOS', 'Cuenta Pública']
+      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'inspexp']]
     },
     ambiente: {
-      n: 5, icono: '🌎', titulo: 'El Costo Ambiental',
+      n: 5, icono: '🌎', titulo: 'Costo Ambiental',
       subtitulo: 'El gasto que no aparece en el recibo',
       texto: 'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí se mide en pesos con cifras oficiales (INEGI, SEMARNAT y Hacienda), se calcula tu parte y se compara con el presupuesto ambiental 2026-2027 y las leyes que aplican.',
       temas: ['Reloj del daño', 'Tu basura y tu parte', 'Servicio municipal', 'Presupuesto ambiental']
@@ -8012,8 +8012,8 @@
       ['⚖️', 'Circuito del Dinero', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos) y cómo llega a estados y municipios.'],
       ['🏗️', 'Inversión y Megaobras', 'cuánto costaron las grandes obras y cuánto cuesta mantenerlas.'],
       ['💳', 'Calculadora Cívica', 'lo que pagas de impuestos según tu ingreso y a qué rubros equivale.'],
-      ['🔍', 'Inspector Forense', 'lo que la Auditoría Superior revisó y lo que quedó por aclarar.'],
-      ['🌎', 'El Costo Ambiental', 'lo que el deterioro del ambiente cuesta y lo que se destina a protegerlo.']
+      ['🔍', 'Modo Inspector', 'lo que la Auditoría Superior revisó y lo que quedó por aclarar.'],
+      ['🌎', 'Costo Ambiental', 'lo que el deterioro del ambiente cuesta y lo que se destina a protegerlo.']
     ];
     var gGasto = glosarioBuscar('Gasto Público'), gHac = glosarioBuscar('Hacienda Pública');
     var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
@@ -24472,7 +24472,7 @@
     return k.map(x => a[x] + ' ' + (EXP_ACCIONES[x] ? EXP_ACCIONES[x][a[x] === 1 ? 0 : 1] : x)).join(', ');
   }
 
-  function expFichaHtml(f) {
+  function expFichaHtml(f, n) {
     const cifras = '<div class="exp-cifras" data-no-autolink>' + f.cifras.map(c =>
       '<div class="exp-cifra"><span class="exp-cifra-v num-tabular">' + pdEsc(c.valor) + '</span><span class="exp-cifra-e">' + pdEsc(c.etq) + ' ' + chipEstado(c.estado) + '</span></div>').join('') + '</div>';
     let detalle = '';
@@ -24494,11 +24494,20 @@
     const principal = f.auditorias
       ? f.auditorias.slice().sort((x, y) => y.porAclarar - x.porAclarar)[0].url
       : f.documentos[0].url;
-    return '<article class="forensic-dossier-card exp-ficha" data-cat="' + f.categoria + '" id="exp-' + f.id + '">' +
-        '<div>' +
-          '<div class="forensic-card-top"><span class="forensic-id-tag">' + f.icono + ' ' + pdEsc(EXP_CATEGORIAS[f.categoria] || f.categoria) + '</span></div>' +
-          '<h4 class="forensic-dossier-title">' + pdEsc(f.titulo) + '</h4>' +
-          '<div class="forensic-dossier-dep">' + pdEsc(f.ente) + '</div>' +
+    /* Un caso por renglon: numero, tema, titulo y sus cifras en fila; el
+       desglose completo se abre al pulsarlo (details/summary). */
+    const resumen = '<span class="exp-fila-cifras" data-no-autolink>' + f.cifras.slice(0, 3).map(c =>
+      '<span class="exp-fila-cifra"><b class="num-tabular">' + pdEsc(c.valor) + '</b><small>' + pdEsc(c.etq) + '</small></span>').join('') + '</span>';
+    return '<li class="exp-fila-li"><details class="exp-fila exp-ficha" data-cat="' + f.categoria + '" id="exp-' + f.id + '">' +
+        '<summary class="exp-fila-cab" data-no-autolink>' +
+          '<span class="exp-fila-n num-tabular" aria-hidden="true">' + String(n).padStart(2, '0') + '</span>' +
+          '<span class="exp-fila-tx"><span class="forensic-id-tag">' + f.icono + ' ' + pdEsc(EXP_CATEGORIAS[f.categoria] || f.categoria) + '</span>' +
+            '<span class="exp-fila-tit">' + pdEsc(f.titulo) + '</span>' +
+            '<span class="exp-fila-ente">' + pdEsc(f.ente) + '</span></span>' +
+          resumen +
+          '<span class="exp-fila-mas" aria-hidden="true">+</span>' +
+        '</summary>' +
+        '<div class="exp-fila-cuerpo">' +
           '<p class="exp-hallazgo">' + pdEsc(f.hallazgo) + '</p>' +
           cifras + detalle + docs +
           '<p class="pd-nota exp-fuente">' + chipEstado('oficial') + ' ' + pdEsc(f.fuente) + '. ' + pdEsc(f.alcance) + '</p>' +
@@ -24507,7 +24516,8 @@
           '<a href="' + pdEsc(principal) + '" target="_blank" rel="noopener noreferrer" class="forensic-btn-asf" title="Abrir el documento oficial"><span>🏛️</span> ' + (f.auditorias ? 'Informe principal' : 'Documento oficial') + '</a>' +
           '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.expCopiar(\'' + f.id + '\')"><span>📋</span> Copiar ficha con fuentes</button>' +
         '</div>' +
-      '</article>';
+        '</div>' +
+      '</details></li>';
   }
 
   function expCopiar(id) {
@@ -24532,7 +24542,8 @@
     const lista = filtro === "todos" ? todas : todas.filter(d => d.categoria === filtro);
     const countLabel = document.getElementById("forensicCountLabel");
     if (countLabel) countLabel.textContent = lista.length;
-    container.innerHTML = lista.map(expFichaHtml).join('');
+    /* El numero es el del caso en la lista completa: no cambia al filtrar. */
+    container.innerHTML = lista.map(f => expFichaHtml(f, todas.indexOf(f) + 1)).join('');
   }
 
   function filtrarDossiers(cat, btn) {
@@ -27178,6 +27189,7 @@
     seleccionarModuloExplorer('verificador', 'exp-' + id);
     var el = document.getElementById('exp-' + id);
     if (el) {
+      if (el.tagName === 'DETAILS') el.open = true;
       el.classList.remove('ce-destaca');
       void el.offsetWidth;
       el.classList.add('ce-destaca');
@@ -27608,6 +27620,7 @@
   }
 
   function radarVerEstado(entidad) {
+    erarioAbrirAncestros(document.getElementById('cpRaiz'));
     cpElegirEntidad(entidad);
     if (capEstado.cuentapublica) capIr('cuentapublica', 3);
   }

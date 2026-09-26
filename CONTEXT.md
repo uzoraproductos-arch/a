@@ -2101,6 +2101,33 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 4, Modo Inspector, en tres bloques; tarjetas 4 y 5)
+
+- **Tarjeta 4:** se llama «Modo Inspector» y, en lugar del monto por aclarar,
+  muestra «5,417 irregularidades · Señaladas por la ASF · CP 2024». Es la
+  suma, derivada, de las acciones correctivas de la Matriz de Datos Básicos
+  CP 2024 (p. 11): 174 solicitudes de aclaración + 2,762 pliegos de
+  observaciones + 2,203 promociones de responsabilidad administrativa + 278
+  avisos al SAT. Quedan fuera las 857 recomendaciones (R y RD), que son
+  preventivas. La operación está en el `title` de la cifra.
+- **Tarjeta 5:** se llama «Costo Ambiental» (también en el menú, el proemio,
+  el encabezado «Módulo 5: Costo Ambiental» y la nota de portada) y, como la
+  del módulo 1, pregunta «¿Cuántos billones? · Descúbrelo al comenzar».
+- **Tres bloques** con la mecánica de los módulos 1 a 3 (claves `inspasf`,
+  `inspradar`, `inspexp`; nacen cerrados; el proemio lleva a cada uno):
+  1. ¿Qué encontró la Auditoría Superior en el gasto de 2024?
+     (`#cuentaPublicaASF`, `renderCuentaPublica`).
+  2. Radar de banderas rojas por entidad (`#radarBanderasNacional`).
+     `radarVerEstado` abre el bloque 1 antes de saltar al capítulo del estado.
+  3. Expedientes de casos por aclarar: dejan de ser tarjetas verticales en
+     rejilla y pasan a una **lista numerada, un caso por renglón**
+     (`ol.exp-lista`, `details.exp-fila`): número, tema, título, ente y hasta
+     tres cifras en fila; al pulsar se abre el desglose completo. El número
+     es el del caso en la lista completa y no cambia al filtrar. `expIr`
+     abre el renglón. La Enciclopedia usa el mismo formato.
+- El Auditor de Entes Públicos y el verificador 69-B siguen después de los
+  bloques, sin cambios.
+
 ### Hecho (módulo 3, Calculadora Cívica, en tres bloques; comparador ampliado)
 
 - **Tarjeta de la portada:** en lugar de «2,479 municipios» dice «Saca tu
@@ -2537,6 +2564,20 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   cierra con Escape o al pulsar fuera, y se desplaza por dentro en teléfono.
 
 ### Pendiente
+
+- **Lista de pendientes de la plataforma:** a petición del autor, cada tarea
+  que quede abierta al reorganizar los módulos se anota aquí. Se trabajará a
+  fondo cuando los cinco módulos estén reorganizados.
+- **Módulo 5, Costo Ambiental:** solo cambiaron el nombre y la cifra de la
+  tarjeta; falta reorganizar su interior en bloques, como los módulos 1 a 4.
+- **Módulo 4, tarjeta:** la cifra «5,417 irregularidades» cuenta acciones
+  correctivas de la ASF, y una acción puede agrupar varias irregularidades.
+  Cuando se publique el Informe General de la CP 2024 o la ASF dé su propio
+  total de irregularidades, cotejarlo. La 2.ª entrega de la CP 2025 sale el
+  30 de octubre de 2026: decidir entonces si la tarjeta pasa a la CP 2025.
+- **Módulo 4, después de los bloques:** decidir con el autor si el Auditor de
+  Entes Públicos y el verificador 69-B del SAT se vuelven un bloque 4 y 5 o
+  se quedan como están.
 
 - **Dietas de los diputados locales (módulo 3, bloque 2):** no hay serie
   nacional oficial; hay que tomarla de cada uno de los 32 congresos (su
