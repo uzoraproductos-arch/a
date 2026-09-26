@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zi">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zj">
 </head>
 <body>
 
@@ -762,7 +762,7 @@
           <span class="explorer-card-icon" aria-hidden="true">💳</span>
           <h3 class="explorer-card-title">Calculadora Cívica</h3>
           <p class="explorer-card-desc">Descubre a dónde va cada peso de tus impuestos.</p>
-          <div class="explorer-card-stat" title="INEGI, Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM)"><strong>2,479 municipios</strong><span>En el padrón nacional</span></div>
+          <div class="explorer-card-stat" title="Calcule su impuesto 2026 y vea a dónde va cada peso"><strong>Saca tu estado de cuenta</strong><span>Tu impuesto, peso por peso</span></div>
           <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora', 'moduloProemio')" aria-label="Comenzar: Calculadora Cívica">
             <span>Comenzar</span> ➔
           </button>
@@ -1522,29 +1522,47 @@
 
         <div class="section-hero">
           <span class="hero-tag">Herramienta de Auditoría Cívica &middot; Ejercicio fiscal 2026</span>
-          <h2>Módulo 3: Calculadora Cívica &amp; Comparador Salarial de Choque</h2>
+          <h2>Módulo 3: Calculadora Cívica</h2>
           <p id="ccEntrada"></p>
         </div>
 
-        <!-- Selector de Apartados del Módulo 3: Apartado A vs Apartado B -->
-        <div class="mod3-tabs-bar" role="tablist" aria-label="Apartados del Módulo 3">
-          <button type="button" class="mod3-tab-btn active" id="btnMod3ApartadoA" onclick="window.AuditEngine.switchApartadoCalculadora('apartadoA', this)">
-            <span>💳 Apartado A: Tu Sueldo, Retenciones &amp; Ticket Cívico</span>
-          </button>
-          <button type="button" class="mod3-tab-btn" id="btnMod3ApartadoB" onclick="window.AuditEngine.switchApartadoCalculadora('apartadoB', this)">
-            <span>⚡ Apartado B: Comparador Salarial de Choque (Tú vs Ellos)</span>
-          </button>
-        </div>
+        <!-- ====================================================================
+             MÓDULO 3 EN TRES BLOQUES, con la mecánica de los módulos 1 y 2
+             (erarioPlegToggle / erarioIr): 1 su estado de cuenta (ingreso,
+             retención, reparto y emisión), 2 usted contra ellos (cargos y
+             prestaciones, ligado al neto del bloque 1) y 3 el reloj de la
+             deuda. El bloque 1 nace abierto: ahí se escribe la cifra.
+             ==================================================================== -->
+        <nav class="erario-indice" aria-label="Los tres bloques de la calculadora">
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ccticket')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Su estado de cuenta</b><small>Ingreso, retención, reparto y emisión</small></span></button>
+          <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('cccompara')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">⚡</span><span class="ei-tx"><b>Usted contra ellos</b><small>Cargo por cargo y sus prestaciones</small></span></button>
+          <span class="erario-indice-flecha" aria-hidden="true">➜</span>
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ccreloj')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">⏱️</span><span class="ei-tx"><b>El reloj de la deuda</b><small>Lo que se endeuda y se pierde por segundo</small></span></button>
+        </nav>
 
-        <!-- CONTENEDOR APARTADO A: Calculadora Cívica & Ticket Fiscal -->
-        <div id="mod3ApartadoAWrapper">
-
-        <!-- BLOQUE 1 · SU INGRESO. El campo de captura vive en el HTML y no
+        <!-- BLOQUE 1 · SU ESTADO DE CUENTA CÍVICO -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor abierto" id="eb-ccticket">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="true"
+                    aria-controls="eb-cuerpo-ccticket"
+                    onclick="window.AuditEngine.erarioPlegToggle('ccticket')">
+              <span class="erario-pleg-n" aria-hidden="true">1</span>
+              <span class="erario-pleg-ico" aria-hidden="true">🧾</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Su estado de cuenta cívico</span>
+                <span class="erario-pleg-av">Escriba lo que gana y la página saca cuatro cuentas en orden: su ingreso, lo que le retienen, a dónde va cada peso de su impuesto y, al final, la emisión de su estado de cuenta.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">−</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-ccticket">
+        <!-- 1.1 · SU INGRESO. El campo de captura vive en el HTML y no
              se repinta nunca: si el motor lo redibujara, el foco se perdería
              a media cifra. Lo demás del formulario sí lo dibuja el motor. -->
         <section class="cc-bloque" id="cc-b1">
           <div class="cc-cab">
-            <span class="cc-cab-n" aria-hidden="true">1</span>
+            <span class="cc-cab-n" aria-hidden="true">1.1</span>
             <div class="cc-cab-tx">
               <h3 class="cc-cab-tit">Su ingreso</h3>
               <p class="cc-cab-sub">Escriba lo que gana y diga cómo tributa. Nada de esto sale de su navegador: la plataforma no guarda ni envía lo que usted teclee.</p>
@@ -1580,46 +1598,83 @@
           <div class="erario-mandos" id="ccMandos"></div>
         </section>
 
-        <!-- BLOQUE 2 · LO QUE LE RETIENEN -->
+        <!-- 1.2 · LO QUE LE RETIENEN -->
         <div id="ccRetencion"></div>
 
-        <!-- BLOQUE 3 · A DÓNDE VA CADA PESO -->
+        <!-- 1.3 · A DÓNDE VA CADA PESO -->
         <div id="ccReparto"></div>
 
-        <!-- TICKET CÍVICO DEL CONTRIBUYENTE (COMPROBANTE VIRAL DE FISCALIZACIÓN) -->
+        <!-- 1.4 · LA EMISIÓN DEL ESTADO DE CUENTA CÍVICO -->
         <div id="ccTicketCivico"></div>
+          </div>
+        </div>
 
-        <!-- BLOQUE 4 · EL RELOJ DE LA DEUDA Y DE LO PERDIDO -->
-        <div id="ccReloj"></div>
-
-        <div id="ccCiegos"></div>
-        <div id="ccProcedencia"></div>
-        </div><!-- FIN mod3ApartadoAWrapper -->
-
-        <!-- CONTENEDOR APARTADO B: Comparador Salarial de Choque (Tú vs Servidores Públicos) -->
-        <div id="mod3ApartadoBWrapper" style="display:none;">
+        <!-- BLOQUE 2 · USTED CONTRA ELLOS (lee el neto calculado en el bloque 1) -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-cccompara">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-cccompara"
+                    onclick="window.AuditEngine.erarioPlegToggle('cccompara')">
+              <span class="erario-pleg-n" aria-hidden="true">2</span>
+              <span class="erario-pleg-ico" aria-hidden="true">⚡</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">Usted contra ellos: cargo por cargo</span>
+                <span class="erario-pleg-av">Su ingreso neto frente al de quienes legislan, juzgan y gobiernan —y sus asesores y proyectistas—, con el documento de cada cifra. Al final, sus prestaciones de ley contra las de ellos.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-cccompara" hidden>
           <div class="shock-container">
             <div class="shock-header">
               <div>
-                <h3 class="shock-title">⚡ Comparador Salarial de Choque: Tú vs la Alta Burocracia</h3>
+                <h3 class="shock-title">⚡ Usted contra la alta burocracia</h3>
                 <div class="shock-subtitle">
-                  Contraste inmediato entre tu ingreso diario y el costo de los cargos más altos de la Federación. Cifras oficiales del PEF 2026 y Manuales de Percepciones.
+                  Elija un Poder y compare. Cifras del Anexo 23 del Presupuesto de Egresos 2026 y de los manuales de remuneraciones que el Senado, la Cámara de Diputados y el Poder Judicial publicaron en el Diario Oficial el 27 de febrero de 2026.
                 </div>
               </div>
               <div id="shockUserBadge" class="shock-user-badge">
-                Tu ingreso de referencia: $15,000 / mes ($500 / día)
+                Su ingreso de referencia: $15,000 al mes
               </div>
             </div>
+
+            <div class="shock-filtros" id="shockFiltros" role="group" aria-label="Filtrar cargos por Poder"></div>
 
             <div class="shock-cards-grid" id="shockCardsGrid">
               <!-- Renderizado dinámicamente por renderComparadorSalarial() -->
             </div>
 
+            <div id="shockPrestaciones"></div>
+
             <div class="shock-summary-banner" id="shockSummaryBanner">
               <!-- Mensaje de impacto y acciones cívicas -->
             </div>
           </div>
-        </div><!-- FIN mod3ApartadoBWrapper -->
+          </div>
+        </div>
+
+        <!-- BLOQUE 3 · EL RELOJ DE LA DEUDA Y DE LO PERDIDO -->
+        <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-ccreloj">
+          <h3 class="erario-pleg-h">
+            <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                    aria-controls="eb-cuerpo-ccreloj"
+                    onclick="window.AuditEngine.erarioPlegToggle('ccreloj')">
+              <span class="erario-pleg-n" aria-hidden="true">3</span>
+              <span class="erario-pleg-ico" aria-hidden="true">⏱️</span>
+              <span class="erario-pleg-tx">
+                <span class="erario-pleg-tit">El reloj de la deuda y de lo perdido</span>
+                <span class="erario-pleg-av">Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.</span>
+              </span>
+              <span class="erario-pleg-mas" aria-hidden="true">+</span>
+            </button>
+          </h3>
+          <div class="erario-pleg-cuerpo" id="eb-cuerpo-ccreloj" hidden>
+        <div id="ccReloj"></div>
+          </div>
+        </div>
+
+        <div id="ccCiegos"></div>
+        <div id="ccProcedencia"></div>
 
       </div><!-- FIN SUBPANEL 2.4 -->
 
@@ -2675,7 +2730,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zi</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zj</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2819,16 +2874,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926zi"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926zj"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926zi"></script>
+  <script src="assets/js/audit-database.js?v=20260926zj"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926zi"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926zj"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926zi"></script>
+  <script src="assets/js/audit-engine.js?v=20260926zj"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

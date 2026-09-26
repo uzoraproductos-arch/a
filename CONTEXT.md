@@ -2101,6 +2101,46 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 3, Calculadora Cívica, en tres bloques; comparador ampliado)
+
+- **Tarjeta de la portada:** en lugar de «2,479 municipios» dice «Saca tu
+  estado de cuenta · Tu impuesto, peso por peso».
+- **Tres bloques** con la mecánica de los módulos 1 y 2 (`erarioPlegToggle`,
+  `erarioIr`, claves `ccticket`, `cccompara`, `ccreloj`); los apartados A/B
+  desaparecen de la plataforma (`switchApartadoCalculadora` se conserva y
+  ahora abre el bloque). El bloque 1 nace abierto porque ahí se escribe.
+  1. **Su estado de cuenta cívico:** 1.1 su ingreso, 1.2 lo que le retienen,
+     1.3 a dónde va cada peso y 1.4 la emisión del estado de cuenta (con
+     aviso mientras no hay cuenta). La numeración 1.x solo se usa en la
+     plataforma (`ccPaso`); la Enciclopedia conserva sus 1–4.
+  2. **Usted contra ellos:** filtros por Poder (`cmpFiltrar`) y 15 cargos,
+     con el neto del bloque 1 como referencia. Nueva colección
+     `AUDIT_DB.comparador_salarial` (`herramientas/integrar_comparador.py`,
+     extractos en `investigaciones/fuentes-comparador/`):
+     - Ejecutivo: Presidenta (Anexo 23.1.2–23.1.3), secretarios de Estado
+       (límite del grupo G, Anexo 23.1.1, $168,860 netos al mes) con la
+       lista de las 22 dependencias del art. 26 LOAPF, y subsecretarios.
+     - Congreso: senadores (dieta neta 2026 $132.9 mil, Manual del Senado,
+       DOF 27-02-2026) y asesores parlamentarios (niveles 34, 30 y 29);
+       diputados federales (dieta neta 2026 $79,846.35, Manual DOF
+       27-02-2026, p. 144) y su personal homólogo de asesoría, más los
+       3,433 contratos de honorarios ($1,042.6 mdp; promedio derivado bruto).
+     - Judicial (Manual PJF 2026, Anexo B): ministros, secretarios de estudio
+       y cuenta, asesores de la SCJN, magistrados de circuito, jueces de
+       distrito y secretarios proyectistas de tribunal y de juzgado. Su neto
+       anual es derivado (12 × mensual + aguinaldo y prima + pago por riesgo
+       + asignaciones, todos netos, con el máximo de cada rango) y parcial.
+     - Diputados locales: tarjeta `pendiente` (ver Pendiente).
+     - **Prestaciones:** cuenta personal derivada (aguinaldo 15 contra 40
+       días; prima vacacional 3 contra 10 días) y cuadro de cinco renglones
+       contra la LFT (arts. 76, 80 y 87), con el documento de cada celda.
+       Hallazgos: la Cámara de Diputados paga el ISR del aguinaldo de sus
+       diputados ($67,785, Anexo 23.3.4, nota 4); el aguinaldo del Senado
+       reportado en el Anexo 23.2.2 equivale a unos 60 días, no a los 40 del
+       Manual (marcado pendiente de aclarar).
+  3. **El reloj de la deuda y de lo perdido** (antes bloque 4), sin cambios
+     de cálculo; el puente desde la 2.2 abre el bloque antes de saltar.
+
 ### Hecho (módulo 2, bloque 3: tablas comparativas con cifras cotejadas)
 
 - Nueva colección `DB.evaluacion_sexenal` (la escribe
@@ -2497,6 +2537,15 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   cierra con Escape o al pulsar fuera, y se desplaza por dentro en teléfono.
 
 ### Pendiente
+
+- **Dietas de los diputados locales (módulo 3, bloque 2):** no hay serie
+  nacional oficial; hay que tomarla de cada uno de los 32 congresos (su
+  presupuesto en el periódico oficial o su portal de transparencia), con
+  documento y fecha. También faltan los asesores del Senado contratados por
+  honorarios (el Anexo 5 del Manual viene como imagen) y el sueldo de cada
+  titular del gabinete por nombre (el PEF solo publica el límite del grupo).
+- **Aguinaldo del Senado:** el Anexo 23.2.2 reporta $382,207 (≈60 días de la
+  dieta bruta) y el Manual 2026 dice 40 días; aclarar con la Cámara.
 
 - **Bloque `macro` de la base** (`recaudacionTributariaTotal`, `deudaSubnacionalTotal`,
   `grandesContribuyentes`, `predialPromedioPIB`, `asfIrregularidadesGlobales`…) no tiene

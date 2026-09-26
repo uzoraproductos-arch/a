@@ -1200,6 +1200,12 @@
     }
   }
 
+  /* En la plataforma el modulo 3 va en tres bloques y los pasos de la
+     cuenta se numeran dentro del primero (1.1 a 1.4); en la Enciclopedia
+     siguen siendo los cuatro bloques de siempre. */
+  function ccEnBloques() { return !!document.getElementById('eb-ccticket'); }
+  function ccPaso(enBloques, suelto) { return ccEnBloques() ? enBloques : suelto; }
+
   function ccPintarMandos() {
     const cont = document.getElementById('ccMandos');
     if (!cont) return;
@@ -1302,7 +1308,7 @@
     cont.innerHTML =
       '<section class="cc-bloque" id="cc-b2">' +
         '<div class="cc-cab">' +
-          '<span class="cc-cab-n" aria-hidden="true">2</span>' +
+          '<span class="cc-cab-n" aria-hidden="true">' + ccPaso('1.2', '2') + '</span>' +
           '<div class="cc-cab-tx">' +
             '<h3 class="cc-cab-tit">Lo que le retienen</h3>' +
             '<p class="cc-cab-sub">' + (elegido.id === 'nose'
@@ -1475,7 +1481,7 @@
     cont.innerHTML =
       '<section class="cc-bloque" id="cc-b3">' +
         '<div class="cc-cab">' +
-          '<span class="cc-cab-n" aria-hidden="true">3</span>' +
+          '<span class="cc-cab-n" aria-hidden="true">' + ccPaso('1.3', '3') + '</span>' +
           '<div class="cc-cab-tx">' +
             '<h3 class="cc-cab-tit">A dónde iría cada peso</h3>' +
             '<p class="cc-cab-sub">Sus ' + ccPesos(isrAnual) + ' de impuesto sobre la renta al año, ' +
@@ -1527,118 +1533,190 @@
   /* ==========================================================================
      MODULO 3: COMPARADOR SALARIAL DE CHOQUE (TU VS ELLOS) & APARTADOS A / B
      ========================================================================== */
-  function switchApartadoCalculadora(apartadoId, btn) {
-    const wrapA = document.getElementById("mod3ApartadoAWrapper");
-    const wrapB = document.getElementById("mod3ApartadoBWrapper");
-    const btnA = document.getElementById("btnMod3ApartadoA");
-    const btnB = document.getElementById("btnMod3ApartadoB");
-
-    if (btnA && btnB) {
-      btnA.classList.toggle("active", apartadoId === "apartadoA");
-      btnB.classList.toggle("active", apartadoId === "apartadoB");
-    }
-
-    if (wrapA && wrapB) {
-      if (apartadoId === "apartadoA") {
-        wrapA.style.display = "block";
-        wrapB.style.display = "none";
-      } else {
-        wrapA.style.display = "none";
-        wrapB.style.display = "block";
-        renderComparadorSalarial();
-      }
+  /* Los apartados A y B se volvieron bloques (1 y 2). Se conserva la
+     funcion por los enlaces viejos: ahora abre el bloque que corresponde. */
+  function switchApartadoCalculadora(apartadoId) {
+    renderComparadorSalarial();
+    if (document.getElementById('eb-cccompara')) {
+      erarioIr(apartadoId === 'apartadoB' ? 'cccompara' : 'ccticket');
     }
   }
 
-  /* Los cargos del comparador salen de DB.poderes.remuneraciones2026: la
-     remuneracion total anual NETA que el Decreto PEF 2026 publica en su
-     Anexo 23 y, para la Corte, el Manual de remuneraciones del PJF (DOF
-     27-02-2026). Neto contra neto: es la unica comparacion honesta. */
+  /* Los cargos que usa el renglon «Ellos» del estado de cuenta salen de
+     DB.poderes.remuneraciones2026 (Anexo 23 del PEF 2026). */
   function cargosComparador() {
     return (DB.poderes && DB.poderes.remuneraciones2026) || [];
   }
 
+  /* El comparador del bloque 2 lee DB.comparador_salarial
+     (herramientas/integrar_comparador.py): Anexo 23 del PEF 2026 y los
+     manuales de remuneraciones del Senado, la Camara de Diputados y el PJF
+     (DOF 27-02-2026). Neto contra neto; lo bruto se dice bruto. */
+  function cmpDatos() { return DB.comparador_salarial || null; }
+
   /* El ingreso del lector, en neto anual. Si ya saco la cuenta en el
-     Apartado A, se usa su neto calculado; si no, la cifra tal como la
+     bloque 1, se usa su neto calculado; si no, la cifra tal como la
      escribio, avisando si es bruta. */
   function comparadorIngresoLector() {
     const cc = state.cc || {};
     const res = cc.calculado ? cc.resultado : null;
     if (res && res.ano && res.ano.neto > 0) {
-      return { anual: res.ano.neto, tipo: 'neto', calculado: true };
+      return { anual: res.ano.neto, tipo: 'neto', calculado: true, brutoMes: res.mes.bruto };
     }
     const monto = cc.monto > 0 ? cc.monto : 15000;
     const anual = cc.periodicidad === 'ano' ? monto : monto * 12;
-    return { anual: anual, tipo: cc.naturaleza === 'neto' ? 'neto' : 'bruto', calculado: false };
+    const tipo = cc.naturaleza === 'neto' ? 'neto' : 'bruto';
+    return { anual: anual, tipo: tipo, calculado: false, brutoMes: tipo === 'bruto' ? anual / 12 : 0 };
+  }
+
+  function cmpRango(r) {
+    if (!r) return '';
+    return (r.min && r.min !== r.max) ? ccPesos(r.min) + ' a ' + ccPesos(r.max) : ccPesos(r.max);
+  }
+
+  function cmpFuente(clave, pagina) {
+    const f = (cmpDatos().fuentes || {})[clave] || {};
+    return '<a class="pd-fuente no-autolink" href="' + escHtml(f.url || '#') + '" target="_blank" rel="noopener noreferrer" title="' +
+      escHtml(f.doc || '') + '">' + escHtml(f.corto || '') + (pagina ? ', ' + escHtml(pagina) : '') + ' ↗</a>';
+  }
+
+  function cmpFiltrar(grupo) {
+    state.cc.cmpGrupo = grupo;
+    renderComparadorSalarial();
+  }
+
+  function cmpFila(rotulo, valor, estado) {
+    return '<div class="shock-figure-row"><span class="shock-fig-et">' + rotulo + '</span>' +
+      '<span class="num-tabular shock-fig-v">' + valor + (estado ? ' ' + chipEstado(estado) : '') + '</span></div>';
+  }
+
+  function cmpTarjeta(c, lector) {
+    const userDia = lector.anual / 365;
+    if (c.pendiente) {
+      return '<article class="shock-card shock-card-pend">' +
+        '<div><div class="shock-card-ico" aria-hidden="true">' + c.icono + '</div>' +
+        '<h4 class="shock-card-cargo">' + escHtml(c.cargo) + '</h4>' +
+        '<div class="shock-card-ente">' + escHtml(c.detalle) + '</div>' +
+        '<div class="shock-figure-box">' + cmpFila('Neto al mes', 'sin cifra', 'pendiente') + '</div>' +
+        '<p class="shock-card-nota">' + escHtml(c.nota) + '</p></div></article>';
+    }
+    const mesMax = c.mensual.max;
+    const veces = c.anual / lector.anual;
+    const dias = Math.round(mesMax / userDia);
+    let figuras = cmpFila('Neto al mes', cmpRango(c.mensual), c.mensualEstado) +
+      '<div class="shock-fig-concepto">' + escHtml(c.mensualConcepto) + '</div>';
+    if (c.aguinaldoPrima) figuras += cmpFila('Aguinaldo y prima vacacional, al año', cmpRango(c.aguinaldoPrima), 'oficial');
+    if (c.pagoRiesgo) figuras += cmpFila('Pago por riesgo, al año', ccPesos(c.pagoRiesgo), 'oficial');
+    if (c.asignaciones) figuras += cmpFila('Asignaciones adicionales, al año', cmpRango(c.asignaciones), 'oficial');
+    figuras += cmpFila('Neto al año' + (c.parcial ? ' (parcial)' : ''), '<b>' + ccPesos(c.anual) + '</b>', c.anualEstado);
+    figuras += '<div class="shock-fig-concepto">' + escHtml(c.anualConcepto || ('Cómo se obtuvo: ' + c.anualOperacion + '.')) + '</div>';
+
+    const sub = c.subniveles ? '<ul class="shock-sub">' + c.subniveles.map(s =>
+      '<li><span>' + escHtml(s.nombre) + '</span><span class="num-tabular">' + cmpRango(s) + '</span></li>').join('') + '</ul>' : '';
+    const h = c.honorarios;
+    const hon = h ? '<p class="shock-card-nota"><b>Además, por honorarios:</b> ' + formatNumber(h.contratos) +
+      ' contratos con ' + ccPesos(h.montoAnual) + ' al año; en promedio ' + ccPesos(h.promedioMensual) +
+      ' <b>brutos</b> al mes por contrato ' + chipEstado('derivado') + ' <small>(' + escHtml(h.operacion) + '; ' +
+      escHtml(h.pagina) + ')</small></p>' : '';
+    const lista = c.lista ? '<details class="shock-lista"><summary>Las ' + c.lista.length +
+      ' dependencias que comparten este límite</summary><ul>' +
+      c.lista.map(n => '<li>' + escHtml(n) + '</li>').join('') + '</ul><div class="shock-card-fuente">' +
+      cmpFuente(c.listaFuente) + '</div></details>' : '';
+
+    return '<article class="shock-card">' +
+      '<div><div class="shock-card-ico" aria-hidden="true">' + c.icono + '</div>' +
+        '<h4 class="shock-card-cargo">' + escHtml(c.cargo) + '</h4>' +
+        '<div class="shock-card-ente">' + escHtml(c.detalle) + '</div>' +
+        '<div class="shock-figure-box">' + figuras + '</div>' + sub + hon + lista +
+        '<div class="shock-ratio-highlight">' + (veces >= 1
+          ? 'Recibe ' + veces.toFixed(1) + ' veces lo que usted'
+          : 'Recibe menos que usted') + ' ' + chipEstado('derivado') + '</div>' +
+        '<div class="shock-metric-pill"><strong>' + formatNumber(dias) + ' días de su ingreso</strong> equivalen a un solo mes' +
+          (c.mensual.min && c.mensual.min !== c.mensual.max ? ' del máximo' : '') + ' de este cargo.</div>' +
+        '<p class="shock-card-nota">' + escHtml(c.nota) + '</p>' +
+      '</div>' +
+      '<div class="shock-card-fuente">Fuente: ' + cmpFuente(c.fuente, c.pagina) + '</div>' +
+    '</article>';
+  }
+
+  /* Las prestaciones: primero la cuenta con el sueldo del lector (derivada),
+     despues el cuadro de reglas, cada una con su articulo. */
+  function cmpPrestaciones(lector) {
+    const d = cmpDatos();
+    const P = d.prestaciones, L = d.ley;
+    let cuenta;
+    if (lector.brutoMes > 0) {
+      const dia = lector.brutoMes / 30;
+      const caja = (et, ley, ref, extra) =>
+        '<div class="shock-prest-caja"><span>' + et + '</span>' +
+          '<div class="shock-prest-par"><div><small>Mínimo de ley</small><strong class="num-tabular">' + ccPesos(ley) + '</strong></div>' +
+          '<div><small>Con la regla de ellos</small><strong class="num-tabular">' + ccPesos(ref) + '</strong></div></div>' +
+          '<em>' + extra + '</em></div>';
+      cuenta = '<div class="shock-prest-cuenta">' +
+        caja('Su aguinaldo', L.aguinaldoDias * dia, L.referencia.aguinaldoDias * dia,
+          L.aguinaldoDias + ' contra ' + L.referencia.aguinaldoDias + ' días: ' + ccPesos((L.referencia.aguinaldoDias - L.aguinaldoDias) * dia) + ' de diferencia') +
+        caja('Su prima vacacional', L.primaVacacionalDias * dia, L.referencia.primaVacacionalDias * dia,
+          L.primaVacacionalDias + ' contra ' + L.referencia.primaVacacionalDias + ' días: ' + ccPesos((L.referencia.primaVacacionalDias - L.primaVacacionalDias) * dia) + ' de diferencia') +
+        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Su sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
+        ') entre 30, por los días de cada regla, en bruto y antes de impuestos. ' + escHtml(L.nota) + '</p>';
+    } else {
+      cuenta = '<p class="shock-prest-op">Para ver la cuenta con su sueldo, escriba su ingreso bruto o saque la cuenta en el bloque 1.</p>';
+    }
+    const cols = P.columnas;
+    const tabla = '<div class="shock-prest-scroll" tabindex="0" role="region" aria-label="Cuadro de prestaciones"><table class="shock-prest-tabla">' +
+      '<thead><tr><th scope="col">Prestación</th>' + cols.map(c => '<th scope="col">' + escHtml(c.nombre) + '<small>' + escHtml(c.sub) + '</small></th>').join('') + '</tr></thead>' +
+      '<tbody>' + P.filas.map(f => '<tr><th scope="row">' + escHtml(f.concepto) + '</th>' + cols.map(c => {
+        const x = f.celdas[c.id] || {};
+        return '<td' + (c.id === 'lft' ? ' class="shock-td-lft"' : '') + '>' + escHtml(x.tx || '') +
+          (x.estado === 'pendiente' ? ' ' + chipEstado('pendiente') : '') +
+          (x.nota ? '<span class="shock-td-nota">' + escHtml(x.nota) + '</span>' : '') +
+          '<small>' + escHtml(x.ref || '') + '</small></td>';
+      }).join('') + '</tr>').join('') + '</tbody></table></div>';
+    return '<section class="shock-prest">' +
+      '<h4 class="shock-prest-tit">Sus prestaciones de ley contra las de ellos</h4>' +
+      '<p class="shock-prest-sub">La Ley Federal del Trabajo fija lo mínimo que un patrón debe darle. Los manuales de cada Poder fijan lo que reciben sus integrantes. Estas son las dos reglas, lado a lado.</p>' +
+      cuenta + tabla +
+      '<div class="shock-card-fuente">Fuentes: ' + cmpFuente('LFT') + ' · ' + cmpFuente('DIP', 'Anexo 1, p. 145') + ' · ' +
+        cmpFuente('SEN', 'Anexo 3') + ' · ' + cmpFuente('PEF', 'Anexos 23.1.3, 23.2.2 y 23.3.4') + ' · ' + cmpFuente('PJF', 'numerales 8.1 y 8.2') + '</div>' +
+    '</section>';
   }
 
   function renderComparadorSalarial() {
     const grid = document.getElementById("shockCardsGrid");
     const badge = document.getElementById("shockUserBadge");
     const banner = document.getElementById("shockSummaryBanner");
+    const filtros = document.getElementById("shockFiltros");
+    const prest = document.getElementById("shockPrestaciones");
     if (!grid) return;
-
+    const d = cmpDatos();
     const lector = comparadorIngresoLector();
-    const userMes = lector.anual / 12;
-    const userDia = lector.anual / 365;
-    const cargos = cargosComparador();
+    const enBloques = ccEnBloques();
 
     if (badge) {
-      badge.innerHTML = 'Su ingreso de referencia: <strong>' + ccPesos(userMes) + ' al mes</strong>, ' + lector.tipo +
-        (lector.calculado ? ' (calculado en el Apartado A)' :
-          (lector.tipo === 'bruto' ? '. <em>Es bruto: saque la cuenta en el Apartado A para comparar neto contra neto.</em>' : ''));
+      badge.innerHTML = 'Su ingreso de referencia: <strong>' + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
+        (lector.calculado ? ' (calculado en el ' + (enBloques ? 'bloque 1' : 'Apartado A') + ')' :
+          (lector.tipo === 'bruto' ? '. <em>Es bruto: saque la cuenta en el ' + (enBloques ? 'bloque 1' : 'Apartado A') +
+            ' para comparar neto contra neto.</em>' : ''));
     }
 
-    if (!cargos.length) {
+    if (!d) {
       grid.innerHTML = '<p>' + chipEstado('pendiente') + ' No hay remuneraciones documentadas en la base.</p>';
       return;
     }
 
-    grid.innerHTML = cargos.map(c => {
-      const mesCargo = c.netoMensualTabulado || (c.netoAnual / 12);
-      const veces = c.netoAnual / lector.anual;
-      const dias = Math.round(mesCargo / userDia);
-      const fuente = (DB.poderes.fuentes[c.fuente] || {});
-      const pag = /^\d+$/.test(String(c.pagina)) ? 'p. ' + c.pagina : c.pagina;
-      return `
-        <article class="shock-card">
-          <div>
-            <div style="font-size:24px; margin-bottom:4px;">${c.icono}</div>
-            <h4 class="shock-card-cargo">${c.cargo}</h4>
-            <div class="shock-card-ente">${c.ente}</div>
+    const grupo = state.cc.cmpGrupo || 'todos';
+    if (filtros) {
+      const btn = (id, et, n) => '<button type="button" class="shock-filtro' + (grupo === id ? ' activo' : '') +
+        '" aria-pressed="' + (grupo === id) + '" onclick="window.AuditEngine.cmpFiltrar(\'' + id + '\')">' + et +
+        ' <span class="shock-filtro-n">' + n + '</span></button>';
+      filtros.innerHTML = btn('todos', 'Todos', d.cargos.length) +
+        d.grupos.map(g => btn(g.id, g.icono + ' ' + escHtml(g.nombre), d.cargos.filter(c => c.grupo === g.id).length)).join('');
+    }
 
-            <div class="shock-figure-box">
-              <div class="shock-figure-row">
-                <span style="color:var(--text-dim);">Neto al año${c.parcial ? ' (parcial)' : ''}:</span>
-                <span class="num-tabular" style="color:var(--gold-bright); font-weight:700;">${ccPesos(c.netoAnual)} ${chipEstado(c.netoAnualEstado || c.estado)}</span>
-              </div>
-              <div class="shock-figure-row">
-                <span style="color:var(--text-dim);">${c.netoMensualTabulado ? 'Sueldo neto al mes:' : 'Equivale al mes:'}</span>
-                <span class="num-tabular">${ccPesos(mesCargo)} ${chipEstado(c.netoMensualTabulado ? 'oficial' : 'derivado')}</span>
-              </div>
-              <div class="shock-figure-row">
-                <span style="color:var(--text-dim);">Aguinaldo:</span>
-                <span class="num-tabular" style="color:var(--cyan);">${ccPesos(c.aguinaldo)}</span>
-              </div>
-              <div style="font-size:10.5px; color:var(--text-dim); line-height:1.45;">${c.aguinaldoNota}</div>
-            </div>
+    grid.innerHTML = d.cargos.filter(c => grupo === 'todos' || c.grupo === grupo)
+      .map(c => cmpTarjeta(c, lector)).join('');
 
-            <div class="shock-ratio-highlight">
-              ${veces >= 1 ? 'Recibe ' + veces.toFixed(1) + ' veces lo que usted' : 'Recibe menos que usted'} ${chipEstado('derivado')}
-            </div>
-
-            <div class="shock-metric-pill">
-              <strong>${formatNumber(dias)} días de su ingreso</strong> equivalen a un solo mes de su remuneración.
-            </div>
-            ${c.parcial ? `<div class="shock-metric-pill">${c.nota}</div>` : ''}
-          </div>
-
-          <div style="font-size:10px; color:var(--text-dim); margin-top:14px; font-family:var(--font-mono); border-top:1px dashed var(--border-subtle); padding-top:8px;">
-            Fuente: <a class="pd-fuente no-autolink" href="${fuente.url || '#'}" target="_blank" rel="noopener noreferrer" title="${fuente.doc || ''}">${fuente.corto || fuente.doc || ''}, ${pag} ↗</a>
-          </div>
-        </article>
-      `;
-    }).join("");
+    if (prest) prest.innerHTML = cmpPrestaciones(lector);
 
     if (banner) {
       banner.innerHTML = `
@@ -1647,12 +1725,12 @@
             ¿Cómo se lee esta comparación?
           </strong>
           <p style="font-size:12.5px; color:var(--text-secondary); margin:0; line-height:1.5;">
-            Todas las cifras son netas: lo que llega a la persona después de impuestos. El artículo 127 de la Constitución prohíbe que un servidor público reciba una remuneración mayor que la establecida para la Presidencia de la República. Las cuentas «veces» y «días» son derivadas: dividen la remuneración oficial entre el ingreso que usted escribió.
+            Las cifras son netas —lo que llega a la persona después de impuestos— salvo el promedio de los honorarios, que el documento da en bruto y así se dice. Cuando un documento publica un rango, las cuentas usan su máximo. El artículo 127 de la Constitución prohíbe que un servidor público reciba una remuneración mayor que la de la Presidencia. Las cuentas «veces» y «días» son derivadas: dividen la cifra oficial entre su ingreso.
           </p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.copiarComparadorChoque()" style="font-size:12px; padding:8px 14px;">
-            <span>📋</span> Copiar Comparativa para Redes
+            <span>📋</span> Copiar comparativa para redes
           </button>
           <button type="button" class="hero-pillar-btn hero-pase-btn" onclick="window.AuditEngine.openPaseCivicoModal()" style="font-size:12px; padding:8px 14px;">
             <span>🍺</span> Descargar Reporte Salarial ($79)
@@ -1664,13 +1742,15 @@
 
   function copiarComparadorChoque() {
     const lector = comparadorIngresoLector();
+    const d = cmpDatos();
+    const grupo = state.cc.cmpGrupo || 'todos';
     let texto = `COMPARATIVA SALARIAL (Auditavisión México)\n`;
     texto += `Mi ingreso: ${ccPesos(lector.anual / 12)} al mes, ${lector.tipo}.\n`;
-    texto += `Remuneración neta anual 2026 según el Presupuesto de Egresos:\n`;
-    cargosComparador().forEach(c => {
-      texto += `• ${c.cargo}: ${ccPesos(c.netoAnual)} al año${c.parcial ? ' (parcial)' : ''}, ${(c.netoAnual / lector.anual).toFixed(1)} veces lo mío\n`;
+    texto += `Neto anual 2026 según el PEF y los manuales de remuneraciones:\n`;
+    (d ? d.cargos : []).filter(c => !c.pendiente && (grupo === 'todos' || c.grupo === grupo)).forEach(c => {
+      texto += `• ${c.cargo}: ${ccPesos(c.anual)} al año${c.parcial ? ' (parcial)' : ''}${c.anualEstado === 'derivado' ? ' (calculado)' : ''}, ${(c.anual / lector.anual).toFixed(1)} veces lo mío\n`;
     });
-    texto += `\nFuentes: PEF 2026, Anexo 23 (DOF 21-11-2025) y Manual de remuneraciones del PJF 2026 (DOF 27-02-2026).`;
+    texto += `\nFuentes: PEF 2026, Anexo 23 (DOF 21-11-2025); manuales de remuneraciones del Senado, la Cámara de Diputados y el PJF (DOF 27-02-2026).`;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(texto).then(() => {
@@ -2808,7 +2888,7 @@
     setTimeout(() => {
       switchApartadoCalculadora('apartadoB');
       const el = document.getElementById('shockCardsGrid');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (el && !document.getElementById('eb-cccompara')) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 120);
   }
 
@@ -2974,7 +3054,17 @@
     const cont = document.getElementById("ccTicketCivico");
     if (!cont) return;
     const d = eccDatos();
-    if (!d) { cont.innerHTML = ""; return; }
+    const cab14 = ccEnBloques() ?
+      '<div class="cc-cab cc-cab-ecc">' +
+        '<span class="cc-cab-n" aria-hidden="true">1.4</span>' +
+        '<div class="cc-cab-tx">' +
+          '<h3 class="cc-cab-tit">La emisión de su estado de cuenta cívico</h3>' +
+          '<p class="cc-cab-sub">' + (d
+            ? 'Lo que usted ganó, lo que le retuvieron y a dónde fue su impuesto, en un solo documento que puede descargar o copiar.'
+            : 'Aparece aquí en cuanto pulse «Sacar la cuenta» en el paso 1.1.') + '</p>' +
+        '</div>' +
+      '</div>' : '';
+    if (!d) { cont.innerHTML = cab14 ? '<section class="cc-bloque cc-bloque-ecc">' + cab14 + '</section>' : ""; return; }
     const max = Math.max.apply(null, d.movimientos.map(m => m.monto));
 
     const movs = d.movimientos.map(m => `
@@ -3008,7 +3098,7 @@
           </div>
         </div>` : '';
 
-    cont.innerHTML = `
+    cont.innerHTML = (cab14 ? '<section class="cc-bloque cc-bloque-ecc">' + cab14 + '</section>' : '') + `
       <div class="civic-ticket-wrapper">
         <article class="ecc" id="ticketCardPrintable">
           <header class="ecc-cab">
@@ -3283,7 +3373,7 @@
     cont.innerHTML =
       '<section class="cc-bloque cc-bloque-reloj" id="cc-b4">' +
         '<div class="cc-cab">' +
-          '<span class="cc-cab-n" aria-hidden="true">4</span>' +
+          '<span class="cc-cab-n" aria-hidden="true">' + ccPaso('3', '4') + '</span>' +
           '<div class="cc-cab-tx">' +
             '<h3 class="cc-cab-tit">' + rel.titulo + '</h3>' +
             '<p class="cc-cab-sub">Cuatro cuentas que no aparecen en ningún recibo y que, sin embargo, ' +
@@ -3503,8 +3593,7 @@
 
   function ccReiniciar() {
     state.cc.calculado = false;
-    const tic = document.getElementById("ccTicketCivico");
-    if (tic) tic.innerHTML = "";
+    ccPintarTicketCivico();
     ccPintarMandos();
     simPonerEnCeros(document.getElementById('ccRetencion'), 'cc-ret');
     simPonerEnCeros(document.getElementById('ccReparto'), 'cc-rep');
@@ -3578,6 +3667,7 @@
     ccPintarReparto();
     ccPintarTicketCivico();
     ccPintarReloj();
+    renderComparadorSalarial();
     ccPintarCiegos();
     ccPintarProcedencia();
 
@@ -22249,6 +22339,7 @@
     setTimeout(() => {
       const caja = document.getElementById('cc-b4');
       if (!caja) return;
+      erarioAbrirAncestros(caja);
       caja.scrollIntoView({ behavior: 'smooth', block: 'start' });
       caja.classList.remove('ce-destaca');
       void caja.offsetWidth;
@@ -27953,6 +28044,7 @@
     cerrarModalReferencia: cerrarModalReferencia,
     notificarEnDesarrollo: notificarEnDesarrollo,
     switchApartadoCalculadora: switchApartadoCalculadora,
+    cmpFiltrar: cmpFiltrar,
     renderComparadorSalarial: renderComparadorSalarial,
     renderPoderes: renderPoderes,
     irComparadorChoque: irComparadorChoque,

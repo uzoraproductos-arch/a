@@ -21451,6 +21451,661 @@ window.AUDIT_DB = {
         }
       }
     ]
+  },
+"comparador_salarial": {
+    "consulta": "26 de septiembre de 2026",
+    "fuentes": {
+      "PEF": {
+        "corto": "PEF 2026, Anexo 23 (DOF 21-11-2025)",
+        "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n para el Ejercicio Fiscal 2026, Anexo 23 \u00abRemuneraciones de los servidores p\u00fablicos de la Federaci\u00f3n\u00bb, Diario Oficial de la Federaci\u00f3n, 21 de noviembre de 2025, edici\u00f3n vespertina.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf",
+        "sha256": "6db4a86b588a0f76928e5d61298579c4aff2c29c3ace68fdedbfa5afceb8f2bc"
+      },
+      "DIP": {
+        "corto": "Manual de remuneraciones de la C\u00e1mara de Diputados 2026 (DOF 27-02-2026)",
+        "doc": "Manual que Regula las Remuneraciones para las y los Diputados Federales, Personal de Mando y Hom\u00f3logos de la C\u00e1mara de Diputados, de la Unidad de Evaluaci\u00f3n y Control y del Canal del Congreso, para el ejercicio fiscal 2026. Diario Oficial de la Federaci\u00f3n, 27 de febrero de 2026, pp. 137 a 146.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_manual_remun_27feb26.pdf",
+        "sha256": "e2d839ba972dbe26ba846a7190d7cf81184acf507c61a42deb09dc617de5c7dd"
+      },
+      "SEN": {
+        "corto": "Manual de remuneraciones del Senado 2026 (DOF 27-02-2026)",
+        "doc": "Manual de Remuneraciones de las Senadoras, Senadores, servidoras y servidores p\u00fablicos de mando y hom\u00f3logos, y la informaci\u00f3n relativa al Cap\u00edtulo de Servicios Personales. Diario Oficial de la Federaci\u00f3n, 27 de febrero de 2026.",
+        "url": "https://dof.gob.mx/nota_detalle.php?codigo=5781138&fecha=27/02/2026"
+      },
+      "PJF": {
+        "corto": "Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)",
+        "doc": "Manual que regula las remuneraciones de las personas servidoras p\u00fablicas del Poder Judicial de la Federaci\u00f3n para el ejercicio fiscal 2026, Anexo B \u00abPresupuesto anal\u00edtico de plazas\u00bb. Diario Oficial de la Federaci\u00f3n, 27 de febrero de 2026.",
+        "url": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF",
+        "sha256": "1bab2ed9e8821e6bd8e443b7239423b319a6626cc2a3104f2272eff676f55ef7"
+      },
+      "LOAPF": {
+        "corto": "Ley Org\u00e1nica de la Administraci\u00f3n P\u00fablica Federal, art. 26",
+        "doc": "Ley Org\u00e1nica de la Administraci\u00f3n P\u00fablica Federal, art\u00edculo 26, texto vigente (\u00faltima reforma DOF 07-05-2026).",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf",
+        "sha256": "3edf486e601217f5f595f94f56832d8845cbd9193b6494af52473237252bcc5f"
+      },
+      "LFT": {
+        "corto": "Ley Federal del Trabajo, arts. 76, 80 y 87",
+        "doc": "Ley Federal del Trabajo, texto vigente (\u00faltima reforma DOF 14-05-2026): art\u00edculo 76 (vacaciones, reformado DOF 27-12-2022), 80 (prima vacacional) y 87 (aguinaldo).",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf",
+        "sha256": "12f09393a1951a91c3f57f579bf611b034edf1a5f78cdbfb828e23ff3a9acbf7"
+      }
+    },
+    "grupos": [
+      {
+        "id": "ejecutivo",
+        "nombre": "Poder Ejecutivo",
+        "icono": "\ud83c\udfdb\ufe0f"
+      },
+      {
+        "id": "legislativo",
+        "nombre": "Congreso de la Uni\u00f3n",
+        "icono": "\ud83d\udcdc"
+      },
+      {
+        "id": "judicial",
+        "nombre": "Poder Judicial de la Federaci\u00f3n",
+        "icono": "\u2696\ufe0f"
+      },
+      {
+        "id": "local",
+        "nombre": "Congresos de los estados",
+        "icono": "\ud83d\uddfa\ufe0f"
+      }
+    ],
+    "cargos": [
+      {
+        "id": "presidencia",
+        "grupo": "ejecutivo",
+        "cargo": "Presidenta de la Rep\u00fablica",
+        "detalle": "Titular del Poder Ejecutivo",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "mensual": {
+          "max": 134290
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Remuneraci\u00f3n ordinaria total l\u00edquida mensual neta",
+        "anual": 2073878,
+        "anualEstado": "oficial",
+        "anualConcepto": "Remuneraci\u00f3n total anual neta de percepciones ordinarias",
+        "fuente": "PEF",
+        "pagina": "Anexos 23.1.2 y 23.1.3, DOF p. 59",
+        "nota": "El tope del art\u00edculo 127 constitucional: ning\u00fan servidor p\u00fablico puede recibir una remuneraci\u00f3n mayor que la establecida para la Presidencia."
+      },
+      {
+        "id": "secretario",
+        "grupo": "ejecutivo",
+        "cargo": "Secretaria o secretario de Estado",
+        "detalle": "Gabinete: las 22 dependencias del art. 26 de la LOAPF",
+        "icono": "\ud83d\uddc2\ufe0f",
+        "mensual": {
+          "max": 168860
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "L\u00edmite m\u00e1ximo de la percepci\u00f3n ordinaria neta mensual, grupo G (sueldo m\u00e1s prestaciones en efectivo y en especie)",
+        "anual": 2026320,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $168,860 del l\u00edmite mensual. El anexo no dice si ese l\u00edmite ya prorratea el aguinaldo: no se le suma nada",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.1.1, DOF p. 58",
+        "lista": [
+          "Gobernaci\u00f3n",
+          "Relaciones Exteriores",
+          "Defensa Nacional",
+          "Marina",
+          "Seguridad y Protecci\u00f3n Ciudadana",
+          "Hacienda y Cr\u00e9dito P\u00fablico",
+          "Bienestar",
+          "Medio Ambiente y Recursos Naturales",
+          "Energ\u00eda",
+          "Econom\u00eda",
+          "Agricultura y Desarrollo Rural",
+          "Infraestructura, Comunicaciones y Transportes",
+          "Anticorrupci\u00f3n y Buen Gobierno",
+          "Educaci\u00f3n P\u00fablica",
+          "Ciencia, Humanidades, Tecnolog\u00eda e Innovaci\u00f3n",
+          "Salud",
+          "Trabajo y Previsi\u00f3n Social",
+          "Desarrollo Agrario, Territorial y Urbano",
+          "Cultura",
+          "Turismo",
+          "Mujeres",
+          "Agencia de Transformaci\u00f3n Digital y Telecomunicaciones"
+        ],
+        "listaFuente": "LOAPF",
+        "nota": "El Presupuesto no publica el sueldo de cada titular con su nombre: publica un solo l\u00edmite para el grupo G, que rige a las 22 dependencias. Por eso las 22 comparten cifra. Ese l\u00edmite incluye prestaciones en especie y no se compara rengl\u00f3n a rengl\u00f3n con la cifra \u00abl\u00edquida\u00bb de la Presidenta."
+      },
+      {
+        "id": "subsecretario",
+        "grupo": "ejecutivo",
+        "cargo": "Subsecretaria o subsecretario de Estado",
+        "detalle": "Grupo H: subsecretar\u00edas y oficial\u00edas mayores",
+        "icono": "\ud83d\uddc2\ufe0f",
+        "mensual": {
+          "max": 167353
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "L\u00edmite m\u00e1ximo de la percepci\u00f3n ordinaria neta mensual, grupo H",
+        "anual": 2008236,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $167,353 del l\u00edmite mensual, sin sumar aguinaldo",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.1.1, DOF p. 58",
+        "nota": "Mismo tabulador para todas las dependencias."
+      },
+      {
+        "id": "senado",
+        "grupo": "legislativo",
+        "cargo": "Senadora o senador",
+        "detalle": "128 esca\u00f1os",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "max": 132900
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Dieta neta mensual 2026 (el Manual la publica en miles: 132.9)",
+        "anual": 2037848,
+        "anualEstado": "oficial",
+        "anualConcepto": "Remuneraci\u00f3n total anual neta (el anexo aclara que son percepciones de 2025)",
+        "fuente": "SEN",
+        "pagina": "Anexo 1; anual: PEF, Anexo 23.2.2, DOF p. 61",
+        "nota": "La dieta no es sueldo: el Manual la define como la remuneraci\u00f3n por la representaci\u00f3n pol\u00edtica, irrenunciable."
+      },
+      {
+        "id": "asesor_senado",
+        "grupo": "legislativo",
+        "cargo": "Asesor parlamentario del Senado",
+        "detalle": "De grupo parlamentario (nivel 34); el asesor ejecutivo es nivel 30",
+        "icono": "\ud83e\uddd1\u200d\ud83d\udcbc",
+        "mensual": {
+          "min": 121900,
+          "max": 126000
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Percepci\u00f3n mensual neta del nivel 34 del tabulador",
+        "subniveles": [
+          {
+            "nombre": "Asesor parlamentario de grupo parlamentario (nivel 34)",
+            "min": 121900,
+            "max": 126000
+          },
+          {
+            "nombre": "Asesor ejecutivo (nivel 30)",
+            "min": 58400,
+            "max": 89000
+          },
+          {
+            "nombre": "Asesor de tesorero (nivel 29)",
+            "min": 42900,
+            "max": 58300
+          }
+        ],
+        "anual": 1512000,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $126,000, el m\u00e1ximo del nivel 34, sin sumar aguinaldo",
+        "fuente": "SEN",
+        "pagina": "Anexo 2 (tabulador) y Anexo 4 (cat\u00e1logo de puestos por nivel)",
+        "nota": "El cat\u00e1logo del Anexo 4 asigna cada puesto a un nivel y el tabulador del Anexo 2 fija el rango de cada nivel; aqu\u00ed se cruzan las dos tablas. El Manual publica los miles con un decimal. Los asesores contratados por honorarios no est\u00e1n en el tabulador."
+      },
+      {
+        "id": "diputados",
+        "grupo": "legislativo",
+        "cargo": "Diputada o diputado federal",
+        "detalle": "500 curules",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "mensual": {
+          "max": 79846.35
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Dieta neta mensual 2026",
+        "anual": 1307224,
+        "anualEstado": "oficial",
+        "anualConcepto": "Remuneraci\u00f3n total anual neta (el anexo aclara que son percepciones de 2025)",
+        "fuente": "DIP",
+        "pagina": "p. 144; anual: PEF, Anexo 23.3.4, DOF p. 68",
+        "nota": "La C\u00e1mara, adem\u00e1s, cubre el impuesto del aguinaldo de cada diputado: $67,785 en el anexo anual."
+      },
+      {
+        "id": "asesor_diputados",
+        "grupo": "legislativo",
+        "cargo": "Asesor de la C\u00e1mara de Diputados",
+        "detalle": "Personal \u00abhom\u00f3logo a mando\u00bb: funciones t\u00e9cnicas, de asesor\u00eda o de investigaci\u00f3n",
+        "icono": "\ud83e\uddd1\u200d\ud83d\udcbc",
+        "mensual": {
+          "min": 34486,
+          "max": 107177
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Remuneraci\u00f3n neta mensual de los niveles hom\u00f3logos",
+        "subniveles": [
+          {
+            "nombre": "Hom\u00f3logo a director de \u00e1rea",
+            "min": 74159,
+            "max": 107177
+          },
+          {
+            "nombre": "Hom\u00f3logo a subdirector de \u00e1rea",
+            "min": 50513,
+            "max": 68126
+          },
+          {
+            "nombre": "Hom\u00f3logo a jefe de departamento",
+            "min": 34486,
+            "max": 42137
+          }
+        ],
+        "anual": 1286124,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $107,177, el m\u00e1ximo del hom\u00f3logo a director de \u00e1rea, sin sumar aguinaldo",
+        "honorarios": {
+          "contratos": 3433,
+          "montoAnual": 1042550553,
+          "promedioAnual": 303685,
+          "promedioMensual": 25307,
+          "operacion": "$1,042,550,553 de la partida 1210 entre 3,433 contratos (y entre 12 para el mes)",
+          "pagina": "Anexo 2, p. 146"
+        },
+        "fuente": "DIP",
+        "pagina": "pp. 142 y 143; definici\u00f3n de hom\u00f3logo: p. 139",
+        "nota": "El Manual no tiene un puesto llamado \u00abasesor de diputado\u00bb: la asesor\u00eda la hacen el personal hom\u00f3logo a mando y, sobre todo, los contratos por honorarios, que no tienen tabulador p\u00fablico."
+      },
+      {
+        "id": "ministro",
+        "grupo": "judicial",
+        "cargo": "Ministra o ministro de la SCJN",
+        "detalle": "Nueve integrantes del Pleno",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "max": 134310
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "max": 290273
+        },
+        "anual": 1901993,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $134,310 de sueldo neto mensual + $290,273 de aguinaldo y prima vacacional netos",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 8 y 9",
+        "nota": "Cifra parcial: el Manual no incluye seguros ni aportaciones de seguridad social, que s\u00ed entran en las cifras anuales del Congreso y de la Presidenta."
+      },
+      {
+        "id": "secretario_estudio",
+        "grupo": "judicial",
+        "cargo": "Secretaria o secretario de estudio y cuenta",
+        "detalle": "SCJN: quien proyecta las sentencias de una ponencia (grupo 7)",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 119317,
+          "max": 123105
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 244054,
+          "max": 253281
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 106875,
+          "max": 110663
+        },
+        "anual": 1841204,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $123,105 de sueldo neto mensual + $253,281 de aguinaldo y prima vacacional + $110,663 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 8 y 9",
+        "nota": "Es el \u00abproyectista\u00bb de la Corte. A diferencia de la ministra o ministro, recibe asignaciones adicionales."
+      },
+      {
+        "id": "asesor_scjn",
+        "grupo": "judicial",
+        "cargo": "Asesora o asesor de la SCJN",
+        "detalle": "Grupo 11 del tabulador de la Corte",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 91082,
+          "max": 117152
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 179798,
+          "max": 240265
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 79661,
+          "max": 104710
+        },
+        "anual": 1750799,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $117,152 de sueldo neto mensual + $240,265 de aguinaldo y prima vacacional + $104,710 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 8 y 9",
+        "nota": "Comparte grupo con coordinador administrativo I, dictaminador I y secretario auxiliar I."
+      },
+      {
+        "id": "magistrado",
+        "grupo": "judicial",
+        "cargo": "Magistrada o magistrado de circuito",
+        "detalle": "Tribunales colegiados y de apelaci\u00f3n",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 129310,
+          "max": 129310
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 270975,
+          "max": 270975
+        },
+        "pagoRiesgo": 119460,
+        "asignaciones": null,
+        "anual": 1942155,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $129,310 de sueldo neto mensual + $270,975 de aguinaldo y prima vacacional + $119,460 de pago por riesgo (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 19",
+        "nota": "El pago por riesgo lo reciben solo quienes juzgan: magistraturas de circuito y juzgados de distrito."
+      },
+      {
+        "id": "juez",
+        "grupo": "judicial",
+        "cargo": "Jueza o juez de distrito",
+        "detalle": "Juzgados de distrito",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 126310,
+          "max": 126310
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 263912,
+          "max": 263912
+        },
+        "pagoRiesgo": 110690,
+        "asignaciones": {
+          "min": 52000,
+          "max": 52000
+        },
+        "anual": 1942322,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $126,310 de sueldo neto mensual + $263,912 de aguinaldo y prima vacacional + $110,690 de pago por riesgo + $52,000 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 19",
+        "nota": "Las asignaciones adicionales se toman en su m\u00e1ximo publicado."
+      },
+      {
+        "id": "proyectista_tribunal",
+        "grupo": "judicial",
+        "cargo": "Secretaria o secretario proyectista de tribunal",
+        "detalle": "Tribunal de circuito (nivel 13 A)",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 81027,
+          "max": 81027
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 154294,
+          "max": 154294
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 211170,
+          "max": 211170
+        },
+        "anual": 1337788,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $81,027 de sueldo neto mensual + $154,294 de aguinaldo y prima vacacional + $211,170 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 20",
+        "nota": "Comparte nivel con la secretar\u00eda de tribunal de circuito. Las asignaciones adicionales se toman en su m\u00e1ximo publicado."
+      },
+      {
+        "id": "proyectista_juzgado",
+        "grupo": "judicial",
+        "cargo": "Secretaria o secretario proyectista de juzgado",
+        "detalle": "Juzgado de distrito (nivel 13 C)",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 74865,
+          "max": 74865
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 141968,
+          "max": 141968
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 194796,
+          "max": 194796
+        },
+        "anual": 1235144,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $74,865 de sueldo neto mensual + $141,968 de aguinaldo y prima vacacional + $194,796 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 20",
+        "nota": "Comparte nivel con la secretar\u00eda de juzgado y la de instrucci\u00f3n de los juzgados laborales."
+      },
+      {
+        "id": "diputado_local",
+        "grupo": "local",
+        "cargo": "Diputada o diputado local",
+        "detalle": "32 congresos, 32 tabuladores",
+        "icono": "\ud83d\uddfa\ufe0f",
+        "pendiente": true,
+        "mensualEstado": "pendiente",
+        "anualEstado": "pendiente",
+        "nota": "Cada congreso aprueba su propio presupuesto y publica la dieta en su peri\u00f3dico oficial o en su portal de transparencia. No hay una serie nacional oficial que las re\u00fana: el Censo Nacional de Poderes Legislativos Estatales del INEGI cuenta legisladores y gasto, pero no publica la dieta. Se integrar\u00e1 entidad por entidad, con su documento."
+      }
+    ],
+    "prestaciones": {
+      "columnas": [
+        {
+          "id": "lft",
+          "nombre": "Usted (m\u00ednimo de ley)",
+          "sub": "Ley Federal del Trabajo"
+        },
+        {
+          "id": "dip",
+          "nombre": "Diputaci\u00f3n federal",
+          "sub": "Manual 2026 y Anexo 23.3.4"
+        },
+        {
+          "id": "sen",
+          "nombre": "Senadur\u00eda",
+          "sub": "Manual 2026 y Anexo 23.2.2"
+        },
+        {
+          "id": "pr",
+          "nombre": "Presidencia",
+          "sub": "Anexo 23.1.3"
+        },
+        {
+          "id": "pjf",
+          "nombre": "Poder Judicial",
+          "sub": "Manual PJF 2026"
+        }
+      ],
+      "filas": [
+        {
+          "concepto": "Aguinaldo",
+          "celdas": {
+            "lft": {
+              "tx": "15 d\u00edas de salario, como m\u00ednimo, antes del 20 de diciembre",
+              "ref": "LFT, art. 87",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "40 d\u00edas de la dieta bruta: $147,438",
+              "ref": "Manual, Anexo 1, p. 145; Anexo 23.3.4",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "El Manual dice 40 d\u00edas de dieta; el anexo anual reporta $382,207, que equivalen a unos 60 d\u00edas",
+              "ref": "Manual, Anexo 3; Anexo 23.2.2",
+              "estado": "pendiente",
+              "nota": "$382,207 \u00f7 ($190,023 de dieta bruta mensual \u00f7 30) = 60.3 d\u00edas. El documento no explica la diferencia con los 40 d\u00edas del Manual: queda por aclarar."
+            },
+            "pr": {
+              "tx": "Aguinaldo $105,258 m\u00e1s gratificaci\u00f3n de fin de a\u00f1o $282,074",
+              "ref": "Anexo 23.1.3, DOF p. 59",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "Aguinaldo y prima vacacional netos: $290,273 una ministra o ministro; $270,975 una magistratura de circuito",
+              "ref": "Manual PJF, Anexo B, pp. 9 y 19",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Vacaciones",
+          "celdas": {
+            "lft": {
+              "tx": "12 d\u00edas laborables el primer a\u00f1o; suben de dos en dos hasta 20",
+              "ref": "LFT, art. 76 (DOF 27-12-2022)",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "El Manual no las prev\u00e9 para la diputaci\u00f3n; su personal de mando tiene 20 d\u00edas h\u00e1biles",
+              "ref": "Manual, Anexo 1, p. 145",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "El Manual no las prev\u00e9 para la senadur\u00eda; su personal tiene 20 d\u00edas h\u00e1biles",
+              "ref": "Manual, numeral 9 b) vii",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "El anexo registra la prima, no los d\u00edas",
+              "ref": "Anexo 23.1.3",
+              "estado": "pendiente"
+            },
+            "pjf": {
+              "tx": "Dos periodos al a\u00f1o, conforme a la Ley Org\u00e1nica del PJF",
+              "ref": "Manual PJF, numeral 8.2.10",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Prima vacacional",
+          "celdas": {
+            "lft": {
+              "tx": "25 % de lo que se gana en las vacaciones: 3 d\u00edas de salario el primer a\u00f1o",
+              "ref": "LFT, art. 80",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "Personal de mando: 50 % de 10 d\u00edas por periodo, dos periodos (10 d\u00edas al a\u00f1o)",
+              "ref": "Manual, Anexo 1, p. 145",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "Personal de mando: 15 d\u00edas de sueldo base al a\u00f1o",
+              "ref": "Manual, numeral 9 b) ii",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "$17,656 al a\u00f1o",
+              "ref": "Anexo 23.1.3",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "50 % de 10 d\u00edas por periodo, dos periodos (10 d\u00edas al a\u00f1o)",
+              "ref": "Manual PJF, numeral 8.2.8",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Seguro de vida",
+          "celdas": {
+            "lft": {
+              "tx": "La ley no lo exige al patr\u00f3n",
+              "ref": "LFT",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "40 dietas brutas; 80 si la muerte es por accidente y 120 en accidente colectivo",
+              "ref": "Manual, Anexo 1, p. 145",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "40 meses de dieta; prima pagada con presupuesto: $96,759",
+              "ref": "Manual, Anexo 3; Anexo 23.2.2",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "Prima pagada con presupuesto: $35,914 al a\u00f1o",
+              "ref": "Anexo 23.1.3",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "40 meses de sueldo b\u00e1sico",
+              "ref": "Manual PJF, numeral 8.1.1",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Impuesto del aguinaldo",
+          "celdas": {
+            "lft": {
+              "tx": "Lo paga usted: se le retiene de la parte gravada",
+              "ref": "Ley del ISR, arts. 93 fracc. XIV y 96",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "Lo paga la C\u00e1mara: $67,785 como \u00abprestaci\u00f3n ISR de aguinaldo\u00bb",
+              "ref": "Anexo 23.3.4, nota 4, DOF p. 68",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "El anexo no registra esa prestaci\u00f3n",
+              "ref": "Anexo 23.2.2",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "El anexo no registra esa prestaci\u00f3n",
+              "ref": "Anexo 23.1.3",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "El Manual publica el aguinaldo ya en neto",
+              "ref": "Manual PJF, Anexo B",
+              "estado": "oficial"
+            }
+          }
+        }
+      ]
+    },
+    "ley": {
+      "aguinaldoDias": 15,
+      "primaVacacionalDias": 3,
+      "vacacionesDias": 12,
+      "referencia": {
+        "aguinaldoDias": 40,
+        "primaVacacionalDias": 10
+      },
+      "nota": "M\u00ednimos de la Ley Federal del Trabajo para el primer a\u00f1o de servicios. La referencia de 40 d\u00edas de aguinaldo y 10 de prima vacacional es la que fijan los Manuales de la C\u00e1mara de Diputados (Anexo 1) y del PJF (numeral 8.2.8)."
+    }
   }
 };
 

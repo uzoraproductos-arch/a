@@ -21773,3 +21773,63 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 [data-theme="light"] .pe-tabla th[scope="row"] { background: #f6f4ee; }
 .pe-td-cp { text-align: center; }
 @media (max-width: 640px) { .pe-tabla th[scope="row"] { min-width: 128px; } .pe-tabla-cab h4 { font-size: 15px; } }
+
+/* ==========================================================================
+   MODULO 3, BLOQUE 2: USTED CONTRA ELLOS (filtros por Poder, tarjetas y
+   cuadro de prestaciones contra la Ley Federal del Trabajo)
+   ========================================================================== */
+.shock-filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 6px; }
+.shock-filtro {
+  background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle); color: var(--text-secondary);
+  border-radius: 999px; padding: 7px 14px; font: 600 12.5px var(--font-sans); cursor: pointer;
+}
+.shock-filtro:hover, .shock-filtro:focus-visible { border-color: var(--border-gold); color: var(--gold-bright); }
+.shock-filtro.activo { background: var(--gold); border-color: var(--gold); color: #0c0f16; }
+.shock-filtro-n { font-family: var(--font-mono); font-size: 11px; opacity: 0.75; margin-left: 2px; }
+.shock-card-ico { font-size: 24px; margin-bottom: 4px; }
+.shock-fig-et { color: var(--text-dim); padding-right: 8px; }
+.shock-fig-v { text-align: right; color: var(--gold-bright); }
+.shock-figure-row { gap: 8px; align-items: baseline; }
+.shock-fig-concepto { font-family: var(--font-sans); font-size: 10.5px; color: var(--text-dim); line-height: 1.45; margin: -1px 0 7px; }
+.shock-sub { list-style: none; margin: 0 0 10px; padding: 0; font-size: 11.5px; }
+.shock-sub li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px dashed var(--border-subtle); color: var(--text-secondary); }
+.shock-sub li .num-tabular { white-space: nowrap; font-family: var(--font-mono); }
+.shock-card-nota { font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 8px; }
+.shock-card-nota small { color: var(--text-dim); }
+.shock-lista { margin: 0 0 12px; font-size: 12px; }
+.shock-lista summary { cursor: pointer; color: var(--cyan); font-weight: 600; }
+.shock-lista ul { margin: 8px 0 6px; padding-left: 18px; columns: 2; column-gap: 18px; color: var(--text-secondary); }
+.shock-lista li { break-inside: avoid; margin-bottom: 3px; }
+.shock-card-fuente { font-size: 10.5px; color: var(--text-dim); margin-top: 12px; border-top: 1px dashed var(--border-subtle); padding-top: 8px; }
+.shock-card-pend { border-style: dashed; }
+.shock-prest { margin-top: 26px; border-top: 1px solid var(--border-subtle); padding-top: 18px; }
+.shock-prest-tit { margin: 0 0 4px; font-family: var(--font-serif); font-size: 19px; color: var(--text-main); }
+.shock-prest-sub { margin: 0 0 14px; font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+.shock-prest-cuenta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 8px; }
+.shock-prest-caja { border: 1px solid var(--border-gold); border-radius: 10px; padding: 12px 14px; background: rgba(201, 168, 76, 0.06); }
+.shock-prest-caja > span { font-weight: 700; color: var(--text-main); font-size: 13.5px; }
+.shock-prest-par { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0 6px; }
+.shock-prest-par small { display: block; font-size: 10.5px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.4px; }
+.shock-prest-par strong { font-family: var(--font-mono); font-size: 17px; color: var(--gold-bright); }
+.shock-prest-par div:first-child strong { color: var(--cyan); }
+.shock-prest-caja em { font-style: normal; font-size: 12px; color: var(--text-secondary); }
+.shock-prest-op { font-size: 11.5px; color: var(--text-dim); line-height: 1.5; margin: 0 0 14px; }
+.shock-prest-scroll { overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: 10px; }
+.shock-prest-tabla { width: 100%; border-collapse: collapse; min-width: 820px; font-size: 12px; }
+.shock-prest-tabla th, .shock-prest-tabla td { padding: 9px 10px; border-bottom: 1px solid var(--border-subtle); text-align: left; vertical-align: top; line-height: 1.45; }
+.shock-prest-tabla thead th { font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gold); }
+.shock-prest-tabla thead th small { display: block; text-transform: none; letter-spacing: 0; color: var(--text-dim); font-weight: 400; }
+.shock-prest-tabla th[scope="row"] { color: var(--text-main); font-weight: 700; position: sticky; left: 0; background: #151926; min-width: 110px; }
+.shock-prest-tabla td { color: var(--text-secondary); }
+.shock-prest-tabla td small { display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); }
+.shock-td-lft { background: rgba(78, 205, 196, 0.07); color: var(--text-main) !important; }
+.shock-td-nota { display: block; margin-top: 4px; font-size: 11px; color: var(--text-dim); }
+.cc-bloque-ecc { margin-bottom: 10px; }
+[data-theme="light"] .shock-prest-tabla th[scope="row"] { background: #f6f4ee; }
+[data-theme="light"] .shock-filtro { background: rgba(0, 0, 0, 0.03); }
+[data-theme="light"] .shock-figure-box { background: rgba(0, 0, 0, 0.04); }
+@media (max-width: 600px) {
+  .shock-container { padding: 18px 14px; }
+  .shock-lista ul { columns: 1; }
+  .shock-prest-par strong { font-size: 15px; }
+}
