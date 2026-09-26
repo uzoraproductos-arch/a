@@ -18339,9 +18339,13 @@ body.con-regreso { padding-bottom: 96px; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.nav-menu-item:hover .mega-menu-dropdown,
 .nav-menu-item.open-mega-menu .mega-menu-dropdown {
   display: grid;
+}
+/* Abrir con el cursor solo donde hay cursor: en pantallas tactiles el
+   :hover se queda pegado tras tocar y el menu no se podia cerrar. */
+@media (hover: hover) and (pointer: fine) {
+  .nav-menu-item:hover .mega-menu-dropdown { display: grid; }
 }
 
 [data-theme="light"] .mega-menu-dropdown {
@@ -20630,3 +20634,46 @@ body.con-regreso { padding-bottom: 96px; }
 }
 @media (prefers-reduced-motion: reduce) { .am-reloj-c::after { animation: none; } }
 .am-balanza .est-chip, .am-dato .est-chip { align-self: flex-start; }
+
+/* Menus superiores: desplazamiento interno cuando el desplegable es mas alto que la pantalla */
+.mega-menu-dropdown { overflow-y: auto; overscroll-behavior: contain; }
+
+/* ==========================================================================
+   DESCARGAR DATOS: ventana con las bases en CSV y su diccionario
+   ========================================================================== */
+.dl-modal { position: fixed; inset: 0; z-index: 3000; display: none; align-items: flex-start; justify-content: center; padding: 40px 16px; background: rgba(4, 6, 12, 0.72); overflow-y: auto; }
+.dl-caja { width: 100%; max-width: 760px; background: #10131c; border: 1px solid var(--border-subtle); border-radius: 14px; padding: 22px 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); font-family: var(--font-sans); color: var(--text-primary, #e9ecf6); }
+[data-theme="light"] .dl-caja { background: #fff; color: #16203a; }
+.dl-cab { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.dl-cab h3 { font-family: var(--font-serif); font-size: 24px; margin: 0; color: var(--gold-bright); }
+.dl-cerrar { background: none; border: 1px solid var(--border-subtle); color: inherit; border-radius: 8px; width: 34px; height: 34px; cursor: pointer; font-size: 15px; }
+.dl-intro { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.dl-base { border-top: 1px solid var(--border-subtle); padding: 14px 0 6px; }
+.dl-base-cab { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.dl-base h4 { margin: 0; font-size: 15px; }
+.dl-base p { margin: 6px 0; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; }
+.dl-fuente { font-size: 11.5px !important; color: var(--text-dim) !important; }
+.dl-base summary { cursor: pointer; font-size: 12.5px; color: var(--gold-bright); font-weight: 600; margin: 4px 0; }
+.dl-base code { font-family: var(--font-mono); font-size: 11.5px; }
+@media (max-width: 640px) { .dl-modal { padding: 12px; } .dl-caja { padding: 16px; } }
+
+/* Modulo 5 en la portada: cinco tarjetas */
+@media (min-width: 1200px) { .explorer-cards-grid { grid-template-columns: repeat(5, 1fr); } }
+@media (min-width: 1024px) and (max-width: 1199px) { .explorer-cards-grid { grid-template-columns: repeat(3, 1fr); } }
+.explorer-card-eco { border-color: rgba(95, 212, 154, 0.45); }
+.explorer-card-eco .explorer-card-stat { color: #9fe3bf; border-color: rgba(95, 212, 154, 0.45); }
+[data-theme="light"] .explorer-card-eco .explorer-card-stat { color: #1b6b43; }
+.am-profundizar { margin-top: 36px; padding-top: 12px; border-top: 1px dashed var(--border-subtle); }
+
+/* En telefono la barra superior deja de ser fija: ocupaba cerca de un tercio
+   de la pantalla y tapaba el principio de cada seccion. */
+@media (max-width: 700px) {
+  .site-top-nav { position: relative; }
+}
+
+/* Aterrizaje desde el menu: que el destino no quede bajo la barra fija
+   (unos 145 px en escritorio). En telefono la barra no es fija. */
+.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
+@media (max-width: 700px) {
+  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
+}

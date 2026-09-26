@@ -1922,7 +1922,7 @@
             (f.sha256 ? '<code title="SHA-256">' + f.sha256.slice(0, 16) + '…</code>' : '') + '</li>';
         }).join('') + '<li>' + ceem + '</li></ol>' +
         '<ul class="pd-lista">' + A.pendientes.map(t => '<li>' + chipEstado('pendiente') + ' ' + pdEsc(t) + '</li>').join('') + '</ul>' +
-        '<p class="pd-nota">' + pdEsc(A.nota) + ' Consulta: ' + pdEsc(A.consulta) + '. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'proyeccion2027\')">Ver el detalle de las cuentas ecológicas</button></p>' +
+        '<p class="pd-nota">' + pdEsc(A.nota) + ' Consulta: ' + pdEsc(A.consulta) + '. <button type="button" class="pd-btn" onclick="var e=document.getElementById(\'ceeCascada\'); if(e) e.scrollIntoView({behavior:\'smooth\'});">Ver el detalle de las cuentas ecológicas</button></p>' +
       '</section>';
 
     raiz.innerHTML = reloj + huella + basura + proteccion + megaobras + leyes + quien;
@@ -1963,6 +1963,140 @@
     };
     pintar();
     amb.reloj = setInterval(pintar, quieto ? 5000 : 100);
+  }
+
+  /* ====================================================================
+     DESCARGAR DATOS: cada base de la plataforma, en CSV que abre Excel, con
+     su diccionario (que es cada columna y de donde sale). Solo se ofrecen
+     bases con fuente oficial documentada.
+     ==================================================================== */
+  function dlMunicipios() {
+    const M = window.AUDIT_MUNICIPIOS;
+    if (!M) return [];
+    const filas = [];
+    Object.keys(M.ent).forEach(abbr => {
+      const e = M.ent[abbr];
+      e.lista.forEach(m => {
+        const sin = m.length <= 2;
+        filas.push([e.cve + m[0], abbr, m[1]].concat(sin ? ['', '', '', '', '', '', '', ''] : m.slice(2, 10)).concat([sin ? 'sin reporte 2024' : 'oficial']));
+      });
+    });
+    return filas;
+  }
+
+  const DESCARGAS = [
+    { id: 'municipios', titulo: 'Finanzas de los 2,479 municipios, 2024',
+      fuente: 'INEGI, Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM), cifras definitivas 2024',
+      desc: 'Lo que ingresó cada municipio del país: total, participaciones, aportaciones, FORTAMUN, FISMDF, predial e ingresos propios, y lo que egresó. En pesos.',
+      campos: [['clave_inegi', 'Clave de 5 dígitos: entidad y municipio'], ['entidad', 'Abreviatura de la entidad'], ['municipio', 'Nombre oficial'],
+        ['ingreso_total', 'Ingresos totales del ejercicio'], ['participaciones', 'Ramo 28, de libre disposición'], ['aportaciones', 'Ramo 33, etiquetadas por ley'],
+        ['fortamun', 'Fondo de Aportaciones para el Fortalecimiento de los Municipios'], ['fismdf', 'Fondo de Aportaciones para la Infraestructura Social Municipal'],
+        ['predial', 'Impuesto predial cobrado'], ['ingresos_propios', 'Impuestos, derechos, productos y aprovechamientos propios'], ['egreso_total', 'Egresos totales del ejercicio'],
+        ['estado_dato', '«oficial», o «sin reporte 2024» si el municipio no rindió cuenta al INEGI']],
+      filas: () => dlMunicipios() },
+    { id: 'remuneraciones', titulo: 'Remuneraciones netas 2026 de los altos cargos',
+      fuente: 'PEF 2026, Anexo 23 (DOF 21-11-2025) y Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)',
+      desc: 'Lo que recibe al año, ya descontados impuestos, cada cargo que usa el comparador «Tú contra ellos».',
+      campos: [['cargo', 'Cargo'], ['ente', 'Institución'], ['neto_anual', 'Remuneración total anual neta, en pesos'], ['estado', 'oficial, derivado o parcial'], ['documento', 'Documento de origen'], ['pagina', 'Página o apartado']],
+      filas: () => ((DB.poderes && DB.poderes.remuneraciones2026) || []).map(c => [c.cargo, c.ente, c.netoAnual, c.parcial ? 'parcial' : (c.netoAnualEstado || c.estado), ((DB.poderes.fuentes[c.fuente] || {}).doc || ''), c.pagina]) },
+    { id: 'poderes-gasto', titulo: 'Gasto del Congreso y del Poder Judicial, 2025 y 2026',
+      fuente: 'SHCP: Cuenta Pública 2025 y avance del gasto al 30 de junio de 2026 (datos abiertos)',
+      desc: 'Por unidad: original y ejercido de 2025; aprobado, modificado y pagado de 2026 al 30 de junio.',
+      campos: [['ramo', '01 Legislativo, 03 Judicial'], ['unidad', 'Clave de la unidad responsable'], ['nombre', 'Unidad'], ['original_2025', 'Presupuesto original 2025'], ['ejercido_2025', 'Ejercido 2025 (incluye devengado)'],
+        ['aprobado_2026', 'Aprobado 2026'], ['modificado_2026', 'Modificado al 30 de junio de 2026'], ['pagado_2026', 'Pagado al 30 de junio de 2026']],
+      filas: () => {
+        const E = DB.poderes && DB.poderes.ejercicio;
+        if (!E) return [];
+        const claves = {};
+        E.cp2025.unidades.concat(E.avance2026.unidades).forEach(u => { claves[u.ramo + '|' + u.ur] = u.nombre; });
+        return Object.keys(claves).sort().map(k => {
+          const [ramo, ur] = k.split('|');
+          const a = E.cp2025.unidades.find(u => u.ramo === ramo && u.ur === ur) || {};
+          const b = E.avance2026.unidades.find(u => u.ramo === ramo && u.ur === ur) || {};
+          return [ramo, ur, claves[k], a.original, a.ejercido, b.aprobado, b.modificado, b.pagado];
+        });
+      } },
+    { id: 'ambiente', titulo: 'Presupuesto ambiental (Ramo 16), 2026 y proyecto 2027',
+      fuente: 'PEF 2026, avance del gasto al 30 de junio de 2026 y proyecto de PEF 2027 (SHCP, datos abiertos)',
+      desc: 'Por órgano del sector ambiental: aprobado, modificado y pagado en 2026, y lo propuesto para 2027.',
+      campos: [['unidad', 'Clave de la unidad responsable'], ['nombre', 'Órgano'], ['aprobado_2026', 'Aprobado 2026'], ['modificado_2026', 'Modificado al 30 de junio'], ['pagado_2026', 'Pagado al 30 de junio'], ['proyecto_2027', 'Proyecto 2027 (aún no aprobado)']],
+      filas: () => ((DB.ambiente && DB.ambiente.presupuesto.unidades) || []).map(u => [u.ur, u.nombre, u.aprobado, u.modificado, u.pagado, u.proyecto2027]) },
+    { id: 'sat69b', titulo: 'Lista 69-B del SAT (EFOS)',
+      fuente: 'SAT, Listado completo de contribuyentes del artículo 69-B del Código Fiscal',
+      desc: 'Contribuyentes presuntos, definitivos, desvirtuados o con sentencia favorable por facturar operaciones inexistentes. Estar en la lista no es una condena penal.',
+      campos: [['rfc', 'RFC'], ['nombre', 'Nombre o razón social'], ['situacion', 'Presunto, Definitivo, Desvirtuado o Sentencia favorable'], ['oficio', 'Número del oficio de esa etapa'], ['fecha_publicacion', 'Fecha de publicación'], ['medio', 'DOF o página del SAT']],
+      filas: async () => {
+        await efosCargar();
+        if (!window.SAT_69B) return [];
+        return window.SAT_69B.r.map(r => [r[0], r[1], EFOS_SIT[r[2]].t, r[3], r[4], r[5]]);
+      } },
+    { id: 'referencias', titulo: 'Catálogo de documentos y referencias',
+      fuente: 'Auditavisión, catálogo de referencias legales y documentales',
+      desc: 'Cada ley, decreto, informe y base de datos que sostiene las cifras de la plataforma, con su liga oficial.',
+      campos: [['numero', 'Número de la ficha'], ['id', 'Identificador interno'], ['categoria', 'Categoría'], ['cita', 'Cita en formato APA'], ['url', 'Liga al documento'], ['descripcion', 'Para qué sirve']],
+      filas: () => (DB.referencias_legales || []).map(r => [r.num, r.id, r.categoria_nombre, r.cita_apa, r.url, r.descripcion]) }
+  ];
+
+  function dlCeldaCSV(v) {
+    if (v === undefined || v === null) return '';
+    const s = typeof v === 'number' ? String(Math.round(v * 100) / 100) : String(v);
+    return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+
+  async function descargarCSV(id) {
+    const d = DESCARGAS.find(x => x.id === id);
+    if (!d) return;
+    const filas = await d.filas();
+    const lineas = [d.campos.map(c => c[0]).join(',')].concat(filas.map(f => f.map(dlCeldaCSV).join(',')));
+    lineas.push('');
+    lineas.push(dlCeldaCSV('Fuente: ' + d.fuente + '. Descargado de Auditavisión el ' + new Date().toLocaleDateString('es-MX') + '.'));
+    const blob = new Blob(['﻿' + lineas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'auditavision-' + id + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+
+  function abrirDescargas(foco) {
+    cerrarMegaMenus();
+    let m = document.getElementById('dlModal');
+    if (!m) {
+      m = document.createElement('div');
+      m.id = 'dlModal';
+      m.className = 'dl-modal';
+      m.setAttribute('role', 'dialog');
+      m.setAttribute('aria-modal', 'true');
+      m.setAttribute('aria-labelledby', 'dlModalTit');
+      m.addEventListener('click', e => { if (e.target === m) cerrarDescargas(); });
+      document.body.appendChild(m);
+    }
+    const dicc = foco === 'diccionario';
+    m.innerHTML =
+      '<div class="dl-caja">' +
+        '<div class="dl-cab"><h3 id="dlModalTit">' + (dicc ? 'Diccionario de datos' : 'Descargar datos') + '</h3>' +
+          '<button type="button" class="dl-cerrar" onclick="window.AuditEngine.cerrarDescargas()" aria-label="Cerrar">✕</button></div>' +
+        '<p class="dl-intro">Cada base se descarga en CSV y abre directo en Excel, con acentos. Al final del archivo va su fuente. ' +
+          (dicc ? 'Abajo de cada base, qué significa cada columna.' : 'Pulse «Diccionario» para ver qué significa cada columna.') + '</p>' +
+        DESCARGAS.map(d =>
+          '<article class="dl-base" id="dl-' + d.id + '">' +
+            '<div class="dl-base-cab"><h4>' + pdEsc(d.titulo) + '</h4>' +
+              '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.descargarCSV(\'' + d.id + '\')">⬇️ CSV</button></div>' +
+            '<p>' + pdEsc(d.desc) + '</p>' +
+            '<p class="dl-fuente">Fuente: ' + pdEsc(d.fuente) + '</p>' +
+            '<details' + (dicc ? ' open' : '') + '><summary>Diccionario: ' + d.campos.length + ' columnas</summary><table class="pd-tabla"><tbody>' +
+              d.campos.map(c => '<tr><td><code>' + c[0] + '</code></td><td>' + pdEsc(c[1]) + '</td></tr>').join('') +
+            '</tbody></table></details>' +
+          '</article>').join('') +
+      '</div>';
+    m.style.display = 'flex';
+    const foc = foco && foco !== 'diccionario' ? document.getElementById('dl-' + foco) : null;
+    setTimeout(() => { if (foc) foc.scrollIntoView({ block: 'center' }); const c = m.querySelector('.dl-cerrar'); if (c) c.focus({ preventScroll: true }); }, 30);
+  }
+
+  function cerrarDescargas() {
+    const m = document.getElementById('dlModal');
+    if (m) m.style.display = 'none';
   }
 
   /* ====================================================================
@@ -2502,13 +2636,11 @@
   /* Desde el menu: abre el Inspector, baja al verificador y precarga. */
   function efosAbrir() {
     cerrarMegaMenus();
-    seleccionarModuloExplorer('verificador');
+    seleccionarModuloExplorer('verificador', 'efosVerificador');
     setTimeout(() => {
-      const el = document.getElementById('efosVerificador');
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       const i = document.getElementById('efosBuscador');
       if (i) i.focus({ preventScroll: true });
-    }, 180);
+    }, 1000);
     efosCargar();
   }
 
@@ -4440,6 +4572,10 @@
       t: '5. Personajes Políticos & Radiografía Sexenal (1988–Actualidad)',
       d: 'Seis sexenios y una misma pregunta: ¿cuánto creció el gasto, cuánto creció la deuda y qué quedó sin aclarar? De Carlos Salinas de Gortari a Claudia Sheinbaum, con crecimiento real del gasto, deuda pública, empresas fantasma (EFOS), los grandes desfalcos documentados y los personajes secundarios que rara vez aparecen en la cuenta pública.'
     },
+    'ambiente': {
+      t: '5. El Costo Ambiental',
+      d: 'El deterioro del ambiente en pesos: reloj en vivo del daño, tu huella, la basura municipal, el presupuesto ambiental 2026-2027 y las leyes que aplican.'
+    },
     'verificador': {
       t: '4. Modo Inspector (Auditoría Forense & Alertas ASF)',
       d: 'Expedientes documentados, pliegos de observaciones de la Auditoría Superior de la Federación (ASF) y radiografía de salud financiera de dependencias y entes públicos.'
@@ -4500,7 +4636,12 @@
     }
     /* Las 32 entidades y los municipios viven en Accion Financiera de la
        plataforma. Desde una pagina que no los tiene, se va a buscarlos. */
-    if (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027' || tabKey === 'costo-ambiental') {
+    if (tabKey === 'costo-ambiental') { switchTab('ambiente', skipPush); return; }
+    if (tabKey === 'ambiente' && !document.getElementById('tab-panel-ambiente')) {
+      window.location.href = 'index.html#ambiente';
+      return;
+    }
+    if (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') {
       if (document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]')) {
         switchTab('accion-financiera', skipPush);
         switchSubtab('accion-financiera', tabKey);
@@ -4573,6 +4714,9 @@
       renderJudicialMinisters();
     } else if (tabKey === 'politicos') {
       renderPoliticosMandatarios();
+    } else if (tabKey === 'ambiente') {
+      renderCostoAmbiental();
+      renderCuentasEcologicas();
     } else if (tabKey === 'verificador') {
       renderForensicDossiers('todos');
       renderRadarBanderasNacional();
@@ -4638,8 +4782,7 @@
       else if (subKey === 'bitacora') renderNews();
       else if (subKey === 'poderes') renderPoderes();
       else if (subKey === 'territorio') renderTerritorioErario();
-      else if (subKey === 'proyeccion2027') { renderConstitucionEconomica(); renderCuentasEcologicas(); }
-      else if (subKey === 'costo-ambiental') renderCostoAmbiental();
+      else if (subKey === 'proyeccion2027') renderConstitucionEconomica();
       else if (subKey === 'municipios') renderMunicipioErario();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
     } else if (parentTab === 'legislativo') {
@@ -23477,10 +23620,10 @@
       }
       /* En la portada los modulos viven plegados: un enlace directo los abre. */
       const desgloseHash = document.getElementById('seccionDesgloseModulos');
-      if (desgloseHash && hashSub) {
+      if (desgloseHash) {
         desgloseHash.style.display = 'block';
         desgloseHash.classList.add('desglose-abierto');
-        const destinoHash = document.querySelector('.subtab-panel[data-parent="' + hashTab + '"][data-subpanel="' + hashSub + '"]');
+        const destinoHash = hashSub ? document.querySelector('.subtab-panel[data-parent="' + hashTab + '"][data-subpanel="' + hashSub + '"]') : document.getElementById('tab-panel-' + hashTab);
         if (destinoHash) [300, 900].forEach(ms => setTimeout(() => destinoHash.scrollIntoView({ block: 'start', behavior: 'instant' }), ms));
       }
     } else {
@@ -25720,7 +25863,9 @@
     }
   }
 
-  function seleccionarModuloExplorer(tabKey) {
+  /* ancla: id de un bloque dentro del modulo, para aterrizar ahi y no en
+     el principio de la pestana. */
+  function seleccionarModuloExplorer(tabKey, ancla) {
     var desglose = document.getElementById('seccionDesgloseModulos');
     if (desglose) {
       desglose.style.display = 'block';
@@ -25737,6 +25882,7 @@
       'megaobras': 'cardModMegaobras',
       'calculadora': 'cardModCalculadora',
       'verificador': 'cardModInspector',
+      'ambiente': 'cardModAmbiente',
       'faq': 'cardModFaq'
     };
     var cardEl = document.getElementById(mapCards[tabKey]);
@@ -25744,9 +25890,9 @@
     
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
                          (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
-                         (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027' || tabKey === 'costo-ambiental') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
+                         (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
-    var targetScroll = targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
+    var targetScroll = (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) {
       setTimeout(function() {
         targetScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -25799,20 +25945,54 @@
       }, 70);
     }
   }
+  /* La hoja muestra el menu cuando su contenedor (.nav-menu-item) lleva la
+     clase; antes se le ponia al desplegable y en pantallas tactiles, sin
+     cursor, ningun menu abria. */
   function toggleMegaMenu(menuId) {
     var target = document.getElementById(menuId);
     if (!target) return;
-    var wasOpen = target.classList.contains('open-mega-menu');
+    var item = target.closest('.nav-menu-item') || target;
+    var wasOpen = item.classList.contains('open-mega-menu');
     cerrarMegaMenus();
     if (!wasOpen) {
-      target.classList.add('open-mega-menu');
+      item.classList.add('open-mega-menu');
+      var t = item.querySelector('.mega-menu-trigger');
+      if (t) t.setAttribute('aria-expanded', 'true');
+      posicionarMegaMenu(target);
     }
   }
 
   function cerrarMegaMenus() {
-    document.querySelectorAll('.mega-menu-dropdown').forEach(function(m) {
+    document.querySelectorAll('.nav-menu-item.open-mega-menu, .mega-menu-dropdown.open-mega-menu').forEach(function(m) {
       m.classList.remove('open-mega-menu');
     });
+    document.querySelectorAll('.mega-menu-trigger[aria-expanded="true"]').forEach(function(t) {
+      t.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* Que el desplegable quepa en la pantalla: los menus de la derecha se
+     salian por el borde y su segunda columna no se podia pulsar. En
+     telefono ocupa el ancho disponible, en una sola columna, y se desplaza
+     por dentro si es mas alto que la pantalla. */
+  function posicionarMegaMenu(dd) {
+    if (!dd) return;
+    var vw = document.documentElement.clientWidth, m = 12;
+    dd.style.left = '0px';
+    dd.style.width = '';
+    dd.style.gridTemplateColumns = '';
+    dd.style.maxHeight = '';
+    if (vw < 700) {
+      dd.style.width = (vw - 2 * m) + 'px';
+      dd.style.gridTemplateColumns = '1fr';
+    }
+    var r = dd.getBoundingClientRect();
+    var mover = 0;
+    if (r.right > vw - m) mover = (vw - m) - r.right;
+    if (r.left + mover < m) mover = m - r.left;
+    dd.style.left = mover + 'px';
+    var alto = window.innerHeight - dd.getBoundingClientRect().top - m;
+    if (alto > 160) dd.style.maxHeight = alto + 'px';
   }
 
   var currentShowcaseIdx = 0;
@@ -26848,6 +27028,9 @@
     renderComparadorSalarial: renderComparadorSalarial,
     renderPoderes: renderPoderes,
     irComparadorChoque: irComparadorChoque,
+    descargarCSV: descargarCSV,
+    abrirDescargas: abrirDescargas,
+    cerrarDescargas: cerrarDescargas,
     descargarEstadoCuenta: descargarEstadoCuenta,
     capIr: capIr,
     renderCostoAmbiental: renderCostoAmbiental,
@@ -26868,6 +27051,20 @@
   };
 
   document.addEventListener('DOMContentLoaded', init);
+  /* Menus superiores: acomodo al pasar el cursor, cierre al pulsar fuera y
+     reacomodo si cambia el ancho de la ventana. */
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.nav-menu-item').forEach(function (it) {
+      it.addEventListener('mouseenter', function () { posicionarMegaMenu(it.querySelector('.mega-menu-dropdown')); });
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest || !e.target.closest('.nav-menu-item')) cerrarMegaMenus();
+    });
+    window.addEventListener('resize', function () {
+      var abierto = document.querySelector('.nav-menu-item.open-mega-menu .mega-menu-dropdown');
+      if (abierto) posicionarMegaMenu(abierto);
+    });
+  });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeAyudanosFiscalizar();
@@ -26883,6 +27080,7 @@
       cerrarMegaMenus();
       cerrarRadarDesglose();
       cerrarModalReferencia();
+      cerrarDescargas();
     }
   });
 })();

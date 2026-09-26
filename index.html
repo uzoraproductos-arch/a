@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926g">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926i">
 </head>
 <body>
 
@@ -120,22 +120,22 @@
         <div class="mega-menu-dropdown" id="menuDropdownBusqueda" role="menu">
           <div class="mega-menu-col">
             <span class="mega-col-title">🔍 Asignaciones y Contratos</span>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Búsqueda Avanzada de Contratos</span>
-              <span class="mega-link-desc">Filtra contrataciones federales por año, ramo y monto en el inspector forense.</span>
+            <a href="#inspExplorador" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'inspExplorador'); window.AuditEngine.cerrarMegaMenus(); setTimeout(function(){ var i=document.getElementById('inspBuscador'); if(i) i.focus({preventScroll:true}); }, 1000);" class="mega-link-item">
+              <span class="mega-link-name">Auditor de Entes Públicos</span>
+              <span class="mega-link-desc">Busque una dependencia, un estado o un municipio y abra su expediente: autonomía, deuda y observaciones de la ASF.</span>
             </a>
             <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">Contratos federales en ComprasMX ↗</span>
               <span class="mega-link-desc">La plataforma oficial que sustituyó a CompraNet en 2025. Tome de ahí el RFC del proveedor y verifíquelo aquí.</span>
             </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">Auditoría de Adjudicaciones Directas</span>
-              <span class="mega-link-desc">Contrataciones sin licitación pública bajo excepciones de ley.</span>
+            <a href="#radarBanderasNacional" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'radarBanderasNacional'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+              <span class="mega-link-name">Radar de Banderas Rojas por Entidad</span>
+              <span class="mega-link-desc">Montos por aclarar ante la ASF, adjudicación directa y dependencia del dinero federal, estado por estado.</span>
             </a>
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">⚠️ Detección y Riesgos ASF</span>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+            <a href="#forensicDossiersGrid" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'forensicHeaderBar'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">Dossiers de Irregularidades por Aclarar</span>
               <span class="mega-link-desc">$51,024 mdp observados por la ASF pendientes de solventar.</span>
             </a>
@@ -159,7 +159,7 @@
               <span class="mega-link-name">Explorador del PEF 2026</span>
               <span class="mega-link-desc">Desglose de los $10.19 billones aprobados en el Circuito del Dinero.</span>
             </a>
-            <a href="#eb-egresos" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('presupuesto'); window.AuditEngine.cerrarMegaMenus(); setTimeout(function(){ var e=document.getElementById('eb-egresos'); if(e){ var c=e.querySelector('.erario-pleg-cab'); if(c && c.getAttribute('aria-expanded')==='false') window.AuditEngine.erarioPlegToggle('egresos'); e.scrollIntoView({behavior:'smooth'}); } }, 250);">
+            <a href="#eb-egresos" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.seleccionarModuloExplorer('presupuesto', 'eb-egresos'); setTimeout(function(){ var c=document.querySelector('#eb-egresos .erario-pleg-cab'); if(c && c.getAttribute('aria-expanded')==='false') window.AuditEngine.erarioPlegToggle('egresos'); }, 150);">
               <span class="mega-link-name">Ramos y Dependencias del PEF 2026</span>
               <span class="mega-link-desc">Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.</span>
             </a>
@@ -168,11 +168,11 @@
               <span class="mega-link-desc">Costos, sobrecostos y subsidios de Tren Maya, Dos Bocas y AIFA.</span>
             </a>
             <a href="#accion-financiera/proyeccion2027" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('proyeccion2027'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">Paquete Económico 2027 y Cuentas Ecológicas</span>
-              <span class="mega-link-desc">La proyección de ingresos y gasto para 2027, la Constitución económica y lo que el PIB no descuenta: el agotamiento y la degradación ambiental.</span>
+              <span class="mega-link-name">Paquete Económico 2027</span>
+              <span class="mega-link-desc">La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos, y la Constitución económica que lo sustenta.</span>
             </a>
-            <a href="#accion-financiera/costo-ambiental" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('costo-ambiental'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🌎 El Costo Ambiental</span>
+            <a href="#ambiente" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('ambiente'); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">🌎 Módulo 5 · El Costo Ambiental</span>
               <span class="mega-link-desc">Reloj en vivo del daño ambiental, tu basura y tu parte del daño, el servicio municipal de basura y el presupuesto ambiental 2026-2027.</span>
             </a>
           </div>
@@ -206,13 +206,13 @@
         <div class="mega-menu-dropdown" id="menuDropdownDescargar" role="menu">
           <div class="mega-menu-col">
             <span class="mega-col-title">💾 Datos Abiertos</span>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Descarga Personalizada en CSV/Excel');">
-              <span class="mega-link-name">Descarga Personalizada en CSV/Excel <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Exportador dinámico de tablas de finanzas estatales, PEF y municipios en diseño.</span>
+            <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas();">
+              <span class="mega-link-name">Descarga en CSV (abre en Excel)</span>
+              <span class="mega-link-desc">Seis bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, lista 69-B y documentos.</span>
             </a>
-            <a href="assets/js/municipios-efipem.js" download="municipios-efipem-inegi.js" class="mega-link-item">
+            <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.descargarCSV('municipios');">
               <span class="mega-link-name">Base de Datos Municipal EFIPEM (INEGI)</span>
-              <span class="mega-link-desc">Dataset con los 2,479 municipios y finanzas oficiales.</span>
+              <span class="mega-link-desc">Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.</span>
             </a>
           </div>
           <div class="mega-menu-col">
@@ -221,8 +221,8 @@
               <span class="mega-link-name">Informes de la ASF y Documentos Oficiales</span>
               <span class="mega-link-desc">Los 75 documentos que sostienen las cifras de la plataforma, con su liga oficial.</span>
             </a>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Diccionario de Datos y API Hacendaria');">
-              <span class="mega-link-name">Diccionario de Datos <span class="badge-proximamente">Próximamente</span></span>
+            <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas('diccionario');">
+              <span class="mega-link-name">Diccionario de Datos</span>
               <span class="mega-link-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
             </a>
           </div>
@@ -798,6 +798,20 @@
           <p class="explorer-card-desc">Dossiers de auditoría superior de la federación (ASF), adjudicaciones directas, empresas fantasma (EFOS) y focos rojos de riesgo.</p>
           <div class="explorer-card-stat">$51,024 mdp por aclarar en ASF</div>
           <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador')">
+            <span>Comienza a explorar</span> ➔
+          </button>
+        </div>
+
+        <!-- Módulo 5 -->
+        <div class="explorer-card explorer-card-eco" id="cardModAmbiente">
+          <div class="explorer-card-header">
+            <span class="explorer-card-modnum">Módulo 5</span>
+            <span class="explorer-card-icon">🌎</span>
+          </div>
+          <h3 class="explorer-card-title">El Costo Ambiental</h3>
+          <p class="explorer-card-desc">Reloj en vivo del daño ambiental, tu basura y tu parte del daño, el servicio municipal de basura, el presupuesto ambiental 2026-2027 y las leyes que aplican.</p>
+          <div class="explorer-card-stat">$1.38 billones de daño ambiental en 2024 (INEGI)</div>
+          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('ambiente')">
             <span>Comienza a explorar</span> ➔
           </button>
         </div>
@@ -1882,8 +1896,28 @@
 
         <div id="peFuentes"></div>
 
+      </div><!-- FIN SUBPANEL PROYECCION 2027 -->
+
+    </div><!-- FIN PESTAÑA 2 -->
+
+    <!-- ========================================================================
+         MODULO 5: EL COSTO AMBIENTAL
+         Reloj del dano, huella personal, basura municipal, presupuesto
+         ambiental 2026-2027, leyes aplicables y las Cuentas Economicas y
+         Ecologicas del INEGI. Lo pintan renderCostoAmbiental() y
+         renderCuentasEcologicas().
+         ======================================================================== -->
+    <div id="tab-panel-ambiente" class="tab-panel">
+      <div class="section-hero">
+        <span class="hero-tag">M&oacute;dulo 5 &middot; Medio ambiente &middot; INEGI, SEMARNAT y Hacienda &middot; 2024&ndash;2027</span>
+        <h2>El Costo Ambiental</h2>
+        <p>El deterioro del ambiente tambi&eacute;n es gasto: lo pagamos en agua, aire, suelo y basura, aunque no aparezca en el recibo. Aqu&iacute; se mide en pesos, con cifras oficiales, y se compara con lo que el Estado destina a protegerlo.</p>
+      </div>
+      <div id="ambienteRaiz" class="pd-raiz am-raiz"></div>
+
+      <div class="am-profundizar">
         <!-- ==================================================================
-             TERCERA PARTE: EL COSTO AMBIENTAL (CUENTAS ECOLOGICAS, INEGI)
+             PARA PROFUNDIZAR: EL PIB NO ALCANZA (CUENTAS ECOLOGICAS, INEGI)
              ================================================================== -->
 
         <div class="section-hero">
@@ -1898,24 +1932,8 @@
         <div id="ceeCiegos"></div>
         <div id="ceeJuridico"></div>
         <div id="ceeProcedencia"></div>
-      </div><!-- FIN SUBPANEL PROYECCION 2027 -->
-
-      <!-- ====================================================================
-           EL COSTO AMBIENTAL: reloj del dano, huella personal, basura
-           municipal, presupuesto ambiental 2026-2027 y leyes aplicables.
-           Lo pinta renderCostoAmbiental() desde DB.ambiente y
-           DB.cuentas_ecologicas.
-           ==================================================================== -->
-      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="costo-ambiental">
-        <div class="section-hero">
-          <span class="hero-tag">Medio ambiente &middot; INEGI, SEMARNAT y Hacienda &middot; 2024&ndash;2027</span>
-          <h2>El Costo Ambiental</h2>
-          <p>El deterioro del ambiente tambi&eacute;n es gasto: lo pagamos en agua, aire, suelo y basura, aunque no aparezca en el recibo. Aqu&iacute; se mide en pesos, con cifras oficiales, y se compara con lo que el Estado destina a protegerlo.</p>
-        </div>
-        <div id="ambienteRaiz" class="pd-raiz am-raiz"></div>
-      </div><!-- FIN SUBPANEL COSTO AMBIENTAL -->
-
-    </div><!-- FIN PESTAÑA 2 -->
+      </div>
+    </div><!-- FIN MODULO 5 -->
 
 
     <!-- ========================================================================
@@ -1932,7 +1950,7 @@
       </div>
 
       <!-- Barra de Filtros Temáticos de Expedientes -->
-      <div class="forensic-header-bar">
+      <div class="forensic-header-bar" id="forensicHeaderBar">
         <div>
           <span style="font-family:var(--font-mono); font-size:11px; color:var(--gold-bright); text-transform:uppercase; letter-spacing:1px; font-weight:700;">
             📂 EXPEDIENTES FORENSES AUDITADOS (<span id="forensicCountLabel">6</span> CASOS CLAVE)
@@ -1949,7 +1967,7 @@
       </div>
 
       <!-- Radar Nacional de Banderas Rojas Subnacionales (Estilo Operación Serenata de Amor / Rosie) -->
-      <div class="radar-banderas-national">
+      <div class="radar-banderas-national" id="radarBanderasNacional">
         <div class="radar-banderas-header">
           <div style="display:flex; align-items:center; gap:10px;">
             <span class="red-flag-pulse-dot"></span>
@@ -2443,7 +2461,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926g</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926i</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2587,16 +2605,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926g"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926i"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926g"></script>
+  <script src="assets/js/audit-database.js?v=20260926i"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926g"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926i"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926g"></script>
+  <script src="assets/js/audit-engine.js?v=20260926i"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

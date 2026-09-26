@@ -1919,6 +1919,33 @@ vuelve a correrse si cambian los libros.
 - `integrar_poderes.py` ya no borra colecciones que vengan después de
   «poderes».
 
+### Hecho (menús al cien y Módulo 5: El Costo Ambiental)
+
+- **Menús superiores:** al tocarlos (pantallas táctiles) no abrían, porque la
+  clase `open-mega-menu` se ponía en el desplegable y la hoja la espera en
+  `.nav-menu-item`. Corregido; la apertura por cursor queda sólo para
+  dispositivos con cursor (`@media (hover: hover)`), y un clic fuera cierra.
+  `posicionarMegaMenu()` mantiene cada desplegable dentro de la pantalla (los
+  de la derecha se salían y su segunda columna no se podía pulsar) y en
+  teléfono lo pone a una columna con desplazamiento interno.
+- **Cada vínculo aterriza en su bloque:** `seleccionarModuloExplorer(tab,
+  ancla)`. Búsqueda Forense: «Auditor de Entes Públicos» (antes «Búsqueda
+  avanzada de contratos», que prometía filtros inexistentes), «Radar de
+  Banderas Rojas por Entidad» (antes «Auditoría de adjudicaciones directas»),
+  Dossiers y 69-B, cada uno a su sección. `scroll-margin-top` evita que el
+  destino quede bajo la barra fija.
+- **Descargar Datos ya no tiene «Próximamente»:** ventana con seis bases en
+  CSV (municipios EFIPEM, remuneraciones 2026, gasto de los Poderes,
+  presupuesto ambiental, lista 69-B y catálogo de documentos) y su
+  diccionario de columnas (`abrirDescargas`, `descargarCSV`).
+- **En teléfono la barra superior deja de ser fija.**
+- **Módulo 5: El Costo Ambiental** (`tab-panel-ambiente`, tarjeta en la
+  portada): los siete capítulos y, debajo, «El PIB no alcanza» (Cuentas
+  Económicas y Ecológicas). El renglón de Acción Financiera queda como
+  «Paquete Económico 2027» (Constitución económica y paquete).
+- Verificado: los 29 vínculos del menú en escritorio y en teléfono con
+  toque; ninguno falla.
+
 ### Pendiente
 
 - **Megaobras y su huella ambiental:** falta el documento oficial de cada
@@ -1942,9 +1969,8 @@ vuelve a correrse si cambian los libros.
   2.4 y el Inspector. Espera el visto bueno del autor sobre el piloto.
 - **Fondos de ciudad:** el autor eligió a propósito una ciudad extranjera
   generada con IA para evitar problemas de derechos. Se conservan.
-- **En teléfono, la barra superior fija ocupa cerca de un tercio de la
-  pantalla** (marca, cinco menús, botones y buscador). Hay que compactarla.
-- **Descarga CSV y diccionario de datos** siguen en «Próximamente».
+- **En teléfono la barra superior ya no es fija**, pero sigue siendo alta
+  (marca, cinco menús, botones y buscador): conviene compactarla.
 - **«Búsqueda avanzada de contratos»** promete filtrar contrataciones por
   año, ramo y monto, y el Inspector no hace eso: reescribir o conectar con
   datos de ComprasMX.
