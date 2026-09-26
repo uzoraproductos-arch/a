@@ -25,7 +25,9 @@ import sys
 from datetime import date
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RUTA = os.path.join(RAIZ, 'index.html')
+RUTAS = [os.path.join(RAIZ, 'index.html')]
+if os.path.exists(os.path.join(RAIZ, 'enciclopedia.html')):
+    RUTAS.append(os.path.join(RAIZ, 'enciclopedia.html'))
 
 ARCHIVOS = [
     ('href', 'assets/css/auditavision.css'),
@@ -53,8 +55,8 @@ def siguiente(actual):
 
 
 def main():
-    d = open(RUTA, 'rb').read().decode('utf-8')
-    actual = sello_actual(d)
+    d_first = open(RUTAS[0], 'rb').read().decode('utf-8')
+    actual = sello_actual(d_first)
 
     if len(sys.argv) < 2:
         print('sello actual : %s' % (actual or 'ninguno'))
@@ -67,35 +69,38 @@ def main():
         print('uso: sello.py AAAAMMDD[letra]   (por ejemplo 20260923a)')
         return 2
 
-    cr_antes = len(re.findall(r'\r(?!\n)', d))
+    for ruta in RUTAS:
+        nombre = os.path.basename(ruta)
+        d = open(ruta, 'rb').read().decode('utf-8')
+        cr_antes = len(re.findall(r'\r(?!\n)', d))
 
-    for atributo, archivo in ARCHIVOS:
-        pat = re.compile(r'%s="%s(\?v=[0-9a-z]+)?"' % (atributo, re.escape(archivo)))
-        n = len(pat.findall(d))
-        if n != 1:
-            print('ERROR: %s aparece %d veces en index.html, se esperaba 1' % (archivo, n))
+        for atributo, archivo in ARCHIVOS:
+            pat = re.compile(r'%s="%s(\?v=[0-9a-z]+)?"' % (atributo, re.escape(archivo)))
+            n = len(pat.findall(d))
+            if n != 1:
+                print('ERROR: %s aparece %d veces en %s, se esperaba 1' % (archivo, n, nombre))
+                return 1
+            d = pat.sub('%s="%s?v=%s"' % (atributo, archivo, nuevo), d)
+
+        renglon = ('<span class="footer-sello">Versión publicada: '
+                   '<b id="selloVersion">%s</b></span>' % nuevo)
+        if VISIBLE.search(d):
+            d = VISIBLE.sub(renglon, d)
+        else:
+            print('ERROR: no se encontro el renglon del pie (span.footer-sello) en %s' % nombre)
             return 1
-        d = pat.sub('%s="%s?v=%s"' % (atributo, archivo, nuevo), d)
 
-    renglon = ('<span class="footer-sello">Versión publicada: '
-               '<b id="selloVersion">%s</b></span>' % nuevo)
-    if VISIBLE.search(d):
-        d = VISIBLE.sub(renglon, d)
-    else:
-        print('ERROR: no se encontro el renglon del pie (span.footer-sello)')
-        return 1
+        cr_despues = len(re.findall(r'\r(?!\n)', d))
+        if cr_despues != cr_antes:
+            print('ERROR: los CR sueltos pasaron de %d a %d en %s' % (cr_antes, cr_despues, nombre))
+            return 1
+        if d.count('?v=' + nuevo) != len(ARCHIVOS) or d.count('id="selloVersion"') != 1:
+            print('ERROR: el conteo final no cuadra en %s' % nombre)
+            return 1
 
-    cr_despues = len(re.findall(r'\r(?!\n)', d))
-    if cr_despues != cr_antes:
-        print('ERROR: los CR sueltos pasaron de %d a %d' % (cr_antes, cr_despues))
-        return 1
-    if d.count('?v=' + nuevo) != 5 or d.count('id="selloVersion"') != 1:
-        print('ERROR: el conteo final no cuadra')
-        return 1
-
-    open(RUTA, 'wb').write(d.encode('utf-8'))
-    print('sello %s -> %s' % (actual or 'ninguno', nuevo))
-    print('5 dependencias y el pie visible | CRLF intactos')
+        open(ruta, 'wb').write(d.encode('utf-8'))
+        print('sello %s -> %s en %s (%d dependencias y pie visible | CRLF intactos)' % 
+              (actual or 'ninguno', nuevo, nombre, len(ARCHIVOS)))
     return 0
 
 

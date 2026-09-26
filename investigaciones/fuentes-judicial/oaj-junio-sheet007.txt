@@ -1,0 +1,154 @@
+Bitmap
+ |  |  |  | SECRETARÍA EJECUTIVA DE ADMINISTRACIÓN | 
+ |  |  |  | DIRECCIÓN GENERAL DE PROGRAMACIÓN, PRESUPUESTO Y TESORERÍA | 
+ |  |  |  |  | 
+ |  |  |  | Presupuesto de Egresos 2026 | 
+Bitmap
+ |  |  |  | 
+ | ÓRGANO DE   ADMINISTRACIÓN JUDICIAL |  | 
+ |  |  | Cifras en pesos | 
+ | UEG | DENOMINACIÓN | PAGADO | 
+ | (01/04/26 al 30/06/26) | 
+ | 1102 | Secretaría   Ejecutiva del Pleno | 39,473.05 | 
+ | 1104 | Dirección   General de Asuntos Jurídicos | 29,538.55 | 
+ | 1110 | Dirección   General de Innovación, Planeación y Desarrollo Institucional | 16,131.66 | 
+ | 1117 | Dirección   General de Comunicación Social y Vocería | 5,293,301.47 | 
+ | 1121 | Unidad de   Peritos Judiciales | 2,107,150.99 | 
+ | 1123 | Dirección   General de Vinculación y Relaciones Interinstitucionales | 395,475.37 | 
+ | 1124 | Coordinación   General de Planeación Institucional | 36,375.45 | 
+ | 1125 | Unidad de   Prevención y Combate a la Violencia Laboral y al Acoso Sexual | 254,069.40 | 
+ | 1133 | Unidad de   Administración del Tribunal de Disciplina Judicial | 52,530.45 | 
+ | 1137 | Secretaría   General de la Presidencia del Órgano de Administración Judicial | 36,934.48 | 
+ | 1138 | Centro Público   de Mecanismos Alternativos de Solución de Controversias del PJF | 91,999.03 | 
+ | 1142 | Ponencias y   Comisiones OAJ | 604,039.02 | 
+ | 1201 | Primer   Circuito Judicial (CDMX) | 611,259.00 | 
+ | 1202 | Segundo   Circuito Judicial (Toluca, Edo.Méx) | 7,452,576.74 | 
+ | 1203 | Tercer   Circuito Judicial (Zapopan, Jal.) | 15,981,461.80 | 
+ | 1204 | Cuarto   Circuito Judicial (Monterrey, N.L.) | 33,024,990.12 | 
+ | 1205 | Quinto   Circuito Judicial (Hermosillo, Son.) | 7,315,564.33 | 
+ | 1206 | Sexto Circuito   Judicial (San Andrés Cholula, Pue.) | 12,409,610.10 | 
+ | 1207 | Séptimo   Circuito Judicial (Boca del Río, Ver.) | 7,129,781.50 | 
+ | 1208 | Octavo   Circuito Judicial (Torreón, Coah. y Mpios Durango) | 9,969,104.54 | 
+ | 1209 | Noveno   Circuito Judicial (San Luis Potosí, S.L.P.) | 3,314,426.95 | 
+ | 1210 | Décimo   Circuito Judicial (Villahermosa, Tab. y Mpios Veracruz) | 15,453,144.92 | 
+ | 1211 | Décimo Primer   Circuito Judicial (Morelia, Mich.) | 10,355,254.09 | 
+ | 1212 | Décimo Segundo   Circuito Judicial (Mazatlán, Sin.) | 4,481,779.00 | 
+ | 1213 | Décimo Tercer   Circuito Judicial (Oaxaca, Oax.) | 6,825,043.72 | 
+ | 1214 | Décimo Cuarto   Circuito Judicial (Mérida, Yuc.) | 4,822,788.21 | 
+ | 1215 | Décimo Quinto   Circuito Judicial (Mexicali, B.C. y Mpio Sonora) | 5,146,623.94 | 
+ | 1216 | Décimo Sexto   Circuito Judicial (Guanajuato, Gto.) | 10,004,825.45 | 
+ | 1217 | Décimo Séptimo   Circuito Judicial (Chihuahua, Chih.) | 4,045,537.35 | 
+ | 1218 | Décimo Octavo   Circuito Judicial (Cuernavaca, Morelos) | 5,936,146.39 | 
+ | 1219 | Décimo Noveno   Circuito Judicial (Ciudad Victoria, Tamps.) | 11,234,628.05 | 
+ | 1220 | Vigésimo   Circuito Judicial (Tuxtla Gutiérrez, Chis.) | 6,628,393.69 | 
+ | 1221 | Vigésimo   Primer Circuito Judicial (Chilpancingo, Gro.) | 4,925,593.64 | 
+ | 1222 | Vigésimo   Segundo Circuito Judicial (Querétaro, Qro.) | 7,798,582.14 | 
+ | 1223 | Vigésimo   Tercer Circuito Judicial (Zacatecas, Zac.) | 1,998,582.99 | 
+ | 1224 | Vigésimo   Cuarto Circuito Judicial (Tepic, Nay.) | 5,657,375.49 | 
+ | 1225 | Vigésimo   Quinto Circuito Judicial (Durango, Dgo.) | 2,092,749.34 | 
+ | 1226 | Vigésimo Sexto   Circuito Judicial (La Paz, B.C. Sur) | 2,153,188.73 | 
+ | 1227 | Vigésimo   Séptimo Circuito Judicial (Cancún, Q. Roo) | 5,166,173.80 | 
+ | 1228 | Vigésimo   Octavo Circuito Judicial (Tlaxcala, Tlax.) | 5,647,310.80 | 
+ | 1229 | Vigésimo   Noveno Circuito Judicial (Pachuca, Hgo.) | 5,334,231.79 | 
+ | 1230 | Coordinación   de Administración Regional (Consolidado) | 20,061,829.16 | 
+ | 1231 | Trigésimo   Circuito Judicial (Aguascalientes, Ags.) | 3,292,365.24 | 
+ | 1232 | Vigésimo   Primer Circuito Judicial (Acapulco, Gro.) | 2,588,557.13 | 
+ | 1233 | Décimo Séptimo   Circuito Judicial (Ciudad Juarez, Chih.) | 3,251,125.20 | 
+ | 1234 | Tercer   Circuito Judicial (Puente Grande, Jal.) | 2,273,496.90 | 
+ | 1235 | Décimo Quinto   Circuito Judicial (Tijuana, B.C.) | 15,395,802.34 | 
+ | 1236 | Décimo Segundo   Circuito Judicial (Culiacán, Sin.) | 3,871,928.55 | 
+ | 1237 | Séptimo   Circuito Judicial (Xalapa, Ver.) | 3,783,292.75 | 
+ | 1238 | Trigésimo   Primer Circuito Judicial (Campeche, Camp.) | 8,257,685.48 | 
+ | 1239 | Trigésimo   Segundo Circuito Judicial (Colima, Col.) | 2,620,311.02 | 
+ | 1240 | Octavo   Circuito Judicial (Saltillo, Coah.) | 6,095,842.99 | 
+ | 1241 | Décimo   Circuito Judicial (Coatzacoalcos, Ver.) | 2,883,752.27 | 
+ | 1242 | Centro de   Justicia Penal Federal en Puebla, Pue. | 1,673,445.10 | 
+ | 1243 | Centro de   Justicia Penal Federal en San Luis Potosí, S.L.P. | 190,314.65 | 
+ | 1244 | Centro de   Justicia Penal Federal en Mérida, Yuc. | 1,056,529.80 | 
+ | 1245 | Centro de   Justicia Penal Federal en Guanajuato, Gto. | 1,214,962.51 | 
+ | 1246 | Centro de   Justicia Penal Federal en Querétaro, Qro. | 898,333.26 | 
+ | 1247 | Centro de   Justicia Penal Federal en Zacatecas, Zac. | 949,676.09 | 
+ | 1248 | Centro de   Justicia Penal Federal en La Paz, B.C.S. | 1,211,701.89 | 
+ | 1249 | Centro de   Justicia Penal Federal en Durango, Dgo. | 828,872.26 | 
+ | 1250 | Centro de   Justicia Penal Federal en Cintalapa de Figueroa, Chis. | 774,610.13 | 
+ | 1251 | Centro de   Justicia Penal Federal en Chihuahua, Chih. | 876,450.94 | 
+ | 1252 | Centro de   Justicia Penal Federal en Torreón, Coah. | 1,628,124.76 | 
+ | 1253 | Centro de   Justicia Penal Federal en Tepic, Nay. | 747,267.41 | 
+ | 1254 | Centro de   Justicia Penal Federal en San Bartolo Coyotepec, Oax. | 196,849.05 | 
+ | 1255 | Centro de   Justicia Penal Federal en Culiacán, Sin. | 1,007,910.86 | 
+ | 1256 | Centro de   Justicia Penal Federal en Apizaco, Tlax. | 1,035,067.29 | 
+ | 1257 | Centro de   Justicia Penal Federal en Cadereyta, N.L. | 305,468.37 | 
+ | 1258 | Centro de   Justicia Penal Federal en Aguascalientes, Ags. | 2,675,962.83 | 
+ | 1259 | Centro de   Justicia Penal Federal en Cancún, Q. Roo. | 246,770.63 | 
+ | 1260 | Centro de   Justicia Penal Federal en Colima, Col. | 408,919.45 | 
+ | 1261 | Centro de   Justicia Penal Federal en Pachuca, Hgo. | 1,069,500.00 | 
+ | 1262 | Centro de   Justicia Penal Federal en Villahermosa, Tab. | 1,262,104.20 | 
+ | 1263 | Centro de   Justicia Penal Federal en Cuernavaca, Mor. | 474,729.99 | 
+ | 1264 | Centro de   Justicia Penal Federal en Campeche, Camp. | 847,525.23 | 
+ | 1265 | Centro de   Justicia Penal Federal en Morelia, Mich. | 298,151.59 | 
+ | 1266 | Centro de   Justicia Penal Federal en Hermosillo, Son. | 544,163.53 | 
+ | 1267 | Centro de   Justicia Penal Federal en Coatzacoalcos, Ver. | 165,011.02 | 
+ | 1268 | Centro de   Justicia Penal Federal en Xalapa, Ver. | 740,770.67 | 
+ | 1269 | Centro de   Justicia Penal Federal en Tijuana, B.C. | 1,774,996.19 | 
+ | 1270 | Centro de   Justicia Penal Federal en Mexicali, B.C. | 1,784,807.41 | 
+ | 1271 | Centro de   Justicia Penal Federal en Acapulco, Gro. | 304,580.30 | 
+ | 1272 | Centro de   Justicia Penal Federal en Complejo Penitenciario Puente Grande, Jal. | 1,468,294.70 | 
+ | 1273 | Centro de   Justicia Penal Federal en Ciudad Victoría, Tamps. | 1,094,651.80 | 
+ | 1274 | Centro de   Justicia Penal Federal en Reynosa, Tamps. | 896,217.14 | 
+ | 1276 | Centro de   Justicia Penal Federal el Altiplano, Almoloya de Juárez, Edo. Méx. | 418,797.90 | 
+ | 1277 | Centro de   Justicia Penal Federal en Ciudad Juárez, Chih. | 2,764,626.81 | 
+ | 1278 | Centro de   Justicia Penal Federal en Tapachula, Chis. | 766,942.35 | 
+ | 1279 | Centro de   Justicia Penal Federal en Cd. Obregón, Son. | 301,553.83 | 
+ | 1280 | Centro de   Justicia Penal Federal en Los Mochis, Sin. | 942,207.65 | 
+ | 1283 | Centro de   Justicia Penal Federal en Ensenada, B.C. | 2,230,504.67 | 
+ | 1288 | Archivo   Judicial Lerma | 787,160.94 | 
+ | 1289 | Centro de   Manejo Documental en Apizaco, Tlax. | 1,734,911.52 | 
+ | 1290 | Centro de   Justicia Penal Federal en Nezahualcóyotl, Edo. Méx. | 232,800.81 | 
+ | 1291 | Centro de   Justicia Penal Federal en el Reclusorio Oriente, CDMX. | 244,120.24 | 
+ | 1292 | Centro de   Justicia Penal Federal en el Reclusorio Sur, CDMX. | 166,076.43 | 
+ | 1293 | Centro de   Justicia Penal Federal en el Reclusorio Norte, CDMX. | 355,124.57 | 
+ | 1301 | Instituto   Federal de Defensoría Pública | 2,159,994.81 | 
+ | 1401 | Instituto   Federal de Especialistas de Concursos Mercantiles | 53,631.97 | 
+ | 2104 | Dirección   General de Estadística Judicial | 14,800.28 | 
+ | 2107 | Dirección   General de Gestión Judicial | 44,892.93 | 
+ | 2110 | Secretaría   Ejecutiva de Creación y Seguimiento de Órganos Jurisdiccionales | 2,199.36 | 
+ | 2111 | Escuela   Nacional de Formación Judicial | 3,462,319.45 | 
+ | 3205 | Secretaría   Ejecutiva de Disciplina y Substanciación de Responsabilidades del Personal   Administrativo | 23,287.40 | 
+ | 3206 | Contraloría de   Administración Judicial | 2,241.80 | 
+ | 3303 | Dirección   General de Archivo y Documentación | 562,389.76 | 
+ | 3305 | Unidad de   Transparencia del Órgano de Administración Judicial | 7,741.02 | 
+ | 5101 | Secretaría   Ejecutiva de Administración | 52,119.71 | 
+ | 5201 | Dirección   General de Recursos Humanos | 21,496.18 | 
+ | 5202 | Pago de   Servicios Personales a Plaza | 10,138,799,495.89 | 
+ | 5203 | Pago de   Servicios Personales por Acuerdo | 2,726,558,182.25 | 
+ | 5206 | Dirección de   Seguros (Prestaciones y Ayudas) | 325,805,157.04 | 
+ | 5207 | Dirección   General de Servicios al Personal | 24,715.07 | 
+ | 5209 | Pago de   Servicios Personales por Sustituciones | 61,615,600.12 | 
+ | 5211 | Dirección   General de Derechos Humanos, Igualdad de Género y Asuntos Internacionales | 95,979.46 | 
+ | 5301 | Dirección   General de Recursos Materiales | 17,110.81 | 
+ | 5302 | Dirección de   Adquisiciones | 21,091,826.39 | 
+ | 5303 | Administración   de Servicios | 214,484,762.47 | 
+ | 5304 | Dirección de   Patrimonio Inmobiliario | 41,007,653.75 | 
+ | 5305 | Dirección de   Control Vehicular y Seguros Patrimoniales | 25,359,529.25 | 
+ | 5306 | Administración   Edificios Sede No. 2417 y Canoa No. 79 CDMX | 3,182,364.86 | 
+ | 5308 | Administración   Edificio Periférico Sur 1950 CDMX | 1,413,994.40 | 
+ | 5309 | Administración   Edificios Prisma y Florida CDMX | 4,046,201.10 | 
+ | 5310 | Administración   Edificios Revolución y Almacén General CDMX | 3,280,246.42 | 
+ | 5311 | Administración   Edificio San Lázaro CDMX | 9,222,556.62 | 
+ | 5312 | Administración   Edificios Naucalpan Edo. Méx. y Reclusorio Preventivo Norte CDMX | 3,585,763.46 | 
+ | 5313 | Administración   Edificios Periférico Sur 2321, Reclusorio Oriente y Sur CDMX | 3,441,007.78 | 
+ | 5314 | Administración   Edificio Nezahualcóyotl, Edo Méx. | 1,501,126.26 | 
+ | 5315 | Administración   de los Edificios Sede del P.J.F. de Ajusco No. 170, 200 y Tolima 29 CDMX | 4,351,236.65 | 
+ | 5316 | Dirección   General de Servicios Generales | 70,861.85 | 
+ | 5321 | Administración   del Edificio Sede del P.J.F. en Avenida Revolución No. 366 CDMX | 1,275,259.80 | 
+ | 5322 | Administración   del Edificio de la Escuela Nacional de Formación Judicial | 638,526.77 | 
+ | 5401 | Dirección   General de Inmuebles y Mantenimiento | 440,264.02 | 
+ | 5503 | Dirección de   Programación y Presupuestación (Apoyos Especiales) | 15,066,881.36 | 
+ | 5506 | Dirección   General de Programación, Presupuesto y Tesorería | 14,334.12 | 
+ | 5601 | Coordinación   de Administración Regional | 3,348.90 | 
+ | 5708 | Dirección   General de Tecnologías de la Información | 15,200,199.67 | 
+ | 5803 | Coordinación   de Seguridad del Poder Judicial de la Federación | 1,513,814.52 | 
+ | 5805 | Dirección   General de Protección Civil y Salud en el Trabajo | 37,938.56 | 
+ | Total general |  | 13,977,400,359.62 | 
+ |  |  |  | 
+ |  |  |  |  | 

@@ -1,0 +1,1749 @@
+PAGINA 1
+Grupo Funcional Gobierno
+1
+Cámara de Diputados
+Gestión Financiera
+Auditoría De Cumplimiento: 2024-0-01100-19-0031-2025
+Modalidad: Presencial
+Núm. de Auditoría: 31
+Criterios de Selección
+Esta auditoría se seleccionó con base en los criterios establecidos por la Auditoría Superior 
+de la Federación para la integración del Programa Anual de Auditorías para la Fiscalización 
+Superior de la Cuenta Pública 2024 en consideración de lo dispuesto en el Plan Estratégico 
+de la ASF.
+Objetivo
+Fiscalizar la gestión financiera para verificar que el presupuesto asignado a la Cámara de 
+Diputados del H. Congreso de la Unión, se ejerció y registró conforme a los montos 
+aprobados, y de acuerdo con las disposiciones legales y normativas.
+Alcance
+EGRESOS
+Miles de Pesos
+Universo Seleccionado 6,833,879.4
+Muestra Auditada 6,537,228.2
+Representatividad de la Muestra 95.7%
+El universo de egresos por 6,833,879.4 miles de pesos corresponde al total de recursos 
+federales reportados como pagados en el Analítico de Egresos con Metodología de Cuenta 
+Pública 2024, con cargo a 42 partidas de los capítulos de gasto 1000 “Servicios Personales”, 
+2000 “Materiales y Suministros”, 3000 “Servicios Generales” y 5000 “Bienes Muebles, 
+Inmuebles e Intangibles”; de dicho universo se revisaron 6,537,228.2 miles de pesos, es 
+decir, el 95.7%, como se muestra a continuación:
+PAGINA 2
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024 
+2 
+INTEGRACIÓN DE LA MUESTRA REVISADA
+(Miles de pesos)
+Capítulo Descripción Número de 
+Partidas a Revisar Universo Muestra
+1000 Servicios Personales 17 5,968,035.5 5,968,035.5
+2000 Materiales y Suministros 9 76,126.5 37,903.9
+3000 Servicios Generales 8 612,759.1 395,253.4
+5000 Bienes Muebles, Inmuebles e Intangibles 8 176,958.3 136,035.4
+Total 42 6,833,879.4 6,537,228.2
+FUENTE: Analítico de Egresos con Metodología de Cuenta Pública 2024 y contratos correspondientes al ejercicio 
+2024.
+La información de la Cuenta Pública 2024 se registró en el Tomo IV “Poder Legislativo”, 
+correspondiente a la Cámara de Diputados, y se encuentra disponible en la página 
+electrónica: https://www.cuentapublica.hacienda.gob.mx/es/CP/2024.
+Antecedentes
+La Cámara de Diputados es un Órgano de representación popular que integra el Poder 
+Legislativo Federal. Está conformada por 500 Diputados representantes de la Nación, que 
+son electos por los ciudadanos mexicanos cada tres años de conformidad con la 
+Constitución Política de los Estados Unidos Mexicanos.
+El presupuesto de egresos de este Órgano integrante del Poder Legislativo es aprobado por 
+la propia Cámara de Diputados, con fundamento en la fracción IV, del artículo 74, de la 
+Constitución Política de los Estados Unidos Mexicanos, en el cual se incluyen los capítulos 
+necesarios para cubrir sus gastos y ejercer su función primordial en apego a los principios de 
+austeridad.
+En este sentido, el presupuesto de egresos de la Cámara de Diputados para el ejercicio 2024 
+fue orientado para dar cumplimiento a los objetivos prioritarios de la función legislativa, 
+como formular, analizar, discutir y, en su caso, aprobar las iniciativas de ley o decretos; 
+examinar, discutir y aprobar la iniciativa de la Ley de Ingresos, del Presupuesto de Egresos 
+de la Federación y de la Cuenta Pública Anual; y cumplir con las atribuciones y disposiciones 
+que señala la Constitución Política de los Estados Unidos Mexicanos y las leyes.
+Resultados
+1. Evaluación del Control Interno
+Con el fin de verificar que, durante 2024, la Cámara de Diputados contó con controles 
+internos para el logro de sus objetivos y que éstos se implementaron conforme a las 
+políticas y los procedimientos autorizados, se aplicó el cuestionario de control interno y se 
+PAGINA 3
+Grupo Funcional Gobierno
+3
+analizó la información y documentación proporcionada por la entidad fiscalizada, con lo que 
+se determinó lo siguiente:
+1.- Ambiente de control
+La Cámara de Diputados, durante el ejercicio 2024, contó con leyes, reglamento, manuales 
+generales de organización, operativos y de procedimientos, así como con los códigos de 
+ética y de conducta de los cuales se verificó su difusión entre el personal de la entidad 
+fiscalizada; se verificó que se impartieron cursos en materia de control interno, los cuales se 
+encontraron debidamente actualizados, aprobados y difundidos; además, se comprobó que 
+la entidad fiscalizada contó con un Catálogo Institucional de Puestos de Confianza de la 
+Cámara de Diputados con el cual se regularon los perfiles del personal contratado durante el 
+ejercicio 2024, en cumplimiento de la normativa.
+2.- Administración de riesgos
+La Cámara de Diputados contó con una Matriz de Riesgos mediante la cual se evaluaron 
+dichos riesgos, sus factores y los efectos; asimismo, contó con el Programa de Trabajo de 
+Administración de Riesgos 2024, del que se comprobó el seguimiento mediante reportes de 
+avances trimestrales en los que se indicó el porcentaje de cada una de las acciones de 
+control comprometidas y, en el último reporte del ejercicio 2024, se indicó que llegó a un 
+98.0% de avance, en cumplimiento de la normativa.
+De igual forma se verificó que el cumplimiento de las metas y objetivos de la Cámara de 
+Diputados se encuentran referidos en el 3er. Reporte Trimestral del Sistema de Evaluación 
+del Desempeño 2024, en cumplimiento de la normativa.
+3.- Actividades de control 
+Se constató que la Cámara de Diputados contó con normas, lineamientos y acuerdos, en los 
+cuales se establecieron los procedimientos para el cumplimiento de objetivos; de igual 
+forma, se comprobó que cuenta con una herramienta denominada Sistema Electrónico de 
+Denuncias de la Cámara de Diputados y con un buzón físico para quejas o denuncias, a fin 
+de recibir y dar seguimiento a las quejas y denuncias, en cumplimiento de la normativa.
+4.- Información y comunicación
+Se constató que la Cámara de Diputados, durante el ejercicio 2024, contó con el portal de 
+intranet, su página web y el correo institucional que utilizó para publicar las actualizaciones 
+de información de los trabajos de la entidad fiscalizada, en cumplimiento de la normativa.
+5.- Supervisión
+Se realizaron dos auditorías externas, una para la evaluación de los estados financieros y 
+otra para la revisión de los estados e información presupuestaria, en cuyos resultados no se 
+reportaron observaciones, en cumplimiento de la normativa.
+PAGINA 4
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+4
+En conclusión, se constató que la Cámara de Diputados, durante el ejercicio 2024, contó con 
+un ambiente de control sólido, con una cultura organizacional que promueve la integridad, 
+la transparencia y la responsabilidad; con la Administración de riesgos, la institución ha 
+implementado procesos que identifican y evalúan los riesgos relevantes, así como las 
+medidas para mitigarlos. La evaluación de riesgos identificados se realiza de manera 
+periódica y se toman medidas para abordar las actividades de control implementadas que 
+aseguran que las transacciones y operaciones se efectuaron de acuerdo con las políticas y 
+procedimientos establecidos; cuenta con un sistema de información y comunicación 
+efectivo que permite la toma de decisiones informadas y la rendición de cuentas; la 
+supervisión y monitoreo del control interno es adecuado, y se han implementado 
+mecanismos para evaluar y mejorar continuamente el sistema de control interno.
+2. 1.- Presupuesto asignado y adecuaciones presupuestarias
+La Secretaría de Hacienda y Crédito Público, mediante el Decreto de Presupuesto de Egresos 
+de la Federación del ejercicio 2024, autorizó a la Cámara de Diputados un presupuesto por 
+8,982,854.4 miles de pesos y, durante el ejercicio, mediante 12 adecuaciones 
+presupuestales, tuvo ampliaciones por 388,932.4 miles de pesos y una reducción por 50.3 
+miles de pesos, de lo que resultó un presupuesto modificado por 9,371,736.5 miles de 
+pesos.
+En relación con las adecuaciones presupuestales, se constató que se soportaron en los 
+oficios de solicitud y autorización correspondientes, en cumplimiento de la normativa.
+2.- Ingresos
+Se verificó que la Cámara de Diputados tuvo ingresos fiscales por 8,982,854.4 miles de 
+pesos, los cuales le fueron asignados mediante 12 Cuentas por Liquidar Certificadas, en 
+cumplimiento de la normativa.
+Asimismo, se comprobó que el importe de las ampliaciones presupuestarias por 388,932.4 
+miles de pesos correspondió a los ingresos que generó la Cámara de Diputados en el 
+ejercicio fiscal 2024, mismos que se integraron por 383,681.0 miles de pesos de ingresos 
+financieros y 5,251.4 miles de pesos de otros Ingresos y beneficios varios, los cuales se 
+ampliaron a su presupuesto federal mediante 12 adecuaciones presupuestarias que se 
+soportaron en los oficios de solicitud y autorización correspondientes, en cumplimiento de 
+la normativa.
+3.- Egresos
+En el Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación por Objeto 
+del Gasto del 1 de enero al 31 de diciembre de 2024, se reportó un presupuesto pagado por 
+9,371,736.5 miles de pesos, de los cuales se constató que se registraron en su contabilidad 
+los gastos efectivamente devengados en el ejercicio 2024 y se correspondieron con lo 
+reportado en la Cuenta Pública, en cumplimiento de la normativa.
+PAGINA 5
+Grupo Funcional Gobierno
+5
+En conclusión, se constató que la Cámara de Diputados, para el ejercicio fiscal 2024, tuvo un 
+presupuesto asignado por 8,982,854.4 miles de pesos y, durante el ejercicio, mediante 
+adecuaciones presupuestales debidamente autorizadas, tuvo ampliaciones líquidas netas 
+por 388,882.1 miles de pesos provenientes, principalmente, de rendimientos financieros, lo 
+que resultó en un presupuesto modificado y pagado por 9,371,736.5 miles de pesos; se 
+registraron en su contabilidad los gastos efectivamente devengados en el ejercicio 2024 y se 
+correspondieron con lo reportado en la Cuenta Pública.
+3. La Cámara de Diputados, en el ejercicio 2024, pagó un total de 5,968,035.5 miles de 
+pesos con cargo a 17 partidas de gasto del capítulo 1000 “Servicios Personales”, que se 
+revisaron al 100.0% como se muestra a continuación:
+INTEGRACIÓN DE LA MUESTRA POR CAPÍTULO 1000 “SERVICIOS PERSONALES” 
+(Miles de pesos)
+Cons. Partida Descripción Muestra 
+1 1110 Dietas 623,908.0
+2 1130 Sueldos base al personal permanente 563,826.5
+3 1210 Honorarios asimilables a salarios 913,432.5
+4 1230 Retribuciones por servicios de carácter social 1,200.0
+5 1310 Primas por años de servicios efectivos prestados 7,954.3
+6 1320 Primas de vacaciones, dominical y gratificación de fin de año 391,828.2
+7 1330 Horas extraordinarias 963.4
+8 1340 Compensaciones 1,005,303.5
+9 1410 Aportaciones de seguridad social 144,181.8
+10 1420 Aportaciones a fondos de vivienda 55,008.8
+11 1430 Aportaciones al sistema para el retiro 32,287.6
+12 1440 Aportaciones para seguros 95,602.5
+13 1520 Indemnizaciones 547,396.4
+14 1530 Prestaciones y haberes de retiro 93,773.9
+15 1540 Prestaciones contractuales 957,800.0
+16 1590 Otras prestaciones sociales y económicas 350,115.6
+17 1710 Estímulos 183,452.5
+Total Capítulo 1000 Servicios Personales 5,968,035.5
+FUENTE: Estado del Ejercicio del Presupuesto de la Cámara de Diputados, expedientes de contratación, 
+Formatos Únicos de Servicios Financieros, transferencias electrónicas, estados de cuenta 
+bancarios correspondientes al ejercicio fiscal 2024.
+De la comparación de las cifras reportadas en el Estado Analítico del Ejercicio del 
+Presupuesto por el periodo del 1 de enero al 31 de diciembre de 2024 del capítulo 1000 
+“Servicios Personales”, contra las reportadas en la base de datos de nóminas, aportaciones 
+de seguridad social, y otras prestaciones sociales y económicas proporcionadas por la 
+Cámara de Diputados, no se observaron diferencias, en cumplimiento de la normativa.
+PAGINA 6
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+6
+Con el análisis de la información y documentación proporcionada por la Cámara de 
+Diputados para acreditar el pago de remuneraciones a su personal, se constató que los 
+pagos correspondieron a los periodos en los que el personal ocupó sus respectivos cargos, 
+en cumplimiento de la normativa.
+Adicionalmente, se constató lo siguiente:
+1. De la partida de gasto 1110 "Dietas", en la que se registraron recursos pagados por 
+623,908.0 miles de pesos, se verificó que los pagos se realizaron en cumplimiento de 
+la normativa.
+2. Las partidas 1130 "Sueldos base al personal permanente" y 1340 “Compensaciones”, 
+que en conjunto registraron un presupuesto pagado por 1,569,130.0 miles de pesos, 
+se comprobó que los pagos se realizaron de acuerdo con los niveles e importes 
+establecidos, en cumplimiento de la normativa.
+3. En la partida 1210 "Honorarios asimilables a salarios" se reportaron pagos por 
+913,432.5 miles de pesos, los cuales correspondieron a 5,625 plazas de personal 
+contratado bajo el régimen de honorarios asimilables a salarios, en cuya revisión se 
+constató que los pagos no rebasaron el importe máximo autorizado, en 
+cumplimiento de la normativa.
+4. Por lo que hace a las partidas de gasto 1230 “Retribuciones por servicios de carácter 
+social”, 1310 "Primas por años de servicios efectivos prestados" y 1320 “Gratificación 
+de Fin de Año”, en la que se registraron 400,982.5 miles de pesos, se comprobó que 
+los pagos se realizaron en cumplimiento de la normativa.
+5. De la partida de gasto 1330 "Horas extraordinarias”, en la que se registraron pagos 
+por 963.4 miles de pesos, se verificó que éstos se realizaron en cumplimiento de la 
+normativa.
+6. En lo que respecta a las partidas 1520 “Indemnizaciones” y 1530 “Prestaciones y 
+haberes de retiro”, que registraron pagos en conjunto por 641,170.3 miles de pesos, 
+se comprobó que los pagos se realizaron en cumplimiento de la normativa.
+7. En cuanto a las partidas 1540 “Prestaciones contractuales” y 1590 “Otras 
+prestaciones sociales y económicas”, en las que se pagaron en conjunto 1,307,915.6 
+miles de pesos, se constató que los pagos se realizaron en cumplimiento de la 
+normativa.
+8. En cuanto a la partida 1710 “Estímulos”, en la que se ejercieron 183,452.5 miles de 
+pesos, se comprobó que los pagos efectuados se realizaron para cubrir las 
+prestaciones “Estímulo de antigüedad” y “Estímulo por puntualidad y asistencia”, en 
+cumplimiento de la normativa.
+PAGINA 7
+Grupo Funcional Gobierno
+7 
+En conclusión, los pagos por servicios personales realizados por la Cámara de Diputados se 
+efectuaron de acuerdo con los importes autorizados para el ejercicio fiscal 2024.
+4. El pago de aportaciones por concepto de previsión social, seguros y de ahorro para el 
+retiro del ejercicio fiscal 2024 ascendió a 327,080.7 miles de pesos, como se muestra a 
+continuación:
+PARTIDAS Y SUBPARTIDAS DE GASTO QUE CORRESPONDEN AL PAGO DE
+APORTACIONES POR CONCEPTO DE PREVISIÓN SOCIAL, SEGUROS Y DE AHORRO PARA EL RETIRO
+(Miles de pesos)
+Partida / 
+Subpartida de 
+Gasto
+Nombre de la Partida de Gasto Importe
+Pagado
+1410-1 Aportaciones al ISSSTE de Diputadas (os) 19,179.1
+1410-2 Aportaciones al ISSSTE de empleados 90,067.3
+1410-3 Aportaciones al seguro de cesantía en edad avanzada y vejez de Diputadas (os) 6,105.8
+1410-4 Aportaciones al seguro de cesantía en edad avanzada y vejez de empleados 28,829.6
+1420-1 Aportaciones al FOVISSSTE de Diputadas (os) 9,615.5
+1420-2 Aportaciones al FOVISSSTE de empleados 45,393.3
+1430-1 Aportaciones al Sistema para el Retiro de Diputadas (os) 3,846.2
+1430-2 Aportaciones al Sistema para el Retiro de empleados 18,158.3
+1430-3 Aportaciones para el ahorro solidario de Diputadas (os) 499.2
+1430-4 Aportaciones para el ahorro solidario de empleados 9,783.9
+1440-1 Aportaciones para el seguro de vida de Diputadas (os) 29,991.8
+1440-2 Aportaciones para el seguro de vida de empleados 65,576.4
+1440-6 Aportaciones para el seguro de accidentes escolares 34.3
+Total 327,080.7
+FUENTE: Estado del Ejercicio del Presupuesto de la Cámara de Diputados, correspondiente al ejercicio 2024.
+ISSSTE: Instituto de Seguridad y Servicio Social de los Trabajadores del Estado.
+FOVISSSTE: Fondo de la Vivienda del Instituto de Seguridad y Servicio Social de los Trabajadores del 
+Estado.
+Al respecto, se constató que las erogaciones por estos conceptos se encuentran 
+debidamente sustentadas en los avisos de entero de previsión social presentados ante el 
+Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado (ISSSTE) y el Fondo 
+de la Vivienda del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado 
+(FOVISSSTE) y en los Comprobantes Fiscales Digitales por Internet expedidos por las 
+empresas aseguradoras, los cuales, de acuerdo con la consulta realizada en la página 
+electrónica del Servicio de Administración Tributaria, se encontraron vigentes y se 
+comprobó que los pagos se registraron en las cuentas contables números 51100 y 82711 y 
+en las partidas y subpartidas presupuestales señaladas en la tabla anterior, en cumplimiento 
+de la normativa.
+PAGINA 8
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+8
+En conclusión, los pagos por concepto de previsión social, seguros y de ahorro para el retiro 
+del ejercicio fiscal 2024 realizados por la Cámara de Diputados, se sustentaron en los avisos 
+de entero de previsión social presentados ante el ISSSTE y el FOVISSSTE.
+5. Se seleccionaron para revisión 27 instrumentos jurídicos, de los cuales, 5 se adjudicaron 
+por licitación pública, 2 por invitación a cuando menos cinco personas, 2 por selección entre 
+tres cotizaciones y 18 por adjudicación directa. Éstos se integran por 13 contratos, 6 
+órdenes de servicio y 8 pedidos, como se muestra a continuación:
+MUESTRA DE CONTRATOS REVISADOS CON CARGO A LOS CAPÍTULOS 1000 “SERVICIOS PERSONALES”, 2000 
+“MATERIALES Y SUMINISTROS”, 3000 “SERVICIOS GENERALES” Y 5000 “BIENES MUEBLES, INMUEBLES E 
+INTANGIBLES” 
+(Miles de pesos)
+Procedimiento Cons.
+Número de Procedimiento, 
+Contrato, Orden de Servicio o 
+Pedido
+Concepto Partida Importe
+Adjudicación 
+directa
+1 DGAJ-079/2023
+Vales de Alimentación, Vales de Despensa y Fin 
+de Año, Vales, Otras Prestaciones para Empleados 
+de la Cámara
+1540-1 36,386.4
+1590-1 85,908.2
+2210-3 668.3
+2 LXVI-DGAJ-068/2024
+Adquisición de Vales de Despensa para el 
+Personal Administrativo y Legislativo de Grupos 
+Parlamentarios
+1540-1 30,000.0
+3 LXVI-DGAJ-083/2024 Adquisición de Vales de Despensa, Alimentación y 
+Fin de Año del Ejercicio Fiscal 2025 1540-1 33,000.0
+4 Orden de Servicio 117543 Contratación de un parque de diversiones y 
+alimentos 1540-2 472.2
+5 Orden de Servicio 118667 Contratación de un parque de diversiones (día del 
+niño) 1540-2 700.9
+6 Orden de Servicio 118668 Contratación de un parque de diversiones (día del 
+niño) 1540-2 150.0
+7 Pedido 120195 Aparatos electrónicos 1540-2 319.3
+8 Pedido 123375 Aparatos electrónicos, electrodomésticos y línea 
+blanca (fin de año) 1540-2 706.5
+Selección entre 
+tres cotizaciones
+9 Pedido 119345 Aparatos electrónicos, electrodomésticos y línea 
+blanca 1540-2 665.0
+10 Pedido 119396 Leche acuerdo de voluntades 1540-2 604.6
+Licitación 
+Pública 11 DGAJ-004/2024 Adquisición de a póliza de seguro de vida o 
+incapacidad total o permanente 1440-2 22,653.5
+Adjudicación 
+directa
+12 HCD/LXV/ADEXC/53/2024
+Pedido 119571
+Adquisición de vestuario, uniformes, prendas de 
+seguridad y protección personal de la Cámara de 
+Diputados
+2710 15,057.7
+2720 4,022.3
+13 S/N
+Contrato LXVI-DGAJ-074/2024
+Adquisición de Mobiliario y Equipo de Oficina 2910 73.3
+2990 82.6
+5110 8,683.1
+5120 2,028.2
+14 S/N
+Contrato LXVI-DGAJ-075/2024 Adquisición de Mobiliario y Equipo de Oficina 2910 5,766.7
+5110 366.5
+15 HCD/LXV/ADEXC/092/2024
+Pedido 121005
+Adquisición, instalación y puesta en operación del 
+sistema de videovigilancia
+2460 393.2
+2940 148.5
+3270 239.4
+3570 71.9
+5150 39.7
+5190 364.4
+5660 21.1
+16 HCD/LXV/ADEXC/091/2024
+Contrato DGAJ-035/2024
+Solución integral de licenciamiento de monitoreo 
+de seguridad informática 3270 19,993.7
+PAGINA 9
+Grupo Funcional Gobierno
+9
+Procedimiento Cons.
+Número de Procedimiento, 
+Contrato, Orden de Servicio o 
+Pedido
+Concepto Partida Importe
+17 Contrato LXVI-DGAJ-070/2024 Servicio administrado de equipos de cómputo. 3330-3 56,355.8
+18 HCD/LXV/ADEXC/009/2024
+Orden de Servicio 117396
+Mantenimiento preventivo y correctivo a 
+elevadores de la Cámara de Diputados 3570 3,310.0
+19 S/N
+Contrato DGAJ-047/2021
+Servicios de Tarjetas de Peaje 3920 19,466.6
+20 S/N
+Contrato LXVI-DGAJ-078/2024
+Servicio de Actualización Tecnológica Fire Walls y 
+Licenciamiento Avanzado de Seguridad Antivirus y 
+Gestión de Vulnerabilidades de la Cámara de 
+Diputados
+3270 6,813.0
+3330-3 1,992.6
+5150 9,237.9
+21 S/N
+Contrato LXVI-DGAJ-093/2024
+Adquisición de Equipamiento de Voz, Datos, 
+Servidores y Almacenamiento de Datos
+5150 82,739.3
+5650 6,749.8
+Invitación a 
+cuando menos 
+cinco 
+participantes
+22 HCD/LXVI/CICP/04/2025
+Contrato DGAJ-095/2024
+Póliza para el Aseguramiento de los Equipos 
+Automotrices, Propiedad de la Cámara de 
+Diputados
+3450 815.3
+23 HCD/LXVI/CICP/04/2025
+Contrato DGAJ-092/2024
+Aseguramiento Integral de Bienes Patrimoniales 
+Muebles e Inmuebles Propiedad de la Cámara de 
+Diputados
+3450 33,599.2
+Licitación 
+pública 24 HCD/LXV/LPN/14/2024
+Pedido 118666
+Adquisición, instalación y puesta en marcha de los 
+sistemas de detección de humo, fuego y voceo, 
+alerta sísmica y sistema fijo contra incendio del 
+edificio de talleres gráficos
+2460 345.3
+2470 7,027.5
+2910 21.5
+2980 2,021.2
+2990 26.0
+3570 2,821.5
+5190 552.6
+5660 1,313.8
+5690 13,905.3
+25 HCD/LXV/LPN/16/2024
+Orden de Servicio 118583
+Enlace alterno de internet 3170 1,953.1
+3270 931.9
+26 HCD/LXV/LPN/22/2024
+Pedido 119986 Adquisición e instalación de Chiller
+3570 2,508.4
+5640 10,033.7
+27 HCD/LXV/LPN/04/2024
+Orden de Servicio 116911
+Mantenimiento preventivo y correctivo 
+para el sistema hidroneumático y de 
+bombeo de la red hidráulica de 
+alimentación del palacio legislativo
+3570 7,120.3
+Total 541,248.8
+ FUENTE: Expedientes de contratación, base de contratos, Formatos Únicos de Servicios Financieros y Transferencias Electrónicas
+Al respecto, se comprobó que los procedimientos de contratación, los instrumentos legales 
+y su cumplimiento se llevaron a cabo de acuerdo con la normativa; asimismo, se comprobó 
+que los bienes y servicios adquiridos fueron necesarios para la operación de la Cámara de 
+Diputados y que éstos se entregaron a entera satisfacción, en cumplimiento de la 
+normativa.
+Es necesario mencionar que el resultado del análisis de cada uno de los expedientes de 
+contratación señalados se presenta en los resultados 6 al 24 del presente informe.
+PAGINA 10
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+10
+En conclusión, se constató que los procedimientos de contratación realizados por la Cámara 
+de Diputados en el ejercicio 2024, para contratar los bienes y servicios para su operación, 
+fueron realizados conforme a la norma.
+6. Contrato número DGAJ-079/2023 
+Revisión al cumplimiento del instrumento contractual
+El 29 de diciembre de 2023, la Cámara de Diputados suscribió con el proveedor Toka 
+Internacional, S.A.P.I. de C.V., el contrato número DGAJ-079/2023, por 256,261.0 miles de 
+pesos, para el suministro de vales de alimentación, de despensa, de fin de año, y de otras 
+prestaciones para empleados de la Cámara de Diputados, con vigencia del 1 de enero al 31 
+de diciembre de 2024, en cumplimiento de la normativa.
+Se constató que el proveedor entregó la garantía de cumplimiento en los tiempos 
+establecidos; asimismo, mediante los formatos de recepción de los servicios, se comprobó 
+que se realizó la dispersión de los vales, o bien su entrega física en el caso de vales en papel, 
+al personal correspondiente, en cumplimiento de la normativa.
+Revisión del pago del instrumento contractual 
+De acuerdo con 14 Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados realizó pagos por un total de 122,962.9 miles de pesos con cargo a su 
+presupuesto del ejercicio 2024. El proveedor emitió 167 Comprobantes Fiscales Digitales 
+por Internet, los cuales, conforme a la consulta realizada a la página electrónica del Servicio 
+de Administración Tributaria (SAT), se encontraron con estatus de vigentes.
+Dichos pagos se efectuaron mediante 44 transferencias bancarias, mismas que se 
+verificaron en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+51100, 51200 y 82711 y con cargo en las partidas presupuestales de gasto números 1540-1 
+“Prestaciones”, 1590-1 “Asignaciones adicionales al sueldo” y 2210-3 “Vales de áreas 
+administrativas, en cumplimiento de la normativa.
+Conclusión
+Se constató que el contrato número DGAJ-079/2023, suscrito entre la Cámara de Diputados 
+y el proveedor Toka Internacional, S.A.P.I. de C.V., para la adquisición de vales de 
+alimentación, de despensa, de fin de año y de otras prestaciones para empleados de la 
+Cámara, estuvo vigente durante el ejercicio fiscal 2024, por el cual se pagaron 122,962.9 
+miles de pesos; se proporcionó documentación que acreditó la prestación del servicio; se 
+verificó que la documentación comprobatoria se encontraba con estatus de vigente en el 
+portal del SAT y que se realizaron los registros presupuestales y contables del gasto.
+PAGINA 11
+Grupo Funcional Gobierno
+11
+7. Revisión del contrato número LXVI-DGAJ-068/2024
+Revisión al procedimiento de contratación
+Se constató que mediante el Acuerdo del Comité de Administración de la Cámara de 
+Diputados se autorizó la adquisición de vales de despensa para el personal administrativo y 
+legislativo de Grupos Parlamentarios por 30,000.0 miles de pesos, mediante un 
+procedimiento de adjudicación directa1
+, con la empresa Servicios Broxel, S.A.P.I. de C.V.
+Al respecto, se verificó que se contó con la requisición, la autorización presupuestal, la 
+cotización emitida por el proveedor adjudicado, la notificación de la adjudicación al 
+proveedor, así como con la evidencia de que el proveedor del servicio contó con los 
+recursos técnicos, financieros, legales, administrativos y económicos, en cumplimiento de la 
+normativa.
+Revisión al cumplimiento del instrumento contractual
+El 11 de diciembre de 2024 la Cámara de Diputados suscribió con el proveedor Servicios 
+Broxel, S.A.P.I. de C.V., el contrato número LXVI-DGAJ-068/2024, por 30,000.0 miles de 
+pesos, con el objeto de adquirir vales de despensa para personal administrativo y legislativo 
+de Grupos Parlamentarios, con vigencia del 11 al 31 de diciembre de 2024, en cumplimiento 
+de la normativa.
+El proveedor realizó la dispersión de los vales de despensa mediante 6,000 tarjetas, las 
+cuales fueron entregadas dentro de los cinco días posteriores a la firma del contrato, razón 
+por la cual se le exentó de la entrega de la garantía. Dicha entrega se realizó mediante el 
+formato de recepción del servicio, en cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 30,000.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Servicios Broxel, S.A.P.I. de C.V. emitió un Comprobante Fiscal 
+Digital por Internet, el cual conforme a la consulta realizada en la página electrónica del 
+Servicio de Administración Tributaria (SAT) se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal de gasto número 1540-1 “Prestaciones”, en cumplimiento de la 
+normativa.
+1 Artículos 43, 44, fracción VII de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 12
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+12
+Conclusión
+Se constató que el contrato número LXVI-DGAJ-068/2024, suscrito entre la Cámara de 
+Diputados y el proveedor Servicios Broxel, S.A.P.I. de C.V., para la adquisición de vales de 
+despensa para personal administrativo y legislativo de Grupos Parlamentarios, estuvo 
+vigente durante el ejercicio fiscal 2024, por el cual se pagaron 30,000.0 miles de pesos. De lo 
+anterior se proporcionó la documentación que acreditó la prestación del servicio; además, 
+se verificó que la documentación comprobatoria se encontraba con estatus de vigente en el 
+portal del SAT y que se realizaron los registros presupuestales y contables del gasto.
+8. Contrato número LXVI-DGAJ-083/2024
+Revisión al procedimiento de contratación
+Por Acuerdo del Comité de Administración de la Cámara de Diputados se autorizó la 
+contratación del servicio de vales de despensa mediante el procedimiento de adjudicación 
+directa2
+. 
+Al respecto, se constató que la Cámara de Diputados contó con el requerimiento del servicio 
+del área usuaria y con la suficiencia presupuestal, por lo que solicitó cotización a tres 
+posibles proveedores y, mediante la investigación de precios, seleccionó a la empresa 
+Servicios Broxel, S.A.P.I. de C.V., toda vez que su propuesta cumplió con los requerimientos 
+solicitados y con los recursos técnicos, financieros, legales, administrativos y económicos, en 
+cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 27 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor Servicios 
+Broxel, S.A.P.I. de C.V., el contrato número LXVI-DGAJ-083/2024, por un mínimo de 
+102,342.1 miles de pesos y un máximo de 255,855.2 miles de pesos, ambas cantidades 
+exentas del Impuesto al Valor Agregado, el cual tuvo como objeto la adquisición de vales de 
+despensa, alimentación y fin de año, en cumplimiento de la normativa.
+Al respecto, se constató que el proveedor entregó la garantía de cumplimiento, la cual fue 
+recibida y autorizada por la entidad fiscalizada. Asimismo, se comprobó que la entrega de 
+los vales se realizó dentro de los primeros diez días naturales de cada mes, previa petición 
+de la Dirección General de Recursos Humanos, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con seis Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 33,000.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+2 Artículos 43, 44, fracción II de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 13
+Grupo Funcional Gobierno
+13
+por lo que el proveedor Servicios Broxel, S.A.P.I. de C.V. emitió seis Comprobantes Fiscales 
+Digitales por Internet, los cuales, conforme a la consulta realizada en la página electrónica 
+del Servicio de Administración Tributaria (SAT), se encontraron con estatus de vigentes.
+Dichos pagos se efectuaron mediante seis transferencias bancarias, mismas que se 
+verificaron en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+5.1.1.0 y 82711 y con cargo en la partida presupuestal número 1540-1 “Prestaciones”, en 
+cumplimiento de la normativa.
+Conclusión
+Se constató que el contrato número LXVI-DGAJ-083/2024, suscrito entre la Cámara de 
+Diputados y el proveedor Servicios Broxel, S.A.P.I. de C.V., para la adquisición de vales de 
+despensa de alimentación y fin de año, estuvo vigente durante el ejercicio fiscal 2024, por el 
+cual se pagaron 33,000.0 miles de pesos. De lo anterior se proporcionó la documentación 
+que acreditó la prestación del servicio, además de que se verificó que la documentación 
+comprobatoria se encontraba con estatus de vigente en el portal del SAT y que se realizaron 
+los registros presupuestales y contables del gasto.
+9. Contratos en cumplimiento a acuerdos y condiciones de trabajo con el sindicato
+Se constató que la Cámara de Diputados, para cumplir con los acuerdos con el sindicato y las 
+condiciones de trabajo, durante el ejercicio fiscal 2024, contrató por adjudicación directa los 
+bienes y servicios para atender las festividades como el día de Reyes Magos, el Día del niño, 
+el Día de la Madre, el Día del Padre, comida de fin de año, así como para cumplir con el 
+Acuerdo de Voluntades mediante el cual se otorga leche al personal sindicalizado, como se 
+muestra a continuación:
+CONTRATOS EN CUMPLIMIENTO A ACUERDOS Y CONDICIONES DE TRABAJO CON EL SINDICATO
+(Miles de pesos)
+Orden de Servicio o 
+Pedidos Concepto Importe
+117543 Contratación de un parque de diversión y alimentos (día de 
+reyes) 472.2
+118667 Contratación de un parque de diversión (día del niño) 700.9
+118668 Contratación de alimentos en el parque de diversiones (día del 
+niño) 150.0
+119345 Aparatos electrónicos, electrodomésticos y de línea blanca (día 
+de la madre) 665.0
+120195 Aparatos electrónicos (día del padre) 319.3
+123375 Aparatos electrónicos, electrodomésticos y de línea blanca 
+(comida de fin de año) 706.5
+119396 Leche acuerdo de voluntades 604.6
+Total 3,618.5
+FUENTE: Expedientes de contratación proporcionados por la Cámara de Diputados.
+PAGINA 14
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+14
+Orden de servicio número 117543
+El 1 de marzo de 2024, la Cámara de Diputados suscribió la orden de servicio número 
+117543, con el proveedor Acuario Michin Ciudad de México, S.A. de C.V., por 472.2 miles de 
+pesos, para la contratación de un parque de diversión y alimentos, en cumplimiento de la 
+normativa.
+Al respecto, se constató que el proveedor entregó los boletos para niños y adultos, así como 
+de los paquetes de alimentos dentro de los primeros cinco días hábiles posteriores a la firma 
+de la orden de servicio, a entera satisfacción del área requirente, razón por la que quedó 
+exento de la entrega de la garantía de cumplimiento, en cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 472.2 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Acuario Michin Ciudad de México, S.A. de C.V. emitió un Comprobante 
+Fiscal Digital por Internet (CFDI), el cual conforme a la consulta realizada en la página 
+electrónica del Servicio de Administración Tributaria (SAT) se encontró con estatus de 
+vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal número 1540-2 “Otras Prestaciones”, en cumplimiento de la 
+normativa.
+Orden de servicio número 118667
+El 2 de mayo de 2024, la Cámara de Diputados suscribió la orden de servicio número 
+118667, con el proveedor Six Flags México, S.A. de C.V., por 700.9 miles de pesos, para la 
+contratación de un parque de diversión, en cumplimiento de la normativa.
+Al respecto, se constató que el proveedor entregó los boletos dentro de los primeros cinco 
+días hábiles posteriores a la firma de la orden de servicio, a entera satisfacción del área 
+requirente, razón por la que quedó exento de la entrega de la garantía de cumplimiento, en 
+cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó un total de 700.9 miles de pesos, con cargo al presupuesto del ejercicio 
+fiscal 2024, por lo que el proveedor Six Flags México, S.A. de C.V. emitió un CFDI, el cual, 
+conforme a la consulta realizada en la página electrónica del SAT, se encontró con estatus 
+de vigente.
+PAGINA 15
+Grupo Funcional Gobierno
+15
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal número 1540-2 “Otras Prestaciones”, en cumplimiento de la 
+normativa.
+Orden de servicio número 118668
+El 2 de mayo de 2024, la Cámara de Diputados suscribió con el proveedor Ventas y Servicios 
+al Consumidor, S.A. de C.V., la orden de servicio número 118668, por 150.0 miles de pesos, 
+para la contratación de alimentos en el parque de diversiones (Día del niño), en 
+cumplimiento de la normativa.
+Al respecto, se constató que el proveedor entregó los boletos dentro de los primeros cinco 
+días hábiles posteriores a la firma de la orden de servicio, a entera satisfacción del área 
+requirente, razón por la que quedó exento de la entrega de la garantía de cumplimiento, en 
+cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 150.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Ventas y Servicios al Consumidor, S.A. de C.V. emitió un CFDI, el cual 
+conforme a la consulta realizada en la página electrónica del SAT se encontró con estatus de 
+vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal número 1540-2 “Otras Prestaciones”, en cumplimiento de la 
+normativa.
+Pedido número 119345
+El 31 de mayo de 2024, la Cámara de Diputados suscribió con el proveedor Grupo Ehctran, 
+S.A. de C.V. el pedido número 119345 por 665.0 miles de pesos, para la adquisición de 
+aparatos electrónicos y de línea blanca, en cumplimiento de la normativa.
+Al respecto, se constató que el proveedor entregó los bienes dentro de los primeros cinco 
+días hábiles posteriores a la firma del pedido, a entera satisfacción del área requirente, 
+razón por la que quedó exento de la entrega de la garantía de cumplimiento, en 
+cumplimiento de la normativa.
+PAGINA 16
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+16
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 665.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Grupo Ehctran, S.A. de C.V. emitió un CFDI, el cual, conforme a la 
+consulta realizada en la página electrónica del SAT, se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal número 1540-2 “Otras Prestaciones”, en cumplimiento de la 
+normativa.
+Pedido número 120195
+El 10 de julio de 2024, la Cámara de Diputados suscribió con el proveedor Comercializadora 
+TEC&SYS, S.A. de C.V., el pedido número 120195, por 319.3 miles de pesos, para la 
+adquisición de aparatos electrónicos, en cumplimiento de la normativa.
+Al respecto, se constató que el proveedor entregó los bienes dentro de los primeros cinco 
+días hábiles posteriores a la firma del pedido, a entera satisfacción del área requirente, 
+razón por la que quedó exento de la entrega de la garantía de cumplimiento, en 
+cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 319.3 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Comercializadora TEC&SYS, S.A. de C.V. emitió un CFDI, el cual, 
+conforme a la consulta realizada en la página electrónica del SAT, se encontró con estatus 
+de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal número 1540-2 “Otras Prestaciones”, en cumplimiento de la 
+normativa.
+Pedido número 123375
+El 16 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor 
+Abastecedora y Proveedora Especializada PICH, S.A. de C.V., el pedido número 123375, por 
+706.5 miles de pesos, para la adquisición de aparatos electrónicos, electrodomésticos y línea 
+blanca para el evento de fin de año 2024, en cumplimiento de la normativa.
+PAGINA 17
+Grupo Funcional Gobierno
+17
+Al respecto, se constató que el proveedor entregó los bienes dentro de los primeros cinco 
+días hábiles posteriores a la firma del pedido, a entera satisfacción del área requirente, 
+razón por la que quedó exento de la entrega de la garantía de cumplimiento, en 
+cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 706.5 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Abastecedora y Proveedora Especializada PICH, S.A. de C.V. emitió un 
+CFDI, el cual, conforme a la consulta realizada en la página electrónica del SAT, se encontró 
+con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51100 y 82711 y con cargo en la 
+partida presupuestal número 1540-2 “Otras Prestaciones”, en cumplimiento de la 
+normativa.
+Pedido número 119396
+El 5 de junio de 2024, la Cámara de Diputados suscribió con el proveedor Alhambra Sollus, 
+S.A. de C.V., el pedido número 119396, por 604.6 miles de pesos, para la adquisición de 
+leche, en cumplimiento de la normativa.
+Al respecto, se constató que el proveedor presentó la garantía de cumplimiento, la cual fue 
+recibida y autorizada por la entidad fiscalizada. Asimismo, se comprobó que la entrega del 
+producto se realizó de acuerdo con el calendario establecido, a entera satisfacción del área 
+requirente, en cumplimiento de la normativa.
+Revisión del pago del instrumento contractual
+De acuerdo con siete Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 604.6 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Alhambra Sollus, S.A. de C.V. emitió siete CFDI, los cuales, conforme a la 
+consulta realizada en la página electrónica del SAT, se encontraron con estatus de vigente.
+Dicho pago se efectuó mediante siete transferencias bancarias, mismas que fueron 
+verificadas en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+51100 y 82711 y con cargo en la partida presupuestal de gasto número 1540-2 “Otras 
+Prestaciones”, en cumplimiento de la normativa.
+PAGINA 18
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+18
+Conclusión
+Se constató que en el ejercicio 2024 la Cámara de Diputados suscribió las órdenes de 
+compra números 117543, 118667 y 118668 y los pedidos números 119345, 120195, 123375 
+y 119396, con los que se atendieron los Acuerdos con el sindicato y las Condiciones 
+Generales de Trabajo, por los cuales se pagaron 3,618.5 miles de pesos. De lo anterior, se 
+proporcionó la documentación que acreditó la entrega de los bienes o la prestación del 
+servicio; además, se verificó que la documentación comprobatoria se encontraba con 
+estatus de vigente en el portal del SAT y que se realizaron los registros contables y 
+presupuestales.
+10. Contrato número DGAJ-004/2024
+Revisión al procedimiento de contratación
+Se constató que la Cámara de Diputados mediante Alcance al Acuerdo por el que se autorizó 
+el Programa Anual de Adquisiciones, Arrendamientos, Servicios, Obras Públicas y 
+relacionados con las mismas para el ejercicio fiscal 2024, realizó el procedimiento de 
+licitación pública nacional3 para la contratación de la Póliza de seguro de vida o incapacidad 
+total y permanente, en cumplimiento de la normativa.
+Al respecto, se verificó que la Cámara de Diputados, antes del inicio del procedimiento, llevó 
+a cabo la investigación de precios, en cumplimiento de la normativa. 
+De lo anterior, la entidad fiscalizada realizó el procedimiento de Licitación Pública Nacional 
+número HCD/LXV/LPN/09/2024, de la que resultó ganador el proveedor Metlife México, S.A. 
+de C.V., y de la revisión del expediente de contratación, se constató que éste contó con el 
+Acta de la Cuarta Sesión Extraordinaria del Comité de Adquisiciones, Arrendamientos, Obras 
+Públicas y Servicios, en la cual se autorizaron las bases y anexos de la licitación; con las 
+requisiciones de los bienes y servicios por adquirir, la suficiencia presupuestal, la publicación 
+de las bases de la convocatoria en el Diario Oficial de la Federación, el acta de la celebración 
+de la junta de aclaraciones, las cotizaciones de cuatro oferentes, el acta de la presentación y 
+apertura de propuestas, y con el fallo, en cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 29 de febrero de 2024, la Cámara de Diputados suscribió el contrato número DGAJ￾004/2024, con el proveedor Metlife México, S.A. de C.V., por un mínimo de 13,031.3 miles 
+de pesos y un máximo de 32,578.3 miles de pesos, exentos del Impuesto al Valor Agregado, 
+el cual tuvo como objeto la adquisición de la Póliza de seguro de vida o incapacidad total y 
+permanente, en cumplimiento de la normativa.
+3 Artículos 30, 31, 32, 33, 34, segundo párrafo y 49, fracción I de la Norma de Adquisiciones, Arrendamientos y Servicios de 
+la Cámara de Diputados.
+PAGINA 19
+Grupo Funcional Gobierno
+19
+Al respecto, se constató que el proveedor entregó la póliza general, las pólizas de seguro 
+por concepto de prima de vida y las cartas cobertura, las cuales fueron aceptadas a entera 
+satisfacción por la entidad fiscalizada. Asimismo, se comprobó que el proveedor entregó el 
+curriculum empresarial, los reportes de la siniestralidad y los escritos con los que informa 
+tener conocimiento de que el único dictamen de incapacidad total sería el certificado 
+médico expedido por el Instituto del Seguro Social al Servicio de los Trabajadores del Estado, 
+en cumplimiento de la normativa.
+Revisión del pago al pedido
+De acuerdo con 10 Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 22,653.5 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024. 
+El proveedor emitió 10 Comprobantes Fiscales Digitales por Internet, los cuales, conforme a 
+la consulta realizada en la página electrónica del Servicio de Administración Tributaria (SAT), 
+se encuentran con estatus vigentes.
+Dichos pagos se efectuaron mediante 10 transferencias bancarias, mismas que fueron 
+verificadas en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+51100 y 82711 y con cargo en la partida presupuestal 1440-2 “Aportaciones para el seguro 
+de vida de empleados”, en cumplimiento de la normativa.
+Conclusión
+Se constató que el contrato número DGAJ-004/2024 suscrito entre la Cámara de Diputados 
+y el proveedor Metlife México, S.A. de C.V., para la adquisición de la Póliza de seguro de 
+vida o incapacidad total y permanente, estuvo vigente durante el ejercicio fiscal 2024, por el 
+cual se pagaron 22,653.5 miles de pesos. De lo anterior se proporcionó la documentación 
+que acreditó la entrega de la póliza; además, se verificó que la documentación 
+comprobatoria se encontraba con estatus de vigente en el portal del SAT y que se realizaron 
+los registros presupuestales y contables del gasto.
+11. Pedido número 119571
+Revisión al procedimiento de contratación
+El 4 de abril de 2024, el Comité de Administración de la Cámara de Diputados emitió el 
+Acuerdo por el que se autorizó la adquisición de vestuario, uniformes, prendas de seguridad 
+y protección para personal de la Cámara de Diputados, en el que se autorizó llevar a cabo el 
+procedimiento de adjudicación directa4 con la empresa Grupo Tauros Ignis Vires, S.A. de 
+C.V., hasta por 19,080.0 miles de pesos, toda vez que su adquisición era indispensable para 
+el correcto desempeño de sus funciones. 
+4 Artículos 43 y 44, fracción II de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 20
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+20
+Asimismo, se verificó que el procedimiento contó con las requisiciones de los bienes, la 
+suficiencia presupuestal y se tuvo evidencia de la no existencia en almacén, en 
+cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 11 de junio de 2024, la Cámara de Diputados suscribió con el proveedor Grupo Tauros 
+Ignis Vires, S.A. de C.V., el pedido número 119571, por 19,080.0 miles de pesos, el cual tuvo 
+como objeto la adquisición de 9,056 vestuarios y uniformes y 2,833 prendas de seguridad y 
+protección personal, en cumplimiento de la normativa.
+Se comprobó que el proveedor entregó, en los tiempos establecidos, las garantías de 
+anticipo y de cumplimiento, las cuales se encontraron validadas por la entidad fiscalizada, 
+en cumplimiento a la normativa. 
+Asimismo, se constató que el 26 de julio de 2024, el proveedor entregó dos lotes de 2,833 
+prendas de seguridad y protección personal, y 9,056 vestuarios y uniformes por un total de 
+19,080.0 miles de pesos, los cuales fueron recibidos a entera satisfacción de la Cámara de 
+Diputados y, de igual forma, mediante el registro de recepción de los bienes, se comprobó 
+que éstos fueron entregados a personal que prestó sus servicios en la entidad fiscalizada 
+durante el ejercicio 2024, en cumplimiento a la normativa. 
+Revisión del pago al pedido
+De acuerdo con dos Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 19,080.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024. 
+El proveedor emitió dos Comprobantes Fiscales Digitales por Internet, los cuales, conforme 
+a la consulta realizada a la página electrónica del Servicio de Administración Tributaria (SAT),
+se encontraron con estatus de vigentes.
+Dichos pagos se efectuaron mediante dos transferencias bancarias, mismas que se 
+verificaron en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+51200 y 82711, y con cargo en las partidas presupuestales 2710“Vestuario y uniformes” y 
+2720 “Prendas de seguridad y protección personal”, en cumplimiento de la normativa.
+Conclusión
+Se constató que el pedido número 119571 suscrito entre la Cámara de Diputados y el 
+proveedor Grupo Tauros Ignis Vires, S.A. de C.V., para la adquisición de vestuario, uniformes 
+y prendas de seguridad y protección personal, estuvo vigente durante el ejercicio fiscal 
+2024, por el cual se pagaron 19,080.0 miles de pesos. De lo anterior, se proporcionó la 
+documentación que acreditó la entrega de los bienes, además de que se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros presupuestales y contables del gasto.
+PAGINA 21
+Grupo Funcional Gobierno
+21
+12. Contratos números LXVI-DGAJ-074/2024 y LXVI-DGAJ-075/2024
+Revisión al procedimiento de contratación
+Mediante el Acuerdo del Comité de Administración de la Cámara de Diputados del 10 de 
+diciembre de 2024, se autorizó la adquisición de mobiliario y equipo de oficina para 
+reacondicionamiento de áreas, para que el personal pudiera cumplir con sus actividades y 
+mitigar el desabasto tanto de mobiliario como de equipo de uso diario en las oficinas del 
+recinto Legislativo, mediante procedimientos de adjudicación directa por excepción a la 
+licitación pública5
+, por lo que se suscribieron diversos instrumentos jurídicos.
+Además, se comprobó que se contó con las requisiciones de los bienes, la suficiencia 
+presupuestal y con evidencia de la no existencia de los bienes requeridos en almacén, con la 
+investigación de precios, así como los oficios de notificación a los proveedores que 
+presentaron las mejores condiciones para el Estado, en cumplimiento de la normativa.
+I.- Contrato número LXVI-DGAJ-074/2024
+Revisión al cumplimiento del instrumento contractual
+El 16 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor Grupo 
+Empresarial BECEMEX, S.A. de C.V., el contrato número LXVI-DGAJ-074/2024, con el 
+proveedor Grupo Empresarial BECEMEX, S.A. de C.V., por 10,867.2 miles de pesos, el cual 
+tuvo por objeto la adquisición de mobiliario y equipo de oficina, con vigencia del 17 al 31 de 
+diciembre de 2024, en cumplimiento de la normativa.
+Se verificó que el proveedor entregó la garantía de cumplimiento por el 10.0% del importe 
+total contratado antes del Impuesto al Valor Agregado (IVA), así como la garantía por 12 
+meses por defectos, vicios ocultos y otras responsabilidades, en cumplimiento a la 
+normativa.
+También se comprobó que la Cámara de Diputados recibió en el almacén los bienes dentro 
+de las fechas establecidas en el contrato y, mediante el reporte de consulta de bienes de la 
+Cámara de Diputados, se constató la distribución de los bienes y se verificó la fecha del 
+movimiento y el área a la que se asignó, en cumplimiento a la normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 10,867.2 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024. 
+El proveedor emitió un Comprobante Fiscal Digital por Internet (CFDI), el cual, conforme a la 
+5 Artículos 43, y 44, fracción II, de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 22
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+22
+consulta realizada a la página electrónica del Servicio de Administración Tributaria (SAT), se 
+encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que se verificó en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 51200, 12400 y 82711, y con cargo 
+en las partidas 2910 “Herramientas menores”, 2990 “Refacciones y accesorios menores de 
+otros bienes muebles”, 5110 “Muebles de oficinas y estanterías” y 5120 “Muebles excepto 
+de oficina y estantería”, en cumplimiento de la normativa.
+II.- Contrato número LXVI-DGAJ-075/2024
+Revisión al cumplimiento del instrumento contractual
+El 16 de diciembre de 2024, la Cámara de Diputados suscribió el contrato número LXVI￾DGAJ-075/2024, con el proveedor Grupo Platense MAIPU, S.A. de C.V., por 6,133.2 miles de 
+pesos, el cual tuvo por objeto la adquisición de mobiliario y equipo de oficina, con una 
+vigencia del 17 al 31 de diciembre de 2024, en cumplimiento de la normativa. 
+Se verificó que el proveedor entregó la garantía de cumplimiento por el 10.0% del importe 
+total contratado antes del IVA, así como la garantía por 12 meses por defectos, vicios 
+ocultos y otras responsabilidades, en cumplimiento de la normativa.
+Se comprobó que la Cámara de Diputados recibió los bienes en el almacén dentro de las 
+fechas establecidas en el contrato y, mediante el reporte de consulta de bienes de la 
+Cámara de Diputados, se constató la distribución de éstos y se verificó la fecha del 
+movimiento y el área a la que se asignó, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 6,133.2 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024. El 
+proveedor emitió un CFDI, el cual, conforme a la consulta realizada en la página electrónica 
+del SAT se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que los pagos se registraron en las cuentas contables números 12400, 51200 y 82711 y con 
+cargo en las partidas presupuestales 2910 “Herramientas menores”, y 5110 “Muebles de 
+oficinas y estanterías”, en cumplimiento de la normativa.
+Conclusión
+Se constató que los contratos números LXVI-DGAJ-074/2024 y LXVI-DGAJ-075/2024 
+suscritos entre la Cámara de Diputados y los proveedores Grupo Empresarial BECEMEX, S.A. 
+de C.V. y Grupo Platense MAIPU, S.A. de C.V., para la adquisición de mobiliario y equipo de 
+PAGINA 23
+Grupo Funcional Gobierno
+23
+oficina, estuvieron vigentes durante el ejercicio fiscal 2024, por los cuales se pagó un total 
+de 17,000.4 miles de pesos. De lo anterior se proporcionó documentación comprobatoria 
+que acreditó la entrega de los bienes; además, se verificó que la documentación 
+comprobatoria se encontraba con estatus de vigente en el portal del SAT y que se realizaron 
+los registros presupuestales y contables del gasto.
+13. Pedido número 121005
+Revisión al procedimiento de contratación
+Mediante el Acuerdo del 4 de abril de 2024, el Comité de Administración de la Cámara de 
+Diputados autorizó la contratación de la adquisición, instalación y puesta en marcha del 
+sistema de video vigilancia como excepción a la licitación pública6 por 1,500.0 miles de 
+pesos, en cumplimiento de la normativa.
+Al respecto, se comprobó que, antes del inicio del procedimiento, la Cámara de Diputados 
+realizó una investigación de precios; en el expediente de dicho procedimiento se integró la 
+evidencia de la requisición de los bienes o servicios, la cotización del proveedor adjudicado, 
+la notificación de la adjudicación al proveedor, así como la evidencia de que el proveedor 
+cumplió con los recursos técnicos, financieros, legales, administrativos y económicos, en 
+cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 14 de agosto de 2024, la Cámara de Diputados suscribió el pedido número 121005, con el 
+proveedor Ecomce Comercializadora del Centro, S.A. de C.V., por 1,278.2 miles de pesos, el 
+cual tuvo por objeto la adquisición, instalación y puesta en operación del sistema de 
+videovigilancia, con una vigencia de 15 de agosto al 31 de diciembre de 2024, en 
+cumplimiento de la normativa.
+Al respecto, se constató que el proveedor presentó en tiempo la garantía de cumplimiento 
+por el 10.0% del importe total contratado antes del Impuesto al Valor Agregado, así como la 
+garantía por 12 meses por defectos, vicios ocultos y otras responsabilidades, en 
+cumplimiento de la normativa.
+Asimismo, se comprobó que la Cámara de Diputados contó con evidencia de la recepción de 
+los bienes y remisiones de los equipos, la carta de confidencialidad, las pruebas del correcto 
+funcionamiento del sistema local, las pruebas de funcionamiento e integración al sistema 
+central C4, la memoria técnica, los reportes diarios de actividades, el certificado de 24 
+licencias permanentes y las fichas técnicas y constancias de la transferencia de 
+conocimientos del proyecto, en cumplimiento de la normativa.
+6 Artículos 43, y 44, fracción II de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 24
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+24
+Revisión del pago al pedido
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 1,278.2 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Ecomce Comercializadora del Centro, S.A. de C.V. emitió un 
+Comprobante Fiscal Digital por Internet, el cual, conforme a la consulta realizada en la 
+página electrónica del Servicio de Administración Tributaria (SAT), se encontró con estatus 
+de vigente.
+Dicho pagó se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 12400, 51200, 51300 y 82711, y 
+con cargo en las partidas presupuestales 2460 “Material eléctrico y electrónico”, 2940 
+“Refacciones y accesorios menores de equipo de cómputo y tecnologías de la información”, 
+3270 “Arrendamiento de activos intangibles”, 3570 “Instalación, reparación y 
+mantenimiento de maquinaria, otros equipos y herramienta”, 5150 “Equipo de cómputo y 
+de tecnologías de la información”, 5190 “Otro mobiliario y equipo educacional y recreativo” 
+y 5660 “Equipos de generación eléctrica, aparatos y accesorios eléctricos”, en cumplimiento 
+de la normativa.
+Conclusión
+Se constató que el pedido número 121005 suscrito entre la Cámara de Diputados y el 
+proveedor Ecomce Comercializadora del Centro, S.A. de C.V., para la adquisición, instalación 
+y puesta en operación del sistema de videovigilancia, estuvo vigente durante el ejercicio 
+fiscal 2024, por el cual se pagaron 1,278.2 miles de pesos. De lo anterior, se proporcionó la 
+documentación que acreditó la prestación de los servicios y la entrega de los bienes; 
+además, se verificó que la documentación comprobatoria se encontraba con estatus de 
+vigente en el portal del SAT y que se realizaron los registros presupuestales y contables del 
+gasto. 
+14. Contrato número DGAJ-035/2024
+Revisión al procedimiento de contratación
+El 21 de marzo de 2024, el Comité de Administración de la Cámara de Diputados emitió el 
+Acuerdo mediante el cual se autorizó la adquisición del licenciamiento de monitoreo de 
+seguridad informática de la Cámara de Diputados, mismo que se realizó bajo el 
+procedimiento de adjudicación directa7
+, ya que el haber realizado otro procedimiento de 
+contratación implicaba una duración mayor para su desahogo y término, lo cual generaba 
+un espacio de alta vulnerabilidad en la seguridad de la red informática de la Cámara de 
+7 Artículos 43 y 44, fracción II de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 25
+Grupo Funcional Gobierno
+25
+Diputados, por lo que se determinó que la adquisición se realizaría con la empresa Clean 
+Brokers, S.A. de C.V., por un total de hasta 20,000.0 miles de pesos.
+Al respecto, se verificó que la Cámara de Diputados contó con las requisiciones de los 
+bienes, en los cuales se autorizó la suficiencia presupuestal, en cumplimiento de la 
+normativa.
+Revisión al cumplimiento del contrato
+El 16 de agosto de 2024, la Cámara de Diputados suscribió con el proveedor Clean Brokers, 
+S.A. de C.V., el contrato número DGAJ-035/2024, por 19,993.7 miles de pesos, el cual tuvo 
+por objeto la adquisición del licenciamiento de monitoreo de seguridad informática, con 
+vigencia del 17 de agosto al 31 de diciembre de 2024, en cumplimiento de la normativa.
+Al respecto, se constató que el proveedor presentó en tiempo la garantía de cumplimiento 
+por el 10.0% del importe total contratado antes del Impuesto al Valor Agregado, la garantía 
+por 12 meses por defectos, vicios ocultos y otras responsabilidades y por solución integral 
+de licenciamiento, las cuales fueron validadas y aceptadas por la entidad fiscalizada, en 
+cumplimiento de la normativa. 
+Mediante las requisiciones número 18514 y 18610 y los documentos denominados 
+recepción de los bienes con fecha de recepción del 22 de agosto de 2024, se verificó que el 
+proveedor entregó en tiempo el licenciamiento de monitoreo de seguridad informática por 
+365 días naturales y el servidor físico marca Dell, a entera satisfacción de la Cámara de 
+Diputados, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 19,993.7 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Clean Brokers, S.A. de C.V., emitió un Comprobante Fiscal Digital, el 
+cual, conforme en la consulta realizada en la página electrónica del Servicio de 
+Administración Tributaria (SAT), se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que los pagos se registraron en las cuentas contables números 51300 y 82711, y con cargo 
+en la partida presupuestal 3270 “Arrendamiento de activos intangibles”, en cumplimiento 
+de la normativa.
+Conclusión
+Se constató que el contrato número DGAJ-035/2024 suscrito entre la Cámara de Diputados 
+y el proveedor Clean Brokers, S.A. de C.V., para la adquisición del licenciamiento de 
+monitoreo de seguridad informática, estuvo vigente durante el ejercicio fiscal 2024, por el 
+cual se pagaron 19,993.7 miles de pesos. De lo anterior, se proporcionó la documentación 
+PAGINA 26
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+26
+que acreditó la prestación del servicio; además, se verificó que la documentación 
+comprobatoria se encontraba con estatus de vigente en el portal del SAT y que se realizaron 
+los registros presupuestales y contables del gasto.
+15. Contrato número LXVI-DGAJ-070/2024
+Revisión al procedimiento de contratación
+El Comité de Administración de la Cámara de Diputados emitió el Acuerdo por el que se 
+autorizó la contratación del servicio administrado de equipos de cómputo de forma 
+plurianual, bajo el procedimiento de adjudicación directa8 con el proveedor Consultores y 
+Soporte AMD, S.A. de C.V., por un total de 187,852.7 miles de pesos, de lo cual se indicó que 
+con cargo al presupuesto del ejercicio 2024 se efectuaría el pago de un anticipo por 
+56,355.8 miles de pesos, que corresponden al 30.0% del importe total, para asegurar la 
+actualización de una base de 3,700 equipos de última generación a fin de reducir los 
+equipos obsoletos, garantizar la disponibilidad, operación y la correcta función, en 
+cumplimiento de la normativa. 
+Revisión al cumplimiento del instrumento contractual 
+El 16 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor Consultores 
+y Soporte AMD, S.A. de C.V. el contrato plurianual LXVI-DGAJ-070/2024, por un total de 
+187,852.7 miles de pesos, el cual tuvo por objeto la contratación del servicio administrado 
+de equipos de cómputo, con vigencia del 16 de diciembre de 2024 al 31 de diciembre 2027, 
+en cumplimiento de la normativa.
+Al respecto, se comprobó que el proveedor entregó en los tiempos establecidos la garantía 
+de anticipo por un total de 56,355.8 miles de pesos, así como la garantía de cumplimiento 
+por las obligaciones contraídas y de responsabilidad civil requeridos por la Cámara de 
+Diputados, por medio de la Dirección General de Tecnologías de Información, en 
+cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 56,355.8 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Consultores y Soporte AMD, S.A. de C.V. emitió un Comprobante 
+Fiscal Digital por Internet, el cual, conforme a la consulta realizada en la página electrónica 
+del Servicio de Administración Tributaria (SAT), se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+8 Artículos 43 y 44, fracción II de la Norma de Adquisiciones, arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 27
+Grupo Funcional Gobierno
+27
+que los pagos se registraron en las cuentas contables números 51300 y 82711, y en la 
+partida presupuestal 3330-3 “Servicios de consultoría administrativa, procesos, técnica y en 
+tecnologías de la información de áreas administrativas”, en cumplimiento de la normativa.
+Conclusión
+Se constató que el contrato plurianual LXVI-DGAJ-070/2024, suscrito entre la Cámara de 
+Diputados y el proveedor Consultores y Soporte AMD, S.A. de C.V., para el servicio 
+administrado de equipos de cómputo, estuvo vigente durante el ejercicio fiscal 2024, por el 
+cual se pagaron 56,355.8 miles de pesos por concepto de anticipo. De lo anterior, se 
+proporcionó la documentación con la que se acreditó el anticipo; además, se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros presupuestales y contables del gasto.
+16. Revisión de la orden de servicio número 117396
+Revisión al procedimiento de contratación
+El 6 de febrero de 2024, el Comité de Administración de la Cámara de Diputados emitió un 
+Acuerdo por el que se autorizó la contratación del Mantenimiento Preventivo y Correctivo a 
+Elevadores mediante el procedimiento de adjudicación directa9 con la empresa Elevadores 
+EV Internacional, S.A. de C.V., por un mínimo de 1,324.9 miles de pesos y un máximo de 
+3,312.3 miles de pesos.
+Al respecto, en el expediente de contratación no se localizó evidencia de que la Cámara de 
+Diputados realizó la investigación de precios y posibles oferentes antes del inicio del 
+procedimiento de adjudicación, en incumplimiento del acuerdo TERCERO del Acuerdo por el 
+que se Autoriza el Programa Anual de Adquisiciones, Arrendamientos, Servicios, Obras 
+Públicas y Servicios Relacionados con las Mismas para el Ejercicio Fiscal 2024.
+Por lo anterior, con motivo de la intervención de la Auditoría Superior de la Federación, la 
+Cámara de Diputados proporcionó copia del oficio número SG/2.3350 BIS/2025 del 18 de 
+julio de 2025, emitido por la Coordinación Técnica de la Secretaría General, con el cual se 
+instruyó a los titulares de las direcciones generales de la Secretaría General, la Secretaría de 
+Servicios Parlamentarios, la Secretaría de Servicios Administrativos y Financieros, la 
+Coordinación de Comunicación Social y la Dirección General del Canal del Congreso, que 
+deberá integrarse en los expedientes que respaldan los procedimientos de contratación la 
+evidencia documental que acredite cada una de las actividades realizadas en el desarrollo de 
+los mismos, por lo que la observación se consideró atendida.
+9 Artículos 43, 44, fracción I y 49 de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputados.
+PAGINA 28
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+28
+Revisión al cumplimiento de la orden de servicio
+El 29 de febrero de 2024, la Cámara de Diputados suscribió con el proveedor Elevadores EV 
+Internacional, S.A. de C.V., la orden de servicio 117396, por un mínimo de 1,324.9 miles de 
+pesos y un máximo de 3,312.3 miles de pesos, la cual tuvo por objeto la contratación del 
+servicio de mantenimiento preventivo y correctivo a elevadores de la Cámara de Diputados, 
+con una vigencia del 1 de marzo al 31 de diciembre de 2024, en cumplimiento de la 
+normativa.
+Se constató que el proveedor entregó en tiempo las garantías de cumplimiento y de 
+responsabilidad civil, así como el certificado de garantía firmado por el apoderado legal. 
+Asimismo, se comprobó que el proveedor prestó los servicios, lo que se acreditó con los 
+formatos de recepción del servicio, bitácoras de servicio, reportes de mantenimiento, 
+reportes de servicio correctivo, solicitudes de autorización de los servicios, informes 
+diagnósticos y evidencia fotográfica, en cumplimiento de la normativa.
+Revisión del pago de la orden de servicio
+De acuerdo con nueve Formatos Únicos de Servicios Financieros, se verificó que la Cámara 
+de Diputados pagó 3,310.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 
+2024, por lo que el proveedor Elevadores EV Internacional, S.A. de C.V. emitió 31 
+Comprobantes Fiscales Digitales por Internet, los cuales, conforme a la consulta realizada en 
+la página electrónica del Servicio de Administración (SAT), se encontraron con estatus de 
+vigentes.
+Dicho pago se efectuó mediante nueve transferencias bancarias, mismas que fueron 
+verificadas en los estados de cuenta bancarios presentados como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+51300 y 82711, y con cargo en la partida presupuestal 3570 “Instalación, reparación y 
+mantenimiento de maquinaria, otros equipos y herramienta” en cumplimiento de la 
+normativa.
+Conclusión
+Se constató que la orden de servicio 117396, suscrita entre la Cámara de Diputados y el 
+proveedor Elevadores EV Internacional, S.A. de C.V., para el servicio de mantenimiento 
+preventivo y correctivo a elevadores, estuvo vigente durante el ejercicio fiscal 2024, por el 
+cual se pagaron 3,310.0 miles de pesos. De lo anterior, se proporcionó la documentación 
+que acreditó la prestación del servicio; además, se verificó que la documentación 
+comprobatoria se encontraba con estatus de vigente en el portal del SAT; sin embargo, no 
+se localizó evidencia de que, antes del inicio del procedimiento, la Cámara de Diputados 
+solicitó al proveedor adjudicado la cotización para elaborar la investigación de precios. Sin 
+embargo, para atender la observación, la entidad fiscalizada, en el transcurso de la auditoría 
+y con motivo de la intervención de la Auditoría Superior de la Federación, instruyó para que, 
+PAGINA 29
+Grupo Funcional Gobierno
+29
+en lo sucesivo, se cuente con toda la documentación que soporte el desarrollo de los 
+procedimientos de contratación, con lo que se atiende lo observado.
+17. Contrato número DGAJ-047/2021
+Revisión al procedimiento de contratación
+En los Lineamientos para la Administración y Control de la tarjeta IAVE de la Cámara de 
+Diputados, se prevé la entrega de un dispositivo de telepeaje para las y los legisladores, por 
+lo que, el 3 de agosto de 2021, el Comité de Administración emitió un Acuerdo por el que se 
+autorizaron diversos trámites administrativos relacionados con el servicio de telepeaje 
+requerido por la Cámara de Diputados, en el cual se consideró una contratación abierta 
+plurianual considerando sólo los importes máximos para los ejercicios 2021 al 2024, siendo 
+para este último un total de 23,000.0 miles de pesos, respecto de lo cual se presentó la 
+requisición del servicio y la autorización de la suficiencia presupuestal para la realización de 
+un procedimiento por adjudicación directa.
+Revisión al cumplimiento del instrumento contractual
+El 1 de septiembre de 2021, la Cámara de Diputado suscribió con el proveedor Cobro 
+Electrónico de Peaje, S.A. de C.V. el contrato plurianual número DGAJ-047/2021, por 
+74,000.0 miles de pesos, el cual tuvo por objeto el cobro electrónico de peaje a través de 
+dispositivos electrónicos, con una vigencia del 1 de septiembre de 2021 al 1 de diciembre de 
+2024, en cumplimiento de la normativa.
+Por la naturaleza de los servicios de telepeaje, el Comité de Administración autorizó un 
+depósito en garantía por 2,000.0 miles de pesos al proveedor y se verificó que éste se 
+realizó, en cumplimiento de la normativa.
+Además, mediante los oficios de recepción de servicios emitidos por la Dirección General de 
+Recursos Materiales y Servicios, así como una bitácora del proveedor con los cruces 
+realizados por los usuarios de los vehículos en casetas, se comprobó la prestación de los 
+servicios, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con 25 Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 19,466.6 miles de pesos con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Cobro Electrónico de Peaje, S.A. de C.V. emitió 25 Comprobantes 
+Fiscales Digitales por Internet, los cuales, conforme a la consulta realizada en la página 
+electrónica del Servicio de Administración Tributaria (SAT), se encontraron con estatus de 
+vigentes.
+Dicho pago se efectuó mediante 25 transferencias bancarias, mismas que fueron verificadas 
+en los estados de cuenta bancarios presentado como evidencia documental. Asimismo, se 
+comprobó que los pagos se registraron en las cuentas contables números 51300 y 82711 y 
+PAGINA 30
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+30
+con cargo en la partida presupuestal 3920 “Impuestos y derechos”, en cumplimiento de la 
+normativa.
+Conclusión
+Se constató que el contrato plurianual número DGAJ-047/2021, suscrito entre la Cámara de 
+Diputados y el proveedor Cobro Electrónico de Peaje, S.A. de C.V., para el cobro electrónico 
+de peaje por medio de dispositivos electrónicos, estuvo vigente durante el ejercicio fiscal 
+2024, por el cual se pagaron 19,466.6 miles de pesos. De lo anterior, se proporcionó la 
+documentación que acreditó la presentación del servicio; además, se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros contables y presupuestales.
+18. Revisión del Contrato número LXVI-DGAJ-078/2024 
+Revisión al procedimiento de contratación
+Mediante Acuerdo del 20 de noviembre de 2024, emitido por el Comité de Administración 
+de la Cámara de Diputados, se autorizó contratar, mediante procedimiento de adjudicación 
+directa10, el servicio de actualización tecnológica firewalls y el licenciamiento avanzado de 
+seguridad antivirus y gestión de vulnerabilidades de dicha Soberanía por 18,043.5 miles de 
+pesos, en cumplimiento de la normativa.
+Sobre el particular, se comprobó que la Cámara de Diputados, antes del inicio del 
+procedimiento, realizó la investigación de precios y determinó que la empresa Secure Labs, 
+S.A. de C.V. ofreció las mejores condiciones, por lo que se le notificó la adjudicación del 
+contrato, en cumplimiento de la normativa.
+Asimismo, se comprobó que el expediente de la contratación contó con la evidencia de la 
+requisición de los bienes y servicios, de la cotización emitida por el proveedor adjudicado, la 
+notificación de la adjudicación al proveedor, así como evidencia de que el proveedor 
+contaba con los recursos técnicos, financieros, legales, administrativos y económicos, en 
+cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 20 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor Secure Labs, 
+S.A. de C.V., el contrato número LXVI-DGAJ-078/2024, por 18,043.5 miles de pesos, el cual 
+tuvo por objeto la actualización tecnológica de firewalls y licenciamiento avanzado de 
+seguridad antivirus y gestión de vulnerabilidades para la Cámara de Diputados, con vigencia 
+del 23 al 31 de diciembre de 2024, en cumplimiento de la normativa.
+10 Artículos 43, 44, fracción II y 49, fracción I de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de 
+Diputado.
+PAGINA 31
+Grupo Funcional Gobierno
+31
+Mediante los formatos de recepción de los bienes, remisiones de los equipos, así como con 
+los entregables establecidos en el anexo técnico para la actualización tecnológica de 
+firewalls y licenciamiento avanzado de seguridad antivirus y gestión de vulnerabilidades 
+para la Cámara de Diputados, se comprobó que los servicios se prestaron en el tiempo y la 
+forma establecidos en el contrato, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 18,043.5 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Secure Labs, S.A. de C.V. emitió un Comprobante Fiscale Digital por 
+Internet, el cual, conforme a la consulta realizada en la página electrónica del Servicio de 
+Administración Tributaria (SAT), se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que el pago se registró en las cuentas contables números 12400, 51300 y 82711 y con cargo 
+en las partidas presupuestales 3270 “Arrendamiento de activos intangibles”, 3330-3 
+“Servicios de consultoría administrativa, procesos, técnica y en tecnologías de la 
+información de áreas administrativas” y 5150 “Equipo de cómputo y de tecnologías de la 
+información”, en cumplimiento de la normativa.
+Conclusión
+Se constató que el contrato número LXVI-DGAJ-078/2024 suscrito entre la Cámara de 
+Diputados y el proveedor Secure Labs, S.A. de C.V., para la actualización tecnológica de 
+firewalls y licenciamiento avanzado de seguridad antivirus y gestión de vulnerabilidades 
+para la Cámara de Diputados, estuvo vigente durante diciembre de 2024, por el que se 
+pagaron 18,043.5 miles de pesos. De lo anterior, se proporcionó la documentación que 
+acreditó la prestación del servicio y la entrega de los bienes; además, se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros presupuestales y contables del gasto.
+19. Contrato número LXVI-DGAJ-093/2024
+Revisión al procedimiento de contratación
+Mediante Acuerdo del 10 de diciembre de 2024, el Comité de Administración de la Cámara 
+de Diputados autorizó contratar de forma plurianual, y mediante un procedimiento de 
+adjudicación directa,11 el equipamiento de voz, datos, servidores y almacenamiento de 
+datos por 179,000.0 miles de pesos, del que se autorizó el pago por 89,500.0 miles de pesos 
+11 Artículos 43 y 44, fracción II de la Norma de Adquisiciones, Arrendamientos y Servicios de la Cámara de Diputado.
+PAGINA 32
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+32
+que correspondieron al 50.0% de anticipo, en tanto que el importe restante se realizaría con 
+cargo en el presupuesto del ejercicio 2025.
+Sobre el particular, se comprobó que el 6 de diciembre de 2024, la Dirección de 
+Infraestructura de la Cámara de Diputados elaboró la justificación para la adquisición de 
+equipamiento de voz, datos, servidores y almacenamiento de datos, y requirió realizar la 
+adquisición con la empresa N Digital Evolution Group, S.A. de C.V., por ser una empresa 
+100.0% mexicana, fundada en 2016, con las condiciones humanas, tecnológicas y 
+administrativas requeridas por el Estado, en cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 26 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor N Digital 
+Evolution Group, S.A. de C.V., el contrato número LXVI-DGAJ-093/2024, por un total de 
+178,983.1 miles de pesos, el cual tuvo por objeto la adquisición de equipamiento de voz, 
+datos, servidores y almacenamiento de datos, en cumplimiento de la normativa. 
+Se comprobó que, con cargo en los recursos del ejercicio fiscal 2024, únicamente se pagó el 
+anticipo del 50.0% del importe total del contrato, por lo que, en dicho ejercicio, solo se 
+contó con las garantías de anticipo, de cumplimiento por las obligaciones contraídas y de 
+responsabilidad civil para proteger al personal que realizará los servicios requeridos por la 
+Cámara de Diputados por medio de la Dirección General de Tecnologías de Información, en 
+cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con el Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 89,489.1 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor N Digital Evolution Group, S.A. de C.V. emitió un Comprobante 
+Fiscal Digital por Internet, el cual, conforme a la consulta realizada en la página electrónica 
+del Servicio de Administración Tributaria (SAT), se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que los pagos se registraron en las cuentas contables números 12400 y 82711, y con cargo 
+en las partidas presupuestales 5150 “Equipo de cómputo y tecnología de la información” y 
+5650 “Equipo de comunicación y telecomunicaciones” del ejercicio fiscal 2024, en 
+cumplimiento de la normativa.
+Conclusión
+Se constató que el contrato número LXVI-DGAJ-093/2024, suscrito entre la Cámara de 
+Diputados y el proveedor N Digital Evolution Group, S.A. de C.V., para la adquisición de 
+equipamiento de voz, datos, servidores y almacenamiento de datos, estuvo vigente durante 
+el ejercicio fiscal 2024, por el cual se pagaron 89,489.1 miles de pesos, correspondiente al 
+PAGINA 33
+Grupo Funcional Gobierno
+33
+anticipo del 50.0% del importe total del contrato. De lo anterior, se proporcionó la 
+documentación que acreditó la prestación de servicios; además, se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros presupuestales y contables del gasto. 
+20. Contratos DGAJ-092/2024 y DGAJ-095/2024
+Revisión al procedimiento de contratación
+El 8 de octubre de 2024, se llevó a cabo la reunión de trabajo para las contrataciones 
+anticipadas para el ejercicio 2025, en la cual se consideró realizar un procedimiento de 
+contratación para el aseguramiento integral de bienes patrimoniales muebles e inmuebles 
+con un importe aproximado de hasta 26,688.1 miles de pesos y el aseguramiento de los 
+equipos automotrices por 1,320.8 miles de pesos, ambos mediante un procedimiento de 
+Concurso por Invitación a Cuando Menos Cinco participantes.
+Sobre el particular, se comprobó que la Cámara de Diputados inició el procedimiento de 
+contratación con la invitación y la publicación de la convocatoria el 27 de noviembre de 
+2024; sin embargo, al no contar con cinco propuestas susceptibles de analizarse, fue 
+declarado desierto, en cumplimiento de la normativa.
+Mediante oficio del 6 de diciembre de 2024, la Dirección General de Recursos Materiales y 
+Servicios informó que persistía la necesidad de contratación del aseguramiento integral de 
+bienes patrimoniales y de los equipos automotrices propiedad de la Cámara, derivado de lo 
+cual, mediante una segunda convocatoria, se celebró el concurso de invitación a cuando 
+menos cinco participantes número HCD/LXVI/CICP/04/2025, del que se comprobó que su 
+expediente se integró con el Acta de la Vigésima Sexta Sesión Extraordinaria del Comité de 
+Adquisiciones, Arrendamientos, Obras Públicas y Servicios, en la cual se autorizaron las 
+bases y anexos del concurso, la suficiencia presupuestal, las cotizaciones de proveedores, el 
+fallo del 17 de diciembre de 2024, en el cual, la partida 3 “Aseguramiento integral de bienes 
+patrimoniales, muebles e inmuebles propiedad de la Cámara de Diputados”, se adjudicó a la 
+aseguradora Grupo Mexicano de Seguros, S.A. de C.V., y la partida 4 “Aseguramiento de 
+equipos automotrices propiedad la Cámara de Diputados”, a la aseguradora Grupo Nacional 
+Provincial, S.A.B., con las cuales se formalizaron los contratos números DGAJ-092/2024 y 
+DGAJ-095/2024, respectivamente, en cumplimiento de la normativa.
+I.- Contrato número DGAJ-095/2024
+Revisión al cumplimiento del instrumento contractual
+El 27 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor Grupo 
+Nacional Provincial, S.A.B., el contrato número DGAJ-095/2024, por un total de 815.3 miles 
+de pesos, el cual tuvo como objeto la adquisición de la póliza de aseguramiento de equipos 
+automotrices, en cumplimiento de la normativa. 
+PAGINA 34
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+34
+Se constató que el proveedor entregó la póliza de aseguramiento de equipos automotrices 
+en los tiempos establecidos y por el total de las unidades vehiculares que forman parte del 
+parque vehicular de la Cámara de Diputados, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 815.3 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, por 
+lo que el proveedor Grupo Nacional Provincial, S.A.B. emitió un Comprobante Fiscal Digital 
+por Internet (CFDI), el cual, conforme a la consulta realizada en la página electrónica del 
+Servicio de Administración Tributaria (SAT), se encontró con estatus de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que los pagos se registraron en las cuentas contables números 51300 y 82711, y en la 
+partida presupuestal 3450 “Seguro de bienes patrimoniales”, en cumplimiento de la 
+normativa.
+II.- Contrato número DGAJ-092/2024
+Revisión al cumplimiento del instrumento contractual
+El 27 de diciembre de 2024, la Cámara de Diputados suscribió con el proveedor Grupo 
+Mexicano de Seguros, S.A. de C.V., el contrato número DGAJ-092/2024, por 33,599.2 miles 
+de pesos, el cual tuvo por objeto la adquisición de la póliza de aseguramiento integral de 
+bienes patrimoniales muebles e inmuebles propiedad de la Cámara de Diputados, en 
+cumplimiento de la normativa.
+Se contó con evidencia de los formatos de recepción del servicio, carta cobertura que 
+ampara los bienes y servicios conforme a los términos y condiciones de la convocatoria, así 
+como con la póliza de seguro por un total de 33,599.2 miles de pesos, en cumplimiento de la 
+normativa.
+Revisión del pago al contrato
+De acuerdo con un Formato Único de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 33,599.2 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Grupo Mexicano de Seguros, S.A. de C.V. emitió un CFDI, el cual, 
+conforme a la consulta realizada en la página electrónica del SAT, se encontró con estatus 
+de vigente.
+Dicho pago se efectuó mediante una transferencia bancaria, misma que fue verificada en el 
+estado de cuenta bancario presentado como evidencia documental. Asimismo, se comprobó 
+que los pagos se registraron en las cuentas contables números 51300 y 82711 y en la partida 
+presupuestal 3450 “Seguro de bienes patrimoniales”, en cumplimiento de la normativa.
+PAGINA 35
+Grupo Funcional Gobierno
+35
+Conclusión 
+Se constató que los contratos números DGAJ-095/2024 y DGAJ-092/2024, suscritos entre la 
+Cámara de Diputados y los proveedores Grupo Nacional Provincial, S.A.B. y Grupo Mexicano 
+de Seguros, S.A. de C.V., para el aseguramiento integral de bienes patrimoniales, muebles e 
+inmuebles y de equipos automotrices de su propiedad, estuvieron vigentes durante el 
+ejercicio fiscal 2024, por los cuales pagó un importe total de 34,414.5 miles de pesos. De lo 
+anterior, se proporcionó la documentación que acreditó la entrega de las pólizas; además, 
+se verificó que la documentación comprobatoria se encontraba con estatus de vigente en el 
+portal del SAT y que se realizaron los registros presupuestales y contables del gasto.
+21. Pedido 118666
+Revisión al procedimiento de contratación
+En relación con el Acuerdo por el que se autorizó el programa anual de adquisiciones, 
+arrendamientos, servicios, obras públicas y servicios relacionados con las mismas para el 
+ejercicio fiscal 2024 y sus actualizaciones del Comité de Administración, con el cual se 
+autorizó la adquisición, instalación y puesta en marcha de los sistemas de detección de 
+humo, fuego, voceo, alerta sísmica y sistema fijo contra incendio del edificio de talleres 
+gráficos, se llevó a cabo el procedimiento de licitación pública nacional12, de cuyo análisis se 
+comprobó que, antes del inicio del procedimiento, la Cámara de Diputados llevó a cabo la 
+investigación de mercado, en cumplimiento de la normativa. 
+Al respecto, la Cámara de Diputados realizó el procedimiento de licitación pública nacional 
+número HCD/LXV/LPN/14/2024, cuyas bases y anexos se autorizaron en la Octava Sesión 
+Extraordinaria del Comité de Adquisiciones, Arrendamientos, Obras Públicas y Servicios; 
+asimismo, se comprobó el fallo mediante el cual se adjudicó el pedido al proveedor Enforcer 
+Units Fire Service Pluse México, S.A. de C.V., en cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 7 de mayo de 2024, la Cámara de Diputados suscribió con el proveedor Enforcer Units Fire 
+Service Pluse México, S.A. de C.V., el pedido número 118666, por un total de 28,034.7 miles 
+de pesos, el cual tuvo por objeto la adquisición de sistemas de detección de humo, fuego y 
+voceo, sistema de alerta sísmica, así como un sistema fijo contra incendio, con vigencia del 8 
+de mayo al 31 de diciembre de 2024, en cumplimiento de la normativa.
+Se verificó que el proveedor entregó las pólizas de fianza por el cumplimiento de los 
+servicios; por el anticipo del 30.0% del importe total del pedido y la de responsabilidad civil 
+para protección del equipo encargado de la puesta en marcha de los bienes y servicios 
+12 Artículos 30, 31, 32, 33, 34, segundo párrafo y 49, fracción I de la Norma de Adquisiciones, Arrendamientos y Servicios de 
+la Cámara de Diputados.
+PAGINA 36
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+36
+requeridos; asimismo, se adjuntaron los perfiles del personal encargado de brindar los 
+servicios, en cumplimiento de la normativa.
+De igual forma, se comprobó que los servicios se realizaron a entera satisfacción de la 
+entidad fiscalizada, toda vez que se contó con dos actas de recepción de los servicios, el 
+listado del personal que tuvo acceso al interior de las instalaciones, la constancia de la 
+transferencia de conocimiento al personal de la entidad fiscalizada junto con el certificado 
+de calidad de los bienes instalados, los planos As Built y el manual de operación y 
+mantenimiento en español, en cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con dos Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 28,034.7 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Enforcer Units Fire Service Pluse México, S.A. de C.V. emitió dos 
+Comprobantes Fiscales Digitales por Internet, los cuales, conforme a la consulta realizada en 
+la página electrónica del Servicio de Administración Tributaria (SAT), se encontraron con 
+estatus de vigentes.
+Dicho pago se efectuó mediante dos transferencias bancarias, mismas que fueron 
+verificadas en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+12400, 51200, 51300 y 82711 y con cargo en las partidas presupuestales 2460 “Material 
+eléctrico y electrónico”, 2470 “Artículos metálicos para la construcción”, 2910 
+“Herramientas menores”, 2980 “Refacciones y accesorios menores de maquinaria y otros 
+equipos”, 2990 “Refacciones y accesorios menores de otros bienes muebles”, 3570 
+“Instalación, reparación y mantenimiento de maquinaria, otros equipos y herramienta”, 
+5190 “Otros mobiliarios y equipos de administración”, 5660 “Equipos de generación 
+eléctrica, aparatos y accesorios eléctricos” y 5690 “Otros equipos”, en cumplimiento de la 
+normativa.
+Conclusión
+Se constató que el pedido número 118666, suscrito entre la Cámara de Diputados y el 
+proveedor Enforcer Units Fire Service Pluse México, S.A. de C.V., para la adquisición de 
+sistemas de detección de humo, fuego y voceo, sistema de alerta sísmica, así como un 
+sistema fijo contra incendio, estuvo vigente durante el ejercicio fiscal 2024, por el que se 
+pagaron 28,034.7 miles de pesos. De lo anterior, se proporcionó documentación que 
+acreditó la prestación del servicio y la entrega de los bienes; además, se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros presupuestales y contables del gasto.
+PAGINA 37
+Grupo Funcional Gobierno
+37
+22. Orden de Servicio 118583
+Revisión al procedimiento de contratación
+La Cámara de Diputados, mediante Acuerdo del Comité de Administración, autorizó la 
+actualización del programa anual de adquisiciones, arrendamientos, servicios, obras 
+públicas y servicios relacionados con las mismas para el ejercicio fiscal 2024, en el cual se 
+incluyó la contratación del servicio de acceso a internet, redes y procesamiento de 
+información, por lo que determinó realizar un procedimiento de licitación pública 
+nacional13. 
+Al respecto, se verificó que la Cámara de Diputados, antes del inicio del procedimiento, llevó 
+a cabo la investigación de precios, en cumplimiento de la normativa.
+Por lo anterior, la Cámara de Diputados realizó el procedimiento de Licitación Pública 
+Nacional número HCD/LXV/LPN/16/2024, y de su verificación se comprobó que, en la 
+Octava Sesión Extraordinaria del Comité de Adquisiciones, Arrendamientos, Obras Públicas y 
+Servicios, se autorizaron las bases y anexos de la licitación; y se emitió el fallo mediante el 
+cual se adjudicó el pedido al proveedor Total Play Telecomunicaciones, S.A.P.I. de C.V., en 
+cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 30 de abril de 2024, la Cámara de Diputados suscribió con el proveedor Total Play 
+Telecomunicaciones, S.A.P.I. de C.V., la orden de servicio número 118583, por 2,885.0 miles 
+de pesos, el cual tuvo por objeto contar con el servicio de enlace alterno de Internet, con 
+vigencia del 1 de mayo al 31 de diciembre de 2024, en cumplimiento de la normativa.
+Se verificó que el proveedor entregó la póliza de fianza por el cumplimiento de los servicios; 
+presentó los certificados de la ISO/IEC 20000-1, ISO 9001, ISO 37001, ISO37301 y NOM-017-
+STPS-2008; además, adjuntó los perfiles del ingeniero en sistemas en redes de 
+telecomunicaciones y el listado de los trabajadores de apoyo técnico, de los cuales se 
+comprobó que estuvieron afiliados ante el Instituto Mexicano del Seguro Social, en 
+cumplimiento de la normativa.
+Adicionalmente, se contó con los reportes operativos, de incidencias y de requerimientos, 
+del periodo de mayo a diciembre de 2024, con los que se constató que el proveedor 
+proporcionó los servicios de Enlace alterno de internet de 2 GBPS en configuración en 1+0 
+incluye apoyo técnico y servicio para firewall Checkpoint modelo 15600, que incluye el 
+documento Next Generation Threat Prevention y Apoyo Técnico, por un importe de 2,885.0 
+miles de pesos, en cumplimiento de la normativa.
+13 Artículos 30, 31, 32, 33, 34, segundo párrafo y 49, fracción I de la Norma de Adquisiciones, Arrendamientos y Servicios de 
+la Cámara de Diputados.
+PAGINA 38
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+38
+Revisión del pago a la orden de servicios
+De acuerdo con ocho Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 2,885.0 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Total Play Telecomunicaciones, S.A.P.I. de C.V. emitió ocho 
+Comprobantes Fiscales Digitales por Internet, los cuales, conforme a la consulta realizada en 
+la página electrónica del Servicio de Administración Tributaria (SAT), se encontraron con 
+estatus de vigentes.
+Dicho pago se efectuó mediante ocho transferencias bancarias, mismas que fueron 
+verificadas en los estados de cuenta bancarios presentados como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+51300 y 82711 y con cargo en las partidas presupuestales 3170 “Servicios de acceso a 
+Internet, redes y procesamiento de información” y 3270 “Arrendamiento de activos 
+intangibles”, en cumplimiento de la normativa.
+Conclusión
+Se constató que la orden de servicio número 118583, suscrita entre la Cámara de Diputados 
+y el proveedor Total Play Telecomunicaciones, S.A.P.I. de C.V., para contar con el servicio de 
+enlace alterno de Internet, estuvo vigente durante el ejercicio fiscal 2024, por la que se 
+pagaron 2,885.0 miles de pesos. De lo anterior se proporcionó documentación que acreditó 
+la prestación de servicios; además, se verificó que la documentación comprobatoria se 
+encontraba con estatus de vigente en el portal del SAT y que se realizaron los registros 
+presupuestales y contables del gasto.
+23. Revisión del Pedido 119986
+Revisión al procedimiento de contratación
+El Comité de Administración de la Cámara de Diputados autorizó, mediante un Acuerdo del 
+4 de abril de 2024, la adquisición e instalación de Chiller (equipo de refrigeración), la cual se 
+realizó mediante el procedimiento de licitación pública nacional número 
+HCD/LXV/LPN/22/202414, del que se constató que se llevó a cabo una investigación de 
+mercado; asimismo, se verificó que el Comité de Adquisiciones, Arrendamientos, Obras 
+Públicas y Servicios, en su Décima Quinta Sesión Extraordinaria, autorizó las bases y anexos 
+de la convocatoria; se proporcionó evidencia de la suficiencia presupuestal, las cotizaciones 
+de proveedores, la publicación de las bases de la convocatoria en el Diario Oficial de la 
+Federación y en dos diarios de circulación nacional, de la junta de aclaraciones y la 
+14 Artículos 30, 31, 32, 33, 34, segundo párrafo y 49, fracción I de la Norma de Adquisiciones, Arrendamientos y Servicios de 
+la Cámara de Diputados.
+PAGINA 39
+Grupo Funcional Gobierno
+39
+presentación y apertura de propuestas, la garantía de sostenimiento de propuesta, y la 
+emisión del fallo a favor de la persona moral Motores e Ingeniería MEXMOT, S.A. de C.V., en 
+cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 2 de julio de 2024, la Cámara de Diputados suscribió con el proveedor Motores e 
+Ingeniería MEXMOT, S.A. de C.V. el pedido número 119986, por 12,542.1 miles de pesos, el 
+cual tuvo por objeto la adquisición e instalación de Chiller, con vigencia del 3 de julio al 31 
+de diciembre de 2024, en cumplimiento de la normativa. 
+Para acreditar el cumplimiento del contrato, se contó con un álbum fotográfico que 
+documenta cada etapa de los trabajos realizados, diagramas de la instalación eléctrica y 
+remisiones de los equipos entregados en el almacén; así como evidencia de la transferencia 
+de conocimientos para el uso y operación de los equipos adquiridos para al menos cinco 
+personas de la Cámara de Diputados, la lista del personal que participó en la ejecución de 
+los trabajos contratados, así como copia de su alta ante el Instituto Mexicano del Seguro 
+Social; asimismo, se contó con la carta de garantía para responder por posibles defectos, 
+deficiencias en la calidad, vicios ocultos de los servicios contratados, o cualquier otra 
+responsabilidad en la que hubiese incurrido el proveedor, en cumplimiento de la normativa.
+Revisión del pago al pedido
+De acuerdo con dos Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 12,542.1 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Motores e Ingeniería MEXMOT, S.A. de C.V. emitió dos 
+Comprobantes Fiscales Digitales por Internet, los cuales, conforme a la consulta realizada en 
+la página electrónica del Servicio de Administración Tributaria (SAT), se encontraron con 
+estatus de vigentes.
+Dicho pago se efectuó mediante dos transferencias bancarias, mismas que fueron 
+verificadas en el estado de cuenta bancario presentado como evidencia documental. 
+Asimismo, se comprobó que los pagos se registraron en las cuentas contables números 
+12400, 51300 y 82711 y con cargo en las partidas presupuestales 3570 “Instalación, 
+reparación y mantenimiento de maquinaria, otros equipos y herramienta” y 5640 “Sistemas 
+de aire acondicionado, calefacción y de refrigeración industrial y comercial”, en 
+cumplimiento de la normativa.
+Conclusión 
+Se constató que el pedido número 119986, suscrito entre la Cámara de Diputados y el 
+proveedor Motores e Ingeniería MEXMOT, S.A. de C.V., para la adquisición e instalación de 
+Chiller, estuvo vigente durante el ejercicio fiscal 2024, por el cual se pagaron 12,542.1 miles 
+de pesos. De lo anterior, se proporcionó la documentación que acreditó la prestación del 
+servicio y la entrega de los bienes; además, se verificó que la documentación comprobatoria 
+PAGINA 40
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+40
+se encontraba con estatus de vigente en el portal del SAT y que se realizaron los registros 
+presupuestales y contables del gasto.
+24. Orden de servicio número 116911
+Revisión al procedimiento de contratación
+Mediante alcance al Acuerdo por el que se autorizó el Programa Anual de Adquisiciones, 
+Arrendamientos, Servicios, Obras Públicas y Servicios relacionados con las mismas para el 
+ejercicio fiscal 2024, se autorizó la adquisición del servicio de mantenimiento preventivo y 
+correctivo para el sistema hidroneumático y de bombeo de la red hidráulica de alimentación 
+del Palacio Legislativo, la cual se realizó mediante un procedimiento de licitación pública 
+nacional15. La Cámara de Diputados realizó la investigación de precios y para el inicio del 
+procedimiento de contratación se estableció y autorizó un anticipo de 30.0% del importe 
+máximo a adjudicar, en cumplimiento de la normativa.
+Por lo anterior, la Cámara de Diputados inició el procedimiento de Licitación Pública 
+Nacional número HCD/LXV/LPN/04/2024, cuyas bases y anexos se autorizaron en el Acta de 
+la Cuarta Sesión Extraordinaria del Comité de Adquisiciones, Arrendamientos, Obras 
+Públicas y Servicios; además, se proporcionó evidencia documental, la suficiencia 
+presupuestal, la publicación de las bases de la convocatoria en el Diario Oficial de la 
+Federación; asimismo, se contó con el acta de la junta de aclaraciones, la cotización de 
+cuatro oferentes, el acta de la presentación y apertura de propuestas, el fallo a favor del 
+proveedor Bombas Verticales BNJ, S.A. de C.V., en cumplimiento de la normativa.
+Revisión al cumplimiento del instrumento contractual
+El 16 de febrero de 2024, la Cámara de Diputados suscribió con el proveedor Bombas 
+Verticales BNJ, S.A. de C.V., la orden de servicio 116911, por un mínimo de 2,481.4 miles de 
+pesos y un máximo de 6,203.4 miles de pesos, el cual tuvo por objeto la adquisición del 
+servicio de mantenimiento preventivo y correctivo para el sistema hidroneumático y de 
+bombeo de la red hidráulica de alimentación del Palacio Legislativo, con vigencia del 1 de 
+marzo al 31 de diciembre de 2024, en cumplimiento de la normativa.
+Se verificó que el proveedor proporcionó su currículum vitae para demostrar la experiencia 
+dentro de sus diferentes giros, así como las pruebas de laboratorio, las diferentes 
+certificaciones con las que cuenta y anexo fotográfico de los servicios que se llevaron a 
+cabo. Asimismo, entregó el anexo técnico de los servicios que realizó, así como las pólizas 
+las garantías del anticipo, de cumplimiento y de responsabilidad civil, en cumplimiento de la 
+normativa.
+15 Artículos 30, 31, 32, 33, 34, segundo párrafo y 49, fracción I de la Norma de Adquisiciones, Arrendamientos y Servicios de 
+la Cámara de Diputados.
+PAGINA 41
+Grupo Funcional Gobierno
+41
+El 19 agosto de 2024, la Cámara de Diputados solicitó el incremento del importe del 
+contrato, por lo que el 20 de agosto de 2024 se suscribió un convenio modificatorio por un 
+mínimo de 2,849.3 miles de pesos y un máximo de 7,123.1 miles de pesos, en cumplimiento 
+de la normativa.
+Sobre el particular, se comprobó que el proveedor presentó el endoso de la garantía de 
+cumplimiento y de responsabilidad civil por el incremento del 20.0%.
+En relación con los servicios de mantenimiento preventivo y correctivo para el sistema 
+hidroneumático y de bombeo de la red hidráulica de alimentación del palacio legislativo, se 
+verificó que la Cámara de Diputados expidió diversos oficios de recepción del servicio y 
+contó con las bitácoras de obras, el programa de mantenimiento y evidencia fotográfica, en 
+cumplimiento de la normativa.
+Revisión del pago al contrato
+De acuerdo con 18 Formatos Únicos de Servicios Financieros, se verificó que la Cámara de 
+Diputados pagó 7,120.3 miles de pesos, con cargo al presupuesto del ejercicio fiscal 2024, 
+por lo que el proveedor Bombas Verticales BNJ, S.A. de C.V. emitió 25 Comprobantes 
+Fiscales Digitales por Internet, los cuales, conforme a la consulta realizada en la página 
+electrónica del Servicio de Administración Tributaria (SAT), se encontraron con estatus de 
+vigentes.
+Dicho pago se efectuó mediante 18 transferencias bancarias, mismas que fueron verificadas 
+en los estados de cuenta bancarios presentados como evidencia documental. Asimismo, se 
+comprobó que los pagos se registraron en las cuentas contables números 51300 y 82711 y 
+con cargo en la partida presupuestal 3570 “Instalación, reparación y mantenimiento de 
+maquinaria, otros equipos y herramienta”, en cumplimiento de la normativa.
+Conclusión
+Se constató que la orden de servicio 116911 y un convenio modificatorio, suscritos entre la 
+Cámara de Diputados y Bombas Verticales BNJ, S.A. de C.V., para la adquisición del servicio 
+de mantenimiento preventivo y correctivo para el sistema hidroneumático y de bombeo de 
+la red hidráulica de alimentación del Palacio Legislativo, estuvieron vigentes durante el 
+ejercicio 2024, por el que se pagaron 7,120.3 miles de pesos. De lo anterior, se proporcionó 
+documentación que acreditó la prestación del servicio; además, se verificó que la 
+documentación comprobatoria se encontraba con estatus de vigente en el portal del SAT y 
+que se realizaron los registros presupuestales y contables del gasto.
+25. Verificación física de muestra seleccionada de bienes adquiridos
+Con la revisión del contrato número LXVI-DGAJ-078/2024 y los pedidos números 119986 y 
+118666, mediante los cuales se adquirieron 761 bienes por un total de 46,930.5 miles de 
+pesos, se seleccionó, para su verificación física, una muestra de 26 bienes por un total de 
+PAGINA 42
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+42
+33,583.0 miles de pesos, que representan el 71.6% del valor total de los bienes adquiridos, y 
+que corresponden a un Chiller con capacidad de enfriamiento nominal de 420 T.R.; 18 
+extintores de diferentes capacidades; dos Maestros Hyperscale Orchestrator 140; tres 
+checkpoint; un tablero de control para sistema de detección y supresión de fuego 
+alimentación 120/240 VCA, y un generador de gas frío.
+Sobre el particular, se comprobó que todos los bienes revisados se ubicaron dentro del 
+recinto Legislativo de la Cámara de Diputados; que los números de serie de las facturas 
+emitidas se correspondieron con los de los bienes en revisión; asimismo, se verificó que los 
+bienes cumplieron con las especificaciones requeridas en los anexos técnicos; que se 
+encontraran debidamente etiquetados con su número de inventario y bajo resguardo del 
+personal de la entidad fiscalizada; y finalmente, que se encontraran en uso de las áreas; de 
+lo anterior, se dejó evidencia fotográfica, en cumplimiento de la normativa. 
+En conclusión, de la muestra verificada físicamente de los bienes adquiridos mediante el 
+contrato número LXVI-DGAJ-078/2024 y los pedidos número 119986 y 118666, se comprobó 
+que éstos se corresponden con sus especificaciones y que se encontraron inventariados, en 
+uso y con sus resguardos respectivos.
+26. Con la revisión efectuada a los recursos reportados como pagados por la Cámara de 
+Diputados con cargo a las partidas de gasto 2910 “Herramientas menores” y 3610 “Difusión 
+por radio, televisión y otros medios de mensajes sobre programas y actividades 
+gubernamentales”, se seleccionaron nueve Formatos Únicos de Servicios Financieros por un 
+total de 178,199.8 miles de pesos, que contienen la documentación que soporta la 
+contratación de servicios para la difusión de las acciones derivadas de la conclusión de la 
+LXV Legislatura y diálogos de las reformas constitucionales efectuadas en dicha legislatura, 
+así como la adquisición de equipos para la votación remota de los legisladores.
+Sobre el particular, se comprobó que los servicios y bienes adquiridos fueron autorizados 
+por los órganos de gobierno. De igual forma, la Cámara de Diputados contó con evidencia 
+fotográfica y medición de los servicios de difusión contratados, así como el soporte 
+documental de la entrega de los equipos, en tiempo y forma, en cumplimiento de la 
+normativa.
+Adicionalmente, se comprobó que la entidad fiscalizada contó con los Comprobantes 
+Fiscales Digitales por Internet que emitieron los proveedores a su favor, así como las 
+respectivas transferencias electrónicas que acreditan su pago total de 178,199.8 miles de 
+pesos, los cuales se registraron en las cuentas contables números 51200, 51300 y 82711, en 
+cumplimiento de la normativa.
+En conclusión, se constató que, con cargo en las partidas de gasto 2910 “Herramientas 
+menores” y 3610 “Difusión por radio, televisión y otros medios de mensajes sobre 
+programas y actividades gubernamentales”, la Cámara de Diputados pagó 178,199.8 miles 
+de pesos, correspondientes a distintos bienes y servicios que fueron autorizados por los 
+órganos de gobierno, los cuales se entregaron de acuerdo con lo solicitado.
+PAGINA 43
+Grupo Funcional Gobierno
+43
+Resumen de Resultados, Observaciones, Acciones y Recomendaciones
+Se determinaron 26 resultados, de los cuales, en 26 no se detectaron irregularidades.
+Dictamen 
+El presente dictamen se emite el 10 de octubre de 2025, fecha de conclusión de los trabajos 
+de auditoría, la cual se practicó sobre la información proporcionada por la entidad 
+fiscalizada y de cuya veracidad esta última es responsable. Con base en los resultados 
+obtenidos en la auditoría practicada, cuyo objetivo fue fiscalizar la gestión financiera para 
+verificar que el presupuesto asignado a la Cámara de Diputados del H. Congreso de la Unión 
+se ejerció y registró conforme a los montos aprobados, y de acuerdo con las disposiciones 
+legales y normativas, y específicamente respecto de la muestra revisada que se establece en 
+el apartado relativo al alcance, se concluye que, en términos generales, la Cámara de 
+Diputados cumplió con las disposiciones legales y normativas que son aplicables en la 
+materia.
+Servidores públicos que intervinieron en la auditoría: 
+Director de Área Director General
+C.P. José Manuel Nieto López C.P. Sergio Giovani Rubio Maldonado
+Comentarios de la Entidad Fiscalizada
+La entidad fiscalizada no emitió comentarios con motivo de las reuniones celebradas 
+durante la revisión.
+El Informe de Auditoría puede consultarse en el Sistema Público de Consulta de Auditorías 
+(SPCA).
+La entidad fiscalizada no emitió comentarios con motivo de las reuniones celebradas 
+durante la revisión.
+PAGINA 44
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+44
+Apéndices
+Procedimientos de Auditoría Aplicados
+1. Verificar que la entidad fiscalizada contó con controles internos para las operaciones 
+revisadas y que éstos se aplicaron en cumplimiento a las políticas y los procedimientos 
+autorizados.
+2. Verificar que las cifras presentadas en la Cuenta Pública respecto de la muestra 
+seleccionada para su revisión coincidieron con las reportadas en el Estado del Ejercicio 
+del Presupuesto, y que éstas se encuentran registradas en las partidas de gasto que les 
+corresponde de acuerdo con su naturaleza.
+3. Constatar que las modificaciones del presupuesto original respecto de la muestra 
+seleccionada para su revisión estuvieron respaldadas en los oficios de adecuación 
+presupuestaria y que éstas cumplieron con la normativa.
+4. Verificar que los egresos por servicios personales se autorizaron, determinaron, 
+ejercieron y pagaron en cumplimiento de la normativa.
+5. Verificar de forma selectiva (muestra) que los procedimientos de contratación para la 
+adquisición y arrendamiento de bienes y prestación de servicios se autorizaron y 
+formalizaron en cumplimiento de las disposiciones jurídicas.
+6. Comprobar de forma selectiva (muestra) que la adquisición y arrendamiento de bienes y 
+prestación de servicios contratados se recibieron, ejecutaron y pagaron en cumplimiento 
+con los instrumentos jurídicos respectivos, así como constatar su uso y destino final.
+Áreas Revisadas
+Las direcciones generales de Presupuesto, Contabilidad y Finanzas, de Recursos Humanos, 
+de Recursos Materiales y Servicios, y de Tecnologías de la Información, todas adscritas a la 
+Cámara de Diputados del H. Congreso de la Unión.

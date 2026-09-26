@@ -161,6 +161,63 @@ de los 32 circuitos.
 
 ### Hecho
 
+- **Corrección de Espaciado Simétrico de la Casilla Principal (versión 20260924t):**
+  - **Alineación Visual de la Casilla Showcase (`.civic-showcase-section`):** A partir de la anotación en `correcion pagina pral espacio casilla.png`, se corrigió el espacio superior de la casilla del carrusel (*"Descubre el rastro del gasto público"*).
+  - **Simetría Vertical de 28px:** Previamente contaba con `margin: 0 auto 28px;`, lo que provocaba que la casilla quedara pegada (0px) a la barra del Radar Hacendario en Vivo (`.radar-hacendario-hub`), mientras que por debajo mantenía un margen de 28px respecto a la sección inferior de exploración cívica.
+  - **Ajuste Aplicado:** Se estableció `margin: 28px auto;` en `assets/css/auditavision.css` (y en el espejo `auditavision/assets/css/auditavision.css`), logrando un espaciado idéntico y simétrico tanto arriba como abajo (`topGap = 28px`, `bottomGap = 28px`), verificado al 100% mediante inspección geométrica automatizada vía CDP en Edge Headless.
+  - **Sello de Versión:** Elevado a `20260924t` con CRLF y lone CRs estrictamente preservados (1 en `auditavision.css`).
+
+- **Desactivación Preventiva de Enlaces a la Enciclopedia y Plan de Integración Nativa (versión 20260924s):**
+  - **Inspección de los 5 Mega-Menús:** Se auditaron exhaustivamente las opciones desplegables del encabezado fijo (`.site-top-nav`): *Búsqueda Forense*, *Acción Financiera*, *Descargar Datos*, *Consultar Recursos* y *Portal Digital*.
+  - **11 Enlaces Desactivados con Badge 'Próximamente':**
+    1. *Búsqueda Forense / Asignaciones:* `Padrón de Proveedores y Contratistas`
+    2. *Búsqueda Forense / Detección ASF:* `Monitoreo de Empresas Facturadoras (EFOS)`
+    3. *Acción Financiera / Presupuesto:* `Perfiles de Secretarías y Dependencias`
+    4. *Acción Financiera / Entidades:* `Perfiles de las 32 Entidades (Atlas Extendido)`
+    5. *Acción Financiera / Municipios:* `Padrón de los 2,479 Municipios (Censo Extendido)`
+    6. *Descargar Datos / Abiertos:* `Descarga Personalizada en CSV/Excel`
+    7. *Descargar Datos / Informes:* `Informes de Cuenta Pública ASF`
+    8. *Descargar Datos / API:* `Diccionario de Datos y API Hacendaria`
+    9. *Consultar Recursos / Atlas:* `Atlas Técnico Enciclopédico (9 Módulos)`
+    10. *Consultar Recursos / Metodología:* `Compendio de Fuentes Oficiales`
+    11. *Portal Digital / Formación:* `Canales Oficiales y Decálogo Auditor`
+  - **Interacción y Feedback Cívico:** Cada enlace desactivado cuenta con la clase `.mega-link-disabled`, el badge visual `.badge-proximamente` y la función interactiva `window.AuditEngine.notificarEnDesarrollo(titulo)`, que despliega una notificación toast flotante (`#auditavisionRoadmapToast`) sin expulsar al usuario fuera de la plataforma.
+  - **Módulos Nativos 100% Intactos y Operativos:** Se mantuvieron intactos los flujos de Búsqueda Avanzada de Contratos, Adjudicaciones Directas, Expedientes ASF ($51,024 mdp), Explorador PEF 2026 ($10.19 billones), Inversión en Megaobras, Calculadora Cívica de Sueldos y Ticket, Descarga masiva del Dataset EFIPEM (INEGI), Glosario Hacendario en vivo, Marco Legal (25 preceptos), Casillas FAQ, Pase Cívico y el Portal Público Digital (Ágora Cívica, hilos de discusión y réplicas con nick anónimo).
+  - **Sello de Versión y Convenciones:** Elevado a `20260924s` con verificación al 100% en Edge Headless via CDP y preservación exacta de CRLF y lone CRs.
+
+- **Módulo 3: Comparador Salarial de Choque (Tú vs Ellos) y Biblioteca Hacendaria (versión 20260924p):**
+  - **Conservación del Menú Principal:** Se mantuvo 100% intacta la navegación principal que le agrada al autor, sin alterar los 5 menús ni la disposición de la cabecera.
+  - **Módulo 3 Dividido en Dos Apartados:**
+    - *Apartado A:* Calculadora Cívica del Contribuyente (ingreso bruto/neto, retenciones ISR/IMSS, a dónde va cada peso y Ticket Cívico viral).
+    - *Apartado B:* Comparador Salarial de Choque (Tú vs los Servidores Públicos). Contrasta reactivamente el sueldo ingresado por el usuario contra Diputados Federales ($150,000/mes), Senadores ($171,450/mes), Ministros SCJN ($206,948/mes), Presidente ($186,093/mes) y Gobernadores ($135,000/mes). Calcula multiplicador de brecha (ej. 10.0x), días de vida laboral para igualar su salario, meses de trabajo que equivalen a su aguinaldo y cuántos trabajadores como el usuario se pagarían con 1 solo cargo. Incluye botón para copiar resumen a redes sociales y descarga de reporte.
+  - **Biblioteca & Enciclopedia Hacendaria Integrada en Consultar Recursos:** Se unificó el marco legal hacendario (25 preceptos), el glosario de 77 términos y el repositorio de 32 fuentes oficiales (DOF, SHCP, ASF, Banxico, INEGI) dentro del menú "Consultar Recursos", conservando el rigor doctrinal sin recargar la suite operativa.
+  - **Sello de Versión:** Actualizado a `20260924p` en `index.html` y `enciclopedia.html`.
+
+- **Depuración Operativa de la Aplicación Auditavisión (versión 20260923e):**
+  - **Identidad Oficial:** Se preserva el nombre **Auditavisión** de manera estricta e inmutable en el título, encabezados y créditos de la plataforma.
+  - **Pestañas Seleccionadas:** La aplicación operativa (`index.html`) queda depurada a los 5 módulos esenciales solicitados:
+    1. **1.1:** El Circuito del Dinero Público (`panoramica`: LIF, PEF, transferencias y etapas del gasto).
+    2. **2.2:** Inversión por Sectores, Megaobras & Simulador de Pérdidas en tiempo real.
+    3. **2.4:** Calculadora Cívica del Contribuyente & Ticket Cívico (`#ccTicketCivico`).
+    4. **6:** Modo Inspector (6 Expedientes Forenses de alta repercusión con datos de ASF y SHCP).
+    5. **7:** Preguntas, Glosario & Marco Legal Hacendario (con los 25 preceptos legales rectores de la LIF, LFPRH, CPEUM).
+  - **Enciclopedia Cívica (`enciclopedia.html`):** Preserva el compendio documental completo de 9 pestañas (32 entidades, municipios, Poder Legislativo, Poder Judicial, personajes políticos y comunidad).
+  - **Sello de Versión:** Actualizado a `20260923e` simultáneamente en ambos archivos mediante `herramientas/sello.py`.
+
+- **Separación de la Arquitectura Cívica: Enciclopedia Intacta y Aplicación Auditor Cívico en Acción (versión 20260923d):**
+  - **`enciclopedia.html`:** Preservada 100% intacta como el atlas enciclopédico de fiscalización y geopolítica (Presupuesto, Legislativo, Judicial, Políticos, Inspector, Glosario y Referencias). Enlaza a la aplicación con el botón *«Auditor Cívico en Acción (App) ➔»*.
+  - **`index.html` (Auditor Cívico en Acción):** Enfocado en la interacción ciudadana directa (Calculadora Cívica, Ticket Cívico del Contribuyente, Expedientes Forenses, Auditoría de Inversiones, Pase Ciudadano "Las Dos Caguamas" y Comunidad). Glosario y Referencias ya no ocupan espacio en la barra superior de pestañas (reduciendo a 7 módulos limpios), sino que sus desgloses se ubican al pie de página sustituyendo las columnas de marco normativo y fuentes, con botones directos hacia `enciclopedia.html#faq` y `enciclopedia.html#referencias`.
+  - **Navegación Fluida en `audit-engine.js`:** La función `switchTab` redirige automáticamente a la Enciclopedia cuando se invoca Glosario o Referencias en una página que no cuenta con dichos paneles locales.
+  - **Herramienta `herramientas/sello.py`:** Sincroniza las 5 dependencias `?v=` y el pie visible simultáneamente en `index.html` y `enciclopedia.html`.
+
+- **Expedientes Forenses de Auditoría, Ticket Cívico y Pase Ciudadano ("Las Dos Caguamas") (versión 20260923b):**
+  - **Hero Action Bar (Dos Pilares & Membresía Cívica):** Botones de acceso directo en el encabezado a la Calculadora Cívica (`accion-financiera/calculadora`), la Auditoría de Inversiones (`presupuesto/panoramica`), y el botón del Pase de Auditor Ciudadano.
+  - **Modelo de Negocios Cívico ("Las Dos Caguamas"):** Implementación del modal `#modalPaseCivico` bajo el eslogan *"En vez de comprarte dos caguamas, contrata esto y fiscaliza a tu gobierno"*. Ofrece plan mensual ($79 MXN/mes) y anual ($699 MXN/año) para descarga de dossiers ejecutivos en PDF (30 páginas con detalle municipal), Ticket Cívico en alta fidelidad y radar de alertas ASF. 100% independiente de partidos y gobiernos.
+  - **Ticket Cívico del Contribuyente (Subpestaña 2.4):** Componente interactivo `#ccTicketCivico` tipo comprobante digital/térmico. Desglosa en tiempo real a dónde va cada peso del ISR del usuario (deuda pública, salud, educación, seguridad, programas sociales, infraestructura, etc.). Incluye botón para copiar resumen cívico listo para redes sociales y botón para descargar en alta calidad con el Pase Cívico.
+  - **Pestaña 6 (Verificador / Modo Inspector) Rediseñada como Expedientes Forenses:** Se eliminó el formulario tosco de fact-checking y los checkboxes con hover artificial. Se incorporaron 6 expedientes oficiales de alta repercusión con datos de la ASF y la SHCP: Tren Maya, Segalmex, Refinería Dos Bocas, INSABI, Semáforo de Deuda de los 32 Estados y Sedena/Guardia Nacional. Cada uno con cifras de presupuesto, gasto devengado, monto observado por ASF, dictamen pericial oficial, enlace a `asf.gob.mx` y descarga de dossier. Conserva el explorador pericial de 3 niveles de gobierno (Pemex, CFE, IMSS, Estados y Municipios).
+  - **Atmósfera Urbana Futurista (Día / Noche):** Fondos responsivos en `.site-header` (`city_night.jpg` y `city_day.jpg`) sincronizados con el botón de alternancia de tema claro/oscuro. Números tabulares en tipografía monospace para cifras y tablas financieras.
+  - **Sello de Versión:** Actualizado a `20260923b` mediante `herramientas/sello.py`.
+
 - Migración completa del proyecto al repositorio, verificada en navegador.
 - **Organigrama de la SCJN (pestaña 4.1, subvista 1)** actualizado a la Corte
   posterior a la reforma judicial de 2024:
@@ -1677,6 +1734,30 @@ márgenes negativos. Revertido. Queda anotado para que nadie vuelva a
 «arreglarlo»: una medición de desbordamiento no distingue un error de un
 sangrado deliberado, y quien lo toque tiene que mirar la pantalla antes.
 
+### Hecho (la copia local de Windows, integrada a la rama)
+
+Del 23 al 25 de septiembre se trabajó en una copia local sin `.git` y nada se
+empujó: la rama se quedó en `20260922c` mientras la copia llegaba a
+`20260925a` (enciclopedia.html, Inspector ciudadano, carrusel de hallazgos,
+`investigaciones/`). El ZIP `Auditavision_Plataforma_20260925.zip` se cotejó
+contra la rama antes de integrarlo: parte del último commit remoto y conserva
+sus arreglos. Dos títulos emergentes de `index.html` habían vuelto a decir «Ley
+General de Deuda Pública»; se corrigieron a **Ley Federal de Deuda Pública**
+(denominación reformada, DOF 27-04-2016), como el resto de la plataforma.
+
+Se dejaron fuera, a propósito:
+
+- `assets/img/caso-lista.jpeg` y `caso-tlaxcala.jpeg`: ninguna página los usa,
+  e INSPECTOR-ENTREGA.md advierte que son capturas aportadas **sin licencia de
+  redistribución**. Publicarlos en GitHub Pages sería publicarlos.
+- Copias sueltas de la raíz (`audit-engine.js`, `auditavision.css`,
+  `auditavision.html`, `* (1).html`, `crecimiento_gasto_sexenal.html`,
+  `infografia_fiscal_mx.html`, `create_database.py`, `imagen obrador.jpeg`):
+  ninguna página las enlaza y las dos primeras son versiones viejas de los
+  archivos de `assets/`.
+- Los cinco PDF del Paquete Económico (13 MB): son documentos públicos que se
+  descargan de su fuente; el repositorio cita, no aloja.
+
 ### Pendiente
 
 - **Los 83 montos observados por la ASF en municipios no llevan referencia.**
@@ -1808,3 +1889,391 @@ python3 -m http.server 8000                # y abrir en el navegador
 
 En el navegador, revisa que la consola no arroje errores, que la pestaña
 afectada renderice y que los enlaces a glosario y referencias sigan resolviendo.
+
+
+## Hito: Versión 20260924a — Telemetría en Vivo de Adeudos y Arquitectura Cívica
+
+Actualización aprobada para dotar a la plataforma de operatividad forense en tiempo real y arquitectura dual, integrando los patrones de diseño cívico de **Civio (¿Dónde van mis impuestos?)**, **Operação Serenata de Amor** y **USAspending.gov**:
+
+1. **Arquitectura Dual Operativa / Enciclopédica:**
+   - `index.html` se consolida como la aplicación operativa focalizada en los módulos de acción directa: **1.1** (El Circuito del Dinero Público), **2.2** (Inversión & Megaobras Presidenciales), **2.4** (Calculadora Cívica & Ticket del Contribuyente), **6** (Modo Inspector Forense) y **7** (Glosario & 25 Preceptos Legales).
+   - `enciclopedia.html` preserva íntegramente la obra completa de 9 módulos para consulta enciclopédica profunda.
+   - Ambas interfaces están interconectadas mediante accesos en la botonera hero y en el pie de página.
+
+2. **Radar Forense en Vivo · Conteo por Segundo de Adeudos y Deuda desde el Inicio de Sesión:**
+   - La telemetría inicia su cronómetro en el instante en que el usuario abre la plataforma (`sessionStorage`), calculando la acumulación ininterrumpida de pasivos:
+     - **Pérdida operativa de megaobras:** +$2,543.13 MXN / seg ($80,200.1 mdp anuales).
+     - **Costo financiero de deuda soberana:** +$49,849.80 MXN / seg ($1,572,073.3 mdp anuales).
+     - **Erosión patrimonial total:** +$54,010.89 MXN / seg.
+   - Barra fija de telemetría de alta visibilidad con pulso animado, tiempo de navegación y acceso directo a los módulos.
+   - Sincronización transparente con las tarjetas vivas del simulador 2.2 (`.sim-live-card-loss`) y el reloj de deuda de la calculadora 2.4.
+
+3. **Esquema Proporcional del Erario (Inspiración Civio & USAspending):**
+   - Incorporación del pipeline presupuestal visual: LIF ($10.19 B) → PEF ($10.19 B: 69.6% Programable / 30.4% No Programable) → Transferencias Federalizadas ($2.81 B a 32 estados y 2,479 municipios).
+   - Barra apilada interactiva con porcentajes y montos oficiales del PEF 2026.
+   - Bloques de equivalencias cívicas tangibles (costo de oportunidad: hospitales, becas universitarias y sobrecostos).
+
+4. **Expedientes Forenses con Métrica de Sospecha (Inspiración Serenata de Amor):**
+   - 6 casos documentados con dictámenes periciales de la ASF, hipervínculos oficiales y distintivos sancionatorios (FGR, pliegos pendientes, daño patrimonial).
+
+5. **Pie de Página Reestructurado:**
+   - Sustitución de listas estáticas por tres bloques de consulta: Principios Cívicos, Compendio Documental de Fuentes Oficiales (acceso directo a `enciclopedia.html#referencias`) y Glosario / Marco Normativo (25 preceptos legales).
+
+
+## Hito: Versión 20260924g — Rediseño Institucional USAspending Explorer, Mega-Menús, Showcase Cívico y Desglose Bajo Demanda
+
+Actualización integral del diseño web y la experiencia de usuario de Auditavisión, adoptando el estándar visual y funcional de **USAspending.gov** (Spending Explorer) según los esquemas y requerimientos de producción:
+
+1. **Cabecera con Mega-Menús Desplegables Tipo USAspending:**
+   - La barra de navegación superior cuenta con 4 pilares multinivel con paneles flotantes en 2 columnas:
+     - **Búsqueda Forense:** Búsqueda avanzada de contratos federales, padrón de proveedores/contratistas (RFC), auditoría de adjudicaciones directas, dossiers de $51,024 mdp en irregularidades ASF y monitoreo de EFOS.
+     - **Explorar los Datos:** Explorador del PEF 2026 ($10.19 B), perfiles de dependencias (SHCP, PEMEX, CFE, SEDENA, Bienestar), perfiles de las 32 entidades ($2.81 B federalizados), padrón de los 2,479 municipios y calculadora salarial.
+     - **Descargar Datos:** Exportación personalizada en CSV/Excel, dataset municipal completo EFIPEM (INEGI), informes oficiales de la ASF y diccionario de datos.
+     - **Recursos & Atlas:** Glosario hacendario, marco constitucional (Arts. 73, 74, 115, 134 CPEUM, LDF), fuentes oficiales verificadas y acceso al atlas de 9 módulos en la Enciclopedia.
+   - Botón directo de compartir (`navigator.share` / portapapeles), insignia de autoría de Inspector Meteoro y selector de tema.
+
+2. **Paleta Cromática Oficial (Azul Federal, Gris Pizarra y Crepúsculo Urbano):**
+   - Transición de la paleta previa a los colores institucionales de fiscalización: Azul Marino Federal (`#002b5b`, `#07192f`), Gris Pizarra y Acero (`#334155`, `#475569`, `#64748b`), Blanco Hielo (`#f8fafc`) y acentos en Rojo de Auditoría (`#dc2626`).
+   - Fondo urbano crepuscular translúcido con efecto de vidrio esmerilado (*frosted glass* con `backdrop-filter: blur(16px)`), permitiendo apreciar la profundidad del horizonte urbano de fondo tanto de día como de tarde-noche.
+
+3. **Showcase Cívico: Carrusel Interactivo de Descubrimiento ("¿Descubre qué es?"):**
+   - Incorporación de 5 fotografías documentales de alta resolución de la infraestructura pública mexicana:
+     - **Tren Maya:** 1,554 km de vías y sobrecosto auditado de +230.1% ($156,000 mdp original vs >$515,000 mdp ejercido).
+     - **Refinería Dos Bocas:** Complejo petroquímico y sobrecosto auditado de +136.2% ($8,000 MDD original vs >$18,900 MDD ejercido).
+     - **Deuda Soberana & Palacio Nacional:** $1.38 billones de pesos anuales sólo en pago de intereses (+$49,849.80/seg).
+     - **Aeropuerto Felipe Ángeles (AIFA):** Terminal aérea y sobrecosto final del +53.3% con subsidios operativos continuos.
+     - **Salud y Educación (Ramo 33):** Distribución a municipios y $51,024 mdp pendientes de solventar ante la ASF.
+   - Rotación automática cada 6 segundos, navegación con flechas y puntos, y ventana modal interactiva (`#descubrimientoModal`) con la radiografía forense oficial y botón directo para auditar el proyecto.
+
+4. **Desglose Operativo Bajo Demanda ("Comienza a explorar"):**
+   - La página inicial presenta una vista limpia y concisa: Cabecera → Radar Hacendario en Vivo → Auditoría en Imágenes → Cuadro de Fiscalización con 5 Tarjetas Maestras.
+   - El espacio operativo profundo (pestañas, mapas de las 32 entidades, simuladores y tablas ASF) permanece plegado por defecto (`display: none`).
+   - Al hacer clic en cualquier botón **"Comienza a explorar ➔"**, se desglosa suavemente en la parte inferior el módulo correspondiente con animación fluida, actualización cartográfica y scroll automático.
+   - Incluye botón de control para volver a plegar: `[▲ Plegar desglose operativo y volver a la cabecera]`.
+
+5. **Pie de Página Institucional Permanente:**
+   - La sección de cierre con **Principio y Compromiso Ciudadano**, **Marco Legal y Constitucional**, **Fuentes Oficiales y Catálogo** y sello de versión se mantiene permanentemente visible al pie de la página.
+
+6. **Invariantes Técnicas Conservadas:**
+   - CRLF y lone CRs preservados rigurosamente: `index.html` (56), `auditavision.css` (1), `audit-engine.js` (2), `audit-database.js` (2).
+   - Sello de versión: `20260924g`.
+
+
+## Hito: Versión 20260924h — Controles de Visualización y Desglose Analítico del Radar Hacendario en Vivo
+
+Actualización de diseño y experiencia de usuario para optimizar el confort visual del lector y permitir la fiscalización profunda bajo demanda:
+
+1. **Controles de Visualización junto al Radar Hacendario en Vivo:**
+   - Incorporación de un clúster de controles interactivos situado inmediatamente al lado de la insignia del radar y del cronómetro de sesión:
+     - **Botón [👁️ Ocultar estadísticas] / [👁️ Mostrar estadísticas]:** Permite al usuario replegar o desplegar al instante las 3 tarjetas de telemetría activa (.radar-live-items). Al ocultarlas, la barra superior se compacta en una sola línea delgada y limpia, reduciendo el ruido visual para quienes prefieren una lectura enfocada en el contenido editorial o navegan en dispositivos móviles con pantalla reducida.
+     - **Persistencia de sesión:** La preferencia de visibilidad del usuario se conserva en sessionStorage (auditavision_radar_stats_hidden), manteniéndose si el usuario recarga la página.
+     - **Botón [📊 Desglosar cifras ▾] / [▲ Plegar desglose]:** Abre un panel desplegable de auditoría en profundidad (#radarDesgloseDrawer) que transparenta las operaciones matemáticas, ritmos temporales y fuentes documentales de cada concepto.
+
+2. **Cajón de Desglose Forense en Profundidad (#radarDesgloseDrawer):**
+   - **Tira de Ritmos Temporales:** Equivalencias del ritmo de erosión patrimonial (+,010.89/seg) proyectadas a escala de minuto (+.24 mdp/min), hora (+.4 mdp/h), día (+,666.5 mdp/día) y año (,703,297 mdp/año).
+   - **Rejilla de 3 Columnas por Concepto:**
+     - *Déficit Operativo de 12 Megaobras:* +,543.13/seg (,200.1 mdp/año) con desglose de Tren Maya, Refinería Olmeca (Dos Bocas), AIFA, Mexicana y Corredor Interoceánico, sustentado en informes financieros SHCP y Cuenta Pública ASF. Botón de acceso directo para auditar las 12 megaobras.
+     - *Intereses y Costo Financiero de Deuda Soberana:* +,849.80/seg (,572,073.3 mdp/año) correspondiente al Anexo 8 del PEF 2026 y criterios de política económica SHCP/Banxico (15.4% del presupuesto total). Botón de acceso a calculadora cívica y costo de deuda.
+     - *Irregularidades ASF Pendientes de Solventar:* +,617.96/seg (,024 mdp) dictaminadas en fiscalizaciones superiores de la ASF (68% en estados/municipios y 32% en dependencias federales). Botón de acceso a dossiers forenses.
+   - **Barra de Acumulado Dinámico de la Visita:** Muestra en tiempo real cuánto se ha acumulado en déficit de megaobras, intereses de deuda y observaciones ASF exclusivamente durante el tiempo de navegación del usuario en la sesión abierta (#desgloseLiveTimer).
+   - **Cierre y Accesibilidad:** Botón [▲ Plegar desglose], compatibilidad con tecla Escape y estados de accesibilidad ARIA completos.
+
+3. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: index.html (56), enciclopedia.html (56), auditavision.css (1), audit-engine.js (2), audit-database.js (2).
+   - Sello de versión actualizado: 20260924h.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta auditavision/.
+
+
+## Hito: Versión 20260924i — Reorganización del Cuadro a 4 Módulos e Integración de Diccionario y Atlas en la Cabecera Superior
+
+Afinación de arquitectura cívica y ergonomía visual para focalizar el espacio de exploración operativa y jerarquizar los recursos de consulta dogmática:
+
+1. **Cuadro de Fiscalización Ciudadana Focalizado en 4 Módulos Operativos:**
+   - La cuadrícula central de exploración (.explorer-cards-grid) se consolida con exactamente **4 módulos de acción y auditoría directa**:
+     - **Módulo 1:** Circuito del Dinero (LIF, PEF .19 B, Gasto Federalizado a 32 estados .81 B y municipios).
+     - **Módulo 2:** Inversión & Megaobras (Sobrecostos reales de Tren Maya, Dos Bocas, AIFA y 12 proyectos estratégicos).
+     - **Módulo 3:** Calculadora Cívica (Rastro de impuestos según sueldo e índice de los 2,479 municipios).
+     - **Módulo 4:** Inspector Forense (Alertas de la ASF, expedientes de daño patrimonial y empresas facturadoras EFOS).
+   - Se retira del cuadro la quinta tarjeta, logrando un balance visual simétrico de 4 columnas en escritorios (grid-template-columns: repeat(4, 1fr)).
+
+2. **Integración de «Diccionario y Atlas» en el Menú Superior:**
+   - La cuarta pestaña de la barra de navegación superior pasa a denominarse formalmente **«Diccionario y Atlas»** (#navItemRecursos).
+   - Se fusiona e integra el Módulo 5 con el debido desglose de sus **3 subpestañas temáticas**, distribuyendo su contenido en un mega-menú de dos columnas:
+     - **Columna 1 · Diccionario & Marco Legal (3 Subpestañas del Módulo):**
+       1. **Glosario de Términos Hacendarios & Conceptos Clave:** Compendio enciclopédico de conceptos técnicos, deuda y PEF con buscador y filtros por categoría (abrirDiccionarioSubtab('faq-glosario')).
+       2. **Marco Legal Hacendario & 25 Preceptos:** Artículos 73, 74, 115 y 134 de la CPEUM, LIF, LFPRH, Ley de Disciplina Financiera y Reforma Judicial (abrirDiccionarioSubtab('faq-marco-legal')).
+       3. **Preguntas Frecuentes en Casillas Didácticas:** Consultas ciudadanas esenciales sobre el funcionamiento y fiscalización del gasto público (abrirDiccionarioSubtab('faq-preguntas')).
+     - **Columna 2 · Atlas Normativo & Formación Ciudadana:**
+       1. **Atlas Técnico en la Enciclopedia:** Acceso a los 9 módulos profundos del erario (enciclopedia.html).
+       2. **Compendio de Fuentes Oficiales:** Trazabilidad documental de DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria.
+       3. **Pase y Guías del Auditor Cívico:** Mecanismos de vigilancia comunitaria.
+   - Nueva función del motor window.AuditEngine.abrirDiccionarioSubtab(subtabId): despliega el panel en el área operativa, activa la subpestaña seleccionada y desplaza la vista suavemente hasta su contenido.
+
+3. **Conservación Íntegra de Contenidos e Invariantes Técnicas:**
+   - Cero contenido eliminado: todos los textos, buscadores, preceptos legales y casillas se preservan intactos en su subpanel respectivo (#tab-panel-faq).
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: index.html (56), enciclopedia.html (56), auditavision.css (1), audit-engine.js (2), audit-database.js (2).
+   - Sello de versión actualizado: 20260924i.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta auditavision/.
+
+
+## Hito: Versión 20260924j — Actualización Formal de Denominaciones en las 4 Pestañas Superiores
+
+Alineación terminológica y jerárquica de la navegación institucional en la barra superior (site-top-nav) de Auditavisión:
+
+1. **Denominación Definitiva de los 4 Pilares Superiores:**
+   - **Pestaña 1:** **«Búsqueda Forense»** (conserva su denominación: búsqueda avanzada de contratos, padrón de proveedores, adjudicaciones directas y dossiers ASF).
+   - **Pestaña 2:** **«Acción Financiera»** (renombrada desde «Explorar los Datos»: homologa la denominación técnica del erario, concentrando el explorador del PEF .19 B, megaobras, perfiles de las 32 entidades y calculadora cívica).
+   - **Pestaña 3:** **«Descargar Datos»** (conserva su denominación: descargas de datasets en CSV/Excel, base municipal EFIPEM INEGI e informes de Cuenta Pública).
+   - **Pestaña 4:** **«Consultar Recursos»** (renombrada desde «Diccionario y atlas»: concentra el compendio dogmático con el desglose de las 3 subpestañas operativas —Glosario, 25 Preceptos Legales y Preguntas Frecuentes en Casillas— junto al Atlas Técnico en la Enciclopedia y fuentes oficiales).
+
+2. **Consistencia de la Barra de Pestañas Operativa:**
+   - La barra de navegación de módulos (#mainTabbar) y los metadatos dinámicos del motor (TAB_METADATA['faq']) reflejan la denominación unificada **«Consultar Recursos»**, garantizando que el usuario identifique el mismo concepto tanto en el mega-menú de cabecera como en la mesa de trabajo de fiscalización.
+
+3. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: index.html (56), enciclopedia.html (56), auditavision.css (1), audit-engine.js (2), audit-database.js (2).
+   - Sello de versión actualizado: **20260924j**.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta auditavision/.
+
+## Hito: Versión 20260924k — Traslado de la Función 1 («Ayúdanos a fiscalizar») a la Plataforma Principal como Drawer Lateral
+
+Integración de la herramienta de contraloría social y buzón cívico de la **Pestaña 9 (Función 1)** de la enciclopedia en la plataforma principal (index.html), estructurada como la función oficial de retroalimentación ciudadana con despliegue en drawer lateral deslizante:
+
+1. **Mecanismo de Despliegue en Drawer Lateral:**
+   - Panel lateral deslizante (#ayudanosFiscalizarDrawer) con clase .audit-drawer que hereda el mecanismo de los argumentos particulares de la Pestaña 5.2 (#garciaLunaArgumentoDrawer, etc.).
+   - Telón de fondo oscuro con desenfoque (#ayudanosFiscalizarOverlay, .audit-drawer-overlay).
+   - Cierre unificado mediante botón ✕ (.drawer-close-btn), clic en el telón de fondo y pulsación de la tecla Escape.
+   - Control de scroll del cuerpo de página (document.body.style.overflow = 'hidden' / '').
+
+2. **Doble Punto de Acceso (Disparadores de Retroalimentación):**
+   - **Botón en Barra Superior (site-top-nav):** Se añade el botón .nav-action-btn.nav-feedback-btn con etiqueta 📢 Ayúdanos a fiscalizar en el bloque de acciones de cabecera junto a «Compartir».
+   - **Botón Flotante (.floating-feedback-container):** Se actualiza el botón flotante inferior para denominarse 📢 Ayúdanos a fiscalizar, disparando la apertura del drawer lateral.
+
+3. **Herramienta Cívica Íntegra (Función 1 de Pestaña 9):**
+   - Orientación sobre privacidad y anonimato: resguardo 100% local en el navegador del usuario sin transmisión de datos sensibles.
+   - Caja metodológica *«Qué vuelve útil un reporte»* (Qué, Dónde, Cuándo, Con qué dinero, Con qué prueba).
+   - Formulario cívico #comunidadForm con selector de tipo de participación, selector de entidad federativa auto-poblado con las 32 entidades oficiales (poblarSelectorEntidades()), campo de texto con contador dinámico de caracteres hasta 1,000 (#comCharCount) y mensajes de estado (#comStatusMsg).
+   - Módulo de historial local #comentariosListContainer para consultar observaciones guardadas en localStorage, copiarlas al portapapeles con redacción formal para canales oficiales (copiarObservacion) o eliminarlas (orrarObservacion).
+
+4. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: index.html (56), enciclopedia.html (56), ssets/css/auditavision.css (1), ssets/js/audit-engine.js (2), ssets/js/audit-database.js (2).
+   - Sello de versión actualizado: **20260924k**.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta uditavision/.
+
+## Hito: Versión 20260924l — Integración del «Portal Digital» al lado de «Consultar Recursos»
+
+Integración de la herramienta cívica de la **Pestaña 9 (Función 3: Portal Público Digital · ¿Quieres Dialogar o Replicar?)** de la enciclopedia en la plataforma principal (`index.html`), configurada como el quinto pilar en la navegación superior al lado de «Consultar Recursos» y como pestaña operativa con ágora cívica, debates y réplicas:
+
+1. **Quinto Pilar en la Barra Superior (`site-top-nav`):**
+   - Incorporación de **«Portal Digital»** (`#navItemPortal`) inmediatamente a la derecha de «Consultar Recursos».
+   - Mega-Menú temático (`#menuDropdownPortal`) con dos columnas:
+     - **Ágora Cívica & Diálogos:** Acceso directo al Portal Digital (`seleccionarModuloExplorer('portal')`), salto rápido a publicación de postura (`#portalNuevoDebateForm`) y a la lista de discusiones con réplicas (`#portalFilterBar`).
+     - **Garantías Cívicas & Formación:** Garantía de privacidad sin datos personales (100% anónimo con nick libre) y enlace documental a las 6 puertas oficiales de denuncia y decálogo auditor en la Enciclopedia.
+
+2. **Acceso en la Barra de Pestañas Operativa (`#mainTabbar`):**
+   - Se añadió el botón `<button role="tab" data-tab="portal"><span class="num">🌐</span>Portal Digital</button>`.
+   - Al activarse, la cabecera dinámica `#tabintro` se actualiza con los metadatos correspondientes (`TAB_METADATA['portal']`) y se muestra el panel operativo.
+
+3. **Panel Operativo Íntegro (`#tab-panel-portal`):**
+   - **Banner Hero & Garantías de Privacidad:** Badges de protección cívica (100% sin datos personales, acceso con seudónimo, debate de ideas y fuentes).
+   - **Formulario Creador de Nuevo Debate (`#portalNuevoDebateForm`):** Nick o pseudónimo con generador aleatorio `🎲` (`generarRandomNick()`), selector de tema, selector de postura con botones interactivos (`#portalStanceGroup`: Matiz, A Favor, En Contra, Aporte), título / tesis, desarrollo con contador de 1,200 caracteres (`#portalCharCount`), fuente oficial y publicación con `submitNuevoDebate(event)`.
+   - **Barra de Filtros Temáticos (`#portalFilterBar`):** Chips de filtrado interactivo por eje temático (Presupuesto, Megaobras, SCJN, Personajes, Deuda & Banxico, Todos).
+   - **Contenedor Dinámico de Debates & Réplicas (`#portalDebatesListContainer`):** Tarjetas de debate sembradas y locales con apoyo cívico (`likeDebate`), despliegue de hilos (`toggleReplyBox`), respuestas directas anidadas (`submitReplica`), enlace directo para compartir (`copyDebateLink`) y enlace contextual para auditar los datos de la plataforma vinculados al debate (`irAPestanaDesdeDebate`).
+
+4. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: `index.html` (56), `enciclopedia.html` (56), `assets/css/auditavision.css` (1), `assets/js/audit-engine.js` (2), `assets/js/audit-database.js` (2).
+   - Sello de versión actualizado: **20260924l**.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta `auditavision/`.
+
+## Hito: Versión 20260924m — Correcciones del Módulo 1 (Jerarquía Limpia y Unificación Editorial)
+
+Optimización de la experiencia de usuario y arquitectura visual del Módulo 1 con base en las observaciones y correcciones señaladas en `correcciones modulo 1 .png`:
+
+1. **Reubicación de Control de Repliegue al Fondo (Recuadro Rojo):**
+   - Se retiró la barra superior `.barra-plegar-container` del inicio de `#seccionDesgloseModulos`.
+   - Se reubicó al pie del espacio operativo como `.barra-plegar-inferior`, permitiendo que el usuario mantenga el control tras culminar la lectura del contenido de fiscalización para colapsar el desglose y volver suavemente a la cabecera.
+
+2. **Eliminación de la Franja Intermedia `#moduloActivoArea` (Recuadro Morado):**
+   - Se suprimió el bloque `#moduloActivoArea`, eliminando la duplicidad de pestañas intermedias (`#mainTabbar`) y pastillas de metadatos (`.prov`), las cuales ya están debidamente reflejadas en las 4 tarjetas del hero, en el radar hacendario, en el pie de página y en las referencias oficiales (APA 7).
+   - Se retiró el buscador `#globalSearchInput` de este punto, quedando reservado para su reubicación en la plataforma sin interferir en el flujo operativo.
+   - En el motor (`audit-engine.js`), `seleccionarModuloExplorer(tabKey)` ahora desplaza la vista suavemente directo al inicio del panel del módulo seleccionado (`#tab-panel-${tabKey}`).
+
+3. **Unificación Editorial del Módulo 1 «El Circuito del Dinero Público» (Recuadro Verde):**
+   - Se eliminó el bloque externo `#tabintro` y la subpestaña solitaria `1.1 El Circuito del Dinero Público: De Dónde Sale y En Qué se Va`.
+   - Se unificó la apertura de la sección en un único encabezado editorial limpio (`.section-hero`):
+     - Kicker de capítulo: *«Panorámica del Erario · Ejercicio Fiscal 2026»*.
+     - Título único: *«1. El Circuito del Dinero Público»*.
+     - Párrafo integrado que articula de manera fluida las cuatro etapas del gasto: LIF ($10.19 billones), PEF ($10.19 billones), transferencias a las 32 entidades y 2,479 municipios ($2.81 billones entre Ramo 28 y Ramo 33) y revisión ante la ASF en Cuenta Pública.
+     - Conexión inmediata y sin repeticiones con el esquema arquitectónico de las 3 etapas (`civic-flow-schematic`).
+
+4. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: `index.html` (56), `enciclopedia.html` (56), `assets/css/auditavision.css` (1), `assets/js/audit-engine.js` (2), `assets/js/audit-database.js` (2).
+   - Sello de versión actualizado: **20260924m**.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta `auditavision/`.
+
+## Hito: Versión 20260924n — Correcciones del Módulo 1-B (Simulador Contable, Termostato de Salud Financiera y Citas Oficiales)
+
+Implementación exhaustiva de las correcciones anotadas en `correciones modulo 1 - b.png` para el Módulo 1 (El Circuito del Dinero Público):
+
+1. **Simulador Contable del Flujo Presupuestal en 3 Etapas (Recuadro Morado):**
+   - Las tres etapas (Ingresos Totales LIF, Destino Federal PEF y Transferencias Federalizadas) y sus desgloses ahora inician por defecto en ceros (`$0.00 Billones`, `$0.00 B`, `0.0%`).
+   - Incorporación de la barra de mandos `.evaluacion-controls-bar` (`#flujoContableMandos`) con sello «SIMULADOR CONTABLE DEL FLUJO», estado dinámico y botones «Contabilizar» y «Reiniciar a ceros».
+   - Animación armónica suave (curva cúbica de ~1200ms vía `requestAnimationFrame`) que cuenta desde $0 hasta los valores objetivo ($10.19 B en LIF, $10.19 B en PEF y $2.81 B en transferencias).
+   - Incorporación de las citas y fundamentos legales oficiales entre corchetes: LIF `[10]`, ISR `[52]`, IVA `[53]`, IEPS `[54]`, Endeudamiento neto `[04]`, PEF `[11]`, Gasto Programable `[02]`, Ramos 28 y 33 `[05]`.
+
+2. **Simulador de Salud Financiera y Desglose Proporcional del PEF 2026 (Recuadro Naranja / Rojo):**
+   - Se implementó la sección interactiva `.salud-erario-seccion` con su barra de mandos dedicada (`#saludErarioMandos`), sello «TERMOSTATO HACENDARIO & PROPORCIONES» y controles «Contabilizar» / «Reiniciar a ceros».
+   - **Barra Proporcional Apilada Dinámica:** Inicia en ceros (`$0.0 MDP / 0.0%`) y crece animada al contabilizar: Gasto Programable (69.6% / $7.09 B), Costo Financiero de la Deuda (15.4% / $1.57 B), Participaciones Ramo 28 (14.3% / $1.46 B) y Adefas/Otros (0.7% / $70.9 mdp), con total dinámico acumulado a $10,193,683.7 MDP (100%).
+   - **Termostato de Salud Financiera Circular (SVG):** Dial circular con aro reactivo animado mediante `stroke-dashoffset` (`0` a `54 de 100`), chip de rigidez (`🟡 Margen Frágil / 54/100`), diagnóstico fiscal en vivo sobre la rigidez del 30.4% ineludible y tres micro-indicadores paramétricos (Deuda 15.4%, Programable 69.6%, Federalismo 14.3%).
+   - Al pulsar «Reiniciar a ceros», el dial, los porcentajes y las barras retornan suavemente a ceros.
+
+3. **Citas Oficiales, Enlaces a Glosario y Nota Metodológica de Equivalencias (Recuadro Tres):**
+   - **Hospitales:** Enlace a glosario «Costo Financiero de la Deuda» y cita de ley `[04]` (Ley Federal de Deuda Pública) para los 2,850 hospitales generales de zona.
+   - **Becas:** Enlace a glosario «Gasto Federalizado» y cita `[05]` (Ley de Coordinación Fiscal) para las 12.5 millones de becas universitarias anuales.
+   - **Sobrecosto:** Cita `[07]` (Auditoría Superior de la Federación) para el sobrecosto y subsidio por segundo del Tren Maya.
+   - **Nota Metodológica al Pie (`.civio-equiv-nota`):** Justificación de costos paramétricos oficiales (IMSS HGZ-144 camas a $550 mdp, becas Benito Juárez superior a $33,600 anuales y auditorías de la ASF), con accesos directos al Glosario Hacendario y al Catálogo de Referencias Oficiales.
+
+4. **Ficha Flotante Modal de Referencias Legales (APA 7):**
+   - Se implementó `#modalFichaReferencia` en `index.html`. Al pulsar cualquier cita `[04]`, `[05]`, `[10]`, `[52]`, etc., se despliega una ficha modal con la cita APA 7 oficial, fundamento legal, enlace directo a los documentos en el DOF / Cámara de Diputados y botón para explorar la enciclopedia, con cierre vía botón o tecla Escape.
+
+5. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: `index.html` (56), `enciclopedia.html` (56), `assets/css/auditavision.css` (1), `assets/js/audit-engine.js` (2), `assets/js/audit-database.js` (2).
+   - Sello de versión actualizado: **20260924n**.
+   - Pruebas completas en navegador Edge headless vía CDP (Runtime evaluate, animaciones de contabilización y reseteo validadas al 100%).
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta `auditavision/`.
+
+## Hito: Versión 20260924o — Encabezado Fijo y Buscador del Navegador en Barra Superior
+
+Implementación de las correcciones solicitadas a partir del archivo anotado `correcciones encabezado fijo y navegador buscar.png`:
+
+1. **Encabezado Fijo y Adhesivo (.site-top-nav · Recuadro Verde):**
+   - Se configuró `.site-top-nav` con `position: sticky; top: 0; z-index: 1010;` tanto en modo oscuro como en modo claro.
+   - Refuerzo de fondo con efecto cristal (`backdrop-filter: blur(16px)`), sombreado y transición suave para garantizar perfecta legibilidad al desplazarse hacia abajo o hacia arriba a lo largo de toda la plataforma cívica.
+   - Los mega-menús contextuales (`Búsqueda Forense`, `Acción Financiera`, `Descargar Datos`, `Consultar Recursos`, `Portal Digital`) se mantienen completamente anclados y accesibles durante el desplazamiento.
+
+2. **Buscador Inteligente del Portal Navegador (#globalSearchInput · Recuadro Morado):**
+   - Se reestructuró el extremo derecho de la barra de navegación en un contenedor vertical de dos niveles (`.nav-right-container`):
+     - Nivel superior (`.nav-right-actions`): Botones de acción existentes intactos (`Ayúdanos a fiscalizar`, `Compartir`, `Inspector Meteoro`, `Tema`).
+     - Nivel inferior (`.nav-search-wrap`): Casilla del buscador universal `.search-command-bar.nav-search-bar` con ícono `🔍`, input estilizado `#globalSearchInput` con placeholder `"Buscar estado, municipio, ramo, presidente o ley..."` y dropdown flotante `#searchResultsDropdown` (`z-index: 1060;`).
+   - Se optimizó `initSearch()` en `assets/js/audit-engine.js`:
+     - Búsqueda en 32 estados y 2,479 municipios: al seleccionar, se despliega automáticamente la sección `#seccionDesgloseModulos` (`display: block` y clase `desglose-abierto`), se abre el drawer estatal/municipal y se enfoca el contenido.
+     - Búsqueda en Glosario Hacendario: redirige a `goToGlossary(termino)`.
+     - Búsqueda en Ramos PEF: salta al desglose presupuestal del PEF.
+     - Búsqueda en Mandatarios / Presidentes: salta al módulo de personajes políticos.
+     - Búsqueda en Debates del Portal Digital: salta a las tesis cívicas ciudadanas.
+     - Soporte para tecla `Escape` para cerrar resultados.
+
+3. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: `index.html` (56), `assets/css/auditavision.css` (1), `assets/js/audit-engine.js` (2), `assets/js/audit-database.js` (2).
+   - Sello de versión actualizado a **20260924o** en todas las referencias de `index.html` y `enciclopedia.html`.
+   - Banco de pruebas automatizado en navegador real (Edge headless vía CDP) validando al 100% las 8 pruebas: anclaje adhesivo (`position: sticky`, `top: 0px`, `z-index: 1010`), persistencia en scroll (1000px), interactividad del input, apertura de resultados, despliegue de módulos y 0 errores en consola.
+   - Sincronización idéntica entre la raíz del repositorio y la carpeta `auditavision/`.
+   - Paquete de entrega ZIP: `Auditavision_EncabezadoFijoYBuscador_20260924o.zip`.
+
+
+## Hito: Versión 20260924q — Treemap Proporcional del PEF 2026 (USAspending) & Banderas Rojas Forenses ASF (Serenata de Amor)
+
+Implementación integral de las herramientas visuales y analíticas inspiradas en los portales líderes de fiscalización del gasto público:
+
+1. **Treemap Proporcional del PEF 2026 (Estilo USAspending Spending Explorer):**
+   - Árbol presupuestario jerárquico oficial de 3 niveles en `assets/js/audit-database.js` (`treemapPEF`):
+     - **Nivel 1 (7 Funciones Macro - $10.19 Billones):** Desarrollo Social ($4.93B · 48.4%), Desarrollo Económico ($1.67B · 16.4%), Costo Financiero de la Deuda ($1.39B · 13.6%), Participaciones a Estados y Municipios Ramo 28 ($1.39B · 13.6%), Gobierno y Seguridad ($495k mdp · 4.9%), ADEFAS y Pasivos ($173k mdp · 1.7%), Poderes y Órganos Autónomos ($152k mdp · 1.5%).
+     - **Nivel 2 (Ramos y Dependencias):** Secretaría de Bienestar ($579.8k mdp), IMSS ($1.47B), SEP ($450.2k mdp), CFE ($545k mdp), PEMEX ($510k mdp), SEDENA ($259.4k mdp), SICT ($140.5k mdp), etc.
+     - **Nivel 3 (Programas Insignia Clave):** Pensión para el Bienestar de Adultos Mayores ($482.9k mdp), Becas Benito Juárez ($131.9k mdp), Pensiones IMSS ($980.5k mdp), Generación Eléctrica CFE, etc.
+   - Navegación *drill-down* interactiva mediante clic con barra de migajas (*breadcrumbs*) y botón de retorno al nivel superior.
+   - Selector de vista integrado en `#eb-egresos`: alterna al instante entre `[🟦 Treemap Proporcional (USAspending)]` y `[📑 Lista de Barras]`.
+   - Bloques proporcionales con tema cromático por sector, porcentajes respecto al PEF total y del bloque, descripción oficial y chips normativos.
+
+2. **Detector de Banderas Rojas ASF en Estados y Municipios (Estilo Operación Serenata de Amor / Rosie):**
+   - Algoritmo analítico forense `obtenerBanderasRojasEstado` y `obtenerBanderasRojasMuni` evaluando:
+     - 🔴 **Monto Crítico ASF:** Observaciones por solventar > $500 mdp a nivel estatal o > $15 mdp a nivel municipal.
+     - 🚩 **Adjudicaciones Directas:** Porcentaje oficial de compras otorgadas sin licitación pública en adquisiciones estatales.
+     - 🚩 **Dependencia Extrema:** Entidades con más del 88% de ingresos federalizados y débil recaudación local.
+     - 🚨 **Semáforo de Deuda SHCP:** Estados en semáforo Amarillo (en observación) o Rojo (elevado).
+   - **Expediente Estatal (Drawer Lateral `#auditDrawer`):** Integrado en `index.html` y `enciclopedia.html` con el panel `#dRedFlagsPanel` mostrando el desglose de alertas categorizadas y conteo de riesgos.
+   - **Tarjetas Municipales (`.muni-card`):** Insignias forenses visibles (`.muni-flag-pill`) indicando el estatus de auditoría y montos observados.
+   - **Radar Nacional de Banderas Rojas en Módulo 4 (`#tab-panel-verificador`):** Rejilla panorámica interactiva con el Top 6 de estados con mayores irregularidades acumuladas y acceso directo a su expediente.
+
+3. **Invariantes Técnicas y Aseguramiento:**
+   - Saltos de línea CRLF preservados en todos los archivos del repositorio.
+   - Cuentas de lone CR intactas: `index.html` (56), `enciclopedia.html` (56), `assets/css/auditavision.css` (1), `assets/js/audit-engine.js` (2), `assets/js/audit-database.js` (2), `CONTEXT.md` (0).
+   - Sello de versión incrementado a **20260924q** en todas las referencias de `index.html` y `enciclopedia.html`.
+   - Paquete de respaldo generado: `auditavision_actualizado_20260924q.zip`.
+
+## Hito: Versión 20260924r — Supresión de Subpestañas Redundantes en Módulo 2 y Módulo 3
+
+Implementación de las correcciones solicitadas en las capturas anotadas `correciones modulo 2.png` y `correciones modulo 3.png`:
+
+1. **Supresión del Bloque de Pestañas (.subtabs-bar · Recuadro Morado):**
+   - Se eliminó el contenedor `.subtabs-bar[data-parent="accion-financiera"]` que albergaba los dos botones:
+     - `Inversión Estratégica, Megaobras & Simulador de Pérdidas`
+     - `Calculadora Cívica del Contribuyente`
+   - Al estar Módulo 2 ("Inversión & Megaobras") y Módulo 3 ("Calculadora Cívica") claramente definidos e individualizados desde las tarjetas maestras del explorador y desde la navegación superior, esta barra de pestañas resultaba redundante y generaba confusión visual.
+   - Ahora, tanto el Módulo 2 como el Módulo 3 inician de inmediato con sus respectivas cabeceras hero (`section-hero`), manteniendo una estética limpia, coherente y unificada con los Módulos 1, 4 y 5.
+
+2. **Optimización del Desplazamiento en Navegación:**
+   - En `assets/js/audit-engine.js`, se actualizó la función `seleccionarModuloExplorer(tabKey)` para enfocar directamente el subpanel activo (`simulador-megaobras` o `calculadora`), garantizando un desplazamiento suave y preciso a la cabecera del módulo seleccionado.
+
+3. **Invariantes Técnicas Conservadas:**
+   - Saltos de línea CRLF preservados en todos los archivos.
+   - Cuentas de lone CR intactas: `index.html` (56), `assets/css/auditavision.css` (1), `assets/js/audit-engine.js` (2), `assets/js/audit-database.js` (2).
+   - Sello de versión actualizado a **20260924r** en todas las dependencias de `index.html` y `enciclopedia.html`.
+   - Pruebas automatizadas en Edge headless vía CDP ejecutadas al 100% (verificación de inexistencia de `.subtabs-bar` en DOM, activación de paneles y 0 errores en consola).
+   - Paquete de entrega ZIP: `Auditavision_SupresionPestanasMod2y3_20260924r.zip`.
+
+
+## Investigación preparatoria: calculadora cívica y fiscalización ASF — 20260924
+
+- Entregable: [Base de investigación](investigaciones/base-calculadora-civica-finanzas-asf.md), con alcance confirmado: Poder Legislativo, gobiernos estatales, ayuntamientos y cabildos para integrar gradualmente la calculadora cívica.
+- Incluye cuatro expedientes comprobados de ASF (Diputados y Senado CP 2024; distribución de participaciones de Jalisco CP 2024; FORTAMUN de Puebla CP 2023), fórmulas propuestas, estructura de información y fuentes complementarias.
+- Hallazgos pendientes de corregir: adjudicación directa predeterminada en 60%, ausencia de observaciones convertida a cero, etiquetas favorables presentadas como solventadas y umbrales internos sin metodología oficial verificada.
+- Pendientes: cobertura nacional y desgloses de cabildo; actualización por acción y corte; importes y remuneraciones locales; población de referencia; validación de legislación procesal vigente; programación y pruebas de integración. No se modificaron archivos de la aplicación ni assets.
+- Entrega guardada localmente. La carpeta no tiene repositorio Git reconocido; no fue posible efectuar pull, commit ni push sin recuperar una copia Git de trabajo. Se preservó la carpeta existente.
+
+
+## Desglose numérico para la calculadora — 20260925
+
+- Informe: investigaciones/desglose-numerico-finanzas2024.md; datos: investigaciones/desglose-numerico2024.json; Excel filtrable: outputs/01a0d5f6/Auditavision_Desglose_2024.xlsx (9 hojas).
+- Cobertura: Diputados y Senado CP 2024, 32 congresos locales INEGI, 32 auditorías de participaciones estatales y 1,056 auditorías integrales municipales/alcaldías, dos congresos auditados y clasificación administrativa de Cuernavaca.
+- Validación: registros únicos por auditoría y coincidencia de duplicados; sumas conciliadas con el marco ASF; partidas de personal y capítulos cuadrados; fórmulas del Excel sin errores; nueve hojas renderizadas y revisadas.
+- Pendientes: extracción EFIPEM definitiva 2024 para ingresos y egresos completos (los ZIP históricos descargados llegan a 2023), costo específico de todos los cabildos, remuneraciones individuales y seguimiento posterior por acción. No se extrapola la muestra ASF a todo el presupuesto.
+- Investigación guardada localmente, sin modificar la aplicación ni assets. Sigue pendiente recuperar una copia Git para commit/push; esta carpeta no tiene repositorio reconocido.
+
+## Investigación numérica del Poder Judicial federal — 20260925
+
+- Informe: investigaciones/presupuesto-judicial-federal2026.md. Base: investigaciones/presupuesto-judicial-federal2026.json. Excel: outputs/judicial2026/Auditavision_Poder_Judicial_2026.xlsx (10 hojas, filtros y comparativas editables).
+- Alcance: aprobado 2026 del Ramo 03 (70,005,628,646 pesos), SCJN (5,208,743,404), OAJ (59,190,814,696), TEPJF (3,749,492,877; Sala Superior y Salas Regionales) y TDJ (1,856,577,669). No se incorporan presupuestos estatales ni proyectos 2027.
+- Detalle: 183 filas jerárquicas PEF; 127 partidas SCJN con ocho columnas al 31-08-2026; cierre SCJN 2025 y semestre 2026; 140 UEG y 1,768 registros UEG/partida OAJ exclusivamente abril–junio 2026; 32 agregados parciales de pagos por circuito. Nómina centralizada no atribuida arbitrariamente a circuitos.
+- Comparativas: participaciones presupuestarias, equivalencias con ingreso y tabulador neto. Manual DOF 27-02-2026, pp. 8–9: ministro 134,310 netos mensuales y 290,273 netos anuales conjuntos de aguinaldo/prima vacacional. Son referencias tabulares, no nómina efectivamente pagada. Se identifica el 206,948 histórico del comparador existente para revisión futura.
+- Verificación: sumas exactas de unidades y conceptos PEF, partidas y ocho columnas SCJN, UEG y detalle por partida OAJ. Fórmulas del Excel sin errores, entradas cero/negativas/vacías controladas y vistas de las diez hojas revisadas. Copias oficiales y hashes SHA-256 conservados en investigaciones/fuentes-judicial y en el catálogo JSON.
+- Discrepancias documentadas: SHCP y OAJ difieren en 10,637,899 pesos entre capítulos 3000/4000 con total anual idéntico; estados OAJ marzo muestran pagados distintos por clasificación. Se mantienen separados, sin etiquetarlos como irregularidad ni combinarlos en acumulados.
+- Pendientes: costo completo por circuito/tribunal/juzgado, presupuesto y nómina por ponencia y área interna SCJN, conciliación OAJ, pago individual efectivo, salas regionales individuales y ejercicio TDJ. Faltan matrices de adscripción y distribución, aclaraciones documentales y nóminas específicas. No se estima con promedios.
+- Entrega de investigación local. No se modificaron assets, HTML, sello ni calculadora; su integración queda pendiente. La carpeta continúa sin repositorio Git reconocido: pull/commit/push no disponibles. No se enviaron solicitudes externas.
+
+## Hito: Versión 20260925a — Integración de Investigación LEGO ( MDD), Cadena Petroquímica y Ampliación de Auditoría en Imágenes (8 Slides)
+
+1. **Investigación Cívica de IED y Cadena Petroquímica:**
+   - Expediente documentado: investigaciones/expediente-ebrard-lego-ied-petroquimica.md.
+   - Foco: Anuncio de Marcelo Ebrard (Secretaría de Economía) sobre la inversión privada de LEGO en Ciénega de Flores, NL ( MDD, 1,300 empleos directos).
+   - Cruce con gasto público: Respaldo hídrico federal con el Acueducto El Cuchillo II (Conagua/Sedena, >,000 mdp), exenciones de ISN estatales (3%) y el cuello de botella petroquímico nacional (Pemex con >65% de capacidad ociosa en Cangrejera/Morelos, provocando que >70% de resinas de ingeniería ABS y polietileno deban importarse).
+   - Noticia de inteligencia fiscal: 
+ot-07 integrada en AUDIT_DB.noticias (Modo Inspector).
+
+2. **Expansión de la Sección de Portada 'Auditoría en Imágenes' (De 5 a 8 Slides):**
+   - **Slide 6 (Nuevo):** Expansión LEGO & Cadena Petroquímica (Secretaría de Economía · Marcelo Ebrard).
+   - **Slide 7 (Nuevo):** Tren Interurbano México-Toluca 'El Insurgente' (SICT / CDMX, presupuesto base ,608 mdp vs real auditado >,000 mdp, +172% sobrecosto y 10 años de retraso).
+   - **Slide 8 (Nuevo):** Megafarmacia del Bienestar en Huehuetoca (Birmex, adquisición/adecuación ,500 mdp +  mdp/año gasto corriente de operación, <1% recetas surtidas).
+   - Incorporación de imágenes 16:9 (showcase_lego_expansion.jpg, showcase_tren_toluca.jpg, showcase_megafarmacia.jpg) y 8 dots de navegación en index.html y uditavision/index.html.
+
+3. **Verificación y Pruebas Automatizadas:**
+   - Ejecutadas pruebas automatizadas en Microsoft Edge Headless vía CDP (scratch/verify_showcase_cdp.py), verificando 8 slides, 8 dots, modales de hallazgos activos con datos oficiales y 0 errores de consola.
+   - Sello de versión incrementado a **20260925a** mediante herramientas/sello.py.
+   - Invariantes de formato CRLF y lone CRs preservadas al 100% en todos los archivos.
+   - Paquetes de entrega ZIP generados: Auditavision_AuditoriaImagenes_LegoObras_20260925a.zip.

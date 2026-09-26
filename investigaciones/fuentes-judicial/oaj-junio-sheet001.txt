@@ -1,0 +1,21 @@
+Bitmap
+ |  |  |  |  |  | SECRETARÍA EJECUTIVA DE ADMINISTRACIÓN | 
+ |  |  |  |  |  | DIRECCIÓN GENERAL DE PROGRAMACIÓN, PRESUPUESTO Y TESORERÍA | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  | Presupuesto de Egresos 2026 | 
+Bitmap
+ |  |  |  |  |  |  | 
+ | ÓRGANO DE   ADMINISTRACIÓN JUDICIAL |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  | Cifras en pesos |  | 
+ | CAPÍTULO | CONCEPTO | PRESUPUESTO ASIGNADO   ANUAL 2026 | PRESUPUESTO     ASIGNADO | PAGADO |  | 
+ | (01/04/26 al 30/06/26) | (01/04/26 al 30/06/26) |  | 
+ | 1000 | SERVICIOS   PERSONALES | 53,562,949,305.00 | 13,724,140,940.00 | 12,806,170,765.02 |  | 
+ | 2000 | MATERIALES   Y SUMINISTROS | 549,744,012.00 | 177,508,929.00 | 197,114,519.57 |  | 
+ | 3000 | SERVICIOS   GENERALES | 5,040,717,363.00 | 1,371,654,342.00 | 970,480,484.54 |  | 
+ | 4000 | TRANSFERENCIAS,   ASIGNACIONES, SUBSIDIOS Y OTRAS AYUDAS | 37,404,016.00 | 8,447,123.00 | 3,617,154.97 |  | 
+ | 5000 | BIENES   MUEBLES, INMUEBLES E INTANGIBLES | 0.00 | 0.00 | 17,435.52 |  | 
+ | 6000 | INVERSIÓN   PÚBLICA | 0.00 | 0.00 | 0.00 |  | 
+ | TOTAL |  | 59,190,814,696.00 | 15,281,751,334.00 | 13,977,400,359.62 |  | 
+ |  |  |  |  |  |  | 
+ |  |  |  |  |  |  | 

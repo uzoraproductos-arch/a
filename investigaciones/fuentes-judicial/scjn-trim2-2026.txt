@@ -1,0 +1,233 @@
+PAGINA 1
+SUPREMA CORTE DE JUSTICIA DE LA NACIÓN
+Estado Analítico del Ejercicio del Presupuesto de Egresos
+Clasificación por Objeto del Gasto (Capítulo y Concepto)
+Del 1 de Enero al 30 de Junio 2026
+(Pesos)
+EGRESOS
+Ampliaciones / Subejercicio
+CONCEPTO Aprobado Modificado Devengado Pagado
+(Reducciones)
+1 2 3=(1+2) 4 5 6=(3-4)
+Servicios personales 4,289,319,105 0 4,289,319,105 2,169,374,535 1,875,481,661
+1100000Remuneraciones al Personal de Carácter Permanente 736,636,097 93,065,283 829,701,380 437,111,984 437,111,984
+1200000Remuneraciones al Personal de Carácter Transitorio 21,334,036 6,937,681 28,271,717 12,428,230 12,428,230
+1300000Remuneraciones Adicionales y Especiales 473,146,529 -59,715,520 413,431,009 191,366,382 23,729,223
+1400000Seguridad Social 646,108,230 -45,765,470 600,342,760 357,964,725 314,397,205
+1500000Otras Prestaciones Sociales y Económicas 2,412,094,213 5,478,027 2,417,572,240 1,170,503,213 1,087,815,018
+1600000Previsiones 0 0 0 0 0
+1700000Pago de Estímulos a Servidores Públicos 0 0 0 0 0
+Materiales y Suministros 67,002,322 1,762,389 68,764,711 19,200,927 16,545,316
+2100000Materiales de Administración, Emisión de Documentos y Artículos Oficiales 11,089,213 2,260,125 13,349,338 2,592,160 2,548,151
+2200000Alimentos y Utensilios 38,336,030 -2,071,713 36,264,317 13,717,524 11,486,121
+2300000Materias Primas y Materiales de Producción y Comercialización 0 0 0 0 0
+2400000Materiales y Artículos de Construcción y de Reparación 3,171,143 1,422,387 4,593,530 559,741 559,741
+2500000Productos Químicos, Farmacéuticos y de Laboratorio 1,437,318 -21,382 1,415,936 72,278 72,278
+2600000Combustibles, Lubricantes y Aditivos 7,936,264 -102,756 7,833,508 1,834,630 1,454,431
+2700000Vestuario, Blancos, Prendas de Protección y Artículos Deportivos 2,593,089 -17,918 2,575,171 12,570 12,570
+2800000Materiales y Suministros Para Seguridad 0 0 0 0 0
+2900000Herramientas, Refacciones y Accesorios Menores 2,439,265 293,647 2,732,912 412,023 412,023
+Servicios Generales 825,658,834 -2,290,418 823,368,416 314,786,427 208,901,861
+3100000Servicios Básicos 166,962,665 -1,068,434 165,894,231 79,444,303 48,722,437
+3200000Servicios de Arrendamiento 149,220,658 -6,590,878 142,629,780 41,439,427 29,539,961
+3300000Servicios Profesionales, Científicos, Técnicos y Otros Servicios 226,727,587 8,185,398 234,912,985 103,636,274 53,983,557
+3400000Servicios Financieros, Bancarios y Comerciales 27,381,786 -4,105,479 23,276,307 5,106,078 5,098,993
+3500000Servicios de Instalación, Reparación, Mantenimiento y Conservación 124,265,584 -222,874 124,042,710 20,588,015 15,531,179
+3600000Servicios de Comunicación Social y Publicidad 3,650,000 -880,078 2,769,922 114,488 114,488
+3700000Servicios de Traslado y Viáticos 6,288,806 760,898 7,049,704 4,148,749 3,699,660
+3800000Servicios Oficiales 3,522,731 1,632,293 5,155,024 1,850,886 1,850,886
+3900000Otros Servicios Generales 117,639,017 -1,263 117,637,754 58,458,206 50,360,701
+Transferencias, Asignaciones, Subsidios y Otras Ayudas 17,262,862 -599,740 16,663,122 316,350 316,350
+Transferencias Internas y Asignaciones al Sector Público 0 0 0 0 0
+Transferencias al Resto del Sector Publico Subsidios y Subvenciones 6,669,961 0 6,669,961 0 0
+4400000Ayudas Sociales 10,592,901 -599,740 9,993,161 316,350 316,350
+4500000Pensiones y Jubilaciones 0 0 0 0 0
+4600000Transferencias a Fideicomisos, Mandatos y Otros Análogos 0 0 0 0 0
+Transferencias a la Seguridad Social 0 0 0 0 0
+4800000Donativos 0 0 0 0 0
+4900000Transferencias al Exterior 0 0 0 0 0
+Bienes Muebles, Inmuebles e Intangibles 5,500,281 1,127,768 6,628,049 13,340 13,340
+5100000Mobiliario y Equipo de Administración 3,840,281 1,077,768 4,918,049 13,340 13,340
+5200000Mobiliario y Equipo Educacional y Recreativo 210,000 0 210,000 0 0
+5300000Equipo e Instrumental Médico y de Laboratorio 0 0 0 0 0
+5400000Vehículos y Equipo de Transporte 0 0 0 0 0
+5500000Equipo de Defensa y Seguridad 0 0 0 0 0
+5600000Maquinaria, Otros Equipos y Herramientas 1,450,000 50,000 1,500,000 0 0
+5700000Activos Biológicos 0 0 0 0 0
+5800000Bienes Inmuebles 0 0 0 0 0
+5900000Activos Intangibles 0 0 0 0 0
+Inversión Pública 4,000,000 0 4,000,000 0 0
+6100000Obra Pública en Bienes de Dominio Público 0 0 0 0 0
+6200000Obra Pública en Bienes Propios 4,000,000 0 4,000,000 0 0
+Proyectos Productivos y Acciones de Fomento 0 0 0 0 0
+Inversiones Financieras y Otras Provisiones 0 0 0 0 0
+Inversiones para el Fomento de Actividades Productivas 0 0 0 0 0
+Acciones y Participaciones de Capital 0 0 0 0 0
+Compra de Títulos y Valores 0 0 0 0 0
+Concesión de Préstamos 0 0 0 0 0
+Inversiones en Fideicomisos, Mandatos y Otros Análogos 0 0 0 0 0
+Otras Inversiones Financieras 0 0 0 0 0
+Provisiones para Contingencias y Otras Erogaciones Especiales 0 0 0 0 0
+Participaciones y Aportaciones 0 0 0 0 0
+Participaciones 0 0 0 0 0
+Aportaciones 0 0 0 0 0
+Convenios 0 0 0 0 0
+Deuda Pública 0 0 0 0 0
+Amortización de la Deuda Pública 0 0 0 0 0
+Intereses de la Deuda Pública 0 0 0 0 0
+Comisiones de la Deuda Pública 0 0 0 0 0
+Gastos de la Deuda Pública 0 0 0 0 0
+Costo por Coberturas 0 0 0 0 0
+Apoyos Financieros 0 0 0 0 0
+Adeudos de Ejercicios Fiscales Anteriores (Adefas) 0 0 0 0 0
+######## Total del Egreso 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Fundamento:DiarioOficialdelaFederacióndel30deseptiembrede2015,AcuerdoporelqueseReformayAdicionaelCapítuloVIIdelosEstadoseInformesContables,Presupuestarios,Programáticosydelos
+Indicadores de Postura Fiscal y el Anexo 1 Matrices de Conversión del Manual de Contabilidad Gubernamental.
+ElCriterio18correspondientealSubejercicio,seencuentravinculadoalosartículos5,fracc.Iy54,tercerpárrafo,delaLeyFederaldePresupuestoyResponsabilidadHacendaria,queestablecenque,entre
+otros,losÓrganosdelPoderJudicialdelaFederación,tienenlaobligacióndereintegraralaTesoreríadelaFederacióndentrodelos15díasnaturalessiguientesalcierredelejercicio,losrecursosdisponibles
+queporcualquiermotivoal31dediciembreconserven,incluyendolosrendimientosobtenidos.Entalsentido,elimportecorrespondienteaesteCriterio,delaSupremaCortedeJusticiadelaNación,sepresenta
+en el cuarto trimestre de cada ejercicio fiscal.
+1/ Las sumas parciales y total pueden no coincidir debido al redondeo.
+PAGINA 2
+SUPREMA CORTE DE JUSTICIA DE LA NACIÓN
+Estado Analítico del Ejercicio del Presupuesto de Egresos
+Clasificación Económica (por Tipo de Gasto)
+Del 1 de Enero al 30 de Junio 2026
+(Pesos)
+EGRESOS
+Ampliaciones / Subejercicio
+CONCEPTO Aprobado Modificado Devengado Pagado
+(Reducciones)
+1 2 3=(1+2) 4 5 6=(3-4)
+1Gasto Corriente 5,199,243,123 -1,127,768 5,198,115,355 2,503,678,239 2,101,245,187
+2Gasto de Capital 9,500,281 1,127,768 10,628,049 13,340 13,340
+3Amortización de la Deuda y Disminución de Pasivos
+4Pensiones y Jubilaciones
+5Participaciones
+##### Total del Egreso 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Fundamento:DiarioOficialdelaFederacióndel30deseptiembrede2015,AcuerdoporelqueseReformayAdicionaelCapítuloVIIdelosEstadoseInformesContables,Presupuestarios,Programáticosy
+de los Indicadores de Postura Fiscal y el Anexo 1 Matrices de Conversión del Manual de Contabilidad Gubernamental.
+ElCriterio18correspondientealSubejercicio,seencuentravinculadoalosartículos5,fracc.Iy54,tercerpárrafo,delaLeyFederaldePresupuestoyResponsabilidadHacendaria,queestablecenque,entre
+otros,losÓrganosdelPoderJudicialdelaFederación,tienenlaobligacióndereintegraralaTesoreríadelaFederacióndentrodelos15díasnaturalessiguientesalcierredelejercicio,losrecursos
+disponiblesqueporcualquiermotivoal31dediciembreconserven,incluyendolosrendimientosobtenidos.Entalsentido,elimportecorrespondienteaesteCriterio,delaSupremaCortedeJusticiadela
+Nación, se presenta en el cuarto trimestre de cada ejercicio fiscal.
+1/ Las sumas parciales y total pueden no coincidir debido al redondeo.
+PAGINA 3
+SUPREMA CORTE DE JUSTICIA DE LA NACIÓN
+Estado Analítico del Ejercicio del Presupuesto de Egresos
+Clasificación Funcional (Finalidad y Función)
+Del 1 de Enero al 30 de Junio 2026
+(Pesos)
+EGRESOS
+Ampliaciones / Subejercicio
+CONCEPTO Aprobado Modificado Devengado Pagado
+(Reducciones)
+1 2 3=(1+2) 4 5 6=(3-4)
+Gobierno
+Legislación
+1Justicia 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Coordinación de la Política de Gobierno
+Relaciones Exteriores
+Asuntos Financieros y Hacendarios
+Seguridad Nacional
+Asuntos de Orden Público y de Seguridad Interior
+Otros Servicios Generales
+Desarrollo Social
+Protección Ambiental
+Vivienda y Servicios a la Comunidad
+Salud
+Recreación, Cultura y Otras Manifestaciones Sociales
+Educación
+Protección Social
+Otros Asuntos Sociales
+Desarrollo Económico
+Asuntos Económicos, Comerciales y Laborales en General
+Agropecuaria, Silvicultura, Pesca y Caza
+Combustibles y Energía
+Minería, Manufacturas y Construcción
+Transporte
+Comunicaciones
+Turismo
+Ciencia, Tecnología e Innovación
+Otras Industrias y Otros Asuntos Económicos
+Otras no Clasificadas en Funciones Anteriores
+Transacciones de la Deuda Pública / Costo Financiero de la Deuda
+Transferencias, Participaciones y Aportaciones entre Diferentes Niveles y
+Ordenes de Gobierno
+Saneamiento del Sistema Financiero
+Adeudos de Ejercicios Fiscales Anteriores
+##### Total del Egreso 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Fundamento: DiarioOficial delaFederacióndel 30deseptiembre de2015, Acuerdo por el que seReforma y Adicionael Capítulo VII delos Estados e Informes Contables, Presupuestarios,
+Programáticos y de los Indicadores de Postura Fiscal y el Anexo 1 Matrices de Conversión del Manual de Contabilidad Gubernamental.
+ElCriterio18correspondientealSubejercicio,seencuentravinculadoalosartículos5,fracc.Iy54,tercerpárrafo,delaLeyFederaldePresupuestoyResponsabilidadHacendaria,queestablecen
+que,entreotros,losÓrganosdelPoderJudicialdelaFederación,tienenlaobligacióndereintegraralaTesoreríadelaFederacióndentrodelos15díasnaturalessiguientesalcierredelejercicio,los
+recursosdisponiblesqueporcualquiermotivoal31dediciembreconserven,incluyendolosrendimientosobtenidos.Entalsentido,elimportecorrespondienteaesteCriterio,delaSupremaCortede
+Justicia de la Nación, se presenta en el cuarto trimestre de cada ejercicio fiscal.
+PAGINA 4
+SUPREMA CORTE DE JUSTICIA DE LA NACIÓN
+Gasto por Categoría Programática
+Del 1 de Enero al 30 de Junio 2026
+(Pesos)
+EGRESOS
+Ampliaciones / Subejercicio
+CONCEPTO Aprobado Modificado Devengado Pagado
+(Reducciones)
+1 2 3=(1+2) 4 5 6=(3-4)
+Programas
+S u b s i d i o s ; Sector Social y Pr iva do o enti dad es Feder ativas y Municipios
+S u je t o s a R eglas de Operaci ón
+O t r o s S u b s idios
+Desempeño de las Funciones
+Prestación de Servicios Públicos
+Provisión de Bienes Públicos
+Planeación, Seguimiento y Evaluación de Políticas Públicas
+Promoción y Fomento
+Regulación y Supervisión
+Funciones de las Fuerzas Armadas (Únicamente Gobierno Federal)
+1Específicos 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Proyectos de Inversión
+Administrativos y de Apoyo
+Apoyo al Proceso presupuestaria y para mejorar la eficiencia institucional
+Apoyo a la Función Pública y mejoramiento de la gestión
+Operaciones Ajenas
+Compromisos
+Obligaciones de cumplimiento de resolución jurisdiccional
+Desastres Naturales
+Obligaciones
+Pensiones y Jubilaciones
+Aportaciones a la Seguridad Social
+Aportaciones a Fondos de Estabilización
+Aportaciones a fondos de inversión y reestructura de pensiones
+Programas de Gasto Federalizado (Gobierno Federal)
+Gasto Federalizado
+Participaciones a entidades federativas y municipios
+Costo fTransacci ones d e la Deuda P ública / C o sto Financier o d e l a Deuda
+Adeudos de Ejercicios Fiscales Anteriores
+##### Total del Egreso 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Fundamento:DiarioOficialdelaFederacióndel30deseptiembrede2015,AcuerdoporelqueseReformayAdicionaelCapítuloVIIdelosEstadoseInformesContables,Presupuestarios,Programáticosy
+de los Indicadores de Postura Fiscal y el Anexo 1 Matrices de Conversión del Manual de Contabilidad Gubernamental.
+ElCriterio18correspondientealSubejercicio,seencuentravinculadoalosartículos5,fracc.Iy54,tercerpárrafo,delaLeyFederaldePresupuestoyResponsabilidadHacendaria,queestablecenque,entre
+otros,losÓrganosdelPoderJudicialdelaFederación,tienenlaobligacióndereintegraralaTesoreríadelaFederacióndentrodelos15díasnaturalessiguientesalcierredelejercicio,losrecursos
+disponiblesqueporcualquiermotivoal31dediciembreconserven,incluyendolosrendimientosobtenidos.Entalsentido,elimportecorrespondienteaesteCriterio,delaSupremaCortedeJusticiadela
+Nación, se presenta en el cuarto trimestre de cada ejercicio fiscal.
+PAGINA 5
+SUPREMA CORTE DE JUSTICIA DE LA NACIÓN
+Estado Analítico del Ejercicio del Presupuesto de Egresos
+Clasificación Administrativa
+Del 1 de Enero al 30 de Junio 2026
+(Pesos)
+EGRESOS
+Ampliaciones / Subejercicio
+CONCEPTO Aprobado Modificado Devengado Pagado
+(Reducciones)
+1 2 3=(1+2) 4 5 6=(3-4)
+RAMO
+03 Poder Judicial 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Suprema Corte de Justicia de la Nación (UR 100) 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Total del Egreso 5,208,743,404 0 5,208,743,404 2,503,691,579 2,101,258,527
+Fundamento:DiarioOficialdelaFederacióndel30deseptiembrede2015,AcuerdoporelqueseReformayAdicionaelCapítuloVIIdelosEstadoseInformesContables,Presupuestarios,
+Programáticos y de los Indicadores de Postura Fiscal y el Anexo 1 Matrices de Conversión del Manual de Contabilidad Gubernamental.
+ElCriterio18correspondientealSubejercicio,seencuentravinculadoalosartículos5,fracc.Iy54,tercerpárrafo,delaLeyFederaldePresupuestoyResponsabilidadHacendaria,queestablecen
+que,entreotros,losÓrganosdelPoderJudicialdelaFederación,tienenlaobligacióndereintegraralaTesoreríadelaFederacióndentrodelos15díasnaturalessiguientesalcierredelejercicio,
+losrecursosdisponiblesqueporcualquiermotivoal31dediciembreconserven,incluyendolosrendimientosobtenidos.Entalsentido,elimportecorrespondienteaesteCriterio,delaSuprema
+Corte de Justicia de la Nación, se presenta en el cuarto trimestre de cada ejercicio fiscal.

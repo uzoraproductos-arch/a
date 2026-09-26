@@ -1,0 +1,1921 @@
+ |  |  | ÓRGANO DE ADMINISTRACIÓN JUDICIAL | 
+Bitmap
+ |  |  | DIRECCIÓN GENERAL DE PROGRAMACIÓN, PRESUPUESTO Y TESORERÍA | 
+ |  |  |  | 
+ |  |  | Presupuesto de Egresos 2026 | 
+Bitmap                                  Bitmap
+
+ÓRGANO DE ADMINISTRACIÓN JUDICIAL | 
+ |  | Cifras en pesos |  | 
+ | UEG / PARTIDA | PAGADO |  | 
+(01/04/26 al   30/06/26) |  | 
+ | 1102 - Secretaría Ejecutiva del Pleno | 39,473.05 | 
+ | 21101 Materiales y útiles de oficina | 791.71 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 495.49 | 
+ | 21601 Material de limpieza | 611.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 36,375.45 | 
+ | 29101 Herramientas menores | 87.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,112.40 | 
+ | 1104 - Dirección General de Asuntos   Jurídicos | 29,538.55 | 
+ | 21101 Materiales y útiles de oficina | 2,074.35 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 499.00 | 
+ | 21601 Material de limpieza | 1,432.00 | 
+ | 33602 Otros servicios comerciales | 688.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 18,190.20 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 6,655.00 | 
+ | 1110 - Dirección General de   Innovación, Planeación y Desarrollo Institucional | 16,131.66 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 10,698.66 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,856.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 3,577.00 | 
+ | 1117 - Dirección General de   Comunicación Social y Vocería | 5,293,301.47 | 
+ | 21101 Materiales y útiles de oficina | 2,569.00 | 
+ | 21501 Material de Apoyo Informativo | 109,981.60 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 8,689.44 | 
+ | 24601 Material eléctrico y   electrónico | 1,344.16 | 
+ | 24801 Materiales complementarios | 3,011.39 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 5,898.00 | 
+ | 33602 Otros servicios comerciales | 11,368.90 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 3,985,161.62 | 
+ | 35701 Mantenimiento y conservación de   maquinaria y equipo | 162,798.41 | 
+ | 36101 Difusión de mensajes sobre   programas y actividades gubernamentales | 108,344.00 | 
+ | 36901 Servicios relacionados con   monitoreo de información en medios masivos | 692,752.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 86,281.64 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 3,750.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 111,351.31 | 
+ | 1121 - Unidad de Peritos Judiciales | 2,107,150.99 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 7,132.44 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 1,612,057.50 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 487,961.05 | 
+ | 1123 - Dirección General de   Vinculación y Relaciones Interinstitucionales | 395,475.37 | 
+ | 21101 Materiales y útiles de oficina | 1,292.39 | 
+ | 21601 Material de limpieza | 2,219.83 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 14,264.88 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 511.00 | 
+ | 27201 Prendas de protección personal | 596.00 | 
+ | 29101 Herramientas menores | 169.99 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 299.00 | 
+ | 33602 Otros servicios comerciales | 5,838.64 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 111,907.64 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,509.00 | 
+ | 37207 Pasajes terrestres nacionales   por medio electrónico | 173,000.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 83,867.00 | 
+ | 1124 - Coordinación General de   Planeación Institucional | 36,375.45 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 36,375.45 | 
+ | 1125 - Unidad de Prevención y Combate   a la Violencia Laboral y al Acoso Sexual | 254,069.40 | 
+ | 21101 Materiales y útiles de oficina | 6,661.35 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,699.91 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 10,698.66 | 
+ | 24601 Material eléctrico y   electrónico | 116.00 | 
+ | 33602 Otros servicios comerciales | 157.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 146,747.66 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 3,110.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 84,878.82 | 
+ | 1133 - Unidad de Administración del   Tribunal de Disciplina Judicial | 52,530.45 | 
+ | 21101 Materiales y útiles de oficina | 3,272.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 43,576.45 | 
+ | 22301 Utensilios para el servicio de   alimentación | 4,098.00 | 
+ | 24601 Material eléctrico y   electrónico | 599.00 | 
+ | 33602 Otros servicios comerciales | 48.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 937.00 | 
+ | 1137 - Secretaría General de la   Presidencia del Órgano de Administración Judicial | 36,934.48 | 
+ | 21601 Material de limpieza | 559.03 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 36,375.45 | 
+ | 1138 - Centro Público de Mecanismos   Alternativos de Solución de Controversias del PJF | 91,999.03 | 
+ | 21101 Materiales y útiles de oficina | 455.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 3,544.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 36,375.15 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 22,744.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 28,880.88 | 
+ | 1142 - Ponencias y Comisiones OAJ | 604,039.02 | 
+ | 21101 Materiales y útiles de oficina | 12,853.77 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 2,015.05 | 
+ | 21601 Material de limpieza | 8,768.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 351,629.36 | 
+ | 24601 Material eléctrico y   electrónico | 58.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 3,678.66 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 141,656.52 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 83,379.66 | 
+ | 1201 - Primer Circuito Judicial   (CDMX) | 611,259.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 202,080.33 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 409,178.67 | 
+ | 1202 - Segundo Circuito Judicial   (Toluca, Edo.Méx) | 7,452,576.74 | 
+ | 21101 Materiales y útiles de oficina | 4,176.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 4,074.85 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 5,033,843.59 | 
+ | 24101 Productos minerales no   metálicos | 1,396.58 | 
+ | 24501 Vidrio y productos de vidrio | 900.16 | 
+ | 24601 Material eléctrico y   electrónico | 4,067.46 | 
+ | 24801 Materiales complementarios | 295.01 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,068.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 40,509.39 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 35,000.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 2,485.36 | 
+ | 31101 Servicio de energía eléctrica | 1,052.50 | 
+ | 31301 Servicio de agua | 356,577.01 | 
+ | 31902 Contratación de otros servicios | 182,700.00 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 747,225.59 | 
+ | 33602 Otros servicios comerciales | 516.20 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 754.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 431,735.00 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 15,434.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 43,848.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 403,745.54 | 
+ | 35901 Servicios de jardinería y   fumigación | 137,675.50 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 900.00 | 
+ | 39202 Otros impuestos y derechos | 2,597.00 | 
+ | 1203 - Tercer Circuito Judicial   (Zapopan, Jal.) | 15,981,461.80 | 
+ | 21101 Materiales y útiles de oficina | 68,814.04 | 
+ | 21501 Material de Apoyo Informativo | 2,818.71 | 
+ | 21601 Material de limpieza | 482,508.66 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 7,401,695.75 | 
+ | 24101 Productos minerales no   metálicos | 953.61 | 
+ | 24601 Material eléctrico y   electrónico | 116,022.11 | 
+ | 24801 Materiales complementarios | 30,510.41 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 8,560.28 | 
+ | 27101 Vestuario y uniformes | 1,550.01 | 
+ | 29101 Herramientas menores | 518,673.85 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 512,818.05 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 109,431.30 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 965.25 | 
+ | 31301 Servicio de agua | 682,634.00 | 
+ | 31902 Contratación de otros servicios | 38,836.80 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 499,217.60 | 
+ | 33602 Otros servicios comerciales | 7,284.80 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 1,914.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 1,019,327.36 | 
+ | 33801 Servicios de vigilancia | 3,347,267.34 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 105,560.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 2,842.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 37,346.20 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 806,036.78 | 
+ | 35901 Servicios de jardinería y   fumigación | 149,857.89 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 2,715.00 | 
+ | 39202 Otros impuestos y derechos | 25,300.00 | 
+ | 1204 - Cuarto Circuito Judicial   (Monterrey, N.L.) | 33,024,990.12 | 
+ | 21101 Materiales y útiles de oficina | 12,180.00 | 
+ | 21601 Material de limpieza | 156,836.64 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 2,071,053.68 | 
+ | 24801 Materiales complementarios | 674.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 49,677.60 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 770.83 | 
+ | 29101 Herramientas menores | 52,316.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 27,074.40 | 
+ | 31101 Servicio de energía eléctrica | 372.00 | 
+ | 31301 Servicio de agua | 252,478.77 | 
+ | 31401 Servicio telefónico tradicional | 3,179.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 26,642,038.52 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 316,876.32 | 
+ | 33602 Otros servicios comerciales | 1,852.40 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 163,073.44 | 
+ | 33801 Servicios de vigilancia | 2,142,513.78 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,710.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 5,672.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,061,669.47 | 
+ | 35901 Servicios de jardinería y   fumigación | 60,650.87 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 2,320.00 | 
+ | 1205 - Quinto Circuito Judicial   (Hermosillo, Son.) | 7,315,564.33 | 
+ | 21101 Materiales y útiles de oficina | 37,222.77 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,918.84 | 
+ | 21601 Material de limpieza | 50,575.13 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,352,323.21 | 
+ | 22301 Utensilios para el servicio de   alimentación | 982.00 | 
+ | 24601 Material eléctrico y   electrónico | 13,203.72 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,560.50 | 
+ | 25301 Medicinas y productos   farmacéuticos | 500.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 29,746.82 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 382.41 | 
+ | 27101 Vestuario y uniformes | 44,932.32 | 
+ | 29101 Herramientas menores | 1,205.80 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 255.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 28,581.02 | 
+ | 31101 Servicio de energía eléctrica | 2,219.00 | 
+ | 31301 Servicio de agua | 129,177.34 | 
+ | 31401 Servicio telefónico tradicional | 36,496.41 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,889,861.91 | 
+ | 32903 Otros arrendamientos | 3,828.00 | 
+ | 33602 Otros servicios comerciales | 3,562.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 266,573.00 | 
+ | 33801 Servicios de vigilancia | 1,793,311.35 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 115,366.54 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 10,560.40 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 10,443.39 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,368,510.18 | 
+ | 35901 Servicios de jardinería y   fumigación | 122,265.27 | 
+ | 1206 - Sexto Circuito Judicial (San   Andrés Cholula, Pue.) | 12,409,610.10 | 
+ | 21101 Materiales y útiles de oficina | 7,825.71 | 
+ | 21601 Material de limpieza | 121,701.95 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 3,722,775.72 | 
+ | 24601 Material eléctrico y   electrónico | 289.00 | 
+ | 24801 Materiales complementarios | 919.00 | 
+ | 25301 Medicinas y productos   farmacéuticos | 47,318.63 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 19,688.33 | 
+ | 25501 Materiales, accesorios y   suministros de laboratorio | 15,864.51 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 14,400.17 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 3,000.00 | 
+ | 27101 Vestuario y uniformes | 41,180.00 | 
+ | 29101 Herramientas menores | 1,332.19 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,334.00 | 
+ | 31101 Servicio de energía eléctrica | 776.00 | 
+ | 31301 Servicio de agua | 290,326.00 | 
+ | 31401 Servicio telefónico tradicional | 27,115.47 | 
+ | 32201 Arrendamiento de edificios y   locales | 2,818,682.55 | 
+ | 33602 Otros servicios comerciales | 1,494.08 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 1,035,587.32 | 
+ | 33801 Servicios de vigilancia | 2,777,001.14 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 235,490.71 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 1,161.01 | 
+ | 35401 Instalación, reparación y   mantenimiento de equipo e instrumental médico y de laboratorio | 928.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 7,083.08 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 981,499.13 | 
+ | 35901 Servicios de jardinería y   fumigación | 234,836.40 | 
+ | 1207 - Séptimo Circuito Judicial   (Boca del Río, Ver.) | 7,129,781.50 | 
+ | 21101 Materiales y útiles de oficina | 40,274.44 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 337.36 | 
+ | 21601 Material de limpieza | 118,418.97 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 859,849.48 | 
+ | 24301 Cal, yeso y productos de yeso | 16,820.00 | 
+ | 24501 Vidrio y productos de vidrio | 908.86 | 
+ | 24601 Material eléctrico y   electrónico | 124,676.85 | 
+ | 24801 Materiales complementarios | 52,524.80 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 30,119.25 | 
+ | 25301 Medicinas y productos   farmacéuticos | 9,921.00 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 7,284.68 | 
+ | 25501 Materiales, accesorios y   suministros de laboratorio | 6,994.80 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 11,424.35 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 1,415.00 | 
+ | 27101 Vestuario y uniformes | 1,322.40 | 
+ | 29101 Herramientas menores | 94,917.88 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 36,233.25 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,409.41 | 
+ | 31301 Servicio de agua | 19,075.98 | 
+ | 31902 Contratación de otros servicios | 271,395.06 | 
+ | 32201 Arrendamiento de edificios y   locales | 3,993,239.22 | 
+ | 33602 Otros servicios comerciales | 4,129.60 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 325,739.00 | 
+ | 33801 Servicios de vigilancia | 678,205.76 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 20,632.92 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 968.60 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 8,750.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 304,787.16 | 
+ | 35901 Servicios de jardinería y   fumigación | 82,476.42 | 
+ | 39202 Otros impuestos y derechos | 5,529.00 | 
+ | 1208 - Octavo Circuito Judicial   (Torreón, Coah. y Mpios Durango) | 9,969,104.54 | 
+ | 21101 Materiales y útiles de oficina | 11,766.76 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 867.68 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 958.00 | 
+ | 21601 Material de limpieza | 1,247.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 987,022.80 | 
+ | 24601 Material eléctrico y   electrónico | 3,166.44 | 
+ | 24801 Materiales complementarios | 1,180.01 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,450.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 10,071.06 | 
+ | 29101 Herramientas menores | 6,547.91 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,341.81 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,395.02 | 
+ | 31101 Servicio de energía eléctrica | -1,334.00 | 
+ | 31301 Servicio de agua | 206,666.63 | 
+ | 31401 Servicio telefónico tradicional | 67,573.29 | 
+ | 31902 Contratación de otros servicios | 129,189.42 | 
+ | 32201 Arrendamiento de edificios y   locales | 4,425,441.13 | 
+ | 32903 Otros arrendamientos | 1,392.00 | 
+ | 33602 Otros servicios comerciales | 3,728.20 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 274,963.28 | 
+ | 33801 Servicios de vigilancia | 2,370,016.37 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 121,676.56 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 6,380.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 110.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,138,191.11 | 
+ | 35901 Servicios de jardinería y   fumigación | 168,810.16 | 
+ | 39202 Otros impuestos y derechos | 29,285.90 | 
+ | 1209 - Noveno Circuito Judicial (San   Luis Potosí, S.L.P.) | 3,314,426.95 | 
+ | 21101 Materiales y útiles de oficina | 9,858.41 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 2,731.00 | 
+ | 21601 Material de limpieza | 43,836.75 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 853,110.60 | 
+ | 24601 Material eléctrico y   electrónico | 18,714.79 | 
+ | 24801 Materiales complementarios | 1,540.01 | 
+ | 25301 Medicinas y productos   farmacéuticos | 24,721.76 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 15,956.14 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 12,405.05 | 
+ | 27201 Prendas de protección personal | 633.60 | 
+ | 29101 Herramientas menores | 870.87 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 52,548.00 | 
+ | 31101 Servicio de energía eléctrica | 177.00 | 
+ | 31201 Servicio de gas | 16,855.17 | 
+ | 31301 Servicio de agua | 52,032.16 | 
+ | 31401 Servicio telefónico tradicional | 1,859.99 | 
+ | 32201 Arrendamiento de edificios y   locales | 672,247.20 | 
+ | 33602 Otros servicios comerciales | 2,681.36 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 7,530.72 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 173,090.52 | 
+ | 33801 Servicios de vigilancia | 425,284.75 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 141,245.93 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 7,252.81 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 606,265.88 | 
+ | 35901 Servicios de jardinería y   fumigación | 170,976.48 | 
+ | 1210 - Décimo Circuito Judicial   (Villahermosa, Tab. y Mpios Veracruz) | 15,453,144.92 | 
+ | 21601 Material de limpieza | 148,325.73 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,222,130.25 | 
+ | 24601 Material eléctrico y   electrónico | 929.48 | 
+ | 24801 Materiales complementarios | 8,526.00 | 
+ | 25201 Plaguicidas, abonos y   fertilizantes | 698.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 12,970.52 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 22,500.00 | 
+ | 31101 Servicio de energía eléctrica | 97.32 | 
+ | 31301 Servicio de agua | 5,795.32 | 
+ | 31401 Servicio telefónico tradicional | 561.00 | 
+ | 31902 Contratación de otros servicios | 98,445.99 | 
+ | 32201 Arrendamiento de edificios y   locales | 10,656,246.63 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 1,044.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 409,591.00 | 
+ | 33801 Servicios de vigilancia | 1,512,592.76 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 100,009.69 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,148,668.66 | 
+ | 35901 Servicios de jardinería y   fumigación | 98,742.57 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,750.00 | 
+ | 39202 Otros impuestos y derechos | 3,520.00 | 
+ | 1211 - Décimo Primer Circuito   Judicial (Morelia, Mich.) | 10,355,254.09 | 
+ | 21101 Materiales y útiles de oficina | 25,906.20 | 
+ | 21601 Material de limpieza | 25,116.70 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,186,905.99 | 
+ | 24201 Cemento y productos de concreto | 317.72 | 
+ | 24301 Cal, yeso y productos de yeso | 8,129.28 | 
+ | 24801 Materiales complementarios | 4,382.48 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 10,424.92 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 14,883.60 | 
+ | 29101 Herramientas menores | 148.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 8,794.07 | 
+ | 31301 Servicio de agua | 98,293.95 | 
+ | 31401 Servicio telefónico tradicional | 9,403.97 | 
+ | 31902 Contratación de otros servicios | 108,451.98 | 
+ | 32201 Arrendamiento de edificios y   locales | 4,893,461.85 | 
+ | 33602 Otros servicios comerciales | 1,000.00 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 20,914.42 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 363,432.00 | 
+ | 33801 Servicios de vigilancia | 2,567,331.67 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 201,823.56 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 36,482.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 2,630.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 650,419.98 | 
+ | 35901 Servicios de jardinería y   fumigación | 113,799.75 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 2,800.00 | 
+ | 1212 - Décimo Segundo Circuito   Judicial (Mazatlán, Sin.) | 4,481,779.00 | 
+ | 21101 Materiales y útiles de oficina | 6,902.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 638.00 | 
+ | 21501 Material de Apoyo Informativo | 3,826.84 | 
+ | 21601 Material de limpieza | 53,714.50 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 736,665.11 | 
+ | 24201 Cemento y productos de concreto | 1,276.00 | 
+ | 24601 Material eléctrico y   electrónico | 408,732.31 | 
+ | 25301 Medicinas y productos   farmacéuticos | 20,184.90 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 8,149.21 | 
+ | 29101 Herramientas menores | 1,705.20 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,218.00 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 21,480.00 | 
+ | 31101 Servicio de energía eléctrica | 961.00 | 
+ | 31301 Servicio de agua | 47,721.00 | 
+ | 31401 Servicio telefónico tradicional | 5,049.00 | 
+ | 31902 Contratación de otros servicios | 477,204.69 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,268,094.45 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 71,775.00 | 
+ | 33801 Servicios de vigilancia | 787,210.59 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 58,000.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 5,550.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 339,923.86 | 
+ | 35901 Servicios de jardinería y   fumigación | 63,510.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 3,176.00 | 
+ | 39202 Otros impuestos y derechos | 89,111.34 | 
+ | 1213 - Décimo Tercer Circuito   Judicial (Oaxaca, Oax.) | 6,825,043.72 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 522.00 | 
+ | 21501 Material de Apoyo Informativo | 11,600.00 | 
+ | 21601 Material de limpieza | 52,513.90 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 4,239,935.22 | 
+ | 24601 Material eléctrico y   electrónico | 68,909.74 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,499.88 | 
+ | 25301 Medicinas y productos   farmacéuticos | 4,687.67 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 12,008.26 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 30,965.67 | 
+ | 29101 Herramientas menores | 15,784.00 | 
+ | 29301 Refacciones y accesorios   menores de mobiliario y equipo de administración, educacional y recreativo | 1,459.11 | 
+ | 31101 Servicio de energía eléctrica | 814.00 | 
+ | 31301 Servicio de agua | 4,756.00 | 
+ | 31401 Servicio telefónico tradicional | 2,992.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 781,279.29 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 287,912.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 100,701.12 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 120,146.60 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 692,103.93 | 
+ | 35901 Servicios de jardinería y   fumigación | 331,253.33 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 6,000.00 | 
+ | 39202 Otros impuestos y derechos | 57,200.00 | 
+ | 1214 - Décimo Cuarto Circuito   Judicial (Mérida, Yuc.) | 4,822,788.21 | 
+ | 21501 Material de Apoyo Informativo | 1,440.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 839,955.77 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 4,210.00 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 389.37 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 49,100.00 | 
+ | 29101 Herramientas menores | 1,776.08 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,578.68 | 
+ | 31101 Servicio de energía eléctrica | 1,443.00 | 
+ | 31301 Servicio de agua | 8,612.59 | 
+ | 31401 Servicio telefónico tradicional | 3,815.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,491,386.63 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 26,456.00 | 
+ | 33801 Servicios de vigilancia | 1,261,967.54 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 152,530.17 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 828,583.91 | 
+ | 35901 Servicios de jardinería y   fumigación | 141,401.47 | 
+ | 39202 Otros impuestos y derechos | 7,142.00 | 
+ | 1215 - Décimo Quinto Circuito   Judicial (Mexicali, B.C. y Mpio Sonora) | 5,146,623.94 | 
+ | 21501 Material de Apoyo Informativo | 1,500.00 | 
+ | 21601 Material de limpieza | 45,323.32 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 829,123.25 | 
+ | 24101 Productos minerales no   metálicos | 4,201.20 | 
+ | 24601 Material eléctrico y   electrónico | 250.01 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 10,145.60 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 6,285.20 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 12,631.93 | 
+ | 31101 Servicio de energía eléctrica | 819.00 | 
+ | 31301 Servicio de agua | 1,890.23 | 
+ | 31401 Servicio telefónico tradicional | 7,350.37 | 
+ | 32201 Arrendamiento de edificios y   locales | 700,893.54 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 392,534.94 | 
+ | 33801 Servicios de vigilancia | 2,214,369.51 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 85,852.56 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 18,435.60 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 731,542.65 | 
+ | 35901 Servicios de jardinería y   fumigación | 76,992.03 | 
+ | 39202 Otros impuestos y derechos | 6,483.00 | 
+ | 1216 - Décimo Sexto Circuito Judicial   (Guanajuato, Gto.) | 10,004,825.45 | 
+ | 21101 Materiales y útiles de oficina | 3,782.30 | 
+ | 21601 Material de limpieza | 221,434.35 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,564,330.47 | 
+ | 24101 Productos minerales no   metálicos | 696.00 | 
+ | 24601 Material eléctrico y   electrónico | 2,553.98 | 
+ | 25201 Plaguicidas, abonos y   fertilizantes | 159.00 | 
+ | 25301 Medicinas y productos   farmacéuticos | 250.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 12,959.87 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 2,639.60 | 
+ | 27101 Vestuario y uniformes | 13,000.00 | 
+ | 29101 Herramientas menores | 107.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 10,320.20 | 
+ | 29301 Refacciones y accesorios   menores de mobiliario y equipo de administración, educacional y recreativo | 1,322.40 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,621.60 | 
+ | 31101 Servicio de energía eléctrica | 829.35 | 
+ | 31301 Servicio de agua | 88,623.68 | 
+ | 31401 Servicio telefónico tradicional | 27,201.91 | 
+ | 31801 Servicio postal | 1,396.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 3,428,456.37 | 
+ | 33602 Otros servicios comerciales | 1,976.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 160,559.04 | 
+ | 33801 Servicios de vigilancia | 2,816,693.80 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 503,905.77 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 37,026.33 | 
+ | 35401 Instalación, reparación y   mantenimiento de equipo e instrumental médico y de laboratorio | 928.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 2,460.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 868,418.87 | 
+ | 35901 Servicios de jardinería y   fumigación | 208,633.56 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 21,540.00 | 
+ | 1217 - Décimo Séptimo Circuito   Judicial (Chihuahua, Chih.) | 4,045,537.35 | 
+ | 21101 Materiales y útiles de oficina | 50,540.00 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 1,531.20 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 58.00 | 
+ | 21601 Material de limpieza | 130,549.84 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 833,985.98 | 
+ | 24201 Cemento y productos de concreto | 900.44 | 
+ | 24501 Vidrio y productos de vidrio | 464.00 | 
+ | 24601 Material eléctrico y   electrónico | 24,604.70 | 
+ | 25301 Medicinas y productos   farmacéuticos | 6,744.60 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 19,680.67 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 4,512.26 | 
+ | 29101 Herramientas menores | 26,838.78 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 16,119.24 | 
+ | 31101 Servicio de energía eléctrica | 949.00 | 
+ | 31201 Servicio de gas | 20,338.00 | 
+ | 31301 Servicio de agua | 46,933.05 | 
+ | 31401 Servicio telefónico tradicional | 1,684.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 16,156.48 | 
+ | 33801 Servicios de vigilancia | 2,009,122.67 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 182,663.06 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 23,960.64 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 250.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 469,961.52 | 
+ | 35901 Servicios de jardinería y   fumigación | 156,027.22 | 
+ | 39202 Otros impuestos y derechos | 962.00 | 
+ | 1218 - Décimo Octavo Circuito   Judicial (Cuernavaca, Morelos) | 5,936,146.39 | 
+ | 21101 Materiales y útiles de oficina | 5,742.77 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 91,351.40 | 
+ | 21601 Material de limpieza | 277,106.40 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,082,910.05 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 533.70 | 
+ | 24601 Material eléctrico y   electrónico | 3,397.42 | 
+ | 24801 Materiales complementarios | 3,445.93 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,463.42 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 29,480.36 | 
+ | 29101 Herramientas menores | 2,377.62 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,470.88 | 
+ | 31301 Servicio de agua | 69,486.75 | 
+ | 32201 Arrendamiento de edificios y   locales | 3,463,170.30 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 189,660.00 | 
+ | 33602 Otros servicios comerciales | 7,624.68 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 543,353.08 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 2,737.95 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 2,610.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 80.00 | 
+ | 35901 Servicios de jardinería y   fumigación | 143,737.68 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 13,031.00 | 
+ | 39202 Otros impuestos y derechos | 1,375.00 | 
+ | 1219 - Décimo Noveno Circuito   Judicial (Ciudad Victoria, Tamps.) | 11,234,628.05 | 
+ | 21101 Materiales y útiles de oficina | 46,298.40 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,788.86 | 
+ | 21601 Material de limpieza | 338,541.04 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,504,789.49 | 
+ | 24601 Material eléctrico y   electrónico | 70,716.11 | 
+ | 24801 Materiales complementarios | 1,295.01 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 137.48 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 26,849.06 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 25,114.94 | 
+ | 29101 Herramientas menores | 3,297.51 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,116.01 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,854.00 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 6,600.01 | 
+ | 31101 Servicio de energía eléctrica | 4,499.00 | 
+ | 31301 Servicio de agua | 216,265.76 | 
+ | 31401 Servicio telefónico tradicional | 44,055.08 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,851,992.89 | 
+ | 33602 Otros servicios comerciales | 4,816.59 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 414,304.24 | 
+ | 33801 Servicios de vigilancia | 4,436,636.33 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 146,988.10 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 4,234.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 3,780.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,554,058.53 | 
+ | 35901 Servicios de jardinería y   fumigación | 520,313.61 | 
+ | 39202 Otros impuestos y derechos | 3,286.00 | 
+ | 1220 - Vigésimo Circuito Judicial   (Tuxtla Gutiérrez, Chis.) | 6,628,393.69 | 
+ | 21101 Materiales y útiles de oficina | 18,370.43 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 42,877.00 | 
+ | 21501 Material de Apoyo Informativo | 7,960.16 | 
+ | 21601 Material de limpieza | 382,232.96 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,107,993.36 | 
+ | 24601 Material eléctrico y   electrónico | 2,104.88 | 
+ | 24801 Materiales complementarios | 18,510.59 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 27,876.50 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 42,158.88 | 
+ | 29101 Herramientas menores | 1,331.63 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 7,472.78 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 3,531.14 | 
+ | 31301 Servicio de agua | 128,604.37 | 
+ | 31902 Contratación de otros servicios | 75,912.12 | 
+ | 32201 Arrendamiento de edificios y   locales | 993,290.43 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 622,340.00 | 
+ | 33602 Otros servicios comerciales | 2,360.09 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 419,395.60 | 
+ | 33801 Servicios de vigilancia | 1,830,283.16 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 85,026.53 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 5,964.70 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 117,489.19 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 475,380.36 | 
+ | 35901 Servicios de jardinería y   fumigación | 200,212.83 | 
+ | 39202 Otros impuestos y derechos | 9,714.00 | 
+ | 1221 - Vigésimo Primer Circuito   Judicial (Chilpancingo, Gro.) | 4,925,593.64 | 
+ | 21101 Materiales y útiles de oficina | 18,908.00 | 
+ | 21601 Material de limpieza | 162,846.60 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 533,388.75 | 
+ | 24601 Material eléctrico y   electrónico | 609.96 | 
+ | 24701 Artículos metálicos para la   construcción | 150.68 | 
+ | 24801 Materiales complementarios | 1,064.88 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 4,478.27 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 4,300.30 | 
+ | 29101 Herramientas menores | 294.42 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 340.78 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,726.01 | 
+ | 31101 Servicio de energía eléctrica | 2,826.70 | 
+ | 31301 Servicio de agua | 105,701.69 | 
+ | 31401 Servicio telefónico tradicional | 22,228.76 | 
+ | 31902 Contratación de otros servicios | 179,198.43 | 
+ | 32201 Arrendamiento de edificios y   locales | 3,192,900.44 | 
+ | 33602 Otros servicios comerciales | 200.00 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 1,566.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 85,398.26 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 220,709.11 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 338,738.38 | 
+ | 35901 Servicios de jardinería y   fumigación | 47,013.22 | 
+ | 39202 Otros impuestos y derechos | 1,004.00 | 
+ | 1222 - Vigésimo Segundo Circuito   Judicial (Querétaro, Qro.) | 7,798,582.14 | 
+ | 21101 Materiales y útiles de oficina | 1,485.00 | 
+ | 21601 Material de limpieza | 188,407.28 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 884,398.06 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 4,350.00 | 
+ | 29101 Herramientas menores | 16,772.70 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 5,382.40 | 
+ | 31301 Servicio de agua | 266,980.00 | 
+ | 31401 Servicio telefónico tradicional | 7,194.27 | 
+ | 31902 Contratación de otros servicios | 165,134.88 | 
+ | 32201 Arrendamiento de edificios y   locales | 3,527,053.59 | 
+ | 33602 Otros servicios comerciales | 2,724.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 187,891.68 | 
+ | 33801 Servicios de vigilancia | 1,060,111.85 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 254,809.93 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,143,882.11 | 
+ | 35901 Servicios de jardinería y   fumigación | 82,004.39 | 
+ | 1223 - Vigésimo Tercer Circuito   Judicial (Zacatecas, Zac.) | 1,998,582.99 | 
+ | 21101 Materiales y útiles de oficina | 5,049.99 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 1,680.00 | 
+ | 21601 Material de limpieza | 63,417.20 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 644,712.19 | 
+ | 24601 Material eléctrico y   electrónico | 24,154.57 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,265.40 | 
+ | 25301 Medicinas y productos   farmacéuticos | 35,276.00 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 40,292.00 | 
+ | 25501 Materiales, accesorios y   suministros de laboratorio | 18,195.99 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 33,100.00 | 
+ | 27101 Vestuario y uniformes | 1,350.00 | 
+ | 29101 Herramientas menores | 3,042.82 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 5,995.01 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,500.00 | 
+ | 31301 Servicio de agua | 79,122.79 | 
+ | 31401 Servicio telefónico tradicional | 3,906.54 | 
+ | 32903 Otros arrendamientos | 1,430.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 32,284.00 | 
+ | 33801 Servicios de vigilancia | 426,783.07 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 15,176.78 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 17,310.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 403,435.16 | 
+ | 35901 Servicios de jardinería y   fumigación | 140,103.48 | 
+ | 1224 - Vigésimo Cuarto Circuito   Judicial (Tepic, Nay.) | 5,657,375.49 | 
+ | 21101 Materiales y útiles de oficina | 17,168.41 | 
+ | 21601 Material de limpieza | 103,883.21 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 829,596.52 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 172,763.75 | 
+ | 31301 Servicio de agua | 29,320.35 | 
+ | 31401 Servicio telefónico tradicional | 360.00 | 
+ | 31902 Contratación de otros servicios | 133,115.07 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,942,245.15 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 34,116.00 | 
+ | 33801 Servicios de vigilancia | 1,936,068.05 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,496.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 393,086.84 | 
+ | 35901 Servicios de jardinería y   fumigación | 64,155.74 | 
+ | 1225 - Vigésimo Quinto Circuito   Judicial (Durango, Dgo.) | 2,092,749.34 | 
+ | 21101 Materiales y útiles de oficina | 6,510.53 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,142.72 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 467,037.05 | 
+ | 24601 Material eléctrico y   electrónico | 833.81 | 
+ | 24701 Artículos metálicos para la   construcción | 30.00 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 3,923.29 | 
+ | 25301 Medicinas y productos   farmacéuticos | 4,174.29 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 7,449.13 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 5,300.00 | 
+ | 29101 Herramientas menores | 44,186.29 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,475.52 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 29.00 | 
+ | 31301 Servicio de agua | 18,773.00 | 
+ | 31801 Servicio postal | 96.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 59,032.68 | 
+ | 33801 Servicios de vigilancia | 902,605.75 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 2,853.60 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 384,684.84 | 
+ | 35901 Servicios de jardinería y   fumigación | 182,611.84 | 
+ | 1226 - Vigésimo Sexto Circuito   Judicial (La Paz, B.C. Sur) | 2,153,188.73 | 
+ | 21101 Materiales y útiles de oficina | 10,810.38 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 2,894.33 | 
+ | 21501 Material de Apoyo Informativo | 3,000.00 | 
+ | 21601 Material de limpieza | 81,248.53 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 427,452.10 | 
+ | 24601 Material eléctrico y   electrónico | 2,901.46 | 
+ | 24801 Materiales complementarios | 2,872.16 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 7,500.00 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 1,500.00 | 
+ | 29101 Herramientas menores | 2,534.60 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,460.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 899.00 | 
+ | 31301 Servicio de agua | 179,737.46 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 95,682.24 | 
+ | 33801 Servicios de vigilancia | 766,338.18 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 8,874.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 238,650.75 | 
+ | 35901 Servicios de jardinería y   fumigación | 318,833.54 | 
+ | 1227 - Vigésimo Séptimo Circuito   Judicial (Cancún, Q. Roo) | 5,166,173.80 | 
+ | 21101 Materiales y útiles de oficina | 19,911.36 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 4,361.22 | 
+ | 21601 Material de limpieza | 186,928.91 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 881,255.21 | 
+ | 24401 Madera y productos de madera | 195.00 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 2,930.89 | 
+ | 25301 Medicinas y productos   farmacéuticos | 5,660.55 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 5,339.37 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 8,630.14 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 800.00 | 
+ | 29101 Herramientas menores | 439,480.77 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 31,465.76 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 17,700.00 | 
+ | 31301 Servicio de agua | 135,362.90 | 
+ | 32201 Arrendamiento de edificios y   locales | 802,906.53 | 
+ | 33602 Otros servicios comerciales | 792.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 443,680.00 | 
+ | 33801 Servicios de vigilancia | 769,339.33 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 814,616.41 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 9,280.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 383,003.54 | 
+ | 35901 Servicios de jardinería y   fumigación | 202,533.91 | 
+ | 1228 - Vigésimo Octavo Circuito   Judicial (Tlaxcala, Tlax.) | 5,647,310.80 | 
+ | 21101 Materiales y útiles de oficina | 535,626.43 | 
+ | 21601 Material de limpieza | 115,748.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,689,958.71 | 
+ | 24801 Materiales complementarios | 71,680.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 1,841.96 | 
+ | 31301 Servicio de agua | 72,306.67 | 
+ | 31902 Contratación de otros servicios | 33,176.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,257,000.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 60,904.08 | 
+ | 33801 Servicios de vigilancia | 904,620.56 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 353,234.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 508,726.49 | 
+ | 35901 Servicios de jardinería y   fumigación | 42,487.90 | 
+ | 1229 - Vigésimo Noveno Circuito   Judicial (Pachuca, Hgo.) | 5,334,231.79 | 
+ | 21101 Materiales y útiles de oficina | 2,876.80 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,331.98 | 
+ | 21601 Material de limpieza | 44,153.51 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 763,567.15 | 
+ | 24601 Material eléctrico y   electrónico | 710.99 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 37.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 18,000.00 | 
+ | 29101 Herramientas menores | 1,081.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 210.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 6,690.08 | 
+ | 31101 Servicio de energía eléctrica | 585.00 | 
+ | 31301 Servicio de agua | 38,513.54 | 
+ | 31401 Servicio telefónico tradicional | 1,945.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 2,293,866.76 | 
+ | 33602 Otros servicios comerciales | 1,200.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 392,461.91 | 
+ | 33801 Servicios de vigilancia | 1,413,685.18 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 2,300.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 68,270.40 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 11,719.48 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 203,812.48 | 
+ | 35901 Servicios de jardinería y   fumigación | 59,283.53 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,800.00 | 
+ | 39202 Otros impuestos y derechos | 6,130.00 | 
+ | 1230 - Coordinación de Administración   Regional (Consolidado) | 20,061,829.16 | 
+ | 33105 Servicios relacionados con   procedimientos jurisdiccionales | 11,703,713.98 | 
+ | 33801 Servicios de vigilancia | 48,303.28 | 
+ | 34101 Servicios bancarios y   financieros | 754.00 | 
+ | 34701 Fletes y maniobras | 678,531.72 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 950,959.07 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 6,454,759.11 | 
+ | 37701 Instalación del personal | 224,808.00 | 
+ | 1231 - Trigésimo Circuito Judicial   (Aguascalientes, Ags.) | 3,292,365.24 | 
+ | 21101 Materiales y útiles de oficina | 508.08 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,945.32 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 840,440.86 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,146.59 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 20,167.46 | 
+ | 31301 Servicio de agua | 169,858.00 | 
+ | 33602 Otros servicios comerciales | 765.60 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 81,869.64 | 
+ | 33801 Servicios de vigilancia | 1,475,564.18 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 100.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 582,434.63 | 
+ | 35901 Servicios de jardinería y   fumigación | 116,314.88 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,250.00 | 
+ | 1232 - Vigésimo Primer Circuito   Judicial (Acapulco, Gro.) | 2,588,557.13 | 
+ | 21101 Materiales y útiles de oficina | 9,562.00 | 
+ | 21501 Material de Apoyo Informativo | 1,252.80 | 
+ | 21601 Material de limpieza | 38,351.92 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 720,817.88 | 
+ | 24601 Material eléctrico y   electrónico | 1,600.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 17,853.56 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 11,951.20 | 
+ | 29101 Herramientas menores | 1,134.99 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 4,850.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 896.01 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 1,995.00 | 
+ | 31101 Servicio de energía eléctrica | 395.00 | 
+ | 31301 Servicio de agua | 7,063.00 | 
+ | 31401 Servicio telefónico tradicional | 23,853.19 | 
+ | 32201 Arrendamiento de edificios y   locales | 731,665.30 | 
+ | 33602 Otros servicios comerciales | 1,191.74 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 196,167.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 8,985.36 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 647,980.44 | 
+ | 35901 Servicios de jardinería y   fumigación | 159,990.74 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,000.00 | 
+ | 1233 - Décimo Séptimo Circuito   Judicial (Ciudad Juarez, Chih.) | 3,251,125.20 | 
+ | 21101 Materiales y útiles de oficina | 23,524.80 | 
+ | 21601 Material de limpieza | 28,357.54 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 558,502.57 | 
+ | 24601 Material eléctrico y   electrónico | 291.60 | 
+ | 24801 Materiales complementarios | 1,425.39 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 967.00 | 
+ | 25301 Medicinas y productos   farmacéuticos | 19,271.54 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 1,003.90 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 4,514.33 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 52,293.60 | 
+ | 31201 Servicio de gas | 85,509.77 | 
+ | 31401 Servicio telefónico tradicional | 7,068.96 | 
+ | 33602 Otros servicios comerciales | 1,231.20 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 183,815.40 | 
+ | 33801 Servicios de vigilancia | 1,779,019.15 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 4,862.28 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 266,091.18 | 
+ | 35901 Servicios de jardinería y   fumigación | 231,102.99 | 
+ | 39202 Otros impuestos y derechos | 2,272.00 | 
+ | 1234 - Tercer Circuito Judicial   (Puente Grande, Jal.) | 2,273,496.90 | 
+ | 21101 Materiales y útiles de oficina | 12,064.00 | 
+ | 21601 Material de limpieza | 46,233.34 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 276,066.17 | 
+ | 24601 Material eléctrico y   electrónico | 20,332.00 | 
+ | 24701 Artículos metálicos para la   construcción | 88.04 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 1,590.01 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 1,426.10 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 25,000.00 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 625.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 2,500.40 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 179.00 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 2,998.00 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 282,576.00 | 
+ | 33602 Otros servicios comerciales | 6,264.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 859,933.02 | 
+ | 33801 Servicios de vigilancia | 385,529.75 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 61,856.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 132,888.38 | 
+ | 35901 Servicios de jardinería y   fumigación | 155,347.29 | 
+ | 1235 - Décimo Quinto Circuito   Judicial (Tijuana, B.C.) | 15,395,802.34 | 
+ | 21101 Materiales y útiles de oficina | 10,485.45 | 
+ | 21601 Material de limpieza | 33,951.67 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 840,138.91 | 
+ | 24601 Material eléctrico y   electrónico | 2,662.52 | 
+ | 24801 Materiales complementarios | 730.94 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 25,896.58 | 
+ | 29301 Refacciones y accesorios   menores de mobiliario y equipo de administración, educacional y recreativo | 1,339.20 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,460.37 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 11,218.98 | 
+ | 31301 Servicio de agua | 214,318.52 | 
+ | 31401 Servicio telefónico tradicional | 85,548.59 | 
+ | 32201 Arrendamiento de edificios y   locales | 8,634,449.02 | 
+ | 33602 Otros servicios comerciales | 12,708.63 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 262,145.20 | 
+ | 33801 Servicios de vigilancia | 4,649,211.40 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 26,135.88 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 11,016.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 10,922.04 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 491,728.03 | 
+ | 35901 Servicios de jardinería y   fumigación | 69,734.41 | 
+ | 1236 - Décimo Segundo Circuito   Judicial (Culiacán, Sin.) | 3,871,928.55 | 
+ | 21101 Materiales y útiles de oficina | 3,978.80 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 6,762.34 | 
+ | 21501 Material de Apoyo Informativo | 1,496.40 | 
+ | 21601 Material de limpieza | 63,946.89 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 904,454.99 | 
+ | 24101 Productos minerales no   metálicos | 5,104.00 | 
+ | 24601 Material eléctrico y   electrónico | 8,358.96 | 
+ | 25301 Medicinas y productos   farmacéuticos | 5,150.57 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 1,699.40 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 11,339.95 | 
+ | 27101 Vestuario y uniformes | 3,557.25 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 820.00 | 
+ | 29301 Refacciones y accesorios   menores de mobiliario y equipo de administración, educacional y recreativo | 324.80 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 495.01 | 
+ | 31301 Servicio de agua | 180,957.63 | 
+ | 31401 Servicio telefónico tradicional | 71,364.77 | 
+ | 31801 Servicio postal | 17,589.00 | 
+ | 33602 Otros servicios comerciales | 638.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 148,647.06 | 
+ | 33801 Servicios de vigilancia | 877,448.42 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 691,393.42 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 32,010.20 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 26,221.87 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 533,237.20 | 
+ | 35901 Servicios de jardinería y   fumigación | 274,931.62 | 
+ | 1237 - Séptimo Circuito Judicial   (Xalapa, Ver.) | 3,783,292.75 | 
+ | 21101 Materiales y útiles de oficina | 11,599.80 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 16,149.52 | 
+ | 21601 Material de limpieza | 25,980.53 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,067,152.16 | 
+ | 24601 Material eléctrico y   electrónico | 38,357.74 | 
+ | 24801 Materiales complementarios | 4,176.00 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 38,669.37 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 49,306.23 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,215.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 870.00 | 
+ | 31101 Servicio de energía eléctrica | 151.00 | 
+ | 31301 Servicio de agua | 239,304.31 | 
+ | 31401 Servicio telefónico tradicional | 86,352.57 | 
+ | 32201 Arrendamiento de edificios y   locales | 1,029,386.58 | 
+ | 33602 Otros servicios comerciales | 6,994.80 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 69,800.80 | 
+ | 33801 Servicios de vigilancia | 378,838.25 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 13,072.03 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 1,150.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 15,524.64 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 527,495.63 | 
+ | 35901 Servicios de jardinería y   fumigación | 161,745.79 | 
+ | 1238 - Trigésimo Primer Circuito   Judicial (Campeche, Camp.) | 8,257,685.48 | 
+ | 21101 Materiales y útiles de oficina | 17,330.30 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 483.72 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 10,086.95 | 
+ | 21601 Material de limpieza | 302,366.20 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 574,682.12 | 
+ | 24601 Material eléctrico y   electrónico | 211,910.22 | 
+ | 24801 Materiales complementarios | 5,017.25 | 
+ | 25301 Medicinas y productos   farmacéuticos | 10,445.72 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 11,316.65 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 42,374.04 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 11,992.09 | 
+ | 29101 Herramientas menores | 2,656.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 5,370.89 | 
+ | 29301 Refacciones y accesorios   menores de mobiliario y equipo de administración, educacional y recreativo | 1,319.99 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 12,153.21 | 
+ | 31301 Servicio de agua | 4,284.00 | 
+ | 31902 Contratación de otros servicios | 117,759.20 | 
+ | 32201 Arrendamiento de edificios y   locales | 2,859,192.82 | 
+ | 33602 Otros servicios comerciales | 3,036.48 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 1,042,482.60 | 
+ | 33801 Servicios de vigilancia | 1,960,906.59 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 109,755.28 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 35,273.26 | 
+ | 35301 Mantenimiento y conservación de   bienes informáticos | 3,318.06 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 575,852.54 | 
+ | 35901 Servicios de jardinería y   fumigación | 323,151.30 | 
+ | 39202 Otros impuestos y derechos | 3,168.00 | 
+ | 1239 - Trigésimo Segundo Circuito   Judicial (Colima, Col.) | 2,620,311.02 | 
+ | 21101 Materiales y útiles de oficina | 10,881.34 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 411,441.10 | 
+ | 24801 Materiales complementarios | 490.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 15,264.66 | 
+ | 29101 Herramientas menores | 1,439.04 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,048.96 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,323.51 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 17,040.00 | 
+ | 31301 Servicio de agua | 114,652.21 | 
+ | 33602 Otros servicios comerciales | 1,939.52 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,296,508.80 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 26,308.80 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 642,998.20 | 
+ | 35901 Servicios de jardinería y   fumigación | 76,754.88 | 
+ | 39202 Otros impuestos y derechos | 1,220.00 | 
+ | 1240 - Octavo Circuito Judicial   (Saltillo, Coah.) | 6,095,842.99 | 
+ | 21101 Materiales y útiles de oficina | 18,936.67 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 297.54 | 
+ | 21601 Material de limpieza | 14,654.98 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 812,239.18 | 
+ | 24601 Material eléctrico y   electrónico | 2,427.40 | 
+ | 24801 Materiales complementarios | 12,382.36 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 10,554.02 | 
+ | 25301 Medicinas y productos   farmacéuticos | 5,325.22 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 1,861.46 | 
+ | 25501 Materiales, accesorios y   suministros de laboratorio | 8,037.66 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 14,840.22 | 
+ | 27101 Vestuario y uniformes | 7,540.00 | 
+ | 29101 Herramientas menores | 52,107.52 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 34,871.32 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,136.79 | 
+ | 31301 Servicio de agua | 137,187.40 | 
+ | 32201 Arrendamiento de edificios y   locales | 2,804,550.36 | 
+ | 33602 Otros servicios comerciales | 3,254.52 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 127,935.00 | 
+ | 33801 Servicios de vigilancia | 1,260,132.13 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 92,716.10 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 3,990.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 541,584.93 | 
+ | 35901 Servicios de jardinería y   fumigación | 126,279.81 | 
+ | 1241 - Décimo Circuito Judicial   (Coatzacoalcos, Ver.) | 2,883,752.27 | 
+ | 21101 Materiales y útiles de oficina | 27,268.44 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,467.99 | 
+ | 21601 Material de limpieza | 90,471.72 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 469,035.17 | 
+ | 24501 Vidrio y productos de vidrio | 1,500.00 | 
+ | 24601 Material eléctrico y   electrónico | 1,416.13 | 
+ | 25301 Medicinas y productos   farmacéuticos | 4,454.00 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 27,692.22 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 10,100.10 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,103.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 1,484.80 | 
+ | 31301 Servicio de agua | 38,101.08 | 
+ | 32201 Arrendamiento de edificios y   locales | 614,091.69 | 
+ | 33602 Otros servicios comerciales | 730.80 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 179,325.52 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,135,090.19 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 198,051.08 | 
+ | 35901 Servicios de jardinería y   fumigación | 82,368.34 | 
+ | 1242 - Centro de Justicia Penal   Federal en Puebla, Pue. | 1,673,445.10 | 
+ | 21601 Material de limpieza | 6,066.56 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 252,690.72 | 
+ | 31301 Servicio de agua | 33,379.00 | 
+ | 31401 Servicio telefónico tradicional | 7,701.73 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 133,180.16 | 
+ | 33801 Servicios de vigilancia | 1,007,354.94 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 7,083.08 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 184,950.58 | 
+ | 35901 Servicios de jardinería y   fumigación | 31,273.33 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 9,000.00 | 
+ | 39202 Otros impuestos y derechos | 765.00 | 
+ | 1243 - Centro de Justicia Penal   Federal en San Luis Potosí, S.L.P. | 190,314.65 | 
+ | 21101 Materiales y útiles de oficina | 487.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 890.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 87,372.39 | 
+ | 24601 Material eléctrico y   electrónico | 24,882.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,110.00 | 
+ | 31301 Servicio de agua | 2,992.80 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 67,050.46 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 5,530.00 | 
+ | 1244 - Centro de Justicia Penal   Federal en Mérida, Yuc. | 1,056,529.80 | 
+ | 21501 Material de Apoyo Informativo | 216.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 115,435.93 | 
+ | 31301 Servicio de agua | 3,162.41 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 10,385.00 | 
+ | 33801 Servicios de vigilancia | 813,859.49 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 77,477.77 | 
+ | 35901 Servicios de jardinería y   fumigación | 27,649.72 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,343.48 | 
+ | 1245 - Centro de Justicia Penal   Federal en Guanajuato, Gto. | 1,214,962.51 | 
+ | 21601 Material de limpieza | 33,739.13 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 274,624.72 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 2,224.88 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 3,000.00 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 4,209.40 | 
+ | 31301 Servicio de agua | 58,198.00 | 
+ | 31401 Servicio telefónico tradicional | 6,000.00 | 
+ | 33801 Servicios de vigilancia | 607,315.09 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 464.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 16,800.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 141,012.25 | 
+ | 35901 Servicios de jardinería y   fumigación | 49,375.04 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 18,000.00 | 
+ | 1246 - Centro de Justicia Penal   Federal en Querétaro, Qro. | 898,333.26 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 162,234.58 | 
+ | 29101 Herramientas menores | 14,137.20 | 
+ | 31301 Servicio de agua | 18,068.00 | 
+ | 31401 Servicio telefónico tradicional | 3,000.00 | 
+ | 33801 Servicios de vigilancia | 487,068.41 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 12,238.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 161,444.91 | 
+ | 35901 Servicios de jardinería y   fumigación | 40,142.16 | 
+ | 1247 - Centro de Justicia Penal   Federal en Zacatecas, Zac. | 949,676.09 | 
+ | 21101 Materiales y útiles de oficina | 10,232.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 99,854.16 | 
+ | 24601 Material eléctrico y   electrónico | 1,448.29 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 145.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 4,886.14 | 
+ | 29101 Herramientas menores | 993.31 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 5,945.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 3,000.00 | 
+ | 31301 Servicio de agua | 69,812.15 | 
+ | 31401 Servicio telefónico tradicional | 831.16 | 
+ | 33801 Servicios de vigilancia | 483,682.73 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 16,396.69 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 4,416.12 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 206,332.54 | 
+ | 35901 Servicios de jardinería y   fumigación | 32,737.80 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,963.00 | 
+ | 1248 - Centro de Justicia Penal   Federal en La Paz, B.C.S. | 1,211,701.89 | 
+ | 21101 Materiales y útiles de oficina | 4,103.50 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 3,074.60 | 
+ | 21501 Material de Apoyo Informativo | 1,500.00 | 
+ | 21601 Material de limpieza | 8,462.61 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 110,354.11 | 
+ | 24601 Material eléctrico y   electrónico | 2,893.23 | 
+ | 24801 Materiales complementarios | 2,872.16 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 2,950.10 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,470.00 | 
+ | 31301 Servicio de agua | 34,443.01 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 18,234.56 | 
+ | 33801 Servicios de vigilancia | 703,417.21 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 1,450.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 237,500.79 | 
+ | 35901 Servicios de jardinería y   fumigación | 73,912.02 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 5,063.99 | 
+ | 1249 - Centro de Justicia Penal   Federal en Durango, Dgo. | 828,872.26 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 109,881.29 | 
+ | 24601 Material eléctrico y   electrónico | 1,461.60 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 2,435.40 | 
+ | 29101 Herramientas menores | 8,244.39 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 1,295.14 | 
+ | 31301 Servicio de agua | 120,365.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 31,645.68 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 274,774.88 | 
+ | 35901 Servicios de jardinería y   fumigación | 278,768.88 | 
+ | 1250 - Centro de Justicia Penal   Federal en Cintalapa de Figueroa, Chis. | 774,610.13 | 
+ | 21101 Materiales y útiles de oficina | 2,992.80 | 
+ | 21601 Material de limpieza | 19,354.14 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 74,890.62 | 
+ | 24601 Material eléctrico y   electrónico | 1,305.00 | 
+ | 24801 Materiales complementarios | 4,913.60 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 5,050.00 | 
+ | 29101 Herramientas menores | 498.64 | 
+ | 31301 Servicio de agua | 2,449.92 | 
+ | 33801 Servicios de vigilancia | 504,025.07 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 135,349.45 | 
+ | 35901 Servicios de jardinería y   fumigación | 17,508.90 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 6,171.99 | 
+ | 37804 Gastos de alimentación de los   detenidos en los Centros de Justicia Penal Federal | 100.00 | 
+ | 1251 - Centro de Justicia Penal   Federal en Chihuahua, Chih. | 876,450.94 | 
+ | 21101 Materiales y útiles de oficina | 1,562.52 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 533.60 | 
+ | 21601 Material de limpieza | 13,253.09 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 102,810.43 | 
+ | 31301 Servicio de agua | 2,305.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 10,548.56 | 
+ | 33801 Servicios de vigilancia | 679,072.70 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 55,276.01 | 
+ | 35901 Servicios de jardinería y   fumigación | 2,227.20 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,861.83 | 
+ | 1252 - Centro de Justicia Penal   Federal en Torreón, Coah. | 1,628,124.76 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 110,214.16 | 
+ | 31301 Servicio de agua | 57,997.98 | 
+ | 31401 Servicio telefónico tradicional | 1,105.20 | 
+ | 33801 Servicios de vigilancia | 1,061,491.57 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 319,096.80 | 
+ | 35901 Servicios de jardinería y   fumigación | 69,219.05 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 9,000.00 | 
+ | 1253 - Centro de Justicia Penal   Federal en Tepic, Nay. | 747,267.41 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 111,758.51 | 
+ | 31301 Servicio de agua | 29,876.48 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 96,770.26 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,450.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 339,605.68 | 
+ | 35901 Servicios de jardinería y   fumigación | 167,806.48 | 
+ | 1254 - Centro de Justicia Penal   Federal en San Bartolo Coyotepec, Oax. | 196,849.05 | 
+ | 21601 Material de limpieza | 1,058.62 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 188,626.55 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 7,163.88 | 
+ | 1255 - Centro de Justicia Penal   Federal en Culiacán, Sin. | 1,007,910.86 | 
+ | 21601 Material de limpieza | 3,774.64 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 149,781.24 | 
+ | 27101 Vestuario y uniformes | 3,634.75 | 
+ | 31301 Servicio de agua | 19,693.53 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 55,705.28 | 
+ | 33801 Servicios de vigilancia | 443,628.08 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 4,969.53 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 224,390.40 | 
+ | 35901 Servicios de jardinería y   fumigación | 98,335.36 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 3,998.05 | 
+ | 1256 - Centro de Justicia Penal   Federal en Apizaco, Tlax. | 1,035,067.29 | 
+ | 21101 Materiales y útiles de oficina | 46,750.00 | 
+ | 21601 Material de limpieza | 42,700.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 87,372.39 | 
+ | 24801 Materiales complementarios | 39,800.00 | 
+ | 31301 Servicio de agua | 89,784.00 | 
+ | 33801 Servicios de vigilancia | 447,414.17 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 124,200.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 123,871.18 | 
+ | 35901 Servicios de jardinería y   fumigación | 31,662.20 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 1,513.35 | 
+ | 1257 - Centro de Justicia Penal   Federal en Cadereyta, N.L. | 305,468.37 | 
+ | 21601 Material de limpieza | 3,802.48 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 112,878.33 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,262.00 | 
+ | 31301 Servicio de agua | 16,525.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 145,169.03 | 
+ | 35901 Servicios de jardinería y   fumigación | 15,836.53 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,995.00 | 
+ | 1258 - Centro de Justicia Penal   Federal en Aguascalientes, Ags. | 2,675,962.83 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 98,181.59 | 
+ | 31301 Servicio de agua | 75,363.00 | 
+ | 33602 Otros servicios comerciales | 382.80 | 
+ | 33801 Servicios de vigilancia | 2,147,613.01 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 232,722.22 | 
+ | 35901 Servicios de jardinería y   fumigación | 121,700.21 | 
+ | 1259 - Centro de Justicia Penal   Federal en Cancún, Q. Roo. | 246,770.63 | 
+ | 21101 Materiales y útiles de oficina | 1,103.46 | 
+ | 21601 Material de limpieza | 11,214.57 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 115,501.25 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 519.57 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 27,647.44 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 14,500.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 67,284.34 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 9,000.00 | 
+ | 1260 - Centro de Justicia Penal   Federal en Colima, Col. | 408,919.45 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 120,975.93 | 
+ | 31301 Servicio de agua | 25,706.22 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 205,824.60 | 
+ | 35901 Servicios de jardinería y   fumigación | 52,049.20 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 4,363.50 | 
+ | 1261 - Centro de Justicia Penal   Federal en Pachuca, Hgo. | 1,069,500.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 138.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 177,930.18 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 334.03 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 943.90 | 
+ | 31301 Servicio de agua | 585.01 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 78,702.97 | 
+ | 33801 Servicios de vigilancia | 651,769.56 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 4,901.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 119,186.98 | 
+ | 35901 Servicios de jardinería y   fumigación | 26,008.37 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 9,000.00 | 
+ | 1262 - Centro de Justicia Penal   Federal en Villahermosa, Tab. | 1,262,104.20 | 
+ | 21601 Material de limpieza | 2,762.93 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 50,727.08 | 
+ | 24801 Materiales complementarios | 11,368.00 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 7,500.00 | 
+ | 31301 Servicio de agua | 1,970.80 | 
+ | 33801 Servicios de vigilancia | 658,864.10 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 350,064.09 | 
+ | 35901 Servicios de jardinería y   fumigación | 175,250.19 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 3,597.01 | 
+ | 1263 - Centro de Justicia Penal   Federal en Cuernavaca, Mor. | 474,729.99 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 22,397.28 | 
+ | 21601 Material de limpieza | 23,810.08 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 92,399.25 | 
+ | 24601 Material eléctrico y   electrónico | 1,195.07 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 510.00 | 
+ | 25201 Plaguicidas, abonos y   fertilizantes | 1,260.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 2,400.00 | 
+ | 31301 Servicio de agua | 245.74 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 189,660.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 29,763.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 8,798.25 | 
+ | 35901 Servicios de jardinería y   fumigación | 92,702.62 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,250.00 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,338.70 | 
+ | 1264 - Centro de Justicia Penal   Federal en Campeche, Camp. | 847,525.23 | 
+ | 21101 Materiales y útiles de oficina | 4,403.36 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 2,493.77 | 
+ | 21601 Material de limpieza | 2,088.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 74,890.62 | 
+ | 24801 Materiales complementarios | 1,461.60 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 5,183.32 | 
+ | 33801 Servicios de vigilancia | 585,444.58 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 7,992.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 101,298.85 | 
+ | 35901 Servicios de jardinería y   fumigación | 53,268.73 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 9,000.00 | 
+ | 1265 - Centro de Justicia Penal   Federal en Morelia, Mich. | 298,151.59 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 268,459.65 | 
+ | 31301 Servicio de agua | 6,090.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 2,598.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 4,290.33 | 
+ | 35901 Servicios de jardinería y   fumigación | 7,808.20 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,905.01 | 
+ | 1266 - Centro de Justicia Penal   Federal en Hermosillo, Son. | 544,163.53 | 
+ | 21101 Materiales y útiles de oficina | 5,707.20 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 867.00 | 
+ | 21601 Material de limpieza | 6,648.34 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 195,437.55 | 
+ | 31301 Servicio de agua | 53,858.99 | 
+ | 31401 Servicio telefónico tradicional | 3,655.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 33,302.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 13,397.80 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 199,263.15 | 
+ | 35901 Servicios de jardinería y   fumigación | 24,253.10 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 7,773.40 | 
+ | 1267 - Centro de Justicia Penal   Federal en Coatzacoalcos, Ver. | 165,011.02 | 
+ | 21601 Material de limpieza | 4,328.31 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 111,693.44 | 
+ | 31301 Servicio de agua | 4,399.92 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 33,258.20 | 
+ | 35901 Servicios de jardinería y   fumigación | 10,126.56 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 1,204.59 | 
+ | 1268 - Centro de Justicia Penal   Federal en Xalapa, Ver. | 740,770.67 | 
+ | 21601 Material de limpieza | 972.89 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 115,569.93 | 
+ | 24601 Material eléctrico y   electrónico | 8,195.40 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 2,000.00 | 
+ | 31301 Servicio de agua | 53,718.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 63,623.74 | 
+ | 33801 Servicios de vigilancia | 178,894.04 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,160.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 170,561.47 | 
+ | 35901 Servicios de jardinería y   fumigación | 139,133.67 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 6,941.53 | 
+ | 1269 - Centro de Justicia Penal   Federal en Tijuana, B.C. | 1,774,996.19 | 
+ | 21601 Material de limpieza | 11,714.56 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 144,059.47 | 
+ | 31301 Servicio de agua | 79,977.44 | 
+ | 31401 Servicio telefónico tradicional | 15,137.34 | 
+ | 33801 Servicios de vigilancia | 1,398,621.68 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 2,338.20 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 114,336.10 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,811.40 | 
+ | 1270 - Centro de Justicia Penal   Federal en Mexicali, B.C. | 1,784,807.41 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 179,604.78 | 
+ | 29101 Herramientas menores | 7,981.42 | 
+ | 31301 Servicio de agua | 47,461.04 | 
+ | 31401 Servicio telefónico tradicional | 1,620.00 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 42,194.24 | 
+ | 33801 Servicios de vigilancia | 1,306,298.88 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 183,101.16 | 
+ | 35901 Servicios de jardinería y   fumigación | 9,901.89 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 6,644.00 | 
+ | 1271 - Centro de Justicia Penal   Federal en Acapulco, Gro. | 304,580.30 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 120,219.93 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 450.01 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 299.00 | 
+ | 31401 Servicio telefónico tradicional | 1,892.56 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 11,313.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 155,696.36 | 
+ | 35901 Servicios de jardinería y   fumigación | 5,856.84 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,852.60 | 
+ | 1272 - Centro de Justicia Penal   Federal en Complejo Penitenciario Puente Grande, Jal. | 1,468,294.70 | 
+ | 21101 Materiales y útiles de oficina | 2,752.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 11,560.56 | 
+ | 21601 Material de limpieza | 7,844.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 191,370.55 | 
+ | 24701 Artículos metálicos para la   construcción | 394.40 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 145.00 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 1,473.90 | 
+ | 29101 Herramientas menores | 148.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 184.00 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 50,779.00 | 
+ | 31301 Servicio de agua | 1,062.00 | 
+ | 33602 Otros servicios comerciales | 1,252.80 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 313,054.78 | 
+ | 33801 Servicios de vigilancia | 504,363.89 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 298,602.21 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 8,468.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 53,640.57 | 
+ | 35901 Servicios de jardinería y   fumigación | 12,587.04 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,612.00 | 
+ | 1273 - Centro de Justicia Penal   Federal en Ciudad Victoría, Tamps. | 1,094,651.80 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 63,408.85 | 
+ | 24601 Material eléctrico y   electrónico | 575.65 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 56.27 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 5,014.06 | 
+ | 31301 Servicio de agua | 3,471.00 | 
+ | 31401 Servicio telefónico tradicional | 4,000.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 868,435.92 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 9,396.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 118,762.37 | 
+ | 35901 Servicios de jardinería y   fumigación | 20,401.68 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 1,130.00 | 
+ | 1274 - Centro de Justicia Penal   Federal en Reynosa, Tamps. | 896,217.14 | 
+ | 21101 Materiales y útiles de oficina | 1,404.00 | 
+ | 21601 Material de limpieza | 397.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 52,690.72 | 
+ | 24601 Material eléctrico y   electrónico | 1,054.00 | 
+ | 32201 Arrendamiento de edificios y   locales | 838,125.78 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,830.64 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 715.00 | 
+ | 1276 - Centro de Justicia Penal   Federal el Altiplano, Almoloya de Juárez, Edo. Méx. | 418,797.90 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 12,761.16 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 165,143.01 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 4,800.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 1,496.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 132,296.36 | 
+ | 35901 Servicios de jardinería y   fumigación | 93,444.99 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,855.98 | 
+ | 1277 - Centro de Justicia Penal   Federal en Ciudad Juárez, Chih. | 2,764,626.81 | 
+ | 21601 Material de limpieza | 2,352.24 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 174,722.84 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 2,000.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 29,063.88 | 
+ | 33801 Servicios de vigilancia | 2,190,462.53 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 39,852.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 154,105.60 | 
+ | 35901 Servicios de jardinería y   fumigación | 163,386.72 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 8,681.00 | 
+ | 1278 - Centro de Justicia Penal   Federal en Tapachula, Chis. | 766,942.35 | 
+ | 21601 Material de limpieza | 13,175.23 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 77,580.58 | 
+ | 25301 Medicinas y productos   farmacéuticos | 652.00 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 1,500.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 915.00 | 
+ | 31301 Servicio de agua | 25,565.70 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 8,529.00 | 
+ | 33801 Servicios de vigilancia | 552,032.99 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,458.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 26,043.79 | 
+ | 35901 Servicios de jardinería y   fumigación | 58,750.06 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 740.00 | 
+ | 1279 - Centro de Justicia Penal   Federal en Cd. Obregón, Son. | 301,553.83 | 
+ | 31301 Servicio de agua | 352.00 | 
+ | 33801 Servicios de vigilancia | 301,201.83 | 
+ | 1280 - Centro de Justicia Penal   Federal en Los Mochis, Sin. | 942,207.65 | 
+ | 21601 Material de limpieza | 9,825.40 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 70,184.73 | 
+ | 31301 Servicio de agua | 16,264.68 | 
+ | 33605 Información en medios masivos   derivado de la operación y administración del PJF | 203,048.88 | 
+ | 33801 Servicios de vigilancia | 344,436.50 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 6,994.80 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 118,838.80 | 
+ | 35901 Servicios de jardinería y   fumigación | 167,172.23 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 5,441.63 | 
+ | 1283 - Centro de Justicia Penal   Federal en Ensenada, B.C. | 2,230,504.67 | 
+ | 21101 Materiales y útiles de oficina | 329.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 116,846.61 | 
+ | 31301 Servicio de agua | 58,536.00 | 
+ | 31401 Servicio telefónico tradicional | 6,623.96 | 
+ | 33801 Servicios de vigilancia | 1,766,534.98 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 26,877.26 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 198,292.96 | 
+ | 35901 Servicios de jardinería y   fumigación | 47,463.90 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 9,000.00 | 
+ | 1288 - Archivo Judicial Lerma | 787,160.94 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 3,712.00 | 
+ | 31301 Servicio de agua | 23,044.80 | 
+ | 33602 Otros servicios comerciales | 261.00 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 400,086.01 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 239,720.04 | 
+ | 35901 Servicios de jardinería y   fumigación | 120,337.09 | 
+ | 1289 - Centro de Manejo Documental en   Apizaco, Tlax. | 1,734,911.52 | 
+ | 21101 Materiales y útiles de oficina | 45,800.00 | 
+ | 24801 Materiales complementarios | 46,150.00 | 
+ | 31301 Servicio de agua | 88,063.34 | 
+ | 32201 Arrendamiento de edificios y   locales | 763,875.00 | 
+ | 33801 Servicios de vigilancia | 374,189.05 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 132,010.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 223,786.67 | 
+ | 35901 Servicios de jardinería y   fumigación | 61,037.46 | 
+ | 1290 - Centro de Justicia Penal   Federal en Nezahualcóyotl, Edo. Méx. | 232,800.81 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 231,398.15 | 
+ | 24601 Material eléctrico y   electrónico | 845.86 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 556.80 | 
+ | 1291 - Centro de Justicia Penal   Federal en el Reclusorio Oriente, CDMX. | 244,120.24 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 199,256.33 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 38,863.91 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 6,000.00 | 
+ | 1292 - Centro de Justicia Penal   Federal en el Reclusorio Sur, CDMX. | 166,076.43 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 144,009.54 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 19,066.89 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 3,000.00 | 
+ | 1293 - Centro de Justicia Penal   Federal en el Reclusorio Norte, CDMX. | 355,124.57 | 
+ | 21101 Materiales y útiles de oficina | 4,278.08 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 418.79 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 186,508.66 | 
+ | 24801 Materiales complementarios | 715.38 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 4,308.58 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 151,471.08 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 7,424.00 | 
+ | 1301 - Instituto Federal de   Defensoría Pública | 2,159,994.81 | 
+ | 21101 Materiales y útiles de oficina | 464.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 301.60 | 
+ | 21601 Material de limpieza | 2,250.40 | 
+ | 24101 Productos minerales no   metálicos | 1,044.00 | 
+ | 24201 Cemento y productos de concreto | 1,392.00 | 
+ | 24301 Cal, yeso y productos de yeso | 14,210.00 | 
+ | 24401 Madera y productos de madera | 7,143.28 | 
+ | 24501 Vidrio y productos de vidrio | 1,113.60 | 
+ | 24601 Material eléctrico y   electrónico | 14,565.66 | 
+ | 24701 Artículos metálicos para la   construcción | 10,340.24 | 
+ | 24801 Materiales complementarios | 1,169.28 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 14,159.44 | 
+ | 25301 Medicinas y productos   farmacéuticos | 1,738.84 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 7,955.28 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 8,327.18 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 939,389.28 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 3,728.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 1,130,702.73 | 
+ | 1401 - Instituto Federal de   Especialistas de Concursos Mercantiles | 53,631.97 | 
+ | 21101 Materiales y útiles de oficina | 1,465.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 349.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 50,617.97 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,200.00 | 
+ | 2104 - Dirección General de   Estadística Judicial | 14,800.28 | 
+ | 21101 Materiales y útiles de oficina | 874.60 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 2,214.02 | 
+ | 21601 Material de limpieza | 431.50 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 10,698.66 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 581.50 | 
+ | 2107 - Dirección General de Gestión   Judicial | 44,892.93 | 
+ | 21101 Materiales y útiles de oficina | 188.01 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 485.05 | 
+ | 21601 Material de limpieza | 1,157.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 34,182.01 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 8,880.86 | 
+ | 2110 - Secretaría Ejecutiva de   Creación y Seguimiento de Órganos Jurisdiccionales | 2,199.36 | 
+ | 33602 Otros servicios comerciales | 2,199.36 | 
+ | 2111 - Escuela Nacional de Formación   Judicial | 3,462,319.45 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,924.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 9,304.73 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 2,391.85 | 
+ | 43901 Subsidios para capacitación,   prácticas profesionales y becas | 3,448,698.87 | 
+ | 3205 - Secretaría Ejecutiva de   Disciplina y Substanciación de Responsabilidades del Personal Administrativo | 23,287.40 | 
+ | 21101 Materiales y útiles de oficina | 11,053.51 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,745.00 | 
+ | 21501 Material de Apoyo Informativo | 2,076.40 | 
+ | 21601 Material de limpieza | 2,803.00 | 
+ | 29101 Herramientas menores | 349.00 | 
+ | 33602 Otros servicios comerciales | 264.50 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 4,995.99 | 
+ | 3206 - Contraloría de Administración   Judicial | 2,241.80 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 2,241.80 | 
+ | 3303 - Dirección General de Archivo y   Documentación | 562,389.76 | 
+ | 21101 Materiales y útiles de oficina | 516,669.10 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,849.01 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 5,878.12 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 500.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 37,493.53 | 
+ | 3305 - Unidad de Transparencia del   Órgano de Administración Judicial | 7,741.02 | 
+ | 21101 Materiales y útiles de oficina | 2,583.80 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 5,157.22 | 
+ | 5101 - Secretaría Ejecutiva de   Administración | 52,119.71 | 
+ | 21101 Materiales y útiles de oficina | 6,489.52 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,955.33 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 36,375.45 | 
+ | 22301 Utensilios para el servicio de   alimentación | 1,149.00 | 
+ | 24601 Material eléctrico y   electrónico | 354.99 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,219.42 | 
+ | 33602 Otros servicios comerciales | 75.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 3,501.00 | 
+ | 5201 - Dirección General de Recursos   Humanos | 21,496.18 | 
+ | 21101 Materiales y útiles de oficina | 788.80 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,595.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 14,264.88 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 4,847.50 | 
+ | 5202 - Pago de Servicios Personales a   Plaza | 10,138,799,495.89 | 
+ | 11301 Sueldo base | 2,783,044,934.84 | 
+ | 13201 Primas de vacaciones y   dominical | 996.86 | 
+ | 13202 Aguinaldo o gratificación de   fin de año | 9,337.39 | 
+ | 14101 Aportaciones al ISSSTE | 464,911,461.88 | 
+ | 14105 Aportaciones al seguro de   cesantía en edad avanzada y vejez | 99,313,597.76 | 
+ | 14201 Aportaciones al FOVISSSTE | 156,399,349.31 | 
+ | 14301 Aportaciones al sistema de   ahorro para el retiro | 62,559,712.11 | 
+ | 14302 Depósitos para el ahorro   solidario | 89,180,290.32 | 
+ | 14401 Cuotas para el seguro de vida   del personal | 55,850,847.85 | 
+ | 14404 Cuotas para el seguro de   separación individualizado | 639,356,954.42 | 
+ | 14405 Cuotas para el seguro colectivo   de retiro | 1,761,544.35 | 
+ | 15401 Prestaciones establecidas por   condiciones generales de trabajo | 1,107,088,574.68 | 
+ | 15402 Compensación garantizada | 3,446,225,503.06 | 
+ | 15901 Otras prestaciones sociales y   económicas | 872,804,056.95 | 
+ | 39801 Impuesto sobre nóminas | 350,113,098.66 | 
+ | 39802 Otros impuestos derivados de   una relación laboral | 10,179,235.45 | 
+ | 5203 - Pago de Servicios Personales   por Acuerdo | 2,726,558,182.25 | 
+ | 13101 Prima quinquenal por años de   servicios efectivos prestados | 96,502,570.40 | 
+ | 13201 Primas de vacaciones y   dominical | 822,966.43 | 
+ | 13301 Remuneraciones por horas   extraordinarias | 66,305,258.49 | 
+ | 13404 Compensaciones por servicios   eventuales | 2,255,540.17 | 
+ | 15401 Prestaciones establecidas por   condiciones generales de trabajo | 42,659,329.94 | 
+ | 15403 Asignaciones adicionales al   sueldo | 2,408,516,651.21 | 
+ | 15902 Pago por riesgo | 91,067,118.05 | 
+ | 39101 Funerales y pagas de defunción | 2,512,757.04 | 
+ | 39401 Erogaciones por resoluciones   por autoridad competente | 15,852,647.63 | 
+ | 44101 Gastos relacionados con   actividades culturales, deportivas y de ayuda extraordinaria | 63,342.89 | 
+ | 5206 - Dirección de Seguros   (Prestaciones y Ayudas) | 325,805,157.04 | 
+ | 15301 Prestaciones de retiro | 259,487,326.55 | 
+ | 21101 Materiales y útiles de oficina | 12,690.48 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 1,860.43 | 
+ | 21501 Material de Apoyo Informativo | 5,106.70 | 
+ | 21601 Material de limpieza | 42,169.96 | 
+ | 21701 Materiales y suministros para   CENDI y estancia infantil | 147,823.45 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 987,012.60 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 3,850.00 | 
+ | 22301 Utensilios para el servicio de   alimentación | 17,531.93 | 
+ | 24601 Material eléctrico y   electrónico | 2,334.02 | 
+ | 24801 Materiales complementarios | 5,864.67 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 2,459.60 | 
+ | 25301 Medicinas y productos   farmacéuticos | 28,484.79 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 21,992.10 | 
+ | 26104 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   asignados a servidores públicos | 45,666,911.54 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 28,129.20 | 
+ | 27101 Vestuario y uniformes | 83.50 | 
+ | 29101 Herramientas menores | 659.00 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 60.00 | 
+ | 33602 Otros servicios comerciales | 15.00 | 
+ | 33901 Subcontratación de servicios   con terceros | 19,226,802.42 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 17,133.00 | 
+ | 44101 Gastos relacionados con   actividades culturales, deportivas y de ayuda extraordinaria | 98,856.10 | 
+ | 5207 - Dirección General de Servicios   al Personal | 24,715.07 | 
+ | 21101 Materiales y útiles de oficina | 1,974.33 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 675.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 10,413.73 | 
+ | 24601 Material eléctrico y   electrónico | 685.01 | 
+ | 33602 Otros servicios comerciales | 2,511.00 | 
+ | 33604 Impresión y elaboración de   material informativo derivado de la operación y administración | 1,914.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 5,950.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 592.00 | 
+ | 5209 - Pago de Servicios Personales   por Sustituciones | 61,615,600.12 | 
+ | 12201 Sueldos base al personal   eventual | 16,485,887.29 | 
+ | 13101 Prima quinquenal por años de   servicios efectivos prestados | 136,075.62 | 
+ | 13201 Primas de vacaciones y   dominical | 2,052.19 | 
+ | 13301 Remuneraciones por horas   extraordinarias | 47,183.50 | 
+ | 13404 Compensaciones por servicios   eventuales | 12,313.04 | 
+ | 14101 Aportaciones al ISSSTE | 999,554.93 | 
+ | 14105 Aportaciones al seguro de   cesantía en edad avanzada y vejez | 207,150.38 | 
+ | 14201 Aportaciones al FOVISSSTE | 326,221.13 | 
+ | 14301 Aportaciones al sistema de   ahorro para el retiro | 130,488.38 | 
+ | 14302 Depósitos para el ahorro   solidario | 175,866.62 | 
+ | 14401 Cuotas para el seguro de vida   del personal | 339,556.02 | 
+ | 14404 Cuotas para el seguro de   separación individualizado | 1,989,910.22 | 
+ | 14405 Cuotas para el seguro colectivo   de retiro | 3,642.00 | 
+ | 15401 Prestaciones establecidas por   condiciones generales de trabajo | 1,641,125.96 | 
+ | 15402 Compensación garantizada | 28,063,158.76 | 
+ | 15403 Asignaciones adicionales al   sueldo | 6,802,602.59 | 
+ | 15901 Otras prestaciones sociales y   económicas | 2,669,975.59 | 
+ | 15902 Pago por riesgo | 14,077.78 | 
+ | 39801 Impuesto sobre nóminas | 1,508,205.69 | 
+ | 39802 Otros impuestos derivados de   una relación laboral | 60,552.43 | 
+ | 5211 - Dirección General de Derechos   Humanos, Igualdad de Género y Asuntos Internacionales | 95,979.46 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 10,698.66 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 6,828.18 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 8,852.62 | 
+ | 44201 Formación, difusión,   vinculación e investigación para la igualdad y la inclusión de personas en   situación de vulnerabilidad | 69,600.00 | 
+ | 5301 - Dirección General de Recursos   Materiales | 17,110.81 | 
+ | 21101 Materiales y útiles de oficina | 540.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 5,965.36 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 10,510.45 | 
+ | 33602 Otros servicios comerciales | 35.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 60.00 | 
+ | 5302 - Dirección de Adquisiciones | 21,091,826.39 | 
+ | 21101 Materiales y útiles de oficina | 9,943.18 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 19,093,793.29 | 
+ | 34701 Fletes y maniobras | 1,970,654.40 | 
+ | 52101 Equipos y aparatos   audiovisuales | 5,535.52 | 
+ | 53101 Equipo médico y de laboratorio | 11,900.00 | 
+ | 5303 - Administración de Servicios | 214,484,762.47 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 41,517,928.87 | 
+ | 31101 Servicio de energía eléctrica | 103,286,489.00 | 
+ | 31301 Servicio de agua | 4,536,562.09 | 
+ | 31401 Servicio telefónico tradicional | 471,070.55 | 
+ | 31501 Servicio de telefonía celular | 4,027,599.98 | 
+ | 31701 Servicio de conducción de   señales analógicas y digitales | 10,059.00 | 
+ | 31702 Servicios de procesamiento de   información | 83,240.38 | 
+ | 31801 Servicio postal | 18,958,474.20 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 1,439,838.40 | 
+ | 32601 Arrendamiento de maquinaria y   equipo | 5,148.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 40,121,092.00 | 
+ | 37701 Instalación del personal | 27,260.00 | 
+ | 5304 - Dirección de Patrimonio   Inmobiliario | 41,007,653.75 | 
+ | 32201 Arrendamiento de edificios y   locales | 41,007,653.75 | 
+ | 5305 - Dirección de Control Vehicular   y Seguros Patrimoniales | 25,359,529.25 | 
+ | 21501 Material de Apoyo Informativo | 4,625.00 | 
+ | 26103 Combustibles, lubricantes y   aditivos para vehículos terrestres, aéreos, marítimos, lacustres y fluviales   destinados a servicios administrativos | 1,225,561.18 | 
+ | 29601 Refacciones y accesorios   menores de equipo de transporte | 552,981.16 | 
+ | 32503 Arrendamiento de vehículos   terrestres, aéreos, marítimos, lacustres y fluviales para servicios   administrativos | 6,732,429.70 | 
+ | 34501 Seguros de bienes patrimoniales | 13,073,817.40 | 
+ | 34502 Seguros de vehículos | -3,427,490.77 | 
+ | 34701 Fletes y maniobras | 295,800.00 | 
+ | 35501 Mantenimiento y conservación de   vehículos terrestres | 1,308,057.60 | 
+ | 39202 Otros impuestos y derechos | 5,593,747.98 | 
+ | 5306 - Administración Edificios Sede   No. 2417 y Canoa No. 79 CDMX | 3,182,364.86 | 
+ | 21101 Materiales y útiles de oficina | 46,139.58 | 
+ | 21601 Material de limpieza | 243.60 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 373,687.45 | 
+ | 24601 Material eléctrico y   electrónico | 55,861.62 | 
+ | 24701 Artículos metálicos para la   construcción | 1,115.92 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 11,442.55 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 5,130.44 | 
+ | 27201 Prendas de protección personal | 1,807.72 | 
+ | 29101 Herramientas menores | 6,436.25 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,664.83 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 16,589.18 | 
+ | 31902 Contratación de otros servicios | 345,404.59 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 2,071,234.27 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 23,595.56 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 53,760.20 | 
+ | 35901 Servicios de jardinería y   fumigación | 168,251.10 | 
+ | 5308 - Administración Edificio   Periférico Sur 1950 CDMX | 1,413,994.40 | 
+ | 21101 Materiales y útiles de oficina | 20,431.87 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 595,072.43 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 11,858.90 | 
+ | 24601 Material eléctrico y   electrónico | 64,940.59 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 5,665.19 | 
+ | 25301 Medicinas y productos   farmacéuticos | 5,830.47 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 4,254.07 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | -7,415.44 | 
+ | 29101 Herramientas menores | 871.45 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 14,748.52 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 555,435.46 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 96,276.75 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 319.29 | 
+ | 35901 Servicios de jardinería y   fumigación | 24,041.85 | 
+ | 37701 Instalación del personal | 21,663.00 | 
+ | 5309 - Administración Edificios   Prisma y Florida CDMX | 4,046,201.10 | 
+ | 21101 Materiales y útiles de oficina | 47,744.20 | 
+ | 21601 Material de limpieza | 60,643.64 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,458,284.52 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 850.00 | 
+ | 24101 Productos minerales no   metálicos | 305.00 | 
+ | 24601 Material eléctrico y   electrónico | 42,537.60 | 
+ | 24801 Materiales complementarios | 470.00 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 176,812.32 | 
+ | 25301 Medicinas y productos   farmacéuticos | 30,466.45 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 23,326.83 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 14,291.54 | 
+ | 29101 Herramientas menores | 24,355.73 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 16,894.13 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 4,730.00 | 
+ | 31902 Contratación de otros servicios | 712,361.81 | 
+ | 33602 Otros servicios comerciales | 387,554.38 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 873,856.22 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 84,865.60 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 14,407.20 | 
+ | 35901 Servicios de jardinería y   fumigación | 67,278.93 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 4,165.00 | 
+ | 5310 - Administración Edificios   Revolución y Almacén General CDMX | 3,280,246.42 | 
+ | 21101 Materiales y útiles de oficina | 20,970.67 | 
+ | 21501 Material de Apoyo Informativo | 8,327.64 | 
+ | 21601 Material de limpieza | 5,419.52 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 972,611.91 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 146,641.87 | 
+ | 24301 Cal, yeso y productos de yeso | 5,999.98 | 
+ | 24601 Material eléctrico y   electrónico | 27,422.88 | 
+ | 24801 Materiales complementarios | 16,911.65 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 4,600.87 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 31,562.83 | 
+ | 27201 Prendas de protección personal | 6,217.60 | 
+ | 27501 Blancos y otros productos   textiles, excepto prendas de vestir | 150.80 | 
+ | 29101 Herramientas menores | 487.20 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 4,524.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 5,236.18 | 
+ | 31902 Contratación de otros servicios | 98,033.18 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,746,076.36 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 66,392.60 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 30,722.60 | 
+ | 35901 Servicios de jardinería y   fumigación | 81,936.08 | 
+ | 5311 - Administración Edificio San   Lázaro CDMX | 9,222,556.62 | 
+ | 21101 Materiales y útiles de oficina | 44,476.00 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 1,392.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 282,784.22 | 
+ | 21601 Material de limpieza | 9,252.11 | 
+ | 21701 Materiales y suministros para   CENDI y estancia infantil | 2,378.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 3,480,519.38 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 61,004.15 | 
+ | 22301 Utensilios para el servicio de   alimentación | 208.80 | 
+ | 24101 Productos minerales no   metálicos | 10,628.15 | 
+ | 24601 Material eléctrico y   electrónico | 45,671.38 | 
+ | 24701 Artículos metálicos para la   construcción | 102,149.60 | 
+ | 24801 Materiales complementarios | 11,530.40 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 904,969.59 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 54,308.88 | 
+ | 27201 Prendas de protección personal | 1,902.40 | 
+ | 29101 Herramientas menores | 328,476.37 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 106,718.25 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 18,529.02 | 
+ | 31301 Servicio de agua | 18,270.00 | 
+ | 31902 Contratación de otros servicios | 473,600.19 | 
+ | 32903 Otros arrendamientos | 37,491.20 | 
+ | 33602 Otros servicios comerciales | 17,206.11 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 2,514,546.85 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 262,993.37 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 27,537.34 | 
+ | 35901 Servicios de jardinería y   fumigación | 403,612.86 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 400.00 | 
+ | 5312 - Administración Edificios   Naucalpan Edo. Méx. y Reclusorio Preventivo Norte CDMX | 3,585,763.46 | 
+ | 21101 Materiales y útiles de oficina | 56,585.15 | 
+ | 21201 Materiales y útiles de   impresión y reproducción | 25,520.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 18,068.46 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,010,455.47 | 
+ | 24601 Material eléctrico y   electrónico | 37,385.35 | 
+ | 24801 Materiales complementarios | 802.02 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 14,548.97 | 
+ | 25301 Medicinas y productos   farmacéuticos | 1,216.84 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 4,694.46 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 9,781.58 | 
+ | 27201 Prendas de protección personal | 507.00 | 
+ | 29101 Herramientas menores | 15,008.92 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 13,668.68 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 18,851.46 | 
+ | 31301 Servicio de agua | 699,766.10 | 
+ | 31902 Contratación de otros servicios | 52,746.79 | 
+ | 33602 Otros servicios comerciales | 25,000.00 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 1,240,049.73 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 145,609.43 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 23,362.40 | 
+ | 35901 Servicios de jardinería y   fumigación | 169,539.65 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 2,595.00 | 
+ | 5313 - Administración Edificios   Periférico Sur 2321, Reclusorio Oriente y Sur CDMX | 3,441,007.78 | 
+ | 21101 Materiales y útiles de oficina | 65,085.86 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 469.63 | 
+ | 21601 Material de limpieza | 21,072.62 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 2,063,337.50 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 18,426.23 | 
+ | 24601 Material eléctrico y   electrónico | 25,453.75 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 56,884.84 | 
+ | 25301 Medicinas y productos   farmacéuticos | 17,933.67 | 
+ | 25401 Materiales, accesorios y   suministros médicos | 13,287.82 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 26,317.39 | 
+ | 27201 Prendas de protección personal | 438.48 | 
+ | 29101 Herramientas menores | 9,628.37 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 12,667.27 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 2,505.60 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 698,007.04 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 180,628.52 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 2,639.00 | 
+ | 35901 Servicios de jardinería y   fumigación | 226,224.19 | 
+ | 5314 - Administración Edificio   Nezahualcóyotl, Edo Méx. | 1,501,126.26 | 
+ | 21101 Materiales y útiles de oficina | 9,480.68 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 397,107.64 | 
+ | 24601 Material eléctrico y   electrónico | 42,969.56 | 
+ | 24801 Materiales complementarios | 4,593.60 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 250.56 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 22,657.70 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 9,748.59 | 
+ | 31301 Servicio de agua | 95,120.00 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 779,908.55 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 24,278.80 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 2,281.72 | 
+ | 35901 Servicios de jardinería y   fumigación | 112,728.86 | 
+ | 5315 - Administración de los   Edificios Sede del P.J.F. de Ajusco No. 170, 200 y Tolima 29 CDMX | 4,351,236.65 | 
+ | 21101 Materiales y útiles de oficina | 64,914.90 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 19,473.97 | 
+ | 21501 Material de Apoyo Informativo | 16,240.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 1,475,125.78 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 26,624.00 | 
+ | 24601 Material eléctrico y   electrónico | 12,312.56 | 
+ | 24801 Materiales complementarios | 6,322.00 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 19,820.84 | 
+ | 25301 Medicinas y productos   farmacéuticos | 299.00 | 
+ | 26105 Combustibles, lubricantes y   aditivos para maquinaria, equipo de producción y servicios administrativos | 36,464.13 | 
+ | 29101 Herramientas menores | 3,194.34 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 9,908.29 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 19,350.54 | 
+ | 31301 Servicio de agua | 8,816.00 | 
+ | 31902 Contratación de otros servicios | 214,486.88 | 
+ | 33602 Otros servicios comerciales | 45,255.93 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 2,159,508.00 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 98,559.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 3,758.40 | 
+ | 35901 Servicios de jardinería y   fumigación | 110,801.69 | 
+ | 5316 - Dirección General de Servicios   Generales | 70,861.85 | 
+ | 21101 Materiales y útiles de oficina | 155.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 8,619.44 | 
+ | 29101 Herramientas menores | 796.00 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 159.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 15,349.72 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 700.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 45,082.69 | 
+ | 5321 - Administración del Edificio   Sede del P.J.F. en Avenida Revolución No. 366 CDMX | 1,275,259.80 | 
+ | 21101 Materiales y útiles de oficina | 8,369.65 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 516.01 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 486,405.55 | 
+ | 24101 Productos minerales no   metálicos | 847.73 | 
+ | 24601 Material eléctrico y   electrónico | 8,455.89 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 150.71 | 
+ | 25301 Medicinas y productos   farmacéuticos | 410.00 | 
+ | 27101 Vestuario y uniformes | 1,032.40 | 
+ | 29101 Herramientas menores | 2,782.05 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 1,116.15 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 25,898.16 | 
+ | 33602 Otros servicios comerciales | 209,879.01 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 493,051.39 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 1,740.00 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 17,631.68 | 
+ | 35901 Servicios de jardinería y   fumigación | 16,973.42 | 
+ | 5322 - Administración del Edificio de   la Escuela Nacional de Formación Judicial | 638,526.77 | 
+ | 21101 Materiales y útiles de oficina | 6,766.50 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 72,552.71 | 
+ | 22106 Productos alimenticios para el   personal derivado de actividades extraordinarias | 228.00 | 
+ | 24101 Productos minerales no   metálicos | -16,867.00 | 
+ | 24601 Material eléctrico y   electrónico | 8,841.11 | 
+ | 24801 Materiales complementarios | 54,901.14 | 
+ | 24901 Otros materiales y artículos de   construcción y reparación | 37,514.82 | 
+ | 27101 Vestuario y uniformes | 6,855.60 | 
+ | 29101 Herramientas menores | 11,617.35 | 
+ | 29201 Refacciones y accesorios   menores de edificios | 45,060.55 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 25,300.96 | 
+ | 35101 Mantenimiento y conservación de   inmuebles | 301,483.33 | 
+ | 35201 Mantenimiento y conservación de   mobiliario y equipo de administración | 45,170.40 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 10,648.80 | 
+ | 35901 Servicios de jardinería y   fumigación | 27,452.50 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 1,000.00 | 
+ | 5401 - Dirección General de Inmuebles   y Mantenimiento | 440,264.02 | 
+ | 21101 Materiales y útiles de oficina | 500.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 175.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 4,593.85 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 283,561.32 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 151,433.85 | 
+ | 5503 - Dirección de Programación y   Presupuestación (Apoyos Especiales) | 15,066,881.36 | 
+ | 33104 Otras asesorías para la   operación de programas | 1,831,687.67 | 
+ | 33105 Servicios relacionados con   procedimientos jurisdiccionales | 11,941,592.32 | 
+ | 34101 Servicios bancarios y   financieros | 1,090,014.07 | 
+ | 37801 Servicios integrales para apoyo   a personas físicas y morales ajenas al PJF | 63,613.51 | 
+ | 38201 Gastos de orden social | 203,316.68 | 
+ | 44116 Apoyo médico complementario | -63,342.89 | 
+ | 5506 - Dirección General de   Programación, Presupuesto y Tesorería | 14,334.12 | 
+ | 21101 Materiales y útiles de oficina | 2,267.68 | 
+ | 21601 Material de limpieza | 120.00 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 7,132.44 | 
+ | 24601 Material eléctrico y   electrónico | 329.00 | 
+ | 29101 Herramientas menores | 2,775.00 | 
+ | 33602 Otros servicios comerciales | 1,230.00 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 480.00 | 
+ | 5601 - Coordinación de Administración   Regional | 3,348.90 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 653.90 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 2,695.00 | 
+ | 5708 - Dirección General de   Tecnologías de la Información | 15,200,199.67 | 
+ | 21101 Materiales y útiles de oficina | 199.00 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 11,321.27 | 
+ | 22104 Productos alimenticios para   personas en las instalaciones | 7,471.22 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 269.00 | 
+ | 31603 Servicios de internet | 90,868.57 | 
+ | 31701 Servicio de conducción de   señales analógicas y digitales | 2,569,168.00 | 
+ | 31702 Servicios de procesamiento de   información | 82,094.22 | 
+ | 32701 Patentes, derechos de autor,   regalías y otros | 11,816,427.00 | 
+ | 33104 Otras asesorías para la   operación de programas | 311,815.35 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 86,262.89 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 18,868.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 205,435.15 | 
+ | 5803 - Coordinación de Seguridad del   Poder Judicial de la Federación | 1,513,814.52 | 
+ | 21101 Materiales y útiles de oficina | 2,367.50 | 
+ | 21401 Materiales y útiles consumibles   para el procesamiento en equipos y bienes informáticos | 8,735.00 | 
+ | 21601 Material de limpieza | 3,503.96 | 
+ | 22301 Utensilios para el servicio de   alimentación | 358.55 | 
+ | 24601 Material eléctrico y   electrónico | 299.00 | 
+ | 29101 Herramientas menores | 1,880.65 | 
+ | 29401 Refacciones y accesorios para   equipo de cómputo y telecomunicaciones | 6,190.03 | 
+ | 33801 Servicios de vigilancia | 1,430,769.74 | 
+ | 35801 Servicios de lavandería,   limpieza e higiene | 1,332.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 16,223.87 | 
+ | 37207 Pasajes terrestres nacionales   por medio electrónico | 8,500.00 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 33,654.22 | 
+ | 5805 - Dirección General de   Protección Civil y Salud en el Trabajo | 37,938.56 | 
+ | 21601 Material de limpieza | 5,462.79 | 
+ | 24601 Material eléctrico y   electrónico | 1,085.99 | 
+ | 24801 Materiales complementarios | 3,360.00 | 
+ | 37104 Pasajes aéreos nacionales para   servidores públicos en el desempeño de comisiones y funciones oficiales | 8,853.44 | 
+ | 37201 Pasajes terrestres nacionales   para labores en campo y de supervisión | 91.22 | 
+ | 37504 Viáticos nacionales para   servidores públicos en el desempeño de funciones oficiales | 19,085.12 | 
+ | Total general | 13,977,400,359.62 | 
+ |  |  |  | 

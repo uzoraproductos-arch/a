@@ -1,0 +1,2668 @@
+PAGINA 1
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 1/56
+CONTENIDO
+I. Objetivo ......................................................................................................................................................2
+II. Ficha metodológica ....................................................................................................................................2
+III. Estructura organizacional y recursos..........................................................................................................3
+Unidades administrativas ...........................................................................................................................3
+Personas titulares de las unidades administrativas ....................................................................................5
+Personal adscrito........................................................................................................................................7
+Presupuesto ejercido................................................................................................................................10
+IV. Órganos y unidades especializadas .........................................................................................................12
+Entidad de fiscalización superior u homóloga ..........................................................................................12
+V. Participación ciudadana ...........................................................................................................................14
+VI. Control normativo sobre la deuda pública ................................................................................................16
+Deuda pública estatal ...............................................................................................................................16
+Deuda pública municipal ..........................................................................................................................21
+VII. Control interno y anticorrupción................................................................................................................23
+Denuncias.................................................................................................................................................23
+Investigaciones.........................................................................................................................................24
+Procedimientos de responsabilidad administrativa...................................................................................27
+Personas servidoras públicas sancionadas..............................................................................................29
+VIII. Estructura parlamentaria ..........................................................................................................................31
+Personas legisladoras ..............................................................................................................................31
+Personal de apoyo de las personas legisladoras .....................................................................................39
+Comisiones legislativas ............................................................................................................................42
+IX. Trabajo legislativo.....................................................................................................................................45
+Iniciativas..................................................................................................................................................45
+Iniciativas preferentes...............................................................................................................................47
+Estatus de las iniciativas presentadas......................................................................................................49
+X. Juicio político............................................................................................................................................51
+XI. Declaración de procedencia .....................................................................................................................52
+XII. Comparecencias.......................................................................................................................................53
+PAGINA 2
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 2/56
+I. OBJETIVO
+El Instituto Nacional de Estadística y Geografía (INEGI) da a conocer los resultados del Censo 
+Nacional de Poderes Legislativos Estatales (CNPLE) 2025. Este programa estadístico ofrece 
+información sobre la gestión y desempeño del Congreso de cada entidad federativa, 
+específicamente en las funciones de gobierno, estructura parlamentaria y trabajo legislativo. 
+Su objetivo es vincular los datos con el diseño, implementación, monitoreo y evaluación de las 
+políticas públicas de alcance nacional en dichas funciones.
+II. FICHA METODOLÓGICA
+Antecedentes
+En 2016, en el marco del Subsistema Nacional de Información de Gobierno, Seguridad 
+Pública e Impartición de Justicia (SNIGSPIJ) se iniciaron las actividades de revisión y 
+generación del primer instrumento de captación en materia de gobierno, estructura 
+parlamentaria y trabajo legislativo de los congresos estatales. Como resultado, en 2017 se 
+implementó el primer levantamiento del Censo Nacional de Poderes Legislativos Estatales 
+(CNPLE) 2017.
+A partir de la edición 2023 del censo, la captación de información sobre estructura 
+organizacional y recursos de los congresos se mantiene a través del cuestionario 
+tradicional. Mientras que la información correspondiente a la estructura parlamentaria y 
+trabajo legislativo se recaba mediante una estructura de datos que busca avanzar en el
+aprovechamiento estadístico de los registros administrativos de los congresos.
+Diseño 
+conceptual https://www.inegi.org.mx/app/biblioteca/ficha.html?upc=889463930204
+Cobertura 
+geográfica Nacional, desglose por entidad federativa
+Referencia 
+temporal
+Estructura organizacional y recursos de los congresos: 2024 y 2025. Este último solo para 
+las preguntas que solicitan datos al momento de la aplicación del cuestionario.
+Estructura parlamentaria y trabajo legislativo: primer año de la legislatura actual para cada 
+congreso.
+https://desarrollowww.inegi.org.mx/contenidos/programas/cnple/2025/doc/periodos_cnple2
+025.pdf
+Periodicidad Estructura organizacional y recursos de los congresos: anual
+Estructura parlamentaria y trabajo legislativo: semestral
+Periodo de 
+levantamiento
+Estructura organizacional y recursos de los congresos: del 15 de septiembre al 8 de 
+diciembre de 2025
+Estructura parlamentaria y trabajo legislativo: del 15 de enero de 2025 al 20 de marzo de 
+2026
+Población 
+objeto de 
+estudio
+Gobierno (ámbito estatal)
+Unidad de 
+observación o 
+análisis
+Congreso de cada entidad federativa
+PAGINA 3
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 3/56
+III. ESTRUCTURA ORGANIZACIONAL Y RECURSOS
+Unidades administrativas1
+Para el ejercicio de sus funciones, al cierre de 2024, la estructura orgánica de los congresos 
+estatales se conformó por 330 unidades administrativas. En comparación con 2023, hubo un 
+aumento de 1.5 % (ver gráfica 1).
+Gráfica 1
+Unidades administrativas que conformaron la estructura orgánica de los congresos estatales 1/
+2018-2024
+(unidades administrativas)
+1/ El censo no se levantó para la edición 2022, además, en la de 2023 no se captó la información sobre 
+unidades administrativas, por lo que no se muestran datos para los años 2021 y 2022.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2019 a 2021 y 2024 a 2025.
+1 Se refiere a las áreas de apoyo administrativo que, de acuerdo con las disposiciones normativas aplicables, conforman la estructura orgánica 
+del congreso, a efecto de desarrollar las funciones y objetivos que le son conferidos. No se incluyen los órganos de gobierno y coordinación 
+de la legislatura en funciones (Mesa Directiva, Comisión o Diputación Permanente y/o Junta de Coordinación Política u homóloga) ni, de ser 
+el caso, a la entidad de fiscalización superior u homóloga.
+327
+352
+349
+325
+330
+2018 2019 2020 2023 2024
+PAGINA 4
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 4/56
+La mayoría de las unidades administrativas ejercieron como función principal administración 
+y finanzas, con 48 (14.5 %). Siguieron las unidades administrativas que ejercieron servicios 
+parlamentarios, con 39 (11.8 %). (Ver gráfica 2).
+Gráfica 2
+Unidades administrativas que conformaron a los congresos estatales,
+según función principal ejercida
+2024
+(unidades administrativas)
+Nota: Una unidad administrativa pudo haber desarrollado una o más funciones secundarias, además de la principal.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+48
+39
+32
+27
+26
+23
+19
+19
+14
+13
+11
+11
+10
+8
+6
+6
+4
+1
+13
+Administración y finanzas
+Servicios parlamentarios
+Contraloría interna
+Comunicación social y difusión
+Investigación o estudios legislativos
+Acceso a la información pública y protección
+de datos personales (transparencia)
+Asuntos jurídicos
+Secretaría general u homóloga
+Administración de archivos y gestión
+documental
+Vinculación y promoción con
+la sociedad
+Igualdad de género y/o derechos de
+las mujeres
+Informática y tecnologías de la información
+Planeación y evaluación
+Vinculación y coordinación interinstitucional
+Capacitación, formación y evaluación
+del personal
+Seguridad institucional y protección civil
+Biblioteca
+Estadística
+Otra función
+PAGINA 5
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 5/56
+Personas titulares de las unidades administrativas
+Al cierre de 2024, las unidades administrativas de los congresos estatales tuvieron 
+323 personas titulares: 118 (36.5 %) fueron mujeres y 203 (62.9 %), hombres.
+2 Respecto al 
+nivel de escolaridad, se reportó que 62.0 % de las personas titulares contó con licenciatura 
+como último grado de estudios (ver gráfica 3).
+Gráfica 3
+Personas titulares de las unidades administrativas de los congresos estatales,
+según nivel de escolaridad
+2024
+(porcentaje)
+Nota: No se graficó la categoría no identificado, con 4.3 por ciento.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Según la forma de designación, la Junta de Coordinación Política u homóloga designó a 
+49.8 % de las personas titulares, mientras que 24.2 % se designó por voto del congreso estatal
+(ver gráfica 4).
+Gráfica 4
+Personas titulares de las unidades administrativas de los congresos estatales,
+según forma de designación
+2024
+(porcentaje)
+Nota: No se graficó la categoría no identificado, con 16.7 por ciento.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+2 En la categoría no identificado se registraron dos personas (0.6 %). La titularidad de seis unidades administrativas se encontraba vacante
+y una persona fungió como titular de dos unidades.
+0.9
+1.2
+62.0
+26.6
+5.0
+Preparatoria
+Carrera técnica o
+carrera comercial
+Licenciatura
+Maestría
+Doctorado
+2.2
+7.1
+10.0
+14.2
+49.8
+Otra forma de designación
+Secretario(a) General u homólogo
+del Congreso Estatal
+Voto de la mitad más uno del
+Congreso Estatal
+Voto de ⅔ partes del Congreso 
+Estatal
+Junta de Coordinación Política
+u homóloga
+PAGINA 6
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 6/56
+La función principal ejercida por las unidades administrativas cuyas personas titulares fueron 
+designadas por la Junta de Coordinación Política u homóloga fue administración y finanzas,
+con 14.9 por ciento. Siguió servicios parlamentarios, con 14.3 % (ver gráfica 5).
+Gráfica 5
+Personas titulares de las unidades administrativas de los congresos estatales designadas por 
+la Junta de Coordinación Política u homóloga, según función principal
+2024
+(porcentaje)
+Nota: Se muestran las cinco principales funciones, de acuerdo con la mayor frecuencia de registros. 
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+En el caso de las personas titulares que fueron designadas por el voto de dos terceras partes 
+del congreso estatal, la función principal más frecuente de la unidad administrativa 
+correspondiente fue contraloría interna, con 21.7 por ciento. Siguió administración y finanzas, 
+con 17.4 % (ver gráfica 6).
+Gráfica 6
+Personas titulares de las unidades administrativas de los congresos estatales designadas por 
+el voto de dos terceras partes del congreso estatal, según función principal
+2024
+(porcentaje)
+Nota: Se muestran las 5 principales funciones, de acuerdo con la mayor frecuencia de registros.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+14.9 14.3
+8.7 8.7 7.5
+Administración y
+finanzas
+Servicios
+parlamentarios
+Acceso a la
+información pública y
+protección de datos
+personales
+(transparencia)
+Comunicación social y
+difusión
+Contraloría interna
+21.7 17.4 15.2 10.9 8.7
+Contraloría interna Administración y
+finanzas
+Investigación o
+estudios legislativos
+Servicios
+parlamentarios
+Comunicación social y
+difusión
+PAGINA 7
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 7/56
+Personal adscrito
+Al cierre de 2024, 13 135 personas se desempeñaron como funcionarias en los congresos 
+estatales: 48.4 % correspondió a mujeres y 51.6 %, a hombres3
+(ver gráfica 7).
+Gráfica 7
+Personal adscrito a los congresos estatales, según sexo1/
+2018-2024
+(personas)
+Nota: No se graficó la categoría sexo no identificado, con tres registros para 2023 y dos registros para 2024.
+1/ El censo no se levantó para la edición 2022, además, en la de 2023 no se captó la información sobre personal 
+adscrito, por lo que no se muestran datos para los años 2021 y 2022. Se incluyó a las personas titulares de las 
+unidades administrativas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2019 a 2021 y 2024 a 2025.
+3 Para dos personas (0.02 %) no se identificó el sexo. La suma de los porcentajes puede ser distinta a 100, debido al redondeo de los 
+decimales.
+6 336
+5 334
+6 312 6 269 6 354
+7 022
+6 056
+6 891 6 714 6 779
+13 358
+11 390
+13 203 12 986 13 135
+2018 2019 2020 2023 2024
+Mujeres Hombres Total
+PAGINA 8
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 8/56
+Por entidad federativa, el congreso de Jalisco concentró 8.2 % del personal total. Siguió el 
+congreso de Michoacán, con 7.7 por ciento. En cuanto al sexo, a nivel nacional, 48.4 % 
+correspondió a mujeres y 51.6 %, a hombres. El congreso de Chiapas contó con el mayor 
+porcentaje de mujeres, con 67.9 (ver gráfica 8).
+Gráfica 8
+Personal adscrito a los congresos estatales, según entidad federativa y sexo
+2024
+(porcentaje y personas)
+Nota: Se incluyó a las personas titulares de las unidades administrativas. No se graficó la categoría sexo no identificado, con 
+0.02 % para Estados Unidos Mexicanos y 0.2 % para Jalisco. La suma de los porcentajes puede ser distinta a 100, debido 
+al redondeo de los decimales.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+197
+223
+549
+347
+1 081
+308
+610
+908
+247
+323
+446
+350
+359
+944
+13 135
+585
+1 015
+230
+317
+352
+174
+120
+643
+266
+164
+315
+289
+107
+624
+150
+351
+295
+246
+40.6
+41.3
+42.4
+42.9
+43.0
+44.2
+44.3
+45.0
+45.3
+45.5
+46.2
+46.3
+47.1
+47.9
+48.4
+48.4
+48.5
+49.1
+49.8
+50.0
+50.6
+50.8
+51.6
+52.3
+52.4
+52.7
+52.9
+53.3
+54.8
+56.7
+57.5
+58.3
+67.9
+59.4
+58.7
+57.6
+57.1
+56.8
+55.8
+55.7
+55.0
+54.7
+54.5
+53.8
+53.7
+52.9
+52.1
+51.6
+51.6
+51.5
+50.9
+50.2
+50.0
+49.4
+49.2
+48.4
+47.7
+47.6
+47.3
+47.1
+46.7
+45.2
+43.3
+42.5
+41.7
+32.1
+GTO
+YUC
+MOR
+BCS
+JAL
+TAB
+QROO
+CDMX
+CAMP
+VER
+HGO
+ZAC
+SIN
+MEX
+EUM
+BC
+MICH
+QRO
+TAMPS
+SLP
+PUE
+COAH
+GRO
+AGS
+NL
+NAY
+TLAX
+COL
+CHIH
+SON
+OAX
+DGO
+CHIS
+Total Mujeres Hombres No identificado
+PAGINA 9
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 9/56
+Respecto al rango de ingresos del personal de los congresos, 22.0 % de las mujeres y 22.3 % 
+de los hombres tenían ingresos brutos mensuales de más de 35 mil pesos (ver gráfica 9).
+Gráfica 9
+Personal adscrito a los congresos estatales, según rango de ingresos y sexo
+2024
+(porcentaje)
+Nota: Rangos de ingresos en pesos. No se graficó la categoría no identificado, con 0.8 % para mujeres y 0.7 % 
+para hombres. No se incluyó a las personas titulares de las unidades administrativas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+En cuanto al nivel de escolaridad, 52.9 % de las mujeres y 50.6 % de los hombres contaron
+con licenciatura o posgrado como último grado de estudios (ver gráfica 10).
+Gráfica 10
+Personal adscrito a los congresos estatales, según nivel de escolaridad y sexo
+2024
+(porcentaje)
+Nota: No se graficó la categoría no identificado, con 13.9 % para mujeres y 15.3 % para hombres. 
+No se incluyó a las personas titulares de las unidades administrativas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+0.2
+10.0
+15.5
+20.2
+11.7
+10.6
+8.8
+22.3
+0.1
+11.8
+16.0
+19.3
+11.8
+10.9
+7.3
+22.0
+De 1 a 5 000
+De 5 001 a 10 000
+De 10 001 a 15 000
+De 15 001 a 20 000
+De 20 001 a 25 000
+De 25 001 a 30 000
+De 30 001 a 35 000
+Más de 35 000
+Hombres Mujeres
+3.3
+9.9
+16.4
+4.4
+43.6
+5.8
+1.2
+3.8
+7.5
+14.6
+7.3
+45.7
+6.3
+0.9
+Ninguno
+Preescolar o primaria
+y secundaria
+Preparatoria
+Carrera técnica o
+carrera comercial
+Licenciatura o superior
+Maestría
+Doctorado
+Hombres Mujeres
+PAGINA 10
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 10/56
+Finalmente, de acuerdo con el régimen de contratación, 47.5 % de las mujeres y 41.8 % de los 
+hombres correspondieron a personal de base. Por su parte, 33.6 % de las mujeres y 37.8 % 
+de los hombres fueron personal de confianza (ver gráfica 11).
+Gráfica 11
+Personal adscrito a los congresos estatales, según régimen de contratación y sexo
+2024
+(porcentaje)
+Nota: No se incluyó a las personas titulares de las unidades administrativas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Presupuesto ejercido
+En 2024, los congresos estatales ejercieron un presupuesto de 15 934 015 120 pesos. De ese
+total, 12.8 % se concentró en el congreso de Ciudad de México (ver gráfica 12).
+2.4
+7.7
+10.3
+37.8
+41.8
+3.2
+6.9
+8.8
+33.6
+47.5
+Otro régimen de
+contratación
+Honorarios
+Eventual
+Confianza
+Base
+Hombres Mujeres
+PAGINA 11
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 11/56
+Gráfica 12
+Presupuesto ejercido por los congresos estatales, según entidad federativa
+2024
+(millones de pesos)1/
+1/ Pesos corrientes.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 
+2025.
+A precios de la segunda quincena de julio de 2018, el presupuesto que ejercieron los 
+congresos estatales fue de 11 799.5 millones de pesos. Al comparar con 2023, el presupuesto 
+ejercido disminuyó 7.2 % en 2024 (ver gráfica 13).
+2 044.0
+1 324.5
+922.2
+769.4
+729.3
+676.8
+671.9
+606.8
+564.1
+542.2
+499.6
+490.8
+483.5
+454.3
+428.9
+419.4
+376.1
+364.7
+341.4
+322.4
+311.7
+309.9
+308.6
+307.6
+290.2
+265.2
+252.6
+239.7
+206.5
+173.8
+120.7
+115.1
+CDMX
+Mich.
+Jal.
+BC
+Oax.
+Chih.
+Gro.
+Sin.
+Mex.
+Mor.
+Gto.
+Q. Roo
+Son.
+NL
+Dgo.
+Tlax.
+Qro.
+Ver.
+Zac.
+Chis.
+Nay.
+SLP
+Tamps.
+Tab.
+Ags.
+Hgo.
+BCS
+Coah.
+Camp.
+Yuc.
+Col.
+Pue.
+PAGINA 12
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 12/56
+Gráfica 13
+Presupuesto ejercido por los congresos estatales
+2019-2024
+(millones de pesos)1/
+Nota: Para ajustar las cifras a precios de 2018, se utilizó el promedio mensual del Índice Nacional de Precios al 
+Consumidor (INPC) de 2018 como base de comparación. Los valores deflactados se calcularon dividiendo la 
+cifra nominal entre el INPC del año en que se registró la cifra. Después se multiplicó por el INPC del año base 
+(2018).
+El censo no se levantó para la edición 2022, por lo que no se muestran datos para el año 2021.
+1/ Pesos a precios de la segunda quincena de julio de 2018.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2020 a 2021 y 2023 a 2025.
+IV. ÓRGANOS Y UNIDADES ESPECIALIZADAS
+Entidad de fiscalización superior u homóloga
+Al cierre de 2024, en 16 entidades federativas, la entidad de fiscalización superior u homóloga
+4
+se encontraba en el congreso estatal (ver tabla 1).
+4 Se refiere al órgano con autonomía técnica y de gestión para ejercer de sus atribuciones, así como para decidir sobre su organización 
+interna, funcionamiento y resoluciones. Es el encargado de fiscalizar las acciones de la entidad federativa y sus municipios en materia de 
+fondos, recursos locales y deuda pública.
+13 461.6
+13 836.1
+12 514.1
+12 718.9
+11 799.5
+2019 2020 2022 2023 2024
+PAGINA 13
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 13/56
+Tabla 1
+Condición de pertenencia de la entidad de fiscalización superior u homóloga al congreso 
+estatal, según entidad federativa
+2024
+Entidad federativa La entidad de fiscalización superior u homóloga 
+se encontraba en el congreso estatal
+Ags. No
+BC Sí
+BCS Sí
+Camp. Sí
+Coah. Sí
+Col. No
+Chis. No
+Chih. No
+CDMX No
+Dgo. No
+Gto. Sí
+Gro. Sí
+Hgo. No
+Jal. Sí
+Mex. Sí
+Mich. Sí
+Mor. No
+Nay. Sí
+NL No
+Oax. Sí
+Pue. Sí
+Qro. No
+Q. Roo No
+SLP Sí
+Sin. Sí
+Son. No
+Tab. No
+Tamps. No
+Tlax. No
+Ver. No
+Yuc. Sí
+Zac. Sí
+EUM 16
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+PAGINA 14
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 14/56
+V. PARTICIPACIÓN CIUDADANA
+Durante 2024, 23 congresos estatales abrieron espacios para la participación ciudadana5
+(ver mapa 1).
+Mapa 1
+Condición de apertura de espacios para la participación ciudadana en el Congreso,
+según entidad federativa 
+2024
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+En el mismo periodo, a nivel nacional se abrieron 149 espacios para la participación 
+ciudadana. El parlamento abierto6
+fue el tipo de canal participativo más frecuente, con 
+64 espacios (43.0 %). Siguió ejercicio participativo7
+, con 33 (22.1 %). (Ver gráfica 14).
+5 Se refiere, en términos del censo, a la acción o acciones que se llevan a cabo de manera voluntaria por quienes tienen la intención de 
+incidir, directa o indirectamente, en los asuntos públicos mediante los canales participativos que establecen las instancias gubernamentales.
+6 Se refiere al canal participativo abierto por los órganos de dirección y coordinación de las legislaturas para ampliar el análisis de las iniciativas 
+presentadas y propiciar el contraste de ideas y argumentos.
+7 Se refiere a la promoción de la participación ciudadana en asambleas, consultas y/o encuestas, para la toma de decisiones y facilitación de 
+consensos en proyectos en materia de planeación y presupuesto.
+No identificado (una entidad)
+No (8 entidades)
+Sí (23 entidades)
+Condición de apertura de espacios 
+para la participación ciudadana
+PAGINA 15
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 15/56
+Gráfica 14
+Espacios abiertos por los congresos estatales para la participación ciudadana, 
+según tipo de canal participativo 
+2024
+(porcentaje)
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Los espacios de parlamento abierto ocurrieron en 13 entidades federativas. San Luis Potosí 
+reportó la mayor cantidad, con 18. Por su parte, los temas más recurrentes que se abordaron
+fueron igualdad de género y/o derechos de las mujeres, así como medio ambiente y ecología, 
+con 9.4 % cada uno (ver tabla 2).
+Parlamento 
+abierto
+43.0
+Ejercicio 
+participativo
+22.1
+Consulta 
+ciudadana
+14.8
+Proceso 
+participativo
+9.4
+Órgano (consejo, 
+comité, etc.)
+6.7
+Otro tipo de canal 
+participativo 
+4.0
+PAGINA 16
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 16/56
+Tabla 2
+Parlamentos abiertos en los congresos estatales, según entidad federativa y tema
+2024
+(parlamentos abiertos)
+Entidad 
+federativa Total Derechos 
+humanos Economía
+Igualdad de 
+género y/o 
+derechos de 
+las mujeres
+Juventud
+Medio 
+ambiente y 
+ecología
+Niñas, niños 
+y personas 
+adolescentes
+Puntos 
+constitucionales 
+y legislación
+Salud Otros 
+temas
+No 
+identifica￾do
+SLP 18 1 1 1 1 2 0 0 1 11 0
+Chih. 13 0 1 1 0 2 0 0 2 3 4
+Son. 10 0 0 0 0 2 1 3 0 4 0
+Mor. 4 0 1 1 1 0 0 0 0 1 0
+Q. Roo 4 2 0 1 0 0 0 0 0 1 0
+Coah. 3 0 1 0 0 0 0 0 0 2 0
+Mich. 3 0 0 1 1 0 1 0 0 0 0
+BCS 2 0 0 0 1 0 0 0 0 1 0
+Gto. 2 0 0 0 0 0 0 0 0 0 2
+Gro. 2 0 0 0 0 0 2 0 0 0 0
+BC 1 0 0 0 0 0 0 0 0 1 0
+Jal. 1 0 0 0 0 0 0 0 0 1 0
+Zac. 1 0 0 1 0 0 0 0 0 0 0
+EUM 64 3 4 6 4 6 4 3 3 25 6
+Nota: La información corresponde a los espacios abiertos por los congresos estatales para la participación ciudadana mediante el canal
+participativo de parlamento abierto.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+VI. CONTROL NORMATIVO SOBRE LA DEUDA PÚBLICA
+Deuda pública estatal
+Dos elementos normativos que involucran a los congresos para el control de la deuda pública
+estatal son el establecimiento de mayoría calificada para la aprobación de deuda pública y el 
+establecimiento de límites a los montos o contratación de nueva deuda. Por un lado, al 
+momento del levantamiento del censo en 2025, en 26 entidades federativas, la normatividad 
+vigente aplicable establecía explícitamente el requerimiento de mayoría calificada para la 
+aprobación de deuda pública (ver mapa 2).
+PAGINA 17
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 17/56
+Establecimiento de mayoría calificada para 
+la aprobación de deuda pública 
+Mapa 2
+Condición de establecimiento de mayoría calificada para la aprobación de deuda pública en la 
+normatividad vigente aplicable, según entidad federativa
+2025
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Por otro lado, en 24 entidades federativas, la normatividad vigente aplicable establecía un 
+límite para la contratación de deuda pública (ver mapa 3).
+No (2 entidades)
+Sí (24 entidades)
+Sí, bajo condiciones específicas (2 entidades)
+No explícitamente, pero se retoma lo establecido 
+en la fracción VIII del artículo 117 de la 
+Constitución Política de los Estados Unidos 
+Mexicanos (4 entidades)
+PAGINA 18
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 18/56
+Mapa 3
+Condición de establecimiento de un límite para la contratación de deuda pública en la 
+normatividad vigente aplicable, según entidad federativa
+2025
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De acuerdo con el tipo de límite para la contratación de deuda pública, en ocho entidades 
+federativas se estableció un porcentaje del presupuesto de egresos, y en siete, el Sistema de 
+Alertas de la Secretaría de Hacienda y Crédito Público (ver gráfica 15).
+Sí (24 entidades)
+No identificado (2 entidades)
+No (6 entidades)
+Establecimiento de límite 
+para la contratación de deuda 
+pública 
+PAGINA 19
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 19/56
+Gráfica 15
+Entidades federativas, según tipo de límite establecido para la contratación de deuda pública
+2024
+(entidades federativas)
+Nota: No se graficó la categoría no identificado, con un registro. Solo se incluyeron las 24 entidades federativas 
+que reportaron que su normatividad vigente aplicable establecía un límite para la contratación de deuda 
+pública.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Durante 2024, siete congresos aprobaron la contratación de deuda pública estatal 
+(ver mapa 4).
+8
+7
+1
+7
+Porcentaje del presupuesto de egresos
+Sistema de Alertas de la Secretaría de Hacienda y
+Crédito Público
+Imposibilidad de contratar nuevos empréstitos hasta no
+saldar los adeudos pendientes
+Otro tipo
+PAGINA 20
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 20/56
+Mapa 4
+Condición de aprobación de la contratación de deuda pública estatal por el congreso, 
+según entidad federativa
+2024
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+El monto total aprobado fue de 35 030 453 847.0 pesos corrientes. De estos, Chiapas 
+concentró 35.2 % (ver gráfica 16).
+Sí (7 entidades)
+No identificado (una entidad)
+No (24 entidades)
+Aprobación de la contratación 
+de deuda pública estatal
+PAGINA 21
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 21/56
+Gráfica 16
+Monto aprobado por los congresos estatales para la contratación de deuda pública, 
+según entidad federativa
+2024
+(millones de pesos)
+1/
+Nota: Solo se muestran las entidades federativas que reportaron haber aprobado la contratación de deuda 
+pública estatal. Jalisco no contó con datos o elementos para responder.
+1/ Pesos corrientes.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Deuda pública municipal
+Durante 2024, 9 congresos estatales aprobaron la contratación de deuda pública municipal. 
+En total, se aprobó la deuda de 300 municipios. El monto total fue de 10 443 709 169.0 pesos
+corrientes (ver gráfica 17).8
+8 Jalisco reportó que aprobó contratación de deuda pública municipal. Sin embargo, no contó con datos o elementos para responder sobre 
+los municipios y los montos.
+12 325.0
+9 788.0
+9 674.9
+1 519.5
+1 123.0
+600.0
+Chis.
+Ver.
+Ags.
+Son.
+Tamps.
+Nay.
+PAGINA 22
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 22/56
+Gráfica 17
+Monto aprobado por los congresos estatales para la contratación de deuda pública municipal, 
+según entidad federativa
+2024
+(millones de pesos)
+1/
+Nota: Solo se muestran las entidades federativas que reportaron haber aprobado la contratación de deuda
+pública municipal. Jalisco no contó con datos o elementos para responder.
+1/ Pesos corrientes.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+A continuación, se muestran los 10 principales municipios con el mayor monto aprobado de 
+deuda pública. En conjunto, representaron 55.4 % del total nacional (ver tabla 3).
+Tabla 3
+Monto aprobado por los congresos estatales para la contratación de deuda pública municipal, 
+según entidad federativa y municipio
+2024
+(millones de pesos)
+1/
+Entidad 
+federativa Municipio Monto aprobado 
+Ags. Aguascalientes 3 195.7
+Son. Hermosillo 1 633.2
+Yuc. Mérida 170.7
+Ver. San Andrés Tuxtla 154.9
+Coah. Saltillo 150.0
+Ver. Papantla 120.7
+Tamps. Nuevo laredo 120.0
+Ver. Veracruz 85.7
+Ver. Las Choapas 80.2
+Ver. Xalapa 79.5
+Nota: Se muestran los 10 principales municipios, de acuerdo con el mayor monto
+aprobado de deuda pública.
+1/ Pesos corrientes.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+3 981.0
+3 195.7
+1 633.2
+1 301.3
+168.0
+120.0
+36.6
+7.9
+Ver.
+Ags.
+Son.
+Yuc.
+Coah.
+Tamps.
+Dgo.
+BC
+PAGINA 23
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 23/56
+VII. CONTROL INTERNO Y ANTICORRUPCIÓN
+Denuncias
+Durante 2024, se recibieron 536 denuncias por el incumplimiento de las obligaciones de las 
+personas servidoras públicas de los congresos estatales. Al comparar con 2023, las denuncias
+disminuyeron 16.1 % en 2024 (ver gráfica 18).
+Gráfica 18
+Denuncias recibidas derivadas del incumplimiento de las obligaciones de las personas 
+servidoras públicas de los congresos estatales
+2022-2024
+(denuncias)
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2023 a 2025.
+Del total de denuncias recibidas, el congreso del estado de México concentró 17.9 por ciento. 
+En cuanto al estatus de las denuncias, 43.7 % fue procedente, 21.3 % estaba pendiente de 
+atención y 16.2 % fue improcedente (ver tabla 4).
+769
+639
+536
+2022 2023 2024
+PAGINA 24
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 24/56
+Tabla 4
+Denuncias recibidas derivadas del incumplimiento de las obligaciones de las personas 
+servidoras públicas de los congresos estatales, según entidad federativa y estatus
+2024
+(denuncias)
+Entidad 
+federativa Total Procedentes Incompetentes Improcedentes
+Pendientes 
+(de 
+atención)
+Otro estatus
+Mex. 96 96 0 0 0 0
+Hgo. 88 0 0 12 63 13
+BCS 82 0 0 0 35 47
+Chis. 61 0 0 61 0 0
+Chih. 48 27 5 8 8 0
+Nay. 48 40 8 0 0 0
+Qro. 28 0 27 0 0 1
+Q. Roo 12 12 0 0 0 0
+Gto. 10 10 0 0 0 0
+Mich. 9 0 0 1 8 0
+Pue. 9 9 0 0 0 0
+Jal. 8 8 0 0 0 0
+SLP 7 7 0 0 0 0
+Sin. 7 2 0 5 0 0
+BC 6 6 0 0 0 0
+Gro. 4 4 0 0 0 0
+Son. 4 4 0 0 0 0
+Zac. 4 4 0 0 0 0
+Ver. 3 3 0 0 0 0
+Camp. 1 1 0 0 0 0
+Coah. 1 1 0 0 0 0
+EUM 536 234 40 87 114 61
+Nota: El resto de los congresos de las entidades federativas no reportaron denuncias recibidas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Investigaciones
+Durante 2024, se iniciaron 697 investigaciones por la presunta responsabilidad de faltas 
+administrativas cometidas por las personas servidoras públicas de los congresos estatales.
+9
+De estas investigaciones, el congreso del estado de México concentró 13.8 % (ver gráfica 19).
+9 Las investigaciones pudieron iniciarse de oficio, por denuncia, derivadas de auditorías o por algún otro motivo.
+PAGINA 25
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 25/56
+Gráfica 19
+Investigaciones iniciadas por la presunta responsabilidad de faltas administrativas cometidas 
+por las personas servidoras públicas de los congresos estatales, según entidad federativa
+2024
+(investigaciones)
+Nota: El resto de los congresos de las entidades federativas no reportaron investigaciones 
+iniciadas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+En el mismo periodo, se reportaron 677 investigaciones concluidas. Del total, el congreso de
+Chihuahua concentró 18.9 % (ver gráfica 20).
+96
+88
+84
+82
+61
+48
+48
+48
+25
+24
+20
+13
+10
+9
+9
+7
+7
+5
+4
+3
+2
+2
+1
+1
+Mex.
+Hgo.
+Jal.
+BCS
+Chis.
+Chih.
+Nay.
+Q. Roo
+Qro.
+CDMX
+Son.
+Camp.
+Gto.
+Mich.
+Pue.
+SLP
+Zac.
+Col.
+Gro.
+Ver.
+Oax.
+Sin.
+BC
+Coah.
+PAGINA 26
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 26/56
+Gráfica 20
+Investigaciones concluidas por la presunta responsabilidad de faltas administrativas 
+cometidas por las personas servidoras públicas de los congresos estatales, según entidad 
+federativa
+2024
+(investigaciones)
+Nota: Se consideran las investigaciones concluidas durante el año, independientemente de que se 
+hayan iniciado durante el año o en ejercicios anteriores.
+El resto de los congresos de las entidades federativas no reportaron investigaciones 
+concluidas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De las investigaciones concluidas, 66.6 % correspondió a emisión del acuerdo de conclusión 
+y archivo del expediente (ver gráfica 21).
+128
+86
+81
+61
+54
+47
+41
+37
+25
+24
+21
+17
+16
+10
+7
+6
+5
+3
+3
+2
+1
+1
+1
+Chih.
+Mex.
+Jal.
+Chis.
+Qro.
+BCS
+Q. Roo
+Zac.
+Hgo.
+Son.
+CDMX
+Nay.
+Pue.
+Gto.
+Camp.
+Sin.
+Col.
+SLP
+Ver.
+Oax.
+BC
+Gro.
+Mich.
+PAGINA 27
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 27/56
+Gráfica 21
+Investigaciones concluidas por la presunta responsabilidad de faltas administrativas 
+cometidas por las personas servidoras públicas de los congresos estatales, 
+según tipo de conclusión
+2024
+(investigaciones)
+Nota: Se consideran las investigaciones concluidas durante el año, independientemente de que se hayan 
+iniciado durante el año o en ejercicios anteriores. 
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Procedimientos de responsabilidad administrativa
+Durante 2024, las autoridades substanciadoras iniciaron 182 procedimientos de 
+responsabilidad administrativa por las presuntas faltas administrativas cometidas por las 
+personas servidoras públicas y concluyeron 162. El congreso de Nayarit reportó la mayoría de 
+los procedimientos, tanto iniciados como concluidos, con 44 (ver tabla 5).
+451
+218
+8
+Emisión del acuerdo de
+conclusión y archivo del
+expediente
+Presentación del informe de
+presunta responsabilidad
+administrativa
+Otro tipo
+PAGINA 28
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 28/56
+Tabla 5
+Procedimientos por la presunta responsabilidad de faltas administrativas cometidas por las 
+personas servidoras públicas de los congresos estatales, según entidad federativa y estatus
+2024
+(procedimientos)
+Entidad 
+federativa
+Procedimientos de responsabilidad 
+administrativa
+Iniciados Concluidos
+Ags. 2 0
+BCS 2 0
+Coah. 1 0
+Chis. 19 19
+Chih. 11 18
+Gto. 2 1
+Gro. 1 1
+Hgo. 2 1
+Jal. 30 29
+Mex. 6 6
+Nay. 44 44
+Oax. 2 2
+Pue. 3 1
+Qro. 2 4
+Q. Roo 13 13
+SLP 1 1
+Son. 26 9
+Zac. 15 13
+EUM 182 162
+Nota: El resto de los congresos de las entidades federativas no 
+reportaron procedimientos de responsabilidad administrativa. 
+Se consideran los procedimientos de responsabilidad 
+administrativa concluidos durante el año, independientemente 
+de que se hayan iniciado durante el año o en ejercicios 
+anteriores y de que hayan sido concluidos por la autoridad 
+resolutora de cada congreso estatal (faltas no graves) o por el 
+tribunal competente (faltas graves).
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales 
+(CNPLE), 2025.
+De los 162 procedimientos de responsabilidad administrativa concluidos, 63.6 % derivó en 
+imposición de sanción por responsabilidad administrativa (faltas administrativas no graves).
+(Ver gráfica 22).
+PAGINA 29
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 29/56
+Gráfica 22
+Procedimientos concluidos por la presunta responsabilidad de faltas administrativas 
+cometidas por las personas servidoras públicas de los congresos estatales, 
+según tipo de conclusión 
+2024
+(procedimientos)
+Nota: Se consideran los procedimientos de responsabilidad administrativa concluidos durante el año, 
+independientemente de que se hayan iniciado durante el año o en ejercicios anteriores y de que hayan sido 
+concluidos por la autoridad resolutora de cada congreso estatal (faltas no graves) o por el tribunal competente 
+(faltas graves).
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Personas servidoras públicas sancionadas
+En 2024, 110 personas servidoras públicas de los congresos estatales fueron sancionadas 
+por su responsabilidad en la comisión de faltas administrativas. Al comparar con 2023, la cifra 
+de personas sancionadas disminuyó 14.1 % (ver gráfica 23).
+Gráfica 23
+Personas servidoras públicas de los congresos estatales sancionadas por su responsabilidad 
+en la comisión de faltas administrativas
+2022-2024
+(personas)
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2023 a 2025.
+103
+30
+16
+4
+9
+Imposición de sanción por responsabilidad
+administrativa
+(faltas administrativas no graves)
+Abstención de imposición de sanción
+Inexistencia de responsabilidad administrativa
+(faltas administrativas no graves)
+Sobreseimiento
+Otro tipo
+270
+128
+110
+2022 2023 2024
+PAGINA 30
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 30/56
+Del total de personas servidoras públicas sancionadas, 33.6 % correspondió a mujeres y
+66.4 %, a hombres. Por entidad federativa, el congreso de Nayarit concentró 30.9 %
+(ver tabla 6).
+Tabla 6
+Personas servidoras públicas de los congresos estatales sancionadas por su responsabilidad 
+en la comisión de faltas administrativas, según entidad federativa y sexo
+2024
+(personas)
+Entidad 
+federativa Total Mujeres Hombres
+Nay. 34 11 23
+Jal. 24 6 18
+Chis. 17 6 11
+Chih. 6 3 3
+Q. Roo 6 2 4
+Mex. 5 4 1
+Zac. 5 0 5
+Son. 4 1 3
+Qro. 3 2 1
+Pue. 2 0 2
+Gto. 1 0 1
+Gro. 1 0 1
+Hgo. 1 1 0
+SLP 1 1 0
+EUM 110 37 73
+Nota: El resto de los congresos de las entidades federativas no 
+reportaron personas sancionadas.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 
+2025.
+El tipo de sanción administrativa más frecuente fue amonestación privada, con 51 personas. 
+Siguieron amonestación pública e inhabilitación, con 29 y 23, respectivamente (ver tabla 7).
+PAGINA 31
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 31/56
+Tabla 7
+Personas servidoras públicas de los congresos estatales sancionadas por su responsabilidad 
+en la comisión de faltas administrativas, según entidad federativa y tipo de sanción
+2024
+(personas)
+Entidad 
+federativa
+Amonestación 
+privada
+Amonestación 
+pública Inhabilitación
+Suspensión del 
+empleo, cargo o 
+comisión
+Chis. 0 0 17 0
+Chih. 0 6 0 0
+Gto. 0 0 0 1
+Gro. 1 0 0 0
+Hgo. 1 0 0 0
+Jal. 0 18 6 0
+Mex. 3 2 0 0
+Nay. 33 0 0 1
+Pue. 2 0 0 0
+Qro. 3 0 0 0
+Q. Roo 3 3 0 2
+SLP 1 0 0 0
+Son. 4 0 0 0
+Zac. 0 0 0 5
+EUM 51 29 23 9
+Nota: El resto de los congresos de las entidades federativas no reportaron personas 
+sancionadas. A una persona servidora pública se le pudo haber impuesto más de un tipo 
+de sanción administrativa.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+VIII. ESTRUCTURA PARLAMENTARIA
+Personas legisladoras
+Al cierre del último periodo reportado por los congresos estatales,10 1 122 personas 
+legisladoras se encontraban con estatus activo:11 54.3 % correspondió a mujeres; 45.6 %, a 
+hombres, y 0.1 %, a personas no binarias. En 28 congresos el porcentaje de mujeres fue igual 
+o mayor a 50 por ciento. Además, destacaron los congresos de Baja California, Colima y 
+Tlaxcala, con 64.0 % de mujeres (ver tabla 8).
+10 Para revisar los periodos legislativos reportados por los congresos estatales, se puede consultar el siguiente enlace:
+ https://desarrollowww.inegi.org.mx/contenidos/programas/cnple/2025/doc/periodos_cnple2025.pdf
+11 Se refiere a la persona legisladora que en un momento determinado desempeñaba las funciones inherentes a su cargo, de conformidad 
+con la normatividad aplicable.
+PAGINA 32
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 32/56
+Tabla 8
+Personas legisladoras de los congresos estatales, según entidad federativa y sexo
+(personas y porcentaje)
+Entidad 
+federativa Total Mujer
+(%)
+Hombre
+(%)
+No binario
+(%)
+Mex. 75 50.7 49.3 0.0
+CDMX 65 56.9 43.1 0.0
+Ver. 50 56.0 44.0 0.0
+Gro. 46 52.2 47.8 0.0
+NL 42 61.9 38.1 0.0
+Oax. 42 59.5 40.5 0.0
+Pue. 41 63.4 36.6 0.0
+Chis. 40 60.0 40.0 0.0
+Mich. 40 50.0 50.0 0.0
+Sin. 40 55.0 45.0 0.0
+Jal. 38 52.6 47.4 0.0
+Gto. 36 52.8 47.2 0.0
+Tamps. 36 52.8 47.2 0.0
+Camp. 35 51.4 48.6 0.0
+Tab. 35 51.4 48.6 0.0
+Yuc. 35 48.6 51.4 0.0
+Chih. 33 51.5 48.5 0.0
+Son. 33 48.5 51.5 0.0
+Hgo. 30 53.3 46.7 0.0
+Nay. 30 53.3 46.7 0.0
+Zac. 30 50.0 50.0 0.0
+Ags. 27 55.6 40.7 3.7
+SLP 27 51.9 48.1 0.0
+BC 25 64.0 36.0 0.0
+Coah. 25 48.0 52.0 0.0
+Col. 25 64.0 36.0 0.0
+Dgo. 25 52.0 48.0 0.0
+Qro. 25 52.0 48.0 0.0
+Q. Roo 25 48.0 52.0 0.0
+Tlax. 25 64.0 36.0 0.0
+BCS 21 52.4 47.6 0.0
+Mor. 20 50.0 50.0 0.0
+EUM 1 122 54.3 45.6 0.1
+Nota: La información corresponde a las personas legisladoras en activo.
+Para Ciudad de México solo se consideraron 65 personas 
+legisladoras de las 66 que deben conformar el Congreso, debido 
+a que una persona suplente tomó protesta en fecha posterior al 
+periodo de referencia de los datos. 
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 
+2025.
+De acuerdo con el carácter del cargo, del total de personas legisladoras en activo, 97.0 % fue 
+propietaria(o) y 3.0 %, suplente (ver tabla 9).
+PAGINA 33
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 33/56
+Tabla 9
+Personas legisladoras de los congresos estatales,
+según entidad federativa y carácter del cargo
+(personas)
+Entidad 
+federativa Total Propietaria(o) Suplente
+Mex. 75 75 0
+CDMX 65 62 3
+Ver. 50 48 2
+Gro. 46 44 2
+NL 42 38 4
+Oax. 42 40 2
+Pue. 41 39 2
+Chis. 40 40 0
+Mich. 40 39 1
+Sin. 40 36 4
+Jal. 38 38 0
+Gto. 36 36 0
+Tamps. 36 35 1
+Camp. 35 35 0
+Tab. 35 35 0
+Yuc. 35 35 0
+Chih. 33 33 0
+Son. 33 32 1
+Hgo. 30 29 1
+Nay. 30 29 1
+Zac. 30 30 0
+Ags. 27 26 1
+SLP 27 26 1
+BC 25 25 0
+Coah. 25 22 3
+Col. 25 23 2
+Dgo. 25 22 3
+Qro. 25 25 0
+Q. Roo 25 25 0
+Tlax. 25 25 0
+BCS 21 21 0
+Mor. 20 20 0
+EUM 1 122 1 088 34
+Nota: La información corresponde a las personas 
+legisladoras en activo. Para Ciudad de México solo 
+se consideraron 65 personas legisladoras de las 66 
+que deben conformar el Congreso, debido a que una 
+persona suplente tomó protesta en fecha posterior al 
+periodo de referencia de los datos.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos 
+Estatales (CNPLE), 2025.
+Según la forma de elección, 60.4 % fue electo por mayoría relativa y 39.6 %, por el principio 
+de representación proporcional (ver tabla 10).
+PAGINA 34
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 34/56
+Tabla 10
+Personas legisladoras de los congresos estatales,
+según adscripción y forma de elección
+(personas)
+Adscripción Total Mayoría 
+relativa
+Representación 
+proporcional
+Total 1 122 678 444
+Movimiento de Regeneración Nacional (Morena) 496 368 128
+Partido Acción Nacional (PAN) 160 87 73
+Partido de la Revolución Democrática (PRD) 27 12 15
+Partido del Trabajo (PT) 81 51 30
+Movimiento Ciudadano (MC) 71 15 56
+Partido Revolucionario Institucional (PRI) 87 34 53
+Partido Verde Ecologista de México (PVEM) 119 71 48
+Otro grupo parlamentario 62 37 25
+Legislador sin grupo parlamentario 18 3 15
+No identificado 1 0 1
+Nota: La información corresponde a las personas legisladoras en activo, según la adscripción que tenían al término 
+del último periodo reportado por cada congreso.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De acuerdo con el tipo de adscripción, a nivel nacional, 44.2 % perteneció al grupo 
+parlamentario Movimiento de Regeneración Nacional (Morena); 14.3 %, al Partido Acción 
+Nacional (PAN); 10.6 %, al Partido Verde Ecologista de México (PVEM); 7.8 %, al Partido 
+Revolucionario Institucional (PRI); 7.2 %, al Partido del Trabajo (PT); y 6.3 %, a Movimiento 
+Ciudadano (MC). (Ver tabla 11).
+PAGINA 35
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 35/56
+Tabla 11
+Personas legisladoras de los congresos estatales,
+según entidad federativa y adscripción
+(porcentaje)
+Entidad 
+federativa
+Movimiento 
+de 
+Regeneración 
+Nacional 
+(Morena)
+Partido 
+Acción 
+Nacional 
+(PAN)
+Partido de la 
+Revolución 
+Democrática 
+(PRD)
+Partido 
+del 
+Trabajo 
+(PT)
+Movimiento 
+Ciudadano 
+(MC)
+Partido 
+Revolucionario 
+Institucional 
+(PRI)
+Partido 
+Verde 
+Ecologista 
+de México 
+(PVEM)
+Otro grupo 
+parlamentario
+Legislador 
+sin grupo 
+parlamentario
+Ags. 25.9 63.0 3.7 0.0 3.7 0.0 3.7 0.0 0.0
+BC 60.0 12.0 0.0 4.0 4.0 0.0 12.0 8.0 0.0
+BCS 42.9 4.8 0.0 33.3 0.0 4.8 4.8 9.5 0.0
+Camp. 45.7 5.7 0.0 5.7 28.6 8.6 5.7 0.0 0.0
+Coah. 24.0 20.0 8.0 0.0 0.0 40.0 4.0 4.0 0.0
+Col. 44.0 8.0 0.0 12.0 8.0 12.0 12.0 4.0 0.0
+Chis. 42.5 0.0 0.0 15.0 0.0 7.5 22.5 7.5 5.0
+Chih. 36.4 36.4 0.0 0.0 6.1 12.1 0.0 0.0 9.1
+CDMX 36.9 23.1 3.1 6.2 4.6 3.1 15.4 7.7 0.0
+Dgo. 40.0 20.0 0.0 0.0 0.0 32.0 4.0 0.0 4.0
+Gto. 30.6 44.4 2.8 2.8 5.6 8.3 5.6 0.0 0.0
+Gro. 50.0 2.2 8.7 8.7 4.3 13.0 13.0 0.0 0.0
+Hgo. 53.3 0.0 0.0 6.7 6.7 6.7 6.7 13.3 6.7
+Jal. 21.1 13.2 0.0 5.3 26.3 7.9 10.5 15.8 0.0
+Mex. 49.3 9.3 2.7 12.0 5.3 9.3 12.0 0.0 0.0
+Mich. 35.0 10.0 5.0 12.5 5.0 5.0 15.0 12.5 0.0
+Mor. 50.0 20.0 0.0 10.0 5.0 5.0 5.0 5.0 0.0
+Nay. 43.3 10.0 0.0 13.3 0.0 3.3 16.7 13.3 0.0
+NL 21.4 23.8 7.1 2.4 21.4 19.0 2.4 2.4 0.0
+Oax. 66.7 0.0 0.0 7.1 2.4 2.4 7.1 14.3 0.0
+Pue. 43.9 12.2 0.0 12.2 2.4 2.4 17.1 9.8 0.0
+Qro. 36.0 28.0 0.0 4.0 8.0 4.0 12.0 0.0 8.0
+Q. Roo 56.0 4.0 0.0 12.0 4.0 4.0 20.0 0.0 0.0
+SLP 22.2 14.8 0.0 14.8 3.7 7.4 33.3 3.7 0.0
+Sin. 57.5 5.0 0.0 0.0 7.5 7.5 15.0 5.0 0.0
+Son. 33.3 3.0 3.0 12.1 6.1 6.1 12.1 18.2 6.1
+Tab. 60.0 0.0 11.4 8.6 8.6 2.9 8.6 0.0 0.0
+Tamps. 69.4 19.4 0.0 2.8 5.6 2.8 0.0 0.0 0.0
+Tlax. 48.0 4.0 12.0 4.0 0.0 4.0 8.0 20.0 0.0
+Ver. 68.0 8.0 0.0 0.0 0.0 0.0 10.0 6.0 8.0
+Yuc. 48.6 34.3 0.0 2.9 5.7 5.7 2.9 0.0 0.0
+Zac. 33.3 13.3 6.7 6.7 6.7 13.3 13.3 0.0 6.7
+EUM 44.2 14.3 2.4 7.2 6.3 7.8 10.6 5.5 1.6
+Nota: La información corresponde a las personas legisladoras en activo, según la adscripción que tenían al término del último periodo 
+reportado por cada congreso. Para Ciudad de México solo se consideraron 65 personas legisladoras de las 66 que deben conformar 
+el Congreso, debido a que una persona suplente tomó protesta en fecha posterior al periodo de referencia de los datos.
+No se tabuló la categoría no identificado, con 2.5 % en Sinaloa.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Respecto al nivel de escolaridad de las personas legisladoras, 55.0 % contó con estudios de 
+licenciatura; 23.2 %, con maestría, y 6.8 %, con doctorado (ver tabla 12).
+PAGINA 36
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 36/56
+Tabla 12
+Personas legisladoras de los congresos estatales,
+según adscripción y nivel de escolaridad
+(porcentaje)
+Adscripción Doctorado Maestría Licenciatura
+Carrera 
+técnica o 
+carrera 
+comercial
+Preparatoria Secundaria Preescolar 
+o primaria
+Total 6.8 23.2 55.0 2.0 4.2 0.9 0.2
+Movimiento de Regeneración Nacional 
+(Morena)
+6.5 16.5 57.1 2.8 5.6 1.2 0.2
+Partido Acción Nacional (PAN) 6.3 33.8 48.1 1.9 4.4 0.0 0.0
+Partido de la Revolución Democrática (PRD) 18.5 25.9 55.6 0.0 0.0 0.0 0.0
+Partido del Trabajo (PT) 6.2 21.0 59.3 2.5 2.5 0.0 1.2
+Movimiento Ciudadano (MC) 5.6 28.2 62.0 0.0 2.8 0.0 0.0
+Partido Revolucionario Institucional (PRI) 5.7 33.3 58.6 0.0 0.0 0.0 0.0
+Partido Verde Ecologista de México (PVEM) 5.0 26.1 54.6 2.5 3.4 1.7 0.0
+Otro grupo parlamentario 9.7 29.0 43.5 1.6 4.8 1.6 0.0
+Legislador sin grupo parlamentario 16.7 11.1 33.3 0.0 5.6 5.6 0.0
+No identificado 0.0 0.0 100.0 0.0 0.0 0.0 0.0
+Nota: La información corresponde a las personas legisladoras en activo, según la adscripción que tenían al término del último periodo 
+reportado por cada congreso. No se tabularon las categorías de escolaridad no identificado y ninguno, con 86 y una personas 
+legisladoras, respectivamente.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+En cuanto a otras características sociodemográficas, 1.9 % de las personas legisladoras 
+presentó alguna discapacidad. Además, 0.4 % perteneció a la población afromexicana o 
+afrodescendiente: 3 personas en Guerrero y una en Baja California. A su vez, se registraron 
+25 personas legisladoras (2.2 %) —en 12 estados— pertenecientes a algún pueblo indígena. 
+Asimismo, se reportó una persona legisladora perteneciente tanto a la población indígena 
+como a la afrodescendiente. Finalmente, se registró que 0.8 % de las personas legisladoras 
+perteneció a algún grupo de la diversidad sexual. Destaca el congreso de Guerrero con la 
+mayoría de las personas legisladoras con alguna discapacidad, indígenas, afromexicanas o 
+afrodescendientes y/o personas pertenecientes a algún grupo de la diversidad sexual 
+(ver tabla 13).
+PAGINA 37
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 37/56
+Tabla 13
+Personas legisladoras con alguna discapacidad, afromexicanas, afrodescendientes y/o 
+pertenecientes a algún pueblo indígena o grupo de la diversidad sexual, según entidad 
+federativa
+(personas y porcentaje)
+Entidad 
+federativa
+Con alguna 
+discapacidad
+Perteneciente a la 
+población 
+afromexicana o 
+afrodescendiente
+Perteneciente a algún 
+pueblo indígena
+Perteneciente a algún 
+grupo de la 
+diversidad sexual
+Total Porcentaje Total Porcentaje Total Porcentaje Total Porcentaje
+Ags. 2 7.4% 0 0.0% 1 3.7% 1 3.7%
+BC 0 0.0% 0 0.0% 2 8.0% 1 4.0%
+BCS 1 4.8% 1 4.8% 1 4.8% 1 4.8%
+Chis. 1 2.5% 0 0.0% 0 0.0% 1 2.5%
+CDMX 1 1.5% 0 0.0% 0 0.0% 1 1.5%
+Dgo. 2 8.0% 0 0.0% 2 8.0% 1 4.0%
+Gto. 1 2.8% 0 0.0% 0 0.0% 0 0.0%
+Gro. 5 10.9% 3 6.5% 8 17.4% 2 4.3%
+Mich. 1 2.5% 0 0.0% 2 5.0% 0 0.0%
+Nay. 1 3.3% 0 0.0% 2 6.7% 0 0.0%
+Qro. 0 0.0% 0 0.0% 1 4.0% 0 0.0%
+SLP 0 0.0% 0 0.0% 2 7.4% 0 0.0%
+Son. 1 3.0% 0 0.0% 2 6.1% 0 0.0%
+Tab. 1 2.9% 0 0.0% 0 0.0% 0 0.0%
+Tamps. 1 2.8% 0 0.0% 0 0.0% 1 2.8%
+Tlax. 1 4.0% 0 0.0% 1 4.0% 0 0.0%
+Yuc. 0 0.0% 0 0.0% 1 2.9% 0 0.0%
+Zac. 2 6.7% 0 0.0% 0 0.0% 0 0.0%
+EUM 21 1.9% 4 0.4% 25 2.2% 9 0.8%
+Nota: El porcentaje se calculó con base en el número de personas legisladoras en activo de cada entidad
+federativa.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Respecto del empleo anterior de las personas legisladoras en activo, 218 (19.4 %) fueron
+personas reelectas, es decir, formaron parte de la legislatura inmediata anterior en su entidad 
+federativa. De estas, 121 fueron mujeres y 97, hombres. Los congresos de Ciudad de México
+y Chihuahua reportaron 19 y 17 personas legisladoras reelectas, respectivamente. Como 
+proporción del total de integrantes de sus congresos, Chihuahua y Baja California fueron los 
+que presentaron mayor porcentaje de personas legisladoras reelectas, con 51.5 y 48.0, 
+respectivamente (ver tabla 14).
+PAGINA 38
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 38/56
+Tabla 14
+Personas legisladoras reelectas en los congresos estatales, según entidad federativa
+(personas y porcentaje)
+Entidad 
+federativa Total Porcentaje
+Chih. 17 51.5%
+BC 12 48.0%
+Tlax. 9 36.0%
+NL 15 35.7%
+Ags. 9 33.3%
+Col. 8 32.0%
+Son. 10 30.3%
+CDMX 19 29.2%
+Camp. 10 28.6%
+Qro. 7 28.0%
+Q. Roo 7 28.0%
+Tamps. 9 25.0%
+Coah. 6 24.0%
+Sin. 9 22.5%
+Mich. 8 20.0%
+Dgo. 5 20.0%
+Gto. 7 19.4%
+Gro. 8 17.4%
+Mex. 13 17.3%
+Nay. 5 16.7%
+SLP 4 14.8%
+Zac. 4 13.3%
+Jal. 5 13.2%
+Tab. 4 11.4%
+Yuc. 4 11.4%
+Chis. 4 10.0%
+EUM 218 19.4%
+Nota: El porcentaje se calculó con base las
+personas legisladoras en activo de cada 
+entidad. Para Ciudad de México solo se 
+consideraron 65 personas legisladoras 
+de las 66 que deben conformar el 
+Congreso, debido a que una persona 
+suplente tomó protesta en fecha 
+posterior al periodo de referencia de los 
+datos.
+Fuente: INEGI. Censo Nacional de Poderes 
+Legislativos Estatales (CNPLE), 2025.
+PAGINA 39
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 39/56
+Personal de apoyo de las personas legisladoras
+Al término del último periodo reportado por los congresos, 4 724 personas fungieron como
+personal de apoyo de las personas legisladoras para el ejercicio de sus funciones: 2 360 
+(50.0 %) fueron mujeres y 2 363 (50.0 %), hombres12 (ver tabla 15).
+Tabla 15
+Personal de apoyo de las personas legisladoras de los
+congresos estatales, según entidad federativa y sexo
+(personas y porcentaje)
+Entidad Total Mujeres Hombres No binario
+CDMX 1 462 53.9% 46.1% 0.0%
+Mor. 346 40.8% 59.2% 0.0%
+Mich. 284 43.3% 56.7% 0.0%
+Ver. 271 51.7% 48.3% 0.0%
+NL 257 50.2% 49.8% 0.0%
+BC 220 49.1% 50.9% 0.0%
+Chih. 216 54.2% 45.8% 0.0%
+Mex. 169 40.8% 59.2% 0.0%
+Sin. 156 48.7% 51.3% 0.0%
+Jal. 140 41.4% 57.9% 0.7%
+Yuc. 112 40.2% 59.8% 0.0%
+Nay. 111 48.6% 51.4% 0.0%
+Pue. 111 42.3% 57.7% 0.0%
+BCS 99 50.5% 49.5% 0.0%
+Hgo. 91 38.5% 61.5% 0.0%
+Chis. 86 53.5% 46.5% 0.0%
+Q. Roo 82 63.4% 36.6% 0.0%
+Gto. 75 46.7% 53.3% 0.0%
+Tab. 74 55.4% 44.6% 0.0%
+Zac. 67 43.3% 56.7% 0.0%
+Dgo. 55 65.5% 34.5% 0.0%
+Tamps. 36 100.0% 0.0% 0.0%
+Son. 33 39.4% 60.6% 0.0%
+Gro. 32 50.0% 50.0% 0.0%
+Col. 25 64.0% 36.0% 0.0%
+Tlax. 25 28.0% 72.0% 0.0%
+Ags. 20 55.0% 45.0% 0.0%
+Qro. 19 100.0% 0.0% 0.0%
+SLP 17 29.4% 70.6% 0.0%
+Camp. 15 66.7% 33.3% 0.0%
+Oax. 14 50.0% 50.0% 0.0%
+Coah. 4 25.0% 75.0% 0.0%
+EUM 4 724 49.96% 50.02% 0.02%
+Nota: La suma de los porcentajes puede ser distinta a 100, debido al redondeo de los 
+decimales.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De acuerdo con el tipo de adscripción, 48.9 % del personal de apoyo estaba adscrito con
+alguna persona legisladora (ver gráfica 24).
+12 Se registró una persona no binaria (0.02 %). La suma de los porcentajes puede ser distinta a 100, debido al redondeo de los decimales.
+PAGINA 40
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 40/56
+Gráfica 24
+Personal de apoyo de las personas legisladoras de los
+congresos estatales, según tipo de adscripción
+(personas)
+Nota: No se graficó la categoría no identificado, con 136 registros.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De las 2 686 personas de apoyo adscritas con alguna persona legisladora o grupo 
+parlamentario, 1 158 (43.1 %) correspondieron a Morena. El mayor promedio por cada persona 
+legisladora se encontró adscrito al PVEM o a alguna persona legisladora perteneciente a este, 
+con 3.0 (ver tabla 16).
+Tabla 16
+Personal de apoyo de las personas legisladoras de los congresos estatales, según adscripción 
+y sexo
+(personas y promedio)
+Adscripción Total Mujeres Hombres
+Promedio por 
+persona 
+legisladora
+Total 2 686 1 349 1 337 2.4
+Movimiento de Regeneración Nacional (Morena) 1 158 608 550 2.3
+Partido Acción Nacional (PAN) 462 239 223 2.9
+Partido Verde Ecologista de México (PVEM) 357 184 173 3.0
+Partido del Trabajo (PT) 187 74 113 2.3
+Partido Revolucionario Institucional (PRI) 132 56 76 1.5
+Movimiento Ciudadano (MC) 105 47 58 1.5
+Partido de la Revolución Democrática (PRD) 56 23 33 2.1
+Otro grupo parlamentario 199 105 94 3.2
+Legislador sin grupo parlamentario 27 12 15 1.6
+No identificado 3 1 2 3.0
+Nota: Solo se consideraron 2 686 personas de apoyo adscritas con alguna persona legisladora o grupo 
+parlamentario.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De acuerdo con el nivel de escolaridad, 38.5 % de las mujeres y 44.2% de los hombres 
+contaron con licenciatura como último grado de estudios (ver gráfica 25).
+312
+377
+1 590
+2 309
+Otro tipo de adscripción
+Grupo parlamentario
+Nómina del Congreso
+Persona legisladora
+PAGINA 41
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 41/56
+Gráfica 25
+Personal de apoyo de las personas legisladoras de los congresos estatales, 
+según nivel de escolaridad y sexo
+(porcentaje)
+Nota: No se graficó la categoría no identificado, con 24.5 % para las mujeres y 22.8 % para 
+los hombres.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Los mayores porcentajes de personal de apoyo con licenciatura o posgrado como último grado 
+de estudios correspondieron a personal adscrito a los grupos parlamentarios del PRD, PRI y PT
+o a personas legisladoras pertenecientes a los mismos, con 71.4, 59.9 y 56.7, respectivamente 
+(ver tabla 17).
+0.5
+1.7
+9.2
+14.2
+7.7
+38.5
+3.2
+0.5
+0.3
+1.4
+6.0
+15.5
+3.3
+44.2
+5.5
+0.9
+Ninguno
+Preescolar o primaria
+Secundaria
+Preparatoria
+Carrera técnica o carrera comercial
+Licenciatura
+Maestría
+Doctorado
+Mujeres Hombres
+PAGINA 42
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 42/56
+Tabla 17
+Personal de apoyo de las personas legisladoras de los congresos estatales, según adscripción 
+y nivel de escolaridad 
+(porcentaje)
+Adscripción Ninguno Preescolar 
+o primaria Secundaria Preparatoria
+Carrera 
+técnica o 
+carrera 
+comercial
+Licenciatura Maestría Doctorado No 
+identificado
+Total 0.7 2.2 10.7 17.3 5.6 46.8 4.8 0.9 11.1
+Movimiento de 
+Regeneración 
+Nacional (Morena)
+0.9 2.8 11.8 16.2 5.5 45.4 5.0 1.1 11.1
+Partido Acción 
+Nacional (PAN)
+0.0 1.1 9.3 16.9 5.8 46.3 3.7 0.6 16.2
+Partido Verde 
+Ecologista de 
+México (PVEM)
+0.3 2.2 11.8 19.9 6.7 44.8 4.8 0.3 9.2
+Partido del Trabajo 
+(PT)
+1.6 0.0 5.3 17.1 4.8 52.9 2.7 1.1 14.4
+Partido 
+Revolucionario 
+Institucional (PRI)
+1.5 2.3 2.3 18.9 6.8 53.0 6.1 0.8 8.3
+Movimiento 
+Ciudadano (MC)
+0.0 0.0 12.4 20.0 5.7 48.6 4.8 0.0 8.6
+Partido de la 
+Revolución 
+Democrática (PRD)
+0.0 1.8 3.6 14.3 1.8 62.5 8.9 0.0 7.1
+Otro grupo 
+parlamentario 1.0 3.5 18.1 17.1 4.0 42.7 6.5 1.5 5.5
+Legislador sin 
+grupo 
+parlamentario
+0.0 3.7 3.7 25.9 7.4 51.9 7.4 0.0 0.0
+No identificado 0.0 0.0 0.0 0.0 0.0 100.0 0.0 0.0 0.0
+Nota: Solo se consideraron 2 686 personas de apoyo adscritas con alguna persona legisladora o grupo parlamentario. La suma de los 
+porcentajes puede ser distinta a 100, debido al redondeo de los decimales.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Comisiones legislativas 
+Durante el último periodo reportado, los congresos estatales registraron 1 015 comisiones
+legislativas. De estas, 90.0 % correspondió a comisiones ordinarias; 4.6 %, a comisiones
+especiales; 0.9 %, a extraordinarias, y 4.5 %, a otro tipo. El promedio nacional fue de 
+32 comisiones por congreso: 13 congresos (40.6 %) contaron con más comisiones que el
+promedio (ver gráfica 26).
+PAGINA 43
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 43/56
+Gráfica 26
+Comisiones legislativas conformadas en los congresos estatales, 
+según entidad federativa
+(comisiones)
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+El tema más frecuente que atendieron fue gobierno y política interior, con 62 comisiones. 
+Siguieron desarrollo agrario, territorial, urbano y vivienda, derechos humanos y asuntos 
+financieros y hacendarios, con 60, 58 y 55, respectivamente. En contraste,
+cinco comisiones legislativas atendieron el tema de búsqueda de personas y siete, el de 
+reinserción social (ver tabla 18).
+48
+48
+46
+45
+42
+42
+41
+36
+36
+36
+35
+35
+34
+32
+30
+30
+30
+30
+29
+28
+28
+27
+27
+27
+26
+25
+25
+25
+25
+24
+20
+19
+16
+Mex.
+Ver.
+Tamps.
+CDMX
+Chis.
+Dgo.
+Camp.
+Oax.
+Pue.
+Son.
+Gro.
+Hgo.
+Chih.
+Promedio EUM
+Mich.
+Mor.
+Nay.
+Zac.
+Sin.
+BCS
+NL
+Ags.
+BC
+SLP
+Coah.
+Qro.
+Q. Roo
+Tlax.
+Yuc.
+Gto.
+Jal.
+Col.
+Tab.
+PAGINA 44
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 44/56
+Tabla 18
+Comisiones legislativas conformadas en los congresos estatales, 
+según tema atendido
+(comisiones)
+Temas Total
+Gobierno y política interior 62
+Desarrollo agrario, territorial, urbano y vivienda 60
+Derechos humanos 58
+Asuntos financieros y hacendarios 55
+Desarrollo municipal 50
+Desarrollo social 47
+Puntos constitucionales y legislación 47
+Economía 46
+Régimen, reglamentos y prácticas parlamentarias 46
+Medio ambiente y ecología 45
+Agricultura y desarrollo rural 44
+Población 42
+Arte, cultura y otras manifestaciones sociales 40
+Justicia 40
+Seguridad pública o seguridad ciudadana 40
+Atención a grupos en situación de vulnerabilidad (sin incluir adultos mayores; niñas, niños y 
+adolescentes; y juventud) 38
+Infraestructura, comunicaciones y transportes 38
+Igualdad de género y/o derechos de las mujeres 36
+Salud 36
+Educación 34
+Asuntos electorales y participación ciudadana 32
+Niñas, niños y adolescentes 32
+Vigilancia 32
+Administración y gestoría interna 31
+Cultura física y/o deporte 31
+Protección civil 31
+Turismo 31
+Migración y asuntos internacionales y/o fronterizos 30
+Transparencia, acceso a la información y protección de datos personales 30
+Ciencia, tecnología e innovación 28
+Combate a la corrupción 28
+Asuntos indígenas 26
+Juventud 26
+Recursos hidráulicos 26
+Trabajo 26
+Servicios públicos 24
+Desarrollo integral de la familia 22
+Protección y seguridad social 20
+Adultos mayores 17
+Atención a víctimas 14
+Combustibles y energía 12
+Reinserción social 7
+Búsqueda de personas 5
+Otro tema o asunto 151
+Nota: Las comisiones por tema atendido son mayor al total porque una comisión pudo atender más de 
+un tema.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+PAGINA 45
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 45/56
+IX. TRABAJO LEGISLATIVO 
+Iniciativas
+Durante los periodos reportados del primer año de las legislaturas actuales,
+13 se presentaron 
+11 967 iniciativas en total. En el congreso de Puebla se presentaron 818; mientras que en los 
+de Michoacán y Jalisco se presentaron 787 y 702, respectivamente. En contraste, en los 
+congresos de Veracruz, Chiapas y Coahuila se presentaron, en ese orden, 104, 102 y 
+86 iniciativas (ver tabla 19).
+Tabla 19
+Iniciativas presentadas en los congresos estatales, según entidad federativa 
+(iniciativas y porcentaje)
+Entidad 
+federativa Iniciativas presentadas Porcentaje
+Pue. 818 6.8%
+Mich. 787 6.6%
+Jal. 702 5.9%
+NL 693 5.8%
+Mex. 692 5.8%
+Chih. 687 5.7%
+BC 604 5.0%
+Oax. 556 4.6%
+Tamps. 530 4.4%
+Ags. 529 4.4%
+Hgo. 528 4.4%
+CDMX 422 3.5%
+Dgo. 418 3.5%
+Mor. 395 3.3%
+Sin. 374 3.1%
+SLP 323 2.7%
+Gro. 296 2.5%
+Tab. 275 2.3%
+Qro. 263 2.2%
+Gto. 249 2.1%
+Son. 222 1.9%
+Tlax. 210 1.8%
+Q. Roo 206 1.7%
+Zac. 179 1.5%
+Yuc. 173 1.4%
+Camp. 148 1.2%
+Col. 141 1.2%
+Nay. 141 1.2%
+BCS 114 1.0%
+Ver. 104 0.9%
+Chis. 102 0.9%
+Coah. 86 0.7%
+EUM 11 967 100 %
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+13 Para revisar los periodos legislativos reportados por los congresos estatales, se puede consultar el siguiente enlace:
+ https://desarrollowww.inegi.org.mx/contenidos/programas/cnple/2025/doc/periodos_cnple2025.pdf
+PAGINA 46
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 46/56
+Del total de iniciativas presentadas, el tipo de promovente más frecuente fue personas 
+legisladoras, con 7 400 (61.8 %). (Ver gráfica 27).
+Gráfica 27
+Iniciativas presentadas en los congresos estatales, según tipo de promovente
+(iniciativas)
+Nota: No se graficaron las categorías no identificado y no disponible, con 6 y 2 registros, respectivamente.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De las 1 920 iniciativas que se promovieron por los grupos parlamentarios,14 Morena participó 
+en 32.6 %; PAN, en 24.6 %, y PVEM, en 18.8 % (ver gráfica 28).
+14 Solo se incluyen las iniciativas presentadas como grupo, por lo que no se consideran las que se presentaron de forma individual por cada 
+persona legisladora.
+7 400
+1 920
+1 462
+576
+254
+38
+33
+24
+16
+12
+1
+223
+Personas legisladoras
+Grupo parlamentario
+Ayuntamientos
+Persona titular del Poder Ejecutivo
+Ciudadanía
+Comisión legislativa
+Legislatura en funciones
+Órgano constitucional autónomo
+Junta de coordinación política
+Tribunal Superior de Justicia
+Mesa directiva
+Otro tipo de promovente
+PAGINA 47
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 47/56
+Gráfica 28
+Iniciativas presentadas por los grupos parlamentarios, según grupo
+(iniciativas)
+Nota: Una iniciativa se pudo haber promovido por uno o varios grupos parlamentarios. 
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Iniciativas preferentes15
+En 17 entidades federativas, la legislación vigente del Poder Legislativo contemplaba la figura 
+de iniciativa preferente por parte del Poder Ejecutivo (ver mapa 5). De las 576 iniciativas que 
+presentaron las personas titulares de los poderes ejecutivos durante el primer año de ejercicio 
+de las legislaturas actuales, 52 tuvieron carácter de iniciativa preferente. De estas, 17 se 
+presentaron en el congreso de Campeche; 14, en el de Michoacán; y 8, en el de Tlaxcala
+(ver gráfica 29).
+15 Se refiere al proyecto de ley o decreto que el Poder Ejecutivo de la entidad federativa presenta para trámite preferente, o lo señala con este 
+carácter, el día de la apertura de cada periodo ordinario de sesiones.
+625
+473
+360
+244
+219
+213
+153
+87
+Movimiento de Regeneración Nacional (Morena)
+Partido Acción Nacional (PAN)
+Partido Verde Ecologista de México (PVEM)
+Partido Revolucionario Institucional (PRI)
+Partido de la Revolución Democrática (PRD)
+Movimiento Ciudadano (MC)
+Partido del Trabajo (PT)
+Otro grupo parlamentario
+PAGINA 48
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 48/56
+Mapa 5
+Condición de establecimiento de la figura de iniciativa preferente en la legislación vigente del 
+Poder Legislativo estatal, según entidad federativa 
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Gráfica 29
+Iniciativas preferentes, según entidad federativa
+(iniciativas preferentes)
+Nota: Solo se graficaron siete entidades federativas en las que se presentaron iniciativas preferentes 
+durante el primer año de ejercicio de las legislaturas actuales.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025
+17
+14
+8
+6
+3
+3
+1
+Camp.
+Mich.
+Tlax.
+BCS
+Gro.
+Hgo.
+Chih.
+Establecimiento de 
+la figura de 
+iniciativa preferente 
+Sí (17 entidades)
+No (15 entidades)
+PAGINA 49
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 49/56
+Estatus de las iniciativas presentadas16
+Del total de 11 967 iniciativas, 2 964 (24.8 %) fueron dictaminadas17 en comisiones durante el 
+mismo periodo de sesiones en el que se presentaron. De estas iniciativas, los congresos de
+Tamaulipas y estado de México reportaron la mayor cantidad: 253 y 223, respectivamente. 
+Sin embargo, los congresos de Chiapas y Colima destacaron por el porcentaje de iniciativas 
+dictaminadas con respecto a las iniciativas presentadas, con 88.2 y 76.6, respectivamente (ver 
+tabla 20).
+16 La información se refiere al estatus que tenían las iniciativas al término del periodo de sesiones en el que se presentaron.
+17 Se refiere a la resolución acordada por la mayoría de los integrantes de una o varias comisiones legislativas. Contiene la opinión técnica, 
+especializada y consensuada respecto de una o varias iniciativas para su debate, votación y, de ser el caso, aprobación del Pleno del 
+Congreso de la entidad federativa. Se incluyen las iniciativas que se determinaron con los siguientes estatus: dictamen, aprobada o 
+procedente y desechada o improcedente.
+PAGINA 50
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 50/56
+Tabla 20
+Iniciativas presentadas en los congresos estatales, según entidad federativa y estatus
+(iniciativas y porcentaje)
+Entidad
+federativa Total
+Estatus de las iniciativas Porcentaje de 
+iniciativas 
+dictaminadas 
+respecto al 
+total1/
+Estudio Aprobada o
+procedente Ingreso Dictamen Desechada o 
+improcedente Desistimiento Otro 
+estatus
+No 
+disponible
+Pue. 818 752 66 0 0 0 0 0 0 8.1 
+Mich. 787 564 215 0 0 8 0 0 0 28.3 
+Jal. 702 36 60 68 24 0 0 514 0 12.0 
+NL 693 693 0 0 0 0 0 0 0 0.0 
+Mex. 692 469 223 0 0 0 0 0 0 32.2 
+Chih. 687 470 208 0 0 2 0 5 2 30.6 
+BC 604 566 24 2 0 0 12 0 0 4.0 
+Oax. 556 489 62 0 0 5 0 0 0 12.1 
+Tamps. 530 276 222 0 29 2 0 1 0 47.7 
+Ags. 529 309 77 0 106 36 1 0 0 41.4 
+Hgo. 528 365 142 0 0 0 0 21 0 26.9 
+CDMX 422 374 40 0 0 0 8 0 0 9.5 
+Dgo. 418 0 108 0 0 0 0 310 0 25.8 
+Mor. 395 395 0 0 0 0 0 0 0 0.0 
+Sin. 374 35 69 225 45 0 0 0 0 30.5 
+SLP 323 0 71 0 0 9 6 237 0 24.8 
+Gro. 296 176 120 0 0 0 0 0 0 40.5 
+Tab. 275 213 62 0 0 0 0 0 0 22.5 
+Qro. 263 152 81 0 21 0 9 0 0 38.8 
+Gto. 249 224 25 0 0 0 0 0 0 10.0 
+Son. 222 135 82 0 4 1 0 0 0 39.2 
+Tlax. 210 96 113 0 0 1 0 0 0 54.3 
+Q. Roo 206 131 73 0 1 0 0 1 0 35.9 
+Zac. 179 102 77 0 0 0 0 0 0 43.0 
+Yuc. 173 132 41 0 0 0 0 0 0 23.7 
+Camp. 148 53 92 3 0 0 0 0 0 62.2 
+Col. 141 32 106 0 0 2 1 0 0 76.6 
+Nay. 141 81 56 4 0 0 0 0 0 39.7 
+BCS 114 82 30 0 0 0 0 2 0 26.3 
+Ver. 104 78 26 0 0 0 0 0 0 25.0 
+Chis. 102 12 90 0 0 0 0 0 0 88.2 
+Coah. 86 78 7 0 0 0 1 0 0 8.1 
+Total 11 967 7 570 2 668 302 230 66 38 1 091 2 24.8%
+Nota: La información se refiere al estatus que tenían las iniciativas al término del periodo de sesiones en el que se presentaron.
+1/ Solo se consideraron las iniciativas que se dictaminaron durante el mismo periodo de sesiones en el que se presentaron.
+Las iniciativas dictaminadas incluyen las que tuvieron los siguientes estatus: dictamen, aprobada o procedente y desechada o 
+improcedente.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+PAGINA 51
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 51/56
+De acuerdo con el tipo del primer dictamen18 que emitieron las comisiones legislativas, de las 
+2 964 iniciativas dictaminadas en el mismo periodo de sesiones en el que se presentaron, el 
+mayor porcentaje correspondió a reformas a leyes estatales (42.2 %). Siguieron nueva ley
+(17.3 %) y reformas a la Constitución de la entidad federativa (6.0 %). (Ver gráfica 30).
+Gráfica 30
+Iniciativas dictaminadas en las comisiones de los congresos estatales, 
+según tipo de primer dictamen
+(iniciativas)
+Nota: La información se refiere a las iniciativas dictaminadas al término del periodo de sesiones en el que se presentaron. 
+No se graficó la categoría no identificado, con 120 registros.
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+X. JUICIO POLÍTICO19
+Durante los periodos reportados, cuatro congresos estatales recibieron alguna denuncia, 
+iniciaron y/o dieron continuidad a algún procedimiento de juicio político en contra de alguna 
+persona servidora pública. En total, se presentaron 26 denuncias de juicio político, de las 
+cuales, Veracruz concentró 53.8 por ciento. Respecto al estatus que tuvieron las denuncias al 
+término del periodo de sesiones en que se presentaron, siete estuvieron en trámite en la 
+instancia instructora y cinco, en trámite en la instancia substanciadora. El resto fueron 
+sobreseídas (ver tabla 21).
+18 Se refiere al documento que registra la resolución escrita de una o varias comisiones, producto de un primer estudio, sobre una iniciativa 
+de ley o de decreto, y que contiene la opinión técnica, especializada y consensuada sobre dicha iniciativa para su posterior debate, votación 
+y, de ser el caso, aprobación por parte del Pleno.
+19 Procedimiento de orden constitucional que realiza el Congreso Estatal cuando los actos u omisiones de las personas servidoras públicas 
+redundan en perjuicio de los intereses públicos fundamentales o de su buen despacho por violaciones graves a la Constitución, a las leyes 
+que de ella emanen; o bien, cuando existe un manejo indebido de fondos y recursos públicos.
+1 250
+512
+179 146 118
+28
+243
+368
+Reformas a
+leyes estatales
+Nueva ley Reformas a la
+Constitución de
+la entidad
+federativa
+Nueva
+normatividad
+Reformas a la
+Constitución
+Política de los
+Estados Unidos
+Mexicanos
+Reformas a
+leyes nacionales
+y/o generales
+Reformas a otro
+tipo de
+disposición
+normativa
+Otro tipo
+PAGINA 52
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 52/56
+Tabla 21
+Denuncias de juicio político presentadas en los congresos estatales, 
+según entidad federativa y estatus
+(denuncias)
+Entidad federativa Total
+En trámite en 
+instancia 
+instructora
+En trámite en 
+instancia 
+substanciadora
+Sobreseimiento
+Veracruz 14 0 0 14
+Nuevo León 5 0 5 0
+San Luis Potosí 4 4 0 0
+Zacatecas 3 3 0 0
+Estados Unidos Mexicanos 26 7 5 14
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+XI. DECLARACIÓN DE PROCEDENCIA20
+Durante los periodos reportados, se dio continuidad a tres denuncias de declaración de 
+procedencia: una ante cada uno de los congresos de Chiapas, Nayarit y Zacatecas. De 
+acuerdo con su estatus, todas concluyeron con resolución condenatoria por parte del pleno. 
+Los casos correspondieron a tres hombres que se desempeñaron como síndico en Chiapas,
+magistrado u homólogo del Tribunal Superior de Justicia de la entidad federativa en Nayarit y 
+presidente municipal en Zacatecas (ver mapa 6).
+20 Procedimiento presentado ante el Congreso Estatal a efecto de eliminar el fuero constitucional de las personas servidoras públicas de la 
+entidad federativa.
+PAGINA 53
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 53/56
+Mapa 6
+Condición de haber recibido alguna denuncia, iniciado y/o dado continuidad a algún 
+procedimiento de declaración de procedencia, según entidad federativa
+ 
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+XII. COMPARECENCIAS
+Durante los periodos reportados, en 18 congresos se celebraron 348 comparecencias de 
+personas servidoras públicas. De estas comparecencias, 263 (75.6 %) fueron por motivo de 
+glosa y 85 (24.4 %), por otro motivo. En Baja California se registró 11.8 % del total de 
+comparecencias efectuadas en los congresos locales. Siguió el congreso de Zacatecas, con 
+10.3 % (ver tabla 22).
+No (26 entidades)
+Sí (3 entidades)
+Condición de haber recibido 
+alguna denuncia, iniciado y/o 
+dado continuidad a algún 
+procedimiento de declaración 
+de procedencia
+No aplica (3 entidades)
+PAGINA 54
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 54/56
+Tabla 22
+Comparecencias celebradas en los congresos estatales, según entidad federativa y motivo
+(comparecencias)
+Entidad 
+federativa Total Glosa Otro
+BC 41 21 20
+Zac. 36 16 20
+Camp. 30 17 13
+Q. Roo 29 20 9
+Ver. 22 17 5
+Oax. 21 21 0
+Dgo. 20 16 4
+Gro. 20 20 0
+CDMX 19 19 0
+Pue. 19 17 2
+Coah. 17 17 0
+Hgo. 17 17 0
+Tamps. 15 15 0
+Chih. 12 0 12
+Nay. 10 10 0
+SLP 9 9 0
+Ags. 6 6 0
+Mex. 5 5 0
+EUM 348 263 85
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De acuerdo con la modalidad, en 72.1 % se citó a comparecer a las personas servidoras 
+públicas ante comisiones legislativas y en 26.1 %, ante el Pleno (ver gráfica 31).
+Gráfica 31
+Comparecencias celebradas en los congresos estatales, según modalidad
+(comparecencias)
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+91
+251
+2 4
+Ante Pleno Ante comisiones
+legislativas
+Ante Pleno y
+comisiones legislativas
+Otra
+PAGINA 55
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 55/56
+Del total de comparecencias, en 77.6 % comparecieron ante el congreso personas titulares de 
+alguna institución o unidad administrativa de la Administración Pública Estatal (excluyendo, de 
+ser el caso, a la Procuraduría General de Justicia). Además, en 6.6 % de las comparecencias 
+se citó a personas titulares de presidencias municipales y en 2.0 %, a personas titulares de 
+las fiscalías o procuradurías generales de justicia (ver tabla 23).
+Tabla 23
+Comparecencias celebradas en los congresos estatales, según cargo de las personas 
+comparecientes
+(comparecencias)
+Cargo Total
+Titular de alguna institución o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser 
+el caso, a la Procuraduría General de Justicia) 270
+Presidente(a) municipal 23
+Integrante del Consejo General u homólogo del organismo público local electoral de la entidad federativa 8
+Titular de la Fiscalía General o Procuraduría General de Justicia de la entidad federativa 7
+Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo 
+público local electoral, al organismo garante de acceso a la información y protección de datos personales, al 
+organismo público de derechos humanos de la entidad federativa, y, de ser el caso, a la Fiscalía General de 
+la entidad federativa)
+7
+Titular del organismo público de derechos humanos de la entidad federativa 6
+Magistrado(a) u homólogo del Tribunal Superior de Justicia de la entidad federativa 4
+Gobernador(a) o Jefe (a) de Gobierno 2
+Comisionado(a) u homólogo del organismo garante del derecho de acceso a la información y protección de 
+datos personales de la entidad federativa 1
+Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o 
+demarcación territorial 1
+Otro cargo del ámbito estatal 19
+Total 348
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+De las 270 comparecencias de personas titulares de alguna institución o unidad administrativa 
+de la Administración Pública Estatal, las más frecuentes fueron las de titulares cuya función 
+principal de la institución fue asuntos financieros y hacendarios (23), desarrollo social (20), 
+seguridad pública o seguridad ciudadana (19), gobierno y política interior (18) y salud (18). 
+(Ver gráfica 32).
+PAGINA 56
+REPORTE DE RESULTADOS 13/26
+CENSO NACIONAL DE PODERES LEGISLATIVOS 
+ESTATALES (CNPLE) 2025
+27 de abril de 2026
+Página 56/56
+Gráfica 32
+Comparecencias de titulares de alguna institución o unidad administrativa de la 
+Administración Pública Estatal, según función principal
+(comparecencias)
+Fuente: INEGI. Censo Nacional de Poderes Legislativos Estatales (CNPLE), 2025.
+Los resultados CNPLE 2025 se pueden consultar en la siguiente liga:
+https://www.inegi.org.mx/programas/cnple/2025/
+La información estadística y geográfica que genera el INEGI es un bien público y nos permite a todas y 
+a todos tomar mejores decisiones. ¡Conócela, úsala y compártela!
+23
+20
+19
+18
+18
+17
+16
+16
+15
+14
+14
+12
+12
+10
+9
+9
+8
+5
+5
+3
+3
+2
+2
+Asuntos financieros y hacendarios
+Desarrollo social
+Seguridad pública o seguridad ciudadana
+Gobierno y política interior
+Salud
+Educación
+Economía
+Función pública
+Agricultura y desarrollo rural
+Medio ambiente y ecología
+Turismo
+Infraestructura, comunicaciones y transportes
+Trabajo
+Servicios públicos
+Desarrollo agrario, territorial, urbano y vivienda
+Igualdad de género y/o derechos de las mujeres
+Arte, cultura y otras manifestaciones sociales
+Protección civil
+Tránsito, movilidad y seguridad vial
+Asuntos indígenas
+Asuntos jurídicos
+Cultura física y/o deporte
+Despacho del ejecutivo
