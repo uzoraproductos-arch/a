@@ -18033,16 +18033,20 @@ body.con-regreso { padding-bottom: 96px; }
 }
 
 
+/* Tarjeta de modulo al estilo del explorador de USAspending: icono grande,
+   titulo, una frase, la cifra y «Comenzar». La explicacion larga vive en el
+   proemio (#moduloProemio), al abrir el modulo. */
 .explorer-card {
   background: rgba(14, 18, 27, 0.65);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-card);
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 28px 20px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  text-align: center;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
@@ -18060,113 +18064,258 @@ body.con-regreso { padding-bottom: 96px; }
 }
 
 [data-theme="light"] .explorer-card {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] .explorer-card:hover {
-  border-color: var(--navy);
+  border-color: var(--navy, #0b3a6e);
   box-shadow: 0 8px 20px rgba(0, 43, 91, 0.12);
 }
 
 [data-theme="light"] .explorer-card.active-explorer-card {
-  border-color: var(--navy);
+  border-color: var(--navy, #0b3a6e);
   background: rgba(0, 43, 91, 0.05);
 }
 
-.explorer-card-header {
+.explorer-card-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  justify-content: center;
+  font-size: 42px;
+  line-height: 1;
+  margin-bottom: 16px;
+  background: radial-gradient(circle at 35% 30%, rgba(243, 207, 101, 0.22), rgba(201, 168, 76, 0.06) 70%);
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 0 0 6px rgba(201, 168, 76, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.explorer-card-modnum {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-}
+.explorer-card:hover .explorer-card-icon { transform: scale(1.06); }
 
-[data-theme="light"] .explorer-card-modnum {
-  color: var(--navy);
-}
-
-.explorer-card-icon {
-  font-size: 22px;
+[data-theme="light"] .explorer-card-icon {
+  background: radial-gradient(circle at 35% 30%, rgba(0, 43, 91, 0.12), rgba(0, 43, 91, 0.03) 70%);
+  border-color: rgba(0, 43, 91, 0.2);
+  box-shadow: 0 0 0 6px rgba(0, 43, 91, 0.04);
 }
 
 .explorer-card-title {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--text-main);
   margin: 0 0 8px;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .explorer-card-desc {
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.5;
-  color: var(--text-dim);
-  margin: 0 0 14px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
   flex-grow: 1;
 }
 
 .explorer-card-stat {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--gold-bright);
-  background: rgba(201, 168, 76, 0.08);
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-bottom: 14px;
-  display: inline-block;
-  border-left: 2px solid var(--gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 8px;
+  margin-top: auto;
+  margin-bottom: 16px;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
-[data-theme="light"] .explorer-card-stat {
-  color: var(--navy);
-  background: rgba(0, 43, 91, 0.06);
-  border-left-color: var(--navy);
+.explorer-card-stat strong {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.explorer-card-stat span {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="light"] .explorer-card-stat strong {
+  color: var(--navy, #0b3a6e);
 }
 
 .explorer-card-btn {
   width: 100%;
-  padding: 9px 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-gold);
-  border-radius: 6px;
-  color: var(--gold-bright);
+  padding: 11px 12px;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  color: #0c0e15;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .explorer-card-btn:hover {
-  background: var(--gold);
-  color: #0c0e15;
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.35);
+}
+
+.explorer-card-btn:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
 }
 
 [data-theme="light"] .explorer-card-btn {
-  background: rgba(0, 43, 91, 0.04);
-  border-color: rgba(0, 43, 91, 0.3);
-  color: var(--navy);
+  background: var(--navy, #0b3a6e);
+  border-color: var(--navy, #0b3a6e);
+  color: #fff;
 }
 
 [data-theme="light"] .explorer-card-btn:hover {
-  background: var(--navy);
-  color: #fff;
+  background: #013a78;
+  box-shadow: 0 4px 14px rgba(0, 43, 91, 0.3);
+}
+
+/* Proemio del modulo: portada con el texto que salio de la tarjeta */
+.mod-proemio {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin: 8px 0 28px;
+  padding: 28px;
+  border: 1px solid var(--border-gold);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(40, 34, 18, 0.92), rgba(12, 15, 22, 0.9) 60%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  scroll-margin-top: 156px;
+}
+
+.mod-proemio[hidden] { display: none; }
+
+[data-theme="light"] .mod-proemio {
+  border-color: rgba(0, 43, 91, 0.18);
+  background: linear-gradient(135deg, rgba(0, 43, 91, 0.07), rgba(255, 255, 255, 0.9) 60%);
+}
+
+.mod-proemio-icono {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  line-height: 1;
+  background: radial-gradient(circle at 35% 30%, rgba(243, 207, 101, 0.25), rgba(201, 168, 76, 0.06) 70%);
+  border: 1px solid var(--border-gold);
+}
+
+[data-theme="light"] .mod-proemio-icono {
+  background: radial-gradient(circle at 35% 30%, rgba(0, 43, 91, 0.14), rgba(0, 43, 91, 0.03) 70%);
+  border-color: rgba(0, 43, 91, 0.2);
+}
+
+.mod-proemio-cuerpo { min-width: 0; }
+
+.mod-proemio-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+[data-theme="light"] .mod-proemio-kicker { color: var(--navy, #0b3a6e); }
+
+.mod-proemio-titulo {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 6px 0 4px;
+  color: var(--text-main);
+}
+
+.mod-proemio-sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--gold-bright);
+  margin: 0 0 14px;
+}
+
+[data-theme="light"] .mod-proemio-sub { color: var(--navy, #0b3a6e); }
+
+.mod-proemio-texto {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+  max-width: 78ch;
+}
+
+.mod-proemio-temas {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.mod-proemio-temas li {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.mod-proemio-volver {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-bright);
+  cursor: pointer;
+}
+
+.mod-proemio-volver:hover { text-decoration: underline; }
+
+[data-theme="light"] .mod-proemio-volver { color: var(--navy, #0b3a6e); }
+
+.mod-proemio-eco { border-color: rgba(95, 212, 154, 0.45); }
+
+@media (max-width: 640px) {
+  .mod-proemio { flex-direction: column; align-items: center; text-align: center; padding: 22px 16px; gap: 14px; scroll-margin-top: 12px; }
+  .mod-proemio-icono { width: 76px; height: 76px; font-size: 40px; }
+  .mod-proemio-titulo { font-size: 24px; }
+  .mod-proemio-temas { justify-content: center; }
+  .explorer-card { padding: 22px 16px 16px; }
 }
 
 /* ==========================================================================
@@ -20713,8 +20862,9 @@ button.radar-state-flag-card {
 @media (min-width: 1200px) { .explorer-cards-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (min-width: 1024px) and (max-width: 1199px) { .explorer-cards-grid { grid-template-columns: repeat(3, 1fr); } }
 .explorer-card-eco { border-color: rgba(95, 212, 154, 0.45); }
-.explorer-card-eco .explorer-card-stat { color: #9fe3bf; border-color: rgba(95, 212, 154, 0.45); }
-[data-theme="light"] .explorer-card-eco .explorer-card-stat { color: #1b6b43; }
+.explorer-card-eco .explorer-card-stat strong { color: #9fe3bf; }
+.explorer-card-eco .explorer-card-icon { border-color: rgba(95, 212, 154, 0.45); background: radial-gradient(circle at 35% 30%, rgba(95, 212, 154, 0.22), rgba(95, 212, 154, 0.05) 70%); }
+[data-theme="light"] .explorer-card-eco .explorer-card-stat strong { color: #1b6b43; }
 .am-profundizar { margin-top: 36px; padding-top: 12px; border-top: 1px dashed var(--border-subtle); }
 
 /* En telefono la barra superior deja de ser fija: ocupaba cerca de un tercio

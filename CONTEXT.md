@@ -2101,6 +2101,28 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (vitrina de módulos al estilo del explorador de USAspending)
+
+- **Tarjeta limpia:** cada uno de los cinco módulos de la portada muestra sólo
+  ícono grande en círculo, título, una frase breve, su cifra y el botón
+  «Comenzar». Se retiró la etiqueta «Módulo N» y el párrafo descriptivo.
+- **Proemio al abrir:** el texto que salió de la tarjeta vive ahora en
+  `#moduloProemio`, al inicio del espacio de módulos: ícono, «Módulo N ·
+  Proemio», título, subtítulo (el subtema), el texto, los temas del módulo y
+  «↑ Ver todos los módulos». Lo pinta `pintarProemio(tabKey)` desde
+  `PROEMIOS` en `audit-engine.js`; `switchTab` quedó envuelto
+  (`switchTabNucleo`) para pintarlo una sola vez con la pestaña pedida, y se
+  oculta en las pestañas que no son de la vitrina.
+- **Cifra corregida en la tarjeta del Inspector:** decía «$51,024 mdp por
+  aclarar», cifra sin sostén (ver la bitácora de noticias, abajo). Ahora dice
+  $65,169.1 mdp por aclarar en la CP 2024, de la Matriz de Datos Básicos de
+  la ASF (consolidado, feb. 2026, p. 11), la misma que usa la sección de la
+  Cuenta Pública. Cada cifra de tarjeta lleva su fuente en `title`.
+- **Tema claro:** la variable `--navy` no está definida en la hoja; los
+  botones de las tarjetas salían invisibles. Las reglas nuevas usan
+  `var(--navy, #0b3a6e)`. El resto de usos de `--navy` en la hoja sigue
+  igual (pendiente abajo).
+
 ### Hecho (Auditoría en imágenes: simulador «Ver gasto» con cifras de la base)
 
 - **El carrusel ya no lleva cifras propias.** `showcaseData`, con montos sin
@@ -2140,6 +2162,12 @@ vuelve a correrse si cambian los libros.
 
 ### Pendiente
 
+- **`--navy` sin definir:** unas 20 reglas del tema claro la usan sin
+  valor de respaldo y se pintan con el color heredado. Definirla en
+  `[data-theme="light"]` y revisar esas secciones una por una.
+- **«$51,024 mdp» sigue en la cinta de indicadores de la portada** y en
+  el motor (tasa por segundo y serie histórica). Sustituir por la cifra
+  de la CP 2024 con su fuente, o retirarla, previa decisión del autor.
 - **Expedientes, alcance:** cada ficha reúne sólo los informes enlistados. El
   caso Segalmex más conocido está en las Cuentas Públicas 2019 a 2021, que no
   se han integrado; tampoco las auditorías de la CP 2021 a los demás casos.

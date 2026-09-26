@@ -4836,7 +4836,74 @@
 
   let activeTabKey = 'presupuesto';
 
+  /* Proemio de cada modulo de la vitrina. La tarjeta solo lleva icono,
+     titulo, frase y cifra; la explicacion vive aqui, al abrir el modulo. */
+  const PROEMIOS = {
+    presupuesto: {
+      n: 1, icono: '⚖️', titulo: 'Circuito del Dinero',
+      subtitulo: 'Por dónde pasa cada peso antes de llegar a tu calle',
+      texto: 'El dinero público recorre siempre el mismo camino: la Ley de Ingresos (LIF) autoriza cobrarlo, el Presupuesto de Egresos (PEF 2026: $10.19 billones) decide en qué se gasta, el gasto federalizado lo reparte a los 32 estados ($2.81 billones) y las participaciones y aportaciones lo llevan a los municipios. Aquí se audita cada una de esas cuatro etapas.',
+      temas: ['Ingresos: la LIF', 'Egresos: el PEF', 'Gasto federalizado', 'Participaciones municipales']
+    },
+    megaobras: {
+      n: 2, icono: '🏗️', titulo: 'Inversión &amp; Megaobras',
+      subtitulo: 'Lo que se prometió, lo que se pagó y la diferencia',
+      texto: 'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
+      temas: ['Simulador de megaobras', 'Sobrecostos', 'Subsidios de operación', 'Proyectos por sexenio']
+    },
+    calculadora: {
+      n: 3, icono: '💳', titulo: 'Calculadora Cívica',
+      subtitulo: 'Tu sueldo, tus impuestos y el rubro al que llegan',
+      texto: 'Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu estado y tu municipio con los 2,479 del padrón nacional.',
+      temas: ['Tu ticket fiscal', 'ISR, IVA y predial', 'Comparador salarial', 'Tu estado y tu municipio']
+    },
+    verificador: {
+      n: 4, icono: '🔍', titulo: 'Inspector Forense',
+      subtitulo: 'Dónde quedó el dinero que nadie ha podido explicar',
+      texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
+      temas: ['Radar de banderas rojas', 'Expedientes ASF', 'Verificador de EFOS', 'Cuenta Pública']
+    },
+    ambiente: {
+      n: 5, icono: '🌎', titulo: 'El Costo Ambiental',
+      subtitulo: 'El gasto que no aparece en el recibo',
+      texto: 'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí se mide en pesos con cifras oficiales (INEGI, SEMARNAT y Hacienda), se calcula tu parte y se compara con el presupuesto ambiental 2026-2027 y las leyes que aplican.',
+      temas: ['Reloj del daño', 'Tu basura y tu parte', 'Servicio municipal', 'Presupuesto ambiental']
+    }
+  };
+
+  function pintarProemio(tabKey) {
+    var el = document.getElementById('moduloProemio');
+    if (!el) return;
+    var p = PROEMIOS[tabKey];
+    if (!p) { el.hidden = true; el.removeAttribute('data-modulo'); return; }
+    if (el.getAttribute('data-modulo') === tabKey && !el.hidden) return;
+    el.setAttribute('data-modulo', tabKey);
+    el.className = 'mod-proemio' + (tabKey === 'ambiente' ? ' mod-proemio-eco' : '');
+    el.innerHTML =
+      '<div class="mod-proemio-icono" aria-hidden="true">' + p.icono + '</div>' +
+      '<div class="mod-proemio-cuerpo">' +
+        '<span class="mod-proemio-kicker">Módulo ' + p.n + ' · Proemio</span>' +
+        '<h2 class="mod-proemio-titulo">' + p.titulo + '</h2>' +
+        '<p class="mod-proemio-sub">' + p.subtitulo + '</p>' +
+        '<p class="mod-proemio-texto">' + p.texto + '</p>' +
+        '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
+          p.temas.map(function(t) { return '<li>' + t + '</li>'; }).join('') +
+        '</ul>' +
+        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
+      '</div>';
+    el.hidden = false;
+  }
+
+  /* Envoltura: switchTab se llama a si misma (megaobras -> accion-financiera);
+     el proemio se pinta una sola vez, con la pestaña que pidio el lector. */
+  let switchTabNivel = 0;
   function switchTab(tabKey, skipPush) {
+    switchTabNivel++;
+    try { return switchTabNucleo(tabKey, skipPush); }
+    finally { switchTabNivel--; if (!switchTabNivel) pintarProemio(tabKey); }
+  }
+
+  function switchTabNucleo(tabKey, skipPush) {
     if (tabKey === 'megaobras') {
       switchTab('accion-financiera', skipPush);
       switchSubtab('accion-financiera', 'simulador-megaobras');
@@ -26205,8 +26272,14 @@
     document.querySelectorAll('.explorer-card').forEach(function(c) {
       c.classList.remove('active-explorer-card');
     });
-    var hero = document.querySelector('.explorer-hero-section') || document.body;
-    hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    pintarProemio(null);
+    /* De vuelta a la vitrina de modulos, por debajo de la barra fija. */
+    var rejilla = document.querySelector('.explorer-cards-grid');
+    if (rejilla) {
+      window.scrollTo({ top: Math.max(0, rejilla.getBoundingClientRect().top + window.pageYOffset - 170), behavior: 'smooth' });
+    } else {
+      (document.querySelector('.explorer-hero-section') || document.body).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // =========================================================================
@@ -27514,6 +27587,7 @@
     compartirPlataforma: compartirPlataforma,
     seleccionarModuloExplorer: seleccionarModuloExplorer,
     plegarDesgloseModulos: plegarDesgloseModulos,
+    pintarProemio: pintarProemio,
     abrirDiccionarioSubtab: abrirDiccionarioSubtab,
     toggleMegaMenu: toggleMegaMenu,
     cerrarMegaMenus: cerrarMegaMenus,
