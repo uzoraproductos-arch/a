@@ -43,6 +43,9 @@
 }
 
 [data-theme="light"] {
+  /* Azul institucional del tema claro: titulos, botones y enlaces que
+     antes la leian sin valor y heredaban el color del padre. */
+  --navy: #0b3a6e;
   --bg-void: transparent;
   --bg-surface: rgba(255, 255, 255, 0.78);
   --bg-card: rgba(255, 255, 255, 0.65);

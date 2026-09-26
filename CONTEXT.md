@@ -2101,6 +2101,50 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (pendientes del glosario, la bibliografía y el tema claro)
+
+Segunda vuelta sobre la lista de pendientes, con lo que no requería decisión
+del autor. Script idempotente: `herramientas/glosario_fundamentos.py`.
+
+- **26 definiciones antiguas con su artículo exacto**, leídas contra el texto
+  vigente de LeyesBiblio (26-09-2026): Denuncia Ciudadana, Alertador, OIC,
+  Ramo 28, LDF, ADEFAS, Techo de Endeudamiento, Subastas y Tasa de Banxico,
+  Ingresos Presupuestarios, Sistema de Alertas, Adecuación, Anexo Transversal,
+  Pp, Fideicomiso Público, Testigo Social, Convenio Modificatorio, Versión
+  Pública, Auditoría de Desempeño, Pobreza Multidimensional, IVA, IEPS, ISAN,
+  Gasto Programable, SEC y Ramo. Lo que la ley ya no decía se corrigió:
+  - La pobreza la mide el **INEGI** desde la reforma a la LGDS del
+    16-07-2025 (arts. 36 y 81); el CONEVAL se extinguió. También se corrigió
+    la mención del art. 26 constitucional en la base.
+  - La denuncia ante la ASF no se prevé anónima (LFRCF 60, reforma
+    14-05-2026): la ASF protege la identidad. Anónima sí puede serlo ante el
+    OIC (LGRA 91).
+  - LAASSP y LGTAIP son leyes nuevas de 2025: testigo social en licitaciones
+    de más de 5 millones de UMA (art. 38; $586.6 mdp, derivado), convenios
+    hasta 20 % (art. 74), versión pública (LGTAIP art. 3, fr. XXI).
+  - Techo 2026 (LIF art. 2o.): $1.78 billones internos y 15,500 mdd
+    externos. ADEFAS: tope nuevo del art. 54 LFPRH (DOF 09-04-2026).
+  - IEPS: suma videojuegos con violencia y bebidas energetizantes (LIF 2026).
+    IVA: se retiró el «es regresivo» sin matiz.
+- **Subsidio para el empleo con su decreto**: DOF 31-12-2025, código 5777649
+  (ficha nueva 105). Hallazgo: el decreto dice que 15.02 % de la UMA son
+  $536.22, pero con la UMA publicada el 9 de enero da **$535.65**; la
+  definición lo explica. La calculadora enlaza la ficha.
+- **Fichas 35 y 37 con documento**: la sentencia de la AI 164/2024 (copia del
+  TEPJF, 303 pp.) y el Acuerdo General 7/2025 en el DOF (19-09-2025).
+- **Fichas 23, 25 y 26 marcadas «por cotejar»**: sus cifras ($15,434 mdp en
+  13 fideicomisos; 32-38 plazas y más de 70 colaboradores por ministro;
+  54,500 plazas) no se localizaron en documento oficial. La 23 atribuía a la
+  ASF la extinción de los fideicomisos, que dispuso el decreto del
+  27-10-2023.
+- **`--navy` definida** en el tema claro (#0b3a6e). El botón flotante se
+  quedaba sin fondo y con letra blanca al pasar el cursor.
+- **Titular de la ASF**: la Gaceta Parlamentaria del 10-03-2026 (Anexo V,
+  acuerdo CVASF/LXVI/007/2026) publica la terna encabezada por Aureliano
+  Hernández Palacios Cardel; la prensa reporta su designación ese día
+  (472 votos) para 2026-2034. La plataforma no nombra al titular en ningún
+  texto, así que no hubo nada que cambiar.
+
 ### Hecho (glosario y bibliografía al día con los cinco módulos)
 
 - **Rastreo de palabras sin subrayar.** Se abrieron todos los bloques de los
@@ -2668,18 +2712,20 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 ### Pendiente
 
 - **Glosario y bibliografía, lo que quedó abierto:**
-  - El decreto del subsidio para el empleo (DOF 31-12-2025) no apareció en el
-    índice del DOF consultado desde el entorno; el término lo cita por su
-    nombre y su enlace apunta a la ficha de la UMA. Conseguir la liga.
   - Concejalías de la CDMX: el número de concejales por alcaldía está en el
-    art. 53 de la Constitución de la Ciudad, cuyo portal no respondió.
-  - Siguen definiciones antiguas con fundamento genérico (sin artículo):
-    Tasa de Referencia, Techo de Endeudamiento, Subastas de Banxico,
-    Contraloría Social, Denuncia Ciudadana, Órgano Interno de Control, entre
-    otras. Revisarlas una por una.
-  - Las fichas 38 (Barra Mexicana de Abogados) y 46 (columna de El
-    Universal) siguen siendo las únicas no oficiales; 14 fichas apuntan aún a
-    la página de inicio de su institución.
+    art. 53 de la Constitución de la Ciudad. Ni la Consejería Jurídica ni el
+    Congreso de la CDMX respondieron desde el entorno, y el IECM lo bloquea la
+    política de red. Citarlo de su texto oficial.
+  - Quedan sin artículo unas 20 definiciones, pero citan con razón una
+    metodología (INEGI, ASF, CONAC) y no una ley.
+  - Fichas 23, 25 y 26 «por cotejar»: localizar el informe de la ASF de los
+    fideicomisos del PJF y cualquier documento oficial de las cifras de
+    ponencias, o retirar esas cifras de la Enciclopedia (4.4 y 4.5) al
+    decidir el destino de las pestañas 3 y 4.
+  - Fichas 38 (Barra Mexicana de Abogados) y 46 (columna de El Universal):
+    siguen siendo las únicas no oficiales. Las demás fichas que apuntan a una
+    portada citan precisamente un portal (PNT, ASF Datos, ComprasMX, SIE,
+    Transparencia Presupuestaria), lo que es correcto.
 - **Código muerto con ligas de prensa inventadas:** `FACTCHECK_KNOWLEDGE_BASE`
   en el motor guarda seis «noticias» con titulares, ligas a El Universal,
   Reforma, Animal Político, El Economista, Proceso y El Financiero que no
@@ -2721,10 +2767,13 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   y `dep` son cifras redondas sin documento. Revisar quién las usa y sustituirlas.
 - **Personajes políticos (sexenios):** «ASF observó $417,321 mdp» y otras cifras
   acumuladas de la ASF por sexenio no cuadran con la serie oficial 2019-2024 y no
-  traen fuente. Rehacerlas con `DB.cuenta_publica_asf.serie`.
+  traen fuente. Rehacerlas con `DB.cuenta_publica_asf.serie`. Con ella sólo
+  se puede el sexenio 2018-2024: $315,395.5 mdp observados en las CP 2019 a
+  2023, o $382,570.2 mdp con la CP 2024 (que incluye octubre a diciembre de
+  otro gobierno). Los demás no tienen serie. Rehacer uno solo reproduciría el
+  trato desigual que señaló la auditoría: decide el autor.
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
-- **Titular de la ASF:** confirmar si sigue David Colmenares tras marzo de 2026.
 - **Evaluación de los presidentes (módulo 2, 3.2):** quedan pendientes el PIB
   de 1988 (para el promedio de Salinas; habría que usar una serie del INEGI
   con base anterior y decir el empalme), la deuda de 1994 y el empleo IMSS de
@@ -2744,9 +2793,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **Guion editorial, entregas B a E** (portada, glosario ampliado,
   diccionario de sustituciones, reescritura por módulos): esperan decisiones
   del autor sobre «tú» o «usted», nombres de menús y el Pase.
-- **`--navy` sin definir:** unas 20 reglas del tema claro la usan sin
-  valor de respaldo y se pintan con el color heredado. Definirla en
-  `[data-theme="light"]` y revisar esas secciones una por una.
 - **«$51,024 mdp» sigue en la cinta de indicadores de la portada** y en
   el motor (tasa por segundo y serie histórica). Sustituir por la cifra
   de la CP 2024 con su fuente, o retirarla, previa decisión del autor.
@@ -2809,9 +2855,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   reescriben con la colección `poderes` o se funden con la 2.6.
 - **Las 1,056 auditorías municipales de la ASF** (hoja «ASF municipios» del
   libro 2024) pueden anclar los 83 montos municipales sin referencia de abajo.
-- **Referencias no oficiales por sustituir:** 46 (columna de opinión de El
-  Universal) y 38 (Barra Mexicana de Abogados). 14 fichas apuntan todavía a la
-  página de inicio de su institución y no al documento.
 **Auditoría del 26 de septiembre (versión 20260925a).** Lo agregado del 23 al
 25 de septiembre no cumple todavía la regla editorial. Bloquean la versión
 final, en este orden:

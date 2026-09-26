@@ -4659,14 +4659,14 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Denuncia Ciudadana",
-      "definicion": "Acto por el que una persona pone en conocimiento de una autoridad fiscalizadora hechos que pueden constituir un uso irregular de recursos públicos. Puede presentarse de forma anónima ante la Auditoría Superior de la Federación o los órganos internos de control. No requiere abogado ni formalidades procesales, pero su utilidad depende por completo de que aporte datos verificables: fecha, lugar, monto, dependencia y documento.",
-      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación · Ley General de Responsabilidades Administrativas",
+      "definicion": "Acto por el que una persona pone en conocimiento de una autoridad hechos que pueden constituir un uso irregular de recursos públicos. Hay dos puertas y no piden lo mismo. Ante el órgano interno de control de la institución, por una falta administrativa, la denuncia puede ser anónima y la autoridad guarda la identidad de quien la presenta. Ante la Auditoría Superior de la Federación —o ante la Cámara de Diputados o su Comisión de Vigilancia—, cualquier persona puede denunciar el manejo irregular de recursos federales, aun del año en curso; el escrito debe decir en qué ejercicio ocurrieron los hechos y describirlos, acompañarse de las pruebas que se tengan, y la ASF debe proteger la identidad del denunciante. En ambos casos no hace falta abogado, pero la denuncia vale lo que valen sus datos: fecha, lugar, monto, dependencia y documento.",
+      "ley": "Ley General de Responsabilidades Administrativas, arts. 91 a 93 · Ley de Fiscalización y Rendición de Cuentas de la Federación, arts. 59 a 61 (reforma DOF 14-05-2026)",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
       "termino": "Alertador",
-      "definicion": "Persona, servidora pública o no, que informa sobre un acto grave de corrupción y queda amparada por medidas de protección frente a represalias laborales o de otro tipo. El mecanismo federal opera mediante una plataforma que asigna una clave de seguimiento, de modo que quien alerta puede conocer el avance de su caso sin revelar su identidad.",
-      "ley": "Ley General de Responsabilidades Administrativas · mecanismo de la Secretaría Anticorrupción y Buen Gobierno",
+      "definicion": "Persona que informa sobre un acto grave de corrupción. La ley protege sobre todo a quien denuncia desde dentro: el servidor público que denuncia una falta grave, o que es testigo en el procedimiento, puede pedir medidas de protección razonables al ente donde trabaja, y revelar la identidad de un denunciante anónimo protegido es obstrucción de la justicia. El mecanismo federal de alertadores opera con una plataforma que asigna una clave de seguimiento, para que quien alerta conozca el avance de su caso sin dar su nombre.",
+      "ley": "Ley General de Responsabilidades Administrativas, art. 64, fr. III y párrafos siguientes · Plataforma de Ciudadanos Alertadores Internos y Externos de la Corrupción (Secretaría Anticorrupción y Buen Gobierno)",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -4689,8 +4689,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Órgano Interno de Control",
-      "definicion": "Unidad de vigilancia que existe dentro de cada dependencia, entidad y ayuntamiento, encargada de recibir quejas, investigar faltas administrativas de su propio personal y sustanciar los procedimientos de responsabilidad. Es la instancia más cercana y la más rápida para un hecho local, aunque su independencia respecto de la institución que vigila es una de las críticas recurrentes del sistema anticorrupción.",
-      "ley": "Ley General de Responsabilidades Administrativas · Ley Orgánica de la Administración Pública Federal",
+      "definicion": "Unidad que vive dentro de cada ente público y cuida su control interno: recibe denuncias, investiga faltas administrativas de su propio personal y sustancia los procedimientos de responsabilidad. En la Administración Pública Federal sus titulares los designa la Secretaría Anticorrupción y Buen Gobierno, no la institución vigilada. Es la instancia más cercana para un hecho local, aunque su independencia frente al ente que revisa es una de las críticas recurrentes del sistema anticorrupción.",
+      "ley": "Ley General de Responsabilidades Administrativas, art. 3, fr. XXI, y art. 10 · Ley Orgánica de la Administración Pública Federal, art. 37, fr. XL, y art. 44",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -4839,8 +4839,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Ramo 28 (Participaciones Federales)",
-      "definicion": "Recursos transferidos en efectivo a los estados y municipios sin etiquetar, en compensación por su adhesión al Pacto Fiscal. Es de libre disposición presupuestaria.",
-      "ley": "Ley de Coordinación Fiscal, Capítulos I y II",
+      "definicion": "Dinero federal que se entrega a estados y municipios sin etiqueta, a cambio de que se adhieran al Sistema Nacional de Coordinación Fiscal y dejen a la Federación el cobro de los grandes impuestos. El corazón es el Fondo General de Participaciones, formado con el 20 % de la recaudación federal participable. Al ser «de libre disposición», el gobierno local decide en qué gastarlo; por lo mismo, sólo su propio congreso y su auditoría local lo fiscalizan de lleno.",
+      "ley": "Ley de Coordinación Fiscal, arts. 2o. y 10 · Ley de Disciplina Financiera, art. 2, fr. XIX (ingresos de libre disposición)",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -4899,20 +4899,20 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Ley de Disciplina Financiera (LDF)",
-      "definicion": "Ley nacional que regula el endeudamiento de estados y municipios, impone techos al gasto en nómina y crea el Sistema de Alertas de la SHCP.",
-      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (2016)",
+      "definicion": "Ley de 2016 que pone reglas al dinero de estados y municipios. Topa el crecimiento anual de la nómina de los estados (el menor entre 3 % real y el crecimiento del PIB previsto), exige inscribir toda deuda en un Registro Público Único y crea el Sistema de Alertas, que según el nivel de endeudamiento de cada gobierno le fija cuánto más puede pedir prestado.",
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (DOF 27-04-2016), arts. 10, 43 a 46",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
       "termino": "Gasto Programable vs No Programable",
-      "definicion": "Gasto Programable: Recursos destinados a programas gubernamentales, servicios públicos e inversión (salud, escuelas, obras). Gasto No Programable: Pagos ineludibles por ley (deuda, participaciones a estados, ADEFAS).",
-      "ley": "Clasificación Económica del Gasto Público (SHCP)",
+      "definicion": "Gasto programable: lo que la Federación gasta en sus programas para proveer bienes y servicios a la población —salud, escuelas, obras, seguridad—. Gasto no programable: lo que paga por obligaciones legales o del propio decreto y que no corresponde a un programa: intereses de la deuda, participaciones a estados y municipios y ADEFAS.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 2, frs. XXVII y XXVIII",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
       "termino": "ADEFAS (Adeudos de Ejercicios Fiscales Anteriores)",
-      "definicion": "Compromisos devengados y pasivos contraídos en años fiscales previos que se liquidan con cargo al presupuesto del año en curso.",
-      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "definicion": "Compromisos que quedaron devengados —el bien se recibió o el servicio se prestó— pero sin pagar al cierre del año, y que se liquidan con cargo al presupuesto siguiente. La regla es estricta: lo aprobado y no devengado al 31 de diciembre ya no puede ejercerse. Desde abril de 2026 la ley añade un tope: las ADEFAS del proyecto de presupuesto no pueden pasar del monto de pagos diferidos que previó la Ley de Ingresos del año anterior.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 54 (párrafo adicionado DOF 09-04-2026)",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
@@ -4931,7 +4931,7 @@ window.AUDIT_DB = {
       "termino": "Secretario(a) de Estudio y Cuenta",
       "categoria": "⚖️ Poder Judicial",
       "definicion": "Persona funcionaria judicial adscrita a una ponencia que analiza amparos, controversias y acciones de inconstitucionalidad y redacta los proyectos de sentencia. Su remuneración se fija en el manual anual del Poder Judicial según su nivel; la plataforma la cita de ese documento y no de estimaciones.",
-      "ley": "Ley Orgánica del Poder Judicial de la Federación · Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)"
+      "ley": "Ley Orgánica del Poder Judicial de la Federación (DOF 20-12-2024), art. 15 · Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)"
     },
     {
       "termino": "Asesoría de Ponencia",
@@ -5062,20 +5062,20 @@ window.AUDIT_DB = {
     {
       "termino": "Techo de Endeudamiento Neto (LIF)",
       "categoria": "📜 Ley de Ingresos & Marco Legal",
-      "definicion": "Límite máximo en pesos y moneda extranjera que el Congreso de la Unión autoriza a la Secretaría de Hacienda para contratar pasivos soberanos internos (vía colocación de CETES y Bonos por Banxico) y externos durante el ejercicio fiscal.",
-      "ley": "Ley de Ingresos de la Federación / Ley Federal de Deuda Pública"
+      "definicion": "Límite de deuda nueva, descontadas las amortizaciones, que el Congreso autoriza cada año al Ejecutivo en la Ley de Ingresos. Para 2026 es de hasta $1 billón 780 mil millones de pesos de endeudamiento neto interno y hasta 15 mil 500 millones de dólares de endeudamiento neto externo. La deuda interna se coloca sobre todo con CETES y Bonos que subasta el Banco de México como agente financiero del gobierno.",
+      "ley": "Ley de Ingresos de la Federación 2026 (DOF 07-11-2025), art. 2o. · Ley Federal de Deuda Pública, arts. 9 y 10"
     },
     {
       "termino": "Subastas Primarias Banxico (CETES y Bonos M)",
       "categoria": "💰 Hacendario & Deuda",
-      "definicion": "Mecanismo financiero semanal operado por el Banco de México como agente colocador de deuda del Gobierno Federal, donde intermediarios financieros autorizados pujan por adquirir valores soberanos a descuento o tasa de interés fija.",
-      "ley": "Ley del Banco de México / Ley Federal de Deuda Pública"
+      "definicion": "Mecanismo con el que el Gobierno Federal vende su deuda interna. El Banco de México actúa como su agente financiero y, cada semana, recibe las posturas de los intermediarios autorizados: los CETES se venden a descuento y los Bonos M pagan una tasa fija. Lo que resulte de esas subastas es, en buena parte, el costo financiero que el presupuesto pagará después.",
+      "ley": "Ley del Banco de México, art. 3o., fr. III · Ley Federal de Deuda Pública, art. 4o., fr. I"
     },
     {
       "termino": "Tasa de Referencia de Deuda (Banxico)",
       "categoria": "💰 Hacendario & Deuda",
-      "definicion": "Tasa de interés interbancaria a un día que fija la Junta de Gobierno de Banxico para contener la inflación; impacta directamente en el costo financiero que debe cubrir el Estado para pagar los intereses de su deuda pública.",
-      "ley": "Ley del Banco de México / Criterios Generales de Política Económica"
+      "definicion": "Nombre común de la tasa objetivo para la tasa de interés interbancaria a un día, que fija la Junta de Gobierno del Banco de México para cumplir su mandato: procurar la estabilidad del poder adquisitivo de la moneda. No es una tasa «de la deuda», pero la mueve: cuando sube, el gobierno paga más por los CETES y bonos que emite, y crece el costo financiero del presupuesto.",
+      "ley": "Constitución, art. 28, párrafos sexto y séptimo · Ley del Banco de México, arts. 2o. y 3o."
     },
     {
       "termino": "Mayoría Relativa (MR) / Voto Directo",
@@ -5158,7 +5158,7 @@ window.AUDIT_DB = {
     {
       "termino": "Ramo Presupuestario",
       "definicion": "Unidad de mayor jerarquía en que se divide el Presupuesto de Egresos. Cada dependencia, poder u organismo autónomo tiene el suyo: Ramo 03 corresponde al Poder Judicial, Ramo 22 al Instituto Nacional Electoral, Ramo 28 a las participaciones y Ramo 33 a las aportaciones federales. Localizar el ramo es el primer paso para rastrear cualquier peso.",
-      "ley": "Clasificador por Objeto del Gasto · PEF del ejercicio correspondiente",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 2, frs. XL a XLII · PEF del ejercicio correspondiente",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
@@ -5319,8 +5319,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Ingresos Presupuestarios",
-      "definicion": "Recursos que la Federación estima captar durante el ejercicio y que la Ley de Ingresos enumera año con año: tributarios (ISR, IVA, IEPS), no tributarios (derechos, productos y aprovechamientos), los de organismos y empresas del Estado, y los de financiamiento, es decir, deuda. La distinción importa: un ingreso por deuda hoy es un gasto por intereses mañana.",
-      "ley": "Ley de Ingresos de la Federación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "definicion": "Recursos que la Federación estima captar en el año y que la Ley de Ingresos enumera concepto por concepto: impuestos (ISR, IVA, IEPS), cuotas de seguridad social, derechos, productos y aprovechamientos, los ingresos propios de organismos y empresas del Estado y, aparte, el financiamiento, es decir, la deuda. La distinción importa: un ingreso por deuda hoy es un gasto por intereses mañana.",
+      "ley": "Ley de Ingresos de la Federación 2026 (DOF 07-11-2025), art. 1o.",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -5331,32 +5331,32 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Sistema de Alertas (SHCP)",
-      "definicion": "Semáforo con el que la Secretaría de Hacienda clasifica el endeudamiento de cada entidad federativa y de los municipios con obligaciones inscritas. El color —verde, amarillo o rojo— no es una opinión: determina cuánto más pueden endeudarse en el siguiente ejercicio. Se publica de forma periódica y es consultable por cualquier persona.",
-      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios · Secretaría de Hacienda y Crédito Público",
+      "definicion": "Evaluación con la que la Secretaría de Hacienda clasifica a cada estado y municipio con deuda inscrita según su nivel de endeudamiento: sostenible, en observación o elevado (verde, amarillo o rojo en su publicación). No es una opinión: fija el techo de financiamiento neto del año siguiente, de hasta el 15 % de sus ingresos de libre disposición si es sostenible, del 5 % si está en observación y de cero si es elevado.",
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios, arts. 43, 44 y 46",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
       "termino": "Adecuación Presupuestaria",
-      "definicion": "Movimiento que traslada recursos de una partida a otra durante el ejercicio, una vez que el presupuesto ya fue aprobado. Es legal y a menudo necesario, pero es también el punto donde un presupuesto aprobado deja de parecerse al presupuesto ejercido: por eso conviene leer siempre el dato modificado junto al aprobado.",
-      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "definicion": "Modificación al presupuesto ya aprobado durante el año: mover recursos entre partidas, cambiar calendarios, ampliar o reducir montos. Es legal y a menudo necesaria, pero es también el punto donde el presupuesto aprobado deja de parecerse al ejercido; por eso conviene leer siempre el dato modificado junto al aprobado.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 2, fr. II, y art. 58",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
       "termino": "Anexo Transversal",
-      "definicion": "Agrupación de recursos que persiguen un mismo objetivo pero están repartidos en varios ramos y programas: igualdad entre mujeres y hombres, pueblos indígenas, atención a la niñez, cambio climático. El anexo no crea presupuesto nuevo: etiqueta y hace visible el que ya está disperso.",
-      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Presupuesto de Egresos de la Federación",
+      "definicion": "Anexo del Presupuesto que reúne, de varios ramos y programas, el dinero destinado a un mismo propósito: igualdad entre mujeres y hombres, niñas, niños y adolescentes, pueblos indígenas, jóvenes, desarrollo rural, ciencia, transición energética, grupos vulnerables y cambio climático, entre otros. El anexo no crea presupuesto nuevo: etiqueta y hace visible el que ya está disperso.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 2, fr. III Bis, y art. 41, fr. II",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
       "termino": "Programa Presupuestario (Pp)",
-      "definicion": "Unidad mínima a la que se asigna dinero y a la que se le puede exigir un resultado. Cada peso del Presupuesto de Egresos cuelga de un programa presupuestario con clave propia, y es el nivel en el que tiene sentido preguntar «¿cuánto costó y qué produjo?».",
-      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Sistema de Evaluación del Desempeño",
+      "definicion": "Categoría de la estructura programática a la que se asigna dinero y se le puede pedir un resultado. Cada peso del Presupuesto de Egresos cuelga de un programa con clave propia, metas e indicadores, y es el nivel donde el Sistema de Evaluación del Desempeño pregunta «¿cuánto costó y qué produjo?».",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 27, fr. I; art. 2, fr. LI, y art. 111",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
       "termino": "Fideicomiso Público",
-      "definicion": "Figura en la que una dependencia o entidad aporta recursos públicos a un patrimonio que administra una institución fiduciaria para un fin determinado. Su rasgo fiscalizable es que el dinero sale del ejercicio anual y puede permanecer años fuera del escrutinio presupuestario ordinario, sin dejar de ser público.",
-      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Ley Federal de las Entidades Paraestatales",
+      "definicion": "Figura en la que el Gobierno Federal —por medio de Hacienda—, una entidad, un poder o un órgano autónomo aporta recursos públicos a un patrimonio que administra una institución fiduciaria para un fin determinado. Su rasgo fiscalizable es que el dinero sale del ejercicio anual y puede permanecer años fuera del presupuesto ordinario, sin dejar de ser público.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, arts. 9 y 10 · Ley Federal de las Entidades Paraestatales",
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
@@ -5379,8 +5379,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Testigo Social",
-      "definicion": "Persona u organización acreditada que participa en procedimientos de contratación de monto relevante y emite un testimonio público sobre lo que observó. No decide ni sanciona: deja constancia, y esa constancia queda disponible para quien quiera revisarla.",
-      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "definicion": "Persona física o moral, acreditada por la Secretaría Anticorrupción y Buen Gobierno, que vigila un procedimiento de contratación. Participa, con voz, en todas sus etapas, en las licitaciones de más de cinco millones de UMA (unos $586.6 millones de pesos en 2026), en el diálogo competitivo y donde la Secretaría lo decida. No decide ni sanciona: emite un informe final con observaciones que se publica y se integra al expediente.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público (DOF 16-04-2025), art. 2, fr. XVIII, y art. 38 · el monto en pesos es derivado: 5,000,000 × UMA 2026 ($117.31)",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -5391,8 +5391,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Convenio Modificatorio",
-      "definicion": "Instrumento que cambia el monto, el plazo o el alcance de un contrato ya adjudicado. Es una figura legal y a veces inevitable, pero también el lugar donde suele alojarse el sobrecosto: un contrato que se gana barato y se termina caro casi siempre pasó por aquí.",
-      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "definicion": "Instrumento que cambia el monto, el plazo o el alcance de un contrato ya adjudicado. En adquisiciones, las ampliaciones no pueden rebasar en conjunto el 20 % de lo pactado y el precio debe ser el mismo; en obra pública, la reforma de 2025 quitó el antiguo tope del 25 %. Es una figura legal y a veces inevitable, pero también el lugar donde suele alojarse el sobrecosto: un contrato que se gana barato y se termina caro casi siempre pasó por aquí.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público (DOF 16-04-2025), art. 74 · Ley de Obras Públicas y Servicios Relacionados con las Mismas, art. 59",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -5409,14 +5409,14 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Versión Pública",
-      "definicion": "Documento del que se han eliminado los datos clasificados como reservados o confidenciales para poder entregarlo. Es la salida ordinaria a la negativa total: la regla es entregar lo que sí puede entregarse, no callar el documento entero porque una parte esté protegida.",
-      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "definicion": "Documento o expediente que se entrega después de eliminar u omitir las partes clasificadas como reservadas o confidenciales. Es la salida ordinaria frente a la negativa total: la regla es entregar lo que sí puede entregarse, no callar el documento entero porque una parte esté protegida.",
+      "ley": "Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025), art. 3, fr. XXI",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
       "termino": "Auditoría de Desempeño",
-      "definicion": "Revisión que no pregunta si el dinero se gastó conforme a la norma, sino si sirvió de algo: si el programa cumplió su objetivo, a qué costo y con qué resultados verificables. Es la que responde la pregunta que más le importa a quien paga impuestos y la que más incomoda a quien ejerce el gasto.",
-      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "definicion": "Revisión que no pregunta si el dinero se gastó conforme a la norma, sino si sirvió: si el programa cumplió sus objetivos con eficiencia, eficacia y economía, y si alcanzó las metas de los indicadores aprobados en el presupuesto. Es la que responde la pregunta que más le importa a quien paga impuestos.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación, art. 14, fr. II, incisos a) y b)",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -5565,8 +5565,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Pobreza Multidimensional",
-      "definicion": "Medición que no se limita al ingreso, sino que considera carencias en acceso a salud, educación, seguridad social, vivienda digna, servicios básicos y alimentación. Es la metodología oficial en México. Su virtud es que impide declarar superada la pobreza por el solo hecho de que un ingreso rebase un umbral.",
-      "ley": "Ley General de Desarrollo Social · CONEVAL",
+      "definicion": "Medición que no se limita al ingreso: considera también rezago educativo y carencias de acceso a la salud, a la seguridad social, a una vivienda digna y sus servicios, y a la alimentación, además de la cohesión social. Es la metodología oficial en México y desde la reforma de julio de 2025 la hace el INEGI, que heredó esa función del extinto CONEVAL. Su virtud es que impide declarar superada la pobreza sólo porque un ingreso rebasó un umbral.",
+      "ley": "Ley General de Desarrollo Social, arts. 36 y 81 (reforma DOF 16-07-2025)",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -5607,20 +5607,20 @@ window.AUDIT_DB = {
     },
     {
       "termino": "IVA (Impuesto al Valor Agregado)",
-      "definicion": "Impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % en alimentos y medicinas y una lista de actos exentos. Funciona por traslado y acreditamiento: quien vende lo cobra por separado y lo entera, pero acredita el que pagó a sus proveedores, de modo que cada eslabón tributa sólo por el valor que añade y el consumidor final lo soporta íntegro. Su incidencia es regresiva: la tasa es la misma para quien gana poco y para quien gana mucho.",
-      "ley": "Ley del IVA",
+      "definicion": "Impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % en la mayoría de los alimentos, las medicinas de patente y otros bienes que la ley enumera, y una lista de actos exentos. Funciona por traslado y acreditamiento: quien vende lo cobra por separado y lo entera, pero acredita el que pagó a sus proveedores, de modo que cada eslabón tributa sólo por el valor que añade y el consumidor final lo soporta íntegro. La tasa es la misma para todos; si pesa más en los hogares pobres o en los ricos depende de cómo se mida, y la tasa cero en alimentos y medicinas es la que inclina la balanza.",
+      "ley": "Ley del Impuesto al Valor Agregado, arts. 1o. y 2o.-A",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
       "termino": "IEPS (Impuesto Especial sobre Producción y Servicios)",
-      "definicion": "Impuesto indirecto sobre consumos específicos —combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones— cuyo fin no es sólo recaudar sino encarecer aquello que impone un costo a terceros o a la salud pública. Es un impuesto pigouviano. Su recaudación es la más volátil del cuadro fiscal porque la cuota de combustibles se ajusta según el precio de referencia.",
-      "ley": "Ley del IEPS",
+      "definicion": "Impuesto indirecto sobre consumos específicos —combustibles, bebidas alcohólicas y cerveza, tabacos, bebidas saborizadas y energetizantes, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas, redes de telecomunicaciones y, desde 2026, videojuegos con violencia— cuyo fin no es sólo recaudar sino encarecer lo que impone un costo a terceros o a la salud pública. Su recaudación es la más volátil del cuadro fiscal porque la cuota de las gasolinas se reduce con estímulos fiscales que Hacienda fija cada semana según los precios internacionales.",
+      "ley": "Ley del IEPS, art. 2o. · Ley de Ingresos de la Federación 2026, art. 1o. (rubro 1.3)",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
       "termino": "ISAN (Impuesto Sobre Automóviles Nuevos)",
-      "definicion": "Impuesto federal sobre la enajenación de automóviles nuevos de producción nacional y sobre su importación definitiva. Su rasgo distintivo es que, siendo federal, lo administran las entidades federativas: ellas lo recaudan y conservan su rendimiento por convenio de colaboración administrativa en el marco de la Ley de Coordinación Fiscal. Por eso aparece a la vez en la Ley de Ingresos de la Federación y en las haciendas locales.",
-      "ley": "Ley Federal del ISAN · Ley de Coordinación Fiscal",
+      "definicion": "Impuesto federal a la primera venta de un automóvil nuevo al consumidor y a su importación definitiva. Su rasgo distintivo es que, siendo federal, lo cobran los estados: si firman convenio de colaboración administrativa, se quedan con el 100 % de lo recaudado y deben dar al menos el 20 % a sus municipios. Por eso aparece a la vez en la Ley de Ingresos de la Federación y en las haciendas locales.",
+      "ley": "Ley Federal del Impuesto sobre Automóviles Nuevos, art. 1o. · Ley de Coordinación Fiscal, art. 2o.",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -5931,8 +5931,8 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Subsidio para el Empleo",
-      "definicion": "Una cantidad que se resta del impuesto que se retiene a quien gana poco. Desde 2024 dejó de ser una tabla por tramos y es un monto fijo: el valor mensual de la UMA multiplicado por 15.02 %, para quien no rebasa $11,492.66 al mes en 2026. Si el subsidio es mayor que el impuesto, no hay impuesto a cargo, pero tampoco se entrega la diferencia.",
-      "ley": "Decreto que reforma el diverso por el que se otorga el subsidio para el empleo (DOF 31-12-2025)",
+      "definicion": "Una cantidad que se resta del impuesto que se retiene a quien gana poco. Desde 2024 dejó de ser una tabla por tramos y es un monto fijo: el valor mensual de la UMA multiplicado por 15.02 %, para quien no rebasa $11,492.66 al mes en 2026. En enero se usó 15.59 % de la UMA de 2025 ($536.21), porque la UMA nueva rige desde febrero; de febrero a diciembre, con la UMA publicada el 9 de enero, son $535.65 al mes (el decreto los había estimado en $536.22). Si el subsidio es mayor que el impuesto, no hay impuesto a cargo, pero tampoco se entrega la diferencia.",
+      "ley": "Decreto por el que se modifica el diverso que otorga el subsidio para el empleo (DOF 31-12-2025), Artículo Segundo y transitorio segundo · el monto mensual es derivado: UMA mensual 2026 ($3,566.22) × 15.02 %",
       "categoria": "👷 Trabajo y Salario"
     },
     {
@@ -7535,8 +7535,8 @@ window.AUDIT_DB = {
       "id": "ref-ai-164-2024",
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
-      "cita_apa": "Suprema Corte de Justicia de la Nación. (2024). Acción de inconstitucionalidad 164/2024 y sus acumuladas, resuelta por el Tribunal Pleno el 5 de noviembre de 2024. SCJN (México).",
-      "url": "https://www.scjn.gob.mx/",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2024, 5 de noviembre). Sentencia de la acción de inconstitucionalidad 164/2024 y sus acumuladas 165/2024, 166/2024, 167/2024 y 170/2024. Tribunal Pleno (México).",
+      "url": "https://www.te.gob.mx/SAI/Documentos//704/AI%20164-2024%20y%20acumuladas.pdf",
       "descripcion": "Impugnación de la reforma constitucional del Poder Judicial promovida por partidos políticos. Siete de los once ministros entonces en funciones votaron a favor de invalidar diversas porciones de la reforma, pero como el umbral constitucional exigía ocho votos, el Pleno desestimó los conceptos de invalidez sin entrar al estudio de fondo. Es el precedente que ilustra con mayor claridad el efecto práctico de las mayorías calificadas: una mayoría absoluta del tribunal constitucional no bastó para detener la reforma que transformaba al propio tribunal."
     },
     {
@@ -7553,8 +7553,8 @@ window.AUDIT_DB = {
       "id": "ref-sjf-duodecima",
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
-      "cita_apa": "Suprema Corte de Justicia de la Nación. (2025). Acuerdo General número 7/2025 del Pleno: inicio del Tercer Periodo de Jurisprudencia y de la Duodécima Época del Semanario Judicial de la Federación, a partir del 1 de septiembre de 2025. SCJN (México).",
-      "url": "https://sjf2.scjn.gob.mx/",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2025, 19 de septiembre). Acuerdo General número 7/2025 (12a.), del Pleno, de 3 de septiembre de 2025, por el que se determina el inicio del tercer periodo y de la Duodécima Época del Semanario Judicial de la Federación. Diario Oficial de la Federación.",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5768224&fecha=19/09/2025",
       "descripcion": "Acuerdo que abre una nueva época del Semanario Judicial de la Federación, el órgano oficial donde se publican los criterios obligatorios. Marca el corte entre la jurisprudencia de la Suprema Corte anterior a la reforma y la de la Corte electa por voto popular, e incorpora por primera vez una sección dedicada a las resoluciones de autoridades de pueblos y comunidades indígenas y afromexicanas. Para el usuario que consulta un criterio, la época indica si el precedente pertenece al sistema vigente o al anterior."
     },
     {
@@ -7891,6 +7891,15 @@ window.AUDIT_DB = {
       "descripcion": "Da a conocer el valor de la UMA vigente del 1 de febrero de 2026 al 31 de enero de 2027: $117.31 diarios y $3,566.22 mensuales. Con ella se calculan el tope de cotización al Seguro Social, el subsidio para el empleo y los límites exentos del ISR."
     },
     {
+      "num": 105,
+      "id": "ref-subsidio-empleo-2026",
+      "categoria": "tributario",
+      "categoria_nombre": "Marco Tributario y Fiscal",
+      "cita_apa": "Presidencia de la República. (2025, 31 de diciembre). Decreto por el que se modifica el diverso que otorga el subsidio para el empleo. Diario Oficial de la Federación.",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777649&fecha=31/12/2025",
+      "descripcion": "Fija para 2026 el subsidio en 15.02 % del valor mensual de la UMA (15.59 % de la UMA de 2025 durante enero) y el límite de ingresos en $11,492.66 mensuales. Entró en vigor el 1 de enero de 2026."
+    },
+    {
       "num": 99,
       "id": "ref-conasami2026",
       "categoria": "estadistica_oficial",
@@ -8149,7 +8158,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Poder Judicial & SCJN",
       "cita_apa": "Auditoría Superior de la Federación. (2023–2025). Auditoría Financiera y de Cumplimiento a los Fideicomisos y Fondos del Poder Judicial de la Federación: Cuentas Públicas 2018–2023. Informes Individuales de Fiscalización. Cámara de Diputados.",
       "url": "https://www.asf.gob.mx/",
-      "descripcion": "Dictamen de fiscalización superior que documentó la acumulación de $15,434 millones de pesos en 13 fideicomisos fiduciarios del PJF en Nacional Financiera (Nafin) nutridos por subejercicios presupuestales anuales no devengados. Dictaminó que dichos recursos no comprometidos debieron reintegrarse a la Tesorería de la Federación conforme al Artículo 54 de la LFPRH, ordenando su extinción definitiva conforme a los decretos de reforma constitucional."
+      "descripcion": "Ficha por cotejar. Remite a los informes individuales de la ASF sobre los fideicomisos del Poder Judicial, pero no enlaza ninguno, y la cifra de $15,434 millones en 13 fideicomisos no se ha localizado todavía en un informe de la ASF: debe leerse como pendiente. La extinción de esos fideicomisos no la ordenó la ASF: la dispuso el decreto que reformó la Ley Orgánica del Poder Judicial de la Federación (DOF 27-10-2023)."
     },
     {
       "num": 24,
@@ -8167,7 +8176,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Poder Judicial & SCJN",
       "cita_apa": "Plataforma Nacional de Transparencia (PNT), & Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales. (2024–2025). Sistema de Portales de Obligaciones de Transparencia (SIPOT): Estructura Orgánica, Padrón de Personal Técnico y Contratos de Honorarios Asimilados del Ramo 03 (SCJN). Obligaciones del Artículo 70 Fracciones VIII y XI (LGTAIP).",
       "url": "https://www.plataformadetransparencia.org.mx/",
-      "descripcion": "Auditoría ciudadana y registros oficiales de transparencia que documentan la conformación de los despachos de ministros. Constata un organigrama nuclear de 32 a 38 plazas directas por ponencia (con promedio de 14 secretarios proyectistas de estudio y cuenta) y una red ampliada que rebasó los 70 colaboradores por ministro a través de comisiones técnicas, asesores externos y contratos de servicios profesionales por honorarios asimilados (Capítulo 3000), elevando el costo real de operación por despacho a entre $35 y $42 millones de pesos anuales."
+      "descripcion": "Ficha por cotejar. No identifica el folio de ninguna solicitud ni el formato del SIPOT consultado, de modo que las cifras que se le atribuían —de 32 a 38 plazas y 14 secretarios de estudio y cuenta por ponencia, más de 70 colaboradores por ministro y un costo de $35 a $42 millones anuales por despacho— no se han localizado en un documento oficial y deben leerse como pendientes. Cita además el art. 70 de la ley de transparencia de 2015, sustituida por la de 2025."
     },
     {
       "num": 26,
@@ -8176,7 +8185,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Investigación & Contraloría Cívica",
       "cita_apa": "Centro de Investigación Económica y Presupuestaria. (2024). El Presupuesto del Poder Judicial de la Federación: Análisis de su Evolución Histórica, Costo por Juzgador y Masa Salarial de Mandos Superiores. CIEP.",
       "url": "https://ciep.mx/",
-      "descripcion": "Investigación económica independiente que evalúa el crecimiento del gasto judicial en México en la última década, analizando la nómina de 54,500 plazas en tribunales y juzgados, el impacto del Capítulo 1000 en el balance del erario nacional y el elevado costo por juzgador frente a estándares internacionales de la OCDE y América Latina."
+      "descripcion": "Ficha por cotejar. No enlaza el estudio: el título y la cifra de 54,500 plazas no se han localizado en las publicaciones del CIEP y deben leerse como pendientes. Es, además, una fuente académica, no oficial."
     },
     {
       "num": 27,
@@ -12600,7 +12609,7 @@ window.AUDIT_DB = {
       "denominacion": "Rectoría Económica del Estado & Economía Mixta",
       "precepto_resumen": "Atribuye al Estado la rectoría del desarrollo nacional y ordena que éste sea integral y sustentable. Reconoce la concurrencia de tres sectores —público, social y privado— y manda una más justa distribución del ingreso y la riqueza.",
       "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales... Al desarrollo económico nacional concurrirán, con responsabilidad social, el sector público, el sector social y el sector privado, sin menoscabo de otras formas de actividad económica que contribuyan al desarrollo de la Nación.",
-      "analisis_civico": "Es el artículo que responde a la pregunta anterior a todas las demás: ¿con qué facultad interviene el Estado en la economía? Aquí están las dos palabras que esta plataforma audita renglón por renglón. «Sustentable» significa que el crecimiento que agota el capital natural no cumple el mandato, y por eso importan las cuentas ecológicas del INEGI. «Más justa distribución» significa que crecer concentrando no basta, y por eso importan el coeficiente de Gini y la medición de pobreza del CONEVAL. Un gobierno puede reportar crecimiento y estar incumpliendo este artículo por ambos flancos a la vez.",
+      "analisis_civico": "Es el artículo que responde a la pregunta anterior a todas las demás: ¿con qué facultad interviene el Estado en la economía? Aquí están las dos palabras que esta plataforma audita renglón por renglón. «Sustentable» significa que el crecimiento que agota el capital natural no cumple el mandato, y por eso importan las cuentas ecológicas del INEGI. «Más justa distribución» significa que crecer concentrando no basta, y por eso importan el coeficiente de Gini y la medición de pobreza, que desde la reforma de julio de 2025 hace el INEGI (Ley General de Desarrollo Social, arts. 36 y 81). Un gobierno puede reportar crecimiento y estar incumpliendo este artículo por ambos flancos a la vez.",
       "aplicacion_auditavision": "Pestaña 1 (Constitución Económica y Circuito del Dinero), Pestaña 2 (Acción Financiera y Cuentas Ecológicas) y Pestaña 5 (Radiografía Sexenal).",
       "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
     },
@@ -14948,7 +14957,7 @@ window.AUDIT_DB = {
     },
     "subsidio_empleo": {
       "pct_uma": 15.02, "pct_enero": 15.59, "tope_ingreso_mensual": 11492.66,
-      "fuente": "Decreto que reforma el diverso por el que se otorga el subsidio para el empleo \u00b7 DOF 31 de diciembre de 2025",
+      "fuente": "Decreto por el que se modifica el diverso que otorga el subsidio para el empleo \u00b7 DOF 31 de diciembre de 2025",
       "estado": "oficial",
       "que": "Desde 2024 el subsidio dej\u00f3 de ser una tabla por tramos y es una cantidad fija: el valor mensual de la UMA multiplicado por 15.02%. Se resta del impuesto retenido a quien gana hasta $11,492.66 al mes. Para enero de 2026 el decreto orden\u00f3 usar 15.59%, porque la UMA se actualiza hasta febrero."
     },

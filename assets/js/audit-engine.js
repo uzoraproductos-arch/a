@@ -3787,7 +3787,8 @@
           fila('El subsidio para el empleo', 'El valor mensual de la UMA por ' + p.subsidio_empleo.pct_uma +
                '%, para quien no rebasa ' + ccPesosExacto(p.subsidio_empleo.tope_ingreso_mensual) + ' al mes. ' +
                p.subsidio_empleo.fuente + '. Si el subsidio supera al impuesto, no hay impuesto a cargo y ' +
-               'tampoco se entrega la diferencia', p.subsidio_empleo.estado) +
+               'tampoco se entrega la diferencia', p.subsidio_empleo.estado,
+               vsxRefLink('ref-subsidio-empleo-2026')) +
           fila('El salario mínimo', '$' + p.salario_minimo.general + ' diarios en el país y $' +
                p.salario_minimo.frontera_norte + ' en la franja fronteriza. ' + p.salario_minimo.fuente,
                p.salario_minimo.estado) +
@@ -5852,7 +5853,7 @@
     { a: ['prima vacacional', 'primas vacacionales'], t: 'Prima Vacacional', r: 'ref-lft', n: 90 },
     { a: ['salario mínimo', 'salarios mínimos', 'Comisión Nacional de los Salarios Mínimos'], t: 'Salario Mínimo (CONASAMI)', r: 'ref-conasami2026', n: 99 },
     { a: ['CONASAMI'], t: 'Salario Mínimo (CONASAMI)', r: 'ref-conasami2026', n: 99, cs: true },
-    { a: ['subsidio para el empleo'], t: 'Subsidio para el Empleo', r: 'ref-uma2026', n: 98 },
+    { a: ['subsidio para el empleo'], t: 'Subsidio para el Empleo', r: 'ref-subsidio-empleo-2026', n: 105 },
     { a: ['impuesto retenido', 'retención del impuesto', 'tarifas del impuesto sobre la renta', 'tarifa del impuesto sobre la renta'], t: 'Retención del ISR (Tarifa del Artículo 96)', r: 'ref-lisr', n: 52 },
     { a: ['cuota obrera', 'cuotas obreras'], t: 'Cuota Obrera del IMSS', r: 'ref-lss', n: 58 },
     { a: ['Secretaría de Hacienda y Crédito Público', 'Secretaría de Hacienda'], t: 'Secretaría de Hacienda y Crédito Público (SHCP)', r: 'ref-loapf', n: 91 },
