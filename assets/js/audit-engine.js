@@ -4650,6 +4650,11 @@
       }
       return;
     }
+    if (tabKey === 'comunidad' && document.getElementById('tab-panel-portal')) { switchTab('portal', skipPush); return; }
+    if (tabKey === 'portal' && !document.getElementById('tab-panel-portal')) {
+      window.location.href = 'index.html#portal';
+      return;
+    }
     if (tabKey === 'faq' && !document.getElementById('tab-panel-faq')) {
       window.location.href = 'enciclopedia.html#faq';
       return;
@@ -21658,6 +21663,8 @@
 
   function irABloqueComunidad(id) {
     const el = document.getElementById(id);
+    /* En la plataforma el formulario vive en el cajon lateral. */
+    if (!el && id === 'bloqueAportar') { openAyudanosFiscalizar(); return; }
     if (!el) return;
     const y = el.getBoundingClientRect().top + window.scrollY - 90;
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -21694,7 +21701,7 @@
           '<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si su esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>' +
           '<div class="com-destino-cols">' +
             '<div class="com-destino-col" data-tono="gold">' +
-              '<div class="com-destino-k">El formulario de esta página</div>' +
+              '<div class="com-destino-k">El formulario «Ayúdanos a fiscalizar»</div>' +
               '<p>Se guarda <strong>únicamente en su propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borra los datos del sitio se pierde. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial con el botón de copiar.</p>' +
             '</div>' +
             '<div class="com-destino-col" data-tono="emerald">' +
@@ -21910,15 +21917,24 @@
      Antes el selector afirmaba que la deuda estaba en la pestana 6, que es
      el Modo Inspector: la maquinaria financiera vive en la pestana 2. */
   const PORTAL_TEMA_PESTANA = {
-    'presupuesto': { tab: 'presupuesto',       etiqueta: 'pestaña 1' },
-    'megaobras':   { tab: 'accion-financiera', etiqueta: 'pestaña 2' },
-    'deuda':       { tab: 'accion-financiera', etiqueta: 'pestaña 2' },
-    'legislativo': { tab: 'legislativo',       etiqueta: 'pestaña 3' },
-    'judicial':    { tab: 'judicial',          etiqueta: 'pestaña 4' },
-    'politicos':   { tab: 'politicos',         etiqueta: 'pestaña 5' }
+    'presupuesto': { tab: 'presupuesto',       etiqueta: 'Presupuesto' },
+    'megaobras':   { tab: 'megaobras',         etiqueta: 'Megaobras' },
+    'deuda':       { tab: 'accion-financiera', etiqueta: 'Acción Financiera' },
+    'legislativo': { tab: 'legislativo',       etiqueta: 'Congreso' },
+    'judicial':    { tab: 'judicial',          etiqueta: 'Poder Judicial' },
+    'politicos':   { tab: 'politicos',         etiqueta: 'Enciclopedia' }
   };
 
+  /* En la plataforma no hay pestanas de Congreso ni de Corte: su gasto vive
+     en Accion Financiera (Poderes). Los personajes solo estan en la
+     Enciclopedia. */
   function irAPestanaDesdeDebate(tab) {
+    const enPlataforma = !!document.getElementById('seccionDesgloseModulos');
+    if (enPlataforma) {
+      if (tab === 'politicos') { window.location.href = 'enciclopedia.html#politicos'; return; }
+      seleccionarModuloExplorer(tab === 'legislativo' || tab === 'judicial' ? 'poderes' : tab);
+      return;
+    }
     if (typeof switchTab === 'function') switchTab(tab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -22286,7 +22302,7 @@
   }
 
   function copyDebateLink(debateId) {
-    const url = `${window.location.origin}${window.location.pathname}#comunidad`;
+    const url = new URL('index.html#portal', window.location.href).href;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url);
     }

@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926j">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926k">
 </head>
 <body>
 
@@ -276,28 +276,36 @@
         <div class="mega-menu-dropdown" id="menuDropdownPortal" role="menu">
           <div class="mega-menu-col">
             <span class="mega-col-title">💬 Ágora Cívica &amp; Diálogos</span>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('portal'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'bloquePortal'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">🌐 Portal Público Digital</span>
               <span class="mega-link-desc">Espacio abierto y plural para contrastar posturas, plantear tesis críticas y debatir con réplicas directas.</span>
             </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('portal'); setTimeout(function(){ document.getElementById('portalNuevoDebateForm')?.scrollIntoView({behavior:'smooth'}); }, 100); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'portalNuevoDebateForm'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">✍️ Iniciar Nuevo Diálogo o Postura</span>
               <span class="mega-link-desc">Publica tu argumento con nick ciudadano libre o aleatorio, postura y fuentes documentales.</span>
             </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('portal'); setTimeout(function(){ document.getElementById('portalFilterBar')?.scrollIntoView({behavior:'smooth'}); }, 100); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'portalFilterBar'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">🗣️ Hilos de Debate y Réplicas en Vivo</span>
               <span class="mega-link-desc">Consulta los argumentos ciudadanos filtrados por Presupuesto, Megaobras, Deuda y SCJN.</span>
             </a>
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">🛡️ Garantías Cívicas &amp; Formación</span>
-            <div class="mega-link-item" style="cursor:default;">
-              <span class="mega-link-name">🔒 100% Sin Datos Personales</span>
-              <span class="mega-link-desc">Sin correos, teléfonos ni rastreo. Participa libremente con tu seudónimo o nick cívico.</span>
-            </div>
-            <a href="enciclopedia.html#comunidad" class="mega-link-item">
-              <span class="mega-link-name">🏛️ Canales Oficiales y Decálogo Auditor</span>
-              <span class="mega-link-desc">Las seis puertas donde un señalamiento se vuelve expediente, y el decálogo del ciudadano auditor.</span>
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'comOrientacion'); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">🔒 Tu Privacidad: a Dónde Va lo que Escribes</span>
+              <span class="mega-link-desc">Sin correos, teléfonos ni rastreo. Qué se guarda, dónde y quién lo ve, dicho sin adornos.</span>
+            </a>
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'bloqueCanales'); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">🏛️ Canales Oficiales de Denuncia</span>
+              <span class="mega-link-desc">Las seis puertas donde un señalamiento se vuelve expediente: ASF, SABG, FGR, SAT, Transparencia y contralorías internas.</span>
+            </a>
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'decalogoWrap'); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">📜 Decálogo del Ciudadano Auditor</span>
+              <span class="mega-link-desc">Diez reglas que separan una queja de una denuncia, cada una con su fundamento legal.</span>
+            </a>
+            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.openAyudanosFiscalizar(); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">📢 Reporta lo que Viste</span>
+              <span class="mega-link-desc">Arma tu reporte con qué, dónde, cuándo y con qué prueba, y llévalo ya redactado a un canal oficial.</span>
             </a>
           </div>
         </div>
@@ -2202,6 +2210,39 @@
          ======================================================================== -->
     <div id="tab-panel-portal" class="tab-panel">
 
+      <div class="section-hero">
+        <span class="hero-tag">Portal Digital &middot; Participa, denuncia y debate</span>
+        <h2>Portal Digital: del dato a la acción</h2>
+        <p>Aquí termina el recorrido de la plataforma y empieza el suyo. Hay tres caminos y conviene no confundirlos: <strong>reportarnos lo que vio</strong>, <strong>denunciar ante el Estado</strong> por la vía que sí produce consecuencias jurídicas, y <strong>debatir en público</strong> con seudónimo. Antes de escribir, lea a dónde va a parar cada texto.</p>
+      </div>
+
+      <!-- CAPA DE ORIENTACIÓN: LAS TRES FUNCIONES Y EL DESTINO DE CADA TEXTO -->
+      <div id="comOrientacion"></div>
+
+      <!-- ====================================================================
+           BLOQUE 2: CANALES OFICIALES DE DENUNCIA
+           ==================================================================== -->
+      <div class="fj-bloque" id="bloqueCanales">
+        <div class="fj-bloque-head">
+          <span class="fj-kicker">Función 2</span>
+          <h3>Las seis puertas donde un señalamiento se vuelve expediente</h3>
+        </div>
+        <p class="fj-bloque-sub">
+          Esta es la parte que sí tiene efecto jurídico, y la que casi nadie usa porque no se sabe cuál toca. Cada ficha responde lo mismo: qué investiga ese órgano, si admite denuncia anónima, qué debe tener a la mano antes de empezar y qué produce su denuncia una vez presentada. Una de las seis no es un canal de denuncia sino la herramienta para conseguir la prueba: léala primero si todavía no tiene documentos.
+        </p>
+        <div id="canalesOficialesContainer" class="canales-denuncia-list"></div>
+
+        <div class="dec-wrap" id="decalogoWrap">
+          <div class="dec-head">
+            <span class="dec-kicker">Decálogo del ciudadano auditor</span>
+            <h4>Diez reglas que hacen la diferencia entre una queja y una denuncia</h4>
+            <p>No son consignas: cada una tiene detrás una norma concreta. Están ordenadas de lo general a lo práctico, y la última es la que más se olvida.</p>
+          </div>
+          <div id="decalogoContainer" class="dec-grid"></div>
+        </div>
+      </div>
+
+
       <!-- ========================================================================
            BLOQUE 3: PORTAL PÚBLICO DIGITAL · ¿QUIERES DIALOGAR O REPLICAR?
            ======================================================================== -->
@@ -2461,7 +2502,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926j</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926k</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2605,16 +2646,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926j"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926k"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926j"></script>
+  <script src="assets/js/audit-database.js?v=20260926k"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926j"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926k"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926j"></script>
+  <script src="assets/js/audit-engine.js?v=20260926k"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

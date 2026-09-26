@@ -1946,8 +1946,34 @@ vuelve a correrse si cambian los libros.
 - Verificado: los 29 vínculos del menú en escritorio y en teléfono con
   toque; ninguno falla.
 
+### Hecho (Portal Digital completo en la plataforma)
+
+- **La pestaña 9 de la Enciclopedia se mudó al Portal Digital** de la
+  plataforma: portada, las tres rutas con «a dónde va lo que escribe»
+  (`comOrientacion`), los seis canales oficiales (ASF, SABG, FGR, SAT, PNT,
+  OIC) y el decálogo (`decalogoWrap`), antes del foro. En la Enciclopedia
+  queda un aviso «Se mudó» con liga a `index.html#portal`. El formulario
+  «Ayúdanos a fiscalizar» sigue en el cajón lateral; la ruta 1 lo abre.
+- **Menú Portal Digital:** la columna «Garantías Cívicas & Formación» ya no
+  manda a la Enciclopedia: Privacidad, Canales oficiales, Decálogo y «Reporta
+  lo que viste» (cajón).
+- **Por qué se trababa:** los vínculos del foro hacían dos desplazamientos
+  que competían, y la corrección de 900 ms regresaba al inicio del portal.
+  Ahora cada uno pasa su ancla a `seleccionarModuloExplorer` y aterriza a la
+  primera.
+- «Ver los datos» de los hilos lleva, en la plataforma, a Presupuesto,
+  Megaobras, Acción Financiera o Poderes; sólo Personajes va a la
+  Enciclopedia. «Compartir» copia `index.html#portal`.
+
 ### Pendiente
 
+- **Expedientes de Casos por Aclarar (Auditoría Forense):** las seis fichas
+  no llevan chip ni número de auditoría, el botón «Informe ASF» abre la
+  portada de la ASF y varias cifras no se pueden sostener como están (Tren
+  Maya «$540,000+ mdp», «Coahuila 142% IDL», «84% contratos clasificados»).
+  El botón «Expediente Completo ($79)» vende algo que no existe.
+- **El foro del Portal Digital no tiene servidor:** lo que se publica vive
+  en el navegador de quien lo escribe; los hilos visibles son ejemplos.
 - **Megaobras y su huella ambiental:** falta el documento oficial de cada
   Manifestación de Impacto Ambiental (portal dgiraDocs de la SEMARNAT, no
   accesible desde el entorno de trabajo). No se muestran hectáreas de prensa

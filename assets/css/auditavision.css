@@ -20673,7 +20673,7 @@ body.con-regreso { padding-bottom: 96px; }
 
 /* Aterrizaje desde el menu: que el destino no quede bajo la barra fija
    (unos 145 px en escritorio). En telefono la barra no es fija. */
-.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
+.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
 @media (max-width: 700px) {
-  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
+  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
 }
