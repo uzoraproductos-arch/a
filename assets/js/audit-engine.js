@@ -4871,26 +4871,64 @@
     }
   };
 
+  /* Encabezado de la seccion que el proemio absorbe, para no repetir el
+     titulo dos veces seguidas: su etiqueta pasa al renglon superior y su
+     parrafo (con sus ligas a fuentes) se muda al proemio. Al salir del
+     modulo, el parrafo vuelve a su lugar y el encabezado reaparece. */
+  const PROEMIO_HERO = {
+    presupuesto: '.subtab-panel[data-parent="presupuesto"][data-subpanel="panoramica"] > .section-hero',
+    megaobras: '.subtab-panel[data-subpanel="simulador-megaobras"] .section-hero',
+    calculadora: '.subtab-panel[data-subpanel="calculadora"] > .section-hero',
+    verificador: '#tab-panel-verificador > .section-hero',
+    ambiente: '#tab-panel-ambiente > .section-hero'
+  };
+  let proemioFusion = null;
+
+  function proemioSoltarHero() {
+    const f = proemioFusion;
+    if (!f) return;
+    f.nodos.forEach(function(n) { f.marca.parentNode.insertBefore(n, f.marca); });
+    f.marca.remove();
+    f.hero.hidden = false;
+    proemioFusion = null;
+  }
+
   function pintarProemio(tabKey) {
     var el = document.getElementById('moduloProemio');
     if (!el) return;
     var p = PROEMIOS[tabKey];
-    if (!p) { el.hidden = true; el.removeAttribute('data-modulo'); return; }
+    if (!p) { proemioSoltarHero(); el.hidden = true; el.removeAttribute('data-modulo'); return; }
     if (el.getAttribute('data-modulo') === tabKey && !el.hidden) return;
+    proemioSoltarHero();
+    var hero = PROEMIO_HERO[tabKey] ? document.querySelector(PROEMIO_HERO[tabKey]) : null;
+    var tagEl = hero ? hero.querySelector('.hero-tag') : null;
+    /* La etiqueta del ambiente ya dice «Modulo 5»: no se repite. */
+    var etiqueta = tagEl ? tagEl.textContent.replace(/^\s*M[oó]dulo\s*\d+\s*·\s*/i, '').trim() : 'Proemio';
     el.setAttribute('data-modulo', tabKey);
     el.className = 'mod-proemio' + (tabKey === 'ambiente' ? ' mod-proemio-eco' : '');
     el.innerHTML =
       '<div class="mod-proemio-icono" aria-hidden="true">' + p.icono + '</div>' +
       '<div class="mod-proemio-cuerpo">' +
-        '<span class="mod-proemio-kicker">Módulo ' + p.n + ' · Proemio</span>' +
+        '<span class="mod-proemio-kicker">Módulo ' + p.n + ' · ' + pdEsc(etiqueta) + '</span>' +
         '<h2 class="mod-proemio-titulo">' + p.titulo + '</h2>' +
         '<p class="mod-proemio-sub">' + p.subtitulo + '</p>' +
-        '<p class="mod-proemio-texto">' + p.texto + '</p>' +
+        '<div class="mod-proemio-texto"></div>' +
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
           p.temas.map(function(t) { return '<li>' + t + '</li>'; }).join('') +
         '</ul>' +
         '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
       '</div>';
+    var caja = el.querySelector('.mod-proemio-texto');
+    var parrafos = hero ? [].slice.call(hero.children).filter(function(n) { return n.tagName === 'P'; }) : [];
+    if (parrafos.length) {
+      var marca = document.createComment('parrafo mudado al proemio');
+      hero.insertBefore(marca, parrafos[0]);
+      parrafos.forEach(function(n) { caja.appendChild(n); });
+      hero.hidden = true;
+      proemioFusion = { hero: hero, marca: marca, nodos: parrafos };
+    } else {
+      caja.innerHTML = '<p>' + p.texto + '</p>';
+    }
     el.hidden = false;
   }
 

@@ -18087,13 +18087,13 @@ body.con-regreso { padding-bottom: 96px; }
 }
 
 .explorer-card-icon {
-  width: 84px;
-  height: 84px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42px;
+  font-size: 58px;
   line-height: 1;
   margin-bottom: 16px;
   background: radial-gradient(circle at 35% 30%, rgba(243, 207, 101, 0.22), rgba(201, 168, 76, 0.06) 70%);
@@ -18227,13 +18227,13 @@ body.con-regreso { padding-bottom: 96px; }
 
 .mod-proemio-icono {
   flex: 0 0 auto;
-  width: 96px;
-  height: 96px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
+  font-size: 68px;
   line-height: 1;
   background: radial-gradient(circle at 35% 30%, rgba(243, 207, 101, 0.25), rgba(201, 168, 76, 0.06) 70%);
   border: 1px solid var(--border-gold);
@@ -18276,12 +18276,21 @@ body.con-regreso { padding-bottom: 96px; }
 [data-theme="light"] .mod-proemio-sub { color: var(--navy, #0b3a6e); }
 
 .mod-proemio-texto {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-secondary);
   margin: 0 0 16px;
-  max-width: 78ch;
+  max-width: 82ch;
 }
+
+.mod-proemio-texto p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+}
+
+.mod-proemio-texto p:last-child { margin-bottom: 0; }
+
+/* El encabezado de la seccion que absorbio el proemio no se pinta dos veces. */
+.section-hero[hidden] { display: none !important; }
 
 .mod-proemio-temas {
   list-style: none;
@@ -18319,7 +18328,7 @@ body.con-regreso { padding-bottom: 96px; }
 
 @media (max-width: 640px) {
   .mod-proemio { flex-direction: column; align-items: center; text-align: center; padding: 22px 16px; gap: 14px; scroll-margin-top: 12px; }
-  .mod-proemio-icono { width: 76px; height: 76px; font-size: 40px; }
+  .mod-proemio-icono { width: 100px; height: 100px; font-size: 54px; }
   .mod-proemio-titulo { font-size: 24px; }
   .mod-proemio-temas { justify-content: center; }
   .explorer-card { padding: 22px 16px 16px; }

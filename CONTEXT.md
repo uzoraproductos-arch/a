@@ -2101,6 +2101,22 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (un solo encabezado por módulo e íconos más grandes)
+
+- **Sin título repetido.** Al pulsar «Comenzar», el proemio absorbe el
+  encabezado de la sección de entrada del módulo (`PROEMIO_HERO`): la
+  etiqueta de esa sección pasa al renglón superior («Módulo 1 · Panorámica
+  del Erario · Ejercicio Fiscal 2026») y su párrafo, con sus ligas a
+  fuentes, se muda al proemio. El encabezado de abajo se oculta. Aplica a
+  los cinco módulos (1.1 Panorámica, 2.1 Megaobras, 2.4 Calculadora,
+  Inspector y Costo Ambiental).
+- El párrafo se mueve, no se copia: `#ccEntrada` de la calculadora sigue
+  siendo el mismo nodo. Al salir del módulo (`proemioSoltarHero`) vuelve a
+  su lugar y el encabezado reaparece, así que quien entra por el menú ve la
+  sección como antes. El texto propio de `PROEMIOS` queda de respaldo.
+- Íconos: 112 px en las tarjetas (antes 84) y 128 px en el proemio (antes
+  96); 100 px en teléfono.
+
 ### Hecho (Auditoría en imágenes: regreso desde el expediente)
 
 - Los botones internos de la ventana de cada obra (abrir el expediente,
