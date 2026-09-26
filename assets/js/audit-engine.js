@@ -4280,7 +4280,7 @@
     }
     /* Las 32 entidades y los municipios viven en Accion Financiera de la
        plataforma. Desde una pagina que no los tiene, se va a buscarlos. */
-    if (tabKey === 'territorio' || tabKey === 'municipios') {
+    if (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') {
       if (document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]')) {
         switchTab('accion-financiera', skipPush);
         switchSubtab('accion-financiera', tabKey);
@@ -4418,6 +4418,7 @@
       else if (subKey === 'bitacora') renderNews();
       else if (subKey === 'poderes') renderPoderes();
       else if (subKey === 'territorio') renderTerritorioErario();
+      else if (subKey === 'proyeccion2027') { renderConstitucionEconomica(); renderCuentasEcologicas(); }
       else if (subKey === 'municipios') renderMunicipioErario();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
     } else if (parentTab === 'legislativo') {
@@ -18535,7 +18536,10 @@
     /* La segunda mitad de la 1.4 se pinta antes del autoenlace para que
        sus terminos hacendarios entren en el mismo barrido. */
     renderPaquete2027();
-    autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="constitucion"]'));
+    /* El contenido vive ahora en Accion Financiera (proyeccion2027): se
+       enlaza el panel que lo contenga, se llame como se llame. */
+    const ceAmbito = document.getElementById('ceBrujula');
+    if (ceAmbito) autolinkAmbito(ceAmbito.closest('.subtab-panel'));
   }
 
   /* Cual de los cuatro pilares esta desplegado. Null los deja todos cerrados,
@@ -19243,7 +19247,8 @@
         '</section>';
     }
 
-    autolinkAmbito(document.querySelector('.subtab-panel[data-subpanel="cuentas-verdes"]'));
+    const ceeAmbito = document.getElementById('ceeCascada');
+    if (ceeAmbito) autolinkAmbito(ceeAmbito.closest('.subtab-panel'));
   }
 
   /* La cascada: cada renglon arranca donde termino el anterior, de modo que
@@ -25518,13 +25523,19 @@
     
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
                          (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
-                         (tabKey === 'territorio' || tabKey === 'municipios') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
+                         (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
     var targetScroll = targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) {
       setTimeout(function() {
         targetScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 60);
+      /* Las secciones largas terminan de dibujarse despues del primer salto
+         y lo dejan corto: se corrige una vez, si quedo lejos. */
+      setTimeout(function() {
+        var t = targetScroll.getBoundingClientRect().top;
+        if (Math.abs(t) > 200) targetScroll.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }, 900);
     }
   }
 

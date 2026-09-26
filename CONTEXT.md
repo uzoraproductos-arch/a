@@ -1843,9 +1843,10 @@ vuelve a correrse si cambian los libros.
 
 ### Hecho (entidades y municipios pasan a Acción Financiera; cuatro menús)
 
-- **Menú superior, estructura fijada por el autor:** Búsqueda Forense,
-  Acción Financiera, Descargar Datos y Recursos (reúne lo que era «Consultar
-  Recursos») y Portal Digital.
+- **Menú superior:** se probó fundir «Descargar Datos» y «Consultar
+  Recursos»; el autor pidió regresarlos separados. Quedan cinco: Búsqueda
+  Forense, Acción Financiera, Descargar Datos, Consultar Recursos y Portal
+  Digital.
 - **Las 32 entidades (antes 1.2) y los 2,479 municipios (antes 1.3) se
   mudaron de la Enciclopedia a Acción Financiera de la plataforma**
   (`data-parent="accion-financiera"`, subpaneles `territorio` y
@@ -1878,8 +1879,24 @@ vuelve a correrse si cambian los libros.
   --cacert` y un paquete que agrega el intermedio YR1 y Root YR de Let's
   Encrypt (del repositorio `letsencrypt/website`); nunca sin verificar.
 
+### Hecho (Paquete Económico 2027 y costo ambiental, en Acción Financiera)
+
+- **Cuarto renglón de «Presupuesto Federal»** en el menú de Acción
+  Financiera: «Paquete Económico 2027 y Costo Ambiental», subpanel
+  `proyeccion2027` de la plataforma. Reúne la antigua 1.4 (Constitución
+  económica y lectura del Paquete Económico 2027) y la antigua 2.3 (Cuentas
+  Económicas y Ecológicas del INEGI). En la Enciclopedia, 1.4 y 2.3 quedan con
+  aviso y enlace.
+- El autoenlace de las dos secciones ya no depende del nombre del subpanel:
+  busca el panel que contiene sus contenedores.
+- Al abrir una sección larga desde el menú, el desplazamiento se corrige una
+  vez a los 900 ms si la página siguió creciendo.
+
 ### Pendiente
 
+- **El capítulo «Paquete Económico 2027 y Costo Ambiental» mide unos
+  19,500 px:** es el mejor candidato para la lectura por capítulos (índice de
+  tarjetas), en cuanto el autor apruebe extenderla.
 - **El avance de 2026 se actualiza por trimestre:** cuando Hacienda publique
   el tercer trimestre (fin de octubre), bajar el CSV y correr los dos
   scripts. El pagado de Hacienda y el que publica cada ente pueden no
