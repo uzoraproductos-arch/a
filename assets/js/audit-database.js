@@ -17159,6 +17159,36 @@ window.AUDIT_DB = {
         "doc": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico, Cuenta P\u00fablica (portal oficial, ejercicios 1996 a 2025)",
         "url": "https://www.cuentapublica.hacienda.gob.mx"
       },
+      "MDB2019": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2019 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2019, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2019c/Documentos/Matriz/IR2019b.pdf",
+        "sha256": "0367910412bd729089ce4a632b7414a8ef88bf8a708cd9e7ac6b1d3fb84319a9"
+      },
+      "MDB2020": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2020 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2020, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2020c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "c425e450a96c5fc6d13429f18420a8cdaa3edb7d0b1f15fb8615a13a62492d1e"
+      },
+      "MDB2021": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2021 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2021, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "513145012d27125a0bf23ef565a61a5090ccecc97b223da5ae599fba7790110c"
+      },
+      "MDB2022": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2022 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2022, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "97002cffa4f73b98ed3f8c5f78fc10ef365829ae142ae11b6dec304be99bdedc"
+      },
+      "MDB2023": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2023 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2023, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "8c77465b147545c513c474292dc6352d8a0f45a638d214a41b7dca8eb45493e9"
+      },
       "ASFDATOS": {
         "corto": "ASF, Sistema P\u00fablico de Consulta",
         "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Sistema P\u00fablico de Consulta de Auditor\u00edas (ASF Datos)",
@@ -19132,7 +19162,87 @@ window.AUDIT_DB = {
       "fuente": "MDB2025A",
       "pagina": 11,
       "estado": "oficial"
-    }
+    },
+    "serie": [
+      {
+        "auditorias": 1358,
+        "acciones": 7141,
+        "PO": 1492,
+        "PRAS": 1583,
+        "recuperaciones": 1517843800.0,
+        "porAclarar": 99396584800.0,
+        "observado": 100914428500.0,
+        "observadoEstado": "oficial",
+        "cp": 2019,
+        "fuente": "MDB2019",
+        "pagina": 9
+      },
+      {
+        "auditorias": 1616,
+        "acciones": 5393,
+        "PO": 1139,
+        "PRAS": 1484,
+        "recuperaciones": 2176433500.0,
+        "porAclarar": 60834134600.0,
+        "observado": 63010568100.0,
+        "observadoEstado": "oficial",
+        "cp": 2020,
+        "fuente": "MDB2020",
+        "pagina": 9
+      },
+      {
+        "auditorias": 2050,
+        "acciones": 5478,
+        "PO": 1301,
+        "PRAS": 1564,
+        "recuperaciones": 2994803500.0,
+        "porAclarar": 61840334500.0,
+        "observado": 64835137900.0,
+        "observadoEstado": "oficial",
+        "cp": 2021,
+        "fuente": "MDB2021",
+        "pagina": 13
+      },
+      {
+        "auditorias": 2153,
+        "acciones": 5466,
+        "PO": 1613,
+        "PRAS": 1730,
+        "recuperaciones": 3128187100.0,
+        "porAclarar": 29765904800.0,
+        "observado": 32894091900.0,
+        "observadoEstado": "oficial",
+        "cp": 2022,
+        "fuente": "MDB2022",
+        "pagina": 13
+      },
+      {
+        "auditorias": 2369,
+        "acciones": 6806,
+        "PO": 2298,
+        "PRAS": 2508,
+        "recuperaciones": 1762225500.0,
+        "porAclarar": 51979042400.0,
+        "observado": 53741267900.0,
+        "observadoEstado": "derivado",
+        "cp": 2023,
+        "fuente": "MDB2023",
+        "pagina": 13
+      },
+      {
+        "cp": 2024,
+        "auditorias": 2264,
+        "acciones": 6274,
+        "PO": 2762,
+        "PRAS": 2203,
+        "recuperaciones": 2005619900.0,
+        "porAclarar": 65169097600.0,
+        "observado": 67174717500.0,
+        "observadoEstado": "derivado",
+        "fuente": "MDB2024",
+        "pagina": 11
+      }
+    ]
   },
 "expedientes": {
     "consulta": "26 de septiembre de 2026",

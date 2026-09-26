@@ -7,7 +7,9 @@ entregas, y primera entrega de la 2025) y qué significa cada acción.
 Uso:
     python3 herramientas/integrar_cuenta_publica.py
 
-Lee investigaciones/asf-mdb-2024.json (lo produce extraer_mdb_asf.py). Las
+Lee investigaciones/asf-mdb-2024.json (lo produce extraer_mdb_asf.py) y
+investigaciones/asf-mdb-serie.json (extraer_serie_asf.py: el renglón Total de
+las matrices consolidadas de las CP 2019 a 2023). Las
 cifras de la primera entrega 2025 se capturan a mano de su matriz (página 11,
 un solo renglón de totales). Es idempotente. También corrige dos fichas del
 catálogo: la 7 (LFRCF, citaba la reforma de 2021) y la 14 (informes de la ASF,
@@ -22,6 +24,7 @@ from integrar_ambiente import BASE, insertar, _valor  # noqa: E402
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 MDB = RAIZ / 'investigaciones' / 'asf-mdb-2024.json'
+SERIE = RAIZ / 'investigaciones' / 'asf-mdb-serie.json'
 CONSULTA = '26 de septiembre de 2026'
 ASF = 'https://www.asf.gob.mx/Trans/Informes/'
 
@@ -58,6 +61,15 @@ FUENTES = {
         'corto': 'SHCP, portal de la Cuenta Pública',
         'doc': 'Secretaría de Hacienda y Crédito Público, Cuenta Pública (portal oficial, ejercicios 1996 a 2025)',
         'url': 'https://www.cuentapublica.hacienda.gob.mx'},
+    **{'MDB%d' % a: {
+        'corto': 'ASF, Matriz de Datos Básicos CP %d (consolidado)' % a,
+        'doc': 'Auditoría Superior de la Federación, Matriz de Datos Básicos del Informe del Resultado de la Fiscalización Superior de la Cuenta Pública %d, consolidado de sus entregas' % a,
+        'url': u, 'sha256': h} for a, u, h in [
+        (2019, ASF + 'IR2019c/Documentos/Matriz/IR2019b.pdf', '0367910412bd729089ce4a632b7414a8ef88bf8a708cd9e7ac6b1d3fb84319a9'),
+        (2020, ASF + 'IR2020c/Documentos/Matriz/MDB_Consolidado.pdf', 'c425e450a96c5fc6d13429f18420a8cdaa3edb7d0b1f15fb8615a13a62492d1e'),
+        (2021, ASF + 'IR2021c/Documentos/Matriz/MDB_Consolidado.pdf', '513145012d27125a0bf23ef565a61a5090ccecc97b223da5ae599fba7790110c'),
+        (2022, ASF + 'IR2022c/Documentos/Matriz/MDB_Consolidado.pdf', '97002cffa4f73b98ed3f8c5f78fc10ef365829ae142ae11b6dec304be99bdedc'),
+        (2023, ASF + 'IR2023c/Documentos/Matriz/MDB_Consolidado.pdf', '8c77465b147545c513c474292dc6352d8a0f45a638d214a41b7dca8eb45493e9')]},
     'ASFDATOS': {
         'corto': 'ASF, Sistema Público de Consulta',
         'doc': 'Auditoría Superior de la Federación, Sistema Público de Consulta de Auditorías (ASF Datos)',
@@ -149,7 +161,23 @@ def construir():
             'paginaEntidades': '19 a 23',
         },
         'cp2025': CP2025A,
+        'serie': serie(m),
     }
+
+
+def serie(m):
+    """Una fila por Cuenta Pública, de 2019 a 2024, todas del renglón Total de
+    su matriz consolidada. En 2023 y 2024 la matriz ya no publica el monto
+    observado: se deriva como recuperado + por aclarar."""
+    campos = ('auditorias', 'acciones', 'PO', 'PRAS', 'recuperaciones', 'porAclarar', 'observado', 'observadoEstado')
+    filas = [dict({k: d[k] for k in campos}, cp=d['cp'], fuente='MDB%d' % d['cp'], pagina=d['pagina'])
+             for d in json.loads(SERIE.read_text(encoding='utf-8'))['serie']]
+    t = m['total']
+    filas.append({'cp': 2024, 'auditorias': t['auditorias'], 'acciones': t['acciones'], 'PO': t['PO'], 'PRAS': t['PRAS'],
+                  'recuperaciones': t['recuperaciones'], 'porAclarar': t['porAclarar'],
+                  'observado': round(t['recuperaciones'] + t['porAclarar'], 2), 'observadoEstado': 'derivado',
+                  'fuente': 'MDB2024', 'pagina': 11})
+    return filas
 
 
 def main():

@@ -2101,6 +2101,41 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (la ASF en cifras oficiales 2019-2024 y la cinta de datos verificada)
+
+- **Serie histórica oficial.** `herramientas/extraer_serie_asf.py` lee el
+  renglón Total de la Matriz de Datos Básicos consolidada de las Cuentas
+  Públicas 2019 a 2023 (cada PDF verificado por sha256; se detiene si las seis
+  acciones no suman el total o si observado ≠ recuperado + por aclarar) y
+  escribe `investigaciones/asf-mdb-serie.json`. `integrar_cuenta_publica.py`
+  lo suma a `DB.cuenta_publica_asf.serie` con la fila de 2024.
+  Por aclarar, en mdp: 2019 99,396.6 · 2020 60,834.1 · 2021 61,840.3 ·
+  2022 29,765.9 · 2023 51,979.0 · 2024 65,169.1. Desde la CP 2023 la matriz
+  ya no publica el «monto observado»: se deriva y se marca `derivado`.
+- **Hallazgo:** la antigua serie del simulador graficaba el *observado*
+  (63,010 / 64,834 / 32,894…), no el *por aclarar*, y para 2019 y 2023 traía
+  cifras que no son las del documento; su «% resuelto» no tenía fuente.
+- **Capítulo nuevo** en «¿Qué encontró la Auditoría Superior?»: «Seis años de
+  revisiones», con selector (por aclarar, observado, recuperado, auditorías,
+  pliegos), liga a la página de cada matriz y la lectura derivada: de lo
+  observado en 2019-2024 se recuperó el 3.6 % durante las auditorías.
+- **Enciclopedia, Legislativo, bloque 3 (ASF):** se retiró el simulador de
+  «salud financiera» (tacómetro, ROI contra un presupuesto de $3,200 mdp y
+  «tasa de recuperación de los $51,024 mdp») y el análisis por «tipologías»
+  con montos sin fuente, con todo su código. En su lugar va la misma sección
+  oficial de la Cuenta Pública (`#cuentaPublicaASFLeg`). La tarjeta usa el
+  presupuesto aprobado de la ASF, $2,822.6 mdp (PEF 2026, Anexo 1), 2,264
+  auditorías y $65,169.1 mdp por aclarar de la CP 2024; el titular queda
+  `pendiente` de verificar (nombramiento de 2018 por ocho años).
+- **Cinta de datos de referencia (portada y Enciclopedia):** se retiraron
+  «recaudación SAT récord $4.95 billones» (la LIF 2026 estima $5.42 billones
+  de ISR, IVA e IEPS), «deuda subnacional $715,420 mdp», «12,867 empresas
+  aportan el 52 %», «dependencia fiscal 84.0 %», «predial 0.16 % del PIB» y
+  «CETES 28d», todos sin fuente. Ahora lleva siete datos con su documento en
+  `title`: PEF, gasto federalizado, lo por aclarar de la CP 2024, ISR+IVA+IEPS
+  de la LIF, Ramo 28, costo financiero de la deuda y la deuda de los 32
+  gobiernos estatales ($643,695.7 mdp, suma del Sistema de Alertas).
+
 ### Hecho (radar: cada cifra explica qué es y cómo se calcula)
 
 - Pulsar una cifra del radar (o su ícono) ya no salta a otra sección: abre
@@ -2269,14 +2304,16 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 
 ### Pendiente
 
-- **Simulador de la ASF en la Enciclopedia (6 · Modo Inspector):** gira
-  alrededor de «$51,024 mdp observados» (tipologías, serie histórica y metas de
-  recuperación en `ASF_IRREGULARIDADES_DATA`), cifra que no es la de la ASF
-  para la CP 2024. Rehacerlo con la matriz de la CP 2024 (`DB.cuenta_publica_asf`).
-- **Cinta de datos de referencia:** «Recaudación SAT récord $4.95 billones»,
-  «Deuda subnacional $715,420 mdp», «12,867 empresas aportan el 52%»,
-  «Dependencia fiscal 84.0%» y «Predial 0.16% del PIB» no traen fuente visible.
-  Verificarlas una por una o retirarlas.
+- **Bloque `macro` de la base** (`recaudacionTributariaTotal`, `deudaSubnacionalTotal`,
+  `grandesContribuyentes`, `predialPromedioPIB`, `asfIrregularidadesGlobales`…) no tiene
+  fuentes y todavía lo leen otras piezas; y en los estados, `gasto`, `ramo28`, `ramo33`
+  y `dep` son cifras redondas sin documento. Revisar quién las usa y sustituirlas.
+- **Personajes políticos (sexenios):** «ASF observó $417,321 mdp» y otras cifras
+  acumuladas de la ASF por sexenio no cuadran con la serie oficial 2019-2024 y no
+  traen fuente. Rehacerlas con `DB.cuenta_publica_asf.serie`.
+- **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
+  rutas de los demás años; la serie empieza en 2019.
+- **Titular de la ASF:** confirmar si sigue David Colmenares tras marzo de 2026.
 - **Guion editorial, entregas B a E** (portada, glosario ampliado,
   diccionario de sustituciones, reescritura por módulos): esperan decisiones
   del autor sobre «tú» o «usted», nombres de menús y el Pase.

@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926w">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926x">
 </head>
 <body>
 
@@ -356,26 +356,22 @@
         <span>DATOS DE REFERENCIA:</span>
       </div>
       <div class="radar-telemetry-track">
-        <div class="tel-item">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
-        <div class="tel-item">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
-        <div class="tel-item">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
-        <div class="tel-item">Recaudación SAT Récord: <strong class="green">$4.95 billones</strong> (ISR + IVA + IEPS)</div>
-        <div class="tel-item">Deuda Subnacional (Estados y Municipios): <strong class="gold">$715,420 mdp</strong></div>
-        <div class="tel-item">Grandes Contribuyentes: <strong class="cyan">12,867 empresas</strong> aportan el 52%</div>
-        <div class="tel-item">Dependencia Fiscal Promedio de Estados: <strong class="red">84.0%</strong></div>
-        <div class="tel-item">Predial Municipal vs OCDE: <strong class="red">0.16% del PIB</strong> (vs 1.0% OCDE)</div>
-        <div class="tel-item">Subastas Banxico CETES 28d: <strong class="gold">Tasa de Referencia de Deuda</strong></div>
+        <div class="tel-item" title="Presupuesto de Egresos de la Federación 2026, art. 1">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
+        <div class="tel-item" title="PEF 2026: estimación del gasto federalizado total, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF (derivado)">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
+        <div class="tel-item" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
+        <div class="tel-item" title="Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp">ISR, IVA e IEPS estimados en la Ley de Ingresos 2026: <strong class="green">$5.42 billones</strong></div>
+        <div class="tel-item" title="PEF 2026, Ramo General 28: $1,456,045.9 mdp">Participaciones a estados y municipios (Ramo 28): <strong class="gold">$1.46 billones</strong></div>
+        <div class="tel-item" title="PEF 2026, Anexo 8: $1,572,073.3 mdp">Costo financiero de la deuda (PEF 2026, Anexo 8): <strong class="red">$1.57 billones</strong> al año</div>
+        <div class="tel-item" title="SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades">Deuda de los 32 gobiernos estatales (SHCP, Sistema de Alertas): <strong class="gold">$643,695.7 mdp</strong></div>
 
         <!-- Repetición continua para loop infinito sin saltos -->
-        <div class="tel-item" aria-hidden="true">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
-        <div class="tel-item" aria-hidden="true">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
-        <div class="tel-item" aria-hidden="true">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
-        <div class="tel-item" aria-hidden="true">Recaudación SAT Récord: <strong class="green">$4.95 billones</strong> (ISR + IVA + IEPS)</div>
-        <div class="tel-item" aria-hidden="true">Deuda Subnacional (Estados y Municipios): <strong class="gold">$715,420 mdp</strong></div>
-        <div class="tel-item" aria-hidden="true">Grandes Contribuyentes: <strong class="cyan">12,867 empresas</strong> aportan el 52%</div>
-        <div class="tel-item" aria-hidden="true">Dependencia Fiscal Promedio de Estados: <strong class="red">84.0%</strong></div>
-        <div class="tel-item" aria-hidden="true">Predial Municipal vs OCDE: <strong class="red">0.16% del PIB</strong> (vs 1.0% OCDE)</div>
-        <div class="tel-item" aria-hidden="true">Subastas Banxico CETES 28d: <strong class="gold">Tasa de Referencia de Deuda</strong></div>
+        <div class="tel-item" aria-hidden="true" title="Presupuesto de Egresos de la Federación 2026, art. 1">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
+        <div class="tel-item" aria-hidden="true" title="PEF 2026: estimación del gasto federalizado total, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF (derivado)">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
+        <div class="tel-item" aria-hidden="true" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
+        <div class="tel-item" aria-hidden="true" title="Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp">ISR, IVA e IEPS estimados en la Ley de Ingresos 2026: <strong class="green">$5.42 billones</strong></div>
+        <div class="tel-item" aria-hidden="true" title="PEF 2026, Ramo General 28: $1,456,045.9 mdp">Participaciones a estados y municipios (Ramo 28): <strong class="gold">$1.46 billones</strong></div>
+        <div class="tel-item" aria-hidden="true" title="PEF 2026, Anexo 8: $1,572,073.3 mdp">Costo financiero de la deuda (PEF 2026, Anexo 8): <strong class="red">$1.57 billones</strong> al año</div>
+        <div class="tel-item" aria-hidden="true" title="SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades">Deuda de los 32 gobiernos estatales (SHCP, Sistema de Alertas): <strong class="gold">$643,695.7 mdp</strong></div>
       </div>
     </div>
 
@@ -2566,7 +2562,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926w</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926x</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2710,16 +2706,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926w"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926x"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926w"></script>
+  <script src="assets/js/audit-database.js?v=20260926x"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926w"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926x"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926w"></script>
+  <script src="assets/js/audit-engine.js?v=20260926x"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

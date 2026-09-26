@@ -2132,7 +2132,39 @@
      2025). Coleccion cuenta_publica_asf. Las sumas por estado y los
      porcentajes son derivados y lo dicen.
      ==================================================================== */
-  const cpEstado = { entidad: 'Aguascalientes' };
+  const cpEstado = { entidad: 'Aguascalientes', metrica: 'porAclarar' };
+
+  /* Seis años de revisiones: el renglon Total de la matriz consolidada de
+     cada Cuenta Publica (DB.cuenta_publica_asf.serie). */
+  const CP_METRICAS = [
+    { k: 'porAclarar', et: 'Por aclarar', mdp: true },
+    { k: 'observado', et: 'Observado', mdp: true },
+    { k: 'recuperaciones', et: 'Recuperado', mdp: true },
+    { k: 'auditorias', et: 'Auditorías', mdp: false },
+    { k: 'PO', et: 'Pliegos', mdp: false }
+  ];
+
+  function cpSerieHtml() {
+    const S = (DB.cuenta_publica_asf && DB.cuenta_publica_asf.serie) || [];
+    if (!S.length) return '<p class="pd-nota">' + chipEstado('pendiente') + ' La base no trae la serie histórica.</p>';
+    const m = CP_METRICAS.find(x => x.k === cpEstado.metrica) || CP_METRICAS[0];
+    const max = Math.max.apply(null, S.map(r => r[m.k] || 0));
+    return '<div class="cp-metricas" role="group" aria-label="Qué cifra comparar">' + CP_METRICAS.map(x =>
+        '<button type="button" class="chip' + (x === m ? ' on active' : '') + '" aria-pressed="' + (x === m) + '" onclick="window.AuditEngine.cpSerieMetrica(\'' + x.k + '\')">' + x.et + '</button>').join('') + '</div>' +
+      S.map(r => {
+        const v = r[m.k] || 0;
+        const est = (m.k === 'observado') ? r.observadoEstado : 'oficial';
+        return '<div class="pd-fila cp-serie-fila"><span>CP ' + r.cp + ' <small>' + cpFuente(r.fuente, r.pagina) + '</small></span>' +
+          pdBarra(v, max) + '<span class="num-tabular">' + (m.mdp ? pdMdp(v) : amNum(v)) + ' ' + chipEstado(est) + '</span></div>';
+      }).join('');
+  }
+
+  function cpSerieMetrica(k) {
+    cpEstado.metrica = k;
+    const cont = document.getElementById('cpSerie');
+    if (cont) cont.innerHTML = cpSerieHtml();
+  }
+
 
   function cpFuente(clave, pagina) {
     const C = DB.cuenta_publica_asf;
@@ -2261,6 +2293,17 @@
         '<div class="am-alerta"><b>Por aclarar no es lo mismo que robado.</b> ' + pdEsc(C.nota.split('. ').slice(2).join('. ')) + '</div>' +
       '</section>';
 
+    /* 2 bis. Seis años de revisiones */
+    const S = C.serie || [];
+    const sObs = S.reduce((a, r) => a + r.observado, 0), sRec = S.reduce((a, r) => a + r.recuperaciones, 0);
+    const serie = !S.length ? '' :
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">📈 Seis años de revisiones: ' + S[0].cp + ' a ' + S[S.length - 1].cp + '</h3>' +
+        '<p class="pd-lead">Cada renglón es el total de la matriz consolidada de una Cuenta Pública, con su documento y su página. En esos seis años la ASF observó ' + pdMdp(sObs) + ' y, durante las propias auditorías, se recuperaron ' + pdMdp(sRec) + ': el <b>' + pdPct(sRec / sObs * 100) + '</b>. ' + chipEstado('derivado') + '</p>' +
+        '<div id="cpSerie">' + cpSerieHtml() + '</div>' +
+        '<p class="pd-nota"><b>Cómo leerla.</b> Observado = recuperado + por aclarar. Desde la Cuenta Pública 2023 la matriz ya no publica el total observado: para 2023 y 2024 se suma y se marca ' + chipEstado('derivado') + '. Los montos están en pesos de cada año, sin ajustar por inflación, y el «por aclarar» es el del corte de cada matriz: lo que se solventó después no aparece aquí. La matriz de la Cuenta Pública 2018 no está publicada en el portal de la ASF ' + chipEstado('pendiente') + '.</p>' +
+      '</section>';
+
     /* 3. Donde se concentra */
     const grupos = C.cp2024.grupos;
     const maxG = Math.max.apply(null, grupos.map(g => g.subtotal.porAclarar));
@@ -2333,18 +2376,19 @@
         '<p class="pd-nota">' + pdEsc(C.nota) + ' Consulta: ' + pdEsc(C.consulta) + '.</p>' +
       '</section>';
 
-    raiz.innerHTML = calendario + cifras + donde + estado + acciones + nueva + fuentes;
+    raiz.innerHTML = calendario + cifras + serie + donde + estado + acciones + nueva + fuentes;
     raiz.querySelectorAll('.am-dato, .cp-linea, .cp-cuenta, .pd-tabla-w, .cp-ranking, .pd-docs, .cp-leyenda, .cp-accion b, .cp-ent-cab')
       .forEach(el => el.setAttribute('data-no-autolink', ''));
     capMontar(raiz, 'cuentapublica', [
       { ico: '🗓️', tit: 'Qué es y cuándo se revisa', cifra: prox ? dias + ' días' : '', cifraPie: prox ? 'para la siguiente entrega' : '', estado: prox ? 'derivado' : '', res: 'El calendario que fija la ley, de Hacienda a la ASF.' },
       { ico: '🔎', tit: 'La Cuenta Pública 2024 en cifras', cifra: amNum(T.auditorias), cifraPie: 'auditorías', estado: 'oficial', res: 'Lo revisado, las acciones y lo que falta aclarar.' },
+      S.length ? { ico: '📈', tit: 'Seis años de revisiones', cifra: S.length + ' años', cifraPie: 'de matrices oficiales', estado: 'oficial', res: 'Lo observado, lo recuperado y lo por aclarar, de ' + S[0].cp + ' a ' + S[S.length - 1].cp + '.' } : null,
       { ico: '🏛️', tit: 'Dónde se concentra', cifra: pdPct(fedPct, 0), cifraPie: 'en estados y municipios', estado: 'derivado', res: 'Por grupo de gasto y los diez renglones más altos.' },
       { ico: '🗺️', tit: 'Su estado', cifra: '32', cifraPie: 'estados comparados', estado: 'oficial', res: 'Gobierno, municipios y otros entes, con su lugar nacional.' },
       { ico: '⚖️', tit: 'Qué significa cada acción', cifra: amNum(T.PO), cifraPie: 'pliegos de observaciones', estado: 'oficial', res: 'De la recomendación al pliego, y los plazos de la ley.' },
       { ico: '🆕', tit: 'La Cuenta Pública 2025', cifra: amNum(N.auditorias), cifraPie: 'auditorías en la 1.ª entrega', estado: 'oficial', res: 'Lo que ya publicó la ASF y lo que viene.' },
       { ico: '📚', tit: 'Documentos y descarga', cifra: 'CSV', cifraPie: 'por estado', estado: '', res: 'Los PDF oficiales con su huella, y la base para Excel.' }
-    ]);
+    ].filter(Boolean));
   }
 
   function capMontar(raiz, clave, caps) {
@@ -5141,7 +5185,6 @@
         // Subpestaña 3.1: Monitor Cívico Electoral
         updateDiputadosSimulator();
         updateSenadoSimulator();
-        updateASFSimulator();
       } else if (subKey === 'congresos-estatales') {
         renderCongresosTable();
         updateCongresosSimulator();
@@ -7815,7 +7858,7 @@
           (plazos ? radarSec('Qué sigue después', '<ul class="rc-plazos">' + plazos + '</ul>') : '') +
           radarSec('Fuente', '<p class="glos-drawer-apa">' + glosEsc(f.doc || f.corto || '') + ', p. ' + cp.cp2024.pagina + '.</p>' + (f.url ? '<a class="glos-drawer-doc" href="' + glosEsc(f.url) + '" target="_blank" rel="noopener">Abrir el documento oficial ↗</a>' : '')),
         acciones: [
-          { txt: 'Ver lo que encontró la ASF', fn: function() { seleccionarModuloExplorer('verificador', 'cuentaPublicaASF'); } },
+          { txt: 'Ver lo que encontró la ASF', fn: function() { if (document.getElementById('cuentaPublicaASFLeg')) abrirAsfLegislativo(); else seleccionarModuloExplorer('verificador', 'cuentaPublicaASF'); } },
           g ? { txt: 'Ver en el glosario completo', fn: function() { irAlGlosario(g.termino); } } : null
         ]
       };
@@ -16281,6 +16324,14 @@
     }
   }
 
+  /* En la Enciclopedia la seccion de la ASF vive en el bloque 3 del
+     Legislativo: se abre (si estaba plegado) y se lleva ahi al lector. */
+  function abrirAsfLegislativo() {
+    const d = document.getElementById('desgloseBloque3');
+    if (d && d.style.display !== 'block') toggleBloqueLegislativo(3);
+    seleccionarModuloExplorer('legislativo', 'cuentaPublicaASFLeg');
+  }
+
   function toggleBloqueLegislativo(num) {
     const desglose = document.getElementById(`desgloseBloque${num}`);
     const btn = document.getElementById(`btnToggleBloque${num}`);
@@ -16304,8 +16355,7 @@
       } else if (num === 2) {
         updateSenadoSimulator();
       } else if (num === 3) {
-        updateASFSimulator();
-        renderAsfIrregularidadesChart(currentAsfChartView);
+        renderCuentaPublica();
       } else if (num === 4) {
         renderCongresosTable();
       } else if (num === 5) {
@@ -24226,8 +24276,6 @@
     safeRun(renderCalculadora, 'renderCalculadora');
     safeRun(updateDiputadosSimulator, 'updateDiputadosSimulator');
     safeRun(updateSenadoSimulator, 'updateSenadoSimulator');
-    safeRun(updateASFSimulator, 'updateASFSimulator');
-    safeRun(() => renderAsfIrregularidadesChart('tipologia'), 'renderAsfIrregularidadesChart');
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
     safeRun(renderPanoramaErario, 'renderPanoramaErario');
@@ -24904,652 +24952,10 @@
     }
   }
 
-  // ==========================================================================
-  // SIMULADOR DE SALUD FINANCIERA & EFICACIA · AUDITORÍA SUPERIOR (ASF - BLOQUE 3)
-  // ==========================================================================
-  let isAsfHealthEvaluated = false;
-  let isAsfHealthEvaluating = false;
-  let isAsfHealthHoverEnabled = false;
-  let asfAnimFrameId = null;
-  let asfNeedleAngle = -90;
-  let asfDisplayedScore = 0;
-
-  function updateASFPillarsDOM(p1, p2, p3, p4) {
-    const f1 = document.getElementById('asfPillarFill_1');
-    const v1 = document.getElementById('asfPillarVal_1');
-    if (f1) f1.style.width = `${p1}%`;
-    if (v1) v1.textContent = `${p1}%`;
-
-    const f2 = document.getElementById('asfPillarFill_2');
-    const v2 = document.getElementById('asfPillarVal_2');
-    if (f2) f2.style.width = `${p2}%`;
-    if (v2) v2.textContent = `${p2}%`;
-
-    const f3 = document.getElementById('asfPillarFill_3');
-    const v3 = document.getElementById('asfPillarVal_3');
-    if (f3) f3.style.width = `${p3}%`;
-    if (v3) v3.textContent = `${p3}%`;
-
-    const f4 = document.getElementById('asfPillarFill_4');
-    const v4 = document.getElementById('asfPillarVal_4');
-    if (f4) f4.style.width = `${p4}%`;
-    if (v4) v4.textContent = `${p4}%`;
-  }
-
-  function updateASFSimulator() {
-    const rRecup = document.getElementById('asfRangeRecuperacion');
-    const rCob = document.getElementById('asfRangeCobertura');
-    const rEfic = document.getElementById('asfRangeEficiencia');
-
-    const pRecup = rRecup ? parseInt(rRecup.value, 10) : 15;
-    const pCob = rCob ? parseInt(rCob.value, 10) : 25;
-    const pEfic = rEfic ? parseInt(rEfic.value, 10) : 0;
-
-    const montoObservado = 51024;
-    const basePresupuestoASF = 3200;
-
-    const reintegroTesofe = Math.round(montoObservado * (pRecup / 100));
-    const roi = (reintegroTesofe / basePresupuestoASF).toFixed(1);
-
-    const lblRecup = document.getElementById('asfSliderVal_recup');
-    if (lblRecup) lblRecup.textContent = `${pRecup}% ($${reintegroTesofe.toLocaleString('es-MX')} mdp)`;
-
-    const lblCob = document.getElementById('asfSliderVal_cobertura');
-    if (lblCob) lblCob.textContent = `${pCob}%`;
-
-    const lblEfic = document.getElementById('asfSliderVal_eficiencia');
-    if (lblEfic) lblEfic.textContent = `${pEfic}%`;
-
-    const elRecup = document.getElementById('asfSimRecuperacion');
-    if (elRecup) elRecup.textContent = `+$${reintegroTesofe.toLocaleString('es-MX')} mdp`;
-
-    const elROI = document.getElementById('asfSimROI');
-    if (elROI) elROI.textContent = `${roi}x`;
-
-    const elROIExpl = document.getElementById('asfROIExpl');
-    if (elROIExpl) elROIExpl.textContent = `$${roi} pesos`;
-
-    const pil1 = Math.min(100, Math.round(((pRecup - 15) / 45) * 100));
-    const pil2 = Math.min(100, Math.round(((pCob - 25) / 55) * 100));
-    const pil3 = Math.min(100, Math.round(pRecup * 1.5));
-    const pil4 = Math.min(100, Math.round(parseFloat(roi) * 11));
-
-    if (!isAsfHealthEvaluating) {
-      updateASFPillarsDOM(pil1, pil2, pil3, pil4);
-
-      let calcScore = Math.round((pil1 * 0.45) + (pil2 * 0.35) + (pil3 * 0.10) + (pil4 * 0.10));
-      calcScore = Math.min(100, Math.max(0, calcScore));
-
-      const needleEl = document.getElementById('asfNeedleGroup');
-      const scoreEl = document.getElementById('asfScoreNum');
-      const targetAngle = -90 + (calcScore / 100) * 180;
-
-      if (needleEl) needleEl.style.transform = `rotate(${targetAngle}deg)`;
-      asfNeedleAngle = targetAngle;
-      asfDisplayedScore = calcScore;
-
-      if (scoreEl) {
-        scoreEl.textContent = calcScore;
-        scoreEl.style.color = calcScore >= 80 ? '#2ecc71' : calcScore >= 50 ? '#f1c40f' : 'var(--text-dim)';
-      }
-
-      const statusEl = document.getElementById('asfStatusPill');
-      if (statusEl) {
-        if (calcScore === 0) {
-          statusEl.innerHTML = '⚪ Simulador en Reposo. Presiona «Calibrar Fiscalización».';
-          statusEl.style.color = 'var(--text-dim)';
-        } else if (calcScore < 50) {
-          statusEl.innerHTML = `🟡 <b>Eficacia Inicial de Fiscalización (${calcScore} pts)</b>`;
-          statusEl.style.color = '#f1c40f';
-        } else if (calcScore < 80) {
-          statusEl.innerHTML = `🟡 <b>Recuperación Hacendaria Progresiva (${calcScore} pts)</b>`;
-          statusEl.style.color = '#f1c40f';
-        } else {
-          statusEl.innerHTML = `🟢 <b>Eficacia Resarcitoria Ejemplar (${calcScore} pts)</b>`;
-          statusEl.style.color = '#2ecc71';
-        }
-      }
-    }
-  }
-
-  function evaluarSaludASF() {
-    if (isAsfHealthEvaluating) return;
-    if (asfAnimFrameId) cancelAnimationFrame(asfAnimFrameId);
-
-    isAsfHealthEvaluating = true;
-
-    const rRecup = document.getElementById('asfRangeRecuperacion');
-    const rCob = document.getElementById('asfRangeCobertura');
-    const rEfic = document.getElementById('asfRangeEficiencia');
-    if (rRecup) rRecup.value = 55;
-    if (rCob) rCob.value = 75;
-    if (rEfic) rEfic.value = 25;
-
-    const startAngle = asfNeedleAngle;
-    const targetScore = 95;
-    const targetAngle = -90 + (targetScore / 100) * 180;
-    const startTime = performance.now();
-    const duration = 1200;
-
-    const needleEl = document.getElementById('asfNeedleGroup');
-    const scoreEl = document.getElementById('asfScoreNum');
-    const statusEl = document.getElementById('asfStatusPill');
-    const evalStatus = document.getElementById('asfEvalStatus');
-
-    if (evalStatus) {
-      evalStatus.innerHTML = '<span style="color:var(--gold-bright);">⚡ Calibrando modelo resarcitorio de la ASF...</span>';
-    }
-
-    function animateStep(now) {
-      const p = Math.min(1, (now - startTime) / duration);
-      const ease = p < 0.8 ? (1 - Math.pow(1 - p / 0.8, 3)) * 1.04 : 1.04 - (p - 0.8) / 0.2 * 0.04;
-      
-      const currentAngle = startAngle + (targetAngle - startAngle) * Math.min(1, ease);
-      const currentScore = Math.round(targetScore * Math.min(1, ease));
-
-      if (needleEl) needleEl.style.transform = `rotate(${currentAngle}deg)`;
-      if (scoreEl) {
-        scoreEl.textContent = currentScore;
-        scoreEl.style.color = currentScore >= 80 ? '#2ecc71' : '#f1c40f';
-      }
-
-      updateASFPillarsDOM(
-        Math.round(89 * Math.min(1, ease)),
-        Math.round(91 * Math.min(1, ease)),
-        Math.round(83 * Math.min(1, ease)),
-        Math.round(96 * Math.min(1, ease))
-      );
-
-      if (p < 1) {
-        asfAnimFrameId = requestAnimationFrame(animateStep);
-      } else {
-        asfNeedleAngle = targetAngle;
-        asfDisplayedScore = targetScore;
-        isAsfHealthEvaluating = false;
-        isAsfHealthEvaluated = true;
-        asfAnimFrameId = null;
-
-        if (statusEl) {
-          statusEl.innerHTML = `🟢 <b>Calibración Completada: Eficacia Resarcitoria Ejemplar (${targetScore} pts)</b>`;
-          statusEl.style.color = '#2ecc71';
-        }
-        if (evalStatus) {
-          evalStatus.innerHTML = '🟢 <b>Calibración completada: Reintegro proyectado a Tesofe de +$28,063 mdp (ROI 8.8x).</b>';
-        }
-
-        updateASFSimulator();
-      }
-    }
-
-    asfAnimFrameId = requestAnimationFrame(animateStep);
-  }
-
-  function resetSaludASF() {
-    if (asfAnimFrameId) cancelAnimationFrame(asfAnimFrameId);
-    isAsfHealthEvaluating = false;
-    isAsfHealthEvaluated = false;
-
-    const rRecup = document.getElementById('asfRangeRecuperacion');
-    const rCob = document.getElementById('asfRangeCobertura');
-    const rEfic = document.getElementById('asfRangeEficiencia');
-    if (rRecup) rRecup.value = 15;
-    if (rCob) rCob.value = 25;
-    if (rEfic) rEfic.value = 0;
-
-    const needleEl = document.getElementById('asfNeedleGroup');
-    const scoreEl = document.getElementById('asfScoreNum');
-    const statusEl = document.getElementById('asfStatusPill');
-    const evalStatus = document.getElementById('asfEvalStatus');
-
-    asfNeedleAngle = -90;
-    asfDisplayedScore = 0;
-
-    if (needleEl) needleEl.style.transform = 'rotate(-90deg)';
-    if (scoreEl) {
-      scoreEl.textContent = '0';
-      scoreEl.style.color = 'var(--text-dim)';
-    }
-
-    if (statusEl) {
-      statusEl.innerHTML = '⚪ Simulador en Reposo. Presiona «Calibrar Fiscalización».';
-      statusEl.style.color = 'var(--text-dim)';
-    }
-    if (evalStatus) {
-      evalStatus.textContent = '⚪ Simulador en reposo. Presiona «Calibrar Fiscalización» o ajusta los controles interactivos.';
-    }
-
-    updateASFPillarsDOM(0, 0, 0, 0);
-    updateASFSimulator();
-  }
-
-  function toggleHoverSaludASF(enabled) {
-    isAsfHealthHoverEnabled = !!enabled;
-  }
-
-  function handleASFConsoleHover() {
-    if (isAsfHealthHoverEnabled && !isAsfHealthEvaluated && !isAsfHealthEvaluating) {
-      evaluarSaludASF();
-    }
-  }
-
-  // ==========================================================================
-  // RADIOGRAFÍA DE IRREGULARIDADES EN TRANSPARENCIA & RENDICIÓN DE CUENTAS (ASF)
-  // ==========================================================================
-  const ASF_IRREGULARIDADES_DATA = {
-    tipologias: [
-      {
-        id: 'falta_comprobacion',
-        nombre: 'Falta de Documentación Justificatoria y Comprobatoria',
-        subtitulo: 'Facturas no válidas, entregables inexistentes o bitácoras omitidas',
-        monto: 18400,
-        pct: 36.1,
-        color: '#e74c3c',
-        icono: '📑',
-        causa: 'Entidades ejecutoras no presentan comprobantes fiscales digitales (CFDI) válidos, contratos con prestadores o estimaciones de obra que acrediten la aplicación real del recurso.',
-        marco: 'Arts. 134 CPEUM; 42 y 43 de la Ley General de Contabilidad Gubernamental (LGCG)',
-        sancion: 'Pliegos de observaciones con obligación de reintegro a Tesofe y vista al Órgano Interno de Control (OIC).'
-      },
-      {
-        id: 'recursos_no_devengados',
-        nombre: 'Recursos No Devengados ni Reintegrados a la Tesofe',
-        subtitulo: 'Subejercicios y retenciones indebidas en cuentas bancarias estatales/municipales',
-        monto: 12250,
-        pct: 24.0,
-        color: '#e67e22',
-        icono: '🏦',
-        causa: 'Fondos federales transferidos en el ejercicio que al 31 de diciembre o 31 de marzo no fueron comprometidos ni reintegrados con sus rendimientos financieros.',
-        marco: 'Art. 17 de la Ley de Disciplina Financiera y Art. 54 de la LFPRH',
-        sancion: 'Obligación perentoria de reintegro a la Tesorería de la Federación más cargas financieras generadas.'
-      },
-      {
-        id: 'pagos_improcedentes',
-        nombre: 'Pagos Improcedentes o en Exceso',
-        subtitulo: 'Nóminas infladas, comisionados sindicales ("aviadores") y sobrecostos',
-        monto: 9680,
-        pct: 19.0,
-        color: '#f1c40f',
-        icono: '👥',
-        causa: 'Erogaciones por conceptos no autorizados en el tabulador, pagos a trabajadores dados de baja o fallecidos, y liquidaciones duplicadas en salud (FASSA) y educación (FONE).',
-        marco: 'Arts. 127 CPEUM y 65 de la Ley General del Sistema de Carrera para Maestras y Maestros',
-        sancion: 'Procedimientos de Responsabilidad Resarcitoria (PRR) individualizados a pagadores habilitados.'
-      },
-      {
-        id: 'desvio_ramo33',
-        nombre: 'Desvío de Recursos a Fines No Autorizados',
-        subtitulo: 'Uso de fondos etiquetados de infraestructura para gasto corriente o nómina política',
-        monto: 6120,
-        pct: 12.0,
-        color: '#9b59b6',
-        icono: '🔀',
-        causa: 'Aplicación de aportaciones del Ramo 33 (FAIS y FORTAMUN) para solventar déficit de gasto operativo, eventos o gasto electoral, violando el destino legal del fondo.',
-        marco: 'Arts. 33 y 49 de la Ley de Coordinación Fiscal (LCF)',
-        sancion: 'Denuncias de Hechos (DH) formuladas ante la FGR por desvío de recursos públicos y peculado.'
-      },
-      {
-        id: 'licitaciones_simuladas',
-        nombre: 'Opacidad en Licitaciones y Adjudicaciones Directas',
-        subtitulo: 'Fraccionamiento de contratos, sobreprecios y elusión de licitación pública',
-        monto: 4574,
-        pct: 8.9,
-        color: '#00c3ff',
-        icono: '🤝',
-        causa: 'Asignación directa indebida de contratos de obra pública y adquisiciones a empresas de reciente creación sin experiencia ni capacidad técnica demostrada.',
-        marco: 'Art. 134 CPEUM y Art. 41 de la Ley de Adquisiciones, Arrendamientos y Servicios',
-        sancion: 'Inhabilitación de servidores públicos y empresas proveedoras ante la Secretaría de la Función Pública.'
-      }
-    ],
-    historico: [
-      { year: 'CP 2018', monto: 68140, auditorias: 1807, resueltoPct: 78, color: '#f39c12', nota: 'Cierre de sexenio anterior con alta concentración en proyectos carreteros y fondos de seguridad.' },
-      { year: 'CP 2019', monto: 100920, auditorias: 1359, resueltoPct: 71, color: '#e74c3c', nota: 'Pico histórico observado: arranque de administración federal y observaciones preliminares en megaobras.' },
-      { year: 'CP 2020', monto: 63056, auditorias: 1622, resueltoPct: 65, color: '#e67e22', nota: 'Año de pandemia Covid-19: observaciones en compras de emergencia de insumos médicos sin contrato formal.' },
-      { year: 'CP 2021', monto: 64834, auditorias: 2050, resueltoPct: 58, color: '#e67e22', nota: 'Primeras auditorías forenses a Segalmex y programas de subsidios de la Secretaría de Bienestar.' },
-      { year: 'CP 2022', monto: 32894, auditorias: 2153, resueltoPct: 49, color: '#f1c40f', nota: 'Implementación del buzón digital y auditorías electrónicas masivas de la ASF.' },
-      { year: 'CP 2023', monto: 32950, auditorias: 2258, resueltoPct: 42, color: '#f1c40f', nota: 'Revisión intermedia: 65% de observaciones concentradas en estados y municipios del Ramo 33.' },
-      { year: 'CP 2024–25', monto: 51024, auditorias: 2100, resueltoPct: 15, color: '#e74c3c', nota: 'Cuenta Pública en proceso activo de solventación: $35,074 mdp pendientes de aclarar en municipios.' }
-    ]
-  };
-
-  let currentAsfChartView = 'tipologia';
-  let activeAsfItemId = null;
-  let isAsfIrregEvaluated = false;
-  let isAsfIrregAnimating = false;
-  let isAsfIrregHoverEnabled = false;
-  let asfIrregAnimFrameId = null;
-
-  function renderAsfIrregularidadesChart(mode) {
-    const stage = document.getElementById('asfIrregularidadesStage');
-    if (!stage) return;
-
-    currentAsfChartView = mode || 'tipologia';
-
-    const statusEl = document.getElementById('asfIrregEvalStatusText');
-    const btnEval = document.getElementById('btnEvaluarAsfIrreg');
-    if (!isAsfIrregAnimating) {
-      if (isAsfIrregEvaluated) {
-        if (statusEl) statusEl.innerHTML = '<span style="color:var(--emerald-bright);">✓ Auditoría forense completada: Irregularidades y montos por aclarar desplegados al 100%.</span>';
-        if (btnEval) btnEval.innerHTML = '<span>🔄</span> Volver a Evaluar';
-      } else {
-        if (statusEl) statusEl.innerHTML = '⚪ Barras en reposo ($0 mdp / 0.0%). Presiona «Evaluar Irregularidades» o pasa el cursor para medir la escala real.';
-        if (btnEval) btnEval.innerHTML = '<span>▶️</span> Evaluar Irregularidades';
-      }
-    }
-
-    if (currentAsfChartView === 'tipologia') {
-      const maxMonto = Math.max(...ASF_IRREGULARIDADES_DATA.tipologias.map(t => t.monto));
-      let html = '<div style="display:flex; flex-direction:column; gap:12px;">';
-
-      ASF_IRREGULARIDADES_DATA.tipologias.forEach(item => {
-        const targetWidth = Math.max(6, (item.monto / maxMonto) * 100);
-        const isSelected = activeAsfItemId === item.id;
-        const borderStyle = isSelected ? `border-left: 4px solid ${item.color}; background: rgba(255,255,255,0.06);` : `border-left: 3px solid ${item.color}; background: rgba(0,0,0,0.25);`;
-
-        const barWidthStyle = isAsfIrregEvaluated ? `${targetWidth}%` : '0%';
-        const barClass = isAsfIrregEvaluated ? 'asf-bar-fill' : 'asf-bar-fill bar-zero';
-        const montoText = isAsfIrregEvaluated ? `$${item.monto.toLocaleString('es-MX')} mdp` : '$0 mdp';
-        const pctText = isAsfIrregEvaluated ? `(${item.pct}%)` : '(0.0%)';
-
-        html += `
-          <div class="asf-irreg-item" onclick="window.AuditEngine.selectAsfIrregularidadItem('${item.id}', 'tipologia')" 
-               style="cursor:pointer; padding:10px 14px; border-radius:6px; transition:all 0.2s ease; ${borderStyle}"
-               title="Clic para inspeccionar fundamento legal y expedientes">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <span style="font-size:16px;">${item.icono}</span>
-                <span style="font-family:var(--font-serif); font-size:13.5px; color:var(--text-main); font-weight:600;">${item.nombre}</span>
-              </div>
-              <div style="font-family:var(--font-mono); font-size:12px; font-weight:700;">
-                <span id="asfTipMonto_${item.id}" style="color:${item.color};">${montoText}</span>
-                <span id="asfTipPct_${item.id}" style="color:var(--text-dim); margin-left:6px;">${pctText}</span>
-              </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.06); height:8px; border-radius:4px; overflow:hidden;">
-              <div id="asfTipBar_${item.id}" class="${barClass}" style="width:${barWidthStyle}; height:100%; background:linear-gradient(90deg, ${item.color}, #f1c40f); border-radius:4px; transition:width 0.4s ease;"></div>
-            </div>
-            <div style="font-size:11px; color:var(--text-dim); margin-top:4px;">${item.subtitulo}</div>
-          </div>
-        `;
-      });
-
-      html += '</div>';
-      stage.innerHTML = html;
-    } else {
-      // Vista Histórica (2018–2025)
-      const maxMonto = Math.max(...ASF_IRREGULARIDADES_DATA.historico.map(h => h.monto));
-      let html = '<div style="display:flex; flex-direction:column; gap:10px;">';
-
-      ASF_IRREGULARIDADES_DATA.historico.forEach(item => {
-        const targetWidth = Math.max(6, (item.monto / maxMonto) * 100);
-        const isSelected = activeAsfItemId === item.year;
-        const borderStyle = isSelected ? `border-left: 4px solid ${item.color}; background: rgba(255,255,255,0.06);` : `border-left: 3px solid ${item.color}; background: rgba(0,0,0,0.25);`;
-
-        const barWidthStyle = isAsfIrregEvaluated ? `${targetWidth}%` : '0%';
-        const barClass = isAsfIrregEvaluated ? 'asf-bar-fill' : 'asf-bar-fill bar-zero';
-        const montoText = isAsfIrregEvaluated ? `$${item.monto.toLocaleString('es-MX')} mdp observados` : '$0 mdp observados';
-        const solvText = isAsfIrregEvaluated ? `(${item.resueltoPct}% solventado)` : '(0.0% solventado)';
-
-        html += `
-          <div class="asf-irreg-item" onclick="window.AuditEngine.selectAsfIrregularidadItem('${item.year}', 'historico')" 
-               style="cursor:pointer; padding:10px 14px; border-radius:6px; transition:all 0.2s ease; ${borderStyle}"
-               title="Clic para ver contexto de auditoría de este año">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <span style="font-family:var(--font-mono); font-size:12px; font-weight:800; color:var(--gold-bright);">${item.year}</span>
-                <span style="font-size:11.5px; color:var(--text-secondary);">${item.auditorias} auditorías practicadas</span>
-              </div>
-              <div style="font-family:var(--font-mono); font-size:12px; font-weight:700;">
-                <span id="asfHistMonto_${item.year}" style="color:${item.color};">${montoText}</span>
-                <span id="asfHistSolv_${item.year}" style="color:var(--text-dim); margin-left:6px;">${solvText}</span>
-              </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.06); height:8px; border-radius:4px; overflow:hidden;">
-              <div id="asfHistBar_${item.year}" class="${barClass}" style="width:${barWidthStyle}; height:100%; background:linear-gradient(90deg, ${item.color}, var(--gold-bright)); border-radius:4px; transition:width 0.4s ease;"></div>
-            </div>
-            <div style="font-size:11px; color:var(--text-dim); margin-top:4px;">${item.nota}</div>
-          </div>
-        `;
-      });
-
-      html += '</div>';
-      stage.innerHTML = html;
-    }
-  }
-
-  function setAsfChartView(viewMode) {
-    if (asfIrregAnimFrameId) {
-      cancelAnimationFrame(asfIrregAnimFrameId);
-      asfIrregAnimFrameId = null;
-      isAsfIrregAnimating = false;
-    }
-
-    currentAsfChartView = viewMode;
-    const btnTip = document.getElementById('btnAsfViewTipologia');
-    const btnHist = document.getElementById('btnAsfViewHistorico');
-
-    if (btnTip && btnHist) {
-      if (viewMode === 'tipologia') {
-        btnTip.classList.add('active');
-        btnTip.style.borderColor = 'var(--gold)';
-        btnTip.style.color = 'var(--gold-bright)';
-        btnHist.classList.remove('active');
-        btnHist.style.borderColor = 'var(--border-subtle)';
-        btnHist.style.color = 'var(--text-secondary)';
-      } else {
-        btnHist.classList.add('active');
-        btnHist.style.borderColor = 'var(--gold)';
-        btnHist.style.color = 'var(--gold-bright)';
-        btnTip.classList.remove('active');
-        btnTip.style.borderColor = 'var(--border-subtle)';
-        btnTip.style.color = 'var(--text-secondary)';
-      }
-    }
-
-    renderAsfIrregularidadesChart(viewMode);
-  }
-
-  function selectAsfIrregularidadItem(id, mode) {
-    activeAsfItemId = id;
-    const detailBox = document.getElementById('asfIrregularidadesDetailBox');
-    if (!detailBox) return;
-
-    if (mode === 'tipologia') {
-      const item = ASF_IRREGULARIDADES_DATA.tipologias.find(t => t.id === id);
-      if (!item) return;
-
-      detailBox.innerHTML = `
-        <div style="border-left:3px solid ${item.color}; padding-left:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
-            <strong style="font-family:var(--font-serif); font-size:14.5px; color:var(--gold-bright);">${item.icono} ${item.nombre}</strong>
-            <span style="font-family:var(--font-mono); font-size:12px; color:${item.color}; font-weight:800;">$${item.monto.toLocaleString('es-MX')} mdp (${item.pct}%)</span>
-          </div>
-          <p style="margin:0 0 6px 0; color:var(--text-main); font-size:12px;"><b>Causa detectada por la ASF:</b> ${item.causa}</p>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:10px; font-size:11.5px; color:var(--text-secondary); margin-top:8px;">
-            <div><b style="color:var(--cyan);">📜 Fundamento Jurídico:</b> ${item.marco}</div>
-            <div><b style="color:var(--gold);">⚖️ Consecuencia Sancionatoria:</b> ${item.sancion}</div>
-          </div>
-        </div>
-      `;
-    } else {
-      const item = ASF_IRREGULARIDADES_DATA.historico.find(h => h.year === id);
-      if (!item) return;
-
-      detailBox.innerHTML = `
-        <div style="border-left:3px solid ${item.color}; padding-left:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
-            <strong style="font-family:var(--font-mono); font-size:14px; color:var(--gold-bright);">Cuenta Pública ${item.year}</strong>
-            <span style="font-family:var(--font-mono); font-size:12px; color:${item.color}; font-weight:800;">$${item.monto.toLocaleString('es-MX')} mdp observados</span>
-          </div>
-          <p style="margin:0 0 6px 0; color:var(--text-main); font-size:12px;"><b>Hallazgos y Contexto de Auditoría:</b> ${item.nota}</p>
-          <div style="display:flex; gap:16px; font-family:var(--font-mono); font-size:11.5px; color:var(--text-secondary); margin-top:6px;">
-            <span>Auditorías Totales: <b>${item.auditorias}</b></span>
-            <span>Porcentaje Solventado al Cierre: <b style="color:#2ecc71;">${item.resueltoPct}%</b></span>
-          </div>
-        </div>
-      `;
-    }
-
-    renderAsfIrregularidadesChart(mode);
-  }
-
-  function evaluarAsfIrregularidades(duracionMs = 1400) {
-    if (asfIrregAnimFrameId) {
-      cancelAnimationFrame(asfIrregAnimFrameId);
-      asfIrregAnimFrameId = null;
-    }
-
-    const statusEl = document.getElementById('asfIrregEvalStatusText');
-    const btnEval = document.getElementById('btnEvaluarAsfIrreg');
-    if (statusEl) {
-      statusEl.innerHTML = '<span style="color:var(--gold-bright);">⚡ Evaluando y auditando irregularidades ASF en tiempo real...</span>';
-    }
-    if (btnEval) {
-      btnEval.innerHTML = '<span>⏳</span> Evaluando...';
-    }
-
-    // Quitar clases bar-zero de las barras visibles
-    if (currentAsfChartView === 'tipologia') {
-      ASF_IRREGULARIDADES_DATA.tipologias.forEach(item => {
-        const b = document.getElementById(`asfTipBar_${item.id}`);
-        if (b) b.classList.remove('bar-zero');
-      });
-    } else {
-      ASF_IRREGULARIDADES_DATA.historico.forEach(item => {
-        const b = document.getElementById(`asfHistBar_${item.year}`);
-        if (b) b.classList.remove('bar-zero');
-      });
-    }
-
-    isAsfIrregAnimating = true;
-    const startTime = performance.now();
-    const easeOutCubic = (t) => (--t) * t * t + 1;
-
-    function animateStep(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(1, elapsed / duracionMs);
-      const eased = easeOutCubic(progress);
-
-      if (currentAsfChartView === 'tipologia') {
-        const maxMonto = Math.max(...ASF_IRREGULARIDADES_DATA.tipologias.map(t => t.monto));
-        ASF_IRREGULARIDADES_DATA.tipologias.forEach(item => {
-          const bar = document.getElementById(`asfTipBar_${item.id}`);
-          const montoEl = document.getElementById(`asfTipMonto_${item.id}`);
-          const pctEl = document.getElementById(`asfTipPct_${item.id}`);
-          const targetW = Math.max(6, (item.monto / maxMonto) * 100);
-
-          if (bar) bar.style.width = `${(targetW * eased).toFixed(1)}%`;
-          if (montoEl) montoEl.textContent = `$${Math.round(item.monto * eased).toLocaleString('es-MX')} mdp`;
-          if (pctEl) pctEl.textContent = `(${(item.pct * eased).toFixed(1)}%)`;
-        });
-      } else {
-        const maxMonto = Math.max(...ASF_IRREGULARIDADES_DATA.historico.map(h => h.monto));
-        ASF_IRREGULARIDADES_DATA.historico.forEach(item => {
-          const bar = document.getElementById(`asfHistBar_${item.year}`);
-          const montoEl = document.getElementById(`asfHistMonto_${item.year}`);
-          const solvEl = document.getElementById(`asfHistSolv_${item.year}`);
-          const targetW = Math.max(6, (item.monto / maxMonto) * 100);
-
-          if (bar) bar.style.width = `${(targetW * eased).toFixed(1)}%`;
-          if (montoEl) montoEl.textContent = `$${Math.round(item.monto * eased).toLocaleString('es-MX')} mdp observados`;
-          if (solvEl) solvEl.textContent = `(${(item.resueltoPct * eased).toFixed(1)}% solventado)`;
-        });
-      }
-
-      if (progress < 1) {
-        asfIrregAnimFrameId = requestAnimationFrame(animateStep);
-      } else {
-        isAsfIrregAnimating = false;
-        isAsfIrregEvaluated = true;
-        asfIrregAnimFrameId = null;
-
-        // Fijar valores finales exactos
-        if (currentAsfChartView === 'tipologia') {
-          const maxMonto = Math.max(...ASF_IRREGULARIDADES_DATA.tipologias.map(t => t.monto));
-          ASF_IRREGULARIDADES_DATA.tipologias.forEach(item => {
-            const bar = document.getElementById(`asfTipBar_${item.id}`);
-            const montoEl = document.getElementById(`asfTipMonto_${item.id}`);
-            const pctEl = document.getElementById(`asfTipPct_${item.id}`);
-            const targetW = Math.max(6, (item.monto / maxMonto) * 100);
-            if (bar) bar.style.width = `${targetW}%`;
-            if (montoEl) montoEl.textContent = `$${item.monto.toLocaleString('es-MX')} mdp`;
-            if (pctEl) pctEl.textContent = `(${item.pct}%)`;
-          });
-        } else {
-          const maxMonto = Math.max(...ASF_IRREGULARIDADES_DATA.historico.map(h => h.monto));
-          ASF_IRREGULARIDADES_DATA.historico.forEach(item => {
-            const bar = document.getElementById(`asfHistBar_${item.year}`);
-            const montoEl = document.getElementById(`asfHistMonto_${item.year}`);
-            const solvEl = document.getElementById(`asfHistSolv_${item.year}`);
-            const targetW = Math.max(6, (item.monto / maxMonto) * 100);
-            if (bar) bar.style.width = `${targetW}%`;
-            if (montoEl) montoEl.textContent = `$${item.monto.toLocaleString('es-MX')} mdp observados`;
-            if (solvEl) solvEl.textContent = `(${item.resueltoPct}% solventado)`;
-          });
-        }
-
-        if (statusEl) {
-          statusEl.innerHTML = '<span style="color:var(--emerald-bright);">✓ Auditoría forense completada: Irregularidades y montos por aclarar desplegados al 100%.</span>';
-        }
-        if (btnEval) {
-          btnEval.innerHTML = '<span>🔄</span> Volver a Evaluar';
-        }
-      }
-    }
-
-    asfIrregAnimFrameId = requestAnimationFrame(animateStep);
-  }
-
-  function resetAsfIrregularidades() {
-    if (asfIrregAnimFrameId) {
-      cancelAnimationFrame(asfIrregAnimFrameId);
-      asfIrregAnimFrameId = null;
-    }
-    isAsfIrregAnimating = false;
-    isAsfIrregEvaluated = false;
-
-    if (currentAsfChartView === 'tipologia') {
-      ASF_IRREGULARIDADES_DATA.tipologias.forEach(item => {
-        const bar = document.getElementById(`asfTipBar_${item.id}`);
-        const montoEl = document.getElementById(`asfTipMonto_${item.id}`);
-        const pctEl = document.getElementById(`asfTipPct_${item.id}`);
-        if (bar) {
-          bar.classList.add('bar-zero');
-          bar.style.width = '0%';
-        }
-        if (montoEl) montoEl.textContent = '$0 mdp';
-        if (pctEl) pctEl.textContent = '(0.0%)';
-      });
-    } else {
-      ASF_IRREGULARIDADES_DATA.historico.forEach(item => {
-        const bar = document.getElementById(`asfHistBar_${item.year}`);
-        const montoEl = document.getElementById(`asfHistMonto_${item.year}`);
-        const solvEl = document.getElementById(`asfHistSolv_${item.year}`);
-        if (bar) {
-          bar.classList.add('bar-zero');
-          bar.style.width = '0%';
-        }
-        if (montoEl) montoEl.textContent = '$0 mdp observados';
-        if (solvEl) solvEl.textContent = '(0.0% solventado)';
-      });
-    }
-
-    const statusEl = document.getElementById('asfIrregEvalStatusText');
-    if (statusEl) {
-      statusEl.innerHTML = '⚪ Barras en reposo ($0 mdp / 0.0%). Presiona «Evaluar Irregularidades» o pasa el cursor para medir la escala real.';
-    }
-    const btnEval = document.getElementById('btnEvaluarAsfIrreg');
-    if (btnEval) {
-      btnEval.innerHTML = '<span>▶️</span> Evaluar Irregularidades';
-    }
-  }
-
-  function toggleHoverAsfIrregularidades(enabled) {
-    isAsfIrregHoverEnabled = !!enabled;
-  }
-
-  function handleAsfIrregContainerHover() {
-    if (isAsfIrregHoverEnabled && !isAsfIrregEvaluated && !isAsfIrregAnimating) {
-      evaluarAsfIrregularidades();
-    }
-  }
+  /* El simulador de «salud financiera» de la ASF y su analisis por
+     tipologias se retiraron: giraban sobre $51,024 mdp y porcentajes sin
+     fuente. El bloque 3 del Legislativo muestra ahora la seccion oficial
+     de la Cuenta Publica (renderCuentaPublica), con la serie 2019-2024. */
 
 
 
@@ -27770,6 +27176,8 @@
     renderReferencias: renderReferencias,
     renderCuentaPublica: renderCuentaPublica,
     cpElegirEntidad: cpElegirEntidad,
+    cpSerieMetrica: cpSerieMetrica,
+    abrirAsfLegislativo: abrirAsfLegislativo,
     abrirCatalogoFuentes: abrirCatalogoFuentes,
     renderPreceptosLegales: renderPreceptosLegales,
     filterPreceptos: filterPreceptos,
@@ -27852,18 +27260,6 @@
     toggleHoverSaludSenado: toggleHoverSaludSenado,
     handleSenadoConsoleHover: handleSenadoConsoleHover,
 
-    evaluarSaludASF: evaluarSaludASF,
-    resetSaludASF: resetSaludASF,
-    updateASFSimulator: updateASFSimulator,
-    toggleHoverSaludASF: toggleHoverSaludASF,
-    handleASFConsoleHover: handleASFConsoleHover,
-    renderAsfIrregularidadesChart: renderAsfIrregularidadesChart,
-    setAsfChartView: setAsfChartView,
-    selectAsfIrregularidadItem: selectAsfIrregularidadItem,
-    evaluarAsfIrregularidades: evaluarAsfIrregularidades,
-    resetAsfIrregularidades: resetAsfIrregularidades,
-    toggleHoverAsfIrregularidades: toggleHoverAsfIrregularidades,
-    handleAsfIrregContainerHover: handleAsfIrregContainerHover,
 
     // Simuladores de Salud Financiera & Rigor Legislativo (Pestaña 3)
     evaluarSaludCongresos: evaluarSaludCongresos,
