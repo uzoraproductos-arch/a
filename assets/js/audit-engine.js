@@ -7866,6 +7866,55 @@
     return null;
   }
 
+  /* Nota de la portada: que son las finanzas publicas y que encuentra el
+     lector aqui. Es la parte narrativa que antes ocupaba el parrafo bajo el
+     titulo; las cifras se leen de la base. */
+  function abrirNotaPortada(origen) {
+    var P = DB.panoramaErario || {};
+    var fed = (P.federalizado && P.federalizado.totalMdp) || 0;
+    var cf = ((P.egresos || []).find(function(x) { return x.id === 'egr-costofin'; }) || {}).montoMdp || 0;
+    var cp = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024 ? DB.cuenta_publica_asf.cp2024.total : null;
+    var bill = function(mdp) { return '$' + (mdp / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' billones'; };
+    var mods = [
+      ['⚖️', 'Circuito del Dinero', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos) y cómo llega a estados y municipios.'],
+      ['🏗️', 'Inversión y Megaobras', 'cuánto costaron las grandes obras y cuánto cuesta mantenerlas.'],
+      ['💳', 'Calculadora Cívica', 'lo que pagas de impuestos según tu ingreso y a qué rubros equivale.'],
+      ['🔍', 'Inspector Forense', 'lo que la Auditoría Superior revisó y lo que quedó por aclarar.'],
+      ['🌎', 'El Costo Ambiental', 'lo que el deterioro del ambiente cuesta y lo que se destina a protegerlo.']
+    ];
+    var gGasto = glosarioBuscar('Gasto Público'), gHac = glosarioBuscar('Hacienda Pública');
+    var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">📖</span> Qué significa</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar la nota" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        '<span class="glos-drawer-cat">⚖️ Fiscalización ciudadana del gasto público</span>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Las finanzas públicas</h3>' +
+        radarSec('Qué son', '<p>Todo lo que hace el Estado con el dinero público: <b>cómo lo obtiene</b> (impuestos, derechos, ventas de sus empresas y deuda), <b>en qué decide gastarlo</b> (el presupuesto), <b>cómo lo reparte</b> entre la Federación, los estados y los municipios, y <b>cómo rinde cuentas</b> de lo que gastó (la Cuenta Pública y sus auditorías).</p>') +
+        radarSec('Por qué importan', '<p>Cada año el Congreso aprueba cuánto se cobra y en qué se gasta. En 2026 el Presupuesto de Egresos es de ' + bill(P.totalPEF || 0) + '; de ellos, ' + bill(fed) + ' viajan a los 32 estados y a sus municipios, y ' + bill(cf) + ' pagan el costo de la deuda. ' +
+          (cp ? 'Al revisar la Cuenta Pública 2024, la Auditoría Superior dejó ' + radarMdp(cp.porAclarar / 1e6) + ' por aclarar. ' : '') + 'Entender ese recorrido es el primer paso para pedir cuentas con datos.</p>') +
+        radarSec('Qué encontrarás aquí', '<ul class="rc-plazos">' + mods.map(function(m) { return '<li>' + m[0] + ' <b>' + m[1] + ':</b> ' + m[2] + '</li>'; }).join('') + '</ul>' +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y el detalle de cada tema está la Enciclopedia Interactiva.</p>') +
+        radarSec('Cómo leer las cifras', '<ul class="rc-plazos">' +
+          '<li>' + chipEstado('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
+          '<li>' + chipEstado('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
+          '<li>' + chipEstado('pendiente') + ' aún sin una fuente verificable: no se presenta como dato.</li>' +
+        '</ul>') +
+        radarSec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 31 fr. IV (la obligación de contribuir al gasto público), art. 74 fr. IV y VI (la Cámara de Diputados aprueba el presupuesto y revisa la Cuenta Pública) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        '<a class="glos-drawer-todo" href="enciclopedia.html" style="text-align:center; text-decoration:none;">📚 Abrir la Enciclopedia Interactiva ➔</a>' +
+        (gGasto ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gGasto.termino) + '">Qué es el gasto público ➔</button>' : '') +
+        (gHac ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gHac.termino) + '">Qué es la hacienda pública ➔</button>' : '') +
+      '</footer>';
+    dr.querySelectorAll('[data-g]').forEach(function(b) {
+      b.addEventListener('click', function() { abrirGlosarioDrawer(b.getAttribute('data-g'), null, origen); });
+    });
+    glosDrawerAbrir(ov, dr, origen);
+  }
+
   function abrirRadarConcepto(clave, origen) {
     var c = null;
     try { c = radarConcepto(clave); } catch (err) { c = null; }
@@ -27089,6 +27138,7 @@
     abrirGlosarioDrawer: abrirGlosarioDrawer,
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     abrirRadarConcepto: abrirRadarConcepto,
+    abrirNotaPortada: abrirNotaPortada,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
     actualizarConteosGlosario: actualizarConteosGlosario,

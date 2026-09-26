@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926x">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926y">
 </head>
 <body>
 
@@ -728,24 +728,10 @@
   <section class="explorer-hero-section" aria-label="Explorador del Gasto Público">
     <div class="explorer-hero-box">
       <span class="explorer-hero-tag">⚖️ FISCALIZACIÓN CIUDADANA DEL GASTO PÚBLICO</span>
-      <h1 class="explorer-hero-title">Explora el panorama del gasto público en México</h1>
+      <h1 class="explorer-hero-title">Explora el panorama de las finanzas públicas en México<button type="button" class="hero-nota-btn" onclick="window.AuditEngine.abrirNotaPortada(this)" aria-haspopup="dialog" aria-label="Qué son las finanzas públicas y qué encontrarás aquí" title="Qué son las finanzas públicas y qué encontrarás aquí"><span aria-hidden="true">📖</span></button></h1>
       <p class="explorer-hero-desc">
-        Fiscaliza cómo el Estado recauda, distribuye y ejerce los recursos de la Nación. 
-        Explora el Presupuesto de Egresos (PEF 2026: $10.19 billones), las megaobras, 
-        el costo financiero de la deuda y lo que la ASF dejó por aclarar, cada cifra con su fuente y su fecha de corte, o consulta el atlas normativo en la Enciclopedia Interactiva.
+        Cómo el Estado obtiene, reparte y gasta el dinero público, y qué falta por aclarar. Cada cifra, con su fuente.
       </p>
-      
-      <div class="explorer-hero-ctas">
-        <a href="enciclopedia.html" class="explorer-cta-btn explorer-cta-enciclopedia" title="Abrir la Enciclopedia Interactiva con el marco normativo y dogmático de curso">
-          <span>📚 Enciclopedia Interactiva (Atlas Técnico)</span> ➔
-        </a>
-        <button type="button" class="explorer-cta-btn explorer-cta-audit" onclick="window.AuditEngine.seleccionarModuloExplorer('presupuesto')" title="Desglosar los módulos de fiscalización operativa">
-          <span>⚡ Comienza a explorar</span> ↓
-        </button>
-        <button type="button" class="explorer-cta-btn explorer-cta-pase" onclick="window.AuditEngine.openPaseCivicoModal()" title="Menos que dos caguamas al mes · Apoya la fiscalización independiente">
-          <span>🍺 Pase Auditor Cívico · $79/mes</span>
-        </button>
-      </div>
 
       <!-- Cuadrícula de 4 Módulos Operativos de Fiscalización Ciudadana -->
       <div class="explorer-cards-grid" role="region" aria-label="Módulos de Auditoría">
@@ -804,6 +790,23 @@
           </button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Mas formas de explorar: los tres accesos que antes iban bajo el titulo,
+       fuera del encabezado para que este quede limpio. -->
+  <section class="explorer-extra" aria-label="Más formas de explorar">
+    <span class="explorer-extra-tit">Más formas de explorar</span>
+    <div class="explorer-hero-ctas">
+      <a href="enciclopedia.html" class="explorer-cta-btn explorer-cta-enciclopedia" title="Abrir la Enciclopedia Interactiva con el marco normativo y los conceptos">
+        <span>📚 Enciclopedia Interactiva (Atlas Técnico)</span> ➔
+      </a>
+      <button type="button" class="explorer-cta-btn explorer-cta-audit" onclick="window.AuditEngine.seleccionarModuloExplorer('presupuesto', 'moduloProemio')" title="Empezar por el Módulo 1: el Circuito del Dinero">
+        <span>⚡ Comienza a explorar</span> ↓
+      </button>
+      <button type="button" class="explorer-cta-btn explorer-cta-pase" onclick="window.AuditEngine.openPaseCivicoModal()" title="Menos que dos caguamas al mes · Apoya la fiscalización independiente">
+        <span>🍺 Pase Auditor Cívico · $79/mes</span>
+      </button>
     </div>
   </section>
 
@@ -2562,7 +2565,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926x</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926y</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2706,16 +2709,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926x"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926y"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926x"></script>
+  <script src="assets/js/audit-database.js?v=20260926y"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926x"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926y"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926x"></script>
+  <script src="assets/js/audit-engine.js?v=20260926y"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

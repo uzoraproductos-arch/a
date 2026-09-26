@@ -21311,3 +21311,30 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 #cuentaPublicaASFLeg { scroll-margin-top: 156px; }
 @media (max-width: 640px) { #cuentaPublicaASFLeg { scroll-margin-top: 12px; } }
 .cp-metricas { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+/* Libro junto al titulo de la portada: abre la nota «Las finanzas publicas». */
+.hero-nota-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.3em; height: 1.3em; margin-left: 0.35em; vertical-align: 0.12em;
+  font-size: 0.62em; line-height: 1; cursor: pointer;
+  border-radius: 50%; border: 1px solid var(--border-gold);
+  background: rgba(201, 168, 76, 0.12); color: inherit;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.hero-nota-btn:hover { transform: scale(1.1); background: rgba(201, 168, 76, 0.25); }
+.hero-nota-btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+[data-theme="light"] .hero-nota-btn { border-color: rgba(0, 43, 91, 0.3); background: rgba(0, 43, 91, 0.07); }
+/* Franja «Mas formas de explorar», despues de las tarjetas de modulos */
+.explorer-extra {
+  max-width: 1200px; margin: 18px auto 8px; padding: 16px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  border: 1px dashed var(--border-gold); border-radius: 12px;
+  background: rgba(14, 18, 27, 0.55);
+}
+.explorer-extra .explorer-hero-ctas { margin: 0; }
+.explorer-extra-tit {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.8px; text-transform: uppercase; color: var(--gold);
+}
+[data-theme="light"] .explorer-extra { background: rgba(255, 255, 255, 0.8); border-color: rgba(0, 43, 91, 0.25); }
+[data-theme="light"] .explorer-extra-tit { color: #0b3a6e; }
+@media (max-width: 640px) { .explorer-extra { margin: 14px 16px 6px; } }

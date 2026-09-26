@@ -2101,6 +2101,23 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (encabezado de la portada más limpio, con nota en ventana lateral)
+
+- Título: «Explora el panorama de las finanzas públicas en México» (antes «del
+  gasto público»), con un libro 📖 que abre la nota «Las finanzas públicas» en
+  la ventana lateral (`abrirNotaPortada`): qué son, por qué importan (PEF,
+  gasto federalizado, costo de la deuda y lo por aclarar de la CP 2024, leídos
+  de la base), qué hay en cada uno de los cinco módulos, cómo leer los tres
+  estados de una cifra y su fundamento constitucional (arts. 31 fr. IV, 74 fr.
+  IV y VI y 134). Al pie: Enciclopedia, «gasto público» y «hacienda pública»
+  del glosario.
+- El párrafo largo bajo el título se redujo a una frase; su contenido vive en
+  la nota.
+- Los tres botones que iban entre el título y los módulos (Enciclopedia,
+  Comienza a explorar y Pase Auditor Cívico) salieron del encabezado a una
+  franja propia, «Más formas de explorar» (`.explorer-extra`), debajo de las
+  cinco tarjetas. «Comienza a explorar» abre el Módulo 1 con su proemio.
+
 ### Hecho (la ASF en cifras oficiales 2019-2024 y la cinta de datos verificada)
 
 - **Serie histórica oficial.** `herramientas/extraer_serie_asf.py` lee el
