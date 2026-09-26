@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 100" role="img" aria-label="Auditavisión: un billete inspector con alas">
+  <title>Auditavisión</title>
+  <defs>
+    <linearGradient id="billete" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3fae6f"/>
+      <stop offset="1" stop-color="#23804d"/>
+    </linearGradient>
+    <linearGradient id="ala" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff6d8"/>
+      <stop offset="1" stop-color="#f0cf6a"/>
+    </linearGradient>
+    <g id="alaIzq">
+      <path d="M30 46 C 20 30, 6 26, 2 32 C 6 34, 9 37, 10 40 C 4 41, 2 46, 4 49 C 8 48, 12 49, 14 51 C 9 54, 9 59, 12 61 C 16 59, 21 59, 24 60 C 22 64, 24 67, 28 67 L 34 62 Z" fill="url(#ala)" stroke="#9c7412" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M28 48 C 20 44, 14 42, 9 41 M28 54 C 22 53, 17 52, 13 51 M30 59 C 27 59, 25 60, 23 60" fill="none" stroke="#c39a2c" stroke-width="1.4" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <use href="#alaIzq"/>
+  <use href="#alaIzq" transform="translate(128 0) scale(-1 1)"/>
+  <rect x="24" y="32" width="80" height="46" rx="7" fill="url(#billete)" stroke="#11492a" stroke-width="2.5"/>
+  <rect x="29.5" y="37.5" width="69" height="35" rx="4" fill="none" stroke="#bfe8cc" stroke-width="1.4" stroke-dasharray="3 2"/>
+  <circle cx="35" cy="43" r="2.4" fill="#bfe8cc"/>
+  <circle cx="35" cy="67" r="2.4" fill="#bfe8cc"/>
+  <circle cx="93" cy="67" r="2.4" fill="#bfe8cc"/>
+  <ellipse cx="62" cy="55" rx="22" ry="15.5" fill="#e3f6e8" stroke="#11492a" stroke-width="1.6"/>
+  <circle cx="53.5" cy="52.5" r="5" fill="#fff" stroke="#11492a" stroke-width="1.6"/>
+  <circle cx="54.8" cy="53.2" r="2.3" fill="#10202e"/>
+  <path d="M48.5 45.5 Q53.5 43 58 45" fill="none" stroke="#11492a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M54 62 Q60 66.5 66 62" fill="none" stroke="#11492a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="80.5" y1="59" x2="95" y2="74" stroke="#6b4a14" stroke-width="6" stroke-linecap="round"/>
+  <line x1="80.5" y1="59" x2="95" y2="74" stroke="#a87424" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="72" cy="51" r="11.5" fill="#d6ecff" fill-opacity="0.72" stroke="#c89b1e" stroke-width="3.4"/>
+  <circle cx="72" cy="51" r="7" fill="#fff" stroke="#11492a" stroke-width="1.4"/>
+  <circle cx="73.4" cy="52" r="3.6" fill="#10202e"/>
+  <circle cx="74.8" cy="50.6" r="1.2" fill="#fff"/>
+  <path d="M67 44.5 A 7.5 7.5 0 0 1 71 42.2" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+  <g transform="rotate(-10 52 30)">
+    <ellipse cx="52" cy="33" rx="17" ry="3.6" fill="#1b2433" stroke="#d4a826" stroke-width="1.1"/>
+    <path d="M41 33 C 41 20, 44 17, 52 17 C 60 17, 63 20, 63 33 Z" fill="#1b2433" stroke="#d4a826" stroke-width="1.1"/>
+    <rect x="41.3" y="27" width="21.4" height="4" fill="#d4a826"/>
+  </g>
+</svg>

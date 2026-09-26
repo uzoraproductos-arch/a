@@ -21333,3 +21333,81 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 [data-theme="light"] .explorer-hero-box .explorer-card { background: rgba(255, 255, 255, 0.94); }
 .explorer-hero-box .explorer-card.active-explorer-card { background: linear-gradient(rgba(201, 168, 76, 0.1), rgba(201, 168, 76, 0.1)), rgba(14, 18, 27, 0.88); }
 [data-theme="light"] .explorer-hero-box .explorer-card.active-explorer-card { background: linear-gradient(rgba(0, 43, 91, 0.05), rgba(0, 43, 91, 0.05)), rgba(255, 255, 255, 0.94); }
+
+/* ==========================================================================
+   LOGOTIPO: el billete inspector. Al picarlo abre la presentacion.
+   ========================================================================== */
+.brand-logo-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: -6px 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+.brand-logo-btn img {
+  display: block;
+  width: 72px;
+  height: auto;
+}
+.brand-logo-btn-enc img { width: 82px; }
+.brand-logo-btn:hover,
+.brand-logo-btn:focus-visible {
+  transform: translateY(-2px) rotate(-4deg) scale(1.06);
+  filter: drop-shadow(0 4px 12px rgba(212, 168, 38, 0.45));
+}
+.brand-logo-btn:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-logo-btn:hover img { animation: billeteAleteo 0.9s ease-in-out infinite alternate; }
+}
+@keyframes billeteAleteo {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+@media (max-width: 640px) {
+  .brand-logo-btn img { width: 56px; }
+}
+
+.pres-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  margin: 4px auto 14px;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.3));
+}
+.pres-lema {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-main);
+  margin: 8px 0 18px;
+}
+.pres-palabras { margin: 0; }
+.pres-palabras dt {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  margin-top: 10px;
+}
+[data-theme="light"] .pres-palabras dt { color: var(--navy, #0b3a6e); }
+.pres-palabras dd {
+  margin: 2px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-main);
+}
+.pres-lista {
+  margin: 0;
+  padding-left: 22px;
+  line-height: 1.55;
+}
+.pres-lista li { margin: 6px 0; font-size: 14px; color: var(--text-main); }

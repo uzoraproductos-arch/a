@@ -7915,6 +7915,67 @@
     glosDrawerAbrir(ov, dr, origen);
   }
 
+  /* Presentacion de la plataforma: se abre al picar el logotipo. Dice que
+     quiere decir el nombre, para que existe y con que reglas trabaja. No
+     lleva cifras: solo el fundamento de cada afirmacion. */
+  function abrirPresentacion(origen) {
+    var enPortal = !!document.getElementById('decalogoWrap');
+    var palabras = [
+      ['Audita', 'de <i>auditar</i>: revisar con método que lo que se gastó corresponda a lo que se autorizó y a lo que se comprobó.'],
+      ['visión', 'mirar el conjunto, de la Federación a los estados y municipios, y hacerlo visible para quien no lee informes técnicos.'],
+      ['Sistema', 'no son notas sueltas: ingresos, egresos, transferencias, deuda y Cuenta Pública son piezas conectadas que se leen juntas.'],
+      ['Cívico', 'lo construye y lo usa la ciudadanía. No es una autoridad ni sustituye a la Auditoría Superior de la Federación ni a las contralorías.'],
+      ['Fiscalización', 'la revisión del uso de los recursos públicos. La oficial la hacen la ASF (art. 79 constitucional) y las entidades de fiscalización de los estados (art. 116, fr. II); la ciudadana la complementa: consulta, compara, pregunta y denuncia.']
+    ];
+    var principios = [
+      ['Fuente antes que opinión', 'cada cifra se rastrea a su documento oficial: DOF, SHCP, ASF, INEGI, Banxico, Gaceta Parlamentaria.'],
+      ['Honestidad del dato', 'cada cifra dice si es ' + chipEstado('oficial') + ', ' + chipEstado('derivado') + ' o ' + chipEstado('pendiente') + '.'],
+      ['Método a la vista', 'si una cifra se calcula, se dice la operación para que cualquiera la repita.'],
+      ['Claridad con rigor', 'se explica en lenguaje llano, sin simplificar lo que la ley dice.'],
+      ['Memoria', 'las normas y estructuras derogadas se marcan con su vigencia en lugar de borrarse.']
+    ];
+    var compromisos = [
+      'No inventar ni redondear a ojo: lo que no se puede verificar se queda como <b>pendiente</b>.',
+      'Poner el documento a su alcance para que usted lo verifique por su cuenta.',
+      'Corregir a la vista cuando se encuentre un error. El sello de versión al pie de la página dice qué copia está leyendo.',
+      'Orientar hacia los canales oficiales de denuncia, sin suplantar a ninguna autoridad.'
+    ];
+    var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">👋</span> Quiénes somos</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar la presentación" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        '<img class="pres-logo" src="assets/img/logo-auditavision.svg" alt="" width="200" height="156">' +
+        '<span class="glos-drawer-cat">Presentación</span>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Auditavisión, Sistema Cívico de Fiscalización</h3>' +
+        '<p class="pres-lema">Una plataforma ciudadana que explica, con los documentos oficiales en la mano, de dónde sale el dinero público, en qué se gasta y qué encontró quien lo revisó.</p>' +
+        radarSec('El nombre, palabra por palabra', '<dl class="pres-palabras">' + palabras.map(function(w) { return '<dt>' + w[0] + '</dt><dd>' + w[1] + '</dd>'; }).join('') + '</dl>') +
+        radarSec('Propósito', '<p>Que cualquier persona pueda seguir el rastro de un peso público, desde que se cobra hasta que se gasta y se audita, y convertir una duda en una pregunta bien hecha: una solicitud de información, una denuncia o un voto informado.</p>') +
+        radarSec('Principios', '<ol class="pres-lista">' + principios.map(function(x) { return '<li><b>' + x[0] + ':</b> ' + x[1] + '</li>'; }).join('') + '</ol>') +
+        radarSec('Compromisos', '<ul class="rc-plazos">' + compromisos.map(function(x) { return '<li>' + x + '</li>'; }).join('') + '</ul>') +
+        radarSec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 6º, apartado A (derecho de acceso a la información pública), art. 8º (derecho de petición), art. 79 (fiscalización superior de la Federación) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        (enPortal
+          ? '<button type="button" class="glos-drawer-todo" data-pres="decalogo">📜 Decálogo del ciudadano auditor ➔</button>' +
+            '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="fuentes">📚 Catálogo de fuentes oficiales ➔</button>'
+          : '<a class="glos-drawer-todo" href="index.html" style="text-align:center; text-decoration:none;">⚡ Ir a la plataforma ➔</a>') +
+        '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="finanzas">📖 Qué son las finanzas públicas ➔</button>' +
+      '</footer>';
+    dr.querySelectorAll('[data-pres]').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var k = b.getAttribute('data-pres');
+        if (k === 'finanzas') { abrirNotaPortada(origen); return; }
+        cerrarGlosarioDrawer(true);
+        if (k === 'decalogo') seleccionarModuloExplorer('portal', 'decalogoWrap');
+        else abrirCatalogoFuentes();
+      });
+    });
+    glosDrawerAbrir(ov, dr, origen);
+  }
+
   function abrirRadarConcepto(clave, origen) {
     var c = null;
     try { c = radarConcepto(clave); } catch (err) { c = null; }
@@ -27139,6 +27200,7 @@
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     abrirRadarConcepto: abrirRadarConcepto,
     abrirNotaPortada: abrirNotaPortada,
+    abrirPresentacion: abrirPresentacion,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
     actualizarConteosGlosario: actualizarConteosGlosario,

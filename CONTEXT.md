@@ -2101,6 +2101,24 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (logotipo propio: el billete inspector, con su presentación)
+
+- El ⚖️ de la cabecera se sustituyó por un logotipo en SVG
+  (`assets/img/logo-auditavision.svg`): un billete verde con alas, sombrero y
+  una lupa que le agranda un ojo. Va en la barra de la plataforma y en la
+  cabecera de la Enciclopedia; aletea un poco al pasar el cursor (salvo con
+  «reducir movimiento»).
+- Al picarlo se abre «Quiénes somos» en la ventana lateral
+  (`abrirPresentacion`): el nombre palabra por palabra (Audita · visión ·
+  Sistema · Cívico · Fiscalización), el propósito, cinco principios, cuatro
+  compromisos y su fundamento (arts. 6º A, 8º, 79 y 134 constitucionales). No
+  lleva cifras. Al pie: Decálogo del ciudadano auditor y Catálogo de fuentes
+  (en la Enciclopedia, «Ir a la plataforma») y la nota de finanzas públicas.
+- El texto «Auditavisión / Sistema Cívico de Fiscalización» sigue llevando al
+  inicio de la página.
+- `herramientas/sello.py` acepta ya dos letras: después de la «z» sigue la
+  «za» (el sello de este cambio es 20260926za).
+
 ### Hecho (encabezado de la portada más limpio, con nota en ventana lateral)
 
 - Título: «Explora el panorama de las finanzas públicas en México» (antes «del

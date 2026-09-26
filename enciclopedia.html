@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926z">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926za">
 </head>
 <body>
 
@@ -332,7 +332,7 @@
       <!-- Lado Izquierdo: Marca, Título y Descripción Institucional Inmediata -->
       <div class="brand-wrapper">
         <div class="brand-main-row">
-          <div class="brand-emblem">⚖️</div>
+          <button type="button" class="brand-logo-btn brand-logo-btn-enc" onclick="event.stopPropagation(); window.AuditEngine.abrirPresentacion(this)" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/img/logo-auditavision.svg" alt="" width="82" height="64"></button>
           <div class="brand-titles">
             <h1>Auditavisión</h1>
             <div class="eyebrow">Enciclopedia Electrónica de Fiscalización · Geopolítica del Gasto Público en México</div>
@@ -5496,7 +5496,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926z</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926za</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -5570,16 +5570,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926z"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926za"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926z"></script>
+  <script src="assets/js/audit-database.js?v=20260926za"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926z"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926za"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926z"></script>
+  <script src="assets/js/audit-engine.js?v=20260926za"></script>
 
 </body>
 </html>

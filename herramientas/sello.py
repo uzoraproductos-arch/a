@@ -50,7 +50,10 @@ def siguiente(actual):
     hoy = date.today().strftime('%Y%m%d')
     if actual and actual.startswith(hoy):
         letra = actual[8:] or 'a'
-        return hoy + chr(ord(letra[0]) + 1)
+        # Despues de la z sigue za, zb...: el dia no se acaba con el alfabeto.
+        if letra == 'z':
+            return hoy + 'za'
+        return hoy + letra[:-1] + chr(ord(letra[-1]) + 1)
     return hoy + 'a'
 
 
@@ -65,7 +68,7 @@ def main():
         return 0
 
     nuevo = sys.argv[1]
-    if not re.fullmatch(r'\d{8}[a-z]?', nuevo):
+    if not re.fullmatch(r'\d{8}[a-z]{0,2}', nuevo):
         print('uso: sello.py AAAAMMDD[letra]   (por ejemplo 20260923a)')
         return 2
 
