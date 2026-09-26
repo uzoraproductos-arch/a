@@ -4893,7 +4893,8 @@
       n: 2, icono: '🏗️', titulo: 'Inversión &amp; Megaobras',
       subtitulo: 'Lo que se prometió, lo que se pagó y la diferencia',
       texto: 'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
-      temas: ['Simulador de megaobras', 'Sobrecostos', 'Subsidios de operación', 'Proyectos por sexenio']
+      nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué a veces verá 12 obras y a veces 13' },
+      temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Administración presidencial', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
     },
     calculadora: {
       n: 3, icono: '💳', titulo: 'Calculadora Cívica',
@@ -4954,7 +4955,9 @@
       '<div class="mod-proemio-icono" aria-hidden="true">' + p.icono + '</div>' +
       '<div class="mod-proemio-cuerpo">' +
         '<span class="mod-proemio-kicker">Módulo ' + p.n + ' · ' + pdEsc(etiqueta) + '</span>' +
-        '<h2 class="mod-proemio-titulo">' + p.titulo + '</h2>' +
+        '<h2 class="mod-proemio-titulo">' + p.titulo +
+          (p.nota ? '<button type="button" class="hero-nota-btn" onclick="window.AuditEngine.' + p.nota.fn + '(this)" title="' + p.nota.txt + '" aria-label="' + p.nota.txt + '" aria-haspopup="dialog">📖</button>' : '') +
+        '</h2>' +
         '<p class="mod-proemio-sub">' + p.subtitulo + '</p>' +
         '<div class="mod-proemio-texto"></div>' +
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
@@ -8012,6 +8015,34 @@
         if (k === 'decalogo') seleccionarModuloExplorer('portal', 'decalogoWrap');
         else abrirCatalogoFuentes();
       });
+    });
+    glosDrawerAbrir(ov, dr, origen);
+  }
+
+  /* Nota de metodo del modulo 2: por que el reparto por sexenio suma 13 si
+     las obras son 12. El texto vive en la plantilla tplConteoObras del
+     panel, para que se edite en el HTML como el resto del contenido. */
+  function abrirNotaConteoObras(origen) {
+    var tpl = document.getElementById('tplConteoObras');
+    if (!tpl) return;
+    var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">📖</span> Nota de método</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar la nota" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        '<span class="glos-drawer-cat">🏗️ Inversión &amp; Megaobras</span>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Por qué a veces verá 12 obras y a veces 13</h3>' +
+        '<p class="pres-lema">No es un error de suma: es una obra que pertenece a dos sexenios a la vez.</p>' +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        '<button type="button" class="glos-drawer-todo" data-ir="sexenios">🏛️ Ver el reparto por administración ➔</button>' +
+      '</footer>';
+    dr.querySelector('.glos-drawer-cuerpo').appendChild(tpl.content.cloneNode(true));
+    dr.querySelector('[data-ir]').addEventListener('click', function() {
+      cerrarGlosarioDrawer(true);
+      erarioIr('sexenios');
     });
     glosDrawerAbrir(ov, dr, origen);
   }
@@ -20821,6 +20852,7 @@
   function simIrAObra(id) {
     const el = document.getElementById('card-sim-' + id);
     if (!el) return;
+    erarioAbrirAncestros(el);
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     el.classList.remove('ce-destaca');
     void el.offsetWidth;
@@ -21616,6 +21648,10 @@
      lo elegido en A sigue senalado en B y sigue rigiendo las mesas de C. */
   function setSimParte(parte) {
     state.simParte = parte;
+    /* En la plataforma las tres partes son ya bloques desplegables
+       independientes (sin pestañas A/B/C): no se oculta ninguna. La
+       Enciclopedia conserva sus pestañas. */
+    if (!document.getElementById('simTabs')) return;
     document.querySelectorAll('#simTabs .sim-tab-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.parte === parte);
       b.setAttribute('aria-selected', b.dataset.parte === parte ? 'true' : 'false');
@@ -21898,7 +21934,7 @@
           '<span class="sim-sel-ico">🧾</span>' +
           '<div><h3 class="sim-sel-tit">Todo el dinero, obra por obra y dividido por sector</h3>' +
           '<p class="sim-sel-sub">Las ' + agT.n + ' inversiones evaluadas, completas y sin recortar por ningún filtro. ' +
-            'Pulse el nombre de una obra para ir a la parte A con su sector puesto y llegar a su ficha.</p></div>' +
+            'Pulse el nombre de una obra para ir al desglose por sector y llegar a su ficha.</p></div>' +
         '</div>' +
         '<p class="sim-unidades"><strong>Unidades.</strong> Las columnas de esta tabla están en <strong>millones de pesos</strong> (mdp). ' +
           'Mil millones son 1,000 mdp; un billón de pesos son 1,000,000 mdp. Las cifras son nominales del año de cada erogación, sin deflactar.</p>' +
@@ -21933,6 +21969,9 @@
     state.simuladorSector = sectorId;
     state.simParte = 'a';
     renderSimuladorMegaobras();
+    /* En la plataforma el desglose por sector es el bloque 2, plegable. */
+    const cuerpoSector = document.getElementById('eb-cuerpo-sector');
+    if (cuerpoSector && cuerpoSector.hidden) erarioPlegToggle('sector', true);
     setTimeout(() => simIrAObra(obraId), 140);
   }
 
@@ -22367,7 +22406,9 @@
     simTelObs = new IntersectionObserver((entradas) => {
       const panel = document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]');
       const enVista = panel && panel.offsetParent !== null;
-      flota.hidden = !enVista || entradas[0].isIntersecting;
+      /* Con el bloque del pulso plegado la tira no existe en pantalla: la
+         pastilla tampoco se muestra. */
+      flota.hidden = !enVista || entradas[0].isIntersecting || tira.offsetParent === null;
     }, { threshold: 0 });
     simTelObs.observe(tira);
   }
@@ -27249,6 +27290,7 @@
     abrirRadarConcepto: abrirRadarConcepto,
     abrirNotaPortada: abrirNotaPortada,
     abrirPresentacion: abrirPresentacion,
+    abrirNotaConteoObras: abrirNotaConteoObras,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
     actualizarConteosGlosario: actualizarConteosGlosario,
@@ -27590,6 +27632,8 @@
       while (prim && prim.tagName !== 'BUTTON') prim = prim.previousElementSibling;
       if (!prim || prim._buClave || /Reiniciar/i.test(prim.textContent || '')) return;
       reset.hidden = true;
+      /* Los estilos de boton fijan su display y le ganan al atributo hidden. */
+      reset.style.display = 'none';
       reset.setAttribute('aria-hidden', 'true');
       prim._buClave = clave;
       prim._buOriginal = prim.innerHTML;

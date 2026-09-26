@@ -21560,3 +21560,12 @@ body.glos-drawer-bloqueo { overflow: hidden; }
     transform: translateX(-50%) rotate(90deg); color: var(--gold);
   }
 }
+
+/* Módulo 2: índice de cuatro pasos; en pantallas medianas, de dos en dos */
+@media (max-width: 1100px) and (min-width: 761px) {
+  .erario-indice-4 { flex-wrap: wrap; }
+  .erario-indice-4 .erario-indice-paso { flex: 1 1 calc(50% - 10px); }
+  .erario-indice-4 .erario-indice-flecha { display: none; }
+}
+.glos-drawer-cuerpo .sim-conteo { margin-top: 6px; }
+.glos-drawer-cuerpo .sim-conteo-ico { flex: none; }

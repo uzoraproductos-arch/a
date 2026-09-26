@@ -2101,6 +2101,24 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 2, Inversión y Megaobras, en cuatro bloques)
+
+- Índice de cuatro pasos y cuatro bloques desplegables, con la misma
+  mecánica del módulo 1 (`erarioPlegToggle`, `erarioIr`): 1 El pulso del
+  gasto (tira de cifras y cadencias de pérdidas y subsidios), 2 El desglose
+  obra por obra: sector e industria (antes parte A), 3 Administración
+  presidencial (antes parte B) y 4 De cero al resultado (antes parte C). Las
+  pestañas A/B/C desaparecen de la plataforma; `setSimParte` ya no oculta
+  nada si no hay pestañas. La Enciclopedia conserva las suyas.
+- «Por qué a veces verá 12 obras y a veces 13» pasa a una nota de método en
+  la ventana lateral: 📖 junto al título del proemio
+  (`abrirNotaConteoObras`, texto en la plantilla `tplConteoObras`), con un
+  botón al reparto por administración.
+- Los saltos a la ficha de una obra abren su bloque; la pastilla flotante del
+  contador no aparece con el pulso plegado.
+- Corrección del botón único: el de reinicio seguía visible porque el estilo
+  del botón le ganaba al atributo `hidden`; ahora se oculta con estilo.
+
 ### Hecho («el rastro del gasto público» en el glosario)
 
 - Junto al título «Descubre el rastro del gasto público» de Auditoría en
