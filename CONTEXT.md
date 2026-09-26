@@ -1824,12 +1824,30 @@ vuelve a correrse si cambian los libros.
 - **Enlaces a subpestañas:** `enciclopedia.html#pestaña/subpestaña` abre la
   subpestaña indicada.
 
+### Hecho (lectura por capítulos: piloto en la 2.6)
+
+- **Componente de capítulos** (`capMontar`, `capIr`, `capTodo`): toma los
+  bloques de una sección y monta arriba un índice de tarjetas (número,
+  título, cifra clave con su chip y una línea de resumen). Se lee un
+  capítulo a la vez, con barra de avance y «anterior / siguiente»; un botón
+  permite leer todo de corrido. Para usarlo en otra sección basta pasarle la
+  raíz, una clave y la lista de tarjetas.
+- **Piloto en la 2.6:** de 4,887 px de desplazamiento a un índice de 644 px.
+  Las cifras de las tarjetas salen de la colección `poderes` (la de nómina,
+  88.9 %, del renglón total del Ramo 03).
+- **El estado de cuenta usa las fotos de la ciudad del autor** en la cabecera
+  (noche o día, con un paneo lento), en la vista y en la imagen PNG.
+- **Regreso del glosario más preciso:** la palabra se busca solo dentro de la
+  subpestaña de origen y la posición se corrige tres veces mientras la página
+  termina de acomodarse.
+
 ### Pendiente
 
-- **Las fotos de fondo del tema claro y oscuro parecen ser de Chongqing, China**
-  (`city_day.jpg`, `city_night.jpg`; el edificio con puente horizontal parece Raffles City). Para una
-  plataforma mexicana conviene sustituirlas por una ciudad mexicana o por un
-  horizonte genérico como el del estado de cuenta.
+- **Extender la lectura por capítulos** al resto de las secciones largas,
+  empezando por la 2.2 (megaobras: 7,666 px y 3,451 palabras), la 1.1, la
+  2.4 y el Inspector. Espera el visto bueno del autor sobre el piloto.
+- **Fondos de ciudad:** el autor eligió a propósito una ciudad extranjera
+  generada con IA para evitar problemas de derechos. Se conservan.
 - **En teléfono, la barra superior fija ocupa cerca de un tercio de la
   pantalla** (marca, cinco menús, botones y buscador). Hay que compactarla.
 - **Descarga CSV y diccionario de datos** siguen en «Próximamente».

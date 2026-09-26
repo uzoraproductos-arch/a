@@ -1745,6 +1745,128 @@
     });
   }
 
+  /* ====================================================================
+     CAPITULOS: una seccion larga, en piezas que se leen de una en una.
+
+     Toma los bloques hijos directos de `raiz` (uno por capitulo) y monta
+     arriba un indice de tarjetas: numero, titulo, la cifra clave y una
+     linea de resumen. Se lee un capitulo a la vez, con barra de avance y
+     «anterior / siguiente». Quien prefiera todo de corrido tiene un boton
+     para verlo asi. Las cifras de las tarjetas las calcula quien llama,
+     con su chip de estado: aqui no se inventa ninguna.
+     ==================================================================== */
+  const capEstado = {};
+
+  function capMontar(raiz, clave, caps) {
+    const bloques = [...raiz.children].filter(el => !el.classList.contains('cap-indice') && !el.classList.contains('cap-nav'));
+    if (!bloques.length || bloques.length !== caps.length) return;
+    if (!capEstado[clave]) capEstado[clave] = { i: -1, todo: false };
+    bloques.forEach((b, i) => { b.classList.add('cap-bloque'); b.dataset.cap = i; });
+
+    const indice = document.createElement('nav');
+    indice.className = 'cap-indice';
+    indice.setAttribute('aria-label', 'Capítulos de esta sección');
+    indice.setAttribute('data-no-autolink', '');
+    indice.innerHTML =
+      '<div class="cap-indice-cab"><span>' + caps.length + ' capítulos · elija por dónde empezar</span>' +
+        '<button type="button" class="cap-todo" onclick="window.AuditEngine.capTodo(\'' + clave + '\')">Leer todo de corrido</button></div>' +
+      '<div class="cap-tarjetas">' + caps.map((c, i) =>
+        '<button type="button" class="cap-tarjeta" data-i="' + i + '" onclick="window.AuditEngine.capIr(\'' + clave + '\',' + i + ')">' +
+          '<span class="cap-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<span class="cap-ico" aria-hidden="true">' + c.ico + '</span>' +
+          '<span class="cap-tit">' + escHtml(c.tit) + '</span>' +
+          (c.cifra ? '<span class="cap-cifra num-tabular">' + escHtml(c.cifra) + '</span>' : '') +
+          (c.cifraPie ? '<span class="cap-cifra-pie">' + escHtml(c.cifraPie) + (c.estado ? ' ' + chipEstado(c.estado) : '') + '</span>' : '') +
+          '<span class="cap-res">' + escHtml(c.res) + '</span>' +
+        '</button>').join('') + '</div>';
+
+    const nav = document.createElement('div');
+    nav.className = 'cap-nav';
+    nav.setAttribute('data-no-autolink', '');
+
+    raiz.insertBefore(indice, raiz.firstChild);
+    raiz.appendChild(nav);
+    raiz.dataset.capClave = clave;
+    capEstado[clave].raiz = raiz;
+    capEstado[clave].caps = caps;
+    capPintar(clave, false);
+  }
+
+  function capPintar(clave, desplazar) {
+    const e = capEstado[clave];
+    if (!e || !e.raiz) return;
+    const raiz = e.raiz, n = e.caps.length;
+    raiz.classList.toggle('cap-modo-todo', e.todo);
+    raiz.classList.toggle('cap-modo-indice', !e.todo && e.i < 0);
+    raiz.querySelectorAll('.cap-bloque').forEach(b => { b.hidden = !e.todo && +b.dataset.cap !== e.i; });
+    raiz.querySelectorAll('.cap-tarjeta').forEach(t => {
+      const act = +t.dataset.i === e.i && !e.todo;
+      t.classList.toggle('activa', act);
+      if (act) t.setAttribute('aria-current', 'step'); else t.removeAttribute('aria-current');
+    });
+    const btnTodo = raiz.querySelector('.cap-todo');
+    if (btnTodo) btnTodo.textContent = e.todo ? 'Leer por capítulos' : 'Leer todo de corrido';
+    const nav = raiz.querySelector('.cap-nav');
+    if (e.todo || e.i < 0) { nav.innerHTML = ''; }
+    else {
+      const ant = e.i > 0 ? e.caps[e.i - 1] : null, sig = e.i < n - 1 ? e.caps[e.i + 1] : null;
+      nav.innerHTML =
+        '<div class="cap-avance" aria-hidden="true"><i style="width:' + ((e.i + 1) / n * 100).toFixed(1) + '%"></i></div>' +
+        '<div class="cap-nav-fila">' +
+          (ant ? '<button type="button" class="cap-btn" onclick="window.AuditEngine.capIr(\'' + clave + '\',' + (e.i - 1) + ')">← ' + escHtml(ant.tit) + '</button>' : '<span></span>') +
+          '<span class="cap-paso">Capítulo ' + (e.i + 1) + ' de ' + n + '</span>' +
+          (sig ? '<button type="button" class="cap-btn cap-btn-sig" onclick="window.AuditEngine.capIr(\'' + clave + '\',' + (e.i + 1) + ')">Siguiente: ' + escHtml(sig.tit) + ' →</button>'
+               : '<button type="button" class="cap-btn" onclick="window.AuditEngine.capIr(\'' + clave + '\',-1)">Volver al índice ↑</button>') +
+        '</div>';
+    }
+    if (desplazar) {
+      const destino = (e.todo || e.i < 0) ? raiz.querySelector('.cap-indice') : raiz.querySelector('.cap-bloque[data-cap="' + e.i + '"]');
+      if (destino) setTimeout(() => destino.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30);
+    }
+  }
+
+  function capIr(clave, i) {
+    const e = capEstado[clave];
+    if (!e) return;
+    e.todo = false;
+    e.i = i;
+    capPintar(clave, true);
+  }
+
+  function capTodo(clave) {
+    const e = capEstado[clave];
+    if (!e) return;
+    e.todo = !e.todo;
+    if (!e.todo && e.i < 0) e.i = 0;
+    capPintar(clave, true);
+  }
+
+  /* Las seis tarjetas de la 2.6, con cifras sacadas de la coleccion. */
+  function pdCapitulos(P) {
+    const L = P.ramos2026.legislativo, J = P.ramos2026.judicial, total = P.gastoNetoTotal.valor;
+    let nomina = 0, todo = 0;
+    /* El renglon RAMO03 ya es el total del ramo: se usa solo el, para no
+       contar dos veces lo de cada unidad. */
+    const cpu = P.judicial.capitulosPorUR || {};
+    (cpu.RAMO03 || []).forEach(c => { todo += c.aprobado; if (c.cap === '1000') nomina += c.aprobado; });
+    const tope = (P.remuneraciones2026 || []).reduce((m, r) => r.netoAnual > m.netoAnual ? r : m, { netoAnual: 0 });
+    const pm = v => '$' + (v / total * 1000).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return [
+      { ico: '🧾', tit: 'Su parte', cifra: pm(L.aprobado) + ' y ' + pm(J.aprobado), cifraPie: 'de cada $1,000 del gasto federal', estado: 'derivado',
+        res: 'Cuánto de lo que usted paga llega al Congreso y cuánto a la Judicatura.' },
+      { ico: '🏛️', tit: 'Los dos Poderes en 2026', cifra: pdMdp(L.aprobado + J.aprobado), cifraPie: 'aprobados entre ambos', estado: 'derivado',
+        res: 'Lo que la Cámara aprobó a cada uno, y lo que le recortó al Poder Judicial.' },
+      { ico: '⚖️', tit: 'Poder Judicial: en qué se va', cifra: todo ? pdPct(nomina / todo * 100) : '', cifraPie: 'se va en servicios personales (nómina)', estado: 'derivado',
+        res: 'Órgano por órgano y capítulo por capítulo, con lo ya ejercido.' },
+      { ico: '🔎', tit: 'Congreso: lo que la ASF revisó', cifra: 'Cuenta Pública 2024', cifraPie: 'último año auditado', estado: 'oficial',
+        res: 'Los resultados de la Auditoría en Diputados y Senado, y los 32 congresos locales.' },
+      { ico: '💰', tit: 'Cuánto ganan', cifra: tope.netoAnual ? pdPesos(tope.netoAnual) : '', cifraPie: tope.cargo ? 'neto al año: ' + tope.cargo : '', estado: 'oficial',
+        res: 'Remuneraciones netas oficiales de 2026, y la comparación con su ingreso.' },
+      { ico: '📂', tit: 'Los documentos', cifra: Object.keys(P.fuentes).length + ' documentos', cifraPie: 'oficiales, con liga y página', estado: 'oficial',
+        res: 'De dónde sale cada cifra, para que usted lo compruebe.' }
+    ];
+  }
+
   function renderPoderes() {
     const raiz = document.getElementById('poderesRaiz');
     const P = pdDatos();
@@ -1977,6 +2099,7 @@
     raiz.querySelectorAll('.pd-fila, .pd-leyenda, .pd-tabla-w, .pd-lado-cab, .pd-duo, .pd-pila-cab, summary, .pd-docs')
       .forEach(el => el.setAttribute('data-no-autolink', ''));
     autolinkAmbito(raiz);
+    capMontar(raiz, 'poderes', pdCapitulos(P));
   }
 
   /* Del bloque de remuneraciones al comparador de la calculadora. */
@@ -2297,8 +2420,21 @@
     const serif = "'Playfair Display', Georgia, serif", sans = "Inter, 'Segoe UI', Arial, sans-serif", mono = "'JetBrains Mono', Consolas, monospace";
 
     g.fillStyle = C.fondo; g.fillRect(0, 0, W, H);
-    eccHorizonte(g, W, 60, 250, noche);
-    const velo = g.createLinearGradient(0, 120, 0, 330);
+    const foto = await new Promise(ok => {
+      const im = new Image();
+      im.onload = () => ok(im); im.onerror = () => ok(null);
+      im.src = 'assets/img/' + (noche ? 'city_night.jpg' : 'city_day.jpg');
+    });
+    if (foto) {
+      const hH = 330, esc = Math.max(W / foto.width, hH / foto.height);
+      const sw = W / esc, sh = hH / esc;
+      g.drawImage(foto, (foto.width - sw) / 2, (foto.height - sh) * 0.35, sw, sh, 0, 0, W, hH);
+      g.fillStyle = noche ? 'rgba(6,9,20,0.45)' : 'rgba(255,255,255,0.30)';
+      g.fillRect(0, 0, W, hH);
+    } else {
+      eccHorizonte(g, W, 60, 250, noche);
+    }
+    const velo = g.createLinearGradient(0, 150, 0, 330);
     velo.addColorStop(0, 'rgba(0,0,0,0)'); velo.addColorStop(1, C.fondo);
     g.fillStyle = velo; g.fillRect(0, 120, W, 212);
 
@@ -6504,16 +6640,27 @@
 
   /* Huella de un enlace: su clase, su texto y su posicion entre los que
      comparten ambos. Sirve para reencontrarlo si el panel se redibujo. */
-  function navEnlacesIguales(clase, texto) {
-    return Array.from(document.querySelectorAll('.' + clase)).filter(x => x.textContent === texto);
+  /* La posicion se cuenta dentro de la subpestana del enlace, no en todo
+     el documento: otras pestanas pueden dibujar la misma palabra entre
+     tanto y correr la cuenta. */
+  function navAmbitoSel(a) {
+    const s = a.closest('.subtab-panel[data-subpanel]');
+    if (s) return '.subtab-panel[data-parent="' + s.dataset.parent + '"][data-subpanel="' + s.dataset.subpanel + '"]';
+    const t = a.closest('.tab-panel[id]');
+    return t ? '#' + t.id : '';
+  }
+  function navEnlacesIguales(clase, texto, ambito) {
+    const raiz = (ambito && document.querySelector(ambito)) || document;
+    return Array.from(raiz.querySelectorAll('.' + clase)).filter(x => x.textContent === texto);
   }
   function navHuellaEnlace(a) {
     const clase = a.classList.contains('glos-link') ? 'glos-link' : 'ref-link';
-    return { clase: clase, texto: a.textContent, idx: navEnlacesIguales(clase, a.textContent).indexOf(a) };
+    const ambito = navAmbitoSel(a);
+    return { clase: clase, texto: a.textContent, ambito: ambito, idx: navEnlacesIguales(clase, a.textContent, ambito).indexOf(a) };
   }
   function navReencontrar(h) {
     if (!h || h.idx < 0) return null;
-    return navEnlacesIguales(h.clase, h.texto)[h.idx] || null;
+    return navEnlacesIguales(h.clase, h.texto, h.ambito)[h.idx] || null;
   }
 
   function navMarcarOrigen() {
@@ -6546,16 +6693,23 @@
     const intentar = (ultimo) => {
       if (o.ancla && !o.ancla.isConnected) o.ancla = navReencontrar(o.anclaHuella);
       if (o.ancla && o.ancla.isConnected && o.ancla.getClientRects().length) {
-        const top = o.ancla.getBoundingClientRect().top + window.scrollY - o.anclaTop;
-        window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
-        o.ancla.classList.add('nav-origen-marca');
-        /* Si la seccion se redibuja justo despues, la marca pasa a la copia. */
-        setTimeout(() => {
+        /* Se corrige varias veces: la pagina todavia puede crecer o
+           encogerse (enlazado, capitulos, imagenes) despues del primer
+           salto. 'instant' evita que el scroll suave de la hoja llegue a un
+           destino calculado con la disposicion vieja. */
+        const fijar = () => {
           if (!o.ancla.isConnected) {
             const copia = navReencontrar(o.anclaHuella);
-            if (copia) { o.ancla = copia; copia.classList.add('nav-origen-marca'); }
+            if (!copia) return;
+            o.ancla = copia;
           }
-        }, 700);
+          o.ancla.classList.add('nav-origen-marca');
+          const d = o.ancla.getBoundingClientRect().top - o.anclaTop;
+          if (Math.abs(d) > 3) window.scrollTo({ top: Math.max(0, window.scrollY + d), behavior: 'instant' });
+        };
+        fijar();
+        setTimeout(fijar, 350);
+        setTimeout(fijar, 800);
         setTimeout(() => o.ancla && o.ancla.classList.remove('nav-origen-marca'), 2200);
         try { o.ancla.focus({ preventScroll: true }); } catch (e) { /* sin foco */ }
         return;
@@ -26377,6 +26531,8 @@
     renderPoderes: renderPoderes,
     irComparadorChoque: irComparadorChoque,
     descargarEstadoCuenta: descargarEstadoCuenta,
+    capIr: capIr,
+    capTodo: capTodo,
     efosAbrir: efosAbrir,
     efosBuscar: efosBuscar,
     efosCargar: efosCargar,
