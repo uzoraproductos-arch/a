@@ -3262,8 +3262,7 @@
                   desglose.style.display = 'block';
                   desglose.classList.add('desglose-abierto');
                 }
-                switchTab('presupuesto');
-                switchSubtab('presupuesto', 'territorio');
+                switchTab('territorio');
                 openStateDrawer(st);
                 desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }
@@ -3287,8 +3286,7 @@
                       desglose.style.display = 'block';
                       desglose.classList.add('desglose-abierto');
                     }
-                    switchTab('presupuesto');
-                    switchSubtab('presupuesto', 'municipios');
+                    switchTab('municipios');
                     openStateDrawer(st);
                     desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }
@@ -4214,6 +4212,17 @@
       switchSubtab('accion-financiera', 'poderes');
       return;
     }
+    /* Las 32 entidades y los municipios viven en Accion Financiera de la
+       plataforma. Desde una pagina que no los tiene, se va a buscarlos. */
+    if (tabKey === 'territorio' || tabKey === 'municipios') {
+      if (document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]')) {
+        switchTab('accion-financiera', skipPush);
+        switchSubtab('accion-financiera', tabKey);
+      } else {
+        window.location.href = 'index.html#accion-financiera/' + tabKey;
+      }
+      return;
+    }
     if (tabKey === 'faq' && !document.getElementById('tab-panel-faq')) {
       window.location.href = 'enciclopedia.html#faq';
       return;
@@ -4342,6 +4351,8 @@
       else if (subKey === 'calculadora') renderCalculadora();
       else if (subKey === 'bitacora') renderNews();
       else if (subKey === 'poderes') renderPoderes();
+      else if (subKey === 'territorio') renderTerritorioErario();
+      else if (subKey === 'municipios') renderMunicipioErario();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
     } else if (parentTab === 'legislativo') {
       if (subKey === 'monitor-civico') {
@@ -23172,6 +23183,14 @@
       if (hashSub && document.querySelector('.subtab-panel[data-parent="' + hashTab + '"][data-subpanel="' + hashSub + '"]')) {
         switchSubtab(hashTab, hashSub);
       }
+      /* En la portada los modulos viven plegados: un enlace directo los abre. */
+      const desgloseHash = document.getElementById('seccionDesgloseModulos');
+      if (desgloseHash && hashSub) {
+        desgloseHash.style.display = 'block';
+        desgloseHash.classList.add('desglose-abierto');
+        const destinoHash = document.querySelector('.subtab-panel[data-parent="' + hashTab + '"][data-subpanel="' + hashSub + '"]');
+        if (destinoHash) [300, 900].forEach(ms => setTimeout(() => destinoHash.scrollIntoView({ block: 'start', behavior: 'instant' }), ms));
+      }
     } else {
       switchTab('presupuesto', true);
     }
@@ -25433,6 +25452,7 @@
     
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
                          (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
+                         (tabKey === 'territorio' || tabKey === 'municipios') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
     var targetScroll = targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) {

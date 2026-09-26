@@ -1841,6 +1841,23 @@ vuelve a correrse si cambian los libros.
   subpestaña de origen y la posición se corrige tres veces mientras la página
   termina de acomodarse.
 
+### Hecho (entidades y municipios pasan a Acción Financiera; cuatro menús)
+
+- **Menú superior, estructura fijada por el autor:** Búsqueda Forense,
+  Acción Financiera, Descargar Datos y Recursos (reúne lo que era «Consultar
+  Recursos») y Portal Digital.
+- **Las 32 entidades (antes 1.2) y los 2,479 municipios (antes 1.3) se
+  mudaron de la Enciclopedia a Acción Financiera de la plataforma**
+  (`data-parent="accion-financiera"`, subpaneles `territorio` y
+  `municipios`). El menú ya no manda a la Enciclopedia. En la Enciclopedia,
+  las pestañas 1.2 y 1.3 quedan con un aviso y un botón que lleva a su nuevo
+  lugar.
+- `switchTab('territorio' | 'municipios')` abre esas secciones; desde una
+  página que no las tiene, navega a `index.html#accion-financiera/…`. El
+  buscador global usa esa ruta para estados y municipios.
+- Un enlace `index.html#pestaña/subpestaña` abre los módulos plegados de la
+  portada y baja a la subpestaña.
+
 ### Pendiente
 
 - **Extender la lectura por capítulos** al resto de las secciones largas,

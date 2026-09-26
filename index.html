@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926c">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926d">
 </head>
 <body>
 
@@ -170,13 +170,13 @@
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">🗺️ Entidades y Municipios</span>
-            <a href="enciclopedia.html#presupuesto/territorio" class="mega-link-item">
+            <a href="#accion-financiera/territorio" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('territorio'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">Las 32 Entidades: del Peso Federal al Estatal</span>
-              <span class="mega-link-desc">Mapa, participaciones (Ramo 28) y aportaciones (Ramo 33) de cada estado. Abre la Enciclopedia.</span>
+              <span class="mega-link-desc">Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.</span>
             </a>
-            <a href="enciclopedia.html#presupuesto/municipios" class="mega-link-item">
+            <a href="#accion-financiera/municipios" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('municipios'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">Los 2,479 Municipios: Predial y Transferencias</span>
-              <span class="mega-link-desc">Padrón INEGI EFIPEM con la ficha financiera de cada municipio. Abre la Enciclopedia.</span>
+              <span class="mega-link-desc">Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">Calculadora Cívica de Tu Sueldo</span>
@@ -190,10 +190,10 @@
         </div>
       </div>
 
-      <!-- Menú 3: Descargar Datos (Download the Data) -->
+      <!-- Menú 3: Descargar Datos y Consultar Recursos -->
       <div class="nav-menu-item" id="navItemDescargar">
         <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownDescargar')" aria-haspopup="true" aria-expanded="false">
-          <span>Descargar Datos</span> <span class="caret">▾</span>
+          <span>Descargar Datos y Recursos</span> <span class="caret">▾</span>
         </button>
         <div class="mega-menu-dropdown" id="menuDropdownDescargar" role="menu">
           <div class="mega-menu-col">
@@ -218,15 +218,6 @@
               <span class="mega-link-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
             </a>
           </div>
-        </div>
-      </div>
-
-      <!-- Menú 4: Consultar Recursos (Módulo 5 Integrado con Desglose de 3 Subpestañas) -->
-      <div class="nav-menu-item" id="navItemRecursos">
-        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownRecursos')" aria-haspopup="true" aria-expanded="false">
-          <span>Consultar Recursos</span> <span class="caret">▾</span>
-        </button>
-        <div class="mega-menu-dropdown" id="menuDropdownRecursos" role="menu">
           <div class="mega-menu-col">
             <span class="mega-col-title">🏛️ Biblioteca &amp; Enciclopedia Hacendaria (Marco Legal &amp; Glosario)</span>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-glosario');" class="mega-link-item">
@@ -260,7 +251,7 @@
         </div>
       </div>
 
-      <!-- Menú 5: Portal Digital (Función 3 · Ágora Cívica & Debates Ciudadanos) -->
+      <!-- Menú 4: Portal Digital (Función 3 · Ágora Cívica & Debates Ciudadanos) -->
       <div class="nav-menu-item" id="navItemPortal">
         <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownPortal')" aria-haspopup="true" aria-expanded="false">
           <span>Portal Digital</span> <span class="caret">▾</span>
@@ -1506,6 +1497,216 @@
         <div id="poderesRaiz" class="pd-raiz"></div>
       </div><!-- FIN SUBPANEL 2.6 -->
 
+      <!-- ====================================================================
+           LAS 32 ENTIDADES (antes 1.2 de la Enciclopedia)
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="territorio">
+
+        <div class="section-hero">
+          <span class="hero-tag">Hacienda P&uacute;blica en Tres Pisos &middot; Federaci&oacute;n, Estado y Municipio</span>
+          <h2>Del Peso Federal al Peso Estatal</h2>
+          <p>
+            M&eacute;xico no tiene una hacienda p&uacute;blica, tiene tres superpuestas. Cada piso cobra sus
+            propios impuestos, aprueba su propia ley de ingresos y su propio presupuesto, y
+            responde ante un fiscalizador distinto. Entender qui&eacute;n cobra qu&eacute; y qui&eacute;n revisa a
+            qui&eacute;n es lo que permite saber a qu&eacute; puerta tocar cuando algo no cuadra.
+            Esta secci&oacute;n sigue el dinero hasta las 32 entidades; el piso municipal tiene la suya:
+            <a href="#accion-financiera/municipios" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('municipios');">los 2,479 municipios</a>.
+          </p>
+        </div>
+
+        <!-- LOS TRES PISOS -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Los tres pisos de la hacienda p&uacute;blica</h3>
+            <p class="erario-bloque-sub">
+              Note una asimetr&iacute;a que casi nunca se menciona: la ley de ingresos del municipio
+              no la aprueba el municipio, la aprueba el congreso del estado.
+            </p>
+          </div>
+          <div class="pisos-grid" id="pisosGrid"></div>
+        </div>
+
+        <!-- RAMO 28 VS RAMO 33 -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>Lo que baja, y con qu&eacute; libertad baja</h3>
+            <p class="erario-bloque-sub">
+              La distinci&oacute;n entre <b>Ramo 28</b> y <b>Ramo 33</b> es la m&aacute;s importante de todo el gasto
+              federalizado, y la que m&aacute;s se confunde en la conversaci&oacute;n p&uacute;blica: el primero es
+              dinero del estado, el segundo sigue siendo dinero federal despu&eacute;s de entregarse.
+              Pulse cualquier ramo para ver qu&eacute; ley lo sustenta, qu&eacute; efecto jur&iacute;dico produce y
+              qu&eacute; fondos lo componen.
+            </p>
+          </div>
+          <div class="erario-mandos" id="federalizadoMandos"></div>
+          <div class="flujo-chart" id="federalizadoChart" role="list"></div>
+          <div class="flujo-detalle" id="federalizadoPista"></div>
+          <div id="federalizadoNota"></div>
+        </div>
+
+        <!-- CIRCUITO DE UNA ENTIDAD -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>El circuito de una entidad, paso a paso</h3>
+            <p class="erario-bloque-sub">
+              Elija un estado para ver cu&aacute;nto recibe de la Federaci&oacute;n, cu&aacute;nto recauda por su
+              cuenta y qu&eacute; tan dependiente resulta la suma.
+            </p>
+          </div>
+          <div class="entidad-selector-bar">
+            <label for="entidadCircuitoSelect">Entidad federativa</label>
+            <select id="entidadCircuitoSelect" aria-label="Seleccionar entidad federativa"></select>
+          </div>
+          <div class="erario-mandos" id="entidadMandos"></div>
+          <div class="entidad-circuito" id="entidadCircuito"></div>
+        </div>
+
+        <!-- FUENTES -->
+        <div class="erario-fuentes">
+          <div class="ef-tit">Fuentes de esta secci&oacute;n</div>
+          <ul>
+            <li><b>Constituci&oacute;n Pol&iacute;tica de los Estados Unidos Mexicanos</b>, art&iacute;culos 115 fracci&oacute;n IV, 116, 117 y 124.</li>
+            <li><b>Ley de Coordinaci&oacute;n Fiscal</b>: art&iacute;culos 2 a 3-B para participaciones y cap&iacute;tulo V, art&iacute;culos 25 a 51, para aportaciones.</li>
+            <li><b>Base de datos subnacional de Auditavisi&oacute;n</b>: montos por entidad y municipio, con su origen indicado en cada ficha.</li>
+          </ul>
+          <p class="ef-nota">
+            Los totales de los ramos 28, 33 y 25 son los del <b>Anexo 1 del Presupuesto de Egresos
+            de la Federaci&oacute;n 2026</b>, y el desglose del Ramo 33 fondo por fondo es el de su
+            <b>Anexo 22</b>. Las cifras por entidad proceden de la base interna de la plataforma
+            y corresponden al &uacute;ltimo corte cargado: la distribuci&oacute;n entidad por entidad para 2026
+            se actualizar&aacute; contra el acuerdo de distribuci&oacute;n que publica la Secretar&iacute;a de Hacienda
+            en el Diario Oficial de la Federaci&oacute;n. Conciliaci&oacute;n presupuestaria: la suma directa de las 32
+            asignaciones estatales ($2.50 billones) refleja el gasto directamente regionalizado; la diferencia de $304,621 mdp
+            respecto al total federalizado ($2.81 billones) corresponde a convenios de reasignaci&oacute;n y fondos no asignados a una sola entidad.
+          </p>
+        </div>
+
+      </div>
+      <!-- FIN SUBPANEL ENTIDADES -->
+
+      <!-- ====================================================================
+           LOS 2,479 MUNICIPIOS (antes 1.3 de la Enciclopedia)
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="accion-financiera" data-subpanel="municipios">
+
+        <div class="section-hero">
+          <span class="hero-tag">Tercer Piso &middot; Art&iacute;culo 115 Constitucional &middot; M&aacute;s de 2,400 Municipios</span>
+          <h2>El Eslab&oacute;n Municipal</h2>
+          <p>
+            Es el piso que recoge la basura, cobra el agua, abre la calle y entierra a los muertos,
+            y el que menos capacidad tiene de sostenerse solo. La Constituci&oacute;n le reconoce hacienda
+            propia y le entrega el predial &laquo;en todo caso&raquo;, pero le deja al congreso de su estado
+            la aprobaci&oacute;n de su ley de ingresos. Aqu&iacute; se ve de d&oacute;nde sale cada peso municipal, con
+            qu&eacute; ley y con cu&aacute;nta libertad.
+          </p>
+        </div>
+
+        <!-- LO QUE EL PRESUPUESTO CIFRA COMO MUNICIPAL -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>1 &middot; Lo que el Presupuesto le entrega con nombre</h3>
+            <p class="erario-bloque-sub">
+              De los ocho fondos del Ramo 33, s&oacute;lo dos llegan cifrados como municipales en el
+              Presupuesto de Egresos: el <b>FORTAMUN</b>, que el municipio puede aplicar con
+              holgura, y el <b>FISMDF</b>, que s&oacute;lo puede tocar obra para poblaci&oacute;n en pobreza.
+              Pulse cualquiera para ver su fundamento, su efecto jur&iacute;dico y c&oacute;mo lo reparte la ley.
+            </p>
+          </div>
+          <div class="erario-mandos" id="municipalMandos"></div>
+          <div class="flujo-chart" id="municipalChart" role="list"></div>
+          <div class="flujo-detalle" id="municipalPista"></div>
+          <div class="erario-ceros" id="municipalSinCifra"></div>
+        </div>
+
+        <!-- LO QUE COBRA POR SU CUENTA -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>2 &middot; Lo que cobra por su cuenta</h3>
+            <p class="erario-bloque-sub">
+              El art&iacute;culo 115, fracci&oacute;n IV, enumera tres ingresos que el municipio percibe
+              &laquo;en todo caso&raquo;. Su total nacional no vive en el Presupuesto de Egresos: se
+              reconstruye sumando las cuentas p&uacute;blicas que los municipios rinden al INEGI, y por eso
+              va marcado como <b>derivado</b>. Cada ficha dice qu&eacute; es, con qu&eacute; fundamento, qu&eacute;
+              efecto jur&iacute;dico produce y c&oacute;mo se obtuvo la cifra.
+            </p>
+          </div>
+          <div class="mpf-grid" id="munPropiosGrid"></div>
+        </div>
+
+        <!-- PUNTO CIEGO -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>3 &middot; El punto ciego del tercer piso</h3>
+          </div>
+          <div id="munAsimetria"></div>
+        </div>
+
+        <!-- MUNICIPIOS DE LA ENTIDAD -->
+        <div class="erario-bloque">
+          <div class="erario-bloque-head">
+            <h3>4 &middot; Municipio por municipio</h3>
+            <p class="erario-bloque-sub">
+              Los <b>2,479 municipios</b> del cat&aacute;logo oficial del INEGI, entidad por
+              entidad, con lo que de verdad ingres&oacute; cada uno: su predial, sus
+              participaciones, sus dos fondos del Ramo&nbsp;33 y qu&eacute; tan dependiente
+              resulta la suma. <span id="munEntidadRotulo"></span>
+            </p>
+          </div>
+          <div class="entidad-selector-bar mun-filtros">
+            <div class="mun-filtro">
+              <label for="munEntidadSelect">Entidad federativa</label>
+              <select id="munEntidadSelect" aria-label="Seleccionar entidad federativa para ver sus municipios"></select>
+            </div>
+            <div class="mun-filtro">
+              <label for="munBuscar">Buscar municipio</label>
+              <input type="search" id="munBuscar" placeholder="Escriba un nombre&hellip;" autocomplete="off"
+                     aria-label="Filtrar por nombre los municipios de la entidad">
+            </div>
+            <div class="mun-filtro">
+              <label for="munOrden">Ordenar por</label>
+              <select id="munOrden" aria-label="Criterio para ordenar los municipios">
+                <option value="nombre">Nombre (A&ndash;Z)</option>
+                <option value="ing">Ingreso total</option>
+                <option value="predial">Predial cobrado</option>
+                <option value="fortamun">FORTAMUN recibido</option>
+                <option value="fismdf">FISMDF recibido</option>
+                <option value="dep">Dependencia de transferencias</option>
+              </select>
+            </div>
+          </div>
+          <div class="erario-mandos" id="munEntidadMandos"></div>
+          <div id="municipiosCircuito"></div>
+        </div>
+
+        <!-- FUENTES -->
+        <div class="erario-fuentes">
+          <div class="ef-tit">Fuentes de esta secci&oacute;n</div>
+          <ul>
+            <li><b>Constituci&oacute;n Pol&iacute;tica de los Estados Unidos Mexicanos</b>, art&iacute;culo 115, fracciones III y IV.</li>
+            <li><b>Ley de Coordinaci&oacute;n Fiscal</b>: art&iacute;culos 2-A y 6&ordm; para participaciones municipales; 32 a 35 para el FISMDF; 36 y 37 para el FORTAMUN.</li>
+            <li><b>Presupuesto de Egresos de la Federaci&oacute;n 2026</b>, Anexo 22: cifra al peso de los ocho fondos del Ramo 33.</li>
+            <li><b>INEGI, Estad&iacute;stica de Finanzas P&uacute;blicas Estatales y Municipales (EFIPEM)</b>,
+              conjunto de datos municipal, ejercicio 2024, cifras definitivas: lo que ingres&oacute;
+              cada municipio del pa&iacute;s, concepto por concepto.</li>
+            <li><b>Cat&aacute;logo de Entidades, Municipios y Localidades del INEGI</b>: el padr&oacute;n de los
+              2,479 municipios, con su clave oficial.</li>
+          </ul>
+          <p class="ef-nota">
+            El FORTAMUN y el FISMDF del cuadro nacional son cifras oficiales del Anexo 22 del
+            Presupuesto de Egresos 2026. El padr&oacute;n municipal y los agregados de predial, derechos y
+            participaciones proceden de la <b>EFIPEM 2024</b> del INEGI, que es la &uacute;nica fuente
+            nacional que desciende al municipio: el Presupuesto de Egresos no lo hace. Son
+            cifras de ejercicios distintos y no deben sumarse entre s&iacute;. Los agregados nacionales
+            van marcados como <b>derivados</b> porque son la suma de las cuentas de los
+            <b>2,380 municipios que rindieron la suya</b>, de los 2,479 del cat&aacute;logo; los 99
+            restantes aparecen en la lista sin cifra, no en ceros.
+          </p>
+        </div>
+
+      </div>
+      <!-- FIN SUBPANEL MUNICIPIOS -->
+
     </div><!-- FIN PESTAÑA 2 -->
 
 
@@ -2034,7 +2235,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926c</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926d</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2178,16 +2379,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926c"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926d"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926c"></script>
+  <script src="assets/js/audit-database.js?v=20260926d"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926c"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926d"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926c"></script>
+  <script src="assets/js/audit-engine.js?v=20260926d"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
