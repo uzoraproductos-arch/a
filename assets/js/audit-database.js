@@ -4508,6 +4508,54 @@ window.AUDIT_DB = {
   ],
   "glosario": [
     {
+      "termino": "Remuneraci\u00f3n Total Anual Neta",
+      "definicion": "Lo que una persona servidora p\u00fablica recibe en un a\u00f1o despu\u00e9s del impuesto sobre la renta: su sueldo, sus prestaciones y los pagos que se cubren una vez al a\u00f1o, como el aguinaldo. El Presupuesto de Egresos la publica para los cargos de mayor rango en su Anexo 23. Es la medida que permite comparar cargos entre s\u00ed, porque todos se cuentan igual: en neto y por a\u00f1o.",
+      "ley": "Art. 127 CPEUM \u00b7 Ley Federal de Remuneraciones de los Servidores P\u00fablicos \u00b7 PEF 2026, Anexo 23",
+      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+    },
+    {
+      "termino": "Dieta Legislativa",
+      "definicion": "Nombre que recibe la remuneraci\u00f3n de diputadas, diputados, senadoras y senadores. El Presupuesto la registra como su sueldo base. La Constituci\u00f3n prev\u00e9 que quien falte a una sesi\u00f3n sin causa justificada o sin permiso pierde la dieta de ese d\u00eda.",
+      "ley": "Art. 64 CPEUM",
+      "categoria": "\ud83d\uddf3\ufe0f Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Ramo 01 (Poder Legislativo)",
+      "definicion": "Ramo del Presupuesto de Egresos que re\u00fane a la C\u00e1mara de Diputados, la C\u00e1mara de Senadores y la Auditor\u00eda Superior de la Federaci\u00f3n. Para 2026 se le aprobaron $17,529.1 millones de pesos, sin cambios respecto del proyecto.",
+      "ley": "PEF 2026, Anexos 1 y 32 (DOF 21-11-2025)",
+      "categoria": "\ud83d\uddf3\ufe0f Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Unidad Responsable",
+      "definicion": "Cada \u00e1rea u \u00f3rgano al que el Presupuesto asigna dinero dentro de un ramo y que rinde cuentas por su ejercicio. En el Ramo 03, por ejemplo, la Suprema Corte es la unidad 100 y el \u00d3rgano de Administraci\u00f3n Judicial la 120.",
+      "ley": "Art. 2 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+    },
+    {
+      "termino": "Cap\u00edtulo de Gasto",
+      "definicion": "El nivel m\u00e1s general del Clasificador por Objeto del Gasto: agrupa lo que se paga seg\u00fan su naturaleza. El 1000 son servicios personales (la n\u00f3mina), el 2000 materiales y suministros, el 3000 servicios generales, el 4000 transferencias, el 5000 bienes muebles e inmuebles y el 6000 inversi\u00f3n p\u00fablica.",
+      "ley": "Clasificador por Objeto del Gasto (CONAC) \u00b7 Ley General de Contabilidad Gubernamental",
+      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+    },
+    {
+      "termino": "Muestra Auditada",
+      "definicion": "La parte del gasto que la Auditor\u00eda Superior revisa documento por documento, dentro del universo que seleccion\u00f3. Un informe sin observaciones habla de esa muestra, no de todo lo que gast\u00f3 la instituci\u00f3n.",
+      "ley": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n",
+      "categoria": "\ud83d\udd0d Fiscalizaci\u00f3n Superior"
+    },
+    {
+      "termino": "Monto por Aclarar",
+      "definicion": "Recursos que la Auditor\u00eda Superior observ\u00f3 y que la entidad todav\u00eda debe justificar o reintegrar. Es un saldo sujeto a seguimiento: puede solventarse con documentos, recuperarse o derivar en responsabilidades. Por s\u00ed solo no acredita un da\u00f1o.",
+      "ley": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n",
+      "categoria": "\ud83d\udd0d Fiscalizaci\u00f3n Superior"
+    },
+    {
+      "termino": "Tribunal Electoral del Poder Judicial de la Federaci\u00f3n (TEPJF)",
+      "definicion": "M\u00e1xima autoridad jurisdiccional en materia electoral, salvo las acciones de inconstitucionalidad, que resuelve la Suprema Corte. Funciona con una Sala Superior y Salas Regionales. Para 2026 se le aprobaron $3,749.5 millones de pesos.",
+      "ley": "Art. 99 CPEUM \u00b7 PEF 2026, Anexo 1",
+      "categoria": "\u2696\ufe0f Poder Judicial"
+    },
+    {
       "termino": "Contraloría Social",
       "definicion": "Vigilancia organizada de la ciudadanía sobre la aplicación de recursos públicos en programas y obras que la afectan directamente. No es una figura simbólica: los comités de contraloría social están previstos en la normativa de los programas federales y tienen derecho a recibir información, recorrer la obra y levantar constancias. Su fuerza no está en sancionar, sino en documentar.",
       "ley": "Art. 134 CPEUM · Ley General de Desarrollo Social",
@@ -7165,6 +7213,51 @@ window.AUDIT_DB = {
       "descripcion": "El índice del día en que el Ejecutivo entregó el paquete. Enumera los catorce anexos y permite comprobar cuáles se publicaron como texto y cuáles como imagen escaneada."
     },
     {
+      "num": 71,
+      "id": "ref-asf-cp2024-diputados",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. Informe individual de la auditor\u00eda 2024-0031: C\u00e1mara de Diputados. Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, segunda entrega.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf",
+      "descripcion": "Gasto 2024 de la C\u00e1mara de Diputados: $8,982.9 millones aprobados y $9,371.7 millones pagados (p. 4), con el desglose de su cap\u00edtulo de personal (p. 5). La revisi\u00f3n reporta 26 resultados sin irregularidades en la muestra (p. 43)."
+    },
+    {
+      "num": 72,
+      "id": "ref-asf-cp2024-senado",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. Informe individual de la auditor\u00eda 2024-0032: C\u00e1mara de Senadores. Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, segunda entrega.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0032_a.pdf",
+      "descripcion": "Gasto 2024 del Senado: $4,955.2 millones aprobados, $5,045.7 millones devengados y $4,978.8 millones pagados al 31 de diciembre (pp. 4 y 5), por cap\u00edtulo de gasto."
+    },
+    {
+      "num": 73,
+      "id": "ref-inegi-cnple2025",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estad\u00edstica Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda. (2026). Censo Nacional de Poderes Legislativos Estatales 2025: presentaci\u00f3n de resultados. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf",
+      "descripcion": "Gasto ejercido en 2024 por cada uno de los 32 congresos locales, en millones de pesos corrientes (p. 11)."
+    },
+    {
+      "num": 74,
+      "id": "ref-scjn-ejercicio2026",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Naci\u00f3n. (2026). Estado del ejercicio del presupuesto al 31 de agosto de 2026. SCJN.",
+      "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto-asignado/documento/2026-09/EEP-2026-08.pdf",
+      "descripcion": "Las 127 partidas de la Corte con su presupuesto original, modificado, comprometido, ejercido y disponible. Al corte, de $5,230.1 millones modificados se hab\u00edan ejercido $3,253.8 millones."
+    },
+    {
+      "num": 75,
+      "id": "ref-oaj-trimestre2026",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "\u00d3rgano de Administraci\u00f3n Judicial. (2026). Presupuesto ejercido: cierre del segundo trimestre de 2026. OAJ.",
+      "url": "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet001.htm",
+      "descripcion": "Presupuesto asignado y pagado del \u00d3rgano de Administraci\u00f3n Judicial entre el 1 de abril y el 30 de junio de 2026, por cap\u00edtulo, por unidad ejecutora y por partida."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -7349,18 +7442,18 @@ window.AUDIT_DB = {
       "id": "ref-pef-ramo03",
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
-      "cita_apa": "Cámara de Diputados. (2024–2026). Presupuesto de Egresos de la Federación: Tomo VII, Ramo 03 'Poder Judicial de la Federación' (SCJN, CJF, TEPJF). Secretaría de Hacienda y Crédito Público (SHCP).",
-      "url": "https://www.transparenciapresupuestaria.gob.mx/",
-      "descripcion": "Asignación presupuestaria histórica consolidada del Ramo 03 ($78,327 millones de pesos aprobados), de los cuales la Suprema Corte de Justicia de la Nación ejerce directamente cerca de $5,900 millones anuales. Documenta que el 80.2% del presupuesto del Poder Judicial se concentra en el Capítulo 1000 (Servicios Personales), con un costo consolidado anual de $376.2 millones de pesos para las 11 ponencias (~$34.2 mdp anuales por ministro ponente), proyectado a reducirse a ~$216 mdp anuales con el nuevo Pleno austero de 9 ministros."
+      "cita_apa": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico. (2026). Presupuesto de Egresos de la Federaci\u00f3n 2026. Ramo 03, Poder Judicial: an\u00e1lisis administrativo econ\u00f3mico. SHCP.",
+      "url": "https://www.pef.hacienda.gob.mx/work/models/P3f26115/PEF2026/y6k1r4r1/docs/03/r03_aae.pdf",
+      "descripcion": "Presupuesto aprobado 2026 del Ramo 03 por unidad responsable: $70,005.6 millones de pesos. La Suprema Corte tiene $5,208.7 millones; el \u00d3rgano de Administraci\u00f3n Judicial, $59,190.8 millones; el Tribunal Electoral, $3,749.5 millones, y el Tribunal de Disciplina Judicial, $1,856.6 millones. Las cifras cuadran con el Anexo 1 del Decreto de Presupuesto (DOF 21-11-2025, p. 32)."
     },
     {
       "num": 22,
       "id": "ref-manual-remun-pjf",
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
-      "cita_apa": "Suprema Corte de Justicia de la Nación, & Consejo de la Judicatura Federal. (2024–2025). Manual que regula las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación. Diario Oficial de la Federación (México).",
-      "url": "https://www.dof.gob.mx/",
-      "descripcion": "Tabulador oficial institucional que desglosa sueldos base, compensaciones garantizadas y el paquete de compensaciones extraordinarias complementario, estimado en más de $1.7 millones de pesos anuales por ministro por encima del salario tabular. Incluye el Seguro de Separación Individualizado (SSI de hasta 10% del sueldo con aportación idéntica del erario), Seguro de Gastos Médicos Mayores (SGMM con pólizas privadas de $30 a $50 mdp), aguinaldo y asignación de vehículos blindados de alta gama."
+      "cita_apa": "Poder Judicial de la Federaci\u00f3n. (2026, 27 de febrero). Manual que regula las remuneraciones de las personas servidoras p\u00fablicas del Poder Judicial de la Federaci\u00f3n para el ejercicio fiscal 2026. Diario Oficial de la Federaci\u00f3n.",
+      "url": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF",
+      "descripcion": "Tabulador 2026 del Poder Judicial de la Federaci\u00f3n. Una ministra o un ministro de la Suprema Corte percibe como m\u00e1ximo $134,310 de sueldo neto mensual (p. 8) y $290,273 netos al a\u00f1o de aguinaldo y prima vacacional (p. 9)."
     },
     {
       "num": 23,
@@ -14461,6 +14554,1631 @@ window.AUDIT_DB = {
       "texto": "Al trabajador se le descuenta 2.375% del salario base m\u00e1s 0.40% de la parte que excede tres UMA. El patr\u00f3n aporta, por el mismo trabajador, el retiro, las guarder\u00edas, la vivienda, los riesgos de trabajo y la parte mayor de cada ramo compartido. Nada de eso aparece en la n\u00f3mina que el trabajador recibe."
     }
   ]
-}
+},
+"poderes": {
+    "consulta": "2026-09-25",
+    "nota": "Pesos nominales. \u00abAprobado\u00bb es autorizaci\u00f3n de gasto, no dinero pagado. Cada cifra conserva su documento, su p\u00e1gina y su estado: oficial (transcrita), derivado (calculada, con la operaci\u00f3n dicha) o pendiente. Las vistas de un mismo dinero no se suman entre s\u00ed.",
+    "fuentes": {
+      "PEF": {
+        "corto": "PEF 2026, DOF 21-11-2025",
+        "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n 2026, DOF 21-11-2025 (edici\u00f3n vespertina)",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf",
+        "sha256": "6db4a86b588a0f76928e5d61298579c4aff2c29c3ace68fdedbfa5afceb8f2bc"
+      },
+      "UR": {
+        "corto": "SHCP, Ramo 03 por unidad responsable",
+        "doc": "PEF 2026, Ramo 03, an\u00e1lisis administrativo econ\u00f3mico (SHCP, enero 2026)",
+        "url": "https://www.pef.hacienda.gob.mx/work/models/P3f26115/PEF2026/y6k1r4r1/docs/03/r03_aae.pdf"
+      },
+      "COG": {
+        "corto": "SHCP, Ramo 03 por cap\u00edtulo y concepto",
+        "doc": "PEF 2026, Ramo 03, distribuci\u00f3n por unidad responsable, cap\u00edtulo y concepto (SHCP, enero 2026)",
+        "url": "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf"
+      },
+      "SCJN_AGO": {
+        "corto": "SCJN, ejercicio al 31-08-2026",
+        "doc": "SCJN, estado del ejercicio del presupuesto al 31 de agosto de 2026",
+        "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto-asignado/documento/2026-09/EEP-2026-08.pdf"
+      },
+      "SCJN_JUN": {
+        "corto": "SCJN, enero-junio 2026",
+        "doc": "SCJN, estado anal\u00edtico del ejercicio del presupuesto, enero-junio 2026",
+        "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-07/Estado-Analitico-Ejercicio-Presupuesto-2026-Trim-02.pdf"
+      },
+      "SCJN_2025": {
+        "corto": "SCJN, cierre 2025",
+        "doc": "SCJN, estado anal\u00edtico del ejercicio del presupuesto, enero-diciembre 2025",
+        "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-01/Estado-Analitico-Ejercicio-Presupuesto-2025-Trim-04.pdf"
+      },
+      "MANUAL": {
+        "corto": "Manual de remuneraciones PJF 2026, DOF 27-02-2026",
+        "doc": "Manual de remuneraciones de las personas servidoras p\u00fablicas del Poder Judicial de la Federaci\u00f3n 2026, DOF 27-02-2026",
+        "url": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF"
+      },
+      "OAJ_CAP": {
+        "corto": "OAJ, 2.\u00ba trimestre 2026 por cap\u00edtulo",
+        "doc": "OAJ, presupuesto ejercido por cap\u00edtulo, segundo trimestre 2026 (1 de abril a 30 de junio)",
+        "url": "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet001.htm"
+      },
+      "OAJ_UEG": {
+        "corto": "OAJ, 2.\u00ba trimestre 2026 por unidad",
+        "doc": "OAJ, pagos por unidad ejecutora, segundo trimestre 2026",
+        "url": "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet007.htm"
+      },
+      "ASF_DIP": {
+        "corto": "ASF, auditor\u00eda 31 (Diputados)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 31: C\u00e1mara de Diputados (segunda entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf"
+      },
+      "ASF_SEN": {
+        "corto": "ASF, auditor\u00eda 32 (Senado)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 32: C\u00e1mara de Senadores (segunda entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0032_a.pdf"
+      },
+      "ASF_NL": {
+        "corto": "ASF, auditor\u00eda 1402 (Congreso de NL)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 1402: Congreso de Nuevo Le\u00f3n (tercera entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1402_a.pdf"
+      },
+      "ASF_TLX": {
+        "corto": "ASF, auditor\u00eda 1940 (Congreso de Tlaxcala)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 1940: Congreso de Tlaxcala (tercera entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1940_a.pdf"
+      },
+      "CNPLE": {
+        "corto": "INEGI, CNPLE 2025",
+        "doc": "INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, resultados (ejercicio 2024)",
+        "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf"
+      }
+    },
+    "gastoNetoTotal": {
+      "valor": 10193683700000,
+      "estado": "oficial",
+      "fuente": "PEF",
+      "pagina": "Anexo 1, DOF p. 32"
+    },
+    "ramos2026": {
+      "legislativo": {
+        "ramo": "01",
+        "nombre": "Poder Legislativo",
+        "aprobado": 17529076499,
+        "proyecto": 17529076499,
+        "unidades": [
+          {
+            "id": "diputados",
+            "nombre": "C\u00e1mara de Diputados",
+            "aprobado": 9602671330,
+            "proyecto": 9602671330
+          },
+          {
+            "id": "senado",
+            "nombre": "C\u00e1mara de Senadores",
+            "aprobado": 5103817038,
+            "proyecto": 5103817038
+          },
+          {
+            "id": "asf",
+            "nombre": "Auditor\u00eda Superior de la Federaci\u00f3n",
+            "aprobado": 2822588131,
+            "proyecto": 2822588131
+          }
+        ],
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 1, DOF p. 32; proyecto y recorte: Anexo 32, DOF p. 108"
+      },
+      "judicial": {
+        "ramo": "03",
+        "nombre": "Poder Judicial de la Federaci\u00f3n",
+        "aprobado": 70005628646,
+        "proyecto": 85960228646,
+        "unidades": [
+          {
+            "id": "oaj",
+            "ur": "120",
+            "nombre": "\u00d3rgano de Administraci\u00f3n Judicial",
+            "aprobado": 59190814696,
+            "proyecto": 74224414696
+          },
+          {
+            "id": "scjn",
+            "ur": "100",
+            "nombre": "Suprema Corte de Justicia de la Naci\u00f3n",
+            "aprobado": 5208743404,
+            "proyecto": 5869743404
+          },
+          {
+            "id": "tepjf",
+            "ur": "210 y 211",
+            "nombre": "Tribunal Electoral del Poder Judicial de la Federaci\u00f3n",
+            "aprobado": 3749492877,
+            "proyecto": 4009492877
+          },
+          {
+            "id": "tdj",
+            "ur": "300",
+            "nombre": "Tribunal de Disciplina Judicial",
+            "aprobado": 1856577669,
+            "proyecto": 1856577669
+          }
+        ],
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 1, DOF p. 32; proyecto y recorte: Anexo 32, DOF p. 108"
+      }
+    },
+    "remuneraciones2026": [
+      {
+        "id": "presidencia",
+        "cargo": "Presidenta de la Rep\u00fablica",
+        "ente": "Poder Ejecutivo Federal",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "netoAnual": 2073878,
+        "brutoAnual": 2882131,
+        "isrAnual": 808253,
+        "aguinaldo": 105258,
+        "aguinaldoNota": "Aguinaldo sobre sueldo base; la gratificaci\u00f3n de fin de a\u00f1o sobre compensaci\u00f3n garantizada es aparte ($282,074 brutos).",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.1.3, DOF p. 59",
+        "nota": "Remuneraci\u00f3n total anual neta de percepciones ordinarias 2026."
+      },
+      {
+        "id": "senado",
+        "cargo": "Senadora o senador",
+        "ente": "C\u00e1mara de Senadores \u00b7 Ramo 01",
+        "icono": "\u2696\ufe0f",
+        "netoAnual": 2037848,
+        "brutoAnual": 2822953,
+        "isrAnual": 785105,
+        "aguinaldo": 382207,
+        "aguinaldoNota": "Aguinaldo bruto sobre la dieta.",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.2.2, DOF p. 61",
+        "nota": "El propio anexo aclara que corresponde a las percepciones de 2025."
+      },
+      {
+        "id": "asf",
+        "cargo": "Auditor Superior de la Federaci\u00f3n",
+        "ente": "Auditor\u00eda Superior de la Federaci\u00f3n \u00b7 Ramo 01",
+        "icono": "\ud83d\udd0e",
+        "netoAnual": 2037546,
+        "brutoAnual": 2849965,
+        "isrAnual": 812419,
+        "aguinaldo": 89058,
+        "aguinaldoNota": "Aguinaldo bruto sobre sueldo base; la gratificaci\u00f3n de fin de a\u00f1o es aparte ($297,065 brutos).",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.4.3, DOF p. 73",
+        "nota": "Remuneraci\u00f3n total anual neta de la m\u00e1xima representaci\u00f3n de la ASF."
+      },
+      {
+        "id": "diputados",
+        "cargo": "Diputada o diputado federal",
+        "ente": "C\u00e1mara de Diputados \u00b7 Ramo 01",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "netoAnual": 1307224,
+        "brutoAnual": 1710677,
+        "isrAnual": 403453,
+        "aguinaldo": 147438,
+        "aguinaldoNota": "Aguinaldo bruto sobre la dieta.",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.3.4, DOF p. 68",
+        "nota": "El propio anexo aclara que corresponde a las percepciones de 2025."
+      },
+      {
+        "id": "ministro",
+        "cargo": "Ministra o ministro de la SCJN",
+        "ente": "Suprema Corte de Justicia \u00b7 Ramo 03",
+        "icono": "\u2696\ufe0f",
+        "netoMensualTabulado": 134310,
+        "aguinaldoPrimaNetos": 290273,
+        "netoAnual": 1901993,
+        "netoAnualEstado": "derivado",
+        "netoAnualOperacion": "12 \u00d7 $134,310 de sueldo neto tabulado + $290,273 de aguinaldo y prima vacacional netos",
+        "aguinaldo": 290273,
+        "aguinaldoNota": "Aguinaldo y prima vacacional netos, juntos (Manual, p. 9).",
+        "estado": "oficial",
+        "fuente": "MANUAL",
+        "pagina": "pp. 8 y 9",
+        "parcial": true,
+        "nota": "Cifra parcial: el Manual publica el sueldo neto tabulado y el aguinaldo con la prima; no incluye seguros ni aportaciones de seguridad social, que s\u00ed entran en la remuneraci\u00f3n total de los otros cargos. En el Decreto, los tabuladores de la Corte vienen como imagen (Anexo 23.5)."
+      }
+    ],
+    "judicial": {
+      "capitulosPorUR": {
+        "RAMO03": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 62257909570,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 667533897,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 6663246322,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 58799179,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 343869378,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 2
+          },
+          {
+            "cap": "6000",
+            "concepto": "Inversi\u00f3n p\u00fablica",
+            "aprobado": 14270300,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 2
+          }
+        ],
+        "100": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 4289319105,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 67002322,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 825658834,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 17262862,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 5500281,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "6000",
+            "concepto": "Inversi\u00f3n p\u00fablica",
+            "aprobado": 4000000,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          }
+        ],
+        "120": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 53562949305,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 549744012,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 5051355262,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 26766117,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          }
+        ],
+        "210": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 2353552670,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 44881169,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 414756297,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 14770200,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 93590235,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          },
+          {
+            "cap": "6000",
+            "concepto": "Inversi\u00f3n p\u00fablica",
+            "aprobado": 10270300,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          }
+        ],
+        "211": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 710847874,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 3061097,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 100984173,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 2778862,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          }
+        ],
+        "300": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 1341240616,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 2845297,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 8
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 270491756,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 8
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 242000000,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 8
+          }
+        ]
+      },
+      "scjnCortes": [
+        {
+          "corte": "2025-12-31",
+          "concepto": "Servicios personales",
+          "aprobado": 4475993376,
+          "modificado": 4467514725,
+          "devengado": 4467514725,
+          "pagado": 4351050362,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Materiales y Suministros",
+          "aprobado": 54644881,
+          "modificado": 48742161,
+          "devengado": 48742161,
+          "pagado": 46027009,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Servicios Generales",
+          "aprobado": 656572072,
+          "modificado": 723055502,
+          "devengado": 723055502,
+          "pagado": 626511742,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Transferencias, Asignaciones, Subsidios y Otras Ayudas",
+          "aprobado": 15151534,
+          "modificado": 6282854,
+          "devengado": 6282854,
+          "pagado": 6282854,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Bienes Muebles, Inmuebles e Intangibles",
+          "aprobado": 2275525,
+          "modificado": 27517693,
+          "devengado": 27517693,
+          "pagado": 1576747,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Inversi\u00f3n P\u00fablica",
+          "aprobado": 3873776,
+          "modificado": 671866,
+          "devengado": 671866,
+          "pagado": 671866,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Total",
+          "aprobado": 5208511164,
+          "modificado": 5273784802,
+          "devengado": 5273784802,
+          "pagado": 5032120580,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Servicios personales",
+          "aprobado": 4289319105,
+          "modificado": 4289319105,
+          "devengado": 2169374535,
+          "pagado": 1875481661,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Materiales y Suministros",
+          "aprobado": 67002322,
+          "modificado": 68764711,
+          "devengado": 19200927,
+          "pagado": 16545316,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Servicios Generales",
+          "aprobado": 825658834,
+          "modificado": 823368416,
+          "devengado": 314786427,
+          "pagado": 208901861,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Transferencias, Asignaciones, Subsidios y Otras Ayudas",
+          "aprobado": 17262862,
+          "modificado": 16663122,
+          "devengado": 316350,
+          "pagado": 316350,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Bienes Muebles, Inmuebles e Intangibles",
+          "aprobado": 5500281,
+          "modificado": 6628049,
+          "devengado": 13340,
+          "pagado": 13340,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Inversi\u00f3n P\u00fablica",
+          "aprobado": 4000000,
+          "modificado": 4000000,
+          "devengado": 0,
+          "pagado": 0,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Total",
+          "aprobado": 5208743404,
+          "modificado": 5208743404,
+          "devengado": 2503691579,
+          "pagado": 2101258527,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        }
+      ],
+      "scjnAgosto": {
+        "original": 5208743404,
+        "modificado": 5230072515.57,
+        "compromiso": 1707440588.3,
+        "ejercido": 3253791174.26,
+        "disponible": 268840753.01,
+        "estado": "oficial",
+        "fuente": "SCJN_AGO",
+        "pagina": 1,
+        "nota": "Compromiso + ejercido + disponible = modificado. \u00abEjercido\u00bb no se renombra como pagado."
+      },
+      "oajCapitulos": [
+        {
+          "cap": "1000",
+          "concepto": "Servicios personales",
+          "anualShcp": 53562949305,
+          "anualOaj": 53562949305,
+          "diferencia": 0,
+          "asignadoTrim": 13724140940,
+          "pagadoTrim": 12806170765.02,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "2000",
+          "concepto": "Materiales y suministros",
+          "anualShcp": 549744012,
+          "anualOaj": 549744012,
+          "diferencia": 0,
+          "asignadoTrim": 177508929,
+          "pagadoTrim": 197114519.57,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "3000",
+          "concepto": "Servicios generales",
+          "anualShcp": 5051355262,
+          "anualOaj": 5040717363,
+          "diferencia": -10637899,
+          "asignadoTrim": 1371654342,
+          "pagadoTrim": 970480484.54,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "4000",
+          "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+          "anualShcp": 26766117,
+          "anualOaj": 37404016,
+          "diferencia": 10637899,
+          "asignadoTrim": 8447123,
+          "pagadoTrim": 3617154.97,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "5000",
+          "concepto": "Bienes muebles, inmuebles e intangibles",
+          "anualShcp": null,
+          "anualOaj": 0,
+          "diferencia": null,
+          "asignadoTrim": 0,
+          "pagadoTrim": 17435.52,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "6000",
+          "concepto": "Inversi\u00f3n p\u00fablica",
+          "anualShcp": null,
+          "anualOaj": 0,
+          "diferencia": null,
+          "asignadoTrim": 0,
+          "pagadoTrim": 0,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        }
+      ],
+      "oajNota": "SHCP y OAJ difieren en $10,637,899 entre los cap\u00edtulos 3000 y 4000; el total coincide. La causa est\u00e1 pendiente.",
+      "circuitos": [
+        {
+          "n": 1,
+          "ueg": "1201",
+          "sede": "Primer Circuito Judicial (CDMX)",
+          "pagado": 611259,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 2,
+          "ueg": "1202",
+          "sede": "Segundo Circuito Judicial (Toluca, Edo.M\u00e9x)",
+          "pagado": 7452576.74,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 3,
+          "ueg": "1203, 1234",
+          "sede": "Tercer Circuito Judicial (Zapopan, Jal.) / Tercer Circuito Judicial (Puente Grande, Jal.)",
+          "pagado": 18254958.7,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 4,
+          "ueg": "1204",
+          "sede": "Cuarto Circuito Judicial (Monterrey, N.L.)",
+          "pagado": 33024990.12,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 5,
+          "ueg": "1205",
+          "sede": "Quinto Circuito Judicial (Hermosillo, Son.)",
+          "pagado": 7315564.33,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 6,
+          "ueg": "1206",
+          "sede": "Sexto Circuito Judicial (San Andr\u00e9s Cholula, Pue.)",
+          "pagado": 12409610.1,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 7,
+          "ueg": "1207, 1237",
+          "sede": "S\u00e9ptimo Circuito Judicial (Boca del R\u00edo, Ver.) / S\u00e9ptimo Circuito Judicial (Xalapa, Ver.)",
+          "pagado": 10913074.25,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 8,
+          "ueg": "1208, 1240",
+          "sede": "Octavo Circuito Judicial (Torre\u00f3n, Coah. y Mpios Durango) / Octavo Circuito Judicial (Saltillo, Coah.)",
+          "pagado": 16064947.53,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 9,
+          "ueg": "1209",
+          "sede": "Noveno Circuito Judicial (San Luis Potos\u00ed, S.L.P.)",
+          "pagado": 3314426.95,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 10,
+          "ueg": "1210, 1241",
+          "sede": "D\u00e9cimo Circuito Judicial (Villahermosa, Tab. y Mpios Veracruz) / D\u00e9cimo Circuito Judicial (Coatzacoalcos, Ver.)",
+          "pagado": 18336897.19,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 11,
+          "ueg": "1211",
+          "sede": "D\u00e9cimo Primer Circuito Judicial (Morelia, Mich.)",
+          "pagado": 10355254.09,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 12,
+          "ueg": "1212, 1236",
+          "sede": "D\u00e9cimo Segundo Circuito Judicial (Mazatl\u00e1n, Sin.) / D\u00e9cimo Segundo Circuito Judicial (Culiac\u00e1n, Sin.)",
+          "pagado": 8353707.55,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 13,
+          "ueg": "1213",
+          "sede": "D\u00e9cimo Tercer Circuito Judicial (Oaxaca, Oax.)",
+          "pagado": 6825043.72,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 14,
+          "ueg": "1214",
+          "sede": "D\u00e9cimo Cuarto Circuito Judicial (M\u00e9rida, Yuc.)",
+          "pagado": 4822788.21,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 15,
+          "ueg": "1215, 1235",
+          "sede": "D\u00e9cimo Quinto Circuito Judicial (Mexicali, B.C. y Mpio Sonora) / D\u00e9cimo Quinto Circuito Judicial (Tijuana, B.C.)",
+          "pagado": 20542426.28,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 16,
+          "ueg": "1216",
+          "sede": "D\u00e9cimo Sexto Circuito Judicial (Guanajuato, Gto.)",
+          "pagado": 10004825.45,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 17,
+          "ueg": "1217, 1233",
+          "sede": "D\u00e9cimo S\u00e9ptimo Circuito Judicial (Chihuahua, Chih.) / D\u00e9cimo S\u00e9ptimo Circuito Judicial (Ciudad Juarez, Chih.)",
+          "pagado": 7296662.55,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 18,
+          "ueg": "1218",
+          "sede": "D\u00e9cimo Octavo Circuito Judicial (Cuernavaca, Morelos)",
+          "pagado": 5936146.39,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 19,
+          "ueg": "1219",
+          "sede": "D\u00e9cimo Noveno Circuito Judicial (Ciudad Victoria, Tamps.)",
+          "pagado": 11234628.05,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 20,
+          "ueg": "1220",
+          "sede": "Vig\u00e9simo Circuito Judicial (Tuxtla Guti\u00e9rrez, Chis.)",
+          "pagado": 6628393.69,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 21,
+          "ueg": "1221, 1232",
+          "sede": "Vig\u00e9simo Primer Circuito Judicial (Chilpancingo, Gro.) / Vig\u00e9simo Primer Circuito Judicial (Acapulco, Gro.)",
+          "pagado": 7514150.77,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 22,
+          "ueg": "1222",
+          "sede": "Vig\u00e9simo Segundo Circuito Judicial (Quer\u00e9taro, Qro.)",
+          "pagado": 7798582.14,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 23,
+          "ueg": "1223",
+          "sede": "Vig\u00e9simo Tercer Circuito Judicial (Zacatecas, Zac.)",
+          "pagado": 1998582.99,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 24,
+          "ueg": "1224",
+          "sede": "Vig\u00e9simo Cuarto Circuito Judicial (Tepic, Nay.)",
+          "pagado": 5657375.49,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 25,
+          "ueg": "1225",
+          "sede": "Vig\u00e9simo Quinto Circuito Judicial (Durango, Dgo.)",
+          "pagado": 2092749.34,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 26,
+          "ueg": "1226",
+          "sede": "Vig\u00e9simo Sexto Circuito Judicial (La Paz, B.C. Sur)",
+          "pagado": 2153188.73,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 27,
+          "ueg": "1227",
+          "sede": "Vig\u00e9simo S\u00e9ptimo Circuito Judicial (Canc\u00fan, Q. Roo)",
+          "pagado": 5166173.8,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 28,
+          "ueg": "1228",
+          "sede": "Vig\u00e9simo Octavo Circuito Judicial (Tlaxcala, Tlax.)",
+          "pagado": 5647310.8,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 29,
+          "ueg": "1229",
+          "sede": "Vig\u00e9simo Noveno Circuito Judicial (Pachuca, Hgo.)",
+          "pagado": 5334231.79,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 30,
+          "ueg": "1231",
+          "sede": "Trig\u00e9simo Circuito Judicial (Aguascalientes, Ags.)",
+          "pagado": 3292365.24,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 31,
+          "ueg": "1238",
+          "sede": "Trig\u00e9simo Primer Circuito Judicial (Campeche, Camp.)",
+          "pagado": 8257685.48,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 32,
+          "ueg": "1239",
+          "sede": "Trig\u00e9simo Segundo Circuito Judicial (Colima, Col.)",
+          "pagado": 2620311.02,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        }
+      ],
+      "circuitosNota": "Pagos registrados en las unidades ejecutoras de cada circuito entre abril y junio de 2026. Son pagos parciales: excluyen la n\u00f3mina, que se paga de forma centralizada. No son el costo del circuito.",
+      "pendientes": [
+        "Costo completo por circuito",
+        "Costo completo por ponencia de la SCJN"
+      ]
+    },
+    "legislativo": {
+      "ejercicio2024": [
+        {
+          "institucion": "Diputados",
+          "concepto": "Aprobado",
+          "pesos": 8982854400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 4
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Modificado",
+          "pesos": 9371736500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 4
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Pagado",
+          "pesos": 9371736500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 4
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Universo de egresos seleccionado",
+          "pesos": 6833879400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 1
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Muestra de egresos",
+          "pesos": 6537228200,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 1
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Aprobado",
+          "pesos": 4955182000,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 4
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Modificado",
+          "pesos": 5045707600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 4
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Devengado",
+          "pesos": 5045707600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Pagado al 31 de diciembre",
+          "pesos": 4978781800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Pendiente de pago al cierre; pagado en 2025",
+          "pesos": 66925800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 1
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Universo de egresos seleccionado",
+          "pesos": 5045707600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 1
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Muestra de egresos",
+          "pesos": 3560328500,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 1
+        }
+      ],
+      "resultadosAsf": [
+        {
+          "institucion": "Diputados",
+          "texto": "26 resultados sin irregularidades detectadas en la muestra revisada.",
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 43
+        },
+        {
+          "institucion": "Senado",
+          "texto": "25 resultados sin irregularidades y dos solventados antes del informe, en la muestra revisada.",
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 31
+        }
+      ],
+      "personalDiputados2024": [
+        {
+          "partida": "1110",
+          "concepto": "Dietas",
+          "pesos": 623908000,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1130",
+          "concepto": "Sueldos base",
+          "pesos": 563826500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1210",
+          "concepto": "Honorarios asimilables",
+          "pesos": 913432500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1230",
+          "concepto": "Servicio social",
+          "pesos": 1200000,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1310",
+          "concepto": "Primas por antig\u00fcedad",
+          "pesos": 7954300,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1320",
+          "concepto": "Primas vacacionales y gratificaci\u00f3n anual",
+          "pesos": 391828200,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1330",
+          "concepto": "Horas extraordinarias",
+          "pesos": 963400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1340",
+          "concepto": "Compensaciones",
+          "pesos": 1005303500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1410",
+          "concepto": "Seguridad social",
+          "pesos": 144181800,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1420",
+          "concepto": "Fondos de vivienda",
+          "pesos": 55008800,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1430",
+          "concepto": "Sistema de retiro",
+          "pesos": 32287600,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1440",
+          "concepto": "Seguros",
+          "pesos": 95602500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1520",
+          "concepto": "Indemnizaciones",
+          "pesos": 547396400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1530",
+          "concepto": "Prestaciones y haberes de retiro",
+          "pesos": 93773900,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1540",
+          "concepto": "Prestaciones contractuales",
+          "pesos": 957800000,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1590",
+          "concepto": "Otras prestaciones",
+          "pesos": 350115600,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1710",
+          "concepto": "Est\u00edmulos",
+          "pesos": 183452500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        }
+      ],
+      "senadoCapitulos2024": [
+        {
+          "cap": "1000",
+          "concepto": "Servicios personales",
+          "devengado": 3274276000,
+          "pagado": 3259885800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "2000",
+          "concepto": "Materiales y suministros",
+          "devengado": 83699000,
+          "pagado": 81146600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "3000",
+          "concepto": "Servicios generales",
+          "devengado": 1653842600,
+          "pagado": 1610384500,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "4000",
+          "concepto": "Transferencias y ayudas",
+          "devengado": 8751200,
+          "pagado": 8751200,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "5000",
+          "concepto": "Bienes e intangibles",
+          "devengado": 19761000,
+          "pagado": 13235900,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "6000",
+          "concepto": "Inversi\u00f3n p\u00fablica",
+          "devengado": 5377800,
+          "pagado": 5377800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        }
+      ],
+      "congresos2024": [
+        {
+          "entidad": "Ciudad de M\u00e9xico",
+          "ejercicio": 2024,
+          "ejercidoMdp": 2044,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Michoac\u00e1n",
+          "ejercicio": 2024,
+          "ejercidoMdp": 1324.5,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Jalisco",
+          "ejercicio": 2024,
+          "ejercidoMdp": 922.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Baja California",
+          "ejercicio": 2024,
+          "ejercidoMdp": 769.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Oaxaca",
+          "ejercicio": 2024,
+          "ejercidoMdp": 729.3,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Chihuahua",
+          "ejercicio": 2024,
+          "ejercidoMdp": 676.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Guerrero",
+          "ejercicio": 2024,
+          "ejercidoMdp": 671.9,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Sinaloa",
+          "ejercicio": 2024,
+          "ejercidoMdp": 606.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Estado de M\u00e9xico",
+          "ejercicio": 2024,
+          "ejercidoMdp": 564.1,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Morelos",
+          "ejercicio": 2024,
+          "ejercidoMdp": 542.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Guanajuato",
+          "ejercicio": 2024,
+          "ejercidoMdp": 499.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Quintana Roo",
+          "ejercicio": 2024,
+          "ejercidoMdp": 490.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Sonora",
+          "ejercicio": 2024,
+          "ejercidoMdp": 483.5,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Nuevo Le\u00f3n",
+          "ejercicio": 2024,
+          "ejercidoMdp": 454.3,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Durango",
+          "ejercicio": 2024,
+          "ejercidoMdp": 428.9,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Tlaxcala",
+          "ejercicio": 2024,
+          "ejercidoMdp": 419.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Quer\u00e9taro",
+          "ejercicio": 2024,
+          "ejercidoMdp": 376.1,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Veracruz",
+          "ejercicio": 2024,
+          "ejercidoMdp": 364.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Zacatecas",
+          "ejercicio": 2024,
+          "ejercidoMdp": 341.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Chiapas",
+          "ejercicio": 2024,
+          "ejercidoMdp": 322.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Nayarit",
+          "ejercicio": 2024,
+          "ejercidoMdp": 311.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "San Luis Potos\u00ed",
+          "ejercicio": 2024,
+          "ejercidoMdp": 309.9,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Tamaulipas",
+          "ejercicio": 2024,
+          "ejercidoMdp": 308.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Tabasco",
+          "ejercicio": 2024,
+          "ejercidoMdp": 307.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Aguascalientes",
+          "ejercicio": 2024,
+          "ejercidoMdp": 290.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Hidalgo",
+          "ejercicio": 2024,
+          "ejercidoMdp": 265.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Baja California Sur",
+          "ejercicio": 2024,
+          "ejercidoMdp": 252.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Coahuila",
+          "ejercicio": 2024,
+          "ejercidoMdp": 239.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Campeche",
+          "ejercicio": 2024,
+          "ejercidoMdp": 206.5,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Yucat\u00e1n",
+          "ejercicio": 2024,
+          "ejercidoMdp": 173.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Colima",
+          "ejercicio": 2024,
+          "ejercidoMdp": 120.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Puebla",
+          "ejercicio": 2024,
+          "ejercidoMdp": 115.1,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        }
+      ],
+      "asfCongresos2024": [
+        {
+          "congreso": "Congreso de Nuevo Le\u00f3n",
+          "auditoria": 1402,
+          "concepto": "Universo seleccionado",
+          "pesos": 233044500.0,
+          "estado": "oficial",
+          "fuente": "ASF_NL",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Nuevo Le\u00f3n",
+          "auditoria": 1402,
+          "concepto": "Muestra auditada",
+          "pesos": 233044500.0,
+          "estado": "oficial",
+          "fuente": "ASF_NL",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Nuevo Le\u00f3n",
+          "auditoria": 1402,
+          "concepto": "Monto por aclarar",
+          "pesos": 4507703.95,
+          "estado": "oficial",
+          "fuente": "ASF_NL",
+          "pagina": 26
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Universo seleccionado",
+          "pesos": 151900800.0,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Muestra auditada",
+          "pesos": 151900800.0,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Recuperaciones; incluye cargas financieras",
+          "pesos": 4995755.97,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 29
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Cargas financieras incluidas en recuperaci\u00f3n",
+          "pesos": 97956,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 29
+        }
+      ],
+      "pendientes": [
+        "Remuneraciones individuales de los 32 congresos locales",
+        "N\u00famero de legisladores de cada congreso con su fuente, para el costo por legislador"
+      ]
+    }
+  }
 };
 

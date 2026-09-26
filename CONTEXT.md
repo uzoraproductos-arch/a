@@ -1758,8 +1758,63 @@ Se dejaron fuera, a propósito:
 - Los cinco PDF del Paquete Económico (13 MB): son documentos públicos que se
   descargan de su fuente; el repositorio cita, no aloja.
 
+### Hecho (2.6: lo que cuestan el Congreso y la Judicatura, con sus documentos)
+
+Se integraron los dos libros de trabajo del autor, que ahora viven en
+`investigaciones/`: `Auditavision_Poder_Judicial_2026.xlsx` y
+`Auditavision_Desglose_2024.xlsx`. Se sumaron las cifras del Decreto PEF 2026
+(DOF 21-11-2025), descargado y cotejado por su huella SHA-256 (`6db4a86b…`,
+la misma que registra el libro judicial). Todo entra por
+`herramientas/integrar_poderes.py`, que es idempotente y conserva los CRLF;
+vuelve a correrse si cambian los libros.
+
+- **Nueva colección `AUDIT_DB.poderes`.** Ramo 01 ($17,529.1 mdp) y Ramo 03
+  ($70,005.6 mdp) por unidad, con proyecto contra aprobado (Anexo 32, DOF
+  p. 108: la Cámara recortó $15,954.6 mdp al Judicial); capítulos por unidad
+  responsable; la SCJN al 31 de agosto; el OAJ de abril a junio; los 32
+  circuitos (pagos parciales, derivado); el ejercicio 2024 de Diputados y
+  Senado auditado por la ASF; los 32 congresos locales (INEGI, CNPLE 2025), y
+  dos congresos auditados. Cada registro lleva estado, documento y página.
+- **Por qué 2024 en el Legislativo:** para 2026 solo existe el aprobado; 2024
+  es el último año con gasto ejercido **y** auditado (Cuenta Pública 2024).
+- **Subpestaña 2.6** en Acción Financiera (enciclopedia) y en el menú de la
+  portada. Fondo sólido, 40 chips, 33 enlaces a documento con página.
+- **Comparador «Tú vs Ellos» (2.4 B), corregido.** Decía que un ministro ganaba
+  $206,948 al mes, más que la Presidencia, contra el art. 127. Ahora lee la
+  remuneración total anual **neta** del Anexo 23 del PEF 2026 (Presidenta
+  $2,073,878; Senado $2,037,848; Auditor Superior $2,037,546; Diputados
+  $1,307,224) y, para la Corte, el Manual del PJF 2026 ($134,310 netos al mes,
+  cifra parcial y así rotulada). Compara neto contra neto con el neto que el
+  lector calculó en el Apartado A. Se retiró la tarjeta de «Gobernador
+  promedio», que no tenía documento.
+- **Ticket cívico:** dos renglones nuevos con lo que llega de su ISR a cada
+  Poder (derivado; ya incluido en el reparto, no se suma).
+- **Referencias:** 13 identificadores rotos corregidos (cuatro fallaban en
+  silencio y dos abrían la ficha equivocada) y 10 notas que citaban una ley
+  distinta de la que decían («Art. 134 CPEUM [02]» abría la LFPRH). Las fichas
+  21 y 22 ahora apuntan a su documento exacto, y se sumaron las 71 a 75. Cero
+  identificadores rotos en las dos páginas.
+- **Glosario:** 8 términos nuevos con enlace automático (remuneración total
+  anual neta, dieta, Ramo 01, unidad responsable, capítulo de gasto, muestra
+  auditada, monto por aclarar, TEPJF).
+- **Regreso del glosario:** vuelve a la palabra exacta que se pulsó, en el
+  mismo lugar de la pantalla, y la marca un instante (antes quedaba unos 300 px
+  desplazado).
+
 ### Pendiente
 
+- **Las cifras viejas de las pestañas 3 y 4 contradicen a la 2.6.**
+  `judicial_reservado` dice $78,327 mdp para el Poder Judicial (oficial:
+  $70,005.6), $5,900 para la Corte ($5,208.7) y $68,627 para un CJF que ya no
+  existe; la 4.2 y la 4.4 calculan «costo por ponencia», que el libro judicial
+  marca como pendiente. `legislativo.federal` dice $9,282 mdp para Diputados
+  (2026 aprobado: $9,602.7). Falta decidir con el autor si esas pestañas se
+  reescriben con la colección `poderes` o se funden con la 2.6.
+- **Las 1,056 auditorías municipales de la ASF** (hoja «ASF municipios» del
+  libro 2024) pueden anclar los 83 montos municipales sin referencia de abajo.
+- **Referencias no oficiales por sustituir:** 46 (columna de opinión de El
+  Universal) y 38 (Barra Mexicana de Abogados). 14 fichas apuntan todavía a la
+  página de inicio de su institución y no al documento.
 **Auditoría del 26 de septiembre (versión 20260925a).** Lo agregado del 23 al
 25 de septiembre no cumple todavía la regla editorial. Bloquean la versión
 final, en este orden:

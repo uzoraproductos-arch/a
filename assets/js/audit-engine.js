@@ -1527,54 +1527,6 @@
   /* ==========================================================================
      MODULO 3: COMPARADOR SALARIAL DE CHOQUE (TU VS ELLOS) & APARTADOS A / B
      ========================================================================== */
-  const CARGOS_PUBLICOS_CHOQUE = [
-    {
-      cargo: "Diputado Federal",
-      ente: "Cámara de Diputados · Ramo 01",
-      icono: "🏛️",
-      sueldoMes: 150000,
-      aguinaldo: 140504,
-      prestaciones: "40 días de aguinaldo + fondo de ahorro + seguro médico mayor.",
-      fuente: "PEF 2026 Anexo 23.2 · Remuneración de Diputados Federales"
-    },
-    {
-      cargo: "Senador de la República",
-      ente: "Cámara de Senadores · Ramo 01",
-      icono: "🏛️",
-      sueldoMes: 171450,
-      aguinaldo: 160000,
-      prestaciones: "Dieta mensual neta + apoyos legislativos extraordinarios.",
-      fuente: "Manual de Percepciones del Senado de la República 2026"
-    },
-    {
-      cargo: "Ministro de la SCJN",
-      ente: "Suprema Corte de Justicia · Ramo 03",
-      icono: "⚖️",
-      sueldoMes: 206948,
-      aguinaldo: 440000,
-      prestaciones: "Pago por riesgo (Art. 94) + prima vacacional + fondo de retiro vitalicio.",
-      fuente: "Presupuesto de Egresos PJF 2026 · Tabulador de Mandos Superiores"
-    },
-    {
-      cargo: "Presidente de la República",
-      ente: "Poder Ejecutivo Federal · Ramo 02",
-      icono: "🇲🇽",
-      sueldoMes: 186093,
-      aguinaldo: 95000,
-      prestaciones: "Tope máximo constitucional fijado por el Art. 127 de la CPEUM.",
-      fuente: "PEF 2026 Anexo 23.1 · Percepción del Titular del Ejecutivo"
-    },
-    {
-      cargo: "Gobernador Estatal Promedio",
-      ente: "Poderes Ejecutivos Locales (32 Entidades)",
-      icono: "🗺️",
-      sueldoMes: 135000,
-      aguinaldo: 120000,
-      prestaciones: "Sueldo promedio (en NL, Jalisco y Edomex supera los $160,000/mes).",
-      fuente: "Presupuestos de Egresos Estatales 2025-2026 · Cuentas Públicas Locales"
-    }
-  ];
-
   function switchApartadoCalculadora(apartadoId, btn) {
     const wrapA = document.getElementById("mod3ApartadoAWrapper");
     const wrapB = document.getElementById("mod3ApartadoBWrapper");
@@ -1598,27 +1550,56 @@
     }
   }
 
+  /* Los cargos del comparador salen de DB.poderes.remuneraciones2026: la
+     remuneracion total anual NETA que el Decreto PEF 2026 publica en su
+     Anexo 23 y, para la Corte, el Manual de remuneraciones del PJF (DOF
+     27-02-2026). Neto contra neto: es la unica comparacion honesta. */
+  function cargosComparador() {
+    return (DB.poderes && DB.poderes.remuneraciones2026) || [];
+  }
+
+  /* El ingreso del lector, en neto anual. Si ya saco la cuenta en el
+     Apartado A, se usa su neto calculado; si no, la cifra tal como la
+     escribio, avisando si es bruta. */
+  function comparadorIngresoLector() {
+    const cc = state.cc || {};
+    const res = cc.calculado ? cc.resultado : null;
+    if (res && res.ano && res.ano.neto > 0) {
+      return { anual: res.ano.neto, tipo: 'neto', calculado: true };
+    }
+    const monto = cc.monto > 0 ? cc.monto : 15000;
+    const anual = cc.periodicidad === 'ano' ? monto : monto * 12;
+    return { anual: anual, tipo: cc.naturaleza === 'neto' ? 'neto' : 'bruto', calculado: false };
+  }
+
   function renderComparadorSalarial() {
     const grid = document.getElementById("shockCardsGrid");
     const badge = document.getElementById("shockUserBadge");
     const banner = document.getElementById("shockSummaryBanner");
     if (!grid) return;
 
-    const userMonto = (state.cc && state.cc.monto > 0) ? state.cc.monto : 15000;
-    const esAnual = state.cc && state.cc.periodicidad === "ano";
-    const userMes = esAnual ? (userMonto / 12) : userMonto;
-    const userDia = userMes / 30;
+    const lector = comparadorIngresoLector();
+    const userMes = lector.anual / 12;
+    const userDia = lector.anual / 365;
+    const cargos = cargosComparador();
 
     if (badge) {
-      badge.innerHTML = `Tu ingreso de referencia: <strong>${ccPesos(userMes)} / mes</strong> (${ccPesos(userDia)} / día)`;
+      badge.innerHTML = 'Su ingreso de referencia: <strong>' + ccPesos(userMes) + ' al mes</strong>, ' + lector.tipo +
+        (lector.calculado ? ' (calculado en el Apartado A)' :
+          (lector.tipo === 'bruto' ? '. <em>Es bruto: saque la cuenta en el Apartado A para comparar neto contra neto.</em>' : ''));
     }
 
-    grid.innerHTML = CARGOS_PUBLICOS_CHOQUE.map(c => {
-      const ratio = (c.sueldoMes / userMes).toFixed(1);
-      const diasTrabajo = Math.round(c.sueldoMes / userDia);
-      const mesesAguinaldo = (c.aguinaldo / userMes).toFixed(1);
-      const personasEquiv = Math.floor(c.sueldoMes / userMes);
+    if (!cargos.length) {
+      grid.innerHTML = '<p>' + chipEstado('pendiente') + ' No hay remuneraciones documentadas en la base.</p>';
+      return;
+    }
 
+    grid.innerHTML = cargos.map(c => {
+      const mesCargo = c.netoMensualTabulado || (c.netoAnual / 12);
+      const veces = c.netoAnual / lector.anual;
+      const dias = Math.round(mesCargo / userDia);
+      const fuente = (DB.poderes.fuentes[c.fuente] || {});
+      const pag = /^\d+$/.test(String(c.pagina)) ? 'p. ' + c.pagina : c.pagina;
       return `
         <article class="shock-card">
           <div>
@@ -1628,36 +1609,32 @@
 
             <div class="shock-figure-box">
               <div class="shock-figure-row">
-                <span style="color:var(--text-dim);">Sueldo Mensual:</span>
-                <span class="num-tabular" style="color:var(--gold-bright); font-weight:700;">${ccPesos(c.sueldoMes)}</span>
+                <span style="color:var(--text-dim);">Neto al año${c.parcial ? ' (parcial)' : ''}:</span>
+                <span class="num-tabular" style="color:var(--gold-bright); font-weight:700;">${ccPesos(c.netoAnual)} ${chipEstado(c.netoAnualEstado || c.estado)}</span>
               </div>
               <div class="shock-figure-row">
-                <span style="color:var(--text-dim);">Ingreso Diario:</span>
-                <span class="num-tabular">${ccPesos(c.sueldoMes / 30)}</span>
+                <span style="color:var(--text-dim);">${c.netoMensualTabulado ? 'Sueldo neto al mes:' : 'Equivale al mes:'}</span>
+                <span class="num-tabular">${ccPesos(mesCargo)} ${chipEstado(c.netoMensualTabulado ? 'oficial' : 'derivado')}</span>
               </div>
               <div class="shock-figure-row">
-                <span style="color:var(--text-dim);">Aguinaldo Garantizado:</span>
+                <span style="color:var(--text-dim);">Aguinaldo:</span>
                 <span class="num-tabular" style="color:var(--cyan);">${ccPesos(c.aguinaldo)}</span>
               </div>
+              <div style="font-size:10.5px; color:var(--text-dim); line-height:1.45;">${c.aguinaldoNota}</div>
             </div>
 
             <div class="shock-ratio-highlight">
-              ⚡ Gana ${ratio} veces más que tú
+              ${veces >= 1 ? 'Recibe ' + veces.toFixed(1) + ' veces lo que usted' : 'Recibe menos que usted'} ${chipEstado('derivado')}
             </div>
 
             <div class="shock-metric-pill">
-              ⏳ <strong>${diasTrabajo} días de tu vida:</strong> es lo que tendrías que trabajar sin descanso para igualar un solo mes de su salario.
+              <strong>${formatNumber(dias)} días de su ingreso</strong> equivalen a un solo mes de su remuneración.
             </div>
-            <div class="shock-metric-pill">
-              🎁 <strong>${mesesAguinaldo} meses de tu trabajo:</strong> equivalen exclusivamente a su aguinaldo navideño.
-            </div>
-            <div class="shock-metric-pill">
-              👥 <strong>Equivalencia ciudadana:</strong> con el sueldo de 1 ${c.cargo} se cubren los ingresos de <strong>${personasEquiv} trabajadores</strong> como tú.
-            </div>
+            ${c.parcial ? `<div class="shock-metric-pill">${c.nota}</div>` : ''}
           </div>
 
           <div style="font-size:10px; color:var(--text-dim); margin-top:14px; font-family:var(--font-mono); border-top:1px dashed var(--border-subtle); padding-top:8px;">
-            Fuente: ${c.fuente}
+            Fuente: <a class="pd-fuente no-autolink" href="${fuente.url || '#'}" target="_blank" rel="noopener noreferrer" title="${fuente.doc || ''}">${fuente.corto || fuente.doc || ''}, ${pag} ↗</a>
           </div>
         </article>
       `;
@@ -1667,10 +1644,10 @@
       banner.innerHTML = `
         <div>
           <strong style="color:var(--gold-bright); font-size:14px; display:block; margin-bottom:4px;">
-            📢 ¿Por qué importa esta comparativa?
+            ¿Cómo se lee esta comparación?
           </strong>
           <p style="font-size:12.5px; color:var(--text-secondary); margin:0; line-height:1.5;">
-            El Artículo 127 Constitucional prohíbe expresamente sueldos discrecionales, pero las asignaciones y fideicomisos continúan financiándose con tus impuestos.
+            Todas las cifras son netas: lo que llega a la persona después de impuestos. El artículo 127 de la Constitución prohíbe que un servidor público reciba una remuneración mayor que la establecida para la Presidencia de la República. Las cuentas «veces» y «días» son derivadas: dividen la remuneración oficial entre el ingreso que usted escribió.
           </p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -1686,20 +1663,14 @@
   }
 
   function copiarComparadorChoque() {
-    const userMonto = (state.cc && state.cc.monto > 0) ? state.cc.monto : 15000;
-    const esAnual = state.cc && state.cc.periodicidad === "ano";
-    const userMes = esAnual ? (userMonto / 12) : userMonto;
-    const userDia = userMes / 30;
-
-    let texto = `⚡ COMPARATIVA SALARIAL DE CHOQUE (Auditavisión México)\n`;
-    texto += `Mi sueldo: ${ccPesos(userMes)}/mes (${ccPesos(userDia)}/día).\n`;
-    texto += `Así ganan los funcionarios públicos que se pagan con mis impuestos:\n`;
-    CARGOS_PUBLICOS_CHOQUE.forEach(c => {
-      const ratio = (c.sueldoMes / userMes).toFixed(1);
-      texto += `• ${c.cargo}: ${ccPesos(c.sueldoMes)}/mes (${ratio}x más que yo · Aguinaldo: ${ccPesos(c.aguinaldo)})\n`;
+    const lector = comparadorIngresoLector();
+    let texto = `COMPARATIVA SALARIAL (Auditavisión México)\n`;
+    texto += `Mi ingreso: ${ccPesos(lector.anual / 12)} al mes, ${lector.tipo}.\n`;
+    texto += `Remuneración neta anual 2026 según el Presupuesto de Egresos:\n`;
+    cargosComparador().forEach(c => {
+      texto += `• ${c.cargo}: ${ccPesos(c.netoAnual)} al año${c.parcial ? ' (parcial)' : ''}, ${(c.netoAnual / lector.anual).toFixed(1)} veces lo mío\n`;
     });
-    texto += `\nCon el costo de 1 Diputado se pagan los sueldos de ${Math.floor(150000 / userMes)} trabajadores como yo.\n`;
-    texto += `Compara tu sueldo y fiscaliza en: Auditavisión México`;
+    texto += `\nFuentes: PEF 2026, Anexo 23 (DOF 21-11-2025) y Manual de remuneraciones del PJF 2026 (DOF 27-02-2026).`;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(texto).then(() => {
@@ -1710,6 +1681,312 @@
     } else {
       prompt("Copia tu Comparativa Salarial de Choque:", texto);
     }
+  }
+
+  /* ======================================================================
+     SUBPESTANA 2.6 - LO QUE CUESTAN LOS PODERES: CONGRESO Y JUDICATURA
+     Lee exclusivamente DB.poderes (herramientas/integrar_poderes.py).
+     Cada cifra lleva su chip de estado y el enlace a su documento, con
+     pagina. Nada se suma entre vistas distintas del mismo dinero.
+     ====================================================================== */
+
+  function pdDatos() { return DB.poderes || null; }
+
+  function pdEsc(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function pdMdp(pesos, dec) {
+    const d = (dec == null) ? 1 : dec;
+    return '$' + (pesos / 1e6).toLocaleString('es-MX', { minimumFractionDigits: d, maximumFractionDigits: d }) + ' mdp';
+  }
+
+  function pdPesos(p) { return '$' + Math.round(p).toLocaleString('es-MX'); }
+
+  function pdPct(p, d) { return p.toLocaleString('es-MX', { minimumFractionDigits: d == null ? 1 : d, maximumFractionDigits: d == null ? 1 : d }) + ' %'; }
+
+  /* Enlace a la fuente: documento y pagina, abre el PDF oficial. */
+  function pdFuente(clave, pagina) {
+    const P = pdDatos();
+    const f = P && P.fuentes[clave];
+    if (!f) return '<span class="pd-fuente">' + chipEstado('pendiente') + ' fuente por documentar</span>';
+    const pag = (pagina === undefined || pagina === null || pagina === '') ? '' :
+      (/^\d+$/.test(String(pagina)) ? ', p. ' + pagina : ', ' + pagina);
+    return '<a class="pd-fuente no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer" title="' +
+      pdEsc(f.doc) + '">' + pdEsc(f.corto || f.doc) + pdEsc(pag) + ' ↗</a>';
+  }
+
+  /* Barra horizontal a escala; ancho relativo al maximo del grupo. */
+  function pdBarra(valor, maximo, clase) {
+    const w = maximo > 0 ? Math.max(0.6, valor / maximo * 100) : 0;
+    return '<span class="pd-barra" aria-hidden="true"><span class="pd-barra-v ' + (clase || '') + '" style="width:' + w.toFixed(2) + '%"></span></span>';
+  }
+
+  /* Lo que el lector aporta a cada Poder: su ISR anual por la proporcion
+     del ramo dentro del gasto neto total. Es el mismo criterio del reparto
+     de la calculadora (2.4): solo el ISR, nunca las cuotas de seguridad
+     social, que tienen destino especifico. */
+  function pdTuParte() {
+    const P = pdDatos();
+    if (!P) return null;
+    const total = P.gastoNetoTotal.valor;
+    const res = state.cc && state.cc.calculado ? state.cc.resultado : null;
+    const isr = res ? res.ano.isr : 0;
+    return ['legislativo', 'judicial'].map(k => {
+      const r = P.ramos2026[k];
+      return {
+        k: k, nombre: r.nombre, ramo: r.ramo,
+        proporcion: r.aprobado / total,
+        porMil: r.aprobado / total * 1000,
+        tuyo: isr * r.aprobado / total,
+        hayIsr: isr > 0
+      };
+    });
+  }
+
+  function renderPoderes() {
+    const raiz = document.getElementById('poderesRaiz');
+    const P = pdDatos();
+    if (!raiz) return;
+    if (!P) {
+      raiz.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base de datos no trae la colección de los Poderes.</p>';
+      return;
+    }
+    const L = P.ramos2026.legislativo;
+    const J = P.ramos2026.judicial;
+    const total = P.gastoNetoTotal.valor;
+    const partes = pdTuParte();
+    const hayIsr = partes[0].hayIsr;
+
+    /* --- 1. Su parte --- */
+    const tuParte =
+      '<section class="pd-bloque" id="pd-tuparte">' +
+        '<h3 class="pd-tit">Lo que a usted le toca pagar de cada Poder</h3>' +
+        '<p class="pd-lead">De cada <b>$1,000</b> del gasto federal aprobado para 2026, el Congreso de la Unión recibe <b>' +
+          '$' + partes[0].porMil.toFixed(2) + '</b> y el Poder Judicial de la Federación <b>$' +
+          partes[1].porMil.toFixed(2) + '</b>. ' + chipEstado('derivado') +
+          ' <span class="pd-op">Aprobado del ramo ÷ gasto neto total (' + pdMdp(total, 0) + ') × 1,000.</span></p>' +
+        '<div class="pd-duo">' + partes.map(p =>
+          '<div class="pd-duo-c pd-' + p.k + '">' +
+            '<span class="pd-k">' + (p.k === 'legislativo' ? '🏛️' : '⚖️') + ' ' + pdEsc(p.nombre) + ' · Ramo ' + p.ramo + '</span>' +
+            (hayIsr
+              ? '<b class="pd-v">' + pdPesos(p.tuyo) + ' <small>al año</small></b>' +
+                '<span class="pd-s">de su ISR, ' + pdPct(p.proporcion * 100, 2) + ' del total ' + chipEstado('derivado') + '</span>'
+              : '<b class="pd-v">' + pdPct(p.proporcion * 100, 2) + '</b>' +
+                '<span class="pd-s">del gasto neto total ' + chipEstado('derivado') + '</span>') +
+          '</div>').join('') +
+        '</div>' +
+        (hayIsr
+          ? '<p class="pd-nota">Calculado con el ISR anual que obtuvo en la calculadora (2.4). Las cuotas de seguridad social no entran: tienen destino específico.</p>'
+          : '<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.switchSubtab(\'accion-financiera\',\'calculadora\')">Calcule su ISR en 2.4</button> y aquí verá cuántos pesos suyos llegan a cada Poder.</p>') +
+      '</section>';
+
+    /* --- 2. Los dos Poderes lado a lado --- */
+    const maxU = Math.max(...L.unidades.concat(J.unidades).map(u => u.aprobado));
+    const filaU = (u) =>
+      '<div class="pd-fila">' +
+        '<span class="pd-fila-n">' + pdEsc(u.nombre) + '</span>' +
+        pdBarra(u.aprobado, maxU, '') +
+        '<span class="pd-fila-v">' + pdMdp(u.aprobado) + '</span>' +
+      '</div>';
+    const recorte = J.proyecto - J.aprobado;
+    const lado =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">Los dos Poderes en el Presupuesto 2026</h3>' +
+        '<p class="pd-lead">Lo aprobado por la Cámara de Diputados en el Decreto publicado el 21 de noviembre de 2025. «Aprobado» es autorización de gasto: no es dinero ya pagado.</p>' +
+        '<div class="pd-lado">' +
+          '<div class="pd-lado-c">' +
+            '<div class="pd-lado-cab"><span>🏛️ Poder Legislativo · Ramo 01</span><b>' + pdMdp(L.aprobado) + '</b>' + chipEstado('oficial') + '</div>' +
+            L.unidades.map(filaU).join('') +
+            '<p class="pd-nota">La Cámara no le hizo cambios: el proyecto y lo aprobado son iguales. ' + pdFuente('PEF', 'Anexos 1 y 32, DOF pp. 32 y 108') + '</p>' +
+          '</div>' +
+          '<div class="pd-lado-c">' +
+            '<div class="pd-lado-cab"><span>⚖️ Poder Judicial · Ramo 03</span><b>' + pdMdp(J.aprobado) + '</b>' + chipEstado('oficial') + '</div>' +
+            J.unidades.map(filaU).join('') +
+            '<p class="pd-nota">Se pidieron ' + pdMdp(J.proyecto) + ' y se aprobaron ' + pdMdp(J.aprobado) + ': <b>' + pdMdp(recorte) + ' menos</b> ' + chipEstado('derivado') +
+              ', casi todo al Órgano de Administración Judicial. Es una diferencia entre proyecto y aprobado, no un ahorro comprobado. ' + pdFuente('PEF', 'Anexo 32, DOF p. 108') + '</p>' +
+          '</div>' +
+        '</div>' +
+      '</section>';
+
+    /* --- 3. Poder Judicial: en que se gasta --- */
+    const nombresUR = { '100': 'Suprema Corte', '120': 'Órgano de Administración Judicial', '210': 'TEPJF · Sala Superior', '211': 'TEPJF · Salas Regionales', '300': 'Tribunal de Disciplina Judicial' };
+    const capsOrden = ['1000', '2000', '3000', '4000', '5000', '6000'];
+    const capsNombre = { '1000': 'Personal', '2000': 'Materiales', '3000': 'Servicios generales', '4000': 'Transferencias', '5000': 'Bienes muebles e inmuebles', '6000': 'Obra pública' };
+    const capUR = P.judicial.capitulosPorUR;
+    const pilas = Object.keys(nombresUR).map(ur => {
+      const caps = capUR[ur] || [];
+      const tot = caps.reduce((a, c) => a + c.aprobado, 0);
+      const personal = (caps.find(c => c.cap === '1000') || { aprobado: 0 }).aprobado;
+      return '<div class="pd-pila">' +
+        '<div class="pd-pila-cab"><span>' + pdEsc(nombresUR[ur]) + '</span><span>' + pdMdp(tot) + ' · ' + pdPct(personal / tot * 100) + ' en personal</span></div>' +
+        '<div class="pd-pila-barra" role="img" aria-label="' + pdEsc(nombresUR[ur]) + ': ' + caps.map(c => capsNombre[c.cap] + ' ' + pdPct(c.aprobado / tot * 100)).join(', ') + '">' +
+          capsOrden.map(cp => {
+            const c = caps.find(x => x.cap === cp);
+            return c ? '<span class="pd-cap pd-cap-' + cp + '" style="width:' + (c.aprobado / tot * 100).toFixed(3) + '%" title="' + capsNombre[cp] + ': ' + pdMdp(c.aprobado) + '"></span>' : '';
+          }).join('') +
+        '</div></div>';
+    }).join('');
+    const leyendaCaps = '<div class="pd-leyenda">' + capsOrden.map(cp => '<span><i class="pd-cap-' + cp + '"></i>' + cp + ' ' + capsNombre[cp] + '</span>').join('') + '</div>';
+
+    const ag = P.judicial.scjnAgosto;
+    const barAg = [['ejercido', ag.ejercido, 'Ejercido'], ['compromiso', ag.compromiso, 'Comprometido'], ['disponible', ag.disponible, 'Disponible']];
+    const scjn =
+      '<div class="pd-sub">' +
+        '<h4 class="pd-sub-t">La Suprema Corte, al 31 de agosto de 2026</h4>' +
+        '<div class="pd-pila-barra pd-ejec" role="img" aria-label="Ejercido ' + pdPct(ag.ejercido / ag.modificado * 100) + ', comprometido ' + pdPct(ag.compromiso / ag.modificado * 100) + ', disponible ' + pdPct(ag.disponible / ag.modificado * 100) + '">' +
+          barAg.map(b => '<span class="pd-ej-' + b[0] + '" style="width:' + (b[1] / ag.modificado * 100).toFixed(3) + '%"></span>').join('') +
+        '</div>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla"><tbody>' +
+          '<tr><th scope="row">Presupuesto original</th><td>' + pdMdp(ag.original) + '</td><td>' + chipEstado('oficial') + '</td></tr>' +
+          '<tr><th scope="row">Modificado</th><td>' + pdMdp(ag.modificado) + '</td><td>' + chipEstado('oficial') + '</td></tr>' +
+          barAg.map(b => '<tr><th scope="row"><i class="pd-ej-' + b[0] + '"></i>' + b[2] + '</th><td>' + pdMdp(b[1]) + ' <small>(' + pdPct(b[1] / ag.modificado * 100) + ')</small></td><td>' + chipEstado('oficial') + '</td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="pd-nota">' + pdEsc(ag.nota) + ' Porcentajes sobre el modificado ' + chipEstado('derivado') + '. ' + pdFuente('SCJN_AGO', ag.pagina) + '</p>' +
+      '</div>';
+
+    const oaj = P.judicial.oajCapitulos;
+    const oajT =
+      '<div class="pd-sub">' +
+        '<h4 class="pd-sub-t">El Órgano de Administración Judicial, abril a junio de 2026</h4>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Capítulo</th><th>Anual (SHCP)</th><th>Asignado en el trimestre</th><th>Pagado en el trimestre</th></tr></thead><tbody>' +
+          oaj.filter(c => c.anualShcp || c.pagadoTrim).map(c =>
+            '<tr><th scope="row">' + c.cap + ' ' + pdEsc(c.concepto) + '</th><td>' + (c.anualShcp ? pdMdp(c.anualShcp) : '—') + '</td><td>' + pdMdp(c.asignadoTrim) + '</td><td>' + pdMdp(c.pagadoTrim) + '</td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + pdEsc(P.judicial.oajNota) + ' ' + pdFuente('OAJ_CAP') + ' · ' + pdFuente('COG', 'pp. 3–8') + '</p>' +
+      '</div>';
+
+    const circ = P.judicial.circuitos.slice().sort((a, b) => b.pagado - a.pagado);
+    const maxC = circ[0] ? circ[0].pagado : 0;
+    const circT =
+      '<details class="pd-sub pd-det">' +
+        '<summary class="pd-sub-t">Los 32 circuitos judiciales: pagos registrados de abril a junio ' + chipEstado('derivado') + '</summary>' +
+        '<p class="pd-nota"><b>No es el costo de cada circuito.</b> ' + pdEsc(P.judicial.circuitosNota) + '</p>' +
+        circ.map(c =>
+          '<div class="pd-fila"><span class="pd-fila-n">' + c.n + '. ' + pdEsc(String(c.sede).split(' / ')[0].replace(/^.*?Circuito Judicial /, '')) + '</span>' +
+          pdBarra(c.pagado, maxC, 'pd-v-jud') + '<span class="pd-fila-v">' + pdPesos(c.pagado) + '</span></div>').join('') +
+        '<p class="pd-nota">Suma de las unidades ejecutoras de cada circuito. ' + pdFuente('OAJ_UEG') + '</p>' +
+      '</details>';
+
+    const judicial =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">⚖️ Poder Judicial: en qué se va el dinero</h3>' +
+        '<p class="pd-lead">Presupuesto aprobado 2026 de cada órgano, por capítulo de gasto. Casi todo es nómina: jueces, magistrados y el personal que opera los juzgados en todo el país.</p>' +
+        pilas + leyendaCaps +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' montos; ' + chipEstado('derivado') + ' porcentajes. ' + pdFuente('COG', 'pp. 3–8') + '</p>' +
+        scjn + oajT + circT +
+        '<p class="pd-nota">' + chipEstado('pendiente') + ' ' + P.judicial.pendientes.map(pdEsc).join(' · ') + '. No se calculan dividiendo el presupuesto entre el número de personas: el dinero paga estructuras, no sólo cargos.</p>' +
+      '</section>';
+
+    /* --- 4. Poder Legislativo: lo que la ASF ya audito --- */
+    const E = P.legislativo.ejercicio2024;
+    const busca = (inst, concepto) => E.find(x => x.institucion === inst && x.concepto.indexOf(concepto) === 0);
+    const filaEj = (inst, concepto) => {
+      const x = busca(inst, concepto);
+      return x ? '<tr><th scope="row">' + pdEsc(x.concepto) + '</th><td>' + pdMdp(x.pesos) + '</td><td>' + chipEstado(x.estado) + '</td><td>' + pdFuente(x.fuente, x.pagina) + '</td></tr>' : '';
+    };
+    const resAsf = P.legislativo.resultadosAsf.map(r =>
+      '<li><b>' + pdEsc(r.institucion) + ':</b> ' + pdEsc(r.texto) + ' ' + chipEstado(r.estado) + ' ' + pdFuente(r.fuente, r.pagina) + '</li>').join('');
+
+    const pers = P.legislativo.personalDiputados2024.slice().sort((a, b) => b.pesos - a.pesos);
+    const totPers = pers.reduce((a, x) => a + x.pesos, 0);
+    const persT =
+      '<details class="pd-sub pd-det">' +
+        '<summary class="pd-sub-t">Cámara de Diputados 2024: gasto de personal por partida</summary>' +
+        '<p class="pd-nota"><b>Es el personal de toda la institución</b>, no sólo el de las 500 diputaciones. Total: ' + pdMdp(totPers) + ' ' + chipEstado('derivado') + '.</p>' +
+        pers.map(x => '<div class="pd-fila"><span class="pd-fila-n">' + x.partida + ' ' + pdEsc(x.concepto) + '</span>' + pdBarra(x.pesos, pers[0].pesos, 'pd-v-leg') + '<span class="pd-fila-v">' + pdMdp(x.pesos) + '</span></div>').join('') +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + pdFuente('ASF_DIP', 5) + '</p>' +
+      '</details>';
+
+    const sc = P.legislativo.senadoCapitulos2024;
+    const senT =
+      '<details class="pd-sub pd-det">' +
+        '<summary class="pd-sub-t">Cámara de Senadores 2024: devengado y pagado por capítulo</summary>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Capítulo</th><th>Devengado</th><th>Pagado al 31 de diciembre</th></tr></thead><tbody>' +
+          sc.map(c => '<tr><th scope="row">' + c.cap + ' ' + pdEsc(c.concepto) + '</th><td>' + pdMdp(c.devengado) + '</td><td>' + pdMdp(c.pagado) + '</td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' Lo devengado y no pagado al cierre se pagó en 2025. ' + pdFuente('ASF_SEN', 5) + '</p>' +
+      '</details>';
+
+    const cg = P.legislativo.congresos2024.slice().sort((a, b) => b.ejercidoMdp - a.ejercidoMdp);
+    const totCg = cg.reduce((a, x) => a + x.ejercidoMdp, 0);
+    const cgT =
+      '<details class="pd-sub pd-det">' +
+        '<summary class="pd-sub-t">Los 32 congresos locales: gasto ejercido en 2024</summary>' +
+        cg.map(x => '<div class="pd-fila"><span class="pd-fila-n">' + pdEsc(x.entidad) + '</span>' + pdBarra(x.ejercidoMdp, cg[0].ejercidoMdp, 'pd-v-leg') + '<span class="pd-fila-v">' + pdMdp(x.ejercidoMdp * 1e6) + '</span></div>').join('') +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' cada congreso; ' + chipEstado('derivado') + ' la suma de las 32 filas, ' + pdMdp(totCg * 1e6) + '. Millones de pesos corrientes. ' + pdFuente('CNPLE', 11) + '</p>' +
+        '<p class="pd-nota">' + chipEstado('pendiente') + ' ' + P.legislativo.pendientes.map(pdEsc).join(' · ') + '.</p>' +
+      '</details>';
+
+    const ac = P.legislativo.asfCongresos2024;
+    const acT =
+      '<details class="pd-sub pd-det">' +
+        '<summary class="pd-sub-t">Dos congresos locales auditados por la ASF</summary>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Congreso</th><th>Concepto</th><th>Importe</th><th>Fuente</th></tr></thead><tbody>' +
+          ac.map(x => '<tr><td>' + pdEsc(x.congreso) + '</td><td>' + pdEsc(x.concepto) + '</td><td>' + pdPesos(x.pesos) + '</td><td>' + pdFuente(x.fuente, x.pagina) + '</td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' Un monto «por aclarar» es un saldo sujeto a seguimiento: no equivale a daño definitivo.</p>' +
+      '</details>';
+
+    const legislativo =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🏛️ Poder Legislativo: lo que la Auditoría ya revisó</h3>' +
+        '<p class="pd-lead">Para 2026 sólo existe el presupuesto aprobado. El año más reciente con el gasto ya ejercido <b>y auditado</b> es 2024: la Auditoría Superior de la Federación ya publicó sus informes de la revisión de la Cuenta Pública 2024.</p>' +
+        '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th colspan="4">Cámara de Diputados · 2024</th></tr></thead><tbody>' +
+          filaEj('Diputados', 'Aprobado') + filaEj('Diputados', 'Modificado') + filaEj('Diputados', 'Pagado') + filaEj('Diputados', 'Muestra') +
+        '</tbody><thead><tr><th colspan="4">Cámara de Senadores · 2024</th></tr></thead><tbody>' +
+          filaEj('Senado', 'Aprobado') + filaEj('Senado', 'Modificado') + filaEj('Senado', 'Pagado al 31') + filaEj('Senado', 'Pendiente de pago') + filaEj('Senado', 'Muestra') +
+        '</tbody></table></div>' +
+        '<ul class="pd-lista">' + resAsf + '</ul>' +
+        persT + senT + cgT + acT +
+      '</section>';
+
+    /* --- 5. Remuneraciones: puente al comparador --- */
+    const R = P.remuneraciones2026;
+    const maxR = Math.max(...R.map(r => r.netoAnual));
+    const rem =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">Cuánto ganan, en neto y al año</h3>' +
+        '<p class="pd-lead">La remuneración total anual neta que publica el propio Presupuesto: lo que llega a la persona después de impuestos. Es la única medida comparable entre cargos.</p>' +
+        R.map(r => '<div class="pd-fila"><span class="pd-fila-n">' + r.icono + ' ' + pdEsc(r.cargo) + (r.parcial ? ' <small>(parcial)</small>' : '') + '</span>' +
+          pdBarra(r.netoAnual, maxR, r.id === 'ministro' ? 'pd-v-jud' : 'pd-v-leg') +
+          '<span class="pd-fila-v">' + pdPesos(r.netoAnual) + ' ' + chipEstado(r.netoAnualEstado || r.estado) + '</span></div>').join('') +
+        '<p class="pd-nota">' + R.map(r => '<b>' + pdEsc(r.cargo) + ':</b> ' + pdFuente(r.fuente, r.pagina) + (r.parcial ? ' — ' + pdEsc(r.nota) : '')).join('<br>') + '</p>' +
+        (document.getElementById('btnMod3ApartadoB')
+          ? '<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.irComparadorChoque()">Compararlo con su ingreso (2.4 B)</button></p>'
+          : '') +
+      '</section>';
+
+    /* --- 6. Documentos --- */
+    const docs =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">Los documentos de esta sección</h3>' +
+        '<p class="pd-lead">Todos son documentos públicos oficiales. Consulta del ' + pdEsc(P.consulta) + '. Si una liga deja de funcionar, la huella SHA-256 permite comprobar que un archivo es el mismo que se usó aquí.</p>' +
+        '<ol class="pd-docs">' + Object.keys(P.fuentes).map(k => {
+          const f = P.fuentes[k];
+          return '<li><a class="no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(f.doc) + ' ↗</a>' +
+            (f.sha256 ? '<code title="SHA-256">' + f.sha256.slice(0, 16) + '…</code>' : '') + '</li>';
+        }).join('') + '</ol>' +
+        '<p class="pd-nota">' + pdEsc(P.nota) + '</p>' +
+      '</section>';
+
+    raiz.innerHTML = tuParte + lado + judicial + legislativo + rem + docs;
+    /* El glosario se enlaza en el texto corrido; etiquetas, tablas y
+       resumenes plegables se quedan limpios. */
+    raiz.querySelectorAll('.pd-fila, .pd-leyenda, .pd-tabla-w, .pd-lado-cab, .pd-duo, .pd-pila-cab, summary, .pd-docs')
+      .forEach(el => el.setAttribute('data-no-autolink', ''));
+    autolinkAmbito(raiz);
+  }
+
+  /* Del bloque de remuneraciones al comparador de la calculadora. */
+  function irComparadorChoque() {
+    switchSubtab('accion-financiera', 'calculadora');
+    setTimeout(() => {
+      switchApartadoCalculadora('apartadoB');
+      const el = document.getElementById('shockCardsGrid');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
   }
 
   /* --- TICKET CIVICO DEL CONTRIBUYENTE (COMPROBANTE FISCAL CIUDADANO) --- */
@@ -1779,6 +2056,7 @@
           <div class="civic-ticket-body">
             ${rows}
           </div>
+          ${ticketPoderes(isrEfectivo)}
 
           <div class="civic-ticket-row ticket-total">
             <span>TOTAL DE TUS IMPUESTOS FISCALIZADOS (${cad}):</span>
@@ -1803,6 +2081,29 @@
     `;
   }
 
+  /* Dentro del reparto, lo que llega a cada Poder. Ya esta incluido en
+     los renglones de arriba: se muestra aparte para poder compararlo, no
+     para sumarlo. */
+  function ticketPoderes(isr) {
+    const P = DB.poderes;
+    if (!P || !(isr > 0)) return '';
+    const total = P.gastoNetoTotal.valor;
+    const filas = ['legislativo', 'judicial'].map(k => {
+      const r = P.ramos2026[k];
+      return `
+        <div class="civic-ticket-row">
+          <span>${k === 'legislativo' ? '🏛️' : '⚖️'} ${r.nombre} · Ramo ${r.ramo}</span>
+          <span class="num-tabular"><strong>${ccPesosFinos(isr * r.aprobado / total)}</strong> <small style="color:var(--text-dim);">(${(r.aprobado / total * 100).toFixed(2)}%)</small></span>
+        </div>`;
+    }).join('');
+    return `
+      <div class="civic-ticket-poderes">
+        <div class="civic-ticket-sub">De ahí, lo que llega a los Poderes <small>(ya incluido arriba; no se suma)</small></div>
+        ${filas}
+        <button type="button" class="pd-btn" onclick="window.AuditEngine.switchSubtab('accion-financiera','poderes')">Ver en qué lo gastan (2.6)</button>
+      </div>`;
+  }
+
   function copiarTicketCivico() {
     const res = state.cc.resultado;
     if (!res) return;
@@ -1818,6 +2119,13 @@
     res.reparto.forEach(x => {
       texto += `• ${x.icono} ${x.nombre}: ${ccPesos(x.monto * factor)} (${x.pct.toFixed(1)}%)\n`;
     });
+    if (DB.poderes) {
+      const tot = DB.poderes.gastoNetoTotal.valor;
+      ['legislativo', 'judicial'].forEach(k => {
+        const r = DB.poderes.ramos2026[k];
+        texto += `   de ahí, ${r.nombre}: ${ccPesosFinos(isrEfectivo * r.aprobado / tot)}\n`;
+      });
+    }
     texto += `\nTotal fiscalizado: ${ccPesos(isrEfectivo)} ${cad}.\n`;
     texto += `Fiscaliza el tuyo y audita a tu gobierno en: Auditavisión México`;
 
@@ -3480,6 +3788,11 @@
       }
       return;
     }
+    if (tabKey === 'poderes') {
+      switchTab('accion-financiera', skipPush);
+      switchSubtab('accion-financiera', 'poderes');
+      return;
+    }
     if (tabKey === 'faq' && !document.getElementById('tab-panel-faq')) {
       window.location.href = 'enciclopedia.html#faq';
       return;
@@ -3607,6 +3920,7 @@
       else if (subKey === 'cuentas-verdes') renderCuentasEcologicas();
       else if (subKey === 'calculadora') renderCalculadora();
       else if (subKey === 'bitacora') renderNews();
+      else if (subKey === 'poderes') renderPoderes();
       else if (subKey === 'ejes-deuda') renderFinanzasPublicas();
     } else if (parentTab === 'legislativo') {
       if (subKey === 'monitor-civico') {
@@ -3748,6 +4062,14 @@
     { a: ['haber de retiro'], t: 'Haber de Retiro', r: 'ref-manual-remun-pjf', n: 22 },
     { a: ['Capítulo 1000'], t: 'Capítulo 1000 (Servicios Personales)', r: 'ref-pef-ramo03', n: 21, cs: true },
     { a: ['Ramo 03'], t: 'Ramo 03 (Poder Judicial de la Federación)', r: 'ref-pef-ramo03', n: 21, cs: true },
+    { a: ['remuneración total anual neta', 'remuneraciones totales anuales netas'], t: 'Remuneración Total Anual Neta', r: 'ref-cpeum-art127', n: 20 },
+    { a: ['dieta', 'dietas'], t: 'Dieta Legislativa', r: 'ref-cpeum', n: 1 },
+    { a: ['Ramo 01'], t: 'Ramo 01 (Poder Legislativo)', r: 'ref-pef2026', n: 11, cs: true },
+    { a: ['unidad responsable', 'unidades responsables'], t: 'Unidad Responsable', r: 'ref-lfprh', n: 2 },
+    { a: ['capítulo de gasto', 'capítulos de gasto'], t: 'Capítulo de Gasto', r: 'ref-lgcg', n: 12 },
+    { a: ['muestra revisada', 'muestra auditada', 'muestra de egresos'], t: 'Muestra Auditada', r: 'ref-lfrcf', n: 7 },
+    { a: ['por aclarar'], t: 'Monto por Aclarar', r: 'ref-lfrcf', n: 7 },
+    { a: ['Tribunal Electoral', 'TEPJF'], t: 'Tribunal Electoral del Poder Judicial de la Federación (TEPJF)', r: 'ref-cpeum', n: 1, cs: true },
     { a: ['tope salarial'], t: 'Artículo 127 Constitucional (Tope Salarial)', r: 'ref-cpeum-art127', n: 20 },
     { a: ['secretario de estudio y cuenta', 'secretaria de estudio y cuenta', 'secretarios de estudio y cuenta'], t: 'Secretario(a) de Estudio y Cuenta', r: 'ref-pnt-asesores-scjn', n: 25 },
     { a: ['seguro de separación individualizado'], t: 'Seguro de Separación Individualizado (SSI)', r: 'ref-manual-remun-pjf', n: 22 },
@@ -5886,13 +6208,41 @@
     return n ? n + '. ' + txt.slice(n.length).trim() : txt;
   }
 
+  /* El ultimo enlace de glosario o referencia que pulso el lector. Se
+     captura antes que cualquier otro manejador: asi el regreso vuelve a
+     esa palabra exacta aunque la pestana se haya vuelto a dibujar. */
+  let navUltimoEnlace = null;
+  document.addEventListener('click', function (ev) {
+    const a = ev.target && ev.target.closest && ev.target.closest('.glos-link, .ref-link');
+    if (a) navUltimoEnlace = a;
+  }, true);
+
+  /* Huella de un enlace: su clase, su texto y su posicion entre los que
+     comparten ambos. Sirve para reencontrarlo si el panel se redibujo. */
+  function navEnlacesIguales(clase, texto) {
+    return Array.from(document.querySelectorAll('.' + clase)).filter(x => x.textContent === texto);
+  }
+  function navHuellaEnlace(a) {
+    const clase = a.classList.contains('glos-link') ? 'glos-link' : 'ref-link';
+    return { clase: clase, texto: a.textContent, idx: navEnlacesIguales(clase, a.textContent).indexOf(a) };
+  }
+  function navReencontrar(h) {
+    if (!h || h.idx < 0) return null;
+    return navEnlacesIguales(h.clase, h.texto)[h.idx] || null;
+  }
+
   function navMarcarOrigen() {
+    const ancla = (navUltimoEnlace && navUltimoEnlace.isConnected) ? navUltimoEnlace : null;
     navOrigen = {
       tab: activeTabKey,
       sub: navSubtabActiva(activeTabKey),
       y: window.scrollY || document.documentElement.scrollTop || 0,
+      ancla: ancla,
+      anclaHuella: ancla ? navHuellaEnlace(ancla) : null,
+      anclaTop: ancla ? ancla.getBoundingClientRect().top : 0,
       etiqueta: navEtiquetaActual()
     };
+    navUltimoEnlace = null;
   }
 
   function navVolverAlOrigen() {
@@ -5904,7 +6254,31 @@
     navSaltoEnCurso = false;
     navOrigen = null;
     navPintarBarra();
-    setTimeout(() => window.scrollTo({ top: o.y, behavior: 'smooth' }), 110);
+    /* Si la palabra de origen sigue en la pagina, se deja justo donde
+       estaba en la pantalla y se marca un instante. El enlazado automatico
+       llega unos milisegundos despues del cambio de pestana, asi que se
+       intenta dos veces antes de recurrir a la posicion guardada. */
+    const intentar = (ultimo) => {
+      if (o.ancla && !o.ancla.isConnected) o.ancla = navReencontrar(o.anclaHuella);
+      if (o.ancla && o.ancla.isConnected && o.ancla.getClientRects().length) {
+        const top = o.ancla.getBoundingClientRect().top + window.scrollY - o.anclaTop;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+        o.ancla.classList.add('nav-origen-marca');
+        /* Si la seccion se redibuja justo despues, la marca pasa a la copia. */
+        setTimeout(() => {
+          if (!o.ancla.isConnected) {
+            const copia = navReencontrar(o.anclaHuella);
+            if (copia) { o.ancla = copia; copia.classList.add('nav-origen-marca'); }
+          }
+        }, 700);
+        setTimeout(() => o.ancla && o.ancla.classList.remove('nav-origen-marca'), 2200);
+        try { o.ancla.focus({ preventScroll: true }); } catch (e) { /* sin foco */ }
+        return;
+      }
+      if (ultimo) window.scrollTo({ top: o.y, behavior: 'auto' });
+      else setTimeout(() => intentar(true), 380);
+    };
+    setTimeout(() => intentar(false), 110);
   }
 
   function navIrAlInicio() {
@@ -6731,7 +7105,7 @@
               'Decreto de Reforma Judicial publicado en el DOF el 15 de septiembre de 2024'
             ],
             glosario: 'Pleno de la Suprema Corte',
-            refKey: 'ref-cpeum-art94',
+            refKey: 'ref-cpeum',
             refNum: '20'
           }
         ]
@@ -6841,8 +7215,8 @@
               'Cuenta Pública Federal - Ramo 03'
             ],
             glosario: 'Cuenta Pública',
-            refKey: 'ref-cuentas-publicas',
-            refNum: '2'
+            refKey: 'ref-asf-cp',
+            refNum: '14'
           }
         ]
       },
@@ -7016,7 +7390,7 @@
               'Ley Orgánica del Poder Judicial de la Federación (Arts. 1 a 23)'
             ],
             glosario: 'Pleno de la Suprema Corte',
-            refKey: 'ref-cpeum-art94',
+            refKey: 'ref-cpeum',
             refNum: '20'
           },
           {
@@ -7128,7 +7502,7 @@
               'Acuerdo General 1/2023 del CJF que determinó la integración y funcionamiento de los Plenos Regionales'
             ],
             glosario: 'Poder Judicial de la Federación',
-            refKey: 'ref-cpeum-art94',
+            refKey: 'ref-cpeum',
             refNum: '20'
           },
           {
@@ -7178,7 +7552,7 @@
               'Código Federal de Procedimientos Civiles y Código Nacional de Procedimientos Penales (recurso de apelación)'
             ],
             glosario: 'Poder Judicial de la Federación',
-            refKey: 'ref-cpeum-art94',
+            refKey: 'ref-cpeum',
             refNum: '20'
           },
           {
@@ -7228,7 +7602,7 @@
               'Acuerdo General 14/2016 del Pleno del Consejo de la Judicatura Federal'
             ],
             glosario: 'Poder Judicial de la Federación',
-            refKey: 'ref-cpeum-art94',
+            refKey: 'ref-cpeum',
             refNum: '20'
           }
         ]
@@ -7260,7 +7634,7 @@
               'Ley Federal de Competencia Económica y Ley Federal de Telecomunicaciones y Radiodifusión'
             ],
             glosario: 'Marco Legal Hacendario',
-            refKey: 'ref-cpeum-art94',
+            refKey: 'ref-cpeum',
             refNum: '20'
           },
           {
@@ -10515,7 +10889,7 @@
           <span>📜 <strong>Fundamento:</strong> Arts. 94 y 116 CPEUM · Acuerdos CJF/OAJ · Ley Orgánica del ${st.tsjNombre}</span>
           <div style="display:flex; gap:10px;">
             <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Poder Judicial de la Federación')">Glosario ↗</a>
-            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cpeum-art94')">[Ref. 20] ↗</a>
+            <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cpeum')">[Ref. 01] ↗</a>
           </div>
         </div>
       `;
@@ -13468,7 +13842,7 @@
               </div>
               <div style="text-align:right;">
                 <span style="display:inline-block; background:rgba(0,0,0,0.4); border:1px solid var(--border-subtle); padding:6px 12px; border-radius:6px; font-size:11.5px; font-family:var(--font-mono); color:var(--gold);">
-                  Hacienda y Crédito Público · <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-porfiriato-ferrocarriles')">[Ref. 26]</a>
+                  Hacienda y Crédito Público · <span class="est-chip est-pendiente" title="Esta afirmación no tiene todavía un documento en el catálogo de referencias">fuente pendiente</span>
                 </span>
               </div>
             </div>
@@ -13548,7 +13922,7 @@
                 <div style="background:rgba(201,168,76,0.06); border-left:3px solid var(--gold); padding:12px 16px; border-radius:0 6px 6px 0; font-size:12.5px;">
                   <strong style="color:var(--gold-bright);">${d.rubro}:</strong> ${d.detalle}
                   <span style="display:inline-block; margin-left:6px;">
-                    <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-porfiriato-ferrocarriles'); return false;" title="Ver Fuentes Oficiales">[Ref: Hacienda 1876-1911]</a>
+                    <span class="est-chip est-pendiente" title="Esta afirmación no tiene todavía un documento en el catálogo de referencias">fuente pendiente</span>
                   </span>
                 </div>
               `).join('')}
@@ -21052,8 +21426,8 @@
         irregDesc: 'Pliegos en mantenimiento de refinerías, pagos indebidos en contratos de perforación y plantas coquizadoras.',
         transpVal: '$1.9 billones deuda ($97,300 mdd) + $360,000 mdp proveedores',
         transpDesc: 'Petrolera más endeudada del orbe; pasivos ocultos en facturación diferida a proveedores locales.',
-        refKey: 'ref-cuentas-publicas',
-        refNum: '2',
+        refKey: 'ref-asf-cp',
+        refNum: '14',
         glosTerm: 'Cuenta Pública'
       },
       'tren_maya': {
@@ -21069,8 +21443,8 @@
         irregDesc: 'Pagos improcedentes en terraplenes, falta de finiquitos en tramos 5 y 6 y volúmenes de obra no ejecutados.',
         transpVal: 'Contratos reservados por "Seguridad Nacional"',
         transpDesc: 'Reserva decretada sobre convenios con constructoras militares y expropiaciones de derecho de vía.',
-        refKey: 'ref-cuentas-publicas',
-        refNum: '2',
+        refKey: 'ref-asf-cp',
+        refNum: '14',
         glosTerm: 'Presupuesto de Egresos de la Federación'
       },
       'salud_insabi': {
@@ -21120,8 +21494,8 @@
         irregDesc: 'Facturación con empresas fantasma EFOS (Art. 69-B CFF), compra simulada de equipo y eventos ficticios.',
         transpVal: '87 negativas en PNT ("Inexistencia de datos")',
         transpDesc: 'Declaratorias reiteradas de inexistencia ante el INAI en solicitudes de comprobación de viáticos y viajes.',
-        refKey: 'ref-asf-declaratorias',
-        refNum: '1',
+        refKey: 'ref-asf-cp',
+        refNum: '14',
         glosTerm: 'Empresas Fantasma (EFOS)'
       },
       'dos_bocas': {
@@ -21137,8 +21511,8 @@
         irregDesc: 'Pagos en exceso en montaje de plantas combinadas, contratos asignados sin licitación a PTI Infraestructura.',
         transpVal: 'Clasificación bajo secreto comercial e industrial',
         transpDesc: 'Filial PTI operó en el régimen privado excluyendo contratos de la Ley de Obras Públicas federal.',
-        refKey: 'ref-cuentas-publicas',
-        refNum: '2',
+        refKey: 'ref-asf-cp',
+        refNum: '14',
         glosTerm: 'Cuenta Pública'
       },
       'cfe': {
@@ -21154,8 +21528,8 @@
         irregDesc: 'Sobrecostos de mantenimiento en plantas termoeléctricas y compras directas de carbón en Coahuila.',
         transpVal: 'Pasivos laborales contingentes > $430,000 mdp',
         transpDesc: 'Reversión del contrato colectivo laboral en 2020 incrementó el costo actuarial de pensiones de CFE.',
-        refKey: 'ref-cuentas-publicas',
-        refNum: '2',
+        refKey: 'ref-asf-cp',
+        refNum: '14',
         glosTerm: 'Gasto Programable'
       },
       'shcp': {
@@ -21171,8 +21545,8 @@
         irregDesc: 'ASF alertó sobre subestimación deliberada de ingresos en la LIF para manejar excedentes con discrecionalidad.',
         transpVal: 'FEIP vaciado: De $279k mdp (2018) a <$40k mdp (2024)',
         transpDesc: 'Consumo casi total del Fondo de Estabilización de los Ingresos Presupuestarios sin reglas de reposición.',
-        refKey: 'ref-cuentas-publicas',
-        refNum: '2',
+        refKey: 'ref-asf-cp',
+        refNum: '14',
         glosTerm: 'Deuda Pública'
       }
     },
@@ -24613,6 +24987,7 @@
     if (cardEl) cardEl.classList.add('active-explorer-card');
     
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
+                         (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
     var targetScroll = targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) {
@@ -25708,6 +26083,8 @@
     notificarEnDesarrollo: notificarEnDesarrollo,
     switchApartadoCalculadora: switchApartadoCalculadora,
     renderComparadorSalarial: renderComparadorSalarial,
+    renderPoderes: renderPoderes,
+    irComparadorChoque: irComparadorChoque,
     copiarComparadorChoque: copiarComparadorChoque,
     setVistaEgresos: setVistaEgresos,
     renderTreemapPEF: renderTreemapPEF,
