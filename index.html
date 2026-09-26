@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926m">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926n">
 </head>
 <body>
 
@@ -242,7 +242,7 @@
               <span class="mega-link-desc">Compendio enciclopédico de conceptos fiscales, deuda y PEF con buscador interactivo y filtros.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-marco-legal');" class="mega-link-item">
-              <span class="mega-link-name">⚖️ Marco Legal Hacendario &amp; 25 Preceptos</span>
+              <span class="mega-link-name">⚖️ Marco Legal Hacendario &amp; <span data-cuenta="preceptos">28</span> Preceptos</span>
               <span class="mega-link-desc">Fundamentos en la CPEUM (Arts. 73, 74, 115, 134), LIF, LFPRH, Ley de Disciplina y Reforma Judicial.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-preguntas');" class="mega-link-item">
@@ -2087,7 +2087,7 @@
       <div class="subtabs-bar" data-parent="faq">
         <button class="subtab-btn active" data-sub="faq-preguntas">Preguntas Frecuentes en Casillas</button>
         <button class="subtab-btn" data-sub="faq-glosario">Glosario de Términos Hacendarios &amp; Conceptos Clave</button>
-        <button class="subtab-btn" data-sub="faq-marco-legal">Marco Legal Hacendario &amp; 25 Preceptos Rectores</button>
+        <button class="subtab-btn" data-sub="faq-marco-legal">Marco Legal Hacendario &amp; <span data-cuenta="preceptos">28</span> Preceptos Rectores</button>
         <button class="subtab-btn" data-sub="faq-referencias">Catálogo de Fuentes Oficiales</button>
       </div>
 
@@ -2161,7 +2161,7 @@
                   Marco Legal Hacendario &amp; Fundamento Jurídico del Gasto Público
                 </h3>
                 <p style="font-size:12.5px; color:var(--text-dim); margin:4px 0 0; font-family:var(--font-mono);">
-                  25 preceptos constitucionales y leyes federales rectores del erario, con desglose puntual, disposiciones de la Ley de Ingresos de la Federación (LIF) e hipervínculos interactivos a su texto íntegro.
+                  <span data-cuenta="preceptos">28</span> preceptos constitucionales y leyes federales rectores del erario, con desglose puntual, disposiciones de la Ley de Ingresos de la Federación (LIF) e hipervínculos interactivos a su texto íntegro.
                 </p>
               </div>
             </div>
@@ -2559,11 +2559,12 @@
       <div class="footer-col">
         <h4>Glosario Enciclopédico &amp; Marco Normativo</h4>
         <p style="font-size:12px; color:var(--text-dim); margin-bottom:10px; line-height:1.5;">
-          Diccionario hacendario con más de 120 conceptos técnicos y los 25 preceptos legales rectores de la hacienda pública mexicana:
+          Diccionario hacendario con <span data-cuenta="glosario">212</span> conceptos técnicos, <span data-cuenta="preceptos">28</span> preceptos legales rectores de la hacienda pública mexicana y <span data-cuenta="referencias">89</span> fuentes oficiales citadas:
         </p>
         <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
           <button type="button" class="chip" onclick="window.AuditEngine.switchSubtab('faq', 'faq-glosario')" style="font-size:10.5px; padding:4px 8px; cursor:pointer;">📖 Glosario Técnico</button>
-          <button type="button" class="chip" onclick="window.AuditEngine.switchSubtab('faq', 'faq-marco-legal')" style="font-size:10.5px; padding:4px 8px; cursor:pointer;">⚖️ 25 Preceptos Legales</button>
+          <button type="button" class="chip" onclick="window.AuditEngine.switchSubtab('faq', 'faq-marco-legal')" style="font-size:10.5px; padding:4px 8px; cursor:pointer;">⚖️ Preceptos Legales</button>
+          <button type="button" class="chip" onclick="window.AuditEngine.abrirCatalogoFuentes()" style="font-size:10.5px; padding:4px 8px; cursor:pointer;">📚 Catálogo de Fuentes</button>
           <button type="button" class="chip" onclick="window.AuditEngine.switchSubtab('faq', 'faq-preguntas')" style="font-size:10.5px; padding:4px 8px; cursor:pointer;">❓ Preguntas Frecuentes</button>
         </div>
         <p style="font-size:11px; color:var(--text-dim); line-height:1.4;">
@@ -2574,7 +2575,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926m</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926n</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2718,16 +2719,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926m"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926n"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926m"></script>
+  <script src="assets/js/audit-database.js?v=20260926n"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926m"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926n"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926m"></script>
+  <script src="assets/js/audit-engine.js?v=20260926n"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

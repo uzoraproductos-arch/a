@@ -4817,7 +4817,7 @@
       d: 'Expedientes documentados, pliegos de observaciones de la Auditoría Superior de la Federación (ASF) y radiografía de salud financiera de dependencias y entes públicos.'
     },
     'faq': {
-      t: 'Consultar Recursos: Diccionario, 25 Preceptos Legales y Casillas Didácticas',
+      t: 'Consultar Recursos: Diccionario, Preceptos Legales y Casillas Didácticas',
       d: 'Pedagogía cívica directa: respuestas a dudas frecuentes en casillas didácticas, glosario técnico, marco normativo constitucional y enlace directo al atlas enciclopédico de 9 tomos.'
     },
     'portal': {
@@ -5157,6 +5157,33 @@
     { a: ['conflicto de interés'], t: 'Conflicto de Interés', r: 'ref-lgra', n: 29 },
     { a: ['datos abiertos'], t: 'Transparencia Proactiva y Datos Abiertos', r: 'ref-lgtaip', n: 30 },
     { a: ['auditoría forense'], t: 'Auditoría Forense', r: 'ref-lfrcf', n: 7 },
+    // --- Informe del Resultado de la ASF (seccion Cuenta Publica) ---
+    { a: ['informe individual', 'informes individuales'], t: 'Informe Individual de Auditoría', r: 'ref-lfrcf', n: 7 },
+    { a: ['Informe General Ejecutivo'], t: 'Informe General Ejecutivo', r: 'ref-lfrcf', n: 7 },
+    { a: ['Matriz de Datos Básicos'], t: 'Matriz de Datos Básicos (MDB)', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['universo seleccionado'], t: 'Universo Seleccionado', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['representatividad de la muestra'], t: 'Representatividad de la Muestra', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['observaciones solventadas', 'observación solventada', 'solventación'], t: 'Observación Solventada', r: 'ref-lfrcf', n: 7 },
+    { a: ['recomendación al desempeño', 'recomendaciones al desempeño'], t: 'Recomendación (R) y Recomendación al Desempeño (RD)', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['solicitud de aclaración', 'solicitudes de aclaración'], t: 'Solicitud de Aclaración (SA)', r: 'ref-lfrcf', n: 7 },
+    { a: ['facultad de comprobación fiscal'], t: 'Promoción del Ejercicio de la Facultad de Comprobación Fiscal (PEFCF)', r: 'ref-lfrcf', n: 7 },
+    { a: ['PEFCF'], t: 'Promoción del Ejercicio de la Facultad de Comprobación Fiscal (PEFCF)', r: 'ref-lfrcf', n: 7, cs: true },
+    { a: ['responsabilidad administrativa sancionatoria'], t: 'Promoción de Responsabilidad Administrativa Sancionatoria (PRAS)', r: 'ref-lfrcf', n: 7 },
+    { a: ['PRAS'], t: 'Promoción de Responsabilidad Administrativa Sancionatoria (PRAS)', r: 'ref-lfrcf', n: 7, cs: true },
+    { a: ['presunta responsabilidad administrativa'], t: 'Informe de Presunta Responsabilidad Administrativa', r: 'ref-lfrcf', n: 7 },
+    { a: ['denuncia de hechos', 'denuncias de hechos'], t: 'Denuncia de Hechos (ASF)', r: 'ref-lfrcf', n: 7 },
+    { a: ['denuncia de juicio político', 'denuncias de juicio político'], t: 'Denuncia de Juicio Político', r: 'ref-lfrcf', n: 7 },
+    { a: ['sugerencias a la Cámara'], t: 'Sugerencias a la Cámara de Diputados', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['cuantificación monetaria'], t: 'Cuantificación Monetaria de las Observaciones', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['recuperaciones operadas'], t: 'Recuperaciones Operadas', r: 'ref-asf-mdb2024', n: 80 },
+    { a: ['entidad fiscalizada', 'entidades fiscalizadas'], t: 'Entidad Fiscalizada', r: 'ref-lfrcf', n: 7 },
+    { a: ['Comisión de Vigilancia'], t: 'Comisión de Vigilancia de la Auditoría Superior de la Federación', r: 'ref-lfrcf', n: 7, cs: true },
+    { a: ['autonomía técnica'], t: 'Autonomía Técnica y de Gestión de la ASF', r: 'ref-lfrcf', n: 7 },
+    { a: ['Informe de Avance de Gestión Financiera'], t: 'Informe de Avance de Gestión Financiera', r: 'ref-lfrcf', n: 7 },
+    { a: ['Fiscalía Especializada en Materia de Combate a la Corrupción', 'Fiscalía Especializada en Combate a la Corrupción'], t: 'Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)', r: 'ref-fgr-femcc', n: 87 },
+    { a: ['FEMCC'], t: 'Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)', r: 'ref-fgr-femcc', n: 87, cs: true },
+    { a: ['Transparencia para el Pueblo'], t: 'Transparencia para el Pueblo (Autoridad Garante)', r: 'ref-lgtaip', n: 30, cs: true },
+    { a: ['ASF Datos'], t: 'Informe Individual de Auditoría', r: 'ref-asfdatos', n: 83, cs: true },
     { a: ['EFOS', 'EDOS', 'factureras'], t: 'EFOS y EDOS (Factureras)', r: 'ref-cff', n: 9, cs: true },
     { a: ['Declaración 3 de 3'], t: 'Declaración 3 de 3 (Patrimonial, Intereses y Fiscal)', r: 'ref-lgra', n: 29 },
 
@@ -23865,6 +23892,15 @@
     safeRun(renderVersusPorfirio, 'renderVersusPorfirio');
     safeRun(renderCasillasFaq, 'renderCasillasFaq');
     safeRun(() => renderReferencias('todas'), 'renderReferencias');
+    /* Los conteos del diccionario se leen de la base: al sumar un termino o
+       una ficha, el texto se actualiza solo. */
+    safeRun(() => {
+      const cuentas = { glosario: DB.glosario, preceptos: DB.preceptos_legales, referencias: DB.referencias_legales };
+      document.querySelectorAll('[data-cuenta]').forEach(el => {
+        const lista = cuentas[el.dataset.cuenta];
+        if (lista) el.textContent = lista.length;
+      });
+    }, 'cuentasDiccionario');
     /* Las ventanas y cajones flotantes deben colgar del body: dentro del pie
        (que lleva backdrop-filter) position:fixed se mide contra el pie y la
        ventana aparece hasta abajo de la pagina. */

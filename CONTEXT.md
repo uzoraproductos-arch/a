@@ -2007,7 +2007,48 @@ vuelve a correrse si cambian los libros.
   citaba la reforma de 2021 y la 14 apuntaba a la portada de la ASF y hablaba
   de «2,100 pliegos»: corregidas.
 
+### Hecho (glosario y bibliografía al día con las secciones nuevas)
+
+- `herramientas/integrar_glosario_fiscalizacion.py` (idempotente) suma al
+  glosario 24 términos que trajeron la Cuenta Pública y el Portal Digital:
+  informe individual, entregas del Informe del Resultado, Informe General
+  Ejecutivo, Matriz de Datos Básicos, universo seleccionado,
+  representatividad de la muestra, observación solventada, R y RD, SA, PEFCF,
+  PRAS, informe de presunta responsabilidad administrativa, denuncia de
+  hechos, denuncia de juicio político, sugerencias a la Cámara, cuantificación
+  monetaria, recuperaciones operadas, entidad fiscalizada, Comisión de
+  Vigilancia, autonomía técnica y de gestión, plazos del seguimiento, Informe
+  de Avance de Gestión Financiera, FEMCC y Transparencia para el Pueblo.
+  Cada definición sale del texto de la LFRCF (reforma DOF 14-05-2026), del
+  glosario de la MDB 2024 (pp. 518-519), de la LGTAIP de 2025 o del art. 102
+  constitucional. El glosario pasa de 188 a 212 términos.
+- Bibliografía: fichas 82 a 89 (MDB 2025 1.ª entrega, ASF Datos, portal de
+  la Cuenta Pública de la SHCP, denuncias ASF, Alertadores, FEMCC, denuncias
+  SAT, Transparencia Presupuestaria). Eran ligas que la plataforma ya usaba
+  sin ficha. Pasa de 81 a 89.
+- Citas corregidas: la ficha 30 decía LGTAIP de 2015 (abrogada; la vigente es
+  del DOF 20-03-2025, arts. 65 a 82 y 144 a 148); «Observación, Recomendación
+  y Promoción» citaba los arts. 49 a 52 de la LFRCF, que tratan otra cosa (las
+  acciones están en el 40 y las recomendaciones en el 42); se precisó el
+  fundamento de pliego de observaciones, muestra auditada, monto por aclarar,
+  datos abiertos y recurso de revisión.
+- 26 entradas nuevas en el autoenlazado (`AUTOLINK_TERMINOS`); las 199
+  entradas se comprobaron: todo término existe y todo número de nota coincide
+  con su ficha.
+- Los conteos del diccionario (términos, preceptos, fuentes) ya no se
+  escriben a mano: se leen de la base con `data-cuenta`. El pie decía «más de
+  120 conceptos» y «25 preceptos»; hoy son 212 y 28.
+
 ### Pendiente
+
+- **Ligas de la FGR y del SAT (fichas 87 y 88):** no se pudieron volver a
+  abrir desde el entorno de trabajo. `fgr.org.mx` lo bloquea la política de
+  red del entorno (se permite en la configuración de red del entorno) y
+  `sat.gob.mx` responde 403 a cualquier visita automática. Comprobarlas a mano
+  en un navegador.
+- **Ficha 25 (asesores de la SCJN):** cita el art. 70 de la LGTAIP de 2015,
+  vigente cuando se hizo aquella solicitud. Es correcta como cita histórica;
+  si se actualiza la solicitud, citar el art. 65 de la ley de 2025.
 
 - **Bitácora de noticias (Enciclopedia 2.5, `DB.noticias`):** sus siete notas
   no traen liga a su fuente y varias no se sostienen (el PEF 2026 no se
