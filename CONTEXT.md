@@ -2101,6 +2101,43 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (Auditoría en imágenes: simulador «Ver gasto» con cifras de la base)
+
+- **El carrusel ya no lleva cifras propias.** `showcaseData`, con montos sin
+  fuente que contradecían a otras secciones, se sustituye por `SHOWCASE`: cada
+  diapositiva arma sus cifras al abrirse desde la base (fichas de Expedientes,
+  Panorama del Erario, matriz de la CP 2024 y padrón EFIPEM). Cada cifra lleva
+  su chip `oficial` o `derivado` y la ventana cita su documento.
+- **Simulador «Ver gasto».** Las cuentas nacen en cero y sólo suben al pulsar
+  el botón (motor compartido `simAnimarZona`); un segundo toque las regresa a
+  cero. Debajo, «el rastro del dinero»: una barra por informe de la ASF (o por
+  fondo, o por componente) con liga al PDF.
+- **Los botones azules llevan a su contenido.** Antes mandaban a la
+  pestaña genérica de megaobras o a una clave que no existía (`inspector`).
+  Ahora: Tren Maya, Dos Bocas, AIFA, Tren Interurbano y Megafarmacia abren su
+  ficha en Expedientes (`expIr`), resaltada; la deuda abre la ficha del costo
+  financiero en la 1.1 y la calculadora en el bloque de intereses; el Ramo 33
+  abre el padrón municipal y la ficha del Ramo 33; LEGO abre Ciénega de Flores
+  en el padrón (`munIrA('NL','19012')`) y el expediente de El Cuchillo II.
+- **Preguntas reescritas** para lo que los documentos sí responden. Las
+  anteriores afirmaban sobrecostos («más del doble», «triplicó») sin fuente.
+- **Cuatro expedientes nuevos (10 en total):** Tren Interurbano (10 informes,
+  CP 2022 a 2024), AIFA (5), El Cuchillo II (3) y Birmex (auditoría forense
+  234 de la CP 2023). `defensa` cede el informe del AIFA 2024 a su ficha.
+  `extraer_expedientes_asf.py` lee además cifras literales del informe de
+  Birmex (precio del inmueble de Huehuetoca, equipamiento, pagos de 2023,
+  pagos a almacenes privados) y de El Cuchillo II (106 km, 5,371,290
+  usuarios); si una frase no aparece, se detiene.
+- **Imágenes rotuladas:** las cinco con C2PA de IA dicen «Ilustración
+  generada con IA»; las otras tres, «Imagen ilustrativa». Los `alt` ya no
+  las presentan como lugares reales.
+- **Defecto corregido de paso:** la integración de la copia local del 25 de
+  septiembre borró de `index.html` las ventanas laterales `flujoFichaDrawer` y
+  `munFichaDrawer`. Pulsar un renglón de la 1.1 o un municipio de la 1.3 no
+  abría nada. Se restauraron desde `enciclopedia.html`.
+- Accesibilidad: las diapositivas se abren con Enter o espacio; la ventana se
+  cierra con Escape o al pulsar fuera, y se desplaza por dentro en teléfono.
+
 ### Pendiente
 
 - **Expedientes, alcance:** cada ficha reúne sólo los informes enlistados. El
@@ -2169,15 +2206,13 @@ vuelve a correrse si cambian los libros.
 25 de septiembre no cumple todavía la regla editorial. Bloquean la versión
 final, en este orden:
 
-- **Imágenes de IA sin aviso.** 7 de 10 JPG de `assets/img/` traen C2PA de
-  Google (`trainedAlgorithmicMedia`); el `alt` las presenta como lugares
-  reales. Rotular «Ilustración generada con IA» o sustituir por fotos con
-  licencia. La de «Palacio Nacional» no es el Palacio Nacional.
-- **Cifras que no coinciden entre secciones.** `showcaseData` (motor) contra
-  `simulador_megaobras`: Tren Maya $156,000 vs $120,000 mdp, AIFA +53.3 % vs
-  +460.1 %, Dos Bocas $378,000 vs $350,000 mdp; costo de la deuda $1,388,400
-  (carrusel) vs $1,572,073 mdp (radar) vs «más de $1.2 billones» (ficha
-  Sheinbaum). El carrusel debe leer de la base, no llevar sus cifras.
+- **Imágenes de IA sin aviso.** Resuelto en el carrusel (rótulo en cada
+  diapositiva). Quedan los fondos de ciudad, que el autor conserva a propósito.
+- **Cifras que no coinciden entre secciones.** El carrusel ya lee de la base.
+  Sigue abierto: `simulador_megaobras` (Tren Maya $120,000 mdp, AIFA
+  +460.1 %, Dos Bocas $350,000 mdp) no tiene campo de fuente, y el costo de
+  la deuda aparece como $1,572,073 mdp (PEF, radar y carrusel) pero «más de
+  $1.2 billones» en la ficha Sheinbaum.
 - **«Erosión patrimonial» ($54,010.89/s).** Suma costo financiero (gasto legal,
   flujo) con observaciones ASF por aclarar (saldo) y probablemente cuenta dos
   veces al IPAB (FOBAPROA en megaobras y Ramo 34 en costo financiero).

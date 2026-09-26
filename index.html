@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926p">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926q">
 </head>
 <body>
 
@@ -137,7 +137,7 @@
             <span class="mega-col-title">⚠️ Detección y Riesgos ASF</span>
             <a href="#expedientesCasos" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'expedientesCasos'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">📂 Expedientes de Casos por Aclarar</span>
-              <span class="mega-link-desc">Seis casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.</span>
+              <span class="mega-link-desc">Diez casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.</span>
             </a>
             <a href="#efosVerificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.efosAbrir();">
               <span class="mega-link-name">🧾 ¿Su proveedor está en la lista negra del SAT? (69-B)</span>
@@ -596,113 +596,121 @@
           <span class="showcase-tag">🇲🇽 AUDITORÍA EN IMÁGENES</span>
           <h2 class="showcase-title">Descubre el rastro del gasto público</h2>
         </div>
-        <span class="showcase-hint">Haz clic en cualquier imagen para revelar el presupuesto oficial vs. el costo real</span>
+        <span class="showcase-hint">Haz clic en una imagen y pulsa «Ver gasto»: las cuentas arrancan en cero y suben hasta la cifra oficial, cada una con su fuente</span>
       </div>
 
       <div class="showcase-viewport" onmouseenter="window.AuditEngine.pauseShowcaseAutoSlide()" onmouseleave="window.AuditEngine.startShowcaseAutoSlide()">
         <div class="showcase-track">
           
           <!-- Slide 1: Tren Maya -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(0)" title="Clic para descubrir la auditoría del Tren Maya">
-            <img src="assets/img/showcase_tren_maya.jpg" alt="Tren Maya en vías férreas de México" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(0)" title="Clic para descubrir la auditoría del Tren Maya">
+            <img src="assets/img/showcase_tren_maya.jpg" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🚅 Megaobra Ferroviaria · 1,554 km</span>
-              <h3 class="showcase-slide-q">¿Cuánto costó realmente el Tren Maya y qué porcentaje fue sobrecosto?</h3>
+              <span class="showcase-slide-badge">🚅 Megaobra ferroviaria · FONATUR y Tren Maya</span>
+              <h3 class="showcase-slide-q">¿Cuánto dinero del Tren Maya dejó la ASF por aclarar, y en qué tramos?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
           <!-- Slide 2: Dos Bocas -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(1)" title="Clic para descubrir la auditoría de Dos Bocas">
-            <img src="assets/img/showcase_dos_bocas.jpg" alt="Refinería Olmeca en Dos Bocas Tabasco" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(1)" title="Clic para descubrir la auditoría de Dos Bocas">
+            <img src="assets/img/showcase_dos_bocas.jpg" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🏭 Refinación Petrolera · Tabasco</span>
-              <h3 class="showcase-slide-q">¿Sabías que esta refinería costó más del doble de lo presupuestado?</h3>
+              <span class="showcase-slide-badge">🏭 Refinación · Pemex, Paraíso, Tabasco</span>
+              <h3 class="showcase-slide-q">¿Qué encontró la ASF al revisar la refinería paquete por paquete?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
           <!-- Slide 3: Deuda Soberana y Palacio Nacional -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(2)" title="Clic para descubrir los intereses de la deuda soberana">
-            <img src="assets/img/showcase_deuda_soberana.jpg" alt="Palacio Nacional y Secretaría de Hacienda" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(2)" title="Clic para descubrir los intereses de la deuda soberana">
+            <img src="assets/img/showcase_deuda_soberana.jpg" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🏛️ Costo Financiero de la Deuda · Banxico</span>
-              <h3 class="showcase-slide-q">¿A cuánto asciende el costo anual sólo de pagar intereses de la deuda pública?</h3>
+              <span class="showcase-slide-badge">🏛️ Costo financiero de la deuda · PEF 2026</span>
+              <h3 class="showcase-slide-q">¿Cuánto cuesta al año pagar sólo los intereses de la deuda pública?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
           <!-- Slide 4: AIFA -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(3)" title="Clic para descubrir la auditoría del AIFA">
-            <img src="assets/img/showcase_aifa.jpg" alt="Aeropuerto Internacional Felipe Ángeles" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(3)" title="Clic para descubrir la auditoría del AIFA">
+            <img src="assets/img/showcase_aifa.jpg" alt="Ilustración generada con IA de una terminal aérea" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">✈️ Infraestructura Aeroportuaria · SEDENA</span>
-              <h3 class="showcase-slide-q">¿Cuánto erario público subsidia la operación de cada vuelo y pasajero?</h3>
+              <span class="showcase-slide-badge">✈️ Infraestructura aeroportuaria · Defensa</span>
+              <h3 class="showcase-slide-q">¿Qué revisó la ASF en la construcción y la operación del AIFA?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
           <!-- Slide 5: Ramo 33 Municipios -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(4)" title="Clic para descubrir las aportaciones a municipios">
-            <img src="assets/img/showcase_ramo33.jpg" alt="Centro de salud y hospital público en México" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(4)" title="Clic para descubrir las aportaciones a municipios">
+            <img src="assets/img/showcase_ramo33.jpg" alt="Ilustración generada con IA de un centro de salud" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🏥 Gasto Federalizado · 2,479 Municipios</span>
-              <h3 class="showcase-slide-q">¿Cómo se reparte el Ramo 33 en clínicas y escuelas de tu localidad?</h3>
+              <span class="showcase-slide-badge">🏥 Gasto federalizado · Ramo 33</span>
+              <h3 class="showcase-slide-q">¿Cuánto dinero del Ramo 33 llega a estados y municipios, y cuánto quedó por aclarar?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
 
           <!-- Slide 6: Expansión LEGO & Petroquímica -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(5)" title="Clic para descubrir la inversión de LEGO e insumos petroquímicos">
-            <img src="assets/img/showcase_lego_expansion.jpg" alt="Complejo industrial de manufactura y polímeros LEGO en México" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(5)" title="Clic para descubrir la inversión de LEGO e insumos petroquímicos">
+            <img src="assets/img/showcase_lego_expansion.jpg" alt="Imagen ilustrativa de una planta industrial" loading="lazy">
+            <span class="showcase-ia">Imagen ilustrativa</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🧱 Inversión Extranjera Directa & Cadena Petroquímica · Economía</span>
-              <h3 class="showcase-slide-q">¿Cuánto erario público en agua, luz e infraestructura respalda la megainversión de LEGO?</h3>
+              <span class="showcase-slide-badge">🧱 Inversión privada y obra pública · Nuevo León</span>
+              <h3 class="showcase-slide-q">¿Qué dinero público rodea a la planta de LEGO en Ciénega de Flores?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
           <!-- Slide 7: Tren México-Toluca 'El Insurgente' -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(6)" title="Clic para descubrir la auditoría del Tren México-Toluca">
-            <img src="assets/img/showcase_tren_toluca.jpg" alt="Tren Interurbano México-Toluca El Insurgente sobre viaducto elevado" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(6)" title="Clic para descubrir la auditoría del Tren México-Toluca">
+            <img src="assets/img/showcase_tren_toluca.jpg" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy">
+            <span class="showcase-ia">Imagen ilustrativa</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🚄 Transporte Masivo Ferroviario · SICT / CDMX</span>
-              <h3 class="showcase-slide-q">¿Cuánto costó el tren que tardó más de una década y triplicó su presupuesto original?</h3>
+              <span class="showcase-slide-badge">🚄 Transporte ferroviario · SICT</span>
+              <h3 class="showcase-slide-q">¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
 
           <!-- Slide 8: Megafarmacia del Bienestar -->
-          <div class="showcase-slide" onclick="window.AuditEngine.abrirDescubrimiento(7)" title="Clic para descubrir la auditoría de la Megafarmacia de Huehuetoca">
-            <img src="assets/img/showcase_megafarmacia.jpg" alt="Megafarmacia del Bienestar en Huehuetoca y almacén central" loading="lazy">
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(7)" title="Clic para descubrir la auditoría de la Megafarmacia de Huehuetoca">
+            <img src="assets/img/showcase_megafarmacia.jpg" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy">
+            <span class="showcase-ia">Imagen ilustrativa</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">💊 Cadena de Suministro de Medicamentos · Birmex</span>
-              <h3 class="showcase-slide-q">¿Cuánto costó el mega-almacén central y cuál ha sido su volumen real de recetas surtidas?</h3>
+              <span class="showcase-slide-badge">💊 Almacén de medicamentos · Birmex, Huehuetoca</span>
+              <h3 class="showcase-slide-q">¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?</h3>
               <div class="showcase-click-cue">
-                <span>👁️ Clic para descubrir el rastro del dinero</span> ➔
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
               </div>
             </div>
           </div>
@@ -1682,7 +1690,7 @@
         </div>
 
         <!-- MUNICIPIOS DE LA ENTIDAD -->
-        <div class="erario-bloque">
+        <div class="erario-bloque" id="munBloqueLista">
           <div class="erario-bloque-head">
             <h3>4 &middot; Municipio por municipio</h3>
             <p class="erario-bloque-sub">
@@ -1990,7 +1998,7 @@
         <span class="insp-sep-n">📂</span>
         <div>
           <h3 class="insp-sep-tit">Expedientes de Casos por Aclarar</h3>
-          <p class="insp-sep-sub">Seis casos de alto impacto, uno por ficha: megaobras, energía, salud, Segalmex y deuda de los estados. Filtre por tema y abra el expediente.</p>
+          <p class="insp-sep-sub">Diez casos de alto impacto, uno por ficha: megaobras, energía, salud, Segalmex y deuda de los estados. Filtre por tema y abra el expediente.</p>
         </div>
       </div>
 
@@ -2578,7 +2586,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926p</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926q</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2722,48 +2730,26 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926p"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926q"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926p"></script>
+  <script src="assets/js/audit-database.js?v=20260926q"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926p"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926q"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926p"></script>
+  <script src="assets/js/audit-engine.js?v=20260926q"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
     <div class="desc-modal-card">
-      <button type="button" class="desc-modal-close" onclick="window.AuditEngine.cerrarDescubrimiento()" aria-label="Cerrar modal">✕</button>
-      <span class="desc-modal-tag">⚖️ DICTAMEN DE AUDITORÍA FORENSE</span>
-      <h3 class="desc-modal-title" id="descModalTitulo">Título de la Obra</h3>
-      <p class="desc-modal-question" id="descModalPregunta">Pregunta de investigación ciudadana</p>
-
-      <div class="desc-modal-grid">
-        <div class="desc-modal-stat-box">
-          <span class="desc-stat-lbl">Presupuesto Aprobado Inicial:</span>
-          <span class="desc-stat-val val-gold" id="descModalOriginal">$0.00</span>
-        </div>
-        <div class="desc-modal-stat-box">
-          <span class="desc-stat-lbl">Costo Real Auditado:</span>
-          <span class="desc-stat-val val-red" id="descModalReal">$0.00</span>
-        </div>
-        <div class="desc-modal-stat-box" style="grid-column: span 2;">
-          <span class="desc-stat-lbl">Variación / Sobrecosto Documentado:</span>
-          <span class="desc-stat-val val-red" id="descModalSobrecosto">+0.0%</span>
-        </div>
-      </div>
-
-      <div class="desc-modal-findings">
-        <p class="desc-findings-txt" id="descModalHallazgo">Detalle técnico oficial documentado en los informes de cuenta pública.</p>
-        <span class="desc-source-txt"><b>Fuente Oficial Verificada:</b> <span id="descModalFuente">Auditoría Superior de la Federación (ASF)</span></span>
-      </div>
-
-      <button type="button" class="desc-modal-btn" id="descModalAccionBtn">
-        Auditar este proyecto en el módulo operativo ➔
-      </button>
+      <button type="button" class="desc-modal-close" onclick="window.AuditEngine.cerrarDescubrimiento()" aria-label="Cerrar">✕</button>
+      <span class="desc-modal-tag">🔎 EL RASTRO DEL DINERO · FUENTES OFICIALES</span>
+      <h3 class="desc-modal-title" id="descModalTitulo">Obra</h3>
+      <p class="desc-modal-question" id="descModalPregunta"></p>
+      <div id="descModalSim"></div>
+      <div class="desc-modal-acciones" id="descModalAcciones"></div>
     </div>
   </div>
 
@@ -2774,6 +2760,40 @@
       <span>Ayúdanos a fiscalizar</span>
     </button>
   </div>
+
+  <!-- ==========================================================================
+       VENTANA LATERAL: FICHA DE UN RENGL&Oacute;N DEL ERARIO (1.1)
+       El desglose de cada origen del ingreso y cada destino del gasto se lee
+       aqu&iacute;, con el mismo mecanismo de las ventanas de argumento particular de
+       la 5.2: cubierta oscura, panel lateral y cierre por Escape. Va m&aacute;s ancha
+       que aqu&eacute;llas porque la ficha trae tabla, y su cuerpo lleva desplazamiento
+       vertical propio porque es lectura larga.
+       ========================================================================== -->
+  <div id="flujoFichaOverlay" class="audit-drawer-overlay" onclick="window.AuditEngine.closeFlujoFicha()"></div>
+
+  <aside id="flujoFichaDrawer" class="audit-drawer audit-drawer-ancha"
+         role="dialog" aria-modal="true" aria-labelledby="flujoFichaTitulo" aria-hidden="true">
+    <div class="drawer-header" id="flujoFichaHead"></div>
+    <div class="flujo-ficha-marco">
+      <div class="drawer-body flujo-ficha-body" id="flujoFichaBody"></div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       VENTANA LATERAL: FICHA DE UN MUNICIPIO (1.3)
+       Misma ventana que la de los renglones del erario. Se abre al pulsar
+       cualquier rengl&oacute;n del padr&oacute;n municipal y trae, para ese municipio,
+       de d&oacute;nde vino cada peso que ingres&oacute; en el ejercicio.
+       ========================================================================== -->
+  <div id="munFichaOverlay" class="audit-drawer-overlay" onclick="window.AuditEngine.closeMunFicha()"></div>
+
+  <aside id="munFichaDrawer" class="audit-drawer audit-drawer-ancha"
+         role="dialog" aria-modal="true" aria-labelledby="munFichaTitulo" aria-hidden="true">
+    <div class="drawer-header" id="munFichaHead"></div>
+    <div class="flujo-ficha-marco">
+      <div class="drawer-body flujo-ficha-body" id="munFichaBody"></div>
+    </div>
+  </aside>
 
   <!-- ==========================================================================
        DRAWER LATERAL: AYÚDANOS A FISCALIZAR (CONTRALORÍA SOCIAL Y RETROALIMENTACIÓN)

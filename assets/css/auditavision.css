@@ -18862,8 +18862,11 @@ body.con-regreso { padding-bottom: 96px; }
 }
 
 .desc-modal-card {
-  max-width: 680px;
+  max-width: 760px;
   width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: rgba(11, 28, 52, 0.95);
   border: 1px solid var(--slate-border);
   border-radius: 14px;
@@ -20722,9 +20725,9 @@ button.radar-state-flag-card {
 
 /* Aterrizaje desde el menu: que el destino no quede bajo la barra fija
    (unos 145 px en escritorio). En telefono la barra no es fija. */
-.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
+.tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, .exp-ficha, #munBloqueLista, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 156px; }
 @media (max-width: 700px) {
-  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
+  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, .exp-ficha, #munBloqueLista, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
 }
 
 /* Pase Civico: si la ficha es mas alta que la pantalla, se desplaza dentro
@@ -20837,4 +20840,126 @@ button.radar-state-flag-card {
 @media (max-width: 640px) {
   .forensic-dossiers-grid { grid-template-columns: 1fr; }
   .exp-ficha { padding: 16px; }
+}
+
+
+/* --------------------------------------------------------------------------
+   AUDITORIA EN IMAGENES: SIMULADOR «VER GASTO»
+   Las cuentas nacen en cero y suben a la cifra oficial al pulsar el boton.
+   -------------------------------------------------------------------------- */
+.showcase-ia {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.62);
+  color: #f1f5f9;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.showcase-slide:focus-visible { outline: 3px solid var(--blue-bright); outline-offset: -3px; }
+.desc-modal-title, .desc-modal-tag { padding-right: 40px; }
+.sc-sim { margin-bottom: 18px; }
+.sc-mandos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 14px;
+}
+.sc-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(251, 191, 36, 0.6);
+  background: #fbbf24;
+  color: #111827;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.sc-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(251, 191, 36, 0.35); }
+.sc-btn:disabled { opacity: 0.7; cursor: progress; }
+.sc-estado { font-size: 12.5px; color: #cbd5e1; flex: 1 1 220px; }
+.sc-conts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.sc-cont {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sc-cont-v {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 800;
+  color: #fbbf24;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.sc-cont-e { font-size: 12px; line-height: 1.4; color: #cbd5e1; }
+.sc-rastro-tit {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+.sc-rastro { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.sc-fila { display: flex; flex-direction: column; gap: 4px; }
+.sc-fila-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.sc-fila-k { font-size: 13px; font-weight: 700; color: #e2e8f0; min-width: 0; }
+.sc-fila-k a { color: inherit; text-decoration: underline; text-decoration-color: rgba(148, 163, 184, 0.5); text-underline-offset: 2px; }
+.sc-fila-k a:hover { color: var(--blue-bright); }
+.sc-fila-v { font-family: var(--font-mono); font-size: 13px; font-weight: 800; color: #fbbf24; white-space: nowrap; }
+.sc-riel { display: block; height: 8px; border-radius: 4px; background: rgba(148, 163, 184, 0.18); overflow: hidden; }
+.sc-barra { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #f59e0b, #ef4444); }
+.sc-fila-sub { font-size: 11.5px; line-height: 1.4; color: #94a3b8; }
+.sc-hallazgo {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #e2e8f0;
+  background: rgba(0, 43, 91, 0.25);
+  border-left: 3px solid var(--blue-bright);
+  padding: 10px 12px;
+  border-radius: 0 6px 6px 0;
+  margin: 0 0 10px;
+}
+.sc-pendiente, .sc-fuente { font-size: 12px; line-height: 1.45; color: #94a3b8; margin: 0 0 6px; }
+.desc-modal-acciones { display: flex; flex-direction: column; gap: 8px; }
+.desc-modal-btn { text-decoration: none; text-align: center; }
+.desc-modal-btn-2 {
+  background: transparent;
+  color: var(--blue-bright);
+  border-color: rgba(56, 189, 248, 0.45);
+  font-weight: 600;
+}
+.desc-modal-btn-2:hover { background: rgba(2, 132, 199, 0.14); box-shadow: none; }
+[data-theme="light"] .sc-estado, [data-theme="light"] .sc-cont-e { color: #475569; }
+[data-theme="light"] .sc-cont { background: rgba(241, 245, 249, 0.8); border-color: rgba(0, 43, 91, 0.12); }
+[data-theme="light"] .sc-cont-v, [data-theme="light"] .sc-fila-v { color: #b45309; }
+[data-theme="light"] .sc-rastro-tit { color: var(--navy-fed); }
+[data-theme="light"] .sc-fila-k { color: #1e293b; }
+[data-theme="light"] .sc-fila-sub, [data-theme="light"] .sc-pendiente, [data-theme="light"] .sc-fuente { color: #64748b; }
+[data-theme="light"] .sc-riel { background: rgba(0, 43, 91, 0.1); }
+[data-theme="light"] .sc-hallazgo { color: #334155; background: rgba(0, 43, 91, 0.05); border-left-color: var(--navy-fed); }
+[data-theme="light"] .desc-modal-btn-2 { color: var(--navy-fed); border-color: rgba(0, 43, 91, 0.35); }
+@media (max-width: 600px) {
+  .descubrimiento-modal { padding: 10px; align-items: flex-start; }
+  .desc-modal-card { padding: 20px 16px; max-height: calc(100vh - 20px); }
+  .desc-modal-title { font-size: 19px; }
+  .sc-conts { grid-template-columns: 1fr 1fr; }
+  .sc-cont-v { font-size: 16px; }
 }

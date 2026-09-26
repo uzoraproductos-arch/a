@@ -19208,7 +19208,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 7 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 1 Recomendaci\u00f3n, 1 Solicitud de Aclaraci\u00f3n y 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0107_a.pdf",
             "sha256": "8b9396da026519f622fb7a977435bb5efb058a6f8720aab77612133657500150",
-            "paginas": 17
+            "paginas": 17,
+            "universo": 3784661300.0,
+            "muestra": 2397416700.0
           },
           {
             "cp": 2022,
@@ -19226,7 +19228,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 2 Solicitudes de Aclaraci\u00f3n y 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0111_a.pdf",
             "sha256": "c1579fa88c7a76ea4ba6b35d6f2b2861f80f64bbf43f4ecc47abe4cb071ea1a0",
-            "paginas": 18
+            "paginas": 18,
+            "universo": 14391101500.0,
+            "muestra": 10135587900.0
           },
           {
             "cp": 2022,
@@ -19244,7 +19248,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 10 resultados, de los cuales, en 4 no se detectaron irregularidades y los 6 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0112_a.pdf",
             "sha256": "1bd89b2f064577a2338c5e8f43174855569c243228bd4845d14063f33182ce2d",
-            "paginas": 27
+            "paginas": 27,
+            "universo": 19000537000.0,
+            "muestra": 17106324100.0
           },
           {
             "cp": 2022,
@@ -19263,7 +19269,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 10 resultados, de los cuales, en 4 no se detectaron irregularidades y los 6 restantes generaron: 2 Solicitudes de Aclaraci\u00f3n, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0113_a.pdf",
             "sha256": "646c96bd656ea186732c8f706ebad84190c61f4ecc7098952b7ac5703ac6fc2b",
-            "paginas": 27
+            "paginas": 27,
+            "universo": 8366022300.0,
+            "muestra": 5050903000.0
           },
           {
             "cp": 2022,
@@ -19282,7 +19290,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 1 Solicitud de Aclaraci\u00f3n, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 5 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0114_a.pdf",
             "sha256": "4d19f7f22519fb5732b2f917d27271666c9f4bc843e40cb69a94a96e6b4b4c3f",
-            "paginas": 26
+            "paginas": 26,
+            "universo": 24089495000.0,
+            "muestra": 19349005000.0
           },
           {
             "cp": 2022,
@@ -19297,7 +19307,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 5 resultados, de los cuales, en 4 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0115_a.pdf",
             "sha256": "bcb785857427e1a620b2b88f756df83756410ef5813d579345c8fd05f45922cf",
-            "paginas": 19
+            "paginas": 19,
+            "universo": 318296100.0,
+            "muestra": 157995000.0
           },
           {
             "cp": 2022,
@@ -19316,7 +19328,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 8 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 2 Recomendaciones, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0116_a.pdf",
             "sha256": "4af901d8cfa66fc7f5ff79e15c8706faa513c364cfa0c3afe53482baacb0e3d8",
-            "paginas": 20
+            "paginas": 20,
+            "universo": 14221317000.0,
+            "muestra": 14221317000.0
           },
           {
             "cp": 2022,
@@ -19334,7 +19348,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 1 Solicitud de Aclaraci\u00f3n y 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0117_a.pdf",
             "sha256": "b5dca0a98c7104993f39b4ae3a4cee7816af816ff946fc2cfebce04f08f55c65",
-            "paginas": 16
+            "paginas": 16,
+            "universo": 1423921600.0,
+            "muestra": 1146939900.0
           },
           {
             "cp": 2022,
@@ -19352,7 +19368,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 5 resultados, de los cuales, en 3 no se detectaron irregularidades y los 2 restantes generaron: 1 Recomendaci\u00f3n y 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0118_a.pdf",
             "sha256": "3e832f9c68abea608fcf055b074352d5996c79b9689e8c1fa8741ac4035b7272",
-            "paginas": 31
+            "paginas": 31,
+            "universo": null,
+            "muestra": null
           },
           {
             "cp": 2022,
@@ -19369,7 +19387,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 6 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2111_a.pdf",
             "sha256": "6657149008b936ca429d70fe55aa4de5a5c27fcb8537ea9a5087307abb2f9a1d",
-            "paginas": 23
+            "paginas": 23,
+            "universo": 1075437200.0,
+            "muestra": 799778600.0
           },
           {
             "cp": 2022,
@@ -19386,7 +19406,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 7 resultados, de los cuales, 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 4 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2112_a.pdf",
             "sha256": "ea6572ad11d21a3302bce5adf397eabbc8ef0b9bcb8f10f43b6bc0e40916ff08",
-            "paginas": 18
+            "paginas": 18,
+            "universo": 3808252200.0,
+            "muestra": 3808252200.0
           },
           {
             "cp": 2023,
@@ -19403,7 +19425,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 15 resultados, de los cuales, en 11 no se detectaron irregularidades y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0145_a.pdf",
             "sha256": "adbe5b0516cdcad0817a01b16d7460454cee4f623d4d9fecf235bfad5489aefb",
-            "paginas": 33
+            "paginas": 33,
+            "universo": null,
+            "muestra": null
           },
           {
             "cp": 2024,
@@ -19418,7 +19442,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 4 resultados, de los cuales, en 2 no se detectaron irregularidades y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0125_a.pdf",
             "sha256": "0c913ffb921f0b7656188ebecb68b8e4ee8b418d2bd1bd79a3ee77fb2db4144f",
-            "paginas": 8
+            "paginas": 8,
+            "universo": 19542057300.0,
+            "muestra": 15587979700.0
           },
           {
             "cp": 2024,
@@ -19433,7 +19459,535 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 12 resultados, de los cuales, en 12 no se detectaron irregularidades.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0126_a.pdf",
             "sha256": "d2c6eb81437c4e04a06444bb0c2b924f47a737038c6f2fae2c639a68b6d51550",
-            "paginas": 21
+            "paginas": 21,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "tren-toluca",
+        "categoria": "megaobras",
+        "icono": "\ud83d\ude84",
+        "titulo": "Tren Interurbano M\u00e9xico-Toluca: la obra que faltaba terminar",
+        "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+        "hallazgo": "De 2022 a 2024 la ASF revis\u00f3 cada a\u00f1o lo que faltaba para terminar el tren: el tramo de Zinacantepec, la estaci\u00f3n Vasco de Quiroga, los viaductos de Santa Fe y el material rodante con sus sistemas ferroviarios. Dej\u00f3 $820.9 mdp por aclarar y promovi\u00f3 50 pliegos de observaciones. Una sola auditor\u00eda, la del material rodante de 2023, concentra $528.5 mdp: el 64 %. Durante la revisi\u00f3n de 2024 se recuperaron $23.0 mdp.",
+        "cifras": [
+          {
+            "valor": "10",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$820.9 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "50 \u00b7 7",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$24.5 mdp",
+            "etq": "recuperados durante las auditor\u00edas",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 4,
+            "porAclarar": 248417609.6,
+            "recuperado": 1536922.67,
+            "acciones": 23,
+            "PO": 19,
+            "PRAS": 4
+          },
+          {
+            "cp": 2023,
+            "auditorias": 3,
+            "porAclarar": 552467915.65,
+            "recuperado": 0.0,
+            "acciones": 25,
+            "PO": 23,
+            "PRAS": 2
+          },
+          {
+            "cp": 2024,
+            "auditorias": 3,
+            "porAclarar": 20062859.91,
+            "recuperado": 23007990.04,
+            "acciones": 9,
+            "PO": 8,
+            "PRAS": 1
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 303,
+            "clave": "2022-0-09100-22-0303-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n de la Estaci\u00f3n Vasco de Quiroga del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 10040516.17,
+            "recuperado": 55303.54,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 4
+            },
+            "resumen": "Se determinaron 8 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 5 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 4 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022a/Documentos/Auditorias/2022_0303_a.pdf",
+            "sha256": "fd94a1bc9afa4795f13feb9578b51e2b806a926484c3ac4463389c57f1e5d1bf",
+            "paginas": 20,
+            "universo": 138320600.0,
+            "muestra": 102609000.0
+          },
+          {
+            "cp": 2022,
+            "num": 307,
+            "clave": "2022-0-09100-22-0307-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Tramo Ferroviario Zinacantepec km 0+000 al km 36+150 y Adecuaciones al Proyecto Ejecutivo del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico",
+            "porAclarar": 112229787.73,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 4
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 2 no se detectaron irregularidades y los 5 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 4 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0307_a.pdf",
+            "sha256": "ca02507d306254751fa3ec608e26f0c0190d8145d6742fca682abb1deec24dd3",
+            "paginas": 20,
+            "universo": 363943500.0,
+            "muestra": 363943500.0
+          },
+          {
+            "cp": 2022,
+            "num": 308,
+            "clave": "2022-0-09100-22-0308-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Viaducto Atirantado del Manantial CONAGUA, y del Viaducto Doble Voladizo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 32460352.29,
+            "recuperado": 1481619.13,
+            "acciones": {
+              "PO": 5
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en 2 no se detectaron irregularidades y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 5 restantes generaron: 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0308_a.pdf",
+            "sha256": "7c769df36bfcdae370f1fccb3dff5aefaa4d5e1e284d8f9ee62abd09973180bb",
+            "paginas": 25,
+            "universo": 261426700.0,
+            "muestra": 229367100.0
+          },
+          {
+            "cp": 2022,
+            "num": 329,
+            "clave": "2022-0-09100-22-0329-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Suministro y Puesta en Marcha de Material Rodante y Sistemas Ferroviarios del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico y el Estado de M\u00e9xico",
+            "porAclarar": 93686953.41,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 8 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0329_a.pdf",
+            "sha256": "a43b8f289870aebdc4af633a1cabe52e70f2117c1e66175d549b39abf578e257",
+            "paginas": 33,
+            "universo": 1832955500.0,
+            "muestra": 1832955500.0
+          },
+          {
+            "cp": 2023,
+            "num": 336,
+            "clave": "2023-0-09100-22-0336-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n de la Estaci\u00f3n Vasco de Quiroga, de la Superestructura del Viaducto Ferroviario Denominado Viaducto \"0\" y Adecuaciones al Proyecto Ejecutivo del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico y la Ciudad de M\u00e9xico",
+            "porAclarar": 15305742.58,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0336_a.pdf",
+            "sha256": "ae349145c69376ca3002d8ed556823ff3b8fe1751fea06c15347d06b04410c3a",
+            "paginas": 29,
+            "universo": 467878800.0,
+            "muestra": 339861900.0
+          },
+          {
+            "cp": 2023,
+            "num": 341,
+            "clave": "2023-0-09100-22-0341-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Viaducto Atirantado del Manantial CONAGUA, y del Viaducto Doble Voladizo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 8637371.27,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 5
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 2 no se detectaron irregularidades y los 5 restantes generaron: 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0341_a.pdf",
+            "sha256": "27d3e853d3f6d97a52038bfb744d3df702f2e20bb118cfaf8893f969a6340ea9",
+            "paginas": 23,
+            "universo": 500771700.0,
+            "muestra": 374890600.0
+          },
+          {
+            "cp": 2023,
+            "num": 353,
+            "clave": "2023-0-09100-22-0353-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Suministro y Puesta en Marcha de Material Rodante y Sistemas Ferroviarios del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico y la Ciudad de M\u00e9xico",
+            "porAclarar": 528524801.8,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 12
+            },
+            "resumen": "Se determinaron 14 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 13 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 12 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0353_a.pdf",
+            "sha256": "e75ea1e873d970763e28f2e22a1b6411476d136626a9bd7882e3e6c94a360191",
+            "paginas": 46,
+            "universo": 2155197000.0,
+            "muestra": 1603026100.0
+          },
+          {
+            "cp": 2024,
+            "num": 338,
+            "clave": "2024-0-09100-22-0338-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n de la Estaci\u00f3n Vasco de Quiroga y las Adecuaciones al Proyecto Ejecutivo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 6198637.1,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 3
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024a/Documentos/Auditorias/2024_0338_a.pdf",
+            "sha256": "a35f6607efc3cd983c90e12466674318272f6b58cf98b3bb5d91634221657ddd",
+            "paginas": 23,
+            "universo": 423917000.0,
+            "muestra": 291686700.0
+          },
+          {
+            "cp": 2024,
+            "num": 340,
+            "clave": "2024-0-09100-22-0340-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Viaducto Atirantado del Manantial CONAGUA, y del Viaducto Doble Voladizo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 13864222.81,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 5
+            },
+            "resumen": "Se determinaron 8 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 5 restantes generaron: 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024a/Documentos/Auditorias/2024_0340_a.pdf",
+            "sha256": "249bb82505639871bcc4a0b151dd49071da36591843a49c248d59cdc01e51c9a",
+            "paginas": 28,
+            "universo": 634617300.0,
+            "muestra": 466121100.0
+          },
+          {
+            "cp": 2024,
+            "num": 350,
+            "clave": "2024-0-09100-22-0350-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Suministro y Puesta en Marcha de Material Rodante y Sistemas Ferroviarios del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico y la Ciudad de M\u00e9xico",
+            "porAclarar": 0.0,
+            "recuperado": 23007990.04,
+            "acciones": {},
+            "resumen": "Se determinaron 7 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 6 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0350_a.pdf",
+            "sha256": "94f0e7130ba7f31cb64d457f0c55bdb8e7ebfb76a47bdda6870f831874c1c197",
+            "paginas": 16,
+            "universo": 2612118000.0,
+            "muestra": 1230738000.0
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "aifa",
+        "categoria": "megaobras",
+        "icono": "\u2708\ufe0f",
+        "titulo": "Aeropuerto Felipe \u00c1ngeles: construcci\u00f3n y operaci\u00f3n",
+        "ente": "Secretar\u00eda de la Defensa Nacional y Aeropuerto Internacional Felipe \u00c1ngeles, S.A. de C.V.",
+        "hallazgo": "En la Cuenta P\u00fablica 2022 la ASF revis\u00f3 la terminal de pasajeros, el estacionamiento, la interconexi\u00f3n vial y los recursos destinados a construir y hacer funcionar el aeropuerto; en la de 2024, su gesti\u00f3n financiera. S\u00f3lo la terminal dej\u00f3 dinero por aclarar: $6.6 mdp, con 2 pliegos de observaciones. En las cinco auditor\u00edas emiti\u00f3 4 promociones de responsabilidad administrativa.",
+        "cifras": [
+          {
+            "valor": "5",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$6.6 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "2 \u00b7 4",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$0.1 mdp",
+            "etq": "recuperados durante las auditor\u00edas",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 4,
+            "porAclarar": 6565884.01,
+            "recuperado": 123942.37,
+            "acciones": 7,
+            "PO": 2,
+            "PRAS": 4
+          },
+          {
+            "cp": 2024,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 341,
+            "clave": "2022-0-07100-22-0341-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Terminal de Pasajeros del Aeropuerto Internacional de Santa Luc\u00eda, en el Estado de M\u00e9xico",
+            "porAclarar": 6565884.01,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 2
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 2 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0341_a.pdf",
+            "sha256": "303eb3bedf376c44fce6c9abd1af33a3f9e2cf68580e2c59f0cba6bfb832e4d1",
+            "paginas": 25,
+            "universo": 3930332800.0,
+            "muestra": 1565102300.0
+          },
+          {
+            "cp": 2022,
+            "num": 2121,
+            "clave": "2022-0-07100-22-2121-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Estacionamiento del Aeropuerto Internacional de Santa Luc\u00eda, en el Estado de M\u00e9xico",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, 5 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2121_a.pdf",
+            "sha256": "5dc49ee494df56e6ba0eda33daca786d407e89943ad32c852dfb85c8dfbc6c40",
+            "paginas": 24,
+            "universo": 535200200.0,
+            "muestra": 294631700.0
+          },
+          {
+            "cp": 2022,
+            "num": 2122,
+            "clave": "2022-0-07100-22-2122-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Interconexi\u00f3n Vial Caseta Tultepec-Santa Luc\u00eda y Eje Troncal de Circulaci\u00f3n y Obras Complementarias del Aeropuerto Internacional de Santa Luc\u00eda, en el Estado de M\u00e9xico",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Recomendaci\u00f3n.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2122_a.pdf",
+            "sha256": "3bfe55207e8a91fc0bf4e751d6329e324b58f4b3c31b0bcd4fa565dba650d6f7",
+            "paginas": 22,
+            "universo": 867963100.0,
+            "muestra": 732886100.0
+          },
+          {
+            "cp": 2022,
+            "num": 342,
+            "clave": "2022-0-07100-19-0342-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Recursos Financieros Destinados a la Construcci\u00f3n y Funcionamiento del Aeropuerto Internacional Felipe \u00c1ngeles",
+            "porAclarar": 0.0,
+            "recuperado": 123942.37,
+            "acciones": {
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0342_a.pdf",
+            "sha256": "39233514dccff696e3097e023df77df3db1d20b0888f84b6123bc89ceaf93d9b",
+            "paginas": 36,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 9,
+            "clave": "2024-2-07HZI-19-0009-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Aeropuerto Internacional Felipe \u00c1ngeles, S.A. de C.V.",
+            "titulo": "Gesti\u00f3n Financiera",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 17 resultados, de los cuales, en 17 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0009_a.pdf",
+            "sha256": "df60b49333adf5fc500b66a53b36fd083b98ae7b9270936323b03ab651a51368",
+            "paginas": 38,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "cuchillo-ii",
+        "categoria": "megaobras",
+        "icono": "\ud83d\udca7",
+        "titulo": "Acueducto El Cuchillo II: agua para Monterrey",
+        "ente": "Comisi\u00f3n Nacional del Agua",
+        "hallazgo": "La Conagua construye un acueducto de 106.0 km para llevar agua potable al \u00c1rea Metropolitana de Monterrey y su zona conurbada, en beneficio de 5,371,290 usuarios seg\u00fan la ASF. En sus tres revisiones, de 2022 a 2024, la ASF dej\u00f3 $105.2 mdp por aclarar y promovi\u00f3 13 pliegos de observaciones.",
+        "cifras": [
+          {
+            "valor": "3",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$105.2 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "13 \u00b7 7",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 3,
+            "PO": 0,
+            "PRAS": 3
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 77266326.9,
+            "recuperado": 0.0,
+            "acciones": 8,
+            "PO": 6,
+            "PRAS": 2
+          },
+          {
+            "cp": 2024,
+            "auditorias": 1,
+            "porAclarar": 27929908.49,
+            "recuperado": 0.0,
+            "acciones": 9,
+            "PO": 7,
+            "PRAS": 2
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 77,
+            "clave": "2022-5-16B00-22-0077-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Comisi\u00f3n Nacional del Agua",
+            "titulo": "Construcci\u00f3n del Acueducto El Cuchillo II, en el Estado de Nuevo Le\u00f3n",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, 3 generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022b/Documentos/Auditorias/2022_0077_a.pdf",
+            "sha256": "5c645345c3ca39e40e5289b48c5a733b0234bd339333caa61bfd47e30fc85a08",
+            "paginas": 17,
+            "universo": 804590700.0,
+            "muestra": 804590700.0
+          },
+          {
+            "cp": 2023,
+            "num": 101,
+            "clave": "2023-5-16B00-22-0101-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Comisi\u00f3n Nacional del Agua",
+            "titulo": "Construcci\u00f3n del Acueducto El Cuchillo II, en el Estado de Nuevo Le\u00f3n",
+            "porAclarar": 77266326.9,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 11 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 8 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0101_a.pdf",
+            "sha256": "f4a5ce9ebd562ec5fcf09f68dcee9e3920ec0166be26e48a7f409d56857ad29e",
+            "paginas": 35,
+            "universo": 5650916200.0,
+            "muestra": 3737650500.0,
+            "extractos": {
+              "longitudKm": 106.0,
+              "usuarios": 5371290.0
+            }
+          },
+          {
+            "cp": 2024,
+            "num": 95,
+            "clave": "2024-5-16B00-22-0095-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Comisi\u00f3n Nacional del Agua",
+            "titulo": "Construcci\u00f3n del Acueducto El Cuchillo II, en el Estado de Nuevo Le\u00f3n",
+            "porAclarar": 27929908.49,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2,
+              "PO": 7
+            },
+            "resumen": "Se determinaron 11 resultados, de los cuales, 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 9 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria y 7 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024a/Documentos/Auditorias/2024_0095_a.pdf",
+            "sha256": "4b563de7fbf21c8b30054158e0953ecda639f4cafaa5588c289c54d84a191ac5",
+            "paginas": 32,
+            "universo": 1287960100.0,
+            "muestra": 654961200.0
           }
         ],
         "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
@@ -19502,7 +20056,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 5 resultados, de los cuales, 5 generaron: 5 Recomendaciones, 4 Promociones del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 10 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2123_a.pdf",
             "sha256": "dd8aad223341ee400119000878699f7b85dfbe5d41fe8f1523d5d770be21122e",
-            "paginas": 125
+            "paginas": 125,
+            "universo": 2849732600.0,
+            "muestra": 2627182000.0
           },
           {
             "cp": 2023,
@@ -19522,7 +20078,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 7 resultados, de los cuales, uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 6 restantes generaron: 9 Recomendaciones, 3 Promociones del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0400_a.pdf",
             "sha256": "d0f5317a17d71ddff04d51e7264f8154050bbe31651ac3b3cc73434102e560c8",
-            "paginas": 90
+            "paginas": 90,
+            "universo": null,
+            "muestra": null
           }
         ],
         "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023",
@@ -19602,7 +20160,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 2 restantes generaron: 2 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0215_a.pdf",
             "sha256": "263c3483aa7c186a6bd9243e10ffb89ce04d86fd6bb8e081ba966f3f1fa326e0",
-            "paginas": 15
+            "paginas": 15,
+            "universo": 1842355200.0,
+            "muestra": 1842355200.0
           },
           {
             "cp": 2022,
@@ -19620,7 +20180,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 2 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0216_a.pdf",
             "sha256": "63251dfd48af92d9f72f471e7416153c1986875c62d7d572f9fee7a29ecd3f95",
-            "paginas": 23
+            "paginas": 23,
+            "universo": 21799775700.0,
+            "muestra": 21799775700.0
           },
           {
             "cp": 2022,
@@ -19638,7 +20200,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 4 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0217_a.pdf",
             "sha256": "f6b25a61fa2dc19d128ed35388f6c31601aa4879e0f11e9d1431f1e92ec26194",
-            "paginas": 24
+            "paginas": 24,
+            "universo": 20025812700.0,
+            "muestra": 20025812700.0
           },
           {
             "cp": 2022,
@@ -19653,7 +20217,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 4 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0218_a.pdf",
             "sha256": "ea5e44c44ddd0e0957d68836a43f273f78ee8e283bb92841504e38ebd7ab7f7b",
-            "paginas": 13
+            "paginas": 13,
+            "universo": 15123990500.0,
+            "muestra": 15123990500.0
           },
           {
             "cp": 2022,
@@ -19670,7 +20236,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 3 resultados, de los cuales, en 2 no se detectaron irregularidades y el restante gener\u00f3: 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0219_a.pdf",
             "sha256": "814ed5e55b9851c60a93267b11882097dfae1b92e823eb5d60a104102232c026",
-            "paginas": 16
+            "paginas": 16,
+            "universo": 18664514600.0,
+            "muestra": 18664514600.0
           },
           {
             "cp": 2022,
@@ -19687,7 +20255,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0220_a.pdf",
             "sha256": "fec21331b826b22d89ac866c18b51abef117d8889145ce0756f5869bde4c053c",
-            "paginas": 18
+            "paginas": 18,
+            "universo": 3717059000.0,
+            "muestra": 3717059000.0
           },
           {
             "cp": 2022,
@@ -19704,7 +20274,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 9 resultados, de los cuales, en 2 no se detectaron irregularidades y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 4 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0221_a.pdf",
             "sha256": "78f11738f536ac33e6d15d2e4c50e12bd29cfd2079e83badb06c305dacc53501",
-            "paginas": 34
+            "paginas": 34,
+            "universo": 19298503000.0,
+            "muestra": 19298503000.0
           },
           {
             "cp": 2023,
@@ -19721,7 +20293,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 14 resultados, de los cuales, en 9 no se detectaron irregularidades y los 5 restantes generaron: 5 Recomendaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0244_a.pdf",
             "sha256": "3dfc9db99a6da4672d7b18b7874646abc17ddad9985fd06108f997d14309e8b8",
-            "paginas": 23
+            "paginas": 23,
+            "universo": 34032789900.0,
+            "muestra": 34032789900.0
           },
           {
             "cp": 2023,
@@ -19739,7 +20313,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0246_a.pdf",
             "sha256": "7794d03377837c0ae9974f333fdaf249cf7542f30717bfb084ae2cbaa7b3290d",
-            "paginas": 34
+            "paginas": 34,
+            "universo": 14777172200.0,
+            "muestra": 14777172200.0
           },
           {
             "cp": 2023,
@@ -19756,7 +20332,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 4 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Pliegos de Observaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0247_a.pdf",
             "sha256": "5aac9f1ef66010f2a0afadb05737cd4299eda95e29057376ee911a2dae7a6455",
-            "paginas": 20
+            "paginas": 20,
+            "universo": 10531653500.0,
+            "muestra": 5229856600.0
           },
           {
             "cp": 2023,
@@ -19773,7 +20351,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0248_a.pdf",
             "sha256": "2a8b9ebe4afb57dcd2a460c2bf3aff579d903d7f8053220455b6cfb04c56e4a4",
-            "paginas": 22
+            "paginas": 22,
+            "universo": 8449084400.0,
+            "muestra": 8449084400.0
           },
           {
             "cp": 2023,
@@ -19788,7 +20368,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 3 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0249_a.pdf",
             "sha256": "aaaa54d857f69012145f64c22bd672eb2440786d2dccdcc01e0ed68018708d04",
-            "paginas": 17
+            "paginas": 17,
+            "universo": 15594523300.0,
+            "muestra": 15594523300.0
           },
           {
             "cp": 2024,
@@ -19805,7 +20387,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 15 resultados, de los cuales, en 11 no se detectaron irregularidades y los 4 restantes generaron: 3 Recomendaciones.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
             "sha256": "0b517333d735160e535f43df7b25eba6a8b6211a1eeeefcc4756f484947319f3",
-            "paginas": 17
+            "paginas": 17,
+            "universo": null,
+            "muestra": null
           }
         ],
         "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
@@ -19881,7 +20465,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 18 resultados, de los cuales, en 5 no se detectaron irregularidades y 5 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 8 restantes generaron: 2 Recomendaciones y 7 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0140_a.pdf",
             "sha256": "f947be0e742b12784f69e545ed1db6bf1580d2e8143ae5b27893520db2501024",
-            "paginas": 75
+            "paginas": 75,
+            "universo": 11681899100.0,
+            "muestra": 2729037400.0
           },
           {
             "cp": 2022,
@@ -19898,7 +20484,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 6 resultados, de los cuales, en 2 no se detectaron irregularidades y los 4 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0164_a.pdf",
             "sha256": "23f473f631b4a21ae6ab6f70e3a5aa082f3158fd75b771bd77a62f20a4ef6208",
-            "paginas": 17
+            "paginas": 17,
+            "universo": 22621558400.0,
+            "muestra": 4840425800.0
           },
           {
             "cp": 2022,
@@ -19915,7 +20503,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 7 resultados, de los cuales, en 4 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0173_a.pdf",
             "sha256": "a2a62412a9a32eea2fba7a2be0cde17d0357c71881e4b189caf2e8035bc80ff7",
-            "paginas": 24
+            "paginas": 24,
+            "universo": 20184013700.0,
+            "muestra": 4435897400.0
           },
           {
             "cp": 2023,
@@ -19932,7 +20522,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 27 resultados, de los cuales, en 16 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 4 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0191_a.pdf",
             "sha256": "392219ae5aef394c5ffcc71cce9fd6cb919c98bd08418592b61f1c2b3b1ec7e9",
-            "paginas": 35
+            "paginas": 35,
+            "universo": 21124578000.0,
+            "muestra": 5400208200.0
           },
           {
             "cp": 2024,
@@ -19949,7 +20541,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 20 resultados, de los cuales, en 19 no se detectaron irregularidades y el restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0418_a.pdf",
             "sha256": "dbd97fc694854149ed965b4b2fe8f7eca16b5a111f3fc7814e2f5f3dad75debf",
-            "paginas": 15
+            "paginas": 15,
+            "universo": 97401638900.0,
+            "muestra": 97401638900.0
           },
           {
             "cp": 2024,
@@ -19966,7 +20560,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 12 resultados, de los cuales, en 8 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0419_a.pdf",
             "sha256": "8686502c29da7b703005661077d11eb259afa6f7e4d97e3f251ef91f9b75bc5f",
-            "paginas": 16
+            "paginas": 16,
+            "universo": 5339385300.0,
+            "muestra": 5339385300.0
           },
           {
             "cp": 2024,
@@ -19984,10 +20580,90 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 20 resultados, de los cuales, en 11 no se detectaron irregularidades y los 9 restantes generaron: 2 Recomendaciones y 7 Promociones de Responsabilidad Administrativa Sancionatoria.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0420_a.pdf",
             "sha256": "aaf457a8f071f6dbb20c6f0e4ca98127cfa5e973009e7f43edf97f7cf76f2246",
-            "paginas": 28
+            "paginas": 28,
+            "universo": 55219516300.0,
+            "muestra": 54966674600.0
           }
         ],
         "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "birmex",
+        "categoria": "salud",
+        "icono": "\ud83d\udc8a",
+        "titulo": "Birmex: el almac\u00e9n de Huehuetoca y el almacenaje privado",
+        "ente": "Laboratorios de Biol\u00f3gicos y Reactivos de M\u00e9xico, S.A. de C.V. (Birmex)",
+        "hallazgo": "La auditor\u00eda forense a Birmex de la Cuenta P\u00fablica 2023 revis\u00f3 la compra del inmueble de Huehuetoca para el Centro Federal de Almacenamiento y Distribuci\u00f3n de Insumos para la Salud (CEFEDIS), la \u00abMegafarmacia\u00bb: se pact\u00f3 en $1,400.0 mdp m\u00e1s IVA y el equipamiento se adjudic\u00f3 en forma directa por $557.2 mdp. En la compra, la ASF observ\u00f3 que no se acredit\u00f3 haber avisado a la Funci\u00f3n P\u00fablica del contrato plurianual ni justificado su anticipo. La auditor\u00eda completa dej\u00f3 $1,044.9 mdp por aclarar, sobre todo por pagos a almacenes privados sin la evidencia de que se recibi\u00f3 el servicio: $819.6 mdp a Almacenaje y Distribuci\u00f3n Avior y $152.6 mdp a Farmac\u00e9uticos Maypo.",
+        "cifras": [
+          {
+            "valor": "1",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$1,044.9 mdp",
+            "etq": "por aclarar en la auditor\u00eda",
+            "estado": "oficial"
+          },
+          {
+            "valor": "8 \u00b7 11",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$1,531.5 mdp",
+            "etq": "precio del inmueble de Huehuetoca, con IVA",
+            "estado": "oficial"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 1044882951.1,
+            "recuperado": 0.0,
+            "acciones": 25,
+            "PO": 8,
+            "PRAS": 11
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2023,
+            "num": 234,
+            "clave": "2023-2-12NEF-23-0234-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento Forense",
+            "ente": "Laboratorios de Biol\u00f3gicos y Reactivos de M\u00e9xico, S.A. de C.V.",
+            "titulo": "Erogaciones por Adquisici\u00f3n de Bienes y Prestaci\u00f3n de Servicios",
+            "porAclarar": 1044882951.1,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 5,
+              "PEFCF": 1,
+              "PRAS": 11,
+              "PO": 8
+            },
+            "resumen": "Se determinaron 4 resultados, de los cuales, 4 generaron: 5 Recomendaciones, 1 Promoci\u00f3n del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 8 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0234_a.pdf",
+            "sha256": "8a5c1516efa5ec81baf9b6029b4fe3661b2c4a341cb5ba09b98e160e047dce1a",
+            "paginas": 93,
+            "universo": 4524627600.0,
+            "muestra": 4058856300.0,
+            "extractos": {
+              "cefedisPrecio": 1400000000.0,
+              "cefedisInmuebleConIva": 1531521600.0,
+              "cefedisInmueblePagado": 153152200.0,
+              "cefedisEquipamiento": 557240500.0,
+              "cefedisEquipamientoPagado": 84929700.0,
+              "cefedisInversion": 2973600000.0,
+              "cefedisConstruir": 3628020000.0,
+              "almacenAvior": 819630500.0,
+              "almacenMaypo": 152553600.0
+            }
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2023",
         "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
       },
       {
@@ -20071,12 +20747,12 @@ window.AUDIT_DB = {
         "id": "defensa",
         "categoria": "megaobras",
         "icono": "\ud83d\udee1\ufe0f",
-        "titulo": "Defensa: AIFA, Tren Maya S.A. y fideicomiso militar",
+        "titulo": "Defensa: Tren Maya S.A. y fideicomiso militar",
         "ente": "Secretar\u00eda de la Defensa Nacional y sus empresas",
-        "hallazgo": "En las 7 auditor\u00edas aqu\u00ed reunidas, la ASF no dej\u00f3 montos por aclarar ni promovi\u00f3 acciones: lo que lleg\u00f3 a observar se solvent\u00f3 antes del informe. Que una auditor\u00eda salga limpia tambi\u00e9n es un dato, y se reporta igual que uno con hallazgos.",
+        "hallazgo": "En las 6 auditor\u00edas aqu\u00ed reunidas, la ASF no dej\u00f3 montos por aclarar ni promovi\u00f3 acciones: lo que lleg\u00f3 a observar se solvent\u00f3 antes del informe. Que una auditor\u00eda salga limpia tambi\u00e9n es un dato, y se reporta igual que uno con hallazgos.",
         "cifras": [
           {
-            "valor": "7",
+            "valor": "6",
             "etq": "informes individuales revisados",
             "estado": "oficial"
           },
@@ -20103,7 +20779,7 @@ window.AUDIT_DB = {
           },
           {
             "cp": 2024,
-            "auditorias": 6,
+            "auditorias": 5,
             "porAclarar": 0.0,
             "recuperado": 0.0,
             "acciones": 0,
@@ -20125,22 +20801,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 3 resultados, de los cuales, en 3 no se detectaron irregularidades.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0371_a.pdf",
             "sha256": "6a31a6b1f1908af548f172ef1f8f9d3b09f9a3df6e8b02ae9057cd5a169875b7",
-            "paginas": 9
-          },
-          {
-            "cp": 2024,
-            "num": 9,
-            "clave": "2024-2-07HZI-19-0009-2025",
-            "tipo": "Auditor\u00eda de Cumplimiento",
-            "ente": "Aeropuerto Internacional Felipe \u00c1ngeles, S.A. de C.V.",
-            "titulo": "Gesti\u00f3n Financiera",
-            "porAclarar": 0.0,
-            "recuperado": 0.0,
-            "acciones": {},
-            "resumen": "Se determinaron 17 resultados, de los cuales, en 17 no se detectaron irregularidades.",
-            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0009_a.pdf",
-            "sha256": "df60b49333adf5fc500b66a53b36fd083b98ae7b9270936323b03ab651a51368",
-            "paginas": 38
+            "paginas": 9,
+            "universo": null,
+            "muestra": null
           },
           {
             "cp": 2024,
@@ -20155,7 +20818,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 11 resultados, de los cuales, en 11 no se detectaron irregularidades.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0429_a.pdf",
             "sha256": "494d0793c968a83ca2311a5e9f05546b4a37e132417800163cb12847c005f7d0",
-            "paginas": 24
+            "paginas": 24,
+            "universo": null,
+            "muestra": null
           },
           {
             "cp": 2024,
@@ -20170,7 +20835,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 10 resultados, de los cuales, en 9 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0367_a.pdf",
             "sha256": "7e53b416bd91a9b09b11acc60ec7272c75bbb4d06f9f01d0149c93b2ac167532",
-            "paginas": 23
+            "paginas": 23,
+            "universo": null,
+            "muestra": null
           },
           {
             "cp": 2024,
@@ -20185,7 +20852,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 13 resultados, de los cuales, en 4 no se detectaron irregularidades y 9 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0353_a.pdf",
             "sha256": "0cb039ada784079a2596716f148818481614f1263bb1acf68576aeb334cb5b45",
-            "paginas": 28
+            "paginas": 28,
+            "universo": 4491797400.0,
+            "muestra": 1973269200.0
           },
           {
             "cp": 2024,
@@ -20200,7 +20869,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 7 resultados, de los cuales, en 3 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0356_a.pdf",
             "sha256": "03cd67a6c3869745bf739e25b312eade3274de0405922cbce9434960b5d185ac",
-            "paginas": 17
+            "paginas": 17,
+            "universo": null,
+            "muestra": null
           },
           {
             "cp": 2024,
@@ -20215,7 +20886,9 @@ window.AUDIT_DB = {
             "resumen": "Se determinaron 6 resultados, de los cuales, en 2 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
             "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0360_a.pdf",
             "sha256": "f037e5545de4d8013a21e7d812eba927f32be2b325c05d9908345d0025be34a2",
-            "paginas": 18
+            "paginas": 18,
+            "universo": null,
+            "muestra": null
           }
         ],
         "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2023, 2024",

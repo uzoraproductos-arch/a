@@ -42,11 +42,15 @@ SDA_URL = ('https://www.disciplinafinanciera.hacienda.gob.mx/work/models/DISCIPL
 
 # (entrega del Informe del Resultado, número de auditoría)
 AUDITORIAS = {
+    'IR2022a': [303],
+    'IR2022b': [77],
     'IR2022c': [107, 111, 112, 113, 114, 115, 116, 117, 118, 2111, 2112,
-                215, 216, 217, 218, 219, 220, 221, 2123, 140, 164, 173],
-    'IR2023b': [371],
-    'IR2023c': [145, 244, 246, 247, 248, 249, 400, 191],
-    'IR2024b': [126, 353, 360, 418, 419, 420],
+                215, 216, 217, 218, 219, 220, 221, 2123, 140, 164, 173,
+                307, 308, 329, 341, 342, 2121, 2122],
+    'IR2023b': [371, 336, 101],
+    'IR2023c': [145, 244, 246, 247, 248, 249, 400, 191, 341, 353, 234],
+    'IR2024a': [338, 340, 95],
+    'IR2024b': [126, 353, 360, 418, 419, 420, 350],
     'IR2024c': [9, 125, 247, 356, 367, 429],
 }
 
@@ -60,6 +64,27 @@ ACCIONES = [
     ('DH', r'Denuncias? de Hechos'),
 ]
 
+
+# Cifras puntuales que se citan en Auditoría en imágenes. Se leen del texto
+# del informe con su frase literal; si la frase no aparece, el script se
+# detiene en lugar de dejar un hueco. (clave, patrón, multiplicador a pesos).
+EXTRACTOS = {
+    (2023, 234): [  # Birmex: almacén de Huehuetoca (CEFEDIS), resultado 4
+        ('cefedisPrecio', r'se pactó por un monto de ([\d,\.]+) miles de pesos más IVA', 1e3),
+        ('cefedisInmuebleConIva', r'Perinorte, S\.A de C\.V\. Contrato vía civil \S+ No aplica ([\d,\.]+) [\d,\.]+', 1e3),
+        ('cefedisInmueblePagado', r'Perinorte, S\.A de C\.V\. Contrato vía civil \S+ No aplica [\d,\.]+ ([\d,\.]+)', 1e3),
+        ('cefedisEquipamiento', r'SEASA Nuevo León, S\.A\. de C\.V\. A-043/2023 \S+ Del \S+ al \S+ ([\d,\.]+) [\d,\.]+', 1e3),
+        ('cefedisEquipamientoPagado', r'SEASA Nuevo León, S\.A\. de C\.V\. A-043/2023 \S+ Del \S+ al \S+ [\d,\.]+ ([\d,\.]+)', 1e3),
+        ('cefedisInversion', r'el costo de inversión de esta alternativa ascendió a ([\d,\.]+) millones de pesos sin IVA', 1e6),
+        ('cefedisConstruir', r'El costo de inversión de esta alternativa ascendía a ([\d,\.]+) millones de pesos sin IVA', 1e6),
+        ('almacenAvior', r'pagó ([\d,\.]+) miles de pesos al proveedor Almacenaje y Distribución Avior', 1e3),
+        ('almacenMaypo', r'pagó ([\d,\.]+) miles de pesos al proveedor Farmacéuticos Maypo', 1e3),
+    ],
+    (2023, 101): [  # Conagua: El Cuchillo II
+        ('longitudKm', r'con una longitud de ([\d,\.]+) kilómetros, un desnivel', 1),
+        ('usuarios', r'Monterrey y su Zona Conurbada, en beneficio de un total de ([\d,]+) usuarios', 1),
+    ],
+}
 
 def pesos(t):
     return float(t.replace(',', ''))
@@ -130,6 +155,12 @@ def leer_informe(ruta, ir, num, titulo):
         else:
             sys.exit('No separo ente y titulo en %s' % ruta.name)
     ente = re.sub(r'(\w) - (\w)', r'\1-\2', ente)
+    extractos = {}
+    for clave_x, patron, factor in EXTRACTOS.get((int(ir[2:6]), num), []):
+        mx = re.search(patron, plano)
+        if not mx:
+            sys.exit('No encuentro «%s» en %s' % (clave_x, ruta.name))
+        extractos[clave_x] = round(pesos(mx.group(1)) * factor, 2)
     return {
         'ir': ir, 'cp': int(ir[2:6]), 'num': num, 'claveAuditoria': clave, 'tipo': tipo,
         'ente': ente, 'titulo': titulo,
@@ -139,6 +170,7 @@ def leer_informe(ruta, ir, num, titulo):
         'determinado': montos['determinado'], 'recuperado': montos['recuperado'], 'porAclarar': montos['porAclarar'],
         'fechaDictamen': dictamen.group(1) if dictamen else None,
         'paginas': len(paginas),
+        'extractos': extractos,
         'url': ASF % (ir, ruta.name),
         'sha256': hashlib.sha256(ruta.read_bytes()).hexdigest(),
     }

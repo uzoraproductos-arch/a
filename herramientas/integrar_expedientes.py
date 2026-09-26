@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Integra a assets/js/audit-database.js la colección «expedientes»: las seis
-fichas de Expedientes de Casos por Aclarar (Búsqueda Forense).
+"""Integra a assets/js/audit-database.js la colección «expedientes»: las diez
+fichas de Expedientes de Casos por Aclarar (Búsqueda Forense). Auditoría en
+imágenes, en la portada, lee estas mismas fichas.
 
 Uso:
     python3 herramientas/integrar_expedientes.py
@@ -37,6 +38,15 @@ FICHAS = [
     ('tren-maya', 'megaobras', '🚅', 'Tren Maya: lo que la ASF dejó por aclarar',
      'FONATUR Tren Maya y Fondo Nacional de Fomento al Turismo',
      [(2022, n) for n in (107, 111, 112, 113, 114, 115, 116, 117, 118, 2111, 2112)] + [(2023, 145), (2024, 125), (2024, 126)]),
+    ('tren-toluca', 'megaobras', '🚄', 'Tren Interurbano México-Toluca: la obra que faltaba terminar',
+     'Secretaría de Infraestructura, Comunicaciones y Transportes',
+     [(2022, 303), (2022, 307), (2022, 308), (2022, 329), (2023, 336), (2023, 341), (2023, 353), (2024, 338), (2024, 340), (2024, 350)]),
+    ('aifa', 'megaobras', '✈️', 'Aeropuerto Felipe Ángeles: construcción y operación',
+     'Secretaría de la Defensa Nacional y Aeropuerto Internacional Felipe Ángeles, S.A. de C.V.',
+     [(2022, 341), (2022, 2121), (2022, 2122), (2022, 342), (2024, 9)]),
+    ('cuchillo-ii', 'megaobras', '💧', 'Acueducto El Cuchillo II: agua para Monterrey',
+     'Comisión Nacional del Agua',
+     [(2022, 77), (2023, 101), (2024, 95)]),
     ('segalmex', 'alimentos', '🌽', 'Segalmex: las auditorías forenses más recientes',
      'Seguridad Alimentaria Mexicana (Segalmex)',
      [(2022, 2123), (2023, 400)]),
@@ -46,9 +56,12 @@ FICHAS = [
     ('salud', 'salud', '🏥', 'Compra de medicamentos e IMSS-Bienestar',
      'INSABI, IMSS e IMSS-Bienestar',
      [(2022, 140), (2022, 164), (2022, 173), (2023, 191), (2024, 418), (2024, 419), (2024, 420)]),
-    ('defensa', 'megaobras', '🛡️', 'Defensa: AIFA, Tren Maya S.A. y fideicomiso militar',
+    ('birmex', 'salud', '💊', 'Birmex: el almacén de Huehuetoca y el almacenaje privado',
+     'Laboratorios de Biológicos y Reactivos de México, S.A. de C.V. (Birmex)',
+     [(2023, 234)]),
+    ('defensa', 'megaobras', '🛡️', 'Defensa: Tren Maya S.A. y fideicomiso militar',
      'Secretaría de la Defensa Nacional y sus empresas',
-     [(2023, 371), (2024, 9), (2024, 429), (2024, 367), (2024, 353), (2024, 356), (2024, 360)]),
+     [(2023, 371), (2024, 429), (2024, 367), (2024, 353), (2024, 356), (2024, 360)]),
 ]
 
 
@@ -108,6 +121,34 @@ def hallazgo(fid, tot, anios, inf):
         return ('En la compra de medicamentos, en la transición a IMSS-Bienestar y en su operación en 2024, la ASF no cuantificó montos por aclarar, pero emitió %s: '
                 'faltas administrativas que el órgano interno de control de cada institución debe investigar y, en su caso, sancionar.') % (
             plural(tot['PRAS'], 'promoción de responsabilidad administrativa sancionatoria', 'promociones de responsabilidad administrativa sancionatoria'))
+    if fid == 'tren-toluca':
+        mayor = max(inf, key=lambda x: x['porAclarar'])
+        return ('De 2022 a 2024 la ASF revisó cada año lo que faltaba para terminar el tren: el tramo de Zinacantepec, la estación Vasco de Quiroga, '
+                'los viaductos de Santa Fe y el material rodante con sus sistemas ferroviarios. Dejó %s por aclarar y promovió %s. '
+                'Una sola auditoría, la del material rodante de %d, concentra %s: el %s. Durante la revisión de 2024 se recuperaron %s.') % (
+            mdp(tot['porAclarar']), plural(tot['PO'], 'pliego de observaciones', 'pliegos de observaciones'), mayor['cp'],
+            mdp(mayor['porAclarar']), '{:.0f} %'.format(mayor['porAclarar'] / tot['porAclarar'] * 100), mdp(por[2024]['recuperado']))
+    if fid == 'aifa':
+        term = next(x for x in inf if x['cp'] == 2022 and x['num'] == 341)
+        return ('En la Cuenta Pública 2022 la ASF revisó la terminal de pasajeros, el estacionamiento, la interconexión vial y los recursos destinados a construir '
+                'y hacer funcionar el aeropuerto; en la de 2024, su gestión financiera. Sólo la terminal dejó dinero por aclarar: %s, con %s. '
+                'En las cinco auditorías emitió %s.') % (
+            mdp(term['porAclarar']), plural(term['acciones'].get('PO', 0), 'pliego de observaciones', 'pliegos de observaciones'),
+            plural(tot['PRAS'], 'promoción de responsabilidad administrativa', 'promociones de responsabilidad administrativa'))
+    if fid == 'cuchillo-ii':
+        x = next(y for y in inf if y['cp'] == 2023)['extractos']
+        return ('La Conagua construye un acueducto de %s km para llevar agua potable al Área Metropolitana de Monterrey y su zona conurbada, '
+                'en beneficio de %s usuarios según la ASF. En sus tres revisiones, de 2022 a 2024, la ASF dejó %s por aclarar y promovió %s.') % (
+            '{:,.1f}'.format(x['longitudKm']), '{:,}'.format(int(x['usuarios'])), mdp(tot['porAclarar']),
+            plural(tot['PO'], 'pliego de observaciones', 'pliegos de observaciones'))
+    if fid == 'birmex':
+        x = inf[0]['extractos']
+        return ('La auditoría forense a Birmex de la Cuenta Pública 2023 revisó la compra del inmueble de Huehuetoca para el Centro Federal de '
+                'Almacenamiento y Distribución de Insumos para la Salud (CEFEDIS), la «Megafarmacia»: se pactó en %s más IVA y el equipamiento '
+                'se adjudicó en forma directa por %s. En la compra, la ASF observó que no se acreditó haber avisado a la Función Pública del '
+                'contrato plurianual ni justificado su anticipo. La auditoría completa dejó %s por aclarar, sobre todo por pagos a almacenes '
+                'privados sin la evidencia de que se recibió el servicio: %s a Almacenaje y Distribución Avior y %s a Farmacéuticos Maypo.') % (
+            mdp(x['cefedisPrecio']), mdp(x['cefedisEquipamiento']), mdp(tot['porAclarar']), mdp(x['almacenAvior']), mdp(x['almacenMaypo']))
     if fid == 'defensa':
         return ('En las %s aquí reunidas, la ASF no dejó montos por aclarar ni promovió acciones: lo que llegó a observar se solventó antes del informe. '
                 'Que una auditoría salga limpia también es un dato, y se reporta igual que uno con hallazgos.') % plural(tot['auditorias'], 'auditoría', 'auditorías')
@@ -188,6 +229,10 @@ def main():
         ]
         if tot['recuperado']:
             cifras.append({'valor': mdp(tot['recuperado']), 'etq': 'recuperados durante las auditorías', 'estado': 'derivado'})
+        if fid == 'birmex':
+            cifras[1]['estado'] = 'oficial'
+            cifras[1]['etq'] = 'por aclarar en la auditoría'
+            cifras.append({'valor': mdp(inf[0]['extractos']['cefedisInmuebleConIva']), 'etq': 'precio del inmueble de Huehuetoca, con IVA', 'estado': 'oficial'})
         fichas.append({
             'id': fid, 'categoria': cat, 'icono': ico, 'titulo': tit, 'ente': ente,
             'hallazgo': hallazgo(fid, tot, anios, inf),
@@ -195,11 +240,14 @@ def main():
             'auditorias': [{'cp': x['cp'], 'num': x['num'], 'clave': x['claveAuditoria'], 'tipo': x['tipo'],
                             'ente': x['ente'], 'titulo': x['titulo'], 'porAclarar': x['porAclarar'], 'recuperado': x['recuperado'],
                             'acciones': x['acciones'], 'resumen': x['resumen'], 'url': x['url'], 'sha256': x['sha256'],
-                            'paginas': x['paginas']} for x in inf],
+                            'paginas': x['paginas'],
+                            'universo': round(x['universoMiles'] * 1e3, 2) if x['universoMiles'] else None,
+                            'muestra': round(x['muestraMiles'] * 1e3, 2) if x['muestraMiles'] else None,
+                            **({'extractos': x['extractos']} if x.get('extractos') else {})} for x in inf],
             'fuente': 'ASF, informes individuales de la fiscalización superior de las Cuentas Públicas %s' % ', '.join(str(a['cp']) for a in anios),
             'alcance': 'Reúne sólo las auditorías enlistadas abajo. La ASF pudo practicar otras a estos entes que no están aquí.',
         })
-    fichas.insert(4, ficha_deuda(d['sistemaAlertas']))
+    fichas.insert(len(fichas) - 1, ficha_deuda(d['sistemaAlertas']))
     coleccion = {'consulta': '26 de septiembre de 2026', 'fichas': fichas}
     b = BASE.read_bytes().decode('utf-8')
     b = insertar(b, 'expedientes', coleccion)

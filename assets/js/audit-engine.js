@@ -20610,6 +20610,7 @@
        la unidad de la casa escondería de qué documento viene el dato. */
     if (f === 'mmp') return munMiles(v.toFixed(1)) + ' mmp';
     if (f === 'mdd') return '$' + munMiles(Math.round(v).toFixed(0)) + ' mdd';
+    if (f === 'mdp1') return '$' + munMiles(v.toFixed(1)) + ' mdp';
     if (f === 'pct') return v.toFixed(1) + '%';
     if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
     if (f === 'pesos') return '$' + formatNumber(Math.round(v * 100) / 100);
@@ -23353,7 +23354,7 @@
   /* ==========================================================================
      EXPEDIENTES FORENSES DE AUDITORIA (DOSSIERS ASF / SHCP / PEF)
      ========================================================================== */
-  /* Las seis fichas salen de DB.expedientes (herramientas/integrar_expedientes.py):
+  /* Las diez fichas salen de DB.expedientes (herramientas/integrar_expedientes.py):
      cada cifra suma informes individuales de la ASF enlistados en la ficha, o
      viene del Sistema de Alertas de la SHCP. */
   const EXP_CATEGORIAS = { megaobras: 'Megaobras', energia: 'Energía (Pemex)', salud: 'Salud y fármacos', alimentos: 'Segalmex', deuda: 'Deuda de los estados' };
@@ -26284,111 +26285,229 @@
     if (alto > 160) dd.style.maxHeight = alto + 'px';
   }
 
+  /* Auditoria en imagenes. Cada diapositiva abre un simulador «Ver gasto»
+     que arma sus cifras en el momento desde la base: las fichas de
+     Expedientes (informes individuales de la ASF), el Panorama del Erario
+     (PEF 2026), la matriz de la Cuenta Publica 2024 y el padron municipal
+     del INEGI. Aqui no se escribe ni un monto: si la base cambia, el
+     carrusel cambia con ella. Las cuentas arrancan en cero y solo suben
+     cuando el lector pulsa «Ver gasto». */
   var currentShowcaseIdx = 0;
   var showcaseTimer = null;
-  var showcaseData = [
-    {
-      id: 'tren-maya',
-      titulo: 'Tren Maya \u00b7 1,554 km de V\u00edas F\u00e9rreas',
-      pregunta: '\u00bfCu\u00e1nto cost\u00f3 realmente el Tren Maya y qu\u00e9 porcentaje fue sobrecosto?',
-      montoOriginal: '$156,000 mdp (Estimaci\u00f3n Inicial PEF)',
-      montoReal: '>$515,000 mdp (Ejercido al cierre 2024)',
-      sobrecosto: '+230.1% de incremento auditado',
-      fuente: 'Auditor\u00eda Superior de la Federaci\u00f3n (ASF) \u00b7 Informes de la Cuenta P\u00fablica',
-      hallazgo: 'La ASF detect\u00f3 pagos en exceso, duplicidad en tramos y falta de justificaci\u00f3n en terraplenes y balasto. Su costo final triplic\u00f3 el costo previsto.',
-      accionModulo: 'megaobras',
-      botonTexto: 'Auditar Tren Maya en M\u00f3dulo de Megaobras \u2794'
-    },
-    {
-      id: 'dos-bocas',
-      titulo: 'Refiner\u00eda Olmeca (Dos Bocas) \u00b7 Para\u00edso, Tabasco',
-      pregunta: '\u00bfSab\u00edas que esta refiner\u00eda cost\u00f3 m\u00e1s del doble de lo presupuestado?',
-      montoOriginal: '$8,000 MDD (~$160,000 mdp)',
-      montoReal: '>$18,900 MDD (~$378,000 mdp)',
-      sobrecosto: '+136.2% de sobrecosto en d\u00f3lares',
-      fuente: 'ASF / Dict\u00e1menes de Pemex Transformaci\u00f3n Industrial / SHCP',
-      hallazgo: 'Incrementos sistem\u00e1ticos en plantas hidrotratadoras, sistemas de cogeneraci\u00f3n y obras de protecci\u00f3n marina. Ha absorbido subsidios r\u00e9cord de la federaci\u00f3n.',
-      accionModulo: 'megaobras',
-      botonTexto: 'Auditar Dos Bocas en M\u00f3dulo de Megaobras \u2794'
-    },
-    {
-      id: 'deuda-soberana',
-      titulo: 'Costo Financiero de la Deuda Soberana \u00b7 Banxico y SHCP',
-      pregunta: '\u00bfA cu\u00e1nto asciende el costo anual s\u00f3lo de pagar intereses de la deuda p\u00fablica?',
-      montoOriginal: '$1,388,400 mdp anuales (Presupuestado PEF 2026)',
-      montoReal: '+$49,849.80 pesos cada segundo',
-      sobrecosto: 'Representa el 13.6% de todo el Presupuesto Federal',
-      fuente: 'Banco de M\u00e9xico \u00b7 Subastas de CETES / Informes de Deuda P\u00fablica SHCP',
-      hallazgo: 'El costo por servicio de la deuda supera todo el presupuesto conjunto de Salud, Educaci\u00f3n y Seguridad p\u00fablica federal.',
-      accionModulo: 'calculadora',
-      botonTexto: 'Calcular cu\u00e1nto aportas a la deuda seg\u00fan tu sueldo \u2794'
-    },
-    {
-      id: 'aifa',
-      titulo: 'Aeropuerto Internacional Felipe \u00c1ngeles (AIFA) \u00b7 Zumpango',
-      pregunta: '\u00bfCu\u00e1nto erario p\u00fablico subsidia la operaci\u00f3n de cada vuelo y pasajero?',
-      montoOriginal: '$75,000 mdp (Monto Base Inicial)',
-      montoReal: '>$115,000 mdp (Incluyendo vialidades y transferencias)',
-      sobrecosto: '+53.3% sobre la estimaci\u00f3n de 2019',
-      fuente: 'Auditor\u00eda Superior de la Federaci\u00f3n / Informes Financieros SEDENA',
-      hallazgo: 'La terminal ha requerido transferencias fiscales continuas del erario para cubrir gastos de operaci\u00f3n y mantenimiento.',
-      accionModulo: 'megaobras',
-      botonTexto: 'Auditar AIFA en M\u00f3dulo de Megaobras \u2794'
-    },
-    {
-      id: 'ramo-33',
-      titulo: 'Salud y Educaci\u00f3n en los Municipios (Ramo 33)',
-      pregunta: '\u00bfC\u00f3mo se reparte el Ramo 33 en cl\u00ednicas y escuelas de tu localidad?',
-      montoOriginal: '$1,114,100 mdp (PEF 2026 Gasto Federalizado)',
-      montoReal: '$51,024 mdp observados por la ASF por aclarar',
-      sobrecosto: '68% de las observaciones se concentran en municipios',
-      fuente: 'Diario Oficial de la Federaci\u00f3n (DOF) \u00b7 Anexo 24 PEF 2026 / ASF',
-      hallazgo: 'El FONE (educaci\u00f3n) y FASSA (salud) presentan plazas no localizadas y retenciones del ISR no enteradas al SAT.',
-      accionModulo: 'calculadora',
-      botonTexto: 'Comparar el dinero que recibe tu municipio en el Padr\u00f3n \u2794'
+  var scActual = null;
+  var scEstado = 'cero';
+
+  function scFicha(id) {
+    return (DB.expedientes && DB.expedientes.fichas || []).find(function (f) { return f.id === id; }) || null;
+  }
+
+  function scSuma(lista, campo) {
+    return lista.reduce(function (a, x) { return a + (x[campo] || 0); }, 0);
+  }
+
+  function scAcc(lista, clave) {
+    return lista.reduce(function (a, x) { return a + ((x.acciones && x.acciones[clave]) || 0); }, 0);
+  }
+
+  /* Un titulo de la ASF puede pasar de las veinte palabras; en la barra
+     se deja lo que distingue a cada informe. */
+  function scCorto(t) {
+    var m = String(t).match(/Paquetes? [\d, y]*\d|Tramo \d+[^,]*, [^,]+/);
+    if (m) return m[0];
+    var c = String(t).split(/ del Tren Interurbano| y (?:las )?Adecuaciones| de la Construcci[oó]n| del Proyecto| de la Nueva Refiner| del Aeropuerto| de Circulaci[oó]n|, de la Superestructura|, y del Viaducto| km \d|, en (?:el|la|los) /)[0];
+    return c.length > 80 ? c.slice(0, 78) + '…' : c;
+  }
+
+  /* Las obras que tienen expediente comparten la misma forma: cuantos
+     informes, cuanto quedo por aclarar, que acciones se promovieron y un
+     renglon por informe. Si ninguno dejo monto por aclarar, el rastro
+     muestra lo que la ASF reviso en cada uno (universo seleccionado). */
+  function scDesdeExpediente(id, etqExp) {
+    var f = scFicha(id);
+    if (!f || !f.auditorias) return null;
+    var au = f.auditorias;
+    var por = scSuma(au, 'porAclarar') / 1e6;
+    var rec = scSuma(au, 'recuperado') / 1e6;
+    var multi = au.length > 1;
+    var cont = [
+      { v: au.length, f: 'entero', etq: 'informes de la ASF revisados', est: 'oficial' },
+      { v: por, f: 'mdp1', etq: multi ? 'por aclarar, suma de los informes' : 'por aclarar en el informe', est: multi ? 'derivado' : 'oficial' },
+      { v: scAcc(au, 'PO'), f: 'entero', etq: 'pliegos de observaciones', est: multi ? 'derivado' : 'oficial' },
+      { v: scAcc(au, 'PRAS'), f: 'entero', etq: 'promociones de responsabilidad administrativa', est: multi ? 'derivado' : 'oficial' }
+    ];
+    if (rec > 0) cont.push({ v: rec, f: 'mdp1', etq: 'recuperados durante las auditorías', est: multi ? 'derivado' : 'oficial' });
+    var conMonto = au.filter(function (a) { return a.porAclarar > 0; });
+    var rastro, tit;
+    if (conMonto.length >= 2) {
+      tit = 'Dónde quedó el dinero por aclarar, informe por informe';
+      rastro = conMonto.slice().sort(function (a, b) { return b.porAclarar - a.porAclarar; }).map(function (a) {
+        return { k: scCorto(a.titulo), sub: 'CP ' + a.cp + ' · auditoría ' + a.num, v: a.porAclarar / 1e6, url: a.url };
+      });
+    } else {
+      tit = 'Lo que la ASF revisó en cada auditoría (universo seleccionado)';
+      rastro = au.filter(function (a) { return a.universo; }).sort(function (a, b) { return b.universo - a.universo; }).map(function (a) {
+        return { k: scCorto(a.titulo), sub: 'CP ' + a.cp + ' · auditoría ' + a.num + (a.porAclarar ? ' · ' + pdMdp(a.porAclarar) + ' por aclarar' : ' · sin monto por aclarar'), v: a.universo / 1e6, url: a.url };
+      });
     }
-    ,
-    {
-      id: 'lego-petroquimica',
-      titulo: 'Expansi\u00f3n LEGO en Ci\u00e9nega de Flores \u00b7 Secretar\u00eda de Econom\u00eda',
-      pregunta: '\u00bfCu\u00e1nto erario p\u00fablico en agua, luz y est\u00edmulos respalda los $400 MDD de LEGO?',
-      montoOriginal: '$400 MDD (~$8,000 mdp de capital privado)',
-      montoReal: '1,300 empleos directos ($307,692 USD de inversi\u00f3n por plaza)',
-      sobrecosto: 'Respaldo con obras federales: Acueducto El Cuchillo II ($14,000 mdp Conagua/Sedena)',
-      fuente: 'Secretar\u00eda de Econom\u00eda \u00b7 Marcelo Ebrard / Conagua / DOF / CFE',
-      hallazgo: 'El Estado aporta infraestructura h\u00eddrica y exenciones de ISN mientras Pemex no produce insumos b\u00e1sicos de la cadena: m\u00e1s del 70% de resinas pl\u00e1sticas se siguen importando.',
-      accionModulo: 'inspector',
-      botonTexto: 'Ver Expediente de IED y Cadena Petroqu\u00edmica \u2794'
-    },
-    {
-      id: 'tren-toluca',
-      titulo: 'Tren Interurbano M\u00e9xico-Toluca "El Insurgente" \u00b7 SICT / CDMX',
-      pregunta: '\u00bfCu\u00e1nto cost\u00f3 el tren que tard\u00f3 m\u00e1s de una d\u00e9cada y triplic\u00f3 su presupuesto?',
-      montoOriginal: '$38,608 mdp (Presupuesto Base 2014)',
-      montoReal: '>$105,000 mdp (Ejercido auditado al cierre 2024)',
-      sobrecosto: '+172.0% de sobrecosto y 10 a\u00f1os de retrasos en obras',
-      fuente: 'Auditor\u00eda Superior de la Federaci\u00f3n (ASF) \u00b7 Informes de Cuenta P\u00fablica SICT',
-      hallazgo: 'La ASF detect\u00f3 pagos improcedentes en dovelas, modificaciones continuas al trazo en Santa Fe y sobrecostos multimillonarios en acero estructural a lo largo de dos administraciones federales.',
-      accionModulo: 'megaobras',
-      botonTexto: 'Auditar Tren Toluca en M\u00f3dulo de Megaobras \u2794'
-    },
-    {
-      id: 'megafarmacia',
-      titulo: 'Megafarmacia del Bienestar (Huehuetoca) \u00b7 Birmex',
-      pregunta: '\u00bfCu\u00e1nto cost\u00f3 el mega-almac\u00e9n central y cu\u00e1l ha sido su volumen real de recetas surtidas?',
-      montoOriginal: '$1,400 mdp (Estimaci\u00f3n inicial de reconversi\u00f3n)',
-      montoReal: '$3,500 mdp de compra y acondicionamiento + $985 mdp/a\u00f1o de operaci\u00f3n',
-      sobrecosto: '+150.0% sobrecosto de habilitaci\u00f3n \u00b7 Subsidio fiscal 100%',
-      fuente: 'Birmex \u00b7 Auditor\u00eda Superior de la Federaci\u00f3n (ASF) \u00b7 Presupuesto de Egresos',
-      hallazgo: 'La ASF y reportes de transparencia documentaron que en sus primeros meses surti\u00f3 menos del 1% de las recetas solicitadas, mientras absorbe casi mil millones de pesos anuales de gasto operativo en n\u00f3mina, climatizaci\u00f3n y custodia militar.',
-      accionModulo: 'megaobras',
-      botonTexto: 'Auditar Megafarmacia en M\u00f3dulo de Megaobras \u2794'
-    }
+    var principal = au.slice().sort(function (a, b) { return (b.porAclarar - a.porAclarar) || ((b.universo || 0) - (a.universo || 0)); })[0];
+    return {
+      contadores: cont, rastroTit: tit, rastro: rastro,
+      rastroEst: rastro.length > 0 ? 'oficial' : null,
+      hallazgo: f.hallazgo,
+      fuente: f.fuente + '. ' + f.alcance,
+      acciones: [
+        { txt: '📂 Abrir el expediente ' + etqExp + ' en Búsqueda Forense', fn: function () { expIr(id); } },
+        { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }
+      ]
+    };
+  }
+
+  var SHOWCASE = [
+    { id: 'tren-maya', titulo: 'Tren Maya', pregunta: '¿Cuánto dinero del Tren Maya dejó la ASF por aclarar, y en qué tramos?',
+      arma: function () { return scDesdeExpediente('tren-maya', 'del Tren Maya'); } },
+    { id: 'dos-bocas', titulo: 'Refinería Olmeca (Dos Bocas) · Paraíso, Tabasco', pregunta: '¿Qué encontró la ASF al revisar la refinería paquete por paquete?',
+      arma: function () { return scDesdeExpediente('dos-bocas', 'de Dos Bocas'); } },
+    { id: 'deuda-soberana', titulo: 'Costo financiero de la deuda pública', pregunta: '¿Cuánto cuesta al año pagar sólo los intereses de la deuda pública?',
+      arma: scDeuda },
+    { id: 'aifa', titulo: 'Aeropuerto Internacional Felipe Ángeles (AIFA)', pregunta: '¿Qué revisó la ASF en la construcción y la operación del AIFA?',
+      arma: function () { return scDesdeExpediente('aifa', 'del AIFA'); } },
+    { id: 'ramo-33', titulo: 'Ramo 33: el dinero etiquetado para estados y municipios', pregunta: '¿Cuánto dinero del Ramo 33 llega a estados y municipios, y cuánto quedó por aclarar?',
+      arma: scRamo33 },
+    { id: 'lego-cienega', titulo: 'Ciénega de Flores, Nuevo León: el dinero público alrededor de LEGO', pregunta: '¿Qué dinero público rodea a la planta de LEGO en Ciénega de Flores?',
+      arma: scLego },
+    { id: 'tren-toluca', titulo: 'Tren Interurbano México-Toluca «El Insurgente»', pregunta: '¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?',
+      arma: function () { return scDesdeExpediente('tren-toluca', 'del Tren Interurbano'); } },
+    { id: 'megafarmacia', titulo: 'Megafarmacia del Bienestar (Huehuetoca) · Birmex', pregunta: '¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?',
+      arma: scMegafarmacia }
   ];
+  /* Los controles del carrusel cuentan diapositivas con este nombre. */
+  var showcaseData = SHOWCASE;
+
+  function scEgreso(id) {
+    var P = DB.panoramaErario;
+    return P && P.egresos ? P.egresos.find(function (e) { return e.id === id; }) : null;
+  }
+
+  function scDeuda() {
+    var e = scEgreso('egr-costofin');
+    var P = DB.panoramaErario;
+    if (!e || !P) return null;
+    var anual = e.montoMdp;
+    return {
+      contadores: [
+        { v: anual, f: 'mdp1', etq: 'al año en intereses y comisiones (PEF 2026, Anexo 8)', est: e.estado },
+        { v: anual / 365, f: 'mdp1', etq: 'cada día: el monto anual entre 365', est: 'derivado' },
+        { v: anual * 1e6 / 31536000, f: 'pesos2', etq: 'cada segundo: el monto anual entre los 31,536,000 segundos del año', est: 'derivado' },
+        { v: anual / P.totalPEF * 100, f: 'pct', etq: 'del Presupuesto de Egresos 2026 ($' + munMiles(P.totalPEF.toFixed(1)) + ' mdp)', est: 'derivado' }
+      ],
+      rastroTit: 'De qué se compone',
+      rastroEst: 'oficial',
+      rastro: e.componentes.filter(function (c) { return c.m > 0; }).map(function (c) { return { k: c.n, sub: c.d, v: c.m }; }),
+      hallazgo: e.queCubre + ' La Ley Federal de Presupuesto (art. 2º, fracc. XXV) deja fuera del gasto neto total las amortizaciones: este renglón paga el precio de lo prestado, no devuelve el capital.',
+      fuente: 'Presupuesto de Egresos de la Federación 2026, ' + e.clave + '. ' + e.ley + '.',
+      acciones: [
+        { txt: '📉 Ver el costo financiero en el Panorama del Erario', fn: function () { scAbrirFlujo('egresos', 'egresosChart', 'egr-costofin'); } },
+        { txt: '🧮 Calcular su parte de los intereses en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora', 'cc-b4'); } }
+      ]
+    };
+  }
+
+  function scRamo33() {
+    var P = DB.panoramaErario;
+    var r = P && P.federalizado && P.federalizado.componentes.find(function (c) { return c.id === 'fed-r33'; });
+    var cp = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024;
+    if (!r || !cp) return null;
+    var mun = (P.municipal && P.municipal.fuentes) || [];
+    var fed = cp.federalizado;
+    return {
+      contadores: [
+        { v: r.montoMdp, f: 'mdp1', etq: 'Ramo 33 aprobado para 2026 (' + r.clave + ' del PEF)', est: r.estado },
+        { v: scSuma(mun, 'montoMdp'), f: 'mdp1', etq: 'de ese ramo llegan directo a los municipios: FORTAMUN más FISMDF', est: 'derivado' },
+        { v: fed.auditorias, f: 'entero', etq: 'auditorías de la ASF al gasto federalizado de la Cuenta Pública 2024', est: cp.estado },
+        { v: fed.porAclarar / 1e6, f: 'mdp1', etq: 'por aclarar en esas auditorías (CP 2024)', est: cp.estado }
+      ],
+      rastroTit: 'Los ocho fondos del Ramo 33 en 2026',
+      rastroEst: 'oficial',
+      rastro: r.componentes.map(function (c) { return { k: c.n, sub: c.d, v: c.m }; }),
+      hallazgo: r.queEs + ' Las cifras de la ASF son de la Cuenta Pública 2024, la última revisada completa; las del presupuesto, de 2026. Son años distintos y se muestran juntas sólo para dar escala.',
+      fuente: 'PEF 2026, ' + r.clave + ' (' + r.ley + '); ' + (DB.cuenta_publica_asf.fuentes.MDB2024 ? DB.cuenta_publica_asf.fuentes.MDB2024.doc : 'ASF, Matriz de Datos Básicos CP 2024') + ', p. ' + cp.pagina + '.',
+      acciones: [
+        { txt: '🏘️ Comparar lo que recibe su municipio en el padrón municipal', fn: function () { munIrA(null, null); } },
+        { txt: '🎯 Ver los ocho fondos en el Panorama del Erario', fn: function () { scAbrirFlujo('federalizado', 'federalizadoChart', 'fed-r33'); } }
+      ]
+    };
+  }
+
+  function scLego() {
+    var f = scFicha('cuchillo-ii');
+    if (!f) return null;
+    var m = munDatos('NL').find(function (x) { return x.cve === '19012'; });
+    var au = f.auditorias;
+    var cont = [
+      { v: scSuma(au, 'universo') / 1e6, f: 'mdp1', etq: 'de El Cuchillo II revisados por la ASF en tres Cuentas Públicas (suma del universo seleccionado)', est: 'derivado' },
+      { v: scSuma(au, 'porAclarar') / 1e6, f: 'mdp1', etq: 'del acueducto por aclarar, suma de los tres informes', est: 'derivado' }
+    ];
+    if (m && m.hay) {
+      cont.push({ v: m.ing, f: 'mdp1', etq: 'ingresos del municipio de Ciénega de Flores en 2024 (INEGI, EFIPEM)', est: 'oficial' });
+      cont.push({ v: m.fortamun + m.fismdf, f: 'mdp1', etq: 'de ellos, FORTAMUN más FISMDF del Ramo 33', est: 'derivado' });
+    }
+    return {
+      contadores: cont,
+      rastroTit: 'El Cuchillo II, año por año: lo que la ASF revisó',
+      rastroEst: 'oficial',
+      rastro: au.map(function (a) {
+        return { k: 'Cuenta Pública ' + a.cp, sub: 'Auditoría ' + a.num + ' · ' + (a.porAclarar ? pdMdp(a.porAclarar) + ' por aclarar' : 'sin monto por aclarar'), v: (a.universo || 0) / 1e6, url: a.url };
+      }),
+      hallazgo: f.hallazgo + ' La ampliación de la planta de LEGO que se ha anunciado no tiene todavía un documento oficial en esta plataforma: su monto queda pendiente y no se suma a ninguna cifra.',
+      pendiente: 'Inversión anunciada por LEGO en Ciénega de Flores: sin documento oficial verificado.',
+      fuente: f.fuente + '. Padrón municipal: INEGI, Estadística de Finanzas Públicas Estatales y Municipales, 2024.',
+      acciones: [
+        { txt: '🏘️ Ver Ciénega de Flores en el padrón municipal', fn: function () { munIrA('NL', '19012'); } },
+        { txt: '📂 Abrir el expediente de El Cuchillo II en Búsqueda Forense', fn: function () { expIr('cuchillo-ii'); } }
+      ]
+    };
+  }
+
+  function scMegafarmacia() {
+    var f = scFicha('birmex');
+    if (!f) return null;
+    var a = f.auditorias[0], x = a.extractos || {};
+    var otros = a.porAclarar - x.almacenAvior - x.almacenMaypo;
+    return {
+      contadores: [
+        { v: x.cefedisInversion / 1e6, f: 'mdp1', etq: 'inversión estimada para comprar y adecuar el almacén, sin IVA', est: 'oficial' },
+        { v: x.cefedisInmuebleConIva / 1e6, f: 'mdp1', etq: 'precio del inmueble de Huehuetoca, con IVA', est: 'oficial' },
+        { v: x.cefedisEquipamiento / 1e6, f: 'mdp1', etq: 'equipamiento adjudicado en forma directa, con IVA', est: 'oficial' },
+        { v: (x.cefedisInmueblePagado + x.cefedisEquipamientoPagado) / 1e6, f: 'mdp1', etq: 'pagados en 2023: primer abono del inmueble y anticipo del equipamiento', est: 'derivado' },
+        { v: a.porAclarar / 1e6, f: 'mdp1', etq: 'por aclarar en toda la auditoría a Birmex (CP 2023)', est: 'oficial' }
+      ],
+      rastroTit: 'Lo que Birmex dejó por aclarar en 2023',
+      rastroEst: 'oficial',
+      rastro: [
+        { k: 'Almacenaje y Distribución Avior', sub: 'Almacenaje sin evidencia de que se recibió el servicio', v: x.almacenAvior / 1e6, url: a.url },
+        { k: 'Farmacéuticos Maypo', sub: 'Almacenaje y distribución sin evidencia de recepción', v: x.almacenMaypo / 1e6, url: a.url },
+        { k: 'Otros hallazgos de la misma auditoría', sub: 'El resto del monto por aclarar (resta del total menos los dos anteriores)', v: otros / 1e6, url: a.url, est: 'derivado' }
+      ],
+      hallazgo: f.hallazgo,
+      fuente: 'ASF, Informe Individual de la Cuenta Pública 2023, auditoría ' + a.num + ' (' + a.clave + '), resultado 4, pp. 79 a 84, y dictamen.',
+      acciones: [
+        { txt: '📂 Abrir el expediente de Birmex en Búsqueda Forense', fn: function () { expIr('birmex'); } },
+        { txt: '🏛️ Leer el informe de la ASF', url: a.url }
+      ]
+    };
+  }
 
   function initShowcase() {
     var container = document.querySelector('.showcase-track');
     if (!container) return;
+    /* Las diapositivas son botones: tambien se abren con el teclado. */
+    document.querySelectorAll('.showcase-slide').forEach(function (s, i) {
+      s.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirDescubrimiento(i); }
+      });
+    });
+    var modal = document.getElementById('descubrimientoModal');
+    if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) cerrarDescubrimiento(); });
     updateShowcaseDisplay();
     startShowcaseAutoSlide();
   }
@@ -26436,56 +26555,160 @@
     });
   }
 
-  function abrirDescubrimiento(idxOrId) {
-    pauseShowcaseAutoSlide();
-    var data;
-    if (typeof idxOrId === 'number') {
-      data = showcaseData[idxOrId];
-    } else {
-      for (var i = 0; i < showcaseData.length; i++) {
-        if (showcaseData[i].id === idxOrId) {
-          data = showcaseData[i];
-          break;
-        }
-      }
-      if (!data) data = showcaseData[0];
-    }
-    var modal = document.getElementById('descubrimientoModal');
-    if (!modal) return;
-    
-    var elTit = document.getElementById('descModalTitulo');
-    var elPreg = document.getElementById('descModalPregunta');
-    var elOrig = document.getElementById('descModalOriginal');
-    var elReal = document.getElementById('descModalReal');
-    var elSob = document.getElementById('descModalSobrecosto');
-    var elFue = document.getElementById('descModalFuente');
-    var elHal = document.getElementById('descModalHallazgo');
-    var btnAcc = document.getElementById('descModalAccionBtn');
-    
-    if (elTit) elTit.textContent = data.titulo;
-    if (elPreg) elPreg.textContent = data.pregunta;
-    if (elOrig) elOrig.textContent = data.montoOriginal;
-    if (elReal) elReal.textContent = data.montoReal;
-    if (elSob) elSob.textContent = data.sobrecosto;
-    if (elFue) elFue.textContent = data.fuente;
-    if (elHal) elHal.textContent = data.hallazgo;
-    
-    if (btnAcc) {
-      btnAcc.textContent = data.botonTexto;
-      btnAcc.onclick = function() {
-        cerrarDescubrimiento();
-        seleccionarModuloExplorer(data.accionModulo);
-      };
-    }
-    
-    modal.classList.add('show-modal');
+  function scSimHtml(p) {
+    var cont = p.contadores.map(function (c) {
+      return '<div class="sc-cont"><span class="sc-cont-v num-tabular" data-anim-v="' + c.v + '" data-anim-f="' + c.f + '">' + simFmt(0, c.f) + '</span>' +
+        '<span class="sc-cont-e">' + pdEsc(c.etq) + ' ' + chipEstado(c.est) + '</span></div>';
+    }).join('');
+    var mayor = Math.max.apply(null, p.rastro.map(function (r) { return r.v; }).concat([0])) || 1;
+    var filas = p.rastro.length ? p.rastro.map(function (r) {
+      var k = r.url ? '<a href="' + pdEsc(r.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(r.k) + ' ↗</a>' : pdEsc(r.k);
+      return '<li class="sc-fila">' +
+        '<div class="sc-fila-cab"><span class="sc-fila-k">' + k + (r.est ? ' ' + chipEstado(r.est) : '') + '</span>' +
+        '<span class="sc-fila-v num-tabular" data-anim-v="' + r.v + '" data-anim-f="mdp1">' + simFmt(0, 'mdp1') + '</span></div>' +
+        '<span class="sc-riel"><span class="sc-barra" data-anim-w="' + (r.v / mayor * 100).toFixed(2) + '" style="width:0%"></span></span>' +
+        (r.sub ? '<span class="sc-fila-sub">' + pdEsc(r.sub) + '</span>' : '') +
+      '</li>';
+    }).join('') : '<li class="sc-fila sc-fila-sub">Ninguno de estos informes trae el dato.</li>';
+    return '<div class="sc-sim" data-no-autolink>' +
+        '<div class="sc-mandos">' +
+          '<button type="button" class="sc-btn" id="scBtn" onclick="window.AuditEngine.scVerGasto()">▶ Ver gasto</button>' +
+          '<span class="sc-estado" id="scEstado" role="status">Las cuentas están en cero. Pulse «Ver gasto» para seguir el rastro del dinero.</span>' +
+        '</div>' +
+        '<div class="sc-conts">' + cont + '</div>' +
+        '<h4 class="sc-rastro-tit">' + pdEsc(p.rastroTit) + (p.rastroEst ? ' ' + chipEstado(p.rastroEst) : '') + '</h4>' +
+        '<ul class="sc-rastro">' + filas + '</ul>' +
+        '<p class="sc-hallazgo">' + pdEsc(p.hallazgo) + '</p>' +
+        (p.pendiente ? '<p class="sc-pendiente">' + chipEstado('pendiente') + ' ' + pdEsc(p.pendiente) + '</p>' : '') +
+        '<p class="sc-fuente"><b>Fuente:</b> ' + pdEsc(p.fuente) + '</p>' +
+      '</div>';
   }
 
-  function cerrarDescubrimiento() {
+  function abrirDescubrimiento(idxOrId) {
+    pauseShowcaseAutoSlide();
+    var spec = typeof idxOrId === 'number' ? SHOWCASE[idxOrId]
+      : SHOWCASE.find(function (s) { return s.id === idxOrId; });
+    if (!spec) spec = SHOWCASE[0];
     var modal = document.getElementById('descubrimientoModal');
-    if (modal) modal.classList.remove('show-modal');
-    startShowcaseAutoSlide();
+    if (!modal) return;
+    var p = null;
+    try { p = spec.arma(); } catch (err) { p = null; }
+    var elTit = document.getElementById('descModalTitulo');
+    var elPreg = document.getElementById('descModalPregunta');
+    var elSim = document.getElementById('descModalSim');
+    var elAcc = document.getElementById('descModalAcciones');
+    if (elTit) elTit.textContent = spec.titulo;
+    if (elPreg) elPreg.textContent = spec.pregunta;
+    scActual = p;
+    scEstado = 'cero';
+    if (elSim) {
+      elSim.innerHTML = p ? scSimHtml(p)
+        : '<p class="sc-pendiente">' + chipEstado('pendiente') + ' La base no trae todavía los datos de esta obra.</p>';
+    }
+    if (elAcc) {
+      elAcc.innerHTML = p ? p.acciones.map(function (a, i) {
+        return a.url
+          ? '<a class="desc-modal-btn desc-modal-btn-2" href="' + pdEsc(a.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(a.txt) + ' ↗</a>'
+          : '<button type="button" class="desc-modal-btn' + (i ? ' desc-modal-btn-2' : '') + '" data-sc-acc="' + i + '">' + pdEsc(a.txt) + ' ➔</button>';
+      }).join('') : '';
+      elAcc.querySelectorAll('[data-sc-acc]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var a = p.acciones[+b.dataset.scAcc];
+          cerrarDescubrimiento(true);
+          a.fn();
+        });
+      });
+    }
+    modal.classList.add('show-modal');
+    var card = modal.querySelector('.desc-modal-card');
+    if (card) card.scrollTop = 0;
+    var btn = document.getElementById('scBtn');
+    if (btn) setTimeout(function () { try { btn.focus(); } catch (err) {} }, 60);
   }
+
+  /* Primer toque: las cuentas suben de cero a la cifra oficial. Segundo
+     toque: vuelven a cero, para poder contar otra vez. */
+  function scVerGasto() {
+    var raiz = document.querySelector('#descModalSim .sc-sim');
+    var btn = document.getElementById('scBtn');
+    var est = document.getElementById('scEstado');
+    if (!raiz || !btn) return;
+    if (scEstado === 'contando') return;
+    if (scEstado === 'listo') {
+      if (simAnimFrames.showcase) { cancelAnimationFrame(simAnimFrames.showcase); delete simAnimFrames.showcase; }
+      raiz.querySelectorAll('[data-anim-v]').forEach(function (el) { el.textContent = simFmt(0, el.dataset.animF); });
+      raiz.querySelectorAll('[data-anim-w]').forEach(function (el) { el.style.width = '0%'; });
+      raiz.classList.remove('sc-listo');
+      scEstado = 'cero';
+      btn.textContent = '▶ Ver gasto';
+      if (est) est.textContent = 'Las cuentas volvieron a cero. Pulse «Ver gasto» para contar de nuevo.';
+      return;
+    }
+    scEstado = 'contando';
+    btn.disabled = true;
+    btn.textContent = '⏳ Contando…';
+    if (est) est.textContent = 'Siguiendo el rastro del dinero…';
+    simAnimarZona(raiz, 'showcase', 2400, function () {
+      scEstado = 'listo';
+      raiz.classList.add('sc-listo');
+      btn.disabled = false;
+      btn.textContent = '↺ Reiniciar a ceros';
+      if (est) est.textContent = 'Cuenta terminada: cada cifra lleva su fuente y su estado.';
+    });
+  }
+
+  function cerrarDescubrimiento(sinReanudar) {
+    var modal = document.getElementById('descubrimientoModal');
+    if (!modal || !modal.classList.contains('show-modal')) return;
+    if (simAnimFrames.showcase) { cancelAnimationFrame(simAnimFrames.showcase); delete simAnimFrames.showcase; }
+    modal.classList.remove('show-modal');
+    scEstado = 'cero';
+    if (sinReanudar !== true) startShowcaseAutoSlide();
+  }
+
+  /* Lleva a una ficha de Expedientes (Busqueda Forense) con el filtro en
+     «Todos», para que la ficha exista, y la resalta. */
+  function expIr(id) {
+    var chip = document.querySelector('.forensic-chip-btn');
+    filtrarDossiers('todos', chip);
+    seleccionarModuloExplorer('verificador', 'exp-' + id);
+    var el = document.getElementById('exp-' + id);
+    if (el) {
+      el.classList.remove('ce-destaca');
+      void el.offsetWidth;
+      el.classList.add('ce-destaca');
+    }
+  }
+
+  /* Abre el padron municipal en una entidad y, si se pide, la ficha de un
+     municipio. Sin entidad deja la que el lector tenia. */
+  function munIrA(abbr, cve) {
+    if (abbr) {
+      entidadCircuitoSel = abbr;
+      munFiltro = '';
+      var busca = document.getElementById('munBuscar');
+      if (busca) busca.value = '';
+    }
+    seleccionarModuloExplorer('municipios', 'munBloqueLista');
+    if (!abbr) return;
+    setTimeout(function () {
+      sincronizarSelectoresEntidad();
+      renderMunicipiosCircuito(abbr);
+      renderEntidadCircuito(abbr);
+      if (cve) setTimeout(function () { if (munFichaSel !== cve) selectMunicipio(cve); }, 1000);
+    }, 120);
+  }
+
+  /* Abre la ficha de un renglon del Panorama del Erario (pestana 1.1). */
+  function scAbrirFlujo(ctx, ancla, id) {
+    seleccionarModuloExplorer(ctx === 'egresos' ? 'presupuesto' : 'territorio', ctx === 'egresos' ? 'eb-egresos' : ancla);
+    /* Los egresos viven en un bloque plegado: se despliega antes de
+       abrir el renglon, o la ficha se abriria sobre una grafica oculta. */
+    var cuerpo = document.getElementById('eb-cuerpo-' + ctx);
+    if (cuerpo && cuerpo.hidden) erarioPlegToggle(ctx);
+    setTimeout(function () { if (fichaSel[ctx] !== id) selectFlujoItem(ctx, id); }, 1000);
+  }
+
 
 
   // ==========================================================================
@@ -27301,6 +27524,9 @@
     startShowcaseAutoSlide: startShowcaseAutoSlide,
     abrirDescubrimiento: abrirDescubrimiento,
     cerrarDescubrimiento: cerrarDescubrimiento,
+    scVerGasto: scVerGasto,
+    expIr: expIr,
+    munIrA: munIrA,
     initShowcase: initShowcase,
     flujoContableContar: flujoContableContar,
     flujoContableReiniciar: flujoContableReiniciar,
