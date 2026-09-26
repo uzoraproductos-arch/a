@@ -2101,6 +2101,23 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (glosario en ventana lateral, al estilo de USAspending)
+
+- **La palabra enlazada ya no lleva nota al pie en línea.** El enlazado
+  automático (`autolinkAmbito`) marca el término con un libro 📖
+  (`button.glos-term`). Al pulsarlo se abre una ventana lateral (drawer) en la
+  misma página, con categoría, «Qué significa», «Fundamento» y «Fuente»: la
+  referencia [NN] con su cita APA y la liga al documento oficial.
+- **El glosario sigue siendo la fuente única** (`DB.glosario`). La ventana
+  termina con «Ver en el glosario completo», que hace el salto de siempre
+  (ahora `irAlGlosario`, con su barra de regreso a la palabra de origen).
+- `goToGlossary(term)` abre ahora la ventana; así, todos los botones
+  «📖 Glosario» y «Qué significa» de la plataforma la usan sin tocarlos. Si
+  el término no está en el glosario, cae al salto de siempre.
+- Se cierra con ✕, con Escape o al pulsar fuera, y devuelve el foco a la
+  palabra. La ventana se construye en el momento, por eso funciona igual en
+  `index.html` y en `enciclopedia.html`.
+
 ### Hecho (vitrina de módulos al estilo del explorador de USAspending)
 
 - **Tarjeta limpia:** cada uno de los cinco módulos de la portada muestra sólo

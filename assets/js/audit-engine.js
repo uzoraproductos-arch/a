@@ -5499,7 +5499,7 @@
     while (el && el.nodeType === 1) {
       if (AUTOLINK_OMITIR_TAGS.has(el.tagName)) return false;
       if (el.classList) {
-        if (el.classList.contains('glos-link') || el.classList.contains('ref-link') || el.classList.contains('no-autolink')) return false;
+        if (el.classList.contains('glos-link') || el.classList.contains('glos-term') || el.classList.contains('ref-link') || el.classList.contains('no-autolink')) return false;
         for (let k = 0; k < el.classList.length; k++) {
           if (AUTOLINK_OMITIR_CLASES.has(el.classList[k])) return false;
         }
@@ -5535,25 +5535,27 @@
         const antes = document.createTextNode(texto.slice(0, inicio));
         const despues = document.createTextNode(texto.slice(fin));
 
-        const enlace = document.createElement('a');
-        enlace.className = 'glos-link auto-glos';
-        enlace.textContent = coincidencia[0];
-        enlace.title = 'Ver «' + entrada.termino + '» en el glosario';
+        /* Como en el glosario de USAspending: la palabra lleva un icono de
+           libro y abre la definicion en una ventana lateral, sin salir de la
+           pagina. La fuente (antes nota al pie [NN]) va dentro de la ventana. */
+        const enlace = document.createElement('button');
+        enlace.type = 'button';
+        enlace.className = 'glos-term auto-glos';
+        enlace.title = 'Qué significa «' + entrada.termino + '»';
+        enlace.setAttribute('aria-haspopup', 'dialog');
         enlace.dataset.termino = entrada.termino;
-        enlace.addEventListener('click', () => goToGlossary(entrada.termino));
-
-        const nota = document.createElement('a');
-        nota.className = 'ref-link auto-ref';
-        nota.textContent = '[' + String(entrada.refNum).padStart(2, '0') + ']';
-        nota.title = 'Ir a la referencia ' + entrada.refNum + ' del catálogo de fuentes';
-        nota.dataset.ref = entrada.refKey;
-        nota.dataset.termino = entrada.termino;
-        nota.addEventListener('click', () => goToRef(entrada.refKey));
+        enlace.dataset.ref = entrada.refKey;
+        enlace.appendChild(document.createTextNode(coincidencia[0]));
+        const ico = document.createElement('span');
+        ico.className = 'glos-term-ico';
+        ico.setAttribute('aria-hidden', 'true');
+        ico.textContent = '\ud83d\udcd6';
+        enlace.appendChild(ico);
+        enlace.addEventListener('click', () => abrirGlosarioDrawer(entrada.termino, entrada.refKey, enlace));
 
         const padre = nodo.parentNode;
         padre.insertBefore(antes, nodo);
         padre.insertBefore(enlace, nodo);
-        padre.insertBefore(nota, nodo);
         padre.insertBefore(despues, nodo);
         padre.removeChild(nodo);
 
@@ -7425,7 +7427,7 @@
      esa palabra exacta aunque la pestana se haya vuelto a dibujar. */
   let navUltimoEnlace = null;
   document.addEventListener('click', function (ev) {
-    const a = ev.target && ev.target.closest && ev.target.closest('.glos-link, .ref-link');
+    const a = ev.target && ev.target.closest && ev.target.closest('.glos-link, .glos-term, .ref-link');
     if (a) navUltimoEnlace = a;
   }, true);
 
@@ -7445,7 +7447,7 @@
     return Array.from(raiz.querySelectorAll('.' + clase)).filter(x => x.textContent === texto);
   }
   function navHuellaEnlace(a) {
-    const clase = a.classList.contains('glos-link') ? 'glos-link' : 'ref-link';
+    const clase = a.classList.contains('glos-term') ? 'glos-term' : a.classList.contains('glos-link') ? 'glos-link' : 'ref-link';
     const ambito = navAmbitoSel(a);
     return { clase: clase, texto: a.textContent, ambito: ambito, idx: navEnlacesIguales(clase, a.textContent, ambito).indexOf(a) };
   }
@@ -7548,7 +7550,114 @@
         'onclick="window.AuditEngine.navCerrarRegreso()">✕</button>';
   }
 
+  /* ------------------------------------------------------------------
+     Glosario en ventana lateral. Cualquier «Qué significa» o palabra con
+     icono abre aqui su definicion; el glosario completo sigue siendo la
+     fuente unica (DB.glosario) y se llega a el desde la ventana.
+     ------------------------------------------------------------------ */
+  function glosNorm(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  function glosarioBuscar(term) {
+    var lista = DB.glosario || [];
+    var q = glosNorm(term);
+    if (!q) return null;
+    var i, t;
+    for (i = 0; i < lista.length; i++) if (glosNorm(lista[i].termino) === q) return lista[i];
+    for (i = 0; i < lista.length; i++) { t = glosNorm(lista[i].termino); if (t.indexOf(q) === 0) return lista[i]; }
+    for (i = 0; i < lista.length; i++) { t = glosNorm(lista[i].termino); if (t.indexOf(q) !== -1 || q.indexOf(t) !== -1) return lista[i]; }
+    return null;
+  }
+
+  var glosDrawerOrigen = null;
+
+  function glosEsc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function abrirGlosarioDrawer(term, refKey, origen) {
+    var g = glosarioBuscar(term);
+    if (!g) { irAlGlosario(term); return; }
+    var ov = document.getElementById('glosDrawerOverlay');
+    var dr = document.getElementById('glosDrawer');
+    if (!dr) {
+      ov = document.createElement('div');
+      ov.id = 'glosDrawerOverlay';
+      ov.className = 'glos-drawer-overlay';
+      ov.addEventListener('click', cerrarGlosarioDrawer);
+      dr = document.createElement('aside');
+      dr.id = 'glosDrawer';
+      dr.className = 'glos-drawer';
+      dr.setAttribute('role', 'dialog');
+      dr.setAttribute('aria-modal', 'true');
+      dr.setAttribute('aria-labelledby', 'glosDrawerTitulo');
+      document.body.appendChild(ov);
+      document.body.appendChild(dr);
+      document.addEventListener('keydown', function(ev) {
+        if (ev.key === 'Escape' && dr.classList.contains('abierto')) cerrarGlosarioDrawer();
+      });
+    }
+    var ref = null;
+    if (refKey && DB.referencias_legales) ref = DB.referencias_legales.find(function(r) { return r.id === refKey; }) || null;
+    var fuenteHtml = '';
+    if (ref) {
+      fuenteHtml =
+        '<section class="glos-drawer-sec">' +
+          '<h4>Fuente</h4>' +
+          '<p class="glos-drawer-apa"><span class="glos-drawer-num">[' + String(ref.num).padStart(2, '0') + ']</span> ' + glosEsc(ref.cita_apa) + '</p>' +
+          (ref.url ? '<a class="glos-drawer-doc" href="' + glosEsc(ref.url) + '" target="_blank" rel="noopener">Abrir el documento oficial ↗</a>' : '') +
+        '</section>';
+    }
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">\ud83d\udcd6</span> Glosario</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar el glosario" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        (g.categoria ? '<span class="glos-drawer-cat">' + glosEsc(g.categoria) + '</span>' : '') +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">' + glosEsc(g.termino) + '</h3>' +
+        '<section class="glos-drawer-sec">' +
+          '<h4>Qué significa</h4>' +
+          '<p>' + glosEsc(g.definicion) + '</p>' +
+        '</section>' +
+        (g.ley ? '<section class="glos-drawer-sec"><h4>Fundamento</h4><p class="glos-drawer-ley">' + glosEsc(g.ley) + '</p></section>' : '') +
+        fuenteHtml +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        '<button type="button" class="glos-drawer-todo" data-t="' + glosEsc(g.termino) + '">Ver en el glosario completo ➔</button>' +
+      '</footer>';
+    dr.querySelector('.glos-drawer-todo').addEventListener('click', function() {
+      var t = this.getAttribute('data-t');
+      cerrarGlosarioDrawer(true);
+      irAlGlosario(t);
+    });
+    glosDrawerOrigen = origen || document.activeElement;
+    ov.classList.add('abierto');
+    dr.classList.add('abierto');
+    document.body.classList.add('glos-drawer-bloqueo');
+    var x = dr.querySelector('.glos-drawer-x');
+    if (x) setTimeout(function() { x.focus(); }, 30);
+  }
+
+  function cerrarGlosarioDrawer(sinFoco) {
+    var ov = document.getElementById('glosDrawerOverlay');
+    var dr = document.getElementById('glosDrawer');
+    if (!dr || !dr.classList.contains('abierto')) return;
+    dr.classList.remove('abierto');
+    if (ov) ov.classList.remove('abierto');
+    document.body.classList.remove('glos-drawer-bloqueo');
+    if (sinFoco !== true && glosDrawerOrigen && glosDrawerOrigen.focus) {
+      try { glosDrawerOrigen.focus({ preventScroll: true }); } catch (err) { /* sin foco */ }
+    }
+    glosDrawerOrigen = null;
+  }
+
   function goToGlossary(term) {
+    abrirGlosarioDrawer(term, null, document.activeElement);
+  }
+
+  function irAlGlosario(term) {
     navMarcarOrigen();
     navSaltoEnCurso = true;
     var desglose = document.getElementById('seccionDesgloseModulos');
@@ -27328,6 +27437,9 @@
     programarAutolink: programarAutolink,
     actualizarPistasDeslizamiento: actualizarPistasDeslizamiento,
     goToGlossary: goToGlossary,
+    irAlGlosario: irAlGlosario,
+    abrirGlosarioDrawer: abrirGlosarioDrawer,
+    cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     goToRef: goToRef,
     filterGlossaryByCategory: filterGlossaryByCategory,
     actualizarConteosGlosario: actualizarConteosGlosario,
