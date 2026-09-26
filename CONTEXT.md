@@ -2101,6 +2101,45 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 2, bloque 3: tablas comparativas con cifras cotejadas)
+
+- Nueva colección `DB.evaluacion_sexenal` (la escribe
+  `herramientas/integrar_evaluacion_sexenal.py`; extractos de cada página en
+  `investigaciones/fuentes-sexenal/`). Convención: a cada presidente se le
+  asignan sus seis años calendario (López Obrador 2019–2024).
+  - **PIB** (INEGI, PIBT año base 2018, `PIBT_2.xlsx`, sha256 anotado):
+    tasa media anual, derivado. Zedillo 3.48, Fox 1.81, Calderón 1.38,
+    Peña 1.94, López Obrador 0.82 (2023–2024 preliminares). Salinas
+    pendiente: la serie empieza en 1993.
+  - **Deuda (SHRFSP, % PIB) al cierre:** 2000 30.7, 2006 29.1, 2012 36.8
+    (ASF, IR CP 2012, Tomo Ejecutivo, p. 67, con datos SHCP); 2018 44.9 (ASF,
+    IGE CP 2022, p. 150); 2024 51.4 (SHCP, Comunicado 4/2025). 1994 pendiente.
+  - **Empleo formal (IMSS, diciembre contra diciembre):** 2000, 2006 y 2012
+    del Anexo Estadístico del Quinto Informe de Gobierno (p. 530); 2018 y 2024
+    de los comunicados IMSS 008/2019 y 009/2025. Fox 1,240,732; Calderón
+    2,383,551; Peña 4,017,322; López Obrador 2,159,014. Salinas y Zedillo
+    pendientes (la serie empieza en 1997).
+  - **Auditorías de la ASF:** 2000–2018 de la gráfica del IGE CP 2018
+    (p. 313); 2019–2024 de las Matrices de Datos Básicos.
+  - **Recuperaciones operadas** (IGE CP 2022, p. 16, corte 31-ene-2024): la ASF
+    publica 2001–2008 en una sola cifra ($41,091.6 mdp), que no separa a Fox
+    de los dos primeros años de Calderón; se dice así.
+  - **Monto por aclarar:** solo CP 2019–2024 (misma definición).
+- Las métricas de déficit, gasto e ingresos salieron de la trivia: no se
+  pudieron cotejar y además cambian de definición entre épocas (con y sin
+  inversión de Pemex). Siguen en la 5.1 de la Enciclopedia como estaban.
+- La trivia queda en dos grupos, Crecimiento (economía, deuda, empleo) y
+  Fiscalización (auditorías, recuperado, por aclarar). Quien no tiene dato no
+  entra a la barra ni a las opciones y se lista abajo con su motivo. Tras
+  «Ver resultados» aparece una nota «Para leerlo bien».
+- Dos tablas comparativas (`peTabla`): se desbloquean al responder las tres
+  trivias de su grupo; botón único «Contabilizar la tabla» / «Reiniciar a
+  ceros» (`peTablaAlternar`, exportado). Celdas con chip `pendiente`,
+  «No aplica» o «Conjunta», notas agrupadas por motivo y fuentes con liga.
+  Primera columna fija al desplazar en celular.
+- Hacienda (secciones.hacienda.gob.mx, presto) no respondió desde el
+  entorno; la API del INEGI pide credencial y no se usó.
+
 ### Hecho (módulo 2, bloque 3: la evaluación de los presidentes con trivia)
 
 - El bloque 3 queda en dos partes: 3.1 «Las megaobras de cada sexenio» (el
@@ -2469,13 +2508,14 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
 - **Titular de la ASF:** confirmar si sigue David Colmenares tras marzo de 2026.
-- **Evaluación de los presidentes (módulo 2, 3.2):** cotejar con su documento
-  el PIB (INEGI, Sistema de Cuentas Nacionales), la deuda al cierre (SHCP,
-  SHRFSP; la serie oficial empieza en 2000, así que Salinas y Zedillo
-  necesitan otra fuente), el balance, el gasto y los ingresos como % del PIB
-  (SHCP, Estadísticas Oportunas). Faltan también series de empleo (IMSS,
-  puestos de trabajo afiliados) para una métrica de empleo que el autor
-  pidió: no se agregó porque la base no la tiene.
+- **Evaluación de los presidentes (módulo 2, 3.2):** quedan pendientes el PIB
+  de 1988 (para el promedio de Salinas; habría que usar una serie del INEGI
+  con base anterior y decir el empalme), la deuda de 1994 y el empleo IMSS de
+  1994 (la serie del anexo empieza en 1997). La deuda de 2000–2012 se publicó
+  con el PIB base 2003: si se consigue la serie homogénea de la SHCP
+  (Estadísticas Oportunas, hoy sin respuesta), reemplazarla. Balance, gasto e
+  ingresos como % del PIB no se comparan mientras no haya una serie de
+  definición única.
 - **«Presupuesto récord» en la tarjeta del módulo 1:** para decirlo hace
   falta la serie del PEF aprobado de años anteriores (DOF) en la base, con
   fuente, y decidir si el récord es en pesos corrientes o reales.

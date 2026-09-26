@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zh">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zi">
 </head>
 <body>
 
@@ -1358,7 +1358,7 @@
             <span class="erario-indice-flecha" aria-hidden="true">➜</span>
             <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('sector')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">🏭</span><span class="ei-tx"><b>Sector e industria</b><small>Obra por obra, con filtros</small></span></button>
             <span class="erario-indice-flecha" aria-hidden="true">➜</span>
-            <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('sexenios')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">🏛️</span><span class="ei-tx"><b>Administración presidencial</b><small>Obras y evaluación, con trivia</small></span></button>
+            <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('sexenios')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">🏛️</span><span class="ei-tx"><b>Administración presidencial</b><small>Obras, trivia y tablas comparativas</small></span></button>
             <span class="erario-indice-flecha" aria-hidden="true">➜</span>
             <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('cero')"><span class="ei-n">4</span><span class="ei-ico" aria-hidden="true">🧮</span><span class="ei-tx"><b>De cero al resultado</b><small>Mesas de cálculo y escala</small></span></button>
           </nav>
@@ -1431,7 +1431,7 @@
                 <span class="erario-pleg-ico" aria-hidden="true">🏛️</span>
                 <span class="erario-pleg-tx">
                   <span class="erario-pleg-tit">Administración presidencial</span>
-                  <span class="erario-pleg-av">Qué megaobras le tocan a cada sexenio y cómo le fue a cada presidente en economía, deuda, déficit, gasto, ingresos y lo que la ASF dejó por aclarar. Primero adivine; luego compruebe.</span>
+                  <span class="erario-pleg-av">Qué megaobras le tocan a cada sexenio y cómo le fue a cada presidente en crecimiento, deuda, empleo formal y fiscalización superior, con cifras cotejadas contra INEGI, SHCP, IMSS y la ASF. Primero adivine; luego compruebe y abra las tablas comparativas.</span>
                 </span>
                 <span class="erario-pleg-mas" aria-hidden="true">+</span>
               </button>
@@ -1442,8 +1442,9 @@
             <h4 class="pe-subtit"><span>3.1</span> Las megaobras de cada sexenio</h4>
             <div id="simSexenioLinea"></div>
             <h4 class="pe-subtit"><span>3.2</span> La evaluación de los presidentes: adivine y compruebe</h4>
-            <!-- Traída de la pestaña 5.1 de la Enciclopedia: trivia por métrica y
-                 resultados con botón único (AuditEngine.renderPresEval) -->
+            <!-- Traída de la pestaña 5.1 de la Enciclopedia: trivia por métrica, tablas
+                 comparativas y botón único (AuditEngine.renderPresEval, datos en
+                 DB.evaluacion_sexenal) -->
             <div id="presEval"></div>
           </section>
             </div>
@@ -2674,7 +2675,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zh</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zi</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2818,16 +2819,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926zh"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926zi"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926zh"></script>
+  <script src="assets/js/audit-database.js?v=20260926zi"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926zh"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926zi"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926zh"></script>
+  <script src="assets/js/audit-engine.js?v=20260926zi"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

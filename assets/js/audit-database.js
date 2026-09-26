@@ -21023,6 +21023,434 @@ window.AUDIT_DB = {
         "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
       }
     ]
+  },
+"evaluacion_sexenal": {
+    "consulta": "26 de septiembre de 2026",
+    "convencion": "A cada presidente se le asignan los seis a\u00f1os calendario de su mandato: Salinas 1989\u20131994, Zedillo 1995\u20132000, Fox 2001\u20132006, Calder\u00f3n 2007\u20132012, Pe\u00f1a Nieto 2013\u20132018 y L\u00f3pez Obrador 2019\u20132024. El cambio de gobierno ocurre el 1 de diciembre (el 1 de octubre en 2024), as\u00ed que el primer y el \u00faltimo a\u00f1o se comparten unas semanas o meses con el vecino.",
+    "advertencias": [
+      "La deuda de 2000 a 2012 se public\u00f3 con el PIB de su momento (base 2003) y la de 2018 y 2024 con bases m\u00e1s recientes. Las revisiones del PIB pueden mover el cociente m\u00e1s de un punto: la diferencia entre Zedillo (30.7%) y Fox (29.1%) no debe leerse como definitiva.",
+      "Las recuperaciones operadas crecen con el tiempo: una Cuenta P\u00fablica vieja lleva m\u00e1s a\u00f1os de solventaci\u00f3n que una reciente. Comparar sexenios con esta cifra favorece a los antiguos.",
+      "El PIB de 2023 y 2024 es preliminar."
+    ],
+    "recuperacionesConjuntas": {
+      "mdp": 41091.56,
+      "cuentas": [
+        2001,
+        2008
+      ],
+      "fuente": "ASF_IGE2022"
+    },
+    "fuentes": {
+      "INEGI_PIBT": {
+        "corto": "INEGI, PIB trimestral, a\u00f1o base 2018 (serie 1993\u20132026)",
+        "doc": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda, Sistema de Cuentas Nacionales de M\u00e9xico, Producto Interno Bruto Trimestral, a\u00f1o base 2018, serie detallada (PIBT_2.xlsx), rengl\u00f3n \u00abProducto interno bruto\u00bb, columna \u00abAnual\u00bb, millones de pesos a precios de 2018. Actualizaci\u00f3n del 24 de agosto de 2026; 2023 a 2025 son cifras preliminares.",
+        "url": "https://www.inegi.org.mx/contenidos/programas/pib/2018/tabulados/ori/PIBT_2.xlsx",
+        "sha256": "65a7899d4106e94ddb0612919ea45f7ce356910693a6c74526994e3eb11a5dee"
+      },
+      "ASF_IR2012": {
+        "corto": "ASF, Informe del Resultado CP 2012, Tomo Ejecutivo, p. 67",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2012, Tomo Ejecutivo, cuadro \u00abSaldo hist\u00f3rico de los requerimientos financieros del sector p\u00fablico, 2000-2012\u00bb, elaborado con informaci\u00f3n de la SHCP y del INEGI (p\u00e1gina 67 del PDF).",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2012i/Documentos/InformeEjecutivo/Tomo%20Ejecutivo%20IR%202012.pdf",
+        "sha256": "4be2952a01fbc0708cd4430eb6bd9cd6cdc7be0723e426e4464c13724018d66b"
+      },
+      "ASF_IGE2022": {
+        "corto": "ASF, Informe General Ejecutivo CP 2022",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe General Ejecutivo de la Cuenta P\u00fablica 2022: cuadro \u00abRecuperaciones operadas (Cuentas P\u00fablicas 2001-2022)\u00bb, cifras al 31 de enero de 2024 (p. 16 del PDF), y cuadro \u00abSaldo hist\u00f3rico de los requerimientos financieros del sector p\u00fablico, 2016-2022\u00bb, con informaci\u00f3n de la SHCP y del INEGI (p. 150).",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/2022_IGE_a.pdf",
+        "sha256": "618073724893b909c81e38e670dccd6f52a66b5e7abc1a2801408d6886c9b836"
+      },
+      "ASF_IGE2018": {
+        "corto": "ASF, Informe General Ejecutivo CP 2018, p. 313",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe General Ejecutivo de la Cuenta P\u00fablica 2018, gr\u00e1fica \u00abTotal de auditor\u00edas practicadas, con base en el Programa Anual de Auditor\u00edas, Cuentas P\u00fablicas 2000-2018\u00bb (p\u00e1gina 313 del PDF). No incluye las auditor\u00edas por mandato judicial o por denuncia.",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/IGE_2018_PROTEGIDO.pdf",
+        "sha256": "b69defcd67d2f4196f75940a0f6da4f1a82141c98b187590673fa216ec2bf73b"
+      },
+      "ASF_MDB": {
+        "corto": "ASF, Matrices de Datos B\u00e1sicos CP 2019\u20132024",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos consolidada de cada Cuenta P\u00fablica, 2019 a 2024, rengl\u00f3n Total (la misma serie de la colecci\u00f3n cuenta_publica_asf, con la liga y la p\u00e1gina de cada a\u00f1o).",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf"
+      },
+      "SHCP_C4_2025": {
+        "corto": "SHCP, Comunicado 4/2025 (30 ene. 2025)",
+        "doc": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico, Comunicado No. 4, \u00abInformes sobre la Situaci\u00f3n Econ\u00f3mica, las Finanzas P\u00fablicas y la Deuda P\u00fablica al cuarto trimestre de 2024\u00bb, 30 de enero de 2025: la deuda p\u00fablica (SHRFSP) cerr\u00f3 2024 en 51.4% del PIB.",
+        "url": "https://www.gob.mx/shcp/prensa/comunicado-no-4-informes-sobre-la-situacion-economica-las-finanzas-publicas-y-la-deuda-publica-al-cuarto-trimestre-de-2024"
+      },
+      "PRES_5IG": {
+        "corto": "Presidencia, Quinto Informe de Gobierno, Anexo Estad\u00edstico, p. 530",
+        "doc": "Presidencia de la Rep\u00fablica, Quinto Informe de Gobierno 2016-2017, Anexo Estad\u00edstico, cuadro \u00abAsegurados trabajadores en el IMSS\u00bb (fuente: IMSS), columna diciembre (p\u00e1gina 530 del PDF).",
+        "url": "https://framework-gb.cdn.gob.mx/quintoinforme/5IG_ANEXO_FINAL_TGM_250818.pdf",
+        "sha256": "7159e585765b0d4cf027b22ce826c5d66daa2f926e18aaceba7f65efe1178f57"
+      },
+      "IMSS_008_2019": {
+        "corto": "IMSS, Comunicado 008/2019",
+        "doc": "Instituto Mexicano del Seguro Social, Comunicado No. 008/2019, \u00abCierra 2018 con un registro de 20 millones 79 mil 365 puestos de trabajo\u00bb.",
+        "url": "https://www.imss.gob.mx/prensa/archivo/201901/008"
+      },
+      "IMSS_009_2025": {
+        "corto": "IMSS, Comunicado 009/2025",
+        "doc": "Instituto Mexicano del Seguro Social, Comunicado No. 009/2025, \u00abPuestos de trabajo afiliados al Instituto Mexicano del Seguro Social\u00bb: 22,238,379 al 31 de diciembre de 2024.",
+        "url": "https://www.imss.gob.mx/prensa/archivo/202501/009"
+      }
+    },
+    "filas": [
+      {
+        "id": "salinas",
+        "anios": [
+          1989,
+          1994
+        ],
+        "pib": {
+          "estado": "pendiente",
+          "motivo": "La serie del INEGI a\u00f1o base 2018 empieza en 1993; falta el PIB de 1988 en una base comparable."
+        },
+        "deuda": {
+          "estado": "pendiente",
+          "motivo": "Falta el saldo de 1994 en los documentos consultados."
+        },
+        "empleo": {
+          "estado": "pendiente",
+          "motivo": "La serie de asegurados del anexo estad\u00edstico empieza en 1997."
+        },
+        "auditorias": {
+          "estado": "no_aplica",
+          "motivo": "La ASF se cre\u00f3 en 2000; antes revisaba la Contadur\u00eda Mayor de Hacienda."
+        },
+        "recuperaciones": {
+          "estado": "no_aplica",
+          "motivo": "La ASF se cre\u00f3 en 2000; antes revisaba la Contadur\u00eda Mayor de Hacienda."
+        },
+        "porAclarar": {
+          "estado": "no_aplica",
+          "motivo": "La ASF se cre\u00f3 en 2000; antes revisaba la Contadur\u00eda Mayor de Hacienda."
+        }
+      },
+      {
+        "id": "zedillo",
+        "anios": [
+          1995,
+          2000
+        ],
+        "pib": {
+          "promedio": 3.48,
+          "acumulado": 22.77,
+          "base": 1994,
+          "cierre": 2000,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2000 / PIB 1994)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 30.7,
+          "anio": 2000,
+          "estado": "oficial",
+          "fuente": "ASF_IR2012"
+        },
+        "empleo": {
+          "estado": "pendiente",
+          "motivo": "La serie de asegurados del anexo estad\u00edstico empieza en 1997."
+        },
+        "auditorias": {
+          "total": 312,
+          "cuentas": [
+            2000,
+            2000
+          ],
+          "porCuenta": {
+            "2000": 312
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2000 a 2000.",
+          "nota": "Solo la Cuenta P\u00fablica 2000, primera que revis\u00f3 la ASF."
+        },
+        "recuperaciones": {
+          "estado": "pendiente",
+          "motivo": "La serie de recuperaciones de la ASF empieza en la Cuenta P\u00fablica 2001."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "fox",
+        "anios": [
+          2001,
+          2006
+        ],
+        "pib": {
+          "promedio": 1.81,
+          "acumulado": 11.38,
+          "base": 2000,
+          "cierre": 2006,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2006 / PIB 2000)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 29.1,
+          "anio": 2006,
+          "estado": "oficial",
+          "fuente": "ASF_IR2012"
+        },
+        "empleo": {
+          "inicio": 12437760,
+          "fin": 13678492,
+          "creados": 1240732,
+          "fuentes": [
+            "PRES_5IG"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2006 menos los de 2000."
+        },
+        "auditorias": {
+          "total": 2834,
+          "cuentas": [
+            2001,
+            2006
+          ],
+          "porCuenta": {
+            "2001": 355,
+            "2002": 336,
+            "2003": 338,
+            "2004": 424,
+            "2005": 627,
+            "2006": 754
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2001 a 2006."
+        },
+        "recuperaciones": {
+          "estado": "conjunta",
+          "fuente": "ASF_IGE2022",
+          "motivo": "La ASF publica las recuperaciones de 2001 a 2008 en una sola cifra ($41,091.6 mdp), que no separa los a\u00f1os de Fox de los dos primeros de Calder\u00f3n."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "calderon",
+        "anios": [
+          2007,
+          2012
+        ],
+        "pib": {
+          "promedio": 1.38,
+          "acumulado": 8.57,
+          "base": 2006,
+          "cierre": 2012,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2012 / PIB 2006)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 36.8,
+          "anio": 2012,
+          "estado": "oficial",
+          "fuente": "ASF_IR2012"
+        },
+        "empleo": {
+          "inicio": 13678492,
+          "fin": 16062043,
+          "creados": 2383551,
+          "fuentes": [
+            "PRES_5IG"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2012 menos los de 2006."
+        },
+        "auditorias": {
+          "total": 6209,
+          "cuentas": [
+            2007,
+            2012
+          ],
+          "porCuenta": {
+            "2007": 962,
+            "2008": 987,
+            "2009": 945,
+            "2010": 1031,
+            "2011": 1111,
+            "2012": 1173
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2007 a 2012."
+        },
+        "recuperaciones": {
+          "mdp": 56455.58,
+          "cuentas": [
+            2009,
+            2012
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_IGE2022",
+          "operacion": "Suma de las recuperaciones operadas de las Cuentas P\u00fablicas 2009 a 2012, cifras al 31 de enero de 2024.",
+          "nota": "Solo CP 2009\u20132012. Las de 2007 y 2008 est\u00e1n dentro de la cifra conjunta 2001\u20132008."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "epn",
+        "anios": [
+          2013,
+          2018
+        ],
+        "pib": {
+          "promedio": 1.94,
+          "acumulado": 12.25,
+          "base": 2012,
+          "cierre": 2018,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2018 / PIB 2012)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 44.9,
+          "anio": 2018,
+          "estado": "oficial",
+          "fuente": "ASF_IGE2022"
+        },
+        "empleo": {
+          "inicio": 16062043,
+          "fin": 20079365,
+          "creados": 4017322,
+          "fuentes": [
+            "IMSS_008_2019",
+            "PRES_5IG"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2018 menos los de 2012."
+        },
+        "auditorias": {
+          "total": 10064,
+          "cuentas": [
+            2013,
+            2018
+          ],
+          "porCuenta": {
+            "2013": 1413,
+            "2014": 1659,
+            "2015": 1643,
+            "2016": 1865,
+            "2017": 1676,
+            "2018": 1808
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2013 a 2018."
+        },
+        "recuperaciones": {
+          "mdp": 52264.15,
+          "cuentas": [
+            2013,
+            2018
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_IGE2022",
+          "operacion": "Suma de las recuperaciones operadas de las Cuentas P\u00fablicas 2013 a 2018, cifras al 31 de enero de 2024."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "amlo",
+        "anios": [
+          2019,
+          2024
+        ],
+        "pib": {
+          "promedio": 0.82,
+          "acumulado": 5.05,
+          "base": 2018,
+          "cierre": 2024,
+          "preliminar": true,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2024 / PIB 2018)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 51.4,
+          "anio": 2024,
+          "estado": "oficial",
+          "fuente": "SHCP_C4_2025"
+        },
+        "empleo": {
+          "inicio": 20079365,
+          "fin": 22238379,
+          "creados": 2159014,
+          "fuentes": [
+            "IMSS_008_2019",
+            "IMSS_009_2025"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2024 menos los de 2018."
+        },
+        "auditorias": {
+          "total": 11810,
+          "cuentas": [
+            2019,
+            2024
+          ],
+          "porCuenta": {
+            "2019": 1358,
+            "2020": 1616,
+            "2021": 2050,
+            "2022": 2153,
+            "2023": 2369,
+            "2024": 2264
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_MDB"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2019 a 2024.",
+          "nota": "La Cuenta P\u00fablica 2024 incluye octubre a diciembre, ya con el gobierno siguiente."
+        },
+        "recuperaciones": {
+          "mdp": 10008.61,
+          "cuentas": [
+            2019,
+            2022
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_IGE2022",
+          "operacion": "Suma de las recuperaciones operadas de las Cuentas P\u00fablicas 2019 a 2022, cifras al 31 de enero de 2024.",
+          "nota": "Solo CP 2019\u20132022: las de 2023 y 2024 siguen en solventaci\u00f3n y no estaban en el corte."
+        },
+        "porAclarar": {
+          "mdp": 368985.1,
+          "cuentas": [
+            2019,
+            2024
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_MDB",
+          "operacion": "Suma del monto por aclarar de las Cuentas P\u00fablicas 2019 a 2024.",
+          "nota": "La Cuenta P\u00fablica 2024 incluye octubre a diciembre, ya con el gobierno siguiente."
+        }
+      }
+    ]
   }
 };
 
