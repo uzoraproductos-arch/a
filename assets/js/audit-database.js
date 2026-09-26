@@ -24,69 +24,863 @@ window.AUDIT_DB = {
     "notaCuadre": "La Ley de Ingresos y el Presupuesto de Egresos suman la misma cifra por construcción: el presupuesto cuadra porque la deuda se cuenta como ingreso.",
 
     "ingresos": [
-      { "id": "ing-isr", "nombre": "ISR", "nombreLargo": "Impuesto Sobre la Renta", "grupo": "Impuestos", "montoMdp": 3070149.1, "estado": "oficial",
+      {
+        "id": "ing-isr",
+        "nombre": "ISR",
+        "nombreLargo": "Impuesto Sobre la Renta",
+        "grupo": "Impuestos",
+        "montoMdp": 3070149.1,
+        "estado": "oficial",
         "quePaga": "Grava lo que ganan las personas y las empresas. Es la mayor fuente de recursos del Estado mexicano.",
-        "ley": "Ley del ISR · Art. 31 fracc. IV CPEUM", "icono": "\ud83d\udcbc" },
-      { "id": "ing-iva", "nombre": "IVA", "nombreLargo": "Impuesto al Valor Agregado", "grupo": "Impuestos", "montoMdp": 1589069.0, "estado": "oficial",
+        "ley": "Ley del ISR · Art. 31 fracc. IV CPEUM",
+        "icono": "💼",
+        "claveLIF": "1.11.01",
+        "glos": "ISR (Impuesto Sobre la Renta)",
+        "refKey": "ref-lisr",
+        "refNum": 52,
+        "efecto": "Impuesto <b>directo</b>: lo paga quien obtiene el ingreso y no puede trasladarlo a otro. Grava la utilidad de las personas morales y el ingreso de las personas físicas, de modo que su recaudación sube y baja con el ciclo económico. Es el componente mayor de la Recaudación Federal Participable, la bolsa de la que salen las participaciones del Ramo 28."
+      },
+      {
+        "id": "ing-iva",
+        "nombre": "IVA",
+        "nombreLargo": "Impuesto al Valor Agregado",
+        "grupo": "Impuestos",
+        "montoMdp": 1589069.0,
+        "estado": "oficial",
         "quePaga": "Grava el consumo al 16% (8% en la franja fronteriza). Lo paga quien compra, lo entera quien vende.",
-        "ley": "Ley del IVA", "icono": "\ud83d\uded2" },
-      { "id": "ing-ieps", "nombre": "IEPS", "nombreLargo": "Impuesto Especial sobre Producción y Servicios", "grupo": "Impuestos", "montoMdp": 761501.9, "estado": "oficial",
+        "ley": "Ley del IVA",
+        "icono": "🛒",
+        "claveLIF": "1.13.01",
+        "glos": "IVA (Impuesto al Valor Agregado)",
+        "refKey": "ref-liva",
+        "refNum": 53,
+        "efecto": "Impuesto <b>indirecto</b> y trasladable: la ley obliga a quien vende a cobrarlo por separado y enterarlo, pero quien lo soporta es el consumidor final. El acreditamiento hace que cada eslabón tribute sólo por el valor que añade. Por eso su incidencia es regresiva: la tasa no distingue la capacidad de pago de quien compra."
+      },
+      {
+        "id": "ing-ieps",
+        "nombre": "IEPS",
+        "nombreLargo": "Impuesto Especial sobre Producción y Servicios",
+        "grupo": "Impuestos",
+        "montoMdp": 761501.9,
+        "estado": "oficial",
         "quePaga": "Grava gasolinas, tabaco, bebidas azucaradas y alcohol. Es el impuesto que más varía de un año a otro.",
-        "ley": "Ley del IEPS", "icono": "\u26fd" },
-      { "id": "ing-comext", "nombre": "Comercio exterior", "nombreLargo": "Impuestos al comercio exterior", "grupo": "Impuestos", "montoMdp": 254756.8, "estado": "oficial",
+        "ley": "Ley del IEPS",
+        "icono": "⛽",
+        "claveLIF": "1.13.02",
+        "glos": "IEPS (Impuesto Especial sobre Producción y Servicios)",
+        "refKey": "ref-lieps",
+        "refNum": 54,
+        "efecto": "Impuesto indirecto con <b>fin extrafiscal</b>: no busca sólo recaudar, sino encarecer consumos que imponen un costo a terceros o a la salud pública. Es la figura que la doctrina llama impuesto pigouviano. De ahí que la tasa se fije producto por producto y que su recaudación sea la más volátil del cuadro: depende del precio de los combustibles.",
+        "componentes": [
+          {
+            "n": "Combustibles automotrices",
+            "m": 473279.1,
+            "d": "Art. 2o. fracc. I inciso D): $432,487.9 · Art. 2o.-A: $40,791.2"
+          },
+          {
+            "n": "Bebidas con contenido alcohólico y cerveza",
+            "m": 81518.8,
+            "d": "Bebidas alcohólicas $27,780.2 · cervezas y refrescantes $53,738.6"
+          },
+          {
+            "n": "Bebidas saborizadas",
+            "m": 75290.0,
+            "d": "Con azúcares añadidos"
+          },
+          {
+            "n": "Tabacos labrados y otros",
+            "m": 62097.5,
+            "d": "Cigarros, puros y tabacos hechos enteramente a mano"
+          },
+          {
+            "n": "Alimentos no básicos con alta densidad calórica",
+            "m": 42856.1,
+            "d": "Botanas, confitería, chocolates y similares"
+          },
+          {
+            "n": "Combustibles fósiles",
+            "m": 10517.7,
+            "d": "Cuota por contenido de carbono"
+          },
+          {
+            "n": "Redes públicas de telecomunicaciones",
+            "m": 8486.8,
+            "d": ""
+          },
+          {
+            "n": "Juegos con apuestas y sorteos",
+            "m": 5024.7,
+            "d": ""
+          },
+          {
+            "n": "Plaguicidas",
+            "m": 2148.0,
+            "d": "Cuota según categoría de toxicidad"
+          },
+          {
+            "n": "Videojuegos con contenido violento",
+            "m": 183.0,
+            "d": ""
+          },
+          {
+            "n": "Bebidas energetizantes",
+            "m": 100.2,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-comext",
+        "nombre": "Comercio exterior",
+        "nombreLargo": "Impuestos al comercio exterior",
+        "grupo": "Impuestos",
+        "montoMdp": 254756.8,
+        "estado": "oficial",
         "quePaga": "Aranceles que se cobran en aduanas a la mercancía que entra al país.",
-        "ley": "Ley de los Impuestos Generales de Importaci\u00f3n y Exportaci\u00f3n", "icono": "\ud83d\udea2" },
-      { "id": "ing-otrosimp", "nombre": "Otros impuestos", "nombreLargo": "ISAN, accesorios y otros impuestos", "grupo": "Impuestos", "montoMdp": 162523.2, "estado": "derivado",
-        "quePaga": "Impuesto sobre autom\u00f3viles nuevos, recargos, multas fiscales y actualizaciones.",
-        "ley": "C\u00f3digo Fiscal de la Federaci\u00f3n", "icono": "\ud83e\uddfe" },
-      { "id": "ing-cuotas", "nombre": "Cuotas de seguridad social", "nombreLargo": "Cuotas y aportaciones de seguridad social", "grupo": "No tributarios", "montoMdp": 641782.1, "estado": "oficial",
-        "quePaga": "Lo que patrones y trabajadores aportan al IMSS y al ISSSTE. No es impuesto, es contribuci\u00f3n con destino propio.",
-        "ley": "Ley del Seguro Social · Ley del ISSSTE", "icono": "\ud83c\udfe5" },
-      { "id": "ing-dpa", "nombre": "Derechos, productos y aprovechamientos", "nombreLargo": "Derechos, productos y aprovechamientos", "grupo": "No tributarios", "montoMdp": 940196.7, "estado": "derivado",
-        "quePaga": "Pagos por usar bienes de la naci\u00f3n \u2014entre ellos los hidrocarburos\u2014, por tr\u00e1mites y por rendimientos del patrimonio p\u00fablico.",
-        "ley": "Ley Federal de Derechos", "icono": "\ud83d\udee2\ufe0f" },
-      { "id": "ing-organismos", "nombre": "Organismos y empresas del Estado", "nombreLargo": "Ingresos de organismos y empresas productivas", "grupo": "No tributarios", "montoMdp": 1301078.5, "estado": "oficial",
-        "quePaga": "Lo que generan por su cuenta el IMSS, el ISSSTE, la CFE y Pemex con su propia operaci\u00f3n.",
-        "ley": "Art. 25 y 28 CPEUM · LFPRH", "icono": "\u26a1" },
-      { "id": "ing-deuda", "nombre": "Deuda", "nombreLargo": "Ingresos derivados de financiamientos", "grupo": "Financiamiento", "montoMdp": 1472626.4, "estado": "oficial",
-        "quePaga": "Dinero prestado, no recaudado. Entra como ingreso del a\u00f1o y sale como obligaci\u00f3n de los a\u00f1os siguientes.",
-        "ley": "Art. 73 fracc. VIII CPEUM · Ley General de Deuda P\u00fablica", "icono": "\ud83c\udfe6" }
+        "ley": "Ley de los Impuestos Generales de Importación y de Exportación · Ley Aduanera",
+        "icono": "🚢",
+        "claveLIF": "1.14.01",
+        "glos": "Impuestos al Comercio Exterior (Aranceles)",
+        "refKey": "ref-ligie",
+        "refNum": 55,
+        "efecto": "Es el único impuesto cuyas tasas <b>no fija el Congreso año con año</b>: el artículo 131 constitucional faculta al Ejecutivo para aumentarlas, disminuirlas o suprimirlas por decreto, sujeto a aprobación posterior del Congreso. Por eso funciona como instrumento de política comercial antes que como fuente de ingreso.",
+        "componentes": [
+          {
+            "n": "A la importación",
+            "m": 254756.8,
+            "d": "La totalidad del rubro"
+          },
+          {
+            "n": "A la exportación",
+            "m": 0.0,
+            "d": "Presupuestado en cero: México no grava sus exportaciones"
+          }
+        ]
+      },
+      {
+        "id": "ing-accesorios",
+        "nombre": "Accesorios de impuestos",
+        "nombreLargo": "Accesorios de impuestos: recargos, multas, gastos de ejecución e indemnizaciones",
+        "grupo": "Impuestos",
+        "montoMdp": 135769.4,
+        "estado": "oficial",
+        "quePaga": "Lo que se cobra de más cuando un impuesto se paga tarde o no se paga: recargos por mora, multas por infracciones fiscales, gastos de ejecución e indemnización por cheque devuelto.",
+        "ley": "Código Fiscal de la Federación, arts. 2º último párrafo, 20, 21 y 70 a 91",
+        "icono": "⏰",
+        "claveLIF": "1.17.01",
+        "glos": "Accesorios de las Contribuciones",
+        "refKey": "ref-cff",
+        "refNum": 9,
+        "efecto": "El último párrafo del artículo 2º del Código Fiscal ordena que los accesorios <b>participen de la naturaleza de la suerte principal</b>: un recargo del ISR es, jurídicamente, ISR. Por eso se cobran con el mismo procedimiento administrativo de ejecución y prescriben junto con el crédito que los origina. No son una sanción aparte: son el precio del incumplimiento."
+      },
+      {
+        "id": "ing-isan",
+        "nombre": "ISAN",
+        "nombreLargo": "Impuesto Sobre Automóviles Nuevos",
+        "grupo": "Impuestos",
+        "montoMdp": 20161.8,
+        "estado": "oficial",
+        "quePaga": "Grava la enajenación de automóviles nuevos de producción nacional y la importación definitiva de automóviles.",
+        "ley": "Ley Federal del Impuesto sobre Automóviles Nuevos",
+        "icono": "🚗",
+        "claveLIF": "1.13.03",
+        "glos": "ISAN (Impuesto Sobre Automóviles Nuevos)",
+        "refKey": "ref-lfisan",
+        "refNum": 56,
+        "efecto": "Impuesto federal de <b>administración estatal</b>: aunque lo establece una ley federal, las entidades lo recaudan y conservan su rendimiento por convenio de colaboración en el marco de la Ley de Coordinación Fiscal. De ahí que aparezca en la Ley de Ingresos de la Federación y, al mismo tiempo, en las haciendas locales."
+      },
+      {
+        "id": "ing-hidro",
+        "nombre": "Exploración y extracción de hidrocarburos",
+        "nombreLargo": "Impuesto por la actividad de exploración y extracción de hidrocarburos",
+        "grupo": "Impuestos",
+        "montoMdp": 7070.4,
+        "estado": "oficial",
+        "quePaga": "Se paga por cada kilómetro cuadrado de área contractual o de asignación, según esté en fase de exploración o de extracción.",
+        "ley": "Ley de Ingresos sobre Hidrocarburos, arts. 55 a 57",
+        "icono": "🛢️",
+        "claveLIF": "1.18.01",
+        "glos": "Impuesto por la Actividad de Exploración y Extracción de Hidrocarburos",
+        "refKey": "ref-lih",
+        "refNum": 57,
+        "efecto": "No grava la ganancia ni el volumen extraído, sino <b>la superficie ocupada</b>, y la cuota sube cuando el área lleva más de sesenta meses sin producir. Es un impuesto diseñado para desincentivar que se retengan áreas ociosas. Su recaudación se destina al Fondo para Entidades Federativas y Municipios Productores de Hidrocarburos."
+      },
+      {
+        "id": "ing-rezagos",
+        "nombre": "Impuestos de ejercicios anteriores",
+        "nombreLargo": "Impuestos no comprendidos en la Ley de Ingresos vigente, causados en ejercicios fiscales anteriores pendientes de liquidación o pago",
+        "grupo": "Impuestos",
+        "montoMdp": 62.7,
+        "estado": "oficial",
+        "quePaga": "Cobros de impuestos ya derogados o de ejercicios pasados que siguen pendientes de liquidarse o de pagarse.",
+        "ley": "Código Fiscal de la Federación, arts. 67 y 146",
+        "icono": "📜",
+        "claveLIF": "1.19",
+        "glos": "Rezago Fiscal",
+        "refKey": "ref-cff",
+        "refNum": 9,
+        "efecto": "Es la prueba de que <b>un impuesto derogado no desaparece</b>: la obligación ya causada sobrevive a la ley que la creó hasta que se extingue por pago, por caducidad de la facultad de determinar (cinco años, art. 67) o por prescripción del crédito (cinco años, art. 146). Es la partida más pequeña del cuadro y la que más dice sobre cómo corre el tiempo en materia fiscal."
+      },
+      {
+        "id": "ing-cuotas",
+        "nombre": "Cuotas de seguridad social",
+        "nombreLargo": "Cuotas y aportaciones de seguridad social",
+        "grupo": "Otras contribuciones",
+        "montoMdp": 641782.1,
+        "estado": "oficial",
+        "quePaga": "Lo que patrones y trabajadores aportan al IMSS y al ISSSTE para financiar las prestaciones de seguridad social.",
+        "icono": "🏥",
+        "ley": "Ley del Seguro Social · Ley del ISSSTE · Art. 2º fracc. II CFF",
+        "claveLIF": "2.22.01",
+        "glos": "Aportaciones de Seguridad Social",
+        "refKey": "ref-lss",
+        "refNum": 58,
+        "efecto": "Es <b>contribución, no impuesto</b>: el artículo 2º del Código Fiscal la define como la aportación de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social. De ahí su rasgo decisivo: tiene <b>destino específico</b>. No entra a la bolsa común del gasto ni forma parte de la Recaudación Federal Participable, así que no se reparte a estados y municipios.",
+        "componentes": [
+          {
+            "n": "Cuotas para el Seguro Social a cargo de patrones y trabajadores",
+            "m": 641782.1,
+            "d": "La totalidad del rubro"
+          },
+          {
+            "n": "Aportaciones para fondos de vivienda (INFONAVIT)",
+            "m": 0.0,
+            "d": "Presupuestado en cero: no ingresa al erario federal, va directo al fondo"
+          },
+          {
+            "n": "Cuotas del Sistema de Ahorro para el Retiro",
+            "m": 0.0,
+            "d": "Presupuestado en cero: van a las cuentas individuales, no a la Federación"
+          }
+        ]
+      },
+      {
+        "id": "ing-mejoras",
+        "nombre": "Contribuciones de mejoras",
+        "nombreLargo": "Contribuciones de mejoras por obras públicas de infraestructura hidráulica",
+        "grupo": "Otras contribuciones",
+        "montoMdp": 39.6,
+        "estado": "oficial",
+        "quePaga": "Lo que pagan quienes se benefician de forma directa de una obra pública federal de infraestructura hidráulica.",
+        "icono": "💧",
+        "ley": "Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica · Art. 2º fracc. III CFF",
+        "claveLIF": "3.31.01",
+        "glos": "Contribuciones de Mejoras",
+        "refKey": "ref-lcmopfih",
+        "refNum": 59,
+        "efecto": "Es la contribución que mejor ilustra el principio de <b>beneficio</b>: no se paga por tener capacidad económica, sino por recibir una ventaja particular y medible de una obra pública. Con $39.6 mdp es la partida más pequeña de toda la Ley de Ingresos, y sin embargo es una de las cuatro especies de contribución que reconoce el Código Fiscal."
+      },
+      {
+        "id": "ing-derechos",
+        "nombre": "Derechos",
+        "nombreLargo": "Derechos",
+        "grupo": "Otras contribuciones",
+        "montoMdp": 157081.7,
+        "estado": "oficial",
+        "quePaga": "Pagos por usar o aprovechar bienes del dominio público de la Nación y por recibir servicios que presta el Estado en funciones de derecho público.",
+        "icono": "📋",
+        "ley": "Ley Federal de Derechos · Art. 2º fracc. IV CFF",
+        "claveLIF": "4",
+        "glos": "Derechos (Contribución)",
+        "refKey": "ref-lfd",
+        "refNum": 60,
+        "efecto": "Contribución de <b>contraprestación</b>: a diferencia del impuesto, aquí el particular recibe algo identificable a cambio —un pasaporte, una concesión, el uso de agua o del espectro—. La Suprema Corte ha sostenido que su cuota debe guardar relación razonable con el costo del servicio; si excede ese costo, el derecho se vuelve un impuesto encubierto y es inconstitucional.",
+        "componentes": [
+          {
+            "n": "Por el uso, goce o aprovechamiento de bienes del dominio público",
+            "m": 81380.2,
+            "d": "Agua, espectro radioeléctrico, zona federal, puertos y carreteras"
+          },
+          {
+            "n": "Por prestación de servicios del Estado en funciones de derecho público",
+            "m": 75701.5,
+            "d": "Trámites migratorios, consulares, sanitarios, registrales y de seguridad"
+          }
+        ]
+      },
+      {
+        "id": "ing-productos",
+        "nombre": "Productos",
+        "nombreLargo": "Productos",
+        "grupo": "No tributarios",
+        "montoMdp": 16488.3,
+        "estado": "oficial",
+        "quePaga": "Lo que el Estado gana por usar, aprovechar o vender bienes que NO son del dominio público, y por los rendimientos de su patrimonio.",
+        "icono": "🏷️",
+        "ley": "Art. 3º párrafo tercero CFF",
+        "claveLIF": "5.51",
+        "glos": "Productos (Ingresos del Estado)",
+        "refKey": "ref-cff",
+        "refNum": 9,
+        "efecto": "El Estado aquí <b>no actúa como autoridad, sino como particular</b>: cobra rentas, intereses y precios de venta igual que cualquier propietario. Por eso el artículo 3º del Código Fiscal los saca de la categoría de contribuciones. La consecuencia práctica: no se rigen por el principio de legalidad tributaria con el mismo rigor, y su cobro es de derecho privado.",
+        "componentes": [
+          {
+            "n": "Derivados del uso, aprovechamiento o enajenación de bienes no sujetos al régimen de dominio público",
+            "m": 16322.7,
+            "d": "Intereses de valores $11,736.9 · enajenación de bienes $3,985.6 · utilidades $600.0"
+          },
+          {
+            "n": "Por servicios que no corresponden a funciones de derecho público",
+            "m": 165.6,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-aprovech",
+        "nombre": "Aprovechamientos",
+        "nombreLargo": "Aprovechamientos",
+        "grupo": "No tributarios",
+        "montoMdp": 203520.5,
+        "estado": "oficial",
+        "quePaga": "Ingresos que percibe el Estado por funciones de derecho público distintos de las contribuciones: multas no fiscales, cuotas compensatorias, decomisos, recuperaciones y remanentes.",
+        "icono": "⚖️",
+        "ley": "Art. 3º párrafo primero CFF",
+        "claveLIF": "6",
+        "glos": "Aprovechamientos",
+        "refKey": "ref-cff",
+        "refNum": 9,
+        "efecto": "Es la <b>categoría residual</b> del sistema: el artículo 3º los define por exclusión, como lo que percibe el Estado por funciones de derecho público y no es contribución, ni ingreso de organismos, ni empresa del Estado. Esa textura abierta los vuelve el rubro más heterogéneo de la ley y el más difícil de auditar renglón por renglón.",
+        "componentes": [
+          {
+            "n": "Aprovechamientos",
+            "m": 201723.3,
+            "d": "Cuotas compensatorias $1,807.2 · juegos y sorteos $2,578.3 · obras hidráulicas $4,304.7 · servicios energéticos $1,948.0 · decomisos $337.0"
+          },
+          {
+            "n": "Aprovechamientos patrimoniales",
+            "m": 1176.2,
+            "d": "Recuperaciones de capital"
+          },
+          {
+            "n": "Accesorios de aprovechamientos",
+            "m": 621.0,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-ventas",
+        "nombre": "Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE)",
+        "nombreLargo": "Ingresos por ventas de bienes, prestación de servicios y otros ingresos",
+        "grupo": "No tributarios",
+        "montoMdp": 1630973.6,
+        "estado": "oficial",
+        "quePaga": "Lo que generan con su propia operación el IMSS, el ISSSTE, Petróleos Mexicanos y la Comisión Federal de Electricidad.",
+        "icono": "⚡",
+        "ley": "Ley de la Empresa Pública del Estado, Petróleos Mexicanos · Ley de la Empresa Pública del Estado, CFE · Arts. 25 y 28 CPEUM",
+        "claveLIF": "7",
+        "glos": "Empresas Públicas del Estado",
+        "refKey": "ref-lepe",
+        "refNum": 61,
+        "efecto": "No es recaudación: es <b>venta</b>. El Estado cobra aquí un precio por un bien o un servicio en el mercado, no un tributo por mandato de ley. La reforma de 2024–2025 cambió su naturaleza jurídica: Pemex y CFE dejaron de ser «empresas productivas del Estado» para volverse <b>empresas públicas del Estado</b>, con el Estado como rector y no sólo como accionista.",
+        "componentes": [
+          {
+            "n": "Petróleos Mexicanos",
+            "m": 971677.2,
+            "d": ""
+          },
+          {
+            "n": "Comisión Federal de Electricidad",
+            "m": 535477.2,
+            "d": ""
+          },
+          {
+            "n": "Instituto Mexicano del Seguro Social",
+            "m": 62799.2,
+            "d": ""
+          },
+          {
+            "n": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+            "m": 61020.0,
+            "d": ""
+          }
+        ]
+      },
+      {
+        "id": "ing-transf",
+        "nombre": "Transferencias del Fondo Mexicano del Petróleo",
+        "nombreLargo": "Transferencias, asignaciones, subsidios y subvenciones, y pensiones y jubilaciones",
+        "grupo": "No tributarios",
+        "montoMdp": 232630.4,
+        "estado": "oficial",
+        "quePaga": "Lo que el Fondo Mexicano del Petróleo entrega al Gobierno Federal para el gasto del año.",
+        "icono": "🛢️",
+        "ley": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo · Art. 28 párrafo sexto CPEUM",
+        "claveLIF": "9.97.01",
+        "glos": "Fondo Mexicano del Petróleo (FMP)",
+        "refKey": "ref-lfmped",
+        "refNum": 62,
+        "efecto": "El FMP es un <b>fideicomiso público en el Banco de México</b> con mandato constitucional: recibe toda la renta petrolera y la entrega al presupuesto hasta un tope de 4.7 % del PIB. Lo que exceda debe ahorrarse. En 2026 la transferencia va íntegra al gasto corriente, de modo que el ahorro de largo plazo previsto en su diseño no se materializa.",
+        "componentes": [
+          {
+            "n": "Transferencias ordinarias",
+            "m": 232630.4,
+            "d": "La totalidad del rubro"
+          },
+          {
+            "n": "Transferencias extraordinarias",
+            "m": 0.0,
+            "d": "Presupuestado en cero"
+          }
+        ]
+      },
+      {
+        "id": "ing-deuda",
+        "nombre": "Deuda",
+        "nombreLargo": "Ingresos derivados de financiamientos",
+        "grupo": "Financiamiento",
+        "montoMdp": 1472626.4,
+        "estado": "oficial",
+        "quePaga": "Dinero prestado, no recaudado. Entra como ingreso del año y sale como obligación de los años siguientes.",
+        "icono": "🏦",
+        "ley": "Art. 73 fracc. VIII CPEUM · Ley Federal de Deuda Pública",
+        "claveLIF": "0",
+        "glos": "Techo de Endeudamiento Neto (LIF)",
+        "refKey": "ref-lfdp",
+        "refNum": 4,
+        "efecto": "Es lo que hace que la Ley de Ingresos y el Presupuesto de Egresos <b>cierren en la misma cifra</b>: el presupuesto cuadra porque lo prestado se cuenta como ingreso. La cifra neta esconde un bruto mayor: se contratan $1,858,397.4 mdp de endeudamiento interno y se restan los déficits de organismos y de empresas públicas.",
+        "componentes": [
+          {
+            "n": "Endeudamiento interno del Gobierno Federal",
+            "m": 1779541.7,
+            "d": "Endeudamiento neto del Gobierno Federal, según la nota informativa de la propia ley"
+          },
+          {
+            "n": "Otros financiamientos (diferimiento de pagos)",
+            "m": 78855.7,
+            "d": "Pagos que se recorren al ejercicio siguiente"
+          },
+          {
+            "n": "Endeudamiento externo",
+            "m": 0.0,
+            "d": "Presupuestado en cero para 2026"
+          },
+          {
+            "n": "Déficit de organismos y empresas de control directo",
+            "m": -101616.2,
+            "d": "Se resta: reduce el financiamiento neto"
+          },
+          {
+            "n": "Déficit de empresas públicas del Estado",
+            "m": -284154.8,
+            "d": "Se resta: reduce el financiamiento neto"
+          }
+        ]
+      }
     ],
 
     "egresos": [
-      { "id": "egr-social", "nombre": "Desarrollo Social", "grupo": "Programable", "montoMdp": 4916112.8, "estado": "oficial",
-        "queCubre": "Pensiones, salud, educaci\u00f3n, vivienda y programas sociales. La funci\u00f3n de protecci\u00f3n social por s\u00ed sola es la partida m\u00e1s grande del presupuesto.",
-        "icono": "\ud83e\udec2" },
-      { "id": "egr-gobierno", "nombre": "Gobierno", "grupo": "Programable", "montoMdp": 1697583.6, "estado": "oficial",
-        "queCubre": "Seguridad nacional, justicia, orden p\u00fablico, relaciones exteriores y la administraci\u00f3n del propio Estado.",
-        "icono": "\ud83c\udfdb\ufe0f" },
-      { "id": "egr-economico", "nombre": "Desarrollo Econ\u00f3mico", "grupo": "Programable", "montoMdp": 481012.4, "estado": "oficial",
-        "queCubre": "Energ\u00eda, comunicaciones, transporte, agricultura, ciencia y tecnolog\u00eda.",
-        "icono": "\ud83c\udfed" },
-      { "id": "egr-costofin", "nombre": "Costo financiero de la deuda", "grupo": "No programable", "montoMdp": 1571652.6, "estado": "derivado",
-        "queCubre": "Intereses de la deuda ya contratada. No compra nada: paga el precio de lo prestado en a\u00f1os anteriores.",
-        "icono": "\ud83d\udcc9" },
+      { "id": "egr-social", "nombre": "Desarrollo Social", "grupo": "Programable", "montoMdp": 4929400.0, "estado": "oficial",
+        "nombreLargo": "Desarrollo Social · finalidad 2 del gasto programable",
+        "clave": "PEF 2026 · clasificación funcional",
+        "queCubre": "Pensiones, salud, educación, vivienda y programas sociales. La función de protección social por sí sola es la partida más grande del presupuesto.",
+        "icono": "🫂",
+        "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, arts. 2º fracc. XXVII y 28 fracc. II",
+        "glos": "Gasto Programable vs No Programable",
+        "refKey": "ref-cgpe2027",
+        "refNum": 64,
+        "efecto": "Es <b>gasto programable</b>, que el artículo 2º, fracción XXVII de la Ley Federal de Presupuesto define como «las erogaciones que la Federación realiza en cumplimiento de sus atribuciones conforme a los programas para proveer bienes y servicios públicos a la población». La palabra «programable» sugiere que se decide cada año, y en buena parte no es así: la misma ley, al definir el gasto corriente estructural en su artículo 2º, fracción XXIV Bis, <b>excluye</b> del monto ajustable el pago de pensiones y jubilaciones del sector público y los programas sociales universales establecidos en la Constitución. El legislador reconoce ahí que ese dinero no se recorta como una partida cualquiera.<br><br>Los Criterios publican además el reparto por dentro, en proporción del PIB aprobado de 2026: <b>protección social 6.2 puntos</b>, educación 2.9, salud 2.5, vivienda y servicios a la comunidad 1.1 y protección ambiental 0.0. Protección social sola pesa más que educación y salud juntas, y es la única línea que creció sin pausa en toda la serie 2020-2026: de 4.7 a 6.2 puntos del PIB.",
+        "comoSeObtuvo": "Hasta ahora esta cifra se reconstruía desde el Anexo 1 del decreto, porque la clasificación funcional vivía en los tomos analíticos de Hacienda. Los <b>Criterios Generales de Política Económica 2027</b> la publican completa en el cuadro de su página 39, con una columna «PEF 2026 aprobado». Esta plataforma la adoptó tal cual, en miles de millones de pesos, que es la unidad en que la fuente la publica. Por eso los cinco renglones programables suman $7,094,700.0 mdp y no los $7,094,708.8 del cuadro de finanzas públicas: son 8.8 millones de redondeo de la fuente, no un faltante." },
+      { "id": "egr-economico", "nombre": "Desarrollo Económico", "grupo": "Programable", "montoMdp": 1695700.0, "estado": "oficial",
+        "nombreLargo": "Desarrollo Económico · finalidad 3 del gasto programable",
+        "clave": "PEF 2026 · clasificación funcional",
+        "queCubre": "Energía, comunicaciones, transporte, agricultura, ciencia y tecnología.",
+        "icono": "🏭",
+        "ley": "LFPRH, arts. 2º fracc. XXVII y 28 fracc. II · Constitución Política, arts. 25 y 28",
+        "glos": "Rectoría Económica del Estado",
+        "refKey": "ref-cgpe2027",
+        "refNum": 64,
+        "efecto": "Es la traducción presupuestal del artículo 25 constitucional, que encarga al Estado «la rectoría del desarrollo nacional». Conviene mirar de qué está hecha. Los Criterios la desglosan en proporción del PIB aprobado de 2026: <b>combustibles y energía 3.3 puntos de los 4.4</b> que suma toda la finalidad, es decir <b>tres cuartas partes</b>; comunicaciones y transportes 0.6; agropecuaria, silvicultura, pesca y caza 0.2; asuntos económicos y laborales 0.2; y ciencia, tecnología e innovación 0.2.<br><br>Dicho en pesos, en el Anexo 1 del Presupuesto Petróleos Mexicanos recibe $517,362.1 mdp y la Comisión Federal de Electricidad $554,567.5 —<b>$1,071,929.6 mdp entre las dos</b>—. Lo que se anuncia como gasto en desarrollo económico es, sobre todo, el costo de operar dos empresas del Estado en las áreas que el artículo 28 reserva a la Nación. Carreteras, campo y ciencia se reparten el cuarto restante, y la ciencia lleva catorce años clavada en dos décimas del PIB.",
+        "comoSeObtuvo": "Hasta ahora esta cifra se reconstruía desde el Anexo 1 del decreto, porque la clasificación funcional vivía en los tomos analíticos de Hacienda. Los <b>Criterios Generales de Política Económica 2027</b> la publican completa en el cuadro de su página 39, con una columna «PEF 2026 aprobado». Esta plataforma la adoptó tal cual, en miles de millones de pesos, que es la unidad en que la fuente la publica. Por eso los cinco renglones programables suman $7,094,700.0 mdp y no los $7,094,708.8 del cuadro de finanzas públicas: son 8.8 millones de redondeo de la fuente, no un faltante." },
+      { "id": "egr-gobierno", "nombre": "Gobierno", "grupo": "Programable", "montoMdp": 320700.0, "estado": "oficial",
+        "nombreLargo": "Gobierno · finalidad 1, sólo Administración Pública Federal",
+        "clave": "PEF 2026 · clasificación funcional",
+        "queCubre": "Seguridad nacional, justicia, orden público, relaciones exteriores y la administración del propio Ejecutivo.",
+        "icono": "🏛️",
+        "ley": "LFPRH, arts. 2º fracc. XXVII y 28 fracc. II · Constitución Política, art. 126",
+        "glos": "Ramo Presupuestario",
+        "refKey": "ref-cgpe2027",
+        "refNum": 64,
+        "efecto": "Reúne lo que al Ejecutivo le cuesta existir y hacer cumplir la ley. Sobre todo ello pesa el artículo 126 de la Constitución: «No podrá hacerse pago alguno que no esté comprendido en el Presupuesto o determinado por la ley posterior».<br><br>Los Criterios lo desglosan en proporción del PIB aprobado de 2026: justicia, orden público y seguridad interior 0.5 puntos; seguridad nacional 0.4; servicios públicos generales 0.4. Y dejan ver un movimiento que casi nunca se cita: entre 2020 y 2026 la finalidad de gobierno <b>cayó 21.2% en términos reales</b>, de 1.8 a 1.2 puntos del PIB. Es la única de las tres finalidades que se contrajo en el periodo.<br><br>Esta cifra cubre <b>sólo la Administración Pública Federal</b>. Los poderes Legislativo y Judicial, los órganos autónomos, el INEGI y el Tribunal Federal de Justicia Administrativa van aparte, en el renglón siguiente, porque la Cámara aprueba su techo pero no reparte su interior. En la clasificación funcional estándar los dos renglones van juntos y suman 1.2 puntos del PIB.",
+        "comoSeObtuvo": "Hasta ahora esta cifra se reconstruía desde el Anexo 1 del decreto, porque la clasificación funcional vivía en los tomos analíticos de Hacienda. Los <b>Criterios Generales de Política Económica 2027</b> la publican completa en el cuadro de su página 39, con una columna «PEF 2026 aprobado». Esta plataforma la adoptó tal cual, en miles de millones de pesos, que es la unidad en que la fuente la publica. Por eso los cinco renglones programables suman $7,094,700.0 mdp y no los $7,094,708.8 del cuadro de finanzas públicas: son 8.8 millones de redondeo de la fuente, no un faltante." },
+      { "id": "egr-poderes", "nombre": "Poderes y órganos autónomos", "grupo": "Programable", "montoMdp": 142300.0, "estado": "oficial",
+        "nombreLargo": "Poderes, órganos autónomos, INEGI y Tribunal Federal de Justicia Administrativa",
+        "clave": "PEF 2026 · clasificación funcional",
+        "queCubre": "El Congreso, el Poder Judicial, los órganos constitucionales autónomos, el INEGI y el Tribunal Federal de Justicia Administrativa.",
+        "icono": "⚖️",
+        "ley": "Constitución Política, arts. 74 fracc. IV y 94 · LFPRH, art. 5º fracc. I",
+        "glos": "Autonomía Presupuestal Judicial (Art. 94)",
+        "refKey": "ref-cgpe2027",
+        "refNum": 64,
+        "efecto": "Es el único renglón del gasto programable que la Cámara de Diputados aprueba pero <b>no administra</b>. El artículo 5º, fracción I de la Ley Federal de Presupuesto enumera qué significa la autonomía presupuestaria de los poderes Legislativo y Judicial y de los entes autónomos: <b>aprobar</b> sus propios proyectos y enviarlos a Hacienda sólo para que los integre; <b>ejercer</b> su presupuesto «sin sujetarse a las disposiciones generales emitidas por la Secretaría»; <b>autorizar</b> sus adecuaciones sin permiso de Hacienda; <b>pagar</b> por sus propias tesorerías; y <b>determinar</b> ellos mismos los ajustes si caen los ingresos.<br><br>No es un privilegio contable: es la condición material de la división de poderes. Quien controla el calendario de pagos de un tribunal controla al tribunal. Con todo, el artículo 74 constitucional pone el límite que vale para todos: «No podrá haber partidas secretas en el Presupuesto de Egresos de la Federación». Y desde la reforma judicial de 2024 el artículo 94 fija un techo expreso: la remuneración de ministras, ministros, magistraturas y juezas y jueces «no podrá ser mayor a la establecida para la persona titular de la Presidencia de la República».",
+        "comoSeObtuvo": "Hasta ahora esta cifra se reconstruía desde el Anexo 1 del decreto, porque la clasificación funcional vivía en los tomos analíticos de Hacienda. Los <b>Criterios Generales de Política Económica 2027</b> la publican completa en el cuadro de su página 39, con una columna «PEF 2026 aprobado». Esta plataforma la adoptó tal cual, en miles de millones de pesos, que es la unidad en que la fuente la publica. Por eso los cinco renglones programables suman $7,094,700.0 mdp y no los $7,094,708.8 del cuadro de finanzas públicas: son 8.8 millones de redondeo de la fuente, no un faltante." },
+      { "id": "egr-fondos", "nombre": "Fondos de estabilización", "grupo": "Programable", "montoMdp": 6600.0, "estado": "oficial",
+        "nombreLargo": "Fondos de estabilización · la aportación del ejercicio",
+        "clave": "PEF 2026 · clasificación funcional",
+        "queCubre": "Lo que el presupuesto del año aporta a los fondos que deben amortiguar una caída de ingresos.",
+        "icono": "🛟",
+        "ley": "LFPRH, art. 19 fracc. IV · Ley Federal de Presupuesto, art. 2º fracc. XXVII",
+        "glos": "Fondo Mexicano del Petróleo (FMP)",
+        "refKey": "ref-cgpe2027",
+        "refNum": 64,
+        "efecto": "Seis mil seiscientos millones de pesos: <b>una diezmilésima parte</b> del presupuesto. Es lo que el ejercicio aporta a los colchones que deben sostener al país si caen los ingresos.<br><br>Los fondos no se llenan sobre todo con esta partida, sino con los excedentes, y el artículo 19 de la Ley Federal de Presupuesto fija el orden: los ingresos que sobren se destinan <b>primero</b> a cubrir el incremento del gasto no programable —participaciones, costo financiero si se movieron la tasa o el tipo de cambio, adeudos del año anterior y desastres naturales—. Sólo lo que quede después se reparte, por la fracción IV, en <b>25% al Fondo de Estabilización de los Ingresos de las Entidades Federativas</b>, <b>65% al Fondo de Estabilización de los Ingresos Presupuestarios</b> y 10% a infraestructura de las entidades.<br><br>Dicho de otro modo: antes de ahorrar, el excedente paga intereses. Por eso el saldo de los tres fondos a junio de 2026 —$172.0 mil millones, según los propios Criterios— es menor que lo que cuesta un alza de cien puntos base en la tasa de interés durante dos años.",
+        "comoSeObtuvo": "Hasta ahora esta cifra se reconstruía desde el Anexo 1 del decreto, porque la clasificación funcional vivía en los tomos analíticos de Hacienda. Los <b>Criterios Generales de Política Económica 2027</b> la publican completa en el cuadro de su página 39, con una columna «PEF 2026 aprobado». Esta plataforma la adoptó tal cual, en miles de millones de pesos, que es la unidad en que la fuente la publica. Por eso los cinco renglones programables suman $7,094,700.0 mdp y no los $7,094,708.8 del cuadro de finanzas públicas: son 8.8 millones de redondeo de la fuente, no un faltante." },
+      { "id": "egr-costofin", "nombre": "Costo financiero de la deuda", "grupo": "No programable", "montoMdp": 1572073.3, "estado": "oficial",
+        "nombreLargo": "Costo financiero de la deuda y otras erogaciones",
+        "clave": "PEF 2026, Anexo 8",
+        "queCubre": "Intereses de la deuda ya contratada. No compra nada: paga el precio de lo prestado en años anteriores.",
+        "icono": "📉",
+        "ley": "Constitución Política, art. 73 fracc. VIII · LFPRH, art. 2º fraccs. XXV y XXVIII",
+        "glos": "Costo Financiero de la Deuda",
+        "refKey": "ref-pef2026",
+        "refNum": 11,
+        "efecto": "Aquí está uno de los puntos ciegos mayores del presupuesto, y lo dice la propia ley. El artículo 2º, fracción XXV de la Ley Federal de Presupuesto define el gasto neto total como la totalidad de las erogaciones aprobadas «las cuales <b>no incluyen las amortizaciones de la deuda pública</b>». Dicho de otro modo: este renglón paga <b>intereses</b>, no capital. Lo que el país devuelve del principal no aparece en los $10.19 billones que se presentan como el presupuesto entero. Es gasto no programable porque deriva de una obligación legal y no de un programa (art. 2º, fracc. XXVIII), y su raíz constitucional está en el artículo 73, fracción VIII, que faculta al Congreso para aprobar empréstitos y advierte que «ningún empréstito podrá celebrarse sino para la ejecución de obras que directamente produzcan un incremento en los ingresos públicos», salvo refinanciamiento, reestructura o regulación monetaria.",
+        "componentes": [
+          { "n": "Ramo 24 · Deuda Pública del Gobierno Federal", "m": 1297681.1, "d": "El costo financiero de la deuda soberana: intereses, comisiones y gastos de colocación." },
+          { "n": "Costo financiero de Pemex y CFE", "m": 238838.8, "d": "Anexo 1.E del decreto: Petróleos Mexicanos $190,838.8 mdp y Comisión Federal de Electricidad $48,000.0." },
+          { "n": "Ramo 34 · Apoyo a ahorradores y deudores de la banca", "m": 35553.4, "d": "No es interés de deuda soberana: es la herencia de los programas de rescate bancario. El Anexo 8 la agrupa aquí, bajo «y otras erogaciones»." },
+          { "n": "Ramo 29 · Saneamiento financiero", "m": 0, "d": "El anexo lo enumera y lo deja en cero para 2026. Se muestra porque el catálogo legal se lee completo o no se lee." }
+        ] },
       { "id": "egr-participaciones", "nombre": "Participaciones (Ramo 28)", "grupo": "No programable", "montoMdp": 1456045.9, "estado": "oficial",
-        "queCubre": "Dinero que pertenece a los estados y municipios por derecho, no por concesi\u00f3n. La Federaci\u00f3n lo recauda y lo entrega.",
-        "icono": "\ud83d\uddfa\ufe0f" },
-      { "id": "egr-adefas", "nombre": "ADEFAS", "grupo": "No programable", "montoMdp": 71276.4, "estado": "derivado",
-        "queCubre": "Adeudos de ejercicios fiscales anteriores: cuentas del a\u00f1o pasado que se pagan con dinero de este.",
-        "icono": "\ud83d\udcc5" }
+        "nombreLargo": "Participaciones a Entidades Federativas y Municipios",
+        "clave": "PEF 2026, Ramo General 28",
+        "queCubre": "Dinero que pertenece a los estados y municipios por derecho, no por concesión. La Federación lo recauda y lo entrega.",
+        "icono": "🗺️",
+        "ley": "Ley de Coordinación Fiscal, arts. 1º, 2º y 9º · LFPRH, art. 2º fracc. XXVIII",
+        "glos": "Ramo 28 (Participaciones Federales)",
+        "refKey": "ref-lcf",
+        "refNum": 5,
+        "efecto": "Aparece como gasto federal y jurídicamente no lo es: es dinero <b>de las entidades y los municipios</b> que la Federación recauda y entrega, a cambio de que ellos hayan dejado de cobrar por su cuenta los impuestos que hoy cobra la Federación. El artículo 9º de la Ley de Coordinación Fiscal lo protege con una fórmula tajante: las participaciones «son <b>inembargables</b>; no pueden afectarse a fines específicos, ni estar sujetas a retención». Y enseguida abre la puerta que explica la deuda de los estados: el Fondo General de Participaciones, el Fondo de Fomento Municipal y los recursos del artículo 4-A, fracción I <b>sí</b> pueden afectarse en garantía como fuente de pago, siempre que la afectación no exceda del <b>25 %</b> de lo que les corresponda. Esa es la diferencia con las aportaciones del Ramo 33, que el artículo 49 declara inembargables sin esa salida. Y es gasto no programable justamente porque deriva de una obligación legal, no de un programa." },
+      { "id": "egr-adefas", "nombre": "ADEFAS", "grupo": "No programable", "montoMdp": 70855.7, "estado": "oficial",
+        "nombreLargo": "Adeudos de Ejercicios Fiscales Anteriores",
+        "clave": "PEF 2026, Ramo General 30",
+        "queCubre": "Adeudos de ejercicios fiscales anteriores: cuentas del año pasado que se pagan con dinero de este.",
+        "icono": "📅",
+        "ley": "LFPRH, art. 54 · Constitución Política, art. 126",
+        "glos": "ADEFAS (Adeudos de Ejercicios Fiscales Anteriores)",
+        "refKey": "ref-lfprh",
+        "refNum": 2,
+        "efecto": "El año fiscal es un muro. El artículo 54 de la Ley Federal de Presupuesto ordena que «las erogaciones previstas en el Presupuesto de Egresos que no se encuentren devengadas al 31 de diciembre, <b>no podrán ejercerse</b>», y obliga a reintegrar a la Tesorería lo que sobre dentro de los quince días naturales siguientes al cierre. Las ADEFAS son la excepción prevista: lo que sí se devengó —el bien se recibió, el servicio se prestó— pero no alcanzó a pagarse. Como el artículo 126 constitucional exige que todo pago esté comprendido en el presupuesto, esas deudas del año anterior tienen que presupuestarse de nuevo, con ramo propio. Hasta 2025 no tenían techo explícito; una reforma publicada el <b>9 de abril de 2026</b> añadió uno: las ADEFAS del proyecto de presupuesto podrán ser, cuando mucho, del monto de los diferimientos de pagos previstos en la Ley de Ingresos del ejercicio inmediato anterior. Este Presupuesto se publicó antes de esa reforma, el 21 de noviembre de 2025, así que el techo regirá a partir del siguiente; como referencia, la Ley de Ingresos de 2026 prevé $78,855.7 mdp de diferimiento de pagos.",
+        "pendiente": "Lo que no se puede saber desde el decreto es <b>a quién</b> se le debe: el Ramo 30 es una sola cifra sin desglose por acreedor ni por dependencia. Ese detalle aparece después, en los informes trimestrales y en la Cuenta Pública." }
     ],
 
     "federalizado": {
       "totalMdp": 2810800,
+      "nota": "Los tres primeros renglones salen del Anexo 1 del Presupuesto de Egresos de la Federación 2026, que los nombra y cifra ramo por ramo. El cuarto es el residuo contra la estimación de gasto federalizado total y por eso va marcado como derivado.",
       "componentes": [
-        { "id": "fed-r28", "nombre": "Ramo 28 \u2014 Participaciones", "montoMdp": 1456045.9, "estado": "oficial",
-          "regla": "Libre disposici\u00f3n. El estado decide en qu\u00e9 lo gasta y responde ante su propio congreso.",
-          "ley": "Ley de Coordinaci\u00f3n Fiscal, arts. 2 a 3-B" },
-        { "id": "fed-r33", "nombre": "Ramo 33 \u2014 Aportaciones", "montoMdp": 1127075.3, "estado": "oficial",
-          "regla": "Etiquetado. Llega con destino fijado por ley: educaci\u00f3n, salud, infraestructura social, seguridad.",
-          "ley": "Ley de Coordinaci\u00f3n Fiscal, cap\u00edtulo V, arts. 25 a 51" },
-        { "id": "fed-conv", "nombre": "Convenios y otros recursos", "montoMdp": 227678.8, "estado": "derivado",
-          "regla": "Se pactan caso por caso entre la Federaci\u00f3n y cada entidad. Es la bolsa menos previsible de las tres.",
-          "ley": "LFPRH, art. 82" }
+        {
+          "id": "fed-r28",
+          "icono": "🪙",
+          "grupo": "No programable · el estado decide",
+          "nombre": "Ramo 28 — Participaciones",
+          "nombreLargo": "Ramo 28 · Participaciones a Entidades Federativas y Municipios",
+          "montoMdp": 1456045.89428,
+          "estado": "oficial",
+          "clave": "PEF Anexo 1",
+          "queEs": "La parte de la recaudación federal que, por pertenecer a un sistema de coordinación fiscal, regresa a los estados y municipios como ingreso propio. No es un subsidio ni un apoyo: es lo que las entidades reciben a cambio de haber dejado de cobrar por su cuenta los impuestos que hoy cobra la Federación.",
+          "efecto": "Es <b>ingreso propio de la entidad</b>, no transferencia condicionada. Una vez entregado deja de ser dinero federal: el estado lo gasta en lo que decida y responde ante su propio congreso y su propio órgano de fiscalización, no ante la Cámara de Diputados. Por eso el Ramo 28 aparece como gasto <b>no programable</b> de la Federación: no se decide cada año, se debe. El artículo 9º de la Ley de Coordinación Fiscal lo declara además <b>inembargable</b> y prohíbe afectarlo a fines específicos, salvo los fondos que la propia ley autoriza dar en garantía de deuda.",
+          "ley": "Ley de Coordinación Fiscal, arts. 2º a 4-A y 9º",
+          "glos": "Ramo 28 (Participaciones Federales)",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "reglas": [
+            {
+              "n": "Fondo General de Participaciones",
+              "v": "20 % de la RFP",
+              "d": "El fondo mayor del ramo. Se reparte entre las 32 entidades con una fórmula que pesa población, crecimiento económico y recaudación local. LCF art. 2º."
+            },
+            {
+              "n": "Fondo de Fiscalización y Recaudación",
+              "v": "1.25 % de la RFP",
+              "d": "Premia a las entidades que fiscalizan y recaudan mejor. LCF art. 4º."
+            },
+            {
+              "n": "Fondo de Fomento Municipal",
+              "v": "1 % de la RFP",
+              "d": "Su 16.8 % lo forma directamente; el 83.2 % restante sólo corresponde a las entidades coordinadas en materia de derechos. Es dinero municipal. LCF art. 2-A, fracc. III."
+            },
+            {
+              "n": "IEPS de gasolinas y diésel",
+              "v": "9/11 a las entidades",
+              "d": "Los 2/11 restantes forman el Fondo de Compensación para las diez entidades de menor PIB per cápita no minero y no petrolero. LCF art. 4-A."
+            },
+            {
+              "n": "ISR del personal de estados y municipios",
+              "v": "100 % a quien lo paga",
+              "d": "Si el sueldo lo paga el estado o el municipio con cargo a sus propios recursos, el ISR retenido regresa completo a esa hacienda. LCF art. 3-B."
+            },
+            {
+              "n": "Municipios de frontera y litoral",
+              "v": "0.136 % de la RFP",
+              "d": "Para los municipios por los que entran o salen materialmente del país las mercancías de comercio exterior. LCF art. 2-A, fracc. I."
+            }
+          ],
+          "pendiente": "El Presupuesto de Egresos publica el total del Ramo 28, no su reparto fondo por fondo ni entidad por entidad. Ese desglose lo da a conocer la Secretaría de Hacienda en el acuerdo de distribución que publica el Diario Oficial cada diciembre; se incorporará cuando pueda cotejarse contra la fuente."
+        },
+        {
+          "id": "fed-r33",
+          "icono": "🎯",
+          "grupo": "Programable · llega con destino fijado",
+          "nombre": "Ramo 33 — Aportaciones",
+          "nombreLargo": "Ramo 33 · Aportaciones Federales para Entidades Federativas y Municipios",
+          "montoMdp": 1041892.906925,
+          "estado": "oficial",
+          "clave": "PEF Anexo 22",
+          "queEs": "Ocho fondos que la Federación transfiere a estados y municipios con el gasto condicionado por ley: cada peso trae escrito en qué puede gastarse. Nómina magisterial, salud, infraestructura social, seguridad pública y fortalecimiento de las haciendas locales.",
+          "efecto": "A diferencia de las participaciones, las aportaciones <b>no dejan de ser recursos federales</b> al entregarse: el artículo 25 de la Ley de Coordinación Fiscal condiciona su gasto al cumplimiento de los objetivos que la propia ley fija para cada fondo, y el artículo 49 somete su ejercicio a la fiscalización de la Auditoría Superior de la Federación. De ahí que un municipio pueda ser auditado por la ASF sin ser autoridad federal: lo que se audita es el fondo, no el ente. Desviar un fondo de su destino legal no es mala administración, es <b>responsabilidad administrativa y, en su caso, delito</b>.",
+          "ley": "Ley de Coordinación Fiscal, capítulo V, arts. 25 a 51",
+          "glos": "Ramo 33 (Aportaciones Federales)",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "componentes": [
+            {
+              "n": "FONE — Nómina Educativa y Gasto Operativo",
+              "m": 546396.822994,
+              "d": "Servicios personales $500,367.1 · gasto de operación $19,340.5 · fondo de compensación $13,915.7 · otros de gasto corriente $12,773.6. Es el 52.4 % del ramo: uno de cada dos pesos del Ramo 33 es nómina magisterial. LCF arts. 26 a 28."
+            },
+            {
+              "n": "FORTAMUN — Fortalecimiento de los Municipios",
+              "m": 136817.441982,
+              "d": "Equivale al 2.35 % de la recaudación federal participable. Es el único fondo del ramo que es 100 % municipal y llega sin más restricción que su destino legal. LCF arts. 36 y 37."
+            },
+            {
+              "n": "FAIS — Infraestructura Social",
+              "m": 135060.702396,
+              "d": "2.5294 % de la RFP: 0.3066 % a las entidades ($16,371.3 mdp) y 2.2228 % a los municipios y demarcaciones ($118,689.4 mdp). Sólo puede gastarse en obra que beneficie a población en pobreza extrema o rezago social. LCF arts. 32 a 35."
+            },
+            {
+              "n": "FASSA — Servicios de Salud",
+              "m": 84635.885593,
+              "d": "Financia los servicios estatales de salud. Su peso relativo cayó con la absorción de los servicios estatales por el IMSS-Bienestar. LCF arts. 29 a 31."
+            },
+            {
+              "n": "FAFEF — Fortalecimiento de las Entidades Federativas",
+              "m": 74754.876,
+              "d": "1.40 % de la RFP. Se destina a inversión en infraestructura, saneamiento financiero y pago de deuda de la entidad. LCF art. 46."
+            },
+            {
+              "n": "FAM — Aportaciones Múltiples",
+              "m": 43464.62076,
+              "d": "Asistencia social $19,993.7 (46 % por ley) e infraestructura educativa $23,470.9 (54 %). Paga desayunos escolares y construcción de escuelas. LCF arts. 39 a 41."
+            },
+            {
+              "n": "FAETA — Educación Tecnológica y de Adultos",
+              "m": 10811.443171,
+              "d": "Educación tecnológica $6,858.3 y educación de adultos $3,953.1. LCF arts. 42 a 44."
+            },
+            {
+              "n": "FASP — Seguridad Pública de los Estados",
+              "m": 9951.114029,
+              "d": "El fondo más pequeño del ramo: el 0.96 %. El Presupuesto de Egresos promueve que al menos el 20 % se reparta entre municipios y demarcaciones. LCF arts. 45 y 45-Bis."
+            }
+          ]
+        },
+        {
+          "id": "fed-r25",
+          "icono": "🏫",
+          "grupo": "Programable · llega con destino fijado",
+          "nombre": "Ramo 25 — Previsiones educativas",
+          "nombreLargo": "Ramo 25 · Previsiones y Aportaciones para los Sistemas de Educación Básica, Normal, Tecnológica y de Adultos",
+          "montoMdp": 85182.409042,
+          "estado": "oficial",
+          "clave": "PEF Anexo 21",
+          "queEs": "El ramo que financia la educación básica y normal de la Ciudad de México —que nunca se descentralizó como en el resto del país— y guarda las previsiones salariales del magisterio que después se trasladan al FONE y al FAETA.",
+          "efecto": "Es <b>gasto federalizado que no aparece en el Ramo 33</b>, y ahí está su interés: quien compare años o entidades sumando sólo el Ramo 33 deja fuera $85,182.4 mdp de dinero magisterial. La Ciudad de México recibe por este ramo lo que las demás entidades reciben por el FONE, porque su servicio educativo básico siguió a cargo de la Federación cuando el Acuerdo Nacional para la Modernización de la Educación Básica de 1992 transfirió el de los estados.",
+          "ley": "Presupuesto de Egresos de la Federación 2026, Anexo 21 · Ley de Coordinación Fiscal, arts. 26-A y 42",
+          "glos": "Ramo 25 (Previsiones y Aportaciones Educativas)",
+          "refKey": "ref-pef2026",
+          "refNum": 11,
+          "componentes": [
+            {
+              "n": "Aportaciones para la educación básica y normal en la Ciudad de México",
+              "m": 50292.389634,
+              "d": "Lo que en las otras 31 entidades llega por el FONE."
+            },
+            {
+              "n": "Previsiones para servicios personales del FONE y del FAETA",
+              "m": 34890.019408,
+              "d": "Bolsa de reserva para las medidas salariales del año, que se traslada a los fondos del Ramo 33 conforme se ejerce."
+            }
+          ]
+        },
+        {
+          "id": "fed-conv",
+          "icono": "🤝",
+          "grupo": "Programable · pactado caso por caso",
+          "nombre": "Convenios y otros recursos",
+          "nombreLargo": "Convenios de descentralización, reasignación y otros recursos federalizados",
+          "montoMdp": 227678.789753,
+          "estado": "derivado",
+          "clave": "residuo",
+          "queEs": "Lo que la Federación transfiere a las entidades sin pasar por los ramos 28, 33 ni 25: convenios de descentralización y de reasignación que firman las secretarías con cada gobierno estatal, caso por caso y año por año.",
+          "efecto": "Es la bolsa <b>menos previsible y menos comparable</b> de las cuatro. No la fija una fórmula de ley sino un convenio administrativo, de modo que puede crecer, encogerse o desaparecer sin que cambie una sola norma. El artículo 82 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria exige que se sujeten a la disponibilidad del ramo que los origina y que se informe de ellos; no garantiza su continuidad. Para una entidad, planear con esta bolsa es planear con un ingreso que nadie le debe.",
+          "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 82",
+          "glos": "Gasto Federalizado",
+          "refKey": "ref-lfprh",
+          "refNum": 2,
+          "pendiente": "Esta cifra es un residuo: la diferencia entre la estimación de gasto federalizado total y la suma de los ramos 28, 33 y 25, que sí están cifrados en el Presupuesto de Egresos. Se sustituirá por la suma de los convenios reportados en los informes trimestrales de la Secretaría de Hacienda en cuanto puedan cotejarse uno por uno."
+        }
       ]
+    },
+    "municipal": {
+      "etiquetadoMdp": 255506.826534,
+      "nota": "Las dos cifras salen del Anexo 22 del Presupuesto de Egresos de la Federación 2026, que cifra fondo por fondo el Ramo 33. Son los únicos recursos federales que el Presupuesto identifica como municipales de origen; todo lo demás que llega al municipio pasa antes por la hacienda de su estado.",
+      "fuentes": [
+        {
+          "id": "mun-fortamun",
+          "icono": "🏛️",
+          "grupo": "Lo que el Presupuesto de Egresos cifra como municipal",
+          "nombre": "FORTAMUN",
+          "nombreLargo": "Fondo de Aportaciones para el Fortalecimiento de los Municipios y de las Demarcaciones Territoriales",
+          "montoMdp": 136817.441982,
+          "estado": "oficial",
+          "clave": "PEF Anexo 22",
+          "queEs": "El fondo municipal por excelencia del Ramo 33. Equivale al 2.35 % de la recaudación federal participable y se entrega mensualmente, por partes iguales, a través de los estados, sin más restricción que su destino legal.",
+          "efecto": "Es el único fondo del Ramo 33 que llega <b>«de manera ágil y directa sin más limitaciones ni restricciones, incluyendo aquellas de carácter administrativo»</b>, según el propio artículo 36 de la Ley de Coordinación Fiscal: el estado es conducto, no filtro, y retenerlo genera intereses a la tasa de recargos del Congreso. Su destino, en cambio, sí está fijado por el artículo 37, y en un orden revelador: <b>primero las obligaciones financieras</b> del municipio, después el agua, la modernización de la recaudación, el mantenimiento de infraestructura y la seguridad pública. Es decir, la ley da por supuesto que el municipio llega endeudado. El Presupuesto de Egresos añade que se promoverá destinar al menos el 20 % a seguridad pública.",
+          "ley": "Ley de Coordinación Fiscal, arts. 36 y 37",
+          "glos": "FORTAMUN",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "reglas": [
+            {
+              "n": "Municipios de los estados",
+              "v": "2.35 % de la RFP",
+              "d": "Se reparte en proporción directa al número de habitantes de cada entidad, y de ahí entre sus municipios. LCF art. 36, inciso a)."
+            },
+            {
+              "n": "Demarcaciones de la Ciudad de México",
+              "v": "0.2123 % de la RFP",
+              "d": "Las alcaldías reciben por una vía propia, calculada aparte. LCF art. 36, inciso b)."
+            },
+            {
+              "n": "Plazo de entrega",
+              "v": "mensual",
+              "d": "El estado es conducto: si retrasa la entrega paga intereses a la tasa de recargos que fija el Congreso de la Unión."
+            }
+          ]
+        },
+        {
+          "id": "mun-fismdf",
+          "icono": "🚧",
+          "grupo": "Lo que el Presupuesto de Egresos cifra como municipal",
+          "nombre": "FISMDF",
+          "nombreLargo": "Fondo de Aportaciones para la Infraestructura Social Municipal y de las Demarcaciones Territoriales",
+          "montoMdp": 118689.384552,
+          "estado": "oficial",
+          "clave": "PEF Anexo 22",
+          "queEs": "La parte municipal del Fondo de Aportaciones para la Infraestructura Social. De cada 2.5294 % de la recaudación federal participable que forma el FAIS, 2.2228 puntos son municipales y 0.3066 quedan en la entidad.",
+          "efecto": "Es el fondo <b>más condicionado</b> de todos los que llegan al municipio. El artículo 33 de la Ley de Coordinación Fiscal lo reserva «exclusivamente» a obras y acciones que beneficien de forma directa a población en pobreza extrema, localidades de alto o muy alto rezago social y zonas de atención prioritaria; el artículo 35 obliga a repartirlo entre municipios con una fórmula redistributiva que pesa la profundidad de la pobreza. El Presupuesto de Egresos 2026 agrega un piso: al menos el <b>10 % debe entregarse a pueblos y comunidades indígenas y afromexicanas</b>. Gastarlo en otra cosa, por útil que parezca, es desvío de recursos con destino legal.",
+          "ley": "Ley de Coordinación Fiscal, arts. 32, 33 y 35",
+          "glos": "FISMDF / FAIS",
+          "refKey": "ref-lcf",
+          "refNum": 5,
+          "reglas": [
+            {
+              "n": "Parte municipal del FAIS",
+              "v": "2.2228 % de la RFP",
+              "d": "El FAIS completo equivale al 2.5294 % de la recaudación federal participable. LCF art. 32."
+            },
+            {
+              "n": "Parte estatal (FISE)",
+              "v": "0.3066 % de la RFP",
+              "d": "Los $16,371.3 mdp que se quedan en la entidad y no bajan al municipio. LCF art. 32."
+            },
+            {
+              "n": "Piso para pueblos indígenas y afromexicanos",
+              "v": "10 % del fondo",
+              "d": "Lo fija el Presupuesto de Egresos de la Federación 2026, no la Ley de Coordinación Fiscal."
+            },
+            {
+              "n": "Criterio de reparto",
+              "v": "pobreza extrema",
+              "d": "Fórmula redistributiva con la medición de pobreza municipal más reciente. LCF arts. 34 y 35."
+            }
+          ]
+        }
+      ],
+      "sinCifra": [
+        {
+          "clave": "LCF art. 6º",
+          "nombre": "Participaciones del Fondo General",
+          "que": "Al municipio le corresponde <b>cuando menos el 20 %</b> de lo que su estado reciba del Fondo General de Participaciones. Quién recibe cuánto lo decide la legislatura local, no la Federación: por eso no existe una cifra municipal nacional en el Presupuesto de Egresos."
+        },
+        {
+          "clave": "LCF art. 2-A, III",
+          "nombre": "Fondo de Fomento Municipal",
+          "que": "El 1 % de la recaudación federal participable, íntegramente municipal. Su fórmula premia a los municipios que más recaudan de predial y de derechos de agua: el municipio que cobra, recibe más."
+        },
+        {
+          "clave": "LCF art. 4-A",
+          "nombre": "IEPS de gasolinas y diésel",
+          "que": "De la cuota que se paga en cada litro, 9 de cada 11 pesos corresponden a la entidad donde se consumió, y una parte de esos recursos debe llegar a sus municipios."
+        },
+        {
+          "clave": "LCF art. 2-A, I",
+          "nombre": "Municipios de frontera y de litoral",
+          "que": "El 0.136 % de la recaudación federal participable, para los municipios por los que entran o salen materialmente del país las mercancías de comercio exterior."
+        }
+      ],
+      "propios": [
+        {
+          "id": "mp-predial",
+          "icono": "🏠",
+          "grupo": "Lo que cobra por su cuenta · Art. 115, fracc. IV CPEUM",
+          "nombre": "Predial y contribuciones sobre la propiedad",
+          "nombreLargo": "Contribuciones sobre la propiedad inmobiliaria",
+          "montoMdp": 52543.2,
+          "estado": "derivado",
+          "clave": "115-IV-a",
+          "queEs": "El impuesto predial y las contribuciones sobre el fraccionamiento, división, consolidación, traslación y mejora de inmuebles, más las que tengan por base el cambio de valor de la propiedad.",
+          "efecto": "Es la única fuente que la Constitución reserva al municipio <b>en exclusiva y por mandato</b>: el artículo 115, fracción IV, inciso a), dice «en todo caso», y el mismo precepto prohíbe que las leyes federales limiten esa facultad o concedan exenciones sobre ella. Sólo quedan exentos los bienes de dominio público, y aun ésos pierden la exención si un particular o una paraestatal los usa para fines distintos de su objeto público. A cambio, el municipio <b>no fija la tasa</b>: propone cuotas, tarifas y tablas de valores, y es el congreso del estado quien las aprueba. Puede además convenir con el estado que éste administre el cobro.",
+          "ley": "Constitución Política, art. 115, fracc. IV, inciso a)",
+          "glos": "Impuesto Predial",
+          "refKey": "ref-inegi-efipem",
+          "refNum": 63,
+          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. No es una estimación ni un residuo: es la suma de cifras publicadas, municipio por municipio, y cualquiera puede rehacerla con el mismo archivo de datos abiertos. Falta en ella lo de los 99 municipios que no reportaron y lo de las dieciséis demarcaciones de la Ciudad de México, que no rinden cuenta municipal. Puesto en perspectiva: los municipios del país recaudaron de predial menos de la quinta parte de lo que recibieron de participaciones federales. Es el impuesto que la Constitución les reserva en exclusiva, y el que menos pesa en su bolsa.",
+          "leyAdicional": "Constitución Política, art. 115, fracc. IV, inciso a)"
+        },
+        {
+          "id": "mp-servicios",
+          "icono": "🚰",
+          "grupo": "Lo que cobra por su cuenta · Art. 115, fracc. IV CPEUM",
+          "nombre": "Derechos por servicios públicos",
+          "nombreLargo": "Ingresos derivados de la prestación de servicios públicos a su cargo",
+          "montoMdp": 48348.2,
+          "estado": "derivado",
+          "clave": "115-IV-c",
+          "queEs": "Agua potable y alcantarillado, alumbrado, limpia y disposición de residuos, mercados, panteones, rastro, calles, parques y seguridad pública: los servicios que la fracción III del artículo 115 pone a cargo del municipio, y cuyo cobro la fracción IV le reconoce como ingreso.",
+          "efecto": "Aquí el municipio cobra por lo que hace, no por lo que alguien posee, y esa es la diferencia jurídica entre un <b>derecho</b> y un impuesto: el derecho supone una contraprestación. De ahí una consecuencia que rara vez se discute: si el municipio deja de prestar el servicio, pierde la base del cobro. Como en el predial, las tarifas las propone el ayuntamiento y las aprueba el congreso del estado, de modo que un municipio puede quedar atrapado entre un costo que sube y una tarifa que no le toca mover.",
+          "ley": "Constitución Política, art. 115, fraccs. III y IV, inciso c)",
+          "glos": "Derechos (Contribución)",
+          "refKey": "ref-inegi-efipem",
+          "refNum": 63,
+          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. No es una estimación ni un residuo: es la suma de cifras publicadas, municipio por municipio, y cualquiera puede rehacerla con el mismo archivo de datos abiertos. Falta en ella lo de los 99 municipios que no reportaron y lo de las dieciséis demarcaciones de la Ciudad de México, que no rinden cuenta municipal. Agua, alumbrado, limpia, mercados, panteones, rastro y licencias suman casi tanto como el predial: entre los dos apenas rebasan los cien mil millones, frente a los doscientos sesenta y ocho mil que bajan por participaciones."
+        },
+        {
+          "id": "mp-participaciones",
+          "icono": "🔗",
+          "grupo": "Lo que cobra por su cuenta · Art. 115, fracc. IV CPEUM",
+          "nombre": "Participaciones federales",
+          "nombreLargo": "Participaciones federales cubiertas por conducto del estado",
+          "montoMdp": 268861.2,
+          "estado": "derivado",
+          "clave": "115-IV-b",
+          "queEs": "La parte del Ramo 28 que toca al municipio. La Constitución la enumera junto al predial y a los derechos, como uno de los tres ingresos que el municipio tiene «en todo caso».",
+          "efecto": "La Constitución la garantiza, pero deja el <b>cuánto, el cómo y el cuándo</b> a las legislaturas de los estados: «con arreglo a las bases, montos y plazos que anualmente se determinen por las Legislaturas de los Estados». La Ley de Coordinación Fiscal pone un piso —nunca menos del 20 % del Fondo General que reciba la entidad— y obliga al estado a entregarlas dentro de los cinco días siguientes a recibirlas, con intereses si se retrasa. Aun así, el municipio no negocia con la Federación: negocia con su congreso local. Es la razón de que dos municipios iguales en población y pobreza reciban cantidades distintas según el estado en que estén.",
+          "ley": "Constitución Política, art. 115, fracc. IV, inciso b) · Ley de Coordinación Fiscal, art. 6º",
+          "glos": "Ramo 28 (Participaciones Federales)",
+          "refKey": "ref-inegi-efipem",
+          "refNum": 63,
+          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. Conviene leer la cifra con cuidado: dice cuánto <b>recibieron</b>, no cómo se reparte. La regla de reparto no es una, son treinta y dos, porque cada congreso estatal la fija en su propia ley de coordinación fiscal, y esos acuerdos se publican en 32 periódicos oficiales distintos. La suma es verificable; la fórmula que hay detrás, no lo es de un solo golpe.",
+          "pendiente": "Falta el reparto por entidad: los acuerdos de distribución que cada congreso estatal publica en su periódico oficial. Se incorporarán conforme puedan citarse uno por uno."
+        }
+      ],
+      "asimetria": {
+        "titulo": "El municipio aprueba en qué gasta, pero no de dónde cobra",
+        "texto": "El mismo párrafo del artículo 115 que reconoce la hacienda municipal contiene la asimetría: «<b>Las legislaturas de los Estados aprobarán las leyes de ingresos de los municipios</b>, revisarán y fiscalizarán sus cuentas públicas. Los presupuestos de egresos serán aprobados por los ayuntamientos». El cabildo decide el gasto; el congreso del estado decide el ingreso y después revisa la cuenta. Es el único de los tres pisos de la hacienda pública mexicana donde quien aprueba el ingreso no es el mismo órgano que responde por el gasto.",
+        "consecuencia": "De ahí que subir el predial sea, para un presidente municipal, una decisión que no depende de él: puede proponer la tabla de valores, pero la aprueba un congreso cuyo costo político es distinto del suyo. La consecuencia medible es un predial de los más bajos de la OCDE frente al PIB y municipios que dependen de transferencias para gasto corriente."
+      }
     },
 
     "circuito": [
@@ -153,7 +947,715 @@ window.AUDIT_DB = {
       { "id": "pc-predial", "titulo": "El predial mexicano recauda seis veces menos que el promedio de la OCDE",
         "texto": "El impuesto predial es la principal fuente propia del municipio y en M\u00e9xico apenas llega al 0.16 por ciento del PIB, frente al 1.0 por ciento de la OCDE. El eslab\u00f3n que est\u00e1 m\u00e1s cerca del ciudadano es el que menos capacidad tiene de sostenerse solo.",
         "dato": "0.16% del PIB contra 1.0% de la OCDE" }
-    ]
+    ],
+
+    "treemapPEF":     {
+        "ejercicio": 2026,
+        "totalMdp": 10193683.7,
+        "fuente": "Presupuesto de Egresos de la Federación 2026 (DOF) · Criterios Generales de Política Económica 2027 (SHCP)",
+        "nodos": [
+            {
+                "id": "fn-social",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "Desarrollo Social",
+                "montoMdp": 4929400.0,
+                "pctTotal": 48.36,
+                "icono": "🫂",
+                "color": "social",
+                "clasificacion": "Gasto Programable · Finalidad 2",
+                "descripcion": "Pensiones universales, salud pública, educación nacional, vivienda y bienestar comunitario.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "fn-economico",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "Desarrollo Económico",
+                "montoMdp": 1670300.0,
+                "pctTotal": 16.39,
+                "icono": "⚡",
+                "color": "econ",
+                "clasificacion": "Gasto Programable · Finalidad 3",
+                "descripcion": "Energía eléctrica (CFE), hidrocarburos (PEMEX), infraestructura carretera, trenes y agricultura.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "fn-gobierno",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "Gobierno y Seguridad",
+                "montoMdp": 495000.0,
+                "pctTotal": 4.86,
+                "icono": "🛡️",
+                "color": "gob",
+                "clasificacion": "Gasto Programable · Finalidad 1",
+                "descripcion": "Defensa militar (SEDENA), seguridad pública (SSPC), Marina (SEMAR) y gobernabilidad interior.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "fn-deuda",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "Costo Financiero de la Deuda",
+                "montoMdp": 1388400.0,
+                "pctTotal": 13.62,
+                "icono": "💳",
+                "color": "deuda",
+                "clasificacion": "Gasto No Programable · Ineludible",
+                "descripcion": "Intereses, comisiones y amortizaciones de deuda pública interna (CETES/Bonos) y externa.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "fn-ramo28",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "Participaciones a Estados (Ramo 28)",
+                "montoMdp": 1385200.0,
+                "pctTotal": 13.59,
+                "icono": "🏛️",
+                "color": "fed",
+                "clasificacion": "Gasto No Programable · Ley de Coordinación Fiscal",
+                "descripcion": "Recursos federales no etiquetados transferidos a las 32 entidades y 2,479 municipios.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            },
+            {
+                "id": "fn-autonomos",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "Poderes y Órganos Autónomos",
+                "montoMdp": 152000.0,
+                "pctTotal": 1.49,
+                "icono": "⚖️",
+                "color": "autonomos",
+                "clasificacion": "Gasto Programable · Ramos Autónomos",
+                "descripcion": "Poder Judicial de la Federación (SCJN), Instituto Nacional Electoral (INE), Congreso y órganos autónomos.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "fn-adefas",
+                "parentId": "raiz",
+                "nivel": 1,
+                "nombre": "ADEFAS y Fondos",
+                "montoMdp": 173383.7,
+                "pctTotal": 1.7,
+                "icono": "📑",
+                "color": "adefas",
+                "clasificacion": "Gasto No Programable · Pasivos Devengados",
+                "descripcion": "Adeudos de ejercicios fiscales anteriores, pago a proveedores rezagados y reservas FEIP.",
+                "estado": "oficial",
+                "refKey": "ref-lfprh"
+            },
+            {
+                "id": "dep-bienestar",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Secretaría de Bienestar",
+                "montoMdp": 579884.0,
+                "pctTotal": 5.69,
+                "icono": "🌾",
+                "color": "social",
+                "clasificacion": "Ramo 20 · Bienestar",
+                "descripcion": "Pensión universal para adultos mayores, personas con discapacidad y programas de apoyo social directo.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-imss",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Instituto Mexicano del Seguro Social (IMSS)",
+                "montoMdp": 1470250.0,
+                "pctTotal": 14.42,
+                "icono": "🏥",
+                "color": "social",
+                "clasificacion": "Entidad de Control Directo",
+                "descripcion": "Pensiones contributivas obrero-patronales Ley 73/97 y servicios médicos de segundo y tercer nivel.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-sep",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Secretaría de Educación Pública (SEP)",
+                "montoMdp": 450200.0,
+                "pctTotal": 4.42,
+                "icono": "🎓",
+                "color": "social",
+                "clasificacion": "Ramo 11 · Educación Pública",
+                "descripcion": "Becas Benito Juárez, nómina docente federalizada, universidades públicas y escuelas básicas.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-issste",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "ISSSTE",
+                "montoMdp": 525800.0,
+                "pctTotal": 5.16,
+                "icono": "⚕️",
+                "color": "social",
+                "clasificacion": "Entidad de Control Directo",
+                "descripcion": "Pensiones y cobertura médica para trabajadores y jubilados del Estado.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-imss-bienestar",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Servicios de Salud IMSS-Bienestar",
+                "montoMdp": 172000.0,
+                "pctTotal": 1.69,
+                "icono": "🩺",
+                "color": "social",
+                "clasificacion": "Organismo Público Descentralizado",
+                "descripcion": "Atención médica integral y medicamentos gratuitos para la población sin derechohabiencia laboral.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-vivienda",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Vivienda y Servicios a la Comunidad (SEDATU / FISMDF)",
+                "montoMdp": 385000.0,
+                "pctTotal": 3.78,
+                "icono": "🏘️",
+                "color": "social",
+                "clasificacion": "Ramo 15 · Desarrollo Agrario, Territorial y Urbano",
+                "descripcion": "Vivienda social digna, pavimentación, drenaje, redes de agua potable municipal.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-salud-ssa",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Secretaría de Salud e Institutos Nacionales",
+                "montoMdp": 146266.0,
+                "pctTotal": 1.43,
+                "icono": "🔬",
+                "color": "social",
+                "clasificacion": "Ramo 12 · Salud",
+                "descripcion": "COFEPRIS, vigilancia epidemiológica, vacunación e institutos de alta especialidad.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-social-otros",
+                "parentId": "fn-social",
+                "nivel": 2,
+                "nombre": "Aportaciones Federales a Entidades (Ramo 33 Social)",
+                "montoMdp": 1200000.0,
+                "pctTotal": 11.77,
+                "icono": "📦",
+                "color": "social",
+                "clasificacion": "Ramo 33 · Fondos Sociales Transferidos",
+                "descripcion": "Fondo de Aportaciones para la Educación (FONE), FASSA salud y asistencia social alimentaria.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            },
+            {
+                "id": "dep-cfe",
+                "parentId": "fn-economico",
+                "nivel": 2,
+                "nombre": "Comisión Federal de Electricidad (CFE)",
+                "montoMdp": 545000.0,
+                "pctTotal": 5.35,
+                "icono": "🔌",
+                "color": "econ",
+                "clasificacion": "Empresa Pública del Estado",
+                "descripcion": "Generación termoeléctrica/hidroeléctrica, red de transmisión, distribución y compra de gas natural.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-pemex",
+                "parentId": "fn-economico",
+                "nivel": 2,
+                "nombre": "Petróleos Mexicanos (PEMEX)",
+                "montoMdp": 510000.0,
+                "pctTotal": 5.0,
+                "icono": "🛢️",
+                "color": "econ",
+                "clasificacion": "Empresa Pública del Estado",
+                "descripcion": "Exploración de crudo, Sistema Nacional de Refinación, petroquímica y amortización soberana.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-sict",
+                "parentId": "fn-economico",
+                "nivel": 2,
+                "nombre": "Infraestructura, Comunicaciones y Transportes (SICT)",
+                "montoMdp": 140500.0,
+                "pctTotal": 1.38,
+                "icono": "🚆",
+                "color": "econ",
+                "clasificacion": "Ramo 09 · SICT",
+                "descripcion": "Nuevas líneas ferroviarias de pasajeros, modernización carretera y puertos.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-sader",
+                "parentId": "fn-economico",
+                "nivel": 2,
+                "nombre": "Agricultura y Desarrollo Rural (SADER)",
+                "montoMdp": 78200.0,
+                "pctTotal": 0.77,
+                "icono": "🌽",
+                "color": "econ",
+                "clasificacion": "Ramo 08 · Agricultura",
+                "descripcion": "Producción para el Bienestar, Fertilizantes gratuitos y Precios de Garantía.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-turismo-otros",
+                "parentId": "fn-economico",
+                "nivel": 2,
+                "nombre": "Turismo, Comercio, Trabajo y Ciencia",
+                "montoMdp": 396600.0,
+                "pctTotal": 3.89,
+                "icono": "📈",
+                "color": "econ",
+                "clasificacion": "Ramos Económicos Complementarios",
+                "descripcion": "Operación de circuitos turísticos, fomento a la exportación, Conahcyt y becas de posgrado.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-sedena",
+                "parentId": "fn-gobierno",
+                "nivel": 2,
+                "nombre": "Defensa Nacional (SEDENA / Ramo 07)",
+                "montoMdp": 259400.0,
+                "pctTotal": 2.54,
+                "icono": "🪖",
+                "color": "gob",
+                "clasificacion": "Ramo 07 · Defensa Nacional",
+                "descripcion": "Soberanía territorial, operatividad del Ejército y Fuerza Aérea, e infraestructura estratégica.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-sspc",
+                "parentId": "fn-gobierno",
+                "nivel": 2,
+                "nombre": "Seguridad y Protección Ciudadana (SSPC / Ramo 36)",
+                "montoMdp": 70400.0,
+                "pctTotal": 0.69,
+                "icono": "🚨",
+                "color": "gob",
+                "clasificacion": "Ramo 36 · Seguridad Ciudadana",
+                "descripcion": "Centro Nacional de Inteligencia, cárceles federales y mando de estrategia de pacificación.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-semar",
+                "parentId": "fn-gobierno",
+                "nivel": 2,
+                "nombre": "Secretaría de Marina (SEMAR / Ramo 13)",
+                "montoMdp": 65900.0,
+                "pctTotal": 0.65,
+                "icono": "⚓",
+                "color": "gob",
+                "clasificacion": "Ramo 13 · Marina",
+                "descripcion": "Vigilancia de litorales marítimos, administración de puertos comerciales e Interoceánico.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-gobernacion-otros",
+                "parentId": "fn-gobierno",
+                "nivel": 2,
+                "nombre": "Gobernación, SRE, SAT y Función Pública",
+                "montoMdp": 99300.0,
+                "pctTotal": 0.97,
+                "icono": "🏛️",
+                "color": "gob",
+                "clasificacion": "Ramos Centrales de Administración",
+                "descripcion": "Política exterior, consulados, política migratoria, recaudación fiscal del SAT y auditoría interna.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-deuda-interna",
+                "parentId": "fn-deuda",
+                "nivel": 2,
+                "nombre": "Intereses de Deuda Interna en Moneda Nacional",
+                "montoMdp": 985000.0,
+                "pctTotal": 9.66,
+                "icono": "🇲🇽",
+                "color": "deuda",
+                "clasificacion": "Gasto No Programable · Deuda Soberana",
+                "descripcion": "Pago de intereses y rendimientos de CETES, Bonos M, UDIBONOS colocados en el mercado local.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "dep-deuda-externa",
+                "parentId": "fn-deuda",
+                "nivel": 2,
+                "nombre": "Intereses de Deuda Externa en Divisas",
+                "montoMdp": 280000.0,
+                "pctTotal": 2.75,
+                "icono": "💵",
+                "color": "deuda",
+                "clasificacion": "Gasto No Programable · Deuda Externa",
+                "descripcion": "Servicio de bonos globales colocados en Wall Street, Europa y créditos con Banco Mundial / BID.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "dep-ipab-saneamiento",
+                "parentId": "fn-deuda",
+                "nivel": 2,
+                "nombre": "Saneamiento Financiero (IPAB / Rescate Bancario)",
+                "montoMdp": 123400.0,
+                "pctTotal": 1.21,
+                "icono": "🏦",
+                "color": "deuda",
+                "clasificacion": "Ramo 34 · Cuotas al IPAB",
+                "descripcion": "Intereses anuales del rescate bancario de 1995 (Fobaproa), deuda histórica perpetua.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-fondo-general",
+                "parentId": "fn-ramo28",
+                "nivel": 2,
+                "nombre": "Fondo General de Participaciones (FGP)",
+                "montoMdp": 1095000.0,
+                "pctTotal": 10.74,
+                "icono": "🗺️",
+                "color": "fed",
+                "clasificacion": "Ramo 28 · Participaciones",
+                "descripcion": "El 20% de la recaudación federal participable transferido a libre disposición de los 32 estados.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            },
+            {
+                "id": "dep-fondo-fomento",
+                "parentId": "fn-ramo28",
+                "nivel": 2,
+                "nombre": "Fondo de Fomento Municipal (FFM)",
+                "montoMdp": 58500.0,
+                "pctTotal": 0.57,
+                "icono": "🏙️",
+                "color": "fed",
+                "clasificacion": "Ramo 28 · Municipal",
+                "descripcion": "Recursos directos para los 2,479 municipios que coordinan el impuesto predial con su estado.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            },
+            {
+                "id": "dep-otros-fondos-r28",
+                "parentId": "fn-ramo28",
+                "nivel": 2,
+                "nombre": "Fondo de Fiscalización (FOFIR), Gasolinas e ISAN",
+                "montoMdp": 231700.0,
+                "pctTotal": 2.27,
+                "icono": "⛽",
+                "color": "fed",
+                "clasificacion": "Ramo 28 · Fondos Especiales",
+                "descripcion": "Cuotas de gasolinas, incentivos por cobro vehicular y compensaciones de fiscalización.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            },
+            {
+                "id": "dep-poder-judicial",
+                "parentId": "fn-autonomos",
+                "nivel": 2,
+                "nombre": "Poder Judicial de la Federación (Ramo 03)",
+                "montoMdp": 85000.0,
+                "pctTotal": 0.83,
+                "icono": "⚖️",
+                "color": "autonomos",
+                "clasificacion": "Ramo 03 · Poder Judicial",
+                "descripcion": "Suprema Corte de Justicia, Tribunal Electoral y Tribunales y Juzgados de Distrito del país.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-ine",
+                "parentId": "fn-autonomos",
+                "nivel": 2,
+                "nombre": "Instituto Nacional Electoral (INE / Ramo 22)",
+                "montoMdp": 33000.0,
+                "pctTotal": 0.32,
+                "icono": "🗳️",
+                "color": "autonomos",
+                "clasificacion": "Ramo 22 · Instituto Nacional Electoral",
+                "descripcion": "Padrón electoral de 98M de ciudadanos, credenciales gratuitas y financiamiento a partidos.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-poder-legislativo",
+                "parentId": "fn-autonomos",
+                "nivel": 2,
+                "nombre": "Poder Legislativo Federal (Ramo 01)",
+                "montoMdp": 18500.0,
+                "pctTotal": 0.18,
+                "icono": "🏛️",
+                "color": "autonomos",
+                "clasificacion": "Ramo 01 · Poder Legislativo",
+                "descripcion": "500 diputados federales, 128 senadores y la Auditoría Superior de la Federación (ASF).",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-organos-autonomos",
+                "parentId": "fn-autonomos",
+                "nivel": 2,
+                "nombre": "INEGI, CNDH, COFECE e IFT",
+                "montoMdp": 15500.0,
+                "pctTotal": 0.15,
+                "icono": "📊",
+                "color": "autonomos",
+                "clasificacion": "Ramos Autónomos Complementarios",
+                "descripcion": "Censos nacionales, defensa de derechos humanos y regulación antimonopolios.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "dep-adefas-proveedores",
+                "parentId": "fn-adefas",
+                "nivel": 2,
+                "nombre": "Cuentas por Pagar a Proveedores y Contratistas",
+                "montoMdp": 120000.0,
+                "pctTotal": 1.18,
+                "icono": "🧾",
+                "color": "adefas",
+                "clasificacion": "Ramo 24 · Deuda Flotante",
+                "descripcion": "Liquidación de obras públicas, servicios y suministros del año fiscal previo.",
+                "estado": "oficial",
+                "refKey": "ref-lfprh"
+            },
+            {
+                "id": "dep-fondos-estabilizacion",
+                "parentId": "fn-adefas",
+                "nivel": 2,
+                "nombre": "Fondo de Estabilización de Ingresos (FEIP)",
+                "montoMdp": 53383.7,
+                "pctTotal": 0.52,
+                "icono": "🛡️",
+                "color": "adefas",
+                "clasificacion": "Fondo Soberano de Contingencia",
+                "descripcion": "Ahorro contracíclico de la Tesorería para amortiguar caídas en ingresos petroleros o tributarios.",
+                "estado": "oficial",
+                "refKey": "ref-lfprh"
+            },
+            {
+                "id": "prg-adultos-mayores",
+                "parentId": "dep-bienestar",
+                "nivel": 3,
+                "nombre": "Pensión para Adultos Mayores",
+                "montoMdp": 482953.0,
+                "pctTotal": 4.74,
+                "icono": "👵",
+                "color": "social",
+                "clasificacion": "Programa S771 · Art. 4º Constitucional",
+                "descripcion": "Pensión universal de $6,000 bimestrales para más de 12.2 millones de beneficiarios.",
+                "estado": "oficial",
+                "refKey": "ref-cpeum-art4"
+            },
+            {
+                "id": "prg-discapacidad",
+                "parentId": "dep-bienestar",
+                "nivel": 3,
+                "nombre": "Pensión a Personas con Discapacidad",
+                "montoMdp": 32840.0,
+                "pctTotal": 0.32,
+                "icono": "♿",
+                "color": "social",
+                "clasificacion": "Programa S772 · Transferencia Directa",
+                "descripcion": "Apoyo universal para niñas, niños y jóvenes con discapacidad permanente.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-sembrando-vida",
+                "parentId": "dep-bienestar",
+                "nivel": 3,
+                "nombre": "Sembrando Vida",
+                "montoMdp": 38925.0,
+                "pctTotal": 0.38,
+                "icono": "🌱",
+                "color": "social",
+                "clasificacion": "Programa U022 · Comunidades Rurales",
+                "descripcion": "Jornales a sembradores en sistemas agroforestales en el sureste y centro del país.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-mujeres-bienestar",
+                "parentId": "dep-bienestar",
+                "nivel": 3,
+                "nombre": "Pensión Mujeres Bienestar (60 a 64 años)",
+                "montoMdp": 25166.0,
+                "pctTotal": 0.25,
+                "icono": "👩",
+                "color": "social",
+                "clasificacion": "Nuevo Programa Federal 2026",
+                "descripcion": "Reconocimiento económico a mujeres que dedicaron su vida al cuidado del hogar y la familia.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-imss-pensiones",
+                "parentId": "dep-imss",
+                "nivel": 3,
+                "nombre": "Pago de Jubilaciones y Pensiones IMSS",
+                "montoMdp": 980500.0,
+                "pctTotal": 9.62,
+                "icono": "👴",
+                "color": "social",
+                "clasificacion": "Obligación Patronal y Estatal Ineludible",
+                "descripcion": "Nómina mensual para más de 4.8 millones de pensionados por cesantía, vejez e invalidez.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-imss-medico",
+                "parentId": "dep-imss",
+                "nivel": 3,
+                "nombre": "Atención Médica y Hospitalaria IMSS",
+                "montoMdp": 415750.0,
+                "pctTotal": 4.08,
+                "icono": "🏥",
+                "color": "social",
+                "clasificacion": "Servicios de Salud Ordinarios",
+                "descripcion": "Médicos, enfermeras, medicamentos, cirugías e insumos en el régimen formal de seguridad social.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-becas-benito",
+                "parentId": "dep-sep",
+                "nivel": 3,
+                "nombre": "Becas para el Bienestar Benito Juárez",
+                "montoMdp": 131926.0,
+                "pctTotal": 1.29,
+                "icono": "🎒",
+                "color": "social",
+                "clasificacion": "Programas S071, S072, S283",
+                "descripcion": "Apoyo a estudiantes de educación básica, preparatoria obligatoria y universidad para abatir deserción.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-sep-docentes",
+                "parentId": "dep-sep",
+                "nivel": 3,
+                "nombre": "Sueldos Docentes y Operación Escolar (FONE)",
+                "montoMdp": 245274.0,
+                "pctTotal": 2.41,
+                "icono": "👩‍🏫",
+                "color": "social",
+                "clasificacion": "Fondo de Aportaciones de Nómina Educativa",
+                "descripcion": "Pago quincenal de más de 1.2 millones de maestras y maestros de escuelas públicas en los 32 estados.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            },
+            {
+                "id": "prg-cfe-generacion",
+                "parentId": "dep-cfe",
+                "nivel": 3,
+                "nombre": "Generación Eléctrica y Ciclos Combinados",
+                "montoMdp": 210000.0,
+                "pctTotal": 2.06,
+                "icono": "⚡",
+                "color": "econ",
+                "clasificacion": "CFE Generación I a VI",
+                "descripcion": "Operación de plantas hidroeléctricas, geotérmicas, solares y de ciclo combinado en todo el país.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-pemex-exploracion",
+                "parentId": "dep-pemex",
+                "nivel": 3,
+                "nombre": "Exploración y Extracción de Crudo (PEP)",
+                "montoMdp": 275000.0,
+                "pctTotal": 2.7,
+                "icono": "⚓",
+                "color": "econ",
+                "clasificacion": "PEMEX Exploración y Producción",
+                "descripcion": "Plataformas marinas en la Sonda de Campeche y campos terrestres para sostener 1.8 millones de barriles diarios.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-sict-trenes",
+                "parentId": "dep-sict",
+                "nivel": 3,
+                "nombre": "Trenes de Pasajeros e Infraestructura Ferroviaria",
+                "montoMdp": 82000.0,
+                "pctTotal": 0.8,
+                "icono": "🚆",
+                "color": "econ",
+                "clasificacion": "Proyectos Estratégicos de Movilidad",
+                "descripcion": "Nuevas rutas México-Querétaro, Saltillo-Nuevo Laredo e interconexiones de carga y pasajeros.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-sedena-operacion",
+                "parentId": "dep-sedena",
+                "nivel": 3,
+                "nombre": "Operatividad y Despliegue de Fuerzas Armadas",
+                "montoMdp": 165000.0,
+                "pctTotal": 1.62,
+                "icono": "🎖️",
+                "color": "gob",
+                "clasificacion": "Ramo 07 · Defensa",
+                "descripcion": "Mantenimiento de zonas militares, cuarteles, parque vehicular, haberes de tropa y oficiales.",
+                "estado": "oficial",
+                "refKey": "ref-pef2026"
+            },
+            {
+                "id": "prg-deuda-cetes-bonosm",
+                "parentId": "dep-deuda-interna",
+                "nivel": 3,
+                "nombre": "Servicio de Bonos M y CETES",
+                "montoMdp": 720000.0,
+                "pctTotal": 7.06,
+                "icono": "📊",
+                "color": "deuda",
+                "clasificacion": "Mercado Local de Deuda",
+                "descripcion": "Intereses pagados quincenal y trimestralmente a fondos de ahorro, bancos e inversionistas privados.",
+                "estado": "oficial",
+                "refKey": "ref-cgpe2027"
+            },
+            {
+                "id": "prg-fgp-estados",
+                "parentId": "dep-fondo-general",
+                "nivel": 3,
+                "nombre": "Reparto Quincenal del Fondo General (FGP)",
+                "montoMdp": 1095000.0,
+                "pctTotal": 10.74,
+                "icono": "🗺️",
+                "color": "fed",
+                "clasificacion": "Ramo 28 · Participaciones a las 32 Entidades",
+                "descripcion": "Distribución no condicionada conforme al Art. 2º de la Ley de Coordinación Fiscal.",
+                "estado": "oficial",
+                "refKey": "ref-lcf"
+            }
+        ]
+    }
   },
 
   "funcionJurisdiccional": {
@@ -680,62 +2182,6 @@ window.AUDIT_DB = {
     ],
     "notaFuentes": "Los portales oficiales del DOF, la Suprema Corte y la Cámara de Diputados estuvieron bloqueados por el proxy de red durante la elaboración de esta ficha; el articulado se contrastó contra resúmenes de esas mismas fuentes. Todo dato calculado por proporción aparece marcado como derivado y todo juicio interpretativo como análisis."
   },
-  "impuestos": [
-    {
-      "id": "isr",
-      "nombre": "Impuesto Sobre la Renta (ISR)",
-      "nivel": "Federal",
-      "monto": 2684495,
-      "share": 54.2,
-      "descripcion": "Grava directamente los ingresos y utilidades de personas físicas y empresas.",
-      "icono": "💼"
-    },
-    {
-      "id": "iva",
-      "nombre": "Impuesto al Valor Agregado (IVA)",
-      "nivel": "Federal",
-      "monto": 1407983,
-      "share": 28.4,
-      "descripcion": "Impuesto al consumo del 16% (8% franja fronteriza).",
-      "icono": "🛒"
-    },
-    {
-      "id": "ieps",
-      "nombre": "IEPS (Gasolinas, Refrescos, Tabacos)",
-      "nivel": "Federal",
-      "monto": 508000,
-      "share": 10.3,
-      "descripcion": "Impuesto especial sobre combustibles y bienes de impacto a la salud.",
-      "icono": "⛽"
-    },
-    {
-      "id": "comext",
-      "nombre": "Comercio Exterior (Aranceles)",
-      "nivel": "Federal",
-      "monto": 87000,
-      "share": 1.8,
-      "descripcion": "Aranceles y derechos aduanales en puertos y fronteras.",
-      "icono": "🚢"
-    },
-    {
-      "id": "isn",
-      "nombre": "Impuesto Sobre Nóminas (ISN)",
-      "nivel": "Estatal",
-      "monto": 210000,
-      "share": 4.2,
-      "descripcion": "Grava del 2% al 3% la nómina pagada en cada estado.",
-      "icono": "👥"
-    },
-    {
-      "id": "predial",
-      "nombre": "Impuesto Predial y Catastro",
-      "nivel": "Municipal",
-      "monto": 55000,
-      "share": 1.1,
-      "descripcion": "Grava inmuebles. Es la fuente propia central del municipio.",
-      "icono": "🏛️"
-    }
-  ],
   "estados": [
     {
       "abbr": "AGS",
@@ -751,11 +2197,14 @@ window.AUDIT_DB = {
       "dep": 82.8,
       "gobernador": "María Teresa Jiménez Esquivel",
       "partido": "PAN",
-      "deuda": 3650,
+      "deuda": 3993.9,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 428,
-      "asfAuditorias": 38,
-      "asfTipologia": "Inconsistencias en licitación de insumos hospitalarios y comprobación de viáticos en seguridad.",
+      "deudaIld": 26.6,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 343.3,
+      "asfAuditorias": 34,
+      "asfTipologia": "La ASF practicó 34 auditorías al dinero federal que recibió el estado y promovió 63 acciones, entre ellas 31 pliegos de observaciones y 24 promociones de responsabilidad administrativa. Quedaron $343.3 mdp por aclarar y se recuperaron $2.2 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Economía automotriz dinámica; alta dependencia federal mitigada por recaudación eficiente de ISN.",
       "municipios": [
         {
@@ -763,11 +2212,11 @@ window.AUDIT_DB = {
           "alcalde": "Leonardo Montañez Castro",
           "partido": "PAN",
           "pob": 948000,
-          "presupuestoTotal": 4650,
-          "fortamun": 780,
-          "fismdf": 210,
-          "predial": 890,
-          "dependencia": 67.5,
+          "presupuestoTotal": 4843.6,
+          "fortamun": 888.4,
+          "fismdf": 243.5,
+          "predial": 522.3,
+          "dependencia": 62.9,
           "observacionesASF": 42.5,
           "estatusAuditoria": "Aclaración de contratos de luminarias LED y pavimentación.",
           "proyectosAuditados": [
@@ -781,11 +2230,11 @@ window.AUDIT_DB = {
           "alcalde": "César Medina Delgado",
           "partido": "PAN",
           "pob": 130000,
-          "presupuestoTotal": 890,
-          "fortamun": 110,
-          "fismdf": 75,
-          "predial": 120,
-          "dependencia": 78.6,
+          "presupuestoTotal": 969.5,
+          "fortamun": 121.6,
+          "fismdf": 58.6,
+          "predial": 98.2,
+          "dependencia": 54.0,
           "observacionesASF": 15.2,
           "estatusAuditoria": "Observación en obra de colector pluvial.",
           "proyectosAuditados": [
@@ -798,11 +2247,11 @@ window.AUDIT_DB = {
           "alcalde": "Daniel Romo Urrutia",
           "partido": "PAN",
           "pob": 58000,
-          "presupuestoTotal": 410,
-          "fortamun": 48,
-          "fismdf": 52,
-          "predial": 32,
-          "dependencia": 80.5,
+          "presupuestoTotal": 353.4,
+          "fortamun": 54.5,
+          "fismdf": 51.6,
+          "predial": 20.3,
+          "dependencia": 81.4,
           "observacionesASF": 8.1,
           "estatusAuditoria": "Justificación de compras de maquinaria pesada.",
           "proyectosAuditados": [
@@ -826,11 +2275,14 @@ window.AUDIT_DB = {
       "dep": 78.5,
       "gobernador": "Marina del Pilar Ávila Olmeda",
       "partido": "MORENA",
-      "deuda": 22800,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1840,
-      "asfAuditorias": 54,
-      "asfTipologia": "Observaciones en asignación directa de obras del Fondo Metropolitano y pagos duplicados en nómina magisterial.",
+      "deuda": 21664.7,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 43.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 558.4,
+      "asfAuditorias": 29,
+      "asfTipologia": "La ASF practicó 29 auditorías al dinero federal que recibió el estado y promovió 59 acciones, entre ellas 28 pliegos de observaciones y 21 promociones de responsabilidad administrativa. Quedaron $558.4 mdp por aclarar y se recuperaron $10.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Potencia maquiladora y fronteriza. Elevada presión por servicio de deuda reestructurada de sexenios anteriores.",
       "municipios": [
         {
@@ -838,11 +2290,11 @@ window.AUDIT_DB = {
           "alcalde": "Ismael Burgueño Ruiz",
           "partido": "MORENA",
           "pob": 1922000,
-          "presupuestoTotal": 11200,
-          "fortamun": 1650,
-          "fismdf": 420,
-          "predial": 2100,
-          "dependencia": 63.4,
+          "presupuestoTotal": 14559.2,
+          "fortamun": 1724.4,
+          "fismdf": 309.6,
+          "predial": 1150.3,
+          "dependencia": 48.3,
           "observacionesASF": 285.0,
           "estatusAuditoria": "Revisión prioritaria en obras de bacheo y contratos de seguridad privada.",
           "proyectosAuditados": [
@@ -856,11 +2308,11 @@ window.AUDIT_DB = {
           "alcalde": "Norma Alicia Bustamante Martínez",
           "partido": "MORENA",
           "pob": 1048000,
-          "presupuestoTotal": 5800,
-          "fortamun": 890,
-          "fismdf": 260,
-          "predial": 980,
-          "dependencia": 69.8,
+          "presupuestoTotal": 6394.3,
+          "fortamun": 925.1,
+          "fismdf": 137.7,
+          "predial": 597.1,
+          "dependencia": 61.6,
           "observacionesASF": 118.4,
           "estatusAuditoria": "Diferencias en estimaciones de obra de drenaje pluvial.",
           "proyectosAuditados": [
@@ -873,11 +2325,11 @@ window.AUDIT_DB = {
           "alcalde": "Claudia Agatón Muñiz",
           "partido": "MORENA",
           "pob": 443000,
-          "presupuestoTotal": 2650,
-          "fortamun": 380,
-          "fismdf": 190,
-          "predial": 390,
-          "dependencia": 70.9,
+          "presupuestoTotal": 3147.2,
+          "fortamun": 398.1,
+          "fismdf": 134.1,
+          "predial": 446.1,
+          "dependencia": 51.2,
           "observacionesASF": 88.0,
           "estatusAuditoria": "Contratos observados en mantenimiento de planta tratadora.",
           "proyectosAuditados": [
@@ -901,11 +2353,14 @@ window.AUDIT_DB = {
       "dep": 84.7,
       "gobernador": "Víctor Manuel Castro Cosío",
       "partido": "MORENA",
-      "deuda": 3100,
+      "deuda": 1977.0,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 312,
-      "asfAuditorias": 32,
-      "asfTipologia": "Retrasos en ejecución de fondos para infraestructura hídrica y desalinizadoras.",
+      "deudaIld": 18.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 225.1,
+      "asfAuditorias": 30,
+      "asfTipologia": "La ASF practicó 30 auditorías al dinero federal que recibió el estado y promovió 39 acciones, entre ellas 20 pliegos de observaciones y 9 promociones de responsabilidad administrativa. Quedaron $225.1 mdp por aclarar y se recuperaron $65.4 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Sector turismo de ultra lujo en Los Cabos genera alta derrama pero con fuerte contraste en colonias populares.",
       "municipios": [
         {
@@ -913,11 +2368,11 @@ window.AUDIT_DB = {
           "alcalde": "Christian Agúndez Gómez",
           "partido": "MORENA",
           "pob": 351000,
-          "presupuestoTotal": 4300,
-          "fortamun": 310,
-          "fismdf": 180,
-          "predial": 1450,
-          "dependencia": 52.3,
+          "presupuestoTotal": 4807.0,
+          "fortamun": 340.9,
+          "fismdf": 485.9,
+          "predial": 648.0,
+          "dependencia": 42.8,
           "observacionesASF": 65.4,
           "estatusAuditoria": "Auditoría en concesión de recolección de basura y licencias de construcción.",
           "proyectosAuditados": [
@@ -931,11 +2386,11 @@ window.AUDIT_DB = {
           "alcalde": "Milena Paola Quiroga Romero",
           "partido": "MORENA",
           "pob": 292000,
-          "presupuestoTotal": 2500,
-          "fortamun": 240,
-          "fismdf": 120,
-          "predial": 480,
-          "dependencia": 66.8,
+          "presupuestoTotal": 2322.4,
+          "fortamun": 283.7,
+          "fismdf": 191.9,
+          "predial": 290.1,
+          "dependencia": 59.5,
           "observacionesASF": 44.1,
           "estatusAuditoria": "Pliego por subsidios no acreditados en transporte público.",
           "proyectosAuditados": [
@@ -959,11 +2414,14 @@ window.AUDIT_DB = {
       "dep": 91.2,
       "gobernador": "Layda Sansores San Román",
       "partido": "MORENA",
-      "deuda": 2850,
+      "deuda": 2211.1,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 580,
+      "deudaIld": 18.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 759.7,
       "asfAuditorias": 36,
-      "asfTipologia": "Fondos petroleros no comprobados y retenciones salariales no enteradas al SAT.",
+      "asfTipologia": "La ASF practicó 36 auditorías al dinero federal que recibió el estado y promovió 102 acciones, entre ellas 44 pliegos de observaciones y 44 promociones de responsabilidad administrativa. Quedaron $759.7 mdp por aclarar y se recuperaron $27.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Impactado por declive de producción de Cantarell; alta dependencia de transferencias federales de rescate.",
       "municipios": [
         {
@@ -971,11 +2429,11 @@ window.AUDIT_DB = {
           "alcalde": "Biby Rabelo de la Torre",
           "partido": "MC",
           "pob": 294000,
-          "presupuestoTotal": 1750,
-          "fortamun": 220,
-          "fismdf": 110,
-          "predial": 210,
-          "dependencia": 75.4,
+          "presupuestoTotal": 1814.9,
+          "fortamun": 268.5,
+          "fismdf": 122.8,
+          "predial": 48.2,
+          "dependencia": 72.1,
           "observacionesASF": 38.6,
           "estatusAuditoria": "Falta de expedientes en pavimentación hidráulica.",
           "proyectosAuditados": [
@@ -988,11 +2446,11 @@ window.AUDIT_DB = {
           "alcalde": "Pablo Gutiérrez Lazarus",
           "partido": "MORENA",
           "pob": 248000,
-          "presupuestoTotal": 1950,
-          "fortamun": 210,
-          "fismdf": 130,
-          "predial": 290,
-          "dependencia": 73.8,
+          "presupuestoTotal": 2095.8,
+          "fortamun": 227.2,
+          "fismdf": 180.3,
+          "predial": 74.8,
+          "dependencia": 66.5,
           "observacionesASF": 52.0,
           "estatusAuditoria": "Subsidios de pesca y contratos portuarios bajo revisión.",
           "proyectosAuditados": [
@@ -1016,11 +2474,14 @@ window.AUDIT_DB = {
       "dep": 95.3,
       "gobernador": "Eduardo Ramírez Aguilar",
       "partido": "VERDE",
-      "deuda": 21200,
+      "deuda": 18442.1,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 2667,
-      "asfAuditorias": 82,
-      "asfTipologia": "Uno de los estados con mayores irregularidades: desvío en nómina FONE, empresas fantasmas en municipios indígenas y obras de agua pagadas no concluidas.",
+      "deudaIld": 36.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 4499.7,
+      "asfAuditorias": 64,
+      "asfTipologia": "La ASF practicó 64 auditorías al dinero federal que recibió el estado y promovió 227 acciones, entre ellas 122 pliegos de observaciones y 70 promociones de responsabilidad administrativa. Quedaron $4,499.7 mdp por aclarar y se recuperaron $19.3 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Estado con la mayor dependencia fiscal (95.3%). El 61% de sus recursos son Ramo 33 condicionado a pobreza extrema.",
       "municipios": [
         {
@@ -1028,11 +2489,11 @@ window.AUDIT_DB = {
           "alcalde": "Ángel Torres Culebro",
           "partido": "MORENA",
           "pob": 604000,
-          "presupuestoTotal": 3200,
-          "fortamun": 480,
-          "fismdf": 260,
-          "predial": 380,
-          "dependencia": 73.1,
+          "presupuestoTotal": 3693.8,
+          "fortamun": 555.7,
+          "fismdf": 311.7,
+          "predial": 288.3,
+          "dependencia": 78.5,
           "observacionesASF": 145.2,
           "estatusAuditoria": "Observaciones por pagos improcedentes en alumbrado público.",
           "proyectosAuditados": [
@@ -1045,11 +2506,11 @@ window.AUDIT_DB = {
           "alcalde": "Yamil Melgar Bravo",
           "partido": "MORENA",
           "pob": 353000,
-          "presupuestoTotal": 1950,
-          "fortamun": 280,
-          "fismdf": 310,
-          "predial": 190,
-          "dependencia": 78.5,
+          "presupuestoTotal": 1770.6,
+          "fortamun": 325.3,
+          "fismdf": 434.4,
+          "predial": 53.2,
+          "dependencia": 86.4,
           "observacionesASF": 89.3,
           "estatusAuditoria": "Presunto sobreprecio en obras de contención y albergues migrantes.",
           "proyectosAuditados": [
@@ -1062,11 +2523,11 @@ window.AUDIT_DB = {
           "alcalde": "Fabiola Ricci Diestel",
           "partido": "MORENA",
           "pob": 215000,
-          "presupuestoTotal": 1350,
-          "fortamun": 175,
-          "fismdf": 210,
-          "predial": 110,
-          "dependencia": 81.5,
+          "presupuestoTotal": 1171.9,
+          "fortamun": 198.5,
+          "fismdf": 385.0,
+          "predial": 68.8,
+          "dependencia": 87.3,
           "observacionesASF": 64.7,
           "estatusAuditoria": "Inconsistencias en fondos turísticos y conservación patrimonial.",
           "proyectosAuditados": [
@@ -1079,11 +2540,11 @@ window.AUDIT_DB = {
           "alcalde": "Consejo Municipal Tradicional",
           "partido": "IND",
           "pob": 101000,
-          "presupuestoTotal": 720,
-          "fortamun": 82,
-          "fismdf": 390,
-          "predial": 1.2,
-          "dependencia": 99.8,
+          "presupuestoTotal": 743.2,
+          "fortamun": 93.8,
+          "fismdf": 479.0,
+          "predial": 0.0,
+          "dependencia": 94.2,
           "observacionesASF": 112.4,
           "estatusAuditoria": "Cero recaudación propia; 100% dependiente de FISMDF; opacidad severa en compras directas comunitarias.",
           "proyectosAuditados": [
@@ -1107,11 +2568,14 @@ window.AUDIT_DB = {
       "dep": 75.0,
       "gobernador": "María Eugenia Campos Galván",
       "partido": "PAN",
-      "deuda": 49800,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1240,
-      "asfAuditorias": 58,
-      "asfTipologia": "Costo financiero exorbitante por deuda de administraciones previas; observaciones en fondos de seguridad pública y presas agrícolas.",
+      "deuda": 56049.8,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 93.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 2521.9,
+      "asfAuditorias": 60,
+      "asfTipologia": "La ASF practicó 60 auditorías al dinero federal que recibió el estado y promovió 234 acciones, entre ellas 95 pliegos de observaciones y 123 promociones de responsabilidad administrativa. Quedaron $2,521.9 mdp por aclarar y se recuperaron $5.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El estado más extenso territorialmente. Gran recaudación de ISN por clúster aeroespacial y maquilador pero lastrado por pasivos bancarios.",
       "municipios": [
         {
@@ -1119,11 +2583,11 @@ window.AUDIT_DB = {
           "alcalde": "Cruz Pérez Cuéllar",
           "partido": "MORENA",
           "pob": 1512000,
-          "presupuestoTotal": 9200,
-          "fortamun": 1200,
-          "fismdf": 380,
-          "predial": 1850,
-          "dependencia": 69.6,
+          "presupuestoTotal": 9697.9,
+          "fortamun": 1389.1,
+          "fismdf": 309.6,
+          "predial": 1328.7,
+          "dependencia": 60.9,
           "observacionesASF": 195.4,
           "estatusAuditoria": "Licitaciones de recolección de basura y software policial.",
           "proyectosAuditados": [
@@ -1137,11 +2601,11 @@ window.AUDIT_DB = {
           "alcalde": "Marco Antonio Bonilla Mendoza",
           "partido": "PAN",
           "pob": 937000,
-          "presupuestoTotal": 5400,
-          "fortamun": 750,
-          "fismdf": 190,
-          "predial": 1250,
-          "dependencia": 64.8,
+          "presupuestoTotal": 6177.5,
+          "fortamun": 861.2,
+          "fismdf": 104.3,
+          "predial": 982.5,
+          "dependencia": 55.3,
           "observacionesASF": 68.2,
           "estatusAuditoria": "Aclaración de costos en nuevo Relleno Sanitario Metropolitano.",
           "proyectosAuditados": [
@@ -1165,11 +2629,14 @@ window.AUDIT_DB = {
       "dep": 65.0,
       "gobernador": "Clara Brugada Molina",
       "partido": "MORENA",
-      "deuda": 98500,
+      "deuda": 108022.2,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1750,
-      "asfAuditorias": 88,
-      "asfTipologia": "Observaciones en subsidios de transporte masivo (Metro / Cablebús) y contratos de centros comunitarios UTOPÍAS.",
+      "deudaIld": 39.5,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 2143.5,
+      "asfAuditorias": 31,
+      "asfTipologia": "La ASF practicó 31 auditorías al dinero federal que recibió el estado y promovió 104 acciones, entre ellas 36 pliegos de observaciones y 51 promociones de responsabilidad administrativa. Quedaron $2,143.5 mdp por aclarar y se recuperaron $1.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "La capital del país ostenta el mayor gasto per cápita ($34,874) y la menor dependencia fiscal (65%) gracias a una formidable recaudación de predial y nómina.",
       "municipios": [
         {
@@ -1177,11 +2644,11 @@ window.AUDIT_DB = {
           "alcalde": "Aleida Alavez Ruiz",
           "partido": "MORENA",
           "pob": 1835000,
-          "presupuestoTotal": 6900,
-          "fortamun": 850,
-          "fismdf": 510,
-          "predial": 420,
-          "dependencia": 82.0,
+          "presupuestoTotal": null,
+          "fortamun": null,
+          "fismdf": null,
+          "predial": null,
+          "dependencia": null,
           "observacionesASF": 185.0,
           "estatusAuditoria": "Revisión en sistema de captación pluvial y eventos culturales masivos.",
           "proyectosAuditados": [
@@ -1195,11 +2662,11 @@ window.AUDIT_DB = {
           "alcalde": "Alessandra Rojo de la Vega",
           "partido": "PAN-PRI-PRD",
           "pob": 545000,
-          "presupuestoTotal": 4100,
-          "fortamun": 450,
-          "fismdf": 120,
-          "predial": 1890,
-          "dependencia": 48.8,
+          "presupuestoTotal": null,
+          "fortamun": null,
+          "fismdf": null,
+          "predial": null,
+          "dependencia": null,
           "observacionesASF": 110.2,
           "estatusAuditoria": "Fiscalización especial de cobros de comercio en vía pública e imagen urbana.",
           "proyectosAuditados": [
@@ -1212,11 +2679,11 @@ window.AUDIT_DB = {
           "alcalde": "Luis Mendoza Acevedo",
           "partido": "PAN",
           "pob": 434000,
-          "presupuestoTotal": 2950,
-          "fortamun": 340,
-          "fismdf": 45,
-          "predial": 1420,
-          "dependencia": 44.5,
+          "presupuestoTotal": null,
+          "fortamun": null,
+          "fismdf": null,
+          "predial": null,
+          "dependencia": null,
           "observacionesASF": 54.0,
           "estatusAuditoria": "Auditoría a licencias de construcción y obras inmobiliarias.",
           "proyectosAuditados": [
@@ -1229,11 +2696,11 @@ window.AUDIT_DB = {
           "alcalde": "Janecarlo Lozano Reynoso",
           "partido": "MORENA",
           "pob": 1173000,
-          "presupuestoTotal": 5600,
-          "fortamun": 680,
-          "fismdf": 320,
-          "predial": 680,
-          "dependencia": 76.5,
+          "presupuestoTotal": null,
+          "fortamun": null,
+          "fismdf": null,
+          "predial": null,
+          "dependencia": null,
           "observacionesASF": 125.8,
           "estatusAuditoria": "Contratos de seguridad perimetral y desazolve en Cuautepec.",
           "proyectosAuditados": [
@@ -1257,11 +2724,14 @@ window.AUDIT_DB = {
       "dep": 80.0,
       "gobernador": "Manolo Jiménez Salinas",
       "partido": "PRI",
-      "deuda": 42100,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 890,
-      "asfAuditorias": 46,
-      "asfTipologia": "Servicio de deuda bancaria comprometida; observaciones en compras policiales y apoyos a la región carbonífera.",
+      "deuda": 36358.3,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 87.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 1379.1,
+      "asfAuditorias": 62,
+      "asfTipologia": "La ASF practicó 62 auditorías al dinero federal que recibió el estado y promovió 183 acciones, entre ellas 120 pliegos de observaciones y 48 promociones de responsabilidad administrativa. Quedaron $1,379.1 mdp por aclarar y se recuperaron $9.5 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran dinamismo automotriz; alto compromiso de participaciones federales en garantía de pasivos financieros.",
       "municipios": [
         {
@@ -1269,11 +2739,11 @@ window.AUDIT_DB = {
           "alcalde": "Javier Díaz González",
           "partido": "PRI",
           "pob": 879000,
-          "presupuestoTotal": 3800,
-          "fortamun": 540,
-          "fismdf": 140,
-          "predial": 780,
-          "dependencia": 68.5,
+          "presupuestoTotal": 4386.6,
+          "fortamun": 822.9,
+          "fismdf": 158.7,
+          "predial": 433.3,
+          "dependencia": 59.4,
           "observacionesASF": 48.0,
           "estatusAuditoria": "Licitación de cámaras urbanas con reconocimiento facial.",
           "proyectosAuditados": [
@@ -1286,11 +2756,11 @@ window.AUDIT_DB = {
           "alcalde": "Román Alberto Cepeda González",
           "partido": "PRI",
           "pob": 720000,
-          "presupuestoTotal": 3400,
-          "fortamun": 490,
-          "fismdf": 160,
-          "predial": 690,
-          "dependencia": 71.0,
+          "presupuestoTotal": 4296.4,
+          "fortamun": 674.1,
+          "fismdf": 169.3,
+          "predial": 530.9,
+          "dependencia": 53.9,
           "observacionesASF": 62.4,
           "estatusAuditoria": "Diferencias en estimaciones del Sistema Integral de Mantenimiento Vial.",
           "proyectosAuditados": [
@@ -1314,11 +2784,14 @@ window.AUDIT_DB = {
       "dep": 88.4,
       "gobernador": "Indira Vizcaíno Silva",
       "partido": "MORENA",
-      "deuda": 4800,
+      "deuda": 3741.3,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 340,
-      "asfAuditorias": 30,
-      "asfTipologia": "Inconsistencias en adquisiciones de chalecos balísticos y equipo de peritaje forense.",
+      "deudaIld": 46.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 485.7,
+      "asfAuditorias": 32,
+      "asfTipologia": "La ASF practicó 32 auditorías al dinero federal que recibió el estado y promovió 78 acciones, entre ellas 44 pliegos de observaciones y 16 promociones de responsabilidad administrativa. Quedaron $485.7 mdp por aclarar y se recuperaron $1.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El estado con el menor monto total de gasto federalizado por ser la entidad con menor población continental.",
       "municipios": [
         {
@@ -1326,11 +2799,11 @@ window.AUDIT_DB = {
           "alcalde": "Rosa María Bayardo Cabrera",
           "partido": "MORENA",
           "pob": 191000,
-          "presupuestoTotal": 1450,
-          "fortamun": 160,
-          "fismdf": 75,
-          "predial": 320,
-          "dependencia": 66.8,
+          "presupuestoTotal": 1704.8,
+          "fortamun": 173.7,
+          "fismdf": 69.2,
+          "predial": 321.3,
+          "dependencia": 54.7,
           "observacionesASF": 42.0,
           "estatusAuditoria": "Obras de acceso al recinto portuario bajo escrutinio.",
           "proyectosAuditados": [
@@ -1343,11 +2816,11 @@ window.AUDIT_DB = {
           "alcalde": "Riult Rivera Gutiérrez",
           "partido": "PAN-PRI",
           "pob": 157000,
-          "presupuestoTotal": 980,
-          "fortamun": 125,
-          "fismdf": 50,
-          "predial": 190,
-          "dependencia": 73.0,
+          "presupuestoTotal": 971.9,
+          "fortamun": 142.8,
+          "fismdf": 73.6,
+          "predial": 172.4,
+          "dependencia": 57.0,
           "observacionesASF": 21.5,
           "estatusAuditoria": "Observación en compras consolidadas de combustible.",
           "proyectosAuditados": [
@@ -1371,11 +2844,14 @@ window.AUDIT_DB = {
       "dep": 89.8,
       "gobernador": "Esteban Villegas Villarreal",
       "partido": "PRI",
-      "deuda": 12400,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 950,
-      "asfAuditorias": 44,
-      "asfTipologia": "Investigaciones penales en curso por desvío de participaciones federales en el cierre de la administración estatal previa.",
+      "deuda": 10881.4,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 59.3,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 1370.5,
+      "asfAuditorias": 41,
+      "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 117 acciones, entre ellas 59 pliegos de observaciones y 30 promociones de responsabilidad administrativa. Quedaron $1,370.5 mdp por aclarar y se recuperaron $7.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Estado con severa estrechez fiscal y necesidad recurrente de adelanto de participaciones para pagar aguinaldos.",
       "municipios": [
         {
@@ -1383,11 +2859,11 @@ window.AUDIT_DB = {
           "alcalde": "José Antonio Ochoa Rodríguez",
           "partido": "PAN",
           "pob": 688000,
-          "presupuestoTotal": 3100,
-          "fortamun": 420,
-          "fismdf": 160,
-          "predial": 480,
-          "dependencia": 72.5,
+          "presupuestoTotal": 3385.6,
+          "fortamun": 630.6,
+          "fismdf": 155.5,
+          "predial": 453.9,
+          "dependencia": 64.8,
           "observacionesASF": 58.0,
           "estatusAuditoria": "Revisión en el programa de pavimentación con slurry.",
           "proyectosAuditados": [
@@ -1400,11 +2876,11 @@ window.AUDIT_DB = {
           "alcalde": "Leticia Herrera Ale",
           "partido": "PRI",
           "pob": 372000,
-          "presupuestoTotal": 1850,
-          "fortamun": 240,
-          "fismdf": 110,
-          "predial": 280,
-          "dependencia": 74.0,
+          "presupuestoTotal": 1812.2,
+          "fortamun": 341.3,
+          "fismdf": 89.0,
+          "predial": 109.1,
+          "dependencia": 67.2,
           "observacionesASF": 44.5,
           "estatusAuditoria": "Diferencias en cobro de derechos de agua industrial.",
           "proyectosAuditados": [
@@ -1427,11 +2903,14 @@ window.AUDIT_DB = {
       "dep": 82.0,
       "gobernador": "Libia Dennise García Muñoz Ledo",
       "partido": "PAN",
-      "deuda": 11800,
+      "deuda": 12644.1,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1350,
-      "asfAuditorias": 62,
-      "asfTipologia": "El estado con el MENOR gasto federalizado per cápita de México ($15,271); observaciones en contratos de seguridad y FONE.",
+      "deudaIld": 19.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 2422.2,
+      "asfAuditorias": 70,
+      "asfTipologia": "La ASF practicó 70 auditorías al dinero federal que recibió el estado y promovió 146 acciones, entre ellas 77 pliegos de observaciones y 57 promociones de responsabilidad administrativa. Quedaron $2,422.2 mdp por aclarar y se recuperaron $208.1 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Potencia manufacturera castigada históricamente por la fórmula de la Ley de Coordinación Fiscal.",
       "municipios": [
         {
@@ -1439,11 +2918,11 @@ window.AUDIT_DB = {
           "alcalde": "Alejandra Gutiérrez Campos",
           "partido": "PAN",
           "pob": 1721000,
-          "presupuestoTotal": 8400,
-          "fortamun": 1200,
-          "fismdf": 390,
-          "predial": 1650,
-          "dependencia": 67.5,
+          "presupuestoTotal": 10035.6,
+          "fortamun": 1569.0,
+          "fismdf": 522.4,
+          "predial": 1089.2,
+          "dependencia": 61.1,
           "observacionesASF": 135.0,
           "estatusAuditoria": "Auditoría en subsidios al Sistema Integrado de Transporte (SIT OPTIBÚS).",
           "proyectosAuditados": [
@@ -1457,11 +2936,11 @@ window.AUDIT_DB = {
           "alcalde": "Lorena Alfaro García",
           "partido": "PAN",
           "pob": 592000,
-          "presupuestoTotal": 3100,
-          "fortamun": 410,
-          "fismdf": 180,
-          "predial": 480,
-          "dependencia": 73.0,
+          "presupuestoTotal": 3555.9,
+          "fortamun": 540.5,
+          "fismdf": 188.6,
+          "predial": 9.9,
+          "dependencia": 68.5,
           "observacionesASF": 65.4,
           "estatusAuditoria": "Observación en compras de patrullas y blindaje.",
           "proyectosAuditados": [
@@ -1474,11 +2953,11 @@ window.AUDIT_DB = {
           "alcalde": "Juan Miguel Ramírez Sánchez",
           "partido": "MORENA",
           "pob": 521000,
-          "presupuestoTotal": 2650,
-          "fortamun": 380,
-          "fismdf": 170,
-          "predial": 360,
-          "dependencia": 74.8,
+          "presupuestoTotal": 3016.0,
+          "fortamun": 475.1,
+          "fismdf": 139.1,
+          "predial": 382.5,
+          "dependencia": 60.6,
           "observacionesASF": 82.1,
           "estatusAuditoria": "Revisión exhaustiva en nómina de policía auxiliar y finiquitos.",
           "proyectosAuditados": [
@@ -1502,11 +2981,14 @@ window.AUDIT_DB = {
       "dep": 95.5,
       "gobernador": "Evelyn Cecia Salgado Pineda",
       "partido": "MORENA",
-      "deuda": 4900,
+      "deuda": 4288.1,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 2180,
-      "asfAuditorias": 68,
-      "asfTipologia": "Auditorías críticas post-huracanes; fondos de emergencia con adjudicaciones directas no comprobadas e irregularidades en plazas docentes.",
+      "deudaIld": 16.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 505.3,
+      "asfAuditorias": 49,
+      "asfTipologia": "La ASF practicó 49 auditorías al dinero federal que recibió el estado y promovió 125 acciones, entre ellas 48 pliegos de observaciones y 49 promociones de responsabilidad administrativa. Quedaron $505.3 mdp por aclarar y se recuperaron $27.4 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Dependencia fiscal extrema (95.5%). La mayor parte de su presupuesto se consume en gasto corriente e irreductible magisterial.",
       "municipios": [
         {
@@ -1514,11 +2996,11 @@ window.AUDIT_DB = {
           "alcalde": "Abelina López Rodríguez",
           "partido": "MORENA",
           "pob": 779000,
-          "presupuestoTotal": 4500,
-          "fortamun": 620,
-          "fismdf": 480,
-          "predial": 650,
-          "dependencia": 76.8,
+          "presupuestoTotal": 5139.9,
+          "fortamun": 709.9,
+          "fismdf": 917.2,
+          "predial": 348.0,
+          "dependencia": 70.6,
           "observacionesASF": 310.5,
           "estatusAuditoria": "Cientos de millones bajo pliego de observaciones por fondos de emergencia sin licitación.",
           "proyectosAuditados": [
@@ -1532,11 +3014,11 @@ window.AUDIT_DB = {
           "alcalde": "Gustavo Alarcón Herrera",
           "partido": "PRI-PAN-PRD",
           "pob": 283000,
-          "presupuestoTotal": 1450,
-          "fortamun": 190,
-          "fismdf": 180,
-          "predial": 110,
-          "dependencia": 84.0,
+          "presupuestoTotal": 1256.0,
+          "fortamun": 258.0,
+          "fismdf": 355.8,
+          "predial": 39.3,
+          "dependencia": 83.0,
           "observacionesASF": 94.0,
           "estatusAuditoria": "Inconsistencias en finiquitos de seguridad y desabasto de agua.",
           "proyectosAuditados": [
@@ -1560,11 +3042,14 @@ window.AUDIT_DB = {
       "dep": 91.0,
       "gobernador": "Julio Menchaca Salazar",
       "partido": "MORENA",
-      "deuda": 4600,
+      "deuda": 2448.7,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 820,
-      "asfAuditorias": 48,
-      "asfTipologia": "Investigaciones derivadas del esquema de desvío de recursos conocido como 'Estafa Siniestra' en municipios rurales.",
+      "deudaIld": 9.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 2152.7,
+      "asfAuditorias": 65,
+      "asfTipologia": "La ASF practicó 65 auditorías al dinero federal que recibió el estado y promovió 163 acciones, entre ellas 96 pliegos de observaciones y 46 promociones de responsabilidad administrativa. Quedaron $2,152.7 mdp por aclarar y se recuperaron $5.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Proceso de fiscalización y recuperación de recursos tras el cambio de régimen político estatal.",
       "municipios": [
         {
@@ -1572,11 +3057,11 @@ window.AUDIT_DB = {
           "alcalde": "Jorge Alberto Reyes Hernández",
           "partido": "MORENA",
           "pob": 314000,
-          "presupuestoTotal": 1250,
-          "fortamun": 180,
-          "fismdf": 75,
-          "predial": 240,
-          "dependencia": 72.0,
+          "presupuestoTotal": 1272.5,
+          "fortamun": 292.0,
+          "fismdf": 53.1,
+          "predial": 0.0,
+          "dependencia": 64.3,
           "observacionesASF": 42.0,
           "estatusAuditoria": "Revisión en contratos de recolección de basura y bacheo emergente.",
           "proyectosAuditados": [
@@ -1589,11 +3074,11 @@ window.AUDIT_DB = {
           "alcalde": "Eduardo Medécigo Rubio",
           "partido": "MORENA",
           "pob": 202000,
-          "presupuestoTotal": 750,
-          "fortamun": 110,
-          "fismdf": 60,
-          "predial": 120,
-          "dependencia": 78.0,
+          "presupuestoTotal": 678.9,
+          "fortamun": 188.4,
+          "fismdf": 22.2,
+          "predial": 55.5,
+          "dependencia": 68.8,
           "observacionesASF": 31.5,
           "estatusAuditoria": "Diferencias en cobro de predial en nuevos fraccionamientos.",
           "proyectosAuditados": [
@@ -1617,11 +3102,14 @@ window.AUDIT_DB = {
       "dep": 72.0,
       "gobernador": "Pablo Lemus Navarro",
       "partido": "MC",
-      "deuda": 37500,
+      "deuda": 24798.2,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1890,
-      "asfAuditorias": 64,
-      "asfTipologia": "Observaciones recurrentes en FONE magisterial, sobrecostos en tramos de la Línea 4 del Tren Ligero y compras de insumos de salud en centros rurales.",
+      "deudaIld": 28.3,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 2196.8,
+      "asfAuditorias": 77,
+      "asfTipologia": "La ASF practicó 77 auditorías al dinero federal que recibió el estado y promovió 228 acciones, entre ellas 109 pliegos de observaciones y 97 promociones de responsabilidad administrativa. Quedaron $2,196.8 mdp por aclarar y se recuperaron $102.1 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Pilar en el debate del Pacto Fiscal y la defensa del federalismo tributario; potente clúster agroindustrial y tecnológico.",
       "municipios": [
         {
@@ -1629,11 +3117,11 @@ window.AUDIT_DB = {
           "alcalde": "Verónica Delgadillo García",
           "partido": "MC",
           "pob": 1385000,
-          "presupuestoTotal": 11500,
-          "fortamun": 1150,
-          "fismdf": 380,
-          "predial": 1680,
-          "dependencia": 65.0,
+          "presupuestoTotal": 11915.9,
+          "fortamun": 1272.8,
+          "fismdf": 135.6,
+          "predial": 1660.0,
+          "dependencia": 57.6,
           "observacionesASF": 142.0,
           "estatusAuditoria": "Pliego en contratos de arrendamiento de patrullas y mantenimiento de luminarias.",
           "proyectosAuditados": [
@@ -1647,11 +3135,11 @@ window.AUDIT_DB = {
           "alcalde": "Juan José Frangie Saade",
           "partido": "MC",
           "pob": 1476000,
-          "presupuestoTotal": 11800,
-          "fortamun": 1210,
-          "fismdf": 310,
-          "predial": 2350,
-          "dependencia": 60.5,
+          "presupuestoTotal": 12227.2,
+          "fortamun": 1356.2,
+          "fismdf": 172.0,
+          "predial": 1874.2,
+          "dependencia": 49.2,
           "observacionesASF": 115.0,
           "estatusAuditoria": "El municipio con mayor recaudación predial per cápita fuera de CDMX; observaciones de trámite.",
           "proyectosAuditados": [
@@ -1665,11 +3153,11 @@ window.AUDIT_DB = {
           "alcalde": "Gerardo Quirino Velázquez",
           "partido": "MC",
           "pob": 727000,
-          "presupuestoTotal": 4600,
-          "fortamun": 510,
-          "fismdf": 260,
-          "predial": 680,
-          "dependencia": 73.0,
+          "presupuestoTotal": 4723.3,
+          "fortamun": 668.5,
+          "fismdf": 111.1,
+          "predial": 552.4,
+          "dependencia": 48.1,
           "observacionesASF": 78.4,
           "estatusAuditoria": "Obras de mitigación de inundaciones en Cuenca El Ahogado.",
           "proyectosAuditados": [
@@ -1682,11 +3170,11 @@ window.AUDIT_DB = {
           "alcalde": "Luis Ernesto Munguía González",
           "partido": "VERDE",
           "pob": 291000,
-          "presupuestoTotal": 2700,
-          "fortamun": 240,
-          "fismdf": 90,
-          "predial": 580,
-          "dependencia": 68.0,
+          "presupuestoTotal": 3060.3,
+          "fortamun": 268.1,
+          "fismdf": 57.0,
+          "predial": 651.3,
+          "dependencia": 54.7,
           "observacionesASF": 86.2,
           "estatusAuditoria": "Fiscalización especial de derechos de Zona Federal Marítimo Terrestre.",
           "proyectosAuditados": [
@@ -1710,11 +3198,14 @@ window.AUDIT_DB = {
       "dep": 84.5,
       "gobernador": "Delfina Gómez Álvarez",
       "partido": "MORENA",
-      "deuda": 62000,
+      "deuda": 55488.0,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 7068,
-      "asfAuditorias": 112,
-      "asfTipologia": "El estado que MÁS dinero recibe y que MÁS irregularidades acumula ($7,068 mdp observados por ASF): desvíos en el sector salud (ISEM), nóminas opacas y obras viales inconclusas.",
+      "deudaIld": 27.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 13198.7,
+      "asfAuditorias": 151,
+      "asfTipologia": "La ASF practicó 151 auditorías al dinero federal que recibió el estado y promovió 453 acciones, entre ellas 255 pliegos de observaciones y 166 promociones de responsabilidad administrativa. Quedaron $13,198.7 mdp por aclarar y se recuperaron $283.5 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El gigante demográfico nacional (17.5M hab). Recibe más presupuesto que 10 estados combinados pero enfrenta retos titánicos de opacidad.",
       "municipios": [
         {
@@ -1722,11 +3213,11 @@ window.AUDIT_DB = {
           "alcalde": "Azucena Cisneros Coss",
           "partido": "MORENA",
           "pob": 1645000,
-          "presupuestoTotal": 6900,
-          "fortamun": 980,
-          "fismdf": 580,
-          "predial": 750,
-          "dependencia": 78.0,
+          "presupuestoTotal": 6136.9,
+          "fortamun": 1512.0,
+          "fismdf": 404.1,
+          "predial": 658.3,
+          "dependencia": 78.8,
           "observacionesASF": 420.0,
           "estatusAuditoria": "Cientos de millones bajo auditoría por programas de pipas de agua y seguridad.",
           "proyectosAuditados": [
@@ -1740,11 +3231,11 @@ window.AUDIT_DB = {
           "alcalde": "Isaac Montoya Márquez",
           "partido": "MORENA",
           "pob": 834000,
-          "presupuestoTotal": 5200,
-          "fortamun": 650,
-          "fismdf": 190,
-          "predial": 1180,
-          "dependencia": 67.0,
+          "presupuestoTotal": 5708.6,
+          "fortamun": 766.8,
+          "fismdf": 177.1,
+          "predial": 1065.6,
+          "dependencia": 65.9,
           "observacionesASF": 210.0,
           "estatusAuditoria": "Deudas heredadas con proveedores y falta de entero de cuotas al ISSEMyM.",
           "proyectosAuditados": [
@@ -1757,11 +3248,11 @@ window.AUDIT_DB = {
           "alcalde": "Ricardo Moreno Bastida",
           "partido": "MORENA",
           "pob": 910000,
-          "presupuestoTotal": 5400,
-          "fortamun": 690,
-          "fismdf": 210,
-          "predial": 920,
-          "dependencia": 71.0,
+          "presupuestoTotal": 5051.7,
+          "fortamun": 836.8,
+          "fismdf": 366.6,
+          "predial": 683.5,
+          "dependencia": 69.6,
           "observacionesASF": 165.0,
           "estatusAuditoria": "Juicios y pliegos por contrataciones irregulares de patrullas y parquímetros virtuales.",
           "proyectosAuditados": [
@@ -1774,11 +3265,11 @@ window.AUDIT_DB = {
           "alcalde": "Adolfo Cerqueda Rebollo",
           "partido": "MORENA",
           "pob": 1077000,
-          "presupuestoTotal": 4800,
-          "fortamun": 720,
-          "fismdf": 340,
-          "predial": 620,
-          "dependencia": 77.0,
+          "presupuestoTotal": 5241.1,
+          "fortamun": 989.9,
+          "fismdf": 256.2,
+          "predial": 610.6,
+          "dependencia": 64.5,
           "observacionesASF": 130.0,
           "estatusAuditoria": "Supervisión en la red de sustitución de tuberías de asbesto.",
           "proyectosAuditados": [
@@ -1802,11 +3293,14 @@ window.AUDIT_DB = {
       "dep": 89.2,
       "gobernador": "Alfredo Ramírez Bedolla",
       "partido": "MORENA",
-      "deuda": 34200,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1820,
-      "asfAuditorias": 56,
-      "asfTipologia": "Auditorías focalizadas en el rescate de la nómina educativa no reconocida por FONE y compras de maquinaria agrícola.",
+      "deuda": 21815.7,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 53.1,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 1003.6,
+      "asfAuditorias": 48,
+      "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 108 acciones, entre ellas 44 pliegos de observaciones y 45 promociones de responsabilidad administrativa. Quedaron $1,003.6 mdp por aclarar y se recuperaron $62.1 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran potencia agrícola y puerto marítimo (Lázaro Cárdenas); severa debilidad en recaudación fiscal municipal y local.",
       "municipios": [
         {
@@ -1814,11 +3308,11 @@ window.AUDIT_DB = {
           "alcalde": "Alfonso Martínez Alcázar",
           "partido": "PAN-PRD",
           "pob": 849000,
-          "presupuestoTotal": 4200,
-          "fortamun": 540,
-          "fismdf": 190,
-          "predial": 680,
-          "dependencia": 71.0,
+          "presupuestoTotal": 3944.9,
+          "fortamun": 797.7,
+          "fismdf": 227.3,
+          "predial": 0.0,
+          "dependencia": 55.8,
           "observacionesASF": 78.5,
           "estatusAuditoria": "Diferencias en estimaciones de obra en pasos a desnivel urbanos.",
           "proyectosAuditados": [
@@ -1831,11 +3325,11 @@ window.AUDIT_DB = {
           "alcalde": "Carlos Manzo Rodríguez",
           "partido": "IND",
           "pob": 356000,
-          "presupuestoTotal": 1750,
-          "fortamun": 240,
-          "fismdf": 150,
-          "predial": 210,
-          "dependencia": 75.0,
+          "presupuestoTotal": 1339.1,
+          "fortamun": 335.2,
+          "fismdf": 169.6,
+          "predial": 0.0,
+          "dependencia": 70.9,
           "observacionesASF": 65.0,
           "estatusAuditoria": "Licitaciones de obra directa comunitaria bajo observación.",
           "proyectosAuditados": [
@@ -1859,11 +3353,14 @@ window.AUDIT_DB = {
       "dep": 87.0,
       "gobernador": "Margarita González Saravia",
       "partido": "MORENA",
-      "deuda": 8200,
+      "deuda": 6110.6,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 890,
-      "asfAuditorias": 40,
-      "asfTipologia": "Investigaciones a fideicomisos turísticos del sexenio previo y pagos sin comprobante en seguridad pública.",
+      "deudaIld": 35.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 3168.9,
+      "asfAuditorias": 58,
+      "asfTipologia": "La ASF practicó 58 auditorías al dinero federal que recibió el estado y promovió 233 acciones, entre ellas 113 pliegos de observaciones y 100 promociones de responsabilidad administrativa. Quedaron $3,168.9 mdp por aclarar y se recuperaron $3.7 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Reestructuración administrativa tras años de tensión institucional; rescate de servicios públicos básicos.",
       "municipios": [
         {
@@ -1871,11 +3368,11 @@ window.AUDIT_DB = {
           "alcalde": "José Luis Urióstegui Salgado",
           "partido": "PAN-PRI",
           "pob": 378000,
-          "presupuestoTotal": 1900,
-          "fortamun": 260,
-          "fismdf": 85,
-          "predial": 380,
-          "dependencia": 69.5,
+          "presupuestoTotal": 2252.9,
+          "fortamun": 338.7,
+          "fismdf": 86.5,
+          "predial": 282.1,
+          "dependencia": 55.2,
           "observacionesASF": 54.0,
           "estatusAuditoria": "Deuda histórica con CFE por bombeo del SAPAC (agua potable).",
           "proyectosAuditados": [
@@ -1888,11 +3385,11 @@ window.AUDIT_DB = {
           "alcalde": "Evert Velázquez",
           "partido": "MORENA",
           "pob": 215000,
-          "presupuestoTotal": 880,
-          "fortamun": 120,
-          "fismdf": 55,
-          "predial": 110,
-          "dependencia": 76.0,
+          "presupuestoTotal": 991.7,
+          "fortamun": 192.7,
+          "fismdf": 52.8,
+          "predial": 90.6,
+          "dependencia": 60.4,
           "observacionesASF": 28.5,
           "estatusAuditoria": "Contratos de recolección de basura observados.",
           "proyectosAuditados": [
@@ -1916,11 +3413,14 @@ window.AUDIT_DB = {
       "dep": 92.0,
       "gobernador": "Miguel Ángel Navarro Quintero",
       "partido": "MORENA",
-      "deuda": 6400,
+      "deuda": 6531.3,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 490,
-      "asfAuditorias": 34,
-      "asfTipologia": "Observaciones en la Universidad Autónoma de Nayarit (UAN) por pensiones no sustentadas y desvío de subsidios.",
+      "deudaIld": 47.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 915.0,
+      "asfAuditorias": 41,
+      "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 118 acciones, entre ellas 54 pliegos de observaciones y 41 promociones de responsabilidad administrativa. Quedaron $915.0 mdp por aclarar y se recuperaron $2.8 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Fuerte inversión federal en autopistas turísticas; baja recaudación tributaria local.",
       "municipios": [
         {
@@ -1928,11 +3428,11 @@ window.AUDIT_DB = {
           "alcalde": "Héctor Santana García",
           "partido": "MORENA",
           "pob": 187000,
-          "presupuestoTotal": 1650,
-          "fortamun": 130,
-          "fismdf": 65,
-          "predial": 540,
-          "dependencia": 58.5,
+          "presupuestoTotal": 2124.2,
+          "fortamun": 171.9,
+          "fismdf": 31.9,
+          "predial": 205.5,
+          "dependencia": 28.9,
           "observacionesASF": 48.0,
           "estatusAuditoria": "Licitaciones de permisos turísticos en Punta Mita bajo análisis.",
           "proyectosAuditados": [
@@ -1945,11 +3445,11 @@ window.AUDIT_DB = {
           "alcalde": "Geraldine Ponce Méndez",
           "partido": "MORENA",
           "pob": 425000,
-          "presupuestoTotal": 1850,
-          "fortamun": 240,
-          "fismdf": 95,
-          "predial": 280,
-          "dependencia": 73.0,
+          "presupuestoTotal": 1856.9,
+          "fortamun": 390.3,
+          "fismdf": 74.0,
+          "predial": 63.1,
+          "dependencia": 76.8,
           "observacionesASF": 41.0,
           "estatusAuditoria": "Revisión en compras de maquinaria para SIAPA Tepic.",
           "proyectosAuditados": [
@@ -1973,11 +3473,14 @@ window.AUDIT_DB = {
       "dep": 62.0,
       "gobernador": "Samuel Alejandro García Sepúlveda",
       "partido": "MC",
-      "deuda": 88000,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 2204,
-      "asfAuditorias": 72,
-      "asfTipologia": "Uno de los estados con más observaciones en obras estratégicas: Líneas 4, 5 y 6 del Metrorrey, Presa Libertad y contratos de comunicación social.",
+      "deuda": 81006.1,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 97.8,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 4539.7,
+      "asfAuditorias": 73,
+      "asfTipologia": "La ASF practicó 73 auditorías al dinero federal que recibió el estado y promovió 215 acciones, entre ellas 123 pliegos de observaciones y 80 promociones de responsabilidad administrativa. Quedaron $4,539.7 mdp por aclarar y se recuperaron $28.5 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "La capital industrial de México. Tiene la menor dependencia federal de provincia (62%) pero una deuda pública abultada en el límite de la Ley de Disciplina Financiera.",
       "municipios": [
         {
@@ -1985,11 +3488,11 @@ window.AUDIT_DB = {
           "alcalde": "Adrián de la Garza Santos",
           "partido": "PRI-PAN-PRD",
           "pob": 1142000,
-          "presupuestoTotal": 9800,
-          "fortamun": 980,
-          "fismdf": 190,
-          "predial": 2450,
-          "dependencia": 61.0,
+          "presupuestoTotal": 10287.0,
+          "fortamun": 1078.5,
+          "fismdf": 226.2,
+          "predial": 1450.7,
+          "dependencia": 57.9,
           "observacionesASF": 155.0,
           "estatusAuditoria": "Auditoría en contratos del sistema de cámaras de seguridad y proyectos de regeneración del centro.",
           "proyectosAuditados": [
@@ -2003,11 +3506,11 @@ window.AUDIT_DB = {
           "alcalde": "Mauricio Fernández Garza",
           "partido": "PAN",
           "pob": 132000,
-          "presupuestoTotal": 4500,
-          "fortamun": 110,
-          "fismdf": 15,
-          "predial": 1920,
-          "dependencia": 38.0,
+          "presupuestoTotal": 4919.8,
+          "fortamun": 124.7,
+          "fismdf": 8.2,
+          "predial": 905.1,
+          "dependencia": 45.9,
           "observacionesASF": 28.0,
           "estatusAuditoria": "El municipio con mayor autonomía financiera del país (solo 38% dependencia); observaciones mínimas de forma.",
           "proyectosAuditados": [
@@ -2021,11 +3524,11 @@ window.AUDIT_DB = {
           "alcalde": "Héctor García García",
           "partido": "MC",
           "pob": 643000,
-          "presupuestoTotal": 3200,
-          "fortamun": 420,
-          "fismdf": 110,
-          "predial": 680,
-          "dependencia": 70.0,
+          "presupuestoTotal": 3242.4,
+          "fortamun": 606.9,
+          "fismdf": 76.2,
+          "predial": 376.6,
+          "dependencia": 68.0,
           "observacionesASF": 72.0,
           "estatusAuditoria": "Observaciones por retraso en obras de drenaje pluvial.",
           "proyectosAuditados": [
@@ -2038,11 +3541,11 @@ window.AUDIT_DB = {
           "alcalde": "César Garza Arredondo",
           "partido": "PRI",
           "pob": 656000,
-          "presupuestoTotal": 3600,
-          "fortamun": 480,
-          "fismdf": 95,
-          "predial": 980,
-          "dependencia": 64.0,
+          "presupuestoTotal": 3544.0,
+          "fortamun": 619.4,
+          "fismdf": 61.7,
+          "predial": 346.6,
+          "dependencia": 61.5,
           "observacionesASF": 65.0,
           "estatusAuditoria": "Inversiones en parques industriales bajo escrutinio de catastro.",
           "proyectosAuditados": [
@@ -2066,11 +3569,14 @@ window.AUDIT_DB = {
       "dep": 95.0,
       "gobernador": "Salomón Jara Cruz",
       "partido": "MORENA",
-      "deuda": 18500,
+      "deuda": 13100.8,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1950,
-      "asfAuditorias": 78,
-      "asfTipologia": "El estado con más municipios del país (570, 417 por Usos y Costumbres). Observaciones en obras comunitarias del Corredor Interoceánico y transferencias directas sin comprobantes.",
+      "deudaIld": 36.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 2024.4,
+      "asfAuditorias": 60,
+      "asfTipologia": "La ASF practicó 60 auditorías al dinero federal que recibió el estado y promovió 159 acciones, entre ellas 92 pliegos de observaciones y 46 promociones de responsabilidad administrativa. Quedaron $2,024.4 mdp por aclarar y se recuperaron $10.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Dependencia extrema de la federación (95%). El Ramo 33 representa más del doble que sus participaciones libres.",
       "municipios": [
         {
@@ -2078,11 +3584,11 @@ window.AUDIT_DB = {
           "alcalde": "Raymundo Chagoya Villanueva",
           "partido": "VERDE-MORENA",
           "pob": 270000,
-          "presupuestoTotal": 1850,
-          "fortamun": 210,
-          "fismdf": 140,
-          "predial": 280,
-          "dependencia": 72.5,
+          "presupuestoTotal": 2356.9,
+          "fortamun": 252.4,
+          "fismdf": 186.4,
+          "predial": 146.0,
+          "dependencia": 73.9,
           "observacionesASF": 68.0,
           "estatusAuditoria": "Contratos millonarios por traslado foráneo de basura no licitados.",
           "proyectosAuditados": [
@@ -2095,11 +3601,11 @@ window.AUDIT_DB = {
           "alcalde": "Daniel Méndez Sosa",
           "partido": "MORENA",
           "pob": 84000,
-          "presupuestoTotal": 620,
-          "fortamun": 75,
-          "fismdf": 65,
-          "predial": 90,
-          "dependencia": 74.0,
+          "presupuestoTotal": 503.7,
+          "fortamun": 78.6,
+          "fismdf": 49.1,
+          "predial": 22.9,
+          "dependencia": 73.3,
           "observacionesASF": 44.0,
           "estatusAuditoria": "Observaciones en polígonos industriales del Corredor Interoceánico.",
           "proyectosAuditados": [
@@ -2112,11 +3618,11 @@ window.AUDIT_DB = {
           "alcalde": "Miguel Sánchez Altamirano",
           "partido": "MORENA",
           "pob": 113000,
-          "presupuestoTotal": 710,
-          "fortamun": 88,
-          "fismdf": 110,
-          "predial": 35,
-          "dependencia": 82.0,
+          "presupuestoTotal": null,
+          "fortamun": null,
+          "fismdf": null,
+          "predial": null,
+          "dependencia": null,
           "observacionesASF": 52.0,
           "estatusAuditoria": "Fondos para reconstrucción de mercado y drenaje colapsado.",
           "proyectosAuditados": [
@@ -2140,11 +3646,14 @@ window.AUDIT_DB = {
       "dep": 88.0,
       "gobernador": "Alejandro Armenta Mier",
       "partido": "MORENA",
-      "deuda": 41500,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1680,
-      "asfAuditorias": 70,
-      "asfTipologia": "Comprobación de pagos de deuda oculta bajo esquemas PPS (Museo Barroco, Plataforma Audi, RUTA); observaciones en nóminas del CAPCEE.",
+      "deuda": 8060.9,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 12.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 931.2,
+      "asfAuditorias": 62,
+      "asfTipologia": "La ASF practicó 62 auditorías al dinero federal que recibió el estado y promovió 145 acciones, entre ellas 66 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $931.2 mdp por aclarar y se recuperaron $15.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran polarización económica entre la zona metropolitana automotriz (Volkswagen/Audi) y la Sierra Norte con alta marginación.",
       "municipios": [
         {
@@ -2152,11 +3661,11 @@ window.AUDIT_DB = {
           "alcalde": "José Chedraui Budib",
           "partido": "MORENA",
           "pob": 1692000,
-          "presupuestoTotal": 6800,
-          "fortamun": 980,
-          "fismdf": 380,
-          "predial": 1450,
-          "dependencia": 68.0,
+          "presupuestoTotal": 7635.8,
+          "fortamun": 1518.9,
+          "fismdf": 453.5,
+          "predial": 841.5,
+          "dependencia": 67.4,
           "observacionesASF": 128.0,
           "estatusAuditoria": "Pliego en cobros de parquímetros, contratos de alumbrado y bacheo.",
           "proyectosAuditados": [
@@ -2170,11 +3679,11 @@ window.AUDIT_DB = {
           "alcalde": "Alejandro Barroso Chávez",
           "partido": "MORENA",
           "pob": 327000,
-          "presupuestoTotal": 1400,
-          "fortamun": 190,
-          "fismdf": 180,
-          "predial": 160,
-          "dependencia": 78.0,
+          "presupuestoTotal": 1474.1,
+          "fortamun": 293.8,
+          "fismdf": 162.8,
+          "predial": 0.0,
+          "dependencia": 64.3,
           "observacionesASF": 59.0,
           "estatusAuditoria": "Crisis y multas por disposición clandestina de basura en Tehuacán.",
           "proyectosAuditados": [
@@ -2187,10 +3696,10 @@ window.AUDIT_DB = {
           "alcalde": "Tonantzin Fernández Díaz",
           "partido": "MORENA",
           "pob": 138000,
-          "presupuestoTotal": 680,
-          "fortamun": 85,
-          "fismdf": 45,
-          "predial": 140,
+          "presupuestoTotal": 727.6,
+          "fortamun": 124.3,
+          "fismdf": 76.9,
+          "predial": 0.0,
           "dependencia": 69.0,
           "observacionesASF": 24.0,
           "estatusAuditoria": "Observaciones por destino de derechos turísticos en zona piramidal.",
@@ -2215,11 +3724,14 @@ window.AUDIT_DB = {
       "dep": 76.0,
       "gobernador": "Mauricio Kuri González",
       "partido": "PAN",
-      "deuda": 4200,
+      "deuda": 1533.4,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 410,
-      "asfAuditorias": 42,
-      "asfTipologia": "Uno de los estados con MENOR índice de observaciones del país; revisiones en la magna obra de Av. 5 de Febrero.",
+      "deudaIld": 4.8,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 243.7,
+      "asfAuditorias": 38,
+      "asfTipologia": "La ASF practicó 38 auditorías al dinero federal que recibió el estado y promovió 68 acciones, entre ellas 33 pliegos de observaciones y 26 promociones de responsabilidad administrativa. Quedaron $243.7 mdp por aclarar y se recuperaron $4.3 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran polo de atracción aeroespacial y de centros de datos; finanzas públicas de las más sólidas de la federación.",
       "municipios": [
         {
@@ -2227,11 +3739,11 @@ window.AUDIT_DB = {
           "alcalde": "Felipe Fernando Macías Olvera",
           "partido": "PAN",
           "pob": 1049000,
-          "presupuestoTotal": 6200,
-          "fortamun": 720,
-          "fismdf": 160,
-          "predial": 1890,
-          "dependencia": 62.0,
+          "presupuestoTotal": 7807.3,
+          "fortamun": 994.9,
+          "fismdf": 185.8,
+          "predial": 1628.0,
+          "dependencia": 39.5,
           "observacionesASF": 46.0,
           "estatusAuditoria": "Cuentas claras y alta eficiencia recaudatoria; revisión en apoyos escolares directos.",
           "proyectosAuditados": [
@@ -2245,11 +3757,11 @@ window.AUDIT_DB = {
           "alcalde": "Rodrigo Monsalvo Castelán",
           "partido": "PAN",
           "pob": 231000,
-          "presupuestoTotal": 2400,
-          "fortamun": 190,
-          "fismdf": 65,
-          "predial": 890,
-          "dependencia": 55.0,
+          "presupuestoTotal": 4303.5,
+          "fortamun": 219.6,
+          "fismdf": 58.3,
+          "predial": 605.0,
+          "dependencia": 24.1,
           "observacionesASF": 22.0,
           "estatusAuditoria": "Gran captación de predial industrial; observaciones mínimas.",
           "proyectosAuditados": [
@@ -2262,11 +3774,11 @@ window.AUDIT_DB = {
           "alcalde": "Roberto Cabrera Valencia",
           "partido": "PAN",
           "pob": 297000,
-          "presupuestoTotal": 1600,
-          "fortamun": 180,
-          "fismdf": 110,
-          "predial": 280,
-          "dependencia": 73.0,
+          "presupuestoTotal": 1867.3,
+          "fortamun": 282.2,
+          "fismdf": 94.6,
+          "predial": 258.8,
+          "dependencia": 52.1,
           "observacionesASF": 34.0,
           "estatusAuditoria": "Fondos para obras de contención del Río San Juan.",
           "proyectosAuditados": [
@@ -2290,11 +3802,14 @@ window.AUDIT_DB = {
       "dep": 84.0,
       "gobernador": "María Elena Hermelinda Lezama Espinosa",
       "partido": "MORENA",
-      "deuda": 23500,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 980,
-      "asfAuditorias": 45,
-      "asfTipologia": "Contratos de fideicomisos turísticos (CPTQ), derechos de saneamiento ambiental y obras de mitigación de sargazo.",
+      "deuda": 19262.5,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 62.6,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 428.3,
+      "asfAuditorias": 38,
+      "asfTipologia": "La ASF practicó 38 auditorías al dinero federal que recibió el estado y promovió 24 acciones, entre ellas 13 pliegos de observaciones y 2 promociones de responsabilidad administrativa. Quedaron $428.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El gigante turístico de México (Cancún, Riviera Maya, Tulum); alta deuda heredada de administraciones pasadas.",
       "municipios": [
         {
@@ -2302,11 +3817,11 @@ window.AUDIT_DB = {
           "alcalde": "Ana Patricia Peralta de la Peña",
           "partido": "MORENA",
           "pob": 911000,
-          "presupuestoTotal": 6100,
-          "fortamun": 680,
-          "fismdf": 190,
-          "predial": 1950,
-          "dependencia": 60.0,
+          "presupuestoTotal": 7331.2,
+          "fortamun": 837.5,
+          "fismdf": 293.9,
+          "predial": 1013.5,
+          "dependencia": 37.0,
           "observacionesASF": 88.0,
           "estatusAuditoria": "Auditoría a licitaciones de repavimentación en Zona Hotelera.",
           "proyectosAuditados": [
@@ -2320,11 +3835,11 @@ window.AUDIT_DB = {
           "alcalde": "Estefanía Mercado Asencio",
           "partido": "MORENA",
           "pob": 333000,
-          "presupuestoTotal": 3800,
-          "fortamun": 340,
-          "fismdf": 95,
-          "predial": 1420,
-          "dependencia": 56.0,
+          "presupuestoTotal": 4813.6,
+          "fortamun": 306.7,
+          "fismdf": 95.3,
+          "predial": 635.8,
+          "dependencia": 22.4,
           "observacionesASF": 65.0,
           "estatusAuditoria": "Revisión en el cobro y destino del Derecho de Saneamiento Ambiental hotelero.",
           "proyectosAuditados": [
@@ -2337,11 +3852,11 @@ window.AUDIT_DB = {
           "alcalde": "Diego Castañón Trejo",
           "partido": "MORENA",
           "pob": 46000,
-          "presupuestoTotal": 1400,
-          "fortamun": 90,
-          "fismdf": 35,
-          "predial": 580,
-          "dependencia": 52.0,
+          "presupuestoTotal": 1313.2,
+          "fortamun": 42.9,
+          "fismdf": 62.2,
+          "predial": 203.5,
+          "dependencia": 28.1,
           "observacionesASF": 42.0,
           "estatusAuditoria": "Crecimiento vertiginoso; escrutinio en licencias ambientales y de construcción.",
           "proyectosAuditados": [
@@ -2365,11 +3880,14 @@ window.AUDIT_DB = {
       "dep": 88.0,
       "gobernador": "José Ricardo Gallardo Cardona",
       "partido": "VERDE",
-      "deuda": 8900,
+      "deuda": 7574.4,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1120,
-      "asfAuditorias": 50,
-      "asfTipologia": "Auditorías al sistema estatal de transporte metrored y entrega de despensas alimentarias en zonas marginadas.",
+      "deudaIld": 25.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 592.5,
+      "asfAuditorias": 82,
+      "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 206 acciones, entre ellas 123 pliegos de observaciones y 63 promociones de responsabilidad administrativa. Quedaron $592.5 mdp por aclarar y se recuperaron $24.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gran crecimiento industrial automotriz (BMW/GM); finanzas con fuerte orientación a subsidios sociales directos.",
       "municipios": [
         {
@@ -2377,11 +3895,11 @@ window.AUDIT_DB = {
           "alcalde": "Enrique Galindo Ceballos",
           "partido": "PRI-PAN-PRD",
           "pob": 911000,
-          "presupuestoTotal": 4400,
-          "fortamun": 620,
-          "fismdf": 180,
-          "predial": 980,
-          "dependencia": 68.0,
+          "presupuestoTotal": 4145.4,
+          "fortamun": 824.9,
+          "fismdf": 123.7,
+          "predial": 517.5,
+          "dependencia": 59.9,
           "observacionesASF": 64.0,
           "estatusAuditoria": "Crisis del agua (presa El Realito) y gastos emergentes en pozos profundos.",
           "proyectosAuditados": [
@@ -2395,11 +3913,11 @@ window.AUDIT_DB = {
           "alcalde": "Juan Manuel Navarro Muñiz",
           "partido": "VERDE",
           "pob": 332000,
-          "presupuestoTotal": 1500,
-          "fortamun": 210,
-          "fismdf": 110,
-          "predial": 180,
-          "dependencia": 79.0,
+          "presupuestoTotal": 1402.4,
+          "fortamun": 300.4,
+          "fismdf": 46.8,
+          "predial": 73.4,
+          "dependencia": 79.6,
           "observacionesASF": 38.0,
           "estatusAuditoria": "Observaciones en adjudicaciones directas de pavimentación.",
           "proyectosAuditados": [
@@ -2423,11 +3941,14 @@ window.AUDIT_DB = {
       "dep": 83.0,
       "gobernador": "Rubén Rocha Moya",
       "partido": "MORENA",
-      "deuda": 9800,
+      "deuda": 7821.6,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1290,
-      "asfAuditorias": 52,
-      "asfTipologia": "Auditorías en compras emergentes de granos (maíz estatal) y gastos operativos policiales.",
+      "deudaIld": 23.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 574.6,
+      "asfAuditorias": 42,
+      "asfTipologia": "La ASF practicó 42 auditorías al dinero federal que recibió el estado y promovió 73 acciones, entre ellas 41 pliegos de observaciones y 23 promociones de responsabilidad administrativa. Quedaron $574.6 mdp por aclarar y se recuperaron $3.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El granero de México (maíz, tomate); tensiones en gasto corriente por contingencias de seguridad.",
       "municipios": [
         {
@@ -2435,11 +3956,11 @@ window.AUDIT_DB = {
           "alcalde": "Juan de Dios Gámez Mendívil",
           "partido": "MORENA",
           "pob": 1003000,
-          "presupuestoTotal": 4900,
-          "fortamun": 680,
-          "fismdf": 210,
-          "predial": 890,
-          "dependencia": 72.0,
+          "presupuestoTotal": 5099.7,
+          "fortamun": 908.1,
+          "fismdf": 165.9,
+          "predial": 868.1,
+          "dependencia": 63.9,
           "observacionesASF": 78.0,
           "estatusAuditoria": "Observación en gastos de operativos policiales y combustible.",
           "proyectosAuditados": [
@@ -2453,11 +3974,11 @@ window.AUDIT_DB = {
           "alcalde": "Estrella Palacios Domínguez",
           "partido": "MORENA",
           "pob": 501000,
-          "presupuestoTotal": 3400,
-          "fortamun": 410,
-          "fismdf": 140,
-          "predial": 820,
-          "dependencia": 67.0,
+          "presupuestoTotal": 3379.2,
+          "fortamun": 456.5,
+          "fismdf": 75.7,
+          "predial": 434.7,
+          "dependencia": 55.4,
           "observacionesASF": 85.0,
           "estatusAuditoria": "Laudos millonarios por contratos de luminarias Azteca Lighting.",
           "proyectosAuditados": [
@@ -2481,11 +4002,14 @@ window.AUDIT_DB = {
       "dep": 79.0,
       "gobernador": "Francisco Alfonso Durazo Montaño",
       "partido": "MORENA",
-      "deuda": 31200,
-      "semaforoDeuda": "Amarillo",
-      "asfMontoObservado": 1420,
-      "asfAuditorias": 54,
-      "asfTipologia": "Revisión en proyectos del Plan Sonora de Energía Renovable y modernización del puerto de Guaymas.",
+      "deuda": 29101.8,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 76.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 619.6,
+      "asfAuditorias": 48,
+      "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 108 acciones, entre ellas 49 pliegos de observaciones y 38 promociones de responsabilidad administrativa. Quedaron $619.6 mdp por aclarar y se recuperaron $2.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Pilar en la transición energética con plantas fotovoltaicas gigantes y reservas de litio.",
       "municipios": [
         {
@@ -2493,11 +4017,11 @@ window.AUDIT_DB = {
           "alcalde": "Antonio Astiazarán Gutiérrez",
           "partido": "PAN-PRI-PRD",
           "pob": 936000,
-          "presupuestoTotal": 5200,
-          "fortamun": 680,
-          "fismdf": 170,
-          "predial": 1180,
-          "dependencia": 67.0,
+          "presupuestoTotal": 5914.2,
+          "fortamun": 849.6,
+          "fismdf": 175.2,
+          "predial": 956.0,
+          "dependencia": 48.4,
           "observacionesASF": 65.0,
           "estatusAuditoria": "Auditoría a la flotilla de patrullas eléctricas solares; cuentas transparentes.",
           "proyectosAuditados": [
@@ -2511,11 +4035,11 @@ window.AUDIT_DB = {
           "alcalde": "Javier Lamarque Cano",
           "partido": "MORENA",
           "pob": 436000,
-          "presupuestoTotal": 2300,
-          "fortamun": 310,
-          "fismdf": 150,
-          "predial": 320,
-          "dependencia": 76.0,
+          "presupuestoTotal": 2172.9,
+          "fortamun": 396.1,
+          "fismdf": 81.7,
+          "predial": 205.5,
+          "dependencia": 70.0,
           "observacionesASF": 58.0,
           "estatusAuditoria": "Diferencias en aplicación de recursos federales de agua potable.",
           "proyectosAuditados": [
@@ -2539,11 +4063,14 @@ window.AUDIT_DB = {
       "dep": 92.0,
       "gobernador": "Javier May Rodríguez",
       "partido": "MORENA",
-      "deuda": 6500,
+      "deuda": 5084.2,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1850,
-      "asfAuditorias": 60,
-      "asfTipologia": "Observaciones por miles de millones en la refinería Olmeca (Dos Bocas), dragado de ríos y obras de protección de Conagua.",
+      "deudaIld": 16.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 1586.0,
+      "asfAuditorias": 41,
+      "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 172 acciones, entre ellas 53 pliegos de observaciones y 102 promociones de responsabilidad administrativa. Quedaron $1,586.0 mdp por aclarar y se recuperaron $12.0 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "El estado con el mayor gasto federalizado per cápita de toda la república ($38,467) por impacto de las megaobras energéticas.",
       "municipios": [
         {
@@ -2551,11 +4078,11 @@ window.AUDIT_DB = {
           "alcalde": "Yolanda Osuna Huerta",
           "partido": "MORENA",
           "pob": 683000,
-          "presupuestoTotal": 3800,
-          "fortamun": 490,
-          "fismdf": 260,
-          "predial": 520,
-          "dependencia": 75.0,
+          "presupuestoTotal": 4835.4,
+          "fortamun": 628.4,
+          "fismdf": 209.5,
+          "predial": 140.4,
+          "dependencia": 73.1,
           "observacionesASF": 95.0,
           "estatusAuditoria": "Observaciones en la nueva planta potabilizadora Carrizal y cárcamos.",
           "proyectosAuditados": [
@@ -2568,11 +4095,11 @@ window.AUDIT_DB = {
           "alcalde": "Alfonso Baca Sevilla",
           "partido": "MC",
           "pob": 96000,
-          "presupuestoTotal": 980,
-          "fortamun": 95,
-          "fismdf": 80,
-          "predial": 180,
-          "dependencia": 71.0,
+          "presupuestoTotal": 761.4,
+          "fortamun": 88.9,
+          "fismdf": 92.8,
+          "predial": 8.5,
+          "dependencia": 84.4,
           "observacionesASF": 44.0,
           "estatusAuditoria": "Fiscalización especial de derechos de construcción por el complejo petroquímico.",
           "proyectosAuditados": [
@@ -2596,11 +4123,14 @@ window.AUDIT_DB = {
       "dep": 81.0,
       "gobernador": "Américo Villarreal Anaya",
       "partido": "MORENA",
-      "deuda": 18500,
+      "deuda": 15105.4,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 1580,
-      "asfAuditorias": 58,
-      "asfTipologia": "Investigaciones penales sobre fideicomisos de seguridad de administraciones previas; fiscalización aduanera de hidrocarburos.",
+      "deudaIld": 38.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 401.7,
+      "asfAuditorias": 66,
+      "asfTipologia": "La ASF practicó 66 auditorías al dinero federal que recibió el estado y promovió 106 acciones, entre ellas 52 pliegos de observaciones y 44 promociones de responsabilidad administrativa. Quedaron $401.7 mdp por aclarar y se recuperaron $33.2 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Líder en cruces fronterizos de comercio exterior (Nuevo Laredo recauda el 25% de todo el IVA nacional en aduanas).",
       "municipios": [
         {
@@ -2608,11 +4138,11 @@ window.AUDIT_DB = {
           "alcalde": "Carmen Lilia Canturosas Villarreal",
           "partido": "MORENA",
           "pob": 425000,
-          "presupuestoTotal": 4400,
-          "fortamun": 410,
-          "fismdf": 140,
-          "predial": 680,
-          "dependencia": 74.0,
+          "presupuestoTotal": 4700.2,
+          "fortamun": 384.5,
+          "fismdf": 93.8,
+          "predial": 95.6,
+          "dependencia": 92.2,
           "observacionesASF": 78.0,
           "estatusAuditoria": "Obras viales de enlace a la nueva sede de la Agencia Nacional de Aduanas (ANAM).",
           "proyectosAuditados": [
@@ -2625,11 +4155,11 @@ window.AUDIT_DB = {
           "alcalde": "Carlos Peña Ortiz",
           "partido": "MORENA",
           "pob": 704000,
-          "presupuestoTotal": 3800,
-          "fortamun": 510,
-          "fismdf": 180,
-          "predial": 610,
-          "dependencia": 75.0,
+          "presupuestoTotal": 3227.5,
+          "fortamun": 637.5,
+          "fismdf": 117.8,
+          "predial": 370.8,
+          "dependencia": 73.1,
           "observacionesASF": 92.0,
           "estatusAuditoria": "Diferencias en comprobación de fondos de auxilio a la migración y drenaje.",
           "proyectosAuditados": [
@@ -2642,11 +4172,11 @@ window.AUDIT_DB = {
           "alcalde": "Mónica Villarreal Anaya",
           "partido": "MORENA",
           "pob": 297000,
-          "presupuestoTotal": 1750,
-          "fortamun": 210,
-          "fismdf": 65,
-          "predial": 340,
-          "dependencia": 68.0,
+          "presupuestoTotal": 1419.9,
+          "fortamun": 269.2,
+          "fismdf": 57.4,
+          "predial": 58.3,
+          "dependencia": 71.4,
           "observacionesASF": 36.0,
           "estatusAuditoria": "Revisión en el fideicomiso del Centro de Convenciones y Laguna del Carpintero.",
           "proyectosAuditados": [
@@ -2672,9 +4202,12 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 0,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 390,
-      "asfAuditorias": 32,
-      "asfTipologia": "Único estado de México por mandato constitucional con CERO deuda bancaria; observaciones concentradas en el FONE.",
+      "deudaIld": 0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026). Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único; la Ley de Disciplina Financiera (art. 14) lo clasifica como sostenible.",
+      "asfMontoObservado": 418.3,
+      "asfAuditorias": 82,
+      "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 191 acciones, entre ellas 108 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $418.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Modelo fiscal sin deuda bancaria pública; alta dependencia de transferencias federales y baja recaudación propia.",
       "municipios": [
         {
@@ -2682,11 +4215,11 @@ window.AUDIT_DB = {
           "alcalde": "Alfonso Sánchez García",
           "partido": "MORENA",
           "pob": 99000,
-          "presupuestoTotal": 580,
-          "fortamun": 78,
-          "fismdf": 42,
-          "predial": 88,
-          "dependencia": 76.0,
+          "presupuestoTotal": 445.9,
+          "fortamun": 94.1,
+          "fismdf": 20.7,
+          "predial": 22.9,
+          "dependencia": 76.5,
           "observacionesASF": 18.5,
           "estatusAuditoria": "Comprobación de obras turísticas del centro histórico.",
           "proyectosAuditados": [
@@ -2699,11 +4232,11 @@ window.AUDIT_DB = {
           "alcalde": "Javier Rivera Bonilla",
           "partido": "MORENA",
           "pob": 80000,
-          "presupuestoTotal": 490,
-          "fortamun": 65,
-          "fismdf": 38,
-          "predial": 75,
-          "dependencia": 74.0,
+          "presupuestoTotal": 402.3,
+          "fortamun": 76.0,
+          "fismdf": 28.9,
+          "predial": 30.4,
+          "dependencia": 73.7,
           "observacionesASF": 16.0,
           "estatusAuditoria": "Diferencias en cobro de parquímetros y seguridad.",
           "proyectosAuditados": [
@@ -2726,11 +4259,14 @@ window.AUDIT_DB = {
       "dep": 90.0,
       "gobernador": "Rocío Nahle García",
       "partido": "MORENA",
-      "deuda": 48500,
+      "deuda": 42402.8,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 2523,
-      "asfAuditorias": 86,
-      "asfTipologia": "El tercer estado con más observaciones de la república: empresas fantasma en servicios de salud, desvíos en el Fondo de Aportaciones Múltiples (FAM) y subejercicio deliberado de recursos.",
+      "deudaIld": 47.5,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 4460.8,
+      "asfAuditorias": 126,
+      "asfTipologia": "La ASF practicó 126 auditorías al dinero federal que recibió el estado y promovió 357 acciones, entre ellas 207 pliegos de observaciones y 134 promociones de responsabilidad administrativa. Quedaron $4,460.8 mdp por aclarar y se recuperaron $3.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Gigante costero y petrolero. El 90% de sus ingresos provienen de la federación; gran rezago en infraestructura municipal.",
       "municipios": [
         {
@@ -2738,11 +4274,11 @@ window.AUDIT_DB = {
           "alcalde": "Patricia Lobeira Rodríguez",
           "partido": "PAN",
           "pob": 607000,
-          "presupuestoTotal": 2950,
-          "fortamun": 380,
-          "fismdf": 160,
-          "predial": 680,
-          "dependencia": 69.0,
+          "presupuestoTotal": 3784.1,
+          "fortamun": 546.5,
+          "fismdf": 196.4,
+          "predial": 180.8,
+          "dependencia": 71.8,
           "observacionesASF": 74.0,
           "estatusAuditoria": "Auditoría a obras de rescate del Centro Histórico y colectores pluviales.",
           "proyectosAuditados": [
@@ -2756,11 +4292,11 @@ window.AUDIT_DB = {
           "alcalde": "Alberto Islas Reyes",
           "partido": "MORENA",
           "pob": 488000,
-          "presupuestoTotal": 2350,
-          "fortamun": 310,
-          "fismdf": 140,
-          "predial": 420,
-          "dependencia": 73.0,
+          "presupuestoTotal": 2246.9,
+          "fortamun": 439.7,
+          "fismdf": 179.7,
+          "predial": 129.2,
+          "dependencia": 74.7,
           "observacionesASF": 52.0,
           "estatusAuditoria": "Diferencias en estimaciones de obra vial en Las Trancas.",
           "proyectosAuditados": [
@@ -2773,11 +4309,11 @@ window.AUDIT_DB = {
           "alcalde": "Amado Cruz Malpica",
           "partido": "MORENA",
           "pob": 310000,
-          "presupuestoTotal": 1800,
-          "fortamun": 240,
-          "fismdf": 170,
-          "predial": 280,
-          "dependencia": 72.0,
+          "presupuestoTotal": 2330.0,
+          "fortamun": 279.6,
+          "fismdf": 141.7,
+          "predial": 123.3,
+          "dependencia": 76.9,
           "observacionesASF": 68.0,
           "estatusAuditoria": "Foco de atención por el Corredor Interoceánico; obras de saneamiento.",
           "proyectosAuditados": [
@@ -2801,11 +4337,14 @@ window.AUDIT_DB = {
       "dep": 84.0,
       "gobernador": "Joaquín Jesús Díaz Mena",
       "partido": "MORENA",
-      "deuda": 11200,
+      "deuda": 9780.7,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 480,
-      "asfAuditorias": 44,
-      "asfTipologia": "Observaciones por adquisición de unidades de transporte Va y Ven e Ie-Tram, y apoyos agrícolas al henequén.",
+      "deudaIld": 37.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 1989.7,
+      "asfAuditorias": 48,
+      "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 134 acciones, entre ellas 81 pliegos de observaciones y 28 promociones de responsabilidad administrativa. Quedaron $1,989.7 mdp por aclarar y se recuperaron $5.6 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Referente nacional en seguridad ciudadana y certidumbre jurídica; finanzas en crecimiento sostenido.",
       "municipios": [
         {
@@ -2813,11 +4352,11 @@ window.AUDIT_DB = {
           "alcalde": "Cecilia Patrón Laviada",
           "partido": "PAN",
           "pob": 995000,
-          "presupuestoTotal": 5400,
-          "fortamun": 620,
-          "fismdf": 180,
-          "predial": 1450,
-          "dependencia": 62.0,
+          "presupuestoTotal": 6939.6,
+          "fortamun": 911.2,
+          "fismdf": 294.4,
+          "predial": 1174.5,
+          "dependencia": 44.0,
           "observacionesASF": 42.0,
           "estatusAuditoria": "Finanzas sanas y alta calificación crediticia; revisión de pavimentación en comisarías.",
           "proyectosAuditados": [
@@ -2831,11 +4370,11 @@ window.AUDIT_DB = {
           "alcalde": "Edwin Bojórquez Ramírez",
           "partido": "PAN",
           "pob": 141000,
-          "presupuestoTotal": 620,
-          "fortamun": 85,
-          "fismdf": 70,
-          "predial": 65,
-          "dependencia": 78.0,
+          "presupuestoTotal": 525.4,
+          "fortamun": 130.0,
+          "fismdf": 45.7,
+          "predial": 18.6,
+          "dependencia": 74.8,
           "observacionesASF": 22.0,
           "estatusAuditoria": "Auditoría en obras de interconexión con el Tren Maya.",
           "proyectosAuditados": [
@@ -2859,11 +4398,14 @@ window.AUDIT_DB = {
       "dep": 94.0,
       "gobernador": "David Monreal Ávila",
       "partido": "MORENA",
-      "deuda": 7900,
+      "deuda": 6394.6,
       "semaforoDeuda": "Verde",
-      "asfMontoObservado": 740,
-      "asfAuditorias": 42,
-      "asfTipologia": "Falta de comprobación en fondo de aportaciones mineras y pliegos por retraso en el viaducto elevado de la capital.",
+      "deudaIld": 40.3,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
+      "asfMontoObservado": 702.2,
+      "asfAuditorias": 39,
+      "asfTipologia": "La ASF practicó 39 auditorías al dinero federal que recibió el estado y promovió 92 acciones, entre ellas 40 pliegos de observaciones y 41 promociones de responsabilidad administrativa. Quedaron $702.2 mdp por aclarar y se recuperaron $3.4 mdp durante las auditorías.",
+      "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23",
       "destacados": "Líder en minería de metales preciosos; paradoja de enorme riqueza extraída pero muy precaria captación tributaria local.",
       "municipios": [
         {
@@ -2871,11 +4413,11 @@ window.AUDIT_DB = {
           "alcalde": "Miguel Ángel Varela Pinedo",
           "partido": "PAN-PRI-PRD",
           "pob": 149000,
-          "presupuestoTotal": 880,
-          "fortamun": 110,
-          "fismdf": 55,
-          "predial": 160,
-          "dependencia": 73.0,
+          "presupuestoTotal": 982.8,
+          "fortamun": 135.5,
+          "fismdf": 38.6,
+          "predial": 59.5,
+          "dependencia": 68.5,
           "observacionesASF": 32.0,
           "estatusAuditoria": "Revisión en cobro de derechos del Centro Histórico y parquímetros.",
           "proyectosAuditados": [
@@ -2888,11 +4430,11 @@ window.AUDIT_DB = {
           "alcalde": "Javier Torres Rodríguez",
           "partido": "PRI-PAN-PRD",
           "pob": 240000,
-          "presupuestoTotal": 1250,
-          "fortamun": 180,
-          "fismdf": 140,
-          "predial": 190,
-          "dependencia": 72.0,
+          "presupuestoTotal": 1124.8,
+          "fortamun": 217.9,
+          "fismdf": 141.8,
+          "predial": 83.5,
+          "dependencia": 81.3,
           "observacionesASF": 54.0,
           "estatusAuditoria": "Fondos extraordinarios de seguridad y equipamiento táctico.",
           "proyectosAuditados": [
@@ -3008,6 +4550,22 @@ window.AUDIT_DB = {
         "CHIS"
       ],
       "fuente": "SAT / Diario Oficial de la Federación (DOF) / FGR"
+    },
+    {
+      "id": "not-07",
+      "categoria": "Secretaría de Economía & IED",
+      "fecha": "24 de Septiembre, 2026",
+      "hora": "11:00 CST",
+      "urgencia": "MEDIA",
+      "titulo": "Secretaría de Economía anuncia $400 MDD de LEGO en Nuevo León: fiscalización de incentivos, agua y petroquímica",
+      "bajada": "Marcelo Ebrard confirmó la expansión de la planta en Ciénega de Flores con 1,300 empleos. El análisis de auditoría cívica contrasta el respaldo de obras federales de agua (El Cuchillo II) y el reto de suministro nacional de polímeros.",
+      "cuerpo": "El Secretario de Economía, Marcelo Ebrard Casaubón, anunció una inversión de 400 millones de dólares (~$8,000 mdp) del Grupo LEGO para ampliar su megaplanta en Ciénega de Flores, proyectando 1,300 empleos directos ($307,692 USD de capital por plaza). La contraloría cívica de Auditavisión examina el circuito público de esta inversión: la certeza operativa de la manufactura plástica depende de obras federales masivas como el Acueducto El Cuchillo II (Conagua/Sedena, >$14,000 mdp) y redes de la CFE, mientras que el Estado de Nuevo León otorga facilidades sobre el Impuesto Sobre Nóminas (3% ISN). El reto estructural radica en la petroquímica nacional: Pemex Transformación Industrial opera sus complejos petroquímicos con subutilización severa, forzando a que más del 70% de las resinas plásticas de ingeniería (ABS, polietileno) sigan siendo importadas.",
+      "monto": "$400 MDD (~$8,000 mdp)",
+      "entidades": [
+        "NL",
+        "FED"
+      ],
+      "fuente": "Secretaría de Economía / DOF / Conagua / Auditoría Superior de la Federación (ASF)"
     }
   ],
   "faqs": [
@@ -3046,6 +4604,54 @@ window.AUDIT_DB = {
   ],
   "glosario": [
     {
+      "termino": "Remuneraci\u00f3n Total Anual Neta",
+      "definicion": "Lo que una persona servidora p\u00fablica recibe en un a\u00f1o despu\u00e9s del impuesto sobre la renta: su sueldo, sus prestaciones y los pagos que se cubren una vez al a\u00f1o, como el aguinaldo. El Presupuesto de Egresos la publica para los cargos de mayor rango en su Anexo 23. Es la medida que permite comparar cargos entre s\u00ed, porque todos se cuentan igual: en neto y por a\u00f1o.",
+      "ley": "Art. 127 CPEUM \u00b7 Ley Federal de Remuneraciones de los Servidores P\u00fablicos \u00b7 PEF 2026, Anexo 23",
+      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+    },
+    {
+      "termino": "Dieta Legislativa",
+      "definicion": "Nombre que recibe la remuneraci\u00f3n de diputadas, diputados, senadoras y senadores. El Presupuesto la registra como su sueldo base. La Constituci\u00f3n prev\u00e9 que quien falte a una sesi\u00f3n sin causa justificada o sin permiso pierde la dieta de ese d\u00eda.",
+      "ley": "Art. 64 CPEUM",
+      "categoria": "\ud83d\uddf3\ufe0f Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Ramo 01 (Poder Legislativo)",
+      "definicion": "Ramo del Presupuesto de Egresos que re\u00fane a la C\u00e1mara de Diputados, la C\u00e1mara de Senadores y la Auditor\u00eda Superior de la Federaci\u00f3n. Para 2026 se le aprobaron $17,529.1 millones de pesos, sin cambios respecto del proyecto.",
+      "ley": "PEF 2026, Anexos 1 y 32 (DOF 21-11-2025)",
+      "categoria": "\ud83d\uddf3\ufe0f Poder Legislativo & Elecciones"
+    },
+    {
+      "termino": "Unidad Responsable",
+      "definicion": "Cada \u00e1rea u \u00f3rgano al que el Presupuesto asigna dinero dentro de un ramo y que rinde cuentas por su ejercicio. En el Ramo 03, por ejemplo, la Suprema Corte es la unidad 100 y el \u00d3rgano de Administraci\u00f3n Judicial la 120.",
+      "ley": "Art. 2 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+    },
+    {
+      "termino": "Cap\u00edtulo de Gasto",
+      "definicion": "El nivel m\u00e1s general del Clasificador por Objeto del Gasto: agrupa lo que se paga seg\u00fan su naturaleza. El 1000 son servicios personales (la n\u00f3mina), el 2000 materiales y suministros, el 3000 servicios generales, el 4000 transferencias, el 5000 bienes muebles e inmuebles y el 6000 inversi\u00f3n p\u00fablica.",
+      "ley": "Clasificador por Objeto del Gasto (CONAC) \u00b7 Ley General de Contabilidad Gubernamental",
+      "categoria": "\ud83c\udfdb\ufe0f Presupuesto & ASF"
+    },
+    {
+      "termino": "Muestra Auditada",
+      "definicion": "La parte del gasto que la Auditor\u00eda Superior revisa documento por documento, dentro del universo que seleccion\u00f3. Un informe sin observaciones habla de esa muestra, no de todo lo que gast\u00f3 la instituci\u00f3n.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518), num. 2.2 · Art. 34 fr. IV Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "\ud83d\udd0d Fiscalizaci\u00f3n Superior"
+    },
+    {
+      "termino": "Monto por Aclarar",
+      "definicion": "Recursos que la Auditor\u00eda Superior observ\u00f3 y que la entidad todav\u00eda debe justificar o reintegrar. Es un saldo sujeto a seguimiento: puede solventarse con documentos, recuperarse o derivar en responsabilidades. Por s\u00ed solo no acredita un da\u00f1o.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 6.2 · Arts. 39 y 41 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "\ud83d\udd0d Fiscalizaci\u00f3n Superior"
+    },
+    {
+      "termino": "Tribunal Electoral del Poder Judicial de la Federaci\u00f3n (TEPJF)",
+      "definicion": "M\u00e1xima autoridad jurisdiccional en materia electoral, salvo las acciones de inconstitucionalidad, que resuelve la Suprema Corte. Funciona con una Sala Superior y Salas Regionales. Para 2026 se le aprobaron $3,749.5 millones de pesos.",
+      "ley": "Art. 99 CPEUM \u00b7 PEF 2026, Anexo 1",
+      "categoria": "\u2696\ufe0f Poder Judicial"
+    },
+    {
       "termino": "Contraloría Social",
       "definicion": "Vigilancia organizada de la ciudadanía sobre la aplicación de recursos públicos en programas y obras que la afectan directamente. No es una figura simbólica: los comités de contraloría social están previstos en la normativa de los programas federales y tienen derecho a recibir información, recorrer la obra y levantar constancias. Su fuerza no está en sancionar, sino en documentar.",
       "ley": "Art. 134 CPEUM · Ley General de Desarrollo Social",
@@ -3078,7 +4684,7 @@ window.AUDIT_DB = {
     {
       "termino": "Recurso de Revisión en Transparencia",
       "definicion": "Medio de impugnación contra la respuesta de una institución a una solicitud de información: procede cuando se niega el documento, se entrega incompleto, se clasifica como reservado sin justificación o simplemente no se responde. Lo resuelve la autoridad garante, hoy Transparencia para el Pueblo en el ámbito federal, y su resolución puede ordenar la entrega.",
-      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "ley": "Arts. 144 a 148 Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025)",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -3270,7 +4876,7 @@ window.AUDIT_DB = {
     {
       "termino": "Pliego de Observaciones",
       "definicion": "Documento de determinación de presunto daño patrimonial emitido por la ASF cuando una entidad no comprueba el destino legítimo o legal de los recursos auditados.",
-      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "ley": "Arts. 40 fr. II y 41 Ley de Fiscalización y Rendición de Cuentas de la Federación · Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 4.6",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -3288,7 +4894,7 @@ window.AUDIT_DB = {
     {
       "termino": "Costo Financiero de la Deuda",
       "definicion": "Monto destinado exclusivamente a pagar intereses, comisiones y gastos de amortización de la deuda pública adquirida por el gobierno federal o local, sin amortizar capital sustancial.",
-      "ley": "Ley General de Deuda Pública",
+      "ley": "Ley Federal de Deuda Pública",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -3457,13 +5063,13 @@ window.AUDIT_DB = {
       "termino": "Techo de Endeudamiento Neto (LIF)",
       "categoria": "📜 Ley de Ingresos & Marco Legal",
       "definicion": "Límite máximo en pesos y moneda extranjera que el Congreso de la Unión autoriza a la Secretaría de Hacienda para contratar pasivos soberanos internos (vía colocación de CETES y Bonos por Banxico) y externos durante el ejercicio fiscal.",
-      "ley": "Ley de Ingresos de la Federación / Ley General de Deuda Pública"
+      "ley": "Ley de Ingresos de la Federación / Ley Federal de Deuda Pública"
     },
     {
       "termino": "Subastas Primarias Banxico (CETES y Bonos M)",
       "categoria": "💰 Hacendario & Deuda",
       "definicion": "Mecanismo financiero semanal operado por el Banco de México como agente colocador de deuda del Gobierno Federal, donde intermediarios financieros autorizados pujan por adquirir valores soberanos a descuento o tasa de interés fija.",
-      "ley": "Ley del Banco de México / Ley General de Deuda Pública"
+      "ley": "Ley del Banco de México / Ley Federal de Deuda Pública"
     },
     {
       "termino": "Tasa de Referencia de Deuda (Banxico)",
@@ -3562,6 +5168,24 @@ window.AUDIT_DB = {
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
+      "termino": "Rastro del Gasto Público",
+      "definicion": "El camino documentado que sigue un peso público: la partida del presupuesto que lo aprobó, el contrato o la transferencia con que se ejerció, a quién se le pagó y lo que la Auditoría Superior encontró al revisarlo. Seguirlo es comparar lo aprobado, lo pagado y lo comprobado.",
+      "ley": "Art. 134 CPEUM · Art. 38 Ley General de Contabilidad Gubernamental (momentos contables del gasto) · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Auditar (Auditoría Gubernamental)",
+      "definicion": "Revisar, con método y con evidencia documental, que el dinero público se obtuvo, se administró y se gastó conforme a lo autorizado: que el gasto exista, que esté comprobado, que se haya hecho con apego a la ley y que haya logrado lo que prometía. La auditoría gubernamental puede ser financiera y de cumplimiento, de desempeño (si el programa sirvió para lo que se diseñó) o forense (cuando se investigan posibles actos ilícitos).",
+      "ley": "Art. 134 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Auditoría Superior de la Federación (ASF)",
+      "definicion": "Órgano técnico de la Cámara de Diputados, con autonomía técnica y de gestión, que fiscaliza la Cuenta Pública: revisa los ingresos, los egresos y la deuda de la Federación, y también el gasto federalizado que ejercen los estados y municipios. Cuando encuentra irregularidades emite acciones —recomendaciones, solicitudes de aclaración, pliegos de observaciones, promociones de responsabilidad y denuncias— y reporta el monto que queda por aclarar.",
+      "ley": "Arts. 74 frac. VI y 79 CPEUM · Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
       "termino": "Déficit y Superávit Público",
       "definicion": "Déficit: el gobierno gastó más de lo que ingresó en el periodo y la diferencia se cubre con deuda. Superávit: ingresó más de lo que gastó. No es un juicio moral automático: un déficit puede financiar inversión productiva y un superávit puede esconder subejercicio. Lo relevante es su tamaño frente al PIB y su sostenibilidad en el tiempo.",
       "ley": "Art. 17 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
@@ -3576,7 +5200,7 @@ window.AUDIT_DB = {
     {
       "termino": "Deuda Pública y SHRFSP",
       "definicion": "Obligaciones financieras contraídas por el sector público. La medida más amplia y honesta es el Saldo Histórico de los Requerimientos Financieros del Sector Público (SHRFSP), que incluye deuda tradicional, pasivos de empresas productivas del Estado, pensiones y proyectos de inversión diferidos. Citar solo la deuda del gobierno federal subestima el compromiso real.",
-      "ley": "Art. 73 frac. VIII CPEUM · Ley General de Deuda Pública · Criterios Generales de Política Económica",
+      "ley": "Art. 73 frac. VIII CPEUM · Ley Federal de Deuda Pública · Criterios Generales de Política Económica",
       "categoria": "💰 Hacendario & Deuda"
     },
     {
@@ -3618,7 +5242,7 @@ window.AUDIT_DB = {
     {
       "termino": "Observación, Recomendación y Promoción de Responsabilidad",
       "definicion": "Los tres desenlaces de una auditoría, en orden de gravedad. Observación: se detectó una irregularidad y se pide aclararla. Recomendación: se sugiere corregir un procedimiento sin imputar falta. Promoción de responsabilidad: se turna el caso a la autoridad competente porque hay presunta falta administrativa o delito. Confundirlas infla o desinfla artificialmente la gravedad de un hallazgo.",
-      "ley": "Arts. 49 a 52 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "ley": "Arts. 40 y 42 Ley de Fiscalización y Rendición de Cuentas de la Federación",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -3630,7 +5254,7 @@ window.AUDIT_DB = {
     {
       "termino": "Transparencia Proactiva y Datos Abiertos",
       "definicion": "Obligación de publicar información de oficio en formatos que permitan procesarla, no solo leerla. Un PDF escaneado cumple la letra y traiciona el propósito: sin datos abiertos, la verificación ciudadana depende de transcribir a mano lo que la autoridad ya tenía en hoja de cálculo.",
-      "ley": "Arts. 70 y 71 Ley General de Transparencia y Acceso a la Información Pública",
+      "ley": "Arts. 3 fr. VIII y 65 Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025)",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -3674,7 +5298,602 @@ window.AUDIT_DB = {
       "definicion": "Órgano oficial de difusión del Estado mexicano. Una norma existe jurídicamente a partir de su publicación en el DOF, y la fecha de publicación —no la de aprobación ni la del anuncio— es la que determina su entrada en vigor. Cuando una cifra o una facultad se disputa, el DOF es la fuente que zanja la discusión.",
       "ley": "Art. 2° Ley del Diario Oficial de la Federación y Gacetas Gubernamentales",
       "categoria": "📜 Ley de Ingresos & Marco Legal"
-    }],
+    },
+    {
+      "termino": "Acción Financiera del Estado",
+      "definicion": "Conjunto de operaciones con las que el Estado obtiene recursos, los administra y los aplica. Tiene tres movimientos y ninguno se entiende sin los otros dos: el ingreso (impuestos, derechos, aprovechamientos y venta de petróleo), el gasto (lo que se ejerce y en qué) y el financiamiento (la deuda que cubre la diferencia cuando el ingreso no alcanza). Auditar sólo uno de los tres deja fuera la mitad de la historia.",
+      "ley": "Arts. 73, 74, 126 y 134 CPEUM · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Federalismo Fiscal",
+      "definicion": "Reparto de facultades para cobrar impuestos y para gastar entre la Federación, las entidades federativas y los municipios. En México la recaudación está muy centralizada y el gasto muy descentralizado: la Federación cobra la mayor parte y después transfiere; de ahí que estados y municipios dependan de las participaciones y aportaciones para operar.",
+      "ley": "Arts. 40, 115, 117 y 124 CPEUM · Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Hacienda Pública",
+      "definicion": "Conjunto de bienes, derechos, ingresos y obligaciones económicas del Estado, y la actividad de administrarlos. No es sinónimo de «la Secretaría de Hacienda»: es el patrimonio y la actividad económica del Estado en su conjunto, de la cual esa Secretaría es sólo la conductora en el ámbito federal.",
+      "ley": "Arts. 31 fracción IV y 73 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Ingresos Presupuestarios",
+      "definicion": "Recursos que la Federación estima captar durante el ejercicio y que la Ley de Ingresos enumera año con año: tributarios (ISR, IVA, IEPS), no tributarios (derechos, productos y aprovechamientos), los de organismos y empresas del Estado, y los de financiamiento, es decir, deuda. La distinción importa: un ingreso por deuda hoy es un gasto por intereses mañana.",
+      "ley": "Ley de Ingresos de la Federación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deuda Subnacional",
+      "definicion": "Obligaciones financieras contratadas por las entidades federativas y los municipios. La Constitución sólo les permite endeudarse para inversión pública productiva, nunca para gasto corriente, y su registro y seguimiento corresponden al sistema que establece la Ley de Disciplina Financiera.",
+      "ley": "Art. 117 fracción VIII CPEUM · Ley de Disciplina Financiera de las Entidades Federativas y los Municipios",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sistema de Alertas (SHCP)",
+      "definicion": "Semáforo con el que la Secretaría de Hacienda clasifica el endeudamiento de cada entidad federativa y de los municipios con obligaciones inscritas. El color —verde, amarillo o rojo— no es una opinión: determina cuánto más pueden endeudarse en el siguiente ejercicio. Se publica de forma periódica y es consultable por cualquier persona.",
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios · Secretaría de Hacienda y Crédito Público",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Adecuación Presupuestaria",
+      "definicion": "Movimiento que traslada recursos de una partida a otra durante el ejercicio, una vez que el presupuesto ya fue aprobado. Es legal y a menudo necesario, pero es también el punto donde un presupuesto aprobado deja de parecerse al presupuesto ejercido: por eso conviene leer siempre el dato modificado junto al aprobado.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Anexo Transversal",
+      "definicion": "Agrupación de recursos que persiguen un mismo objetivo pero están repartidos en varios ramos y programas: igualdad entre mujeres y hombres, pueblos indígenas, atención a la niñez, cambio climático. El anexo no crea presupuesto nuevo: etiqueta y hace visible el que ya está disperso.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Presupuesto de Egresos de la Federación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Programa Presupuestario (Pp)",
+      "definicion": "Unidad mínima a la que se asigna dinero y a la que se le puede exigir un resultado. Cada peso del Presupuesto de Egresos cuelga de un programa presupuestario con clave propia, y es el nivel en el que tiene sentido preguntar «¿cuánto costó y qué produjo?».",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Sistema de Evaluación del Desempeño",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Fideicomiso Público",
+      "definicion": "Figura en la que una dependencia o entidad aporta recursos públicos a un patrimonio que administra una institución fiduciaria para un fin determinado. Su rasgo fiscalizable es que el dinero sale del ejercicio anual y puede permanecer años fuera del escrutinio presupuestario ordinario, sin dejar de ser público.",
+      "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria · Ley Federal de las Entidades Paraestatales",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Licitación Pública",
+      "definicion": "Procedimiento de contratación abierto mediante convocatoria pública, en el que compiten quienes cumplan los requisitos y gana la propuesta que ofrezca las mejores condiciones. La Constitución la establece como la regla general para adquisiciones, arrendamientos, servicios y obra pública; todo lo demás es excepción y debe justificarse.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Adjudicación Directa",
+      "definicion": "Contratación sin concurso, en la que la autoridad elige directamente a quien la ejecutará. La ley la permite en supuestos tasados y por debajo de ciertos montos, y obliga a fundar y motivar la decisión. Su uso reiterado para contratos grandes es uno de los indicadores más citados de riesgo de corrupción en la contratación pública.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Invitación a Cuando Menos Tres Personas",
+      "definicion": "Procedimiento intermedio entre la licitación pública y la adjudicación directa: la autoridad invita a un número acotado de proveedores en lugar de convocar abiertamente. Como la adjudicación directa, es una excepción y exige justificación expresa.",
+      "ley": "Art. 134 CPEUM · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Testigo Social",
+      "definicion": "Persona u organización acreditada que participa en procedimientos de contratación de monto relevante y emite un testimonio público sobre lo que observó. No decide ni sanciona: deja constancia, y esa constancia queda disponible para quien quiera revisarla.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Obra Pública",
+      "definicion": "Trabajos de construcción, ampliación, conservación o demolición de bienes inmuebles con recursos públicos, y los servicios relacionados con ellos, como proyectos y supervisión. Se rige por su propia ley, distinta de la de adquisiciones, aunque comparte con ella el mandato constitucional de licitar.",
+      "ley": "Art. 134 CPEUM · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Convenio Modificatorio",
+      "definicion": "Instrumento que cambia el monto, el plazo o el alcance de un contrato ya adjudicado. Es una figura legal y a veces inevitable, pero también el lugar donde suele alojarse el sobrecosto: un contrato que se gana barato y se termina caro casi siempre pasó por aquí.",
+      "ley": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público · Ley de Obras Públicas y Servicios Relacionados con las Mismas",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sistema Nacional Anticorrupción",
+      "definicion": "Instancia de coordinación entre las autoridades de todos los órdenes de gobierno encargadas de prevenir, detectar y sancionar hechos de corrupción y faltas administrativas, así como de fiscalizar y controlar recursos públicos. Incluye un Comité de Participación Ciudadana, de modo que la sociedad tiene asiento y voto y no sólo derecho de petición.",
+      "ley": "Art. 113 CPEUM · Ley General del Sistema Nacional Anticorrupción",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sujeto Obligado",
+      "definicion": "Toda autoridad, entidad, órgano, partido político, sindicato, fideicomiso o persona que recibe o ejerce recursos públicos, y que por esa razón debe documentar y entregar información. La definición es amplia a propósito: quien toca dinero público entra en ella, sea o no parte del gobierno.",
+      "ley": "Art. 6 CPEUM · Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Versión Pública",
+      "definicion": "Documento del que se han eliminado los datos clasificados como reservados o confidenciales para poder entregarlo. Es la salida ordinaria a la negativa total: la regla es entregar lo que sí puede entregarse, no callar el documento entero porque una parte esté protegida.",
+      "ley": "Ley General de Transparencia y Acceso a la Información Pública",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Auditoría de Desempeño",
+      "definicion": "Revisión que no pregunta si el dinero se gastó conforme a la norma, sino si sirvió de algo: si el programa cumplió su objetivo, a qué costo y con qué resultados verificables. Es la que responde la pregunta que más le importa a quien paga impuestos y la que más incomoda a quien ejerce el gasto.",
+      "ley": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Artículo 134 Constitucional",
+      "definicion": "Norma que ordena que los recursos económicos de que dispone el Estado se administren con eficiencia, eficacia, economía, transparencia y honradez, y que las contrataciones se adjudiquen por licitación pública mediante convocatoria abierta. Es el artículo que se invoca cuando se discute una adjudicación directa, un sobrecosto o el uso de propaganda gubernamental.",
+      "ley": "Art. 134 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Artículo 126 Constitucional",
+      "definicion": "Norma de una sola línea y consecuencias enormes: no puede hacerse pago alguno que no esté comprendido en el presupuesto o determinado por ley posterior. Es el fundamento de que un gasto no previsto sea, por definición, un gasto que alguien debe explicar.",
+      "ley": "Art. 126 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Rectoría Económica del Estado",
+      "definicion": "Facultad constitucional del Estado para conducir y orientar el desarrollo nacional sin ser dueño de toda la economía. No significa que el gobierno produzca todo, sino que fija el rumbo y coordina a quienes producen. El texto le pone dos condiciones que suelen olvidarse: que el desarrollo sea sustentable y que la distribución del ingreso sea más justa. Crecer incumpliendo cualquiera de las dos es crecer fuera del mandato.",
+      "ley": "Art. 25 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Economía Mixta",
+      "definicion": "Sistema en el que conviven la propiedad privada y la rectoría del Estado, con tres sectores que concurren al desarrollo: el público, el social y el privado. Es el modelo que México adopta expresamente. El sector social —ejidos, comunidades, cooperativas— tiene rango constitucional: no es una categoría residual ni una concesión, es uno de los tres pilares nombrados en el texto.",
+      "ley": "Art. 25 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sector Social de la Economía",
+      "definicion": "Conjunto de formas de organización productiva de propiedad colectiva: ejidos, comunidades, cooperativas, empresas de trabajadores. La Constitución lo nombra junto al público y al privado, con los mismos derechos de concurrencia al desarrollo. En la práctica es el sector con menor acceso a crédito y a contratación pública, brecha que la propia norma manda cerrar mediante fomento.",
+      "ley": "Art. 25 CPEUM · Ley de la Economía Social y Solidaria",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Sistema Nacional de Planeación Democrática",
+      "definicion": "Mecanismo por el cual el Estado organiza sus metas de desarrollo recogiendo las aspiraciones de la sociedad mediante consulta popular. El adjetivo «democrática» no es adorno: distingue este modelo de la planeación centralizada, porque el resultado obliga a la Administración Pública Federal pero para el particular es apenas indicativo.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Plan Nacional de Desarrollo",
+      "definicion": "Documento rector sexenal al que deben sujetarse obligatoriamente los programas de la Administración Pública Federal. Se elabora con consulta y se publica en los primeros meses del sexenio. Su punto débil no es el contenido sino la trazabilidad: el eslabón que va del objetivo del Plan al Programa presupuestario y de ahí a la partida del Presupuesto de Egresos es donde una meta puede evaporarse sin dejar rastro contable.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Planeación Indicativa",
+      "definicion": "Carácter que tiene el Plan Nacional de Desarrollo frente a los particulares: es una guía, no una orden. El mismo documento es obligatorio hacia adentro del gobierno e indicativo hacia afuera. Esta doble naturaleza es exactamente lo que separa la planeación democrática mexicana de una economía centralmente planificada.",
+      "ley": "Art. 26 CPEUM · Ley de Planeación",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Propiedad Originaria de la Nación",
+      "definicion": "Principio según el cual las tierras y aguas del territorio nacional pertenecen originariamente a la Nación, que transmitió su dominio a los particulares para constituir la propiedad privada. La consecuencia práctica es que la propiedad privada deriva de esa transmisión y no la antecede, por lo que puede sujetarse a modalidades cuando lo exija el interés público.",
+      "ley": "Art. 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Modalidades a la Propiedad Privada",
+      "definicion": "Límites que la Nación puede imponer al dominio privado cuando lo dicte el interés público, incluyendo la regulación del aprovechamiento de los recursos naturales. Es el fundamento jurídico de que se niegue una concesión de agua o se rechace una autorización ambiental: la propiedad no es absoluta frente al interés colectivo.",
+      "ley": "Art. 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Áreas Estratégicas",
+      "definicion": "Actividades que el Estado ejerce de manera exclusiva sin que ello constituya monopolio, por disposición constitucional expresa. Su consecuencia práctica se pasa por alto con frecuencia: una entidad que opera en área estratégica no se juzga con la vara de la rentabilidad privada, porque su razón de existir no es el margen sino la función.",
+      "ley": "Art. 28 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Práctica Monopólica Absoluta",
+      "definicion": "Acuerdo entre competidores para fijar precios, restringir la oferta, repartirse el mercado o coordinar posturas en licitaciones. Se sanciona por sí misma, sin necesidad de probar daño: el acuerdo es la infracción. En compras públicas es la figura que explica por qué varias empresas presentan ofertas sospechosamente parecidas.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Práctica Monopólica Relativa",
+      "definicion": "Conducta con la que una empresa con poder sustancial en el mercado desplaza indebidamente a sus competidores o impide su entrada. A diferencia de la absoluta, aquí sí debe acreditarse el poder de mercado y el efecto. Es la categoría que se invoca cuando un proveedor dominante del sector público bloquea el acceso de otros.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autonomía del Banco Central",
+      "definicion": "Régimen constitucional que impide a cualquier autoridad ordenar al Banco de México conceder financiamiento. Su objetivo prioritario es procurar la estabilidad del poder adquisitivo de la moneda. Esa última línea es el candado que impide cubrir el déficit imprimiendo dinero, y la razón de que la deuda soberana tenga que colocarse en subasta.",
+      "ley": "Art. 28 CPEUM · Ley del Banco de México",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Desarrollo Sustentable",
+      "definicion": "Fórmula de equilibrio entre tres dimensiones que deben cumplirse a la vez: crecimiento económico, equidad social y preservación ambiental. No es una cuestión sólo ecológica. En el orden jurídico mexicano es un mandato derivado de los artículos 25, 26 y 27, lo que significa que un crecimiento que agota el capital natural no satisface la norma aunque el PIB suba.",
+      "ley": "Art. 25, 26 y 27 CPEUM",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Producto Interno Neto Ecológico",
+      "definicion": "Indicador que el INEGI calcula restando al Producto Interno Bruto el consumo de capital fijo y los costos totales por agotamiento y degradación ambiental. Responde a la pregunta que el PIB no puede contestar: cuánto creció realmente la riqueza si se descuenta el daño causado para producirla. En 2024 ascendió a 25.7 billones de pesos, 76.6% del PIB.",
+      "ley": "Sistema de Cuentas Nacionales de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Costos Totales por Agotamiento y Degradación Ambiental",
+      "definicion": "Valoración monetaria del impacto ambiental de la actividad económica, con dos componentes: lo que se acabó (agotamiento de hidrocarburos, bosques y agua subterránea) y lo que se ensució (aire, suelo, residuos, aguas residuales). En 2024 sumaron $1,382,214 millones de pesos, 4.1% del PIB.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Agotamiento de Recursos Naturales",
+      "definicion": "Consumo de capital natural que no se repone dentro del periodo: barriles extraídos, bosque perdido por encima de la regeneración, agua sacada de un acuífero por arriba de su recarga. En 2024 costó $144,020 millones de pesos. El reparto oficial lo encabezan los hidrocarburos con 46%, seguidos por los recursos forestales con 28% y el agua subterránea con 26%.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Degradación Ambiental",
+      "definicion": "Costo de que el entorno empeore, a diferencia del agotamiento, donde el recurso desaparece. Incluye emisiones al aire, degradación del suelo, residuos sólidos urbanos y tratamiento insuficiente de aguas residuales. En 2024 costó $1,238,194 millones de pesos, y las emisiones al aire por sí solas representaron 2.5% del PIB.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Externalidad Negativa",
+      "definicion": "Costo que quien produce no paga y traslada a terceros o a la sociedad entera: el aire que otros respiran, el acuífero que otros dejarán de usar. Las cuentas ecológicas del INEGI son precisamente el ejercicio de ponerle precio a esas externalidades, y ese precio es el que da sustento jurídico a gravarlas.",
+      "ley": "Art. 25 y 27 CPEUM · LGEEPA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuesto Pigouviano",
+      "definicion": "Gravamen diseñado para que quien genera un costo ambiental lo internalice, bajo la premisa de que quien contamina y agota, paga. No busca principalmente recaudar sino corregir un precio que estaba mal puesto. En México la discusión sobre estos impuestos suele confundirse con la recaudatoria, y son cosas distintas.",
+      "ley": "Art. 31 fracción IV y Art. 73 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Manifestación de Impacto Ambiental",
+      "definicion": "Documento con el que quien pretende realizar una obra debe acreditar ante la autoridad ambiental los efectos que causará y cómo los mitigará. Es el punto donde una cifra estadística se vuelve una decisión exigible: si el agotamiento hídrico de una región ya es crítico, la autoridad tiene sustento para negarla.",
+      "ley": "Art. 27 CPEUM · LGEEPA",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Capital Natural",
+      "definicion": "Acervo de recursos que la naturaleza aporta a la economía: agua, suelo, bosques, hidrocarburos, capacidad de absorber contaminantes. Se comporta como cualquier otro capital en un aspecto decisivo: si se consume por encima de su reposición, la producción futura se reduce aunque las cuentas presentes se vean bien.",
+      "ley": "Art. 27 CPEUM · Sistema de Cuentas Nacionales",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Coeficiente de Gini",
+      "definicion": "Medida de desigualdad en la distribución del ingreso que va de 0, donde todos reciben lo mismo, a 1, donde una sola persona concentra todo. Importa jurídicamente porque el artículo 25 exige una más justa distribución del ingreso y la riqueza: sin esta medición, el cumplimiento de ese mandato no es verificable.",
+      "ley": "Art. 25 CPEUM · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Pobreza Multidimensional",
+      "definicion": "Medición que no se limita al ingreso, sino que considera carencias en acceso a salud, educación, seguridad social, vivienda digna, servicios básicos y alimentación. Es la metodología oficial en México. Su virtud es que impide declarar superada la pobreza por el solo hecho de que un ingreso rebase un umbral.",
+      "ley": "Ley General de Desarrollo Social · CONEVAL",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Estrés Hídrico",
+      "definicion": "Situación en que la demanda de agua de una cuenca supera su disponibilidad renovable. Es el indicador que debería anteceder a la autorización de cualquier polo industrial o desarrollo habitacional, porque proyectar crecimiento sin datos de recarga de acuíferos convierte la inversión en un pasivo futuro.",
+      "ley": "Art. 27 CPEUM · Ley de Aguas Nacionales",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Matriz Energética",
+      "definicion": "Composición de las fuentes con que un país genera y consume energía, medida como la proporción entre fósiles y limpias. Es un dato de soberanía y de sustentabilidad a la vez, y la base sobre la que se justifica jurídicamente que el Estado regule el mercado eléctrico y de combustibles como asunto de rectoría.",
+      "ley": "Art. 25, 27 y 28 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Índice Herfindahl-Hirschman",
+      "definicion": "Medida de concentración de un mercado que se obtiene sumando los cuadrados de las participaciones de cada competidor. Cuanto más alto, más concentrado. Se emplea para detectar poder sustancial de mercado y es una de las herramientas técnicas con las que se aplica la prohibición constitucional de monopolios.",
+      "ley": "Art. 28 CPEUM · Ley Federal de Competencia Económica",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Gasto en Protección Ambiental",
+      "definicion": "Recursos que la economía destina a prevenir, reducir o reparar el daño al entorno. En 2024 ascendió a $232,882 millones de pesos, 0.7% del PIB, frente a un deterioro de 4.1%. La proporción entre ambas cifras, y no el monto absoluto, es lo que revela la seriedad del compromiso.",
+      "ley": "Cuentas Económicas y Ecológicas de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Consumo de Capital Fijo",
+      "definicion": "Desgaste de la infraestructura creada por el hombre —maquinaria, fábricas, carreteras— durante un periodo. Restarlo al Producto Interno Bruto da el Producto Interno Neto, y reconoce que una parte de lo producido apenas repuso lo que se gastó en producirlo.",
+      "ley": "Sistema de Cuentas Nacionales de México · INEGI",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "ISR (Impuesto Sobre la Renta)",
+      "definicion": "Impuesto directo sobre el ingreso de personas físicas y sobre la utilidad de personas morales. Directo quiere decir que lo soporta quien lo causa: no puede trasladarse a otro, a diferencia del IVA. Grava la utilidad fiscal —ingresos menos deducciones autorizadas—, de modo que un estímulo o una deducción reducen la recaudación sin cambiar la tasa. Es el mayor ingreso tributario del país y el componente principal de la Recaudación Federal Participable, de la que salen las participaciones del Ramo 28.",
+      "ley": "Ley del ISR · Art. 31 fracc. IV CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "IVA (Impuesto al Valor Agregado)",
+      "definicion": "Impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % en alimentos y medicinas y una lista de actos exentos. Funciona por traslado y acreditamiento: quien vende lo cobra por separado y lo entera, pero acredita el que pagó a sus proveedores, de modo que cada eslabón tributa sólo por el valor que añade y el consumidor final lo soporta íntegro. Su incidencia es regresiva: la tasa es la misma para quien gana poco y para quien gana mucho.",
+      "ley": "Ley del IVA",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "IEPS (Impuesto Especial sobre Producción y Servicios)",
+      "definicion": "Impuesto indirecto sobre consumos específicos —combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones— cuyo fin no es sólo recaudar sino encarecer aquello que impone un costo a terceros o a la salud pública. Es un impuesto pigouviano. Su recaudación es la más volátil del cuadro fiscal porque la cuota de combustibles se ajusta según el precio de referencia.",
+      "ley": "Ley del IEPS",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "ISAN (Impuesto Sobre Automóviles Nuevos)",
+      "definicion": "Impuesto federal sobre la enajenación de automóviles nuevos de producción nacional y sobre su importación definitiva. Su rasgo distintivo es que, siendo federal, lo administran las entidades federativas: ellas lo recaudan y conservan su rendimiento por convenio de colaboración administrativa en el marco de la Ley de Coordinación Fiscal. Por eso aparece a la vez en la Ley de Ingresos de la Federación y en las haciendas locales.",
+      "ley": "Ley Federal del ISAN · Ley de Coordinación Fiscal",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuestos al Comercio Exterior (Aranceles)",
+      "definicion": "Gravámenes que se causan al importar o exportar mercancía, liquidados en la aduana conforme a la tarifa de fracciones arancelarias. Su particularidad jurídica es la excepción del artículo 131 constitucional: el Congreso puede facultar al Ejecutivo para aumentar, disminuir o suprimir las cuotas por decreto, sujeto a aprobación posterior. Es, por tanto, instrumento de política comercial antes que fuente estable de ingreso. México presupuesta en cero el impuesto a la exportación.",
+      "ley": "LIGIE · Ley Aduanera · Art. 131 CPEUM",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Accesorios de las Contribuciones",
+      "definicion": "Recargos por mora, multas por infracciones fiscales, gastos de ejecución e indemnización por cheque devuelto. El último párrafo del artículo 2º del Código Fiscal ordena que participen de la naturaleza de la suerte principal: un recargo del ISR es jurídicamente ISR. De ahí que se cobren por el mismo procedimiento administrativo de ejecución y que prescriban junto con el crédito que los originó. No son una sanción separada: son el precio legal del incumplimiento.",
+      "ley": "Código Fiscal de la Federación, arts. 2º, 20, 21 y 70 a 91",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Impuesto por la Actividad de Exploración y Extracción de Hidrocarburos",
+      "definicion": "Gravamen que no mide la ganancia ni el volumen extraído, sino la superficie del área contractual o de asignación, con una cuota por kilómetro cuadrado que se eleva cuando el área lleva más de sesenta meses sin producir. Su diseño busca desincentivar que se retengan áreas ociosas. Su recaudación se destina al Fondo para Entidades Federativas y Municipios Productores de Hidrocarburos.",
+      "ley": "Ley de Ingresos sobre Hidrocarburos, arts. 55 a 57",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Rezago Fiscal",
+      "definicion": "Impuestos causados en ejercicios anteriores que siguen pendientes de liquidarse o de pagarse, incluidos los de contribuciones ya derogadas. Demuestran que la obligación tributaria sobrevive a la ley que la creó: se extingue por pago, por caducidad de la facultad de la autoridad para determinarla —cinco años, artículo 67 del Código Fiscal— o por prescripción del crédito ya determinado —cinco años, artículo 146—.",
+      "ley": "Código Fiscal de la Federación, arts. 67 y 146",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Aportaciones de Seguridad Social",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 2º fracc. II CFF · Ley del Seguro Social · Ley del ISSSTE",
+      "definicion": "Contribuciones a cargo de quienes son sustituidos por el Estado en el cumplimiento de obligaciones de seguridad social, o de quienes se benefician de servicios de previsión social. Su rasgo decisivo es el destino específico: financian las prestaciones del IMSS y del ISSSTE, no entran a la bolsa común del gasto y no integran la Recaudación Federal Participable, de modo que no se reparten a estados ni municipios."
+    },
+    {
+      "termino": "Contribuciones de Mejoras",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 2º fracc. III CFF · Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica",
+      "definicion": "Contribuciones a cargo de quienes se benefician de manera directa de una obra pública. Responden al principio de beneficio y no al de capacidad contributiva: no se paga por tener con qué, sino por recibir una ventaja particular y medible. En el ámbito federal sólo subsiste la referida a obras de infraestructura hidráulica."
+    },
+    {
+      "termino": "Derechos (Contribución)",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 2º fracc. IV CFF · Ley Federal de Derechos",
+      "definicion": "Contribuciones que se pagan por usar o aprovechar bienes del dominio público de la Nación, o por recibir servicios que presta el Estado en sus funciones de derecho público. A diferencia del impuesto, aquí existe contraprestación identificable. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio: si lo excede de manera desproporcionada, el derecho se convierte en un impuesto encubierto y resulta inconstitucional."
+    },
+    {
+      "termino": "Productos (Ingresos del Estado)",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 3º párrafo tercero CFF",
+      "definicion": "Contraprestaciones que recibe el Estado por los servicios que presta en sus funciones de derecho privado, y por el uso, aprovechamiento o enajenación de bienes que no son del dominio público: rentas, intereses de valores, venta de muebles e inmuebles y utilidades. Aquí el Estado no actúa como autoridad sino como particular, razón por la cual el Código Fiscal los excluye de las contribuciones."
+    },
+    {
+      "termino": "Aprovechamientos",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 3º párrafo primero CFF",
+      "definicion": "Ingresos que percibe el Estado por funciones de derecho público distintos de las contribuciones, de los ingresos derivados de financiamientos y de los que obtienen los organismos descentralizados y las empresas del Estado. Es una categoría residual definida por exclusión: caben ahí multas no fiscales, cuotas compensatorias, decomisos, recuperaciones de capital y remanentes. Esa textura abierta la vuelve el rubro más heterogéneo de la Ley de Ingresos."
+    },
+    {
+      "termino": "Empresas Públicas del Estado",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Arts. 25 y 28 CPEUM · Ley de la Empresa Pública del Estado, Pemex · Ley de la Empresa Pública del Estado, CFE",
+      "definicion": "Figura jurídica que sustituyó a las empresas productivas del Estado con la reforma energética de 2024-2025. Pemex y la CFE dejan de regirse por una lógica de competencia en el mercado, creada en 2013, y pasan a operar bajo la rectoría del Estado en áreas estratégicas. Lo que aportan al erario no es recaudación sino venta: cobran un precio por un bien o un servicio, no un tributo por mandato de ley."
+    },
+    {
+      "termino": "Fondo Mexicano del Petróleo (FMP)",
+      "categoria": "💰 Hacendario & Deuda",
+      "ley": "Art. 28 párrafo sexto CPEUM · Ley del FMP para la Estabilización y el Desarrollo",
+      "definicion": "Fideicomiso público constituido en el Banco de México por mandato constitucional. Recibe los ingresos del Estado derivados de las asignaciones y contratos de hidrocarburos y los transfiere al presupuesto hasta un tope equivalente al 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Cuando la transferencia se agota en gasto corriente del ejercicio, la función estabilizadora prevista en su diseño no llega a operar."
+    },
+    {
+      "termino": "Gasto Federalizado",
+      "definicion": "El dinero federal que no se queda en la Federación: participaciones del Ramo 28, aportaciones del Ramo 33, el Ramo 25 educativo y los convenios que las secretarías firman con cada estado. Para 2026 suma alrededor de $2.81 billones, más de una cuarta parte del gasto neto total. No es un ramo del presupuesto sino una suma de ramos, y por eso dos análisis pueden dar cifras distintas según qué incluyan.",
+      "ley": "PEF 2026, Anexo 1 · Ley de Coordinación Fiscal",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Recursos de Libre Disposición",
+      "definicion": "Ingresos que la entidad o el municipio pueden gastar en lo que decidan, sin destino fijado por ley: las participaciones del Ramo 28, sus impuestos propios y sus derechos. La Ley de Disciplina Financiera los usa como denominador de los techos de endeudamiento, de modo que una hacienda con pocos ingresos de libre disposición puede endeudarse menos aunque reciba mucho dinero etiquetado.",
+      "ley": "Ley de Disciplina Financiera, art. 2 fracc. XXIII",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Recursos Etiquetados",
+      "definicion": "Transferencias federales cuyo destino ya viene fijado por la ley que las crea: los ocho fondos del Ramo 33 y los convenios. Siguen siendo recursos federales después de entregarse, de modo que la Auditoría Superior de la Federación puede fiscalizar su ejercicio aunque el ejecutor sea un municipio. Gastarlos en un fin distinto del legal genera responsabilidad administrativa y, en su caso, penal.",
+      "ley": "Ley de Coordinación Fiscal, arts. 25 y 49",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sistema Nacional de Coordinación Fiscal",
+      "definicion": "El acuerdo por el que las 32 entidades renunciaron a cobrar ciertos impuestos a cambio de participar en lo que recauda la Federación. Se formaliza con un convenio de adhesión: quien se adhiere recibe participaciones, quien no, conserva sus facultades tributarias pero pierde el reparto. Explica por qué México tiene una recaudación tan centralizada y por qué el ingreso estatal depende tanto de una fórmula federal.",
+      "ley": "Ley de Coordinación Fiscal, arts. 1º y 10",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Hacienda Municipal",
+      "definicion": "El conjunto de bienes e ingresos que el artículo 115 constitucional reconoce al municipio: los rendimientos de sus bienes, el predial y demás contribuciones sobre la propiedad, las participaciones federales y los derechos por los servicios públicos a su cargo. El ayuntamiento la administra libremente y aprueba su presupuesto de egresos, pero su ley de ingresos la aprueba el congreso del estado.",
+      "ley": "Constitución Política, art. 115 fracc. IV",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Ramo 25 (Previsiones y Aportaciones Educativas)",
+      "definicion": "Ramo general que financia la educación básica y normal de la Ciudad de México —que nunca se descentralizó— y guarda las previsiones salariales del magisterio que después se trasladan al FONE y al FAETA. Para 2026 asciende a $85,182.4 mdp. Es gasto federalizado que no aparece en el Ramo 33: quien compara años sumando sólo ese ramo deja fuera esta bolsa.",
+      "ley": "PEF 2026, Anexo 21",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FAFEF",
+      "definicion": "Fondo de Aportaciones para el Fortalecimiento de las Entidades Federativas. Equivale al 1.40 % de la recaudación federal participable —$74,754.9 mdp en 2026— y se destina a inversión en infraestructura, saneamiento financiero y amortización de deuda estatal. Junto con el FAIS, es uno de los dos fondos del Ramo 33 que pueden darse en garantía de crédito hasta por el 25 % anual.",
+      "ley": "Ley de Coordinación Fiscal, art. 46",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "FAM",
+      "definicion": "Fondo de Aportaciones Múltiples. Por ley se parte en dos: 46 % a desayunos escolares, apoyos alimentarios y asistencia social, y 54 % a construcción, equipamiento y rehabilitación de escuelas. Para 2026 suma $43,464.6 mdp. Es el fondo con el que se compran los desayunos escolares del DIF y se levantan aulas.",
+      "ley": "Ley de Coordinación Fiscal, arts. 39 a 41",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FAETA",
+      "definicion": "Fondo de Aportaciones para la Educación Tecnológica y de Adultos. Paga los servicios de educación tecnológica ($6,858.3 mdp) y de educación para adultos ($3,953.1 mdp) que los estados asumieron por convenio con la Federación. Con $10,811.4 mdp en 2026 es el segundo fondo más pequeño del Ramo 33.",
+      "ley": "Ley de Coordinación Fiscal, arts. 42 a 44",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "FASP",
+      "definicion": "Fondo de Aportaciones para la Seguridad Pública de los Estados y del Distrito Federal. Con $9,951.1 mdp es el fondo más pequeño del Ramo 33: el 0.96 % del ramo. Se destina a profesionalización policial, equipamiento, sistemas de información y percepciones extraordinarias del Ministerio Público. El Presupuesto de Egresos promueve que al menos el 20 % se reparta entre municipios.",
+      "ley": "Ley de Coordinación Fiscal, arts. 45 y 45-Bis",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
+      "termino": "Informe Individual de Auditoría",
+      "definicion": "El informe de cada auditoría que practica la Auditoría Superior de la Federación. Dice por qué se eligió ese ente, qué se revisó y cómo, el dictamen, los resultados, las observaciones y las acciones que se promovieron, e incluye un resumen de lo que la entidad respondió durante la revisión. Es público: la ley obliga a mantenerlo en la página de la ASF en formatos abiertos. Es el documento que hay que citar cuando se habla de lo que encontró una auditoría.",
+      "ley": "Arts. 4 fr. XXII, 35 y 36 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Entregas del Informe del Resultado",
+      "definicion": "Las tres fechas en que la ASF entrega a la Cámara de Diputados, por conducto de la Comisión de Vigilancia, los informes individuales que va concluyendo: el último día hábil de junio, el último día hábil de octubre y el 20 de febrero del año siguiente al de la presentación de la Cuenta Pública. Por eso la revisión de un año se conoce por partes: un informe de junio no es el cuadro completo, y cualquier suma hecha antes de la tercera entrega es parcial.",
+      "ley": "Art. 35 Ley de Fiscalización y Rendición de Cuentas de la Federación · Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Informe General Ejecutivo",
+      "definicion": "El documento de conjunto que la ASF rinde a la Cámara de Diputados a más tardar el 20 de febrero del año siguiente al de la presentación de la Cuenta Pública. Resume las auditorías y sus observaciones, señala las áreas clave con riesgo, da los resultados del gasto federalizado, las participaciones y la deuda, describe qué parte del gasto se auditó y puede proponer a la Cámara cambios a las leyes. Es público, y la Cámara lo envía al Comité Coordinador del Sistema Nacional Anticorrupción y al Comité de Participación Ciudadana.",
+      "ley": "Arts. 4 fr. XX, 33 y 34 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Matriz de Datos Básicos (MDB)",
+      "definicion": "El resumen numérico que la ASF publica con cada entrega del Informe del Resultado. Cuenta, por grupo funcional, sector y entidad federativa, cuántas auditorías se hicieron, el universo seleccionado, la muestra auditada, las acciones de cada tipo, lo recuperado y lo que queda por aclarar. Dos advertencias de la propia ASF: sus montos vienen en miles de pesos, y no todas las auditorías tienen monto, porque las de desempeño o las que sólo revisan que el dinero se haya transferido no se miden en pesos.",
+      "ley": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, introducción, notas y glosario (corte febrero de 2026)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Universo Seleccionado",
+      "definicion": "El monto total de lo que la ASF eligió revisar en una auditoría: el presupuesto asignado o ejercido en los capítulos, partidas, programas, fondos u obras de que se trate, los conceptos de ingreso o los rubros de balance. De ese universo se toma la muestra auditada, que es lo que de verdad se revisa documento por documento.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518), num. 2.1",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Representatividad de la Muestra",
+      "definicion": "El porcentaje que la muestra auditada representa del universo seleccionado. Un porcentaje alto dice que se revisó casi todo lo elegido; uno bajo pide leer los hallazgos con cuidado, porque describen sólo esa parte. En la Cuenta Pública 2024, sumando todas las auditorías con monto, la muestra fue el 53.03 % del universo.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518), num. 2.3 · ASF, Matriz de Datos Básicos CP 2024, cuadro general",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Observación Solventada",
+      "definicion": "Irregularidad o deficiencia que la entidad fiscalizada corrigió o aclaró con documentos, ya sea durante la auditoría o después, en el seguimiento. Solventar no equivale a devolver dinero: puede bastar con demostrar que el gasto estaba justificado. Tras recibir la respuesta de la entidad, la ASF tiene 120 días hábiles para decidir si la observación queda solventada, no solventada, archivada o concluida.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518), num. 3.1 · Art. 41 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Recomendación (R) y Recomendación al Desempeño (RD)",
+      "definicion": "Las dos acciones preventivas de la ASF: no imputan falta a nadie. La recomendación (R) pide fortalecer el control interno, los procesos administrativos y el cumplimiento de metas. La recomendación al desempeño (RD) pide que la entidad cumpla sus objetivos, ejerza el dinero para el propósito que se le asignó y mejore sus indicadores. Antes de emitirlas, la ASF las analiza con la entidad y lo acordado queda en actas que firman ambas; si no hay acuerdo, la ASF puede emitirlas de todos modos.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518), nums. 4.1 y 4.2 · Art. 42 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Solicitud de Aclaración (SA)",
+      "definicion": "Acción con la que la ASF pide a la entidad fiscalizada documentos adicionales que aclaren y respalden operaciones o montos que durante la revisión quedaron sin justificar o sin comprobar. Es el paso previo a un pliego de observaciones: si la entidad aclara, el asunto se cierra; si no, puede escalar.",
+      "ley": "Art. 40 fr. I Ley de Fiscalización y Rendición de Cuentas de la Federación · Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 4.4",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Promoción del Ejercicio de la Facultad de Comprobación Fiscal (PEFCF)",
+      "definicion": "Aviso que la ASF envía a la autoridad tributaria, el SAT, cuando en una auditoría detecta un posible incumplimiento fiscal o errores y omisiones en declaraciones o avisos fiscales. La ASF no cobra impuestos: le pasa el dato a quien sí puede revisarlos.",
+      "ley": "Art. 40 fr. III Ley de Fiscalización y Rendición de Cuentas de la Federación · Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 4.3",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Promoción de Responsabilidad Administrativa Sancionatoria (PRAS)",
+      "definicion": "Acción con la que la ASF da vista al órgano interno de control de la entidad cuando detecta posibles faltas administrativas no graves, para que ese órgano investigue y, en su caso, sancione. En la Cuenta Pública 2024 fue la segunda acción más frecuente: 2,203 de 6,274, sólo detrás de los pliegos de observaciones. Las faltas graves siguen otro camino: el informe de presunta responsabilidad administrativa.",
+      "ley": "Art. 40 fr. V Ley de Fiscalización y Rendición de Cuentas de la Federación · Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 4.5 · ASF, Matriz de Datos Básicos CP 2024, cuadro general",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Informe de Presunta Responsabilidad Administrativa",
+      "definicion": "El documento con el que la ASF lleva ante el Tribunal Federal de Justicia Administrativa las faltas administrativas graves que descubre en sus auditorías o investigaciones, para que se sancione a las personas servidoras públicas y a los particulares vinculados. A diferencia de las demás acciones, no se notifica con el informe individual, sino conforme a la Ley General de Responsabilidades Administrativas.",
+      "ley": "Arts. 4 fr. XXXI, 39 y 40 fr. IV Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Denuncia de Hechos (ASF)",
+      "definicion": "La vía con la que la ASF hace del conocimiento de la Fiscalía Especializada en Materia de Combate a la Corrupción hechos que pueden ser delito. Puede presentarse en cualquier momento, sin esperar a que termine la auditoría. Es el único camino que lleva un hallazgo de fiscalización al terreno penal.",
+      "ley": "Arts. 4 fr. XV y 40 fr. VI Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Denuncia de Juicio Político",
+      "definicion": "Acción con la que la ASF informa a la Cámara de Diputados de actos u omisiones de los altos cargos del artículo 110 constitucional que perjudican los intereses públicos fundamentales, para que se tramite el procedimiento y se resuelva sobre su responsabilidad política. No es penal ni administrativa: su sanción es la destitución y la inhabilitación.",
+      "ley": "Art. 40 fr. VII Ley de Fiscalización y Rendición de Cuentas de la Federación · Art. 110 CPEUM",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Sugerencias a la Cámara de Diputados",
+      "definicion": "Propuestas de la ASF para que la Cámara cambie disposiciones legales y así mejore la gestión financiera y el desempeño de las entidades fiscalizadas. No obligan: la Cámara decide si las acepta. Se cuentan aparte de las acciones en la Matriz de Datos Básicos y se recogen en el Informe General Ejecutivo.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 5 · Art. 34 fr. V Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Cuantificación Monetaria de las Observaciones",
+      "definicion": "El monto de las operaciones que la ASF observó porque no cumplían la ley o la norma. Se divide en lo que ya se recuperó y lo que queda por aclarar. La propia ASF advierte que no equivale a dinero perdido ni a dinero que vaya a regresar: es lo que quedó en duda.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 6",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Recuperaciones Operadas",
+      "definicion": "Dinero que efectivamente se reintegró o resarció a la Hacienda Pública o al patrimonio de un ente público gracias a la intervención de la ASF, durante la auditoría. Es la única parte de la cuantificación monetaria que ya es dinero de vuelta; el resto sigue siendo monto por aclarar.",
+      "ley": "Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 519), num. 6.1",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Entidad Fiscalizada",
+      "definicion": "Todo aquel que la ASF puede auditar. No sólo los entes públicos: también fideicomisos, fondos y mandatos, públicos o privados, y en general cualquier persona física o moral, del sector privado o social, que haya recibido, manejado o ejercido recursos públicos federales o participaciones federales, incluidas las donatarias autorizadas. La regla es sencilla: quien toca dinero federal puede ser auditado.",
+      "ley": "Art. 4 fr. XI Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Comisión de Vigilancia de la Auditoría Superior de la Federación",
+      "definicion": "La comisión de la Cámara de Diputados por cuyo conducto la ASF entrega los informes individuales y el Informe General. Puede pedir al Auditor Superior que presente, amplíe o aclare esos informes en sesiones, tantas veces como haga falta, siempre que no se revele información reservada.",
+      "ley": "Arts. 4 fr. VI, 33 y 35 Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autonomía Técnica y de Gestión de la ASF",
+      "definicion": "Las dos garantías que protegen a la ASF de presiones. La técnica le permite decidir por sí misma qué audita, cómo, cuándo lo informa y cómo le da seguimiento. La de gestión le permite decidir su organización, sus resoluciones y la administración de su personal y sus recursos. Depende de la Cámara de Diputados, pero la Cámara no le dicta a quién auditar.",
+      "ley": "Art. 79 CPEUM · Art. 4 frs. III y IV Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Plazos del Seguimiento de las Acciones",
+      "definicion": "El reloj que corre después de cada entrega de la ASF, contado en días hábiles. La ASF tiene 10 para enviar el informe individual a la entidad; la entidad, 30 para responder y aportar pruebas; la ASF, 120 para pronunciarse sobre esas respuestas, y 90 más para mandar a investigación los pliegos de observaciones no solventados. Por eso un monto por aclarar de hoy puede tardar más de un año en resolverse.",
+      "ley": "Arts. 39 y 41 Ley de Fiscalización y Rendición de Cuentas de la Federación (reforma DOF 14-05-2026)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Informe de Avance de Gestión Financiera",
+      "definicion": "El informe de medio año sobre el avance físico y financiero de los programas federales, que los Poderes y los entes públicos federales rinden de forma consolidada, por medio del Ejecutivo, a la Cámara de Diputados. Viene como un apartado del segundo informe trimestral. Permite ver cómo va el gasto antes de que llegue la Cuenta Pública.",
+      "ley": "Art. 4 fr. XIX Ley de Fiscalización y Rendición de Cuentas de la Federación · Art. 107 Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)",
+      "definicion": "La fiscalía de la Fiscalía General de la República que investiga los delitos de corrupción: peculado, cohecho, uso ilícito de atribuciones, enriquecimiento ilícito. La Constitución obliga a que exista. Recibe las denuncias de hechos de la ASF y también las de cualquier persona; a diferencia de otras vías, la denuncia penal pide identificarse.",
+      "ley": "Art. 102 apartado A CPEUM · Arts. 4 fr. XV y 40 fr. VI Ley de Fiscalización y Rendición de Cuentas de la Federación",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Transparencia para el Pueblo (Autoridad Garante)",
+      "definicion": "El órgano desconcentrado de la Secretaría Anticorrupción y Buen Gobierno que, desde la nueva ley de 2025, es la autoridad garante federal del acceso a la información: la que resuelve los recursos de revisión cuando una dependencia niega o no entrega lo que se le pidió. Ocupó el lugar del extinto INAI. No es la única: el Poder Judicial, el Congreso y los órganos autónomos tienen su propia autoridad garante, y en los estados la función la tienen las contralorías u órganos equivalentes del Ejecutivo local.",
+      "ley": "Art. 3 frs. III, IV y V Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025)",
+      "categoria": "🔍 Fiscalización Superior"
+    }
+  ],
   "legislativo": {
     "federal": {
       "diputados": {
@@ -4909,7 +7128,7 @@ window.AUDIT_DB = {
         "eje": 2,
         "nombre": "Deuda Pública, Crédito y Mercado Financiero",
         "icono": "📈",
-        "descripcion": "Cuando los ingresos ordinarios no bastan para cubrir el presupuesto aprobado, el Estado recurre a empréstitos y a la emisión de títulos soberanos en el mercado de valores nacional e internacional, regulado por la Ley General de Deuda Pública.",
+        "descripcion": "Cuando los ingresos ordinarios no bastan para cubrir el presupuesto aprobado, el Estado recurre a empréstitos y a la emisión de títulos soberanos en el mercado de valores nacional e internacional, regulado por la Ley Federal de Deuda Pública.",
         "instrumentos": [
           {
             "nombre": "Empréstitos y Crédito Público",
@@ -5081,48 +7300,48 @@ window.AUDIT_DB = {
       "descripcion": "Regula la contratación, ejecución y finiquito de la obra pública federal. Establece el expediente único de obra y la bitácora como registro obligatorio de su ejecución: son los documentos que permiten contrastar lo contratado contra lo construido, y por tanto los primeros que conviene solicitar antes de señalar una obra. Fue reformada el 16 de abril de 2025, el mismo día en que se publicó la nueva Ley de Adquisiciones."
     },
     {
-        "num": 43,
-        "id": "ref-inegi-social-porfiriato",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Estadísticas Oficiales",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Estadísticas sociales del Porfiriato, 1877–1910. Reedición de la obra de la Dirección General de Estadística. Acervo histórico del INEGI (México).",
-        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf",
-        "descripcion": "Compilación oficial de los indicadores sociales del régimen porfirista levantados en los tres primeros censos nacionales (1895, 1900 y 1910). Es la fuente que permite contrastar las cifras hacendarias del Porfiriato —superávit, deuda, ferrocarriles— contra lo que ocurría con la población: alfabetización, mortalidad, escuelas y condiciones de vida. Sin esta contraparte, el balance fiscal del régimen se lee como un éxito sin costo."
-      },
+      "num": 43,
+      "id": "ref-inegi-social-porfiriato",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Estadísticas sociales del Porfiriato, 1877–1910. Reedición de la obra de la Dirección General de Estadística. Acervo histórico del INEGI (México).",
+      "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf",
+      "descripcion": "Compilación oficial de los indicadores sociales del régimen porfirista levantados en los tres primeros censos nacionales (1895, 1900 y 1910). Es la fuente que permite contrastar las cifras hacendarias del Porfiriato —superávit, deuda, ferrocarriles— contra lo que ocurría con la población: alfabetización, mortalidad, escuelas y condiciones de vida. Sin esta contraparte, el balance fiscal del régimen se lee como un éxito sin costo."
+    },
     {
-        "num": 44,
-        "id": "ref-conapo-esperanza-vida",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Estadísticas Oficiales",
-        "cita_apa": "Consejo Nacional de Población [CONAPO] e Instituto Nacional de Estadística y Geografía [INEGI]. Esperanza de vida al nacimiento por entidad federativa según sexo, serie anual 2010–2026. Tabulados interactivos de mortalidad (México).",
-        "url": "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648",
-        "descripcion": "Serie oficial de esperanza de vida al nacer que publica el INEGI con las proyecciones de CONAPO. Para 2026 estima 72.8 años en hombres y 79.2 en mujeres, frente a los 30 años que registraba el país en 1910. Es el indicador que mide, en años de vida, la distancia entre un Estado que gastaba 7.4% del PIB y uno que gasta cerca de 25%."
-      },
+      "num": 44,
+      "id": "ref-conapo-esperanza-vida",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Consejo Nacional de Población [CONAPO] e Instituto Nacional de Estadística y Geografía [INEGI]. Esperanza de vida al nacimiento por entidad federativa según sexo, serie anual 2010–2026. Tabulados interactivos de mortalidad (México).",
+      "url": "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648",
+      "descripcion": "Serie oficial de esperanza de vida al nacer que publica el INEGI con las proyecciones de CONAPO. Para 2026 estima 72.8 años en hombres y 79.2 en mujeres, frente a los 30 años que registraba el país en 1910. Es el indicador que mide, en años de vida, la distancia entre un Estado que gastaba 7.4% del PIB y uno que gasta cerca de 25%."
+    },
     {
-        "num": 45,
-        "id": "ref-inegi-censo-2020",
-        "categoria": "fuentes_oficiales",
-        "categoria_nombre": "Fuentes Estadísticas Oficiales",
-        "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. (2021). Censo de Población y Vivienda 2020: características educativas de la población. Resultados definitivos (México).",
-        "url": "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/",
-        "descripcion": "Censo que fija el analfabetismo nacional en 4.7% de la población de 15 años y más (4,456,431 personas), frente al 6.9% de 2010. Es el punto de comparación censo contra censo con el 82.1% que registró el primer censo nacional de 1895 y con el 73% estimado para 1910, y el dato que impide leer el Porfiriato como una etapa de progreso social."
-      },
+      "num": 45,
+      "id": "ref-inegi-censo-2020",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. (2021). Censo de Población y Vivienda 2020: características educativas de la población. Resultados definitivos (México).",
+      "url": "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/",
+      "descripcion": "Censo que fija el analfabetismo nacional en 4.7% de la población de 15 años y más (4,456,431 personas), frente al 6.9% de 2010. Es el punto de comparación censo contra censo con el 82.1% que registró el primer censo nacional de 1895 y con el 73% estimado para 1910, y el dato que impide leer el Porfiriato como una etapa de progreso social."
+    },
     {
-        "num": 46,
-        "id": "ref-salario-real-historico",
-        "categoria": "investigacion_civica",
-        "categoria_nombre": "Investigación Civica & Periodística",
-        "cita_apa": "Urzúa, C. M. (23 de diciembre de 2019). Salario justo. El Universal, sección Opinión. Serie de salario mínimo real reconstruida con datos de la Comisión Nacional de los Salarios Mínimos [CONASAMI] (México).",
-        "url": "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/",
-        "descripcion": "Reconstrucción del salario mínimo real mexicano en pesos constantes de 2018 desde 1877. Documenta que el jornal equivalía a $64.3 en 1877 y había caído a $60.1 en 1911: tras 34 años de crecimiento, ferrocarriles y superávit, el trabajador compraba menos que al principio. El máximo porfiriano fue $78.3 en 1899 y el mínimo $57.1 en 1910, el año anterior a la caída del régimen."
-      },
+      "num": 46,
+      "id": "ref-salario-real-historico",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación Civica & Periodística",
+      "cita_apa": "Urzúa, C. M. (23 de diciembre de 2019). Salario justo. El Universal, sección Opinión. Serie de salario mínimo real reconstruida con datos de la Comisión Nacional de los Salarios Mínimos [CONASAMI] (México).",
+      "url": "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/",
+      "descripcion": "Reconstrucción del salario mínimo real mexicano en pesos constantes de 2018 desde 1877. Documenta que el jornal equivalía a $64.3 en 1877 y había caído a $60.1 en 1911: tras 34 años de crecimiento, ferrocarriles y superávit, el trabajador compraba menos que al principio. El máximo porfiriano fue $78.3 en 1899 y el mínimo $57.1 en 1910, el año anterior a la caída del régimen."
+    },
     {
       "num": 42,
       "id": "ref-lgmde",
       "categoria": "leyes_federales",
       "categoria_nombre": "Leyes Hacendarias y Presupuestales",
       "cita_apa": "Ley General en Materia de Delitos Electorales [LGMDE]. Diario Oficial de la Federación, 23 de mayo de 2014 (México). Cámara de Diputados.",
-      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGMDE.pdf",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_General_en_Materia_de_Delitos_Electorales.pdf",
       "descripcion": "Tipifica como delito el condicionamiento de programas sociales, obras o apoyos gubernamentales a cambio del voto, así como el desvío de recursos públicos con fines electorales. Es la norma que convierte una práctica clientelar habitual en una conducta penalmente perseguible, y el fundamento por el que el uso partidista de un padrón de beneficiarios se denuncia ante la Fiscalía Especializada en Delitos Electorales y no sólo ante una contraloría."
     },
     {
@@ -5180,6 +7399,249 @@ window.AUDIT_DB = {
       "descripcion": "Postura del colegio de abogados de mayor antigüedad del país frente a la reforma. Sostiene que el artículo tercero transitorio del decreto parte de una premisa inconstitucional al disponer su aplicación a juicios ya en trámite, lo que vulneraría los derechos adquiridos y el artículo 14 constitucional; que la restricción de la suspensión provisional y definitiva reduce la posibilidad real de defensa, y que ninguna reforma debería contravenir el principio de progresividad de los derechos humanos. Se cita como fuente de opinión técnica calificada, no como dato oficial."
     },
     {
+      "num": 63,
+      "id": "ref-inegi-efipem",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM). Conjunto de datos municipal, ejercicio 2024, cifras definitivas. INEGI (México).",
+      "url": "https://www.inegi.org.mx/programas/finanzas/",
+      "descripcion": "Estadística anual que integra el origen y la aplicación de los recursos financieros de los gobiernos municipales, concepto por concepto y municipio por municipio, a partir de las cuentas públicas que cada ayuntamiento rinde. Es la única fuente nacional que permite saber cuánto ingresó realmente cada municipio del país: ni el Presupuesto de Egresos ni la Ley de Ingresos descienden a ese nivel. De ella proceden las cifras del padrón municipal de esta plataforma y los agregados de predial, derechos y participaciones municipales. Su cobertura de 2024 es de 2,380 de los 2,479 municipios del catálogo; las dieciséis demarcaciones territoriales de la Ciudad de México no forman parte de la estadística municipal porque no llevan hacienda propia."
+    },
+    {
+      "num": 64,
+      "id": "ref-cgpe2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto de Egresos de la Federación correspondientes al ejercicio fiscal de 2027. Gaceta Parlamentaria, año XXIX, número 7121, Anexo C, 8 de septiembre de 2026. Cámara de Diputados, LXVI Legislatura.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+      "descripcion": "Documento que la Ley Federal de Presupuesto exige en su artículo 16: marco macroeconómico, proyecciones de finanzas públicas a cinco años, sensibilidades ante cambios en las variables, amortiguadores fiscales y pasivos contingentes. Es la fuente de las cifras de esta plataforma sobre 2027 y sobre el cierre estimado de 2026."
+    },
+    {
+      "num": 65,
+      "id": "ref-ppef2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Proyecto de Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2027 [PPEF 2027]. Gaceta Parlamentaria, año XXIX, número 7121, Anexo B, 8 de septiembre de 2026 (México). Poder Ejecutivo Federal.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-B.pdf",
+      "descripcion": "Decreto propuesto por el Ejecutivo. Su artículo 2º fija el gasto neto total en $10,636,488,100,000 y el déficit presupuestario en $1,358,558,800,000. Todavía no es ley: la Cámara de Diputados debe aprobarlo, con o sin modificaciones, a más tardar el 15 de noviembre."
+    },
+    {
+      "num": 66,
+      "id": "ref-ilif2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Iniciativa de Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 [ILIF 2027]. Gaceta Parlamentaria, año XXIX, número 7121, Anexo A, 8 de septiembre de 2026 (México). Poder Ejecutivo Federal.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf",
+      "descripcion": "Su artículo 1º enumera los ingresos estimados para 2027 por un total de $10,636,488.1 millones de pesos, cifra que coincide con el gasto neto total del proyecto de Presupuesto porque incluye los ingresos derivados de financiamiento. También fija los techos de endeudamiento del Gobierno Federal, Pemex y CFE."
+    },
+    {
+      "num": 67,
+      "id": "ref-shcp-c71",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística y Documentos Oficiales",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026, 8 de septiembre). Comunicado No. 71: La Secretaría de Hacienda y Crédito Público entrega el Paquete Económico 2027 al H. Congreso de la Unión. Gobierno de México.",
+      "url": "https://www.gob.mx/shcp/prensa/comunicado-no-71-la-secretaria-de-hacienda-y-credito-publico-entrega-el-paquete-economico-2027-al-h-congreso-de-la-union",
+      "descripcion": "Presentación oficial del paquete. De aquí proceden el monto del Plan de Inversión en Infraestructura para el Desarrollo con Bienestar 2026-2030 —5.7 billones de pesos de inversión pública y mixta— y los incrementos reales anunciados por sector: educación 10.7%, salud 11.3%, seguridad 11.5% y ciencia 13%."
+    },
+    {
+      "num": 68,
+      "id": "ref-lisr2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Ejecutivo Federal. (2026). Iniciativa de Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley del Impuesto sobre la Renta y se expiden disposiciones de vigencia transitoria. Gaceta Parlamentaria, año XXIX, número 7121, Anexo E, 8 de septiembre de 2026. Cámara de Diputados, LXVI Legislatura.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-E.pdf",
+      "descripcion": "Texto legal de la reforma al impuesto sobre la renta: el tope del 96.67% a las deducciones autorizadas, el límite a las pérdidas fiscales de ejercicios anteriores, la baja del 30% al 20% en la deducción de intereses netos y la derogación del Capítulo VI, donde vivía el Régimen Opcional para Grupos de Sociedades. Su exposición de motivos publica la evidencia de evasión en la que el Ejecutivo funda la reforma."
+    },
+    {
+      "num": 69,
+      "id": "ref-lfd2027",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Ejecutivo Federal. (2026). Iniciativa de Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Federal de Derechos. Gaceta Parlamentaria, año XXIX, número 7121, Anexo D, 8 de septiembre de 2026. Cámara de Diputados, LXVI Legislatura.",
+      "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-D.pdf",
+      "descripcion": "Texto legal de la actualización de los derechos que el Estado cobra por prestar un servicio o por permitir el uso de un bien público: migración, espacio aéreo, vías férreas, trámites sanitarios, medio ambiente, puertos, zona federal marítimo terrestre, museos y zonas arqueológicas, armas, extracción de materiales y la inspección que la Comisión Nacional Bancaria y de Valores cobra a las emisoras de valores."
+    },
+    {
+      "num": 70,
+      "id": "ref-gaceta7121",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Cámara de Diputados, LXVI Legislatura. (2026). Gaceta Parlamentaria, año XXIX, número 7121, 8 de septiembre de 2026. Índice del día, con los catorce anexos del Paquete Económico 2027.",
+      "url": "https://gaceta.diputados.gob.mx/Gaceta/66/2026/sep/20260908.html",
+      "descripcion": "El índice del día en que el Ejecutivo entregó el paquete. Enumera los catorce anexos y permite comprobar cuáles se publicaron como texto y cuáles como imagen escaneada."
+    },
+    {
+      "num": 71,
+      "id": "ref-asf-cp2024-diputados",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. Informe individual de la auditor\u00eda 2024-0031: C\u00e1mara de Diputados. Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, segunda entrega.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf",
+      "descripcion": "Gasto 2024 de la C\u00e1mara de Diputados: $8,982.9 millones aprobados y $9,371.7 millones pagados (p. 4), con el desglose de su cap\u00edtulo de personal (p. 5). La revisi\u00f3n reporta 26 resultados sin irregularidades en la muestra (p. 43)."
+    },
+    {
+      "num": 72,
+      "id": "ref-asf-cp2024-senado",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. Informe individual de la auditor\u00eda 2024-0032: C\u00e1mara de Senadores. Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, segunda entrega.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0032_a.pdf",
+      "descripcion": "Gasto 2024 del Senado: $4,955.2 millones aprobados, $5,045.7 millones devengados y $4,978.8 millones pagados al 31 de diciembre (pp. 4 y 5), por cap\u00edtulo de gasto."
+    },
+    {
+      "num": 73,
+      "id": "ref-inegi-cnple2025",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estad\u00edstica Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda. (2026). Censo Nacional de Poderes Legislativos Estatales 2025: presentaci\u00f3n de resultados. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf",
+      "descripcion": "Gasto ejercido en 2024 por cada uno de los 32 congresos locales, en millones de pesos corrientes (p. 11)."
+    },
+    {
+      "num": 74,
+      "id": "ref-scjn-ejercicio2026",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Naci\u00f3n. (2026). Estado del ejercicio del presupuesto al 31 de agosto de 2026. SCJN.",
+      "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto-asignado/documento/2026-09/EEP-2026-08.pdf",
+      "descripcion": "Las 127 partidas de la Corte con su presupuesto original, modificado, comprometido, ejercido y disponible. Al corte, de $5,230.1 millones modificados se hab\u00edan ejercido $3,253.8 millones."
+    },
+    {
+      "num": 75,
+      "id": "ref-oaj-trimestre2026",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "\u00d3rgano de Administraci\u00f3n Judicial. (2026). Presupuesto ejercido: cierre del segundo trimestre de 2026. OAJ.",
+      "url": "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet001.htm",
+      "descripcion": "Presupuesto asignado y pagado del \u00d3rgano de Administraci\u00f3n Judicial entre el 1 de abril y el 30 de junio de 2026, por cap\u00edtulo, por unidad ejecutora y por partida."
+    },
+    {
+      "num": 76,
+      "id": "ref-lgpgir",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General para la Prevenci\u00f3n y Gesti\u00f3n Integral de los Residuos. Diario Oficial de la Federaci\u00f3n, 8 de octubre de 2003, \u00faltima reforma 19 de enero de 2026 (M\u00e9xico). C\u00e1mara de Diputados del H. Congreso de la Uni\u00f3n.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPGIR.pdf",
+      "descripcion": "Reparte la gesti\u00f3n de los residuos entre Federaci\u00f3n, estados y municipios. Su art\u00edculo 10 deja al municipio la recolecci\u00f3n, el traslado, el tratamiento y la disposici\u00f3n final de la basura, y le permite prestar el servicio por s\u00ed o por gestores y otorgar concesiones."
+    },
+    {
+      "num": 77,
+      "id": "ref-lgcc",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Cambio Clim\u00e1tico. Diario Oficial de la Federaci\u00f3n, 6 de junio de 2012, \u00faltima reforma 1 de abril de 2024 (M\u00e9xico). C\u00e1mara de Diputados del H. Congreso de la Uni\u00f3n.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCC.pdf",
+      "descripcion": "Establece las disposiciones para enfrentar los efectos adversos del cambio clim\u00e1tico y reglamenta la protecci\u00f3n al ambiente en esa materia."
+    },
+    {
+      "num": 78,
+      "id": "ref-dbgir2026",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estad\u00edstica Oficial del Estado Mexicano",
+      "cita_apa": "Secretar\u00eda de Medio Ambiente y Recursos Naturales e Instituto Nacional de Ecolog\u00eda y Cambio Clim\u00e1tico. (2026). Diagn\u00f3stico B\u00e1sico para la Gesti\u00f3n Integral de los Residuos. SEMARNAT.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf",
+      "descripcion": "Diagn\u00f3stico nacional de residuos publicado en abril de 2026: generaci\u00f3n de 139,902 toneladas diarias de residuos s\u00f3lidos urbanos (1.076 kg por habitante), recolecci\u00f3n, disposici\u00f3n final e infraestructura."
+    },
+    {
+      "num": 79,
+      "id": "ref-cngmd2023",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estad\u00edstica Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda. (2024). Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales de la Ciudad de M\u00e9xico 2023: presentaci\u00f3n de resultados generales. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/programas/cngmd/2023/doc/cngmd2023_resultados_geogr_amb.pdf",
+      "descripcion": "Censo de los gobiernos municipales. Su m\u00f3dulo de residuos s\u00f3lidos urbanos reporta la basura recolectada cada d\u00eda (108,146 toneladas en 2022), el sistema de recolecci\u00f3n y la disposici\u00f3n final."
+    },
+    {
+      "num": 80,
+      "id": "ref-asf-mdb2024",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024: primera, segunda y tercera entregas (consolidado). ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf",
+      "descripcion": "Resumen num\u00e9rico oficial de la revisi\u00f3n de la Cuenta P\u00fablica 2024: 2,264 auditor\u00edas, 6,274 acciones, montos recuperados y montos por aclarar, por grupo funcional, sector y entidad federativa. Corte a febrero de 2026."
+    },
+    {
+      "num": 81,
+      "id": "ref-asf-ir2025a",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
+      "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
+      "num": 82,
+      "id": "ref-asf-mdb2025a",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Matriz de Datos Básicos, Fiscalización Superior de la Cuenta Pública 2025: primera entrega. ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/Documentos/Matriz/IR2025_Entrega_a.pdf",
+      "descripcion": "Resumen numérico de la primera entrega de la revisión de la Cuenta Pública 2025, corte junio de 2026: las 33 auditorías a la distribución de las participaciones federales. Es la fuente de las cifras 2025 de la sección Informes de la Cuenta Pública."
+    },
+    {
+      "num": 83,
+      "id": "ref-asfdatos",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Auditoría Superior de la Federación. (s. f.). Sistema Público de Consulta de Auditorías [ASF Datos]. ASF.",
+      "url": "https://www.asfdatos.gob.mx/",
+      "descripcion": "Buscador oficial de las auditorías de la ASF por año de Cuenta Pública, entidad fiscalizada y tipo de acción. Sirve para llegar del dato agregado de la matriz al informe individual de una auditoría concreta."
+    },
+    {
+      "num": 84,
+      "id": "ref-shcp-cuentapublica",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (s. f.). Cuenta Pública [portal oficial, ejercicios 1996 a 2025]. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx",
+      "descripcion": "La Cuenta Pública misma: el informe anual del gasto que Hacienda entrega a la Cámara de Diputados a más tardar el 30 de abril del año siguiente (art. 74 fr. VI constitucional). Es el documento que después revisa la ASF."
+    },
+    {
+      "num": 85,
+      "id": "ref-asf-denuncias",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Auditoría Superior de la Federación. (s. f.). Denuncias ciudadanas [Sistema de Denuncias Ciudadanas]. ASF.",
+      "url": "https://www.asf.gob.mx/Section/262_Denuncias_Ciudadanas",
+      "descripcion": "Canal oficial para denunciar ante la ASF el desvío o uso irregular de recursos federales, incluidos los que la Federación transfiere a estados y municipios. Admite denuncia anónima. Es el canal 1 del Portal Digital."
+    },
+    {
+      "num": 86,
+      "id": "ref-sabg-alertadores",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Secretaría Anticorrupción y Buen Gobierno. (s. f.). Plataforma Ciudadanos Alertadores Internos y Externos de la Corrupción. Gobierno de México.",
+      "url": "https://alertadores.buengobierno.gob.mx/",
+      "descripcion": "Plataforma para alertar actos graves de corrupción de personas servidoras públicas federales, con medidas de protección para quien alerta y una clave de seguimiento que no revela su identidad. Es el canal 2 del Portal Digital."
+    },
+    {
+      "num": 87,
+      "id": "ref-fgr-femcc",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Fiscalía General de la República. (s. f.). Fiscalía Especializada en Materia de Combate a la Corrupción. FGR.",
+      "url": "https://fgr.org.mx/es/FGR/FEMCC",
+      "descripcion": "Fiscalía que investiga los delitos de corrupción, prevista en el artículo 102 apartado A de la Constitución. Recibe las denuncias de hechos de la ASF y las de cualquier persona. Es el canal 3 del Portal Digital."
+    },
+    {
+      "num": 88,
+      "id": "ref-sat-denuncias",
+      "categoria": "tributario",
+      "categoria_nombre": "Marco Tributario y Fiscal",
+      "cita_apa": "Servicio de Administración Tributaria. (s. f.). Denuncias [trámite en línea]. SAT.",
+      "url": "https://www.sat.gob.mx/aplicacion/operacion/50409/denuncias-sat",
+      "descripcion": "Buzón del SAT para denunciar, entre otras conductas, a las empresas que facturan operaciones simuladas. Admite denuncia anónima. Es el canal 4 del Portal Digital."
+    },
+    {
+      "num": 89,
+      "id": "ref-transparencia-presupuestaria",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (s. f.). Transparencia Presupuestaria: Observatorio del Gasto [portal de datos abiertos]. SHCP.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/",
+      "descripcion": "Portal de Hacienda con las bases de datos abiertas del presupuesto: el aprobado, su avance trimestral, los proyectos de presupuesto y los programas. De aquí salen varias de las descargas de la plataforma."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -5203,17 +7665,17 @@ window.AUDIT_DB = {
       "categoria": "leyes_federales",
       "categoria_nombre": "Leyes Hacendarias y Presupuestales",
       "cita_apa": "Ley de Presupuesto, Contabilidad y Gasto Público Federal [LPCGPF]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Texto histórico y principios compilados por el Centro de Documentación de la Cámara de Diputados.",
-      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_historicos/LPCGPF.pdf",
-      "descripcion": "Ordenamiento rector precursor que sentó las bases de la contabilidad gubernamental, la estructura programática y el catálogo de cuentas de la hacienda pública en México."
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/abro/LPCGPF_abro.pdf",
+      "descripcion": "Ordenamiento rector precursor que sentó las bases de la contabilidad gubernamental, la estructura programática y el catálogo de cuentas de la hacienda pública en México. Ordenamiento abrogado: el enlace apunta a la versión histórica que conserva la Cámara de Diputados entre las leyes abrogadas."
     },
     {
       "num": 4,
-      "id": "ref-lgdp",
+      "id": "ref-lfdp",
       "categoria": "leyes_federales",
       "categoria_nombre": "Leyes Hacendarias y Presupuestales",
-      "cita_apa": "Ley General de Deuda Pública [LGDP]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
-      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/136.pdf",
-      "descripcion": "Rige la contratación de empréstitos y la emisión de valores de deuda soberana nacional e internacional; faculta a la SHCP a normar las emisiones y celebrar con Banco de México los convenios de colocación de CETES y Bonos."
+      "cita_apa": "Ley Federal de Deuda Pública [LFDP]. Diario Oficial de la Federación, 31 de diciembre de 1976 (México). Publicada originalmente como Ley General de Deuda Pública; la denominación de la ley fue reformada por decreto publicado en el Diario Oficial el 27 de abril de 2016. Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_de_Deuda_Publica.pdf",
+      "descripcion": "Rige la contratación de empréstitos y la emisión de valores de deuda soberana nacional e internacional; faculta a la SHCP a normar las emisiones y celebrar con Banco de México los convenios de colocación de CETES y Bonos. Nació en 1976 como <em>Ley General de Deuda Pública</em>; el decreto publicado en el Diario Oficial el 27 de abril de 2016 reformó su denominación y desde entonces se llama <em>Ley Federal de Deuda Pública</em>. El nombre viejo sigue circulando en documentos y notas, pero no es el vigente."
     },
     {
       "num": 5,
@@ -5221,8 +7683,8 @@ window.AUDIT_DB = {
       "categoria": "coordinacion_fiscal",
       "categoria_nombre": "Federalismo y Coordinación Fiscal",
       "cita_apa": "Ley de Coordinación Fiscal [LCF]. Diario Oficial de la Federación, 27 de diciembre de 1978 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
-      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/31_300118.pdf",
-      "descripcion": "Establece el Sistema Nacional de Coordinación Fiscal, regula el Fondo General de Participaciones (Ramo 28 - libre disposición) y los ocho fondos de Aportaciones Federales (Ramo 33 - etiquetados: FONE, FASSA, FAIS, FORTAMUN)."
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
+      "descripcion": "Ley que reparte entre los tres pisos de gobierno lo que la Federación recauda. Fija el Fondo General de Participaciones en el 20 % de la recaudación federal participable (art. 2º), crea los ocho fondos del Ramo 33 (arts. 25 a 51) y garantiza al municipio cuando menos el 20 % de las participaciones que reciba su estado (art. 6º). Para 2026, el Presupuesto de Egresos asigna $1,456,045.9 mdp al Ramo 28 y $1,041,892.9 mdp al Ramo 33."
     },
     {
       "num": 6,
@@ -5238,9 +7700,9 @@ window.AUDIT_DB = {
       "id": "ref-lfrcf",
       "categoria": "fiscalizacion_auditoria",
       "categoria_nombre": "Fiscalización Superior y Auditoría",
-      "cita_apa": "Ley de Fiscalización y Rendición de Cuentas de la Federación [LFRCF]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Última reforma publicada el 20 de mayo de 2021. Cámara de Diputados.",
+      "cita_apa": "Ley de Fiscalización y Rendición de Cuentas de la Federación [LFRCF]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Última reforma publicada el 14 de mayo de 2026. Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
-      "descripcion": "Otorga facultades a la Auditoría Superior de la Federación (ASF) para auditar en tiempo real y posterior la Cuenta Pública de los tres Poderes de la Unión, los Ramos 28 y 33 en las 32 entidades, y emitir Pliegos de Observaciones."
+      "descripcion": "Regula la revisión de la Cuenta Pública por la Auditoría Superior de la Federación: las tres entregas de informes individuales (art. 35), el Informe General del 20 de febrero (art. 33), los plazos para responder (arts. 39 y 41) y las acciones que puede promover, como los pliegos de observaciones (art. 40)."
     },
     {
       "num": 8,
@@ -5284,7 +7746,7 @@ window.AUDIT_DB = {
       "categoria": "contabilidad_gubernamental",
       "categoria_nombre": "Contabilidad y Armonización",
       "cita_apa": "Ley General de Contabilidad Gubernamental [LGCG]. Diario Oficial de la Federación, 31 de diciembre de 2008 (México). Última reforma publicada el 30 de enero de 2018. Consejo Nacional de Armonización Contable (CONAC).",
-      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG_300118.pdf",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf",
       "descripcion": "Obliga a los tres órdenes de gobierno (Federación, Estados y Municipios) a emitir información patrimonial y presupuestaria en tiempo real bajo criterios y clasificadores contables homogéneos."
     },
     {
@@ -5293,7 +7755,7 @@ window.AUDIT_DB = {
       "categoria": "adquisiciones_compras",
       "categoria_nombre": "Compras Públicas y Contrataciones",
       "cita_apa": "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público [LAASSP]. Diario Oficial de la Federación, 16 de abril de 2025 (México). Cámara de Diputados. Abroga la ley del 4 de enero de 2000. En la misma fecha se publicaron reformas a la Ley de Obras Públicas y Servicios Relacionados con las Mismas.",
-      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/14_200521.pdf",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAASSP.pdf",
       "descripcion": "Norma el procedimiento de licitaciones públicas, compraventa y adquisición de insumos del Estado, y acota las adjudicaciones directas y las invitaciones restringidas. El marco vigente desde el 16 de abril de 2025 sustituyó por completo a la ley del año 2000 e introdujo un Sistema Nacional de Contrataciones Públicas con una plataforma digital única en la que las propuestas y los contratos se firman electrónicamente, pensada para dejar rastro de cada modificación contractual."
     },
     {
@@ -5301,9 +7763,9 @@ window.AUDIT_DB = {
       "id": "ref-asf-cp",
       "categoria": "fuentes_oficiales",
       "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-      "cita_apa": "Auditoría Superior de la Federación. (2025). Informes Individuales y General del Resultado de la Fiscalización Superior de la Cuenta Pública 2024. Cámara de Diputados.",
-      "url": "https://www.asf.gob.mx/",
-      "descripcion": "Repositorio oficial con los 2,100 pliegos de auditoría practicados al gasto federalizado, dependencias centralizadas y empresas productivas del Estado."
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Informe del Resultado de la Fiscalización Superior de la Cuenta Pública 2024: tercera entrega e informes individuales. ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/index.html",
+      "descripcion": "Portal oficial con los informes individuales de las 2,264 auditorías a la Cuenta Pública 2024, el Informe General Ejecutivo, los informes simplificados y la matriz de datos básicos."
     },
     {
       "num": 15,
@@ -5364,18 +7826,18 @@ window.AUDIT_DB = {
       "id": "ref-pef-ramo03",
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
-      "cita_apa": "Cámara de Diputados. (2024–2026). Presupuesto de Egresos de la Federación: Tomo VII, Ramo 03 'Poder Judicial de la Federación' (SCJN, CJF, TEPJF). Secretaría de Hacienda y Crédito Público (SHCP).",
-      "url": "https://www.transparenciapresupuestaria.gob.mx/",
-      "descripcion": "Asignación presupuestaria histórica consolidada del Ramo 03 ($78,327 millones de pesos aprobados), de los cuales la Suprema Corte de Justicia de la Nación ejerce directamente cerca de $5,900 millones anuales. Documenta que el 80.2% del presupuesto del Poder Judicial se concentra en el Capítulo 1000 (Servicios Personales), con un costo consolidado anual de $376.2 millones de pesos para las 11 ponencias (~$34.2 mdp anuales por ministro ponente), proyectado a reducirse a ~$216 mdp anuales con el nuevo Pleno austero de 9 ministros."
+      "cita_apa": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico. (2026). Presupuesto de Egresos de la Federaci\u00f3n 2026. Ramo 03, Poder Judicial: an\u00e1lisis administrativo econ\u00f3mico. SHCP.",
+      "url": "https://www.pef.hacienda.gob.mx/work/models/P3f26115/PEF2026/y6k1r4r1/docs/03/r03_aae.pdf",
+      "descripcion": "Presupuesto aprobado 2026 del Ramo 03 por unidad responsable: $70,005.6 millones de pesos. La Suprema Corte tiene $5,208.7 millones; el \u00d3rgano de Administraci\u00f3n Judicial, $59,190.8 millones; el Tribunal Electoral, $3,749.5 millones, y el Tribunal de Disciplina Judicial, $1,856.6 millones. Las cifras cuadran con el Anexo 1 del Decreto de Presupuesto (DOF 21-11-2025, p. 32)."
     },
     {
       "num": 22,
       "id": "ref-manual-remun-pjf",
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
-      "cita_apa": "Suprema Corte de Justicia de la Nación, & Consejo de la Judicatura Federal. (2024–2025). Manual que regula las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación. Diario Oficial de la Federación (México).",
-      "url": "https://www.dof.gob.mx/",
-      "descripcion": "Tabulador oficial institucional que desglosa sueldos base, compensaciones garantizadas y el paquete de compensaciones extraordinarias complementario, estimado en más de $1.7 millones de pesos anuales por ministro por encima del salario tabular. Incluye el Seguro de Separación Individualizado (SSI de hasta 10% del sueldo con aportación idéntica del erario), Seguro de Gastos Médicos Mayores (SGMM con pólizas privadas de $30 a $50 mdp), aguinaldo y asignación de vehículos blindados de alta gama."
+      "cita_apa": "Poder Judicial de la Federaci\u00f3n. (2026, 27 de febrero). Manual que regula las remuneraciones de las personas servidoras p\u00fablicas del Poder Judicial de la Federaci\u00f3n para el ejercicio fiscal 2026. Diario Oficial de la Federaci\u00f3n.",
+      "url": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF",
+      "descripcion": "Tabulador 2026 del Poder Judicial de la Federaci\u00f3n. Una ministra o un ministro de la Suprema Corte percibe como m\u00e1ximo $134,310 de sueldo neto mensual (p. 8) y $290,273 netos al a\u00f1o de aguinaldo y prima vacacional (p. 9)."
     },
     {
       "num": 23,
@@ -5445,7 +7907,7 @@ window.AUDIT_DB = {
       "id": "ref-lgtaip",
       "categoria": "fuentes_oficiales",
       "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-      "cita_apa": "Ley General de Transparencia y Acceso a la Información Pública [LGTAIP]. Diario Oficial de la Federación, 4 de mayo de 2015 (México). Artículos 70 a 83.",
+      "cita_apa": "Ley General de Transparencia y Acceso a la Información Pública [LGTAIP]. Diario Oficial de la Federación, 20 de marzo de 2025 (México). Nueva ley que abrogó la de 2015. Artículos 65 a 82 y 144 a 148. Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf",
       "descripcion": "Establece las obligaciones de transparencia que todos los sujetos obligados deben publicar de oficio, incluidos presupuesto asignado y ejercido, remuneraciones, contrataciones y resultados de auditorías, así como el mandato de difundirlas en formatos de datos abiertos que permitan su procesamiento."
     },
@@ -5466,6 +7928,150 @@ window.AUDIT_DB = {
       "cita_apa": "Instituto Nacional de Estadística y Geografía [INEGI]. Sistema de Cuentas Nacionales de México e Índice Nacional de Precios al Consumidor. Banco de Información Económica (BIE).",
       "url": "https://www.inegi.org.mx/temas/pib/",
       "descripcion": "Fuente oficial del Producto Interno Bruto y del Índice Nacional de Precios al Consumidor, así como del valor anual de la Unidad de Medida y Actualización. Es el insumo obligado para expresar el gasto y la deuda como porcentaje del PIB y para deflactar cifras de distintos años a pesos constantes."
+    },
+    {
+      "num": 47,
+      "id": "ref-inegi-ceem",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Cuentas Económicas y Ecológicas de México (CEEM). Sistema de Cuentas Nacionales de México. INEGI.",
+      "url": "https://www.inegi.org.mx/temas/ee/",
+      "descripcion": "Programa estadístico con el que el INEGI mide, en pesos, cuánto capital natural se agota y cuánto se degrada el entorno para producir el PIB. Es la respuesta contable al mandato de desarrollo sustentable de los artículos 25 y 27 constitucionales, y la fuente del Producto Interno Neto Ecológico (PINE) y de los Costos Totales por Agotamiento y Degradación Ambiental (CTADA)."
+    },
+    {
+      "num": 48,
+      "id": "ref-ceem-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf",
+      "descripcion": "Edición 2024 de las cuentas verdes, publicada el 1 de diciembre de 2025. Reporta un Producto Interno Neto Ecológico de 25.7 billones de pesos, equivalente a 76.6% del PIB, y costos totales por agotamiento y degradación ambiental de $1,382,214 millones de pesos, es decir 4.1% del PIB. Es la fuente de todas las cifras ambientales que esta plataforma presenta."
+    },
+    {
+      "num": 49,
+      "id": "ref-inegi-pib-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Producto Interno Bruto por Entidad Federativa (PIBE) 2024. Comunicado de prensa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf",
+      "descripcion": "Fuente del PIB nacional a precios de mercado de 2024: $33,506,847 millones de pesos corrientes. Es el denominador contra el que se calculan todos los porcentajes ambientales, de deuda y de gasto que esta plataforma expresa como proporción del PIB."
+    },
+    {
+      "num": 50,
+      "id": "ref-ley-planeacion",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley de Planeación. Diario Oficial de la Federación, 5 de enero de 1983, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPlan.pdf",
+      "descripcion": "Ley reglamentaria del artículo 26 constitucional. Define el Sistema Nacional de Planeación Democrática, el procedimiento de consulta popular, el plazo para publicar el Plan Nacional de Desarrollo y la regla que separa lo obligatorio para la Administración Pública Federal de lo meramente indicativo para los particulares."
+    },
+    {
+      "num": 51,
+      "id": "ref-lgeepa",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General del Equilibrio Ecológico y la Protección al Ambiente. Diario Oficial de la Federación, 28 de enero de 1988, con reformas posteriores (México). Cámara de Diputados del H. Congreso de la Unión.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf",
+      "descripcion": "Norma que aterriza el mandato de sustentabilidad del artículo 27 constitucional. Regula la evaluación del impacto ambiental, las áreas naturales protegidas y los instrumentos económicos de política ambiental. Es el fundamento de la Manifestación de Impacto Ambiental (MIA), que la autoridad puede negar cuando una obra compromete la capacidad de carga de una región."
+    },
+    {
+      "num": 52,
+      "id": "ref-lisr",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Impuesto Sobre la Renta. Diario Oficial de la Federación, 11 de diciembre de 2013, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
+      "descripcion": "Ley que regula el impuesto directo sobre el ingreso de personas físicas y morales. Es la mayor fuente tributaria del Estado mexicano: $3,070,149.1 mdp estimados para 2026, el 52.6 % de todos los impuestos. Su base es la utilidad fiscal, no el ingreso bruto, de modo que deducciones y estímulos inciden directamente en lo recaudado."
+    },
+    {
+      "num": 53,
+      "id": "ref-liva",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Impuesto al Valor Agregado. Diario Oficial de la Federación, 29 de diciembre de 1978, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/liva.htm",
+      "descripcion": "Ley del impuesto indirecto al consumo, con tasa general del 16 %, tasa del 0 % para alimentos y medicinas y actos exentos. Funciona por traslado y acreditamiento: cada eslabón entera el impuesto sobre el valor que añade y el consumidor final lo soporta íntegro. Estimado en $1,589,069.0 mdp para 2026."
+    },
+    {
+      "num": 54,
+      "id": "ref-lieps",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Impuesto Especial sobre Producción y Servicios. Diario Oficial de la Federación, 30 de diciembre de 1980, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm",
+      "descripcion": "Ley del impuesto con fin extrafiscal sobre consumos específicos: combustibles, bebidas alcohólicas, tabacos, bebidas saborizadas, alimentos de alta densidad calórica, plaguicidas, juegos con apuestas y telecomunicaciones. Estimado en $761,501.9 mdp para 2026, de los cuales $473,279.1 corresponden a combustibles automotrices."
+    },
+    {
+      "num": 55,
+      "id": "ref-ligie",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de los Impuestos Generales de Importación y de Exportación. Diario Oficial de la Federación, 7 de junio de 2022, última reforma vigente (México). Cámara de Diputados. En relación con la Ley Aduanera y el artículo 131 constitucional.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/ligie_2022.htm",
+      "descripcion": "Tarifa arancelaria de México, organizada por fracciones del Sistema Armonizado. Es el único gravamen cuyas tasas puede modificar el Ejecutivo por decreto, conforme al artículo 131 constitucional, con aprobación posterior del Congreso. En 2026 se estiman $254,756.8 mdp, todos por importación: la exportación se presupuesta en cero."
+    },
+    {
+      "num": 56,
+      "id": "ref-lfisan",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley Federal del Impuesto sobre Automóviles Nuevos. Diario Oficial de la Federación, 30 de diciembre de 1996, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfisan.htm",
+      "descripcion": "Impuesto federal sobre la enajenación de automóviles nuevos y su importación definitiva. Es de administración estatal: las entidades lo recaudan y conservan su rendimiento por convenio de colaboración en el marco de la Ley de Coordinación Fiscal. Estimado en $20,161.8 mdp para 2026."
+    },
+    {
+      "num": 57,
+      "id": "ref-lih",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de Ingresos sobre Hidrocarburos, artículos 55 a 57. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lih.htm",
+      "descripcion": "Régimen fiscal de la actividad petrolera. Sus artículos 55 a 57 establecen el impuesto por la actividad de exploración y extracción de hidrocarburos, que se calcula por kilómetro cuadrado de área contractual o de asignación y cuya cuota se eleva pasados sesenta meses sin producción. Estimado en $7,070.4 mdp para 2026."
+    },
+    {
+      "num": 58,
+      "id": "ref-lss",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Seguro Social. Diario Oficial de la Federación, 21 de diciembre de 1995, última reforma vigente (México). Cámara de Diputados. En relación con la Ley del ISSSTE (DOF 31 de marzo de 2007).",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss.htm",
+      "descripcion": "Régimen de las cuotas obrero-patronales que financian las prestaciones del IMSS. Junto con las del ISSSTE constituyen las aportaciones de seguridad social del artículo 2º fracción II del Código Fiscal: contribuciones con destino específico, que no integran la Recaudación Federal Participable y por tanto no se reparten a estados y municipios. Estimadas en $641,782.1 mdp para 2026."
+    },
+    {
+      "num": 59,
+      "id": "ref-lcmopfih",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de Contribución de Mejoras por Obras Públicas Federales de Infraestructura Hidráulica. Diario Oficial de la Federación, 26 de diciembre de 1990, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lcmopfih.htm",
+      "descripcion": "Única ley vigente de contribución de mejoras en el ámbito federal. Grava a quienes se benefician de manera directa de obras públicas de infraestructura hidráulica, conforme al principio de beneficio del artículo 2º fracción III del Código Fiscal. Con $39.6 mdp estimados para 2026 es la partida más pequeña de toda la Ley de Ingresos."
+    },
+    {
+      "num": 60,
+      "id": "ref-lfd",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley Federal de Derechos. Diario Oficial de la Federación, 31 de diciembre de 1981, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
+      "descripcion": "Catálogo de los derechos federales: pagos por servicios que presta el Estado en funciones de derecho público y por el uso o aprovechamiento de bienes del dominio de la Nación —agua, espectro radioeléctrico, zona federal, puertos—. La jurisprudencia exige que la cuota guarde relación razonable con el costo del servicio; si lo excede, el derecho se convierte en un impuesto encubierto. Estimados en $157,081.7 mdp para 2026."
+    },
+    {
+      "num": 61,
+      "id": "ref-lepe",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley de la Empresa Pública del Estado, Petróleos Mexicanos, y Ley de la Empresa Pública del Estado, Comisión Federal de Electricidad. Diario Oficial de la Federación, 18 de marzo de 2025 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lepepm.htm",
+      "descripcion": "Leyes que rigen a Pemex y a la CFE tras la reforma energética de 2024-2025. El cambio no es de nombre: dejan de ser «empresas productivas del Estado», figura creada en 2013 con lógica de competencia, para volverse «empresas públicas del Estado», con el Estado como rector del sector. Sus ingresos propios suman $1,507,154.4 mdp estimados para 2026."
+    },
+    {
+      "num": 62,
+      "id": "ref-lfmped",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm",
+      "descripcion": "Fideicomiso público en el Banco de México, previsto en el párrafo sexto del artículo 28 constitucional, que recibe la renta petrolera del Estado y la transfiere al presupuesto hasta un tope de 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Para 2026 se presupuestan $232,630.4 mdp de transferencias ordinarias y cero extraordinarias."
     }
   ],
   "preguntas_casillas": [
@@ -5491,7 +8097,7 @@ window.AUDIT_DB = {
       "items": [
         {
           "q": "¿Qué son los CETES y qué relación directa tienen con la Tesorería y Banxico?",
-          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda pública emitidos por la SHCP al amparo de la <em>Ley General de Deuda Pública</em>. El <strong>Banco de México</strong> actúa por mandato de ley como su agente financiero colocador mediante subastas primarias semanales. El gobierno los vende a descuento para captar dinero inmediato de los ahorradores y financiar su gasto corriente; al vencimiento, el Estado devuelve el valor nominal íntegro ($10 pesos), pagando la diferencia como rendimiento."
+          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda pública emitidos por la SHCP al amparo de la <em>Ley Federal de Deuda Pública</em>. El <strong>Banco de México</strong> actúa por mandato de ley como su agente financiero colocador mediante subastas primarias semanales. El gobierno los vende a descuento para captar dinero inmediato de los ahorradores y financiar su gasto corriente; al vencimiento, el Estado devuelve el valor nominal íntegro ($10 pesos), pagando la diferencia como rendimiento."
         },
         {
           "q": "¿Cuál es la diferencia entre CETES, Bonos M, Udibonos y Bondes F?",
@@ -6110,7 +8716,7 @@ window.AUDIT_DB = {
       {
         "id": "amlo",
         "nombre": "Andrés Manuel López Obrador",
-        "periodo": "1 DIC 2018 — 30 NOV 2024",
+        "periodo": "1 DIC 2018 — 30 SEP 2024",
         "partido": "MORENA",
         "partido_clase": "morena",
         "color": "#8b1a1a",
@@ -7028,12 +9634,12 @@ window.AUDIT_DB = {
           "ref_fuente": "ref-pef2026"
         },
         "ferrocarriles_km": {
-          "nombre": "Infraestructura Ferroviaria (km acumulados)",
+          "nombre": "Tendido Ferroviario Atribuible al Periodo (km)",
           "icono": "🛤️",
           "unidad": "km de vías",
           "diaz_val": 19280,
           "diaz_str": "19,280 km construidos",
-          "descripcion": "Kilómetros de tendido férreo construidos, rescatados o impulsados para pasajeros y carga.",
+          "descripcion": "Kilómetros de vía férrea construidos, rescatados o impulsados durante el periodo, no el acervo del país. La cifra negativa de 1994–2000 corresponde a la extinción de Ferrocarriles Nacionales y al retiro del servicio de pasajeros, no a vía levantada; y los 19,280 km de Don Porfirio Díaz son el resultado de 31 años, no de un sexenio.",
           "sentido_positivo": true,
           "fuente_dato": "Kilometraje de vía férrea del INEGI y de la Agencia Reguladora del Transporte Ferroviario; la cifra de 1910 procede de Ferrocarriles Nacionales de México.",
           "ref_fuente": "ref-inegi-social-porfiriato"
@@ -9684,6 +12290,42 @@ window.AUDIT_DB = {
   },
   "preceptos_legales": [
     {
+      "id": "cpeum_art_25",
+      "icono": "🏛️",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "precepto": "Artículo 25 Constitucional",
+      "denominacion": "Rectoría Económica del Estado & Economía Mixta",
+      "precepto_resumen": "Atribuye al Estado la rectoría del desarrollo nacional y ordena que éste sea integral y sustentable. Reconoce la concurrencia de tres sectores —público, social y privado— y manda una más justa distribución del ingreso y la riqueza.",
+      "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales... Al desarrollo económico nacional concurrirán, con responsabilidad social, el sector público, el sector social y el sector privado, sin menoscabo de otras formas de actividad económica que contribuyan al desarrollo de la Nación.",
+      "analisis_civico": "Es el artículo que responde a la pregunta anterior a todas las demás: ¿con qué facultad interviene el Estado en la economía? Aquí están las dos palabras que esta plataforma audita renglón por renglón. «Sustentable» significa que el crecimiento que agota el capital natural no cumple el mandato, y por eso importan las cuentas ecológicas del INEGI. «Más justa distribución» significa que crecer concentrando no basta, y por eso importan el coeficiente de Gini y la medición de pobreza del CONEVAL. Un gobierno puede reportar crecimiento y estar incumpliendo este artículo por ambos flancos a la vez.",
+      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica y Circuito del Dinero), Pestaña 2 (Acción Financiera y Cuentas Ecológicas) y Pestaña 5 (Radiografía Sexenal).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    },
+    {
+      "id": "cpeum_art_27",
+      "icono": "🌎",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "precepto": "Artículo 27 Constitucional",
+      "denominacion": "Propiedad Originaria de la Nación & Modalidades al Dominio Privado",
+      "precepto_resumen": "Declara que las tierras y aguas del territorio nacional corresponden originariamente a la Nación y reserva a ésta el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, cuidando la conservación de los recursos.",
+      "texto_oficial": "La propiedad de las tierras y aguas comprendidas dentro de los límites del territorio nacional, corresponde originariamente a la Nación, la cual ha tenido y tiene el derecho de transmitir el dominio de ellas a los particulares, constituyendo la propiedad privada... La Nación tendrá en todo tiempo el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, así como el de regular, en beneficio social, el aprovechamiento de los elementos naturales susceptibles de apropiación, con objeto de hacer una distribución equitativa de la riqueza pública, cuidar de su conservación, lograr el desarrollo equilibrado del país y el mejoramiento de las condiciones de vida de la población rural y urbana.",
+      "analisis_civico": "Aquí está el fundamento jurídico de que una concesión de agua pueda negarse y de que una Manifestación de Impacto Ambiental pueda rechazarse. La propiedad privada no es absoluta frente al interés público, y la conservación de los recursos no es una aspiración retórica sino un fin expreso del texto constitucional. Cuando el INEGI documenta que el agotamiento de agua subterránea tuvo un costo medible, este artículo convierte ese dato estadístico en una obligación exigible a la autoridad.",
+      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica) y Pestaña 2 (Cuentas Económicas y Ecológicas).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    },
+    {
+      "id": "cpeum_art_28",
+      "icono": "⚖️",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "precepto": "Artículo 28 Constitucional",
+      "denominacion": "Prohibición de Monopolios, Áreas Estratégicas & Autonomía del Banco Central",
+      "precepto_resumen": "Prohíbe los monopolios, las prácticas monopólicas y las condonaciones de impuestos; reserva al Estado ciertas áreas estratégicas sin que ello constituya monopolio; y ordena que el banco central sea autónomo con el objetivo prioritario de procurar la estabilidad del poder adquisitivo de la moneda.",
+      "texto_oficial": "En los Estados Unidos Mexicanos quedan prohibidos los monopolios, las prácticas monopólicas, los estancos, las condonaciones de impuestos y las exenciones de impuestos en los términos y condiciones que fijan las leyes... No constituirán monopolios las funciones que el Estado ejerza de manera exclusiva en las áreas estratégicas a que se refiere este precepto... El Estado tendrá un banco central que será autónomo en el ejercicio de sus funciones y en su administración. Su objetivo prioritario será procurar la estabilidad del poder adquisitivo de la moneda nacional, fortaleciendo con ello la rectoría del desarrollo nacional que corresponde al Estado. Ninguna autoridad podrá ordenar al banco conceder financiamiento.",
+      "analisis_civico": "Tres mandatos que suelen leerse por separado y que este artículo une a propósito. La prohibición de condonar impuestos explica por qué una condonación masiva es un asunto constitucional y no sólo de política fiscal. Las áreas estratégicas explican por qué ciertas empresas del Estado no se juzgan con la vara de la rentabilidad privada. Y la última línea —ninguna autoridad podrá ordenar al banco conceder financiamiento— es el candado que impide pagar el déficit imprimiendo dinero: la razón por la que la deuda soberana se coloca en subasta y no se decreta.",
+      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica), Pestaña 2 (Maquinaria Financiera y Banxico) y Pestaña 7 (Marco Legal).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+    },
+    {
       "id": "cpeum_art_26",
       "icono": "📜",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
@@ -9986,6 +12628,1396 @@ window.AUDIT_DB = {
     }
   ]
 ,
+  "constitucion_economica": {
+    "titulo": "La Constitución Económica",
+    "entrada": "Cuatro artículos responden, entre los cuatro, a la pregunta que antecede a toda auditoría: ¿con qué facultad interviene el Estado en la economía? El 25 dice quién manda; el 26, hacia dónde; el 27, con qué recursos; el 28, bajo qué reglas. Ningún peso del erario se explica sin alguno de los cuatro.",
+    "ref_fuente": "ref-cpeum",
+    "pilares": [
+      {
+        "id": "art25",
+        "articulo": "Artículo 25",
+        "icono": "🏛️",
+        "color": "#c9a227",
+        "titulo": "Rectoría del Desarrollo Nacional",
+        "pregunta": "¿Quién manda en la economía?",
+        "respuesta": "El Estado, y no como dueño de todo sino como rector: fija el rumbo y coordina a tres sectores que concurren al desarrollo.",
+        "facultad": "Planear, conducir, coordinar y orientar la actividad económica nacional.",
+        "organo": "Poder Ejecutivo Federal, a través de la Secretaría de Hacienda y Crédito Público y las dependencias sectoriales.",
+        "ley_secundaria": "Ley de Planeación · Ley Federal de Presupuesto y Responsabilidad Hacendaria",
+        "precepto_id": "cpeum_art_25",
+        "claves": [
+          {
+            "k": "Integral y sustentable",
+            "v": "El crecimiento que agota el capital natural no cumple el mandato. Es el enganche constitucional de las cuentas ecológicas."
+          },
+          {
+            "k": "Más justa distribución",
+            "v": "Crecer concentrando tampoco cumple. Es el enganche del coeficiente de Gini y de la medición de pobreza."
+          },
+          {
+            "k": "Tres sectores",
+            "v": "Público, social y privado. El sector social —ejidos, cooperativas, comunidades— tiene rango constitucional, no es residual."
+          }
+        ],
+        "punto_ciego": "El discurso público suele reducir este artículo a «el Estado rector» y omitir los dos adjetivos que lo condicionan. Un informe de gobierno puede presumir crecimiento y estar incumpliendo el artículo 25 por sustentabilidad y por distribución al mismo tiempo, sin que la cifra de PIB lo delate."
+      },
+      {
+        "id": "art26",
+        "articulo": "Artículo 26",
+        "icono": "🧭",
+        "color": "#4a90d9",
+        "titulo": "Sistema Nacional de Planeación Democrática",
+        "pregunta": "¿Hacia dónde va la economía?",
+        "respuesta": "Hacia donde diga el Plan Nacional de Desarrollo, que se elabora con consulta popular y dura un sexenio.",
+        "facultad": "Organizar la planeación democrática y expedir el Plan Nacional de Desarrollo.",
+        "organo": "Poder Ejecutivo Federal, con aprobación y seguimiento de la Cámara de Diputados.",
+        "ley_secundaria": "Ley de Planeación",
+        "precepto_id": "cpeum_art_26",
+        "claves": [
+          {
+            "k": "Obligatorio hacia adentro",
+            "v": "El Plan vincula a toda la Administración Pública Federal: ningún programa puede contradecirlo."
+          },
+          {
+            "k": "Indicativo hacia afuera",
+            "v": "Para el particular es una guía, no una orden. Esta distinción separa la planeación democrática de la economía centralmente planificada."
+          },
+          {
+            "k": "Consulta popular",
+            "v": "La ley exige recoger las aspiraciones de la sociedad. Es el adjetivo «democrática» del sistema."
+          }
+        ],
+        "punto_ciego": "Se discute mucho el contenido del Plan y casi nunca su cumplimiento. El eslabón que nadie audita es el que va del objetivo del Plan al Programa presupuestario y de ahí a la partida del Presupuesto de Egresos: es justo ahí donde una meta se evapora sin dejar rastro contable."
+      },
+      {
+        "id": "art27",
+        "articulo": "Artículo 27",
+        "icono": "🌎",
+        "color": "#3fa373",
+        "titulo": "Propiedad Originaria y Recursos Naturales",
+        "pregunta": "¿Con qué recursos cuenta la Nación?",
+        "respuesta": "Las tierras y aguas del territorio le pertenecen originariamente, y puede imponer modalidades a la propiedad privada cuando lo exija el interés público.",
+        "facultad": "Regular el aprovechamiento de los elementos naturales, expropiar por causa de utilidad pública y cuidar su conservación.",
+        "organo": "Ejecutivo Federal, a través de SEMARNAT, CONAGUA y la Secretaría de Energía.",
+        "ley_secundaria": "Ley General del Equilibrio Ecológico y la Protección al Ambiente · Ley de Aguas Nacionales",
+        "precepto_id": "cpeum_art_27",
+        "claves": [
+          {
+            "k": "Propiedad originaria",
+            "v": "La propiedad privada de la tierra deriva de una transmisión que hizo la Nación, no la antecede."
+          },
+          {
+            "k": "Modalidades por interés público",
+            "v": "Fundamento de que una concesión de agua se niegue o una Manifestación de Impacto Ambiental se rechace."
+          },
+          {
+            "k": "Cuidar su conservación",
+            "v": "Es un fin expreso del texto, no una aspiración. Aquí se ancla jurídicamente el dato del INEGI sobre agotamiento."
+          }
+        ],
+        "punto_ciego": "La conversación pública sobre el 27 casi siempre gira en torno al petróleo y al litio. El renglón que el INEGI señala como el más costoso del agotamiento después de los hidrocarburos —los bosques— y el que compromete la viabilidad de regiones enteras —el agua subterránea— casi no aparecen en el debate."
+      },
+      {
+        "id": "art28",
+        "articulo": "Artículo 28",
+        "icono": "⚖️",
+        "color": "#c0504d",
+        "titulo": "Competencia, Áreas Estratégicas y Banco Central",
+        "pregunta": "¿Bajo qué reglas se juega?",
+        "respuesta": "Sin monopolios ni condonaciones de impuestos, con ciertas áreas reservadas al Estado y con un banco central que nadie puede obligar a prestar.",
+        "facultad": "Prohibir prácticas monopólicas, reservar áreas estratégicas y garantizar la autonomía del banco central.",
+        "organo": "COFECE e IFT como órganos autónomos · Banco de México · SHCP.",
+        "ley_secundaria": "Ley Federal de Competencia Económica · Ley del Banco de México",
+        "precepto_id": "cpeum_art_28",
+        "claves": [
+          {
+            "k": "Condonaciones prohibidas",
+            "v": "Perdonar impuestos de manera general no es sólo mala política fiscal: el texto constitucional lo prohíbe expresamente."
+          },
+          {
+            "k": "Áreas estratégicas",
+            "v": "No son monopolios. Por eso ciertas empresas del Estado no se juzgan con la vara de la rentabilidad privada."
+          },
+          {
+            "k": "Ninguna autoridad podrá ordenar al banco conceder financiamiento",
+            "v": "El candado que impide pagar el déficit imprimiendo dinero. Es la razón de que la deuda se coloque en subasta."
+          }
+        ],
+        "punto_ciego": "La autonomía de Banxico se discute como si fuera una política revocable por decisión administrativa. Es texto constitucional, y la prohibición de ordenarle financiamiento es la última línea del párrafo que casi nunca se cita completo."
+      }
+    ]
+  },
+  "paquete_2027": {
+    "titulo": "El Paquete Económico 2027",
+    "entregado": "8 de septiembre de 2026",
+    "gaceta": "Gaceta Parlamentaria, año XXIX, número 7121, martes 8 de septiembre de 2026",
+    "entrada": "El 8 de septiembre de 2026 el Ejecutivo entregó a la Cámara de Diputados el paquete del año entrante: la iniciativa de Ley de Ingresos, el proyecto de Presupuesto de Egresos y los Criterios Generales de Política Económica. No es un anuncio: es un acto con fecha constitucional, contenido tasado por ley y un plazo de respuesta. Lo que sigue lee esos tres documentos renglón por renglón —no la nota de prensa que los resumió— y señala dónde la cifra publicada y la cifra comentada dejan de coincidir.",
+    "itinerario": [
+      {
+        "fecha": "1 de abril",
+        "hito": "Pre-criterios",
+        "quien": "Ejecutivo → Congreso",
+        "ley": "LFPRH, art. 42, fracc. I",
+        "texto": "Un documento con los objetivos de la Ley de Ingresos y del Presupuesto del año siguiente, los escenarios de crecimiento, inflación, tasa de interés y precio del petróleo, el monto total del gasto y su déficit, y la enumeración de los programas prioritarios con sus montos.",
+        "ciego": "Es el único momento del año en que el Congreso ve los supuestos antes de que vengan amarrados a una cifra. Casi nunca se discute en público."
+      },
+      {
+        "fecha": "8 de septiembre",
+        "hito": "Entrega del paquete",
+        "quien": "Ejecutivo → Cámara de Diputados",
+        "ley": "CPEUM, art. 74, fracc. IV, párrafo segundo · LFPRH, art. 42, fracc. III",
+        "texto": "«El Ejecutivo Federal hará llegar a la Cámara la Iniciativa de Ley de Ingresos y el Proyecto de Presupuesto de Egresos de la Federación a más tardar el día 8 del mes de septiembre». La ley reglamentaria añade qué debe venir dentro: los criterios generales de política económica, la estimación del precio de la mezcla y, en su caso, las reformas fiscales.",
+        "ciego": "En el año en que entra un nuevo Ejecutivo la fecha se recorre al 15 de noviembre. El plazo largo es la excepción, no la regla."
+      },
+      {
+        "fecha": "20 de octubre",
+        "hito": "Ley de Ingresos · Diputados",
+        "quien": "Cámara de Diputados",
+        "ley": "LFPRH, art. 42, fracc. IV",
+        "texto": "«La Ley de Ingresos será aprobada por la Cámara de Diputados a más tardar el 20 de octubre».",
+        "ciego": "Primero los ingresos y después el gasto, y no al revés: el artículo 74 manda aprobar el Presupuesto «una vez aprobadas las contribuciones que, a su juicio, deben decretarse para cubrirlo»."
+      },
+      {
+        "fecha": "31 de octubre",
+        "hito": "Ley de Ingresos · Senado",
+        "quien": "Cámara de Senadores",
+        "ley": "LFPRH, art. 42, fracc. IV",
+        "texto": "«…y por la Cámara de Senadores, a más tardar el 31 de octubre».",
+        "ciego": "Es el único tramo del paquete en que el Senado vota. En el Presupuesto de Egresos no interviene: ahí la Cámara de Diputados decide sola."
+      },
+      {
+        "fecha": "15 de noviembre",
+        "hito": "Presupuesto de Egresos",
+        "quien": "Cámara de Diputados, en exclusiva",
+        "ley": "CPEUM, art. 74, fracc. IV, párrafo tercero · LFPRH, art. 42, fracc. V",
+        "texto": "«La Cámara de Diputados deberá aprobar el Presupuesto de Egresos de la Federación a más tardar el día 15 del mes de noviembre». Y en el mismo artículo: «No podrá haber partidas secretas en el Presupuesto de Egresos de la Federación».",
+        "ciego": "La facultad es exclusiva y también es modificatoria: la Cámara puede examinar, discutir y modificar el proyecto. Que en los hechos lo modifique poco es una decisión política, no una limitación jurídica."
+      },
+      {
+        "fecha": "20 días naturales después",
+        "hito": "Publicación en el Diario Oficial",
+        "quien": "Ejecutivo Federal",
+        "ley": "LFPRH, art. 42, fracc. VI",
+        "texto": "«La Ley de Ingresos y el Presupuesto de Egresos de la Federación deberán publicarse en el Diario Oficial de la Federación a más tardar 20 días naturales después de aprobados». Otros veinte días después deben llegar a la Cámara todos los tomos y anexos con sus modificaciones.",
+        "ciego": "Entre la votación y la llegada de los tomos analíticos pueden pasar cuarenta días. En ese lapso existe un presupuesto aprobado cuyo detalle todavía no es público."
+      }
+    ],
+    "marco": [
+      {
+        "v": "Crecimiento real del PIB",
+        "u": "rango %",
+        "a26": "1.8 a 2.8",
+        "e26": "1.0 a 2.0",
+        "p27": "1.5 a 2.5",
+        "n": "Rango, no cifra puntual. La estimación de ingresos usa el punto medio: 2.0%."
+      },
+      {
+        "v": "PIB nominal",
+        "u": "miles de millones de pesos",
+        "a26": "38,715.9",
+        "e26": "37,160.7",
+        "p27": "39,419.4",
+        "n": "Es el denominador de todo porcentaje «del PIB» que aparece en el paquete."
+      },
+      {
+        "v": "Inflación, diciembre contra diciembre",
+        "u": "%",
+        "a26": "3.0",
+        "e26": "3.5",
+        "p27": "3.0",
+        "n": "Coincide con el objetivo puntual del Banco de México."
+      },
+      {
+        "v": "Tasa de interés, Cetes 28 días",
+        "u": "% fin de periodo",
+        "a26": "6.0",
+        "e26": "6.5",
+        "p27": "6.0",
+        "n": "El promedio anual proyectado es 6.1%."
+      },
+      {
+        "v": "Tipo de cambio",
+        "u": "pesos por dólar, fin de periodo",
+        "a26": "18.9",
+        "e26": "17.8",
+        "p27": "18.0",
+        "n": "Los Criterios advierten que no es un pronóstico, sino «un supuesto para la elaboración de las proyecciones»."
+      },
+      {
+        "v": "Mezcla mexicana de exportación",
+        "u": "dólares por barril",
+        "a26": "54.9",
+        "e26": "78.4",
+        "p27": "61.8",
+        "n": "Se determina con la fórmula del artículo 31 de la Ley Federal de Presupuesto y el 15 de su Reglamento."
+      },
+      {
+        "v": "Plataforma de producción de líquidos",
+        "u": "miles de barriles diarios",
+        "a26": "1,794.0",
+        "e26": "1,800.0",
+        "p27": "1,800.1",
+        "n": "Incluye Pemex, condensados, socios y privados. La meta de 1.8 millones se repite sin cambio hasta 2032."
+      },
+      {
+        "v": "Plataforma de exportación",
+        "u": "miles de barriles diarios",
+        "a26": "521.0",
+        "e26": "522.4",
+        "p27": "426.6",
+        "n": "Cae 18% respecto del cierre estimado de 2026. Más crudo se queda en el país y menos se vende afuera."
+      },
+      {
+        "v": "Cuenta corriente",
+        "u": "% del PIB",
+        "a26": "-0.6",
+        "e26": "-0.5",
+        "p27": "-0.6",
+        "n": "Déficit moderado; se explica sobre todo por la balanza comercial."
+      },
+      {
+        "v": "Crecimiento del PIB de Estados Unidos",
+        "u": "% real",
+        "a26": "1.9",
+        "e26": "2.3",
+        "p27": "2.0",
+        "n": "Variable de apoyo. De ella depende buena parte de la exportación mexicana."
+      }
+    ],
+    "finanzas": [
+      {
+        "id": "f-rfsp",
+        "n": "RFSP · balance público amplio",
+        "m": -1555655.8,
+        "pib": -3.9,
+        "m26": -1587349.9,
+        "pib26": -4.1,
+        "g": "Balance",
+        "d": "La medida más amplia del déficit: todo lo que el sector público necesita financiar, dentro y fuera del presupuesto."
+      },
+      {
+        "id": "f-balance",
+        "n": "Balance presupuestario",
+        "m": -1358558.8,
+        "pib": -3.4,
+        "m26": -1393770.6,
+        "pib26": -3.6,
+        "g": "Balance",
+        "d": "El déficit estricto del presupuesto. Es la cifra que el decreto del Presupuesto fija en su artículo 2º."
+      },
+      {
+        "id": "f-extra",
+        "n": "Requerimientos fuera del presupuesto",
+        "m": -197097.0,
+        "pib": -0.5,
+        "m26": -193579.3,
+        "pib26": -0.5,
+        "g": "Balance",
+        "d": "Pidiregas de CFE, IPAB, FONADIN, banca de desarrollo y adecuaciones a los registros presupuestarios."
+      },
+      {
+        "id": "f-primario",
+        "n": "Superávit primario",
+        "m": 216891.3,
+        "pib": 0.6,
+        "m26": 178802.6,
+        "pib26": 0.5,
+        "g": "Balance",
+        "d": "El balance antes de pagar intereses. En positivo: sin la deuda heredada, el presupuesto cerraría con sobrante."
+      },
+      {
+        "id": "f-ing",
+        "n": "Ingresos presupuestarios",
+        "m": 9156528.9,
+        "pib": 23.2,
+        "m26": 8721057.3,
+        "pib26": 22.5,
+        "g": "Ingreso",
+        "d": "Todo lo que entra sin endeudarse. Crece 3.9% real contra el cierre estimado de 2026."
+      },
+      {
+        "id": "f-trib",
+        "n": "Ingresos tributarios",
+        "m": 6263886.8,
+        "pib": 15.9,
+        "m26": 5838571.0,
+        "pib26": 15.1,
+        "g": "Ingreso",
+        "d": "Máximo histórico como proporción del PIB, según los propios Criterios."
+      },
+      {
+        "id": "f-petro",
+        "n": "Ingresos petroleros",
+        "m": 984539.7,
+        "pib": 2.5,
+        "m26": 1204277.7,
+        "pib26": 3.1,
+        "g": "Ingreso",
+        "d": "Caen 14.4% real. Bajan de un billón de pesos por primera vez en la serie reciente."
+      },
+      {
+        "id": "f-gasto",
+        "n": "Gasto neto pagado",
+        "m": 10515087.7,
+        "pib": 26.7,
+        "m26": 10114827.9,
+        "pib26": 26.1,
+        "g": "Gasto",
+        "d": "Lo que efectivamente sale de caja. Crece 0.7% real contra lo aprobado para 2026."
+      },
+      {
+        "id": "f-prog",
+        "n": "Gasto programable devengado",
+        "m": 7432529.7,
+        "pib": 18.9,
+        "m26": 7094708.8,
+        "pib26": 18.3,
+        "g": "Gasto",
+        "d": "Lo que compra bienes y servicios. Crece 1.5% real."
+      },
+      {
+        "id": "f-noprog",
+        "n": "Gasto no programable",
+        "m": 3203958.4,
+        "pib": 8.1,
+        "m26": 3098974.9,
+        "pib26": 8.0,
+        "g": "Gasto",
+        "d": "Intereses, participaciones y adeudos del año anterior. No se decide: se debe."
+      },
+      {
+        "id": "f-costofin",
+        "n": "Costo financiero de la deuda",
+        "m": 1574950.2,
+        "pib": 4.0,
+        "m26": 1572073.3,
+        "pib26": 4.1,
+        "g": "Gasto",
+        "d": "Cuesta 4.0% del PIB. El déficit amplio es 3.9%. Los intereses solos pesan más que todo el faltante."
+      },
+      {
+        "id": "f-defer",
+        "n": "Diferimiento de pagos",
+        "m": -121400.4,
+        "pib": -0.3,
+        "m26": -78855.7,
+        "pib26": -0.2,
+        "g": "Gasto",
+        "d": "La diferencia entre lo devengado y lo pagado. Crece 49.1% real: es gasto autorizado que se empuja al año siguiente."
+      },
+      {
+        "id": "f-shrfsp",
+        "n": "Deuda pública (SHRFSP)",
+        "m": 21665995.8,
+        "pib": 55.0,
+        "m26": 20259590.7,
+        "pib26": 52.3,
+        "g": "Deuda",
+        "d": "Sube 1.0 punto del PIB respecto del cierre estimado de 2026, aun con el déficit a la baja."
+      }
+    ],
+    "funcional": {
+      "nota": "Clasificación funcional del gasto programable. Publicada en los Criterios Generales de Política Económica 2027, cuadro de la página 39, en miles de millones de pesos.",
+      "filas": [
+        {
+          "n": "Desarrollo social",
+          "pef26": 4929.4,
+          "ppef27": 5384.9,
+          "var": 5.8,
+          "d": "Educación, salud, protección social, vivienda y medio ambiente. Tres de cada cuatro pesos del gasto de la Administración Pública Federal."
+        },
+        {
+          "n": "Desarrollo económico",
+          "pef26": 1695.7,
+          "ppef27": 1518.7,
+          "var": -13.2,
+          "d": "Energía, comunicaciones, transporte, agropecuario y ciencia. Cae 13.2% real, y la caída tiene un solo nombre: Pemex."
+        },
+        {
+          "n": "Gobierno",
+          "pef26": 320.7,
+          "ppef27": 357.1,
+          "var": 7.9,
+          "d": "Seguridad nacional, justicia, orden público y servicios generales del Ejecutivo. Es la finalidad que más crece en términos relativos."
+        },
+        {
+          "n": "Poderes, órganos autónomos, INEGI y Tribunal Federal de Justicia Administrativa",
+          "pef26": 142.3,
+          "ppef27": 165.8,
+          "var": 12.9,
+          "d": "Fuera de la Administración Pública Federal. La Cámara aprueba su techo pero no reparte su interior: la autonomía presupuestaria es condición de su independencia."
+        },
+        {
+          "n": "Fondos de estabilización",
+          "pef26": 6.6,
+          "ppef27": 6.0,
+          "var": -12.2,
+          "d": "La aportación anual a los fondos que deben amortiguar una caída de ingresos. Seis mil millones de pesos: menos de una milésima del presupuesto."
+        }
+      ]
+    },
+    "sensibilidades": [
+      {
+        "id": "s-crec",
+        "n": "Crecimiento económico",
+        "icono": "📈",
+        "base": 2.0,
+        "min": 0.0,
+        "max": 4.0,
+        "paso": 0.1,
+        "unidad": "% real anual",
+        "dec": 1,
+        "tramo": 0.5,
+        "coef": 30200.0,
+        "destino": "ingresos",
+        "cita": "Efecto de un incremento de medio punto real de crecimiento económico sobre los ingresos tributarios: 30.2 mmp.",
+        "porque": "Más actividad económica significa más IVA y más ISR sin cambiar una sola tasa."
+      },
+      {
+        "id": "s-precio",
+        "n": "Precio de la mezcla mexicana",
+        "icono": "🛢️",
+        "base": 61.8,
+        "min": 25.0,
+        "max": 110.0,
+        "paso": 1.0,
+        "unidad": "dólares por barril",
+        "dec": 1,
+        "tramo": 1.0,
+        "coef": 9600.0,
+        "destino": "ingresos",
+        "cita": "Efecto de un dólar adicional en promedio anual del precio del petróleo sobre los ingresos petroleros: 9.6 mmp.",
+        "porque": "Sube lo que se cobra por exportar crudo más de lo que sube el costo de importar hidrocarburos."
+      },
+      {
+        "id": "s-plataforma",
+        "n": "Plataforma de producción",
+        "icono": "⛽",
+        "base": 1800.0,
+        "min": 1400.0,
+        "max": 2200.0,
+        "paso": 25.0,
+        "unidad": "miles de barriles diarios",
+        "dec": 0,
+        "tramo": 50.0,
+        "coef": 21800.0,
+        "destino": "ingresos",
+        "cita": "Efecto de un aumento de 50 mil barriles diarios de extracción de crudo sobre los ingresos petroleros: 21.8 mmp.",
+        "porque": "Más barriles extraídos, más ventas. La meta de 1.8 millones se repite sin cambio de 2026 a 2032."
+      },
+      {
+        "id": "s-tipocambio",
+        "n": "Tipo de cambio promedio",
+        "icono": "💱",
+        "base": 17.9,
+        "min": 14.0,
+        "max": 26.0,
+        "paso": 0.1,
+        "unidad": "pesos por dólar",
+        "dec": 2,
+        "tramo": 0.2,
+        "coef": 8100.0,
+        "coef2": 2100.0,
+        "destino": "ambos",
+        "cita": "Efecto de una apreciación de 20 centavos en el tipo de cambio promedio: −6.0 mmp netos. Ingresos petroleros −8.1; costo financiero +2.1.",
+        "porque": "Un peso más fuerte vale menos crudo exportado, pero también abarata en pesos la deuda contratada en dólares. Gana el primer efecto."
+      },
+      {
+        "id": "s-tasa",
+        "n": "Tasa de interés",
+        "icono": "🏦",
+        "base": 6.1,
+        "min": 2.0,
+        "max": 14.0,
+        "paso": 0.25,
+        "unidad": "% Cetes 28 días, promedio",
+        "dec": 2,
+        "tramo": 1.0,
+        "coef": 37900.0,
+        "destino": "costofin",
+        "cita": "Efecto de un aumento de 100 puntos base en la tasa de interés sobre el costo financiero: 37.9 mmp.",
+        "porque": "Encarece la deuda a tasa variable y el refinanciamiento de la que va venciendo. Es la palanca más cara del cuadro."
+      },
+      {
+        "id": "s-inflacion",
+        "n": "Inflación",
+        "icono": "🌡️",
+        "base": 3.2,
+        "min": 0.0,
+        "max": 12.0,
+        "paso": 0.1,
+        "unidad": "% promedio anual",
+        "dec": 1,
+        "tramo": 1.0,
+        "coef": 1300.0,
+        "destino": "costofin",
+        "cita": "Efecto de un aumento de 100 puntos base en la tasa de inflación sobre el costo financiero: 1.3 mmp.",
+        "porque": "Encarece los Udibonos y la deuda indexada a la unidad de inversión."
+      }
+    ],
+    "simBase": {
+      "ingresos": 9156528.9,
+      "costofin": 1574950.2,
+      "balance": -1358558.8,
+      "extrapres": -197097.0,
+      "rfsp": -1555655.8,
+      "pib": 39419400.0,
+      "gastoNeto": 10636488.1,
+      "tolerancia": 212729.762,
+      "meta": -3.9,
+      "metaBalance": -3.4
+    },
+    "amortiguadores": [
+      {
+        "n": "Fondo de Estabilización de los Ingresos Presupuestarios (FEIP)",
+        "m": 136600.0,
+        "u": "mdp",
+        "icono": "🛟",
+        "d": "El colchón de la Federación ante una caída de ingresos. Saldo al cierre de junio de 2026.",
+         "meta": 517972.9,
+         "metaPct": 26.4,
+         "metaTexto": "La ley define cuánto debería tener. El artículo 19, fracción IV de la Ley Federal de Presupuesto fija la «reserva adecuada» en 0.08 por la suma de los impuestos totales y las transferencias del Fondo Mexicano del Petróleo estimados en la Ley de Ingresos. Con las cifras de 2027 —$6,263,886.8 mdp de impuestos y $210,774.0 de transferencias— eso son $517,972.9 mdp. El fondo tiene el 26.4%."
+      },
+      {
+        "n": "Fondo de Estabilización de los Ingresos de las Entidades Federativas (FEIEF)",
+        "m": 13300.0,
+        "u": "mdp",
+        "icono": "🗺️",
+        "d": "El colchón equivalente para las 32 entidades, cuando caen las participaciones.",
+         "meta": 258986.4,
+         "metaPct": 5.1,
+         "metaTexto": "Su reserva adecuada, con el factor de 0.04 que le asigna el mismo artículo 19, sería de $258,986.4 mdp. El fondo tiene el 5.1%. Es el colchón de las 32 entidades cuando caen las participaciones."
+      },
+      {
+        "n": "Fondo Mexicano del Petróleo",
+        "m": 22100.0,
+        "u": "mdp",
+        "icono": "🛢️",
+        "d": "El fideicomiso que recibe la renta petrolera del Estado."
+      },
+      {
+        "n": "Reservas internacionales del Banco de México",
+        "m": 258700.0,
+        "u": "mdd",
+        "icono": "🏛️",
+        "d": "Al 28 de agosto de 2026. No son del Gobierno Federal: son del banco central, y su uso no es presupuestario."
+      },
+      {
+        "n": "Línea de Crédito Flexible con el FMI",
+        "m": 24000.0,
+        "u": "mdd",
+        "icono": "🌐",
+        "d": "Crédito contingente por 17.8 mil millones de Derechos Especiales de Giro. Es deuda si se usa."
+      },
+      {
+        "n": "Línea swap con el Tesoro de Estados Unidos",
+        "m": 9000.0,
+        "u": "mdd",
+        "icono": "🤝",
+        "d": "Intercambio de divisas de emergencia con el Tesoro estadounidense."
+      },
+      {
+        "n": "Seguro para catástrofes",
+        "m": 10400.0,
+        "u": "mdp",
+        "icono": "🌀",
+        "d": "Vigente del 5 de junio de 2026 al 5 de mayo de 2027. Cubre lo presupuestado para atender fenómenos naturales."
+      },
+      {
+        "n": "Cuatro bonos catastróficos",
+        "m": 595.0,
+        "u": "mdd",
+        "icono": "📜",
+        "d": "Con vigencia hasta abril de 2028, contra sismos y huracanes de distintas magnitudes."
+      }
+    ],
+    "contingentes": [
+      {
+        "n": "Pasivo pensionario del sector público",
+        "m": 13214200.0,
+        "pib": 37.4,
+        "icono": "👵",
+        "d": "ISSSTE $7,403.3 mmp, IMSS régimen de jubilaciones $3,297.6, Pemex $1,462.3, CFE $773.9 y otras entidades $277.0. Cifras de 2025.",
+        "ciego": "No está dentro del 55.0% del PIB de deuda pública, porque no es deuda contratada sino obligación de pago futura. Las dos proporciones se publican con años base distintos, de modo que sumarlas es indicativo y no contable; aun así, el orden de magnitud del compromiso declarado ronda los noventa puntos del PIB."
+      },
+      {
+        "n": "Depósitos bancarios garantizados por el IPAB",
+        "m": 8800000.0,
+        "pib": 23.3,
+        "icono": "🏧",
+        "d": "Saldo de depósitos a la vista y a plazo al cierre de junio de 2026. La garantía cubre hasta 400 mil UDIs por persona e institución: $3.5 millones de pesos.",
+        "ciego": "El compromiso se activa sólo si una institución quiebra, pero existe todos los días."
+      },
+      {
+        "n": "Activos netos de las AFORE",
+        "m": 8963700.0,
+        "pib": 25.3,
+        "icono": "💼",
+        "d": "Junio de 2026. Es ahorro de los trabajadores, no dinero público; aparece aquí porque es la otra mitad del sistema de pensiones.",
+        "ciego": "Convive con un pasivo pensionario de 37.4% del PIB que corresponde al viejo sistema de reparto, el que no tiene fondo detrás."
+      },
+      {
+        "n": "Cartera de la banca de desarrollo",
+        "m": 2188500.0,
+        "pib": null,
+        "icono": "🏦",
+        "d": "Crédito directo e impulsado al sector privado a junio de 2026. Capitalización de 30.6% y cartera vencida de $38.3 mmp.",
+        "ciego": "El riesgo se declara bajo. Eso depende de que las garantías otorgadas no se ejerzan al mismo tiempo."
+      },
+      {
+        "n": "Pidiregas de la Comisión Federal de Electricidad",
+        "m": 96600.0,
+        "pib": null,
+        "icono": "⚡",
+        "d": "Exposición máxima contingente, repartida en unos 20 años, en el supuesto extremo de que los activos adquiridos valieran cero.",
+        "ciego": "Son inversiones con registro diferido: obra que ya existe y deuda que todavía no se contabiliza como tal."
+      },
+      {
+        "n": "Pérdida esperada por desastres naturales",
+        "m": 62100.0,
+        "pib": null,
+        "icono": "🌪️",
+        "d": "Para un evento con 1% de probabilidad anual. Para uno con 5% de probabilidad, $22.3 mmp; para los frecuentes y menores, $20.3 mmp al año.",
+        "ciego": "El seguro catastrófico y los cuatro bonos suman alrededor de $21 mmp. Un evento de los grandes rebasaría por tres veces toda la cobertura."
+      }
+    ],
+    "senda": {
+      "nota": "Proyecciones de mediano plazo presentadas en cumplimiento del artículo 16 de la Ley Federal de Presupuesto. Los propios Criterios advierten que «las cifras tienen carácter informativo y no constituyen un compromiso presupuestario vinculante para la SHCP». En la última columna, verde señala el indicador que mejora a lo largo del periodo y rojo el que empeora.",
+      "anios": [
+        "2026",
+        "2027",
+        "2028",
+        "2029",
+        "2030",
+        "2031",
+        "2032"
+      ],
+      "series": [
+        {
+          "n": "RFSP",
+          "u": "% del PIB",
+          "v": [
+            -4.1,
+            -3.9,
+            -3.7,
+            -3.6,
+            -3.4,
+            -3.2,
+            -3.1
+          ],
+          "sentido": "mejora"
+        },
+        {
+          "n": "Balance presupuestario",
+          "u": "% del PIB",
+          "v": [
+            -3.6,
+            -3.4,
+            -3.2,
+            -3.1,
+            -2.9,
+            -2.7,
+            -2.6
+          ],
+          "sentido": "mejora"
+        },
+        {
+          "n": "Balance primario",
+          "u": "% del PIB",
+          "v": [
+            0.1,
+            0.6,
+            0.5,
+            0.5,
+            0.7,
+            0.9,
+            1.0
+          ],
+          "sentido": "mejora"
+        },
+        {
+          "n": "Costo financiero",
+          "u": "% del PIB",
+          "v": [
+            3.7,
+            4.0,
+            3.7,
+            3.6,
+            3.7,
+            3.7,
+            3.7
+          ],
+          "sentido": "plano"
+        },
+        {
+          "n": "Deuda pública (SHRFSP)",
+          "u": "% del PIB",
+          "v": [
+            54.0,
+            55.0,
+            55.6,
+            56.1,
+            56.4,
+            56.5,
+            56.5
+          ],
+          "sentido": "deterioro"
+        },
+        {
+          "n": "Gasto neto pagado",
+          "u": "% del PIB",
+          "v": [
+            26.6,
+            26.7,
+            26.0,
+            25.9,
+            25.7,
+            25.5,
+            25.4
+          ],
+          "sentido": "plano"
+        },
+        {
+          "n": "Ingresos presupuestarios",
+          "u": "% del PIB",
+          "v": [
+            23.0,
+            23.2,
+            22.8,
+            22.8,
+            22.8,
+            22.8,
+            22.8
+          ],
+          "sentido": "plano"
+        }
+      ]
+    },
+    "sociales": {
+      "total": 1025388.5,
+      "pibPct": 2.6,
+      "nota": "Programas sociales prioritarios del proyecto de Presupuesto 2027, tal como los enumera el cuadro de la página 33 de los Criterios Generales. Equivalen a 2.6% del PIB.",
+      "filas": [
+        {
+          "n": "Pensión para Adultos Mayores",
+          "m": 543498.4,
+          "g": "Pensiones"
+        },
+        {
+          "n": "Pensión Mujeres Bienestar",
+          "m": 59356.3,
+          "g": "Pensiones"
+        },
+        {
+          "n": "Pensión Personas con Discapacidad",
+          "m": 37436.3,
+          "g": "Pensiones"
+        },
+        {
+          "n": "Beca Rita Cetina (básica)",
+          "m": 133561.3,
+          "g": "Becas"
+        },
+        {
+          "n": "Beca de Nivel Medio Superior",
+          "m": 43932.4,
+          "g": "Becas"
+        },
+        {
+          "n": "Jóvenes Escribiendo el Futuro",
+          "m": 13058.2,
+          "g": "Becas"
+        },
+        {
+          "n": "Jóvenes Construyendo el Futuro",
+          "m": 25985.3,
+          "g": "Becas"
+        },
+        {
+          "n": "Sembrando Vida",
+          "m": 40500.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Producción para el Bienestar",
+          "m": 17000.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Fertilizantes",
+          "m": 17000.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Acopio para el Bienestar",
+          "m": 8445.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Comercio Justo",
+          "m": 8995.6,
+          "g": "Campo"
+        },
+        {
+          "n": "Leche para el Bienestar",
+          "m": 6866.9,
+          "g": "Campo"
+        },
+        {
+          "n": "Comercio Justo (incentivos)",
+          "m": 2862.8,
+          "g": "Campo"
+        },
+        {
+          "n": "Pesca",
+          "m": 2118.1,
+          "g": "Campo"
+        },
+        {
+          "n": "Maíz es la Raíz",
+          "m": 2000.0,
+          "g": "Campo"
+        },
+        {
+          "n": "Programa de Vivienda Social",
+          "m": 34353.9,
+          "g": "Territorio"
+        },
+        {
+          "n": "La Escuela es Nuestra",
+          "m": 20000.0,
+          "g": "Territorio"
+        },
+        {
+          "n": "Salud Casa por Casa",
+          "m": 5000.0,
+          "g": "Territorio"
+        },
+        {
+          "n": "Niñas y Niños, hijos de madres trabajadoras",
+          "m": 3418.0,
+          "g": "Territorio"
+        }
+      ]
+    },
+    "inversion": {
+      "total": 560172.6,
+      "nota": "Prioridades de inversión del proyecto de Presupuesto 2027, cuadro de la página 33 de los Criterios Generales.",
+      "filas": [
+        {
+          "n": "Pemex",
+          "m": 255529.2,
+          "g": "Energía",
+          "d": "Incluye los $81,100.0 mdp del Ramo 18 para amortizar deuda."
+        },
+        {
+          "n": "CFE",
+          "m": 60991.6,
+          "g": "Energía",
+          "d": "Generación, transmisión y distribución eléctrica."
+        },
+        {
+          "n": "Tren Saltillo – Nuevo Laredo",
+          "m": 41985.8,
+          "g": "Trenes",
+          "d": "El tramo con mayor asignación del programa ferroviario."
+        },
+        {
+          "n": "Istmo de Tehuantepec",
+          "m": 25000.0,
+          "g": "Trenes",
+          "d": "Corredor interoceánico."
+        },
+        {
+          "n": "Tren Querétaro – Saltillo",
+          "m": 24025.5,
+          "g": "Trenes",
+          "d": "Comprende Querétaro – San Luis Potosí y San Luis Potosí – Saltillo."
+        },
+        {
+          "n": "Tren Querétaro – Irapuato",
+          "m": 20054.7,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Tren Maya",
+          "m": 17158.8,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Material rodante",
+          "m": 14629.5,
+          "g": "Trenes",
+          "d": "Los trenes mismos, no las vías."
+        },
+        {
+          "n": "Tren México – Querétaro",
+          "m": 5682.2,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Tren AIFA – Pachuca",
+          "m": 1339.0,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Tren Irapuato – Guadalajara",
+          "m": 1000.0,
+          "g": "Trenes",
+          "d": ""
+        },
+        {
+          "n": "Carreteras y caminos",
+          "m": 24121.2,
+          "g": "Carreteras",
+          "d": ""
+        },
+        {
+          "n": "Toluca – Zihuatanejo",
+          "m": 7700.0,
+          "g": "Carreteras",
+          "d": ""
+        },
+        {
+          "n": "Puentes y distribuidores",
+          "m": 3598.8,
+          "g": "Carreteras",
+          "d": ""
+        },
+        {
+          "n": "Obras hidráulicas de Conagua",
+          "m": 22761.9,
+          "g": "Agua",
+          "d": "Distritos de riego y acueductos."
+        },
+        {
+          "n": "Proyecto Sargazo",
+          "m": 1866.9,
+          "g": "Agua",
+          "d": ""
+        },
+        {
+          "n": "Defensa Nacional",
+          "m": 12781.5,
+          "g": "Seguridad",
+          "d": ""
+        },
+        {
+          "n": "Marina",
+          "m": 10030.8,
+          "g": "Seguridad",
+          "d": ""
+        },
+        {
+          "n": "Inversión de Seguridad y Protección Ciudadana",
+          "m": 8370.8,
+          "g": "Seguridad",
+          "d": ""
+        },
+        {
+          "n": "Asociaciones público-privadas y PPS",
+          "m": 1544.3,
+          "g": "Seguridad",
+          "d": "Recursos para servicios de seguridad y educación."
+        }
+      ]
+    },
+    "fiscal": [
+      {
+        "n": "Deducciones empresariales estandarizadas",
+        "tipo": "Recauda más",
+        "icono": "🧾",
+        "d": "Las deducciones autorizadas se topan al 96.67% de los ingresos acumulables de la empresa (99% para las que hoy deducen menos). Aplica sólo a empresas con ingresos mayores a 50 millones de pesos y al menos cinco años de operación. El umbral no es arbitrario: la iniciativa explica que, por encima del 96.67%, las operaciones con contribuyentes de perfil facturero representan en promedio el 10% de las erogaciones.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta, Anexo E del paquete"
+      },
+      {
+        "n": "Tope a las pérdidas fiscales",
+        "tipo": "Recauda más",
+        "icono": "📉",
+        "d": "Las pérdidas de ejercicios anteriores sólo podrán disminuir hasta el 50% de la utilidad fiscal del año, a cambio de ampliar el plazo para usarlas de 10 a 15 años.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Deducción de intereses netos",
+        "tipo": "Recauda más",
+        "icono": "🏦",
+        "d": "Baja del 30% al 20% de la utilidad fiscal ajustada. Lo no deducido se puede arrastrar diez ejercicios.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Fin del Régimen Opcional para Grupos de Sociedades",
+        "tipo": "Recauda más",
+        "icono": "🏢",
+        "d": "Se elimina y se cobra íntegro el impuesto diferido. Los Criterios lo llaman «un subsidio implícito» derivado de un esquema transitorio de 2013 que «ya cumplió con su objetivo».",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Catorce derechos actualizados",
+        "tipo": "Recauda más",
+        "icono": "📋",
+        "d": "Visas y servicios migratorios, espacio aéreo, vías férreas, trámites sanitarios, medio ambiente, puertos, zona federal marítimo terrestre, museos y zonas arqueológicas, armas, extracción de materiales, AFORE y un aumento de 16% a la inspección bursátil.",
+        "ley": "Iniciativa de reforma a la Ley Federal de Derechos, Anexo D"
+      },
+      {
+        "n": "RESICO con umbrales más altos",
+        "tipo": "Recauda menos",
+        "icono": "🧑‍🔧",
+        "d": "El régimen simplificado sube de 3.5 a 5 millones de pesos para personas físicas y de 35 a 50 millones para morales, con opción de pagar el IVA aplicando 7% al valor de lo cobrado, sin acreditamiento.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta"
+      },
+      {
+        "n": "Tasa de retención de intereses a la baja",
+        "tipo": "Recauda menos",
+        "icono": "🐖",
+        "d": "Pasa de 0.90% en 2026 a 0.68% en 2027, calculada con la metodología que la propia Ley de Ingresos incorpora a partir del marco macroeconómico.",
+        "ley": "Iniciativa de Ley de Ingresos 2027"
+      },
+      {
+        "n": "Repatriación de capitales al 7.5%",
+        "tipo": "Recauda menos",
+        "icono": "✈️",
+        "d": "Programa temporal con tasa preferente de ISR, a condición de invertir los recursos en el país en activos y gastos estratégicos.",
+        "ley": "Iniciativa de Ley de Ingresos 2027"
+      },
+      {
+        "n": "Tasa cero de IVA a libros, periódicos y revistas",
+        "tipo": "Recauda menos",
+        "icono": "📚",
+        "d": "Hoy están exentos; pasar a tasa cero permite a los editores acreditar el IVA que pagan en sus insumos. Aplica a quienes obtengan al menos el 90% de sus ingresos de esa venta.",
+        "ley": "Iniciativa de reforma a la Ley del Impuesto sobre la Renta y disposiciones de vigencia temporal"
+      },
+      {
+        "n": "Estímulo del 10% a ofertas públicas iniciales",
+        "tipo": "Recauda menos",
+        "icono": "📈",
+        "d": "Tasa reducida a la ganancia por vender acciones en una oferta pública inicial, si la emisora vale 50 mil millones de pesos o menos.",
+        "ley": "Iniciativa de Ley de Ingresos 2027"
+      },
+      {
+        "n": "Dos leyes nuevas",
+        "tipo": "Estructural",
+        "icono": "⚖️",
+        "d": "El paquete incluye la Ley de Economía Digital para Pagos Digitales y Electrónicos (Anexo G) y la Ley General para el Fortalecimiento y Armonización Catastral y Registral (Anexo H). Esta última toca directamente la base del impuesto predial, el tributo peor cobrado del país.",
+        "ley": "Anexos G y H de la Gaceta Parlamentaria 7121"
+      }
+    ],
+    "ciegos": [
+      {
+        "id": "c-deficit",
+        "titulo": "«Déficit de 3.9%» nombra la medida amplia, no el déficit del presupuesto",
+        "dice": "La cobertura resumió el paquete como un déficit fiscal de 3.9% del PIB.",
+        "documento": "Los Criterios distinguen dos cifras: el <b>balance presupuestario</b> se propone en <b>3.4% del PIB</b> ($1,358,558.8 mdp, la cifra que el artículo 2º del decreto fija) y los <b>Requerimientos Financieros del Sector Público</b> —el balance público amplio— en <b>3.9%</b> ($1,555,655.8 mdp). La diferencia, medio punto del PIB, son necesidades de financiamiento que ocurren fuera del presupuesto.",
+        "porque": "Las dos cifras son correctas y nombran cosas distintas. Usar la amplia al hablar de «el déficit» y la estrecha al hablar de «lo aprobado» permite elegir el número conveniente según la frase.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-deuda",
+        "titulo": "El déficit baja todos los años y la deuda sube todos los años",
+        "dice": "La reducción gradual del déficit se presenta como el eje de la responsabilidad hacendaria.",
+        "documento": "Es cierto: los RFSP bajan de 4.1% a 3.9% y siguen bajando hasta 3.1% en 2032. Y en el mismo cuadro, la deuda pública medida por el SHRFSP sube de 54.0% a <b>55.0%</b> en 2027 y sigue subiendo: 55.6, 56.1, 56.4, 56.5 y 56.5% del PIB. <b>En ningún año del horizonte proyectado la deuda baja.</b>",
+        "porque": "Un déficit menor sigue siendo un déficit: la deuda crece más despacio, no deja de crecer. Se estabiliza hasta 2031, a 4.2 puntos del PIB por encima de donde está hoy.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-pemex",
+        "titulo": "Los 81 mil millones para Pemex no son un apoyo nuevo: son el 31% del apoyo anterior",
+        "dice": "Se informó que Pemex recibirá 81,100 millones de pesos porque no alcanzó la autosuficiencia financiera.",
+        "documento": "Los Criterios explican de dónde sale esa cifra: el programa del Ramo 18 «Articulación de la Política de Hidrocarburos» «en 2026 contó con recursos por <b>263,476.0 millones de pesos</b>, y para 2027 se proponen únicamente <b>81,100.0 millones</b>». Es una caída de $182,376 millones, el 69%. Esa sola línea hace que el gasto de inversión total del presupuesto caiga <b>12.3% real</b> y que la finalidad de desarrollo económico caiga 13.2%.",
+        "porque": "Presentado como apoyo, el dato sugiere que el erario se abre a Pemex. Presentado como movimiento presupuestal, es el mayor recorte del paquete. La inversión física, en cambio, sí sube: 3.5% real.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-reforma",
+        "titulo": "«Sin nuevos impuestos» es literal y, a la vez, esconde una reforma de base",
+        "dice": "El paquete no crea impuestos ni sube tasas generales. Los Criterios lo dicen con esas palabras.",
+        "documento": "En la misma sección, Hacienda propone estandarizar las deducciones empresariales al <b>96.67%</b> de los ingresos acumulables, topar las pérdidas fiscales al 50% de la utilidad, bajar la deducción de intereses netos del 30% al 20% y eliminar el Régimen Opcional para Grupos de Sociedades cobrando el impuesto diferido. Y lo justifica con un dato propio: en 2025, «de <b>524 mil empresas</b> que declararon ingresos positivos, el 60.7% (<b>318 mil empresas</b>) no registró un pago del ISR». La iniciativa que lleva ese diagnóstico a la ley explica el mecanismo: de esas 318 mil, <b>223 mil —el 70.3%— no pagaron porque sus deducciones igualaron o superaron sus ingresos</b>; el resto se explica por pérdidas de ejercicios anteriores. Y mide el sesgo: las empresas que más ISR pagan registran operaciones con contribuyentes de perfil facturero en el <b>3.5%</b> de sus deducciones; las que menos pagan o declaran pérdidas, en el <b>10%</b>.",
+        "porque": "No subir la tasa y ensanchar la base recaudan de forma distinta pero pesan igual en el bolsillo. Llamar «sin reforma» a un cambio permanente de la base gravable describe el titular, no el contenido.",
+        "ref": "lisr"
+      },
+      {
+        "id": "c-diferimiento",
+        "titulo": "Hay 121 mil millones que el presupuesto autoriza y no paga",
+        "dice": "El gasto neto total de 2027 es de $10.64 billones de pesos.",
+        "documento": "El decreto lo confirma: «el gasto neto total previsto en el presente Presupuesto de Egresos importa la cantidad de $10,636,488,100,000». Pero el cuadro de finanzas públicas separa el gasto <b>devengado</b> del <b>pagado</b>, y entre ambos hay un <b>diferimiento de pagos de $121,400.4 mdp</b> que crece <b>49.1% real</b> frente a los $78,855.7 de 2026. Lo que saldrá de caja son $10,515,087.7 millones.",
+        "porque": "El diferimiento es gasto comprometido que se empuja al ejercicio siguiente, donde reaparece como adeudo. Las ADEFAS de 2027 ya están presupuestadas en $81,400.4 mdp.",
+        "ref": "ppef"
+      },
+      {
+        "id": "c-riesgos",
+        "titulo": "La lista de siete riesgos existe; el cuadro tiene dos columnas",
+        "dice": "Hacienda identificó siete riesgos para la economía en 2027.",
+        "documento": "El cuadro de los Criterios es simétrico: <b>siete riesgos a la baja y seis al alza</b>. Entre los de baja aparece uno que casi no se citó —«menor dinamismo de la economía y la producción industrial de EE. UU.»— y otro nuevo: «corrección significativa en la valuación de activos vinculados con la inteligencia artificial».",
+        "porque": "Leer sólo la columna izquierda convierte un ejercicio de escenarios en un pronóstico sombrío. Leer sólo la derecha haría lo contrario. El documento presenta las dos.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-pensiones",
+        "titulo": "El pasivo que no cuenta como deuda vale 37 puntos del PIB",
+        "dice": "La deuda pública se ubicará en 55.0% del PIB, por debajo de otras economías emergentes.",
+        "documento": "En el apartado de pasivos contingentes, los mismos Criterios cuantifican el pasivo pensionario del sector público en <b>$13,214.2 mil millones de pesos, 37.4% del PIB</b>: ISSSTE 21.0 puntos, IMSS 9.3, Pemex 4.1, CFE 2.2 y otras entidades 0.8.",
+        "porque": "No es deuda contratada y por eso no entra en el SHRFSP; es una obligación de pago cierta y creciente. La población de 60 años y más pasará de 17.8 a 35.4 millones entre 2026 y 2050, según CONAPO.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-colchon",
+        "titulo": "Los amortiguadores caben en lo que cuesta un punto de tasa",
+        "dice": "El gobierno cuenta con fondos de estabilización, coberturas petroleras, línea con el FMI y reservas internacionales.",
+        "documento": "Los tres fondos suman <b>$172.0 mil millones de pesos</b> a junio de 2026: FEIP $136.6, FEIEF $13.3 y Fondo Mexicano del Petróleo $22.1. Y el artículo 19 de la Ley Federal de Presupuesto explica por qué están así: los ingresos que sobran se destinan <b>primero</b> a cubrir el incremento del gasto no programable —participaciones, costo financiero, adeudos del año anterior y desastres— y sólo lo que quede después se reparte a los fondos. En el cuadro de sensibilidades de la página siguiente, un alza de 100 puntos base en la tasa de interés cuesta <b>$37.9 mil millones</b> y medio punto menos de crecimiento resta <b>$30.2 mil millones</b> de recaudación.",
+        "porque": "El FEIP equivale al 1.5% de los ingresos presupuestarios de 2027. Alcanza para un golpe, no para una racha. Y hay una vara mejor que esa: la que pone la ley. El artículo 19, fracción IV de la Ley Federal de Presupuesto define la «reserva adecuada» del FEIP como <b>0.08 por la suma de los impuestos totales y las transferencias del Fondo Mexicano del Petróleo</b> estimados en la Ley de Ingresos. Con las cifras de 2027 eso son <b>$517,972.9 mdp</b>: el fondo tiene el <b>26.4%</b> de lo que la propia ley llama adecuado. Para el FEIEF, con el factor de 0.04, la meta sería de $258,986.4 mdp y el saldo es el <b>5.1%</b>.",
+        "ref": "cgpe",
+      "ref2": "lfprh"
+      },
+      {
+        "id": "c-tolerancia",
+        "titulo": "La ley tolera desviarse 212 mil millones antes de pedir una explicación",
+        "dice": "El presupuesto debe contribuir a la meta anual de los requerimientos financieros del sector público.",
+        "documento": "El artículo 17 de la Ley Federal de Presupuesto añade el umbral: sólo «en caso de que, al cierre del ejercicio fiscal, se observe una desviación respecto a la meta de los requerimientos financieros del sector público mayor al equivalente a un <b>2 por ciento del gasto neto total aprobado</b>, la Secretaría deberá presentar una justificación». Dos por ciento de $10,636,488.1 mdp son <b>$212,729.8 millones de pesos</b>.",
+        "porque": "Por debajo de esa raya, incumplir la meta no obliga siquiera a una nota en el informe trimestral.",
+        "ref": "lfprh"
+      },
+      {
+        "id": "c-fondos",
+        "titulo": "Al fondo que debe amortiguar la próxima caída se le asignan seis mil millones",
+        "dice": "El presupuesto mantiene la estrategia de estabilización macroeconómica.",
+        "documento": "En la clasificación funcional del gasto programable, la línea «Fondos de estabilización» recibe <b>$6.0 mil millones de pesos</b> para 2027, <b>12.2% real menos</b> que en 2026.",
+        "porque": "Es menos de una milésima parte del presupuesto, y es la aportación anual del ejercicio a los colchones que el propio documento presenta como la defensa del país ante un choque externo.",
+        "ref": "cgpe"
+      },
+      {
+        "id": "c-legible",
+        "titulo": "Cuatro de los catorce anexos se publican como fotografía, no como texto",
+        "dice": "El paquete económico se entregó completo y está publicado para consulta de cualquiera.",
+        "documento": "Publicado está, y eso es cierto. Pero de los <b>catorce anexos</b> de la Gaceta Parlamentaria 7121, <b>cuatro no tienen capa de texto</b>: son imágenes escaneadas que ningún buscador indexa, de las que no se puede copiar un renglón y que ningún lector de pantalla puede leer en voz alta. Son el <b>Anexo F</b>, reforma a la Ley Aduanera; el <b>Anexo G</b>, que expide la Ley de Economía Digital para Pagos Digitales y Electrónicos; el <b>Anexo H</b>, que expide la Ley General para el Fortalecimiento y Armonización Catastral y Registral, y el <b>Anexo J</b>, el informe sobre el uso de la facultad arancelaria. Los archivos equivalentes del portal de Hacienda sí traen texto, pero salen con los permisos del documento bloqueados, <b>incluida la casilla de extracción para accesibilidad</b>: la que los lectores de pantalla consultan antes de leer.",
+        "porque": "Tres de los cuatro escaneados son leyes: dos enteramente nuevas y una reformada. Y una de ellas, la catastral y registral, toca la base del impuesto predial, que es el tributo peor cobrado del país. Un documento que la Constitución obliga a entregar no queda entregado del todo si no se puede buscar dentro de él, citar un renglón ni oírlo leer: la forma de publicar decide quién alcanza a revisar.",
+        "ref": "gaceta"
+      }
+    ],
+    "refs": {
+      "cgpe": "ref-cgpe2027",
+      "ppef": "ref-ppef2027",
+      "ilif": "ref-ilif2027",
+      "com": "ref-shcp-c71",
+      "lisr": "ref-lisr2027",
+      "lfd": "ref-lfd2027",
+      "gaceta": "ref-gaceta7121",
+      "lfprh": "ref-lfprh"
+    }
+  },
+  "cuentas_ecologicas": {
+    "titulo": "Cuentas Económicas y Ecológicas de México",
+    "ejercicio": 2024,
+    "publicacion": "1 de diciembre de 2025",
+    "ref_fuente": "ref-ceem-2024",
+    "ref_programa": "ref-inegi-ceem",
+    "ref_pib": "ref-inegi-pib-2024",
+    "entrada": "El Producto Interno Bruto es un indicador ciego: puede crecer mientras el país se queda sin acuíferos, pierde bosque y ensucia el aire que respira. El INEGI calcula, desde el Sistema de Cuentas Nacionales, cuánto de ese crecimiento se paga con capital natural. El resultado se llama Producto Interno Neto Ecológico.",
+    "nota_metodologica": "Las cifras marcadas como oficiales provienen del comunicado de prensa de las CEEM 2024 del INEGI y del PIB a precios de mercado de 2024. Las marcadas como derivadas se obtienen por diferencia aritmética a partir de las oficiales, y se identifican como tales en cada tarjeta. Esta plataforma no estima ninguna cifra ambiental.",
+    "pib_mdp": 33506847,
+    "pib_estado": "oficial",
+    "cascada": [
+      {
+        "id": "pib",
+        "etiqueta": "Producto Interno Bruto",
+        "monto_mdp": 33506847,
+        "pct_pib": 100.0,
+        "signo": "base",
+        "estado": "oficial",
+        "glosa": "Valor de todo lo producido en el país en 2024, a precios de mercado. Es el número que se anuncia cada trimestre."
+      },
+      {
+        "id": "ccf",
+        "etiqueta": "− Consumo de capital fijo",
+        "monto_mdp": 6424633,
+        "pct_pib": 19.2,
+        "signo": "resta",
+        "estado": "derivado",
+        "glosa": "Desgaste de lo que construimos nosotros: máquinas, fábricas, carreteras. Restarlo reconoce que parte de lo producido sólo repuso lo que se gastó."
+      },
+      {
+        "id": "pin",
+        "etiqueta": "= Producto Interno Neto",
+        "monto_mdp": 27082214,
+        "pct_pib": 80.8,
+        "signo": "subtotal",
+        "estado": "derivado",
+        "glosa": "Lo que queda después de reponer el capital hecho por el hombre. Todavía no descuenta nada de la naturaleza."
+      },
+      {
+        "id": "agotamiento",
+        "etiqueta": "− Agotamiento de recursos naturales",
+        "monto_mdp": 144020,
+        "pct_pib": 0.4,
+        "signo": "resta",
+        "estado": "oficial",
+        "glosa": "Capital natural que ya no está: hidrocarburos extraídos, bosque perdido, agua subterránea sacada por encima de la recarga."
+      },
+      {
+        "id": "degradacion",
+        "etiqueta": "− Degradación del ambiente",
+        "monto_mdp": 1238194,
+        "pct_pib": 3.7,
+        "signo": "resta",
+        "estado": "oficial",
+        "glosa": "Lo que cuesta el daño: aire contaminado, suelo degradado, residuos sin gestionar, aguas residuales sin tratar."
+      },
+      {
+        "id": "pine",
+        "etiqueta": "= Producto Interno Neto Ecológico",
+        "monto_mdp": 25700000,
+        "pct_pib": 76.6,
+        "signo": "resultado",
+        "estado": "oficial",
+        "glosa": "La riqueza que de verdad quedó en 2024, una vez pagado lo que la naturaleza puso. Poco más de tres cuartas partes del PIB anunciado."
+      }
+    ],
+    "ctada": {
+      "total_mdp": 1382214,
+      "pct_pib": 4.1,
+      "estado": "oficial",
+      "nombre": "Costos Totales por Agotamiento y Degradación Ambiental",
+      "lectura": "En 2024 el país gastó ambientalmente $1,382,214 millones de pesos para producir su PIB. Es 4.1% de todo lo que produjo: más que muchos presupuestos sectoriales completos."
+    },
+    "agotamiento": {
+      "total_mdp": 144020,
+      "pct_pib": 0.4,
+      "estado": "oficial",
+      "definicion": "Capital natural que se consumió y no vuelve por sí solo dentro del periodo. Se mide por lo que se extrajo por encima de la capacidad de reposición.",
+      "componentes": [
+        {
+          "id": "hidrocarburos",
+          "nombre": "Agotamiento de hidrocarburos",
+          "icono": "🛢️",
+          "pct_del_rubro": 46,
+          "monto_mdp": 66249,
+          "estado": "derivado",
+          "glosa": "El renglón más caro del agotamiento. Cada barril extraído es una reserva que deja de existir."
+        },
+        {
+          "id": "forestal",
+          "nombre": "Agotamiento de recursos forestales",
+          "icono": "🌲",
+          "pct_del_rubro": 28,
+          "monto_mdp": 40326,
+          "estado": "derivado",
+          "glosa": "Bosque perdido por encima de lo que se regenera. Casi nunca aparece en el debate público sobre recursos."
+        },
+        {
+          "id": "agua",
+          "nombre": "Agotamiento de agua subterránea",
+          "icono": "💧",
+          "pct_del_rubro": 26,
+          "monto_mdp": 37445,
+          "estado": "derivado",
+          "glosa": "Agua extraída de acuíferos por encima de su recarga. Es el dato que debería condicionar cualquier polo industrial nuevo."
+        }
+      ],
+      "nota": "Los porcentajes de reparto (46%, 28% y 26%) son oficiales; los montos en pesos se derivan aplicándolos al total del rubro."
+    },
+    "degradacion": {
+      "total_mdp": 1238194,
+      "pct_pib": 3.7,
+      "estado": "oficial",
+      "definicion": "Lo que cuesta reparar o soportar el daño hecho al entorno. No es capital que se acabó, es entorno que empeoró.",
+      "componentes": [
+        {
+          "id": "aire",
+          "nombre": "Emisiones al aire",
+          "icono": "🏭",
+          "monto_mdp": 832799,
+          "pct_pib": 2.5,
+          "estado": "oficial",
+          "glosa": "Por sí solo, el renglón más costoso de toda la cuenta ambiental: más que el agotamiento completo multiplicado por cinco."
+        },
+        {
+          "id": "suelo",
+          "nombre": "Degradación del suelo",
+          "icono": "🏜️",
+          "monto_mdp": 212348,
+          "pct_pib": 0.6,
+          "estado": "oficial",
+          "glosa": "Erosión y pérdida de capacidad productiva de la tierra. Golpea primero al campo y a la seguridad alimentaria."
+        },
+        {
+          "id": "residuos",
+          "nombre": "Residuos sólidos urbanos",
+          "icono": "🗑️",
+          "monto_mdp": 124438,
+          "pct_pib": 0.4,
+          "estado": "oficial",
+          "glosa": "La basura que no se gestiona adecuadamente. Es competencia municipal, y el municipio es el orden de gobierno con menos ingreso propio."
+        },
+        {
+          "id": "aguas_residuales",
+          "nombre": "Tratamiento insuficiente de aguas residuales",
+          "icono": "🚱",
+          "monto_mdp": 68609,
+          "pct_pib": 0.2,
+          "estado": "oficial",
+          "glosa": "Agua que se devuelve al ciclo sin tratar. El costo lo paga quien está río abajo."
+        }
+      ]
+    },
+    "gasto_proteccion_ambiental": {
+      "monto_mdp": 232882,
+      "pct_pib": 0.7,
+      "estado": "oficial",
+      "lectura": "México gastó $232,882 millones de pesos en proteger el ambiente y causó un daño de $1,382,214 millones. Por cada peso destinado a proteger, se deterioraron cerca de seis.",
+      "ratio_dano_sobre_gasto": 5.94,
+      "ratio_estado": "derivado"
+    },
+    "puntos_ciegos": [
+      {
+        "titulo": "Un crecimiento que en términos ecológicos puede ser negativo",
+        "texto": "Si en un año la economía crece 3% y el costo ambiental es de 4.1% del PIB, el país produjo más de lo que su capital natural repuso. El indicador que se anuncia no permite ver esa resta, porque el PIB no la hace."
+      },
+      {
+        "titulo": "La cuenta ambiental no aparece en el Presupuesto de Egresos",
+        "texto": "El daño de $1,382,214 millones de pesos no tiene una partida ni un responsable con nombre. No es una deuda que alguien vaya a pagar: es un costo que se traslada a quien viene después."
+      },
+      {
+        "titulo": "Seis pesos de daño por cada peso de protección",
+        "texto": "El gasto en protección ambiental equivale a 0.7% del PIB frente a un deterioro de 4.1%. La proporción, y no el monto absoluto, es lo que mide la seriedad del compromiso."
+      },
+      {
+        "titulo": "El aire concentra el problema y el debate mira a otro lado",
+        "texto": "Las emisiones al aire cuestan 2.5% del PIB, casi dos terceras partes de toda la cuenta ambiental. La discusión pública sobre recursos naturales suele centrarse en petróleo y litio, que juntos pesan mucho menos."
+      }
+    ],
+    "implicaciones_juridicas": [
+      {
+        "id": "fiscal",
+        "icono": "💰",
+        "titulo": "Justifica los impuestos ambientales",
+        "texto": "El PINE demuestra con contabilidad nacional que existen externalidades negativas: costos que quien produce traslada a la sociedad. Eso da sustento jurídico a que el Congreso establezca gravámenes ambientales bajo la premisa de que quien contamina y agota, paga.",
+        "fundamento": "Art. 31 fracción IV y Art. 73 CPEUM"
+      },
+      {
+        "id": "mia",
+        "icono": "🚫",
+        "titulo": "Respalda negar una Manifestación de Impacto Ambiental",
+        "texto": "Si el costo de agotamiento hídrico de una región ya es crítico según el INEGI, la autoridad ambiental cuenta con sustento técnico para negar concesiones o autorizaciones a nuevas industrias en esa zona.",
+        "fundamento": "Art. 27 CPEUM · LGEEPA"
+      },
+      {
+        "id": "pnd",
+        "icono": "🧭",
+        "titulo": "Obliga a que el Plan Nacional de Desarrollo lleve metas ambientales",
+        "texto": "La planeación democrática no puede guiarse sólo por el PIB. Al existir una medición oficial del deterioro, omitirla en el Plan deja de ser una decisión técnica y pasa a ser una omisión revisable.",
+        "fundamento": "Art. 26 CPEUM · Ley de Planeación"
+      },
+      {
+        "id": "energia",
+        "icono": "⚡",
+        "titulo": "Legitima la intervención en el mercado energético",
+        "texto": "Al poner precio a la degradación del aire y al agotamiento de hidrocarburos, la cuenta ecológica sostiene jurídicamente que el Estado regule la matriz energética como asunto de rectoría y no de preferencia política.",
+        "fundamento": "Art. 25 y Art. 28 CPEUM"
+      }
+    ]
+  },
   "simulador_megaobras": {
   "sectores": [
     {
@@ -10582,11 +14614,7498 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 4066853,
-    "perdida_anual_consolidada_mdp": 78685.1,
-    "perdida_diaria_consolidada_mdp": 215.58,
-    "perdida_segundo_consolidada": 2495.14
+    "inversion_total_mdp": 4116153,
+    "inversion_presupuestada_total_mdp": 1046506,
+    "perdida_anual_consolidada_mdp": 80200.1,
+    "perdida_diaria_consolidada_mdp": 219.73,
+    "perdida_segundo_consolidada": 2543.13,
+    "obras_evaluadas": 12,
+    "sobrecosto_conjunto_pct": 293.3,
+    "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   }
-}
+},
+"calculadora_civica": {
+  "ejercicio": 2026,
+  "nota_general": "Toda esta subpesta\u00f1a calcula con el aparato legal vigente en 2026 y con el Presupuesto aprobado para ese ejercicio. No hay un solo porcentaje escrito a mano: las dos tarifas del impuesto sobre la renta se transcribieron del Anexo 8 de la Resoluci\u00f3n Miscel\u00e1nea Fiscal publicado en el Diario Oficial el 28 de diciembre de 2025, la tabla del r\u00e9gimen simplificado est\u00e1 en el texto del art\u00edculo 113-E de la Ley del ISR, y las cuotas que se descuentan al trabajador vienen de cinco art\u00edculos de la Ley del Seguro Social.",
+
+  "parametros": {
+    "uma": {
+      "diaria": 117.31, "mensual": 3566.22, "anual": 42794.64,
+      "vigencia": "Del 1 de febrero de 2026 al 31 de enero de 2027",
+      "fuente": "INEGI \u00b7 Valor de la Unidad de Medida y Actualizaci\u00f3n, DOF 9 de enero de 2026",
+      "estado": "oficial",
+      "que": "La referencia en pesos que sustituy\u00f3 al salario m\u00ednimo para calcular multas, cuotas y obligaciones legales. Aqu\u00ed fija dos cosas: el tope del salario con el que se cotiza al Seguro Social y el monto del subsidio para el empleo."
+    },
+    "salario_minimo": {
+      "general": 315.04, "frontera_norte": 440.87,
+      "mensual_general": 9451.20, "mensual_frontera": 13226.10,
+      "fuente": "CONASAMI \u00b7 Resoluci\u00f3n publicada en el DOF el 9 de diciembre de 2025, vigente desde el 1 de enero de 2026",
+      "estado": "oficial",
+      "que": "El piso legal del salario. El mensual se obtiene multiplicando el diario por 30, que es como lo eleva al mes la legislaci\u00f3n laboral y de seguridad social."
+    },
+    "subsidio_empleo": {
+      "pct_uma": 15.02, "pct_enero": 15.59, "tope_ingreso_mensual": 11492.66,
+      "fuente": "Decreto que reforma el diverso por el que se otorga el subsidio para el empleo \u00b7 DOF 31 de diciembre de 2025",
+      "estado": "oficial",
+      "que": "Desde 2024 el subsidio dej\u00f3 de ser una tabla por tramos y es una cantidad fija: el valor mensual de la UMA multiplicado por 15.02%. Se resta del impuesto retenido a quien gana hasta $11,492.66 al mes. Para enero de 2026 el decreto orden\u00f3 usar 15.59%, porque la UMA se actualiza hasta febrero."
+    },
+    "iva": {
+      "tasa": 16, "tasa_frontera": 8,
+      "fuente": "Ley del Impuesto al Valor Agregado, art. 1\u00ba \u00b7 Decreto de est\u00edmulos fiscales regi\u00f3n fronteriza norte",
+      "estado": "oficial",
+      "que": "El impuesto que nadie retiene y todos pagan: va dentro del precio de casi todo lo que se compra. No distingue cu\u00e1nto gana quien compra, y por eso pesa m\u00e1s sobre el ingreso bajo."
+    },
+    "poblacion": {
+      "millones": 134.4,
+      "fuente": "CONAPO \u00b7 Proyecciones de la Poblaci\u00f3n de M\u00e9xico y las entidades federativas 2020-2070, poblaci\u00f3n a mitad de 2026",
+      "estado": "oficial",
+      "pendiente": "La base de datos abierta del Consejo no result\u00f3 accesible al integrar esta cifra, de modo que la referencia puntual al cuadro de la proyecci\u00f3n queda declarada como pendiente. La cifra es la que el propio Consejo dio a conocer para mediados de 2026."
+    },
+    "padron": {
+      "millones": 63.2,
+      "fuente": "Padr\u00f3n de contribuyentes activos, cat\u00e1logo macro de esta plataforma",
+      "estado": "pendiente",
+      "pendiente": "Esta cifra todav\u00eda no lleva en nuestro cat\u00e1logo la referencia oficial que la sustenta. Se ofrece como segundo denominador porque repartir entre quienes efectivamente tributan da una lectura distinta a repartir entre todos los habitantes, y ocultar esa diferencia ser\u00eda peor que declarar el pendiente."
+    }
+  },
+
+  "tarifa_mensual": {
+    "titulo": "Tarifa mensual del impuesto sobre la renta",
+    "ley": "Art. 96 de la Ley del ISR \u00b7 Anexo 8 de la RMF 2026, apartado B fracci\u00f3n V",
+    "fuente": "Diario Oficial de la Federaci\u00f3n, 28 de diciembre de 2025",
+    "estado": "oficial",
+    "nota": "Para 2026 los renglones se actualizaron por inflaci\u00f3n acumulada: el primer tramo pas\u00f3 de $746.04 a $844.59 y la cuota fija del \u00faltimo, de $117,912.32 a $133,488.54.",
+    "renglones": [
+      { "li": 0.01, "ls": 844.59, "cf": 0.0, "pct": 1.92 },
+      { "li": 844.6, "ls": 7168.51, "cf": 16.22, "pct": 6.4 },
+      { "li": 7168.52, "ls": 12598.02, "cf": 420.95, "pct": 10.88 },
+      { "li": 12598.03, "ls": 14644.64, "cf": 1011.68, "pct": 16.0 },
+      { "li": 14644.65, "ls": 17533.64, "cf": 1339.14, "pct": 17.92 },
+      { "li": 17533.65, "ls": 35362.83, "cf": 1856.84, "pct": 21.36 },
+      { "li": 35362.84, "ls": 55736.68, "cf": 5665.16, "pct": 23.52 },
+      { "li": 55736.69, "ls": 106410.5, "cf": 10457.09, "pct": 30.0 },
+      { "li": 106410.51, "ls": 141880.66, "cf": 25659.23, "pct": 32.0 },
+      { "li": 141880.67, "ls": 425641.99, "cf": 37009.69, "pct": 34.0 },
+      { "li": 425642.0, "ls": null, "cf": 133488.54, "pct": 35.0 }
+    ]
+  },
+
+  "tarifa_anual": {
+    "titulo": "Tarifa anual del impuesto sobre la renta",
+    "ley": "Arts. 97 y 152 de la Ley del ISR \u00b7 Anexo 8 de la RMF 2026, apartado C fracci\u00f3n II",
+    "fuente": "Diario Oficial de la Federaci\u00f3n, 28 de diciembre de 2025",
+    "estado": "oficial",
+    "nota": "Es la tarifa mensual elevada al a\u00f1o: cada l\u00edmite y cada cuota fija son doce veces los del cuadro mensual.",
+    "renglones": [
+      { "li": 0.01, "ls": 10135.11, "cf": 0.0, "pct": 1.92 },
+      { "li": 10135.12, "ls": 86022.11, "cf": 194.59, "pct": 6.4 },
+      { "li": 86022.12, "ls": 151176.19, "cf": 5051.37, "pct": 10.88 },
+      { "li": 151176.2, "ls": 175735.66, "cf": 12140.13, "pct": 16.0 },
+      { "li": 175735.67, "ls": 210403.69, "cf": 16069.64, "pct": 17.92 },
+      { "li": 210403.7, "ls": 424353.97, "cf": 22282.14, "pct": 21.36 },
+      { "li": 424353.98, "ls": 668840.14, "cf": 67981.92, "pct": 23.52 },
+      { "li": 668840.15, "ls": 1276925.98, "cf": 125485.07, "pct": 30.0 },
+      { "li": 1276925.99, "ls": 1702567.97, "cf": 307910.81, "pct": 32.0 },
+      { "li": 1702567.98, "ls": 5107703.92, "cf": 444116.23, "pct": 34.0 },
+      { "li": 5107703.93, "ls": null, "cf": 1601862.46, "pct": 35.0 }
+    ]
+  },
+
+  "resico": {
+    "titulo": "Tabla mensual del R\u00e9gimen Simplificado de Confianza",
+    "ley": "Art. 113-E de la Ley del ISR, T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n IV",
+    "fuente": "Texto vigente de la Ley del Impuesto sobre la Renta",
+    "estado": "oficial",
+    "tope_anual": 3500000,
+    "nota": "La tasa se aplica al total de lo efectivamente cobrado y amparado con factura, sin el IVA y <b>sin deducci\u00f3n alguna</b>. Esa es la diferencia de fondo con el r\u00e9gimen general: aqu\u00ed no se resta ning\u00fan gasto, y a cambio la tasa es una fracci\u00f3n de la del cuadro com\u00fan.",
+    "renglones": [
+      { "hasta": 25000.00, "tasa": 1.00 },
+      { "hasta": 50000.00, "tasa": 1.10 },
+      { "hasta": 83333.33, "tasa": 1.50 },
+      { "hasta": 208333.33, "tasa": 2.00 },
+      { "hasta": 3500000.00, "tasa": 2.50 }
+    ]
+  },
+
+  "imss_obrero": {
+    "titulo": "Lo que el Seguro Social descuenta al trabajador",
+    "fuente": "Ley del Seguro Social, \u00faltima reforma publicada en el DOF el 15 de enero de 2026",
+    "estado": "oficial",
+    "tope_sbc_uma": 25,
+    "nota_tope": "El art\u00edculo 28 fija el l\u00edmite superior del salario con el que se cotiza en veinticinco veces la referencia diaria. De ah\u00ed hacia arriba, el sueldo sube y la cuota ya no.",
+    "ramos": [
+      { "ramo": "Enfermedades y maternidad \u00b7 prestaciones en dinero", "pct": 0.25, "base": "sbc",
+        "ley": "Art. 107, fracci\u00f3n II: al trabajador le toca el 25% de la cuota total del 1% sobre el salario base de cotizaci\u00f3n." },
+      { "ramo": "Gastos m\u00e9dicos de personas pensionadas", "pct": 0.375, "base": "sbc",
+        "ley": "Art. 25: de la cuota conjunta de 1.5%, al patr\u00f3n le corresponde 1.05%, al trabajador 0.375% y al Estado 0.075%." },
+      { "ramo": "Invalidez y vida", "pct": 0.625, "base": "sbc",
+        "ley": "Art. 147: patr\u00f3n 1.75% y trabajador 0.625% sobre el salario base de cotizaci\u00f3n." },
+      { "ramo": "Cesant\u00eda en edad avanzada y vejez", "pct": 1.125, "base": "sbc",
+        "ley": "Art. 168, fracci\u00f3n II, inciso b): el trabajador cubre 1.125% sobre el salario base de cotizaci\u00f3n." },
+      { "ramo": "Enfermedades y maternidad \u00b7 prestaciones en especie", "pct": 0.40, "base": "excedente_3_uma",
+        "ley": "Art. 106, fracci\u00f3n II, le\u00eddo con el art\u00edculo D\u00e9cimo Noveno transitorio del decreto de 1995: la cuota obrera arranc\u00f3 en 2% y baj\u00f3 dieciseis cent\u00e9simas cada 1\u00ba de julio de 1998 a 2007, hasta quedar en 0.40%. Se causa s\u00f3lo sobre la parte del salario que excede tres veces la referencia diaria." }
+    ],
+    "no_los_paga_el_trabajador": [
+      { "ramo": "Retiro", "pct": 2.00, "ley": "Art. 168, fracci\u00f3n I: \u00edntegramente a cargo del patr\u00f3n." },
+      { "ramo": "Guarder\u00edas y prestaciones sociales", "pct": 1.00, "ley": "Arts. 211 y 212: la prima es de 1% y el patr\u00f3n la cubre \u00edntegramente." },
+      { "ramo": "Vivienda (INFONAVIT)", "pct": 5.00, "ley": "Art. 29 de la Ley del INFONAVIT: aportaci\u00f3n patronal del 5% sobre el salario base." },
+      { "ramo": "Riesgos de trabajo", "pct": null, "ley": "Arts. 70 a 74: prima variable seg\u00fan la siniestralidad de cada empresa, a cargo del patr\u00f3n." }
+    ]
+  },
+
+  "regimenes": [
+    {
+      "id": "sueldos",
+      "nombre": "Sueldos y salarios",
+      "corto": "Trabajo con un patr\u00f3n que me retiene",
+      "icono": "\ud83d\udc54",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo I de la Ley del ISR",
+      "articulos": "Arts. 94 a 99",
+      "quien_es": "Quien recibe un sueldo de un patr\u00f3n, est\u00e1 en la n\u00f3mina y ve el descuento ya hecho en su recibo.",
+      "base": "El sueldo completo del periodo.",
+      "retiene": "El patr\u00f3n. El trabajador no presenta pago alguno: se lo descuentan antes de cobrar.",
+      "seguridad_social": true,
+      "subsidio": true,
+      "nota": "Es el \u00fanico r\u00e9gimen en el que el impuesto llega ya descontado. Por eso quien est\u00e1 en n\u00f3mina casi nunca sabe cu\u00e1nto paga: nunca tuvo el dinero en la mano.",
+      "punto_ciego": "El recibo de n\u00f3mina muestra la cuota obrera del Seguro Social, pero no la patronal ni la del Estado. El costo completo de una plaza es bastante mayor que el bruto que aparece arriba del recibo, y ese dato el trabajador no lo ve nunca."
+    },
+    {
+      "id": "resico",
+      "nombre": "R\u00e9gimen Simplificado de Confianza",
+      "corto": "Facturo y pago una tasa baja sobre lo cobrado",
+      "icono": "\ud83e\uddd1\u200d\ud83d\udd27",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n IV de la Ley del ISR",
+      "articulos": "Arts. 113-E a 113-J",
+      "quien_es": "Personas f\u00edsicas con actividad empresarial, profesional o de arrendamiento que no rebasan tres millones y medio de pesos al a\u00f1o.",
+      "base": "El total cobrado en el mes y amparado con factura, sin IVA y sin restar ning\u00fan gasto.",
+      "retiene": "Nadie: el propio contribuyente declara y paga a m\u00e1s tardar el d\u00eda 17 del mes siguiente.",
+      "seguridad_social": false,
+      "subsidio": false,
+      "nota": "La tasa va de 1% a 2.5%. Es, con diferencia, el r\u00e9gimen m\u00e1s barato para una persona f\u00edsica, y ese es justamente el motivo por el que existe.",
+      "punto_ciego": "Pagar poco impuesto no es lo mismo que estar protegido. Quien tributa aqu\u00ed no cotiza al Seguro Social por ese solo hecho: ni servicio m\u00e9dico, ni incapacidades, ni semanas para pensionarse, salvo que se inscriba por su cuenta y pague ambas cuotas."
+    },
+    {
+      "id": "honorarios",
+      "nombre": "Actividad empresarial y profesional",
+      "corto": "Honorarios o negocio propio, con deducciones",
+      "icono": "\ud83e\uddfe",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n I de la Ley del ISR",
+      "articulos": "Arts. 100 a 110",
+      "quien_es": "Profesionistas independientes y due\u00f1os de un negocio que tributan en el r\u00e9gimen general.",
+      "base": "Los ingresos del periodo menos las deducciones autorizadas. El impuesto se calcula sobre la utilidad, no sobre lo facturado.",
+      "retiene": "Si el cliente es una persona moral, retiene 10% como pago provisional (art. 106). El resto lo entera el contribuyente.",
+      "seguridad_social": false,
+      "subsidio": false,
+      "nota": "Se le aplica la misma tarifa que a los sueldos, pero sobre la utilidad. Deducir bien puede cambiar el impuesto por completo; no deducir nada lo deja igual al de un asalariado.",
+      "punto_ciego": "La retenci\u00f3n del 10% que hace el cliente no es el impuesto final: es un anticipo. Quien la confunde con el pago definitivo llega a la declaraci\u00f3n anual con una diferencia a cargo que no esperaba."
+    },
+    {
+      "id": "arrendamiento",
+      "nombre": "Arrendamiento de inmuebles",
+      "corto": "Rento una casa, un local o un terreno",
+      "icono": "\ud83c\udfe0",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo III de la Ley del ISR",
+      "articulos": "Arts. 114 a 118",
+      "quien_es": "Quien obtiene ingresos por dar en uso o goce temporal un bien inmueble.",
+      "base": "La renta cobrada menos las deducciones. El art\u00edculo 115 permite optar por restar 35% a ciegas, sin comprobar gasto alguno, m\u00e1s el predial pagado.",
+      "retiene": "Si el inquilino es persona moral, retiene 10% sobre la renta sin deducci\u00f3n alguna (art. 116).",
+      "seguridad_social": false,
+      "subsidio": false,
+      "nota": "La deducci\u00f3n ciega de 35% es una de las pocas del sistema que no exige comprobar nada. Esta calculadora la aplica por ser la opci\u00f3n m\u00e1s com\u00fan, y lo dice en el resultado.",
+      "punto_ciego": "El predial se deduce, pero la calculadora no lo conoce: har\u00eda falta el recibo del municipio. El impuesto que aqu\u00ed se muestra es, por eso, un techo: el real puede ser algo menor."
+    },
+    {
+      "id": "plataformas",
+      "nombre": "Plataformas tecnol\u00f3gicas",
+      "corto": "Reparto, transporte, hospedaje o ventas por app",
+      "icono": "\ud83d\udcf1",
+      "capitulo": "T\u00edtulo IV, Cap\u00edtulo II, Secci\u00f3n III de la Ley del ISR",
+      "articulos": "Art. 113-A",
+      "quien_es": "Quien vende o presta servicios por internet a trav\u00e9s de una aplicaci\u00f3n: transporte de pasajeros, entrega de bienes, hospedaje o comercio.",
+      "base": "El total efectivamente percibido por conducto de la plataforma, sin IVA.",
+      "retiene": "La propia plataforma, y entera la retenci\u00f3n al fisco.",
+      "seguridad_social": false,
+      "subsidio": false,
+      "tasas": [
+        { "id": "transporte", "nombre": "Transporte de pasajeros y entrega de bienes", "pct": 2.1 },
+        { "id": "hospedaje", "nombre": "Servicios de hospedaje", "pct": 4.0 },
+        { "id": "bienes", "nombre": "Venta de bienes y prestaci\u00f3n de servicios", "pct": 1.0 }
+      ],
+      "nota": "Las tres tasas son las del propio art\u00edculo 113-A. La retenci\u00f3n tiene car\u00e1cter de pago provisional, salvo que se opte por considerarla definitiva.",
+      "punto_ciego": "La tasa se aplica al ingreso bruto que pasa por la app, antes de descontar gasolina, mantenimiento o la comisi\u00f3n de la propia plataforma. El porcentaje se ve peque\u00f1o sobre el bruto y bastante m\u00e1s grande sobre lo que realmente queda."
+    },
+    {
+      "id": "nose",
+      "nombre": "No s\u00e9 en cu\u00e1l estoy",
+      "corto": "No estoy seguro, o no estoy registrado",
+      "icono": "\ud83e\udd14",
+      "capitulo": "\u2014",
+      "articulos": "\u2014",
+      "quien_es": "Quien no sabe c\u00f3mo tributa, o no tributa.",
+      "base": "La calculadora sigue adelante con el supuesto m\u00e1s com\u00fan en M\u00e9xico: sueldos y salarios.",
+      "retiene": "Se calcula como si hubiera un patr\u00f3n que retiene.",
+      "seguridad_social": true,
+      "subsidio": true,
+      "hereda": "sueldos",
+      "nota": "No pasa nada por no saberlo. El r\u00e9gimen aparece en la constancia de situaci\u00f3n fiscal que expide el SAT, y se puede cambiar la elecci\u00f3n aqu\u00ed arriba en cuanto se sepa.",
+      "punto_ciego": "Quien no est\u00e1 registrado no deja de pagar impuestos: paga el IVA y el IEPS que van dentro del precio de lo que compra, sin excepci\u00f3n y sin recibo que se lo diga."
+    }
+  ],
+
+  "relojes": {
+    "titulo": "Lo que se endeuda y lo que se pierde, por segundo",
+    "nota": "Ninguno de estos relojes mide un gasto que ocurra en el instante en que usted lo mira. Cada uno toma una cifra anual de un documento oficial y la proyecta sobre el tiempo que usted lleva en esta p\u00e1gina. Es una regla de tres con el reloj del sistema, no una lectura en tiempo real del erario.",
+    "fuentes": [
+      {
+        "id": "deuda-nueva",
+        "nombre": "Deuda nueva autorizada para 2026",
+        "icono": "\ud83c\udfe6",
+        "anual_mdp": 1472626.4,
+        "estado": "oficial",
+        "fuente": "Ley de Ingresos de la Federaci\u00f3n 2026 \u00b7 ingresos derivados de financiamientos",
+        "refKey": "ref-lif2026",
+        "que": "No es lo que el pa\u00eds debe: es lo que se agrega este a\u00f1o a lo que ya deb\u00eda. Entra al presupuesto como ingreso y sale como obligaci\u00f3n de los a\u00f1os siguientes.",
+        "culpa": false
+      },
+      {
+        "id": "intereses",
+        "nombre": "Intereses de la deuda ya contratada",
+        "icono": "\ud83d\udcc9",
+        "anual_mdp": 1572073.3,
+        "estado": "oficial",
+        "fuente": "Presupuesto de Egresos de la Federaci\u00f3n 2026 \u00b7 Anexo 8, costo financiero de la deuda",
+        "refKey": "ref-pef2026",
+        "que": "El precio de lo prestado en ejercicios anteriores. No compra nada y no amortiza capital: s\u00f3lo paga intereses. Es la factura de las decisiones de gobiernos pasados, y la paga el presupuesto de hoy.",
+        "culpa": true
+      },
+      {
+        "id": "megaobras",
+        "nombre": "P\u00e9rdida operativa de las doce megaobras",
+        "icono": "\ud83c\udfd7\ufe0f",
+        "anual_mdp": 80200.1,
+        "estado": "derivado",
+        "fuente": "Suma de las doce obras evaluadas en la subpesta\u00f1a 2.2",
+        "que": "Lo que cuesta cada a\u00f1o mantener andando obras cuya operaci\u00f3n ingresa menos de lo que gasta. No es el sobrecosto de construirlas: es el d\u00e9ficit de tenerlas abiertas.",
+        "culpa": true
+      },
+      {
+        "id": "asf",
+        "nombre": "Monto observado por la ASF a las 32 entidades",
+        "icono": "\ud83d\udd0d",
+        "anual_mdp": 46122.0,
+        "estado": "derivado",
+        "fuente": "Suma de los montos observados a las 32 entidades en el cat\u00e1logo de la pesta\u00f1a 1",
+        "que": "Lo que la Auditor\u00eda Superior de la Federaci\u00f3n se\u00f1al\u00f3 como no justificado en el gasto de las entidades. Observado no es lo mismo que perdido: parte se aclara y parte se recupera.",
+        "culpa": true
+      }
+    ],
+    "sobrecosto_acumulado": {
+      "mdp": 3069647.0,
+      "estado": "derivado",
+      "fuente": "Subpesta\u00f1a 2.2 \u00b7 inversi\u00f3n real menos inversi\u00f3n presupuestada de las doce obras",
+      "nota": "No entra en los relojes porque no es un ritmo anual sino una suma de pesos de a\u00f1os distintos, entre 1988 y 2024, sin deflactar a un a\u00f1o com\u00fan. Se muestra aparte, como lo que es: una cuenta acumulada."
+    }
+  },
+
+  "cadencias": [
+    { "id": "dia", "nombre": "Al d\u00eda", "dias": 1, "icono": "\ud83d\udd50" },
+    { "id": "mes", "nombre": "Al mes", "dias": 30.4167, "icono": "\ud83d\udcc5" },
+    { "id": "trimestre", "nombre": "Al trimestre", "dias": 91.25, "icono": "\ud83d\udcc6" },
+    { "id": "semestre", "nombre": "Al semestre", "dias": 182.5, "icono": "\u23f3" },
+    { "id": "ano", "nombre": "Al a\u00f1o", "dias": 365, "icono": "\ud83d\uddd3\ufe0f" }
+  ],
+
+  "puntos_ciegos": [
+    {
+      "titulo": "El impuesto que usted paga no tiene destino",
+      "icono": "\ud83e\udded",
+      "texto": "El reparto que esta calculadora muestra no significa que su dinero vaya a esos rubros. El sistema mexicano funciona bajo unidad de caja: todo lo recaudado entra a una sola bolsa y de ah\u00ed sale todo el gasto. Su ISR no est\u00e1 etiquetado. Lo que el reparto dice, con precisi\u00f3n, es otra cosa: si el gasto del a\u00f1o se reparte as\u00ed, entonces a su aportaci\u00f3n le corresponde esta proporci\u00f3n.",
+      "excepcion": "Hay una excepci\u00f3n, y la Ley de Ingresos la marca expresamente: las cuotas de seguridad social s\u00ed tienen destino espec\u00edfico. No entran a la bolsa com\u00fan ni forman parte de la Recaudaci\u00f3n Federal Participable, de modo que tampoco se reparten a estados y municipios."
+    },
+    {
+      "titulo": "De cada peso que se gasta, catorce centavos son prestados",
+      "icono": "\ud83c\udfe6",
+      "texto": "El Presupuesto de Egresos y la Ley de Ingresos cierran en la misma cifra porque lo prestado se cuenta como ingreso. De los $10.19 billones que el Estado tiene autorizado gastar en 2026, $1.47 billones son endeudamiento neto. Dicho de otro modo: el reparto del gasto que usted ve no se financia s\u00f3lo con impuestos, y la parte que no, alguien la pagar\u00e1 despu\u00e9s."
+    },
+    {
+      "titulo": "El impuesto que no se ve es el m\u00e1s parejo y el m\u00e1s injusto",
+      "icono": "\ud83d\uded2",
+      "texto": "La retenci\u00f3n sobre el ingreso se declara, se calcula y aparece en un recibo. El IVA no: va dentro del precio. Es de tasa \u00fanica, as\u00ed que quien gana poco le entrega al fisco una proporci\u00f3n mayor de su ingreso que quien gana mucho. Esta calculadora no puede saber cu\u00e1nto IVA paga usted, porque eso depende de en qu\u00e9 gasta; por eso lo ofrece como escenario que usted fija, y no como dato."
+    },
+    {
+      "titulo": "El costo completo de una plaza no est\u00e1 en el recibo",
+      "icono": "\ud83e\uddfe",
+      "texto": "Al trabajador se le descuenta 2.375% del salario base m\u00e1s 0.40% de la parte que excede tres UMA. El patr\u00f3n aporta, por el mismo trabajador, el retiro, las guarder\u00edas, la vivienda, los riesgos de trabajo y la parte mayor de cada ramo compartido. Nada de eso aparece en la n\u00f3mina que el trabajador recibe."
+    }
+  ]
+},
+"poderes": {
+    "consulta": "2026-09-25",
+    "nota": "Pesos nominales. \u00abAprobado\u00bb es autorizaci\u00f3n de gasto, no dinero pagado. Cada cifra conserva su documento, su p\u00e1gina y su estado: oficial (transcrita), derivado (calculada, con la operaci\u00f3n dicha) o pendiente. Las vistas de un mismo dinero no se suman entre s\u00ed.",
+    "fuentes": {
+      "CP2025": {
+        "corto": "Cuenta P\u00fablica 2025, datos abiertos SHCP",
+        "doc": "SHCP, Cuenta P\u00fablica 2025, base de datos abierta de ramos administrativos, generales y aut\u00f3nomos (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv",
+        "sha256": "973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0"
+      },
+      "AV2T2026": {
+        "corto": "SHCP, avance del gasto al 2.\u00ba trimestre 2026",
+        "doc": "SHCP, Presupuesto de Egresos 2026, avance del gasto (AC01) al segundo trimestre, base de datos abierta (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
+        "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511"
+      },
+      "PEF": {
+        "corto": "PEF 2026, DOF 21-11-2025",
+        "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n 2026, DOF 21-11-2025 (edici\u00f3n vespertina)",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf",
+        "sha256": "6db4a86b588a0f76928e5d61298579c4aff2c29c3ace68fdedbfa5afceb8f2bc"
+      },
+      "UR": {
+        "corto": "SHCP, Ramo 03 por unidad responsable",
+        "doc": "PEF 2026, Ramo 03, an\u00e1lisis administrativo econ\u00f3mico (SHCP, enero 2026)",
+        "url": "https://www.pef.hacienda.gob.mx/work/models/P3f26115/PEF2026/y6k1r4r1/docs/03/r03_aae.pdf"
+      },
+      "COG": {
+        "corto": "SHCP, Ramo 03 por cap\u00edtulo y concepto",
+        "doc": "PEF 2026, Ramo 03, distribuci\u00f3n por unidad responsable, cap\u00edtulo y concepto (SHCP, enero 2026)",
+        "url": "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf"
+      },
+      "SCJN_AGO": {
+        "corto": "SCJN, ejercicio al 31-08-2026",
+        "doc": "SCJN, estado del ejercicio del presupuesto al 31 de agosto de 2026",
+        "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto-asignado/documento/2026-09/EEP-2026-08.pdf"
+      },
+      "SCJN_JUN": {
+        "corto": "SCJN, enero-junio 2026",
+        "doc": "SCJN, estado anal\u00edtico del ejercicio del presupuesto, enero-junio 2026",
+        "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-07/Estado-Analitico-Ejercicio-Presupuesto-2026-Trim-02.pdf"
+      },
+      "SCJN_2025": {
+        "corto": "SCJN, cierre 2025",
+        "doc": "SCJN, estado anal\u00edtico del ejercicio del presupuesto, enero-diciembre 2025",
+        "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-01/Estado-Analitico-Ejercicio-Presupuesto-2025-Trim-04.pdf"
+      },
+      "MANUAL": {
+        "corto": "Manual de remuneraciones PJF 2026, DOF 27-02-2026",
+        "doc": "Manual de remuneraciones de las personas servidoras p\u00fablicas del Poder Judicial de la Federaci\u00f3n 2026, DOF 27-02-2026",
+        "url": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF"
+      },
+      "OAJ_CAP": {
+        "corto": "OAJ, 2.\u00ba trimestre 2026 por cap\u00edtulo",
+        "doc": "OAJ, presupuesto ejercido por cap\u00edtulo, segundo trimestre 2026 (1 de abril a 30 de junio)",
+        "url": "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet001.htm"
+      },
+      "OAJ_UEG": {
+        "corto": "OAJ, 2.\u00ba trimestre 2026 por unidad",
+        "doc": "OAJ, pagos por unidad ejecutora, segundo trimestre 2026",
+        "url": "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet007.htm"
+      },
+      "ASF_DIP": {
+        "corto": "ASF, auditor\u00eda 31 (Diputados)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 31: C\u00e1mara de Diputados (segunda entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf"
+      },
+      "ASF_SEN": {
+        "corto": "ASF, auditor\u00eda 32 (Senado)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 32: C\u00e1mara de Senadores (segunda entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0032_a.pdf"
+      },
+      "ASF_NL": {
+        "corto": "ASF, auditor\u00eda 1402 (Congreso de NL)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 1402: Congreso de Nuevo Le\u00f3n (tercera entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1402_a.pdf"
+      },
+      "ASF_TLX": {
+        "corto": "ASF, auditor\u00eda 1940 (Congreso de Tlaxcala)",
+        "doc": "ASF, Cuenta P\u00fablica 2024, auditor\u00eda 1940: Congreso de Tlaxcala (tercera entrega)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1940_a.pdf"
+      },
+      "CNPLE": {
+        "corto": "INEGI, CNPLE 2025",
+        "doc": "INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, resultados (ejercicio 2024)",
+        "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf"
+      }
+    },
+    "gastoNetoTotal": {
+      "valor": 10193683700000,
+      "estado": "oficial",
+      "fuente": "PEF",
+      "pagina": "Anexo 1, DOF p. 32"
+    },
+    "ramos2026": {
+      "legislativo": {
+        "ramo": "01",
+        "nombre": "Poder Legislativo",
+        "aprobado": 17529076499,
+        "proyecto": 17529076499,
+        "unidades": [
+          {
+            "id": "diputados",
+            "nombre": "C\u00e1mara de Diputados",
+            "aprobado": 9602671330,
+            "proyecto": 9602671330
+          },
+          {
+            "id": "senado",
+            "nombre": "C\u00e1mara de Senadores",
+            "aprobado": 5103817038,
+            "proyecto": 5103817038
+          },
+          {
+            "id": "asf",
+            "nombre": "Auditor\u00eda Superior de la Federaci\u00f3n",
+            "aprobado": 2822588131,
+            "proyecto": 2822588131
+          }
+        ],
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 1, DOF p. 32; proyecto y recorte: Anexo 32, DOF p. 108"
+      },
+      "judicial": {
+        "ramo": "03",
+        "nombre": "Poder Judicial de la Federaci\u00f3n",
+        "aprobado": 70005628646,
+        "proyecto": 85960228646,
+        "unidades": [
+          {
+            "id": "oaj",
+            "ur": "120",
+            "nombre": "\u00d3rgano de Administraci\u00f3n Judicial",
+            "aprobado": 59190814696,
+            "proyecto": 74224414696
+          },
+          {
+            "id": "scjn",
+            "ur": "100",
+            "nombre": "Suprema Corte de Justicia de la Naci\u00f3n",
+            "aprobado": 5208743404,
+            "proyecto": 5869743404
+          },
+          {
+            "id": "tepjf",
+            "ur": "210 y 211",
+            "nombre": "Tribunal Electoral del Poder Judicial de la Federaci\u00f3n",
+            "aprobado": 3749492877,
+            "proyecto": 4009492877
+          },
+          {
+            "id": "tdj",
+            "ur": "300",
+            "nombre": "Tribunal de Disciplina Judicial",
+            "aprobado": 1856577669,
+            "proyecto": 1856577669
+          }
+        ],
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 1, DOF p. 32; proyecto y recorte: Anexo 32, DOF p. 108"
+      }
+    },
+    "remuneraciones2026": [
+      {
+        "id": "presidencia",
+        "cargo": "Presidenta de la Rep\u00fablica",
+        "ente": "Poder Ejecutivo Federal",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "netoAnual": 2073878,
+        "brutoAnual": 2882131,
+        "isrAnual": 808253,
+        "aguinaldo": 105258,
+        "aguinaldoNota": "Aguinaldo sobre sueldo base; la gratificaci\u00f3n de fin de a\u00f1o sobre compensaci\u00f3n garantizada es aparte ($282,074 brutos).",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.1.3, DOF p. 59",
+        "nota": "Remuneraci\u00f3n total anual neta de percepciones ordinarias 2026."
+      },
+      {
+        "id": "senado",
+        "cargo": "Senadora o senador",
+        "ente": "C\u00e1mara de Senadores \u00b7 Ramo 01",
+        "icono": "\u2696\ufe0f",
+        "netoAnual": 2037848,
+        "brutoAnual": 2822953,
+        "isrAnual": 785105,
+        "aguinaldo": 382207,
+        "aguinaldoNota": "Aguinaldo bruto sobre la dieta.",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.2.2, DOF p. 61",
+        "nota": "El propio anexo aclara que corresponde a las percepciones de 2025."
+      },
+      {
+        "id": "asf",
+        "cargo": "Auditor Superior de la Federaci\u00f3n",
+        "ente": "Auditor\u00eda Superior de la Federaci\u00f3n \u00b7 Ramo 01",
+        "icono": "\ud83d\udd0e",
+        "netoAnual": 2037546,
+        "brutoAnual": 2849965,
+        "isrAnual": 812419,
+        "aguinaldo": 89058,
+        "aguinaldoNota": "Aguinaldo bruto sobre sueldo base; la gratificaci\u00f3n de fin de a\u00f1o es aparte ($297,065 brutos).",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.4.3, DOF p. 73",
+        "nota": "Remuneraci\u00f3n total anual neta de la m\u00e1xima representaci\u00f3n de la ASF."
+      },
+      {
+        "id": "diputados",
+        "cargo": "Diputada o diputado federal",
+        "ente": "C\u00e1mara de Diputados \u00b7 Ramo 01",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "netoAnual": 1307224,
+        "brutoAnual": 1710677,
+        "isrAnual": 403453,
+        "aguinaldo": 147438,
+        "aguinaldoNota": "Aguinaldo bruto sobre la dieta.",
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.3.4, DOF p. 68",
+        "nota": "El propio anexo aclara que corresponde a las percepciones de 2025."
+      },
+      {
+        "id": "ministro",
+        "cargo": "Ministra o ministro de la SCJN",
+        "ente": "Suprema Corte de Justicia \u00b7 Ramo 03",
+        "icono": "\u2696\ufe0f",
+        "netoMensualTabulado": 134310,
+        "aguinaldoPrimaNetos": 290273,
+        "netoAnual": 1901993,
+        "netoAnualEstado": "derivado",
+        "netoAnualOperacion": "12 \u00d7 $134,310 de sueldo neto tabulado + $290,273 de aguinaldo y prima vacacional netos",
+        "aguinaldo": 290273,
+        "aguinaldoNota": "Aguinaldo y prima vacacional netos, juntos (Manual, p. 9).",
+        "estado": "oficial",
+        "fuente": "MANUAL",
+        "pagina": "pp. 8 y 9",
+        "parcial": true,
+        "nota": "Cifra parcial: el Manual publica el sueldo neto tabulado y el aguinaldo con la prima; no incluye seguros ni aportaciones de seguridad social, que s\u00ed entran en la remuneraci\u00f3n total de los otros cargos. En el Decreto, los tabuladores de la Corte vienen como imagen (Anexo 23.5)."
+      }
+    ],
+    "ejercicio": {
+      "cp2025": {
+        "fuente": "CP2025",
+        "unidades": [
+          {
+            "ramo": "01",
+            "ur": "100",
+            "nombre": "H. C\u00e1mara de Diputados",
+            "original": 9602671330.0,
+            "modificado": 9926921396.51,
+            "devengado": 9926921396.51,
+            "pagado": 9926921396.51,
+            "ejercido": 9926921396.51
+          },
+          {
+            "ramo": "01",
+            "ur": "101",
+            "nombre": "Auditor\u00eda Superior de la Federaci\u00f3n",
+            "original": 2822588134.0,
+            "modificado": 3356780869.5,
+            "devengado": 3356780869.5,
+            "pagado": 3356780869.5,
+            "ejercido": 3356780869.5
+          },
+          {
+            "ramo": "01",
+            "ur": "200",
+            "nombre": "H. C\u00e1mara de Senadores",
+            "original": 5103817038.0,
+            "modificado": 5335926794.82,
+            "devengado": 5335926794.82,
+            "pagado": 5241887433.52,
+            "ejercido": 5335926794.82
+          },
+          {
+            "ramo": "03",
+            "ur": "100",
+            "nombre": "Suprema Corte de Justicia de la Naci\u00f3n",
+            "original": 5208511164.0,
+            "modificado": 5273784802.32,
+            "devengado": 5273784802.32,
+            "pagado": 5032120579.92,
+            "ejercido": 5273784802.32
+          },
+          {
+            "ramo": "03",
+            "ur": "110",
+            "nombre": "Consejo de la Judicatura Federal",
+            "original": 62025503862.0,
+            "modificado": 38684932301.08,
+            "devengado": 38684932301.08,
+            "pagado": 38591877063.18,
+            "ejercido": 38684932301.08
+          },
+          {
+            "ramo": "03",
+            "ur": "120",
+            "nombre": "\u00d3rgano de Administraci\u00f3n Judicial",
+            "original": 0.0,
+            "modificado": 34703602896.1,
+            "devengado": 34701722979.43,
+            "pagado": 30820909860.18,
+            "ejercido": 34701722979.43
+          },
+          {
+            "ramo": "03",
+            "ur": "210",
+            "nombre": "Sala Superior",
+            "original": 2883840440.0,
+            "modificado": 2553780617.73,
+            "devengado": 2547413115.73,
+            "pagado": 2456004989.09,
+            "ejercido": 2547413115.73
+          },
+          {
+            "ramo": "03",
+            "ur": "211",
+            "nombre": "Salas Regionales",
+            "original": 865750836.0,
+            "modificado": 839311292.58,
+            "devengado": 837568194.76,
+            "pagado": 806584253.18,
+            "ejercido": 837568194.76
+          },
+          {
+            "ramo": "03",
+            "ur": "300",
+            "nombre": "Tribunal de Disciplina Judicial",
+            "original": 0.0,
+            "modificado": 241168922.2,
+            "devengado": 241168922.2,
+            "pagado": 230764033.17,
+            "ejercido": 241168922.2
+          }
+        ],
+        "capitulosLegislativo": {
+          "100": [
+            {
+              "cap": "1000",
+              "concepto": "Servicios personales",
+              "ejercido": 5672924645.2
+            },
+            {
+              "cap": "2000",
+              "concepto": "Materiales y suministros",
+              "ejercido": 170633499.95
+            },
+            {
+              "cap": "3000",
+              "concepto": "Servicios generales",
+              "ejercido": 1630339334.33
+            },
+            {
+              "cap": "4000",
+              "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+              "ejercido": 1994082499.63
+            },
+            {
+              "cap": "5000",
+              "concepto": "Bienes muebles, inmuebles e intangibles",
+              "ejercido": 220239688.76
+            },
+            {
+              "cap": "6000",
+              "concepto": "Inversi\u00f3n p\u00fablica",
+              "ejercido": 238701728.64
+            }
+          ],
+          "200": [
+            {
+              "cap": "1000",
+              "concepto": "Servicios personales",
+              "ejercido": 3153196682.12
+            },
+            {
+              "cap": "2000",
+              "concepto": "Materiales y suministros",
+              "ejercido": 93549278.8
+            },
+            {
+              "cap": "3000",
+              "concepto": "Servicios generales",
+              "ejercido": 919329292.18
+            },
+            {
+              "cap": "4000",
+              "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+              "ejercido": 1156873218.73
+            },
+            {
+              "cap": "5000",
+              "concepto": "Bienes muebles, inmuebles e intangibles",
+              "ejercido": 12978322.99
+            }
+          ],
+          "101": [
+            {
+              "cap": "1000",
+              "concepto": "Servicios personales",
+              "ejercido": 2873830290.41
+            },
+            {
+              "cap": "2000",
+              "concepto": "Materiales y suministros",
+              "ejercido": 17580520.81
+            },
+            {
+              "cap": "3000",
+              "concepto": "Servicios generales",
+              "ejercido": 433618134.15
+            },
+            {
+              "cap": "4000",
+              "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+              "ejercido": 18200614.89
+            },
+            {
+              "cap": "5000",
+              "concepto": "Bienes muebles, inmuebles e intangibles",
+              "ejercido": 13551309.24
+            }
+          ]
+        },
+        "estado": "oficial"
+      },
+      "avance2026": {
+        "fuente": "AV2T2026",
+        "corte": "30 de junio de 2026",
+        "unidades": [
+          {
+            "ramo": "01",
+            "ur": "100",
+            "nombre": "H. C\u00e1mara de Diputados",
+            "aprobado": 9602671330.0,
+            "modificado": 9602671330.0,
+            "pagado": 3908689295.55
+          },
+          {
+            "ramo": "01",
+            "ur": "101",
+            "nombre": "Auditor\u00eda Superior de la Federaci\u00f3n",
+            "aprobado": 2822588131.0,
+            "modificado": 3371031329.2,
+            "pagado": 1338514011.38
+          },
+          {
+            "ramo": "01",
+            "ur": "200",
+            "nombre": "H. C\u00e1mara de Senadores",
+            "aprobado": 5103817038.0,
+            "modificado": 5103817038.0,
+            "pagado": 2187188742.79
+          },
+          {
+            "ramo": "03",
+            "ur": "100",
+            "nombre": "Suprema Corte de Justicia de la Naci\u00f3n",
+            "aprobado": 5208743404.0,
+            "modificado": 5208743404.0,
+            "pagado": 1939062490.66
+          },
+          {
+            "ramo": "03",
+            "ur": "120",
+            "nombre": "\u00d3rgano de Administraci\u00f3n Judicial",
+            "aprobado": 59190814696.0,
+            "modificado": 59190814696.0,
+            "pagado": 24963321913.56
+          },
+          {
+            "ramo": "03",
+            "ur": "210",
+            "nombre": "Sala Superior",
+            "aprobado": 2931820871.0,
+            "modificado": 2931820871.0,
+            "pagado": 809533548.65
+          },
+          {
+            "ramo": "03",
+            "ur": "211",
+            "nombre": "Salas Regionales",
+            "aprobado": 817672006.0,
+            "modificado": 817672006.0,
+            "pagado": 255269006.74
+          },
+          {
+            "ramo": "03",
+            "ur": "300",
+            "nombre": "Tribunal de Disciplina Judicial",
+            "aprobado": 1856577669.0,
+            "modificado": 1856577669.0,
+            "pagado": 1047775628.17
+          }
+        ],
+        "estado": "oficial"
+      },
+      "nota": "Hacienda consolida lo que cada ente le reporta; el propio ente puede publicar cifras distintas para el mismo periodo por fechas de registro. \u00abEjercido\u00bb incluye lo devengado y no pagado al cierre."
+    },
+    "judicial": {
+      "capitulosPorUR": {
+        "RAMO03": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 62257909570,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 667533897,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 6663246322,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 58799179,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 1
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 343869378,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 2
+          },
+          {
+            "cap": "6000",
+            "concepto": "Inversi\u00f3n p\u00fablica",
+            "aprobado": 14270300,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 2
+          }
+        ],
+        "100": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 4289319105,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 67002322,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 825658834,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 17262862,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 3
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 5500281,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "6000",
+            "concepto": "Inversi\u00f3n p\u00fablica",
+            "aprobado": 4000000,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          }
+        ],
+        "120": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 53562949305,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 549744012,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 5051355262,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 4
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 26766117,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          }
+        ],
+        "210": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 2353552670,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 44881169,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 414756297,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 5
+          },
+          {
+            "cap": "4000",
+            "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+            "aprobado": 14770200,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 93590235,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          },
+          {
+            "cap": "6000",
+            "concepto": "Inversi\u00f3n p\u00fablica",
+            "aprobado": 10270300,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          }
+        ],
+        "211": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 710847874,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 6
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 3061097,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 100984173,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 2778862,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          }
+        ],
+        "300": [
+          {
+            "cap": "1000",
+            "concepto": "Servicios personales",
+            "aprobado": 1341240616,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 7
+          },
+          {
+            "cap": "2000",
+            "concepto": "Materiales y suministros",
+            "aprobado": 2845297,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 8
+          },
+          {
+            "cap": "3000",
+            "concepto": "Servicios generales",
+            "aprobado": 270491756,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 8
+          },
+          {
+            "cap": "5000",
+            "concepto": "Bienes muebles, inmuebles e intangibles",
+            "aprobado": 242000000,
+            "estado": "oficial",
+            "fuente": "COG",
+            "pagina": 8
+          }
+        ]
+      },
+      "scjnCortes": [
+        {
+          "corte": "2025-12-31",
+          "concepto": "Servicios personales",
+          "aprobado": 4475993376,
+          "modificado": 4467514725,
+          "devengado": 4467514725,
+          "pagado": 4351050362,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Materiales y Suministros",
+          "aprobado": 54644881,
+          "modificado": 48742161,
+          "devengado": 48742161,
+          "pagado": 46027009,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Servicios Generales",
+          "aprobado": 656572072,
+          "modificado": 723055502,
+          "devengado": 723055502,
+          "pagado": 626511742,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Transferencias, Asignaciones, Subsidios y Otras Ayudas",
+          "aprobado": 15151534,
+          "modificado": 6282854,
+          "devengado": 6282854,
+          "pagado": 6282854,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Bienes Muebles, Inmuebles e Intangibles",
+          "aprobado": 2275525,
+          "modificado": 27517693,
+          "devengado": 27517693,
+          "pagado": 1576747,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Inversi\u00f3n P\u00fablica",
+          "aprobado": 3873776,
+          "modificado": 671866,
+          "devengado": 671866,
+          "pagado": 671866,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2025-12-31",
+          "concepto": "Total",
+          "aprobado": 5208511164,
+          "modificado": 5273784802,
+          "devengado": 5273784802,
+          "pagado": 5032120580,
+          "estado": "oficial",
+          "fuente": "SCJN_2025",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Servicios personales",
+          "aprobado": 4289319105,
+          "modificado": 4289319105,
+          "devengado": 2169374535,
+          "pagado": 1875481661,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Materiales y Suministros",
+          "aprobado": 67002322,
+          "modificado": 68764711,
+          "devengado": 19200927,
+          "pagado": 16545316,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Servicios Generales",
+          "aprobado": 825658834,
+          "modificado": 823368416,
+          "devengado": 314786427,
+          "pagado": 208901861,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Transferencias, Asignaciones, Subsidios y Otras Ayudas",
+          "aprobado": 17262862,
+          "modificado": 16663122,
+          "devengado": 316350,
+          "pagado": 316350,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Bienes Muebles, Inmuebles e Intangibles",
+          "aprobado": 5500281,
+          "modificado": 6628049,
+          "devengado": 13340,
+          "pagado": 13340,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Inversi\u00f3n P\u00fablica",
+          "aprobado": 4000000,
+          "modificado": 4000000,
+          "devengado": 0,
+          "pagado": 0,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        },
+        {
+          "corte": "2026-06-30",
+          "concepto": "Total",
+          "aprobado": 5208743404,
+          "modificado": 5208743404,
+          "devengado": 2503691579,
+          "pagado": 2101258527,
+          "estado": "oficial",
+          "fuente": "SCJN_JUN",
+          "pagina": 1
+        }
+      ],
+      "scjnAgosto": {
+        "original": 5208743404,
+        "modificado": 5230072515.57,
+        "compromiso": 1707440588.3,
+        "ejercido": 3253791174.26,
+        "disponible": 268840753.01,
+        "estado": "oficial",
+        "fuente": "SCJN_AGO",
+        "pagina": 1,
+        "nota": "Compromiso + ejercido + disponible = modificado. \u00abEjercido\u00bb no se renombra como pagado."
+      },
+      "oajCapitulos": [
+        {
+          "cap": "1000",
+          "concepto": "Servicios personales",
+          "anualShcp": 53562949305,
+          "anualOaj": 53562949305,
+          "diferencia": 0,
+          "asignadoTrim": 13724140940,
+          "pagadoTrim": 12806170765.02,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "2000",
+          "concepto": "Materiales y suministros",
+          "anualShcp": 549744012,
+          "anualOaj": 549744012,
+          "diferencia": 0,
+          "asignadoTrim": 177508929,
+          "pagadoTrim": 197114519.57,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "3000",
+          "concepto": "Servicios generales",
+          "anualShcp": 5051355262,
+          "anualOaj": 5040717363,
+          "diferencia": -10637899,
+          "asignadoTrim": 1371654342,
+          "pagadoTrim": 970480484.54,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "4000",
+          "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+          "anualShcp": 26766117,
+          "anualOaj": 37404016,
+          "diferencia": 10637899,
+          "asignadoTrim": 8447123,
+          "pagadoTrim": 3617154.97,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "5000",
+          "concepto": "Bienes muebles, inmuebles e intangibles",
+          "anualShcp": null,
+          "anualOaj": 0,
+          "diferencia": null,
+          "asignadoTrim": 0,
+          "pagadoTrim": 17435.52,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        },
+        {
+          "cap": "6000",
+          "concepto": "Inversi\u00f3n p\u00fablica",
+          "anualShcp": null,
+          "anualOaj": 0,
+          "diferencia": null,
+          "asignadoTrim": 0,
+          "pagadoTrim": 0,
+          "estado": "oficial",
+          "fuente": "OAJ_CAP"
+        }
+      ],
+      "oajNota": "SHCP y OAJ difieren en $10,637,899 entre los cap\u00edtulos 3000 y 4000; el total coincide. La causa est\u00e1 pendiente.",
+      "circuitos": [
+        {
+          "n": 1,
+          "ueg": "1201",
+          "sede": "Primer Circuito Judicial (CDMX)",
+          "pagado": 611259,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 2,
+          "ueg": "1202",
+          "sede": "Segundo Circuito Judicial (Toluca, Edo.M\u00e9x)",
+          "pagado": 7452576.74,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 3,
+          "ueg": "1203, 1234",
+          "sede": "Tercer Circuito Judicial (Zapopan, Jal.) / Tercer Circuito Judicial (Puente Grande, Jal.)",
+          "pagado": 18254958.7,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 4,
+          "ueg": "1204",
+          "sede": "Cuarto Circuito Judicial (Monterrey, N.L.)",
+          "pagado": 33024990.12,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 5,
+          "ueg": "1205",
+          "sede": "Quinto Circuito Judicial (Hermosillo, Son.)",
+          "pagado": 7315564.33,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 6,
+          "ueg": "1206",
+          "sede": "Sexto Circuito Judicial (San Andr\u00e9s Cholula, Pue.)",
+          "pagado": 12409610.1,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 7,
+          "ueg": "1207, 1237",
+          "sede": "S\u00e9ptimo Circuito Judicial (Boca del R\u00edo, Ver.) / S\u00e9ptimo Circuito Judicial (Xalapa, Ver.)",
+          "pagado": 10913074.25,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 8,
+          "ueg": "1208, 1240",
+          "sede": "Octavo Circuito Judicial (Torre\u00f3n, Coah. y Mpios Durango) / Octavo Circuito Judicial (Saltillo, Coah.)",
+          "pagado": 16064947.53,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 9,
+          "ueg": "1209",
+          "sede": "Noveno Circuito Judicial (San Luis Potos\u00ed, S.L.P.)",
+          "pagado": 3314426.95,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 10,
+          "ueg": "1210, 1241",
+          "sede": "D\u00e9cimo Circuito Judicial (Villahermosa, Tab. y Mpios Veracruz) / D\u00e9cimo Circuito Judicial (Coatzacoalcos, Ver.)",
+          "pagado": 18336897.19,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 11,
+          "ueg": "1211",
+          "sede": "D\u00e9cimo Primer Circuito Judicial (Morelia, Mich.)",
+          "pagado": 10355254.09,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 12,
+          "ueg": "1212, 1236",
+          "sede": "D\u00e9cimo Segundo Circuito Judicial (Mazatl\u00e1n, Sin.) / D\u00e9cimo Segundo Circuito Judicial (Culiac\u00e1n, Sin.)",
+          "pagado": 8353707.55,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 13,
+          "ueg": "1213",
+          "sede": "D\u00e9cimo Tercer Circuito Judicial (Oaxaca, Oax.)",
+          "pagado": 6825043.72,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 14,
+          "ueg": "1214",
+          "sede": "D\u00e9cimo Cuarto Circuito Judicial (M\u00e9rida, Yuc.)",
+          "pagado": 4822788.21,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 15,
+          "ueg": "1215, 1235",
+          "sede": "D\u00e9cimo Quinto Circuito Judicial (Mexicali, B.C. y Mpio Sonora) / D\u00e9cimo Quinto Circuito Judicial (Tijuana, B.C.)",
+          "pagado": 20542426.28,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 16,
+          "ueg": "1216",
+          "sede": "D\u00e9cimo Sexto Circuito Judicial (Guanajuato, Gto.)",
+          "pagado": 10004825.45,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 17,
+          "ueg": "1217, 1233",
+          "sede": "D\u00e9cimo S\u00e9ptimo Circuito Judicial (Chihuahua, Chih.) / D\u00e9cimo S\u00e9ptimo Circuito Judicial (Ciudad Juarez, Chih.)",
+          "pagado": 7296662.55,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 18,
+          "ueg": "1218",
+          "sede": "D\u00e9cimo Octavo Circuito Judicial (Cuernavaca, Morelos)",
+          "pagado": 5936146.39,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 19,
+          "ueg": "1219",
+          "sede": "D\u00e9cimo Noveno Circuito Judicial (Ciudad Victoria, Tamps.)",
+          "pagado": 11234628.05,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 20,
+          "ueg": "1220",
+          "sede": "Vig\u00e9simo Circuito Judicial (Tuxtla Guti\u00e9rrez, Chis.)",
+          "pagado": 6628393.69,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 21,
+          "ueg": "1221, 1232",
+          "sede": "Vig\u00e9simo Primer Circuito Judicial (Chilpancingo, Gro.) / Vig\u00e9simo Primer Circuito Judicial (Acapulco, Gro.)",
+          "pagado": 7514150.77,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 22,
+          "ueg": "1222",
+          "sede": "Vig\u00e9simo Segundo Circuito Judicial (Quer\u00e9taro, Qro.)",
+          "pagado": 7798582.14,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 23,
+          "ueg": "1223",
+          "sede": "Vig\u00e9simo Tercer Circuito Judicial (Zacatecas, Zac.)",
+          "pagado": 1998582.99,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 24,
+          "ueg": "1224",
+          "sede": "Vig\u00e9simo Cuarto Circuito Judicial (Tepic, Nay.)",
+          "pagado": 5657375.49,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 25,
+          "ueg": "1225",
+          "sede": "Vig\u00e9simo Quinto Circuito Judicial (Durango, Dgo.)",
+          "pagado": 2092749.34,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 26,
+          "ueg": "1226",
+          "sede": "Vig\u00e9simo Sexto Circuito Judicial (La Paz, B.C. Sur)",
+          "pagado": 2153188.73,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 27,
+          "ueg": "1227",
+          "sede": "Vig\u00e9simo S\u00e9ptimo Circuito Judicial (Canc\u00fan, Q. Roo)",
+          "pagado": 5166173.8,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 28,
+          "ueg": "1228",
+          "sede": "Vig\u00e9simo Octavo Circuito Judicial (Tlaxcala, Tlax.)",
+          "pagado": 5647310.8,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 29,
+          "ueg": "1229",
+          "sede": "Vig\u00e9simo Noveno Circuito Judicial (Pachuca, Hgo.)",
+          "pagado": 5334231.79,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 30,
+          "ueg": "1231",
+          "sede": "Trig\u00e9simo Circuito Judicial (Aguascalientes, Ags.)",
+          "pagado": 3292365.24,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 31,
+          "ueg": "1238",
+          "sede": "Trig\u00e9simo Primer Circuito Judicial (Campeche, Camp.)",
+          "pagado": 8257685.48,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        },
+        {
+          "n": 32,
+          "ueg": "1239",
+          "sede": "Trig\u00e9simo Segundo Circuito Judicial (Colima, Col.)",
+          "pagado": 2620311.02,
+          "estado": "derivado",
+          "fuente": "OAJ_UEG"
+        }
+      ],
+      "circuitosNota": "Pagos registrados en las unidades ejecutoras de cada circuito entre abril y junio de 2026. Son pagos parciales: excluyen la n\u00f3mina, que se paga de forma centralizada. No son el costo del circuito.",
+      "pendientes": [
+        "Costo completo por circuito",
+        "Costo completo por ponencia de la SCJN"
+      ]
+    },
+    "legislativo": {
+      "ejercicio2024": [
+        {
+          "institucion": "Diputados",
+          "concepto": "Aprobado",
+          "pesos": 8982854400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 4
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Modificado",
+          "pesos": 9371736500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 4
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Pagado",
+          "pesos": 9371736500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 4
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Universo de egresos seleccionado",
+          "pesos": 6833879400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 1
+        },
+        {
+          "institucion": "Diputados",
+          "concepto": "Muestra de egresos",
+          "pesos": 6537228200,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 1
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Aprobado",
+          "pesos": 4955182000,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 4
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Modificado",
+          "pesos": 5045707600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 4
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Devengado",
+          "pesos": 5045707600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Pagado al 31 de diciembre",
+          "pesos": 4978781800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Pendiente de pago al cierre; pagado en 2025",
+          "pesos": 66925800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 1
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Universo de egresos seleccionado",
+          "pesos": 5045707600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 1
+        },
+        {
+          "institucion": "Senado",
+          "concepto": "Muestra de egresos",
+          "pesos": 3560328500,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 1
+        }
+      ],
+      "resultadosAsf": [
+        {
+          "institucion": "Diputados",
+          "texto": "26 resultados sin irregularidades detectadas en la muestra revisada.",
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 43
+        },
+        {
+          "institucion": "Senado",
+          "texto": "25 resultados sin irregularidades y dos solventados antes del informe, en la muestra revisada.",
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 31
+        }
+      ],
+      "personalDiputados2024": [
+        {
+          "partida": "1110",
+          "concepto": "Dietas",
+          "pesos": 623908000,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1130",
+          "concepto": "Sueldos base",
+          "pesos": 563826500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1210",
+          "concepto": "Honorarios asimilables",
+          "pesos": 913432500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1230",
+          "concepto": "Servicio social",
+          "pesos": 1200000,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1310",
+          "concepto": "Primas por antig\u00fcedad",
+          "pesos": 7954300,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1320",
+          "concepto": "Primas vacacionales y gratificaci\u00f3n anual",
+          "pesos": 391828200,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1330",
+          "concepto": "Horas extraordinarias",
+          "pesos": 963400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1340",
+          "concepto": "Compensaciones",
+          "pesos": 1005303500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1410",
+          "concepto": "Seguridad social",
+          "pesos": 144181800,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1420",
+          "concepto": "Fondos de vivienda",
+          "pesos": 55008800,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1430",
+          "concepto": "Sistema de retiro",
+          "pesos": 32287600,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1440",
+          "concepto": "Seguros",
+          "pesos": 95602500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1520",
+          "concepto": "Indemnizaciones",
+          "pesos": 547396400,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1530",
+          "concepto": "Prestaciones y haberes de retiro",
+          "pesos": 93773900,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1540",
+          "concepto": "Prestaciones contractuales",
+          "pesos": 957800000,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1590",
+          "concepto": "Otras prestaciones",
+          "pesos": 350115600,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        },
+        {
+          "partida": "1710",
+          "concepto": "Est\u00edmulos",
+          "pesos": 183452500,
+          "estado": "oficial",
+          "fuente": "ASF_DIP",
+          "pagina": 5
+        }
+      ],
+      "senadoCapitulos2024": [
+        {
+          "cap": "1000",
+          "concepto": "Servicios personales",
+          "devengado": 3274276000,
+          "pagado": 3259885800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "2000",
+          "concepto": "Materiales y suministros",
+          "devengado": 83699000,
+          "pagado": 81146600,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "3000",
+          "concepto": "Servicios generales",
+          "devengado": 1653842600,
+          "pagado": 1610384500,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "4000",
+          "concepto": "Transferencias y ayudas",
+          "devengado": 8751200,
+          "pagado": 8751200,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "5000",
+          "concepto": "Bienes e intangibles",
+          "devengado": 19761000,
+          "pagado": 13235900,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        },
+        {
+          "cap": "6000",
+          "concepto": "Inversi\u00f3n p\u00fablica",
+          "devengado": 5377800,
+          "pagado": 5377800,
+          "estado": "oficial",
+          "fuente": "ASF_SEN",
+          "pagina": 5
+        }
+      ],
+      "congresos2024": [
+        {
+          "entidad": "Ciudad de M\u00e9xico",
+          "ejercicio": 2024,
+          "ejercidoMdp": 2044,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Michoac\u00e1n",
+          "ejercicio": 2024,
+          "ejercidoMdp": 1324.5,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Jalisco",
+          "ejercicio": 2024,
+          "ejercidoMdp": 922.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Baja California",
+          "ejercicio": 2024,
+          "ejercidoMdp": 769.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Oaxaca",
+          "ejercicio": 2024,
+          "ejercidoMdp": 729.3,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Chihuahua",
+          "ejercicio": 2024,
+          "ejercidoMdp": 676.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Guerrero",
+          "ejercicio": 2024,
+          "ejercidoMdp": 671.9,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Sinaloa",
+          "ejercicio": 2024,
+          "ejercidoMdp": 606.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Estado de M\u00e9xico",
+          "ejercicio": 2024,
+          "ejercidoMdp": 564.1,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Morelos",
+          "ejercicio": 2024,
+          "ejercidoMdp": 542.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Guanajuato",
+          "ejercicio": 2024,
+          "ejercidoMdp": 499.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Quintana Roo",
+          "ejercicio": 2024,
+          "ejercidoMdp": 490.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Sonora",
+          "ejercicio": 2024,
+          "ejercidoMdp": 483.5,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Nuevo Le\u00f3n",
+          "ejercicio": 2024,
+          "ejercidoMdp": 454.3,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Durango",
+          "ejercicio": 2024,
+          "ejercidoMdp": 428.9,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Tlaxcala",
+          "ejercicio": 2024,
+          "ejercidoMdp": 419.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Quer\u00e9taro",
+          "ejercicio": 2024,
+          "ejercidoMdp": 376.1,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Veracruz",
+          "ejercicio": 2024,
+          "ejercidoMdp": 364.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Zacatecas",
+          "ejercicio": 2024,
+          "ejercidoMdp": 341.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Chiapas",
+          "ejercicio": 2024,
+          "ejercidoMdp": 322.4,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Nayarit",
+          "ejercicio": 2024,
+          "ejercidoMdp": 311.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "San Luis Potos\u00ed",
+          "ejercicio": 2024,
+          "ejercidoMdp": 309.9,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Tamaulipas",
+          "ejercicio": 2024,
+          "ejercidoMdp": 308.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Tabasco",
+          "ejercicio": 2024,
+          "ejercidoMdp": 307.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Aguascalientes",
+          "ejercicio": 2024,
+          "ejercidoMdp": 290.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Hidalgo",
+          "ejercicio": 2024,
+          "ejercidoMdp": 265.2,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Baja California Sur",
+          "ejercicio": 2024,
+          "ejercidoMdp": 252.6,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Coahuila",
+          "ejercicio": 2024,
+          "ejercidoMdp": 239.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Campeche",
+          "ejercicio": 2024,
+          "ejercidoMdp": 206.5,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Yucat\u00e1n",
+          "ejercicio": 2024,
+          "ejercidoMdp": 173.8,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Colima",
+          "ejercicio": 2024,
+          "ejercidoMdp": 120.7,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        },
+        {
+          "entidad": "Puebla",
+          "ejercicio": 2024,
+          "ejercidoMdp": 115.1,
+          "estado": "oficial",
+          "fuente": "CNPLE",
+          "pagina": 11
+        }
+      ],
+      "asfCongresos2024": [
+        {
+          "congreso": "Congreso de Nuevo Le\u00f3n",
+          "auditoria": 1402,
+          "concepto": "Universo seleccionado",
+          "pesos": 233044500.0,
+          "estado": "oficial",
+          "fuente": "ASF_NL",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Nuevo Le\u00f3n",
+          "auditoria": 1402,
+          "concepto": "Muestra auditada",
+          "pesos": 233044500.0,
+          "estado": "oficial",
+          "fuente": "ASF_NL",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Nuevo Le\u00f3n",
+          "auditoria": 1402,
+          "concepto": "Monto por aclarar",
+          "pesos": 4507703.95,
+          "estado": "oficial",
+          "fuente": "ASF_NL",
+          "pagina": 26
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Universo seleccionado",
+          "pesos": 151900800.0,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Muestra auditada",
+          "pesos": 151900800.0,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 1
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Recuperaciones; incluye cargas financieras",
+          "pesos": 4995755.97,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 29
+        },
+        {
+          "congreso": "Congreso de Tlaxcala",
+          "auditoria": 1940,
+          "concepto": "Cargas financieras incluidas en recuperaci\u00f3n",
+          "pesos": 97956,
+          "estado": "oficial",
+          "fuente": "ASF_TLX",
+          "pagina": 29
+        }
+      ],
+      "pendientes": [
+        "Remuneraciones individuales de los 32 congresos locales",
+        "N\u00famero de legisladores de cada congreso con su fuente, para el costo por legislador"
+      ]
+    }
+  },
+"ambiente": {
+    "consulta": "26 de septiembre de 2026",
+    "nota": "Pesos nominales. El costo del da\u00f1o ambiental es del INEGI (Cuentas Econ\u00f3micas y Ecol\u00f3gicas 2024); los relojes lo reparten por segundo y por persona, y esas cuentas son derivadas. Esta plataforma no estima ninguna cifra ambiental propia.",
+    "fuentes": {
+      "DBGIR": {
+        "corto": "SEMARNAT, Diagn\u00f3stico de residuos, abril 2026",
+        "doc": "SEMARNAT-INECC, Diagn\u00f3stico B\u00e1sico para la Gesti\u00f3n Integral de los Residuos, abril de 2026",
+        "url": "https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf",
+        "sha256": "af47fb7034805c1822832af441d9bc3ad672abcaa558c8089f3bfe2bd2a0bb5e"
+      },
+      "CNGMD": {
+        "corto": "INEGI, Censo de Gobiernos Municipales 2023",
+        "doc": "INEGI, Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales de la Ciudad de M\u00e9xico 2023, presentaci\u00f3n de resultados, 28 de febrero de 2024",
+        "url": "https://www.inegi.org.mx/contenidos/programas/cngmd/2023/doc/cngmd2023_resultados_geogr_amb.pdf",
+        "sha256": "37e26cff2604a710fe94c76ea4a4fcbc31f2cb119986edb7a843c6ced136424d"
+      },
+      "PEF": {
+        "corto": "PEF 2026, DOF 21-11-2025",
+        "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n 2026, DOF 21-11-2025 (edici\u00f3n vespertina)",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf",
+        "sha256": "6db4a86b588a0f76928e5d61298579c4aff2c29c3ace68fdedbfa5afceb8f2bc"
+      },
+      "AV2T2026": {
+        "corto": "SHCP, avance del gasto al 2.\u00ba trimestre 2026",
+        "doc": "SHCP, Presupuesto de Egresos 2026, avance del gasto (AC01) al segundo trimestre, base de datos abierta (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
+        "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511"
+      },
+      "PPEF2027": {
+        "corto": "SHCP, Proyecto de PEF 2027, datos abiertos",
+        "doc": "SHCP, Proyecto de Presupuesto de Egresos de la Federaci\u00f3n 2027, base de datos abierta (Transparencia Presupuestaria)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/XLSX/PPEF_2027.xlsx",
+        "sha256": "8cb9cd83fc2e2b9f2ff0beb46fe33337ee266b02c813d0d6eeccad14842bc327"
+      },
+      "LGPGIR": {
+        "corto": "Ley General de Residuos, reforma DOF 19-01-2026",
+        "doc": "Ley General para la Prevenci\u00f3n y Gesti\u00f3n Integral de los Residuos, \u00faltima reforma DOF 19-01-2026",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPGIR.pdf",
+        "sha256": "b34326588bd6e7519e33411d3658239e3aefb56cef0fae5d775bc894af64a565"
+      }
+    },
+    "residuos": {
+      "generacionTdia": {
+        "valor": 139902,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31
+      },
+      "perCapitaKg": {
+        "valor": 1.076,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 34
+      },
+      "recolectadaTdia": {
+        "valor": 108146,
+        "pct": 77.3,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31,
+        "nota": "Dato del Censo de Gobiernos Municipales 2023 (recolecci\u00f3n promedio de 2022)."
+      },
+      "separadaTdia": {
+        "valor": 14679,
+        "pct": 10.4,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31
+      },
+      "sitiosDisposicion": {
+        "valor": 2250,
+        "tdia": 98047,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 32
+      },
+      "rellenosSanitarios": {
+        "valor": 52,
+        "tdia": 15254.605,
+        "pct": 15.6,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 32,
+        "nota": "El resto de los sitios de disposici\u00f3n final se clasifica como no controlado conforme a la NOM-083-SEMARNAT-2003."
+      },
+      "municipiosSinRecoleccion": {
+        "valor": 150,
+        "tdia": 528.3,
+        "oaxaca": 127,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 49
+      },
+      "vehiculos": {
+        "valor": 17593,
+        "pctAntes2002": 25.15,
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 31
+      },
+      "sinPartidaFederal": {
+        "texto": "Despu\u00e9s del periodo 2013\u20132018, no se cuenta con ninguna partida presupuestal federal para la gesti\u00f3n de residuos; Banobras es la \u00fanica fuente de recursos financieros disponible.",
+        "estado": "oficial",
+        "fuente": "DBGIR",
+        "pagina": 32
+      },
+      "recolectadaSerie": {
+        "anios": [
+          2010,
+          2012,
+          2014,
+          2016,
+          2018,
+          2020,
+          2022
+        ],
+        "tdia": [
+          86342,
+          99770,
+          102887,
+          104734,
+          107055,
+          106523,
+          108146
+        ],
+        "estado": "oficial",
+        "fuente": "CNGMD",
+        "pagina": 31
+      }
+    },
+    "presupuesto": {
+      "ramo": "16",
+      "nombre": "Medio Ambiente y Recursos Naturales",
+      "aprobado2026": {
+        "valor": 45564073902.0,
+        "estado": "oficial",
+        "fuente": "PEF",
+        "pagina": "Anexo 1, DOF p. 32"
+      },
+      "modificado2026": {
+        "valor": 45622718863.4,
+        "estado": "oficial",
+        "fuente": "AV2T2026",
+        "pagina": "base de datos"
+      },
+      "pagado2026": {
+        "valor": 18854778532.41,
+        "corte": "30 de junio de 2026",
+        "estado": "oficial",
+        "fuente": "AV2T2026",
+        "pagina": "base de datos"
+      },
+      "proyecto2027": {
+        "valor": 49508305994.0,
+        "estado": "oficial",
+        "fuente": "PPEF2027",
+        "pagina": "base de datos",
+        "nota": "Proyecto enviado por el Ejecutivo el 8 de septiembre de 2026; la C\u00e1mara de Diputados puede modificarlo hasta el 15 de noviembre."
+      },
+      "unidades": [
+        {
+          "ur": "B00",
+          "nombre": "Comisi\u00f3n Nacional del Agua",
+          "aprobado": 37689110439.0,
+          "modificado": 37601659493.38,
+          "pagado": 14947644450.41,
+          "proyecto2027": 39797423959.0
+        },
+        {
+          "ur": "RHQ",
+          "nombre": "Comisi\u00f3n Nacional Forestal",
+          "aprobado": 2589652339.0,
+          "modificado": 2586715424.0,
+          "pagado": 1521949887.35,
+          "proyecto2027": 2781404837.0
+        },
+        {
+          "ur": "F00",
+          "nombre": "Comisi\u00f3n Nacional de \u00c1reas Naturales Protegidas",
+          "aprobado": 1502268352.0,
+          "modificado": 1555438166.43,
+          "pagado": 656664568.4,
+          "proyecto2027": 1590790225.0
+        },
+        {
+          "ur": "E00",
+          "nombre": "Procuradur\u00eda Federal de Protecci\u00f3n al Ambiente",
+          "aprobado": 827072298.0,
+          "modificado": 879335926.86,
+          "pagado": 409266860.43,
+          "proyecto2027": 981308335.0
+        },
+        {
+          "ur": "G00",
+          "nombre": "Agencia Nacional de Seguridad Industrial y de Protecci\u00f3n al Medio Ambiente del Sector Hidrocarburos",
+          "aprobado": 353465344.0,
+          "modificado": 353465344.0,
+          "pagado": 159904112.88,
+          "proyecto2027": 409917156.0
+        },
+        {
+          "ur": "RJJ",
+          "nombre": "Instituto Nacional de Ecolog\u00eda y Cambio Clim\u00e1tico",
+          "aprobado": 159259589.0,
+          "modificado": 159241506.0,
+          "pagado": 72535953.13,
+          "proyecto2027": 198188803.0
+        },
+        {
+          "ur": "RESTO",
+          "nombre": "Resto de la SEMARNAT (oficinas centrales y representaciones)",
+          "aprobado": 2443245541.0,
+          "modificado": 2486863002.73,
+          "pagado": 1086812699.81,
+          "proyecto2027": 3749272679.0
+        }
+      ]
+    },
+    "leyes": [
+      {
+        "norma": "Constituci\u00f3n, art\u00edculo 4\u00ba",
+        "dice": "Toda persona tiene derecho a un medio ambiente sano para su desarrollo y bienestar; el da\u00f1o y deterioro ambiental genera responsabilidad para quien lo provoque.",
+        "refKey": "ref-cpeum"
+      },
+      {
+        "norma": "Constituci\u00f3n, art\u00edculo 115, fracci\u00f3n III, inciso c)",
+        "dice": "Limpia, recolecci\u00f3n, traslado, tratamiento y disposici\u00f3n final de residuos: es un servicio p\u00fablico a cargo del municipio.",
+        "refKey": "ref-cpeum"
+      },
+      {
+        "norma": "Ley General de Residuos, art\u00edculo 10, fracciones IV y V",
+        "dice": "El municipio presta el servicio por s\u00ed o a trav\u00e9s de gestores, y otorga las autorizaciones y concesiones de una o m\u00e1s actividades del servicio. Por eso la concesi\u00f3n de la basura se decide en el cabildo.",
+        "refKey": "ref-lgpgir"
+      },
+      {
+        "norma": "Ley General del Equilibrio Ecol\u00f3gico, art\u00edculo 28",
+        "dice": "Las obras que puedan causar desequilibrio ecol\u00f3gico requieren evaluaci\u00f3n de impacto ambiental previa por la SEMARNAT: la Manifestaci\u00f3n de Impacto Ambiental.",
+        "refKey": "ref-lgeepa"
+      },
+      {
+        "norma": "Ley General de Cambio Clim\u00e1tico",
+        "dice": "Establece las obligaciones para enfrentar los efectos adversos del cambio clim\u00e1tico y reglamenta la protecci\u00f3n al ambiente en esa materia.",
+        "refKey": "ref-lgcc"
+      },
+      {
+        "norma": "Ley del IEPS, art\u00edculo 2\u00ba, fracci\u00f3n I, inciso H)",
+        "dice": "Grava los combustibles f\u00f3siles: es el llamado impuesto al carbono, un impuesto con justificaci\u00f3n ambiental que entra a la bolsa general.",
+        "refKey": "ref-lieps"
+      }
+    ],
+    "quienMide": [
+      {
+        "dato": "Costo del da\u00f1o ambiental (PIB ecol\u00f3gico)",
+        "mide": "INEGI",
+        "estado": "vigente",
+        "nota": "Organismo aut\u00f3nomo; desde 2025 tambi\u00e9n mide la pobreza que med\u00eda el CONEVAL."
+      },
+      {
+        "dato": "Generaci\u00f3n y manejo de residuos",
+        "mide": "SEMARNAT e INECC",
+        "estado": "vigente",
+        "nota": "Diagn\u00f3stico nacional, edici\u00f3n de abril de 2026."
+      },
+      {
+        "dato": "Servicio de basura por municipio",
+        "mide": "INEGI (Censo de Gobiernos Municipales)",
+        "estado": "vigente",
+        "nota": "Levantamiento cada dos a\u00f1os; el \u00faltimo publicado es el de 2023."
+      },
+      {
+        "dato": "Permisos ambientales de las obras (MIA)",
+        "mide": "SEMARNAT, Direcci\u00f3n General de Impacto y Riesgo Ambiental",
+        "estado": "vigente",
+        "nota": ""
+      },
+      {
+        "dato": "Presupuesto ambiental",
+        "mide": "SHCP y C\u00e1mara de Diputados",
+        "estado": "vigente",
+        "nota": "El proyecto 2027 se aprueba a m\u00e1s tardar el 15 de noviembre de 2026."
+      },
+      {
+        "dato": "Acceso a la informaci\u00f3n",
+        "mide": "Secretar\u00eda Anticorrupci\u00f3n y Buen Gobierno (\u00abTransparencia para el Pueblo\u00bb)",
+        "estado": "cambi\u00f3",
+        "nota": "Antes el INAI, extinto en marzo de 2025."
+      },
+      {
+        "dato": "Contrataciones p\u00fablicas",
+        "mide": "ComprasMX",
+        "estado": "cambi\u00f3",
+        "nota": "Antes CompraNet, sustituido en abril de 2025."
+      }
+    ],
+    "pendientes": [
+      "Huella ambiental de las megaobras: las Manifestaciones de Impacto Ambiental est\u00e1n en el portal de la SEMARNAT (dgiraDocs), que no fue accesible al integrar. Ninguna cifra de hect\u00e1reas se muestra hasta tener el documento oficial.",
+      "Concesi\u00f3n y costo del servicio de basura, municipio por municipio: vienen en los microdatos del m\u00f3dulo de residuos del Censo de Gobiernos Municipales 2023 del INEGI; falta descargarlos.",
+      "Costo del da\u00f1o ambiental 2025: el INEGI publica las Cuentas Econ\u00f3micas y Ecol\u00f3gicas cada diciembre; la de 2025 se espera en diciembre de 2026."
+    ]
+  },
+"cuenta_publica_asf": {
+    "consulta": "26 de septiembre de 2026",
+    "nota": "Pesos corrientes. Los montos de la ASF vienen en miles de pesos y aqu\u00ed se muestran en pesos. Un monto por aclarar no es un desfalco comprobado: es lo que, al cierre de la auditor\u00eda, carec\u00eda de documentaci\u00f3n que acreditara el uso del dinero, y puede solventarse despu\u00e9s.",
+    "fuentes": {
+      "MDB2024": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2024 (feb. 2026)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, primera, segunda y tercera entregas (consolidado), corte febrero de 2026",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "49732c8da82eaafc6bdd67b0b0ce5c995773294d7e48e5412ad73e5c4fe15d66"
+      },
+      "IR2024": {
+        "corto": "ASF, Informe del Resultado CP 2024",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, tercera entrega (portal con los informes individuales)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/index.html"
+      },
+      "MDB2025A": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2025, 1.\u00aa entrega (jun. 2026)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos, Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, primera entrega, corte junio de 2026",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/Documentos/Matriz/IR2025_Entrega_a.pdf",
+        "sha256": "f0cd6497346ca2247f4db83f663fdcc99c517fc6f94c239f0970d3edb855edcc"
+      },
+      "IR2025A": {
+        "corto": "ASF, Informe del Resultado CP 2025, 1.\u00aa entrega",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, primera entrega",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html"
+      },
+      "LFRCF": {
+        "corto": "Ley de Fiscalizaci\u00f3n, reforma DOF 14-05-2026",
+        "doc": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n, \u00faltima reforma DOF 14-05-2026",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
+        "sha256": "cc687a4d8d9de93d2d3ec9b40b26d0273e108bb002a6f611806dc36ebce5ba2c"
+      },
+      "CPEUM": {
+        "corto": "Constituci\u00f3n, art. 74 fr. VI",
+        "doc": "Constituci\u00f3n Pol\u00edtica de los Estados Unidos Mexicanos, \u00faltimas reformas DOF 02-06-2026",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+        "sha256": "ca63a23a4b7444ebdbdad93759fbf46bd14c069e587c5878decf89fc9c12ca8e"
+      },
+      "CPSHCP": {
+        "corto": "SHCP, portal de la Cuenta P\u00fablica",
+        "doc": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico, Cuenta P\u00fablica (portal oficial, ejercicios 1996 a 2025)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx"
+      },
+      "MDB2019": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2019 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2019, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2019c/Documentos/Matriz/IR2019b.pdf",
+        "sha256": "0367910412bd729089ce4a632b7414a8ef88bf8a708cd9e7ac6b1d3fb84319a9"
+      },
+      "MDB2020": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2020 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2020, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2020c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "c425e450a96c5fc6d13429f18420a8cdaa3edb7d0b1f15fb8615a13a62492d1e"
+      },
+      "MDB2021": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2021 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2021, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "513145012d27125a0bf23ef565a61a5090ccecc97b223da5ae599fba7790110c"
+      },
+      "MDB2022": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2022 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2022, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "97002cffa4f73b98ed3f8c5f78fc10ef365829ae142ae11b6dec304be99bdedc"
+      },
+      "MDB2023": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2023 (consolidado)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2023, consolidado de sus entregas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "8c77465b147545c513c474292dc6352d8a0f45a638d214a41b7dca8eb45493e9"
+      },
+      "ASFDATOS": {
+        "corto": "ASF, Sistema P\u00fablico de Consulta",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Sistema P\u00fablico de Consulta de Auditor\u00edas (ASF Datos)",
+        "url": "https://www.asfdatos.gob.mx/"
+      }
+    },
+    "calendario": [
+      {
+        "fecha": "2025-12-31",
+        "titulo": "Cierra el ejercicio 2025",
+        "texto": "Termina el a\u00f1o en que se gast\u00f3 el dinero que se revisa.",
+        "hecho": true
+      },
+      {
+        "fecha": "2026-04-30",
+        "titulo": "Hacienda entrega la Cuenta P\u00fablica 2025",
+        "texto": "La SHCP la presenta a la C\u00e1mara de Diputados a m\u00e1s tardar el 30 de abril del a\u00f1o siguiente.",
+        "fundamento": "CPEUM, art. 74, fr. VI",
+        "fuente": "CPEUM",
+        "hecho": true
+      },
+      {
+        "fecha": "2026-06-30",
+        "titulo": "Primera entrega de la ASF",
+        "texto": "Informes individuales que concluyen en el periodo. En 2026 fueron 33 auditor\u00edas a la distribuci\u00f3n de las participaciones federales.",
+        "fundamento": "LFRCF, art. 35",
+        "fuente": "LFRCF",
+        "hecho": true
+      },
+      {
+        "fecha": "2026-10-30",
+        "titulo": "Segunda entrega de la ASF",
+        "texto": "\u00daltimo d\u00eda h\u00e1bil de octubre (el 31 de octubre de 2026 cae en s\u00e1bado).",
+        "fundamento": "LFRCF, art. 35",
+        "fuente": "LFRCF",
+        "hecho": false
+      },
+      {
+        "fecha": "2027-02-20",
+        "titulo": "Tercera entrega e Informe General",
+        "texto": "\u00daltimos informes individuales y el Informe General Ejecutivo, que es p\u00fablico.",
+        "fundamento": "LFRCF, arts. 33 y 35",
+        "fuente": "LFRCF",
+        "hecho": false
+      }
+    ],
+    "plazos": [
+      {
+        "plazo": "10 d\u00edas h\u00e1biles",
+        "que": "para que la ASF env\u00ede a cada ente su informe individual, con sus acciones y recomendaciones, despu\u00e9s de entregarlo a la C\u00e1mara",
+        "fundamento": "LFRCF, art. 39"
+      },
+      {
+        "plazo": "30 d\u00edas h\u00e1biles",
+        "que": "para que el ente responda y aporte la informaci\u00f3n que aclare lo observado",
+        "fundamento": "LFRCF, art. 39"
+      },
+      {
+        "plazo": "120 d\u00edas h\u00e1biles",
+        "que": "para que la ASF se pronuncie sobre esas respuestas: solventa, no solventa, archiva o concluye",
+        "fundamento": "LFRCF, art. 41"
+      },
+      {
+        "plazo": "90 d\u00edas h\u00e1biles",
+        "que": "para enviar a investigaci\u00f3n el dictamen t\u00e9cnico de los pliegos de observaciones no solventados",
+        "fundamento": "LFRCF, art. 41"
+      }
+    ],
+    "acciones": [
+      {
+        "clave": "R",
+        "nombre": "Recomendaci\u00f3n",
+        "tipo": "preventiva",
+        "que": "Sugerencia para fortalecer el control interno y el cumplimiento de metas.",
+        "fundamento": "LFRCF, art. 42; glosario de la MDB"
+      },
+      {
+        "clave": "RD",
+        "nombre": "Recomendaci\u00f3n al desempe\u00f1o",
+        "tipo": "preventiva",
+        "que": "Sugerencia para que el ente cumpla sus objetivos y metas y ejerza sus recursos con eficiencia.",
+        "fundamento": "Glosario de la MDB"
+      },
+      {
+        "clave": "PEFCF",
+        "nombre": "Promoci\u00f3n del ejercicio de la facultad de comprobaci\u00f3n fiscal",
+        "tipo": "correctiva",
+        "que": "Avisa al SAT de un posible incumplimiento fiscal detectado en la auditor\u00eda.",
+        "fundamento": "LFRCF, art. 40, fr. III"
+      },
+      {
+        "clave": "SA",
+        "nombre": "Solicitud de aclaraci\u00f3n",
+        "tipo": "correctiva",
+        "que": "Pide al ente documentos adicionales que aclaren operaciones o montos no justificados.",
+        "fundamento": "LFRCF, art. 40, fr. I"
+      },
+      {
+        "clave": "PRAS",
+        "nombre": "Promoci\u00f3n de responsabilidad administrativa sancionatoria",
+        "tipo": "correctiva",
+        "que": "Da vista al \u00f3rgano interno de control para que investigue y, en su caso, sancione.",
+        "fundamento": "LFRCF, art. 40, fr. V"
+      },
+      {
+        "clave": "PO",
+        "nombre": "Pliego de observaciones",
+        "tipo": "correctiva",
+        "que": "Fija en cantidad l\u00edquida un presunto da\u00f1o o perjuicio a la Hacienda P\u00fablica o al patrimonio de un ente.",
+        "fundamento": "LFRCF, art. 40, fr. II"
+      }
+    ],
+    "cp2024": {
+      "corte": "febrero de 2026",
+      "entregas": "primera, segunda y tercera (consolidado)",
+      "fuente": "MDB2024",
+      "pagina": 11,
+      "estado": "oficial",
+      "total": {
+        "auditorias": 2264,
+        "universo": 22898075580100.0,
+        "muestra": 12143300890200.0,
+        "representatividad": 53.03,
+        "acciones": 6274,
+        "R": 570,
+        "RD": 287,
+        "PEFCF": 278,
+        "SA": 174,
+        "PRAS": 2203,
+        "PO": 2762,
+        "recuperaciones": 2005619900.0,
+        "porAclarar": 65169097600.0
+      },
+      "grupos": [
+        {
+          "grupo": "Ingreso",
+          "subtotal": {
+            "auditorias": 2,
+            "universo": 46000373300.0,
+            "muestra": 27331217100.0,
+            "representatividad": 59.42,
+            "acciones": 2,
+            "R": 1,
+            "RD": 0,
+            "PEFCF": 0,
+            "SA": 0,
+            "PRAS": 1,
+            "PO": 0,
+            "recuperaciones": 160100.0,
+            "porAclarar": 0.0
+          },
+          "sectores": [
+            {
+              "nombre": "Marina",
+              "auditorias": 1,
+              "acciones": 2,
+              "PO": 0,
+              "recuperaciones": 160100.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Petr\u00f3leos Mexicanos",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            }
+          ]
+        },
+        {
+          "grupo": "Deuda",
+          "subtotal": {
+            "auditorias": 3,
+            "universo": 14793080755800.0,
+            "muestra": 5168865755600.0,
+            "representatividad": 34.94,
+            "acciones": 1,
+            "R": 1,
+            "RD": 0,
+            "PEFCF": 0,
+            "SA": 0,
+            "PRAS": 0,
+            "PO": 0,
+            "recuperaciones": 0.0,
+            "porAclarar": 0.0
+          },
+          "sectores": [
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Comisi\u00f3n Federal de Electricidad",
+              "auditorias": 1,
+              "acciones": 1,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Petr\u00f3leos Mexicanos",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            }
+          ]
+        },
+        {
+          "grupo": "Gobierno",
+          "subtotal": {
+            "auditorias": 84,
+            "universo": 378604475900.0,
+            "muestra": 302456428800.0,
+            "representatividad": 79.89,
+            "acciones": 254,
+            "R": 65,
+            "RD": 66,
+            "PEFCF": 14,
+            "SA": 0,
+            "PRAS": 64,
+            "PO": 45,
+            "recuperaciones": 9944300.0,
+            "porAclarar": 673022200.0
+          },
+          "sectores": [
+            {
+              "nombre": "Poder Legislativo",
+              "auditorias": 2,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Poder Judicial",
+              "auditorias": 3,
+              "acciones": 54,
+              "PO": 17,
+              "recuperaciones": 8133300.0,
+              "porAclarar": 284574800.0
+            },
+            {
+              "nombre": "Gobernaci\u00f3n",
+              "auditorias": 9,
+              "acciones": 26,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 78072600.0
+            },
+            {
+              "nombre": "Seguridad y Protecci\u00f3n Ciudadana",
+              "auditorias": 6,
+              "acciones": 25,
+              "PO": 3,
+              "recuperaciones": 753700.0,
+              "porAclarar": 3199800.0
+            },
+            {
+              "nombre": "Relaciones Exteriores",
+              "auditorias": 5,
+              "acciones": 15,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 12,
+              "acciones": 13,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Defensa Nacional",
+              "auditorias": 15,
+              "acciones": 23,
+              "PO": 0,
+              "recuperaciones": 10700.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Trabajo y Previsi\u00f3n Social",
+              "auditorias": 2,
+              "acciones": 7,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Marina",
+              "auditorias": 10,
+              "acciones": 22,
+              "PO": 15,
+              "recuperaciones": 1040200.0,
+              "porAclarar": 233255400.0
+            },
+            {
+              "nombre": "Desarrollo Agrario, Territorial y Urbano",
+              "auditorias": 1,
+              "acciones": 6,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Entidades no Sectorizadas",
+              "auditorias": 4,
+              "acciones": 5,
+              "PO": 0,
+              "recuperaciones": 6400.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Informaci\u00f3n Nacional Estad\u00edstica y Geogr\u00e1fica",
+              "auditorias": 3,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Comisi\u00f3n Nacional de los Derechos Humanos",
+              "auditorias": 4,
+              "acciones": 1,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Instituto Nacional de Transparencia, Acceso a la Informaci\u00f3n y Protecci\u00f3n de Datos Personales",
+              "auditorias": 1,
+              "acciones": 28,
+              "PO": 4,
+              "recuperaciones": 0.0,
+              "porAclarar": 7356600.0
+            },
+            {
+              "nombre": "Instituto Nacional Electoral",
+              "auditorias": 4,
+              "acciones": 19,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 66563000.0
+            },
+            {
+              "nombre": "Tribunal Federal de Justicia Administrativa",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Tribunales Agrarios",
+              "auditorias": 2,
+              "acciones": 10,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            }
+          ]
+        },
+        {
+          "grupo": "Desarrollo Social",
+          "subtotal": {
+            "auditorias": 154,
+            "universo": 3865251604300.0,
+            "muestra": 3489044914800.0,
+            "representatividad": 90.27,
+            "acciones": 500,
+            "R": 123,
+            "RD": 101,
+            "PEFCF": 21,
+            "SA": 0,
+            "PRAS": 153,
+            "PO": 102,
+            "recuperaciones": 179095900.0,
+            "porAclarar": 1409175100.0
+          },
+          "sectores": [
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 16,
+              "acciones": 22,
+              "PO": 6,
+              "recuperaciones": 3103900.0,
+              "porAclarar": 34053500.0
+            },
+            {
+              "nombre": "Defensa Nacional",
+              "auditorias": 4,
+              "acciones": 10,
+              "PO": 1,
+              "recuperaciones": 2108900.0,
+              "porAclarar": 3595200.0
+            },
+            {
+              "nombre": "Agricultura y Desarrollo Rural",
+              "auditorias": 2,
+              "acciones": 20,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 57413900.0
+            },
+            {
+              "nombre": "Educaci\u00f3n P\u00fablica",
+              "auditorias": 20,
+              "acciones": 79,
+              "PO": 16,
+              "recuperaciones": 41006700.0,
+              "porAclarar": 231047000.0
+            },
+            {
+              "nombre": "Salud",
+              "auditorias": 21,
+              "acciones": 105,
+              "PO": 20,
+              "recuperaciones": 26691300.0,
+              "porAclarar": 585754600.0
+            },
+            {
+              "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+              "auditorias": 21,
+              "acciones": 34,
+              "PO": 12,
+              "recuperaciones": 9116800.0,
+              "porAclarar": 123043200.0
+            },
+            {
+              "nombre": "Instituto Mexicano del Seguro Social",
+              "auditorias": 17,
+              "acciones": 26,
+              "PO": 3,
+              "recuperaciones": 3086800.0,
+              "porAclarar": 46354000.0
+            },
+            {
+              "nombre": "Marina",
+              "auditorias": 2,
+              "acciones": 11,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Desarrollo Agrario, Territorial y Urbano",
+              "auditorias": 6,
+              "acciones": 18,
+              "PO": 5,
+              "recuperaciones": 378200.0,
+              "porAclarar": 47555500.0
+            },
+            {
+              "nombre": "Medio Ambiente y Recursos Naturales",
+              "auditorias": 15,
+              "acciones": 37,
+              "PO": 23,
+              "recuperaciones": 7434300.0,
+              "porAclarar": 225754800.0
+            },
+            {
+              "nombre": "Aportaciones a Seguridad Social",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Entidades no Sectorizadas",
+              "auditorias": 9,
+              "acciones": 34,
+              "PO": 3,
+              "recuperaciones": 74615600.0,
+              "porAclarar": 3433800.0
+            },
+            {
+              "nombre": "Entidades No Coordinadas Sectorialmente",
+              "auditorias": 2,
+              "acciones": 20,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 11521400.0
+            },
+            {
+              "nombre": "Bienestar",
+              "auditorias": 10,
+              "acciones": 29,
+              "PO": 6,
+              "recuperaciones": 11331400.0,
+              "porAclarar": 5835400.0
+            },
+            {
+              "nombre": "Cultura",
+              "auditorias": 8,
+              "acciones": 55,
+              "PO": 1,
+              "recuperaciones": 222200.0,
+              "porAclarar": 33812700.0
+            }
+          ]
+        },
+        {
+          "grupo": "Desarrollo Econ\u00f3mico",
+          "subtotal": {
+            "auditorias": 175,
+            "universo": 1047498437600.0,
+            "muestra": 642192526600.0,
+            "representatividad": 61.31,
+            "acciones": 651,
+            "R": 206,
+            "RD": 120,
+            "PEFCF": 19,
+            "SA": 0,
+            "PRAS": 168,
+            "PO": 138,
+            "recuperaciones": 562857900.0,
+            "porAclarar": 3723195700.0
+          },
+          "sectores": [
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 4,
+              "acciones": 11,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Defensa Nacional",
+              "auditorias": 3,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Agricultura y Desarrollo Rural",
+              "auditorias": 9,
+              "acciones": 51,
+              "PO": 13,
+              "recuperaciones": 0.0,
+              "porAclarar": 17556600.0
+            },
+            {
+              "nombre": "Econom\u00eda",
+              "auditorias": 10,
+              "acciones": 32,
+              "PO": 1,
+              "recuperaciones": 0.0,
+              "porAclarar": 116800.0
+            },
+            {
+              "nombre": "Trabajo y Previsi\u00f3n Social",
+              "auditorias": 5,
+              "acciones": 8,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Turismo",
+              "auditorias": 20,
+              "acciones": 35,
+              "PO": 5,
+              "recuperaciones": 191674900.0,
+              "porAclarar": 87918100.0
+            },
+            {
+              "nombre": "Educaci\u00f3n P\u00fablica",
+              "auditorias": 1,
+              "acciones": 2,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+              "auditorias": 1,
+              "acciones": 4,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Instituto Mexicano del Seguro Social",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Marina",
+              "auditorias": 14,
+              "acciones": 82,
+              "PO": 20,
+              "recuperaciones": 10725500.0,
+              "porAclarar": 274503700.0
+            },
+            {
+              "nombre": "Desarrollo Agrario, Territorial y Urbano",
+              "auditorias": 3,
+              "acciones": 21,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Medio Ambiente y Recursos Naturales",
+              "auditorias": 6,
+              "acciones": 16,
+              "PO": 4,
+              "recuperaciones": 0.0,
+              "porAclarar": 25346500.0
+            },
+            {
+              "nombre": "Energ\u00eda",
+              "auditorias": 6,
+              "acciones": 20,
+              "PO": 1,
+              "recuperaciones": 18609400.0,
+              "porAclarar": 130400.0
+            },
+            {
+              "nombre": "Humanidades, Ciencias, Tecnolog\u00edas e Innovaci\u00f3n",
+              "auditorias": 10,
+              "acciones": 110,
+              "PO": 10,
+              "recuperaciones": 0.0,
+              "porAclarar": 266230700.0
+            },
+            {
+              "nombre": "Comisi\u00f3n Federal de Electricidad",
+              "auditorias": 20,
+              "acciones": 71,
+              "PO": 3,
+              "recuperaciones": 22111900.0,
+              "porAclarar": 72852400.0
+            },
+            {
+              "nombre": "Petr\u00f3leos Mexicanos",
+              "auditorias": 33,
+              "acciones": 81,
+              "PO": 17,
+              "recuperaciones": 287600300.0,
+              "porAclarar": 1762959800.0
+            },
+            {
+              "nombre": "Infraestructura, Comunicaciones y Transportes",
+              "auditorias": 29,
+              "acciones": 107,
+              "PO": 64,
+              "recuperaciones": 32135900.0,
+              "porAclarar": 1215580700.0
+            }
+          ]
+        },
+        {
+          "grupo": "Gasto Federalizado",
+          "subtotal": {
+            "auditorias": 1846,
+            "universo": 2767639933200.0,
+            "muestra": 2513410047300.0,
+            "representatividad": 90.81,
+            "acciones": 4866,
+            "R": 174,
+            "RD": 0,
+            "PEFCF": 224,
+            "SA": 174,
+            "PRAS": 1817,
+            "PO": 2477,
+            "recuperaciones": 1253561700.0,
+            "porAclarar": 59363704600.0
+          },
+          "sectores": [
+            {
+              "nombre": "Seguridad",
+              "auditorias": 99,
+              "acciones": 46,
+              "PO": 14,
+              "recuperaciones": 1577200.0,
+              "porAclarar": 83643400.0
+            },
+            {
+              "nombre": "Salud",
+              "auditorias": 36,
+              "acciones": 158,
+              "PO": 37,
+              "recuperaciones": 58594000.0,
+              "porAclarar": 1591227300.0
+            },
+            {
+              "nombre": "Educaci\u00f3n",
+              "auditorias": 328,
+              "acciones": 718,
+              "PO": 303,
+              "recuperaciones": 932373300.0,
+              "porAclarar": 3989749500.0
+            },
+            {
+              "nombre": "Infraestructura Social",
+              "auditorias": 93,
+              "acciones": 140,
+              "PO": 90,
+              "recuperaciones": 69059000.0,
+              "porAclarar": 666384500.0
+            },
+            {
+              "nombre": "Saneamiento Financiero",
+              "auditorias": 44,
+              "acciones": 13,
+              "PO": 8,
+              "recuperaciones": 30193200.0,
+              "porAclarar": 36216900.0
+            },
+            {
+              "nombre": "Infraestructura F\u00edsica, Saneamiento Financiero",
+              "auditorias": 33,
+              "acciones": 45,
+              "PO": 16,
+              "recuperaciones": 109648800.0,
+              "porAclarar": 1391487600.0
+            },
+            {
+              "nombre": "Protecci\u00f3n Social",
+              "auditorias": 27,
+              "acciones": 161,
+              "PO": 49,
+              "recuperaciones": 2083600.0,
+              "porAclarar": 275608200.0
+            },
+            {
+              "nombre": "Aportaciones Federales, Participaciones Federales y Otros",
+              "auditorias": 1069,
+              "acciones": 3254,
+              "PO": 1903,
+              "recuperaciones": 18098400.0,
+              "porAclarar": 35647789800.0
+            },
+            {
+              "nombre": "Participaciones Federales",
+              "auditorias": 98,
+              "acciones": 321,
+              "PO": 54,
+              "recuperaciones": 11238600.0,
+              "porAclarar": 15680829600.0
+            },
+            {
+              "nombre": "Otros",
+              "auditorias": 19,
+              "acciones": 10,
+              "PO": 3,
+              "recuperaciones": 20695600.0,
+              "porAclarar": 767800.0
+            }
+          ]
+        }
+      ],
+      "federalizado": {
+        "auditorias": 1846,
+        "universo": 2767639933200.0,
+        "muestra": 2513410047300.0,
+        "representatividad": 90.81,
+        "acciones": 4866,
+        "R": 174,
+        "RD": 0,
+        "PEFCF": 224,
+        "SA": 174,
+        "PRAS": 1817,
+        "PO": 2477,
+        "recuperaciones": 1253561700.0,
+        "porAclarar": 59363704600.0
+      },
+      "coordinadoras": {
+        "auditorias": 23,
+        "universo": 216978811100.0,
+        "muestra": 210399842500.0,
+        "representatividad": 96.97,
+        "acciones": 36,
+        "R": 17,
+        "RD": 0,
+        "PEFCF": 1,
+        "SA": 0,
+        "PRAS": 17,
+        "PO": 1,
+        "recuperaciones": 248449400.0,
+        "porAclarar": 1050400.0
+      },
+      "entidades": [
+        {
+          "entidad": "Aguascalientes",
+          "total": {
+            "auditorias": 34,
+            "universo": 31493487100.0,
+            "muestra": 29339932500.0,
+            "acciones": 63,
+            "PO": 31,
+            "PRAS": 24,
+            "recuperaciones": 2210800.0,
+            "porAclarar": 343280100.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 85586400.0,
+              "recuperaciones": 416900.0,
+              "acciones": 27
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 11,
+              "porAclarar": 209643000.0,
+              "recuperaciones": 0.0,
+              "acciones": 23
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 48050700.0,
+              "recuperaciones": 1793900.0,
+              "acciones": 13
+            }
+          ]
+        },
+        {
+          "entidad": "Baja California",
+          "total": {
+            "auditorias": 29,
+            "universo": 74995661400.0,
+            "muestra": 66214870500.0,
+            "acciones": 59,
+            "PO": 28,
+            "PRAS": 21,
+            "recuperaciones": 10789900.0,
+            "porAclarar": 558402200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 12968300.0,
+              "recuperaciones": 10789900.0,
+              "acciones": 14
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 7,
+              "porAclarar": 455092200.0,
+              "recuperaciones": 0.0,
+              "acciones": 17
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 90341700.0,
+              "recuperaciones": 0.0,
+              "acciones": 28
+            }
+          ]
+        },
+        {
+          "entidad": "Baja California Sur",
+          "total": {
+            "auditorias": 30,
+            "universo": 23353252800.0,
+            "muestra": 20482548700.0,
+            "acciones": 39,
+            "PO": 20,
+            "PRAS": 9,
+            "recuperaciones": 65352800.0,
+            "porAclarar": 225069600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 21,
+              "porAclarar": 31222700.0,
+              "recuperaciones": 65166100.0,
+              "acciones": 20
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 5,
+              "porAclarar": 141104400.0,
+              "recuperaciones": 0.0,
+              "acciones": 13
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 52742500.0,
+              "recuperaciones": 186700.0,
+              "acciones": 6
+            }
+          ]
+        },
+        {
+          "entidad": "Campeche",
+          "total": {
+            "auditorias": 36,
+            "universo": 24978469800.0,
+            "muestra": 22237655200.0,
+            "acciones": 102,
+            "PO": 44,
+            "PRAS": 44,
+            "recuperaciones": 27858100.0,
+            "porAclarar": 759697900.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 152339400.0,
+              "recuperaciones": 17062500.0,
+              "acciones": 25
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 13,
+              "porAclarar": 300171300.0,
+              "recuperaciones": 0.0,
+              "acciones": 51
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 307187200.0,
+              "recuperaciones": 10795600.0,
+              "acciones": 26
+            }
+          ]
+        },
+        {
+          "entidad": "Chiapas",
+          "total": {
+            "auditorias": 64,
+            "universo": 130088977500.0,
+            "muestra": 122274162400.0,
+            "acciones": 227,
+            "PO": 122,
+            "PRAS": 70,
+            "recuperaciones": 19330300.0,
+            "porAclarar": 4499707300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 20,
+              "porAclarar": 1231917300.0,
+              "recuperaciones": 19215800.0,
+              "acciones": 59
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 38,
+              "porAclarar": 2667136500.0,
+              "recuperaciones": 114500.0,
+              "acciones": 124
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 600653500.0,
+              "recuperaciones": 0.0,
+              "acciones": 44
+            }
+          ]
+        },
+        {
+          "entidad": "Chihuahua",
+          "total": {
+            "auditorias": 60,
+            "universo": 77401019000.0,
+            "muestra": 74785679600.0,
+            "acciones": 234,
+            "PO": 95,
+            "PRAS": 123,
+            "recuperaciones": 5602900.0,
+            "porAclarar": 2521898200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 1210533100.0,
+              "recuperaciones": 4453300.0,
+              "acciones": 35
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 35,
+              "porAclarar": 913681300.0,
+              "recuperaciones": 1149600.0,
+              "acciones": 150
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 397683800.0,
+              "recuperaciones": 0.0,
+              "acciones": 49
+            }
+          ]
+        },
+        {
+          "entidad": "Ciudad de M\u00e9xico",
+          "total": {
+            "auditorias": 31,
+            "universo": 146636687700.0,
+            "muestra": 112909926600.0,
+            "acciones": 104,
+            "PO": 36,
+            "PRAS": 51,
+            "recuperaciones": 1948300.0,
+            "porAclarar": 2143468900.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 14,
+              "porAclarar": 1040000.0,
+              "recuperaciones": 1948300.0,
+              "acciones": 9
+            },
+            {
+              "ente": "Alcald\u00edas",
+              "auditorias": 16,
+              "porAclarar": 2142428900.0,
+              "recuperaciones": 0.0,
+              "acciones": 92
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 1,
+              "porAclarar": 0.0,
+              "recuperaciones": 0.0,
+              "acciones": 3
+            }
+          ]
+        },
+        {
+          "entidad": "Coahuila de Zaragoza",
+          "total": {
+            "auditorias": 62,
+            "universo": 58645342000.0,
+            "muestra": 54553214400.0,
+            "acciones": 183,
+            "PO": 120,
+            "PRAS": 48,
+            "recuperaciones": 9530000.0,
+            "porAclarar": 1379079000.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 309448500.0,
+              "recuperaciones": 9508800.0,
+              "acciones": 37
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 38,
+              "porAclarar": 928601700.0,
+              "recuperaciones": 0.0,
+              "acciones": 117
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 7,
+              "porAclarar": 141028800.0,
+              "recuperaciones": 21200.0,
+              "acciones": 29
+            }
+          ]
+        },
+        {
+          "entidad": "Colima",
+          "total": {
+            "auditorias": 32,
+            "universo": 19832095800.0,
+            "muestra": 18491911900.0,
+            "acciones": 78,
+            "PO": 44,
+            "PRAS": 16,
+            "recuperaciones": 1623600.0,
+            "porAclarar": 485672800.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 217756000.0,
+              "recuperaciones": 1623600.0,
+              "acciones": 36
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 10,
+              "porAclarar": 190205400.0,
+              "recuperaciones": 0.0,
+              "acciones": 22
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 77711400.0,
+              "recuperaciones": 0.0,
+              "acciones": 20
+            }
+          ]
+        },
+        {
+          "entidad": "Durango",
+          "total": {
+            "auditorias": 41,
+            "universo": 41154518800.0,
+            "muestra": 38918314600.0,
+            "acciones": 117,
+            "PO": 59,
+            "PRAS": 30,
+            "recuperaciones": 7753500.0,
+            "porAclarar": 1370464600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 608147300.0,
+              "recuperaciones": 5624400.0,
+              "acciones": 46
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 16,
+              "porAclarar": 680240000.0,
+              "recuperaciones": 0.0,
+              "acciones": 52
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 7,
+              "porAclarar": 82077300.0,
+              "recuperaciones": 2129100.0,
+              "acciones": 19
+            }
+          ]
+        },
+        {
+          "entidad": "M\u00e9xico",
+          "total": {
+            "auditorias": 151,
+            "universo": 293164981300.0,
+            "muestra": 268721011500.0,
+            "acciones": 453,
+            "PO": 255,
+            "PRAS": 166,
+            "recuperaciones": 283536900.0,
+            "porAclarar": 13198744600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 6037739900.0,
+              "recuperaciones": 125600900.0,
+              "acciones": 36
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 125,
+              "porAclarar": 7068706800.0,
+              "recuperaciones": 0.0,
+              "acciones": 383
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 10,
+              "porAclarar": 92297900.0,
+              "recuperaciones": 157936000.0,
+              "acciones": 34
+            }
+          ]
+        },
+        {
+          "entidad": "Guanajuato",
+          "total": {
+            "auditorias": 70,
+            "universo": 110037951600.0,
+            "muestra": 99748981900.0,
+            "acciones": 146,
+            "PO": 77,
+            "PRAS": 57,
+            "recuperaciones": 208106600.0,
+            "porAclarar": 2422230000.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 854917800.0,
+              "recuperaciones": 55927100.0,
+              "acciones": 13
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 46,
+              "porAclarar": 1505629300.0,
+              "recuperaciones": 0.0,
+              "acciones": 126
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 61682900.0,
+              "recuperaciones": 152179500.0,
+              "acciones": 7
+            }
+          ]
+        },
+        {
+          "entidad": "Guerrero",
+          "total": {
+            "auditorias": 49,
+            "universo": 87214196700.0,
+            "muestra": 76564781500.0,
+            "acciones": 125,
+            "PO": 48,
+            "PRAS": 49,
+            "recuperaciones": 27404800.0,
+            "porAclarar": 505328200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 5284200.0,
+              "recuperaciones": 18528400.0,
+              "acciones": 20
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 28,
+              "porAclarar": 474686600.0,
+              "recuperaciones": 0.0,
+              "acciones": 89
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 25357400.0,
+              "recuperaciones": 8876400.0,
+              "acciones": 16
+            }
+          ]
+        },
+        {
+          "entidad": "Hidalgo",
+          "total": {
+            "auditorias": 65,
+            "universo": 68649119800.0,
+            "muestra": 60945661700.0,
+            "acciones": 163,
+            "PO": 96,
+            "PRAS": 46,
+            "recuperaciones": 5821400.0,
+            "porAclarar": 2152707600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 1304873700.0,
+              "recuperaciones": 4334700.0,
+              "acciones": 38
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 40,
+              "porAclarar": 810384600.0,
+              "recuperaciones": 5300.0,
+              "acciones": 112
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 37449300.0,
+              "recuperaciones": 1481400.0,
+              "acciones": 13
+            }
+          ]
+        },
+        {
+          "entidad": "Jalisco",
+          "total": {
+            "auditorias": 77,
+            "universo": 158812077100.0,
+            "muestra": 145469089900.0,
+            "acciones": 228,
+            "PO": 109,
+            "PRAS": 97,
+            "recuperaciones": 102053800.0,
+            "porAclarar": 2196802500.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 92676100.0,
+              "recuperaciones": 13059600.0,
+              "acciones": 19
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 54,
+              "porAclarar": 1919339800.0,
+              "recuperaciones": 19300.0,
+              "acciones": 176
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 7,
+              "porAclarar": 184786600.0,
+              "recuperaciones": 88974900.0,
+              "acciones": 33
+            }
+          ]
+        },
+        {
+          "entidad": "Michoac\u00e1n de Ocampo",
+          "total": {
+            "auditorias": 48,
+            "universo": 98607929700.0,
+            "muestra": 87118982300.0,
+            "acciones": 108,
+            "PO": 44,
+            "PRAS": 45,
+            "recuperaciones": 62050800.0,
+            "porAclarar": 1003568500.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 151400600.0,
+              "recuperaciones": 17384700.0,
+              "acciones": 14
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 25,
+              "porAclarar": 548511700.0,
+              "recuperaciones": 0.0,
+              "acciones": 71
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 303656200.0,
+              "recuperaciones": 44666100.0,
+              "acciones": 23
+            }
+          ]
+        },
+        {
+          "entidad": "Morelos",
+          "total": {
+            "auditorias": 58,
+            "universo": 39876814000.0,
+            "muestra": 35838088900.0,
+            "acciones": 233,
+            "PO": 113,
+            "PRAS": 100,
+            "recuperaciones": 3745500.0,
+            "porAclarar": 3168922700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 1909195400.0,
+              "recuperaciones": 3745500.0,
+              "acciones": 101
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 36,
+              "porAclarar": 1248981700.0,
+              "recuperaciones": 0.0,
+              "acciones": 109
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 10745600.0,
+              "recuperaciones": 0.0,
+              "acciones": 23
+            }
+          ]
+        },
+        {
+          "entidad": "Nayarit",
+          "total": {
+            "auditorias": 41,
+            "universo": 30913712400.0,
+            "muestra": 28206690300.0,
+            "acciones": 118,
+            "PO": 54,
+            "PRAS": 41,
+            "recuperaciones": 2775600.0,
+            "porAclarar": 914952100.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 333268800.0,
+              "recuperaciones": 2775600.0,
+              "acciones": 36
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 20,
+              "porAclarar": 504849000.0,
+              "recuperaciones": 0.0,
+              "acciones": 51
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 76834300.0,
+              "recuperaciones": 0.0,
+              "acciones": 31
+            }
+          ]
+        },
+        {
+          "entidad": "Nuevo Le\u00f3n",
+          "total": {
+            "auditorias": 73,
+            "universo": 118233476800.0,
+            "muestra": 110492714100.0,
+            "acciones": 215,
+            "PO": 123,
+            "PRAS": 80,
+            "recuperaciones": 28545400.0,
+            "porAclarar": 4539726300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 2204976300.0,
+              "recuperaciones": 13444800.0,
+              "acciones": 45
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 51,
+              "porAclarar": 1747330800.0,
+              "recuperaciones": 0.0,
+              "acciones": 151
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 587419200.0,
+              "recuperaciones": 15100600.0,
+              "acciones": 19
+            }
+          ]
+        },
+        {
+          "entidad": "Oaxaca",
+          "total": {
+            "auditorias": 60,
+            "universo": 103860920700.0,
+            "muestra": 95204278900.0,
+            "acciones": 159,
+            "PO": 92,
+            "PRAS": 46,
+            "recuperaciones": 9958000.0,
+            "porAclarar": 2024366400.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 20,
+              "porAclarar": 190487300.0,
+              "recuperaciones": 9239900.0,
+              "acciones": 28
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 34,
+              "porAclarar": 1699196300.0,
+              "recuperaciones": 0.0,
+              "acciones": 120
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 134682800.0,
+              "recuperaciones": 718100.0,
+              "acciones": 11
+            }
+          ]
+        },
+        {
+          "entidad": "Puebla",
+          "total": {
+            "auditorias": 62,
+            "universo": 119375606500.0,
+            "muestra": 103796681100.0,
+            "acciones": 145,
+            "PO": 66,
+            "PRAS": 68,
+            "recuperaciones": 15022700.0,
+            "porAclarar": 931226700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 2380300.0,
+              "recuperaciones": 10853500.0,
+              "acciones": 7
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 37,
+              "porAclarar": 927668400.0,
+              "recuperaciones": 0.0,
+              "acciones": 122
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 1178000.0,
+              "recuperaciones": 4169200.0,
+              "acciones": 16
+            }
+          ]
+        },
+        {
+          "entidad": "Quer\u00e9taro",
+          "total": {
+            "auditorias": 38,
+            "universo": 49254694500.0,
+            "muestra": 43656855900.0,
+            "acciones": 68,
+            "PO": 33,
+            "PRAS": 26,
+            "recuperaciones": 4262800.0,
+            "porAclarar": 243680100.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 0.0,
+              "recuperaciones": 381600.0,
+              "acciones": 3
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 18,
+              "porAclarar": 193075600.0,
+              "recuperaciones": 0.0,
+              "acciones": 60
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 50604500.0,
+              "recuperaciones": 3881200.0,
+              "acciones": 5
+            }
+          ]
+        },
+        {
+          "entidad": "Quintana Roo",
+          "total": {
+            "auditorias": 38,
+            "universo": 36681922700.0,
+            "muestra": 34003186100.0,
+            "acciones": 24,
+            "PO": 13,
+            "PRAS": 2,
+            "recuperaciones": 5885400.0,
+            "porAclarar": 428296200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 0.0,
+              "recuperaciones": 3306500.0,
+              "acciones": 6
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 11,
+              "porAclarar": 427938700.0,
+              "recuperaciones": 0.0,
+              "acciones": 14
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 9,
+              "porAclarar": 357500.0,
+              "recuperaciones": 2578900.0,
+              "acciones": 4
+            }
+          ]
+        },
+        {
+          "entidad": "San Luis Potos\u00ed",
+          "total": {
+            "auditorias": 82,
+            "universo": 60497987100.0,
+            "muestra": 54881511100.0,
+            "acciones": 206,
+            "PO": 123,
+            "PRAS": 63,
+            "recuperaciones": 24583200.0,
+            "porAclarar": 592466900.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 34050600.0,
+              "recuperaciones": 4244200.0,
+              "acciones": 16
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 59,
+              "porAclarar": 553574500.0,
+              "recuperaciones": 0.0,
+              "acciones": 176
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 4841800.0,
+              "recuperaciones": 20339000.0,
+              "acciones": 14
+            }
+          ]
+        },
+        {
+          "entidad": "Sinaloa",
+          "total": {
+            "auditorias": 42,
+            "universo": 67620490800.0,
+            "muestra": 65218380300.0,
+            "acciones": 73,
+            "PO": 41,
+            "PRAS": 23,
+            "recuperaciones": 3621600.0,
+            "porAclarar": 574629600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 0.0,
+              "recuperaciones": 2708700.0,
+              "acciones": 5
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 18,
+              "porAclarar": 493967500.0,
+              "recuperaciones": 0.0,
+              "acciones": 58
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 80662100.0,
+              "recuperaciones": 912900.0,
+              "acciones": 10
+            }
+          ]
+        },
+        {
+          "entidad": "Sonora",
+          "total": {
+            "auditorias": 48,
+            "universo": 65254424000.0,
+            "muestra": 60637003600.0,
+            "acciones": 108,
+            "PO": 49,
+            "PRAS": 38,
+            "recuperaciones": 1966200.0,
+            "porAclarar": 619575300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 52921900.0,
+              "recuperaciones": 1966200.0,
+              "acciones": 19
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 23,
+              "porAclarar": 522522100.0,
+              "recuperaciones": 0.0,
+              "acciones": 79
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 44131300.0,
+              "recuperaciones": 0.0,
+              "acciones": 10
+            }
+          ]
+        },
+        {
+          "entidad": "Tabasco",
+          "total": {
+            "auditorias": 41,
+            "universo": 64264271400.0,
+            "muestra": 59307610300.0,
+            "acciones": 172,
+            "PO": 53,
+            "PRAS": 102,
+            "recuperaciones": 12021800.0,
+            "porAclarar": 1586016500.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 482581200.0,
+              "recuperaciones": 5799900.0,
+              "acciones": 69
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 17,
+              "porAclarar": 984223500.0,
+              "recuperaciones": 0.0,
+              "acciones": 71
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 119211800.0,
+              "recuperaciones": 6221900.0,
+              "acciones": 32
+            }
+          ]
+        },
+        {
+          "entidad": "Tamaulipas",
+          "total": {
+            "auditorias": 66,
+            "universo": 70075449500.0,
+            "muestra": 61964968300.0,
+            "acciones": 106,
+            "PO": 52,
+            "PRAS": 44,
+            "recuperaciones": 33210300.0,
+            "porAclarar": 401691700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 10848600.0,
+              "recuperaciones": 31865300.0,
+              "acciones": 9
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 43,
+              "porAclarar": 387407500.0,
+              "recuperaciones": 0.0,
+              "acciones": 91
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 3435600.0,
+              "recuperaciones": 1345000.0,
+              "acciones": 6
+            }
+          ]
+        },
+        {
+          "entidad": "Tlaxcala",
+          "total": {
+            "auditorias": 82,
+            "universo": 30418552600.0,
+            "muestra": 26819241700.0,
+            "acciones": 191,
+            "PO": 108,
+            "PRAS": 68,
+            "recuperaciones": 5943200.0,
+            "porAclarar": 418325300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 31081100.0,
+              "recuperaciones": 331400.0,
+              "acciones": 23
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 60,
+              "porAclarar": 369246200.0,
+              "recuperaciones": 0.0,
+              "acciones": 151
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 17998000.0,
+              "recuperaciones": 5611800.0,
+              "acciones": 17
+            }
+          ]
+        },
+        {
+          "entidad": "Veracruz de Ignacio de la Llave",
+          "total": {
+            "auditorias": 126,
+            "universo": 161620594000.0,
+            "muestra": 144529392900.0,
+            "acciones": 357,
+            "PO": 207,
+            "PRAS": 134,
+            "recuperaciones": 3584700.0,
+            "porAclarar": 4460779700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 1896723200.0,
+              "recuperaciones": 2486500.0,
+              "acciones": 70
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 104,
+              "porAclarar": 2523328600.0,
+              "recuperaciones": 1098200.0,
+              "acciones": 272
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 40727900.0,
+              "recuperaciones": 0.0,
+              "acciones": 15
+            }
+          ]
+        },
+        {
+          "entidad": "Yucat\u00e1n",
+          "total": {
+            "auditorias": 48,
+            "universo": 48315758900.0,
+            "muestra": 45274236200.0,
+            "acciones": 134,
+            "PO": 81,
+            "PRAS": 28,
+            "recuperaciones": 5627600.0,
+            "porAclarar": 1989665200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 753196600.0,
+              "recuperaciones": 5627600.0,
+              "acciones": 45
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 26,
+              "porAclarar": 1158659900.0,
+              "recuperaciones": 0.0,
+              "acciones": 70
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 77808700.0,
+              "recuperaciones": 0.0,
+              "acciones": 19
+            }
+          ]
+        },
+        {
+          "entidad": "Zacatecas",
+          "total": {
+            "auditorias": 39,
+            "universo": 39330678100.0,
+            "muestra": 34402639900.0,
+            "acciones": 92,
+            "PO": 40,
+            "PRAS": 41,
+            "recuperaciones": 3383900.0,
+            "porAclarar": 702211300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 0.0,
+              "recuperaciones": 2991800.0,
+              "acciones": 18
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 18,
+              "porAclarar": 652728800.0,
+              "recuperaciones": 0.0,
+              "acciones": 65
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 49482500.0,
+              "recuperaciones": 392100.0,
+              "acciones": 9
+            }
+          ]
+        }
+      ],
+      "paginaEntidades": "19 a 23"
+    },
+    "cp2025": {
+      "entrega": "primera",
+      "corte": "junio de 2026",
+      "auditorias": 33,
+      "universo": 301366198860.5,
+      "muestra": 301366198860.5,
+      "representatividad": 100.0,
+      "acciones": 7,
+      "R": 6,
+      "RD": 0,
+      "PEFCF": 0,
+      "SA": 1,
+      "PRAS": 0,
+      "PO": 0,
+      "recuperaciones": 20669471.05,
+      "porAclarar": 1403459.0,
+      "que": "Una auditor\u00eda a la SHCP, como coordinadora de la distribuci\u00f3n de las participaciones federales, y una a cada una de las 32 entidades.",
+      "fuente": "MDB2025A",
+      "pagina": 11,
+      "estado": "oficial"
+    },
+    "serie": [
+      {
+        "auditorias": 1358,
+        "acciones": 7141,
+        "PO": 1492,
+        "PRAS": 1583,
+        "recuperaciones": 1517843800.0,
+        "porAclarar": 99396584800.0,
+        "observado": 100914428500.0,
+        "observadoEstado": "oficial",
+        "cp": 2019,
+        "fuente": "MDB2019",
+        "pagina": 9
+      },
+      {
+        "auditorias": 1616,
+        "acciones": 5393,
+        "PO": 1139,
+        "PRAS": 1484,
+        "recuperaciones": 2176433500.0,
+        "porAclarar": 60834134600.0,
+        "observado": 63010568100.0,
+        "observadoEstado": "oficial",
+        "cp": 2020,
+        "fuente": "MDB2020",
+        "pagina": 9
+      },
+      {
+        "auditorias": 2050,
+        "acciones": 5478,
+        "PO": 1301,
+        "PRAS": 1564,
+        "recuperaciones": 2994803500.0,
+        "porAclarar": 61840334500.0,
+        "observado": 64835137900.0,
+        "observadoEstado": "oficial",
+        "cp": 2021,
+        "fuente": "MDB2021",
+        "pagina": 13
+      },
+      {
+        "auditorias": 2153,
+        "acciones": 5466,
+        "PO": 1613,
+        "PRAS": 1730,
+        "recuperaciones": 3128187100.0,
+        "porAclarar": 29765904800.0,
+        "observado": 32894091900.0,
+        "observadoEstado": "oficial",
+        "cp": 2022,
+        "fuente": "MDB2022",
+        "pagina": 13
+      },
+      {
+        "auditorias": 2369,
+        "acciones": 6806,
+        "PO": 2298,
+        "PRAS": 2508,
+        "recuperaciones": 1762225500.0,
+        "porAclarar": 51979042400.0,
+        "observado": 53741267900.0,
+        "observadoEstado": "derivado",
+        "cp": 2023,
+        "fuente": "MDB2023",
+        "pagina": 13
+      },
+      {
+        "cp": 2024,
+        "auditorias": 2264,
+        "acciones": 6274,
+        "PO": 2762,
+        "PRAS": 2203,
+        "recuperaciones": 2005619900.0,
+        "porAclarar": 65169097600.0,
+        "observado": 67174717500.0,
+        "observadoEstado": "derivado",
+        "fuente": "MDB2024",
+        "pagina": 11
+      }
+    ]
+  },
+"expedientes": {
+    "consulta": "26 de septiembre de 2026",
+    "fichas": [
+      {
+        "id": "tren-maya",
+        "categoria": "megaobras",
+        "icono": "\ud83d\ude85",
+        "titulo": "Tren Maya: lo que la ASF dej\u00f3 por aclarar",
+        "ente": "FONATUR Tren Maya y Fondo Nacional de Fomento al Turismo",
+        "hallazgo": "En la Cuenta P\u00fablica 2022, con la obra en marcha, la ASF revis\u00f3 la construcci\u00f3n de los tramos 1 a 7 y el financiamiento del proyecto: dej\u00f3 $785.3 mdp por aclarar y promovi\u00f3 14 pliegos de observaciones. El tramo 4, Izamal-Canc\u00fan, concentra $352.3 mdp: el 45 % del total. En las auditor\u00edas de 2023 y 2024 aqu\u00ed reunidas, ya con el tren en operaci\u00f3n, no quedaron montos por aclarar.",
+        "cifras": [
+          {
+            "valor": "14",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$785.3 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "14 \u00b7 15",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 11,
+            "porAclarar": 785260347.3,
+            "recuperado": 0.0,
+            "acciones": 39,
+            "PO": 14,
+            "PRAS": 14
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 1,
+            "PO": 0,
+            "PRAS": 1
+          },
+          {
+            "cp": 2024,
+            "auditorias": 2,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 107,
+            "clave": "2022-2-21W3X-22-0107-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "FONATUR Tren Maya, S.A. de C.V.",
+            "titulo": "Proyecto Tren Maya",
+            "porAclarar": 256099390.14,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 1,
+              "SA": 1,
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 1 Recomendaci\u00f3n, 1 Solicitud de Aclaraci\u00f3n y 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0107_a.pdf",
+            "sha256": "8b9396da026519f622fb7a977435bb5efb058a6f8720aab77612133657500150",
+            "paginas": 17,
+            "universo": 3784661300.0,
+            "muestra": 2397416700.0
+          },
+          {
+            "cp": 2022,
+            "num": 111,
+            "clave": "2022-3-21W3N-22-0111-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 1, Palenque-Esc\u00e1rcega, en los Estados de Chiapas, Tabasco y Campeche",
+            "porAclarar": 57568832.92,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 2,
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 2 Solicitudes de Aclaraci\u00f3n y 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0111_a.pdf",
+            "sha256": "c1579fa88c7a76ea4ba6b35d6f2b2861f80f64bbf43f4ecc47abe4cb071ea1a0",
+            "paginas": 18,
+            "universo": 14391101500.0,
+            "muestra": 10135587900.0
+          },
+          {
+            "cp": 2022,
+            "num": 112,
+            "clave": "2022-3-21W3N-22-0112-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 2, Esc\u00e1rcega-Calkin\u00ed, en el Estado de Campeche",
+            "porAclarar": 28834854.94,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3,
+              "PO": 3
+            },
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 4 no se detectaron irregularidades y los 6 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0112_a.pdf",
+            "sha256": "1bd89b2f064577a2338c5e8f43174855569c243228bd4845d14063f33182ce2d",
+            "paginas": 27,
+            "universo": 19000537000.0,
+            "muestra": 17106324100.0
+          },
+          {
+            "cp": 2022,
+            "num": 113,
+            "clave": "2022-3-21W3N-22-0113-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 3, Calkin\u00ed-Izamal, en los Estados de Campeche y Yucat\u00e1n",
+            "porAclarar": 65466591.89,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 2,
+              "PRAS": 1,
+              "PO": 3
+            },
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 4 no se detectaron irregularidades y los 6 restantes generaron: 2 Solicitudes de Aclaraci\u00f3n, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0113_a.pdf",
+            "sha256": "646c96bd656ea186732c8f706ebad84190c61f4ecc7098952b7ac5703ac6fc2b",
+            "paginas": 27,
+            "universo": 8366022300.0,
+            "muestra": 5050903000.0
+          },
+          {
+            "cp": 2022,
+            "num": 114,
+            "clave": "2022-3-21W3N-22-0114-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 4, Izamal-Canc\u00fan, en los Estados de Yucat\u00e1n y Quintana Roo",
+            "porAclarar": 352311614.76,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 1,
+              "PRAS": 1,
+              "PO": 5
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 1 Solicitud de Aclaraci\u00f3n, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0114_a.pdf",
+            "sha256": "4d19f7f22519fb5732b2f917d27271666c9f4bc843e40cb69a94a96e6b4b4c3f",
+            "paginas": 26,
+            "universo": 24089495000.0,
+            "muestra": 19349005000.0
+          },
+          {
+            "cp": 2022,
+            "num": 115,
+            "clave": "2022-0-07100-22-0115-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 5 Norte, Canc\u00fan-Playa del Carmen, en el Estado de Quintana Roo",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 5 resultados, de los cuales, en 4 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0115_a.pdf",
+            "sha256": "bcb785857427e1a620b2b88f756df83756410ef5813d579345c8fd05f45922cf",
+            "paginas": 19,
+            "universo": 318296100.0,
+            "muestra": 157995000.0
+          },
+          {
+            "cp": 2022,
+            "num": 116,
+            "clave": "2022-0-07100-22-0116-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Proyecto y Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 5 Sur, Playa del Carmen-Tulum, en el Estado de Quintana Roo",
+            "porAclarar": 2153824.98,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 2,
+              "PRAS": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 8 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 2 Recomendaciones, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0116_a.pdf",
+            "sha256": "4af901d8cfa66fc7f5ff79e15c8706faa513c364cfa0c3afe53482baacb0e3d8",
+            "paginas": 20,
+            "universo": 14221317000.0,
+            "muestra": 14221317000.0
+          },
+          {
+            "cp": 2022,
+            "num": 117,
+            "clave": "2022-3-21W3N-22-0117-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Seguimiento al Proyecto Tren Maya",
+            "porAclarar": 12805938.81,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 1 Solicitud de Aclaraci\u00f3n y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0117_a.pdf",
+            "sha256": "b5dca0a98c7104993f39b4ae3a4cee7816af816ff946fc2cfebce04f08f55c65",
+            "paginas": 16,
+            "universo": 1423921600.0,
+            "muestra": 1146939900.0
+          },
+          {
+            "cp": 2022,
+            "num": 118,
+            "clave": "2022-3-21W3N-19-0118-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Financiamiento y Erogaciones del Proyecto y Construcci\u00f3n del Tren Maya",
+            "porAclarar": 10019298.86,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en 3 no se detectaron irregularidades y los 2 restantes generaron: 1 Recomendaci\u00f3n y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0118_a.pdf",
+            "sha256": "3e832f9c68abea608fcf055b074352d5996c79b9689e8c1fa8741ac4035b7272",
+            "paginas": 31,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2022,
+            "num": 2111,
+            "clave": "2022-0-07100-22-2111-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 6, Tulum-Chetumal, en el Estado de Quintana Roo",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 6 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2111_a.pdf",
+            "sha256": "6657149008b936ca429d70fe55aa4de5a5c27fcb8537ea9a5087307abb2f9a1d",
+            "paginas": 23,
+            "universo": 1075437200.0,
+            "muestra": 799778600.0
+          },
+          {
+            "cp": 2022,
+            "num": 2112,
+            "clave": "2022-0-07100-22-2112-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 7, Chetumal-Esc\u00e1rcega, y Construcci\u00f3n del Taller y Cochera en Chetumal, en los Estados de Quintana Roo y Campeche",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 4
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 4 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2112_a.pdf",
+            "sha256": "ea6572ad11d21a3302bce5adf397eabbc8ef0b9bcb8f10f43b6bc0e40916ff08",
+            "paginas": 18,
+            "universo": 3808252200.0,
+            "muestra": 3808252200.0
+          },
+          {
+            "cp": 2023,
+            "num": 145,
+            "clave": "2023-3-21W3N-19-0145-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n y Operaci\u00f3n del Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 15 resultados, de los cuales, en 11 no se detectaron irregularidades y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0145_a.pdf",
+            "sha256": "adbe5b0516cdcad0817a01b16d7460454cee4f623d4d9fecf235bfad5489aefb",
+            "paginas": 33,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 125,
+            "clave": "2024-2-21W3X-22-0125-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "FONATUR Tren Maya, S.A. de C.V.",
+            "titulo": "Proyecto Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 4 resultados, de los cuales, en 2 no se detectaron irregularidades y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0125_a.pdf",
+            "sha256": "0c913ffb921f0b7656188ebecb68b8e4ee8b418d2bd1bd79a3ee77fb2db4144f",
+            "paginas": 8,
+            "universo": 19542057300.0,
+            "muestra": 15587979700.0
+          },
+          {
+            "cp": 2024,
+            "num": 126,
+            "clave": "2024-2-21W3X-19-0126-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "FONATUR Tren Maya, S.A. de C.V. Fondo Nacional de Fomento al Turismo",
+            "titulo": "Erogaciones para el Proyecto Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 12 resultados, de los cuales, en 12 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0126_a.pdf",
+            "sha256": "d2c6eb81437c4e04a06444bb0c2b924f47a737038c6f2fae2c639a68b6d51550",
+            "paginas": 21,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "tren-toluca",
+        "categoria": "megaobras",
+        "icono": "\ud83d\ude84",
+        "titulo": "Tren Interurbano M\u00e9xico-Toluca: la obra que faltaba terminar",
+        "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+        "hallazgo": "De 2022 a 2024 la ASF revis\u00f3 cada a\u00f1o lo que faltaba para terminar el tren: el tramo de Zinacantepec, la estaci\u00f3n Vasco de Quiroga, los viaductos de Santa Fe y el material rodante con sus sistemas ferroviarios. Dej\u00f3 $820.9 mdp por aclarar y promovi\u00f3 50 pliegos de observaciones. Una sola auditor\u00eda, la del material rodante de 2023, concentra $528.5 mdp: el 64 %. Durante la revisi\u00f3n de 2024 se recuperaron $23.0 mdp.",
+        "cifras": [
+          {
+            "valor": "10",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$820.9 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "50 \u00b7 7",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$24.5 mdp",
+            "etq": "recuperados durante las auditor\u00edas",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 4,
+            "porAclarar": 248417609.6,
+            "recuperado": 1536922.67,
+            "acciones": 23,
+            "PO": 19,
+            "PRAS": 4
+          },
+          {
+            "cp": 2023,
+            "auditorias": 3,
+            "porAclarar": 552467915.65,
+            "recuperado": 0.0,
+            "acciones": 25,
+            "PO": 23,
+            "PRAS": 2
+          },
+          {
+            "cp": 2024,
+            "auditorias": 3,
+            "porAclarar": 20062859.91,
+            "recuperado": 23007990.04,
+            "acciones": 9,
+            "PO": 8,
+            "PRAS": 1
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 303,
+            "clave": "2022-0-09100-22-0303-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n de la Estaci\u00f3n Vasco de Quiroga del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 10040516.17,
+            "recuperado": 55303.54,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 4
+            },
+            "resumen": "Se determinaron 8 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 5 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 4 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022a/Documentos/Auditorias/2022_0303_a.pdf",
+            "sha256": "fd94a1bc9afa4795f13feb9578b51e2b806a926484c3ac4463389c57f1e5d1bf",
+            "paginas": 20,
+            "universo": 138320600.0,
+            "muestra": 102609000.0
+          },
+          {
+            "cp": 2022,
+            "num": 307,
+            "clave": "2022-0-09100-22-0307-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Tramo Ferroviario Zinacantepec km 0+000 al km 36+150 y Adecuaciones al Proyecto Ejecutivo del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico",
+            "porAclarar": 112229787.73,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 4
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 2 no se detectaron irregularidades y los 5 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 4 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0307_a.pdf",
+            "sha256": "ca02507d306254751fa3ec608e26f0c0190d8145d6742fca682abb1deec24dd3",
+            "paginas": 20,
+            "universo": 363943500.0,
+            "muestra": 363943500.0
+          },
+          {
+            "cp": 2022,
+            "num": 308,
+            "clave": "2022-0-09100-22-0308-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Viaducto Atirantado del Manantial CONAGUA, y del Viaducto Doble Voladizo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 32460352.29,
+            "recuperado": 1481619.13,
+            "acciones": {
+              "PO": 5
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en 2 no se detectaron irregularidades y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 5 restantes generaron: 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0308_a.pdf",
+            "sha256": "7c769df36bfcdae370f1fccb3dff5aefaa4d5e1e284d8f9ee62abd09973180bb",
+            "paginas": 25,
+            "universo": 261426700.0,
+            "muestra": 229367100.0
+          },
+          {
+            "cp": 2022,
+            "num": 329,
+            "clave": "2022-0-09100-22-0329-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Suministro y Puesta en Marcha de Material Rodante y Sistemas Ferroviarios del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico y el Estado de M\u00e9xico",
+            "porAclarar": 93686953.41,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 8 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0329_a.pdf",
+            "sha256": "a43b8f289870aebdc4af633a1cabe52e70f2117c1e66175d549b39abf578e257",
+            "paginas": 33,
+            "universo": 1832955500.0,
+            "muestra": 1832955500.0
+          },
+          {
+            "cp": 2023,
+            "num": 336,
+            "clave": "2023-0-09100-22-0336-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n de la Estaci\u00f3n Vasco de Quiroga, de la Superestructura del Viaducto Ferroviario Denominado Viaducto \"0\" y Adecuaciones al Proyecto Ejecutivo del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico y la Ciudad de M\u00e9xico",
+            "porAclarar": 15305742.58,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0336_a.pdf",
+            "sha256": "ae349145c69376ca3002d8ed556823ff3b8fe1751fea06c15347d06b04410c3a",
+            "paginas": 29,
+            "universo": 467878800.0,
+            "muestra": 339861900.0
+          },
+          {
+            "cp": 2023,
+            "num": 341,
+            "clave": "2023-0-09100-22-0341-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Viaducto Atirantado del Manantial CONAGUA, y del Viaducto Doble Voladizo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 8637371.27,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 5
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 2 no se detectaron irregularidades y los 5 restantes generaron: 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0341_a.pdf",
+            "sha256": "27d3e853d3f6d97a52038bfb744d3df702f2e20bb118cfaf8893f969a6340ea9",
+            "paginas": 23,
+            "universo": 500771700.0,
+            "muestra": 374890600.0
+          },
+          {
+            "cp": 2023,
+            "num": 353,
+            "clave": "2023-0-09100-22-0353-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Suministro y Puesta en Marcha de Material Rodante y Sistemas Ferroviarios del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico y la Ciudad de M\u00e9xico",
+            "porAclarar": 528524801.8,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 12
+            },
+            "resumen": "Se determinaron 14 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 13 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 12 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0353_a.pdf",
+            "sha256": "e75ea1e873d970763e28f2e22a1b6411476d136626a9bd7882e3e6c94a360191",
+            "paginas": 46,
+            "universo": 2155197000.0,
+            "muestra": 1603026100.0
+          },
+          {
+            "cp": 2024,
+            "num": 338,
+            "clave": "2024-0-09100-22-0338-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n de la Estaci\u00f3n Vasco de Quiroga y las Adecuaciones al Proyecto Ejecutivo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 6198637.1,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 3
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024a/Documentos/Auditorias/2024_0338_a.pdf",
+            "sha256": "a35f6607efc3cd983c90e12466674318272f6b58cf98b3bb5d91634221657ddd",
+            "paginas": 23,
+            "universo": 423917000.0,
+            "muestra": 291686700.0
+          },
+          {
+            "cp": 2024,
+            "num": 340,
+            "clave": "2024-0-09100-22-0340-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Construcci\u00f3n del Viaducto Atirantado del Manantial CONAGUA, y del Viaducto Doble Voladizo del Tren Interurbano M\u00e9xico-Toluca, en la Ciudad de M\u00e9xico",
+            "porAclarar": 13864222.81,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 5
+            },
+            "resumen": "Se determinaron 8 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 5 restantes generaron: 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024a/Documentos/Auditorias/2024_0340_a.pdf",
+            "sha256": "249bb82505639871bcc4a0b151dd49071da36591843a49c248d59cdc01e51c9a",
+            "paginas": 28,
+            "universo": 634617300.0,
+            "muestra": 466121100.0
+          },
+          {
+            "cp": 2024,
+            "num": 350,
+            "clave": "2024-0-09100-22-0350-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de Infraestructura, Comunicaciones y Transportes",
+            "titulo": "Suministro y Puesta en Marcha de Material Rodante y Sistemas Ferroviarios del Tren Interurbano M\u00e9xico-Toluca, en el Estado de M\u00e9xico y la Ciudad de M\u00e9xico",
+            "porAclarar": 0.0,
+            "recuperado": 23007990.04,
+            "acciones": {},
+            "resumen": "Se determinaron 7 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 6 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0350_a.pdf",
+            "sha256": "94f0e7130ba7f31cb64d457f0c55bdb8e7ebfb76a47bdda6870f831874c1c197",
+            "paginas": 16,
+            "universo": 2612118000.0,
+            "muestra": 1230738000.0
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "aifa",
+        "categoria": "megaobras",
+        "icono": "\u2708\ufe0f",
+        "titulo": "Aeropuerto Felipe \u00c1ngeles: construcci\u00f3n y operaci\u00f3n",
+        "ente": "Secretar\u00eda de la Defensa Nacional y Aeropuerto Internacional Felipe \u00c1ngeles, S.A. de C.V.",
+        "hallazgo": "En la Cuenta P\u00fablica 2022 la ASF revis\u00f3 la terminal de pasajeros, el estacionamiento, la interconexi\u00f3n vial y los recursos destinados a construir y hacer funcionar el aeropuerto; en la de 2024, su gesti\u00f3n financiera. S\u00f3lo la terminal dej\u00f3 dinero por aclarar: $6.6 mdp, con 2 pliegos de observaciones. En las cinco auditor\u00edas emiti\u00f3 4 promociones de responsabilidad administrativa.",
+        "cifras": [
+          {
+            "valor": "5",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$6.6 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "2 \u00b7 4",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$0.1 mdp",
+            "etq": "recuperados durante las auditor\u00edas",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 4,
+            "porAclarar": 6565884.01,
+            "recuperado": 123942.37,
+            "acciones": 7,
+            "PO": 2,
+            "PRAS": 4
+          },
+          {
+            "cp": 2024,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 341,
+            "clave": "2022-0-07100-22-0341-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Terminal de Pasajeros del Aeropuerto Internacional de Santa Luc\u00eda, en el Estado de M\u00e9xico",
+            "porAclarar": 6565884.01,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 2
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 2 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0341_a.pdf",
+            "sha256": "303eb3bedf376c44fce6c9abd1af33a3f9e2cf68580e2c59f0cba6bfb832e4d1",
+            "paginas": 25,
+            "universo": 3930332800.0,
+            "muestra": 1565102300.0
+          },
+          {
+            "cp": 2022,
+            "num": 2121,
+            "clave": "2022-0-07100-22-2121-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Estacionamiento del Aeropuerto Internacional de Santa Luc\u00eda, en el Estado de M\u00e9xico",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, 5 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2121_a.pdf",
+            "sha256": "5dc49ee494df56e6ba0eda33daca786d407e89943ad32c852dfb85c8dfbc6c40",
+            "paginas": 24,
+            "universo": 535200200.0,
+            "muestra": 294631700.0
+          },
+          {
+            "cp": 2022,
+            "num": 2122,
+            "clave": "2022-0-07100-22-2122-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Interconexi\u00f3n Vial Caseta Tultepec-Santa Luc\u00eda y Eje Troncal de Circulaci\u00f3n y Obras Complementarias del Aeropuerto Internacional de Santa Luc\u00eda, en el Estado de M\u00e9xico",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Recomendaci\u00f3n.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2122_a.pdf",
+            "sha256": "3bfe55207e8a91fc0bf4e751d6329e324b58f4b3c31b0bcd4fa565dba650d6f7",
+            "paginas": 22,
+            "universo": 867963100.0,
+            "muestra": 732886100.0
+          },
+          {
+            "cp": 2022,
+            "num": 342,
+            "clave": "2022-0-07100-19-0342-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Recursos Financieros Destinados a la Construcci\u00f3n y Funcionamiento del Aeropuerto Internacional Felipe \u00c1ngeles",
+            "porAclarar": 0.0,
+            "recuperado": 123942.37,
+            "acciones": {
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0342_a.pdf",
+            "sha256": "39233514dccff696e3097e023df77df3db1d20b0888f84b6123bc89ceaf93d9b",
+            "paginas": 36,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 9,
+            "clave": "2024-2-07HZI-19-0009-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Aeropuerto Internacional Felipe \u00c1ngeles, S.A. de C.V.",
+            "titulo": "Gesti\u00f3n Financiera",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 17 resultados, de los cuales, en 17 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0009_a.pdf",
+            "sha256": "df60b49333adf5fc500b66a53b36fd083b98ae7b9270936323b03ab651a51368",
+            "paginas": 38,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "cuchillo-ii",
+        "categoria": "megaobras",
+        "icono": "\ud83d\udca7",
+        "titulo": "Acueducto El Cuchillo II: agua para Monterrey",
+        "ente": "Comisi\u00f3n Nacional del Agua",
+        "hallazgo": "La Conagua construye un acueducto de 106.0 km para llevar agua potable al \u00c1rea Metropolitana de Monterrey y su zona conurbada, en beneficio de 5,371,290 usuarios seg\u00fan la ASF. En sus tres revisiones, de 2022 a 2024, la ASF dej\u00f3 $105.2 mdp por aclarar y promovi\u00f3 13 pliegos de observaciones.",
+        "cifras": [
+          {
+            "valor": "3",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$105.2 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "13 \u00b7 7",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 3,
+            "PO": 0,
+            "PRAS": 3
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 77266326.9,
+            "recuperado": 0.0,
+            "acciones": 8,
+            "PO": 6,
+            "PRAS": 2
+          },
+          {
+            "cp": 2024,
+            "auditorias": 1,
+            "porAclarar": 27929908.49,
+            "recuperado": 0.0,
+            "acciones": 9,
+            "PO": 7,
+            "PRAS": 2
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 77,
+            "clave": "2022-5-16B00-22-0077-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Comisi\u00f3n Nacional del Agua",
+            "titulo": "Construcci\u00f3n del Acueducto El Cuchillo II, en el Estado de Nuevo Le\u00f3n",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, 3 generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022b/Documentos/Auditorias/2022_0077_a.pdf",
+            "sha256": "5c645345c3ca39e40e5289b48c5a733b0234bd339333caa61bfd47e30fc85a08",
+            "paginas": 17,
+            "universo": 804590700.0,
+            "muestra": 804590700.0
+          },
+          {
+            "cp": 2023,
+            "num": 101,
+            "clave": "2023-5-16B00-22-0101-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Comisi\u00f3n Nacional del Agua",
+            "titulo": "Construcci\u00f3n del Acueducto El Cuchillo II, en el Estado de Nuevo Le\u00f3n",
+            "porAclarar": 77266326.9,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 11 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 8 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0101_a.pdf",
+            "sha256": "f4a5ce9ebd562ec5fcf09f68dcee9e3920ec0166be26e48a7f409d56857ad29e",
+            "paginas": 35,
+            "universo": 5650916200.0,
+            "muestra": 3737650500.0,
+            "extractos": {
+              "longitudKm": 106.0,
+              "usuarios": 5371290.0
+            }
+          },
+          {
+            "cp": 2024,
+            "num": 95,
+            "clave": "2024-5-16B00-22-0095-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Comisi\u00f3n Nacional del Agua",
+            "titulo": "Construcci\u00f3n del Acueducto El Cuchillo II, en el Estado de Nuevo Le\u00f3n",
+            "porAclarar": 27929908.49,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2,
+              "PO": 7
+            },
+            "resumen": "Se determinaron 11 resultados, de los cuales, 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 9 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria y 7 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024a/Documentos/Auditorias/2024_0095_a.pdf",
+            "sha256": "4b563de7fbf21c8b30054158e0953ecda639f4cafaa5588c289c54d84a191ac5",
+            "paginas": 32,
+            "universo": 1287960100.0,
+            "muestra": 654961200.0
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "segalmex",
+        "categoria": "alimentos",
+        "icono": "\ud83c\udf3d",
+        "titulo": "Segalmex: las auditor\u00edas forenses m\u00e1s recientes",
+        "ente": "Seguridad Alimentaria Mexicana (Segalmex)",
+        "hallazgo": "Las dos auditor\u00edas forenses a Segalmex de las Cuentas P\u00fablicas 2022 y 2023 dejaron $324.5 mdp por aclarar, 16 pliegos de observaciones y avisos al SAT por posibles incumplimientos fiscales. Revisaron compras de bienes y servicios (2022) y la compra, venta y administraci\u00f3n de ma\u00edz y frijol (2023).",
+        "cifras": [
+          {
+            "valor": "2",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$324.5 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "16 \u00b7 22",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 1,
+            "porAclarar": 177854262.93,
+            "recuperado": 0.0,
+            "acciones": 30,
+            "PO": 10,
+            "PRAS": 11
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 146603764.54,
+            "recuperado": 0.0,
+            "acciones": 29,
+            "PO": 6,
+            "PRAS": 11
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 2123,
+            "clave": "2022-1-08JBP-23-2123-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento Forense",
+            "ente": "Seguridad Alimentaria Mexicana",
+            "titulo": "Adquisici\u00f3n de Bienes y Prestaci\u00f3n de Servicios",
+            "porAclarar": 177854262.93,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 5,
+              "PEFCF": 4,
+              "PRAS": 11,
+              "PO": 10
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, 5 generaron: 5 Recomendaciones, 4 Promociones del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 10 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2123_a.pdf",
+            "sha256": "dd8aad223341ee400119000878699f7b85dfbe5d41fe8f1523d5d770be21122e",
+            "paginas": 125,
+            "universo": 2849732600.0,
+            "muestra": 2627182000.0
+          },
+          {
+            "cp": 2023,
+            "num": 400,
+            "clave": "2023-1-08JBP-23-0400-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento Forense",
+            "ente": "Seguridad Alimentaria Mexicana",
+            "titulo": "Compra, Venta y Administraci\u00f3n del Ma\u00edz y Frijol y Servicios Relacionados",
+            "porAclarar": 146603764.54,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 9,
+              "PEFCF": 3,
+              "PRAS": 11,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 6 restantes generaron: 9 Recomendaciones, 3 Promociones del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0400_a.pdf",
+            "sha256": "d0f5317a17d71ddff04d51e7264f8154050bbe31651ac3b3cc73434102e560c8",
+            "paginas": 90,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "dos-bocas",
+        "categoria": "energia",
+        "icono": "\ud83d\udee2\ufe0f",
+        "titulo": "Refiner\u00eda Olmeca (Dos Bocas): obra y contratos",
+        "ente": "Pemex Corporativo y Pemex Transformaci\u00f3n Industrial",
+        "hallazgo": "En 2022 y 2023 la ASF revis\u00f3 la construcci\u00f3n de la refiner\u00eda paquete por paquete: dej\u00f3 $127.9 mdp por aclarar, promovi\u00f3 13 pliegos de observaciones y durante las auditor\u00edas se recuperaron $11.2 mdp. La auditor\u00eda de 2024, a los ingresos y egresos del proyecto, s\u00f3lo emiti\u00f3 3 recomendaciones.",
+        "cifras": [
+          {
+            "valor": "13",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$127.9 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "13 \u00b7 7",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$11.2 mdp",
+            "etq": "recuperados durante las auditor\u00edas",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 7,
+            "porAclarar": 110636008.34,
+            "recuperado": 10715068.450000001,
+            "acciones": 12,
+            "PO": 10,
+            "PRAS": 2
+          },
+          {
+            "cp": 2023,
+            "auditorias": 5,
+            "porAclarar": 17214186.01,
+            "recuperado": 468142.25,
+            "acciones": 13,
+            "PO": 3,
+            "PRAS": 5
+          },
+          {
+            "cp": 2024,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 3,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 215,
+            "clave": "2022-6-90T9N-22-0215-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Conformaci\u00f3n de Plataformas y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 32950001.59,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 2
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 2 restantes generaron: 2 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0215_a.pdf",
+            "sha256": "263c3483aa7c186a6bd9243e10ffb89ce04d86fd6bb8e081ba966f3f1fa326e0",
+            "paginas": 15,
+            "universo": 1842355200.0,
+            "muestra": 1842355200.0
+          },
+          {
+            "cp": 2022,
+            "num": 216,
+            "clave": "2022-6-90T9N-22-0216-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 1 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 13940721.58,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 2 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0216_a.pdf",
+            "sha256": "63251dfd48af92d9f72f471e7416153c1986875c62d7d572f9fee7a29ecd3f95",
+            "paginas": 23,
+            "universo": 21799775700.0,
+            "muestra": 21799775700.0
+          },
+          {
+            "cp": 2022,
+            "num": 217,
+            "clave": "2022-6-90T9N-22-0217-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 2 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 436774.6,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 4 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0217_a.pdf",
+            "sha256": "f6b25a61fa2dc19d128ed35388f6c31601aa4879e0f11e9d1431f1e92ec26194",
+            "paginas": 24,
+            "universo": 20025812700.0,
+            "muestra": 20025812700.0
+          },
+          {
+            "cp": 2022,
+            "num": 218,
+            "clave": "2022-6-90T9N-22-0218-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 3 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 4 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0218_a.pdf",
+            "sha256": "ea5e44c44ddd0e0957d68836a43f273f78ee8e283bb92841504e38ebd7ab7f7b",
+            "paginas": 13,
+            "universo": 15123990500.0,
+            "muestra": 15123990500.0
+          },
+          {
+            "cp": 2022,
+            "num": 219,
+            "clave": "2022-6-90T9N-22-0219-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 4 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 3806528.74,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 1
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en 2 no se detectaron irregularidades y el restante gener\u00f3: 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0219_a.pdf",
+            "sha256": "814ed5e55b9851c60a93267b11882097dfae1b92e823eb5d60a104102232c026",
+            "paginas": 16,
+            "universo": 18664514600.0,
+            "muestra": 18664514600.0
+          },
+          {
+            "cp": 2022,
+            "num": 220,
+            "clave": "2022-6-90T9N-22-0220-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 5 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 5338163.8,
+            "recuperado": 29390.3,
+            "acciones": {
+              "PO": 1
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0220_a.pdf",
+            "sha256": "fec21331b826b22d89ac866c18b51abef117d8889145ce0756f5869bde4c053c",
+            "paginas": 18,
+            "universo": 3717059000.0,
+            "muestra": 3717059000.0
+          },
+          {
+            "cp": 2022,
+            "num": 221,
+            "clave": "2022-6-90T9N-22-0221-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 6 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 54163818.03,
+            "recuperado": 10685678.15,
+            "acciones": {
+              "PO": 4
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en 2 no se detectaron irregularidades y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 4 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0221_a.pdf",
+            "sha256": "78f11738f536ac33e6d15d2e4c50e12bd29cfd2079e83badb06c305dacc53501",
+            "paginas": 34,
+            "universo": 19298503000.0,
+            "muestra": 19298503000.0
+          },
+          {
+            "cp": 2023,
+            "num": 244,
+            "clave": "2023-6-90T9N-19-0244-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Pemex Corporativo",
+            "titulo": "Egresos Destinados al Proyecto de la Refiner\u00eda Olmeca en Dos Bocas",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 5
+            },
+            "resumen": "Se determinaron 14 resultados, de los cuales, en 9 no se detectaron irregularidades y los 5 restantes generaron: 5 Recomendaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0244_a.pdf",
+            "sha256": "3dfc9db99a6da4672d7b18b7874646abc17ddad9985fd06108f997d14309e8b8",
+            "paginas": 23,
+            "universo": 34032789900.0,
+            "muestra": 34032789900.0
+          },
+          {
+            "cp": 2023,
+            "num": 246,
+            "clave": "2023-6-90T9N-22-0246-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo de los Paquetes 3, 4, 5 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 2677637.93,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0246_a.pdf",
+            "sha256": "7794d03377837c0ae9974f333fdaf249cf7542f30717bfb084ae2cbaa7b3290d",
+            "paginas": 34,
+            "universo": 14777172200.0,
+            "muestra": 14777172200.0
+          },
+          {
+            "cp": 2023,
+            "num": 247,
+            "clave": "2023-6-90T9N-22-0247-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 1 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 14536548.08,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 2
+            },
+            "resumen": "Se determinaron 4 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0247_a.pdf",
+            "sha256": "5aac9f1ef66010f2a0afadb05737cd4299eda95e29057376ee911a2dae7a6455",
+            "paginas": 20,
+            "universo": 10531653500.0,
+            "muestra": 5229856600.0
+          },
+          {
+            "cp": 2023,
+            "num": 248,
+            "clave": "2023-6-90T9N-22-0248-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 2 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0248_a.pdf",
+            "sha256": "2a8b9ebe4afb57dcd2a460c2bf3aff579d903d7f8053220455b6cfb04c56e4a4",
+            "paginas": 22,
+            "universo": 8449084400.0,
+            "muestra": 8449084400.0
+          },
+          {
+            "cp": 2023,
+            "num": 249,
+            "clave": "2023-6-90T9N-22-0249-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 6 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 0.0,
+            "recuperado": 468142.25,
+            "acciones": {},
+            "resumen": "Se determinaron 3 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0249_a.pdf",
+            "sha256": "aaaa54d857f69012145f64c22bd672eb2440786d2dccdcc01e0ed68018708d04",
+            "paginas": 17,
+            "universo": 15594523300.0,
+            "muestra": 15594523300.0
+          },
+          {
+            "cp": 2024,
+            "num": 247,
+            "clave": "2024-6-90T9N-19-0247-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Pemex Corporativo Pemex Transformaci\u00f3n Industrial",
+            "titulo": "Ingresos y Egresos del Proyecto de la Refiner\u00eda Olmeca en Dos Bocas",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 3
+            },
+            "resumen": "Se determinaron 15 resultados, de los cuales, en 11 no se detectaron irregularidades y los 4 restantes generaron: 3 Recomendaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
+            "sha256": "0b517333d735160e535f43df7b25eba6a8b6211a1eeeefcc4756f484947319f3",
+            "paginas": 17,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "salud",
+        "categoria": "salud",
+        "icono": "\ud83c\udfe5",
+        "titulo": "Compra de medicamentos e IMSS-Bienestar",
+        "ente": "INSABI, IMSS e IMSS-Bienestar",
+        "hallazgo": "En la compra de medicamentos, en la transici\u00f3n a IMSS-Bienestar y en su operaci\u00f3n en 2024, la ASF no cuantific\u00f3 montos por aclarar, pero emiti\u00f3 27 promociones de responsabilidad administrativa sancionatoria: faltas administrativas que el \u00f3rgano interno de control de cada instituci\u00f3n debe investigar y, en su caso, sancionar.",
+        "cifras": [
+          {
+            "valor": "7",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$0.0 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "0 \u00b7 27",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 3,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 14,
+            "PO": 0,
+            "PRAS": 12
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 4,
+            "PO": 0,
+            "PRAS": 4
+          },
+          {
+            "cp": 2024,
+            "auditorias": 3,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 13,
+            "PO": 0,
+            "PRAS": 11
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 140,
+            "clave": "2022-1-12NAW-19-0140-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto de Salud para el Bienestar",
+            "titulo": "Adquisici\u00f3n Consolidada de Medicamentos y Material de Curaci\u00f3n",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 2,
+              "PRAS": 7
+            },
+            "resumen": "Se determinaron 18 resultados, de los cuales, en 5 no se detectaron irregularidades y 5 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 8 restantes generaron: 2 Recomendaciones y 7 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0140_a.pdf",
+            "sha256": "f947be0e742b12784f69e545ed1db6bf1580d2e8143ae5b27893520db2501024",
+            "paginas": 75,
+            "universo": 11681899100.0,
+            "muestra": 2729037400.0
+          },
+          {
+            "cp": 2022,
+            "num": 164,
+            "clave": "2022-1-19GYR-19-0164-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto Mexicano del Seguro Social",
+            "titulo": "Adquisici\u00f3n de Medicamentos por parte de los \u00d3rganos de Operaci\u00f3n Administrativa Desconcentrada y Unidades M\u00e9dicas de Alta Especialidad",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en 2 no se detectaron irregularidades y los 4 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0164_a.pdf",
+            "sha256": "23f473f631b4a21ae6ab6f70e3a5aa082f3158fd75b771bd77a62f20a4ef6208",
+            "paginas": 17,
+            "universo": 22621558400.0,
+            "muestra": 4840425800.0
+          },
+          {
+            "cp": 2022,
+            "num": 173,
+            "clave": "2022-1-19GYR-19-0173-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto Mexicano del Seguro Social",
+            "titulo": "Transici\u00f3n del Programa IMSS-Bienestar al Organismo P\u00fablico Descentralizado Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 4 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0173_a.pdf",
+            "sha256": "a2a62412a9a32eea2fba7a2be0cde17d0357c71881e4b189caf2e8035bc80ff7",
+            "paginas": 24,
+            "universo": 20184013700.0,
+            "muestra": 4435897400.0
+          },
+          {
+            "cp": 2023,
+            "num": 191,
+            "clave": "2023-1-19GYR-19-0191-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto Mexicano del Seguro Social",
+            "titulo": "Programa IMSS-Bienestar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 4
+            },
+            "resumen": "Se determinaron 27 resultados, de los cuales, en 16 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 4 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0191_a.pdf",
+            "sha256": "392219ae5aef394c5ffcc71cce9fd6cb919c98bd08418592b61f1c2b3b1ec7e9",
+            "paginas": 35,
+            "universo": 21124578000.0,
+            "muestra": 5400208200.0
+          },
+          {
+            "cp": 2024,
+            "num": 418,
+            "clave": "2024-1-47AYO-19-0418-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar (IMSS-BIENESTAR) Secretar\u00eda de Salud",
+            "titulo": "Fondo de Aportaciones para los Servicios de Salud",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 20 resultados, de los cuales, en 19 no se detectaron irregularidades y el restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0418_a.pdf",
+            "sha256": "dbd97fc694854149ed965b4b2fe8f7eca16b5a111f3fc7814e2f5f3dad75debf",
+            "paginas": 15,
+            "universo": 97401638900.0,
+            "muestra": 97401638900.0
+          },
+          {
+            "cp": 2024,
+            "num": 419,
+            "clave": "2024-1-47AYO-19-0419-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar (IMSS-BIENESTAR) Secretar\u00eda de Salud",
+            "titulo": "Programa de Atenci\u00f3n a la Salud de Personas sin Seguridad Social",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3
+            },
+            "resumen": "Se determinaron 12 resultados, de los cuales, en 8 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0419_a.pdf",
+            "sha256": "8686502c29da7b703005661077d11eb259afa6f7e4d97e3f251ef91f9b75bc5f",
+            "paginas": 16,
+            "universo": 5339385300.0,
+            "muestra": 5339385300.0
+          },
+          {
+            "cp": 2024,
+            "num": 420,
+            "clave": "2024-1-47AYO-19-0420-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar (IMSS-BIENESTAR) Secretar\u00eda de Salud",
+            "titulo": "Programa de Atenci\u00f3n a la Salud y Medicamentos Gratuitos para la Poblaci\u00f3n sin Seguridad Social Laboral",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 2,
+              "PRAS": 7
+            },
+            "resumen": "Se determinaron 20 resultados, de los cuales, en 11 no se detectaron irregularidades y los 9 restantes generaron: 2 Recomendaciones y 7 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0420_a.pdf",
+            "sha256": "aaf457a8f071f6dbb20c6f0e4ca98127cfa5e973009e7f43edf97f7cf76f2246",
+            "paginas": 28,
+            "universo": 55219516300.0,
+            "muestra": 54966674600.0
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "birmex",
+        "categoria": "salud",
+        "icono": "\ud83d\udc8a",
+        "titulo": "Birmex: el almac\u00e9n de Huehuetoca y el almacenaje privado",
+        "ente": "Laboratorios de Biol\u00f3gicos y Reactivos de M\u00e9xico, S.A. de C.V. (Birmex)",
+        "hallazgo": "La auditor\u00eda forense a Birmex de la Cuenta P\u00fablica 2023 revis\u00f3 la compra del inmueble de Huehuetoca para el Centro Federal de Almacenamiento y Distribuci\u00f3n de Insumos para la Salud (CEFEDIS), la \u00abMegafarmacia\u00bb: se pact\u00f3 en $1,400.0 mdp m\u00e1s IVA y el equipamiento se adjudic\u00f3 en forma directa por $557.2 mdp. En la compra, la ASF observ\u00f3 que no se acredit\u00f3 haber avisado a la Funci\u00f3n P\u00fablica del contrato plurianual ni justificado su anticipo. La auditor\u00eda completa dej\u00f3 $1,044.9 mdp por aclarar, sobre todo por pagos a almacenes privados sin la evidencia de que se recibi\u00f3 el servicio: $819.6 mdp a Almacenaje y Distribuci\u00f3n Avior y $152.6 mdp a Farmac\u00e9uticos Maypo.",
+        "cifras": [
+          {
+            "valor": "1",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$1,044.9 mdp",
+            "etq": "por aclarar en la auditor\u00eda",
+            "estado": "oficial"
+          },
+          {
+            "valor": "8 \u00b7 11",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$1,531.5 mdp",
+            "etq": "precio del inmueble de Huehuetoca, con IVA",
+            "estado": "oficial"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 1044882951.1,
+            "recuperado": 0.0,
+            "acciones": 25,
+            "PO": 8,
+            "PRAS": 11
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2023,
+            "num": 234,
+            "clave": "2023-2-12NEF-23-0234-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento Forense",
+            "ente": "Laboratorios de Biol\u00f3gicos y Reactivos de M\u00e9xico, S.A. de C.V.",
+            "titulo": "Erogaciones por Adquisici\u00f3n de Bienes y Prestaci\u00f3n de Servicios",
+            "porAclarar": 1044882951.1,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 5,
+              "PEFCF": 1,
+              "PRAS": 11,
+              "PO": 8
+            },
+            "resumen": "Se determinaron 4 resultados, de los cuales, 4 generaron: 5 Recomendaciones, 1 Promoci\u00f3n del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 8 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0234_a.pdf",
+            "sha256": "8a5c1516efa5ec81baf9b6029b4fe3661b2c4a341cb5ba09b98e160e047dce1a",
+            "paginas": 93,
+            "universo": 4524627600.0,
+            "muestra": 4058856300.0,
+            "extractos": {
+              "cefedisPrecio": 1400000000.0,
+              "cefedisInmuebleConIva": 1531521600.0,
+              "cefedisInmueblePagado": 153152200.0,
+              "cefedisEquipamiento": 557240500.0,
+              "cefedisEquipamientoPagado": 84929700.0,
+              "cefedisInversion": 2973600000.0,
+              "cefedisConstruir": 3628020000.0,
+              "almacenAvior": 819630500.0,
+              "almacenMaypo": 152553600.0
+            }
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2023",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "deuda-estados",
+        "categoria": "deuda",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "titulo": "Deuda de los estados: el Sistema de Alertas",
+        "ente": "SHCP \u00b7 Sistema de Alertas de la Ley de Disciplina Financiera",
+        "hallazgo": "Con la Cuenta P\u00fablica 2025, los 31 estados medidos quedaron en \u00abEndeudamiento Sostenible\u00bb; ninguno en observaci\u00f3n ni en endeudamiento elevado. Los m\u00e1s endeudados respecto de sus ingresos de libre disposici\u00f3n son Nuevo Le\u00f3n (97.8 %), Chihuahua (93.0 %), Coahuila (87.0 %). En Nuevo Le\u00f3n, Chihuahua, Coahuila, Sonora y Durango el pago de la deuda ya pesa en rango medio. Tlaxcala no se mide porque no tiene deuda inscrita en el Registro P\u00fablico \u00danico.",
+        "cifras": [
+          {
+            "valor": "$643,695.6 mdp",
+            "etq": "deuda y obligaciones de los 31 estados medidos",
+            "estado": "derivado",
+            "nota": "Suma de la columna \u00abDeuda y Obligaciones\u00bb del Sistema de Alertas."
+          },
+          {
+            "valor": "97.8 %",
+            "etq": "deuda sobre ingresos de libre disposici\u00f3n en Nuevo Le\u00f3n, el m\u00e1s alto",
+            "estado": "oficial"
+          },
+          {
+            "valor": "31 de 31",
+            "etq": "en endeudamiento sostenible",
+            "estado": "oficial"
+          }
+        ],
+        "tabla": [
+          {
+            "entidad": "Nuevo Le\u00f3n",
+            "dyoIld": 0.978,
+            "dyo": 81006055031.35,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Chihuahua",
+            "dyoIld": 0.93,
+            "dyo": 56049777511.27,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Coahuila",
+            "dyoIld": 0.87,
+            "dyo": 36358301572.06,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Sonora",
+            "dyoIld": 0.76,
+            "dyo": 29101781792.89,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Quintana Roo",
+            "dyoIld": 0.626,
+            "dyo": 19262514337.01,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Durango",
+            "dyoIld": 0.593,
+            "dyo": 10881389917.02,
+            "resultado": "Endeudamiento Sostenible"
+          }
+        ],
+        "documentos": [
+          {
+            "titulo": "Resultado del Sistema de Alertas, Cuenta P\u00fablica 2025 (variables por entidad, XLSX)",
+            "url": "https://www.disciplinafinanciera.hacienda.gob.mx/work/models/DISCIPLINA_FINANCIERA/Documentos/SistemaAlertas/2025/CP/Informaci%C3%B3n%20Variables%20SdA%20Entidades%20Federativas.xlsx",
+            "sha256": "b76ba68b4d720e7cd73547bb2bcc832fe41c1cc12395e56fbe363ef857e34b16"
+          },
+          {
+            "titulo": "Sistema de Alertas: p\u00e1gina oficial con todas las mediciones",
+            "url": "https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Entidades_Federativas_2025"
+          }
+        ],
+        "fuente": "SHCP, Sistema de Alertas, evaluaci\u00f3n con la Cuenta P\u00fablica 2025 (publicada el 29 de junio de 2026)",
+        "alcance": "Seg\u00fan la SHCP, el Sistema de Alertas mide a los entes con financiamientos inscritos en el Registro P\u00fablico \u00danico cuya fuente o garant\u00eda de pago son sus ingresos de libre disposici\u00f3n. Clasifica en tres niveles: sostenible, en observaci\u00f3n y elevado."
+      },
+      {
+        "id": "defensa",
+        "categoria": "megaobras",
+        "icono": "\ud83d\udee1\ufe0f",
+        "titulo": "Defensa: Tren Maya S.A. y fideicomiso militar",
+        "ente": "Secretar\u00eda de la Defensa Nacional y sus empresas",
+        "hallazgo": "En las 6 auditor\u00edas aqu\u00ed reunidas, la ASF no dej\u00f3 montos por aclarar ni promovi\u00f3 acciones: lo que lleg\u00f3 a observar se solvent\u00f3 antes del informe. Que una auditor\u00eda salga limpia tambi\u00e9n es un dato, y se reporta igual que uno con hallazgos.",
+        "cifras": [
+          {
+            "valor": "6",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$0.0 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "0 \u00b7 0",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          },
+          {
+            "cp": 2024,
+            "auditorias": 5,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2023,
+            "num": 371,
+            "clave": "2023-0-07100-19-0371-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Desarrollo y Entrega del Proyecto Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 3 resultados, de los cuales, en 3 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0371_a.pdf",
+            "sha256": "6a31a6b1f1908af548f172ef1f8f9d3b09f9a3df6e8b02ae9057cd5a169875b7",
+            "paginas": 9,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 429,
+            "clave": "2024-2-07HOM-19-0429-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Tren Maya, S.A. de C.V. Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Gesti\u00f3n Financiera",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 11 resultados, de los cuales, en 11 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0429_a.pdf",
+            "sha256": "494d0793c968a83ca2311a5e9f05546b4a37e132417800163cb12847c005f7d0",
+            "paginas": 24,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 367,
+            "clave": "2024-0-07100-19-0367-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional Banco Nacional del Ej\u00e9rcito, Fuerza A\u00e9rea y Armada, S.N.C.",
+            "titulo": "Fideicomiso P\u00fablico de Administraci\u00f3n y Pago de Equipo Militar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 9 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0367_a.pdf",
+            "sha256": "7e53b416bd91a9b09b11acc60ec7272c75bbb4d06f9f01d0149c93b2ac167532",
+            "paginas": 23,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 353,
+            "clave": "2024-0-07100-19-0353-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Adquisici\u00f3n de Enseres e Insumos para la Atenci\u00f3n de la Poblaci\u00f3n Afectada por Fen\u00f3menos Naturales",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 13 resultados, de los cuales, en 4 no se detectaron irregularidades y 9 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0353_a.pdf",
+            "sha256": "0cb039ada784079a2596716f148818481614f1263bb1acf68576aeb334cb5b45",
+            "paginas": 28,
+            "universo": 4491797400.0,
+            "muestra": 1973269200.0
+          },
+          {
+            "cp": 2024,
+            "num": 356,
+            "clave": "2024-0-07100-07-0356-2025",
+            "tipo": "Auditor\u00eda de Desempe\u00f1o",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Becas para Hijos del Personal de las Fuerzas Armadas en Activo",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 3 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0356_a.pdf",
+            "sha256": "03cd67a6c3869745bf739e25b312eade3274de0405922cbce9434960b5d185ac",
+            "paginas": 17,
+            "universo": null,
+            "muestra": null
+          },
+          {
+            "cp": 2024,
+            "num": 360,
+            "clave": "2024-0-07100-07-0360-2025",
+            "tipo": "Auditor\u00eda de Desempe\u00f1o",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Investigaci\u00f3n y Desarrollo Militar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 6 resultados, de los cuales, en 2 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0360_a.pdf",
+            "sha256": "f037e5545de4d8013a21e7d812eba927f32be2b325c05d9908345d0025be34a2",
+            "paginas": 18,
+            "universo": null,
+            "muestra": null
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      }
+    ]
+  },
+"evaluacion_sexenal": {
+    "consulta": "26 de septiembre de 2026",
+    "convencion": "A cada presidente se le asignan los seis a\u00f1os calendario de su mandato: Salinas 1989\u20131994, Zedillo 1995\u20132000, Fox 2001\u20132006, Calder\u00f3n 2007\u20132012, Pe\u00f1a Nieto 2013\u20132018 y L\u00f3pez Obrador 2019\u20132024. El cambio de gobierno ocurre el 1 de diciembre (el 1 de octubre en 2024), as\u00ed que el primer y el \u00faltimo a\u00f1o se comparten unas semanas o meses con el vecino.",
+    "advertencias": [
+      "La deuda de 2000 a 2012 se public\u00f3 con el PIB de su momento (base 2003) y la de 2018 y 2024 con bases m\u00e1s recientes. Las revisiones del PIB pueden mover el cociente m\u00e1s de un punto: la diferencia entre Zedillo (30.7%) y Fox (29.1%) no debe leerse como definitiva.",
+      "Las recuperaciones operadas crecen con el tiempo: una Cuenta P\u00fablica vieja lleva m\u00e1s a\u00f1os de solventaci\u00f3n que una reciente. Comparar sexenios con esta cifra favorece a los antiguos.",
+      "El PIB de 2023 y 2024 es preliminar."
+    ],
+    "recuperacionesConjuntas": {
+      "mdp": 41091.56,
+      "cuentas": [
+        2001,
+        2008
+      ],
+      "fuente": "ASF_IGE2022"
+    },
+    "fuentes": {
+      "INEGI_PIBT": {
+        "corto": "INEGI, PIB trimestral, a\u00f1o base 2018 (serie 1993\u20132026)",
+        "doc": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda, Sistema de Cuentas Nacionales de M\u00e9xico, Producto Interno Bruto Trimestral, a\u00f1o base 2018, serie detallada (PIBT_2.xlsx), rengl\u00f3n \u00abProducto interno bruto\u00bb, columna \u00abAnual\u00bb, millones de pesos a precios de 2018. Actualizaci\u00f3n del 24 de agosto de 2026; 2023 a 2025 son cifras preliminares.",
+        "url": "https://www.inegi.org.mx/contenidos/programas/pib/2018/tabulados/ori/PIBT_2.xlsx",
+        "sha256": "65a7899d4106e94ddb0612919ea45f7ce356910693a6c74526994e3eb11a5dee"
+      },
+      "ASF_IR2012": {
+        "corto": "ASF, Informe del Resultado CP 2012, Tomo Ejecutivo, p. 67",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2012, Tomo Ejecutivo, cuadro \u00abSaldo hist\u00f3rico de los requerimientos financieros del sector p\u00fablico, 2000-2012\u00bb, elaborado con informaci\u00f3n de la SHCP y del INEGI (p\u00e1gina 67 del PDF).",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2012i/Documentos/InformeEjecutivo/Tomo%20Ejecutivo%20IR%202012.pdf",
+        "sha256": "4be2952a01fbc0708cd4430eb6bd9cd6cdc7be0723e426e4464c13724018d66b"
+      },
+      "ASF_IGE2022": {
+        "corto": "ASF, Informe General Ejecutivo CP 2022",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe General Ejecutivo de la Cuenta P\u00fablica 2022: cuadro \u00abRecuperaciones operadas (Cuentas P\u00fablicas 2001-2022)\u00bb, cifras al 31 de enero de 2024 (p. 16 del PDF), y cuadro \u00abSaldo hist\u00f3rico de los requerimientos financieros del sector p\u00fablico, 2016-2022\u00bb, con informaci\u00f3n de la SHCP y del INEGI (p. 150).",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/2022_IGE_a.pdf",
+        "sha256": "618073724893b909c81e38e670dccd6f52a66b5e7abc1a2801408d6886c9b836"
+      },
+      "ASF_IGE2018": {
+        "corto": "ASF, Informe General Ejecutivo CP 2018, p. 313",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe General Ejecutivo de la Cuenta P\u00fablica 2018, gr\u00e1fica \u00abTotal de auditor\u00edas practicadas, con base en el Programa Anual de Auditor\u00edas, Cuentas P\u00fablicas 2000-2018\u00bb (p\u00e1gina 313 del PDF). No incluye las auditor\u00edas por mandato judicial o por denuncia.",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/IGE_2018_PROTEGIDO.pdf",
+        "sha256": "b69defcd67d2f4196f75940a0f6da4f1a82141c98b187590673fa216ec2bf73b"
+      },
+      "ASF_MDB": {
+        "corto": "ASF, Matrices de Datos B\u00e1sicos CP 2019\u20132024",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos consolidada de cada Cuenta P\u00fablica, 2019 a 2024, rengl\u00f3n Total (la misma serie de la colecci\u00f3n cuenta_publica_asf, con la liga y la p\u00e1gina de cada a\u00f1o).",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf"
+      },
+      "SHCP_C4_2025": {
+        "corto": "SHCP, Comunicado 4/2025 (30 ene. 2025)",
+        "doc": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico, Comunicado No. 4, \u00abInformes sobre la Situaci\u00f3n Econ\u00f3mica, las Finanzas P\u00fablicas y la Deuda P\u00fablica al cuarto trimestre de 2024\u00bb, 30 de enero de 2025: la deuda p\u00fablica (SHRFSP) cerr\u00f3 2024 en 51.4% del PIB.",
+        "url": "https://www.gob.mx/shcp/prensa/comunicado-no-4-informes-sobre-la-situacion-economica-las-finanzas-publicas-y-la-deuda-publica-al-cuarto-trimestre-de-2024"
+      },
+      "PRES_5IG": {
+        "corto": "Presidencia, Quinto Informe de Gobierno, Anexo Estad\u00edstico, p. 530",
+        "doc": "Presidencia de la Rep\u00fablica, Quinto Informe de Gobierno 2016-2017, Anexo Estad\u00edstico, cuadro \u00abAsegurados trabajadores en el IMSS\u00bb (fuente: IMSS), columna diciembre (p\u00e1gina 530 del PDF).",
+        "url": "https://framework-gb.cdn.gob.mx/quintoinforme/5IG_ANEXO_FINAL_TGM_250818.pdf",
+        "sha256": "7159e585765b0d4cf027b22ce826c5d66daa2f926e18aaceba7f65efe1178f57"
+      },
+      "IMSS_008_2019": {
+        "corto": "IMSS, Comunicado 008/2019",
+        "doc": "Instituto Mexicano del Seguro Social, Comunicado No. 008/2019, \u00abCierra 2018 con un registro de 20 millones 79 mil 365 puestos de trabajo\u00bb.",
+        "url": "https://www.imss.gob.mx/prensa/archivo/201901/008"
+      },
+      "IMSS_009_2025": {
+        "corto": "IMSS, Comunicado 009/2025",
+        "doc": "Instituto Mexicano del Seguro Social, Comunicado No. 009/2025, \u00abPuestos de trabajo afiliados al Instituto Mexicano del Seguro Social\u00bb: 22,238,379 al 31 de diciembre de 2024.",
+        "url": "https://www.imss.gob.mx/prensa/archivo/202501/009"
+      }
+    },
+    "filas": [
+      {
+        "id": "salinas",
+        "anios": [
+          1989,
+          1994
+        ],
+        "pib": {
+          "estado": "pendiente",
+          "motivo": "La serie del INEGI a\u00f1o base 2018 empieza en 1993; falta el PIB de 1988 en una base comparable."
+        },
+        "deuda": {
+          "estado": "pendiente",
+          "motivo": "Falta el saldo de 1994 en los documentos consultados."
+        },
+        "empleo": {
+          "estado": "pendiente",
+          "motivo": "La serie de asegurados del anexo estad\u00edstico empieza en 1997."
+        },
+        "auditorias": {
+          "estado": "no_aplica",
+          "motivo": "La ASF se cre\u00f3 en 2000; antes revisaba la Contadur\u00eda Mayor de Hacienda."
+        },
+        "recuperaciones": {
+          "estado": "no_aplica",
+          "motivo": "La ASF se cre\u00f3 en 2000; antes revisaba la Contadur\u00eda Mayor de Hacienda."
+        },
+        "porAclarar": {
+          "estado": "no_aplica",
+          "motivo": "La ASF se cre\u00f3 en 2000; antes revisaba la Contadur\u00eda Mayor de Hacienda."
+        }
+      },
+      {
+        "id": "zedillo",
+        "anios": [
+          1995,
+          2000
+        ],
+        "pib": {
+          "promedio": 3.48,
+          "acumulado": 22.77,
+          "base": 1994,
+          "cierre": 2000,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2000 / PIB 1994)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 30.7,
+          "anio": 2000,
+          "estado": "oficial",
+          "fuente": "ASF_IR2012"
+        },
+        "empleo": {
+          "estado": "pendiente",
+          "motivo": "La serie de asegurados del anexo estad\u00edstico empieza en 1997."
+        },
+        "auditorias": {
+          "total": 312,
+          "cuentas": [
+            2000,
+            2000
+          ],
+          "porCuenta": {
+            "2000": 312
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2000 a 2000.",
+          "nota": "Solo la Cuenta P\u00fablica 2000, primera que revis\u00f3 la ASF."
+        },
+        "recuperaciones": {
+          "estado": "pendiente",
+          "motivo": "La serie de recuperaciones de la ASF empieza en la Cuenta P\u00fablica 2001."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "fox",
+        "anios": [
+          2001,
+          2006
+        ],
+        "pib": {
+          "promedio": 1.81,
+          "acumulado": 11.38,
+          "base": 2000,
+          "cierre": 2006,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2006 / PIB 2000)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 29.1,
+          "anio": 2006,
+          "estado": "oficial",
+          "fuente": "ASF_IR2012"
+        },
+        "empleo": {
+          "inicio": 12437760,
+          "fin": 13678492,
+          "creados": 1240732,
+          "fuentes": [
+            "PRES_5IG"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2006 menos los de 2000."
+        },
+        "auditorias": {
+          "total": 2834,
+          "cuentas": [
+            2001,
+            2006
+          ],
+          "porCuenta": {
+            "2001": 355,
+            "2002": 336,
+            "2003": 338,
+            "2004": 424,
+            "2005": 627,
+            "2006": 754
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2001 a 2006."
+        },
+        "recuperaciones": {
+          "estado": "conjunta",
+          "fuente": "ASF_IGE2022",
+          "motivo": "La ASF publica las recuperaciones de 2001 a 2008 en una sola cifra ($41,091.6 mdp), que no separa los a\u00f1os de Fox de los dos primeros de Calder\u00f3n."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "calderon",
+        "anios": [
+          2007,
+          2012
+        ],
+        "pib": {
+          "promedio": 1.38,
+          "acumulado": 8.57,
+          "base": 2006,
+          "cierre": 2012,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2012 / PIB 2006)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 36.8,
+          "anio": 2012,
+          "estado": "oficial",
+          "fuente": "ASF_IR2012"
+        },
+        "empleo": {
+          "inicio": 13678492,
+          "fin": 16062043,
+          "creados": 2383551,
+          "fuentes": [
+            "PRES_5IG"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2012 menos los de 2006."
+        },
+        "auditorias": {
+          "total": 6209,
+          "cuentas": [
+            2007,
+            2012
+          ],
+          "porCuenta": {
+            "2007": 962,
+            "2008": 987,
+            "2009": 945,
+            "2010": 1031,
+            "2011": 1111,
+            "2012": 1173
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2007 a 2012."
+        },
+        "recuperaciones": {
+          "mdp": 56455.58,
+          "cuentas": [
+            2009,
+            2012
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_IGE2022",
+          "operacion": "Suma de las recuperaciones operadas de las Cuentas P\u00fablicas 2009 a 2012, cifras al 31 de enero de 2024.",
+          "nota": "Solo CP 2009\u20132012. Las de 2007 y 2008 est\u00e1n dentro de la cifra conjunta 2001\u20132008."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "epn",
+        "anios": [
+          2013,
+          2018
+        ],
+        "pib": {
+          "promedio": 1.94,
+          "acumulado": 12.25,
+          "base": 2012,
+          "cierre": 2018,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2018 / PIB 2012)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 44.9,
+          "anio": 2018,
+          "estado": "oficial",
+          "fuente": "ASF_IGE2022"
+        },
+        "empleo": {
+          "inicio": 16062043,
+          "fin": 20079365,
+          "creados": 4017322,
+          "fuentes": [
+            "IMSS_008_2019",
+            "PRES_5IG"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2018 menos los de 2012."
+        },
+        "auditorias": {
+          "total": 10064,
+          "cuentas": [
+            2013,
+            2018
+          ],
+          "porCuenta": {
+            "2013": 1413,
+            "2014": 1659,
+            "2015": 1643,
+            "2016": 1865,
+            "2017": 1676,
+            "2018": 1808
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_IGE2018"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2013 a 2018."
+        },
+        "recuperaciones": {
+          "mdp": 52264.15,
+          "cuentas": [
+            2013,
+            2018
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_IGE2022",
+          "operacion": "Suma de las recuperaciones operadas de las Cuentas P\u00fablicas 2013 a 2018, cifras al 31 de enero de 2024."
+        },
+        "porAclarar": {
+          "estado": "pendiente",
+          "motivo": "La ASF publica el monto por aclarar con esta definici\u00f3n desde la Cuenta P\u00fablica 2019; antes usaba otros conceptos que no se suman con este."
+        }
+      },
+      {
+        "id": "amlo",
+        "anios": [
+          2019,
+          2024
+        ],
+        "pib": {
+          "promedio": 0.82,
+          "acumulado": 5.05,
+          "base": 2018,
+          "cierre": 2024,
+          "preliminar": true,
+          "estado": "derivado",
+          "fuente": "INEGI_PIBT",
+          "operacion": "Tasa media anual: (PIB 2024 / PIB 2018)^(1/6) \u2212 1, a precios de 2018."
+        },
+        "deuda": {
+          "cierre": 51.4,
+          "anio": 2024,
+          "estado": "oficial",
+          "fuente": "SHCP_C4_2025"
+        },
+        "empleo": {
+          "inicio": 20079365,
+          "fin": 22238379,
+          "creados": 2159014,
+          "fuentes": [
+            "IMSS_008_2019",
+            "IMSS_009_2025"
+          ],
+          "estado": "derivado",
+          "operacion": "Asegurados en el IMSS al 31 de diciembre de 2024 menos los de 2018."
+        },
+        "auditorias": {
+          "total": 11810,
+          "cuentas": [
+            2019,
+            2024
+          ],
+          "porCuenta": {
+            "2019": 1358,
+            "2020": 1616,
+            "2021": 2050,
+            "2022": 2153,
+            "2023": 2369,
+            "2024": 2264
+          },
+          "estado": "derivado",
+          "fuentes": [
+            "ASF_MDB"
+          ],
+          "operacion": "Suma de las auditor\u00edas practicadas en las Cuentas P\u00fablicas 2019 a 2024.",
+          "nota": "La Cuenta P\u00fablica 2024 incluye octubre a diciembre, ya con el gobierno siguiente."
+        },
+        "recuperaciones": {
+          "mdp": 10008.61,
+          "cuentas": [
+            2019,
+            2022
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_IGE2022",
+          "operacion": "Suma de las recuperaciones operadas de las Cuentas P\u00fablicas 2019 a 2022, cifras al 31 de enero de 2024.",
+          "nota": "Solo CP 2019\u20132022: las de 2023 y 2024 siguen en solventaci\u00f3n y no estaban en el corte."
+        },
+        "porAclarar": {
+          "mdp": 368985.1,
+          "cuentas": [
+            2019,
+            2024
+          ],
+          "estado": "derivado",
+          "fuente": "ASF_MDB",
+          "operacion": "Suma del monto por aclarar de las Cuentas P\u00fablicas 2019 a 2024.",
+          "nota": "La Cuenta P\u00fablica 2024 incluye octubre a diciembre, ya con el gobierno siguiente."
+        }
+      }
+    ]
+  },
+"comparador_salarial": {
+    "consulta": "26 de septiembre de 2026",
+    "fuentes": {
+      "PEF": {
+        "corto": "PEF 2026, Anexo 23 (DOF 21-11-2025)",
+        "doc": "Decreto de Presupuesto de Egresos de la Federaci\u00f3n para el Ejercicio Fiscal 2026, Anexo 23 \u00abRemuneraciones de los servidores p\u00fablicos de la Federaci\u00f3n\u00bb, Diario Oficial de la Federaci\u00f3n, 21 de noviembre de 2025, edici\u00f3n vespertina.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf",
+        "sha256": "6db4a86b588a0f76928e5d61298579c4aff2c29c3ace68fdedbfa5afceb8f2bc"
+      },
+      "DIP": {
+        "corto": "Manual de remuneraciones de la C\u00e1mara de Diputados 2026 (DOF 27-02-2026)",
+        "doc": "Manual que Regula las Remuneraciones para las y los Diputados Federales, Personal de Mando y Hom\u00f3logos de la C\u00e1mara de Diputados, de la Unidad de Evaluaci\u00f3n y Control y del Canal del Congreso, para el ejercicio fiscal 2026. Diario Oficial de la Federaci\u00f3n, 27 de febrero de 2026, pp. 137 a 146.",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_manual_remun_27feb26.pdf",
+        "sha256": "e2d839ba972dbe26ba846a7190d7cf81184acf507c61a42deb09dc617de5c7dd"
+      },
+      "SEN": {
+        "corto": "Manual de remuneraciones del Senado 2026 (DOF 27-02-2026)",
+        "doc": "Manual de Remuneraciones de las Senadoras, Senadores, servidoras y servidores p\u00fablicos de mando y hom\u00f3logos, y la informaci\u00f3n relativa al Cap\u00edtulo de Servicios Personales. Diario Oficial de la Federaci\u00f3n, 27 de febrero de 2026.",
+        "url": "https://dof.gob.mx/nota_detalle.php?codigo=5781138&fecha=27/02/2026"
+      },
+      "PJF": {
+        "corto": "Manual de remuneraciones del PJF 2026 (DOF 27-02-2026)",
+        "doc": "Manual que regula las remuneraciones de las personas servidoras p\u00fablicas del Poder Judicial de la Federaci\u00f3n para el ejercicio fiscal 2026, Anexo B \u00abPresupuesto anal\u00edtico de plazas\u00bb. Diario Oficial de la Federaci\u00f3n, 27 de febrero de 2026.",
+        "url": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF",
+        "sha256": "1bab2ed9e8821e6bd8e443b7239423b319a6626cc2a3104f2272eff676f55ef7"
+      },
+      "LOAPF": {
+        "corto": "Ley Org\u00e1nica de la Administraci\u00f3n P\u00fablica Federal, art. 26",
+        "doc": "Ley Org\u00e1nica de la Administraci\u00f3n P\u00fablica Federal, art\u00edculo 26, texto vigente (\u00faltima reforma DOF 07-05-2026).",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf",
+        "sha256": "3edf486e601217f5f595f94f56832d8845cbd9193b6494af52473237252bcc5f"
+      },
+      "LFT": {
+        "corto": "Ley Federal del Trabajo, arts. 76, 80 y 87",
+        "doc": "Ley Federal del Trabajo, texto vigente (\u00faltima reforma DOF 14-05-2026): art\u00edculo 76 (vacaciones, reformado DOF 27-12-2022), 80 (prima vacacional) y 87 (aguinaldo).",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf",
+        "sha256": "12f09393a1951a91c3f57f579bf611b034edf1a5f78cdbfb828e23ff3a9acbf7"
+      }
+    },
+    "grupos": [
+      {
+        "id": "ejecutivo",
+        "nombre": "Poder Ejecutivo",
+        "icono": "\ud83c\udfdb\ufe0f"
+      },
+      {
+        "id": "legislativo",
+        "nombre": "Congreso de la Uni\u00f3n",
+        "icono": "\ud83d\udcdc"
+      },
+      {
+        "id": "judicial",
+        "nombre": "Poder Judicial de la Federaci\u00f3n",
+        "icono": "\u2696\ufe0f"
+      },
+      {
+        "id": "local",
+        "nombre": "Congresos de los estados",
+        "icono": "\ud83d\uddfa\ufe0f"
+      }
+    ],
+    "cargos": [
+      {
+        "id": "presidencia",
+        "grupo": "ejecutivo",
+        "cargo": "Presidenta de la Rep\u00fablica",
+        "detalle": "Titular del Poder Ejecutivo",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "mensual": {
+          "max": 134290
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Remuneraci\u00f3n ordinaria total l\u00edquida mensual neta",
+        "anual": 2073878,
+        "anualEstado": "oficial",
+        "anualConcepto": "Remuneraci\u00f3n total anual neta de percepciones ordinarias",
+        "fuente": "PEF",
+        "pagina": "Anexos 23.1.2 y 23.1.3, DOF p. 59",
+        "nota": "El tope del art\u00edculo 127 constitucional: ning\u00fan servidor p\u00fablico puede recibir una remuneraci\u00f3n mayor que la establecida para la Presidencia."
+      },
+      {
+        "id": "secretario",
+        "grupo": "ejecutivo",
+        "cargo": "Secretaria o secretario de Estado",
+        "detalle": "Gabinete: las 22 dependencias del art. 26 de la LOAPF",
+        "icono": "\ud83d\uddc2\ufe0f",
+        "mensual": {
+          "max": 168860
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "L\u00edmite m\u00e1ximo de la percepci\u00f3n ordinaria neta mensual, grupo G (sueldo m\u00e1s prestaciones en efectivo y en especie)",
+        "anual": 2026320,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $168,860 del l\u00edmite mensual. El anexo no dice si ese l\u00edmite ya prorratea el aguinaldo: no se le suma nada",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.1.1, DOF p. 58",
+        "lista": [
+          "Gobernaci\u00f3n",
+          "Relaciones Exteriores",
+          "Defensa Nacional",
+          "Marina",
+          "Seguridad y Protecci\u00f3n Ciudadana",
+          "Hacienda y Cr\u00e9dito P\u00fablico",
+          "Bienestar",
+          "Medio Ambiente y Recursos Naturales",
+          "Energ\u00eda",
+          "Econom\u00eda",
+          "Agricultura y Desarrollo Rural",
+          "Infraestructura, Comunicaciones y Transportes",
+          "Anticorrupci\u00f3n y Buen Gobierno",
+          "Educaci\u00f3n P\u00fablica",
+          "Ciencia, Humanidades, Tecnolog\u00eda e Innovaci\u00f3n",
+          "Salud",
+          "Trabajo y Previsi\u00f3n Social",
+          "Desarrollo Agrario, Territorial y Urbano",
+          "Cultura",
+          "Turismo",
+          "Mujeres",
+          "Agencia de Transformaci\u00f3n Digital y Telecomunicaciones"
+        ],
+        "listaFuente": "LOAPF",
+        "nota": "El Presupuesto no publica el sueldo de cada titular con su nombre: publica un solo l\u00edmite para el grupo G, que rige a las 22 dependencias. Por eso las 22 comparten cifra. Ese l\u00edmite incluye prestaciones en especie y no se compara rengl\u00f3n a rengl\u00f3n con la cifra \u00abl\u00edquida\u00bb de la Presidenta."
+      },
+      {
+        "id": "subsecretario",
+        "grupo": "ejecutivo",
+        "cargo": "Subsecretaria o subsecretario de Estado",
+        "detalle": "Grupo H: subsecretar\u00edas y oficial\u00edas mayores",
+        "icono": "\ud83d\uddc2\ufe0f",
+        "mensual": {
+          "max": 167353
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "L\u00edmite m\u00e1ximo de la percepci\u00f3n ordinaria neta mensual, grupo H",
+        "anual": 2008236,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $167,353 del l\u00edmite mensual, sin sumar aguinaldo",
+        "fuente": "PEF",
+        "pagina": "Anexo 23.1.1, DOF p. 58",
+        "nota": "Mismo tabulador para todas las dependencias."
+      },
+      {
+        "id": "senado",
+        "grupo": "legislativo",
+        "cargo": "Senadora o senador",
+        "detalle": "128 esca\u00f1os",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "max": 132900
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Dieta neta mensual 2026 (el Manual la publica en miles: 132.9)",
+        "anual": 2037848,
+        "anualEstado": "oficial",
+        "anualConcepto": "Remuneraci\u00f3n total anual neta (el anexo aclara que son percepciones de 2025)",
+        "fuente": "SEN",
+        "pagina": "Anexo 1; anual: PEF, Anexo 23.2.2, DOF p. 61",
+        "nota": "La dieta no es sueldo: el Manual la define como la remuneraci\u00f3n por la representaci\u00f3n pol\u00edtica, irrenunciable."
+      },
+      {
+        "id": "asesor_senado",
+        "grupo": "legislativo",
+        "cargo": "Asesor parlamentario del Senado",
+        "detalle": "De grupo parlamentario (nivel 34); el asesor ejecutivo es nivel 30",
+        "icono": "\ud83e\uddd1\u200d\ud83d\udcbc",
+        "mensual": {
+          "min": 121900,
+          "max": 126000
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Percepci\u00f3n mensual neta del nivel 34 del tabulador",
+        "subniveles": [
+          {
+            "nombre": "Asesor parlamentario de grupo parlamentario (nivel 34)",
+            "min": 121900,
+            "max": 126000
+          },
+          {
+            "nombre": "Asesor ejecutivo (nivel 30)",
+            "min": 58400,
+            "max": 89000
+          },
+          {
+            "nombre": "Asesor de tesorero (nivel 29)",
+            "min": 42900,
+            "max": 58300
+          }
+        ],
+        "anual": 1512000,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $126,000, el m\u00e1ximo del nivel 34, sin sumar aguinaldo",
+        "fuente": "SEN",
+        "pagina": "Anexo 2 (tabulador) y Anexo 4 (cat\u00e1logo de puestos por nivel)",
+        "nota": "El cat\u00e1logo del Anexo 4 asigna cada puesto a un nivel y el tabulador del Anexo 2 fija el rango de cada nivel; aqu\u00ed se cruzan las dos tablas. El Manual publica los miles con un decimal. Los asesores contratados por honorarios no est\u00e1n en el tabulador."
+      },
+      {
+        "id": "diputados",
+        "grupo": "legislativo",
+        "cargo": "Diputada o diputado federal",
+        "detalle": "500 curules",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "mensual": {
+          "max": 79846.35
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Dieta neta mensual 2026",
+        "anual": 1307224,
+        "anualEstado": "oficial",
+        "anualConcepto": "Remuneraci\u00f3n total anual neta (el anexo aclara que son percepciones de 2025)",
+        "fuente": "DIP",
+        "pagina": "p. 144; anual: PEF, Anexo 23.3.4, DOF p. 68",
+        "nota": "La C\u00e1mara, adem\u00e1s, cubre el impuesto del aguinaldo de cada diputado: $67,785 en el anexo anual."
+      },
+      {
+        "id": "asesor_diputados",
+        "grupo": "legislativo",
+        "cargo": "Asesor de la C\u00e1mara de Diputados",
+        "detalle": "Personal \u00abhom\u00f3logo a mando\u00bb: funciones t\u00e9cnicas, de asesor\u00eda o de investigaci\u00f3n",
+        "icono": "\ud83e\uddd1\u200d\ud83d\udcbc",
+        "mensual": {
+          "min": 34486,
+          "max": 107177
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Remuneraci\u00f3n neta mensual de los niveles hom\u00f3logos",
+        "subniveles": [
+          {
+            "nombre": "Hom\u00f3logo a director de \u00e1rea",
+            "min": 74159,
+            "max": 107177
+          },
+          {
+            "nombre": "Hom\u00f3logo a subdirector de \u00e1rea",
+            "min": 50513,
+            "max": 68126
+          },
+          {
+            "nombre": "Hom\u00f3logo a jefe de departamento",
+            "min": 34486,
+            "max": 42137
+          }
+        ],
+        "anual": 1286124,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $107,177, el m\u00e1ximo del hom\u00f3logo a director de \u00e1rea, sin sumar aguinaldo",
+        "honorarios": {
+          "contratos": 3433,
+          "montoAnual": 1042550553,
+          "promedioAnual": 303685,
+          "promedioMensual": 25307,
+          "operacion": "$1,042,550,553 de la partida 1210 entre 3,433 contratos (y entre 12 para el mes)",
+          "pagina": "Anexo 2, p. 146"
+        },
+        "fuente": "DIP",
+        "pagina": "pp. 142 y 143; definici\u00f3n de hom\u00f3logo: p. 139",
+        "nota": "El Manual no tiene un puesto llamado \u00abasesor de diputado\u00bb: la asesor\u00eda la hacen el personal hom\u00f3logo a mando y, sobre todo, los contratos por honorarios, que no tienen tabulador p\u00fablico."
+      },
+      {
+        "id": "ministro",
+        "grupo": "judicial",
+        "cargo": "Ministra o ministro de la SCJN",
+        "detalle": "Nueve integrantes del Pleno",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "max": 134310
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "max": 290273
+        },
+        "anual": 1901993,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $134,310 de sueldo neto mensual + $290,273 de aguinaldo y prima vacacional netos",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 8 y 9",
+        "nota": "Cifra parcial: el Manual no incluye seguros ni aportaciones de seguridad social, que s\u00ed entran en las cifras anuales del Congreso y de la Presidenta."
+      },
+      {
+        "id": "secretario_estudio",
+        "grupo": "judicial",
+        "cargo": "Secretaria o secretario de estudio y cuenta",
+        "detalle": "SCJN: quien proyecta las sentencias de una ponencia (grupo 7)",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 119317,
+          "max": 123105
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 244054,
+          "max": 253281
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 106875,
+          "max": 110663
+        },
+        "anual": 1841204,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $123,105 de sueldo neto mensual + $253,281 de aguinaldo y prima vacacional + $110,663 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 8 y 9",
+        "nota": "Es el \u00abproyectista\u00bb de la Corte. A diferencia de la ministra o ministro, recibe asignaciones adicionales."
+      },
+      {
+        "id": "asesor_scjn",
+        "grupo": "judicial",
+        "cargo": "Asesora o asesor de la SCJN",
+        "detalle": "Grupo 11 del tabulador de la Corte",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 91082,
+          "max": 117152
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 179798,
+          "max": 240265
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 79661,
+          "max": 104710
+        },
+        "anual": 1750799,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $117,152 de sueldo neto mensual + $240,265 de aguinaldo y prima vacacional + $104,710 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 8 y 9",
+        "nota": "Comparte grupo con coordinador administrativo I, dictaminador I y secretario auxiliar I."
+      },
+      {
+        "id": "magistrado",
+        "grupo": "judicial",
+        "cargo": "Magistrada o magistrado de circuito",
+        "detalle": "Tribunales colegiados y de apelaci\u00f3n",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 129310,
+          "max": 129310
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 270975,
+          "max": 270975
+        },
+        "pagoRiesgo": 119460,
+        "asignaciones": null,
+        "anual": 1942155,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $129,310 de sueldo neto mensual + $270,975 de aguinaldo y prima vacacional + $119,460 de pago por riesgo (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 19",
+        "nota": "El pago por riesgo lo reciben solo quienes juzgan: magistraturas de circuito y juzgados de distrito."
+      },
+      {
+        "id": "juez",
+        "grupo": "judicial",
+        "cargo": "Jueza o juez de distrito",
+        "detalle": "Juzgados de distrito",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 126310,
+          "max": 126310
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 263912,
+          "max": 263912
+        },
+        "pagoRiesgo": 110690,
+        "asignaciones": {
+          "min": 52000,
+          "max": 52000
+        },
+        "anual": 1942322,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $126,310 de sueldo neto mensual + $263,912 de aguinaldo y prima vacacional + $110,690 de pago por riesgo + $52,000 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 19",
+        "nota": "Las asignaciones adicionales se toman en su m\u00e1ximo publicado."
+      },
+      {
+        "id": "proyectista_tribunal",
+        "grupo": "judicial",
+        "cargo": "Secretaria o secretario proyectista de tribunal",
+        "detalle": "Tribunal de circuito (nivel 13 A)",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 81027,
+          "max": 81027
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 154294,
+          "max": 154294
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 211170,
+          "max": 211170
+        },
+        "anual": 1337788,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $81,027 de sueldo neto mensual + $154,294 de aguinaldo y prima vacacional + $211,170 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 20",
+        "nota": "Comparte nivel con la secretar\u00eda de tribunal de circuito. Las asignaciones adicionales se toman en su m\u00e1ximo publicado."
+      },
+      {
+        "id": "proyectista_juzgado",
+        "grupo": "judicial",
+        "cargo": "Secretaria o secretario proyectista de juzgado",
+        "detalle": "Juzgado de distrito (nivel 13 C)",
+        "icono": "\u2696\ufe0f",
+        "mensual": {
+          "min": 74865,
+          "max": 74865
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Sueldo neto mensual del tabulador",
+        "aguinaldoPrima": {
+          "min": 141968,
+          "max": 141968
+        },
+        "pagoRiesgo": null,
+        "asignaciones": {
+          "min": 194796,
+          "max": 194796
+        },
+        "anual": 1235144,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $74,865 de sueldo neto mensual + $141,968 de aguinaldo y prima vacacional + $194,796 de asignaciones adicionales (todos netos, del Manual; con el m\u00e1ximo de cada rango)",
+        "parcial": true,
+        "fuente": "PJF",
+        "pagina": "Anexo B, pp. 16 y 20",
+        "nota": "Comparte nivel con la secretar\u00eda de juzgado y la de instrucci\u00f3n de los juzgados laborales."
+      },
+      {
+        "id": "diputado_local",
+        "grupo": "local",
+        "cargo": "Diputada o diputado local",
+        "detalle": "32 congresos, 32 tabuladores",
+        "icono": "\ud83d\uddfa\ufe0f",
+        "pendiente": true,
+        "mensualEstado": "pendiente",
+        "anualEstado": "pendiente",
+        "nota": "Cada congreso aprueba su propio presupuesto y publica la dieta en su peri\u00f3dico oficial o en su portal de transparencia. No hay una serie nacional oficial que las re\u00fana: el Censo Nacional de Poderes Legislativos Estatales del INEGI cuenta legisladores y gasto, pero no publica la dieta. Se integrar\u00e1 entidad por entidad, con su documento."
+      }
+    ],
+    "prestaciones": {
+      "columnas": [
+        {
+          "id": "lft",
+          "nombre": "Usted (m\u00ednimo de ley)",
+          "sub": "Ley Federal del Trabajo"
+        },
+        {
+          "id": "dip",
+          "nombre": "Diputaci\u00f3n federal",
+          "sub": "Manual 2026 y Anexo 23.3.4"
+        },
+        {
+          "id": "sen",
+          "nombre": "Senadur\u00eda",
+          "sub": "Manual 2026 y Anexo 23.2.2"
+        },
+        {
+          "id": "pr",
+          "nombre": "Presidencia",
+          "sub": "Anexo 23.1.3"
+        },
+        {
+          "id": "pjf",
+          "nombre": "Poder Judicial",
+          "sub": "Manual PJF 2026"
+        }
+      ],
+      "filas": [
+        {
+          "concepto": "Aguinaldo",
+          "celdas": {
+            "lft": {
+              "tx": "15 d\u00edas de salario, como m\u00ednimo, antes del 20 de diciembre",
+              "ref": "LFT, art. 87",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "40 d\u00edas de la dieta bruta: $147,438",
+              "ref": "Manual, Anexo 1, p. 145; Anexo 23.3.4",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "El Manual dice 40 d\u00edas de dieta; el anexo anual reporta $382,207, que equivalen a unos 60 d\u00edas",
+              "ref": "Manual, Anexo 3; Anexo 23.2.2",
+              "estado": "pendiente",
+              "nota": "$382,207 \u00f7 ($190,023 de dieta bruta mensual \u00f7 30) = 60.3 d\u00edas. El documento no explica la diferencia con los 40 d\u00edas del Manual: queda por aclarar."
+            },
+            "pr": {
+              "tx": "Aguinaldo $105,258 m\u00e1s gratificaci\u00f3n de fin de a\u00f1o $282,074",
+              "ref": "Anexo 23.1.3, DOF p. 59",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "Aguinaldo y prima vacacional netos: $290,273 una ministra o ministro; $270,975 una magistratura de circuito",
+              "ref": "Manual PJF, Anexo B, pp. 9 y 19",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Vacaciones",
+          "celdas": {
+            "lft": {
+              "tx": "12 d\u00edas laborables el primer a\u00f1o; suben de dos en dos hasta 20",
+              "ref": "LFT, art. 76 (DOF 27-12-2022)",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "El Manual no las prev\u00e9 para la diputaci\u00f3n; su personal de mando tiene 20 d\u00edas h\u00e1biles",
+              "ref": "Manual, Anexo 1, p. 145",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "El Manual no las prev\u00e9 para la senadur\u00eda; su personal tiene 20 d\u00edas h\u00e1biles",
+              "ref": "Manual, numeral 9 b) vii",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "El anexo registra la prima, no los d\u00edas",
+              "ref": "Anexo 23.1.3",
+              "estado": "pendiente"
+            },
+            "pjf": {
+              "tx": "Dos periodos al a\u00f1o, conforme a la Ley Org\u00e1nica del PJF",
+              "ref": "Manual PJF, numeral 8.2.10",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Prima vacacional",
+          "celdas": {
+            "lft": {
+              "tx": "25 % de lo que se gana en las vacaciones: 3 d\u00edas de salario el primer a\u00f1o",
+              "ref": "LFT, art. 80",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "Personal de mando: 50 % de 10 d\u00edas por periodo, dos periodos (10 d\u00edas al a\u00f1o)",
+              "ref": "Manual, Anexo 1, p. 145",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "Personal de mando: 15 d\u00edas de sueldo base al a\u00f1o",
+              "ref": "Manual, numeral 9 b) ii",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "$17,656 al a\u00f1o",
+              "ref": "Anexo 23.1.3",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "50 % de 10 d\u00edas por periodo, dos periodos (10 d\u00edas al a\u00f1o)",
+              "ref": "Manual PJF, numeral 8.2.8",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Seguro de vida",
+          "celdas": {
+            "lft": {
+              "tx": "La ley no lo exige al patr\u00f3n",
+              "ref": "LFT",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "40 dietas brutas; 80 si la muerte es por accidente y 120 en accidente colectivo",
+              "ref": "Manual, Anexo 1, p. 145",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "40 meses de dieta; prima pagada con presupuesto: $96,759",
+              "ref": "Manual, Anexo 3; Anexo 23.2.2",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "Prima pagada con presupuesto: $35,914 al a\u00f1o",
+              "ref": "Anexo 23.1.3",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "40 meses de sueldo b\u00e1sico",
+              "ref": "Manual PJF, numeral 8.1.1",
+              "estado": "oficial"
+            }
+          }
+        },
+        {
+          "concepto": "Impuesto del aguinaldo",
+          "celdas": {
+            "lft": {
+              "tx": "Lo paga usted: se le retiene de la parte gravada",
+              "ref": "Ley del ISR, arts. 93 fracc. XIV y 96",
+              "estado": "oficial"
+            },
+            "dip": {
+              "tx": "Lo paga la C\u00e1mara: $67,785 como \u00abprestaci\u00f3n ISR de aguinaldo\u00bb",
+              "ref": "Anexo 23.3.4, nota 4, DOF p. 68",
+              "estado": "oficial"
+            },
+            "sen": {
+              "tx": "El anexo no registra esa prestaci\u00f3n",
+              "ref": "Anexo 23.2.2",
+              "estado": "oficial"
+            },
+            "pr": {
+              "tx": "El anexo no registra esa prestaci\u00f3n",
+              "ref": "Anexo 23.1.3",
+              "estado": "oficial"
+            },
+            "pjf": {
+              "tx": "El Manual publica el aguinaldo ya en neto",
+              "ref": "Manual PJF, Anexo B",
+              "estado": "oficial"
+            }
+          }
+        }
+      ]
+    },
+    "ley": {
+      "aguinaldoDias": 15,
+      "primaVacacionalDias": 3,
+      "vacacionesDias": 12,
+      "referencia": {
+        "aguinaldoDias": 40,
+        "primaVacacionalDias": 10
+      },
+      "nota": "M\u00ednimos de la Ley Federal del Trabajo para el primer a\u00f1o de servicios. La referencia de 40 d\u00edas de aguinaldo y 10 de prima vacacional es la que fijan los Manuales de la C\u00e1mara de Diputados (Anexo 1) y del PJF (numeral 8.2.8)."
+    }
+  }
 };
 

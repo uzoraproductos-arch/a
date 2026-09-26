@@ -1,0 +1,601 @@
+ .
+ www.dof.gob.mx 
+ -->
+ Busqueda
+ Ejemplar de hoy
+ Trámites
+ Servicios
+ Leyes y Reglamentos
+ Preguntas Frecuentes
+ Publicación de documentos
+ Distribución de ejemplares -->
+ Adquisición de ejemplares
+ Cotizador de publicaciones
+ Distribuidores autorizados -->
+ Consulta de existencias de ejemplares
+ Solicitud de publicación de documentos en forma electrónica
+ | 
+ function Enviar(cod_nota) {
+ window.open("favoritos_agregar.php?cod_nota="+cod_nota,"", 
+ "height=250,width=400,scrollbars=no,toolbar=no,status=no,menubar=no,location=no,resizable=no")
+ }
+ | 
+Si el documento se presenta incompleto en el margen derecho, es que contiene tablas que rebasan el ancho predeterminado. Si es el caso, haga click aquí para visualizarlo correctamente. | 
+ | 
+DOF: 27/02/2026 | 
+ MANUAL de Remuneraciones de las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos, y la información relativa al Capítulo de Servicios Personales .ANOTACION {text-indent:0.0pt;text-align:center;font-size:9.0pt;margin-left:0.0pt;margin-bottom:5.05pt;font-family:serif,Times,Times Roman,Times-Roman;margin-top:5.05pt;font-weight:bold;} .Fechas {margin-right:14.4pt;text-indent:0.0pt;text-align:justify;font-size:9.0pt;border-bottom: 0.75pt solid rgb(0,0,0);margin-left:14.4pt;margin-bottom:0.0pt;font-family:serif,Times,Times Roman,Times-Roman;padding-bottom:0.05pt;} .Normal {text-indent:0.0pt;font-size:12.0pt;margin-left:0.0pt;font-family:serif,Times,Times Roman,Times-Roman;} .Texto {text-indent:14.4pt;text-align:justify;font-size:9.0pt;margin-left:0.0pt;margin-bottom:5.05pt;font-family:Tahoma,Arial Unicode MS,Verdana,system, , ,Arial Black,sans-serif,Helvetica,dialog;} .Titulo_2 {padding-top:0.05pt;text-indent:0.0pt;text-align:justify;font-size:9.0pt;margin-left:0.0pt;margin-bottom:5.05pt;font-family:Tahoma,Arial Unicode MS,Verdana,system, , ,Arial Black,sans-serif,Helvetica,dialog;border-top: 0.75pt solid rgb(0,0,0);} .Titulo_1 {text-indent:0.0pt;text-align:justify;font-size:9.0pt;border-bottom: 1.5pt solid rgb(0,0,0);margin-left:0.0pt;margin-bottom:0.0pt;font-family:serif,Times,Times Roman,Times-Roman;margin-top:6.0pt;font-weight:bold;padding-bottom:0.05pt;} .ROMANOS {text-indent:-21.6pt;text-align:justify;font-size:9.0pt;margin-left:36.0pt;margin-bottom:5.05pt;font-family:Tahoma,Arial Unicode MS,Verdana,system, , ,Arial Black,sans-serif,Helvetica,dialog;} .INCISO {text-indent:-18.0pt;text-align:justify;font-size:9.0pt;margin-left:54.0pt;margin-bottom:5.05pt;font-family:Tahoma,Arial Unicode MS,Verdana,system, , ,Arial Black,sans-serif,Helvetica,dialog;} MANUAL de Remuneraciones de las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos, y la información relativa al Capítulo de Servicios Personales. Al margen un sello con el Escudo Nacional, que dice: Estados Unidos Mexicanos.- Senado de la República.- LXVI Legislatura. MANUAL DE REMUNERACIONES DE LAS SENADORAS, SENADORES, SERVIDORAS Y SERVIDORES PÚBLICOS DE MANDO Y HOMÓLOGOS, Y LA INFORMACIÓN RELATIVA AL CAPÍTULO DE SERVICIOS PERSONALES
+ Con fundamento en lo establecido en los artículos 70, 75, 77, fracción I, y 127, fracciones I, II, III, IV y V de la Constitución Política de los Estados Unidos Mexicanos; artículos 66, numeral 1, inciso i), 108 y 110, numeral 1, inciso c) de la Ley Orgánica del Congreso General de los Estados Unidos Mexicanos; artículos 1, párrafo segundo, 17 y 62 de la Ley General de Contabilidad Gubernamental; artículos 1, párrafo tercero, 4, 5, 6, 9, 14 y 24 de la Ley Federal de Remuneraciones de los Servidores Públicos; artículos 1 y 2 de la Ley Federal de Austeridad Republicana; artículos 2, fracción XIII, 3, párrafo segundo, 4, fracción I, párrafos segundo, tercero y quinto, 5, fracción I, 6, párrafo segundo, 20, 64, 65 y 66 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria; artículos 14 y 21 del Decreto de Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026; artículo 21, incisos f), h) y n) del Estatuto de los Servicios Parlamentarios, Administrativos y Técnicos del Senado de la República; el Acuerdo de la Junta de Coordinación Política por el que se establecen criterios y medidas en materia presupuestal en el Senado de la República; así como por Acuerdos de la Mesa Directiva y de la Comisión de Administración, la Secretaría General de Servicios Administrativos publica el siguiente:
+ MANUAL DE REMUNERACIONES DE LAS SENADORAS, SENADORES, SERVIDORAS Y SERVIDORES PÚBLICOS DE
+ MANDO Y HOMÓLOGOS, Y LA INFORMACIÓN RELATIVA AL CAPÍTULO DE SERVICIOS PERSONALES
+ 1. Objetivo.
+ Regular la aplicación de la política salarial del Senado de la República, conforme al Sistema de Remuneraciones para las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos.
+ 2. Ámbito de Aplicación.
+ Órganos de Gobierno, Grupos Parlamentarios, Comisiones Ordinarias, Especiales y Bicamerales, las Secretarías Generales de Servicios Administrativos y Parlamentarios con sus respectivas Unidades; así como las Unidades de Apoyo Técnico, en términos de lo señalado en la Ley Orgánica del Congreso General de los Estados Unidos Mexicanos, el Reglamento del Senado de la República y en el Estatuto de los Servicios Parlamentarios, Administrativos y Técnicos del Senado de la República.
+ 3. Disposiciones generales.
+ La remuneración que perciben las y los servidores públicos del Senado de la República se rige bajo los siguientes principios: ser adecuada e irrenunciable por el desempeño de las funciones, empleos, cargos o comisiones; proporcional a sus responsabilidades; con igualdad laboral y no discriminación; así como determinada para cada ejercicio fiscal.
+ Los ajustes y movimientos a las estructuras orgánicas, ocupacionales y salariales; así como a las plantillas de personal que contribuyan al adecuado funcionamiento administrativo, se podrán realizar conforme a las disposiciones establecidas en la Ley Federal de Presupuesto y Responsabilidad Hacendaria, en el Decreto de Presupuesto de Egresos de la Federación, ambos en materia de servicios personales; así como en lo previsto en el artículo 21, incisos f), h) y n) del Estatuto de los Servicios Parlamentarios, Administrativos y Técnicos del Senado de la República.
+ 4. Sujetos.
+ I. Las Senadoras y los Senadores de la República.
+ II. Las y los servidores públicos de mando y homólogos, considerados como de confianza, de acuerdo con el artículo 5, fracción III, inciso C) de la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del artículo 123 Constitucional y el artículo 6 del Estatuto del Servicio Civil de Carrera.
+ Quedan excluidos del presente Manual:
+ III. El personal de base, cuyas percepciones se regulan por la Ley Federal de los Trabajadores al Servicio del Estado reglamentaria del Apartado B) del artículo 123 Constitucional; así como por las Condiciones Generales de Trabajo.
+ IV. El personal operativo de confianza, de servicios generales y del servicio técnico de carrera, incluidos los casos con percepciones y funciones homólogas a mando, cuyas percepciones se establecen en los Tabuladores respectivos y en lo dispuesto en el marco normativo interno.
+ V. Las y los prestadores de servicios profesionales por honorarios, cuya relación contractual se regula por la legislación civil.
+ 5. Responsables de la Aplicación.
+ Corresponde a la Secretaría General de Servicios Administrativos a través de la Dirección General de Recursos Humanos, la aplicación en lo general del presente Manual y, a través de la Tesorería y sus áreas, lo relativo al seguimiento y control presupuestal.
+ 6. Definiciones.
+ Para efectos del presente Manual, se entenderá por:
+ I. Catálogo General de Puestos.- Instrumento técnico que contiene la descripción de los puestos genéricos y las funciones del personal de mando y homólogos de confianza, en su caso, miembros del Servicio Civil de Carrera o de libre designación que integran la estructura orgánica.
+ II. Código.- La nomenclatura que permite identificar el puesto y el grupo ocupacional al que pertenece.
+ III. Compensación complementaria.- Las remuneraciones y apoyos complementarios a la percepción ordinaria que se cubre a las y los servidores públicos de mando. Estas remuneraciones no forman parte de la base de cálculo para determinar las cuotas y aportaciones de seguridad social.
+ IV. Compensación garantizada.- Importe adicional al sueldo base tabular que se cubre al trabajador de manera regular, de acuerdo con el puesto y nivel salarial del Tabulador; no se considera para el cálculo y entero de las cuotas y aportaciones de seguridad social.
+ V. Dieta.- Remuneración que perciben las Senadoras y los Senadores por la representación política que ostentan, misma que es irrenunciable y no constituye una contraprestación por un trabajo personal subordinado.
+ VI. Estatuto.- El Estatuto de los Servicios Parlamentarios, Administrativos y Técnicos del Senado de la República.
+ VII. Estatuto del Servicio Civil de Carrera.- Estatuto que regula al personal del Servicio Civil de Carrera.
+ VIII. Estructura orgánica.- Se integra por Unidades legislativas, parlamentarias, administrativas y técnicas que se encuentran jerarquizadas, con atribuciones y responsabilidades específicas, de conformidad con la Ley; así como con el Reglamento del Senado de la República, el Estatuto, el Manual General de Organización del Senado de la República y los Acuerdos de los Órganos de Gobierno.
+ IX. FOVISSSTE.- Fondo de la Vivienda del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado.
+ X. Grupo.- Conjunto de puestos que integran la estructura ocupacional y salarial, independientemente de su denominación.
+ XI. ISSSTE.- Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado.
+ XII. Ley.- La Ley Orgánica del Congreso General de los Estados Unidos Mexicanos.
+ XIII. Lineamientos.- Los Lineamientos para el pago de aguinaldo o gratificación y estímulo de fin de año, y prestaciones al personal de confianza y prestadores de servicios profesionales.
+ XIV. Manual.- El Manual de Remuneraciones de las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos, y la información relativa al Capítulo de Servicios Personales.
+ XV. Nivel salarial.- Escala de percepciones ordinarias, establecidas por puestos y rangos por grupo jerárquico, inscritas en los Tabuladores de Sueldos.
+ XVI. Órganos de Gobierno.- La Mesa Directiva, la Junta de Coordinación Política y la Comisión de Administración.
+ XVII. PEF.- Decreto del Presupuesto de Egresos de la Federación para el ejercicio fiscal 2026.
+ XVIII. Percepción extraordinaria.- Remuneración que no constituye un ingreso fijo, regular ni permanente: premios, estímulos, reconocimientos, recompensas, incentivos, cualquier otro tipo de beneficio de fin de año y otros análogos; su otorgamiento se encuentra sujeto a requisitos y condiciones variables. Pueden ser autorizados por los Órganos de Gobierno o la Secretaría General de Servicios Administrativos, siempre y cuando se cuente con la disponibilidad presupuestal en el ejercicio fiscal correspondiente.
+ Dicho concepto de pago no forma parte integrante de la base de cálculo para efectos de indemnización, liquidación o de prestaciones.
+ XIX. Percepción ordinaria.- Remuneración fija, regular y permanente que reciben las y los servidores públicos por el desempeño de sus funciones de acuerdo con el Tabulador autorizado, integrada por el sueldo base y la compensación garantizada, sin prestaciones.
+ XX. Plantilla de personal.- Instrumento que contiene el inventario de personal en cada Unidad.
+ XXI. Plaza.- Posición presupuestaria que respalda un puesto en la estructura ocupacional o plantilla, que sólo puede ser ocupada por una servidora o un servidor público.
+ XXII. Prestaciones.- Son beneficios que reciben las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos del Senado de la República, conforme a la Ley Federal de los Trabajadores al Servicio del Estado; a la Ley del ISSSTE; a la Ley Federal de Presupuesto y Responsabilidad Hacendaria; así como las derivadas de los Acuerdos emitidos por los Órganos de Gobierno del Senado de la República. Por su naturaleza, se desglosan en:
+ a) Seguridad Social.
+ b) Económicas.
+ c) Apoyo Institucional.
+ d) Seguros.
+ XXIII. Procedimiento.- Procedimiento para Movimientos de Altas, Promociones y Bajas de Personal.
+ XXIV. Puesto.- Unidad impersonal de trabajo que determina tareas y deberes, lo cual le asigna un grado de responsabilidad específico. Cada puesto puede contener una o más plazas e implica determinados requisitos de aptitud, habilidad, preparación y experiencia.
+ XXV. Puestos homólogos.- Aquellos que tienen un nivel salarial equivalente al de un puesto de la estructura orgánica y que no forman parte de esta. Realizan funciones de confianza en los términos de lo que dispone el artículo 5 fracción III inciso C de la Ley Federal de los Trabajadores al Servicio del Estado y son determinadas por los titulares de las Unidades en función de sus competencias y de las necesidades de servicio.
+ XXVI. SAR.- Sistema de Ahorro para el Retiro.
+ XXVII. Senadora o Senador.- Ciudadana o ciudadano electo constitucionalmente que ejerce la representación política como miembro del Senado de la República, desempeñando funciones legislativas, en términos del artículo 56 Constitucional.
+ XXVIII. Servidora o servidor público.- Toda persona que desempeñe un empleo, cargo o comisión de cualquier naturaleza en el Senado de la República en términos del primer párrafo del artículo 108 Constitucional.
+ XXIX. Sistema de remuneraciones.- Es un instrumento que integra el conjunto de todas las percepciones ordinarias y extraordinarias en efectivo y en especie; que pueden recibir las servidoras y servidores públicos del Senado de la República, de conformidad con su puesto, grupo y política salarial; así como las dietas y demás ingresos que se cubran a las Senadoras y Senadores.
+ No se consideran remuneraciones los apoyos y gastos sujetos a comprobación que sean propios del trabajo; así mismo, los gastos de viajes en actividades oficiales. En su caso, la comprobación se realizará en los términos de la normatividad en la materia o conforme a los acuerdos de los Órganos de Gobierno.
+ Las dietas de las Senadoras y Senadores y, las percepciones ordinarias de las y los servidores públicos de mando y homólogos, se asignan en términos de lo dispuesto por los artículos 127, fracción I Constitucional, 5 y 6, fracción VI de la Ley Federal de Remuneraciones de los Servidores Públicos y establecidas en el Tomo IX y en el Anexo 23.2.2. y 23.2.3. del PEF 2026.
+ XXX. Sueldo base.- Importe que se consigna en los Tabuladores de Sueldos y constituye la base de cálculo de las cuotas y aportaciones por concepto de seguridad social conforme a la Ley del ISSSTE y, de las prestaciones económicas plasmadas en la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del artículo 123 Constitucional.
+ XXXI. Tabulador de Sueldos.- Instrumento técnico en el que se fijan y ordenan por grupo y nivel salarial, las percepciones ordinarias para los puestos contenidos en el Catálogo General de Puestos.
+ XXXII. Unidades.- Áreas legislativas, parlamentarias, técnicas y administrativas, que conforman la estructura orgánica del Senado de la República y que tienen atribuciones especificas conferidas por la Ley, el Estatuto, el Reglamento del Senado de la República y el Manual General de Organización del Senado de la República.
+ XXXIII. Unidades de Apoyo Técnico.- Coordinación de Comunicación Social, Centro de Estudios Internacionales Gilberto Bosques, Instituto Belisario Domínguez, Contraloría Interna, el Centro de Capacitación y Formación Permanente, la Unidad de Transparencia del Senado de la República y la Unidad Técnica para la Igualdad de Género.
+ 7. Sistema de Remuneraciones.
+ Las remuneraciones que reciben las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos por sus servicios en el Senado de la República podrán ser:
+ A. Percepciones Ordinarias:
+ I. En numerario, que comprende:
+ a) Sueldos y salarios:
+ i. Dieta o sueldo base y,
+ ii. En su caso, esquema de compensaciones conforme a las disposiciones normativas aplicables.
+ b) Prestaciones con base en el régimen laboral aplicable, susceptibles de otorgarse a las Senadoras, Senadores, servidoras y servidores públicos conforme al grupo que corresponda. Las prestaciones se clasifican por mandato de Ley o por disposición de los Órganos de Gobierno del Senado en:
+ i. Seguridad Social.
+ ii. Económicas.
+ iii. Apoyo Institucional.
+ iv. Seguros.
+ II. En especie.
+ B. Percepciones Extraordinarias.
+ 8. Percepciones: dietas, sueldos y salarios.
+ a) El importe de la dieta neta mensual para las Senadoras y Senadores y la percepción ordinaria neta mensual que se otorga a las servidoras y servidores públicos menos las deducciones fiscales y de seguridad social establecidas en el tabulador de sueldos (Anexos 1 y 2), podrán ser actualizadas siempre que no rebasen el importe autorizado de Remuneración Anual Máxima de la Presidenta de la República, conforme a la Ley Federal de Remuneraciones de los Servidores Públicos.
+ b) El otorgamiento del aguinaldo o gratificación de fin de año que corresponda a las Senadoras, Senadores y, a las y los servidores públicos de mando y homólogos, se sujetará a las disposiciones en la materia.
+ 9. Prestaciones. (Anexo 3)
+ Se clasifican en:
+ a) Seguridad social. Son los beneficios que reciben las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos, de conformidad con la Ley del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado, y la Ley de los Sistemas de Ahorro para el Retiro.
+ b) Económicas. Las previstas y aplicables en apego a la normatividad en la materia a este grupo ocupacional:
+ i. Prima quinquenal de las y los servidores públicos de mando y homólogos. Se otorgará debido a la antigüedad, por cada 5 años de servicios efectivamente prestados hasta llegar a 25 años, con fundamento en el segundo párrafo del artículo 34 de la Ley Federal de los Trabajadores al Servicio del Estado. Esta prestación se cubre quincenalmente por sistema ordinario de pago conforme a lo siguiente:
+ Años de antigüedad efectiva
+ | Importe de pago mensual
+ | 
+ de
+ | menos de
+ | 
+ 5
+ | 10
+ | $210.00
+ | 
+ 10
+ | 15
+ | $245.00
+ | 
+ 15
+ | 20
+ | $310.00
+ | 
+ 20
+ | 25
+ | $345.00
+ | 
+ 25
+ | en adelante
+ | $375.00
+ | 
+ ii. Prima vacacional. Corresponde al pago de 15 días calculados sobre el sueldo base divididos en dos semestres al año, equivalente a cada uno de los dos períodos vacacionales a que se tiene derecho, con base en el calendario institucional.
+ iii. Ahorro solidario. Con fundamento en el artículo 100 de la Ley del ISSSTE, cada Senadora, Senador, servidora o servidor público de mando podrán optar porque se les descuente hasta el 2% de su sueldo base para incrementar el saldo de la cuenta individual y el Senado depositará $3.25 por cada peso ahorrado. Dichos depósitos no se deberán considerar como cuotas o aportaciones.
+ iv. Aguinaldo y/o gratificación de fin de año. Se otorgará a las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos, en los términos del artículo 42 Bis de la Ley Federal de los Trabajadores al Servicio del Estado; así como a lo establecido en los Lineamientos en la materia. Podrá tomarse como base el Decreto Anual que para tal efecto emita el Ejecutivo Federal y, de conformidad con los procedimientos y criterios que autoricen los Órganos de Gobierno o, en su caso, la Secretaría General de Servicios Administrativos.
+ v. Paga por defunción. Prestación de carácter económico establecida en el artículo 73 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria, considerando lo dispuesto en el numeral 6, fracciones V y XIX de la presente disposición; cuando alguna Senadora, Senador, servidora o servidor público fallezca y tuviera cuando menos una antigüedad en el servicio de seis meses, los familiares o quienes hayan vivido con él en la fecha del fallecimiento y se hagan cargo de los gastos de inhumación, sepelio o cremación, recibirán hasta el importe de cuatro meses de la Dieta o de las percepciones ordinarias que estuviera percibiendo; menos las deducciones fiscales aplicables en la materia.
+ vi. Vales de despensa. Se otorgan al personal de mando y homólogo conforme a las disposiciones que al respecto emita la Secretaría de Hacienda y Crédito Público, las autorizaciones de los Órganos de Gobierno o, en su caso, la Secretaría General de Servicios Administrativos; así como de la disponibilidad presupuestal.
+ vii. Vacaciones. El personal tendrá derecho a disfrutar dos períodos de 10 días hábiles cada uno al año, previo cumplimiento de la antigüedad en el Senado de la República y en términos de lo dispuesto en el artículo 30 de la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del artículo 123 Constitucional.
+ viii. Licencia por maternidad. Se otorgará un mes de descanso antes de la fecha del parto y dos meses después del mismo, en términos del artículo 28 de la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del artículo 123 Constitucional.
+ ix. Licencia por paternidad y adopción. Se otorgará permiso a los servidores públicos de mando y homólogos, cinco días laborales con goce de sueldo, por el nacimiento de sus hijos o en el caso de adopción de un infante, de conformidad con las disposiciones establecidas en el artículo 132, fracción XXVII Bis de la Ley Federal del Trabajo, de aplicación supletoria de la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del artículo 123 Constitucional.
+ c) Apoyo institucional. Las que se cubren por Acuerdo de Órgano de Gobierno y/o se encuentren consideradas en la normatividad institucional.
+ i. Premio de antigüedad. Se otorgará al personal de mando u homólogo, en términos de los Lineamientos Administrativos para Otorgar Reconocimientos por Antigüedad al Personal de Confianza en el Senado de la República:
+ a. Por diez años de servicio, un mes de percepción ordinaria neta, más quinquenios.
+ b. Por veinte años de servicio, dos meses de percepción ordinaria neta, más quinquenios.
+ c. Por treinta años de servicio, tres meses de percepción ordinaria neta, más quinquenios.
+ ii. Apoyo económico para la adquisición de lentes. Anualmente se reembolsará un monto máximo equivalente a 50 veces el salario mínimo general vigente en la Ciudad de México por la adquisición de lentes, de conformidad con la normatividad en la materia.
+ iii. Otros apoyos. Conforme se determinen por los Órganos de Gobierno para su aplicación.
+ d) Seguros. Los Seguros son beneficios adicionales que se extienden a todos los sujetos a que se refiere este Manual, con el fin de coadyuvar a su estabilidad económica, al bienestar y seguridad de su familia; previstos en la Ley del ISSSTE y en las pólizas respectivas.
+ i. Seguro de vida institucional. Tiene por objeto cubrir los siniestros por fallecimiento o incapacidad total y permanente, de conformidad con las disposiciones aplicables en la materia. La suma asegurada básica será el equivalente a 40 meses de la dieta o percepción ordinaria y la prima correspondiente será cubierta de conformidad con el artículo 64 fracción III de la Ley Federal de Presupuesto y Responsabilidad Hacendaria.
+ ii. Seguro colectivo de retiro. Es un beneficio económico en favor de las y los servidores públicos que opten por alguna de las modalidades de pensión que otorga el ISSSTE.
+ 10. Impuesto Sobre la Renta.
+ La retención y entero de los impuestos correspondientes a las dietas de las Senadoras y los Senadores y, a las percepciones de las y los servidores públicos de mando y homólogos, se deberán efectuar en la forma y términos establecidos por la Ley del Impuesto Sobre la Renta y demás disposiciones aplicables en la materia.
+ 11. Operación del Tabulador de Sueldos.
+ a) La aplicación del tabulador de sueldos para las y los servidores públicos se efectuará con base en el nivel salarial determinado para cada uno de los puestos.
+ b) Cuando la entrada en vigor de los tabuladores implique una reducción de la percepción bruta en un puesto, se podrá optar por cualquiera de las opciones siguientes:
+ I. La percepción ordinaria del ocupante del puesto en las condiciones enunciadas se congelará respecto de cualquier incremento de sueldo general, hasta en tanto se ajuste a los límites establecidos para el puesto.
+ II. Liquidar conforme a Ley Federal del Trabajo, la diferencia que resulte por la reducción, según la antigüedad de servicios en el Senado de la República.
+ c) Cada uno de los puestos tendrá asignado un nivel salarial que, a su vez, se clasificará en rangos, con el objeto de que la o el servidor público pueda obtener promociones salariales con base en los resultados de su desempeño o a solicitud expresa del titular de la Unidad Administrativa, sin que para ello deba crearse o existir una plaza vacante, por acuerdo o instrucciones de los Órganos de Gobierno o con la aprobación del Secretario General de Servicios Administrativos a través de la Dirección General de Recursos Humanos. La promoción a un rango salarial más alto no implica mayor responsabilidad o jerarquía, toda vez que no implica un cambio de puesto.
+ d) Las servidoras y servidores públicos de mando y homólogos podrán obtener ascensos de puesto, que impliquen mayor responsabilidad, jerarquía y nivel salarial, cuando exista una plaza vacante, cuente con disponibilidad presupuestal y, que el puesto se encuentre en la estructura orgánica o plantilla de personal de las y los servidores públicos de mando, autorizadas por las instancias respectivas o con la aprobación del Secretario General de Servicios Administrativos.
+ Los ascensos de puesto se sujetarán al presente Manual, al tabulador de sueldos autorizado y al Catálogo General de Puestos.
+ e) Los titulares de las Unidades, de acuerdo con las necesidades del Senado y, con el fin de dar continuidad a las funciones y tareas encomendadas, podrán solicitar contrataciones de personal de mando u homólogos cuando exista una plaza vacante disponible y que el puesto se encuentre en la estructura orgánica y/o plantilla y se cuente con disponibilidad presupuestal, lo anterior conforme al Procedimiento.
+ Para la contratación de personal de mando u homólogos, las Unidades tomarán como referente el Catálogo General de Puestos que se autorice conforme a la normatividad aplicable y, en todo caso, asegurarse que el personal contratado cumpla con los requisitos establecidos en el artículo 71 del Estatuto.
+ Al personal de nuevo ingreso, se le asignará la percepción del rango mínimo del nivel salarial que corresponda al puesto al que haya ingresado, salvo los casos que se determinen en función de la experiencia de las servidoras o servidores públicos entrantes; así como aquellos que, por Acuerdo o instrucción de los Órganos de Gobierno, directamente o por conducto del o la titular de la Secretaría General de Servicios Administrativos, tengan un tratamiento diferente.
+ f) Los Órganos de Gobierno y en todo caso la Secretaría General de Servicios Administrativos, a través de la Dirección General de Recursos Humanos, con el objeto de fortalecer y dar continuidad a las funciones legislativas, parlamentarias, técnicas y administrativas asignadas a las Unidades, podrán con sujeción a la disponibilidad presupuestal y de acuerdo con las medidas en materia de austeridad, racionalidad y disciplina presupuestaria, actualizar o realizar los ajustes necesarios a los grupos y niveles salariales, así como a la denominación de los puestos o cualquier otro concepto correspondiente al tabulador de sueldos o al Catálogo General de Puestos.
+ g) El personal de mando u homólogo que sea separado de su puesto por necesidades del servicio, por reorganización administrativa o, que se retire cuando así proceda, tendrá derecho a la indemnización que establece la Ley Federal del Trabajo, supletoria de la Ley Federal de los Trabajadores al Servicio del Estado, lo anterior, con el objeto de prevenir una controversia; para tal fin, se deberá utilizar el tabulador de sueldos vigente, de acuerdo con las disposiciones legales aplicables; así como en su caso, podrán contar con un apoyo económico por entrega-recepción que autorice la Secretaría General de Servicios Administrativos a través de la Dirección General de Recursos Humanos.
+ 12. Interpretación Administrativa.
+ La Secretaría General de Servicios Administrativos, a través de la Dirección General de Recursos Humanos, es la autoridad facultada para la interpretación administrativa del presente Manual y, en los términos del artículo 108 de la Ley Orgánica del Congreso General de los Estados Unidos Mexicanos, está facultada para formular, en el ámbito de su competencia, normas administrativas de carácter interno, previamente sancionada por los Órganos de Gobierno.
+ 13. Vigilancia.
+ La vigilancia del cumplimiento del presente Manual, en los términos de las disposiciones legales vigentes, corresponde a la Contraloría Interna del Senado de la República.
+ TRANSITORIOS
+ PRIMERO.- El presente Manual deja sin efecto el publicado en el Diario Oficial de la Federación el 28 de febrero de 2025.
+ SEGUNDO.- El presente Manual entrará en vigor en la fecha de su publicación en el Diario Oficial de la Federación.
+ Ciudad de México, 27 de febrero de 2026.- El Secretario General de Servicios Administrativos, Lic. Oscar Trinidad Palomera Cano.- Rúbrica.
+ ANEXO 1
+ PUESTO DE ELECCIÓN
+ SENADORA O SENADOR DE LA REPÚBLICA
+ DIETA NETA MENSUAL MILES DE PESOS
+ | 
+ CONCEPTO
+ | IMPORTE
+ | 
+ DIETA MENSUAL
+ | 132.9
+ | 
+ Ingreso menor a la remuneración de la Presidenta de la República, publicado en el Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026, Anexo 23.1.2. y conforme al artículo 127 Constitucional.
+ ANEXO 2
+ PUESTOS DE LA ESTRUCTURA ORGÁNICA
+ TABULADOR DE SUELDOS NETOS MENSUALES PARA SERVIDORAS Y SERVIDORES PÚBLICOS DE MANDO Y
+ HOMÓLOGOS
+ MILES DE PESOS
+ | 
+ NIVEL SALARIAL
+ | PUESTOS
+ | PERCEPCIÓN MENSUAL NETA *
+ | 
+ 28
+ | Jefe (a) de Departamento
+ | 29.6
+ | a
+ | 42.0
+ | 
+ 29
+ | Subdirector (a) de Área
+ | 42.9
+ | a
+ | 58.3
+ | 
+ 30
+ | Director (a) de Área
+ | 58.4
+ | a
+ | 89.0
+ | 
+ 33
+ | Jefe (a) de Unidad
+ | 80.8
+ | a
+ | 98.6
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ 33E
+ | Director (a) General
+ | 102.5
+ | a
+ | 121.8
+ | 
+ 34
+ | Coordinador (a)
+ | 121.9
+ | a
+ | 126.0
+ | 
+ 34
+ | Contralor (a)
+ | 
+ 34
+ | Tesorero (a)
+ | 
+ 35
+ | Secretario (a) General
+ | 131.9
+ | 
+ | 
+ | 
+ ANEXO 3
+ PUESTO DE ELECCIÓN
+ SENADORA O SENADOR DE LA REPÚBLICA
+ SEGUROS
+ | ECONÓMICAS
+ | 
+ SEGURO DE VIDA INSTITUCIONAL: 40
+ meses de dieta.
+ | Aguinaldo: 40 días de dieta.
+ | 
+ SEGURIDAD SOCIAL
+ | 
+ ISSSTE, FOVISSSTE, SAR, Ahorro Solidario
+ | 
+ PUESTO: SECRETARIO (A) GENERAL, TESORERO (A), COORDINADOR (A), CONTRALOR (A) INTERNO (A),
+ DIRECTOR (A) GENERAL Y HOMÓLOGOS
+ SEGUROS
+ | ECONÓMICAS
+ | 
+ SEGURO DE VIDA INSTITUCIONAL: 40 meses de la percepción ordinaria.
+ SEGURO COLECTIVO DE RETIRO: de $12,000.00 a $25,000.00, según los años de servicio.
+ El Seguro Colectivo de Retiro se otorga a la baja definitiva del trabajador cuando éste se pensiona o jubila. Es una aportación patronal al ISSSTE.
+ | PRIMA VACACIONAL: Equivalente a 15 días de sueldo base, para su otorgamiento, se divide en dos periodos semestrales al año, previstos cada uno en el calendario institucional.
+ PRIMA QUINQUENAL: Se otorga por cada 5 años de servicio efectivos prestados, hasta llegar a 25 años. Se paga quincenalmente.
+ AGUINALDO: Conforme al artículo 42 Bis de la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del Artículo 123 Constitucional.
+ PAGAS DE DEFUNCIÓN: En términos de lo dispuesto en el artículo 73 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria.
+ VACACIONES: 20 días hábiles al año, en dos períodos de 10 días cada uno.
+ VALES DE DESPENSA: Se otorgan al personal de mando y homólogo conforme a las disposiciones que al respecto emita la Secretaría de Hacienda y Crédito Público, las autorizaciones de los Órganos de Gobierno o, en su caso, la Secretaría General de Servicios Administrativos; así como de la disponibilidad presupuestal.
+ LICENCIA POR MATERNIDAD: En términos del artículo 28 Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del Artículo 123 Constitucional.
+ LICENCIA POR PATERNIDAD: De conformidad con las disposiciones establecidas en el artículo 132, fracción XXVII Bis de la Ley Federal del Trabajo, supletoria de la Ley Federal de los Trabajadores al Servicio del Estado.
+ APOYO ECONÓMICO PARA LA ADQUISICIÓN DE LENTES: Se otorgará anualmente un apoyo económico para la adquisición de lentes, hasta por un monto equivalente a 50 veces del salario mínimo general en la Ciudad de México.
+ PREMIO DE ANTIGÜEDAD: De 10, 20 y 30 años, conforme a las disposiciones establecidas por el Senado de la República.
+ | 
+ SEGURIDAD SOCIAL
+ | 
+ ISSSTE, FOVISSSTE, SAR, Ahorro Solidario
+ | 
+ PUESTO: DIRECTOR (A) DE ÁREA / JEFE (A) DE UNIDAD, SUBDIRECTOR (A) DE ÁREA, JEFE (A) DE
+ DEPARTAMENTO Y HOMÓLOGOS
+ SEGUROS
+ | ECONÓMICAS
+ | 
+ SEGURO DE VIDA INSTITUCIONAL: 40 meses de la percepción ordinaria.
+ SEGURO COLECTIVO DE RETIRO: de $12,000.00 a $25,000.00, según los años de servicio.
+ El Seguro Colectivo de Retiro se otorga a la baja definitiva del trabajador cuando éste se pensiona o jubila. Es una aportación patronal al ISSSTE.
+ | PRIMA VACACIONAL: Equivalente a 15 días de sueldo base, para su otorgamiento, se divide en dos periodos semestrales al año, previstos cada uno en el calendario institucional.
+ PRIMA QUINQUENAL: Se otorga por cada 5 años de servicio efectivos prestados, hasta llegar a 25 años. Se paga quincenalmente.
+ AGUINALDO: Conforme al artículo 42 Bis de la Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del Artículo 123 Constitucional.
+ PAGAS DE DEFUNCIÓN: En términos de lo dispuesto en el artículo 73 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria.
+ VACACIONES: 20 días hábiles al año, en dos períodos de 10 días cada uno.
+ VALES DE DESPENSA: Se otorgan al personal de mando y homólogo conforme a las disposiciones que al respecto emita la Secretaría de Hacienda y Crédito Público, las autorizaciones de los Órganos de Gobierno o, en su caso, la Secretaría General de Servicios Administrativos; así como de la disponibilidad presupuestal.
+ LICENCIA POR MATERNIDAD: En términos del artículo 28 Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del Apartado B) del Artículo 123 Constitucional.
+ LICENCIA POR PATERNIDAD: De conformidad con las disposiciones establecidas en el artículo 132, fracción XXVII Bis de la Ley Federal del Trabajo, supletoria de la Ley Federal de los Trabajadores al Servicio del Estado.
+ APOYO ECONÓMICO PARA LA ADQUISICIÓN DE LENTES: Se otorgará anualmente un apoyo económico para la adquisición de lentes, hasta por un monto equivalente a 50 veces del salario mínimo general en la Ciudad de México.
+ PREMIO DE ANTIGÜEDAD: De 10, 20 y 30 años, conforme a las disposiciones establecidas por el Senado de la República.
+ | 
+ SEGURIDAD SOCIAL
+ | 
+ ISSSTE, FOVISSSTE, SAR, Ahorro Solidario
+ | 
+ INFORMACIÓN RELATIVA A LA INTEGRACIÓN DE LAS ASIGNACIONES PRESUPUESTARIAS DEL CAPÍTULO DE
+ SERVICIOS PERSONALES
+ Con fundamento en los artículos 66 numeral 1 inciso h) y 110 de la Ley Orgánica del Congreso General de los Estados Unidos Mexicanos y por acuerdos de los Órganos de Gobierno, la Secretaría General de Servicios Administrativos publica:
+ Primero. - En cumplimiento a lo dispuesto en el artículo 21 párrafo segundo del Decreto del Presupuesto de Egresos de la Federación para el ejercicio fiscal 2026, publicado en el Diario Oficial de la Federación el 21 de noviembre de 2025, se presenta en el anexo 4 el Catálogo General de Puestos con niveles salariales y, en el anexo 5 la estructura ocupacional que contiene la integración de los recursos aprobados en el Capítulo de servicios personales, con la desagregación total de las plazas activas y vacantes del personal operativo de base, confianza, servicios generales, servicio técnico de carrera y de los prestadores de servicios profesionales contratados bajo el régimen de honorarios; así como, de las Senadoras, Senadores, servidoras y servidores públicos de mando y homólogos (integradas en el Tomo IX del propio Decreto en mención), en el que se identifican todos los conceptos de pago y aportaciones de seguridad social que se otorgan con base en las leyes y en la normatividad aplicable por el Senado de la República.
+ Anexo 4
+ PUESTO
+ | NIVEL
+ | 
+ Asistente Administrativo
+ | 1
+ | 
+ Auxiliar de Administrador
+ | 2
+ | 
+ Oficial Administrativo
+ | 2
+ | 
+ Técnico Medio
+ | 2
+ | 
+ Especialista Técnico
+ | 3
+ | 
+ Coordinador de Técnicos en Computación
+ | 4
+ | 
+ Administrativo Especializado
+ | 4
+ | 
+ Jefe de Oficina
+ | 5
+ | 
+ Secretaria "A"
+ | 6
+ | 
+ Técnico Especializado
+ | 6
+ | 
+ Supervisor de Enfermería
+ | 6
+ | 
+ Técnico Superior
+ | 7
+ | 
+ Jefe de Sistemas Administrativos
+ | 8
+ | 
+ Analista de Servicios Administrativos
+ | 9
+ | 
+ Analista en Sistemas de Información
+ | 9
+ | 
+ Secretaria Especializada
+ | 9
+ | 
+ Profesional Administrativo
+ | 10
+ | 
+ Profesional Especializado
+ | 11
+ | 
+ Profesional Dictaminador Especializado
+ | 12
+ | 
+ Profesional Analista de Información
+ | 12
+ | 
+ Profesional Ejecutivo
+ | 13
+ | 
+ Profesional de Servicios Especializados
+ | 14
+ | 
+ Profesional Dictaminador de Servicios Especializados
+ | 15
+ | 
+ Profesional Ejecutivo Especializado
+ | 16
+ | 
+ Profesional Ejecutivo de Servicios Especializados
+ | 17
+ | 
+ Supervisor de Apoyo Técnico, Administrativo y Parlamentario "A"
+ | CFA
+ | 
+ Chofer de Servidor Público de Mando
+ | CFA
+ | 
+ Manejador de Fondos y Valores
+ | CFA
+ | 
+ Supervisor de Servicios
+ | CFA
+ | 
+ Supervisor de Apoyo Técnico, Administrativo y Parlamentario "B"
+ | CFB
+ | 
+ Asistente Secretarial "B" de Servidor Público de Mando
+ | CFB
+ | 
+ Supervisor de Apoyo Técnico, Administrativo y Parlamentario "C"
+ | CFC
+ | 
+ Asistente Secretarial "C" de Servidor Público de Mando
+ | CFC
+ | 
+ Supervisor de Información Financiera
+ | CFC
+ | 
+ Asistente en Servicios Médicos
+ | CFTA
+ | 
+ Asistente de Seguridad
+ | CFTA
+ | 
+ Asistente de Servicio Secretarial
+ | CFTA
+ | 
+ Asistente de Servicios de Apoyo Técnico Especializado
+ | CFTA
+ | 
+ Supervisor De Servicios Técnicos Especializados
+ | CFTB
+ | 
+ Secretaria Auxiliar de Servidor Público de Mando
+ | CFTB
+ | 
+ Profesional Especializado en Servicios Técnicos
+ | CFTC
+ | 
+ Analista De Servicios Técnicos Especializados
+ | CFTC
+ | 
+ Medico Dictaminador Especializado
+ | CFTC
+ | 
+ Asesor Especializado de Servidor Público de Mando
+ | CFTD
+ | 
+ Asistente en Servicios de Limpieza Multifuncional
+ | CFGA
+ | 
+ Asistente en Servicios de Mantenimiento Multifuncional
+ | CFGA
+ | 
+ Asistente en Servicios Generales
+ | CFGA
+ | 
+ Supervisor de Servicios de Limpieza
+ | CFGB
+ | 
+ Supervisor de Servicios Generales
+ | CFGB
+ | 
+ Técnico en Servicios de Mantenimiento
+ | CFGB
+ | 
+ Técnico Especializado en Servicios de Mantenimiento
+ | CFGC
+ | 
+ Intendente
+ | CFGD
+ | 
+ Jefe de Departamento
+ | 28
+ | 
+ Investigador "A"
+ | 28
+ | 
+ Administrador del Salón de Sesiones
+ | 28
+ | 
+ Consultor Parlamentario "A"
+ | 28
+ | 
+ Abogado "A"
+ | 28
+ | 
+ Subdirector de Área
+ | 29
+ | 
+ Investigador "B"
+ | 29
+ | 
+ Consultor Parlamentario "B"
+ | 29
+ | 
+ Asesor de Tesorero
+ | 29
+ | 
+ Secretario Técnico "B"
+ | 29
+ | 
+ Director de Área
+ | 30
+ | 
+ Consultor Parlamentario "C"
+ | 30
+ | 
+ Asistente de Organización y Métodos
+ | 30
+ | 
+ Asistente de Sistemas y Procedimientos Administrativos
+ | 30
+ | 
+ Investigador "C"
+ | 30
+ | 
+ Asesor Ejecutivo
+ | 30
+ | 
+ Secretario Técnico "C"
+ | 30
+ | 
+ Secretario Técnico
+ | 30
+ | 
+ Jefe de Unidad
+ | 33
+ | 
+ Consultor Parlamentario "D"
+ | 33
+ | 
+ Secretario Técnico
+ | 33
+ | 
+ Coordinador de Auditoria a Grupos Parlamentarios
+ | 33E
+ | 
+ Director General
+ | 33E
+ | 
+ Subcontralor
+ | 33E
+ | 
+ Secretario Técnico
+ | 33E
+ | 
+ Coordinador General
+ | 34
+ | 
+ Contralor Interno
+ | 34
+ | 
+ Coordinador Técnico de la SGSA
+ | 34
+ | 
+ Secretario Técnico de Órgano de Gobierno
+ | 34
+ | 
+ Enlace Legislativo
+ | 34
+ | 
+ Tesorero
+ | 34
+ | 
+ Secretario Particular de Órgano de Gobierno
+ | 34
+ | 
+ Coordinador de Asesores de Órgano de Gobierno
+ | 34
+ | 
+ Coordinador Administrativo
+ | 34
+ | 
+ Asesor Parlamentario de Grupo Parlamentario
+ | 34
+ | 
+ Secretario General
+ | 35
+ | 
+ Senador
+ | -
+ | 
+ ESTRUCTURA OCUPACIONAL Y RECURSOS APROBADOS EN EL CAPÍTULO DE SERVICIOS PERSONALES
+ ANEXO 5
+ 1) Importes determinados según tabuladores vigentes y autorizados para el ejercicio 2026 y plantilla autorizada al 1 de enero de 2026. No se incluye política salarial.
+ 2) En los honorarios administrativos se reporta el número de contratos de servicios profesionales para las áreas técnicas, parlamentarias y administrativas, los cuales pueden ajustarse en función del presupuesto autorizado.
+ 3) En los honorarios legislativos se reporta el número de techos autorizados para las áreas legislativas y comisiones, los cuales pueden ajustarse en función de los Acuerdos que se establezcan.
+ 4) Incluye plazas, contratos y presupuesto asignado para cubrir lo correspondiente del Canal del Congreso.
+ ____________________________
+ En el documento que usted está visualizando puede haber texto, caracteres u objetos que no se muestren correctamente debido a la conversión a formato HTML, por lo que le recomendamos tomar siempre como referencia la imagen digitalizada del DOF o el archivo PDF de la edición.
+ El contenido, forma y alcance de los documentos publicados, son estricta responsabilidad de su emisor.
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 

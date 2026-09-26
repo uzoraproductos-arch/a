@@ -1,0 +1,2588 @@
+{
+ "cuenta": 2024,
+ "corte": "febrero de 2026",
+ "entregas": "primera, segunda y tercera (consolidado)",
+ "total": {
+  "auditorias": 2264,
+  "universo": 22898075580100.0,
+  "muestra": 12143300890200.0,
+  "representatividad": 53.03,
+  "solventadas": 5842,
+  "conAcciones": 5158,
+  "R": 570,
+  "RD": 287,
+  "PEFCF": 278,
+  "SA": 174,
+  "PRAS": 2203,
+  "PO": 2762,
+  "acciones": 6274,
+  "sugerencias": 1,
+  "recuperaciones": 2005619900.0,
+  "porAclarar": 65169097600.0
+ },
+ "grupos": [
+  {
+   "grupo": "Ingreso",
+   "sectores": [
+    {
+     "auditorias": 1,
+     "universo": 564348000.0,
+     "muestra": 504952000.0,
+     "representatividad": 89.48,
+     "solventadas": 0,
+     "conAcciones": 3,
+     "R": 1,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 1,
+     "PO": 0,
+     "acciones": 2,
+     "sugerencias": 0,
+     "recuperaciones": 160100.0,
+     "porAclarar": 0.0,
+     "nombre": "Marina"
+    },
+    {
+     "auditorias": 1,
+     "universo": 45436025300.0,
+     "muestra": 26826265100.0,
+     "representatividad": 59.04,
+     "solventadas": 0,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Petróleos Mexicanos"
+    }
+   ],
+   "subtotal": {
+    "auditorias": 2,
+    "universo": 46000373300.0,
+    "muestra": 27331217100.0,
+    "representatividad": 59.42,
+    "solventadas": 0,
+    "conAcciones": 3,
+    "R": 1,
+    "RD": 0,
+    "PEFCF": 0,
+    "SA": 0,
+    "PRAS": 1,
+    "PO": 0,
+    "acciones": 2,
+    "sugerencias": 0,
+    "recuperaciones": 160100.0,
+    "porAclarar": 0.0
+   }
+  },
+  {
+   "grupo": "Deuda",
+   "sectores": [
+    {
+     "auditorias": 1,
+     "universo": 13526568603600.0,
+     "muestra": 4640566204000.0,
+     "representatividad": 34.31,
+     "solventadas": 0,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Hacienda y Crédito Público"
+    },
+    {
+     "auditorias": 1,
+     "universo": 396229003300.0,
+     "muestra": 179055768500.0,
+     "representatividad": 45.19,
+     "solventadas": 2,
+     "conAcciones": 1,
+     "R": 1,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 1,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Comisión Federal de Electricidad"
+    },
+    {
+     "auditorias": 1,
+     "universo": 870283148900.0,
+     "muestra": 349243783100.0,
+     "representatividad": 40.13,
+     "solventadas": 3,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Petróleos Mexicanos"
+    }
+   ],
+   "subtotal": {
+    "auditorias": 3,
+    "universo": 14793080755800.0,
+    "muestra": 5168865755600.0,
+    "representatividad": 34.94,
+    "solventadas": 5,
+    "conAcciones": 1,
+    "R": 1,
+    "RD": 0,
+    "PEFCF": 0,
+    "SA": 0,
+    "PRAS": 0,
+    "PO": 0,
+    "acciones": 1,
+    "sugerencias": 0,
+    "recuperaciones": 0.0,
+    "porAclarar": 0.0
+   }
+  },
+  {
+   "grupo": "Gobierno",
+   "sectores": [
+    {
+     "auditorias": 2,
+     "universo": 16925294600.0,
+     "muestra": 15143264300.0,
+     "representatividad": 89.47,
+     "solventadas": 2,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Poder Legislativo"
+    },
+    {
+     "auditorias": 3,
+     "universo": 14217608600.0,
+     "muestra": 7896332500.0,
+     "representatividad": 55.54,
+     "solventadas": 3,
+     "conAcciones": 12,
+     "R": 16,
+     "RD": 0,
+     "PEFCF": 5,
+     "SA": 0,
+     "PRAS": 16,
+     "PO": 17,
+     "acciones": 54,
+     "sugerencias": 0,
+     "recuperaciones": 8133300.0,
+     "porAclarar": 284574800.0,
+     "nombre": "Poder Judicial"
+    },
+    {
+     "auditorias": 9,
+     "universo": 5677792200.0,
+     "muestra": 3620865200.0,
+     "representatividad": 63.77,
+     "solventadas": 28,
+     "conAcciones": 34,
+     "R": 14,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 9,
+     "PO": 3,
+     "acciones": 26,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 78072600.0,
+     "nombre": "Gobernación"
+    },
+    {
+     "auditorias": 6,
+     "universo": 36881208600.0,
+     "muestra": 16751122600.0,
+     "representatividad": 45.42,
+     "solventadas": 12,
+     "conAcciones": 10,
+     "R": 10,
+     "RD": 9,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 3,
+     "PO": 3,
+     "acciones": 25,
+     "sugerencias": 0,
+     "recuperaciones": 753700.0,
+     "porAclarar": 3199800.0,
+     "nombre": "Seguridad y Protección Ciudadana"
+    },
+    {
+     "auditorias": 5,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 14,
+     "conAcciones": 10,
+     "R": 0,
+     "RD": 15,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 15,
+     "sugerencias": 1,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Relaciones Exteriores"
+    },
+    {
+     "auditorias": 12,
+     "universo": 157174301600.0,
+     "muestra": 138010197500.0,
+     "representatividad": 87.81,
+     "solventadas": 25,
+     "conAcciones": 9,
+     "R": 9,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 4,
+     "PO": 0,
+     "acciones": 13,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Hacienda y Crédito Público"
+    },
+    {
+     "auditorias": 15,
+     "universo": 88634556900.0,
+     "muestra": 76142306700.0,
+     "representatividad": 85.91,
+     "solventadas": 46,
+     "conAcciones": 18,
+     "R": 0,
+     "RD": 17,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 6,
+     "PO": 0,
+     "acciones": 23,
+     "sugerencias": 0,
+     "recuperaciones": 10700.0,
+     "porAclarar": 0.0,
+     "nombre": "Defensa Nacional"
+    },
+    {
+     "auditorias": 2,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 8,
+     "conAcciones": 5,
+     "R": 0,
+     "RD": 7,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 7,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Trabajo y Previsión Social"
+    },
+    {
+     "auditorias": 10,
+     "universo": 17283319100.0,
+     "muestra": 12803332800.0,
+     "representatividad": 74.08,
+     "solventadas": 14,
+     "conAcciones": 20,
+     "R": 4,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 3,
+     "PO": 15,
+     "acciones": 22,
+     "sugerencias": 0,
+     "recuperaciones": 1040200.0,
+     "porAclarar": 233255400.0,
+     "nombre": "Marina"
+    },
+    {
+     "auditorias": 1,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 1,
+     "conAcciones": 4,
+     "R": 0,
+     "RD": 6,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 6,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Desarrollo Agrario, Territorial y Urbano"
+    },
+    {
+     "auditorias": 4,
+     "universo": 3641266400.0,
+     "muestra": 2526765000.0,
+     "representatividad": 69.39,
+     "solventadas": 18,
+     "conAcciones": 5,
+     "R": 0,
+     "RD": 1,
+     "PEFCF": 3,
+     "SA": 0,
+     "PRAS": 1,
+     "PO": 0,
+     "acciones": 5,
+     "sugerencias": 0,
+     "recuperaciones": 6400.0,
+     "porAclarar": 0.0,
+     "nombre": "Entidades no Sectorizadas"
+    },
+    {
+     "auditorias": 3,
+     "universo": 26754044100.0,
+     "muestra": 24023722900.0,
+     "representatividad": 89.79,
+     "solventadas": 8,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Información Nacional Estadística y Geográfica"
+    },
+    {
+     "auditorias": 4,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 22,
+     "conAcciones": 1,
+     "R": 0,
+     "RD": 1,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 1,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Comisión Nacional de los Derechos Humanos"
+    },
+    {
+     "auditorias": 1,
+     "universo": 1033196800.0,
+     "muestra": 707583500.0,
+     "representatividad": 68.48,
+     "solventadas": 1,
+     "conAcciones": 8,
+     "R": 6,
+     "RD": 0,
+     "PEFCF": 4,
+     "SA": 0,
+     "PRAS": 14,
+     "PO": 4,
+     "acciones": 28,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 7356600.0,
+     "nombre": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales"
+    },
+    {
+     "auditorias": 4,
+     "universo": 7127001400.0,
+     "muestra": 1978950700.0,
+     "representatividad": 27.77,
+     "solventadas": 5,
+     "conAcciones": 7,
+     "R": 6,
+     "RD": 0,
+     "PEFCF": 2,
+     "SA": 0,
+     "PRAS": 8,
+     "PO": 3,
+     "acciones": 19,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 66563000.0,
+     "nombre": "Instituto Nacional Electoral"
+    },
+    {
+     "auditorias": 1,
+     "universo": 3254885600.0,
+     "muestra": 2851985100.0,
+     "representatividad": 87.62,
+     "solventadas": 1,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Tribunal Federal de Justicia Administrativa"
+    },
+    {
+     "auditorias": 2,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 0,
+     "conAcciones": 8,
+     "R": 0,
+     "RD": 10,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 10,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Tribunales Agrarios"
+    }
+   ],
+   "subtotal": {
+    "auditorias": 84,
+    "universo": 378604475900.0,
+    "muestra": 302456428800.0,
+    "representatividad": 79.89,
+    "solventadas": 208,
+    "conAcciones": 151,
+    "R": 65,
+    "RD": 66,
+    "PEFCF": 14,
+    "SA": 0,
+    "PRAS": 64,
+    "PO": 45,
+    "acciones": 254,
+    "sugerencias": 1,
+    "recuperaciones": 9944300.0,
+    "porAclarar": 673022200.0
+   }
+  },
+  {
+   "grupo": "Desarrollo Social",
+   "sectores": [
+    {
+     "auditorias": 16,
+     "universo": 1377928474100.0,
+     "muestra": 1302499384900.0,
+     "representatividad": 94.53,
+     "solventadas": 40,
+     "conAcciones": 16,
+     "R": 11,
+     "RD": 2,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 3,
+     "PO": 6,
+     "acciones": 22,
+     "sugerencias": 0,
+     "recuperaciones": 3103900.0,
+     "porAclarar": 34053500.0,
+     "nombre": "Hacienda y Crédito Público"
+    },
+    {
+     "auditorias": 4,
+     "universo": 8354970300.0,
+     "muestra": 7173957800.0,
+     "representatividad": 85.86,
+     "solventadas": 9,
+     "conAcciones": 10,
+     "R": 7,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 2,
+     "PO": 1,
+     "acciones": 10,
+     "sugerencias": 0,
+     "recuperaciones": 2108900.0,
+     "porAclarar": 3595200.0,
+     "nombre": "Defensa Nacional"
+    },
+    {
+     "auditorias": 2,
+     "universo": 10610702300.0,
+     "muestra": 9443456700.0,
+     "representatividad": 89.0,
+     "solventadas": 5,
+     "conAcciones": 16,
+     "R": 1,
+     "RD": 0,
+     "PEFCF": 2,
+     "SA": 0,
+     "PRAS": 14,
+     "PO": 3,
+     "acciones": 20,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 57413900.0,
+     "nombre": "Agricultura y Desarrollo Rural"
+    },
+    {
+     "auditorias": 20,
+     "universo": 192752344700.0,
+     "muestra": 175340113700.0,
+     "representatividad": 90.97,
+     "solventadas": 60,
+     "conAcciones": 52,
+     "R": 27,
+     "RD": 7,
+     "PEFCF": 6,
+     "SA": 0,
+     "PRAS": 23,
+     "PO": 16,
+     "acciones": 79,
+     "sugerencias": 0,
+     "recuperaciones": 41006700.0,
+     "porAclarar": 231047000.0,
+     "nombre": "Educación Pública"
+    },
+    {
+     "auditorias": 21,
+     "universo": 44509336700.0,
+     "muestra": 36708894500.0,
+     "representatividad": 82.47,
+     "solventadas": 51,
+     "conAcciones": 61,
+     "R": 28,
+     "RD": 22,
+     "PEFCF": 5,
+     "SA": 0,
+     "PRAS": 30,
+     "PO": 20,
+     "acciones": 105,
+     "sugerencias": 0,
+     "recuperaciones": 26691300.0,
+     "porAclarar": 585754600.0,
+     "nombre": "Salud"
+    },
+    {
+     "auditorias": 21,
+     "universo": 433373556000.0,
+     "muestra": 411254311900.0,
+     "representatividad": 94.9,
+     "solventadas": 60,
+     "conAcciones": 28,
+     "R": 9,
+     "RD": 4,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 9,
+     "PO": 12,
+     "acciones": 34,
+     "sugerencias": 0,
+     "recuperaciones": 9116800.0,
+     "porAclarar": 123043200.0,
+     "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado"
+    },
+    {
+     "auditorias": 17,
+     "universo": 1038813338200.0,
+     "muestra": 872166984600.0,
+     "representatividad": 83.96,
+     "solventadas": 39,
+     "conAcciones": 24,
+     "R": 0,
+     "RD": 8,
+     "PEFCF": 1,
+     "SA": 0,
+     "PRAS": 14,
+     "PO": 3,
+     "acciones": 26,
+     "sugerencias": 0,
+     "recuperaciones": 3086800.0,
+     "porAclarar": 46354000.0,
+     "nombre": "Instituto Mexicano del Seguro Social"
+    },
+    {
+     "auditorias": 2,
+     "universo": 4452042400.0,
+     "muestra": 4191852600.0,
+     "representatividad": 94.16,
+     "solventadas": 2,
+     "conAcciones": 8,
+     "R": 0,
+     "RD": 11,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 11,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Marina"
+    },
+    {
+     "auditorias": 6,
+     "universo": 7759279700.0,
+     "muestra": 6229842500.0,
+     "representatividad": 80.29,
+     "solventadas": 14,
+     "conAcciones": 11,
+     "R": 4,
+     "RD": 0,
+     "PEFCF": 1,
+     "SA": 0,
+     "PRAS": 8,
+     "PO": 5,
+     "acciones": 18,
+     "sugerencias": 0,
+     "recuperaciones": 378200.0,
+     "porAclarar": 47555500.0,
+     "nombre": "Desarrollo Agrario, Territorial y Urbano"
+    },
+    {
+     "auditorias": 15,
+     "universo": 82458126800.0,
+     "muestra": 53937003500.0,
+     "representatividad": 65.41,
+     "solventadas": 34,
+     "conAcciones": 36,
+     "R": 0,
+     "RD": 1,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 13,
+     "PO": 23,
+     "acciones": 37,
+     "sugerencias": 0,
+     "recuperaciones": 7434300.0,
+     "porAclarar": 225754800.0,
+     "nombre": "Medio Ambiente y Recursos Naturales"
+    },
+    {
+     "auditorias": 1,
+     "universo": 20053574300.0,
+     "muestra": 6987600500.0,
+     "representatividad": 34.84,
+     "solventadas": 1,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Aportaciones a Seguridad Social"
+    },
+    {
+     "auditorias": 9,
+     "universo": 99490792100.0,
+     "muestra": 80526960900.0,
+     "representatividad": 80.94,
+     "solventadas": 15,
+     "conAcciones": 32,
+     "R": 7,
+     "RD": 8,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 16,
+     "PO": 3,
+     "acciones": 34,
+     "sugerencias": 0,
+     "recuperaciones": 74615600.0,
+     "porAclarar": 3433800.0,
+     "nombre": "Entidades no Sectorizadas"
+    },
+    {
+     "auditorias": 2,
+     "universo": 4423963600.0,
+     "muestra": 1832776800.0,
+     "representatividad": 41.43,
+     "solventadas": 2,
+     "conAcciones": 7,
+     "R": 6,
+     "RD": 0,
+     "PEFCF": 5,
+     "SA": 0,
+     "PRAS": 6,
+     "PO": 3,
+     "acciones": 20,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 11521400.0,
+     "nombre": "Entidades No Coordinadas Sectorialmente"
+    },
+    {
+     "auditorias": 10,
+     "universo": 516932163600.0,
+     "muestra": 501324638900.0,
+     "representatividad": 96.98,
+     "solventadas": 15,
+     "conAcciones": 26,
+     "R": 20,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 3,
+     "PO": 6,
+     "acciones": 29,
+     "sugerencias": 0,
+     "recuperaciones": 11331400.0,
+     "porAclarar": 5835400.0,
+     "nombre": "Bienestar"
+    },
+    {
+     "auditorias": 8,
+     "universo": 23338939500.0,
+     "muestra": 19427135000.0,
+     "representatividad": 83.24,
+     "solventadas": 14,
+     "conAcciones": 61,
+     "R": 3,
+     "RD": 38,
+     "PEFCF": 1,
+     "SA": 0,
+     "PRAS": 12,
+     "PO": 1,
+     "acciones": 55,
+     "sugerencias": 0,
+     "recuperaciones": 222200.0,
+     "porAclarar": 33812700.0,
+     "nombre": "Cultura"
+    }
+   ],
+   "subtotal": {
+    "auditorias": 154,
+    "universo": 3865251604300.0,
+    "muestra": 3489044914800.0,
+    "representatividad": 90.27,
+    "solventadas": 361,
+    "conAcciones": 388,
+    "R": 123,
+    "RD": 101,
+    "PEFCF": 21,
+    "SA": 0,
+    "PRAS": 153,
+    "PO": 102,
+    "acciones": 500,
+    "sugerencias": 0,
+    "recuperaciones": 179095900.0,
+    "porAclarar": 1409175100.0
+   }
+  },
+  {
+   "grupo": "Desarrollo Económico",
+   "sectores": [
+    {
+     "auditorias": 4,
+     "universo": 191071270300.0,
+     "muestra": 68360754600.0,
+     "representatividad": 35.78,
+     "solventadas": 7,
+     "conAcciones": 6,
+     "R": 11,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 11,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Hacienda y Crédito Público"
+    },
+    {
+     "auditorias": 3,
+     "universo": 65590480100.0,
+     "muestra": 57625186100.0,
+     "representatividad": 87.86,
+     "solventadas": 0,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Defensa Nacional"
+    },
+    {
+     "auditorias": 9,
+     "universo": 38371818400.0,
+     "muestra": 36381326900.0,
+     "representatividad": 94.81,
+     "solventadas": 24,
+     "conAcciones": 15,
+     "R": 10,
+     "RD": 13,
+     "PEFCF": 5,
+     "SA": 0,
+     "PRAS": 10,
+     "PO": 13,
+     "acciones": 51,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 17556600.0,
+     "nombre": "Agricultura y Desarrollo Rural"
+    },
+    {
+     "auditorias": 10,
+     "universo": 13732938400.0,
+     "muestra": 10250547100.0,
+     "representatividad": 74.64,
+     "solventadas": 32,
+     "conAcciones": 19,
+     "R": 21,
+     "RD": 4,
+     "PEFCF": 1,
+     "SA": 0,
+     "PRAS": 5,
+     "PO": 1,
+     "acciones": 32,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 116800.0,
+     "nombre": "Economía"
+    },
+    {
+     "auditorias": 5,
+     "universo": 23640404000.0,
+     "muestra": 22984004600.0,
+     "representatividad": 97.22,
+     "solventadas": 13,
+     "conAcciones": 7,
+     "R": 0,
+     "RD": 8,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 8,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Trabajo y Previsión Social"
+    },
+    {
+     "auditorias": 20,
+     "universo": 153769032000.0,
+     "muestra": 77484067100.0,
+     "representatividad": 50.39,
+     "solventadas": 38,
+     "conAcciones": 31,
+     "R": 0,
+     "RD": 21,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 9,
+     "PO": 5,
+     "acciones": 35,
+     "sugerencias": 0,
+     "recuperaciones": 191674900.0,
+     "porAclarar": 87918100.0,
+     "nombre": "Turismo"
+    },
+    {
+     "auditorias": 1,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 3,
+     "conAcciones": 3,
+     "R": 0,
+     "RD": 2,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 2,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Educación Pública"
+    },
+    {
+     "auditorias": 1,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 4,
+     "conAcciones": 4,
+     "R": 0,
+     "RD": 4,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 4,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado"
+    },
+    {
+     "auditorias": 1,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 2,
+     "conAcciones": 0,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 0,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Instituto Mexicano del Seguro Social"
+    },
+    {
+     "auditorias": 14,
+     "universo": 78232341200.0,
+     "muestra": 71131332300.0,
+     "representatividad": 90.92,
+     "solventadas": 31,
+     "conAcciones": 56,
+     "R": 9,
+     "RD": 19,
+     "PEFCF": 1,
+     "SA": 0,
+     "PRAS": 33,
+     "PO": 20,
+     "acciones": 82,
+     "sugerencias": 0,
+     "recuperaciones": 10725500.0,
+     "porAclarar": 274503700.0,
+     "nombre": "Marina"
+    },
+    {
+     "auditorias": 3,
+     "universo": 0.0,
+     "muestra": 0.0,
+     "representatividad": null,
+     "solventadas": 2,
+     "conAcciones": 9,
+     "R": 0,
+     "RD": 21,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 0,
+     "PO": 0,
+     "acciones": 21,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 0.0,
+     "nombre": "Desarrollo Agrario, Territorial y Urbano"
+    },
+    {
+     "auditorias": 6,
+     "universo": 4242718800.0,
+     "muestra": 4012465400.0,
+     "representatividad": 94.57,
+     "solventadas": 9,
+     "conAcciones": 14,
+     "R": 6,
+     "RD": 4,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 2,
+     "PO": 4,
+     "acciones": 16,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 25346500.0,
+     "nombre": "Medio Ambiente y Recursos Naturales"
+    },
+    {
+     "auditorias": 6,
+     "universo": 1614371900.0,
+     "muestra": 1287598000.0,
+     "representatividad": 79.76,
+     "solventadas": 11,
+     "conAcciones": 12,
+     "R": 0,
+     "RD": 15,
+     "PEFCF": 1,
+     "SA": 0,
+     "PRAS": 3,
+     "PO": 1,
+     "acciones": 20,
+     "sugerencias": 0,
+     "recuperaciones": 18609400.0,
+     "porAclarar": 130400.0,
+     "nombre": "Energía"
+    },
+    {
+     "auditorias": 10,
+     "universo": 19775690500.0,
+     "muestra": 14929750100.0,
+     "representatividad": 75.5,
+     "solventadas": 15,
+     "conAcciones": 59,
+     "R": 53,
+     "RD": 0,
+     "PEFCF": 2,
+     "SA": 0,
+     "PRAS": 45,
+     "PO": 10,
+     "acciones": 110,
+     "sugerencias": 0,
+     "recuperaciones": 0.0,
+     "porAclarar": 266230700.0,
+     "nombre": "Humanidades, Ciencias, Tecnologías e Innovación"
+    },
+    {
+     "auditorias": 20,
+     "universo": 31176492600.0,
+     "muestra": 19484071800.0,
+     "representatividad": 62.5,
+     "solventadas": 43,
+     "conAcciones": 52,
+     "R": 38,
+     "RD": 0,
+     "PEFCF": 6,
+     "SA": 0,
+     "PRAS": 24,
+     "PO": 3,
+     "acciones": 71,
+     "sugerencias": 0,
+     "recuperaciones": 22111900.0,
+     "porAclarar": 72852400.0,
+     "nombre": "Comisión Federal de Electricidad"
+    },
+    {
+     "auditorias": 33,
+     "universo": 343726002900.0,
+     "muestra": 215111396400.0,
+     "representatividad": 62.58,
+     "solventadas": 27,
+     "conAcciones": 67,
+     "R": 43,
+     "RD": 4,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 17,
+     "PO": 17,
+     "acciones": 81,
+     "sugerencias": 0,
+     "recuperaciones": 287600300.0,
+     "porAclarar": 1762959800.0,
+     "nombre": "Petróleos Mexicanos"
+    },
+    {
+     "auditorias": 29,
+     "universo": 82554876500.0,
+     "muestra": 43150026200.0,
+     "representatividad": 52.27,
+     "solventadas": 54,
+     "conAcciones": 86,
+     "R": 15,
+     "RD": 5,
+     "PEFCF": 3,
+     "SA": 0,
+     "PRAS": 20,
+     "PO": 64,
+     "acciones": 107,
+     "sugerencias": 0,
+     "recuperaciones": 32135900.0,
+     "porAclarar": 1215580700.0,
+     "nombre": "Infraestructura, Comunicaciones y Transportes"
+    }
+   ],
+   "subtotal": {
+    "auditorias": 175,
+    "universo": 1047498437600.0,
+    "muestra": 642192526600.0,
+    "representatividad": 61.31,
+    "solventadas": 315,
+    "conAcciones": 440,
+    "R": 206,
+    "RD": 120,
+    "PEFCF": 19,
+    "SA": 0,
+    "PRAS": 168,
+    "PO": 138,
+    "acciones": 651,
+    "sugerencias": 0,
+    "recuperaciones": 562857900.0,
+    "porAclarar": 3723195700.0
+   }
+  },
+  {
+   "grupo": "Gasto Federalizado",
+   "sectores": [
+    {
+     "auditorias": 99,
+     "universo": 127131114300.0,
+     "muestra": 124065827100.0,
+     "representatividad": 97.59,
+     "solventadas": 305,
+     "conAcciones": 46,
+     "R": 9,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 23,
+     "PO": 14,
+     "acciones": 46,
+     "sugerencias": 0,
+     "recuperaciones": 1577200.0,
+     "porAclarar": 83643400.0,
+     "nombre": "Seguridad"
+    },
+    {
+     "auditorias": 36,
+     "universo": 311569945100.0,
+     "muestra": 281939792200.0,
+     "representatividad": 90.49,
+     "solventadas": 340,
+     "conAcciones": 154,
+     "R": 60,
+     "RD": 0,
+     "PEFCF": 6,
+     "SA": 1,
+     "PRAS": 54,
+     "PO": 37,
+     "acciones": 158,
+     "sugerencias": 0,
+     "recuperaciones": 58594000.0,
+     "porAclarar": 1591227300.0,
+     "nombre": "Salud"
+    },
+    {
+     "auditorias": 328,
+     "universo": 826284999800.0,
+     "muestra": 770356756400.0,
+     "representatividad": 93.23,
+     "solventadas": 1573,
+     "conAcciones": 711,
+     "R": 36,
+     "RD": 0,
+     "PEFCF": 136,
+     "SA": 0,
+     "PRAS": 243,
+     "PO": 303,
+     "acciones": 718,
+     "sugerencias": 0,
+     "recuperaciones": 932373300.0,
+     "porAclarar": 3989749500.0,
+     "nombre": "Educación"
+    },
+    {
+     "auditorias": 93,
+     "universo": 118229694300.0,
+     "muestra": 118229694300.0,
+     "representatividad": 100.0,
+     "solventadas": 348,
+     "conAcciones": 140,
+     "R": 9,
+     "RD": 0,
+     "PEFCF": 5,
+     "SA": 2,
+     "PRAS": 34,
+     "PO": 90,
+     "acciones": 140,
+     "sugerencias": 0,
+     "recuperaciones": 69059000.0,
+     "porAclarar": 666384500.0,
+     "nombre": "Infraestructura Social"
+    },
+    {
+     "auditorias": 44,
+     "universo": 13350681500.0,
+     "muestra": 13350681500.0,
+     "representatividad": 100.0,
+     "solventadas": 82,
+     "conAcciones": 13,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 5,
+     "PO": 8,
+     "acciones": 13,
+     "sugerencias": 0,
+     "recuperaciones": 30193200.0,
+     "porAclarar": 36216900.0,
+     "nombre": "Saneamiento Financiero"
+    },
+    {
+     "auditorias": 33,
+     "universo": 63845027100.0,
+     "muestra": 63845027100.0,
+     "representatividad": 100.0,
+     "solventadas": 66,
+     "conAcciones": 35,
+     "R": 0,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 1,
+     "PRAS": 28,
+     "PO": 16,
+     "acciones": 45,
+     "sugerencias": 0,
+     "recuperaciones": 109648800.0,
+     "porAclarar": 1391487600.0,
+     "nombre": "Infraestructura Física, Saneamiento Financiero"
+    },
+    {
+     "auditorias": 27,
+     "universo": 800793400.0,
+     "muestra": 797851000.0,
+     "representatividad": 99.63,
+     "solventadas": 265,
+     "conAcciones": 173,
+     "R": 14,
+     "RD": 0,
+     "PEFCF": 6,
+     "SA": 1,
+     "PRAS": 91,
+     "PO": 49,
+     "acciones": 161,
+     "sugerencias": 0,
+     "recuperaciones": 2083600.0,
+     "porAclarar": 275608200.0,
+     "nombre": "Protección Social"
+    },
+    {
+     "auditorias": 1069,
+     "universo": 60991528000.0,
+     "muestra": 60991528000.0,
+     "representatividad": 100.0,
+     "solventadas": 1484,
+     "conAcciones": 2625,
+     "R": 15,
+     "RD": 0,
+     "PEFCF": 28,
+     "SA": 88,
+     "PRAS": 1220,
+     "PO": 1903,
+     "acciones": 3254,
+     "sugerencias": 0,
+     "recuperaciones": 18098400.0,
+     "porAclarar": 35647789800.0,
+     "nombre": "Aportaciones Federales, Participaciones Federales y Otros"
+    },
+    {
+     "auditorias": 98,
+     "universo": 1244482173900.0,
+     "muestra": 1078878913900.0,
+     "representatividad": 86.69,
+     "solventadas": 440,
+     "conAcciones": 267,
+     "R": 29,
+     "RD": 0,
+     "PEFCF": 43,
+     "SA": 81,
+     "PRAS": 114,
+     "PO": 54,
+     "acciones": 321,
+     "sugerencias": 0,
+     "recuperaciones": 11238600.0,
+     "porAclarar": 15680829600.0,
+     "nombre": "Participaciones Federales"
+    },
+    {
+     "auditorias": 19,
+     "universo": 953975800.0,
+     "muestra": 953975800.0,
+     "representatividad": 100.0,
+     "solventadas": 50,
+     "conAcciones": 11,
+     "R": 2,
+     "RD": 0,
+     "PEFCF": 0,
+     "SA": 0,
+     "PRAS": 5,
+     "PO": 3,
+     "acciones": 10,
+     "sugerencias": 0,
+     "recuperaciones": 20695600.0,
+     "porAclarar": 767800.0,
+     "nombre": "Otros"
+    }
+   ],
+   "subtotal": {
+    "auditorias": 1846,
+    "universo": 2767639933200.0,
+    "muestra": 2513410047300.0,
+    "representatividad": 90.81,
+    "solventadas": 4953,
+    "conAcciones": 4175,
+    "R": 174,
+    "RD": 0,
+    "PEFCF": 224,
+    "SA": 174,
+    "PRAS": 1817,
+    "PO": 2477,
+    "acciones": 4866,
+    "sugerencias": 0,
+    "recuperaciones": 1253561700.0,
+    "porAclarar": 59363704600.0
+   }
+  }
+ ],
+ "gasto": {
+  "auditorias": 2259,
+  "universo": 8058994451000.0,
+  "muestra": 6947103917500.0,
+  "representatividad": 86.2,
+  "solventadas": 5837,
+  "conAcciones": 5154,
+  "R": 568,
+  "RD": 287,
+  "PEFCF": 278,
+  "SA": 174,
+  "PRAS": 2202,
+  "PO": 2762,
+  "acciones": 6271,
+  "sugerencias": 1,
+  "recuperaciones": 2005459800.0,
+  "porAclarar": 65169097600.0
+ },
+ "federalizadoTotal": {
+  "auditorias": 1846,
+  "universo": 2767639933200.0,
+  "muestra": 2513410047300.0,
+  "representatividad": 90.81,
+  "solventadas": 4953,
+  "conAcciones": 4175,
+  "R": 174,
+  "RD": 0,
+  "PEFCF": 224,
+  "SA": 174,
+  "PRAS": 1817,
+  "PO": 2477,
+  "acciones": 4866,
+  "sugerencias": 0,
+  "recuperaciones": 1253561700.0,
+  "porAclarar": 59363704600.0
+ },
+ "entidades": [
+  {
+   "entidad": "Aguascalientes",
+   "total": {
+    "auditorias": 34,
+    "universo": 31493487100.0,
+    "muestra": 29339932500.0,
+    "acciones": 63,
+    "PO": 31,
+    "PRAS": 24,
+    "recuperaciones": 2210800.0,
+    "porAclarar": 343280100.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 85586400.0,
+     "recuperaciones": 416900.0,
+     "acciones": 27
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 11,
+     "porAclarar": 209643000.0,
+     "recuperaciones": 0.0,
+     "acciones": 23
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 6,
+     "porAclarar": 48050700.0,
+     "recuperaciones": 1793900.0,
+     "acciones": 13
+    }
+   ]
+  },
+  {
+   "entidad": "Baja California",
+   "total": {
+    "auditorias": 29,
+    "universo": 74995661400.0,
+    "muestra": 66214870500.0,
+    "acciones": 59,
+    "PO": 28,
+    "PRAS": 21,
+    "recuperaciones": 10789900.0,
+    "porAclarar": 558402200.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 12968300.0,
+     "recuperaciones": 10789900.0,
+     "acciones": 14
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 7,
+     "porAclarar": 455092200.0,
+     "recuperaciones": 0.0,
+     "acciones": 17
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 5,
+     "porAclarar": 90341700.0,
+     "recuperaciones": 0.0,
+     "acciones": 28
+    }
+   ]
+  },
+  {
+   "entidad": "Baja California Sur",
+   "total": {
+    "auditorias": 30,
+    "universo": 23353252800.0,
+    "muestra": 20482548700.0,
+    "acciones": 39,
+    "PO": 20,
+    "PRAS": 9,
+    "recuperaciones": 65352800.0,
+    "porAclarar": 225069600.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 21,
+     "porAclarar": 31222700.0,
+     "recuperaciones": 65166100.0,
+     "acciones": 20
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 5,
+     "porAclarar": 141104400.0,
+     "recuperaciones": 0.0,
+     "acciones": 13
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 4,
+     "porAclarar": 52742500.0,
+     "recuperaciones": 186700.0,
+     "acciones": 6
+    }
+   ]
+  },
+  {
+   "entidad": "Campeche",
+   "total": {
+    "auditorias": 36,
+    "universo": 24978469800.0,
+    "muestra": 22237655200.0,
+    "acciones": 102,
+    "PO": 44,
+    "PRAS": 44,
+    "recuperaciones": 27858100.0,
+    "porAclarar": 759697900.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 152339400.0,
+     "recuperaciones": 17062500.0,
+     "acciones": 25
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 13,
+     "porAclarar": 300171300.0,
+     "recuperaciones": 0.0,
+     "acciones": 51
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 6,
+     "porAclarar": 307187200.0,
+     "recuperaciones": 10795600.0,
+     "acciones": 26
+    }
+   ]
+  },
+  {
+   "entidad": "Chiapas",
+   "total": {
+    "auditorias": 64,
+    "universo": 130088977500.0,
+    "muestra": 122274162400.0,
+    "acciones": 227,
+    "PO": 122,
+    "PRAS": 70,
+    "recuperaciones": 19330300.0,
+    "porAclarar": 4499707300.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 20,
+     "porAclarar": 1231917300.0,
+     "recuperaciones": 19215800.0,
+     "acciones": 59
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 38,
+     "porAclarar": 2667136500.0,
+     "recuperaciones": 114500.0,
+     "acciones": 124
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 6,
+     "porAclarar": 600653500.0,
+     "recuperaciones": 0.0,
+     "acciones": 44
+    }
+   ]
+  },
+  {
+   "entidad": "Chihuahua",
+   "total": {
+    "auditorias": 60,
+    "universo": 77401019000.0,
+    "muestra": 74785679600.0,
+    "acciones": 234,
+    "PO": 95,
+    "PRAS": 123,
+    "recuperaciones": 5602900.0,
+    "porAclarar": 2521898200.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 1210533100.0,
+     "recuperaciones": 4453300.0,
+     "acciones": 35
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 35,
+     "porAclarar": 913681300.0,
+     "recuperaciones": 1149600.0,
+     "acciones": 150
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 8,
+     "porAclarar": 397683800.0,
+     "recuperaciones": 0.0,
+     "acciones": 49
+    }
+   ]
+  },
+  {
+   "entidad": "Ciudad de México",
+   "total": {
+    "auditorias": 31,
+    "universo": 146636687700.0,
+    "muestra": 112909926600.0,
+    "acciones": 104,
+    "PO": 36,
+    "PRAS": 51,
+    "recuperaciones": 1948300.0,
+    "porAclarar": 2143468900.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 14,
+     "porAclarar": 1040000.0,
+     "recuperaciones": 1948300.0,
+     "acciones": 9
+    },
+    {
+     "ente": "Alcaldías",
+     "auditorias": 16,
+     "porAclarar": 2142428900.0,
+     "recuperaciones": 0.0,
+     "acciones": 92
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 1,
+     "porAclarar": 0.0,
+     "recuperaciones": 0.0,
+     "acciones": 3
+    }
+   ]
+  },
+  {
+   "entidad": "Coahuila de Zaragoza",
+   "total": {
+    "auditorias": 62,
+    "universo": 58645342000.0,
+    "muestra": 54553214400.0,
+    "acciones": 183,
+    "PO": 120,
+    "PRAS": 48,
+    "recuperaciones": 9530000.0,
+    "porAclarar": 1379079000.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 309448500.0,
+     "recuperaciones": 9508800.0,
+     "acciones": 37
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 38,
+     "porAclarar": 928601700.0,
+     "recuperaciones": 0.0,
+     "acciones": 117
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 7,
+     "porAclarar": 141028800.0,
+     "recuperaciones": 21200.0,
+     "acciones": 29
+    }
+   ]
+  },
+  {
+   "entidad": "Colima",
+   "total": {
+    "auditorias": 32,
+    "universo": 19832095800.0,
+    "muestra": 18491911900.0,
+    "acciones": 78,
+    "PO": 44,
+    "PRAS": 16,
+    "recuperaciones": 1623600.0,
+    "porAclarar": 485672800.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 217756000.0,
+     "recuperaciones": 1623600.0,
+     "acciones": 36
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 10,
+     "porAclarar": 190205400.0,
+     "recuperaciones": 0.0,
+     "acciones": 22
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 3,
+     "porAclarar": 77711400.0,
+     "recuperaciones": 0.0,
+     "acciones": 20
+    }
+   ]
+  },
+  {
+   "entidad": "Durango",
+   "total": {
+    "auditorias": 41,
+    "universo": 41154518800.0,
+    "muestra": 38918314600.0,
+    "acciones": 117,
+    "PO": 59,
+    "PRAS": 30,
+    "recuperaciones": 7753500.0,
+    "porAclarar": 1370464600.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 18,
+     "porAclarar": 608147300.0,
+     "recuperaciones": 5624400.0,
+     "acciones": 46
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 16,
+     "porAclarar": 680240000.0,
+     "recuperaciones": 0.0,
+     "acciones": 52
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 7,
+     "porAclarar": 82077300.0,
+     "recuperaciones": 2129100.0,
+     "acciones": 19
+    }
+   ]
+  },
+  {
+   "entidad": "México",
+   "total": {
+    "auditorias": 151,
+    "universo": 293164981300.0,
+    "muestra": 268721011500.0,
+    "acciones": 453,
+    "PO": 255,
+    "PRAS": 166,
+    "recuperaciones": 283536900.0,
+    "porAclarar": 13198744600.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 16,
+     "porAclarar": 6037739900.0,
+     "recuperaciones": 125600900.0,
+     "acciones": 36
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 125,
+     "porAclarar": 7068706800.0,
+     "recuperaciones": 0.0,
+     "acciones": 383
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 10,
+     "porAclarar": 92297900.0,
+     "recuperaciones": 157936000.0,
+     "acciones": 34
+    }
+   ]
+  },
+  {
+   "entidad": "Guanajuato",
+   "total": {
+    "auditorias": 70,
+    "universo": 110037951600.0,
+    "muestra": 99748981900.0,
+    "acciones": 146,
+    "PO": 77,
+    "PRAS": 57,
+    "recuperaciones": 208106600.0,
+    "porAclarar": 2422230000.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 16,
+     "porAclarar": 854917800.0,
+     "recuperaciones": 55927100.0,
+     "acciones": 13
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 46,
+     "porAclarar": 1505629300.0,
+     "recuperaciones": 0.0,
+     "acciones": 126
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 8,
+     "porAclarar": 61682900.0,
+     "recuperaciones": 152179500.0,
+     "acciones": 7
+    }
+   ]
+  },
+  {
+   "entidad": "Guerrero",
+   "total": {
+    "auditorias": 49,
+    "universo": 87214196700.0,
+    "muestra": 76564781500.0,
+    "acciones": 125,
+    "PO": 48,
+    "PRAS": 49,
+    "recuperaciones": 27404800.0,
+    "porAclarar": 505328200.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 18,
+     "porAclarar": 5284200.0,
+     "recuperaciones": 18528400.0,
+     "acciones": 20
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 28,
+     "porAclarar": 474686600.0,
+     "recuperaciones": 0.0,
+     "acciones": 89
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 3,
+     "porAclarar": 25357400.0,
+     "recuperaciones": 8876400.0,
+     "acciones": 16
+    }
+   ]
+  },
+  {
+   "entidad": "Hidalgo",
+   "total": {
+    "auditorias": 65,
+    "universo": 68649119800.0,
+    "muestra": 60945661700.0,
+    "acciones": 163,
+    "PO": 96,
+    "PRAS": 46,
+    "recuperaciones": 5821400.0,
+    "porAclarar": 2152707600.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 1304873700.0,
+     "recuperaciones": 4334700.0,
+     "acciones": 38
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 40,
+     "porAclarar": 810384600.0,
+     "recuperaciones": 5300.0,
+     "acciones": 112
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 6,
+     "porAclarar": 37449300.0,
+     "recuperaciones": 1481400.0,
+     "acciones": 13
+    }
+   ]
+  },
+  {
+   "entidad": "Jalisco",
+   "total": {
+    "auditorias": 77,
+    "universo": 158812077100.0,
+    "muestra": 145469089900.0,
+    "acciones": 228,
+    "PO": 109,
+    "PRAS": 97,
+    "recuperaciones": 102053800.0,
+    "porAclarar": 2196802500.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 16,
+     "porAclarar": 92676100.0,
+     "recuperaciones": 13059600.0,
+     "acciones": 19
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 54,
+     "porAclarar": 1919339800.0,
+     "recuperaciones": 19300.0,
+     "acciones": 176
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 7,
+     "porAclarar": 184786600.0,
+     "recuperaciones": 88974900.0,
+     "acciones": 33
+    }
+   ]
+  },
+  {
+   "entidad": "Michoacán de Ocampo",
+   "total": {
+    "auditorias": 48,
+    "universo": 98607929700.0,
+    "muestra": 87118982300.0,
+    "acciones": 108,
+    "PO": 44,
+    "PRAS": 45,
+    "recuperaciones": 62050800.0,
+    "porAclarar": 1003568500.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 151400600.0,
+     "recuperaciones": 17384700.0,
+     "acciones": 14
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 25,
+     "porAclarar": 548511700.0,
+     "recuperaciones": 0.0,
+     "acciones": 71
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 4,
+     "porAclarar": 303656200.0,
+     "recuperaciones": 44666100.0,
+     "acciones": 23
+    }
+   ]
+  },
+  {
+   "entidad": "Morelos",
+   "total": {
+    "auditorias": 58,
+    "universo": 39876814000.0,
+    "muestra": 35838088900.0,
+    "acciones": 233,
+    "PO": 113,
+    "PRAS": 100,
+    "recuperaciones": 3745500.0,
+    "porAclarar": 3168922700.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 1909195400.0,
+     "recuperaciones": 3745500.0,
+     "acciones": 101
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 36,
+     "porAclarar": 1248981700.0,
+     "recuperaciones": 0.0,
+     "acciones": 109
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 5,
+     "porAclarar": 10745600.0,
+     "recuperaciones": 0.0,
+     "acciones": 23
+    }
+   ]
+  },
+  {
+   "entidad": "Nayarit",
+   "total": {
+    "auditorias": 41,
+    "universo": 30913712400.0,
+    "muestra": 28206690300.0,
+    "acciones": 118,
+    "PO": 54,
+    "PRAS": 41,
+    "recuperaciones": 2775600.0,
+    "porAclarar": 914952100.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 333268800.0,
+     "recuperaciones": 2775600.0,
+     "acciones": 36
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 20,
+     "porAclarar": 504849000.0,
+     "recuperaciones": 0.0,
+     "acciones": 51
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 4,
+     "porAclarar": 76834300.0,
+     "recuperaciones": 0.0,
+     "acciones": 31
+    }
+   ]
+  },
+  {
+   "entidad": "Nuevo León",
+   "total": {
+    "auditorias": 73,
+    "universo": 118233476800.0,
+    "muestra": 110492714100.0,
+    "acciones": 215,
+    "PO": 123,
+    "PRAS": 80,
+    "recuperaciones": 28545400.0,
+    "porAclarar": 4539726300.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 2204976300.0,
+     "recuperaciones": 13444800.0,
+     "acciones": 45
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 51,
+     "porAclarar": 1747330800.0,
+     "recuperaciones": 0.0,
+     "acciones": 151
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 3,
+     "porAclarar": 587419200.0,
+     "recuperaciones": 15100600.0,
+     "acciones": 19
+    }
+   ]
+  },
+  {
+   "entidad": "Oaxaca",
+   "total": {
+    "auditorias": 60,
+    "universo": 103860920700.0,
+    "muestra": 95204278900.0,
+    "acciones": 159,
+    "PO": 92,
+    "PRAS": 46,
+    "recuperaciones": 9958000.0,
+    "porAclarar": 2024366400.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 20,
+     "porAclarar": 190487300.0,
+     "recuperaciones": 9239900.0,
+     "acciones": 28
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 34,
+     "porAclarar": 1699196300.0,
+     "recuperaciones": 0.0,
+     "acciones": 120
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 6,
+     "porAclarar": 134682800.0,
+     "recuperaciones": 718100.0,
+     "acciones": 11
+    }
+   ]
+  },
+  {
+   "entidad": "Puebla",
+   "total": {
+    "auditorias": 62,
+    "universo": 119375606500.0,
+    "muestra": 103796681100.0,
+    "acciones": 145,
+    "PO": 66,
+    "PRAS": 68,
+    "recuperaciones": 15022700.0,
+    "porAclarar": 931226700.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 2380300.0,
+     "recuperaciones": 10853500.0,
+     "acciones": 7
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 37,
+     "porAclarar": 927668400.0,
+     "recuperaciones": 0.0,
+     "acciones": 122
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 8,
+     "porAclarar": 1178000.0,
+     "recuperaciones": 4169200.0,
+     "acciones": 16
+    }
+   ]
+  },
+  {
+   "entidad": "Querétaro",
+   "total": {
+    "auditorias": 38,
+    "universo": 49254694500.0,
+    "muestra": 43656855900.0,
+    "acciones": 68,
+    "PO": 33,
+    "PRAS": 26,
+    "recuperaciones": 4262800.0,
+    "porAclarar": 243680100.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 16,
+     "porAclarar": 0.0,
+     "recuperaciones": 381600.0,
+     "acciones": 3
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 18,
+     "porAclarar": 193075600.0,
+     "recuperaciones": 0.0,
+     "acciones": 60
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 4,
+     "porAclarar": 50604500.0,
+     "recuperaciones": 3881200.0,
+     "acciones": 5
+    }
+   ]
+  },
+  {
+   "entidad": "Quintana Roo",
+   "total": {
+    "auditorias": 38,
+    "universo": 36681922700.0,
+    "muestra": 34003186100.0,
+    "acciones": 24,
+    "PO": 13,
+    "PRAS": 2,
+    "recuperaciones": 5885400.0,
+    "porAclarar": 428296200.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 18,
+     "porAclarar": 0.0,
+     "recuperaciones": 3306500.0,
+     "acciones": 6
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 11,
+     "porAclarar": 427938700.0,
+     "recuperaciones": 0.0,
+     "acciones": 14
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 9,
+     "porAclarar": 357500.0,
+     "recuperaciones": 2578900.0,
+     "acciones": 4
+    }
+   ]
+  },
+  {
+   "entidad": "San Luis Potosí",
+   "total": {
+    "auditorias": 82,
+    "universo": 60497987100.0,
+    "muestra": 54881511100.0,
+    "acciones": 206,
+    "PO": 123,
+    "PRAS": 63,
+    "recuperaciones": 24583200.0,
+    "porAclarar": 592466900.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 18,
+     "porAclarar": 34050600.0,
+     "recuperaciones": 4244200.0,
+     "acciones": 16
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 59,
+     "porAclarar": 553574500.0,
+     "recuperaciones": 0.0,
+     "acciones": 176
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 5,
+     "porAclarar": 4841800.0,
+     "recuperaciones": 20339000.0,
+     "acciones": 14
+    }
+   ]
+  },
+  {
+   "entidad": "Sinaloa",
+   "total": {
+    "auditorias": 42,
+    "universo": 67620490800.0,
+    "muestra": 65218380300.0,
+    "acciones": 73,
+    "PO": 41,
+    "PRAS": 23,
+    "recuperaciones": 3621600.0,
+    "porAclarar": 574629600.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 0.0,
+     "recuperaciones": 2708700.0,
+     "acciones": 5
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 18,
+     "porAclarar": 493967500.0,
+     "recuperaciones": 0.0,
+     "acciones": 58
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 5,
+     "porAclarar": 80662100.0,
+     "recuperaciones": 912900.0,
+     "acciones": 10
+    }
+   ]
+  },
+  {
+   "entidad": "Sonora",
+   "total": {
+    "auditorias": 48,
+    "universo": 65254424000.0,
+    "muestra": 60637003600.0,
+    "acciones": 108,
+    "PO": 49,
+    "PRAS": 38,
+    "recuperaciones": 1966200.0,
+    "porAclarar": 619575300.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 52921900.0,
+     "recuperaciones": 1966200.0,
+     "acciones": 19
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 23,
+     "porAclarar": 522522100.0,
+     "recuperaciones": 0.0,
+     "acciones": 79
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 8,
+     "porAclarar": 44131300.0,
+     "recuperaciones": 0.0,
+     "acciones": 10
+    }
+   ]
+  },
+  {
+   "entidad": "Tabasco",
+   "total": {
+    "auditorias": 41,
+    "universo": 64264271400.0,
+    "muestra": 59307610300.0,
+    "acciones": 172,
+    "PO": 53,
+    "PRAS": 102,
+    "recuperaciones": 12021800.0,
+    "porAclarar": 1586016500.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 482581200.0,
+     "recuperaciones": 5799900.0,
+     "acciones": 69
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 17,
+     "porAclarar": 984223500.0,
+     "recuperaciones": 0.0,
+     "acciones": 71
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 5,
+     "porAclarar": 119211800.0,
+     "recuperaciones": 6221900.0,
+     "acciones": 32
+    }
+   ]
+  },
+  {
+   "entidad": "Tamaulipas",
+   "total": {
+    "auditorias": 66,
+    "universo": 70075449500.0,
+    "muestra": 61964968300.0,
+    "acciones": 106,
+    "PO": 52,
+    "PRAS": 44,
+    "recuperaciones": 33210300.0,
+    "porAclarar": 401691700.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 19,
+     "porAclarar": 10848600.0,
+     "recuperaciones": 31865300.0,
+     "acciones": 9
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 43,
+     "porAclarar": 387407500.0,
+     "recuperaciones": 0.0,
+     "acciones": 91
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 4,
+     "porAclarar": 3435600.0,
+     "recuperaciones": 1345000.0,
+     "acciones": 6
+    }
+   ]
+  },
+  {
+   "entidad": "Tlaxcala",
+   "total": {
+    "auditorias": 82,
+    "universo": 30418552600.0,
+    "muestra": 26819241700.0,
+    "acciones": 191,
+    "PO": 108,
+    "PRAS": 68,
+    "recuperaciones": 5943200.0,
+    "porAclarar": 418325300.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 16,
+     "porAclarar": 31081100.0,
+     "recuperaciones": 331400.0,
+     "acciones": 23
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 60,
+     "porAclarar": 369246200.0,
+     "recuperaciones": 0.0,
+     "acciones": 151
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 6,
+     "porAclarar": 17998000.0,
+     "recuperaciones": 5611800.0,
+     "acciones": 17
+    }
+   ]
+  },
+  {
+   "entidad": "Veracruz de Ignacio de la Llave",
+   "total": {
+    "auditorias": 126,
+    "universo": 161620594000.0,
+    "muestra": 144529392900.0,
+    "acciones": 357,
+    "PO": 207,
+    "PRAS": 134,
+    "recuperaciones": 3584700.0,
+    "porAclarar": 4460779700.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 18,
+     "porAclarar": 1896723200.0,
+     "recuperaciones": 2486500.0,
+     "acciones": 70
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 104,
+     "porAclarar": 2523328600.0,
+     "recuperaciones": 1098200.0,
+     "acciones": 272
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 4,
+     "porAclarar": 40727900.0,
+     "recuperaciones": 0.0,
+     "acciones": 15
+    }
+   ]
+  },
+  {
+   "entidad": "Yucatán",
+   "total": {
+    "auditorias": 48,
+    "universo": 48315758900.0,
+    "muestra": 45274236200.0,
+    "acciones": 134,
+    "PO": 81,
+    "PRAS": 28,
+    "recuperaciones": 5627600.0,
+    "porAclarar": 1989665200.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 17,
+     "porAclarar": 753196600.0,
+     "recuperaciones": 5627600.0,
+     "acciones": 45
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 26,
+     "porAclarar": 1158659900.0,
+     "recuperaciones": 0.0,
+     "acciones": 70
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 5,
+     "porAclarar": 77808700.0,
+     "recuperaciones": 0.0,
+     "acciones": 19
+    }
+   ]
+  },
+  {
+   "entidad": "Zacatecas",
+   "total": {
+    "auditorias": 39,
+    "universo": 39330678100.0,
+    "muestra": 34402639900.0,
+    "acciones": 92,
+    "PO": 40,
+    "PRAS": 41,
+    "recuperaciones": 3383900.0,
+    "porAclarar": 702211300.0
+   },
+   "desglose": [
+    {
+     "ente": "Gobierno del Estado",
+     "auditorias": 18,
+     "porAclarar": 0.0,
+     "recuperaciones": 2991800.0,
+     "acciones": 18
+    },
+    {
+     "ente": "Municipios",
+     "auditorias": 18,
+     "porAclarar": 652728800.0,
+     "recuperaciones": 0.0,
+     "acciones": 65
+    },
+    {
+     "ente": "Otros",
+     "auditorias": 3,
+     "porAclarar": 49482500.0,
+     "recuperaciones": 392100.0,
+     "acciones": 9
+    }
+   ]
+  }
+ ],
+ "federalizadoCoordinadoras": {
+  "auditorias": 23,
+  "universo": 216978811100.0,
+  "muestra": 210399842500.0,
+  "representatividad": 96.97,
+  "solventadas": 19,
+  "conAcciones": 36,
+  "R": 17,
+  "RD": 0,
+  "PEFCF": 1,
+  "SA": 0,
+  "PRAS": 17,
+  "PO": 1,
+  "acciones": 36,
+  "sugerencias": 0,
+  "recuperaciones": 248449400.0,
+  "porAclarar": 1050400.0
+ },
+ "sha256": "49732c8da82eaafc6bdd67b0b0ce5c995773294d7e48e5412ad73e5c4fe15d66"
+}

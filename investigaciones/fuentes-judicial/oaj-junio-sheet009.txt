@@ -1,0 +1,122 @@
+Bitmap
+ |  | SECRETARÍA EJECUTIVA DE ADMINISTRACIÓN |  | 
+ |  | DIRECCIÓN GENERAL DE PROGRAMACIÓN, PRESUPUESTO Y TESORERÍA |  | 
+ |  |  |  | 
+ |  | Presupuesto de Egresos 2026 |  | 
+Bitmap
+ | 
+ÓRGANO DE ADMINISTRACIÓN JUDICIAL |  | 
+ |  | Cifras en pesos |  | 
+PARTIDA | DENOMINACIÓN | PAGADO |  | 
+(01/04/26 al 30/06/26) |  | 
+11301 | Sueldo   base | 2,783,044,934.84 |  | 
+12201 | Sueldos   base al personal eventual | 16,485,887.29 |  | 
+13101 | Prima   quinquenal por años de servicios efectivos prestados | 96,638,646.02 |  | 
+13201 | Primas   de vacaciones y dominical | 826,015.48 |  | 
+13202 | Aguinaldo   o gratificación de fin de año | 9,337.39 |  | 
+13301 | Remuneraciones   por horas extraordinarias | 66,352,441.99 |  | 
+13404 | Compensaciones   por servicios eventuales | 2,267,853.21 |  | 
+14101 | Aportaciones   al ISSSTE | 465,911,016.81 |  | 
+14105 | Aportaciones   al seguro de cesantía en edad avanzada y vejez | 99,520,748.14 |  | 
+14201 | Aportaciones   al FOVISSSTE | 156,725,570.44 |  | 
+14301 | Aportaciones   al sistema de ahorro para el retiro | 62,690,200.49 |  | 
+14302 | Depósitos   para el ahorro solidario | 89,356,156.94 |  | 
+14401 | Cuotas   para el seguro de vida del personal | 56,190,403.87 |  | 
+14404 | Cuotas   para el seguro de separación individualizado | 641,346,864.64 |  | 
+14405 | Cuotas   para el seguro colectivo de retiro | 1,765,186.35 |  | 
+15301 | Prestaciones   de retiro | 259,487,326.55 |  | 
+15401 | Prestaciones   establecidas por condiciones generales de trabajo | 1,151,389,030.58 |  | 
+15402 | Compensación   garantizada | 3,474,288,661.82 |  | 
+15403 | Asignaciones   adicionales al sueldo | 2,415,319,253.80 |  | 
+15901 | Otras   prestaciones sociales y económicas | 875,474,032.54 |  | 
+15902 | Pago   por riesgo | 91,081,195.83 |  | 
+21101 | Materiales   y útiles de oficina | 2,238,199.87 |  | 
+21201 | Materiales   y útiles de impresión y reproducción | 31,811.96 |  | 
+21401 | Materiales   y útiles consumibles para el procesamiento en equipos y bienes informáticos | 19,711,077.72 |  | 
+21501 | Material   de Apoyo Informativo | 182,968.25 |  | 
+21601 | Material   de limpieza | 4,638,396.65 |  | 
+21701 | Materiales   y suministros para CENDI y estancia infantil | 150,201.45 |  | 
+22104 | Productos   alimenticios para personas en las instalaciones | 113,386,649.26 |  | 
+22106 | Productos   alimenticios para el personal derivado de actividades extraordinarias | 274,737.85 |  | 
+22301 | Utensilios   para el servicio de alimentación | 24,328.28 |  | 
+24101 | Productos   minerales no metálicos | 8,309.27 |  | 
+24201 | Cemento   y productos de concreto | 3,886.16 |  | 
+24301 | Cal,   yeso y productos de yeso | 45,159.26 |  | 
+24401 | Madera   y productos de madera | 7,338.28 |  | 
+24501 | Vidrio   y productos de vidrio | 4,886.62 |  | 
+24601 | Material   eléctrico y electrónico | 1,616,385.58 |  | 
+24701 | Artículos   metálicos para la construcción | 114,268.88 |  | 
+24801 | Materiales   complementarios | 439,859.12 |  | 
+24901 | Otros   materiales y artículos de construcción y reparación | 1,383,552.72 |  | 
+25201 | Plaguicidas,   abonos y fertilizantes | 2,117.00 |  | 
+25301 | Medicinas   y productos farmacéuticos | 291,118.51 |  | 
+25401 | Materiales,   accesorios y suministros médicos | 220,572.92 |  | 
+25501 | Materiales,   accesorios y suministros de laboratorio | 49,092.96 |  | 
+26103 | Combustibles,   lubricantes y aditivos para vehículos terrestres, aéreos, marítimos,   lacustres y fluviales destinados a servicios administrativos | 2,152,667.83 |  | 
+26104 | Combustibles,   lubricantes y aditivos para vehículos terrestres, aéreos, marítimos,   lacustres y fluviales asignados a servidores públicos | 45,666,911.54 |  | 
+26105 | Combustibles,   lubricantes y aditivos para maquinaria, equipo de producción y servicios   administrativos | 410,597.98 |  | 
+27101 | Vestuario   y uniformes | 126,038.23 |  | 
+27201 | Prendas   de protección personal | 12,102.80 |  | 
+27501 | Blancos   y otros productos textiles, excepto prendas de vestir | 150.80 |  | 
+29101 | Herramientas   menores | 1,735,538.10 |  | 
+29201 | Refacciones   y accesorios menores de edificios | 986,267.80 |  | 
+29301 | Refacciones   y accesorios menores de mobiliario y equipo de administración, educacional y   recreativo | 5,765.50 |  | 
+29401 | Refacciones   y accesorios para equipo de cómputo y telecomunicaciones | 504,298.48 |  | 
+29601 | Refacciones   y accesorios menores de equipo de transporte | 689,261.94 |  | 
+31101 | Servicio   de energía eléctrica | 103,304,120.87 |  | 
+31201 | Servicio   de gas | 122,702.94 |  | 
+31301 | Servicio   de agua | 11,220,817.29 |  | 
+31401 | Servicio   telefónico tradicional | 1,070,796.64 |  | 
+31501 | Servicio   de telefonía celular | 4,027,599.98 |  | 
+31603 | Servicios   de internet | 90,868.57 |  | 
+31701 | Servicio   de conducción de señales analógicas y digitales | 2,579,227.00 |  | 
+31702 | Servicios   de procesamiento de información | 165,334.60 |  | 
+31801 | Servicio   postal | 18,977,555.20 |  | 
+31902 | Contratación   de otros servicios | 3,907,153.08 |  | 
+32201 | Arrendamiento   de edificios y locales | 143,137,181.60 |  | 
+32503 | Arrendamiento   de vehículos terrestres, aéreos, marítimos, lacustres y fluviales para   servicios administrativos | 11,379,510.61 |  | 
+32601 | Arrendamiento   de maquinaria y equipo | 5,148.00 |  | 
+32701 | Patentes,   derechos de autor, regalías y otros | 11,816,427.00 |  | 
+32903 | Otros   arrendamientos | 44,141.20 |  | 
+33104 | Otras   asesorías para la operación de programas | 2,143,503.02 |  | 
+33105 | Servicios   relacionados con procedimientos jurisdiccionales | 23,645,306.30 |  | 
+33602 | Otros   servicios comerciales | 797,919.72 |  | 
+33604 | Impresión   y elaboración de material informativo derivado de la operación y   administración | 35,637.14 |  | 
+33605 | Información   en medios masivos derivado de la operación y administración del PJF | 16,228,051.24 |  | 
+33801 | Servicios   de vigilancia | 75,594,140.46 |  | 
+33901 | Subcontratación   de servicios con terceros | 19,226,802.42 |  | 
+34101 | Servicios   bancarios y financieros | 1,090,768.07 |  | 
+34501 | Seguros   de bienes patrimoniales | 13,073,817.40 |  | 
+34502 | Seguros   de vehículos | -3,427,490.77 |  | 
+34701 | Fletes   y maniobras | 2,944,986.12 |  | 
+35101 | Mantenimiento   y conservación de inmuebles | 21,582,939.67 |  | 
+35201 | Mantenimiento   y conservación de mobiliario y equipo de administración | 2,101,837.18 |  | 
+35301 | Mantenimiento   y conservación de bienes informáticos | 3,318.06 |  | 
+35401 | Instalación,   reparación y mantenimiento de equipo e instrumental médico y de laboratorio | 1,856.00 |  | 
+35501 | Mantenimiento   y conservación de vehículos terrestres | 1,678,719.10 |  | 
+35701 | Mantenimiento   y conservación de maquinaria y equipo | 162,798.41 |  | 
+35801 | Servicios   de lavandería, limpieza e higiene | 69,782,098.97 |  | 
+35901 | Servicios   de jardinería y fumigación | 9,906,859.19 |  | 
+36101 | Difusión   de mensajes sobre programas y actividades gubernamentales | 108,344.00 |  | 
+36901 | Servicios   relacionados con monitoreo de información en medios masivos | 692,752.00 |  | 
+37104 | Pasajes   aéreos nacionales para servidores públicos en el desempeño de comisiones y   funciones oficiales | 4,699,370.78 |  | 
+37201 | Pasajes   terrestres nacionales para labores en campo y de supervisión | 138,215.22 |  | 
+37207 | Pasajes   terrestres nacionales por medio electrónico | 181,500.00 |  | 
+37504 | Viáticos   nacionales para servidores públicos en el desempeño de funciones oficiales | 9,375,568.03 |  | 
+37701 | Instalación   del personal | 273,731.00 |  | 
+37801 | Servicios   integrales para apoyo a personas físicas y morales ajenas al PJF | 308,825.43 |  | 
+37804 | Gastos   de alimentación de los detenidos en los Centros de Justicia Penal Federal | 100.00 |  | 
+38201 | Gastos   de orden social | 203,316.68 |  | 
+39101 | Funerales   y pagas de defunción | 2,512,757.04 |  | 
+39202 | Otros   impuestos y derechos | 5,849,812.22 |  | 
+39401 | Erogaciones   por resoluciones por autoridad competente | 15,852,647.63 |  | 
+39801 | Impuesto   sobre nóminas | 351,621,304.35 |  | 
+39802 | Otros   impuestos derivados de una relación laboral | 10,239,787.88 |  | 
+43901 | Subsidios   para capacitación, prácticas profesionales y becas | 3,448,698.87 |  | 
+44101 | Gastos   relacionados con actividades culturales, deportivas y de ayuda extraordinaria | 162,198.99 |  | 
+44116 | Apoyo   médico complementario | -63,342.89 |  | 
+44201 | Formación,   difusión, vinculación e investigación para la igualdad y la inclusión de   personas en situación de vulnerabilidad | 69,600.00 |  | 
+52101 | Equipos   y aparatos audiovisuales | 5,535.52 |  | 
+53101 | Equipo   médico y de laboratorio | 11,900.00 |  | 
+Total general |  | 13,977,400,359.62 |  | 
+ |  |  |  | 

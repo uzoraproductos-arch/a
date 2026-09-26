@@ -1,0 +1,19 @@
+# Auditavisión — los saltos de línea son parte del archivo, no un detalle
+# del sistema operativo de quien edita.
+#
+# index.html, los cuatro .js, el .css y CONTEXT.md están escritos con CRLF.
+# README.md, AGENTS.md y herramientas/sello.py, con LF. Git no debe convertir
+# ni unos ni otros.
+#
+# El riesgo es concreto: en Windows, `core.autocrlf=true` viene activado por
+# omisión, y al primer commit normalizaría las más de 48,000 líneas del
+# proyecto. Donde debería haber un cambio de tres renglones aparecería un diff
+# del tamaño del repositorio entero, y con él se perdería la trazabilidad de
+# qué se tocó y por qué —que en una plataforma de fiscalización es justamente
+# lo que hay que poder demostrar—.
+#
+# `-text` apaga toda conversión y conserva los bytes tal cual, en cualquier
+# sistema y con cualquier configuración local. El diff se sigue leyendo como
+# texto.
+
+* -text

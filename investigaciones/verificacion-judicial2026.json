@@ -1,0 +1,20 @@
+{
+  "unidades_pef": 5,
+  "pef_filas": 183,
+  "scjn_partidas": 127,
+  "oaj_ueg": 140,
+  "oaj_ueg_partida": 1768,
+  "circuitos": 32,
+  "pagos_ueg_circuitos": 277230888.48,
+  "scjn_total_agosto": {
+    "original": 5208743404.0,
+    "ampliaciones": 1630537675.97,
+    "reducciones": 1609208564.4,
+    "neto": 21329111.57,
+    "modificado": 5230072515.57,
+    "compromiso": 1707440588.3,
+    "ejercido": 3253791174.26,
+    "disponible": 268840753.01
+  },
+  "validaciones": "sumas PEF, conceptos, partidas SCJN, UEG OAJ y detalle UEG/partida conciliados exactamente"
+}

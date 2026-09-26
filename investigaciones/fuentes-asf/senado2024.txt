@@ -1,0 +1,1262 @@
+PAGINA 1
+Grupo Funcional Gobierno
+1
+Cámara de Senadores
+Gestión Financiera
+Auditoría De Cumplimiento: 2024-0-01200-19-0032-2025
+Modalidad: Presencial
+Núm. de Auditoría: 32
+Criterios de Selección
+Esta auditoría se seleccionó con base en los criterios establecidos por la Auditoría Superior de 
+la Federación para la integración del Programa Anual de Auditorías para la Fiscalización 
+Superior de la Cuenta Pública 2024 en consideración de lo dispuesto en el Plan Estratégico de 
+la ASF.
+Objetivo
+Fiscalizar la gestión financiera para verificar que el presupuesto asignado a la Cámara de 
+Senadores del H. Congreso de la Unión, se ejerció y registró conforme a los montos 
+aprobados, y de acuerdo con las disposiciones legales y normativas.
+Alcance
+INGRESOS EGRESOS
+Miles de Pesos Miles de Pesos
+Universo Seleccionado 5,045,707.6 5,045,707.6
+Muestra Auditada 5,045,707.6 3,560,328.5
+Representatividad de la Muestra 100.0% 70.6%
+El universo de ingresos se integró por 5,045,707.6 miles de pesos, conformados por 
+4,955,059.3 miles de pesos de recursos fiscales, y 90,648.3 miles de pesos de ingresos 
+excedentes, los cuales se obtuvieron principalmente por rendimientos financieros en cuenta 
+de cheques e inversiones y otros conceptos, entre otros, correspondientes al total de los 
+recursos reportados en el Estado Analítico de Ingresos de la Cuenta Pública 2024, de los cuales 
+se revisó el 100.0%.
+El universo de egresos, por 5,045,707.6 miles de pesos, correspondió al total presentado 
+como gastos en el Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación 
+por Objeto del Gasto de la Cuenta Pública 2024, de los cuales 4,978,781.8 miles de pesos se 
+pagaron al 31 de diciembre de 2024 y los restantes 66,925.8 miles de pesos durante el primer 
+bimestre del ejercicio 2025, con recursos presupuestales del ejercicio 2024, por tratarse de 
+compromisos devengados al cierre de éste, de los que se revisó un importe de 3,560,328.5 
+miles de pesos, que representan el 70.6%, como se señala a continuación:
+PAGINA 2
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024 
+2 
+INTEGRACIÓN DE LA MUESTRA REVISADA
+(Miles de pesos)
+Capítulo Descripción Universo Seleccionado Muestra Porciento
+1000 Servicios Personales 3,274,276.0 3,274,276.0 100.0%
+2000 Materiales y Suministros 83,699.0 11,072.3 13.2%
+3000 Servicios Generales 1,653,842.6 269,304.6 16.3%
+4000 Transferencias, Asignaciones, Subsidios y Otras 
+Ayudas 8,751.2 2,974.5 34.0%
+5000 Bienes muebles, inmuebles e intangibles 19,761.0 2,701.1 13.7%
+6000 Inversión Pública 5,377.8 0.0 0.0%
+ Total: 5,045,707.6 3,560,328.5 70.6%
+FUENTE: Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación por Objeto del Gasto de la Cuenta 
+Pública 2024.
+Antecedentes
+El Senado de la República es una de las dos cámaras del Congreso de la Unión de México, 
+siendo la otra, la Cámara de Diputados; es una institución legislativa encargada de representar 
+a las entidades federativas de México, así como de participar en la elaboración y aprobación 
+de leyes y en la toma de decisiones importantes para el país, cuyas facultades exclusivas se 
+encuentran establecidas en el artículo 76 de la Constitución Política de los Estados Unidos 
+Mexicanos; asimismo, de conformidad con el artículo 56 de dicha Constitución, la Cámara de 
+Senadores se encuentra integrada por 128 senadoras y senadores.
+Por otra parte, para el desahogo de sus tareas legislativas y administrativas, cuenta con las 
+secretarías generales de Servicios Parlamentarios y de Servicios Administrativos, la Tesorería 
+y la Contraloría Interna, cuyos titulares son designados y removidos por el Pleno a propuesta 
+de la Mesa Directiva o de la Junta de Coordinación Política.
+De acuerdo con la Ley Orgánica del Congreso General de los Estados Unidos Mexicanos, la 
+Secretaría General de Servicios Administrativos tiene a su cargo la administración de los 
+recursos humanos y materiales, así como los servicios generales, de informática, jurídicos y 
+de seguridad de la Cámara
+Resultados
+1. Con el fin de verificar que, durante 2024, la Cámara de Senadores contó con controles 
+internos para el logro de sus objetivos y que éstos se implementaron conforme a las políticas 
+y los procedimientos autorizados, se analizó la información y documentación proporcionada 
+por la Cámara de Senadores, con lo cual se determinó lo siguiente:
+PAGINA 3
+Grupo Funcional Gobierno
+3
+Ambiente de control
+La Cámara de Senadores contó con el Manual General de Organización, autorizado por la 
+Mesa Directiva en abril de 2024, y con el “Estatuto de los Servicios Parlamentarios, 
+Administrativos y Técnicos del Senado de la República”, publicado en el Diario Oficial de la 
+Federación el 17 de mayo de dicho ejercicio, en los cuales, se establecieron la estructura, los 
+objetivos y las funciones de las unidades parlamentarias, administrativas y técnicas que 
+proporcionan los recursos y servicios para su operación; asimismo, se constató que en la 
+página de internet institucional se difunde el Código de Ética de los Servidores Públicos de la 
+Cámara de Senadores, emitido por la Contraloría Interna en febrero de 2019.
+Administración de riesgos
+En el ejercicio fiscal 2024, la Secretaría General de Servicios Administrativos (SGSA) contó con 
+el Sistema de Evaluación del Desempeño, como una herramienta para la valoración objetiva 
+del desempeño, bajo los principios de verificación del grado de cumplimiento de las metas 
+comprometidas por las Unidades Parlamentarias, Administrativas y Técnicas, con base en 
+indicadores estratégicos y de gestión, con la finalidad de que esta medición apoye la toma de 
+decisiones. 
+Actividades de control
+El marco normativo de los servicios parlamentarios, administrativos y técnicos del Senado de 
+la República consta de alrededor de 205 disposiciones, respecto de las que se constató que 
+se encontraron en proceso de revisión para su modernización debido a las modificaciones de 
+leyes y reglamentos en materia laboral, civil, mercantil, fiscal y de transparencia entre otras, 
+actividades que coordinó la SGSA y enviará a la Mesa Directiva para su autorización.
+Por otra parte, el 8 de abril de 2025 se autorizó el “Acuerdo de la Mesa Directiva por el que 
+se Establecen las Facultades y Atribuciones de la Unidad de Anticorrupción y Transparencia 
+de la Contraloría Interna del Senado de la República”, en el cual se establecieron sus 
+facultades y atribuciones, con la finalidad de garantizar el acceso a la información pública y la 
+protección de datos personales en posesión de sujetos obligados, así como procurar el 
+cumplimiento de las obligaciones de transparencia del Senado.
+Información y comunicación
+La Cámara de Senadores contó con los sistemas Integral de Administración-Contabilidad, de 
+Administración Presupuestal y Financiera, Integral de Administración-Recursos humanos, de 
+Información de Viáticos y Pasajes, de Compras Directas y de Evaluación del Desempeño 
+Institucional, para llevar el control de los registros contables y presupuestables, así como 
+conciliaciones bancarias, informes diarios de bancos y de movimientos e incidencias 
+relacionadas con recursos humanos.
+PAGINA 4
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+4
+Supervisión
+En marzo de 2025, la Contraloría Interna de la Cámara de Senadores presentó a la Mesa 
+Directiva el “Informe Ejecutivo Semestral de Auditoría del Ejercicio Presupuestal de la Cámara 
+de Senadores Enero–Junio 2024”, en el cual se indican los alcances, observaciones y 
+recomendaciones derivadas de cinco auditorías practicadas en materia de adecuaciones y 
+remodelaciones de espacios, padrón electrónico de proveedores, servicio de fotocopiado e 
+impresión, así como de software y licenciamiento.
+En conclusión, se constató que, en 2024, la Cámara de Senadores contó con controles internos 
+que le permitieron dar cumplimiento a sus objetivos y que éstos se implementaron conforme 
+a las políticas y los procedimientos autorizados.
+Lo anterior se realizó en cumplimiento de la normativa.
+2. Información presentada en la Cuenta Pública
+ Presupuesto asignado y adecuaciones presupuestarias
+El 25 de noviembre de 2023, se publicó en el Diario Oficial de la Federación (DOF) el 
+“Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2024”, en donde se indicó el 
+techo de gasto presupuestal para la Cámara de Senadores, y el 8 de diciembre de 2023 se 
+publicó en el DOF el calendario del presupuesto autorizado, ambos por 4,955,182.0 miles de 
+pesos de recursos fiscales, en cumplimiento de la normativa.
+Se verificó que la Cámara de Senadores tuvo una ampliación neta de recursos por 90,525.6 
+miles de pesos, mediante 26 adecuaciones presupuestarias, por lo que, al cierre del ejercicio 
+fiscal 2024, el presupuesto modificado totalizó 5,045,707.6 miles de pesos.
+ Ingresos
+En el Estado Analítico de Ingresos de la Cuenta Pública 2024, la Cámara de Senadores reportó 
+la recaudación de 5,045,707.6 miles de pesos, como se presenta a continuación:
+INGRESOS DE LA CÁMARA DE SENADORES, 2024
+(Miles de pesos)
+Rubro de ingreso Estimado Ampliaciones y 
+reducciones Modificado Recaudado
+Productos y Aprovechamientos - 90,648.3 90,648.3 90,648.3 
+Transferencias, Asignaciones, Subsidios y 
+Subvenciones, y Pensiones y Jubilaciones 4,955,182.0 -122.7 4,955,059.3 4,955,059.3 
+Total: 4,955,182.0 90,525.6 5,045,707.6 5,045,707.6
+FUENTE: Estado Analítico de Ingresos de la Cuenta Pública 2024.
+PAGINA 5
+Grupo Funcional Gobierno
+5 
+La Cámara de Senadores recibió recursos fiscales por 4,955,182.0 miles de pesos, mediante 
+12 Cuentas por Liquidar Certificadas, y se constató que su registro contable se realizó en la 
+cuenta 4221 “Transferencias Internas y Asignaciones del Sector Público”, en cumplimiento de 
+la normativa.
+Posteriormente, mediante dos líneas de captura, se reintegraron a la Tesorería de la 
+Federación 122.7 miles de pesos, por lo que resultaron ingresos fiscales netos por 4,955,059.3 
+miles de pesos.
+Cabe señalar que la principal actividad de la Cámara de Senadores es legislar, su función no 
+es recaudadora, por tanto, no tuvo ingresos de gestión; no obstante, en 2024, obtuvo ingresos 
+por un total 90,648.3 miles de pesos, principalmente por rendimientosfinancieros de cuentas 
+bancarias e inversiones, entre otros conceptos, los cuales se incorporaron a su presupuesto 
+mediante 13 adecuaciones presupuestarias y se registraron contablemente en las cuentas 
+4319 “Otros Ingresos Financieros” y 4399 “Otros Ingresos y Beneficios Varios”, en 
+cumplimiento de la normativa.
+ Egresos
+De acuerdo con el Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación 
+por Objeto del Gasto, de la Cuenta Pública 2024, el presupuesto modificado al 31 de 
+diciembre de 2024, por 5,045,707.6 miles de pesos, se devengó en su totalidad y se habían 
+pagado 4,978,781.8 miles de pesos, como se muestra a continuación:
+INTEGRACIÓN DEL PRESUPUESTO DEVENGADO Y PAGADO, POR CAPÍTULO DE GASTO
+EJERCICIO FISCAL 2024
+(Miles de pesos)
+Capítulo Descripción Devengado Pagado Pendiente de 
+Pago
+1000 Servicios Personales 3,274,276.0 3,259,885.8 14,390.2
+2000 Materiales y Suministros 83,699.0 81,146.6 2,552.4
+3000 Servicios Generales 1,653,842.6 1,610,384.5 43,458.1
+4000 Transferencias, Asignaciones, Subsidios y 
+Otras Ayudas 8,751.2 8,751.2 0.0
+5000 Bienes Muebles, Inmuebles e Intangibles 19,761.0 13,235.9 6,525.1
+6000 Inversión Pública 5,377.8 5,377.8 0.0
+ Total: 5,045,707.6 4,978,781.8 66,925.8
+FUENTE: Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación por Objeto del Gasto de la Cuenta 
+Pública 2024.
+De lo anterior se constató que en los sistemas Integral de Administración-Contabilidad (SIA) 
+y de Administración Presupuestal y Financiera (SAPFIN) de la Cámara de Senadores se 
+registraron gastos del ejercicio 2024 por 5,045,707.6 miles de pesos, los cuales coincidieron 
+con los reportados en el Estado Analítico del Ejercicio del Presupuesto de Egresos en 
+PAGINA 6
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+6
+Clasificación por Objeto del Gasto de la Cuenta Pública 2024, en cumplimiento de la 
+normativa.
+Cabe señalar que en el Estado de Actividades del mismo ejercicio, la Cámara de Senadores 
+reportó gastos por 180,832.3 miles de pesos que corresponden a gastos contables no 
+presupuestarios por depreciación de bienes muebles e inmuebles y amortización de activos 
+intangibles, que se registraron en la cuenta contable 5518 “Disminución de Bienes por 
+Pérdida; Obsolescencia y Deterioros”, y se presentaron en la Conciliación entre los Egresos 
+Presupuestarios y los Gastos Contables, de la Cuenta Pública 2024, en cumplimiento de la 
+normativa
+ Pasivos
+En lo que respecta a los 66,925.8 miles de pesos que se encontraban pendientes de pago al 
+cierre del ejercicio 2024, se constató que se registraron en el SAPFIN y que se pagaron durante 
+el primer bimestre del ejercicio 2025, con recursos presupuestales del ejercicio 2024, por 
+tratarse de compromisos devengados al cierre de este último, y de los cuales se 
+proporcionaron 137 Cuentas por Liquidar autorizadas por las áreas correspondientes, en 
+cumplimiento de la normativa.
+En conclusión, se constató que, en el ejercicio fiscal 2024, a la Cámara de Senadores se le 
+asignó un presupuesto de 4,955,182.0 miles de pesos de recursos fiscales y mediante 26 
+adecuaciones presupuestales tuvo una ampliación de recursos de 90,525.6 miles de pesos, 
+provenientes de otros ingresos obtenidos, principalmente, por rendimientos financieros en 
+cuentas bancarias e inversiones, por lo que, al cierre de 2024, el presupuesto modificado fue 
+de 5,045,707.6 miles de pesos de recursos fiscales, el cual se devengó totalmente; asimismo, 
+se verificó que los ingresos y gastos se registraron presupuestal y contablemente, en 
+cumplimiento de la normativa.
+3. Servicios personales
+En 2024, la Cámara de Senadores devengó y pagó 3,274,276.0 miles de pesos de servicios 
+personales, los cuales se reportaron en el Estado Analítico del Ejercicio del Presupuesto de 
+Egresos de la Cuenta Pública 2024 y se distribuyeron en las partidas presupuestales 
+siguientes:
+PAGINA 7
+Grupo Funcional Gobierno
+7 
+INTEGRACIÓN DE GASTOS POR SERVICIOS PERSONALES EN 2024
+(Miles de pesos)
+Partida Concepto de la partida de gasto Importe 
+pagado
+11101 Dietas (Ramos Autónomos) 288,168.8
+11301 Sueldos base 218,821.5
+12101 Honorarios 1,107,760.6
+13101 Prima quinquenal por años de servicios efectivos prestados 3,534.6
+13201 Primas de vacaciones y dominical 8,962.2
+13202 Aguinaldo o gratificación de fin de año 188,499.6
+13403 Compensaciones por servicios especiales 254,251.4
+13404 Compensaciones por servicios eventuales 1,081.7
+14101 Aportaciones al ISSSTE 44,178.4
+14105 Aportaciones al seguro de cesantía en edad avanzada y vejez 14,198.7
+14201 Aportaciones al FOVISSSTE 22,360.2
+14301 Aportaciones al Sistema de Ahorro para el Retiro 8,944.1
+14302 Depósitos para el ahorro solidario 7,115.3
+14401 Cuotas para el seguro de vida del personal civil 1,594.6
+14405 Cuotas para el seguro colectivo de retiro 215.4
+15301 Prestaciones de retiro 121,056.3
+15401 Prestaciones establecidas por condiciones generales de trabajo o contratos 
+colectivos de trabajo 261,290.0
+15402 Compensación garantizada 509,679.2
+15403 Asignaciones adicionales al sueldo 73,324.5
+15901 Otras prestaciones 60,210.5
+17102 Estímulos al personal operativo 79,028.4
+ Total: 3,274,276.0
+FUENTE: Estado del Ejercicio del Presupuesto del 2024 y base de datos proporcionados por la Cámara de 
+Senadores.
+ISSSTE: Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado.
+FOVISSSTE: Fondo de la Vivienda del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado.
+Se analizó la base de datos del pago de dietas a 128 senadores, de remuneraciones a 1,389 
+empleados de base, confianza y servicio técnico, y de 4,645 prestadores de servicios 
+profesionales contratados bajo la figura de honorarios asimilados a salarios, así como la 
+balanza de comprobación, los pagos de las cuotas obrero-patronales de seguridad social, 
+otras prestaciones sociales y económicas, y los tabuladores de sueldos y salarios, respecto de 
+lo cual se comprobó lo siguiente:
+• En la Cuenta Pública se reportó un presupuesto devengado y pagado por 3,274,276.0 
+miles de pesos, que coincidió con el pago de dietas, de la nómina y de las demás 
+prestaciones económicas y de seguridad social que se otorgaron al personal de la 
+Cámara, en cumplimiento de la normativa.
+PAGINA 8
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+8
+• No se realizaron pagos por remuneraciones mayores que las establecidas para el 
+Presidente de la República, ni se realizaron pagos con cheque, en cumplimiento de la 
+normativa.
+• Los pagos por concepto de dietas, percepciones ordinarias y extraordinarias se 
+pagaron de forma correcta y por los periodos en los que el personal ocupó sus cargos, 
+en cumplimiento de la normativa.
+• La Cámara de Senadores efectuó las retenciones del Impuesto Sobre la Renta y de las 
+cuotas de seguridad social, y las enteró a las autoridades correspondientes, en 
+cumplimiento de la normativa.
+• Se comprobó que las nóminas y sus pagos se registraron en los sistemas Integral de 
+Administración-Contabilidad, Integral de Administración-Recursos Humanos y de 
+Administración Presupuestal y Financiera; no obstante, se identificó que el pago del 
+concepto “Prestaciones de retiro” se registró en el sistema de Recursos Humanos en 
+una partida distinta a la que le correspondía de acuerdo con el Clasificador por Objeto 
+del Gasto.
+Al respecto, en el transcurso de la auditoría, y con motivo de la intervención de la 
+Auditoría Superior de la Federación, el Secretario General de Servicios 
+Administrativos instruyó las acciones de control necesarias consistentes en la 
+homologación de las partidas presupuestarias en los sistemas antes referidos, con lo 
+que se atendió lo observado.
+Asistencia de los Senadores
+La Cámara de Senadores proporcionó la base de datos del Sistema Parlamentario de 
+Asistencia, Votación y Audio Automatizado respecto de los periodos de sesiones celebrados 
+durante el ejercicio 2024, con cuyo análisis se comprobó que se corresponden con las 
+registradas en las gacetas publicadas en su página electrónica oficial, y se constató que en los 
+casos en los que no se justificaron las inasistencias se efectuaron los respectivos descuentos, 
+en cumplimiento de la normativa.
+En conclusión, se comprobó que la Cámara de Senadores dio cumplimiento a lo establecido 
+en los tabuladores de sueldos autorizados, enteró las retenciones de terceros institucionales, 
+acreditó la asistencia de los Senadores y realizó los pagos de dietas y de servicios personales, 
+de conformidad con la normativa.
+4. Para la revisión de los egresos de la Cámara de Senadores correspondientes a los capítulos 
+de gasto de materiales y suministros, servicios generales, transferencias, asignaciones, 
+subsidios y otras ayudas, y bienes muebles, inmuebles e intangibles, se seleccionaron pagos 
+por un total de 286,052.5 miles de pesos, que representan el 16.2% del importe total erogado 
+en esos capítulos, integrados por 21 instrumentos jurídicos por 250,217.0 miles de pesos, el 
+PAGINA 9
+Grupo Funcional Gobierno
+9
+entero del Impuesto sobre Nómina por 32,861.0 miles de pesos y el pago de cuotas a 
+organismos internacionales por 2,974.5 miles de pesos.
+Respecto de los pagos efectuados por 250,217.0 miles de pesos, la integración de los 21 
+instrumentos jurídicos seleccionados para su revisión es la siguiente:
+MUESTRA DE LOS CONTRATOS PAGADOS EN EL EJERCICIO FISCAL 2024
+(Miles de pesos)
+Cons. Partidas 
+de gasto Instrumento Jurídico Proveedor Importe 
+Pagado
+1 21601 ADQ/DGRMSG/2024/02/006
+ADQ/DGRMSG/2024/02/006-I Cocina y Aseo Institucional, S.A. de C.V. 4,886.6 
+2
+26105
+29801
+35701
+SERV/DGRMSG/2024/01/013 Grupo México Tecnoindustrial, S.A. de C.V. 3,074.6 
+3
+21101
+21601
+24101
+24201
+24301
+24501
+24601
+24701
+24901
+25601
+29101
+29201
+ADQ/DGRMSG/2024/05/023
+ADQ/DGRMSG/2024/05/023-I
+ADQ/DGRMSG/2024/05/023-II
+Abastecedora y Distribuidora del Sureste García 
+Hnos., S.A. de C.V. 5,132.9 
+4 33603 SERV/DGRMSG/2024/03/053 Persona Física 1 2,913.6 
+5 35701 SERV/DGRMSG/2024/04/062
+SERV/DGRMSG/2024/04/062-I Equipos y Climas de México, S.A. de C.V. 11,205.0 
+6 35701 SERV/DGRMSG/2024/01/035 Lemonroy Business Solutions, S.A. de C.V. 2,995.0 
+7 35701 SERV/DGRMSG/2024/01/009 Blue & Green Servicios y Soluciones al Medio 
+Ambiente, S.A. de C.V. 5,807.8 
+8 34501 SERV/DGRMSG/2024/01/037 Grupo Mexicano de Seguros, S.A. de C.V. 34,788.3 
+9 31902 SERV/DGRMSG/2024/04/059
+SERV/DGRMSG/2024/04/059-I
+Compañía Operadora de Estacionamientos 
+Mexicanos, S.A. de C.V. 5,731.9 
+10 31902 SERV/DGRMSG/2024/01/006
+SERV/DGRMSG/2024/01/006-I
+Estrategia en Estacionamientos y Valet Parking, 
+S.A. de C.V. 9,953.4 
+11 32701 ADQ/DGRMSG/156-II/11/21 Microsoft México, S. de R.L. de C.V. 1,760.7 
+12 33201 SERV/DGRMSG/2024/11/083 Construcciones y Acabados Mohusa, S.A de C.V. 1,849.6 
+13 33801 SERV/DGRMSG/2024/01/010 Policía Auxiliar de la Ciudad de México 76,563.7 
+14 35101 SERV/DGRMSG/2024/01/022 Elevadores Schindler, S.A. de C.V. 3,179.0 
+15 35701 SERV/DGRMSG/2024/01/026
+SERV/DGRMSG/2024/01/026-I Johnson Controls BTS México, S.A. de C.V. 9,012.0 
+16 35701 SERV/DGRMSG/2024/01/031 Dhimex Ciudad de México, S.A. de C.V. 3,498.9 
+17 32701
+33104 SERV/DGRMSG/2024/01/004 Uninet, S.A. de C.V. 5,156.2 
+18 32701
+33104 SERV/DGRMSG/2024/01/021 Sinteg en México, S.A. de C.V. 2,970.0 
+PAGINA 10
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+10
+Cons. Partidas 
+de gasto Instrumento Jurídico Proveedor Importe 
+Pagado
+19 32701
+33104 SERV/DGRMSG/2024/01/047 Guzdan Services, S.A. de C.V. 15,776.0 
+20 32701
+51501 SERV/DGRMSG/2024/07/079 Tagsec Group, S.A. de C.V. 17,315.6 
+21 33303 SERV/DGRMSG/2024/01/041
+SERV/DGRMSG/2024/01/041-I Silent4Business, S.A. de C.V. 26,646.2 
+Total: 250,217.0 
+FUENTE: Base de datos de contratos vigentes en 2024 proporcionada por la Cámara de Senadores.
+Se verificó que los proveedores no se incluyeron entre los sancionados por la entonces 
+Secretaría de la Función Pública, actualmente Secretaría Anticorrupción y Buen Gobierno, ni 
+por la Secretaría de la Contraloría General de la Ciudad de México; tampoco se publicaron 
+circulares en el Diario Oficial de la Federación que instruyeran la abstención de contratarlos, 
+ni se incluyeron en el directorio de proveedores y contratistas sancionados del Servicio de 
+Administración Tributaria. Asimismo, se constató que en todos los casos los Comprobantes 
+Fiscales Digitales por Internet (CFDI) que sustentan las erogaciones cumplieron con los 
+requisitos fiscales y se encuentran vigentes.
+Cabe señalar que el detalle de la revisión de cada uno de los contratos, de las cuotas a 
+organismos internacionales y el entero del Impuesto Sobre Nómina se desarrollará en los 
+resultados posteriores de este informe.
+En conclusión, se comprobó que de los 21 instrumentos jurídicos que se seleccionaron para 
+revisión, ninguno de los proveedores contó con antecedentes de incumplimientos o 
+sanciones que impidieran su contratación, y que en todos los casos los CFDI cumplieron con 
+los requisitos fiscales y se encuentran vigentes, en cumplimiento de la normativa.
+5. Revisión del contrato número ADQ/DGRMSG/2024/02/006 y su modificatorio 
+ADQ/DGRMSG/2024/02/006-I con Cocina y Aseo Institucional, S.A. de C.V.
+El 25 de enero de 2024, la Cámara de Senadores publicó en el Diario Oficial de la Federación 
+la convocatoria de la licitación pública nacional número SEN/DGRMSG/L031/2024 para el 
+“Suministro de materiales de limpieza” integrado por cinco partidas. El 8 de febrero de 2024 
+se realizó la presentación y apertura de las proposiciones, y el 16 del mismo mes se emitió el 
+fallo con el que se adjudicó el contrato a la persona moral Cocina y Aseo Institucional, S.A de 
+C.V., en cumplimiento de la normativa.
+Por lo anterior, el 21 de febrero de 2024 se suscribió el contrato abierto número 
+ADQ/DGRMSG/2024/02/006, por un importe mínimo de 1,884.7 miles de pesos y un máximo 
+de 4,712.0 miles de pesos, con vigencia del 21 de febrero al 31 de diciembre de 2024. 
+Asimismo, el 28 de octubre de 2024, la Cámara de Senadores suscribió el convenio 
+modificatorio del contrato abierto número ADQ/DGRMSG/2024/02/006-I, para ampliar el 
+PAGINA 11
+Grupo Funcional Gobierno
+11
+importe máximo a 4,886.9 miles de pesos, correspondiente al 25.0% de la partida 1, en 
+cumplimiento de la normativa.
+Para acreditar la recepción de los materiales de limpieza, se proporcionaron los 
+Comprobantes Fiscales Digitales por Internet (CFDI) con sellos del almacén, las remisiones y 
+los formatos de solicitud emitidos por la Cámara, en cumplimiento del Anexo Técnico del 
+contrato.
+Asimismo, se contó con evidencia de su distribución o entrega a los usuarios finales, en 
+cumplimiento de la normativa.
+Para el pago de las adquisiciones, el proveedor emitió 14 CFDI por un total de 4,886.6 miles 
+de pesos, que la Cámara de Senadores pagó mediante seis transferencias electrónicas a la 
+cuenta bancaria del proveedor, y se constató que las registró en las cuentas contables y 
+partidas presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento 
+de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato 
+ADQ/DGRMSG/2024/02/006 para el suministro de materiales de limpieza, por el cual pagó 
+4,886.6 miles de pesos, realizó los registros contables y presupuestales, y acreditó la 
+recepción de dichos materiales y su distribución al personal correspondiente para su uso, en 
+cumplimiento de la normativa.
+6. Revisión del contrato número SERV/DGRMSG/2024/01/013 con Grupo México 
+Tecnoindustrial, S.A. de C.V.
+La Cámara de Senadores realizó el procedimiento de licitación pública nacional número 
+SEN/DGRMSG/L019/2024, a fin de contratar el “Servicio de mantenimiento preventivo y 
+correctivo con refacciones a los 421 equipos elevautos marca Bendpak, modelos PL7000 y
+PL7000X, instalados en los cuatro niveles de estacionamientos de la nueva Sede del Senado 
+del H. Congreso de la Unión”, por lo que el 23 de noviembre de 2023 se emitió el acta de 
+notificación de fallo a favor de la empresa Grupo México Tecnoindustrial, S.A. de C.V.
+Con el análisis del expediente del procedimiento de contratación se comprobó que la 
+convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y económicas 
+y el fallo se realizaron en cumplimiento de la normativa.
+El 2 de enero de 2024 se suscribió el contrato abierto número SERV/DGRMSG/2024/01/013 
+por un importe total mínimo de 1,343.8 miles de pesos, y un máximo de 3,359.6 miles de 
+pesos, el cual estuvo vigente del 1 de enero al 31 de diciembre de 2024; cabe señalar que el 
+contrato se formalizó después de los 15 días establecidos en la normativa, con el fin de evitar 
+duplicidades, toda vez que en la fecha de emisión del fallo existía un contrato vigente con el 
+mismo objeto, por lo que la Dirección General de Recursos Materiales y Servicios Generales 
+notificó al proveedor respecto de la ampliación del plazo para la formalización del contrato, 
+en cumplimiento de la normativa.
+PAGINA 12
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+12
+Para acreditar la prestación de los servicios se proporcionaron las bitácoras mensuales de 
+mantenimiento preventivo y correctivo emitidas por el proveedor, los reportes de campo de 
+las fallas detectadas, los dictámenes técnicos de las pruebas realizadas, las notas de remisión 
+de las piezas sustituidas, evidencia fotográfica y los reportes ejecutivos validados por el 
+supervisor y el administrador del contrato, en cumplimiento del Anexo Técnico del contrato.
+Respecto del pago por la prestación del servicio, el proveedor emitió 22 Comprobantes 
+Fiscales Digitales por Internet por un total de 3,074.6 miles de pesos, por lo que la Cámara de 
+Senadores pagó el mismo importe mediante 21 transferencias electrónicas a la cuenta 
+bancaria del proveedor, y se constató que las registró en las cuentas contables y partidas 
+presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento de la 
+normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato abierto número 
+SERV/DGRMSG/2024/01/013 con el proveedor Grupo México Tecnoindustrial, S.A. de C.V., al 
+amparo del cual pagó 3,074.6 miles de pesos, realizó los registros contables y presupuestales, 
+y contó con el soporte documental de la recepción de los servicios, en cumplimiento de la 
+normativa.
+7. Revisión del contrato número ADQ/DGRMSG/2024/05/023 y sus modificatorios 
+ADQ/DGRMSG/2024/05/023-I y ADQ/DGRMSG/2024/05/023-II con Abastecedora y 
+Distribuidora del Sureste García Hnos., S.A. de C.V.
+Como resultado del procedimiento de licitación pública nacional número 
+SEN/DGRMSG/L043/2024, la Cámara de Senadores adjudicó al proveedor Abastecedora y 
+Distribuidora del Sureste García Hnos., S.A. de C.V., el suministro de accesorios y consumibles 
+para aire acondicionado, tuberías, soldadura, tornillería, material eléctrico, repuestos de 
+iluminación, herramientas, lubricantes y desengrasantes, y bisagras, entre otros, para el 
+edificio de Reforma número 135, lo cual se sustentó en el acta de fallo del 2 de mayo de 2024. 
+Con el análisis del expediente del procedimiento de contratación se comprobó que la 
+convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y económicas 
+y el fallo se realizaron en cumplimiento de la normativa.
+Por lo anterior, el 7 de mayo de 2024 se suscribió el contrato abierto número 
+ADQ/DGRMSG/2024/05/023 por un importe total mínimo de 1,719.3 miles de pesos, y un 
+máximo de 4,276.2 miles de pesos, el cual estuvo vigente del 7 de mayo al 15 de noviembre 
+de 2024. Asimismo, el 5 de noviembre y 6 de diciembre de 2024, la Cámara de Senadores 
+suscribió dos convenios modificatorios del contrato abierto, para aumentar los montos 
+máximos de 11 partidas para quedar en un total de 5,135.2 miles de pesos, respecto de lo 
+cual, se comprobó que en ningún caso se rebasó el 25.0% del monto original, en cumplimiento 
+de la normativa.
+PAGINA 13
+Grupo Funcional Gobierno
+13
+Para acreditar la recepción de los materiales, se proporcionaron los Comprobantes Fiscales 
+Digitales por Internet (CFDI) con sellos del almacén general de la Cámara de Senadores y las 
+solicitudes de materiales recurrentes, en cumplimiento del Anexo Técnico del contrato.
+Asimismo, se contó con evidencia de su distribución o entrega a los usuarios finales, en 
+cumplimiento de la normativa.
+Para el pago del suministro de los materiales, el proveedor emitió 51 CFDI por un total de 
+5,132.9 miles de pesos, que la Cámara de Senadores pagó mediante 16 transferencias 
+electrónicas a la cuenta bancaria del proveedor, y las registró en las cuentas contables y 
+partidas presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento 
+de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+ADQ/DGRMSG/2024/05/023 con el proveedor Abastecedora y Distribuidora del Sureste 
+García Hnos., S.A. de C.V., para el suministro de material recurrente para el edificio de 
+Reforma número 135, por el que se pagaron en total 5,132.9 miles de pesos, de los cuales, se 
+contó con el soporte documental de la recepción de los materiales y de su distribución a los 
+usuarios finales, y se realizaron los registros contables y presupuestales correspondientes, en 
+cumplimiento de la normativa.
+8. Revisión del contrato número SERV/DGRMSG/2024/03/053 (persona física)
+La Cámara de Senadores realizó el procedimiento de licitación pública nacional número 
+SEN/DGRMSG/L033/2024 para el “Servicio de elaboración de papelería impresa oficial y 
+administrativa”; al respecto, con el análisis del expediente de dicho procedimiento se 
+comprobó que la convocatoria, la junta de aclaraciones, la presentación de propuestas 
+técnicas y económicas, y el fallo se realizaron en cumplimiento de la normativa.
+El 27 de febrero de 2024 se emitió el fallo a favor de tres personas físicas para el 
+abastecimiento simultaneo de los servicios; en consecuencia, el 1 de marzo de 2024 se 
+suscribió el contrato abierto número SERV/DGRMSG/2024/03/053 con una de las personas 
+físicas por el 50.0% de los servicios, por un importe mínimo de 1,532.9 miles de pesos y un 
+máximo de 3,832.2 miles de pesos, y una vigencia del 1 de marzo al 31 de diciembre de 2024.
+Para acreditar la recepción de la papelería, se proporcionaron las representaciones impresas 
+de los Comprobantes Fiscales Digitales por Internet (CFDI) con sellos del almacén, en las que 
+se indica que se recibió de manera satisfactoria, así como las órdenes de servicio emitidas por 
+la Cámara, en cumplimiento del Anexo Técnico del contrato. 
+Asimismo, se contó con evidencia de su distribución o entrega a las áreas requirentes, en 
+cumplimiento de la normativa.
+La persona física emitió 131 CFDI por un total de 2,915.2 miles de pesos, sin embargo, se 
+aplicaron deductivas por 1.6 miles de pesos, por lo que resultó en un importe neto de 2,913.6 
+PAGINA 14
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+14
+miles de pesos, el cual se pagó mediante 36 transferencias electrónicas a la cuenta bancaria 
+de dicha persona física, y se constató que las registró en las cuentas contables y partidas 
+presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento de la 
+normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato 
+SERV/DGRMSG/2024/03/053 para el servicio de elaboración de papelería impresa oficial y 
+administrativa, por el cual se pagaron 2,913.6 miles de pesos, realizó los registros contables 
+y presupuestales, y acreditó la recepción de dicha papelería y su distribución o entrega a los 
+usuarios finales, en cumplimiento de la normativa.
+9. Revisión del contrato número SERV/DGRMSG/2024/04/062 y su modificatorio 
+SERV/DGRMSG/2024/04/062-I con Equipos y Climas de México, S.A. de C.V.
+Durante el ejercicio fiscal 2024, la Cámara de Senadores realizó el procedimiento de 
+contratación mediante la licitación pública nacional número SEN/DGRMSG/L037/2024, con el 
+fin de contar con el servicio de “mantenimiento preventivo y correctivo con refacciones de 
+los equipos HVAC incluye la sanitización y limpieza de ductos de aire acondicionado, 
+instalados en los diversos inmuebles”, por lo que el 1 de abril de 2024 se emitió el acta de 
+notificación de fallo a favor de la empresa Equipos y Climas de México, S.A. de C.V. 
+Al respecto, con el análisis del expediente de dicho procedimiento se comprobó que la 
+convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y económicas, 
+el fallo, y la formalización del contrato se realizaron en cumplimiento de la normativa.
+Por lo anterior, el 4 de abril de 2024 se suscribió el contrato abierto número 
+SERV/DGRMSG/2024/04/062 por un importe mínimo de 5,648.4 miles de pesos y un máximo 
+de 9,435.2 miles de pesos, con una vigencia del 4 de abril al 31 de diciembre de 2024. 
+Posteriormente, el 27 de noviembre de 2024, la Cámara de Senadores suscribió el convenio 
+modificatorio número SERV/DGRMSG/2024/04/062-I, para ampliar el importe máximo en 
+2,358.7 miles de pesos para quedar en un total de 11,793.9 miles de pesos, correspondiente 
+al 25.0%, en cumplimiento de la normativa.
+Para acreditar la prestación de los servicios se proporcionaron los reportes mensuales de 
+mantenimiento preventivo elaborados por el proveedor, las bitácoras de mantenimiento, la 
+memoria fotográfica y los dictámenes técnicos; además, se contó con la autorización del 
+administrador del contrato para el suministro de las refacciones necesarias para los 
+mantenimientos correctivos, así como con la validación y recepción a entera satisfacción de 
+éste, respecto de la totalidad de los servicios, en cumplimiento del Anexo Técnico del 
+contrato.
+Respecto del pago por la prestación del servicio, el proveedor emitió 44 Comprobantes 
+Fiscales Digitales por Internet por un total de 11,205.0 miles de pesos, por lo que la Cámara 
+de Senadores pagó el mismo importe mediante transferencias electrónicas a la cuenta 
+PAGINA 15
+Grupo Funcional Gobierno
+15
+bancaria del proveedor, y las registró en las cuentas contables y partidas presupuestales 
+correspondientes, de acuerdo con su naturaleza, en cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/04/062 con el proveedor Equipos y Climas de México, S.A. de C.V., para 
+la prestación del servicio de mantenimiento preventivo y correctivo con refacciones de los 
+equipos HVAC instalados en sus diversos inmuebles, por un total de 11,205.0 miles de pesos, 
+del cual se contó con el soporte documental de su recepción y de los registros contables y 
+presupuestales correspondientes, en cumplimiento de la normativa.
+10. Revisión del contrato número SERV/DGRMSG/2024/01/035 con Lemonroy Business 
+Solutions, S.A. de C.V.
+Como resultado de la licitación pública nacional número SEN/DGRMSG/L026/2024, el 21 de 
+diciembre de 2023, la Cámara de Senadores emitió el acta de fallo mediante el cual adjudicó 
+a la persona moral Lemonroy Business Solutions, S.A. de C.V., el “Servicio de mantenimiento 
+preventivo y correctivo a 13 equipos UPS/Baterías, para el ejercicio 2024”. 
+Con el análisis del expediente del procedimiento de contratación se comprobó que la 
+convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y económicas 
+y el fallo se realizaron en cumplimiento de la normativa.
+Por lo anterior, el 2 de enero de 2024 se suscribió el contrato abierto número 
+SERV/DGRMSG/2024/01/035 por un importe mínimo de 2,230.0 miles de pesos y un máximo 
+de 4,040.4 miles de pesos, y una vigencia del 1 de enero al 31 de diciembre de 2024.
+Para acreditar la prestación de los servicios se proporcionó el dictamen inicial de los 13 
+equipos UPS, la matriz de escalamiento en el caso de fallas y soporte técnico, los reportes de 
+servicio mensuales elaborados por el proveedor y validados por personal de la Dirección 
+General de Recursos Materiales y Servicios Generales, así como la memoria fotográfica de los 
+trabajos realizados, en cumplimiento del Anexo Técnico del contrato.
+En lo que respecta al pago, la persona moral Lemonroy Business Solutions, S.A. de C.V., emitió 
+13 Comprobantes Fiscales Digitales por Internet por un importe total de 2,995.0 miles de 
+pesos, por lo que la Cámara de Senadores pagó el mismo importe mediante transferencias 
+electrónicas a la cuenta bancaria del proveedor, las cuales registró en las cuentas contables y 
+partidas presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento 
+de la normativa.
+En conclusión, durante el ejercicio 2024 se suscribió el contrato abierto número 
+SERV/DGRMSG/2024/01/035, mediante el cual la Cámara de Senadores adquirió el servicio 
+de mantenimiento preventivo y correctivo a 13 equipos UPS, por el que se pagaron 2,995.0 
+miles de pesos, los cuales se sustentaron en la documentación comprobatoria 
+correspondiente y en las constancias que acreditaron su prestación, en cumplimiento de la 
+normativa.
+PAGINA 16
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+16
+11. Revisión del contrato número SERV/DGRMSG/2024/01/009 con Blue & Green Servicios 
+y Soluciones al Medio Ambiente, S.A. de C.V.
+Como resultado del procedimiento de licitación pública nacional número 
+SEN/DGRMSG/L010/2024, la Cámara de Senadores adjudicó al proveedor Blue & Green 
+Servicios y Soluciones al Medio Ambiente, S.A. de C.V., el “Servicio de operación, 
+mantenimiento preventivo y correctivo a la planta de tratamiento de aguas residuales (PTAR), 
+3 plantas de osmosis inversa Marca Aqua Tecnología Ambiental, y el monitoreo y dosificación 
+de cloro de 2 cisternas de agua potable ubicadas en la Sede”, lo cual se sustentó en el acta de 
+fallo.
+Con el análisis del expediente del procedimiento de contratación se comprobó que la 
+convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y económicas 
+y el fallo se realizaron en cumplimiento de la normativa.
+Por lo anterior, el 2 de enero de 2024 se suscribió el contrato SERV/DGRMSG/2024/01/009 
+por un importe mínimo de 5,492.5 miles de pesos, y un máximo de 5,818.6 miles de pesos, el 
+cual estuvo vigente del 1 de enero al 31 de diciembre de 2024; cabe señalar que el contrato 
+se formalizó después de los 15 días establecidos en la normativa, con el fin de evitar 
+duplicidades, toda vez que en la fecha de emisión del fallo existía un contrato vigente con el 
+mismo objeto, por lo que la Dirección General de Recursos Materiales y Servicios Generales 
+notificó al proveedor respecto de la ampliación del plazo para la formalización del contrato, 
+en cumplimiento de la normativa.
+Para acreditar la prestación de los servicios se proporcionaron los reportes mensuales de 
+mantenimiento preventivo elaborados por el proveedor, en los que se incluyeron las órdenes 
+de servicio, el registro de asistencia de su personal, las bitácoras de mantenimiento, la 
+memoria fotográfica y se describió el estado físico de las plantas; además, se contó con la 
+autorización del administrador del contrato para el suministro del equipo que resultó 
+necesario para mantenimientos correctivos, así como con la validación y recepción a entera 
+satisfacción de éste, de la totalidad de los servicios, en cumplimiento del Anexo Técnico del 
+contrato.
+Respecto del pago por la prestación del servicio, el proveedor emitió 15 Comprobantes 
+Fiscales Digitales por Internet por un total de 5,807.8 miles de pesos, por lo que la Cámara de 
+Senadores pagó el mismo importe mediante 14 transferencias electrónicas a la cuenta 
+bancaria del proveedor, y las registró en las cuentas contables y partidas presupuestales 
+correspondientes, de acuerdo con su naturaleza, en cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/01/009 con el proveedor Blue & Green Servicios y Soluciones al Medio 
+Ambiente, S.A. de C.V., para la prestación del servicio de mantenimiento preventivo y 
+correctivo a las plantas de tratamiento de aguas residuales y de osmosis ubicadas en su 
+edificio sede, por un total de 5,807.8 miles de pesos, del cual se contó con el soporte 
+PAGINA 17
+Grupo Funcional Gobierno
+17
+documental de su recepción y con los registros contables y presupuestales correspondientes, 
+en cumplimiento de la normativa.
+12. Revisión del contrato SERV/DGRMSG/2024/01/037 con Grupo Mexicano de Seguros, 
+S.A. de C.V.
+La Cámara de Senadores llevó a cabo el procedimiento de invitación a cuando menos tres 
+personas número SEN/DGRMSG/INV014/2024 por excepción a licitación pública, para la 
+“Contratación de la póliza de seguro de bienes patrimoniales propiedad de la Cámara de 
+Senadores, para el ejercicio 2024”, para lo cual se contó con el dictamen en el que se 
+fundamentaron y motivaron las circunstancias para la excepción y con la autorización del 
+Comité de Adquisiciones, Obras y Servicios, en cumplimiento de la normativa.
+Con el análisis del expediente del procedimiento de contratación se comprobó que se 
+enviaron las invitaciones a los posibles oferentes, y que la junta de aclaraciones, la 
+presentación de propuestas técnicas y económicas y el fallo se realizaron en cumplimiento de 
+la normativa.
+En consecuencia, el 2 de enero de 2024 se suscribió el contrato cerrado con número 
+SERV/DGRMSG/2024/01/037 con Grupo Mexicano de Seguros, S.A. de C.V., por un importe 
+de 34,788.3 miles de pesos, y una vigencia del 1 de enero al 31 de diciembre de 2024.
+Para acreditar la prestación de los servicios de aseguramiento de los bienes patrimoniales, se 
+proporcionó la póliza de seguro de bienes patrimoniales, con una vigencia del 1 enero al 31 
+de diciembre de 2024, así como los reportes bimestrales de siniestralidad, en cuyo análisis se 
+constató que se reportaron 34 siniestros que fueron atendidos por la aseguradora, de los que, 
+en 32 casos se pagaron deducibles por un total de 89.5 miles de pesos, en cumplimiento del 
+Anexo Técnico del contrato.
+En cuanto al pago por la prestación de los servicios, el proveedor emitió un Comprobante 
+Fiscal Digital por Internet por un total de 34,788.3 miles de pesos, por lo que la Cámara de 
+Senadores pagó el mismo importe mediante una transferencia electrónica a la cuenta 
+bancaria del proveedor, y la registró en las cuentas contables y partidas presupuestales 
+correspondientes, de acuerdo con su naturaleza, en cumplimiento de la normativa.
+En conclusión, se constató que el contrato de aseguramiento de bienes patrimoniales se 
+adjudicó a Grupo Mexicano de Seguros, S.A. de C.V., y que se realizó el pago total por 34,788.3 
+miles de pesos; además, durante 2024, la aseguradora atendió los reportes de siniestro 
+notificados por la Cámara de Senadores, en cumplimiento de la normativa.
+PAGINA 18
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+18
+13. Revisión del contrato SERV/DGRMSG/2024/04/059 y su modificatorio 
+SERV/DGRMSG/2024/04/059-I con Compañía Operadora de Estacionamientos 
+Mexicanos, S.A. de C.V.
+El 15 de marzo de 2024, la Cámara de Senadores emitió la justificación de la excepción a 
+licitación pública mediante adjudicación directa para prestar el “Servicio de operación de los 
+cuatro niveles de estacionamiento de la nueva sede y los cuatro sótanos del inmueble de 
+Donceles número 14, por medio de operativos que manejen los equipos de elevautos y 
+elevador”, debido a que se declaró desierto el procedimiento de licitación pública nacional 
+número SEN/DGRMSG/L036/2024, según el acta de fallo emitida el 4 de marzo de 2024, 
+conforme a la normativa.
+El 1 de abril de 2024 se suscribió el contrato abierto número SERV/DGRMSG/2024/04/059
+por un importe mínimo de 2,182.6 miles de pesos y un máximo de 5,456.6 miles de pesos, y 
+una vigencia del 1 de abril al 31 de diciembre de 2024. Posteriormente, el 3 de diciembre de 
+2024, la Cámara de Senadores suscribió el convenio modificatorio número 
+SERV/DGRMSG/2024/04/059-I, con el propósito de ampliar 375.0 miles de pesos al importe 
+máximo, para quedar en un total de 5,831.6 miles de pesos, el cual representó un incremento 
+del 6.9%, en cumplimiento de la normativa.
+Para acreditar la prestación de los servicios, la Cámara de Senadores proporcionó la relación 
+del personal del proveedor que prestaría los servicios, los formatos de “Control de asistencia” 
+mensuales, evidencia de la recepción de la herramienta y equipo necesarios para la prestación 
+del servicio, así como las constancias de capacitación del personal que se encargó de operar 
+el sistema de elevación de autos, en cumplimiento del Anexo Técnico del contrato.
+Para el pago del servicio, el proveedor emitió 14 Comprobantes Fiscales Digitales por Internet 
+por un total de 5,731.9 miles de pesos, que la Cámara de Senadores pagó mediante 12 
+transferencias electrónicas a la cuenta bancaria del proveedor, y las registró en las cuentas 
+contables y partidas presupuestales correspondientes, de acuerdo con su naturaleza, en 
+cumplimiento de la normativa.
+En conclusión, la Cámara de Senadores contrató el servicio de operación de los 
+estacionamientos de la nueva sede y del inmueble de Donceles número 14, mediante el 
+procedimiento de adjudicación directa por excepción a licitación; pagó al proveedor 5,731.9 
+miles de pesos, de los cuales se realizó el registro contable y presupuestal, y acreditó la 
+prestación de los servicios, en cumplimiento de la normativa.
+14. Revisión del contrato SERV/DGRMSG/2024/01/006 y su modificatorio 
+SERV/DGRMSG/2024/01/006-I con Estrategia en Estacionamientos y Valet Parking, 
+S.A. de C.V.
+El 4 de octubre de 2023, la Cámara de Senadores emitió la justificación de la excepción a la 
+licitación pública para contratar el “Servicio de estacionamiento y pensión para 250 unidades 
+vehiculares como mínimo y 450 como máximo”, con la persona moral Estrategia en 
+PAGINA 19
+Grupo Funcional Gobierno
+19
+Estacionamientos y Valet Parking, S.A. de C.V., mediante el procedimiento de adjudicación 
+directa, por tratarse del servicio de estacionamientos, de acuerdo con lo establecido en la 
+normativa, por lo que, el 24 de noviembre se le notificó formalmente al proveedor la 
+adjudicación del contrato.
+El 2 de enero de 2024 se suscribió el contrato abierto número SERV/DGRMSG/2024/01/006
+por un importe mínimo de 3,555.9 miles de pesos y un máximo de 8,889.8 miles de pesos, y 
+una vigencia del 1 de enero al 31 de diciembre de 2024; cabe señalar que el contrato se 
+formalizó después de los 15 días establecidos en la normativa, con el fin de evitar 
+duplicidades, toda vez que en la fecha de notificación de la adjudicación al proveedor existía 
+un contrato vigente con el mismo objeto, por lo que la Dirección General de Recursos 
+Materiales y Servicios Generales le notificó al proveedor la ampliación del plazo para la 
+formalización del contrato, en cumplimiento de la normativa.
+El 27 de noviembre de 2024, la Cámara de Senadores suscribió el convenio modificatorio 
+número SERV/DGRMSG/2024/01/006-I, para ampliar 2,222.5 miles de pesos al importe 
+máximo, para quedar en un total de 11,112.3 miles de pesos, el cual representó un 
+incremento del 25.0%, en cumplimiento de la normativa.
+Para acreditar la prestación de los servicios se contó con evidencia de la recepción de las 
+tarjetas magnéticas de proximidad para los sistemas de acceso y salida automatizados, así 
+como con los reportes de asistencia mensuales en los que se incluyeron los registros de 
+entradas y salidas de las tarjetas magnéticas, y con los boletos sellados de los usuarios a los 
+que se les brindó el servicio por hora, en cumplimiento del Anexo Técnico del contrato.
+Para el pago, el proveedor de los servicios emitió 67 Comprobantes Fiscales Digitales por 
+Internet por un total de 9,953.4 miles de pesos, que la Cámara de Senadores pagó mediante 
+32 transferencias a la cuenta bancaria del proveedor, y las registró en las cuentas contables y 
+partidas presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento 
+de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato abierto número 
+SERV/DGRMSG/2024/01/006 con el proveedor Estrategia en Estacionamientos y Valet 
+Parking, S.A. de C.V., por un total de 9,953.4 miles de pesos; realizó los registros contables y 
+presupuestales, y contó con el soporte documental de la recepción de los servicios, en 
+cumplimiento de la normativa.
+15. Revisión del convenio modificatorio número ADQ/DGRMSG/156-II/11/21 con 
+Microsoft México, S. de R.L. de C.V.
+Se constató que durante el ejercicio fiscal 2024 estuvo vigente el contrato número 
+ADQ/DGRMSG/156/11/21 suscrito el 24 de noviembre de 2021 con la persona moral 
+Microsoft México, S. de R.L. de C.V., para la prestación del “Servicio de licenciamiento 
+Microsoft”, con una vigencia del 1 de diciembre de 2021 al 30 de noviembre de 2024; al 
+respecto, se comprobó que el 28 de noviembre de 2024, la Cámara de Senadores suscribió el 
+PAGINA 20
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+20
+convenio modificatorio número ADQ/DGRMSG/156-II/11/21, para ampliar la vigencia de 
+dicho contrato al 31 de diciembre de 2024 y su importe por 86.0 miles de dólares.
+Al respecto, se constató que la Cámara de Senadores contó con la carta de licenciamiento 
+mediante la cual el proveedor le informó de la extensión hasta el 31 de diciembre de 2024 del 
+uso del servicio de licenciamiento del software adquirido en 2021; asimismo, proporcionó la 
+relación de los equipos de cómputo en los que se utilizó, en cumplimiento de la normativa.
+Para el pago de los servicios, el proveedor emitió dos Comprobantes Fiscales Digitales por 
+Internet por un importe total de 86.0 miles de dólares, por lo que la Cámara de Senadores, 
+mediante una transferencia electrónica a la cuenta bancaria del proveedor, pagó 1,760.7 
+miles de pesos, para lo cual utilizó el tipo de cambio registrado en el Sistema de 
+Administración Presupuestal y Financiera, y se constató que la registró en las cuentas 
+contables y partidas presupuestales correspondientes, de acuerdo con su naturaleza, en 
+cumplimiento de la normativa.
+En conclusión, durante 2024 la Cámara de Senadores realizó el pago del licenciamiento de 
+software Microsoft por 1,760.7 miles de pesos para el mes de diciembre de 2024, y acreditó 
+la continuidad de su funcionamiento, en cumplimiento de la normativa.
+16. Revisión del contrato SERV/DGRMSG/2024/11/083 con Construcciones y Acabados 
+Mohusa, S.A. de C.V.
+En su sexta sesión extraordinaria del 26 de noviembre del 2024, el Comité de Adquisiciones, 
+Obras y Servicios de la Cámara de Senadores dictaminó procedente la excepción a la licitación 
+pública para la contratación, mediante adjudicación directa de los “Servicios Profesionales de 
+un Director Responsable de Obra, de un Corresponsable en Seguridad Estructural y de un 
+Corresponsable en Instalaciones para las constancias de seguridad estructural de Xicohténcatl 
+y Madrid 37, así como los avisos de visto bueno de seguridad y operación de Allende 23, 
+Reforma 135 y Teatro de la República”, con la persona moral Construcciones y Acabados 
+Mohusa, S.A. de C.V., debido a que correspondieron a servicios profesionales en los que se 
+tuvo acceso a información de carácter confidencial.
+En consecuencia, el 27 de noviembre de 2024 se suscribió el contrato número 
+SERV/DGRMSG/2024/11/083 por un importe de 1,849.6 miles de pesos, y una vigencia del 27 
+de noviembre al 26 de diciembre de 2024.
+Para acreditar la prestación de los servicios, la Cámara de Senadores proporcionó la “Carta de 
+Confidencialidad”, respecto de la información a la que tuvo acceso el proveedor en virtud del 
+objeto del contrato, las constancias de seguridad estructural registradas ante el Gobierno de 
+la Ciudad de México de los edificios ubicados en Madrid 37 y Xicoténcatl 9, el visto bueno de 
+seguridad y operación de las instalaciones de los edificios ubicados en Allende 23, Reforma 
+135 y del Teatro de la República, así como la memoria fotográfica y los reportes técnicos de 
+cada edificio revisado, en cumplimiento del Anexo Técnico del contrato.
+PAGINA 21
+Grupo Funcional Gobierno
+21
+Para el pago, el proveedor de los servicios emitió un Comprobante Fiscal Digital por Internet 
+por un importe de 1,849.6 miles de pesos, el cual pagó la Cámara de Senadores mediante una 
+transferencia electrónica a la cuenta bancaria del proveedor, y la registró en las cuentas 
+contables y partidas presupuestales correspondientes, de acuerdo con su naturaleza, en 
+cumplimiento de la normativa.
+En conclusión, la Cámara de Senadores contrató los servicios profesionales para las 
+constancias de seguridad estructural y visto bueno de seguridad y operación de sus inmuebles
+mediante el procedimiento de adjudicación directa; pagó 1,849.6 miles de pesos, de los cuales 
+se realizó el registro contable y presupuestal, y acreditó la prestación de los servicios, en 
+cumplimiento de la normativa.
+17. Revisión del contrato número SERV/DGRMSG/2024/01/010 con Policía Auxiliar de la 
+Ciudad de México
+En enero de 2024, la Cámara de Senadores notificó a la Policía Auxiliar de la Ciudad de México 
+la adjudicación del contrato número SERV/DGRMSG/2024/01/010 para el servicio de 
+seguridad y vigilancia las 24 horas del día, todos los días del año, intra y extramuros, de los 
+inmuebles que ocupa, por un importe total de 80,011.7 miles de pesos, con una vigencia del 
+1 de enero al 31 de diciembre de 2024, el cual se adjudicó de manera directa por tratarse de 
+una institución pública y se informó al Comité de Adquisiciones, Obras y Servicios, en 
+cumplimiento de la normativa.
+Para acreditar la prestación de los servicios se contó con los documentos denominados 
+“Fatiga de Servicio de Asistencia de Personal de la Policía Auxiliar” en los que los elementos 
+de vigilancia registraron las horas de entrada y salida, así como sus firmas; asimismo, se 
+proporcionaron los formatos de “Conciliación de Turnos” en los que personal de la 
+Subdirección de Vigilancia Exterior e Interior de la Cámara de Senadores y el Comandante 
+asignado por el destacamento de policía conciliaron los turnos efectivamente devengados 
+para determinar los importes por los que se debían expedir las facturas, cuyo total ascendió 
+a 76,563.7 miles de pesos por los referidos turnos efectivamente devengados, en 
+cumplimiento del Anexo Técnico del contrato. 
+Para el pago de servicios, el proveedor emitió 12 Comprobantes Fiscales Digitales por Internet 
+por un importe total de 76,563.7 miles pesos, por lo que la Cámara de Senadores realizó su 
+pago mediante transferencias electrónicas a la cuenta bancaria del proveedor, y se constató 
+que las registró en las cuentas contables y partidas presupuestales correspondientes, de 
+acuerdo con su naturaleza, en cumplimiento de la normativa.
+En conclusión, durante el ejercicio 2024 la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/01/010 para el servicio de seguridad y vigilancia para sus instalaciones, 
+por el que pagó un total de 76,563.7 miles de pesos, y respecto del que acreditó su prestación 
+en los términos pactados en el referido instrumento jurídico.
+PAGINA 22
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+22
+18. Revisión del contrato número SERV/DGRMSG/2024/01/022 con Elevadores Schindler, 
+S.A. de C.V.
+El 8 de diciembre de 2023, el Comité de Adquisiciones, Obras y Servicios de la Cámara de 
+Senadores dictaminó la procedencia de la contratación por excepción a la licitación pública 
+por adjudicación directa para el servicio de mantenimiento preventivo y correctivo con 
+refacciones incluidas a 17 elevadores marca Schindler ubicados en el inmueble de Av. Paseo 
+de la Reforma No. 135, con la persona moral Elevadores Schindler, S.A. de C.V., por ser la 
+única empresa que cuenta con los derechos sobre el uso de la tecnología “Port” con la que 
+operan los elevadores objeto de la adquisición.
+Por lo anterior, el 2 de enero de 2024 se suscribió el contrato cerrado número 
+SERV/DGRMSG/2024/01/022, por un importe total de 3,179.0 miles de pesos, con vigencia 
+del 1 de enero al 31 de diciembre de 2024, en cumplimiento de la normativa.
+Para acreditar la prestación de los servicios se proporcionaron los reportes de servicio 
+mensuales y el “Acta de entrega-recepción” del 31 de diciembre de 2024, en la que el 
+administrador del contrato indicó que recibió la totalidad de los servicios a entera 
+satisfacción, los cuales contaron con garantía de un año sobre los materiales suministrados y 
+la mano de obra, en cumplimiento del Anexo Técnico del contrato.
+Para el pago de los servicios, el proveedor emitió 12 Comprobantes Fiscales Digitales por 
+Internet por un importe total de 3,179.0 miles de pesos. El pago se realizó mediante 12 
+transferencias electrónicas a la cuenta bancaria del proveedor, y se constató que los pagos se 
+registraron en las cuentas contables y partidas presupuestales correspondientes, en 
+cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/01/022 con Elevadores Schindler, S.A. de C.V., por el cual pagó 3,179.0 
+miles de pesos; realizó los registros contables y presupuestales, y acreditó la prestación de 
+los servicios, en cumplimiento de la normativa.
+19. Revisión del contrato SERV/DGRMSG/2024/01/026 y su modificatorio 
+SERV/DGRMSG/2024/01/026-I con Johnson Controls BTS México, S.A. de C.V.
+En el 2024, el Comité de Adquisiciones, Obras y Servicios de la Cámara de Senadores 
+dictaminó procedente la adjudicación directa por excepción a licitación pública del servicio 
+de mantenimiento preventivo y correctivo, con soporte técnico y refacciones para los equipos 
+del sistema de automatización y control marca “Metasys”, del sistema de aire acondicionado.
+Por lo anterior, el 2 de enero de 2024, la Cámara de Senadores suscribió el contrato abierto 
+número SERV/DGRMSG/2024/01/026 con la persona moral Johnson Controls BTS México, 
+S.A. de C.V., la cual cuenta con la titularidad de la marca “Metasys”, por un importe mínimo 
+de 7,634.0 miles de pesos y un máximo de 8,153.0 miles de pesos, y una vigencia del 1 de 
+enero al 31 de diciembre de 2024; asimismo, el 2 de julio de 2024, se suscribió el convenio 
+PAGINA 23
+Grupo Funcional Gobierno
+23
+modificatorio número SERV/DGRMSG/2024/01/026-I, para ampliar el importe máximo a 
+9,047.0 miles de pesos, lo que representó un incremento del 11.0%, en cumplimiento de la 
+normativa.
+Para acreditar la prestación de los servicios, se contó con los reportes mensuales de 
+mantenimiento preventivo elaborados por el proveedor, las bitácoras de mantenimiento, la 
+memoria fotográfica y los dictámenes técnicos de los mantenimientos correctivos que 
+resultaron necesarios, así como con la validación y recepción del servicio a entera satisfacción 
+del administrador del contrato, en cumplimiento del Anexo Técnico del contrato.
+Para el pago del servicio el proveedor emitió 17 Comprobantes Fiscales Digitales por Internet 
+por un importe total de 9,012.0 miles de pesos, el cual pagó la Cámara de Senadores mediante 
+transferencias electrónicas a la cuenta del proveedor, y se constató que las registró en las 
+cuentas contables y partidas presupuestales correspondientes, de acuerdo con su naturaleza, 
+en cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/01/026 y su modificatorio SERV/DGRMSG/2024/01/026-I con la 
+persona moral Johnson Controls BTS México, S.A. de C.V., por los que pagó 9,012.0 miles de 
+pesos, respecto de los cuales se acreditó la prestación de los servicios convenidos, y se 
+realizaron los registros contables y presupuestales, en cumplimiento de la normativa.
+20. Revisión del contrato número SERV/DGRMSG/2024/01/031 con Dhimex Ciudad de 
+México, S.A de C.V.
+El 11 de diciembre de 2023, la Cámara de Senadores emitió el dictamen para la contratación 
+por adjudicación directa por excepción a licitación pública del servicio de mantenimiento 
+preventivo y correctivo a los equipos de bombeo de agua helada, válvulas de compuerta y 
+multipropósito de la sede de Avenida Paseo de la Reforma número 135, el cual fue 
+dictaminado como procedente por el Comité de Adquisiciones, Obras y Servicios de la Cámara 
+de Senadores.
+En consecuencia, el 2 de enero de 2024 se suscribió el contrato abierto número 
+SERV/DGRMSG/2024/01/031 con Dhimex Ciudad de México, S.A. de C.V., por un importe 
+mínimo de 2,845.0 miles de pesos y un máximo de 3,500.0 miles de pesos, y una vigencia del 
+1 de enero al 31 de diciembre de 2024.
+Para acreditar la prestación de los servicios se proporcionaron los reportes mensuales de 
+mantenimiento preventivo y correctivos emitidos por el proveedor, los dictámenes técnicos, 
+la evidencia fotográfica, así como el “Acta de entrega-recepción” del 31 de diciembre de 2024, 
+en la que el administrador del contrato indicó que recibió la totalidad de los servicios a entera 
+satisfacción, en cumplimiento del Anexo Técnico del contrato.
+Respecto del pago de los servicios, el proveedor emitió 16 Comprobantes Fiscales Digitales 
+por Internet por un total de 3,498.9 miles de pesos, por lo que la Cámara de Senadores pagó 
+PAGINA 24
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+24
+el mismo importe mediante transferencias electrónicas a la cuenta bancaria del proveedor, y 
+las registró en las cuentas contables y partidas presupuestales correspondientes, en 
+cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores mediante adjudicación directa, 
+suscribió el contrato abierto SERV/DGRMSG/2024/01/031 con el proveedor Dhimex Ciudad 
+de México, S.A. de C.V., por un importe total de 3,498.9 miles de pesos; realizó los registros 
+contables y presupuestales, y contó con el soporte documental de la recepción de los 
+servicios, en cumplimiento de la normativa.
+21. Revisión del contrato número SERV/DGRMSG/2024/01/004 con Uninet, S.A. de C.V. 
+(Revisión conjunta con la Dirección General de Auditoría de Tecnologías de 
+Información y Comunicaciones)
+El 2 de enero de 2024, la Cámara de Senadores suscribió el contrato de prestación de servicios 
+número SERV/DGRMSG/2024/01/004 para licenciamiento y soporte a usuarios del software 
+para realizar reuniones de trabajo en línea con Cisco y Webex, para el ejercicio 2024, con la 
+persona moral Uninet, S.A. de C.V., adjudicado mediante el procedimiento de licitación 
+pública nacional número SEN/DGRMSG/L006/2024, por un importe de 5,156.2 miles de pesos 
+y una vigencia del 1 de enero al 31 de diciembre de 2024, en cumplimiento de la normativa.
+Con el análisis del expediente del procedimiento de contratación se comprobó que la 
+convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y económicas 
+y el fallo se realizaron en cumplimiento de la normativa.
+Para acreditar la prestación del servicio, la Cámara de Senadores proporcionó los entregables 
+mensuales validados, mediante la documentación de forma digital (reportes mensuales) 
+firmada con la aceptación y autorización por parte de la Dirección General de Informática y 
+Telecomunicaciones de la Cámara de Senadores y del proveedor Uninet, S.A de C.V., con lo 
+que se dio cumplimiento a lo establecido en el numeral “5. Entregables” del anexo técnico.
+Asimismo, de la revisión y pruebas realizadas se obtuvo lo siguiente:
+• Se implementó licenciamiento para 420 usuarios de la plataforma Cisco Webex con 
+los módulos Meeting, Training, Events y Support.
+• La plataforma contó con la capacidad de usar pizarras virtuales, traducción en tiempo 
+real y anotaciones interactivas, incluyó un panel integrado para preguntas y 
+respuestas, grabó sesiones en la nube o de forma local, y su funcionalidad 
+antimalware permitió escanear archivos en busca de virus, malware y ataques tipo 
+troyano.
+• Webex Training (entrenamiento) incluyó herramientas de evaluación, nivel de 
+atención, sondeo y generación de informes para evaluar la eficacia de las 
+capacitaciones, así como la administración completa de eventos desde la creación, 
+PAGINA 25
+Grupo Funcional Gobierno
+25
+envío de invitaciones, inscripción, registro de asistentes y panelistas, hasta el 
+seguimiento, envío de recordatorios y análisis posterior al evento.
+• Webex Events (eventos) proporcionó capacidades de transmisión a redes sociales y 
+generación de una biblioteca digital de capacitaciones y tutorías grabadas.
+• Webex Support (soporte) permitió a los usuarios recibir asistencia técnica en vivo de 
+un organizador de soporte.
+Lo anterior se realizó en cumplimiento del Anexo Técnico del contrato.
+En relación con el pago por el licenciamiento, el proveedor emitió 13 Comprobantes Fiscales 
+Digitales por Internet por un importe total de 5,156.2 miles de pesos, los cuales se pagaron 
+mediante el mismo número de transferencias electrónicas a la cuenta bancaria del proveedor, 
+respecto de lo que se constató que se registraron en las cuentas contables y partidas 
+presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento de la 
+normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/01/004 con el proveedor Uninet, S.A. de C.V., al amparo del cual pagó 
+5,156.2 miles de pesos, realizó los registros contables y presupuestales y contó con el soporte 
+documental de la recepción de los servicios, en cumplimiento de la normativa.
+22. Revisión del contrato número SERV/DGRMSG/2024/01/021 con Sinteg en México, S.A 
+de C.V. (Revisión conjunta con la Dirección General de Auditoría de Tecnologías de 
+Información y Comunicaciones)
+Mediante el acta de fallo del 5 de diciembre de 2023, la Cámara de Senadores adjudicó al 
+proveedor Sinteg en México, S.A. de C.V., el “Servicio de protección, consultoría y soporte en 
+seguridad informática a través de antivirus para equipos y servidores virtuales de la Cámara 
+de Senadores”, como resultado del procedimiento de licitación pública nacional número LA￾SEN/DGRMSG/L022/2024.
+Por lo anterior, el 2 de enero de 2024 se suscribió el contrato número 
+SERV/DGRMSG/2024/01/021 por un importe total de 2,970.0 miles de pesos, y una vigencia 
+del 1 de enero al 31 de diciembre de 2024.
+Para acreditar la prestación del servicio se proporcionaron los entregables mensuales 
+validados mediante la documentación de forma digital (reportes mensuales) firmada con la 
+aceptación y la autorización del supervisor del contrato de la Cámara de Senadores y del 
+proveedor Sinteg en México, S.A. de C.V., lo que dio cumplimiento a lo establecido en el 
+numeral “5. Entregables” del anexo técnico.
+Al respecto, de la revisión y las pruebas realizadas se obtuvo lo siguiente:
+PAGINA 26
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+26
+• Se contó con el licenciamiento de antivirus y soporte ENDPOINT para 2,800 
+dispositivos, así como para el entorno virtual VMWARE para 200 máquinas virtuales.
+• Se verificó que la consola de gestión centralizada habilitó la instalación, configuración, 
+actualización y administración integral de las soluciones, al tiempo que supervisó de 
+forma continua el estado general de los dispositivos, lo que permitió identificar 
+equipos sin agente instalado y ejecutar las acciones correctivas.
+Respecto del pago por la prestación del servicio, Sinteg en México, S.A. de C.V., emitió 13 
+Comprobantes Fiscales Digitales por Internet (CFDI) por un total de 2,970.0 miles de pesos, 
+por lo que la Cámara de Senadores realizó el pago por la misma cantidad con la emisión del 
+mismo número de transferencias a la cuenta bancaria del proveedor, los cuales se registraron 
+en las cuentas contables y partidas presupuestales correspondientes, de acuerdo con su 
+naturaleza, en cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/01/021 con el proveedor Sinteg en México, S.A. de C.V., para el 
+licenciamiento de antivirus y soporte ENDPOINT para 2,800 dispositivos, así como para el 
+entorno virtual VMWARE para 200 máquinas virtuales, y pagó 2,970.0 miles de pesos 
+mediante 13 CFDI. Los pagos se registraron contablemente; además, acreditó la recepción de 
+los servicios y su validación por el administrador del contrato.
+23. Revisión del contrato número SERV/DGRMSG/2024/01/047 con Guzdan Services, S.A. 
+de C.V. (Revisión conjunta con la Dirección General de Auditoría de Tecnologías de 
+Información y Comunicaciones)
+Como resultado de la licitación pública nacional número SEN/DGRMSG/L030/2024, el 29 de 
+diciembre de 2023, la Cámara de Senadores emitió el acta de fallo mediante el cual adjudicó 
+a la persona moral Guzdan Services, S.A. de C.V., el servicio de “Licenciamiento y póliza de 
+soporte de la infraestructura de virtualización”.
+Al respecto, con el análisis del expediente del procedimiento de contratación se comprobó 
+que la convocatoria, la junta de aclaraciones, la presentación de propuestas técnicas y 
+económicas y el fallo se realizaron en cumplimiento de la normativa.
+Por lo anterior, el 2 de enero de 2024 se suscribió el contrato número 
+SERV/DGRMSG/2024/01/047 por un importe mínimo de 15,776.0 miles de pesos, y una 
+vigencia del 1 de enero al 31 de diciembre de 2024.
+De la revisión y las pruebas realizadas respecto del cumplimiento técnico y funcional se 
+obtuvo lo siguiente:
+• Los entregables mensuales se validaron mediante la documentación de forma digital 
+(reportes mensuales) firmada con la aceptación y autorización del Departamento de 
+PAGINA 27
+Grupo Funcional Gobierno
+27
+Seguridad Informática de la Cámara de Senadores y del proveedor Guzdan Services, 
+S.A. de C.V.
+• Se realizó la entrega del licenciamiento para las suscripciones Red Hat Enterprise 
+Linux Server (sistema operativo), VMware con 38 CPU (virtualización), Veeam con 310 
+instancias (almacenamiento), Dell PowerVault ME4012 (almacenamiento) y soporte 
+de servidores Dell PowerEdge.
+• Se contó con los servicios de administración, monitoreo, soporte y mantenimiento en 
+sitio.
+Lo anterior se realizó en cumplimiento de la normativa.
+En lo que respecta al pago, la persona moral Guzdan Services, S.A. de C.V., emitió 12 
+Comprobantes Fiscales Digitales por Internet por un importe total de 15,776.0 miles de pesos, 
+por lo que la Cámara de Senadores pagó el mismo importe mediante transferencias 
+electrónicas a la cuenta bancaria del proveedor, las cuales registró en las cuentas contables y 
+partidas presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento 
+de la normativa.
+En conclusión, durante el ejercicio 2024 se suscribió el contrato número 
+SERV/DGRMSG/2024/01/047, mediante el cual la Cámara de Senadores adquirió el 
+licenciamiento y póliza de soporte de la infraestructura de virtualización, por el que se 
+pagaron 15,776.0 miles de pesos, los cuales se sustentaron en la documentación 
+comprobatoria correspondiente y en las constancias que acreditaron su prestación, en 
+cumplimiento de la normativa.
+24. Revisión del contrato número SERV/DGRMSG/2024/07/079 con Tagsec Group, S.A. de 
+C.V. (Revisión conjunta con la Dirección General de Auditoría de Tecnologías de 
+Información y Comunicaciones)
+Mediante el fallo de la licitación pública nacional electrónica número 
+SEN/DGRMSG/L047/2024 del 12 de julio de 2024, se adjudicó al proveedor Tagsec Group, S.A. 
+de C.V., la prestación del “Servicio de licenciamiento Cisco, adquisición de teléfonos y Access
+Point”.
+Por lo anterior, el 18 de julio de 2024 se suscribió el contrato número 
+SERV/DGRMSG/2024/07/079 con el proveedor Tagsec Group, S.A. de C.V., por un importe de 
+17,315.6 miles de pesos, y una vigencia del 18 de julio al 31 de octubre de 2024.
+Con la revisión y las pruebas realizadas respecto del cumplimiento técnico y funcional se 
+constató que el servicio integró el licenciamiento inicial Cisco DNA Essentials y Advantage; las 
+licencias de seguridad de resolución de nombres de dominio (DNS) Umbrella DNS Security 
+Advantage para 5,000 dispositivos; el licenciamiento Cisco ISE Advantage para 5,000 
+dispositivos; el licenciamiento para equipo Cisco Firepower 2130 y equipo Cisco Firepower 
+PAGINA 28
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+28
+1010, ambos con Threat y Malware Protection (antivirus); el licenciamiento para equipo Cisco 
+Firepower 4125 y para equipo Cisco Firepower 4125 Secure Client para 50 usuarios (VPN); 
+licencias para 3 cámaras de internet (IP); los puntos de acceso Cisco y Teléfonos IP Cisco 8841. 
+Por otra parte, salvo las licencias de Cisco DNA Essentials y Cisco DNA Advantage, cuya 
+vigencia es de 36 meses, las demás licencias tuvieron una vigencia de 12 meses.
+Al respecto, se observó que el licenciamiento de Seguridad de Resolución de Nombres de 
+Dominio (DNS) Umbrella DNS Security Advantage para 5,000 dispositivos durante 2024 no 
+contó con servicio de gestión, documentación, generación de reportes ni monitoreo de 
+equipos; al respecto, la Cámara de Senadores, en el transcurso de la auditoría y con motivo 
+de la intervención de la Auditoría Superior de la Federación, señaló que se encuentra en 
+análisis y evaluación de las disposiciones normativas y administrativas para la generación de 
+los reportes que incluyan el número de equipos protegidos, el monitoreo y seguimiento de 
+las amenazas detectadas, el filtrado de tráfico malicioso en las conexiones que se realizan con 
+equipos móviles y los procedimientos para documentar las cifras reales de los equipos 
+protegidos por las plataformas de seguridad contratadas, con lo que se solventa lo observado.
+Asimismo, respecto del servicio de monitoreo y seguimiento de amenazas de la plataforma 
+Cisco Umbrella DNS Security Advantage, se constató que durante el ejercicio de 2024, se 
+identificaron ataques dirigidos mediante la consola de Cisco Umbrella DNS Security 
+Advantage, y se determinó que la inteligencia es una funcionalidad activa y continua de la 
+solución Cisco, integrada directamente en la operación de la plataforma, lo que permitió la 
+protección dinámica y en tiempo real contra amenazas emergentes, en cumplimiento del 
+Anexo Técnico del contrato.
+Para el pago por la contratación del servicio, el proveedor emitió tres Comprobantes Fiscales 
+Digitales por Internet (CFDI) por un total de 17,315.6 miles de pesos, por lo que la Cámara de 
+Senadores pagó el mismo importe mediante dos transferencias electrónicas a la cuenta del 
+proveedor. Se constató que los pagos se registraron en las cuentas contables y partidas 
+presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento de la 
+normativa.
+En conclusión, se constató que la Cámara de Senadores suscribió el contrato número 
+SERV/DGRMSG/2024/07/079 con el proveedor Tagsec Group, S.A. de C.V, para el “Servicio de 
+licenciamiento Cisco, adquisición de teléfonos y Access Point”, y pagó 17,315.6 miles de 
+pesos, mediante tres CFDI y los pagos se registraron contablemente, en cumplimiento de la 
+normativa.
+25. Revisión del contrato número SERV/DGRMSG/2024/01/041 y su modificatorio 
+SERV/DGRMSG/2024/01/041-I con Silent4Business, S.A. de C.V. (Revisión conjunta 
+con la Dirección General de Auditoría de Tecnologías de Información y 
+Comunicaciones)
+El 20 de diciembre de 2023, la Cámara de Senadores emitió la justificación de la excepción a 
+la licitación pública para contratar el “Servicio de fortalecimiento de los procesos de 
+PAGINA 29
+Grupo Funcional Gobierno
+29
+seguridad”, mediante el procedimiento de adjudicación directa. En consecuencia, el Comité 
+de Adquisiciones, Obras y Servicios dictaminó procedente la referida excepción a la licitación 
+pública, ya que debía compartirse con el proveedor información sensible concerniente a la 
+infraestructura informática institucional, en cumplimiento de la normativa.
+Por lo anterior, el 2 de enero de 2024, se suscribió el contrato número 
+SERV/DGRMSG/2024/01/041 con la persona moral Silent4Business, S.A. de C.V., por un 
+importe de 29,869.8 miles de pesos, y una vigencia del 1 de enero al 31 de diciembre de 2024.
+Asimismo, el 10 de octubre de 2024, la Cámara de Senadores suscribió el convenio 
+modificatorio número SERV/DGRMSG/2024/01/041-I, con la finalidad de sustituir al 
+administrador del contrato y decrementar el importe de los servicios para quedar en un total 
+de 26,646.2 miles de pesos, en cumplimiento de la normativa.
+Al respecto, se constató que el servicio integró la gestión de vulnerabilidades para los activos 
+de tecnologías de información (TI), la concientización, el análisis de vulnerabilidades, las 
+pruebas de penetración, el acompañamiento a la mitigación de vulnerabilidades y el análisis 
+de riesgos de procesos de TI, en la revisión técnica, funcional y administrativa se identificó lo 
+siguiente:
+• Se presentó evidencia de las acciones de remediación realizadas por la Cámara de 
+Senadores para fortalecer las recomendaciones emitidas en los reportes mensuales 
+relativas a las bases de datos de Microsoft, como parte de la actualización de los 
+servidores referente a los sistemas operativos Microsoft Windows Server 2016 (64-
+bit), Windows Server 2019 (64-bit) y Microsoft Windows 10 (64-bit).
+• Se proporcionó documentación que acreditó la actualización de los servidores web 
+Apache y Tomcat solicitada por la Dirección de Infraestructura Informática y de 
+Comunicaciones a la Dirección de Sistemas Informáticos, así como la implementación 
+de las medidas compensatorias, que incluyeron la optimización de la configuración 
+del servidor, el cifrado de las comunicaciones y el control del tráfico a través de un 
+firewall de aplicaciones web (WAF) y la realización de copias de seguridad periódicas.
+• Como parte de la actualización para atender otras vulnerabilidades en los servidores 
+del Senado, se instalaron los parches de seguridad liberados por el fabricante.
+• La detección de vulnerabilidades en los equipos (activos) se efectuó a partir de la 
+correlación de cada caso con la IP asignada. Se detectó la misma vulnerabilidad en 
+meses posteriores, correspondientes a equipos distintos y en cada caso se resolvió de 
+forma individual.
+Con relación al pago por la prestación del servicio, el proveedor emitió 12 Comprobantes 
+Fiscales Digitales por Internet por un importe total de 26,646.2 miles de pesos, de los que la 
+Cámara de Senadores realizó el pago mediante el mismo número de transferencias 
+electrónicas a la cuenta bancaria del proveedor, y las registró en las cuentas contables y 
+PAGINA 30
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+30
+partidas presupuestales correspondientes, de acuerdo con su naturaleza, en cumplimiento 
+de la normativa.
+En conclusión, se verificó que durante 2024 se suscribió el contrato número 
+SERV/DGRMSG/2024/01/041, con el proveedor Silent4Business, S.A. de C.V., por el que se 
+pagó un importe de 26,646.2 miles de pesos; el pago se justificó y se acreditó la prestación 
+del servicio, y se registró contablemente, en cumplimiento de la normativa.
+26. Egresos por Impuesto sobre Nómina
+En el ejercicio fiscal 2024, la Cámara de Senadores reportó en la partida de gasto 39801 
+“Impuesto sobre nóminas” un importe pagado de 32,861.0 miles de pesos; al respecto, se 
+comprobó que el cálculo del impuesto se realizó con base en las remuneraciones pagadas y 
+que se aplicó la tasa prevista en el Código Fiscal de la Ciudad de México, en cumplimiento de 
+la normativa.
+Cabe señalar que un importe de 7,079.5 miles de pesos, correspondiente al impuesto causado 
+en el mes de diciembre de 2024, se registró como pasivo y se pagó el 17 de enero de 2025, 
+con recursos presupuestales del ejercicio objeto de revisión, por tratarse de compromisos 
+devengados al cierre de éste, en cumplimiento de la normativa.
+También, se constató que los pagos se sustentaron en las transferencias bancarias y en los 
+Comprobantes Fiscales Digitales por Internet expedidos por la oficina recaudadora en la 
+Ciudad de México, y se registraron en las cuentas contables y partidas presupuestales 
+correspondientes, en cumplimiento de la normativa.
+En conclusión, se constató que la Cámara de Senadores realizó el pago del Impuesto Sobre 
+Nóminas por 32,861.0 miles de pesos por medio de transferencias bancarias a favor de la 
+autoridad recaudadora en la Ciudad de México, de acuerdo con las tarifas establecidas en la 
+normativa.
+27. Egresos por pago de cuotas y aportaciones a organismos internacionales
+La Cámara de Senadores registró pagos por 2,974.5 miles de pesos, en la partida presupuestal 
+número 49201 “Cuotas y aportaciones a organismos internacionales”, como se muestra a 
+continuación: 
+PAGINA 31
+Grupo Funcional Gobierno
+31 
+CUOTAS Y APORTACIONES A ORGANISMOS INTERNACIONALES
+EJERCICIO FISCAL 2024
+(Miles de pesos)
+Cons. Organismo Pagado
+1 Asociación de Televisiones Educativas y Culturales Iberoamericana (ATEI) 29.5
+2 Asociación Tal Televisión América Latina 96.8
+3 Inter-Parlamentary Unión 1,766.8
+4 Secretaría Internacional de ParlAmericas 169.5
+5 Parlamento Latinoamericano y Caribeño 515.8
+6 Foro de Presidentes de Poderes Legislativos 396.1
+ Total: 2,974.5
+FUENTE: Cuentas por Liquidar y transferencias bancarias proporcionadas por el Senado.
+Al respecto, se comprobó que el pago de las cuotas y aportaciones se realizó mediante 
+transferencias electrónicas de acuerdo con las solicitudes, justificaciones y autorizaciones 
+para realizarlas, y se sustentaron con las facturas o recibos emitidos por los organismos 
+internacionales por la recepción de los recursos; asimismo, se comprobó que se registraron 
+en las cuentas contables y partidas presupuestales correspondientes, en cumplimento de la 
+normativa.
+En conclusión, se comprobó que la Cámara de Senadores pagó 2,974.5 miles de pesos por 
+cuotas y aportaciones a organismos internacionales, cuyos importes individuales coincidieron 
+con las solicitudes para realizarlas, que se encontraron justificados, y contaron con la 
+documentación comprobatoria correspondiente, en cumplimiento de la normativa.
+Resumen de Resultados, Observaciones, Acciones y Recomendaciones
+Se determinaron 27 resultados, de los cuales, en 25 no se detectaron irregularidades y 2 
+fueron solventados por la entidad fiscalizada antes de la emisión de este Informe.
+Dictamen 
+El presente dictamen se emite el 10 de octubre de 2025, fecha de conclusión de los trabajos 
+de auditoría, la cual se practicó sobre la información proporcionada por la entidad fiscalizada, 
+de cuya veracidad esta última es responsable. Con base en los resultados obtenidos en la 
+auditoría practicada, cuyo objetivo fue fiscalizar la gestión financiera para verificar que el 
+presupuesto asignado a la Cámara de Senadores del H. Congreso de la Unión, se ejerció y 
+registró conforme a los montos aprobados, y de acuerdo con las disposiciones legales y 
+normativas, y específicamente respecto de la muestra revisada que se establece en el 
+apartado relativo al alcance, se concluye que, en términos generales, la Cámara de Senadores 
+cumplió con las disposiciones legales y normativas que son aplicables en la materia.
+PAGINA 32
+Informe Individual del Resultado de la Fiscalización Superior de la Cuenta Pública 2024
+32
+Servidores públicos que intervinieron en la auditoría: 
+Director de Área Director General
+C.P. José Manuel Nieto López C.P. Sergio Giovani Rubio Maldonado
+Comentarios de la Entidad Fiscalizada
+La entidad fiscalizada no emitió comentarios con motivo de las reuniones celebradas durante 
+la revisión.
+El Informe de Auditoría puede consultarse en el Sistema Público de Consulta de Auditorías 
+(SPCA).
+Apéndices
+Procedimientos de Auditoría Aplicados
+1. Verificar que la entidad fiscalizada contó con controles internos para las operaciones 
+revisadas y que éstos se aplicaron conforme a las políticas y los procedimientos 
+autorizados.
+2. Constatar que la entidad realizó el registro contable y presupuestal de los ingresos, 
+egresos y operaciones vinculadas, y que se registraron y presentaron en los estados 
+financieros y en la Cuenta Pública, de conformidad con las disposiciones jurídicas.
+3. Verificar que los egresos por servicios personales se autorizaron, determinaron, ejercieron 
+y pagaron de conformidad con la normativa.
+4. Verificar de forma selectiva (muestra) que los procedimientos de contratación para la 
+adquisición y arrendamiento de bienes y prestación de servicios se autorizaron y 
+formalizaron de conformidad con las disposiciones jurídicas.
+5. Comprobar de forma selectiva (muestra) que la adquisición y arrendamiento de bienes y 
+prestación de servicios contratados se recibieron, ejecutaron y pagaron de conformidad 
+con los instrumentos jurídicos respectivos, así como constatar su uso y destino final.
+6. Comprobar que los pagos y aportaciones a organismos internacionales se efectuaron de 
+acuerdo con lo establecido en los convenios suscritos y que se registraron contablemente.
+PAGINA 33
+Grupo Funcional Gobierno
+33
+Áreas Revisadas
+La Secretaría General de Servicios Administrativos de la Cámara de Senadores del H. Congreso 
+de la Unión.
