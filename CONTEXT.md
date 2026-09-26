@@ -2101,6 +2101,14 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho («el rastro del gasto público» en el glosario)
+
+- Junto al título «Descubre el rastro del gasto público» de Auditoría en
+  imágenes, un 📖 abre en la ventana lateral la nueva entrada del glosario
+  «Rastro del Gasto Público» (partida que lo aprobó, contrato o transferencia,
+  a quién se pagó y qué encontró la ASF; fundamento: art. 134 CPEUM, art. 38
+  LGCG y LFRCF). El glosario llega a 215 términos.
+
 ### Hecho (un solo botón en los simuladores y la tarjeta del módulo 1 sin cifra)
 
 - **Tarjeta del módulo 1 en la portada:** en lugar de «$10.19 billones» dice

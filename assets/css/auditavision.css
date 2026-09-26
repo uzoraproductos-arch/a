@@ -21322,6 +21322,7 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 }
 .hero-nota-btn:hover { transform: scale(1.1); background: rgba(201, 168, 76, 0.25); }
 .hero-nota-btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+.showcase-nota-btn { font-size: 0.8em; vertical-align: 0.05em; }
 [data-theme="light"] .hero-nota-btn { border-color: rgba(0, 43, 91, 0.3); background: rgba(0, 43, 91, 0.07); }
 /* Sobre el recuadro translucido, el titulo y la frase llevan una sombra
    suave para leerse sobre cualquier parte de la fotografia. */
