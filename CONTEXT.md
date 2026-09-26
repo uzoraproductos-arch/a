@@ -1760,6 +1760,42 @@ Se dejaron fuera, a propósito:
 
 ### Pendiente
 
+**Auditoría del 26 de septiembre (versión 20260925a).** Lo agregado del 23 al
+25 de septiembre no cumple todavía la regla editorial. Bloquean la versión
+final, en este orden:
+
+- **Imágenes de IA sin aviso.** 7 de 10 JPG de `assets/img/` traen C2PA de
+  Google (`trainedAlgorithmicMedia`); el `alt` las presenta como lugares
+  reales. Rotular «Ilustración generada con IA» o sustituir por fotos con
+  licencia. La de «Palacio Nacional» no es el Palacio Nacional.
+- **Cifras que no coinciden entre secciones.** `showcaseData` (motor) contra
+  `simulador_megaobras`: Tren Maya $156,000 vs $120,000 mdp, AIFA +53.3 % vs
+  +460.1 %, Dos Bocas $378,000 vs $350,000 mdp; costo de la deuda $1,388,400
+  (carrusel) vs $1,572,073 mdp (radar) vs «más de $1.2 billones» (ficha
+  Sheinbaum). El carrusel debe leer de la base, no llevar sus cifras.
+- **«Erosión patrimonial» ($54,010.89/s).** Suma costo financiero (gasto legal,
+  flujo) con observaciones ASF por aclarar (saldo) y probablemente cuenta dos
+  veces al IPAB (FOBAPROA en megaobras y Ramo 34 en costo financiero).
+  INSPECTOR-ENTREGA.md ya lo había retirado. Retirar.
+- **Simulador de megaobras en pesos nominales 1988–2024**, sin INPC, con dos
+  rescates financieros (FOBAPROA, FARAC) que hacen el 69 % de la «pérdida».
+  Ninguna de las 12 obras tiene campo de fuente.
+- **Noticias sin URL ni estado.** `not-02` fecha la aprobación del PEF 2026 el
+  10 de enero de 2026; el art. 74-IV CPEUM fija el 15 de noviembre anterior.
+- **Fichas presidenciales sin una sola fuente**, con acusaciones graves,
+  `asf_monto_num` inventado para Salinas (5,000) y trato desigual a la
+  presidenta en funciones. Riesgo legal.
+- **Pase de $79/mes** que promete funciones inexistentes y habla de
+  «lanzamiento electoral». Ocultar.
+- **Vocabulario**: «Dictamen de auditoría forense», «Costo real auditado»,
+  «Fuente oficial verificada», «Versión 3.3 Aprobada».
+
+Diseño: texto sobre fotografía ilegible (axe: 10 y 18 fallas de contraste),
+etiqueta de la cinta encimada, botón flotante sobre «Reiniciar a ceros», falta
+`scroll-margin-top`, primera pantalla móvil ocupada por menú, 30 elementos
+clicables sin teclado, dos cabeceras y tres marcas. Informe completo con
+capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
+
 - **Los 83 montos observados por la ASF en municipios no llevan referencia.**
   El campo `observacionesASF` de `estados[].municipios[]` guarda un número
   —42, 15, 8…— y **ni un solo campo de fuente o de informe que lo sustente**:
