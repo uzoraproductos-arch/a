@@ -2101,6 +2101,24 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (módulo 2, bloque 2: filtros en dos pasos y simulación en vivo)
+
+- **Panel de filtros** (`.sim-filtros`): «Paso 1 · Industria» (el mosaico de
+  sectores, con «Todas las industrias») y «Paso 2 · Mandato presidencial»,
+  ahora tarjetas con el color del sexenio, el periodo y cuántas obras le
+  tocan (`.sim-mdt`), en lugar de pastillas.
+- **Filtro activo:** sustituye la cabecera del mundo 🌐 con «Contar de nuevo» y
+  «Quitar los filtros». Dice en una línea qué se ve (industria · mandato · N
+  de 12 obras), trae un solo botón Contabilizar / Reiniciar a ceros
+  (`simCabAlternar`) para sus tres cifras y muestra «Quitar filtros» solo
+  cuando hay alguno puesto.
+- **Pestaña «Simulación en vivo»** al final de «Ordenar y medir por»: muestra
+  las fichas vivas (pérdida operativa día con día y su acumulado) y «Contra
+  qué se compara este dinero» (`#simVistaVivo`); las otras pestañas muestran
+  la lista comparativa. Pulsar un renglón de la lista abre la pestaña en vivo
+  y lleva a la ficha. En la Enciclopedia (sin `#simVistaVivo`) la pestaña no
+  aparece y todo sigue como estaba; las tarjetas de mandato sí se comparten.
+
 ### Hecho (módulo 2, Inversión y Megaobras, en cuatro bloques)
 
 - Índice de cuatro pasos y cuatro bloques desplegables, con la misma

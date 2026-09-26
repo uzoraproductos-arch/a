@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zf">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926zg">
 </head>
 <body>
 
@@ -1402,18 +1402,21 @@
             <div class="erario-pleg-cuerpo" id="eb-cuerpo-sector" hidden>
           <!-- ---------- PARTE A: industria y mandato, fusionados ---------- -->
           <section class="sim-parte-panel" id="simPanelA" data-parte="a">
-            <div id="simSectorMosaico"></div>
-            <div id="simMandatoPills"></div>
-            <div id="simDesgloseCab"></div>
+            <!-- Filtros en dos pasos (industria y mandato) y el resultado del filtro -->
+            <div class="sim-filtros">
+              <div id="simSectorMosaico"></div>
+              <div id="simMandatoPills"></div>
+              <div id="simDesgloseCab"></div>
+            </div>
 
-            <!-- Comparativa de las obras que dejaron en pie los filtros -->
+            <!-- Comparativa de las obras del filtro; su última pestaña es la simulación en vivo -->
             <div id="simRankingFiltro"></div>
 
-            <!-- Fichas vivas de cada obra del filtro -->
-            <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
-
-            <!-- Escala: contra que se compara este dinero (sigue al filtro) -->
-            <div id="simEscala"></div>
+            <!-- Pestaña «Simulación en vivo»: las fichas vivas y la escala -->
+            <div id="simVistaVivo" class="sim-vista-vivo" hidden>
+              <div id="simuladorObrasGrid" class="sim-obras-grid"></div>
+              <div id="simEscala"></div>
+            </div>
           </section>
             </div>
           </div>
@@ -2666,7 +2669,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zf</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926zg</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2810,16 +2813,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926zf"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926zg"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926zf"></script>
+  <script src="assets/js/audit-database.js?v=20260926zg"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926zf"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926zg"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926zf"></script>
+  <script src="assets/js/audit-engine.js?v=20260926zg"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

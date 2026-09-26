@@ -20825,7 +20825,10 @@
      estaba evaluado se re-anima con la nueva escala, para que se vea el
      cambio de posiciones y no aparezca hecho. */
   function setSimuladorOrden(id) {
-    state.simuladorOrden = id;
+    /* «Simulacion en vivo» no es un criterio de orden: es otra vista de
+       la misma lista, con las fichas vivas y la escala. */
+    if (id === 'vivo') state.simVista = 'vivo';
+    else { state.simVista = 'lista'; state.simuladorOrden = id; }
     renderSimuladorRankingFiltro();
     renderSimuladorTablas();
     renderSimuladorObrasGrid();
@@ -20850,6 +20853,12 @@
   }
 
   function simIrAObra(id) {
+    const vivo = document.getElementById('simVistaVivo');
+    if (vivo && vivo.hidden) {
+      setSimuladorOrden('vivo');
+      setTimeout(() => simIrAObra(id), 60);
+      return;
+    }
     const el = document.getElementById('card-sim-' + id);
     if (!el) return;
     erarioAbrirAncestros(el);
@@ -21040,11 +21049,11 @@
     cont.innerHTML =
       '<section class="sim-sel sim-sel-sector">' +
         '<div class="sim-sel-cab">' +
-          '<span class="sim-sel-ico">🏢</span>' +
-          '<div><h3 class="sim-sel-tit">Sector estratégico</h3>' +
-          '<p class="sim-sel-sub">Elija la industria y, debajo, el mandato. Ambos filtran a la vez sobre la misma lista: las fichas de obra responden a los dos criterios sin cambiar de pantalla.</p></div>' +
+          '<span class="sim-sel-paso">Paso 1</span>' +
+          '<div><h3 class="sim-sel-tit">Industria</h3>' +
+          '<p class="sim-sel-sub">Elija un sector estratégico. Industria y mandato filtran a la vez todo lo que sigue: la comparativa, las fichas y la escala.</p></div>' +
           '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
-            'onclick="window.AuditEngine.setSimuladorSector(\'todos\')">🌐 Ver todas</button>' +
+            'onclick="window.AuditEngine.setSimuladorSector(\'todos\')">Todas las industrias</button>' +
         '</div>' +
         '<div class="sim-mosaico">' + losetas + '</div>' +
       '</section>';
@@ -21344,6 +21353,33 @@
     if (!sim) return;
     const orden = SIM_ORDENES.find(x => x.id === (state.simuladorOrden || 'perdida')) || SIM_ORDENES[0];
     const delFiltro = simFiltradas();
+    /* La pestaña «Simulacion en vivo» solo existe donde hay donde ponerla
+       (la plataforma); la Enciclopedia conserva la lista sola. */
+    const cajaVivo = document.getElementById('simVistaVivo');
+    const vivo = !!cajaVivo && state.simVista === 'vivo';
+    if (cajaVivo) cajaVivo.hidden = !vivo;
+    const pestanas = SIM_ORDENES.map(o =>
+      '<button type="button" class="sim-pill-btn' + (!vivo && o.id === orden.id ? ' active' : '') + '" ' +
+        'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('') +
+      (cajaVivo
+        ? '<button type="button" class="sim-pill-btn sim-pill-vivo' + (vivo ? ' active' : '') + '" ' +
+            'onclick="window.AuditEngine.setSimuladorOrden(\'vivo\')"><span class="pulsing-dot"></span> Simulación en vivo</button>'
+        : '');
+    if (vivo) {
+      cont.innerHTML =
+        '<section class="sim-rank sim-rank-filtro">' +
+          '<div class="sim-rank-cab">' +
+            '<h3 class="sim-rank-tit">Simulación en vivo: ' + (delFiltro.length === 1 ? 'la obra del filtro' : 'las ' + delFiltro.length + ' obras del filtro') + '</h3>' +
+            '<span class="sim-rank-sub">Cada ficha lleva corriendo su pérdida de operación, a la cadencia elegida en «El pulso del gasto». ' +
+              'Al final, contra qué se compara este dinero.</span>' +
+          '</div>' +
+          '<div class="sim-control-group">' +
+            '<span class="sim-group-label">&#8645; Ordenar y medir por:</span>' +
+            '<div class="sim-pill-group">' + pestanas + '</div>' +
+          '</div>' +
+        '</section>';
+      return;
+    }
     const hayFiltro = (state.simuladorSector && state.simuladorSector !== 'todos') ||
                       (state.simuladorSexenio && state.simuladorSexenio !== 'todos');
     const universo = !!state.simRankUniverso;
@@ -21381,9 +21417,7 @@
     const fmtOrden = orden.id === 'sobrecosto' ? 'pctS' : 'mdp';
     const marcadas = obras.filter(o => dentro[o.id]).length;
 
-    const chips = SIM_ORDENES.map(o =>
-      '<button type="button" class="sim-pill-btn' + (o.id === orden.id ? ' active' : '') + '" ' +
-        'onclick="window.AuditEngine.setSimuladorOrden(\'' + o.id + '\')">' + o.et + '</button>').join('');
+    const chips = pestanas;
 
     const titulo = sola
       ? 'La única obra del filtro, medida por ' + rotulo
@@ -21401,7 +21435,7 @@
             'la barra la mide contra la obra mayor de las ' + sim.obras.length + ' del universo. ' +
             'Si quiere verla junto a las demás, encienda «Ver las ' + sim.obras.length + ' en contexto».'
           : 'La barra mide el tamaño de la cifra frente a la mayor de esta lista. ' +
-            'Pulse cualquier renglón para ir a su ficha, aquí abajo.');
+            (cajaVivo ? 'Pulse cualquier renglón para ver su ficha en la simulación en vivo.' : 'Pulse cualquier renglón para ir a su ficha, aquí abajo.'));
 
     cont.innerHTML =
       '<section class="sim-rank sim-rank-filtro">' +
@@ -21562,26 +21596,29 @@
        pastillas no respondian al clic y parecia que el filtro estaba
        roto. Ahora todas responden; si la combinacion no tiene obras, la
        lista lo dice y ofrece la salida. */
-    const pastillas = SIM_SEXENIOS.map(x => {
-      const n = simObrasDe(sector, x.k).length;
-      return '<button type="button" class="sim-pill-btn' + (x.k === activo ? ' active' : '') +
-          (n === 0 ? ' sim-pill-cero' : '') + '" ' +
-          'onclick="window.AuditEngine.setSimuladorSexenio(\'' + x.k + '\')">' +
-        x.nom + ' <span class="sim-pill-n">' + n + '</span></button>';
-    }).join('');
-
+    /* Tarjetas de mandato, con el color de su sexenio, el periodo y
+       cuantas obras le tocan dentro de la industria elegida. */
+    const tarjeta = (k, nom, periodo, n, color) =>
+      '<button type="button" class="sim-mdt' + (k === activo ? ' on' : '') + (n === 0 ? ' sim-mdt-cero' : '') + '" ' +
+        'style="--mdt:' + color + '" aria-pressed="' + (k === activo ? 'true' : 'false') + '" ' +
+        'onclick="window.AuditEngine.setSimuladorSexenio(\'' + k + '\')">' +
+        '<span class="sim-mdt-nom">' + nom + '</span>' +
+        '<span class="sim-mdt-per">' + periodo + '</span>' +
+        '<span class="sim-mdt-n">' + n + (n === 1 ? ' obra' : ' obras') + '</span>' +
+      '</button>';
     const totalSector = simObrasDe(sector, 'todos').length;
+    const tarjetas = tarjeta('todos', 'Todos los mandatos', '1988–2024', totalSector, 'var(--gold)') +
+      SIM_SEXENIOS.map(x => tarjeta(x.k, x.nom, x.ini + '–' + x.fin, simObrasDe(sector, x.k).length, x.color)).join('');
 
     cont.innerHTML =
-      '<div class="sim-control-group sim-mandato">' +
-        '<span class="sim-group-label">🏛️ Y dentro de esa industria, ¿qué mandato?</span>' +
-        '<div class="sim-pill-group">' +
-          '<button type="button" class="sim-pill-btn' + (activo === 'todos' ? ' active' : '') + '" ' +
-            'onclick="window.AuditEngine.setSimuladorSexenio(\'todos\')">Todos los mandatos ' +
-            '<span class="sim-pill-n">' + totalSector + '</span></button>' +
-          pastillas +
+      '<section class="sim-sel sim-sel-mandato">' +
+        '<div class="sim-sel-cab">' +
+          '<span class="sim-sel-paso">Paso 2</span>' +
+          '<div><h3 class="sim-sel-tit">Mandato presidencial</h3>' +
+          '<p class="sim-sel-sub">Dentro de la industria elegida, ¿bajo qué gobierno se contrató? El número dice cuántas obras le tocan.</p></div>' +
         '</div>' +
-      '</div>';
+        '<div class="sim-mdt-grid">' + tarjetas + '</div>' +
+      '</section>';
   }
 
   /* --- Cabecera del desglose: que se esta viendo y como replegarlo --- */
@@ -21599,21 +21636,23 @@
     const agT = simAgregados(sim.obras);
     const cuota = agT.real > 0 ? (ag.real / agT.real) * 100 : 0;
 
+    const hayFiltro = !!sec && sec.id !== 'todos' || !!sx;
+    const contado = !!state.simCabContado;
+    /* Resultado del filtro: que se esta viendo, en una linea, con un solo
+       boton de conteo (como el resto de los simuladores) y la salida de
+       los filtros solo cuando hay alguno puesto. */
     cont.innerHTML =
-      '<div class="sim-desg-cab">' +
-        '<div class="sim-desg-quien">' +
-          '<span class="sim-desg-ico">' + (sec ? sec.icono : '🌐') + '</span>' +
-          '<div>' +
-            '<h3 class="sim-desg-tit">' + (sec ? sec.nombre : 'Todos los sectores') + '</h3>' +
-            '<p class="sim-desg-sub">' + ag.n + (ag.n === 1 ? ' obra' : ' obras') +
-              (sx ? ' · ' + sx.nom + ' (' + sx.ini + '–' + sx.fin + ')' : ' · 1988–2024') +
-              '. Debajo, la ficha viva de cada una.</p>' +
-          '</div>' +
+      '<div class="sim-filtro-activo">' +
+        '<div class="sim-fa-txt">' +
+          '<span class="sim-fa-lbl">Filtro activo</span>' +
+          '<span class="sim-fa-chip">' + (sec && sec.id !== 'todos' ? sec.icono + ' ' + sec.nombre : 'Todas las industrias') + '</span>' +
+          '<span class="sim-fa-chip">' + (sx ? '🏛️ ' + sx.nom + ' · ' + sx.ini + '–' + sx.fin : 'Todos los mandatos') + '</span>' +
+          '<span class="sim-fa-n"><b>' + ag.n + '</b> de ' + agT.n + ' obras</span>' +
         '</div>' +
         '<div class="sim-desg-mandos">' +
-          '<button type="button" class="sim-recontar" onclick="window.AuditEngine.simRecontar()" ' +
-            'title="Volver a contar estas cifras desde cero">↺ Contar de nuevo</button>' +
-          '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Quitar los filtros</button>' +
+          '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.simCabAlternar()">' +
+            (contado ? '<span>\u21BA</span> Reiniciar a ceros' : '<span>\u25B6\uFE0F</span> Contabilizar') + '</button>' +
+          (hayFiltro ? '<button type="button" class="sim-replegar" onclick="window.AuditEngine.cerrarSimuladorDesglose()">✕ Quitar filtros</button>' : '') +
         '</div>' +
       '</div>' +
       /* Las cifras nacen en cero y el motor de conteo las sube hasta su
@@ -21639,8 +21678,19 @@
        cifra pulsa «Contar de nuevo», y entonces sube desde cero. A quien
        pidio menos movimiento se le entrega el dato de una vez, porque
        para esa persona la animacion no es el medio de lectura. */
-    if (simMovimientoReducido()) simAnimarZona(cont, 'cab', 0);
+    if (simMovimientoReducido() || contado) simAnimarZona(cont, 'cab', 0);
     else simPonerEnCeros(cont, 'cab');
+  }
+
+  /* El boton unico de las cifras del filtro: cuenta, o regresa a ceros. */
+  function simCabAlternar() {
+    state.simCabContado = !state.simCabContado;
+    const cont = document.getElementById('simDesgloseCab');
+    renderSimuladorDesgloseCab();
+    if (state.simCabContado && !simMovimientoReducido()) {
+      simPonerEnCeros(cont, 'cab');
+      simAnimarZona(cont, 'cab', 1100);
+    }
   }
 
   /* Las tres partes de la 2.2 son subpestanas: solo una a la vista, con
@@ -27212,6 +27262,7 @@
     simVerSector: simVerSector,
     setSimParte: setSimParte,
     simRecontar: simRecontar,
+    simCabAlternar: simCabAlternar,
     inspSetNivel: inspSetNivel,
     inspBuscar: inspBuscar,
     inspLimpiarBusqueda: inspLimpiarBusqueda,
