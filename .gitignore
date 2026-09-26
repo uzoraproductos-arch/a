@@ -17,3 +17,4 @@ Thumbs.db
 
 # Respaldos manuales: el historial de Git cumple esta funcion
 backups/
+__pycache__/
