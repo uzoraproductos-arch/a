@@ -2067,10 +2067,45 @@ vuelve a correrse si cambian los libros.
   ícono, como ya los tenía Consultar Recursos. La descripción de Expedientes
   decía «$51,024 mdp observados»: cifra que no es la de la ASF; se retiró.
 
+### Hecho (Expedientes de casos verificados contra la ASF y la SHCP)
+
+- Las seis fichas vivían en el motor (`FORENSIC_DOSSIERS`) con cifras sin
+  documento, un único enlace a la portada de la ASF y un botón de $79 que
+  vendía un «expediente pericial» inexistente. Se sustituyeron por la
+  colección `DB.expedientes`, armada con
+  `herramientas/extraer_expedientes_asf.py` (lee 43 informes individuales en
+  PDF, con su SHA-256, más el índice oficial de cada entrega y el libro del
+  Sistema de Alertas) y `herramientas/integrar_expedientes.py` (idempotente).
+  Los datos quedan en `investigaciones/expedientes-asf.json`.
+- Qué cambió al verificar:
+  - Tren Maya: la ficha decía «$540,000+ mdp (+246 %)» y «$1,480.6 mdp
+    observados». En 14 informes (CP 2022 a 2024) la ASF dejó $785.3 mdp por
+    aclarar, todos en la CP 2022 (45 % en el tramo 4); en 2023 y 2024 nada.
+  - Segalmex: «$15,151 mdp» no se pudo sostener con los informes revisados.
+    Las auditorías forenses de las CP 2022 y 2023 dejan $324.5 mdp por aclarar
+    y 16 pliegos.
+  - Dos Bocas: «$18,900 MDD» y «pagos dobles» sin documento. En 13 informes,
+    $127.9 mdp por aclarar y $11.2 mdp recuperados (CP 2022 y 2023); la de
+    2024 sólo emitió 3 recomendaciones.
+  - Salud: se retiraron Fonsabi y CeNSIA (sin documento). En 7 informes de
+    INSABI, IMSS e IMSS-Bienestar: sin montos por aclarar y 27 promociones de
+    responsabilidad administrativa sancionatoria.
+  - Deuda: «Coahuila 142 %», «NL 108 %», «QRoo 95 %» y «alerta amarilla» eran
+    falsos. En el Sistema de Alertas con la CP 2025 (29-06-2026) los 31
+    estados medidos están en endeudamiento sostenible; el más alto es Nuevo
+    León con 97.8 %; suman $643,695.6 mdp.
+  - Defensa: «84 % contratos clasificados» sin documento. En 7 informes (AIFA,
+    Tren Maya S.A., fideicomiso de equipo militar, etc.) no quedaron montos ni
+    acciones.
+- `DB.estados`: `deuda` y `semaforoDeuda` salen ahora del Sistema de Alertas
+  (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
+  `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
+
 ### Pendiente
 
-- **Expedientes de casos (las seis fichas):** siguen con cifras propias sin
-  verificar contra los informes individuales; ver el renglón de abajo.
+- **Expedientes, alcance:** cada ficha reúne sólo los informes enlistados. El
+  caso Segalmex más conocido está en las Cuentas Públicas 2019 a 2021, que no
+  se han integrado; tampoco las auditorías de la CP 2021 a los demás casos.
 - **Ligas de la FGR y del SAT (fichas 87 y 88):** no se pudieron volver a
   abrir desde el entorno de trabajo. `fgr.org.mx` lo bloquea la política de
   red del entorno (se permite en la configuración de red del entorno) y
@@ -2088,11 +2123,6 @@ vuelve a correrse si cambian los libros.
 - **Segunda entrega de la Cuenta Pública 2025 (30 de octubre de 2026):**
   bajar su matriz de datos básicos y actualizar `cp2025`; el 20 de febrero
   de 2027, la tercera y el Informe General.
-- **Expedientes de Casos por Aclarar (Auditoría Forense):** las seis fichas
-  no llevan chip ni número de auditoría, el botón «Informe ASF» abre la
-  portada de la ASF y varias cifras no se pueden sostener como están (Tren
-  Maya «$540,000+ mdp», «Coahuila 142% IDL», «84% contratos clasificados»).
-  El botón «Expediente Completo ($79)» vende algo que no existe.
 - **El foro del Portal Digital no tiene servidor:** lo que se publica vive
   en el navegador de quien lo escribe; los hilos visibles son ejemplos.
 - **Megaobras y su huella ambiental:** falta el documento oficial de cada

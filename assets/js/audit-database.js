@@ -2197,8 +2197,10 @@ window.AUDIT_DB = {
       "dep": 82.8,
       "gobernador": "María Teresa Jiménez Esquivel",
       "partido": "PAN",
-      "deuda": 3650,
+      "deuda": 3993.9,
       "semaforoDeuda": "Verde",
+      "deudaIld": 26.6,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 343.3,
       "asfAuditorias": 34,
       "asfTipologia": "La ASF practicó 34 auditorías al dinero federal que recibió el estado y promovió 63 acciones, entre ellas 31 pliegos de observaciones y 24 promociones de responsabilidad administrativa. Quedaron $343.3 mdp por aclarar y se recuperaron $2.2 mdp durante las auditorías.",
@@ -2273,8 +2275,10 @@ window.AUDIT_DB = {
       "dep": 78.5,
       "gobernador": "Marina del Pilar Ávila Olmeda",
       "partido": "MORENA",
-      "deuda": 22800,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 21664.7,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 43.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 558.4,
       "asfAuditorias": 29,
       "asfTipologia": "La ASF practicó 29 auditorías al dinero federal que recibió el estado y promovió 59 acciones, entre ellas 28 pliegos de observaciones y 21 promociones de responsabilidad administrativa. Quedaron $558.4 mdp por aclarar y se recuperaron $10.8 mdp durante las auditorías.",
@@ -2349,8 +2353,10 @@ window.AUDIT_DB = {
       "dep": 84.7,
       "gobernador": "Víctor Manuel Castro Cosío",
       "partido": "MORENA",
-      "deuda": 3100,
+      "deuda": 1977.0,
       "semaforoDeuda": "Verde",
+      "deudaIld": 18.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 225.1,
       "asfAuditorias": 30,
       "asfTipologia": "La ASF practicó 30 auditorías al dinero federal que recibió el estado y promovió 39 acciones, entre ellas 20 pliegos de observaciones y 9 promociones de responsabilidad administrativa. Quedaron $225.1 mdp por aclarar y se recuperaron $65.4 mdp durante las auditorías.",
@@ -2408,8 +2414,10 @@ window.AUDIT_DB = {
       "dep": 91.2,
       "gobernador": "Layda Sansores San Román",
       "partido": "MORENA",
-      "deuda": 2850,
+      "deuda": 2211.1,
       "semaforoDeuda": "Verde",
+      "deudaIld": 18.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 759.7,
       "asfAuditorias": 36,
       "asfTipologia": "La ASF practicó 36 auditorías al dinero federal que recibió el estado y promovió 102 acciones, entre ellas 44 pliegos de observaciones y 44 promociones de responsabilidad administrativa. Quedaron $759.7 mdp por aclarar y se recuperaron $27.9 mdp durante las auditorías.",
@@ -2466,8 +2474,10 @@ window.AUDIT_DB = {
       "dep": 95.3,
       "gobernador": "Eduardo Ramírez Aguilar",
       "partido": "VERDE",
-      "deuda": 21200,
+      "deuda": 18442.1,
       "semaforoDeuda": "Verde",
+      "deudaIld": 36.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 4499.7,
       "asfAuditorias": 64,
       "asfTipologia": "La ASF practicó 64 auditorías al dinero federal que recibió el estado y promovió 227 acciones, entre ellas 122 pliegos de observaciones y 70 promociones de responsabilidad administrativa. Quedaron $4,499.7 mdp por aclarar y se recuperaron $19.3 mdp durante las auditorías.",
@@ -2558,8 +2568,10 @@ window.AUDIT_DB = {
       "dep": 75.0,
       "gobernador": "María Eugenia Campos Galván",
       "partido": "PAN",
-      "deuda": 49800,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 56049.8,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 93.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 2521.9,
       "asfAuditorias": 60,
       "asfTipologia": "La ASF practicó 60 auditorías al dinero federal que recibió el estado y promovió 234 acciones, entre ellas 95 pliegos de observaciones y 123 promociones de responsabilidad administrativa. Quedaron $2,521.9 mdp por aclarar y se recuperaron $5.6 mdp durante las auditorías.",
@@ -2617,8 +2629,10 @@ window.AUDIT_DB = {
       "dep": 65.0,
       "gobernador": "Clara Brugada Molina",
       "partido": "MORENA",
-      "deuda": 98500,
+      "deuda": 108022.2,
       "semaforoDeuda": "Verde",
+      "deudaIld": 39.5,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 2143.5,
       "asfAuditorias": 31,
       "asfTipologia": "La ASF practicó 31 auditorías al dinero federal que recibió el estado y promovió 104 acciones, entre ellas 36 pliegos de observaciones y 51 promociones de responsabilidad administrativa. Quedaron $2,143.5 mdp por aclarar y se recuperaron $1.9 mdp durante las auditorías.",
@@ -2710,8 +2724,10 @@ window.AUDIT_DB = {
       "dep": 80.0,
       "gobernador": "Manolo Jiménez Salinas",
       "partido": "PRI",
-      "deuda": 42100,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 36358.3,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 87.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 1379.1,
       "asfAuditorias": 62,
       "asfTipologia": "La ASF practicó 62 auditorías al dinero federal que recibió el estado y promovió 183 acciones, entre ellas 120 pliegos de observaciones y 48 promociones de responsabilidad administrativa. Quedaron $1,379.1 mdp por aclarar y se recuperaron $9.5 mdp durante las auditorías.",
@@ -2768,8 +2784,10 @@ window.AUDIT_DB = {
       "dep": 88.4,
       "gobernador": "Indira Vizcaíno Silva",
       "partido": "MORENA",
-      "deuda": 4800,
+      "deuda": 3741.3,
       "semaforoDeuda": "Verde",
+      "deudaIld": 46.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 485.7,
       "asfAuditorias": 32,
       "asfTipologia": "La ASF practicó 32 auditorías al dinero federal que recibió el estado y promovió 78 acciones, entre ellas 44 pliegos de observaciones y 16 promociones de responsabilidad administrativa. Quedaron $485.7 mdp por aclarar y se recuperaron $1.6 mdp durante las auditorías.",
@@ -2826,8 +2844,10 @@ window.AUDIT_DB = {
       "dep": 89.8,
       "gobernador": "Esteban Villegas Villarreal",
       "partido": "PRI",
-      "deuda": 12400,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 10881.4,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 59.3,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 1370.5,
       "asfAuditorias": 41,
       "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 117 acciones, entre ellas 59 pliegos de observaciones y 30 promociones de responsabilidad administrativa. Quedaron $1,370.5 mdp por aclarar y se recuperaron $7.8 mdp durante las auditorías.",
@@ -2883,8 +2903,10 @@ window.AUDIT_DB = {
       "dep": 82.0,
       "gobernador": "Libia Dennise García Muñoz Ledo",
       "partido": "PAN",
-      "deuda": 11800,
+      "deuda": 12644.1,
       "semaforoDeuda": "Verde",
+      "deudaIld": 19.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 2422.2,
       "asfAuditorias": 70,
       "asfTipologia": "La ASF practicó 70 auditorías al dinero federal que recibió el estado y promovió 146 acciones, entre ellas 77 pliegos de observaciones y 57 promociones de responsabilidad administrativa. Quedaron $2,422.2 mdp por aclarar y se recuperaron $208.1 mdp durante las auditorías.",
@@ -2959,8 +2981,10 @@ window.AUDIT_DB = {
       "dep": 95.5,
       "gobernador": "Evelyn Cecia Salgado Pineda",
       "partido": "MORENA",
-      "deuda": 4900,
+      "deuda": 4288.1,
       "semaforoDeuda": "Verde",
+      "deudaIld": 16.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 505.3,
       "asfAuditorias": 49,
       "asfTipologia": "La ASF practicó 49 auditorías al dinero federal que recibió el estado y promovió 125 acciones, entre ellas 48 pliegos de observaciones y 49 promociones de responsabilidad administrativa. Quedaron $505.3 mdp por aclarar y se recuperaron $27.4 mdp durante las auditorías.",
@@ -3018,8 +3042,10 @@ window.AUDIT_DB = {
       "dep": 91.0,
       "gobernador": "Julio Menchaca Salazar",
       "partido": "MORENA",
-      "deuda": 4600,
+      "deuda": 2448.7,
       "semaforoDeuda": "Verde",
+      "deudaIld": 9.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 2152.7,
       "asfAuditorias": 65,
       "asfTipologia": "La ASF practicó 65 auditorías al dinero federal que recibió el estado y promovió 163 acciones, entre ellas 96 pliegos de observaciones y 46 promociones de responsabilidad administrativa. Quedaron $2,152.7 mdp por aclarar y se recuperaron $5.8 mdp durante las auditorías.",
@@ -3076,8 +3102,10 @@ window.AUDIT_DB = {
       "dep": 72.0,
       "gobernador": "Pablo Lemus Navarro",
       "partido": "MC",
-      "deuda": 37500,
+      "deuda": 24798.2,
       "semaforoDeuda": "Verde",
+      "deudaIld": 28.3,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 2196.8,
       "asfAuditorias": 77,
       "asfTipologia": "La ASF practicó 77 auditorías al dinero federal que recibió el estado y promovió 228 acciones, entre ellas 109 pliegos de observaciones y 97 promociones de responsabilidad administrativa. Quedaron $2,196.8 mdp por aclarar y se recuperaron $102.1 mdp durante las auditorías.",
@@ -3170,8 +3198,10 @@ window.AUDIT_DB = {
       "dep": 84.5,
       "gobernador": "Delfina Gómez Álvarez",
       "partido": "MORENA",
-      "deuda": 62000,
+      "deuda": 55488.0,
       "semaforoDeuda": "Verde",
+      "deudaIld": 27.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 13198.7,
       "asfAuditorias": 151,
       "asfTipologia": "La ASF practicó 151 auditorías al dinero federal que recibió el estado y promovió 453 acciones, entre ellas 255 pliegos de observaciones y 166 promociones de responsabilidad administrativa. Quedaron $13,198.7 mdp por aclarar y se recuperaron $283.5 mdp durante las auditorías.",
@@ -3263,8 +3293,10 @@ window.AUDIT_DB = {
       "dep": 89.2,
       "gobernador": "Alfredo Ramírez Bedolla",
       "partido": "MORENA",
-      "deuda": 34200,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 21815.7,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 53.1,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 1003.6,
       "asfAuditorias": 48,
       "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 108 acciones, entre ellas 44 pliegos de observaciones y 45 promociones de responsabilidad administrativa. Quedaron $1,003.6 mdp por aclarar y se recuperaron $62.1 mdp durante las auditorías.",
@@ -3321,8 +3353,10 @@ window.AUDIT_DB = {
       "dep": 87.0,
       "gobernador": "Margarita González Saravia",
       "partido": "MORENA",
-      "deuda": 8200,
+      "deuda": 6110.6,
       "semaforoDeuda": "Verde",
+      "deudaIld": 35.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 3168.9,
       "asfAuditorias": 58,
       "asfTipologia": "La ASF practicó 58 auditorías al dinero federal que recibió el estado y promovió 233 acciones, entre ellas 113 pliegos de observaciones y 100 promociones de responsabilidad administrativa. Quedaron $3,168.9 mdp por aclarar y se recuperaron $3.7 mdp durante las auditorías.",
@@ -3379,8 +3413,10 @@ window.AUDIT_DB = {
       "dep": 92.0,
       "gobernador": "Miguel Ángel Navarro Quintero",
       "partido": "MORENA",
-      "deuda": 6400,
+      "deuda": 6531.3,
       "semaforoDeuda": "Verde",
+      "deudaIld": 47.7,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 915.0,
       "asfAuditorias": 41,
       "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 118 acciones, entre ellas 54 pliegos de observaciones y 41 promociones de responsabilidad administrativa. Quedaron $915.0 mdp por aclarar y se recuperaron $2.8 mdp durante las auditorías.",
@@ -3437,8 +3473,10 @@ window.AUDIT_DB = {
       "dep": 62.0,
       "gobernador": "Samuel Alejandro García Sepúlveda",
       "partido": "MC",
-      "deuda": 88000,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 81006.1,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 97.8,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 4539.7,
       "asfAuditorias": 73,
       "asfTipologia": "La ASF practicó 73 auditorías al dinero federal que recibió el estado y promovió 215 acciones, entre ellas 123 pliegos de observaciones y 80 promociones de responsabilidad administrativa. Quedaron $4,539.7 mdp por aclarar y se recuperaron $28.5 mdp durante las auditorías.",
@@ -3531,8 +3569,10 @@ window.AUDIT_DB = {
       "dep": 95.0,
       "gobernador": "Salomón Jara Cruz",
       "partido": "MORENA",
-      "deuda": 18500,
+      "deuda": 13100.8,
       "semaforoDeuda": "Verde",
+      "deudaIld": 36.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 2024.4,
       "asfAuditorias": 60,
       "asfTipologia": "La ASF practicó 60 auditorías al dinero federal que recibió el estado y promovió 159 acciones, entre ellas 92 pliegos de observaciones y 46 promociones de responsabilidad administrativa. Quedaron $2,024.4 mdp por aclarar y se recuperaron $10.0 mdp durante las auditorías.",
@@ -3606,8 +3646,10 @@ window.AUDIT_DB = {
       "dep": 88.0,
       "gobernador": "Alejandro Armenta Mier",
       "partido": "MORENA",
-      "deuda": 41500,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 8060.9,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 12.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 931.2,
       "asfAuditorias": 62,
       "asfTipologia": "La ASF practicó 62 auditorías al dinero federal que recibió el estado y promovió 145 acciones, entre ellas 66 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $931.2 mdp por aclarar y se recuperaron $15.0 mdp durante las auditorías.",
@@ -3682,8 +3724,10 @@ window.AUDIT_DB = {
       "dep": 76.0,
       "gobernador": "Mauricio Kuri González",
       "partido": "PAN",
-      "deuda": 4200,
+      "deuda": 1533.4,
       "semaforoDeuda": "Verde",
+      "deudaIld": 4.8,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 243.7,
       "asfAuditorias": 38,
       "asfTipologia": "La ASF practicó 38 auditorías al dinero federal que recibió el estado y promovió 68 acciones, entre ellas 33 pliegos de observaciones y 26 promociones de responsabilidad administrativa. Quedaron $243.7 mdp por aclarar y se recuperaron $4.3 mdp durante las auditorías.",
@@ -3758,8 +3802,10 @@ window.AUDIT_DB = {
       "dep": 84.0,
       "gobernador": "María Elena Hermelinda Lezama Espinosa",
       "partido": "MORENA",
-      "deuda": 23500,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 19262.5,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 62.6,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 428.3,
       "asfAuditorias": 38,
       "asfTipologia": "La ASF practicó 38 auditorías al dinero federal que recibió el estado y promovió 24 acciones, entre ellas 13 pliegos de observaciones y 2 promociones de responsabilidad administrativa. Quedaron $428.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",
@@ -3834,8 +3880,10 @@ window.AUDIT_DB = {
       "dep": 88.0,
       "gobernador": "José Ricardo Gallardo Cardona",
       "partido": "VERDE",
-      "deuda": 8900,
+      "deuda": 7574.4,
       "semaforoDeuda": "Verde",
+      "deudaIld": 25.4,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 592.5,
       "asfAuditorias": 82,
       "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 206 acciones, entre ellas 123 pliegos de observaciones y 63 promociones de responsabilidad administrativa. Quedaron $592.5 mdp por aclarar y se recuperaron $24.6 mdp durante las auditorías.",
@@ -3893,8 +3941,10 @@ window.AUDIT_DB = {
       "dep": 83.0,
       "gobernador": "Rubén Rocha Moya",
       "partido": "MORENA",
-      "deuda": 9800,
+      "deuda": 7821.6,
       "semaforoDeuda": "Verde",
+      "deudaIld": 23.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 574.6,
       "asfAuditorias": 42,
       "asfTipologia": "La ASF practicó 42 auditorías al dinero federal que recibió el estado y promovió 73 acciones, entre ellas 41 pliegos de observaciones y 23 promociones de responsabilidad administrativa. Quedaron $574.6 mdp por aclarar y se recuperaron $3.6 mdp durante las auditorías.",
@@ -3952,8 +4002,10 @@ window.AUDIT_DB = {
       "dep": 79.0,
       "gobernador": "Francisco Alfonso Durazo Montaño",
       "partido": "MORENA",
-      "deuda": 31200,
-      "semaforoDeuda": "Amarillo",
+      "deuda": 29101.8,
+      "semaforoDeuda": "Verde",
+      "deudaIld": 76.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 619.6,
       "asfAuditorias": 48,
       "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 108 acciones, entre ellas 49 pliegos de observaciones y 38 promociones de responsabilidad administrativa. Quedaron $619.6 mdp por aclarar y se recuperaron $2.0 mdp durante las auditorías.",
@@ -4011,8 +4063,10 @@ window.AUDIT_DB = {
       "dep": 92.0,
       "gobernador": "Javier May Rodríguez",
       "partido": "MORENA",
-      "deuda": 6500,
+      "deuda": 5084.2,
       "semaforoDeuda": "Verde",
+      "deudaIld": 16.0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 1586.0,
       "asfAuditorias": 41,
       "asfTipologia": "La ASF practicó 41 auditorías al dinero federal que recibió el estado y promovió 172 acciones, entre ellas 53 pliegos de observaciones y 102 promociones de responsabilidad administrativa. Quedaron $1,586.0 mdp por aclarar y se recuperaron $12.0 mdp durante las auditorías.",
@@ -4069,8 +4123,10 @@ window.AUDIT_DB = {
       "dep": 81.0,
       "gobernador": "Américo Villarreal Anaya",
       "partido": "MORENA",
-      "deuda": 18500,
+      "deuda": 15105.4,
       "semaforoDeuda": "Verde",
+      "deudaIld": 38.2,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 401.7,
       "asfAuditorias": 66,
       "asfTipologia": "La ASF practicó 66 auditorías al dinero federal que recibió el estado y promovió 106 acciones, entre ellas 52 pliegos de observaciones y 44 promociones de responsabilidad administrativa. Quedaron $401.7 mdp por aclarar y se recuperaron $33.2 mdp durante las auditorías.",
@@ -4146,6 +4202,8 @@ window.AUDIT_DB = {
       "partido": "MORENA",
       "deuda": 0,
       "semaforoDeuda": "Verde",
+      "deudaIld": 0,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026). Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único; la Ley de Disciplina Financiera (art. 14) lo clasifica como sostenible.",
       "asfMontoObservado": 418.3,
       "asfAuditorias": 82,
       "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 191 acciones, entre ellas 108 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $418.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",
@@ -4201,8 +4259,10 @@ window.AUDIT_DB = {
       "dep": 90.0,
       "gobernador": "Rocío Nahle García",
       "partido": "MORENA",
-      "deuda": 48500,
+      "deuda": 42402.8,
       "semaforoDeuda": "Verde",
+      "deudaIld": 47.5,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 4460.8,
       "asfAuditorias": 126,
       "asfTipologia": "La ASF practicó 126 auditorías al dinero federal que recibió el estado y promovió 357 acciones, entre ellas 207 pliegos de observaciones y 134 promociones de responsabilidad administrativa. Quedaron $4,460.8 mdp por aclarar y se recuperaron $3.6 mdp durante las auditorías.",
@@ -4277,8 +4337,10 @@ window.AUDIT_DB = {
       "dep": 84.0,
       "gobernador": "Joaquín Jesús Díaz Mena",
       "partido": "MORENA",
-      "deuda": 11200,
+      "deuda": 9780.7,
       "semaforoDeuda": "Verde",
+      "deudaIld": 37.9,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 1989.7,
       "asfAuditorias": 48,
       "asfTipologia": "La ASF practicó 48 auditorías al dinero federal que recibió el estado y promovió 134 acciones, entre ellas 81 pliegos de observaciones y 28 promociones de responsabilidad administrativa. Quedaron $1,989.7 mdp por aclarar y se recuperaron $5.6 mdp durante las auditorías.",
@@ -4336,8 +4398,10 @@ window.AUDIT_DB = {
       "dep": 94.0,
       "gobernador": "David Monreal Ávila",
       "partido": "MORENA",
-      "deuda": 7900,
+      "deuda": 6394.6,
       "semaforoDeuda": "Verde",
+      "deudaIld": 40.3,
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)",
       "asfMontoObservado": 702.2,
       "asfAuditorias": 39,
       "asfTipologia": "La ASF practicó 39 auditorías al dinero federal que recibió el estado y promovió 92 acciones, entre ellas 40 pliegos de observaciones y 41 promociones de responsabilidad administrativa. Quedaron $702.2 mdp por aclarar y se recuperaron $3.4 mdp durante las auditorías.",
@@ -19069,6 +19133,1095 @@ window.AUDIT_DB = {
       "pagina": 11,
       "estado": "oficial"
     }
+  },
+"expedientes": {
+    "consulta": "26 de septiembre de 2026",
+    "fichas": [
+      {
+        "id": "tren-maya",
+        "categoria": "megaobras",
+        "icono": "\ud83d\ude85",
+        "titulo": "Tren Maya: lo que la ASF dej\u00f3 por aclarar",
+        "ente": "FONATUR Tren Maya y Fondo Nacional de Fomento al Turismo",
+        "hallazgo": "En la Cuenta P\u00fablica 2022, con la obra en marcha, la ASF revis\u00f3 la construcci\u00f3n de los tramos 1 a 7 y el financiamiento del proyecto: dej\u00f3 $785.3 mdp por aclarar y promovi\u00f3 14 pliegos de observaciones. El tramo 4, Izamal-Canc\u00fan, concentra $352.3 mdp: el 45 % del total. En las auditor\u00edas de 2023 y 2024 aqu\u00ed reunidas, ya con el tren en operaci\u00f3n, no quedaron montos por aclarar.",
+        "cifras": [
+          {
+            "valor": "14",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$785.3 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "14 \u00b7 15",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 11,
+            "porAclarar": 785260347.3,
+            "recuperado": 0.0,
+            "acciones": 39,
+            "PO": 14,
+            "PRAS": 14
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 1,
+            "PO": 0,
+            "PRAS": 1
+          },
+          {
+            "cp": 2024,
+            "auditorias": 2,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 107,
+            "clave": "2022-2-21W3X-22-0107-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "FONATUR Tren Maya, S.A. de C.V.",
+            "titulo": "Proyecto Tren Maya",
+            "porAclarar": 256099390.14,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 1,
+              "SA": 1,
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 1 Recomendaci\u00f3n, 1 Solicitud de Aclaraci\u00f3n y 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0107_a.pdf",
+            "sha256": "8b9396da026519f622fb7a977435bb5efb058a6f8720aab77612133657500150",
+            "paginas": 17
+          },
+          {
+            "cp": 2022,
+            "num": 111,
+            "clave": "2022-3-21W3N-22-0111-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 1, Palenque-Esc\u00e1rcega, en los Estados de Chiapas, Tabasco y Campeche",
+            "porAclarar": 57568832.92,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 2,
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 2 Solicitudes de Aclaraci\u00f3n y 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0111_a.pdf",
+            "sha256": "c1579fa88c7a76ea4ba6b35d6f2b2861f80f64bbf43f4ecc47abe4cb071ea1a0",
+            "paginas": 18
+          },
+          {
+            "cp": 2022,
+            "num": 112,
+            "clave": "2022-3-21W3N-22-0112-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 2, Esc\u00e1rcega-Calkin\u00ed, en el Estado de Campeche",
+            "porAclarar": 28834854.94,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3,
+              "PO": 3
+            },
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 4 no se detectaron irregularidades y los 6 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0112_a.pdf",
+            "sha256": "1bd89b2f064577a2338c5e8f43174855569c243228bd4845d14063f33182ce2d",
+            "paginas": 27
+          },
+          {
+            "cp": 2022,
+            "num": 113,
+            "clave": "2022-3-21W3N-22-0113-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 3, Calkin\u00ed-Izamal, en los Estados de Campeche y Yucat\u00e1n",
+            "porAclarar": 65466591.89,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 2,
+              "PRAS": 1,
+              "PO": 3
+            },
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 4 no se detectaron irregularidades y los 6 restantes generaron: 2 Solicitudes de Aclaraci\u00f3n, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 3 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0113_a.pdf",
+            "sha256": "646c96bd656ea186732c8f706ebad84190c61f4ecc7098952b7ac5703ac6fc2b",
+            "paginas": 27
+          },
+          {
+            "cp": 2022,
+            "num": 114,
+            "clave": "2022-3-21W3N-22-0114-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 4, Izamal-Canc\u00fan, en los Estados de Yucat\u00e1n y Quintana Roo",
+            "porAclarar": 352311614.76,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 1,
+              "PRAS": 1,
+              "PO": 5
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 1 Solicitud de Aclaraci\u00f3n, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 5 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0114_a.pdf",
+            "sha256": "4d19f7f22519fb5732b2f917d27271666c9f4bc843e40cb69a94a96e6b4b4c3f",
+            "paginas": 26
+          },
+          {
+            "cp": 2022,
+            "num": 115,
+            "clave": "2022-0-07100-22-0115-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 5 Norte, Canc\u00fan-Playa del Carmen, en el Estado de Quintana Roo",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 5 resultados, de los cuales, en 4 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0115_a.pdf",
+            "sha256": "bcb785857427e1a620b2b88f756df83756410ef5813d579345c8fd05f45922cf",
+            "paginas": 19
+          },
+          {
+            "cp": 2022,
+            "num": 116,
+            "clave": "2022-0-07100-22-0116-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Proyecto y Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 5 Sur, Playa del Carmen-Tulum, en el Estado de Quintana Roo",
+            "porAclarar": 2153824.98,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 2,
+              "PRAS": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 8 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 2 Recomendaciones, 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0116_a.pdf",
+            "sha256": "4af901d8cfa66fc7f5ff79e15c8706faa513c364cfa0c3afe53482baacb0e3d8",
+            "paginas": 20
+          },
+          {
+            "cp": 2022,
+            "num": 117,
+            "clave": "2022-3-21W3N-22-0117-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Seguimiento al Proyecto Tren Maya",
+            "porAclarar": 12805938.81,
+            "recuperado": 0.0,
+            "acciones": {
+              "SA": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 1 Solicitud de Aclaraci\u00f3n y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0117_a.pdf",
+            "sha256": "b5dca0a98c7104993f39b4ae3a4cee7816af816ff946fc2cfebce04f08f55c65",
+            "paginas": 16
+          },
+          {
+            "cp": 2022,
+            "num": 118,
+            "clave": "2022-3-21W3N-19-0118-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Financiamiento y Erogaciones del Proyecto y Construcci\u00f3n del Tren Maya",
+            "porAclarar": 10019298.86,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en 3 no se detectaron irregularidades y los 2 restantes generaron: 1 Recomendaci\u00f3n y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0118_a.pdf",
+            "sha256": "3e832f9c68abea608fcf055b074352d5996c79b9689e8c1fa8741ac4035b7272",
+            "paginas": 31
+          },
+          {
+            "cp": 2022,
+            "num": 2111,
+            "clave": "2022-0-07100-22-2111-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 6, Tulum-Chetumal, en el Estado de Quintana Roo",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 6 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2111_a.pdf",
+            "sha256": "6657149008b936ca429d70fe55aa4de5a5c27fcb8537ea9a5087307abb2f9a1d",
+            "paginas": 23
+          },
+          {
+            "cp": 2022,
+            "num": 2112,
+            "clave": "2022-0-07100-22-2112-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n de Plataforma y V\u00eda del Tren Maya, Tramo 7, Chetumal-Esc\u00e1rcega, y Construcci\u00f3n del Taller y Cochera en Chetumal, en los Estados de Quintana Roo y Campeche",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 4
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 4 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2112_a.pdf",
+            "sha256": "ea6572ad11d21a3302bce5adf397eabbc8ef0b9bcb8f10f43b6bc0e40916ff08",
+            "paginas": 18
+          },
+          {
+            "cp": 2023,
+            "num": 145,
+            "clave": "2023-3-21W3N-19-0145-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Fondo Nacional de Fomento al Turismo",
+            "titulo": "Construcci\u00f3n y Operaci\u00f3n del Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 15 resultados, de los cuales, en 11 no se detectaron irregularidades y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0145_a.pdf",
+            "sha256": "adbe5b0516cdcad0817a01b16d7460454cee4f623d4d9fecf235bfad5489aefb",
+            "paginas": 33
+          },
+          {
+            "cp": 2024,
+            "num": 125,
+            "clave": "2024-2-21W3X-22-0125-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "FONATUR Tren Maya, S.A. de C.V.",
+            "titulo": "Proyecto Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 4 resultados, de los cuales, en 2 no se detectaron irregularidades y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0125_a.pdf",
+            "sha256": "0c913ffb921f0b7656188ebecb68b8e4ee8b418d2bd1bd79a3ee77fb2db4144f",
+            "paginas": 8
+          },
+          {
+            "cp": 2024,
+            "num": 126,
+            "clave": "2024-2-21W3X-19-0126-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "FONATUR Tren Maya, S.A. de C.V. Fondo Nacional de Fomento al Turismo",
+            "titulo": "Erogaciones para el Proyecto Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 12 resultados, de los cuales, en 12 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0126_a.pdf",
+            "sha256": "d2c6eb81437c4e04a06444bb0c2b924f47a737038c6f2fae2c639a68b6d51550",
+            "paginas": 21
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "segalmex",
+        "categoria": "alimentos",
+        "icono": "\ud83c\udf3d",
+        "titulo": "Segalmex: las auditor\u00edas forenses m\u00e1s recientes",
+        "ente": "Seguridad Alimentaria Mexicana (Segalmex)",
+        "hallazgo": "Las dos auditor\u00edas forenses a Segalmex de las Cuentas P\u00fablicas 2022 y 2023 dejaron $324.5 mdp por aclarar, 16 pliegos de observaciones y avisos al SAT por posibles incumplimientos fiscales. Revisaron compras de bienes y servicios (2022) y la compra, venta y administraci\u00f3n de ma\u00edz y frijol (2023).",
+        "cifras": [
+          {
+            "valor": "2",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$324.5 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "16 \u00b7 22",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 1,
+            "porAclarar": 177854262.93,
+            "recuperado": 0.0,
+            "acciones": 30,
+            "PO": 10,
+            "PRAS": 11
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 146603764.54,
+            "recuperado": 0.0,
+            "acciones": 29,
+            "PO": 6,
+            "PRAS": 11
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 2123,
+            "clave": "2022-1-08JBP-23-2123-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento Forense",
+            "ente": "Seguridad Alimentaria Mexicana",
+            "titulo": "Adquisici\u00f3n de Bienes y Prestaci\u00f3n de Servicios",
+            "porAclarar": 177854262.93,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 5,
+              "PEFCF": 4,
+              "PRAS": 11,
+              "PO": 10
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, 5 generaron: 5 Recomendaciones, 4 Promociones del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 10 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_2123_a.pdf",
+            "sha256": "dd8aad223341ee400119000878699f7b85dfbe5d41fe8f1523d5d770be21122e",
+            "paginas": 125
+          },
+          {
+            "cp": 2023,
+            "num": 400,
+            "clave": "2023-1-08JBP-23-0400-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento Forense",
+            "ente": "Seguridad Alimentaria Mexicana",
+            "titulo": "Compra, Venta y Administraci\u00f3n del Ma\u00edz y Frijol y Servicios Relacionados",
+            "porAclarar": 146603764.54,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 9,
+              "PEFCF": 3,
+              "PRAS": 11,
+              "PO": 6
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 6 restantes generaron: 9 Recomendaciones, 3 Promociones del Ejercicio de la Facultad de Comprobaci\u00f3n Fiscal, 11 Promociones de Responsabilidad Administrativa Sancionatoria y 6 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0400_a.pdf",
+            "sha256": "d0f5317a17d71ddff04d51e7264f8154050bbe31651ac3b3cc73434102e560c8",
+            "paginas": 90
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "dos-bocas",
+        "categoria": "energia",
+        "icono": "\ud83d\udee2\ufe0f",
+        "titulo": "Refiner\u00eda Olmeca (Dos Bocas): obra y contratos",
+        "ente": "Pemex Corporativo y Pemex Transformaci\u00f3n Industrial",
+        "hallazgo": "En 2022 y 2023 la ASF revis\u00f3 la construcci\u00f3n de la refiner\u00eda paquete por paquete: dej\u00f3 $127.9 mdp por aclarar, promovi\u00f3 13 pliegos de observaciones y durante las auditor\u00edas se recuperaron $11.2 mdp. La auditor\u00eda de 2024, a los ingresos y egresos del proyecto, s\u00f3lo emiti\u00f3 3 recomendaciones.",
+        "cifras": [
+          {
+            "valor": "13",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$127.9 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "13 \u00b7 7",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          },
+          {
+            "valor": "$11.2 mdp",
+            "etq": "recuperados durante las auditor\u00edas",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 7,
+            "porAclarar": 110636008.34,
+            "recuperado": 10715068.450000001,
+            "acciones": 12,
+            "PO": 10,
+            "PRAS": 2
+          },
+          {
+            "cp": 2023,
+            "auditorias": 5,
+            "porAclarar": 17214186.01,
+            "recuperado": 468142.25,
+            "acciones": 13,
+            "PO": 3,
+            "PRAS": 5
+          },
+          {
+            "cp": 2024,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 3,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 215,
+            "clave": "2022-6-90T9N-22-0215-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Conformaci\u00f3n de Plataformas y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 32950001.59,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 2
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 2 restantes generaron: 2 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0215_a.pdf",
+            "sha256": "263c3483aa7c186a6bd9243e10ffb89ce04d86fd6bb8e081ba966f3f1fa326e0",
+            "paginas": 15
+          },
+          {
+            "cp": 2022,
+            "num": 216,
+            "clave": "2022-6-90T9N-22-0216-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 1 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 13940721.58,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y los 2 restantes generaron: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0216_a.pdf",
+            "sha256": "63251dfd48af92d9f72f471e7416153c1986875c62d7d572f9fee7a29ecd3f95",
+            "paginas": 23
+          },
+          {
+            "cp": 2022,
+            "num": 217,
+            "clave": "2022-6-90T9N-22-0217-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 2 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 436774.6,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 4 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0217_a.pdf",
+            "sha256": "f6b25a61fa2dc19d128ed35388f6c31601aa4879e0f11e9d1431f1e92ec26194",
+            "paginas": 24
+          },
+          {
+            "cp": 2022,
+            "num": 218,
+            "clave": "2022-6-90T9N-22-0218-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 3 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 4 resultados, de los cuales, en 3 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0218_a.pdf",
+            "sha256": "ea5e44c44ddd0e0957d68836a43f273f78ee8e283bb92841504e38ebd7ab7f7b",
+            "paginas": 13
+          },
+          {
+            "cp": 2022,
+            "num": 219,
+            "clave": "2022-6-90T9N-22-0219-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 4 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 3806528.74,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 1
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en 2 no se detectaron irregularidades y el restante gener\u00f3: 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0219_a.pdf",
+            "sha256": "814ed5e55b9851c60a93267b11882097dfae1b92e823eb5d60a104102232c026",
+            "paginas": 16
+          },
+          {
+            "cp": 2022,
+            "num": 220,
+            "clave": "2022-6-90T9N-22-0220-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 5 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 5338163.8,
+            "recuperado": 29390.3,
+            "acciones": {
+              "PO": 1
+            },
+            "resumen": "Se determinaron 3 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. El restante gener\u00f3: 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0220_a.pdf",
+            "sha256": "fec21331b826b22d89ac866c18b51abef117d8889145ce0756f5869bde4c053c",
+            "paginas": 18
+          },
+          {
+            "cp": 2022,
+            "num": 221,
+            "clave": "2022-6-90T9N-22-0221-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 6 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 54163818.03,
+            "recuperado": 10685678.15,
+            "acciones": {
+              "PO": 4
+            },
+            "resumen": "Se determinaron 9 resultados, de los cuales, en 2 no se detectaron irregularidades y 3 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 4 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0221_a.pdf",
+            "sha256": "78f11738f536ac33e6d15d2e4c50e12bd29cfd2079e83badb06c305dacc53501",
+            "paginas": 34
+          },
+          {
+            "cp": 2023,
+            "num": 244,
+            "clave": "2023-6-90T9N-19-0244-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Pemex Corporativo",
+            "titulo": "Egresos Destinados al Proyecto de la Refiner\u00eda Olmeca en Dos Bocas",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 5
+            },
+            "resumen": "Se determinaron 14 resultados, de los cuales, en 9 no se detectaron irregularidades y los 5 restantes generaron: 5 Recomendaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0244_a.pdf",
+            "sha256": "3dfc9db99a6da4672d7b18b7874646abc17ddad9985fd06108f997d14309e8b8",
+            "paginas": 23
+          },
+          {
+            "cp": 2023,
+            "num": 246,
+            "clave": "2023-6-90T9N-22-0246-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo de los Paquetes 3, 4, 5 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 2677637.93,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3,
+              "PO": 1
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 4 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria y 1 Pliego de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0246_a.pdf",
+            "sha256": "7794d03377837c0ae9974f333fdaf249cf7542f30717bfb084ae2cbaa7b3290d",
+            "paginas": 34
+          },
+          {
+            "cp": 2023,
+            "num": 247,
+            "clave": "2023-6-90T9N-22-0247-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 1 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 14536548.08,
+            "recuperado": 0.0,
+            "acciones": {
+              "PO": 2
+            },
+            "resumen": "Se determinaron 4 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Pliegos de Observaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0247_a.pdf",
+            "sha256": "5aac9f1ef66010f2a0afadb05737cd4299eda95e29057376ee911a2dae7a6455",
+            "paginas": 20
+          },
+          {
+            "cp": 2023,
+            "num": 248,
+            "clave": "2023-6-90T9N-22-0248-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 2 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 5 resultados, de los cuales, en uno no se detect\u00f3 irregularidad y 2 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0248_a.pdf",
+            "sha256": "2a8b9ebe4afb57dcd2a460c2bf3aff579d903d7f8053220455b6cfb04c56e4a4",
+            "paginas": 22
+          },
+          {
+            "cp": 2023,
+            "num": 249,
+            "clave": "2023-6-90T9N-22-0249-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento a Inversiones F\u00edsicas",
+            "ente": "Pemex Corporativo",
+            "titulo": "Desarrollo del Paquete 6 y Contratos Relacionados con el Proyecto de la Nueva Refiner\u00eda en Dos Bocas, Para\u00edso, en el Estado de Tabasco",
+            "porAclarar": 0.0,
+            "recuperado": 468142.25,
+            "acciones": {},
+            "resumen": "Se determinaron 3 resultados, de los cuales, en 2 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0249_a.pdf",
+            "sha256": "aaaa54d857f69012145f64c22bd672eb2440786d2dccdcc01e0ed68018708d04",
+            "paginas": 17
+          },
+          {
+            "cp": 2024,
+            "num": 247,
+            "clave": "2024-6-90T9N-19-0247-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Pemex Corporativo Pemex Transformaci\u00f3n Industrial",
+            "titulo": "Ingresos y Egresos del Proyecto de la Refiner\u00eda Olmeca en Dos Bocas",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 3
+            },
+            "resumen": "Se determinaron 15 resultados, de los cuales, en 11 no se detectaron irregularidades y los 4 restantes generaron: 3 Recomendaciones.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
+            "sha256": "0b517333d735160e535f43df7b25eba6a8b6211a1eeeefcc4756f484947319f3",
+            "paginas": 17
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "salud",
+        "categoria": "salud",
+        "icono": "\ud83c\udfe5",
+        "titulo": "Compra de medicamentos e IMSS-Bienestar",
+        "ente": "INSABI, IMSS e IMSS-Bienestar",
+        "hallazgo": "En la compra de medicamentos, en la transici\u00f3n a IMSS-Bienestar y en su operaci\u00f3n en 2024, la ASF no cuantific\u00f3 montos por aclarar, pero emiti\u00f3 27 promociones de responsabilidad administrativa sancionatoria: faltas administrativas que el \u00f3rgano interno de control de cada instituci\u00f3n debe investigar y, en su caso, sancionar.",
+        "cifras": [
+          {
+            "valor": "7",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$0.0 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "0 \u00b7 27",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2022,
+            "auditorias": 3,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 14,
+            "PO": 0,
+            "PRAS": 12
+          },
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 4,
+            "PO": 0,
+            "PRAS": 4
+          },
+          {
+            "cp": 2024,
+            "auditorias": 3,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 13,
+            "PO": 0,
+            "PRAS": 11
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2022,
+            "num": 140,
+            "clave": "2022-1-12NAW-19-0140-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto de Salud para el Bienestar",
+            "titulo": "Adquisici\u00f3n Consolidada de Medicamentos y Material de Curaci\u00f3n",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 2,
+              "PRAS": 7
+            },
+            "resumen": "Se determinaron 18 resultados, de los cuales, en 5 no se detectaron irregularidades y 5 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 8 restantes generaron: 2 Recomendaciones y 7 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0140_a.pdf",
+            "sha256": "f947be0e742b12784f69e545ed1db6bf1580d2e8143ae5b27893520db2501024",
+            "paginas": 75
+          },
+          {
+            "cp": 2022,
+            "num": 164,
+            "clave": "2022-1-19GYR-19-0164-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto Mexicano del Seguro Social",
+            "titulo": "Adquisici\u00f3n de Medicamentos por parte de los \u00d3rganos de Operaci\u00f3n Administrativa Desconcentrada y Unidades M\u00e9dicas de Alta Especialidad",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3
+            },
+            "resumen": "Se determinaron 6 resultados, de los cuales, en 2 no se detectaron irregularidades y los 4 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0164_a.pdf",
+            "sha256": "23f473f631b4a21ae6ab6f70e3a5aa082f3158fd75b771bd77a62f20a4ef6208",
+            "paginas": 17
+          },
+          {
+            "cp": 2022,
+            "num": 173,
+            "clave": "2022-1-19GYR-19-0173-2023",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto Mexicano del Seguro Social",
+            "titulo": "Transici\u00f3n del Programa IMSS-Bienestar al Organismo P\u00fablico Descentralizado Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 2
+            },
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 4 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 2 restantes generaron: 2 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0173_a.pdf",
+            "sha256": "a2a62412a9a32eea2fba7a2be0cde17d0357c71881e4b189caf2e8035bc80ff7",
+            "paginas": 24
+          },
+          {
+            "cp": 2023,
+            "num": 191,
+            "clave": "2023-1-19GYR-19-0191-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Instituto Mexicano del Seguro Social",
+            "titulo": "Programa IMSS-Bienestar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 4
+            },
+            "resumen": "Se determinaron 27 resultados, de los cuales, en 16 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 7 restantes generaron: 4 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_0191_a.pdf",
+            "sha256": "392219ae5aef394c5ffcc71cce9fd6cb919c98bd08418592b61f1c2b3b1ec7e9",
+            "paginas": 35
+          },
+          {
+            "cp": 2024,
+            "num": 418,
+            "clave": "2024-1-47AYO-19-0418-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar (IMSS-BIENESTAR) Secretar\u00eda de Salud",
+            "titulo": "Fondo de Aportaciones para los Servicios de Salud",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 1
+            },
+            "resumen": "Se determinaron 20 resultados, de los cuales, en 19 no se detectaron irregularidades y el restante gener\u00f3: 1 Promoci\u00f3n de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0418_a.pdf",
+            "sha256": "dbd97fc694854149ed965b4b2fe8f7eca16b5a111f3fc7814e2f5f3dad75debf",
+            "paginas": 15
+          },
+          {
+            "cp": 2024,
+            "num": 419,
+            "clave": "2024-1-47AYO-19-0419-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar (IMSS-BIENESTAR) Secretar\u00eda de Salud",
+            "titulo": "Programa de Atenci\u00f3n a la Salud de Personas sin Seguridad Social",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "PRAS": 3
+            },
+            "resumen": "Se determinaron 12 resultados, de los cuales, en 8 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe. Los 3 restantes generaron: 3 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0419_a.pdf",
+            "sha256": "8686502c29da7b703005661077d11eb259afa6f7e4d97e3f251ef91f9b75bc5f",
+            "paginas": 16
+          },
+          {
+            "cp": 2024,
+            "num": 420,
+            "clave": "2024-1-47AYO-19-0420-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar (IMSS-BIENESTAR) Secretar\u00eda de Salud",
+            "titulo": "Programa de Atenci\u00f3n a la Salud y Medicamentos Gratuitos para la Poblaci\u00f3n sin Seguridad Social Laboral",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {
+              "R": 2,
+              "PRAS": 7
+            },
+            "resumen": "Se determinaron 20 resultados, de los cuales, en 11 no se detectaron irregularidades y los 9 restantes generaron: 2 Recomendaciones y 7 Promociones de Responsabilidad Administrativa Sancionatoria.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0420_a.pdf",
+            "sha256": "aaf457a8f071f6dbb20c6f0e4ca98127cfa5e973009e7f43edf97f7cf76f2246",
+            "paginas": 28
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2022, 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      },
+      {
+        "id": "deuda-estados",
+        "categoria": "deuda",
+        "icono": "\ud83c\udfdb\ufe0f",
+        "titulo": "Deuda de los estados: el Sistema de Alertas",
+        "ente": "SHCP \u00b7 Sistema de Alertas de la Ley de Disciplina Financiera",
+        "hallazgo": "Con la Cuenta P\u00fablica 2025, los 31 estados medidos quedaron en \u00abEndeudamiento Sostenible\u00bb; ninguno en observaci\u00f3n ni en endeudamiento elevado. Los m\u00e1s endeudados respecto de sus ingresos de libre disposici\u00f3n son Nuevo Le\u00f3n (97.8 %), Chihuahua (93.0 %), Coahuila (87.0 %). En Nuevo Le\u00f3n, Chihuahua, Coahuila, Sonora y Durango el pago de la deuda ya pesa en rango medio. Tlaxcala no se mide porque no tiene deuda inscrita en el Registro P\u00fablico \u00danico.",
+        "cifras": [
+          {
+            "valor": "$643,695.6 mdp",
+            "etq": "deuda y obligaciones de los 31 estados medidos",
+            "estado": "derivado",
+            "nota": "Suma de la columna \u00abDeuda y Obligaciones\u00bb del Sistema de Alertas."
+          },
+          {
+            "valor": "97.8 %",
+            "etq": "deuda sobre ingresos de libre disposici\u00f3n en Nuevo Le\u00f3n, el m\u00e1s alto",
+            "estado": "oficial"
+          },
+          {
+            "valor": "31 de 31",
+            "etq": "en endeudamiento sostenible",
+            "estado": "oficial"
+          }
+        ],
+        "tabla": [
+          {
+            "entidad": "Nuevo Le\u00f3n",
+            "dyoIld": 0.978,
+            "dyo": 81006055031.35,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Chihuahua",
+            "dyoIld": 0.93,
+            "dyo": 56049777511.27,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Coahuila",
+            "dyoIld": 0.87,
+            "dyo": 36358301572.06,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Sonora",
+            "dyoIld": 0.76,
+            "dyo": 29101781792.89,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Quintana Roo",
+            "dyoIld": 0.626,
+            "dyo": 19262514337.01,
+            "resultado": "Endeudamiento Sostenible"
+          },
+          {
+            "entidad": "Durango",
+            "dyoIld": 0.593,
+            "dyo": 10881389917.02,
+            "resultado": "Endeudamiento Sostenible"
+          }
+        ],
+        "documentos": [
+          {
+            "titulo": "Resultado del Sistema de Alertas, Cuenta P\u00fablica 2025 (variables por entidad, XLSX)",
+            "url": "https://www.disciplinafinanciera.hacienda.gob.mx/work/models/DISCIPLINA_FINANCIERA/Documentos/SistemaAlertas/2025/CP/Informaci%C3%B3n%20Variables%20SdA%20Entidades%20Federativas.xlsx",
+            "sha256": "b76ba68b4d720e7cd73547bb2bcc832fe41c1cc12395e56fbe363ef857e34b16"
+          },
+          {
+            "titulo": "Sistema de Alertas: p\u00e1gina oficial con todas las mediciones",
+            "url": "https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Entidades_Federativas_2025"
+          }
+        ],
+        "fuente": "SHCP, Sistema de Alertas, evaluaci\u00f3n con la Cuenta P\u00fablica 2025 (publicada el 29 de junio de 2026)",
+        "alcance": "Seg\u00fan la SHCP, el Sistema de Alertas mide a los entes con financiamientos inscritos en el Registro P\u00fablico \u00danico cuya fuente o garant\u00eda de pago son sus ingresos de libre disposici\u00f3n. Clasifica en tres niveles: sostenible, en observaci\u00f3n y elevado."
+      },
+      {
+        "id": "defensa",
+        "categoria": "megaobras",
+        "icono": "\ud83d\udee1\ufe0f",
+        "titulo": "Defensa: AIFA, Tren Maya S.A. y fideicomiso militar",
+        "ente": "Secretar\u00eda de la Defensa Nacional y sus empresas",
+        "hallazgo": "En las 7 auditor\u00edas aqu\u00ed reunidas, la ASF no dej\u00f3 montos por aclarar ni promovi\u00f3 acciones: lo que lleg\u00f3 a observar se solvent\u00f3 antes del informe. Que una auditor\u00eda salga limpia tambi\u00e9n es un dato, y se reporta igual que uno con hallazgos.",
+        "cifras": [
+          {
+            "valor": "7",
+            "etq": "informes individuales revisados",
+            "estado": "oficial"
+          },
+          {
+            "valor": "$0.0 mdp",
+            "etq": "por aclarar, suma de esos informes",
+            "estado": "derivado"
+          },
+          {
+            "valor": "0 \u00b7 0",
+            "etq": "pliegos de observaciones \u00b7 promociones de responsabilidad",
+            "estado": "derivado"
+          }
+        ],
+        "anios": [
+          {
+            "cp": 2023,
+            "auditorias": 1,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          },
+          {
+            "cp": 2024,
+            "auditorias": 6,
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": 0,
+            "PO": 0,
+            "PRAS": 0
+          }
+        ],
+        "auditorias": [
+          {
+            "cp": 2023,
+            "num": 371,
+            "clave": "2023-0-07100-19-0371-2024",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Desarrollo y Entrega del Proyecto Tren Maya",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 3 resultados, de los cuales, en 3 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0371_a.pdf",
+            "sha256": "6a31a6b1f1908af548f172ef1f8f9d3b09f9a3df6e8b02ae9057cd5a169875b7",
+            "paginas": 9
+          },
+          {
+            "cp": 2024,
+            "num": 9,
+            "clave": "2024-2-07HZI-19-0009-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Aeropuerto Internacional Felipe \u00c1ngeles, S.A. de C.V.",
+            "titulo": "Gesti\u00f3n Financiera",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 17 resultados, de los cuales, en 17 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0009_a.pdf",
+            "sha256": "df60b49333adf5fc500b66a53b36fd083b98ae7b9270936323b03ab651a51368",
+            "paginas": 38
+          },
+          {
+            "cp": 2024,
+            "num": 429,
+            "clave": "2024-2-07HOM-19-0429-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Tren Maya, S.A. de C.V. Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Gesti\u00f3n Financiera",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 11 resultados, de los cuales, en 11 no se detectaron irregularidades.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0429_a.pdf",
+            "sha256": "494d0793c968a83ca2311a5e9f05546b4a37e132417800163cb12847c005f7d0",
+            "paginas": 24
+          },
+          {
+            "cp": 2024,
+            "num": 367,
+            "clave": "2024-0-07100-19-0367-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional Banco Nacional del Ej\u00e9rcito, Fuerza A\u00e9rea y Armada, S.N.C.",
+            "titulo": "Fideicomiso P\u00fablico de Administraci\u00f3n y Pago de Equipo Militar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 10 resultados, de los cuales, en 9 no se detectaron irregularidades y uno fue solventado por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0367_a.pdf",
+            "sha256": "7e53b416bd91a9b09b11acc60ec7272c75bbb4d06f9f01d0149c93b2ac167532",
+            "paginas": 23
+          },
+          {
+            "cp": 2024,
+            "num": 353,
+            "clave": "2024-0-07100-19-0353-2025",
+            "tipo": "Auditor\u00eda de Cumplimiento",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Adquisici\u00f3n de Enseres e Insumos para la Atenci\u00f3n de la Poblaci\u00f3n Afectada por Fen\u00f3menos Naturales",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 13 resultados, de los cuales, en 4 no se detectaron irregularidades y 9 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0353_a.pdf",
+            "sha256": "0cb039ada784079a2596716f148818481614f1263bb1acf68576aeb334cb5b45",
+            "paginas": 28
+          },
+          {
+            "cp": 2024,
+            "num": 356,
+            "clave": "2024-0-07100-07-0356-2025",
+            "tipo": "Auditor\u00eda de Desempe\u00f1o",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Becas para Hijos del Personal de las Fuerzas Armadas en Activo",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 7 resultados, de los cuales, en 3 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0356_a.pdf",
+            "sha256": "03cd67a6c3869745bf739e25b312eade3274de0405922cbce9434960b5d185ac",
+            "paginas": 17
+          },
+          {
+            "cp": 2024,
+            "num": 360,
+            "clave": "2024-0-07100-07-0360-2025",
+            "tipo": "Auditor\u00eda de Desempe\u00f1o",
+            "ente": "Secretar\u00eda de la Defensa Nacional",
+            "titulo": "Investigaci\u00f3n y Desarrollo Militar",
+            "porAclarar": 0.0,
+            "recuperado": 0.0,
+            "acciones": {},
+            "resumen": "Se determinaron 6 resultados, de los cuales, en 2 no se detectaron irregularidades y 4 fueron solventados por la entidad fiscalizada antes de la emisi\u00f3n de este Informe.",
+            "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0360_a.pdf",
+            "sha256": "f037e5545de4d8013a21e7d812eba927f32be2b325c05d9908345d0025be34a2",
+            "paginas": 18
+          }
+        ],
+        "fuente": "ASF, informes individuales de la fiscalizaci\u00f3n superior de las Cuentas P\u00fablicas 2023, 2024",
+        "alcance": "Re\u00fane s\u00f3lo las auditor\u00edas enlistadas abajo. La ASF pudo practicar otras a estos entes que no est\u00e1n aqu\u00ed."
+      }
+    ]
   }
 };
 

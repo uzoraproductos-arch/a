@@ -752,7 +752,7 @@
     document.getElementById('dRamo28').innerText = formatMoneyMdp(st.ramo28);
     document.getElementById('dRamo33').innerText = formatMoneyMdp(st.ramo33);
     document.getElementById('dRecaudacionPropia').innerText = formatMoneyMdp(st.recaudacionPropia);
-    document.getElementById('dDeuda').innerText = `$${formatNumber(st.deuda)} mdp (${st.semaforoDeuda})`;
+    document.getElementById('dDeuda').innerText = `$${formatNumber(st.deuda)} mdp (${st.semaforoDeuda}${st.deudaIld ? ' · ' + st.deudaIld + ' % de sus ingresos libres' : ''})`;
     document.getElementById('dDependencia').innerText = `${st.dep}% federalizada`;
 
     // Lista de Municipios
@@ -23353,151 +23353,84 @@
   /* ==========================================================================
      EXPEDIENTES FORENSES DE AUDITORIA (DOSSIERS ASF / SHCP / PEF)
      ========================================================================== */
-  const FORENSIC_DOSSIERS = [
-    {
-      id: "ASF-TM-2023",
-      categoria: "megaobras",
-      icono: "🚅",
-      titulo: "Tren Maya: Sobrecosto y Pagos Improcedentes",
-      ente: "Fonatur Tren Maya / Sedena · Ramos 21 y 07",
-      presupuesto: "$156,000 mdp",
-      devengado: "$540,000+ mdp (+246%)",
-      observado: "$1,480.6 mdp",
-      statusBadge: "🔴 Pliegos Sancionatorios",
-      statusClass: "forensic-status-penal",
-      dictamen: "Pagos en exceso en terracerías, durmientes y balasto; deficiencias en proyectos ejecutivos y falta de acreditación en tramos 1 a 4.",
-      asfRef: "Informes Individuales ASF Cuenta Pública 2021-2023 · Fonatur Tren Maya",
-      asfUrl: "https://www.asf.gob.mx"
-    },
-    {
-      id: "ASF-SGL-2022",
-      categoria: "alimentos",
-      icono: "🌽",
-      titulo: "Segalmex: Desfalco en Alimentos y Bonos Bursátiles",
-      ente: "Segalmex, Diconsa y Liconsa (Sader) · Ramo 08",
-      presupuesto: "$15,151 mdp observados",
-      devengado: "$2,700 mdp recuperados",
-      observado: "$12,451 mdp pendientes",
-      statusBadge: "🔴 26+ Denuncias Penales FGR",
-      statusClass: "forensic-status-penal",
-      dictamen: "Simulación de compras de maíz, frijol y leche; colocación ilícita de fondos públicos en certificados bursátiles privados sin garantía.",
-      asfRef: "Auditorías de Cumplimiento Financiero 330-DE, 331-DE y 332-DE",
-      asfUrl: "https://www.asf.gob.mx"
-    },
-    {
-      id: "ASF-DB-2023",
-      categoria: "energia",
-      icono: "🛢️",
-      titulo: "Refinería Dos Bocas: Régimen Filial y Desfases",
-      ente: "Pemex Transformación Industrial / PTI · Ramo 52",
-      presupuesto: "$8,000 MDD inicial",
-      devengado: "$18,900+ MDD devengado",
-      observado: "$1,120+ mdp",
-      statusBadge: "🟡 Auditoría Especial Desempeño",
-      statusClass: "forensic-status-obs",
-      dictamen: "Contratación bajo esquema filial privado de PTI para eludir licitación pública de la Ley de Obras; pagos dobles en montaje electromecánico.",
-      asfRef: "Auditorías de Inversiones Físicas ASF CP 2020-2023 · PTI Infraestructura",
-      asfUrl: "https://www.asf.gob.mx"
-    },
-    {
-      id: "ASF-SAL-2023",
-      categoria: "salud",
-      icono: "🏥",
-      titulo: "INSABI & Fonsabi: Medicamentos sin Trazabilidad",
-      ente: "Secretaría de Salud / Birmex · Ramo 12",
-      presupuesto: "$140,000+ mdp transferidos",
-      devengado: "$3,420 mdp observados",
-      observado: "Desabasto y caducidad",
-      statusBadge: "🔴 Pliegos de Responsabilidades",
-      statusClass: "forensic-status-penal",
-      dictamen: "Extinción del fondo Fonsabi sin actas de entrega-recepción en almacenes estatales; fármacos oncológicos caducados sin deslinde administrativo.",
-      asfRef: "Auditorías al Centro Nacional para la Salud de la Infancia y la Adolescencia (CeNSIA)",
-      asfUrl: "https://www.asf.gob.mx"
-    },
-    {
-      id: "SHCP-DEUDA-2025",
-      categoria: "deuda",
-      icono: "🏛️",
-      titulo: "Semáforo de Deuda de los 32 Estados (LDF)",
-      ente: "SHCP · Sistema de Alertas de Disciplina Financiera",
-      presupuesto: "$698,924 mdp deuda total",
-      devengado: "Coahuila 142% IDL",
-      observado: "NL 108% · QRoo 95%",
-      statusBadge: "⚠️ Rango en Observación SHCP",
-      statusClass: "forensic-status-alerta",
-      dictamen: "Entidades federativas en alerta amarilla por rebasar techos de endeudamiento sostenible respecto a sus ingresos de libre disposición.",
-      asfRef: "Registro Público Único SHCP · Evaluación de Alertas 2024-2025",
-      asfUrl: "https://www.disciplinafinanciera.hacienda.gob.mx"
-    },
-    {
-      id: "ASF-SED-2023",
-      categoria: "megaobras",
-      icono: "🛡️",
-      titulo: "Sedena y GN: Fideicomisos y Obras Civiles",
-      ente: "Secretaría de la Defensa Nacional · Ramo 07",
-      presupuesto: "$270,000+ mdp anual",
-      devengado: "84% contratos clasificados",
-      observado: "Cuentas por Liquidar (CLC)",
-      statusBadge: "🟡 Observaciones de Gestión",
-      statusClass: "forensic-status-obs",
-      dictamen: "Opacidad en cuentas administradas para aduanas fronterizas, AIFA y empresas paraestatales militares bajo argumento de seguridad nacional.",
-      asfRef: "Auditoría Superior de la Federación CP 2022-2023 · Ramo 07 Defensa Nacional",
-      asfUrl: "https://www.asf.gob.mx"
+  /* Las seis fichas salen de DB.expedientes (herramientas/integrar_expedientes.py):
+     cada cifra suma informes individuales de la ASF enlistados en la ficha, o
+     viene del Sistema de Alertas de la SHCP. */
+  const EXP_CATEGORIAS = { megaobras: 'Megaobras', energia: 'Energía (Pemex)', salud: 'Salud y fármacos', alimentos: 'Segalmex', deuda: 'Deuda de los estados' };
+  const EXP_ACCIONES = {
+    R: ['recomendación', 'recomendaciones'], RD: ['recomendación al desempeño', 'recomendaciones al desempeño'],
+    SA: ['solicitud de aclaración', 'solicitudes de aclaración'], PEFCF: ['aviso al SAT', 'avisos al SAT'],
+    PRAS: ['promoción de responsabilidad', 'promociones de responsabilidad'], PO: ['pliego de observaciones', 'pliegos de observaciones'],
+    DH: ['denuncia de hechos', 'denuncias de hechos']
+  };
+
+  function expAccionesTexto(a) {
+    const k = Object.keys(a || {});
+    if (!k.length) return 'sin acciones';
+    return k.map(x => a[x] + ' ' + (EXP_ACCIONES[x] ? EXP_ACCIONES[x][a[x] === 1 ? 0 : 1] : x)).join(', ');
+  }
+
+  function expFichaHtml(f) {
+    const cifras = '<div class="exp-cifras" data-no-autolink>' + f.cifras.map(c =>
+      '<div class="exp-cifra"><span class="exp-cifra-v num-tabular">' + pdEsc(c.valor) + '</span><span class="exp-cifra-e">' + pdEsc(c.etq) + ' ' + chipEstado(c.estado) + '</span></div>').join('') + '</div>';
+    let detalle = '';
+    if (f.anios) {
+      detalle = '<div class="pd-tabla-w" data-no-autolink><table class="pd-tabla exp-anios"><thead><tr><th>Cuenta Pública</th><th>Informes</th><th>Por aclarar</th><th>Pliegos</th><th>Promociones</th></tr></thead><tbody>' +
+        f.anios.map(a => '<tr><td>' + a.cp + '</td><td class="num-tabular">' + a.auditorias + '</td><td class="num-tabular">' + pdMdp(a.porAclarar) + '</td><td class="num-tabular">' + a.PO + '</td><td class="num-tabular">' + a.PRAS + '</td></tr>').join('') +
+        '</tbody></table></div>';
+    } else if (f.tabla) {
+      detalle = '<div class="pd-tabla-w" data-no-autolink><table class="pd-tabla exp-anios"><thead><tr><th>Estado</th><th>Deuda / ingresos libres</th><th>Deuda y obligaciones</th></tr></thead><tbody>' +
+        f.tabla.map(t => '<tr><td>' + pdEsc(t.entidad) + '</td><td class="num-tabular">' + pdPct(t.dyoIld * 100) + '</td><td class="num-tabular">' + pdMdp(t.dyo) + '</td></tr>').join('') +
+        '</tbody></table></div>';
     }
-  ];
+    const docs = f.auditorias
+      ? '<details class="exp-informes" data-no-autolink><summary>Los ' + f.auditorias.length + ' informes de la ASF, uno por uno</summary><ol>' + f.auditorias.map(a =>
+          '<li><a href="' + pdEsc(a.url) + '" target="_blank" rel="noopener noreferrer">CP ' + a.cp + ' · Auditoría ' + a.num + ' ↗</a> ' +
+          '<span>' + pdEsc(a.titulo) + ' · <i>' + pdEsc(a.ente) + '</i></span> <small>' + (a.porAclarar ? pdMdp(a.porAclarar) + ' por aclarar; ' : 'Sin monto por aclarar; ') +
+          (a.recuperado ? pdMdp(a.recuperado) + ' recuperados; ' : '') + expAccionesTexto(a.acciones) + '.</small></li>').join('') + '</ol></details>'
+      : '<ul class="exp-docs" data-no-autolink>' + f.documentos.map(d => '<li><a href="' + pdEsc(d.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(d.titulo) + ' ↗</a></li>').join('') + '</ul>';
+    const principal = f.auditorias
+      ? f.auditorias.slice().sort((x, y) => y.porAclarar - x.porAclarar)[0].url
+      : f.documentos[0].url;
+    return '<article class="forensic-dossier-card exp-ficha" data-cat="' + f.categoria + '" id="exp-' + f.id + '">' +
+        '<div>' +
+          '<div class="forensic-card-top"><span class="forensic-id-tag">' + f.icono + ' ' + pdEsc(EXP_CATEGORIAS[f.categoria] || f.categoria) + '</span></div>' +
+          '<h4 class="forensic-dossier-title">' + pdEsc(f.titulo) + '</h4>' +
+          '<div class="forensic-dossier-dep">' + pdEsc(f.ente) + '</div>' +
+          '<p class="exp-hallazgo">' + pdEsc(f.hallazgo) + '</p>' +
+          cifras + detalle + docs +
+          '<p class="pd-nota exp-fuente">' + chipEstado('oficial') + ' ' + pdEsc(f.fuente) + '. ' + pdEsc(f.alcance) + '</p>' +
+        '</div>' +
+        '<div class="forensic-card-actions">' +
+          '<a href="' + pdEsc(principal) + '" target="_blank" rel="noopener noreferrer" class="forensic-btn-asf" title="Abrir el documento oficial"><span>🏛️</span> ' + (f.auditorias ? 'Informe principal' : 'Documento oficial') + '</a>' +
+          '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.expCopiar(\'' + f.id + '\')"><span>📋</span> Copiar ficha con fuentes</button>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function expCopiar(id) {
+    const f = DB.expedientes && DB.expedientes.fichas.find(x => x.id === id);
+    if (!f) return;
+    let t = f.titulo + '\n' + f.ente + '\n\n' + f.hallazgo + '\n\n' + f.cifras.map(c => '- ' + c.valor + ': ' + c.etq + ' (' + c.estado + ')').join('\n');
+    if (f.auditorias) t += '\n\nInformes de la ASF:\n' + f.auditorias.map(a => '- CP ' + a.cp + ', auditoría ' + a.num + ' (' + a.clave + '): ' + a.titulo + '. ' + a.url).join('\n');
+    if (f.documentos) t += '\n\nDocumentos:\n' + f.documentos.map(d => '- ' + d.titulo + ': ' + d.url).join('\n');
+    t += '\n\nFuente: ' + f.fuente + '. ' + f.alcance + '\nConsultado en Auditavisión.';
+    copiarTextoPlano(t, 'Ficha copiada con sus fuentes.');
+  }
 
   function renderForensicDossiers(cat) {
     const container = document.getElementById("forensicDossiersGrid");
     if (!container) return;
+    const todas = (DB.expedientes && DB.expedientes.fichas) || [];
+    if (!todas.length) {
+      container.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base no trae la colección de expedientes.</p>';
+      return;
+    }
     const filtro = cat || "todos";
-    const lista = filtro === "todos" ? FORENSIC_DOSSIERS : FORENSIC_DOSSIERS.filter(d => d.categoria === filtro);
-
+    const lista = filtro === "todos" ? todas : todas.filter(d => d.categoria === filtro);
     const countLabel = document.getElementById("forensicCountLabel");
     if (countLabel) countLabel.textContent = lista.length;
-
-    container.innerHTML = lista.map(d => `
-      <article class="forensic-dossier-card" data-cat="${d.categoria}">
-        <div>
-          <div class="forensic-card-top">
-            <span class="forensic-id-tag">${d.icono} ${d.id}</span>
-            <span class="forensic-status-badge ${d.statusClass}">${d.statusBadge}</span>
-          </div>
-          <h4 class="forensic-dossier-title">${d.titulo}</h4>
-          <div class="forensic-dossier-dep">${d.ente}</div>
-
-          <div class="forensic-metrics-row">
-            <div class="forensic-metric-item">
-              <span class="forensic-metric-label">Presupuesto / Base:</span>
-              <span class="forensic-metric-val">${d.presupuesto}</span>
-            </div>
-            <div class="forensic-metric-item">
-              <span class="forensic-metric-label">Cifra Real / Devengada:</span>
-              <span class="forensic-metric-val" style="color:var(--gold-bright);">${d.devengado}</span>
-            </div>
-            <div class="forensic-metric-item" style="grid-column: span 2;">
-              <span class="forensic-metric-label">Monto Observado / Irregularidad ASF:</span>
-              <span class="forensic-metric-val" style="color:var(--crimson-bright);">${d.observado}</span>
-            </div>
-          </div>
-
-          <div class="forensic-quote-box">
-            "${d.dictamen}"
-          </div>
-          <div style="font-size:10.5px; color:var(--text-dim); margin-bottom:14px; font-family:var(--font-mono);">
-            <b>Fuente Oficial:</b> ${d.asfRef}
-          </div>
-        </div>
-
-        <div class="forensic-card-actions">
-          <a href="${d.asfUrl}" target="_blank" rel="noopener noreferrer" class="forensic-btn-asf" title="Abrir portal de la Auditoría Superior de la Federación">
-            <span>🏛️</span> Informe ASF
-          </a>
-          <button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.openPaseCivicoModal()" title="Menos que dos caguamas al mes · Descarga el expediente pericial">
-            <span>🍺</span> Expediente Completo ($79)
-          </button>
-        </div>
-      </article>
-    `).join("");
+    container.innerHTML = lista.map(expFichaHtml).join('');
   }
 
   function filtrarDossiers(cat, btn) {
@@ -27400,6 +27333,7 @@
     renderPanelBanderasRojas: renderPanelBanderasRojas,
     abrirExpedienteEstado: abrirExpedienteEstado,
     renderRadarBanderasNacional: renderRadarBanderasNacional,
+    expCopiar: expCopiar,
     radarOrdenar: radarOrdenar,
     radarVerEstado: radarVerEstado,
   };

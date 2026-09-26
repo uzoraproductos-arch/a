@@ -20789,3 +20789,52 @@ button.radar-state-flag-card {
   .cp-cuenta > span { font-size: 32px; }
   .cp-ent-cab select { min-width: 0; width: 100%; }
 }
+
+/* Expedientes de casos: fichas con informes de la ASF y del Sistema de Alertas */
+.exp-ficha .forensic-card-top { margin-bottom: 10px; }
+.exp-hallazgo {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-main);
+  margin: 10px 0 14px;
+}
+.exp-cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.exp-cifra {
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.exp-cifra-v {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+.exp-cifra-e { font-size: 11.5px; line-height: 1.35; color: var(--text-secondary); }
+.exp-anios { font-size: 12px; margin-bottom: 12px; }
+.exp-informes, .exp-docs { margin: 4px 0 12px; font-size: 12px; }
+.exp-informes summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--gold-bright);
+  padding: 6px 0;
+}
+.exp-informes ol, .exp-docs { padding-left: 18px; margin: 6px 0 0; }
+.exp-informes li, .exp-docs li { margin: 0 0 8px; line-height: 1.45; color: var(--text-secondary); }
+.exp-informes a, .exp-docs a { color: var(--gold-bright); font-weight: 600; }
+.exp-informes small { display: block; color: var(--text-dim); }
+.exp-fuente { font-size: 11px; margin-bottom: 14px; }
+@media (max-width: 640px) {
+  .forensic-dossiers-grid { grid-template-columns: 1fr; }
+  .exp-ficha { padding: 16px; }
+}
