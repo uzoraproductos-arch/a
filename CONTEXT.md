@@ -1965,6 +1965,24 @@ vuelve a correrse si cambian los libros.
   Megaobras, Acción Financiera o Poderes; sólo Personajes va a la
   Enciclopedia. «Compartir» copia `index.html#portal`.
 
+### Hecho (Consultar Recursos sin salir de la plataforma)
+
+- **Catálogo de Fuentes Oficiales en la plataforma:** nueva subpestaña
+  `faq-referencias` del Diccionario del Dinero Público, con el mismo formato
+  de la Enciclopedia. Los filtros y el total se pintan desde la base
+  (`refsPintarFiltros`): antes decían «27» con 79 fichas. `abrirCatalogoFuentes
+  (refId)` abre el catálogo y, si recibe una ficha, la ilumina. «Compendio de
+  Fuentes Oficiales», «Informes de la ASF y Documentos Oficiales» y el pie de
+  página ya no mandan a la Enciclopedia; la ficha flotante de una cita ofrece
+  «Ver en el Catálogo de Fuentes» en la misma página.
+- La columna «Atlas Normativo & Formación Ciudadana» se llama ahora
+  **«Kit del Auditor Ciudadano: Fuentes y Guías»**. La Enciclopedia sigue
+  abriendo su archivo.
+- **El Pase Cívico aparecía hasta abajo:** vivía dentro del pie, que lleva
+  `backdrop-filter`, y eso hace que `position: fixed` se mida contra el pie.
+  Al arrancar, las ventanas y cajones flotantes se cuelgan del `body`. Tenía
+  el mismo defecto el cajón de detalle de las entidades (`auditDrawer`).
+
 ### Pendiente
 
 - **Expedientes de Casos por Aclarar (Auditoría Forense):** las seis fichas

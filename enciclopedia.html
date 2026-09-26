@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926k">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926l">
 </head>
 <body>
 
@@ -5061,24 +5061,13 @@
               Todas las Referencias y Fuentes Consultadas
             </h3>
           </div>
-          <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); background:rgba(255,255,255,0.05); padding:4px 10px; border-radius:4px; border:1px solid var(--border-subtle);">
-            27 Fuentes Verificadas
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); background:rgba(255,255,255,0.05); padding:4px 10px; border-radius:4px; border:1px solid var(--border-subtle);" id="refsTotal">
+            Fuentes verificadas
           </span>
         </div>
 
-        <!-- Barra de Filtros por Categoría de Referencia -->
-        <div class="presets-bar" style="margin-bottom: 20px;">
-          <button class="chip on active" data-reff="todas">Todas las Referencias (27)</button>
-          <button class="chip" data-reff="judicial">⚖️ Poder Judicial &amp; SCJN</button>
-          <button class="chip" data-reff="internacional">🌐 Internacional &amp; Cortes EE. UU.</button>
-          <button class="chip" data-reff="constitucional">Constitución (CPEUM)</button>
-          <button class="chip" data-reff="leyes_federales">Leyes Hacendarias &amp; Deuda</button>
-          <button class="chip" data-reff="coordinacion_fiscal">Federalismo &amp; Disciplina</button>
-          <button class="chip" data-reff="banca_central">Banca Central &amp; Banxico</button>
-          <button class="chip" data-reff="fiscalizacion_auditoria">Fiscalización &amp; ASF</button>
-          <button class="chip" data-reff="fuentes_oficiales">Fuentes Oficiales &amp; Datos</button>
-          <button class="chip" data-reff="investigacion_civica">Investigación &amp; Cívica</button>
-        </div>
+        <!-- Barra de Filtros por Categoría de Referencia: la pinta renderReferencias() -->
+        <div class="presets-bar" id="refsFiltros" style="margin-bottom: 20px;"></div>
 
         <!-- Lista Ordenada y Numerada de Referencias APA 7 -->
         <ol id="refsListContainer" class="refs-ordered-list" style="margin:0; padding-left:24px;"></ol>
@@ -6047,7 +6036,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926k</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926l</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -6121,16 +6110,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926k"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926l"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926k"></script>
+  <script src="assets/js/audit-database.js?v=20260926l"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926k"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926l"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926k"></script>
+  <script src="assets/js/audit-engine.js?v=20260926l"></script>
 
 </body>
 </html>

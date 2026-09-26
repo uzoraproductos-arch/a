@@ -4659,6 +4659,10 @@
       window.location.href = 'enciclopedia.html#faq';
       return;
     }
+    if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias') && document.getElementById('refsListContainer')) {
+      abrirCatalogoFuentes();
+      return;
+    }
     if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias')) {
       window.location.href = 'enciclopedia.html#referencias';
       return;
@@ -4836,6 +4840,7 @@
       if (subKey === 'faq-preguntas') renderCasillasFaq();
       else if (subKey === 'faq-glosario') renderGlossary();
       else if (subKey === 'faq-marco-legal') renderPreceptosLegales();
+      else if (subKey === 'faq-referencias') renderReferencias('todas');
     }
 
     programarAutolink();
@@ -6150,7 +6155,15 @@
       }
     }
     if (encEl) {
-      encEl.href = 'enciclopedia.html#' + (ref.id || 'tab-panel-referencias');
+      /* Si esta pagina trae su propio catalogo, la ficha se abre aqui. */
+      if (document.getElementById('refsListContainer')) {
+        encEl.href = '#faq/faq-referencias';
+        encEl.onclick = function (ev) { ev.preventDefault(); cerrarModalReferencia(); abrirCatalogoFuentes(ref.id); };
+        encEl.lastChild.textContent = ' Ver en el Catálogo de Fuentes';
+      } else {
+        encEl.href = 'enciclopedia.html#' + (ref.id || 'tab-panel-referencias');
+        encEl.onclick = null;
+      }
     }
 
     modal.style.display = 'flex';
@@ -21574,9 +21587,47 @@
   // ==========================================================================
   // RENDERIZADO: REFERENCIAS APA 7 NUMERADAS CON FILTROS
   // ==========================================================================
+  /* Las categorias y sus cuentas salen de la base: el catalogo crece y los
+     botones con cifra fija se quedaban atras (decian 27 con 79 fichas). */
+  function refsPintarFiltros(filter) {
+    const bar = document.getElementById('refsFiltros');
+    const total = document.getElementById('refsTotal');
+    const refs = DB.referencias_legales || [];
+    if (total) total.textContent = refs.length + ' fuentes verificadas';
+    if (!bar) return;
+    const cats = {};
+    refs.forEach(r => {
+      if (!cats[r.categoria]) cats[r.categoria] = { nombre: r.categoria_nombre, n: 0 };
+      cats[r.categoria].n++;
+    });
+    const orden = Object.keys(cats).sort((a, b) => cats[b].n - cats[a].n);
+    const chip = (k, txt) => '<button type="button" class="chip' + (k === filter ? ' on active' : '') + '" data-reff="' + k + '" onclick="window.AuditEngine.renderReferencias(\'' + k + '\')">' + txt + '</button>';
+    bar.innerHTML = chip('todas', 'Todas (' + refs.length + ')') +
+      orden.map(k => chip(k, pdEsc(cats[k].nombre) + ' (' + cats[k].n + ')')).join('');
+  }
+
+  function abrirCatalogoFuentes(refId) {
+    cerrarMegaMenus();
+    const desglose = document.getElementById('seccionDesgloseModulos');
+    if (desglose) { desglose.style.display = 'block'; desglose.classList.add('desglose-abierto'); }
+    switchTab('faq');
+    switchSubtab('faq', 'faq-referencias');
+    const panel = document.querySelector('.subtab-panel[data-parent="faq"][data-subpanel="faq-referencias"]');
+    const el = (refId && document.getElementById(refId)) || panel;
+    if (!el) return;
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: refId ? 'center' : 'start' });
+      if (refId) {
+        el.classList.add('ref-row-destacada');
+        setTimeout(() => el.classList.remove('ref-row-destacada'), 2600);
+      }
+    }, 60);
+  }
+
   function renderReferencias(filter = 'todas') {
     const container = document.getElementById('refsListContainer');
     if (!container || !DB.referencias_legales) return;
+    refsPintarFiltros(filter);
 
     let items = DB.referencias_legales;
     // Se ordena por numero de cita para que el catalogo siga la numeracion
@@ -23576,6 +23627,14 @@
     safeRun(renderVersusPorfirio, 'renderVersusPorfirio');
     safeRun(renderCasillasFaq, 'renderCasillasFaq');
     safeRun(() => renderReferencias('todas'), 'renderReferencias');
+    /* Las ventanas y cajones flotantes deben colgar del body: dentro del pie
+       (que lleva backdrop-filter) position:fixed se mide contra el pie y la
+       ventana aparece hasta abajo de la pagina. */
+    safeRun(() => {
+      document.querySelectorAll('.civic-modal-backdrop, .audit-drawer, .audit-drawer-overlay, .modal-ref-backdrop').forEach(el => {
+        if (el.parentElement !== document.body) document.body.appendChild(el);
+      });
+    }, 'ventanasAlBody');
     safeRun(initComunidad, 'initComunidad');
     safeRun(renderCalculadora, 'renderCalculadora');
     safeRun(updateDiputadosSimulator, 'updateDiputadosSimulator');
@@ -25839,9 +25898,16 @@
 
 
   // Funciones de navegacion rapida a los dos pilares y Pase Civico
+  /* La ventana vivia dentro del pie de pagina, que lleva backdrop-filter: eso
+     hace que position:fixed se mida contra el pie y no contra la pantalla, y
+     el Pase aparecia hasta abajo. Se cuelga directo del body al abrirla. */
   function openPaseCivicoModal() {
     const m = document.getElementById('modalPaseCivico');
-    if (m) m.style.display = 'flex';
+    if (!m) return;
+    if (m.parentElement !== document.body) document.body.appendChild(m);
+    cerrarMegaMenus();
+    m.style.display = 'flex';
+    m.scrollTop = 0;
   }
   function closePaseCivicoModal() {
     const m = document.getElementById('modalPaseCivico');
@@ -26851,6 +26917,7 @@
     closeCargoDetail: closeCargoDetail,
     toggleJerarquiaTable: toggleJerarquiaTable,
     renderReferencias: renderReferencias,
+    abrirCatalogoFuentes: abrirCatalogoFuentes,
     renderPreceptosLegales: renderPreceptosLegales,
     filterPreceptos: filterPreceptos,
     searchPreceptos: searchPreceptos,

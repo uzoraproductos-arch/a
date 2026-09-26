@@ -20677,3 +20677,10 @@ body.con-regreso { padding-bottom: 96px; }
 @media (max-width: 700px) {
   .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice { scroll-margin-top: 12px; }
 }
+
+/* Pase Civico: si la ficha es mas alta que la pantalla, se desplaza dentro
+   de la cubierta en lugar de cortarse arriba. */
+.civic-modal-backdrop { overflow-y: auto; align-items: flex-start; }
+.civic-modal-backdrop > .civic-modal-card { margin: auto; }
+/* Ficha del catalogo a la que se llega desde una cita. */
+.ref-row-item.ref-row-destacada { outline: 2px solid var(--gold-bright); outline-offset: 4px; border-radius: 8px; box-shadow: 0 0 22px rgba(212,175,55,0.35); transition: box-shadow .3s; }

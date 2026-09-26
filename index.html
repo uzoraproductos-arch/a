@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926k">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926l">
 </head>
 <body>
 
@@ -217,9 +217,9 @@
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">📑 Informes Oficiales</span>
-            <a href="enciclopedia.html#referencias" class="mega-link-item">
+            <a href="#faq/faq-referencias" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.abrirCatalogoFuentes();">
               <span class="mega-link-name">Informes de la ASF y Documentos Oficiales</span>
-              <span class="mega-link-desc">Los 75 documentos que sostienen las cifras de la plataforma, con su liga oficial.</span>
+              <span class="mega-link-desc">Los documentos que sostienen las cifras de la plataforma, numerados y con su liga oficial.</span>
             </a>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas('diccionario');">
               <span class="mega-link-name">Diccionario de Datos</span>
@@ -251,16 +251,16 @@
             </a>
           </div>
           <div class="mega-menu-col">
-            <span class="mega-col-title">🗺️ Atlas Normativo &amp; Formación Ciudadana</span>
+            <span class="mega-col-title">🧭 Kit del Auditor Ciudadano: Fuentes y Guías</span>
             <a href="enciclopedia.html" class="mega-link-item">
               <span class="mega-link-name">🗺️ Enciclopedia Hacendaria (9 Módulos)</span>
               <span class="mega-link-desc">El compendio completo: presupuesto, Poderes, personajes, marco legal y comunidad.</span>
             </a>
-            <a href="enciclopedia.html#referencias" class="mega-link-item">
+            <a href="#faq/faq-referencias" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.abrirCatalogoFuentes();">
               <span class="mega-link-name">📑 Compendio de Fuentes Oficiales</span>
               <span class="mega-link-desc">DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.</span>
             </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.openPaseCivicoModal(); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
+            <a href="#pase" onclick="event.preventDefault(); window.AuditEngine.openPaseCivicoModal(); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">🍺 Pase y Guías del Auditor Cívico</span>
               <span class="mega-link-desc">Herramientas independientes de fiscalización ciudadana ($79/mes · Menos que dos caguamas).</span>
             </a>
@@ -2066,7 +2066,7 @@
         <span class="hero-tag">Pedagogía Cívica, Glosario &amp; Marco Legal</span>
         <h2>El Diccionario del Dinero Público</h2>
         <p>
-          Formación cívica integral dividida en tres subpestañas: Casillas temáticas de preguntas ciudadanas, Glosario enciclopédico de conceptos clave del erario en constante actualización, y el Marco Legal Hacendario con las disposiciones de la Ley de Ingresos (LIF) y preceptos constitucionales vigentes con acceso a su texto íntegro.
+          Formación cívica integral dividida en cuatro subpestañas: Casillas temáticas de preguntas ciudadanas, Glosario enciclopédico de conceptos clave del erario en constante actualización, el Marco Legal Hacendario con las disposiciones de la Ley de Ingresos (LIF) y preceptos constitucionales vigentes con acceso a su texto íntegro, y el Catálogo de Fuentes Oficiales que sostiene cada cifra de la plataforma.
         </p>
       </div>
 
@@ -2075,6 +2075,7 @@
         <button class="subtab-btn active" data-sub="faq-preguntas">Preguntas Frecuentes en Casillas</button>
         <button class="subtab-btn" data-sub="faq-glosario">Glosario de Términos Hacendarios &amp; Conceptos Clave</button>
         <button class="subtab-btn" data-sub="faq-marco-legal">Marco Legal Hacendario &amp; 25 Preceptos Rectores</button>
+        <button class="subtab-btn" data-sub="faq-referencias">Catálogo de Fuentes Oficiales</button>
       </div>
 
       <!-- ====================================================================
@@ -2200,6 +2201,64 @@
           <div id="preceptosLegalesGrid" class="preceptos-grid"></div>
 
         </div>
+
+      </div>
+
+      <!-- ====================================================================
+           SUBPANEL: CATÁLOGO DE FUENTES OFICIALES (antes sólo en la Enciclopedia)
+           ==================================================================== -->
+      <div class="subtab-panel" data-parent="faq" data-subpanel="faq-referencias">
+      <!-- ========================================================================
+           PROTOCOLO ARQUITECTÓNICO DE CITACIÓN Y CENTRALIZACIÓN DOCUMENTAL
+           ======================================================================== -->
+      <div class="banner-protocolo-citacion" style="background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(0,0,0,0.4)); border: 1px solid var(--border-gold); border-radius: 12px; padding: 18px 22px; margin-bottom: 24px; box-shadow: 0 4px 18px rgba(0,0,0,0.25);">
+        <div style="display:flex; align-items:flex-start; gap:14px;">
+          <div style="font-size:26px; line-height:1;">🏛️</div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+              <strong style="color:var(--gold-bright); font-size:15px; letter-spacing:0.5px; font-family:var(--font-serif);">
+                Protocolo de Citación Cívica y Centralización Documental
+              </strong>
+              <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3); padding:2px 8px; border-radius:4px;">
+                Regla de Diseño Permanente
+              </span>
+            </div>
+            <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin:0 0 8px;">
+              Para salvaguardar la limpieza visual de los tableros interactivos y garantizar un rigor académico inexpugnable, <strong>ninguna pestaña de la plataforma exhibirá cuadros de notas al pie debajo de sus gráficos o secciones</strong>. En su lugar, cada cifra oficial, mandato constitucional, presupuesto o expediente judicial contiene <strong>indicadores numéricos interactivos en el texto</strong> (ej. <span style="color:var(--gold-bright); font-family:var(--font-mono);">[Ref. 21]</span> o <span style="color:var(--cyan); font-family:var(--font-mono);">[27]</span>) que enlazan directamente a este catálogo maestro.
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:16px; font-family:var(--font-mono); font-size:11px; color:var(--text-dim); border-top:1px dashed rgba(201,168,76,0.25); padding-top:8px;">
+              <span>✓ <strong>Centralización:</strong> Catálogo unificado y numerado cronológico/temático.</span>
+              <span>✓ <strong>Estándar:</strong> Estilo de citación formal con hipervínculos a gacetas, DOF y expedientes.</span>
+              <span>✓ <strong>Sincronización:</strong> Desplazamiento suave e iluminación focal al hacer clic en cualquier sección.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================
+           BLOQUE 2: CATÁLOGO DE TODAS LAS REFERENCIAS Y FUENTES
+           ======================================================================== -->
+      <div class="casilla-bloque" id="bloqueCatalogoReferencias" style="padding: 24px; border: 1px solid var(--border-gold); background: var(--bg-card); border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom: 18px; border-bottom: 1px solid var(--border-gold); padding-bottom: 14px;">
+          <div>
+            <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--gold); text-transform:uppercase; letter-spacing:1.5px; font-weight:700;">
+              📚 Catálogo Institucional Oficial
+            </div>
+            <h3 style="font-family:var(--font-serif); font-size:22px; color:var(--gold-bright); margin:4px 0 0;">
+              Todas las Referencias y Fuentes Consultadas
+            </h3>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); background:rgba(255,255,255,0.05); padding:4px 10px; border-radius:4px; border:1px solid var(--border-subtle);" id="refsTotal">
+            Fuentes verificadas
+          </span>
+        </div>
+
+        <!-- Barra de Filtros por Categoría de Referencia: la pinta renderReferencias() -->
+        <div class="presets-bar" id="refsFiltros" style="margin-bottom: 20px;"></div>
+
+        <!-- Lista Ordenada y Numerada de Referencias APA 7 -->
+        <ol id="refsListContainer" class="refs-ordered-list" style="margin:0; padding-left:24px;"></ol>
+      </div>
 
       </div>
 
@@ -2478,8 +2537,8 @@
           <li>📊 SHCP: Registro Público Único de Deuda y Disciplina Financiera</li>
         </ul>
         <div style="margin-top:10px;">
-          <a href="enciclopedia.html#referencias" class="hero-pillar-btn hero-pillar-audit" style="text-decoration:none; display:inline-flex; font-size:11.5px; padding:6px 12px; background:rgba(0,210,211,0.1); border-color:var(--cyan); color:var(--cyan);">
-            <span>📂</span> Ver las 60+ Fuentes Oficiales Documentadas ➔
+          <a href="#faq/faq-referencias" onclick="event.preventDefault(); window.AuditEngine.abrirCatalogoFuentes();" class="hero-pillar-btn hero-pillar-audit" style="text-decoration:none; display:inline-flex; font-size:11.5px; padding:6px 12px; background:rgba(0,210,211,0.1); border-color:var(--cyan); color:var(--cyan);">
+            <span>📂</span> Ver el Catálogo de Fuentes Oficiales ➔
           </a>
         </div>
       </div>
@@ -2502,7 +2561,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926k</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926l</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2646,16 +2705,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926k"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926l"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926k"></script>
+  <script src="assets/js/audit-database.js?v=20260926l"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926k"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926l"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926k"></script>
+  <script src="assets/js/audit-engine.js?v=20260926l"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
