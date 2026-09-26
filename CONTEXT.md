@@ -1801,8 +1801,43 @@ vuelve a correrse si cambian los libros.
   mismo lugar de la pantalla, y la marca un instante (antes quedaba unos 300 px
   desplazado).
 
+### Hecho (estado de cuenta cívico, verificador 69-B y menú sin promesas vacías)
+
+- **El ticket pasa a «Estado de Cuenta Cívico»** (2.4): cabecera con ciudad
+  genérica en SVG (de noche o de día según el tema), folio, periodo, resumen
+  de cuatro cifras (bruto, ISR, cuotas IMSS, neto), movimientos con barras, lo
+  que llega a los Poderes y una línea «Ellos» (diputación federal, neto contra
+  neto, Anexo 23). Dice en el propio documento que no es un comprobante
+  fiscal. Las cuotas IMSS ya no se suman como «impuestos».
+- **Imagen para compartir gratuita** (`descargarEstadoCuenta`): PNG de
+  1080 × 1350 dibujado en canvas, sin librerías, en los dos temas.
+- **Verificador de proveedores, lista 69-B del SAT** (pestaña Inspector):
+  14,234 registros con corte al 31-12-2025, búsqueda por RFC o nombre, las
+  cuatro situaciones explicadas (definitivo, presunto, desvirtuado, sentencia
+  favorable) y el oficio y la fecha de publicación de cada una. Los datos
+  viven en `assets/data/sat-69b.js` (1.5 MB, se descargan solo al usarlo) y
+  se regeneran con `python3 herramientas/actualizar_69b.py`.
+- **Menú superior:** de 11 «Próximamente» quedan 2 (descarga CSV y
+  diccionario de datos). Los demás llevan a lo que ya existía: ComprasMX, el
+  verificador 69-B, el treemap de ramos, las 32 entidades y los municipios de
+  la Enciclopedia, las referencias y los canales de denuncia.
+- **Enlaces a subpestañas:** `enciclopedia.html#pestaña/subpestaña` abre la
+  subpestaña indicada.
+
 ### Pendiente
 
+- **Las fotos de fondo del tema claro y oscuro parecen ser de Chongqing, China**
+  (`city_day.jpg`, `city_night.jpg`; el edificio con puente horizontal parece Raffles City). Para una
+  plataforma mexicana conviene sustituirlas por una ciudad mexicana o por un
+  horizonte genérico como el del estado de cuenta.
+- **En teléfono, la barra superior fija ocupa cerca de un tercio de la
+  pantalla** (marca, cinco menús, botones y buscador). Hay que compactarla.
+- **Descarga CSV y diccionario de datos** siguen en «Próximamente».
+- **«Búsqueda avanzada de contratos»** promete filtrar contrataciones por
+  año, ramo y monto, y el Inspector no hace eso: reescribir o conectar con
+  datos de ComprasMX.
+- **La lista 69-B se actualiza a mano**: correr el script cada vez que el SAT
+  publique un corte nuevo y subir el sello.
 - **Las cifras viejas de las pestañas 3 y 4 contradicen a la 2.6.**
   `judicial_reservado` dice $78,327 mdp para el Poder Judicial (oficial:
   $70,005.6), $5,900 para la Corte ($5,208.7) y $68,627 para un CJF que ya no

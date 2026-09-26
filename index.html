@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926a">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926b">
 </head>
 <body>
 
@@ -124,9 +124,9 @@
               <span class="mega-link-name">Búsqueda Avanzada de Contratos</span>
               <span class="mega-link-desc">Filtra contrataciones federales por año, ramo y monto en el inspector forense.</span>
             </a>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Padrón de Proveedores y Contratistas');">
-              <span class="mega-link-name">Padrón de Proveedores y Contratistas <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Registro histórico consolidado de contratistas federales en evaluación técnica.</span>
+            <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">Contratos federales en ComprasMX ↗</span>
+              <span class="mega-link-desc">La plataforma oficial que sustituyó a CompraNet en 2025. Tome de ahí el RFC del proveedor y verifíquelo aquí.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">Auditoría de Adjudicaciones Directas</span>
@@ -139,9 +139,9 @@
               <span class="mega-link-name">Dossiers de Irregularidades por Aclarar</span>
               <span class="mega-link-desc">$51,024 mdp observados por la ASF pendientes de solventar.</span>
             </a>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Monitoreo de EFOS y Empresas Fantasma');">
-              <span class="mega-link-name">Monitoreo de Empresas Facturadoras (EFOS) <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Cruce forense de listas negras del SAT (Art. 69-B CFF) en evaluación técnica.</span>
+            <a href="#efosVerificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.efosAbrir();">
+              <span class="mega-link-name">¿Su proveedor está en la lista negra del SAT? (69-B)</span>
+              <span class="mega-link-desc">14,234 registros del listado oficial: presuntos, definitivos, desvirtuados y con sentencia favorable.</span>
             </a>
           </div>
         </div>
@@ -159,9 +159,9 @@
               <span class="mega-link-name">Explorador del PEF 2026</span>
               <span class="mega-link-desc">Desglose de los $10.19 billones aprobados en el Circuito del Dinero.</span>
             </a>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Perfiles de Secretarías y Dependencias');">
-              <span class="mega-link-name">Perfiles de Secretarías y Dependencias <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Fichas analíticas de SHCP, PEMEX, CFE, SEDENA, Bienestar, Educación y Salud.</span>
+            <a href="#eb-egresos" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('presupuesto'); window.AuditEngine.cerrarMegaMenus(); setTimeout(function(){ var e=document.getElementById('eb-egresos'); if(e){ var c=e.querySelector('.erario-pleg-cab'); if(c && c.getAttribute('aria-expanded')==='false') window.AuditEngine.erarioPlegToggle('egresos'); e.scrollIntoView({behavior:'smooth'}); } }, 250);">
+              <span class="mega-link-name">Ramos y Dependencias del PEF 2026</span>
+              <span class="mega-link-desc">Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">Inversión Pública & Megaobras</span>
@@ -170,13 +170,13 @@
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">🗺️ Entidades y Municipios</span>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Perfiles de las 32 Entidades');">
-              <span class="mega-link-name">Perfiles de las 32 Entidades (Atlas Extendido) <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Fichas monográficas y series históricas del Ramo 28 y 33 en evaluación técnica.</span>
+            <a href="enciclopedia.html#presupuesto/territorio" class="mega-link-item">
+              <span class="mega-link-name">Las 32 Entidades: del Peso Federal al Estatal</span>
+              <span class="mega-link-desc">Mapa, participaciones (Ramo 28) y aportaciones (Ramo 33) de cada estado. Abre la Enciclopedia.</span>
             </a>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Padrón de los 2,479 Municipios');">
-              <span class="mega-link-name">Padrón de los 2,479 Municipios (Censo Extendido) <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Explorador masivo de recaudación predial y transferencias en evaluación técnica.</span>
+            <a href="enciclopedia.html#presupuesto/municipios" class="mega-link-item">
+              <span class="mega-link-name">Los 2,479 Municipios: Predial y Transferencias</span>
+              <span class="mega-link-desc">Padrón INEGI EFIPEM con la ficha financiera de cada municipio. Abre la Enciclopedia.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">Calculadora Cívica de Tu Sueldo</span>
@@ -209,13 +209,13 @@
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">📑 Informes Oficiales</span>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Informes de Cuenta Pública ASF');">
-              <span class="mega-link-name">Informes de Cuenta Pública ASF <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Repositorio directo de expedientes y dictámenes de auditoría forense en diseño.</span>
+            <a href="enciclopedia.html#referencias" class="mega-link-item">
+              <span class="mega-link-name">Informes de la ASF y Documentos Oficiales</span>
+              <span class="mega-link-desc">Los 75 documentos que sostienen las cifras de la plataforma, con su liga oficial.</span>
             </a>
             <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Diccionario de Datos y API Hacendaria');">
-              <span class="mega-link-name">Diccionario de Datos y API Hacendaria <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Catálogo técnico de esquemas JSON y endpoints REST hacendarios en diseño.</span>
+              <span class="mega-link-name">Diccionario de Datos <span class="badge-proximamente">Próximamente</span></span>
+              <span class="mega-link-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
             </a>
           </div>
         </div>
@@ -244,13 +244,13 @@
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">🗺️ Atlas Normativo &amp; Formación Ciudadana</span>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Atlas Técnico Enciclopédico');">
-              <span class="mega-link-name">🗺️ Atlas Técnico Enciclopédico (9 Módulos) <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Integración unificada del compendio técnico y dogmático directamente en la plataforma.</span>
+            <a href="enciclopedia.html" class="mega-link-item">
+              <span class="mega-link-name">🗺️ Enciclopedia Hacendaria (9 Módulos)</span>
+              <span class="mega-link-desc">El compendio completo: presupuesto, Poderes, personajes, marco legal y comunidad.</span>
             </a>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Compendio de Fuentes Oficiales');">
-              <span class="mega-link-name">📑 Compendio de Fuentes Oficiales <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Trazabilidad documental: DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria en diseño.</span>
+            <a href="enciclopedia.html#referencias" class="mega-link-item">
+              <span class="mega-link-name">📑 Compendio de Fuentes Oficiales</span>
+              <span class="mega-link-desc">DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.openPaseCivicoModal(); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">🍺 Pase y Guías del Auditor Cívico</span>
@@ -287,9 +287,9 @@
               <span class="mega-link-name">🔒 100% Sin Datos Personales</span>
               <span class="mega-link-desc">Sin correos, teléfonos ni rastreo. Participa libremente con tu seudónimo o nick cívico.</span>
             </div>
-            <a href="javascript:void(0)" class="mega-link-item mega-link-disabled" onclick="window.AuditEngine.notificarEnDesarrollo('Canales Oficiales y Decálogo Auditor');">
-              <span class="mega-link-name">🏛️ Canales Oficiales y Decálogo Auditor <span class="badge-proximamente">Próximamente</span></span>
-              <span class="mega-link-desc">Guía cívica con las 6 puertas oficiales de denuncia y decálogo fiscalizador en diseño.</span>
+            <a href="enciclopedia.html#comunidad" class="mega-link-item">
+              <span class="mega-link-name">🏛️ Canales Oficiales y Decálogo Auditor</span>
+              <span class="mega-link-desc">Las seis puertas donde un señalamiento se vuelve expediente, y el decálogo del ciudadano auditor.</span>
             </a>
           </div>
         </div>
@@ -1590,6 +1590,36 @@
 
       <section id="inspExpediente" class="insp-expediente"></section>
 
+      <!-- Verificador de proveedores: lista 69-B del SAT (EFOS) -->
+      <div class="insp-sep" style="margin-top:28px;">
+        <span class="insp-sep-n">🧾</span>
+        <div>
+          <h3 class="insp-sep-tit">¿Su proveedor está en la lista negra del SAT?</h3>
+          <p class="insp-sep-sub">Busque por RFC o por nombre en el listado oficial del artículo 69-B del Código Fiscal: empresas y personas a las que el SAT presume o declara emisoras de facturas por operaciones inexistentes (EFOS).</p>
+        </div>
+      </div>
+
+      <section class="efos-verificador" id="efosVerificador">
+        <div class="insp-buscador">
+          <span class="insp-buscador-ico">🔍</span>
+          <input type="search" id="efosBuscador" class="insp-buscador-input" autocomplete="off"
+                 placeholder="RFC (p. ej. ABC123456XY0) o nombre de la empresa"
+                 onfocus="window.AuditEngine.efosCargar()"
+                 oninput="window.AuditEngine.efosBuscar(this.value)">
+        </div>
+        <p class="efos-estado" id="efosEstado">La lista se descarga al escribir la primera búsqueda (1.5 MB).</p>
+        <div class="efos-resultados" id="efosResultados"></div>
+        <details class="efos-guia">
+          <summary>Cómo usarlo en una auditoría ciudadana</summary>
+          <ol>
+            <li>Consiga el RFC del proveedor: viene en el contrato, en la factura o en <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer">ComprasMX ↗</a>, la plataforma oficial de contrataciones que sustituyó a CompraNet en abril de 2025.</li>
+            <li>Búsquelo aquí. <strong>Definitivo</strong> es la señal fuerte; <strong>presunto</strong> es una sospecha en curso; <strong>desvirtuado</strong> y <strong>sentencia favorable</strong> significan que el contribuyente salió de la lista.</li>
+            <li>Si un ente público le pagó a un proveedor definitivo, esa compra merece una pregunta formal: presente una solicitud de información o acuda a los canales de denuncia.</li>
+          </ol>
+          <p>Aparecer en la lista es una determinación administrativa del SAT, no una condena penal. Fuente: <a href="https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336" target="_blank" rel="noopener noreferrer">SAT, listados del artículo 69-B ↗</a>.</p>
+        </details>
+      </section>
+
     </div><!-- FIN PESTAÑA 6 -->
 
     <!-- ========================================================================
@@ -2004,7 +2034,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926a</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926b</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2148,16 +2178,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926a"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926b"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926a"></script>
+  <script src="assets/js/audit-database.js?v=20260926b"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926a"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926b"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926a"></script>
+  <script src="assets/js/audit-engine.js?v=20260926b"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

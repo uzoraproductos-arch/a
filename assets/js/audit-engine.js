@@ -1989,96 +1989,379 @@
     }, 120);
   }
 
-  /* --- TICKET CIVICO DEL CONTRIBUYENTE (COMPROBANTE FISCAL CIUDADANO) --- */
+  /* ====================================================================
+     VERIFICADOR DE PROVEEDORES: LISTA 69-B DEL SAT
+
+     El articulo 69-B del Codigo Fiscal permite al SAT presumir que un
+     contribuyente factura operaciones inexistentes (lo que se conoce como
+     EFOS), notificarlo y, si no lo desvirtua, declararlo en definitiva.
+     El SAT publica la lista completa; aqui se consulta sin salir de la
+     pagina. La lista pesa cerca de 1.5 MB y solo se descarga cuando el
+     lector la pide. Estar en la lista no es una condena penal, y dos de
+     sus cuatro situaciones significan justamente lo contrario.
+     ==================================================================== */
+  const EFOS_SIT = {
+    F: { t: 'Definitivo', clase: 'efos-f', txt: 'El SAT determinó en definitiva que sus comprobantes amparan operaciones inexistentes. Esas facturas no tienen efectos fiscales para nadie (art. 69-B del CFF).' },
+    P: { t: 'Presunto', clase: 'efos-p', txt: 'El SAT presume que sus operaciones son inexistentes y se lo notificó. Todavía puede desvirtuarlo: no es una determinación final.' },
+    D: { t: 'Desvirtuado', clase: 'efos-d', txt: 'Demostró ante el SAT que sus operaciones sí existieron. Salió de la presunción.' },
+    S: { t: 'Sentencia favorable', clase: 'efos-s', txt: 'Un tribunal le dio la razón frente al SAT. No se le considera EFOS.' }
+  };
+  const efos = { estado: 'sin-cargar', norm: null, rfcs: null, t: null };
+
+  function efosNorm(s) {
+    return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toUpperCase().replace(/[^A-Z0-9& ]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function efosSello() {
+    const s = document.querySelector('script[src*="audit-engine.js"]');
+    const m = s && s.getAttribute('src').match(/\?v=([\w.-]+)/);
+    return m ? m[1] : '';
+  }
+
+  function efosCargar() {
+    if (efos.estado === 'listo') return Promise.resolve();
+    if (efos.promesa) return efos.promesa;
+    efos.estado = 'cargando';
+    efosPintarEstado();
+    efos.promesa = new Promise((ok, mal) => {
+      const sc = document.createElement('script');
+      sc.src = 'assets/data/sat-69b.js' + (efosSello() ? '?v=' + efosSello() : '');
+      sc.onload = () => {
+        if (!window.SAT_69B) { mal(new Error('sin datos')); return; }
+        efos.norm = window.SAT_69B.r.map(r => efosNorm(r[1]));
+        efos.rfcs = window.SAT_69B.r.map(r => efosNorm(r[0]).replace(/ /g, ''));
+        efos.estado = 'listo';
+        ok();
+      };
+      sc.onerror = () => mal(new Error('no cargó'));
+      document.head.appendChild(sc);
+    }).catch(() => { efos.estado = 'error'; efos.promesa = null; })
+      .then(() => { efosPintarEstado(); const i = document.getElementById('efosBuscador'); if (i && i.value) efosBuscar(i.value); });
+    return efos.promesa;
+  }
+
+  function efosPintarEstado() {
+    const el = document.getElementById('efosEstado');
+    if (!el) return;
+    if (efos.estado === 'cargando') { el.innerHTML = 'Descargando la lista del SAT…'; return; }
+    if (efos.estado === 'error') { el.innerHTML = chipEstado('pendiente') + ' No se pudo cargar la lista. Revise su conexión e intente de nuevo.'; return; }
+    if (efos.estado !== 'listo') { el.innerHTML = 'La lista se descarga al escribir la primera búsqueda (1.5 MB).'; return; }
+    const m = window.SAT_69B.meta, c = m.porSituacion;
+    el.innerHTML = chipEstado('oficial') + ' <strong>' + formatNumber(m.total) + '</strong> registros · corte del SAT al ' + escHtml(m.corte) +
+      ' · Definitivos ' + formatNumber(c['Definitivo'] || 0) + ', presuntos ' + formatNumber(c['Presunto'] || 0) +
+      ', desvirtuados ' + formatNumber(c['Desvirtuado'] || 0) + ', con sentencia favorable ' + formatNumber(c['Sentencia Favorable'] || 0) + '.';
+  }
+
+  function efosBuscar(q) {
+    clearTimeout(efos.t);
+    efos.t = setTimeout(() => efosBuscarYa(q), 160);
+  }
+
+  function efosBuscarYa(q) {
+    const cont = document.getElementById('efosResultados');
+    if (!cont) return;
+    const n = efosNorm(q);
+    if (n.length < 3) { cont.innerHTML = ''; return; }
+    if (efos.estado !== 'listo') { efosCargar(); return; }
+    const R = window.SAT_69B.r;
+    const rfc = n.replace(/ /g, '');
+    const esRfc = /^[A-Z&]{3,4}\d{2}/.test(rfc);
+    const palabras = n.split(' ');
+    const hallados = [];
+    for (let i = 0; i < R.length && hallados.length < 40; i++) {
+      const ok = esRfc ? efos.rfcs[i].indexOf(rfc) === 0 : palabras.every(p => efos.norm[i].indexOf(p) !== -1);
+      if (ok) hallados.push(R[i]);
+    }
+    if (!hallados.length) {
+      cont.innerHTML = '<p class="efos-vacio">No aparece en la lista 69-B con corte al ' + escHtml(window.SAT_69B.meta.corte) + '. ' +
+        'Eso no certifica a nadie: solo significa que el SAT no lo ha incluido. Verifique el RFC exacto, que es más preciso que el nombre.</p>';
+      return;
+    }
+    cont.innerHTML = (hallados.length === 40 ? '<p class="efos-nota">Se muestran los primeros 40. Escriba el RFC o más palabras del nombre.</p>' : '') +
+      hallados.map(r => {
+        const s = EFOS_SIT[r[2]];
+        return '<article class="efos-ficha ' + s.clase + '">' +
+          '<div class="efos-ficha-cab"><span class="efos-sit">' + s.t + '</span><code>' + escHtml(r[0]) + '</code></div>' +
+          '<h4>' + escHtml(r[1]) + '</h4>' +
+          '<p>' + s.txt + '</p>' +
+          '<div class="efos-oficio">Oficio ' + escHtml(r[3]) + ' · publicado en ' + (r[5] === 'DOF' ? 'el DOF' : 'la página del SAT') + ' el ' + escHtml(r[4]) + ' ' + chipEstado('oficial') + '</div>' +
+        '</article>';
+      }).join('');
+  }
+
+  /* Desde el menu: abre el Inspector, baja al verificador y precarga. */
+  function efosAbrir() {
+    cerrarMegaMenus();
+    seleccionarModuloExplorer('verificador');
+    setTimeout(() => {
+      const el = document.getElementById('efosVerificador');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const i = document.getElementById('efosBuscador');
+      if (i) i.focus({ preventScroll: true });
+    }, 180);
+    efosCargar();
+  }
+
+  /* --- ESTADO DE CUENTA CIVICO ---
+     Lo que antes era el «ticket»: el mismo calculo, presentado como un
+     estado de cuenta bancario. Resumen, movimientos (a donde fue el ISR),
+     lo que llega a los Poderes y una linea de comparacion con quienes
+     deciden. Se descarga como imagen para compartir. No es un comprobante
+     fiscal y lo dice en el propio documento. */
+  function eccFolio() {
+    if (!state.cc.folio) {
+      const d = new Date();
+      const f = d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+      state.cc.folio = 'AV-' + f + '-' + Math.random().toString(16).slice(2, 6).toUpperCase();
+    }
+    return state.cc.folio;
+  }
+
+  /* Los numeros del documento, una sola vez: los usan la vista, la imagen
+     y el texto para copiar. */
+  function eccDatos() {
+    const res = state.cc.resultado;
+    if (!res || !state.cc.calculado) return null;
+    const esAnual = state.cc.periodicidad === 'ano';
+    const per = esAnual ? res.ano : res.mes;
+    if (!res.reparto.length || !(per.isr > 0)) return null;
+    const factor = esAnual ? 1 : 1 / 12;
+    const P = DB.poderes;
+    const poderes = P ? ['legislativo', 'judicial'].map(k => {
+      const r = P.ramos2026[k];
+      return { icono: k === 'legislativo' ? '🏛️' : '⚖️', nombre: r.nombre, ramo: r.ramo,
+               monto: per.isr * r.aprobado / P.gastoNetoTotal.valor, pct: r.aprobado / P.gastoNetoTotal.valor * 100 };
+    }) : [];
+    const cargos = cargosComparador();
+    const dip = cargos.find(c => /diputad/i.test(c.cargo));
+    const reg = ccRegimenEfectivo();
+    return {
+      cad: esAnual ? 'al año' : 'al mes',
+      periodo: esAnual ? 'Ejercicio 2026 · anual' : 'Ejercicio 2026 · mensual',
+      regimen: reg ? reg.nombre : 'Sueldos y salarios',
+      bruto: per.bruto, isr: per.isr, cuotas: per.cuotasTotal, neto: per.neto,
+      movimientos: res.reparto.map(x => ({ icono: x.icono, nombre: x.nombre, pct: x.pct, monto: x.monto * factor })),
+      poderes: poderes,
+      ellos: dip && res.ano.neto > 0 ? { cargo: dip.cargo, veces: dip.netoAnual / res.ano.neto, netoAnual: dip.netoAnual } : null,
+      folio: eccFolio(),
+      emitido: new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    };
+  }
+
   function ccPintarTicketCivico() {
     const cont = document.getElementById("ccTicketCivico");
     if (!cont) return;
-    const res = state.cc.resultado;
-    if (!res || !state.cc.calculado) { cont.innerHTML = ""; return; }
-    const esAnual = state.cc.periodicidad === "ano";
-    const isrEfectivo = esAnual ? res.ano.isr : res.mes.isr;
-    const sueldoEfectivo = esAnual ? res.ano.bruto : res.mes.bruto;
-    const cuotas = esAnual ? res.ano.cuotasTotal : res.mes.cuotasTotal;
-    const rep = res.reparto;
-    if (!rep.length || isrEfectivo <= 0) { cont.innerHTML = ""; return; }
+    const d = eccDatos();
+    if (!d) { cont.innerHTML = ""; return; }
+    const max = Math.max.apply(null, d.movimientos.map(m => m.monto));
 
-    const factor = esAnual ? 1 : (1 / 12);
-    const totalRetenido = isrEfectivo + cuotas;
-    const cad = esAnual ? "al año" : "al mes";
-    const reg = ccRegimenEfectivo();
+    const movs = d.movimientos.map(m => `
+          <div class="ecc-mov">
+            <span class="ecc-mov-con">${m.icono} ${m.nombre}</span>
+            <span class="ecc-mov-bar"><i style="width:${(m.monto / max * 100).toFixed(1)}%"></i></span>
+            <span class="ecc-mov-pct num-tabular">${m.pct.toFixed(1)}%</span>
+            <span class="ecc-mov-mon num-tabular">${ccPesos(m.monto)}</span>
+          </div>`).join('');
 
-    const rows = rep.map(x => {
-      const montoItem = x.monto * factor;
-      return `
-        <div class="civic-ticket-row">
-          <span>${x.icono} ${x.nombre}</span>
-          <span class="num-tabular"><strong>${ccPesos(montoItem)}</strong> <small style="color:var(--text-dim);">(${x.pct.toFixed(1)}%)</small></span>
-        </div>
-      `;
-    }).join("");
+    const pod = d.poderes.length ? `
+        <div class="ecc-sec">
+          <div class="ecc-sec-tit">De ahí, lo que llega a los Poderes <small>(ya incluido arriba; no se suma)</small></div>
+          ${d.poderes.map(p => `
+          <div class="ecc-mov ecc-mov-sub">
+            <span class="ecc-mov-con">${p.icono} ${p.nombre} · Ramo ${p.ramo}</span>
+            <span class="ecc-mov-bar"></span>
+            <span class="ecc-mov-pct num-tabular">${p.pct.toFixed(2)}%</span>
+            <span class="ecc-mov-mon num-tabular">${ccPesosFinos(p.monto)}</span>
+          </div>`).join('')}
+          <button type="button" class="pd-btn" onclick="window.AuditEngine.switchSubtab('accion-financiera','poderes')">Ver en qué lo gastan (2.6)</button>
+        </div>` : '';
+
+    const ellos = d.ellos ? `
+        <div class="ecc-ellos">
+          <div class="ecc-ellos-num num-tabular">${d.ellos.veces.toFixed(1)}×</div>
+          <div class="ecc-ellos-txt">
+            <strong>${d.ellos.cargo}</strong>: recibe ${d.ellos.veces.toFixed(1)} veces su ingreso neto,
+            ${ccPesos(d.ellos.netoAnual)} netos al año según el Anexo 23 del PEF 2026. ${chipEstado('derivado')}
+            <button type="button" class="pd-btn" onclick="window.AuditEngine.irComparadorChoque()">Comparar con más cargos</button>
+          </div>
+        </div>` : '';
 
     cont.innerHTML = `
       <div class="civic-ticket-wrapper">
-        <div class="civic-ticket-card" id="ticketCardPrintable">
-          <div class="civic-ticket-header">
-            <div class="civic-ticket-stamp">🧾 COMPROBANTE CÍVICO DE CONTRIBUCIONES · 2026</div>
-            <h3 class="civic-ticket-title">Ticket del Contribuyente</h3>
-            <div class="civic-ticket-meta">
-              AUDITAVISIÓN · SISTEMA INDEPENDIENTE DE FISCALIZACIÓN CIUDADANA<br>
-              Corte: Presupuesto de Egresos de la Federación 2026 · DOF &amp; SHCP
+        <article class="ecc" id="ticketCardPrintable">
+          <header class="ecc-cab">
+            <div class="ecc-cielo" aria-hidden="true"></div>
+            <div class="ecc-cab-txt">
+              <div class="ecc-marca">AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN</div>
+              <h3 class="ecc-titulo">Estado de Cuenta Cívico</h3>
+              <dl class="ecc-meta">
+                <div><dt>Titular</dt><dd>Contribuyente</dd></div>
+                <div><dt>Periodo</dt><dd>${d.periodo}</dd></div>
+                <div><dt>Folio</dt><dd class="num-tabular">${d.folio}</dd></div>
+                <div><dt>Emitido</dt><dd class="num-tabular">${d.emitido}</dd></div>
+              </dl>
             </div>
+          </header>
+
+          <div class="ecc-resumen">
+            <div class="ecc-kpi"><span>Ingreso bruto</span><strong class="num-tabular">${ccPesos(d.bruto)}</strong><small>${d.cad} · ${d.regimen}</small></div>
+            <div class="ecc-kpi ecc-kpi-isr"><span>ISR pagado</span><strong class="num-tabular">${ccPesos(d.isr)}</strong><small>impuesto: se reparte abajo</small></div>
+            <div class="ecc-kpi"><span>Cuotas IMSS</span><strong class="num-tabular">${ccPesos(d.cuotas)}</strong><small>aportación con destino propio</small></div>
+            <div class="ecc-kpi ecc-kpi-neto"><span>Le queda</span><strong class="num-tabular">${ccPesos(d.neto)}</strong><small>ingreso neto ${d.cad}</small></div>
           </div>
 
-          <div style="font-size:11.5px; margin-bottom:12px; line-height:1.6; border-bottom:1px dashed var(--border-subtle); padding-bottom:10px;">
-            <div class="civic-ticket-row">
-              <span>Ingreso Bruto Fiscal (${cad}):</span>
-              <span class="num-tabular"><strong>${ccPesos(sueldoEfectivo)}</strong></span>
-            </div>
-            <div class="civic-ticket-row">
-              <span>Régimen Tributario:</span>
-              <span>${reg ? reg.nombre : "Sueldos y Salarios"}</span>
-            </div>
-            <div class="civic-ticket-row">
-              <span>ISR Retenido por Hacienda:</span>
-              <span class="num-tabular" style="color:var(--gold-bright);"><strong>${ccPesos(isrEfectivo)}</strong></span>
-            </div>
-            ${cuotas > 0 ? `
-            <div class="civic-ticket-row">
-              <span>Cuotas Seguridad Social (IMSS):</span>
-              <span class="num-tabular" style="color:var(--cyan);"><strong>${ccPesos(cuotas)}</strong></span>
-            </div>` : ""}
+          <div class="ecc-sec">
+            <div class="ecc-sec-tit">Movimientos: a dónde fue su ISR ${chipEstado('derivado')}</div>
+            <div class="ecc-movs">${movs}</div>
           </div>
+          ${pod}
+          ${ellos}
 
-          <div style="font-size:11px; text-transform:uppercase; color:var(--gold); letter-spacing:1px; margin-bottom:8px; font-weight:700;">
-            ¿En qué gasta el Estado cada peso de tu trabajo?
-          </div>
-
-          <div class="civic-ticket-body">
-            ${rows}
-          </div>
-          ${ticketPoderes(isrEfectivo)}
-
-          <div class="civic-ticket-row ticket-total">
-            <span>TOTAL DE TUS IMPUESTOS FISCALIZADOS (${cad}):</span>
-            <span class="num-tabular">${ccPesos(totalRetenido)}</span>
-          </div>
-
-          <div class="civic-ticket-footer">
-            <div>"Menos que dos caguamas al mes te cuesta fiscalizar el destino de tu dinero."</div>
-            <div style="margin-top:4px; font-size:10px; color:var(--text-dim);">Folio Cívico: #MX-2026-${Math.floor(sueldoEfectivo % 90000 + 10000)} · Plataforma Cívica Ciudadana</div>
-          </div>
+          <footer class="ecc-pie">
+            <p><strong>Cómo se calculó.</strong> ISR con las tarifas del Anexo 8 de la Resolución Miscelánea Fiscal 2026; reparto con los renglones del Presupuesto de Egresos 2026 (DOF 21-11-2025). Los montos por renglón son derivados: su ISR multiplicado por el peso de cada renglón en el gasto aprobado.</p>
+            <p class="ecc-legal">Este documento es un ejercicio de divulgación. No es un comprobante fiscal ni sustituye su constancia de retenciones.</p>
+          </footer>
 
           <div class="civic-ticket-actions">
-            <button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.copiarTicketCivico()" style="font-size:12.5px; padding:8px 16px;">
-              <span>📋</span> Copiar Resumen Cívico para Redes
+            <button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.descargarEstadoCuenta()" style="font-size:12.5px; padding:8px 16px;">
+              <span>⬇️</span> Descargar imagen para compartir
+            </button>
+            <button type="button" class="hero-pillar-btn" onclick="window.AuditEngine.copiarTicketCivico()" style="font-size:12.5px; padding:8px 16px;">
+              <span>📋</span> Copiar como texto
             </button>
             <button type="button" class="hero-pillar-btn hero-pase-btn" onclick="window.AuditEngine.openPaseCivicoModal()" style="font-size:12.5px; padding:8px 16px;">
-              <span>🍺</span> Descargar Ticket HD (Pase Cívico · $79/mes)
+              <span>🍺</span> Pase Cívico
             </button>
           </div>
-        </div>
+        </article>
       </div>
     `;
+  }
+
+  /* --- La imagen para compartir (1080 x 1350, formato vertical de redes).
+     Sigue el tema de la pagina: ciudad de noche o de dia. El horizonte se
+     dibuja aqui mismo, sin fotos, para que ningun edificio real se lea
+     como una ciudad concreta. --- */
+  function eccAleatorio(semilla) {
+    let s = semilla >>> 0;
+    return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+  }
+
+  function eccHorizonte(g, W, y0, alto, noche) {
+    const rnd = eccAleatorio(20260926);
+    const cielo = g.createLinearGradient(0, 0, 0, y0 + alto);
+    if (noche) { cielo.addColorStop(0, '#070b1a'); cielo.addColorStop(1, '#1d2650'); }
+    else { cielo.addColorStop(0, '#9fd3f7'); cielo.addColorStop(1, '#fbe9c8'); }
+    g.fillStyle = cielo; g.fillRect(0, 0, W, y0 + alto);
+    if (noche) {
+      g.fillStyle = 'rgba(255,255,255,0.8)';
+      for (let i = 0; i < 70; i++) g.fillRect(rnd() * W, rnd() * (y0 + alto * 0.5), 2, 2);
+      g.beginPath(); g.fillStyle = '#f4e7b8'; g.arc(W - 150, 90, 34, 0, Math.PI * 2); g.fill();
+    } else {
+      g.beginPath(); g.fillStyle = 'rgba(255,210,120,0.9)'; g.arc(W - 150, 95, 46, 0, Math.PI * 2); g.fill();
+    }
+    const base = y0 + alto;
+    [[0.55, noche ? '#141b3a' : '#9fb3c8'], [1, noche ? '#0b1026' : '#5d7390']].forEach(([esc, color], capa) => {
+      let x = -10;
+      while (x < W) {
+        const w = 40 + rnd() * 70, h = (40 + rnd() * 90) * esc + capa * 16;
+        g.fillStyle = color; g.fillRect(x, base - h, w, h);
+        if (capa === 1) {
+          g.fillStyle = noche ? 'rgba(255,211,107,0.85)' : 'rgba(255,255,255,0.55)';
+          for (let wy = base - h + 12; wy < base - 8; wy += 16)
+            for (let wx = x + 8; wx < x + w - 8; wx += 13)
+              if (rnd() < (noche ? 0.35 : 0.5)) g.fillRect(wx, wy, 5, 7);
+        }
+        x += w + 4 + rnd() * 10;
+      }
+    });
+  }
+
+  function eccTexto(g, txt, x, y, fuente, color, alinear) {
+    g.font = fuente; g.fillStyle = color; g.textAlign = alinear || 'left'; g.fillText(txt, x, y);
+  }
+
+  async function descargarEstadoCuenta() {
+    const d = eccDatos();
+    if (!d) return;
+    try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) { /* sin fuentes web */ }
+    const noche = document.documentElement.getAttribute('data-theme') !== 'light';
+    const C = noche
+      ? { fondo: '#0c1122', tarjeta: '#131a33', linea: '#27305a', txt: '#eef1fa', suave: '#9aa3c7', oro: '#f2c14e', cian: '#4fd1e8', barra: '#f2c14e' }
+      : { fondo: '#f7f5ef', tarjeta: '#ffffff', linea: '#ddd6c6', txt: '#16203a', suave: '#5d6680', oro: '#a8740a', cian: '#0b7a8f', barra: '#c9921a' };
+    const W = 1080, H = 1350, M = 64;
+    const cv = document.createElement('canvas');
+    cv.width = W; cv.height = H;
+    const g = cv.getContext('2d');
+    const serif = "'Playfair Display', Georgia, serif", sans = "Inter, 'Segoe UI', Arial, sans-serif", mono = "'JetBrains Mono', Consolas, monospace";
+
+    g.fillStyle = C.fondo; g.fillRect(0, 0, W, H);
+    eccHorizonte(g, W, 60, 250, noche);
+    const velo = g.createLinearGradient(0, 120, 0, 330);
+    velo.addColorStop(0, 'rgba(0,0,0,0)'); velo.addColorStop(1, C.fondo);
+    g.fillStyle = velo; g.fillRect(0, 120, W, 212);
+
+    eccTexto(g, 'AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN', M, 70, '600 20px ' + mono, noche ? '#ffffff' : '#16203a');
+    eccTexto(g, 'Estado de Cuenta Cívico', M, 150, '700 64px ' + serif, noche ? '#ffffff' : '#16203a');
+
+    const meta = [['PERIODO', d.periodo], ['FOLIO', d.folio], ['EMITIDO', d.emitido]];
+    meta.forEach((m, i) => {
+      const x = M + i * 330;
+      eccTexto(g, m[0], x, 298, '600 16px ' + mono, C.suave);
+      eccTexto(g, m[1], x, 326, '600 22px ' + sans, C.txt);
+    });
+
+    const kpis = [['INGRESO BRUTO', d.bruto, C.txt], ['ISR PAGADO', d.isr, C.oro], ['CUOTAS IMSS', d.cuotas, C.cian], ['LE QUEDA', d.neto, C.txt]];
+    const kw = (W - 2 * M - 3 * 16) / 4;
+    kpis.forEach((k, i) => {
+      const x = M + i * (kw + 16), y = 356;
+      g.fillStyle = C.tarjeta; g.fillRect(x, y, kw, 112);
+      g.fillStyle = k[2]; g.fillRect(x, y, kw, 4);
+      eccTexto(g, k[0], x + 18, y + 40, '600 15px ' + mono, C.suave);
+      eccTexto(g, ccPesos(k[1]), x + 18, y + 84, '700 30px ' + sans, k[2]);
+    });
+    eccTexto(g, 'Montos ' + d.cad + ' · ' + d.regimen, M, 500, '400 18px ' + sans, C.suave);
+
+    eccTexto(g, 'A DÓNDE FUE SU ISR', M, 552, '700 20px ' + mono, C.oro);
+    const movs = d.movimientos.slice(0, 8);
+    const max = Math.max.apply(null, movs.map(m => m.monto));
+    movs.forEach((m, i) => {
+      const y = 596 + i * 46;
+      eccTexto(g, m.nombre.length > 34 ? m.nombre.slice(0, 33) + '…' : m.nombre, M, y, '500 21px ' + sans, C.txt);
+      g.fillStyle = C.linea; g.fillRect(M + 420, y - 16, 330, 14);
+      g.fillStyle = C.barra; g.fillRect(M + 420, y - 16, 330 * m.monto / max, 14);
+      eccTexto(g, m.pct.toFixed(1) + '%', M + 830, y, '500 19px ' + mono, C.suave, 'right');
+      eccTexto(g, ccPesos(m.monto), W - M, y, '700 21px ' + sans, C.txt, 'right');
+    });
+
+    let y = 596 + movs.length * 46 + 6;
+    g.fillStyle = C.linea; g.fillRect(M, y, W - 2 * M, 2);
+    y += 40;
+    d.poderes.forEach(p => {
+      eccTexto(g, 'de ahí, ' + p.nombre, M, y, 'italic 400 20px ' + sans, C.suave);
+      eccTexto(g, ccPesosFinos(p.monto), W - M, y, '600 20px ' + sans, C.txt, 'right');
+      y += 36;
+    });
+
+    if (d.ellos) {
+      y += 14;
+      g.fillStyle = C.tarjeta; g.fillRect(M, y, W - 2 * M, 118);
+      g.fillStyle = C.oro; g.fillRect(M, y, 6, 118);
+      eccTexto(g, d.ellos.veces.toFixed(1) + '×', M + 36, y + 80, '700 62px ' + serif, C.oro);
+      eccTexto(g, d.ellos.cargo + ': ' + d.ellos.veces.toFixed(1) + ' veces su ingreso', M + 230, y + 50, '600 24px ' + sans, C.txt);
+      eccTexto(g, 'Neto contra neto. Anexo 23, PEF 2026: ' + ccPesos(d.ellos.netoAnual) + ' al año', M + 230, y + 86, '400 19px ' + sans, C.suave);
+      y += 118;
+    }
+
+    eccTexto(g, 'Fuentes: tarifas ISR, Anexo 8 RMF 2026 · PEF 2026, DOF 21-11-2025. Montos por renglón: derivados.', M, H - 92, '400 16px ' + sans, C.suave);
+    eccTexto(g, 'Ejercicio de divulgación. No es un comprobante fiscal.', M, H - 64, '400 16px ' + sans, C.suave);
+    eccTexto(g, 'uzoraproductos-arch.github.io/a', W - M, H - 64, '700 18px ' + mono, C.oro, 'right');
+
+    const a = document.createElement('a');
+    a.download = 'estado-de-cuenta-civico-' + d.folio + '.png';
+    a.href = cv.toDataURL('image/png');
+    document.body.appendChild(a); a.click(); a.remove();
   }
 
   /* Dentro del reparto, lo que llega a cada Poder. Ya esta incluido en
@@ -2113,7 +2396,7 @@
     const cad = esAnual ? "al año" : "al mes";
     const factor = esAnual ? 1 : (1 / 12);
 
-    let texto = `🇲🇽 MI TICKET CÍVICO 2026 (Auditavisión)\n`;
+    let texto = `🇲🇽 MI ESTADO DE CUENTA CÍVICO 2026 (Auditavisión)\n`;
     texto += `De mi sueldo de ${ccPesos(sueldoEfectivo)} ${cad}, Hacienda me retiene ${ccPesos(isrEfectivo)} de ISR.\n`;
     texto += `Así se reparte cada peso de mi esfuerzo en el Presupuesto Federal:\n`;
     res.reparto.forEach(x => {
@@ -2126,12 +2409,14 @@
         texto += `   de ahí, ${r.nombre}: ${ccPesosFinos(isrEfectivo * r.aprobado / tot)}\n`;
       });
     }
-    texto += `\nTotal fiscalizado: ${ccPesos(isrEfectivo)} ${cad}.\n`;
+    const dEcc = eccDatos();
+    if (dEcc && dEcc.ellos) texto += `\n${dEcc.ellos.cargo}: recibe ${dEcc.ellos.veces.toFixed(1)} veces mi ingreso neto (PEF 2026, Anexo 23).\n`;
+    texto += `\nISR que pagué: ${ccPesos(isrEfectivo)} ${cad}. Montos por renglón derivados del PEF 2026.\n`;
     texto += `Fiscaliza el tuyo y audita a tu gobierno en: Auditavisión México`;
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(texto).then(() => {
-        alert("¡Ticket Cívico copiado al portapapeles! Listo para compartir en X, WhatsApp o tus redes sociales.");
+        alert("¡Estado de cuenta cívico copiado! Listo para pegar en X, WhatsApp o tus redes sociales.");
       }).catch(() => {
         prompt("Copia tu Ticket Cívico:", texto);
       });
@@ -22724,9 +23009,15 @@
     });
 
     // Comprobar si hay hash en la URL al cargar
+    /* Se admite #pestana y #pestana/subpestana, para enlazar desde el
+       menu de la portada a una subpestana concreta de la Enciclopedia. */
     const initialHash = window.location.hash.replace('#', '');
-    if (initialHash && TAB_METADATA[initialHash]) {
-      switchTab(initialHash, true);
+    const hashTab = initialHash.split('/')[0], hashSub = initialHash.split('/')[1];
+    if (hashTab && TAB_METADATA[hashTab]) {
+      switchTab(hashTab, true);
+      if (hashSub && document.querySelector('.subtab-panel[data-parent="' + hashTab + '"][data-subpanel="' + hashSub + '"]')) {
+        switchSubtab(hashTab, hashSub);
+      }
     } else {
       switchTab('presupuesto', true);
     }
@@ -26085,6 +26376,10 @@
     renderComparadorSalarial: renderComparadorSalarial,
     renderPoderes: renderPoderes,
     irComparadorChoque: irComparadorChoque,
+    descargarEstadoCuenta: descargarEstadoCuenta,
+    efosAbrir: efosAbrir,
+    efosBuscar: efosBuscar,
+    efosCargar: efosCargar,
     copiarComparadorChoque: copiarComparadorChoque,
     setVistaEgresos: setVistaEgresos,
     renderTreemapPEF: renderTreemapPEF,
