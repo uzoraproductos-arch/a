@@ -1983,8 +1983,42 @@ vuelve a correrse si cambian los libros.
   Al arrancar, las ventanas y cajones flotantes se cuelgan del `body`. Tenía
   el mismo defecto el cajón de detalle de las entidades (`auditDrawer`).
 
+### Hecho (Informes de la Cuenta Pública, con cifras de la ASF)
+
+- **Nueva sección «Informes de la Cuenta Pública (ASF)»** en Búsqueda Forense
+  (`#cuentaPublicaASF`, `renderCuentaPublica()`, siete capítulos). El vínculo
+  de Descargar Datos ya no manda a la Enciclopedia. Capítulos: qué es y
+  calendario legal con cuenta regresiva a la siguiente entrega; la Cuenta
+  Pública 2024 en cifras; dónde se concentra; su estado (selector y ranking de
+  los 32); qué significa cada acción y los plazos; la Cuenta Pública 2025
+  (primera entrega); documentos y descarga.
+- **Datos:** colección `cuenta_publica_asf`, de la Matriz de Datos Básicos de
+  la ASF (CP 2024, tres entregas, corte febrero de 2026; CP 2025, primera
+  entrega, corte junio de 2026). `extraer_mdb_asf.py` lee el PDF y comprueba
+  que grupos, sectores y estados sumen lo que dice el documento;
+  `integrar_cuenta_publica.py` lo integra. Leyes verificadas en su texto
+  vigente: LFRCF (DOF 14-05-2026), arts. 33, 35, 39, 40 y 41; CPEUM (DOF
+  02-06-2026), art. 74 fr. VI.
+- Cifras clave: 2,264 auditorías, 6,274 acciones (2,762 pliegos de
+  observaciones), $2,005.6 mdp recuperados y $65,169.1 mdp por aclarar, 91 %
+  de ellos en gasto federalizado.
+- Nueva base en Descargar Datos: `asf-cp2024` (por estado y ente).
+- Catálogo: fichas 80 (MDB 2024) y 81 (IR 2025, primera entrega); la 7 (LFRCF)
+  citaba la reforma de 2021 y la 14 apuntaba a la portada de la ASF y hablaba
+  de «2,100 pliegos»: corregidas.
+
 ### Pendiente
 
+- **Bitácora de noticias (Enciclopedia 2.5, `DB.noticias`):** sus siete notas
+  no traen liga a su fuente y varias no se sostienen (el PEF 2026 no se
+  aprobó el 10 de enero; «$51,024 mdp por aclarar, 68 % municipios» no es la
+  cifra de la ASF para 2024, que es $65,169.1 mdp). No se trajo a la
+  plataforma. Decidir con el autor si se reescribe con fuentes o se retira.
+- **Segunda entrega de la Cuenta Pública 2025 (30 de octubre de 2026):**
+  bajar su matriz de datos básicos y actualizar `cp2025`; el 20 de febrero
+  de 2027, la tercera y el Informe General.
+- **El radar de banderas rojas** tiene cifras propias por estado que no
+  siempre coinciden con la matriz de la ASF: revisarlas contra `cuenta_publica_asf`.
 - **Expedientes de Casos por Aclarar (Auditoría Forense):** las seis fichas
   no llevan chip ni número de auditoría, el botón «Informe ASF» abre la
   portada de la ASF y varias cifras no se pueden sostener como están (Tren

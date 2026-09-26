@@ -7294,6 +7294,24 @@ window.AUDIT_DB = {
       "descripcion": "Censo de los gobiernos municipales. Su m\u00f3dulo de residuos s\u00f3lidos urbanos reporta la basura recolectada cada d\u00eda (108,146 toneladas en 2022), el sistema de recolecci\u00f3n y la disposici\u00f3n final."
     },
     {
+      "num": 80,
+      "id": "ref-asf-mdb2024",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024: primera, segunda y tercera entregas (consolidado). ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf",
+      "descripcion": "Resumen num\u00e9rico oficial de la revisi\u00f3n de la Cuenta P\u00fablica 2024: 2,264 auditor\u00edas, 6,274 acciones, montos recuperados y montos por aclarar, por grupo funcional, sector y entidad federativa. Corte a febrero de 2026."
+    },
+    {
+      "num": 81,
+      "id": "ref-asf-ir2025a",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalizaci\u00f3n Superior y Auditor\u00eda",
+      "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
+      "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
       "num": 1,
       "id": "ref-cpeum",
       "categoria": "constitucional",
@@ -7352,9 +7370,9 @@ window.AUDIT_DB = {
       "id": "ref-lfrcf",
       "categoria": "fiscalizacion_auditoria",
       "categoria_nombre": "Fiscalización Superior y Auditoría",
-      "cita_apa": "Ley de Fiscalización y Rendición de Cuentas de la Federación [LFRCF]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Última reforma publicada el 20 de mayo de 2021. Cámara de Diputados.",
+      "cita_apa": "Ley de Fiscalización y Rendición de Cuentas de la Federación [LFRCF]. Diario Oficial de la Federación, 18 de julio de 2016 (México). Última reforma publicada el 14 de mayo de 2026. Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
-      "descripcion": "Otorga facultades a la Auditoría Superior de la Federación (ASF) para auditar en tiempo real y posterior la Cuenta Pública de los tres Poderes de la Unión, los Ramos 28 y 33 en las 32 entidades, y emitir Pliegos de Observaciones."
+      "descripcion": "Regula la revisión de la Cuenta Pública por la Auditoría Superior de la Federación: las tres entregas de informes individuales (art. 35), el Informe General del 20 de febrero (art. 33), los plazos para responder (arts. 39 y 41) y las acciones que puede promover, como los pliegos de observaciones (art. 40)."
     },
     {
       "num": 8,
@@ -7415,9 +7433,9 @@ window.AUDIT_DB = {
       "id": "ref-asf-cp",
       "categoria": "fuentes_oficiales",
       "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
-      "cita_apa": "Auditoría Superior de la Federación. (2025). Informes Individuales y General del Resultado de la Fiscalización Superior de la Cuenta Pública 2024. Cámara de Diputados.",
-      "url": "https://www.asf.gob.mx/",
-      "descripcion": "Repositorio oficial con los 2,100 pliegos de auditoría practicados al gasto federalizado, dependencias centralizadas y empresas productivas del Estado."
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Informe del Resultado de la Fiscalización Superior de la Cuenta Pública 2024: tercera entrega e informes individuales. ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/index.html",
+      "descripcion": "Portal oficial con los informes individuales de las 2,264 auditorías a la Cuenta Pública 2024, el Informe General Ejecutivo, los informes simplificados y la matriz de datos básicos."
     },
     {
       "num": 15,
@@ -16785,6 +16803,2024 @@ window.AUDIT_DB = {
       "Concesi\u00f3n y costo del servicio de basura, municipio por municipio: vienen en los microdatos del m\u00f3dulo de residuos del Censo de Gobiernos Municipales 2023 del INEGI; falta descargarlos.",
       "Costo del da\u00f1o ambiental 2025: el INEGI publica las Cuentas Econ\u00f3micas y Ecol\u00f3gicas cada diciembre; la de 2025 se espera en diciembre de 2026."
     ]
+  },
+"cuenta_publica_asf": {
+    "consulta": "26 de septiembre de 2026",
+    "nota": "Pesos corrientes. Los montos de la ASF vienen en miles de pesos y aqu\u00ed se muestran en pesos. Un monto por aclarar no es un desfalco comprobado: es lo que, al cierre de la auditor\u00eda, carec\u00eda de documentaci\u00f3n que acreditara el uso del dinero, y puede solventarse despu\u00e9s.",
+    "fuentes": {
+      "MDB2024": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2024 (feb. 2026)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos del Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, primera, segunda y tercera entregas (consolidado), corte febrero de 2026",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "49732c8da82eaafc6bdd67b0b0ce5c995773294d7e48e5412ad73e5c4fe15d66"
+      },
+      "IR2024": {
+        "corto": "ASF, Informe del Resultado CP 2024",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2024, tercera entrega (portal con los informes individuales)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/index.html"
+      },
+      "MDB2025A": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2025, 1.\u00aa entrega (jun. 2026)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos, Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, primera entrega, corte junio de 2026",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/Documentos/Matriz/IR2025_Entrega_a.pdf",
+        "sha256": "f0cd6497346ca2247f4db83f663fdcc99c517fc6f94c239f0970d3edb855edcc"
+      },
+      "IR2025A": {
+        "corto": "ASF, Informe del Resultado CP 2025, 1.\u00aa entrega",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, primera entrega",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html"
+      },
+      "LFRCF": {
+        "corto": "Ley de Fiscalizaci\u00f3n, reforma DOF 14-05-2026",
+        "doc": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n, \u00faltima reforma DOF 14-05-2026",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
+        "sha256": "cc687a4d8d9de93d2d3ec9b40b26d0273e108bb002a6f611806dc36ebce5ba2c"
+      },
+      "CPEUM": {
+        "corto": "Constituci\u00f3n, art. 74 fr. VI",
+        "doc": "Constituci\u00f3n Pol\u00edtica de los Estados Unidos Mexicanos, \u00faltimas reformas DOF 02-06-2026",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+        "sha256": "ca63a23a4b7444ebdbdad93759fbf46bd14c069e587c5878decf89fc9c12ca8e"
+      },
+      "CPSHCP": {
+        "corto": "SHCP, portal de la Cuenta P\u00fablica",
+        "doc": "Secretar\u00eda de Hacienda y Cr\u00e9dito P\u00fablico, Cuenta P\u00fablica (portal oficial, ejercicios 1996 a 2025)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx"
+      },
+      "ASFDATOS": {
+        "corto": "ASF, Sistema P\u00fablico de Consulta",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Sistema P\u00fablico de Consulta de Auditor\u00edas (ASF Datos)",
+        "url": "https://www.asfdatos.gob.mx/"
+      }
+    },
+    "calendario": [
+      {
+        "fecha": "2025-12-31",
+        "titulo": "Cierra el ejercicio 2025",
+        "texto": "Termina el a\u00f1o en que se gast\u00f3 el dinero que se revisa.",
+        "hecho": true
+      },
+      {
+        "fecha": "2026-04-30",
+        "titulo": "Hacienda entrega la Cuenta P\u00fablica 2025",
+        "texto": "La SHCP la presenta a la C\u00e1mara de Diputados a m\u00e1s tardar el 30 de abril del a\u00f1o siguiente.",
+        "fundamento": "CPEUM, art. 74, fr. VI",
+        "fuente": "CPEUM",
+        "hecho": true
+      },
+      {
+        "fecha": "2026-06-30",
+        "titulo": "Primera entrega de la ASF",
+        "texto": "Informes individuales que concluyen en el periodo. En 2026 fueron 33 auditor\u00edas a la distribuci\u00f3n de las participaciones federales.",
+        "fundamento": "LFRCF, art. 35",
+        "fuente": "LFRCF",
+        "hecho": true
+      },
+      {
+        "fecha": "2026-10-30",
+        "titulo": "Segunda entrega de la ASF",
+        "texto": "\u00daltimo d\u00eda h\u00e1bil de octubre (el 31 de octubre de 2026 cae en s\u00e1bado).",
+        "fundamento": "LFRCF, art. 35",
+        "fuente": "LFRCF",
+        "hecho": false
+      },
+      {
+        "fecha": "2027-02-20",
+        "titulo": "Tercera entrega e Informe General",
+        "texto": "\u00daltimos informes individuales y el Informe General Ejecutivo, que es p\u00fablico.",
+        "fundamento": "LFRCF, arts. 33 y 35",
+        "fuente": "LFRCF",
+        "hecho": false
+      }
+    ],
+    "plazos": [
+      {
+        "plazo": "10 d\u00edas h\u00e1biles",
+        "que": "para que la ASF env\u00ede a cada ente su informe individual, con sus acciones y recomendaciones, despu\u00e9s de entregarlo a la C\u00e1mara",
+        "fundamento": "LFRCF, art. 39"
+      },
+      {
+        "plazo": "30 d\u00edas h\u00e1biles",
+        "que": "para que el ente responda y aporte la informaci\u00f3n que aclare lo observado",
+        "fundamento": "LFRCF, art. 39"
+      },
+      {
+        "plazo": "120 d\u00edas h\u00e1biles",
+        "que": "para que la ASF se pronuncie sobre esas respuestas: solventa, no solventa, archiva o concluye",
+        "fundamento": "LFRCF, art. 41"
+      },
+      {
+        "plazo": "90 d\u00edas h\u00e1biles",
+        "que": "para enviar a investigaci\u00f3n el dictamen t\u00e9cnico de los pliegos de observaciones no solventados",
+        "fundamento": "LFRCF, art. 41"
+      }
+    ],
+    "acciones": [
+      {
+        "clave": "R",
+        "nombre": "Recomendaci\u00f3n",
+        "tipo": "preventiva",
+        "que": "Sugerencia para fortalecer el control interno y el cumplimiento de metas.",
+        "fundamento": "LFRCF, art. 42; glosario de la MDB"
+      },
+      {
+        "clave": "RD",
+        "nombre": "Recomendaci\u00f3n al desempe\u00f1o",
+        "tipo": "preventiva",
+        "que": "Sugerencia para que el ente cumpla sus objetivos y metas y ejerza sus recursos con eficiencia.",
+        "fundamento": "Glosario de la MDB"
+      },
+      {
+        "clave": "PEFCF",
+        "nombre": "Promoci\u00f3n del ejercicio de la facultad de comprobaci\u00f3n fiscal",
+        "tipo": "correctiva",
+        "que": "Avisa al SAT de un posible incumplimiento fiscal detectado en la auditor\u00eda.",
+        "fundamento": "LFRCF, art. 40, fr. III"
+      },
+      {
+        "clave": "SA",
+        "nombre": "Solicitud de aclaraci\u00f3n",
+        "tipo": "correctiva",
+        "que": "Pide al ente documentos adicionales que aclaren operaciones o montos no justificados.",
+        "fundamento": "LFRCF, art. 40, fr. I"
+      },
+      {
+        "clave": "PRAS",
+        "nombre": "Promoci\u00f3n de responsabilidad administrativa sancionatoria",
+        "tipo": "correctiva",
+        "que": "Da vista al \u00f3rgano interno de control para que investigue y, en su caso, sancione.",
+        "fundamento": "LFRCF, art. 40, fr. V"
+      },
+      {
+        "clave": "PO",
+        "nombre": "Pliego de observaciones",
+        "tipo": "correctiva",
+        "que": "Fija en cantidad l\u00edquida un presunto da\u00f1o o perjuicio a la Hacienda P\u00fablica o al patrimonio de un ente.",
+        "fundamento": "LFRCF, art. 40, fr. II"
+      }
+    ],
+    "cp2024": {
+      "corte": "febrero de 2026",
+      "entregas": "primera, segunda y tercera (consolidado)",
+      "fuente": "MDB2024",
+      "pagina": 11,
+      "estado": "oficial",
+      "total": {
+        "auditorias": 2264,
+        "universo": 22898075580100.0,
+        "muestra": 12143300890200.0,
+        "representatividad": 53.03,
+        "acciones": 6274,
+        "R": 570,
+        "RD": 287,
+        "PEFCF": 278,
+        "SA": 174,
+        "PRAS": 2203,
+        "PO": 2762,
+        "recuperaciones": 2005619900.0,
+        "porAclarar": 65169097600.0
+      },
+      "grupos": [
+        {
+          "grupo": "Ingreso",
+          "subtotal": {
+            "auditorias": 2,
+            "universo": 46000373300.0,
+            "muestra": 27331217100.0,
+            "representatividad": 59.42,
+            "acciones": 2,
+            "R": 1,
+            "RD": 0,
+            "PEFCF": 0,
+            "SA": 0,
+            "PRAS": 1,
+            "PO": 0,
+            "recuperaciones": 160100.0,
+            "porAclarar": 0.0
+          },
+          "sectores": [
+            {
+              "nombre": "Marina",
+              "auditorias": 1,
+              "acciones": 2,
+              "PO": 0,
+              "recuperaciones": 160100.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Petr\u00f3leos Mexicanos",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            }
+          ]
+        },
+        {
+          "grupo": "Deuda",
+          "subtotal": {
+            "auditorias": 3,
+            "universo": 14793080755800.0,
+            "muestra": 5168865755600.0,
+            "representatividad": 34.94,
+            "acciones": 1,
+            "R": 1,
+            "RD": 0,
+            "PEFCF": 0,
+            "SA": 0,
+            "PRAS": 0,
+            "PO": 0,
+            "recuperaciones": 0.0,
+            "porAclarar": 0.0
+          },
+          "sectores": [
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Comisi\u00f3n Federal de Electricidad",
+              "auditorias": 1,
+              "acciones": 1,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Petr\u00f3leos Mexicanos",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            }
+          ]
+        },
+        {
+          "grupo": "Gobierno",
+          "subtotal": {
+            "auditorias": 84,
+            "universo": 378604475900.0,
+            "muestra": 302456428800.0,
+            "representatividad": 79.89,
+            "acciones": 254,
+            "R": 65,
+            "RD": 66,
+            "PEFCF": 14,
+            "SA": 0,
+            "PRAS": 64,
+            "PO": 45,
+            "recuperaciones": 9944300.0,
+            "porAclarar": 673022200.0
+          },
+          "sectores": [
+            {
+              "nombre": "Poder Legislativo",
+              "auditorias": 2,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Poder Judicial",
+              "auditorias": 3,
+              "acciones": 54,
+              "PO": 17,
+              "recuperaciones": 8133300.0,
+              "porAclarar": 284574800.0
+            },
+            {
+              "nombre": "Gobernaci\u00f3n",
+              "auditorias": 9,
+              "acciones": 26,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 78072600.0
+            },
+            {
+              "nombre": "Seguridad y Protecci\u00f3n Ciudadana",
+              "auditorias": 6,
+              "acciones": 25,
+              "PO": 3,
+              "recuperaciones": 753700.0,
+              "porAclarar": 3199800.0
+            },
+            {
+              "nombre": "Relaciones Exteriores",
+              "auditorias": 5,
+              "acciones": 15,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 12,
+              "acciones": 13,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Defensa Nacional",
+              "auditorias": 15,
+              "acciones": 23,
+              "PO": 0,
+              "recuperaciones": 10700.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Trabajo y Previsi\u00f3n Social",
+              "auditorias": 2,
+              "acciones": 7,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Marina",
+              "auditorias": 10,
+              "acciones": 22,
+              "PO": 15,
+              "recuperaciones": 1040200.0,
+              "porAclarar": 233255400.0
+            },
+            {
+              "nombre": "Desarrollo Agrario, Territorial y Urbano",
+              "auditorias": 1,
+              "acciones": 6,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Entidades no Sectorizadas",
+              "auditorias": 4,
+              "acciones": 5,
+              "PO": 0,
+              "recuperaciones": 6400.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Informaci\u00f3n Nacional Estad\u00edstica y Geogr\u00e1fica",
+              "auditorias": 3,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Comisi\u00f3n Nacional de los Derechos Humanos",
+              "auditorias": 4,
+              "acciones": 1,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Instituto Nacional de Transparencia, Acceso a la Informaci\u00f3n y Protecci\u00f3n de Datos Personales",
+              "auditorias": 1,
+              "acciones": 28,
+              "PO": 4,
+              "recuperaciones": 0.0,
+              "porAclarar": 7356600.0
+            },
+            {
+              "nombre": "Instituto Nacional Electoral",
+              "auditorias": 4,
+              "acciones": 19,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 66563000.0
+            },
+            {
+              "nombre": "Tribunal Federal de Justicia Administrativa",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Tribunales Agrarios",
+              "auditorias": 2,
+              "acciones": 10,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            }
+          ]
+        },
+        {
+          "grupo": "Desarrollo Social",
+          "subtotal": {
+            "auditorias": 154,
+            "universo": 3865251604300.0,
+            "muestra": 3489044914800.0,
+            "representatividad": 90.27,
+            "acciones": 500,
+            "R": 123,
+            "RD": 101,
+            "PEFCF": 21,
+            "SA": 0,
+            "PRAS": 153,
+            "PO": 102,
+            "recuperaciones": 179095900.0,
+            "porAclarar": 1409175100.0
+          },
+          "sectores": [
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 16,
+              "acciones": 22,
+              "PO": 6,
+              "recuperaciones": 3103900.0,
+              "porAclarar": 34053500.0
+            },
+            {
+              "nombre": "Defensa Nacional",
+              "auditorias": 4,
+              "acciones": 10,
+              "PO": 1,
+              "recuperaciones": 2108900.0,
+              "porAclarar": 3595200.0
+            },
+            {
+              "nombre": "Agricultura y Desarrollo Rural",
+              "auditorias": 2,
+              "acciones": 20,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 57413900.0
+            },
+            {
+              "nombre": "Educaci\u00f3n P\u00fablica",
+              "auditorias": 20,
+              "acciones": 79,
+              "PO": 16,
+              "recuperaciones": 41006700.0,
+              "porAclarar": 231047000.0
+            },
+            {
+              "nombre": "Salud",
+              "auditorias": 21,
+              "acciones": 105,
+              "PO": 20,
+              "recuperaciones": 26691300.0,
+              "porAclarar": 585754600.0
+            },
+            {
+              "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+              "auditorias": 21,
+              "acciones": 34,
+              "PO": 12,
+              "recuperaciones": 9116800.0,
+              "porAclarar": 123043200.0
+            },
+            {
+              "nombre": "Instituto Mexicano del Seguro Social",
+              "auditorias": 17,
+              "acciones": 26,
+              "PO": 3,
+              "recuperaciones": 3086800.0,
+              "porAclarar": 46354000.0
+            },
+            {
+              "nombre": "Marina",
+              "auditorias": 2,
+              "acciones": 11,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Desarrollo Agrario, Territorial y Urbano",
+              "auditorias": 6,
+              "acciones": 18,
+              "PO": 5,
+              "recuperaciones": 378200.0,
+              "porAclarar": 47555500.0
+            },
+            {
+              "nombre": "Medio Ambiente y Recursos Naturales",
+              "auditorias": 15,
+              "acciones": 37,
+              "PO": 23,
+              "recuperaciones": 7434300.0,
+              "porAclarar": 225754800.0
+            },
+            {
+              "nombre": "Aportaciones a Seguridad Social",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Entidades no Sectorizadas",
+              "auditorias": 9,
+              "acciones": 34,
+              "PO": 3,
+              "recuperaciones": 74615600.0,
+              "porAclarar": 3433800.0
+            },
+            {
+              "nombre": "Entidades No Coordinadas Sectorialmente",
+              "auditorias": 2,
+              "acciones": 20,
+              "PO": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 11521400.0
+            },
+            {
+              "nombre": "Bienestar",
+              "auditorias": 10,
+              "acciones": 29,
+              "PO": 6,
+              "recuperaciones": 11331400.0,
+              "porAclarar": 5835400.0
+            },
+            {
+              "nombre": "Cultura",
+              "auditorias": 8,
+              "acciones": 55,
+              "PO": 1,
+              "recuperaciones": 222200.0,
+              "porAclarar": 33812700.0
+            }
+          ]
+        },
+        {
+          "grupo": "Desarrollo Econ\u00f3mico",
+          "subtotal": {
+            "auditorias": 175,
+            "universo": 1047498437600.0,
+            "muestra": 642192526600.0,
+            "representatividad": 61.31,
+            "acciones": 651,
+            "R": 206,
+            "RD": 120,
+            "PEFCF": 19,
+            "SA": 0,
+            "PRAS": 168,
+            "PO": 138,
+            "recuperaciones": 562857900.0,
+            "porAclarar": 3723195700.0
+          },
+          "sectores": [
+            {
+              "nombre": "Hacienda y Cr\u00e9dito P\u00fablico",
+              "auditorias": 4,
+              "acciones": 11,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Defensa Nacional",
+              "auditorias": 3,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Agricultura y Desarrollo Rural",
+              "auditorias": 9,
+              "acciones": 51,
+              "PO": 13,
+              "recuperaciones": 0.0,
+              "porAclarar": 17556600.0
+            },
+            {
+              "nombre": "Econom\u00eda",
+              "auditorias": 10,
+              "acciones": 32,
+              "PO": 1,
+              "recuperaciones": 0.0,
+              "porAclarar": 116800.0
+            },
+            {
+              "nombre": "Trabajo y Previsi\u00f3n Social",
+              "auditorias": 5,
+              "acciones": 8,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Turismo",
+              "auditorias": 20,
+              "acciones": 35,
+              "PO": 5,
+              "recuperaciones": 191674900.0,
+              "porAclarar": 87918100.0
+            },
+            {
+              "nombre": "Educaci\u00f3n P\u00fablica",
+              "auditorias": 1,
+              "acciones": 2,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+              "auditorias": 1,
+              "acciones": 4,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Instituto Mexicano del Seguro Social",
+              "auditorias": 1,
+              "acciones": 0,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Marina",
+              "auditorias": 14,
+              "acciones": 82,
+              "PO": 20,
+              "recuperaciones": 10725500.0,
+              "porAclarar": 274503700.0
+            },
+            {
+              "nombre": "Desarrollo Agrario, Territorial y Urbano",
+              "auditorias": 3,
+              "acciones": 21,
+              "PO": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0
+            },
+            {
+              "nombre": "Medio Ambiente y Recursos Naturales",
+              "auditorias": 6,
+              "acciones": 16,
+              "PO": 4,
+              "recuperaciones": 0.0,
+              "porAclarar": 25346500.0
+            },
+            {
+              "nombre": "Energ\u00eda",
+              "auditorias": 6,
+              "acciones": 20,
+              "PO": 1,
+              "recuperaciones": 18609400.0,
+              "porAclarar": 130400.0
+            },
+            {
+              "nombre": "Humanidades, Ciencias, Tecnolog\u00edas e Innovaci\u00f3n",
+              "auditorias": 10,
+              "acciones": 110,
+              "PO": 10,
+              "recuperaciones": 0.0,
+              "porAclarar": 266230700.0
+            },
+            {
+              "nombre": "Comisi\u00f3n Federal de Electricidad",
+              "auditorias": 20,
+              "acciones": 71,
+              "PO": 3,
+              "recuperaciones": 22111900.0,
+              "porAclarar": 72852400.0
+            },
+            {
+              "nombre": "Petr\u00f3leos Mexicanos",
+              "auditorias": 33,
+              "acciones": 81,
+              "PO": 17,
+              "recuperaciones": 287600300.0,
+              "porAclarar": 1762959800.0
+            },
+            {
+              "nombre": "Infraestructura, Comunicaciones y Transportes",
+              "auditorias": 29,
+              "acciones": 107,
+              "PO": 64,
+              "recuperaciones": 32135900.0,
+              "porAclarar": 1215580700.0
+            }
+          ]
+        },
+        {
+          "grupo": "Gasto Federalizado",
+          "subtotal": {
+            "auditorias": 1846,
+            "universo": 2767639933200.0,
+            "muestra": 2513410047300.0,
+            "representatividad": 90.81,
+            "acciones": 4866,
+            "R": 174,
+            "RD": 0,
+            "PEFCF": 224,
+            "SA": 174,
+            "PRAS": 1817,
+            "PO": 2477,
+            "recuperaciones": 1253561700.0,
+            "porAclarar": 59363704600.0
+          },
+          "sectores": [
+            {
+              "nombre": "Seguridad",
+              "auditorias": 99,
+              "acciones": 46,
+              "PO": 14,
+              "recuperaciones": 1577200.0,
+              "porAclarar": 83643400.0
+            },
+            {
+              "nombre": "Salud",
+              "auditorias": 36,
+              "acciones": 158,
+              "PO": 37,
+              "recuperaciones": 58594000.0,
+              "porAclarar": 1591227300.0
+            },
+            {
+              "nombre": "Educaci\u00f3n",
+              "auditorias": 328,
+              "acciones": 718,
+              "PO": 303,
+              "recuperaciones": 932373300.0,
+              "porAclarar": 3989749500.0
+            },
+            {
+              "nombre": "Infraestructura Social",
+              "auditorias": 93,
+              "acciones": 140,
+              "PO": 90,
+              "recuperaciones": 69059000.0,
+              "porAclarar": 666384500.0
+            },
+            {
+              "nombre": "Saneamiento Financiero",
+              "auditorias": 44,
+              "acciones": 13,
+              "PO": 8,
+              "recuperaciones": 30193200.0,
+              "porAclarar": 36216900.0
+            },
+            {
+              "nombre": "Infraestructura F\u00edsica, Saneamiento Financiero",
+              "auditorias": 33,
+              "acciones": 45,
+              "PO": 16,
+              "recuperaciones": 109648800.0,
+              "porAclarar": 1391487600.0
+            },
+            {
+              "nombre": "Protecci\u00f3n Social",
+              "auditorias": 27,
+              "acciones": 161,
+              "PO": 49,
+              "recuperaciones": 2083600.0,
+              "porAclarar": 275608200.0
+            },
+            {
+              "nombre": "Aportaciones Federales, Participaciones Federales y Otros",
+              "auditorias": 1069,
+              "acciones": 3254,
+              "PO": 1903,
+              "recuperaciones": 18098400.0,
+              "porAclarar": 35647789800.0
+            },
+            {
+              "nombre": "Participaciones Federales",
+              "auditorias": 98,
+              "acciones": 321,
+              "PO": 54,
+              "recuperaciones": 11238600.0,
+              "porAclarar": 15680829600.0
+            },
+            {
+              "nombre": "Otros",
+              "auditorias": 19,
+              "acciones": 10,
+              "PO": 3,
+              "recuperaciones": 20695600.0,
+              "porAclarar": 767800.0
+            }
+          ]
+        }
+      ],
+      "federalizado": {
+        "auditorias": 1846,
+        "universo": 2767639933200.0,
+        "muestra": 2513410047300.0,
+        "representatividad": 90.81,
+        "acciones": 4866,
+        "R": 174,
+        "RD": 0,
+        "PEFCF": 224,
+        "SA": 174,
+        "PRAS": 1817,
+        "PO": 2477,
+        "recuperaciones": 1253561700.0,
+        "porAclarar": 59363704600.0
+      },
+      "coordinadoras": {
+        "auditorias": 23,
+        "universo": 216978811100.0,
+        "muestra": 210399842500.0,
+        "representatividad": 96.97,
+        "acciones": 36,
+        "R": 17,
+        "RD": 0,
+        "PEFCF": 1,
+        "SA": 0,
+        "PRAS": 17,
+        "PO": 1,
+        "recuperaciones": 248449400.0,
+        "porAclarar": 1050400.0
+      },
+      "entidades": [
+        {
+          "entidad": "Aguascalientes",
+          "total": {
+            "auditorias": 34,
+            "universo": 31493487100.0,
+            "muestra": 29339932500.0,
+            "acciones": 63,
+            "PO": 31,
+            "PRAS": 24,
+            "recuperaciones": 2210800.0,
+            "porAclarar": 343280100.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 85586400.0,
+              "recuperaciones": 416900.0,
+              "acciones": 27
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 11,
+              "porAclarar": 209643000.0,
+              "recuperaciones": 0.0,
+              "acciones": 23
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 48050700.0,
+              "recuperaciones": 1793900.0,
+              "acciones": 13
+            }
+          ]
+        },
+        {
+          "entidad": "Baja California",
+          "total": {
+            "auditorias": 29,
+            "universo": 74995661400.0,
+            "muestra": 66214870500.0,
+            "acciones": 59,
+            "PO": 28,
+            "PRAS": 21,
+            "recuperaciones": 10789900.0,
+            "porAclarar": 558402200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 12968300.0,
+              "recuperaciones": 10789900.0,
+              "acciones": 14
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 7,
+              "porAclarar": 455092200.0,
+              "recuperaciones": 0.0,
+              "acciones": 17
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 90341700.0,
+              "recuperaciones": 0.0,
+              "acciones": 28
+            }
+          ]
+        },
+        {
+          "entidad": "Baja California Sur",
+          "total": {
+            "auditorias": 30,
+            "universo": 23353252800.0,
+            "muestra": 20482548700.0,
+            "acciones": 39,
+            "PO": 20,
+            "PRAS": 9,
+            "recuperaciones": 65352800.0,
+            "porAclarar": 225069600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 21,
+              "porAclarar": 31222700.0,
+              "recuperaciones": 65166100.0,
+              "acciones": 20
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 5,
+              "porAclarar": 141104400.0,
+              "recuperaciones": 0.0,
+              "acciones": 13
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 52742500.0,
+              "recuperaciones": 186700.0,
+              "acciones": 6
+            }
+          ]
+        },
+        {
+          "entidad": "Campeche",
+          "total": {
+            "auditorias": 36,
+            "universo": 24978469800.0,
+            "muestra": 22237655200.0,
+            "acciones": 102,
+            "PO": 44,
+            "PRAS": 44,
+            "recuperaciones": 27858100.0,
+            "porAclarar": 759697900.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 152339400.0,
+              "recuperaciones": 17062500.0,
+              "acciones": 25
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 13,
+              "porAclarar": 300171300.0,
+              "recuperaciones": 0.0,
+              "acciones": 51
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 307187200.0,
+              "recuperaciones": 10795600.0,
+              "acciones": 26
+            }
+          ]
+        },
+        {
+          "entidad": "Chiapas",
+          "total": {
+            "auditorias": 64,
+            "universo": 130088977500.0,
+            "muestra": 122274162400.0,
+            "acciones": 227,
+            "PO": 122,
+            "PRAS": 70,
+            "recuperaciones": 19330300.0,
+            "porAclarar": 4499707300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 20,
+              "porAclarar": 1231917300.0,
+              "recuperaciones": 19215800.0,
+              "acciones": 59
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 38,
+              "porAclarar": 2667136500.0,
+              "recuperaciones": 114500.0,
+              "acciones": 124
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 600653500.0,
+              "recuperaciones": 0.0,
+              "acciones": 44
+            }
+          ]
+        },
+        {
+          "entidad": "Chihuahua",
+          "total": {
+            "auditorias": 60,
+            "universo": 77401019000.0,
+            "muestra": 74785679600.0,
+            "acciones": 234,
+            "PO": 95,
+            "PRAS": 123,
+            "recuperaciones": 5602900.0,
+            "porAclarar": 2521898200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 1210533100.0,
+              "recuperaciones": 4453300.0,
+              "acciones": 35
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 35,
+              "porAclarar": 913681300.0,
+              "recuperaciones": 1149600.0,
+              "acciones": 150
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 397683800.0,
+              "recuperaciones": 0.0,
+              "acciones": 49
+            }
+          ]
+        },
+        {
+          "entidad": "Ciudad de M\u00e9xico",
+          "total": {
+            "auditorias": 31,
+            "universo": 146636687700.0,
+            "muestra": 112909926600.0,
+            "acciones": 104,
+            "PO": 36,
+            "PRAS": 51,
+            "recuperaciones": 1948300.0,
+            "porAclarar": 2143468900.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 14,
+              "porAclarar": 1040000.0,
+              "recuperaciones": 1948300.0,
+              "acciones": 9
+            },
+            {
+              "ente": "Alcald\u00edas",
+              "auditorias": 16,
+              "porAclarar": 2142428900.0,
+              "recuperaciones": 0.0,
+              "acciones": 92
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 1,
+              "porAclarar": 0.0,
+              "recuperaciones": 0.0,
+              "acciones": 3
+            }
+          ]
+        },
+        {
+          "entidad": "Coahuila de Zaragoza",
+          "total": {
+            "auditorias": 62,
+            "universo": 58645342000.0,
+            "muestra": 54553214400.0,
+            "acciones": 183,
+            "PO": 120,
+            "PRAS": 48,
+            "recuperaciones": 9530000.0,
+            "porAclarar": 1379079000.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 309448500.0,
+              "recuperaciones": 9508800.0,
+              "acciones": 37
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 38,
+              "porAclarar": 928601700.0,
+              "recuperaciones": 0.0,
+              "acciones": 117
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 7,
+              "porAclarar": 141028800.0,
+              "recuperaciones": 21200.0,
+              "acciones": 29
+            }
+          ]
+        },
+        {
+          "entidad": "Colima",
+          "total": {
+            "auditorias": 32,
+            "universo": 19832095800.0,
+            "muestra": 18491911900.0,
+            "acciones": 78,
+            "PO": 44,
+            "PRAS": 16,
+            "recuperaciones": 1623600.0,
+            "porAclarar": 485672800.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 217756000.0,
+              "recuperaciones": 1623600.0,
+              "acciones": 36
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 10,
+              "porAclarar": 190205400.0,
+              "recuperaciones": 0.0,
+              "acciones": 22
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 77711400.0,
+              "recuperaciones": 0.0,
+              "acciones": 20
+            }
+          ]
+        },
+        {
+          "entidad": "Durango",
+          "total": {
+            "auditorias": 41,
+            "universo": 41154518800.0,
+            "muestra": 38918314600.0,
+            "acciones": 117,
+            "PO": 59,
+            "PRAS": 30,
+            "recuperaciones": 7753500.0,
+            "porAclarar": 1370464600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 608147300.0,
+              "recuperaciones": 5624400.0,
+              "acciones": 46
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 16,
+              "porAclarar": 680240000.0,
+              "recuperaciones": 0.0,
+              "acciones": 52
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 7,
+              "porAclarar": 82077300.0,
+              "recuperaciones": 2129100.0,
+              "acciones": 19
+            }
+          ]
+        },
+        {
+          "entidad": "M\u00e9xico",
+          "total": {
+            "auditorias": 151,
+            "universo": 293164981300.0,
+            "muestra": 268721011500.0,
+            "acciones": 453,
+            "PO": 255,
+            "PRAS": 166,
+            "recuperaciones": 283536900.0,
+            "porAclarar": 13198744600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 6037739900.0,
+              "recuperaciones": 125600900.0,
+              "acciones": 36
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 125,
+              "porAclarar": 7068706800.0,
+              "recuperaciones": 0.0,
+              "acciones": 383
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 10,
+              "porAclarar": 92297900.0,
+              "recuperaciones": 157936000.0,
+              "acciones": 34
+            }
+          ]
+        },
+        {
+          "entidad": "Guanajuato",
+          "total": {
+            "auditorias": 70,
+            "universo": 110037951600.0,
+            "muestra": 99748981900.0,
+            "acciones": 146,
+            "PO": 77,
+            "PRAS": 57,
+            "recuperaciones": 208106600.0,
+            "porAclarar": 2422230000.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 854917800.0,
+              "recuperaciones": 55927100.0,
+              "acciones": 13
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 46,
+              "porAclarar": 1505629300.0,
+              "recuperaciones": 0.0,
+              "acciones": 126
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 61682900.0,
+              "recuperaciones": 152179500.0,
+              "acciones": 7
+            }
+          ]
+        },
+        {
+          "entidad": "Guerrero",
+          "total": {
+            "auditorias": 49,
+            "universo": 87214196700.0,
+            "muestra": 76564781500.0,
+            "acciones": 125,
+            "PO": 48,
+            "PRAS": 49,
+            "recuperaciones": 27404800.0,
+            "porAclarar": 505328200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 5284200.0,
+              "recuperaciones": 18528400.0,
+              "acciones": 20
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 28,
+              "porAclarar": 474686600.0,
+              "recuperaciones": 0.0,
+              "acciones": 89
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 25357400.0,
+              "recuperaciones": 8876400.0,
+              "acciones": 16
+            }
+          ]
+        },
+        {
+          "entidad": "Hidalgo",
+          "total": {
+            "auditorias": 65,
+            "universo": 68649119800.0,
+            "muestra": 60945661700.0,
+            "acciones": 163,
+            "PO": 96,
+            "PRAS": 46,
+            "recuperaciones": 5821400.0,
+            "porAclarar": 2152707600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 1304873700.0,
+              "recuperaciones": 4334700.0,
+              "acciones": 38
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 40,
+              "porAclarar": 810384600.0,
+              "recuperaciones": 5300.0,
+              "acciones": 112
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 37449300.0,
+              "recuperaciones": 1481400.0,
+              "acciones": 13
+            }
+          ]
+        },
+        {
+          "entidad": "Jalisco",
+          "total": {
+            "auditorias": 77,
+            "universo": 158812077100.0,
+            "muestra": 145469089900.0,
+            "acciones": 228,
+            "PO": 109,
+            "PRAS": 97,
+            "recuperaciones": 102053800.0,
+            "porAclarar": 2196802500.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 92676100.0,
+              "recuperaciones": 13059600.0,
+              "acciones": 19
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 54,
+              "porAclarar": 1919339800.0,
+              "recuperaciones": 19300.0,
+              "acciones": 176
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 7,
+              "porAclarar": 184786600.0,
+              "recuperaciones": 88974900.0,
+              "acciones": 33
+            }
+          ]
+        },
+        {
+          "entidad": "Michoac\u00e1n de Ocampo",
+          "total": {
+            "auditorias": 48,
+            "universo": 98607929700.0,
+            "muestra": 87118982300.0,
+            "acciones": 108,
+            "PO": 44,
+            "PRAS": 45,
+            "recuperaciones": 62050800.0,
+            "porAclarar": 1003568500.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 151400600.0,
+              "recuperaciones": 17384700.0,
+              "acciones": 14
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 25,
+              "porAclarar": 548511700.0,
+              "recuperaciones": 0.0,
+              "acciones": 71
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 303656200.0,
+              "recuperaciones": 44666100.0,
+              "acciones": 23
+            }
+          ]
+        },
+        {
+          "entidad": "Morelos",
+          "total": {
+            "auditorias": 58,
+            "universo": 39876814000.0,
+            "muestra": 35838088900.0,
+            "acciones": 233,
+            "PO": 113,
+            "PRAS": 100,
+            "recuperaciones": 3745500.0,
+            "porAclarar": 3168922700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 1909195400.0,
+              "recuperaciones": 3745500.0,
+              "acciones": 101
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 36,
+              "porAclarar": 1248981700.0,
+              "recuperaciones": 0.0,
+              "acciones": 109
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 10745600.0,
+              "recuperaciones": 0.0,
+              "acciones": 23
+            }
+          ]
+        },
+        {
+          "entidad": "Nayarit",
+          "total": {
+            "auditorias": 41,
+            "universo": 30913712400.0,
+            "muestra": 28206690300.0,
+            "acciones": 118,
+            "PO": 54,
+            "PRAS": 41,
+            "recuperaciones": 2775600.0,
+            "porAclarar": 914952100.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 333268800.0,
+              "recuperaciones": 2775600.0,
+              "acciones": 36
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 20,
+              "porAclarar": 504849000.0,
+              "recuperaciones": 0.0,
+              "acciones": 51
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 76834300.0,
+              "recuperaciones": 0.0,
+              "acciones": 31
+            }
+          ]
+        },
+        {
+          "entidad": "Nuevo Le\u00f3n",
+          "total": {
+            "auditorias": 73,
+            "universo": 118233476800.0,
+            "muestra": 110492714100.0,
+            "acciones": 215,
+            "PO": 123,
+            "PRAS": 80,
+            "recuperaciones": 28545400.0,
+            "porAclarar": 4539726300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 2204976300.0,
+              "recuperaciones": 13444800.0,
+              "acciones": 45
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 51,
+              "porAclarar": 1747330800.0,
+              "recuperaciones": 0.0,
+              "acciones": 151
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 587419200.0,
+              "recuperaciones": 15100600.0,
+              "acciones": 19
+            }
+          ]
+        },
+        {
+          "entidad": "Oaxaca",
+          "total": {
+            "auditorias": 60,
+            "universo": 103860920700.0,
+            "muestra": 95204278900.0,
+            "acciones": 159,
+            "PO": 92,
+            "PRAS": 46,
+            "recuperaciones": 9958000.0,
+            "porAclarar": 2024366400.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 20,
+              "porAclarar": 190487300.0,
+              "recuperaciones": 9239900.0,
+              "acciones": 28
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 34,
+              "porAclarar": 1699196300.0,
+              "recuperaciones": 0.0,
+              "acciones": 120
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 134682800.0,
+              "recuperaciones": 718100.0,
+              "acciones": 11
+            }
+          ]
+        },
+        {
+          "entidad": "Puebla",
+          "total": {
+            "auditorias": 62,
+            "universo": 119375606500.0,
+            "muestra": 103796681100.0,
+            "acciones": 145,
+            "PO": 66,
+            "PRAS": 68,
+            "recuperaciones": 15022700.0,
+            "porAclarar": 931226700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 2380300.0,
+              "recuperaciones": 10853500.0,
+              "acciones": 7
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 37,
+              "porAclarar": 927668400.0,
+              "recuperaciones": 0.0,
+              "acciones": 122
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 1178000.0,
+              "recuperaciones": 4169200.0,
+              "acciones": 16
+            }
+          ]
+        },
+        {
+          "entidad": "Quer\u00e9taro",
+          "total": {
+            "auditorias": 38,
+            "universo": 49254694500.0,
+            "muestra": 43656855900.0,
+            "acciones": 68,
+            "PO": 33,
+            "PRAS": 26,
+            "recuperaciones": 4262800.0,
+            "porAclarar": 243680100.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 0.0,
+              "recuperaciones": 381600.0,
+              "acciones": 3
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 18,
+              "porAclarar": 193075600.0,
+              "recuperaciones": 0.0,
+              "acciones": 60
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 50604500.0,
+              "recuperaciones": 3881200.0,
+              "acciones": 5
+            }
+          ]
+        },
+        {
+          "entidad": "Quintana Roo",
+          "total": {
+            "auditorias": 38,
+            "universo": 36681922700.0,
+            "muestra": 34003186100.0,
+            "acciones": 24,
+            "PO": 13,
+            "PRAS": 2,
+            "recuperaciones": 5885400.0,
+            "porAclarar": 428296200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 0.0,
+              "recuperaciones": 3306500.0,
+              "acciones": 6
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 11,
+              "porAclarar": 427938700.0,
+              "recuperaciones": 0.0,
+              "acciones": 14
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 9,
+              "porAclarar": 357500.0,
+              "recuperaciones": 2578900.0,
+              "acciones": 4
+            }
+          ]
+        },
+        {
+          "entidad": "San Luis Potos\u00ed",
+          "total": {
+            "auditorias": 82,
+            "universo": 60497987100.0,
+            "muestra": 54881511100.0,
+            "acciones": 206,
+            "PO": 123,
+            "PRAS": 63,
+            "recuperaciones": 24583200.0,
+            "porAclarar": 592466900.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 34050600.0,
+              "recuperaciones": 4244200.0,
+              "acciones": 16
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 59,
+              "porAclarar": 553574500.0,
+              "recuperaciones": 0.0,
+              "acciones": 176
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 4841800.0,
+              "recuperaciones": 20339000.0,
+              "acciones": 14
+            }
+          ]
+        },
+        {
+          "entidad": "Sinaloa",
+          "total": {
+            "auditorias": 42,
+            "universo": 67620490800.0,
+            "muestra": 65218380300.0,
+            "acciones": 73,
+            "PO": 41,
+            "PRAS": 23,
+            "recuperaciones": 3621600.0,
+            "porAclarar": 574629600.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 0.0,
+              "recuperaciones": 2708700.0,
+              "acciones": 5
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 18,
+              "porAclarar": 493967500.0,
+              "recuperaciones": 0.0,
+              "acciones": 58
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 80662100.0,
+              "recuperaciones": 912900.0,
+              "acciones": 10
+            }
+          ]
+        },
+        {
+          "entidad": "Sonora",
+          "total": {
+            "auditorias": 48,
+            "universo": 65254424000.0,
+            "muestra": 60637003600.0,
+            "acciones": 108,
+            "PO": 49,
+            "PRAS": 38,
+            "recuperaciones": 1966200.0,
+            "porAclarar": 619575300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 52921900.0,
+              "recuperaciones": 1966200.0,
+              "acciones": 19
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 23,
+              "porAclarar": 522522100.0,
+              "recuperaciones": 0.0,
+              "acciones": 79
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 8,
+              "porAclarar": 44131300.0,
+              "recuperaciones": 0.0,
+              "acciones": 10
+            }
+          ]
+        },
+        {
+          "entidad": "Tabasco",
+          "total": {
+            "auditorias": 41,
+            "universo": 64264271400.0,
+            "muestra": 59307610300.0,
+            "acciones": 172,
+            "PO": 53,
+            "PRAS": 102,
+            "recuperaciones": 12021800.0,
+            "porAclarar": 1586016500.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 482581200.0,
+              "recuperaciones": 5799900.0,
+              "acciones": 69
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 17,
+              "porAclarar": 984223500.0,
+              "recuperaciones": 0.0,
+              "acciones": 71
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 119211800.0,
+              "recuperaciones": 6221900.0,
+              "acciones": 32
+            }
+          ]
+        },
+        {
+          "entidad": "Tamaulipas",
+          "total": {
+            "auditorias": 66,
+            "universo": 70075449500.0,
+            "muestra": 61964968300.0,
+            "acciones": 106,
+            "PO": 52,
+            "PRAS": 44,
+            "recuperaciones": 33210300.0,
+            "porAclarar": 401691700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 19,
+              "porAclarar": 10848600.0,
+              "recuperaciones": 31865300.0,
+              "acciones": 9
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 43,
+              "porAclarar": 387407500.0,
+              "recuperaciones": 0.0,
+              "acciones": 91
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 3435600.0,
+              "recuperaciones": 1345000.0,
+              "acciones": 6
+            }
+          ]
+        },
+        {
+          "entidad": "Tlaxcala",
+          "total": {
+            "auditorias": 82,
+            "universo": 30418552600.0,
+            "muestra": 26819241700.0,
+            "acciones": 191,
+            "PO": 108,
+            "PRAS": 68,
+            "recuperaciones": 5943200.0,
+            "porAclarar": 418325300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 16,
+              "porAclarar": 31081100.0,
+              "recuperaciones": 331400.0,
+              "acciones": 23
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 60,
+              "porAclarar": 369246200.0,
+              "recuperaciones": 0.0,
+              "acciones": 151
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 6,
+              "porAclarar": 17998000.0,
+              "recuperaciones": 5611800.0,
+              "acciones": 17
+            }
+          ]
+        },
+        {
+          "entidad": "Veracruz de Ignacio de la Llave",
+          "total": {
+            "auditorias": 126,
+            "universo": 161620594000.0,
+            "muestra": 144529392900.0,
+            "acciones": 357,
+            "PO": 207,
+            "PRAS": 134,
+            "recuperaciones": 3584700.0,
+            "porAclarar": 4460779700.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 1896723200.0,
+              "recuperaciones": 2486500.0,
+              "acciones": 70
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 104,
+              "porAclarar": 2523328600.0,
+              "recuperaciones": 1098200.0,
+              "acciones": 272
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 4,
+              "porAclarar": 40727900.0,
+              "recuperaciones": 0.0,
+              "acciones": 15
+            }
+          ]
+        },
+        {
+          "entidad": "Yucat\u00e1n",
+          "total": {
+            "auditorias": 48,
+            "universo": 48315758900.0,
+            "muestra": 45274236200.0,
+            "acciones": 134,
+            "PO": 81,
+            "PRAS": 28,
+            "recuperaciones": 5627600.0,
+            "porAclarar": 1989665200.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 17,
+              "porAclarar": 753196600.0,
+              "recuperaciones": 5627600.0,
+              "acciones": 45
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 26,
+              "porAclarar": 1158659900.0,
+              "recuperaciones": 0.0,
+              "acciones": 70
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 5,
+              "porAclarar": 77808700.0,
+              "recuperaciones": 0.0,
+              "acciones": 19
+            }
+          ]
+        },
+        {
+          "entidad": "Zacatecas",
+          "total": {
+            "auditorias": 39,
+            "universo": 39330678100.0,
+            "muestra": 34402639900.0,
+            "acciones": 92,
+            "PO": 40,
+            "PRAS": 41,
+            "recuperaciones": 3383900.0,
+            "porAclarar": 702211300.0
+          },
+          "desglose": [
+            {
+              "ente": "Gobierno del Estado",
+              "auditorias": 18,
+              "porAclarar": 0.0,
+              "recuperaciones": 2991800.0,
+              "acciones": 18
+            },
+            {
+              "ente": "Municipios",
+              "auditorias": 18,
+              "porAclarar": 652728800.0,
+              "recuperaciones": 0.0,
+              "acciones": 65
+            },
+            {
+              "ente": "Otros",
+              "auditorias": 3,
+              "porAclarar": 49482500.0,
+              "recuperaciones": 392100.0,
+              "acciones": 9
+            }
+          ]
+        }
+      ],
+      "paginaEntidades": "19 a 23"
+    },
+    "cp2025": {
+      "entrega": "primera",
+      "corte": "junio de 2026",
+      "auditorias": 33,
+      "universo": 301366198860.5,
+      "muestra": 301366198860.5,
+      "representatividad": 100.0,
+      "acciones": 7,
+      "R": 6,
+      "RD": 0,
+      "PEFCF": 0,
+      "SA": 1,
+      "PRAS": 0,
+      "PO": 0,
+      "recuperaciones": 20669471.05,
+      "porAclarar": 1403459.0,
+      "que": "Una auditor\u00eda a la SHCP, como coordinadora de la distribuci\u00f3n de las participaciones federales, y una a cada una de las 32 entidades.",
+      "fuente": "MDB2025A",
+      "pagina": 11,
+      "estado": "oficial"
+    }
   }
 };
 

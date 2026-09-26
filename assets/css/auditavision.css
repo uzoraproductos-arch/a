@@ -20684,3 +20684,59 @@ body.con-regreso { padding-bottom: 96px; }
 .civic-modal-backdrop > .civic-modal-card { margin: auto; }
 /* Ficha del catalogo a la que se llega desde una cita. */
 .ref-row-item.ref-row-destacada { outline: 2px solid var(--gold-bright); outline-offset: 4px; border-radius: 8px; box-shadow: 0 0 22px rgba(212,175,55,0.35); transition: box-shadow .3s; }
+
+/* ====================================================================
+   INFORMES DE LA CUENTA PUBLICA (ASF)
+   ==================================================================== */
+.cp-seccion { margin: 0 0 32px; }
+.cp-cab { border-left: 3px solid var(--gold); padding: 4px 0 4px 16px; margin-bottom: 16px; }
+.cp-cab h3 { font-family: var(--font-serif); font-size: 24px; color: var(--text-main); margin: 6px 0; line-height: 1.25; }
+.cp-cab p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin: 0; max-width: 820px; }
+.cp-sub { font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--gold); margin: 20px 0 10px; }
+.cp-cuenta { display: flex; align-items: center; gap: 14px; background: rgba(201,168,76,0.08); border: 1px solid var(--border-gold); border-radius: 12px; padding: 12px 18px; margin: 14px 0; }
+.cp-cuenta > span { font-family: var(--font-serif); font-size: 40px; font-weight: 700; color: var(--gold-bright); line-height: 1; }
+.cp-cuenta b { display: block; color: var(--text-main); font-size: 15px; }
+.cp-cuenta small { color: var(--text-dim); font-size: 12px; }
+.cp-linea { list-style: none; margin: 16px 0; padding: 0 0 0 22px; border-left: 2px solid var(--border-subtle); }
+.cp-linea li { position: relative; padding: 0 0 16px 8px; display: grid; gap: 3px; }
+.cp-linea li::before { content: ""; position: absolute; left: -30px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg-card); border: 2px solid var(--border-subtle); }
+.cp-linea li.cp-hecho::before { background: var(--emerald-bright, #2ecc71); border-color: var(--emerald-bright, #2ecc71); }
+.cp-linea li.cp-prox::before { background: var(--gold-bright); border-color: var(--gold-bright); box-shadow: 0 0 0 5px rgba(212,175,55,0.2); }
+.cp-linea .cp-fecha { font-family: var(--font-mono); font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: .04em; }
+.cp-linea b { color: var(--text-main); font-size: 14.5px; }
+.cp-linea span:not(.cp-fecha) { color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+.cp-linea small { font-size: 11.5px; color: var(--text-dim); }
+.cp-pila { display: flex; height: 22px; border-radius: 6px; overflow: hidden; gap: 2px; margin: 6px 0 10px; }
+.cp-pila-R { background: #3b82f6; } .cp-pila-RD { background: #06b6d4; } .cp-pila-PEFCF { background: #a855f7; }
+.cp-pila-SA { background: #f59e0b; } .cp-pila-PRAS { background: #ef4444; } .cp-pila-PO { background: #b91c1c; }
+.cp-leyenda { list-style: none; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 16px; font-size: 12.5px; color: var(--text-secondary); }
+.cp-leyenda i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.cp-leyenda b { color: var(--text-main); margin-right: 4px; font-family: var(--font-mono); }
+.cp-leyenda .num-tabular { float: right; color: var(--text-main); }
+.cp-ent-cab { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 10px 0; }
+.cp-ent-cab label { font-family: var(--font-mono); font-size: 11.5px; text-transform: uppercase; color: var(--gold); letter-spacing: .05em; }
+.cp-ent-cab select { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-gold); border-radius: 8px; padding: 9px 12px; font-size: 14px; min-width: 240px; max-width: 100%; }
+.cp-ranking { display: grid; gap: 2px; }
+.cp-rank { width: 100%; background: none; border: 0; border-radius: 6px; padding: 4px 6px; cursor: pointer; text-align: left; color: inherit; font: inherit; }
+.cp-rank:hover { background: rgba(255,255,255,0.04); }
+.cp-rank-sel { background: rgba(212,175,55,0.12); outline: 1px solid var(--border-gold); }
+.pd-barra-v.cp-barra-sel { background: var(--gold-bright); }
+.cp-acciones { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin: 10px 0; }
+.cp-accion { background: var(--bg-card-alt, rgba(255,255,255,0.03)); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+.cp-accion.cp-acc-correctiva { border-left: 3px solid #ef4444; }
+.cp-accion.cp-acc-preventiva { border-left: 3px solid #3b82f6; }
+.cp-accion p { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.cp-accion small { color: var(--text-dim); font-size: 11px; }
+.cp-clave { font-family: var(--font-mono); font-size: 11px; color: var(--gold); letter-spacing: .06em; }
+.cp-plazos { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; }
+.cp-plazos b { color: var(--gold-bright); }
+.cp-plazos small { color: var(--text-dim); font-size: 11px; margin-left: 4px; }
+.cp-botones { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 16px; }
+.cp-botones .hero-pillar-btn { text-decoration: none; }
+#cuentaPublicaASF { scroll-margin-top: 156px; }
+@media (max-width: 700px) {
+  #cuentaPublicaASF { scroll-margin-top: 12px; }
+  .cp-cab h3 { font-size: 20px; }
+  .cp-cuenta > span { font-size: 32px; }
+  .cp-ent-cab select { min-width: 0; width: 100%; }
+}

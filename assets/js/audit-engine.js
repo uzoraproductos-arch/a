@@ -2021,6 +2021,18 @@
       desc: 'Por órgano del sector ambiental: aprobado, modificado y pagado en 2026, y lo propuesto para 2027.',
       campos: [['unidad', 'Clave de la unidad responsable'], ['nombre', 'Órgano'], ['aprobado_2026', 'Aprobado 2026'], ['modificado_2026', 'Modificado al 30 de junio'], ['pagado_2026', 'Pagado al 30 de junio'], ['proyecto_2027', 'Proyecto 2027 (aún no aprobado)']],
       filas: () => ((DB.ambiente && DB.ambiente.presupuesto.unidades) || []).map(u => [u.ur, u.nombre, u.aprobado, u.modificado, u.pagado, u.proyecto2027]) },
+    { id: 'asf-cp2024', titulo: 'Auditorías de la ASF al dinero federal de cada estado, Cuenta Pública 2024',
+      fuente: 'ASF, Matriz de Datos Básicos del Informe del Resultado de la Cuenta Pública 2024, tres entregas (consolidado), corte febrero de 2026, pp. 19 a 23',
+      desc: 'Por estado y por quién gastó (gobierno del estado, municipios o alcaldías, y otros entes): auditorías, acciones, monto recuperado y monto por aclarar. En pesos.',
+      campos: [['entidad', 'Entidad federativa'], ['ente', 'Gobierno del Estado, Municipios (Alcaldías en la CDMX) u Otros'], ['auditorias', 'Auditorías practicadas'], ['acciones', 'Acciones promovidas por la ASF'],
+        ['recuperado', 'Recuperaciones operadas durante la auditoría, en pesos'], ['por_aclarar', 'Montos por aclarar durante el seguimiento de las acciones, en pesos']],
+      filas: () => {
+        const C = DB.cuenta_publica_asf;
+        if (!C) return [];
+        const f = [];
+        C.cp2024.entidades.forEach(e => e.desglose.forEach(d => f.push([e.entidad, d.ente, d.auditorias, d.acciones, d.recuperaciones, d.porAclarar])));
+        return f;
+      } },
     { id: 'sat69b', titulo: 'Lista 69-B del SAT (EFOS)',
       fuente: 'SAT, Listado completo de contribuyentes del artículo 69-B del Código Fiscal',
       desc: 'Contribuyentes presuntos, definitivos, desvirtuados o con sentencia favorable por facturar operaciones inexistentes. Estar en la lista no es una condena penal.',
@@ -2110,6 +2122,230 @@
      con su chip de estado: aqui no se inventa ninguna.
      ==================================================================== */
   const capEstado = {};
+
+  /* ====================================================================
+     INFORMES DE LA CUENTA PUBLICA (Busqueda Forense)
+
+     Que es la Cuenta Publica, el calendario legal de su revision y lo que
+     encontro la ASF, con las cifras de su Matriz de Datos Basicos (Cuenta
+     Publica 2024, consolidado de las tres entregas, y primera entrega de la
+     2025). Coleccion cuenta_publica_asf. Las sumas por estado y los
+     porcentajes son derivados y lo dicen.
+     ==================================================================== */
+  const cpEstado = { entidad: 'Aguascalientes' };
+
+  function cpFuente(clave, pagina) {
+    const C = DB.cuenta_publica_asf;
+    const f = C && C.fuentes[clave];
+    if (!f) return '<span class="pd-fuente">' + chipEstado('pendiente') + ' fuente por documentar</span>';
+    const pag = (pagina === undefined || pagina === null || pagina === '') ? '' :
+      (/^\d+$/.test(String(pagina)) ? ', p. ' + pagina : (/^\d/.test(String(pagina)) ? ', pp. ' : ', ') + pagina);
+    return '<a class="pd-fuente no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer" title="' +
+      pdEsc(f.doc) + '">' + pdEsc(f.corto || f.doc) + pdEsc(pag) + ' ↗</a>';
+  }
+
+  /* El titulo del calendario en minuscula inicial, sin tocar las siglas. */
+  function cpMinus(t) { return t.charAt(0).toLowerCase() + t.slice(1); }
+
+  /* El INEGI la llama «México»; el lector la busca como Estado de México. */
+  function cpNombre(n) { return n === 'México' ? 'Estado de México' : n; }
+
+  /* Pesos a la unidad que se lee: billones, o millones de pesos. */
+  function cpMonto(p) {
+    if (Math.abs(p) >= 1e12) return '$' + (p / 1e12).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' billones';
+    return pdMdp(p);
+  }
+
+  function cpFecha(iso) {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function cpDias(iso) {
+    const [y, m, d] = iso.split('-').map(Number);
+    const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+    return Math.round((new Date(y, m - 1, d) - hoy) / 86400000);
+  }
+
+  function cpEntidadHtml() {
+    const C = DB.cuenta_publica_asf;
+    const lista = C.cp2024.entidades;
+    const e = lista.find(x => x.entidad === cpEstado.entidad) || lista[0];
+    const orden = lista.slice().sort((a, b) => b.total.porAclarar - a.total.porAclarar);
+    const pos = orden.indexOf(e) + 1;
+    const max = orden[0].total.porAclarar;
+    const t = e.total;
+    return '<div class="cp-ent-cab">' +
+        '<label for="cpEntSel">Elija su estado</label>' +
+        '<select id="cpEntSel" onchange="window.AuditEngine.cpElegirEntidad(this.value)">' +
+          lista.map(x => '<option value="' + pdEsc(x.entidad) + '"' + (x === e ? ' selected' : '') + '>' + pdEsc(cpNombre(x.entidad)) + '</option>').join('') +
+        '</select>' +
+      '</div>' +
+      '<div class="am-datos">' +
+        amTarjeta(amNum(t.auditorias), 'auditorías al dinero federal que recibió', 'derivado') +
+        amTarjeta(amNum(t.acciones), 'acciones promovidas', 'derivado', amNum(t.PO) + ' pliegos de observaciones y ' + amNum(t.PRAS) + ' promociones de responsabilidad') +
+        amTarjeta(pdMdp(t.porAclarar), 'por aclarar', 'derivado', 'Lugar ' + pos + ' de 32') +
+        amTarjeta(pdMdp(t.recuperaciones), 'recuperados durante la auditoría', 'derivado') +
+      '</div>' +
+      '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Quién gastó</th><th>Auditorías</th><th>Acciones</th><th>Por aclarar</th><th>Recuperado</th></tr></thead><tbody>' +
+        e.desglose.map(d => '<tr><td>' + pdEsc(d.ente) + '</td><td class="num-tabular">' + amNum(d.auditorias) + '</td><td class="num-tabular">' + amNum(d.acciones) +
+          '</td><td class="num-tabular">' + pdMdp(d.porAclarar) + '</td><td class="num-tabular">' + pdMdp(d.recuperaciones) + '</td></tr>').join('') +
+      '</tbody></table></div>' +
+      '<p class="pd-nota">' + chipEstado('oficial') + ' Cada renglón: ' + cpFuente('MDB2024', C.cp2024.paginaEntidades) + '. ' + chipEstado('derivado') +
+        ' Los totales del estado suman sus tres renglones. «Otros» agrupa organismos, universidades y demás entes locales que recibieron dinero federal.</p>' +
+      '<h4 class="cp-sub">Los 32 estados, por monto por aclarar</h4>' +
+      '<div class="cp-ranking">' + orden.map((x, i) =>
+        '<button type="button" class="pd-fila cp-rank' + (x === e ? ' cp-rank-sel' : '') + '" onclick="window.AuditEngine.cpElegirEntidad(\'' + pdEsc(x.entidad).replace(/'/g, '\\\'') + '\')">' +
+          '<span>' + (i + 1) + '. ' + pdEsc(cpNombre(x.entidad)) + '</span>' + pdBarra(x.total.porAclarar, max, x === e ? 'cp-barra-sel' : '') +
+          '<span class="num-tabular">' + pdMdp(x.total.porAclarar) + '</span></button>').join('') +
+      '</div>';
+  }
+
+  function cpElegirEntidad(nombre) {
+    cpEstado.entidad = nombre;
+    const cont = document.getElementById('cpEntidad');
+    if (cont) cont.innerHTML = cpEntidadHtml();
+  }
+
+  function renderCuentaPublica() {
+    const raiz = document.getElementById('cpRaiz');
+    const C = DB.cuenta_publica_asf;
+    if (!raiz) return;
+    if (!C) {
+      raiz.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base de datos no trae la colección de la Cuenta Pública.</p>';
+      return;
+    }
+    const T = C.cp2024.total, F = C.cp2024.federalizado, N = C.cp2025;
+    const cal = C.calendario.map(c => Object.assign({}, c, { hecho: cpDias(c.fecha) <= 0 }));
+    const prox = cal.find(c => !c.hecho);
+    const dias = prox ? cpDias(prox.fecha) : null;
+    const fedPct = F.porAclarar / T.porAclarar * 100;
+
+    /* 1. Que es y cuando se revisa */
+    const calendario =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🗓️ Qué es la Cuenta Pública y cuándo se revisa</h3>' +
+        '<p class="pd-lead">El presupuesto dice cuánto se <b>puede</b> gastar. La <b>Cuenta Pública</b> dice cuánto se gastó de verdad: es el informe contable, presupuestario y programático de los tres Poderes, los órganos autónomos y las empresas del Estado. Hacienda la entrega a la Cámara de Diputados y la <b>Auditoría Superior de la Federación (ASF)</b> la revisa en tres entregas.</p>' +
+        (prox ? '<div class="cp-cuenta"><span class="num-tabular">' + dias + '</span><div><b>' + (dias === 1 ? 'día' : 'días') + ' para la ' + pdEsc(cpMinus(prox.titulo)) + '</b><small>' + cpFecha(prox.fecha) + ' · ' + pdEsc(prox.fundamento || '') + ' ' + chipEstado('derivado') + '</small></div></div>' : '') +
+        '<ol class="cp-linea">' + cal.map(c =>
+          '<li class="' + (c.hecho ? 'cp-hecho' : (c === prox ? 'cp-prox' : '')) + '">' +
+            '<span class="cp-fecha">' + cpFecha(c.fecha) + '</span>' +
+            '<b>' + pdEsc(c.titulo) + '</b>' +
+            '<span>' + pdEsc(c.texto) + '</span>' +
+            (c.fundamento ? '<small>' + cpFuente(c.fuente, '') + ' · ' + pdEsc(c.fundamento) + '</small>' : '') +
+          '</li>').join('') + '</ol>' +
+        '<p class="pd-nota">Los datos de la Cuenta Pública de cada año están en el ' + cpFuente('CPSHCP') + '. Las fechas son las que fija la ley; si la Cámara concede prórroga a Hacienda, la ASF recorre las suyas (CPEUM, art. 74, fr. VI).</p>' +
+      '</section>';
+
+    /* 2. La Cuenta Publica 2024 en cifras */
+    const acc = ['R', 'RD', 'PEFCF', 'SA', 'PRAS', 'PO'];
+    const cifras =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🔎 Lo que encontró la ASF en la Cuenta Pública 2024</h3>' +
+        '<p class="pd-lead">Es el ejercicio más reciente con sus tres entregas completas (corte: ' + pdEsc(C.cp2024.corte) + ').</p>' +
+        '<div class="am-datos">' +
+          amTarjeta(amNum(T.auditorias), 'auditorías practicadas', 'oficial') +
+          amTarjeta(cpMonto(T.muestra), 'revisados, de ' + cpMonto(T.universo) + ' seleccionados', 'oficial', pdPct(T.representatividad, 2) + ' de lo seleccionado') +
+          amTarjeta(amNum(T.acciones), 'acciones promovidas', 'oficial') +
+          amTarjeta(pdMdp(T.porAclarar), 'por aclarar', 'oficial', 'Sin documentos que acreditaran el gasto al cierre de la auditoría') +
+          amTarjeta(pdMdp(T.recuperaciones), 'recuperados durante la auditoría', 'oficial', 'Dinero efectivamente reintegrado') +
+        '</div>' +
+        '<h4 class="cp-sub">Las ' + amNum(T.acciones) + ' acciones, por tipo</h4>' +
+        '<div class="cp-pila" role="img" aria-label="Acciones por tipo">' + acc.map(k =>
+          '<span class="cp-pila-' + k + '" style="flex:' + T[k] + '" title="' + k + ': ' + amNum(T[k]) + '"></span>').join('') + '</div>' +
+        '<ul class="cp-leyenda">' + acc.map(k => {
+          const a = C.acciones.find(x => x.clave === k);
+          return '<li><i class="cp-pila-' + k + '"></i><b>' + k + '</b> ' + pdEsc(a.nombre) + ' <span class="num-tabular">' + amNum(T[k]) + '</span></li>';
+        }).join('') + '</ul>' +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + cpFuente('MDB2024', C.cp2024.pagina) + '. Los informes individuales, uno por auditoría, están en el ' + cpFuente('IR2024') + '.</p>' +
+        '<div class="am-alerta"><b>Por aclarar no es lo mismo que robado.</b> ' + pdEsc(C.nota.split('. ').slice(2).join('. ')) + '</div>' +
+      '</section>';
+
+    /* 3. Donde se concentra */
+    const grupos = C.cp2024.grupos;
+    const maxG = Math.max.apply(null, grupos.map(g => g.subtotal.porAclarar));
+    const sectores = [];
+    grupos.forEach(g => g.sectores.forEach(s => sectores.push(Object.assign({ grupo: g.grupo }, s))));
+    const top = sectores.filter(s => s.porAclarar > 0).sort((a, b) => b.porAclarar - a.porAclarar).slice(0, 10);
+    const donde =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🏛️ Dónde se concentra lo que falta aclarar</h3>' +
+        '<p class="pd-lead">El <b>' + pdPct(fedPct) + '</b> de lo que quedó por aclarar está en el <b>gasto federalizado</b>: el dinero federal que reciben estados y municipios (' + pdMdp(F.porAclarar) + ' en ' + amNum(F.auditorias) + ' auditorías). ' + chipEstado('derivado') + '</p>' +
+        grupos.map(g => '<div class="pd-fila"><span>' + pdEsc(g.grupo) + ' <small>' + amNum(g.subtotal.auditorias) + ' auditorías</small></span>' +
+          pdBarra(g.subtotal.porAclarar, maxG) + '<span class="num-tabular">' + pdMdp(g.subtotal.porAclarar) + '</span></div>').join('') +
+        '<h4 class="cp-sub">Los diez renglones con más monto por aclarar</h4>' +
+        top.map(s => '<div class="pd-fila"><span>' + pdEsc(s.nombre) + ' <small>' + pdEsc(s.grupo) + '</small></span>' +
+          pdBarra(s.porAclarar, top[0].porAclarar) + '<span class="num-tabular">' + pdMdp(s.porAclarar) + '</span></div>').join('') +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + cpFuente('MDB2024', '11 a 14') + '. En el gasto federalizado la ASF agrupa por tema de fiscalización (educación, salud, participaciones…), no por dependencia. Porcentaje: ' + chipEstado('derivado') + ' por aclarar del grupo ÷ total.</p>' +
+      '</section>';
+
+    /* 4. Su estado */
+    const estado =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🗺️ Lo que la ASF le observó a su estado</h3>' +
+        '<p class="pd-lead">El dinero federal que llega a cada estado lo revisa la ASF en tres niveles: el gobierno del estado, sus municipios (alcaldías en la Ciudad de México) y otros entes locales. Aparte, ' + amNum(C.cp2024.coordinadoras.auditorias) + ' auditorías se hicieron a las dependencias federales que coordinan esos fondos.</p>' +
+        '<div id="cpEntidad">' + cpEntidadHtml() + '</div>' +
+      '</section>';
+
+    /* 5. Que significa cada accion y que sigue */
+    const acciones =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">⚖️ Qué significa cada acción y qué pasa después</h3>' +
+        '<p class="pd-lead">Una observación no es una sentencia. Cada acción abre un camino distinto y con plazos que marca la ley.</p>' +
+        '<div class="cp-acciones">' + C.acciones.map(a =>
+          '<div class="cp-accion cp-acc-' + a.tipo + '"><span class="cp-clave">' + a.clave + '</span><b>' + pdEsc(a.nombre) + '</b><p>' + pdEsc(a.que) + '</p><small>' + pdEsc(a.fundamento) + ' · ' + a.tipo + '</small></div>').join('') + '</div>' +
+        '<h4 class="cp-sub">El reloj de la ley después de cada entrega</h4>' +
+        '<ol class="cp-plazos">' + C.plazos.map(p => '<li><b class="num-tabular">' + pdEsc(p.plazo) + '</b> ' + pdEsc(p.que) + ' <small>' + pdEsc(p.fundamento) + '</small></li>').join('') + '</ol>' +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + cpFuente('LFRCF', 'arts. 33 a 42') + '. Cuando un pliego no se solventa, el caso pasa a investigación y, si hay falta grave, al Tribunal Federal de Justicia Administrativa; si hay delito, a la Fiscalía Especializada (LFRCF, art. 40).</p>' +
+      '</section>';
+
+    /* 6. La Cuenta Publica 2025 */
+    const nueva =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">🆕 La Cuenta Pública 2025: lo que ya salió</h3>' +
+        '<p class="pd-lead">La primera entrega (' + pdEsc(N.corte) + ') revisó un solo tema: <b>cómo se repartieron las participaciones federales</b>, el dinero de libre uso que la Federación entrega a los estados. ' + pdEsc(N.que) + '</p>' +
+        '<div class="am-datos">' +
+          amTarjeta(amNum(N.auditorias), 'auditorías', N.estado) +
+          amTarjeta(cpMonto(N.muestra), 'revisados', N.estado, pdPct(N.representatividad, 0) + ' del universo') +
+          amTarjeta(amNum(N.acciones), 'acciones', N.estado, amNum(N.R) + ' recomendaciones y ' + amNum(N.SA) + ' solicitud de aclaración') +
+          amTarjeta(pdPesos(N.porAclarar), 'por aclarar', N.estado) +
+          amTarjeta(pdPesos(N.recuperaciones), 'recuperados', N.estado) +
+        '</div>' +
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + cpFuente(N.fuente, N.pagina) + '. Los 33 informes, en el ' + cpFuente('IR2025A') + '. ' +
+          (prox ? 'Lo que viene: la ' + pdEsc(cpMinus(prox.titulo)) + ', el ' + cpFecha(prox.fecha) + '.' : '') + '</p>' +
+      '</section>';
+
+    /* 7. Fuentes y descarga */
+    const fuentes =
+      '<section class="pd-bloque">' +
+        '<h3 class="pd-tit">📚 Documentos y descarga</h3>' +
+        '<p class="pd-lead">Cada cifra de esta sección sale de estos documentos. Puede bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>' +
+        '<div class="cp-botones">' +
+          '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.descargarCSV(\'asf-cp2024\')">⬇️ CSV por estado</button>' +
+          '<a class="hero-pillar-btn hero-pillar-audit no-autolink" href="' + pdEsc(C.fuentes.ASFDATOS.url) + '" target="_blank" rel="noopener noreferrer">🔎 Buscar una auditoría en ASF Datos ↗</a>' +
+          '<button type="button" class="hero-pillar-btn" onclick="window.AuditEngine.abrirCatalogoFuentes(\'ref-asf-mdb2024\')">📑 Ver en el Catálogo de Fuentes</button>' +
+        '</div>' +
+        '<ol class="pd-docs">' + Object.keys(C.fuentes).map(k => {
+          const f = C.fuentes[k];
+          return '<li><a class="no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(f.doc) + ' ↗</a>' +
+            (f.sha256 ? '<code title="SHA-256">' + f.sha256.slice(0, 16) + '…</code>' : '') + '</li>';
+        }).join('') + '</ol>' +
+        '<p class="pd-nota">' + pdEsc(C.nota) + ' Consulta: ' + pdEsc(C.consulta) + '.</p>' +
+      '</section>';
+
+    raiz.innerHTML = calendario + cifras + donde + estado + acciones + nueva + fuentes;
+    raiz.querySelectorAll('.am-dato, .cp-linea, .cp-cuenta, .pd-tabla-w, .cp-ranking, .pd-docs, .cp-leyenda, .cp-accion b, .cp-ent-cab')
+      .forEach(el => el.setAttribute('data-no-autolink', ''));
+    capMontar(raiz, 'cuentapublica', [
+      { ico: '🗓️', tit: 'Qué es y cuándo se revisa', cifra: prox ? dias + ' días' : '', cifraPie: prox ? 'para la siguiente entrega' : '', estado: prox ? 'derivado' : '', res: 'El calendario que fija la ley, de Hacienda a la ASF.' },
+      { ico: '🔎', tit: 'La Cuenta Pública 2024 en cifras', cifra: amNum(T.auditorias), cifraPie: 'auditorías', estado: 'oficial', res: 'Lo revisado, las acciones y lo que falta aclarar.' },
+      { ico: '🏛️', tit: 'Dónde se concentra', cifra: pdPct(fedPct, 0), cifraPie: 'en estados y municipios', estado: 'derivado', res: 'Por grupo de gasto y los diez renglones más altos.' },
+      { ico: '🗺️', tit: 'Su estado', cifra: '32', cifraPie: 'estados comparados', estado: 'oficial', res: 'Gobierno, municipios y otros entes, con su lugar nacional.' },
+      { ico: '⚖️', tit: 'Qué significa cada acción', cifra: amNum(T.PO), cifraPie: 'pliegos de observaciones', estado: 'oficial', res: 'De la recomendación al pliego, y los plazos de la ley.' },
+      { ico: '🆕', tit: 'La Cuenta Pública 2025', cifra: amNum(N.auditorias), cifraPie: 'auditorías en la 1.ª entrega', estado: 'oficial', res: 'Lo que ya publicó la ASF y lo que viene.' },
+      { ico: '📚', tit: 'Documentos y descarga', cifra: 'CSV', cifraPie: 'por estado', estado: '', res: 'Los PDF oficiales con su huella, y la base para Excel.' }
+    ]);
+  }
 
   function capMontar(raiz, clave, caps) {
     const bloques = [...raiz.children].filter(el => !el.classList.contains('cap-indice') && !el.classList.contains('cap-nav'));
@@ -4727,6 +4963,7 @@
       renderCostoAmbiental();
       renderCuentasEcologicas();
     } else if (tabKey === 'verificador') {
+      renderCuentaPublica();
       renderForensicDossiers('todos');
       renderRadarBanderasNacional();
       initInspectorExplorador();
@@ -23616,6 +23853,7 @@
     safeRun(() => renderJudicialGlobalesSimulator('balanza'), 'renderJudicialGlobalesSimulator');
     safeRun(() => renderReformaCosto(), 'renderReformaCosto');
     safeRun(() => renderForensicDossiers('todos'), 'renderForensicDossiers');
+    safeRun(renderCuentaPublica, 'renderCuentaPublica');
     safeRun(initFactCheckModule, 'initFactCheckModule');
     safeRun(renderFinanzasPublicas, 'renderFinanzasPublicas');
     safeRun(renderSimuladorMegaobras, 'renderSimuladorMegaobras');
@@ -26917,6 +27155,8 @@
     closeCargoDetail: closeCargoDetail,
     toggleJerarquiaTable: toggleJerarquiaTable,
     renderReferencias: renderReferencias,
+    renderCuentaPublica: renderCuentaPublica,
+    cpElegirEntidad: cpElegirEntidad,
     abrirCatalogoFuentes: abrirCatalogoFuentes,
     renderPreceptosLegales: renderPreceptosLegales,
     filterPreceptos: filterPreceptos,

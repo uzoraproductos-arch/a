@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926l">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260926m">
 </head>
 <body>
 
@@ -208,7 +208,7 @@
             <span class="mega-col-title">💾 Datos Abiertos</span>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas();">
               <span class="mega-link-name">Descarga en CSV (abre en Excel)</span>
-              <span class="mega-link-desc">Seis bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, lista 69-B y documentos.</span>
+              <span class="mega-link-desc">Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.</span>
             </a>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.descargarCSV('municipios');">
               <span class="mega-link-name">Base de Datos Municipal EFIPEM (INEGI)</span>
@@ -217,9 +217,9 @@
           </div>
           <div class="mega-menu-col">
             <span class="mega-col-title">📑 Informes Oficiales</span>
-            <a href="#faq/faq-referencias" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.abrirCatalogoFuentes();">
-              <span class="mega-link-name">Informes de la ASF y Documentos Oficiales</span>
-              <span class="mega-link-desc">Los documentos que sostienen las cifras de la plataforma, numerados y con su liga oficial.</span>
+            <a href="#verificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF'); window.AuditEngine.cerrarMegaMenus();">
+              <span class="mega-link-name">Informes de la Cuenta Pública (ASF)</span>
+              <span class="mega-link-desc">Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en su estado y cuándo sale la siguiente entrega.</span>
             </a>
             <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas('diccionario');">
               <span class="mega-link-name">Diccionario de Datos</span>
@@ -1957,6 +1957,19 @@
         </p>
       </div>
 
+      <!-- ====================================================================
+           INFORMES DE LA CUENTA PÚBLICA (ASF): lo pinta renderCuentaPublica()
+           desde DB.cuenta_publica_asf, en capítulos.
+           ==================================================================== -->
+      <div class="cp-seccion" id="cuentaPublicaASF">
+        <div class="cp-cab">
+          <span class="hero-tag">Informes de la Cuenta Pública &middot; ASF</span>
+          <h3>¿Qué encontró la Auditoría Superior en el gasto de 2024?</h3>
+          <p>Cifras oficiales de la Auditoría Superior de la Federación, con su documento y su página: cuánto revisó, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a su estado.</p>
+        </div>
+        <div id="cpRaiz"></div>
+      </div>
+
       <!-- Barra de Filtros Temáticos de Expedientes -->
       <div class="forensic-header-bar" id="forensicHeaderBar">
         <div>
@@ -2561,7 +2574,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926l</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260926m</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2705,16 +2718,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260926l"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260926m"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260926l"></script>
+  <script src="assets/js/audit-database.js?v=20260926m"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260926l"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260926m"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260926l"></script>
+  <script src="assets/js/audit-engine.js?v=20260926m"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
