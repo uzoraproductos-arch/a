@@ -2126,6 +2126,37 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (retiro de contenido sin fuente sobre personas y hechos, 27-09-2026)
+
+Por instrucción del autor («iniciemos con lo más urgente o grave»), se
+retiró todo lo que presentaba como hecho algo que ningún documento respalda.
+Todo es recuperable en el historial de git (commits anteriores a este).
+
+- **Verificador de noticias** (`FACTCHECK_KNOWLEDGE_BASE`, motor): seis
+  titulares atribuidos a El Universal, Reforma y otros medios, con ligas que
+  no llevan a ninguna nota y puntajes de «falso», más sus funciones y
+  exportaciones. No se pintaba, pero estaba en el archivo público.
+- **Nivel federal del inspector**: ocho expedientes (Pemex, CFE, Tren Maya,
+  Dos Bocas, Salud, PJF, CONADE, SHCP) salían del mismo bloque, con cifras
+  sin documento («>$515,000 mdp ejercidos, +243 %», un PJF de $78,327 mdp
+  cuando el oficial es $70,005.6). Era el nivel que abría por defecto. El
+  inspector abre ahora en «Estatal»; el nivel federal se reconstruye con la
+  Cuenta Pública y la ASF (ver Pendiente).
+- **Enciclopedia 5.1 a 5.3** (mandatarios, personajes secundarios, datos
+  curiosos) y sus cuatro paneles de «argumento»: afirmaban desvíos «a
+  cuentas suizas», vínculos de familiares con NXIVM y otras acusaciones
+  sobre personas reales, sin una sola fuente (0 referencias en 70 KB). Se
+  quitaron de la base (`personajes_politicos` conserva sólo
+  `porfirio_diaz_versus`), del motor (funciones no-op porque siguen
+  exportadas) y del HTML. La 5.1 muestra un aviso de revisión editorial.
+- **Bitácora de noticias** (`DB.noticias`, Enciclopedia 2.5): siete notas con
+  fecha y hora, sin liga, varias falsas (PEF «aprobado el 10 de enero»,
+  operativo del SAT de $18,500 mdp, «142 empresas fantasma»). Vacía con
+  aviso.
+- **Foro del portal**: cuatro debates firmados por usuarios que no existen
+  (@AuditorSureste, @CriminologiaJuridica...). Se quitaron de la base y se
+  purgan del `localStorage` de quien ya los tenía (`DEBATES_SEMBRADOS`).
+
 ### Hecho (recaudación propia, convenios y dependencia de 31 entidades, INEGI 2024)
 
 - **Tres campos por entidad dejan de ser cifras redondas sin documento.**
@@ -2858,12 +2889,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
     siguen siendo las únicas no oficiales. Las demás fichas que apuntan a una
     portada citan precisamente un portal (PNT, ASF Datos, ComprasMX, SIE,
     Transparencia Presupuestaria), lo que es correcto.
-- **Código muerto con ligas de prensa inventadas:** `FACTCHECK_KNOWLEDGE_BASE`
-  en el motor guarda seis «noticias» con titulares, ligas a El Universal,
-  Reforma, Animal Político, El Economista, Proceso y El Financiero que no
-  corresponden a notas reales, y puntajes de «falso». No se pinta (su
-  contenedor no existe en el HTML), pero está en el archivo público.
-  Retirarlo con el visto bueno del autor.
 - **Lista de pendientes de la plataforma:** a petición del autor, cada tarea
   que quede abierta al reorganizar los módulos se anota aquí. Se trabajará a
   fondo cuando los cinco módulos estén reorganizados.
@@ -2897,13 +2922,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   `grandesContribuyentes`, `predialPromedioPIB`, `asfIrregularidadesGlobales`…) no tiene
   fuentes y todavía lo leen otras piezas; y en los estados, `gasto`, `ramo28`, `ramo33`
   y `dep` son cifras redondas sin documento. Revisar quién las usa y sustituirlas.
-- **Personajes políticos (sexenios):** «ASF observó $417,321 mdp» y otras cifras
-  acumuladas de la ASF por sexenio no cuadran con la serie oficial 2019-2024 y no
-  traen fuente. Rehacerlas con `DB.cuenta_publica_asf.serie`. Con ella sólo
-  se puede el sexenio 2018-2024: $315,395.5 mdp observados en las CP 2019 a
-  2023, o $382,570.2 mdp con la CP 2024 (que incluye octubre a diciembre de
-  otro gobierno). Los demás no tienen serie. Rehacer uno solo reproduciría el
-  trato desigual que señaló la auditoría: decide el autor.
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
 - **Evaluación de los presidentes (módulo 2, 3.2):** quedan pendientes el PIB
@@ -2935,16 +2953,22 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   vigente cuando se hizo aquella solicitud. Es correcta como cita histórica;
   si se actualiza la solicitud, citar el art. 65 de la ley de 2025.
 
-- **Bitácora de noticias (Enciclopedia 2.5, `DB.noticias`):** sus siete notas
-  no traen liga a su fuente y varias no se sostienen (el PEF 2026 no se
-  aprobó el 10 de enero; «$51,024 mdp por aclarar, 68 % municipios» no es la
-  cifra de la ASF para 2024, que es $65,169.1 mdp). No se trajo a la
-  plataforma. Decidir con el autor si se reescribe con fuentes o se retira.
 - **Segunda entrega de la Cuenta Pública 2025 (30 de octubre de 2026):**
   bajar su matriz de datos básicos y actualizar `cp2025`; el 20 de febrero
   de 2027, la tercera y el Informe General.
 - **El foro del Portal Digital no tiene servidor:** lo que se publica vive
-  en el navegador de quien lo escribe; los hilos visibles son ejemplos.
+  en el navegador de quien lo escribe. Ya no trae hilos sembrados.
+- **Fichas políticas por rehacer con fuente (Enciclopedia 5.1 a 5.3).**
+  Se retiraron el 27-09-2026 (ver Hecho). Si el autor quiere que vuelvan,
+  ficha por ficha: cada cifra con su fuente oficial y cada señalamiento con
+  sentencia, informe de la ASF o expediente público; mismo trato para todas
+  las administraciones. Para la ASF por sexenio sólo hay serie para
+  2018-2024 (`DB.cuenta_publica_asf.serie`): $315,395.5 mdp en las CP 2019 a
+  2023, o $382,570.2 con la CP 2024.
+- **Enciclopedia 5.4 (Versus Porfirio) en revisión.** Cita once referencias
+  pero no todas sus cifras llevan fuente; lleva aviso pendiente arriba.
+- **Bitácora de noticias (Enciclopedia 2.5).** Vacía con aviso. Si vuelve,
+  cada nota con liga al boletín o documento oficial.
 - **Megaobras y su huella ambiental:** falta el documento oficial de cada
   Manifestación de Impacto Ambiental (portal dgiraDocs de la SEMARNAT, no
   accesible desde el entorno de trabajo). No se muestran hectáreas de prensa
@@ -2986,16 +3010,10 @@ final, en este orden:
 - **Cifras que no coinciden entre secciones.** El carrusel ya lee de la base.
   Sigue abierto: `simulador_megaobras` (Tren Maya $120,000 mdp, AIFA
   +460.1 %, Dos Bocas $350,000 mdp) no tiene campo de fuente, y el costo de
-  la deuda aparece como $1,572,073 mdp (PEF, radar y carrusel) pero «más de
-  $1.2 billones» en la ficha Sheinbaum.
+  la deuda (la ficha Sheinbaum que decía «más de $1.2 billones» se retiró).
 - **Simulador de megaobras en pesos nominales 1988–2024**, sin INPC, con dos
   rescates financieros (FOBAPROA, FARAC) que hacen el 69 % de la «pérdida».
   Ninguna de las 12 obras tiene campo de fuente.
-- **Noticias sin URL ni estado.** `not-02` fecha la aprobación del PEF 2026 el
-  10 de enero de 2026; el art. 74-IV CPEUM fija el 15 de noviembre anterior.
-- **Fichas presidenciales sin una sola fuente**, con acusaciones graves,
-  `asf_monto_num` inventado para Salinas (5,000) y trato desigual a la
-  presidenta en funciones. Riesgo legal.
 - **Pase de $79/mes** que promete funciones inexistentes y habla de
   «lanzamiento electoral». Ocultar: decisión comercial del autor, sigue
   visible en el menú, la pestaña del Pase y el botón de reporte salarial.
