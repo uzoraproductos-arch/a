@@ -2259,6 +2259,77 @@
     return c;
   }
 
+  /* Sello de emisión de los tickets (solo en el auditor). Un sello
+     circular de documento, no una marca de agua: no tapa cifras y se
+     lee igual en pantalla que en la imagen que se descarga. */
+  function selloFechaCorta(d) {
+    d = d || new Date();
+    return String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
+  }
+
+  function selloEmision(fecha, folio, clase) {
+    if (!esAuditor()) return '';
+    const k = 'sl' + Math.random().toString(36).slice(2, 8);
+    return '<div class="sello-av ' + (clase || '') + '" role="img" aria-label="Sello de emisión de Auditavisión, ' + escHtml(fecha) + (folio ? ', folio ' + escHtml(folio) : '') + '">' +
+      '<svg viewBox="0 0 200 200" aria-hidden="true" focusable="false"><defs>' +
+        '<path id="' + k + 'a" d="M 28,100 A 72,72 0 0,1 172,100"/>' +
+        '<path id="' + k + 'b" d="M 22,100 A 78,78 0 0,0 178,100"/></defs>' +
+        '<circle cx="100" cy="100" r="95" class="sello-disco"/>' +
+        '<circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="3.5"/>' +
+        '<circle cx="100" cy="100" r="88" fill="none" stroke="currentColor" stroke-width="1"/>' +
+        '<circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>' +
+        '<text class="sello-arco"><textPath href="#' + k + 'a" startOffset="50%" text-anchor="middle">AUDITAVISIÓN</textPath></text>' +
+        '<text class="sello-arco sello-arco-b"><textPath href="#' + k + 'b" startOffset="50%" text-anchor="middle">SISTEMA CÍVICO DE FISCALIZACIÓN</textPath></text>' +
+        '<text x="21" y="104" class="sello-estrella" text-anchor="middle">★</text><text x="179" y="104" class="sello-estrella" text-anchor="middle">★</text>' +
+        '<image href="assets/img/logo-auditavision.svg" x="68" y="44" width="64" height="50"/>' +
+        '<text x="100" y="110" text-anchor="middle" class="sello-emitido">EMITIDO</text>' +
+        '<text x="100" y="127" text-anchor="middle" class="sello-fecha">' + escHtml(fecha) + '</text>' +
+        (folio ? '<text x="100" y="142" text-anchor="middle" class="sello-folio">' + escHtml(folio) + '</text>' : '') +
+      '</svg></div>';
+  }
+
+  function selloArcoCanvas(g, txt, rad, arriba, fuente) {
+    g.font = fuente; g.textAlign = 'center'; g.textBaseline = 'middle';
+    const letras = Array.from(txt);
+    const anchos = letras.map(ch => g.measureText(ch).width);
+    const total = anchos.reduce((a, b) => a + b, 0) / rad;
+    const dir = arriba ? 1 : -1;
+    let ang = (arriba ? -Math.PI / 2 : Math.PI / 2) - dir * total / 2;
+    letras.forEach((ch, i) => {
+      const w = anchos[i] / rad;
+      ang += dir * w / 2;
+      g.save();
+      g.translate(rad * Math.cos(ang), rad * Math.sin(ang));
+      g.rotate(arriba ? ang + Math.PI / 2 : ang - Math.PI / 2);
+      g.fillText(ch, 0, 0);
+      g.restore();
+      ang += dir * w / 2;
+    });
+  }
+
+  /* El mismo sello, trazado en la imagen para compartir. r es el radio
+     exterior en pixeles; el dibujo usa las medidas del SVG (radio 95). */
+  function selloCanvas(g, cx, cy, r, color, fondo, fecha, folio, logo) {
+    const s = r / 95, mono = "'JetBrains Mono', Consolas, monospace";
+    g.save();
+    g.translate(cx, cy); g.rotate(-0.21); g.scale(s, s);
+    g.globalAlpha = 0.93;
+    if (fondo) { g.beginPath(); g.arc(0, 0, 95, 0, Math.PI * 2); g.fillStyle = fondo; g.fill(); }
+    g.strokeStyle = color; g.fillStyle = color;
+    g.lineWidth = 3.5; g.beginPath(); g.arc(0, 0, 95, 0, Math.PI * 2); g.stroke();
+    g.lineWidth = 1; g.beginPath(); g.arc(0, 0, 88, 0, Math.PI * 2); g.stroke();
+    g.setLineDash([2, 3]); g.beginPath(); g.arc(0, 0, 62, 0, Math.PI * 2); g.stroke(); g.setLineDash([]);
+    selloArcoCanvas(g, 'AUDITAVISIÓN', 76, true, '700 15px ' + mono);
+    selloArcoCanvas(g, 'SISTEMA CÍVICO DE FISCALIZACIÓN', 74, false, '700 10.5px ' + mono);
+    g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+    g.font = '12px ' + mono; g.fillText('★', -79, 4); g.fillText('★', 79, 4);
+    if (logo) g.drawImage(logo, -32, -56, 64, 50);
+    g.font = '700 9px ' + mono; g.fillText('EMITIDO', 0, 10);
+    g.font = '700 13px ' + mono; g.fillText(fecha, 0, 27);
+    if (folio) { g.font = '600 8.5px ' + mono; g.fillText(folio, 0, 42); }
+    g.restore();
+  }
+
   function amTicketEmitir(sinAnimar) {
     const campo = document.getElementById('amTkIngreso');
     const salida = document.getElementById('amTkSalida');
@@ -2305,6 +2376,7 @@
         lin(tuUd('Basura que usted genera al año', 'Basura que generas al año'), -c.kg, 'negkg', amNum(A.residuos.perCapitaKg.valor, 3) + ' kg al día × 365') +
         '<div class="am-tk-bal" style="--i:' + (n++) + tuUd('">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a su nombre, se le cargan <b>$', '">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a tu nombre, se te cargan <b>$') + amNum(c.intereses / c.ramo16, 0) + '</b> de intereses y <b>$' + amNum(c.dano / c.ramo16, 0) + '</b> de daño ambiental.</div>' +
         '<div class="am-tk-pie" style="--i:' + (n++) + '">' + chipEstado('derivado') + ' ' + pdEsc(T.nota) + tuUd(' Los días y los meses dividen cada cargo entre su ingreso.', ' Los días y los meses dividen cada cargo entre tu ingreso.') + '</div>' +
+        selloEmision(selloFechaCorta(), 'TICKET AMBIENTAL', 'am-tk-sello') +
       '</div>' +
       '<div class="am-tk-acciones">' +
         '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.amTicketCopiar()"><span>📋</span> Copiar mi ticket</button>' +
@@ -3351,7 +3423,7 @@
       '<div class="cc-cab cc-cab-ecc">' +
         '<span class="cc-cab-n" aria-hidden="true">1.4</span>' +
         '<div class="cc-cab-tx">' +
-          '<h3 class="cc-cab-tit">La emisión de su estado de cuenta cívico</h3>' +
+          tuUd('<h3 class="cc-cab-tit">La emisión de su estado de cuenta cívico</h3>', '<h3 class="cc-cab-tit">La emisión de tu estado de cuenta cívico</h3>') +
           '<p class="cc-cab-sub">' + (d
             ? tuUd('Lo que usted ganó, lo que le retuvieron y a dónde fue su impuesto, en un solo documento que puede descargar o copiar.', 'Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto, en un solo documento que puedes descargar o copiar.')
             : tuUd('Aparece aquí en cuanto pulse «Sacar la cuenta» en el paso 1.1.', 'Aparece aquí en cuanto pulses «Sacar la cuenta» en el paso 1.1.')) + '</p>' +
@@ -3385,7 +3457,7 @@
         <div class="ecc-ellos">
           <div class="ecc-ellos-num num-tabular">${d.ellos.veces.toFixed(1)}×</div>
           <div class="ecc-ellos-txt">
-            <strong>${d.ellos.cargo}</strong>: recibe ${d.ellos.veces.toFixed(1)} veces su ingreso neto,
+            <strong>${d.ellos.cargo}</strong>: recibe ${d.ellos.veces.toFixed(1)} veces ${tuUd('su', 'tu')} ingreso neto,
             ${ccPesos(d.ellos.netoAnual)} netos al año según el Anexo 23 del PEF 2026. ${chipEstado('derivado')}
             <button type="button" class="pd-btn" onclick="window.AuditEngine.irComparadorChoque()">Comparar con más cargos</button>
           </div>
@@ -3396,6 +3468,7 @@
         <article class="ecc" id="ticketCardPrintable">
           <header class="ecc-cab">
             <div class="ecc-cielo" aria-hidden="true"></div>
+            ${selloEmision(d.emitido, d.folio, 'ecc-sello')}
             <div class="ecc-cab-txt">
               <div class="ecc-marca">AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN</div>
               <h3 class="ecc-titulo">Estado de Cuenta Cívico</h3>
@@ -3412,19 +3485,19 @@
             <div class="ecc-kpi"><span>Ingreso bruto</span><strong class="num-tabular">${ccPesos(d.bruto)}</strong><small>${d.cad} · ${d.regimen}</small></div>
             <div class="ecc-kpi ecc-kpi-isr"><span>ISR pagado</span><strong class="num-tabular">${ccPesos(d.isr)}</strong><small>impuesto: se reparte abajo</small></div>
             <div class="ecc-kpi"><span>Cuotas IMSS</span><strong class="num-tabular">${ccPesos(d.cuotas)}</strong><small>aportación con destino propio</small></div>
-            <div class="ecc-kpi ecc-kpi-neto"><span>Le queda</span><strong class="num-tabular">${ccPesos(d.neto)}</strong><small>ingreso neto ${d.cad}</small></div>
+            <div class="ecc-kpi ecc-kpi-neto"><span>${tuUd('Le queda', 'Te queda')}</span><strong class="num-tabular">${ccPesos(d.neto)}</strong><small>ingreso neto ${d.cad}</small></div>
           </div>
 
           <div class="ecc-sec">
-            <div class="ecc-sec-tit">Movimientos: a dónde fue su ISR ${chipEstado('derivado')}</div>
+            <div class="ecc-sec-tit">Movimientos: a dónde fue ${tuUd('su', 'tu')} ISR ${chipEstado('derivado')}</div>
             <div class="ecc-movs">${movs}</div>
           </div>
           ${pod}
           ${ellos}
 
           <footer class="ecc-pie">
-            <p><strong>Cómo se calculó.</strong> ISR con las tarifas del Anexo 8 de la Resolución Miscelánea Fiscal 2026; reparto con los renglones del Presupuesto de Egresos 2026 (DOF 21-11-2025). Los montos por renglón son derivados: su ISR multiplicado por el peso de cada renglón en el gasto aprobado.</p>
-            <p class="ecc-legal">Este documento es un ejercicio de divulgación. No es un comprobante fiscal ni sustituye su constancia de retenciones.</p>
+            <p><strong>Cómo se calculó.</strong> ISR con las tarifas del Anexo 8 de la Resolución Miscelánea Fiscal 2026; reparto con los renglones del Presupuesto de Egresos 2026 (DOF 21-11-2025). Los montos por renglón son derivados: ${tuUd('su', 'tu')} ISR multiplicado por el peso de cada renglón en el gasto aprobado.</p>
+            <p class="ecc-legal">Este documento es un ejercicio de divulgación. No es un comprobante fiscal ni sustituye ${tuUd('su', 'tu')} constancia de retenciones.</p>
           </footer>
 
           <div class="civic-ticket-actions">
@@ -3521,6 +3594,10 @@
 
     eccTexto(g, 'AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN', M, 70, '600 20px ' + mono, noche ? '#ffffff' : '#16203a');
     eccTexto(g, 'Estado de Cuenta Cívico', M, 150, '700 64px ' + serif, noche ? '#ffffff' : '#16203a');
+    if (esAuditor()) {
+      const logo = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = 'assets/img/logo-auditavision.svg'; });
+      selloCanvas(g, W - M - 96, 158, 92, noche ? '#ecc767' : '#8a6512', noche ? 'rgba(8,12,26,0.55)' : 'rgba(255,255,255,0.6)', d.emitido, d.folio, logo);
+    }
 
     const meta = [['PERIODO', d.periodo], ['FOLIO', d.folio], ['EMITIDO', d.emitido]];
     meta.forEach((m, i) => {
@@ -3529,7 +3606,7 @@
       eccTexto(g, m[1], x, 326, '600 22px ' + sans, C.txt);
     });
 
-    const kpis = [['INGRESO BRUTO', d.bruto, C.txt], ['ISR PAGADO', d.isr, C.oro], ['CUOTAS IMSS', d.cuotas, C.cian], ['LE QUEDA', d.neto, C.txt]];
+    const kpis = [['INGRESO BRUTO', d.bruto, C.txt], ['ISR PAGADO', d.isr, C.oro], ['CUOTAS IMSS', d.cuotas, C.cian], [tuUd('LE QUEDA', 'TE QUEDA'), d.neto, C.txt]];
     const kw = (W - 2 * M - 3 * 16) / 4;
     kpis.forEach((k, i) => {
       const x = M + i * (kw + 16), y = 356;
@@ -3540,7 +3617,7 @@
     });
     eccTexto(g, 'Montos ' + d.cad + ' · ' + d.regimen, M, 500, '400 18px ' + sans, C.suave);
 
-    eccTexto(g, 'A DÓNDE FUE SU ISR', M, 552, '700 20px ' + mono, C.oro);
+    eccTexto(g, tuUd('A DÓNDE FUE SU ISR', 'A DÓNDE FUE TU ISR'), M, 552, '700 20px ' + mono, C.oro);
     const movs = d.movimientos.slice(0, 8);
     const max = Math.max.apply(null, movs.map(m => m.monto));
     movs.forEach((m, i) => {

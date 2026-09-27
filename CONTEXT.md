@@ -3203,6 +3203,24 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (sello de emisión en los tickets)
+
+Pedido del autor (27-09-2026): que los tickets lleven el sello de
+Auditavisión. Sello 20260927u. Solo en el auditor (`selloEmision()`).
+
+- Sello circular de documento, no marca de agua: doble anillo,
+  «AUDITAVISIÓN» arriba y «SISTEMA CÍVICO DE FISCALIZACIÓN» abajo, la
+  moneda al centro, «EMITIDO», la fecha y el folio, girado 12 grados.
+- **Estado de cuenta cívico:** esquina superior derecha de la cabecera,
+  en pantalla y en la imagen para compartir (`selloCanvas()` lo traza
+  en el canvas, con el logotipo). Arriba porque abajo la imagen de
+  1080×1350 no tiene hueco libre.
+- **Ticket ambiental:** esquina inferior derecha, al final, como se sella
+  un recibo. Tinta dorada oscura sobre el papel.
+- De paso, el estado de cuenta todavía hablaba de usted («a dónde fue su
+  ISR», «Le queda», «veces su ingreso», «su constancia»); pasa por
+  `tuUd`. Barrido de los dos tickets emitidos: sin usted.
+
 ### Hecho (Contrasta una nota: el verificador honesto)
 
 Decisión 1 del autor (27-09-2026). Sello 20260927r. Modo Inspector, entre
