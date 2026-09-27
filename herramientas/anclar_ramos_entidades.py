@@ -1,7 +1,7 @@
 """Ancla el Ramo 28 y el Ramo 33 de las 32 entidades a los acuerdos del DOF.
 
-La base traía cifras redondas por entidad sin documento: sumaban ,187,900 mdp
-en el Ramo 28 contra ,456,045.9 del Presupuesto. Hacienda publica el reparto
+La base traía cifras redondas por entidad sin documento: sumaban $1,187,900 mdp
+en el Ramo 28 contra $1,456,045.9 del Presupuesto. Hacienda publica el reparto
 en el «Acuerdo por el que se da a conocer a los gobiernos de las entidades
 federativas la distribución y calendarización para la ministración, durante el
 ejercicio fiscal de 2026, de los recursos correspondientes a los ramos generales
@@ -75,7 +75,7 @@ SIN_ENTIDAD = {
     ],
     'ramo33': [
         {'n': 'No distribuible geográficamente', 'pesos': 39590894315,
-         'd': 'Fondo de Aportaciones Múltiples 3,447.4 mdp, Fondo de Aportaciones para la Seguridad Pública ,941.2 mdp y Fondo de Aportaciones para los Servicios de Salud ,202.3 mdp (anexos 27, 34 y 22). El de seguridad pública se repartió después por acuerdo propio (DOF 20-03-2026).'},
+         'd': 'Fondo de Aportaciones Múltiples $23,447.4 mdp, Fondo de Aportaciones para la Seguridad Pública $9,941.2 mdp y Fondo de Aportaciones para los Servicios de Salud $6,202.3 mdp (anexos 27, 34 y 22). El de seguridad pública se repartió después por acuerdo propio (DOF 20-03-2026).'},
         {'n': 'Componente indígena del FAIS', 'pesos': 13506070241,
          'd': 'Recursos del Fondo de Aportaciones para la Infraestructura Social que la Secretaría de Bienestar asigna aparte.'},
         {'n': 'Auditoría Superior de la Federación', 'pesos': 541525836,
@@ -91,7 +91,7 @@ REF_NUEVAS = [
         'categoria_nombre': 'Federalismo y Coordinación Fiscal',
         'cita_apa': 'Secretaría de Hacienda y Crédito Público. (2025, 12 de diciembre). Acuerdo por el que se da a conocer a los gobiernos de las entidades federativas la distribución y calendarización para la ministración, durante el ejercicio fiscal de 2026, de los recursos correspondientes a los ramos generales 28 Participaciones a Entidades Federativas y Municipios y 33 Aportaciones Federales para Entidades Federativas y Municipios. Diario Oficial de la Federación.',
         'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5776006&fecha=12/12/2025',
-        'descripcion': 'Reparte entre las 32 entidades el Ramo 28 (anexos 1 a 15) y el Ramo 33 (anexos 16 a 35) aprobados en el Presupuesto 2026, mes por mes. El Anexo 15 estima ,456,045.9 mdp de participaciones, de los que 7,278.8 mdp quedan sin distribuir. Lo ordena el artículo 44 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria.',
+        'descripcion': 'Reparte entre las 32 entidades el Ramo 28 (anexos 1 a 15) y el Ramo 33 (anexos 16 a 35) aprobados en el Presupuesto 2026, mes por mes. El Anexo 15 estima $1,456,045.9 mdp de participaciones, de los que $17,278.8 mdp quedan sin distribuir. Lo ordena el artículo 44 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria.',
     },
     {
         'num': 107,
@@ -100,7 +100,7 @@ REF_NUEVAS = [
         'categoria_nombre': 'Federalismo y Coordinación Fiscal',
         'cita_apa': 'Secretaría de Hacienda y Crédito Público. (2026, 9 de julio). Acuerdo por el que se modifica el diverso por el que se da a conocer a los gobiernos de las entidades federativas la distribución y calendarización para la ministración, durante el ejercicio fiscal de 2026, de los recursos correspondientes a los ramos generales 28 y 33, publicado el 12 de diciembre de 2025, y sus modificaciones del 6 de febrero y 8 de abril de 2026, en materia del Fondo de Aportaciones para los Servicios de Salud. Diario Oficial de la Federación.',
         'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5793100&fecha=09/07/2026',
-        'descripcion': 'Tercera modificación del reparto de 2026, la última localizada. Asigna a las entidades parte de la previsión del FASSA que no estaba distribuida y vuelve a publicar completo el Anexo 16: ,041,892.9 mdp del Ramo 33, de los que 88,254.4 mdp van a las 32 entidades.',
+        'descripcion': 'Tercera modificación del reparto de 2026, la última localizada. Asigna a las entidades parte de la previsión del FASSA que no estaba distribuida y vuelve a publicar completo el Anexo 16: $1,041,892.9 mdp del Ramo 33, de los que $988,254.4 mdp van a las 32 entidades.',
     },
 ]
 

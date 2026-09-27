@@ -523,8 +523,11 @@
       campo: st => st.deuda, fmt: 'mdpfijo', aditiva: true, semaforo: true
     },
     dep: {
-      rotulo: 'Dependencia de las transferencias federales', corto: 'su dependencia federal',
-      campo: st => st.dep, fmt: 'pct', aditiva: false
+      rotulo: 'Dependencia de las transferencias federales (2024)', corto: 'su dependencia federal',
+      campo: st => st.dep, fmt: 'pct', aditiva: false, clave: 'dep',
+      nota: 'Es la parte de lo que cada gobierno estatal ingres\u00f3 en 2024, sin contar la deuda, que lleg\u00f3 de la ' +
+        'Federaci\u00f3n por participaciones, aportaciones y convenios, seg\u00fan la estad\u00edstica estatal del INEGI. ' +
+        'La Ciudad de M\u00e9xico no figura en ella y su cifra sigue pendiente.'
     }
   };
 
@@ -586,7 +589,7 @@
     if (lente) {
       lente.innerHTML = 'Lente vigente: <b>' + L.rotulo + '</b>. Es la misma que colorea el mapa ' +
         'y el cartograma; al cambiarla cambia tambi\u00e9n este cuadro. Pulse cualquier entidad ' +
-        'para abrir su expediente.';
+        'para abrir su expediente.' + (L.nota ? ' ' + L.nota + ' ' + vsxRefLink(DB.fiscalEntidades.campos[L.clave].ref) : '');
     }
 
     lista.innerHTML = orden.map((st, i) => {
@@ -601,7 +604,7 @@
           '<span class="ent-pos">' + (i + 1) + '</span>' +
           '<span class="ent-ident">' +
             '<b class="ent-abbr">' + st.abbr + '</b>' +
-            '<span class="ent-nom">' + st.name + '</span>' +
+            '<span class="ent-nom">' + st.name + (L.clave && campoSinFuente(L.clave, st.abbr) ? ' ' + chipEstado('pendiente') : '') + '</span>' +
             (L.semaforo ? '<span class="ent-sem sem-' + st.semaforoDeuda.toLowerCase() + '">' + st.semaforoDeuda + '</span>' : '') +
           '</span>' +
           '<span class="ent-barra-bg">' +
@@ -682,10 +685,21 @@
 
   /* Chip de estado de un campo fiscal de las entidades, con su fuente en
      el title: el panel y la tarjeta dicen de donde sale cada cifra. */
-  function campoEntidadChip(campo) {
+  function campoEntidadChip(campo, abbr) {
     const c = DB.fiscalEntidades && DB.fiscalEntidades.campos[campo];
     if (!c) return '';
+    if (campoSinFuente(campo, abbr)) {
+      return ' <span title="' + escHtml(c.motivo || c.fuente) + '">' + chipEstado('pendiente') + '</span>';
+    }
     return ' <span title="' + escHtml(c.fuente) + '">' + chipEstado(c.estado) + '</span>';
+  }
+
+  /* Un campo puede tener fuente para casi todas las entidades y no para
+     alguna: la estadistica estatal del INEGI no incluye a la Ciudad de
+     Mexico. Esa entidad conserva su cifra, pero con chip pendiente. */
+  function campoSinFuente(campo, abbr) {
+    const c = DB.fiscalEntidades && DB.fiscalEntidades.campos[campo];
+    return !!(c && abbr && c.sinFuente && c.sinFuente.indexOf(abbr) !== -1);
   }
 
   /* --- Los mandos de conteo del bloque --- */
@@ -769,9 +783,9 @@
     document.getElementById('dGastoTotal').innerHTML = formatMoneyMdp(st.gasto) + campoEntidadChip('gasto');
     document.getElementById('dRamo28').innerHTML = formatMoneyMdp(st.ramo28) + campoEntidadChip('ramo28');
     document.getElementById('dRamo33').innerHTML = formatMoneyMdp(st.ramo33) + campoEntidadChip('ramo33');
-    document.getElementById('dRecaudacionPropia').innerHTML = formatMoneyMdp(st.recaudacionPropia) + campoEntidadChip('recaudacionPropia');
+    document.getElementById('dRecaudacionPropia').innerHTML = formatMoneyMdp(st.recaudacionPropia) + campoEntidadChip('recaudacionPropia', st.abbr);
     document.getElementById('dDeuda').innerText = `$${formatNumber(st.deuda)} mdp (${st.semaforoDeuda}${st.deudaIld ? ' · ' + st.deudaIld + ' % de sus ingresos libres' : ''})`;
-    document.getElementById('dDependencia').innerHTML = `${st.dep}% federalizada` + campoEntidadChip('dep');
+    document.getElementById('dDependencia').innerHTML = `${st.dep}% de sus ingresos` + campoEntidadChip('dep', st.abbr);
 
     // Lista de Municipios
     const muniList = document.getElementById('dMunicipiosList');
@@ -7062,9 +7076,9 @@
     if (!cont || !PANORAMA) return;
     cont.innerHTML = PANORAMA.puntosCiegos.map(pc => `
       <article class="ciego-card">
-        <div class="ciego-dato">${pc.dato}</div>
+        <div class="ciego-dato">${pc.dato}${pc.estado ? ' ' + chipEstado(pc.estado) : ''}</div>
         <h4>${pc.titulo}</h4>
-        <p>${pc.texto}</p>
+        <p>${pc.texto}${pc.ref ? ' ' + vsxRefLink(pc.ref) : ''}</p>
       </article>
     `).join('');
   }
@@ -7235,11 +7249,15 @@
 
     const recibido = (e.ramo28 || 0) + (e.ramo33 || 0);
     const propio = e.recaudacionPropia || 0;
+    /* La razon compara dos cifras del mismo año: lo federal y lo propio
+       que la entidad registro como ingreso en 2024. */
+    const razon = (e.federal2024 && propio) ? (e.federal2024 / propio).toFixed(1) + ' pesos' : '\u2014';
+    const cdmx = campoSinFuente('recaudacionPropia', e.abbr);
     const filas = [
       { n: 'Ramo 28 \u2014 participaciones', v: e.ramo28, c: 'gold', d: 'De libre disposici\u00f3n', k: 'ramo28' },
       { n: 'Ramo 33 \u2014 aportaciones', v: e.ramo33, c: 'cyan', d: 'Etiquetado por ley', k: 'ramo33' },
-      { n: 'Convenios', v: e.convenios, c: 'blue', d: 'Pactados caso por caso', k: 'convenios' },
-      { n: 'Recaudaci\u00f3n propia', v: propio, c: 'green', d: 'Lo que el estado cobra por su cuenta', k: 'recaudacionPropia' }
+      { n: 'Convenios (2024)', v: e.convenios, c: 'blue', d: 'Recursos federales reasignados, pactados caso por caso', k: 'convenios' },
+      { n: 'Recaudaci\u00f3n propia (2024)', v: propio, c: 'green', d: 'Lo que el estado cobr\u00f3 por su cuenta', k: 'recaudacionPropia' }
     ];
     const maxV = Math.max.apply(null, filas.map(f => f.v || 0));
 
@@ -7251,13 +7269,13 @@
         </div>
         <div class="ec-dep">
           <span class="ec-dep-num" data-anim-v="${e.dep}" data-anim-f="pct">0.0%</span>
-          <span class="ec-dep-lab">de dependencia federal${campoEntidadChip('dep')}</span>
+          <span class="ec-dep-lab">de dependencia federal en 2024${campoEntidadChip('dep', e.abbr)}</span>
         </div>
       </div>
       <div class="ec-filas">
         ${filas.map(f => `
           <div class="ec-fila">
-            <span class="ec-nom">${f.n}${campoEntidadChip(f.k)}<em>${f.d}</em></span>
+            <span class="ec-nom">${f.n}${campoEntidadChip(f.k, e.abbr)}<em>${f.d}</em></span>
             <span class="ec-barra"><span class="ec-rell ec-${f.c}"
                   data-anim-w="${maxV ? ((f.v || 0) / maxV * 100).toFixed(2) : 0}" style="width:0%"></span></span>
             <span class="ec-val" data-anim-v="${f.v || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
@@ -7265,15 +7283,19 @@
       </div>
       <div class="ec-resumen">
         <div><span class="ec-rk">Le bajan por los Ramos 28 y 33${campoEntidadChip('gasto')}</span><span class="ec-rv" data-anim-v="${recibido}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
-        <div><span class="ec-rk">Cobra por su cuenta${campoEntidadChip('recaudacionPropia')}</span><span class="ec-rv" data-anim-v="${propio}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
-        <div><span class="ec-rk">Por cada peso propio, recibe${campoEntidadChip('recaudacionPropia')}</span><span class="ec-rv">${propio ? (recibido / propio).toFixed(1) : '\u2014'} pesos</span></div>
+        <div><span class="ec-rk">Cobr\u00f3 por su cuenta en 2024${campoEntidadChip('recaudacionPropia', e.abbr)}</span><span class="ec-rv" data-anim-v="${propio}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
+        <div><span class="ec-rk">En 2024, por cada peso propio recibi\u00f3 de la Federaci\u00f3n${campoEntidadChip('federal2024', e.abbr)}</span><span class="ec-rv">${razon}</span></div>
         <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv"><span data-anim-v="${e.deuda || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span> \u00b7 ${e.semaforoDeuda}</span></div>
       </div>
       <p class="ec-nota">
         El Ramo 28 y el Ramo 33 salen del acuerdo con que Hacienda reparte ambos ramos entre las entidades,
         publicado en el Diario Oficial ${vsxRefLink('ref-dof-distribucion-2026')} ${vsxRefLink('ref-dof-distribucion-2026-mod')}.
-        Los convenios, la recaudaci\u00f3n propia, la poblaci\u00f3n y el porcentaje de dependencia todav\u00eda no tienen
-        su documento citado: llevan el chip pendiente y deben leerse como aproximaciones.
+        Los convenios, la recaudaci\u00f3n propia y la dependencia son de 2024, el \u00faltimo a\u00f1o con cifras definitivas
+        en la estad\u00edstica estatal del INEGI ${vsxRefLink('ref-inegi-efipem-estatal')}; por eso la raz\u00f3n entre lo federal y
+        lo propio se calcula con las dos cifras de 2024 y no mezcla a\u00f1os. La dependencia no cuenta la deuda: un pr\u00e9stamo
+        no es autonom\u00eda.
+        ${cdmx ? 'La Ciudad de M\u00e9xico no figura en esa estad\u00edstica: sus cifras de 2024 siguen pendientes de fuente. ' : ''}La poblaci\u00f3n
+        tambi\u00e9n sigue pendiente: lleva su chip y debe leerse como aproximaci\u00f3n.
       </p>
     `;
     zonaSincronizar('entidad');
@@ -24423,8 +24445,8 @@
       const deudaPct = e.gasto > 0 ? (e.deuda / e.gasto) * 100 : 0;
       return [
         { k: 'autonomia', et: 'Autonomía financiera', ico: '🪙', v: inspPct(100 - e.dep),
-          crudo: e.dep.toFixed(1) + '% de dependencia federal (dato pendiente de fuente)',
-          expl: 'De cada 100 pesos que gasta, ' + e.dep.toFixed(1) + ' llegan de la Federación por Ramo 28, Ramo 33 y convenios. ' +
+          crudo: e.dep.toFixed(1) + '% de dependencia federal en 2024' + (campoSinFuente('dep', e.abbr) ? ' (dato pendiente de fuente)' : ' (INEGI)'),
+          expl: 'De cada 100 pesos que ingresó en 2024, sin contar deuda, ' + e.dep.toFixed(1) + ' llegaron de la Federación por participaciones, aportaciones y convenios. ' +
                 'El eje mide lo contrario: lo que el estado recauda por su cuenta.' },
         { k: 'observado', et: 'Limpieza en la cuenta', ico: '⚠️', v: inspPct(100 - obsPct * 20),
           crudo: simMdp(e.asfMontoObservado) + ' observados en ' + e.asfAuditorias + ' auditorías',
@@ -24666,7 +24688,7 @@
          ['Población', e.pob.toFixed(2) + ' millones'],
          ['Ramos 28 y 33', simMdp(e.gasto)],
          ['Ramos 28 y 33 por habitante', '$' + formatNumber(e.pc) + ' (población pendiente de fuente)'],
-         ['Recaudación propia', simMdp(e.recaudacionPropia) + ' (pendiente de fuente)']]
+         ['Recaudación propia en 2024', simMdp(e.recaudacionPropia) + (campoSinFuente('recaudacionPropia', e.abbr) ? ' (pendiente de fuente)' : ' (INEGI)')]]
       : [['Quien gobierna', m.alcalde + ' (' + m.partido + ')'],
          ['Estado', ente.est.name],
          ['Población', formatNumber(m.pob) + ' habitantes'],
@@ -27891,9 +27913,9 @@
         tipo: 'critica',
         icono: '🚩',
         categoria: 'Vulnerabilidad Fiscal',
-        titulo: `Dependencia Extrema: ${st.dep}% de transferencias federales`,
+        titulo: `Dependencia Extrema: ${st.dep}% de sus ingresos de 2024 vino de la Federación`,
         detalle: 'Recaudación propia local insuficiente. Elevada vulnerabilidad ante variaciones de la recaudación federal.',
-        fuente: 'INEGI EFIPEM · SHCP'
+        fuente: 'INEGI, finanzas públicas estatales 2024 (cifras definitivas)'
       });
     }
 

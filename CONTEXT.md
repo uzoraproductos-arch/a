@@ -2126,6 +2126,58 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (recaudación propia, convenios y dependencia de 31 entidades, INEGI 2024)
+
+- **Tres campos por entidad dejan de ser cifras redondas sin documento.**
+  Salen de la *Estadística de Finanzas Públicas Estatales y Municipales* del
+  INEGI, conjunto de datos **estatal** (paquete
+  `conjunto_de_datos_efipem_estatal_csv.zip`, versión del 13-08-2026),
+  ejercicio **2024**, el último con cifras definitivas (2025 es preliminar).
+  Referencia nueva **108**, `ref-inegi-efipem-estatal`.
+  - `convenios` = concepto «Recursos federales reasignados», dentro de las
+    aportaciones federales. Se lee tal cual: **oficial**.
+  - `recaudacionPropia` = impuestos + cuotas de seguridad social +
+    contribuciones de mejoras + derechos + productos + aprovechamientos:
+    **derivado**.
+  - `dep` = (participaciones + aportaciones federales) ÷ (total de ingresos −
+    financiamiento) × 100: **derivado**. La deuda sale del denominador porque
+    un préstamo no es autonomía: con ella, Quintana Roo, que contrató
+    $19,306.8 mdp en 2024, habría salido como la entidad menos dependiente
+    (51.7 %); sin ella queda en 72.2 %.
+  - `federal2024` (campo nuevo) = participaciones + aportaciones de 2024,
+    para que «por cada peso propio recibió» compare cifras del mismo año y no
+    mezcle el Ramo 28/33 de 2026 con lo recaudado en 2024.
+- **Las cifras viejas estaban lejos.** Chihuahua figuraba con $23,900 mdp de
+  recaudación propia y recaudó $28,110.2; el Estado de México con $54,000 y
+  recaudó $84,355.0; Aguascalientes con $5,200 y recaudó $4,032.2. Guerrero
+  es la entidad más dependiente (97.1 %) y Quintana Roo la menos (72.2 %).
+- **La Ciudad de México no está en el conjunto estatal en ningún año.**
+  Conserva sus tres cifras con chip `pendiente` y `federal2024` en nulo.
+  `fiscalEntidades.campos[k]` gana `sinFuente` (lista de entidades) y
+  `motivo`; `campoEntidadChip(campo, abbr)` y el helper nuevo
+  `campoSinFuente(campo, abbr)` pintan el chip por entidad en el panel, la
+  tarjeta de la 1.1, el cuadro de las 32 bajo la lente de dependencia y el
+  inspector.
+- **Punto ciego «Los estados administran mucho y recaudan poco»:** decía
+  «ronda el 84 %» sin fuente. Ahora: en 2024, de cada 100 pesos que
+  ingresaron los 31 gobiernos estatales sin contar deuda, 84.6 llegaron de la
+  Federación y 14.1 los cobraron ellos. Chip `derivado` y referencia 108; la
+  tarjeta de puntos ciegos acepta ahora `estado` y `ref` opcionales.
+- Etiquetas con el año: «Recaudación propia local (2024)», «Dependencia de la
+  Federación (2024, sin deuda)», «Convenios (2024)», lente «Dependencia de las
+  transferencias federales (2024)» con nota y referencia.
+- `herramientas/anclar_ingresos_entidades.py` (idempotente) guarda los pesos
+  de 2024 capítulo por capítulo, comprueba que en cada entidad sumen al peso
+  el total de ingresos y escribe los campos, el bloque `fiscalEntidades` y la
+  ficha 108.
+- **Corrección de cifras mutiladas del commit anterior.** Al generar
+  `anclar_ramos_entidades.py` con un heredoc sin comillas, la terminal se
+  comió los `$1`, `$2`, `$6` y `$9` de siete cifras: «$23,447.4» quedó
+  «3,447.4», «$1,456,045.9» quedó «,456,045.9», «$988,254.4» quedó
+  «88,254.4». Afectaba las fichas 106 y 107 y el renglón «No distribuible»
+  del cuadre del Ramo 33. Corregidas en la base y en la herramienta. Lección:
+  los textos con `$` se escriben con el editor de archivos, no con heredoc.
+
 ### Hecho (equivalencias del módulo 1 con cifras oficiales)
 
 - **Las tres equivalencias del bloque 1.2 ya no usan costos supuestos.**
@@ -2972,14 +3024,28 @@ capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
   permite deducirlo además del 35 % a ciegas, pero haría falta el recibo del
   municipio. El impuesto que la calculadora muestra es, por eso, un techo.
 
-- **Campos por entidad todavía sin fuente** (llevan chip `pendiente` en el
-  panel, la tarjeta de la 1.1 y el inspector): población (el cuadro del
-  CONAPO; su base abierta redirige a una página de error), convenios,
-  recaudación propia y porcentaje de dependencia. La fuente natural de los
-  dos últimos son las finanzas públicas estatales del INEGI (EFIPEM
-  estatal). El eje «autonomía» del índice del inspector descansa en `dep`,
-  así que el índice estatal hereda ese pendiente. `destacados` ya no se
-  muestra: traía cifras sin fuente que además dejaron de cuadrar.
+- **Población por entidad sin fuente** (chip `pendiente` en el panel, la
+  tarjeta de la 1.1 y el inspector): falta el cuadro de las proyecciones del
+  CONAPO; su base abierta redirige a una página de error. De ella dependen
+  `pc` y la lente «por habitante». `destacados` ya no se muestra: traía
+  cifras sin fuente que además dejaron de cuadrar.
+- **Ciudad de México: recaudación propia, convenios y dependencia sin
+  fuente.** No figura en la estadística estatal del INEGI. La fuente sería su
+  Cuenta Pública 2024 (Secretaría de Administración y Finanzas); el sitio de
+  la SAF solo ofrece el boletín de la Cuenta Pública 2025 («ingresos
+  locales» $151,244.5 mdp de $334,349.5), con otra definición y otro año.
+  Localizar el tomo de ingresos 2024 y, con él, retirar los tres chips.
+- **EFIPEM 2025 es preliminar.** Cuando el INEGI publique las cifras
+  definitivas, volver a correr `anclar_ingresos_entidades.py` con los pesos
+  de 2025.
+- **Dos definiciones de dependencia.** La municipal (padrón 1.3) divide entre
+  el total de ingresos con deuda; la estatal, sin deuda. En los municipios el
+  financiamiento pesa poco, pero conviene armonizar y decirlo en la 1.3.
+- **Notas históricas con cifras mutiladas en CONTEXT.md.** Las entradas del
+  radar (sección de la barra de telemetría y el cajón de desglose) y de las
+  diapositivas 7 y 8 perdieron los `$` y sus primeros dígitos por el mismo
+  problema de heredoc; son registro interno, no texto al lector, pero no deben
+  citarse como fuente.
 - **Ramo 28 por entidad es estimación.** El Anexo 15 cambia con la
   recaudación y con los coeficientes de junio (LCF art. 7). Actualizar
   cuando Hacienda publique el ajuste, o con la Cuenta Pública 2026.
