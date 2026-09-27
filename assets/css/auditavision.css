@@ -15536,6 +15536,41 @@ body.con-regreso { padding-bottom: 96px; }
 }
 .insp-fed-exp:hover, .insp-fed-exp:focus-visible { background: rgba(201,168,76,0.2); }
 
+/* Incongruencias: dos documentos oficiales que no dicen lo mismo. Va
+   arriba del expediente porque explicarlas es obligacion de la autoridad. */
+.insp-inc {
+  margin-top: 14px; padding: 14px 16px; border-radius: 11px;
+  border: 1px solid var(--crimson-bright); background: rgba(220,53,69,0.07);
+}
+.insp-inc-tit { margin: 0 0 6px; font-family: var(--font-serif); font-size: 17px; color: var(--text-main); }
+.insp-inc-intro { margin: 0 0 10px; font-size: 13px; line-height: 1.65; color: var(--text-secondary); }
+.insp-inc-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.insp-inc-it {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 4px 14px;
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle); border-left: 4px solid;
+  border-radius: 8px; padding: 10px 12px;
+}
+.insp-inc-tema { grid-column: 1 / -1; font-size: 13.5px; font-weight: 700; color: var(--text-main); }
+.insp-inc-par { display: flex; flex-direction: column; gap: 1px; }
+.insp-inc-doc { font-size: 11.5px; color: var(--text-secondary); }
+.insp-inc-par b, .insp-inc-dif b { font-family: var(--font-mono); font-size: 13.5px; color: var(--text-main); }
+.insp-inc-dif { font-size: 12.5px; color: var(--text-secondary); align-self: end; }
+.insp-inc-nota { grid-column: 1 / -1; font-size: 12px; line-height: 1.55; color: var(--text-secondary); }
+
+/* Filtros de la lista del inspector */
+.insp-vistas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.insp-vista {
+  font: inherit; font-size: 12px; cursor: pointer; padding: 6px 11px; border-radius: 999px;
+  background: var(--bg-card-alt); border: 1px solid var(--border-subtle); color: var(--text-secondary);
+}
+.insp-vista b { font-family: var(--font-mono); color: var(--text-main); margin-left: 3px; }
+.insp-vista:hover, .insp-vista:focus-visible { border-color: var(--border-gold); }
+.insp-vista.active { border-color: var(--gold); background: rgba(201,168,76,0.12); color: var(--text-main); }
+.insp-vista-d { margin: 8px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
+.insp-t-tx small.insp-t-extra { color: var(--text-secondary); white-space: normal; }
+.insp-t-tx small.insp-t-sem { font-size: 10.5px; }
+.insp-mas { margin-top: 10px; }
+
 .insp-acciones {
   display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
   margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle);

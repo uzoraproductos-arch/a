@@ -14,7 +14,7 @@ Uso:
     python3 herramientas/sello.py            # dice cual es el sello de hoy
     python3 herramientas/sello.py 20260923a  # lo sube a ese
 
-Toca las cinco dependencias de index.html y el renglon del pie. Ejecutalo en
+Toca las seis dependencias de index.html y el renglon del pie. Ejecutalo en
 todo cambio que toque assets/; si no tocaste assets/, no hace falta.
 Preserva los saltos de linea CRLF del archivo, que es la convencion del
 proyecto.
@@ -34,6 +34,7 @@ ARCHIVOS = [
     ('src', 'assets/js/mexico-states-geo.js'),
     ('src', 'assets/js/audit-database.js'),
     ('src', 'assets/js/municipios-efipem.js'),
+    ('src', 'assets/js/municipios-rendicion.js'),
     ('src', 'assets/js/audit-engine.js'),
 ]
 

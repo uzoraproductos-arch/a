@@ -2126,6 +2126,75 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (el inspector en los tres niveles: rendición de cuentas e incongruencias)
+
+El autor pidió que el inspector diga, de cualquier autoridad, quién gobierna,
+de qué partido, cómo fueron sus números, si rindió cuentas y, sobre todo,
+**dónde no coinciden sus documentos**: «si los datos no coinciden, es
+responsabilidad del gobierno». Los tres niveles responden ahora las mismas
+preguntas con semáforo, y arriba de cada expediente va un recuadro nuevo,
+**«Incongruencias en su rendición de cuentas»**: el mismo dinero en dos
+documentos oficiales, lado a lado, con la diferencia en pesos y quién debe
+explicarla.
+
+- **Cinco fuentes nuevas, todas con huella SHA-256** en
+  `herramientas/integrar_rendicion.py` (idempotente; referencias **111**
+  `ref-shcp-cp2024-datos`, **112** `ref-shcp-srft-2024`, **113**
+  `ref-inafed-presidencias`):
+  - Cuenta Pública 2024 de Hacienda, clasificación geográfica: lo que la
+    Federación pagó a cada entidad por Ramos 28 y 33.
+  - INEGI, EFIPEM municipal 2016-2025 (el paquete completo, 96 MB): qué años
+    entregó cada municipio su cuenta y, si no entregó la de 2024, la última.
+  - SHCP, Sistema de Recursos Federales Transferidos, informe definitivo
+    2024, sus dos componentes: *ejercicio del gasto* (lo recibido y pagado del
+    FAIS y del FORTAMUN, según el municipio) y *destino del gasto* (las obras
+    que registró con esos fondos).
+  - INAFED, «Presidentas y presidentes municipales» (datos.gob.mx): nombre,
+    partido o coalición y periodo. Registra, casi siempre, a la administración
+    que gobernó la mayor parte de 2024; el expediente lo dice con fechas.
+  - ASF, las 1,056 auditorías integrales a municipios de la CP 2024
+    (`investigaciones/datos-matriz-asf2024.json`), ahora cruzadas todas.
+- **Datos:** `assets/js/municipios-rendicion.js` (`window.AUDIT_MUN_RENDICION`,
+  375 KB, se carga después de `municipios-efipem.js`; `sello.py` ya lo
+  incluye) y el bloque `DB.inspector_estatal`.
+- **Nivel municipal: de 83 a los 2,479 del catálogo.** Quién gobernó y con
+  qué partido, cuatro preguntas (de qué vive, ¿rindió cuentas?, ¿cuadra lo
+  que le dijo al INEGI con lo que le dijo a Hacienda?, ¿qué encontró la
+  ASF?) y el círculo de salud cuando hay cuenta 2024 y auditoría integral.
+  Filtros: *con incongruencias* (367, ordenados por pesos de diferencia;
+  encabezan Coacalco, $269.6 mdp de FAIS: $34.6 al INEGI, $304.1 a Hacienda;
+  Nogales y Zumpango), *con señal fuerte*, *no rindieron cuentas en 2024*
+  (83, ordenados por lo que ellos mismos informaron a Hacienda haber
+  recibido: El Salto, $268.7 mdp; Tlacoachistlahuaca, $247.0) y *sin informe
+  a Hacienda* (46).
+- **Nivel estatal:** cuadre entre lo que cada estado reportó al INEGI como
+  recibido y lo que la Cuenta Pública registra como pagado. Casi todos
+  cuadran a ±2 %; **Tamaulipas** reportó $4,049.7 mdp menos de
+  participaciones (−10.9 %), **Quintana Roo** 8 % menos de aportaciones y
+  **Nayarit** 4.9 % más de participaciones. Se añadió la pregunta de la
+  deuda con el semáforo del Sistema de Alertas, tal cual.
+- **Nivel federal:** lo ejercido por encima de lo modificado y lo ejercido
+  sin pagar pasan también al recuadro de incongruencias.
+- **Lo que se evitó publicar.** La primera versión marcaba «a Hacienda le
+  reportó cero FAIS» a 87 municipios, Ecatepec entre ellos, con $404 mdp. Era
+  falso: esos municipios informan el FAIS obra por obra en el componente de
+  *destino*, no en el de *ejercicio* (Ecatepec registró $400.5 mdp). Con los
+  dos componentes, «sin informe a Hacienda» bajó de 553 a 46, y un fondo que
+  no aparece en ninguno se trata como **omisión** (pregunta de cuentas), no
+  como contradicción.
+- **Incongruencias de la propia fuente, dichas.** El INAFED registra a la
+  misma persona en dos municipios en dos casos (Michoacán 16042 y Nayarit
+  18006; San Pedro Mixtepec 20318 y 20319); el expediente no lo afirma y lo
+  marca por confirmar. Dos San Pedro Mixtepec en Oaxaca: la ASF audita el del
+  distrito de Juquila, clave 318 según el domicilio del propio INAFED.
+- **Semáforos, con los umbrales a la vista.** «De qué vive» nunca es rojo:
+  depender no es irregular. Estados: cuadre naranja desde ±2 %, rojo desde
+  ±5 %. Municipios: cuadre naranja desde ±5 %, rojo desde ±25 % (se ignoran
+  diferencias menores a $1 mdp); ASF rojo desde $50 mdp o 5 % del ingreso.
+- **De paso:** dos fichas de la 1.3 decían «los 99 municipios que no
+  reportaron y las dieciséis demarcaciones»; los 99 ya incluyen a las 16. Son
+  83 municipios más 16 alcaldías.
+
 ### Hecho (nivel federal del Modo Inspector, reconstruido con Cuenta Pública y ASF)
 
 El autor pidió que el inspector «sirva bien»: que la ciudadanía pueda auditar
@@ -3002,10 +3071,19 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **El foro del Portal Digital no tiene servidor:** lo que se publica vive
   en el navegador de quien lo escribe. Ya no trae hilos sembrados.
 - **Inspector, siguientes pasos.**
-  - Llevar las cuatro preguntas a los niveles estatal y municipal: hoy
-    tienen índice de salud, pero no dicen explícitamente si rindieron cuentas
-    ni qué contradicciones hay (p. ej., lo que el estado reporta al INEGI
-    frente a lo que el DOF le asigna; municipios que no reportaron a INEGI).
+  - **Quién gobierna hoy.** El padrón del INAFED consultado registra a la
+    administración que gobernó 2024; falta la que entró en el otoño de 2024
+    (y los alcaldes de la CDMX 2024-2027). Actualizar cuando el INAFED lo
+    publique. Los gobernadores de `DB.estados` siguen sin fuente citada.
+  - **Explicar las incongruencias.** Las estatales pueden deberse a
+    retenciones de participaciones (ISSSTE, CONAGUA) o pagos a fideicomisos
+    de deuda: Hacienda publica las retenciones en sus informes trimestrales;
+    cruzarlas separaría la diferencia explicable de la que no lo es.
+  - **Destino contra ejercicio.** Dentro del propio SRFT, lo recibido
+    (ejercicio) y lo registrado en obras (destino) a veces no coinciden
+    (Coacalco: $304.1 contra $34.5 de FAIS); hoy sólo se menciona.
+  - **Series.** El SRFT está desde 2014 y la Cuenta Pública desde 2008: el
+    cuadre podría mostrarse varios años para distinguir error de patrón.
   - La ASF se cruza por **sector** de la Matriz, no por unidad responsable:
     «Salud» junta a la secretaría con sus desconcentrados. Bajar al informe
     individual (ASF Datos) daría el detalle por UR.

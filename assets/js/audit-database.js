@@ -837,7 +837,7 @@ window.AUDIT_DB = {
           "glos": "Impuesto Predial",
           "refKey": "ref-inegi-efipem",
           "refNum": 63,
-          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. No es una estimación ni un residuo: es la suma de cifras publicadas, municipio por municipio, y cualquiera puede rehacerla con el mismo archivo de datos abiertos. Falta en ella lo de los 99 municipios que no reportaron y lo de las dieciséis demarcaciones de la Ciudad de México, que no rinden cuenta municipal. Puesto en perspectiva: los municipios del país recaudaron de predial menos de la quinta parte de lo que recibieron de participaciones federales. Es el impuesto que la Constitución les reserva en exclusiva, y el que menos pesa en su bolsa.",
+          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. No es una estimación ni un residuo: es la suma de cifras publicadas, municipio por municipio, y cualquiera puede rehacerla con el mismo archivo de datos abiertos. Falta en ella lo de los 83 municipios que no reportaron y lo de las dieciséis demarcaciones de la Ciudad de México, que no rinden cuenta municipal: son las 99 claves del catálogo sin cifra. El Modo Inspector dice cuáles son y quién las gobernaba. Puesto en perspectiva: los municipios del país recaudaron de predial menos de la quinta parte de lo que recibieron de participaciones federales. Es el impuesto que la Constitución les reserva en exclusiva, y el que menos pesa en su bolsa.",
           "leyAdicional": "Constitución Política, art. 115, fracc. IV, inciso a)"
         },
         {
@@ -855,7 +855,7 @@ window.AUDIT_DB = {
           "glos": "Derechos (Contribución)",
           "refKey": "ref-inegi-efipem",
           "refNum": 63,
-          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. No es una estimación ni un residuo: es la suma de cifras publicadas, municipio por municipio, y cualquiera puede rehacerla con el mismo archivo de datos abiertos. Falta en ella lo de los 99 municipios que no reportaron y lo de las dieciséis demarcaciones de la Ciudad de México, que no rinden cuenta municipal. Agua, alumbrado, limpia, mercados, panteones, rastro y licencias suman casi tanto como el predial: entre los dos apenas rebasan los cien mil millones, frente a los doscientos sesenta y ocho mil que bajan por participaciones."
+          "comoSeObtuvo": "Suma de lo que reportaron los <b>2,380 municipios</b> que rindieron su cuenta pública de 2024 al INEGI, de los 2,479 del catálogo. No es una estimación ni un residuo: es la suma de cifras publicadas, municipio por municipio, y cualquiera puede rehacerla con el mismo archivo de datos abiertos. Falta en ella lo de los 83 municipios que no reportaron y lo de las dieciséis demarcaciones de la Ciudad de México, que no rinden cuenta municipal: son las 99 claves del catálogo sin cifra. El Modo Inspector dice cuáles son y quién las gobernaba. Agua, alumbrado, limpia, mercados, panteones, rastro y licencias suman casi tanto como el predial: entre los dos apenas rebasan los cien mil millones, frente a los doscientos sesenta y ocho mil que bajan por participaciones."
         },
         {
           "id": "mp-participaciones",
@@ -3296,6 +3296,215 @@ window.AUDIT_DB = {
      "expedientes": []
     }
    ]
+  },
+  "inspector_estatal": {
+   "nota": "Participaciones y aportaciones de 2024 en millones de pesos: lo que cada gobierno estatal reportó al INEGI como recibido, contra lo que la Cuenta Pública 2024 registra como pagado por la Federación a esa entidad. Las aportaciones del INEGI se toman sin los convenios (recursos reasignados), que en la Cuenta Pública no son Ramo 33.",
+   "fuentes": {
+    "cp2024": {
+     "ref": "ref-shcp-cp2024-datos",
+     "corto": "SHCP, Cuenta Pública 2024, datos abiertos",
+     "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2024_gf_ecd_epe.csv",
+     "sha256": "94cd87dfb1f0dbcb27886d5792046c9c6d96eeab2878f898c8a9813ef1fdf6de"
+    },
+    "inegi2024": {
+     "ref": "ref-inegi-efipem-estatal",
+     "corto": "INEGI, finanzas públicas estatales 2024"
+    }
+   },
+   "entidades": {
+    "AGS": {
+     "inegiPart": 13763.6,
+     "inegiAportSinConvenios": 14385.4,
+     "cpR28": 13840.6,
+     "cpR33": 14375.9
+    },
+    "BC": {
+     "inegiPart": 39542.4,
+     "inegiAportSinConvenios": 24933.6,
+     "cpR28": 40214.1,
+     "cpR33": 24844.4
+    },
+    "BCS": {
+     "inegiPart": 9525.3,
+     "inegiAportSinConvenios": 10056.4,
+     "cpR28": 9548.8,
+     "cpR33": 9996.2
+    },
+    "CAM": {
+     "inegiPart": 10232.0,
+     "inegiAportSinConvenios": 10726.1,
+     "cpR28": 10308.9,
+     "cpR33": 10706.1
+    },
+    "COAH": {
+     "inegiPart": 28218.6,
+     "inegiAportSinConvenios": 24119.2,
+     "cpR28": 28674.3,
+     "cpR33": 24105.5
+    },
+    "COL": {
+     "inegiPart": 7540.3,
+     "inegiAportSinConvenios": 8122.8,
+     "cpR28": 7820.3,
+     "cpR33": 8117.3
+    },
+    "CHIS": {
+     "inegiPart": 49559.8,
+     "inegiAportSinConvenios": 62695.3,
+     "cpR28": 49876.6,
+     "cpR33": 62353.9
+    },
+    "CHIH": {
+     "inegiPart": 39248.9,
+     "inegiAportSinConvenios": 30003.4,
+     "cpR28": 39230.6,
+     "cpR33": 30030.7
+    },
+    "DGO": {
+     "inegiPart": 16210.8,
+     "inegiAportSinConvenios": 19390.2,
+     "cpR28": 16211.7,
+     "cpR33": 19385.0
+    },
+    "GTO": {
+     "inegiPart": 56471.9,
+     "inegiAportSinConvenios": 40883.5,
+     "cpR28": 56981.6,
+     "cpR33": 40705.1
+    },
+    "GRO": {
+     "inegiPart": 28663.0,
+     "inegiAportSinConvenios": 47563.1,
+     "cpR28": 28731.4,
+     "cpR33": 47547.3
+    },
+    "HGO": {
+     "inegiPart": 26557.4,
+     "inegiAportSinConvenios": 32992.5,
+     "cpR28": 26574.6,
+     "cpR33": 32838.0
+    },
+    "JAL": {
+     "inegiPart": 84880.5,
+     "inegiAportSinConvenios": 49090.9,
+     "cpR28": 84852.2,
+     "cpR33": 48730.4
+    },
+    "MÉX": {
+     "inegiPart": 162137.1,
+     "inegiAportSinConvenios": 101697.4,
+     "cpR28": 165247.7,
+     "cpR33": 101697.1
+    },
+    "MICH": {
+     "inegiPart": 41419.5,
+     "inegiAportSinConvenios": 41521.1,
+     "cpR28": 42104.7,
+     "cpR33": 41490.3
+    },
+    "MOR": {
+     "inegiPart": 16604.0,
+     "inegiAportSinConvenios": 16979.0,
+     "cpR28": 16695.0,
+     "cpR33": 16790.2
+    },
+    "NAY": {
+     "inegiPart": 12389.2,
+     "inegiAportSinConvenios": 12320.3,
+     "cpR28": 11815.6,
+     "cpR33": 12235.9
+    },
+    "NL": {
+     "inegiPart": 68536.1,
+     "inegiAportSinConvenios": 35434.3,
+     "cpR28": 68555.8,
+     "cpR33": 35384.1
+    },
+    "OAX": {
+     "inegiPart": 36527.8,
+     "inegiAportSinConvenios": 58121.8,
+     "cpR28": 36564.2,
+     "cpR33": 57709.2
+    },
+    "PUE": {
+     "inegiPart": 55822.8,
+     "inegiAportSinConvenios": 49194.7,
+     "cpR28": 55826.8,
+     "cpR33": 47931.2
+    },
+    "QRO": {
+     "inegiPart": 25941.9,
+     "inegiAportSinConvenios": 17105.6,
+     "cpR28": 26033.1,
+     "cpR33": 17061.3
+    },
+    "QROO": {
+     "inegiPart": 18826.6,
+     "inegiAportSinConvenios": 13478.9,
+     "cpR28": 18818.7,
+     "cpR33": 14656.5
+    },
+    "SLP": {
+     "inegiPart": 25312.4,
+     "inegiAportSinConvenios": 26835.3,
+     "cpR28": 25193.5,
+     "cpR33": 26722.1
+    },
+    "SIN": {
+     "inegiPart": 29924.5,
+     "inegiAportSinConvenios": 24665.5,
+     "cpR28": 29923.9,
+     "cpR33": 24653.7
+    },
+    "SON": {
+     "inegiPart": 31279.1,
+     "inegiAportSinConvenios": 20885.7,
+     "cpR28": 31554.9,
+     "cpR33": 20758.1
+    },
+    "TAB": {
+     "inegiPart": 32165.8,
+     "inegiAportSinConvenios": 20001.8,
+     "cpR28": 32208.1,
+     "cpR33": 19971.1
+    },
+    "TAM": {
+     "inegiPart": 33187.2,
+     "inegiAportSinConvenios": 27854.2,
+     "cpR28": 37236.9,
+     "cpR33": 27841.0
+    },
+    "TLAX": {
+     "inegiPart": 12375.9,
+     "inegiAportSinConvenios": 13142.6,
+     "cpR28": 12353.5,
+     "cpR33": 13653.7
+    },
+    "VER": {
+     "inegiPart": 71531.1,
+     "inegiAportSinConvenios": 71450.1,
+     "cpR28": 70871.7,
+     "cpR33": 71402.0
+    },
+    "YUC": {
+     "inegiPart": 22376.1,
+     "inegiAportSinConvenios": 18700.5,
+     "cpR28": 22409.1,
+     "cpR33": 18658.2
+    },
+    "ZAC": {
+     "inegiPart": 14804.8,
+     "inegiAportSinConvenios": 16451.7,
+     "cpR28": 14741.8,
+     "cpR33": 16317.9
+    },
+    "CDMX": {
+     "inegiPart": null,
+     "inegiAportSinConvenios": null,
+     "cpR28": 122763.9,
+     "cpR33": 19395.3
+    }
+   }
   },
   "estados": [
     {
@@ -8950,6 +9159,33 @@ window.AUDIT_DB = {
       "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Presupuesto de Egresos 2026: avance del gasto (AC01) al segundo trimestre [archivo CSV]. Transparencia Presupuestaria.",
       "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
       "descripcion": "Aprobado, modificado, calendario mensual y pagado de cada ramo al 30 de junio de 2026. Permite ver si un ente va al ritmo de lo que él mismo calendarizó. Huella SHA-256 del archivo consultado: faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511."
+    },
+    {
+      "num": 111,
+      "id": "ref-shcp-cp2024-datos",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2025). Cuenta Pública 2024: base de datos abierta de ramos administrativos, generales y autónomos, entidades de control directo y empresas productivas del Estado [archivo CSV]. Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2024_gf_ecd_epe.csv",
+      "descripcion": "Incluye la clasificación geográfica del gasto: lo que la Federación pagó a cada entidad por participaciones (Ramo 28) y aportaciones (Ramo 33) en 2024. El Modo Inspector lo contrasta con lo que cada gobierno estatal reportó haber recibido. Huella SHA-256 del archivo consultado: 94cd87dfb1f0dbcb27886d5792046c9c6d96eeab2878f898c8a9813ef1fdf6de."
+    },
+    {
+      "num": 112,
+      "id": "ref-shcp-srft-2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2025). Gasto federalizado: ejercicio del gasto, informe definitivo 2024 (Sistema de Recursos Federales Transferidos) [archivo CSV]. Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Entidades_Federativas/2024/ejercicio_del_gasto_2024.zip",
+      "descripcion": "Lo que cada estado y cada municipio le informa a Hacienda sobre el dinero federal que recibió y cómo lo gastó, como manda el artículo 85 de la Ley Federal de Presupuesto y Responsabilidad Hacendaria. De aquí sale, municipio por municipio, lo recibido y lo pagado del FAIS municipal y del FORTAMUN de 2024 (componente Ejercicio del gasto) y el monto de las obras que registró con esos fondos (componente Destino del gasto, https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Entidades_Federativas/2024/ef2024.zip). Huellas SHA-256: ejercicio_del_gasto.csv 091307f00884a6caa35a0dc53eb314a961a61d26894b21bcec5b3a1e68c434f8; ef2024.zip 63656106a607d59fcf74e92574a95ac46c44b2beef7d328acf4959e416f39c34."
+    },
+    {
+      "num": 113,
+      "id": "ref-inafed-presidencias",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Instituto Nacional para el Federalismo y el Desarrollo Municipal. (2025). Presidentas y presidentes municipales [conjunto de datos]. datos.gob.mx.",
+      "url": "https://www.datos.gob.mx/dataset/presidentas_presidentes_municipales",
+      "descripcion": "Quién encabeza cada ayuntamiento, con qué partido, coalición o sistema normativo llegó y el periodo de su gobierno. La versión consultada registra, en casi todos los municipios, a la administración que gobernó la mayor parte de 2024, no a la que entró en el otoño de ese año. Huella SHA-256 del archivo: 919f5ceaa81e3a4d64f846c5603271284d6f4b813e879b786139206f93bc9e99."
     },
     {
       "num": 99,
