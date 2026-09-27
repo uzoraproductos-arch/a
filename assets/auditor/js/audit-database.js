@@ -16558,8 +16558,8 @@ window.AUDIT_DB = {
     "poblacion": {
       "millones": 134.4,
       "fuente": "CONAPO \u00b7 Proyecciones de la Poblaci\u00f3n de M\u00e9xico y las entidades federativas 2020-2070, poblaci\u00f3n a mitad de 2026",
-      "estado": "oficial",
-      "pendiente": "La base de datos abierta del Consejo no result\u00f3 accesible al integrar esta cifra, de modo que la referencia puntual al cuadro de la proyecci\u00f3n queda declarada como pendiente. La cifra es la que el propio Consejo dio a conocer para mediados de 2026."
+      "estado": "pendiente",
+      "pendiente": "Pendiente de cotejo: el portal del CONAPO y su base de datos abierta no responden desde nuestro entorno (27-09-2026), así que no hemos podido leer la cifra en el cuadro oficial de la proyección. Se usa como denominador para dar escala y se marcará oficial cuando se coteje."
     },
     "padron": {
       "millones": 63.2,

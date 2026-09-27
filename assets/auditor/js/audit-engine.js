@@ -1757,7 +1757,7 @@
             ¿Cómo se lee esta comparación?
           </strong>
           <p style="font-size:12.5px; color:var(--text-secondary); margin:0; line-height:1.5;">
-            Las cifras son netas —lo que llega a la persona después de impuestos— salvo el promedio de los honorarios, que el documento da en bruto y así se dice. Cuando un documento publica un rango, las cuentas usan su máximo. El artículo 127 de la Constitución prohíbe que un servidor público reciba una remuneración mayor que la de la Presidencia. Las cuentas «veces» y «días» son derivadas: dividen la cifra oficial entre su ingreso.
+            Las cifras son netas —lo que llega a la persona después de impuestos— salvo el promedio de los honorarios, que el documento da en bruto y así se dice. Cuando un documento publica un rango, las cuentas usan su máximo. El artículo 127 de la Constitución prohíbe que un servidor público reciba una remuneración mayor que la de la Presidencia. Las cuentas «veces» y «días» son derivadas: dividen la cifra oficial entre tu ingreso.
           </p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -1941,7 +1941,7 @@
         '<div class="am-datos">' +
           amTarjeta(amNum(R.perCapitaKg.valor, 3) + ' kg', 'de basura al día por persona', 'oficial', amFuente('DBGIR', R.perCapitaKg.pagina)) +
           amTarjeta(amNum(kgAnio, 0) + ' kg', 'al año: su basura', 'derivado', '1.076 kg × 365 días') +
-          (pob ? amTarjeta(pdPesos(porPersona), 'al año: su parte del daño ambiental', 'derivado', 'Costo 2024 del INEGI ÷ ' + amNum(pob.millones, 1) + ' millones de habitantes (CONAPO, 2026)') : '') +
+          (pob ? amTarjeta(pdPesos(porPersona), tuUd('al año: su parte del daño ambiental', 'al año: tu parte del daño ambiental'), 'derivado', 'Costo 2024 del INEGI ÷ ' + amNum(pob.millones, 1) + ' millones de habitantes (CONAPO, 2026' + (pob.estado === 'pendiente' ? ', cifra pendiente de cotejo' : '') + ')') : '') +
           (isr > 0 ? amTarjeta(pdPct(porPersona / isr * 100), tuUd('de su ISR anual', 'de tu ISR anual'), 'derivado', tuUd('Su parte del daño comparada con el ISR que calculó en la 2.4', 'Tu parte del daño comparada con el ISR que calculaste en la 2.4')) : '') +
         '</div>' +
         (isr > 0 ? '' : tuUd('<p class="pd-nota">Saque la cuenta de su sueldo en la calculadora (2.4) y aquí verá su parte del daño ambiental contra el ISR que paga. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>', '<p class="pd-nota">Saca la cuenta de tu sueldo en la calculadora (2.4) y aquí verás tu parte del daño ambiental contra el ISR que pagas. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>')) +
@@ -2058,7 +2058,7 @@
     }
     capMontar(raiz, 'ambiente', [
       { ico: '🌎', tit: 'El reloj en vivo', cifra: pdPesos(porSeg), cifraPie: 'de daño ambiental por segundo', estado: 'derivado', res: tuUd('Lo que el país pierde mientras usted lee.', 'Lo que el país pierde mientras lees.') },
-      { ico: '🧍', tit: 'Su estado de cuenta ecológico', cifra: amNum(kgAnio, 0) + ' kg', cifraPie: 'de basura al año por persona', estado: 'derivado', res: 'Su basura y su parte del daño, contra su ISR.' },
+      { ico: '🧍', tit: 'Tu estado de cuenta ecológico', cifra: amNum(kgAnio, 0) + ' kg', cifraPie: 'de basura al año por persona', estado: 'derivado', res: 'Tu basura y tu parte del daño, contra tu ISR.' },
       { ico: '🗑️', tit: 'La basura', cifra: amNum(R.rellenosSanitarios.pct, 1) + ' %', cifraPie: 'llega a un relleno sanitario', estado: 'oficial', res: 'Un servicio municipal sin partida federal, y las concesiones.' },
       { ico: '💸', tit: 'Protección contra daño', cifra: '× ' + amNum(gpa.ratio_dano_sobre_gasto, 2), cifraPie: 'el daño contra lo que se gasta en proteger', estado: 'derivado', res: 'El presupuesto ambiental 2026 y el proyecto 2027.' },
       { ico: '🏗️', tit: 'La huella de las megaobras', cifra: '', cifraPie: 'en integración', estado: 'pendiente', res: 'Lo que cada obra reconoce en su permiso ambiental.' },
@@ -2947,7 +2947,7 @@
     }
     const pm = v => '$' + (v / total * 1000).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return [
-      { ico: '🧾', tit: 'Su parte', cifra: pm(L.aprobado) + ' y ' + pm(J.aprobado), cifraPie: 'de cada $1,000 del gasto federal', estado: 'derivado',
+      { ico: '🧾', tit: 'Tu parte', cifra: pm(L.aprobado) + ' y ' + pm(J.aprobado), cifraPie: 'de cada $1,000 del gasto federal', estado: 'derivado',
         res: tuUd('Cuánto de lo que usted paga llega al Congreso y cuánto a la Judicatura.', 'Cuánto de lo que pagas llega al Congreso y cuánto a la Judicatura.') },
       { ico: '🏛️', tit: 'Los dos Poderes en 2026', cifra: pdMdp(L.aprobado + J.aprobado), cifraPie: 'aprobados entre ambos', estado: 'derivado',
         res: 'Lo que la Cámara aprobó a cada uno, y lo que le recortó al Poder Judicial.' },
@@ -3764,7 +3764,7 @@
           tuUd('<span class="cc-vivo-et">Desde que usted abrió esta página, el país lleva</span>', '<span class="cc-vivo-et">Desde que abriste esta página, el país lleva</span>') +
           '<span class="cc-vivo-num cc-vivo" id="ccVivoTotal" data-rate="' + totalSeg + '">+$0.00</span>' +
           '<span class="cc-vivo-sub">entre deuda nueva, intereses, pérdida operativa y montos observados ' +
-            '· <b>' + ccPesosFinos(totalSeg) + ' por segundo</b> · su parte: ' +
+            '· <b>' + ccPesosFinos(totalSeg) + ' por segundo</b> · tu parte: ' +
             '<b class="cc-vivo" data-rate="' + (totalSeg / (den.millones * 1000000)) + '">+$0.00</b></span>' +
         '</div>' +
 
@@ -3794,15 +3794,15 @@
         '</div>' +
 
         (res && res.ano.neto > 0
-          ? '<p class="cc-rel-personal"><strong>Puesto junto a lo suyo.</strong> Su parte de estas cuatro cuentas ' +
+          ? '<p class="cc-rel-personal"><strong>Puesto junto a lo tuyo.</strong> Tu parte de estas cuatro cuentas ' +
             'es <strong>' + ccPesos(totalPersona) + ' al año</strong>. Con el ingreso neto de ' +
             ccPesos(res.ano.neto) + ' anuales que arrojó el bloque 2, equivale a <strong>' +
             (totalPersona / (res.ano.neto / 365)).toFixed(1) + tuUd(' días</strong> de todo lo que usted gana; ', ' días</strong> de todo lo que ganas; ') +
-            'y frente a los ' + ccPesos(res.ano.isr) + ' que paga de impuesto sobre la renta, es <strong>' +
-            (res.ano.isr > 0 ? (totalPersona / res.ano.isr).toFixed(2) + ' veces' : 'una cifra sin comparación posible, porque no paga ISR') +
+            'y frente a los ' + ccPesos(res.ano.isr) + ' que pagas de impuesto sobre la renta, es <strong>' +
+            (res.ano.isr > 0 ? (totalPersona / res.ano.isr).toFixed(2) + ' veces' : 'una cifra sin comparación posible, porque no pagas ISR') +
             '</strong> esa cantidad.</p>'
-          : '<p class="cc-rel-personal cc-rel-personal-vacia">Saque la cuenta en el bloque 1 y esta línea ' +
-            'dirá a cuántos días de <em>su</em> ingreso equivale su parte de estas cuatro cuentas.</p>') +
+          : '<p class="cc-rel-personal cc-rel-personal-vacia">Saca la cuenta en el bloque 1 y esta línea ' +
+            'dirá a cuántos días de <em>tu</em> ingreso equivale tu parte de estas cuatro cuentas.</p>') +
 
         '<div class="cc-sobrecosto">' +
           '<h4 class="cc-sob-tit">🧱 Y aparte, lo ya gastado de más</h4>' +
@@ -3812,6 +3812,8 @@
         '</div>' +
 
         '<p class="cc-fuente">' + rel.nota + '</p>' +
+        (esAuditor() ? '<p class="cc-fuente">Para repartir entre personas: ' + ccPar().poblacion.millones + ' millones de habitantes ' + chipEstado(ccPar().poblacion.estado) +
+          ' y ' + ccPar().padron.millones + ' millones de contribuyentes ' + chipEstado(ccPar().padron.estado) + '. Ninguno de los dos se ha cotejado todavía en su documento oficial; el detalle está en «De dónde sale cada número».</p>' : '') +
       '</section>';
 
     ccSeg('ccCadencia', ccDatos().cadencias, state.cc.relojCadencia, 'ccFijarCadencia');
@@ -3895,12 +3897,12 @@
                'la subpestaña 1.1, con sus montos. El porcentaje de cada uno se obtiene dividiendo su monto ' +
                'entre la suma de los ocho', 'oficial', vsxRefLink('ref-pef2026')) +
           fila('El cálculo desde el neto', tuUd('Cuando usted escribe lo que recibe en lugar de lo que gana, el ', 'Cuando escribes lo que recibes en lugar de lo que ganas, el ') +
-               'bruto se busca por aproximaciones sucesivas hasta que el neto calculado coincide con el suyo. ' +
+               'bruto se busca por aproximaciones sucesivas hasta que el neto calculado coincide con el ' + tuUd('suyo', 'tuyo') + '. ' +
                'Se hace así porque la tarifa tiene once tramos, el subsidio un tope y la cuota obrera dos ' +
                'bases distintas: despejarla a mano daría una fórmula falsa', 'derivado') +
           fila('Los relojes', 'Cada uno toma una cifra anual de su documento y la divide entre los segundos del ' +
                tuUd('año. <strong>No miden un gasto que ocurra en el instante en que usted mira</strong>: ', 'año. <strong>No miden un gasto que ocurra en el instante en que miras</strong>: ') +
-               'proyectan un ritmo anual sobre el tiempo que lleva en esta página', 'derivado') +
+               'proyectan un ritmo anual sobre el tiempo que ' + tuUd('lleva', 'llevas') + ' en esta página', 'derivado') +
           fila('El poblacional', p.poblacion.fuente, p.poblacion.estado,
                '<em>' + p.poblacion.pendiente + '</em>') +
           fila('El padrón de contribuyentes', p.padron.fuente, p.padron.estado,
@@ -19774,7 +19776,7 @@
           '<button type="button" class="cee-atajo" onclick="window.AuditEngine.ceeEscenario(\'espejismo\')">Crece el PIB, crece el daño</button>' +
           '<button type="button" class="cee-atajo" onclick="window.AuditEngine.ceeEscenario(\'limpio\')">Crece el PIB, baja el daño</button>' +
         '</div>' +
-        '<p class="cee-sim-honesto"><strong>Qué hace y qué no hace este simulador.</strong> No predice nada ni estima cifras: toma el año ' + c.ejercicio + ' como base real y aplica la misma resta del INEGI a las participaciones que usted elige. El crecimiento del PINE se obtiene comparando el resultado contra el PINE de ' + c.ejercicio + '. Es aritmética de cuentas nacionales, no un modelo econométrico.</p>' +
+        '<p class="cee-sim-honesto"><strong>Qué hace y qué no hace este simulador.</strong> No predice nada ni estima cifras: toma el año ' + c.ejercicio + ' como base real y aplica la misma resta del INEGI a las participaciones que tú eliges. El crecimiento del PINE se obtiene comparando el resultado contra el PINE de ' + c.ejercicio + '. Es aritmética de cuentas nacionales, no un modelo econométrico.</p>' +
       '</section>';
 
     ['ceeGrow', 'ceeCtada', 'ceeCcf'].forEach(id => {
@@ -26582,7 +26584,7 @@
       fuente: 'Presupuesto de Egresos de la Federación 2026, ' + e.clave + '. ' + e.ley + '.',
       acciones: [
         { txt: '📉 Ver el costo financiero en el Panorama del Erario', fn: function () { scAbrirFlujo('egresos', 'egresosChart', 'egr-costofin'); } },
-        { txt: '🧮 Calcular su parte de los intereses en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora', 'cc-b4'); } }
+        { txt: '🧮 Calcular tu parte de los intereses en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora', 'cc-b4'); } }
       ]
     };
   }

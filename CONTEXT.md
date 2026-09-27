@@ -3204,6 +3204,32 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (la población del CONAPO pasa a pendiente; restos de «usted»)
+
+Sello 20260927z. Al revisar una nota de Antigravity sobre las cifras que
+no se estiman apareció una incongruencia real: la población de 134.4
+millones llevaba chip **oficial** aunque su propia nota decía que nunca se
+había cotejado en el cuadro del CONAPO. Se volvió a intentar: el portal
+del CONAPO devuelve un reto de JavaScript y la base abierta da 404. Pasa a
+**pendiente**, como el padrón de 63.2 millones.
+- Bajo el reloj de la calculadora, una línea dice con qué divisores se
+  reparte «por habitante» y «por contribuyente», cada uno con su chip.
+- El ticket ambiental avisa que la población está pendiente de cotejo.
+- Barrido de trato de tú en todas las pestañas, leyendo también el texto
+  oculto: se corrigieron «su parte» (reloj, tarjetas, ticket ambiental),
+  «que paga», «Saque la cuenta», «Su estado de cuenta ecológico», «entre
+  su ingreso» (comparador salarial) y «que usted elige» (simulador de las
+  Cuentas Ecológicas). Los «su» que quedan son de tercera persona.
+
+**La nota de Antigravity (27-09-2026), cotejada:** no subió nada a la rama;
+editó CONTEXT.md solo en su copia local y con saltos CRLF (aquí es LF).
+Dos afirmaciones no corresponden al auditor: dice que las obras con estados
+financieros son Tren Maya, Dos Bocas y Megafarmacia, y son **Tren Maya, AIFA
+y FOBAPROA** (`simulador_megaobras.operacion_oficial`); y habla de un
+sobrecosto de +460.1 % del AIFA que no existe en el código actual. El resto
+(nueve megaobras sin pérdida, FOBAPROA 1998-2013, padrón y calendario de
+publicaciones) coincide con esta lista de pendientes.
+
 ### Hecho (huachicol fiscal: el plan de Antigravity, cotejado con la ley)
 
 Antigravity entregó (27-09-2026) una investigación con propuestas para
@@ -3430,7 +3456,7 @@ auditor, por tipo:
    Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** pérdida de nueve megaobras, costo
    del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
-   por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del
+   nacional (134.4 millones, sin cotejar en su cuadro) y por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
    en el control de importaciones de combustibles (daría un expediente con
