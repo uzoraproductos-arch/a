@@ -3506,6 +3506,554 @@ window.AUDIT_DB = {
     }
    }
   },
+  "inspector_poderes": {
+   "nota": "Órganos de los poderes Legislativo y Judicial con presupuesto propio, abiertos como entes del Modo Inspector. Millones de pesos, sumados por unidad responsable desde los datos abiertos de Hacienda; auditorías de la ASF transcritas de la Matriz de Datos Básicos de la CP 2024 (p. 31), en pesos.",
+   "fuentes": {
+    "cp2024": {
+     "ref": "ref-shcp-cp2024-datos",
+     "corto": "SHCP, Cuenta Pública 2024, datos abiertos",
+     "sha256": "94cd87dfb1f0dbcb27886d5792046c9c6d96eeab2878f898c8a9813ef1fdf6de"
+    },
+    "cp2025": {
+     "ref": "ref-shcp-cp2025-datos",
+     "corto": "SHCP, Cuenta Pública 2025, datos abiertos",
+     "sha256": "973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0"
+    },
+    "av2026": {
+     "ref": "ref-shcp-avance-2t2026",
+     "corto": "SHCP, avance del gasto al 2.º trimestre de 2026",
+     "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511"
+    },
+    "asf2024": {
+     "ref": "ref-asf-mdb2024",
+     "corto": "ASF, Matriz de Datos Básicos CP 2024, p. 31",
+     "sha256": "49732c8da82eaafc6bdd67b0b0ce5c995773294d7e48e5412ad73e5c4fe15d66"
+    },
+    "cnijf": {
+     "ref": "ref-inegi-cnijfe2025-rr",
+     "corto": "INEGI, CNIJF-E 2025, p. 13",
+     "sha256": "5dfdd93b437885a370fb9f03d988b99ba191be16986828ab4be008709881dee3"
+    },
+    "cnije": {
+     "ref": "ref-inegi-cnijfe2025-rr",
+     "corto": "INEGI, CNIJF-E 2025, p. 14",
+     "sha256": "5dfdd93b437885a370fb9f03d988b99ba191be16986828ab4be008709881dee3"
+    },
+    "cnple": {
+     "ref": "ref-inegi-cnple2025",
+     "corto": "INEGI, CNPLE 2025, p. 11"
+    },
+    "scjn2025": {
+     "ref": "ref-scjn-cierre2025",
+     "corto": "SCJN, estado analítico enero-diciembre 2025, p. 1"
+    },
+    "scjn2026": {
+     "ref": "ref-scjn-trim2-2026",
+     "corto": "SCJN, estado analítico enero-junio 2026, p. 1"
+    },
+    "lfrcf": {
+     "ref": "ref-lfrcf",
+     "corto": "Ley de Fiscalización y Rendición de Cuentas de la Federación, art. 104"
+    },
+    "asfCongresos": {
+     "Congreso de Nuevo León": "ref-asf-cp2024-congreso-nl",
+     "Congreso de Tlaxcala": "ref-asf-cp2024-congreso-tlax"
+    }
+   },
+   "poderDeEnte": {
+    "legislativo": "legislativo",
+    "judicial": "judicial",
+    "ine": "autonomo",
+    "cndh": "autonomo",
+    "inegi": "autonomo",
+    "cofece": "autonomo",
+    "ift": "autonomo",
+    "inai": "autonomo",
+    "fgr": "autonomo",
+    "tribunales-agrarios": "autonomo",
+    "tfja": "autonomo"
+   },
+   "organos": [
+    {
+     "id": "diputados",
+     "padre": "legislativo",
+     "poder": "legislativo",
+     "ramo": "01",
+     "ur": [
+      "100"
+     ],
+     "nombre": "Cámara de Diputados",
+     "icono": "🏛️",
+     "tipo": "Órgano del Poder Legislativo · UR 100",
+     "cp2025": {
+      "original": 9602.7,
+      "modificado": 9926.9,
+      "devengado": 9926.9,
+      "pagado": 9926.9,
+      "ejercido": 9926.9
+     },
+     "av2026": {
+      "aprobado": 9602.7,
+      "modificado": 9602.7,
+      "calendarioAlCorte": 7295.1,
+      "pagado": 3908.7
+     },
+     "cp2024": {
+      "original": 8982.9,
+      "modificado": 9371.7,
+      "devengado": 9371.7,
+      "pagado": 9371.7,
+      "ejercido": 9371.7
+     },
+     "asf": [
+      {
+       "num": 31,
+       "titulo": "Gestión Financiera",
+       "tipo": "De Cumplimiento",
+       "entrega": 2,
+       "repr": 95.66,
+       "res": [
+        0,
+        0
+       ],
+       "acc": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "recuperaciones": 0.0,
+       "porAclarar": 0.0
+      }
+     ]
+    },
+    {
+     "id": "senado",
+     "padre": "legislativo",
+     "poder": "legislativo",
+     "ramo": "01",
+     "ur": [
+      "200"
+     ],
+     "nombre": "Cámara de Senadores",
+     "icono": "🏛️",
+     "tipo": "Órgano del Poder Legislativo · UR 200",
+     "cp2025": {
+      "original": 5103.8,
+      "modificado": 5335.9,
+      "devengado": 5335.9,
+      "pagado": 5241.9,
+      "ejercido": 5335.9
+     },
+     "av2026": {
+      "aprobado": 5103.8,
+      "modificado": 5103.8,
+      "calendarioAlCorte": 3196.4,
+      "pagado": 2187.2
+     },
+     "cp2024": {
+      "original": 4955.2,
+      "modificado": 5045.7,
+      "devengado": 5045.7,
+      "pagado": 4978.8,
+      "ejercido": 5045.7
+     },
+     "asf": [
+      {
+       "num": 32,
+       "titulo": "Gestión Financiera",
+       "tipo": "De Cumplimiento",
+       "entrega": 2,
+       "repr": 85.28,
+       "res": [
+        2,
+        0
+       ],
+       "acc": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "recuperaciones": 0.0,
+       "porAclarar": 0.0
+      }
+     ]
+    },
+    {
+     "id": "asf",
+     "padre": "legislativo",
+     "poder": "legislativo",
+     "ramo": "01",
+     "ur": [
+      "101"
+     ],
+     "nombre": "Auditoría Superior de la Federación",
+     "icono": "🔍",
+     "tipo": "Órgano técnico de la Cámara de Diputados · UR 101",
+     "cp2025": {
+      "original": 2822.6,
+      "modificado": 3356.8,
+      "devengado": 3356.8,
+      "pagado": 3356.8,
+      "ejercido": 3356.8
+     },
+     "av2026": {
+      "aprobado": 2822.6,
+      "modificado": 3371.0,
+      "calendarioAlCorte": 1837.2,
+      "pagado": 1338.5
+     },
+     "cp2024": {
+      "original": 2822.6,
+      "modificado": 3329.3,
+      "devengado": 3329.3,
+      "pagado": 3329.3,
+      "ejercido": 3329.3
+     },
+     "asf": [],
+     "nota": "La ASF no se audita a sí misma. La ley encarga revisar su gasto a la Unidad de Evaluación y Control de la Comisión de Vigilancia de la Cámara de Diputados, que puede practicar auditorías por sí o con auditores externos (art. 104, fr. II, de la Ley de Fiscalización y Rendición de Cuentas de la Federación).",
+     "asfNoAplica": "uec"
+    },
+    {
+     "id": "scjn",
+     "padre": "judicial",
+     "poder": "judicial",
+     "ramo": "03",
+     "ur": [
+      "100"
+     ],
+     "nombre": "Suprema Corte de Justicia de la Nación",
+     "icono": "⚖️",
+     "tipo": "Órgano del Poder Judicial · UR 100",
+     "cp2025": {
+      "original": 5208.5,
+      "modificado": 5273.8,
+      "devengado": 5273.8,
+      "pagado": 5032.1,
+      "ejercido": 5273.8
+     },
+     "av2026": {
+      "aprobado": 5208.7,
+      "modificado": 5208.7,
+      "calendarioAlCorte": 2701.3,
+      "pagado": 1939.1
+     },
+     "cp2024": {
+      "original": 5787.2,
+      "modificado": 5792.3,
+      "devengado": 5665.8,
+      "pagado": 5352.4,
+      "ejercido": 5665.8
+     },
+     "asf": [
+      {
+       "num": 425,
+       "titulo": "Gestión Financiera",
+       "tipo": "De Cumplimiento",
+       "entrega": 1,
+       "repr": 92.81,
+       "res": [
+        3,
+        0
+       ],
+       "acc": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+       ],
+       "recuperaciones": 8133300.0,
+       "porAclarar": 0.0
+      }
+     ],
+     "cotejos": [
+      {
+       "tema": "Gasto ejercido en 2024",
+       "a": [
+        "Cuenta Pública 2024 (Hacienda)",
+        5665.8,
+        "cp2024"
+       ],
+       "b": [
+        "Censo del INEGI (lo reporta el propio órgano)",
+        5665.8,
+        "cnijf"
+       ],
+       "tol": 0.15,
+       "nota": ""
+      },
+      {
+       "tema": "Pagado en 2025",
+       "a": [
+        "Cuenta Pública 2025 (Hacienda)",
+        5032.1,
+        "cp2025"
+       ],
+       "b": [
+        "Estado analítico de la propia Corte, enero-diciembre",
+        5032.1,
+        "scjn2025"
+       ],
+       "tol": 0.15,
+       "nota": ""
+      },
+      {
+       "tema": "Devengado en 2025",
+       "a": [
+        "Cuenta Pública 2025 (Hacienda)",
+        5273.8,
+        "cp2025"
+       ],
+       "b": [
+        "Estado analítico de la propia Corte, enero-diciembre",
+        5273.8,
+        "scjn2025"
+       ],
+       "tol": 0.15,
+       "nota": ""
+      },
+      {
+       "tema": "Pagado de enero a junio de 2026",
+       "a": [
+        "Avance del gasto de Hacienda al 30 de junio",
+        1939.1,
+        "av2026"
+       ],
+       "b": [
+        "Estado analítico de la propia Corte, enero-junio",
+        2101.3,
+        "scjn2026"
+       ],
+       "tol": 0.15,
+       "nota": "Hacienda consolida lo que cada ente le reporta y puede registrar un pago en una fecha distinta a la del ente. Aun así, el corte es el mismo: la Corte debería poder conciliar las dos cifras."
+      }
+     ]
+    },
+    {
+     "id": "oaj",
+     "padre": "judicial",
+     "poder": "judicial",
+     "ramo": "03",
+     "ur": [
+      "110",
+      "120"
+     ],
+     "nombre": "Órgano de Administración Judicial (antes Consejo de la Judicatura Federal)",
+     "icono": "🏢",
+     "tipo": "Órgano del Poder Judicial · UR 110 y 120",
+     "cp2025": {
+      "original": 62025.5,
+      "modificado": 73388.5,
+      "devengado": 73386.7,
+      "pagado": 69412.8,
+      "ejercido": 73386.7
+     },
+     "av2026": {
+      "aprobado": 59190.8,
+      "modificado": 59190.8,
+      "calendarioAlCorte": 30541.0,
+      "pagado": 24963.3
+     },
+     "cp2024": {
+      "original": 68917.3,
+      "modificado": 70055.5,
+      "devengado": 69219.5,
+      "pagado": 67049.1,
+      "ejercido": 69219.5
+     },
+     "asf": [
+      {
+       "num": 108,
+       "titulo": "Erogaciones por Adquisición de Bienes y Prestación de Servicios",
+       "tipo": "De Cumplimiento Forense",
+       "entrega": 2,
+       "repr": 30.83,
+       "res": [
+        0,
+        5
+       ],
+       "acc": [
+        11,
+        0,
+        1,
+        0,
+        11,
+        11,
+        34
+       ],
+       "recuperaciones": 0.0,
+       "porAclarar": 272437500.0
+      }
+     ],
+     "nota": "La reforma judicial publicada en el DOF el 15 de septiembre de 2024 extinguió al Consejo de la Judicatura Federal y repartió sus funciones entre el Órgano de Administración Judicial y el Tribunal de Disciplina Judicial. En la Cuenta Pública 2025 conviven las dos unidades: la 110 (el Consejo, mientras existió) y la 120 (el Órgano). Aquí se suman para no partir en dos el mismo aparato administrativo.",
+     "cotejos": [
+      {
+       "tema": "Gasto ejercido en 2024",
+       "a": [
+        "Cuenta Pública 2024 (Hacienda)",
+        69219.5,
+        "cp2024"
+       ],
+       "b": [
+        "Censo del INEGI (lo reporta el propio órgano)",
+        72090.0,
+        "cnijf"
+       ],
+       "tol": 0.15,
+       "nota": "El INEGI advierte que su cifra incluye al Instituto Federal de Defensoría Pública. En la Cuenta Pública el Ramo 03 de 2024 sólo tiene cuatro unidades y el Instituto no aparece por separado: su gasto ya está dentro del del Consejo, así que no explica la diferencia."
+      }
+     ]
+    },
+    {
+     "id": "tepjf",
+     "padre": "judicial",
+     "poder": "judicial",
+     "ramo": "03",
+     "ur": [
+      "210",
+      "211"
+     ],
+     "nombre": "Tribunal Electoral del Poder Judicial de la Federación",
+     "icono": "🗳️",
+     "tipo": "Órgano del Poder Judicial · UR 210 y 211",
+     "cp2025": {
+      "original": 3749.6,
+      "modificado": 3393.1,
+      "devengado": 3385.0,
+      "pagado": 3262.6,
+      "ejercido": 3385.0
+     },
+     "av2026": {
+      "aprobado": 3749.5,
+      "modificado": 3749.5,
+      "calendarioAlCorte": 1966.2,
+      "pagado": 1064.8
+     },
+     "cp2024": {
+      "original": 3622.8,
+      "modificado": 3646.5,
+      "devengado": 3625.7,
+      "pagado": 3495.9,
+      "ejercido": 3625.7
+     },
+     "asf": [
+      {
+       "num": 430,
+       "titulo": "Erogaciones por Adquisición de Bienes y Prestación de Servicios",
+       "tipo": "De Cumplimiento Forense",
+       "entrega": 3,
+       "repr": 31.24,
+       "res": [
+        0,
+        7
+       ],
+       "acc": [
+        5,
+        0,
+        4,
+        0,
+        5,
+        6,
+        20
+       ],
+       "recuperaciones": 0.0,
+       "porAclarar": 12137400.0
+      }
+     ],
+     "nota": "Suma de la Sala Superior (UR 210) y las Salas Regionales (UR 211).",
+     "cotejos": [
+      {
+       "tema": "Gasto ejercido en 2024",
+       "a": [
+        "Cuenta Pública 2024 (Hacienda)",
+        3625.7,
+        "cp2024"
+       ],
+       "b": [
+        "Censo del INEGI (lo reporta el propio órgano)",
+        3625.7,
+        "cnijf"
+       ],
+       "tol": 0.15,
+       "nota": "El INEGI incluye a la Defensoría Pública Electoral; la Cuenta Pública la trae dentro de las dos unidades del Tribunal."
+      }
+     ]
+    },
+    {
+     "id": "tdj",
+     "padre": "judicial",
+     "poder": "judicial",
+     "ramo": "03",
+     "ur": [
+      "300"
+     ],
+     "nombre": "Tribunal de Disciplina Judicial",
+     "icono": "📜",
+     "tipo": "Órgano del Poder Judicial · UR 300",
+     "cp2025": {
+      "original": 0.0,
+      "modificado": 241.2,
+      "devengado": 241.2,
+      "pagado": 230.8,
+      "ejercido": 241.2
+     },
+     "av2026": {
+      "aprobado": 1856.6,
+      "modificado": 1856.6,
+      "calendarioAlCorte": 1039.7,
+      "pagado": 1047.8
+     },
+     "cp2024": null,
+     "asf": [],
+     "nota": "Nació con la reforma judicial de 2024 y empezó a operar en 2025: no tiene gasto en la Cuenta Pública 2024 ni, por lo tanto, auditorías de la ASF sobre ese año.",
+     "asfNoAplica": "nuevo"
+    }
+   ],
+   "judicialesEstatales2024": {
+    "CDMX": 8222.6,
+    "MÉX": 6196.8,
+    "CHIH": 3370.9,
+    "NL": 3130.2,
+    "JAL": 2533.8,
+    "GTO": 2290.6,
+    "VER": 2193.9,
+    "BC": 1950.8,
+    "PUE": 1744.4,
+    "SON": 1693.2,
+    "MICH": 1649.0,
+    "QRO": 1608.9,
+    "COAH": 1500.2,
+    "SLP": 1321.5,
+    "OAX": 1171.9,
+    "CHIS": 1167.1,
+    "TAM": 1155.2,
+    "GRO": 1065.7,
+    "MOR": 951.8,
+    "QROO": 891.2,
+    "TAB": 882.5,
+    "YUC": 855.6,
+    "SIN": 851.3,
+    "AGS": 772.9,
+    "HGO": 761.0,
+    "NAY": 669.1,
+    "ZAC": 656.1,
+    "TLAX": 563.7,
+    "DGO": 542.4,
+    "BCS": 507.6,
+    "CAM": 333.3,
+    "COL": 311.1
+   }
+  },
   "estados": [
     {
       "abbr": "AGS",
@@ -9186,6 +9734,51 @@ window.AUDIT_DB = {
       "cita_apa": "Instituto Nacional para el Federalismo y el Desarrollo Municipal. (2025). Presidentas y presidentes municipales [conjunto de datos]. datos.gob.mx.",
       "url": "https://www.datos.gob.mx/dataset/presidentas_presidentes_municipales",
       "descripcion": "Quién encabeza cada ayuntamiento, con qué partido, coalición o sistema normativo llegó y el periodo de su gobierno. La versión consultada registra, en casi todos los municipios, a la administración que gobernó la mayor parte de 2024, no a la que entró en el otoño de ese año. Huella SHA-256 del archivo: 919f5ceaa81e3a4d64f846c5603271284d6f4b813e879b786139206f93bc9e99."
+    },
+    {
+      "num": 114,
+      "id": "ref-inegi-cnijfe2025-rr",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025, 6 de noviembre). Censo Nacional de Impartición de Justicia Federal y Estatal (CNIJF-E) 2025: reporte de resultados 43/25. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/programas/cnije/2025/doc/cnije_2025_resultados.pdf",
+      "descripcion": "Presupuesto que ejercieron en 2024 la Suprema Corte ($5,665.8 millones), el Tribunal Electoral ($3,625.7 millones) y el Consejo de la Judicatura Federal ($72,090.0 millones), en la gráfica 6 (p. 13), y el de cada uno de los 32 poderes judiciales estatales, que suman $53,516.3 millones, en la gráfica 7 (p. 14). Lo reporta cada órgano al INEGI. Huella SHA-256 del archivo: 5dfdd93b437885a370fb9f03d988b99ba191be16986828ab4be008709881dee3."
+    },
+    {
+      "num": 115,
+      "id": "ref-scjn-cierre2025",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2026). Estado analítico del ejercicio del presupuesto de egresos, enero-diciembre de 2025. SCJN.",
+      "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-01/Estado-Analitico-Ejercicio-Presupuesto-2025-Trim-04.pdf",
+      "descripcion": "El cierre de 2025 que publica la propia Corte, por capítulo de gasto: $5,273.8 millones modificados y devengados y $5,032.1 millones pagados (p. 1). Coincide peso por peso con lo que Hacienda consolidó en la Cuenta Pública."
+    },
+    {
+      "num": 116,
+      "id": "ref-scjn-trim2-2026",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Suprema Corte de Justicia de la Nación. (2026). Estado analítico del ejercicio del presupuesto de egresos, enero-junio de 2026. SCJN.",
+      "url": "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-07/Estado-Analitico-Ejercicio-Presupuesto-2026-Trim-02.pdf",
+      "descripcion": "Lo que la Corte reporta haber devengado ($2,503.7 millones) y pagado ($2,101.3 millones) en el primer semestre de 2026 (p. 1). Hacienda, con el mismo corte, le registra $1,939.1 millones pagados."
+    },
+    {
+      "num": 117,
+      "id": "ref-asf-cp2024-congreso-nl",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. Informe individual de la auditoría 2024-1402: Congreso del Estado de Nuevo León. Fiscalización Superior de la Cuenta Pública 2024, tercera entrega.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1402_a.pdf",
+      "descripcion": "Revisión de las participaciones federales que ejerció el Congreso de Nuevo León en 2024: universo y muestra de $233.0 millones (p. 1) y $4.5 millones por aclarar (p. 26)."
+    },
+    {
+      "num": 118,
+      "id": "ref-asf-cp2024-congreso-tlax",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. Informe individual de la auditoría 2024-1940: Congreso del Estado de Tlaxcala. Fiscalización Superior de la Cuenta Pública 2024, tercera entrega.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1940_a.pdf",
+      "descripcion": "Revisión de las participaciones federales que ejerció el Congreso de Tlaxcala en 2024: universo y muestra de $151.9 millones (p. 1) y $5.0 millones recuperados, con cargas financieras (p. 29)."
     },
     {
       "num": 99,

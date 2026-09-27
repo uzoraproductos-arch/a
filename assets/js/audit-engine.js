@@ -22594,15 +22594,31 @@
     return R && R.fuentes[k] ? vsxRefLink(R.fuentes[k].ref) : '';
   }
 
+  /* Los tres poderes y los autonomos. Los tribunales agrario y de justicia
+     administrativa no son del Poder Judicial: van con los autonomos. */
+  const INSP_PODERES = {
+    ejecutivo:   { et: 'Poder Ejecutivo',   ico: '🦅' },
+    legislativo: { et: 'Poder Legislativo', ico: '🏛️' },
+    judicial:    { et: 'Poder Judicial',    ico: '⚖️' },
+    autonomo:    { et: 'Autónomos',         ico: '🛡️' }
+  };
+
   function inspEntes(nivel) {
     if (inspCacheEntes[nivel]) return inspCacheEntes[nivel];
     const E = DB.estados || [];
     let out = [];
     if (nivel === 'federal') {
-      const F = DB.inspector_federal;
-      out = (F ? F.entes : []).map(f => ({ nivel: 'federal', id: f.id, nombre: f.nombre, icono: f.icono,
+      const F = DB.inspector_federal, P = DB.inspector_poderes;
+      const poderDe = (P && P.poderDeEnte) || {};
+      const organos = (P && P.organos) || [];
+      const fila = (f, poder) => ({ nivel: 'federal', id: f.id, nombre: f.nombre, icono: f.icono, poder: poder,
         sub: f.tipo + ' · Ramo ' + f.ramo,
-        buscar: (f.nombre + ' ' + f.id + ' ramo ' + f.ramo + ' ' + f.tipo).toLowerCase(), fed: f }));
+        buscar: (f.nombre + ' ' + f.id + ' ramo ' + f.ramo + ' ' + f.tipo + ' ' + INSP_PODERES[poder].et).toLowerCase(), fed: f });
+      /* Cada poder de la Union va seguido de los organos que lo integran */
+      (F ? F.entes : []).forEach(f => {
+        out.push(fila(f, poderDe[f.id] || 'ejecutivo'));
+        organos.filter(o => o.padre === f.id).forEach(o => out.push(fila(o, o.poder)));
+      });
     } else if (nivel === 'estatal') {
       out = E.map(e => ({ nivel: 'estatal', id: e.abbr, nombre: e.name, icono: '🗺️',
         sub: 'Gobierno de ' + e.name + ' · ' + e.partido + ' · ' + e.gobernador,
@@ -23039,13 +23055,27 @@
   /* --- Federal --- */
   function inspFedRef(k) {
     const F = DB.inspector_federal && DB.inspector_federal.fuentes;
-    return F && F[k] ? vsxRefLink(F[k].ref) : '';
+    const P = DB.inspector_poderes && DB.inspector_poderes.fuentes;
+    const x = (F && F[k]) || (P && P[k]);
+    return x && x.ref ? vsxRefLink(x.ref) : '';
   }
 
   /* Suma, sector por sector, lo que la Matriz de la ASF registra para el
      ente. Se excluye el grupo «Gasto Federalizado»: ahi «Salud» o
      «Educacion» son fondos que ejercen los estados, no la secretaria. */
   function inspFedAsf(f) {
+    if (Array.isArray(f.asf)) {
+      if (!f.asf.length) return null;
+      const s = { auditorias: f.asf.length, acciones: 0, PO: 0, recuperaciones: 0, porAclarar: 0, grupos: [], propias: true };
+      f.asf.forEach(a => {
+        s.acciones += a.acc[6];
+        s.PO += a.acc[5];
+        s.recuperaciones += a.recuperaciones;
+        s.porAclarar += a.porAclarar;
+        s.grupos.push('auditoría ' + a.num + ', «' + a.titulo + '» (' + a.tipo + ')');
+      });
+      return s;
+    }
     const C = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024;
     if (!C || !f.asfSectores || !f.asfSectores.length) return null;
     const s = { auditorias: 0, acciones: 0, PO: 0, recuperaciones: 0, porAclarar: 0, grupos: [] };
@@ -23073,7 +23103,15 @@
     /* 1. ¿Gasto lo que aprobo la Camara? */
     const desvio = cp.original ? (cp.ejercido / cp.original - 1) * 100 : 0;
     const d1 = Math.abs(desvio);
-    out.push({
+    if (!cp.original && cp.ejercido > 0) {
+      out.push({
+        k: 'aprobado', ico: '🏛️', q: '¿Gastó lo que aprobó la Cámara de Diputados?', e: 'alerta',
+        v: 'Sin presupuesto aprobado por la Cámara',
+        d: 'El Presupuesto de Egresos de 2025 no le asignó nada: todavía no existía cuando se votó. Los ' + simMdp(cp.ejercido) +
+           ' que ejerció le llegaron por adecuaciones que autoriza Hacienda (Ley Federal de Presupuesto, art. 58), sin pasar por el voto de los diputados.',
+        f: inspFedRef('cp2025')
+      });
+    } else out.push({
       k: 'aprobado', ico: '🏛️', q: '¿Gastó lo que aprobó la Cámara de Diputados?',
       e: d1 > U.desvioGrave ? 'grave' : d1 > U.desvioAlerta ? 'alerta' : 'ok',
       v: inspPctTxt(desvio) + ' frente a lo aprobado',
@@ -23090,7 +23128,13 @@
     let e2 = av ? 'ok' : 'alerta';
     if (asf) {
       partes.push('La Auditoría Superior le practicó ' + asf.auditorias + ' auditoría' + (asf.auditorias === 1 ? '' : 's') +
-        ' en la Cuenta Pública 2024' + inspFedRef('asf2024') + '.');
+        (asf.propias ? ' a su nombre' : '') + ' en la Cuenta Pública 2024' + inspFedRef('asf2024') + '.');
+    } else if (f.asfNoAplica === 'uec') {
+      partes.push('La Auditoría Superior no se audita a sí misma: su gasto lo revisa la Unidad de Evaluación y Control de la Comisión de Vigilancia ' +
+        'de la Cámara de Diputados, por sí o con auditores externos (art. 104, fr. II, de la Ley de Fiscalización' + inspFedRef('lfrcf') + '). ' +
+        'Los resultados de esa revisión todavía no están integrados aquí.');
+    } else if (f.asfNoAplica === 'nuevo') {
+      partes.push('Empezó a operar en 2025: no tuvo Cuenta Pública 2024 que auditarle. Su primer año llegará con la fiscalización de la Cuenta Pública 2025.');
     } else {
       e2 = 'alerta';
       partes.push('En la Matriz de la Cuenta Pública 2024 no aparece un sector a su nombre: su gasto de ese año no ' +
@@ -23098,7 +23142,8 @@
     }
     out.push({
       k: 'cuentas', ico: '📒', q: '¿Rindió cuentas?', e: e2,
-      v: asf ? 'Reportó y fue auditado' : 'Reportó; sin auditoría a su nombre',
+      v: asf ? 'Reportó y fue auditado' : f.asfNoAplica === 'uec' ? 'Reportó; lo revisa la Cámara, no la ASF'
+        : f.asfNoAplica === 'nuevo' ? 'Reportó; aún sin año auditable' : 'Reportó; sin auditoría a su nombre',
       d: partes.join(' '), f: ''
     });
 
@@ -23131,23 +23176,45 @@
           ' que su calendario modificado marcaba de enero a junio: ' + ritmo.toFixed(1) + ' % de su propio calendario' + inspFedRef('av2026') + '.');
       }
     }
+    /* Cotejo entre documentos de emisores distintos sobre el mismo dinero:
+       Hacienda, el INEGI y lo que el propio organo publica. */
+    const coinciden = [];
+    (f.cotejos || []).forEach(c => {
+      const dif = c.b[1] - c.a[1];
+      if (Math.abs(dif) > c.tol) {
+        if (e3 === 'ok') e3 = 'alerta';
+        hall.push(c.tema + ': ' + c.a[0] + ' registra ' + inspMdp(c.a[1]) + inspFedRef(c.a[2]) + '; ' +
+          c.b[0] + ', ' + inspMdp(c.b[1]) + inspFedRef(c.b[2]) + '.');
+        inc.push(inspInc(c.tema, c.a[0], c.a[1], c.b[0], c.b[1], 'alerta', c.nota));
+      } else {
+        coinciden.push(c.tema.charAt(0).toLowerCase() + c.tema.slice(1) + ', ' + inspMdp(c.a[1]) + ' en ' + c.a[0] + inspFedRef(c.a[2]) +
+          ' y en ' + c.b[0] + inspFedRef(c.b[2]));
+      }
+    });
     out.push({
       k: 'cuadre', ico: '🧮', q: '¿Cuadran sus propias cifras?', e: e3,
       v: hall.length ? hall.length + (hall.length === 1 ? ' contradicción o desfase' : ' contradicciones o desfases') : 'Sin contradicciones',
-      d: hall.length ? hall.join(' ') : 'Lo ejercido no rebasa lo modificado, casi todo lo ejercido figura como pagado y en 2026 va al ritmo de su calendario.',
+      d: (hall.length ? hall.join(' ') : 'Lo ejercido no rebasa lo modificado, casi todo lo ejercido figura como pagado y en 2026 va al ritmo de su calendario.') +
+         (coinciden.length ? ' <b>Coinciden</b> ' + coinciden.join('; ') + '.' : ''),
       f: inspFedRef('cp2025'), inc: inc
     });
 
     /* 4. ¿Que encontro la ASF? */
     let e4 = 'sin', v4 = 'Sin sector en la Matriz', d4 = 'La Matriz de la Cuenta Pública 2024 no tiene un sector con este nombre.';
+    if (f.asfNoAplica) {
+      v4 = f.asfNoAplica === 'uec' ? 'No la audita la ASF' : 'No existía en 2024';
+      d4 = f.nota || '';
+    }
     if (asf) {
       e4 = asf.porAclarar <= 0 && asf.PO === 0 ? 'ok' : (asf.PO > 0 && asf.porAclarar >= 100e6 ? 'grave' : 'alerta');
       v4 = asf.porAclarar > 0 ? simMdp(asf.porAclarar / 1e6) + ' por aclarar' : 'Nada por aclarar';
-      d4 = 'En la Cuenta Pública 2024 la ASF le promovió ' + formatNumber(asf.acciones) + ' acciones, ' +
-        asf.PO + ' de ellas pliegos de observaciones; quedaron ' + simMdp(asf.porAclarar / 1e6) +
-        ' por aclarar y se recuperaron ' + simMdp(asf.recuperaciones / 1e6) + ' durante las auditorías. ' +
+      d4 = (asf.acciones
+        ? 'En la Cuenta Pública 2024 la ASF le promovió ' + formatNumber(asf.acciones) + ' acciones, ' +
+          asf.PO + ' de ellas pliegos de observaciones; quedaron ' + simMdp(asf.porAclarar / 1e6) + ' por aclarar'
+        : 'En la Cuenta Pública 2024 la ASF no le promovió acciones y no quedó nada por aclarar') +
+        (asf.recuperaciones > 0 ? '; se recuperaron ' + simMdp(asf.recuperaciones / 1e6) + ' durante las auditorías. ' : '. ') +
         'Por aclarar no es robado: es dinero cuyo destino no quedó acreditado. ' +
-        '<span class="insp-fed-grupos">Grupos de la Matriz: ' + asf.grupos.join(' · ') + '.</span>';
+        '<span class="insp-fed-grupos">' + (asf.propias ? 'Auditorías' : 'Grupos de la Matriz') + ': ' + asf.grupos.join(' · ') + '.</span>';
     }
     out.push({ k: 'asf', ico: '🔍', q: '¿Qué encontró la Auditoría Superior?', e: e4, v: v4, d: d4, f: inspFedRef('asf2024') });
     return out;
@@ -23191,7 +23258,7 @@
     return '<section class="insp-inc" aria-label="Incongruencias en su rendición de cuentas">' +
       '<h4 class="insp-inc-tit">⚖️ Incongruencias en su rendición de cuentas</h4>' +
       '<p class="insp-inc-intro">Dos documentos oficiales dicen cosas distintas sobre el mismo dinero. ' +
-        '<b>Explicar la diferencia le corresponde a ' + responsable + '</b>, no a quien la consulta: mientras no lo haga, cualquiera de las dos cifras puede estar mal.</p>' +
+        '<b>Explicar la diferencia le corresponde ' + ('a ' + responsable).replace(/^a el /, 'al ') + '</b>, no a quien la consulta: mientras no lo haga, cualquiera de las dos cifras puede estar mal.</p>' +
       '<ul class="insp-inc-lista">' +
       inc.map(i => {
         const s = INSP_SEMAFORO[i.e];
@@ -23222,7 +23289,7 @@
     const cont = document.getElementById('inspNiveles');
     if (!cont) return;
     const niveles = [
-      { k: 'federal',   et: 'Federal',   ico: '🇲🇽', d: 'Poderes, secretarías, autónomos y empresas del Estado' },
+      { k: 'federal',   et: 'Federal',   ico: '🇲🇽', d: 'Los tres poderes, los autónomos y las empresas del Estado' },
       { k: 'estatal',   et: 'Estatal',   ico: '🗺️', d: 'Las 32 entidades federativas' },
       { k: 'municipal', et: 'Municipal', ico: '🏙️', d: 'Los municipios y alcaldías del catálogo del INEGI' }
     ];
@@ -23242,6 +23309,14 @@
   let inspTope = 60;
   const INSP_VISTAS = {
     todos: { et: 'Todos', niveles: ['federal', 'estatal', 'municipal'] },
+    pEjecutivo: { et: '🦅 Poder Ejecutivo', niveles: ['federal'], f: x => x.poder === 'ejecutivo',
+      d: 'Presidencia, secretarías, órganos reguladores, IMSS, ISSSTE, Pemex y CFE.' },
+    pLegislativo: { et: '🏛️ Poder Legislativo', niveles: ['federal'], f: x => x.poder === 'legislativo',
+      d: 'El Congreso en su conjunto (Ramo 01) y, cada uno con su expediente, la Cámara de Diputados, el Senado y la Auditoría Superior de la Federación.' },
+    pJudicial: { et: '⚖️ Poder Judicial', niveles: ['federal'], f: x => x.poder === 'judicial',
+      d: 'El Poder Judicial de la Federación en su conjunto (Ramo 03) y, cada uno con su expediente, la Suprema Corte, el Órgano de Administración Judicial (antes Consejo de la Judicatura), el Tribunal Electoral y el Tribunal de Disciplina.' },
+    pAutonomo: { et: '🛡️ Autónomos', niveles: ['federal'], f: x => x.poder === 'autonomo',
+      d: 'Órganos constitucionales autónomos (INE, INEGI, CNDH, FGR y los extintos en 2025) y los tribunales agrarios y de justicia administrativa, que no forman parte del Poder Judicial.' },
     incongruencias: { et: '⚖️ Con incongruencias', niveles: ['federal', 'estatal', 'municipal'],
       f: x => inspIncongruencias(inspDiagnostico(x)).length > 0, orden: (a, b) => inspMagnitudInc(b) - inspMagnitudInc(a),
       d: 'Ordenados de mayor a menor diferencia en pesos entre sus documentos.' },
@@ -23431,6 +23506,44 @@
     return t;
   }
 
+  /* Congreso y Poder Judicial de cada estado: lo que ejercieron en 2024
+     segun los censos del INEGI, que cada organo contesta. */
+  function inspEstPoderes(e) {
+    const P = DB.inspector_poderes, L = DB.poderes && DB.poderes.legislativo;
+    if (!P || !L) return '';
+    const congresos = L.congresos2024 || [];
+    const cong = congresos.find(x => x.entidad === e.name);
+    const jud = P.judicialesEstatales2024 || {};
+    const lugar = (vals, v) => 1 + vals.filter(x => x > v).length;
+    const asf = (L.asfCongresos2024 || []).filter(x => x.congreso === 'Congreso de ' + e.name);
+    let asfTxt = 'Esta base no registra auditorías de la ASF a su nombre en la Cuenta Pública 2024.';
+    if (asf.length) {
+      const refs = (P.fuentes.asfCongresos || {});
+      asfTxt = 'La ASF le auditó en la Cuenta Pública 2024 las participaciones federales que ejerció (auditoría ' + asf[0].auditoria + ')' +
+        vsxRefLink(refs[asf[0].congreso]) + ': ' +
+        asf.filter(x => !/Universo|Muestra|incluidas/.test(x.concepto)).map(x => x.concepto.toLowerCase() + ', ' + inspMdp(x.pesos / 1e6)).join('; ') + '.';
+    }
+    const celda = (k, v) => '<div class="insp-ident-c"><span class="insp-ident-k">' + k + '</span><span class="insp-ident-v">' + v + '</span></div>';
+    return '<section class="insp-poderes" aria-label="Los tres poderes del estado">' +
+      '<h4 class="insp-poderes-tit">🏛️ Los tres poderes del estado</h4>' +
+      '<div class="insp-ident">' +
+        celda('🦅 Poder Ejecutivo', 'Gobierno del estado: ' + e.gobernador + ' (' + e.partido + ') ' + chipEstado('pendiente') +
+          '<br><small>El nombre aún no cita documento. Su dinero es el que revisan las preguntas de abajo.</small>') +
+        celda('🏛️ Poder Legislativo', cong
+          ? 'El Congreso ejerció ' + inspMdp(cong.ejercidoMdp) + ' en 2024 ' + chipEstado('oficial') + inspFedRef('cnple') +
+            '<br><small>El ' + lugar(congresos.map(x => x.ejercidoMdp), cong.ejercidoMdp) + '.º que más gastó de los 32 congresos locales. ' + asfTxt + '</small>'
+          : 'Sin dato ' + chipEstado('pendiente')) +
+        celda('⚖️ Poder Judicial', jud[e.abbr]
+          ? 'El Poder Judicial del estado ejerció ' + inspMdp(jud[e.abbr]) + ' en 2024 ' + chipEstado('oficial') + inspFedRef('cnije') +
+            '<br><small>El ' + lugar(Object.keys(jud).map(k => jud[k]), jud[e.abbr]) + '.º que más gastó de los 32 poderes judiciales estatales.</small>'
+          : 'Sin dato ' + chipEstado('pendiente')) +
+      '</div>' +
+      '<p class="insp-poderes-nota">Las cifras del Congreso y del Poder Judicial las reporta cada órgano al INEGI en sus censos de gobierno. ' +
+        'A los congresos y tribunales locales los fiscaliza sobre todo la auditoría superior de cada estado; la ASF sólo revisa el dinero federal que reciben. ' +
+        'Integrar esos informes estatales está pendiente.</p>' +
+    '</section>';
+  }
+
   function inspExpedienteLocal(ente, ejes, idx) {
     const esEstado = ente.nivel === 'estatal';
     const e = ente.est;
@@ -23521,6 +23634,7 @@
           identidad.map(p => '<div class="insp-ident-c"><span class="insp-ident-k">' + p[0] + '</span>' +
             '<span class="insp-ident-v">' + p[1] + '</span></div>').join('') +
         '</div>' +
+        (esEstado ? inspEstPoderes(e) : '') +
         inspIncongruenciasHtml(diag, esEstado ? 'el gobierno del estado y a Hacienda, que deben conciliar sus registros' : 'el ayuntamiento, que firmó los dos reportes') +
         inspResumenHtml(diag) +
         inspSenalesHtml(diag) +
@@ -23534,9 +23648,63 @@
       '</div>';
   }
 
+  /* Las auditorias de la ASF a nombre de un organo, una por una. */
+  function inspFedAuditorias(f) {
+    if (!f.asf || !f.asf.length) return '';
+    const et = [['recomendación', 'recomendaciones'], ['recomendación al desempeño', 'recomendaciones al desempeño'],
+      ['promoción del ejercicio de la facultad de comprobación fiscal', 'promociones del ejercicio de la facultad de comprobación fiscal'],
+      ['solicitud de aclaración', 'solicitudes de aclaración'],
+      ['promoción de responsabilidad administrativa sancionatoria', 'promociones de responsabilidad administrativa sancionatoria'],
+      ['pliego de observaciones', 'pliegos de observaciones']];
+    return '<div class="insp-nota"><strong>Auditorías de la ASF a su nombre, Cuenta Pública 2024</strong> ' + chipEstado('oficial') + inspFedRef('asf2024') +
+      '<ul class="insp-asf-lista">' +
+      f.asf.map(a => {
+        const acc = a.acc.slice(0, 6).map((n, i) => n ? n + ' ' + et[i][n === 1 ? 0 : 1] : '').filter(Boolean);
+        return '<li><b>Auditoría ' + a.num + '</b> · ' + a.titulo + ' · ' + a.tipo + ' · ' + a.entrega + '.ª entrega. ' +
+          'Revisó el ' + a.repr.toFixed(2) + ' % del universo que seleccionó. ' +
+          (a.res[0] ? a.res[0] + ' resultado' + (a.res[0] === 1 ? '' : 's') + ' con observación ya solventada o atendida. ' : '') +
+          (a.res[1] ? a.res[1] + ' resultado' + (a.res[1] === 1 ? '' : 's') + ' con observaciones y acciones. ' : '') +
+          (acc.length ? 'Acciones: ' + acc.join(', ') + '. ' : 'Sin acciones. ') +
+          (a.recuperaciones > 0 ? 'Recuperado durante la auditoría: ' + inspMdp(a.recuperaciones / 1e6) + '. ' : '') +
+          (a.porAclarar > 0 ? '<b>Por aclarar: ' + inspMdp(a.porAclarar / 1e6) + '.</b>' : 'Nada por aclarar.') +
+        '</li>';
+      }).join('') + '</ul></div>';
+  }
+
+  /* Las fuentes que solo usa un organo: la Cuenta Publica 2024, el
+     censo del INEGI, los informes de la propia Corte. */
+  function inspFedFuentesOrgano(f) {
+    const P = DB.inspector_poderes;
+    if (!f.padre || !P) return '';
+    const usadas = [];
+    if (f.cp2024) usadas.push('cp2024');
+    (f.cotejos || []).forEach(c => [c.a[2], c.b[2]].forEach(k => { if (usadas.indexOf(k) === -1 && !DB.inspector_federal.fuentes[k]) usadas.push(k); }));
+    return usadas.map(k => ' · ' + P.fuentes[k].corto + inspFedRef(k)).join('');
+  }
+
   function inspExpedienteFederal(ente) {
     const f = ente.fed;
     const diag = inspDiagnostico(ente);
+    const P = DB.inspector_poderes;
+    const hijos = ((P && P.organos) || []).filter(o => o.padre === f.id);
+    const padre = f.padre ? inspBuscarEnte('federal', f.padre) : null;
+    const rel = hijos.length
+      ? '<div class="insp-nota"><strong>Órganos que lo integran.</strong> Cada uno tiene presupuesto propio y su propio expediente: ' +
+        '<span class="insp-fed-exps">' + hijos.map(o => '<button type="button" class="insp-fed-exp" ' +
+          'onclick="window.AuditEngine.inspAbrir(\'federal\', \'' + o.id + '\')">' + o.icono + ' ' + o.nombre + ' · ' +
+          simMdp(o.cp2025.ejercido) + ' en 2025</button>').join('') + '</span></div>'
+      : padre
+        ? '<div class="insp-nota"><strong>Forma parte del ' + padre.nombre + '.</strong> ' + (f.nota && !f.asfNoAplica ? f.nota + ' ' : '') +
+          '<span class="insp-fed-exps"><button type="button" class="insp-fed-exp" onclick="window.AuditEngine.inspAbrir(\'federal\', \'' + padre.id + '\')">' +
+          padre.icono + ' Ver el ' + padre.nombre + ' completo</button></span></div>'
+        : '';
+    const celdas = [['Aprobado 2025', simMdp(f.cp2025.original)], ['Modificado 2025', simMdp(f.cp2025.modificado)],
+      ['Ejercido 2025', simMdp(f.cp2025.ejercido)], ['Pagado 2025', simMdp(f.cp2025.pagado)],
+      ['Aprobado 2026', f.av2026 ? simMdp(f.av2026.aprobado) : '—'],
+      ['Pagado a junio de 2026', f.av2026 ? simMdp(f.av2026.pagado) : '—']];
+    if (f.cp2024) celdas.unshift(['Ejercido 2024', simMdp(f.cp2024.ejercido)]);
+    const ago = f.id === 'scjn' && DB.poderes && DB.poderes.judicial && DB.poderes.judicial.scjnAgosto;
+    if (ago) celdas.push(['Ejercido al 31 de agosto de 2026, según la propia Corte', simMdp(ago.ejercido / 1e6) + vsxRefLink('ref-scjn-ejercicio2026')]);
     const exps = (f.expedientes || []).map(id => {
       const x = DB.expedientes && DB.expedientes.fichas.find(y => y.id === id);
       return x ? '<button type="button" class="insp-fed-exp" onclick="window.AuditEngine.irAExpediente(\'' + id + '\')">' +
@@ -23548,26 +23716,25 @@
         '<header class="insp-exp-head">' +
           '<span class="insp-exp-ico">' + ente.icono + '</span>' +
           '<div>' +
-            '<span class="insp-exp-nivel">Expediente federal · Ramo ' + f.ramo + '</span>' +
+            '<span class="insp-exp-nivel">Expediente federal · ' + INSP_PODERES[ente.poder || 'ejecutivo'].et + ' · Ramo ' + f.ramo + '</span>' +
             '<h3 class="insp-exp-nom">' + ente.nombre + '</h3>' +
             '<p class="insp-exp-sub">' + f.tipo + '</p>' +
           '</div>' +
           '<button type="button" class="insp-exp-cerrar" onclick="window.AuditEngine.inspCerrar()" title="Cerrar el expediente">✕</button>' +
         '</header>' +
 
-        inspIncongruenciasHtml(diag, 'el propio ente, que reporta ambas cifras a Hacienda') +
+        inspIncongruenciasHtml(diag, f.padre ? 'el propio órgano, que es quien reporta las dos cifras' : 'el propio ente, que reporta ambas cifras a Hacienda') +
         inspResumenHtml(diag) +
 
         '<div class="insp-ident">' +
-          [['Aprobado 2025', simMdp(f.cp2025.original)], ['Modificado 2025', simMdp(f.cp2025.modificado)],
-           ['Ejercido 2025', simMdp(f.cp2025.ejercido)], ['Pagado 2025', simMdp(f.cp2025.pagado)],
-           ['Aprobado 2026', f.av2026 ? simMdp(f.av2026.aprobado) : '—'],
-           ['Pagado a junio de 2026', f.av2026 ? simMdp(f.av2026.pagado) : '—']]
+          celdas
             .map(p => '<div class="insp-ident-c"><span class="insp-ident-k">' + p[0] + ' ' + chipEstado('oficial') + '</span>' +
               '<span class="insp-ident-v">' + p[1] + '</span></div>').join('') +
         '</div>' +
 
+        rel +
         inspSenalesHtml(diag) +
+        inspFedAuditorias(f) +
 
         (exps ? '<div class="insp-nota"><strong>Expedientes de la ASF sobre este ente.</strong> ' +
           'Informe por informe, con sus claves de auditoría: <span class="insp-fed-exps">' + exps + '</span></div>' : '') +
@@ -23580,6 +23747,7 @@
           '<b>cuadre</b>: rojo si lo ejercido rebasa lo modificado; naranja si más de ' + U.pagoAlerta + ' % de lo ejercido no figura como pagado, ' +
           'o si en 2026 lleva menos de ' + U.ritmoBajo + ' % o más de ' + U.ritmoAlto + ' % de su calendario a junio ' +
           '(columna MONTO_MODIFICADO_MENSUAL de la base de Hacienda, que suma el 52.7 % del modificado anual). ' +
+          'Cuando dos documentos oficiales de emisores distintos (Hacienda, el INEGI, el propio órgano) hablan del mismo dinero, naranja si difieren en más de lo que explica el redondeo. ' +
           '<b>ASF</b>: verde si no quedó nada por aclarar ni pliegos; rojo si hay pliegos y $100 mdp o más por aclarar; naranja en otro caso.</span>' +
         '</div>' +
 
@@ -23589,7 +23757,7 @@
           '<span class="insp-fuentes">🔗 Fuentes: ' +
             DB.inspector_federal.fuentes.cp2025.corto + inspFedRef('cp2025') + ' · ' +
             DB.inspector_federal.fuentes.av2026.corto + inspFedRef('av2026') + ' · ' +
-            DB.inspector_federal.fuentes.asf2024.corto + inspFedRef('asf2024') + '.</span>' +
+            DB.inspector_federal.fuentes.asf2024.corto + inspFedRef('asf2024') + inspFedFuentesOrgano(f) + '.</span>' +
         '</div>' +
       '</div>';
   }

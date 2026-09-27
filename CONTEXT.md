@@ -2126,6 +2126,50 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (el inspector por poderes: Legislativo, Judicial y la SCJN)
+
+El autor aclaró que las auditorías tocan a los tres niveles de gobierno y a
+los tres poderes, y que en el Judicial el foco es la Suprema Corte. El nivel
+federal tenía a cada poder como un solo ramo; ahora se abre por órgano.
+
+- **Datos.** `herramientas/integrar_poderes_inspector.py CP2024.csv CP2025.csv
+  AVANCE_2T_2026.csv` (verifica las tres huellas; idempotente) escribe el
+  bloque propio `DB.inspector_poderes`, que no toca `inspector_federal`:
+  `poderDeEnte`, siete `organos` y `judicialesEstatales2024`. Fichas nuevas
+  **114** (INEGI, CNIJF-E 2025, reporte 43/25, con huella), **115** y **116**
+  (estados analíticos de la SCJN, cierre 2025 y enero-junio 2026) y **117**
+  y **118** (ASF, congresos de Nuevo León y Tlaxcala).
+- **Órganos.** Diputados, Senado, ASF (Ramo 01); SCJN, Órgano de
+  Administración Judicial (suma de las UR 110 del CJF y 120 del OAJ, porque
+  la reforma de 2024 partió el mismo aparato), Tribunal Electoral (UR 210 y
+  211) y Tribunal de Disciplina (Ramo 03). Cada uno con CP 2024 y 2025,
+  avance 2026 y sus auditorías de la ASF a su nombre, transcritas de la
+  Matriz CP 2024, p. 31 (la herramienta comprueba que suman el subtotal del
+  sector). La SCJN suma su propio reporte al 31-08-2026.
+- **Filtros por poder** en el nivel federal: Ejecutivo 30, Legislativo 4,
+  Judicial 5, Autónomos 9. Los tribunales agrario y administrativo van con
+  los autónomos: no son del Poder Judicial.
+- **Cotejo entre emisores** (pregunta «¿cuadran sus cifras?»): cuando
+  Hacienda, el INEGI y el propio órgano hablan del mismo dinero, se comparan;
+  si difieren más que el redondeo, van al recuadro de incongruencias, y si
+  coinciden se dice. Hallazgos: **el Consejo de la Judicatura reportó al
+  INEGI $72,090.0 mdp ejercidos en 2024 y la Cuenta Pública dice $69,219.5**
+  (+$2,870.5, +4.1 %; el Instituto de Defensoría que el INEGI dice incluir ya
+  está dentro de la UR 110, así que no lo explica). **La SCJN coincide peso
+  por peso** en 2024 (CP, INEGI y universo de la ASF: $5,665.8) y en 2025
+  (CP y su propio cierre), pero para enero-junio de 2026 **ella reporta
+  $2,101.3 mdp pagados y Hacienda $1,939.1** (+$162.2). El Tribunal
+  Electoral coincide.
+- **Casos especiales.** ASF: no se audita a sí misma; la revisa la Unidad de
+  Evaluación y Control (art. 104 fr. II LFRCF). Tribunal de Disciplina: sin
+  presupuesto aprobado en 2025 (todo por adecuaciones) y sin año auditable.
+- **Estados.** El expediente estatal trae «Los tres poderes del estado»:
+  gobierno (nombre `pendiente`), Congreso (CNPLE 2025, ya en la base) y Poder
+  Judicial (CNIJF-E 2025, gráfica 7, p. 14; la herramienta comprueba que las
+  32 cifras suman $53,516.3), con su lugar entre los 32 y las auditorías de
+  la ASF a congresos locales que hay en la base.
+- Sello 20260927h.
+
 ### Hecho (el inspector en los tres niveles: rendición de cuentas e incongruencias)
 
 El autor pidió que el inspector diga, de cualquier autoridad, quién gobierna,
@@ -3085,8 +3129,19 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   - **Series.** El SRFT está desde 2014 y la Cuenta Pública desde 2008: el
     cuadre podría mostrarse varios años para distinguir error de patrón.
   - La ASF se cruza por **sector** de la Matriz, no por unidad responsable:
-    «Salud» junta a la secretaría con sus desconcentrados. Bajar al informe
-    individual (ASF Datos) daría el detalle por UR.
+    «Salud» junta a la secretaría con sus desconcentrados. Para los órganos
+    del Legislativo y el Judicial ya se usa la fila de cada entidad
+    fiscalizada (p. 31); falta hacer lo mismo con el Ejecutivo.
+  - **Poderes, lo que falta.** Pedirle al Consejo/OAJ y a la SCJN que
+    concilien sus diferencias (se muestran, no se explican). Integrar las
+    revisiones de la Unidad de Evaluación y Control a la ASF. Congresos y
+    poderes judiciales estatales: sólo tenemos su gasto total (INEGI); sus
+    auditorías las hacen las auditorías superiores de cada estado, que no se
+    han integrado. El Senado aparece en la Matriz con un universo de
+    $10,091.4 mdp, el doble de su gasto; su informe individual dice
+    $5,045.7 (probablemente suma ingresos y egresos): no se usa para cotejar.
+    Los municipios no tienen poderes separados (el cabildo es parte del
+    ayuntamiento).
   - Actualizar con la 2.ª entrega de la CP 2025 de la ASF (30-10-2026) y con
     el avance del 3.er trimestre de 2026.
   - Faltan entes con presupuesto propio que viven dentro de un ramo

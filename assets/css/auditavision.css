@@ -15570,6 +15570,15 @@ body.con-regreso { padding-bottom: 96px; }
 .insp-t-tx small.insp-t-extra { color: var(--text-secondary); white-space: normal; }
 .insp-t-tx small.insp-t-sem { font-size: 10.5px; }
 .insp-mas { margin-top: 10px; }
+.insp-poderes {
+  margin-top: 14px; padding: 14px 16px; border-radius: 11px;
+  border: 1px solid var(--border-subtle); background: var(--bg-card-alt);
+}
+.insp-poderes-tit { margin: 0 0 8px; font-family: var(--font-serif); font-size: 17px; color: var(--text-main); }
+.insp-poderes .insp-ident { margin-top: 0; }
+.insp-poderes-nota { margin: 10px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
+.insp-asf-lista { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.insp-asf-lista li { font-size: 13px; line-height: 1.6; color: var(--text-secondary); }
 
 .insp-acciones {
   display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
