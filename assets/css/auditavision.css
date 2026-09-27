@@ -22213,3 +22213,4 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 .aviso-huachicol p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text-main); }
 .aviso-huachicol .ctx-abrir { grid-column: 2; justify-self: start; }
 .radar-stat-huachicol .radar-stat-val { font-size: 0.92em; }
+.glos-drawer-cuerpo a[target="_blank"] { color: var(--gold-bright); text-decoration: underline; text-underline-offset: 2px; }
