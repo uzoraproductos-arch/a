@@ -3204,6 +3204,33 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (Auditoría en imágenes: la novena, huachicol fiscal)
+
+Pedido del autor (27-09-2026). Sello 20260927zb. Diapositiva 9 del carrusel,
+con su punto, y la misma mecánica que las otras ocho (`SHOWCASE`,
+`scHuachicol()`):
+- Cuatro contadores que arrancan en cero: IEPS de combustibles esperado en
+  2027 ($538,549.2 mdp, oficial), cada 1 % ($5,385.5 mdp, derivado), cada
+  día de ese 1 % (derivado) y la cuota por litro de gasolina menor a 91
+  octanos ($6.7001, oficial).
+- Barras «Lo que está en juego y lo que se ha dicho», cada una con su chip:
+  lo oficial es lo que se espera cobrar; la estimación del Observatorio
+  Ciudadano de Energía y lo detectado por la ANAM van **pendientes**. No es
+  un rastro de gasto sino de impuesto que no entra, y así se dice.
+- «Ver gasto» / «Reiniciar a ceros», hallazgo con la cita de la Ley de
+  Ingresos 2027, aviso pendiente y fuente.
+- Botones: abrir el expediente completo (el panel lateral del huachicol,
+  con la barra de regreso a la ficha), la Calculadora Cívica, el glosario y
+  la Iniciativa de Ley de Ingresos 2027.
+- **Imagen provisional**: ilustración vectorial propia
+  (`assets/auditor/img/showcase_huachicol.jpg`), rotulada «Ilustración
+  provisional», hasta la etapa de imágenes.
+- Defecto encontrado al probar en celular: la barra «Regresar al punto de
+  lectura» (capa 99998) tapaba los botones de la ficha (capa 10000). Se
+  oculta mientras la ficha está abierta.
+- Corregidos 14 saltos LF sueltos que había dejado la sección «Lo que dice
+  la ley» del panel del huachicol.
+
 ### Hecho (la población del CONAPO pasa a pendiente; restos de «usted»)
 
 Sello 20260927z. Al revisar una nota de Antigravity sobre las cifras que
@@ -3462,7 +3489,9 @@ auditor, por tipo:
    en el control de importaciones de combustibles (daría un expediente con
    monto oficial); cotejar en el DOF la reforma a la Ley Aduanera de
    19-11-2025 sobre agentes aduanales antes de mencionarla.
-6. **Aviso a otros agentes:** quien trabaje con una copia local debe hacer
+6. **Imagen definitiva** de la diapositiva del huachicol fiscal (hoy es una
+   ilustración provisional), junto con las demás imágenes al final.
+7. **Aviso a otros agentes:** quien trabaje con una copia local debe hacer
    `git pull` y escribir en `assets/auditor/`. Antigravity propuso cambios
    sobre `assets/js`, que ahora es de la Enciclopedia congelada.
 

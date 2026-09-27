@@ -26555,7 +26555,9 @@
     { id: 'tren-toluca', titulo: 'Tren Interurbano México-Toluca «El Insurgente»', pregunta: '¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?',
       arma: function () { return scDesdeExpediente('tren-toluca', 'del Tren Interurbano'); } },
     { id: 'megafarmacia', titulo: 'Megafarmacia del Bienestar (Huehuetoca) · Birmex', pregunta: '¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?',
-      arma: scMegafarmacia }
+      arma: scMegafarmacia },
+    { id: 'huachicol-fiscal', titulo: 'Huachicol fiscal: el impuesto que no entra', pregunta: '¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?',
+      arma: scHuachicol }
   ];
   /* Los controles del carrusel cuentan diapositivas con este nombre. */
   var showcaseData = SHOWCASE;
@@ -26641,6 +26643,50 @@
       acciones: [
         { txt: '🏘️ Ver Ciénega de Flores en el padrón municipal', fn: function () { munIrA('NL', '19012'); } },
         { txt: '📂 Abrir el expediente de El Cuchillo II en Búsqueda Forense', fn: function () { expIr('cuchillo-ii'); } }
+      ]
+    };
+  }
+
+  /* Huachicol fiscal: no es gasto que sale sino impuesto que no entra, así
+     que las barras no son un rastro de pagos sino la escala de lo que está
+     en juego. Lo oficial es lo que el Gobierno espera cobrar; lo que otros
+     dicen que se pierde va con chip pendiente, porque ninguna autoridad ha
+     publicado la cifra. Todo sale de DB.huachicol_fiscal. */
+  function scHuachicol() {
+    var H = DB.huachicol_fiscal;
+    if (!H || !H.en_juego) return null;
+    var J = H.en_juego, R = H.reconocimiento, A = H.anam, M = H.marco_legal;
+    var ilif = H.fuentes.ilif27 || {};
+    var oce = (H.estimaciones || [])[0];
+    var cf = M && M.cuotas_federales_2026;
+    var cont = [
+      { v: J.ieps_combustibles_2027_mdp, f: 'mdp1', etq: 'de IEPS de gasolinas y diésel que el Gobierno espera cobrar en 2027 (Ley de Ingresos 2027, p. ' + J.pagina.split(' ')[0] + ')', est: J.estado },
+      { v: J.uno_por_ciento_mdp, f: 'mdp1', etq: 'por cada 1 % de ese impuesto que se evada: el monto entre 100', est: 'derivado' },
+      { v: J.uno_por_ciento_mdp / 365, f: 'mdp1', etq: 'cada día, por ese mismo 1 %: el monto anterior entre 365', est: 'derivado' }
+    ];
+    if (cf) cont.push({ v: cf.gasolina_menor_91, f: 'pesos2', etq: 'de IEPS federal en cada litro de gasolina menor a 91 octanos en 2026 ($' + cf.gasolina_menor_91.toFixed(4) + ' por ley, antes del estímulo fiscal)', est: 'oficial' });
+    var rastro = [
+      { k: 'IEPS de combustibles esperado en 2027', sub: 'Lo que la Ley de Ingresos 2027 propone cobrar. Es lo que está en juego, no lo que se pierde.', v: J.ieps_combustibles_2027_mdp, url: ilif.url, est: J.estado }
+    ];
+    if (oce) {
+      rastro.push({ k: 'Costo total estimado por el Observatorio Ciudadano de Energía, ' + oce.anio, sub: 'Organismo civil, no autoridad: ' + munMiles(oce.pemex_mdp.toFixed(0)) + ' mdp de afectación a Pemex más ' + munMiles(oce.impuestos_mdp.toFixed(0)) + ' mdp de impuestos no cobrados.', v: oce.total_mdp, url: (H.fuentes[oce.fuente] || {}).url, est: oce.estado });
+      rastro.push({ k: 'De esa estimación, impuestos no cobrados', sub: 'La parte de la estimación civil que toca al erario.', v: oce.impuestos_mdp, url: (H.fuentes[oce.fuente] || {}).url, est: oce.estado });
+    }
+    rastro.push({ k: 'Cada 1 % del IEPS de combustibles', sub: 'Regla de tres para dar tamaño: ' + munMiles(J.ieps_combustibles_2027_mdp.toFixed(1)) + ' ÷ 100.', v: J.uno_por_ciento_mdp, est: 'derivado' });
+    if (A) rastro.push({ k: 'Evasión que la Agencia Nacional de Aduanas detectó intentar', sub: 'Del ' + A.periodo + ': ' + munMiles(String(A.casos)) + ' casos y ' + A.litros_millones + ' millones de litros, según el Segundo Informe citado por la prensa. Falta cotejarlo en el documento.', v: A.evasion_mdp, url: (H.fuentes[A.fuente] || {}).url, est: A.estado });
+    return {
+      contadores: cont,
+      rastroTit: 'Lo que está en juego y lo que se ha dicho',
+      rastroEst: null,
+      rastro: rastro,
+      hallazgo: 'El Gobierno lo reconoce por escrito: en la exposición de motivos de la Ley de Ingresos 2027 dice que «' + R.cita + '». Las prácticas que nombra: ' + R.practicas + '. ' + R.medida,
+      pendiente: 'Ninguna autoridad ha publicado cuánto se pierde. ' + (H.estudios ? H.estudios.texto + ' ' : '') + 'Las barras con chip pendiente son cifras que otros han dado y que aún no cotejamos en un documento oficial: se muestran para dar escala, no como dato.',
+      fuente: 'Iniciativa de Ley de Ingresos de la Federación 2027 (Gaceta Parlamentaria, 8-09-2026), pp. ' + R.paginas + ' y ' + J.pagina + '; Ley del IEPS, art. 2o., fr. I, inciso D, texto vigente; estimación del Observatorio Ciudadano de Energía y Segundo Informe de Gobierno, ambos pendientes de cotejo.',
+      acciones: [
+        { txt: '📂 Abrir el expediente completo del huachicol fiscal', fn: function () { abrirRadarConcepto('huachicol'); } },
+        { txt: '🧮 Ver cuánto IEPS pagas en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora'); } },
+        { txt: '📖 Qué es el huachicol fiscal, en el glosario', fn: function () { irAlGlosario('Huachicol Fiscal'); } },
+        { txt: '📜 Leer la Iniciativa de Ley de Ingresos 2027', url: ilif.url }
       ]
     };
   }

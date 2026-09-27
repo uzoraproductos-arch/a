@@ -22289,3 +22289,8 @@ body[data-pagina="auditor"] .civic-showcase-section, body[data-pagina="auditor"]
 /* Las cifras de las tarjetas de módulo se parten en dos renglones cuando no
    caben, en lugar de salirse de la tarjeta y chocar con la de al lado. */
 .explorer-card-stat strong { white-space: normal; text-align: center; overflow-wrap: anywhere; }
+/* La barra «Regresar al punto de lectura» vive en una capa más alta que la
+   ficha de «Auditoría en imágenes» y en celular le tapaba los botones de
+   abajo. Mientras la ficha está abierta, la barra se oculta; al cerrarla
+   vuelve tal como estaba. */
+body:has(.descubrimiento-modal.show-modal) .nav-regreso { display: none; }
