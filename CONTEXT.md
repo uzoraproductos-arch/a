@@ -3125,7 +3125,53 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - Accesibilidad: las diapositivas se abren con Enter o espacio; la ventana se
   cierra con Escape o al pulsar fuera, y se desplaza por dentro en teléfono.
 
+### Hecho (planes de Astra y Antigravity, cruzados con el código: entrega 1)
+
+El autor pidió analizar dos planes de mejora. Se contrastaron contra el
+código (commit c3e044e, sello 20260927j); Antigravity había trabajado sobre
+un commit anterior (d496a18). Resultado y lo que se aplicó:
+
+- **Buscador global** (`initSearch`): lo escrito se pinta con `escHtml`
+  (una consulta con etiquetas se muestra, no se ejecuta); compara sin
+  acentos ni mayúsculas (`munPlano`); recorre **el padrón completo de 2,479
+  municipios** (`inspEntes('municipal')`, el mismo del Inspector) con su
+  entidad y clave INEGI, para distinguir homónimos (Juárez en seis
+  estados); el municipio abre su expediente en el Inspector. Flechas, Enter
+  y Escape; lo que empieza con la consulta va primero; tope de 12 con aviso
+  de cuántas coincidencias más hay; «sin coincidencias» se dice como tal.
+- **Historial:** la subpestaña elegida a mano entra como `#pestaña/sub`;
+  Atrás y Adelante la restauran, y una dirección desconocida vuelve a la
+  portada (antes `popstate` ignoraba todo lo que tuviera `/`).
+- **Avisos honestos:** el formulario de comunidad y el foro dicen cuando el
+  navegador no dejó guardar y conservan el texto; `copyDebateLink` y
+  `copiarTextoPlano` solo anuncian la copia si ocurrió, y si no ofrecen el
+  texto para copiarlo a mano; tema y apoyos ya no truenan sin almacenamiento.
+- **«5,417 irregularidades» → «5,417 acciones promovidas»**: la suma de la
+  Matriz de la ASF (p. 11) cuenta acciones, no irregularidades probadas.
+- **Bandera municipal de la ASF:** el verde exige número de auditoría; sin
+  él, chip blanco «pendiente, no limpio». Hoy los 83 municipios de la base
+  tienen auditoría integral, así que nada cambia a la vista: la observación
+  de Antigravity sobre «saldos blancos» no se sostiene con la base actual.
+- **Rechazado de los planes, por regla:** renombrar módulos o pestañas;
+  bajadas con «$51,024 mdp» (ya retirada) y «FARAC: 12 obras, $211,000 mdp»
+  (sin fuente); la leyenda «proviene exclusivamente de fuentes oficiales»
+  tal cual (hay cifras pendientes); reorganizar el motor en componentes.
+- **Ya existían:** descarga CSV con BOM (`descargarCSV`) y ticket PNG.
+- **No se tocó y queda documentado:** el comparador SCJN con $206,948,
+  aguinaldo $588,000 y «póliza VIP» (`SCJN_CALCULOS_GLOBALES_DATA`) solo se
+  pinta en la Enciclopedia congelada; ver «Cifras de la Enciclopedia que NO
+  deben pasar al auditor».
+
 ### Pendiente
+
+- **De los planes de Astra y Antigravity, esperan decisión del autor:**
+  - Trato de «tú» o de «usted» en toda la plataforma (hoy domina «usted»).
+  - Contexto denso en ventana lateral («drawer») o en plegables `<details>`
+    como hasta ahora.
+  - Leyenda metodológica fija al pie, con texto honesto sobre lo pendiente.
+  - Orden de la portada y cabecera compacta en móvil; radar plegado.
+  - Pase Cívico: pasarela real (Mercado Pago o SPEI) con datos del autor;
+    los precios que propuso Antigravity ($79 y $699) no tienen origen.
 
 - **Glosario y bibliografía, lo que quedó abierto:**
   - Concejalías de la CDMX: el número de concejales por alcaldía está en el

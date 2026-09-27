@@ -4339,188 +4339,229 @@
     const dropdown = document.getElementById('searchResultsDropdown');
     if (!input || !dropdown) return;
 
+    /* Lo que escribe el lector se compara sin acentos ni mayusculas
+       («juarez» encuentra «Juárez») y todo lo que se pinta pasa por
+       escHtml: una consulta con etiquetas se muestra, no se ejecuta. */
+    const plano = t => munPlano(t == null ? '' : t);
+    const TOPE = 12;
+    let results = [];
+    let activo = -1;
+
+    function abrirDesglose() {
+      const desglose = document.getElementById('seccionDesgloseModulos');
+      if (desglose) {
+        desglose.style.display = 'block';
+        desglose.classList.add('desglose-abierto');
+      }
+      return desglose;
+    }
+
+    function cerrar() {
+      dropdown.classList.remove('active');
+      input.setAttribute('aria-expanded', 'false');
+      activo = -1;
+    }
+
+    function elegir(i) {
+      const r = results[i];
+      if (!r) return;
+      cerrar();
+      input.value = '';
+      r.action();
+    }
+
+    function marcar(i) {
+      const items = dropdown.querySelectorAll('.search-item');
+      if (!items.length) return;
+      activo = (i + items.length) % items.length;
+      items.forEach((it, k) => {
+        it.classList.toggle('search-item-activo', k === activo);
+        it.setAttribute('aria-selected', k === activo ? 'true' : 'false');
+      });
+      items[activo].scrollIntoView({ block: 'nearest' });
+    }
+
+    function aviso(html) {
+      dropdown.innerHTML = '<div class="search-aviso">' + html + '</div>';
+      dropdown.classList.add('active');
+      input.setAttribute('aria-expanded', 'true');
+    }
+
+    input.setAttribute('role', 'combobox');
+    input.setAttribute('aria-controls', 'searchResultsDropdown');
+    input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-expanded', 'false');
+
     input.addEventListener('input', function(e) {
-      const q = e.target.value.trim().toLowerCase();
+      const bruto = e.target.value.trim();
+      const q = plano(bruto);
+      results = [];
+      activo = -1;
       if (q.length < 2) {
-        dropdown.classList.remove('active');
+        cerrar();
         dropdown.innerHTML = '';
         return;
       }
+      /* Primero lo que empieza con la consulta, luego lo que la contiene */
+      const rango = t => plano(t).startsWith(q) ? 0 : 1;
 
-      const results = [];
-
-      // Buscar en estados
-      if (DB.estados) {
-        DB.estados.forEach(st => {
-          if (st.name.toLowerCase().includes(q) || st.abbr.toLowerCase().includes(q) || (st.capital && st.capital.toLowerCase().includes(q))) {
-            results.push({
-              type: 'Estado',
-              title: st.name,
-              sub: `Ramos 28 y 33: ${formatMoneyMdp(st.gasto)} · Gobernador(a): ${st.gobernador}`,
-              badge: st.abbr,
-              action: () => {
-                var desglose = document.getElementById('seccionDesgloseModulos');
-                if (desglose) {
-                  desglose.style.display = 'block';
-                  desglose.classList.add('desglose-abierto');
-                }
-                switchTab('territorio');
-                openStateDrawer(st);
-                desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            });
-          }
-
-          // Buscar en municipios
-          if (st.municipios) {
-            st.municipios.forEach(m => {
-              if (m.nombre.toLowerCase().includes(q) || (m.alcalde && m.alcalde.toLowerCase().includes(q))) {
-                results.push({
-                  type: 'Municipio',
-                  title: `${m.nombre} (${st.abbr})`,
-                  sub: `Alcalde: ${m.alcalde}` + (m.fortamun === null || m.fortamun === undefined
-                         ? ' · sin cifra en la estadística del INEGI'
-                         : ` · FORTAMUN: $${m.fortamun} mdp`),
-                  badge: 'MUN',
-                  action: () => {
-                    var desglose = document.getElementById('seccionDesgloseModulos');
-                    if (desglose) {
-                      desglose.style.display = 'block';
-                      desglose.classList.add('desglose-abierto');
-                    }
-                    switchTab('municipios');
-                    openStateDrawer(st);
-                    desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                });
-              }
-            });
-          }
-        });
-      }
-
-      // Buscar en glosario
-      if (DB.glosario) {
-        DB.glosario.forEach(g => {
-          if (g.termino.toLowerCase().includes(q) || (g.definicion && g.definicion.toLowerCase().includes(q))) {
-            results.push({
-              type: 'Glosario',
-              title: g.termino,
-              sub: g.ley || 'Concepto Hacendario',
-              badge: 'LEY',
-              action: () => {
-                goToGlossary(g.termino);
-              }
-            });
-          }
-        });
-      }
-
-      // Buscar en ramos
-      if (DB.ramos) {
-        DB.ramos.forEach(r => {
-          if ((r.nombre && r.nombre.toLowerCase().includes(q)) || (r.clave && r.clave.toString().toLowerCase().includes(q))) {
-            results.push({
-              type: 'Ramo PEF',
-              title: `Ramo ${r.clave}: ${r.nombre}`,
-              sub: r.monto ? `Asignación: ${formatMoneyMdp(r.monto)}` : 'Presupuesto de Egresos',
-              badge: 'RAMO',
-              action: () => {
-                var desglose = document.getElementById('seccionDesgloseModulos');
-                if (desglose) {
-                  desglose.style.display = 'block';
-                  desglose.classList.add('desglose-abierto');
-                }
-                switchTab('presupuesto');
-                switchSubtab('presupuesto', 'pef-desglose');
-                desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            });
-          }
-        });
-      }
-
-      // Buscar en mandatarios / gobernadores / personajes
-      if (DB.mandatarios) {
-        DB.mandatarios.forEach(p => {
-          if ((p.nombre && p.nombre.toLowerCase().includes(q)) || (p.cargo && p.cargo.toLowerCase().includes(q))) {
-            results.push({
-              type: 'Mandatario',
-              title: p.nombre,
-              sub: p.cargo || 'Funcionario Públlico',
-              badge: 'POL',
-              action: () => {
-                var desglose = document.getElementById('seccionDesgloseModulos');
-                if (desglose) {
-                  desglose.style.display = 'block';
-                  desglose.classList.add('desglose-abierto');
-                }
-                switchTab('politicos');
-                desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            });
-          }
-        });
-      }
-
-      // Buscar en debates del Portal Digital
-      if (DB.debates_semilla) {
-        DB.debates_semilla.forEach(d => {
-          if ((d.titulo && d.titulo.toLowerCase().includes(q)) || (d.tesis && d.tesis.toLowerCase().includes(q))) {
-            results.push({
-              type: 'Portal Digital',
-              title: d.titulo,
-              sub: `Tesis cívica · ${d.categoria || 'Debate'}`,
-              badge: 'PORTAL',
-              action: () => {
-                var desglose = document.getElementById('seccionDesgloseModulos');
-                if (desglose) {
-                  desglose.style.display = 'block';
-                  desglose.classList.add('desglose-abierto');
-                }
-                seleccionarModuloExplorer('portal');
-                desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            });
-          }
-        });
-      }
-
-      if (results.length > 0) {
-        dropdown.innerHTML = results.slice(0, 10).map((r, i) => `
-          <div class="search-item" data-index="${i}">
-            <div>
-              <div class="name">${r.title}</div>
-              <div style="font-size:11px; color:var(--text-secondary);">${r.sub}</div>
-            </div>
-            <span class="badge" style="background:rgba(201,168,76,0.15); color:var(--gold-bright);">${r.badge}</span>
-          </div>
-        `).join('');
-
-        dropdown.querySelectorAll('.search-item').forEach((item, i) => {
-          item.addEventListener('click', () => {
-            results[i].action();
-            dropdown.classList.remove('active');
-            input.value = '';
+      // Estados
+      (DB.estados || []).forEach(st => {
+        if (plano(st.name).includes(q) || plano(st.abbr) === q || plano(st.capital).includes(q)) {
+          results.push({
+            rango: rango(st.name),
+            title: st.name,
+            sub: `Ramos 28 y 33: ${formatMoneyMdp(st.gasto)} · Gobernador(a): ${st.gobernador}`,
+            badge: st.abbr,
+            action: () => {
+              const desglose = abrirDesglose();
+              switchTab('territorio');
+              openStateDrawer(st);
+              desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
           });
-        });
+        }
+      });
 
-        dropdown.classList.add('active');
-      } else {
-        dropdown.innerHTML = `<div style="padding:12px; font-size:12px; color:var(--text-dim); text-align:center;">No se hallaron coincidencias para "${q}"</div>`;
-        dropdown.classList.add('active');
+      /* Municipios: el padron completo del INEGI (2,479), el mismo que
+         recorre el Inspector. Se identifican por su clave INEGI y llevan
+         su entidad, para distinguir los homonimos (hay Juarez en varios
+         estados). El resultado abre su expediente en el Inspector. */
+      const munis = inspEntes('municipal');
+      let nMun = 0;
+      munis.forEach(m => {
+        if (!plano(m.buscar).includes(q)) return;
+        nMun++;
+        const nomEst = m.est ? m.est.name : m.abbr;
+        const conCifra = m.pad && m.pad.length === 10;
+        results.push({
+          rango: rango(m.nombre) + 0.5,
+          title: `${m.nombre}, ${nomEst}`,
+          sub: `Clave INEGI ${m.id}` + (m.sub.indexOf(' · ') !== -1 ? ' · ' + m.sub.split(' · ').slice(1).join(' · ') : '') +
+               (conCifra ? '' : ' · sin cifra en la estadística municipal del INEGI 2024'),
+          badge: 'MUN',
+          action: () => {
+            seleccionarModuloExplorer('verificador', 'inspExpediente');
+            inspSetNivel('municipal');
+            inspAbrir('municipal', m.id);
+          }
+        });
+      });
+
+      // Glosario
+      (DB.glosario || []).forEach(g => {
+        if (plano(g.termino).includes(q) || plano(g.definicion).includes(q)) {
+          results.push({
+            rango: rango(g.termino) + 1,
+            title: g.termino,
+            sub: g.ley || 'Concepto hacendario',
+            badge: 'LEY',
+            action: () => goToGlossary(g.termino)
+          });
+        }
+      });
+
+      // Ramos del PEF
+      (DB.ramos || []).forEach(r => {
+        if (plano(r.nombre).includes(q) || plano(r.clave) === q) {
+          results.push({
+            rango: rango(r.nombre) + 1,
+            title: `Ramo ${r.clave}: ${r.nombre}`,
+            sub: r.monto ? `Asignación: ${formatMoneyMdp(r.monto)}` : 'Presupuesto de Egresos',
+            badge: 'RAMO',
+            action: () => {
+              const desglose = abrirDesglose();
+              switchTab('presupuesto');
+              switchSubtab('presupuesto', 'pef-desglose');
+              desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        }
+      });
+
+      // Mandatarios
+      (DB.mandatarios || []).forEach(p => {
+        if (plano(p.nombre).includes(q) || plano(p.cargo).includes(q)) {
+          results.push({
+            rango: rango(p.nombre) + 1,
+            title: p.nombre,
+            sub: p.cargo || 'Funcionario público',
+            badge: 'POL',
+            action: () => {
+              const desglose = abrirDesglose();
+              switchTab('politicos');
+              desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        }
+      });
+
+      // Debates del Portal Digital
+      (DB.debates_semilla || []).forEach(d => {
+        if (plano(d.titulo).includes(q) || plano(d.tesis).includes(q)) {
+          results.push({
+            rango: rango(d.titulo) + 1,
+            title: d.titulo,
+            sub: `Tesis cívica · ${d.categoria || 'Debate'}`,
+            badge: 'PORTAL',
+            action: () => {
+              const desglose = abrirDesglose();
+              seleccionarModuloExplorer('portal');
+              desglose?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        }
+      });
+
+      if (!results.length) {
+        aviso('No hay coincidencias para «' + escHtml(bruto) + '». Pruebe con el nombre de un estado, un municipio, un ramo o un término del glosario.');
+        return;
       }
+
+      results.sort((a, b) => a.rango - b.rango);
+      const total = results.length;
+      results = results.slice(0, TOPE);
+      dropdown.innerHTML = results.map((r, i) => `
+          <div class="search-item" role="option" id="searchItem${i}" aria-selected="false" data-index="${i}">
+            <div>
+              <div class="name">${escHtml(r.title)}</div>
+              <div class="search-item-sub">${escHtml(r.sub)}</div>
+            </div>
+            <span class="badge">${escHtml(r.badge)}</span>
+          </div>
+        `).join('') +
+        (total > TOPE
+          ? '<div class="search-aviso search-aviso-mas">' + (total - TOPE) + ' coincidencias más' +
+            (nMun > 1 ? ' (' + nMun + ' municipios)' : '') + '. Escriba más letras o el nombre del estado para acotar.</div>'
+          : '');
+
+      dropdown.querySelectorAll('.search-item').forEach((item, i) => {
+        item.addEventListener('mousedown', ev => ev.preventDefault());
+        item.addEventListener('click', () => elegir(i));
+      });
+      dropdown.classList.add('active');
+      input.setAttribute('aria-expanded', 'true');
     });
 
     input.addEventListener('keydown', function(e) {
+      const abierto = dropdown.classList.contains('active');
       if (e.key === 'Escape') {
-        dropdown.classList.remove('active');
+        cerrar();
+      } else if (e.key === 'ArrowDown' && abierto) {
+        e.preventDefault();
+        marcar(activo + 1);
+      } else if (e.key === 'ArrowUp' && abierto) {
+        e.preventDefault();
+        marcar(activo - 1);
+      } else if (e.key === 'Enter' && abierto && results.length) {
+        e.preventDefault();
+        elegir(activo >= 0 ? activo : 0);
       }
     });
 
     document.addEventListener('click', function(e) {
       if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-        dropdown.classList.remove('active');
+        cerrar();
       }
     });
   }
@@ -18514,7 +18555,8 @@
   // CONMUTADOR DE TEMA (MODO OSCURO / CLARO)
   // ==========================================================================
   function initTheme() {
-    const savedTheme = localStorage.getItem('auditavision_theme') || 'dark';
+    let savedTheme = 'dark';
+    try { savedTheme = localStorage.getItem('auditavision_theme') || 'dark'; } catch (e) { /* sin almacenamiento */ }
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeButtonText(savedTheme);
   }
@@ -18523,7 +18565,7 @@
     const current = document.documentElement.getAttribute('data-theme') || 'dark';
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('auditavision_theme', next);
+    try { localStorage.setItem('auditavision_theme', next); } catch (e) { /* el tema vale solo para esta visita */ }
     updateThemeButtonText(next);
   }
 
@@ -22048,8 +22090,11 @@
 
         if (!texto.trim()) return;
 
-        // Guardar localmente
-        const savedComments = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]');
+        /* Guardar localmente. Si el navegador no deja guardar (modo privado,
+           almacenamiento lleno), se dice y el texto se queda en el formulario. */
+        let savedComments = [];
+        try { savedComments = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]'); } catch (err) { savedComments = []; }
+        if (!Array.isArray(savedComments)) savedComments = [];
         savedComments.unshift({
           id: Date.now(),
           fecha: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }),
@@ -22058,7 +22103,15 @@
           estado: estado,
           texto: texto
         });
-        localStorage.setItem('auditavision_comentarios', JSON.stringify(savedComments));
+        try {
+          localStorage.setItem('auditavision_comentarios', JSON.stringify(savedComments));
+        } catch (err) {
+          if (msgStatus) {
+            msgStatus.textContent = '✗ Este navegador no permitió guardar el texto (puede estar en modo privado o sin espacio). Su texto sigue en el formulario: cópielo antes de salir.';
+            msgStatus.style.color = 'var(--crimson-bright, #e74c3c)';
+          }
+          return;
+        }
 
         if (msgStatus) {
           // Decir la verdad sobre el destino del texto: se guarda en este
@@ -22190,7 +22243,12 @@
     let saved = [];
     try { saved = JSON.parse(localStorage.getItem('auditavision_comentarios') || '[]'); } catch (e) { return; }
     saved = saved.filter(x => String(x.id) !== String(id));
-    localStorage.setItem('auditavision_comentarios', JSON.stringify(saved));
+    try {
+      localStorage.setItem('auditavision_comentarios', JSON.stringify(saved));
+    } catch (e) {
+      alert('Este navegador no permitió borrar la observación. Sigue guardada.');
+      return;
+    }
     renderComentariosList();
   }
 
@@ -22290,8 +22348,16 @@
     return [];
   }
 
+  /* Devuelve si el guardado ocurrio, para no anunciar lo que no paso. */
   function savePortalDebates(debates) {
-    try { localStorage.setItem('auditavision_foro_debates', JSON.stringify(debates)); } catch (e) { /* sin almacenamiento */ }
+    try { localStorage.setItem('auditavision_foro_debates', JSON.stringify(debates)); return true; } catch (e) { return false; }
+  }
+
+  function leerApoyosLocales() {
+    try {
+      const v = JSON.parse(localStorage.getItem('auditavision_liked_debates') || '[]');
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
   }
 
   function initPortalDigital() {
@@ -22339,7 +22405,7 @@
       return;
     }
 
-    const likedDebates = JSON.parse(localStorage.getItem('auditavision_liked_debates') || '[]');
+    const likedDebates = leerApoyosLocales();
 
     container.innerHTML = list.map(d => {
       const isLiked = likedDebates.includes(d.id);
@@ -22507,7 +22573,13 @@
     };
 
     debates.unshift(newDebate);
-    savePortalDebates(debates);
+    if (!savePortalDebates(debates)) {
+      if (statusMsg) {
+        statusMsg.textContent = '✗ Este navegador no permitió guardar el hilo (puede estar en modo privado o sin espacio). Su texto sigue en el formulario.';
+        statusMsg.style.color = 'var(--crimson-bright, #e74c3c)';
+      }
+      return;
+    }
 
     if (statusMsg) {
       statusMsg.textContent = '✓ Publicado en este navegador. Cuando la plataforma tenga servidor, los hilos serán visibles para todas las personas.';
@@ -22591,7 +22663,7 @@
   }
 
   function likeDebate(debateId) {
-    const likedDebates = JSON.parse(localStorage.getItem('auditavision_liked_debates') || '[]');
+    const likedDebates = leerApoyosLocales();
     const debates = getPortalDebates();
     const found = debates.find(d => d.id === debateId);
     if (!found) return;
@@ -22605,7 +22677,7 @@
       likedDebates.push(debateId);
     }
 
-    localStorage.setItem('auditavision_liked_debates', JSON.stringify(likedDebates));
+    try { localStorage.setItem('auditavision_liked_debates', JSON.stringify(likedDebates)); } catch (e) { /* sin almacenamiento: el apoyo no persiste */ }
     savePortalDebates(debates);
     renderPortalDebates();
   }
@@ -22616,11 +22688,17 @@
   }
 
   function copyDebateLink(debateId) {
+    /* Solo se anuncia la copia cuando ocurrio; si el navegador la niega,
+       se ofrece el enlace para copiarlo a mano. */
     const url = new URL('index.html#portal', window.location.href).href;
+    const manual = () => prompt('Copie el enlace al Portal Digital:', url);
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url);
+      navigator.clipboard.writeText(url)
+        .then(() => alert('✓ Enlace al Portal Digital copiado al portapapeles.'))
+        .catch(manual);
+    } else {
+      manual();
     }
-    alert('¡Enlace al diálogo cívico copiado al portapapeles!');
   }
 
   /* Aqui vivian FACTCHECK_KNOWLEDGE_BASE y el «verificador de noticias»:
@@ -22633,9 +22711,9 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(texto)
         .then(() => alert('✓ ' + aviso))
-        .catch(() => alert('No se pudo copiar automáticamente. Puede seleccionar el texto en pantalla.'));
+        .catch(() => prompt('No se pudo copiar automáticamente. Copie el texto desde aquí:', texto));
     } else {
-      alert('✓ ' + aviso);
+      prompt('Este navegador no permite copiar automáticamente. Copie el texto desde aquí:', texto);
     }
   }
 
@@ -24092,6 +24170,12 @@
         const sub = this.dataset.sub;
         if (!navSaltoEnCurso) navCerrarRegreso();
         switchSubtab(parent, sub);
+        /* La subpestana elegida a mano entra al historial como
+           #pestana/subpestana: Atras y Adelante la restauran. */
+        const destino = '#' + parent + '/' + sub;
+        if (TAB_METADATA[parent] && window.location.hash !== destino) {
+          history.pushState({ tab: parent, sub: sub }, '', destino);
+        }
       });
     });
 
@@ -24140,10 +24224,20 @@
     }
 
     // Soporte para navegacion e historial (Atras / Adelante del navegador)
+    /* Misma lectura que al cargar: #pestana o #pestana/subpestana. Una
+       direccion desconocida vuelve a la portada en lugar de quedarse a medias. */
     window.addEventListener('popstate', function() {
-      const h = window.location.hash.replace('#', '') || 'presupuesto';
-      if (TAB_METADATA[h] && h !== activeTabKey) {
-        switchTab(h, true);
+      const partes = window.location.hash.replace('#', '').split('/');
+      const tab = TAB_METADATA[partes[0]] ? partes[0] : 'presupuesto';
+      const sub = partes[1];
+      if (tab !== activeTabKey) switchTab(tab, true);
+      if (sub && document.querySelector('.subtab-panel[data-parent="' + tab + '"][data-subpanel="' + sub + '"]')) {
+        switchSubtab(tab, sub);
+      } else {
+        /* Sin subpestana en la direccion: la primera de la barra, que es
+           la que muestra la pestana al abrirse. */
+        const primera = document.querySelector('.subtabs-bar[data-parent="' + tab + '"] .subtab-btn');
+        if (primera && !primera.classList.contains('active')) switchSubtab(tab, primera.dataset.sub);
       }
     });
 
@@ -26595,7 +26689,19 @@
   function obtenerBanderasRojasMuni(m) {
     if (!m) return [];
     const flags = [];
-    const obs = m.observacionesASF || 0;
+    /* El verde solo se gana con una auditoria documentada. Un municipio sin
+       numero de auditoria no queda limpio: queda sin revisar. Hoy los 83 de
+       la base tienen su auditoria integral en la matriz (ver CONTEXT.md). */
+    if (!m.asfAuditoria || m.observacionesASF === null || m.observacionesASF === undefined) {
+      flags.push({
+        tipo: 'alerta',
+        icono: '⚪',
+        titulo: 'Sin auditoría documentada de la ASF para la CP 2024: pendiente, no limpio',
+        fuente: 'ASF · Matriz de Datos Básicos CP 2024'
+      });
+      return flags;
+    }
+    const obs = m.observacionesASF;
 
     if (obs >= 15) {
       flags.push({

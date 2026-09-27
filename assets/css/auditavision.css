@@ -545,6 +545,36 @@ body {
   border-radius: 4px;
 }
 
+.search-item .badge {
+  background: rgba(201,168,76,0.15);
+  color: var(--gold-bright);
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.search-item.search-item-activo {
+  background: var(--bg-card-hover);
+  box-shadow: inset 3px 0 0 var(--gold-bright);
+}
+
+.search-item-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.search-aviso {
+  padding: 12px;
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.search-aviso-mas {
+  font-size: 11px;
+  font-style: italic;
+}
+
 /* ==========================================================================
    BARRA DE PESTAÑAS PRINCIPALES (TABBAR FORMATO FORTUVISIÓN)
    ========================================================================== */
