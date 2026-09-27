@@ -3198,6 +3198,37 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (Contrasta una nota: el verificador honesto)
+
+Decisión 1 del autor (27-09-2026). Sello 20260927r. Modo Inspector, entre
+el explorador de entes y la lista del SAT (`#vnRaiz`,
+`renderVerificadorNotas`, `vnBuscar`, `vnElegir`, `vnContrastar`,
+`vnCopiar`).
+
+- Tres pasos: pegar la liga de la nota (opcional; no se abre ni se lee),
+  elegir la cifra oficial y escribir lo que afirma la nota con su unidad
+  (pesos, miles, millones, miles de millones o billones en el sentido
+  español).
+- **Catálogo** armado en el navegador con lo que la base ya documenta:
+  relojes de deuda (PEF y LIF 2026), totales de la ASF (CP 2024), los
+  renglones de finanzas del Paquete 2027 (propuesta 2027 y aprobado
+  2026), IEPS de combustibles 2027, Tren Maya, AIFA, IPAB, Tren
+  Interurbano y NAIM, Ramos 28 y 33, deuda y monto por aclarar de los 32
+  estados, gasto de los entes federales (CP 2025 y PEF 2026) y los
+  ingresos 2024 de los municipios con cifra del INEGI. Cada renglón lleva
+  su chip y su documento. Lo que no está en el catálogo no se contrasta.
+- **Veredicto:** coincide (≤ 1 %), se acerca (≤ 10 %, con las causas
+  típicas: otro año, aprobado contra ejercido, pesos reales contra
+  nominales), no coincide (> 10 %), error de unidades (mil veces más o
+  menos; detecta el «billón» del inglés) y «no se puede contrastar» si
+  nuestra cifra está pendiente.
+- Copia un contraste en texto plano con la liga, la cifra, el documento
+  y el veredicto. La liga se valida (solo http o https) y todo se
+  escapa: probado con `javascript:` y con etiquetas en la liga.
+- El viejo verificador (retirado en d36e030) inventaba titulares y
+  calificaciones sin leer la liga; este no califica medios, compara
+  cifras.
+
 ### Hecho (huachicol fiscal, en primera plana y sin cifras inventadas)
 
 Pedido del autor (27-09-2026): que el huachicol fiscal esté en portada y en

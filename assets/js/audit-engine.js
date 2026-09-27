@@ -5554,6 +5554,7 @@
       renderForensicDossiers('todos');
       renderRadarBanderasNacional();
       initInspectorExplorador();
+      renderVerificadorNotas();
     } else if (tabKey === 'faq') {
       renderCasillasFaq();
       renderGlossary();
@@ -22974,6 +22975,223 @@
     autonomo:    { et: 'Autónomos',         ico: '🛡️' }
   };
 
+  /* ====================================================================
+     CONTRASTA UNA NOTA (Modo Inspector, solo en el auditor)
+     La plataforma no lee la nota: un sitio estático no puede abrir
+     páginas ajenas. El lector pega la liga, elige de qué cifra oficial
+     habla y escribe lo que la nota afirma; aquí se pone junto al
+     documento, con su chip, y se mide la diferencia. Nada se estima: si
+     la cifra de referencia está pendiente, el contraste no se hace.
+     ==================================================================== */
+  const vnEstado = { sel: null, cat: null };
+
+  function vnRefUrl(id) {
+    const r = (DB.referencias_legales || []).find(x => x.id === id);
+    return r ? r.url : '';
+  }
+
+  function vnCatalogo() {
+    if (vnEstado.cat) return vnEstado.cat;
+    const out = [];
+    const add = (o) => { if (o && isFinite(o.mdp)) out.push(o); };
+    const rel = ((DB.calculadora_civica || {}).relojes || {}).fuentes || [];
+    rel.filter(f => f.id === 'intereses' || f.id === 'deuda-nueva').forEach(f => add({
+      id: 'rel-' + f.id, grupo: 'Nacional', nombre: f.nombre, anio: '2026', mdp: f.anual_mdp, estado: f.estado,
+      fuente: f.fuente, url: vnRefUrl(f.refKey) }));
+    const asf = DB.cuenta_publica_asf, a24 = asf && asf.cp2024;
+    if (a24) {
+      const fa = asf.fuentes[a24.fuente] || {};
+      add({ id: 'asf-poraclarar', grupo: 'Nacional', nombre: 'Monto por aclarar ante la ASF, Cuenta Pública 2024', anio: '2024', mdp: a24.total.porAclarar / 1e6, estado: 'oficial', fuente: (fa.doc || 'ASF') + ', p. ' + a24.pagina, url: fa.url });
+      add({ id: 'asf-recuperado', grupo: 'Nacional', nombre: 'Recuperado por la ASF durante las auditorías, Cuenta Pública 2024', anio: '2024', mdp: a24.total.recuperaciones / 1e6, estado: 'oficial', fuente: (fa.doc || 'ASF') + ', p. ' + a24.pagina, url: fa.url });
+    }
+    const pq = DB.paquete_2027;
+    (pq && pq.finanzas || []).forEach(f => {
+      add({ id: 'pq27-' + f.id, grupo: 'Paquete Económico 2027', nombre: f.n + ' (propuesta 2027)', anio: '2027', mdp: Math.abs(f.m), estado: 'oficial',
+        fuente: 'SHCP, Criterios Generales de Política Económica 2027', url: vnRefUrl('ref-cgpe2027'), signo: f.m < 0 ? 'negativo' : '' });
+      if (isFinite(f.m26)) add({ id: 'pq26-' + f.id, grupo: 'Paquete Económico 2027', nombre: f.n + ' (aprobado 2026)', anio: '2026', mdp: Math.abs(f.m26), estado: 'oficial',
+        fuente: 'SHCP, Criterios Generales de Política Económica 2027 (columna 2026 aprobado)', url: vnRefUrl('ref-cgpe2027'), signo: f.m26 < 0 ? 'negativo' : '' });
+    });
+    const H = DB.huachicol_fiscal;
+    if (H) add({ id: 'ieps-comb-27', grupo: 'Nacional', nombre: 'IEPS a combustibles automotrices estimado para 2027', anio: '2027', mdp: H.en_juego.ieps_combustibles_2027_mdp, estado: 'oficial',
+      fuente: H.fuentes.ilif27.doc + ', p. ' + H.en_juego.pagina, url: H.fuentes.ilif27.url });
+    const sm = DB.simulador_megaobras, of = sm && sm.operacion_oficial, vf = sm && sm.verificacion;
+    if (of) {
+      const tm = of.obras['tren-maya'], ai = of.obras['aifa-texcoco'], fb = of.obras.fobaproa;
+      const f1 = of.fuentes.ef_h0m, f2 = of.fuentes.ef_hzi, f3 = of.fuentes.ipab_ef;
+      if (tm) {
+        add({ id: 'tm-ingresos', grupo: 'Megaobras', nombre: 'Tren Maya S.A.: ingresos por sus servicios en 2024', anio: '2024', mdp: tm.ingresos_gestion, estado: 'oficial', fuente: f1.doc, url: f1.url });
+        add({ id: 'tm-gasto', grupo: 'Megaobras', nombre: 'Tren Maya S.A.: gasto total en 2024', anio: '2024', mdp: tm.gastos_totales, estado: 'oficial', fuente: f1.doc, url: f1.url });
+        add({ id: 'tm-transf', grupo: 'Megaobras', nombre: 'Tren Maya S.A.: transferencias federales recibidas en 2024', anio: '2024', mdp: tm.transferencias, estado: 'oficial', fuente: f1.doc, url: f1.url });
+        add({ id: 'tm-perdida', grupo: 'Megaobras', nombre: 'Tren Maya S.A.: pérdida de operación en 2024 (sin transferencias)', anio: '2024', mdp: -tm.resultado_sin_transferencias, estado: 'derivado', fuente: f1.doc + ' (ingresos menos gasto total)', url: f1.url });
+      }
+      if (ai) add({ id: 'aifa-ingresos', grupo: 'Megaobras', nombre: 'AIFA S.A.: ingresos por sus servicios en 2024', anio: '2024', mdp: ai.ingresos_gestion, estado: 'oficial', fuente: f2.doc, url: f2.url });
+      if (fb) {
+        add({ id: 'ipab-saldo', grupo: 'Megaobras', nombre: 'IPAB (FOBAPROA): deuda en bonos al 31 de diciembre de 2025', anio: '2025', mdp: fb.saldo_bonos_2025, estado: 'oficial', fuente: f3.doc, url: f3.url });
+        add({ id: 'ipab-r34', grupo: 'Megaobras', nombre: 'Rescate bancario: Ramo 34 ejercido en 2024', anio: '2024', mdp: fb.ramo34_ejercido, estado: 'oficial', fuente: 'SHCP, Cuenta Pública 2024', url: (vf.fuentes.cp || {}).url });
+      }
+    }
+    if (vf && vf.obras) {
+      const t = vf.obras['tren-maya'], to = vf.obras['tren-toluca'], na = vf.obras['aifa-texcoco'];
+      if (t) add({ id: 'tm-ejercido', grupo: 'Megaobras', nombre: 'Tren Maya: ejercido de 2020 a 2025 bajo su clave de cartera', anio: '2020-2025', mdp: t.ejercidoTotal, estado: 'derivado', fuente: vf.fuentes.cp.doc + ' (suma por año)', url: vf.fuentes.cp.url });
+      if (to && to.cartera) { const u = to.cartera[to.cartera.length - 1]; add({ id: 'toluca-mti', grupo: 'Megaobras', nombre: 'Tren Interurbano México-Toluca: monto total de inversión registrado (' + u.corte + ')', anio: u.corte, mdp: u.mti, estado: 'oficial', fuente: vf.fuentes.opa.doc, url: vf.fuentes.opa.url }); }
+      if (na && na.naicm) add({ id: 'naicm', grupo: 'Megaobras', nombre: 'Costo de cancelar el NAIM de Texcoco, según la ASF', anio: '2019', mdp: na.naicm.costo, estado: 'oficial', fuente: vf.fuentes.asfnaicm.doc + ', pp. ' + na.naicm.paginas, url: vf.fuentes.asfnaicm.url });
+    }
+    const FE = DB.fiscalEntidades && DB.fiscalEntidades.campos || {};
+    (DB.estados || []).forEach(e => {
+      const c = k => FE[k] || {};
+      add({ id: 'est-r28-' + e.abbr, grupo: e.name, nombre: e.name + ': participaciones del Ramo 28 en 2026', anio: '2026', mdp: e.ramo28, estado: c('ramo28').estado || 'pendiente', fuente: c('ramo28').fuente, url: vnRefUrl(c('ramo28').ref) });
+      add({ id: 'est-r33-' + e.abbr, grupo: e.name, nombre: e.name + ': aportaciones del Ramo 33 en 2026', anio: '2026', mdp: e.ramo33, estado: c('ramo33').estado || 'pendiente', fuente: c('ramo33').fuente, url: vnRefUrl(c('ramo33').ref) });
+      add({ id: 'est-deuda-' + e.abbr, grupo: e.name, nombre: e.name + ': deuda pública del estado', anio: '2025', mdp: e.deuda, estado: e.deudaFuente ? 'oficial' : 'pendiente', fuente: e.deudaFuente || 'Sin documento citado' });
+      add({ id: 'est-asf-' + e.abbr, grupo: e.name, nombre: e.name + ': monto por aclarar ante la ASF (Cuenta Pública 2024)', anio: '2024', mdp: e.asfMontoObservado, estado: e.asfFuente ? 'oficial' : 'pendiente', fuente: e.asfFuente || 'Sin documento citado' });
+    });
+    const IF = DB.inspector_federal;
+    if (IF) (IF.entes || []).forEach(f => {
+      if (f.cp2025) add({ id: 'fed-cp-' + f.id, grupo: 'Federal', nombre: f.nombre + ': gasto ejercido en 2025', anio: '2025', mdp: f.cp2025.ejercido, estado: 'oficial', fuente: IF.fuentes.cp2025.corto, url: IF.fuentes.cp2025.url });
+      if (f.av2026) add({ id: 'fed-pef-' + f.id, grupo: 'Federal', nombre: f.nombre + ': presupuesto aprobado para 2026', anio: '2026', mdp: f.av2026.aprobado, estado: 'oficial', fuente: IF.fuentes.av2026.corto, url: IF.fuentes.av2026.url });
+    });
+    const M = window.AUDIT_MUNICIPIOS;
+    if (M) Object.keys(M.ent).forEach(ab => {
+      const ent = M.ent[ab], est = (DB.estados || []).find(x => x.abbr === ab);
+      ent.lista.forEach(r => { if (r.length > 2) add({ id: 'mun-' + ent.cve + r[0], grupo: 'Municipios', nombre: r[1] + ', ' + (est ? est.name : ab) + ': ingresos totales en 2024', anio: '2024', mdp: r[2] / 1e6, estado: 'oficial', fuente: M.fuente, url: M.url }); });
+    });
+    vnEstado.cat = out;
+    return out;
+  }
+
+  const VN_UNIDADES = [
+    { id: 'pesos', et: 'pesos', f: 1e-6 },
+    { id: 'miles', et: 'miles de pesos', f: 1e-3 },
+    { id: 'millones', et: 'millones de pesos', f: 1 },
+    { id: 'milmillones', et: 'miles de millones de pesos', f: 1e3 },
+    { id: 'billones', et: 'billones de pesos (millones de millones)', f: 1e6 }
+  ];
+
+  function vnFmt(mdp) {
+    return '$' + Number(mdp).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+  }
+
+  function renderVerificadorNotas() {
+    const raiz = document.getElementById('vnRaiz');
+    if (!raiz || raiz.dataset.listo) return;
+    raiz.dataset.listo = '1';
+    raiz.innerHTML =
+      '<div class="vn-pasos">' +
+        '<label class="vn-paso"><span class="vn-n">1</span><span class="vn-et">Pega la liga de la nota <small>(opcional: sirve para que el contraste diga de dónde salió la afirmación)</small></span>' +
+          '<input type="url" id="vnUrl" class="insp-buscador-input vn-input" placeholder="https://…" autocomplete="off"></label>' +
+        '<div class="vn-paso"><span class="vn-n">2</span><span class="vn-et">¿De qué cifra habla? Busca el concepto, el estado, el municipio o la dependencia</span>' +
+          '<input type="search" id="vnBuscar" class="insp-buscador-input vn-input" placeholder="Ej.: costo de la deuda, Jalisco deuda, Tren Maya, Monterrey…" autocomplete="off" oninput="window.AuditEngine.vnBuscar(this.value)">' +
+          '<div id="vnResultados" class="vn-resultados" role="listbox" aria-label="Cifras oficiales que coinciden"></div>' +
+          '<div id="vnElegida" class="vn-elegida" aria-live="polite"></div></div>' +
+        '<div class="vn-paso"><span class="vn-n">3</span><span class="vn-et">Escribe la cifra que da la nota</span>' +
+          '<div class="vn-cifra"><input type="text" inputmode="decimal" id="vnCifra" class="insp-buscador-input vn-input" placeholder="Ej.: 1.6" autocomplete="off" onkeydown="if(event.key===\'Enter\') window.AuditEngine.vnContrastar()">' +
+          '<select id="vnUnidad" class="vn-unidad">' + VN_UNIDADES.map(u => '<option value="' + u.id + '"' + (u.id === 'millones' ? ' selected' : '') + '>' + u.et + '</option>').join('') + '</select></div></div>' +
+      '</div>' +
+      '<button type="button" class="eval-btn-primary vn-boton" onclick="window.AuditEngine.vnContrastar()"><span>⚖️</span> Contrastar con el documento</button>' +
+      '<div id="vnResultado" class="vn-resultado" aria-live="polite"></div>' +
+      '<p class="vn-aviso"><b>Lo que esta herramienta no hace:</b> no abre ni lee la nota —un sitio sin servidor no puede hacerlo—, así que compara la cifra que tú copiaste, no la que la nota dice. Tampoco califica al medio: dice si una cifra coincide con un documento oficial, y por qué podría no coincidir.</p>';
+  }
+
+  function vnBuscar(q) {
+    const cont = document.getElementById('vnResultados');
+    if (!cont) return;
+    const p = munPlano(String(q || '').trim());
+    if (p.length < 2) { cont.innerHTML = ''; return; }
+    const partes = p.split(/\s+/);
+    const hits = vnCatalogo().filter(o => { const t = munPlano(o.nombre + ' ' + o.grupo + ' ' + (o.fuente || '')); return partes.every(w => t.indexOf(w) !== -1); });
+    const tope = 10;
+    cont.innerHTML = hits.length
+      ? hits.slice(0, tope).map(o => '<button type="button" class="vn-item" role="option" onclick="window.AuditEngine.vnElegir(\'' + o.id + '\')">' +
+          '<span class="vn-item-n">' + escHtml(o.nombre) + '</span><span class="vn-item-v">' + vnFmt(o.mdp) + ' ' + chipEstado(o.estado) + '</span></button>').join('') +
+        (hits.length > tope ? '<p class="vn-mas">' + (hits.length - tope) + ' coincidencias más: agrega una palabra para acotar.</p>' : '')
+      : '<p class="vn-mas">No tenemos esa cifra con documento. Prueba con otra palabra; si no está, no la podemos contrastar y no la vamos a suponer.</p>';
+  }
+
+  function vnElegir(id) {
+    const o = vnCatalogo().find(x => x.id === id);
+    if (!o) return;
+    vnEstado.sel = o;
+    const el = document.getElementById('vnElegida');
+    const res = document.getElementById('vnResultados');
+    if (res) res.innerHTML = '';
+    if (el) el.innerHTML = '<span class="vn-elegida-t">Vas a contrastar contra:</span> <b>' + escHtml(o.nombre) + '</b> · ' + vnFmt(o.mdp) + ' ' + chipEstado(o.estado) +
+      (o.url ? ' <a class="no-autolink" href="' + escHtml(o.url) + '" target="_blank" rel="noopener noreferrer">' + escHtml(o.fuente || 'documento') + ' ↗</a>' : ' <small>' + escHtml(o.fuente || '') + '</small>');
+    const c = document.getElementById('vnCifra');
+    if (c) c.focus();
+  }
+
+  function vnLeerNumero(txt) {
+    let t = String(txt || '').trim().replace(/[$\s]/g, '');
+    if (!t) return NaN;
+    /* 1,572,073.3 o 1.572.073,3 o 1.6 o 1,6 */
+    if (/,\d{1,2}$/.test(t) && t.indexOf('.') !== -1 && t.lastIndexOf(',') > t.lastIndexOf('.')) t = t.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(t)) t = t.replace(/,/g, '');
+    else if (/^\d+,\d+$/.test(t)) t = t.replace(',', '.');
+    return Number(t);
+  }
+
+  function vnContrastar() {
+    const out = document.getElementById('vnResultado');
+    if (!out) return;
+    const o = vnEstado.sel;
+    const bruto = (document.getElementById('vnCifra') || {}).value;
+    const n = vnLeerNumero(bruto);
+    const u = VN_UNIDADES.find(x => x.id === (document.getElementById('vnUnidad') || {}).value) || VN_UNIDADES[2];
+    const url = String((document.getElementById('vnUrl') || {}).value || '').trim();
+    const urlOk = /^https?:\/\/[^\s]+\.[^\s]+/i.test(url);
+    if (!o) { out.innerHTML = '<p class="vn-veredicto vn-v-gris">Primero elige, en el paso 2, la cifra oficial contra la que quieres contrastar.</p>'; return; }
+    if (!isFinite(n) || n <= 0) { out.innerHTML = '<p class="vn-veredicto vn-v-gris">Escribe en el paso 3 una cifra mayor que cero, como la da la nota (por ejemplo, 1.6 y elige «billones»).</p>'; return; }
+    const nota = n * u.f;
+    const dif = nota - o.mdp;
+    const pct = o.mdp ? dif / o.mdp * 100 : 0;
+    const razon = o.mdp ? nota / o.mdp : 0;
+    let clase, tit, porque;
+    if (o.estado === 'pendiente') {
+      clase = 'vn-v-gris'; tit = 'No se puede contrastar';
+      porque = 'Nuestra propia cifra está pendiente de documento. Contrastar contra ella sería medir con una regla que no está calibrada.';
+    } else if (Math.abs(pct) <= 1) {
+      clase = 'vn-v-verde'; tit = '✅ Coincide con el documento';
+      porque = 'La diferencia es de ' + Math.abs(pct).toFixed(2) + ' %: cabe en un redondeo.';
+    } else if (Math.abs(razon - 1000) / 1000 < 0.05 || Math.abs(razon - 0.001) / 0.001 < 0.05) {
+      clase = 'vn-v-rojo'; tit = '🔴 Parece un error de unidades: mil veces ' + (razon > 1 ? 'más' : 'menos');
+      porque = (u.id === 'billones' && razon > 1
+        ? 'Revisa si la nota usa «billón» en el sentido del inglés (billion = mil millones). En español un billón es un millón de millones. '
+        : 'Revisa si la nota confunde millones con miles de millones, o si tú elegiste otra unidad. ') +
+        'Con la unidad corregida, la cifra se acercaría al documento.';
+    } else if (Math.abs(pct) <= 10) {
+      clase = 'vn-v-ambar'; tit = '🟡 Se acerca, pero no es la misma cifra';
+      porque = 'La diferencia es de ' + pct.toFixed(1) + ' %. Suele deberse a otro año, a comparar lo aprobado con lo ejercido, a pesos de otro año (reales contra nominales) o a un redondeo muy grueso.';
+    } else {
+      clase = 'vn-v-rojo'; tit = '🔴 No coincide con el documento';
+      porque = 'La nota da ' + (dif > 0 ? 'una cifra ' + pct.toFixed(1) + ' % mayor' : 'una cifra ' + Math.abs(pct).toFixed(1) + ' % menor') + '. Antes de concluir, revisa que hable del mismo año y del mismo concepto: a veces la nota mide otra cosa con un nombre parecido.';
+    }
+    const texto = [
+      'Contraste de Auditavisión',
+      urlOk ? 'Nota: ' + url : 'Nota: (sin liga)',
+      'La nota afirma: ' + bruto + ' ' + u.et + ' = ' + vnFmt(nota),
+      'Documento oficial: ' + o.nombre + ' = ' + vnFmt(o.mdp) + ' [' + o.estado + ']',
+      'Fuente: ' + (o.fuente || '') + (o.url ? ' ' + o.url : ''),
+      'Diferencia: ' + (dif >= 0 ? '+' : '−') + vnFmt(Math.abs(dif)) + ' (' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + ' %)',
+      'Veredicto: ' + tit.replace(/^[^\wÁÉÍÓÚáéíóúÑñ]+/, '')
+    ].join('\n');
+    vnEstado.texto = texto;
+    out.innerHTML =
+      '<div class="vn-veredicto ' + clase + '">' +
+        '<p class="vn-v-tit">' + tit + '</p>' +
+        '<div class="vn-tabla">' +
+          '<div><span>La nota</span><b>' + vnFmt(nota) + '</b><small>' + escHtml(bruto) + ' ' + u.et + (urlOk ? ' · <a class="no-autolink" href="' + escHtml(url) + '" target="_blank" rel="noopener noreferrer nofollow">' + escHtml(url.replace(/^https?:\/\//i, '').split('/')[0]) + ' ↗</a>' : '') + '</small></div>' +
+          '<div><span>El documento ' + chipEstado(o.estado) + '</span><b>' + vnFmt(o.mdp) + '</b><small>' + escHtml(o.nombre) + ' · ' + escHtml(o.anio) + '</small></div>' +
+          '<div><span>Diferencia ' + chipEstado('derivado') + '</span><b>' + (dif >= 0 ? '+' : '−') + vnFmt(Math.abs(dif)) + '</b><small>' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + ' % frente al documento</small></div>' +
+        '</div>' +
+        '<p class="vn-v-porque">' + porque + '</p>' +
+        '<p class="vn-v-fuente">Fuente: ' + (o.url ? '<a class="no-autolink" href="' + escHtml(o.url) + '" target="_blank" rel="noopener noreferrer">' + escHtml(o.fuente || 'documento') + ' ↗</a>' : escHtml(o.fuente || '')) + '</p>' +
+        '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.vnCopiar()"><span>📋</span> Copiar el contraste</button>' +
+      '</div>';
+  }
+
+  function vnCopiar() {
+    if (vnEstado.texto) copiarTextoPlano(vnEstado.texto, 'Contraste copiado. Pégalo donde quieras compartirlo.');
+  }
+
   function inspEntes(nivel) {
     if (inspCacheEntes[nivel]) return inspCacheEntes[nivel];
     const E = DB.estados || [];
@@ -27170,6 +27388,10 @@
     irAlGlosario: irAlGlosario,
     abrirGlosarioDrawer: abrirGlosarioDrawer,
     abrirContexto: abrirContexto,
+    vnBuscar: vnBuscar,
+    vnElegir: vnElegir,
+    vnContrastar: vnContrastar,
+    vnCopiar: vnCopiar,
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     abrirRadarConcepto: abrirRadarConcepto,
     abrirNotaPortada: abrirNotaPortada,
