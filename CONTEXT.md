@@ -3135,7 +3135,7 @@ un commit anterior (d496a18). Resultado y lo que se aplicó:
   (una consulta con etiquetas se muestra, no se ejecuta); compara sin
   acentos ni mayúsculas (`munPlano`); recorre **el padrón completo de 2,479
   municipios** (`inspEntes('municipal')`, el mismo del Inspector) con su
-  entidad y clave INEGI, para distinguir homónimos (Juárez en seis
+  entidad y clave INEGI, para distinguir homónimos (Juárez en cinco
   estados); el municipio abre su expediente en el Inspector. Flechas, Enter
   y Escape; lo que empieza con la consulta va primero; tope de 12 con aviso
   de cuántas coincidencias más hay; «sin coincidencias» se dice como tal.
