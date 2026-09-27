@@ -8257,6 +8257,40 @@
     return { ov: ov, dr: dr };
   }
 
+  /* La Enciclopedia esta congelada y comparte este motor: lo que cambie la
+     forma de presentar solo se aplica en la plataforma del auditor, que se
+     identifica con <body data-pagina="auditor">. */
+  function esAuditor() {
+    return !!document.body && document.body.getAttribute('data-pagina') === 'auditor';
+  }
+
+  /* Panel lateral de contexto. La informacion densa (metodo, documentos,
+     leyes) no se borra: se guarda junto a un boton y se lee en la misma
+     ventana lateral del glosario, sin salir del recorrido. */
+  function ctxBoton(titulo, html, ico) {
+    return '<button type="button" class="ctx-abrir" data-ctx-titulo="' + glosEsc(titulo) + '" ' +
+        'onclick="window.AuditEngine.abrirContexto(this)" aria-haspopup="dialog">' +
+        '<span class="ctx-abrir-ico" aria-hidden="true">' + (ico || 'ℹ️') + '</span> ' + glosEsc(titulo) +
+        ' <span class="ctx-abrir-flecha" aria-hidden="true">›</span></button>' +
+      '<div class="ctx-contenido" hidden>' + html + '</div>';
+  }
+
+  function abrirContexto(boton) {
+    var cont = boton && boton.nextElementSibling;
+    if (!cont || !cont.classList.contains('ctx-contenido')) return;
+    var sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">🔎</span> Contexto y método</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar el panel" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">' + glosEsc(boton.getAttribute('data-ctx-titulo') || '') + '</h3>' +
+        '<div class="ctx-drawer-cuerpo">' + cont.innerHTML + '</div>' +
+      '</div>';
+    glosDrawerAbrir(ov, dr, boton);
+  }
+
   function glosDrawerAbrir(ov, dr, origen) {
     glosDrawerOrigen = origen || document.activeElement;
     ov.classList.add('abierto');
@@ -21449,6 +21483,7 @@
         v.contradicciones.map(t => '<p>' + escHtml(t) + '</p>').join('') + '</div>';
     }
     h += '<ul class="sim-ver-fuentes">' + (v.fuentes || []).map(simFuenteLink).join('') + '</ul>';
+    if (esAuditor()) return '<div class="sim-ver-ctx">' + ctxBoton('Lo que dicen los documentos oficiales', '<div class="sim-ver">' + h + '</div>', '📑') + '</div>';
     return '<details class="sim-ver"><summary>📑 Lo que dicen los documentos oficiales</summary>' + h + '</details>';
   }
 
@@ -26964,6 +26999,7 @@
     goToGlossary: goToGlossary,
     irAlGlosario: irAlGlosario,
     abrirGlosarioDrawer: abrirGlosarioDrawer,
+    abrirContexto: abrirContexto,
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     abrirRadarConcepto: abrirRadarConcepto,
     abrirNotaPortada: abrirNotaPortada,

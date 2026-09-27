@@ -22146,3 +22146,59 @@ body.glos-drawer-bloqueo { overflow: hidden; }
   .am-tk-v { font-size: 13px; }
   .am-tk-total .am-tk-v { font-size: 15px; }
 }
+
+/* Leyenda de los tres estados de una cifra, en el pie */
+.leyenda-estados {
+  margin: 4px 0 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+}
+.leyenda-estados-tit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 8px;
+}
+.leyenda-estados ul { list-style: none; margin: 0; padding: 0; }
+.leyenda-estados li {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.leyenda-estados li:last-child { margin-bottom: 0; }
+.leyenda-estados .est-chip { margin-right: 6px; vertical-align: 1px; }
+
+/* Panel lateral de contexto: boton que abre la informacion densa */
+.ctx-abrir {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-bright);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: left;
+}
+.ctx-abrir:hover { background: rgba(201,168,76,0.16); }
+.ctx-abrir:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.ctx-abrir-flecha { font-size: 16px; line-height: 1; }
+.ctx-contenido[hidden] { display: none !important; }
+.glos-drawer:has(.ctx-drawer-cuerpo) { width: min(560px, 100vw); }
+.ctx-drawer-cuerpo { font-size: 14px; line-height: 1.65; color: var(--text-main); }
+.ctx-drawer-cuerpo p { margin: 0 0 12px; }
+.ctx-drawer-cuerpo ol, .ctx-drawer-cuerpo ul { padding-left: 20px; margin: 0 0 12px; }
+.ctx-drawer-cuerpo li { margin-bottom: 6px; }
+.ctx-drawer-cuerpo .sim-ver { margin-top: 0; overflow-x: auto; }
+.ctx-drawer-cuerpo a { color: var(--gold-bright); }
+[data-theme="light"] .ctx-abrir { color: #0b3a6e; border-color: rgba(0,43,91,0.3); background: rgba(0,43,91,0.05); }

@@ -68,9 +68,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927k">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927l">
 </head>
-<body>
+<body data-pagina="auditor">
 
   <!-- Primer elemento enfocable: permite a quien navega con teclado o lector
        de pantalla brincar las nueve pestañas y llegar al contenido. -->
@@ -817,10 +817,10 @@
           <p>
             Antes de <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditar (Auditoría Gubernamental)', null, this)" title="Qué significa «Auditar (Auditoría Gubernamental)»" aria-haspopup="dialog">auditar<span class="glos-term-ico" aria-hidden="true">📖</span></button> una cifra hay que saber por dónde pasó. Del <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('PEF (Presupuesto de Egresos de la Federación)', null, this)" title="Qué significa «PEF (Presupuesto de Egresos de la Federación)»" aria-haspopup="dialog">presupuesto federal<span class="glos-term-ico" aria-hidden="true">📖</span></button> de 2026 ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). Esta sección es el mapa de ese recorrido, en tres bloques.
           </p>
-          <details class="hero-mas">
-            <summary>El camino del dinero, en cuatro pasos</summary>
+          <button type="button" class="ctx-abrir hero-mas" data-ctx-titulo="El camino del dinero, en cuatro pasos" onclick="window.AuditEngine.abrirContexto(this)" aria-haspopup="dialog"><span class="ctx-abrir-ico" aria-hidden="true">ℹ️</span> El camino del dinero, en cuatro pasos <span class="ctx-abrir-flecha" aria-hidden="true">›</span></button>
+          <div class="ctx-contenido hero-mas" hidden>
             <p>El dinero público recorre siempre el mismo camino: el Congreso autoriza cobrarlo en la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('LIF (Ley de Ingresos de la Federación)', null, this)" title="Qué significa «LIF (Ley de Ingresos de la Federación)»" aria-haspopup="dialog">Ley de Ingresos de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación 2026">[10]</a>; la Cámara de Diputados aprueba en qué gastarlo en el Presupuesto de Egresos <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">[11]</a>; el gobierno lo ejerce y lo reparte en el territorio por medio de dos <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo Presupuestario', null, this)" title="Qué significa «Ramo Presupuestario»" aria-haspopup="dialog">ramos<span class="glos-term-ico" aria-hidden="true">📖</span></button> (así se llaman los grandes apartados del presupuesto): el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 28 (Participaciones Federales)', null, this)" title="Qué significa «Ramo 28 (Participaciones Federales)»" aria-haspopup="dialog">Ramo 28<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de participaciones que los estados gastan con libertad, y el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 33 (Aportaciones Federales)', null, this)" title="Qué significa «Ramo 33 (Aportaciones Federales)»" aria-haspopup="dialog">Ramo 33<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de aportaciones etiquetadas para educación, salud, agua o seguridad <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a>; y al año siguiente se rinde la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Cuenta Pública', null, this)" title="Qué significa «Cuenta Pública»" aria-haspopup="dialog">Cuenta Pública<span class="glos-term-ico" aria-hidden="true">📖</span></button>, que revisa la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditoría Superior de la Federación (ASF)', null, this)" title="Qué significa «Auditoría Superior de la Federación (ASF)»" aria-haspopup="dialog">Auditoría Superior de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> (ASF).</p>
-          </details>
+          </div>
         </div>
 
         <!-- ====================================================================
@@ -2340,15 +2340,15 @@
         </div>
         <p class="efos-estado" id="efosEstado">La lista se descarga al escribir la primera búsqueda (1.5 MB).</p>
         <div class="efos-resultados" id="efosResultados"></div>
-        <details class="efos-guia">
-          <summary>Cómo usarlo en una auditoría ciudadana</summary>
+        <button type="button" class="ctx-abrir efos-guia-btn" data-ctx-titulo="Cómo usar la lista del SAT en una auditoría ciudadana" onclick="window.AuditEngine.abrirContexto(this)" aria-haspopup="dialog"><span class="ctx-abrir-ico" aria-hidden="true">ℹ️</span> Cómo usarlo en una auditoría ciudadana <span class="ctx-abrir-flecha" aria-hidden="true">›</span></button>
+        <div class="ctx-contenido" hidden>
           <ol>
-            <li>Consiga el RFC del proveedor: viene en el contrato, en la factura o en <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer">ComprasMX ↗</a>, la plataforma oficial de contrataciones que sustituyó a CompraNet en abril de 2025.</li>
-            <li>Búsquelo aquí. <strong>Definitivo</strong> es la señal fuerte; <strong>presunto</strong> es una sospecha en curso; <strong>desvirtuado</strong> y <strong>sentencia favorable</strong> significan que el contribuyente salió de la lista.</li>
-            <li>Si un ente público le pagó a un proveedor definitivo, esa compra merece una pregunta formal: presente una solicitud de información o acuda a los canales de denuncia.</li>
+            <li>Consigue el RFC del proveedor: viene en el contrato, en la factura o en <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer">ComprasMX ↗</a>, la plataforma oficial de contrataciones que sustituyó a CompraNet en abril de 2025.</li>
+            <li>Búscalo aquí. <strong>Definitivo</strong> es la señal fuerte; <strong>presunto</strong> es una sospecha en curso; <strong>desvirtuado</strong> y <strong>sentencia favorable</strong> significan que el contribuyente salió de la lista.</li>
+            <li>Si un ente público le pagó a un proveedor definitivo, esa compra merece una pregunta formal: presenta una solicitud de información o acude a los canales de denuncia.</li>
           </ol>
           <p>Aparecer en la lista es una determinación administrativa del SAT, no una condena penal. Fuente: <a href="https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336" target="_blank" rel="noopener noreferrer">SAT, listados del artículo 69-B ↗</a>.</p>
-        </details>
+        </div>
       </section>
 
     </div><!-- FIN PESTAÑA 6 -->
@@ -2814,6 +2814,14 @@
           El dinero que financia al Estado proviene exclusivamente del esfuerzo y tributo de la ciudadanía; 
           perseguir su destino hasta el último centavo es un derecho constitucional y un deber cívico fundamental.
         </p>
+        <div class="leyenda-estados" role="note" aria-label="Cómo leer cada cifra">
+          <p class="leyenda-estados-tit">Cómo leer cada cifra</p>
+          <ul>
+            <li><span class="est-chip est-oficial">oficial</span> La tomamos tal cual de su documento: DOF, SHCP, ASF, INEGI, Banxico. Junto a ella está la liga a la fuente para que la revises tú.</li>
+            <li><span class="est-chip est-derivado">derivado</span> La calculamos nosotros a partir de cifras oficiales, y te decimos la operación. Es nuestra lectura de los datos, no una cifra que publique el gobierno.</li>
+            <li><span class="est-chip est-pendiente">pendiente</span> Sabemos que el dato existe o se ha dicho, pero no hemos podido verificarlo en un documento oficial. Por eso no lo estimamos ni lo rellenamos: lo dejamos a la vista como pendiente.</li>
+          </ul>
+        </div>
         <p style="font-family:var(--font-mono); font-size:11px; color:var(--gold);">
           ⚡ Inspector Meteoro Creador · Arquitectura Cívica de Auditoría Integral.
         </p>
@@ -2861,7 +2869,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927k</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927l</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3005,17 +3013,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927k"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927l"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927k"></script>
+  <script src="assets/js/audit-database.js?v=20260927l"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927k"></script>
-  <script src="assets/js/municipios-rendicion.js?v=20260927k"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927l"></script>
+  <script src="assets/js/municipios-rendicion.js?v=20260927l"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927k"></script>
+  <script src="assets/js/audit-engine.js?v=20260927l"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

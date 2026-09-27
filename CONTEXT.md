@@ -3162,13 +3162,33 @@ un commit anterior (d496a18). Resultado y lo que se aplicó:
   pinta en la Enciclopedia congelada; ver «Cifras de la Enciclopedia que NO
   deben pasar al auditor».
 
+### Hecho (decisiones del autor: leyenda de tres estados y panel lateral)
+
+Decisiones del autor (27-09-2026): trato de **tú** al lector; la
+información densa va en **panel lateral** (drawer), como propuso
+Antigravity; la leyenda de estados va en «Principio y Compromiso».
+
+- **Leyenda «Cómo leer cada cifra»** en el pie (`.leyenda-estados`): los
+  tres chips con su significado — oficial (del documento, con liga),
+  derivado (cálculo nuestro con la operación dicha) y pendiente (se sabe
+  o se ha dicho, pero no se ha verificado en documento oficial).
+- **Panel lateral de contexto** (`abrirContexto`, `ctxBoton`): reutiliza la
+  ventana del glosario (`glosDrawerShell`) con la marca «Contexto y
+  método» y 560 px de ancho. Un botón `.ctx-abrir` guarda a su lado un
+  `.ctx-contenido` oculto y lo muestra en el panel. Ya usan el panel: «El
+  camino del dinero, en cuatro pasos» (módulo 1), la guía de la lista del
+  SAT y «Lo que dicen los documentos oficiales» de cada megaobra.
+- **Solo en el auditor:** `index.html` lleva `<body data-pagina="auditor">`
+  y `esAuditor()` decide. La Enciclopedia sigue con sus plegables
+  `<details>` intactos (verificado: 5 `details.sim-ver` allá, 0 acá).
+
 ### Pendiente
 
 - **De los planes de Astra y Antigravity, esperan decisión del autor:**
-  - Trato de «tú» o de «usted» en toda la plataforma (hoy domina «usted»).
-  - Contexto denso en ventana lateral («drawer») o en plegables `<details>`
-    como hasta ahora.
-  - Leyenda metodológica fija al pie, con texto honesto sobre lo pendiente.
+  - Trato de «tú»: decidido. Falta pasar los textos (index.html y los del
+    motor que solo pinta el auditor; los compartidos con la Enciclopedia
+    se resuelven con `esAuditor()` o se consultan).
+  - Panel lateral: decidido y construido; falta llevar ahí más bloques densos.
   - Orden de la portada y cabecera compacta en móvil; radar plegado.
   - Pase Cívico: pasarela real (Mercado Pago o SPEI) con datos del autor;
     los precios que propuso Antigravity ($79 y $699) no tienen origen.
