@@ -2886,11 +2886,16 @@ del autor. Script idempotente: `herramientas/glosario_fundamentos.py`.
   operación, y las tres llevan el chip `pendiente` porque sus supuestos no
   tienen documento citado (ver Pendiente).
 
-### Hecho (logotipo propio: el billete inspector, con su presentación)
+### Hecho (logotipo propio: la moneda inspectora, con su presentación)
 
 - El ⚖️ de la cabecera se sustituyó por un logotipo en SVG
-  (`assets/img/logo-auditavision.svg`): un billete verde con alas, sombrero y
-  una lupa que le agranda un ojo. Va en la barra de la plataforma y en la
+  (`assets/img/logo-auditavision.svg`). Primero fue un billete verde con alas;
+  desde el sello 20260927t es **una moneda de oro** grande, con canto acuñado y
+  gráfila de perlas, dos ojos (el derecho agrandado por la lupa), cejas,
+  bigote, sonrisa, sombrero de bombín, un sello de lacre rojo con la palomita
+  de «verificado» y alas de ángel amplias, de dos hileras de plumas blancas.
+  Conserva la proporción 128 × 100 del anterior, así que no cambió ningún
+  `width`/`height` de quien lo usa. Va en la barra de la plataforma y en la
   cabecera de la Enciclopedia; aletea un poco al pasar el cursor (salvo con
   «reducir movimiento»).
 - Al picarlo se abre «Quiénes somos» en la ventana lateral

@@ -21473,7 +21473,7 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 [data-theme="light"] .explorer-hero-box .explorer-card.active-explorer-card { background: linear-gradient(rgba(0, 43, 91, 0.05), rgba(0, 43, 91, 0.05)), rgba(255, 255, 255, 0.94); }
 
 /* ==========================================================================
-   LOGOTIPO: el billete inspector. Al picarlo abre la presentacion.
+   LOGOTIPO: la moneda de oro inspectora. Al picarlo abre la presentacion.
    ========================================================================== */
 .brand-logo-btn {
   flex-shrink: 0;
