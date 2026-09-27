@@ -3065,15 +3065,6 @@ capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
   corresponden a la estructura de once ponencias y al tope salarial anterior.
   Hay una advertencia metodológica visible en la ficha. Deben contrastarse
   contra el Manual de Remuneraciones vigente antes de citarse.
-- **Ramo 28 y Ramo 33 por entidad**: los totales federales de 2026 que hoy se
-  muestran en la subpestaña 1.1 son los oficiales ($1,456,045.9 mdp y
-  $1,127,075.3 mdp). Los montos **por entidad** de la colección `estados`
-  corresponden a un corte anterior y suman totales distintos ($1,385,200 y
-  $1,114,800 mdp). La base es internamente consistente, así que el mapa y los
-  comparativos funcionan bien, pero la distribución entidad por entidad debe
-  actualizarse contra el acuerdo de distribución publicado en el Diario
-  Oficial el 12 de diciembre de 2025. Hasta entonces, la subpestaña 1.2 lo
-  advierte en su bloque de fuentes.
 - **Colección `impuestos`**: sus montos de ISR, IVA e IEPS son anteriores a la
   Ley de Ingresos 2026 y difieren de los que muestra `panoramaErario`. Alimenta
   la calculadora de la pestaña 2; conviene alinearla al tocar ese módulo.
