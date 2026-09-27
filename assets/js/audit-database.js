@@ -15117,6 +15117,72 @@ window.AUDIT_DB = {
       }
     ]
   },
+  "huachicol_fiscal": {
+    "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ninguna autoridad ha publicado todavía una cifra de lo que se pierde; lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
+    "fuentes": {
+      "ilif27": {
+        "doc": "Iniciativa de Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Gaceta Parlamentaria núm. 7121, Anexo A, 8 de septiembre de 2026",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf",
+        "sha256": "8048a912e0cd1f202c3c66f89b95442f6cd9cc2663f725a07301f583c4dc4e1e"
+      },
+      "cgpe27": {
+        "doc": "SHCP, Criterios Generales de Política Económica 2027, Gaceta Parlamentaria núm. 7121, Anexo C",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+        "sha256": "21e179d275a540f4b4ac6f13a97608f5822bea0429972f943ecc7f4f22ebafb8"
+      },
+      "informe2": {
+        "doc": "Presidencia de la República, Segundo Informe de Gobierno, 1 de septiembre de 2026 (apartado de aduanas, citado por la prensa)",
+        "url": "https://www.segundoinformedegobierno.gob.mx/"
+      },
+      "oce": {
+        "doc": "Observatorio Ciudadano de Energía, estimación del costo del huachicol en 2025 (organismo civil, no autoridad), citada por El CEO",
+        "url": "https://elceo.com/economia/costo-huachicol-pemex-hacienda-cifra2-consultores/"
+      }
+    },
+    "reconocimiento": {
+      "estado": "oficial",
+      "fuente": "ilif27",
+      "paginas": "CXXI a CXXV",
+      "cita": "el Gobierno Federal ha identificado el robo y la sustracción ilegal de combustibles y otros delitos asociados, como una de las principales fuentes de evasión del pago del IEPS en la comercialización de combustibles",
+      "practicas": "simulación documental, facturación irregular, importaciones indebidamente declaradas y trazabilidad manipulada",
+      "medida": "Nueva fracción XIX del artículo 25 de la Ley de Ingresos: quien no fabrica, produce ni importa combustibles pagará IEPS por los litros que venda de más respecto de los que compró en el mes, sin trasladarlo al precio."
+    },
+    "en_juego": {
+      "estado": "oficial",
+      "fuente": "ilif27",
+      "pagina": "CLX (artículo 1o., rubro 3.02.01)",
+      "ieps_combustibles_2027_mdp": 538549.2,
+      "uno_por_ciento_mdp": 5385.5
+    },
+    "estudios": {
+      "estado": "oficial",
+      "fuente": "ilif27",
+      "pagina": "CCLXXI (artículo 30)",
+      "texto": "El SAT deberá publicar estudios sobre la evasión fiscal en México a más tardar 35 días después de terminado el ejercicio fiscal de 2027."
+    },
+    "anam": {
+      "estado": "pendiente",
+      "fuente": "informe2",
+      "periodo": "1 de septiembre de 2025 al 30 de junio de 2026",
+      "casos": 3109,
+      "litros_millones": 109.4,
+      "evasion_mdp": 4600,
+      "sellos_cancelados": 3434,
+      "denuncias": 118,
+      "por_que_pendiente": "El portal del Informe rechaza la consulta automatizada; las cifras se tomaron de la prensa que lo cita y falta cotejarlas en el documento."
+    },
+    "estimaciones": [
+      {
+        "estado": "pendiente",
+        "fuente": "oce",
+        "anio": 2025,
+        "total_mdp": 123000,
+        "pemex_mdp": 56000,
+        "impuestos_mdp": 67000,
+        "por_que_pendiente": "Estimación de un organismo civil, no de la autoridad."
+      }
+    ]
+  },
   "simulador_megaobras": {
   "sectores": [
     {

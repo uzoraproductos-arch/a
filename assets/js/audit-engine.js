@@ -8523,6 +8523,40 @@
         acciones: [{ txt: 'Revisar las 12 obras en el módulo 2', fn: function() { seleccionarModuloExplorer('megaobras'); } }]
       };
     }
+    if (clave === 'huachicol') {
+      var H = DB.huachicol_fiscal;
+      if (!H) return null;
+      var hf = function(k, pag) {
+        var f = H.fuentes[k];
+        return f ? '<a class="no-autolink" href="' + glosEsc(f.url) + '" target="_blank" rel="noopener noreferrer">' + glosEsc(f.doc) + (pag ? (/ a /.test(pag) ? ', pp. ' : ', p. ') + glosEsc(pag) : '') + ' ↗</a>' : '';
+      };
+      var mdpH = function(n) { return '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; };
+      var R = H.reconocimiento, J = H.en_juego, A = H.anam, S = H.estudios;
+      var est = (H.estimaciones || []).map(function(e) {
+        return '<li>' + chipEstado(e.estado) + ' ' + mdpH(e.total_mdp) + ' en ' + e.anio + ': ' + mdpH(e.pemex_mdp) + ' de afectación a Pemex y ' + mdpH(e.impuestos_mdp) +
+          ' de impuestos no cobrados. ' + glosEsc(e.por_que_pendiente) + ' ' + hf(e.fuente) + '</li>';
+      }).join('');
+      return {
+        icono: '⛽', estado: 'pendiente',
+        titulo: 'Huachicol fiscal: lo que se deja de cobrar',
+        cuerpo:
+          radarSec('Qué es', '<p>Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía, facturar menos litros de los que se venden o vender más de lo que se compró con factura. No es el robo en ductos, aunque el Gobierno combate los dos juntos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA.</p>') +
+          radarSec('Lo que reconoce el Gobierno ' + chipEstado(R.estado), '<p>En la exposición de motivos de la Ley de Ingresos 2027 se lee que «' + glosEsc(R.cita) + '». Nombra las prácticas: ' + glosEsc(R.practicas) + '. ' + hf(R.fuente, R.paginas) + '</p>' +
+            '<p><b>La medida que propone:</b> ' + glosEsc(R.medida) + '</p>') +
+          radarSec('Lo que está en juego', '<ol class="rc-pasos">' +
+            radarPaso(1, 'IEPS de combustibles que el Gobierno espera cobrar en 2027: <b>' + mdpH(J.ieps_combustibles_2027_mdp) + '</b>. ' + hf(J.fuente, J.pagina), J.estado) +
+            radarPaso(2, 'Cada 1 % de ese impuesto que se evada equivale a <b>' + mdpH(J.uno_por_ciento_mdp) + '</b> (' + mdpH(J.ieps_combustibles_2027_mdp) + ' ÷ 100). Es una regla de tres para dar tamaño, no una estimación de cuánto se evade.', 'derivado') +
+            radarPaso(3, 'De la cuota estatal del IEPS a gasolinas, 9 de cada 11 pesos van a los estados y una parte a sus municipios (Ley de Coordinación Fiscal, art. 4-A): lo que se evade también se lo quitan a tu estado y a tu municipio.', 'oficial') +
+          '</ol>') +
+          radarSec('Lo que se ha dicho y aún no pudimos verificar', '<ul class="pd-lista">' +
+            '<li>' + chipEstado(A.estado) + ' Segundo Informe de Gobierno: del ' + glosEsc(A.periodo) + ' la Agencia Nacional de Aduanas detectó ' + A.casos.toLocaleString('es-MX') + ' casos de posible contrabando de hidrocarburos, ' +
+              A.litros_millones.toLocaleString('es-MX') + ' millones de litros y unos ' + mdpH(A.evasion_mdp) + ' de impuestos que se intentó evadir; canceló ' + A.sellos_cancelados.toLocaleString('es-MX') + ' sellos digitales y presentó ' + A.denuncias + ' denuncias. ' + glosEsc(A.por_que_pendiente) + ' ' + hf(A.fuente) + '</li>' +
+            est + '</ul>') +
+          radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ninguna autoridad ha publicado todavía cuánto se pierde. ' +
+            glosEsc(S.texto) + ' ' + hf(S.fuente, S.pagina) + ' Ahí debería aparecer la primera cifra oficial, y aquí la pondremos.</p>'),
+        acciones: [{ txt: 'Ver cuánto IEPS pagas en la calculadora', fn: function() { seleccionarModuloExplorer('calculadora'); } }]
+      };
+    }
     if (clave === 'deuda') {
       var eg = ((DB.panoramaErario && DB.panoramaErario.egresos) || []).find(function(x) { return x.id === 'egr-costofin'; });
       if (!eg) return null;

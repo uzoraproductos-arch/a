@@ -3198,6 +3198,40 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (huachicol fiscal, en primera plana y sin cifras inventadas)
+
+Pedido del autor (27-09-2026): que el huachicol fiscal esté en portada y en
+la calculadora, la deuda y las obras. Sello 20260927p.
+
+- **Colección `huachicol_fiscal`** en la base (la Enciclopedia no la lee),
+  con cuatro fuentes y el estado de cada dato:
+  - Oficial: la Iniciativa de Ley de Ingresos 2027 (Gaceta núm. 7121,
+    Anexo A; SHA-256 8048a912…), pp. CXXI-CXXV: el Gobierno Federal
+    reconoce el robo y la sustracción ilegal de combustibles como «una de
+    las principales fuentes de evasión del pago del IEPS» y propone la
+    fracción XIX del art. 25 (IEPS sobre los litros vendidos de más).
+  - Oficial: IEPS de combustibles automotrices estimado para 2027,
+    **$538,549.2 mdp** (art. 1o., p. CLX). Derivado: cada 1 % equivale a
+    $5,385.5 mdp (regla de tres, no estimación de la evasión).
+  - Oficial: el art. 30 (p. CCLXXI) obliga al SAT a publicar estudios de
+    evasión a más tardar 35 días después de terminar 2027. Ahí debería
+    salir la primera cifra oficial.
+  - Pendiente: Segundo Informe de Gobierno, ANAM (1-09-2025 a 30-06-2026):
+    3,109 casos, 109.4 millones de litros, unos $4,600 mdp que se intentó
+    evadir, 3,434 sellos cancelados, 118 denuncias. El portal del Informe
+    rechaza la consulta automatizada (403); las cifras vienen de la prensa
+    que lo cita.
+  - Pendiente: Observatorio Ciudadano de Energía, $123,000 mdp en 2025
+    ($56,000 Pemex + $67,000 impuestos). Organismo civil, no autoridad.
+- **Dónde aparece:** cuarto indicador del radar de la portada («sin cifra
+  oficial todavía»), cuarta tarjeta del desglose del radar, explicación
+  completa en el panel lateral (`radarConcepto('huachicol')`), aviso junto
+  al costo de la deuda en la Panorámica y aviso en el reloj de la
+  calculadora.
+- **Por qué no se suma:** es ingreso que no entra, no gasto. Sumarlo a la
+  deuda o a las obras sería mezclar cuentas; se dice en pantalla. Tampoco
+  se integró a las fichas de megaobras: no hay relación documentada.
+
 ### Hecho (megaobras: la pérdida anual, con estados financieros oficiales)
 
 Sello 20260927o. Solo en el auditor (`megaobrasOficialBase()`, en memoria);
