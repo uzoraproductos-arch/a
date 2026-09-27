@@ -3223,7 +3223,9 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
 - **De los planes de Astra y Antigravity, esperan decisión del autor:**
   - Trato de «tú»: hecho. Texto nuevo del motor: usar `tuUd()` si también
     se pinta en la Enciclopedia.
-  - Panel lateral: decidido y construido; falta llevar ahí más bloques densos.
+  - Panel lateral: decidido y construido; ya lo usan 12 bloques (hero, guía
+    EFOS, megaobras y los nueve de `pdPlegable`). Lo nuevo que sea denso
+    nace ahí.
   - Orden de la portada y cabecera compacta en móvil; radar plegado.
   - Pase Cívico: pasarela real (Mercado Pago o SPEI) con datos del autor;
     los precios que propuso Antigravity ($79 y $699) no tienen origen.
