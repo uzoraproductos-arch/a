@@ -38,11 +38,12 @@ federal y federalizado, organizada en nueve módulos:
 
 ```
 index.html                       Estructura, 9 pestañas y contenido editorial
-assets/css/auditavision.css      Estilos maestros
-assets/js/mexico-states-geo.js   Geometría vectorial de los 32 estados
-assets/js/audit-database.js      Base de datos fiscal
-assets/js/municipios-efipem.js   Padrón municipal (INEGI)
-assets/js/audit-engine.js        Motor de la aplicación
+assets/auditor/css/auditavision.css     Estilos maestros
+assets/auditor/js/mexico-states-geo.js  Geometría vectorial de los 32 estados
+assets/auditor/js/audit-database.js     Base de datos fiscal
+assets/auditor/js/municipios-efipem.js  Padrón municipal (INEGI)
+assets/auditor/js/audit-engine.js       Motor de la aplicación
+assets/css, assets/js, assets/data      Congelados: solo los carga enciclopedia.html
 herramientas/sello.py            Sube el sello de versión de las cinco hojas
 AGENTS.md                        Reglas para agentes de IA
 CONTEXT.md                       Estado, decisiones y pendientes

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Integra a assets/js/audit-database.js la colección «comparador_salarial»:
+"""Integra a assets/auditor/js/audit-database.js la colección «comparador_salarial»:
 los cargos con los que el bloque 2 del módulo 3 (Calculadora Cívica) compara
 el ingreso del lector, y el cuadro de prestaciones contra la Ley Federal del
 Trabajo.

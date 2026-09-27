@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Integra a assets/js/audit-database.js la colección «cuenta_publica_asf»:
+"""Integra a assets/auditor/js/audit-database.js la colección «cuenta_publica_asf»:
 qué es la Cuenta Pública, el calendario legal de su revisión, las cifras de la
 Matriz de Datos Básicos de la ASF (Cuenta Pública 2024, consolidado de las tres
 entregas, y primera entrega de la 2025) y qué significa cada acción.

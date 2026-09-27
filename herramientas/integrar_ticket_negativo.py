@@ -1,4 +1,4 @@
-"""Integra la coleccion ticket_negativo en assets/js/audit-database.js.
+"""Integra la coleccion ticket_negativo en assets/auditor/js/audit-database.js.
 
 La usa el bloque 2 del modulo 5 (Costo Ambiental): el ticket ciudadano en
 negativo reparte por habitante la deuda publica total, los intereses de la
@@ -16,7 +16,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from integrar_ambiente import insertar  # noqa: E402
 
-BASE = pathlib.Path(__file__).resolve().parent.parent / 'assets' / 'js' / 'audit-database.js'
+BASE = pathlib.Path(__file__).resolve().parent.parent / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 
 DATOS = {
     'consulta': '26 de septiembre de 2026',

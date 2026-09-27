@@ -25,18 +25,18 @@ import sys
 from datetime import date
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# Solo index.html. La Enciclopedia quedó congelada por decisión del autor
-# (27-09-2026): no se modifica, ni siquiera su sello; sirve de consulta y sus
-# dependencias se refrescan solas cuando vence la caché de diez minutos.
+# Solo index.html y sus copias en assets/auditor/. La Enciclopedia es un proyecto
+# aparte (decisión del autor, 27-09-2026): ni ella ni los archivos que carga
+# (assets/css, assets/js, assets/data) se tocan sin que el autor lo pida.
 RUTAS = [os.path.join(RAIZ, 'index.html')]
 
 ARCHIVOS = [
-    ('href', 'assets/css/auditavision.css'),
-    ('src', 'assets/js/mexico-states-geo.js'),
-    ('src', 'assets/js/audit-database.js'),
-    ('src', 'assets/js/municipios-efipem.js'),
-    ('src', 'assets/js/municipios-rendicion.js'),
-    ('src', 'assets/js/audit-engine.js'),
+    ('href', 'assets/auditor/css/auditavision.css'),
+    ('src', 'assets/auditor/js/mexico-states-geo.js'),
+    ('src', 'assets/auditor/js/audit-database.js'),
+    ('src', 'assets/auditor/js/municipios-efipem.js'),
+    ('src', 'assets/auditor/js/municipios-rendicion.js'),
+    ('src', 'assets/auditor/js/audit-engine.js'),
 ]
 
 VISIBLE = re.compile(r'<span class="footer-sello">[\s\S]*?</span>')

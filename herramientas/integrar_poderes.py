@@ -22,7 +22,7 @@ import sys
 import openpyxl
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 XLS_PJF = RAIZ / 'investigaciones' / 'Auditavision_Poder_Judicial_2026.xlsx'
 XLS_2024 = RAIZ / 'investigaciones' / 'Auditavision_Desglose_2024.xlsx'
 

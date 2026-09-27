@@ -28,7 +28,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from integrar_glosario_modulos import _cuerpo  # noqa: E402
 
-BASE = pathlib.Path(__file__).resolve().parent.parent / 'assets' / 'js' / 'audit-database.js'
+BASE = pathlib.Path(__file__).resolve().parent.parent / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 
 # Pesos, tal como los publica el DOF: (Ramo 28 Anexo 15, Ramo 33 Anexo 16).
 PESOS = {

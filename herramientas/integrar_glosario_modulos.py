@@ -33,7 +33,7 @@ import pathlib
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 
 AMB = '\U0001f30e Medio Ambiente'
 TRA = '\U0001f477 Trabajo y Salario'

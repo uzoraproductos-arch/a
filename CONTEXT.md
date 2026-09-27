@@ -91,10 +91,11 @@ instalar. Se abre y funciona.
 
 ```
 index.html                       Estructura, 9 pestañas, contenido editorial
-assets/css/auditavision.css      Diseño: temas claro y oscuro
-assets/js/mexico-states-geo.js   Geometría de las 32 entidades (window.MEXICO_GEOJSON)
-assets/js/audit-database.js      Datos fiscales, 16 colecciones (window.AUDIT_DB)
-assets/js/audit-engine.js        Motor y controlador (window.AuditEngine)
+assets/auditor/css/auditavision.css     Diseño: temas claro y oscuro
+assets/auditor/js/mexico-states-geo.js  Geometría de las 32 entidades (window.MEXICO_GEOJSON)
+assets/auditor/js/audit-database.js     Datos fiscales (window.AUDIT_DB)
+assets/auditor/js/audit-engine.js       Motor y controlador (window.AuditEngine)
+assets/css, assets/js, assets/data      Congelados con la Enciclopedia: no se tocan
 herramientas/sello.py            Sube el sello de versión de las cinco hojas
 AGENTS.md                        Reglas para agentes de IA (rama, criterio, límites)
 ```
@@ -3202,6 +3203,40 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   (`exp-fila`), la lista de dependencias de una tarjeta del comparador y
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
+
+### Hecho (el auditor, separado de la Enciclopedia)
+
+Decisión del autor (27-09-2026): la Enciclopedia es un proyecto aparte,
+solo de referencia; nada de lo que se haga en el auditor debe tocarla,
+cargarla ni revisarla. Sello 20260927x.
+
+- Hasta hoy las dos páginas cargaban los mismos archivos de `assets/`, así
+  que cualquier cambio en el motor o en la hoja de estilos le llegaba a la
+  Enciclopedia. Para separarlas **sin abrir `enciclopedia.html`**, el
+  auditor pasó a tener copias propias en `assets/auditor/` (css, js, datos
+  del 69-B del SAT y logotipo). La Enciclopedia sigue con `assets/css`,
+  `assets/js` y `assets/data`, que quedan congelados tal como estaban en el
+  commit b5f8fa8.
+- Las fotografías de `assets/img/` (fondo de ciudad y carrusel) siguen
+  compartidas porque no se editan; la hoja del auditor las pide con
+  `../../img/`.
+- `herramientas/sello.py` y todos los `herramientas/integrar_*`,
+  `anclar_*` y `actualizar_69b.py` escriben ya en `assets/auditor/`.
+- Las pruebas dejan de abrir la Enciclopedia.
+
+### Hecho (ancho uniforme de los bloques de portada)
+
+Pedido del autor (27-09-2026, con imagen marcada en rojo y morado).
+Sello 20260927x.
+
+- «Auditoría en imágenes» y «Fiscalización ciudadana del gasto público»
+  eran más angostos que el espacio donde se desglosa un módulo al pulsar
+  «Comenzar» (1440 px frente a 1560 px, 20 px de margen frente a 24).
+  Ahora toman el mismo ancho y márgenes que `.main-wrapper`. Medido: los
+  tres bordes coinciden al píxel en 360, 768, 1366 y 1920 px.
+- De paso: «Saca tu estado de cuenta» y «5,417 acciones promovidas» se
+  salían de su tarjeta y chocaban entre sí; ahora se parten en dos
+  renglones. Sin desbordes en ningún ancho.
 
 ### Hecho (sello de emisión en los tickets)
 

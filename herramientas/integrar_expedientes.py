@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Integra a assets/js/audit-database.js la colección «expedientes»: las diez
+"""Integra a assets/auditor/js/audit-database.js la colección «expedientes»: las diez
 fichas de Expedientes de Casos por Aclarar (Búsqueda Forense). Auditoría en
 imágenes, en la portada, lee estas mismas fichas.
 
@@ -27,7 +27,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from integrar_ambiente import insertar  # noqa: E402
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 DATOS = RAIZ / 'investigaciones' / 'expedientes-asf.json'
 
 SDA_FUENTE = 'SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026)'

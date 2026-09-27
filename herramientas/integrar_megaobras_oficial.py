@@ -36,7 +36,7 @@ import sys
 from collections import defaultdict
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB = os.path.join(RAIZ, 'assets', 'js', 'audit-database.js')
+DB = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js')
 
 TP = 'https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos'
 OPA = TP + '/OPA'

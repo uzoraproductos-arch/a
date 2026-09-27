@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Integra a assets/js/audit-database.js la colección «evaluacion_sexenal»:
+"""Integra a assets/auditor/js/audit-database.js la colección «evaluacion_sexenal»:
 las cifras verificadas con las que el bloque 3 del módulo 2 compara a los
 presidentes de 1988 a 2024 (crecimiento, deuda, empleo formal y fiscalización
 superior).

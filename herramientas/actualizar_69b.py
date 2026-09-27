@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenera assets/data/sat-69b.js desde el listado oficial del SAT.
+"""Regenera assets/auditor/data/sat-69b.js desde el listado oficial del SAT.
 
 Uso:
     python3 herramientas/actualizar_69b.py              # descarga el CSV
@@ -28,7 +28,7 @@ URL_CSV = "http://omawww.sat.gob.mx/cifras_sat/Documents/Listado_Completo_69-B.c
 URL_PAGINA = ("https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-"
               "con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336")
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SALIDA = os.path.join(RAIZ, "assets", "data", "sat-69b.js")
+SALIDA = os.path.join(RAIZ, "assets", "auditor", "data", "sat-69b.js")
 
 # Columna (base cero) donde empieza cada etapa: oficio y fecha en la página
 # del SAT, luego oficio y fecha en el DOF. Se prefiere el DOF; si la etapa

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Integra a assets/js/audit-database.js la colección «ambiente»: el costo
+"""Integra a assets/auditor/js/audit-database.js la colección «ambiente»: el costo
 ambiental (reloj, huella, basura municipal, presupuesto ambiental 2026-2027,
 leyes aplicables y quién mide hoy cada dato).
 
@@ -16,7 +16,7 @@ import pathlib
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 PRESUP = RAIZ / 'investigaciones' / 'presupuesto-ambiental.json'
 CONSULTA = '26 de septiembre de 2026'
 

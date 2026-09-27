@@ -23,7 +23,7 @@ import sys
 import unicodedata
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 MATRIZ = RAIZ / 'investigaciones' / 'datos-matriz-asf2024.json'
 
 ALIAS = {'Veracruz (Puerto)': 'Veracruz',

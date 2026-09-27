@@ -38,9 +38,13 @@ acaban los créditos, lo único que se pierde es lo que no se empujó.
 **Nunca empujes a `main` sin permiso expreso del autor.**
 
 **La Enciclopedia (`enciclopedia.html`) está congelada** por decisión del autor:
-no se modifica, ni siquiera su sello. Sirve de fuente de consulta; todo el
-trabajo va a `index.html`, la plataforma del auditor. Ojo: comparte
-`assets/` con el auditor, así que un cambio en el motor puede alterarla.
+no se modifica, ni siquiera su sello, ni se abre en las pruebas. Es un
+proyecto aparte que sirve solo de fuente de consulta; todo el trabajo va a
+`index.html`, la plataforma del auditor. **Desde el 27-09-2026 ya no
+comparten archivos:** el auditor carga sus copias de `assets/auditor/` y la
+Enciclopedia se quedó con `assets/css`, `assets/js` y `assets/data`, que
+**no se tocan** salvo que el autor lo pida. Solo `assets/img/` (fotografías)
+sigue compartida.
 
 Para saber si una copia está al día:
 
@@ -79,11 +83,11 @@ y funciona.
 
 ```
 index.html                       Estructura, 9 pestañas, contenido editorial
-assets/css/auditavision.css      Diseño: temas claro y oscuro
-assets/js/mexico-states-geo.js   Geometría de las 32 entidades
-assets/js/audit-database.js      Datos fiscales           → window.AUDIT_DB
-assets/js/municipios-efipem.js   Padrón municipal INEGI
-assets/js/audit-engine.js        Motor y controlador      → window.AuditEngine
+assets/auditor/css/auditavision.css      Diseño: temas claro y oscuro
+assets/auditor/js/mexico-states-geo.js   Geometría de las 32 entidades
+assets/auditor/js/audit-database.js      Datos fiscales           → window.AUDIT_DB
+assets/auditor/js/municipios-efipem.js   Padrón municipal INEGI
+assets/auditor/js/audit-engine.js        Motor y controlador      → window.AuditEngine
 herramientas/sello.py            Sube el sello de versión (ver §4)
 ```
 
@@ -107,8 +111,9 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
 - **Saltos de línea CRLF** en `index.html`, los cuatro `.js` y el `.css`.
   Al editar con scripts, ábrelos en binario y preserva los CRLF, o el diff se
   llena de ruido y se pierde la trazabilidad del cambio.
-  Cuentas de CR sueltos que deben conservarse: `index.html` 56,
-  `audit-engine.js` 2, `audit-database.js` 2, `auditavision.css` 1.
+  Cuentas de CR sueltos que deben conservarse (copias de `assets/auditor/`):
+  `index.html` 56, `audit-engine.js` 2, `audit-database.js` 2,
+  `auditavision.css` 1.
   El `.gitattributes` fija `* -text` para que Git no los convierta al clonar
   ni al commitear, en Windows tampoco. **No lo quites.**
 - **El texto va con acentos.** Es contenido de cara al público mexicano.
@@ -162,4 +167,5 @@ sostiene.
 plataforma le habla a una persona, no a un trámite. Las citas textuales de
 leyes y documentos se dejan como están. En el motor, que comparte la
 Enciclopedia, los textos van en `tuUd('versión usted', 'versión tú')`: el
-auditor muestra la de tú y la Enciclopedia congelada conserva el usted.
+auditor muestra la de tú. (Heredado de cuando compartían motor; la copia
+congelada de la Enciclopedia conserva el usted.)

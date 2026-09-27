@@ -26,7 +26,7 @@ import pathlib
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 
 FIS = '\U0001f50d Fiscalización Superior'
 MDB = 'Glosario de la Matriz de Datos Básicos de la ASF (CP 2024, p. 518)'

@@ -24,7 +24,7 @@ aquí cinco documentos oficiales, sin estimar nada:
 5. ASF, Matriz de Datos Básicos de la CP 2024 (investigaciones/datos-matriz-asf2024.json):
    las 1,056 auditorías integrales a municipios y alcaldías.
 
-Escribe assets/js/municipios-rendicion.js (window.AUDIT_MUN_RENDICION), el
+Escribe assets/auditor/js/municipios-rendicion.js (window.AUDIT_MUN_RENDICION), el
 bloque "inspector_estatal" de audit-database.js y las referencias 111 a 113.
 Verifica la huella SHA-256 de cada archivo antes de leerlo. Idempotente.
 
@@ -46,8 +46,8 @@ from integrar_glosario_modulos import _cuerpo  # noqa: E402
 from anclar_ingresos_entidades import INGRESOS  # noqa: E402
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
-BASE = RAIZ / 'assets' / 'js' / 'audit-database.js'
-SALIDA = RAIZ / 'assets' / 'js' / 'municipios-rendicion.js'
+BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
+SALIDA = RAIZ / 'assets' / 'auditor' / 'js' / 'municipios-rendicion.js'
 MATRIZ = RAIZ / 'investigaciones' / 'datos-matriz-asf2024.json'
 
 SHA_CP = '94cd87dfb1f0dbcb27886d5792046c9c6d96eeab2878f898c8a9813ef1fdf6de'
@@ -299,7 +299,7 @@ def asf(padron):
 
 def padron_inegi():
     """Claves y nombres del catálogo, desde municipios-efipem.js."""
-    t = (RAIZ / 'assets' / 'js' / 'municipios-efipem.js').read_text(encoding='utf-8')
+    t = (RAIZ / 'assets' / 'auditor' / 'js' / 'municipios-efipem.js').read_text(encoding='utf-8')
     out = {}
     for m in re.finditer(r'"([A-ZÉ]+)": \{ cve: "(\d\d)", n: \d+, conCifra: \d+,[\s\S]*?lista: \[([\s\S]*?)\] \}', t):
         lista = re.findall(r'\["(\d{3})","([^"]+)"', m.group(3))

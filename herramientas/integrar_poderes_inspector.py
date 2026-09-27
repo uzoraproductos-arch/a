@@ -37,7 +37,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from integrar_glosario_modulos import _cuerpo  # noqa: E402
 
-BASE = pathlib.Path(__file__).resolve().parent.parent / 'assets' / 'js' / 'audit-database.js'
+BASE = pathlib.Path(__file__).resolve().parent.parent / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 SHA_CP24 = '94cd87dfb1f0dbcb27886d5792046c9c6d96eeab2878f898c8a9813ef1fdf6de'
 SHA_CP25 = '973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0'
 SHA_AV = 'faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511'

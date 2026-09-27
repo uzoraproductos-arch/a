@@ -15,7 +15,7 @@ def nl(text):
     return text.replace('\r\n', '\n').replace('\n', '\r\n')
 
 html_path = ROOT / 'index.html'
-engine_path = ROOT / 'assets/js/audit-engine.js'
+engine_path = ROOT / 'assets/auditor/js/audit-engine.js'
 html_original = html_path.read_bytes().decode('utf-8')
 engine_original = engine_path.read_bytes().decode('utf-8')
 if 'id="inspectorWorkspace"' in html_original:
@@ -28,11 +28,11 @@ html = html_original[:start] + nl('''    <div id="tab-panel-verificador" class="
         <p>Preparando el cuaderno del Inspector…</p>
       </div>
     </div><!-- FIN PESTAÑA 6 -->''') + html_original[end:]
-html = once(html, '  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260922c">', nl('''  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260922c">
-  <link rel="stylesheet" href="assets/css/inspector-workspace.css?v=20260922c">'''))
-html = once(html, '  <script src="assets/js/audit-engine.js?v=20260922c"></script>', nl('''  <script src="assets/js/inspector-model.js?v=20260922c"></script>
-  <script src="assets/js/inspector-workspace.js?v=20260922c"></script>
-  <script src="assets/js/audit-engine.js?v=20260922c"></script>'''))
+html = once(html, '  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260922c">', nl('''  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260922c">
+  <link rel="stylesheet" href="assets/auditor/css/inspector-workspace.css?v=20260922c">'''))
+html = once(html, '  <script src="assets/auditor/js/audit-engine.js?v=20260922c"></script>', nl('''  <script src="assets/auditor/js/inspector-model.js?v=20260922c"></script>
+  <script src="assets/auditor/js/inspector-workspace.js?v=20260922c"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20260922c"></script>'''))
 html = once(html, '<div id="tab-panel-comunidad" class="tab-panel">', nl('''<div id="tab-panel-comunidad" class="tab-panel">
       <section class="section-hero">
         <h2>Investigar y conversar sobre un expediente</h2>
