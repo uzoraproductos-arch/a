@@ -2281,6 +2281,1022 @@ window.AUDIT_DB = {
       ]
     }
   },
+  "inspector_federal": {
+   "consulta": "27 de septiembre de 2026",
+   "nota": "Nivel federal del Modo Inspector. Cifras en millones de pesos, sumadas por ramo desde los archivos abiertos de Hacienda; lo de la ASF se suma en el motor desde la Matriz de Datos Básicos de la Cuenta Pública 2024.",
+   "fuentes": {
+    "cp2025": {
+     "ref": "ref-shcp-cp2025-datos",
+     "corto": "SHCP, Cuenta Pública 2025, datos abiertos",
+     "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv",
+     "sha256": "973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0"
+    },
+    "av2026": {
+     "ref": "ref-shcp-avance-2t2026",
+     "corto": "SHCP, avance del gasto al 2.º trimestre de 2026",
+     "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
+     "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511",
+     "corte": "30 de junio de 2026"
+    },
+    "asf2024": {
+     "ref": "ref-asf-mdb2024",
+     "corto": "ASF, Matriz de Datos Básicos CP 2024 (feb. 2026)"
+    }
+   },
+   "entes": [
+    {
+     "id": "legislativo",
+     "ramo": "01",
+     "nombre": "Poder Legislativo",
+     "icono": "🏛️",
+     "tipo": "Poder de la Unión",
+     "cp2025": {
+      "original": 17529.1,
+      "modificado": 18619.6,
+      "devengado": 18619.6,
+      "pagado": 18525.6,
+      "ejercido": 18619.6
+     },
+     "av2026": {
+      "aprobado": 17529.1,
+      "modificado": 18077.5,
+      "calendarioAlCorte": 12328.8,
+      "pagado": 7434.4
+     },
+     "asfSectores": [
+      "Poder Legislativo"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "judicial",
+     "ramo": "03",
+     "nombre": "Poder Judicial de la Federación",
+     "icono": "⚖️",
+     "tipo": "Poder de la Unión",
+     "cp2025": {
+      "original": 70983.6,
+      "modificado": 82296.6,
+      "devengado": 82286.6,
+      "pagado": 77938.3,
+      "ejercido": 82286.6
+     },
+     "av2026": {
+      "aprobado": 70005.6,
+      "modificado": 70005.6,
+      "calendarioAlCorte": 36248.2,
+      "pagado": 29015.0
+     },
+     "asfSectores": [
+      "Poder Judicial"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "presidencia",
+     "ramo": "02",
+     "nombre": "Oficina de la Presidencia de la República",
+     "icono": "🦅",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 823.5,
+      "modificado": 530.8,
+      "devengado": 530.8,
+      "pagado": 530.8,
+      "ejercido": 530.8
+     },
+     "av2026": {
+      "aprobado": 800.5,
+      "modificado": 796.4,
+      "calendarioAlCorte": 304.0,
+      "pagado": 202.8
+     },
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "gobernacion",
+     "ramo": "04",
+     "nombre": "Secretaría de Gobernación",
+     "icono": "🏢",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 9177.9,
+      "modificado": 14665.7,
+      "devengado": 14665.7,
+      "pagado": 14096.9,
+      "ejercido": 14665.7
+     },
+     "av2026": {
+      "aprobado": 9959.7,
+      "modificado": 10691.1,
+      "calendarioAlCorte": 7012.1,
+      "pagado": 6468.2
+     },
+     "asfSectores": [
+      "Gobernación"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "sre",
+     "ramo": "05",
+     "nombre": "Secretaría de Relaciones Exteriores",
+     "icono": "🌐",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 9294.2,
+      "modificado": 13929.0,
+      "devengado": 13912.4,
+      "pagado": 13912.4,
+      "ejercido": 13912.4
+     },
+     "av2026": {
+      "aprobado": 9294.2,
+      "modificado": 15015.9,
+      "calendarioAlCorte": 12166.5,
+      "pagado": 11104.6
+     },
+     "asfSectores": [
+      "Relaciones Exteriores"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "shcp",
+     "ramo": "06",
+     "nombre": "Secretaría de Hacienda y Crédito Público",
+     "icono": "💰",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 26732.7,
+      "modificado": 130897.4,
+      "devengado": 130897.4,
+      "pagado": 79043.8,
+      "ejercido": 130897.4
+     },
+     "av2026": {
+      "aprobado": 26792.1,
+      "modificado": 29803.0,
+      "calendarioAlCorte": 20090.3,
+      "pagado": 17381.6
+     },
+     "asfSectores": [
+      "Hacienda y Crédito Público"
+     ],
+     "expedientes": [
+      "deuda-estados"
+     ]
+    },
+    {
+     "id": "defensa",
+     "ramo": "07",
+     "nombre": "Secretaría de la Defensa Nacional",
+     "icono": "🪖",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 158287.8,
+      "modificado": 160760.5,
+      "devengado": 160760.4,
+      "pagado": 160483.4,
+      "ejercido": 160760.4
+     },
+     "av2026": {
+      "aprobado": 170753.1,
+      "modificado": 173540.3,
+      "calendarioAlCorte": 100834.2,
+      "pagado": 88658.1
+     },
+     "asfSectores": [
+      "Defensa Nacional"
+     ],
+     "expedientes": [
+      "aifa",
+      "defensa"
+     ]
+    },
+    {
+     "id": "agricultura",
+     "ramo": "08",
+     "nombre": "Secretaría de Agricultura y Desarrollo Rural",
+     "icono": "🌾",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 74515.2,
+      "modificado": 74004.0,
+      "devengado": 74004.0,
+      "pagado": 74004.0,
+      "ejercido": 74004.0
+     },
+     "av2026": {
+      "aprobado": 75836.5,
+      "modificado": 82634.7,
+      "calendarioAlCorte": 68061.0,
+      "pagado": 60785.7
+     },
+     "asfSectores": [
+      "Agricultura y Desarrollo Rural"
+     ],
+     "expedientes": [
+      "segalmex"
+     ]
+    },
+    {
+     "id": "sict",
+     "ramo": "09",
+     "nombre": "Secretaría de Infraestructura, Comunicaciones y Transportes",
+     "icono": "🛣️",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 147511.5,
+      "modificado": 132081.8,
+      "devengado": 131706.6,
+      "pagado": 117805.0,
+      "ejercido": 131706.3
+     },
+     "av2026": {
+      "aprobado": 153539.3,
+      "modificado": 174937.3,
+      "calendarioAlCorte": 64005.1,
+      "pagado": 37519.0
+     },
+     "asfSectores": [
+      "Infraestructura, Comunicaciones y Transportes"
+     ],
+     "expedientes": [
+      "tren-toluca"
+     ]
+    },
+    {
+     "id": "economia",
+     "ramo": "10",
+     "nombre": "Secretaría de Economía",
+     "icono": "📈",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 3533.5,
+      "modificado": 3777.1,
+      "devengado": 3777.1,
+      "pagado": 3757.4,
+      "ejercido": 3777.1
+     },
+     "av2026": {
+      "aprobado": 3535.5,
+      "modificado": 3806.1,
+      "calendarioAlCorte": 2151.4,
+      "pagado": 1675.5
+     },
+     "asfSectores": [
+      "Economía"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "sep",
+     "ramo": "11",
+     "nombre": "Secretaría de Educación Pública",
+     "icono": "📚",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 465871.9,
+      "modificado": 491067.3,
+      "devengado": 490980.5,
+      "pagado": 487457.5,
+      "ejercido": 490977.5
+     },
+     "av2026": {
+      "aprobado": 523858.2,
+      "modificado": 522450.9,
+      "calendarioAlCorte": 291605.8,
+      "pagado": 274216.4
+     },
+     "asfSectores": [
+      "Educación Pública"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "salud",
+     "ramo": "12",
+     "nombre": "Secretaría de Salud",
+     "icono": "🏥",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 66693.2,
+      "modificado": 59775.0,
+      "devengado": 59775.0,
+      "pagado": 59223.9,
+      "ejercido": 59775.0
+     },
+     "av2026": {
+      "aprobado": 66825.8,
+      "modificado": 66921.1,
+      "calendarioAlCorte": 29133.2,
+      "pagado": 25128.6
+     },
+     "asfSectores": [
+      "Salud"
+     ],
+     "expedientes": [
+      "salud",
+      "birmex"
+     ]
+    },
+    {
+     "id": "marina",
+     "ramo": "13",
+     "nombre": "Secretaría de Marina",
+     "icono": "⚓",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 65888.7,
+      "modificado": 65738.6,
+      "devengado": 65738.6,
+      "pagado": 65589.7,
+      "ejercido": 65738.6
+     },
+     "av2026": {
+      "aprobado": 65926.8,
+      "modificado": 69664.6,
+      "calendarioAlCorte": 36466.2,
+      "pagado": 28705.9
+     },
+     "asfSectores": [
+      "Marina"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "stps",
+     "ramo": "14",
+     "nombre": "Secretaría del Trabajo y Previsión Social",
+     "icono": "👷",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 27830.2,
+      "modificado": 27992.0,
+      "devengado": 27992.0,
+      "pagado": 27992.0,
+      "ejercido": 27992.0
+     },
+     "av2026": {
+      "aprobado": 28760.9,
+      "modificado": 29034.3,
+      "calendarioAlCorte": 16581.6,
+      "pagado": 15847.8
+     },
+     "asfSectores": [
+      "Trabajo y Previsión Social"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "sedatu",
+     "ramo": "15",
+     "nombre": "Secretaría de Desarrollo Agrario, Territorial y Urbano",
+     "icono": "🏘️",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 38048.0,
+      "modificado": 23390.6,
+      "devengado": 23390.6,
+      "pagado": 23332.7,
+      "ejercido": 23390.6
+     },
+     "av2026": {
+      "aprobado": 36290.1,
+      "modificado": 37239.8,
+      "calendarioAlCorte": 19785.3,
+      "pagado": 5686.9
+     },
+     "asfSectores": [
+      "Desarrollo Agrario, Territorial y Urbano"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "semarnat",
+     "ramo": "16",
+     "nombre": "Secretaría de Medio Ambiente y Recursos Naturales",
+     "icono": "🌳",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 44370.5,
+      "modificado": 42394.7,
+      "devengado": 42393.9,
+      "pagado": 40219.9,
+      "ejercido": 42393.9
+     },
+     "av2026": {
+      "aprobado": 45564.1,
+      "modificado": 45622.7,
+      "calendarioAlCorte": 23099.7,
+      "pagado": 18854.8
+     },
+     "asfSectores": [
+      "Medio Ambiente y Recursos Naturales"
+     ],
+     "expedientes": [
+      "cuchillo-ii"
+     ]
+    },
+    {
+     "id": "energia",
+     "ramo": "18",
+     "nombre": "Secretaría de Energía",
+     "icono": "⚡",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 138307.4,
+      "modificado": 399747.2,
+      "devengado": 399747.2,
+      "pagado": 399747.2,
+      "ejercido": 399747.2
+     },
+     "av2026": {
+      "aprobado": 267439.1,
+      "modificado": 268999.4,
+      "calendarioAlCorte": 267122.7,
+      "pagado": 101822.2
+     },
+     "asfSectores": [
+      "Energía"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "bienestar",
+     "ramo": "20",
+     "nombre": "Secretaría de Bienestar",
+     "icono": "🤝",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 579883.9,
+      "modificado": 606942.9,
+      "devengado": 606896.5,
+      "pagado": 606890.6,
+      "ejercido": 606896.5
+     },
+     "av2026": {
+      "aprobado": 674510.0,
+      "modificado": 669582.4,
+      "calendarioAlCorte": 363219.4,
+      "pagado": 321285.3
+     },
+     "asfSectores": [
+      "Bienestar"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "turismo",
+     "ramo": "21",
+     "nombre": "Secretaría de Turismo",
+     "icono": "🏖️",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 1774.9,
+      "modificado": 2539.1,
+      "devengado": 2539.1,
+      "pagado": 2539.1,
+      "ejercido": 2539.1
+     },
+     "av2026": {
+      "aprobado": 1793.5,
+      "modificado": 3238.4,
+      "calendarioAlCorte": 1943.0,
+      "pagado": 749.3
+     },
+     "asfSectores": [
+      "Turismo"
+     ],
+     "expedientes": [
+      "tren-maya"
+     ]
+    },
+    {
+     "id": "ine",
+     "ramo": "22",
+     "nombre": "Instituto Nacional Electoral",
+     "icono": "🗳️",
+     "tipo": "Órgano autónomo",
+     "cp2025": {
+      "original": 27000.1,
+      "modificado": 28774.9,
+      "devengado": 28288.0,
+      "pagado": 27820.5,
+      "ejercido": 28288.0
+     },
+     "av2026": {
+      "aprobado": 21837.2,
+      "modificado": 21837.2,
+      "calendarioAlCorte": 10742.7,
+      "pagado": 9648.4
+     },
+     "asfSectores": [
+      "Instituto Nacional Electoral"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "anticorrupcion",
+     "ramo": "27",
+     "nombre": "Secretaría Anticorrupción y Buen Gobierno",
+     "icono": "🔎",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 1699.0,
+      "modificado": 2444.0,
+      "devengado": 2444.0,
+      "pagado": 2444.0,
+      "ejercido": 2444.0
+     },
+     "av2026": {
+      "aprobado": 1743.1,
+      "modificado": 1753.4,
+      "calendarioAlCorte": 1066.8,
+      "pagado": 1024.6
+     },
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "tribunales-agrarios",
+     "ramo": "31",
+     "nombre": "Tribunales Agrarios",
+     "icono": "📜",
+     "tipo": "Tribunal administrativo",
+     "cp2025": {
+      "original": 891.8,
+      "modificado": 1014.9,
+      "devengado": 1014.9,
+      "pagado": 1014.9,
+      "ejercido": 1014.9
+     },
+     "av2026": {
+      "aprobado": 895.3,
+      "modificado": 895.3,
+      "calendarioAlCorte": 461.5,
+      "pagado": 424.4
+     },
+     "asfSectores": [
+      "Tribunales Agrarios"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "tfja",
+     "ramo": "32",
+     "nombre": "Tribunal Federal de Justicia Administrativa",
+     "icono": "📜",
+     "tipo": "Tribunal administrativo",
+     "cp2025": {
+      "original": 3304.5,
+      "modificado": 3346.9,
+      "devengado": 3346.9,
+      "pagado": 3150.6,
+      "ejercido": 3346.9
+     },
+     "av2026": {
+      "aprobado": 3400.0,
+      "modificado": 3400.0,
+      "calendarioAlCorte": 1711.8,
+      "pagado": 1329.1
+     },
+     "asfSectores": [
+      "Tribunal Federal de Justicia Administrativa"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "cndh",
+     "ramo": "35",
+     "nombre": "Comisión Nacional de los Derechos Humanos",
+     "icono": "🕊️",
+     "tipo": "Órgano autónomo",
+     "cp2025": {
+      "original": 1722.4,
+      "modificado": 1673.3,
+      "devengado": 1462.8,
+      "pagado": 1403.6,
+      "ejercido": 1462.8,
+      "capitulosSobreModificado": [
+       {
+        "cap": "7000",
+        "concepto": "Inversiones financieras y otras provisiones",
+        "modificado": -0.9,
+        "ejercido": 0.0
+       }
+      ]
+     },
+     "av2026": {
+      "aprobado": 1819.8,
+      "modificado": 1819.8,
+      "calendarioAlCorte": 833.9,
+      "pagado": 453.2
+     },
+     "asfSectores": [
+      "Comisión Nacional de los Derechos Humanos"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "sspc",
+     "ramo": "36",
+     "nombre": "Secretaría de Seguridad y Protección Ciudadana",
+     "icono": "🚓",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 70422.2,
+      "modificado": 77370.7,
+      "devengado": 77367.6,
+      "pagado": 77093.8,
+      "ejercido": 77367.6
+     },
+     "av2026": {
+      "aprobado": 60110.9,
+      "modificado": 60641.7,
+      "calendarioAlCorte": 27106.4,
+      "pagado": 20191.1
+     },
+     "asfSectores": [
+      "Seguridad y Protección Ciudadana"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "cjef",
+     "ramo": "37",
+     "nombre": "Consejería Jurídica del Ejecutivo Federal",
+     "icono": "📑",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 149.6,
+      "modificado": 161.7,
+      "devengado": 161.7,
+      "pagado": 161.7,
+      "ejercido": 161.7
+     },
+     "av2026": {
+      "aprobado": 153.1,
+      "modificado": 153.1,
+      "calendarioAlCorte": 83.4,
+      "pagado": 71.2
+     },
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "secihti",
+     "ramo": "38",
+     "nombre": "Secretaría de Ciencia, Humanidades, Tecnología e Innovación",
+     "icono": "🔬",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 33295.9,
+      "modificado": 38915.4,
+      "devengado": 38915.4,
+      "pagado": 38856.8,
+      "ejercido": 38915.4
+     },
+     "av2026": {
+      "aprobado": 37360.8,
+      "modificado": 37355.7,
+      "calendarioAlCorte": 22464.4,
+      "pagado": 20468.4
+     },
+     "asfSectores": [
+      "Humanidades, Ciencias, Tecnologías e Innovación"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "inegi",
+     "ramo": "40",
+     "nombre": "Instituto Nacional de Estadística y Geografía",
+     "icono": "📊",
+     "tipo": "Órgano autónomo",
+     "cp2025": {
+      "original": 12245.3,
+      "modificado": 14947.3,
+      "devengado": 14947.3,
+      "pagado": 14568.4,
+      "ejercido": 14947.3
+     },
+     "av2026": {
+      "aprobado": 11807.5,
+      "modificado": 11807.5,
+      "calendarioAlCorte": 5288.8,
+      "pagado": 4241.3
+     },
+     "asfSectores": [
+      "Información Nacional Estadística y Geográfica"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "cofece",
+     "ramo": "41",
+     "nombre": "Comisión Federal de Competencia Económica",
+     "icono": "⚖️",
+     "tipo": "Órgano autónomo (extinto en 2025)",
+     "cp2025": {
+      "original": 199.9,
+      "modificado": 307.5,
+      "devengado": 307.5,
+      "pagado": 307.5,
+      "ejercido": 307.5
+     },
+     "av2026": null,
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "ift",
+     "ramo": "43",
+     "nombre": "Instituto Federal de Telecomunicaciones",
+     "icono": "📡",
+     "tipo": "Órgano autónomo (extinto en 2025)",
+     "cp2025": {
+      "original": 500.0,
+      "modificado": 676.7,
+      "devengado": 675.2,
+      "pagado": 675.2,
+      "ejercido": 675.2
+     },
+     "av2026": null,
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "inai",
+     "ramo": "44",
+     "nombre": "Instituto Nacional de Transparencia (INAI)",
+     "icono": "🔓",
+     "tipo": "Órgano autónomo (extinto en 2025)",
+     "cp2025": {
+      "original": 500.0,
+      "modificado": 352.4,
+      "devengado": 352.4,
+      "pagado": 352.4,
+      "ejercido": 352.4
+     },
+     "av2026": null,
+     "asfSectores": [
+      "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "cre",
+     "ramo": "45",
+     "nombre": "Comisión Reguladora de Energía",
+     "icono": "🔌",
+     "tipo": "Órgano regulador",
+     "cp2025": {
+      "original": 199.9,
+      "modificado": 63.8,
+      "devengado": 63.8,
+      "pagado": 63.8,
+      "ejercido": 63.8
+     },
+     "av2026": null,
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "cnh",
+     "ramo": "46",
+     "nombre": "Comisión Nacional de Hidrocarburos",
+     "icono": "🛢️",
+     "tipo": "Órgano regulador",
+     "cp2025": {
+      "original": 173.3,
+      "modificado": 72.8,
+      "devengado": 72.8,
+      "pagado": 72.8,
+      "ejercido": 72.8
+     },
+     "av2026": null,
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "cultura",
+     "ramo": "48",
+     "nombre": "Secretaría de Cultura",
+     "icono": "🎭",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 15081.5,
+      "modificado": 15970.7,
+      "devengado": 15967.5,
+      "pagado": 15736.4,
+      "ejercido": 15967.5
+     },
+     "av2026": {
+      "aprobado": 15082.9,
+      "modificado": 15766.4,
+      "calendarioAlCorte": 7140.1,
+      "pagado": 6318.3
+     },
+     "asfSectores": [
+      "Cultura"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "fgr",
+     "ramo": "49",
+     "nombre": "Fiscalía General de la República",
+     "icono": "🏛️",
+     "tipo": "Órgano autónomo",
+     "cp2025": {
+      "original": 20126.0,
+      "modificado": 20345.6,
+      "devengado": 20345.6,
+      "pagado": 20345.6,
+      "ejercido": 20345.6
+     },
+     "av2026": {
+      "aprobado": 20240.4,
+      "modificado": 20240.4,
+      "calendarioAlCorte": 10166.5,
+      "pagado": 7376.7
+     },
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "imss",
+     "ramo": "50",
+     "nombre": "Instituto Mexicano del Seguro Social",
+     "icono": "🩺",
+     "tipo": "Entidad de control directo",
+     "cp2025": {
+      "original": 1469410.4,
+      "modificado": 1508330.8,
+      "devengado": 1535609.2,
+      "pagado": 1507293.6,
+      "ejercido": 1507293.6
+     },
+     "av2026": {
+      "aprobado": 1590308.7,
+      "modificado": 1605510.7,
+      "calendarioAlCorte": 755684.7,
+      "pagado": 752628.5
+     },
+     "asfSectores": [
+      "Instituto Mexicano del Seguro Social"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "issste",
+     "ramo": "51",
+     "nombre": "ISSSTE",
+     "icono": "🩺",
+     "tipo": "Entidad de control directo",
+     "cp2025": {
+      "original": 525615.4,
+      "modificado": 522827.8,
+      "devengado": 522827.2,
+      "pagado": 522827.2,
+      "ejercido": 522827.2
+     },
+     "av2026": {
+      "aprobado": 539020.8,
+      "modificado": 540950.8,
+      "calendarioAlCorte": 287568.8,
+      "pagado": 280484.4
+     },
+     "asfSectores": [
+      "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "pemex",
+     "ramo": "52",
+     "nombre": "Petróleos Mexicanos",
+     "icono": "🛢️",
+     "tipo": "Empresa pública del Estado",
+     "cp2025": {
+      "original": 612145.9,
+      "modificado": 621517.1,
+      "devengado": 723986.8,
+      "pagado": 620713.6,
+      "ejercido": 720538.4,
+      "capitulosSobreModificado": [
+       {
+        "cap": "4000",
+        "concepto": "Transferencias, asignaciones, subsidios y otras ayudas",
+        "modificado": 89252.8,
+        "ejercido": 89666.8
+       },
+       {
+        "cap": "5000",
+        "concepto": "Bienes muebles, inmuebles e intangibles",
+        "modificado": 5756.3,
+        "ejercido": 5766.7
+       },
+       {
+        "cap": "6000",
+        "concepto": "Inversión pública",
+        "modificado": 214986.6,
+        "ejercido": 321995.2
+       },
+       {
+        "cap": "9000",
+        "concepto": "Deuda pública",
+        "modificado": 140758.0,
+        "ejercido": 140859.8
+       }
+      ]
+     },
+     "av2026": {
+      "aprobado": 708200.9,
+      "modificado": 708200.9,
+      "calendarioAlCorte": 306157.8,
+      "pagado": 291822.8
+     },
+     "asfSectores": [
+      "Petróleos Mexicanos"
+     ],
+     "expedientes": [
+      "dos-bocas"
+     ]
+    },
+    {
+     "id": "cfe",
+     "ramo": "53",
+     "nombre": "Comisión Federal de Electricidad",
+     "icono": "💡",
+     "tipo": "Empresa pública del Estado",
+     "cp2025": {
+      "original": 583951.1,
+      "modificado": 604849.4,
+      "devengado": 577076.8,
+      "pagado": 604849.4,
+      "ejercido": 604849.4
+     },
+     "av2026": {
+      "aprobado": 602567.5,
+      "modificado": 602567.5,
+      "calendarioAlCorte": 283366.6,
+      "pagado": 250766.7
+     },
+     "asfSectores": [
+      "Comisión Federal de Electricidad"
+     ],
+     "expedientes": []
+    },
+    {
+     "id": "mujeres",
+     "ramo": "54",
+     "nombre": "Secretaría de las Mujeres",
+     "icono": "♀️",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 2093.5,
+      "modificado": 1802.9,
+      "devengado": 1802.9,
+      "pagado": 1802.9,
+      "ejercido": 1802.9
+     },
+     "av2026": {
+      "aprobado": 2141.0,
+      "modificado": 2146.8,
+      "calendarioAlCorte": 1768.0,
+      "pagado": 1588.7
+     },
+     "asfSectores": [],
+     "expedientes": []
+    },
+    {
+     "id": "atdt",
+     "ramo": "55",
+     "nombre": "Agencia de Transformación Digital y Telecomunicaciones",
+     "icono": "💻",
+     "tipo": "Ramo administrativo",
+     "cp2025": {
+      "original": 3010.2,
+      "modificado": 5149.6,
+      "devengado": 5149.6,
+      "pagado": 5029.6,
+      "ejercido": 5149.6
+     },
+     "av2026": {
+      "aprobado": 3852.7,
+      "modificado": 4573.3,
+      "calendarioAlCorte": 2667.4,
+      "pagado": 2355.1
+     },
+     "asfSectores": [],
+     "expedientes": []
+    }
+   ]
+  },
   "estados": [
     {
       "abbr": "AGS",
@@ -7916,6 +8932,24 @@ window.AUDIT_DB = {
       "cita_apa": "Instituto Nacional de Estadística y Geografía. (2026). Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM). Conjunto de datos estatal, 1989-2025; ejercicio 2024, cifras definitivas. INEGI (México).",
       "url": "https://www.inegi.org.mx/programas/finanzas/",
       "descripcion": "La misma estadística del padrón municipal, en su conjunto estatal: lo que ingresó y gastó cada gobierno estatal, capítulo por capítulo, según su cuenta pública. De ella salen la recaudación propia, los convenios (recursos federales reasignados) y el porcentaje de dependencia federal de 31 entidades en 2024. La Ciudad de México no forma parte del conjunto estatal en ningún año."
+    },
+    {
+      "num": 109,
+      "id": "ref-shcp-cp2025-datos",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Cuenta Pública 2025: base de datos abierta de ramos administrativos, generales y autónomos, entidades de control directo y empresas productivas del Estado [archivo CSV]. Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv",
+      "descripcion": "Renglón por renglón, lo que cada ramo tenía aprobado, lo que se le modificó, lo que devengó, pagó y ejerció en 2025. De aquí sale el nivel federal del Modo Inspector: si el ente rindió su cuenta, cuánto se apartó de lo que aprobó la Cámara de Diputados y si sus propias cifras cuadran. Huella SHA-256 del archivo consultado: 973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0."
+    },
+    {
+      "num": 110,
+      "id": "ref-shcp-avance-2t2026",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Presupuesto de Egresos 2026: avance del gasto (AC01) al segundo trimestre [archivo CSV]. Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv",
+      "descripcion": "Aprobado, modificado, calendario mensual y pagado de cada ramo al 30 de junio de 2026. Permite ver si un ente va al ritmo de lo que él mismo calendarizó. Huella SHA-256 del archivo consultado: faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511."
     },
     {
       "num": 99,

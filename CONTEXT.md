@@ -2126,6 +2126,49 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (nivel federal del Modo Inspector, reconstruido con Cuenta Pública y ASF)
+
+El autor pidió que el inspector «sirva bien»: que la ciudadanía pueda auditar
+cualquier autoridad de la que tengamos información y ver su salud financiera,
+si rindió cuentas, si lo que reporta es cierto y qué irregularidades o
+contradicciones hay. El nivel federal, retirado horas antes por no tener
+fuentes, vuelve con **41 entes** y sólo datos oficiales.
+
+- **Fuentes.** Cuenta Pública 2025 y avance del gasto al 2.º trimestre de 2026
+  (datos abiertos de Hacienda; referencias nuevas **109**
+  `ref-shcp-cp2025-datos` y **110** `ref-shcp-avance-2t2026`, con la huella
+  SHA-256 del archivo) y la Matriz de Datos Básicos de la ASF para la CP 2024
+  (ref. 80). `herramientas/integrar_inspector_federal.py` verifica las
+  huellas antes de escribir `DB.inspector_federal` (idempotente). Lo de la
+  ASF no se copia: el motor lo suma en vivo desde `cuenta_publica_asf.cp2024`
+  con los nombres de sector de cada ente (`asfSectores`), excluyendo el grupo
+  «Gasto Federalizado» (ahí «Salud» son fondos que ejercen los estados).
+- **Entes.** Poderes, secretarías, autónomos, tribunales administrativos,
+  IMSS, ISSSTE, Pemex y CFE. Fuera: los ramos generales (19, 23, 24, 25, 28,
+  30, 33, 34), que son bolsas de transferencia, y el 47.
+- **Cuatro preguntas con semáforo** (`inspFedDiagnostico`), umbrales a la
+  vista en pantalla: ¿gastó lo que aprobó la Cámara? (±10 % / ±25 %),
+  ¿rindió cuentas? (reportó CP y avance; tiene sector auditado), ¿cuadran sus
+  propias cifras? (ejercido mayor que modificado = rojo; más de 5 % ejercido
+  sin pagar; ritmo 2026 fuera de 80-110 % de su calendario a junio), ¿qué
+  encontró la ASF? (por aclarar, pliegos, recuperaciones). Cada cifra con
+  chip y referencia; ligas a los expedientes ASF del ente (`irAExpediente`).
+  «Una señal no es una acusación: es algo que la autoridad debe explicar.»
+- **Hallazgos que ya muestra.** Pemex: ejerció $720.5 mil millones con un
+  modificado de $621.5 (el exceso, en inversión pública: $322 mil millones
+  contra $215); Hacienda: +389.7 % sobre lo aprobado y 39.6 % de lo ejercido
+  sin pagar al cierre; Energía +189 %; Presidencia −35.5 % y sin sector en la
+  Matriz; Poder Judicial $284.6 millones por aclarar con 17 pliegos.
+- **Calendario a junio**: columna `MONTO_MODIFICADO_MENSUAL` del avance. Hacienda
+  no publica su diccionario en una liga accesible; se comprobó con los datos
+  (en 179,385 renglones nunca supera al anual salvo uno, y suma el 52.7 % del
+  modificado anual) y la columna se nombra en pantalla.
+- **Contraste.** El marco del expediente pasa a `--bg-surface` con desenfoque
+  y los textos de fórmula, fuentes y grupos a `--text-secondary`: sobre la
+  fotografía de fondo no se leían (afecta también estatal y municipal).
+- El inspector vuelve a abrir en «Federal»; buscador y encabezado
+  actualizados en `index.html` y `enciclopedia.html`.
+
 ### Hecho (retiro de contenido sin fuente sobre personas y hechos, 27-09-2026)
 
 Por instrucción del autor («iniciemos con lo más urgente o grave»), se
@@ -2958,6 +3001,19 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   de 2027, la tercera y el Informe General.
 - **El foro del Portal Digital no tiene servidor:** lo que se publica vive
   en el navegador de quien lo escribe. Ya no trae hilos sembrados.
+- **Inspector, siguientes pasos.**
+  - Llevar las cuatro preguntas a los niveles estatal y municipal: hoy
+    tienen índice de salud, pero no dicen explícitamente si rindieron cuentas
+    ni qué contradicciones hay (p. ej., lo que el estado reporta al INEGI
+    frente a lo que el DOF le asigna; municipios que no reportaron a INEGI).
+  - La ASF se cruza por **sector** de la Matriz, no por unidad responsable:
+    «Salud» junta a la secretaría con sus desconcentrados. Bajar al informe
+    individual (ASF Datos) daría el detalle por UR.
+  - Actualizar con la 2.ª entrega de la CP 2025 de la ASF (30-10-2026) y con
+    el avance del 3.er trimestre de 2026.
+  - Faltan entes con presupuesto propio que viven dentro de un ramo
+    (Tren Maya, AIFA, Segalmex, IMSS-Bienestar): la base de Hacienda los
+    trae por UR y se pueden abrir como entes propios.
 - **Fichas políticas por rehacer con fuente (Enciclopedia 5.1 a 5.3).**
   Se retiraron el 27-09-2026 (ver Hecho). Si el autor quiere que vuelvan,
   ficha por ficha: cada cifra con su fuente oficial y cada señalamiento con

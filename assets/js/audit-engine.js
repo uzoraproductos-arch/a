@@ -22569,7 +22569,7 @@
      que nadie tenga que confiar a ciegas. */
   const INSP_PESOS = { autonomia: 40, observado: 35, holgura: 25 };
 
-  let inspNivel = 'estatal';
+  let inspNivel = 'federal';
   let inspFiltro = '';
   let inspSel = null;          // { nivel, id }
   let inspAnimFrame = null;
@@ -22579,6 +22579,12 @@
   /* --- Universo de entes auditables, armado desde la base --- */
   function inspEntes(nivel) {
     const E = DB.estados || [];
+    if (nivel === 'federal') {
+      const F = DB.inspector_federal;
+      return (F ? F.entes : []).map(f => ({ nivel: 'federal', id: f.id, nombre: f.nombre, icono: f.icono,
+        sub: f.tipo + ' · Ramo ' + f.ramo,
+        buscar: (f.nombre + ' ' + f.id + ' ramo ' + f.ramo + ' ' + f.tipo).toLowerCase(), fed: f }));
+    }
     if (nivel === 'estatal') {
       return E.map(e => ({ nivel: 'estatal', id: e.abbr, nombre: e.name, icono: '🗺️',
         sub: 'Gobierno de ' + e.name + ' · ' + e.partido + ' · ' + e.gobernador,
@@ -22594,7 +22600,7 @@
   }
 
   function inspTotalEntes() {
-    return inspEntes('estatal').length + inspEntes('municipal').length;
+    return inspEntes('federal').length + inspEntes('estatal').length + inspEntes('municipal').length;
   }
 
   function inspBuscarEnte(nivel, id) {
@@ -22722,6 +22728,7 @@
     const cont = document.getElementById('inspNiveles');
     if (!cont) return;
     const niveles = [
+      { k: 'federal',   et: 'Federal',   ico: '🇲🇽', d: 'Poderes, secretarías, autónomos y empresas del Estado' },
       { k: 'estatal',   et: 'Estatal',   ico: '🗺️', d: 'Las 32 entidades federativas' },
       { k: 'municipal', et: 'Municipal', ico: '🏙️', d: 'Ayuntamientos con expediente' }
     ];
@@ -22814,6 +22821,11 @@
     const ente = inspBuscarEnte(inspSel.nivel, inspSel.id);
     if (!ente) { inspSel = null; renderInspExpediente(); return; }
 
+    if (ente.nivel === 'federal') {
+      cont.innerHTML = inspExpedienteFederal(ente);
+      autolinkAmbito(cont);
+      return;
+    }
     const ejes = inspEjes(ente);
     const idx = inspIndice(ejes);
     cont.innerHTML = inspExpedienteConIndice(ente, ejes, idx);
@@ -22924,6 +22936,222 @@
       '</div>';
   }
 
+  /* ====================================================================
+     NIVEL FEDERAL DEL INSPECTOR
+
+     Reconstruido el 27-09-2026 con tres documentos oficiales: la Cuenta
+     Publica 2025 y el avance del gasto al 2.o trimestre de 2026 (datos
+     abiertos de Hacienda, DB.inspector_federal) y la Matriz de Datos
+     Basicos de la ASF para la Cuenta Publica 2024 (DB.cuenta_publica_asf).
+
+     No hay circulo: una secretaria, una empresa del Estado y un poder
+     autonomo no se miden con la misma regla. En su lugar, cuatro preguntas
+     que cualquiera puede hacerle a una autoridad, cada una con su semaforo,
+     su umbral a la vista y la ficha del documento de donde sale la cifra.
+     ==================================================================== */
+  const INSP_FED_UMBRALES = { desvioAlerta: 10, desvioGrave: 25, pagoAlerta: 5, ritmoBajo: 80, ritmoAlto: 110 };
+  const INSP_SEMAFORO = {
+    ok:     { c: 'var(--emerald-bright)', ico: '🟢', t: 'Sin señal' },
+    alerta: { c: 'var(--amber)',          ico: '🟠', t: 'Señal a revisar' },
+    grave:  { c: 'var(--crimson-bright)', ico: '🔴', t: 'Señal fuerte' },
+    sin:    { c: 'var(--text-dim)',       ico: '⚪', t: 'Sin dato' }
+  };
+
+  function inspFedRef(k) {
+    const F = DB.inspector_federal && DB.inspector_federal.fuentes;
+    return F && F[k] ? vsxRefLink(F[k].ref) : '';
+  }
+
+  function inspPctTxt(x) {
+    return (x >= 0 ? '+' : '') + x.toFixed(1) + ' %';
+  }
+
+  /* Suma, sector por sector, lo que la Matriz de la ASF registra para el
+     ente. Se excluye el grupo «Gasto Federalizado»: ahi «Salud» o
+     «Educacion» son fondos que ejercen los estados, no la secretaria. */
+  function inspFedAsf(f) {
+    const C = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024;
+    if (!C || !f.asfSectores || !f.asfSectores.length) return null;
+    const s = { auditorias: 0, acciones: 0, PO: 0, recuperaciones: 0, porAclarar: 0, grupos: [] };
+    C.grupos.forEach(g => {
+      if (/federalizado/i.test(g.grupo)) return;
+      g.sectores.forEach(x => {
+        if (f.asfSectores.indexOf(x.nombre) === -1) return;
+        s.auditorias += x.auditorias || 0;
+        s.acciones += x.acciones || 0;
+        s.PO += x.PO || 0;
+        s.recuperaciones += x.recuperaciones || 0;
+        s.porAclarar += x.porAclarar || 0;
+        s.grupos.push(g.grupo + ' (' + x.auditorias + ')');
+      });
+    });
+    return s.auditorias || s.grupos.length ? s : null;
+  }
+
+  function inspFedDiagnostico(f) {
+    const U = INSP_FED_UMBRALES;
+    const cp = f.cp2025, av = f.av2026;
+    const asf = inspFedAsf(f);
+    const out = [];
+
+    /* 1. ¿Gasto lo que aprobo la Camara? */
+    const desvio = cp.original ? (cp.ejercido / cp.original - 1) * 100 : 0;
+    const d1 = Math.abs(desvio);
+    out.push({
+      k: 'aprobado', ico: '🏛️', q: '¿Gastó lo que aprobó la Cámara de Diputados?',
+      e: d1 > U.desvioGrave ? 'grave' : d1 > U.desvioAlerta ? 'alerta' : 'ok',
+      v: inspPctTxt(desvio) + ' frente a lo aprobado',
+      d: 'Para 2025 la Cámara le aprobó ' + simMdp(cp.original) + '. Ejerció ' + simMdp(cp.ejercido) + '. ' +
+         'En el camino, Hacienda le autorizó un presupuesto modificado de ' + simMdp(cp.modificado) +
+         ': la Ley Federal de Presupuesto (art. 58) permite esas adecuaciones sin volver a la Cámara, pero la diferencia ' +
+         'dice cuánto se apartó el gasto real del que votaron los diputados.',
+      f: inspFedRef('cp2025')
+    });
+
+    /* 2. ¿Rindio cuentas? */
+    const partes = ['Reportó su ejercicio de 2025 en la Cuenta Pública' + inspFedRef('cp2025') + '.'];
+    if (av) partes.push('Reportó su avance de 2026 al 30 de junio' + inspFedRef('av2026') + '.');
+    let e2 = av ? 'ok' : 'alerta';
+    if (asf) {
+      partes.push('La Auditoría Superior le practicó ' + asf.auditorias + ' auditoría' + (asf.auditorias === 1 ? '' : 's') +
+        ' en la Cuenta Pública 2024' + inspFedRef('asf2024') + '.');
+    } else {
+      e2 = 'alerta';
+      partes.push('En la Matriz de la Cuenta Pública 2024 no aparece un sector a su nombre: su gasto de ese año no ' +
+        'tuvo, al menos con ese rótulo, revisión externa de la Auditoría Superior. No es una irregularidad; es un hueco.');
+    }
+    out.push({
+      k: 'cuentas', ico: '📒', q: '¿Rindió cuentas?', e: e2,
+      v: asf ? 'Reportó y fue auditado' : 'Reportó; sin auditoría a su nombre',
+      d: partes.join(' '), f: ''
+    });
+
+    /* 3. ¿Cuadran sus propias cifras? */
+    const hall = [];
+    let e3 = 'ok';
+    const exceso = cp.ejercido - cp.modificado;
+    if (exceso >= 0.1) {
+      e3 = 'grave';
+      const caps = (cp.capitulosSobreModificado || []).filter(c => c.ejercido - c.modificado >= Math.max(100, c.modificado * 0.01)).map(c => c.concepto + ' (' + simMdp(c.ejercido) + ' ejercidos contra ' +
+        simMdp(c.modificado) + ' modificados)').join('; ');
+      hall.push('Registra un ejercido de ' + simMdp(cp.ejercido) + ', <b>' + simMdp(exceso) + ' más que su presupuesto modificado</b>' +
+        (caps ? '. Por capítulo: ' + caps : '') + '. La base de Hacienda no explica la diferencia: es una pregunta que el ente debe responder.');
+    }
+    const sinPagar = cp.ejercido - cp.pagado;
+    if (cp.ejercido > 0 && sinPagar / cp.ejercido * 100 > U.pagoAlerta) {
+      if (e3 === 'ok') e3 = 'alerta';
+      hall.push('De lo ejercido, ' + simMdp(sinPagar) + ' (' + (sinPagar / cp.ejercido * 100).toFixed(1) +
+        ' %) no figura como pagado al cierre de 2025.');
+    }
+    if (av && av.calendarioAlCorte > 0) {
+      const ritmo = av.pagado / av.calendarioAlCorte * 100;
+      if (ritmo < U.ritmoBajo || ritmo > U.ritmoAlto) {
+        if (e3 === 'ok') e3 = 'alerta';
+        hall.push('En 2026 pagó ' + simMdp(av.pagado) + ' de ' + simMdp(av.calendarioAlCorte) +
+          ' que su calendario modificado marcaba de enero a junio: ' + ritmo.toFixed(1) + ' % de su propio calendario' + inspFedRef('av2026') + '.');
+      }
+    }
+    out.push({
+      k: 'cuadre', ico: '🧮', q: '¿Cuadran sus propias cifras?', e: e3,
+      v: hall.length ? hall.length + (hall.length === 1 ? ' contradicción o desfase' : ' contradicciones o desfases') : 'Sin contradicciones',
+      d: hall.length ? hall.join(' ') : 'Lo ejercido no rebasa lo modificado, casi todo lo ejercido figura como pagado y en 2026 va al ritmo de su calendario.',
+      f: inspFedRef('cp2025')
+    });
+
+    /* 4. ¿Que encontro la ASF? */
+    let e4 = 'sin', v4 = 'Sin sector en la Matriz', d4 = 'La Matriz de la Cuenta Pública 2024 no tiene un sector con este nombre.';
+    if (asf) {
+      e4 = asf.porAclarar <= 0 && asf.PO === 0 ? 'ok' : (asf.PO > 0 && asf.porAclarar >= 100e6 ? 'grave' : 'alerta');
+      v4 = asf.porAclarar > 0 ? simMdp(asf.porAclarar / 1e6) + ' por aclarar' : 'Nada por aclarar';
+      d4 = 'En la Cuenta Pública 2024 la ASF le promovió ' + formatNumber(asf.acciones) + ' acciones, ' +
+        asf.PO + ' de ellas pliegos de observaciones; quedaron ' + simMdp(asf.porAclarar / 1e6) +
+        ' por aclarar y se recuperaron ' + simMdp(asf.recuperaciones / 1e6) + ' durante las auditorías. ' +
+        'Por aclarar no es robado: es dinero cuyo destino no quedó acreditado. ' +
+        '<span class="insp-fed-grupos">Grupos de la Matriz: ' + asf.grupos.join(' · ') + '.</span>';
+    }
+    out.push({ k: 'asf', ico: '🔍', q: '¿Qué encontró la Auditoría Superior?', e: e4, v: v4, d: d4, f: inspFedRef('asf2024') });
+    return out;
+  }
+
+  function inspExpedienteFederal(ente) {
+    const f = ente.fed;
+    const diag = inspFedDiagnostico(f);
+    const cuenta = { grave: 0, alerta: 0 };
+    diag.forEach(x => { if (cuenta[x.e] !== undefined) cuenta[x.e]++; });
+    const resumen = cuenta.grave ? INSP_SEMAFORO.grave : cuenta.alerta ? INSP_SEMAFORO.alerta : INSP_SEMAFORO.ok;
+    const exps = (f.expedientes || []).map(id => {
+      const x = DB.expedientes && DB.expedientes.fichas.find(y => y.id === id);
+      return x ? '<button type="button" class="insp-fed-exp" onclick="window.AuditEngine.irAExpediente(\'' + id + '\')">' +
+        x.icono + ' ' + x.titulo + '</button>' : '';
+    }).join('');
+    const U = INSP_FED_UMBRALES;
+    return '' +
+      '<div class="insp-exp-marco">' +
+        '<header class="insp-exp-head">' +
+          '<span class="insp-exp-ico">' + ente.icono + '</span>' +
+          '<div>' +
+            '<span class="insp-exp-nivel">Expediente federal · Ramo ' + f.ramo + '</span>' +
+            '<h3 class="insp-exp-nom">' + ente.nombre + '</h3>' +
+            '<p class="insp-exp-sub">' + f.tipo + '</p>' +
+          '</div>' +
+          '<button type="button" class="insp-exp-cerrar" onclick="window.AuditEngine.inspCerrar()" title="Cerrar el expediente">✕</button>' +
+        '</header>' +
+
+        '<div class="insp-fed-resumen" style="border-color:' + resumen.c + ';">' +
+          '<strong style="color:' + resumen.c + ';">' + resumen.ico + ' ' +
+            (cuenta.grave ? cuenta.grave + ' señal' + (cuenta.grave > 1 ? 'es' : '') + ' fuerte' + (cuenta.grave > 1 ? 's' : '') : '') +
+            (cuenta.grave && cuenta.alerta ? ' y ' : '') +
+            (cuenta.alerta ? cuenta.alerta + ' a revisar' : '') +
+            (!cuenta.grave && !cuenta.alerta ? 'Sin señales en las cuatro preguntas' : '') + '</strong>' +
+          '<span>Cuatro preguntas que cualquiera puede hacerle a una autoridad, respondidas con sus propios reportes ' +
+          'a Hacienda y con lo que encontró la Auditoría Superior. Una señal no es una acusación: es algo que la autoridad debe explicar.</span>' +
+        '</div>' +
+
+        '<div class="insp-ident">' +
+          [['Aprobado 2025', simMdp(f.cp2025.original)], ['Modificado 2025', simMdp(f.cp2025.modificado)],
+           ['Ejercido 2025', simMdp(f.cp2025.ejercido)], ['Pagado 2025', simMdp(f.cp2025.pagado)],
+           ['Aprobado 2026', f.av2026 ? simMdp(f.av2026.aprobado) : '—'],
+           ['Pagado a junio de 2026', f.av2026 ? simMdp(f.av2026.pagado) : '—']]
+            .map(p => '<div class="insp-ident-c"><span class="insp-ident-k">' + p[0] + ' ' + chipEstado('oficial') + '</span>' +
+              '<span class="insp-ident-v">' + p[1] + '</span></div>').join('') +
+        '</div>' +
+
+        '<ol class="insp-fed-senales">' +
+          diag.map(x => {
+            const s = INSP_SEMAFORO[x.e];
+            return '<li class="insp-fed-senal" style="border-left-color:' + s.c + ';">' +
+              '<span class="insp-fed-q">' + x.ico + ' ' + x.q + '</span>' +
+              '<span class="insp-fed-v" style="color:' + s.c + ';">' + s.ico + ' ' + x.v + ' ' + chipEstado('derivado') + '</span>' +
+              '<span class="insp-fed-d">' + x.d + (x.f ? ' ' + x.f : '') + '</span>' +
+            '</li>';
+          }).join('') +
+        '</ol>' +
+
+        (exps ? '<div class="insp-nota"><strong>Expedientes de la ASF sobre este ente.</strong> ' +
+          'Informe por informe, con sus claves de auditoría: <span class="insp-fed-exps">' + exps + '</span></div>' : '') +
+
+        '<div class="insp-formula">' +
+          '<strong>Cómo se enciende cada semáforo, sin caja negra.</strong> Los umbrales son de Auditavisión y se pueden discutir; ' +
+          'los datos, no. <span class="insp-formula-det">' +
+          '<b>aprobado</b>: ejercido ÷ aprobado − 1; naranja si pasa de ±' + U.desvioAlerta + ' %, rojo si pasa de ±' + U.desvioGrave + ' %. ' +
+          '<b>cuentas</b>: naranja si falta el avance de 2026 o si la Matriz de la ASF no tiene un sector a su nombre. ' +
+          '<b>cuadre</b>: rojo si lo ejercido rebasa lo modificado; naranja si más de ' + U.pagoAlerta + ' % de lo ejercido no figura como pagado, ' +
+          'o si en 2026 lleva menos de ' + U.ritmoBajo + ' % o más de ' + U.ritmoAlto + ' % de su calendario a junio ' +
+          '(columna MONTO_MODIFICADO_MENSUAL de la base de Hacienda, que suma el 52.7 % del modificado anual). ' +
+          '<b>ASF</b>: verde si no quedó nada por aclarar ni pliegos; rojo si hay pliegos y $100 mdp o más por aclarar; naranja en otro caso.</span>' +
+        '</div>' +
+
+        '<div class="insp-acciones">' +
+          '<button type="button" class="factcheck-copy-btn" onclick="window.AuditEngine.inspCopiarFicha()">' +
+            '<span>📋</span> Copiar esta ficha</button>' +
+          '<span class="insp-fuentes">🔗 Fuentes: ' +
+            DB.inspector_federal.fuentes.cp2025.corto + inspFedRef('cp2025') + ' · ' +
+            DB.inspector_federal.fuentes.av2026.corto + inspFedRef('av2026') + ' · ' +
+            DB.inspector_federal.fuentes.asf2024.corto + inspFedRef('asf2024') + '.</span>' +
+        '</div>' +
+      '</div>';
+  }
+
   function inspCerrar() {
     inspSel = null;
     renderInspResultados();
@@ -22938,9 +23166,19 @@
     if (!inspSel) return;
     const ente = inspBuscarEnte(inspSel.nivel, inspSel.id);
     if (!ente) return;
+    let t = 'AUDITAVISIÓN · Modo Inspector\n' + ente.nombre + '\n' + ente.sub + '\n\n';
+    if (ente.nivel === 'federal') {
+      const sinHtml = s => String(s).replace(/<[^>]+>/g, '').replace(/\s*\[\d+\]/g, '');
+      inspFedDiagnostico(ente.fed).forEach(x => {
+        t += '• ' + x.q + ' ' + INSP_SEMAFORO[x.e].t + ': ' + sinHtml(x.v) + '\n  ' + sinHtml(x.d) + '\n';
+      });
+      t += '\nLos umbrales de los semáforos son de Auditavisión; los datos son oficiales.\n' +
+           'Fuentes: SHCP, Cuenta Pública 2025 y avance del gasto 2026 (datos abiertos); ASF, Matriz de Datos Básicos CP 2024.';
+      copiarTextoPlano(t, 'Ficha del expediente copiada.');
+      return;
+    }
     const ejes = inspEjes(ente);
     const idx = inspIndice(ejes);
-    let t = 'AUDITAVISIÓN · Modo Inspector\n' + ente.nombre + '\n' + ente.sub + '\n\n';
     {
       const v = inspVeredicto(idx);
       t += 'Índice de salud financiera: ' + Math.round(idx) + '/100 — ' + v.t + '\n' + v.d + '\n\n';
