@@ -149,8 +149,8 @@
       [1000, '#d4382c'], [700, '#e67e22'], [500, '#f39c12']] },
     dep: { base: '#233454', unidad: 'pct', igual: true, pasos: [[92, '#8b1a1a'], [88, '#b83b2a'], [84, '#c4602a'],
       [78, '#d49b20'], [70, '#3fae99']] },
-    pc: { base: '#1c233a', unidad: 'pesos', pasos: [[30000, '#f3cf65'], [23000, '#d4a017'], [21000, '#8da352'],
-      [19000, '#3fae99'], [17000, '#257b8c']] },
+    pc: { base: '#1c233a', unidad: 'pesos', pasos: [[22000, '#f3cf65'], [21000, '#d4a017'], [20000, '#8da352'],
+      [19000, '#3fae99'], [18000, '#257b8c']] },
     monto: { base: '#151824', unidad: 'mdp', pasos: [[250000, '#f3cf65'], [150000, '#d4a017'], [110000, '#b8860b'],
       [80000, '#8da352'], [60000, '#3fae99'], [45000, '#257b8c'], [30000, '#1b4965'], [20000, '#233454']] }
   };
@@ -372,7 +372,7 @@
         <strong style="font-family:var(--font-mono); color:var(--gold);">${metricVal}</strong>
       </div>
       <div style="display:flex; justify-content:space-between; font-size:12px; margin:3px 0;">
-        <span style="color:var(--text-secondary);">Gasto Fed. Total:</span>
+        <span style="color:var(--text-secondary);">Ramos 28 y 33:</span>
         <strong style="font-family:var(--font-mono);">${formatMoneyMdp(st.gasto)}</strong>
       </div>
       <div style="display:flex; justify-content:space-between; font-size:12px; margin:3px 0;">
@@ -493,23 +493,24 @@
 
   const LENTES = {
     gasto: {
-      rotulo: 'Gasto Federalizado Total', corto: 'el gasto federalizado que reciben',
+      rotulo: 'Ramos 28 y 33 \u00b7 lo que la Federaci\u00f3n reparte por ley', corto: 'lo que reciben por los Ramos 28 y 33',
       campo: st => st.gasto, fmt: 'mdpfijo', aditiva: true,
-      oficial: 'total', cuadre: 'el gasto federalizado total'
+      oficial: ['ramo28', 'ramo33'], cuadre: 'los Ramos 28 y 33 juntos'
     },
     ramo28: {
       rotulo: 'Ramo 28 \u00b7 Participaciones de libre disposici\u00f3n',
       corto: 'las participaciones del Ramo 28',
       campo: st => st.ramo28, fmt: 'mdpfijo', aditiva: true,
-      oficial: 'fed-r28', cuadre: 'el Ramo 28'
+      oficial: ['ramo28'], cuadre: 'el Ramo 28'
     },
     ramo33: {
       rotulo: 'Ramo 33 \u00b7 Aportaciones etiquetadas',
       corto: 'las aportaciones del Ramo 33',
-      campo: st => st.ramo33, fmt: 'mdpfijo', aditiva: true
+      campo: st => st.ramo33, fmt: 'mdpfijo', aditiva: true,
+      oficial: ['ramo33'], cuadre: 'el Ramo 33'
     },
     pc: {
-      rotulo: 'Gasto federalizado por habitante', corto: 'el gasto por habitante',
+      rotulo: 'Ramos 28 y 33 por habitante', corto: 'lo que reciben por habitante',
       campo: st => st.pc, fmt: 'pesos', aditiva: false
     },
     asf: {
@@ -659,26 +660,32 @@
   }
 
   /* Donde el Presupuesto publica un total nacional, va junto a la suma de
-     los renglones. Que no coincidan no es un descuido de captura: el
-     decreto cifra cada ramo, no su reparto entidad por entidad, y ese
-     reparto lo da a conocer Hacienda en acuerdos posteriores. Ensenar la
-     suma y callar la diferencia seria peor que no ensenar la suma. */
+     los renglones. La diferencia no se calla: el acuerdo de distribucion
+     que Hacienda publica en el DOF deja renglones sin entidad (lo no
+     distribuible, lo que va a la ASF), y aqui se dicen uno por uno. */
   function entidadesCuadre(L, suma) {
-    const F = PANORAMA && PANORAMA.federalizado;
-    if (!F || !L.oficial) return '';
-    const oficial = (L.oficial === 'total')
-      ? F.totalMdp
-      : (F.componentes.filter(c => c.id === L.oficial)[0] || {}).montoMdp;
-    if (!oficial) return '';
+    const FE = DB.fiscalEntidades;
+    if (!FE || !L.oficial) return '';
+    const oficial = L.oficial.reduce((s, k) => s + (FE.totales[k] || 0), 0);
+    const sin = [].concat.apply([], L.oficial.map(k => FE.sinEntidad[k] || []));
+    const sinSuma = sin.reduce((s, x) => s + x.mdp, 0);
     const dif = oficial - suma;
-    const pct = Math.abs(dif / oficial * 100);
-    return 'El Presupuesto de Egresos cifra ' + L.cuadre + ' en <b>' + formatMdpFijo(oficial) +
-      '</b>. Los 32 renglones de este cuadro suman <b>' + formatMdpFijo(suma) + '</b>: ' +
-      (dif >= 0 ? 'quedan ' : 'sobran ') + '<b>' + formatMdpFijo(Math.abs(dif)) + '</b> \u2014el ' +
-      pct.toFixed(1) + '%\u2014 que el reparto entidad por entidad no explica. El decreto publica ' +
-      'el total de cada ramo, no su distribuci\u00f3n estatal: \u00e9sa la da a conocer la Secretar\u00eda ' +
-      'de Hacienda en acuerdos posteriores, y se incorporar\u00e1 aqu\u00ed cuando pueda cotejarse contra ' +
-      'esa fuente.';
+    const residuo = dif - sinSuma;
+    const refs = L.oficial.map(k => vsxRefLink(FE.campos[k].ref)).join(' ');
+    return 'El Presupuesto de Egresos aprueba para ' + L.cuadre + ' <b>' + formatMdpFijo(oficial) + '</b> ' +
+      chipEstado('oficial') + '. Los 32 renglones de este cuadro suman <b>' + formatMdpFijo(suma) + '</b>. ' +
+      'La diferencia, <b>' + formatMdpFijo(dif) + '</b>, es lo que el acuerdo de distribuci\u00f3n publicado en el ' +
+      'Diario Oficial no asigna a ninguna entidad: ' +
+      sin.map(x => '<span title="' + escHtml(x.d) + '">' + escHtml(x.n) + ', ' + formatMdpFijo(x.mdp) + '</span>').join('; ') + '. ' +
+      (Math.abs(residuo) >= 0.5 ? 'Quedan ' + formatMdpFijo(Math.abs(residuo)) + ' de redondeo a d\u00e9cimas. ' : '') + refs;
+  }
+
+  /* Chip de estado de un campo fiscal de las entidades, con su fuente en
+     el title: el panel y la tarjeta dicen de donde sale cada cifra. */
+  function campoEntidadChip(campo) {
+    const c = DB.fiscalEntidades && DB.fiscalEntidades.campos[campo];
+    if (!c) return '';
+    return ' <span title="' + escHtml(c.fuente) + '">' + chipEstado(c.estado) + '</span>';
   }
 
   /* --- Los mandos de conteo del bloque --- */
@@ -745,7 +752,7 @@
     // Header del Drawer
     document.getElementById('dStateTag').innerText = `Entidad Federativa Clave: ${st.abbr} · Capital: ${st.capital}`;
     document.getElementById('dStateName').innerText = st.name;
-    document.getElementById('dStateGov').innerHTML = `Gobernador(a): <strong>${st.gobernador}</strong> (${st.partido}) · Población: <strong>${st.pob}M habitantes</strong>`;
+    document.getElementById('dStateGov').innerHTML = `Gobernador(a): <strong>${st.gobernador}</strong> (${st.partido}) · Población: <strong>${st.pob}M habitantes</strong>${campoEntidadChip('pob')}`;
 
     // Alerta ASF
     document.getElementById('dAsfAmount').innerText = `$${formatNumber(st.asfMontoObservado)} mdp`;
@@ -759,12 +766,12 @@
     }
 
     // Métricas del Estado
-    document.getElementById('dGastoTotal').innerText = formatMoneyMdp(st.gasto);
-    document.getElementById('dRamo28').innerText = formatMoneyMdp(st.ramo28);
-    document.getElementById('dRamo33').innerText = formatMoneyMdp(st.ramo33);
-    document.getElementById('dRecaudacionPropia').innerText = formatMoneyMdp(st.recaudacionPropia);
+    document.getElementById('dGastoTotal').innerHTML = formatMoneyMdp(st.gasto) + campoEntidadChip('gasto');
+    document.getElementById('dRamo28').innerHTML = formatMoneyMdp(st.ramo28) + campoEntidadChip('ramo28');
+    document.getElementById('dRamo33').innerHTML = formatMoneyMdp(st.ramo33) + campoEntidadChip('ramo33');
+    document.getElementById('dRecaudacionPropia').innerHTML = formatMoneyMdp(st.recaudacionPropia) + campoEntidadChip('recaudacionPropia');
     document.getElementById('dDeuda').innerText = `$${formatNumber(st.deuda)} mdp (${st.semaforoDeuda}${st.deudaIld ? ' · ' + st.deudaIld + ' % de sus ingresos libres' : ''})`;
-    document.getElementById('dDependencia').innerText = `${st.dep}% federalizada`;
+    document.getElementById('dDependencia').innerHTML = `${st.dep}% federalizada` + campoEntidadChip('dep');
 
     // Lista de Municipios
     const muniList = document.getElementById('dMunicipiosList');
@@ -4325,7 +4332,7 @@
             results.push({
               type: 'Estado',
               title: st.name,
-              sub: `Gasto: ${formatMoneyMdp(st.gasto)} · Gobernador(a): ${st.gobernador}`,
+              sub: `Ramos 28 y 33: ${formatMoneyMdp(st.gasto)} · Gobernador(a): ${st.gobernador}`,
               badge: st.abbr,
               action: () => {
                 var desglose = document.getElementById('seccionDesgloseModulos');
@@ -7226,14 +7233,13 @@
     const e = DB.estados.find(x => x.abbr === abbr);
     if (!e) { box.innerHTML = ''; return; }
 
-    const recibido = (e.ramo28 || 0) + (e.ramo33 || 0) + (e.convenios || 0);
+    const recibido = (e.ramo28 || 0) + (e.ramo33 || 0);
     const propio = e.recaudacionPropia || 0;
-    const totalDisponible = recibido + propio;
     const filas = [
-      { n: 'Ramo 28 \u2014 participaciones', v: e.ramo28, c: 'gold', d: 'De libre disposici\u00f3n' },
-      { n: 'Ramo 33 \u2014 aportaciones', v: e.ramo33, c: 'cyan', d: 'Etiquetado por ley' },
-      { n: 'Convenios', v: e.convenios, c: 'blue', d: 'Pactados caso por caso' },
-      { n: 'Recaudaci\u00f3n propia', v: propio, c: 'green', d: 'Lo que el estado cobra por su cuenta' }
+      { n: 'Ramo 28 \u2014 participaciones', v: e.ramo28, c: 'gold', d: 'De libre disposici\u00f3n', k: 'ramo28' },
+      { n: 'Ramo 33 \u2014 aportaciones', v: e.ramo33, c: 'cyan', d: 'Etiquetado por ley', k: 'ramo33' },
+      { n: 'Convenios', v: e.convenios, c: 'blue', d: 'Pactados caso por caso', k: 'convenios' },
+      { n: 'Recaudaci\u00f3n propia', v: propio, c: 'green', d: 'Lo que el estado cobra por su cuenta', k: 'recaudacionPropia' }
     ];
     const maxV = Math.max.apply(null, filas.map(f => f.v || 0));
 
@@ -7241,34 +7247,33 @@
       <div class="ec-head">
         <div>
           <h4>${e.name}</h4>
-          <span class="ec-sub">${e.capital} \u00b7 ${e.pob} millones de habitantes \u00b7 gobierna ${e.gobernador}</span>
+          <span class="ec-sub">${e.capital} \u00b7 ${e.pob} millones de habitantes${campoEntidadChip('pob')} \u00b7 gobierna ${e.gobernador}</span>
         </div>
         <div class="ec-dep">
           <span class="ec-dep-num" data-anim-v="${e.dep}" data-anim-f="pct">0.0%</span>
-          <span class="ec-dep-lab">de dependencia federal</span>
+          <span class="ec-dep-lab">de dependencia federal${campoEntidadChip('dep')}</span>
         </div>
       </div>
       <div class="ec-filas">
         ${filas.map(f => `
           <div class="ec-fila">
-            <span class="ec-nom">${f.n}<em>${f.d}</em></span>
+            <span class="ec-nom">${f.n}${campoEntidadChip(f.k)}<em>${f.d}</em></span>
             <span class="ec-barra"><span class="ec-rell ec-${f.c}"
                   data-anim-w="${maxV ? ((f.v || 0) / maxV * 100).toFixed(2) : 0}" style="width:0%"></span></span>
             <span class="ec-val" data-anim-v="${f.v || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>
           </div>`).join('')}
       </div>
       <div class="ec-resumen">
-        <div><span class="ec-rk">Le baja de la Federaci\u00f3n</span><span class="ec-rv" data-anim-v="${recibido}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
-        <div><span class="ec-rk">Cobra por su cuenta</span><span class="ec-rv" data-anim-v="${propio}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
-        <div><span class="ec-rk">Por cada peso propio, recibe</span><span class="ec-rv">${propio ? (recibido / propio).toFixed(1) : '\u2014'} pesos</span></div>
+        <div><span class="ec-rk">Le bajan por los Ramos 28 y 33${campoEntidadChip('gasto')}</span><span class="ec-rv" data-anim-v="${recibido}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
+        <div><span class="ec-rk">Cobra por su cuenta${campoEntidadChip('recaudacionPropia')}</span><span class="ec-rv" data-anim-v="${propio}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
+        <div><span class="ec-rk">Por cada peso propio, recibe${campoEntidadChip('recaudacionPropia')}</span><span class="ec-rv">${propio ? (recibido / propio).toFixed(1) : '\u2014'} pesos</span></div>
         <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv"><span data-anim-v="${e.deuda || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span> \u00b7 ${e.semaforoDeuda}</span></div>
       </div>
       <p class="ec-nota">
-        La dependencia federal mide qu\u00e9 proporci\u00f3n del dinero que ejerce la entidad no proviene
-        de su propia recaudaci\u00f3n. Total disponible estimado:
-        <span data-anim-v="${totalDisponible}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span>.
-        Estas cifras proceden de la base interna de la plataforma, no del Presupuesto de Egresos:
-        el reparto entidad por entidad lo publica la Secretar\u00eda de Hacienda en acuerdos aparte.
+        El Ramo 28 y el Ramo 33 salen del acuerdo con que Hacienda reparte ambos ramos entre las entidades,
+        publicado en el Diario Oficial ${vsxRefLink('ref-dof-distribucion-2026')} ${vsxRefLink('ref-dof-distribucion-2026-mod')}.
+        Los convenios, la recaudaci\u00f3n propia, la poblaci\u00f3n y el porcentaje de dependencia todav\u00eda no tienen
+        su documento citado: llevan el chip pendiente y deben leerse como aproximaciones.
       </p>
     `;
     zonaSincronizar('entidad');
@@ -24418,16 +24423,16 @@
       const deudaPct = e.gasto > 0 ? (e.deuda / e.gasto) * 100 : 0;
       return [
         { k: 'autonomia', et: 'Autonomía financiera', ico: '🪙', v: inspPct(100 - e.dep),
-          crudo: e.dep.toFixed(1) + '% de dependencia federal',
+          crudo: e.dep.toFixed(1) + '% de dependencia federal (dato pendiente de fuente)',
           expl: 'De cada 100 pesos que gasta, ' + e.dep.toFixed(1) + ' llegan de la Federación por Ramo 28, Ramo 33 y convenios. ' +
                 'El eje mide lo contrario: lo que el estado recauda por su cuenta.' },
         { k: 'observado', et: 'Limpieza en la cuenta', ico: '⚠️', v: inspPct(100 - obsPct * 20),
           crudo: simMdp(e.asfMontoObservado) + ' observados en ' + e.asfAuditorias + ' auditorías',
-          expl: 'Lo observado por la ASF equivale al ' + obsPct.toFixed(2) + '% de su gasto. ' +
+          expl: 'Lo observado por la ASF equivale al ' + obsPct.toFixed(2) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
                 'Observado no es robado: es dinero cuyo destino no quedó acreditado y que hay que aclarar.' },
         { k: 'holgura', et: 'Holgura frente a la deuda', ico: '⚖️', v: inspPct(100 - deudaPct * 2),
           crudo: simMdp(e.deuda) + ' de deuda · semáforo ' + e.semaforoDeuda,
-          expl: 'Su deuda equivale al ' + deudaPct.toFixed(1) + '% de un año de gasto. ' +
+          expl: 'Su deuda equivale al ' + deudaPct.toFixed(1) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
                 'El semáforo es el del Sistema de Alertas de la SHCP, no nuestro.' }
       ];
     }
@@ -24659,9 +24664,9 @@
       ? [['Quien gobierna', e.gobernador + ' (' + e.partido + ')'],
          ['Capital', e.capital],
          ['Población', e.pob.toFixed(2) + ' millones'],
-         ['Gasto anual', simMdp(e.gasto)],
-         ['Gasto por habitante', '$' + formatNumber(e.pc)],
-         ['Recaudación propia', simMdp(e.recaudacionPropia)]]
+         ['Ramos 28 y 33', simMdp(e.gasto)],
+         ['Ramos 28 y 33 por habitante', '$' + formatNumber(e.pc) + ' (población pendiente de fuente)'],
+         ['Recaudación propia', simMdp(e.recaudacionPropia) + ' (pendiente de fuente)']]
       : [['Quien gobierna', m.alcalde + ' (' + m.partido + ')'],
          ['Estado', ente.est.name],
          ['Población', formatNumber(m.pob) + ' habitantes'],
@@ -24670,8 +24675,7 @@
          ['FISMDF', simMdp(m.fismdf)]];
 
     const extra = esEstado
-      ? '<div class="insp-nota"><strong>Lo que la ASF le observa.</strong> ' + e.asfTipologia + '</div>' +
-        '<div class="insp-nota"><strong>Rasgo del estado.</strong> ' + e.destacados + '</div>'
+      ? '<div class="insp-nota"><strong>Lo que la ASF le observa.</strong> ' + e.asfTipologia + '</div>'
       : '<div class="insp-nota"><strong>Estatus de auditoría.</strong> ' + m.estatusAuditoria + '</div>' +
         (m.proyectosAuditados && m.proyectosAuditados.length
           ? '<div class="insp-nota"><strong>Obras bajo revisión.</strong> ' + m.proyectosAuditados.join(' · ') + '</div>'

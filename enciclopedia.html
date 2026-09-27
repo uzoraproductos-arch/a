@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927b">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927c">
 </head>
 <body>
 
@@ -563,10 +563,10 @@
           <span>🔎 Lente de Fiscalización:</span>
         </div>
         <div class="lens-buttons">
-          <button class="lens-btn active" data-metric="gasto">Gasto Federalizado Total</button>
+          <button class="lens-btn active" data-metric="gasto">Ramos 28 y 33</button>
           <button class="lens-btn" data-metric="ramo28">Ramo 28 (Libre Disposición)</button>
           <button class="lens-btn" data-metric="ramo33">Ramo 33 (Aportaciones Etiquetadas)</button>
-          <button class="lens-btn" data-metric="pc">Gasto Per Cápita ($/hab)</button>
+          <button class="lens-btn" data-metric="pc">Ramos 28 y 33 por habitante</button>
           <button class="lens-btn" data-metric="asf" style="color:var(--crimson-bright);">⚠️ Alertas ASF (Irregularidades)</button>
           <button class="lens-btn" data-metric="deuda">Semáforo Deuda SHCP</button>
           <button class="lens-btn" data-metric="dep">Dependencia Federal (%)</button>
@@ -4587,7 +4587,7 @@
       <!-- Métricas Financieras del Estado -->
       <div class="state-metrics-grid">
         <div class="s-metric-card">
-          <div class="label">Gasto Federalizado Total</div>
+          <div class="label">Ramos 28 y 33 (participaciones + aportaciones)</div>
           <div id="dGastoTotal" class="val" style="color:var(--gold-bright);">$0</div>
         </div>
         <div class="s-metric-card">
@@ -4599,7 +4599,7 @@
           <div id="dRamo33" class="val">$0</div>
         </div>
         <div class="s-metric-card">
-          <div class="label">Recaudación Propia Local (ISN)</div>
+          <div class="label">Recaudación propia local</div>
           <div id="dRecaudacionPropia" class="val" style="color:var(--cyan);">$0</div>
         </div>
         <div class="s-metric-card">
@@ -5499,7 +5499,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927b</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927c</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -5573,16 +5573,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927b"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927c"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927b"></script>
+  <script src="assets/js/audit-database.js?v=20260927c"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927b"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927c"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927b"></script>
+  <script src="assets/js/audit-engine.js?v=20260927c"></script>
 
 </body>
 </html>
