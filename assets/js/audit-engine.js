@@ -1942,7 +1942,7 @@
           amTarjeta(amNum(R.perCapitaKg.valor, 3) + ' kg', 'de basura al día por persona', 'oficial', amFuente('DBGIR', R.perCapitaKg.pagina)) +
           amTarjeta(amNum(kgAnio, 0) + ' kg', 'al año: su basura', 'derivado', '1.076 kg × 365 días') +
           (pob ? amTarjeta(pdPesos(porPersona), 'al año: su parte del daño ambiental', 'derivado', 'Costo 2024 del INEGI ÷ ' + amNum(pob.millones, 1) + ' millones de habitantes (CONAPO, 2026)') : '') +
-          (isr > 0 ? amTarjeta(pdPct(porPersona / isr * 100), 'de su ISR anual', 'derivado', 'Su parte del daño comparada con el ISR que calculó en la 2.4') : '') +
+          (isr > 0 ? amTarjeta(pdPct(porPersona / isr * 100), tuUd('de su ISR anual', 'de tu ISR anual'), 'derivado', tuUd('Su parte del daño comparada con el ISR que calculó en la 2.4', 'Tu parte del daño comparada con el ISR que calculaste en la 2.4')) : '') +
         '</div>' +
         (isr > 0 ? '' : tuUd('<p class="pd-nota">Saque la cuenta de su sueldo en la calculadora (2.4) y aquí verá su parte del daño ambiental contra el ISR que paga. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>', '<p class="pd-nota">Saca la cuenta de tu sueldo en la calculadora (2.4) y aquí verás tu parte del daño ambiental contra el ISR que pagas. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>')) +
         '<p class="pd-nota">Es un promedio nacional: reparte entre todos un costo que no generamos por igual. La población usada es la de 2026 y el costo el de 2024, el más reciente publicado.</p>' +
@@ -1968,10 +1968,10 @@
         '<div class="am-alerta">' + chipEstado('oficial') + ' <b>Sin partida federal.</b> ' + pdEsc(R.sinPartidaFederal.texto) + ' ' + amFuente('DBGIR', R.sinPartidaFederal.pagina) + '</div>' +
         '<p class="pd-nota">' + pdEsc(R.rellenosSanitarios.nota) + ' Hay ' + amNum(R.sitiosDisposicion.valor) + ' sitios de disposición final; ' + amNum(R.vehiculos.valor) + ' camiones recolectores, de los cuales el ' + amNum(R.vehiculos.pctAntes2002, 2) + ' % son anteriores a 2002.</p>' +
         '<div class="am-serie" aria-label="Basura recolectada al día, 2010 a 2022"><div class="am-serie-cab">Basura recolectada al día, en toneladas: de ' + amNum(serie.tdia[0]) + ' en ' + serie.anios[0] + ' a ' + amNum(serie.tdia[serie.tdia.length - 1]) + ' en ' + serie.anios[serie.anios.length - 1] + ' ' + chipEstado('oficial') + '</div><div class="am-serie-g">' + barras + '</div><div class="pd-nota">' + amFuente('CNGMD', serie.pagina) + '</div></div>' +
-        '<details class="pd-sub pd-det"><summary class="pd-sub-t">¿Quién recoge la basura de su municipio? Las concesiones</summary>' +
+        pdPlegable(tuUd('¿Quién recoge la basura de su municipio? Las concesiones', '¿Quién recoge la basura de tu municipio? Las concesiones'), '' +
           '<p class="pd-nota">La Ley General de Residuos (artículo 10, fracciones IV y V) permite al municipio prestar el servicio por sí mismo o a través de gestores, y le da la facultad de otorgar concesiones. La decisión se toma en el cabildo y debe constar en sus actas. ' + amRef('ref-lgpgir', 'Ley General de Residuos, reforma DOF 19-01-2026') + '</p>' +
           '<p class="pd-nota">' + chipEstado('pendiente') + ' Qué municipios tienen el servicio concesionado y cuánto cuesta vienen en los microdatos del censo municipal del INEGI; se integrarán municipio por municipio.</p>' +
-        '</details>' +
+        '', null, '🚛') +
       '</section>';
 
     /* 4. Proteccion contra dano, y el presupuesto 2026-2027 */
@@ -2144,9 +2144,9 @@
         '<div class="am-car-avance" aria-hidden="true"><i id="amCarAvance"></i></div>' +
         '<ol class="am-car-barras">' + filas + '</ol>' +
         '<p class="am-car-remate" id="amCarRemate" aria-live="polite"></p>' +
-        '<details class="pd-sub pd-det"><summary class="pd-sub-t">Ver las cuatro cifras en tabla, con su documento</summary>' +
+        pdPlegable('Ver las cuatro cifras en tabla, con su documento',
           '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Concepto</th><th>Año</th><th>Al año</th><th>Por segundo</th><th>Documento</th></tr></thead><tbody>' + tabla + '</tbody></table></div>' +
-        '</details>' +
+          '') +
         '<p class="pd-nota">' + chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.</p>' +
       '</section>';
     amCarreraPintar(amCar.t || 0);
@@ -2309,14 +2309,14 @@
       '<div class="am-tk-acciones">' +
         '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.amTicketCopiar()"><span>📋</span> Copiar mi ticket</button>' +
       '</div>' +
-      '<details class="pd-sub pd-det"><summary class="pd-sub-t">De dónde sale cada renglón</summary><ul class="pd-lista">' +
+      pdPlegable('De dónde sale cada renglón', '<ul class="pd-lista">' +
         '<li>Intereses: ' + formatMdpFijo(c.rel ? c.rel.anual_mdp : 0) + ' de costo financiero de la deuda ' + chipEstado('oficial') + ' ' + (c.rel ? amRef(c.rel.refKey, 'PEF 2026, Anexo 8') : '') + '</li>' +
         '<li>Daño ambiental: ' + formatMdpFijo(C.ctada.total_mdp) + ' de costos por agotamiento y degradación; basura, ' + formatMdpFijo(c.resid ? c.resid.monto_mdp : 0) + ' ' + chipEstado('oficial') + ' ' + ceem + '</li>' +
         '<li>Deuda total: ' + formatMdpFijo(T.shrfsp.estimado2026_mdp) + ', ' + amNum(T.shrfsp.estimado2026_pib, 1) + ' % del PIB ' + chipEstado(T.shrfsp.estado) + ' ' + amTkFuente(T.shrfsp.fuente, T.shrfsp.pagina) + '. ' + pdEsc(T.shrfsp.que) + '</li>' +
         '<li>Presupuesto de Medio Ambiente: ' + pdMdp(A.presupuesto.aprobado2026.valor) + ' ' + chipEstado('oficial') + ' ' + amFuente('PEF', A.presupuesto.aprobado2026.pagina) + '; protección ambiental: ' + formatMdpFijo(C.gasto_proteccion_ambiental.monto_mdp) + ' ' + ceem + '</li>' +
         '<li>Basura: ' + amNum(A.residuos.perCapitaKg.valor, 3) + ' kg por persona al día ' + chipEstado('oficial') + ' ' + amFuente('DBGIR', A.residuos.perCapitaKg.pagina) + '</li>' +
         '<li>Población: ' + amNum(c.pob.millones, 1) + ' millones, ' + pdEsc(c.pob.fuente) + ' ' + chipEstado(c.pob.estado) + '</li>' +
-      '</ul></details>';
+      '</ul>', null, '🧾');
     const tk = document.getElementById('amTkImprimible');
     if (!sinAnimar && tk) {
       tk.classList.add('am-tk-anim');
@@ -2919,7 +2919,7 @@
             '<span class="pd-k">' + (p.k === 'legislativo' ? '🏛️' : '⚖️') + ' ' + pdEsc(p.nombre) + ' · Ramo ' + p.ramo + '</span>' +
             (hayIsr
               ? '<b class="pd-v">' + pdPesos(p.tuyo) + ' <small>al año</small></b>' +
-                '<span class="pd-s">de su ISR, ' + pdPct(p.proporcion * 100, 2) + ' del total ' + chipEstado('derivado') + '</span>'
+                '<span class="pd-s">' + tuUd('de su ISR, ', 'de tu ISR, ') + pdPct(p.proporcion * 100, 2) + ' del total ' + chipEstado('derivado') + '</span>'
               : '<b class="pd-v">' + pdPct(p.proporcion * 100, 2) + '</b>' +
                 '<span class="pd-s">del gasto neto total ' + chipEstado('derivado') + '</span>') +
           '</div>').join('') +
@@ -3007,14 +3007,12 @@
     const circ = P.judicial.circuitos.slice().sort((a, b) => b.pagado - a.pagado);
     const maxC = circ[0] ? circ[0].pagado : 0;
     const circT =
-      '<details class="pd-sub pd-det">' +
-        '<summary class="pd-sub-t">Los 32 circuitos judiciales: pagos registrados de abril a junio ' + chipEstado('derivado') + '</summary>' +
+      pdPlegable('Los 32 circuitos judiciales: pagos registrados de abril a junio', '' +
         '<p class="pd-nota"><b>No es el costo de cada circuito.</b> ' + pdEsc(P.judicial.circuitosNota) + '</p>' +
         circ.map(c =>
           '<div class="pd-fila"><span class="pd-fila-n">' + c.n + '. ' + pdEsc(String(c.sede).split(' / ')[0].replace(/^.*?Circuito Judicial /, '')) + '</span>' +
           pdBarra(c.pagado, maxC, 'pd-v-jud') + '<span class="pd-fila-v">' + pdPesos(c.pagado) + '</span></div>').join('') +
-        '<p class="pd-nota">Suma de las unidades ejecutoras de cada circuito. ' + pdFuente('OAJ_UEG') + '</p>' +
-      '</details>';
+        '<p class="pd-nota">Suma de las unidades ejecutoras de cada circuito. ' + pdFuente('OAJ_UEG') + '</p>', chipEstado('derivado'), '⚖️');
 
     /* --- 2 bis. Lo ya gastado: cierre 2025 y avance 2026, de Hacienda --- */
     const EJ = P.ejercicio;
@@ -3068,7 +3066,7 @@
               ' en 2025, y en 2026 su presupuesto ya se amplió a ' + pdMdp(asfAv.modificado) + '.' : '.') + '</p>' +
           tabla('03', '⚖️ Poder Judicial') +
           '<p class="pd-nota">En 2025 conviven el Consejo de la Judicatura Federal, que operó hasta el cambio de estructura de ese año, y los dos órganos que lo sustituyeron: el Órgano de Administración Judicial y el Tribunal de Disciplina Judicial. Por eso estos dos aparecen con original en cero.</p>' +
-          (capFilas ? '<details class="pd-sub pd-det"><summary class="pd-sub-t">En qué gastaron las cámaras en 2025, capítulo por capítulo</summary>' + capFilas + '</details>' : '') +
+          (capFilas ? pdPlegable('En qué gastaron las cámaras en 2025, capítulo por capítulo', capFilas, null, '🏛️') : '') +
           '<p class="pd-nota">' + chipEstado('oficial') + ' Montos: ' + pdFuente('CP2025', 'base de datos') + ' y ' + pdFuente('AV2T2026', 'base de datos') +
             '. Variaciones y avance: ' + chipEstado('derivado') + ' (ejercido ÷ original − 1; pagado ÷ presupuesto modificado). ' + pdEsc(EJ.nota) + '</p>' +
         '</section>';
@@ -3097,42 +3095,34 @@
     const pers = P.legislativo.personalDiputados2024.slice().sort((a, b) => b.pesos - a.pesos);
     const totPers = pers.reduce((a, x) => a + x.pesos, 0);
     const persT =
-      '<details class="pd-sub pd-det">' +
-        '<summary class="pd-sub-t">Cámara de Diputados 2024: gasto de personal por partida</summary>' +
+      pdPlegable('Cámara de Diputados 2024: gasto de personal por partida', '' +
         '<p class="pd-nota"><b>Es el personal de toda la institución</b>, no sólo el de las 500 diputaciones. Total: ' + pdMdp(totPers) + ' ' + chipEstado('derivado') + '.</p>' +
         pers.map(x => '<div class="pd-fila"><span class="pd-fila-n">' + x.partida + ' ' + pdEsc(x.concepto) + '</span>' + pdBarra(x.pesos, pers[0].pesos, 'pd-v-leg') + '<span class="pd-fila-v">' + pdMdp(x.pesos) + '</span></div>').join('') +
-        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + pdFuente('ASF_DIP', 5) + '</p>' +
-      '</details>';
+        '<p class="pd-nota">' + chipEstado('oficial') + ' ' + pdFuente('ASF_DIP', 5) + '</p>', null, '🏛️');
 
     const sc = P.legislativo.senadoCapitulos2024;
     const senT =
-      '<details class="pd-sub pd-det">' +
-        '<summary class="pd-sub-t">Cámara de Senadores 2024: devengado y pagado por capítulo</summary>' +
+      pdPlegable('Cámara de Senadores 2024: devengado y pagado por capítulo', '' +
         '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Capítulo</th><th>Devengado</th><th>Pagado al 31 de diciembre</th></tr></thead><tbody>' +
           sc.map(c => '<tr><th scope="row">' + c.cap + ' ' + pdEsc(c.concepto) + '</th><td>' + pdMdp(c.devengado) + '</td><td>' + pdMdp(c.pagado) + '</td></tr>').join('') +
         '</tbody></table></div>' +
-        '<p class="pd-nota">' + chipEstado('oficial') + ' Lo devengado y no pagado al cierre se pagó en 2025. ' + pdFuente('ASF_SEN', 5) + '</p>' +
-      '</details>';
+        '<p class="pd-nota">' + chipEstado('oficial') + ' Lo devengado y no pagado al cierre se pagó en 2025. ' + pdFuente('ASF_SEN', 5) + '</p>', null, '🏛️');
 
     const cg = P.legislativo.congresos2024.slice().sort((a, b) => b.ejercidoMdp - a.ejercidoMdp);
     const totCg = cg.reduce((a, x) => a + x.ejercidoMdp, 0);
     const cgT =
-      '<details class="pd-sub pd-det">' +
-        '<summary class="pd-sub-t">Los 32 congresos locales: gasto ejercido en 2024</summary>' +
+      pdPlegable('Los 32 congresos locales: gasto ejercido en 2024', '' +
         cg.map(x => '<div class="pd-fila"><span class="pd-fila-n">' + pdEsc(x.entidad) + '</span>' + pdBarra(x.ejercidoMdp, cg[0].ejercidoMdp, 'pd-v-leg') + '<span class="pd-fila-v">' + pdMdp(x.ejercidoMdp * 1e6) + '</span></div>').join('') +
         '<p class="pd-nota">' + chipEstado('oficial') + ' cada congreso; ' + chipEstado('derivado') + ' la suma de las 32 filas, ' + pdMdp(totCg * 1e6) + '. Millones de pesos corrientes. ' + pdFuente('CNPLE', 11) + '</p>' +
-        '<p class="pd-nota">' + chipEstado('pendiente') + ' ' + P.legislativo.pendientes.map(pdEsc).join(' · ') + '.</p>' +
-      '</details>';
+        '<p class="pd-nota">' + chipEstado('pendiente') + ' ' + P.legislativo.pendientes.map(pdEsc).join(' · ') + '.</p>', null, '🏛️');
 
     const ac = P.legislativo.asfCongresos2024;
     const acT =
-      '<details class="pd-sub pd-det">' +
-        '<summary class="pd-sub-t">Dos congresos locales auditados por la ASF</summary>' +
+      pdPlegable('Dos congresos locales auditados por la ASF', '' +
         '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Congreso</th><th>Concepto</th><th>Importe</th><th>Fuente</th></tr></thead><tbody>' +
           ac.map(x => '<tr><td>' + pdEsc(x.congreso) + '</td><td>' + pdEsc(x.concepto) + '</td><td>' + pdPesos(x.pesos) + '</td><td>' + pdFuente(x.fuente, x.pagina) + '</td></tr>').join('') +
         '</tbody></table></div>' +
-        '<p class="pd-nota">' + chipEstado('oficial') + ' Un monto «por aclarar» es un saldo sujeto a seguimiento: no equivale a daño definitivo.</p>' +
-      '</details>';
+        '<p class="pd-nota">' + chipEstado('oficial') + ' Un monto «por aclarar» es un saldo sujeto a seguimiento: no equivale a daño definitivo.</p>', null, '🔍');
 
     const legislativo =
       '<section class="pd-bloque">' +
@@ -8308,6 +8298,17 @@
         '<span class="ctx-abrir-ico" aria-hidden="true">' + (ico || 'ℹ️') + '</span> ' + glosEsc(titulo) +
         ' <span class="ctx-abrir-flecha" aria-hidden="true">›</span></button>' +
       '<div class="ctx-contenido" hidden>' + html + '</div>';
+  }
+
+  /* Bloque denso plegable: en el auditor se abre en el panel lateral de
+     contexto; en la Enciclopedia congelada sigue siendo un <details>. */
+  function pdPlegable(titulo, cuerpo, extra, ico) {
+    if (esAuditor()) {
+      return '<div class="pd-sub pd-sub-ctx">' +
+        ctxBoton(titulo, (extra ? '<p class="pd-nota">' + extra + '</p>' : '') + cuerpo, ico || '📑') + '</div>';
+    }
+    return '<details class="pd-sub pd-det"><summary class="pd-sub-t">' + titulo + (extra ? ' ' + extra : '') + '</summary>' +
+      cuerpo + '</details>';
   }
 
   function abrirContexto(boton) {

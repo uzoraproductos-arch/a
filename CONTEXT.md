@@ -3181,6 +3181,22 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
 - **Solo en el auditor:** `index.html` lleva `<body data-pagina="auditor">`
   y `esAuditor()` decide. La Enciclopedia sigue con sus plegables
   `<details>` intactos (verificado: 5 `details.sim-ver` allá, 0 acá).
+- **Segunda tanda al panel (sello 20260927n):** `pdPlegable(titulo,
+  cuerpo, extra, ico)` sustituye a los nueve `details.pd-det` del motor.
+  En el auditor se abren en el panel: las seis tablas de Poderes
+  (capítulos de las cámaras, 32 circuitos judiciales, personal de
+  Diputados, Senado por capítulo, 32 congresos locales, congresos
+  auditados por la ASF), la tabla de la carrera ambiental, «¿Quién recoge
+  la basura de tu municipio?» y «De dónde sale cada renglón» del ticket.
+  En la Enciclopedia la función devuelve el mismo `<details>` de antes.
+  Verificado en 1366 y 375 px: 0 `pd-det` en el auditor, los 9 abren el
+  panel sin desbordar, 0 errores; Enciclopedia idéntica byte a byte.
+- De paso, dos restos de usted («de su ISR» en Poderes y en la tarjeta
+  ambiental) pasan por `tuUd`.
+- Quedan como plegables, a propósito: el renglón de cada expediente
+  (`exp-fila`), la lista de dependencias de una tarjeta del comparador y
+  el diccionario de columnas de Descargas; son detalle de una fila, no
+  bloques de contexto.
 
 ### Hecho (el auditor habla de tú)
 

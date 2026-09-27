@@ -22201,4 +22201,8 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 .ctx-drawer-cuerpo li { margin-bottom: 6px; }
 .ctx-drawer-cuerpo .sim-ver { margin-top: 0; overflow-x: auto; }
 .ctx-drawer-cuerpo a { color: var(--gold-bright); }
+.pd-sub-ctx { display: block; }
+.ctx-drawer-cuerpo .pd-fila { margin-bottom: 8px; }
+.ctx-drawer-cuerpo .pd-tabla-w { margin: 0 0 12px; }
+.ctx-drawer-cuerpo .pd-nota { margin: 0 0 12px; }
 [data-theme="light"] .ctx-abrir { color: #0b3a6e; border-color: rgba(0,43,91,0.3); background: rgba(0,43,91,0.05); }
