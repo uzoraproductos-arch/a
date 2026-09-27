@@ -3320,6 +3320,33 @@ la Enciclopedia congelada conserva sus cifras de antes.
 
 ### Pendiente
 
+**Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
+auditor, por tipo:
+
+1. **Lo último, por decisión del autor:** maquetas de la portada animada y
+   de la barra en celular (se muestran antes de programarse); después
+   login, registro y códigos promocionales (necesitan servidor y cuentas a
+   nombre del autor); al final, Pase Cívico con pasarela real e imágenes.
+   El Pase de $79 sigue visible hasta entonces.
+2. **Espera publicaciones oficiales con fecha:** 2.ª entrega de la CP 2025
+   de la ASF (30-10-2026), avance del 3.er trimestre (fin de octubre),
+   Cuentas Ecológicas 2025 (diciembre), EFIPEM 2025 definitiva, estudios de
+   evasión del SAT (art. 30 de la LIF 2027, principios de 2028) para el
+   huachicol fiscal.
+3. **Bloqueado por el entorno (comprobar a mano):** Segundo Informe de
+   Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
+4. **Datos que faltan y no se estiman:** pérdida de nueve megaobras, costo
+   del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
+   por entidad, dietas locales, CDMX en EFIPEM.
+
+Resuelto en el barrido: anclas de la escala de Megaobras (usaban el bloque
+`macro` sin fuente: Ramo 33 $1,114,800 contra $1,041,892.9 oficiales;
+deuda estatal $715,420 contra $643,695.7), etiqueta opaca de la cinta de
+datos (se encimaba en celular), término del glosario de la ASF que no
+existía. Revisado sin hallazgo: ningún `onclick` llama a una función no
+exportada, ninguna referencia `goToRef` apunta a un id inexistente, ningún
+desborde horizontal a 360 px en las 9 pestañas.
+
 - **De los planes de Astra y Antigravity, esperan decisión del autor:**
   - Trato de «tú»: hecho. Texto nuevo del motor: usar `tuUd()` si también
     se pinta en la Enciclopedia.
@@ -3356,9 +3383,7 @@ la Enciclopedia congelada conserva sus cifras de antes.
 - **Módulo 5, paquete 2027:** la descripción del renglón SHRFSP compara el
   55.0 % de 2027 con el cierre estimado 2026 (54.0 %), mientras la tarjeta
   muestra el aprobado (52.3 %); valorar mostrar las dos columnas.
-- **Módulo 4, tarjeta:** la cifra «5,417 irregularidades» cuenta acciones
-  correctivas de la ASF, y una acción puede agrupar varias irregularidades.
-  Cuando se publique el Informe General de la CP 2024 o la ASF dé su propio
+- **Módulo 4, tarjeta:** ya dice «5,417 acciones promovidas». Cuando se publique el Informe General de la CP 2024 o la ASF dé su propio
   total de irregularidades, cotejarlo. La 2.ª entrega de la CP 2025 sale el
   30 de octubre de 2026: decidir entonces si la tarjeta pasa a la CP 2025.
 - **Módulo 4, después de los bloques:** decidir con el autor si el Auditor de
@@ -3374,10 +3399,10 @@ la Enciclopedia congelada conserva sus cifras de antes.
 - **Aguinaldo del Senado:** el Anexo 23.2.2 reporta $382,207 (≈60 días de la
   dieta bruta) y el Manual 2026 dice 40 días; aclarar con la Cámara.
 
-- **Bloque `macro` de la base** (`recaudacionTributariaTotal`, `deudaSubnacionalTotal`,
-  `grandesContribuyentes`, `predialPromedioPIB`, `asfIrregularidadesGlobales`…) no tiene
-  fuentes y todavía lo leen otras piezas; y en los estados, `gasto`, `ramo28`, `ramo33`
-  y `dep` son cifras redondas sin documento. Revisar quién las usa y sustituirlas.
+- **Bloque `macro` de la base:** sin fuentes. El auditor ya solo lee de él
+  `padronContribuyentes` (pendiente, con chip); la escala de Megaobras usa
+  `simAnclasOficiales()`. La Enciclopedia congelada lo sigue leyendo. Los
+  campos `ramo28`, `ramo33` y `gasto` de los estados ya están anclados al DOF.
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
 - **Evaluación de los presidentes (módulo 2, 3.2):** quedan pendientes el PIB
@@ -3394,9 +3419,7 @@ la Enciclopedia congelada conserva sus cifras de antes.
 - **Guion editorial, entregas B a E** (portada, glosario ampliado,
   diccionario de sustituciones, reescritura por módulos): esperan decisiones
   del autor sobre «tú» o «usted», nombres de menús y el Pase.
-- **«$51,024 mdp» sigue en la cinta de indicadores de la portada** y en
-  el motor (tasa por segundo y serie histórica). Sustituir por la cifra
-  de la CP 2024 con su fuente, o retirarla, previa decisión del autor.
+- **«$51,024 mdp»:** retirado del auditor (solo queda en un comentario).
 - **Expedientes, alcance:** cada ficha reúne sólo los informes enlistados. El
   caso Segalmex más conocido está en las Cuentas Públicas 2019 a 2021, que no
   se han integrado; tampoco las auditorías de la CP 2021 a los demás casos.
@@ -3615,9 +3638,7 @@ capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
   corresponden a la estructura de once ponencias y al tope salarial anterior.
   Hay una advertencia metodológica visible en la ficha. Deben contrastarse
   contra el Manual de Remuneraciones vigente antes de citarse.
-- **Colección `impuestos`**: sus montos de ISR, IVA e IEPS son anteriores a la
-  Ley de Ingresos 2026 y difieren de los que muestra `panoramaErario`. Alimenta
-  la calculadora de la pestaña 2; conviene alinearla al tocar ese módulo.
+- **Colección `impuestos`**: ya no la lee el motor (revisado el 27-09-2026).
 - **Estilos en línea**: hay 1,326 atributos `style=` en el HTML. Ganan a
   cualquier regla de la hoja de estilos, que es justo el origen del problema
   de contraste en tema claro y de los párrafos demasiado anchos. Conviene

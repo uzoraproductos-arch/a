@@ -22252,3 +22252,6 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 .vn-aviso { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
 .vn-verificador { padding: 16px; border-radius: 14px; background: var(--bg-surface); border: 1px solid var(--border-subtle); }
 .vn-veredicto { background: var(--bg-card); }
+/* La cinta de datos pasa por debajo de su etiqueta: la etiqueta necesita fondo opaco */
+.radar-tel-etiqueta { position: relative; z-index: 2; flex: 0 0 auto; background: #3a1418 !important; box-shadow: 8px 0 10px -4px rgba(0, 0, 0, 0.6); }
+[data-theme="light"] .radar-tel-etiqueta { background: #fde4e4 !important; color: #9b1c1c !important; box-shadow: 8px 0 10px -4px rgba(0, 0, 0, 0.12); }

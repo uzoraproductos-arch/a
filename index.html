@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927r">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927s">
 </head>
 <body data-pagina="auditor">
 
@@ -351,7 +351,7 @@
     
     <!-- Línea 1: Notificaciones y datos oficiales del erario circulando en tiempo real -->
     <div class="radar-row-telemetry">
-      <div style="display:inline-flex; align-items:center; gap:6px; padding:0 14px; background:rgba(220,38,38,0.22); color:#fca5a5; font-weight:800; font-family:var(--font-mono); font-size:10.5px; border-right:1px solid rgba(220,38,38,0.3); white-space:nowrap; z-index:2;">
+      <div class="radar-tel-etiqueta" style="display:inline-flex; align-items:center; gap:6px; padding:0 14px; background:rgba(220,38,38,0.22); color:#fca5a5; font-weight:800; font-family:var(--font-mono); font-size:10.5px; border-right:1px solid rgba(220,38,38,0.3); white-space:nowrap; z-index:2;">
         <span class="pulsing-radar-dot" style="width:7px; height:7px;"></span>
         <span>DATOS DE REFERENCIA:</span>
       </div>
@@ -1076,7 +1076,7 @@
               <div>
                 <div class="civio-equiv-val" data-no-autolink>$785.3 mdp por aclarar <span class="est-chip est-derivado">derivado</span></div>
                 <div class="civio-equiv-lbl">
-                  Es lo que la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación')">Auditoría Superior de la Federación</a> dejó sin aclarar en la construcción y el financiamiento del Tren Maya en la Cuenta Pública 2022, con 14 pliegos de observaciones. El tramo 4, Izamal-Cancún, concentra el 45 %. La cifra suma los informes individuales de ese año.
+                  Es lo que la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación (ASF)')">Auditoría Superior de la Federación</a> dejó sin aclarar en la construcción y el financiamiento del Tren Maya en la Cuenta Pública 2022, con 14 pliegos de observaciones. El tramo 4, Izamal-Cancún, concentra el 45 %. La cifra suma los informes individuales de ese año.
                   <button type="button" class="pd-btn" onclick="window.AuditEngine.irAExpediente('tren-maya')">Ver el expediente y sus informes</button>
                 </div>
               </div>
@@ -2918,7 +2918,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927r</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927s</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3062,17 +3062,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927r"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927s"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927r"></script>
+  <script src="assets/js/audit-database.js?v=20260927s"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927r"></script>
-  <script src="assets/js/municipios-rendicion.js?v=20260927r"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927s"></script>
+  <script src="assets/js/municipios-rendicion.js?v=20260927s"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927r"></script>
+  <script src="assets/js/audit-engine.js?v=20260927s"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

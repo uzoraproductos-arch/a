@@ -19999,12 +19999,15 @@
         '</section>';
       return;
     }
-    const m = DB.macro || {};
+    /* En el auditor las anclas salen de los renglones documentados de la
+       base (PEF 2026, Anexo 1 y Sistema de Alertas), no del bloque macro,
+       que trae cifras redondeadas sin fuente. */
+    const m = esAuditor() ? simAnclasOficiales() : (DB.macro || {});
     const ce = DB.cuentas_ecologicas;
     const anclas = [
       { k: 'Ramo 33 · aportaciones federales a estados y municipios', v: m.ramo33Total, ej: '2026', ref: 'ref-pef2026' },
       { k: 'Gasto federalizado completo', v: m.gastoFederalizadoTotal, ej: '2026', ref: 'ref-pef2026' },
-      { k: 'Deuda subnacional de las 32 entidades', v: m.deudaSubnacionalTotal, ej: '2026', ref: 'ref-shcp-alertas' },
+      { k: 'Deuda subnacional de las 32 entidades', v: m.deudaSubnacionalTotal, ej: esAuditor() ? 'cierre de 2025' : '2026', ref: 'ref-shcp-alertas' },
       { k: 'Costo ambiental de un año completo', v: ce ? ce.ctada.total_mdp : null, ej: '2024', ref: 'ref-ceem-2024' },
       { k: 'Presupuesto de Egresos de la Federación', v: m.pefNetoTotal, ej: '2026', ref: 'ref-pef2026' }
     ].filter(x => x.v);
@@ -21311,6 +21314,17 @@
       '<p class="sim-mesa-cierre">Ese último eslabón, <strong>$' + ag.perdidaSegundo.toFixed(2) +
         tuUd(' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>', ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que llevas mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>') +
     '</article>';
+  }
+
+  function simAnclasOficiales() {
+    const P = DB.panoramaErario || {}, F = P.federalizado || {};
+    const r33 = (F.componentes || []).find(c => c.id === 'fed-r33');
+    return {
+      ramo33Total: r33 ? Math.round(r33.montoMdp * 10) / 10 : null,
+      gastoFederalizadoTotal: F.totalMdp || null,
+      deudaSubnacionalTotal: Math.round((DB.estados || []).reduce((a, e) => a + (Number(e.deuda) || 0), 0) * 10) / 10 || null,
+      pefNetoTotal: P.totalPEF || null
+    };
   }
 
   function simMesaTres(obras) {
