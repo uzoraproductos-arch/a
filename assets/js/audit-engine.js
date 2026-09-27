@@ -19804,6 +19804,16 @@
       '</section>';
   }
 
+  function simProcVerificadas() {
+    const sim = DB.simulador_megaobras;
+    const v = sim.verificacion && sim.verificacion.obras ? Object.keys(sim.verificacion.obras) : [];
+    const nombres = sim.obras.filter(o => v.indexOf(o.id) >= 0).map(o => o.nombre.replace(/ \(.*\)$/, ''));
+    const conCifra = sim.obras.filter(o => o.estado_campos && o.estado_campos.inversion_real_mdp && o.estado_campos.inversion_real_mdp !== 'pendiente').length;
+    return 'De las ' + sim.obras.length + ' obras, ' + nombres.length + ' ya tienen documentos oficiales cotejados (' + nombres.join(', ') +
+      ') y ' + conCifra + ' tienen su costo anclado a la cartera de Hacienda y a la Cuenta Pública. Cada cifra lleva su chip: oficial, derivado o pendiente. ' +
+      'La pérdida operativa, los costos de operación y el costo unitario de todas las obras siguen pendientes de documento, y así se marcan.';
+  }
+
   function renderSimuladorProcedencia() {
     const cont = document.getElementById('simProcedencia');
     if (!cont) return;
@@ -19815,8 +19825,8 @@
           '<li><strong>Los agregados se suman, no se escriben.</strong> ' + (t.nota_totales || '') + '</li>' +
           '<li><strong>La pérdida por segundo.</strong> Se obtiene dividiendo la pérdida anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que usted lleva mirando.</li>' +
           '<li><strong>El sobrecosto del conjunto.</strong> Compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>' +
-          '<li><strong>Los hallazgos de auditoría</strong> que cita cada ficha provienen de la fiscalización de la Cuenta Pública de la Auditoría Superior de la Federación.</li>' +
-          '<li><strong>Pendiente declarado.</strong> Cada obra todavía no lleva la referencia puntual del informe que sustenta su cifra. Mientras eso no exista, estas cifras se presentan como consolidación documental y no como dato auditado renglón por renglón.</li>' +
+          '<li><strong>Cifras con documento.</strong> ' + simProcVerificadas() + '</li>' +
+          '<li><strong>Pendiente declarado.</strong> Las obras marcadas como pendientes no tienen todavía el documento oficial que sustenta su cifra; se muestran como consolidación documental y no como dato auditado. Cada ficha dice cuál es el caso en «Lo que dicen los documentos oficiales».</li>' +
         '</ul>' +
       '</section>';
   }
@@ -21226,10 +21236,7 @@
           '</tr></tfoot>' +
         '</table></div>' +
         '<p class="sim-mesa-aviso"><strong>De dónde salen estas cifras y qué falta.</strong> ' +
-          'Provienen de la fiscalización de la Cuenta Pública de la Auditoría Superior de la Federación ' +
-          'y de información presupuestaria de dominio público. <strong>Pendiente declarado:</strong> cada renglón todavía no lleva ' +
-          'el número de informe individual que sustenta su cifra, así que se presentan como consolidación documental y no como dato ' +
-          'auditado renglón por renglón. Mientras ese trabajo no esté hecho, esta tabla se lee como inventario, no como dictamen. ' +
+          simProcVerificadas() + ' Mientras las demás no tengan documento, esta tabla se lee como inventario, no como dictamen. ' +
           'El universo son doce obras emblemáticas de 1988 a 2024; no pretende ser el catálogo completo de la inversión pública del periodo.</p>' +
       '</section>';
   }
@@ -21321,6 +21328,88 @@
     if (document.getElementById('presEval') && !document.getElementById('peBarras')) renderPresEval();
   }
 
+  /* Lo que los documentos oficiales dicen de cada obra (cartera de
+     Hacienda, Cuenta Pública, PEF 2026 y ASF). Lo escribe
+     herramientas/integrar_megaobras_oficial.py; aquí solo se pinta. */
+  function simVer(o) {
+    const v = DB.simulador_megaobras.verificacion;
+    return v && v.obras ? v.obras[o.id] || null : null;
+  }
+
+  function simChipCampo(o, campo) {
+    const e = (o.estado_campos || {})[campo] || 'pendiente';
+    return chipEstado(e);
+  }
+
+  function simDefCampo(o, campo) {
+    const v = simVer(o);
+    return v && v.definiciones && v.definiciones[campo] ? v.definiciones[campo] : 'Cifra del simulador sin documento oficial localizado todavía.';
+  }
+
+  function simFuenteLink(k) {
+    const f = (DB.simulador_megaobras.verificacion.fuentes || {})[k];
+    if (!f) return '';
+    return '<li><a class="no-autolink" href="' + escHtml(f.url) + '" target="_blank" rel="noopener noreferrer">' + escHtml(f.doc) + ' ↗</a></li>';
+  }
+
+  function simVerificadoHtml(o) {
+    const v = simVer(o);
+    if (!v) {
+      return '<p class="sim-ver-nada">' + chipEstado('pendiente') + ' Ningún documento oficial localizado todavía para esta obra: sus cifras se muestran como las registra el simulador, sin fuente.</p>';
+    }
+    const m = n => '$' + formatNumber(n) + ' mdp';
+    let h = '';
+    if (v.cartera && v.cartera.length) {
+      h += '<h5 class="sim-ver-sub">Monto total de inversión registrado ante Hacienda · clave ' + escHtml(v.clave || '') + '</h5>' +
+        '<table class="sim-ver-tabla"><thead><tr><th>Corte</th><th>Monto total</th><th>Término previsto</th></tr></thead><tbody>' +
+        v.cartera.map(c => '<tr><td>' + escHtml(c.corte) + '</td><td>' + m(c.mti) + '</td><td>' + escHtml(c.fin || '') + '</td></tr>').join('') +
+        '</tbody></table>';
+    }
+    if (v.carteraNaim && v.carteraNaim.length) {
+      h += '<p class="sim-ver-p">El NAIM de Texcoco (clave 1409JZL0005) registraba ' + m(v.carteraNaim[0].mti) + ' en el corte ' + escHtml(v.carteraNaim[0].corte) + ' ' + chipEstado('oficial') + '.</p>';
+    }
+    if (v.ejercidoCP && Object.keys(v.ejercidoCP).length) {
+      const anios = Object.keys(v.ejercidoCP).sort();
+      h += '<h5 class="sim-ver-sub">Ejercido bajo su clave, según la Cuenta Pública</h5>' +
+        '<table class="sim-ver-tabla"><thead><tr><th>Año</th><th>Ejercido</th></tr></thead><tbody>' +
+        anios.map(a => '<tr><td>' + a + '</td><td>' + m(v.ejercidoCP[a]) + '</td></tr>').join('') +
+        '<tr class="sim-ver-total"><td>Suma</td><td>' + m(v.ejercidoTotal) + ' ' + chipEstado('derivado') + '</td></tr>' +
+        '</tbody></table>';
+    }
+    if (v.pef2026) {
+      const partes = [];
+      if (v.pef2026.inversion) partes.push(m(v.pef2026.inversion) + ' para inversión bajo la misma clave');
+      if (v.pef2026.operacion) partes.push(m(v.pef2026.operacion) + ' para operar el servicio');
+      if (partes.length) h += '<p class="sim-ver-p"><strong>PEF 2026:</strong> ' + partes.join('; ') + ' ' + chipEstado('oficial') + '.</p>';
+    }
+    if (v.naicm) {
+      h += '<p class="sim-ver-p"><strong>Costo de cancelar el NAIM:</strong> ' + m(v.naicm.costo) + ' al 31 de diciembre de 2019, según la ASF; la fase 1 se había planeado en ' + m(v.naicm.faseUnoPlaneada) + ' (pp. ' + escHtml(v.naicm.paginas) + ') ' + chipEstado('oficial') + '.</p>';
+    }
+    if (v.ramo34) {
+      const anios = Object.keys(v.ramo34).sort();
+      h += '<h5 class="sim-ver-sub">Ramo 34, apoyo a ahorradores y deudores de la banca, ejercido cada año</h5>' +
+        '<table class="sim-ver-tabla"><thead><tr><th>Año</th><th>Ejercido</th></tr></thead><tbody>' +
+        anios.map(a => '<tr><td>' + a + '</td><td>' + m(v.ramo34[a]) + '</td></tr>').join('') +
+        '<tr class="sim-ver-total"><td>PEF 2026</td><td>' + m(v.pef2026Ramo34) + ' ' + chipEstado('oficial') + '</td></tr>' +
+        '</tbody></table>';
+    }
+    if (v.asf2024 && v.asf2024.auditorias.length) {
+      h += '<h5 class="sim-ver-sub">Auditorías de la ASF a la Cuenta Pública 2024</h5><ul class="sim-ver-asf">' +
+        v.asf2024.auditorias.map(a => '<li><strong>' + a.num + '</strong> · ' + escHtml(a.titulo) +
+          ' <span class="sim-ver-dim">(universo ' + m(a.universo) + '; ' +
+          (a.acciones ? (a.acciones === 1 ? '1 acción' : a.acciones + ' acciones') : 'sin acciones') +
+          (a.recuperaciones ? '; recuperó ' + m(a.recuperaciones) : '') +
+          (a.porAclarar ? '; por aclarar ' + m(a.porAclarar) : '') + '; p. ' + a.pagina + ')</span></li>').join('') +
+        '</ul>';
+    }
+    if (v.contradicciones && v.contradicciones.length) {
+      h += '<div class="sim-ver-inc"><strong>⚠️ Incongruencia entre documentos oficiales.</strong> Explicarla le corresponde al gobierno, que es quien publica las dos cifras.' +
+        v.contradicciones.map(t => '<p>' + escHtml(t) + '</p>').join('') + '</div>';
+    }
+    h += '<ul class="sim-ver-fuentes">' + (v.fuentes || []).map(simFuenteLink).join('') + '</ul>';
+    return '<details class="sim-ver"><summary>📑 Lo que dicen los documentos oficiales</summary>' + h + '</details>';
+  }
+
   function renderSimuladorObrasGrid() {
     const grid = document.getElementById('simuladorObrasGrid');
     const sim = DB.simulador_megaobras;
@@ -21381,7 +21470,7 @@
           <div class="sim-loss-box">
             <div>
               <div class="sim-loss-lbl">
-                <span class="pulsing-dot"></span> Pérdida Operativa (${pInfo.label})
+                <span class="pulsing-dot"></span> Pérdida Operativa (${pInfo.label}) ${chipEstado('pendiente')}
               </div>
               <div class="sim-loss-amount">${perdidaDisplay}</div>
             </div>
@@ -21401,15 +21490,15 @@
           <!-- Comparativa de Inversión y Sobrecosto -->
           <div class="sim-inversion-row">
             <div class="sim-inv-col">
-              <span class="sim-inv-lbl">Presupuesto Original</span>
-              <span class="sim-inv-val">$${formatNumber(o.inversion_presupuestada_mdp)} mdp</span>
+              <span class="sim-inv-lbl">Presupuesto Original ${simChipCampo(o, 'inversion_presupuestada_mdp')}</span>
+              <span class="sim-inv-val" title="${escHtml(simDefCampo(o, 'inversion_presupuestada_mdp'))}">$${formatNumber(o.inversion_presupuestada_mdp)} mdp</span>
             </div>
             <div class="sim-inv-col">
-              <span class="sim-inv-lbl">Costo Real Erogado</span>
-              <span class="sim-inv-val" style="color:var(--gold-bright);">$${formatNumber(o.inversion_real_mdp)} mdp</span>
+              <span class="sim-inv-lbl">Costo Real Erogado ${simChipCampo(o, 'inversion_real_mdp')}</span>
+              <span class="sim-inv-val" style="color:var(--gold-bright);" title="${escHtml(simDefCampo(o, 'inversion_real_mdp'))}">$${formatNumber(o.inversion_real_mdp)} mdp</span>
             </div>
             <div class="sim-inv-col">
-              <span class="sim-inv-lbl">Sobrecosto</span>
+              <span class="sim-inv-lbl">Sobrecosto ${simChipCampo(o, 'sobrecosto_pct')}</span>
               <span class="sim-inv-val" style="color:${o.sobrecosto_pct > 100 ? '#ff6b6b' : 'var(--gold-bright)'};">
                 ${o.sobrecosto_pct > 0 ? '+' : ''}${o.sobrecosto_pct}%
               </span>
@@ -21419,7 +21508,7 @@
           <!-- Desglose de Costos de Operación -->
           <div>
             <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-              ⚙️ Principales Costos de Operación Anuales:
+              ⚙️ Principales Costos de Operación Anuales: ${chipEstado('pendiente')}
             </div>
             <div class="sim-operacion-chips">
               ${o.desglose_costos_operacion.map(c => `
@@ -21445,12 +21534,13 @@
           <div class="sim-asf-finding">
             <span>🔍</span>
             <div>
-              <strong>Auditoría &amp; Hallazgos:</strong> ${o.hallazgo_asf}<br>
+              <strong>Auditoría &amp; Hallazgos:</strong> ${simVer(o) ? chipEstado('oficial') : chipEstado('pendiente')} ${o.hallazgo_asf}<br>
               <span style="display:inline-block; margin-top:4px; color:var(--gold-bright); font-family:var(--font-mono);">
-                📊 <strong>Métrica de Costo Unitario:</strong> ${o.costo_unitario_real}
+                📊 <strong>Métrica de Costo Unitario:</strong> ${chipEstado('pendiente')} ${o.costo_unitario_real}
               </span>
             </div>
           </div>
+          ${simVerificadoHtml(o)}
 
         </div>
       `;

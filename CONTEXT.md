@@ -2126,6 +2126,62 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (el simulador de megaobras, anclado a documentos)
+
+- **Herramienta nueva `herramientas/integrar_megaobras_oficial.py`.** Lee 21
+  archivos oficiales (comprueba su SHA-256): la cartera de inversión de
+  Hacienda en ocho cortes (4T 2019 a 2T 2026, «Obra Pública Abierta»), las
+  Cuentas Públicas 2014-2025 en datos abiertos y el PEF 2026 en datos
+  abiertos. Transcribe con página las auditorías de la Matriz de la ASF (CP
+  2024) y el estudio de la ASF sobre el costo del NAICM (marzo de 2021).
+  Escribe `simulador_megaobras.verificacion`, marca cada obra campo por
+  campo en `estado_campos` y recalcula los totales. Uso:
+  `python3 herramientas/integrar_megaobras_oficial.py DIRECTORIO`. Las
+  fuentes van dentro del bloque y no en `referencias_legales`, para no
+  alterar la bibliografía de la Enciclopedia congelada.
+- **Lo que cambió en cifras:**
+  - Tren Maya: de $120,000 contra $515,000 mdp (+329.2 %, sin fuente) a
+    **$167,341.6 mdp**, el último monto total de inversión registrado en la
+    cartera (4T 2021), contra **$497,350.2 mdp** ejercidos bajo la clave
+    2021W3N0001 en las Cuentas Públicas 2020-2025 (**+197.2 %**). Se revisó
+    que no hay doble conteo: cada peso aparece en la dependencia que lo
+    ejerció (Fonatur, Fonatur Tren Maya, Tren Maya S.A., INAH) y sin
+    transferencias entre ellas.
+  - Tren Interurbano México-Toluca: de $38,608 contra $105,000 mdp a
+    **$76,346.8 mdp** (corte más antiguo en datos abiertos, 4T 2019) contra
+    **$153,694.3 mdp** (2T 2026), **+101.3 %**, ambos de la misma cartera.
+    Con recursos fiscales la Cuenta Pública registra $65,506.4 mdp de 2014
+    a 2025.
+  - AIFA + NAIM: el simulador sumaba los $331,996 mdp que la ASF publicó en
+    febrero de 2021 y corrigió en marzo a **$113,327.7 mdp** (estudio del
+    NAICM, pp. 46-48). El costo consolidado baja de $420,103 a $201,434.7
+    mdp; los $88,107 mdp del AIFA siguen sin fuente y la obra queda
+    pendiente.
+  - Totales del simulador: inversión real $3,928,529.2 mdp, presupuestada
+    $1,131,586.4 mdp, sobrecosto del conjunto 247.2 %. La pérdida operativa
+    ($80,200.1 mdp al año) no cambia: sigue pendiente de documento.
+  - Hallazgos inventados que se retiraron: «pagos duplicados por más de
+    $1,400 mdp» (Tren Maya), «$3,200 mdp vía PTI» (Dos Bocas), «túneles
+    falsos… $1,700 mdp» (Toluca). En su lugar, lo que dice la Matriz de la
+    ASF de la CP 2024.
+- **Incongruencias entre documentos oficiales**, en pantalla y atribuidas al
+  gobierno:
+  - La clave 2021W3N0001 del Tren Maya sale de la cartera pública tras el 4T
+    2021, pero la Cuenta Pública sigue gastando bajo ella hasta 2025 y el PEF
+    2026 le asigna $30,000 mdp.
+  - El AIFA figura en la cartera solo en el 4T 2019 ($82,136.1 mdp); la Cuenta
+    Pública registra bajo su clave $16,656.4 mdp (2019-2021) y luego nada.
+  - Dos Bocas no aparece en la cartera en ningún corte de 2019 a 2026.
+  - El Tren Interurbano movió su fecha de término de 2022 a 2026 y duplicó su
+    monto total registrado.
+- **En pantalla (2.2):** cada ficha lleva chips en presupuesto, costo real y
+  sobrecosto; «pendiente» en pérdida, costos de operación y costo unitario; y
+  un desplegable «Lo que dicen los documentos oficiales» con la serie de la
+  cartera, lo ejercido año por año, el PEF 2026, las auditorías con página,
+  la incongruencia y las ligas a cada fuente. Las siete obras sin documento
+  lo dicen. La procedencia y la mesa de inventario cuentan cuántas obras ya
+  tienen documento en vez del aviso general de antes.
+
 ### Hecho (revisión de las observaciones de Antigravity; la Enciclopedia, congelada)
 
 - **Decisión del autor (27-09-2026): la Enciclopedia queda congelada.**
@@ -3155,6 +3211,22 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   de 2027, la tercera y el Informe General.
 - **El foro del Portal Digital no tiene servidor:** lo que se publica vive
   en el navegador de quien lo escribe. Ya no trae hilos sembrados.
+- **Megaobras, lo que falta** (herramienta: `integrar_megaobras_oficial.py`).
+  - Pérdida operativa, costos de operación y costo unitario de las doce
+    obras: sin documento. Candidatos oficiales: estados financieros de Tren
+    Maya S.A. y AIFA S.A. en la Cuenta Pública (tomo de entidades), y el
+    programa E015 del PEF (operación del Tren Maya, $744.1 mdp en 2026).
+  - Costo total del AIFA: la Cuenta Pública deja de etiquetarlo por clave
+    después de 2021. Buscar el informe de la ASF o la cifra de la Sedena.
+  - Dos Bocas, Agronitrogenados, Estela de Luz, Búnker, Refinería de Tula,
+    Enciclomedia y FARAC: informes individuales de la ASF de sus años.
+  - FOBAPROA/IPAB: ya hay costo anual oficial (Ramo 34 en la Cuenta Pública
+    2014-2025 y PEF 2026: $35,553.4 mdp); falta el saldo de la deuda del
+    IPAB para sustituir los $2,470,000 mdp del simulador.
+  - Registro original de 2013 del Tren Interurbano (la base abierta empieza
+    en 2019).
+  - Los $80,200.1 mdp al año del reloj y la tarjeta del radar dependen de la
+    pérdida: se corrigen cuando la pérdida tenga fuente.
 - **Cifras de la Enciclopedia que NO deben pasar al auditor** (la
   Enciclopedia está congelada; esto es un aviso para quien jale datos de
   ella). Las fichas 4.3 (Prestaciones) y 4.5 (Cálculos globales) usan
@@ -3260,12 +3332,13 @@ final, en este orden:
 - **Imágenes de IA sin aviso.** Resuelto en el carrusel (rótulo en cada
   diapositiva). Quedan los fondos de ciudad, que el autor conserva a propósito.
 - **Cifras que no coinciden entre secciones.** El carrusel ya lee de la base.
-  Sigue abierto: `simulador_megaobras` (Tren Maya $120,000 mdp, AIFA
-  +460.1 %, Dos Bocas $350,000 mdp) no tiene campo de fuente, y el costo de
-  la deuda (la ficha Sheinbaum que decía «más de $1.2 billones» se retiró).
+  `simulador_megaobras`: resuelto en parte el 27-09-2026 (ver Hecho «el
+  simulador de megaobras, anclado a documentos»); el costo de la deuda (la
+  ficha Sheinbaum que decía «más de $1.2 billones») se retiró.
 - **Simulador de megaobras en pesos nominales 1988–2024**, sin INPC, con dos
   rescates financieros (FOBAPROA, FARAC) que hacen el 69 % de la «pérdida».
-  Ninguna de las 12 obras tiene campo de fuente.
+  Cinco obras ya tienen documentos cotejados; lo que falta está en
+  «Megaobras, lo que falta».
 - **Pase de $79/mes** que promete funciones inexistentes y habla de
   «lanzamiento electoral». Ocultar: decisión comercial del autor, sigue
   visible en el menú, la pestaña del Pase y el botón de reporte salarial.

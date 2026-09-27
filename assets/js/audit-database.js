@@ -15186,9 +15186,9 @@ window.AUDIT_DB = {
       "icono": "🚆",
       "estatus": "Operando con subsidio continuo",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 120000,
-      "inversion_real_mdp": 515000,
-      "sobrecosto_pct": 329.2,
+      "inversion_presupuestada_mdp": 167341.6,
+      "inversion_real_mdp": 497350.2,
+      "sobrecosto_pct": 197.2,
       "ingresos_anuales_mdp": 185,
       "costo_operativo_anual_mdp": 2685,
       "perdida_anual_mdp": 2500,
@@ -15219,9 +15219,14 @@ window.AUDIT_DB = {
           "icono": "⚡"
         }
       ],
-      "hallazgo_asf": "Auditorías de la ASF detectaron pagos duplicados por más de $1,400 mdp, pagos improcedentes en suministro de balasto e indemnizaciones sin sustento en derechos de vía.",
+      "hallazgo_asf": "En la Cuenta Pública 2024 la ASF practicó 15 auditorías a la obra (tramos, electrificación, edificaciones y gestión financiera): recuperó $191.7 mdp durante las revisiones, dejó $87.9 mdp por aclarar y promovió 10 acciones.",
       "unidad_metrica": "Pasajero transportado",
-      "costo_unitario_real": "Subsidio fiscal directo de ~$1,850 pesos por cada boleto vendido a pasajeros nacionales."
+      "costo_unitario_real": "Subsidio fiscal directo de ~$1,850 pesos por cada boleto vendido a pasajeros nacionales.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
+      }
     },
     {
       "id": "megafarmacia",
@@ -15267,7 +15272,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "Solicitudes de información vía PNT y auditorías revelaron que durante sus primeros meses el almacén mantuvo desiertas el 85% de sus posiciones y surtió menos de 5 recetas diarias efectivas.",
       "unidad_metrica": "Receta médica surtida",
-      "costo_unitario_real": "Costo operativo de $9,120 pesos por cada receta médica efectivamente surtida y entregada al paciente."
+      "costo_unitario_real": "Costo operativo de $9,120 pesos por cada receta médica efectivamente surtida y entregada al paciente.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "dos-bocas",
@@ -15280,7 +15290,7 @@ window.AUDIT_DB = {
       "badge_color": "var(--gold-bright)",
       "inversion_presupuestada_mdp": 160000,
       "inversion_real_mdp": 350000,
-      "sobrecosto_pct": 118.7,
+      "sobrecosto_pct": 118.8,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 16425,
       "perdida_anual_mdp": 16425,
@@ -15311,9 +15321,14 @@ window.AUDIT_DB = {
           "icono": "👷"
         }
       ],
-      "hallazgo_asf": "La ASF observó pagos no justificados por más de $3,200 mdp a través de la filial privada PTI Infraestructura de Desarrollo, eludiendo la Ley de Obras Públicas.",
+      "hallazgo_asf": "En la Cuenta Pública 2024 la ASF revisó los ingresos y egresos del proyecto: un universo de $84,694.9 mdp en ese año, con una muestra de $71,511.3 mdp. Promovió 3 recomendaciones, sin montos por aclarar ni recuperaciones.",
       "unidad_metrica": "Barril procesado",
-      "costo_unitario_real": "Costo de capital de $55,600 USD por barril de capacidad instalada (duplica el estándar global de refinación moderna)."
+      "costo_unitario_real": "Costo de capital de $55,600 USD por barril de capacidad instalada (duplica el estándar global de refinación moderna).",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "aifa-texcoco",
@@ -15325,8 +15340,8 @@ window.AUDIT_DB = {
       "estatus": "Subsidio operativo federal en curso",
       "badge_color": "var(--cyan)",
       "inversion_presupuestada_mdp": 75000,
-      "inversion_real_mdp": 420103,
-      "sobrecosto_pct": 460.1,
+      "inversion_real_mdp": 201434.7,
+      "sobrecosto_pct": 168.6,
       "ingresos_anuales_mdp": 980,
       "costo_operativo_anual_mdp": 2440,
       "perdida_anual_mdp": 1460,
@@ -15334,7 +15349,7 @@ window.AUDIT_DB = {
       "perdida_segundo": 46.3,
       "proyeccion_tipo": "subsidio_transicion",
       "proyeccion_anios": 25,
-      "proyeccion_resumen": "Subsidio Federal Obligatorio de 25 años. El costo total consolidado incluye $331,996 mdp de la cancelación del NAIM Texcoco dictaminada por la ASF (recompra de bonos FIBRA E y liquidación de obras abandonadas) sumados a los $88,107 mdp de construcción del AIFA.",
+      "proyeccion_resumen": "El costo que el simulador consolida suma los $113,327.7 mdp que la ASF fijó como costo de cancelar el NAIM (estudio de marzo de 2021) y $88,107 mdp de construcción del AIFA, cifra esta última sin fuente oficial. La proyección de subsidio a 25 años queda pendiente de documento.",
       "desglose_costos_operacion": [
         {
           "rubro": "Pago de intereses y servicio de bonos del NAIM (vía TUA AICM)",
@@ -15357,9 +15372,14 @@ window.AUDIT_DB = {
           "icono": "🚌"
         }
       ],
-      "hallazgo_asf": "La ASF Auditoría de Desempeño 1394-DE calculó el costo total de cancelar Texcoco en $331,996 mdp, un 232% superior al estimado inicial de $100,000 mdp del Ejecutivo.",
+      "hallazgo_asf": "La ASF (marzo de 2021) fijó el costo de cancelar el NAIM en $113,327.7 mdp al 31 de diciembre de 2019, contra los $331,996 mdp que había publicado antes. En la Cuenta Pública 2024 revisó la gestión financiera del AIFA sin observaciones.",
       "unidad_metrica": "Pasajero aéreo nacional/int.",
-      "costo_unitario_real": "Cada pasajero en el AIFA requirió un subsidio fiscal promedio de ~$380 pesos del erario federal para mantener operable la terminal."
+      "costo_unitario_real": "Cada pasajero en el AIFA requirió un subsidio fiscal promedio de ~$380 pesos del erario federal para mantener operable la terminal.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "tren-toluca",
@@ -15370,9 +15390,9 @@ window.AUDIT_DB = {
       "icono": "🚈",
       "estatus": "Operación parcial / En conclusión",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 38608,
-      "inversion_real_mdp": 105000,
-      "sobrecosto_pct": 171.9,
+      "inversion_presupuestada_mdp": 76346.8,
+      "inversion_real_mdp": 153694.3,
+      "sobrecosto_pct": 101.3,
       "ingresos_anuales_mdp": 220,
       "costo_operativo_anual_mdp": 1315,
       "perdida_anual_mdp": 1095,
@@ -15403,9 +15423,14 @@ window.AUDIT_DB = {
           "icono": "🛡️"
         }
       ],
-      "hallazgo_asf": "La ASF identificó pagos indebidos en túneles falsos y terraplenes en Ocoyoacac, además de ajustes de costos inflados por más de $1,700 mdp.",
+      "hallazgo_asf": "En la Cuenta Pública 2024 la ASF practicó 3 auditorías a la obra: recuperó $23.0 mdp, dejó $20.1 mdp por aclarar y promovió 9 acciones.",
       "unidad_metrica": "Viaje usuario Toluca-CDMX",
-      "costo_unitario_real": "Costo fiscal acumulado de $1,820 millones de pesos por cada kilómetro de vía construido (57.7 km)."
+      "costo_unitario_real": "Costo fiscal acumulado de $1,820 millones de pesos por cada kilómetro de vía construido (57.7 km).",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "oficial",
+        "sobrecosto_pct": "derivado"
+      }
     },
     {
       "id": "agronitrogenados",
@@ -15451,7 +15476,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "La ASF dictaminó que el 60% de los equipos de Agronitrogenados eran inservibles al momento de la adquisición aprobada por el Consejo de Administración de Pemex.",
       "unidad_metrica": "Tonelada de fertilizante",
-      "costo_unitario_real": "Pérdida neta de más de $4,800 pesos por cada tonelada producida en comparación con importación internacional de urea."
+      "costo_unitario_real": "Pérdida neta de más de $4,800 pesos por cada tonelada producida en comparación con importación internacional de urea.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "estela-luz",
@@ -15492,7 +15522,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "La ASF documentó pagos indebidos por acero importado con sobreprecio del 111% a través del fideicomiso de Banjército y la empresa III Servicios.",
       "unidad_metrica": "Costo por metro de altura",
-      "costo_unitario_real": "Costo de $12.5 millones de pesos por cada metro lineal levantado de la columna sobre Paseo de la Reforma."
+      "costo_unitario_real": "Costo de $12.5 millones de pesos por cada metro lineal levantado de la columna sobre Paseo de la Reforma.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "bunker-garcia-luna",
@@ -15538,7 +15573,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "ASF y PNT revelaron asignaciones directas de tecnología de inteligencia a empresas vinculadas a excolaboradores policiales sin concurso público.",
       "unidad_metrica": "Día de monitoreo táctico",
-      "costo_unitario_real": "Costo diario de $700,000 pesos para mantener encendida la infraestructura tecnológica subterránea."
+      "costo_unitario_real": "Costo diario de $700,000 pesos para mantener encendida la infraestructura tecnológica subterránea.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "refineria-tula",
@@ -15569,7 +15609,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "La ASF auditó la adquisición irregular de 700 hectáreas ejidales en Atitalaquia y Tula con sobreprecios pagados a intermediarios.",
       "unidad_metrica": "Kilómetro de barda",
-      "costo_unitario_real": "Costo de $885 millones de pesos por cada kilómetro de barda de concreto construida sin refinería."
+      "costo_unitario_real": "Costo de $885 millones de pesos por cada kilómetro de barda de concreto construida sin refinería.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "enciclomedia",
@@ -15600,7 +15645,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "La ASF emitió observaciones por falta de inventario, equipos descompuestos sin garantía y pagos millonarios a integradores sin verificar conectividad.",
       "unidad_metrica": "Aula equipada",
-      "costo_unitario_real": "Gasto de más de $145,000 pesos por cada aula escolar de 5° y 6° de primaria."
+      "costo_unitario_real": "Gasto de más de $145,000 pesos por cada aula escolar de 5° y 6° de primaria.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "fobaproa",
@@ -15639,9 +15689,14 @@ window.AUDIT_DB = {
           "icono": "📁"
         }
       ],
-      "hallazgo_asf": "La Auditoría Michael Mackey determinó que al menos el 17% de los créditos rescatados por Fobaproa ($73,000 mdp de 1998) eran irregulares o autopréstamos ilegales de accionistas bancarios.",
+      "hallazgo_asf": "Lo que el rescate bancario le cuesta al presupuesto cada año sí es oficial: el Ramo 34 (programas de apoyo a ahorradores y deudores de la banca) ejerció $52,451.9 mdp en 2025 según la Cuenta Pública, y el PEF 2026 le asigna $35,553.4 mdp.",
       "unidad_metrica": "Día fiscal de deuda",
-      "costo_unitario_real": "Cada ciudadano mexicano aporta indirectamente más de $1,050 pesos al año únicamente para solventar los intereses bancarios del Fobaproa."
+      "costo_unitario_real": "Cada ciudadano mexicano aporta indirectamente más de $1,050 pesos al año únicamente para solventar los intereses bancarios del Fobaproa.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     },
     {
       "id": "farac-carretero",
@@ -15682,7 +15737,12 @@ window.AUDIT_DB = {
       ],
       "hallazgo_asf": "Observaciones sistemáticas de la ASF a Banobras por valuaciones sobreestimadas de aforos vehiculares en los títulos de concesión originales.",
       "unidad_metrica": "Kilómetro carretero rescatado",
-      "costo_unitario_real": "Costo fiscal de $18.5 millones de pesos por kilómetro rescatado transferido a pagarés gubernamentales de Banobras."
+      "costo_unitario_real": "Costo fiscal de $18.5 millones de pesos por kilómetro rescatado transferido a pagarés gubernamentales de Banobras.",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_real_mdp": "pendiente",
+        "sobrecosto_pct": "pendiente"
+      }
     }
   ],
   "periodos": {
@@ -15713,14 +15773,536 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 4116153,
-    "inversion_presupuestada_total_mdp": 1046506,
+    "inversion_total_mdp": 3928529.2,
+    "inversion_presupuestada_total_mdp": 1131586.4,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 12,
-    "sobrecosto_conjunto_pct": 293.3,
+    "sobrecosto_conjunto_pct": 247.2,
     "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
+  },
+  "verificacion": {
+    "nota": "Lo que los documentos oficiales dicen de cada obra. Donde hay cifra oficial comparable, sustituye a la del simulador; donde no, la obra queda marcada como pendiente, campo por campo. Nada de esto es una estimación.",
+    "fuentes": {
+      "opa": {
+        "doc": "SHCP, Cartera de programas y proyectos de inversión («Obra Pública Abierta»), Transparencia Presupuestaria, cortes trimestrales 2019-2026",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta"
+      },
+      "cp": {
+        "doc": "SHCP, Cuenta Pública 2014-2025, datos abiertos (gasto por clave de cartera)",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/Datos-Abiertos"
+      },
+      "pef26": {
+        "doc": "SHCP, PEF 2026, datos abiertos",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/PEF_2026.csv"
+      },
+      "pef26dof": {
+        "doc": "Presupuesto de Egresos de la Federación 2026, DOF 21-11-2025 (edición vespertina), Anexo 8, p. 36",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+      },
+      "asf24": {
+        "doc": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, primera, segunda y tercera entregas (consolidado), febrero de 2026",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf",
+        "sha256": "49732c8da82eaafc6bdd67b0b0ce5c995773294d7e48e5412ad73e5c4fe15d66"
+      },
+      "asfnaicm": {
+        "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+        "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+        "sha256": "b3f621fc8ef657e38114adb75fe2108b152fc3d87479e47353db4a88e27d5f9d"
+      }
+    },
+    "obras": {
+      "tren-maya": {
+        "clave": "2021W3N0001",
+        "cartera": [
+          {
+            "corte": "4T 2020",
+            "mti": 161356.0,
+            "fin": "31/12/2022",
+            "avance": "0.17"
+          },
+          {
+            "corte": "4T 2021",
+            "mti": 167341.6,
+            "fin": "31/12/2022",
+            "avance": "25.55"
+          }
+        ],
+        "ejercidoCP": {
+          "2020": 7473.3,
+          "2021": 31995.3,
+          "2022": 179517.9,
+          "2023": 98474.4,
+          "2024": 151605.8,
+          "2025": 28283.5
+        },
+        "ejercidoTotal": 497350.2,
+        "pef2026": {
+          "inversion": 30000.0,
+          "operacion": 744.1
+        },
+        "asf2024": {
+          "auditorias": [
+            {
+              "num": 125,
+              "titulo": "Proyecto Tren Maya (FONATUR Tren Maya)",
+              "entrega": 3,
+              "universo": 19542.1,
+              "muestra": 15588.0,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 64
+            },
+            {
+              "num": 126,
+              "titulo": "Erogaciones para el Proyecto Tren Maya (FONATUR Tren Maya)",
+              "entrega": 2,
+              "universo": 19467.1,
+              "muestra": 12381.1,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 64
+            },
+            {
+              "num": 137,
+              "titulo": "Subestaciones, líneas de transmisión y catenaria del Tren Maya (CFE)",
+              "entrega": 3,
+              "universo": 653.6,
+              "muestra": 653.6,
+              "acciones": 2,
+              "recuperaciones": 2.2,
+              "porAclarar": 0.0,
+              "pagina": 64
+            },
+            {
+              "num": 138,
+              "titulo": "Plataforma y vía, Tramo 5 Norte",
+              "entrega": 3,
+              "universo": 6537.6,
+              "muestra": 4130.4,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 65
+            },
+            {
+              "num": 139,
+              "titulo": "Plataforma y vía, Tramo 6",
+              "entrega": 3,
+              "universo": 33926.5,
+              "muestra": 11557.4,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 65
+            },
+            {
+              "num": 140,
+              "titulo": "Plataforma y vía, Tramo 7, y taller en Chetumal",
+              "entrega": 3,
+              "universo": 24721.7,
+              "muestra": 7895.7,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 65
+            },
+            {
+              "num": 141,
+              "titulo": "Hotel Calakmul, Tramo 7",
+              "entrega": 3,
+              "universo": 910.5,
+              "muestra": 605.0,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 65
+            },
+            {
+              "num": 142,
+              "titulo": "Edificaciones accesorias en Edzná, Nuevo Uxmal y Tulum",
+              "entrega": 3,
+              "universo": 3288.6,
+              "muestra": 3288.6,
+              "acciones": 1,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 65
+            },
+            {
+              "num": 143,
+              "titulo": "Plataforma y vía, Tramo 5 Sur",
+              "entrega": 3,
+              "universo": 32493.9,
+              "muestra": 11942.7,
+              "acciones": 0,
+              "recuperaciones": 50.5,
+              "porAclarar": 0.0,
+              "pagina": 66
+            },
+            {
+              "num": 130,
+              "titulo": "Plataforma y vía, Tramo 1",
+              "entrega": 3,
+              "universo": 1703.1,
+              "muestra": 1703.1,
+              "acciones": 0,
+              "recuperaciones": 134.5,
+              "porAclarar": 0.0,
+              "pagina": 66
+            },
+            {
+              "num": 131,
+              "titulo": "Plataforma y vía, Tramo 2",
+              "entrega": 3,
+              "universo": 1879.1,
+              "muestra": 1322.3,
+              "acciones": 1,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 66
+            },
+            {
+              "num": 132,
+              "titulo": "Plataforma y vía, Tramo 3",
+              "entrega": 3,
+              "universo": 972.3,
+              "muestra": 972.3,
+              "acciones": 0,
+              "recuperaciones": 4.4,
+              "porAclarar": 0.0,
+              "pagina": 66
+            },
+            {
+              "num": 133,
+              "titulo": "Plataforma y vía, Tramo 4",
+              "entrega": 3,
+              "universo": 2072.1,
+              "muestra": 1699.2,
+              "acciones": 5,
+              "recuperaciones": 0.0,
+              "porAclarar": 85.7,
+              "pagina": 66
+            },
+            {
+              "num": 136,
+              "titulo": "Seguimiento al Proyecto Tren Maya",
+              "entrega": 3,
+              "universo": 504.3,
+              "muestra": 504.3,
+              "acciones": 1,
+              "recuperaciones": 0.0,
+              "porAclarar": 2.2,
+              "pagina": 66
+            },
+            {
+              "num": 429,
+              "titulo": "Gestión financiera de Tren Maya, S.A. de C.V.",
+              "entrega": 3,
+              "universo": 46967.8,
+              "muestra": 44876.6,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 61
+            }
+          ],
+          "recuperaciones": 191.7,
+          "porAclarar": 87.9,
+          "acciones": 10
+        },
+        "campos": {
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Último monto total de inversión que la cartera pública de Hacienda registró para la clave 2021W3N0001 (corte 4T 2021).",
+          "inversion_real_mdp": "Suma de lo ejercido bajo esa clave en las Cuentas Públicas 2020 a 2025."
+        },
+        "contradicciones": [
+          "La clave 2021W3N0001 dejó de aparecer en la cartera pública de Hacienda después del corte 4T 2021, cuando registraba $167,341.6 mdp de monto total de inversión. Sin embargo, la Cuenta Pública siguió registrando gasto bajo esa misma clave hasta 2025 (en total, $497,350.2 mdp desde 2020), y el PEF 2026 le asigna otros $30,000.0 mdp."
+        ],
+        "hallazgo": "En la Cuenta Pública 2024 la ASF practicó 15 auditorías a la obra (tramos, electrificación, edificaciones y gestión financiera): recuperó $191.7 mdp durante las revisiones, dejó $87.9 mdp por aclarar y promovió 10 acciones.",
+        "fuentes": [
+          "opa",
+          "cp",
+          "pef26",
+          "asf24"
+        ],
+        "valores": {
+          "inversion_presupuestada_mdp": 167341.6,
+          "inversion_real_mdp": 497350.2
+        }
+      },
+      "tren-toluca": {
+        "clave": "13093110008",
+        "cartera": [
+          {
+            "corte": "4T 2019",
+            "mti": 76346.8,
+            "fin": "31/12/2022",
+            "avance": "89"
+          },
+          {
+            "corte": "4T 2020",
+            "mti": 93089.7,
+            "fin": "30/06/2023",
+            "avance": "74.6"
+          },
+          {
+            "corte": "4T 2021",
+            "mti": 103615.4,
+            "fin": "31/12/2023",
+            "avance": "76.59"
+          },
+          {
+            "corte": "4T 2022",
+            "mti": 110708.9,
+            "fin": "31/12/2023",
+            "avance": "81.84"
+          },
+          {
+            "corte": "4T 2023",
+            "mti": 116012.5,
+            "fin": "31/12/2024",
+            "avance": "89.69"
+          },
+          {
+            "corte": "4T 2024",
+            "mti": 140134.8,
+            "fin": "31/12/2025",
+            "avance": "93.78"
+          },
+          {
+            "corte": "4T 2025",
+            "mti": 147956.0,
+            "fin": "31/12/2026",
+            "avance": "0"
+          },
+          {
+            "corte": "2T 2026",
+            "mti": 153694.3,
+            "fin": "31/12/2026",
+            "avance": "-2"
+          }
+        ],
+        "ejercidoCP": {
+          "2014": 3239.3,
+          "2015": 3959.4,
+          "2016": 8438.1,
+          "2017": 16699.3,
+          "2018": 11843.3,
+          "2019": 5172.7,
+          "2020": 1617.3,
+          "2021": 89.5,
+          "2022": 15.8,
+          "2023": 11.0,
+          "2024": 5686.6,
+          "2025": 8734.1
+        },
+        "ejercidoTotal": 65506.4,
+        "asf2024": {
+          "auditorias": [
+            {
+              "num": 338,
+              "titulo": "Estación Vasco de Quiroga y adecuaciones al proyecto ejecutivo",
+              "entrega": 1,
+              "universo": 423.9,
+              "muestra": 291.7,
+              "acciones": 4,
+              "recuperaciones": 0.0,
+              "porAclarar": 6.2,
+              "pagina": 82
+            },
+            {
+              "num": 340,
+              "titulo": "Viaducto atirantado del Manantial CONAGUA y viaducto doble voladizo",
+              "entrega": 1,
+              "universo": 634.6,
+              "muestra": 466.1,
+              "acciones": 5,
+              "recuperaciones": 0.0,
+              "porAclarar": 13.9,
+              "pagina": 82
+            },
+            {
+              "num": 350,
+              "titulo": "Material rodante y sistemas ferroviarios",
+              "entrega": 2,
+              "universo": 2612.1,
+              "muestra": 1230.7,
+              "acciones": 0,
+              "recuperaciones": 23.0,
+              "porAclarar": 0.0,
+              "pagina": 84
+            }
+          ],
+          "recuperaciones": 23.0,
+          "porAclarar": 20.1,
+          "acciones": 9
+        },
+        "campos": {
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "oficial",
+          "sobrecosto_pct": "derivado"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Monto total de inversión registrado en la cartera de Hacienda en el corte más antiguo publicado en datos abiertos (4T 2019). El registro original de 2013 no está en esa base: queda pendiente.",
+          "inversion_real_mdp": "Monto total de inversión registrado en el corte 2T 2026. Es el costo que Hacienda reconoce hoy, no lo pagado: con recursos fiscales, la Cuenta Pública registra $65,506.4 mdp de 2014 a 2025."
+        },
+        "contradicciones": [
+          "La fecha de término registrada en la cartera se movió de 31/12/2022 (corte 4T 2019) a 31/12/2026 (corte 2T 2026), y el monto total de inversión pasó de $76,346.8 a $153,694.3 mdp."
+        ],
+        "hallazgo": "En la Cuenta Pública 2024 la ASF practicó 3 auditorías a la obra: recuperó $23.0 mdp, dejó $20.1 mdp por aclarar y promovió 9 acciones.",
+        "fuentes": [
+          "opa",
+          "cp",
+          "asf24"
+        ],
+        "valores": {
+          "inversion_presupuestada_mdp": 76346.8,
+          "inversion_real_mdp": 153694.3
+        }
+      },
+      "aifa-texcoco": {
+        "clave": "19071170003 (AIFA) y 1409JZL0005 (NAIM)",
+        "cartera": [
+          {
+            "corte": "4T 2019",
+            "mti": 82136.1,
+            "fin": "31/12/2021",
+            "avance": ""
+          }
+        ],
+        "carteraNaim": [
+          {
+            "corte": "4T 2019",
+            "mti": 209755.4,
+            "fin": "31/12/2020",
+            "avance": "34.25"
+          }
+        ],
+        "ejercidoCP": {
+          "2019": 4304.2,
+          "2020": 12275.1,
+          "2021": 77.1
+        },
+        "ejercidoTotal": 16656.4,
+        "pef2026": {
+          "operacion": 744.7
+        },
+        "naicm": {
+          "costo": 113327.7,
+          "faseUnoPlaneada": 169000.0,
+          "paginas": "12 y 46-48"
+        },
+        "asf2024": {
+          "auditorias": [
+            {
+              "num": 9,
+              "titulo": "Gestión financiera del Aeropuerto Internacional Felipe Ángeles, S.A. de C.V.",
+              "entrega": 3,
+              "universo": 6163.9,
+              "muestra": 3238.8,
+              "acciones": 0,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 61
+            }
+          ],
+          "recuperaciones": 0.0,
+          "porAclarar": 0.0,
+          "acciones": 0
+        },
+        "campos": {
+          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "definiciones": {
+          "inversion_real_mdp": "Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA que siguen sin fuente oficial."
+        },
+        "contradicciones": [
+          "La ASF publicó en febrero de 2021 que cancelar el NAIM costó $331,996 mdp (auditoría 1394-DE, Cuenta Pública 2019) y en marzo de 2021 corrigió la cifra a $113,327.7 mdp, en un estudio que declara inconsistencias en la cuantificación original. El simulador usaba la cifra retirada.",
+          "El AIFA aparece en la cartera pública solo en el corte 4T 2019, con $82,136.1 mdp de monto total de inversión; en los cortes siguientes ya no figura. La Cuenta Pública registra bajo su clave $16,656.4 mdp entre 2019 y 2021, y después ningún peso: el resto de la obra no se puede seguir por esa vía."
+        ],
+        "hallazgo": "La ASF (marzo de 2021) fijó el costo de cancelar el NAIM en $113,327.7 mdp al 31 de diciembre de 2019, contra los $331,996 mdp que había publicado antes. En la Cuenta Pública 2024 revisó la gestión financiera del AIFA sin observaciones.",
+        "fuentes": [
+          "opa",
+          "cp",
+          "pef26",
+          "asf24",
+          "asfnaicm"
+        ],
+        "valores": {
+          "inversion_real_mdp": 201434.7
+        }
+      },
+      "dos-bocas": {
+        "asf2024": {
+          "auditorias": [
+            {
+              "num": 247,
+              "titulo": "Ingresos y egresos del proyecto de la Refinería Olmeca en Dos Bocas (Pemex Transformación Industrial)",
+              "entrega": 3,
+              "universo": 84694.9,
+              "muestra": 71511.3,
+              "acciones": 3,
+              "recuperaciones": 0.0,
+              "porAclarar": 0.0,
+              "pagina": 75
+            }
+          ],
+          "recuperaciones": 0.0,
+          "porAclarar": 0.0,
+          "acciones": 3
+        },
+        "campos": {
+          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "contradicciones": [
+          "La refinería no aparece en la cartera pública de proyectos de inversión de Hacienda en ninguno de los cortes de 2019 a 2026: la construyó una filial de Pemex, fuera del presupuesto que se publica por clave de cartera. Su costo total no se puede cotejar con esa fuente."
+        ],
+        "hallazgo": "En la Cuenta Pública 2024 la ASF revisó los ingresos y egresos del proyecto: un universo de $84,694.9 mdp en ese año, con una muestra de $71,511.3 mdp. Promovió 3 recomendaciones, sin montos por aclarar ni recuperaciones.",
+        "fuentes": [
+          "opa",
+          "asf24"
+        ]
+      },
+      "fobaproa": {
+        "ramo34": {
+          "2014": 11730.6,
+          "2015": 10949.3,
+          "2016": 20555.3,
+          "2017": 35961.9,
+          "2018": 38168.5,
+          "2019": 51339.9,
+          "2020": 43330.0,
+          "2021": 11245.9,
+          "2022": 38850.0,
+          "2023": 54216.5,
+          "2024": 62489.4,
+          "2025": 52451.9
+        },
+        "pef2026Ramo34": 35553.4,
+        "campos": {
+          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "hallazgo": "Lo que el rescate bancario le cuesta al presupuesto cada año sí es oficial: el Ramo 34 (programas de apoyo a ahorradores y deudores de la banca) ejerció $52,451.9 mdp en 2025 según la Cuenta Pública, y el PEF 2026 le asigna $35,553.4 mdp.",
+        "fuentes": [
+          "cp",
+          "pef26dof"
+        ]
+      }
+    }
   }
 },
 "calculadora_civica": {
