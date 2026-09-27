@@ -26993,6 +26993,22 @@
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   }
+  /* Abre un caso de la lista de expedientes (modulo 5, bloque 3) desde otra
+     pestaña: quita el filtro si lo ocultaba y despliega su ficha. */
+  function irAExpediente(id) {
+    seleccionarModuloExplorer('verificador');
+    setTimeout(function() {
+      let ficha = document.getElementById('exp-' + id);
+      if (!ficha) {
+        filtrarDossiers('todos', document.querySelector('.forensic-chip-btn'));
+        ficha = document.getElementById('exp-' + id);
+      }
+      erarioIr('inspexp');
+      if (!ficha) return;
+      ficha.open = true;
+      setTimeout(function() { ficha.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
+    }, 120);
+  }
   function compartirPlataforma() {
     if (navigator.share) {
       navigator.share({
@@ -28135,6 +28151,7 @@
     selectCircuitoEtapa: selectCircuitoEtapa,
     erarioPlegToggle: erarioPlegToggle,
     erarioIr: erarioIr,
+    irAExpediente: irAExpediente,
     selectFlujoItem: selectFlujoItem,
     closeFlujoFicha: closeFlujoFicha,
     selectMunicipio: selectMunicipio,

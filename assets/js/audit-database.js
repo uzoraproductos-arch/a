@@ -15148,7 +15148,7 @@ window.AUDIT_DB = {
 
   "relojes": {
     "titulo": "Lo que se endeuda y lo que se pierde, por segundo",
-    "nota": "Ninguno de estos relojes mide un gasto que ocurra en el instante en que usted lo mira. Cada uno toma una cifra anual de un documento oficial y la proyecta sobre el tiempo que usted lleva en esta p\u00e1gina. Es una regla de tres con el reloj del sistema, no una lectura en tiempo real del erario.",
+    "nota": "Ninguno de estos relojes mide un gasto que ocurra en el instante en que usted lo mira. Cada uno toma una cifra anual (de un documento oficial, salvo la de las megaobras, que lleva el chip pendiente) y la proyecta sobre el tiempo que usted lleva en esta p\u00e1gina. Es una regla de tres con el reloj del sistema, no una lectura en tiempo real del erario.",
     "fuentes": [
       {
         "id": "deuda-nueva",
@@ -15177,8 +15177,8 @@ window.AUDIT_DB = {
         "nombre": "P\u00e9rdida operativa de las doce megaobras",
         "icono": "\ud83c\udfd7\ufe0f",
         "anual_mdp": 80200.1,
-        "estado": "derivado",
-        "fuente": "Suma de las doce obras evaluadas en la subpesta\u00f1a 2.2",
+        "estado": "pendiente",
+        "fuente": "Suma de las doce obras evaluadas en la subpesta\u00f1a 2.2; sus fuentes obra por obra est\u00e1n pendientes de verificaci\u00f3n",
         "que": "Lo que cuesta cada a\u00f1o mantener andando obras cuya operaci\u00f3n ingresa menos de lo que gasta. No es el sobrecosto de construirlas: es el d\u00e9ficit de tenerlas abiertas.",
         "culpa": true
       },

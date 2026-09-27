@@ -2101,6 +2101,34 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (equivalencias del módulo 1 con cifras oficiales)
+
+- **Las tres equivalencias del bloque 1.2 ya no usan costos supuestos.**
+  Antes comparaban contra un hospital «tipo» de $550 mdp, una beca de
+  $2,800 al mes y el Tren Maya de $120,000 → $515,000 mdp con un subsidio de
+  $79.27 por segundo, y ninguna de esas cifras tenía documento. Ahora cada
+  una divide o suma cifras que la plataforma ya cita, con chip `derivado`:
+  1. Costo financiero de la deuda ($1,572,073.3 mdp, PEF 2026 Anexo 8, [11])
+     ÷ Poderes y órganos autónomos ($142,300.0 mdp, CGPE 2027 p. 39, [64])
+     = 11.05 veces.
+  2. Gasto federalizado ($2,810,800 mdp, PEF 2026) ÷ 134.4 millones de
+     habitantes (CONAPO, mitad de 2026, `DB.poblacion`) = $20,914 por
+     habitante.
+  3. Tren Maya: $785.3 mdp por aclarar y 14 pliegos de observaciones en la
+     CP 2022, suma de los informes individuales de la ASF ya reunidos en
+     `DB.expedientes` (tramo 4, 45 %). Un botón abre ese expediente.
+- **Nueva función `irAExpediente(id)`** (exportada): lleva al bloque 3 del
+  módulo 5, quita el filtro si ocultaba el caso y despliega su ficha.
+- La nota metodológica explica por qué no se compara contra costos «tipo»
+  mientras no tengan documento propio.
+- **El reloj «Pérdida operativa de las doce megaobras»** de la calculadora
+  llevaba chip `derivado`; ahora `pendiente`, igual que en el radar, porque
+  sale del simulador 2.2 sin fuentes obra por obra. La nota de los relojes
+  lo aclara.
+- Queda abierta la población de CONAPO como referencia puntual (ya estaba
+  anotada en `DB.poblacion.pendiente`) y las cifras del simulador 2.2 (ver
+  Pendiente, «Cifras que no coinciden entre secciones»).
+
 ### Hecho (leyenda del mapa y los 83 municipios anclados a la ASF)
 
 - **La leyenda del mapa de la 1.1 dice la verdad.** Antes el rótulo decía
@@ -2812,11 +2840,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
 - **«Presupuesto récord» en la tarjeta del módulo 1:** para decirlo hace
   falta la serie del PEF aprobado de años anteriores (DOF) en la base, con
   fuente, y decidir si el récord es en pesos corrientes o reales.
-- **Equivalencias del módulo 1 (bloque 1.2):** el costo de un hospital
-  general de zona ($550 mdp), el monto de la beca universitaria ($2,800 al
-  mes) y el Tren Maya ($120,000 → $515,000 mdp, $79.27 por segundo) no tienen
-  documento oficial citado. Conseguir la fuente (IMSS, reglas de operación
-  de la beca, ASF/FONATUR) o retirar la tarjeta.
 - **Guion editorial, entregas B a E** (portada, glosario ampliado,
   diccionario de sustituciones, reescritura por módulos): esperan decisiones
   del autor sobre «tú» o «usted», nombres de menús y el Pase.

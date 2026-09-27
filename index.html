@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927a">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927b">
 </head>
 <body>
 
@@ -1007,60 +1007,60 @@
               <span class="erario-pleg-n" aria-hidden="true">1.2</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">¿A qué equivale?</span>
-                <span class="erario-pleg-av">Tres comparaciones para dimensionar las cifras, con la operación y sus supuestos a la vista.</span>
+                <span class="erario-pleg-av">Tres comparaciones para dimensionar las cifras, hechas solo con datos oficiales y con la operación a la vista.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
           </h4>
           <div class="erario-pleg-cuerpo" id="eb-cuerpo-equivale" hidden>
-          <!-- Cajas de Equivalencias Ciudadanas (Civio "¿A qué equivale?") -->
+          <!-- Equivalencias: cada una divide dos cifras oficiales ya citadas en la plataforma (derivado) -->
           <div class="civio-equiv-grid">
             <div class="civio-equiv-card">
               <div class="civio-equiv-ico-wrap">
-                <span class="civio-equiv-ico">🏥</span>
+                <span class="civio-equiv-ico">📉</span>
               </div>
               <div>
-                <div class="civio-equiv-val">2,858 hospitales <span class="est-chip est-pendiente">pendiente</span></div>
+                <div class="civio-equiv-val" data-no-autolink>11 veces <span class="est-chip est-derivado">derivado</span></div>
                 <div class="civio-equiv-lbl">
-                  El <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Costo Financiero de la Deuda')">costo financiero de la deuda</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfdp')" title="Ley Federal de Deuda Pública">[04]</a> ($1.57 B) equivale a construir y equipar unos 2,858 hospitales generales de zona ($1,572,073.3 mdp ÷ $550 mdp por hospital).
+                  El <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Costo Financiero de la Deuda')">costo financiero de la deuda</a> previsto para 2026 <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026, Anexo 8">[11]</a> equivale a 11 veces lo que el mismo presupuesto asigna al Congreso, al Poder Judicial, a los órganos autónomos, al INEGI y al Tribunal Federal de Justicia Administrativa juntos <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-cgpe2027')" title="Criterios Generales de Política Económica 2027, cuadro de la página 39">[64]</a> ($1,572,073.3 mdp ÷ $142,300.0 mdp = 11.05).
                 </div>
               </div>
             </div>
             <div class="civio-equiv-card">
               <div class="civio-equiv-ico-wrap">
-                <span class="civio-equiv-ico">🎓</span>
+                <span class="civio-equiv-ico">🗺️</span>
               </div>
               <div>
-                <div class="civio-equiv-val">83.6 millones <span class="est-chip est-pendiente">pendiente</span></div>
+                <div class="civio-equiv-val" data-no-autolink>$20,914 por habitante <span class="est-chip est-derivado">derivado</span></div>
                 <div class="civio-equiv-lbl">
-                  De becas universitarias anuales completas ($33,600 cada una) equivalen al <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Federalizado')">gasto federalizado</a> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a> transferido a los estados ($2,810,800 mdp ÷ $33,600).
+                  Es lo que el <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Federalizado')">gasto federalizado</a> de 2026 <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">[11]</a> reparte, en promedio, por cada persona que vive en México: $2,810,800 mdp ÷ 134.4 millones de habitantes a mitad de 2026, según las proyecciones del CONAPO. El promedio esconde diferencias grandes entre estados; el mapa las muestra una por una.
                 </div>
               </div>
             </div>
             <div class="civio-equiv-card">
               <div class="civio-equiv-ico-wrap">
-                <span class="civio-equiv-ico">🛤️</span>
+                <span class="civio-equiv-ico">🚆</span>
               </div>
               <div>
-                <div class="civio-equiv-val">329% sobrecosto <span class="est-chip est-pendiente">pendiente</span></div>
+                <div class="civio-equiv-val" data-no-autolink>$785.3 mdp por aclarar <span class="est-chip est-derivado">derivado</span></div>
                 <div class="civio-equiv-lbl">
-                  El Tren Maya <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lfrcf')" title="Auditoría Superior de la Federación">[07]</a> pasó de $120,000 mdp a más de $515,000 mdp erogados, con un subsidio vitalicio de $79.27/seg.
+                  Es lo que la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación')">Auditoría Superior de la Federación</a> dejó sin aclarar en la construcción y el financiamiento del Tren Maya en la Cuenta Pública 2022, con 14 pliegos de observaciones. El tramo 4, Izamal-Cancún, concentra el 45 %. La cifra suma los informes individuales de ese año.
+                  <button type="button" class="pd-btn" onclick="window.AuditEngine.irAExpediente('tren-maya')">Ver el expediente y sus informes</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Nota Metodológica de Equivalencias Ciudadanas y Trazabilidad -->
+          <!-- Nota metodológica de las equivalencias -->
           <div class="civio-equiv-nota">
             <div class="civio-nota-head">
               <span class="civio-nota-ico">📌</span>
               <strong>Nota metodológica y fuentes de equivalencia:</strong>
             </div>
             <p class="civio-nota-body">
-              Las tres equivalencias están marcadas <span class="est-chip est-pendiente">pendiente</span>: la operación está a la vista, pero el costo por hospital, el monto de la beca y las cifras del Tren Maya todavía no tienen su documento oficial citado en esta plataforma. Son modelos de costo de oportunidad con estos supuestos:
-              un hospital general de zona del IMSS tipo HGZ-144 camas ($550 mdp de obra civil y equipamiento electromédico especializado),
-              una beca completa de manutención universitaria tipo Jóvenes Escribiendo el Futuro ($2,800 mensuales = $33,600 anuales)
-              y las auditorías de desempeño y cumplimiento de la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación')">Auditoría Superior de la Federación</a> sobre megaobras de infraestructura.
+              Las tres comparaciones usan solo cifras que esta plataforma ya cita de su documento oficial, y por eso llevan el chip <span class="est-chip est-derivado">derivado</span>: el resultado es una operación, y la operación está a la vista.
+              La primera divide dos renglones del mismo Presupuesto 2026. La segunda reparte una cifra nacional entre la población proyectada por el Consejo Nacional de Población. La tercera suma los informes de la ASF que se enlistan, uno por uno, en el expediente del caso.
+              No comparamos contra el costo de un hospital, de una beca o de una obra &laquo;tipo&raquo; mientras ese costo no tenga su propio documento oficial: un costo supuesto convierte la comparación en opinión.
               Para profundizar en cada concepto técnico, explore el <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Público')">📖 Glosario Hacendario</a> y el catálogo de <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')">📑 Referencias Oficiales</a>.
             </p>
           </div>
@@ -2858,7 +2858,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927a</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927b</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3002,16 +3002,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927a"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927b"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927a"></script>
+  <script src="assets/js/audit-database.js?v=20260927b"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927a"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927b"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927a"></script>
+  <script src="assets/js/audit-engine.js?v=20260927b"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
