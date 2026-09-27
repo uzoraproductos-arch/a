@@ -140,58 +140,68 @@
   // ==========================================================================
   // ESCALA COROPLÉTICA DINÁMICA
   // ==========================================================================
+  // Escalas del mapa: una sola tabla para pintar las entidades y para rotular
+  // la leyenda, de modo que lo que dice el pie sea exactamente lo que se pinta.
+  // Cada paso es [umbral, color], de mayor a menor; "base" es el color de
+  // quien no rebasa el último umbral. "igual" indica comparación >= en vez de >.
+  const ESCALAS_MAPA = {
+    asf: { base: '#27ae60', unidad: 'mdp', pasos: [[3000, '#700c0c'], [2000, '#8b1a1a'], [1500, '#b82a20'],
+      [1000, '#d4382c'], [700, '#e67e22'], [500, '#f39c12']] },
+    dep: { base: '#233454', unidad: 'pct', igual: true, pasos: [[92, '#8b1a1a'], [88, '#b83b2a'], [84, '#c4602a'],
+      [78, '#d49b20'], [70, '#3fae99']] },
+    pc: { base: '#1c233a', unidad: 'pesos', pasos: [[30000, '#f3cf65'], [23000, '#d4a017'], [21000, '#8da352'],
+      [19000, '#3fae99'], [17000, '#257b8c']] },
+    monto: { base: '#151824', unidad: 'mdp', pasos: [[250000, '#f3cf65'], [150000, '#d4a017'], [110000, '#b8860b'],
+      [80000, '#8da352'], [60000, '#3fae99'], [45000, '#257b8c'], [30000, '#1b4965'], [20000, '#233454']] }
+  };
+  // Semáforo del Sistema de Alertas (LDF, arts. 43 a 46)
+  const SEMAFORO_MAPA = [['Verde', '#1e824c', 'sostenible'], ['Amarillo', '#e67e22', 'en observación'],
+    ['Rojo', '#d4382c', 'elevado']];
+
+  function escalaMapa(metricKey) {
+    return ESCALAS_MAPA[metricKey] || ESCALAS_MAPA.monto;
+  }
+
   function getMetricColor(st, metricKey) {
     if (metricKey === 'deuda') {
-      if (st.semaforoDeuda === 'Rojo') return '#d4382c';
-      if (st.semaforoDeuda === 'Amarillo') return '#e67e22';
-      return '#1e824c'; // Verde
+      const s = SEMAFORO_MAPA.find(x => x[0] === st.semaforoDeuda);
+      return s ? s[1] : SEMAFORO_MAPA[0][1];
     }
-
-    if (metricKey === 'asf') {
-      // Observaciones ASF: mayor monto = más rojo / alerta
-      const val = st.asfMontoObservado;
-      if (val > 3000) return '#700c0c';
-      if (val > 2000) return '#8b1a1a';
-      if (val > 1500) return '#b82a20';
-      if (val > 1000) return '#d4382c';
-      if (val > 700) return '#e67e22';
-      if (val > 500) return '#f39c12';
-      return '#27ae60';
+    const L = LENTES[metricKey] || LENTES.gasto;
+    const val = L.campo(st), E = escalaMapa(metricKey);
+    for (const [umbral, color] of E.pasos) {
+      if (E.igual ? val >= umbral : val > umbral) return color;
     }
+    return E.base;
+  }
 
-    if (metricKey === 'dep') {
-      // Dependencia federal: mayor a 90% es alta vulnerabilidad
-      const dep = st.dep;
-      if (dep >= 92) return '#8b1a1a';
-      if (dep >= 88) return '#b83b2a';
-      if (dep >= 84) return '#c4602a';
-      if (dep >= 78) return '#d49b20';
-      if (dep >= 70) return '#3fae99';
-      return '#233454';
+  // Leyenda: rotulo de la lente activa y una muestra por clase, con su rango
+  // real y cuántas entidades caen en ella.
+  function renderLeyendaMapa() {
+    const cap = document.getElementById('legendCaption');
+    const cont = document.getElementById('legendClases');
+    if (!cap || !cont) return;
+    const metric = state.currentMetric;
+    const L = LENTES[metric] || LENTES.gasto;
+    const estados = DB.estados || [];
+    let clases;
+    if (metric === 'deuda') {
+      clases = SEMAFORO_MAPA.map(([nom, color, nivel]) => ({
+        color, txt: nom + ' · endeudamiento ' + nivel,
+        n: estados.filter(st => (st.semaforoDeuda || 'Verde') === nom).length }));
+    } else {
+      const E = escalaMapa(metric);
+      const f = v => E.unidad === 'pct' ? v + ' %' : E.unidad === 'pesos' ? '$' + formatNumber(v) : '$' + formatNumber(v) + ' mdp';
+      const op = E.igual ? '' : 'más de ';
+      const orden = E.pasos.slice().reverse();
+      clases = [{ color: E.base, txt: (E.igual ? 'menos de ' : 'hasta ') + f(orden[0][0]) }].concat(
+        orden.map(([u, color]) => ({ color, txt: op + f(u) + (E.igual ? ' o más' : '') })));
+      clases.forEach(c => { c.n = estados.filter(st => getMetricColor(st, metric) === c.color).length; });
     }
-
-    if (metricKey === 'pc') {
-      // Per cápita: de $15,000 a $38,000+
-      const pc = st.pc;
-      if (pc > 30000) return '#f3cf65';
-      if (pc > 23000) return '#d4a017';
-      if (pc > 21000) return '#8da352';
-      if (pc > 19000) return '#3fae99';
-      if (pc > 17000) return '#257b8c';
-      return '#1c233a';
-    }
-
-    // Gasto Federalizado Total / Ramo 28 / Ramo 33
-    const val = (metricKey === 'ramo28') ? st.ramo28 : (metricKey === 'ramo33') ? st.ramo33 : st.gasto;
-    if (val > 250000) return '#f3cf65'; // Oro brillante
-    if (val > 150000) return '#d4a017';
-    if (val > 110000) return '#b8860b';
-    if (val > 80000) return '#8da352';
-    if (val > 60000) return '#3fae99';
-    if (val > 45000) return '#257b8c';
-    if (val > 30000) return '#1b4965';
-    if (val > 20000) return '#233454';
-    return '#151824';
+    cap.textContent = L.rotulo;
+    cont.innerHTML = clases.map(c =>
+      '<span class="legend-clase" role="listitem"><i aria-hidden="true" style="background:' + c.color + '"></i>' + c.txt +
+      ' <em>(' + c.n + ')</em></span>').join('');
   }
 
   // ==========================================================================
@@ -437,6 +447,7 @@
 
     // Actualizar la columna de extremos y el cuadro de las 32
     renderBloqueMapa();
+    renderLeyendaMapa();
   }
 
   function setMapView(viewType) {
@@ -804,7 +815,7 @@
               </div>
 
               <div class="muni-audit-status">
-                <strong>Alerta Auditoría ASF / Local:</strong> $${formatNumber(m.observacionesASF)} mdp en revisión.${sinCifra ? ' <em>Sus finanzas no aparecen en la estadística municipal del INEGI.</em>' : ''}<br>
+                <strong title="${m.asfFuente || ''}">Auditoría de la ASF, Cuenta Pública 2024:</strong> $${formatNumber(m.observacionesASF)} mdp observados. ${chipEstado(m.asfEstado || 'pendiente')}${sinCifra ? ' <em>Sus finanzas no aparecen en la estadística municipal del INEGI.</em>' : ''}<br>
                 <em>${m.estatusAuditoria}</em>
               </div>
 
@@ -5958,7 +5969,7 @@
     'fc-nom', 'fc-grupo', 'fc-monto', 'fc-pct', 'fd-monto',
     'fed-monto', 'fed-pct', 'ec-nom', 'ec-val', 'ec-rk', 'ec-rv',
     'ec-sub', 'ec-dep', 'mun-cifras', 'mun-part', 'mun-alcalde', 'mun-dep',
-    'ef-tit', 'ciego-dato', 'legend-caption', 'legend-ticks',
+    'ef-tit', 'ciego-dato', 'legend-caption', 'legend-ticks', 'legend-clases',
     'tel-item', 'telemetry-badge', 'prov', 'creator-box', 'chip', 'pill',
     'kpi-label', 'kpi-value', 'box-title', 'stat-label', 'stat-value',
     'fj-kicker', 'fj-inst-lema', 'fj-inst-fund', 'fj-inst-nom', 'fj-idet-k',
@@ -7834,6 +7845,7 @@
     renderFlujoConteo();
     renderCiegos();
     renderBloqueMapa();
+    renderLeyendaMapa();
   }
 
   /* ====================================================================
@@ -27898,19 +27910,22 @@
       flags.push({
         tipo: 'critica',
         icono: '🚩',
-        titulo: `Alerta ASF: $${formatNumber(obs)} mdp en revisión`
+        titulo: `La ASF le observó $${formatNumber(obs)} mdp en la Cuenta Pública 2024`,
+        fuente: 'ASF · Matriz de Datos Básicos CP 2024'
       });
     } else if (obs > 0) {
       flags.push({
         tipo: 'alerta',
         icono: '⚠️',
-        titulo: `$${formatNumber(obs)} mdp observados`
+        titulo: `$${formatNumber(obs)} mdp observados por la ASF (CP 2024)`,
+        fuente: 'ASF · Matriz de Datos Básicos CP 2024'
       });
     } else {
       flags.push({
         tipo: 'ok',
         icono: '🟢',
-        titulo: 'Sin alertas críticas'
+        titulo: 'Sin monto observado en su auditoría integral de la CP 2024',
+        fuente: 'ASF · Matriz de Datos Básicos CP 2024'
       });
     }
 

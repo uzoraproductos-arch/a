@@ -1019,22 +1019,34 @@ nav.tabbar button.active .num {
   color: var(--text-dim);
 }
 
-.legend-gradient-bar {
-  flex: 1;
-  height: 10px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #151824 0%, #257b8c 50%, #d4a017 100%);
-  min-width: 140px;
-}
-
-.legend-ticks {
+.legend-clases {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 14px;
   width: 100%;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.legend-clase {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.legend-clase i {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.legend-clase em {
+  font-style: normal;
   color: var(--text-dim);
-  margin-top: 3px;
 }
 
 /* ==========================================================================

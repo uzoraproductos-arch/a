@@ -2101,6 +2101,33 @@ vuelve a correrse si cambian los libros.
   (nueve estados decían «Amarillo» sin serlo) y se agregan `deudaIld` y
   `deudaFuente`. El botón de $79 se cambió por «Copiar ficha con fuentes».
 
+### Hecho (leyenda del mapa y los 83 municipios anclados a la ASF)
+
+- **La leyenda del mapa de la 1.1 dice la verdad.** Antes el rótulo decía
+  siempre «Gasto Federalizado Total» y la escala eran las palabras «Mínimo,
+  Medio, Máximo» sobre un degradado que el mapa no usa. Ahora una sola tabla,
+  `ESCALAS_MAPA` (más `SEMAFORO_MAPA` para la deuda), pinta las entidades y
+  rotula la leyenda: el nombre de la lente activa y una muestra por clase con
+  su rango real y cuántas entidades caen en ella (las clases suman 32).
+  `renderLeyendaMapa()` corre al arrancar y en cada `setMetric`. Los CR
+  sueltos de las dos páginas se conservaron (56).
+- **Los 83 municipios, anclados a su auditoría de la ASF.** Montos, estatus y
+  «obras fiscalizadas» no tenían fuente, y los montos no coincidían con la
+  ASF: Tijuana decía $285 mdp y la matriz da $0 por aclarar; Ecatepec, $420
+  contra $231.4. `herramientas/anclar_asf_municipios.py` los cruza (83 de 83,
+  por nombre exacto) con las 1,056 auditorías integrales municipales de la
+  Matriz de Datos Básicos CP 2024 (`investigaciones/datos-matriz-asf2024.json`):
+  - `observacionesASF` = recuperaciones + por aclarar, en mdp (la misma
+    definición que la serie nacional);
+  - `estatusAuditoria` con el número de auditoría, entrega, resultados,
+    acciones y montos; campos nuevos `asfAuditoria`, `asfFuente`, `asfEstado`;
+  - `proyectosAuditados` se vació: ninguna obra tenía documento.
+  - La auditoría integral puede no ser la única: en Chiapas la ASF hizo 38
+    auditorías a municipios y 29 son integrales. El texto lo dice.
+  La tarjeta municipal lleva chip `oficial`, y las banderas rojas citan la
+  matriz. El eje «limpieza en la cuenta» del Inspector ya calcula con cifras
+  oficiales.
+
 ### Hecho (pendientes del glosario, la bibliografía y el tema claro)
 
 Segunda vuelta sobre la lista de pendientes, con lo que no requería decisión
@@ -2841,9 +2868,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   generada con IA para evitar problemas de derechos. Se conservan.
 - **En teléfono la barra superior ya no es fija**, pero sigue siendo alta
   (marca, cinco menús, botones y buscador): conviene compactarla.
-- **«Búsqueda avanzada de contratos»** promete filtrar contrataciones por
-  año, ramo y monto, y el Inspector no hace eso: reescribir o conectar con
-  datos de ComprasMX.
 - **La lista 69-B se actualiza a mano**: correr el script cada vez que el SAT
   publique un corte nuevo y subir el sello.
 - **Las cifras viejas de las pestañas 3 y 4 contradicen a la 2.6.**
@@ -2853,8 +2877,6 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   marca como pendiente. `legislativo.federal` dice $9,282 mdp para Diputados
   (2026 aprobado: $9,602.7). Falta decidir con el autor si esas pestañas se
   reescriben con la colección `poderes` o se funden con la 2.6.
-- **Las 1,056 auditorías municipales de la ASF** (hoja «ASF municipios» del
-  libro 2024) pueden anclar los 83 montos municipales sin referencia de abajo.
 **Auditoría del 26 de septiembre (versión 20260925a).** Lo agregado del 23 al
 25 de septiembre no cumple todavía la regla editorial. Bloquean la versión
 final, en este orden:
@@ -2866,10 +2888,6 @@ final, en este orden:
   +460.1 %, Dos Bocas $350,000 mdp) no tiene campo de fuente, y el costo de
   la deuda aparece como $1,572,073 mdp (PEF, radar y carrusel) pero «más de
   $1.2 billones» en la ficha Sheinbaum.
-- **«Erosión patrimonial» ($54,010.89/s).** Suma costo financiero (gasto legal,
-  flujo) con observaciones ASF por aclarar (saldo) y probablemente cuenta dos
-  veces al IPAB (FOBAPROA en megaobras y Ramo 34 en costo financiero).
-  INSPECTOR-ENTREGA.md ya lo había retirado. Retirar.
 - **Simulador de megaobras en pesos nominales 1988–2024**, sin INPC, con dos
   rescates financieros (FOBAPROA, FARAC) que hacen el 69 % de la «pérdida».
   Ninguna de las 12 obras tiene campo de fuente.
@@ -2879,24 +2897,14 @@ final, en este orden:
   `asf_monto_num` inventado para Salinas (5,000) y trato desigual a la
   presidenta en funciones. Riesgo legal.
 - **Pase de $79/mes** que promete funciones inexistentes y habla de
-  «lanzamiento electoral». Ocultar.
-- **Vocabulario**: «Dictamen de auditoría forense», «Costo real auditado»,
-  «Fuente oficial verificada», «Versión 3.3 Aprobada».
+  «lanzamiento electoral». Ocultar: decisión comercial del autor, sigue
+  visible en el menú, la pestaña del Pase y el botón de reporte salarial.
 
 Diseño: texto sobre fotografía ilegible (axe: 10 y 18 fallas de contraste),
 etiqueta de la cinta encimada, botón flotante sobre «Reiniciar a ceros», falta
 `scroll-margin-top`, primera pantalla móvil ocupada por menú, 30 elementos
 clicables sin teclado, dos cabeceras y tres marcas. Informe completo con
 capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
-
-- **Los 83 montos observados por la ASF en municipios no llevan referencia.**
-  El campo `observacionesASF` de `estados[].municipios[]` guarda un número
-  —42, 15, 8…— y **ni un solo campo de fuente o de informe que lo sustente**:
-  la búsqueda de `fuenteObservaciones` o `refObservaciones` en la base da cero.
-  Alimentan el eje «limpieza en la cuenta» del círculo de salud financiera de
-  la pestaña 6, así que un número sin respaldo se convierte en calificación.
-  Hay que anclarlos al informe individual de la ASF que los reporta o marcarlos
-  como pendientes en la ficha.
 
 - **El poblacional de la 2.4 no lleva referencia puntual.** Los relojes dividen
   entre **134.4 millones de habitantes**, la proyección de CONAPO a mitad de
@@ -2936,16 +2944,6 @@ capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
   Ramo 25 en $85,182.4 mdp: juntos, $1,127,075.3 mdp. No consta si la cifra
   por entidad incluye el Ramo 25, así que esta lente no lleva la línea de
   cuadre que sí llevan gasto y Ramo 28. Resolverlo exige la misma fuente.
-
-- **La leyenda del mapa de la 1.1 no dice la verdad.** Salió al probar los
-  capítulos plegables, y es anterior a ellos: `legendCaption`, `legendMin`,
-  `legendMid`, `legendMax` y `legendGradient` están escritos a mano en el HTML y
-  **ningún renglón del motor los toca**. El rótulo dice «Gasto Federalizado
-  Total» aunque el lector haya elegido Ramo 28, alertas ASF o dependencia
-  federal, y las marcas de la escala son las palabras «Mínimo», «Medio» y
-  «Máximo», sin cifra. El mapa sí cambia de color al cambiar de lente; lo que
-  miente es el pie. Pendiente de decisión: rotular la escala con los valores
-  reales de la métrica activa o retirarla.
 
 - **La pestaña 9 necesita servidor.** Las tres funciones están completas en
   interfaz, pero el formulario y el foro guardan en `localStorage`: sólo en el

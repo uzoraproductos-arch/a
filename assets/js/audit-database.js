@@ -2217,13 +2217,12 @@ window.AUDIT_DB = {
           "fismdf": 243.5,
           "predial": 522.3,
           "dependencia": 62.9,
-          "observacionesASF": 42.5,
-          "estatusAuditoria": "Aclaración de contratos de luminarias LED y pavimentación.",
-          "proyectosAuditados": [
-            "Modernización de Semáforos Inteligentes",
-            "Bacheo en Av. López Mateos",
-            "Equipamiento de Policía Municipal"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 462 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 462,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 162-308. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Jesús María",
@@ -2235,12 +2234,12 @@ window.AUDIT_DB = {
           "fismdf": 58.6,
           "predial": 98.2,
           "dependencia": 54.0,
-          "observacionesASF": 15.2,
-          "estatusAuditoria": "Observación en obra de colector pluvial.",
-          "proyectosAuditados": [
-            "Red de Agua Potable Chichimeco",
-            "Rehabilitación Polideportivo"
-          ]
+          "observacionesASF": 7.6,
+          "estatusAuditoria": "Auditoría integral n.º 467 de la ASF a la Cuenta Pública 2024 (tercera entrega): 1 resultado con observación y 1 acción promovida; $7.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 467,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 212-309. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Calvillo",
@@ -2252,12 +2251,12 @@ window.AUDIT_DB = {
           "fismdf": 51.6,
           "predial": 20.3,
           "dependencia": 81.4,
-          "observacionesASF": 8.1,
-          "estatusAuditoria": "Justificación de compras de maquinaria pesada.",
-          "proyectosAuditados": [
-            "Mejoramiento de Caminos Rurales",
-            "Alumbrado Público Zona Centro"
-          ]
+          "observacionesASF": 10.1,
+          "estatusAuditoria": "Auditoría integral n.º 464 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 3 acciones promovidas; $10.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 464,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 177-309. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2295,13 +2294,12 @@ window.AUDIT_DB = {
           "fismdf": 309.6,
           "predial": 1150.3,
           "dependencia": 48.3,
-          "observacionesASF": 285.0,
-          "estatusAuditoria": "Revisión prioritaria en obras de bacheo y contratos de seguridad privada.",
-          "proyectosAuditados": [
-            "Viaducto Elevado Conexión Aeropuerto",
-            "Cámaras de Vigilancia C2 Municipal",
-            "Reencarpetado Blvd. Agua Caliente"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 501 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 501,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 270-313. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Mexicali (Capital)",
@@ -2313,12 +2311,12 @@ window.AUDIT_DB = {
           "fismdf": 137.7,
           "predial": 597.1,
           "dependencia": 61.6,
-          "observacionesASF": 118.4,
-          "estatusAuditoria": "Diferencias en estimaciones de obra de drenaje pluvial.",
-          "proyectosAuditados": [
-            "Colector Pluvial San Pedro",
-            "Equipamiento de Bomberos"
-          ]
+          "observacionesASF": 157.7,
+          "estatusAuditoria": "Auditoría integral n.º 496 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $157.7 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 496,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 223-312. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Ensenada",
@@ -2330,12 +2328,12 @@ window.AUDIT_DB = {
           "fismdf": 134.1,
           "predial": 446.1,
           "dependencia": 51.2,
-          "observacionesASF": 88.0,
-          "estatusAuditoria": "Contratos observados en mantenimiento de planta tratadora.",
-          "proyectosAuditados": [
-            "Modernización de Malecón Turístico",
-            "Red Hidráulica Valle de Guadalupe"
-          ]
+          "observacionesASF": 120.3,
+          "estatusAuditoria": "Auditoría integral n.º 495 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $120.3 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 495,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 196-312. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2373,13 +2371,12 @@ window.AUDIT_DB = {
           "fismdf": 485.9,
           "predial": 648.0,
           "dependencia": 42.8,
-          "observacionesASF": 65.4,
-          "estatusAuditoria": "Auditoría en concesión de recolección de basura y licencias de construcción.",
-          "proyectosAuditados": [
-            "Planta Desaladora Cabo San Lucas",
-            "Canalización Arroyo San José",
-            "Seguridad en Corredor Turístico"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 530 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 530,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 219-317. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "La Paz (Capital)",
@@ -2391,12 +2388,12 @@ window.AUDIT_DB = {
           "fismdf": 191.9,
           "predial": 290.1,
           "dependencia": 59.5,
-          "observacionesASF": 44.1,
-          "estatusAuditoria": "Pliego por subsidios no acreditados en transporte público.",
-          "proyectosAuditados": [
-            "Modernización Red de Agua Potable",
-            "Iluminación Malecón"
-          ]
+          "observacionesASF": 52.9,
+          "estatusAuditoria": "Auditoría integral n.º 528 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $52.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 528,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 215-316. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2434,12 +2431,12 @@ window.AUDIT_DB = {
           "fismdf": 122.8,
           "predial": 48.2,
           "dependencia": 72.1,
-          "observacionesASF": 38.6,
-          "estatusAuditoria": "Falta de expedientes en pavimentación hidráulica.",
-          "proyectosAuditados": [
-            "Reparación de Drenaje Centro Histórico",
-            "Adquisición de Camiones Recolectores"
-          ]
+          "observacionesASF": 122.7,
+          "estatusAuditoria": "Auditoría integral n.º 557 de la ASF a la Cuenta Pública 2024 (tercera entrega): 5 resultados con observación y 7 acciones promovidas; $122.7 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 557,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 177-319. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Carmen (Cd. del Carmen)",
@@ -2451,12 +2448,12 @@ window.AUDIT_DB = {
           "fismdf": 180.3,
           "predial": 74.8,
           "dependencia": 66.5,
-          "observacionesASF": 52.0,
-          "estatusAuditoria": "Subsidios de pesca y contratos portuarios bajo revisión.",
-          "proyectosAuditados": [
-            "Malecón Costero Carmen",
-            "Rehabilitación Puente El Zacatal"
-          ]
+          "observacionesASF": 53.2,
+          "estatusAuditoria": "Auditoría integral n.º 559 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 7 acciones promovidas; $53.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 559,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 178-319. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2494,12 +2491,12 @@ window.AUDIT_DB = {
           "fismdf": 311.7,
           "predial": 288.3,
           "dependencia": 78.5,
-          "observacionesASF": 145.2,
-          "estatusAuditoria": "Observaciones por pagos improcedentes en alumbrado público.",
-          "proyectosAuditados": [
-            "Paso a Desnivel Torre Chiapas",
-            "Rehabilitación Parque Central"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 623 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 623,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 276-327. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Tapachula",
@@ -2511,12 +2508,12 @@ window.AUDIT_DB = {
           "fismdf": 434.4,
           "predial": 53.2,
           "dependencia": 86.4,
-          "observacionesASF": 89.3,
-          "estatusAuditoria": "Presunto sobreprecio en obras de contención y albergues migrantes.",
-          "proyectosAuditados": [
-            "Techado de Mercados Públicos",
-            "Pavimentación Zonas Periféricas"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 616 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 616,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 260-326. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "San Cristóbal de las Casas",
@@ -2528,12 +2525,12 @@ window.AUDIT_DB = {
           "fismdf": 385.0,
           "predial": 68.8,
           "dependencia": 87.3,
-          "observacionesASF": 64.7,
-          "estatusAuditoria": "Inconsistencias en fondos turísticos y conservación patrimonial.",
-          "proyectosAuditados": [
-            "Preservación Centro Histórico",
-            "Equipamiento de Policía Turística"
-          ]
+          "observacionesASF": 31.6,
+          "estatusAuditoria": "Auditoría integral n.º 2250 de la ASF a la Cuenta Pública 2024 (tercera entrega): 5 resultados con observación y 5 acciones promovidas; $31.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2250,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 245-326. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Chamula",
@@ -2545,12 +2542,12 @@ window.AUDIT_DB = {
           "fismdf": 479.0,
           "predial": 0.0,
           "dependencia": 94.2,
-          "observacionesASF": 112.4,
-          "estatusAuditoria": "Cero recaudación propia; 100% dependiente de FISMDF; opacidad severa en compras directas comunitarias.",
-          "proyectosAuditados": [
-            "Caminos Artesanales",
-            "Construcción de Aulas Rurales"
-          ]
+          "observacionesASF": 630.2,
+          "estatusAuditoria": "Auditoría integral n.º 2220 de la ASF a la Cuenta Pública 2024 (tercera entrega): 1 resultado con observación y 3 acciones promovidas; $630.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2220,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 180-323. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2588,13 +2585,12 @@ window.AUDIT_DB = {
           "fismdf": 309.6,
           "predial": 1328.7,
           "dependencia": 60.9,
-          "observacionesASF": 195.4,
-          "estatusAuditoria": "Licitaciones de recolección de basura y software policial.",
-          "proyectosAuditados": [
-            "Puentes Fronterizos Cruces Ágiles",
-            "Pavi-Juárez Bacheo Masivo",
-            "Equipamiento Táctico Policial"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 673 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 673,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 214-332. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Chihuahua (Capital)",
@@ -2606,12 +2602,12 @@ window.AUDIT_DB = {
           "fismdf": 104.3,
           "predial": 982.5,
           "dependencia": 55.3,
-          "observacionesASF": 68.2,
-          "estatusAuditoria": "Aclaración de costos en nuevo Relleno Sanitario Metropolitano.",
-          "proyectosAuditados": [
-            "Plataforma Escudo Chihuahua Fase III",
-            "Paso Superior Los Nogales"
-          ]
+          "observacionesASF": 107.6,
+          "estatusAuditoria": "Auditoría integral n.º 660 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $107.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 660,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 182-331. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2649,13 +2645,12 @@ window.AUDIT_DB = {
           "fismdf": null,
           "predial": null,
           "dependencia": null,
-          "observacionesASF": 185.0,
-          "estatusAuditoria": "Revisión en sistema de captación pluvial y eventos culturales masivos.",
-          "proyectosAuditados": [
-            "Construcción de Nuevas Utopías",
-            "Mitigación de Grietas y Colectores",
-            "Seguridad Cuadrante Oriente"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 706 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 706,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 155-335. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Cuauhtémoc",
@@ -2667,12 +2662,12 @@ window.AUDIT_DB = {
           "fismdf": null,
           "predial": null,
           "dependencia": null,
-          "observacionesASF": 110.2,
-          "estatusAuditoria": "Fiscalización especial de cobros de comercio en vía pública e imagen urbana.",
-          "proyectosAuditados": [
-            "Rescate Parque México y España",
-            "Rehabilitación Mercados Públicos"
-          ]
+          "observacionesASF": 89.7,
+          "estatusAuditoria": "Auditoría integral n.º 703 de la ASF a la Cuenta Pública 2024 (tercera entrega): 6 resultados con observación y 8 acciones promovidas; $89.7 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 703,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 155-334. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Benito Juárez",
@@ -2684,12 +2679,12 @@ window.AUDIT_DB = {
           "fismdf": null,
           "predial": null,
           "dependencia": null,
-          "observacionesASF": 54.0,
-          "estatusAuditoria": "Auditoría a licencias de construcción y obras inmobiliarias.",
-          "proyectosAuditados": [
-            "Blindar BJ Seguridad",
-            "Mantenimiento de Parques Urbanos"
-          ]
+          "observacionesASF": 51.9,
+          "estatusAuditoria": "Auditoría integral n.º 700 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 7 acciones promovidas; $51.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 700,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 155-334. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Gustavo A. Madero",
@@ -2701,12 +2696,12 @@ window.AUDIT_DB = {
           "fismdf": null,
           "predial": null,
           "dependencia": null,
-          "observacionesASF": 125.8,
-          "estatusAuditoria": "Contratos de seguridad perimetral y desazolve en Cuautepec.",
-          "proyectosAuditados": [
-            "Operativo Guadalupano Logística",
-            "Red de Drenaje Cuautepec"
-          ]
+          "observacionesASF": 53.2,
+          "estatusAuditoria": "Auditoría integral n.º 704 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 6 acciones promovidas; $53.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 704,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 155-335. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2744,12 +2739,12 @@ window.AUDIT_DB = {
           "fismdf": 158.7,
           "predial": 433.3,
           "dependencia": 59.4,
-          "observacionesASF": 48.0,
-          "estatusAuditoria": "Licitación de cámaras urbanas con reconocimiento facial.",
-          "proyectosAuditados": [
-            "Paso Vehicular Los Pastores",
-            "Comités Ciudadanos de Seguridad"
-          ]
+          "observacionesASF": 174.1,
+          "estatusAuditoria": "Auditoría integral n.º 766 de la ASF a la Cuenta Pública 2024 (tercera entrega): 5 resultados con observación y 6 acciones promovidas; $174.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 766,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 243-343. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Torreón",
@@ -2761,12 +2756,12 @@ window.AUDIT_DB = {
           "fismdf": 169.3,
           "predial": 530.9,
           "dependencia": 53.9,
-          "observacionesASF": 62.4,
-          "estatusAuditoria": "Diferencias en estimaciones del Sistema Integral de Mantenimiento Vial.",
-          "proyectosAuditados": [
-            "Sistema Vial Cuatro Caminos",
-            "Pozo de Agua La Joya"
-          ]
+          "observacionesASF": 378.4,
+          "estatusAuditoria": "Auditoría integral n.º 771 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 4 acciones promovidas; $378.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 771,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 274-344. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2804,12 +2799,12 @@ window.AUDIT_DB = {
           "fismdf": 69.2,
           "predial": 321.3,
           "dependencia": 54.7,
-          "observacionesASF": 42.0,
-          "estatusAuditoria": "Obras de acceso al recinto portuario bajo escrutinio.",
-          "proyectosAuditados": [
-            "Acceso Norte Manzanillo",
-            "Cámaras Puerto Seguro"
-          ]
+          "observacionesASF": 21.0,
+          "estatusAuditoria": "Auditoría integral n.º 802 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $21.0 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 802,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 220-347. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Colima (Capital)",
@@ -2821,12 +2816,12 @@ window.AUDIT_DB = {
           "fismdf": 73.6,
           "predial": 172.4,
           "dependencia": 57.0,
-          "observacionesASF": 21.5,
-          "estatusAuditoria": "Observación en compras consolidadas de combustible.",
-          "proyectosAuditados": [
-            "Iluminación de Avenidas",
-            "Bacheo Centro"
-          ]
+          "observacionesASF": 13.8,
+          "estatusAuditoria": "Auditoría integral n.º 797 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 3 acciones promovidas; $13.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 797,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 185-347. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2864,12 +2859,12 @@ window.AUDIT_DB = {
           "fismdf": 155.5,
           "predial": 453.9,
           "dependencia": 64.8,
-          "observacionesASF": 58.0,
-          "estatusAuditoria": "Revisión en el programa de pavimentación con slurry.",
-          "proyectosAuditados": [
-            "Parque Lineal Ferrocarril",
-            "Pozos de Agua Sistema Rural"
-          ]
+          "observacionesASF": 173.6,
+          "estatusAuditoria": "Auditoría integral n.º 831 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $173.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 831,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 193-350. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Gómez Palacio",
@@ -2881,11 +2876,12 @@ window.AUDIT_DB = {
           "fismdf": 89.0,
           "predial": 109.1,
           "dependencia": 67.2,
-          "observacionesASF": 44.5,
-          "estatusAuditoria": "Diferencias en cobro de derechos de agua industrial.",
-          "proyectosAuditados": [
-            "Reencarpetamiento Parque Industrial Lagunero"
-          ]
+          "observacionesASF": 192.1,
+          "estatusAuditoria": "Auditoría integral n.º 832 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 6 acciones promovidas; $192.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 832,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 199-351. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -2923,13 +2919,12 @@ window.AUDIT_DB = {
           "fismdf": 522.4,
           "predial": 1089.2,
           "dependencia": 61.1,
-          "observacionesASF": 135.0,
-          "estatusAuditoria": "Auditoría en subsidios al Sistema Integrado de Transporte (SIT OPTIBÚS).",
-          "proyectosAuditados": [
-            "Puente Barranca de Venaderos",
-            "Parque de la Vida",
-            "Cámaras Corporales Policía"
-          ]
+          "observacionesASF": 44.8,
+          "estatusAuditoria": "Auditoría integral n.º 1034 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $44.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1034,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 217-375. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Irapuato",
@@ -2941,12 +2936,12 @@ window.AUDIT_DB = {
           "fismdf": 188.6,
           "predial": 9.9,
           "dependencia": 68.5,
-          "observacionesASF": 65.4,
-          "estatusAuditoria": "Observación en compras de patrullas y blindaje.",
-          "proyectosAuditados": [
-            "Modernización Tercer Cinturón Vial",
-            "Centro de Integración Policial"
-          ]
+          "observacionesASF": 2.8,
+          "estatusAuditoria": "Auditoría integral n.º 1031 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 2 acciones promovidas; $2.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1031,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 207-375. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Celaya",
@@ -2958,12 +2953,12 @@ window.AUDIT_DB = {
           "fismdf": 139.1,
           "predial": 382.5,
           "dependencia": 60.6,
-          "observacionesASF": 82.1,
-          "estatusAuditoria": "Revisión exhaustiva en nómina de policía auxiliar y finiquitos.",
-          "proyectosAuditados": [
-            "Paso Superior Tecnológico",
-            "Cámaras de Detección C4"
-          ]
+          "observacionesASF": 110.5,
+          "estatusAuditoria": "Auditoría integral n.º 1022 de la ASF a la Cuenta Pública 2024 (tercera entrega): 6 resultados con observación y 9 acciones promovidas; $110.5 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1022,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 179-373. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3001,13 +2996,12 @@ window.AUDIT_DB = {
           "fismdf": 917.2,
           "predial": 348.0,
           "dependencia": 70.6,
-          "observacionesASF": 310.5,
-          "estatusAuditoria": "Cientos de millones bajo pliego de observaciones por fondos de emergencia sin licitación.",
-          "proyectosAuditados": [
-            "Reconstrucción Colectores Costera",
-            "Desazolve Río del Camarón",
-            "Alumbrado Turístico"
-          ]
+          "observacionesASF": 206.2,
+          "estatusAuditoria": "Auditoría integral n.º 1084 de la ASF a la Cuenta Pública 2024 (tercera entrega): 6 resultados con observación y 9 acciones promovidas; $206.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1084,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 159-381. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Chilpancingo (Capital)",
@@ -3019,12 +3013,12 @@ window.AUDIT_DB = {
           "fismdf": 355.8,
           "predial": 39.3,
           "dependencia": 83.0,
-          "observacionesASF": 94.0,
-          "estatusAuditoria": "Inconsistencias en finiquitos de seguridad y desabasto de agua.",
-          "proyectosAuditados": [
-            "Línea de Conducción Omiltemi",
-            "Bacheo Boulevard Vicente Guerrero"
-          ]
+          "observacionesASF": 89.5,
+          "estatusAuditoria": "Auditoría integral n.º 1091 de la ASF a la Cuenta Pública 2024 (tercera entrega): 7 resultados con observación y 9 acciones promovidas; $89.5 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1091,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 183-382. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3062,12 +3056,12 @@ window.AUDIT_DB = {
           "fismdf": 53.1,
           "predial": 0.0,
           "dependencia": 64.3,
-          "observacionesASF": 42.0,
-          "estatusAuditoria": "Revisión en contratos de recolección de basura y bacheo emergente.",
-          "proyectosAuditados": [
-            "Reencarpetamiento Bulevar Colosio",
-            "Alumbrado LED Colonia Morelos"
-          ]
+          "observacionesASF": 109.6,
+          "estatusAuditoria": "Auditoría integral n.º 1152 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $109.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1152,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 233-389. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Mineral de la Reforma",
@@ -3079,12 +3073,12 @@ window.AUDIT_DB = {
           "fismdf": 22.2,
           "predial": 55.5,
           "dependencia": 68.8,
-          "observacionesASF": 31.5,
-          "estatusAuditoria": "Diferencias en cobro de predial en nuevos fraccionamientos.",
-          "proyectosAuditados": [
-            "Colector Pluvial Tuzos",
-            "Espacios Deportivos Providencia"
-          ]
+          "observacionesASF": 26.8,
+          "estatusAuditoria": "Auditoría integral n.º 1146 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 4 acciones promovidas; $26.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1146,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 225-388. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3122,13 +3116,12 @@ window.AUDIT_DB = {
           "fismdf": 135.6,
           "predial": 1660.0,
           "dependencia": 57.6,
-          "observacionesASF": 142.0,
-          "estatusAuditoria": "Pliego en contratos de arrendamiento de patrullas y mantenimiento de luminarias.",
-          "proyectosAuditados": [
-            "Corredor Javier Mina",
-            "C5 Guadalajara Seguridad",
-            "Red de Puntos Limpios"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1202 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1202,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 200-396. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Zapopan",
@@ -3140,13 +3133,12 @@ window.AUDIT_DB = {
           "fismdf": 172.0,
           "predial": 1874.2,
           "dependencia": 49.2,
-          "observacionesASF": 115.0,
-          "estatusAuditoria": "El municipio con mayor recaudación predial per cápita fuera de CDMX; observaciones de trámite.",
-          "proyectosAuditados": [
-            "Parque Zapopan Central",
-            "Paso a Desnivel Servidor Público",
-            "Nodos Viales Carretera a Colotlán"
-          ]
+          "observacionesASF": 74.2,
+          "estatusAuditoria": "Auditoría integral n.º 1236 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 5 acciones promovidas; $74.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1236,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 286-400. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Tlajomulco de Zúñiga",
@@ -3158,12 +3150,12 @@ window.AUDIT_DB = {
           "fismdf": 111.1,
           "predial": 552.4,
           "dependencia": 48.1,
-          "observacionesASF": 78.4,
-          "estatusAuditoria": "Obras de mitigación de inundaciones en Cuenca El Ahogado.",
-          "proyectosAuditados": [
-            "Línea 4 Estaciones de Conexión",
-            "Colector López Mateos Sur"
-          ]
+          "observacionesASF": 197.1,
+          "estatusAuditoria": "Auditoría integral n.º 1226 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $197.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1226,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 271-399. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Puerto Vallarta",
@@ -3175,12 +3167,12 @@ window.AUDIT_DB = {
           "fismdf": 57.0,
           "predial": 651.3,
           "dependencia": 54.7,
-          "observacionesASF": 86.2,
-          "estatusAuditoria": "Fiscalización especial de derechos de Zona Federal Marítimo Terrestre.",
-          "proyectosAuditados": [
-            "Puente Federación Límite Nayarit",
-            "Rehabilitación Malecón Marina"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1215 de la ASF a la Cuenta Pública 2024 (tercera entrega): 1 resultado con observación y 1 acción promovida; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1215,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 239-398. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3218,13 +3210,12 @@ window.AUDIT_DB = {
           "fismdf": 404.1,
           "predial": 658.3,
           "dependencia": 78.8,
-          "observacionesASF": 420.0,
-          "estatusAuditoria": "Cientos de millones bajo auditoría por programas de pipas de agua y seguridad.",
-          "proyectosAuditados": [
-            "Colector Siervo de la Nación",
-            "Cámaras Mando Ecatepec",
-            "Reparación Socavones Chamizal"
-          ]
+          "observacionesASF": 231.4,
+          "estatusAuditoria": "Auditoría integral n.º 901 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $231.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 901,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 193-359. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Naucalpan de Juárez",
@@ -3236,12 +3227,12 @@ window.AUDIT_DB = {
           "fismdf": 177.1,
           "predial": 1065.6,
           "dependencia": 65.9,
-          "observacionesASF": 210.0,
-          "estatusAuditoria": "Deudas heredadas con proveedores y falta de entero de cuotas al ISSEMyM.",
-          "proyectosAuditados": [
-            "Par Vial San Mateo",
-            "Reencarpetado Zona Industrial Alce Blanco"
-          ]
+          "observacionesASF": 106.9,
+          "estatusAuditoria": "Auditoría integral n.º 927 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $106.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 927,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 228-362. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Toluca (Capital)",
@@ -3253,12 +3244,12 @@ window.AUDIT_DB = {
           "fismdf": 366.6,
           "predial": 683.5,
           "dependencia": 69.6,
-          "observacionesASF": 165.0,
-          "estatusAuditoria": "Juicios y pliegos por contrataciones irregulares de patrullas y parquímetros virtuales.",
-          "proyectosAuditados": [
-            "Repavimentación Isidro Fabela",
-            "Iluminación Delegaciones Norte"
-          ]
+          "observacionesASF": 287.4,
+          "estatusAuditoria": "Auditoría integral n.º 975 de la ASF a la Cuenta Pública 2024 (tercera entrega): 5 resultados con observación y 6 acciones promovidas; $287.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 975,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 273-368. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Nezahualcóyotl",
@@ -3270,12 +3261,12 @@ window.AUDIT_DB = {
           "fismdf": 256.2,
           "predial": 610.6,
           "dependencia": 64.5,
-          "observacionesASF": 130.0,
-          "estatusAuditoria": "Supervisión en la red de sustitución de tuberías de asbesto.",
-          "proyectosAuditados": [
-            "Sustitución Red Hidráulica Neza Oriente",
-            "Casas de la Tercer Edad"
-          ]
+          "observacionesASF": 215.6,
+          "estatusAuditoria": "Auditoría integral n.º 929 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 3 acciones promovidas; $215.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 929,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 229-362. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3313,12 +3304,12 @@ window.AUDIT_DB = {
           "fismdf": 227.3,
           "predial": 0.0,
           "dependencia": 55.8,
-          "observacionesASF": 78.5,
-          "estatusAuditoria": "Diferencias en estimaciones de obra en pasos a desnivel urbanos.",
-          "proyectosAuditados": [
-            "Paso Superior Siervo de la Nación",
-            "Clínica Poniente Morelia"
-          ]
+          "observacionesASF": 90.7,
+          "estatusAuditoria": "Auditoría integral n.º 1274 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 2 acciones promovidas; $90.7 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1274,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 226-405. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Uruapan",
@@ -3330,12 +3321,12 @@ window.AUDIT_DB = {
           "fismdf": 169.6,
           "predial": 0.0,
           "dependencia": 70.9,
-          "observacionesASF": 65.0,
-          "estatusAuditoria": "Licitaciones de obra directa comunitaria bajo observación.",
-          "proyectosAuditados": [
-            "Teleférico Uruapan Conectividad",
-            "Seguridad Comunitaria del Sombrero"
-          ]
+          "observacionesASF": 1.1,
+          "estatusAuditoria": "Auditoría integral n.º 1281 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $1.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1281,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 276-406. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3373,12 +3364,12 @@ window.AUDIT_DB = {
           "fismdf": 86.5,
           "predial": 282.1,
           "dependencia": 55.2,
-          "observacionesASF": 54.0,
-          "estatusAuditoria": "Deuda histórica con CFE por bombeo del SAPAC (agua potable).",
-          "proyectosAuditados": [
-            "Rehabilitación de Pozos SAPAC",
-            "Vialidades Palmira"
-          ]
+          "observacionesASF": 111.0,
+          "estatusAuditoria": "Auditoría integral n.º 1313 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 3 acciones promovidas; $111.0 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1313,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 191-410. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Jiutepec",
@@ -3390,12 +3381,12 @@ window.AUDIT_DB = {
           "fismdf": 52.8,
           "predial": 90.6,
           "dependencia": 60.4,
-          "observacionesASF": 28.5,
-          "estatusAuditoria": "Contratos de recolección de basura observados.",
-          "proyectosAuditados": [
-            "Alumbrado Civac Industrial",
-            "Pavimentación Tejalpa"
-          ]
+          "observacionesASF": 7.7,
+          "estatusAuditoria": "Auditoría integral n.º 1318 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $7.7 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1318,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 213-410. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3433,12 +3424,12 @@ window.AUDIT_DB = {
           "fismdf": 31.9,
           "predial": 205.5,
           "dependencia": 28.9,
-          "observacionesASF": 48.0,
-          "estatusAuditoria": "Licitaciones de permisos turísticos en Punta Mita bajo análisis.",
-          "proyectosAuditados": [
-            "Vialidad Bucerías",
-            "Malecón La Cruz de Huanacaxtle"
-          ]
+          "observacionesASF": 43.9,
+          "estatusAuditoria": "Auditoría integral n.º 1366 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $43.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1366,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 173-416. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Tepic (Capital)",
@@ -3450,12 +3441,12 @@ window.AUDIT_DB = {
           "fismdf": 74.0,
           "predial": 63.1,
           "dependencia": 76.8,
-          "observacionesASF": 41.0,
-          "estatusAuditoria": "Revisión en compras de maquinaria para SIAPA Tepic.",
-          "proyectosAuditados": [
-            "Colector Colosio",
-            "Ciudad de las Artes Indígenas"
-          ]
+          "observacionesASF": 27.9,
+          "estatusAuditoria": "Auditoría integral n.º 1379 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 4 acciones promovidas; $27.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1379,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 266-417. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3493,13 +3484,12 @@ window.AUDIT_DB = {
           "fismdf": 226.2,
           "predial": 1450.7,
           "dependencia": 57.9,
-          "observacionesASF": 155.0,
-          "estatusAuditoria": "Auditoría en contratos del sistema de cámaras de seguridad y proyectos de regeneración del centro.",
-          "proyectosAuditados": [
-            "Puente Churubusco-Constitución",
-            "Escudo Monterrey",
-            "Regeneración Ocampo"
-          ]
+          "observacionesASF": 31.9,
+          "estatusAuditoria": "Auditoría integral n.º 1444 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $31.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1444,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 226-425. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "San Pedro Garza García",
@@ -3511,13 +3501,12 @@ window.AUDIT_DB = {
           "fismdf": 8.2,
           "predial": 905.1,
           "dependencia": 45.9,
-          "observacionesASF": 28.0,
-          "estatusAuditoria": "El municipio con mayor autonomía financiera del país (solo 38% dependencia); observaciones mínimas de forma.",
-          "proyectosAuditados": [
-            "Seguridad San Pedro Blindado",
-            "Interconexión Lázaro Cárdenas-Morones Prieto",
-            "Parques La Mexicana"
-          ]
+          "observacionesASF": 64.5,
+          "estatusAuditoria": "Auditoría integral n.º 1451 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 5 acciones promovidas; $64.5 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1451,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 250-426. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Guadalupe",
@@ -3529,12 +3518,12 @@ window.AUDIT_DB = {
           "fismdf": 76.2,
           "predial": 376.6,
           "dependencia": 68.0,
-          "observacionesASF": 72.0,
-          "estatusAuditoria": "Observaciones por retraso en obras de drenaje pluvial.",
-          "proyectosAuditados": [
-            "Drenaje Pluvial Eloy Cavazos",
-            "Parque Río La Silla"
-          ]
+          "observacionesASF": 22.0,
+          "estatusAuditoria": "Auditoría integral n.º 1428 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $22.0 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1428,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 200-423. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Apodaca",
@@ -3546,12 +3535,12 @@ window.AUDIT_DB = {
           "fismdf": 61.7,
           "predial": 346.6,
           "dependencia": 61.5,
-          "observacionesASF": 65.0,
-          "estatusAuditoria": "Inversiones en parques industriales bajo escrutinio de catastro.",
-          "proyectosAuditados": [
-            "Paso Superior Carretera Laredo",
-            "Modernización de Vialidades Industriales"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1409 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1409,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 168-421. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3589,12 +3578,12 @@ window.AUDIT_DB = {
           "fismdf": 186.4,
           "predial": 146.0,
           "dependencia": 73.9,
-          "observacionesASF": 68.0,
-          "estatusAuditoria": "Contratos millonarios por traslado foráneo de basura no licitados.",
-          "proyectosAuditados": [
-            "Centro Integral de Revalorización de Residuos",
-            "Rescate del Zócalo"
-          ]
+          "observacionesASF": 85.8,
+          "estatusAuditoria": "Auditoría integral n.º 1490 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $85.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1490,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 230-430. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Salina Cruz",
@@ -3606,12 +3595,12 @@ window.AUDIT_DB = {
           "fismdf": 49.1,
           "predial": 22.9,
           "dependencia": 73.3,
-          "observacionesASF": 44.0,
-          "estatusAuditoria": "Observaciones en polígonos industriales del Corredor Interoceánico.",
-          "proyectosAuditados": [
-            "Rompeolas Oeste Salina Cruz",
-            "Ampliación Puerto Petrolero"
-          ]
+          "observacionesASF": 24.4,
+          "estatusAuditoria": "Auditoría integral n.º 1492 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 2 acciones promovidas; $24.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1492,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 242-430. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Juchitán de Zaragoza",
@@ -3623,12 +3612,12 @@ window.AUDIT_DB = {
           "fismdf": null,
           "predial": null,
           "dependencia": null,
-          "observacionesASF": 52.0,
-          "estatusAuditoria": "Fondos para reconstrucción de mercado y drenaje colapsado.",
-          "proyectosAuditados": [
-            "Drenaje Sanitario Juchitán",
-            "Rehabilitación Casa de la Cultura"
-          ]
+          "observacionesASF": 41.6,
+          "estatusAuditoria": "Auditoría integral n.º 1485 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $41.6 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1485,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 202-430. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3666,13 +3655,12 @@ window.AUDIT_DB = {
           "fismdf": 453.5,
           "predial": 841.5,
           "dependencia": 67.4,
-          "observacionesASF": 128.0,
-          "estatusAuditoria": "Pliego en cobros de parquímetros, contratos de alumbrado y bacheo.",
-          "proyectosAuditados": [
-            "Paseo Bravo Iluminación",
-            "Relaminación 11 Norte-Sur",
-            "Seguridad en Juntas Auxiliares"
-          ]
+          "observacionesASF": 63.5,
+          "estatusAuditoria": "Auditoría integral n.º 1557 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 7 acciones promovidas; $63.5 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1557,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 238-438. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Tehuacán",
@@ -3684,12 +3672,12 @@ window.AUDIT_DB = {
           "fismdf": 162.8,
           "predial": 0.0,
           "dependencia": 64.3,
-          "observacionesASF": 59.0,
-          "estatusAuditoria": "Crisis y multas por disposición clandestina de basura en Tehuacán.",
-          "proyectosAuditados": [
-            "Planta de Tratamiento Aguas Residuales",
-            "Bacheo Avenida Reforma"
-          ]
+          "observacionesASF": 26.4,
+          "estatusAuditoria": "Auditoría integral n.º 1563 de la ASF a la Cuenta Pública 2024 (tercera entrega): 6 resultados con observación y 8 acciones promovidas; $26.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1563,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 262-439. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "San Pedro Cholula",
@@ -3701,12 +3689,12 @@ window.AUDIT_DB = {
           "fismdf": 76.9,
           "predial": 0.0,
           "dependencia": 69.0,
-          "observacionesASF": 24.0,
-          "estatusAuditoria": "Observaciones por destino de derechos turísticos en zona piramidal.",
-          "proyectosAuditados": [
-            "Restauración Templo San Gabriel",
-            "Pavimentación Zonas Arqueológicas"
-          ]
+          "observacionesASF": 13.2,
+          "estatusAuditoria": "Auditoría integral n.º 1561 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 6 acciones promovidas; $13.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1561,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 250-439. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3744,13 +3732,12 @@ window.AUDIT_DB = {
           "fismdf": 185.8,
           "predial": 1628.0,
           "dependencia": 39.5,
-          "observacionesASF": 46.0,
-          "estatusAuditoria": "Cuentas claras y alta eficiencia recaudatoria; revisión en apoyos escolares directos.",
-          "proyectosAuditados": [
-            "Polideportivo San Pedro Mártir",
-            "Subcomandancia Sur Seguridad",
-            "Bacheo Nocturno"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1607 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1607,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 239-445. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "El Marqués",
@@ -3762,12 +3749,12 @@ window.AUDIT_DB = {
           "fismdf": 58.3,
           "predial": 605.0,
           "dependencia": 24.1,
-          "observacionesASF": 22.0,
-          "estatusAuditoria": "Gran captación de predial industrial; observaciones mínimas.",
-          "proyectosAuditados": [
-            "Paso Superior La Cañada",
-            "Drenaje Pluvial Saldarriaga"
-          ]
+          "observacionesASF": 24.1,
+          "estatusAuditoria": "Auditoría integral n.º 1599 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 2 acciones promovidas; $24.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1599,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 194-444. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "San Juan del Río",
@@ -3779,12 +3766,12 @@ window.AUDIT_DB = {
           "fismdf": 94.6,
           "predial": 258.8,
           "dependencia": 52.1,
-          "observacionesASF": 34.0,
-          "estatusAuditoria": "Fondos para obras de contención del Río San Juan.",
-          "proyectosAuditados": [
-            "Dique Rompedor El Carrizo",
-            "Rehabilitación Centro Histórico"
-          ]
+          "observacionesASF": 42.8,
+          "estatusAuditoria": "Auditoría integral n.º 1609 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 5 acciones promovidas; $42.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1609,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 247-445. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3822,13 +3809,12 @@ window.AUDIT_DB = {
           "fismdf": 293.9,
           "predial": 1013.5,
           "dependencia": 37.0,
-          "observacionesASF": 88.0,
-          "estatusAuditoria": "Auditoría a licitaciones de repavimentación en Zona Hotelera.",
-          "proyectosAuditados": [
-            "Puente Nichupté Conexión",
-            "Bulevar Colosio Fase II",
-            "Cámaras Turísticas C5"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1640 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1640,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 174-448. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Solidaridad (Playa del Carmen)",
@@ -3840,12 +3826,12 @@ window.AUDIT_DB = {
           "fismdf": 95.3,
           "predial": 635.8,
           "dependencia": 22.4,
-          "observacionesASF": 65.0,
-          "estatusAuditoria": "Revisión en el cobro y destino del Derecho de Saneamiento Ambiental hotelero.",
-          "proyectosAuditados": [
-            "Rehabilitación 5ta Avenida",
-            "Contención Sargazo Playas"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1648 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1648,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 257-449. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Tulum",
@@ -3857,12 +3843,12 @@ window.AUDIT_DB = {
           "fismdf": 62.2,
           "predial": 203.5,
           "dependencia": 28.1,
-          "observacionesASF": 42.0,
-          "estatusAuditoria": "Crecimiento vertiginoso; escrutinio en licencias ambientales y de construcción.",
-          "proyectosAuditados": [
-            "Acceso a Parque del Jaguar",
-            "Drenaje Sanitario Tulum Centro"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1649 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1649,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 275-449. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3900,13 +3886,12 @@ window.AUDIT_DB = {
           "fismdf": 123.7,
           "predial": 517.5,
           "dependencia": 59.9,
-          "observacionesASF": 64.0,
-          "estatusAuditoria": "Crisis del agua (presa El Realito) y gastos emergentes en pozos profundos.",
-          "proyectosAuditados": [
-            "Plan Emergente del Agua Pozos",
-            "Paso a Desnivel El Saucito",
-            "Alumbrado Táctico"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1702 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1702,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 248-455. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Soledad de Graciano Sánchez",
@@ -3918,12 +3903,12 @@ window.AUDIT_DB = {
           "fismdf": 46.8,
           "predial": 73.4,
           "dependencia": 79.6,
-          "observacionesASF": 38.0,
-          "estatusAuditoria": "Observaciones en adjudicaciones directas de pavimentación.",
-          "proyectosAuditados": [
-            "Puente Superior Quintas de la Hacienda",
-            "Clínica Rosa Municipal"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1709 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1709,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 257-456. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -3961,13 +3946,12 @@ window.AUDIT_DB = {
           "fismdf": 165.9,
           "predial": 868.1,
           "dependencia": 63.9,
-          "observacionesASF": 78.0,
-          "estatusAuditoria": "Observación en gastos de operativos policiales y combustible.",
-          "proyectosAuditados": [
-            "Paso Superior Humaya",
-            "Reencarpetado Obregón Sur",
-            "Dren Bacurimí"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1762 de la ASF a la Cuenta Pública 2024 (tercera entrega): 1 resultado con observación y 1 acción promovida; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1762,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 191-462. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Mazatlán",
@@ -3979,12 +3963,12 @@ window.AUDIT_DB = {
           "fismdf": 75.7,
           "predial": 434.7,
           "dependencia": 55.4,
-          "observacionesASF": 85.0,
-          "estatusAuditoria": "Laudos millonarios por contratos de luminarias Azteca Lighting.",
-          "proyectosAuditados": [
-            "Colector Sanitario Insurgentes",
-            "Cámaras Malecón Mazatlán"
-          ]
+          "observacionesASF": 70.1,
+          "estatusAuditoria": "Auditoría integral n.º 1767 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 6 acciones promovidas; $70.1 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1767,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 222-462. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4022,13 +4006,12 @@ window.AUDIT_DB = {
           "fismdf": 175.2,
           "predial": 956.0,
           "dependencia": 48.4,
-          "observacionesASF": 65.0,
-          "estatusAuditoria": "Auditoría a la flotilla de patrullas eléctricas solares; cuentas transparentes.",
-          "proyectosAuditados": [
-            "Patrullas Eléctricas Sonora",
-            "Paso a Desnivel Colosio-Solidaridad",
-            "Bacheo Nocturno"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1809 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1809,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 202-467. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Cajeme (Cd. Obregón)",
@@ -4040,12 +4023,12 @@ window.AUDIT_DB = {
           "fismdf": 81.7,
           "predial": 205.5,
           "dependencia": 70.0,
-          "observacionesASF": 58.0,
-          "estatusAuditoria": "Diferencias en aplicación de recursos federales de agua potable.",
-          "proyectosAuditados": [
-            "Planta Potabilizadora Obregón",
-            "Seguridad en Comisarías"
-          ]
+          "observacionesASF": 9.2,
+          "estatusAuditoria": "Auditoría integral n.º 1803 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 3 acciones promovidas; $9.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1803,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 176-466. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4083,12 +4066,12 @@ window.AUDIT_DB = {
           "fismdf": 209.5,
           "predial": 140.4,
           "dependencia": 73.1,
-          "observacionesASF": 95.0,
-          "estatusAuditoria": "Observaciones en la nueva planta potabilizadora Carrizal y cárcamos.",
-          "proyectosAuditados": [
-            "Planta Potabilizadora Carrizal II",
-            "Malecón Villahermosa Rescate"
-          ]
+          "observacionesASF": 8.5,
+          "estatusAuditoria": "Auditoría integral n.º 1845 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $8.5 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1845,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 180-471. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Paraíso (Dos Bocas)",
@@ -4100,12 +4083,12 @@ window.AUDIT_DB = {
           "fismdf": 92.8,
           "predial": 8.5,
           "dependencia": 84.4,
-          "observacionesASF": 44.0,
-          "estatusAuditoria": "Fiscalización especial de derechos de construcción por el complejo petroquímico.",
-          "proyectosAuditados": [
-            "Acceso Terrestre Dos Bocas",
-            "Hospital General Paraíso"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1855 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1855,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 235-473. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4143,12 +4126,12 @@ window.AUDIT_DB = {
           "fismdf": 93.8,
           "predial": 95.6,
           "dependencia": 92.2,
-          "observacionesASF": 78.0,
-          "estatusAuditoria": "Obras viales de enlace a la nueva sede de la Agencia Nacional de Aduanas (ANAM).",
-          "proyectosAuditados": [
-            "Puente Vehicular Calzada de los Héroes",
-            "Colector Campeche"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1907 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1907,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 230-479. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Reynosa",
@@ -4160,12 +4143,12 @@ window.AUDIT_DB = {
           "fismdf": 117.8,
           "predial": 370.8,
           "dependencia": 73.1,
-          "observacionesASF": 92.0,
-          "estatusAuditoria": "Diferencias en comprobación de fondos de auxilio a la migración y drenaje.",
-          "proyectosAuditados": [
-            "Drenaje Pluvial Reynosa Poniente",
-            "Presa Rompepicos Granjas"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 1912 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1912,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 240-479. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Tampico",
@@ -4177,12 +4160,12 @@ window.AUDIT_DB = {
           "fismdf": 57.4,
           "predial": 58.3,
           "dependencia": 71.4,
-          "observacionesASF": 36.0,
-          "estatusAuditoria": "Revisión en el fideicomiso del Centro de Convenciones y Laguna del Carpintero.",
-          "proyectosAuditados": [
-            "Malecón Laguna del Carpintero",
-            "Dique Camalote"
-          ]
+          "observacionesASF": 37.0,
+          "estatusAuditoria": "Auditoría integral n.º 1918 de la ASF a la Cuenta Pública 2024 (tercera entrega): 5 resultados con observación y 6 acciones promovidas; $37.0 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1918,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 259-480. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4220,12 +4203,12 @@ window.AUDIT_DB = {
           "fismdf": 20.7,
           "predial": 22.9,
           "dependencia": 76.5,
-          "observacionesASF": 18.5,
-          "estatusAuditoria": "Comprobación de obras turísticas del centro histórico.",
-          "proyectosAuditados": [
-            "Rehabilitación Conjunto Franciscano",
-            "Alumbrado Público"
-          ]
+          "observacionesASF": 11.9,
+          "estatusAuditoria": "Auditoría integral n.º 1995 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 4 acciones promovidas; $11.9 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1995,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 272-489. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Apizaco",
@@ -4237,11 +4220,12 @@ window.AUDIT_DB = {
           "fismdf": 28.9,
           "predial": 30.4,
           "dependencia": 73.7,
-          "observacionesASF": 16.0,
-          "estatusAuditoria": "Diferencias en cobro de parquímetros y seguridad.",
-          "proyectosAuditados": [
-            "Modernización Bulevar Emilio Sánchez Piedras"
-          ]
+          "observacionesASF": 7.8,
+          "estatusAuditoria": "Auditoría integral n.º 1949 de la ASF a la Cuenta Pública 2024 (tercera entrega): 1 resultado con observación y 1 acción promovida; $7.8 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 1949,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 167-483. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4279,13 +4263,12 @@ window.AUDIT_DB = {
           "fismdf": 196.4,
           "predial": 180.8,
           "dependencia": 71.8,
-          "observacionesASF": 74.0,
-          "estatusAuditoria": "Auditoría a obras de rescate del Centro Histórico y colectores pluviales.",
-          "proyectosAuditados": [
-            "Colector Lafragua",
-            "Rehabilitación Los Portales",
-            "Equipamiento Policía Municipal"
-          ]
+          "observacionesASF": 0.0,
+          "estatusAuditoria": "Auditoría integral n.º 2117 de la ASF a la Cuenta Pública 2024 (tercera entrega): 0 resultados con observación y 0 acciones promovidas; $0.0 mdp por aclarar. Sin monto pendiente de aclarar al corte del informe.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2117,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 278-505. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Xalapa (Capital)",
@@ -4297,12 +4280,12 @@ window.AUDIT_DB = {
           "fismdf": 179.7,
           "predial": 129.2,
           "dependencia": 74.7,
-          "observacionesASF": 52.0,
-          "estatusAuditoria": "Diferencias en estimaciones de obra vial en Las Trancas.",
-          "proyectosAuditados": [
-            "Paso Superior Las Trancas",
-            "Colector Quetzalcóatl"
-          ]
+          "observacionesASF": 198.2,
+          "estatusAuditoria": "Auditoría integral n.º 2119 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 6 acciones promovidas; $198.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2119,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 282-506. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Coatzacoalcos",
@@ -4314,12 +4297,12 @@ window.AUDIT_DB = {
           "fismdf": 141.7,
           "predial": 123.3,
           "dependencia": 76.9,
-          "observacionesASF": 68.0,
-          "estatusAuditoria": "Foco de atención por el Corredor Interoceánico; obras de saneamiento.",
-          "proyectosAuditados": [
-            "Rehabilitación Malecón Costero",
-            "Presa Yuribia Acuerdos"
-          ]
+          "observacionesASF": 198.2,
+          "estatusAuditoria": "Auditoría integral n.º 2058 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 7 acciones promovidas; $198.2 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2058,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 185-497. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4357,13 +4340,12 @@ window.AUDIT_DB = {
           "fismdf": 294.4,
           "predial": 1174.5,
           "dependencia": 44.0,
-          "observacionesASF": 42.0,
-          "estatusAuditoria": "Finanzas sanas y alta calificación crediticia; revisión de pavimentación en comisarías.",
-          "proyectosAuditados": [
-            "Parque de la Paz Renovación",
-            "Paseo de Montejo Ciclovía",
-            "Atención Integral Comisarías"
-          ]
+          "observacionesASF": 91.4,
+          "estatusAuditoria": "Auditoría integral n.º 2156 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 3 acciones promovidas; $91.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2156,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 223-510. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Kanasín",
@@ -4375,12 +4357,12 @@ window.AUDIT_DB = {
           "fismdf": 45.7,
           "predial": 18.6,
           "dependencia": 74.8,
-          "observacionesASF": 22.0,
-          "estatusAuditoria": "Auditoría en obras de interconexión con el Tren Maya.",
-          "proyectosAuditados": [
-            "Estación Teya Conectividad",
-            "Mercado Municipal Kanasín"
-          ]
+          "observacionesASF": 1.3,
+          "estatusAuditoria": "Auditoría integral n.º 2152 de la ASF a la Cuenta Pública 2024 (tercera entrega): 2 resultados con observación y 2 acciones promovidas; $1.3 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2152,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 214-509. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     },
@@ -4418,12 +4400,12 @@ window.AUDIT_DB = {
           "fismdf": 38.6,
           "predial": 59.5,
           "dependencia": 68.5,
-          "observacionesASF": 32.0,
-          "estatusAuditoria": "Revisión en cobro de derechos del Centro Histórico y parquímetros.",
-          "proyectosAuditados": [
-            "Rehabilitación Callejones del Centro",
-            "Alumbrado La Bufa"
-          ]
+          "observacionesASF": 3.0,
+          "estatusAuditoria": "Auditoría integral n.º 2199 de la ASF a la Cuenta Pública 2024 (tercera entrega): 4 resultados con observación y 4 acciones promovidas; $3.0 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2199,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 284-516. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         },
         {
           "nombre": "Fresnillo",
@@ -4435,12 +4417,12 @@ window.AUDIT_DB = {
           "fismdf": 141.8,
           "predial": 83.5,
           "dependencia": 81.3,
-          "observacionesASF": 54.0,
-          "estatusAuditoria": "Fondos extraordinarios de seguridad y equipamiento táctico.",
-          "proyectosAuditados": [
-            "Base de Operaciones Mixtas",
-            "Pavimentación Colonia Industrial"
-          ]
+          "observacionesASF": 3.4,
+          "estatusAuditoria": "Auditoría integral n.º 2189 de la ASF a la Cuenta Pública 2024 (tercera entrega): 3 resultados con observación y 3 acciones promovidas; $3.4 mdp por aclarar.",
+          "proyectosAuditados": [],
+          "asfAuditoria": 2189,
+          "asfFuente": "ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, informe consolidado, pp. 197-514. La auditoría integral puede no ser la única que la ASF practicó al municipio.",
+          "asfEstado": "oficial"
         }
       ]
     }
