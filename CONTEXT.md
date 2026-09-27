@@ -3204,6 +3204,41 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (huachicol fiscal: el plan de Antigravity, cotejado con la ley)
+
+Antigravity entregó (27-09-2026) una investigación con propuestas para
+integrar el huachicol fiscal. Se cotejó contra los textos vigentes de la
+Cámara de Diputados (LIEPS, reforma DOF 07-11-2025; LCF, DOF 03-01-2024;
+CFF, DOF 09-04-2026). Sello 20260927y. Script:
+`herramientas/integrar_huachicol_ley.py` (idempotente, solo el auditor).
+
+**Integrado (oficial, con artículo y documento):**
+- `huachicol_fiscal.marco_legal`: cuotas de IEPS por litro 2026 (menor a
+  91 octanos $6.7001, 91 o más $5.6579, diésel $7.3634; art. 2o., fr. I,
+  inciso D); cuotas del art. 2o.-A para estados (59.1390, 72.1605 y 49.0817
+  centavos); reparto (LCF arts. 2o., fr. VII, y 4o.-A, 9/11 a las
+  entidades); controles volumétricos (CFF art. 28, fr. I, apartado B);
+  contrabando y penas (CFF arts. 102, 103 fr. XXIII y 104).
+- Panel lateral del huachicol: nueva sección «Lo que dice la ley».
+- Glosario: «Huachicol Fiscal», «Controles Volumétricos», «Contrabando
+  (Delito Fiscal)».
+- Preguntas frecuentes, casilla 4: «¿Qué es el huachicol fiscal y cómo te
+  afecta si no tienes una gasolinera?».
+
+**Rechazado o corregido, y por qué:**
+
+| Propuesta de Antigravity | Dictamen |
+|---|---|
+| Cuotas de $6.17 a $6.78 por litro | Erróneas. La ley vigente dice $6.7001, $5.6579 y $7.3634 |
+| $177,000 mdp al año, $485 mdp diarios, $14,700 mdp al mes | Sin documento oficial. La única estimación con nombre es la del Observatorio Ciudadano de Energía ($123,000 mdp, 2025), ya marcada pendiente |
+| $550,000 a $600,000 mdp acumulados 2019–2024; «30 % a 35 % del IEPS» | Sin fuente |
+| Importaciones de «aceites» crecieron 1,000 % a 2,000 % | Sin fuente |
+| Descuento de $2 a $4 por litro | Sin fuente |
+| 350 hospitales, IMSS-Bienestar, Ramo 36 | Equivalencias montadas sobre una cifra sin fuente |
+| Expediente forense #7 con monto «observado» | No hay auditoría de la ASF con ese monto; los expedientes son auditorías. Queda pendiente buscar si la ASF auditó a la ANAM por combustibles |
+| «Contador de 6 a 7 casos», `assets/js/...` | Antigravity trabaja con una copia vieja: el auditor ya tiene 10 expedientes y sus archivos están en `assets/auditor/`. `assets/js` es de la Enciclopedia congelada |
+| «50 aduanas», «Trazabilidad Integral del IEPS», reforma de responsabilidad de agentes aduanales | Sin cotejar; no se publica hasta tenerlo del documento |
+
 ### Hecho (el auditor, separado de la Enciclopedia)
 
 Decisión del autor (27-09-2026): la Enciclopedia es un proyecto aparte,
@@ -3395,7 +3430,15 @@ auditor, por tipo:
    Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** pérdida de nueve megaobras, costo
    del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
-   por entidad, dietas locales, CDMX en EFIPEM.
+   por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del
+   huachicol fiscal.
+5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
+   en el control de importaciones de combustibles (daría un expediente con
+   monto oficial); cotejar en el DOF la reforma a la Ley Aduanera de
+   19-11-2025 sobre agentes aduanales antes de mencionarla.
+6. **Aviso a otros agentes:** quien trabaje con una copia local debe hacer
+   `git pull` y escribir en `assets/auditor/`. Antigravity propuso cambios
+   sobre `assets/js`, que ahora es de la Enciclopedia congelada.
 
 Resuelto en el barrido: anclas de la escala de Megaobras (usaban el bloque
 `macro` sin fuente: Ramo 33 $1,114,800 contra $1,041,892.9 oficiales;

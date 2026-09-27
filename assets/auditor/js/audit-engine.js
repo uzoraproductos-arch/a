@@ -8626,6 +8626,19 @@
             radarPaso(2, 'Cada 1 % de ese impuesto que se evada equivale a <b>' + mdpH(J.uno_por_ciento_mdp) + '</b> (' + mdpH(J.ieps_combustibles_2027_mdp) + ' ÷ 100). Es una regla de tres para dar tamaño, no una estimación de cuánto se evade.', 'derivado') +
             radarPaso(3, 'De la cuota estatal del IEPS a gasolinas, 9 de cada 11 pesos van a los estados y una parte a sus municipios (Ley de Coordinación Fiscal, art. 4-A): lo que se evade también se lo quitan a tu estado y a tu municipio.', 'oficial') +
           '</ol>') +
+          (H.marco_legal ? (function(M) {
+            var c = M.cuotas_federales_2026, e = M.cuotas_estatales_2026, d = M.delitos;
+            var p4 = function(n) { return '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 4 }); };
+            var c4 = function(n) { return n.toLocaleString('es-MX', { minimumFractionDigits: 4 }) + ' centavos'; };
+            return radarSec('Lo que dice la ley ' + chipEstado(M.estado),
+              '<ul class="pd-lista">' +
+              '<li><b>Lo que tú pagas por litro en 2026</b> (' + glosEsc(c.articulo) + '): gasolina menor a 91 octanos ' + p4(c.gasolina_menor_91) + ', de 91 octanos o más ' + p4(c.gasolina_91_o_mas) + ', diésel ' + p4(c.diesel) + '. ' + glosEsc(c.nota) + ' ' + hf(c.fuente) + '</li>' +
+              '<li><b>Lo que va directo a tu estado y tu municipio</b> (' + glosEsc(e.articulo) + '): ' + c4(e.gasolina_menor_91_centavos) + ', ' + c4(e.gasolina_91_o_mas_centavos) + ' y ' + c4(e.diesel_centavos) + ' por litro, en el mismo orden. ' + hf(e.fuente) + '</li>' +
+              '<li><b>Cómo se reparte.</b> ' + glosEsc(M.reparto.texto) + ' ' + hf(M.reparto.fuente) + '</li>' +
+              '<li><b>Cómo se vigila.</b> ' + glosEsc(d.controles) + '</li>' +
+              '<li><b>Cuándo es delito.</b> ' + glosEsc(d.contrabando) + ' ' + glosEsc(d.penas) + ' ' + hf(d.fuente) + '</li>' +
+              '</ul>');
+          })(H.marco_legal) : '') +
           radarSec('Lo que se ha dicho y aún no pudimos verificar', '<ul class="pd-lista">' +
             '<li>' + chipEstado(A.estado) + ' Segundo Informe de Gobierno: del ' + glosEsc(A.periodo) + ' la Agencia Nacional de Aduanas detectó ' + A.casos.toLocaleString('es-MX') + ' casos de posible contrabando de hidrocarburos, ' +
               A.litros_millones.toLocaleString('es-MX') + ' millones de litros y unos ' + mdpH(A.evasion_mdp) + ' de impuestos que se intentó evadir; canceló ' + A.sellos_cancelados.toLocaleString('es-MX') + ' sellos digitales y presentó ' + A.denuncias + ' denuncias. ' + glosEsc(A.por_que_pendiente) + ' ' + hf(A.fuente) + '</li>' +
