@@ -3198,6 +3198,41 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   el diccionario de columnas de Descargas; son detalle de una fila, no
   bloques de contexto.
 
+### Hecho (megaobras: la pérdida anual, con estados financieros oficiales)
+
+Sello 20260927o. Solo en el auditor (`megaobrasOficialBase()`, en memoria);
+la Enciclopedia congelada conserva sus cifras de antes.
+
+- **Datos nuevos** en `simulador_megaobras.operacion_oficial` (la
+  Enciclopedia no lee esa llave):
+  - Tren Maya, S.A. de C.V. (H0M), Estado de Actividades 2024, Cuenta
+    Pública 2024, Tomo VII: ingresos por servicios $275.8 mdp, gasto total
+    $2,837.2 mdp, transferencias federales $13,335.4 mdp, otros ingresos
+    $12,890.3 mdp, resultado contable +$23,664.3 mdp. Sin transferencias ni
+    otros ingresos: **−$2,561.4 mdp** (derivado). Sus ingresos cubren el
+    9.7 % de su gasto (el simulador decía 6.9 %, sin fuente).
+  - AIFA, S.A. de C.V. (HZI), mismo documento: ingresos $2,578.2 mdp,
+    gasto $2,288.1 mdp, transferencias $1,510.2 mdp. Sin transferencias,
+    **+$290.2 mdp**: no tuvo pérdida de operación en 2024 (el simulador le
+    ponía $1,460 mdp al año).
+  - IPAB: bonos por **$1,086,952.8 mdp** al 31-12-2025 (corto plazo
+    $208,920.9 + largo $878,031.9), estados financieros del IPAB, p. 3
+    (SHA-256 e577ee96…). Ramo 34 ejercido en 2024: **$62,489.4 mdp**
+    (oficial, Cuenta Pública); suma 2014-2025: $431,289.2 mdp (derivado).
+- **Pérdida anual documentada: $65,050.8 mdp** (derivado), $2,062.75 por
+  segundo, sobre 3 de las 12 obras. Antes: $80,200.1 mdp sin fuente. Las
+  otras nueve entran con cero y la marca `perdida_pendiente`: dicen
+  «pendiente» en la ficha, la mesa 2, la lista comparativa y el radar, y
+  no inflan la suma. El reloj de la calculadora y el radar de la portada
+  toman la cifra nueva.
+- **Textos retirados del auditor por no tener fuente:** desgloses de costos
+  de las doce obras (sustituidos por los capítulos del estado de
+  actividades donde lo hay), proyecciones («120 años para el punto de
+  equilibrio», «300 recetas al día», «hasta 2070», «$620 mdd», «700
+  hectáreas»), hallazgos atribuidos a la ASF en siete obras sin informe
+  cotejado («60 % de equipos inservibles», «sobreprecio del 111 %») y tres
+  etiquetas de estatus con juicio sin documento.
+
 ### Hecho (el auditor habla de tú)
 
 - **`index.html`**: instrucciones, descripciones, placeholders y títulos
@@ -3328,8 +3363,12 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
     IPAB para sustituir los $2,470,000 mdp del simulador.
   - Registro original de 2013 del Tren Interurbano (la base abierta empieza
     en 2019).
-  - Los $80,200.1 mdp al año del reloj y la tarjeta del radar dependen de la
-    pérdida: se corrigen cuando la pérdida tenga fuente.
+  - Pérdida anual: resuelta para Tren Maya, AIFA e IPAB (ver Hecho). Falta
+    en las otras nueve; candidatos: estados de actividades de Pemex TRI
+    (Dos Bocas), Birmex (Megafarmacia), Fonadin (FARAC).
+  - FOBAPROA: el costo real de $2,470,000 mdp sigue sin fuente; el saldo
+    documentado es $1,086,952.8 mdp de bonos al cierre de 2025, pero no es
+    la misma magnitud (saldo por pagar, no lo erogado).
 - **Cifras de la Enciclopedia que NO deben pasar al auditor** (la
   Enciclopedia está congelada; esto es un aviso para quien jale datos de
   ella). Las fichas 4.3 (Prestaciones) y 4.5 (Cálculos globales) usan

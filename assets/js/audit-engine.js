@@ -8292,6 +8292,88 @@
   /* Panel lateral de contexto. La informacion densa (metodo, documentos,
      leyes) no se borra: se guarda junto a un boton y se lee en la misma
      ventana lateral del glosario, sin salir del recorrido. */
+  /* Megaobras en el auditor: la pérdida anual, los costos de operación y
+     la proyección que el simulador traía sin documento se sustituyen, en
+     memoria, por lo que dicen los estados financieros oficiales
+     (operacion_oficial). Donde no hay documento, la obra entra con cero
+     y la marca perdida_pendiente: no infla el total y se dice «pendiente».
+     La Enciclopedia congelada no pasa por aquí. */
+  function megaobrasOficialBase() {
+    if (!esAuditor()) return;
+    const sm = DB.simulador_megaobras;
+    const of = sm && sm.operacion_oficial;
+    if (!of || !of.obras) return;
+    const mdp = n => '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+    const PEND_TXT = 'Ningún documento oficial cotejado todavía dice cuánto cuesta operar esta obra ni cuánto ingresa. La pérdida, los costos y cualquier proyección quedan pendientes; no se estiman.';
+    const HALL_PEND = 'Falta cotejar el informe individual de la Auditoría Superior de la Federación del año de esta obra. Mientras tanto no se publica ningún hallazgo.';
+    sm.obras.forEach(o => {
+      const d = of.obras[o.id];
+      const ver = (sm.verificacion && sm.verificacion.obras || {})[o.id];
+      o.estado_campos = o.estado_campos || {};
+      o.costo_unitario_real = 'pendiente de documento: falta el aforo o el volumen oficial de operación.';
+      if (!ver) o.hallazgo_asf = HALL_PEND;
+      const ESTATUS = { 'megafarmacia': 'En operación · cifras pendientes', 'estela-luz': 'Monumento concluido', 'bunker-garcia-luna': 'Uso actual pendiente de documento' };
+      if (ESTATUS[o.id]) o.estatus = ESTATUS[o.id];
+      if (d && o.id === 'fobaproa') {
+        o.ingresos_anuales_mdp = 0;
+        o.costo_operativo_anual_mdp = d.ramo34_ejercido;
+        o.perdida_anual_mdp = d.ramo34_ejercido;
+        o.estado_campos.perdida_anual_mdp = 'oficial';
+        o.estado_campos.desglose = 'oficial';
+        o.desglose_costos_operacion = [{ rubro: 'Ramo 34, apoyo a ahorradores y deudores de la banca, ejercido en ' + d.anio, monto_anual_mdp: d.ramo34_ejercido, icono: '🏛️' }];
+        o.proy_titulo = 'Lo que dicen los documentos: una deuda que sigue viva';
+        o.proyeccion_resumen = 'Al 31 de diciembre de 2025 el IPAB debía ' + mdp(d.saldo_bonos_2025) + ' en bonos (' + mdp(d.saldo_bonos_corto) + ' a corto plazo y ' + mdp(d.saldo_bonos_largo) +
+          ' a largo), según sus estados financieros. Del Ramo 34 salieron ' + mdp(d.ramo34_ejercido) + ' en ' + d.anio + ' y ' + mdp(d.ramo34_2014_2025) +
+          ' de 2014 a 2025 (suma de la Cuenta Pública). Cuánto se pagó de 1998 a 2013 y hasta qué año se pagará siguen pendientes de documento.';
+        o.fuente_operacion = 'cp';
+      } else if (d) {
+        const res = d.resultado_sin_transferencias;
+        o.ingresos_anuales_mdp = d.ingresos_gestion;
+        o.costo_operativo_anual_mdp = d.gastos_totales;
+        o.perdida_anual_mdp = res < 0 ? -res : 0;
+        o.estado_campos.perdida_anual_mdp = 'derivado';
+        o.estado_campos.desglose = 'oficial';
+        o.desglose_costos_operacion = d.gastos.map(g => ({ rubro: g.rubro + ' (' + d.anio + ')', monto_anual_mdp: g.mdp, icono: '📄' }));
+        const cubre = d.gastos_totales ? (d.ingresos_gestion / d.gastos_totales * 100) : 0;
+        o.proy_titulo = 'Lo que dicen sus estados financieros de ' + d.anio;
+        o.proyeccion_resumen = 'En ' + d.anio + ' cobró ' + mdp(d.ingresos_gestion) + ' por sus servicios y gastó ' + mdp(d.gastos_totales) +
+          ': sus ingresos propios cubrieron el ' + cubre.toFixed(1) + ' % de su gasto. Además recibió ' + mdp(d.transferencias) + ' de transferencias federales y ' +
+          mdp(d.otros_ingresos) + ' de otros ingresos, con lo que cerró con un resultado contable de ' + mdp(d.resultado_ejercicio) + '. ' +
+          (res < 0
+            ? 'Sin esas transferencias ni otros ingresos, operar le habría costado ' + mdp(-res) + ' más de lo que cobró: esa es su pérdida de operación.'
+            : 'Sin esas transferencias, su operación todavía deja ' + mdp(res) + ' a favor: no registra pérdida de operación ese año. Lo que pesa es lo que costó construirla, que se mide aparte.');
+        o.fuente_operacion = d.fuente;
+      } else {
+        o.perdida_pendiente = true;
+        o.ingresos_anuales_mdp = 0;
+        o.costo_operativo_anual_mdp = 0;
+        o.perdida_anual_mdp = 0;
+        o.desglose_costos_operacion = [];
+        o.proy_titulo = 'Lo que falta documentar';
+        o.proyeccion_resumen = PEND_TXT;
+      }
+      o.perdida_diaria_mdp = o.perdida_anual_mdp / 365;
+      o.perdida_segundo = o.perdida_anual_mdp * 1e6 / 31536000;
+    });
+    const t = sm.totales_consolidados;
+    const anual = sm.obras.reduce((a, o) => a + (o.perdida_anual_mdp || 0), 0);
+    t.perdida_anual_consolidada_mdp = Math.round(anual * 10) / 10;
+    t.perdida_diaria_consolidada_mdp = Math.round(anual / 365 * 100) / 100;
+    t.perdida_segundo_consolidada = Math.round(anual * 1e6 / 31536000 * 100) / 100;
+    t.obras_con_operacion_documentada = sm.obras.filter(o => !o.perdida_pendiente).length;
+    MEGAOBRAS_LOSS_RATE = t.perdida_segundo_consolidada;
+    const reloj = ((DB.calculadora_civica || {}).relojes || {}).fuentes || [];
+    const rm = reloj.find(f => f.id === 'megaobras');
+    if (rm) {
+      rm.anual_mdp = t.perdida_anual_consolidada_mdp;
+      rm.estado = 'derivado';
+      rm.nombre = 'Pérdida anual documentada de las megaobras';
+      rm.fuente = 'Suma de las ' + t.obras_con_operacion_documentada + ' obras de la 2.2 con documento: Tren Maya y AIFA (estados de actividades, Cuenta Pública 2024) y el IPAB (Ramo 34, Cuenta Pública 2024). Las otras ' +
+        (sm.obras.length - t.obras_con_operacion_documentada) + ' quedan pendientes y no entran';
+      rm.que = 'Lo que cuesta cada año tener abiertas las obras que ya tienen documento, más lo que el rescate bancario le cuesta al presupuesto. No es el sobrecosto de construirlas: es el costo de mantenerlas o de pagarlas.';
+    }
+  }
+
   function ctxBoton(titulo, html, ico) {
     return '<button type="button" class="ctx-abrir" data-ctx-titulo="' + glosEsc(titulo) + '" ' +
         'onclick="window.AuditEngine.abrirContexto(this)" aria-haspopup="dialog">' +
@@ -8415,25 +8497,29 @@
       var mayor = obras.length ? obras[0].perdida_anual_mdp || 1 : 1;
       filas = obras.map(function(o) {
         var p = o.perdida_anual_mdp || 0;
-        return radarFila(glosEsc(o.nombre), radarMdp(p),
-          p ? 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0) : 'Sin costo de operación anual registrado en el simulador.',
+        return radarFila(glosEsc(o.nombre), o.perdida_pendiente ? chipEstado('pendiente') : radarMdp(p),
+          o.perdida_pendiente ? 'Sin documento oficial: pendiente, no entra en la suma.' :
+          (p ? (o.id === 'fobaproa' && esAuditor() ? 'Ramo 34 ejercido en 2024 (Cuenta Pública)' : 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0))
+             : (esAuditor() && o.fuente_operacion ? 'Sin pérdida de operación en 2024: sus ingresos por servicios cubren su gasto.' : 'Sin costo de operación anual registrado en el simulador.')),
           p / mayor * 100);
       }).join('');
       var fob = sm.obras.find(function(o) { return /FOBAPROA/.test(o.nombre); });
       var pctFob = fob && total ? (fob.perdida_anual_mdp / total * 100) : 0;
       return {
-        icono: '🚅', estado: 'pendiente',
-        titulo: 'Pérdida operativa de las megaobras',
+        icono: '🚅', estado: esAuditor() ? 'derivado' : 'pendiente',
+        titulo: esAuditor() ? 'Pérdida anual documentada de las megaobras' : 'Pérdida operativa de las megaobras',
         cuerpo:
           radarSec('Qué significa', '<p>Lo que cuesta mantener funcionando cada obra en un año, menos lo que ingresa por operar. Cuando el resultado es negativo, la diferencia se cubre con dinero público: subsidios, transferencias o aportaciones de capital.</p>') +
           radarSec('En qué consiste · las 12 obras del simulador', '<ul class="rc-filas">' + filas + '</ul>') +
           radarSec('Cómo se calcula', '<ol class="rc-pasos">' +
-            radarPaso(1, 'Pérdida de cada obra = costo de operación anual − ingresos anuales.', 'pendiente') +
-            radarPaso(2, 'Se suman las ' + sm.obras.length + ' obras: <b>' + radarMdp(total) + ' al año</b>.', 'derivado') +
+            radarPaso(1, 'Pérdida de cada obra = costo de operación anual − ingresos anuales.' + (esAuditor() ? ' Para el rescate bancario, lo que ejerció el Ramo 34.' : ''), esAuditor() ? 'oficial' : 'pendiente') +
+            radarPaso(2, (esAuditor() ? 'Se suman las ' + (sm.totales_consolidados.obras_con_operacion_documentada || 0) + ' obras con documento; las demás quedan pendientes y no entran' : 'Se suman las ' + sm.obras.length + ' obras') + ': <b>' + radarMdp(total) + ' al año</b>.', 'derivado') +
             radarPaso(3, radarMdp(total) + ' ÷ ' + RADAR_SEG_ANIO.toLocaleString('es-MX') + ' segundos del año = <b>' + radarPesos(total * 1e6 / RADAR_SEG_ANIO, 2) + ' por segundo</b>.', 'derivado') +
             radarPaso(4, 'En los ' + seg.toLocaleString('es-MX') + ' segundos que llevas aquí: ' + radarPesos(total * 1e6 / RADAR_SEG_ANIO, 2) + ' × ' + seg.toLocaleString('es-MX') + ' = <b>' + radarPesos(total * 1e6 / RADAR_SEG_ANIO * seg, 2) + '</b>. Es una equivalencia, no un pago que ocurra en este instante.', 'derivado') +
           '</ol>') +
-          radarSec('Qué conviene saber', '<p>' + (fob ? 'Una sola partida, <b>' + glosEsc(fob.nombre) + '</b>, aporta ' + radarMdp(fob.perdida_anual_mdp) + ': el ' + pctFob.toFixed(1) + ' % del total. Es un rescate financiero, no una obra de infraestructura, y conviene leerla aparte. ' : '') + 'La cifra lleva estado <b>pendiente</b> porque el simulador todavía no documenta la fuente de cada costo y cada ingreso obra por obra: tómela como orden de magnitud, no como dato oficial.</p>'),
+          radarSec('Qué conviene saber', '<p>' + (fob ? 'Una sola partida, <b>' + glosEsc(fob.nombre) + '</b>, aporta ' + radarMdp(fob.perdida_anual_mdp) + ': el ' + pctFob.toFixed(1) + ' % del total. Es un rescate financiero, no una obra de infraestructura, y conviene leerla aparte. ' : '') + (esAuditor()
+            ? 'Tren Maya y AIFA salen de sus estados de actividades en la Cuenta Pública 2024; el IPAB, del Ramo 34 de esa misma Cuenta. Las obras sin documento no se estiman: quedan pendientes y fuera de la suma, así que el total es un piso, no un techo.</p>'
+            : 'La cifra lleva estado <b>pendiente</b> porque el simulador todavía no documenta la fuente de cada costo y cada ingreso obra por obra: tómela como orden de magnitud, no como dato oficial.</p>')),
         acciones: [{ txt: 'Revisar las 12 obras en el módulo 2', fn: function() { seleccionarModuloExplorer('megaobras'); } }]
       };
     }
@@ -19923,7 +20009,9 @@
     const conCifra = sim.obras.filter(o => o.estado_campos && o.estado_campos.inversion_real_mdp && o.estado_campos.inversion_real_mdp !== 'pendiente').length;
     return 'De las ' + sim.obras.length + ' obras, ' + nombres.length + ' ya tienen documentos oficiales cotejados (' + nombres.join(', ') +
       ') y ' + conCifra + ' tienen su costo anclado a la cartera de Hacienda y a la Cuenta Pública. Cada cifra lleva su chip: oficial, derivado o pendiente. ' +
-      'La pérdida operativa, los costos de operación y el costo unitario de todas las obras siguen pendientes de documento, y así se marcan.';
+      (esAuditor()
+        ? 'La pérdida anual ya tiene documento en ' + (sim.totales_consolidados.obras_con_operacion_documentada || 0) + ' obras (Tren Maya y AIFA por sus estados de actividades de la Cuenta Pública 2024; el IPAB por el Ramo 34); en las demás, la pérdida, los costos de operación y el costo unitario siguen pendientes y no se estiman.'
+        : 'La pérdida operativa, los costos de operación y el costo unitario de todas las obras siguen pendientes de documento, y así se marcan.');
   }
 
   function renderSimuladorProcedencia() {
@@ -20754,7 +20842,8 @@
        anual porque no operan. Con el filtro en una de ellas la lista
        salia en blanco y parecia averiada. Se dice con todas sus letras
        y se ofrece el criterio que si tiene cifra. */
-    const todoCero = obras.every(o => !simCompValor(o, orden.id));
+    const todoPend = orden.id === 'perdida' && obras.every(o => o.perdida_pendiente);
+    const todoCero = !todoPend && obras.every(o => !simCompValor(o, orden.id));
     const escalaSobre = sola ? sim.obras : obras;
     const maximo = Math.max.apply(null, escalaSobre.map(o => Math.abs(simCompValor(o, orden.id)))) || 1;
     const fmtOrden = orden.id === 'sobrecosto' ? 'pctS' : 'mdp';
@@ -20839,13 +20928,20 @@
                   '<span class="sim-rank-barra" data-anim-w="' + ((Math.abs(v) / maximo) * 100).toFixed(2) + '" ' +
                     'style="width:0%; background:' + o.badge_color + ';"></span>' +
                 '</span>' +
-                '<span class="sim-rank-val" data-anim-v="' + v + '" data-anim-f="' + fmtOrden + '">' +
-                  simFmt(0, fmtOrden) + '</span>' +
+                (orden.id === 'perdida' && o.perdida_pendiente
+                  ? '<span class="sim-rank-val">' + chipEstado('pendiente') + '</span>'
+                  : '<span class="sim-rank-val" data-anim-v="' + v + '" data-anim-f="' + fmtOrden + '">' +
+                  simFmt(0, fmtOrden) + '</span>') +
               '</button>' +
             '</li>';
           }).join('') +
         '</ol>' +
 
+        (todoPend
+          ? '<p class="sim-rank-cero"><strong>Sin documento todavía.</strong> ' + (sola ? 'Esta obra no tiene' : 'Ninguna de estas obras tiene') +
+            ' un estado financiero o informe oficial cotejado que diga cuánto pierde al operar, y la cifra no se estima. ' +
+            '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.setSimuladorOrden(\'inversion\')">Mide por costo real</button>.</p>'
+          : '') +
         (todoCero
           ? '<p class="sim-rank-cero"><strong>Sin cifra bajo este criterio, y no por falta de datos.</strong> ' +
             (sola ? 'Esta obra no registra ' : 'Ninguna de estas obras registra ') + rotulo +
@@ -21136,9 +21232,9 @@
       return '<tr' + (cero ? ' class="sim-t-nula"' : '') + '>' +
         '<td class="sim-t-n">' + (i + 1) + '</td>' +
         '<td class="sim-t-nom"><span class="sim-t-ico">' + o.icono + '</span>' + o.nombre + '</td>' +
-        '<td class="sim-t-num">' + formatNumber(o.ingresos_anuales_mdp) + '</td>' +
-        '<td class="sim-t-num">' + formatNumber(o.costo_operativo_anual_mdp) + '</td>' +
-        '<td class="sim-t-num sim-t-dif">' + (cero ? '—' : formatNumber(o.perdida_anual_mdp)) + '</td>' +
+        '<td class="sim-t-num">' + (o.perdida_pendiente ? '—' : formatNumber(o.ingresos_anuales_mdp)) + '</td>' +
+        '<td class="sim-t-num">' + (o.perdida_pendiente ? '—' : formatNumber(o.costo_operativo_anual_mdp)) + '</td>' +
+        '<td class="sim-t-num sim-t-dif">' + (o.perdida_pendiente ? chipEstado('pendiente') : (cero ? '—' : formatNumber(o.perdida_anual_mdp))) + '</td>' +
         '<td class="sim-t-num sim-t-acum">' + formatNumber(Math.round(acum * 10) / 10) + '</td>' +
       '</tr>';
     }).join('');
@@ -21153,7 +21249,8 @@
     ];
     return '<article class="sim-mesa">' +
       '<h4 class="sim-mesa-tit"><span class="sim-mesa-num">2</span> Cómo se arma la pérdida operativa de un año</h4>' +
-      '<p class="sim-mesa-pie">La pérdida de cada obra es lo que su operación cuesta menos lo que su operación ingresa. Las obras concluidas sin déficit declarado entran con cero y no inflan el total.</p>' +
+      '<p class="sim-mesa-pie">La pérdida de cada obra es lo que su operación cuesta menos lo que su operación ingresa. Las obras concluidas sin déficit declarado entran con cero y no inflan el total.' +
+        (esAuditor() ? ' Las que no tienen documento dicen «pendiente» y tampoco entran: el total es solo lo documentado. Tren Maya y AIFA salen de sus estados de actividades de la Cuenta Pública 2024 (ingresos por servicios contra gasto total, sin transferencias federales); el IPAB, de lo que ejerció el Ramo 34 ese año.' : '') + '</p>' +
       '<div class="sim-t-marco"><table class="sim-t">' +
         '<thead><tr><th>#</th><th>Obra</th><th>Ingresos año (mdp)</th><th>Costo operativo (mdp)</th><th>Pérdida anual</th><th>Acumulado</th></tr></thead>' +
         '<tbody>' +
@@ -21556,7 +21653,7 @@
 
     grid.innerHTML = obras.map(o => {
       const perdidaPeriodo = o.perdida_anual_mdp * factor;
-      const perdidaDisplay = simMdp(perdidaPeriodo) + sufijo;
+      const perdidaDisplay = o.perdida_pendiente ? 'Sin documento' : simMdp(perdidaPeriodo) + sufijo;
 
       const isDeficit = o.proyeccion_tipo === 'deficit_cronico' || o.proyeccion_tipo === 'subsidio_permanente' || o.proyeccion_tipo === 'deuda_perpetua' || o.proyeccion_tipo === 'perdida_patrimonial';
 
@@ -21583,7 +21680,7 @@
           <div class="sim-loss-box">
             <div>
               <div class="sim-loss-lbl">
-                <span class="pulsing-dot"></span> Pérdida Operativa (${pInfo.label}) ${chipEstado('pendiente')}
+                <span class="pulsing-dot"></span> Pérdida Operativa (${pInfo.label}) ${simChipCampo(o, 'perdida_anual_mdp')}
               </div>
               <div class="sim-loss-amount">${perdidaDisplay}</div>
             </div>
@@ -21595,7 +21692,7 @@
                 +$0.00
               </div>
               <div style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);">
-                (+ $${o.perdida_segundo.toFixed(2)}/seg)
+                ${o.perdida_pendiente ? 'sin ritmo que medir' : (o.fuente_operacion && !o.perdida_anual_mdp ? 'sin pérdida de operación en 2024' : '(+ $' + o.perdida_segundo.toFixed(2) + '/seg)')}
               </div>
             </div>
           </div>
@@ -21621,9 +21718,10 @@
           <!-- Desglose de Costos de Operación -->
           <div>
             <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-              ⚙️ Principales Costos de Operación Anuales: ${chipEstado('pendiente')}
+              ⚙️ Principales Costos de Operación Anuales: ${simChipCampo(o, 'desglose')}
             </div>
             <div class="sim-operacion-chips">
+              ${o.desglose_costos_operacion.length ? '' : '<div class="sim-op-chip"><span>Sin desglose con documento oficial.</span></div>'}
               ${o.desglose_costos_operacion.map(c => `
                 <div class="sim-op-chip">
                   <span>${c.icono}</span>
@@ -21638,7 +21736,7 @@
           <div class="sim-proyeccion-box ${isDeficit ? 'deficit-box' : ''}">
             <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
               <span>${isDeficit ? '⚠️' : '📊'}</span> 
-              <span>${isDeficit ? 'Diagnóstico Financiero: Déficit Permanente / Deuda' : 'Proyección de Retorno / Amortización'}</span>
+              <span>${o.proy_titulo || (isDeficit ? 'Diagnóstico Financiero: Déficit Permanente / Deuda' : 'Proyección de Retorno / Amortización')}</span>
             </div>
             <div>${o.proyeccion_resumen}</div>
           </div>
@@ -21688,7 +21786,7 @@
      del año. No se suman entre si (miden cosas distintas) y el monto por
      aclarar de la ASF no entra aqui: es el resultado de un procedimiento
      con fecha de corte, no dinero que corra por segundo. */
-  const MEGAOBRAS_LOSS_RATE = 2543.13; // $80,200.1 mdp anuales / 31,536,000 segs (simulador de megaobras; fuentes pendientes)
+  let MEGAOBRAS_LOSS_RATE = 2543.13; // $80,200.1 mdp anuales / 31,536,000 segs (simulador de megaobras; fuentes pendientes)
   const DEUDA_INTEREST_RATE = 49850.12; // $1,572,073.3 mdp anuales / 31,536,000 segs (PEF 2026, Anexo 8)
 
   function initGlobalSessionTime() {
@@ -24173,6 +24271,7 @@
 
   function init() {
     tuteoBase();
+    megaobrasOficialBase();
     safeRun(initTheme, 'initTheme');
     safeRun(initShowcase, 'initShowcase');
     safeRun(initLeafletMap, 'initLeafletMap');

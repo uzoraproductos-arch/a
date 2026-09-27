@@ -15782,6 +15782,94 @@ window.AUDIT_DB = {
     "sobrecosto_conjunto_pct": 247.2,
     "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   },
+  "operacion_oficial": {
+    "nota": "Resultado de operar de las obras que publican estados financieros propios. Solo el auditor lo lee: sustituye, en memoria, la pérdida, los costos y la proyección que el simulador traía sin documento. Cifras en millones de pesos; la resta sin transferencias es un cálculo de Auditavisión (derivado).",
+    "fuentes": {
+      "ef_h0m": {
+        "doc": "SHCP, Cuenta Pública 2024, Tomo VII, Defensa Nacional, Tren Maya, S.A. de C.V. (H0M): Estado de Actividades del 1 de enero al 31 de diciembre de 2024",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls",
+        "sha256": "ff42c55b106103118c03282bb47e8576307ad7d5d4bc2e64260a54477f651e4c"
+      },
+      "ef_hzi": {
+        "doc": "SHCP, Cuenta Pública 2024, Tomo VII, Defensa Nacional, Aeropuerto Internacional Felipe Ángeles, S.A. de C.V. (HZI): Estado de Actividades del 1 de enero al 31 de diciembre de 2024",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls",
+        "sha256": "f6c7ac5f2a686476a750af0b8f4916bb2fd9f7cb6298ff4b03d3d0931c391a41"
+      },
+      "ipab_ef": {
+        "doc": "IPAB, Estados financieros al 31 de marzo de 2026 y al 31 de diciembre de 2025 (Notas cortas), Estado analítico de la deuda y otros pasivos, p. 3",
+        "url": "https://www.gob.mx/cms/uploads/attachment/file/1073775/IPAB_Notas-Cortas_Marzo_2026-DEF.pdf",
+        "sha256": "e577ee96a65a5109ed0ce324eb5aa2a242eee5f8b14edebd9e23031486f5900e"
+      }
+    },
+    "obras": {
+      "tren-maya": {
+        "anio": 2024,
+        "fuente": "ef_h0m",
+        "ingresos_gestion": 275.8,
+        "transferencias": 13335.4,
+        "otros_ingresos": 12890.3,
+        "gastos_totales": 2837.2,
+        "resultado_ejercicio": 23664.3,
+        "resultado_sin_transferencias": -2561.4,
+        "gastos": [
+          {
+            "rubro": "Servicios generales",
+            "mdp": 1985.5
+          },
+          {
+            "rubro": "Servicios personales",
+            "mdp": 498.8
+          },
+          {
+            "rubro": "Otros gastos, depreciación y amortización",
+            "mdp": 207.4
+          },
+          {
+            "rubro": "Materiales y suministros",
+            "mdp": 145.5
+          }
+        ]
+      },
+      "aifa-texcoco": {
+        "anio": 2024,
+        "fuente": "ef_hzi",
+        "ingresos_gestion": 2578.2,
+        "transferencias": 1510.2,
+        "otros_ingresos": 157.8,
+        "gastos_totales": 2288.1,
+        "resultado_ejercicio": 1958.2,
+        "resultado_sin_transferencias": 290.2,
+        "gastos": [
+          {
+            "rubro": "Servicios generales",
+            "mdp": 1736.5
+          },
+          {
+            "rubro": "Servicios personales",
+            "mdp": 480.6
+          },
+          {
+            "rubro": "Materiales y suministros",
+            "mdp": 70.0
+          },
+          {
+            "rubro": "Ayudas, depreciación y otros",
+            "mdp": 1.0
+          }
+        ]
+      },
+      "fobaproa": {
+        "anio": 2024,
+        "fuente": "cp",
+        "ramo34_ejercido": 62489.4,
+        "ramo34_2014_2025": 431289.2,
+        "saldo_bonos_2025": 1086952.8,
+        "saldo_bonos_corto": 208920.9,
+        "saldo_bonos_largo": 878031.9,
+        "fuente_saldo": "ipab_ef"
+      }
+    }
+  },
   "verificacion": {
     "nota": "Lo que los documentos oficiales dicen de cada obra. Donde hay cifra oficial comparable, sustituye a la del simulador; donde no, la obra queda marcada como pendiente, campo por campo. Nada de esto es una estimación.",
     "fuentes": {

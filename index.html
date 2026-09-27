@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927n">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927o">
 </head>
 <body data-pagina="auditor">
 
@@ -401,7 +401,7 @@
         <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('megaobras', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('megaobras', this);}" title="Qué es esta cifra y cómo se calcula">
           <span class="radar-stat-lbl">🚅 Megaobras (equivalencia):</span>
           <strong class="radar-stat-val val-amber" id="radarMegaobrasVal">+$0.00</strong>
-          <span class="radar-stat-rate">(+$2,543.13/seg)</span>
+          <span class="radar-stat-rate">(+$2,062.75/seg)</span>
         </div>
         <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('deuda', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('deuda', this);}" title="Qué es esta cifra y cómo se calcula">
           <span class="radar-stat-lbl">📉 Costo de la deuda (equivalencia):</span>
@@ -472,16 +472,16 @@
             <div class="radar-card-top">
               <span class="radar-card-icon">🚅</span>
               <div>
-                <h4 class="radar-card-title">Pérdida operativa de las 12 megaobras del simulador <span class="est-chip est-pendiente">pendiente</span></h4>
-                <span class="radar-card-rate val-amber">$80,200.1 mdp al año · equivale a $2,543.13 por segundo</span>
+                <h4 class="radar-card-title">Pérdida anual documentada de las megaobras <span class="est-chip est-derivado">derivado</span></h4>
+                <span class="radar-card-rate val-amber">$65,050.8 mdp al año · equivale a $2,062.75 por segundo</span>
               </div>
             </div>
             <p class="radar-card-body">
-              Es la suma anual que el simulador de megaobras asigna a sus 12 proyectos, de Tren Maya y Dos Bocas a FOBAPROA y FARAC. Sus fuentes obra por obra están pendientes de verificación: tómela como orden de magnitud, no como cifra oficial.
+              Suma solo las obras con documento: la pérdida de operar el Tren Maya ($2,561.4 mdp) según su estado de actividades 2024, el AIFA (sin pérdida ese año: cobró más de lo que gastó) y lo que el rescate bancario le costó al presupuesto por el Ramo 34 ($62,489.4 mdp, Cuenta Pública 2024). Las otras nueve obras no tienen documento de su operación: quedan pendientes y fuera de la suma, así que la cifra es un piso.
             </p>
             <div class="radar-card-meta">
               <span class="radar-meta-lbl">De dónde sale:</span>
-              <span class="radar-meta-val">Simulador de megaobras (módulo 2); fuentes por obra en revisión.</span>
+              <span class="radar-meta-val">Cuenta Pública 2024, Tomo VII (Tren Maya S.A. y AIFA S.A.) y Ramo 34; detalle obra por obra en el módulo 2.</span>
             </div>
             <div class="radar-card-action">
               <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('megaobras');">
@@ -2869,7 +2869,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927n</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927o</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3013,17 +3013,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927n"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927o"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927n"></script>
+  <script src="assets/js/audit-database.js?v=20260927o"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927n"></script>
-  <script src="assets/js/municipios-rendicion.js?v=20260927n"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927o"></script>
+  <script src="assets/js/municipios-rendicion.js?v=20260927o"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927n"></script>
+  <script src="assets/js/audit-engine.js?v=20260927o"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
