@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927l">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927m">
 </head>
 <body data-pagina="auditor">
 
@@ -122,7 +122,7 @@
             <span class="mega-col-title">🔍 Asignaciones y Contratos</span>
             <a href="#inspExplorador" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'inspExplorador'); window.AuditEngine.cerrarMegaMenus(); setTimeout(function(){ var i=document.getElementById('inspBuscador'); if(i) i.focus({preventScroll:true}); }, 1000);" class="mega-link-item">
               <span class="mega-link-name">🏛️ Auditor de Entes Públicos</span>
-              <span class="mega-link-desc">Busque una dependencia, un estado o un municipio y abra su expediente: autonomía, deuda y observaciones de la ASF.</span>
+              <span class="mega-link-desc">Busca una dependencia, un estado o un municipio y abre su expediente: autonomía, deuda y observaciones de la ASF.</span>
             </a>
             <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">📝 Contratos federales en ComprasMX ↗</span>
@@ -316,7 +316,7 @@
     <!-- Derecha: Acciones Superiores y Buscador Global del Portal Navegador -->
     <div class="nav-right-container">
       <div class="nav-right-actions">
-        <button type="button" class="nav-action-btn nav-feedback-btn" onclick="window.AuditEngine.openAyudanosFiscalizar()" title="Ayúdanos a fiscalizar: comparta lo que vio y reporte anomalías presupuestales">
+        <button type="button" class="nav-action-btn nav-feedback-btn" onclick="window.AuditEngine.openAyudanosFiscalizar()" title="Ayúdanos a fiscalizar: comparte lo que viste y reporta anomalías presupuestales">
           <span>📢</span>
           <span>Ayúdanos a fiscalizar</span>
         </button>
@@ -762,7 +762,7 @@
           <span class="explorer-card-icon" aria-hidden="true">💳</span>
           <h3 class="explorer-card-title">Calculadora Cívica</h3>
           <p class="explorer-card-desc">Descubre a dónde va cada peso de tus impuestos.</p>
-          <div class="explorer-card-stat" title="Calcule su impuesto 2026 y vea a dónde va cada peso"><strong>Saca tu estado de cuenta</strong><span>Tu impuesto, peso por peso</span></div>
+          <div class="explorer-card-stat" title="Calcula tu impuesto 2026 y ve a dónde va cada peso"><strong>Saca tu estado de cuenta</strong><span>Tu impuesto, peso por peso</span></div>
           <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora', 'moduloProemio')" aria-label="Comenzar: Calculadora Cívica">
             <span>Comenzar</span> ➔
           </button>
@@ -854,7 +854,7 @@
           <div class="erario-pleg-cuerpo" id="eb-cuerpo-arquitectura" hidden>
           <div class="civic-flow-schematic">
             <div class="civic-flow-header">
-              <p class="erario-bloque-sub">Pulse «Contabilizar» para ver pasar el dinero por las tres primeras etapas, y «Qué ley la gobierna» para leer el fundamento, el plazo y quién responde por cada una.</p>
+              <p class="erario-bloque-sub">Pulsa «Contabilizar» para ver pasar el dinero por las tres primeras etapas, y «Qué ley la gobierna» para leer el fundamento, el plazo y quién responde por cada una.</p>
               <span class="civic-flow-badge">Unidad de Caja · Art. 1° LIF &amp; Art. 74 CPEUM</span>
             </div>
             <div class="erario-mandos" id="flujoContableMandos"></div>
@@ -978,7 +978,7 @@
                       <span class="termostato-rigidez-tag">Rigidez: <strong id="termostatoRigidezTxt">0.0%</strong> ineludible</span>
                     </div>
                     <p id="termostatoDiagTxt" class="termostato-diag-p">
-                      Pulse «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.
+                      Pulsa «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.
                     </p>
                     <div class="termostato-minibar-grid">
                       <div class="termostato-mini-item">
@@ -1065,7 +1065,7 @@
               Las tres comparaciones usan solo cifras que esta plataforma ya cita de su documento oficial, y por eso llevan el chip <span class="est-chip est-derivado">derivado</span>: el resultado es una operación, y la operación está a la vista.
               La primera divide dos renglones del mismo Presupuesto 2026. La segunda reparte una cifra nacional entre la población proyectada por el Consejo Nacional de Población. La tercera suma los informes de la ASF que se enlistan, uno por uno, en el expediente del caso.
               No comparamos contra el costo de un hospital, de una beca o de una obra &laquo;tipo&raquo; mientras ese costo no tenga su propio documento oficial: un costo supuesto convierte la comparación en opinión.
-              Para profundizar en cada concepto técnico, explore el <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Público')">📖 Glosario Hacendario</a> y el catálogo de <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')">📑 Referencias Oficiales</a>.
+              Para profundizar en cada concepto técnico, explora el <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Gasto Público')">📖 Glosario Hacendario</a> y el catálogo de <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')">📑 Referencias Oficiales</a>.
             </p>
           </div>
           </div>
@@ -1212,7 +1212,7 @@
             <p class="erario-bloque-sub">
               De ese gasto, <b class="gold">$2.81 billones</b> no se quedan en la Federaci&oacute;n: viajan a
               las 32 entidades y a m&aacute;s de 2,400 municipios. El mapa muestra c&oacute;mo se reparte.
-              Cambie de lente para ver el mismo territorio bajo otra pregunta.
+              Cambia de lente para ver el mismo territorio bajo otra pregunta.
             </p>
 
 <!-- Lentes de Fiscalización y Controles del Mapa -->
@@ -1397,7 +1397,7 @@
                 <span class="erario-pleg-ico" aria-hidden="true">🏭</span>
                 <span class="erario-pleg-tx">
                   <span class="erario-pleg-tit">El desglose obra por obra: sector e industria</span>
-                  <span class="erario-pleg-av">Filtre por industria y por mandato: comparativa de las obras que queden, su ficha viva y contra qué se compara ese dinero.</span>
+                  <span class="erario-pleg-av">Filtra por industria y por mandato: comparativa de las obras que queden, su ficha viva y contra qué se compara ese dinero.</span>
                 </span>
                 <span class="erario-pleg-mas" aria-hidden="true">+</span>
               </button>
@@ -1434,7 +1434,7 @@
                 <span class="erario-pleg-ico" aria-hidden="true">🏛️</span>
                 <span class="erario-pleg-tx">
                   <span class="erario-pleg-tit">Administración presidencial</span>
-                  <span class="erario-pleg-av">Qué megaobras le tocan a cada sexenio y cómo le fue a cada presidente en crecimiento, deuda, empleo formal y fiscalización superior, con cifras cotejadas contra INEGI, SHCP, IMSS y la ASF. Primero adivine; luego compruebe y abra las tablas comparativas.</span>
+                  <span class="erario-pleg-av">Qué megaobras le tocan a cada sexenio y cómo le fue a cada presidente en crecimiento, deuda, empleo formal y fiscalización superior, con cifras cotejadas contra INEGI, SHCP, IMSS y la ASF. Primero adivina; luego comprueba y abre las tablas comparativas.</span>
                 </span>
                 <span class="erario-pleg-mas" aria-hidden="true">+</span>
               </button>
@@ -1532,14 +1532,14 @@
         <!-- ====================================================================
              MÓDULO 3 EN TRES BLOQUES, con la mecánica de los módulos 1 y 2
              (erarioPlegToggle / erarioIr): 1 su estado de cuenta (ingreso,
-             retención, reparto y emisión), 2 usted contra ellos (cargos y
+             retención, reparto y emisión), 2 tú contra ellos (cargos y
              prestaciones, ligado al neto del bloque 1) y 3 el reloj de la
              deuda. El bloque 1 nace abierto: ahí se escribe la cifra.
              ==================================================================== -->
         <nav class="erario-indice" aria-label="Los tres bloques de la calculadora">
           <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ccticket')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Su estado de cuenta</b><small>Ingreso, retención, reparto y emisión</small></span></button>
           <span class="erario-indice-flecha" aria-hidden="true">➜</span>
-          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('cccompara')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">⚡</span><span class="ei-tx"><b>Usted contra ellos</b><small>Cargo por cargo y sus prestaciones</small></span></button>
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('cccompara')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">⚡</span><span class="ei-tx"><b>Tú contra ellos</b><small>Cargo por cargo y sus prestaciones</small></span></button>
           <span class="erario-indice-flecha" aria-hidden="true">➜</span>
           <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ccreloj')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">⏱️</span><span class="ei-tx"><b>El reloj de la deuda</b><small>Lo que se endeuda y se pierde por segundo</small></span></button>
         </nav>
@@ -1554,7 +1554,7 @@
               <span class="erario-pleg-ico" aria-hidden="true">🧾</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">Su estado de cuenta cívico</span>
-                <span class="erario-pleg-av">Escriba lo que gana y la página saca cuatro cuentas en orden: su ingreso, lo que le retienen, a dónde va cada peso de su impuesto y, al final, la emisión de su estado de cuenta.</span>
+                <span class="erario-pleg-av">Escribe lo que ganas y la página saca cuatro cuentas en orden: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y, al final, la emisión de tu estado de cuenta.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">−</span>
             </button>
@@ -1567,8 +1567,8 @@
           <div class="cc-cab">
             <span class="cc-cab-n" aria-hidden="true">1.1</span>
             <div class="cc-cab-tx">
-              <h3 class="cc-cab-tit">Su ingreso</h3>
-              <p class="cc-cab-sub">Escriba lo que gana y diga cómo tributa. Nada de esto sale de su navegador: la plataforma no guarda ni envía lo que usted teclee.</p>
+              <h3 class="cc-cab-tit">Tu ingreso</h3>
+              <p class="cc-cab-sub">Escribe lo que ganas y di cómo tributas. Nada de esto sale de tu navegador: la plataforma no guarda ni envía lo que teclees.</p>
             </div>
           </div>
 
@@ -1621,8 +1621,8 @@
               <span class="erario-pleg-n" aria-hidden="true">2</span>
               <span class="erario-pleg-ico" aria-hidden="true">⚡</span>
               <span class="erario-pleg-tx">
-                <span class="erario-pleg-tit">Usted contra ellos: cargo por cargo</span>
-                <span class="erario-pleg-av">Su ingreso neto frente al de quienes legislan, juzgan y gobiernan —y sus asesores y proyectistas—, con el documento de cada cifra. Al final, sus prestaciones de ley contra las de ellos.</span>
+                <span class="erario-pleg-tit">Tú contra ellos: cargo por cargo</span>
+                <span class="erario-pleg-av">Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan —y sus asesores y proyectistas—, con el documento de cada cifra. Al final, sus prestaciones de ley contra las de ellos.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
@@ -1631,13 +1631,13 @@
           <div class="shock-container">
             <div class="shock-header">
               <div>
-                <h3 class="shock-title">⚡ Usted contra la alta burocracia</h3>
+                <h3 class="shock-title">⚡ Tú contra la alta burocracia</h3>
                 <div class="shock-subtitle">
-                  Elija un Poder y compare. Cifras del Anexo 23 del Presupuesto de Egresos 2026 y de los manuales de remuneraciones que el Senado, la Cámara de Diputados y el Poder Judicial publicaron en el Diario Oficial el 27 de febrero de 2026.
+                  Elige un Poder y compara. Cifras del Anexo 23 del Presupuesto de Egresos 2026 y de los manuales de remuneraciones que el Senado, la Cámara de Diputados y el Poder Judicial publicaron en el Diario Oficial el 27 de febrero de 2026.
                 </div>
               </div>
               <div id="shockUserBadge" class="shock-user-badge">
-                Su ingreso de referencia: $15,000 al mes
+                Tu ingreso de referencia: $15,000 al mes
               </div>
             </div>
 
@@ -1729,7 +1729,7 @@
               La distinci&oacute;n entre <b>Ramo 28</b> y <b>Ramo 33</b> es la m&aacute;s importante de todo el gasto
               federalizado, y la que m&aacute;s se confunde en la conversaci&oacute;n p&uacute;blica: el primero es
               dinero del estado, el segundo sigue siendo dinero federal despu&eacute;s de entregarse.
-              Pulse cualquier ramo para ver qu&eacute; ley lo sustenta, qu&eacute; efecto jur&iacute;dico produce y
+              Pulsa cualquier ramo para ver qu&eacute; ley lo sustenta, qu&eacute; efecto jur&iacute;dico produce y
               qu&eacute; fondos lo componen.
             </p>
           </div>
@@ -1744,7 +1744,7 @@
           <div class="erario-bloque-head">
             <h3>El circuito de una entidad, paso a paso</h3>
             <p class="erario-bloque-sub">
-              Elija un estado para ver cu&aacute;nto recibe de la Federaci&oacute;n, cu&aacute;nto recauda por su
+              Elige un estado para ver cu&aacute;nto recibe de la Federaci&oacute;n, cu&aacute;nto recauda por su
               cuenta y qu&eacute; tan dependiente resulta la suma.
             </p>
           </div>
@@ -1804,7 +1804,7 @@
               De los ocho fondos del Ramo 33, s&oacute;lo dos llegan cifrados como municipales en el
               Presupuesto de Egresos: el <b>FORTAMUN</b>, que el municipio puede aplicar con
               holgura, y el <b>FISMDF</b>, que s&oacute;lo puede tocar obra para poblaci&oacute;n en pobreza.
-              Pulse cualquiera para ver su fundamento, su efecto jur&iacute;dico y c&oacute;mo lo reparte la ley.
+              Pulsa cualquiera para ver su fundamento, su efecto jur&iacute;dico y c&oacute;mo lo reparte la ley.
             </p>
           </div>
           <div class="erario-mandos" id="municipalMandos"></div>
@@ -1854,7 +1854,7 @@
             </div>
             <div class="mun-filtro">
               <label for="munBuscar">Buscar municipio</label>
-              <input type="search" id="munBuscar" placeholder="Escriba un nombre&hellip;" autocomplete="off"
+              <input type="search" id="munBuscar" placeholder="Escribe un nombre&hellip;" autocomplete="off"
                      aria-label="Filtrar por nombre los municipios de la entidad">
             </div>
             <div class="mun-filtro">
@@ -1943,7 +1943,7 @@
             <p class="erario-bloque-sub">
               El paquete econ&oacute;mico no llega cuando el gobierno quiere: llega cuando la Constituci&oacute;n
               lo obliga, con el contenido que tasa la Ley Federal de Presupuesto y con un plazo de
-              respuesta que tambi&eacute;n est&aacute; escrito. Pulse cualquier fecha para ver el precepto exacto.
+              respuesta que tambi&eacute;n est&aacute; escrito. Pulsa cualquier fecha para ver el precepto exacto.
             </p>
           </div>
           <div id="peItinerario"></div>
@@ -1989,7 +1989,7 @@
               La propia Secretar&iacute;a de Hacienda publica cu&aacute;nto cuesta cada equivocaci&oacute;n. Las seis
               palancas de abajo <b>no las invent&oacute; esta plataforma</b>: son los seis coeficientes del
               cuadro de sensibilidades de los Criterios, con su cita textual al pie de cada una.
-              Mu&eacute;valas y vea a d&oacute;nde va el d&eacute;ficit.
+              Mu&eacute;velas y ve a d&oacute;nde va el d&eacute;ficit.
             </p>
           </div>
           <div id="peSimPalancas"></div>
@@ -2087,7 +2087,7 @@
       <nav class="erario-indice" aria-label="Los cuatro bloques del Costo Ambiental">
         <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('amreloj')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">⏱️</span><span class="ei-tx"><b>El reloj y el año</b><small>El daño en vivo y un año simulado</small></span></button>
         <span class="erario-indice-flecha" aria-hidden="true">➜</span>
-        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('amticket')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Su ticket en negativo</b><small>Deuda y daño, a su nombre</small></span></button>
+        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('amticket')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Tu ticket en negativo</b><small>Deuda y daño, a tu nombre</small></span></button>
         <span class="erario-indice-flecha" aria-hidden="true">➜</span>
         <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ambasura')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">🗑️</span><span class="ei-tx"><b>Basura y protección</b><small>Lo que se tira y lo que se gasta</small></span></button>
         <span class="erario-indice-flecha" aria-hidden="true">➜</span>
@@ -2104,7 +2104,7 @@
             <span class="erario-pleg-ico" aria-hidden="true">⏱️</span>
             <span class="erario-pleg-tx">
               <span class="erario-pleg-tit">El reloj del daño y un año en veinte segundos</span>
-              <span class="erario-pleg-av">El daño ambiental que corre mientras usted lee y una simulación animada que acumula, día por día, lo que cuestan los intereses de la deuda y el daño al ambiente contra lo que se gasta en protegerlo.</span>
+              <span class="erario-pleg-av">El daño ambiental que corre mientras lees y una simulación animada que acumula, día por día, lo que cuestan los intereses de la deuda y el daño al ambiente contra lo que se gasta en protegerlo.</span>
             </span>
             <span class="erario-pleg-mas" aria-hidden="true">−</span>
           </button>
@@ -2125,7 +2125,7 @@
             <span class="erario-pleg-ico" aria-hidden="true">🧾</span>
             <span class="erario-pleg-tx">
               <span class="erario-pleg-tit">Su ticket ciudadano en negativo</span>
-              <span class="erario-pleg-av">Escriba lo que gana y la página emite lo que ya le cargaron a su nombre: su parte de la deuda pública, de sus intereses y del daño ambiental del país, con su basura en kilos.</span>
+              <span class="erario-pleg-av">Escribe lo que ganas y la página emite lo que ya te cargaron a tu nombre: tu parte de la deuda pública, de sus intereses y del daño ambiental del país, con tu basura en kilos.</span>
             </span>
             <span class="erario-pleg-mas" aria-hidden="true">+</span>
           </button>
@@ -2223,7 +2223,7 @@
               <span class="erario-pleg-ico" aria-hidden="true">🏛️</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">¿Qué encontró la Auditoría Superior en el gasto de 2024?</span>
-                <span class="erario-pleg-av">Cifras oficiales de la Auditoría Superior de la Federación, con su documento y su página: cuánto revisó, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a su estado.</span>
+                <span class="erario-pleg-av">Cifras oficiales de la Auditoría Superior de la Federación, con su documento y su página: cuánto revisó, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
@@ -2245,7 +2245,7 @@
               <span class="erario-pleg-ico" aria-hidden="true">🚩</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">Radar de banderas rojas por entidad</span>
-                <span class="erario-pleg-av">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024. Elija cómo ordenarlos: por cada $100 que la ASF revisó, por monto total o por el peso de los municipios.</span>
+                <span class="erario-pleg-av">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024. Elige cómo ordenarlos: por cada $100 que la ASF revisó, por monto total o por el peso de los municipios.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
@@ -2269,7 +2269,7 @@
               <span class="erario-pleg-ico" aria-hidden="true">📂</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">Expedientes de casos por aclarar</span>
-                <span class="erario-pleg-av">Diez casos de alto impacto, numerados y uno por renglón: megaobras, energía, salud, Segalmex y deuda de los estados. Filtre por tema y pulse un caso para abrir su desglose.</span>
+                <span class="erario-pleg-av">Diez casos de alto impacto, numerados y uno por renglón: megaobras, energía, salud, Segalmex y deuda de los estados. Filtra por tema y pulsa un caso para abrir su desglose.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">+</span>
             </button>
@@ -2301,7 +2301,7 @@
         <span class="insp-sep-n">🏛️</span>
         <div>
           <h3 class="insp-sep-tit">Auditor de Entes Públicos: Federal, Estatal y Municipal</h3>
-          <p class="insp-sep-sub">Elija una autoridad y vea su diagnóstico con sus propios reportes a Hacienda y con lo que encontró la Auditoría Superior: si gastó lo que aprobó la Cámara, si rindió cuentas, si sus cifras cuadran y qué quedó por aclarar. Cuarenta y un entes federales, las 32 entidades y los municipios con expediente.</p>
+          <p class="insp-sep-sub">Elige una autoridad y ve su diagnóstico con sus propios reportes a Hacienda y con lo que encontró la Auditoría Superior: si gastó lo que aprobó la Cámara, si rindió cuentas, si sus cifras cuadran y qué quedó por aclarar. Cuarenta y un entes federales, las 32 entidades y los municipios con expediente.</p>
         </div>
       </div>
 
@@ -2311,7 +2311,7 @@
         <div class="insp-buscador">
           <span class="insp-buscador-ico">🔍</span>
           <input type="search" id="inspBuscador" class="insp-buscador-input" autocomplete="off"
-                 placeholder="Escriba un nombre: Pemex, Hacienda, Jalisco, Monterrey, un gobernador…"
+                 placeholder="Escribe un nombre: Pemex, Hacienda, Jalisco, Monterrey, un gobernador…"
                  oninput="window.AuditEngine.inspBuscar(this.value)">
           <button type="button" class="insp-buscador-x" onclick="window.AuditEngine.inspLimpiarBusqueda()" title="Borrar la búsqueda">✕</button>
         </div>
@@ -2326,7 +2326,7 @@
         <span class="insp-sep-n">🧾</span>
         <div>
           <h3 class="insp-sep-tit">¿Su proveedor está en la lista negra del SAT?</h3>
-          <p class="insp-sep-sub">Busque por RFC o por nombre en el listado oficial del artículo 69-B del Código Fiscal: empresas y personas a las que el SAT presume o declara emisoras de facturas por operaciones inexistentes (EFOS).</p>
+          <p class="insp-sep-sub">Busca por RFC o por nombre en el listado oficial del artículo 69-B del Código Fiscal: empresas y personas a las que el SAT presume o declara emisoras de facturas por operaciones inexistentes (EFOS).</p>
         </div>
       </div>
 
@@ -2571,7 +2571,7 @@
       <div class="section-hero">
         <span class="hero-tag">Portal Digital &middot; Participa, denuncia y debate</span>
         <h2>Portal Digital: del dato a la acción</h2>
-        <p>Aquí termina el recorrido de la plataforma y empieza el suyo. Hay tres caminos y conviene no confundirlos: <strong>reportarnos lo que vio</strong>, <strong>denunciar ante el Estado</strong> por la vía que sí produce consecuencias jurídicas, y <strong>debatir en público</strong> con seudónimo. Antes de escribir, lea a dónde va a parar cada texto.</p>
+        <p>Aquí termina el recorrido de la plataforma y empieza el tuyo. Hay tres caminos y conviene no confundirlos: <strong>reportarnos lo que viste</strong>, <strong>denunciar ante el Estado</strong> por la vía que sí produce consecuencias jurídicas, y <strong>debatir en público</strong> con seudónimo. Antes de escribir, lee a dónde va a parar cada texto.</p>
       </div>
 
       <!-- CAPA DE ORIENTACIÓN: LAS TRES FUNCIONES Y EL DESTINO DE CADA TEXTO -->
@@ -2869,7 +2869,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927l</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927m</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3013,17 +3013,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927l"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927m"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927l"></script>
+  <script src="assets/js/audit-database.js?v=20260927m"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927l"></script>
-  <script src="assets/js/municipios-rendicion.js?v=20260927l"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927m"></script>
+  <script src="assets/js/municipios-rendicion.js?v=20260927m"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927l"></script>
+  <script src="assets/js/audit-engine.js?v=20260927m"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
@@ -3039,7 +3039,7 @@
 
     <!-- Botón Flotante de Retroalimentación Cívica: Ayúdanos a fiscalizar -->
   <div class="floating-feedback-container">
-    <button type="button" class="floating-feedback-btn" onclick="window.AuditEngine.openAyudanosFiscalizar()" title="Ayúdanos a fiscalizar: comparta lo que vio y reporte anomalías presupuestales">
+    <button type="button" class="floating-feedback-btn" onclick="window.AuditEngine.openAyudanosFiscalizar()" title="Ayúdanos a fiscalizar: comparte lo que viste y reporta anomalías presupuestales">
       <span>📢</span>
       <span>Ayúdanos a fiscalizar</span>
     </button>
@@ -3091,10 +3091,10 @@
           <span>📢</span> COMUNIDAD &amp; CONTRALORÍA SOCIAL · PARTICIPACIÓN CÍVICA
         </div>
         <h3 class="drawer-state-name" id="ayudanosFiscalizarTitle" style="font-size:22px; color:var(--gold-bright); margin-top:2px;">
-          Ayúdanos a fiscalizar: comparta lo que vio
+          Ayúdanos a fiscalizar: comparte lo que viste
         </h3>
         <div class="drawer-gov-info" style="font-size:12px; color:var(--text-secondary); margin-top:4px;">
-          Buzón cívico local y generación de reportes ciudadanos · Resguardo de privacidad en su navegador
+          Buzón cívico local y generación de reportes ciudadanos · Resguardo de privacidad en tu navegador
         </div>
       </div>
       <button class="drawer-close-btn" onclick="window.AuditEngine.closeAyudanosFiscalizar()" title="Cerrar ventana" aria-label="Cerrar ventana">✕</button>
@@ -3102,8 +3102,8 @@
 
     <div class="drawer-body" style="padding:24px 28px; gap:20px; overflow-y:auto;">
       <p class="fj-bloque-sub" style="margin-top:0;">
-        No necesita ser contador ni abogado. Necesita haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. Lo que registre aquí queda guardado en su navegador y podrá copiarlo con un botón para presentarlo, ya redactado, en cualquiera de los canales oficiales ante la ASF, la Secretaría Anticorrupción y Buen Gobierno o su contraloría local.
-        <strong style="display:block; margin-top:6px; color:var(--gold-bright);">No comparta datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</strong>
+        No necesitas ser contador ni abogado. Necesitas haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. Lo que registres aquí queda guardado en tu navegador y podrás copiarlo con un botón para presentarlo, ya redactado, en cualquiera de los canales oficiales ante la ASF, la Secretaría Anticorrupción y Buen Gobierno o su contraloría local.
+        <strong style="display:block; margin-top:6px; color:var(--gold-bright);">No compartas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</strong>
       </p>
 
       <div class="com-util">
@@ -3112,7 +3112,7 @@
           <li><strong>Qué.</strong> La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</li>
           <li><strong>Dónde.</strong> Municipio, colonia y referencia física. Una dirección vale más que un adjetivo.</li>
           <li><strong>Cuándo.</strong> La fecha o el periodo. Los fondos se fiscalizan por ejercicio anual.</li>
-          <li><strong>Con qué dinero.</strong> Si lo sabe: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</li>
+          <li><strong>Con qué dinero.</strong> Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</li>
           <li><strong>Con qué prueba.</strong> Una foto con fecha, un número de contrato, una factura, un acta de entrega.</li>
         </ul>
       </div>
@@ -3160,7 +3160,7 @@
         </form>
 
         <div class="com-obs-wrap">
-          <h4 class="com-obs-h4">Observaciones que ha registrado en este navegador</h4>
+          <h4 class="com-obs-h4">Observaciones que has registrado en este navegador</h4>
           <div id="comentariosListContainer"></div>
         </div>
       </div>

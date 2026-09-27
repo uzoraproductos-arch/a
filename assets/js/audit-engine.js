@@ -588,7 +588,7 @@
     const lente = document.getElementById('entidadesLente');
     if (lente) {
       lente.innerHTML = 'Lente vigente: <b>' + L.rotulo + '</b>. Es la misma que colorea el mapa ' +
-        'y el cartograma; al cambiarla cambia tambi\u00e9n este cuadro. Pulse cualquier entidad ' +
+        tuUd('y el cartograma; al cambiarla cambia tambi\u00e9n este cuadro. Pulse cualquier entidad ', 'y el cartograma; al cambiarla cambia tambi\u00e9n este cuadro. Pulsa cualquier entidad ') +
         'para abrir su expediente.' + (L.nota ? ' ' + L.nota + ' ' + vsxRefLink(DB.fiscalEntidades.campos[L.clave].ref) : '');
     }
 
@@ -714,7 +714,7 @@
       reiniciar: 'mapaReiniciar()',
       estado: state.mapaContado
         ? '\u2705 Contabilizado. Las 32 entidades, de mayor a menor por ' + L.corto + '.'
-        : '\u26AA Las 32 entidades est\u00e1n en ceros ($0). Pulse \u00abContabilizar\u00bb para verlas subir y ordenarse por ' + L.corto + '.'
+        : tuUd('\u26AA Las 32 entidades est\u00e1n en ceros ($0). Pulse \u00abContabilizar\u00bb para verlas subir y ordenarse por ', '\u26AA Las 32 entidades est\u00e1n en ceros ($0). Pulsa \u00abContabilizar\u00bb para verlas subir y ordenarse por ') + L.corto + '.'
     });
   }
 
@@ -994,7 +994,7 @@
     } else if (reg.id === 'honorarios') {
       const ded = Math.min(Math.max(0, state.cc.deducciones || 0), bruto);
       r.deducido = ded;
-      r.motivoDeduccion = 'Deducciones autorizadas que usted declaró';
+      r.motivoDeduccion = tuUd('Deducciones autorizadas que usted declaró', 'Deducciones autorizadas que declaraste');
       r.base = bruto - ded;
       const t = ccTarifa(r.base, c.tarifa_mensual.renglones);
       r.renglon = t.renglon; r.isr = t.isr; r.isrTarifa = t.isr;
@@ -1148,13 +1148,13 @@
     const el = document.getElementById('ccEntrada');
     if (!el) return;
     const p = ccPar();
-    el.innerHTML = 'Escriba lo que gana, diga cómo tributa y esta página hará tres cuentas con el ' +
-      'aparato legal de 2026: <strong>cuánto le retienen y con qué regla</strong>, <strong>a dónde iría ' +
+    el.innerHTML = tuUd('Escriba lo que gana, diga cómo tributa y esta página hará tres cuentas con el ', 'Escribe lo que ganas, di cómo tributas y esta página hará tres cuentas con el ') +
+      tuUd('aparato legal de 2026: <strong>cuánto le retienen y con qué regla</strong>, <strong>a dónde iría ', 'aparato legal de 2026: <strong>cuánto te retienen y con qué regla</strong>, <strong>a dónde iría ') +
       'esa aportación</strong> según el reparto del Presupuesto aprobado, y <strong>cuánto se endeuda el ' +
-      'país por cada habitante</strong> mientras usted lee. Las tarifas salen del Anexo 8 de la Resolución ' +
+      tuUd('país por cada habitante</strong> mientras usted lee. Las tarifas salen del Anexo 8 de la Resolución ', 'país por cada habitante</strong> mientras lees. Las tarifas salen del Anexo 8 de la Resolución ') +
       'Miscelánea publicado el 28 de diciembre de 2025; las cuotas del Seguro Social, de cinco artículos de ' +
       'su ley; la UMA de $' + formatNumber(p.uma.mensual) + ' al mes, del Instituto Nacional de Estadística. ' +
-      'Nada de lo que usted escriba sale de su navegador.';
+      tuUd('Nada de lo que usted escriba sale de su navegador.', 'Nada de lo que escribas sale de tu navegador.');
   }
 
   function ccPintarFormulario() {
@@ -1247,8 +1247,8 @@
         '<span class="eval-badge">CUENTA PERSONAL</span>' +
         '<span class="eval-status-text">' + (listo
           ? '✅ Cuenta hecha con el régimen de ' + ccRegimenEfectivo().nombre.toLowerCase() +
-            '. Cambie cualquier dato y vuelva a pulsar para rehacerla.'
-          : '⚪ Todo está en ceros ($0). Escriba su ingreso, elija su régimen y pulse «Sacar la cuenta».') +
+            tuUd('. Cambie cualquier dato y vuelva a pulsar para rehacerla.', '. Cambia cualquier dato y vuelve a pulsar para rehacerla.')
+          : tuUd('⚪ Todo está en ceros ($0). Escriba su ingreso, elija su régimen y pulse «Sacar la cuenta».', '⚪ Todo está en ceros ($0). Escribe tu ingreso, elige tu régimen y pulsa «Sacar la cuenta».')) +
         '</span>' +
       '</div>' +
       '<div class="eval-actions-group">' +
@@ -1286,14 +1286,14 @@
     const filas = [];
     filas.push({ k: 'Ingreso bruto ' + per, v: v.bruto, tipo: 'base',
                  d: state.cc.naturaleza === 'neto'
-                    ? 'Calculado hacia atrás desde el neto que usted escribió.'
-                    : 'La cifra que usted escribió.' });
+                    ? tuUd('Calculado hacia atrás desde el neto que usted escribió.', 'Calculado hacia atrás desde el neto que escribiste.')
+                    : tuUd('La cifra que usted escribió.', 'La cifra que escribiste.') });
     if (v.deducido > 0) {
       /* Este dinero no sale del bolsillo: se queda en el. Lo unico que hace
          es achicar la base sobre la que corre la tarifa. Por eso no lleva
          signo de resta ni entra en la suma de la cascada. */
       filas.push({ k: m.motivoDeduccion, v: v.deducido, tipo: 'fiscal',
-                   d: 'No es dinero que usted pierda: se lo queda. Lo \u00fanico que hace es achicar la ' +
+                   d: tuUd('No es dinero que usted pierda: se lo queda. Lo \u00fanico que hace es achicar la ', 'No es dinero que pierdas: te lo quedas. Lo \u00fanico que hace es achicar la ') +
                       'cantidad sobre la que corre la tarifa.' });
       filas.push({ k: 'Base gravable', v: v.base, tipo: 'subtotal',
                    d: 'Sobre esta cantidad, y no sobre el ingreso, corre la tarifa. ' +
@@ -1330,10 +1330,10 @@
         filas.push({ k: x.ramo, v: -(x.monto * (anual ? 12 : 1)), tipo: 'cuota', d: x.ley });
       });
     }
-    filas.push({ k: 'Le queda ' + per, v: v.neto, tipo: 'neto',
+    filas.push({ k: tuUd('Le queda ', 'Te queda ') + per, v: v.neto, tipo: 'neto',
                  d: state.cc.naturaleza === 'neto'
-                    ? 'La cifra que usted escribió.'
-                    : 'Lo que efectivamente recibe.' });
+                    ? tuUd('La cifra que usted escribió.', 'La cifra que escribiste.')
+                    : tuUd('Lo que efectivamente recibe.', 'Lo que efectivamente recibes.') });
 
     const mayor = Math.max.apply(null, filas.map(f => Math.abs(f.v))) || 1;
 
@@ -1342,9 +1342,9 @@
         '<div class="cc-cab">' +
           '<span class="cc-cab-n" aria-hidden="true">' + ccPaso('1.2', '2') + '</span>' +
           '<div class="cc-cab-tx">' +
-            '<h3 class="cc-cab-tit">Lo que le retienen</h3>' +
+            tuUd('<h3 class="cc-cab-tit">Lo que le retienen</h3>', '<h3 class="cc-cab-tit">Lo que te retienen</h3>') +
             '<p class="cc-cab-sub">' + (elegido.id === 'nose'
-              ? 'Calculado como sueldos y salarios, que es el supuesto que usted aceptó al no saber su régimen. '
+              ? tuUd('Calculado como sueldos y salarios, que es el supuesto que usted aceptó al no saber su régimen. ', 'Calculado como sueldos y salarios, que es el supuesto que aceptaste al no saber tu régimen. ')
               : '') + reg.quien_es + ' ' + '<strong>Retiene:</strong> ' + reg.retiene + '</p>' +
           '</div>' +
         '</div>' +
@@ -1359,7 +1359,7 @@
                      'Cuota obrera: 2.375% del salario base más 0.40% del excedente de tres UMA', 'cc-r-imss')
             : ccCaja('Cuotas al Seguro Social', 0, 'pesos2',
                      'Este régimen no cotiza por sí mismo', 'cc-r-imss cc-r-nula')) +
-          ccCaja('Le queda ' + per, v.neto, 'pesos2',
+          ccCaja(tuUd('Le queda ', 'Te queda ') + per, v.neto, 'pesos2',
                  'Se le va el <b>' + m.pctRetenido.toFixed(2) + '%</b> de lo que gana', 'cc-r-neto') +
         '</div>' +
 
@@ -1399,8 +1399,8 @@
           : '') +
 
         (m.salarioMinimo
-          ? '<p class="cc-aviso cc-aviso-bueno"><strong>No le retienen nada, y por dos leyes distintas.</strong> ' +
-            'Su ingreso equivale a un salario m\u00ednimo general, hoy $' + ccPar().salario_minimo.general +
+          ? tuUd('<p class="cc-aviso cc-aviso-bueno"><strong>No le retienen nada, y por dos leyes distintas.</strong> ', '<p class="cc-aviso cc-aviso-bueno"><strong>No te retienen nada, y por dos leyes distintas.</strong> ') +
+            tuUd('Su ingreso equivale a un salario m\u00ednimo general, hoy $', 'Tu ingreso equivale a un salario m\u00ednimo general, hoy $') + ccPar().salario_minimo.general +
             ' diarios. El \u00faltimo p\u00e1rrafo del art\u00edculo 96 de la Ley del ISR prohibe retener el ' +
             'impuesto a quien en el mes \u00fanicamente percibe un salario m\u00ednimo, y el art\u00edculo 36 de ' +
             'la Ley del Seguro Social ordena que en ese caso el patr\u00f3n pague \u00edntegramente tambi\u00e9n ' +
@@ -1473,12 +1473,12 @@
         '<h4 class="cc-esc-tit">🛒 El impuesto que nadie le retiene</h4>' +
         '<span class="cc-esc-sello">Escenario, no dato</span>' +
       '</div>' +
-      '<p class="cc-esc-nota">Esta plataforma <strong>no puede saber</strong> cuánto IVA paga usted: ' +
-        'depende de en qué gasta, y una parte del gasto —alimentos básicos, medicinas, ' +
+      tuUd('<p class="cc-esc-nota">Esta plataforma <strong>no puede saber</strong> cuánto IVA paga usted: ', '<p class="cc-esc-nota">Esta plataforma <strong>no puede saber</strong> cuánto IVA pagas tú: ') +
+        tuUd('depende de en qué gasta, y una parte del gasto —alimentos básicos, medicinas, ', 'depende de en qué gastas, y una parte del gasto —alimentos básicos, medicinas, ') +
         'colegiaturas, renta de casa habitación— está a tasa cero o exenta. Por eso este renglón ' +
-        'es el único de la subpestaña que usted fija y nosotros no afirmamos.</p>' +
+        tuUd('es el único de la subpestaña que usted fija y nosotros no afirmamos.</p>', 'es el único de la subpestaña que tú fijas y nosotros no afirmamos.</p>') +
       '<label class="cc-esc-mando" for="ccIvaRango">' +
-        '<span>Supongamos que gasta el <b id="ccIvaPct">' + pct + '%</b> de lo que le queda en cosas gravadas al ' +
+        tuUd('<span>Supongamos que gasta el <b id="ccIvaPct">', '<span>Supongamos que gastas el <b id="ccIvaPct">') + pct + tuUd('%</b> de lo que le queda en cosas gravadas al ', '%</b> de lo que te queda en cosas gravadas al ') +
           p.iva.tasa + '%</span>' +
         '<input type="range" id="ccIvaRango" class="cc-rango" min="0" max="100" step="5" value="' + pct + '" ' +
           'oninput="window.AuditEngine.ccFijarIva(this.value)">' +
@@ -1486,9 +1486,9 @@
       '<div class="cc-esc-res">' +
         '<div class="cc-esc-c"><span class="cc-esc-k">IVA al año en ese escenario</span>' +
           '<span class="cc-esc-v">' + ccPesos(iva) + '</span></div>' +
-        '<div class="cc-esc-c"><span class="cc-esc-k">Sobre su ingreso bruto</span>' +
+        tuUd('<div class="cc-esc-c"><span class="cc-esc-k">Sobre su ingreso bruto</span>', '<div class="cc-esc-c"><span class="cc-esc-k">Sobre tu ingreso bruto</span>') +
           '<span class="cc-esc-v">' + sobreBruto.toFixed(2) + '%</span></div>' +
-        '<div class="cc-esc-c"><span class="cc-esc-k">Sumado a lo que ya le retienen</span>' +
+        tuUd('<div class="cc-esc-c"><span class="cc-esc-k">Sumado a lo que ya le retienen</span>', '<div class="cc-esc-c"><span class="cc-esc-k">Sumado a lo que ya te retienen</span>') +
           '<span class="cc-esc-v">' + (state.cc.resultado.mes.pctRetenido + sobreBruto).toFixed(2) + '%</span></div>' +
       '</div>' +
       '<p class="cc-esc-pie">El IVA va dentro del precio: de cada $116 pagados por un bien gravado, $16 son ' +
@@ -1661,9 +1661,9 @@
         '<div class="shock-card-ente">' + escHtml(c.detalle) + '</div>' +
         '<div class="shock-figure-box">' + figuras + '</div>' + sub + hon + lista +
         '<div class="shock-ratio-highlight">' + (veces >= 1
-          ? 'Recibe ' + veces.toFixed(1) + ' veces lo que usted'
-          : 'Recibe menos que usted') + ' ' + chipEstado('derivado') + '</div>' +
-        '<div class="shock-metric-pill"><strong>' + formatNumber(dias) + ' días de su ingreso</strong> equivalen a un solo mes' +
+          ? 'Recibe ' + veces.toFixed(1) + tuUd(' veces lo que usted', ' veces lo que tú')
+          : tuUd('Recibe menos que usted', 'Recibe menos que tú')) + ' ' + chipEstado('derivado') + '</div>' +
+        '<div class="shock-metric-pill"><strong>' + formatNumber(dias) + tuUd(' días de su ingreso</strong> equivalen a un solo mes', ' días de tu ingreso</strong> equivalen a un solo mes') +
           (c.mensual.min && c.mensual.min !== c.mensual.max ? ' del máximo' : '') + ' de este cargo.</div>' +
         '<p class="shock-card-nota">' + escHtml(c.nota) + '</p>' +
       '</div>' +
@@ -1692,7 +1692,7 @@
         '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Su sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
         ') entre 30, por los días de cada regla, en bruto y antes de impuestos. ' + escHtml(L.nota) + '</p>';
     } else {
-      cuenta = '<p class="shock-prest-op">Para ver la cuenta con su sueldo, escriba su ingreso bruto o saque la cuenta en el bloque 1.</p>';
+      cuenta = tuUd('<p class="shock-prest-op">Para ver la cuenta con su sueldo, escriba su ingreso bruto o saque la cuenta en el bloque 1.</p>', '<p class="shock-prest-op">Para ver la cuenta con tu sueldo, escribe tu ingreso bruto o saca la cuenta en el bloque 1.</p>');
     }
     const cols = P.columnas;
     const tabla = '<div class="shock-prest-scroll" tabindex="0" role="region" aria-label="Cuadro de prestaciones"><table class="shock-prest-tabla">' +
@@ -1725,9 +1725,9 @@
     const enBloques = ccEnBloques();
 
     if (badge) {
-      badge.innerHTML = 'Su ingreso de referencia: <strong>' + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
+      badge.innerHTML = tuUd('Su ingreso de referencia: <strong>', 'Tu ingreso de referencia: <strong>') + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
         (lector.calculado ? ' (calculado en el ' + (enBloques ? 'bloque 1' : 'Apartado A') + ')' :
-          (lector.tipo === 'bruto' ? '. <em>Es bruto: saque la cuenta en el ' + (enBloques ? 'bloque 1' : 'Apartado A') +
+          (lector.tipo === 'bruto' ? tuUd('. <em>Es bruto: saque la cuenta en el ', '. <em>Es bruto: saca la cuenta en el ') + (enBloques ? 'bloque 1' : 'Apartado A') +
             ' para comparar neto contra neto.</em>' : ''));
     }
 
@@ -1944,7 +1944,7 @@
           (pob ? amTarjeta(pdPesos(porPersona), 'al año: su parte del daño ambiental', 'derivado', 'Costo 2024 del INEGI ÷ ' + amNum(pob.millones, 1) + ' millones de habitantes (CONAPO, 2026)') : '') +
           (isr > 0 ? amTarjeta(pdPct(porPersona / isr * 100), 'de su ISR anual', 'derivado', 'Su parte del daño comparada con el ISR que calculó en la 2.4') : '') +
         '</div>' +
-        (isr > 0 ? '' : '<p class="pd-nota">Saque la cuenta de su sueldo en la calculadora (2.4) y aquí verá su parte del daño ambiental contra el ISR que paga. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>') +
+        (isr > 0 ? '' : tuUd('<p class="pd-nota">Saque la cuenta de su sueldo en la calculadora (2.4) y aquí verá su parte del daño ambiental contra el ISR que paga. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>', '<p class="pd-nota">Saca la cuenta de tu sueldo en la calculadora (2.4) y aquí verás tu parte del daño ambiental contra el ISR que pagas. <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\')">Ir a la calculadora</button></p>')) +
         '<p class="pd-nota">Es un promedio nacional: reparte entre todos un costo que no generamos por igual. La población usada es la de 2026 y el costo el de 2024, el más reciente publicado.</p>' +
       '</section>';
 
@@ -2057,7 +2057,7 @@
       return;
     }
     capMontar(raiz, 'ambiente', [
-      { ico: '🌎', tit: 'El reloj en vivo', cifra: pdPesos(porSeg), cifraPie: 'de daño ambiental por segundo', estado: 'derivado', res: 'Lo que el país pierde mientras usted lee.' },
+      { ico: '🌎', tit: 'El reloj en vivo', cifra: pdPesos(porSeg), cifraPie: 'de daño ambiental por segundo', estado: 'derivado', res: tuUd('Lo que el país pierde mientras usted lee.', 'Lo que el país pierde mientras lees.') },
       { ico: '🧍', tit: 'Su estado de cuenta ecológico', cifra: amNum(kgAnio, 0) + ' kg', cifraPie: 'de basura al año por persona', estado: 'derivado', res: 'Su basura y su parte del daño, contra su ISR.' },
       { ico: '🗑️', tit: 'La basura', cifra: amNum(R.rellenosSanitarios.pct, 1) + ' %', cifraPie: 'llega a un relleno sanitario', estado: 'oficial', res: 'Un servicio municipal sin partida federal, y las concesiones.' },
       { ico: '💸', tit: 'Protección contra daño', cifra: '× ' + amNum(gpa.ratio_dano_sobre_gasto, 2), cifraPie: 'el daño contra lo que se gasta en proteger', estado: 'derivado', res: 'El presupuesto ambiental 2026 y el proyecto 2027.' },
@@ -2135,7 +2135,7 @@
     cont.innerHTML =
       '<section class="pd-bloque am-car" data-no-autolink>' +
         '<h3 class="pd-tit">📊 Un año de cuentas en veinte segundos</h3>' +
-        '<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>' +
+        tuUd('<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>', '<p class="pd-lead">Pulsa «Simular un año» y ve cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>') +
         '<div class="am-car-mandos">' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc am-car-play" id="amCarPlay" onclick="window.AuditEngine.amCarreraPlay()">▶ Simular un año</button>' +
           '<button type="button" class="pd-btn" onclick="window.AuditEngine.amCarreraFin()">Ver el cierre del año</button>' +
@@ -2223,15 +2223,15 @@
     if (!amTk.ingreso && sug) amTk.ingreso = sug.mes;
     cont.innerHTML =
       '<section class="pd-bloque am-tk-b">' +
-        '<p class="pd-lead">El estado de cuenta del módulo 3 le dice a dónde va lo que usted paga. Este ticket le dice lo contrario: lo que ya le cargaron a su nombre sin preguntarle. Su parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que usted gana.</p>' +
+        tuUd('<p class="pd-lead">El estado de cuenta del módulo 3 le dice a dónde va lo que usted paga. Este ticket le dice lo contrario: lo que ya le cargaron a su nombre sin preguntarle. Su parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que usted gana.</p>', '<p class="pd-lead">El estado de cuenta del módulo 3 te dice a dónde va lo que pagas. Este ticket te dice lo contrario: lo que ya te cargaron a tu nombre sin preguntarte. Tu parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que ganas.</p>') +
         '<div class="am-tk-form" data-no-autolink>' +
-          '<label class="am-tk-campo" for="amTkIngreso"><span>Su ingreso neto al mes</span>' +
+          tuUd('<label class="am-tk-campo" for="amTkIngreso"><span>Su ingreso neto al mes</span>', '<label class="am-tk-campo" for="amTkIngreso"><span>Tu ingreso neto al mes</span>') +
             '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="Por ejemplo, 15000" value="' + (amTk.ingreso || '') + '" ' +
             'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
           '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que le queda después de impuestos. Si no lo sabe, sáquelo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
         '</div>' +
-        '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : '<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>') + '</div>' +
+        '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : tuUd('<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>', '<p class="pd-nota am-tk-vacio">Escribe tu ingreso y pulsa «Emitir». El ticket se imprime renglón por renglón.</p>')) + '</div>' +
       '</section>';
     if (amTk.emitido) amTicketEmitir(true);
   }
@@ -2265,14 +2265,14 @@
     if (!salida) return;
     const v = campo ? parseFloat(String(campo.value).replace(/[^0-9.]/g, '')) : amTk.ingreso;
     if (!(v > 0)) {
-      salida.innerHTML = '<p class="pd-nota am-tk-vacio">' + chipEstado('pendiente') + ' Escriba un ingreso mensual mayor que cero.</p>';
+      salida.innerHTML = '<p class="pd-nota am-tk-vacio">' + chipEstado('pendiente') + tuUd(' Escriba un ingreso mensual mayor que cero.</p>', ' Escribe un ingreso mensual mayor que cero.</p>');
       return;
     }
     amTk.ingreso = v; amTk.emitido = true;
     const T = DB.ticket_negativo, C = DB.cuentas_ecologicas, A = DB.ambiente;
     const c = amTkCuentas(v);
     const ceem = amRef('ref-ceem-2024', 'INEGI, CEEM 2024');
-    const dias = x => amNum(x / c.dia, x / c.dia < 10 ? 1 : 0) + ' días de su ingreso';
+    const dias = x => amNum(x / c.dia, x / c.dia < 10 ? 1 : 0) + tuUd(' días de su ingreso', ' días de tu ingreso');
     const folio = new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
     let n = 0;
     const lin = (txt, val, fmt, nota, clase) =>
@@ -2285,26 +2285,26 @@
     salida.innerHTML =
       '<div class="am-tk" id="amTkImprimible" data-no-autolink>' +
         '<div class="am-tk-cab" style="--i:' + (n++) + '"><b>AUDITAVISIÓN</b><span>Ticket ciudadano en negativo</span><small>Emitido el ' + folio + ' · por habitante · ' + amNum(c.pob.millones, 1) + ' millones de personas (CONAPO 2026)</small></div>' +
-        lin('Su ingreso neto de referencia', v, 'pesos', 'al mes · ' + ccPesos(c.anual) + ' al año', 'am-tk-ref') +
-        sec('Cargos de este año a su nombre') +
+        lin(tuUd('Su ingreso neto de referencia', 'Tu ingreso neto de referencia'), v, 'pesos', 'al mes · ' + ccPesos(c.anual) + ' al año', 'am-tk-ref') +
+        sec(tuUd('Cargos de este año a su nombre', 'Cargos de este año a tu nombre')) +
         lin('Intereses de la deuda pública', -c.intereses, 'neg', '2026 · ' + dias(c.intereses)) +
         lin('Daño ambiental del país', -c.dano, 'neg', '2024 · ' + dias(c.dano)) +
         lin('· de él, por basura mal gestionada', -c.basuraPesos, 'neg', 'incluido en el renglón anterior', 'am-tk-sub') +
         lin('TOTAL CARGADO EN EL AÑO', -c.cargoAnual, 'neg', dias(c.cargoAnual) + ' · ' + amNum(pctCargo, 1) + ' % de lo que gana al año', 'am-tk-total') +
-        '<div class="am-tk-graf" style="--i:' + (n++) + '" role="img" aria-label="De cada 100 pesos que gana al año, ' + amNum(pctCargo, 1) + ' equivalen a lo cargado a su nombre">' +
-          '<span class="am-tk-graf-t">De cada $100 que usted gana al año</span>' +
+        '<div class="am-tk-graf" style="--i:' + (n++) + tuUd('" role="img" aria-label="De cada 100 pesos que gana al año, ', '" role="img" aria-label="De cada 100 pesos que ganas al año, ') + amNum(pctCargo, 1) + tuUd(' equivalen a lo cargado a su nombre">', ' equivalen a lo cargado a tu nombre">') +
+          tuUd('<span class="am-tk-graf-t">De cada $100 que usted gana al año</span>', '<span class="am-tk-graf-t">De cada $100 que ganas al año</span>') +
           '<span class="am-tk-graf-r"><i class="am-c1" style="width:' + (c.intereses / c.anual * 100 * (ancho / pctCargo)).toFixed(2) + '%" title="Intereses de la deuda"></i><i class="am-c3" style="width:' + (c.dano / c.anual * 100 * (ancho / pctCargo)).toFixed(2) + '%" title="Daño ambiental"></i></span>' +
           '<span class="am-tk-graf-l"><span><i class="am-sw am-c1"></i>intereses $' + amNum(c.intereses / c.anual * 100, 1) + '</span><span><i class="am-sw am-c3"></i>daño ambiental $' + amNum(c.dano / c.anual * 100, 1) + '</span></span>' +
         '</div>' +
-        sec('Saldo acumulado a su nombre') +
-        lin('Deuda pública total (SHRFSP)', -c.deuda, 'neg', 'cierre estimado 2026 · ' + amNum(c.deuda / v, 1) + ' meses de su ingreso', 'am-tk-total') +
+        sec(tuUd('Saldo acumulado a su nombre', 'Saldo acumulado a tu nombre')) +
+        lin('Deuda pública total (SHRFSP)', -c.deuda, 'neg', 'cierre estimado 2026 · ' + amNum(c.deuda / v, 1) + tuUd(' meses de su ingreso', ' meses de tu ingreso'), 'am-tk-total') +
         sec('Lo que se abona para reparar') +
         lin('Presupuesto federal de Medio Ambiente', c.ramo16, 'pos', 'Ramo 16, aprobado 2026') +
         lin('Gasto en protección ambiental del país', c.gpa, 'pos', '2024 · gobiernos, empresas y hogares') +
         sec('Su huella física') +
-        lin('Basura que usted genera al año', -c.kg, 'negkg', amNum(A.residuos.perCapitaKg.valor, 3) + ' kg al día × 365') +
-        '<div class="am-tk-bal" style="--i:' + (n++) + '">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a su nombre, se le cargan <b>$' + amNum(c.intereses / c.ramo16, 0) + '</b> de intereses y <b>$' + amNum(c.dano / c.ramo16, 0) + '</b> de daño ambiental.</div>' +
-        '<div class="am-tk-pie" style="--i:' + (n++) + '">' + chipEstado('derivado') + ' ' + pdEsc(T.nota) + ' Los días y los meses dividen cada cargo entre su ingreso.' + '</div>' +
+        lin(tuUd('Basura que usted genera al año', 'Basura que generas al año'), -c.kg, 'negkg', amNum(A.residuos.perCapitaKg.valor, 3) + ' kg al día × 365') +
+        '<div class="am-tk-bal" style="--i:' + (n++) + tuUd('">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a su nombre, se le cargan <b>$', '">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a tu nombre, se te cargan <b>$') + amNum(c.intereses / c.ramo16, 0) + '</b> de intereses y <b>$' + amNum(c.dano / c.ramo16, 0) + '</b> de daño ambiental.</div>' +
+        '<div class="am-tk-pie" style="--i:' + (n++) + '">' + chipEstado('derivado') + ' ' + pdEsc(T.nota) + tuUd(' Los días y los meses dividen cada cargo entre su ingreso.', ' Los días y los meses dividen cada cargo entre tu ingreso.') + '</div>' +
       '</div>' +
       '<div class="am-tk-acciones">' +
         '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.amTicketCopiar()"><span>📋</span> Copiar mi ticket</button>' +
@@ -2340,8 +2340,8 @@
       'CARGOS DE ESTE AÑO A SU NOMBRE (por habitante)\n' +
       '- Intereses de la deuda pública 2026: ' + p(c.intereses) + '\n' +
       '- Daño ambiental del país 2024: ' + p(c.dano) + ' (de él, basura: ' + p(c.basuraPesos) + ')\n' +
-      '= Total del año: ' + p(c.cargoAnual) + ', ' + amNum(c.cargoAnual / c.dia, 1) + ' días de su ingreso\n\n' +
-      'SALDO ACUMULADO: deuda pública total (SHRFSP, cierre estimado 2026): ' + p(c.deuda) + ', ' + amNum(c.deuda / amTk.ingreso, 1) + ' meses de su ingreso\n' +
+      '= Total del año: ' + p(c.cargoAnual) + ', ' + amNum(c.cargoAnual / c.dia, 1) + tuUd(' días de su ingreso\n\n', ' días de tu ingreso\n\n') +
+      'SALDO ACUMULADO: deuda pública total (SHRFSP, cierre estimado 2026): ' + p(c.deuda) + ', ' + amNum(c.deuda / amTk.ingreso, 1) + tuUd(' meses de su ingreso\n', ' meses de tu ingreso\n') +
       'ABONOS: presupuesto de Medio Ambiente 2026 +' + ccPesos(c.ramo16) + '; protección ambiental del país 2024 +' + ccPesos(c.gpa) + '\n' +
       'HUELLA: ' + amNum(c.kg, 0) + ' kg de basura al año\n\n' +
       'Fuentes: PEF 2026 (Anexo 8), INEGI Cuentas Económicas y Ecológicas 2024, SHCP Criterios Generales de Política Económica 2027 (p. 67), SEMARNAT Diagnóstico Básico para la Gestión Integral de los Residuos, CONAPO. Cifras oficiales repartidas por habitante (derivado).';
@@ -2472,7 +2472,7 @@
         '<div class="dl-cab"><h3 id="dlModalTit">' + (dicc ? 'Diccionario de datos' : 'Descargar datos') + '</h3>' +
           '<button type="button" class="dl-cerrar" onclick="window.AuditEngine.cerrarDescargas()" aria-label="Cerrar">✕</button></div>' +
         '<p class="dl-intro">Cada base se descarga en CSV y abre directo en Excel, con acentos. Al final del archivo va su fuente. ' +
-          (dicc ? 'Abajo de cada base, qué significa cada columna.' : 'Pulse «Diccionario» para ver qué significa cada columna.') + '</p>' +
+          (dicc ? 'Abajo de cada base, qué significa cada columna.' : tuUd('Pulse «Diccionario» para ver qué significa cada columna.', 'Pulsa «Diccionario» para ver qué significa cada columna.')) + '</p>' +
         DESCARGAS.map(d =>
           '<article class="dl-base" id="dl-' + d.id + '">' +
             '<div class="dl-base-cab"><h4>' + pdEsc(d.titulo) + '</h4>' +
@@ -2591,7 +2591,7 @@
     const max = orden[0].total.porAclarar;
     const t = e.total;
     return '<div class="cp-ent-cab">' +
-        '<label for="cpEntSel">Elija su estado</label>' +
+        tuUd('<label for="cpEntSel">Elija su estado</label>', '<label for="cpEntSel">Elige tu estado</label>') +
         '<select id="cpEntSel" onchange="window.AuditEngine.cpElegirEntidad(this.value)">' +
           lista.map(x => '<option value="' + pdEsc(x.entidad) + '"' + (x === e ? ' selected' : '') + '>' + pdEsc(cpNombre(x.entidad)) + '</option>').join('') +
         '</select>' +
@@ -2745,7 +2745,7 @@
     const fuentes =
       '<section class="pd-bloque">' +
         '<h3 class="pd-tit">📚 Documentos y descarga</h3>' +
-        '<p class="pd-lead">Cada cifra de esta sección sale de estos documentos. Puede bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>' +
+        tuUd('<p class="pd-lead">Cada cifra de esta sección sale de estos documentos. Puede bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>', '<p class="pd-lead">Cada cifra de esta sección sale de estos documentos. Puedes bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>') +
         '<div class="cp-botones">' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.descargarCSV(\'asf-cp2024\')">⬇️ CSV por estado</button>' +
           '<a class="hero-pillar-btn hero-pillar-audit no-autolink" href="' + pdEsc(C.fuentes.ASFDATOS.url) + '" target="_blank" rel="noopener noreferrer">🔎 Buscar una auditoría en ASF Datos ↗</a>' +
@@ -2785,7 +2785,7 @@
     indice.setAttribute('aria-label', 'Capítulos de esta sección');
     indice.setAttribute('data-no-autolink', '');
     indice.innerHTML =
-      '<div class="cap-indice-cab"><span>' + caps.length + ' capítulos · elija por dónde empezar</span>' +
+      '<div class="cap-indice-cab"><span>' + caps.length + tuUd(' capítulos · elija por dónde empezar</span>', ' capítulos · elige por dónde empezar</span>') +
         '<button type="button" class="cap-todo" onclick="window.AuditEngine.capTodo(\'' + clave + '\')">Leer todo de corrido</button></div>' +
       '<div class="cap-tarjetas">' + caps.map((c, i) =>
         '<button type="button" class="cap-tarjeta" data-i="' + i + '" onclick="window.AuditEngine.capIr(\'' + clave + '\',' + i + ')">' +
@@ -2876,7 +2876,7 @@
     const pm = v => '$' + (v / total * 1000).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     return [
       { ico: '🧾', tit: 'Su parte', cifra: pm(L.aprobado) + ' y ' + pm(J.aprobado), cifraPie: 'de cada $1,000 del gasto federal', estado: 'derivado',
-        res: 'Cuánto de lo que usted paga llega al Congreso y cuánto a la Judicatura.' },
+        res: tuUd('Cuánto de lo que usted paga llega al Congreso y cuánto a la Judicatura.', 'Cuánto de lo que pagas llega al Congreso y cuánto a la Judicatura.') },
       { ico: '🏛️', tit: 'Los dos Poderes en 2026', cifra: pdMdp(L.aprobado + J.aprobado), cifraPie: 'aprobados entre ambos', estado: 'derivado',
         res: 'Lo que la Cámara aprobó a cada uno, y lo que le recortó al Poder Judicial.' },
       { ico: '📊', tit: 'Lo ya gastado', cifra: gastoCifra.txt, cifraPie: gastoCifra.pie, estado: 'derivado',
@@ -2886,9 +2886,9 @@
       { ico: '🔎', tit: 'Congreso: lo que la ASF revisó', cifra: 'Cuenta Pública 2024', cifraPie: 'último año auditado', estado: 'oficial',
         res: 'Los resultados de la Auditoría en Diputados y Senado, y los 32 congresos locales.' },
       { ico: '💰', tit: 'Cuánto ganan', cifra: tope.netoAnual ? pdPesos(tope.netoAnual) : '', cifraPie: tope.cargo ? 'neto al año: ' + tope.cargo : '', estado: 'oficial',
-        res: 'Remuneraciones netas oficiales de 2026, y la comparación con su ingreso.' },
+        res: tuUd('Remuneraciones netas oficiales de 2026, y la comparación con su ingreso.', 'Remuneraciones netas oficiales de 2026, y la comparación con tu ingreso.') },
       { ico: '📂', tit: 'Los documentos', cifra: Object.keys(P.fuentes).length + ' documentos', cifraPie: 'oficiales, con liga y página', estado: 'oficial',
-        res: 'De dónde sale cada cifra, para que usted lo compruebe.' }
+        res: tuUd('De dónde sale cada cifra, para que usted lo compruebe.', 'De dónde sale cada cifra, para que lo compruebes.') }
     ];
   }
 
@@ -2909,7 +2909,7 @@
     /* --- 1. Su parte --- */
     const tuParte =
       '<section class="pd-bloque" id="pd-tuparte">' +
-        '<h3 class="pd-tit">Lo que a usted le toca pagar de cada Poder</h3>' +
+        tuUd('<h3 class="pd-tit">Lo que a usted le toca pagar de cada Poder</h3>', '<h3 class="pd-tit">Lo que a ti te toca pagar de cada Poder</h3>') +
         '<p class="pd-lead">De cada <b>$1,000</b> del gasto federal aprobado para 2026, el Congreso de la Unión recibe <b>' +
           '$' + partes[0].porMil.toFixed(2) + '</b> y el Poder Judicial de la Federación <b>$' +
           partes[1].porMil.toFixed(2) + '</b>. ' + chipEstado('derivado') +
@@ -2926,7 +2926,7 @@
         '</div>' +
         (hayIsr
           ? '<p class="pd-nota">Calculado con el ISR anual que obtuvo en la calculadora (2.4). Las cuotas de seguridad social no entran: tienen destino específico.</p>'
-          : '<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.switchSubtab(\'accion-financiera\',\'calculadora\')">Calcule su ISR en 2.4</button> y aquí verá cuántos pesos suyos llegan a cada Poder.</p>') +
+          : tuUd('<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.switchSubtab(\'accion-financiera\',\'calculadora\')">Calcule su ISR en 2.4</button> y aquí verá cuántos pesos suyos llegan a cada Poder.</p>', '<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.switchSubtab(\'accion-financiera\',\'calculadora\')">Calcula tu ISR en 2.4</button> y aquí verás cuántos pesos tuyos llegan a cada Poder.</p>')) +
       '</section>';
 
     /* --- 2. Los dos Poderes lado a lado --- */
@@ -3159,7 +3159,7 @@
           '<span class="pd-fila-v">' + pdPesos(r.netoAnual) + ' ' + chipEstado(r.netoAnualEstado || r.estado) + '</span></div>').join('') +
         '<p class="pd-nota">' + R.map(r => '<b>' + pdEsc(r.cargo) + ':</b> ' + pdFuente(r.fuente, r.pagina) + (r.parcial ? ' — ' + pdEsc(r.nota) : '')).join('<br>') + '</p>' +
         (document.getElementById('btnMod3ApartadoB')
-          ? '<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.irComparadorChoque()">Compararlo con su ingreso (2.4 B)</button></p>'
+          ? tuUd('<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.irComparadorChoque()">Compararlo con su ingreso (2.4 B)</button></p>', '<p class="pd-nota"><button type="button" class="pd-btn" onclick="window.AuditEngine.irComparadorChoque()">Compararlo con tu ingreso (2.4 B)</button></p>')
           : '') +
       '</section>';
 
@@ -3251,7 +3251,7 @@
     const el = document.getElementById('efosEstado');
     if (!el) return;
     if (efos.estado === 'cargando') { el.innerHTML = 'Descargando la lista del SAT…'; return; }
-    if (efos.estado === 'error') { el.innerHTML = chipEstado('pendiente') + ' No se pudo cargar la lista. Revise su conexión e intente de nuevo.'; return; }
+    if (efos.estado === 'error') { el.innerHTML = chipEstado('pendiente') + tuUd(' No se pudo cargar la lista. Revise su conexión e intente de nuevo.', ' No se pudo cargar la lista. Revisa tu conexión e intenta de nuevo.'); return; }
     if (efos.estado !== 'listo') { el.innerHTML = 'La lista se descarga al escribir la primera búsqueda (1.5 MB).'; return; }
     const m = window.SAT_69B.meta, c = m.porSituacion;
     el.innerHTML = chipEstado('oficial') + ' <strong>' + formatNumber(m.total) + '</strong> registros · corte del SAT al ' + escHtml(m.corte) +
@@ -3281,10 +3281,10 @@
     }
     if (!hallados.length) {
       cont.innerHTML = '<p class="efos-vacio">No aparece en la lista 69-B con corte al ' + escHtml(window.SAT_69B.meta.corte) + '. ' +
-        'Eso no certifica a nadie: solo significa que el SAT no lo ha incluido. Verifique el RFC exacto, que es más preciso que el nombre.</p>';
+        tuUd('Eso no certifica a nadie: solo significa que el SAT no lo ha incluido. Verifique el RFC exacto, que es más preciso que el nombre.</p>', 'Eso no certifica a nadie: solo significa que el SAT no lo ha incluido. Verifica el RFC exacto, que es más preciso que el nombre.</p>');
       return;
     }
-    cont.innerHTML = (hallados.length === 40 ? '<p class="efos-nota">Se muestran los primeros 40. Escriba el RFC o más palabras del nombre.</p>' : '') +
+    cont.innerHTML = (hallados.length === 40 ? tuUd('<p class="efos-nota">Se muestran los primeros 40. Escriba el RFC o más palabras del nombre.</p>', '<p class="efos-nota">Se muestran los primeros 40. Escribe el RFC o más palabras del nombre.</p>') : '') +
       hallados.map(r => {
         const s = EFOS_SIT[r[2]];
         return '<article class="efos-ficha ' + s.clase + '">' +
@@ -3363,8 +3363,8 @@
         '<div class="cc-cab-tx">' +
           '<h3 class="cc-cab-tit">La emisión de su estado de cuenta cívico</h3>' +
           '<p class="cc-cab-sub">' + (d
-            ? 'Lo que usted ganó, lo que le retuvieron y a dónde fue su impuesto, en un solo documento que puede descargar o copiar.'
-            : 'Aparece aquí en cuanto pulse «Sacar la cuenta» en el paso 1.1.') + '</p>' +
+            ? tuUd('Lo que usted ganó, lo que le retuvieron y a dónde fue su impuesto, en un solo documento que puede descargar o copiar.', 'Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto, en un solo documento que puedes descargar o copiar.')
+            : tuUd('Aparece aquí en cuanto pulse «Sacar la cuenta» en el paso 1.1.', 'Aparece aquí en cuanto pulses «Sacar la cuenta» en el paso 1.1.')) + '</p>' +
         '</div>' +
       '</div>' : '';
     if (!d) { cont.innerHTML = cab14 ? '<section class="cc-bloque cc-bloque-ecc">' + cab14 + '</section>' : ""; return; }
@@ -3576,7 +3576,7 @@
       g.fillStyle = C.tarjeta; g.fillRect(M, y, W - 2 * M, 118);
       g.fillStyle = C.oro; g.fillRect(M, y, 6, 118);
       eccTexto(g, d.ellos.veces.toFixed(1) + '×', M + 36, y + 80, '700 62px ' + serif, C.oro);
-      eccTexto(g, d.ellos.cargo + ': ' + d.ellos.veces.toFixed(1) + ' veces su ingreso', M + 230, y + 50, '600 24px ' + sans, C.txt);
+      eccTexto(g, d.ellos.cargo + ': ' + d.ellos.veces.toFixed(1) + tuUd(' veces su ingreso', ' veces tu ingreso'), M + 230, y + 50, '600 24px ' + sans, C.txt);
       eccTexto(g, 'Neto contra neto. Anexo 23, PEF 2026: ' + ccPesos(d.ellos.netoAnual) + ' al año', M + 230, y + 86, '400 19px ' + sans, C.suave);
       y += 118;
     }
@@ -3694,7 +3694,7 @@
         '</div>' +
 
         '<div class="cc-vivo-tira">' +
-          '<span class="cc-vivo-et">Desde que usted abrió esta página, el país lleva</span>' +
+          tuUd('<span class="cc-vivo-et">Desde que usted abrió esta página, el país lleva</span>', '<span class="cc-vivo-et">Desde que abriste esta página, el país lleva</span>') +
           '<span class="cc-vivo-num cc-vivo" id="ccVivoTotal" data-rate="' + totalSeg + '">+$0.00</span>' +
           '<span class="cc-vivo-sub">entre deuda nueva, intereses, pérdida operativa y montos observados ' +
             '· <b>' + ccPesosFinos(totalSeg) + ' por segundo</b> · su parte: ' +
@@ -3730,7 +3730,7 @@
           ? '<p class="cc-rel-personal"><strong>Puesto junto a lo suyo.</strong> Su parte de estas cuatro cuentas ' +
             'es <strong>' + ccPesos(totalPersona) + ' al año</strong>. Con el ingreso neto de ' +
             ccPesos(res.ano.neto) + ' anuales que arrojó el bloque 2, equivale a <strong>' +
-            (totalPersona / (res.ano.neto / 365)).toFixed(1) + ' días</strong> de todo lo que usted gana; ' +
+            (totalPersona / (res.ano.neto / 365)).toFixed(1) + tuUd(' días</strong> de todo lo que usted gana; ', ' días</strong> de todo lo que ganas; ') +
             'y frente a los ' + ccPesos(res.ano.isr) + ' que paga de impuesto sobre la renta, es <strong>' +
             (res.ano.isr > 0 ? (totalPersona / res.ano.isr).toFixed(2) + ' veces' : 'una cifra sin comparación posible, porque no paga ISR') +
             '</strong> esa cantidad.</p>'
@@ -3827,12 +3827,12 @@
           fila('El reparto del gasto', 'Los ocho renglónes del Presupuesto de Egresos 2026 que ya publica ' +
                'la subpestaña 1.1, con sus montos. El porcentaje de cada uno se obtiene dividiendo su monto ' +
                'entre la suma de los ocho', 'oficial', vsxRefLink('ref-pef2026')) +
-          fila('El cálculo desde el neto', 'Cuando usted escribe lo que recibe en lugar de lo que gana, el ' +
+          fila('El cálculo desde el neto', tuUd('Cuando usted escribe lo que recibe en lugar de lo que gana, el ', 'Cuando escribes lo que recibes en lugar de lo que ganas, el ') +
                'bruto se busca por aproximaciones sucesivas hasta que el neto calculado coincide con el suyo. ' +
                'Se hace así porque la tarifa tiene once tramos, el subsidio un tope y la cuota obrera dos ' +
                'bases distintas: despejarla a mano daría una fórmula falsa', 'derivado') +
           fila('Los relojes', 'Cada uno toma una cifra anual de su documento y la divide entre los segundos del ' +
-               'año. <strong>No miden un gasto que ocurra en el instante en que usted mira</strong>: ' +
+               tuUd('año. <strong>No miden un gasto que ocurra en el instante en que usted mira</strong>: ', 'año. <strong>No miden un gasto que ocurra en el instante en que miras</strong>: ') +
                'proyectan un ritmo anual sobre el tiempo que lleva en esta página', 'derivado') +
           fila('El poblacional', p.poblacion.fuente, p.poblacion.estado,
                '<em>' + p.poblacion.pendiente + '</em>') +
@@ -3873,7 +3873,7 @@
       ccPintarMandos();
       const cont = document.getElementById('ccRetencion');
       if (cont) {
-        cont.innerHTML = '<p class="cc-aviso cc-aviso-error">Escriba una cantidad mayor que cero para sacar ' +
+        cont.innerHTML = tuUd('<p class="cc-aviso cc-aviso-error">Escriba una cantidad mayor que cero para sacar ', '<p class="cc-aviso cc-aviso-error">Escribe una cantidad mayor que cero para sacar ') +
           'la cuenta. Puede usarse con o sin separador de miles.</p>';
       }
       const rep = document.getElementById('ccReparto');
@@ -4514,7 +4514,7 @@
       });
 
       if (!results.length) {
-        aviso('No hay coincidencias para «' + escHtml(bruto) + '». Pruebe con el nombre de un estado, un municipio, un ramo o un término del glosario.');
+        aviso('No hay coincidencias para «' + escHtml(bruto) + tuUd('». Pruebe con el nombre de un estado, un municipio, un ramo o un término del glosario.', '». Prueba con el nombre de un estado, un municipio, un ramo o un término del glosario.'));
         return;
       }
 
@@ -4532,7 +4532,7 @@
         `).join('') +
         (total > TOPE
           ? '<div class="search-aviso search-aviso-mas">' + (total - TOPE) + ' coincidencias más' +
-            (nMun > 1 ? ' (' + nMun + ' municipios)' : '') + '. Escriba más letras o el nombre del estado para acotar.</div>'
+            (nMun > 1 ? ' (' + nMun + ' municipios)' : '') + tuUd('. Escriba más letras o el nombre del estado para acotar.</div>', '. Escribe más letras o el nombre del estado para acotar.</div>')
           : '');
 
       dropdown.querySelectorAll('.search-item').forEach((item, i) => {
@@ -5345,7 +5345,7 @@
       n: 3, icono: '💳', titulo: 'Calculadora Cívica',
       subtitulo: 'Tu sueldo, tus impuestos y el rubro al que llegan',
       texto: 'Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu estado y tu municipio con los 2,479 del padrón nacional.',
-      temas: [['🧾 1 · Su estado de cuenta', 'ccticket'], ['⚡ 2 · Usted contra ellos', 'cccompara'], ['⏱️ 3 · El reloj de la deuda', 'ccreloj']]
+      temas: [[tuUd('🧾 1 · Su estado de cuenta', '🧾 1 · Tu estado de cuenta'), 'ccticket'], [tuUd('⚡ 2 · Usted contra ellos', '⚡ 2 · Tú contra ellos'), 'cccompara'], ['⏱️ 3 · El reloj de la deuda', 'ccreloj']]
     },
     verificador: {
       n: 4, icono: '🔍', titulo: 'Modo Inspector',
@@ -6315,7 +6315,7 @@
        hasta que alguien pide la ley de una etapa. */
     box.hidden = !e && !document.getElementById('circuitoGrid');
     if (!e) {
-      box.innerHTML = '<p class="cd-vacio">Seleccione una etapa para ver su fundamento legal, su plazo y quién responde por ella.</p>';
+      box.innerHTML = tuUd('<p class="cd-vacio">Seleccione una etapa para ver su fundamento legal, su plazo y quién responde por ella.</p>', '<p class="cd-vacio">Selecciona una etapa para ver su fundamento legal, su plazo y quién responde por ella.</p>');
       return;
     }
     box.innerHTML = `
@@ -6529,7 +6529,7 @@
     /* Debajo de la grafica ya no queda la ficha, sino la invitacion a
        abrirla. Ocupa una linea y no se mueve. */
     if (pista) {
-      pista.innerHTML = '<p class="cd-vacio">Pulse cualquier rengl\u00f3n para abrir su ficha en una ventana lateral: ' +
+      pista.innerHTML = tuUd('<p class="cd-vacio">Pulse cualquier rengl\u00f3n para abrir su ficha en una ventana lateral: ', '<p class="cd-vacio">Pulsa cualquier rengl\u00f3n para abrir su ficha en una ventana lateral: ') +
         'qu\u00e9 ' + cfg.verbo + ', qu\u00e9 ley lo sustenta, qu\u00e9 efecto jur\u00eddico produce ' +
         'y qu\u00e9 incluye por dentro.</p>';
     }
@@ -6732,7 +6732,7 @@
       reiniciar: 'erarioReiniciar()',
       estado: state.erarioTotalContado
         ? '✅ Contabilizado. El ingreso autorizado y el gasto aprobado cierran en la misma cifra: eso es lo que explica el resto de la subpestaña.'
-        : '⚪ Las cinco cifras están en ceros ($0). Pulse «Contabilizar» para verlas subir hasta el cierre del ejercicio.'
+        : tuUd('⚪ Las cinco cifras están en ceros ($0). Pulse «Contabilizar» para verlas subir hasta el cierre del ejercicio.', '⚪ Las cinco cifras están en ceros ($0). Pulsa «Contabilizar» para verlas subir hasta el cierre del ejercicio.')
     });
   }
 
@@ -6757,7 +6757,7 @@
       reiniciar: "barrasReiniciar('" + ctx + "')",
       estado: contado
         ? '✅ Contabilizado. ' + BARRAS_LISTO[ctx]
-        : '⚪ Los ' + n + ' renglones están en ceros ($0 / 0.0%). Pulse «Contabilizar» para ver crecer las barras y sus porcentajes.'
+        : '⚪ Los ' + n + tuUd(' renglones están en ceros ($0 / 0.0%). Pulse «Contabilizar» para ver crecer las barras y sus porcentajes.', ' renglones están en ceros ($0 / 0.0%). Pulsa «Contabilizar» para ver crecer las barras y sus porcentajes.')
     });
   }
 
@@ -6811,7 +6811,7 @@
       reiniciar: 'flujoContableReiniciar()',
       estado: state.flujoContableContado
         ? '✅ Contabilizado. El flujo presupuestal LIF-PEF 2026 ha sido consolidado en $10.19 billones.'
-        : '⚪ Cifras en ceros ($0.00 B). Pulse «Contabilizar» para consolidar el flujo presupuestal 2026.'
+        : tuUd('⚪ Cifras en ceros ($0.00 B). Pulse «Contabilizar» para consolidar el flujo presupuestal 2026.', '⚪ Cifras en ceros ($0.00 B). Pulsa «Contabilizar» para consolidar el flujo presupuestal 2026.')
     });
   }
 
@@ -6910,7 +6910,7 @@
       reiniciar: 'saludErarioReiniciar()',
       estado: state.saludErarioContado
         ? '✅ Termostato calibrado. Salud financiera: 54/100 (Margen Frágil). Rigidez del 30.4% por deuda y obligaciones no programables.'
-        : '⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulse «Contabilizar» para evaluar la salud presupuestal 2026.'
+        : tuUd('⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulse «Contabilizar» para evaluar la salud presupuestal 2026.', '⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulsa «Contabilizar» para evaluar la salud presupuestal 2026.')
     });
   }
 
@@ -7003,7 +7003,7 @@
 
     if (diag) {
       if (factor === 0) {
-        diag.textContent = 'Pulse «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.';
+        diag.textContent = tuUd('Pulse «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.', 'Pulsa «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.');
       } else {
         diag.textContent = 'Salud presupuestal frágil (54/100). El 30.4% del erario ($3.10 B) está atado a obligaciones no programables, reduciendo la flexibilidad ante choques económicos.';
       }
@@ -7184,27 +7184,27 @@
     entidad: {
       cont: 'entidadCircuito', mandos: 'entidadMandos', sello: 'CIRCUITO DE LA ENTIDAD',
       listo: 'Contabilizado. Cada barra compara las cuatro fuentes de la entidad entre s\u00ed; la dependencia federal mide qu\u00e9 parte del dinero que ejerce no recaud\u00f3 ella.',
-      ceros: 'El circuito de la entidad est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para ver de d\u00f3nde viene cada peso que ejerce.'
+      ceros: tuUd('El circuito de la entidad est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para ver de d\u00f3nde viene cada peso que ejerce.', 'El circuito de la entidad est\u00e1 en ceros. Pulsa \u00abContabilizar\u00bb para ver de d\u00f3nde viene cada peso que ejerce.')
     },
     munent: {
       cont: 'municipiosCircuito', mandos: 'munEntidadMandos', sello: 'MUNICIPIOS DE LA ENTIDAD',
       listo: 'Contabilizado. De cada municipio se ve lo que ingres\u00f3, lo que cobr\u00f3 de predial, lo que recibi\u00f3 de los dos fondos del Ramo 33 y qu\u00e9 tanto de eso no lo recaud\u00f3 \u00e9l.',
-      ceros: 'El padr\u00f3n municipal est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para llenarlo con las cifras del INEGI.'
+      ceros: tuUd('El padr\u00f3n municipal est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para llenarlo con las cifras del INEGI.', 'El padr\u00f3n municipal est\u00e1 en ceros. Pulsa \u00abContabilizar\u00bb para llenarlo con las cifras del INEGI.')
     },
     pefin: {
       cont: 'peCifras', mandos: 'peFinMandos', sello: 'PAQUETE ECON\u00d3MICO 2027',
       listo: 'Contabilizado. Son las cifras que Hacienda entreg\u00f3 el 8 de septiembre de 2026; todav\u00eda no son ley.',
-      ceros: 'El Paquete Econ\u00f3mico 2027 est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para ver c\u00f3mo se proyecta el a\u00f1o entrante.'
+      ceros: tuUd('El Paquete Econ\u00f3mico 2027 est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para ver c\u00f3mo se proyecta el a\u00f1o entrante.', 'El Paquete Econ\u00f3mico 2027 est\u00e1 en ceros. Pulsa \u00abContabilizar\u00bb para ver c\u00f3mo se proyecta el a\u00f1o entrante.')
     },
     pegasto: {
       cont: 'peGasto', mandos: 'peGastoMandos', sello: 'EN QU\u00c9 SE IR\u00c1 EN 2027',
       listo: 'Contabilizado. Tres lecturas del mismo gasto: por finalidad, por programa social y por obra prioritaria.',
-      ceros: 'El gasto propuesto para 2027 est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para repartirlo.'
+      ceros: tuUd('El gasto propuesto para 2027 est\u00e1 en ceros. Pulse \u00abContabilizar\u00bb para repartirlo.', 'El gasto propuesto para 2027 est\u00e1 en ceros. Pulsa \u00abContabilizar\u00bb para repartirlo.')
     },
     pecolchon: {
       cont: 'peColchon', mandos: 'peColchonMandos', sello: 'COLCH\u00d3N Y PASIVOS',
       listo: 'Contabilizado. Arriba, con qu\u00e9 se amortigua un golpe; abajo, los compromisos que no cuentan como deuda.',
-      ceros: 'Los amortiguadores y los pasivos contingentes est\u00e1n en ceros. Pulse \u00abContabilizar\u00bb para verlos.'
+      ceros: tuUd('Los amortiguadores y los pasivos contingentes est\u00e1n en ceros. Pulse \u00abContabilizar\u00bb para verlos.', 'Los amortiguadores y los pasivos contingentes est\u00e1n en ceros. Pulsa \u00abContabilizar\u00bb para verlos.')
     }
   };
 
@@ -8264,6 +8264,41 @@
     return !!document.body && document.body.getAttribute('data-pagina') === 'auditor';
   }
 
+  /* Trato de tu en el auditor (decision del autor, 27-09-2026); la
+     Enciclopedia congelada conserva el usted de siempre. */
+  function tuUd(ud, tu) {
+    return esAuditor() ? tu : ud;
+  }
+
+  /* Los pocos textos de la base que hablan de usted se ajustan en memoria,
+     solo en el auditor: el archivo de datos y la Enciclopedia no cambian. */
+  function tuteoBase() {
+    if (!esAuditor()) return;
+    const cambiar = (obj, campo, pares) => {
+      if (!obj || typeof obj[campo] !== 'string') return;
+      pares.forEach(par => { obj[campo] = obj[campo].split(par[0]).join(par[1]); });
+    };
+    const cc = DB.calculadora_civica;
+    if (cc) {
+      const pc = cc.puntos_ciegos || [];
+      cambiar(pc[0], 'titulo', [['El impuesto que usted paga', 'El impuesto que pagas']]);
+      cambiar(pc[0], 'texto', [['que su dinero vaya', 'que tu dinero vaya'], ['Su ISR no está etiquetado', 'Tu ISR no está etiquetado'],
+        ['a su aportación le corresponde', 'a tu aportación le corresponde']]);
+      cambiar(pc[1], 'texto', [['el reparto del gasto que usted ve', 'el reparto del gasto que ves']]);
+      cambiar(pc[2], 'texto', [['cuánto IVA paga usted, porque eso depende de en qué gasta', 'cuánto IVA pagas tú, porque eso depende de en qué gastas'],
+        ['escenario que usted fija', 'escenario que tú fijas']]);
+      cambiar(cc.relojes, 'nota', [['en que usted lo mira', 'en que lo miras'], ['el tiempo que usted lleva', 'el tiempo que llevas']]);
+    }
+    const pr = DB.comparador_salarial && DB.comparador_salarial.prestaciones;
+    if (pr) {
+      cambiar((pr.columnas || [])[0], 'nombre', [['Usted (mínimo de ley)', 'Tú (mínimo de ley)']]);
+      (pr.filas || []).forEach(f => {
+        const c = f.celdas && f.celdas.lft;
+        cambiar(c, 'tx', [['Lo paga usted: se le retiene', 'Lo pagas tú: se te retiene']]);
+      });
+    }
+  }
+
   /* Panel lateral de contexto. La informacion densa (metodo, documentos,
      leyes) no se borra: se guarda junto a un boton y se lee en la misma
      ventana lateral del glosario, sin salir del recorrido. */
@@ -8537,7 +8572,7 @@
     ];
     var compromisos = [
       'No inventar ni redondear a ojo: lo que no se puede verificar se queda como <b>pendiente</b>.',
-      'Poner el documento a su alcance para que usted lo verifique por su cuenta.',
+      tuUd('Poner el documento a su alcance para que usted lo verifique por su cuenta.', 'Poner el documento a tu alcance para que lo verifiques por tu cuenta.'),
       'Corregir a la vista cuando se encuentre un error. El sello de versión al pie de la página dice qué copia está leyendo.',
       'Orientar hacia los canales oficiales de denuncia, sin suplantar a ninguna autoridad.'
     ];
@@ -11740,7 +11775,7 @@
 
         '<div class="pjo-cambio">' +
           '<div class="pjo-cambio-tit">Antes de seguir: este organigrama cambió hace poco</div>' +
-          '<p class="pjo-cambio-sub">Casi todo lo que se encuentra escrito sobre la Suprema Corte describe una institución que ya no existe con esa forma. Compare las dos columnas antes de recorrer las fichas: es la diferencia entre entender el organigrama y confundirse con él.</p>' +
+          tuUd('<p class="pjo-cambio-sub">Casi todo lo que se encuentra escrito sobre la Suprema Corte describe una institución que ya no existe con esa forma. Compare las dos columnas antes de recorrer las fichas: es la diferencia entre entender el organigrama y confundirse con él.</p>', '<p class="pjo-cambio-sub">Casi todo lo que se encuentra escrito sobre la Suprema Corte describe una institución que ya no existe con esa forma. Compara las dos columnas antes de recorrer las fichas: es la diferencia entre entender el organigrama y confundirse con él.</p>') +
           '<div class="pjo-cambio-cols">' +
             '<div class="pjo-col" data-lado="antes">' +
               '<div class="pjo-col-tit">Como era</div>' +
@@ -11797,7 +11832,7 @@
     const total = dataTree.length;
     return '<div class="pj-escalera-wrap">' +
       '<div class="pj-escalera-tit">Mapa jerárquico</div>' +
-      '<p class="pj-escalera-sub">La estructura baja de arriba hacia abajo: cada peldaño es un nivel y su ancho indica qué tan cerca está de la cúspide. Pulse cualquiera para saltar directo a sus fichas.</p>' +
+      tuUd('<p class="pj-escalera-sub">La estructura baja de arriba hacia abajo: cada peldaño es un nivel y su ancho indica qué tan cerca está de la cúspide. Pulse cualquiera para saltar directo a sus fichas.</p>', '<p class="pj-escalera-sub">La estructura baja de arriba hacia abajo: cada peldaño es un nivel y su ancho indica qué tan cerca está de la cúspide. Pulsa cualquiera para saltar directo a sus fichas.</p>') +
       '<div class="pj-escalera">' +
       dataTree.map((lvl, i) => {
         const partes = lvl.nivel.split(':');
@@ -15678,19 +15713,19 @@
   const VSX_PASOS = [
     {
       n: '1', ico: '🎛️', tono: 'gold',
-      tit: 'Elija la variable',
+      tit: tuUd('Elija la variable', 'Elige la variable'),
       txt: 'Seis indicadores macroeconómicos: crecimiento, deuda, balance, ingresos, gasto y ferrocarriles. Cada uno reescala la gráfica completa.',
       pista: 'Los botones dorados de arriba'
     },
     {
       n: '2', ico: '📊', tono: 'emerald',
-      tit: 'Mire crecer las barras',
-      txt: 'La gráfica se anima desde cero hasta la cifra real y traza la línea de referencia de Díaz. Puede repetirla cuantas veces quiera con «Reiniciar a ceros».',
+      tit: tuUd('Mire crecer las barras', 'Mira crecer las barras'),
+      txt: tuUd('La gráfica se anima desde cero hasta la cifra real y traza la línea de referencia de Díaz. Puede repetirla cuantas veces quiera con «Reiniciar a ceros».', 'La gráfica se anima desde cero hasta la cifra real y traza la línea de referencia de Díaz. Puedes repetirla cuantas veces quieras con «Reiniciar a ceros».'),
       pista: 'Arranca sola al entrar'
     },
     {
       n: '3', ico: '🥊', tono: 'cyan',
-      tit: 'Abra el cara a cara',
+      tit: tuUd('Abra el cara a cara', 'Abre el cara a cara'),
       txt: 'Un clic en cualquier barra, punto o retrato abre la ficha bilateral: qué avanzó, qué retrocedió y el veredicto cívico de ese mandatario frente al Porfiriato.',
       pista: 'Clic en cualquier barra'
     }
@@ -15759,7 +15794,7 @@
         '</div>' +
 
         '<div class="vsx-cautelas">' +
-          '<div class="vsx-cau-tit">Antes de citar una de estas cifras, lea esto</div>' +
+          tuUd('<div class="vsx-cau-tit">Antes de citar una de estas cifras, lea esto</div>', '<div class="vsx-cau-tit">Antes de citar una de estas cifras, lee esto</div>') +
           '<p class="vsx-cau-sub">La comparación es legítima y las cifras son las oficiales disponibles. También tiene tres límites que conviene declarar de frente, porque a quien use estos números en una discusión pública se los van a señalar.</p>' +
           '<div class="vsx-cau-grid">' +
             VSX_CAUTELAS.map(c =>
@@ -16136,7 +16171,7 @@
           '<span class="vdg-orden-t">' + sentido + '</span>' +
         '</div>' +
         '<ol class="vdg-tabla">' + filas + '</ol>' +
-        '<p class="vdg-pista">Toque cualquier renglón —salvo el de Don Porfirio Díaz— para abrir su marcador cara a cara.</p>' +
+        tuUd('<p class="vdg-pista">Toque cualquier renglón —salvo el de Don Porfirio Díaz— para abrir su marcador cara a cara.</p>', '<p class="vdg-pista">Toca cualquier renglón —salvo el de Don Porfirio Díaz— para abrir su marcador cara a cara.</p>') +
         proc +
         '<div class="vdg-salida">' +
           '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">↩︎ Volver al tablero completo</button>' +
@@ -19509,7 +19544,7 @@
       '<section class="cee-sim" id="ceeSimCaja">' +
         '<div class="cee-sim-cab">' +
           '<h3 class="cee-sim-tit">Simulador: ¿cuánto de ese crecimiento es real?</h3>' +
-          '<p class="cee-sim-sub">Mueva los tres controles y vea qué le pasa al Producto Interno Neto Ecológico. El punto de partida son las cifras de ' + c.ejercicio + '.</p>' +
+          tuUd('<p class="cee-sim-sub">Mueva los tres controles y vea qué le pasa al Producto Interno Neto Ecológico. El punto de partida son las cifras de ', '<p class="cee-sim-sub">Mueve los tres controles y ve qué le pasa al Producto Interno Neto Ecológico. El punto de partida son las cifras de ') + c.ejercicio + '.</p>' +
         '</div>' +
         '<div class="cee-sim-mandos">' +
           ceeMando('ceeGrow', 'Crecimiento nominal del PIB', -6, 14, 0.1, 5.0, '%') +
@@ -19838,7 +19873,7 @@
       cont.innerHTML =
         '<section class="sim-escala">' +
           '<h3 class="sim-esc-tit">Contra qué se compara este dinero</h3>' +
-          '<p class="sim-esc-sub">Sin obras en el filtro no hay monto que comparar. Elija otra combinación de industria y mandato.</p>' +
+          tuUd('<p class="sim-esc-sub">Sin obras en el filtro no hay monto que comparar. Elija otra combinación de industria y mandato.</p>', '<p class="sim-esc-sub">Sin obras en el filtro no hay monto que comparar. Elige otra combinación de industria y mandato.</p>') +
         '</section>';
       return;
     }
@@ -19896,10 +19931,10 @@
     const t = DB.simulador_megaobras.totales_consolidados || {};
     cont.innerHTML =
       '<section class="sim-proc">' +
-        '<h3 class="sim-proc-tit">Cómo se calcula lo que usted ve</h3>' +
+        tuUd('<h3 class="sim-proc-tit">Cómo se calcula lo que usted ve</h3>', '<h3 class="sim-proc-tit">Cómo se calcula lo que ves</h3>') +
         '<ul class="sim-proc-lista">' +
           '<li><strong>Los agregados se suman, no se escriben.</strong> ' + (t.nota_totales || '') + '</li>' +
-          '<li><strong>La pérdida por segundo.</strong> Se obtiene dividiendo la pérdida anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que usted lleva mirando.</li>' +
+          tuUd('<li><strong>La pérdida por segundo.</strong> Se obtiene dividiendo la pérdida anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que usted lleva mirando.</li>', '<li><strong>La pérdida por segundo.</strong> Se obtiene dividiendo la pérdida anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</li>') +
           '<li><strong>El sobrecosto del conjunto.</strong> Compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>' +
           '<li><strong>Cifras con documento.</strong> ' + simProcVerificadas() + '</li>' +
           '<li><strong>Pendiente declarado.</strong> Las obras marcadas como pendientes no tienen todavía el documento oficial que sustenta su cifra; se muestran como consolidación documental y no como dato auditado. Cada ficha dice cuál es el caso en «Lo que dicen los documentos oficiales».</li>' +
@@ -19959,7 +19994,7 @@
         '<div class="sim-sel-cab">' +
           '<span class="sim-sel-ico">⏱️</span>' +
           '<div><h3 class="sim-sel-tit">Temporalidad de pérdidas y subsidios</h3>' +
-          '<p class="sim-sel-sub">La misma pérdida anual, repartida en cinco cadencias. Elija el ritmo con el que quiere leerla.</p></div>' +
+          tuUd('<p class="sim-sel-sub">La misma pérdida anual, repartida en cinco cadencias. Elija el ritmo con el que quiere leerla.</p></div>', '<p class="sim-sel-sub">La misma pérdida anual, repartida en cinco cadencias. Elige el ritmo con el que quieres leerla.</p></div>') +
         '</div>' +
         '<div class="sim-dial">' +
           Object.keys(sim.periodos).map(k => {
@@ -20019,7 +20054,7 @@
         '<div class="sim-sel-cab">' +
           '<span class="sim-sel-paso">Paso 1</span>' +
           '<div><h3 class="sim-sel-tit">Industria</h3>' +
-          '<p class="sim-sel-sub">Elija un sector estratégico. Industria y mandato filtran a la vez todo lo que sigue: la comparativa, las fichas y la escala.</p></div>' +
+          tuUd('<p class="sim-sel-sub">Elija un sector estratégico. Industria y mandato filtran a la vez todo lo que sigue: la comparativa, las fichas y la escala.</p></div>', '<p class="sim-sel-sub">Elige un sector estratégico. Industria y mandato filtran a la vez todo lo que sigue: la comparativa, las fichas y la escala.</p></div>') +
           '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
             'onclick="window.AuditEngine.setSimuladorSector(\'todos\')">Todas las industrias</button>' +
         '</div>' +
@@ -20214,7 +20249,7 @@
     return '<section class="pe-tabla-caja" id="peTabla-' + G.k + '">' +
       '<header class="pe-tabla-cab"><h4><span aria-hidden="true">' + G.ico + '</span> ' + G.tit + '</h4>' +
         '<div class="pe-tabla-accion">' + boton + '</div></header>' +
-      (abierta ? '' : '<p class="pe-tabla-aviso">Se abre cuando responda las trivias de ' + metr.map(m => '<b>' + m.et + '</b>').join(', ') + '. Pulse cada pestaña de arriba.</p>') +
+      (abierta ? '' : tuUd('<p class="pe-tabla-aviso">Se abre cuando responda las trivias de ', '<p class="pe-tabla-aviso">Se abre cuando respondas las trivias de ') + metr.map(m => '<b>' + m.et + '</b>').join(', ') + tuUd('. Pulse cada pestaña de arriba.</p>', '. Pulsa cada pestaña de arriba.</p>')) +
       '<div class="pe-tabla-scroll' + (abierta ? '' : ' pe-velo') + '"><table class="pe-tabla" id="peTablaT-' + G.k + '"><thead><tr>' + cab + '</tr></thead><tbody>' + filas + '</tbody></table></div>' +
       (notas.length ? '<ul class="pe-tabla-notas">' + notas.join('') + '</ul>' : '') +
       '<p class="pe-fuente">' + chipEstado('oficial') + ' ' + chipEstado('derivado') + ' ' + chipEstado('pendiente') + ' Fuentes: ' + fuentes.map(c => peFuenteLiga(c)).join(' · ') + '. Las celdas calculadas dicen su operación al pasar el cursor.</p>' +
@@ -20259,7 +20294,7 @@
     const veredicto = !resp ? '' :
       '<p class="pe-veredicto ' + (resp.ok ? 'ok' : 'no') + '" role="status">' +
         (resp.ok ? '✓ ¡Acertó! ' : '✗ No fue así. ') + 'La respuesta es <b>' + gana.nombre + '</b>. ' +
-        'Pulse «Ver resultados» para ver a todos en la misma escala.</p>';
+        tuUd('Pulse «Ver resultados» para ver a todos en la misma escala.</p>', 'Pulsa «Ver resultados» para ver a todos en la misma escala.</p>');
 
     const boton = !resp
       ? '<button type="button" class="eval-btn-primary pe-bloqueado" disabled title="Responda la trivia para abrir el contabilizador">🔒 Responda la trivia para ver los resultados</button>'
@@ -20270,7 +20305,7 @@
       '<section class="pe">' +
         '<header class="pe-cab">' +
           '<div><h3 class="pe-tit">🎯 La evaluación de los presidentes</h3>' +
-          '<p class="pe-sub">Primero adivine; después vea el resultado. Cada métrica abre su contabilizador solo cuando responde la pregunta, y las tablas comparativas se abren al terminar las trivias de su grupo. Claudia Sheinbaum no entra: su sexenio está en curso.</p></div>' +
+          tuUd('<p class="pe-sub">Primero adivine; después vea el resultado. Cada métrica abre su contabilizador solo cuando responde la pregunta, y las tablas comparativas se abren al terminar las trivias de su grupo. Claudia Sheinbaum no entra: su sexenio está en curso.</p></div>', '<p class="pe-sub">Primero adivina; después ve el resultado. Cada métrica abre su contabilizador solo cuando respondes la pregunta, y las tablas comparativas se abren al terminar las trivias de su grupo. Claudia Sheinbaum no entra: su sexenio está en curso.</p></div>') +
           '<span class="pe-marcador" aria-live="polite">Aciertos <b>' + aciertos + '</b> de ' + respondidas + (respondidas === 1 ? ' respondida' : ' respondidas') + '</span>' +
         '</header>' +
         '<div class="pe-grupos">' + tabs + '</div>' +
@@ -20283,7 +20318,7 @@
           '</div>' +
           '<div class="evaluacion-controls-bar">' +
             '<div class="eval-info-group"><span class="eval-badge">RESULTADOS</span>' +
-              '<span class="eval-status-text">' + (!resp ? '🔒 Bloqueado hasta que responda.' : (contado ? '✅ ' + M.sub + '.' : '⚪ Todo en ceros. Pulse «Ver resultados».')) + '</span></div>' +
+              '<span class="eval-status-text">' + (!resp ? tuUd('🔒 Bloqueado hasta que responda.', '🔒 Bloqueado hasta que respondas.') : (contado ? '✅ ' + M.sub + '.' : tuUd('⚪ Todo en ceros. Pulse «Ver resultados».', '⚪ Todo en ceros. Pulsa «Ver resultados».'))) + '</span></div>' +
             '<div class="eval-actions-group">' + boton + '</div>' +
           '</div>' +
           '<ol class="pe-barras' + (resp ? '' : ' pe-velo') + '" id="peBarras">' +
@@ -20374,7 +20409,7 @@
     const ev = state.simSexEvaluado;
     const estado = ev
       ? '<span style="color:var(--emerald-bright);">✓ Evaluación completada: los seis periodos a escala real.</span>'
-      : '⚪ Periodos en reposo (0 obras / $0). Pulse «Evaluar» para levantarlos desde cero.';
+      : tuUd('⚪ Periodos en reposo (0 obras / $0). Pulse «Evaluar» para levantarlos desde cero.', '⚪ Periodos en reposo (0 obras / $0). Pulsa «Evaluar» para levantarlos desde cero.');
 
     cont.innerHTML =
       '<section class="sim-sel sim-sel-sex">' +
@@ -20382,7 +20417,7 @@
           '<span class="sim-sel-ico">🏛️</span>' +
           '<div><h3 class="sim-sel-tit">Administración presidencial</h3>' +
           '<p class="sim-sel-sub">Treinta y seis años de obra pública en una sola línea. La altura de cada bloque es el número de obras evaluadas en ese periodo. ' +
-            'Todos arrancan en cero: pulse «Evaluar» para verlos levantarse a su escala real.</p></div>' +
+            tuUd('Todos arrancan en cero: pulse «Evaluar» para verlos levantarse a su escala real.</p></div>', 'Todos arrancan en cero: pulsa «Evaluar» para verlos levantarse a su escala real.</p></div>') +
           '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
             'onclick="window.AuditEngine.setSimuladorSexenio(\'todos\')">🕰️ Todo el periodo</button>' +
         '</div>' +
@@ -20504,7 +20539,7 @@
     });
     const estadoEl = document.getElementById('simSexEstado');
     const btn = document.getElementById('simSexBtn');
-    if (estadoEl) estadoEl.textContent = '⚪ Periodos en reposo (0 obras / $0). Pulse «Evaluar» para levantarlos desde cero.';
+    if (estadoEl) estadoEl.textContent = tuUd('⚪ Periodos en reposo (0 obras / $0). Pulse «Evaluar» para levantarlos desde cero.', '⚪ Periodos en reposo (0 obras / $0). Pulsa «Evaluar» para levantarlos desde cero.');
     if (btn) btn.innerHTML = '<span>▶️</span> Evaluar los seis sexenios';
   }
 
@@ -20707,7 +20742,7 @@
         '<p class="sim-mesa-aviso">Con estos filtros no queda <strong>ninguna obra</strong>. ' +
           'Quite uno de los dos filtros, o ' +
           '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.simRankUniverso(true)">' +
-          'vea las ' + sim.obras.length + ' obras en contexto</button>.</p>';
+          tuUd('vea las ', 've las ') + sim.obras.length + ' obras en contexto</button>.</p>';
       return;
     }
     const sola = obras.length === 1;
@@ -20736,13 +20771,13 @@
       ? (hayFiltro
           ? 'Está viendo el universo completo. Su selección señala <strong>' + marcadas + '</strong> de las ' +
             obras.length + ' obras; las demás siguen presentes, atenuadas, para no perder la escala de comparación.'
-          : 'Está viendo el universo completo. Elija una industria o un mandato para que la lista resalte las obras que le tocan.')
+          : tuUd('Está viendo el universo completo. Elija una industria o un mandato para que la lista resalte las obras que le tocan.', 'Estás viendo el universo completo. Elige una industria o un mandato para que la lista resalte las obras que le tocan.'))
       : (sola
           ? 'El filtro dejó una sola obra, así que no hay con quién compararla dentro de la lista: ' +
             'la barra la mide contra la obra mayor de las ' + sim.obras.length + ' del universo. ' +
             'Si quiere verla junto a las demás, encienda «Ver las ' + sim.obras.length + ' en contexto».'
           : 'La barra mide el tamaño de la cifra frente a la mayor de esta lista. ' +
-            (cajaVivo ? 'Pulse cualquier renglón para ver su ficha en la simulación en vivo.' : 'Pulse cualquier renglón para ir a su ficha, aquí abajo.'));
+            (cajaVivo ? tuUd('Pulse cualquier renglón para ver su ficha en la simulación en vivo.', 'Pulsa cualquier renglón para ver su ficha en la simulación en vivo.') : tuUd('Pulse cualquier renglón para ir a su ficha, aquí abajo.', 'Pulsa cualquier renglón para ir a su ficha, aquí abajo.')));
 
     cont.innerHTML =
       '<section class="sim-rank sim-rank-filtro">' +
@@ -20834,7 +20869,7 @@
   function simRankTextoEstado(cuantas) {
     return state.simRankEvaluado
       ? '<span style="color:var(--emerald-bright);">✓ Evaluación completada: las ' + cuantas + ' obras a escala real.</span>'
-      : '⚪ Barras en reposo (0.0%). Pulse «Evaluar» o pase el cursor para medir la escala real.';
+      : tuUd('⚪ Barras en reposo (0.0%). Pulse «Evaluar» o pase el cursor para medir la escala real.', '⚪ Barras en reposo (0.0%). Pulsa «Evaluar» o pasa el cursor para medir la escala real.');
   }
 
   /* Evaluar: las barras nacen en cero y suben a su escala real. */
@@ -21141,7 +21176,7 @@
         }).join('<span class="sim-cad-fl">→</span>') +
       '</div>' +
       '<p class="sim-mesa-cierre">Ese último eslabón, <strong>$' + ag.perdidaSegundo.toFixed(2) +
-        ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>' +
+        tuUd(' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>', ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que llevas mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>') +
     '</article>';
   }
 
@@ -21292,7 +21327,7 @@
           '<span class="sim-sel-ico">🧾</span>' +
           '<div><h3 class="sim-sel-tit">Todo el dinero, obra por obra y dividido por sector</h3>' +
           '<p class="sim-sel-sub">Las ' + agT.n + ' inversiones evaluadas, completas y sin recortar por ningún filtro. ' +
-            'Pulse el nombre de una obra para ir al desglose por sector y llegar a su ficha.</p></div>' +
+            tuUd('Pulse el nombre de una obra para ir al desglose por sector y llegar a su ficha.</p></div>', 'Pulsa el nombre de una obra para ir al desglose por sector y llegar a su ficha.</p></div>') +
         '</div>' +
         '<p class="sim-unidades"><strong>Unidades.</strong> Las columnas de esta tabla están en <strong>millones de pesos</strong> (mdp). ' +
           'Mil millones son 1,000 mdp; un billón de pesos son 1,000,000 mdp. Las cifras son nominales del año de cada erogación, sin deflactar.</p>' +
@@ -22027,7 +22062,7 @@
   const COM_RUTAS = [
     { id: 'aportar', n: '1', ico: '🔍', ancla: 'bloqueAportar',
       tit: 'Ayúdanos a fiscalizar',
-      txt: 'Comparta un dato, una obra de su municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.',
+      txt: tuUd('Comparta un dato, una obra de su municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.', 'Comparte un dato, una obra de tu municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.'),
       efecto: 'Alimenta el trabajo de esta plataforma',
       aviso: 'No es una denuncia legal', tono: 'gold' },
     { id: 'denunciar', n: '2', ico: '🏛️', ancla: 'bloqueCanales',
@@ -22078,12 +22113,12 @@
         '</div>' +
 
         '<div class="com-destino">' +
-          '<div class="com-destino-tit">Antes de escribir: a dónde va a parar lo que escriba</div>' +
-          '<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si su esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>' +
+          tuUd('<div class="com-destino-tit">Antes de escribir: a dónde va a parar lo que escriba</div>', '<div class="com-destino-tit">Antes de escribir: a dónde va a parar lo que escribas</div>') +
+          tuUd('<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si su esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>', '<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si tu esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>') +
           '<div class="com-destino-cols">' +
             '<div class="com-destino-col" data-tono="gold">' +
               '<div class="com-destino-k">El formulario «Ayúdanos a fiscalizar»</div>' +
-              '<p>Se guarda <strong>únicamente en su propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borra los datos del sitio se pierde. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial con el botón de copiar.</p>' +
+              tuUd('<p>Se guarda <strong>únicamente en su propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borra los datos del sitio se pierde. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial con el botón de copiar.</p>', '<p>Se guarda <strong>únicamente en tu propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borras los datos del sitio se pierde. Sirve para ordenar lo que quieres reportar y para llevártelo a un canal oficial con el botón de copiar.</p>') +
             '</div>' +
             '<div class="com-destino-col" data-tono="emerald">' +
               '<div class="com-destino-k">Un canal oficial</div>' +
@@ -22091,10 +22126,10 @@
             '</div>' +
             '<div class="com-destino-col" data-tono="cyan">' +
               '<div class="com-destino-k">El portal de debate</div>' +
-              '<p>También vive <strong>en su navegador</strong> por ahora. Los hilos que vea publicados son ejemplos sembrados para mostrar cómo funcionará el ágora cuando tenga servidor.</p>' +
+              tuUd('<p>También vive <strong>en su navegador</strong> por ahora. Los hilos que vea publicados son ejemplos sembrados para mostrar cómo funcionará el ágora cuando tenga servidor.</p>', '<p>También vive <strong>en tu navegador</strong> por ahora: los hilos que ves son los que tú publicaste aquí. Nadie más los lee hasta que la plataforma tenga servidor.</p>') +
             '</div>' +
           '</div>' +
-          '<div class="com-destino-pie"><strong>Lo decimos sin adornos porque es lo honesto:</strong> esta plataforma todavía no aloja lo que usted escribe. Prometer lo contrario sería exactamente el tipo de dato falso que nos descalificaría. Lo que sí está completo y verificado son los ' + canales.length + ' canales oficiales y los ' + decalogo.length + ' puntos del decálogo: ahí cada enlace lleva a una institución real.</div>' +
+          tuUd('<div class="com-destino-pie"><strong>Lo decimos sin adornos porque es lo honesto:</strong> esta plataforma todavía no aloja lo que usted escribe. Prometer lo contrario sería exactamente el tipo de dato falso que nos descalificaría. Lo que sí está completo y verificado son los ', '<div class="com-destino-pie"><strong>Lo decimos sin adornos porque es lo honesto:</strong> esta plataforma todavía no aloja lo que escribes. Prometer lo contrario sería exactamente el tipo de dato falso que nos descalificaría. Lo que sí está completo y verificado son los ') + canales.length + ' canales oficiales y los ' + decalogo.length + ' puntos del decálogo: ahí cada enlace lleva a una institución real.</div>' +
         '</div>' +
 
       '</div>';
@@ -22142,7 +22177,7 @@
           localStorage.setItem('auditavision_comentarios', JSON.stringify(savedComments));
         } catch (err) {
           if (msgStatus) {
-            msgStatus.textContent = '✗ Este navegador no permitió guardar el texto (puede estar en modo privado o sin espacio). Su texto sigue en el formulario: cópielo antes de salir.';
+            msgStatus.textContent = '✗ Este navegador no permitió guardar el texto (puede estar en modo privado o sin espacio). Tu texto sigue en el formulario: cópialo antes de salir.';
             msgStatus.style.color = 'var(--crimson-bright, #e74c3c)';
           }
           return;
@@ -22151,7 +22186,7 @@
         if (msgStatus) {
           // Decir la verdad sobre el destino del texto: se guarda en este
           // navegador, no viaja a ningun servidor todavia.
-          msgStatus.textContent = '✓ Guardado en este navegador. Use «Copiar para un canal oficial» si quiere presentarlo ante la ASF, la SABG o una contraloría.';
+          msgStatus.textContent = tuUd('✓ Guardado en este navegador. Use «Copiar para un canal oficial» si quiere presentarlo ante la ASF, la SABG o una contraloría.', '✓ Guardado en este navegador. Usa «Copiar para un canal oficial» si quieres presentarlo ante la ASF, la SABG o una contraloría.');
           msgStatus.style.color = 'var(--emerald-bright)';
         }
         form.reset();
@@ -22175,7 +22210,7 @@
     container.innerHTML = DB.comunidad.canales_denuncia_oficial.map((c, i) => {
       const acceso = c.url
         ? '<a class="canal-cta" href="' + c.url + '" target="_blank" rel="noopener noreferrer">Abrir el canal oficial ↗</a>'
-        : '<span class="canal-sin-url">' + (c.notaSinUrl || 'Consulte el sitio oficial de la institución.') + '</span>';
+        : '<span class="canal-sin-url">' + (c.notaSinUrl || tuUd('Consulte el sitio oficial de la institución.', 'Consulta el sitio oficial de la institución.')) + '</span>';
       const cita = c.refId
         ? ' <a class="ref-link" onclick="window.AuditEngine.goToRef(\'' + c.refId + '\')">[fuente]</a>'
         : '';
@@ -22226,7 +22261,7 @@
       list.innerHTML =
         '<div class="com-vacio">' +
           '<span aria-hidden="true">📝</span>' +
-          '<p>Todavía no ha registrado ninguna observación. Lo que escriba aquí queda guardado en este navegador y podrá copiarlo después para presentarlo en un canal oficial.</p>' +
+          tuUd('<p>Todavía no ha registrado ninguna observación. Lo que escriba aquí queda guardado en este navegador y podrá copiarlo después para presentarlo en un canal oficial.</p>', '<p>Todavía no has registrado ninguna observación. Lo que escribas aquí queda guardado en este navegador y podrás copiarlo después para presentarlo en un canal oficial.</p>') +
         '</div>';
       return;
     }
@@ -22264,7 +22299,7 @@
       if (!el) return;
       el.textContent = ok
         ? '✓ Texto copiado. Péguelo en el formulario del canal oficial que corresponda.'
-        : 'No se pudo copiar automáticamente. Seleccione el texto de la tarjeta y cópielo a mano.';
+        : tuUd('No se pudo copiar automáticamente. Seleccione el texto de la tarjeta y cópielo a mano.', 'No se pudo copiar automáticamente. Selecciona el texto de la tarjeta y cópialo a mano.');
       el.style.color = ok ? 'var(--emerald-bright)' : 'var(--crimson-bright)';
     };
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -22610,7 +22645,7 @@
     debates.unshift(newDebate);
     if (!savePortalDebates(debates)) {
       if (statusMsg) {
-        statusMsg.textContent = '✗ Este navegador no permitió guardar el hilo (puede estar en modo privado o sin espacio). Su texto sigue en el formulario.';
+        statusMsg.textContent = '✗ Este navegador no permitió guardar el hilo (puede estar en modo privado o sin espacio). Tu texto sigue en el formulario.';
         statusMsg.style.color = 'var(--crimson-bright, #e74c3c)';
       }
       return;
@@ -22726,7 +22761,7 @@
     /* Solo se anuncia la copia cuando ocurrio; si el navegador la niega,
        se ofrece el enlace para copiarlo a mano. */
     const url = new URL('index.html#portal', window.location.href).href;
-    const manual = () => prompt('Copie el enlace al Portal Digital:', url);
+    const manual = () => prompt(tuUd('Copie el enlace al Portal Digital:', 'Copia el enlace al Portal Digital:'), url);
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url)
         .then(() => alert('✓ Enlace al Portal Digital copiado al portapapeles.'))
@@ -22746,9 +22781,9 @@
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(texto)
         .then(() => alert('✓ ' + aviso))
-        .catch(() => prompt('No se pudo copiar automáticamente. Copie el texto desde aquí:', texto));
+        .catch(() => prompt(tuUd('No se pudo copiar automáticamente. Copie el texto desde aquí:', 'No se pudo copiar automáticamente. Copia el texto desde aquí:'), texto));
     } else {
-      prompt('Este navegador no permite copiar automáticamente. Copie el texto desde aquí:', texto);
+      prompt(tuUd('Este navegador no permite copiar automáticamente. Copie el texto desde aquí:', 'Este navegador no permite copiar automáticamente. Copia el texto desde aquí:'), texto);
     }
   }
 
@@ -23572,16 +23607,16 @@
 
     if (!lista.length) {
       cont.innerHTML = chips + '<p class="insp-vacio">Nadie coincide en el nivel <strong>' + inspNivel + '</strong>. ' +
-        'Pruebe en otro nivel, o <button type="button" class="sim-rank-enlace" ' +
-        'onclick="window.AuditEngine.inspLimpiarBusqueda()">vea la lista completa</button>.</p>';
+        tuUd('Pruebe en otro nivel, o <button type="button" class="sim-rank-enlace" ', 'Prueba en otro nivel, o <button type="button" class="sim-rank-enlace" ') +
+        tuUd('onclick="window.AuditEngine.inspLimpiarBusqueda()">vea la lista completa</button>.</p>', 'onclick="window.AuditEngine.inspLimpiarBusqueda()">ve la lista completa</button>.</p>');
       return;
     }
 
     const visibles = lista.slice(0, inspTope);
     cont.innerHTML = chips +
       '<p class="insp-conteo">' + formatNumber(lista.length) + (lista.length === 1 ? ' ente' : ' entes') +
-        (q ? ' coinciden con «' + q + '»' : '') + '. Pulse uno para abrir su expediente.' +
-        (lista.length > visibles.length ? ' Se muestran ' + visibles.length + '; escriba en el buscador para encontrar el suyo.' : '') + '</p>' +
+        (q ? ' coinciden con «' + q + '»' : '') + tuUd('. Pulse uno para abrir su expediente.', '. Pulsa uno para abrir su expediente.') +
+        (lista.length > visibles.length ? ' Se muestran ' + visibles.length + tuUd('; escriba en el buscador para encontrar el suyo.', '; escribe en el buscador para encontrar el tuyo.') : '') + '</p>' +
       '<div class="insp-tarjetas">' +
       visibles.map(x => {
         const ejes = inspEjes(x);
@@ -23653,7 +23688,7 @@
       cont.innerHTML =
         '<div class="insp-exp-vacio">' +
           '<span class="insp-exp-vacio-ico">🗂️</span>' +
-          '<p><strong>Ningún expediente abierto todavía.</strong> Elija arriba un ente y aquí aparecerá su diagnóstico: ' +
+          tuUd('<p><strong>Ningún expediente abierto todavía.</strong> Elija arriba un ente y aquí aparecerá su diagnóstico: ', '<p><strong>Ningún expediente abierto todavía.</strong> Elige arriba un ente y aquí aparecerá su diagnóstico: ') +
             'si rindió cuentas, si sus documentos cuadran, qué le encontró la Auditoría Superior y, cuando hay insumos, su círculo de salud financiera.</p>' +
         '</div>';
       return;
@@ -24136,6 +24171,7 @@
   }
 
   function init() {
+    tuteoBase();
     safeRun(initTheme, 'initTheme');
     safeRun(initShowcase, 'initShowcase');
     safeRun(initLeafletMap, 'initLeafletMap');
@@ -26256,7 +26292,7 @@
     return '<div class="sc-sim" data-no-autolink>' +
         '<div class="sc-mandos">' +
           '<button type="button" class="sc-btn" id="scBtn" onclick="window.AuditEngine.scVerGasto()">▶ Ver gasto</button>' +
-          '<span class="sc-estado" id="scEstado" role="status">Las cuentas están en cero. Pulse «Ver gasto» para seguir el rastro del dinero.</span>' +
+          tuUd('<span class="sc-estado" id="scEstado" role="status">Las cuentas están en cero. Pulse «Ver gasto» para seguir el rastro del dinero.</span>', '<span class="sc-estado" id="scEstado" role="status">Las cuentas están en cero. Pulsa «Ver gasto» para seguir el rastro del dinero.</span>') +
         '</div>' +
         '<div class="sc-conts">' + cont + '</div>' +
         '<h4 class="sc-rastro-tit">' + pdEsc(p.rastroTit) + (p.rastroEst ? ' ' + chipEstado(p.rastroEst) : '') + '</h4>' +
@@ -26342,7 +26378,7 @@
       raiz.classList.remove('sc-listo');
       scEstado = 'cero';
       btn.textContent = '▶ Ver gasto';
-      if (est) est.textContent = 'Las cuentas volvieron a cero. Pulse «Ver gasto» para contar de nuevo.';
+      if (est) est.textContent = tuUd('Las cuentas volvieron a cero. Pulse «Ver gasto» para contar de nuevo.', 'Las cuentas volvieron a cero. Pulsa «Ver gasto» para contar de nuevo.');
       return;
     }
     scEstado = 'contando';

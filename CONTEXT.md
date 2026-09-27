@@ -3182,12 +3182,31 @@ Antigravity; la leyenda de estados va en «Principio y Compromiso».
   y `esAuditor()` decide. La Enciclopedia sigue con sus plegables
   `<details>` intactos (verificado: 5 `details.sim-ver` allá, 0 acá).
 
+### Hecho (el auditor habla de tú)
+
+- **`index.html`**: instrucciones, descripciones, placeholders y títulos
+  de bloque pasan a tú («Pulsa», «Elige», «Escribe», «Tu ingreso», «Tú
+  contra ellos»). Las citas de ley no se tocan.
+- **Motor**: `tuUd(ud, tu)` con `esAuditor()`. 142 literales envueltos
+  (calculadora, ticket, comparador, inspector, megaobras, foro, avisos);
+  la Enciclopedia sigue mostrando la versión de usted (verificado en el
+  navegador: 0 «usted» en la calculadora del auditor, 11 en la de la
+  Enciclopedia, igual que antes).
+- **Base de datos**: seis textos de la calculadora y del comparador se
+  ajustan en memoria con `tuteoBase()` al arrancar, solo en el auditor; el
+  archivo `audit-database.js` no cambia.
+- Barrido de todas las pestañas del auditor con sus plegables abiertos:
+  sin imperativos ni posesivos de usted a la vista.
+- De paso: el texto del foro que decía «los hilos que vea publicados son
+  ejemplos sembrados» era falso desde que se retiraron los sembrados; ahora
+  dice que son los que tú publicaste en tu navegador.
+- AGENTS.md §6 recoge la regla.
+
 ### Pendiente
 
 - **De los planes de Astra y Antigravity, esperan decisión del autor:**
-  - Trato de «tú»: decidido. Falta pasar los textos (index.html y los del
-    motor que solo pinta el auditor; los compartidos con la Enciclopedia
-    se resuelven con `esAuditor()` o se consultan).
+  - Trato de «tú»: hecho. Texto nuevo del motor: usar `tuUd()` si también
+    se pinta en la Enciclopedia.
   - Panel lateral: decidido y construido; falta llevar ahí más bloques densos.
   - Orden de la portada y cabecera compacta en móvil; radar plegado.
   - Pase Cívico: pasarela real (Mercado Pago o SPEI) con datos del autor;

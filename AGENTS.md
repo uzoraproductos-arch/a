@@ -157,3 +157,9 @@ Formal, cálido y llano, sin renunciar al rigor técnico. El lector no es
 especialista pero no es tonto: se le explica, no se le simplifica. Cada
 afirmación fuerte va acompañada del artículo, el ramo o el documento que la
 sostiene.
+
+**Al lector se le habla de tú** (decisión del autor, 27-09-2026): la
+plataforma le habla a una persona, no a un trámite. Las citas textuales de
+leyes y documentos se dejan como están. En el motor, que comparte la
+Enciclopedia, los textos van en `tuUd('versión usted', 'versión tú')`: el
+auditor muestra la de tú y la Enciclopedia congelada conserva el usted.
