@@ -5370,7 +5370,7 @@
         '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
       '</div>';
     var caja = el.querySelector('.mod-proemio-texto');
-    var parrafos = hero ? [].slice.call(hero.children).filter(function(n) { return n.tagName === 'P'; }) : [];
+    var parrafos = hero ? [].slice.call(hero.children).filter(function(n) { return n.tagName === 'P' || n.classList.contains('hero-mas'); }) : [];
     if (parrafos.length) {
       var marca = document.createComment('parrafo mudado al proemio');
       hero.insertBefore(marca, parrafos[0]);
@@ -25597,15 +25597,15 @@
   function compartirPlataforma() {
     if (navigator.share) {
       navigator.share({
-        title: 'Auditavision â Sistema CÃ­vico de FiscalizaciÃ³n del Gasto PÃºblico en MÃ©xico',
-        text: 'Fiscaliza en tiempo real a dÃ³nde van tus impuestos y las finanzas del Estado en Auditavision:',
+        title: 'Auditavisión — Sistema Cívico de Fiscalización del Gasto Público en México',
+        text: 'Fiscaliza en tiempo real a dónde van tus impuestos y las finanzas del Estado en Auditavisión:',
         url: window.location.href
       }).catch(function() {});
     } else {
       navigator.clipboard.writeText(window.location.href).then(function() {
-        alert('Â¡Enlace de AuditavisiÃ³n copiado al portapapeles! Listo para compartir en tus redes sociales.');
+        alert('¡Enlace de Auditavisión copiado al portapapeles! Listo para compartir en tus redes sociales.');
       }).catch(function() {
-        prompt('Copia este enlace para compartir AuditavisiÃ³n:', window.location.href);
+        prompt('Copia este enlace para compartir Auditavisión:', window.location.href);
       });
     }
   }

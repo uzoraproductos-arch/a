@@ -2126,6 +2126,47 @@ vuelve a correrse si cambian los libros.
   $23,757). Panel lateral, tarjeta de la 1.1, inspector, tooltip y buscador
   rotulan «Ramos 28 y 33» y pintan el chip de cada campo.
 
+### Hecho (revisión de las observaciones de Antigravity; la Enciclopedia, congelada)
+
+- **Decisión del autor (27-09-2026): la Enciclopedia queda congelada.**
+  `enciclopedia.html` no se toca, ni siquiera su sello; sirve solo como
+  fuente de consulta de la que se jalan datos para el auditor. Todo el
+  trabajo va a `index.html`, donde cada herramienta tiene que ser
+  fidedigna y funcionar, y lo denso que hace falta para los cálculos se
+  pliega en pestañas o desplegables en lugar de borrarse.
+  `herramientas/sello.py` ya solo sube el sello de `index.html`.
+- **Cotejo de lo que reportó Antigravity**, que trabajaba sobre una copia
+  vieja (sello 20260925a):
+  - «Los 2,479 municipios salen en verde»: falso. Las banderas solo se
+    pintan en los 83 municipios con auditoría integral en la Matriz de la
+    ASF, todos con cifra y chip oficiales.
+  - «Adjudicaciones estatales al 60 % por defecto»: no existe en el código.
+  - «$206,948 en el comparador»: el comparador ya usa $134,310 (DOF
+    27-02-2026); el $206,948 solo aparece como «antes». Ver la advertencia
+    de pendientes sobre las fichas 4.3 y 4.5 de la Enciclopedia.
+  - «El Pase Cívico usa alert()»: cierto; se deja al final, como acordado.
+- **Caracteres rotos** en el aviso de «enlace copiado» y en el título que
+  se comparte (`compartirPlataforma`): «Â¡Enlace de AuditavisiÃ³n» ya dice
+  «¡Enlace de Auditavisión».
+- **Síntesis de textos del auditor, sin cambiar nombres de módulos ni
+  pestañas:**
+  - Módulo 1: la explicación de los cuatro pasos del dinero (LIF, PEF,
+    Ramos 28 y 33, Cuenta Pública) se pliega en «El camino del dinero, en
+    cuatro pasos», con sus ligas al glosario y sus fuentes intactas. El
+    proemio del módulo se lleva ese desplegable junto con los párrafos
+    (`pintarProemio` mueve ahora `P` y `.hero-mas`) y lo devuelve al salir.
+  - Módulo 2: fuera «con rigor matemático y documental»; el texto dice lo
+    que mide y que las fuentes obra por obra siguen en verificación.
+  - Diccionario y Preguntas frecuentes: descripciones más cortas; «qué
+    anomalías se detectan» pasa a «qué revisa la Auditoría Superior».
+  - Menús: Megaobras ya no promete «sobrecostos» sin fuente; Glosario,
+    Marco legal, Preguntas, Portal y Nuevo diálogo, en una línea llana.
+  - Propuestas de Antigravity que no se tomaron: «a dedo» (la adjudicación
+    directa es legal en los supuestos de la LAASSP), «$51,024 mdp en
+    anomalías» (cifra retirada por no tener fuente; y lo por aclarar no es
+    anomalía ni daño), «Tú vs. la clase política» (tono de AGENTS.md §6),
+    y los conteos fijos («77 conceptos», «25 leyes»), que se desactualizan.
+
 ### Hecho (el inspector por poderes: Legislativo, Judicial y la SCJN)
 
 El autor aclaró que las auditorías tocan a los tres niveles de gobierno y a
@@ -3114,6 +3155,28 @@ prioridad 1, corregir lo que dice más de lo que es, queda así:
   de 2027, la tercera y el Informe General.
 - **El foro del Portal Digital no tiene servidor:** lo que se publica vive
   en el navegador de quien lo escribe. Ya no trae hilos sembrados.
+- **Cifras de la Enciclopedia que NO deben pasar al auditor** (la
+  Enciclopedia está congelada; esto es un aviso para quien jale datos de
+  ella). Las fichas 4.3 (Prestaciones) y 4.5 (Cálculos globales) usan
+  cifras que los manuales de remuneraciones del PJF contradicen:
+  ingreso de $5,529,450 al año, aguinaldo de $588,000, pago por riesgo de
+  $642,000, «fondo de ahorro» de $150,000 y «póliza VIP de $50 mdp».
+  Lo oficial, neto, por ministra o ministro:
+  - 2024 (DOF 26-02-2024): $206,948 al mes (p. 5); $445,334 de aguinaldo
+    y prima y $416,754 de pago por riesgo al año (p. 6). El numeral 8
+    (p. 4) los excluye de las asignaciones adicionales (el «ahorro»).
+    https://www.scjn.gob.mx/sites/default/files/remuneracion_servidores_publicos/documento/2024-02/Manual-Remuneraciones-PJF-2024.pdf
+  - 2025 (DOF 28-02-2025): $137,131 al mes (anexo 2, p. 6) y $287,591 de
+    aguinaldo y prima (anexo 3, p. 7); sin pago por riesgo.
+    https://www.scjn.gob.mx/sites/default/files/remuneracion_servidores_publicos/documento/2025-03/Manual-Remuneraciones-PJF-2025_0.pdf
+  - 2026 (DOF 27-02-2026, ficha 22): $134,310 al mes y $290,273 de
+    aguinaldo y prima; el seguro de gastos médicos mayores solo es para
+    mando medio y operativo (numeral 8.1.3).
+  Se revisó: ninguna de esas cifras llega a `index.html` (sus contenedores,
+  `plenoOrientacion`, `scjnChartTitle` y las fichas 4.3 y 4.5, solo existen
+  en la Enciclopedia). Allí el «$206,948» cita la ficha 22, que es el
+  manual de 2026 y no la contiene; si algún día se trae al auditor, darle
+  la ficha del manual de 2024.
 - **Inspector, siguientes pasos.**
   - **Quién gobierna hoy.** El padrón del INAFED consultado registra a la
     administración que gobernó 2024; falta la que entró en el otoño de 2024

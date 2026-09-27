@@ -68,7 +68,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927h">
+  <link rel="stylesheet" href="assets/css/auditavision.css?v=20260927i">
 </head>
 <body>
 
@@ -165,7 +165,7 @@
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
               <span class="mega-link-name">🏗️ Inversión Pública & Megaobras</span>
-              <span class="mega-link-desc">Costos, sobrecostos y subsidios de Tren Maya, Dos Bocas y AIFA.</span>
+              <span class="mega-link-desc">Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Fuentes por obra en verificación.</span>
             </a>
             <a href="#accion-financiera/proyeccion2027" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('proyeccion2027'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">📈 Paquete Económico 2027</span>
@@ -239,15 +239,15 @@
             <span class="mega-col-title">🏛️ Biblioteca &amp; Enciclopedia Hacendaria (Marco Legal &amp; Glosario)</span>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-glosario');" class="mega-link-item">
               <span class="mega-link-name">📖 Glosario de Términos Hacendarios</span>
-              <span class="mega-link-desc">Compendio enciclopédico de conceptos fiscales, deuda y PEF con buscador interactivo y filtros.</span>
+              <span class="mega-link-desc">Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-marco-legal');" class="mega-link-item">
               <span class="mega-link-name">⚖️ Marco Legal Hacendario &amp; <span data-cuenta="preceptos">28</span> Preceptos</span>
-              <span class="mega-link-desc">Fundamentos en la CPEUM (Arts. 73, 74, 115, 134), LIF, LFPRH, Ley de Disciplina y Reforma Judicial.</span>
+              <span class="mega-link-desc">Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.</span>
             </a>
             <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-preguntas');" class="mega-link-item">
               <span class="mega-link-name">💡 Preguntas Frecuentes en Casillas Didácticas</span>
-              <span class="mega-link-desc">Respuestas didácticas sobre cómo funciona el gasto público, qué anomalías se detectan y cómo auditar.</span>
+              <span class="mega-link-desc">Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar.</span>
             </a>
           </div>
           <div class="mega-menu-col">
@@ -278,11 +278,11 @@
             <span class="mega-col-title">💬 Ágora Cívica &amp; Diálogos</span>
             <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'bloquePortal'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">🌐 Portal Público Digital</span>
-              <span class="mega-link-desc">Espacio abierto y plural para contrastar posturas, plantear tesis críticas y debatir con réplicas directas.</span>
+              <span class="mega-link-desc">Un espacio plural para contrastar posturas con fuentes y responder con argumentos.</span>
             </a>
             <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'portalNuevoDebateForm'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">✍️ Iniciar Nuevo Diálogo o Postura</span>
-              <span class="mega-link-desc">Publica tu argumento con nick ciudadano libre o aleatorio, postura y fuentes documentales.</span>
+              <span class="mega-link-desc">Publica tu argumento con seudónimo, tu postura y tus fuentes.</span>
             </a>
             <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'portalFilterBar'); window.AuditEngine.cerrarMegaMenus();">
               <span class="mega-link-name">🗣️ Cuaderno de argumentos (en este navegador)</span>
@@ -815,8 +815,12 @@
           <span class="hero-tag">Panorámica del Erario · Ejercicio Fiscal 2026</span>
           <h2>1. El Circuito del Dinero Público</h2>
           <p>
-            Antes de <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditar (Auditoría Gubernamental)', null, this)" title="Qué significa «Auditar (Auditoría Gubernamental)»" aria-haspopup="dialog">auditar<span class="glos-term-ico" aria-hidden="true">📖</span></button> una cifra hay que saber por dónde pasó. Del <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('PEF (Presupuesto de Egresos de la Federación)', null, this)" title="Qué significa «PEF (Presupuesto de Egresos de la Federación)»" aria-haspopup="dialog">presupuesto federal<span class="glos-term-ico" aria-hidden="true">📖</span></button> de 2026 ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). El dinero público recorre siempre el mismo camino: el Congreso autoriza cobrarlo en la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('LIF (Ley de Ingresos de la Federación)', null, this)" title="Qué significa «LIF (Ley de Ingresos de la Federación)»" aria-haspopup="dialog">Ley de Ingresos de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación 2026">[10]</a>; la Cámara de Diputados aprueba en qué gastarlo en el Presupuesto de Egresos <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">[11]</a>; el gobierno lo ejerce y lo reparte en el territorio por medio de dos <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo Presupuestario', null, this)" title="Qué significa «Ramo Presupuestario»" aria-haspopup="dialog">ramos<span class="glos-term-ico" aria-hidden="true">📖</span></button> (así se llaman los grandes apartados del presupuesto): el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 28 (Participaciones Federales)', null, this)" title="Qué significa «Ramo 28 (Participaciones Federales)»" aria-haspopup="dialog">Ramo 28<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de participaciones que los estados gastan con libertad, y el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 33 (Aportaciones Federales)', null, this)" title="Qué significa «Ramo 33 (Aportaciones Federales)»" aria-haspopup="dialog">Ramo 33<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de aportaciones etiquetadas para educación, salud, agua o seguridad <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a>; y al año siguiente se rinde la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Cuenta Pública', null, this)" title="Qué significa «Cuenta Pública»" aria-haspopup="dialog">Cuenta Pública<span class="glos-term-ico" aria-hidden="true">📖</span></button>, que revisa la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditoría Superior de la Federación (ASF)', null, this)" title="Qué significa «Auditoría Superior de la Federación (ASF)»" aria-haspopup="dialog">Auditoría Superior de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> (ASF). Esta sección es el mapa de ese recorrido, en tres bloques.
+            Antes de <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditar (Auditoría Gubernamental)', null, this)" title="Qué significa «Auditar (Auditoría Gubernamental)»" aria-haspopup="dialog">auditar<span class="glos-term-ico" aria-hidden="true">📖</span></button> una cifra hay que saber por dónde pasó. Del <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('PEF (Presupuesto de Egresos de la Federación)', null, this)" title="Qué significa «PEF (Presupuesto de Egresos de la Federación)»" aria-haspopup="dialog">presupuesto federal<span class="glos-term-ico" aria-hidden="true">📖</span></button> de 2026 ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). Esta sección es el mapa de ese recorrido, en tres bloques.
           </p>
+          <details class="hero-mas">
+            <summary>El camino del dinero, en cuatro pasos</summary>
+            <p>El dinero público recorre siempre el mismo camino: el Congreso autoriza cobrarlo en la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('LIF (Ley de Ingresos de la Federación)', null, this)" title="Qué significa «LIF (Ley de Ingresos de la Federación)»" aria-haspopup="dialog">Ley de Ingresos de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lif2026')" title="Ley de Ingresos de la Federación 2026">[10]</a>; la Cámara de Diputados aprueba en qué gastarlo en el Presupuesto de Egresos <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-pef2026')" title="Presupuesto de Egresos de la Federación 2026">[11]</a>; el gobierno lo ejerce y lo reparte en el territorio por medio de dos <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo Presupuestario', null, this)" title="Qué significa «Ramo Presupuestario»" aria-haspopup="dialog">ramos<span class="glos-term-ico" aria-hidden="true">📖</span></button> (así se llaman los grandes apartados del presupuesto): el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 28 (Participaciones Federales)', null, this)" title="Qué significa «Ramo 28 (Participaciones Federales)»" aria-haspopup="dialog">Ramo 28<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de participaciones que los estados gastan con libertad, y el <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Ramo 33 (Aportaciones Federales)', null, this)" title="Qué significa «Ramo 33 (Aportaciones Federales)»" aria-haspopup="dialog">Ramo 33<span class="glos-term-ico" aria-hidden="true">📖</span></button>, de aportaciones etiquetadas para educación, salud, agua o seguridad <a class="ref-link" onclick="window.AuditEngine.goToRef('ref-lcf')" title="Ley de Coordinación Fiscal">[05]</a>; y al año siguiente se rinde la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Cuenta Pública', null, this)" title="Qué significa «Cuenta Pública»" aria-haspopup="dialog">Cuenta Pública<span class="glos-term-ico" aria-hidden="true">📖</span></button>, que revisa la <button type="button" class="glos-term" onclick="window.AuditEngine.abrirGlosarioDrawer('Auditoría Superior de la Federación (ASF)', null, this)" title="Qué significa «Auditoría Superior de la Federación (ASF)»" aria-haspopup="dialog">Auditoría Superior de la Federación<span class="glos-term-ico" aria-hidden="true">📖</span></button> (ASF).</p>
+          </details>
         </div>
 
         <!-- ====================================================================
@@ -1341,10 +1345,9 @@
             <span class="hero-tag">Telemetría de Inversiones Públicas &amp; Auditoría Continua</span>
             <h2>Inversión Estratégica, Megaobras Presidenciales: costos y balances del periodo</h2>
             <p>
-              Explora con rigor matemático y documental cómo el Estado mexicano invierte los recursos públicos por sector estratégico 
-              (Transporte, Energía, Salud, Seguridad, Rescates y Deuda) de <strong>1988 a la fecha</strong>. Monitorea los sobrecostos erogados, 
-              las pérdidas de operación cotidiana calculadas en <strong>5 horizontes temporales</strong> (día, mes, trimestre, semestre y año), 
-              y su equivalencia por segundo, que reparte una cifra anual y no registra pagos en este instante.
+              Cuánto costaron las grandes inversiones del Estado de <strong>1988 a la fecha</strong> (transporte, energía, salud, seguridad, rescates y deuda),
+              cuánto se desviaron de su presupuesto y cuánto pierden al operar, en cinco plazos: del día al año. La cifra por segundo reparte un monto anual; no registra pagos en tiempo real.
+              Las fuentes obra por obra siguen en verificación, y cada cifra lleva su estado.
             </p>
           </div>
 
@@ -2359,7 +2362,7 @@
         <span class="hero-tag">Pedagogía Cívica, Glosario &amp; Marco Legal</span>
         <h2>El Diccionario del Dinero Público</h2>
         <p>
-          Formación cívica integral dividida en cuatro subpestañas: Casillas temáticas de preguntas ciudadanas, Glosario enciclopédico de conceptos clave del erario en constante actualización, el Marco Legal Hacendario con las disposiciones de la Ley de Ingresos (LIF) y preceptos constitucionales vigentes con acceso a su texto íntegro, y el Catálogo de Fuentes Oficiales que sostiene cada cifra de la plataforma.
+          Cuatro apartados: preguntas frecuentes, el glosario de los términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.
         </p>
       </div>
 
@@ -2382,7 +2385,7 @@
             Preguntas Frecuentes del Erario en Casillas Didácticas
           </h3>
           <p style="font-size:13px; color:var(--text-dim); margin:0;">
-            Respuestas directas, pedagógicas y fundamentadas sobre cómo funciona el dinero público, qué anomalías se detectan con mayor frecuencia y cómo auditar a las autoridades.
+            Respuestas directas y con fundamento sobre cómo funciona el dinero público, qué revisa la Auditoría Superior y cómo auditar a las autoridades.
           </p>
         </div>
 
@@ -2858,7 +2861,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927h</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260927i</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3002,17 +3005,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/js/mexico-states-geo.js?v=20260927h"></script>
+  <script src="assets/js/mexico-states-geo.js?v=20260927i"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/js/audit-database.js?v=20260927h"></script>
+  <script src="assets/js/audit-database.js?v=20260927i"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/js/municipios-efipem.js?v=20260927h"></script>
-  <script src="assets/js/municipios-rendicion.js?v=20260927h"></script>
+  <script src="assets/js/municipios-efipem.js?v=20260927i"></script>
+  <script src="assets/js/municipios-rendicion.js?v=20260927i"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/js/audit-engine.js?v=20260927h"></script>
+  <script src="assets/js/audit-engine.js?v=20260927i"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

@@ -37,6 +37,11 @@ acaban los créditos, lo único que se pierde es lo que no se empujó.
 
 **Nunca empujes a `main` sin permiso expreso del autor.**
 
+**La Enciclopedia (`enciclopedia.html`) está congelada** por decisión del autor:
+no se modifica, ni siquiera su sello. Sirve de fuente de consulta; todo el
+trabajo va a `index.html`, la plataforma del auditor. Ojo: comparte
+`assets/` con el auditor, así que un cambio en el motor puede alterarla.
+
 Para saber si una copia está al día:
 
 ```bash
@@ -121,7 +126,7 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
   python3 herramientas/sello.py 20260923a
   ```
 
-  Cambia las cinco referencias `?v=` y el sello visible al pie. Si no tocaste
+  Cambia las referencias `?v=` y el sello visible al pie de `index.html` (solo ahí). Si no tocaste
   `assets/`, no lo subas.
 - La navegación usa `data-tab` en las pestañas y `data-sub` en las
   subpestañas; los paneles, `data-subpanel`.

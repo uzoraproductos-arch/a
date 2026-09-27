@@ -20821,6 +20821,12 @@ button.radar-state-flag-card {
 .efos-guia { margin-top: 14px; font-size: 12.5px; line-height: 1.55; color: var(--text-secondary); }
 .efos-guia summary { cursor: pointer; font-weight: 600; color: var(--gold-bright); }
 .efos-guia ol { padding-left: 20px; }
+/* Explicación larga de una portada, plegada: el lector ve la idea en una
+   línea y abre el detalle si lo necesita. Viaja con los párrafos del
+   encabezado cuando el proemio del módulo los absorbe. */
+.hero-mas { margin-top: 10px; font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); }
+.hero-mas summary { cursor: pointer; font-weight: 600; color: var(--gold-bright); }
+.hero-mas p { margin-top: 8px; }
 
 /* ==========================================================================
    CAPITULOS: indice de tarjetas y lectura de un capitulo a la vez.

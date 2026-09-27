@@ -25,9 +25,10 @@ import sys
 from datetime import date
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Solo index.html. La Enciclopedia quedó congelada por decisión del autor
+# (27-09-2026): no se modifica, ni siquiera su sello; sirve de consulta y sus
+# dependencias se refrescan solas cuando vence la caché de diez minutos.
 RUTAS = [os.path.join(RAIZ, 'index.html')]
-if os.path.exists(os.path.join(RAIZ, 'enciclopedia.html')):
-    RUTAS.append(os.path.join(RAIZ, 'enciclopedia.html'))
 
 ARCHIVOS = [
     ('href', 'assets/css/auditavision.css'),
