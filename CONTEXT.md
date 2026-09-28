@@ -3522,6 +3522,11 @@ auditor, por tipo:
    entonces no se muestra.
 9. **Huachicol, cifra oficial:** si la PFF o el SAT publican en un documento
    los $600,000 mdp o una cifra propia, cotejarla y cambiar el chip.
+10. **Lista de tarea del autor:** los documentos que resuelven cada dato
+   pendiente, con dónde buscarlos y cómo entregarlos, están en
+   `investigaciones/FUENTES-POR-CONSEGUIR.md` (prioridad número uno desde el
+   28-09-2026). Las leyes federales vigentes quedaron en
+   `investigaciones/leyes/`.
 
 Resuelto en el barrido: anclas de la escala de Megaobras (usaban el bloque
 `macro` sin fuente: Ramo 33 $1,114,800 contra $1,041,892.9 oficiales;
