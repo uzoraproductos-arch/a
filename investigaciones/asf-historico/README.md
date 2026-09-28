@@ -19,5 +19,9 @@ antes de escribir.
 | `2010_0923_a.pdf` | CP 2010, auditoría 923, Enciclomedia | Ejercido 2010: $4,665.5 mdp (p. 1) | 4c1ae500… |
 | `2011_0388_a.pdf` | CP 2011, auditoría 388, Enciclomedia | Ejercido 2011: $4,720.6 mdp (p. 1); donación de las aulas (pp. 7-9) | 11ef141e… |
 | `2009_1053_a.pdf` | CP 2009, auditoría 1053, SSP: Edificio de Plataforma México («Búnker») | Contrato de obra civil $347.4 → $289.1 mdp con IVA; erogado $206.0 mdp más IVA; $23.4 mdp por recuperar (pp. 1-5) | c25fb6fa… |
+| `IR2008_T9V2.pdf` | Informe del Resultado CP 2008, tomo IX, vol. 2 (auditoría de desempeño 957, Plataforma México) | Costo estimado por la ASF: $432.7 mdp de instalaciones y equipamiento 2007-2009 y $14,277.8 mdp del sistema 2007-2012 (pp. 89-90); ejercido 2008, $1,188.5 mdp (p. 88) | 25b0b1cd… |
+| `2011_0016_a.pdf` | CP 2011, auditoría 16, SSP: Plataforma México, telecomunicaciones y bienes informáticos | Ejercido 2011 por la Coordinación General, $1,898.1 mdp (p. 1); $14.1 mdp de recuperaciones probables, dictamen con salvedad (p. 23) | dc1556b2… |
+
+Los dos últimos los integra `herramientas/integrar_olmeca_cefedis_bunker.py`.
 
 Las huellas completas están en el script y en `simulador_megaobras.verificacion.fuentes`.

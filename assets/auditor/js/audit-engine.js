@@ -8539,8 +8539,17 @@
         o.proy_titulo = 'Lo que falta documentar';
         o.proyeccion_resumen = PEND_TXT;
         const cx = of.contexto_entidad && of.contexto_entidad[o.id];
-        if (cx) o.proyeccion_resumen += ' Lo más cercano en un documento oficial: en ' + cx.anio + ' ' + cx.entidad + ' ingresó ' + mdp(cx.ingresos_gestion) + ' por sus ventas y ' + mdp(cx.otros_ingresos) +
+        if (cx && cx.texto) o.proyeccion_resumen += ' ' + cx.texto;
+        else if (cx) o.proyeccion_resumen += ' Lo más cercano en un documento oficial: en ' + cx.anio + ' ' + cx.entidad + ' ingresó ' + mdp(cx.ingresos_gestion) + ' por sus ventas y ' + mdp(cx.otros_ingresos) +
           ' de otros ingresos, gastó ' + mdp(cx.gastos_totales) + ' y cerró con ' + (cx.resultado_ejercicio < 0 ? 'una pérdida contable de ' + mdp(-cx.resultado_ejercicio) : 'un resultado a favor de ' + mdp(cx.resultado_ejercicio)) + ' (' + (of.fuentes[cx.fuente] || {}).doc + '). ' + cx.nota;
+        if (cx && cx.extra) o.proyeccion_resumen += ' ' + cx.extra;
+        /* Desglose con documento de lo más cercano a la obra (cartera de
+           Hacienda, ASF): no son sus costos de operación, y el título lo dice. */
+        if (cx && cx.desglose) {
+          o.desglose_costos_operacion = cx.desglose.map(g => ({ rubro: g.rubro, monto_anual_mdp: g.mdp, icono: g.icono || '📄' }));
+          o.desglose_titulo = cx.desglose_titulo;
+          o.estado_campos.desglose = cx.desglose_estado || 'oficial';
+        }
       }
       o.perdida_diaria_mdp = o.perdida_anual_mdp / 365;
       o.perdida_segundo = o.perdida_anual_mdp * 1e6 / 31536000;
@@ -22155,7 +22164,7 @@
           <!-- Desglose de Costos de Operación -->
           <div>
             <div style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim); text-transform:uppercase; margin-bottom:6px; letter-spacing:0.5px;">
-              ⚙️ Principales Costos de Operación Anuales: ${simChipCampo(o, 'desglose')}
+              ⚙️ ${o.desglose_titulo ? escHtml(o.desglose_titulo) : 'Principales Costos de Operación Anuales'}: ${simChipCampo(o, 'desglose')}
             </div>
             <div class="sim-operacion-chips">
               ${o.desglose_costos_operacion.length ? '' : '<div class="sim-op-chip"><span>Sin desglose con documento oficial.</span></div>'}

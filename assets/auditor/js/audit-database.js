@@ -15481,8 +15481,8 @@ window.AUDIT_DB = {
       "estatus": "Fase de integración & pruebas",
       "badge_color": "var(--gold-bright)",
       "inversion_presupuestada_mdp": 160000,
-      "inversion_real_mdp": 350000,
-      "sobrecosto_pct": 118.8,
+      "inversion_real_mdp": 357887.3,
+      "sobrecosto_pct": 123.7,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 16425,
       "perdida_anual_mdp": 16425,
@@ -15518,7 +15518,7 @@ window.AUDIT_DB = {
       "costo_unitario_real": "Costo de capital de $55,600 USD por barril de capacidad instalada (duplica el estándar global de refinación moderna).",
       "estado_campos": {
         "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
+        "inversion_real_mdp": "oficial",
         "sobrecosto_pct": "pendiente"
       }
     },
@@ -15995,13 +15995,13 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3903341.9,
+    "inversion_total_mdp": 3911229.2,
     "inversion_presupuestada_total_mdp": 1142024.6,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 13,
-    "sobrecosto_conjunto_pct": 241.8,
+    "sobrecosto_conjunto_pct": 242.5,
     "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   },
   "operacion_oficial": {
@@ -16037,7 +16037,49 @@ window.AUDIT_DB = {
         "otros_ingresos": 111.8,
         "gastos_totales": 7943.9,
         "resultado_ejercicio": -717.3,
-        "nota": "Es el resultado de toda la empresa, que además de la Megafarmacia compra, produce y distribuye vacunas y medicamentos. La Cuenta Pública no separa lo de la Megafarmacia, así que su pérdida sigue pendiente y esta cifra no entra en la suma."
+        "nota": "Es el resultado de toda la empresa, que además de la Megafarmacia compra, produce y distribuye vacunas y medicamentos. La Cuenta Pública no separa lo de la Megafarmacia, así que su pérdida sigue pendiente y esta cifra no entra en la suma. Para 2025 el auditor externo de Birmex volvió a abstenerse de opinar (dictamen del 20-03-2026): sin balanzas mensuales confiables, no pudo validar cuentas por cobrar, inventarios, almacenes ni activo fijo.",
+        "extra": "En la cartera de Hacienda (corte 4T 2025) Birmex registró un costo total del proyecto de $17,635.8 mdp: $3,948.6 mdp de inversión, $10,806.4 mdp de operación y mantenimiento en 32 años y $992.8 mdp de otros costos; la cartera no detalla los $1,888.0 mdp restantes (resta de Auditavisión). En 2025 no ejerció nada bajo esa clave, y toda la inversión física de Birmex ese año fue de $10.1 mdp (Segundo Informe de Gobierno 2026, anexo estadístico).",
+        "desglose_titulo": "Costo del proyecto que Birmex registró ante Hacienda (cartera, corte 4T 2025)",
+        "desglose_estado": "oficial",
+        "desglose": [
+          {
+            "rubro": "Inversión",
+            "mdp": 3948.6,
+            "icono": "🏗️"
+          },
+          {
+            "rubro": "Operación y mantenimiento previstos en 32 años",
+            "mdp": 10806.4,
+            "icono": "🔧"
+          },
+          {
+            "rubro": "Otros costos",
+            "mdp": 992.8,
+            "icono": "📄"
+          },
+          {
+            "rubro": "Costo total del proyecto",
+            "mdp": 17635.8,
+            "icono": "🧾"
+          }
+        ]
+      },
+      "dos-bocas": {
+        "texto": "Lo más cercano en un documento oficial: en 2024 Pemex aportó $42,696.7 mdp al capital de PTI Infraestructura de Desarrollo, la filial que construye la refinería, y la filial pagó $41,998.3 mdp sin IVA por 192 contratos (ASF, CP 2024, auditoría 247). Son pagos de construcción y arranque, no de operación. La refinería se arrienda a Pemex, que la opera: el primer tren de crudo entró en operación en febrero de 2025 y el segundo en mayo (Pemex, Cuenta Pública 2025). De septiembre de 2025 a junio de 2026 procesó en promedio 188 mil barriles diarios; su mejor mes fue diciembre de 2025, con 263 mil, el 77 % de su capacidad (Segundo Informe de Gobierno 2026, p. 378). Desde 2025 Pemex consolida a la filial sin publicar sus estados por separado, así que lo que cuesta operar la refinería y lo que deja siguen sin documento.",
+        "desglose_titulo": "Lo que pagó en 2024 la filial que construye la refinería (ASF)",
+        "desglose_estado": "oficial",
+        "desglose": [
+          {
+            "rubro": "Pagos a proveedores y contratistas, sin IVA (el total de la ASF menos los servicios administrativos)",
+            "mdp": 41982.7,
+            "icono": "🏗️"
+          },
+          {
+            "rubro": "Servicios administrativos: contabilidad, impuestos y tesorería",
+            "mdp": 15.6,
+            "icono": "🧾"
+          }
+        ]
       }
     },
     "obras": {
@@ -16212,6 +16254,36 @@ window.AUDIT_DB = {
         "doc": "ASF, Cuenta Pública 2009, auditoría de inversiones físicas 1053, Secretaría de Seguridad Pública: Edificio de Plataforma México, en el Distrito Federal",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
         "sha256": "c25fb6fac3442bd85bccdaa541edd476f0e26a7ee18309bad742d06a506d8593"
+      },
+      "asf_olmeca24": {
+        "doc": "ASF, Cuenta Pública 2024, auditoría 247, Pemex: Ingresos y egresos del proyecto de la Refinería Olmeca en Dos Bocas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
+        "sha256": "0b517333d735160e535f43df7b25eba6a8b6211a1eeeefcc4756f484947319f3"
+      },
+      "pemex_ef25": {
+        "doc": "Petróleos Mexicanos, estados financieros consolidados 2025 y notas presupuestarias (Cuenta Pública 2025, tomo VIII)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+        "sha256": "0a6fe9e89e0d94714ea441134ac3c1ee7446c4c4713baaf9e62d8ebd554b86b2"
+      },
+      "informe26": {
+        "doc": "Presidencia de la República, Segundo Informe de Gobierno 2025-2026",
+        "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+        "sha256": "cc95e5ade7cb306b734e9dc1e61e1defcba14c444e5705de24be6ca6e115fa9d"
+      },
+      "birmex25": {
+        "doc": "Birmex, informe del auditor independiente sobre los estados financieros 2025 (Cuenta Pública 2025, tomo VII)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VII/12NEF.05.DAR.pdf",
+        "sha256": "8e6ac20ea6c1d68bec52344cfdfef49255860048822d824d0b4ef22d9c689513"
+      },
+      "asf_pm08": {
+        "doc": "ASF, Informe del Resultado CP 2008, tomo IX, vol. 2, auditoría de desempeño 957: Plataforma México",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf",
+        "sha256": "25b0b1cd4958ec6e5a12753c8730e59fa65e688380da3233749981f1e27ef509"
+      },
+      "asf_pm11": {
+        "doc": "ASF, Cuenta Pública 2011, auditoría 16, SSP: Plataforma México. Servicios de telecomunicaciones y bienes informáticos",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Gobierno/2011_0016_a.pdf",
+        "sha256": "dc1556b2979510721539d0c11111494e6afb588d6447200613b0c29ec95fdf99"
       }
     },
     "obras": {
@@ -16665,16 +16737,62 @@ window.AUDIT_DB = {
         },
         "campos": {
           "inversion_presupuestada_mdp": "pendiente",
-          "inversion_real_mdp": "pendiente",
+          "inversion_real_mdp": "oficial",
           "sobrecosto_pct": "pendiente"
         },
         "contradicciones": [
           "La refinería no aparece en la cartera pública de proyectos de inversión de Hacienda en ninguno de los cortes de 2019 a 2026: la construyó una filial de Pemex, fuera del presupuesto que se publica por clave de cartera. Su costo total no se puede cotejar con esa fuente."
         ],
-        "hallazgo": "En la Cuenta Pública 2024 la ASF revisó los ingresos y egresos del proyecto: un universo de $84,694.9 mdp en ese año, con una muestra de $71,511.3 mdp. Promovió 3 recomendaciones, sin montos por aclarar ni recuperaciones.",
+        "hallazgo": "En la Cuenta Pública 2024 la ASF revisó lo que entró y salió de la filial de la refinería: Pemex le aportó $42,696.7 mdp y ella erogó $41,998.3 mdp sin IVA por 192 contratos. Pagó 122 contratos con atrasos de 1 a 454 días y firmó tres contratos para reconocer trabajos hechos antes de formalizarlos, sin reglas para ello. Promovió 3 recomendaciones, sin montos por aclarar ni recuperaciones (pp. 7-14).",
         "fuentes": [
           "opa",
-          "asf24"
+          "asf24",
+          "asf_olmeca24",
+          "pemex_ef25",
+          "informe26"
+        ],
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Pendiente: los $160,000 mdp que trae la ficha no tienen documento en mano. La refinería no está en la cartera de Hacienda y su presupuesto original no aparece en la Cuenta Pública.",
+          "inversion_real_mdp": "Obra en proceso que PTI Infraestructura de Desarrollo, la filial de Pemex que construye la refinería, registró al 31-12-2024: $357,887,290.0 miles de pesos, que según la ASF «corresponde a lo registrado para construcción» de la refinería, en 6 paquetes y 17 plantas (CP 2024, auditoría 247, p. 8). Es lo acumulado en libros, sin IVA, hasta ese día: no incluye lo gastado desde 2025.",
+          "sobrecosto_pct": "No se puede afirmar: compara la obra en proceso documentada contra un presupuesto original que no tiene documento."
+        },
+        "asfHist": [
+          {
+            "dato": "Obra en proceso de la refinería al 31-12-2024",
+            "valor": "$357,887.3 mdp",
+            "estado": "oficial",
+            "pagina": "8 (CP 2024, aud. 247)"
+          },
+          {
+            "dato": "Aportaciones de Pemex al capital de la filial en 2024",
+            "valor": "$42,696.7 mdp",
+            "estado": "oficial",
+            "pagina": "1 y 7 (CP 2024, aud. 247)"
+          },
+          {
+            "dato": "Erogaciones de la filial en 2024, sin IVA, por 192 contratos",
+            "valor": "$41,998.3 mdp",
+            "estado": "oficial",
+            "pagina": "1 y 11 (CP 2024, aud. 247)"
+          },
+          {
+            "dato": "Devoluciones de IVA que recibió la filial en 2024",
+            "valor": "$14,463.2 mdp",
+            "estado": "oficial",
+            "pagina": "13 (CP 2024, aud. 247)"
+          },
+          {
+            "dato": "Crudo procesado, septiembre de 2025 a junio de 2026 (promedio)",
+            "valor": "188 mil barriles diarios",
+            "estado": "oficial",
+            "pagina": "378 (Segundo Informe)"
+          },
+          {
+            "dato": "Mejor mes: diciembre de 2025",
+            "valor": "263 mil barriles diarios, 77 % de su capacidad",
+            "estado": "oficial",
+            "pagina": "378 (Segundo Informe) y 55 (Pemex, CP 2025)"
+          }
         ]
       },
       "fobaproa": {
@@ -17012,11 +17130,30 @@ window.AUDIT_DB = {
             "valor": "78 %",
             "estado": "oficial",
             "pagina": "cartera, corte 4T 2025"
+          },
+          {
+            "dato": "Otros costos previstos",
+            "valor": "$992.8 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2025"
+          },
+          {
+            "dato": "Costo total del proyecto registrado",
+            "valor": "$17,635.8 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2025"
+          },
+          {
+            "dato": "Ejercido en 2025 bajo la clave",
+            "valor": "$0.0 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2025"
           }
         ],
         "fuentes": [
           "opa",
-          "birmex_notas24"
+          "birmex_notas24",
+          "birmex25"
         ]
       },
       "fertinal": {
@@ -17070,7 +17207,7 @@ window.AUDIT_DB = {
         },
         "definiciones": {
           "inversion_presupuestada_mdp": "Pendiente: los $1,200 mdp que trae la ficha no tienen documento. Lo único documentado es el contrato de obra civil del edificio, adjudicado por $347,369.0 miles de pesos con IVA (ASF, CP 2009, auditoría 1053, p. 1).",
-          "inversion_real_mdp": "Pendiente: los $3,346 mdp que trae la ficha no tienen documento. Del contrato de obra civil se habían erogado $206,027.9 miles de pesos más IVA en agosto de 2010 (p. 2); faltan el equipo tecnológico y los demás contratos, que la ASF no revisó en esta auditoría.",
+          "inversion_real_mdp": "Pendiente: los $3,346 mdp que trae la ficha no tienen documento. Del contrato de obra civil se habían erogado $206,027.9 miles de pesos más IVA en agosto de 2010 (ASF, CP 2009, p. 2). Lo más cercano a un costo total: la ASF estimó $432,678.8 miles para construir y equipar las instalaciones de Plataforma México de 2007 a 2009 (CP 2008, auditoría 957, pp. 89-90), con el presupuesto aprobado de 2009 y no con lo ejercido, y sin decir qué parte es este edificio.",
           "sobrecosto_pct": "No se puede calcular sin el costo total. El contrato se redujo de $347.4 a $289.1 mdp con IVA (p. 2): no hubo sobrecosto en ese contrato."
         },
         "hallazgo": "La ASF auditó en la Cuenta Pública 2009 el contrato de obra del «Edificio de Plataforma México» de la Secretaría de Seguridad Pública: se adjudicó sin licitación a TRADECO Infraestructura por $347.4 mdp con IVA, se redujo a $289.1 mdp y en agosto de 2010, con la obra ya en operación pero sin finiquitar, se habían pagado $206.0 mdp más IVA. Observó que la licencia de construcción y el resolutivo de impacto ambiental se obtuvieron después de iniciar la obra, y $23.4 mdp pagados de más o sin soporte (pp. 1-5).",
@@ -17098,10 +17235,42 @@ window.AUDIT_DB = {
             "valor": "$23.4 mdp",
             "estado": "oficial",
             "pagina": "5 (CP 2009)"
+          },
+          {
+            "dato": "Construcción de instalaciones y equipamiento de Plataforma México, 2007-2009 (estimación de la ASF)",
+            "valor": "$432.7 mdp",
+            "estado": "oficial",
+            "pagina": "89-90 (CP 2008, aud. 957)"
+          },
+          {
+            "dato": "Costo del sistema Plataforma México, 2007-2012 (estimación de la ASF)",
+            "valor": "$14,277.8 mdp",
+            "estado": "oficial",
+            "pagina": "89 (CP 2008, aud. 957)"
+          },
+          {
+            "dato": "Ejercido en acciones de Plataforma México en 2008 (federal, estados y municipios)",
+            "valor": "$1,188.5 mdp",
+            "estado": "oficial",
+            "pagina": "88 (CP 2008, aud. 957)"
+          },
+          {
+            "dato": "Ejercido por la Coordinación General de Plataforma México en 2011",
+            "valor": "$1,898.1 mdp",
+            "estado": "oficial",
+            "pagina": "1 (CP 2011, aud. 16)"
+          },
+          {
+            "dato": "Recuperaciones probables en telecomunicaciones y equipo informático, 2011",
+            "valor": "$14.1 mdp",
+            "estado": "oficial",
+            "pagina": "23 (CP 2011, aud. 16)"
           }
         ],
         "fuentes": [
-          "asf_bunker09"
+          "asf_bunker09",
+          "asf_pm08",
+          "asf_pm11"
         ]
       }
     }
@@ -24983,6 +25152,36 @@ window.AUDIT_DB = {
         "doc": "SHCP, Criterios Generales de Política Económica para 2027, p. 67, cuadro «Estimación de las finanzas públicas, 2026-2027»",
         "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
         "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+      },
+      "asf_olmeca24": {
+        "doc": "ASF, Cuenta Pública 2024, auditoría 247, Pemex: Ingresos y egresos del proyecto de la Refinería Olmeca en Dos Bocas",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
+        "sha256": "0b517333d735160e535f43df7b25eba6a8b6211a1eeeefcc4756f484947319f3"
+      },
+      "pemex_ef25": {
+        "doc": "Petróleos Mexicanos, estados financieros consolidados 2025 y notas presupuestarias (Cuenta Pública 2025, tomo VIII)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+        "sha256": "0a6fe9e89e0d94714ea441134ac3c1ee7446c4c4713baaf9e62d8ebd554b86b2"
+      },
+      "informe26": {
+        "doc": "Presidencia de la República, Segundo Informe de Gobierno 2025-2026",
+        "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+        "sha256": "cc95e5ade7cb306b734e9dc1e61e1defcba14c444e5705de24be6ca6e115fa9d"
+      },
+      "birmex25": {
+        "doc": "Birmex, informe del auditor independiente sobre los estados financieros 2025 (Cuenta Pública 2025, tomo VII)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VII/12NEF.05.DAR.pdf",
+        "sha256": "8e6ac20ea6c1d68bec52344cfdfef49255860048822d824d0b4ef22d9c689513"
+      },
+      "asf_pm08": {
+        "doc": "ASF, Informe del Resultado CP 2008, tomo IX, vol. 2, auditoría de desempeño 957: Plataforma México",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf",
+        "sha256": "25b0b1cd4958ec6e5a12753c8730e59fa65e688380da3233749981f1e27ef509"
+      },
+      "asf_pm11": {
+        "doc": "ASF, Cuenta Pública 2011, auditoría 16, SSP: Plataforma México. Servicios de telecomunicaciones y bienes informáticos",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Gobierno/2011_0016_a.pdf",
+        "sha256": "dc1556b2979510721539d0c11111494e6afb588d6447200613b0c29ec95fdf99"
       }
     },
     "limitaciones": {
@@ -25127,12 +25326,13 @@ window.AUDIT_DB = {
             "supuesto": "Supuesto: 2026 sigue el ritmo de 2024. Desde el 19-03-2025 Pemex TRI se extinguió y Pemex ya no publica por separado lo que le pone a la refinería."
           }
         ],
-        "contexto": "La misma nota (p. 49) da los resultados de PTI Infraestructura en 2024: ventas por $7,116.8 mdp contra un costo de ventas de $7,018.9 mdp y una pérdida neta de $1,473.7 mdp (en 2023 tuvo utilidad de $3,949.5 mdp). Su capital al cierre de 2024, lo que Pemex ha metido en ella, sumaba $363,619.9 mdp. Al 31-12-2024 la refinería estaba «en etapa de pruebas y estabilización» (p. 11).",
+        "contexto": "La misma nota (p. 49) da los resultados de PTI Infraestructura en 2024: ventas por $7,116.8 mdp contra un costo de ventas de $7,019.0 mdp y una pérdida neta de $1,473.7 mdp (en 2023 tuvo utilidad de $3,949.5 mdp). Su capital al cierre de 2024, lo que Pemex ha metido en ella, sumaba $363,619.9 mdp. Al 31-12-2024 la refinería estaba «en etapa de pruebas y estabilización» (p. 11).",
         "contexto_fuente": "tri24",
         "falta": [
           {
             "limitacion": "sin_desglose",
-            "texto": "Los estados de PTI Infraestructura son de toda la filial y vienen condensados: no separan depreciación, intereses ni mantenimiento de la refinería, y no hay estados separados de 2025."
+            "texto": "Los estados de PTI Infraestructura son de toda la filial y vienen condensados: no separan depreciación, intereses ni mantenimiento de la refinería, y la filial también lleva la reconfiguración de Salina Cruz (ASF, CP 2024, auditoría 247, pp. 8-9). Desde 2025 Pemex la consolida sin estados propios (estados financieros consolidados 2025, p. 35).",
+            "fuente": "pemex_ef25"
           }
         ]
       },
@@ -25164,6 +25364,11 @@ window.AUDIT_DB = {
             "limitacion": "dictamen",
             "texto": "El auditor externo de Birmex se abstuvo de opinar sobre sus estados financieros de 2024: la entidad no entregó la balanza de comprobación definitiva ni los auxiliares contables. Sobre el CEFEDIS (la Megafarmacia) escribió que no fue invitado al inventario físico de noviembre de 2024 y que desconoce «como controla la entidad dicho proyecto, en sus registros contables» (dictamen, párrafos III a V, pp. 1 y 2).",
             "fuente": "birmex24"
+          },
+          {
+            "limitacion": "dictamen",
+            "texto": "Tampoco hay opinión sobre 2025: el auditor externo volvió a abstenerse (dictamen del 20-03-2026) porque los saldos iniciales no tenían soporte y no hubo balanzas mensuales confiables; no pudo validar inventarios, almacenes ni activo fijo, ni saber si se solventó lo observado en 2024 (pp. 3 y 5 del PDF).",
+            "fuente": "birmex25"
           },
           {
             "limitacion": "no_localizado",
@@ -25257,7 +25462,8 @@ window.AUDIT_DB = {
         "falta": [
           {
             "limitacion": "no_localizado",
-            "texto": "No encontramos el costo total del edificio ni de su equipo: la ASF solo revisó el contrato de obra civil. Tampoco sabemos cuánto del programa Plataforma México se gasta en el inmueble."
+            "texto": "No encontramos el costo total del edificio ni de su equipo. La ASF revisó el contrato de obra civil (CP 2009) y estimó $432.7 mdp para construir y equipar las instalaciones de todo Plataforma México de 2007 a 2009 (CP 2008, auditoría 957, pp. 89-90), sin separar este inmueble. Tampoco sabemos cuánto del programa se gasta en él.",
+            "fuente": "asf_pm08"
           }
         ]
       }

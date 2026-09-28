@@ -3882,6 +3882,49 @@ poder.
 - **Truco de descarga:** Guerrero devuelve 403 sin un User-Agent de navegador
   completo y el `Referer` de su página.
 
+
+### Hecho (Olmeca, CEFEDIS y Búnker con lo que sí documentan, sello 20260928o)
+
+`herramientas/integrar_olmeca_cefedis_bunker.py` comprueba seis huellas y
+solo toca `assets/auditor/js/audit-database.js`. El motor ganó un desglose
+«de lo más cercano con documento» para obras sin estados propios, con su
+título dicho en la ficha (`contexto_entidad[id].desglose`, `.texto`, `.extra`).
+
+- **Olmeca, costo real anclado:** $357,887.3 mdp de obra en proceso que la
+  filial PTI Infraestructura de Desarrollo registró al 31-12-2024 para la
+  refinería (ASF, CP 2024, aud. 247, p. 8). Pasa a `oficial`; el
+  presupuesto original ($160,000) y el sobrecosto siguen pendientes.
+  Totales: inversión real $3,911,229.2 mdp, sobrecosto del conjunto 242.5 %.
+- **Olmeca, desglose:** lo que pagó la filial en 2024, $41,998.3 mdp sin IVA
+  por 192 contratos ($15.6 de servicios administrativos); aportaciones de
+  Pemex $42,696.7; IVA devuelto $14,463.2. Operación: primer tren en febrero
+  de 2025 y segundo en mayo, pico de 313 mil barriles diarios (Pemex, CP
+  2025, pp. 54-55); 188 mil de promedio de septiembre de 2025 a junio de
+  2026 y 263 mil en diciembre, 77 % de su capacidad (Segundo Informe, p.
+  378). Pemex consolida a la filial sin estados propios desde 2025 (p. 35),
+  así que costo de operación y resultado siguen pendientes. La filial
+  también lleva la reconfiguración de Salina Cruz: sus resultados no son
+  solo de Olmeca, y así lo dice la ficha.
+- **CEFEDIS, desglose:** estructura del registro 2312NEF0001 en la cartera
+  (4T 2025): inversión $3,948.6, operación y mantenimiento en 32 años
+  $10,806.4, otros $992.8, total $17,635.8 mdp; la cartera no detalla
+  $1,888.0 (resta de Auditavisión). Ejercido 2025 bajo la clave: $0. Toda
+  la inversión física de Birmex en 2025: $10.1 mdp (Segundo Informe,
+  anexo). El dictamen 2025 de Birmex (20-03-2026, escaneo leído página por
+  página) **vuelve a denegar opinión**: sin balanzas confiables, no validó
+  inventarios, almacenes ni activo fijo.
+- **Búnker:** la ASF (CP 2008, aud. 957, pp. 88-90) estimó $432.7 mdp para
+  construir y equipar las instalaciones de todo Plataforma México en
+  2007-2009 y $14,277.8 mdp para el sistema 2007-2012; en 2011 la
+  Coordinación General ejerció $1,898.1 mdp con $14.1 de recuperaciones
+  probables (aud. 16). Van a la tabla de la ASF de la ficha; el costo del
+  edificio y su equipo **sigue pendiente**, porque ninguno separa el
+  inmueble, y los $1,200 / $3,346 sin documento siguen marcados así.
+- Corregido: costo de ventas de PTI 2024, $7,019.0 mdp (decía 7,018.9; la
+  nota da 7,018,992 miles).
+- Verificado: 14 paneles, barrido de clics y trivia sin errores; las tres
+  fichas a 1366 y 390 px sin desborde; Enciclopedia intacta.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3898,8 +3941,8 @@ auditor, por tipo:
    evasión del SAT (art. 30 de la LIF 2027, principios de 2028) para el
    huachicol fiscal.
 3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
-4. **Datos que faltan y no se estiman:** el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo del
-   FARAC, costo total del Búnker (edificio y equipo), costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
+4. **Datos que faltan y no se estiman:** costo de operación y resultado de Olmeca desde 2025 (Pemex ya no separa la filial) y su presupuesto original; costo de operación real del CEFEDIS (solo hay lo previsto en cartera); estados de Fonadin 2024-2025 (ver el Hecho de 20260928o), costo del
+   FARAC, costo total del Búnker (edificio y equipo; la ASF solo estimó el de todo Plataforma México), costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
    el corte de abril), dietas de 20 congresos locales (hay 12; ver el Hecho de 20260928n), CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
