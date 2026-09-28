@@ -82,7 +82,7 @@ vigente confirma la reforma del DOF 19-11-2025.
 
 | # | Dato | Cómo conseguirlo |
 |---|---|---|
-| E1 | Dieta 2026 de los diputados de los 32 congresos locales | https://www.plataformadetransparencia.org.mx → Consulta pública → cada congreso → «Remuneración bruta y neta» (art. 70, fr. VIII). Exportar a Excel. Otra vía: el presupuesto 2026 de cada estado en su periódico oficial |
+| E1 | Dieta 2026 de los diputados de los 32 congresos locales. **Hechos 4:** Guanajuato, Jalisco, Querétaro y Tabasco (`investigaciones/congresos-locales/`). Faltan 28; Michoacán está en congresomich.site (el entorno no lo alcanza) | https://www.plataformadetransparencia.org.mx → Consulta pública → cada congreso → «Remuneración bruta y neta» (art. 70, fr. VIII). Exportar a Excel. Otra vía: el presupuesto 2026 de cada estado en su periódico oficial |
 | E2 | Aguinaldo del Senado: el Manual dice 40 días y el anexo paga unos 60 | Solicitud al Senado por la PNT: «¿Cuántos días de dieta se pagaron como aguinaldo a cada senador en 2025 y con qué fundamento, dado que el Manual de Percepciones señala 40 días y el Anexo 23.2.2 reporta $382,207?» |
 | E3 | Asesores del Senado contratados por honorarios | Solicitud al Senado por la PNT, pidiendo el Anexo 5 del Manual en Excel (hoy es una imagen) |
 

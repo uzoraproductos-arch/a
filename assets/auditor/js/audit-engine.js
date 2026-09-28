@@ -1654,12 +1654,16 @@
       ' dependencias que comparten este límite</summary><ul>' +
       c.lista.map(n => '<li>' + escHtml(n) + '</li>').join('') + '</ul><div class="shock-card-fuente">' +
       cmpFuente(c.listaFuente) + '</div></details>' : '';
+    const ent = c.entidades ? '<details class="shock-lista" open><summary>Congreso por congreso</summary><ul>' +
+      c.entidades.map(e => '<li><b>' + escHtml(e.nombre) + ':</b> ' + ccPesos(e.neto) + ' netos ' + chipEstado(e.netoEstado) +
+        ' y ' + ccPesos(e.bruto) + ' brutos al mes ' + chipEstado(e.brutoEstado) + '<br><small>' + escHtml(e.concepto) + ' ' +
+        cmpFuente(e.fuente, e.pagina) + '</small></li>').join('') + '</ul></details>' : '';
 
     return '<article class="shock-card">' +
       '<div><div class="shock-card-ico" aria-hidden="true">' + c.icono + '</div>' +
         '<h4 class="shock-card-cargo">' + escHtml(c.cargo) + '</h4>' +
         '<div class="shock-card-ente">' + escHtml(c.detalle) + '</div>' +
-        '<div class="shock-figure-box">' + figuras + '</div>' + sub + hon + lista +
+        '<div class="shock-figure-box">' + figuras + '</div>' + sub + hon + lista + ent +
         '<div class="shock-ratio-highlight">' + (veces >= 1
           ? 'Recibe ' + veces.toFixed(1) + tuUd(' veces lo que usted', ' veces lo que tú')
           : tuUd('Recibe menos que usted', 'Recibe menos que tú')) + ' ' + chipEstado('derivado') + '</div>' +

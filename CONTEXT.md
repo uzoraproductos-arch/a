@@ -3803,6 +3803,36 @@ informes de la ASF, guardados en `investigaciones/asf-historico/`.
   Medicamentos», porque no existe uno de educación. Moverla es decisión del
   autor.
 
+### Hecho (Diputados locales: 4 de 32 congresos con documento de 2026, sello 20260928m)
+
+`herramientas/integrar_diputados_locales.py` llena la tarjeta «Diputada o
+diputado local» del comparador salarial, que estaba pendiente. Comprueba la
+huella de cada documento (`investigaciones/congresos-locales/`).
+
+| Congreso | Neto al mes | Bruto al mes | Documento |
+|---|---|---|---|
+| Guanajuato | $144,097.16 (oficial) | $224,437.56 (oficial) | Tabulador 2026, nivel 20 |
+| Jalisco | $69,906.28 (derivado) | $109,069.76 (derivado) | Nómina de la 1.ª quincena de septiembre de 2026 (38 diputados) |
+| Querétaro | $56,885.72 (oficial) | $89,774.00 (oficial) | Art. 66 fr. VII, 2.º trimestre de 2026 (25 diputados) |
+| Tabasco | $50,000.00 (oficial) | $68,577.90 (oficial) | Periódico Oficial núm. 8590-C, 8-11-2025, p. 3 |
+
+- Jalisco sale de su nómina, no de un tabulador:
+  - bruto = 2 × $54,534.88;
+  - neto = 2 × (quincena − ISR − pensiones).
+- La tarjeta muestra el rango neto ($50,000 a $144,097) y una lista
+  «Congreso por congreso», cada fila con su chip, sus conceptos y su
+  fuente. No se promedia ni se extrapola.
+- Neto anual parcial: 12 × el máximo (Guanajuato), sin aguinaldo (derivado).
+- Motor: `cmpTarjeta` pinta `c.entidades` cuando existe.
+- **Faltan 28 congresos:**
+  - Michoacán: su tabulador está en `congresomich.site`, dominio que el
+    entorno no alcanza.
+  - Solo tienen años anteriores en su portal: Ciudad de México (2019),
+    Nuevo León (2021), Sinaloa (2016), Chiapas (2018) y Tamaulipas
+    (2.º trimestre de 2025).
+  - Los demás no se localizaron todavía.
+  - La PNT no es accesible desde el entorno.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3821,7 +3851,7 @@ auditor, por tipo:
 3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo del
    FARAC, costo total del Búnker (edificio y equipo), costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
-   el corte de abril), dietas locales, CDMX en EFIPEM, cifra oficial del
+   el corte de abril), dietas de 28 congresos locales (hay 4), CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
    en el control de importaciones de combustibles (daría un expediente con

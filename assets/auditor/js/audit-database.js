@@ -24002,6 +24002,30 @@ window.AUDIT_DB = {
         "doc": "Ley Federal del Trabajo, texto vigente (\u00faltima reforma DOF 14-05-2026): art\u00edculo 76 (vacaciones, reformado DOF 27-12-2022), 80 (prima vacacional) y 87 (aguinaldo).",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf",
         "sha256": "12f09393a1951a91c3f57f579bf611b034edf1a5f78cdbfb828e23ff3a9acbf7"
+      },
+      "GTO": {
+        "corto": "Congreso de Guanajuato, tabulador 2026",
+        "doc": "H. Congreso del Estado de Guanajuato, Tabulador de sueldos y prestaciones 2026 del Poder Legislativo",
+        "url": "https://congreso-gto.s3.amazonaws.com/transparencia/TABULADOR_DE_SUELDOS_2026.pdf",
+        "sha256": "e83c076abe51397de41eef1703435b3793c50ace5f9f813085ae93b132ff86e0"
+      },
+      "JAL": {
+        "corto": "Congreso de Jalisco, n\u00f3mina 1.\u00aa quincena de septiembre de 2026",
+        "doc": "H. Congreso del Estado de Jalisco, Sistema de n\u00f3mina, primera quincena de septiembre de 2026 (PDF de la quincena)",
+        "url": "https://transparencia.congresojal.gob.mx/modulos/nomina/impresion_quincena.php?id=260901",
+        "sha256": "30a139e7b9791af0a773ba5d2bfbd3ed21c432a887e5806c96e97a482ed79dcc"
+      },
+      "TAB": {
+        "corto": "Peri\u00f3dico Oficial de Tabasco, 8-11-2025",
+        "doc": "Peri\u00f3dico Oficial del Estado de Tabasco, n\u00fam. 8590, suplemento C, 8 de noviembre de 2025: tabuladores 2026 del H. Congreso del Estado",
+        "url": "https://publicacionperiodico.tabasco.gob.mx/documento/7667/firmado_qr.pdf",
+        "sha256": "877d5a4e06f63df6a4e7e28b4106852b921e34db71efa44d06df39aab9862a7b"
+      },
+      "QRO": {
+        "corto": "Legislatura de Quer\u00e9taro, remuneraciones 2.\u00ba trim. 2026",
+        "doc": "Legislatura del Estado de Quer\u00e9taro, formato LTAIPEQArt66FraccVII (remuneraciones brutas y netas), segundo trimestre de 2026",
+        "url": "http://site.legislaturaqueretaro.gob.mx/CloudPLQ/Transparencia/Art66/Fracc_07/2026/LTAIPEQArt66FraccVIIA_2o_Tri_2026.xlsx",
+        "sha256": "0975a9fe2badfb5b34a1bb33c25245ff76deb665ab8816947b3bcd14cadd095b"
       }
     },
     "grupos": [
@@ -24419,12 +24443,63 @@ window.AUDIT_DB = {
         "id": "diputado_local",
         "grupo": "local",
         "cargo": "Diputada o diputado local",
-        "detalle": "32 congresos, 32 tabuladores",
+        "detalle": "4 de 32 congresos con documento de 2026",
         "icono": "\ud83d\uddfa\ufe0f",
-        "pendiente": true,
-        "mensualEstado": "pendiente",
-        "anualEstado": "pendiente",
-        "nota": "Cada congreso aprueba su propio presupuesto y publica la dieta en su peri\u00f3dico oficial o en su portal de transparencia. No hay una serie nacional oficial que las re\u00fana: el Censo Nacional de Poderes Legislativos Estatales del INEGI cuenta legisladores y gasto, pero no publica la dieta. Se integrar\u00e1 entidad por entidad, con su documento."
+        "mensual": {
+          "min": 50000.0,
+          "max": 144097.16
+        },
+        "mensualEstado": "oficial",
+        "mensualConcepto": "Neto mensual: del congreso que menos paga (Tabasco) al que m\u00e1s (Guanajuato), entre los 4 con documento",
+        "anual": 1729165.92,
+        "anualEstado": "derivado",
+        "anualOperacion": "12 \u00d7 $144,097.16, el neto mensual m\u00e1s alto documentado (Guanajuato); sin aguinaldo ni prima vacacional",
+        "parcial": true,
+        "fuente": "GTO",
+        "pagina": "nivel 20",
+        "entidades": [
+          {
+            "nombre": "Guanajuato",
+            "bruto": 224437.56,
+            "brutoEstado": "oficial",
+            "neto": 144097.16,
+            "netoEstado": "oficial",
+            "concepto": "Seis conceptos mensuales: sueldo nominal $55,295.23, cuotas de seguridad social, previsi\u00f3n social, ayuda por servicios, apoyo familiar y gratificaci\u00f3n quincenal. Neto despu\u00e9s de ISR y fondo de ahorro. Aparte, 45 d\u00edas de aguinaldo ($336,656.34 brutos).",
+            "fuente": "GTO",
+            "pagina": "nivel 20"
+          },
+          {
+            "nombre": "Jalisco",
+            "bruto": 109069.76,
+            "brutoEstado": "derivado",
+            "neto": 69906.28,
+            "netoEstado": "derivado",
+            "concepto": "Los 38 diputados cobran $54,534.88 brutos por quincena, sin otras percepciones en la n\u00f3mina. Neto: la quincena menos ISR ($13,310.23) y pensiones ($6,271.51), por dos.",
+            "fuente": "JAL",
+            "pagina": "puesto \u00abDiputado\u00bb"
+          },
+          {
+            "nombre": "Quer\u00e9taro",
+            "bruto": 89774.0,
+            "brutoEstado": "oficial",
+            "neto": 56885.72,
+            "netoEstado": "oficial",
+            "concepto": "Los 25 diputados, dieta mensual; el formato no registra percepciones adicionales.",
+            "fuente": "QRO",
+            "pagina": "abril a junio de 2026"
+          },
+          {
+            "nombre": "Tabasco",
+            "bruto": 68577.9,
+            "brutoEstado": "oficial",
+            "neto": 50000.0,
+            "netoEstado": "oficial",
+            "concepto": "Percepci\u00f3n ordinaria total mensual; el cuadro no asigna prestaciones adicionales en dinero o en especie.",
+            "fuente": "TAB",
+            "pagina": "p. 3"
+          }
+        ],
+        "nota": "Cada congreso fija su pago con conceptos distintos: unos pagan solo la dieta, otros la reparten en apoyos y gratificaciones. Por eso no se promedia ni se extrapola a los 28 que faltan. Faltan porque su documento de 2026 no est\u00e1 en su portal (Ciudad de M\u00e9xico, Nuevo Le\u00f3n, Sinaloa, Chiapas y Tamaulipas publican a\u00f1os anteriores), porque su portal no respondi\u00f3 (Michoac\u00e1n lo publica en un dominio que no pudimos consultar). Los dem\u00e1s no los localizamos todav\u00eda en su portal; estos datos suelen publicarse en la Plataforma Nacional de Transparencia, que no pudimos consultar desde nuestro entorno."
       }
     ],
     "prestaciones": {
