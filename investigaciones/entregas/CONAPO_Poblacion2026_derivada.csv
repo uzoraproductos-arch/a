@@ -1,0 +1,34 @@
+﻿ANIO,CVE_GEO,ENTIDAD,POBLACION,ESTADO,OPERACION,FUENTE
+2026,00,Nacional (suma de 32 entidades),134407258,derivado,"Suma de las 32 entidades, todas las edades y ambos sexos",https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,01,Aguascalientes,1567559,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,02,Baja California,4189285,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,03,Baja California Sur,921734,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,04,Campeche,962014,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,05,Coahuila,3440385,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,06,Colima,771538,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,07,Chiapas,6185469,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,08,Chihuahua,4087306,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,09,Ciudad de México,9159966,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,10,Durango,1939482,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,11,Guanajuato,6590749,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,12,Guerrero,3606296,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,13,Hidalgo,3334060,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,14,Jalisco,8982027,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,15,México,17822420,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,16,Michoacán,5089383,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,17,Morelos,2067472,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,18,Nayarit,1338499,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,19,Nuevo León,6516202,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,20,Oaxaca,4368997,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,21,Puebla,7149139,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,22,Querétaro,2700978,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,23,Quintana Roo,2141082,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,24,San Luis Potosí,3002651,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,25,Sinaloa,3208039,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,26,Sonora,3168624,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,27,Tabasco,2472668,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,28,Tamaulipas,3777472,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,29,Tlaxcala,1464515,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,30,Veracruz,8111813,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,31,Yucatán,2542536,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv
+2026,32,Zacatecas,1726898,derivado,Suma de 110 edades y ambos sexos; ANIO=2026,https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv

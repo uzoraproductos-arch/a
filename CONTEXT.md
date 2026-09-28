@@ -4335,3 +4335,32 @@ ot-07 integrada en AUDIT_DB.noticias (Modo Inspector).
    - Pruebas automatizadas en Microsoft Edge Headless vía CDP (`scratch/test_huachicol_modulo5_cdp.py`) con 100% de éxito y 0 errores en consola.
    - Sello de versión incrementado a **20260927ze** mediante `herramientas/sello.py`.
    - Saltos de línea CRLF preservados y cuentas de lone CR inmutables: `index.html` (56), `assets/auditor/js/audit-engine.js` (2), `assets/auditor/js/audit-database.js` (2), `assets/auditor/css/auditavision.css` (1).
+
+## Entrega documental — 28-09-2026: búsqueda de las 25 fuentes
+
+Se entregan originales y trazabilidad en `investigaciones/entregas/README.md`,
+con catálogo de URL, fecha y SHA-256. Los originales mayores de 25 MB se enlazan;
+las copias completas descargadas quedan en `outputs/fuentes-originales-grandes/`
+fuera del commit. No se cambió código, cifras, chips ni sello de la plataforma.
+
+Hallazgos listos para cotejo: población CONAPO 2026 (total derivado 134,407,258,
+32 entidades); Segundo Informe 2026 y anexo, PDF 70 y 284; IPAB 4T2025;
+textos de concejalías; Cuenta Pública CDMX 2024 y 16 enlaces por alcaldía;
+PIB de 1988 en base 1993; Libro Blanco Interurbano y varios informes ASF.
+Dos solicitudes al Senado preparadas, sin presentar.
+
+Pendientes: ITG 2T2026; resolutivos ambientales; serie IPAB desde 1999;
+31 tabuladores legislativos; respuestas del Senado; estenográfica del 02-10-2025;
+informes exactos ANAM/SAT, Fonadin, Búnker y Enciclomedia 2004-2006;
+cotejo de ingresos de alcaldías, costos/pérdidas por obra, trabajadores IMSS
+1988-1996 y saldo nominal de deuda al cierre de 1994. Los motivos y archivos
+parciales se detallan por cada uno de los 25 puntos en el README de la entrega.
+
+Correcciones para futuras integraciones: SAT descargado llega a abril de 2026,
+no junio; 4,600 mdp del Segundo Informe es recaudación asociada, no una
+estimación anual de evasión. La aclaración oficial del 09-10-2025 no respalda
+los 600,000 mdp como cálculo oficial de Hacienda. Pasivo neto IPAB no es costo
+acumulado del rescate. Las pérdidas corporativas no prueban pérdidas de una
+instalación. Birmex 2024 es dictamen con abstención; Pemex TRI 2025 es aviso de
+extinción, no estados financieros separados. Banxico 1994 distingue saldos
+promedio y de cierre. No convertir ningún pendiente en oficial sin ese cotejo.

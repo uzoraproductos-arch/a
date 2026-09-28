@@ -91,3 +91,7 @@ vigente confirma la reforma del DOF 19-11-2025.
 | INEGI, Cuentas Económicas y Ecológicas 2025 | Diciembre de 2026 |
 | INEGI, EFIPEM 2025 definitiva | Sin fecha |
 | SAT, estudios de evasión (art. 30 de la LIF 2027) | Principios de 2028 |
+
+## Avance de localización — 28-09-2026
+
+Consulta la [entrega documental de las 25 fuentes](entregas/README.md), con originales, enlaces, páginas cotejadas y pendientes por punto. La recepción de una fuente no cambia automáticamente el estado del dato en la plataforma.

@@ -1,0 +1,1214 @@
+[
+  {
+    "punto": 1,
+    "archivo": "CONAPO_PoblacionMitad_1950_2070.csv",
+    "url": "https://conapo.segob.gob.mx/work/models/CONAPO/Datos_Abiertos/pry23/00_Pob_Mitad_1950_2070.csv",
+    "consulta_utc": "2026-09-28T01:30:09.470028+00:00",
+    "estado_descarga": "pendiente",
+    "error": "<urlopen error [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión>"
+  },
+  {
+    "punto": 5,
+    "archivo": "SHCP_IPAB_DeudaPublica_4T2025.pdf",
+    "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
+    "consulta_utc": "2026-09-28T01:30:09.492020+00:00",
+    "estado_descarga": "pendiente",
+    "error": "<urlopen error [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión>"
+  },
+  {
+    "punto": 6,
+    "archivo": "CDMX_LeyOrganicaAlcaldias_6_2.pdf",
+    "url": "https://data.consejeria.cdmx.gob.mx//images/leyes/LEY_ORGANICA_DE_ALCALDIAS_DE_LA_CDMX_6.2.pdf",
+    "consulta_utc": "2026-09-28T01:30:09.527992+00:00",
+    "estado_descarga": "pendiente",
+    "error": "<urlopen error [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión>"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_IndiceInformes.html",
+    "url": "https://www.sat.gob.mx/minisitio/DatosAbiertos/informes.html",
+    "consulta_utc": "2026-09-28T01:30:09.586759+00:00",
+    "estado_descarga": "pendiente",
+    "error": "<urlopen error [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión>",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 3,
+    "archivo": "Presidencia_IndiceInformes.html",
+    "url": "https://www.informegobierno.gob.mx/",
+    "consulta_utc": "2026-09-28T01:30:09.680625+00:00",
+    "estado_descarga": "pendiente",
+    "error": "<urlopen error [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión>",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 1,
+    "archivo": "CONAPO_PoblacionMitad_1950_2070.csv",
+    "url": "https://conapo.segob.gob.mx/work/models/CONAPO/Datos_Abiertos/pry23/00_Pob_Mitad_1950_2070.csv",
+    "consulta_utc": "2026-09-28T01:31:08.175622+00:00",
+    "url_final": "https://www.gob.mx/conapo/work/models/CONAPO/Datos_Abiertos/pry23/00_Pob_Mitad_1950_2070.csv",
+    "tipo": "text/html",
+    "bytes": 1834,
+    "estado_descarga": "pendiente",
+    "error": "La respuesta es HTML, no CSV"
+  },
+  {
+    "punto": 5,
+    "archivo": "SHCP_IPAB_DeudaPublica_4T2025.pdf",
+    "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
+    "consulta_utc": "2026-09-28T01:31:08.177079+00:00",
+    "url_final": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
+    "tipo": "application/pdf",
+    "bytes": 1017764,
+    "estado_descarga": "descargado",
+    "sha256": "51a632d59c855ae50c994eafdc40a645fa91237c36faad27108fefd07e39e732",
+    "ruta_local": "investigaciones/entregas/SHCP_IPAB_DeudaPublica_4T2025.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 6,
+    "archivo": "CDMX_LeyOrganicaAlcaldias_6_2.pdf",
+    "url": "https://data.consejeria.cdmx.gob.mx//images/leyes/LEY_ORGANICA_DE_ALCALDIAS_DE_LA_CDMX_6.2.pdf",
+    "consulta_utc": "2026-09-28T01:31:08.177958+00:00",
+    "url_final": "https://data.consejeria.cdmx.gob.mx//images/leyes/LEY_ORGANICA_DE_ALCALDIAS_DE_LA_CDMX_6.2.pdf",
+    "tipo": "application/pdf",
+    "bytes": 630697,
+    "estado_descarga": "descargado",
+    "sha256": "69c7351bdf9f149fc94de36cf3787ca91c7041307211a8f0d3aa93fac63919fb",
+    "ruta_local": "investigaciones/entregas/CDMX_LeyOrganicaAlcaldias_6_2.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_IndiceInformes.html",
+    "url": "https://www.sat.gob.mx/minisitio/DatosAbiertos/informes.html",
+    "consulta_utc": "2026-09-28T01:31:08.180390+00:00",
+    "url_final": "https://www.sat.gob.mx/minisitio/DatosAbiertos/informes.html",
+    "tipo": "text/html",
+    "bytes": 85884,
+    "estado_descarga": "descargado",
+    "sha256": "cc2357d17af4d3768a63f9e51b8d19658215b5bb7bf805ff994cdf5fa4c382c5",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 3,
+    "archivo": "Presidencia_IndiceInformes.html",
+    "url": "https://www.informegobierno.gob.mx/",
+    "consulta_utc": "2026-09-28T01:31:08.181405+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 403: Forbidden",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 1,
+    "archivo": "CONAPO_CatalogoDatos.html",
+    "url": "https://www.datos.gob.mx/dataset/proyecciones-de-poblacion",
+    "consulta_utc": "2026-09-28T01:31:56.474586+00:00",
+    "url_final": "https://www.datos.gob.mx/dataset/proyecciones-de-poblacion",
+    "tipo": "text/html; charset=utf-8",
+    "bytes": 48991,
+    "estado_descarga": "descargado",
+    "sha256": "4283ea99bfa1d4a1f6d12869724ea7e462f96fb91e19d205ea556817c114bf09",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_CatalogoPadron.html",
+    "url": "https://www.datos.gob.mx/es/dataset/padron",
+    "consulta_utc": "2026-09-28T01:31:56.476097+00:00",
+    "url_final": "https://www.datos.gob.mx/es/dataset/padron",
+    "tipo": "text/html; charset=utf-8",
+    "bytes": 53487,
+    "estado_descarga": "descargado",
+    "sha256": "a4ec26f692be9a1b91be1e9d1ee7cbca5633d1d8aab53e570a600aa52b177204",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 6,
+    "archivo": "CDMX_Constitucion_14_2_2.pdf",
+    "url": "https://data.consejeria.cdmx.gob.mx/images/leyes/estatutos/CONSTITUCION_POLITICA_DE_LA_CDMX_14.2.2.pdf",
+    "consulta_utc": "2026-09-28T01:31:56.478018+00:00",
+    "url_final": "https://data.consejeria.cdmx.gob.mx/images/leyes/estatutos/CONSTITUCION_POLITICA_DE_LA_CDMX_14.2.2.pdf",
+    "tipo": "application/pdf",
+    "bytes": 881570,
+    "estado_descarga": "descargado",
+    "sha256": "2b4c4e4ae38c4332ff7c1a0c7b62db1f0ca7bc06bd0b9b88ea080b9d9f094da8",
+    "ruta_local": "investigaciones/entregas/CDMX_Constitucion_14_2_2.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CuentaPublica2024_Indice.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/",
+    "consulta_utc": "2026-09-28T01:31:56.484094+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 67679,
+    "estado_descarga": "descargado",
+    "sha256": "39f9fb073e913032f68bac4d8e53aa2f7c542646fd80468a94d10b1088a9d3af",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 4,
+    "archivo": "ASEA_DosBocas_Indice.html",
+    "url": "https://www.gob.mx/asea/documentos/resolutivo",
+    "consulta_utc": "2026-09-28T01:31:56.486114+00:00",
+    "url_final": "https://www.gob.mx/asea/documentos/resolutivo",
+    "tipo": "text/html",
+    "bytes": 1834,
+    "estado_descarga": "respuesta_no_documental",
+    "sha256": "9d80b23e67bd9e3859cd0848639072f2a5380d89ba6cc6122aaaf970b8b8ccdd",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 4,
+    "archivo": "SEMARNAT_TrenMaya_RespuestaSenado_2021.pdf",
+    "url": "https://infosen.senado.gob.mx/infosen/CCTP/RESPUESTAS/2021-05-12/DGPL_2P3A_1767_SEGOB_ESPECIES_ENDEMICAS_TREN_MAYA.pdf",
+    "consulta_utc": "2026-09-28T01:31:56.984072+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "punto": 1,
+    "archivo": "CONAPO_PoblacionMitad_1950_2070.csv",
+    "url": "https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv",
+    "consulta_utc": "2026-09-28T02:42:28.577823+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_PadronPorTipoContribuyente.csv",
+    "url": "https://repodatos.atdt.gob.mx/api_update/sat/padron/portipocontribuyente.csv",
+    "consulta_utc": "2026-09-28T02:42:28.768521+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_PadronSituacionRFC.csv",
+    "url": "https://repodatos.atdt.gob.mx/api_update/sat/padron/porsitrfc21.csv",
+    "consulta_utc": "2026-09-28T02:42:28.867673+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "punto": 14,
+    "archivo": "PEMEX_TRI_EstadosFinancieros2024.pdf",
+    "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf",
+    "consulta_utc": "2026-09-28T02:42:29.067848+00:00",
+    "url_final": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf",
+    "tipo": "application/pdf",
+    "bytes": 14090651,
+    "estado_descarga": "descargado",
+    "sha256": "b326741b89e7ad809fe17df118e400a20e70d1e79f49ea7b9350d1218a38a90d",
+    "ruta_local": "investigaciones/entregas/PEMEX_TRI_EstadosFinancieros2024.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 17,
+    "archivo": "ASF_PemexFertilizantes_CP2017_0492.pdf",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+    "consulta_utc": "2026-09-28T02:42:29.069873+00:00",
+    "url_final": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+    "tipo": "application/pdf",
+    "bytes": 2328559,
+    "estado_descarga": "descargado",
+    "sha256": "d1f61d814ce1e5dd1f2c4d2e291cddf7ba0b651e75e252a8fe163d51ce1527f5",
+    "ruta_local": "investigaciones/entregas/ASF_PemexFertilizantes_CP2017_0492.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 18,
+    "archivo": "ASF_EstelaDeLuz_CP2011_0056.pdf",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0056_a.pdf",
+    "consulta_utc": "2026-09-28T02:42:29.632274+00:00",
+    "url_final": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0056_a.pdf",
+    "tipo": "application/pdf",
+    "bytes": 939047,
+    "estado_descarga": "descargado",
+    "sha256": "2083b1ece37a0bb31011d5ca06907fd5d79b541a7377c00b5c6b19fa034fd1db",
+    "ruta_local": "investigaciones/entregas/ASF_EstelaDeLuz_CP2011_0056.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 1,
+    "archivo": "CONAPO_PoblacionMitad_1950_2070.csv",
+    "url": "https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv",
+    "consulta_utc": "2026-09-28T02:45:43.619148+00:00",
+    "estado_descarga": "descargado",
+    "metodo": "Navegador; copia binaria sin cambios",
+    "bytes": 45228748,
+    "sha256": "89db6adc7930965fb5b5c01ad3a98765ed90afa6a151c2cfb913acc2b9e0cac6",
+    "ruta_local": "outputs/fuentes-originales-grandes/CONAPO_PoblacionMitad_1950_2070.csv",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_PadronPorTipoContribuyente.csv",
+    "url": "https://repodatos.atdt.gob.mx/api_update/sat/padron/portipocontribuyente.csv",
+    "consulta_utc": "2026-09-28T02:45:43.851263+00:00",
+    "estado_descarga": "descargado",
+    "metodo": "Navegador; copia binaria sin cambios",
+    "bytes": 17226,
+    "sha256": "5be8c25ace814cb9af43cfba0ebbe303b613dfecbd0f5ff04575e18c33fc7e5a",
+    "ruta_local": "investigaciones/entregas/SAT_PadronPorTipoContribuyente.csv",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 2,
+    "archivo": "SAT_PadronSituacionRFC.csv",
+    "url": "https://repodatos.atdt.gob.mx/api_update/sat/padron/porsitrfc21.csv",
+    "consulta_utc": "2026-09-28T02:45:43.880697+00:00",
+    "estado_descarga": "descargado",
+    "metodo": "Navegador; copia binaria sin cambios",
+    "bytes": 10624,
+    "sha256": "062847fd0a575b02411487438018e36ce8bd3927789760954a1426938589a6a5",
+    "ruta_local": "investigaciones/entregas/SAT_PadronSituacionRFC.csv",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 8,
+    "archivo": "Guanajuato_Congreso_Tabulador2026.pdf",
+    "url": "https://congreso-gto.s3.amazonaws.com/transparencia/TABULADOR_DE_SUELDOS_2026.pdf",
+    "consulta_utc": "2026-09-28T02:49:13.134570+00:00",
+    "url_final": "https://congreso-gto.s3.amazonaws.com/transparencia/TABULADOR_DE_SUELDOS_2026.pdf",
+    "tipo": "application/pdf",
+    "bytes": 317256,
+    "estado_descarga": "descargado",
+    "sha256": "e83c076abe51397de41eef1703435b3793c50ace5f9f813085ae93b132ff86e0",
+    "ruta_local": "investigaciones/entregas/Guanajuato_Congreso_Tabulador2026.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 20,
+    "archivo": "ASF_RefineriaTula_CP2010_1115.pdf",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2010i/Grupos/Desarrollo_Economico/2010_1115_a.pdf",
+    "consulta_utc": "2026-09-28T02:49:13.137455+00:00",
+    "url_final": "https://www.asf.gob.mx/Trans/Informes/IR2010i/Grupos/Desarrollo_Economico/2010_1115_a.pdf",
+    "tipo": "application/pdf",
+    "bytes": 154347,
+    "estado_descarga": "descargado",
+    "sha256": "9097ef5cfdfb6dd4a9842feb5e6c3043fd408f0aff4dbfdb2248d7e65b05d635",
+    "ruta_local": "investigaciones/entregas/ASF_RefineriaTula_CP2010_1115.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 21,
+    "archivo": "ASF_Enciclomedia_CP2011_0395.pdf",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0395_a.pdf",
+    "consulta_utc": "2026-09-28T02:49:13.140342+00:00",
+    "url_final": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0395_a.pdf",
+    "tipo": "application/pdf",
+    "bytes": 5738141,
+    "estado_descarga": "descargado",
+    "sha256": "2e915eb2ec62a873635316a3ccb9444c61960224b4d0231472e94aa6b6eedc21",
+    "ruta_local": "investigaciones/entregas/ASF_Enciclomedia_CP2011_0395.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 23,
+    "archivo": "ASF_AIFA_CP2022_0342.pdf",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0342_a.pdf",
+    "consulta_utc": "2026-09-28T02:49:13.141898+00:00",
+    "url_final": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_0342_a.pdf",
+    "tipo": "application/pdf",
+    "bytes": 676123,
+    "estado_descarga": "descargado",
+    "sha256": "39233514dccff696e3097e023df77df3db1d20b0888f84b6123bc89ceaf93d9b",
+    "ruta_local": "investigaciones/entregas/ASF_AIFA_CP2022_0342.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 24,
+    "archivo": "INEGI_EstadisticasHistoricasMexico2014.pdf",
+    "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/EHM2014.pdf",
+    "consulta_utc": "2026-09-28T02:49:13.144904+00:00",
+    "url_final": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/EHM2014.pdf",
+    "tipo": "application/pdf",
+    "bytes": 2511295,
+    "estado_descarga": "descargado",
+    "sha256": "08175be1c75d48878deb1984addba49361a0f8f4871a576d2d80f5b83d1e3084",
+    "ruta_local": "investigaciones/entregas/INEGI_EstadisticasHistoricasMexico2014.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CP2024_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/"
+    },
+    "consulta_utc": "2026-09-28T03:26:04.506372+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 1769,
+    "estado_descarga": "descargado",
+    "sha256": "b0abd047344b6ccd9b14b4b4d64b7df030e719a01983a3d0b43f838e24053819",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 25,
+    "archivo": "BANXICO_InformeAnual1994.pdf",
+    "url": "https://www.banxico.org.mx/publicaciones-y-prensa/informes-anuales/%7B0F2D589F-92A4-9C48-C456-643595B46CE5%7D.pdf",
+    "consulta_utc": "2026-09-28T03:26:04.510398+00:00",
+    "url_final": "https://www.banxico.org.mx/publicaciones-y-prensa/informes-anuales/%7B0F2D589F-92A4-9C48-C456-643595B46CE5%7D.pdf",
+    "tipo": "application/pdf",
+    "bytes": 593463,
+    "estado_descarga": "descargado",
+    "sha256": "56044ed6d2e6f437bcb5ea69c4fb380d83abb4e86e82e23229bc0aff753651a2",
+    "ruta_local": "investigaciones/entregas/BANXICO_InformeAnual1994.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 15,
+    "archivo": "BIRMEX_EstadosFinancieros2024.pdf",
+    "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf",
+    "consulta_utc": "2026-09-28T03:26:04.510398+00:00",
+    "url_final": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf",
+    "tipo": "application/pdf",
+    "bytes": 245510,
+    "estado_descarga": "descargado",
+    "sha256": "bb3ec2a2fd5c9fdc385e0b4ffe173dba33d069b0e265922c6d77df68cb0dc617",
+    "ruta_local": "investigaciones/entregas/BIRMEX_EstadosFinancieros2024.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 15,
+    "archivo": "BIRMEX_EstadosFinancieros2025.pdf",
+    "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VII/12NEF.05.DAR.pdf",
+    "consulta_utc": "2026-09-28T03:26:04.512422+00:00",
+    "url_final": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VII/12NEF.05.DAR.pdf",
+    "tipo": "application/pdf",
+    "bytes": 16189069,
+    "estado_descarga": "descargado",
+    "sha256": "8e6ac20ea6c1d68bec52344cfdfef49255860048822d824d0b4ef22d9c689513",
+    "ruta_local": "investigaciones/entregas/BIRMEX_EstadosFinancieros2025.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 14,
+    "archivo": "PEMEX_TRI_EstadosFinancieros2025.pdf",
+    "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52T9M.05.DAR.pdf",
+    "consulta_utc": "2026-09-28T03:26:04.514476+00:00",
+    "url_final": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52T9M.05.DAR.pdf",
+    "tipo": "application/pdf",
+    "bytes": 57748,
+    "estado_descarga": "descargado",
+    "sha256": "9a2783ddddf07a96b569d6f53781a4de7e93bb4a3cf6bc706455766e7192d457",
+    "ruta_local": "investigaciones/entregas/PEMEX_TRI_EstadosFinancieros2025.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CP2024_TomoI_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/001#Tomo I Resultados Generales/"
+    },
+    "consulta_utc": "2026-09-28T03:47:26.530019+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 586,
+    "estado_descarga": "descargado",
+    "sha256": "31591acf5528c47af48935245fc4828657367db01dcac14d1cad16e04c91e056",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CP2024_TomoIII_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/"
+    },
+    "consulta_utc": "2026-09-28T03:47:26.545358+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 1213,
+    "estado_descarga": "descargado",
+    "sha256": "52c4e3b714e1217bac24a41e92187aa010c541c0b27df6a9fef27a7cfdffea86",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 3,
+    "archivo": "Presidencia_SegundoInformeGobierno2026.pdf",
+    "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+    "consulta_utc": "2026-09-28T03:48:30.095269+00:00",
+    "estado_descarga": "descargado",
+    "metodo": "Navegador; copia binaria sin cambios",
+    "bytes": 14434389,
+    "sha256": "cc95e5ade7cb306b734e9dc1e61e1defcba14c444e5705de24be6ca6e115fa9d",
+    "ruta_local": "investigaciones/entregas/Presidencia_SegundoInformeGobierno2026.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CuentaPublica2024_TomoI.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/001%23Tomo%20I%20Resultados%20Generales/CP2024_TI.pdf",
+    "consulta_utc": "2026-09-28T03:50:20.302664+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/001%23Tomo%20I%20Resultados%20Generales/CP2024_TI.pdf",
+    "tipo": "application/pdf",
+    "bytes": 1919555,
+    "estado_descarga": "descargado",
+    "sha256": "661bc4dedc6637408eb0ec02b23174097f7e48bbe8e659d317269993183c51cc",
+    "ruta_local": "investigaciones/entregas/CDMX_CuentaPublica2024_TomoI.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CP2024_Presupuestaria_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.I.2 INFORMACIÓN PRESUPUESTARIA/"
+    },
+    "consulta_utc": "2026-09-28T03:50:20.304676+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "estado_descarga": "respuesta_no_documental",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CP2024_Anexos_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/"
+    },
+    "consulta_utc": "2026-09-28T03:50:20.306754+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 2310,
+    "estado_descarga": "descargado",
+    "sha256": "32585557ab601869731a65c11d553860d89fa9e0df83a6d09adcff40e04927ca",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "punto": 22,
+    "archivo": "SCT_TrenInterurbano_LibroBlanco2018.pdf",
+    "url": "https://www.sct.gob.mx/fileadmin/Transparencia/rendicion-de-cuentas/LB/20_LB.pdf",
+    "consulta_utc": "2026-09-28T03:50:20.308264+00:00",
+    "url_final": "https://www.gob.mx/sict",
+    "tipo": "text/html",
+    "bytes": 1834,
+    "estado_descarga": "pendiente",
+    "error": "La respuesta no es un PDF"
+  },
+  {
+    "punto": 4,
+    "archivo": "SEMARNAT_TrenMaya_RespuestaSenado_2021.pdf",
+    "url": "https://sil.gobernacion.gob.mx/Archivos/Documentos/2021/05/asun_4185656_20210512_1620852811.pdf",
+    "consulta_utc": "2026-09-28T03:50:20.308264+00:00",
+    "estado_descarga": "pendiente",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+  },
+  {
+    "punto": 4,
+    "archivo": "SEMARNAT_TrenMaya_Fase1_Resolutivo2020.pdf",
+    "url": "https://apps1.semarnat.gob.mx:8443/dgiraDocs/documentos/camp/resolutivos/2020/04CA2020V009.pdf",
+    "consulta_utc": "2026-09-28T03:50:20.783927+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "punto": 24,
+    "archivo": "INEGI_EHM2014_Trabajo.pdf",
+    "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/5.%20Trabajo.pdf",
+    "consulta_utc": "2026-09-28T04:12:50.797909+00:00",
+    "url_final": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/5.%20Trabajo.pdf",
+    "tipo": "application/pdf",
+    "bytes": 1018964,
+    "estado_descarga": "descargado",
+    "sha256": "cfff777cfe14ae66a0882ec81510db5e535dafd5546809dc5b5cf7866486eadf",
+    "ruta_local": "investigaciones/entregas/INEGI_EHM2014_Trabajo.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 24,
+    "archivo": "INEGI_EHM2014_EconomiaAgregada.pdf",
+    "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/8.%20Informacion%20economica%20agregada.pdf",
+    "consulta_utc": "2026-09-28T04:12:50.799994+00:00",
+    "url_final": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/8.%20Informacion%20economica%20agregada.pdf",
+    "tipo": "application/pdf",
+    "bytes": 1030922,
+    "estado_descarga": "descargado",
+    "sha256": "e454376e67522481ef7ba88c190f38acc8f75367332a2f74f88cc9f7230b3009",
+    "ruta_local": "investigaciones/entregas/INEGI_EHM2014_EconomiaAgregada.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 24,
+    "archivo": "INEGI_EHM2014_Salud.pdf",
+    "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/4.%20Salud.pdf",
+    "consulta_utc": "2026-09-28T04:12:50.801073+00:00",
+    "url_final": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/4.%20Salud.pdf",
+    "tipo": "application/pdf",
+    "bytes": 955534,
+    "estado_descarga": "descargado",
+    "sha256": "1dd827015e650c68794e56d41ee54df5eedf8846d58a9243271df453203dc918",
+    "ruta_local": "investigaciones/entregas/INEGI_EHM2014_Salud.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 22,
+    "archivo": "SCT_TrenInterurbano_LibroBlanco2018.pdf",
+    "url": "https://micrs.sct.gob.mx/images/DireccionesGrales/UE/Transparencia/rendicion-de-cuentas/LB/20_LB.pdf",
+    "consulta_utc": "2026-09-28T04:12:50.801073+00:00",
+    "url_final": "https://micrs.sct.gob.mx/images/DireccionesGrales/UE/Transparencia/rendicion-de-cuentas/LB/20_LB.pdf",
+    "tipo": "application/pdf",
+    "bytes": 1084066,
+    "estado_descarga": "descargado",
+    "sha256": "4f5818c77fbea26e015284edf97f8ee5624fe1ef0319880202e109277ed39a48",
+    "ruta_local": "investigaciones/entregas/SCT_TrenInterurbano_LibroBlanco2018.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "punto": 22,
+    "archivo": "ASF_TrenInterurbano_CP2018_0368.pdf",
+    "url": "https://asfbackup.asf.gob.mx/Trans/Informes/IR2018c/Documentos/Auditorias/2018_0368_a.pdf",
+    "consulta_utc": "2026-09-28T04:12:50.802729+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "punto": 7,
+    "archivo": "CDMX_CP2024_URG_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/"
+    },
+    "consulta_utc": "2026-09-28T11:40:18.672437+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 1300,
+    "estado_descarga": "descargado",
+    "sha256": "6a0b5f35b82e772109b35e45ac87d8cf7fb64f8e80a5f02cbc1868c2260b8bb0",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "archivo": "CDMX_CP2024_Alcaldias_Arbol.html",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/"
+    },
+    "consulta_utc": "2026-09-28T11:44:53.959796+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "estado_descarga": "respuesta_no_documental",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_AlcaldÍaS_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/"
+    },
+    "consulta_utc": "2026-09-28T11:46:28.428412+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "estado_descarga": "respuesta_no_documental",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_Dependencias_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/Dependencias/"
+    },
+    "consulta_utc": "2026-09-28T11:46:28.431523+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 8681,
+    "estado_descarga": "descargado",
+    "sha256": "16b52b767011b8b8b5e7ad691c53248d65fab651beeea0fad653070593f00006",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_Otros_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/Otros/"
+    },
+    "consulta_utc": "2026-09-28T11:46:28.431523+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 1282,
+    "estado_descarga": "descargado",
+    "sha256": "41957b388f9632fe2631d2f846bcd108a0d49cc2c6e41d12484e867e9ad103b9",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_Órganos Desconcentrados_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/Órganos Desconcentrados/"
+    },
+    "consulta_utc": "2026-09-28T11:46:28.434584+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "estado_descarga": "respuesta_no_documental",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_AlcaldiasLatin_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:47:40.411025+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 6221,
+    "estado_descarga": "descargado",
+    "sha256": "312e19a2590d88bff9a7ef468743260b5179f77c71e3e899d90363c270281829",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD01 AlcaldÍa Álvaro ObregÓn_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD01 AlcaldÍa Álvaro ObregÓn/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:33.520340+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 445,
+    "estado_descarga": "descargado",
+    "sha256": "c1c3cfb54721a398ad77a00d576f9464b3fe5e724b5131e92f7e449d42dea20a",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD02 AlcaldÍa Azcapotzalco_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD02 AlcaldÍa Azcapotzalco/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:33.524823+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 440,
+    "estado_descarga": "descargado",
+    "sha256": "2d93f23ff2e129a0ae37e953c6e2f5961563ea5af628d4a015605624493e3332",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD03 AlcaldÍa Benito JuÁrez_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD03 AlcaldÍa Benito JuÁrez/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:33.526841+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 441,
+    "estado_descarga": "descargado",
+    "sha256": "46d8b94c7d93cfc3786820a02397cfbcb3713cd3283870fc98ed5175026ac695",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD04 AlcaldÍa CoyoacÁn_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD04 AlcaldÍa CoyoacÁn/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:33.528356+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 434,
+    "estado_descarga": "descargado",
+    "sha256": "35bd89297f18d738acbbd286d586149046dcf5696c09697b70ed9ca4b3d996d1",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD05 AlcaldÍa Cuajimalpa de Morelos_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD05 AlcaldÍa Cuajimalpa de Morelos/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:33.540720+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 455,
+    "estado_descarga": "descargado",
+    "sha256": "6de351e87fb97db786aafb4acd213699aba91666ac8cc69382ea2036090716a3",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD06 AlcaldÍa CuauhtÉmoc_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD06 AlcaldÍa CuauhtÉmoc/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.058301+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 444,
+    "estado_descarga": "descargado",
+    "sha256": "c54443da457c9f2b6b2e314b0fe424df2e1b38487a4db5bd1c506dd6c45ebf28",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD07 AlcaldÍa Gustavo A. Madero_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD07 AlcaldÍa Gustavo A. Madero/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.068437+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 450,
+    "estado_descarga": "descargado",
+    "sha256": "4df0937a09e03a6dd642c827b73c1df52321bbdef6adb66f03ebc5572b9e6c91",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD08 AlcaldÍa Iztacalco_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD08 AlcaldÍa Iztacalco/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.075094+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 437,
+    "estado_descarga": "descargado",
+    "sha256": "28d34ab1b59705883dc4b12af9f91dfe434dbcc443b5582f45a336d5be93e59d",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD09 AlcaldÍa Iztapalapa_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD09 AlcaldÍa Iztapalapa/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.127310+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 439,
+    "estado_descarga": "descargado",
+    "sha256": "0f737476920578ac7eb5e7791c076a2d860638c3b42c1ac999ec6a65260d9a37",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD10 AlcaldÍa La Magdalena Contreras_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD10 AlcaldÍa La Magdalena Contreras/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.136466+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 457,
+    "estado_descarga": "descargado",
+    "sha256": "f6cd82bba8c5e6f2b0ddde9b5aca3ce16c394310a64e007f5c9ecb2f9fb5c154",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD11 AlcaldÍa Miguel Hidalgo_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD11 AlcaldÍa Miguel Hidalgo/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.227639+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 441,
+    "estado_descarga": "descargado",
+    "sha256": "6bcb54946306a87ee09b78216fbb898850b3dde082132f4dcd9ccffffa98f72a",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD12 AlcaldÍa Milpa Alta_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD12 AlcaldÍa Milpa Alta/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.274762+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 433,
+    "estado_descarga": "descargado",
+    "sha256": "5ac1f43b8668fb72186908b1fdeb86991c143bd2d77f81d49eaccbec385535f8",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD13 AlcaldÍa TlÁhuac_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD13 AlcaldÍa TlÁhuac/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.279760+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 432,
+    "estado_descarga": "descargado",
+    "sha256": "9065307ec497eed20456bdcf27c8bf5860ffc5e6072a3622be7ec26d5ad99e5b",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD14 AlcaldÍa Tlalpan_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD14 AlcaldÍa Tlalpan/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.288614+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 430,
+    "estado_descarga": "descargado",
+    "sha256": "0a3d6762052dc985bcc69700809b9d18095f26f0ac679abd263217ec8d77cc9e",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD15 AlcaldÍa Venustiano Carranza_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD15 AlcaldÍa Venustiano Carranza/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.294718+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 451,
+    "estado_descarga": "descargado",
+    "sha256": "8616068f35bc7d488a6ec44fa4595883aaee823117d3ede7af2b294f6d1ff713",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD16  AlcaldÍa Xochimilco_Arbol.html",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "form": {
+      "dir": "egresos/cp2024_25/documentos/003#Tomo III Poder Ejecutivo/III.2 Anexos/2. INFORMES POR URG/AlcaldÍaS/02CD16  AlcaldÍa Xochimilco/"
+    },
+    "form_encoding": "latin-1",
+    "consulta_utc": "2026-09-28T11:48:34.382681+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/connectors/jqueryFileTree.php",
+    "tipo": "text/html; charset=UTF-8",
+    "bytes": 441,
+    "estado_descarga": "descargado",
+    "sha256": "35fa03c32953b2a0ed5c99b7251e5deba0a8b5474ef0a56cf81e227d1c9891a8",
+    "estado_entrega": "indice_auxiliar_fuera_del_commit"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD01 AlcaldÍa Álvaro ObregÓn_02CD01_AO.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD01%20Alcald%CDa%20%C1lvaro%20Obreg%D3n/02CD01_AO.pdf",
+    "consulta_utc": "2026-09-28T11:48:58.931206+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD02 AlcaldÍa Azcapotzalco_02CD02_AZC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD02%20Alcald%CDa%20Azcapotzalco/02CD02_AZC.pdf",
+    "consulta_utc": "2026-09-28T11:48:58.933119+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD03 AlcaldÍa Benito JuÁrez_02CD03_BJ.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD03%20Alcald%CDa%20Benito%20Ju%C1rez/02CD03_BJ.pdf",
+    "consulta_utc": "2026-09-28T11:48:58.934638+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD04 AlcaldÍa CoyoacÁn_02CD04_COY.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD04%20Alcald%CDa%20Coyoac%C1n/02CD04_COY.pdf",
+    "consulta_utc": "2026-09-28T11:48:58.936139+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD05 AlcaldÍa Cuajimalpa de Morelos_02CD05_CM.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD05%20Alcald%CDa%20Cuajimalpa%20de%20Morelos/02CD05_CM.pdf",
+    "consulta_utc": "2026-09-28T11:48:58.946281+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD06 AlcaldÍa CuauhtÉmoc_02CD06_CUAUH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD06%20Alcald%CDa%20Cuauht%C9moc/02CD06_CUAUH.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.391094+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD07 AlcaldÍa Gustavo A. Madero_02CD07_GAM.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD07%20Alcald%CDa%20Gustavo%20A.%20Madero/02CD07_GAM.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.400830+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD08 AlcaldÍa Iztacalco_02CD08_IZTC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD08%20Alcald%CDa%20Iztacalco/02CD08_IZTC.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.400830+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD09 AlcaldÍa Iztapalapa_02CD09_IZTP.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD09%20Alcald%CDa%20Iztapalapa/02CD09_IZTP.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.461166+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD10 AlcaldÍa La Magdalena Contreras_02CD10_MC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD10%20Alcald%CDa%20La%20Magdalena%20Contreras/02CD10_MC.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.466196+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD11 AlcaldÍa Miguel Hidalgo_02CD11_MH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD11%20Alcald%CDa%20Miguel%20Hidalgo/02CD11_MH.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.547426+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD12 AlcaldÍa Milpa Alta_02CD12_MA.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD12%20Alcald%CDa%20Milpa%20Alta/02CD12_MA.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.554637+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD13 AlcaldÍa TlÁhuac_02CD13_TLH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD13%20Alcald%CDa%20Tl%C1huac/02CD13_TLH.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.561211+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD14 AlcaldÍa Tlalpan_02CD14_TLP.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD14%20Alcald%CDa%20Tlalpan/02CD14_TLP.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.599741+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD15 AlcaldÍa Venustiano Carranza_02CD15_VC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD15%20Alcald%CDa%20Venustiano%20Carranza/02CD15_VC.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.614236+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD16  AlcaldÍa Xochimilco_02CD16_XOCH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%CDaS/02CD16%20%20Alcald%CDa%20Xochimilco/02CD16_XOCH.pdf",
+    "consulta_utc": "2026-09-28T11:48:59.733165+00:00",
+    "estado_descarga": "pendiente",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD01 AlcaldÍa Álvaro ObregÓn_02CD01_AO.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD01%20Alcald%C3%8Da%20%C3%81lvaro%20Obreg%C3%93n/02CD01_AO.pdf",
+    "consulta_utc": "2026-09-28T11:49:24.219167+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD01%20Alcald%C3%8Da%20%C3%81lvaro%20Obreg%C3%93n/02CD01_AO.pdf",
+    "tipo": "application/pdf",
+    "bytes": 74257021,
+    "estado_descarga": "descargado",
+    "sha256": "f4ff205b7e0bdd87b2d3962f965ae46e9965d8dc4241b9ac0b76f36e22347709",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD01 AlcaldÍa Álvaro ObregÓn_02CD01_AO.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD02 AlcaldÍa Azcapotzalco_02CD02_AZC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD02%20Alcald%C3%8Da%20Azcapotzalco/02CD02_AZC.pdf",
+    "consulta_utc": "2026-09-28T11:49:24.221184+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD02%20Alcald%C3%8Da%20Azcapotzalco/02CD02_AZC.pdf",
+    "tipo": "application/pdf",
+    "bytes": 36053232,
+    "estado_descarga": "descargado",
+    "sha256": "2ddb413f6e7fa9b2d9f1ca11756a4687135abf304c52026debb8daaca71f9b29",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD02 AlcaldÍa Azcapotzalco_02CD02_AZC.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD03 AlcaldÍa Benito JuÁrez_02CD03_BJ.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD03%20Alcald%C3%8Da%20Benito%20Ju%C3%81rez/02CD03_BJ.pdf",
+    "consulta_utc": "2026-09-28T11:49:24.223511+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD03%20Alcald%C3%8Da%20Benito%20Ju%C3%81rez/02CD03_BJ.pdf",
+    "tipo": "application/pdf",
+    "bytes": 14054883,
+    "estado_descarga": "descargado",
+    "sha256": "6cf2da3f7b088787ce3ea440bd8a7ab0eba47a2ced2b26efe7362fda8709e882",
+    "ruta_local": "investigaciones/entregas/CDMX_CP2024_02CD03 AlcaldÍa Benito JuÁrez_02CD03_BJ.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD04 AlcaldÍa CoyoacÁn_02CD04_COY.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD04%20Alcald%C3%8Da%20Coyoac%C3%81n/02CD04_COY.pdf",
+    "consulta_utc": "2026-09-28T11:49:24.225721+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD04%20Alcald%C3%8Da%20Coyoac%C3%81n/02CD04_COY.pdf",
+    "tipo": "application/pdf",
+    "bytes": 95000001,
+    "estado_descarga": "pendiente",
+    "error": "Archivo mayor al límite de descarga de 95 MB; conservar enlace"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD05 AlcaldÍa Cuajimalpa de Morelos_02CD05_CM.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD05%20Alcald%C3%8Da%20Cuajimalpa%20de%20Morelos/02CD05_CM.pdf",
+    "consulta_utc": "2026-09-28T11:49:24.227487+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD05%20Alcald%C3%8Da%20Cuajimalpa%20de%20Morelos/02CD05_CM.pdf",
+    "tipo": "application/pdf",
+    "bytes": 32488058,
+    "estado_descarga": "descargado",
+    "sha256": "9dfaaacbdb963a2488739ff9b93585b84a71a178d5367478b6599810d390cfab",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD05 AlcaldÍa Cuajimalpa de Morelos_02CD05_CM.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD06 AlcaldÍa CuauhtÉmoc_02CD06_CUAUH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD06%20Alcald%C3%8Da%20Cuauht%C3%89moc/02CD06_CUAUH.pdf",
+    "consulta_utc": "2026-09-28T11:49:28.988116+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD06%20Alcald%C3%8Da%20Cuauht%C3%89moc/02CD06_CUAUH.pdf",
+    "tipo": "application/pdf",
+    "bytes": 19189462,
+    "estado_descarga": "descargado",
+    "sha256": "2aba351353c14a5305de0c5c7b68c9db74e7faa2cb84224a9cf1586704a38c91",
+    "ruta_local": "investigaciones/entregas/CDMX_CP2024_02CD06 AlcaldÍa CuauhtÉmoc_02CD06_CUAUH.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD07 AlcaldÍa Gustavo A. Madero_02CD07_GAM.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD07%20Alcald%C3%8Da%20Gustavo%20A.%20Madero/02CD07_GAM.pdf",
+    "consulta_utc": "2026-09-28T11:49:33.851389+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD07%20Alcald%C3%8Da%20Gustavo%20A.%20Madero/02CD07_GAM.pdf",
+    "tipo": "application/pdf",
+    "bytes": 59133069,
+    "estado_descarga": "descargado",
+    "sha256": "14af4a783ef5dd60fcc9aa0076f2dc7039507ab8f3fed657794bf69ab4494b43",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD07 AlcaldÍa Gustavo A. Madero_02CD07_GAM.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD08 AlcaldÍa Iztacalco_02CD08_IZTC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD08%20Alcald%C3%8Da%20Iztacalco/02CD08_IZTC.pdf",
+    "consulta_utc": "2026-09-28T11:49:33.972885+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD08%20Alcald%C3%8Da%20Iztacalco/02CD08_IZTC.pdf",
+    "tipo": "application/pdf",
+    "bytes": 27319775,
+    "estado_descarga": "descargado",
+    "sha256": "073c40bb5ab7ac594848797471961ef6a6dfe0825a8d6e2629d3c0bf13f0c229",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD08 AlcaldÍa Iztacalco_02CD08_IZTC.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD09 AlcaldÍa Iztapalapa_02CD09_IZTP.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD09%20Alcald%C3%8Da%20Iztapalapa/02CD09_IZTP.pdf",
+    "consulta_utc": "2026-09-28T11:49:35.987732+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD09%20Alcald%C3%8Da%20Iztapalapa/02CD09_IZTP.pdf",
+    "tipo": "application/pdf",
+    "bytes": 31865473,
+    "estado_descarga": "descargado",
+    "sha256": "146d47fb15af15f4bbf67038695bac7f2aca1c88000b9ae4c2c1b33a1b9b6211",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD09 AlcaldÍa Iztapalapa_02CD09_IZTP.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD10 AlcaldÍa La Magdalena Contreras_02CD10_MC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD10%20Alcald%C3%8Da%20La%20Magdalena%20Contreras/02CD10_MC.pdf",
+    "consulta_utc": "2026-09-28T11:49:41.253455+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD10%20Alcald%C3%8Da%20La%20Magdalena%20Contreras/02CD10_MC.pdf",
+    "tipo": "application/pdf",
+    "bytes": 12006501,
+    "estado_descarga": "descargado",
+    "sha256": "c84c569c00d3a950b8dde4f472c7bb764bea8b29a63f7757b598c6e51a90bae4",
+    "ruta_local": "investigaciones/entregas/CDMX_CP2024_02CD10 AlcaldÍa La Magdalena Contreras_02CD10_MC.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD11 AlcaldÍa Miguel Hidalgo_02CD11_MH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD11%20Alcald%C3%8Da%20Miguel%20Hidalgo/02CD11_MH.pdf",
+    "consulta_utc": "2026-09-28T11:49:43.555575+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD11%20Alcald%C3%8Da%20Miguel%20Hidalgo/02CD11_MH.pdf",
+    "tipo": "application/pdf",
+    "bytes": 18387267,
+    "estado_descarga": "descargado",
+    "sha256": "8ef0289ff3f4efde02faded4e01662e371f570255289ab63a8eaad9150d23bb8",
+    "ruta_local": "investigaciones/entregas/CDMX_CP2024_02CD11 AlcaldÍa Miguel Hidalgo_02CD11_MH.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD12 AlcaldÍa Milpa Alta_02CD12_MA.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD12%20Alcald%C3%8Da%20Milpa%20Alta/02CD12_MA.pdf",
+    "consulta_utc": "2026-09-28T11:49:46.387881+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD12%20Alcald%C3%8Da%20Milpa%20Alta/02CD12_MA.pdf",
+    "tipo": "application/pdf",
+    "bytes": 95000001,
+    "estado_descarga": "pendiente",
+    "error": "Archivo mayor al límite de descarga de 95 MB; conservar enlace"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD13 AlcaldÍa TlÁhuac_02CD13_TLH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD13%20Alcald%C3%8Da%20Tl%C3%81huac/02CD13_TLH.pdf",
+    "consulta_utc": "2026-09-28T11:49:47.448814+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD13%20Alcald%C3%8Da%20Tl%C3%81huac/02CD13_TLH.pdf",
+    "tipo": "application/pdf",
+    "bytes": 23320679,
+    "estado_descarga": "descargado",
+    "sha256": "10c9e28e2a01f4f09a6bb55c47a26d5610816c0f8608517ea98a42077fa127f1",
+    "ruta_local": "investigaciones/entregas/CDMX_CP2024_02CD13 AlcaldÍa TlÁhuac_02CD13_TLH.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD14 AlcaldÍa Tlalpan_02CD14_TLP.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD14%20Alcald%C3%8Da%20Tlalpan/02CD14_TLP.pdf",
+    "consulta_utc": "2026-09-28T11:49:47.517335+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD14%20Alcald%C3%8Da%20Tlalpan/02CD14_TLP.pdf",
+    "tipo": "application/pdf",
+    "bytes": 50630123,
+    "estado_descarga": "descargado",
+    "sha256": "63c13d598598589b15ab9e4ae4c4dbb3952703681bbf0fa1f697dc812db11436",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD14 AlcaldÍa Tlalpan_02CD14_TLP.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD15 AlcaldÍa Venustiano Carranza_02CD15_VC.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD15%20Alcald%C3%8Da%20Venustiano%20Carranza/02CD15_VC.pdf",
+    "consulta_utc": "2026-09-28T11:49:52.392742+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD15%20Alcald%C3%8Da%20Venustiano%20Carranza/02CD15_VC.pdf",
+    "tipo": "application/pdf",
+    "bytes": 22327957,
+    "estado_descarga": "descargado",
+    "sha256": "c272b75af295938bb74cf341bc4d3ac1cad8c24e089b80b60813b1e63b94c779",
+    "ruta_local": "investigaciones/entregas/CDMX_CP2024_02CD15 AlcaldÍa Venustiano Carranza_02CD15_VC.pdf",
+    "estado_entrega": "original_en_git"
+  },
+  {
+    "archivo": "CDMX_CP2024_02CD16  AlcaldÍa Xochimilco_02CD16_XOCH.pdf",
+    "url": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD16%20%20Alcald%C3%8Da%20Xochimilco/02CD16_XOCH.pdf",
+    "consulta_utc": "2026-09-28T11:49:53.267715+00:00",
+    "url_final": "https://servidoresx3.finanzas.cdmx.gob.mx/egresos/cp2024_25/documentos/003%23Tomo%20III%20Poder%20Ejecutivo/III.2%20Anexos/2.%20INFORMES%20POR%20URG/Alcald%C3%8DaS/02CD16%20%20Alcald%C3%8Da%20Xochimilco/02CD16_XOCH.pdf",
+    "tipo": "application/pdf",
+    "bytes": 42950804,
+    "estado_descarga": "descargado",
+    "sha256": "8a0adfb133d4eb89205f117576eaa93223266a7a06b90f02864a5abb6370da0a",
+    "ruta_local": "outputs/fuentes-originales-grandes/CDMX_CP2024_02CD16  AlcaldÍa Xochimilco_02CD16_XOCH.pdf",
+    "estado_entrega": "enlace_y_copia_local_mayor_25MB"
+  }
+]
