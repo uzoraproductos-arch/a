@@ -3833,6 +3833,55 @@ huella de cada documento (`investigaciones/congresos-locales/`).
   - Los demás no se localizaron todavía.
   - La PNT no es accesible desde el entorno.
 
+### Hecho (Diputados locales: 12 de 32 congresos, sello 20260928n)
+
+Ocho congresos más, cada uno con su documento de 2026 guardado en
+`investigaciones/congresos-locales/` y su huella comprobada por
+`herramientas/integrar_diputados_locales.py`. Dos vías funcionaron: el
+formato de remuneraciones en el portal propio del congreso y el presupuesto
+estatal 2026, que por ley trae el analítico de plazas o el tabulador de cada
+poder.
+
+| Congreso | Neto al mes | Bruto al mes | Documento |
+|---|---|---|---|
+| Sinaloa | pendiente | $140,941.34 (oficial) | Manual de remuneraciones 2026-2027, Anexo 4, p. 23 |
+| Tlaxcala | pendiente | $111,243 a $135,923 (derivado) | Presupuesto 2026, Anexo 42, p. 469 |
+| Nayarit | pendiente | $111,057.64 (derivado) | Formato art. 33 fr. VIII, 1.er trim. 2026 |
+| Colima | $67,113.68 (derivado) | $92,476.60 (derivado) | P.O. 21-02-2026, supl. 2, pp. 9-10 (quincenal × 2) |
+| Campeche | pendiente | $61,952.00 (oficial) | Presupuesto 2026, Anexo 19 |
+| Oaxaca | $42,000.00 (oficial) | $51,448.51 (oficial) | Formato LGTA70FVIIIA 2026, 1.er y 2.º trim. |
+| Yucatán | pendiente | $50,880.00 (oficial) | D.O. 29-12-2025, tomo de autónomos, p. 187 |
+| Guerrero | $40,188.00 (oficial) | $50,060.00 (oficial) | Formato 08A-VIIIA, 1.er trim. 2026 |
+
+- **Tlaxcala:** el decreto no dice la periodicidad. Es mensual porque la
+  partida 1111 Dietas ($33,669,060) ÷ 25 ÷ 12 = $112,230 cae dentro del rango.
+- **Nayarit:** el bruto suma sueldo ($32,651) y dieta ($78,406.64). El neto
+  de la dieta no se reporta, así que el neto queda pendiente.
+- **Motor:** una fila sin neto dice «neto no publicado» con chip
+  `pendiente`, y `brutoHasta` pinta el rango de Tlaxcala.
+- **Tarjeta:**
+  - Rango neto $40,188 (Guerrero) a $144,097 (Guanajuato), entre los 7 que
+    publican el neto.
+  - En bruto, los 12 van de $50,060 a $224,437.56.
+  - La lista se ordena por bruto.
+- **Revisados y no integrados:**
+  - Durango: su presupuesto 2026 da un rango de $78,890.56 a $113,285, sin
+    periodicidad y sin partida de dietas para cruzarlo.
+  - Baja California Sur: 4.º trim. 2025. Zacatecas: 3.er trim. 2025.
+  - Quintana Roo: su portal llega a 2018.
+  - Chihuahua: los tomos del presupuesto 2026 no traen el tabulador del
+    Congreso.
+  - Aguascalientes: su portal remite a la PNT, y su presupuesto 2026 no
+    trae el tabulador del Congreso.
+  - Veracruz y Coahuila: el portal no respondió (conexión reiniciada o
+    agotada).
+  - Hidalgo: certificado incompleto; su intermediario está en un dominio
+    bloqueado.
+  - Campeche: su portal de transparencia enlaza por tinyurl, dominio
+    bloqueado; se usó el presupuesto.
+- **Truco de descarga:** Guerrero devuelve 403 sin un User-Agent de navegador
+  completo y el `Referer` de su página.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3851,7 +3900,7 @@ auditor, por tipo:
 3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo del
    FARAC, costo total del Búnker (edificio y equipo), costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
-   el corte de abril), dietas de 28 congresos locales (hay 4), CDMX en EFIPEM, cifra oficial del
+   el corte de abril), dietas de 20 congresos locales (hay 12; ver el Hecho de 20260928n), CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
    en el control de importaciones de combustibles (daría un expediente con

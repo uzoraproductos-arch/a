@@ -24026,6 +24026,54 @@ window.AUDIT_DB = {
         "doc": "Legislatura del Estado de Quer\u00e9taro, formato LTAIPEQArt66FraccVII (remuneraciones brutas y netas), segundo trimestre de 2026",
         "url": "http://site.legislaturaqueretaro.gob.mx/CloudPLQ/Transparencia/Art66/Fracc_07/2026/LTAIPEQArt66FraccVIIA_2o_Tri_2026.xlsx",
         "sha256": "0975a9fe2badfb5b34a1bb33c25245ff76deb665ab8816947b3bcd14cadd095b"
+      },
+      "COL": {
+        "corto": "Peri\u00f3dico Oficial de Colima, 21-02-2026",
+        "doc": "Peri\u00f3dico Oficial \u00abEl Estado de Colima\u00bb, 21 de febrero de 2026, suplemento 2: acuerdo parlamentario que aprueba el tabulador de remuneraciones del Poder Legislativo para el ejercicio fiscal 2026",
+        "url": "https://periodicooficial.col.gob.mx/p/21022026/sup02/226022101.pdf",
+        "sha256": "06e9d12e1e4d1893c88a1bdd6a7e3fc969792ba6bd511878581a618db16b7a95"
+      },
+      "TLX": {
+        "corto": "Presupuesto de Egresos de Tlaxcala 2026",
+        "doc": "Peri\u00f3dico Oficial del Estado de Tlaxcala n\u00fam. 50, 5.\u00aa secci\u00f3n, 10 de diciembre de 2025: Presupuesto de Egresos del Estado de Tlaxcala para el ejercicio fiscal 2026 (Anexos 8 y 42)",
+        "url": "https://sefintlax.gob.mx/DocsSF/2026/admin/enero/PRESUPUESTO_EGRESOS_TLAXCALA_2026.pdf",
+        "sha256": "6db5994001400bfdfb87f14d7291f996c78cfe120109f48d4623a495bdb588a0"
+      },
+      "NAY": {
+        "corto": "Congreso de Nayarit, remuneraciones 1.er trim. 2026",
+        "doc": "H. Congreso del Estado de Nayarit, formato LTAIPEN art. 33 fr. VIII (remuneraci\u00f3n bruta y neta), primer trimestre de 2026, con su tabla de dietas",
+        "url": "https://congresonayarit.gob.mx/wp-content/uploads/TRANSPARENCIA/art_33/08/2026/08_a_remuneracion_bruta_y_neta_primer_trimestre_2026.xlsx",
+        "sha256": "6a45b470e405dc35e89e4cd403055fabbe65189d5966ce53b0e3df1d9acff5d4"
+      },
+      "GRO": {
+        "corto": "Congreso de Guerrero, remuneraciones 1.er trim. 2026",
+        "doc": "H. Congreso del Estado de Guerrero, formato 08A-VIIIA (remuneraci\u00f3n bruta y neta), primer trimestre de 2026",
+        "url": "https://congresogro.gob.mx/transparencia/2026/08A-VIIIA-2026-1.xlsx",
+        "sha256": "b5dafc47a00bcdca3ad9aff953e6d3066008a3046a851a4db1932e8095ede7e6"
+      },
+      "SIN": {
+        "corto": "Congreso de Sinaloa, manual de remuneraciones 2026-2027",
+        "doc": "H. Congreso del Estado de Sinaloa, Manual de Remuneraciones del Poder Legislativo del Estado de Sinaloa 2026-2027, Anexo 4 (cat\u00e1logo de sueldos por categor\u00eda)",
+        "url": "https://www.congresosinaloa.gob.mx/images/estructura-y-normatividad/MANUAL_DE_REMUNERACIONES_DEL_PODER_LEGISLATIVO_DEL_2026-2027_.pdf",
+        "sha256": "3bd782d48affe4fdd6d2634939795c5309836caaa3b1887e335ca6ae061f7ff5"
+      },
+      "OAX": {
+        "corto": "Congreso de Oaxaca, remuneraciones 2026",
+        "doc": "H. Congreso del Estado de Oaxaca, formato LGTA70FVIIIA (remuneraci\u00f3n bruta y neta), primer y segundo trimestres de 2026",
+        "url": "https://www.congresooaxaca.gob.mx/docs66.congresooaxaca.gob.mx/transparencia/2026/ART70/FVIII/LGTA70FVIIIA_2026.xlsx",
+        "sha256": "bdd2c652811fecdf91d97dd778019e01072570ad34987c87f73e141204157a38"
+      },
+      "CAM": {
+        "corto": "Presupuesto de Egresos de Campeche 2026, Anexo 19",
+        "doc": "Ley de Presupuesto de Egresos del Estado de Campeche para el ejercicio fiscal 2026, Anexo 19: tabuladores (incluye el Poder Legislativo y su anal\u00edtico de plazas)",
+        "url": "https://legislacion.congresocam.gob.mx/index.php/leyes-focalizadas/paquete-fiscal/2026/649-anexos-de-la-ley-de-presupuesto-de-egresos-del-estado-de-campeche-para-el-ejercicio-fiscal-2026/file",
+        "sha256": "627801e7d40f26fc8753b0c90d394a1ae75a5441069a0fa60322c81dca4e6dc2"
+      },
+      "YUC": {
+        "corto": "Diario Oficial de Yucat\u00e1n, 29-12-2025",
+        "doc": "Diario Oficial del Gobierno del Estado de Yucat\u00e1n n\u00fam. 35,878, 29 de diciembre de 2025, edici\u00f3n especial: Presupuesto de Egresos 2026, tomo de los poderes y organismos aut\u00f3nomos (Congreso del Estado)",
+        "url": "https://www.yucatan.gob.mx/docs/diario_oficial/diarios/2025/2025-12-29_5.pdf",
+        "sha256": "471275a3c4391ccb018e9e41d99897f3557d6b5e3f4c5010ae9501fa34291834"
       }
     },
     "grupos": [
@@ -24443,14 +24491,14 @@ window.AUDIT_DB = {
         "id": "diputado_local",
         "grupo": "local",
         "cargo": "Diputada o diputado local",
-        "detalle": "4 de 32 congresos con documento de 2026",
+        "detalle": "12 de 32 congresos con documento de 2026",
         "icono": "\ud83d\uddfa\ufe0f",
         "mensual": {
-          "min": 50000.0,
+          "min": 40188.0,
           "max": 144097.16
         },
         "mensualEstado": "oficial",
-        "mensualConcepto": "Neto mensual: del congreso que menos paga (Tabasco) al que m\u00e1s (Guanajuato), entre los 4 con documento",
+        "mensualConcepto": "Neto mensual: del congreso que menos paga (Guerrero) al que m\u00e1s (Guanajuato), entre los 7 que publican el neto. En bruto, los 12 con documento van de $50,060.00 a $224,437.56 al mes",
         "anual": 1729165.92,
         "anualEstado": "derivado",
         "anualOperacion": "12 \u00d7 $144,097.16, el neto mensual m\u00e1s alto documentado (Guanajuato); sin aguinaldo ni prima vacacional",
@@ -24469,6 +24517,37 @@ window.AUDIT_DB = {
             "pagina": "nivel 20"
           },
           {
+            "nombre": "Sinaloa",
+            "bruto": 140941.34,
+            "brutoEstado": "oficial",
+            "neto": null,
+            "netoEstado": "pendiente",
+            "concepto": "Sueldo de $28,234.20 m\u00e1s \u00abcompensaci\u00f3n a legisladores\u00bb de $112,707.14: total de percepciones ordinarias mensuales. El manual no publica el neto.",
+            "fuente": "SIN",
+            "pagina": "Anexo 4, p. 23"
+          },
+          {
+            "nombre": "Tlaxcala",
+            "bruto": 111243.0,
+            "brutoHasta": 135923.0,
+            "brutoEstado": "derivado",
+            "neto": null,
+            "netoEstado": "pendiente",
+            "concepto": "Los 25 diputados, remuneraci\u00f3n \u00abde $111,243 hasta $135,923\u00bb en el anal\u00edtico de plazas. El decreto no dice la periodicidad: es mensual porque la partida de dietas ($33,669,060 al a\u00f1o, Anexo 8) entre 25 diputados y 12 meses da $112,230. No publica el neto.",
+            "fuente": "TLX",
+            "pagina": "Anexo 42, p. 469"
+          },
+          {
+            "nombre": "Nayarit",
+            "bruto": 111057.64,
+            "brutoEstado": "derivado",
+            "neto": null,
+            "netoEstado": "pendiente",
+            "concepto": "Los 30 diputados: sueldo de $32,651 brutos ($26,397.46 netos) m\u00e1s dieta de $78,406.64 brutos al mes, cuyo neto el formato no reporta. Bruto: la suma de ambos.",
+            "fuente": "NAY",
+            "pagina": "tabla de dietas"
+          },
+          {
             "nombre": "Jalisco",
             "bruto": 109069.76,
             "brutoEstado": "derivado",
@@ -24477,6 +24556,16 @@ window.AUDIT_DB = {
             "concepto": "Los 38 diputados cobran $54,534.88 brutos por quincena, sin otras percepciones en la n\u00f3mina. Neto: la quincena menos ISR ($13,310.23) y pensiones ($6,271.51), por dos.",
             "fuente": "JAL",
             "pagina": "puesto \u00abDiputado\u00bb"
+          },
+          {
+            "nombre": "Colima",
+            "bruto": 92476.6,
+            "brutoEstado": "derivado",
+            "neto": 67113.68,
+            "netoEstado": "derivado",
+            "concepto": "Por quincena: dieta $38,738.30 m\u00e1s previsi\u00f3n social $7,500 = $46,238.30 brutos; menos ISR ($10,780.71) y pensiones ($1,900.75), $33,556.84 netos. Mensual: la quincena por dos. Una segunda fila del tabulador retiene m\u00e1s de pensiones y deja $33,285.30 netos.",
+            "fuente": "COL",
+            "pagina": "pp. 9-10"
           },
           {
             "nombre": "Quer\u00e9taro",
@@ -24497,9 +24586,49 @@ window.AUDIT_DB = {
             "concepto": "Percepci\u00f3n ordinaria total mensual; el cuadro no asigna prestaciones adicionales en dinero o en especie.",
             "fuente": "TAB",
             "pagina": "p. 3"
+          },
+          {
+            "nombre": "Campeche",
+            "bruto": 61952.0,
+            "brutoEstado": "oficial",
+            "neto": null,
+            "netoEstado": "pendiente",
+            "concepto": "Dieta de los 35 diputados; el anal\u00edtico de plazas la registra como sueldo bruto mensual. No publica el neto.",
+            "fuente": "CAM",
+            "pagina": "tabulador del Poder Legislativo"
+          },
+          {
+            "nombre": "Oaxaca",
+            "bruto": 51448.51,
+            "brutoEstado": "oficial",
+            "neto": 42000.0,
+            "netoEstado": "oficial",
+            "concepto": "Los 42 diputados, igual en el primero y el segundo trimestres; las percepciones adicionales aparecen como \u00abno disponible\u00bb.",
+            "fuente": "OAX",
+            "pagina": "enero a junio de 2026"
+          },
+          {
+            "nombre": "Yucat\u00e1n",
+            "bruto": 50880.0,
+            "brutoEstado": "oficial",
+            "neto": null,
+            "netoEstado": "pendiente",
+            "concepto": "Los 35 diputados: sueldo base de $44,880 m\u00e1s despensa de $6,000 al mes; aparte, aguinaldo de $59,840 al a\u00f1o. No publica el neto.",
+            "fuente": "YUC",
+            "pagina": "p. 187"
+          },
+          {
+            "nombre": "Guerrero",
+            "bruto": 50060.0,
+            "brutoEstado": "oficial",
+            "neto": 40188.0,
+            "netoEstado": "oficial",
+            "concepto": "45 de los 46 diputados (a uno le quedan $28,130 netos). El formato no registra dietas, bonos ni compensaciones; aparte, aguinaldo de $62,575 al a\u00f1o.",
+            "fuente": "GRO",
+            "pagina": "enero a marzo de 2026"
           }
         ],
-        "nota": "Cada congreso fija su pago con conceptos distintos: unos pagan solo la dieta, otros la reparten en apoyos y gratificaciones. Por eso no se promedia ni se extrapola a los 28 que faltan. Faltan porque su documento de 2026 no est\u00e1 en su portal (Ciudad de M\u00e9xico, Nuevo Le\u00f3n, Sinaloa, Chiapas y Tamaulipas publican a\u00f1os anteriores), porque su portal no respondi\u00f3 (Michoac\u00e1n lo publica en un dominio que no pudimos consultar). Los dem\u00e1s no los localizamos todav\u00eda en su portal; estos datos suelen publicarse en la Plataforma Nacional de Transparencia, que no pudimos consultar desde nuestro entorno."
+        "nota": "Cada congreso fija su pago con conceptos distintos: unos pagan solo la dieta, otros la reparten en apoyos, compensaciones y gratificaciones. Por eso no se promedia ni se extrapola a los 20 que faltan. De los que faltan, Ciudad de M\u00e9xico, Nuevo Le\u00f3n, Chiapas, Quintana Roo y Tamaulipas solo tienen a\u00f1os anteriores en su portal, y Baja California Sur y Zacatecas llegan a 2025. Durango publica para 2026 un rango ($78,890.56 a $113,285) sin decir si es mensual, as\u00ed que no lo usamos. Michoac\u00e1n lo publica en un dominio que no pudimos consultar. Los dem\u00e1s no los localizamos todav\u00eda; suelen estar en la Plataforma Nacional de Transparencia, que no pudimos consultar desde nuestro entorno."
       }
     ],
     "prestaciones": {

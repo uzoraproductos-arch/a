@@ -1655,8 +1655,10 @@
       c.lista.map(n => '<li>' + escHtml(n) + '</li>').join('') + '</ul><div class="shock-card-fuente">' +
       cmpFuente(c.listaFuente) + '</div></details>' : '';
     const ent = c.entidades ? '<details class="shock-lista" open><summary>Congreso por congreso</summary><ul>' +
-      c.entidades.map(e => '<li><b>' + escHtml(e.nombre) + ':</b> ' + ccPesos(e.neto) + ' netos ' + chipEstado(e.netoEstado) +
-        ' y ' + ccPesos(e.bruto) + ' brutos al mes ' + chipEstado(e.brutoEstado) + '<br><small>' + escHtml(e.concepto) + ' ' +
+      c.entidades.map(e => '<li><b>' + escHtml(e.nombre) + ':</b> ' +
+        (e.neto != null ? ccPesos(e.neto) + ' netos ' + chipEstado(e.netoEstado) : 'neto no publicado ' + chipEstado('pendiente')) +
+        ' y ' + (e.brutoHasta ? 'de ' + ccPesos(e.bruto) + ' a ' + ccPesos(e.brutoHasta) : ccPesos(e.bruto)) + ' brutos al mes ' +
+        chipEstado(e.brutoEstado) + '<br><small>' + escHtml(e.concepto) + ' ' +
         cmpFuente(e.fuente, e.pagina) + '</small></li>').join('') + '</ul></details>' : '';
 
     return '<article class="shock-card">' +
