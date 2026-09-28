@@ -8472,6 +8472,9 @@
         o.desglose_costos_operacion = [];
         o.proy_titulo = 'Lo que falta documentar';
         o.proyeccion_resumen = PEND_TXT;
+        const cx = of.contexto_entidad && of.contexto_entidad[o.id];
+        if (cx) o.proyeccion_resumen += ' Lo más cercano en un documento oficial: en ' + cx.anio + ' ' + cx.entidad + ' ingresó ' + mdp(cx.ingresos_gestion) + ' por sus ventas y ' + mdp(cx.otros_ingresos) +
+          ' de otros ingresos, gastó ' + mdp(cx.gastos_totales) + ' y cerró con ' + (cx.resultado_ejercicio < 0 ? 'una pérdida contable de ' + mdp(-cx.resultado_ejercicio) : 'un resultado a favor de ' + mdp(cx.resultado_ejercicio)) + ' (' + (of.fuentes[cx.fuente] || {}).doc + '). ' + cx.nota;
       }
       o.perdida_diaria_mdp = o.perdida_anual_mdp / 365;
       o.perdida_segundo = o.perdida_anual_mdp * 1e6 / 31536000;
@@ -23249,6 +23252,8 @@
         add({ id: 'tm-transf', grupo: 'Megaobras', nombre: 'Tren Maya S.A.: transferencias federales recibidas en 2024', anio: '2024', mdp: tm.transferencias, estado: 'oficial', fuente: f1.doc, url: f1.url });
         add({ id: 'tm-perdida', grupo: 'Megaobras', nombre: 'Tren Maya S.A.: pérdida de operación en 2024 (sin transferencias)', anio: '2024', mdp: -tm.resultado_sin_transferencias, estado: 'derivado', fuente: f1.doc + ' (ingresos menos gasto total)', url: f1.url });
       }
+      const bx = of.contexto_entidad && of.contexto_entidad.megafarmacia, fb4 = bx && of.fuentes[bx.fuente];
+      if (bx && fb4) add({ id: 'birmex-resultado', grupo: 'Megaobras', nombre: 'Birmex (opera la Megafarmacia): resultado del ejercicio 2024, toda la empresa', anio: '2024', mdp: bx.resultado_ejercicio, estado: 'oficial', fuente: fb4.doc, url: fb4.url });
       if (ai) add({ id: 'aifa-ingresos', grupo: 'Megaobras', nombre: 'AIFA S.A.: ingresos por sus servicios en 2024', anio: '2024', mdp: ai.ingresos_gestion, estado: 'oficial', fuente: f2.doc, url: f2.url });
       if (fb) {
         add({ id: 'ipab-saldo', grupo: 'Megaobras', nombre: 'IPAB (FOBAPROA): deuda en bonos al 31 de diciembre de 2025', anio: '2025', mdp: fb.saldo_bonos_2025, estado: 'oficial', fuente: f3.doc, url: f3.url });

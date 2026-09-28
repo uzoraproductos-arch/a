@@ -3505,6 +3505,26 @@ diapositiva 9 con el OCE, sin desborde, 14 pestañas sin errores.
   Las preguntas frecuentes se muestran abiertas por diseño (no son
   plegables).
 
+### Hecho (Birmex como contexto de la Megafarmacia, sello 20260928c)
+
+- Cuenta Pública 2024, Tomo VII, Birmex (clave NEF, archivo
+  `12NEF.02.01.xls`, SHA-256 085ef8bd…3350): ingresos de la gestión
+  $7,114.8 mdp, otros ingresos $111.8, gasto total $7,943.9, resultado del
+  ejercicio **−$717.3 mdp**; no recibió transferencias.
+- Es el resultado de **toda la empresa** (compra, produce y distribuye
+  vacunas y medicamentos), no de la Megafarmacia sola, y la Cuenta Pública
+  no la separa. Por eso la pérdida de la Megafarmacia **sigue pendiente**
+  y no entra en la suma (sigue en $65,050.8 mdp, 3 obras documentadas). El
+  dato aparece como contexto en la ficha («Lo más cercano en un documento
+  oficial…») y en el catálogo del verificador de notas
+  (`operacion_oficial.contexto_entidad.megafarmacia`, fuente `ef_nef`).
+- Mismo criterio para Dos Bocas: el estado de Pemex Transformación
+  Industrial (Tomo VIII) abarca todas las refinerías; no sirve para la obra
+  sola. Falta el informe de la ASF o un estado de la refinería.
+- Intentado sin éxito: el boletín de la Cámara sobre la ratificación de la
+  Procuradora Fiscal (el portal de Comunicación Social responde 503 y su
+  certificado no valida desde aquí). Queda en la lista del autor (B1).
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el

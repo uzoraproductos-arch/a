@@ -15944,10 +15944,27 @@ window.AUDIT_DB = {
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls",
         "sha256": "f6c7ac5f2a686476a750af0b8f4916bb2fd9f7cb6298ff4b03d3d0931c391a41"
       },
+      "ef_nef": {
+        "doc": "SHCP, Cuenta Pública 2024, Tomo VII, Salud, Laboratorios de Biológicos y Reactivos de México, S.A. de C.V. (NEF): Estado de Actividades del 1 de enero al 31 de diciembre de 2024",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.02.01.xls",
+        "sha256": "085ef8bd4e9339914130cc9ff34f23ec5a899883d645d08f28ee3f76cfc83350"
+      },
       "ipab_ef": {
         "doc": "IPAB, Estados financieros al 31 de marzo de 2026 y al 31 de diciembre de 2025 (Notas cortas), Estado analítico de la deuda y otros pasivos, p. 3",
         "url": "https://www.gob.mx/cms/uploads/attachment/file/1073775/IPAB_Notas-Cortas_Marzo_2026-DEF.pdf",
         "sha256": "e577ee96a65a5109ed0ce324eb5aa2a242eee5f8b14edebd9e23031486f5900e"
+      }
+    },
+    "contexto_entidad": {
+      "megafarmacia": {
+        "anio": 2024,
+        "fuente": "ef_nef",
+        "entidad": "Birmex (Laboratorios de Biológicos y Reactivos de México, S.A. de C.V.)",
+        "ingresos_gestion": 7114.8,
+        "otros_ingresos": 111.8,
+        "gastos_totales": 7943.9,
+        "resultado_ejercicio": -717.3,
+        "nota": "Es el resultado de toda la empresa, que además de la Megafarmacia compra, produce y distribuye vacunas y medicamentos. La Cuenta Pública no separa lo de la Megafarmacia, así que su pérdida sigue pendiente y esta cifra no entra en la suma."
       }
     },
     "obras": {
