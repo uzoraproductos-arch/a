@@ -3464,6 +3464,28 @@ la Enciclopedia congelada conserva sus cifras de antes.
   dice que son los que tú publicaste en tu navegador.
 - AGENTS.md §6 recoge la regla.
 
+### Hecho (revisión de la versión 20260927ze de Antigravity, sello 20260928a)
+
+Antigravity subió el commit 425651f (sellos zd y ze) con cinco vistas en el
+simulador «Un año de cuentas en veinte segundos» del módulo 5. Se revisó
+contra la regla editorial y se corrigió con visto bueno del autor:
+
+| Lo que traía | Qué pasaba | Qué quedó |
+|---|---|---|
+| 6 cifras de «Obras por sector 2024–2026» ($341,013, $190,847, $114,483, $49,550, $43,060, $32,460 mdp) | No están en ningún documento del repositorio; chip `derivado` sin operación | Vista retirada hasta tener datos oficiales |
+| Poder Ejecutivo $10,033,149 mdp, 98.4 % | Sin fuente; ni siquiera cuadra con el PEF menos los otros dos Poderes | «Todo lo demás del Presupuesto» = PEF 2026 $10,193,683.7 − Judicial $70,005.6 − Legislativo $17,529.1 = $10,106,149.0 mdp, `derivado` con la operación a la vista; Judicial y Legislativo, `oficial` (avance del gasto 2T 2026, lo aprobado) |
+| Huachicol $600,000 mdp como flujo anual en la carrera y en los remates («se fugaron…», «supera N veces…») | Lo dijo la Procuradora Fiscal el 2-10-2025 (La Jornada, 3-10-2025), pero la Presidenta lo desmintió el 10-10-2025 (El Financiero) y no es anual. Fuente original: portada de la Gaceta, sin documento | Sale de la carrera; queda en el expediente del huachicol como `pendiente`, con la declaración, las querellas por $16,000 mdp y el desmentido, cada uno con su liga. Se quitó «102 denuncias», que no se pudo verificar |
+| `pff` puesta primero en `huachicol_fiscal.estimaciones` | La diapositiva 9 lee la estimación del OCE en ese lugar y tronaba; el expediente pintaba «$NaN mdp» | La diapositiva busca la del OCE por su fuente; el expediente pinta cada tipo de estimación con su formato |
+| `reconocimiento.practicas` reescrita (pedimentos clonados, salto arancelario…) | Se presentaba como cita de la Ley de Ingresos 2027 y esas palabras no están ahí | Texto textual restaurado; también el «Qué es» del expediente |
+| Valores de respaldo escritos a mano en el motor (daño $1,387,414, protección $196,419) | No coinciden con la base (CEEM: $1,382,214 y $232,882) | Retirados: el motor lee solo la base |
+| «Ilustración editorial» en la diapositiva 9 | La imagen es provisional | «Ilustración provisional» |
+
+Se conservan: la botonera de vistas (ahora «Deuda y ambiente» y «Los Poderes
+de la Unión»), el segundo botón del expediente hacia el circuito del dinero y
+el texto del reparto del IEPS. Se quitaron los colores `--am-c5..8`, que ya no
+se usan. Verificado en 1366 y 390 px: ambas vistas, expediente sin NaN,
+diapositiva 9 con el OCE, sin desborde, 14 pestañas sin errores.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3494,6 +3516,12 @@ auditor, por tipo:
 7. **Aviso a otros agentes:** quien trabaje con una copia local debe hacer
    `git pull` y escribir en `assets/auditor/`. Antigravity propuso cambios
    sobre `assets/js`, que ahora es de la Enciclopedia congelada.
+8. **Obras públicas por sector (petición que llegó por Antigravity):** para
+   rehacer esa vista hace falta la inversión física por ramo o sector del
+   PEF 2024–2026 o de la Cuenta Pública, con archivo y página. Hasta
+   entonces no se muestra.
+9. **Huachicol, cifra oficial:** si la PFF o el SAT publican en un documento
+   los $600,000 mdp o una cifra propia, cotejarla y cambiar el chip.
 
 Resuelto en el barrido: anclas de la escala de Megaobras (usaban el bloque
 `macro` sin fuente: Ramo 33 $1,114,800 contra $1,041,892.9 oficiales;

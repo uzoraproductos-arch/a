@@ -15143,8 +15143,12 @@ window.AUDIT_DB = {
     "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ninguna autoridad ha publicado todavía una cifra de lo que se pierde; lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
     "fuentes": {
       "pff25": {
-        "doc": "Comparecencia de la Procuradora Fiscal de la Federación, Grisel Galeano García, ante la Comisión de Hacienda y Crédito Público de la Cámara de Diputados, 2 de octubre de 2025",
-        "url": "https://gaceta.diputados.gob.mx/"
+        "doc": "La Jornada, «Asciende a $600 mil millones el daño por el huachicol fiscal», 3 de octubre de 2025 (comparecencia de la Procuradora Fiscal de la Federación, Grisel Galeano García, ante la Comisión de Hacienda de la Cámara de Diputados)",
+        "url": "https://www.jornada.com.mx/noticia/2025/10/03/economia/asciende-a-600-mil-millones-el-dano-por-el-huachicol-fiscal"
+      },
+      "desmentido25": {
+        "doc": "El Financiero, «Desmiente Claudia Sheinbaum daño al erario de 600 mmdp por huachicol fiscal», 10 de octubre de 2025",
+        "url": "https://www.elfinanciero.com.mx/nacional/2025/10/10/desmiente-claudia-sheinbaum-dano-al-erario-de-600-mmdp-por-huachicol-fiscal/"
       },
       "ilif27": {
         "doc": "Iniciativa de Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Gaceta Parlamentaria núm. 7121, Anexo A, 8 de septiembre de 2026",
@@ -15185,7 +15189,7 @@ window.AUDIT_DB = {
       "fuente": "ilif27",
       "paginas": "CXXI a CXXV",
       "cita": "el Gobierno Federal ha identificado el robo y la sustracción ilegal de combustibles y otros delitos asociados, como una de las principales fuentes de evasión del pago del IEPS en la comercialización de combustibles",
-      "practicas": "simulación documental (salto arancelario de gasolinas como aceites o aditivos para eludir cuotas IEPS), facturación irregular mediante empresas fachada (EFOS, art. 69-B del CFF), importaciones en buquetanques o pipas con pedimentos clonados y alteración de controles volumétricos",
+      "practicas": "simulación documental, facturación irregular, importaciones indebidamente declaradas y trazabilidad manipulada",
       "medida": "Nueva fracción XIX del artículo 25 de la Ley de Ingresos: quien no fabrica, produce ni importa combustibles pagará IEPS por los litros que venda de más respecto de los que compró en el mes, sin trasladarlo al precio."
     },
     "en_juego": {
@@ -15243,23 +15247,22 @@ window.AUDIT_DB = {
     "estimaciones": [
       {
         "estado": "pendiente",
-        "id": "pff",
-        "fuente": "pff25",
-        "anio": "2025–2026",
-        "total_mdp": 600000,
-        "querellado_mdp": 16000,
-        "denuncias": 102,
-        "organo": "Procuraduría Fiscal de la Federación (comparecencia oficial en San Lázaro)",
-        "por_que_pendiente": "Estimación preliminar de daño al erario por contrabando de combustibles y salto arancelario; SHCP y Presidencia precisaron que la cifra consolidada oficial está pendiente de los estudios formales de evasión fiscal del SAT (art. 30 de la LIF)."
-      },
-      {
-        "estado": "pendiente",
         "fuente": "oce",
         "anio": 2025,
         "total_mdp": 123000,
         "pemex_mdp": 56000,
         "impuestos_mdp": 67000,
         "por_que_pendiente": "Estimación de un organismo civil, no de la autoridad."
+      },
+      {
+        "estado": "pendiente",
+        "id": "pff",
+        "fuente": "pff25",
+        "fuente2": "desmentido25",
+        "total_mdp": 600000,
+        "querellado_mdp": 16000,
+        "texto": "daño al erario por huachicol fiscal que la Procuradora Fiscal de la Federación mencionó ante la Comisión de Hacienda de la Cámara de Diputados el 2 de octubre de 2025, sobre los casos en investigación; de eso, unos $16,000 mdp estaban en querellas presentadas. No es una cifra anual. El 10 de octubre la Presidenta la desmintió: dijo que la cifra venía de un diputado y que sin una base completa no se puede confirmar.",
+        "por_que_pendiente": "No hay documento oficial que la sostenga y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas."
       }
     ]
   },
