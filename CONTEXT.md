@@ -3694,6 +3694,20 @@ Con los originales de `investigaciones/entregas/` (huellas comprobadas por
   separado de lo no verificado; el campo `evasion_mdp` se llama ahora
   `recaudacion_mdp`.
 
+### Hecho (población de las 32 entidades, CONAPO 2026, sello 20260928i)
+
+- `herramientas/integrar_poblacion_entidades.py` lee
+  `investigaciones/entregas/CONAPO_Poblacion2026_derivada.csv` (huella
+  comprobada) y pone en cada entidad `pob` (millones, dos decimales) y
+  `pobPersonas` (exacta). Recalcula `pc` = Ramos 28 y 33 × 1e6 ÷ población.
+  `fiscalEntidades.campos.pob` y `.pc` pasan de `pendiente` a **derivado**.
+- Las cifras viejas (≈ censo 2020) subestimaban la población, así que lo
+  que cada entidad recibe por habitante baja: rango $15,805 (Puebla) a
+  $23,137 (Guerrero). El inspector estatal ya no dice «población pendiente
+  de fuente»: muestra las personas exactas con su chip.
+- Promedio nacional de la portada: $2,810,800 mdp ÷ 134,407,258 = $20,913
+  (antes $20,914, dividido entre 134.4 redondeado).
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3712,9 +3726,7 @@ auditor, por tipo:
 3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** costo en vivo de Agronitrogenados, Enciclomedia y Búnker, y el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
    en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
-   FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, población por entidad (el CSV de CONAPO de
-   la entrega ya la trae; falta llevarla al inspector estatal, que hoy dice
-   «población pendiente de fuente»), informe del SAT 2T2026 (el padrón usa
+   FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
    el corte de abril), dietas locales, CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT

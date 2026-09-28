@@ -24540,9 +24540,9 @@
     if (esEstado) {
       identidad = [['Quien gobierna', e.gobernador + ' (' + e.partido + ')'],
         ['Capital', e.capital],
-        ['Población', e.pob.toFixed(2) + ' millones'],
+        ['Población a mitad de 2026', formatNumber(e.pobPersonas || Math.round(e.pob * 1e6)) + ' personas (CONAPO)' + campoEntidadChip('pob', e.abbr)],
         ['Ramos 28 y 33 (2026)', simMdp(e.gasto)],
-        ['Ramos 28 y 33 por habitante', '$' + formatNumber(e.pc) + ' (población pendiente de fuente)'],
+        ['Ramos 28 y 33 por habitante', '$' + formatNumber(e.pc) + campoEntidadChip('pc', e.abbr)],
         ['Recaudación propia en 2024', simMdp(e.recaudacionPropia) + (campoSinFuente('recaudacionPropia', e.abbr) ? ' (pendiente de fuente)' : ' (INEGI)')]];
     } else {
       const c = inspMunCifras(ente);
