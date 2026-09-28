@@ -3836,7 +3836,8 @@
     const totalPersona = relojes.reduce((a, r) => a + r.anualPersona, 0);
     const totalCadencia = relojes.reduce((a, r) => a + r.enCadencia, 0);
     const mayor = Math.max.apply(null, relojes.map(r => r.enCadencia)) || 1;
-    const sob = rel.sobrecosto_acumulado;
+    const smT = (DB.simulador_megaobras || {}).totales_consolidados;
+    const sob = smT ? Object.assign({}, rel.sobrecosto_acumulado, { mdp: Math.round((smT.inversion_total_mdp - smT.inversion_presupuestada_total_mdp) * 10) / 10 }) : rel.sobrecosto_acumulado;
     const res = state.cc.resultado;
 
     cont.innerHTML =
@@ -3847,7 +3848,7 @@
             '<h3 class="cc-cab-tit">' + rel.titulo + '</h3>' +
             '<p class="cc-cab-sub">Cuatro cuentas que no aparecen en ningún recibo y que, sin embargo, ' +
               'alguien paga: lo que el país pide prestado este año, lo que cuestan los intereses de lo ya ' +
-              'prestado, lo que pierden al año doce obras que ingresan menos de lo que gastan y lo que la ' +
+              'prestado, lo que pierden al año las megaobras que ingresan menos de lo que gastan y lo que la ' +
               'Auditoría Superior observó como no justificado.</p>' +
           '</div>' +
         '</div>' +
@@ -3905,7 +3906,7 @@
 
         '<div class="cc-sobrecosto">' +
           '<h4 class="cc-sob-tit">🧱 Y aparte, lo ya gastado de más</h4>' +
-          '<p>Construir las doce obras costó <strong>' + simMdp(sob.mdp) + '</strong> más de lo ' +
+          '<p>Construir las ' + ((DB.simulador_megaobras || {}).obras || []).length + ' obras costó <strong>' + simMdp(sob.mdp) + '</strong> más de lo ' +
             'presupuestado, o <strong>' + ccPesos(sob.mdp * 1000000 / (den.millones * 1000000)) + ' ' +
             den.rotulo + '</strong>. ' + sob.nota + chipEstado(sob.estado) + '</p>' +
         '</div>' +
@@ -5440,7 +5441,7 @@
   const TAB_METADATA = {
     'megaobras': {
       t: '2. Inversión Estratégica & Megaobras Presidenciales',
-      d: 'Auditoría en tiempo real de sobrecostos, pérdidas de operación cotidiana y telemetría viva de 12 proyectos estratégicos de infraestructura del Estado mexicano desde 1988 a la fecha.'
+      d: 'Auditoría en tiempo real de sobrecostos, pérdidas de operación cotidiana y telemetría viva de 13 proyectos estratégicos de infraestructura del Estado mexicano desde 1988 a la fecha.'
     },
     'calculadora': {
       t: '3. Calculadora Cívica del Contribuyente & Ticket Cívico',
@@ -5507,7 +5508,7 @@
       n: 2, icono: '🏗️', titulo: 'Inversión &amp; Megaobras',
       subtitulo: 'Lo que se prometió, lo que se pagó y la diferencia',
       texto: 'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
-      nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué a veces verá 12 obras y a veces 13' },
+      nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué a veces verás 13 obras y a veces 14' },
       temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Administración presidencial', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
     },
     calculadora: {
@@ -8709,7 +8710,7 @@
         titulo: esAuditor() ? 'Pérdida anual documentada de las megaobras' : 'Pérdida operativa de las megaobras',
         cuerpo:
           radarSec('Qué significa', '<p>Lo que cuesta mantener funcionando cada obra en un año, menos lo que ingresa por operar. Cuando el resultado es negativo, la diferencia se cubre con dinero público: subsidios, transferencias o aportaciones de capital.</p>') +
-          radarSec('En qué consiste · las 12 obras del simulador', '<ul class="rc-filas">' + filas + '</ul>') +
+          radarSec('En qué consiste · las ' + sm.obras.length + ' obras del simulador', '<ul class="rc-filas">' + filas + '</ul>') +
           radarSec('Cómo se calcula', '<ol class="rc-pasos">' +
             radarPaso(1, 'Pérdida de cada obra = costo de operación anual − ingresos anuales.' + (esAuditor() ? ' Para el rescate bancario, lo que ejerció el Ramo 34.' : ''), esAuditor() ? 'oficial' : 'pendiente') +
             radarPaso(2, (esAuditor() ? 'Se suman las ' + (sm.totales_consolidados.obras_con_operacion_documentada || 0) + ' obras con documento; las demás quedan pendientes y no entran' : 'Se suman las ' + sm.obras.length + ' obras') + ': <b>' + radarMdp(total) + ' al año</b>.', 'derivado') +
@@ -8719,7 +8720,7 @@
           radarSec('Qué conviene saber', '<p>' + (fob ? 'Una sola partida, <b>' + glosEsc(fob.nombre) + '</b>, aporta ' + radarMdp(fob.perdida_anual_mdp) + ': el ' + pctFob.toFixed(1) + ' % del total. Es un rescate financiero, no una obra de infraestructura, y conviene leerla aparte. ' : '') + (esAuditor()
             ? 'Tren Maya y AIFA salen de sus estados de actividades en la Cuenta Pública 2024; el IPAB, del Ramo 34 de esa misma Cuenta. Las obras sin documento no se estiman: quedan pendientes y fuera de la suma, así que el total es un piso, no un techo.</p>'
             : 'La cifra lleva estado <b>pendiente</b> porque el simulador todavía no documenta la fuente de cada costo y cada ingreso obra por obra: tómela como orden de magnitud, no como dato oficial.</p>')),
-        acciones: [{ txt: 'Revisar las 12 obras en el módulo 2', fn: function() { seleccionarModuloExplorer('megaobras'); } }]
+        acciones: [{ txt: 'Revisar las ' + sm.obras.length + ' obras en el módulo 2', fn: function() { seleccionarModuloExplorer('megaobras'); } }]
       };
     }
     if (clave === 'huachicol') {
@@ -8965,7 +8966,7 @@
       '</header>' +
       '<div class="glos-drawer-cuerpo">' +
         '<span class="glos-drawer-cat">🏗️ Inversión &amp; Megaobras</span>' +
-        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Por qué a veces verá 12 obras y a veces 13</h3>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Por qué a veces verás 13 obras y a veces 14</h3>' +
         '<p class="pres-lema">No es un error de suma: es una obra que pertenece a dos sexenios a la vez.</p>' +
       '</div>' +
       '<footer class="glos-drawer-pie">' +
@@ -20878,7 +20879,7 @@
         '<div class="sim-linea-eje"><span>1988</span><span class="sim-linea-riel"></span><span>2024</span></div>' +
         (compartida
           ? '<p class="sim-linea-nota"><strong>Punto ciego declarado.</strong> El rescate carretero FARAC se contrató bajo Salinas y se asumió como deuda pública bajo Zedillo, ' +
-            'así que aparece en ambos bloques. Por eso la suma de los seis periodos da trece obras y no doce: una misma obra tiene dos responsables, no medio responsable cada uno.</p>'
+            'así que aparece en ambos bloques. Por eso la suma de los seis periodos da catorce obras y no trece: una misma obra tiene dos responsables, no medio responsable cada uno.</p>'
           : '') +
       '</section>';
   }
@@ -21232,7 +21233,7 @@
                 'onchange="window.AuditEngine.simRankToggleHover(this.checked)">' +
               '<span>Activar al pasar cursor</span>' +
             '</label>' +
-            '<label class="eval-toggle-label" title="Mantener a la vista las doce obras, con las que no entran en el filtro atenuadas">' +
+            '<label class="eval-toggle-label" title="Mantener a la vista todas las obras, con las que no entran en el filtro atenuadas">' +
               '<input type="checkbox" ' + (universo ? 'checked' : '') + ' ' +
                 'onchange="window.AuditEngine.simRankUniverso(this.checked)">' +
               '<span>Ver las ' + sim.obras.length + ' en contexto</span>' +
@@ -21789,7 +21790,7 @@
         '</table></div>' +
         '<p class="sim-mesa-aviso"><strong>De dónde salen estas cifras y qué falta.</strong> ' +
           simProcVerificadas() + ' Mientras las demás no tengan documento, esta tabla se lee como inventario, no como dictamen. ' +
-          'El universo son doce obras emblemáticas de 1988 a 2024; no pretende ser el catálogo completo de la inversión pública del periodo.</p>' +
+          'El universo son ' + sim.obras.length + ' obras emblemáticas de 1988 a 2024; no pretende ser el catálogo completo de la inversión pública del periodo.</p>' +
       '</section>';
   }
 

@@ -3731,6 +3731,34 @@ Con la auditoría 492-DE de la ASF a Pemex Fertilizantes (CP 2017, en
   mdp, `pendiente`) siguen sin fuente; la 492-DE los resolvería solo para
   Agronitrogenados, no para Fertinal.
 
+### Hecho (Fertinal se separa de Agronitrogenados: 13 obras, sello 20260928k)
+
+Decisión del autor. `herramientas/separar_fertinal.py` (comprueba las huellas
+de las auditorías 492-DE CP 2017 y 468-DE CP 2016) divide la ficha:
+
+- **Plantas Chatarra Agronitrogenados**, en pesos: presupuestada $7,894.2 mdp
+  (costo total estimado al aprobar el proyecto, 19-07-2013, p. 4, oficial);
+  real $13,698.3 mdp = compra $5,427.2 (p. 4) + rehabilitación erogada
+  09-2014 a 12-2017 $8,271.1 (pp. 43-44), derivado; sobrecosto 73.5 %,
+  derivado. Sustituyen los $7,500 / $33,500 sin fuente. Corre en vivo con
+  $329.8 mdp al año (intereses de la baja de tres plantas, $4,206.0 mdp).
+- **Compra de Grupo Fertinal**, ficha nueva (EPN, energía): $13,121.6 mdp,
+  los 635 millones de dólares de créditos de la compra (CP 2016, p. 11),
+  oficial; sin sobrecosto de compra documentado (0 %, derivado). Corre en
+  vivo con $314.1 mdp al año (intereses del deterioro del crédito
+  mercantil, $4,007.0 mdp, CP 2017, p. 37). Contexto: pérdida integral de
+  2016 de 565.7 millones de dólares ($11,690.6 mdp, p. 31) y «no es un
+  negocio rentable» (p. 38), sin sumarse.
+- Totales: inversión real $3,911,026.2 mdp, presupuestada $1,142,024.6,
+  sobrecosto del conjunto 242.5 %. El sobrecosto acumulado de la
+  calculadora ya no se lee del número fijo $3,069,647 (estaba viejo): el
+  motor lo toma de los totales del simulador.
+- Textos: 12 → 13 obras (tarjeta de portada, radar, bloque 1, nota del
+  conteo, que ahora explica 13 expedientes y 14 en el reparto por mandato
+  por el FARAC). Donde se pudo, el número sale de `sim.obras.length`.
+- Simulación en vivo: corren **11 de 13**, $181.1 mil millones al año,
+  $5,744 por segundo (el total no cambia: solo se repartió).
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el

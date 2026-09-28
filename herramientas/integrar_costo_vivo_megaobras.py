@@ -154,12 +154,16 @@ def construir(p, sm):
             falta('no_localizado', 'El proyecto no aparece en los cortes de seguimiento de la cartera del 4T 2024 ni del 2T 2026, y las recetas surtidas no forman parte de ningún estado financiero publicado.')]},
         'agronitrogenados': {'componentes': [
             base('Lo que Pemex dio por perdido en tres plantas de Agronitrogenados que nunca rehabilitó', 4206.0, 'oficial', 'asf_fert17',
-                 'Deterioro por baja de activos ociosos de ProAgro (antes Agronitrogenados) en los estados financieros 2017 de Pemex Fertilizantes: $4,206.0 mdp según la ASF (CP 2017, auditoría 492-DE, pp. 37 y 40; en la p. 44 aparece como $4,206.7 mdp). Son las plantas de nitrato de amonio, ácido nítrico y UAN-32, que al comprarse en 2013 llevaban 14 años sin operar'),
+                 'Deterioro por baja de activos ociosos de ProAgro (antes Agronitrogenados) en los estados financieros 2017 de Pemex Fertilizantes: $4,206.0 mdp según la ASF (CP 2017, auditoría 492-DE, pp. 37 y 40; en la p. 44 aparece como $4,206.7 mdp). Son las plantas de nitrato de amonio, ácido nítrico y UAN-32, que al comprarse en 2013 llevaban 14 años sin operar')],
+            'contexto': 'La misma auditoría documenta en pesos: la compra de los activos por $5,427.2 mdp (20-12-2013, p. 4); una inversión total aprobada de $14,998.9 mdp entre compra y rehabilitación (agosto de 2015, p. 5); $8,271.1 mdp erogados de septiembre de 2014 a diciembre de 2017 en rehabilitar las dos plantas de urea, que a fines de 2017 seguían sin producir (pp. 42-44), y una deuda de $7,696.8 mdp con Nafin que Pemex recibió con la empresa (p. 5). Esas cifras no se suman aquí: solo cuenta lo que Pemex ya reconoció como perdido.',
+            'contexto_fuente': 'asf_fert17',
+            'falta': [falta('no_localizado', 'No localizamos resultados separados de ProAgro posteriores a 2017: no sabemos si las plantas de urea producen hoy ni cuánto cuesta mantenerlas. Por eso no hay flujo anual, solo el costo de lo ya perdido.')]},
+        'fertinal': {'componentes': [
             base('Lo que Pemex dio por perdido del precio pagado por Fertinal', 4007.0, 'oficial', 'asf_fert17',
                  'Deterioro del crédito mercantil de Fertinal: $4,007.0 mdp (ASF, CP 2017, p. 37). Es la parte de lo pagado en 2016 por encima del valor de sus activos que Pemex reconoció como perdida')],
-            'contexto': 'La misma auditoría documenta en pesos: la compra de los activos de Agronitrogenados por $5,427.2 mdp (20-12-2013, p. 4); una inversión total aprobada de $14,998.9 mdp entre compra y rehabilitación (agosto de 2015, p. 5); $8,271.1 mdp erogados de septiembre de 2014 a diciembre de 2017 en rehabilitar las dos plantas de urea, que a fines de 2017 seguían sin producir (pp. 42-44), y una deuda de $7,696.8 mdp con Nafin que Pemex recibió con la empresa (p. 5). Entre 2015 y 2017 el patrimonio de Pemex Fertilizantes perdió $21,174.0 mdp (p. 37). Esas cifras no se suman aquí: solo cuenta lo que Pemex ya reconoció como perdido.',
-            'contexto_fuente': 'asf_fert17',
-            'falta': [falta('no_localizado', 'No localizamos resultados separados de ProAgro ni de Fertinal posteriores a 2017: no sabemos si las plantas de urea producen hoy ni cuánto cuesta mantenerlas. Por eso no hay flujo anual, solo el costo de lo ya perdido.')]},
+            'contexto': 'La ASF (CP 2016) documenta que en su primer año con Pemex, 2016, Fertinal registró una pérdida integral de 565.7 millones de dólares, $11,690.6 mdp (p. 31), y dictaminó que la compra «no es un negocio rentable» (p. 38). En 2017 sus plantas trabajaron entre el 26.0 % y el 84.4 % de su capacidad (CP 2017, p. 37). Entre 2015 y 2017 el patrimonio de Pemex Fertilizantes, que incluye a Fertinal y a ProAgro, perdió $21,174.0 mdp (p. 37). Esas cifras no se suman aquí: la pérdida de 2016 no es la de hoy y el patrimonio es de toda la empresa.',
+            'contexto_fuente': 'asf_fert16',
+            'falta': [falta('no_localizado', 'No localizamos estados financieros de Fertinal posteriores a 2017: no sabemos si hoy gana o pierde. Por eso no hay flujo anual, solo el costo de lo ya perdido.')]},
         'enciclomedia': {'falta': [
             falta('no_localizado', 'Hacienda autorizó $21,398.3 mdp para 2005-2010, pero no encontramos un documento oficial que sume lo que de verdad se pagó. Sin ese total no hay sobrecosto que medir.')]},
         'bunker-garcia-luna': {'falta': [
@@ -194,6 +198,11 @@ def construir(p, sm):
                 'doc': 'Laboratorios de Biológicos y Reactivos de México, S.A. de C.V., dictamen del auditor externo sobre los estados financieros 2024 (denegación de opinión), Cuenta Pública 2024, tomo VII',
                 'url': 'https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf',
                 'sha256': 'bb3ec2a2fd5c9fdc385e0b4ffe173dba33d069b0e265922c6d77df68cb0dc617',
+            },
+            'asf_fert16': {
+                'doc': 'ASF, Cuenta Pública 2016, auditoría 468-DE, Pemex Fertilizantes: Gestión Financiera (compra de Grupo Fertinal)',
+                'url': 'https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf',
+                'sha256': '7028e6acd9ba71064179ce42229b6ad06dfcb36b349c2370d0626608bb340af3',
             },
             'asf_fert17': {
                 'doc': 'ASF, Informe Individual de la Cuenta Pública 2017, auditoría de desempeño 492-DE «Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados», Pemex Fertilizantes',

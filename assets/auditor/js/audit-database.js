@@ -15626,16 +15626,16 @@ window.AUDIT_DB = {
     },
     {
       "id": "agronitrogenados",
-      "nombre": "Plantas Chatarra Agronitrogenados y Fertinal",
+      "nombre": "Plantas Chatarra Agronitrogenados",
       "sector_id": "energia",
       "presidente": "Enrique Peña Nieto",
       "periodo_sexenal": "2012–2018",
       "icono": "🏭",
       "estatus": "Deuda absorbida por Pemex",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 7500,
-      "inversion_real_mdp": 33500,
-      "sobrecosto_pct": 346.7,
+      "inversion_presupuestada_mdp": 7894.2,
+      "inversion_real_mdp": 13698.3,
+      "sobrecosto_pct": 73.5,
       "ingresos_anuales_mdp": 450,
       "costo_operativo_anual_mdp": 2640,
       "perdida_anual_mdp": 2190,
@@ -15643,7 +15643,7 @@ window.AUDIT_DB = {
       "perdida_segundo": 69.44,
       "proyeccion_tipo": "perdida_patrimonial",
       "proyeccion_anios": 999,
-      "proyeccion_resumen": "Pérdida Patrimonial Irreversible. Pemex compró plantas con más de 14 años sin operar a AHMSA y Fertinal con sobreprecio millonario; el costo de rehabilitación superó con creces su valor de mercado generando daño irreparable a las finanzas de la petrolera.",
+      "proyeccion_resumen": "Pérdida patrimonial. Pemex compró en 2013 cinco plantas de fertilizantes que llevaban 14 años sin operar; a fines de 2017 ninguna producía y tres se dieron de baja.",
       "desglose_costos_operacion": [
         {
           "rubro": "Servicio de la deuda bancaria contratada por Pemex con Nafin",
@@ -15666,13 +15666,43 @@ window.AUDIT_DB = {
           "icono": "⚖️"
         }
       ],
-      "hallazgo_asf": "La ASF concluyó que Pemex compró la planta de Agro Nitrogenados en 275 millones de dólares sin evaluar el estado de los bienes (llevaba 14 años sin operar) y que la rehabilitación subió de 200 a 485 millones, con lo que el proyecto pasó de 475 a 760 millones de dólares. De Fertinal, comprada en 635 millones de dólares, dictaminó que «no es un negocio rentable» para Pemex y que en 2016 registró una pérdida integral de 565.7 millones de dólares.",
+      "hallazgo_asf": "La ASF concluyó que Pemex compró la planta de Agro Nitrogenados sin evaluar el estado de los bienes (llevaba 14 años sin operar) y que el proyecto pasó de 475 a 760 millones de dólares (CP 2015). En pesos (CP 2017): el proyecto se aprobó con un costo total estimado de $7,894.2 mdp, la compra costó $5,427.2 mdp y hasta 2017 se habían erogado $8,271.1 mdp en rehabilitar dos plantas de urea que seguían sin producir. Las otras tres se dieron de baja con una pérdida de $4,206.0 mdp.",
       "unidad_metrica": "Tonelada de fertilizante",
       "costo_unitario_real": "Pérdida neta de más de $4,800 pesos por cada tonelada producida en comparación con importación internacional de urea.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
+      }
+    },
+    {
+      "id": "fertinal",
+      "nombre": "Compra de Grupo Fertinal",
+      "sector_id": "energia",
+      "presidente": "Enrique Peña Nieto",
+      "periodo_sexenal": "2012–2018",
+      "icono": "🧪",
+      "estatus": "Filial de Pemex",
+      "badge_color": "var(--crimson-bright)",
+      "inversion_presupuestada_mdp": 13121.6,
+      "inversion_real_mdp": 13121.6,
+      "sobrecosto_pct": 0.0,
+      "ingresos_anuales_mdp": 0,
+      "costo_operativo_anual_mdp": 0,
+      "perdida_anual_mdp": 0,
+      "perdida_diaria_mdp": 0,
+      "perdida_segundo": 0,
+      "proyeccion_tipo": "perdida_patrimonial",
+      "proyeccion_anios": 999,
+      "proyeccion_resumen": "Pérdida patrimonial. Pemex compró en 2016 una empresa de fertilizantes con una mina en Baja California Sur y una planta en Lázaro Cárdenas; la ASF dictaminó que no era un negocio rentable.",
+      "desglose_costos_operacion": [],
+      "hallazgo_asf": "Pemex Fertilizantes compró Grupo Fertinal el 28-01-2016 con 635 millones de dólares de créditos ($13,121.6 mdp): 209.2 millones por las acciones y 425.8 millones para refinanciar sus deudas (ASF, CP 2016, pp. 2 y 11). La ASF dictaminó que la compra «no es un negocio rentable» (p. 38) y que en 2016 Fertinal registró una pérdida integral de 565.7 millones de dólares, $11,690.6 mdp (p. 31). En 2017 Pemex reconoció como perdidos $4,007.0 mdp del precio pagado (deterioro del crédito mercantil, CP 2017, p. 37).",
+      "unidad_metrica": "Tonelada de fertilizante",
+      "costo_unitario_real": "pendiente de documento",
+      "estado_campos": {
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "oficial",
+        "sobrecosto_pct": "derivado"
       }
     },
     {
@@ -15965,14 +15995,14 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3917706.3,
-    "inversion_presupuestada_total_mdp": 1128508.8,
+    "inversion_total_mdp": 3911026.2,
+    "inversion_presupuestada_total_mdp": 1142024.6,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
-    "obras_evaluadas": 12,
-    "sobrecosto_conjunto_pct": 247.2,
-    "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
+    "obras_evaluadas": 13,
+    "sobrecosto_conjunto_pct": 242.5,
+    "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   },
   "operacion_oficial": {
     "nota": "Resultado de operar de las obras que publican estados financieros propios. Solo el auditor lo lee: sustituye, en memoria, la pérdida, los costos y la proyección que el simulador traía sin documento. Cifras en millones de pesos; la resta sin transferencias es un cálculo de Auditavisión (derivado).",
@@ -16142,6 +16172,11 @@ window.AUDIT_DB = {
         "doc": "Birmex, notas a los estados financieros al 30 de septiembre de 2024, nota 14 «Negocio en marcha. Megafarmacia», pp. 42-45",
         "url": "https://datos.birmex.gob.mx/wp-content/uploads/2024/12/notas_estados_financieros.pdf",
         "sha256": "fb3f36af96e0804a29b2c73a9207a58d21ff9d78270222375485c3da105f7e99"
+      },
+      "asf_fert17": {
+        "doc": "ASF, Cuenta Pública 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes: Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+        "sha256": "d1f61d814ce1e5dd1f2c4d2e291cddf7ba0b651e75e252a8fe163d51ce1527f5"
       }
     },
     "obras": {
@@ -16636,51 +16671,57 @@ window.AUDIT_DB = {
       },
       "agronitrogenados": {
         "campos": {
-          "inversion_presupuestada_mdp": "pendiente",
-          "inversion_real_mdp": "pendiente",
-          "sobrecosto_pct": "pendiente"
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
         },
         "definiciones": {
-          "inversion_presupuestada_mdp": "La ASF da estas cifras en dólares: el proyecto se autorizó en 475 millones de dólares (compra más rehabilitación) y subió a 760 millones. No hay en el documento un equivalente en pesos, así que la cifra en mdp sigue pendiente.",
-          "inversion_real_mdp": "Pendiente en pesos. En dólares: 760 millones por Agro Nitrogenados (ASF, CP 2015, p. 27) y 635 millones por Fertinal (ASF, CP 2016, p. 2). No se suman ni se convierten aquí: son compras distintas, de años distintos.",
-          "sobrecosto_pct": "En dólares, el costo total de Agro Nitrogenados pasó de 475 a 760 millones: 60.0 % más (cálculo de Auditavisión con las dos cifras de la ASF, p. 27). No incluye Fertinal."
+          "inversion_presupuestada_mdp": "Costo total estimado cuando el consejo de PMI Holdings aprobó el proyecto el 19-07-2013: $7,894.2 mdp, de los que $2,960.3 mdp eran para reiniciar las plantas (ASF, CP 2017, p. 4).",
+          "inversion_real_mdp": "Compra de los activos ($5,427.2 mdp, contrato del 20-12-2013, p. 4) más lo erogado en rehabilitar las plantas de urea I y II de septiembre de 2014 a diciembre de 2017 ($8,271.1 mdp, pp. 43-44). Suma de Auditavisión; no incluye lo gastado después de 2017, que no localizamos.",
+          "sobrecosto_pct": "Cuánto supera lo pagado hasta 2017 al costo total estimado al aprobar el proyecto (cálculo de Auditavisión). Coincide en orden con lo que la ASF documentó en dólares: de 475 a 760 millones, 60.0 % más."
         },
-        "hallazgo": "La ASF concluyó que Pemex compró la planta de Agro Nitrogenados en 275 millones de dólares sin evaluar el estado de los bienes (llevaba 14 años sin operar) y que la rehabilitación subió de 200 a 485 millones, con lo que el proyecto pasó de 475 a 760 millones de dólares. De Fertinal, comprada en 635 millones de dólares, dictaminó que «no es un negocio rentable» para Pemex y que en 2016 registró una pérdida integral de 565.7 millones de dólares.",
+        "hallazgo": "La ASF concluyó que Pemex compró la planta de Agro Nitrogenados sin evaluar el estado de los bienes (llevaba 14 años sin operar) y que el proyecto pasó de 475 a 760 millones de dólares (CP 2015). En pesos (CP 2017): el proyecto se aprobó con un costo total estimado de $7,894.2 mdp, la compra costó $5,427.2 mdp y hasta 2017 se habían erogado $8,271.1 mdp en rehabilitar dos plantas de urea que seguían sin producir. Las otras tres se dieron de baja con una pérdida de $4,206.0 mdp.",
         "asfHist": [
           {
-            "dato": "Agro Nitrogenados: precio de compra de la planta",
-            "valor": "275 millones de dólares",
+            "dato": "Costo total estimado al aprobar el proyecto (19-07-2013)",
+            "valor": "$7,894.2 mdp",
             "estado": "oficial",
-            "pagina": "27 (CP 2015)"
+            "pagina": "4 (CP 2017)"
           },
           {
-            "dato": "Agro Nitrogenados: costo total autorizado → final",
+            "dato": "Compra de los activos (20-12-2013)",
+            "valor": "$5,427.2 mdp",
+            "estado": "oficial",
+            "pagina": "4 (CP 2017)"
+          },
+          {
+            "dato": "Inversión total aprobada, compra más rehabilitación (26-08-2015)",
+            "valor": "$14,998.9 mdp",
+            "estado": "oficial",
+            "pagina": "5 (CP 2017)"
+          },
+          {
+            "dato": "Rehabilitación de las plantas de urea, 09-2014 a 12-2017",
+            "valor": "$8,271.1 mdp",
+            "estado": "oficial",
+            "pagina": "43-44 (CP 2017)"
+          },
+          {
+            "dato": "Baja de tres plantas ociosas (deterioro)",
+            "valor": "$4,206.0 mdp",
+            "estado": "oficial",
+            "pagina": "37 (CP 2017)"
+          },
+          {
+            "dato": "Costo total en dólares, autorizado → final",
             "valor": "475 → 760 millones de dólares",
             "estado": "oficial",
             "pagina": "26-27 (CP 2015)"
-          },
-          {
-            "dato": "Aumento del costo total",
-            "valor": "60.0 %",
-            "estado": "derivado",
-            "pagina": "27 (CP 2015)"
-          },
-          {
-            "dato": "Fertinal: inversión de compra (2016)",
-            "valor": "635 millones de dólares",
-            "estado": "oficial",
-            "pagina": "2 (CP 2016)"
-          },
-          {
-            "dato": "Fertinal: pérdida integral de 2016",
-            "valor": "565.7 millones de dólares ($11,690.6 mdp)",
-            "estado": "oficial",
-            "pagina": "31 (CP 2016)"
           }
         ],
         "fuentes": [
-          "asf_agro15",
-          "asf_fert16"
+          "asf_fert17",
+          "asf_agro15"
         ]
       },
       "estela-luz": {
@@ -16899,6 +16940,49 @@ window.AUDIT_DB = {
         "fuentes": [
           "opa",
           "birmex_notas24"
+        ]
+      },
+      "fertinal": {
+        "campos": {
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "oficial",
+          "sobrecosto_pct": "derivado"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Lo que Pemex contrató para comprar Fertinal: 635 millones de dólares en créditos, $13,121.6 mdp (ASF, CP 2016, p. 11). No localizamos un presupuesto previo distinto del precio pactado.",
+          "inversion_real_mdp": "Los mismos $13,121.6 mdp. Tras un ajuste de precio se pagaron 629.3 millones de dólares (p. 2); la ASF no da ese monto en pesos.",
+          "sobrecosto_pct": "Sin sobrecosto de compra documentado. Lo que Fertinal le cuesta a Pemex está en lo que perdió después, no en haber pagado más de lo pactado."
+        },
+        "hallazgo": "Pemex Fertilizantes compró Grupo Fertinal el 28-01-2016 con 635 millones de dólares de créditos ($13,121.6 mdp): 209.2 millones por las acciones y 425.8 millones para refinanciar sus deudas (ASF, CP 2016, pp. 2 y 11). La ASF dictaminó que la compra «no es un negocio rentable» (p. 38) y que en 2016 Fertinal registró una pérdida integral de 565.7 millones de dólares, $11,690.6 mdp (p. 31). En 2017 Pemex reconoció como perdidos $4,007.0 mdp del precio pagado (deterioro del crédito mercantil, CP 2017, p. 37).",
+        "asfHist": [
+          {
+            "dato": "Financiamiento de la compra (28-01-2016)",
+            "valor": "635 millones de dólares, $13,121.6 mdp",
+            "estado": "oficial",
+            "pagina": "2 y 11 (CP 2016)"
+          },
+          {
+            "dato": "Precio final de las acciones",
+            "valor": "203.5 millones de dólares",
+            "estado": "oficial",
+            "pagina": "2 (CP 2016)"
+          },
+          {
+            "dato": "Pérdida integral de 2016",
+            "valor": "565.7 millones de dólares ($11,690.6 mdp)",
+            "estado": "oficial",
+            "pagina": "31 (CP 2016)"
+          },
+          {
+            "dato": "Deterioro del crédito mercantil",
+            "valor": "$4,007.0 mdp",
+            "estado": "oficial",
+            "pagina": "37 (CP 2017)"
+          }
+        ],
+        "fuentes": [
+          "asf_fert16",
+          "asf_fert17"
         ]
       }
     }
@@ -17167,11 +17251,11 @@ window.AUDIT_DB = {
       },
       {
         "id": "megaobras",
-        "nombre": "P\u00e9rdida operativa de las doce megaobras",
+        "nombre": "P\u00e9rdida operativa de las megaobras",
         "icono": "\ud83c\udfd7\ufe0f",
         "anual_mdp": 80200.1,
         "estado": "pendiente",
-        "fuente": "Suma de las doce obras evaluadas en la subpesta\u00f1a 2.2; sus fuentes obra por obra est\u00e1n pendientes de verificaci\u00f3n",
+        "fuente": "Suma de las obras evaluadas en la subpesta\u00f1a 2.2; sus fuentes obra por obra est\u00e1n pendientes de verificaci\u00f3n",
         "que": "Lo que cuesta cada a\u00f1o mantener andando obras cuya operaci\u00f3n ingresa menos de lo que gasta. No es el sobrecosto de construirlas: es el d\u00e9ficit de tenerlas abiertas.",
         "culpa": true
       },
@@ -17189,7 +17273,7 @@ window.AUDIT_DB = {
     "sobrecosto_acumulado": {
       "mdp": 3069647.0,
       "estado": "derivado",
-      "fuente": "Subpesta\u00f1a 2.2 \u00b7 inversi\u00f3n real menos inversi\u00f3n presupuestada de las doce obras",
+      "fuente": "Subpesta\u00f1a 2.2 \u00b7 inversi\u00f3n real menos inversi\u00f3n presupuestada de las obras del simulador (el motor la recalcula de sus totales)",
       "nota": "No entra en los relojes porque no es un ritmo anual sino una suma de pesos de a\u00f1os distintos, entre 1988 y 2024, sin deflactar a un a\u00f1o com\u00fan. Se muestra aparte, como lo que es: una cuenta acumulada."
     }
   },
@@ -24562,6 +24646,11 @@ window.AUDIT_DB = {
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf",
         "sha256": "bb3ec2a2fd5c9fdc385e0b4ffe173dba33d069b0e265922c6d77df68cb0dc617"
       },
+      "asf_fert16": {
+        "doc": "ASF, Cuenta Pública 2016, auditoría 468-DE, Pemex Fertilizantes: Gestión Financiera (compra de Grupo Fertinal)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+        "sha256": "7028e6acd9ba71064179ce42229b6ad06dfcb36b349c2370d0626608bb340af3"
+      },
       "asf_fert17": {
         "doc": "ASF, Informe Individual de la Cuenta Pública 2017, auditoría de desempeño 492-DE «Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados», Pemex Fertilizantes",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
@@ -24770,7 +24859,19 @@ window.AUDIT_DB = {
             "como": "Deterioro por baja de activos ociosos de ProAgro (antes Agronitrogenados) en los estados financieros 2017 de Pemex Fertilizantes: $4,206.0 mdp según la ASF (CP 2017, auditoría 492-DE, pp. 37 y 40; en la p. 44 aparece como $4,206.7 mdp). Son las plantas de nitrato de amonio, ácido nítrico y UAN-32, que al comprarse en 2013 llevaban 14 años sin operar",
             "estimacion_propia": true,
             "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
-          },
+          }
+        ],
+        "contexto": "La misma auditoría documenta en pesos: la compra de los activos por $5,427.2 mdp (20-12-2013, p. 4); una inversión total aprobada de $14,998.9 mdp entre compra y rehabilitación (agosto de 2015, p. 5); $8,271.1 mdp erogados de septiembre de 2014 a diciembre de 2017 en rehabilitar las dos plantas de urea, que a fines de 2017 seguían sin producir (pp. 42-44), y una deuda de $7,696.8 mdp con Nafin que Pemex recibió con la empresa (p. 5). Esas cifras no se suman aquí: solo cuenta lo que Pemex ya reconoció como perdido.",
+        "contexto_fuente": "asf_fert17",
+        "falta": [
+          {
+            "limitacion": "no_localizado",
+            "texto": "No localizamos resultados separados de ProAgro posteriores a 2017: no sabemos si las plantas de urea producen hoy ni cuánto cuesta mantenerlas. Por eso no hay flujo anual, solo el costo de lo ya perdido."
+          }
+        ]
+      },
+      "fertinal": {
+        "componentes": [
           {
             "tipo": "intereses",
             "et": "Lo que Pemex dio por perdido del precio pagado por Fertinal",
@@ -24782,12 +24883,12 @@ window.AUDIT_DB = {
             "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
           }
         ],
-        "contexto": "La misma auditoría documenta en pesos: la compra de los activos de Agronitrogenados por $5,427.2 mdp (20-12-2013, p. 4); una inversión total aprobada de $14,998.9 mdp entre compra y rehabilitación (agosto de 2015, p. 5); $8,271.1 mdp erogados de septiembre de 2014 a diciembre de 2017 en rehabilitar las dos plantas de urea, que a fines de 2017 seguían sin producir (pp. 42-44), y una deuda de $7,696.8 mdp con Nafin que Pemex recibió con la empresa (p. 5). Entre 2015 y 2017 el patrimonio de Pemex Fertilizantes perdió $21,174.0 mdp (p. 37). Esas cifras no se suman aquí: solo cuenta lo que Pemex ya reconoció como perdido.",
-        "contexto_fuente": "asf_fert17",
+        "contexto": "La ASF (CP 2016) documenta que en su primer año con Pemex, 2016, Fertinal registró una pérdida integral de 565.7 millones de dólares, $11,690.6 mdp (p. 31), y dictaminó que la compra «no es un negocio rentable» (p. 38). En 2017 sus plantas trabajaron entre el 26.0 % y el 84.4 % de su capacidad (CP 2017, p. 37). Entre 2015 y 2017 el patrimonio de Pemex Fertilizantes, que incluye a Fertinal y a ProAgro, perdió $21,174.0 mdp (p. 37). Esas cifras no se suman aquí: la pérdida de 2016 no es la de hoy y el patrimonio es de toda la empresa.",
+        "contexto_fuente": "asf_fert16",
         "falta": [
           {
             "limitacion": "no_localizado",
-            "texto": "No localizamos resultados separados de ProAgro ni de Fertinal posteriores a 2017: no sabemos si las plantas de urea producen hoy ni cuánto cuesta mantenerlas. Por eso no hay flujo anual, solo el costo de lo ya perdido."
+            "texto": "No localizamos estados financieros de Fertinal posteriores a 2017: no sabemos si hoy gana o pierde. Por eso no hay flujo anual, solo el costo de lo ya perdido."
           }
         ]
       },
