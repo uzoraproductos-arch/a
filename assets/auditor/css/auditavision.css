@@ -22055,6 +22055,8 @@ body.glos-drawer-bloqueo { overflow: hidden; }
 [data-theme="light"] { --am-c1: #c0392b; --am-c2: #0e8f86; --am-c3: #b07d12; --am-c4: #6a4fc8; --am-neg: #b3261e; }
 .am-c1 { background: var(--am-c1); } .am-c2 { background: var(--am-c2); }
 .am-c3 { background: var(--am-c3); } .am-c4 { background: var(--am-c4); }
+/* Cifra pendiente en el simulador: gris rayado, nunca un color de serie. */
+.am-pend { background: repeating-linear-gradient(135deg, var(--text-dim) 0 5px, transparent 5px 9px); outline: 1px dashed var(--text-dim); outline-offset: -1px; }
 .am-car-vistas { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 16px; padding: 10px 14px; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 8px; }
 .am-car-vistas-et { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gold-bright); font-family: var(--font-mono); margin-right: 4px; }
 .am-car-vista-btn { background: var(--bg-card-alt); color: var(--text-secondary); border: 1px solid var(--border-subtle); padding: 5px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; }

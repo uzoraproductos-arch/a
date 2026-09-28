@@ -2103,48 +2103,88 @@
   const amCar = { raf: 0, t: 0, vista: 'ambiental' };
   const AM_CAR_MS = 20000;
 
+  /* Vistas del simulador (28-09-2026): las cinco que propuso Antigravity,
+     ahora con cifras que se pueden rastrear. Poderes y obra publica salen
+     del CSV del PEF 2026 (DB.ritmo_vistas, lo escribe
+     herramientas/integrar_ritmo_vistas.py); del huachicol, la unica cifra
+     oficial es la recaudacion del Segundo Informe, y los $600,000 mdp van
+     como pendiente, con barra rayada, sin entrar a ningun calculo. El color
+     sigue al grupo: c1 deuda, c2 gasto publico, c3 ambiente y huachicol,
+     c4 Poderes y organos autonomos. */
+  const AM_VISTAS = [
+    { k: 'ambiental', et: '🌿 Deuda y ambiente' },
+    { k: 'poderes', et: '🏛️ Los Poderes de la Unión' },
+    { k: 'obras', et: '🏗️ Obra pública por sector' },
+    { k: 'huachicol', et: '⛽ Huachicol fiscal' },
+    { k: 'todos', et: '🌐 Todo junto' }
+  ];
+
+  function amFteLiga(f) {
+    return f ? '<a class="pd-fuente no-autolink" href="' + pdEsc(f.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(f.doc) + ' ↗</a>' : '';
+  }
+
+  function amItems() {
+    const R = DB.ritmo_vistas;
+    if (!R) return {};
+    const F = R.fuentes, H = DB.huachicol_fiscal || {}, HF = H.fuentes || {};
+    const csv = amFteLiga(F.pef26csv);
+    const P = R.poderes, O = R.obra, HU = R.huachicol;
+    const it = {};
+    it.ejecutivo = { id: 'ejecutivo', nom: 'Poder Ejecutivo, con los ramos generales que administra', anio: '2026', mdp: P.ejecutivo, estado: 'derivado', c: 2,
+      fuente: amFteLiga(F.pef26dof) + ' · ' + csv, que: P.operacion_ejecutivo };
+    it.autonomos = { id: 'autonomos', nom: 'Órganos autónomos (INE, CNDH, INEGI y Fiscalía)', anio: '2026', mdp: P.autonomos, estado: 'derivado', c: 4,
+      fuente: csv, que: 'Suma de sus ramos: ' + Object.keys(P.autonomos_desglose).map(k => k + ' ' + formatMdpFijo(P.autonomos_desglose[k])).join(', ') + '.' };
+    it.judicial = { id: 'judicial', nom: 'Poder Judicial de la Federación', anio: '2026', mdp: P.judicial, estado: 'oficial', c: 4, fuente: csv, que: 'Lo aprobado al ramo 03.' };
+    it.legislativo = { id: 'legislativo', nom: 'Poder Legislativo (Cámaras y Auditoría Superior)', anio: '2026', mdp: P.legislativo, estado: 'oficial', c: 4, fuente: csv, que: 'Lo aprobado al ramo 01.' };
+    O.sectores.forEach(x => {
+      it[x.id] = { id: x.id, nom: 'Obra pública · ' + x.nom, anio: '2026', mdp: x.mdp, estado: 'derivado', c: 2, fuente: csv, que: x.como + '. ' + O.definicion };
+    });
+    it.recaudacion = { id: 'recaudacion', nom: 'Huachicol: lo recaudado al detectar combustible no declarado', anio: 'sep 2025–jun 2026', mdp: HU.recaudacion_mdp, estado: 'oficial', c: 3,
+      fuente: amFteLiga(F[HU.fuente]), que: HU.texto };
+    it.declarado = { id: 'declarado', nom: 'Huachicol: la cifra que se mencionó en 2025', anio: '2025', mdp: HU.declarado_mdp, estado: 'pendiente', c: 0,
+      fuente: HU.declarado_fuentes.map(k => amFteLiga(HF[k] || F[k])).join(' · '), que: HU.declarado_texto };
+    return it;
+  }
+
   function amSeries(vista) {
-    if ((vista || amCar.vista) === 'poderes') return amSeriesPoderes();
+    const v = vista || amCar.vista;
     const A = DB.ambiente, C = DB.cuentas_ecologicas;
     const rel = ((ccDatos().relojes || {}).fuentes || []).find(x => x.id === 'intereses');
     const ceem = amRef('ref-ceem-2024', 'INEGI, Cuentas Económicas y Ecológicas 2024');
-    const s = [];
-    if (rel) s.push({ id: 'intereses', nom: 'Intereses de la deuda pública', anio: '2026', mdp: rel.anual_mdp, estado: rel.estado, c: 1,
-      fuente: amRef(rel.refKey, 'PEF 2026, Anexo 8'), que: 'Lo que el presupuesto paga por lo prestado en años anteriores.' });
-    s.push({ id: 'dano', nom: 'Daño ambiental del país', anio: '2024', mdp: C.ctada.total_mdp, estado: C.ctada.estado, c: 3,
-      fuente: ceem, que: 'Lo que costó agotar los recursos y ensuciar aire, agua y suelo.' });
-    s.push({ id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: C.gasto_proteccion_ambiental.monto_mdp, estado: 'oficial', c: 4,
-      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron a proteger el ambiente.' });
-    s.push({ id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: A.presupuesto.aprobado2026.valor / 1e6, estado: A.presupuesto.aprobado2026.estado, c: 2,
-      fuente: amFuente('PEF', A.presupuesto.aprobado2026.pagina), que: 'Lo aprobado a la SEMARNAT, la Conagua y sus órganos.' });
-    return s;
-  }
-
-  /* Vista de los Poderes de la Union: lo aprobado en el PEF 2026 a los
-     ramos 01 y 03, segun la base del avance del gasto de Hacienda que ya
-     usa el Modo Inspector, y el resto del presupuesto por diferencia. */
-  function amSeriesPoderes() {
-    const F = DB.inspector_federal, P = DB.panoramaErario;
-    if (!F || !P) return [];
-    const fav = F.fuentes.av2026;
-    const fte = '<a class="pd-fuente no-autolink" href="' + pdEsc(fav.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(fav.corto) + ' ↗</a>';
-    const ente = id => F.entes.find(x => x.id === id);
-    const leg = ente('legislativo'), jud = ente('judicial');
-    if (!leg || !jud) return [];
-    const L = leg.av2026.aprobado, J = jud.av2026.aprobado, T = P.totalPEF;
-    return [
-      { id: 'resto', nom: 'Todo lo demás del Presupuesto: Poder Ejecutivo, órganos autónomos y ramos generales', anio: '2026', mdp: T - J - L, estado: 'derivado', c: 1,
-        fuente: 'PEF 2026 total, ' + formatMdpFijo(T) + ', menos los Poderes Judicial y Legislativo', que: 'Incluye el pago de la deuda y lo que se reparte a estados y municipios; no es solo el gasto de las secretarías.' },
-      { id: 'judicial', nom: 'Poder Judicial de la Federación', anio: '2026', mdp: J, estado: 'oficial', c: 4, fuente: fte, que: 'Lo aprobado al ramo 03.' },
-      { id: 'legislativo', nom: 'Poder Legislativo (Cámaras y Auditoría Superior)', anio: '2026', mdp: L, estado: 'oficial', c: 3, fuente: fte, que: 'Lo aprobado al ramo 01.' }
-    ];
+    const it = amItems();
+    if (rel) it.intereses = { id: 'intereses', nom: 'Intereses de la deuda pública', anio: '2026', mdp: rel.anual_mdp, estado: rel.estado, c: 1,
+      fuente: amRef(rel.refKey, 'PEF 2026, Anexo 8'), que: 'Lo que el presupuesto paga por lo prestado en años anteriores.' };
+    it.dano = { id: 'dano', nom: 'Daño ambiental del país', anio: '2024', mdp: C.ctada.total_mdp, estado: C.ctada.estado, c: 3,
+      fuente: ceem, que: 'Lo que costó agotar los recursos y ensuciar aire, agua y suelo.' };
+    it.gpa = { id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: C.gasto_proteccion_ambiental.monto_mdp, estado: 'oficial', c: 3,
+      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron a proteger el ambiente.' };
+    it.ramo16 = { id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: A.presupuesto.aprobado2026.valor / 1e6, estado: A.presupuesto.aprobado2026.estado, c: 2,
+      fuente: amFuente('PEF', A.presupuesto.aprobado2026.pagina), que: 'Lo aprobado a la SEMARNAT, la Conagua y sus órganos.' };
+    const ids = {
+      ambiental: ['intereses', 'dano', 'gpa', 'ramo16'],
+      poderes: ['ejecutivo', 'autonomos', 'judicial', 'legislativo'],
+      obras: ['obra_energia', 'obra_transporte', 'obra_ramo33', 'obra_agua', 'obra_salud', 'obra_otros'],
+      huachicol: ['declarado', 'obra_energia', 'obra_ramo33', 'judicial', 'ramo16', 'legislativo', 'recaudacion'],
+      todos: ['ejecutivo', 'intereses', 'dano', 'declarado', 'obra_energia', 'gpa', 'obra_transporte', 'obra_ramo33', 'judicial', 'autonomos', 'ramo16', 'obra_agua', 'legislativo', 'obra_salud', 'recaudacion']
+    }[v] || ['intereses', 'dano', 'gpa', 'ramo16'];
+    return ids.map(k => it[k]).filter(Boolean);
   }
 
   function amCarreraCambiarVista(v) {
     if (amCar.raf) { cancelAnimationFrame(amCar.raf); amCar.raf = 0; }
-    amCar.vista = v === 'poderes' ? 'poderes' : 'ambiental';
+    amCar.vista = AM_VISTAS.some(x => x.k === v) ? v : 'ambiental';
     amCar.t = 0;
     renderAmCarrera();
+  }
+
+  function amNota(v) {
+    const R = DB.ritmo_vistas || {}, HU = R.huachicol || {};
+    const reparto = ' La simulación reparte cada cifra en partes iguales entre los 365 días; el gasto real sigue su calendario.';
+    if (v === 'poderes') return chipEstado('derivado') + ' Las cuatro barras son partes del mismo presupuesto 2026 y suman su gasto neto total. La del Ejecutivo se obtiene por diferencia e incluye la deuda, lo que se reparte a estados y municipios y las pensiones: no es solo el gasto de las secretarías.' + reparto;
+    if (v === 'obras') return chipEstado('derivado') + ' ' + escHtml((R.obra || {}).definicion || '') + ' Los sectores son una agrupación de Auditavisión; la cifra de cada ramo es la del CSV oficial.' + reparto;
+    if (v === 'huachicol') return chipEstado('pendiente') + ' Ninguna autoridad ha publicado cuánto se evade por huachicol fiscal. La barra rayada es la cifra que se mencionó en octubre de 2025 y que la Presidencia aclaró que no es oficial: se muestra para dimensionar lo que se discutió, no entra en ninguna cuenta. La única cifra con documento es la recaudación del Segundo Informe (' + escHtml(HU.periodo || '') + ', diez meses). La Ley de Ingresos 2027 obliga al SAT a publicar su estudio de evasión (art. 30).';
+    if (v === 'todos') return chipEstado('derivado') + ' Mezcla cifras de 2024 (INEGI) y 2026 (presupuesto aprobado), y una pendiente (rayada). Sirve para ver órdenes de magnitud, no para sumar.' + reparto;
+    return chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.';
   }
 
   function renderAmCarrera() {
@@ -2155,8 +2195,8 @@
     const max = Math.max.apply(null, S.map(x => x.mdp));
     const filas = S.map(x =>
       '<li class="am-car-fila" title="' + escHtml(x.nom + ', ' + x.anio + ': ' + formatMdpFijo(x.mdp) + ' al año. ' + x.que) + '">' +
-        '<span class="am-car-nom"><i class="am-sw am-c' + x.c + '" aria-hidden="true"></i>' + escHtml(x.nom) + ' <small>' + x.anio + '</small></span>' +
-        '<span class="am-car-riel"><span class="am-car-barra am-c' + x.c + '" data-w="' + Math.max(0.6, x.mdp / max * 100).toFixed(3) + '"></span></span>' +
+        '<span class="am-car-nom"><i class="am-sw ' + (x.c ? 'am-c' + x.c : 'am-pend') + '" aria-hidden="true"></i>' + escHtml(x.nom) + ' <small>' + x.anio + '</small>' + (x.estado === 'pendiente' ? ' ' + chipEstado('pendiente') : '') + '</span>' +
+        '<span class="am-car-riel"><span class="am-car-barra ' + (x.c ? 'am-c' + x.c : 'am-pend') + '" data-w="' + Math.max(0.6, x.mdp / max * 100).toFixed(3) + '"></span></span>' +
         '<span class="am-car-v num-tabular" data-v="' + x.mdp + '">$0 mdp</span>' +
       '</li>').join('');
     const tabla = S.map(x => '<tr><td>' + escHtml(x.nom) + '</td><td>' + x.anio + '</td><td class="num-tabular">' + formatMdpFijo(x.mdp) + '</td><td class="num-tabular">' +
@@ -2164,11 +2204,10 @@
     cont.innerHTML =
       '<section class="pd-bloque am-car" data-no-autolink>' +
         '<h3 class="pd-tit">📊 Un año de cuentas en veinte segundos</h3>' +
-        tuUd('<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>', '<p class="pd-lead">Pulsa «Simular un año» y ve cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>') +
+        tuUd('<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, las grandes cifras del erario: los intereses de la deuda y el daño ambiental, los tres Poderes de la Unión, la obra pública de 2026 por sector y lo que se sabe del huachicol fiscal. Elija qué comparar; todas van en la misma escala, en pesos.</p>', '<p class="pd-lead">Pulsa «Simular un año» y ve cómo se acumulan, día por día, las grandes cifras del erario: los intereses de la deuda y el daño ambiental, los tres Poderes de la Unión, la obra pública de 2026 por sector y lo que se sabe del huachicol fiscal. Elige qué comparar; todas van en la misma escala, en pesos.</p>') +
         '<div class="am-car-vistas" role="group" aria-label="Qué comparar">' +
           '<span class="am-car-vistas-et">Comparar</span>' +
-          '<button type="button" class="am-car-vista-btn' + (v === 'ambiental' ? ' activa' : '') + '" aria-pressed="' + (v === 'ambiental') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'ambiental\')">🌿 Deuda y ambiente</button>' +
-          '<button type="button" class="am-car-vista-btn' + (v === 'poderes' ? ' activa' : '') + '" aria-pressed="' + (v === 'poderes') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'poderes\')">🏛️ Los Poderes de la Unión</button>' +
+          AM_VISTAS.map(x => '<button type="button" class="am-car-vista-btn' + (v === x.k ? ' activa' : '') + '" aria-pressed="' + (v === x.k) + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'' + x.k + '\')">' + x.et + '</button>').join('') +
         '</div>' +
         '<div class="am-car-mandos">' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc am-car-play" id="amCarPlay" onclick="window.AuditEngine.amCarreraPlay()">▶ Simular un año</button>' +
@@ -2181,8 +2220,7 @@
         pdPlegable('Ver las cifras en tabla, con su documento',
           '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Concepto</th><th>Año</th><th>Al año</th><th>Por segundo</th><th>Documento</th></tr></thead><tbody>' + tabla + '</tbody></table></div>' +
           '') +
-        (v === 'poderes' ? '<p class="pd-nota">' + chipEstado('derivado') + ' Las tres barras son partes del mismo presupuesto 2026 y suman su total. La simulación reparte cada cifra en partes iguales entre los 365 días; el gasto real sigue su calendario. Los $600,000 mdp de «huachicol fiscal» que circularon en octubre de 2025 no se incluyen: no son una cifra anual ni oficial (el expediente del huachicol explica por qué).</p>' : '') +
-        (v === 'poderes' ? '' : '<p class="pd-nota">' + chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.</p>') +
+        '<p class="pd-nota">' + amNota(v) + '</p>' +
       '</section>';
     amCarreraPintar(amCar.t || 0);
   }
@@ -2201,11 +2239,31 @@
     const rem = document.getElementById('amCarRemate');
     if (rem) {
       if (t < 1) { rem.innerHTML = ''; return; }
-      const S = amSeries(amCar.vista), por = id => (S.find(x => x.id === id) || {}).mdp || 0;
-      if (amCar.vista === 'poderes') {
-        const tot = por('resto') + por('judicial') + por('legislativo');
-        rem.innerHTML = tot ? 'Al cerrar el año, de cada $100 del Presupuesto 2026, <b>$' + amNum(por('judicial') / tot * 100, 2) + '</b> fueron al Poder Judicial y <b>$' + amNum(por('legislativo') / tot * 100, 2) +
-          '</b> al Legislativo; los otros <b>$' + amNum(por('resto') / tot * 100, 2) + '</b> los ejercen el Ejecutivo, los órganos autónomos y los ramos generales. ' + chipEstado('derivado') : '';
+      const v = amCar.vista, S = amSeries(v), por = id => (S.find(x => x.id === id) || {}).mdp || 0;
+      if (v === 'poderes') {
+        const tot = por('ejecutivo') + por('autonomos') + por('judicial') + por('legislativo');
+        rem.innerHTML = tot ? 'Al cerrar el año, de cada $100 del Presupuesto 2026, <b>$' + amNum(por('ejecutivo') / tot * 100, 2) + '</b> los ejerció el Ejecutivo con sus ramos generales, <b>$' + amNum(por('judicial') / tot * 100, 2) +
+          '</b> el Poder Judicial, <b>$' + amNum(por('autonomos') / tot * 100, 2) + '</b> los órganos autónomos y <b>$' + amNum(por('legislativo') / tot * 100, 2) + '</b> el Legislativo. ' + chipEstado('derivado') : '';
+        return;
+      }
+      if (v === 'obras') {
+        const tot = S.reduce((a, x) => a + x.mdp, 0), ener = por('obra_energia');
+        const it = (((ccDatos().relojes || {}).fuentes || []).find(x => x.id === 'intereses') || {}).anual_mdp;
+        rem.innerHTML = tot ? 'Al cerrar el año, el Presupuesto 2026 habrá destinado <b>' + formatMdpFijo(tot) + '</b> a obra pública. De cada $100, <b>$' + amNum(ener / tot * 100, 1) + '</b> son de Pemex y CFE.' +
+          (it ? ' Los intereses de la deuda del mismo año (' + formatMdpFijo(it) + ') equivalen a <b>' + amNum(it / tot, 1) + ' veces</b> toda esa obra.' : '') + ' ' + chipEstado('derivado') : '';
+        return;
+      }
+      if (v === 'huachicol') {
+        const rec = por('recaudacion'), dec = por('declarado'), ener = por('obra_energia');
+        rem.innerHTML = 'Lo único documentado: <b>' + formatMdpFijo(rec) + '</b> recaudados en diez meses al detectar 109.4 millones de litros no declarados ' + chipEstado('oficial') +
+          '; equivalen al ' + amNum(rec / ener * 100, 1) + ' % de la obra pública de Pemex y CFE de un año. La cifra de ' + formatMdpFijo(dec) + ' que se mencionó en 2025 sería ' + amNum(dec / ener, 1) +
+          ' veces esa obra, pero no tiene documento y la Presidencia aclaró que no es oficial. ' + chipEstado('pendiente');
+        return;
+      }
+      if (v === 'todos') {
+        const obra = ((DB.ritmo_vistas || {}).obra || {}).total || 0;
+        rem.innerHTML = 'Al cerrar el año, la cifra más grande es el gasto del Ejecutivo (' + formatMdpFijo(por('ejecutivo')) + '). Los intereses de la deuda (' + formatMdpFijo(por('intereses')) + ') y el daño ambiental de 2024 (' +
+          formatMdpFijo(por('dano')) + ') rebasan, cada uno, toda la obra pública del año (' + formatMdpFijo(obra) + '). ' + chipEstado('derivado');
         return;
       }
       const r16 = por('ramo16');

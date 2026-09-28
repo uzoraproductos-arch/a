@@ -3569,6 +3569,34 @@ escribir; solo tocan la copia del auditor).
   desglose a 1366 y 390 px, barrido de clics sin errores, las cinco tablas
   de la ASF se pintan en el panel lateral.
 
+### Hecho (simulador «Un año de cuentas en veinte segundos» con cinco pestañas, sello 20260928e)
+
+El autor señaló que el simulador del módulo 5 estaba incompleto: la
+versión de Antigravity (425651f) tenía cinco pestañas y la revisión del
+27-09 (5b881a3) la dejó en dos por falta de fuentes. Se restauran las
+cinco con cifras rastreables:
+
+| Pestaña | Barras | Fuente |
+|---|---|---|
+| 🌿 Deuda y ambiente | intereses, daño ambiental, gasto en protección, Ramo 16 | igual que antes |
+| 🏛️ Los Poderes de la Unión | Ejecutivo $10,050,444.1 · autónomos $55,704.9 · Judicial $70,005.6 · Legislativo $17,529.1 mdp | CSV del PEF 2026; el Ejecutivo es el gasto neto del decreto menos los otros tres (derivado; Antigravity tenía $10,033,149 sin cálculo) |
+| 🏗️ Obra pública por sector | Pemex y CFE $279,605.0 · trenes, carreteras y puertos $199,674.5 · Ramo 33 $137,074.9 · Conagua $21,761.9 · IMSS e ISSSTE $12,941.0 · resto $1,904.1 (total $652,961.4 mdp) | CSV del PEF 2026, «gasto de obra pública» (tipo de gasto 3); sustituye los seis promedios 2024-2026 sin fuente |
+| ⛽ Huachicol fiscal | la cifra mencionada ($600,000 mdp, **pendiente**, barra gris rayada) contra obra, Poderes y Ramo 16; recaudación de $4,600 mdp (oficial) | Segundo Informe 2026, p. 260 (PDF 284), cotejado en la entrega del autor; aclaración de Presidencia del 9-10-2025 |
+| 🌐 Todo junto | 15 barras | las anteriores |
+
+- Datos en `DB.ritmo_vistas`, escritos por
+  `herramientas/integrar_ritmo_vistas.py` (comprueba la huella del CSV,
+  6dec5f3a…). El color sigue al grupo (deuda, gasto público, ambiente y
+  huachicol, Poderes); lo pendiente es gris rayado y lleva su chip.
+- Cada pestaña tiene su cierre del año y su nota de método. La del
+  huachicol dice que la barra rayada no entra en ninguna cuenta.
+- **Corrección:** la aclaración de la Presidenta sobre los $600,000 mdp fue
+  el **9** de octubre de 2025 en su conferencia (versión estenográfica
+  oficial), no el 10; la nota de El Financiero del 10 la reportó. La
+  estimación `pff` ahora cita la estenográfica y la frase textual.
+- Verificado: las cinco pestañas a 1366 y 390 px, sin NaN ni desborde; 14
+  paneles y barrido de clics sin errores; Enciclopedia intacta.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el

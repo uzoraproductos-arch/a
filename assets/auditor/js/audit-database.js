@@ -15182,6 +15182,10 @@ window.AUDIT_DB = {
         "doc": "Código Fiscal de la Federación, texto vigente (última reforma DOF 09-04-2026), Cámara de Diputados",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
         "sha256": "be7427b20d3552775ab42018f8f87578078770095bf8cf46322c25e36ee3aa7d"
+      },
+      "presidencia0910": {
+        "doc": "Presidencia de la República, versión estenográfica de la conferencia de prensa del 9 de octubre de 2025",
+        "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-09-de-octubre-de-2025"
       }
     },
     "reconocimiento": {
@@ -15258,10 +15262,10 @@ window.AUDIT_DB = {
         "estado": "pendiente",
         "id": "pff",
         "fuente": "pff25",
-        "fuente2": "desmentido25",
+        "fuente2": "presidencia0910",
         "total_mdp": 600000,
         "querellado_mdp": 16000,
-        "texto": "daño al erario por huachicol fiscal que la Procuradora Fiscal de la Federación mencionó ante la Comisión de Hacienda de la Cámara de Diputados el 2 de octubre de 2025, sobre los casos en investigación; de eso, unos $16,000 mdp estaban en querellas presentadas. No es una cifra anual. El 10 de octubre la Presidenta la desmintió: dijo que la cifra venía de un diputado y que sin una base completa no se puede confirmar.",
+        "texto": "daño al erario por huachicol fiscal que la Procuradora Fiscal de la Federación mencionó ante la Comisión de Hacienda de la Cámara de Diputados el 2 de octubre de 2025, sobre los casos en investigación; de eso, unos $16,000 mdp estaban en querellas presentadas. No es una cifra anual. El 9 de octubre, en su conferencia, la Presidenta aclaró que «no hay un dato de Secretaría de Hacienda oficial de cuánto recurso significa el contrabando de combustible» y que la cifra venía de un diputado; el secretario de Hacienda precisó que los $16,000 mdp son el saldo histórico de los casos querellados.",
         "por_que_pendiente": "No hay documento oficial que la sostenga y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas."
       }
     ]
@@ -24333,6 +24337,98 @@ window.AUDIT_DB = {
       "estado": "oficial",
       "fuente": "CGPE27",
       "pagina": "67, cuadro \u00abEstimaci\u00f3n de las finanzas p\u00fablicas, 2026-2027\u00bb, columna 2026 estimado"
+    }
+  },
+  "ritmo_vistas": {
+    "nota": "Datos de las vistas del simulador «Un año de cuentas en veinte segundos» (módulo 5). Los escribe herramientas/integrar_ritmo_vistas.py desde el CSV de datos abiertos del PEF 2026.",
+    "fuentes": {
+      "pef26csv": {
+        "doc": "SHCP, Presupuesto de Egresos de la Federación 2026, datos abiertos (PEF_2026.csv), columna MONTO_PEF_2026",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/PEF_2026.csv",
+        "sha256": "6dec5f3ad52126c3257a74e7e177eada0c591ed8109d861becf767e959c86c03"
+      },
+      "pef26dof": {
+        "doc": "Presupuesto de Egresos de la Federación 2026, DOF 21-11-2025: gasto neto total de $10,193,683.7 mdp",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+      },
+      "ig2": {
+        "doc": "Presidencia de la República, Segundo Informe de Gobierno 2025-2026, apartado «Acompañamiento técnico a la Administración Pública Federal», p. 260 (p. 284 del PDF)",
+        "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+        "sha256": "cc95e5ade7cb306b734e9dc1e61e1defcba14c444e5705de24be6ca6e115fa9d"
+      },
+      "presidencia0910": {
+        "doc": "Presidencia de la República, versión estenográfica de la conferencia de prensa del 9 de octubre de 2025",
+        "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-09-de-octubre-de-2025"
+      }
+    },
+    "poderes": {
+      "gasto_neto": 10193683.7,
+      "ejecutivo": 10050444.1,
+      "legislativo": 17529.1,
+      "judicial": 70005.6,
+      "autonomos": 55704.9,
+      "autonomos_desglose": {
+        "INE": 21837.2,
+        "CNDH": 1819.8,
+        "INEGI": 11807.5,
+        "FGR": 20240.4
+      },
+      "operacion_ejecutivo": "Gasto neto total del PEF 2026 ($10,193,683.7 mdp) menos el Poder Legislativo, el Poder Judicial y los órganos autónomos (INE, CNDH, INEGI y Fiscalía General). Incluye los ramos generales que administra el Ejecutivo: deuda, participaciones y aportaciones a estados y municipios, y pensiones."
+    },
+    "obra": {
+      "total": 652961.4,
+      "sectores": [
+        {
+          "id": "obra_energia",
+          "nom": "Energía: Pemex y CFE",
+          "mdp": 279605.0,
+          "como": "Pemex $239,843.2 + CFE $39,761.8 mdp"
+        },
+        {
+          "id": "obra_transporte",
+          "nom": "Trenes, carreteras y puertos",
+          "mdp": 199674.5,
+          "como": "SICT $144,674.5 + Tren Maya (Defensa) $30,000.0 + Marina (Tren Interoceánico y puertos) $25,000.0 mdp"
+        },
+        {
+          "id": "obra_ramo33",
+          "nom": "Obra de estados y municipios (Ramo 33)",
+          "mdp": 137074.9,
+          "como": "Aportaciones federales clasificadas como gasto de obra pública; el FAIS municipal suma $118,689.4 mdp"
+        },
+        {
+          "id": "obra_agua",
+          "nom": "Agua: Conagua",
+          "mdp": 21761.9,
+          "como": "Ramo 16, Comisión Nacional del Agua"
+        },
+        {
+          "id": "obra_salud",
+          "nom": "Hospitales: IMSS e ISSSTE",
+          "mdp": 12941.0,
+          "como": "IMSS $8,634.8 + ISSSTE $4,306.2 mdp"
+        },
+        {
+          "id": "obra_otros",
+          "nom": "Defensa, Fiscalía y Poderes",
+          "mdp": 1904.1,
+          "como": "Lo demás: Ingenieros de la Defensa, Fiscalía General, Cámaras y Poder Judicial"
+        }
+      ],
+      "definicion": "Lo que el PEF 2026 clasifica como «gasto de obra pública» (tipo de gasto 3), agrupado por Auditavisión en sectores según el ramo o la entidad que lo ejerce. Es presupuesto aprobado para 2026, no lo ya pagado."
+    },
+    "huachicol": {
+      "recaudacion_mdp": 4600,
+      "litros_millones": 109.4,
+      "periodo": "1-09-2025 a 30-06-2026",
+      "fuente": "ig2",
+      "texto": "Con sistemas de revisión no intrusiva en las 50 aduanas se detectaron 109.4 millones de litros de hidrocarburos no declarados, con una recaudación asociada de $4,600 mdp de IVA e IEPS. Son diez meses, no un año, y es lo que se cobró, no lo que se evade.",
+      "declarado_mdp": 600000,
+      "declarado_texto": "La cifra que la Procuradora Fiscal mencionó ante diputados el 2-10-2025. El 9-10-2025 la Presidenta aclaró en su conferencia que «no hay un dato de Secretaría de Hacienda oficial de cuánto recurso significa el contrabando de combustible» y que la cifra venía de un diputado. No es oficial ni anual.",
+      "declarado_fuentes": [
+        "pff25",
+        "presidencia0910"
+      ]
     }
   }
 };
