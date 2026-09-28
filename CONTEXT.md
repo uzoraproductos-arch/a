@@ -3597,6 +3597,50 @@ cinco con cifras rastreables:
 - Verificado: las cinco pestañas a 1366 y 390 px, sin NaN ni desborde; 14
   paneles y barrido de clics sin errores; Enciclopedia intacta.
 
+### Hecho (módulo 2: la «Simulación en vivo» corre con lo que cada obra nos cuesta, sello 20260928f)
+
+El autor pidió que el simulador en vivo de Megaobras (2.2) dejara de estar
+lleno de pendientes y operara con las fuentes que ya hay, como
+**interpretación propia**, declarada, de documentos oficiales. Antes solo
+corrían 2 de 12 fichas; ahora corren 7 y las otras 5 dicen qué lo impide.
+
+- **Qué mide cada ficha («Lo que nos cuesta», chip derivado):** lo que el
+  erario le pone este año (PEF 2026, datos abiertos) más lo que sigue
+  costando el dinero ya perdido en ella (sobrecosto, cancelación o gasto
+  sin obra documentados por la ASF o Hacienda) a la **tasa implícita de la
+  deuda**: costo financiero del PEF 2026 ($1,572,073.3 mdp) ÷ SHRFSP
+  estimado 2026 de los CGPE 2027 ($20,062,321.6 mdp) = **7.84 %**.
+  Los intereses van marcados como **estimación propia**, con su supuesto
+  (que ese dinero se financió con deuda al costo promedio).
+
+| Obra | Al año (mdp) | Componentes |
+|---|---:|---|
+| Tren Maya | 56,616.8 | PEF 2026 $30,744.1 + 7.84 % de $330,008.6 de sobrecosto |
+| FOBAPROA/IPAB | 35,553.4 | Ramo 34 del PEF 2026 (sin intereses aparte); contexto: pasivos netos del IPAB $1,023,571 al 31-12-2025 |
+| FARAC | 21,998.1 | $351,969.6 que la ASF estimó por pagar 2018-2033 ÷ 16 años (estimación propia: reparto parejo) |
+| Tren Interurbano | 13,472.0 | PEF 2026 clave 13093110008 $7,408.0 + 7.84 % de $77,347.5 de crecimiento del costo reconocido en cartera |
+| AIFA/Texcoco | 9,629.6 | PEF 2026 $744.7 + 7.84 % de $113,327.7 de la cancelación del NAIM (ASF) |
+| Refinería de Tula | 88.4 | 7.84 % de $1,127.6 gastados sin refinería (ASF) |
+| Estela de Luz | 71.5 | 7.84 % de $911.4 sobre el contrato (ASF) |
+
+  Total: **$137,429.8 mdp al año, unos $4,358 por segundo**, con contador
+  conjunto arriba de las fichas y tabla de método en el panel lateral.
+- **No corren, con la limitación concreta** (categorías: no localizado, sin
+  desglose por proyecto, acceso fallido, salvedad documentada): Dos Bocas
+  (Pemex no separa la refinería; TRI se extinguió el 19-03-2025),
+  Megafarmacia (**dictamen de Birmex 2024 con denegación de opinión**; el
+  auditor no fue invitado al inventario del CEFEDIS y desconoce cómo se
+  controla en la contabilidad, párrafos III a V), Agronitrogenados (solo
+  en dólares), Enciclomedia y Búnker (no localizado).
+- «Pérdida de operación» pasa a llamarse **déficit antes de transferencias
+  y otros ingresos** en los textos del auditor, con la aclaración de que en
+  un servicio público no prueba por sí solo desperdicio.
+- Datos en `DB.costo_vivo_megaobras`, escritos por
+  `herramientas/integrar_costo_vivo_megaobras.py` (comprueba la huella del
+  CSV del PEF 2026). El motor calcula los intereses con la tasa.
+- Verificado a 1366 y 390 px sin desborde; 14 paneles, barrido de clics y
+  trivia sin errores; Enciclopedia intacta.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3614,7 +3658,7 @@ auditor, por tipo:
    huachicol fiscal.
 3. **Bloqueado por el entorno (comprobar a mano):** Segundo Informe de
    Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
-4. **Datos que faltan y no se estiman:** pérdida de nueve megaobras, costo
+4. **Datos que faltan y no se estiman:** costo en vivo de Dos Bocas, Megafarmacia, Agronitrogenados, Enciclomedia y Búnker (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
    en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
    FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
    nacional (134.4 millones, sin cotejar en su cuadro) y por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del

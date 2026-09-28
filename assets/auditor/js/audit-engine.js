@@ -8519,8 +8519,8 @@
           ': sus ingresos propios cubrieron el ' + cubre.toFixed(1) + ' % de su gasto. Además recibió ' + mdp(d.transferencias) + ' de transferencias federales y ' +
           mdp(d.otros_ingresos) + ' de otros ingresos, con lo que cerró con un resultado contable de ' + mdp(d.resultado_ejercicio) + '. ' +
           (res < 0
-            ? 'Sin esas transferencias ni otros ingresos, operar le habría costado ' + mdp(-res) + ' más de lo que cobró: esa es su pérdida de operación.'
-            : 'Sin esas transferencias, su operación todavía deja ' + mdp(res) + ' a favor: no registra pérdida de operación ese año. Lo que pesa es lo que costó construirla, que se mide aparte.');
+            ? 'Sin esas transferencias ni otros ingresos, operar le habría costado ' + mdp(-res) + ' más de lo que cobró: ese es su déficit antes de transferencias y otros ingresos. En un servicio público gastar más de lo que se cobra no prueba por sí solo desperdicio, pero sí dice cuánto depende del erario.'
+            : 'Sin esas transferencias, su operación todavía deja ' + mdp(res) + ' a favor: no registra déficit antes de transferencias ese año. Lo que pesa es lo que costó construirla, que se mide aparte.');
         o.fuente_operacion = d.fuente;
       } else {
         o.perdida_pendiente = true;
@@ -8537,6 +8537,22 @@
       o.perdida_diaria_mdp = o.perdida_anual_mdp / 365;
       o.perdida_segundo = o.perdida_anual_mdp * 1e6 / 31536000;
     });
+    /* Costo en vivo: interpretación de Auditavisión con cifras oficiales
+       (costo_vivo_megaobras). Suma lo que el erario le pone a la obra este
+       año y los intereses que cuesta el dinero ya perdido, a la tasa
+       implícita de la deuda. Sin componentes documentados, no corre. */
+    const cv = DB.costo_vivo_megaobras;
+    if (cv && cv.obras) {
+      const tasa = cv.tasa.pct / 100;
+      sm.obras.forEach(o => {
+        const d = cv.obras[o.id];
+        if (!d) return;
+        const comps = (d.componentes || []).map(c => c.tipo === 'intereses'
+          ? Object.assign({}, c, { mdp: Math.round(c.base_mdp * tasa * 10) / 10 }) : c);
+        o.vivo = { anual: Math.round(comps.reduce((a, c) => a + c.mdp, 0) * 10) / 10, comps: comps,
+          falta: d.falta || [], contexto: d.contexto, contexto_fuente: d.contexto_fuente };
+      });
+    }
     const t = sm.totales_consolidados;
     const anual = sm.obras.reduce((a, o) => a + (o.perdida_anual_mdp || 0), 0);
     t.perdida_anual_consolidada_mdp = Math.round(anual * 10) / 10;
@@ -21111,9 +21127,12 @@
         '<section class="sim-rank sim-rank-filtro">' +
           '<div class="sim-rank-cab">' +
             '<h3 class="sim-rank-tit">Simulación en vivo: ' + (delFiltro.length === 1 ? 'la obra del filtro' : 'las ' + delFiltro.length + ' obras del filtro') + '</h3>' +
-            '<span class="sim-rank-sub">Cada ficha lleva corriendo su pérdida de operación, a la cadencia elegida en «El pulso del gasto». ' +
+            '<span class="sim-rank-sub">' + (esAuditor() && DB.costo_vivo_megaobras
+              ? 'Cada ficha corre con lo que esa obra nos cuesta: lo que el erario le pone este año más lo que sigue costando el dinero que ya se perdió en ella. Es un cálculo nuestro con cifras oficiales; en cada ficha está la operación. '
+              : 'Cada ficha lleva corriendo su déficit antes de transferencias, a la cadencia elegida en «El pulso del gasto». ') +
               'Al final, contra qué se compara este dinero.</span>' +
           '</div>' +
+          simVivoTotal(delFiltro) +
           '<div class="sim-control-group">' +
             '<span class="sim-group-label">&#8645; Ordenar y medir por:</span>' +
             '<div class="sim-pill-group">' + pestanas + '</div>' +
@@ -21877,7 +21896,7 @@
   }
 
   function simFuenteLink(k) {
-    const f = (DB.simulador_megaobras.verificacion.fuentes || {})[k];
+    const f = (DB.simulador_megaobras.verificacion.fuentes || {})[k] || ((DB.costo_vivo_megaobras || {}).fuentes || {})[k];
     if (!f) return '';
     return '<li><a class="no-autolink" href="' + escHtml(f.url) + '" target="_blank" rel="noopener noreferrer">' + escHtml(f.doc) + ' ↗</a></li>';
   }
@@ -21948,6 +21967,85 @@
     return '<details class="sim-ver"><summary>📑 Lo que dicen los documentos oficiales</summary>' + h + '</details>';
   }
 
+  /* Caja «Lo que nos cuesta» de cada ficha en vivo (solo el auditor). El
+     ritmo es el costo_vivo de la obra: si no tiene ningún componente
+     documentado, la ficha no corre y dice qué limita la información. */
+  function simVivoCaja(o, pInfo) {
+    if (!esAuditor() || !o.vivo) return '';
+    const cv = DB.costo_vivo_megaobras;
+    const v = o.vivo;
+    const mdpTx = n => '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+    const limEt = k => ((cv.limitaciones || {})[k] || '').split(':')[0] || 'Limitación';
+    if (!v.comps.length) {
+      const falta = v.falta.map(f => '<li><strong>' + escHtml(limEt(f.limitacion)) + '.</strong> ' + escHtml(f.texto) +
+        (f.fuente ? ' <ul class="sim-ver-fuentes">' + simFuenteLink(f.fuente) + '</ul>' : '') + '</li>').join('');
+      return '<div class="sim-loss-box sim-vivo-parado">' +
+          '<div>' +
+            '<div class="sim-loss-lbl">⏸️ Lo que nos cuesta ' + chipEstado('pendiente') + '</div>' +
+            '<div class="sim-loss-amount">No corre</div>' +
+            '<div class="sim-vivo-nota">No hay información pública suficiente para calcularlo sin inventar. Esto es lo que lo impide:</div>' +
+          '</div>' +
+        '</div>' +
+        '<ul class="sim-vivo-falta">' + falta + '</ul>';
+    }
+    const porSeg = v.anual * 1e6 / 31536000;
+    const propia = v.comps.some(c => c.estimacion_propia);
+    const comps = v.comps.map(c =>
+      '<li><strong>' + escHtml(c.et) + ':</strong> ' + mdpTx(c.mdp) + ' al año ' + chipEstado(c.tipo === 'intereses' ? 'derivado' : c.estado) +
+        (c.estimacion_propia ? ' <span class="sim-vivo-tag">estimación propia</span>' : '') +
+        '<br><small>' + escHtml(c.como) + (c.tipo === 'intereses' ? '. Base: ' + mdpTx(c.base_mdp) + ' × ' + cv.tasa.pct + ' % de tasa implícita de la deuda = ' + mdpTx(c.mdp) + ' al año' : '') + '.' +
+        (c.supuesto ? ' ' + escHtml(c.supuesto) : '') + '</small>' +
+        '<ul class="sim-ver-fuentes">' + simFuenteLink(c.fuente) + '</ul></li>').join('');
+    const detalle = '<p class="sim-ver-p">Cálculo de Auditavisión con cifras oficiales. Suma lo que el erario le pone a la obra este año y lo que sigue costando el dinero que ya se perdió en ella. ' +
+        'Pasarlo a «por segundo» solo cambia la unidad: lo que se justifica es el monto anual, renglón por renglón.</p>' +
+      '<ul class="sim-vivo-comps">' + comps + '</ul>' +
+      '<p class="sim-ver-p"><strong>Total: ' + mdpTx(v.anual) + ' al año</strong> ÷ 31,536,000 segundos = $' + porSeg.toFixed(2) + ' por segundo.</p>' +
+      (v.contexto ? '<p class="sim-ver-p">' + escHtml(v.contexto) + '</p><ul class="sim-ver-fuentes">' + simFuenteLink(v.contexto_fuente) + '</ul>' : '') +
+      '<p class="sim-ver-p"><strong>La tasa.</strong> ' + escHtml(cv.tasa.como) + ' Resultado: ' + cv.tasa.pct + ' % al año ' + chipEstado('derivado') + '</p>' +
+      '<ul class="sim-ver-fuentes">' + simFuenteLink('pef26dof') + simFuenteLink('cgpe27') + '</ul>' +
+      '<p class="sim-ver-p"><strong>Límites.</strong> No es una cifra que el gobierno publique como «pérdida»: es nuestra lectura de sus documentos. Mezcla un flujo de 2026 con dinero de años anteriores sin deflactar, y los renglones de estimación propia dependen del supuesto que cada uno declara.</p>' +
+      v.falta.map(f => '<p class="sim-ver-p"><strong>' + escHtml(limEt(f.limitacion)) + '.</strong> ' + escHtml(f.texto) + '</p>').join('');
+    return '<div class="sim-loss-box sim-vivo-box">' +
+        '<div>' +
+          '<div class="sim-loss-lbl"><span class="pulsing-dot"></span> Lo que nos cuesta (' + pInfo.label + ') ' + chipEstado('derivado') + '</div>' +
+          '<div class="sim-loss-amount">' + simMdp(v.anual * pInfo.factor) + pInfo.sufijo + '</div>' +
+          '<div class="sim-vivo-nota">Cálculo de Auditavisión con cifras oficiales: ' + mdpTx(v.anual) + ' al año.' + (propia ? ' <span class="sim-vivo-tag">incluye estimación propia</span>' : '') + '</div>' +
+        '</div>' +
+        '<div style="text-align:right;">' +
+          '<div class="sim-live-ticker-sub"><span>⏱️ Acumulado en vivo:</span></div>' +
+          '<div class="sim-loss-amount sim-live-card-loss" id="live-tick-' + o.id + '" data-rate="' + porSeg + '" style="color:#ffd166; font-size:18px;">+$0.00</div>' +
+          '<div style="font-size:10px; color:var(--text-dim); font-family:var(--font-mono);">(+ $' + porSeg.toFixed(2) + '/seg)</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="sim-ver-ctx">' + ctxBoton('Cómo se calcula lo que nos cuesta: ' + o.nombre, '<div class="sim-ver">' + detalle + '</div>', '🧮') + '</div>';
+  }
+
+  /* Contador conjunto de la vista en vivo: suma el costo_vivo de las obras
+     del filtro que sí corren y dice cuántas se quedan fuera y por qué. */
+  function simVivoTotal(obras) {
+    if (!esAuditor() || !DB.costo_vivo_megaobras) return '';
+    const corren = obras.filter(o => o.vivo && o.vivo.comps.length);
+    const paradas = obras.filter(o => o.vivo && !o.vivo.comps.length);
+    const anual = Math.round(corren.reduce((a, o) => a + o.vivo.anual, 0) * 10) / 10;
+    const porSeg = anual * 1e6 / 31536000;
+    const cvt = DB.costo_vivo_megaobras.tasa;
+    const tabla = '<table class="sim-t"><thead><tr><th>Obra</th><th>Al año</th><th>Por segundo</th></tr></thead><tbody>' +
+      corren.slice().sort((a, b) => b.vivo.anual - a.vivo.anual).map(o =>
+        '<tr><td class="sim-t-nom">' + escHtml(o.nombre) + '</td><td class="sim-t-num">' + simMdp(o.vivo.anual) + '</td><td class="sim-t-num">$' +
+          (o.vivo.anual * 1e6 / 31536000).toLocaleString('es-MX', { maximumFractionDigits: 0 }) + '</td></tr>').join('') +
+      '</tbody></table>' +
+      '<p class="sim-ver-p">Método: cada obra suma lo que el PEF 2026 le asigna y, sobre el dinero que la ASF o Hacienda documentan como perdido (sobrecosto, cancelación o gasto sin obra), los intereses a la tasa implícita de la deuda pública: ' + cvt.pct + ' % ' + chipEstado('derivado') + '. ' + escHtml(cvt.como) + '</p>' +
+      '<p class="sim-ver-p">Los intereses son <strong>estimación propia</strong>: suponen que ese dinero se financió con deuda al costo promedio. El rescate carretero reparte en partes iguales el pago que la ASF estimó para 2018-2033. Ninguna cifra es una «pérdida» que el gobierno publique con ese nombre.</p>' +
+      (paradas.length ? '<p class="sim-ver-p"><strong>No corren (' + paradas.length + '):</strong> ' + paradas.map(o => escHtml(o.nombre)).join(', ') + '. Sin información pública suficiente; cada ficha dice qué lo impide.</p>' : '');
+    return '<div class="sim-vivo-total">' +
+        '<div class="sim-vivo-total-lbl"><span class="pulsing-dot"></span> Lo que ' + (corren.length === 1 ? 'esta obra nos cuesta' : 'estas ' + corren.length + ' obras nos cuestan') + ' mientras miras ' + chipEstado('derivado') + '</div>' +
+        '<div class="sim-vivo-total-val sim-live-card-loss" data-rate="' + porSeg + '">+$0.00</div>' +
+        '<div class="sim-vivo-nota">' + simMdp(anual) + ' al año · $' + porSeg.toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' por segundo' +
+          (paradas.length ? ' · ' + paradas.length + ' sin datos públicos suficientes no entran' : '') + '</div>' +
+        '<div class="sim-ver-ctx">' + ctxBoton('Cómo se calcula y qué no entra', '<div class="sim-ver">' + tabla + '</div>', '🧮') + '</div>' +
+      '</div>';
+  }
+
   function renderSimuladorObrasGrid() {
     const grid = document.getElementById('simuladorObrasGrid');
     const sim = DB.simulador_megaobras;
@@ -22004,6 +22102,7 @@
             </span>
           </div>
 
+          ${simVivoCaja(o, pInfo) || `
           <!-- Caja de Telemetría: Pérdida en el Periodo & Reloj en Vivo -->
           <div class="sim-loss-box">
             <div>
@@ -22023,7 +22122,7 @@
                 ${o.perdida_pendiente ? 'sin ritmo que medir' : (o.fuente_operacion && !o.perdida_anual_mdp ? 'sin pérdida de operación en 2024' : '(+ $' + o.perdida_segundo.toFixed(2) + '/seg)')}
               </div>
             </div>
-          </div>
+          </div>`}
 
           <!-- Comparativa de Inversión y Sobrecosto -->
           <div class="sim-inversion-row">

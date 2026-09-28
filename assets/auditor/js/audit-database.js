@@ -24430,6 +24430,217 @@ window.AUDIT_DB = {
         "presidencia0910"
       ]
     }
+  },
+  "costo_vivo_megaobras": {
+    "nota": "Interpretación de Auditavisión para la «Simulación en vivo» del módulo 2. La escribe herramientas/integrar_costo_vivo_megaobras.py; el motor calcula los intereses con la tasa.",
+    "tasa": {
+      "pct": 7.84,
+      "costo_financiero_mdp": 1572073.3,
+      "shrfsp_mdp": 20062321.6,
+      "estado": "derivado",
+      "como": "Costo financiero de la deuda en el PEF 2026 ($1,572,073.3 mdp, Anexo 8) entre el saldo histórico de los requerimientos financieros del sector público estimado para el cierre de 2026 ($20,062,321.6 mdp, Criterios 2027, p. 67)."
+    },
+    "fuentes": {
+      "pef26csv": {
+        "doc": "SHCP, Presupuesto de Egresos de la Federación 2026, datos abiertos (PEF_2026.csv), columna MONTO_PEF_2026",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/PEF_2026.csv",
+        "sha256": "6dec5f3ad52126c3257a74e7e177eada0c591ed8109d861becf767e959c86c03"
+      },
+      "ipab4t25": {
+        "doc": "SHCP, Informes sobre la situación económica, las finanzas públicas y la deuda pública, cuarto trimestre de 2025, anexo de deuda pública, p. C24 (pasivos del IPAB)",
+        "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
+        "sha256": "51a632d59c855ae50c994eafdc40a645fa91237c36faad27108fefd07e39e732"
+      },
+      "birmex24": {
+        "doc": "Laboratorios de Biológicos y Reactivos de México, S.A. de C.V., dictamen del auditor externo sobre los estados financieros 2024 (denegación de opinión), Cuenta Pública 2024, tomo VII",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf",
+        "sha256": "bb3ec2a2fd5c9fdc385e0b4ffe173dba33d069b0e265922c6d77df68cb0dc617"
+      },
+      "cgpe27": {
+        "doc": "SHCP, Criterios Generales de Política Económica para 2027, p. 67, cuadro «Estimación de las finanzas públicas, 2026-2027»",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+        "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+      }
+    },
+    "limitaciones": {
+      "no_localizado": "No localizado: nuestra búsqueda no encontró el documento.",
+      "sin_desglose": "Sin desglose por proyecto: el documento trae datos de toda la empresa o en otra unidad.",
+      "acceso_fallido": "Acceso fallido: el enlace oficial no permitió descargarlo.",
+      "dictamen": "Salvedad documentada: el propio dictamen oficial señala que la información no es suficiente."
+    },
+    "obras": {
+      "tren-maya": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Presupuesto 2026 de Tren Maya, S.A. de C.V.",
+            "mdp": 30744.1,
+            "estado": "oficial",
+            "fuente": "pef26csv",
+            "como": "Suma de sus renglones en el PEF 2026: $30,000.0 mdp de inversión en vía (K019) y $744.1 mdp de operación (E015)"
+          },
+          {
+            "tipo": "intereses",
+            "et": "Lo pagado por encima de lo autorizado en cartera",
+            "base_mdp": 330008.6,
+            "estado": "derivado",
+            "fuente": "cp",
+            "como": "Ejercido 2020-2025 según la Cuenta Pública ($497,350.2 mdp) menos el monto autorizado en cartera al 4T 2021 ($167,341.6 mdp)",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
+          }
+        ]
+      },
+      "tren-toluca": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Presupuesto 2026 del Tren Interurbano (clave 13093110008)",
+            "mdp": 7408.0,
+            "estado": "oficial",
+            "fuente": "pef26csv",
+            "como": "Renglones del PEF 2026 con la clave de cartera del proyecto, a cargo de la Agencia Reguladora del Transporte Ferroviario"
+          },
+          {
+            "tipo": "intereses",
+            "et": "Lo que su costo reconocido creció desde 2019",
+            "base_mdp": 77347.5,
+            "estado": "derivado",
+            "fuente": "opa",
+            "como": "Costo total que la cartera de Hacienda reconoce al 2T 2026 ($153,694.3 mdp) menos el que registraba al 4T 2019 ($76,346.8 mdp). Es costo reconocido, no todo pagado: la Cuenta Pública registra $65,506.4 mdp pagados con recursos fiscales de 2014 a 2025. El Libro Blanco de la SCT (2018, p. 39) registra que en diciembre de 2013 el proyecto entró a cartera con $34,114.9 mdp",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
+          }
+        ]
+      },
+      "aifa-texcoco": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Presupuesto 2026 del AIFA, S.A. de C.V.",
+            "mdp": 744.7,
+            "estado": "oficial",
+            "fuente": "pef26csv",
+            "como": "Sus renglones de operación en el PEF 2026 (E014)"
+          },
+          {
+            "tipo": "intereses",
+            "et": "Costo de cancelar el aeropuerto de Texcoco",
+            "base_mdp": 113327.7,
+            "estado": "oficial",
+            "fuente": "asfnaicm",
+            "como": "La ASF fijó en $113,327.7 mdp el costo de cancelar el NAIM al 31-12-2019 (marzo de 2021)",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
+          }
+        ]
+      },
+      "fobaproa": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Ramo 34 en el PEF 2026 (apoyo a ahorradores y deudores de la banca)",
+            "mdp": 35553.4,
+            "estado": "oficial",
+            "fuente": "pef26csv",
+            "como": "Todo el Ramo 34 del PEF 2026. No se le suman intereses aparte: el rescate ya es deuda, y lo que el presupuesto paga por ella es este ramo"
+          }
+        ],
+        "contexto": "Al 31-12-2025 los pasivos netos del IPAB sumaban $1,023,571 mdp, cifra preliminar de Hacienda (anexo de deuda pública del 4T 2025, p. C24). Es lo que sigue debiendo el rescate.",
+        "contexto_fuente": "ipab4t25"
+      },
+      "estela-luz": {
+        "componentes": [
+          {
+            "tipo": "intereses",
+            "et": "Lo que costó de más sobre el contrato original",
+            "base_mdp": 911.4,
+            "estado": "derivado",
+            "fuente": "asf_estela",
+            "como": "Costo final según la ASF ($1,304.9 mdp) menos el contrato de construcción de 2009 ($393.5 mdp)",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
+          }
+        ]
+      },
+      "refineria-tula": {
+        "componentes": [
+          {
+            "tipo": "intereses",
+            "et": "Lo gastado en una refinería que no se construyó",
+            "base_mdp": 1127.6,
+            "estado": "derivado",
+            "fuente": "asf_tula14",
+            "como": "Ejercido en estudios ($659.3 mdp) y en el terreno ($468.3 mdp), según la ASF, antes de detener el proyecto",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
+          }
+        ]
+      },
+      "farac-carretero": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Pago anual de la deuda del rescate, repartido de 2018 a 2033",
+            "mdp": 21998.1,
+            "estado": "derivado",
+            "fuente": "asf_farac17",
+            "estimacion_propia": true,
+            "como": "La ASF estimó en $351,969.6 mdp el capital y los intereses por pagar de 2018 a 2033 (CP 2017, p. 6), entre los 16 años de ese periodo",
+            "supuesto": "Supuesto: el pago se reparte parejo en los 16 años. La ASF no publica el calendario año por año; en 2017 se pagaron $10,368.6 mdp de intereses."
+          }
+        ]
+      },
+      "dos-bocas": {
+        "falta": [
+          {
+            "limitacion": "sin_desglose",
+            "texto": "Pemex publica estados financieros de toda la empresa; la Cuenta Pública 2025 solo trae el aviso de que Pemex Transformación Industrial se extinguió y se integró a Pemex el 19-03-2025. En ninguno se separa la refinería Olmeca."
+          },
+          {
+            "limitacion": "no_localizado",
+            "texto": "No encontramos en los datos abiertos del PEF 2026 un renglón ni una clave de cartera a su nombre. La ASF revisó en 2024 un universo de $84,694.9 mdp que mezcla ingresos y egresos del proyecto, y no sirve como costo."
+          }
+        ]
+      },
+      "megafarmacia": {
+        "falta": [
+          {
+            "limitacion": "dictamen",
+            "texto": "El auditor externo de Birmex se abstuvo de opinar sobre sus estados financieros de 2024: la entidad no entregó la balanza de comprobación definitiva ni los auxiliares contables. Sobre el CEFEDIS (la Megafarmacia) escribió que no fue invitado al inventario físico de noviembre de 2024 y que desconoce «como controla la entidad dicho proyecto, en sus registros contables» (dictamen, párrafos III a V, pp. 1 y 2).",
+            "fuente": "birmex24"
+          },
+          {
+            "limitacion": "sin_desglose",
+            "texto": "Los estados financieros de Birmex son de toda la empresa: no separan el gasto del almacén, su inversión inicial ni las recetas surtidas."
+          }
+        ]
+      },
+      "agronitrogenados": {
+        "falta": [
+          {
+            "limitacion": "sin_desglose",
+            "texto": "La ASF documenta la compra en dólares (475 millones autorizados, 760 pagados) y no da su equivalente en pesos; Pemex no publica por separado los resultados de la planta."
+          }
+        ]
+      },
+      "enciclomedia": {
+        "falta": [
+          {
+            "limitacion": "no_localizado",
+            "texto": "Hacienda autorizó $21,398.3 mdp para 2005-2010, pero no encontramos un documento oficial que sume lo que de verdad se pagó. Sin ese total no hay sobrecosto que medir."
+          }
+        ]
+      },
+      "bunker-garcia-luna": {
+        "falta": [
+          {
+            "limitacion": "no_localizado",
+            "texto": "No encontramos informe de la ASF ni registro de cartera que diga cuánto costó el edificio ni qué uso tiene hoy."
+          }
+        ]
+      }
+    }
   }
 };
 
