@@ -3708,6 +3708,29 @@ Con los originales de `investigaciones/entregas/` (huellas comprobadas por
 - Promedio nacional de la portada: $2,810,800 mdp ÷ 134,407,258 = $20,913
   (antes $20,914, dividido entre 134.4 redondeado).
 
+### Hecho (Agronitrogenados corre en la simulación en vivo, sello 20260928j)
+
+Con la auditoría 492-DE de la ASF a Pemex Fertilizantes (CP 2017, en
+`investigaciones/entregas/`, sha d1f61d…), que da montos en pesos:
+
+- Sin flujo anual: el PEF 2026 no tiene renglón de la planta (el programa
+  «Fertilizantes para el Bienestar» es de Agricultura, no de ProAgro).
+- Corre con los intereses de lo que Pemex **reconoció como perdido**
+  (estimación propia, tasa implícita 7.84 %): deterioro por baja de las
+  tres plantas ociosas de ProAgro, $4,206.0 mdp (pp. 37 y 40; la p. 44 dice
+  $4,206.7) → $329.8 mdp al año; deterioro del crédito mercantil de
+  Fertinal, $4,007.0 mdp (p. 37) → $314.1 mdp al año. Total **$643.9 mdp
+  al año, $20.42 por segundo**.
+- En el panel, como contexto y sin sumarse: compra de $5,427.2 mdp (2013),
+  inversión aprobada de $14,998.9 mdp, $8,271.1 mdp erogados en
+  rehabilitar la urea hasta 2017, deuda con Nafin de $7,696.8 mdp.
+  Límite «No localizado»: resultados de ProAgro y Fertinal después de 2017.
+- Ahora corren **10 de 12**: **$181.1 mil millones al año, $5,744 por
+  segundo**. No corren Enciclomedia y el Búnker.
+- Sin tocar todavía: los campos de inversión de la ficha ($7,500 y $33,500
+  mdp, `pendiente`) siguen sin fuente; la 492-DE los resolvería solo para
+  Agronitrogenados, no para Fertinal.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3724,7 +3747,7 @@ auditor, por tipo:
    evasión del SAT (art. 30 de la LIF 2027, principios de 2028) para el
    huachicol fiscal.
 3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
-4. **Datos que faltan y no se estiman:** costo en vivo de Agronitrogenados, Enciclomedia y Búnker, y el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
+4. **Datos que faltan y no se estiman:** costo en vivo de Enciclomedia y Búnker, y el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
    en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
    FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
    el corte de abril), dietas locales, CDMX en EFIPEM, cifra oficial del

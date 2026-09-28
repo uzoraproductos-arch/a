@@ -152,8 +152,14 @@ def construir(p, sm):
             'falta': [
             falta('dictamen', 'El auditor externo de Birmex se abstuvo de opinar sobre sus estados financieros de 2024: la entidad no entregó la balanza de comprobación definitiva ni los auxiliares contables. Sobre el CEFEDIS (la Megafarmacia) escribió que no fue invitado al inventario físico de noviembre de 2024 y que desconoce «como controla la entidad dicho proyecto, en sus registros contables» (dictamen, párrafos III a V, pp. 1 y 2).', 'birmex24'),
             falta('no_localizado', 'El proyecto no aparece en los cortes de seguimiento de la cartera del 4T 2024 ni del 2T 2026, y las recetas surtidas no forman parte de ningún estado financiero publicado.')]},
-        'agronitrogenados': {'falta': [
-            falta('sin_desglose', 'La ASF documenta la compra en dólares (475 millones autorizados, 760 pagados) y no da su equivalente en pesos; Pemex no publica por separado los resultados de la planta.')]},
+        'agronitrogenados': {'componentes': [
+            base('Lo que Pemex dio por perdido en tres plantas de Agronitrogenados que nunca rehabilitó', 4206.0, 'oficial', 'asf_fert17',
+                 'Deterioro por baja de activos ociosos de ProAgro (antes Agronitrogenados) en los estados financieros 2017 de Pemex Fertilizantes: $4,206.0 mdp según la ASF (CP 2017, auditoría 492-DE, pp. 37 y 40; en la p. 44 aparece como $4,206.7 mdp). Son las plantas de nitrato de amonio, ácido nítrico y UAN-32, que al comprarse en 2013 llevaban 14 años sin operar'),
+            base('Lo que Pemex dio por perdido del precio pagado por Fertinal', 4007.0, 'oficial', 'asf_fert17',
+                 'Deterioro del crédito mercantil de Fertinal: $4,007.0 mdp (ASF, CP 2017, p. 37). Es la parte de lo pagado en 2016 por encima del valor de sus activos que Pemex reconoció como perdida')],
+            'contexto': 'La misma auditoría documenta en pesos: la compra de los activos de Agronitrogenados por $5,427.2 mdp (20-12-2013, p. 4); una inversión total aprobada de $14,998.9 mdp entre compra y rehabilitación (agosto de 2015, p. 5); $8,271.1 mdp erogados de septiembre de 2014 a diciembre de 2017 en rehabilitar las dos plantas de urea, que a fines de 2017 seguían sin producir (pp. 42-44), y una deuda de $7,696.8 mdp con Nafin que Pemex recibió con la empresa (p. 5). Entre 2015 y 2017 el patrimonio de Pemex Fertilizantes perdió $21,174.0 mdp (p. 37). Esas cifras no se suman aquí: solo cuenta lo que Pemex ya reconoció como perdido.',
+            'contexto_fuente': 'asf_fert17',
+            'falta': [falta('no_localizado', 'No localizamos resultados separados de ProAgro ni de Fertinal posteriores a 2017: no sabemos si las plantas de urea producen hoy ni cuánto cuesta mantenerlas. Por eso no hay flujo anual, solo el costo de lo ya perdido.')]},
         'enciclomedia': {'falta': [
             falta('no_localizado', 'Hacienda autorizó $21,398.3 mdp para 2005-2010, pero no encontramos un documento oficial que sume lo que de verdad se pagó. Sin ese total no hay sobrecosto que medir.')]},
         'bunker-garcia-luna': {'falta': [
@@ -188,6 +194,11 @@ def construir(p, sm):
                 'doc': 'Laboratorios de Biológicos y Reactivos de México, S.A. de C.V., dictamen del auditor externo sobre los estados financieros 2024 (denegación de opinión), Cuenta Pública 2024, tomo VII',
                 'url': 'https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf',
                 'sha256': 'bb3ec2a2fd5c9fdc385e0b4ffe173dba33d069b0e265922c6d77df68cb0dc617',
+            },
+            'asf_fert17': {
+                'doc': 'ASF, Informe Individual de la Cuenta Pública 2017, auditoría de desempeño 492-DE «Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados», Pemex Fertilizantes',
+                'url': 'https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf',
+                'sha256': 'd1f61d814ce1e5dd1f2c4d2e291cddf7ba0b651e75e252a8fe163d51ce1527f5',
             },
             'cgpe27': {
                 'doc': 'SHCP, Criterios Generales de Política Económica para 2027, p. 67, cuadro «Estimación de las finanzas públicas, 2026-2027»',
