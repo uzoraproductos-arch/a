@@ -15390,9 +15390,9 @@ window.AUDIT_DB = {
       "icono": "💊",
       "estatus": "Subsidio fiscal 100% · Baja operatividad",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 1400,
-      "inversion_real_mdp": 3500,
-      "sobrecosto_pct": 150.0,
+      "inversion_presupuestada_mdp": 3614.6,
+      "inversion_real_mdp": 3948.6,
+      "sobrecosto_pct": 9.2,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 985,
       "perdida_anual_mdp": 985,
@@ -15423,13 +15423,13 @@ window.AUDIT_DB = {
           "icono": "🛡️"
         }
       ],
-      "hallazgo_asf": "Solicitudes de información vía PNT y auditorías revelaron que durante sus primeros meses el almacén mantuvo desiertas el 85% de sus posiciones y surtió menos de 5 recetas diarias efectivas.",
+      "hallazgo_asf": "El Centro Federal de Almacenamiento y Distribución de Insumos para la Salud (CEFEDIS), que contiene la Megafarmacia, entró a la cartera de Hacienda con la clave 2312NEF0001 (registro el 30-10-2023, autorización el 6-11-2023). Al 4T 2023 registraba $3,614.6 mdp de inversión y $613.0 mdp ejercidos ese año; al 4T 2025, $3,948.6 mdp, 78 % de avance físico y estatus «en proceso de modificación». No aparece en los cortes de seguimiento del 4T 2024 ni del 2T 2026.",
       "unidad_metrica": "Receta médica surtida",
       "costo_unitario_real": "Costo operativo de $9,120 pesos por cada receta médica efectivamente surtida y entregada al paciente.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "oficial",
+        "sobrecosto_pct": "derivado"
       }
     },
     {
@@ -15926,13 +15926,13 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3917257.7,
-    "inversion_presupuestada_total_mdp": 1126294.2,
+    "inversion_total_mdp": 3917706.3,
+    "inversion_presupuestada_total_mdp": 1128508.8,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 12,
-    "sobrecosto_conjunto_pct": 247.8,
+    "sobrecosto_conjunto_pct": 247.2,
     "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   },
   "operacion_oficial": {
@@ -16098,6 +16098,11 @@ window.AUDIT_DB = {
         "doc": "ASF, Cuenta Pública 2017, auditoría 96, Banobras: Fideicomiso Fondo Nacional de Infraestructura (deuda del rescate carretero)",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf",
         "sha256": "aef6346d39a48e59bd0666415965d83bf7da0cda69d84eba69de357c2d3581f8"
+      },
+      "birmex_notas24": {
+        "doc": "Birmex, notas a los estados financieros al 30 de septiembre de 2024, nota 14 «Negocio en marcha. Megafarmacia», pp. 42-45",
+        "url": "https://datos.birmex.gob.mx/wp-content/uploads/2024/12/notas_estados_financieros.pdf",
+        "sha256": "fb3f36af96e0804a29b2c73a9207a58d21ff9d78270222375485c3da105f7e99"
       }
     },
     "obras": {
@@ -16805,6 +16810,56 @@ window.AUDIT_DB = {
         ],
         "fuentes": [
           "asf_farac17"
+        ]
+      },
+      "megafarmacia": {
+        "clave": "2312NEF0001",
+        "campos": {
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "oficial",
+          "sobrecosto_pct": "derivado"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Monto total de inversión del CEFEDIS en la cartera de Hacienda, corte 4T 2023, el primero tras su autorización: $3,614.6 mdp.",
+          "inversion_real_mdp": "Monto total de inversión registrado en el corte 4T 2025: $3,948.6 mdp. Es el costo que Hacienda reconoce, no lo pagado: el único ejercicio anual publicado en la cartera es el de 2023, $613.0 mdp.",
+          "sobrecosto_pct": "Cuánto creció el monto de inversión reconocido entre los cortes 4T 2023 y 4T 2025 (cálculo de Auditavisión)."
+        },
+        "hallazgo": "El Centro Federal de Almacenamiento y Distribución de Insumos para la Salud (CEFEDIS), que contiene la Megafarmacia, entró a la cartera de Hacienda con la clave 2312NEF0001 (registro el 30-10-2023, autorización el 6-11-2023). Al 4T 2023 registraba $3,614.6 mdp de inversión y $613.0 mdp ejercidos ese año; al 4T 2025, $3,948.6 mdp, 78 % de avance físico y estatus «en proceso de modificación». No aparece en los cortes de seguimiento del 4T 2024 ni del 2T 2026.",
+        "asfHist": [
+          {
+            "dato": "Monto total de inversión, 4T 2023",
+            "valor": "$3,614.6 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2023"
+          },
+          {
+            "dato": "Ejercido en 2023",
+            "valor": "$613.0 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2023"
+          },
+          {
+            "dato": "Monto total de inversión, 4T 2025",
+            "valor": "$3,948.6 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2025"
+          },
+          {
+            "dato": "Operación y mantenimiento previstos en 32 años",
+            "valor": "$10,806.4 mdp",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2025"
+          },
+          {
+            "dato": "Avance físico al 4T 2025",
+            "valor": "78 %",
+            "estado": "oficial",
+            "pagina": "cartera, corte 4T 2025"
+          }
+        ],
+        "fuentes": [
+          "opa",
+          "birmex_notas24"
         ]
       }
     }
@@ -24451,6 +24506,11 @@ window.AUDIT_DB = {
         "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
         "sha256": "51a632d59c855ae50c994eafdc40a645fa91237c36faad27108fefd07e39e732"
       },
+      "tri24": {
+        "doc": "Pemex Transformación Industrial, estados financieros separados dictaminados al 31 de diciembre de 2024, Cuenta Pública 2024, tomo VIII (notas 1 y 12)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf",
+        "sha256": "b326741b89e7ad809fe17df118e400a20e70d1e79f49ea7b9350d1218a38a90d"
+      },
       "birmex24": {
         "doc": "Laboratorios de Biológicos y Reactivos de México, S.A. de C.V., dictamen del auditor externo sobre los estados financieros 2024 (denegación de opinión), Cuenta Pública 2024, tomo VII",
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.05.DAR.pdf",
@@ -24592,18 +24652,50 @@ window.AUDIT_DB = {
         ]
       },
       "dos-bocas": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Lo que Pemex le aportó a la empresa de la refinería en 2024 (último año documentado)",
+            "mdp": 42696.7,
+            "estado": "oficial",
+            "fuente": "tri24",
+            "estimacion_propia": true,
+            "como": "Aportaciones de Pemex Transformación Industrial a PTI Infraestructura de Desarrollo, S.A. de C.V., la filial que construye la refinería Olmeca: $42,696,652 miles de pesos en 2024 y $34,032,790 miles en 2023 (estados financieros de Pemex TRI 2024, nota 12, p. 47)",
+            "supuesto": "Supuesto: 2026 sigue el ritmo de 2024. Desde el 19-03-2025 Pemex TRI se extinguió y Pemex ya no publica por separado lo que le pone a la refinería."
+          }
+        ],
+        "contexto": "La misma nota (p. 49) da los resultados de PTI Infraestructura en 2024: ventas por $7,116.8 mdp contra un costo de ventas de $7,018.9 mdp y una pérdida neta de $1,473.7 mdp (en 2023 tuvo utilidad de $3,949.5 mdp). Su capital al cierre de 2024, lo que Pemex ha metido en ella, sumaba $363,619.9 mdp. Al 31-12-2024 la refinería estaba «en etapa de pruebas y estabilización» (p. 11).",
+        "contexto_fuente": "tri24",
         "falta": [
           {
             "limitacion": "sin_desglose",
-            "texto": "Pemex publica estados financieros de toda la empresa; la Cuenta Pública 2025 solo trae el aviso de que Pemex Transformación Industrial se extinguió y se integró a Pemex el 19-03-2025. En ninguno se separa la refinería Olmeca."
-          },
-          {
-            "limitacion": "no_localizado",
-            "texto": "No encontramos en los datos abiertos del PEF 2026 un renglón ni una clave de cartera a su nombre. La ASF revisó en 2024 un universo de $84,694.9 mdp que mezcla ingresos y egresos del proyecto, y no sirve como costo."
+            "texto": "Los estados de PTI Infraestructura son de toda la filial y vienen condensados: no separan depreciación, intereses ni mantenimiento de la refinería, y no hay estados separados de 2025."
           }
         ]
       },
       "megafarmacia": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Operación y mantenimiento que Birmex previó al año",
+            "mdp": 337.7,
+            "estado": "derivado",
+            "fuente": "opa",
+            "estimacion_propia": true,
+            "como": "El registro del CEFEDIS (clave 2312NEF0001) en la cartera de Hacienda, corte 4T 2025, prevé $10,806.4 mdp de operación y mantenimiento en un horizonte de evaluación de 32 años",
+            "supuesto": "Supuesto: el gasto previsto se reparte parejo en los 32 años. Es lo que Birmex planeó, no lo que ha gastado: eso no se publica."
+          },
+          {
+            "tipo": "intereses",
+            "et": "Lo que creció su monto de inversión reconocido",
+            "base_mdp": 334.0,
+            "estado": "derivado",
+            "fuente": "opa",
+            "como": "Monto total de inversión en cartera al 4T 2025 ($3,948.6 mdp) menos el del 4T 2023 ($3,614.6 mdp)",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
+          }
+        ],
         "falta": [
           {
             "limitacion": "dictamen",
@@ -24611,8 +24703,8 @@ window.AUDIT_DB = {
             "fuente": "birmex24"
           },
           {
-            "limitacion": "sin_desglose",
-            "texto": "Los estados financieros de Birmex son de toda la empresa: no separan el gasto del almacén, su inversión inicial ni las recetas surtidas."
+            "limitacion": "no_localizado",
+            "texto": "El proyecto no aparece en los cortes de seguimiento de la cartera del 4T 2024 ni del 2T 2026, y las recetas surtidas no forman parte de ningún estado financiero publicado."
           }
         ]
       },

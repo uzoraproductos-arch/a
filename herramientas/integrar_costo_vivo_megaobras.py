@@ -134,12 +134,24 @@ def construir(p, sm):
              'estado': 'derivado', 'fuente': 'asf_farac17', 'estimacion_propia': True,
              'como': 'La ASF estimó en $351,969.6 mdp el capital y los intereses por pagar de 2018 a 2033 (CP 2017, p. 6), entre los 16 años de ese periodo',
              'supuesto': 'Supuesto: el pago se reparte parejo en los 16 años. La ASF no publica el calendario año por año; en 2017 se pagaron $10,368.6 mdp de intereses.'}]},
-        'dos-bocas': {'falta': [
-            falta('sin_desglose', 'Pemex publica estados financieros de toda la empresa; la Cuenta Pública 2025 solo trae el aviso de que Pemex Transformación Industrial se extinguió y se integró a Pemex el 19-03-2025. En ninguno se separa la refinería Olmeca.'),
-            falta('no_localizado', 'No encontramos en los datos abiertos del PEF 2026 un renglón ni una clave de cartera a su nombre. La ASF revisó en 2024 un universo de $84,694.9 mdp que mezcla ingresos y egresos del proyecto, y no sirve como costo.')]},
-        'megafarmacia': {'falta': [
+        'dos-bocas': {'componentes': [
+            {'tipo': 'flujo', 'et': 'Lo que Pemex le aportó a la empresa de la refinería en 2024 (último año documentado)', 'mdp': 42696.7,
+             'estado': 'oficial', 'fuente': 'tri24', 'estimacion_propia': True,
+             'como': 'Aportaciones de Pemex Transformación Industrial a PTI Infraestructura de Desarrollo, S.A. de C.V., la filial que construye la refinería Olmeca: $42,696,652 miles de pesos en 2024 y $34,032,790 miles en 2023 (estados financieros de Pemex TRI 2024, nota 12, p. 47)',
+             'supuesto': 'Supuesto: 2026 sigue el ritmo de 2024. Desde el 19-03-2025 Pemex TRI se extinguió y Pemex ya no publica por separado lo que le pone a la refinería.'}],
+            'contexto': 'La misma nota (p. 49) da los resultados de PTI Infraestructura en 2024: ventas por $7,116.8 mdp contra un costo de ventas de $7,018.9 mdp y una pérdida neta de $1,473.7 mdp (en 2023 tuvo utilidad de $3,949.5 mdp). Su capital al cierre de 2024, lo que Pemex ha metido en ella, sumaba $363,619.9 mdp. Al 31-12-2024 la refinería estaba «en etapa de pruebas y estabilización» (p. 11).',
+            'contexto_fuente': 'tri24',
+            'falta': [falta('sin_desglose', 'Los estados de PTI Infraestructura son de toda la filial y vienen condensados: no separan depreciación, intereses ni mantenimiento de la refinería, y no hay estados separados de 2025.')]},
+        'megafarmacia': {'componentes': [
+            {'tipo': 'flujo', 'et': 'Operación y mantenimiento que Birmex previó al año', 'mdp': round(10806.4 / 32, 1),
+             'estado': 'derivado', 'fuente': 'opa', 'estimacion_propia': True,
+             'como': 'El registro del CEFEDIS (clave 2312NEF0001) en la cartera de Hacienda, corte 4T 2025, prevé $10,806.4 mdp de operación y mantenimiento en un horizonte de evaluación de 32 años',
+             'supuesto': 'Supuesto: el gasto previsto se reparte parejo en los 32 años. Es lo que Birmex planeó, no lo que ha gastado: eso no se publica.'},
+            base('Lo que creció su monto de inversión reconocido', round(3948.6 - 3614.6, 1), 'derivado', 'opa',
+                 'Monto total de inversión en cartera al 4T 2025 ($3,948.6 mdp) menos el del 4T 2023 ($3,614.6 mdp)')],
+            'falta': [
             falta('dictamen', 'El auditor externo de Birmex se abstuvo de opinar sobre sus estados financieros de 2024: la entidad no entregó la balanza de comprobación definitiva ni los auxiliares contables. Sobre el CEFEDIS (la Megafarmacia) escribió que no fue invitado al inventario físico de noviembre de 2024 y que desconoce «como controla la entidad dicho proyecto, en sus registros contables» (dictamen, párrafos III a V, pp. 1 y 2).', 'birmex24'),
-            falta('sin_desglose', 'Los estados financieros de Birmex son de toda la empresa: no separan el gasto del almacén, su inversión inicial ni las recetas surtidas.')]},
+            falta('no_localizado', 'El proyecto no aparece en los cortes de seguimiento de la cartera del 4T 2024 ni del 2T 2026, y las recetas surtidas no forman parte de ningún estado financiero publicado.')]},
         'agronitrogenados': {'falta': [
             falta('sin_desglose', 'La ASF documenta la compra en dólares (475 millones autorizados, 760 pagados) y no da su equivalente en pesos; Pemex no publica por separado los resultados de la planta.')]},
         'enciclomedia': {'falta': [
@@ -166,6 +178,11 @@ def construir(p, sm):
                 'doc': 'SHCP, Informes sobre la situación económica, las finanzas públicas y la deuda pública, cuarto trimestre de 2025, anexo de deuda pública, p. C24 (pasivos del IPAB)',
                 'url': 'https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf',
                 'sha256': '51a632d59c855ae50c994eafdc40a645fa91237c36faad27108fefd07e39e732',
+            },
+            'tri24': {
+                'doc': 'Pemex Transformación Industrial, estados financieros separados dictaminados al 31 de diciembre de 2024, Cuenta Pública 2024, tomo VIII (notas 1 y 12)',
+                'url': 'https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf',
+                'sha256': 'b326741b89e7ad809fe17df118e400a20e70d1e79f49ea7b9350d1218a38a90d',
             },
             'birmex24': {
                 'doc': 'Laboratorios de Biológicos y Reactivos de México, S.A. de C.V., dictamen del auditor externo sobre los estados financieros 2024 (denegación de opinión), Cuenta Pública 2024, tomo VII',

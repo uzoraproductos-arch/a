@@ -3641,6 +3641,33 @@ corrían 2 de 12 fichas; ahora corren 7 y las otras 5 dicen qué lo impide.
 - Verificado a 1366 y 390 px sin desborde; 14 paneles, barrido de clics y
   trivia sin errores; Enciclopedia intacta.
 
+### Hecho (Dos Bocas y Megafarmacia entran a la simulación en vivo, sello 20260928g)
+
+Del reporte de fuentes que Antigravity le entregó al autor se cotejó lo
+que tiene documento; lo demás quedó anotado en
+`investigaciones/costo-vivo/README.md` y no se usa.
+
+- **Dos Bocas** corre con **$42,696.7 mdp al año**: lo que Pemex TRI le
+  aportó en 2024 a PTI Infraestructura de Desarrollo, la filial de la
+  refinería (estados financieros de Pemex TRI 2024, nota 12, p. 47). Es
+  estimación propia (supone que 2026 sigue el ritmo de 2024, porque desde
+  el 19-03-2025 no hay estados separados). Contexto en el panel: pérdida
+  neta de la filial en 2024, $1,473.7 mdp; capital acumulado, $363,619.9
+  mdp.
+- **Megafarmacia (CEFEDIS, clave 2312NEF0001, de las notas de Birmex al
+  3T 2024)**: la cartera de Hacienda da $3,614.6 mdp de inversión al 4T 2023
+  y $3,948.6 al 4T 2025 (78 % de avance, «en proceso de modificación»);
+  sustituyen los $1,400 / $3,500 sin fuente del simulador (oficial; +9.2 %
+  derivado). Corre con $363.9 mdp al año: operación y mantenimiento
+  previstos ($10,806.4 mdp ÷ 32 años de horizonte, estimación propia) más
+  intereses del crecimiento. No aparece en los cortes 4T 2024 ni 2T 2026.
+- Ahora corren **9 de 12**: **$180.5 mil millones al año, $5,723 por
+  segundo**. No corren Agronitrogenados, Enciclomedia y Búnker.
+- Totales del simulador recalculados: inversión real $3,917,706.3 mdp,
+  presupuestada $1,128,508.8, sobrecosto del conjunto 247.2 %.
+- Scripts: `herramientas/integrar_cefedis.py` (comprueba huellas de cuatro
+  cortes de cartera) y `integrar_costo_vivo_megaobras.py`.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3658,7 +3685,7 @@ auditor, por tipo:
    huachicol fiscal.
 3. **Bloqueado por el entorno (comprobar a mano):** Segundo Informe de
    Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
-4. **Datos que faltan y no se estiman:** costo en vivo de Dos Bocas, Megafarmacia, Agronitrogenados, Enciclomedia y Búnker (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
+4. **Datos que faltan y no se estiman:** costo en vivo de Agronitrogenados, Enciclomedia y Búnker, y el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
    en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
    FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
    nacional (134.4 millones, sin cotejar en su cuadro) y por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del
