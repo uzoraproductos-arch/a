@@ -41,7 +41,9 @@ vigente confirma la reforma del DOF 19-11-2025.
 | A6 | Número de concejales por alcaldía | *Constitución Política de la Ciudad de México* (art. 53) y *Ley Orgánica de Alcaldías de la Ciudad de México* | https://www.congresocdmx.gob.mx → Marco legal. O la Consejería Jurídica: https://data.consejeria.cdmx.gob.mx | Glosario de concejalías, hoy sin cita |
 | A7 | Finanzas de las 16 alcaldías (el INEGI no las incluye en EFIPEM) | *Cuenta Pública de la Ciudad de México 2024*, tomo o apartado de alcaldías | https://www.finanzas.cdmx.gob.mx → Cuenta Pública → 2024 | Las alcaldías aparecen vacías en el padrón municipal |
 
-## B. Huachicol fiscal: pasar de «dicho en prensa» a «documento» (primero lo intento yo)
+## B. Huachicol fiscal: pasar de «dicho en prensa» a «documento»
+
+> 28-09-2026: intenté B1 y el portal de Comunicación Social de la Cámara no responde desde aquí (503). **B1 pasa a ti.**
 
 | # | Dato | Documento | Dónde |
 |---|---|---|---|
@@ -54,7 +56,7 @@ vigente confirma la reforma del DOF 19-11-2025.
 | # | Obra | Documento que lo resuelve | Dónde |
 |---|---|---|---|
 | C1 | Refinería Olmeca (Dos Bocas) | Estado de actividades de Pemex Transformación Industrial en la Cuenta Pública 2024 y 2025, e informes de la ASF (Cuentas Públicas 2019 a 2024) | https://www.cuentapublica.hacienda.gob.mx (tomo de empresas productivas del Estado) · https://www.asf.gob.mx |
-| C2 | Megafarmacia del Bienestar | Estado de actividades de Birmex (Cuenta Pública 2024 y 2025) y auditoría de la ASF | Mismos portales |
+| C2 | Megafarmacia del Bienestar | ~~Estado de actividades de Birmex~~ (hecho: CP 2024, −$717.3 mdp, pero es de toda la empresa). Falta un documento que separe la Megafarmacia: auditoría de la ASF a Birmex (CP 2023 o 2024) | https://www.asf.gob.mx |
 | C3 | FARAC (rescate carretero) | Estados financieros del Fonadin (Banobras) | https://www.gob.mx/banobras → Fonadin → información financiera |
 | C4 | Agronitrogenados y Fertinal | Informes de la ASF (Cuentas Públicas 2014 a 2019), Pemex Fertilizantes | https://www.asf.gob.mx |
 | C5 | Estela de Luz | Informe de la ASF, Cuenta Pública 2011 | https://www.asf.gob.mx |
