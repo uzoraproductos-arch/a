@@ -22051,10 +22051,17 @@ body.glos-drawer-bloqueo { overflow: hidden; }
    su concepto, no a su lugar. c1 intereses de la deuda, c2 presupuesto
    federal de Medio Ambiente y PINE, c3 dano ambiental y PIB, c4 gasto en
    proteccion ambiental. */
-:root { --am-c1: #e5534b; --am-c2: #23a197; --am-c3: #b8862a; --am-c4: #8f7ee6; --am-neg: #ff8a7a; }
-[data-theme="light"] { --am-c1: #c0392b; --am-c2: #0e8f86; --am-c3: #b07d12; --am-c4: #6a4fc8; --am-neg: #b3261e; }
+:root { --am-c1: #e5534b; --am-c2: #23a197; --am-c3: #b8862a; --am-c4: #8f7ee6; --am-c5: #29b6f6; --am-c6: #fb8c00; --am-c7: #5c6bc0; --am-c8: #ec407a; --am-neg: #ff8a7a; }
+[data-theme="light"] { --am-c1: #c0392b; --am-c2: #0e8f86; --am-c3: #b07d12; --am-c4: #6a4fc8; --am-c5: #0288d1; --am-c6: #e65100; --am-c7: #3949ab; --am-c8: #c2185b; --am-neg: #b3261e; }
 .am-c1 { background: var(--am-c1); } .am-c2 { background: var(--am-c2); }
 .am-c3 { background: var(--am-c3); } .am-c4 { background: var(--am-c4); }
+.am-c5 { background: var(--am-c5); } .am-c6 { background: var(--am-c6); }
+.am-c7 { background: var(--am-c7); } .am-c8 { background: var(--am-c8); }
+.am-car-vistas { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 16px; padding: 10px 14px; background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: 8px; }
+.am-car-vistas-et { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gold-bright); font-family: var(--font-mono); margin-right: 4px; }
+.am-car-vista-btn { background: var(--bg-card-alt); color: var(--text-secondary); border: 1px solid var(--border-subtle); padding: 5px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease; }
+.am-car-vista-btn:hover { color: var(--text-main); border-color: var(--gold); }
+.am-car-vista-btn.activa { background: var(--gold-glow); color: var(--gold-bright); border-color: var(--gold-bright); font-weight: 700; }
 .am-sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 .am-pib-entrada { font-size: 14px; line-height: 1.6; color: var(--text-secondary); margin: 4px 0 14px; }
 

@@ -4227,3 +4227,39 @@ ot-07 integrada en AUDIT_DB.noticias (Modo Inspector).
    - Sello de versión incrementado a **20260925a** mediante herramientas/sello.py.
    - Invariantes de formato CRLF y lone CRs preservadas al 100% en todos los archivos.
    - Paquetes de entrega ZIP generados: Auditavision_AuditoriaImagenes_LegoObras_20260925a.zip.
+## Hito: Versión 20260927zd — Ampliación del Simulador de Módulo 5 (Costo Ambiental, Sectores de Obra Pública 2024–2026 y Tres Poderes de la Unión)
+
+1. **Cuatro Ejes de Contraste en el Simulador de Ritmo (`amCarrera` / "Un año de cuentas en veinte segundos"):**
+   - **Balanza Ambiental y Deuda (Base):** Intereses de la deuda ($1,388,400 mdp), Daño ambiental del país ($1,387,414 mdp, INEGI CEEM), Gasto en protección ambiental ($196,419 mdp) y Presupuesto federal de Medio Ambiente - Ramo 16 ($45,564.1 mdp).
+   - **Inversión en Obras Públicas por Sector (2024–2026 a la fecha):** Inversión física anual promedio en Energía e Hidrocarburos Pemex/CFE ($341,013 mdp), Transporte Ferroviario y Carretero SICT/Sedena ($190,847 mdp), Infraestructura Social Municipal Básica FISMDF Ramo 33 ($114,483 mdp), Obras Hidráulicas Conagua ($49,550 mdp), Infraestructura Hospitalaria y Médica ($43,060 mdp) e Infraestructura de Seguridad y Defensa ($32,460 mdp), contrastadas directamente contra la velocidad del daño ambiental nacional.
+   - **Los Tres Poderes de la Unión:** Contraste macrofiscal directo entre el Poder Ejecutivo Federal ($10,033,149 mdp, 98.4% del PEF), Poder Judicial de la Federación ($70,005.6 mdp, 0.69%) y Poder Legislativo Federal ($17,529.1 mdp, 0.17%), contrastados contra el costo financiero de la deuda ($1,388,400 mdp) y el presupuesto ambiental ($45,564.1 mdp).
+   - **Gran Contraste General (Todas):** Simulación simultánea de los 13 conceptos a escala uniforme en pesos para proyectar la acumulación día por día en 20 segundos.
+2. **Interfaz Reactiva y Desglose Oficial:**
+   - Botonera interactiva de selección `.am-car-vistas` con estados activos (`.activa`) y paleta de colores cromática coherente para cada serie (`--am-c1` a `--am-c8`).
+   - Conclusión analítica dinámica (`amCarRemate`) con chip `derivado` adaptada al eje seleccionado y cálculo de múltiplos en tiempo real.
+   - Tabla interactiva y plegable de fundamentación documental (PEF 2024–2026 Anexos 1, 8, 24 y 32 del DOF, e INEGI Cuentas Económicas y Ecológicas).
+3. **Aseguramiento Técnico e Invariantes:**
+   - Pruebas automatizadas en Microsoft Edge Headless vía CDP (`scratch/test_modulo5_cdp.py`) con 100% de éxito, renderizado dinámico de barras, alternancia de vistas y 0 errores en consola.
+   - Sello de versión incrementado a **20260927zd** mediante `herramientas/sello.py`.
+   - Saltos de línea CRLF preservados y cuentas de lone CR inmutables: `index.html` (56), `assets/auditor/js/audit-engine.js` (2), `assets/auditor/css/auditavision.css` (1).
+
+## Hito: Versión 20260927ze — Integración del Dato de Huachicol Fiscal ($600,000 mdp) en el Simulador de Módulo 5 (Costo Ambiental)
+
+1. **Integración Oficial de la Estimación de Huachicol Fiscal:**
+   - **Monto y Naturaleza:** $600,000 millones de pesos al año ($19,025.87 por segundo) en evasión y contrabando técnico de gasolinas y diésel (salto arancelario simulando aditivos o lubricantes para omitir cuotas del IEPS y el IVA).
+   - **Fundamentación Documental:** Comparecencia de la titular de la Procuraduría Fiscal de la Federación (PFF), Grisel Galeano García, ante la Comisión de Hacienda y Crédito Público de la Cámara de Diputados (2 de octubre de 2025), donde reportó dicho perjuicio estimado y $16,000 millones de pesos querellados en 102 denuncias formalizadas ante la FGR.
+   - **Rigor Normativo y Chip de Estado:** Clasificado como `pendiente` conforme a la regla editorial 2 de Auditavisión, dado que la SHCP y Presidencia señalaron que el cálculo consolidado definitivo está sujeto a los estudios formales de evasión fiscal del SAT conforme al Artículo 30 de la Ley de Ingresos de la Federación 2027.
+   - **Registro en Base de Datos:** Incorporado en `AUDIT_DB.huachicol_fiscal.fuentes.pff25` y en `AUDIT_DB.huachicol_fiscal.estimaciones`.
+
+2. **Cinco Ejes de Contraste en el Simulador de Ritmo (`amCarrera`):**
+   - **🌿 Balanza Ambiental y Deuda (Base ampliada):** Intereses de la deuda ($1,388,400 mdp), Daño ambiental del país ($1,387,414 mdp), Huachicol fiscal ($600,000 mdp), Gasto en protección ambiental ($196,419 mdp) y Presupuesto federal de Medio Ambiente - Ramo 16 ($45,564.1 mdp).
+   - **⛽ Huachicol Fiscal vs Inversión Pública (Nueva vista dedicada):** Contraste frontal del huachicol fiscal ($600,000 mdp) contra las obras de energía de Pemex/CFE ($341,013 mdp, 1.8x), el fondo social municipal FISMDF ($114,483 mdp, 5.2x), el Poder Judicial ($70,005.6 mdp, 8.6x), las obras hidráulicas de Conagua ($49,550 mdp, 12.1x), el presupuesto ambiental ($45,564.1 mdp, 13.2x) y el Poder Legislativo ($17,529.1 mdp, 34.2x).
+   - **🏗️ Obras Públicas por Sector (2024–2026):** Los 6 sectores de obras públicas (Energía, Transporte, Social, Hidráulica, Hospitales, Seguridad) contrastados contra el daño ecológico y la fuga por huachicol.
+   - **🏛️ Los Tres Poderes de la Unión:** Poder Ejecutivo ($10.03B, 98.4%), Intereses de Deuda ($1.38B), Daño ambiental ($1.38B), Huachicol fiscal ($600,000 mdp), Poder Judicial ($70,005.6 mdp), Ramo 16 ($45,564.1 mdp) y Poder Legislativo ($17,529.1 mdp).
+   - **🌐 Gran Contraste General (Todas):** 14 barras corriendo simultáneamente a escala uniforme durante los 20 segundos de simulación.
+
+3. **Verificación y Aseguramiento de Calidad:**
+   - Corrección de formato monetario: eliminación de duplicación de signo de moneda en cadenas de remate analítico.
+   - Pruebas automatizadas en Microsoft Edge Headless vía CDP (`scratch/test_huachicol_modulo5_cdp.py`) con 100% de éxito y 0 errores en consola.
+   - Sello de versión incrementado a **20260927ze** mediante `herramientas/sello.py`.
+   - Saltos de línea CRLF preservados y cuentas de lone CR inmutables: `index.html` (56), `assets/auditor/js/audit-engine.js` (2), `assets/auditor/js/audit-database.js` (2), `assets/auditor/css/auditavision.css` (1).

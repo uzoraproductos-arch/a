@@ -15142,6 +15142,10 @@ window.AUDIT_DB = {
   "huachicol_fiscal": {
     "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ninguna autoridad ha publicado todavía una cifra de lo que se pierde; lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
     "fuentes": {
+      "pff25": {
+        "doc": "Comparecencia de la Procuradora Fiscal de la Federación, Grisel Galeano García, ante la Comisión de Hacienda y Crédito Público de la Cámara de Diputados, 2 de octubre de 2025",
+        "url": "https://gaceta.diputados.gob.mx/"
+      },
       "ilif27": {
         "doc": "Iniciativa de Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Gaceta Parlamentaria núm. 7121, Anexo A, 8 de septiembre de 2026",
         "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf",
@@ -15181,7 +15185,7 @@ window.AUDIT_DB = {
       "fuente": "ilif27",
       "paginas": "CXXI a CXXV",
       "cita": "el Gobierno Federal ha identificado el robo y la sustracción ilegal de combustibles y otros delitos asociados, como una de las principales fuentes de evasión del pago del IEPS en la comercialización de combustibles",
-      "practicas": "simulación documental, facturación irregular, importaciones indebidamente declaradas y trazabilidad manipulada",
+      "practicas": "simulación documental (salto arancelario de gasolinas como aceites o aditivos para eludir cuotas IEPS), facturación irregular mediante empresas fachada (EFOS, art. 69-B del CFF), importaciones en buquetanques o pipas con pedimentos clonados y alteración de controles volumétricos",
       "medida": "Nueva fracción XIX del artículo 25 de la Ley de Ingresos: quien no fabrica, produce ni importa combustibles pagará IEPS por los litros que venda de más respecto de los que compró en el mes, sin trasladarlo al precio."
     },
     "en_juego": {
@@ -15216,7 +15220,7 @@ window.AUDIT_DB = {
       },
       "reparto": {
         "fuente": "lcf",
-        "texto": "El IEPS de combustibles del artículo 2o. entra a la recaudación federal participable, de la que el 20 % forma el Fondo General de Participaciones (LCF, art. 2o.). La cuota del artículo 2o.-A queda fuera de esa bolsa (art. 2o., fracción VII) y se reparte aparte: 9 de cada 11 pesos a las entidades según el consumo en su territorio (art. 4o.-A)."
+        "texto": "El IEPS federal de combustibles del artículo 2o. entra a la Recaudación Federal Participable (RFP), de la que el 20 % forma el Fondo General de Participaciones (LCF, art. 2o.): cada peso omitido encoge la bolsa del Ramo 28 de los 32 estados y sus 2,479 municipios. La cuota del artículo 2o.-A queda fuera de esa bolsa (art. 2o., fracción VII) y se reparte aparte: 9 de cada 11 pesos directo a las entidades según el consumo en su territorio (art. 4o.-A)."
       },
       "delitos": {
         "fuente": "cff",
@@ -15237,6 +15241,17 @@ window.AUDIT_DB = {
       "por_que_pendiente": "El portal del Informe rechaza la consulta automatizada; las cifras se tomaron de la prensa que lo cita y falta cotejarlas en el documento."
     },
     "estimaciones": [
+      {
+        "estado": "pendiente",
+        "id": "pff",
+        "fuente": "pff25",
+        "anio": "2025–2026",
+        "total_mdp": 600000,
+        "querellado_mdp": 16000,
+        "denuncias": 102,
+        "organo": "Procuraduría Fiscal de la Federación (comparecencia oficial en San Lázaro)",
+        "por_que_pendiente": "Estimación preliminar de daño al erario por contrabando de combustibles y salto arancelario; SHCP y Presidencia precisaron que la cifra consolidada oficial está pendiente de los estudios formales de evasión fiscal del SAT (art. 30 de la LIF)."
+      },
       {
         "estado": "pendiente",
         "fuente": "oce",

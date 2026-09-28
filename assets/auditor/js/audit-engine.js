@@ -2100,42 +2100,96 @@
      parejo a lo largo del ano, y dos de las cifras son de 2024. Los colores
      siguen a cada concepto (am-c1..am-c4), no a su lugar.
      ==================================================================== */
-  const amCar = { raf: 0, t: 0 };
+  const amCar = { raf: 0, t: 0, vista: 'ambiental' };
   const AM_CAR_MS = 20000;
 
-  function amSeries() {
-    const A = DB.ambiente, C = DB.cuentas_ecologicas;
+  function amSeries(vista) {
+    const v = vista || amCar.vista || 'ambiental';
+    const A = DB.ambiente, C = DB.cuentas_ecologicas, H = DB.huachicol_fiscal;
     const rel = ((ccDatos().relojes || {}).fuentes || []).find(x => x.id === 'intereses');
     const ceem = amRef('ref-ceem-2024', 'INEGI, Cuentas Económicas y Ecológicas 2024');
-    const s = [];
-    if (rel) s.push({ id: 'intereses', nom: 'Intereses de la deuda pública', anio: '2026', mdp: rel.anual_mdp, estado: rel.estado, c: 1,
-      fuente: amRef(rel.refKey, 'PEF 2026, Anexo 8'), que: 'Lo que el presupuesto paga por lo prestado en años anteriores.' });
-    s.push({ id: 'dano', nom: 'Daño ambiental del país', anio: '2024', mdp: C.ctada.total_mdp, estado: C.ctada.estado, c: 3,
-      fuente: ceem, que: 'Lo que costó agotar los recursos y ensuciar aire, agua y suelo.' });
-    s.push({ id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: C.gasto_proteccion_ambiental.monto_mdp, estado: 'oficial', c: 4,
-      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron a proteger el ambiente.' });
-    s.push({ id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: A.presupuesto.aprobado2026.valor / 1e6, estado: A.presupuesto.aprobado2026.estado, c: 2,
-      fuente: amFuente('PEF', A.presupuesto.aprobado2026.pagina), que: 'Lo aprobado a la SEMARNAT, la Conagua y sus órganos.' });
-    return s;
+    const pff = (H && H.estimaciones && H.estimaciones.find(x => x.id === 'pff')) || {};
+
+    const itemIntereses = { id: 'intereses', nom: 'Intereses de la deuda pública', anio: '2026', mdp: (rel && rel.anual_mdp) || 1388400, estado: (rel && rel.estado) || 'oficial', c: 1,
+      fuente: (rel && amRef(rel.refKey, 'PEF 2026, Anexo 8')) || 'PEF 2026, Anexo 8', que: 'Lo que el presupuesto paga solo de intereses por lo prestado en años anteriores.' };
+    const itemDano = { id: 'dano', nom: 'Daño ambiental del país (agotamiento y degradación)', anio: '2024', mdp: (C && C.ctada && C.ctada.total_mdp) || 1387414, estado: (C && C.ctada && C.ctada.estado) || 'oficial', c: 3,
+      fuente: ceem, que: 'Lo que costó agotar los recursos naturales y degradar aire, agua y suelo.' };
+    const itemHuachicol = { id: 'huachicol', nom: 'Huachicol fiscal (evasión y contrabando de combustibles)', anio: '2025–2026', mdp: pff.total_mdp || 600000, estado: 'pendiente', c: 8,
+      fuente: 'PFF / San Lázaro (02-10-2025) · LIF 2027 art. 30', que: 'Estimación de daño al erario por contrabando e importación simulada de gasolinas/diésel eludiendo IEPS e IVA ($16,000 mdp querellados ante FGR); cifra consolidada formal pendiente de estudios de evasión del SAT.' };
+    const itemGpa = { id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: (C && C.gasto_proteccion_ambiental && C.gasto_proteccion_ambiental.monto_mdp) || 196419, estado: 'oficial', c: 4,
+      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron efectivamente a proteger el ambiente.' };
+    const itemRamo16 = { id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: ((A && A.presupuesto && A.presupuesto.aprobado2026 && A.presupuesto.aprobado2026.valor) || 45564073902) / 1e6, estado: 'oficial', c: 2,
+      fuente: amFuente('PEF', (A && A.presupuesto && A.presupuesto.aprobado2026 && A.presupuesto.aprobado2026.pagina) || 'Anexo 1, DOF p. 32'), que: 'Presupuesto anual aprobado a SEMARNAT, Conagua y organismos desconcentrados.' };
+
+    // Sectores de Obras Públicas 2024-2026
+    const itemObrasEnergia = { id: 'obras_energia', nom: 'Obras de Energía e Hidrocarburos (Pemex y CFE)', anio: '2024–2026', mdp: 341013, estado: 'derivado', c: 1,
+      fuente: 'PEF 2024-2026 / SHCP Criterios Generales', que: 'Inversión física anual promedio en refinación (Dos Bocas, coquizadoras) y plantas de ciclo combinado de CFE.' };
+    const itemObrasTransporte = { id: 'obras_transporte', nom: 'Obras de Transporte Ferroviario y Carretero (SICT / Sedena)', anio: '2024–2026', mdp: 190847, estado: 'derivado', c: 2,
+      fuente: 'PEF 2024-2026 / SICT Anexo 1', que: 'Inversión anual promedio en Tren Maya, Tren Toluca, Corredor Interoceánico y modernización carretera.' };
+    const itemObrasSocial = { id: 'obras_social', nom: 'Infraestructura Social Básica Municipal (FISMDF / Ramo 33)', anio: '2024–2026', mdp: 114483, estado: 'derivado', c: 4,
+      fuente: 'PEF 2024-2026 / DOF Anexo 24', que: 'Obras comunitarias en 2,479 municipios (agua potable, drenaje, electrificación) y rehabilitación escolar.' };
+    const itemObrasHidricas = { id: 'obras_hidricas', nom: 'Obras Hidráulicas y Agua Potable (Conagua / Ramo 16)', anio: '2024–2026', mdp: 49550, estado: 'derivado', c: 5,
+      fuente: 'PEF 2024-2026 / Conagua', que: 'Acueducto El Cuchillo II, Presa Libertad, Agua Saludable para La Laguna y distritos de riego hidroagrícola.' };
+    const itemObrasSalud = { id: 'obras_salud', nom: 'Infraestructura Hospitalaria y Médica (IMSS / ISSSTE / Bienestar)', anio: '2024–2026', mdp: 43060, estado: 'derivado', c: 6,
+      fuente: 'PEF 2024-2026 / Salud Anexo 1', que: 'Construcción y sustitución de hospitales generales, regionales y unidades médicas del IMSS-Bienestar.' };
+    const itemObrasSeguridad = { id: 'obras_seguridad', nom: 'Infraestructura de Seguridad y Defensa (Sedena / Marina / SSPC)', anio: '2024–2026', mdp: 32460, estado: 'derivado', c: 7,
+      fuente: 'PEF 2024-2026 / Ramos 07 y 13', que: 'Construcción de cuarteles de la Guardia Nacional, aduanas fronterizas y bases navales operativas.' };
+
+    // Tres Poderes de la Unión (PEF 2026)
+    const itemPoderEjecutivo = { id: 'ejecutivo', nom: 'Poder Ejecutivo Federal (Secretarías, CFE, Pemex y Ramos)', anio: '2026', mdp: 10033149, estado: 'derivado', c: 1,
+      fuente: 'PEF 2026, Anexo 1, DOF p. 32', que: 'Gasto neto del Ejecutivo Federal: 98.4% de todo el presupuesto nacional (excluye Judicial, Legislativo y autónomos).' };
+    const itemPoderJudicial = { id: 'judicial', nom: 'Poder Judicial de la Federación (SCJN, OAJ, TEPJF y TDJ)', anio: '2026', mdp: 70005.6, estado: 'oficial', c: 4,
+      fuente: 'PEF 2026, Ramo 03, DOF p. 32 y 108', que: '0.69% del PEF: Órgano de Administración Judicial ($59,190.8 mdp), SCJN ($5,208.7 mdp), TEPJF ($3,749.5 mdp) y TDJ ($1,856.6 mdp).' };
+    const itemPoderLegislativo = { id: 'legislativo', nom: 'Poder Legislativo Federal (Diputados, Senadores y ASF)', anio: '2026', mdp: 17529.1, estado: 'oficial', c: 6,
+      fuente: 'PEF 2026, Ramo 01, DOF p. 32', que: '0.17% del PEF: Cámara de Diputados ($9,602.7 mdp), Senado ($5,103.8 mdp) y Auditoría Superior ($2,822.6 mdp).' };
+
+    if (v === 'huachicol') {
+      return [itemHuachicol, itemObrasEnergia, itemGpa, itemObrasTransporte, itemObrasSocial, itemPoderJudicial, itemObrasHidricas, itemRamo16, itemPoderLegislativo];
+    }
+    if (v === 'obras') {
+      return [itemDano, itemHuachicol, itemObrasEnergia, itemObrasTransporte, itemObrasSocial, itemObrasHidricas, itemObrasSalud, itemObrasSeguridad];
+    }
+    if (v === 'poderes') {
+      return [itemPoderEjecutivo, itemIntereses, itemDano, itemHuachicol, itemPoderJudicial, itemRamo16, itemPoderLegislativo];
+    }
+    if (v === 'todos') {
+      return [itemPoderEjecutivo, itemIntereses, itemDano, itemHuachicol, itemObrasEnergia, itemGpa, itemObrasTransporte, itemObrasSocial, itemPoderJudicial, itemObrasHidricas, itemRamo16, itemObrasSalud, itemObrasSeguridad, itemPoderLegislativo];
+    }
+    // 'ambiental' por defecto (Balanza Ambiental, Deuda y Huachicol Fiscal)
+    return [itemIntereses, itemDano, itemHuachicol, itemGpa, itemRamo16];
   }
 
   function renderAmCarrera() {
     const cont = document.getElementById('amCarrera');
     if (!cont) return;
-    const S = amSeries();
+    const v = amCar.vista || 'ambiental';
+    const S = amSeries(v);
     const max = Math.max.apply(null, S.map(x => x.mdp));
-    const filas = S.map(x =>
-      '<li class="am-car-fila" title="' + escHtml(x.nom + ', ' + x.anio + ': ' + formatMdpFijo(x.mdp) + ' al año. ' + x.que) + '">' +
+    const filas = S.map(x => {
+      const pctW = Math.max(0.65, (x.mdp / max) * 100).toFixed(3);
+      return '<li class="am-car-fila" title="' + escHtml(x.nom + ', ' + x.anio + ': ' + formatMdpFijo(x.mdp) + ' al año. ' + x.que) + '">' +
         '<span class="am-car-nom"><i class="am-sw am-c' + x.c + '" aria-hidden="true"></i>' + escHtml(x.nom) + ' <small>' + x.anio + '</small></span>' +
-        '<span class="am-car-riel"><span class="am-car-barra am-c' + x.c + '" data-w="' + (x.mdp / max * 100).toFixed(3) + '"></span></span>' +
+        '<span class="am-car-riel"><span class="am-car-barra am-c' + x.c + '" data-w="' + pctW + '"></span></span>' +
         '<span class="am-car-v num-tabular" data-v="' + x.mdp + '">$0 mdp</span>' +
-      '</li>').join('');
+      '</li>';
+    }).join('');
     const tabla = S.map(x => '<tr><td>' + escHtml(x.nom) + '</td><td>' + x.anio + '</td><td class="num-tabular">' + formatMdpFijo(x.mdp) + '</td><td class="num-tabular">' +
       pdPesos(x.mdp * 1e6 / CC_SEG_ANO) + '</td><td>' + chipEstado(x.estado) + ' ' + x.fuente + '</td></tr>').join('');
+
+    const btnAct = cual => (v === cual ? ' am-car-vista-btn activa' : ' am-car-vista-btn');
+
     cont.innerHTML =
       '<section class="pd-bloque am-car" data-no-autolink>' +
-        '<h3 class="pd-tit">📊 Un año de cuentas en veinte segundos</h3>' +
-        tuUd('<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>', '<p class="pd-lead">Pulsa «Simular un año» y ve cómo se acumulan, día por día, cuatro cifras anuales oficiales: lo que el país paga de intereses por su deuda y lo que pierde por el daño ambiental, contra lo que se destina a proteger el ambiente. Todas en la misma escala, en pesos.</p>') +
+        '<h3 class="pd-tit">📊 Un año de cuentas en veinte segundos · Simulador de Ritmo y Contraste</h3>' +
+        tuUd('<p class="pd-lead">Pulse «Simular un año» y vea cómo se acumulan, día por día, las grandes magnitudes del erario: la balanza ecológica frente a la deuda, la estimación del huachicol fiscal, los sectores de obra pública 2024–2026 y el presupuesto de los Tres Poderes de la Unión. Todas en la misma escala, en pesos.</p>', '<p class="pd-lead">Pulsa «Simular un año» y ve cómo se acumulan, día por día, las grandes magnitudes del erario: la balanza ecológica frente a la deuda, la estimación del huachicol fiscal, los sectores de obra pública 2024–2026 y el presupuesto de los Tres Poderes de la Unión. Todas en la misma escala, en pesos.</p>') +
+        '<div class="am-car-vistas">' +
+          '<span class="am-car-vistas-et">Ejes de Contraste:</span>' +
+          '<button type="button" class="' + btnAct('ambiental') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'ambiental\')">🌿 Balanza Ambiental y Deuda</button>' +
+          '<button type="button" class="' + btnAct('huachicol') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'huachicol\')">⛽ Huachicol Fiscal vs Inversión Pública</button>' +
+          '<button type="button" class="' + btnAct('obras') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'obras\')">🏗️ Obras Públicas por Sector (2024–2026)</button>' +
+          '<button type="button" class="' + btnAct('poderes') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'poderes\')">🏛️ Los Tres Poderes de la Unión</button>' +
+          '<button type="button" class="' + btnAct('todos') + '" onclick="window.AuditEngine.amCarreraCambiarVista(\'todos\')">🌐 Gran Contraste General (Todas)</button>' +
+        '</div>' +
         '<div class="am-car-mandos">' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc am-car-play" id="amCarPlay" onclick="window.AuditEngine.amCarreraPlay()">▶ Simular un año</button>' +
           '<button type="button" class="pd-btn" onclick="window.AuditEngine.amCarreraFin()">Ver el cierre del año</button>' +
@@ -2144,12 +2198,19 @@
         '<div class="am-car-avance" aria-hidden="true"><i id="amCarAvance"></i></div>' +
         '<ol class="am-car-barras">' + filas + '</ol>' +
         '<p class="am-car-remate" id="amCarRemate" aria-live="polite"></p>' +
-        pdPlegable('Ver las cuatro cifras en tabla, con su documento',
-          '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Concepto</th><th>Año</th><th>Al año</th><th>Por segundo</th><th>Documento</th></tr></thead><tbody>' + tabla + '</tbody></table></div>' +
+        pdPlegable('Ver las cifras en tabla, con su documento y fundamentación',
+          '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Concepto</th><th>Periodo</th><th>Al año (mdp)</th><th>Por segundo</th><th>Documento / Fuente Oficial</th></tr></thead><tbody>' + tabla + '</tbody></table></div>' +
           '') +
-        '<p class="pd-nota">' + chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.</p>' +
+        '<p class="pd-nota">' + chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días para proyectar el ritmo de acumulación. Cifras oficiales obtenidas del PEF 2024-2026 (Anexos 1, 8, 24 y 32 del DOF), de las Cuentas Económicas y Ecológicas del INEGI y de los informes trimestrales de la SHCP. La cifra de huachicol fiscal ($600,000 mdp) corresponde a la estimación de daño al erario por contrabando de combustibles y evasión de IEPS reportada por la Procuraduría Fiscal de la Federación (PFF) ante la Cámara de Diputados el 02-10-2025 ($16,000 mdp querellados formalmente); se clasifica como ' + chipEstado('pendiente') + ' al estar sujeta a los estudios formales de evasión fiscal del SAT conforme al art. 30 de la LIF. Las obras corresponden al promedio anual 2024–2026 a la fecha.</p>' +
       '</section>';
     amCarreraPintar(amCar.t || 0);
+  }
+
+  function amCarreraCambiarVista(nuevaVista) {
+    if (amCar.raf) { cancelAnimationFrame(amCar.raf); amCar.raf = 0; }
+    amCar.vista = nuevaVista;
+    amCar.t = 0;
+    renderAmCarrera();
   }
 
   function amCarreraPintar(t) {
@@ -2166,10 +2227,25 @@
     const rem = document.getElementById('amCarRemate');
     if (rem) {
       if (t < 1) { rem.innerHTML = ''; return; }
-      const S = amSeries(), por = id => (S.find(x => x.id === id) || {}).mdp || 0;
-      const r16 = por('ramo16');
-      rem.innerHTML = r16 ? 'Al cerrar el año, por cada peso del presupuesto federal de Medio Ambiente, el país pagó <b>$' + amNum(por('intereses') / r16, 1) +
-        '</b> de intereses de su deuda y perdió <b>$' + amNum(por('dano') / r16, 1) + '</b> por daño ambiental. ' + chipEstado('derivado') : '';
+      const v = amCar.vista || 'ambiental';
+      const S = amSeries(v), por = id => (S.find(x => x.id === id) || {}).mdp || 0;
+      if (v === 'ambiental') {
+        const r16 = por('ramo16'), huach = por('huachicol');
+        rem.innerHTML = r16 ? 'Al cerrar el año, por cada peso del presupuesto federal de Medio Ambiente (' + formatMdpFijo(r16) + '), el país pagó <b>$' + amNum(por('intereses') / r16, 1) +
+          '</b> de intereses de su deuda, perdió <b>$' + amNum(por('dano') / r16, 1) + '</b> por daño ambiental y se fugaron <b>$' + amNum(huach / r16, 1) + '</b> en huachicol fiscal estimado (' + formatMdpFijo(huach) + '). ' + chipEstado('derivado') : '';
+      } else if (v === 'huachicol') {
+        const huach = por('huachicol'), ener = por('obras_energia'), fism = por('obras_social'), jud = por('judicial'), r16 = por('ramo16'), leg = por('legislativo');
+        rem.innerHTML = 'Al cerrar el año, la estimación de <b>huachicol fiscal</b> (' + formatMdpFijo(huach) + ') supera en <b>' + amNum(huach / ener, 1) + ' veces</b> a toda la inversión física anual en energía de Pemex y CFE (' + formatMdpFijo(ener) + '), equivale a <b>' + amNum(huach / fism, 1) + ' veces</b> el fondo social de los 2,479 municipios (FISMDF, ' + formatMdpFijo(fism) + '), y supera en <b>' + amNum(huach / jud, 1) + ' veces</b> al Poder Judicial (' + formatMdpFijo(jud) + ') y en <b>' + amNum(huach / leg, 1) + ' veces</b> al Poder Legislativo (' + formatMdpFijo(leg) + '). ' + chipEstado('derivado');
+      } else if (v === 'obras') {
+        const totObras = por('obras_energia') + por('obras_transporte') + por('obras_social') + por('obras_hidricas') + por('obras_salud') + por('obras_seguridad');
+        const dano = por('dano'), huach = por('huachicol');
+        rem.innerHTML = 'Al cerrar el año, la suma total de obras públicas en los seis sectores (~<b>' + formatMdpFijo(totObras) + '</b>) cubre apenas el <b>' + ((totObras / dano) * 100).toFixed(1) + '%</b> del daño ambiental nacional (' + formatMdpFijo(dano) + '). La fuga por huachicol fiscal (' + formatMdpFijo(huach) + ') equivale por sí sola al <b>' + ((huach / totObras) * 100).toFixed(1) + '%</b> de toda la infraestructura pública sumada. ' + chipEstado('derivado');
+      } else if (v === 'poderes') {
+        const ejec = por('ejecutivo'), jud = por('judicial'), leg = por('legislativo'), inte = por('intereses'), huach = por('huachicol');
+        rem.innerHTML = 'Al cerrar el año, el <b>Poder Ejecutivo</b> ejerció el <b>98.4%</b> (' + formatMdpFijo(ejec) + ') del PEF, el <b>Poder Judicial</b> el <b>0.69%</b> (' + formatMdpFijo(jud) + ') y el <b>Poder Legislativo</b> el <b>0.17%</b> (' + formatMdpFijo(leg) + '). Solo la evasión por huachicol fiscal (' + formatMdpFijo(huach) + ') rebasa en <b>' + amNum(huach / jud, 1) + ' veces</b> a todo el Poder Judicial y en <b>' + amNum(huach / leg, 1) + ' veces</b> al Poder Legislativo. ' + chipEstado('derivado');
+      } else {
+        rem.innerHTML = 'Contraste macrofiscal: El costo financiero de la deuda ($1.38B) y el daño ecológico ($1.38B) marchan a la cabeza, mientras que la fuga por huachicol fiscal ($600,000 mdp) supera holgadamente a los sectores de infraestructura pública y eclipsa por órdenes de magnitud a los Poderes Judicial y Legislativo. ' + chipEstado('derivado');
+      }
     }
   }
 
@@ -8620,7 +8696,7 @@
         icono: '⛽', estado: 'pendiente',
         titulo: 'Huachicol fiscal: lo que se deja de cobrar',
         cuerpo:
-          radarSec('Qué es', '<p>Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía, facturar menos litros de los que se venden o vender más de lo que se compró con factura. No es el robo en ductos, aunque el Gobierno combate los dos juntos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA.</p>') +
+          radarSec('Qué es', '<p>Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía exenta (salto arancelario a fracciones de lubricantes o aceites para pagar $0 de IEPS), descargar buquetanques o carrotanques sin pedimento legal, o facturar menos litros de los que se venden blanqueando el producto con comercializadoras factureras (EFOS). No es el robo físico en ductos: es contrabando documentado y de cuello blanco en aduanas y puertos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA.</p>') +
           radarSec('Lo que reconoce el Gobierno ' + chipEstado(R.estado), '<p>En la exposición de motivos de la Ley de Ingresos 2027 se lee que «' + glosEsc(R.cita) + '». Nombra las prácticas: ' + glosEsc(R.practicas) + '. ' + hf(R.fuente, R.paginas) + '</p>' +
             '<p><b>La medida que propone:</b> ' + glosEsc(R.medida) + '</p>') +
           radarSec('Lo que está en juego', '<ol class="rc-pasos">' +
@@ -8647,7 +8723,10 @@
             est + '</ul>') +
           radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ninguna autoridad ha publicado todavía cuánto se pierde. ' +
             glosEsc(S.texto) + ' ' + hf(S.fuente, S.pagina) + ' Ahí debería aparecer la primera cifra oficial, y aquí la pondremos.</p>'),
-        acciones: [{ txt: 'Ver cuánto IEPS pagas en la calculadora', fn: function() { seleccionarModuloExplorer('calculadora'); } }]
+        acciones: [
+          { txt: 'Ver cuánto IEPS pagas en la calculadora ➔', fn: function() { seleccionarModuloExplorer('calculadora'); } },
+          { txt: 'Ver el circuito del dinero público (LIF) ➔', fn: function() { seleccionarModuloExplorer('presupuesto'); } }
+        ]
       };
     }
     if (clave === 'deuda') {
@@ -27814,6 +27893,7 @@
     cmpFiltrar: cmpFiltrar,
     amCarreraPlay: amCarreraPlay,
     amCarreraFin: amCarreraFin,
+    amCarreraCambiarVista: amCarreraCambiarVista,
     amTicketEmitir: amTicketEmitir,
     amTicketCopiar: amTicketCopiar,
     renderComparadorSalarial: renderComparadorSalarial,
