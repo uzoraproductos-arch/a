@@ -7,7 +7,7 @@ window.AUDIT_DB = {
     "conveniosTotal": 311400,
     "recaudacionTributariaTotal": 4955000,
     "recaudacionNoTributariaTotal": 4350000,
-    "padronContribuyentes": 63.2,
+    "padronContribuyentes": 88.1,
     "grandesContribuyentes": 12867,
     "asfIrregularidadesGlobales": 51024,
     "asfMunicipalIrregularidades": 35074,
@@ -15161,8 +15161,9 @@ window.AUDIT_DB = {
         "sha256": "21e179d275a540f4b4ac6f13a97608f5822bea0429972f943ecc7f4f22ebafb8"
       },
       "informe2": {
-        "doc": "Presidencia de la República, Segundo Informe de Gobierno, 1 de septiembre de 2026 (apartado de aduanas, citado por la prensa)",
-        "url": "https://www.segundoinformedegobierno.gob.mx/"
+        "doc": "Presidencia de la República, Segundo Informe de Gobierno 2025-2026, informe consolidado (1-09-2026)",
+        "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+        "sha256": "cc95e5ade7cb306b734e9dc1e61e1defcba14c444e5705de24be6ca6e115fa9d"
       },
       "oce": {
         "doc": "Observatorio Ciudadano de Energía, estimación del costo del huachicol en 2025 (organismo civil, no autoridad), citada por El CEO",
@@ -15238,15 +15239,19 @@ window.AUDIT_DB = {
       }
     },
     "anam": {
-      "estado": "pendiente",
+      "estado": "oficial",
       "fuente": "informe2",
       "periodo": "1 de septiembre de 2025 al 30 de junio de 2026",
       "casos": 3109,
+      "casos_texto": "En colaboración con el SAT, la Agencia Nacional de Aduanas detectó 3,109 casos de clasificación arancelaria incorrecta en productos petrolíferos e hidrocarburos, «propiciando su regularización». No son decomisos: es mercancía declarada con una fracción que no le corresponde.",
+      "casos_pagina": "46 (70 del PDF)",
       "litros_millones": 109.4,
-      "evasion_mdp": 4600,
+      "recaudacion_mdp": 4600,
       "sellos_cancelados": 3434,
       "denuncias": 118,
-      "por_que_pendiente": "El portal del Informe rechaza la consulta automatizada; las cifras se tomaron de la prensa que lo cita y falta cotejarlas en el documento."
+      "pagina": "260 (284 del PDF)",
+      "texto": "Con sistemas de revisión no intrusiva en las 50 aduanas se detectaron 109.4 millones de litros de hidrocarburos no declarados, con una recaudación asociada de $4,600 mdp de IVA e IEPS. Aparte, herramientas de trazabilidad permitieron a «las autoridades competentes» cancelar 3,434 sellos digitales para facturar y presentar 118 denuncias penales.",
+      "limites": "Son diez meses, no un año. Los $4,600 mdp son lo que se cobró por lo detectado, no lo que se evade. El Informe no atribuye los sellos ni las denuncias solo a la Agencia de Aduanas."
     },
     "estimaciones": [
       {
@@ -16898,15 +16903,22 @@ window.AUDIT_DB = {
     },
     "poblacion": {
       "millones": 134.4,
-      "fuente": "CONAPO \u00b7 Proyecciones de la Poblaci\u00f3n de M\u00e9xico y las entidades federativas 2020-2070, poblaci\u00f3n a mitad de 2026",
-      "estado": "pendiente",
-      "pendiente": "Pendiente de cotejo: el portal del CONAPO y su base de datos abierta no responden desde nuestro entorno (27-09-2026), así que no hemos podido leer la cifra en el cuadro oficial de la proyección. Se usa como denominador para dar escala y se marcará oficial cuando se coteje."
+      "personas": 134407258,
+      "fuente": "CONAPO \u00b7 Proyecciones de la Poblaci\u00f3n de M\u00e9xico y de las Entidades Federativas 2020-2070, poblaci\u00f3n a mitad de 2026",
+      "url": "https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv",
+      "sha256": "89db6adc7930965fb5b5c01ad3a98765ed90afa6a151c2cfb913acc2b9e0cac6",
+      "estado": "derivado",
+      "como": "Suma de las 32 entidades, las 110 edades y ambos sexos del a\u00f1o 2026 en el archivo de datos abiertos del CONAPO: 134,407,258 personas. El archivo no trae una fila nacional; por eso la cifra es derivada."
     },
     "padron": {
-      "millones": 63.2,
-      "fuente": "Padr\u00f3n de contribuyentes activos, cat\u00e1logo macro de esta plataforma",
-      "estado": "pendiente",
-      "pendiente": "Esta cifra todav\u00eda no lleva en nuestro cat\u00e1logo la referencia oficial que la sustenta. Se ofrece como segundo denominador porque repartir entre quienes efectivamente tributan da una lectura distinta a repartir entre todos los habitantes, y ocultar esa diferencia ser\u00eda peor que declarar el pendiente."
+      "millones": 88.1,
+      "personas": 88085311,
+      "corte": "abril de 2026",
+      "fuente": "SAT \u00b7 Padr\u00f3n de contribuyentes por situaci\u00f3n del RFC, datos abiertos, corte de abril de 2026",
+      "url": "https://repodatos.atdt.gob.mx/api_update/sat/padron/porsitrfc21.csv",
+      "sha256": "062847fd0a575b02411487438018e36ce8bd3927789760954a1426938589a6a5",
+      "estado": "oficial",
+      "como": "88,085,311 contribuyentes con RFC activo en abril de 2026, el \u00faltimo mes publicado en el archivo. 52,932,127 son asalariados: su impuesto lo retiene el patr\u00f3n. Es el n\u00famero de inscritos con RFC activo, no el de quienes pagaron impuestos ese mes. Se usa para repartir entre quienes tienen obligaciones con el SAT, no entre todos los habitantes."
     }
   },
 

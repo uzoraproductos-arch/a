@@ -3393,11 +3393,10 @@ la calculadora, la deuda y las obras. Sello 20260927p.
   - Oficial: el art. 30 (p. CCLXXI) obliga al SAT a publicar estudios de
     evasión a más tardar 35 días después de terminar 2027. Ahí debería
     salir la primera cifra oficial.
-  - Pendiente: Segundo Informe de Gobierno, ANAM (1-09-2025 a 30-06-2026):
-    3,109 casos, 109.4 millones de litros, unos $4,600 mdp que se intentó
-    evadir, 3,434 sellos cancelados, 118 denuncias. El portal del Informe
-    rechaza la consulta automatizada (403); las cifras vienen de la prensa
-    que lo cita.
+  - Oficial desde el sello 20260928h (cotejado en el PDF del Segundo
+    Informe, ver abajo): 3,109 casos de clasificación arancelaria
+    incorrecta (p. 46), 109.4 millones de litros no declarados con $4,600
+    mdp de recaudación asociada, 3,434 sellos, 118 denuncias (p. 260).
   - Pendiente: Observatorio Ciudadano de Energía, $123,000 mdp en 2025
     ($56,000 Pemex + $67,000 impuestos). Organismo civil, no autoridad.
 - **Dónde aparece:** cuarto indicador del radar de la portada («sin cifra
@@ -3668,6 +3667,33 @@ que tiene documento; lo demás quedó anotado en
 - Scripts: `herramientas/integrar_cefedis.py` (comprueba huellas de cuatro
   cortes de cartera) y `integrar_costo_vivo_megaobras.py`.
 
+### Hecho (población, padrón y huachicol en aduanas, cotejados en sus originales, sello 20260928h)
+
+Con los originales de `investigaciones/entregas/` (huellas comprobadas por
+`herramientas/integrar_poblacion_padron_anam.py`, que solo toca
+`assets/auditor/js/audit-database.js`):
+
+- **Población:** 134.4 millones pasa de `pendiente` a **derivado**:
+  134,407,258 personas, suma de las 32 entidades, 110 edades y ambos sexos
+  del año 2026 en el CSV de datos abiertos del CONAPO (no trae fila
+  nacional). Se reproduce con `investigaciones/entregas/derivar_poblacion.py`.
+- **Padrón:** los 63.2 millones sin fuente se sustituyen por **88.1
+  millones, oficial**: 88,085,311 contribuyentes con RFC activo en abril de
+  2026 (SAT, padrón por situación del RFC; 52,932,127 son asalariados).
+  Cambia en la calculadora (`parametros.padron`) y en el catálogo `macro`
+  (mesa 3 de la 2.2). La opción del reloj dice ahora «inscritos en el SAT»,
+  no «que tributan»: estar activo no es haber pagado. Las cifras por
+  contribuyente bajan en consecuencia.
+- **Huachicol en aduanas:** pasa a **oficial**, cotejado en el PDF del
+  Segundo Informe (sha cc95e5…). Conceptos corregidos: los 3,109 son casos
+  de clasificación arancelaria incorrecta, no «posible contrabando» ni
+  decomisos (p. 46, 70 del PDF); los $4,600 mdp son **recaudación
+  asociada**, no «impuestos que se intentó evadir» (p. 260, 284 del PDF);
+  sellos y denuncias los atribuye el Informe a «las autoridades
+  competentes». El panel lateral lo muestra en «Lo que informa el Gobierno»,
+  separado de lo no verificado; el campo `evasion_mdp` se llama ahora
+  `recaudacion_mdp`.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3683,12 +3709,13 @@ auditor, por tipo:
    Cuentas Ecológicas 2025 (diciembre), EFIPEM 2025 definitiva, estudios de
    evasión del SAT (art. 30 de la LIF 2027, principios de 2028) para el
    huachicol fiscal.
-3. **Bloqueado por el entorno (comprobar a mano):** Segundo Informe de
-   Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
+3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** costo en vivo de Agronitrogenados, Enciclomedia y Búnker, y el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
    en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
-   FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
-   nacional (134.4 millones, sin cotejar en su cuadro) y por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del
+   FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, población por entidad (el CSV de CONAPO de
+   la entrega ya la trae; falta llevarla al inspector estatal, que hoy dice
+   «población pendiente de fuente»), informe del SAT 2T2026 (el padrón usa
+   el corte de abril), dietas locales, CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
    en el control de importaciones de combustibles (daría un expediente con

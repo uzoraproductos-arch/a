@@ -3912,13 +3912,13 @@
 
         '<p class="cc-fuente">' + rel.nota + '</p>' +
         (esAuditor() ? '<p class="cc-fuente">Para repartir entre personas: ' + ccPar().poblacion.millones + ' millones de habitantes ' + chipEstado(ccPar().poblacion.estado) +
-          ' y ' + ccPar().padron.millones + ' millones de contribuyentes ' + chipEstado(ccPar().padron.estado) + '. Ninguno de los dos se ha cotejado todavía en su documento oficial; el detalle está en «De dónde sale cada número».</p>' : '') +
+          ' y ' + ccPar().padron.millones + ' millones de contribuyentes ' + chipEstado(ccPar().padron.estado) + ' (SAT, RFC activos en ' + ccPar().padron.corte + '). El detalle está en «De dónde sale cada número».</p>' : '') +
       '</section>';
 
     ccSeg('ccCadencia', ccDatos().cadencias, state.cc.relojCadencia, 'ccFijarCadencia');
     ccSeg('ccDenominador', [
       { id: 'habitante', nombre: 'Entre los ' + ccPar().poblacion.millones + ' millones de habitantes' },
-      { id: 'padron', nombre: 'Entre los ' + ccPar().padron.millones + ' millones que tributan' }
+      { id: 'padron', nombre: 'Entre los ' + ccPar().padron.millones + ' millones inscritos en el SAT' }
     ], state.cc.relojDenominador, 'ccFijarDenominador');
     autolinkAmbito(cont);
     ccTictac();
@@ -3969,6 +3969,7 @@
     const p = ccPar(), c = ccDatos();
     const fila = (k, v, estado, extra) =>
       '<li><strong>' + k + '.</strong> ' + v + chipEstado(estado) + (extra ? ' ' + extra : '') + '</li>';
+    const ccFuenteA = f => f.url ? '<a class="no-autolink" href="' + glosEsc(f.url) + '" target="_blank" rel="noopener noreferrer">Ver el archivo original ↗</a>' : '';
     cont.innerHTML =
       '<section class="sim-proc">' +
         '<h3 class="sim-proc-tit">De dónde sale cada número de esta calculadora</h3>' +
@@ -4002,10 +4003,10 @@
           fila('Los relojes', 'Cada uno toma una cifra anual de su documento y la divide entre los segundos del ' +
                tuUd('año. <strong>No miden un gasto que ocurra en el instante en que usted mira</strong>: ', 'año. <strong>No miden un gasto que ocurra en el instante en que miras</strong>: ') +
                'proyectan un ritmo anual sobre el tiempo que ' + tuUd('lleva', 'llevas') + ' en esta página', 'derivado') +
-          fila('El poblacional', p.poblacion.fuente, p.poblacion.estado,
-               '<em>' + p.poblacion.pendiente + '</em>') +
-          fila('El padrón de contribuyentes', p.padron.fuente, p.padron.estado,
-               '<em>' + p.padron.pendiente + '</em>') +
+          fila('El poblacional', p.poblacion.fuente + '. ' + p.poblacion.como, p.poblacion.estado,
+               ccFuenteA(p.poblacion)) +
+          fila('El padrón de contribuyentes', p.padron.fuente + '. ' + p.padron.como, p.padron.estado,
+               ccFuenteA(p.padron)) +
         '</ul>' +
         '<p class="cc-fuente">Lo que esta calculadora <strong>no</strong> hace: no considera aguinaldo, prima ' +
           'vacacional, horas extra ni ninguna de las exenciones del artículo 93; no aplica deducciones ' +
@@ -8760,9 +8761,11 @@
               '<li><b>Cuándo es delito.</b> ' + glosEsc(d.contrabando) + ' ' + glosEsc(d.penas) + ' ' + hf(d.fuente) + '</li>' +
               '</ul>');
           })(H.marco_legal) : '') +
+          radarSec('Lo que informa el Gobierno ' + chipEstado(A.estado), '<p>Del ' + glosEsc(A.periodo) + ', según el Segundo Informe de Gobierno:</p><ul class="pd-lista">' +
+            '<li>' + glosEsc(A.casos_texto) + ' ' + hf(A.fuente, A.casos_pagina) + '</li>' +
+            '<li>' + glosEsc(A.texto) + ' ' + hf(A.fuente, A.pagina) + '</li>' +
+            '</ul><p class="rc-nota"><b>Lo que no dice:</b> ' + glosEsc(A.limites) + '</p>') +
           radarSec('Lo que se ha dicho y aún no pudimos verificar', '<ul class="pd-lista">' +
-            '<li>' + chipEstado(A.estado) + ' Segundo Informe de Gobierno: del ' + glosEsc(A.periodo) + ' la Agencia Nacional de Aduanas detectó ' + A.casos.toLocaleString('es-MX') + ' casos de posible contrabando de hidrocarburos, ' +
-              A.litros_millones.toLocaleString('es-MX') + ' millones de litros y unos ' + mdpH(A.evasion_mdp) + ' de impuestos que se intentó evadir; canceló ' + A.sellos_cancelados.toLocaleString('es-MX') + ' sellos digitales y presentó ' + A.denuncias + ' denuncias. ' + glosEsc(A.por_que_pendiente) + ' ' + hf(A.fuente) + '</li>' +
             est + '</ul>') +
           radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ninguna autoridad ha publicado todavía cuánto se pierde. ' +
             glosEsc(S.texto) + ' ' + hf(S.fuente, S.pagina) + ' Ahí debería aparecer la primera cifra oficial, y aquí la pondremos.</p>'),
@@ -21648,7 +21651,7 @@
               '<td class="sim-t-num">' + p.v + '</td>' +
               '<td class="sim-t-num sim-t-acum">' + simMdp(p.acum) + '</td></tr>').join('') +
           '<tr class="sim-t-div"><td class="sim-t-n">3</td>' +
-            '<td class="sim-t-nom">Padrón de contribuyentes activos</td>' +
+            '<td class="sim-t-nom">Padrón de contribuyentes activos (SAT, abril de 2026) ' + chipEstado('oficial') + '</td>' +
             '<td class="sim-t-op">÷ ' + padron + ' millones</td>' +
             '<td class="sim-t-num">—</td>' +
             '<td class="sim-t-num sim-t-acum">$' + formatNumber(Math.round(porContrib)) + '</td></tr>' +
@@ -26961,7 +26964,7 @@
       rastro.push({ k: 'De esa estimación, impuestos no cobrados', sub: 'La parte de la estimación civil que toca al erario.', v: oce.impuestos_mdp, url: (H.fuentes[oce.fuente] || {}).url, est: oce.estado });
     }
     rastro.push({ k: 'Cada 1 % del IEPS de combustibles', sub: 'Regla de tres para dar tamaño: ' + munMiles(J.ieps_combustibles_2027_mdp.toFixed(1)) + ' ÷ 100.', v: J.uno_por_ciento_mdp, est: 'derivado' });
-    if (A) rastro.push({ k: 'Evasión que la Agencia Nacional de Aduanas detectó intentar', sub: 'Del ' + A.periodo + ': ' + munMiles(String(A.casos)) + ' casos y ' + A.litros_millones + ' millones de litros, según el Segundo Informe citado por la prensa. Falta cotejarlo en el documento.', v: A.evasion_mdp, url: (H.fuentes[A.fuente] || {}).url, est: A.estado });
+    if (A) rastro.push({ k: 'Recaudación asociada a lo que detectaron las aduanas', sub: 'Del ' + A.periodo + ': ' + A.litros_millones + ' millones de litros de hidrocarburos no declarados (Segundo Informe de Gobierno, p. ' + A.pagina + '). Es lo que se cobró, no lo que se evade.', v: A.recaudacion_mdp, url: (H.fuentes[A.fuente] || {}).url, est: A.estado });
     return {
       contadores: cont,
       rastroTit: 'Lo que está en juego y lo que se ha dicho',
@@ -26969,7 +26972,7 @@
       rastro: rastro,
       hallazgo: 'El Gobierno lo reconoce por escrito: en la exposición de motivos de la Ley de Ingresos 2027 dice que «' + R.cita + '». Las prácticas que nombra: ' + R.practicas + '. ' + R.medida,
       pendiente: 'Ninguna autoridad ha publicado cuánto se pierde. ' + (H.estudios ? H.estudios.texto + ' ' : '') + 'Las barras con chip pendiente son cifras que otros han dado y que aún no cotejamos en un documento oficial: se muestran para dar escala, no como dato.',
-      fuente: 'Iniciativa de Ley de Ingresos de la Federación 2027 (Gaceta Parlamentaria, 8-09-2026), pp. ' + R.paginas + ' y ' + J.pagina + '; Ley del IEPS, art. 2o., fr. I, inciso D, texto vigente; estimación del Observatorio Ciudadano de Energía y Segundo Informe de Gobierno, ambos pendientes de cotejo.',
+      fuente: 'Iniciativa de Ley de Ingresos de la Federación 2027 (Gaceta Parlamentaria, 8-09-2026), pp. ' + R.paginas + ' y ' + J.pagina + '; Ley del IEPS, art. 2o., fr. I, inciso D, texto vigente; Segundo Informe de Gobierno, pp. 46 y 260; estimación del Observatorio Ciudadano de Energía, pendiente de cotejo.',
       acciones: [
         { txt: '📂 Abrir el expediente completo del huachicol fiscal', fn: function () { abrirRadarConcepto('huachicol'); } },
         { txt: '🧮 Ver cuánto IEPS pagas en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora'); } },
