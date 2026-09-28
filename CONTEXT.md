@@ -3525,6 +3525,50 @@ diapositiva 9 con el OCE, sin desborde, 14 pestañas sin errores.
   Procuradora Fiscal (el portal de Comunicación Social responde 503 y su
   certificado no valida desde aquí). Queda en la lista del autor (B1).
 
+### Hecho (informes de la ASF de cinco megaobras y series de Salinas, sello 20260928d)
+
+Documentos guardados con su huella en `investigaciones/asf-historico/` y
+`investigaciones/series-historicas/` (índice en el `README.md` de cada una).
+Scripts: `herramientas/integrar_megaobras_asf_historico.py` y
+`herramientas/integrar_series_historicas.py` (comprueban la huella antes de
+escribir; solo tocan la copia del auditor).
+
+| Obra | Antes (sin fuente) | Ahora | Documento |
+|---|---|---|---|
+| Estela de Luz | $398 → $1,304 mdp, +227.6 % | $393.5 → $1,304.9 mdp, +192.0 % (oficial) | ASF, informe especial 2009-2011, pp. 3 y 13 |
+| Refinería Bicentenario (Tula) | $12,400 mdp | autorizado $3,714.0, ejercido $1,127.6 mdp (derivado, suma de dos claves) | ASF, CP 2014, aud. 315, pp. 10-11 |
+| Agronitrogenados y Fertinal | $7,500 → $33,500 mdp | en pesos sigue pendiente; en dólares: 475 → 760 millones (+60.0 %), Fertinal 635 millones | ASF, CP 2015 aud. 498 (p. 27) y CP 2016 aud. 468 (pp. 2 y 31) |
+| Enciclomedia | $18,000 → $40,000 mdp | autorizado 2005-2010: $21,398.3 mdp (oficial); lo pagado sigue pendiente | ASF, CP 2005, tomo VI vol. 2, aud. 584, p. 264 |
+| FARAC | $60,000 → $162,000 mdp | costo sigue pendiente; deuda en bonos $27,491.2 (1997) → $225,500.2 mdp (2017) | ASF, CP 2017, aud. 96, pp. 5-6 |
+
+- Se retiraron cuatro «hallazgos de la ASF» que no estaban en ningún
+  informe (sobreprecio del 111 % en el acero, hectáreas ejidales de Tula,
+  60 % de equipos inservibles, aforos sobreestimados del FARAC). Cada obra
+  muestra ahora el hallazgo del informe y, en el panel «Lo que dicen los
+  documentos oficiales», una tabla dato · cifra · página con su chip.
+- La inversión total de las 12 obras pasa de $3,928,529.2 a $3,917,257.7
+  mdp y el sobrecosto del conjunto de 247.2 % a 247.8 % (se siguen sumando,
+  no se escriben). La pérdida anual documentada no cambia ($65,050.8 mdp).
+- **Evaluación de los presidentes, Salinas:** PIB +3.91 % anual (+25.87 %
+  acumulado), con el cuadro 8.6 de *Estadísticas históricas de México
+  2014* (precios de 1993, valores básicos; esa serie da 3.42 % a Zedillo
+  contra 3.48 % con la de 2018). Deuda al cierre de 1994: 36.9 % del PIB,
+  Informe Anual 1994 de Banxico, p. 80; es la deuda neta «económica amplia»,
+  no el SHRFSP, e incluye la devaluación de diciembre (promedio del año
+  24.8 %). Las dos salvedades van en la nota de cada celda, en el subtítulo
+  de la métrica y en las advertencias. La lección de la trivia del PIB se
+  corrigió: el promedio más alto ahora es el de Salinas.
+- **No se encontró (sigue pendiente):** el Búnker de la SSP (ningún informe
+  de la ASF localizado con su costo), el costo total del AIFA (la ASF CP
+  2022, aud. 342, solo da lo erogado ese año: $18,141.2 mdp de obra y
+  predios), el registro de 2013 del Tren Interurbano, y los asegurados del
+  IMSS de 1988 y 1994 (Banxico solo da variaciones; el INEGI solo
+  derechohabientes, que es otro concepto; la serie de la STPS pide
+  verificación de navegador).
+- Verificado: 14 paneles sin errores, 42 celdas de la trivia abren su
+  desglose a 1366 y 390 px, barrido de clics sin errores, las cinco tablas
+  de la ASF se pintan en el panel lateral.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3543,7 +3587,8 @@ auditor, por tipo:
 3. **Bloqueado por el entorno (comprobar a mano):** Segundo Informe de
    Gobierno (403), FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
 4. **Datos que faltan y no se estiman:** pérdida de nueve megaobras, costo
-   del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
+   en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
+   FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, padrón de contribuyentes, población CONAPO
    nacional (134.4 millones, sin cotejar en su cuadro) y por entidad, dietas locales, CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
@@ -3633,10 +3678,11 @@ desborde horizontal a 360 px en las 9 pestañas.
   campos `ramo28`, `ramo33` y `gasto` de los estados ya están anclados al DOF.
 - **Matriz de la Cuenta Pública 2018:** no aparece en el portal de la ASF con las
   rutas de los demás años; la serie empieza en 2019.
-- **Evaluación de los presidentes (módulo 2, 3.2):** quedan pendientes el PIB
-  de 1988 (para el promedio de Salinas; habría que usar una serie del INEGI
-  con base anterior y decir el empalme), la deuda de 1994 y el empleo IMSS de
-  1994 (la serie del anexo empieza en 1997). La deuda de 2000–2012 se publicó
+- **Evaluación de los presidentes (módulo 2, 3.2):** el PIB y la deuda de
+  Salinas ya están (28-09-2026, con salvedades). Queda pendiente el empleo
+  IMSS de 1988 y 1994 (la serie del anexo empieza en 1997; hace falta la
+  Memoria Estadística del IMSS o un anexo de informe de gobierno de esos
+  años), por eso Salinas y Zedillo no tienen empleo. La deuda de 2000–2012 se publicó
   con el PIB base 2003: si se consigue la serie homogénea de la SHCP
   (Estadísticas Oportunas, hoy sin respuesta), reemplazarla. Balance, gasto e
   ingresos como % del PIB no se comparan mientras no haya una serie de

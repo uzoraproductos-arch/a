@@ -53,26 +53,30 @@ vigente confirma la reforma del DOF 19-11-2025.
 
 ## C. Megaobras: la pérdida de nueve obras y el costo del AIFA (primero lo intento yo)
 
+> 28-09-2026: revisé los informes de la ASF. Resueltos C5 (Estela de Luz) y C7 (Tula); C3, C4 y C8 avanzaron pero les falta un dato. Lo que sigue abierto pasa a ti. Documentos en `investigaciones/asf-historico/`.
+
 | # | Obra | Documento que lo resuelve | Dónde |
 |---|---|---|---|
 | C1 | Refinería Olmeca (Dos Bocas) | Estado de actividades de Pemex Transformación Industrial en la Cuenta Pública 2024 y 2025, e informes de la ASF (Cuentas Públicas 2019 a 2024) | https://www.cuentapublica.hacienda.gob.mx (tomo de empresas productivas del Estado) · https://www.asf.gob.mx |
 | C2 | Megafarmacia del Bienestar | ~~Estado de actividades de Birmex~~ (hecho: CP 2024, −$717.3 mdp, pero es de toda la empresa). Falta un documento que separe la Megafarmacia: auditoría de la ASF a Birmex (CP 2023 o 2024) | https://www.asf.gob.mx |
-| C3 | FARAC (rescate carretero) | Estados financieros del Fonadin (Banobras) | https://www.gob.mx/banobras → Fonadin → información financiera |
-| C4 | Agronitrogenados y Fertinal | Informes de la ASF (Cuentas Públicas 2014 a 2019), Pemex Fertilizantes | https://www.asf.gob.mx |
-| C5 | Estela de Luz | Informe de la ASF, Cuenta Pública 2011 | https://www.asf.gob.mx |
-| C6 | «Búnker» de la SSP | Informes de la ASF, Cuentas Públicas 2009 a 2012 | https://www.asf.gob.mx |
-| C7 | Refinería Bicentenario (Tula) | Informes de la ASF, Cuentas Públicas 2009 a 2014 | https://www.asf.gob.mx |
-| C8 | Enciclomedia | Informes de la ASF, Cuentas Públicas 2004 a 2006 | https://www.asf.gob.mx |
+| C3 | FARAC (rescate carretero) | ~~ASF~~ (hecho: deuda en bonos 1997-2017, CP 2017 aud. 96). Falta el costo total de indemnizar a los concesionarios: estados financieros del Fonadin o el decreto de rescate de 1997 con sus montos | https://www.gob.mx/banobras → Fonadin → información financiera |
+| C4 | Agronitrogenados y Fertinal | ~~Informes de la ASF~~ (hecho, en dólares: 475 → 760 millones; Fertinal 635 millones). Falta lo pagado en pesos: estados financieros de Pemex Fertilizantes o de Pro-Agroindustria en la Cuenta Pública 2016-2019 | https://www.asf.gob.mx |
+| C5 | Estela de Luz | ~~Informe de la ASF~~ **hecho**: $393.5 → $1,304.9 mdp (informe especial 2009-2011) | https://www.asf.gob.mx |
+| C6 | «Búnker» de la SSP | Informes de la ASF, Cuentas Públicas 2009 a 2012. **No lo encontré**: busca «Centro de Mando» o «Policía Federal» + «inversión física» en el buscador de informes de la ASF, o pide por la PNT a la SSPC el costo de construcción del Centro de Mando de Constituyentes | https://www.asf.gob.mx |
+| C7 | Refinería Bicentenario (Tula) | ~~Informes de la ASF~~ **hecho**: autorizado $3,714.0, ejercido $1,127.6 mdp (CP 2014, aud. 315) | https://www.asf.gob.mx |
+| C8 | Enciclomedia | ~~ASF CP 2005~~ (hecho: autorizado $21,398.3 mdp 2005-2010). Falta lo pagado en total de 2004 a 2011: informes de la ASF de las CP 2006 a 2011 a la SEP (DGTI/ILCE) o solicitud por la PNT a la SEP | https://www.asf.gob.mx |
 | C9 | Tren Interurbano México-Toluca | Registro original de 2013 en la Cartera de Programas y Proyectos de Inversión (clave y monto) e informes de la ASF | https://www.transparenciapresupuestaria.gob.mx → Proyectos de inversión · https://www.asf.gob.mx |
-| C10 | AIFA, costo total de construcción | Informes de la ASF (Cuentas Públicas 2019 a 2022) o documento de la Sedena. Si no aparece: solicitud por la Plataforma Nacional de Transparencia | https://www.asf.gob.mx · https://www.plataformadetransparencia.org.mx |
+| C10 | AIFA, costo total de construcción | Informes de la ASF (Cuentas Públicas 2019 a 2022) o documento de la Sedena. La ASF CP 2022 (aud. 342) solo da lo de ese año ($18,141.2 mdp) y menciona un «Presupuesto Paramétrico» de la Sedena: ese es el documento que hay que pedir. Si no aparece: solicitud por la Plataforma Nacional de Transparencia | https://www.asf.gob.mx · https://www.plataformadetransparencia.org.mx |
 
 ## D. Evaluación de los presidentes: series históricas (primero lo intento yo)
 
+> 28-09-2026: D1 y D2 resueltos (INEGI, *Estadísticas históricas de México 2014*, cuadro 8.6; Banxico, *Informe Anual 1994*, p. 80). **D3 pasa a ti.**
+
 | # | Dato | Documento | Dónde |
 |---|---|---|---|
-| D1 | PIB de 1988 en una serie comparable | INEGI, *Estadísticas Históricas de México 2014*, capítulo de Cuentas Nacionales, o el PIB base 1993 del Banco de Información Económica | https://www.inegi.org.mx (buscar «Estadísticas Históricas de México») |
-| D2 | Saldo de la deuda pública al cierre de 1994 | SHCP, *Informe sobre la situación económica, las finanzas públicas y la deuda pública*, 4.º trimestre de 1994, o Banxico, *Informe Anual 1994* | https://www.banxico.org.mx → Publicaciones → Informes anuales |
-| D3 | Trabajadores asegurados en el IMSS, 1988 a 1996 | IMSS, *Memoria Estadística* de esos años, o *Estadísticas Históricas de México* (INEGI) | https://www.imss.gob.mx → Estadísticas · https://www.inegi.org.mx |
+| D1 | ~~PIB de 1988 en una serie comparable~~ **hecho** | INEGI, *Estadísticas Históricas de México 2014*, capítulo de Cuentas Nacionales, o el PIB base 1993 del Banco de Información Económica | https://www.inegi.org.mx (buscar «Estadísticas Históricas de México») |
+| D2 | ~~Saldo de la deuda pública al cierre de 1994~~ **hecho** (deuda neta económica amplia, 36.9 % del PIB) | SHCP, *Informe sobre la situación económica, las finanzas públicas y la deuda pública*, 4.º trimestre de 1994, o Banxico, *Informe Anual 1994* | https://www.banxico.org.mx → Publicaciones → Informes anuales |
+| D3 | Trabajadores asegurados en el IMSS, diciembre de 1988 y de 1994 (y hasta 1996) | IMSS, *Memoria Estadística* de esos años (en papel o PDF escaneado; la electrónica empieza en 1996), o el *Anexo Estadístico* del Sexto Informe de Gobierno de Zedillo (2000), cuadro de asegurados. Las *Estadísticas históricas* del INEGI no sirven: traen derechohabientes, no trabajadores | https://www.imss.gob.mx → Estadísticas · https://www.inegi.org.mx |
 
 ## E. Remuneraciones (tú, por la Plataforma Nacional de Transparencia)
 

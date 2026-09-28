@@ -15623,7 +15623,7 @@ window.AUDIT_DB = {
           "icono": "⚖️"
         }
       ],
-      "hallazgo_asf": "La ASF dictaminó que el 60% de los equipos de Agronitrogenados eran inservibles al momento de la adquisición aprobada por el Consejo de Administración de Pemex.",
+      "hallazgo_asf": "La ASF concluyó que Pemex compró la planta de Agro Nitrogenados en 275 millones de dólares sin evaluar el estado de los bienes (llevaba 14 años sin operar) y que la rehabilitación subió de 200 a 485 millones, con lo que el proyecto pasó de 475 a 760 millones de dólares. De Fertinal, comprada en 635 millones de dólares, dictaminó que «no es un negocio rentable» para Pemex y que en 2016 registró una pérdida integral de 565.7 millones de dólares.",
       "unidad_metrica": "Tonelada de fertilizante",
       "costo_unitario_real": "Pérdida neta de más de $4,800 pesos por cada tonelada producida en comparación con importación internacional de urea.",
       "estado_campos": {
@@ -15641,9 +15641,9 @@ window.AUDIT_DB = {
       "icono": "🗼",
       "estatus": "Gasto suntuario no productivo",
       "badge_color": "var(--gold-bright)",
-      "inversion_presupuestada_mdp": 398,
-      "inversion_real_mdp": 1304,
-      "sobrecosto_pct": 227.6,
+      "inversion_presupuestada_mdp": 393.5,
+      "inversion_real_mdp": 1304.9,
+      "sobrecosto_pct": 192.0,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 14.6,
       "perdida_anual_mdp": 14.6,
@@ -15669,13 +15669,13 @@ window.AUDIT_DB = {
           "icono": "🛡️"
         }
       ],
-      "hallazgo_asf": "La ASF documentó pagos indebidos por acero importado con sobreprecio del 111% a través del fideicomiso de Banjército y la empresa III Servicios.",
+      "hallazgo_asf": "La ASF documentó pagos improcedentes por $399.2 mdp incluidos en el costo final: $248.9 mdp por el acero (precio, peso, transporte y montaje) y $150.3 mdp por precios extraordinarios, cuarzo y otros conceptos, y presentó denuncias de hechos. Se inauguró el 7 de enero de 2012, más de 15 meses después de lo previsto.",
       "unidad_metrica": "Costo por metro de altura",
       "costo_unitario_real": "Costo de $12.5 millones de pesos por cada metro lineal levantado de la columna sobre Paseo de la Reforma.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "oficial",
+        "sobrecosto_pct": "oficial"
       }
     },
     {
@@ -15738,9 +15738,9 @@ window.AUDIT_DB = {
       "icono": "🧱",
       "estatus": "Cancelada · Terreno ocioso",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 12400,
-      "inversion_real_mdp": 12400,
-      "sobrecosto_pct": 0.0,
+      "inversion_presupuestada_mdp": 3714.0,
+      "inversion_real_mdp": 1127.6,
+      "sobrecosto_pct": 0,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 0,
       "perdida_anual_mdp": 0,
@@ -15756,13 +15756,13 @@ window.AUDIT_DB = {
           "icono": "🗑️"
         }
       ],
-      "hallazgo_asf": "La ASF auditó la adquisición irregular de 700 hectáreas ejidales en Atitalaquia y Tula con sobreprecios pagados a intermediarios.",
+      "hallazgo_asf": "La ASF constató que la nueva refinería no continuó: de $3,714.0 mdp autorizados a sus dos proyectos de inversión se ejercieron $1,127.6 mdp, y siete contratos se terminaron anticipadamente por «cambio de estrategia de negocios». La cifra de $12,400 mdp que traía el simulador no aparece en este documento.",
       "unidad_metrica": "Kilómetro de barda",
       "costo_unitario_real": "Costo de $885 millones de pesos por cada kilómetro de barda de concreto construida sin refinería.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "derivado",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
       }
     },
     {
@@ -15774,9 +15774,9 @@ window.AUDIT_DB = {
       "icono": "🖥️",
       "estatus": "Extinguido · Hardware en desuso",
       "badge_color": "var(--text-dim)",
-      "inversion_presupuestada_mdp": 18000,
+      "inversion_presupuestada_mdp": 21398.3,
       "inversion_real_mdp": 40000,
-      "sobrecosto_pct": 122.2,
+      "sobrecosto_pct": 86.9,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 0,
       "perdida_anual_mdp": 0,
@@ -15792,11 +15792,11 @@ window.AUDIT_DB = {
           "icono": "💸"
         }
       ],
-      "hallazgo_asf": "La ASF emitió observaciones por falta de inventario, equipos descompuestos sin garantía y pagos millonarios a integradores sin verificar conectividad.",
+      "hallazgo_asf": "La ASF revisó el primer año del contrato multianual (2005): de $2,105.0 mdp asignados a Enciclomedia se ejercieron $478.3 mdp, porque el esquema cambió de compra de equipo a un servicio multianual de arrendamiento. Hacienda había autorizado $21,398.3 mdp para 2005 a 2010.",
       "unidad_metrica": "Aula equipada",
       "costo_unitario_real": "Gasto de más de $145,000 pesos por cada aula escolar de 5° y 6° de primaria.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_presupuestada_mdp": "oficial",
         "inversion_real_mdp": "pendiente",
         "sobrecosto_pct": "pendiente"
       }
@@ -15884,7 +15884,7 @@ window.AUDIT_DB = {
           "icono": "🛣️"
         }
       ],
-      "hallazgo_asf": "Observaciones sistemáticas de la ASF a Banobras por valuaciones sobreestimadas de aforos vehiculares en los títulos de concesión originales.",
+      "hallazgo_asf": "La ASF (Cuenta Pública 2017) documentó que la deuda en bonos del rescate carretero pasó de $27,491.2 mdp en 1997 a $225,500.2 mdp en 2017, por nuevas emisiones, el aumento de la UDI y la capitalización de intereses; ese año se pagaron $10,368.6 mdp de intereses y lo que faltaba pagar de 2018 a 2033 se estimaba en $351,969.6 mdp.",
       "unidad_metrica": "Kilómetro carretero rescatado",
       "costo_unitario_real": "Costo fiscal de $18.5 millones de pesos por kilómetro rescatado transferido a pagarés gubernamentales de Banobras.",
       "estado_campos": {
@@ -15922,13 +15922,13 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3928529.2,
-    "inversion_presupuestada_total_mdp": 1131586.4,
+    "inversion_total_mdp": 3917257.7,
+    "inversion_presupuestada_total_mdp": 1126294.2,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 12,
-    "sobrecosto_conjunto_pct": 247.2,
+    "sobrecosto_conjunto_pct": 247.8,
     "nota_totales": "Todos estos agregados se obtienen sumando las 12 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   },
   "operacion_oficial": {
@@ -16064,6 +16064,36 @@ window.AUDIT_DB = {
         "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
         "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
         "sha256": "b3f621fc8ef657e38114adb75fe2108b152fc3d87479e47353db4a88e27d5f9d"
+      },
+      "asf_estela": {
+        "doc": "ASF, Informe sobre la fiscalización superior del monumento Estela de Luz 2009-2011 (informe especial)",
+        "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+        "sha256": "91cef08bd1cfdc16e91f4a40a5c46885d058b2083d77d3611b33709af89056f8"
+      },
+      "asf_tula14": {
+        "doc": "ASF, Cuenta Pública 2014, auditoría 315, Pemex Refinación: Calidad de Combustibles, Fase Gasolinas, de la Refinería «Miguel Hidalgo» y Revisión de la Cancelación de la Construcción de la Refinería Bicentenario",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+        "sha256": "370607a9b7c055cf1c58a9455ea467730063e2276ff4e5078d3dddb787be02c4"
+      },
+      "asf_agro15": {
+        "doc": "ASF, Cuenta Pública 2015, auditoría 498-DE, Petróleos Mexicanos: Gestión Financiera para la Adquisición de Agro Nitrogenados",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0498_a.pdf",
+        "sha256": "906989b1266ac701aa6ff639be499afac9d670f501ed7aa57c5e58470eebe041"
+      },
+      "asf_fert16": {
+        "doc": "ASF, Cuenta Pública 2016, auditoría 468-DE, Pemex Fertilizantes: Gestión Financiera (compra de Grupo Fertinal)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+        "sha256": "7028e6acd9ba71064179ce42229b6ad06dfcb36b349c2370d0626608bb340af3"
+      },
+      "asf_encic05": {
+        "doc": "ASF, Informe del Resultado de la Cuenta Pública 2005, tomo VI, vol. 2, auditoría 584, SEP: Egresos Presupuestales Asignados al Proyecto Enciclomedia",
+        "url": "https://www.asf.gob.mx/Trans/Informes/ir2005i/Tomos/T6V2.pdf",
+        "sha256": "e668164a96e169ee16b5b5b78a3e875a43dc0a780d482c70bcd750e7fc8e380b"
+      },
+      "asf_farac17": {
+        "doc": "ASF, Cuenta Pública 2017, auditoría 96, Banobras: Fideicomiso Fondo Nacional de Infraestructura (deuda del rescate carretero)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf",
+        "sha256": "aef6346d39a48e59bd0666415965d83bf7da0cda69d84eba69de357c2d3581f8"
       }
     },
     "obras": {
@@ -16554,6 +16584,223 @@ window.AUDIT_DB = {
         "fuentes": [
           "cp",
           "pef26dof"
+        ]
+      },
+      "agronitrogenados": {
+        "campos": {
+          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "La ASF da estas cifras en dólares: el proyecto se autorizó en 475 millones de dólares (compra más rehabilitación) y subió a 760 millones. No hay en el documento un equivalente en pesos, así que la cifra en mdp sigue pendiente.",
+          "inversion_real_mdp": "Pendiente en pesos. En dólares: 760 millones por Agro Nitrogenados (ASF, CP 2015, p. 27) y 635 millones por Fertinal (ASF, CP 2016, p. 2). No se suman ni se convierten aquí: son compras distintas, de años distintos.",
+          "sobrecosto_pct": "En dólares, el costo total de Agro Nitrogenados pasó de 475 a 760 millones: 60.0 % más (cálculo de Auditavisión con las dos cifras de la ASF, p. 27). No incluye Fertinal."
+        },
+        "hallazgo": "La ASF concluyó que Pemex compró la planta de Agro Nitrogenados en 275 millones de dólares sin evaluar el estado de los bienes (llevaba 14 años sin operar) y que la rehabilitación subió de 200 a 485 millones, con lo que el proyecto pasó de 475 a 760 millones de dólares. De Fertinal, comprada en 635 millones de dólares, dictaminó que «no es un negocio rentable» para Pemex y que en 2016 registró una pérdida integral de 565.7 millones de dólares.",
+        "asfHist": [
+          {
+            "dato": "Agro Nitrogenados: precio de compra de la planta",
+            "valor": "275 millones de dólares",
+            "estado": "oficial",
+            "pagina": "27 (CP 2015)"
+          },
+          {
+            "dato": "Agro Nitrogenados: costo total autorizado → final",
+            "valor": "475 → 760 millones de dólares",
+            "estado": "oficial",
+            "pagina": "26-27 (CP 2015)"
+          },
+          {
+            "dato": "Aumento del costo total",
+            "valor": "60.0 %",
+            "estado": "derivado",
+            "pagina": "27 (CP 2015)"
+          },
+          {
+            "dato": "Fertinal: inversión de compra (2016)",
+            "valor": "635 millones de dólares",
+            "estado": "oficial",
+            "pagina": "2 (CP 2016)"
+          },
+          {
+            "dato": "Fertinal: pérdida integral de 2016",
+            "valor": "565.7 millones de dólares ($11,690.6 mdp)",
+            "estado": "oficial",
+            "pagina": "31 (CP 2016)"
+          }
+        ],
+        "fuentes": [
+          "asf_agro15",
+          "asf_fert16"
+        ]
+      },
+      "estela-luz": {
+        "campos": {
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "oficial",
+          "sobrecosto_pct": "oficial"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Monto del contrato de construcción firmado el 18-12-2009 entre el fideicomiso e I.I.I. Servicios: $393,490.0 miles de pesos (ASF, informe especial, p. 3).",
+          "inversion_real_mdp": "Costo final del proyecto, desde su concepción hasta su inauguración: $1,304,917.7 miles de pesos (ASF, informe especial, p. 13).",
+          "sobrecosto_pct": "La ASF calcula que el costo de la construcción se elevó 192.0 % respecto del contratado originalmente (p. 13). Mide solo la construcción; el costo final incluye además proyecto, supervisión y otros gastos."
+        },
+        "hallazgo": "La ASF documentó pagos improcedentes por $399.2 mdp incluidos en el costo final: $248.9 mdp por el acero (precio, peso, transporte y montaje) y $150.3 mdp por precios extraordinarios, cuarzo y otros conceptos, y presentó denuncias de hechos. Se inauguró el 7 de enero de 2012, más de 15 meses después de lo previsto.",
+        "asfHist": [
+          {
+            "dato": "Contrato de construcción original (18-12-2009)",
+            "valor": "$393.5 mdp",
+            "estado": "oficial",
+            "pagina": "3"
+          },
+          {
+            "dato": "Total contratado tras cuatro convenios modificatorios",
+            "valor": "$1,146.4 mdp",
+            "estado": "oficial",
+            "pagina": "3"
+          },
+          {
+            "dato": "Costo final del proyecto",
+            "valor": "$1,304.9 mdp",
+            "estado": "oficial",
+            "pagina": "13"
+          },
+          {
+            "dato": "Pagos injustificados en el acero",
+            "valor": "$248.9 mdp",
+            "estado": "oficial",
+            "pagina": "3"
+          },
+          {
+            "dato": "Otros pagos improcedentes",
+            "valor": "$150.3 mdp",
+            "estado": "oficial",
+            "pagina": "4"
+          }
+        ],
+        "fuentes": [
+          "asf_estela"
+        ]
+      },
+      "refineria-tula": {
+        "campos": {
+          "inversion_presupuestada_mdp": "derivado",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Suma de lo que Hacienda autorizó a los dos proyectos de inversión de la nueva refinería: $1,475.2 mdp para estudios de preinversión (clave 0818T4M0023) y $2,238.8 mdp para acondicionar el terreno (clave 0918T4M0048). ASF, auditoría 315, CP 2014, pp. 10 y 11.",
+          "inversion_real_mdp": "Suma de lo ejercido en esos dos proyectos: $659.3 mdp en 17 contratos de estudios y $468.3 mdp en obras del terreno (pp. 10 y 11).",
+          "sobrecosto_pct": "No hubo sobrecosto: el proyecto se detuvo habiendo ejercido el 30.4 % de lo autorizado. Se dejaron de ejecutar $1,770.5 mdp de plataformas, urbanización, edificios y vialidades (p. 11)."
+        },
+        "hallazgo": "La ASF constató que la nueva refinería no continuó: de $3,714.0 mdp autorizados a sus dos proyectos de inversión se ejercieron $1,127.6 mdp, y siete contratos se terminaron anticipadamente por «cambio de estrategia de negocios». La cifra de $12,400 mdp que traía el simulador no aparece en este documento.",
+        "asfHist": [
+          {
+            "dato": "Estudios de preinversión: autorizado / ejercido",
+            "valor": "$1,475.2 / $659.3 mdp",
+            "estado": "oficial",
+            "pagina": "10"
+          },
+          {
+            "dato": "Acondicionamiento del terreno: autorizado / ejercido",
+            "valor": "$2,238.8 / $468.3 mdp",
+            "estado": "oficial",
+            "pagina": "11"
+          },
+          {
+            "dato": "Obra que se dejó de ejecutar",
+            "valor": "$1,770.5 mdp",
+            "estado": "oficial",
+            "pagina": "11"
+          },
+          {
+            "dato": "Total ejercido (suma)",
+            "valor": "$1,127.6 mdp",
+            "estado": "derivado",
+            "pagina": "10-11"
+          }
+        ],
+        "fuentes": [
+          "asf_tula14"
+        ]
+      },
+      "enciclomedia": {
+        "campos": {
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Recursos que Hacienda autorizó para el servicio multianual de Enciclomedia de 2005 a 2010: $21,398,300.0 miles de pesos para 125,562 aulas (ASF, CP 2005, tomo VI, vol. 2, p. 264).",
+          "inversion_real_mdp": "Falta un documento que sume lo pagado de 2004 a 2011. La ASF solo revisó 2005, cuando se ejercieron $478.3 mdp de los $2,105.0 mdp previstos (p. 270).",
+          "sobrecosto_pct": "No se puede calcular mientras falte lo pagado en total."
+        },
+        "hallazgo": "La ASF revisó el primer año del contrato multianual (2005): de $2,105.0 mdp asignados a Enciclomedia se ejercieron $478.3 mdp, porque el esquema cambió de compra de equipo a un servicio multianual de arrendamiento. Hacienda había autorizado $21,398.3 mdp para 2005 a 2010.",
+        "asfHist": [
+          {
+            "dato": "Autorizado para el servicio multianual 2005-2010",
+            "valor": "$21,398.3 mdp",
+            "estado": "oficial",
+            "pagina": "264"
+          },
+          {
+            "dato": "Presupuesto original de 2005",
+            "valor": "$2,105.0 mdp",
+            "estado": "oficial",
+            "pagina": "265"
+          },
+          {
+            "dato": "Ejercido en 2005",
+            "valor": "$478.3 mdp",
+            "estado": "oficial",
+            "pagina": "270"
+          }
+        ],
+        "fuentes": [
+          "asf_encic05"
+        ]
+      },
+      "farac-carretero": {
+        "campos": {
+          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "El rescate no tuvo un presupuesto de obra: sustituyó deuda bancaria de los concesionarios por deuda en bonos con aval federal. Lo que la ASF documenta es esa deuda (ver el panel).",
+          "inversion_real_mdp": "Pendiente: falta un documento que diga cuánto costó en total indemnizar a los concesionarios de las 23 autopistas.",
+          "sobrecosto_pct": "No aplica mientras no haya un costo original y uno final comparables."
+        },
+        "hallazgo": "La ASF (Cuenta Pública 2017) documentó que la deuda en bonos del rescate carretero pasó de $27,491.2 mdp en 1997 a $225,500.2 mdp en 2017, por nuevas emisiones, el aumento de la UDI y la capitalización de intereses; ese año se pagaron $10,368.6 mdp de intereses y lo que faltaba pagar de 2018 a 2033 se estimaba en $351,969.6 mdp.",
+        "asfHist": [
+          {
+            "dato": "Deuda en bonos del rescate, 1997",
+            "valor": "$27,491.2 mdp",
+            "estado": "oficial",
+            "pagina": "6"
+          },
+          {
+            "dato": "Deuda en bonos neta, 31-12-2017",
+            "valor": "$225,500.2 mdp",
+            "estado": "oficial",
+            "pagina": "5-6"
+          },
+          {
+            "dato": "Intereses pagados en 2017",
+            "valor": "$10,368.6 mdp",
+            "estado": "oficial",
+            "pagina": "6"
+          },
+          {
+            "dato": "Capital e intereses por pagar 2018-2033 (estimado por la ASF, en UDIS valuadas a 2017)",
+            "valor": "$351,969.6 mdp",
+            "estado": "oficial",
+            "pagina": "6"
+          }
+        ],
+        "fuentes": [
+          "asf_farac17"
         ]
       }
     }
@@ -22965,7 +23212,8 @@ window.AUDIT_DB = {
     "advertencias": [
       "La deuda de 2000 a 2012 se public\u00f3 con el PIB de su momento (base 2003) y la de 2018 y 2024 con bases m\u00e1s recientes. Las revisiones del PIB pueden mover el cociente m\u00e1s de un punto: la diferencia entre Zedillo (30.7%) y Fox (29.1%) no debe leerse como definitiva.",
       "Las recuperaciones operadas crecen con el tiempo: una Cuenta P\u00fablica vieja lleva m\u00e1s a\u00f1os de solventaci\u00f3n que una reciente. Comparar sexenios con esta cifra favorece a los antiguos.",
-      "El PIB de 2023 y 2024 es preliminar."
+      "El PIB de 2023 y 2024 es preliminar.",
+      "La deuda de Salinas (36.9 % del PIB al cierre de 1994) es la deuda neta econ\u00f3mica amplia que report\u00f3 Banxico, no el SHRFSP de los dem\u00e1s sexenios, y su PIB viene de la serie a precios de 1993. Se comparan con esa salvedad."
     ],
     "recuperacionesConjuntas": {
       "mdp": 41091.56,
@@ -23025,6 +23273,18 @@ window.AUDIT_DB = {
         "corto": "IMSS, Comunicado 009/2025",
         "doc": "Instituto Mexicano del Seguro Social, Comunicado No. 009/2025, \u00abPuestos de trabajo afiliados al Instituto Mexicano del Seguro Social\u00bb: 22,238,379 al 31 de diciembre de 2024.",
         "url": "https://www.imss.gob.mx/prensa/archivo/202501/009"
+      },
+      "INEGI_EHM2014": {
+        "corto": "INEGI, Estad\u00edsticas hist\u00f3ricas de M\u00e9xico 2014, cuadro 8.6",
+        "doc": "Instituto Nacional de Estad\u00edstica y Geograf\u00eda, Estad\u00edsticas hist\u00f3ricas de M\u00e9xico 2014 (2015), cap\u00edtulo 8 \u00abInformaci\u00f3n econ\u00f3mica agregada\u00bb, cuadro 8.6 \u00abProducto interno bruto total y por gran divisi\u00f3n de actividad econ\u00f3mica\u00bb, serie anual de 1988 a 2006, millones de pesos a precios de 1993, valores b\u00e1sicos (p\u00e1gina 20 del PDF del cap\u00edtulo).",
+        "url": "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/8.%20Informacion%20economica%20agregada.pdf",
+        "sha256": "e454376e67522481ef7ba88c190f38acc8f75367332a2f74f88cc9f7230b3009"
+      },
+      "BANXICO_IA1994": {
+        "corto": "Banco de M\u00e9xico, Informe Anual 1994, p. 80",
+        "doc": "Banco de M\u00e9xico, Informe Anual 1994 (1995), apartado \u00abDeuda Neta del Sector P\u00fablico\u00bb, p. 80: saldos de fin de periodo de la deuda neta total econ\u00f3mica amplia como proporci\u00f3n del PIB al cierre de 1994.",
+        "url": "https://www.banxico.org.mx/publicaciones-y-prensa/informes-anuales/%7B0F2D589F-92A4-9C48-C456-643595B46CE5%7D.pdf",
+        "sha256": "56044ed6d2e6f437bcb5ea69c4fb380d83abb4e86e82e23229bc0aff753651a2"
       }
     },
     "filas": [
@@ -23035,12 +23295,22 @@ window.AUDIT_DB = {
           1994
         ],
         "pib": {
-          "estado": "pendiente",
-          "motivo": "La serie del INEGI a\u00f1o base 2018 empieza en 1993; falta el PIB de 1988 en una base comparable."
+          "promedio": 3.91,
+          "acumulado": 25.87,
+          "base": 1988,
+          "cierre": 1994,
+          "preliminar": false,
+          "estado": "derivado",
+          "fuente": "INEGI_EHM2014",
+          "operacion": "Tasa media anual: (PIB 1994 / PIB 1988)^(1/6) \u2212 1, con el PIB a precios de 1993: $1,206,135 y $958,230 millones de pesos.",
+          "nota": "La serie del INEGI a precios de 2018, que se usa para los dem\u00e1s sexenios, empieza en 1993. Para Salinas se usa la serie anterior, a precios de 1993 y en valores b\u00e1sicos. Como contraste, esa misma serie da a Zedillo 3.42 % anual (1994-2000), contra 3.48 % con la de 2018: la diferencia entre bases es de d\u00e9cimas."
         },
         "deuda": {
-          "estado": "pendiente",
-          "motivo": "Falta el saldo de 1994 en los documentos consultados."
+          "cierre": 36.9,
+          "anio": 1994,
+          "estado": "oficial",
+          "fuente": "BANXICO_IA1994",
+          "nota": "No es el mismo indicador que el de los dem\u00e1s sexenios. Para 1994 no existe el saldo hist\u00f3rico de los requerimientos financieros (SHRFSP), que Hacienda publica desde 2000; Banxico report\u00f3 la deuda neta total \u00abecon\u00f3mica amplia\u00bb, saldo de fin de a\u00f1o. Ese cierre incluye la devaluaci\u00f3n de diciembre de 1994, que infl\u00f3 la deuda externa en pesos: en saldo promedio del a\u00f1o fue 24.8 % del PIB (misma p\u00e1gina)."
         },
         "empleo": {
           "estado": "pendiente",

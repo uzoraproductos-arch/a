@@ -20186,7 +20186,7 @@
     const nombres = sim.obras.filter(o => v.indexOf(o.id) >= 0).map(o => o.nombre.replace(/ \(.*\)$/, ''));
     const conCifra = sim.obras.filter(o => o.estado_campos && o.estado_campos.inversion_real_mdp && o.estado_campos.inversion_real_mdp !== 'pendiente').length;
     return 'De las ' + sim.obras.length + ' obras, ' + nombres.length + ' ya tienen documentos oficiales cotejados (' + nombres.join(', ') +
-      ') y ' + conCifra + ' tienen su costo anclado a la cartera de Hacienda y a la Cuenta Pública. Cada cifra lleva su chip: oficial, derivado o pendiente. ' +
+      ') y ' + conCifra + ' tienen su costo anclado a un documento oficial (la cartera de Hacienda, la Cuenta Pública o un informe de la ASF). Cada cifra lleva su chip: oficial, derivado o pendiente. ' +
       (esAuditor()
         ? 'La pérdida anual ya tiene documento en ' + (sim.totales_consolidados.obras_con_operacion_documentada || 0) + ' obras (Tren Maya y AIFA por sus estados de actividades de la Cuenta Pública 2024; el IPAB por el Ramo 34); en las demás, la pérdida, los costos de operación y el costo unitario siguen pendientes y no se estiman.'
         : 'La pérdida operativa, los costos de operación y el costo unitario de todas las obras siguen pendientes de documento, y así se marcan.');
@@ -20353,12 +20353,12 @@
   const PE_METRICAS = [
     { k: 'pib', g: 'crec', ico: '📈', et: 'Economía', fmt: 'pctS', criterio: 'max',
       val: f => f.pib && f.pib.promedio,
-      tit: 'Crecimiento de la economía', sub: 'PIB real, tasa media anual del sexenio (INEGI, precios de 2018)',
+      tit: 'Crecimiento de la economía', sub: 'PIB real, tasa media anual del sexenio (INEGI, precios de 2018; Salinas, a precios de 1993)',
       pregunta: '¿Con qué presidente creció más la economía?',
-      leccion: 'El sexenio que empezó con la peor crisis (−5.9% en 1995) terminó con el mayor promedio: la recuperación de 1996 a 2000 fue rápida. Un promedio de seis años no cuenta cómo se vivió cada uno.' },
+      leccion: 'Salinas tiene el promedio más alto, medido con la serie del INEGI a precios de 1993, porque la de 2018 empieza en 1993. Zedillo, que empezó con la peor crisis (−5.9% en 1995), quedó segundo: la recuperación de 1996 a 2000 fue rápida. Un promedio de seis años no cuenta cómo se vivió cada uno.' },
     { k: 'deuda', g: 'crec', ico: '💳', et: 'Deuda', fmt: 'pct', criterio: 'max',
       val: f => f.deuda && f.deuda.cierre,
-      tit: 'Deuda pública al cierre', sub: 'Saldo histórico de los requerimientos financieros (SHRFSP), % del PIB al terminar el sexenio',
+      tit: 'Deuda pública al cierre', sub: 'Saldo histórico de los requerimientos financieros (SHRFSP), % del PIB al terminar el sexenio; Salinas, deuda neta reportada por Banxico',
       pregunta: '¿Quién entregó la deuda más alta como proporción de la economía?',
       leccion: 'Desde 2006 cada sexenio entregó una deuda mayor que la que recibió. La pandemia de 2020 explica una parte del último salto: ese año el PIB cayó 8.4% y el cociente subió solo por eso.' },
     { k: 'empleo', g: 'crec', ico: '👷', et: 'Empleo', fmt: 'entero', criterio: 'max',
@@ -21874,6 +21874,13 @@
           (a.porAclarar ? '; por aclarar ' + m(a.porAclarar) : '') + '; p. ' + a.pagina + ')</span></li>').join('') +
         '</ul>';
     }
+    if (v.asfHist && v.asfHist.length) {
+      h += '<h5 class="sim-ver-sub">Lo que documentó la Auditoría Superior de la Federación</h5>' +
+        '<table class="sim-ver-tabla"><thead><tr><th>Dato</th><th>Cifra</th><th>Página</th></tr></thead><tbody>' +
+        v.asfHist.map(a => '<tr><td>' + escHtml(a.dato) + '</td><td>' + escHtml(a.valor) + ' ' + chipEstado(a.estado) + '</td><td>' + escHtml(a.pagina) + '</td></tr>').join('') +
+        '</tbody></table>';
+    }
+    if (v.hallazgo && v.asfHist) h += '<p class="sim-ver-p">' + escHtml(v.hallazgo) + '</p>';
     if (v.contradicciones && v.contradicciones.length) {
       h += '<div class="sim-ver-inc"><strong>⚠️ Incongruencia entre documentos oficiales.</strong> Explicarla le corresponde al gobierno, que es quien publica las dos cifras.' +
         v.contradicciones.map(t => '<p>' + escHtml(t) + '</p>').join('') + '</div>';
