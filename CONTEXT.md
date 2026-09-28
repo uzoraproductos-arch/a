@@ -3486,6 +3486,25 @@ el texto del reparto del IEPS. Se quitaron los colores `--am-c5..8`, que ya no
 se usan. Verificado en 1366 y 390 px: ambas vistas, expediente sin NaN,
 diapositiva 9 con el OCE, sin desborde, 14 pestañas sin errores.
 
+### Hecho (trivia de los presidentes: desglose de cada cifra; barrido de clics, sello 20260928b)
+
+- **Falla reportada por el autor:** en la trivia (módulo 2, bloque 3, 3.2)
+  no se podía desglosar la información de la última tabla. Causa: la
+  operación, la nota del asterisco y el motivo de cada «pendiente» solo
+  vivían en el `title` de la celda, que se lee al pasar el cursor; en un
+  teléfono no hay cursor y en computadora no había nada que pulsar. Además,
+  a 390 px la tabla mostraba dos columnas sin avisar que se desliza.
+- **Corrección:** las 42 celdas de las dos tablas comparativas son botones
+  (`data-pe-ref`, teclado con Enter o espacio) que abren `peDesglose` en el
+  panel lateral: cifra y chip, «Cómo se calculó», la tabla por Cuenta
+  Pública cuando existe `porCuenta` (con su suma), la resta de asegurados
+  del IMSS, la nota, el motivo del pendiente y la fuente con liga. Aviso
+  «Toca cualquier cifra… desliza la tabla» sobre cada tabla.
+- **Barrido de funcionalidad:** 372 botones pulsados en las 14 secciones del
+  auditor, 0 errores; ningún `onclick` apunta a una función no exportada.
+  Las preguntas frecuentes se muestran abiertas por diseño (no son
+  plegables).
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el

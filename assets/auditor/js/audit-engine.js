@@ -20450,12 +20450,13 @@
     return chipEstado(estado) + ' ' + op + ' Fuentes: ' + ligas + '.' + (E && E.convencion ? ' <span class="pe-conv">' + escHtml(E.convencion) + '</span>' : '');
   }
 
-  function peCelda(c, valor, fmt, extra) {
+  function peCelda(c, valor, fmt, extra, ref) {
+    const abre = ref ? ' role="button" tabindex="0" data-pe-ref="' + ref + '"' : '';
     if (!c || typeof valor !== 'number') {
       const est = c && c.estado === 'no_aplica' ? 'No aplica' : c && c.estado === 'conjunta' ? 'Conjunta' : 'Pendiente';
-      return '<td class="pe-td-sin" title="' + escHtml((c && c.motivo) || '') + '">' + (est === 'Pendiente' ? chipEstado('pendiente') : '<span class="pe-td-na">' + est + '</span>') + '</td>';
+      return '<td class="pe-td-sin' + (ref && c ? ' pe-td-abre' : '') + '"' + (c ? abre : '') + ' title="' + escHtml((c && c.motivo) || '') + '">' + (est === 'Pendiente' ? chipEstado('pendiente') : '<span class="pe-td-na">' + est + '</span>') + '</td>';
     }
-    return '<td class="pe-td-num"' + (c.nota || c.operacion ? ' title="' + escHtml(c.nota || c.operacion) + '"' : '') + '><span data-anim-v="' + valor + '" data-anim-f="' + fmt + '">' + simFmt(0, fmt) + '</span>' + (extra || '') + (c.nota ? '<sup class="pe-nota-mk">*</sup>' : '') + '</td>';
+    return '<td class="pe-td-num' + (ref ? ' pe-td-abre' : '') + '"' + abre + (c.nota || c.operacion ? ' title="' + escHtml(c.nota || c.operacion) + '"' : '') + '><span data-anim-v="' + valor + '" data-anim-f="' + fmt + '">' + simFmt(0, fmt) + '</span>' + (extra || '') + (c.nota ? '<sup class="pe-nota-mk">*</sup>' : '') + '</td>';
   }
 
   function peTabla(G, E) {
@@ -20468,19 +20469,19 @@
     if (G.k === 'crec') {
       cab = '<th>Presidente</th><th>PIB · promedio anual</th><th>PIB · acumulado</th><th>Deuda al cierre (% PIB)</th><th>Empleo formal creado (IMSS)</th>';
       filas = man.map(x => '<tr><th scope="row"><b>' + x.corto + '</b><small>' + x.periodo + '</small></th>' +
-        peCelda(x.d.pib, x.d.pib && x.d.pib.promedio, 'pctS') +
-        peCelda(x.d.pib, x.d.pib && x.d.pib.acumulado, 'pctS') +
-        peCelda(x.d.deuda, x.d.deuda && x.d.deuda.cierre, 'pct') +
-        peCelda(x.d.empleo, x.d.empleo && x.d.empleo.creados, 'entero') + '</tr>').join('');
+        peCelda(x.d.pib, x.d.pib && x.d.pib.promedio, 'pctS', '', x.id + ':pib:promedio') +
+        peCelda(x.d.pib, x.d.pib && x.d.pib.acumulado, 'pctS', '', x.id + ':pib:acumulado') +
+        peCelda(x.d.deuda, x.d.deuda && x.d.deuda.cierre, 'pct', '', x.id + ':deuda:cierre') +
+        peCelda(x.d.empleo, x.d.empleo && x.d.empleo.creados, 'entero', '', x.id + ':empleo:creados') + '</tr>').join('');
     } else {
       cab = '<th>Presidente</th><th>Cuentas Públicas</th><th>Auditorías de la ASF</th><th>Recuperado (mdp)</th><th>Por aclarar (mdp)</th>';
       filas = man.map(x => {
         const a = x.d.auditorias || {};
         const cps = a.cuentas ? (a.cuentas[0] === a.cuentas[1] ? 'CP ' + a.cuentas[0] : 'CP ' + a.cuentas[0] + '–' + a.cuentas[1]) : 'Sin ASF';
         return '<tr><th scope="row"><b>' + x.corto + '</b><small>' + x.periodo + '</small></th><td class="pe-td-cp">' + cps + '</td>' +
-          peCelda(x.d.auditorias, a.total, 'entero') +
-          peCelda(x.d.recuperaciones, x.d.recuperaciones && x.d.recuperaciones.mdp, 'mdp1') +
-          peCelda(x.d.porAclarar, x.d.porAclarar && x.d.porAclarar.mdp, 'mdp1') + '</tr>';
+          peCelda(x.d.auditorias, a.total, 'entero', '', x.id + ':auditorias:total') +
+          peCelda(x.d.recuperaciones, x.d.recuperaciones && x.d.recuperaciones.mdp, 'mdp1', '', x.id + ':recuperaciones:mdp') +
+          peCelda(x.d.porAclarar, x.d.porAclarar && x.d.porAclarar.mdp, 'mdp1', '', x.id + ':porAclarar:mdp') + '</tr>';
       }).join('');
     }
     /* Una nota por motivo, con todos los presidentes a los que aplica:
@@ -20514,11 +20515,84 @@
       '<header class="pe-tabla-cab"><h4><span aria-hidden="true">' + G.ico + '</span> ' + G.tit + '</h4>' +
         '<div class="pe-tabla-accion">' + boton + '</div></header>' +
       (abierta ? '' : tuUd('<p class="pe-tabla-aviso">Se abre cuando responda las trivias de ', '<p class="pe-tabla-aviso">Se abre cuando respondas las trivias de ') + metr.map(m => '<b>' + m.et + '</b>').join(', ') + tuUd('. Pulse cada pestaña de arriba.</p>', '. Pulsa cada pestaña de arriba.</p>')) +
+      (abierta ? tuUd('<p class="pe-desliza">Toque cualquier cifra para ver su desglose. En pantallas angostas, deslice la tabla hacia la izquierda →</p>', '<p class="pe-desliza">Toca cualquier cifra para ver su desglose. En pantallas angostas, desliza la tabla hacia la izquierda →</p>') : '') +
       '<div class="pe-tabla-scroll' + (abierta ? '' : ' pe-velo') + '"><table class="pe-tabla" id="peTablaT-' + G.k + '"><thead><tr>' + cab + '</tr></thead><tbody>' + filas + '</tbody></table></div>' +
       (notas.length ? '<ul class="pe-tabla-notas">' + notas.join('') + '</ul>' : '') +
-      '<p class="pe-fuente">' + chipEstado('oficial') + ' ' + chipEstado('derivado') + ' ' + chipEstado('pendiente') + ' Fuentes: ' + fuentes.map(c => peFuenteLiga(c)).join(' · ') + '. Las celdas calculadas dicen su operación al pasar el cursor.</p>' +
+      '<p class="pe-fuente">' + chipEstado('oficial') + ' ' + chipEstado('derivado') + ' ' + chipEstado('pendiente') + ' Fuentes: ' + fuentes.map(c => peFuenteLiga(c)).join(' · ') + '. ' + tuUd('Toque una cifra para ver cómo se calculó.', 'Toca una cifra para ver cómo se calculó.') + '</p>' +
     '</section>';
   }
+
+  /* Desglose de una celda de las tablas comparativas: la operacion, las
+     cifras por Cuenta Publica o por año, la nota y la fuente, en el panel
+     lateral. Antes solo se leia al pasar el cursor, y en un telefono no
+     habia forma de abrirlo. */
+  const PE_CAMPOS = {
+    'pib:promedio': ['Crecimiento del PIB, promedio anual', 'pctS'],
+    'pib:acumulado': ['Crecimiento del PIB, acumulado del sexenio', 'pctS'],
+    'deuda:cierre': ['Deuda pública al cierre del sexenio (% del PIB)', 'pct'],
+    'empleo:creados': ['Empleo formal creado (asegurados en el IMSS)', 'entero'],
+    'auditorias:total': ['Auditorías de la ASF', 'entero'],
+    'recuperaciones:mdp': ['Recuperado por la ASF', 'mdp1'],
+    'porAclarar:mdp': ['Monto por aclarar ante la ASF', 'mdp1']
+  };
+
+  function peDesglose(ref, origen) {
+    const p = String(ref || '').split(':');
+    const x = peMandatarios().find(m => m.id === p[0]);
+    const def = PE_CAMPOS[p[1] + ':' + p[2]];
+    if (!x || !def) return;
+    const c = x.d[p[1]];
+    const v = c && c[p[2]];
+    const fmt = def[1];
+    const ES = peES() || {};
+    const est = !c ? 'pendiente' : (typeof v === 'number' ? (c.estado || 'derivado') : c.estado);
+    const secs = [];
+    if (typeof v === 'number') secs.push('<p class="pe-dg-cifra">' + simFmt(v, fmt) + ' ' + chipEstado(est === 'conjunta' ? 'pendiente' : est) + '</p>');
+    else secs.push('<p class="pe-dg-cifra">' + (est === 'no_aplica' ? 'No aplica' : est === 'conjunta' ? 'Cifra conjunta' : 'Pendiente') + (est === 'no_aplica' ? '' : ' ' + chipEstado('pendiente')) + '</p>');
+    if (c && c.operacion) secs.push(radarSec('Cómo se calculó', '<p>' + escHtml(c.operacion) + '</p>'));
+    if (c && c.porCuenta) {
+      const ks = Object.keys(c.porCuenta).sort();
+      const suma = ks.reduce((a, k) => a + c.porCuenta[k], 0);
+      secs.push(radarSec('Por Cuenta Pública', '<div class="pd-tabla-w"><table class="pd-tabla"><thead><tr><th>Cuenta Pública</th><th>' + escHtml(def[0]) + '</th></tr></thead><tbody>' +
+        ks.map(k => '<tr><td>CP ' + k + '</td><td class="num-tabular">' + simFmt(c.porCuenta[k], fmt) + '</td></tr>').join('') +
+        '<tr><td><b>Suma</b></td><td class="num-tabular"><b>' + simFmt(suma, fmt) + '</b></td></tr></tbody></table></div>'));
+    }
+    if (c && typeof c.inicio === 'number' && typeof c.fin === 'number') {
+      secs.push(radarSec('La resta', '<ol class="rc-pasos">' +
+        radarPaso(1, 'Asegurados al 31 de diciembre de ' + x.d.anios[1] + ': <b>' + simFmt(c.fin, 'entero') + '</b>', 'oficial') +
+        radarPaso(2, 'Asegurados al 31 de diciembre de ' + (x.d.anios[0] - 1) + ': <b>' + simFmt(c.inicio, 'entero') + '</b>', 'oficial') +
+        radarPaso(3, 'Diferencia: <b>' + simFmt(c.fin - c.inicio, 'entero') + '</b>', 'derivado') + '</ol>'));
+    }
+    if (c && c.cuentas && !c.porCuenta) secs.push(radarSec('Periodo que cubre', '<p>Cuentas Públicas ' + c.cuentas[0] + (c.cuentas[1] !== c.cuentas[0] ? ' a ' + c.cuentas[1] : '') + '.</p>'));
+    const notas = [c && c.nota, c && c.motivo].filter(Boolean);
+    if (p[1] === 'deuda' && ES.convencion) notas.push(ES.convencion);
+    if (notas.length) secs.push(radarSec('Para leerlo bien', notas.map(t => '<p>' + escHtml(t) + '</p>').join('')));
+    const fts = [].concat((c && c.fuentes) || [], (c && c.fuente) ? [c.fuente] : []).map(k => peFuenteLiga(k)).filter(Boolean);
+    if (fts.length) secs.push(radarSec('Fuente', '<p>' + fts.join(' · ') + '</p>'));
+    const sh = glosDrawerShell(), ov = sh.ov, dr = sh.dr;
+    dr.innerHTML =
+      '<header class="glos-drawer-cab">' +
+        '<span class="glos-drawer-marca"><span aria-hidden="true">🎯</span> Evaluación de los presidentes</span>' +
+        '<button type="button" class="glos-drawer-x" aria-label="Cerrar el desglose" onclick="window.AuditEngine.cerrarGlosarioDrawer()">✕</button>' +
+      '</header>' +
+      '<div class="glos-drawer-cuerpo">' +
+        '<span class="glos-drawer-cat">' + escHtml(x.nombre) + ' · ' + escHtml(x.periodo) + '</span>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">' + escHtml(def[0]) + '</h3>' +
+        secs.join('') +
+      '</div>';
+    glosDrawerAbrir(ov, dr, origen);
+  }
+
+  /* Un solo escucha para todas las celdas: sobrevive a cada re-dibujo. */
+  document.addEventListener('click', function(ev) {
+    const td = ev.target.closest && ev.target.closest('#presEval [data-pe-ref]');
+    if (td) peDesglose(td.getAttribute('data-pe-ref'), td);
+  });
+  document.addEventListener('keydown', function(ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    const td = ev.target.closest && ev.target.closest('#presEval [data-pe-ref]');
+    if (td) { ev.preventDefault(); peDesglose(td.getAttribute('data-pe-ref'), td); }
+  });
 
   function renderPresEval() {
     const cont = document.getElementById('presEval');
@@ -27507,6 +27581,7 @@
     peResponder: peResponder,
     peAlternar: peAlternar,
     peTablaAlternar: peTablaAlternar,
+    peDesglose: peDesglose,
     inspSetNivel: inspSetNivel,
     inspSetVista: inspSetVista,
     inspMas: inspMas,

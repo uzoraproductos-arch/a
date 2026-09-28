@@ -22299,3 +22299,10 @@ body[data-pagina="auditor"] .civic-showcase-section, body[data-pagina="auditor"]
    abajo. Mientras la ficha está abierta, la barra se oculta; al cerrarla
    vuelve tal como estaba. */
 body:has(.descubrimiento-modal.show-modal) .nav-regreso { display: none; }
+/* Tablas comparativas de la evaluacion: cada cifra abre su desglose. */
+.pe-td-abre { cursor: pointer; transition: background 0.15s ease; }
+.pe-td-abre:hover, .pe-td-abre:focus-visible { background: var(--gold-glow); outline: none; }
+.pe-td-abre:focus-visible { box-shadow: inset 0 0 0 2px var(--gold-bright); }
+.pe-td-num.pe-td-abre > span:first-child { border-bottom: 1px dotted var(--gold); }
+.pe-desliza { font-size: 12.5px; color: var(--text-secondary); margin: 0 0 8px; }
+.pe-dg-cifra { font-family: var(--font-mono); font-size: 26px; font-weight: 800; color: var(--text-main); margin: 4px 0 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
