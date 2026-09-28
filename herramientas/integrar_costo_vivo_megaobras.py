@@ -44,7 +44,7 @@ def pef(ruta):
     h = hashlib.sha256(open(ruta, 'rb').read()).hexdigest()
     if h != CSV_SHA:
         sys.exit('La huella del CSV no coincide: ' + h)
-    t = {'tren_maya': 0.0, 'aifa': 0.0, 'interurbano': 0.0, 'ramo34': 0.0}
+    t = {'tren_maya': 0.0, 'aifa': 0.0, 'interurbano': 0.0, 'ramo34': 0.0, 'plataforma': 0.0}
     for x in csv.DictReader(open(ruta, encoding='utf-8-sig')):
         m = float(x['MONTO_PEF_2026'])
         if x['ID_RAMO'] == '7' and x['DESC_UR'] == 'Tren Maya, S.A. de C.V.':
@@ -55,6 +55,8 @@ def pef(ruta):
             t['interurbano'] += m
         if x['ID_RAMO'] == '34':
             t['ramo34'] += m
+        if x['ID_RAMO'] == '36' and x['ID_MODALIDAD'] == 'P' and x['ID_PP'] == '48':
+            t['plataforma'] += m
     return {k: mdp(v) for k, v in t.items()}
 
 
@@ -164,10 +166,21 @@ def construir(p, sm):
             'contexto': 'La ASF (CP 2016) documenta que en su primer año con Pemex, 2016, Fertinal registró una pérdida integral de 565.7 millones de dólares, $11,690.6 mdp (p. 31), y dictaminó que la compra «no es un negocio rentable» (p. 38). En 2017 sus plantas trabajaron entre el 26.0 % y el 84.4 % de su capacidad (CP 2017, p. 37). Entre 2015 y 2017 el patrimonio de Pemex Fertilizantes, que incluye a Fertinal y a ProAgro, perdió $21,174.0 mdp (p. 37). Esas cifras no se suman aquí: la pérdida de 2016 no es la de hoy y el patrimonio es de toda la empresa.',
             'contexto_fuente': 'asf_fert16',
             'falta': [falta('no_localizado', 'No localizamos estados financieros de Fertinal posteriores a 2017: no sabemos si hoy gana o pierde. Por eso no hay flujo anual, solo el costo de lo ya perdido.')]},
-        'enciclomedia': {'falta': [
-            falta('no_localizado', 'Hacienda autorizó $21,398.3 mdp para 2005-2010, pero no encontramos un documento oficial que sume lo que de verdad se pagó. Sin ese total no hay sobrecosto que medir.')]},
-        'bunker-garcia-luna': {'falta': [
-            falta('no_localizado', 'No encontramos informe de la ASF ni registro de cartera que diga cuánto costó el edificio ni qué uso tiene hoy.')]},
+        'enciclomedia': {'componentes': [
+            base('Lo pagado por encima de lo que Hacienda autorizó para el servicio multianual', sobrecosto('enciclomedia'), 'derivado', 'asf_encic06',
+                 'Lo que la Cuenta Pública reportó como ejercido de 2001 a 2011 según seis auditorías de la ASF ($32,315.7 mdp) menos lo que Hacienda autorizó para el servicio multianual 2005-2010 ($21,398.3 mdp, CP 2005, p. 264). Lo ejercido incluye piezas que esa autorización no cubría, como la compra de las aulas del piloto y la secundaria')],
+            'contexto': 'El programa ya no recibe presupuesto: los contratos de las aulas terminaron en 2011 y la SEP empezó a donar los equipos a los estados (ASF, CP 2011, auditoría 388, pp. 7-9). En 2009 la ASF dictaminó en negativo y escribió que el Gobierno ejerció ese año $4,786.0 mdp «sin demostrar una mejora sustentable en la calidad de la educación primaria» (CP 2009, auditoría 338, p. 24).',
+            'contexto_fuente': 'asf_encic09'},
+        'bunker-garcia-luna': {'componentes': [
+            {'tipo': 'flujo', 'et': 'Programa P048 «Plataforma México» en el PEF 2026', 'mdp': p['plataforma'],
+             'estado': 'oficial', 'fuente': 'pef26csv', 'estimacion_propia': True,
+             'como': 'Renglones del programa presupuestario P048 del Ramo 36, Seguridad y Protección Ciudadana, en tres unidades: el Centro Nacional de Información Plataforma México, la Dirección General de Gestión de Servicios, Ciberseguridad y Desarrollo Tecnológico y la Unidad de Información, Infraestructura Informática y Vinculación Tecnológica',
+             'supuesto': 'Supuesto: el programa paga el sistema que se opera desde el edificio. El PEF no separa cuánto va al inmueble y cuánto a la red y al personal, así que lo sumamos completo.'},
+            dict(base('Lo que la ASF observó pagado de más o sin soporte en la obra del edificio', 23.4, 'oficial', 'asf_bunker09',
+                      'Recuperaciones probables que la ASF determinó en el contrato de obra civil del Edificio de Plataforma México: $23,416.9 miles de pesos por diésel a precio inflado, equipos sin factura y una pintura contra fuego sin garantía (CP 2009, auditoría 1053, pp. 3-5)'),
+                 supuesto=SUP_INT + ' Además suponemos que esos pagos no se recuperaron: el informe no dice si la Secretaría los aclaró. Que este edificio sea el «búnker» también es lectura nuestra: la ASF no usa esa palabra ni da la dirección.')],
+            'falta': [
+            falta('no_localizado', 'No encontramos el costo total del edificio ni de su equipo: la ASF solo revisó el contrato de obra civil. Tampoco sabemos cuánto del programa Plataforma México se gasta en el inmueble.')]},
     }
     return {
         'nota': 'Interpretación de Auditavisión para la «Simulación en vivo» del módulo 2. La escribe herramientas/integrar_costo_vivo_megaobras.py; el motor calcula los intereses con la tasa.',

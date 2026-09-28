@@ -22038,7 +22038,7 @@
         '<tr><td class="sim-t-nom">' + escHtml(o.nombre) + '</td><td class="sim-t-num">' + simMdp(o.vivo.anual) + '</td><td class="sim-t-num">$' +
           (o.vivo.anual * 1e6 / 31536000).toLocaleString('es-MX', { maximumFractionDigits: 0 }) + '</td></tr>').join('') +
       '</tbody></table>' +
-      '<p class="sim-ver-p">Método: cada obra suma lo que el PEF 2026 le asigna y, sobre el dinero que la ASF o Hacienda documentan como perdido (sobrecosto, cancelación o gasto sin obra), los intereses a la tasa implícita de la deuda pública: ' + cvt.pct + ' % ' + chipEstado('derivado') + '. ' + escHtml(cvt.como) + '</p>' +
+      '<p class="sim-ver-p">Método: cada obra suma lo que el PEF 2026 le asigna y, sobre el dinero que la ASF o Hacienda documentan como perdido (sobrecosto, cancelación, gasto sin obra o pagos que la ASF observó sin soporte), los intereses a la tasa implícita de la deuda pública: ' + cvt.pct + ' % ' + chipEstado('derivado') + '. ' + escHtml(cvt.como) + '</p>' +
       '<p class="sim-ver-p">Los intereses son <strong>estimación propia</strong>: suponen que ese dinero se financió con deuda al costo promedio. El rescate carretero reparte en partes iguales el pago que la ASF estimó para 2018-2033. Ninguna cifra es una «pérdida» que el gobierno publique con ese nombre.</p>' +
       (paradas.length ? '<p class="sim-ver-p"><strong>No corren (' + paradas.length + '):</strong> ' + paradas.map(o => escHtml(o.nombre)).join(', ') + '. Sin información pública suficiente; cada ficha dice qué lo impide.</p>' : '');
     return '<div class="sim-vivo-total">' +

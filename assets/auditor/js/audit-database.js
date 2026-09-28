@@ -15793,7 +15793,7 @@ window.AUDIT_DB = {
           "icono": "🚪"
         }
       ],
-      "hallazgo_asf": "ASF y PNT revelaron asignaciones directas de tecnología de inteligencia a empresas vinculadas a excolaboradores policiales sin concurso público.",
+      "hallazgo_asf": "La ASF auditó en la Cuenta Pública 2009 el contrato de obra del «Edificio de Plataforma México» de la Secretaría de Seguridad Pública: se adjudicó sin licitación a TRADECO Infraestructura por $347.4 mdp con IVA, se redujo a $289.1 mdp y en agosto de 2010, con la obra ya en operación pero sin finiquitar, se habían pagado $206.0 mdp más IVA. Observó que la licencia de construcción y el resolutivo de impacto ambiental se obtuvieron después de iniciar la obra, y $23.4 mdp pagados de más o sin soporte (pp. 1-5).",
       "unidad_metrica": "Día de monitoreo táctico",
       "costo_unitario_real": "Costo diario de $700,000 pesos para mantener encendida la infraestructura tecnológica subterránea.",
       "estado_campos": {
@@ -15848,8 +15848,8 @@ window.AUDIT_DB = {
       "estatus": "Extinguido · Hardware en desuso",
       "badge_color": "var(--text-dim)",
       "inversion_presupuestada_mdp": 21398.3,
-      "inversion_real_mdp": 40000,
-      "sobrecosto_pct": 86.9,
+      "inversion_real_mdp": 32315.7,
+      "sobrecosto_pct": 51.0,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 0,
       "perdida_anual_mdp": 0,
@@ -15857,7 +15857,7 @@ window.AUDIT_DB = {
       "perdida_segundo": 0.0,
       "proyeccion_tipo": "perdida_patrimonial",
       "proyeccion_anios": 999,
-      "proyeccion_resumen": "Tecnología Obsoleta Cancelada. Se destinaron más de $40,000 mdp a contratos de arrendamiento con empresas privadas; tras suspenderse en 2011, los proyectores y pizarrones quedaron inservibles en miles de escuelas públicas sin actualización ni soporte técnico.",
+      "proyeccion_resumen": "Programa extinguido. De 2004 a 2011 la SEP pagó el equipamiento y la renta de aulas con computadora, pizarrón y proyector en 5° y 6° de primaria; al terminar los contratos, en 2011, la SEP empezó a donar los equipos a los estados.",
       "desglose_costos_operacion": [
         {
           "rubro": "Gasto promedio anual devengado durante su operación (2003–2011)",
@@ -15865,13 +15865,13 @@ window.AUDIT_DB = {
           "icono": "💸"
         }
       ],
-      "hallazgo_asf": "La ASF revisó el primer año del contrato multianual (2005): de $2,105.0 mdp asignados a Enciclomedia se ejercieron $478.3 mdp, porque el esquema cambió de compra de equipo a un servicio multianual de arrendamiento. Hacienda había autorizado $21,398.3 mdp para 2005 a 2010.",
+      "hallazgo_asf": "La ASF auditó Enciclomedia casi cada año. En 2006 constató que se habían ejercido $6,417.8 mdp desde 2001 y que de 2001 a 2003 no había comprobantes de lo que el Libro Blanco decía gastado (CP 2006, pp. 585-587). En 2009 dictaminó en negativo: la SEP reportó un gasto que no correspondía a lo devengado, no tenía cómo saber si las aulas funcionaban y había aulas sin reparar durante cinco ciclos escolares: 19,650 alumnos se quedaron sin la herramienta (CP 2009, p. 24). Los 14 contratos de las aulas terminaron en 2011 y la SEP empezó a donar los equipos a los estados (CP 2011, pp. 7-9).",
       "unidad_metrica": "Aula equipada",
       "costo_unitario_real": "Gasto de más de $145,000 pesos por cada aula escolar de 5° y 6° de primaria.",
       "estado_campos": {
         "inversion_presupuestada_mdp": "oficial",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
       }
     },
     {
@@ -15995,13 +15995,13 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3911026.2,
+    "inversion_total_mdp": 3903341.9,
     "inversion_presupuestada_total_mdp": 1142024.6,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 13,
-    "sobrecosto_conjunto_pct": 242.5,
+    "sobrecosto_conjunto_pct": 241.8,
     "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
   },
   "operacion_oficial": {
@@ -16177,6 +16177,41 @@ window.AUDIT_DB = {
         "doc": "ASF, Cuenta Pública 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes: Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
         "sha256": "d1f61d814ce1e5dd1f2c4d2e291cddf7ba0b651e75e252a8fe163d51ce1527f5"
+      },
+      "asf_encic06": {
+        "doc": "ASF, Informe del Resultado de la Cuenta Pública 2006, tomo V, vol. 1, auditoría 99, SEP: Evaluación del Programa Enciclomedia",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2006i/Tomos/T5V1.pdf",
+        "sha256": "e461b1f4b0b5ce298da8f294d824e51bad1b3d05a0797ca2a619608c21e27882"
+      },
+      "asf_encic07": {
+        "doc": "ASF, Informe del Resultado de la Cuenta Pública 2007, tomo V, vol. 2, auditoría 438, SEP: Programa Enciclomedia 5° y 6° Año de Primaria",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2007i/Tomos/T5V2.pdf",
+        "sha256": "f6dcf2a80b4cf212e60bca559a8b6ebee0d8c3a3acf9818327dd1662cca7e8ad"
+      },
+      "asf_encic08": {
+        "doc": "ASF, Informe del Resultado de la Cuenta Pública 2008, tomo V, vol. 2, auditoría 274, SEP: Programa E001 «Enciclomedia, 5° y 6° Año de Primaria»",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T5V2.pdf",
+        "sha256": "3a9313a388b7c2b6c1b5b8dc34343096e5ad71d857af5d549930698edbbae720"
+      },
+      "asf_encic09": {
+        "doc": "ASF, Cuenta Pública 2009, auditoría 338, SEP: Programa E001 «Enciclomedia» 5° y 6° Año de Primaria",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo4/2009_0338_a.pdf",
+        "sha256": "224c8bf22c0c92758a0c7be2b4e6c9bb689890705b545c337af24ef63546be5a"
+      },
+      "asf_encic10": {
+        "doc": "ASF, Cuenta Pública 2010, auditoría 923, SEP: Programa E001 «Enciclomedia»",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2010i/Grupos/Desarrollo_Social/2010_0923_a.pdf",
+        "sha256": "4c1ae5003e22b015968ca84050232de1d974b1ddc7e779e3794211c828d7c6a0"
+      },
+      "asf_encic11": {
+        "doc": "ASF, Cuenta Pública 2011, auditoría 388, SEP: Programa E001 «Enciclomedia»",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0388_a.pdf",
+        "sha256": "11ef141e8f641c2d67819b191d6945203a3dd1fdf87075d04124a1f3e04b991f"
+      },
+      "asf_bunker09": {
+        "doc": "ASF, Cuenta Pública 2009, auditoría de inversiones físicas 1053, Secretaría de Seguridad Pública: Edificio de Plataforma México, en el Distrito Federal",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
+        "sha256": "c25fb6fac3442bd85bccdaa541edd476f0e26a7ee18309bad742d06a506d8593"
       }
     },
     "obras": {
@@ -16817,15 +16852,15 @@ window.AUDIT_DB = {
       "enciclomedia": {
         "campos": {
           "inversion_presupuestada_mdp": "oficial",
-          "inversion_real_mdp": "pendiente",
-          "sobrecosto_pct": "pendiente"
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
         },
         "definiciones": {
           "inversion_presupuestada_mdp": "Recursos que Hacienda autorizó para el servicio multianual de Enciclomedia de 2005 a 2010: $21,398,300.0 miles de pesos para 125,562 aulas (ASF, CP 2005, tomo VI, vol. 2, p. 264).",
-          "inversion_real_mdp": "Falta un documento que sume lo pagado de 2004 a 2011. La ASF solo revisó 2005, cuando se ejercieron $478.3 mdp de los $2,105.0 mdp previstos (p. 270).",
-          "sobrecosto_pct": "No se puede calcular mientras falte lo pagado en total."
+          "inversion_real_mdp": "Suma de Auditavisión de lo que la Cuenta Pública reportó como ejercido cada año, según la ASF: 2001 a 2006 (2001-2003 según el Libro Blanco), $6,417.8 mdp; 2007, partida 3414, $7,145.8 mdp; 2008, partida 3414, $5,817.7 mdp; 2009, $3,548.4 mdp; 2010, $4,665.5 mdp; 2011, $4,720.6 mdp. En 2007 y 2008 la ASF solo da la partida 3414, por la que pasa el 99.0 % del programa (CP 2009, p. 4): la suma es un piso. Lo que un año se reportó como ejercido y se pagó al siguiente se cuenta una sola vez. No localizamos pagos posteriores a 2011.",
+          "sobrecosto_pct": "Cuánto supera lo ejercido de 2001 a 2011 a lo que Hacienda autorizó para el servicio multianual 2005-2010 (cálculo de Auditavisión). Lo ejercido incluye piezas que esa autorización no cubría: la compra de las 21,434 aulas del piloto de 2004, la secundaria y la prórroga de 2011."
         },
-        "hallazgo": "La ASF revisó el primer año del contrato multianual (2005): de $2,105.0 mdp asignados a Enciclomedia se ejercieron $478.3 mdp, porque el esquema cambió de compra de equipo a un servicio multianual de arrendamiento. Hacienda había autorizado $21,398.3 mdp para 2005 a 2010.",
+        "hallazgo": "La ASF auditó Enciclomedia casi cada año. En 2006 constató que se habían ejercido $6,417.8 mdp desde 2001 y que de 2001 a 2003 no había comprobantes de lo que el Libro Blanco decía gastado (CP 2006, pp. 585-587). En 2009 dictaminó en negativo: la SEP reportó un gasto que no correspondía a lo devengado, no tenía cómo saber si las aulas funcionaban y había aulas sin reparar durante cinco ciclos escolares: 19,650 alumnos se quedaron sin la herramienta (CP 2009, p. 24). Los 14 contratos de las aulas terminaron en 2011 y la SEP empezó a donar los equipos a los estados (CP 2011, pp. 7-9).",
         "asfHist": [
           {
             "dato": "Autorizado para el servicio multianual 2005-2010",
@@ -16840,14 +16875,56 @@ window.AUDIT_DB = {
             "pagina": "265"
           },
           {
-            "dato": "Ejercido en 2005",
-            "valor": "$478.3 mdp",
+            "dato": "Ejercido 2001 a 2006 (2001-2003 según el Libro Blanco)",
+            "valor": "$6,417.8 mdp",
             "estado": "oficial",
-            "pagina": "270"
+            "pagina": "586 (CP 2006)"
+          },
+          {
+            "dato": "Ejercido 2007, partida 3414",
+            "valor": "$7,145.8 mdp",
+            "estado": "oficial",
+            "pagina": "170 (CP 2007)"
+          },
+          {
+            "dato": "Ejercido 2008, partida 3414",
+            "valor": "$5,817.7 mdp",
+            "estado": "oficial",
+            "pagina": "589 (CP 2008)"
+          },
+          {
+            "dato": "Ejercido 2009",
+            "valor": "$3,548.4 mdp",
+            "estado": "oficial",
+            "pagina": "1 (CP 2009)"
+          },
+          {
+            "dato": "Ejercido 2010",
+            "valor": "$4,665.5 mdp",
+            "estado": "oficial",
+            "pagina": "1 (CP 2010)"
+          },
+          {
+            "dato": "Ejercido 2011",
+            "valor": "$4,720.6 mdp",
+            "estado": "oficial",
+            "pagina": "1 (CP 2011)"
+          },
+          {
+            "dato": "Costo total previsto en el PEF 2006, con vigencia hasta 2009",
+            "valor": "$17,572.6 mdp",
+            "estado": "oficial",
+            "pagina": "585 (CP 2006)"
           }
         ],
         "fuentes": [
-          "asf_encic05"
+          "asf_encic05",
+          "asf_encic06",
+          "asf_encic07",
+          "asf_encic08",
+          "asf_encic09",
+          "asf_encic10",
+          "asf_encic11"
         ]
       },
       "farac-carretero": {
@@ -16983,6 +17060,48 @@ window.AUDIT_DB = {
         "fuentes": [
           "asf_fert16",
           "asf_fert17"
+        ]
+      },
+      "bunker-garcia-luna": {
+        "campos": {
+          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_real_mdp": "pendiente",
+          "sobrecosto_pct": "pendiente"
+        },
+        "definiciones": {
+          "inversion_presupuestada_mdp": "Pendiente: los $1,200 mdp que trae la ficha no tienen documento. Lo único documentado es el contrato de obra civil del edificio, adjudicado por $347,369.0 miles de pesos con IVA (ASF, CP 2009, auditoría 1053, p. 1).",
+          "inversion_real_mdp": "Pendiente: los $3,346 mdp que trae la ficha no tienen documento. Del contrato de obra civil se habían erogado $206,027.9 miles de pesos más IVA en agosto de 2010 (p. 2); faltan el equipo tecnológico y los demás contratos, que la ASF no revisó en esta auditoría.",
+          "sobrecosto_pct": "No se puede calcular sin el costo total. El contrato se redujo de $347.4 a $289.1 mdp con IVA (p. 2): no hubo sobrecosto en ese contrato."
+        },
+        "hallazgo": "La ASF auditó en la Cuenta Pública 2009 el contrato de obra del «Edificio de Plataforma México» de la Secretaría de Seguridad Pública: se adjudicó sin licitación a TRADECO Infraestructura por $347.4 mdp con IVA, se redujo a $289.1 mdp y en agosto de 2010, con la obra ya en operación pero sin finiquitar, se habían pagado $206.0 mdp más IVA. Observó que la licencia de construcción y el resolutivo de impacto ambiental se obtuvieron después de iniciar la obra, y $23.4 mdp pagados de más o sin soporte (pp. 1-5).",
+        "asfHist": [
+          {
+            "dato": "Contrato de obra civil adjudicado sin licitación (1-09-2008)",
+            "valor": "$347.4 mdp con IVA",
+            "estado": "oficial",
+            "pagina": "1 (CP 2009)"
+          },
+          {
+            "dato": "Monto del contrato tras el convenio de reducción (6-04-2009)",
+            "valor": "$289.1 mdp con IVA",
+            "estado": "oficial",
+            "pagina": "2 (CP 2009)"
+          },
+          {
+            "dato": "Erogado a agosto de 2010, obra en operación sin finiquitar",
+            "valor": "$206.0 mdp más IVA",
+            "estado": "oficial",
+            "pagina": "2 (CP 2009)"
+          },
+          {
+            "dato": "Pagos de más o sin soporte por recuperar",
+            "valor": "$23.4 mdp",
+            "estado": "oficial",
+            "pagina": "5 (CP 2009)"
+          }
+        ],
+        "fuentes": [
+          "asf_bunker09"
         ]
       }
     }
@@ -24893,18 +25012,48 @@ window.AUDIT_DB = {
         ]
       },
       "enciclomedia": {
-        "falta": [
+        "componentes": [
           {
-            "limitacion": "no_localizado",
-            "texto": "Hacienda autorizó $21,398.3 mdp para 2005-2010, pero no encontramos un documento oficial que sume lo que de verdad se pagó. Sin ese total no hay sobrecosto que medir."
+            "tipo": "intereses",
+            "et": "Lo pagado por encima de lo que Hacienda autorizó para el servicio multianual",
+            "base_mdp": 10917.4,
+            "estado": "derivado",
+            "fuente": "asf_encic06",
+            "como": "Lo que la Cuenta Pública reportó como ejercido de 2001 a 2011 según seis auditorías de la ASF ($32,315.7 mdp) menos lo que Hacienda autorizó para el servicio multianual 2005-2010 ($21,398.3 mdp, CP 2005, p. 264). Lo ejercido incluye piezas que esa autorización no cubría, como la compra de las aulas del piloto y la secundaria",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra."
           }
-        ]
+        ],
+        "contexto": "El programa ya no recibe presupuesto: los contratos de las aulas terminaron en 2011 y la SEP empezó a donar los equipos a los estados (ASF, CP 2011, auditoría 388, pp. 7-9). En 2009 la ASF dictaminó en negativo y escribió que el Gobierno ejerció ese año $4,786.0 mdp «sin demostrar una mejora sustentable en la calidad de la educación primaria» (CP 2009, auditoría 338, p. 24).",
+        "contexto_fuente": "asf_encic09"
       },
       "bunker-garcia-luna": {
+        "componentes": [
+          {
+            "tipo": "flujo",
+            "et": "Programa P048 «Plataforma México» en el PEF 2026",
+            "mdp": 478.3,
+            "estado": "oficial",
+            "fuente": "pef26csv",
+            "estimacion_propia": true,
+            "como": "Renglones del programa presupuestario P048 del Ramo 36, Seguridad y Protección Ciudadana, en tres unidades: el Centro Nacional de Información Plataforma México, la Dirección General de Gestión de Servicios, Ciberseguridad y Desarrollo Tecnológico y la Unidad de Información, Infraestructura Informática y Vinculación Tecnológica",
+            "supuesto": "Supuesto: el programa paga el sistema que se opera desde el edificio. El PEF no separa cuánto va al inmueble y cuánto a la red y al personal, así que lo sumamos completo."
+          },
+          {
+            "tipo": "intereses",
+            "et": "Lo que la ASF observó pagado de más o sin soporte en la obra del edificio",
+            "base_mdp": 23.4,
+            "estado": "oficial",
+            "fuente": "asf_bunker09",
+            "como": "Recuperaciones probables que la ASF determinó en el contrato de obra civil del Edificio de Plataforma México: $23,416.9 miles de pesos por diésel a precio inflado, equipos sin factura y una pintura contra fuego sin garantía (CP 2009, auditoría 1053, pp. 3-5)",
+            "estimacion_propia": true,
+            "supuesto": "Supuesto: ese dinero se financió con deuda pública y cuesta lo mismo que la deuda en promedio. Es estimación propia: el gobierno no etiqueta qué deuda pagó cada obra. Además suponemos que esos pagos no se recuperaron: el informe no dice si la Secretaría los aclaró. Que este edificio sea el «búnker» también es lectura nuestra: la ASF no usa esa palabra ni da la dirección."
+          }
+        ],
         "falta": [
           {
             "limitacion": "no_localizado",
-            "texto": "No encontramos informe de la ASF ni registro de cartera que diga cuánto costó el edificio ni qué uso tiene hoy."
+            "texto": "No encontramos el costo total del edificio ni de su equipo: la ASF solo revisó el contrato de obra civil. Tampoco sabemos cuánto del programa Plataforma México se gasta en el inmueble."
           }
         ]
       }

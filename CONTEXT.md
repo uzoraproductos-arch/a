@@ -3759,6 +3759,50 @@ de las auditorías 492-DE CP 2017 y 468-DE CP 2016) divide la ficha:
 - Simulación en vivo: corren **11 de 13**, $181.1 mil millones al año,
   $5,744 por segundo (el total no cambia: solo se repartió).
 
+### Hecho (Enciclomedia y el Búnker corren en vivo: 13 de 13, sello 20260928l)
+
+`herramientas/integrar_enciclomedia_bunker.py` comprueba las huellas de siete
+informes de la ASF, guardados en `investigaciones/asf-historico/`.
+
+- **Enciclomedia, lo pagado:** $32,315.7 mdp de 2001 a 2011 (derivado).
+  Suma lo que la Cuenta Pública reportó como ejercido según la ASF:
+  - 2001-2006: $6,417.8 (CP 2006, aud. 99, p. 586).
+  - 2007: $7,145.8 (aud. 438, p. 170).
+  - 2008: $5,817.7 (aud. 274, p. 589).
+  - 2009: $3,548.4 (aud. 338, p. 1).
+  - 2010: $4,665.5 (aud. 923, p. 1).
+  - 2011: $4,720.6 (aud. 388, p. 1).
+
+  En 2007 y 2008 solo cuenta la partida 3414, que concentra el 99.0 % del
+  programa, así que la suma es un piso. Sobrecosto contra los $21,398.3 mdp
+  autorizados para 2005-2010: 51.0 % (derivado). La definición aclara que
+  lo ejercido incluye piezas que esa autorización no cubría. Sustituye los
+  $40,000 mdp sin fuente.
+- **Enciclomedia, costo en vivo:** $855.9 mdp al año. Son los intereses
+  sobre lo pagado por encima de lo autorizado ($10,917.4 mdp). Contexto:
+  dictamen negativo de 2009 y donación de los equipos en 2011.
+- **Búnker, lo que documenta la ASF:** la ASF auditó en la CP 2009
+  (aud. 1053) el contrato de obra del «Edificio de Plataforma México».
+  - Adjudicación directa a TRADECO por $347.4 mdp con IVA, reducida a
+    $289.1 mdp.
+  - Erogados $206.0 mdp más IVA a agosto de 2010.
+  - $23.4 mdp por recuperar.
+
+  Es un contrato, no el costo del edificio: presupuestada y real siguen
+  pendientes. Los $1,200 y $3,346 no tienen documento y así lo dice la
+  definición. Que ese edificio sea el «búnker» se declara como lectura
+  propia.
+- **Búnker, costo en vivo:** $480.1 mdp al año, suma de dos renglones:
+  - el programa P048 «Plataforma México» del PEF 2026, $478.3 mdp en tres
+    unidades de la SSPC (estimación propia: el PEF no separa el inmueble);
+  - los intereses sobre los $23.4 mdp observados.
+- **Totales:** inversión real $3,903,341.9 mdp y sobrecosto del conjunto
+  241.8 %. En vivo corren **13 de 13**: $182.5 mil millones al año, $5,786
+  por segundo. El método del cajón menciona los pagos observados.
+- **Sin corregir:** Enciclomedia sigue en el sector «Salud, Logística y
+  Medicamentos», porque no existe uno de educación. Moverla es decisión del
+  autor.
+
 ### Pendiente
 
 **Cierre del 27-09-2026 (barrido final en el código).** Lo que falta en el
@@ -3775,9 +3819,8 @@ auditor, por tipo:
    evasión del SAT (art. 30 de la LIF 2027, principios de 2028) para el
    huachicol fiscal.
 3. **Bloqueado por el entorno (comprobar a mano):** FGR, SAT, IECM, SEMARNAT (dgiraDocs), apps1.ipab.org.mx.
-4. **Datos que faltan y no se estiman:** costo en vivo de Enciclomedia y Búnker, y el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo
-   en pesos de Agronitrogenados, lo pagado por Enciclomedia, costo del
-   FARAC y del Búnker, costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
+4. **Datos que faltan y no se estiman:** el desglose de Olmeca y del CEFEDIS (ver la 2.2; la lista de documentos que lo resolverían, en orden, la dio el autor el 28-09: resultados de la refinería Olmeca 2024-2025, costos del CEFEDIS 2312NEF0001, estados de Fonadin 2024-2025), costo del
+   FARAC, costo total del Búnker (edificio y equipo), costo del AIFA, FOBAPROA 1998-2013, informe del SAT 2T2026 (el padrón usa
    el corte de abril), dietas locales, CDMX en EFIPEM, cifra oficial del
    huachicol fiscal.
 5. **Por investigar (huachicol):** si la ASF ha auditado a la ANAM o al SAT
