@@ -2163,7 +2163,7 @@
     it.dano = { id: 'dano', nom: 'Daño ambiental del país', anio: '2024', mdp: C.ctada.total_mdp, estado: C.ctada.estado, c: 3,
       fuente: ceem, que: 'Lo que costó agotar los recursos y ensuciar aire, agua y suelo.' };
     it.gpa = { id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: C.gasto_proteccion_ambiental.monto_mdp, estado: 'oficial', c: 3,
-      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron a proteger el ambiente.' };
+      fuente: ceem, que: 'Gasto en protección ambiental ejercido exclusivamente por el sector público consolidado (INEGI CEEM 2024, pág. 2).' };
     it.ramo16 = { id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: A.presupuesto.aprobado2026.valor / 1e6, estado: A.presupuesto.aprobado2026.estado, c: 2,
       fuente: amFuente('PEF', A.presupuesto.aprobado2026.pagina), que: 'Lo aprobado a la SEMARNAT, la Conagua y sus órganos.' };
     const ids = {
@@ -2261,9 +2261,9 @@
       }
       if (v === 'huachicol') {
         const rec = por('recaudacion'), dec = por('declarado'), ener = por('obra_energia');
-        rem.innerHTML = 'Lo único documentado: <b>' + formatMdpFijo(rec) + '</b> recaudados en diez meses al detectar 109.4 millones de litros no declarados ' + chipEstado('oficial') +
-          '; equivalen al ' + amNum(rec / ener * 100, 1) + ' % de la obra pública de Pemex y CFE de un año. La cifra de ' + formatMdpFijo(dec) + ' que se mencionó en 2025 sería ' + amNum(dec / ener, 1) +
-          ' veces esa obra, pero no tiene documento y la Presidencia aclaró que no es oficial. ' + chipEstado('pendiente');
+        rem.innerHTML = 'Lo único documentado oficialmente: <b>' + formatMdpFijo(rec) + '</b> cobrados en 10 meses (1-sep-2025 al 30-jun-2026; 304 días · tasa de $175.13/s) al detectar 109.4 millones de litros no declarados ' + chipEstado('oficial') +
+          '; equivalen al ' + amNum(rec / ener * 100, 1) + ' % de la obra anual de Pemex y CFE. Su equivalencia anualizada proyectada es de ' + formatMdpFijo(5523) + ' ' + chipEstado('derivado') +
+          '. La cifra aislada de ' + formatMdpFijo(dec) + ' que se mencionó en tribuna en 2025 carece de estudio metodológico oficial publicado por Hacienda. ' + chipEstado('pendiente');
         return;
       }
       if (v === 'todos') {
@@ -2476,7 +2476,7 @@
         lin('Deuda pública total (SHRFSP)', -c.deuda, 'neg', 'cierre estimado 2026 · ' + amNum(c.deuda / v, 1) + tuUd(' meses de su ingreso', ' meses de tu ingreso'), 'am-tk-total') +
         sec('Lo que se abona para reparar') +
         lin('Presupuesto federal de Medio Ambiente', c.ramo16, 'pos', 'Ramo 16, aprobado 2026') +
-        lin('Gasto en protección ambiental del país', c.gpa, 'pos', '2024 · gobiernos, empresas y hogares') +
+        lin('Gasto en protección ambiental del sector público', c.gpa, 'pos', '2024 · sector público consolidado (INEGI CEEM pág. 2)') +
         sec('Su huella física') +
         lin(tuUd('Basura que usted genera al año', 'Basura que generas al año'), -c.kg, 'negkg', amNum(A.residuos.perCapitaKg.valor, 3) + ' kg al día × 365') +
         '<div class="am-tk-bal" style="--i:' + (n++) + tuUd('">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a su nombre, se le cargan <b>$', '">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a tu nombre, se te cargan <b>$') + amNum(c.intereses / c.ramo16, 0) + '</b> de intereses y <b>$' + amNum(c.dano / c.ramo16, 0) + '</b> de daño ambiental.</div>' +
@@ -7081,13 +7081,13 @@
     const cont = document.getElementById('saludErarioMandos');
     if (!cont) return;
     cont.innerHTML = erarioBarraMandos({
-      sello: 'TERMOSTATO HACENDARIO & PROPORCIONES',
+      sello: 'FLEXIBILIDAD & RIGIDEZ DEL GASTO',
       contado: state.saludErarioContado,
       contar: 'saludErarioContar()',
       reiniciar: 'saludErarioReiniciar()',
       estado: state.saludErarioContado
-        ? '✅ Termostato calibrado. Salud financiera: 54/100 (Margen Frágil). Rigidez del 30.4% por deuda y obligaciones no programables.'
-        : tuUd('⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulse «Contabilizar» para evaluar la salud presupuestal 2026.', '⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulsa «Contabilizar» para evaluar la salud presupuestal 2026.')
+        ? '✅ Calibración oficial con PEF 2026 Anexo 1: Margen de Flexibilidad Programable del 69.6% ($7.09 B) vs Rigidez Ineludible del 30.4% ($3.10 B por deuda, participaciones y ADEFAS).'
+        : tuUd('⚪ Indicadores en ceros ($0 / 0.0%). Pulse «Contabilizar» para evaluar la flexibilidad del presupuesto 2026.', '⚪ Indicadores en ceros ($0 / 0.0%). Pulsa «Contabilizar» para evaluar la flexibilidad del presupuesto 2026.')
     });
   }
 
@@ -7139,7 +7139,7 @@
       if (txt) txt.textContent = factor > 0.5 ? '0.7%' : '';
     }
 
-    // 2. Termostato circular
+    // 2. Termostato circular dinámico (69.6% Programable vs 30.4% Rigidez)
     const arc = document.getElementById('termostatoArc');
     const num = document.getElementById('termostatoScoreNum');
     const badge = document.getElementById('termostatoBadge');
@@ -7149,21 +7149,23 @@
     const tmProg = document.getElementById('tminiProg');
     const tmFed = document.getElementById('tminiFed');
 
-    const score = Math.round(54 * factor);
+    const pctFlex = 69.6 * factor;
+    const pctRig = 30.4 * factor;
+    const score = Math.round(pctFlex);
     const C = 314.16;
     if (arc) {
-      arc.setAttribute('stroke-dashoffset', (C * (1 - (54 / 100) * factor)).toFixed(2));
+      arc.setAttribute('stroke-dashoffset', (C * (1 - (69.6 / 100) * factor)).toFixed(2));
       if (factor === 0) {
         arc.setAttribute('stroke', 'rgba(255,255,255,0.15)');
       } else {
-        arc.setAttribute('stroke', score >= 70 ? 'var(--emerald-bright)' : score >= 50 ? 'var(--amber)' : 'var(--crimson-bright)');
+        arc.setAttribute('stroke', 'var(--gold-bright)');
       }
     }
 
     if (num) {
       num.textContent = score;
       if (factor === 0) num.style.fill = '#94a3b8';
-      else num.style.fill = score >= 70 ? 'var(--emerald-bright)' : score >= 50 ? 'var(--amber)' : 'var(--crimson-bright)';
+      else num.style.fill = 'var(--gold-bright)';
     }
 
     if (badge) {
@@ -7172,17 +7174,17 @@
         badge.textContent = '⚪ En espera';
       } else {
         badge.className = 'termostato-badge termostato-badge-fragil';
-        badge.textContent = '🟡 Margen Frágil (54/100)';
+        badge.textContent = '🟡 Flexibilidad: ' + pctFlex.toFixed(1) + '% (Margen Condicionado)';
       }
     }
 
-    if (rigTxt) rigTxt.textContent = (30.4 * factor).toFixed(1) + '%';
+    if (rigTxt) rigTxt.textContent = pctRig.toFixed(1) + '%';
 
     if (diag) {
       if (factor === 0) {
         diag.textContent = tuUd('Pulse «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.', 'Pulsa «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.');
       } else {
-        diag.textContent = 'Salud presupuestal frágil (54/100). El 30.4% del erario ($3.10 B) está atado a obligaciones no programables, reduciendo la flexibilidad ante choques económicos.';
+        diag.textContent = 'De cada $100 del erario federal 2026, $69.60 corresponden a gasto programable y $30.40 a compromisos ineludibles por ley (deuda pública 15.4%, participaciones Ramo 28 14.3% y ADEFAS 0.7%). Fuente: PEF 2026, Anexo 1 del DOF [02].';
       }
     }
 
@@ -8152,6 +8154,9 @@
         setTimeout(() => state.leafletMap.invalidateSize(), 60);
       }
     }
+    if (abrir && clave === 'cuenta-federal') {
+      renderCuentaFederal();
+    }
   }
 
   /* Abre los bloques plegados que envuelven a un elemento, del mas externo
@@ -8571,21 +8576,26 @@
       });
     }
     const t = sm.totales_consolidados;
-    const anual = sm.obras.reduce((a, o) => a + (o.perdida_anual_mdp || 0), 0);
+    const obrasOp = sm.obras.filter(o => !o.perdida_pendiente);
+    const perdidaEmpresas = obrasOp.reduce((a, o) => a + (o.id !== 'fobaproa' ? (o.perdida_anual_mdp || 0) : 0), 0);
+    const ramo34Apoyo = (sm.obras.find(o => o.id === 'fobaproa') || {}).perdida_anual_mdp || 62489.4;
+    t.perdida_operativa_empresas_mdp = Math.round(perdidaEmpresas * 10) / 10;
+    t.apoyo_presupuestal_fobaproa_ramo34_mdp = Math.round(ramo34Apoyo * 10) / 10;
+    t.cobertura_obras = { documentadas: obrasOp.length, total: sm.obras.length, pct: Math.round(obrasOp.length / sm.obras.length * 1000) / 10 };
+    t.obras_con_operacion_documentada = obrasOp.length;
+    const anual = perdidaEmpresas + ramo34Apoyo;
     t.perdida_anual_consolidada_mdp = Math.round(anual * 10) / 10;
     t.perdida_diaria_consolidada_mdp = Math.round(anual / 365 * 100) / 100;
     t.perdida_segundo_consolidada = Math.round(anual * 1e6 / 31536000 * 100) / 100;
-    t.obras_con_operacion_documentada = sm.obras.filter(o => !o.perdida_pendiente).length;
     MEGAOBRAS_LOSS_RATE = t.perdida_segundo_consolidada;
     const reloj = ((DB.calculadora_civica || {}).relojes || {}).fuentes || [];
     const rm = reloj.find(f => f.id === 'megaobras');
     if (rm) {
       rm.anual_mdp = t.perdida_anual_consolidada_mdp;
       rm.estado = 'derivado';
-      rm.nombre = 'Pérdida anual documentada de las megaobras';
-      rm.fuente = 'Suma de las ' + t.obras_con_operacion_documentada + ' obras de la 2.2 con documento: Tren Maya y AIFA (estados de actividades, Cuenta Pública 2024) y el IPAB (Ramo 34, Cuenta Pública 2024). Las otras ' +
-        (sm.obras.length - t.obras_con_operacion_documentada) + ' quedan pendientes y no entran';
-      rm.que = 'Lo que cuesta cada año tener abiertas las obras que ya tienen documento, más lo que el rescate bancario le cuesta al presupuesto. No es el sobrecosto de construirlas: es el costo de mantenerlas o de pagarlas.';
+      rm.nombre = 'Pérdida anual documentada de las megaobras y apoyo Ramo 34';
+      rm.fuente = 'Suma de ' + t.obras_con_operacion_documentada + ' de 13 obras con documento oficial (cobertura 23.1%): pérdidas operativas de Tren Maya y AIFA ($2,194.4 mdp, estados de actividades Cuenta Pública 2024) y apoyo presupuestal Ramo 34 al IPAB ($62,489.4 mdp). 10 obras pendientes declaradas explícitamente.';
+      rm.que = 'Desglose oficial: $2,194.4 mdp de déficit operativo de empresas públicas más $62,489.4 mdp de transferencias presupuestarias del Ramo 34 al rescate bancario. Las 10 obras sin estados de actividades se mantienen en estado pendiente y no se asumen como cero.';
     }
   }
 
@@ -16488,7 +16498,9 @@
           estado = d === 0 ? 'neutro' : (mejor ? 'mejor' : 'peor');
         }
         return '<span class="vdg-dist" data-estado="' + estado + '">' + flecha + ' ' + txt + '</span>';
-      })();
+        window.AUDIT_CORE = window.AuditEngine.core;
+  window.AuditavisionVisita = window.AuditEngine.visita;
+})();
 
       const clic = f.esDiaz ? '' :
         ' onclick="window.AuditEngine.selectVersusPresident(\'' + f.id + '\')" title="Abrir el marcador cara a cara contra Don Porfirio Díaz"';
@@ -21677,26 +21689,22 @@
         '<div class="sim-pr-card">' +
           '<span class="sim-pr-lbl">Sobrecosto histórico por contribuyente</span>' +
           '<span class="sim-pr-val">$' + formatNumber(Math.round(brechaContrib)) + '</span>' +
-          '<span class="sim-pr-sub">acumulado de 1988 a 2024, una sola vez</span>' +
+          '<span class="sim-pr-sub">acumulado de 1988 a 2024 (inversión de capital en exceso)</span>' +
         '</div>' +
         '<div class="sim-pr-card sim-pr-alta">' +
-          '<span class="sim-pr-lbl">Aportación total por contribuyente</span>' +
-          '<span class="sim-pr-val">$' + formatNumber(Math.round(porContrib)) + '</span>' +
-          '<span class="sim-pr-sub">las dos mesas anteriores, divididas entre el padrón</span>' +
+          '<span class="sim-pr-lbl">Conciliación temporal de cuentas</span>' +
+          '<span class="sim-pr-val">No se suman</span>' +
+          '<span class="sim-pr-sub">un sobrecosto multianual no debe sumarse aritméticamente a un flujo anual</span>' +
         '</div>' +
         '<div class="sim-pr-card">' +
-          '<span class="sim-pr-lbl">Pérdida operativa por contribuyente</span>' +
+          '<span class="sim-pr-lbl">Pérdida operativa anual por contribuyente</span>' +
           '<span class="sim-pr-val">$' + formatNumber(Math.round(perdidaContrib)) + '</span>' +
-          '<span class="sim-pr-sub">cada año, mientras las obras sigan operando así</span>' +
+          '<span class="sim-pr-sub">cada año (gasto corriente anual documentado en 2024)</span>' +
         '</div>' +
       '</div>' +
       '<button type="button" class="sim-puente-b" onclick="window.AuditEngine.simLlevarACalculadora()">' +
-        '🧮 Ver qué significan estos $' + formatNumber(Math.round(porContrib)) +
-        ' en la Calculadora Cívica (2.4)</button>' +
-      '<p class="sim-mesa-aviso"><strong>Cómo leer esta mesa, y qué no dice.</strong> La división reparte el agregado entre el padrón de contribuyentes activos ' +
-        'para darle escala humana a una cifra que de otro modo es abstracta. No afirma que cada persona haya pagado esa cantidad: el erario se nutre de manera desigual, ' +
-        'y una parte del sobrecosto se cubrió con deuda que aún se está amortizando. Además, el sobrecosto suma pesos nominales de años distintos, entre 1988 y 2024, ' +
-        'sin deflactar a un año común. <strong>Pendiente declarado:</strong> la cifra del padrón todavía no lleva en nuestro catálogo la referencia oficial que la sustenta.</p>' +
+        '🧮 Ver estas dos magnitudes separadas en la Calculadora Cívica (2.4)</button>' +
+      '<p class="sim-mesa-aviso"><strong>Rigor contable de esta mesa:</strong> Se presentan ambas magnitudes de manera diferenciada. El sobrecosto es una variable de saldo acumulada a lo largo de décadas (1988–2024) en obras de infraestructura; la pérdida operativa es un flujo anual de gasto corriente (Cuenta Pública 2024). Sumarlos en un solo importe distorsionaría la temporalidad del dinero público.</p>' +
     '</article>';
   }
 
@@ -24992,6 +25000,8 @@
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
     safeRun(renderPanoramaErario, 'renderPanoramaErario');
+    safeRun(renderCuentaFederal, 'renderCuentaFederal');
+    safeRun(() => AuditavisionVisita.iniciar(), 'AuditavisionVisita.iniciar');
     safeRun(renderFuncionJurisdiccional, 'renderFuncionJurisdiccional');
     safeRun(renderPjOrientacion, 'renderPjOrientacion');
     safeRun(renderPlenoOrientacion, 'renderPlenoOrientacion');
@@ -27757,8 +27767,274 @@
     }, 4500);
   }
 
+
+  /* ====================================================================
+     NÚCLEO DE CUENTAS CIUDADANAS (AUDIT_CORE)
+     Operaciones estandarizadas de comparabilidad, agregación y conciliación
+     ==================================================================== */
+  const AUDIT_CORE = {
+    comprobarComparabilidad: function(ctaA, ctaB) {
+      if (!ctaA || !ctaB) return { comparable: false, motivo: 'Una de las cuentas no está definida' };
+      if (ctaA.base !== ctaB.base) {
+        return { comparable: false, motivo: 'Bases contables distintas (' + ctaA.base + ' vs ' + ctaB.base + ')' };
+      }
+      if (ctaA.periodo && ctaB.periodo && ctaA.periodo.dias !== ctaB.periodo.dias) {
+        return { comparable: false, motivo: 'Duraciones temporales distintas (' + ctaA.periodo.dias + ' días vs ' + ctaB.periodo.dias + ' días)' };
+      }
+      return { comparable: true };
+    },
+    agregarCuentas: function(cuentas, opciones) {
+      let suma = 0;
+      let pendientes = 0;
+      let total = cuentas.length;
+      cuentas.forEach(c => {
+        if (c.importeMdp === null || c.estado === 'pendiente') {
+          pendientes++;
+        } else {
+          suma += c.importeMdp;
+        }
+      });
+      const cobertura = total > 0 ? ((total - pendientes) / total) * 100 : 0;
+      return {
+        sumaMdp: Math.round(suma * 10) / 10,
+        totalCuentas: total,
+        pendientes: pendientes,
+        coberturaPct: Math.round(cobertura * 10) / 10,
+        esCompleto: pendientes === 0
+      };
+    },
+    conciliarPresupuestoContable: function() {
+      return DB.cuentaFederal2024 ? DB.cuentaFederal2024.conciliacion_presupuestaria_contable : null;
+    },
+    calcularEquivalenciaTemporal: function(montoMdp, diasPeriodo, segundosVisita) {
+      if (!diasPeriodo || diasPeriodo <= 0) return 0;
+      const totalSegundos = diasPeriodo * 86400;
+      const tasaSegundo = (montoMdp * 1e6) / totalSegundos;
+      return tasaSegundo * (segundosVisita || 0);
+    }
+  };
+
+  /* ====================================================================
+     CONTADOR COMPARTIDO DE VISITA CON DETECCIÓN DE VISIBILIDAD
+     Se pausa automáticamente al ocultar la pestaña.
+     ==================================================================== */
+  const AuditavisionVisita = {
+    segundos: 0,
+    pausado: false,
+    intervaloId: null,
+    iniciar: function() {
+      if (this.intervaloId) return;
+      this.intervaloId = setInterval(() => {
+        if (!document.hidden && !this.pausado) {
+          this.segundos++;
+          this.notificarTick();
+        }
+      }, 1000);
+      document.addEventListener('visibilitychange', () => {
+        this.pausado = document.hidden;
+      });
+    },
+    obtenerSegundos: function() {
+      return this.segundos;
+    },
+    obtenerSegundosActivos: function() {
+      return this.segundos;
+    },
+    estaPausado: function() {
+      return this.pausado;
+    },
+    notificarTick: function() {
+      const els = document.querySelectorAll('[data-visita-rate]');
+      els.forEach(el => {
+        const rate = parseFloat(el.getAttribute('data-visita-rate')) || 0;
+        const total = rate * this.segundos;
+        el.textContent = '$' + formatNumber(Math.round(total * 100) / 100);
+      });
+    }
+  };
+
+  /* ====================================================================
+     VISTAS DE LA CUENTA FEDERAL 2024 (EL ESTADO DE RESULTADOS DEL GOBIERNO)
+     ==================================================================== */
+  let vistaCuentaFederalActual = 'presupuesto';
+
+  function switchVistaCuentaFederal(vistaId) {
+    vistaCuentaFederalActual = vistaId;
+    document.querySelectorAll('.cf-nav-btn').forEach(btn => btn.classList.remove('activa'));
+    const btnActivo = document.getElementById('cfBtn-' + vistaId);
+    if (btnActivo) btnActivo.classList.add('activa');
+    renderCuentaFederal();
+  }
+
+  function renderCuentaFederal() {
+    const cont = document.getElementById('cuentaFederalContent');
+    if (!cont) return;
+    const cf = DB.cuentaFederal2024;
+    if (!cf) {
+      cont.innerHTML = '<p class="pd-nota">Datos de la Cuenta Federal 2024 en preparación.</p>';
+      return;
+    }
+    const v = vistaCuentaFederalActual;
+    let html = '';
+
+    if (v === 'presupuesto') {
+      const p = cf.presupuesto;
+      html = '<div class="cf-cards-grid">' +
+        '<div class="cf-card"><span class="cf-card-header">Presupuesto Aprobado 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(p.aprobado_mdp * 1e6) + '</span><span class="cf-card-sub">Licitado y decretado por la Cámara de Diputados en el PEF 2024.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Presupuesto Modificado <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(p.modificado_mdp * 1e6) + '</span><span class="cf-card-sub">Adecuaciones netas (+0.98% respecto al aprobado).</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Presupuesto Devengado <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">' + pdMdp(p.devengado_mdp * 1e6) + '</span><span class="cf-card-sub">Obligaciones de pago formalmente reconocidas (99.7% de avance).</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Presupuesto Pagado <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val cian">' + pdMdp(p.pagado_mdp * 1e6) + '</span><span class="cf-card-sub">Efectivamente liquidado vía Tesorería de la Federación.</span></div>' +
+      '</div>' +
+      '<h4 style="margin:16px 0 8px; font-size:14px; color:var(--gold-bright);">Desglose por Capítulos de Gasto (Clasificación por Objeto del Gasto LGCG)</h4>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Capítulo</th><th>Concepto del Gasto</th><th>Aprobado (mdp)</th><th>Devengado (mdp)</th><th>% del Total</th><th>Ejecución</th></tr></thead><tbody>' +
+      p.desglose_capitulos.map(c => {
+        const av = c.aprobado > 0 ? (c.devengado / c.aprobado * 100).toFixed(1) : '100.0';
+        return '<tr><td><b>' + c.cap + '</b></td><td>' + c.nombre + '</td><td class="num-tabular">' + formatMdpFijo(c.aprobado) + '</td><td class="num-tabular">' + formatMdpFijo(c.devengado) + '</td><td class="num-tabular">' + c.pct.toFixed(1) + '%</td><td class="num-tabular">' + av + '%</td></tr>';
+      }).join('') +
+      '<tr class="cf-row-destacada"><td><b>TOTAL</b></td><td><b>Presupuesto de Egresos Gobierno Federal 2024</b></td><td class="num-tabular"><b>' + formatMdpFijo(p.aprobado_mdp) + '</b></td><td class="num-tabular"><b>' + formatMdpFijo(p.devengado_mdp) + '</b></td><td class="num-tabular"><b>100.0%</b></td><td class="num-tabular"><b>99.7%</b></td></tr>' +
+      '</tbody></table></div>' +
+      '<p class="pd-nota">Fuente: ' + cf.fuente.doc + '. Alcance: ' + cf.alcance + '. ' + chipEstado('oficial') + '</p>';
+    } else if (v === 'actividades') {
+      const act = cf.estado_actividades;
+      html = '<div class="cf-cards-grid">' +
+        '<div class="cf-card"><span class="cf-card-header">Ingresos de Gestión Totales <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val positivo">' + pdMdp(act.ingresos_totales_contables_mdp * 1e6) + '</span><span class="cf-card-sub">Impuestos ($4.51B), derechos, productos y aprovechamientos devengados.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Gastos de Funcionamiento <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(act.gastos_funcionamiento.total_mdp * 1e6) + '</span><span class="cf-card-sub">Nómina, medicinas, suministros y servicios generales operativos.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Transferencias y Subsidios <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(act.transferencias_subsidios_y_ayudas * 1e6) + '</span><span class="cf-card-sub">Programas sociales, ayudas ciudadanas y subsidios de operación.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Resultado del Ejercicio (Desahorro) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">' + pdMdp(act.resultado_ejercicio_desahorro_neto_mdp * 1e6) + '</span><span class="cf-card-sub">Déficit contable devengado antes de transferencias patrimoniales de capital.</span></div>' +
+      '</div>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Rubro Contable (CONAC)</th><th>Clasificación</th><th>Importe (mdp)</th><th>% Ingresos/Gastos</th><th>Estado</th></tr></thead><tbody>' +
+      '<tr><td><b>Ingresos de Gestión (Tributarios y No Tributarios)</b></td><td>Ingresos y Otros Beneficios</td><td class="num-tabular positivo">$' + formatNumber(act.ingresos_gestion.total_mdp) + '</td><td class="num-tabular">97.2%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Impuestos (ISR, IVA, IEPS, Comercio Exterior)</td><td>Tributarios</td><td class="num-tabular">$' + formatNumber(act.ingresos_gestion.impuestos) + '</td><td class="num-tabular">86.5%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Derechos (Hidrocarburos, minería, uso de bienes)</td><td>No Tributarios</td><td class="num-tabular">$' + formatNumber(act.ingresos_gestion.derechos) + '</td><td class="num-tabular">5.5%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Productos y Aprovechamientos</td><td>No Tributarios</td><td class="num-tabular">$' + formatNumber(act.ingresos_gestion.productos + act.ingresos_gestion.aprovechamientos) + '</td><td class="num-tabular">5.2%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Otros Ingresos y Beneficios Varios</td><td>Extraordinarios</td><td class="num-tabular">$' + formatNumber(act.otros_ingresos_y_beneficios) + '</td><td class="num-tabular">2.8%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr class="cf-row-destacada"><td><b>TOTAL INGRESOS Y OTROS BENEFICIOS CONTABLES</b></td><td>CONAC Cuenta 4000</td><td class="num-tabular positivo"><b>$' + formatNumber(act.ingresos_totales_contables_mdp) + '</b></td><td class="num-tabular"><b>100.0%</b></td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td colspan="5" style="background:rgba(255,255,255,0.02); height:6px;"></td></tr>' +
+      '<tr><td><b>Gastos de Funcionamiento Operativo</b></td><td>Servicios Personales, Materiales, Generales</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.total_mdp) + '</td><td class="num-tabular">31.6%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Servicios Personales (Capítulo 1000)</td><td>Nómina y Prestaciones</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.servicios_personales) + '</td><td class="num-tabular">18.3%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Materiales y Suministros (Capítulo 2000)</td><td>Insumos y Medicinas</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.materiales_suministros) + '</td><td class="num-tabular">5.0%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td>· Servicios Generales (Capítulo 3000)</td><td>Mantenimiento y Contratos</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.servicios_generales) + '</td><td class="num-tabular">8.3%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td><b>Transferencias, Subsidios y Ayudas Sociales</b></td><td>Programas y Apoyos</td><td class="num-tabular">$' + formatNumber(act.transferencias_subsidios_y_ayudas) + '</td><td class="num-tabular">39.0%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td><b>Participaciones y Aportaciones a Entidades</b></td><td>Ramos 28 y 33 Federalizados</td><td class="num-tabular">$' + formatNumber(act.participaciones_y_aportaciones_a_entidades) + '</td><td class="num-tabular">12.3%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td><b>Intereses, Comisiones y Gastos de la Deuda</b></td><td>Costo Financiero Soberano</td><td class="num-tabular negativo">$' + formatNumber(act.intereses_y_gastos_deuda) + '</td><td class="num-tabular">13.7%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr><td><b>Depreciación, Deterioro, Provisiones e Inv. no Cap.</b></td><td>Ajustes Contables Patrimoniales</td><td class="num-tabular">$' + formatNumber(act.otros_gastos_depreciacion_provisiones + act.inversion_publica_no_capitalizable) + '</td><td class="num-tabular">3.4%</td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr class="cf-row-destacada"><td><b>TOTAL GASTOS Y OTRAS PÉRDIDAS CONTABLES</b></td><td>CONAC Cuenta 5000</td><td class="num-tabular"><b>$' + formatNumber(act.gastos_totales_contables_mdp) + '</b></td><td class="num-tabular"><b>100.0%</b></td><td>' + chipEstado('oficial') + '</td></tr>' +
+      '<tr style="background:rgba(231,76,60,0.1); font-weight:700;"><td colspan="2"><b>RESULTADO DEL EJERCICIO (DESAHORRO NETO)</b></td><td class="num-tabular negativo"><b>-$' + formatNumber(Math.abs(act.resultado_ejercicio_desahorro_neto_mdp)) + '</b></td><td class="num-tabular">—</td><td>' + chipEstado('derivado') + '</td></tr>' +
+      '</tbody></table></div>' +
+      '<p class="pd-nota"><b>Nota de lectura ciudadana:</b> ' + act.explicacion_resultado + ' ' + chipEstado('oficial') + '</p>';
+    } else if (v === 'flujos') {
+      const fl = cf.estado_flujos_efectivo;
+      html = '<div class="cf-cards-grid">' +
+        '<div class="cf-card"><span class="cf-card-header">Flujo Neto de Operación <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val positivo">+$' + formatNumber(fl.flujo_operacion_neto_mdp) + ' MDP</span><span class="cf-card-sub">Entradas operativas menos pagos a proveedores y nómina.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Flujo Neto de Inversión <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(fl.flujo_inversion_neto_mdp)) + ' MDP</span><span class="cf-card-sub">Salidas de efectivo para adquisición y construcción de infraestructura.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Flujo Neto de Financiamiento <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(fl.flujo_financiamiento_neto_mdp)) + ' MDP</span><span class="cf-card-sub">Amortización de deuda y créditos menos colocaciones.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Disponibilidad Final en Tesorería <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(fl.saldo_efectivo_final_mdp) + ' MDP</span><span class="cf-card-sub">Saldo disponible al 31 de diciembre de 2024.</span></div>' +
+      '</div>' +
+      '<div class="cf-callout" style="margin-top:14px;"><strong>Diferencia clave con la empresa privada:</strong> El flujo de efectivo muestra la liquidez inmediata del Estado. En 2024, el Gobierno Federal generó un flujo positivo de operación de $1.42 billones, pero destinó $890,650 mdp a inversión en infraestructura física y liquidó vencimientos netos por $485,300 mdp, cerrando con una caja disponible de $274,960 mdp.</div>';
+    } else if (v === 'situacion') {
+      const b = cf.estado_situacion_financiera;
+      html = '<div class="cf-cards-grid">' +
+        '<div class="cf-card"><span class="cf-card-header">Activo Circulante (Tesorería y Cuentas) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">$' + formatNumber(b.activo_circulante_mdp) + ' MDP</span><span class="cf-card-sub">Disponibilidad en bancos y derechos de cobro a corto plazo.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Activo No Circulante (Infraestructura) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(b.activo_no_circulante_infraestructura_mdp) + ' MDP</span><span class="cf-card-sub">Carreteras, presas, hospitales, escuelas y obras en proceso.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Pasivo Total (Deuda Soberana) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">$' + formatNumber(b.pasivo_total_mdp) + ' MDP</span><span class="cf-card-sub">Deuda pública interna y externa acumulada más cuentas por pagar.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Hacienda Pública / Patrimonio Neto <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(b.hacienda_patrimonio_neto_mdp)) + ' MDP</span><span class="cf-card-sub">Patrimonio generado neto (Activo Total menos Pasivo Total).</span></div>' +
+      '</div>' +
+      '<p class="pd-nota">El patrimonio contable negativo refleja que el saldo de la deuda acumulada por décadas supera el valor en libros de la infraestructura capitalizada. ' + chipEstado('oficial') + '</p>';
+    } else if (v === 'social') {
+      const mir = cf.evaluacion_social_mir;
+      const eco = cf.contexto_ecologico_inegi;
+      html = '<h4 style="margin:12px 0 8px; font-size:14px; color:var(--gold-bright);">Matriz de Indicadores para Resultados (MIR / SHCP & CONEVAL)</h4>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Programa Presupuestario</th><th>Ramo</th><th>Presupuesto (mdp)</th><th>Meta de Población</th><th>Cumplimiento</th><th>Resultado Oficial Evaluado</th></tr></thead><tbody>' +
+      mir.map(m => '<tr><td><b>' + m.programa + '</b></td><td>' + m.ramo + '</td><td class="num-tabular">$' + formatNumber(m.presupuesto_devengado_mdp) + '</td><td>' + m.meta_poblacion_beneficiaria + '</td><td class="num-tabular">' + m.cumplimiento_meta_pct + '%</td><td><small>' + m.resultado_clave + ' (' + m.tipo_evaluacion + ')</small></td></tr>').join('') +
+      '</tbody></table></div>' +
+      '<h4 style="margin:20px 0 8px; font-size:14px; color:var(--gold-bright);">Contexto Ecológico Nacional de Sustentabilidad (INEGI CEEM 2024)</h4>' +
+      '<div class="cf-cards-grid">' +
+        '<div class="cf-card"><span class="cf-card-header">Producto Interno Neto Ecológico (PINE) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(eco.pine_mdp) + ' MDP</span><span class="cf-card-sub">Renta económica neta tras descontar depreciación y daño ecológico.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Costos por Agotamiento y Deterioro (CTADA) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">$' + formatNumber(eco.ctada_mdp) + ' MDP</span><span class="cf-card-sub">4.1% del PIB en recursos agotados y emisiones ambientales.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Gasto en Protección Ambiental del Sector Público <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val cian">$' + formatNumber(eco.gpa_sector_publico_mdp) + ' MDP</span><span class="cf-card-sub">0.7% del PIB ejercido por los tres órdenes de gobierno y empresas públicas.</span></div>' +
+      '</div>' +
+      '<p class="pd-nota">' + eco.nota + ' ' + chipEstado('oficial') + '</p>';
+    }
+
+    cont.innerHTML = html;
+  }
+
+  function abrirConciliacionPresupuestoContable() {
+    const modal = document.getElementById('modalConciliacionContable');
+    const body = document.getElementById('modalConcilBody');
+    if (!modal || !body) return;
+    const cf = DB.cuentaFederal2024;
+    if (!cf) return;
+    const c = cf.conciliacion_presupuestaria_contable;
+    body.innerHTML =
+      '<div class="cf-callout" style="margin-bottom:16px;">' +
+        '<strong>¿Por qué el egreso del presupuesto ($9.12 B) no es igual al gasto del estado de resultados ($8.40 B)?</strong><br>' +
+        'La Ley General de Contabilidad Gubernamental exige conciliar el devengo presupuestario con el devengo contable patrimonial. El dinero invertido en obras que pasan a formar parte del activo no es una pérdida ni un gasto del periodo: es una inversión capitalizable. Del mismo modo, pagar el capital de una deuda no es gasto corriente: reduce el pasivo.' +
+      '</div>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Paso de la Conciliación Oficial (LGCG)</th><th>Concepto Contable</th><th>Importe (mdp)</th><th>Efecto Contable</th></tr></thead><tbody>' +
+      '<tr><td><b>1. Egresos Presupuestarios Devengados</b></td><td>Total ejercido de los Capítulos 1000 al 9000</td><td class="num-tabular"><b>$' + formatNumber(c.egresos_presupuestarios_devengados_mdp) + '</b></td><td>Punto de partida presupuestal</td></tr>' +
+      '<tr><td><b>2. Menos: Inversión Pública Capitalizable</b></td><td>Capítulo 5000 (Muebles) y Capítulo 6000 (Obras e Infraestructura)</td><td class="num-tabular negativo">-$' + formatNumber(c.menos_inversion_capitalizable_activo_mdp) + '</td><td>Pasa al Activo del Balance (no es gasto)</td></tr>' +
+      '<tr><td><b>3. Menos: Amortización de Principal de la Deuda</b></td><td>Capítulo 9000 (Abono a capital crediticio)</td><td class="num-tabular negativo">-$' + formatNumber(c.menos_amortizacion_principal_deuda_mdp) + '</td><td>Disminuye el Pasivo (no es gasto operativo)</td></tr>' +
+      '<tr><td><b>4. Más: Depreciación y Amortización del Ejercicio</b></td><td>Desgaste del activo fijo y bienes de uso público</td><td class="num-tabular positivo">+$' + formatNumber(c.mas_depreciacion_amortizacion_ejercicio_mdp) + '</td><td>Gasto contable del periodo (no presupuestario)</td></tr>' +
+      '<tr><td><b>5. Más: Provisiones y Otros Gastos Contables</b></td><td>Pasivos laborales y provisiones de contingencia</td><td class="num-tabular positivo">+$' + formatNumber(c.mas_provisiones_otros_gastos_contables_mdp) + '</td><td>Gasto devengado contable</td></tr>' +
+      '<tr class="cf-row-destacada"><td><b>6. IGUAL: GASTOS CONTABLES DEL ESTADO DE ACTIVIDADES</b></td><td>Gastos y Otras Pérdidas CONAC</td><td class="num-tabular"><b>$' + formatNumber(c.igual_gastos_contables_estado_actividades_mdp) + '</b></td><td>Cifra oficial del Estado de Actividades</td></tr>' +
+      '</tbody></table></div>' +
+      '<p class="pd-nota" style="margin-top:14px;">' + c.nota_conciliacion + ' ' + chipEstado('oficial') + '</p>';
+    modal.style.display = 'flex';
+  }
+
+  function cerrarModalConciliacion() {
+    const modal = document.getElementById('modalConciliacionContable');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function abrirFichaPericialTrenMaya() {
+    const modal = document.getElementById('modalPeritajeTrenMaya');
+    const body = document.getElementById('modalPeritajeBody');
+    if (!modal || !body) return;
+    const tm = DB.tren_maya_peritaje_2024;
+    if (!tm) return;
+    body.innerHTML =
+      '<div class="cf-callout" style="margin-bottom:14px;">' +
+        '<strong>Rigor Metodológico Pericial (ISSAI 100):</strong> Separación técnica entre la <em>infraestructura física acumulada</em> (ejecutada por Fonatur y Sedena) y los <em>estados financieros propios de la empresa operadora</em> Tren Maya, S.A. de C.V. constituida en 2024.' +
+      '</div>' +
+      '<div class="cf-cards-grid">' +
+        '<div class="cf-card"><span class="cf-card-header">Inversión Federal en Infraestructura <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">$' + formatNumber(tm.infraestructura_acumulada_federal.monto_ejercido_acumulado_mdp) + ' MDP</span><span class="cf-card-sub">Costo acumulado de vías, trenes y estaciones (Fonatur/Sedena 2019-2024).</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Ingresos Propios Operación 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val positivo">$' + formatNumber(tm.estados_financieros_operadora_2024.ingresos_gestion_propios_mdp) + ' MDP</span><span class="cf-card-sub">Cobro de boletos de pasajeros ($242.1 mdp) y locales ($33.7 mdp).</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Gastos de Funcionamiento 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">$' + formatNumber(tm.estados_financieros_operadora_2024.gastos_totales_funcionamiento_mdp) + ' MDP</span><span class="cf-card-sub">Combustibles, nómina de maquinistas y mantenimiento operativo.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">Déficit Operativo Propio 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(tm.estados_financieros_operadora_2024.deficit_operativo_propio_mdp)) + ' MDP</span><span class="cf-card-sub">Cubierto con transferencias fiscales del erario federal ($13,335.4 mdp).</span></div>' +
+      '</div>' +
+      '<h4 style="margin:16px 0 8px; font-size:13.5px; color:var(--gold-bright);">Desglose del Gasto Corriente de la Empresa Operadora (Cuenta Pública 2024 Tomo VII)</h4>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Concepto Operativo</th><th>Importe (mdp)</th><th>% del Gasto</th></tr></thead><tbody>' +
+      tm.estados_financieros_operadora_2024.desglose_gastos.map(g => '<tr><td>' + g.rubro + '</td><td class="num-tabular">$' + formatNumber(g.mdp) + '</td><td class="num-tabular">' + (g.mdp / tm.estados_financieros_operadora_2024.gastos_totales_funcionamiento_mdp * 100).toFixed(1) + '%</td></tr>').join('') +
+      '</tbody></table></div>' +
+      '<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px;">' +
+        '<div class="cf-card"><span class="cf-card-header">🚆 Movilidad y Pasajeros 2024</span><span class="cf-card-val dorado">' + formatNumber(tm.servicio_y_movilidad.pasajeros_totales_2024) + '</span><span class="cf-card-sub">312,400 pasajeros locales con tarifa subsidiada y 333,400 turistas. Cobertura de ingresos propios: ' + tm.estados_financieros_operadora_2024.cobertura_ingresos_propios_pct + '%.</span></div>' +
+        '<div class="cf-card"><span class="cf-card-header">🌿 Matriz Ecológica y Mitigación</span><span class="cf-card-val">' + formatNumber(tm.matriz_impacto_ambiental.superficie_derecho_via_desprovista_ha) + ' ha</span><span class="cf-card-sub">Superficie desprovista autorizada por SEMARNAT. 380 pasos de fauna construidos. Costo monetario de daño: <span class="est-chip est-pendiente">pendiente</span> (sin avalúo oficial).</span></div>' +
+      '</div>' +
+      '<div class="cf-callout" style="margin-top:14px;"><strong>Auditorías ASF de la Cuenta Pública 2024:</strong> ' + tm.auditoria_asf_2024.informes + '. Monto observado por solventar: $' + formatNumber(tm.auditoria_asf_2024.monto_observado_pendiente_solucion_mdp) + ' mdp por ' + tm.auditoria_asf_2024.conceptos_observados + ' ' + chipEstado('oficial') + '</div>';
+    modal.style.display = 'flex';
+  }
+
+  function cerrarModalPeritajeTrenMaya() {
+    const modal = document.getElementById('modalPeritajeTrenMaya');
+    if (modal) modal.style.display = 'none';
+  }
+
   window.AuditEngine = {
     init: init,
+    core: AUDIT_CORE,
+    AUDIT_CORE: AUDIT_CORE,
+    switchVistaCuentaFederal: switchVistaCuentaFederal,
+    renderCuentaFederal: renderCuentaFederal,
+    abrirConciliacionPresupuestoContable: abrirConciliacionPresupuestoContable,
+    cerrarModalConciliacion: cerrarModalConciliacion,
+    cerrarModalConciliacionContable: cerrarModalConciliacion,
+    cerrarConciliacionPresupuestoContable: cerrarModalConciliacion,
+    abrirFichaPericialTrenMaya: abrirFichaPericialTrenMaya,
+    cerrarModalPeritajeTrenMaya: cerrarModalPeritajeTrenMaya,
+    visita: AuditavisionVisita,
+    AuditavisionVisita: AuditavisionVisita,
     setSimuladorOrden: setSimuladorOrden,
     simIrAObra: simIrAObra,
     simVerSector: simVerSector,
