@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditavisión · Sistema de marca</title>
+  <meta name="description" content="Sistema de marca de Auditavisión: logo, color, tipografía, voz y aplicaciones. Generado a partir de DESIGN.md.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0e15">
+  <link rel="icon" href="../assets/brand/logos/symbol/auditavision-favicon.svg" type="image/svg+xml">
+  <style>
+    html, body { margin: 0; background: #0c0e15; }
+    #estado { font: 14px/1.6 'Source Serif 4', Georgia, serif; color: #a8a59e; padding: 48px 24px; max-width: 640px; margin: 0 auto; }
+    #estado code { font-family: 'JetBrains Mono', monospace; color: #e8c86a; }
+  </style>
+  <!--
+    Este index solo carga brand-book.jsx, que es el entregable del skill
+    brand-book-generator (un componente React de un archivo). Se transpila en el
+    navegador con Babel para no agregar un paso de compilación al sitio.
+    Para cambiar el contenido, edita brand-book.jsx, no este archivo.
+  -->
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.26.4/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"><p id="estado">Cargando el sistema de marca…</p></div>
+  <noscript><p style="color:#a8a59e;padding:24px">El sistema de marca necesita JavaScript. La misma información está en <code>DESIGN.md</code>.</p></noscript>
+  <script>
+    (function () {
+      var root = document.getElementById('root');
+      function fallo(msg) {
+        root.innerHTML = '<p id="estado">No se pudo cargar el sistema de marca: <code></code>. ' +
+          'Abre la página con un servidor HTTP (no con <code>file://</code>). La misma información está en <code>DESIGN.md</code>.</p>';
+        root.querySelector('code').textContent = msg;
+      }
+      fetch('brand-book.jsx', { cache: 'no-cache' })
+        .then(function (r) { if (!r.ok) throw new Error('brand-book.jsx respondió ' + r.status); return r.text(); })
+        .then(function (src) {
+          src = src.replace(/^import\s+\{\s*useState\s*\}\s+from\s+["']react["'];?\s*$/m, '')
+                   .replace('export default function AuditavisionBrandGuidelines', 'function AuditavisionBrandGuidelines');
+          var code = Babel.transform(src, { presets: ['react'] }).code;
+          var App = new Function('React', 'useState', code + '\nreturn AuditavisionBrandGuidelines;')(React, React.useState);
+          ReactDOM.createRoot(root).render(React.createElement(App));
+        })
+        .catch(function (e) { fallo(e.message); });
+    })();
+  </script>
+</body>
+</html>

@@ -189,6 +189,12 @@ encabezado con emoji ⚖️ y superficies sólidas. El auditor de esta rama ya
 tenía la moneda ilustrada y superficies translúcidas sobre la fotografía de la
 ciudad: `DESIGN.md` documenta lo que hay en esta rama.
 
+El brand book interactivo que produce el skill está en **`brand/`** y se abre
+en `/brand/`: `brand-book.jsx` es el componente React del skill y
+`brand/index.html` lo carga con React, Babel y Tailwind por CDN, sin paso de
+compilación. Muestra los 19 SVG con descarga y los dos temas. Si cambia
+`DESIGN.md`, se actualiza `brand-book.jsx` a mano.
+
 Aplicar `DESIGN.md` al sitio es trabajo aparte y queda pendiente (lista en su
 §9 y abajo, en Pendiente).
 
