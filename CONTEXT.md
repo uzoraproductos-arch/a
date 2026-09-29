@@ -158,6 +158,36 @@ La pestaña 4 tiene cinco subpestañas (4.1 a 4.5), y la 4.1 a su vez tiene tres
 subvistas: organigrama de la SCJN, estructura general del PJF y mapa territorial
 de los 32 circuitos.
 
+## Siguiente tarea: sistema de marca (`DESIGN.md`)
+
+El sitio no tiene todavía una referencia única de marca: el emblema del
+encabezado es un emoji ⚖️ y el HTML acumula más de 1,300 estilos en línea con
+valores sueltos. El objetivo es producir **`DESIGN.md` en la raíz**, que
+fije colores, tipografía, logo, forma y tono para que todo el sitio sea
+consistente.
+
+Todo está preparado en el repositorio:
+
+- `.claude/skills/brand-book-generator/`: el skill que guía la entrevista y
+  genera `DESIGN.md` y los SVG del logo. Al inicio de su `SKILL.md` hay reglas
+  específicas de este proyecto.
+- `docs/marca/BRIEF.md`: lo ya extraído del sitio (paleta en los dos temas,
+  fuentes, favicon de la balanza, radios, voz) y **siete preguntas abiertas**
+  que decide quien es dueño de la marca.
+
+Cómo hacerlo:
+
+1. `git pull origin main`.
+2. Lee `docs/marca/BRIEF.md` y ten a la mano las respuestas a sus preguntas.
+3. En Claude Code, abierto en la raíz del repositorio, ejecuta
+   `/brand-book-generator`. Con otra herramienta de IA, dale a leer
+   `.claude/skills/brand-book-generator/SKILL.md`, `md-template.md` y el brief.
+4. Aprueba el logo antes de que genere las variantes.
+5. Revisa `DESIGN.md`, haz commit y push a `main`.
+
+Aplicar `DESIGN.md` al CSS y al HTML es un trabajo posterior e independiente:
+en esta tarea sólo se documenta la marca.
+
 ## Estado actual
 
 ### Hecho
@@ -4286,6 +4316,13 @@ capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
   se publica marcada como `análisis`, no como dato. Procede de crítica
   académica, no de un artículo que sancione expresamente el apartarse de un
   precedente. Si aparece la norma concreta, reetiquetar como `oficial`.
+- **Sistema de marca (`DESIGN.md`)**: no existe todavía una referencia única
+  de colores, tipografía, logo y tono; el emblema del encabezado es un emoji.
+  El brief con lo ya extraído del sitio y las preguntas abiertas está en
+  `docs/marca/BRIEF.md`, y el skill para generarlo en
+  `.claude/skills/brand-book-generator/` (en Claude Code:
+  `/brand-book-generator`). Una vez aprobado, `DESIGN.md` es la referencia
+  para migrar los estilos en línea.
 - **Decisión editorial abierta**: si las Salas suprimidas deben permanecer
   documentadas como estructura histórica o desaparecer del organigrama.
 
