@@ -35,8 +35,6 @@ ARCHIVOS = [
     ('href', 'assets/auditor/css/legibilidad.css'),
     ('src', 'assets/auditor/js/mexico-states-geo.js'),
     ('src', 'assets/auditor/js/audit-database.js'),
-    ('src', 'assets/auditor/js/municipios-efipem.js'),
-    ('src', 'assets/auditor/js/municipios-rendicion.js'),
     ('src', 'assets/auditor/js/audit-engine.js'),
     ('src', 'assets/auditor/js/legibilidad.js'),
 ]

@@ -192,6 +192,48 @@ body:has(#seccionDesgloseModulos.desglose-abierto) .radar-hacendario-hub { displ
   color: var(--text-secondary);
 }
 .portada-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; }
+
+/* Guía de uso: tres pasos y qué significa cada etiqueta, sin jerga */
+.portada-guia {
+  margin: 24px 0 8px;
+  padding: 18px;
+  border: 1px dashed var(--border-accent);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card-alt);
+}
+.portada-guia-titulo {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 22px;
+  margin: 0 0 10px;
+  color: var(--text-main);
+}
+.portada-pasos {
+  margin: 0 0 10px;
+  padding-left: 22px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-main);
+}
+.portada-pasos li + li { margin-top: 6px; }
+.portada-etiquetas { margin: 0 0 10px; display: grid; gap: 8px; }
+.portada-etiquetas div { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; gap: 10px; }
+.portada-etiquetas dt { margin: 0; }
+.portada-etiquetas dd {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-main);
+}
+.portada-guia-nota {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.puerta-ir-mas { color: var(--text-gold) !important; }
 .portada-accion {
   min-height: 44px;
   padding: 10px 16px;
@@ -207,29 +249,122 @@ body:has(#seccionDesgloseModulos.desglose-abierto) .radar-hacendario-hub { displ
 .portada-accion:hover { border-color: var(--gold); }
 
 /* --------------------------------------------------------------------------
-   4. Cabecera móvil: marca, botón «Menú» y buscador.
-   El menú agrupa todo en Lee, Explora, Consulta y Participa.
+   4. Navegación (DESIGN.md §4 y §5): cuatro secciones, iguales en escritorio
+      y en celular. Inter para la interfaz, oro solo para lo activo, todo lo
+      que se toca mide al menos 44 px, foco visible.
    -------------------------------------------------------------------------- */
+.site-top-nav {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "marca secciones acciones" "buscar buscar buscar";
+  align-items: center;
+  gap: 8px 20px;
+  padding: 10px 24px 12px !important;
+  background: var(--bg-surface) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+.nav-brand-group { grid-area: marca; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.nav-brand-group .brand-logo-btn { min-width: 44px; min-height: 44px; }
+.nav-brand-text { display: flex; flex-direction: column; text-decoration: none; min-width: 0; }
+.nav-brand-title {
+  font-family: var(--font-serif) !important;
+  font-weight: 900 !important;
+  font-size: 24px !important;
+  line-height: 1.1 !important;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+.nav-brand-sub {
+  font-family: var(--font-sans) !important;
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--text-secondary) !important;
+}
+
+.nav-secciones { grid-area: secciones; display: flex; justify-content: center; gap: 4px; }
+.nav-seccion {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+.nav-seccion::after { content: "▾"; margin-left: 6px; font-size: 12px; color: var(--text-secondary); }
+.nav-seccion:hover, .nav-seccion.activa { background: var(--bg-card); }
+.nav-seccion.activa { box-shadow: inset 0 -2px 0 var(--gold); }
+
+.nav-right-container { display: contents !important; }
+.nav-right-actions { grid-area: acciones; display: flex !important; align-items: center; gap: 8px; }
+.nav-accion {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-accent);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.nav-accion:hover { border-color: var(--gold); }
+.nav-accion-principal { border-color: var(--border-gold); color: var(--text-gold); }
+.nav-search-wrap { grid-area: buscar; width: 100%; max-width: 720px; justify-self: center; }
+.nav-search-bar { display: flex; align-items: center; gap: 8px; }
+.nav-search-bar .search-icon { flex-shrink: 0; color: var(--text-secondary); }
+.nav-search-wrap .search-input-box {
+  font-family: var(--font-sans) !important;
+  font-size: 16px !important;
+  letter-spacing: 0 !important;
+  min-height: 44px;
+}
+
+/* Lista desplegable de una sección en escritorio */
+.nav-panel {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 720px);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 8px 20px 12px;
+}
+.nav-panel-que {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 6px 0 4px;
+}
+.nav-panel .puerta-lista { columns: 2; column-gap: 28px; }
+.nav-panel .puerta-lista li { break-inside: avoid; border-top: 0 !important; }
+
 .menu-movil-btn { display: none; }
 .menu-movil { display: none; }
 
 @media (max-width: 900px) {
   .site-top-nav {
-    display: grid !important;
     grid-template-columns: 1fr auto;
     grid-template-areas: "marca boton" "buscar buscar";
-    align-items: center;
     gap: 10px 12px;
     padding: 10px 16px 12px !important;
   }
-  .nav-brand-group { grid-area: marca; min-width: 0; }
   .nav-brand-group .brand-logo-btn img { width: 46px; height: 36px; }
   .nav-brand-title { font-size: 22px !important; }
   .nav-brand-sub { display: none !important; }
-  .nav-center-links, .nav-right-actions { display: none !important; }
-  .nav-right-container { display: contents !important; }
-  .nav-search-wrap { grid-area: buscar; width: 100%; }
-  .nav-search-wrap .search-input-box { font-size: 16px !important; min-height: 44px; }
+  .nav-secciones, .nav-right-actions, .nav-panel { display: none !important; }
+  .nav-search-wrap { max-width: none; }
 
   .menu-movil-btn {
     grid-area: boton;
@@ -243,7 +378,7 @@ body:has(#seccionDesgloseModulos.desglose-abierto) .radar-hacendario-hub { displ
     background: var(--bg-card);
     color: var(--text-main);
     font-family: var(--font-sans);
-    font-size: var(--fs-texto);
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
   }
@@ -260,9 +395,9 @@ body:has(#seccionDesgloseModulos.desglose-abierto) .radar-hacendario-hub { displ
   .menu-movil-btn-raya::before, .menu-movil-btn-raya::after { content: ""; position: absolute; left: 0; }
   .menu-movil-btn-raya::before { top: -5px; }
   .menu-movil-btn-raya::after { top: 5px; }
-
 }
 
+/* Menú a pantalla completa (celular, y «Ver todo» en cualquier ancho) */
 .menu-movil {
   position: fixed;
   inset: 0;
@@ -290,12 +425,13 @@ body.menu-abierto { overflow: hidden; }
 .menu-movil-cerrar {
   min-width: 44px;
   min-height: 44px;
+  padding: 0 14px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-accent);
   background: var(--bg-card);
   color: var(--text-main);
   font-family: var(--font-sans);
-  font-size: var(--fs-texto);
+  font-size: 16px;
   cursor: pointer;
 }
 .menu-grupo { padding: 14px 0 6px; border-top: 1px solid var(--border-subtle); }
@@ -309,12 +445,70 @@ body.menu-abierto { overflow: hidden; }
 }
 .menu-grupo-que {
   font-family: var(--font-sans);
-  font-size: var(--fs-apoyo);
+  font-size: 14px;
   color: var(--text-secondary);
   margin: 0 0 6px;
 }
 .menu-movil .puerta-lista li + li { border-top: 0; }
 .menu-movil-acciones { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 16px; border-top: 1px solid var(--border-subtle); }
+.menu-movil-acciones .portada-accion { text-decoration: none; display: inline-flex; align-items: center; }
+
+/* Ruta de migas al abrir un módulo: dónde estás y cómo volver */
+.ruta-migas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 16px 4px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+.ruta-inicio, .ruta-seccion {
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-gold);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ruta-inicio { padding-left: 0; }
+.ruta-seccion::before { content: "›"; margin-right: 10px; color: var(--text-secondary); font-weight: 400; }
+.ruta-aqui { color: var(--text-main); }
+.ruta-aqui::before { content: "›"; margin-right: 8px; color: var(--text-secondary); }
+.ruta-inicio:hover, .ruta-seccion:hover { background: var(--bg-card); }
+
+/* Aviso mientras llegan los datos de municipios (o si fallan) */
+.aviso-carga {
+  max-width: 1080px;
+  margin: 4px auto 0;
+  padding: 10px 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--gold);
+}
+.aviso-carga-btn {
+  min-height: 44px;
+  margin-left: 6px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-accent);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Íconos decorativos que el motor pinta aparte: fuera (DESIGN.md §7) */
+.mod-proemio-icono, .erario-pleg-ico, .explorer-card-icon, .radar-card-icon, .radar-btn-icon,
+.radar-acc-icon, .cs-ico, .insp-sep-n, .nav-feedback-btn > span:first-child {
+  display: none !important;
+}
 
 /* --------------------------------------------------------------------------
    5. Escala de lectura en celular.
@@ -370,6 +564,19 @@ body.menu-abierto { overflow: hidden; }
   /* Párrafos largos alineados a la izquierda: centrados cuestan leer */
   .mod-proemio, .mod-proemio p, .section-hero, .section-hero p { text-align: left !important; }
 
+  /* Fichas de estados, poderes y comunidad: pies y notas a 14 px */
+  #contenido dt, .cap-cifra-pie, .ec-nom em, .piso-card footer, .com-util-tit,
+  .asf-alert-banner div, .ef-tit, .drawer-state-tag {
+    font-size: var(--fs-apoyo) !important;
+    line-height: 1.45 !important;
+  }
+  /* Rótulos cortos de fichas: 12 px como mínimo */
+  .ec-rk, .fc-grupo span, .fc-grupo-monto, .asf-badge, .eval-badge,
+  .cap-indice-cab span, .ec-dep-lab, .cap-num, .cap-todo, .com-form-row label {
+    font-size: var(--fs-etiqueta) !important;
+    line-height: 1.4 !important;
+  }
+
   /* Chips de estado */
   .est-chip { font-size: var(--fs-chip) !important; }
 
@@ -393,8 +600,58 @@ body.menu-abierto { overflow: hidden; }
   #contenido select, #contenido input:not([type="checkbox"]):not([type="radio"]) {
     min-height: 44px;
   }
+  /* Excepción: botones dentro de un párrafo (glosario, notas). Son enlaces en
+     línea; con 44 px separaban los renglones. */
+  #contenido p button, #contenido li button, #contenido .glos-term,
+  #contenido sup button, #contenido small button {
+    min-height: 0 !important;
+  }
   #contenido input, #contenido select, #contenido textarea { font-size: 16px !important; }
 }
 
 /* Foco visible en todo lo que se opera con teclado */
 :focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+
+/* El botón de nota junto a un título solo tenía un emoji: ahora dice qué hace */
+.hero-nota-btn {
+  font-size: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 32px;
+  padding: 4px 12px !important;
+  margin-left: 10px;
+  border-radius: var(--radius-pill) !important;
+  border: 1px solid var(--border-gold) !important;
+  background: none !important;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.hero-nota-btn::after {
+  content: "¿Qué es?";
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-gold);
+}
+
+/* Escala de lectura también en escritorio: texto corrido a 16 px y
+   descripciones de bloque legibles (DESIGN.md §4.1, propuesta). */
+@media (min-width: 761px) {
+  #contenido p, #contenido li, .mod-proemio p {
+    font-size: max(16px, 1rem);
+    line-height: 1.6;
+  }
+  .fj-bloque-sub, .erario-bloque-sub, .insp-sep-sub, .erario-pleg-av,
+  .cc-ciego-tx, .mod-proemio-sub {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+  .mod-proemio-tema-ir button { font-size: 14px !important; min-height: 36px; }
+}
+
+/* Enlaces dentro del texto: color de marca, nunca el azul del navegador */
+#contenido a:not([class]), .site-footer a:not([class]) {
+  color: var(--text-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

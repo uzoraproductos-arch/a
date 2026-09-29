@@ -1695,7 +1695,7 @@
           L.aguinaldoDias + ' contra ' + L.referencia.aguinaldoDias + ' días: ' + ccPesos((L.referencia.aguinaldoDias - L.aguinaldoDias) * dia) + ' de diferencia') +
         caja('Su prima vacacional', L.primaVacacionalDias * dia, L.referencia.primaVacacionalDias * dia,
           L.primaVacacionalDias + ' contra ' + L.referencia.primaVacacionalDias + ' días: ' + ccPesos((L.referencia.primaVacacionalDias - L.primaVacacionalDias) * dia) + ' de diferencia') +
-        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Su sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
+        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Tu sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
         ') entre 30, por los días de cada regla, en bruto y antes de impuestos. ' + escHtml(L.nota) + '</p>';
     } else {
       cuenta = tuUd('<p class="shock-prest-op">Para ver la cuenta con su sueldo, escriba su ingreso bruto o saque la cuenta en el bloque 1.</p>', '<p class="shock-prest-op">Para ver la cuenta con tu sueldo, escribe tu ingreso bruto o saca la cuenta en el bloque 1.</p>');
@@ -1942,7 +1942,7 @@
     const isr = res ? res.ano.isr : 0;
     const huella =
       '<section class="pd-bloque">' +
-        '<h3 class="pd-tit">🧍 Su estado de cuenta ecológico</h3>' +
+        '<h3 class="pd-tit">Tu estado de cuenta ecológico</h3>' +
         '<p class="pd-lead">Lo que a cada persona le toca, en promedio, de la basura y del daño ambiental del país.</p>' +
         '<div class="am-datos">' +
           amTarjeta(amNum(R.perCapitaKg.valor, 3) + ' kg', 'de basura al día por persona', 'oficial', amFuente('DBGIR', R.perCapitaKg.pagina)) +
@@ -2318,7 +2318,7 @@
 
   function amTkIngresoSugerido() {
     const l = comparadorIngresoLector();
-    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de su estado de cuenta del módulo 3 (neto).' } : null;
+    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de tu estado de cuenta en la calculadora (neto).' } : null;
   }
 
   function renderAmTicket() {
@@ -2334,7 +2334,7 @@
             '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="Por ejemplo, 15000" value="' + (amTk.ingreso || '') + '" ' +
             'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
-          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que le queda después de impuestos. Si no lo sabe, sáquelo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
+          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que te queda después de impuestos. Si no lo sabes, sácalo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
         '</div>' +
         '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : tuUd('<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>', '<p class="pd-nota am-tk-vacio">Escribe tu ingreso y pulsa «Emitir». El ticket se imprime renglón por renglón.</p>')) + '</div>' +
       '</section>';
@@ -2885,7 +2885,7 @@
     /* 4. Su estado */
     const estado =
       '<section class="pd-bloque">' +
-        '<h3 class="pd-tit">🗺️ Lo que la ASF le observó a su estado</h3>' +
+        '<h3 class="pd-tit">Lo que la ASF le observó a tu estado</h3>' +
         '<p class="pd-lead">El dinero federal que llega a cada estado lo revisa la ASF en tres niveles: el gobierno del estado, sus municipios (alcaldías en la Ciudad de México) y otros entes locales. Aparte, ' + amNum(C.cp2024.coordinadoras.auditorias) + ' auditorías se hicieron a las dependencias federales que coordinan esos fondos.</p>' +
         '<div id="cpEntidad">' + cpEntidadHtml() + '</div>' +
       '</section>';
@@ -5584,7 +5584,7 @@
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
           p.temas.map(function(t) { return Array.isArray(t) ? '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>' : '<li>' + t + '</li>'; }).join('') +
         '</ul>' +
-        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
+        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">← Volver al inicio</button>' +
       '</div>';
     var caja = el.querySelector('.mod-proemio-texto');
     var parrafos = hero ? [].slice.call(hero.children).filter(function(n) { return n.tagName === 'P' || n.classList.contains('hero-mas'); }) : [];
@@ -16529,7 +16529,7 @@
         tuUd('<p class="vdg-pista">Toque cualquier renglón —salvo el de Don Porfirio Díaz— para abrir su marcador cara a cara.</p>', '<p class="vdg-pista">Toca cualquier renglón —salvo el de Don Porfirio Díaz— para abrir su marcador cara a cara.</p>') +
         proc +
         '<div class="vdg-salida">' +
-          '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">↩︎ Volver al tablero completo</button>' +
+          '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">← Volver al tablero completo</button>' +
         '</div>' +
       '</section>';
   }
@@ -16551,7 +16551,7 @@
     if (!m) { cont.innerHTML = ''; return; }
     cont.innerHTML =
       '<div class="vfoco-bar">' +
-        '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">↩︎ Volver al tablero completo</button>' +
+        '<button type="button" class="vfoco-volver" onclick="window.AuditEngine.salirDesgloseVersus()">← Volver al tablero completo</button>' +
         '<span class="vfoco-txt">Está viendo una sola variable: <strong>' + m.icono + ' ' + m.nombre + '</strong>. El resto de la subpestaña se repliega para no estorbar; puede cambiar de variable aquí abajo sin salir.</span>' +
       '</div>';
   }
@@ -20768,7 +20768,7 @@
           '<p class="pe-fuente">' + peFuenteMetrica(M) + '</p>' +
         '</div>' +
         '<div class="pe-tablas">' + PE_GRUPOS.map(G => peTabla(G, E)).join('') + '</div>' +
-        '<p class="pe-ficha">¿Quiere el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
+        '<p class="pe-ficha">¿Quieres el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
           '<a href="enciclopedia.html#politicos/mandatarios" target="_blank" rel="noopener">Abrir la pestaña 5.1 de la Enciclopedia ↗</a></p>' +
       '</section>';
 
@@ -23467,7 +23467,7 @@
       const ent = M.ent[ab], est = (DB.estados || []).find(x => x.abbr === ab);
       ent.lista.forEach(r => { if (r.length > 2) add({ id: 'mun-' + ent.cve + r[0], grupo: 'Municipios', nombre: r[1] + ', ' + (est ? est.name : ab) + ': ingresos totales en 2024', anio: '2024', mdp: r[2] / 1e6, estado: 'oficial', fuente: M.fuente, url: M.url }); });
     });
-    vnEstado.cat = out;
+    if (window.AUDIT_MUNICIPIOS) vnEstado.cat = out;
     return out;
   }
 
@@ -23643,7 +23643,9 @@
         });
       });
     }
-    inspCacheEntes[nivel] = out;
+    /* El padron municipal llega despues del arranque (legibilidad.js): sin
+       el, no se guarda la lista vacia o el buscador nunca veria un municipio. */
+    if (nivel !== 'municipal' || window.AUDIT_MUNICIPIOS) inspCacheEntes[nivel] = out;
     return out;
   }
 

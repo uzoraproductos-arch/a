@@ -277,6 +277,44 @@ desarrollador.
   Reusa el patrón de `sat-69b.js` (`:3402`).
 - **Sello de versión** en cada entrega (AGENTS.md §4).
 
+### Estado de la fase 1 (29-09-2026, rama `ux/fase-1`, sin publicar)
+
+La guardia en `--fase 1` **cumple en las 11 vistas.**
+
+| Medida | Línea base | Hoy |
+|---|---|---|
+| Texto menor de 12 px | 16–42 % | 1–6 % |
+| Texto menor de 14 px | 78–86 % | 17–32 % |
+| Emojis en rótulos | 37–175 | 0 |
+| Tiempo hasta usar la portada (Android simulado) | 50 s | 31 s |
+| Errores de consola | 0 | 0 |
+
+- **1a · Lectura.** `assets/auditor/css/legibilidad.css`, una capa aparte que
+  se carga después de la hoja principal para no chocar con quien la edita.
+- **1b · Cabecera.** Barra de escritorio y menú de celular con las mismas
+  cuatro secciones, ruta de migas al abrir un módulo y textos de navegación
+  sin jerga. Se retiraron los 5 menús anteriores.
+- **1c · Portada.** Lema, tres puertas, una cifra con su fuente y la guía
+  «Cómo se usa», que explica qué significa cada etiqueta.
+- **1d · Emojis y voz.**
+  - **Desviación del plan (X3).** En el motor y en la base de datos, los
+    emojis de los rótulos se retiran al mostrarse (`legibilidad.js`), no en
+    la fuente. El barrido en la fuente de 1,749 cadenas, en archivos que otra
+    persona edita todos los días, chocaría a diario. Se hace módulo por
+    módulo en la fase 2, cuando cada uno pase a su plantilla.
+  - Las frases de usted dirigidas al lector pasaron a tú.
+  - «Reiniciar a ceros» y «Contabilizar» siguen igual porque la lógica del
+    motor reconoce esos textos (`audit-engine.js:28172`).
+- **1e · Imágenes.** Las fotos del carrusel pasaron a WebP en
+  `assets/auditor/img/showcase/` y bajaron de 5.8 MB a 0.65 MB. Los
+  originales de `assets/img/` no se tocaron.
+- **1f · Velocidad.** El padrón municipal (677 KB) se descarga después del
+  arranque, o antes si alguien busca o abre un módulo que lo usa. Mientras
+  llega hay un aviso de carga, y si falla, un botón «Reintentar».
+  `inspEntes()` y `vnCatalogo()` ya no guardan en caché una lista vacía.
+
+Falta el visto bueno del autor, sobre todo para `docs/ux/fase-0-propuestas.md`.
+
 ### Fase 2: módulos en capas
 
 Un módulo por entrega. Cada uno:

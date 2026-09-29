@@ -68,8 +68,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260929a">
-  <link rel="stylesheet" href="assets/auditor/css/legibilidad.css?v=20260929a">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260929b">
+  <link rel="stylesheet" href="assets/auditor/css/legibilidad.css?v=20260929b">
 </head>
 <body data-pagina="auditor">
 
@@ -101,248 +101,34 @@
        BARRA SUPERIOR DE NAVEGACIÓN Y ACCESO A ENCICLOPEDIA (ESTILO USASPENDING)
        ========================================================================== -->
   <nav class="site-top-nav" aria-label="Navegación principal">
-    <!-- Izquierda: Marca y Título (Auditavisión) -->
-    <div class="nav-brand-group" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Ir al inicio de Auditavisión">
-      <button type="button" class="brand-logo-btn" onclick="event.stopPropagation(); window.AuditEngine.abrirPresentacion(this)" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
-      <div class="nav-brand-text">
+    <!-- Marca: el logo abre «Quiénes somos»; el nombre lleva al inicio -->
+    <div class="nav-brand-group">
+      <button type="button" class="brand-logo-btn" onclick="window.AuditEngine.abrirPresentacion(this)" title="Qué es Auditavisión" aria-label="Qué es Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
+      <a class="nav-brand-text" href="#" id="navInicio" aria-label="Auditavisión: ir al inicio">
         <span class="nav-brand-title">Auditavisión</span>
-        <span class="nav-brand-sub">Sistema Cívico de Fiscalización</span>
-      </div>
+        <span class="nav-brand-sub">El gasto público, a la vista</span>
+      </a>
     </div>
+
+    <!-- Las cuatro secciones (Lee, Explora, Consulta, Participa). Las pinta
+         assets/auditor/js/legibilidad.js desde la misma lista que la portada. -->
+    <div class="nav-secciones" id="navSecciones"></div>
 
     <button type="button" class="menu-movil-btn" id="menuMovilBtn" aria-expanded="false" aria-controls="menuMovil">
       <span class="menu-movil-btn-raya" aria-hidden="true"></span> Menú
     </button>
 
-    <!-- Centro / Mega-Menús Estilo USAspending con Acceso Directo y a la Enciclopedia -->
-    <div class="nav-center-links" role="menubar">
-      
-      <!-- Menú 1: Búsqueda Forense (Award Search) -->
-      <div class="nav-menu-item" id="navItemBusqueda">
-        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownBusqueda')" aria-haspopup="true" aria-expanded="false">
-          <span>Búsqueda Forense</span> <span class="caret">▾</span>
-        </button>
-        <div class="mega-menu-dropdown" id="menuDropdownBusqueda" role="menu">
-          <div class="mega-menu-col">
-            <span class="mega-col-title">🔍 Asignaciones y Contratos</span>
-            <a href="#inspExplorador" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'inspExplorador'); window.AuditEngine.cerrarMegaMenus(); setTimeout(function(){ var i=document.getElementById('inspBuscador'); if(i) i.focus({preventScroll:true}); }, 1000);" class="mega-link-item">
-              <span class="mega-link-name">🏛️ Auditor de Entes Públicos</span>
-              <span class="mega-link-desc">Busca una dependencia, un estado o un municipio y abre su expediente: autonomía, deuda y observaciones de la ASF.</span>
-            </a>
-            <a href="https://comprasmx.buengobierno.gob.mx/" target="_blank" rel="noopener noreferrer" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">📝 Contratos federales en ComprasMX ↗</span>
-              <span class="mega-link-desc">La plataforma oficial que sustituyó a CompraNet en 2025. Tome de ahí el RFC del proveedor y verifíquelo aquí.</span>
-            </a>
-            <a href="#radarBanderasNacional" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'radarBanderasNacional'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">🚩 Radar de Banderas Rojas por Entidad</span>
-              <span class="mega-link-desc">Qué estados dejaron más dinero federal por aclarar ante la ASF en la Cuenta Pública 2024, ordenados a su elección.</span>
-            </a>
-          </div>
-          <div class="mega-menu-col">
-            <span class="mega-col-title">⚠️ Detección y Riesgos ASF</span>
-            <a href="#expedientesCasos" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'expedientesCasos'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">📂 Expedientes de Casos por Aclarar</span>
-              <span class="mega-link-desc">Diez casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.</span>
-            </a>
-            <a href="#efosVerificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.efosAbrir();">
-              <span class="mega-link-name">🧾 ¿Su proveedor está en la lista negra del SAT? (69-B)</span>
-              <span class="mega-link-desc">14,234 registros del listado oficial: presuntos, definitivos, desvirtuados y con sentencia favorable.</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menú 2: Acción Financiera -->
-      <div class="nav-menu-item" id="navItemExplorar">
-        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownExplorar')" aria-haspopup="true" aria-expanded="false">
-          <span>Acción Financiera</span> <span class="caret">▾</span>
-        </button>
-        <div class="mega-menu-dropdown" id="menuDropdownExplorar" role="menu">
-          <div class="mega-menu-col">
-            <span class="mega-col-title">📊 Presupuesto Federal</span>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('presupuesto'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">💰 Explorador del PEF 2026</span>
-              <span class="mega-link-desc">Desglose de los $10.19 billones aprobados en el Circuito del Dinero.</span>
-            </a>
-            <a href="#eb-egresos" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.seleccionarModuloExplorer('presupuesto', 'eb-egresos'); setTimeout(function(){ var c=document.querySelector('#eb-egresos .erario-pleg-cab'); if(c && c.getAttribute('aria-expanded')==='false') window.AuditEngine.erarioPlegToggle('egresos'); }, 150);">
-              <span class="mega-link-name">🏢 Ramos y Dependencias del PEF 2026</span>
-              <span class="mega-link-desc">Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.</span>
-            </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">🏗️ Inversión Pública & Megaobras</span>
-              <span class="mega-link-desc">Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Fuentes por obra en verificación.</span>
-            </a>
-            <a href="#accion-financiera/proyeccion2027" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('proyeccion2027'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">📈 Paquete Económico 2027</span>
-              <span class="mega-link-desc">La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos, y la Constitución económica que lo sustenta.</span>
-            </a>
-            <a href="#ambiente" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('ambiente'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🌎 Costo Ambiental</span>
-              <span class="mega-link-desc">El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.</span>
-            </a>
-          </div>
-          <div class="mega-menu-col">
-            <span class="mega-col-title">🗺️ Entidades y Municipios</span>
-            <a href="#accion-financiera/territorio" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('territorio'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🗺️ Las 32 Entidades: del Peso Federal al Estatal</span>
-              <span class="mega-link-desc">Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.</span>
-            </a>
-            <a href="#accion-financiera/municipios" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('municipios'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🏘️ Los 2,479 Municipios: Predial y Transferencias</span>
-              <span class="mega-link-desc">Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.</span>
-            </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">🧮 Calculadora Cívica de Tu Sueldo</span>
-              <span class="mega-link-desc">A qué rubros y fondos se van los impuestos de tu nómina.</span>
-            </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.seleccionarModuloExplorer('poderes'); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">⚖️ Lo que Cuestan el Congreso y la Judicatura</span>
-              <span class="mega-link-desc">Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menú 3: Descargar Datos (Download the Data) -->
-      <div class="nav-menu-item" id="navItemDescargar">
-        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownDescargar')" aria-haspopup="true" aria-expanded="false">
-          <span>Descargar Datos</span> <span class="caret">▾</span>
-        </button>
-        <div class="mega-menu-dropdown" id="menuDropdownDescargar" role="menu">
-          <div class="mega-menu-col">
-            <span class="mega-col-title">💾 Datos Abiertos</span>
-            <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas();">
-              <span class="mega-link-name">📥 Descarga en CSV (abre en Excel)</span>
-              <span class="mega-link-desc">Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.</span>
-            </a>
-            <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.cerrarMegaMenus(); window.AuditEngine.descargarCSV('municipios');">
-              <span class="mega-link-name">🏘️ Base de Datos Municipal EFIPEM (INEGI)</span>
-              <span class="mega-link-desc">Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.</span>
-            </a>
-          </div>
-          <div class="mega-menu-col">
-            <span class="mega-col-title">📑 Informes Oficiales</span>
-            <a href="#verificador" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🔎 Informes de la Cuenta Pública (ASF)</span>
-              <span class="mega-link-desc">Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en su estado y cuándo sale la siguiente entrega.</span>
-            </a>
-            <a href="javascript:void(0)" class="mega-link-item" onclick="window.AuditEngine.abrirDescargas('diccionario');">
-              <span class="mega-link-name">📋 Diccionario de Datos</span>
-              <span class="mega-link-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menú 4: Consultar Recursos (Módulo 5 Integrado con Desglose de 3 Subpestañas) -->
-      <div class="nav-menu-item" id="navItemRecursos">
-        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownRecursos')" aria-haspopup="true" aria-expanded="false">
-          <span>Consultar Recursos</span> <span class="caret">▾</span>
-        </button>
-        <div class="mega-menu-dropdown" id="menuDropdownRecursos" role="menu">
-          <div class="mega-menu-col">
-            <span class="mega-col-title">🏛️ Biblioteca &amp; Enciclopedia Hacendaria (Marco Legal &amp; Glosario)</span>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-glosario');" class="mega-link-item">
-              <span class="mega-link-name">📖 Glosario de Términos Hacendarios</span>
-              <span class="mega-link-desc">Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador.</span>
-            </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-marco-legal');" class="mega-link-item">
-              <span class="mega-link-name">⚖️ Marco Legal Hacendario &amp; <span data-cuenta="preceptos">28</span> Preceptos</span>
-              <span class="mega-link-desc">Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.</span>
-            </a>
-            <a href="#seccionDesgloseModulos" onclick="window.AuditEngine.abrirDiccionarioSubtab('faq-preguntas');" class="mega-link-item">
-              <span class="mega-link-name">💡 Preguntas Frecuentes en Casillas Didácticas</span>
-              <span class="mega-link-desc">Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar.</span>
-            </a>
-          </div>
-          <div class="mega-menu-col">
-            <span class="mega-col-title">🧭 Kit del Auditor Ciudadano: Fuentes y Guías</span>
-            <a href="enciclopedia.html" class="mega-link-item">
-              <span class="mega-link-name">🗺️ Enciclopedia Hacendaria (9 Módulos)</span>
-              <span class="mega-link-desc">El compendio completo: presupuesto, Poderes, personajes, marco legal y comunidad.</span>
-            </a>
-            <a href="#faq/faq-referencias" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.abrirCatalogoFuentes();">
-              <span class="mega-link-name">📑 Compendio de Fuentes Oficiales</span>
-              <span class="mega-link-desc">DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.</span>
-            </a>
-            <a href="#pase" onclick="event.preventDefault(); window.AuditEngine.openPaseCivicoModal(); window.AuditEngine.cerrarMegaMenus();" class="mega-link-item">
-              <span class="mega-link-name">🍺 Pase y Guías del Auditor Cívico</span>
-              <span class="mega-link-desc">Herramientas independientes de fiscalización ciudadana ($79/mes · Menos que dos caguamas).</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menú 5: Portal Digital (Función 3 · Ágora Cívica & Debates Ciudadanos) -->
-      <div class="nav-menu-item" id="navItemPortal">
-        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownPortal')" aria-haspopup="true" aria-expanded="false">
-          <span>Portal Digital</span> <span class="caret">▾</span>
-        </button>
-        <div class="mega-menu-dropdown" id="menuDropdownPortal" role="menu">
-          <div class="mega-menu-col">
-            <span class="mega-col-title">💬 Ágora Cívica &amp; Diálogos</span>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'bloquePortal'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🌐 Portal Público Digital</span>
-              <span class="mega-link-desc">Un espacio plural para contrastar posturas con fuentes y responder con argumentos.</span>
-            </a>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'portalNuevoDebateForm'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">✍️ Iniciar Nuevo Diálogo o Postura</span>
-              <span class="mega-link-desc">Publica tu argumento con seudónimo, tu postura y tus fuentes.</span>
-            </a>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'portalFilterBar'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🗣️ Cuaderno de argumentos (en este navegador)</span>
-              <span class="mega-link-desc">Consulta los argumentos ciudadanos filtrados por Presupuesto, Megaobras, Deuda y SCJN.</span>
-            </a>
-          </div>
-          <div class="mega-menu-col">
-            <span class="mega-col-title">🛡️ Garantías Cívicas &amp; Formación</span>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'comOrientacion'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🔒 Tu Privacidad: a Dónde Va lo que Escribes</span>
-              <span class="mega-link-desc">Sin correos, teléfonos ni rastreo. Qué se guarda, dónde y quién lo ve, dicho sin adornos.</span>
-            </a>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'bloqueCanales'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">🏛️ Canales Oficiales de Denuncia</span>
-              <span class="mega-link-desc">Las seis puertas donde un señalamiento se vuelve expediente: ASF, SABG, FGR, SAT, Transparencia y contralorías internas.</span>
-            </a>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.seleccionarModuloExplorer('portal', 'decalogoWrap'); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">📜 Decálogo del Ciudadano Auditor</span>
-              <span class="mega-link-desc">Diez reglas que separan una queja de una denuncia, cada una con su fundamento legal.</span>
-            </a>
-            <a href="#portal" class="mega-link-item" onclick="event.preventDefault(); window.AuditEngine.openAyudanosFiscalizar(); window.AuditEngine.cerrarMegaMenus();">
-              <span class="mega-link-name">📢 Reporta lo que Viste</span>
-              <span class="mega-link-desc">Arma tu reporte con qué, dónde, cuándo y con qué prueba, y llévalo ya redactado a un canal oficial.</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Derecha: Acciones Superiores y Buscador Global del Portal Navegador -->
     <div class="nav-right-container">
       <div class="nav-right-actions">
-        <button type="button" class="nav-action-btn nav-feedback-btn" onclick="window.AuditEngine.openAyudanosFiscalizar()" title="Ayúdanos a fiscalizar: comparte lo que viste y reporta anomalías presupuestales">
-          <span>📢</span>
-          <span>Ayúdanos a fiscalizar</span>
-        </button>
-        <button type="button" class="nav-action-btn nav-share-btn" onclick="window.AuditEngine.compartirPlataforma()" title="Compartir Auditavisión en redes sociales o copiar enlace directo">
-          <span>🔗</span>
-          <span>Compartir</span>
-        </button>
-        <a href="enciclopedia.html#tab-panel-faq" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Enciclopedias Interactivas">
-          <span>🪐</span>
-          <span>Inspector Meteoro</span>
-        </a>
-        <button type="button" class="iconbtn" id="themeBtn" onclick="window.AuditEngine.toggleTheme()" title="Alternar entre tema claro y tema oscuro">
-          ◐ Tema
-        </button>
+        <button type="button" class="nav-accion nav-accion-principal" onclick="window.AuditEngine.openAyudanosFiscalizar()">Cuéntanos lo que viste</button>
+        <button type="button" class="nav-accion" id="themeBtn" onclick="window.AuditEngine.toggleTheme()" title="Cambiar entre fondo oscuro y fondo claro">Tema claro</button>
       </div>
 
-      <!-- Buscador Inteligente del Portal (Plataforma Navegador) -->
+      <!-- Buscador de toda la plataforma -->
       <div class="nav-search-wrap">
         <div class="search-command-bar nav-search-bar" role="search">
-          <span class="search-icon" aria-hidden="true">🔍</span>
-          <input type="text" id="globalSearchInput" class="search-input-box" placeholder="Buscar estado, municipio, ramo, presidente o ley..." autocomplete="off" spellcheck="false" aria-label="Buscar en la plataforma de fiscalización">
+          <svg class="search-icon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="globalSearchInput" class="search-input-box" placeholder="Busca un estado, municipio o tema" autocomplete="off" spellcheck="false" aria-label="Buscar en Auditavisión">
           <div id="searchResultsDropdown" class="search-results-dropdown" role="listbox"></div>
         </div>
       </div>
@@ -360,10 +146,11 @@
     </div>
     <div class="menu-movil-cuerpo"></div>
     <div class="menu-movil-acciones">
-      <button type="button" class="portada-accion" data-menu-accion="ayudanos">Ayúdanos a fiscalizar</button>
-      <button type="button" class="portada-accion" data-menu-accion="compartir">Compartir</button>
-      <button type="button" class="portada-accion" data-menu-accion="tema">Cambiar tema</button>
-      <a class="portada-accion" href="enciclopedia.html#tab-panel-faq">Inspector Meteoro</a>
+      <button type="button" class="portada-accion" data-menu-accion="ayudanos">Cuéntanos lo que viste</button>
+      <button type="button" class="portada-accion" data-menu-accion="compartir">Compartir esta página</button>
+      <button type="button" class="portada-accion" data-menu-accion="tema">Cambiar a fondo claro u oscuro</button>
+      <a class="portada-accion" href="enciclopedia.html">Enciclopedia hacendaria</a>
+      <a class="portada-accion" href="enciclopedia.html#tab-panel-faq">Quién hace Auditavisión</a>
     </div>
   </div>
 
@@ -384,8 +171,23 @@
       <span class="portada-cifra-fuente">ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11.</span>
     </div>
     <div class="portada-acciones">
-      <button type="button" class="portada-accion" id="portadaCifraIr">Ver lo que encontró la ASF</button>
-      <button type="button" class="portada-accion" id="portadaAyudanos">Ayúdanos a fiscalizar</button>
+      <button type="button" class="portada-accion" id="portadaCifraIr">Ver qué encontró la Auditoría</button>
+      <button type="button" class="portada-accion" id="portadaAyudanos">Cuéntanos lo que viste</button>
+    </div>
+
+    <div class="portada-guia">
+      <h2 class="portada-guia-titulo">Cómo se usa</h2>
+      <ol class="portada-pasos">
+        <li><b>Elige una sección.</b> Lee para entender, Explora para hacer tus cuentas y Consulta para buscar datos.</li>
+        <li><b>Toca un tema.</b> Lo más importante va arriba. Lo demás se abre con el botón +.</li>
+        <li><b>Fíjate en la etiqueta de cada cifra.</b> Te dice qué tan segura es:</li>
+      </ol>
+      <dl class="portada-etiquetas">
+        <div><dt><span class="est-chip est-oficial">oficial</span></dt><dd>Viene tal cual de un documento del gobierno.</dd></div>
+        <div><dt><span class="est-chip est-derivado">derivado</span></dt><dd>La calculamos con datos oficiales y te decimos cómo.</dd></div>
+        <div><dt><span class="est-chip est-pendiente">pendiente</span></dt><dd>Todavía no hay un documento que la confirme.</dd></div>
+      </dl>
+      <p class="portada-guia-nota">Si una palabra está subrayada, tócala y te explicamos qué significa.</p>
     </div>
   </section>
 
@@ -664,7 +466,7 @@
           
           <!-- Slide 1: Tren Maya -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(0)" title="Clic para descubrir la auditoría del Tren Maya">
-            <img src="assets/img/showcase_tren_maya.jpg" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_tren_maya.webp" decoding="async" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy">
             <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -678,7 +480,7 @@
 
           <!-- Slide 2: Dos Bocas -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(1)" title="Clic para descubrir la auditoría de Dos Bocas">
-            <img src="assets/img/showcase_dos_bocas.jpg" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_dos_bocas.webp" decoding="async" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy">
             <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -692,7 +494,7 @@
 
           <!-- Slide 3: Deuda Soberana y Palacio Nacional -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(2)" title="Clic para descubrir los intereses de la deuda soberana">
-            <img src="assets/img/showcase_deuda_soberana.jpg" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_deuda_soberana.webp" decoding="async" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy">
             <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -706,7 +508,7 @@
 
           <!-- Slide 4: AIFA -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(3)" title="Clic para descubrir la auditoría del AIFA">
-            <img src="assets/img/showcase_aifa.jpg" alt="Ilustración generada con IA de una terminal aérea" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_aifa.webp" decoding="async" alt="Ilustración generada con IA de una terminal aérea" loading="lazy">
             <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -720,7 +522,7 @@
 
           <!-- Slide 5: Ramo 33 Municipios -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(4)" title="Clic para descubrir las aportaciones a municipios">
-            <img src="assets/img/showcase_ramo33.jpg" alt="Ilustración generada con IA de un centro de salud" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_ramo33.webp" decoding="async" alt="Ilustración generada con IA de un centro de salud" loading="lazy">
             <span class="showcase-ia">Ilustración generada con IA</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -735,7 +537,7 @@
 
           <!-- Slide 6: Expansión LEGO & Petroquímica -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(5)" title="Clic para descubrir la inversión de LEGO e insumos petroquímicos">
-            <img src="assets/img/showcase_lego_expansion.jpg" alt="Imagen ilustrativa de una planta industrial" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_lego_expansion.webp" decoding="async" alt="Imagen ilustrativa de una planta industrial" loading="lazy">
             <span class="showcase-ia">Imagen ilustrativa</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -749,7 +551,7 @@
 
           <!-- Slide 7: Tren México-Toluca 'El Insurgente' -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(6)" title="Clic para descubrir la auditoría del Tren México-Toluca">
-            <img src="assets/img/showcase_tren_toluca.jpg" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_tren_toluca.webp" decoding="async" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy">
             <span class="showcase-ia">Imagen ilustrativa</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -763,7 +565,7 @@
 
           <!-- Slide 8: Megafarmacia del Bienestar -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(7)" title="Clic para descubrir la auditoría de la Megafarmacia de Huehuetoca">
-            <img src="assets/img/showcase_megafarmacia.jpg" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_megafarmacia.webp" decoding="async" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy">
             <span class="showcase-ia">Imagen ilustrativa</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -777,7 +579,7 @@
 
           <!-- Slide 9: Huachicol fiscal -->
           <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(8)" title="Clic para descubrir lo que está en juego con el huachicol fiscal">
-            <img src="assets/auditor/img/showcase_huachicol.jpg" alt="Ilustración de pipas de combustible frente a una aduana portuaria al atardecer" loading="lazy">
+            <img src="assets/auditor/img/showcase/showcase_huachicol.webp" decoding="async" alt="Ilustración de pipas de combustible frente a una aduana portuaria al atardecer" loading="lazy">
             <span class="showcase-ia">Ilustración provisional</span>
             <div class="showcase-slide-gradient"></div>
             <div class="showcase-slide-content">
@@ -1631,7 +1433,7 @@
              deuda. El bloque 1 nace abierto: ahí se escribe la cifra.
              ==================================================================== -->
         <nav class="erario-indice" aria-label="Los tres bloques de la calculadora">
-          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ccticket')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Su estado de cuenta</b><small>Ingreso, retención, reparto y emisión</small></span></button>
+          <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('ccticket')"><span class="ei-n">1</span><span class="ei-ico" aria-hidden="true">🧾</span><span class="ei-tx"><b>Tu estado de cuenta</b><small>Ingreso, retención, reparto y emisión</small></span></button>
           <span class="erario-indice-flecha" aria-hidden="true">➜</span>
           <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('cccompara')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">⚡</span><span class="ei-tx"><b>Tú contra ellos</b><small>Cargo por cargo y sus prestaciones</small></span></button>
           <span class="erario-indice-flecha" aria-hidden="true">➜</span>
@@ -1647,7 +1449,7 @@
               <span class="erario-pleg-n" aria-hidden="true">1</span>
               <span class="erario-pleg-ico" aria-hidden="true">🧾</span>
               <span class="erario-pleg-tx">
-                <span class="erario-pleg-tit">Su estado de cuenta cívico</span>
+                <span class="erario-pleg-tit">Tu estado de cuenta cívico</span>
                 <span class="erario-pleg-av">Escribe lo que ganas y la página saca cuatro cuentas en orden: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y, al final, la emisión de tu estado de cuenta.</span>
               </span>
               <span class="erario-pleg-mas" aria-hidden="true">−</span>
@@ -1668,7 +1470,7 @@
 
           <div class="cc-campos">
             <div class="cc-campo cc-campo-monto">
-              <label class="cc-campo-et" for="ccMonto">¿Cuánto gana?</label>
+              <label class="cc-campo-et" for="ccMonto">¿Cuánto ganas?</label>
               <div class="cc-caja">
                 <span class="cc-caja-sig" aria-hidden="true">$</span>
                 <input type="text" id="ccMonto" class="cc-input" value="15,000"
@@ -1813,7 +1615,7 @@
           <div class="erario-bloque-head">
             <h3>Los tres pisos de la hacienda p&uacute;blica</h3>
             <p class="erario-bloque-sub">
-              Note una asimetr&iacute;a que casi nunca se menciona: la ley de ingresos del municipio
+              F&iacute;jate en una asimetr&iacute;a que casi nunca se menciona: la ley de ingresos del municipio
               no la aprueba el municipio, la aprueba el congreso del estado.
             </p>
           </div>
@@ -2434,7 +2236,7 @@
       <div class="insp-sep" style="margin-top:28px;">
         <span class="insp-sep-n">🧾</span>
         <div>
-          <h3 class="insp-sep-tit">¿Su proveedor está en la lista negra del SAT?</h3>
+          <h3 class="insp-sep-tit">¿Tu proveedor está en la lista negra del SAT?</h3>
           <p class="insp-sep-sub">Busca por RFC o por nombre en el listado oficial del artículo 69-B del Código Fiscal: empresas y personas a las que el SAT presume o declara emisoras de facturas por operaciones inexistentes (EFOS).</p>
         </div>
       </div>
@@ -2869,9 +2671,9 @@
          BARRA INFERIOR DE CONTROL: PLEGAR Y VOLVER A LA CABECERA
          ========================================================================== -->
     <div class="barra-plegar-container barra-plegar-inferior">
-      <button type="button" class="btn-plegar-desglose" onclick="window.AuditEngine.plegarDesgloseModulos()" title="Plegar desglose operativo y volver a la cabecera">
+      <button type="button" class="btn-plegar-desglose" onclick="window.AuditEngine.plegarDesgloseModulos()" title="Cerrar este tema y volver al inicio">
         <span>▲</span>
-        <span>Plegar desglose operativo y volver a la cabecera</span>
+        <span>Cerrar y volver al inicio</span>
       </button>
     </div>
   </div>
@@ -2978,7 +2780,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260929a</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260929b</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3122,18 +2924,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20260929a"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20260929b"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20260929a"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20260929b"></script>
   
-  <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/auditor/js/municipios-efipem.js?v=20260929a"></script>
-  <script src="assets/auditor/js/municipios-rendicion.js?v=20260929a"></script>
+  <!-- Padrón de los 2,479 municipios (INEGI, EFIPEM 2024) y su rendición de cuentas:
+       pesan 677 KB, así que legibilidad.js los descarga después de que la página ya
+       se puede usar, o en cuanto alguien busca o abre un módulo que los necesita. -->
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20260929a"></script>
-  <script src="assets/auditor/js/legibilidad.js?v=20260929a"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20260929b"></script>
+  <script src="assets/auditor/js/legibilidad.js?v=20260929b"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
