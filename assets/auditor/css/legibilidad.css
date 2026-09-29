@@ -1,0 +1,400 @@
+/* ==========================================================================
+   AUDITAVISIÓN · CAPA DE LEGIBILIDAD (fase 1 de docs/ux/PLAN.md)
+   Se carga después de auditavision.css y solo corrige lectura:
+   tamaño de letra, superficies, fondo, cabecera y portada en celular.
+   Vive en su propio archivo para no chocar con quien edita la hoja maestra.
+   Escala: docs/ux/fase-0-propuestas.md §2 (pendiente de aprobación del autor).
+   ========================================================================== */
+
+:root {
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* Escala móvil propuesta (DESIGN.md §4.1, en revisión) */
+  --fs-lectura: 17px;
+  --fs-texto: 16px;
+  --fs-apoyo: 14px;
+  --fs-etiqueta: 12px;
+  --fs-chip: 11px;
+
+  /* Superficies sólidas: el texto ya no compite con la fotografía */
+  --bg-surface: #0c0e15;
+  --bg-card: #121520;
+  --bg-card-alt: #171b29;
+  --bg-card-hover: #1c2133;
+  --border-subtle: #242a3d;
+  --border-accent: #2f364f;
+}
+
+[data-theme="light"] {
+  --bg-surface: #f6f4ee;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f1ede1;
+  --bg-card-hover: #e9e3d2;
+  --border-subtle: #ded7c6;
+  --border-accent: #c7beab;
+}
+
+/* --------------------------------------------------------------------------
+   1. Fondo vectorial discreto en lugar de la fotografía de la ciudad
+   Líneas finas de un perfil urbano, a menos de 6 % de contraste. Pocos bytes.
+   -------------------------------------------------------------------------- */
+body {
+  background-color: #0a0c12;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='220' viewBox='0 0 480 220'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-opacity='.07' stroke-width='1'%3E%3Cpath d='M0 200h480'/%3E%3Cpath d='M10 200v-60h28v60M46 200v-96h22v96M76 200v-40h34v40M118 200v-120h18v-14h10v14h18v120M172 200v-70h30v70M210 200v-104h26v104M244 200v-52h40v52M292 200v-136h8v-18h8v18h8v136M324 200v-84h30v84M362 200v-58h24v58M394 200v-112h30v112M432 200v-72h38v72'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  background-size: 480px auto;
+  background-attachment: fixed;
+}
+[data-theme="light"] body {
+  background-color: #f6f4ee;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='220' viewBox='0 0 480 220'%3E%3Cg fill='none' stroke='%23967420' stroke-opacity='.09' stroke-width='1'%3E%3Cpath d='M0 200h480'/%3E%3Cpath d='M10 200v-60h28v60M46 200v-96h22v96M76 200v-40h34v40M118 200v-120h18v-14h10v14h18v120M172 200v-70h30v70M210 200v-104h26v104M244 200v-52h40v52M292 200v-136h8v-18h8v18h8v136M324 200v-84h30v84M362 200v-58h24v58M394 200v-112h30v112M432 200v-72h38v72'/%3E%3C/g%3E%3C/svg%3E");
+}
+.noise-overlay { display: none; }
+
+/* --------------------------------------------------------------------------
+   2. La cinta que corre sale; el radar pasa a Explora («El reloj del dinero»)
+   y solo se muestra cuando el lector lo pide desde el menú o la portada.
+   -------------------------------------------------------------------------- */
+.radar-row-telemetry { display: none !important; }
+.radar-hacendario-hub { display: none; }
+body.ver-reloj .radar-hacendario-hub { display: block; }
+
+/* El botón flotante tapaba contenido: pasa al menú y a la portada */
+.floating-feedback-container { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   3. Portada nueva: lema, tres puertas y una cifra con su fuente.
+   El héroe anterior (cinco tarjetas) queda reemplazado por las puertas.
+   Al abrir un módulo, la portada se retira y el módulo empieza arriba.
+   -------------------------------------------------------------------------- */
+.explorer-hero-section { display: none; }
+
+/* Un solo índice por módulo: la lista 1-2-3 repetía los títulos de los
+   bloques plegables que vienen justo debajo (docs/ux/PLAN.md §1). */
+.erario-indice { display: none !important; }
+
+body:has(#seccionDesgloseModulos.desglose-abierto) .portada,
+body:has(#seccionDesgloseModulos.desglose-abierto) .civic-showcase-section,
+body:has(#seccionDesgloseModulos.desglose-abierto) .radar-hacendario-hub { display: none; }
+
+.portada {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 16px 8px;
+  color: var(--text-main);
+}
+.portada-lema {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(30px, 7.4vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+.portada-lema em { font-style: italic; color: var(--gold); }
+.portada-intro {
+  font-family: var(--font-body);
+  font-size: var(--fs-lectura);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: 0 0 24px;
+}
+.portada-puertas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 820px) {
+  .portada-puertas { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+}
+.puerta {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 14px;
+}
+.puerta-nombre {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 0 0 4px;
+  color: var(--text-main);
+}
+.puerta-que {
+  font-family: var(--font-sans);
+  font-size: var(--fs-texto);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0 0 12px;
+}
+.puerta-lista { list-style: none; margin: 0; padding: 0; }
+.puerta-lista li + li { border-top: 1px solid var(--border-subtle); }
+.puerta-ir {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 2px;
+  background: none;
+  border: 0;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: var(--fs-texto);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.puerta-ir::after { content: "›"; color: var(--gold); font-size: 22px; line-height: 1; }
+.puerta-ir:hover { color: var(--text-gold); }
+
+.portada-cifra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  margin: 0 0 20px;
+}
+.portada-cifra-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-main);
+}
+.portada-cifra-que {
+  font-family: var(--font-body);
+  font-size: var(--fs-texto);
+  line-height: 1.5;
+  color: var(--text-main);
+  flex: 1 1 220px;
+}
+.portada-cifra-fuente {
+  flex-basis: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--fs-apoyo);
+  color: var(--text-secondary);
+}
+.portada-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; }
+.portada-accion {
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-accent);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: var(--fs-texto);
+  font-weight: 500;
+  cursor: pointer;
+}
+.portada-accion:hover { border-color: var(--gold); }
+
+/* --------------------------------------------------------------------------
+   4. Cabecera móvil: marca, botón «Menú» y buscador.
+   El menú agrupa todo en Lee, Explora, Consulta y Participa.
+   -------------------------------------------------------------------------- */
+.menu-movil-btn { display: none; }
+.menu-movil { display: none; }
+
+@media (max-width: 900px) {
+  .site-top-nav {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "marca boton" "buscar buscar";
+    align-items: center;
+    gap: 10px 12px;
+    padding: 10px 16px 12px !important;
+  }
+  .nav-brand-group { grid-area: marca; min-width: 0; }
+  .nav-brand-group .brand-logo-btn img { width: 46px; height: 36px; }
+  .nav-brand-title { font-size: 22px !important; }
+  .nav-brand-sub { display: none !important; }
+  .nav-center-links, .nav-right-actions { display: none !important; }
+  .nav-right-container { display: contents !important; }
+  .nav-search-wrap { grid-area: buscar; width: 100%; }
+  .nav-search-wrap .search-input-box { font-size: 16px !important; min-height: 44px; }
+
+  .menu-movil-btn {
+    grid-area: boton;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-accent);
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: var(--fs-texto);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .menu-movil-btn-raya,
+  .menu-movil-btn-raya::before,
+  .menu-movil-btn-raya::after {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    position: relative;
+  }
+  .menu-movil-btn-raya::before, .menu-movil-btn-raya::after { content: ""; position: absolute; left: 0; }
+  .menu-movil-btn-raya::before { top: -5px; }
+  .menu-movil-btn-raya::after { top: 5px; }
+
+}
+
+.menu-movil {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: var(--bg-surface);
+  overflow-y: auto;
+  padding: 12px 16px 40px;
+}
+.menu-movil.abierto { display: block; }
+.menu-movil-cuerpo, .menu-movil-cab, .menu-movil-acciones { max-width: 640px; margin-left: auto; margin-right: auto; }
+body.menu-abierto { overflow: hidden; }
+
+.menu-movil-cab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 8px;
+}
+.menu-movil-titulo {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--text-main);
+}
+.menu-movil-cerrar {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-accent);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: var(--fs-texto);
+  cursor: pointer;
+}
+.menu-grupo { padding: 14px 0 6px; border-top: 1px solid var(--border-subtle); }
+.menu-grupo:first-of-type { border-top: 0; }
+.menu-grupo-nombre {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--gold);
+  margin: 0 0 2px;
+}
+.menu-grupo-que {
+  font-family: var(--font-sans);
+  font-size: var(--fs-apoyo);
+  color: var(--text-secondary);
+  margin: 0 0 6px;
+}
+.menu-movil .puerta-lista li + li { border-top: 0; }
+.menu-movil-acciones { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 16px; border-top: 1px solid var(--border-subtle); }
+
+/* --------------------------------------------------------------------------
+   5. Escala de lectura en celular.
+   Texto corrido a 16 px como mínimo; notas y fuentes a 14 px; rótulos a 12 px;
+   chips a 11 px. Los !important solo vencen a los estilos en línea que el
+   barrido de la fase 1d va a retirar.
+   -------------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  body { font-size: var(--fs-texto); line-height: 1.6; }
+
+  #contenido p, #contenido li, #contenido dd, #contenido td,
+  #contenido blockquote, #contenido summary,
+  .site-footer p, .site-footer li,
+  .mod-proemio p {
+    font-size: var(--fs-texto) !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Bajadas y descripciones: tamaño de texto (fijo: 1em heredaba el de los títulos) */
+  .fj-bloque-sub, .erario-bloque-sub, .insp-sep-sub, .erario-pleg-av,
+  .cc-ciego-tx, .ecz-que, .mpf-que, .showcase-hint, .showcase-click-cue {
+    font-size: var(--fs-texto) !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Notas, fuentes y pies: tamaño de apoyo */
+  #contenido small, #contenido figcaption, #contenido th,
+  .cc-fuente, .ef-nota, .footer-bottom span,
+  #contenido label, .drawer-muni-section p, .drawer-gov-info,
+  .hero-pillar-btn, #contenido .chip {
+    font-size: var(--fs-apoyo) !important;
+    line-height: 1.5 !important;
+  }
+  .glos-term { font-size: inherit !important; }
+
+  /* Encabezado de cada bloque plegable: el texto usa todo el ancho */
+  .erario-pleg-ico { display: none !important; }
+  .erario-pleg-tit {
+    font-size: 19px !important;
+    line-height: 1.25 !important;
+  }
+  .erario-pleg-n { flex-shrink: 0; }
+
+  /* Rótulos: cortos, en mayúsculas, legibles */
+  .label, .hero-tag, .insp-t-idx, .radar-stat-lbl, .radar-stat-rate,
+  .showcase-slide-badge, .showcase-ia, .mega-col-title, .explorer-hero-tag,
+  .erario-kicker, .dec-kicker {
+    font-size: var(--fs-etiqueta) !important;
+    letter-spacing: 0.06em !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Párrafos largos alineados a la izquierda: centrados cuestan leer */
+  .mod-proemio, .mod-proemio p, .section-hero, .section-hero p { text-align: left !important; }
+
+  /* Chips de estado */
+  .est-chip { font-size: var(--fs-chip) !important; }
+
+  /* Títulos dentro de los módulos */
+  #contenido h2 { font-size: 26px !important; line-height: 1.15 !important; }
+  #contenido h3 { font-size: 22px !important; line-height: 1.2 !important; }
+  #contenido h4 { font-size: 19px !important; line-height: 1.25 !important; }
+
+  /* Estilos en línea que achicaban el texto (se retiran en la fase 1d) */
+  #contenido [style*="font-size: 9"], #contenido [style*="font-size:9"],
+  #contenido [style*="font-size: 10"], #contenido [style*="font-size:10"],
+  #contenido [style*="font-size: 11"], #contenido [style*="font-size:11"],
+  #contenido [style*="font-size: 12"], #contenido [style*="font-size:12"],
+  #contenido [style*="font-size: 13"], #contenido [style*="font-size:13"],
+  .site-footer [style*="font-size"] {
+    font-size: var(--fs-apoyo) !important;
+  }
+
+  /* Lo que se toca mide al menos 44 px */
+  #contenido button, #contenido .btn, #contenido [role="button"],
+  #contenido select, #contenido input:not([type="checkbox"]):not([type="radio"]) {
+    min-height: 44px;
+  }
+  #contenido input, #contenido select, #contenido textarea { font-size: 16px !important; }
+}
+
+/* Foco visible en todo lo que se opera con teclado */
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }

@@ -26,8 +26,8 @@
   <meta name="theme-color" content="#0c0e15" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
   <meta name="color-scheme" content="dark light">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E">
+  <link rel="icon" href="assets/brand/logos/symbol/auditavision-favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/brand/logos/symbol/auditavision-favicon.svg">
 
   <!-- Vista previa en redes sociales -->
   <meta property="og:type" content="website">
@@ -68,7 +68,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260928o">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260929a">
+  <link rel="stylesheet" href="assets/auditor/css/legibilidad.css?v=20260929a">
 </head>
 <body data-pagina="auditor">
 
@@ -108,6 +109,10 @@
         <span class="nav-brand-sub">Sistema Cívico de Fiscalización</span>
       </div>
     </div>
+
+    <button type="button" class="menu-movil-btn" id="menuMovilBtn" aria-expanded="false" aria-controls="menuMovil">
+      <span class="menu-movil-btn-raya" aria-hidden="true"></span> Menú
+    </button>
 
     <!-- Centro / Mega-Menús Estilo USAspending con Acceso Directo y a la Enciclopedia -->
     <div class="nav-center-links" role="menubar">
@@ -343,6 +348,46 @@
       </div>
     </div>
   </nav>
+
+  <!-- ==========================================================================
+       MENÚ DE SECCIONES: Lee, Explora, Consulta y Participa (docs/ux/PLAN.md §3).
+       Las listas las pinta assets/auditor/js/legibilidad.js.
+       ========================================================================== -->
+  <div class="menu-movil" id="menuMovil" role="dialog" aria-modal="true" aria-label="Menú de secciones" hidden>
+    <div class="menu-movil-cab">
+      <span class="menu-movil-titulo">Auditavisión</span>
+      <button type="button" class="menu-movil-cerrar">Cerrar</button>
+    </div>
+    <div class="menu-movil-cuerpo"></div>
+    <div class="menu-movil-acciones">
+      <button type="button" class="portada-accion" data-menu-accion="ayudanos">Ayúdanos a fiscalizar</button>
+      <button type="button" class="portada-accion" data-menu-accion="compartir">Compartir</button>
+      <button type="button" class="portada-accion" data-menu-accion="tema">Cambiar tema</button>
+      <a class="portada-accion" href="enciclopedia.html#tab-panel-faq">Inspector Meteoro</a>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PORTADA: el lema, tres puertas y una cifra con su fuente.
+       ========================================================================== -->
+  <section class="portada" aria-labelledby="portadaLema">
+    <h1 class="portada-lema" id="portadaLema">El gasto público, <em>a la vista.</em></h1>
+    <p class="portada-intro">
+      Sigue el dinero público federal, estatal y municipal con documentos
+      oficiales, explicado para que cualquier persona lo pueda revisar. Cada
+      cifra lleva su fuente.
+    </p>
+    <ul class="portada-puertas" id="portadaPuertas" aria-label="Secciones"></ul>
+    <div class="portada-cifra">
+      <span class="portada-cifra-num">$65,169.1 mdp</span>
+      <span class="portada-cifra-que">quedaron por aclarar ante la Auditoría Superior en la Cuenta Pública 2024. No es un desfalco comprobado: es lo que carecía de documentación al cierre de las auditorías. <span class="est-chip est-oficial">oficial</span></span>
+      <span class="portada-cifra-fuente">ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11.</span>
+    </div>
+    <div class="portada-acciones">
+      <button type="button" class="portada-accion" id="portadaCifraIr">Ver lo que encontró la ASF</button>
+      <button type="button" class="portada-accion" id="portadaAyudanos">Ayúdanos a fiscalizar</button>
+    </div>
+  </section>
 
   <!-- ==========================================================================
        RADAR HACENDARIO EN VIVO (2 LÍNEAS INTEGRADAS: NOTIFICACIÓN EN VIVO & TELEMETRÍA)
@@ -2933,7 +2978,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260928o</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260929a</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3077,17 +3122,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20260928o"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20260929a"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20260928o"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20260929a"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/auditor/js/municipios-efipem.js?v=20260928o"></script>
-  <script src="assets/auditor/js/municipios-rendicion.js?v=20260928o"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20260929a"></script>
+  <script src="assets/auditor/js/municipios-rendicion.js?v=20260929a"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20260928o"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20260929a"></script>
+  <script src="assets/auditor/js/legibilidad.js?v=20260929a"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
