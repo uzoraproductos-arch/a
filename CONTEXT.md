@@ -163,6 +163,26 @@ La pestaña 4 tiene cinco subpestañas (4.1 a 4.5), y la 4.1 a su vez tiene tres
 subvistas: organigrama de la SCJN, estructura general del PJF y mapa territorial
 de los 32 circuitos.
 
+## Siguiente tarea: legibilidad en celular (`docs/ux/PLAN.md`)
+
+Condición del dueño: **la plataforma debe ser fácil de leer y de entender,
+empezando por el celular.** Una auditoría medida (29-09-2026, 390 px, 11
+vistas) encontró que entre el 78 y el 86 % del texto visible mide menos de
+14 px, que hay entre 50 y 198 emojis por vista, y que cada módulo empieza unas
+cinco pantallas abajo. El plan completo, con decisiones, fases y metas, está en
+**`docs/ux/PLAN.md`**. Pasó por un CEO review y por dos revisiones externas.
+
+Orden acordado: lectura en todo el sitio → módulos en capas → dominio propio
+→ URLs por módulo (SEO/GEO) → datos por página.
+
+**Fase 0 en curso.** No tiene cambio visible:
+
+- `herramientas/guardia_legibilidad.py` mide la legibilidad.
+- `docs/ux/fase-0-propuestas.md` reúne lo que el autor debe aprobar: los cambios
+  a AGENTS.md y a DESIGN.md, y los nombres de secciones y rutas.
+
+Nada de la fase 1 empieza sin ese visto bueno.
+
 ## Sistema de marca (`DESIGN.md`), hecho el 29-09-2026
 
 **`DESIGN.md` en la raíz es la referencia única de la marca**: logo, color,
