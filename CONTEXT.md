@@ -158,35 +158,34 @@ La pestaña 4 tiene cinco subpestañas (4.1 a 4.5), y la 4.1 a su vez tiene tres
 subvistas: organigrama de la SCJN, estructura general del PJF y mapa territorial
 de los 32 circuitos.
 
-## Siguiente tarea: sistema de marca (`DESIGN.md`)
+## Sistema de marca (`DESIGN.md`), hecho el 29-09-2026
 
-El sitio no tiene todavía una referencia única de marca: el emblema del
-encabezado es un emoji ⚖️ y el HTML acumula más de 1,300 estilos en línea con
-valores sueltos. El objetivo es producir **`DESIGN.md` en la raíz**, que
-fije colores, tipografía, logo, forma y tono para que todo el sitio sea
-consistente.
+**`DESIGN.md` en la raíz es la referencia única de la marca**: logo, color,
+tipografía, forma y voz. Se generó con el skill
+`.claude/skills/brand-book-generator/` y las respuestas del autor:
 
-Todo está preparado en el repositorio:
+- **Alcance:** solo Auditavisión. Inspector Meteoro queda como firma del autor
+  y Fortuvisión fuera.
+- **Lema:** *El gasto público, a la vista.*
+- **Público:** ciudadanía general. **Qué no es:** un sitio oficial.
+- **Tono:** riguroso, cívico, sobrio, didáctico.
+- **Logo:** la moneda de oro inspectora con alas **se queda** como logo
+  principal (`assets/auditor/img/logo-auditavision.svg`), para 56 px o más. Se
+  le sumó un **símbolo plano** aprobado por el autor, «moneda con rostro»
+  (bombín, ojo tras la lupa, bigote y alas), para favicon, sellos y una tinta.
+  Hay 19 SVG en `assets/brand/logos/{combined,symbol,wordmark}/`, todos solo
+  con `fill` y con el nombre en contornos (Playfair Display Black).
+- **Paleta:** se conservan los siete acentos (decisión del autor) y cada uno
+  queda con un solo papel: oro marca, carmesí alerta, esmeralda oficial, ámbar
+  derivado, naranja advertencia, cian referencia y azul información.
 
-- `.claude/skills/brand-book-generator/`: el skill que guía la entrevista y
-  genera `DESIGN.md` y los SVG del logo. Al inicio de su `SKILL.md` hay reglas
-  específicas de este proyecto.
-- `docs/marca/BRIEF.md`: lo ya extraído del sitio (paleta en los dos temas,
-  fuentes, favicon de la balanza, radios, voz) y **siete preguntas abiertas**
-  que decide quien es dueño de la marca.
+El brief `docs/marca/BRIEF.md` se escribió sobre `main` y describía un
+encabezado con emoji ⚖️ y superficies sólidas. El auditor de esta rama ya
+tenía la moneda ilustrada y superficies translúcidas sobre la fotografía de la
+ciudad: `DESIGN.md` documenta lo que hay en esta rama.
 
-Cómo hacerlo:
-
-1. `git pull origin main`.
-2. Lee `docs/marca/BRIEF.md` y ten a la mano las respuestas a sus preguntas.
-3. En Claude Code, abierto en la raíz del repositorio, ejecuta
-   `/brand-book-generator`. Con otra herramienta de IA, dale a leer
-   `.claude/skills/brand-book-generator/SKILL.md`, `md-template.md` y el brief.
-4. Aprueba el logo antes de que genere las variantes.
-5. Revisa `DESIGN.md`, haz commit y push a `main`.
-
-Aplicar `DESIGN.md` al CSS y al HTML es un trabajo posterior e independiente:
-en esta tarea sólo se documenta la marca.
+Aplicar `DESIGN.md` al sitio es trabajo aparte y queda pendiente (lista en su
+§9 y abajo, en Pendiente).
 
 ## Estado actual
 
@@ -4316,13 +4315,12 @@ capturas: https://claude.ai/artifact/QmXudJvRc5Hs7kp3ZDrEzF
   se publica marcada como `análisis`, no como dato. Procede de crítica
   académica, no de un artículo que sancione expresamente el apartarse de un
   precedente. Si aparece la norma concreta, reetiquetar como `oficial`.
-- **Sistema de marca (`DESIGN.md`)**: no existe todavía una referencia única
-  de colores, tipografía, logo y tono; el emblema del encabezado es un emoji.
-  El brief con lo ya extraído del sitio y las preguntas abiertas está en
-  `docs/marca/BRIEF.md`, y el skill para generarlo en
-  `.claude/skills/brand-book-generator/` (en Claude Code:
-  `/brand-book-generator`). Una vez aprobado, `DESIGN.md` es la referencia
-  para migrar los estilos en línea.
+- **Aplicar `DESIGN.md` al auditor** (la marca ya está documentada): cambiar
+  el favicon por `assets/brand/logos/symbol/auditavision-favicon.svg`;
+  declarar `--radius-sm/md/lg/pill` y migrar los radios sueltos; migrar los
+  estilos en línea de `index.html` a clases con variables; reducir los tamaños
+  de letra a la escala de §4.1. Solo `index.html` y `assets/auditor/`; la
+  Enciclopedia no se migra. Espera el visto bueno del autor.
 - **Decisión editorial abierta**: si las Salas suprimidas deben permanecer
   documentadas como estructura histórica o desaparecer del organigrama.
 

@@ -1,5 +1,9 @@
 # Brief de marca — Auditavisión
 
+> **Resuelto el 29-09-2026.** La marca quedó documentada en `DESIGN.md`, en la
+> raíz. Este brief se conserva como antecedente: se escribió sobre `main` y
+> no conocía la moneda ilustrada del auditor.
+
 Punto de partida para generar `DESIGN.md` con el skill
 `.claude/skills/brand-book-generator`. Todo lo de la sección «Lo que ya existe»
 se extrajo del sitio tal como está en `main`; no hay que volver a preguntarlo,
