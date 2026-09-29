@@ -10,12 +10,17 @@
 en ninguna otra parte: ni en un chat, ni en una carpeta local, ni en el
 historial de otra IA.
 
-### La rama de trabajo no es `main`
+### Se trabaja en la rama, `main` es la versión entregada
 
-**Todo el proyecto vive en `claude/funny-turing-imtm54`.** `main` se quedó
-atrás y no tiene la calculadora cívica, ni el padrón municipal, ni las 32
-entidades bajo el mapa, ni el Paquete Económico 2027 leído contra sus textos
-legales. **Clonar `main` es empezar sin el trabajo hecho.**
+**Todo el trabajo se hace en `claude/funny-turing-imtm54`.** `main` guarda la
+versión que el autor aprueba. El 29-09-2026, con permiso expreso del autor, se
+llevaron a `main` los 133 commits de la rama y las dos quedaron idénticas
+(`196084e`). Desde entonces `main` solo avanza cuando el autor lo pide, así que
+la rama puede volver a ir adelante: parte siempre de la rama.
+
+```bash
+git rev-list --count origin/main..origin/claude/funny-turing-imtm54   # 0 = iguales
+```
 
 ```bash
 git clone --branch claude/funny-turing-imtm54 \
@@ -53,10 +58,10 @@ buena. **No empujes a `main` sin permiso expreso del autor.**
 | Repositorio | `https://github.com/uzoraproductos-arch/a` |
 | Rama de trabajo | `claude/funny-turing-imtm54` |
 | Publicado y en vivo | `https://uzoraproductos-arch.github.io/a/` |
-| Revisión abierta | Pull request #1 del repositorio |
+| Revisión | El pull request #1 se fusionó en `main` el 29-09-2026; lo nuevo irá en un pull request nuevo |
 | Copia comprimida | `.../a/archive/refs/heads/claude/funny-turing-imtm54.zip` |
 
-La página publicada lleva su sello al pie: **Versión publicada: 20260922b**.
+La página publicada lleva su sello al pie (al 29-09-2026: **Versión publicada: 20260928o**).
 Si lo que ves en el navegador no coincide con el sello del `index.html` que
 tienes delante, estás mirando una copia guardada por tu navegador, no la
 publicación. Recarga forzando (`Ctrl+Shift+R`) o añade `?v=` a la dirección.

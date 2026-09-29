@@ -9,13 +9,14 @@ antes de tocar código.
 
 ---
 
-## 1. La rama de trabajo no es `main`
+## 1. Se trabaja en la rama, `main` es la versión entregada
 
-**Todo el proyecto vive en la rama `claude/funny-turing-imtm54`.**
-`main` se quedó decenas de commits atrás: no tiene la calculadora cívica, ni el
-padrón municipal, ni las 32 entidades, ni el Paquete Económico. **No sirve como
-punto de partida y clonarla es perder el trabajo.** Para ver cuánto le falta:
-`git rev-list --count origin/main..origin/claude/funny-turing-imtm54`.
+**Todo el trabajo se hace en la rama `claude/funny-turing-imtm54`.**
+`main` es la versión que el autor aprueba: el 29-09-2026 se puso al día con la
+rama y quedaron idénticas. Desde entonces, `main` solo avanza cuando el autor
+lo pide, así que la rama puede volver a ir adelante. Para ver cuánto le falta
+a `main`: `git rev-list --count origin/main..origin/claude/funny-turing-imtm54`
+(0 = están iguales).
 
 ```bash
 git clone --branch claude/funny-turing-imtm54 \
