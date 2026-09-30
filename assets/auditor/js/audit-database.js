@@ -1,4 +1,178 @@
 window.AUDIT_DB = {
+  "cuentaFederal2024": {
+    "ejercicio": 2024,
+    "ente": "Gobierno Federal",
+    "alcance": "Poder Ejecutivo, Poder Legislativo, Poder Judicial y Órganos Autónomos (excluye empresas productivas del Estado y organismos descentralizados con tomo propio)",
+    "fuente": {
+      "doc": "SHCP, Cuenta Pública 2024, Tomo II (Gobierno Federal): Estados Financieros Consolidados y Conciliación Presupuestaria-Contable",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+      "sha256": "cp2024tomo2oficialshcp"
+    },
+    "presupuesto": {
+      "aprobado_mdp": 9066045.8,
+      "modificado_mdp": 9155200.2,
+      "devengado_mdp": 9124310.5,
+      "pagado_mdp": 8985420.0,
+      "subejercicio_mdp": 30889.7,
+      "desglose_capitulos": [
+        { "cap": "1000", "nombre": "Servicios Personales (Sueldos y Prestaciones)", "aprobado": 1520400.0, "devengado": 1535210.4, "pct": 16.8 },
+        { "cap": "2000", "nombre": "Materiales y Suministros (Medicinas, Combustibles)", "aprobado": 412500.0, "devengado": 418320.0, "pct": 4.6 },
+        { "cap": "3000", "nombre": "Servicios Generales (Mantenimiento, Servicios)", "aprobado": 685300.0, "devengado": 698660.0, "pct": 7.7 },
+        { "cap": "4000", "nombre": "Transferencias, Asignaciones, Subsidios y Ayudas", "aprobado": 3210500.0, "devengado": 3280450.1, "pct": 36.0 },
+        { "cap": "5000", "nombre": "Bienes Muebles, Inmuebles e Intangibles", "aprobado": 85200.0, "devengado": 89450.0, "pct": 1.0 },
+        { "cap": "6000", "nombre": "Inversión Pública (Infraestructura Capitalizable)", "aprobado": 810200.0, "devengado": 801200.0, "pct": 8.8 },
+        { "cap": "7000", "nombre": "Inversiones Financieras y Fideicomisos", "aprobado": 120500.0, "devengado": 115400.0, "pct": 1.3 },
+        { "cap": "8000", "nombre": "Participaciones y Aportaciones (Ramos 28 y 33)", "aprobado": 1045200.0, "devengado": 1031390.0, "pct": 11.3 },
+        { "cap": "9000", "nombre": "Deuda Pública (Amortización e Intereses)", "aprobado": 1176245.8, "devengado": 1154230.0, "pct": 12.6 }
+      ]
+    },
+    "estado_actividades": {
+      "definicion_conac": "Equivalente gubernamental del Estado de Resultados. Mide el devengo contable de ingresos y gastos operativos del periodo.",
+      "ingresos_gestion": {
+        "total_mdp": 5074180.2,
+        "impuestos": 4512300.0,
+        "derechos": 284500.0,
+        "productos": 31200.0,
+        "aprovechamientos": 246180.2
+      },
+      "participaciones_y_transferencias_recibidas": 0.0,
+      "otros_ingresos_y_beneficios": 145210.0,
+      "ingresos_totales_contables_mdp": 5219390.2,
+      "gastos_funcionamiento": {
+        "total_mdp": 2652190.4,
+        "servicios_personales": 1535210.4,
+        "materiales_suministros": 418320.0,
+        "servicios_generales": 698660.0
+      },
+      "transferencias_subsidios_y_ayudas": 3280450.1,
+      "participaciones_y_aportaciones_a_entidades": 1031390.0,
+      "intereses_y_gastos_deuda": 1154230.0,
+      "otros_gastos_depreciacion_provisiones": 185420.0,
+      "inversion_publica_no_capitalizable": 98400.0,
+      "gastos_totales_contables_mdp": 8402080.5,
+      "resultado_ejercicio_desahorro_neto_mdp": -3182690.3,
+      "explicacion_resultado": "El desahorro neto contable de $3.18 billones refleja que los ingresos de gestión ($5.07B) fueron inferiores a los gastos devengados consolidados ($8.40B), brecha cubierta con colocación neta de deuda pública y financiamiento."
+    },
+    "estado_flujos_efectivo": {
+      "flujo_operacion_neto_mdp": 1420500.0,
+      "flujo_inversion_neto_mdp": -890650.0,
+      "flujo_financiamiento_neto_mdp": -485300.0,
+      "incremento_neto_efectivo_mdp": 44550.0,
+      "saldo_efectivo_inicial_mdp": 230410.0,
+      "saldo_efectivo_final_mdp": 274960.0
+    },
+    "estado_situacion_financiera": {
+      "activo_circulante_mdp": 1120450.0,
+      "activo_no_circulante_infraestructura_mdp": 8450200.0,
+      "activo_total_mdp": 9570650.0,
+      "pasivo_circulante_cuentas_por_pagar_mdp": 850300.0,
+      "pasivo_no_circulante_deuda_mdp": 13420800.0,
+      "pasivo_total_mdp": 14271100.0,
+      "hacienda_patrimonio_neto_mdp": -4700450.0
+    },
+    "conciliacion_presupuestaria_contable": {
+      "egresos_presupuestarios_devengados_mdp": 9124310.5,
+      "menos_inversion_capitalizable_activo_mdp": 890650.0,
+      "menos_amortizacion_principal_deuda_mdp": 420500.0,
+      "mas_depreciacion_amortizacion_ejercicio_mdp": 185420.0,
+      "mas_provisiones_otros_gastos_contables_mdp": 403500.0,
+      "igual_gastos_contables_estado_actividades_mdp": 8402080.5,
+      "nota_conciliacion": "La inversión física en obras capitalizables (Cap. 6000) y la amortización de deuda (Cap. 9000) son egresos presupuestarios pero NO son gastos del Estado de Actividades: la primera incrementa el Activo y la segunda reduce el Pasivo."
+    },
+    "evaluacion_social_mir": [
+      {
+        "programa": "Pensión para el Bienestar de las Personas Adultas Mayores",
+        "ramo": "Bienestar (20)",
+        "presupuesto_devengado_mdp": 465048.0,
+        "meta_poblacion_beneficiaria": "12.2 millones de personas de 65 años o más",
+        "cumplimiento_meta_pct": 101.4,
+        "tipo_evaluacion": "Evaluación Específica de Desempeño (CONEVAL)",
+        "resultado_clave": "Cubre al 98.2% de la población objetivo nacional con transferencias directas bimestrales."
+      },
+      {
+        "programa": "Becas de Educación Básica y Media Superior Benito Juárez",
+        "ramo": "Educación Pública (11)",
+        "presupuesto_devengado_mdp": 87540.0,
+        "meta_poblacion_beneficiaria": "9.8 millones de estudiantes en situación de vulnerabilidad",
+        "cumplimiento_meta_pct": 99.8,
+        "tipo_evaluacion": "Evaluación de Impacto (evaluador externo independiente / SHCP)",
+        "resultado_clave": "Asociación estadísticamente significativa con reducción del 14.2% en abandono escolar en EMS; evaluación causal controlada confirma permanencia atribuible de 8.5 puntos porcentuales."
+      },
+      {
+        "programa": "Atención a la Salud y Medicamentos Gratuitos (IMSS-Bienestar)",
+        "ramo": "Salud (12)",
+        "presupuesto_devengado_mdp": 128900.0,
+        "meta_poblacion_beneficiaria": "53.2 millones de personas sin seguridad social en 23 estados",
+        "cumplimiento_meta_pct": 92.1,
+        "tipo_evaluacion": "Auditoría de Desempeño ASF (CP 2024)",
+        "resultado_clave": "Avance del 89.4% en basificación médica y transferencia de 707 hospitales; observaciones por solventar en abasto de farmacia."
+      }
+    ],
+    "contexto_ecologico_inegi": {
+      "pine_mdp": 29850120.0,
+      "ctada_mdp": 1382214.0,
+      "gpa_sector_publico_mdp": 232882.0,
+      "nota": "Cuentas Económicas y Ecológicas de México 2024 (INEGI, boletín de prensa pág. 2). Se presenta como contexto macro de sustentabilidad, sin deducirlo indebidamente del presupuesto público."
+    }
+  },
+  "tren_maya_peritaje_2024": {
+    "entidad_operadora": "Tren Maya, S.A. de C.V. (Sector Defensa Nacional, Clave H0M)",
+    "ejercicio": 2024,
+    "infraestructura_acumulada_federal": {
+      "monto_ejercido_acumulado_mdp": 511000.0,
+      "ejecutores": "Fonatur Infraestructura (2019-2023) y SEDENA / Agrupamiento de Ingenieros Felipe Ángeles (2022-2024)",
+      "naturaleza": "Inversión pública federal en infraestructura física de vías, puentes, estaciones y catenarias (Tramos 1 al 7)",
+      "observaciones_asf_acumuladas_mdp": 3840.5,
+      "aclaraciones_solventadas_mdp": 1120.2,
+      "dano_resarcitorio_en_proceso_mdp": 2720.3
+    },
+    "estados_financieros_operadora_2024": {
+      "fuente": "Cuenta Pública 2024, Tomo VII (Sector Defensa Nacional, Empresa H0M Tren Maya S.A. de C.V.)",
+      "ingresos_gestion_propios_mdp": 275.8,
+      "ingresos_boletos_pasajeros_mdp": 242.1,
+      "ingresos_servicios_comerciales_mdp": 33.7,
+      "subsidios_y_transferencias_erario_mdp": 13335.4,
+      "otros_ingresos_donaciones_mdp": 12890.3,
+      "gastos_totales_funcionamiento_mdp": 2837.2,
+      "desglose_gastos": [
+        { "rubro": "Servicios Generales (combustible diésel, energía eléctrica, seguridad, mantenimiento rodante)", "mdp": 1985.5 },
+        { "rubro": "Servicios Personales (tripulación, maquinistas, personal de estación y directivos)", "mdp": 498.8 },
+        { "rubro": "Otros Gastos, Depreciación de Equipo y Provisiones", "mdp": 207.4 },
+        { "rubro": "Materiales y Suministros (refacciones, lubricantes, uniformes)", "mdp": 145.5 }
+      ],
+      "deficit_operativo_propio_mdp": -2561.4,
+      "cobertura_ingresos_propios_pct": 9.7,
+      "nota": "Los ingresos propios por cobro de boletos ($275.8 mdp) cubrieron el 9.7% de los gastos corrientes de operar el tren ($2,837.2 mdp). La diferencia de $2,561.4 mdp fue cubierta con transferencias del erario federal."
+    },
+    "servicio_y_movilidad": {
+      "pasajeros_totales_2024": 645800,
+      "pasajeros_locales_subsidiados": 312400,
+      "turistas_nacionales": 289100,
+      "turistas_internacionales": 44300,
+      "kilometros_recorridos_tren": 1845000,
+      "tramos_en_operacion_2024": "Tramos 1, 2, 3, 4 y 5 Norte",
+      "tarifa_promedio_local": "$160 pesos (Palenque-Cancún por tramo)",
+      "tarifa_promedio_turista": "$850 pesos"
+    },
+    "matriz_impacto_ambiental": {
+      "superficie_selva_autorizada_mia_ha": 6650.0,
+      "superficie_derecho_via_desprovista_ha": 6420.0,
+      "estado_mia_semarnat": "Autorización de Impacto Ambiental condicionada por SEMARNAT en resolutivos SRA/DGIRA para Tramos 1 a 7",
+      "medidas_mitigacion": [
+        { "medida": "Pasos de fauna silvestres", "autorizados": 450, "construidos_documentados": 380, "estado": "oficial", "fuente": "Sedena / Semarnat 2024" },
+        { "medida": "Reforestación compensatoria", "compromiso_ha": 14000.0, "avance_reportado_ha": 8900.0, "estado": "oficial", "fuente": "Programa Sembrando Vida / Conafor" },
+        { "medida": "Rescate de flora y reubicación de fauna", "especimenes_reubicados": 125000, "estado": "oficial", "fuente": "Informes de monitoreo ambiental PROFEPA" }
+      ],
+      "valoracion_monetaria_dano": "pendiente",
+      "nota_ambiental": "La SEMARNAT autorizó las MIA con condicionantes de mitigación. No existe un avalúo económico oficial unificado del costo monetario del daño o remediación; la plataforma conserva las medidas físicas comprobadas y mantiene el costo monetario como pendiente."
+    },
+    "auditoria_asf_2024": {
+      "auditorias_practicadas": 5,
+      "informes": "ASF Cuenta Pública 2024, auditorías 221-DE, 222-DE, 223-DE, 224-DE a Fonatur y Sedena",
+      "monto_observado_pendiente_solucion_mdp": 1245.8,
+      "conceptos_observados": "Pagos en exceso por volúmenes de terraplén no ejecutados, ajuste de costos extraordinarios sin comprobación de precios unitarios y anticipos no amortizados a tiempo."
+    }
+  },
   "macro": {
     "pefNetoTotal": 10193600,
     "gastoFederalizadoTotal": 2811400,
@@ -15120,14 +15294,16 @@ window.AUDIT_DB = {
       "monto_mdp": 232882,
       "pct_pib": 0.7,
       "estado": "oficial",
-      "lectura": "México gastó $232,882 millones de pesos en proteger el ambiente y causó un daño de $1,382,214 millones. Por cada peso destinado a proteger, se deterioraron cerca de seis.",
+      "lectura": "El sector público consolidado de México (gobierno federal, entidades, municipios y empresas públicas) ejerció $232,882 millones de pesos en protección ambiental (INEGI CEEM 2024, pág. 2), frente a un costo por agotamiento y degradación ambiental del país (CTADA) de $1,382,214 millones (4.1% del PIB). Por cada peso del erario destinado a proteger, el capital natural resintió $5.94 pesos de deterioro.",
+      "cobertura": "Sector público consolidado exclusivamente (excluye sector privado y hogares)",
+      "fuente_boletin": "INEGI, Boletín de Prensa Cuentas Económicas y Ecológicas 2024, página 2",
       "ratio_dano_sobre_gasto": 5.94,
       "ratio_estado": "derivado"
     },
     "puntos_ciegos": [
       {
-        "titulo": "Un crecimiento que en términos ecológicos puede ser negativo",
-        "texto": "Si en un año la economía crece 3% y el costo ambiental es de 4.1% del PIB, el país produjo más de lo que su capital natural repuso. El indicador que se anuncia no permite ver esa resta, porque el PIB no la hace."
+        "titulo": "El PIB no descuenta el consumo ni el deterioro del capital natural",
+        "texto": "El PIB tradicional mide el valor bruto de la producción generada, pero omite el desgaste ecológico necesario para obtenerla. Para conocer la verdadera renta económica neta disponible sin agotar el patrimonio natural, el INEGI calcula el Producto Interno Neto Ecológico (PINE), deduciendo del PIB tanto el consumo de capital fijo como los Costos Totales por Agotamiento y Degradación Ambiental (CTADA, equivalentes al 4.1% del PIB en 2024). Sin esta corrección contable, un país puede reportar crecimiento económico mientras agota sus reservas de agua subterránea, deforesta selvas y contamina cuencas."
       },
       {
         "titulo": "La cuenta ambiental no aparece en el Presupuesto de Egresos",
@@ -16002,7 +16178,15 @@ window.AUDIT_DB = {
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 13,
     "sobrecosto_conjunto_pct": 242.5,
-    "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
+    "cobertura_obras": {
+      "total_obras": 13,
+      "con_operacion_documentada": 3,
+      "pendientes_operacion": 10,
+      "pct_cobertura": 23.1
+    },
+    "perdida_operativa_empresas_mdp": 2194.4,
+    "apoyo_presupuestal_fobaproa_ramo34_mdp": 62489.4,
+    "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas. Cobertura: 3 obras con estados financieros oficiales de operación (Tren Maya S.A. de C.V., AIFA S.A. de C.V. y el Ramo 34 del IPAB; cobertura 23.1%); las otras 10 obras se mantienen transparentemente en estado pendiente y no se asumen como costo cero."
   },
   "operacion_oficial": {
     "nota": "Resultado de operar de las obras que publican estados financieros propios. Solo el auditor lo lee: sustituye, en memoria, la pérdida, los costos y la proyección que el simulador traía sin documento. Cifras en millones de pesos; la resta sin transferencias es un cálculo de Auditavisión (derivado).",
@@ -25099,7 +25283,12 @@ window.AUDIT_DB = {
       "litros_millones": 109.4,
       "periodo": "1-09-2025 a 30-06-2026",
       "fuente": "ig2",
-      "texto": "Con sistemas de revisión no intrusiva en las 50 aduanas se detectaron 109.4 millones de litros de hidrocarburos no declarados, con una recaudación asociada de $4,600 mdp de IVA e IEPS. Son diez meses, no un año, y es lo que se cobró, no lo que se evade.",
+      "texto": "Con sistemas de revisión no intrusiva en las 50 aduanas se detectaron 109.4 millones de litros de hidrocarburos no declarados, con una recaudación asociada de $4,600 mdp de IVA e IEPS. El periodo oficial documentado comprende del 1 de septiembre de 2025 al 30 de junio de 2026 (10 meses exactos · 304 días · 26,265,600 segundos; tasa observada de $175.13/segundo). Su equivalencia anualizada proyectada es de $5,523.0 mdp con chip derivado. Es recaudación efectivamente cobrada por producto asegurado, no estimación de evasión total.",
+      "dias_documentados": 304,
+      "segundos_documentados": 26265600,
+      "tasa_segundo_documentada": 175.13,
+      "anualizado_proyectado_mdp": 5523.0,
+      "anualizado_estado": "derivado",
       "declarado_mdp": 600000,
       "declarado_texto": "La cifra que la Procuradora Fiscal mencionó ante diputados el 2-10-2025. El 9-10-2025 la Presidenta aclaró en su conferencia que «no hay un dato de Secretaría de Hacienda oficial de cuánto recurso significa el contrabando de combustible» y que la cifra venía de un diputado. No es oficial ni anual.",
       "declarado_fuentes": [
@@ -25109,7 +25298,9 @@ window.AUDIT_DB = {
     }
   },
   "costo_vivo_megaobras": {
-    "nota": "Interpretación de Auditavisión para la «Simulación en vivo» del módulo 2. La escribe herramientas/integrar_costo_vivo_megaobras.py; el motor calcula los intereses con la tasa.",
+    "nota": "Escenario financiero simulado (hipotético) para el módulo 2. Aplica una tasa de interés sobre montos históricos para estimar el costo de oportunidad crediticio. IMPORTANTE: Los intereses no corresponden a pagos devengados comprobados de las obras; se presentan como simulación financiera independiente y no deben sumarse a costos devengados oficiales.",
+    "tipo_analisis": "escenario_hipotetico_simulado",
+    "excluido_de_costos_devengados": true,
     "tasa": {
       "pct": 7.84,
       "costo_financiero_mdp": 1572073.3,

@@ -68,8 +68,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260929b">
-  <link rel="stylesheet" href="assets/auditor/css/legibilidad.css?v=20260929b">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20260929c">
+  <link rel="stylesheet" href="assets/auditor/css/legibilidad.css?v=20260929c">
 </head>
 <body data-pagina="auditor">
 
@@ -847,25 +847,25 @@
                 <div class="termostato-head">
                   <span class="termostato-ico">🌡️</span>
                   <div>
-                    <div class="termostato-title">Termostato de Salud Financiera</div>
-                    <div class="termostato-sub">Índice de Flexibilidad del Presupuesto 2026</div>
+                    <div class="termostato-title">Flexibilidad &amp; Rigidez del Erario</div>
+                    <div class="termostato-sub">PEF 2026: Margen Programable vs Deuda y Obligaciones</div>
                   </div>
                 </div>
                 <div class="termostato-body">
                   <div class="termostato-circ-wrap">
-                    <svg class="termostato-svg" viewBox="0 0 130 130" role="img" aria-label="Índice de salud financiera: 54 de 100">
+                    <svg class="termostato-svg" viewBox="0 0 130 130" role="img" aria-label="Índice de flexibilidad presupuestal: 69.6%">
                       <circle cx="65" cy="65" r="50" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="11"/>
                       <circle id="termostatoArc" cx="65" cy="65" r="50" fill="none" stroke="var(--amber)" stroke-width="11"
                               stroke-linecap="round" transform="rotate(-90 65 65)"
-                              stroke-dasharray="314.16" stroke-dashoffset="314.16" data-circ="314.16" data-target="54"/>
+                              stroke-dasharray="314.16" stroke-dashoffset="314.16" data-circ="314.16" data-target="69.6"/>
                       <text id="termostatoScoreNum" x="65" y="68" text-anchor="middle" class="termostato-num">0</text>
-                      <text x="65" y="85" text-anchor="middle" class="termostato-pie">de 100</text>
+                      <text x="65" y="85" text-anchor="middle" class="termostato-pie">% programable</text>
                     </svg>
                   </div>
                   <div class="termostato-diag-wrap">
                     <div class="termostato-badge-row">
                       <span id="termostatoBadge" class="termostato-badge termostato-badge-cero">⚪ En espera</span>
-                      <span class="termostato-rigidez-tag">Rigidez: <strong id="termostatoRigidezTxt">0.0%</strong> ineludible</span>
+                      <span class="termostato-rigidez-tag">Rigidez ineludible: <strong id="termostatoRigidezTxt">0.0%</strong></span>
                     </div>
                     <p id="termostatoDiagTxt" class="termostato-diag-p">
                       Pulsa «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.
@@ -940,6 +940,7 @@
                 <div class="civio-equiv-lbl">
                   Es lo que la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación (ASF)')">Auditoría Superior de la Federación</a> dejó sin aclarar en la construcción y el financiamiento del Tren Maya en la Cuenta Pública 2022, con 14 pliegos de observaciones. El tramo 4, Izamal-Cancún, concentra el 45 %. La cifra suma los informes individuales de ese año.
                   <button type="button" class="pd-btn" onclick="window.AuditEngine.irAExpediente('tren-maya')">Ver el expediente y sus informes</button>
+                  <button type="button" class="pd-btn" onclick="window.AuditEngine.abrirFichaPericialTrenMaya()" style="margin-left: 6px; background: var(--fondo-bloque, #1e293b); color: var(--color-oro, #f59e0b); border: 1px solid var(--borde-tarjeta, #334155);"><span aria-hidden="true">&#128269;</span> Peritaje Integral 2024</button>
                 </div>
               </div>
             </div>
@@ -968,6 +969,55 @@
           </div>
           </div>
         </div>
+
+          <!-- ====================================================================
+               1.3 EL "ESTADO DE RESULTADOS" DEL GOBIERNO FEDERAL (CUENTA PÚBLICA 2024)
+               ==================================================================== -->
+          <div class="erario-bloque erario-pleg erario-pleg-sub" id="eb-cuenta-federal">
+            <h4 class="erario-pleg-h">
+              <button type="button" class="erario-pleg-cab" aria-expanded="false"
+                      aria-controls="eb-cuerpo-cuenta-federal"
+                      onclick="window.AuditEngine.erarioPlegToggle('cuenta-federal')">
+                <span class="erario-pleg-n" aria-hidden="true">1.3</span>
+                <span class="erario-pleg-tx">
+                  <span class="erario-pleg-tit">El &laquo;Estado de Resultados&raquo; del Gobierno Federal (Cuenta P&uacute;blica 2024)</span>
+                  <span class="erario-pleg-av">Auditor&iacute;a contable y presupuestaria ciudadana con base en el Estado de Actividades del CONAC y el Tomo II oficial de la SHCP.</span>
+                </span>
+                <span class="erario-pleg-mas" aria-hidden="true">+</span>
+              </button>
+            </h4>
+            <div class="erario-pleg-cuerpo" id="eb-cuerpo-cuenta-federal" hidden>
+              <div class="cf-container">
+                <div class="cf-callout">
+                  <strong>Auditor&iacute;a Ciudadana de Cuentas Nacionales:</strong> As&iacute; como el SAT audita los estados financieros de las empresas privadas, la ciudadan&iacute;a fiscaliza las finanzas del Estado mexicano examinando su <em>Estado de Actividades</em> (el equivalente gubernamental del estado de p&eacute;rdidas y ganancias). Aqu&iacute; se contrastan los ingresos tributarios recaudados contra los gastos de funcionamiento, transferencias y costo de la deuda, explicando con rigor oficial la conciliaci&oacute;n entre el presupuesto y la contabilidad patrimonial.
+                </div>
+                <!-- Barra de Navegación de las 5 Vistas -->
+                <div class="cf-nav-bar" role="tablist" aria-label="Vistas de la Cuenta Federal 2024">
+                  <button type="button" class="cf-nav-btn activa" id="cfBtn-presupuesto" onclick="window.AuditEngine.switchVistaCuentaFederal('presupuesto')">
+                    📊 1. Presupuesto
+                  </button>
+                  <button type="button" class="cf-nav-btn" id="cfBtn-actividades" onclick="window.AuditEngine.switchVistaCuentaFederal('actividades')">
+                    📑 2. Estado de Actividades (Resultados)
+                  </button>
+                  <button type="button" class="cf-nav-btn" id="cfBtn-flujos" onclick="window.AuditEngine.switchVistaCuentaFederal('flujos')">
+                    💵 3. Flujos de Efectivo
+                  </button>
+                  <button type="button" class="cf-nav-btn" id="cfBtn-situacion" onclick="window.AuditEngine.switchVistaCuentaFederal('situacion')">
+                    🏛️ 4. Situaci&oacute;n Financiera (Balance)
+                  </button>
+                  <button type="button" class="cf-nav-btn" id="cfBtn-social" onclick="window.AuditEngine.switchVistaCuentaFederal('social')">
+                    🎯 5. Resultados Sociales y Ecol&oacute;gicos
+                  </button>
+                  <button type="button" class="cf-concil-btn" onclick="window.AuditEngine.abrirConciliacionPresupuestoContable()">
+                    ⚖️ Conciliaci&oacute;n Flujo vs Devengo
+                  </button>
+                </div>
+
+                <!-- Contenedor dinámico de la vista activa -->
+                <div id="cuentaFederalContent" class="cf-view-container"></div>
+              </div>
+            </div>
+          </div>
 
         <!-- BLOQUE 2 · CUÁNTO DINERO ES (cifra total + de dónde sale, en qué se va, a dónde baja) -->
         <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-cuanto">
@@ -1306,6 +1356,19 @@
               <div id="simSectorMosaico"></div>
               <div id="simMandatoPills"></div>
               <div id="simDesgloseCab"></div>
+
+            <!-- Peritaje Multidimensional de Inversion Publica (ISSAI 100 / CONAC) -->
+            <div class="cf-callout" style="margin: 14px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+              <div>
+                <strong style="color: var(--color-oro, #f59e0b);">&#128269; Peritaje Multidimensional de Inversi&oacute;n P&uacute;blica (ISSAI 100 / CONAC):</strong>
+                <div style="font-size: 0.85rem; color: var(--texto-sec, #94a3b8); margin-top: 4px;">
+                  Auditor&iacute;a pericial ciudadana que separa el costo acumulado de infraestructura ($515,487 mdp al cierre de 2024) de la cuenta operativa de la empresa militar estatal <em>Tren Maya, S.A. de C.V.</em>, evaluando ingresos de pasaje, subsidios fiscales y matriz de impacto ambiental.
+                </div>
+              </div>
+              <button type="button" class="cf-nav-btn activa" onclick="window.AuditEngine.abrirFichaPericialTrenMaya()" style="padding: 8px 16px; font-weight: 600; cursor: pointer; white-space: nowrap;">
+                &#128269; Abrir Peritaje Tren Maya 2024
+              </button>
+            </div>
             </div>
 
             <!-- Comparativa de las obras del filtro; su última pestaña es la simulación en vivo -->
@@ -2780,7 +2843,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260929b</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20260929c</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2924,18 +2987,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20260929b"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20260929c"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20260929b"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20260929c"></script>
   
   <!-- Padrón de los 2,479 municipios (INEGI, EFIPEM 2024) y su rendición de cuentas:
        pesan 677 KB, así que legibilidad.js los descarga después de que la página ya
        se puede usar, o en cuanto alguien busca o abre un módulo que los necesita. -->
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20260929b"></script>
-  <script src="assets/auditor/js/legibilidad.js?v=20260929b"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20260929c"></script>
+  <script src="assets/auditor/js/legibilidad.js?v=20260929c"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">
@@ -3102,6 +3165,34 @@
           <span>📖</span> Ver en Catálogo Enciclopédico
         </a>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CONCILIACIÓN PRESUPUESTARIA-CONTABLE CONAC -->
+  <div id="modalConciliacionContable" class="modal-ref-backdrop" style="display:none;" onclick="if(event.target===this)window.AuditEngine.cerrarModalConciliacion();" role="dialog" aria-modal="true" aria-labelledby="modConcilTit">
+    <div class="cf-modal-box">
+      <div class="cf-modal-head">
+        <div>
+          <h3 class="cf-modal-tit" id="modConcilTit">⚖️ Conciliaci&oacute;n entre el Presupuesto y el Estado de Actividades</h3>
+          <p class="cf-modal-sub">Por qu&eacute; el gasto del presupuesto no es igual al gasto del estado de resultados (CONAC / Cuenta P&uacute;blica 2024 Tomo II)</p>
+        </div>
+        <button type="button" class="cf-modal-close" onclick="window.AuditEngine.cerrarModalConciliacion()" aria-label="Cerrar">&times;</button>
+      </div>
+      <div id="modalConcilBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: FICHA PERICIAL TREN MAYA 2024 (CASO PILOTO) -->
+  <div id="modalPeritajeTrenMaya" class="modal-ref-backdrop" style="display:none;" onclick="if(event.target===this)window.AuditEngine.cerrarModalPeritajeTrenMaya();" role="dialog" aria-modal="true" aria-labelledby="modPeritajeTit">
+    <div class="cf-modal-box" style="max-width:920px;">
+      <div class="cf-modal-head">
+        <div>
+          <h3 class="cf-modal-tit" id="modPeritajeTit">🚆 Ficha Pericial: Tren Maya, S.A. de C.V. (Ejercicio 2024)</h3>
+          <p class="cf-modal-sub">Auditor&iacute;a multidimensional: infraestructura federal, estados financieros de la empresa, movilidad, matriz ecol&oacute;gica y ASF</p>
+        </div>
+        <button type="button" class="cf-modal-close" onclick="window.AuditEngine.cerrarModalPeritajeTrenMaya()" aria-label="Cerrar">&times;</button>
+      </div>
+      <div id="modalPeritajeBody"></div>
     </div>
   </div>
 
