@@ -1,95 +1,133 @@
-# Prompt para revisar la fase 1 y seguir con el plan
+# Cómo revisar los cambios y seguir con el plan (sin saber programar)
 
-Copia el bloque de abajo tal cual en Claude Code (o en otro asistente) abierto
-en la raíz del repositorio.
+## Lo que tienes que hacer tú
+
+No vas a escribir ningún comando. Tu asistente de IA hace la parte técnica.
+Tú solo copias un mensaje, contestas sus preguntas y miras cómo quedó.
+
+1. **Abre tu asistente de IA en la carpeta del proyecto.** Es el mismo programa
+   que usas para trabajar en Auditavisión (Claude Code, Antigravity, Cursor u
+   otro), abierto en la carpeta del proyecto.
+2. **Copia el mensaje del recuadro de abajo, completo,** desde «Hola» hasta
+   el final.
+3. **Pégalo en el chat del asistente** y envíalo.
+4. **Contesta lo que te pregunte.** Si no entiendes algo, escríbele
+   «explícamelo más fácil».
+5. **Cuando te diga que abras una página en tu navegador, ábrela** y mira
+   cómo se ve.
+6. **Para que algo se publique (que lo vea todo el mundo), el asistente te va
+   a pedir permiso.** Solo contesta «sí, publícalo» cuando estés de acuerdo.
+
+## Dos palabras que vas a leer
+
+- **Rama:** una copia aparte del proyecto donde se prueban cambios sin que el
+  público los vea. Los cambios nuevos están en la rama `ux/fase-1`.
+- **Publicar:** pasar los cambios a la versión que ve todo el mundo en
+  internet.
+
+## El mensaje para copiar
 
 ```text
-Vamos a revisar la fase 1 del rediseño de legibilidad de Auditavisión y a
-seguir con el plan. Trabaja paso por paso y pregúntame antes de publicar.
+Hola. No sé programar, así que necesito que tú hagas toda la parte técnica y
+me expliques cada cosa como si tuviera 5 años: frases cortas, sin palabras
+técnicas, y un paso a la vez. Antes de cada paso dime qué vas a hacer y para
+qué sirve. Si algo falla, arréglalo tú y cuéntame en palabras sencillas qué
+pasó.
 
-CONTEXTO
-- Condición del dueño: la plataforma tiene que ser fácil de leer y de
-  entender, empezando por el celular.
-- Lee antes de tocar nada: AGENTS.md, CONTEXT.md, docs/ux/PLAN.md y
-  docs/ux/fase-0-propuestas.md.
-- La fase 1 vive en la rama ux/fase-1. NO está publicada. GitHub Pages publica
-  la rama claude/funny-turing-imtm54: lo que llegue ahí es público.
+LO QUE NECESITO
+Alguien preparó cambios para que la plataforma Auditavisión sea más fácil de
+leer en el celular. Están guardados aparte, en una copia de prueba (la rama
+ux/fase-1), y todavía no los ve el público. Quiero verlos, decidir si me
+gustan y, si me gustan, seguir con el plan.
 
-PASO 1 · Traer la rama del preview
-  git fetch origin
-  git checkout ux/fase-1
-  git pull origin ux/fase-1
+PASO 1 · Revisa que mi computadora tenga lo necesario
+Comprueba que estén instalados git y python3. Si falta algo, dime qué es, para
+qué sirve y cómo instalarlo, con instrucciones muy sencillas.
 
-PASO 2 · Verla funcionando
-- Levanta el sitio: python3 -m http.server 8000 y ábrelo en
-  http://127.0.0.1:8000 (no uses localhost).
-- Revísalo en modo celular (DevTools, 390 px de ancho) y en escritorio:
-  1. la portada: lema, tres puertas (Lee, Explora, Consulta), la cifra de la
-     ASF y la guía «Cómo se usa»;
-  2. el botón «Menú» en celular y las cuatro secciones en escritorio;
-  3. un módulo abierto (por ejemplo «Busca tu municipio») con su ruta de
-     migas y el botón «‹ Inicio»;
-  4. el buscador (prueba «Zapopan») y el tema claro.
-- Hazme una lista corta de lo que se ve mal o no se entiende.
+PASO 2 · Trae la versión más nueva y cámbiate a la copia de prueba
+Descarga lo último del proyecto y cámbiate a la rama ux/fase-1. Si tengo
+cambios sin guardar, avísame antes de hacer nada.
 
-PASO 3 · Correr la guardia de legibilidad
-  pip install playwright
-  python3 -m playwright install chromium
+PASO 3 · Lee las instrucciones del proyecto
+Lee AGENTS.md, CONTEXT.md, docs/ux/PLAN.md y docs/ux/fase-0-propuestas.md.
+Luego explícame en 5 frases sencillas qué cambió y por qué.
+
+PASO 4 · Enséñame cómo se ve
+Prende la página en mi computadora (python3 -m http.server 8000) y dime
+exactamente qué dirección abrir en el navegador: http://127.0.0.1:8000
+Explícame cómo verla como si fuera un celular (en Chrome: clic derecho,
+«Inspeccionar» y el botón del teléfono) y qué revisar, en una lista corta:
+  - la portada nueva, con tres secciones: Lee, Explora y Consulta;
+  - el botón «Menú»;
+  - abrir un tema, por ejemplo «Busca tu municipio», y volver con «‹ Inicio»;
+  - buscar «Zapopan» en el buscador;
+  - cambiar a fondo claro.
+Espera a que yo te diga qué me pareció.
+
+PASO 5 · Comprueba que se lea bien
+Corre la revisión automática de lectura:
   python3 herramientas/guardia_legibilidad.py --fase 1
-Debe decir «Fase 1: cumple». Si no, dime qué vista falla y por qué.
+Si hace falta, instala antes lo que necesita (pip install playwright y
+python3 -m playwright install chromium) y dime qué estás instalando. Debe
+decir «Fase 1: cumple». Explícame el resultado en palabras sencillas.
 
-PASO 4 · Decisiones del autor
-Recorre conmigo docs/ux/fase-0-propuestas.md, punto por punto, y pregúntame qué
-apruebo:
-  1. reglas de lectura para AGENTS.md;
-  2. escala de letra y fondo para DESIGN.md;
-  3. nombres de las secciones y rutas;
-  4. el dominio propio.
-Aplica solo lo que yo apruebe y márcalo en ese archivo.
+PASO 6 · Decisiones que me tocan a mí
+Abre docs/ux/fase-0-propuestas.md y hazme las preguntas UNA POR UNA, en
+palabras sencillas y con tu recomendación:
+  1. las reglas para que el texto siempre se lea bien;
+  2. el tamaño de la letra y el fondo;
+  3. los nombres de las secciones (Lee, Explora, Consulta, Participa);
+  4. comprar un dominio propio (una dirección de internet como
+     auditavision.mx).
+Cambia solo lo que yo apruebe y anótalo en ese mismo archivo.
 
-PASO 5 · Integrar la fase 1 (solo con mi visto bueno explícito)
-- Trae lo último de la rama publicada y mézclalo en ux/fase-1:
-    git fetch origin
-    git merge origin/claude/funny-turing-imtm54
-- Si hay choques en los sellos ?v= de index.html, quédate con una sola versión
-  y sube un sello nuevo con: python3 herramientas/sello.py AAAAMMDDx
-- Conserva los CRLF (AGENTS.md §4): index.html debe seguir con 56 CR sueltos.
-- Vuelve a correr la guardia (--fase 1) y node --check sobre
-  assets/auditor/js/audit-engine.js y assets/auditor/js/legibilidad.js.
-- Antes de empujar, pregúntame. Luego:
-    git checkout claude/funny-turing-imtm54
-    git merge ux/fase-1
-    git push origin claude/funny-turing-imtm54
+PASO 7 · Publicar, SOLO si yo digo «sí, publícalo»
+Si me gustó, pregúntame con estas palabras: «¿Quieres que lo publique para
+que lo vea todo el mundo?». Si digo que sí:
+  - trae primero lo último de la rama publicada
+    (claude/funny-turing-imtm54) y júntalo con ux/fase-1;
+  - si hay choques en los números de versión (?v=), deja uno solo y crea
+    uno nuevo con: python3 herramientas/sello.py;
+  - vuelve a correr la revisión de lectura del paso 5;
+  - junta ux/fase-1 con claude/funny-turing-imtm54 y súbelo;
+  - dime la dirección pública para que lo vea.
+Si digo que no, no publiques nada.
 
-PASO 6 · Seguir con la fase 2 (docs/ux/PLAN.md §5)
-- Un módulo por entrega, cada uno en su propia rama creada desde la rama
-  publicada ya al día. Orden: calculadora → megaobras → asf-2024 →
-  municipios → panorama-2026, y después el resto.
-- Empieza con la calculadora, en la rama ux/fase-2-calculadora:
-  a. Pásala a la plantilla «herramienta» (PLAN §3): un paso visible a la vez,
-     el resultado justo después del paso y «¿Cómo se calcula?» desplegable.
-  b. Quita los emojis EN EL ARCHIVO (index.html, audit-engine.js y
-     audit-database.js) solo de ese módulo. Hoy los retira al mostrarse
-     assets/auditor/js/legibilidad.js; eso es una capa de transición.
-  c. Cambia «Reiniciar a ceros» y «Contabilizar» por textos sencillos
-     («Volver a cero», «Ver la cuenta»). Ajusta también la lógica que
-     reconoce esos textos: BOTON_UNICO_REINICIO en audit-engine.js, cerca de
-     la línea 28172.
-  d. Deja la guardia en verde con --fase 2 para esa vista:
-       python3 herramientas/guardia_legibilidad.py --fase 2 --vistas calculadora
-  e. Muéstrame cómo quedó y espera mi visto bueno antes de integrarla.
-- Si tienes gstack, antes de la fase 2 corre /plan-design-review sobre las
-  tres plantillas.
+PASO 8 · Seguir con el plan
+Dime en qué parte del plan vamos (docs/ux/PLAN.md, sección 5 «Fases») y qué
+sigue, en 3 frases. Lo que sigue es la fase 2: arreglar los temas uno por uno,
+empezando por la calculadora de impuestos. Antes de empezar, pregúntame si
+quiero seguir.
+Si digo que sí:
+  - trabaja en una copia aparte nueva (la rama ux/fase-2-calculadora), no en
+    la que se publica;
+  - sigue lo que dicen docs/ux/PLAN.md (sección 3, plantilla «herramienta») y
+    AGENTS.md;
+  - quita los emojis y los tamaños de letra fijos de ese tema directamente en
+    los archivos;
+  - cambia «Reiniciar a ceros» y «Contabilizar» por palabras más sencillas,
+    como «Volver a cero» y «Ver la cuenta». Ajusta también el código que
+    reconoce esos textos: BOTON_UNICO_REINICIO en audit-engine.js;
+  - comprueba con:
+      python3 herramientas/guardia_legibilidad.py --fase 2 --vistas calculadora
+  - enséñame cómo quedó en el navegador y espera mi respuesta antes de
+    publicar.
 
-REGLAS (de AGENTS.md y del plan)
-- Ninguna cifra inventada. Si no se puede sostener, se marca «pendiente».
-- No toques la Enciclopedia (enciclopedia.html, assets/css, assets/js ni
-  assets/img).
-- Los cambios de lectura van en assets/auditor/css/legibilidad.css, no en la
-  hoja principal.
-- Nada de emojis en títulos, botones o menús. Nada de font-size en línea.
-  Al lector se le habla de tú, con palabras sencillas.
-- Si tocas assets/, sube el sello de versión.
-- Al terminar cada paso, actualiza «Estado» en docs/ux/PLAN.md y la sección
-  «Siguiente tarea» de CONTEXT.md, y dime qué quedó pendiente.
+REGLAS QUE NUNCA SE ROMPEN
+- Nunca inventes una cifra. Si no se puede comprobar, se marca «pendiente».
+- No toques la Enciclopedia.
+- No publiques nada sin que yo diga «sí, publícalo».
+- Al terminar, actualiza docs/ux/PLAN.md y CONTEXT.md, y dime en 3 frases
+  qué hiciste y qué falta.
 ```
+
+## Si algo sale mal
+
+- **El asistente no encuentra el proyecto:** dile «estoy en la carpeta del
+  proyecto Auditavisión, búscala tú».
+- **No entiendes lo que te dice:** escríbele «explícamelo más fácil, sin
+  palabras técnicas».
+- **La página no abre:** usa la dirección `http://127.0.0.1:8000`, no
+  `localhost`.
+- **Te pide una contraseña de GitHub:** es la de la cuenta con la que subes el
+  proyecto. Si no la tienes, detente y pregúntale a quien te pasó esto.
