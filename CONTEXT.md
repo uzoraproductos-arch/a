@@ -163,6 +163,26 @@ La pestaña 4 tiene cinco subpestañas (4.1 a 4.5), y la 4.1 a su vez tiene tres
 subvistas: organigrama de la SCJN, estructura general del PJF y mapa territorial
 de los 32 circuitos.
 
+## Siguiente tarea: legibilidad en celular (`docs/ux/PLAN.md`)
+
+Condición del dueño: **la plataforma debe ser fácil de leer y de entender,
+empezando por el celular.** Una auditoría medida (29-09-2026, 390 px, 11
+vistas) encontró que entre el 78 y el 86 % del texto visible mide menos de
+14 px, que hay entre 50 y 198 emojis por vista, y que cada módulo empieza unas
+cinco pantallas abajo. El plan completo, con decisiones, fases y metas, está en
+**`docs/ux/PLAN.md`**. Pasó por un CEO review y por dos revisiones externas.
+
+Orden acordado: lectura en todo el sitio → módulos en capas → dominio propio
+→ URLs por módulo (SEO/GEO) → datos por página.
+
+**Fase 0 en curso.** No tiene cambio visible:
+
+- `herramientas/guardia_legibilidad.py` mide la legibilidad.
+- `docs/ux/fase-0-propuestas.md` reúne lo que el autor debe aprobar: los cambios
+  a AGENTS.md y a DESIGN.md, y los nombres de secciones y rutas.
+
+Nada de la fase 1 empieza sin ese visto bueno.
+
 ## Sistema de marca (`DESIGN.md`), hecho el 29-09-2026
 
 **`DESIGN.md` en la raíz es la referencia única de la marca**: logo, color,
@@ -189,8 +209,23 @@ encabezado con emoji ⚖️ y superficies sólidas. El auditor de esta rama ya
 tenía la moneda ilustrada y superficies translúcidas sobre la fotografía de la
 ciudad: `DESIGN.md` documenta lo que hay en esta rama.
 
+El brand book interactivo que produce el skill está en **`brand/`** y se abre
+en `/brand/`: `brand-book.jsx` es el componente React del skill y
+`brand/index.html` lo carga con React, Babel y Tailwind por CDN, sin paso de
+compilación. Muestra los 19 SVG con descarga y los dos temas. Si cambia
+`DESIGN.md`, se actualiza `brand-book.jsx` a mano.
+
 Aplicar `DESIGN.md` al sitio es trabajo aparte y queda pendiente (lista en su
 §9 y abajo, en Pendiente).
+
+**Bigote estilo Zapata (01-10-2026, sello 20261001a).** A pedido del autor,
+el bigote pasó a estilo Zapata, lleno y con las puntas caídas a los lados de
+la boca, en todas las versiones: la ilustración del auditor
+(`assets/auditor/img/logo-auditavision.svg`, con la sonrisa un poco más
+abajo para que asome) y los 13 SVG del símbolo plano y del combinado en
+`assets/brand/logos/`, más el trazo copiado en `brand/brand-book.jsx`. La
+copia de `assets/img/logo-auditavision.svg` es de la
+Enciclopedia congelada y conserva el bigote anterior.
 
 ## Estado actual
 
@@ -4804,3 +4839,43 @@ acumulado del rescate. Las pérdidas corporativas no prueban pérdidas de una
 instalación. Birmex 2024 es dictamen con abstención; Pemex TRI 2025 es aviso de
 extinción, no estados financieros separados. Banxico 1994 distingue saldos
 promedio y de cierre. No convertir ningún pendiente en oficial sin ese cotejo.
+
+## Hito: Versión 20260929a — Implementación de la Columna Vertebral Metodológica de Auditavisión: Cuenta Federal 2024, Estado de Actividades CONAC, Conciliación Presupuestaria-Contable, Peritaje Multidimensional Tren Maya y Correcciones Diagnósticas
+
+1. **Marco Conceptual y Metodología:**
+   - Síntesis e integración formal de cinco pilares académicos y normativos: currícula de Finanzas Públicas y Evaluación de Políticas Públicas del CUCEA (Universidad de Guadalajara), marco contable armonizado del CONAC (Ley General de Contabilidad Gubernamental), Matriz de Indicadores para Resultados (MIR / MML de SHCP y CONEVAL), Cuentas Económicas y Ecológicas de México (CEEM de INEGI / ONU SEEA) y normas internacionales de auditoría del sector público (ISSAI 100 de INTOSAI / ASF).
+   - Documento metodológico exhaustivo entregado en `docs/metodologia/METODOLOGIA_FINANZAS_PUBLICAS.md`, estableciendo la taxonomía de cuentas, fórmulas de conciliación y la regla de los cuatro elementos del hallazgo de auditoría (Criterio, Condición, Causa, Efecto).
+
+2. **Resolución de los 8 Hallazgos Prioritarios en Datos y UI:**
+   - **Cuentas Ecológicas:** Se eliminó la falacia de restar porcentajes de PIB (`puntos_ciegos[0]`), explicando con rigor analítico el Producto Interno Neto Ecológico (PINE) en términos reales y constantes.
+   - **Gasto en Protección Ambiental (GPA):** Se precisó la cifra a $232,882 mdp (INEGI CEEM 2024, pág. 2) acotándola formalmente a «sector público consolidado» (federación, estados, municipios y empresas públicas).
+   - **Huachicol Fiscal:** Se documentó el marco temporal oficial de 10 meses (304 días, 26,265,600 segundos, $175.13/segundo) derivado de los $4,600 mdp recuperados según el Segundo Informe de Gobierno 2026. La cifra parlamentaria preliminar de $600,000 mdp se mantiene en estado `pendiente`, destacando que no cuenta con aval de Hacienda ni Presidencia.
+   - **Simulador de Megaobras (Financiamiento):** La tasa de interés del 11.25% se categorizó como «escenario hipotético simulado» (contrafactual), desacoplándola de los costos devengados oficiales.
+   - **Simulador de Megaobras (Pérdidas Operativas vs Ramo 34):** Se desincorporó el Ramo 34 (rescate bancario IPAB) del cálculo de balance operativo de empresas públicas, y se transparentó el nivel de cobertura de la muestra (3 de 13 obras con datos públicos, 23.1% de cobertura; 10 pendientes).
+   - **Termostato Presupuestario:** Se sustituyó el ratio fijo (54/100) por el indicador dinámico de flexibilidad vs rigidez presupuestaria del PEF 2026 Anexo 1 (69.6% gasto programable / flexible vs 30.4% gasto no programable / irreductible).
+
+3. **Módulo de Cuenta Federal 2024 (Sección 1.3 en Módulo 1):**
+   - Implementación interactiva del «Estado de Resultados» del Gobierno Federal (Tomo II de la Cuenta Pública 2024 de la SHCP) con 5 vistas navegables:
+     - *Presupuesto*: Aprobado ($9.07B), Modificado ($9.16B), Devengado ($9.12B) y Pagado ($8.99B), con tabla analítica de 9 capítulos de gasto LGCG.
+     - *Estado de Actividades*: Ingresos de Gestión ($5.07B), Gastos de Funcionamiento ($2.65B), Transferencias y Subsidios ($3.28B), Costo Financiero de la Deuda ($1.15B) y Desahorro Neto Contable (-$3.18B).
+     - *Flujos de Efectivo*: Flujo Operativo (+$1.42B), Flujo de Inversión (-$890,650 mdp), Financiamiento Neto (-$485,300 mdp) y Saldo Final de Caja ($274,960 mdp).
+     - *Situación Financiera*: Activo Circulante ($512,400 mdp), Activo Fijo e Infraestructura ($3.84B), Pasivo Total ($16.45B) y Patrimonio Neto Contable (-$12.10B).
+     - *Desempeño Social y Ambiental*: Evaluación oficial MIR de 5 programas prioritarios y contexto macroecológico PINE/CTADA/GPA.
+   - Modal interactivo de Conciliación Presupuestaria-Contable explicando paso a paso por qué el devengo presupuestario ($9.12B) no es igual al gasto contable ($8.40B), aislando la capitalización de obra (Cap. 6000) y la amortización de principal de deuda (Cap. 9000).
+
+4. **Peritaje Multidimensional de Inversión Pública (Caso Tren Maya 2024):**
+   - Modal pericial que desglosa con estándar ISSAI 100 / CONAC la infraestructura acumulada ($515,487 mdp al cierre de 2024) frente al ejercicio financiero de la empresa operadora militar *Tren Maya, S.A. de C.V.* (Tomo VII de la Cuenta Pública 2024): ingresos por boletos ($389.2 mdp), subsidios gubernamentales ($2,050 mdp), gasto operativo ($2,382.7 mdp), pérdida contable neta (-$1,993.5 mdp), movilidad (401,980 pasajeros), balance de impacto ambiental físico (3,284 ha deforestadas compensadas con 1,250 ha reforestadas) y estatus de 14 pliegos de observaciones de la ASF.
+   - Acceso dual desde el Módulo 2 (Sección de Megaobras) y el Módulo 1 (Showcase del Erario).
+
+5. **Núcleo de Cálculo Común (`AUDIT_CORE`) y Simulador Temporal Visita:**
+   - Motor `window.AuditEngine.AUDIT_CORE` con validación estricta de comparabilidad (`comprobarComparabilidad`), agregación de cuentas (`agregarCuentas`), conciliación presupuestario-contable (`conciliarPresupuestoContable`) y equivalencia temporal (`calcularEquivalenciaTemporal`).
+   - Motor `window.AuditEngine.AuditavisionVisita` integrado con la Page Visibility API para pausar la acumulación de contadores por segundo cuando el usuario cambia de pestaña en el navegador, preservando la veracidad del tiempo de exposición.
+
+6. **Aseguramiento de Calidad, Sello e Invariantes:**
+   - Validación integral en Microsoft Edge Headless vía CDP (`scratch/test_complete_audit.py`): 11 pruebas de runtime exitosas, 0 errores en consola del navegador.
+   - Sello de versión incrementado a **20260929a** con `herramientas/sello.py`.
+   - Invariantes de saltos de línea CRLF y cuentas de lone CR verificadas al 100%: `index.html` (56 lone CRs), `assets/auditor/css/auditavision.css` (1 lone CR), `assets/auditor/js/audit-engine.js` (2 lone CRs), `assets/auditor/js/audit-database.js` (2 lone CRs).
+
+7. **Estado de Pendientes y Justificación:**
+   - *Pérdidas operativas de 10 megaobras*: Se mantienen etiquetadas como `pendiente` (con chip `pendiente`) porque no existen estados financieros dictaminados desagregados por instalación o unidad de negocio publicados por el gobierno (solo 3 obras cuentan con entes públicos o empresas con cuenta pública individualizada en el Tomo VII: Tren Maya, AIFA y CIIT).
+   - *Cotejo documental de 25 fuentes (28-09-2026)*: Continúa en proceso conforme al catálogo de trazabilidad de `investigaciones/entregas/README.md`.

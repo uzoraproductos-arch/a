@@ -11,6 +11,7 @@ Hay tres fuentes de verdad, y cada una manda sobre lo suyo:
 | Valores de color y fuentes | `assets/auditor/css/auditavision.css` (en `:root` y `[data-theme="light"]`) |
 | Reglas editoriales | `AGENTS.md` §2 y §6, y «Criterio editorial» en `CONTEXT.md` |
 | Esta guía | `DESIGN.md` |
+| Brand book interactivo | `brand/` (se abre en `/brand/`; su contenido sale de esta guía) |
 
 La Enciclopedia (`enciclopedia.html` y `assets/css`) está congelada y **no se
 migra** a esta guía.
@@ -60,7 +61,7 @@ grande y un símbolo plano para lo pequeño.
 
 `assets/auditor/img/logo-auditavision.svg` (la copia en `assets/img/` es la
 de la Enciclopedia y no se toca). Es una moneda de oro con canto acuñado,
-bombín, lupa, cejas, bigote, sello de lacre con palomita y alas de dos hileras
+bombín, lupa, cejas, bigote estilo Zapata, sello de lacre con palomita y alas de dos hileras
 de plumas. Tiene proporción 128 × 100 y usa degradados.
 
 - **Úsala** en el encabezado (hoy a 72 × 56 px), en «Quiénes somos», en
@@ -70,11 +71,14 @@ de plumas. Tiene proporción 128 × 100 y usa degradados.
 - **Fondo:** funciona sobre los dos temas. No la pongas sobre fotografía sin
   una superficie detrás.
 - No se redibuja ni se recolorea: es la cara de la marca tal como está.
+- **El bigote es estilo Zapata** (decisión del autor, 01-10-2026): lleno, con
+  las puntas caídas a los lados de la boca. Va así en la ilustración y en
+  todas las versiones del símbolo plano.
 
 ### 2.2 El símbolo plano: la moneda con rostro (nuevo)
 
 Es la misma moneda reducida a lo esencial: bombín, un ojo, el otro tras la
-lupa, bigote y cinco plumas por ala. Todo está hecho con rellenos planos. Los
+lupa, el bigote estilo Zapata y cinco plumas por ala. Todo está hecho con rellenos planos. Los
 grabados y la separación entre las alas y la moneda son recortes
 transparentes, así que el símbolo funciona a una sola tinta y sobre cualquier
 fondo.
@@ -466,4 +470,4 @@ migra.
 
 ---
 
-*Sistema de marca v1.0 · 29-09-2026*
+*Sistema de marca v1.1 · 01-10-2026 (bigote estilo Zapata)*
