@@ -218,14 +218,11 @@ compilación. Muestra los 19 SVG con descarga y los dos temas. Si cambia
 Aplicar `DESIGN.md` al sitio es trabajo aparte y queda pendiente (lista en su
 §9 y abajo, en Pendiente).
 
-**Bigote estilo Zapata (01-10-2026, sello 20261001a).** A pedido del autor,
-el bigote pasó a estilo Zapata, lleno y con las puntas caídas a los lados de
-la boca, en todas las versiones: la ilustración del auditor
-(`assets/auditor/img/logo-auditavision.svg`, con la sonrisa un poco más
-abajo para que asome) y los 13 SVG del símbolo plano y del combinado en
-`assets/brand/logos/`, más el trazo copiado en `brand/brand-book.jsx`. La
-copia de `assets/img/logo-auditavision.svg` es de la
-Enciclopedia congelada y conserva el bigote anterior.
+**Bigote estilo Zapata, retirado (07-10-2026, sello 20261007a).** El 01-10
+se cambió el bigote del logo a estilo Zapata; el autor lo rechazó («ese no
+es el logo») y se revirtió completo: ilustración, los 13 SVG de
+`assets/brand/logos/`, `brand/brand-book.jsx` y `DESIGN.md` (vuelve a v1.0).
+El logo es el de antes. No se vuelve a tocar el bigote sin que el autor lo pida.
 
 ## Estado actual
 

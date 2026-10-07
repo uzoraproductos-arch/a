@@ -89,7 +89,7 @@ const ILLUSTRATION = "../assets/auditor/img/logo-auditavision.svg";
 // Trazos tomados tal cual de assets/brand/logos/ (no redibujar)
 const PATHS = {
   FACE_CUTS:
-    "M24.9 34.5A2.1 2.1 0 1 0 29.1 34.5A2.1 2.1 0 1 0 24.9 34.5ZM35 34.5A2 2 0 1 0 39 34.5A2 2 0 1 0 35 34.5ZM39.66 39.1L43.66 43.3A1.3 1.3 0 0 0 45.54 41.5L41.54 37.3A1.3 1.3 0 0 0 39.66 39.1ZM32 38.75C34.04 37.56 36.76 37.73 38.12 39.18C39.23 40.45 39.39 42.92 38.97 45.21C38.72 46.4 37.1 46.48 36.93 45.21C36.76 43.51 35.83 42.15 34.38 41.73C33.36 41.47 32.51 41.73 32 42.15C31.49 41.73 30.64 41.47 29.62 41.73C28.18 42.15 27.24 43.51 27.07 45.21C26.9 46.48 25.29 46.4 25.03 45.21C24.61 42.92 24.77 40.45 25.88 39.18C27.24 37.73 29.96 37.56 32 38.75Z",
+    "M24.9 34.5A2.1 2.1 0 1 0 29.1 34.5A2.1 2.1 0 1 0 24.9 34.5ZM35 34.5A2 2 0 1 0 39 34.5A2 2 0 1 0 35 34.5ZM39.66 39.1L43.66 43.3A1.3 1.3 0 0 0 45.54 41.5L41.54 37.3A1.3 1.3 0 0 0 39.66 39.1ZM24 42.5C27 39 30 39.6 32 41C34 39.6 37 39 40 42.5C36 41.6 33.5 43 32 42.4C30.5 43 28 41.6 24 42.5Z",
   LENS_RING:
     "M31.8 34.5A5.2 5.2 0 1 0 42.2 34.5A5.2 5.2 0 1 0 31.8 34.5ZM33.6 34.5A3.4 3.4 0 1 0 40.4 34.5A3.4 3.4 0 1 0 33.6 34.5Z",
   WING_GAP:
@@ -359,7 +359,7 @@ const TabLogo = ({ t }) => (
           ))}
           <p className="text-sm flex-1 min-w-[220px]" style={{ color: t.textSecondary, fontFamily: fonts.sans }}>
             Favicon: cuadro <code style={{ fontFamily: fonts.mono }}>#0c0e15</code> con radio 12. A 16 px el rostro se reduce
-            a dos puntos y el bigote estilo Zapata, pero la silueta alada se sigue leyendo.{" "}
+            a dos puntos y el bigote, pero la silueta alada se sigue leyendo.{" "}
             <a href={`${LOGO_DIR}/symbol/auditavision-favicon.svg`} download style={{ color: t.gold, fontFamily: fonts.mono }}>SVG ↓</a>
           </p>
         </Card>
