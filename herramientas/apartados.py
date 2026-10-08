@@ -109,32 +109,85 @@ APARTADOS = [
         'menu': 'Sigue el dinero',
         'icono': '💰',
         'titulo': 'Sigue el dinero',
-        'lema': 'Del presupuesto federal a tu municipio',
-        'entrada': ('El dinero público baja por tres pisos: la Federación, los 32 estados y los municipios. '
-                    'Empieza por el presupuesto federal o ve directo a tu entidad.'),
+        'lema': 'Seis capítulos, del impuesto a la deuda',
+        'entrada': ('El dinero público tiene un recorrido: se recauda, se aprueba, se gasta, baja a estados y municipios, '
+                    'se pide prestado y, al final, te toca una parte. Aquí lo sigues capítulo por capítulo.'),
+        'libro': ('Este apartado sigue el orden de <cite>Introducción al Derecho Económico</cite>, de Moisés Gómez Granillo y '
+                  'Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7. Cada capítulo trae una '
+                  'franja <b>«Ayer y hoy»</b>: lo que explicaba el libro y cómo está hoy, con el documento oficial que lo sostiene. '
+                  'Las cifras no se copian del libro: se toman de su fuente oficial vigente.'),
+        'scripts': ['deuda-tiempo.js'],
         'secciones': [
             {
-                'id': 'federal',
-                'titulo': '📊 Presupuesto federal',
-                'texto': 'Cuánto se aprobó, en qué se gasta y qué viene para 2027.',
+                'id': 'origen',
+                'num': 1,
+                'titulo': 'De dónde sale el dinero',
+                'texto': 'Impuestos, ingresos petroleros y deuda: todo lo que autoriza la Ley de Ingresos, y su recorrido completo hasta el gasto.',
+                'ayer': ('El capítulo 7 abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda.',
+                         'Cada año la <b>Ley de Ingresos de la Federación</b> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.'),
                 'tarjetas': [
-                    ('💰', 'Explorador del PEF 2026', 'Desglose de los $10.19 billones aprobados en el Circuito del Dinero.', ir('presupuesto'),
+                    ('💰', 'El Circuito del Dinero 2026', 'Del ingreso al gasto: los $10.19 billones aprobados, de dónde vienen y en qué se van.', ir('presupuesto'),
                      'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
+                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos.', ir('proyeccion2027'), None, 'dinero'),
+                ],
+            },
+            {
+                'id': 'decide',
+                'num': 2,
+                'titulo': 'Quién lo decide',
+                'texto': 'El Congreso autoriza los ingresos y la deuda; la Cámara de Diputados aprueba el gasto. Y los Poderes también cuestan.',
+                'ayer': ('El capítulo 5 explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77).',
+                         'Las facultades siguen en los artículos 73 y 74 de la Constitución: la fracción IV del 74 da a los diputados la aprobación anual del Presupuesto de Egresos. El Distrito Federal es hoy la <b>Ciudad de México</b>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016.'),
+                'tarjetas': [
+                    ('⚖️', 'Lo que Cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', ir('poderes'), None, 'dinero'),
+                ],
+            },
+            {
+                'id': 'gasta',
+                'num': 3,
+                'titulo': 'Quién lo gasta y en qué',
+                'texto': 'Cuánto recibe cada Secretaría, qué obras se pagan y qué le cuesta al ambiente.',
+                'ayer': ('«Presupuesto y gasto público» (p. 97) reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y la sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
+                         'Esa ley fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
+                'tarjetas': [
                     ('🏢', 'Ramos y Dependencias del PEF 2026', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', ir('egresos'), None, 'dinero'),
                     ('🏗️', 'Inversión Pública &amp; Megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Fuentes por obra en verificación.', ir('megaobras'), None, 'obras'),
-                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos, y la Constitución económica que lo sustenta.', ir('proyeccion2027'), None, 'dinero'),
                     ('🌎', 'Costo Ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.', ir('ambiente'), None, 'ambiente'),
                 ],
             },
             {
-                'id': 'territorio',
-                'titulo': '🗺️ Entidades y municipios',
-                'texto': 'Lo que llega a cada estado y a cada municipio, y lo que cuesta cada Poder.',
+                'id': 'baja',
+                'num': 4,
+                'titulo': 'A dónde baja',
+                'texto': 'El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno recauda.',
+                'ayer': ('El Cuadro 1 del capítulo 7 ya separaba, dentro del Presupuesto de 1994, lo que la Federación destinaba a estados y municipios.',
+                         'Hoy viaja por dos vías: las <b>participaciones</b> (Ramo 28), de libre uso, y las <b>aportaciones</b> (Ramo 33), etiquetadas por la Ley de Coordinación Fiscal para salud, educación, infraestructura y seguridad.'),
                 'tarjetas': [
                     ('🗺️', 'Las 32 Entidades: del Peso Federal al Estatal', 'Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.', ir('territorio'), None, 'dinero'),
                     ('🏘️', 'Los 2,479 Municipios: Predial y Transferencias', 'Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.', ir('municipios'), None, 'dinero'),
-                    ('🧮', 'Calculadora Cívica de Tu Sueldo', 'A qué rubros y fondos se van los impuestos de tu nómina.', ir('calculadora'), None, 'calculadora'),
-                    ('⚖️', 'Lo que Cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', ir('poderes'), None, 'dinero'),
+                ],
+            },
+            {
+                'id': 'deuda',
+                'num': 5,
+                'titulo': 'Cuánto debemos',
+                'texto': 'La deuda pública de 1994 a la proyección de 2027, sexenio por sexenio. Pulsa «Contabilizar» y mírala crecer.',
+                'ayer': ('La sección 4 del capítulo 7 (p. 104) explica la Ley General de Deuda Pública y su Gráfica 1 sigue la deuda externa de 1988 a 1994, en dólares.',
+                         'La misma ley se llama hoy <b>Ley Federal de Deuda Pública</b> (decreto del DOF del 27 de abril de 2016). Y la deuda se mide con un indicador más amplio, el saldo histórico de los requerimientos financieros del sector público (SHRFSP), que Hacienda publica desde 2000.'),
+                'bloque': ('<div class="dt" id="deudaTiempo">\n'
+                           '          <noscript><p>La línea de tiempo necesita JavaScript. La serie, con sus fuentes, está en el auditor.</p></noscript>\n'
+                           '        </div>'),
+                'tarjetas': [
+                    ('⏱️', 'El Reloj de la Deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo.', ir('calculadora', 'eb-ccreloj'), None, 'inspector'),
+                ],
+            },
+            {
+                'id': 'ati',
+                'num': 6,
+                'titulo': 'Y a ti, ¿cuánto te toca?',
+                'texto': 'Escribe tu sueldo y mira a qué rubros, fondos y pago de deuda se van tus impuestos.',
+                'tarjetas': [
+                    ('🧮', 'Calculadora Cívica de Tu Sueldo', 'A qué rubros y fondos se van los impuestos de tu nómina, con tu ticket cívico.', ir('calculadora'), None, 'calculadora'),
                 ],
             },
         ],
@@ -321,18 +374,31 @@ def tarjeta(t):
 def pagina(a, sello):
     secciones = []
     for s in a['secciones']:
+        num = ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else ''
+        titulo = ('Capítulo %d. ' % s['num'] if s.get('num') else '')
+        ayer = ''
+        if s.get('ayer'):
+            ayer = '''
+        <div class="apartado-ayer">
+          <div><span class="apartado-ayer-tit">📘 En el libro (1995)</span>%s</div>
+          <div><span class="apartado-ayer-tit">📍 Hoy (2026)</span>%s</div>
+        </div>''' % s['ayer']
+        bloque = ('\n        <div class="apartado-bloque">\n        %s\n        </div>' % s['bloque']) if s.get('bloque') else ''
         secciones.append('''      <section class="apartado-seccion" id="%s" aria-labelledby="%s-tit">
         <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="%s-tit">%s</h2>
+          <h2 class="apartado-seccion-titulo" id="%s-tit">%s<span class="sr-only">%s</span>%s</h2>
           <p class="apartado-seccion-texto">%s</p>
-        </div>
+        </div>%s%s
         <div class="apartado-rejilla">
 %s
         </div>
-      </section>''' % (s['id'], s['id'], s['id'], s['titulo'], s['texto'], '\n'.join(tarjeta(t) for t in s['tarjetas'])))
+      </section>''' % (s['id'], s['id'], s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
+                       '\n'.join(tarjeta(t) for t in s['tarjetas'])))
 
     if len(a['secciones']) > 1:
-        saltos = '\n'.join('          <a href="#%s">%s</a>' % (s['id'], s['titulo']) for s in a['secciones'])
+        saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
+            s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '', s['titulo'])
+            for s in a['secciones'])
         en_pagina = '''      <nav class="apartado-saltos" aria-label="En esta página">
           <span class="apartado-saltos-tit">En esta página:</span>
 %s
@@ -343,6 +409,10 @@ def pagina(a, sello):
     nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
             if a.get('nota') else '')
     guia = GUIA if a.get('guia') else ''
+    if a.get('libro'):
+        guia = (guia + '\n      ' if guia else '') + ('<aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span>'
+                                                       '<p>%s</p></aside>' % a['libro'])
+    scripts = ''.join('\n  <script src="assets/auditor/js/%s?v=%s"></script>' % (js, sello) for js in a.get('scripts', []))
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
 
@@ -392,12 +462,12 @@ def pagina(a, sello):
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v={sello}"></script>
+  <script src="assets/auditor/js/apartados.js?v={sello}"></script>{scripts}
 </body>
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            cabecera=cabecera(a['archivo'], sello), menu=a['menu'], icono=a['icono'], lema=a['lema'],
-           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia,
+           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, scripts=scripts,
            secciones='\n\n'.join(secciones))
 
 

@@ -409,6 +409,54 @@ parpadee) y vuelve a crecer al regresar arriba; lo hacen el motor y
 salto (`altoCabeceraCompacta`): si cambiaba de alto a medio camino, el
 desplazamiento suave se interrumpía.
 
+**«Sigue el dinero» en seis capítulos y la deuda en el tiempo (08-10-2026,
+sello 20261008o).** La página sigue ahora el orden de *Introducción al
+Derecho Económico* (Gómez Granillo y Gutiérrez Rosas, Esfinge, 1995),
+capítulos 5 y 7, puesto al día: 1 De dónde sale, 2 Quién lo decide, 3 Quién
+lo gasta y en qué, 4 A dónde baja, 5 Cuánto debemos, 6 Y a ti. Cada capítulo
+trae una franja «Ayer y hoy» (lo que explicaba el libro, con su página, y lo
+vigente, con su documento). No se copian cifras ni pasajes del libro.
+`apartados.py` acepta ahora en cada sección `num`, `ayer`, `bloque` (HTML
+propio) y, en el apartado, `libro` y `scripts`.
+
+El capítulo 5 es un módulo nuevo, `assets/auditor/js/deuda-tiempo.js`
+(autónomo, no usa el motor): línea de tiempo del SHRFSP como % del PIB o en
+billones de pesos corrientes, de 1994 a la proyección de 2027, con franjas
+por sexenio (convención de seis años calendario de la evaluación sexenal),
+«Contabilizar / Reiniciar a ceros», barra de años, ficha por sexenio
+(recibió, entregó, cambio `derivado`, máximo, hitos) y la tabla completa.
+Regla de la serie: cada año viene de la publicación oficial más reciente
+encontrada, y la cifra anterior queda visible cuando una revisión del PIB la
+cambió. Fuentes, todas descargadas y leídas el 08-10-2026:
+- 2000-2011: ASF, Informe del Resultado CP 2012, Tomo Ejecutivo, p. 67.
+- 2012-2015: ASF, IGE CP 2018, p. 258 del PDF (2012 era 36.8 en la CP 2012).
+- 2016-2019 (% y pesos hasta 2022): ASF, IGE CP 2022, pp. 149-150.
+- 2020-2025 en %: Criterios 2027, cuadro con el PIB revisado (p. 53 del
+  PDF): 50.2, 49.1, 47.6, 46.6, 51.9, 52.6. Antes se publicaron 51.6, 50.8,
+  49.4 (ASF), 46.8 (SHCP Com. 5/2024) y 51.4 (SHCP Com. 4/2025).
+- 2026 estimado 54.0 % y 2027 proyectado 55.0 %, con sus saldos en pesos:
+  Criterios 2027, pp. 18 y 68 del PDF.
+- 1994: 36.9 % de deuda neta económica amplia (Banxico), otro indicador,
+  dibujado aparte. 1995-1999 queda `pendiente`: no hay serie comparable.
+
+**Lo de 52.3 contra 54.0 en 2026 no era contradicción:** 52.3 % es lo que se
+aprobó y 54.0 % es el cierre estimado. Los propios Criterios (p. 18 del PDF)
+explican que, con el PIB revisado por el INEGI, el 52.3 aprobado equivale a
+54.5 %.
+
+Gráfica 1 del libro (deuda externa del sector público 1988-1994, en dólares):
+Banxico, Informe Anual 1994, Anexo 6, p. 165, confirma 78,747 millones en
+1993 y da 85,436 millones en 1994 (el libro anota 85.1). De 1988 a 1992 son
+cifras del libro y van como `pendiente`. Las cifras del Porfiriato tampoco
+tienen fuente primaria en el auditor: se mencionan sin números y se enlaza a
+la Enciclopedia (`enciclopedia.html#tab-panel-politicos`, que no se tocó).
+
+Pendiente de este bloque: la evaluación sexenal sigue usando las cifras de
+su momento (36.8 en 2012, 51.4 en 2024), mientras la línea de tiempo usa las
+revisadas (37.2 y 51.9). Hay que decidir un solo criterio. También faltan el
+saldo en pesos de 2025, la serie 1995-1999 y verificar en Banxico la deuda
+externa de 1988 a 1992.
+
 ## Estado actual
 
 ### Hecho

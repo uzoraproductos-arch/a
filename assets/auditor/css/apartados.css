@@ -187,3 +187,149 @@ body[data-pagina="apartado"] a.nav-movil-ayuda-btn { display: block; text-align:
   .apartado-entrada { font-size: 16px; }
   .apartado-rejilla { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   CAPÍTULOS DE «SIGUE EL DINERO» Y LA DEUDA A TRAVÉS DEL TIEMPO (08-10-2026)
+   La página sigue el orden de «Introducción al Derecho Económico»
+   (Gómez Granillo y Gutiérrez Rosas, Esfinge, 1995), puesto al día.
+   ========================================================================== */
+.apartado-libro {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: #ffffff; border: 1px solid var(--civ-gris-borde); border-left: 5px solid var(--civ-azul-medio);
+  border-radius: 10px; padding: 14px 18px; margin: 0 0 26px; font-size: 15px; line-height: 1.55; color: #2a3a57;
+}
+.apartado-libro-ico { font-size: 26px; line-height: 1; }
+.apartado-libro p { margin: 0; }
+.apartado-cap-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 34px; height: 34px; padding: 0 8px; margin-right: 10px; border-radius: 9px;
+  background: var(--civ-azul); color: #ffffff; font-family: var(--font-mono, monospace); font-size: 15px; vertical-align: 3px;
+}
+.apartado-saltos a .apartado-cap-num { min-width: 22px; height: 22px; font-size: 12px; margin-right: 6px; border-radius: 6px; vertical-align: 0; }
+.apartado-ayer {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 0 0 16px;
+  border: 1px solid var(--civ-gris-borde); border-radius: 10px; overflow: hidden; background: #ffffff;
+}
+.apartado-ayer > div { padding: 12px 16px; font-size: 14.5px; line-height: 1.55; color: #2a3a57; }
+.apartado-ayer > div + div { border-left: 1px solid var(--civ-gris-borde); background: var(--civ-azul-claro); }
+.apartado-ayer-tit { display: block; font-family: var(--font-mono, monospace); font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--civ-azul-medio); margin-bottom: 4px; }
+@media (max-width: 720px) {
+  .apartado-ayer { grid-template-columns: 1fr; }
+  .apartado-ayer > div + div { border-left: 0; border-top: 1px solid var(--civ-gris-borde); }
+}
+.apartado-bloque { margin: 0 0 18px; }
+
+/* ---------- La deuda a través del tiempo ---------- */
+.dt { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-radius: 14px; padding: 18px; box-shadow: 0 6px 22px rgba(11, 42, 99, 0.06); }
+.dt-mandos { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 14px; }
+.dt-btn {
+  font: inherit; font-weight: 700; font-size: 15px; cursor: pointer;
+  background: var(--rubro-dinero); color: #ffffff; border: 0; border-radius: 999px; padding: 10px 20px;
+}
+.dt-btn:hover { filter: brightness(1.1); }
+.dt-modo { display: inline-flex; border: 1px solid var(--civ-gris-borde); border-radius: 999px; overflow: hidden; }
+.dt-modo-btn { font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; background: #ffffff; color: var(--civ-azul); border: 0; padding: 9px 14px; }
+.dt-modo-btn[aria-pressed="true"] { background: var(--civ-azul); color: #ffffff; }
+.dt-estado { flex: 1 1 260px; margin: 0; font-size: 14.5px; color: #44526b; }
+.dt-tablero { display: grid; grid-template-columns: 250px 1fr; gap: 16px; align-items: stretch; }
+.dt-contador {
+  display: flex; flex-direction: column; gap: 8px; justify-content: center;
+  background: var(--civ-azul); color: #ffffff; border-radius: 12px; padding: 18px;
+}
+.dt-c-anio { font-family: var(--font-mono, monospace); font-size: 44px; font-weight: 800; line-height: 1; }
+.dt-c-sx { align-self: flex-start; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--sx); color: #ffffff; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5); }
+.dt-c-val { font-family: var(--font-mono, monospace); font-size: 30px; font-weight: 800; line-height: 1.1; }
+.dt-c-val small { font-size: 14px; font-weight: 600; opacity: 0.85; }
+.dt-c-pie { font-size: 13px; line-height: 1.5; color: #dfe9f8; }
+.dt-c-pie a { color: #ffffff; }
+.dt-c-tipo { text-transform: uppercase; font-size: 11px; letter-spacing: 0.05em; background: rgba(255, 255, 255, 0.18); padding: 2px 6px; border-radius: 4px; }
+.dt-grafica-w { min-width: 0; }
+.dt-svg { display: block; width: 100%; height: auto; font-family: var(--font-sans, Inter, sans-serif); }
+.dt-franja { cursor: pointer; }
+.dt-franja:hover rect:first-child, .dt-franja:focus rect:first-child { fill-opacity: 0.2; }
+.dt-franja-n { fill: #ffffff; font-size: 13px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+.dt-rejilla { stroke: #dbe5f2; stroke-width: 1; }
+.dt-eje-y { fill: #5a6a85; font-size: 13px; text-anchor: end; }
+.dt-eje-x { fill: #5a6a85; font-size: 12.5px; text-anchor: middle; }
+.dt-eje-x.fuerte { font-weight: 700; fill: #1c2a44; }
+.dt-eje-tit { fill: #5a6a85; font-size: 12.5px; font-style: italic; }
+.dt-hueco { fill: #7a8aa8; font-size: 12px; text-anchor: middle; font-style: italic; }
+.dt-area { fill: var(--rubro-inspector); fill-opacity: 0.08; }
+.dt-linea { fill: none; stroke: var(--rubro-inspector); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.dt-futuro { stroke-dasharray: 7 6; stroke-width: 2.5; }
+.dt-puente { stroke: #7a8aa8; stroke-width: 2; stroke-dasharray: 3 5; }
+.dt-punto { cursor: pointer; }
+.dt-punto circle { fill: #ffffff; stroke: var(--rubro-inspector); stroke-width: 2.5; }
+.dt-punto.actual circle { fill: var(--rubro-inspector); }
+.dt-p-fut circle { stroke-dasharray: 3 2; }
+.dt-p-rev circle { stroke: #8a1c15; }
+.dt-pend circle { fill: #ffffff; stroke: #9aa8bf; stroke-dasharray: 2 2; }
+.dt-94 rect { fill: #ffffff; stroke: #5a6a85; stroke-width: 2.5; }
+.dt-94.actual rect { fill: #5a6a85; }
+.dt-punto:focus { outline: none; }
+.dt-punto:focus circle, .dt-punto:focus rect { stroke-width: 4; }
+.dt-hito line { stroke: #1c2a44; stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.55; }
+.dt-hito text { fill: #1c2a44; font-size: 12px; font-weight: 600; }
+.dt-cursor { stroke: var(--civ-azul); stroke-width: 1.5; opacity: 0.4; }
+.dt-rango-w { display: flex; align-items: center; gap: 12px; margin-top: 6px; font-size: 13.5px; color: #44526b; font-weight: 600; }
+.dt-rango { flex: 1; accent-color: var(--rubro-inspector); }
+.dt-sx { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.dt-sx-btn {
+  font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+  background: #ffffff; color: #1c2a44; border: 2px solid var(--sx); border-radius: 999px; padding: 6px 12px;
+}
+.dt-sx-btn small { font-weight: 500; color: #5a6a85; }
+.dt-sx-btn[aria-pressed="true"] { background: var(--sx); color: #ffffff; }
+.dt-sx-btn[aria-pressed="true"] small { color: #ffffff; }
+.dt-ficha { margin-top: 14px; border: 1px solid var(--civ-gris-borde); border-top: 5px solid var(--sx); border-radius: 12px; overflow: hidden; }
+.dt-ficha-cab { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px; background: color-mix(in srgb, var(--sx) 10%, #ffffff); }
+.dt-ficha-cab strong { font-size: 18px; color: #1c2a44; }
+.dt-ficha-cab span { color: #44526b; font-size: 14px; }
+.dt-ficha-x { margin-left: auto; font: inherit; background: none; border: 0; cursor: pointer; font-size: 16px; color: #44526b; }
+.dt-ficha-cuerpo { padding: 12px 16px 6px; font-size: 14.5px; line-height: 1.6; color: #2a3a57; }
+.dt-ficha-cuerpo p { margin: 0 0 10px; }
+.dt-ficha-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 10px; }
+.dt-ficha-cifras span { display: flex; flex-direction: column; gap: 2px; background: var(--civ-gris); border-radius: 8px; padding: 10px 12px; }
+.dt-ficha-cifras small { font-size: 12px; color: #5a6a85; }
+.dt-ficha-cifras b { font-family: var(--font-mono, monospace); font-size: 22px; color: #1c2a44; }
+.dt-ficha-cifras em { font-style: normal; font-size: 12px; color: #5a6a85; }
+.dt-ficha-cifras .dt-dif b { color: var(--rubro-inspector); }
+.dt-ficha-cifras .est-chip { align-self: flex-start; }
+.dt-ficha-op, .dt-ficha-rev { font-size: 13.5px; color: #44526b; }
+.dt-detalle { margin-top: 16px; }
+.dt-detalle summary { cursor: pointer; font-weight: 700; color: var(--civ-azul-medio); font-size: 15px; }
+.dt-tabla-w { overflow-x: auto; margin-top: 10px; }
+.dt-tabla { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.dt-tabla caption { text-align: left; font-weight: 700; color: #1c2a44; padding: 6px 0; }
+.dt-tabla th, .dt-tabla td { border-bottom: 1px solid #e3ebf6; padding: 7px 8px; text-align: left; vertical-align: top; }
+.dt-tabla th { background: var(--civ-gris); color: #1c2a44; }
+.dt-tabla td:nth-child(2), .dt-tabla td:nth-child(3) { font-family: var(--font-mono, monospace); white-space: nowrap; }
+.dt-nota { font-size: 13.5px; color: #5a6a85; line-height: 1.55; }
+.dt-antes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 20px; }
+.dt-antes-t { background: var(--civ-gris); border: 1px solid var(--civ-gris-borde); border-radius: 12px; padding: 14px 16px; font-size: 14.5px; line-height: 1.55; color: #2a3a57; }
+.dt-antes-t h4 { margin: 0 0 8px; font-size: 16.5px; color: var(--civ-azul); }
+.dt-antes-t p { margin: 0 0 10px; }
+.dt-antes-link { font-weight: 700; color: var(--civ-azul-medio); }
+.dt-reglas { margin: 0 0 10px; padding-left: 18px; }
+.dt-reglas li { margin-bottom: 8px; }
+.dt-libro-graf { display: flex; align-items: flex-end; gap: 6px; height: 170px; padding: 6px 2px 0; }
+.dt-lb { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.dt-lb-barra { width: 100%; max-width: 34px; border-radius: 4px 4px 0 0; background: repeating-linear-gradient(135deg, #b9c8de 0 5px, #d7e1ef 5px 10px); }
+.dt-lb.ok .dt-lb-barra { background: var(--rubro-dinero); }
+.dt-lb-v { font-family: var(--font-mono, monospace); font-size: 11.5px; font-weight: 700; color: #1c2a44; margin-bottom: 3px; }
+.dt-lb-a { font-size: 11.5px; color: #5a6a85; margin-top: 4px; }
+.dt-leyenda { margin: 10px 0 8px; font-size: 13px; color: #44526b; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.dt-lb-muestra { display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: repeating-linear-gradient(135deg, #b9c8de 0 4px, #d7e1ef 4px 8px); }
+.dt-lb-muestra.ok { background: var(--rubro-dinero); }
+@media (max-width: 900px) {
+  .dt-tablero { grid-template-columns: 1fr; }
+  .dt-contador { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 14px; }
+  .dt-c-anio { font-size: 34px; }
+  .dt-c-val { font-size: 24px; }
+  .dt-c-pie { flex-basis: 100%; }
+}
+.dt-svg-w { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 560px) {
+  .dt { padding: 12px; }
+  .dt-svg { min-width: 720px; }
+}
