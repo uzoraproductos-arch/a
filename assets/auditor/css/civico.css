@@ -61,7 +61,6 @@ body { background-color: #0f1218; }
 /* Barra superior azul, como USAspending */
 [data-theme="light"] .site-top-nav {
   background: var(--civ-azul);
-  border-bottom: 4px solid var(--civ-azul-medio);
   box-shadow: 0 2px 8px rgba(15, 61, 117, 0.18);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -122,44 +121,21 @@ body { background-color: #0f1218; }
 /* Radar: franja gris de datos, sin brillo */
 [data-theme="light"] .radar-hacendario-hub {
   background: var(--civ-gris);
-  border-bottom: 1px solid var(--civ-gris-borde);
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
-/* --- Portada: el lema arriba de los rubros ------------------------------- */
-.portada-civica {
-  text-align: left;
-  max-width: 820px;
-  margin: 0 0 28px;
-}
-.portada-lema {
-  font-family: var(--font-serif);
-  font-size: clamp(32px, 5vw, 52px);
-  line-height: 1.08;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 0 0 12px;
-  letter-spacing: -0.5px;
-}
-.portada-lema em { color: var(--gold-bright); font-style: italic; }
-.portada-intro {
-  font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-/* El panorama: caja sobria, título a la izquierda */
-.explorer-hero-section { margin-top: 0; }
+/* --- Rectángulo 3: el panorama -------------------------------------------
+   Un solo título (el lema va como etiqueta encima), la frase sencilla, la
+   guía «Cómo se usa» y los cinco rubros. */
+.explorer-hero-section { margin-top: 0; margin-bottom: 0; }
 .explorer-hero-box {
   text-align: left;
   background: transparent;
   border: 0;
   box-shadow: none;
-  padding: 36px 8px 28px;
+  padding: 8px 0 0;
   border-radius: 0;
 }
 [data-theme="light"] .explorer-hero-box {
@@ -167,11 +143,24 @@ body { background-color: #0f1218; }
   border: 0;
   box-shadow: none;
 }
-.explorer-hero-title {
-  font-size: clamp(22px, 3vw, 28px);
-  margin-top: 6px;
+.explorer-hero-tag {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-transform: none;
 }
-.explorer-hero-desc { margin-left: 0; }
+.explorer-hero-title {
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.12;
+  margin: 12px 0 10px;
+}
+.explorer-hero-desc {
+  margin: 0;
+  max-width: 860px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.explorer-hero-desc b { color: var(--text-main); }
 
 /* Tarjetas de rubro al estilo Serenata: franja de color arriba */
 .explorer-cards-grid { gap: 18px; }
@@ -223,71 +212,51 @@ body { background-color: #0f1218; }
 /* En oscuro, el color del rubro también marca el botón y el título */
 :root:not([data-theme="light"]) .explorer-card-title { color: color-mix(in srgb, var(--rubro) 55%, #ffffff); }
 
-/* Cifra y guía de lectura, en una franja gris de dos columnas */
-.portada-franja {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
-  gap: 18px;
-  margin-top: 28px;
-  text-align: left;
-}
-@media (max-width: 860px) {
-  .portada-franja { grid-template-columns: minmax(0, 1fr); }
-}
-.portada-cifra,
+/* Cómo se usa: tres pasos en fila, sin cifras */
 .portada-guia {
+  margin: 24px 0 4px;
+  padding: 18px 20px;
   background: var(--bg-card-alt);
   border: 1px solid var(--border-subtle);
-  border-left: 6px solid var(--rubro-inspector);
+  border-left: 6px solid var(--rubro-dinero);
   border-radius: 6px;
-  padding: 20px 22px;
 }
-.portada-guia { border-left-color: var(--rubro-dinero); }
-[data-theme="light"] .portada-cifra,
-[data-theme="light"] .portada-guia { background: var(--civ-gris); border-color: var(--civ-gris-borde); border-left-color: var(--rubro-inspector); }
-[data-theme="light"] .portada-guia { border-left-color: var(--rubro-dinero); }
-.portada-cifra { display: flex; flex-direction: column; gap: 8px; }
-.portada-cifra-num {
-  font-family: var(--font-mono);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--text-main);
-  letter-spacing: -0.5px;
-}
-.portada-cifra-que { font-family: var(--font-body); font-size: 16px; line-height: 1.55; color: var(--text-main); }
-.portada-cifra-fuente { font-family: var(--font-sans); font-size: 13px; color: var(--text-secondary); }
-.portada-accion {
-  align-self: flex-start;
-  margin-top: 6px;
-  min-height: 44px;
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: 1px solid var(--gold);
-  background: transparent;
-  color: var(--gold-bright);
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.portada-accion:hover { background: var(--gold-glow); }
+[data-theme="light"] .portada-guia { background: var(--civ-gris); border-color: var(--civ-gris-borde); border-left-color: var(--rubro-dinero); }
 .portada-guia-titulo {
   font-family: var(--font-serif);
-  font-size: 22px;
-  margin: 0 0 10px;
+  font-size: 20px;
+  margin: 0 0 12px;
   color: var(--text-main);
 }
 .portada-pasos {
-  margin: 0 0 12px 20px;
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
   font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.55;
   color: var(--text-main);
 }
-.portada-pasos li { margin-bottom: 4px; }
-.portada-etiquetas { margin: 0 0 10px; display: grid; gap: 6px; }
-.portada-etiquetas > div { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; }
-.portada-etiquetas dd { margin: 0; font-family: var(--font-sans); font-size: 14.5px; color: var(--text-main); }
+@media (max-width: 860px) { .portada-pasos { grid-template-columns: minmax(0, 1fr); } }
+.portada-pasos li { display: flex; gap: 10px; align-items: flex-start; }
+.portada-paso-num {
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  background: var(--rubro-dinero);
+}
+.portada-pasos li:nth-child(2) .portada-paso-num { background: var(--rubro-obras); }
+.portada-pasos li:nth-child(3) .portada-paso-num { background: var(--rubro-calculadora); }
+.portada-pasos .est-chip { white-space: nowrap; }
 .portada-guia-nota { font-family: var(--font-sans); font-size: 13.5px; color: var(--text-secondary); margin: 0; }
 
 /* --- Carrusel e informe: superficies sólidas en claro --------------------- */
@@ -318,3 +287,71 @@ body { background-color: #0f1218; }
   border-color: var(--civ-azul);
   color: #ffffff;
 }
+
+/* ==========================================================================
+   LOS SEIS RECTÁNGULOS DE LA PORTADA (08-10-2026)
+   1 cabecera · 2 radar · 3 panorama · 4 auditoría en imágenes · 5 pie ·
+   6 renglón final. Cada uno es una franja de ancho completo con su fondo y
+   una raya de color arriba, como los bloques de Operação Serenata de Amor.
+   ========================================================================== */
+:root {
+  --rect-raya: 6px;
+  --rect-ancho: 1440px;
+}
+
+/* 1. Cabecera */
+.site-top-nav { border-bottom: var(--rect-raya) solid var(--rubro-dinero); }
+
+/* 2. Radar: datos de referencia y cifras en perspectiva */
+.radar-hacendario-hub,
+[data-theme="light"] .radar-hacendario-hub {
+  border-bottom: var(--rect-raya) solid var(--rubro-inspector);
+}
+/* La cinta de datos traía colores claros pensados para el fondo oscuro */
+[data-theme="light"] .tel-item { color: var(--text-secondary); }
+[data-theme="light"] .tel-item strong.gold { color: var(--civ-azul); }
+[data-theme="light"] .tel-item .red { color: #b3261e; }
+[data-theme="light"] .tel-item .green { color: #1d6f4a; }
+
+/* 3. Panorama */
+.explorer-hero-section {
+  max-width: none;
+  padding: 36px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px)) 40px;
+  border-bottom: var(--rect-raya) solid var(--rubro-obras);
+}
+[data-theme="light"] .explorer-hero-section { background: #ffffff; }
+
+/* Módulo abierto: queda dentro de su propio marco, debajo del panorama */
+.seccion-desglose-modulos.desglose-abierto {
+  border-bottom: var(--rect-raya) solid var(--rubro-obras);
+}
+
+/* 4. Auditoría en imágenes */
+.civic-showcase-section {
+  max-width: none;
+  margin: 0;
+  padding: 32px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px));
+  border-bottom: var(--rect-raya) solid var(--rubro-calculadora);
+}
+[data-theme="light"] .civic-showcase-section { background: var(--civ-gris); }
+
+/* 5. Pie */
+.site-footer { border-top: 0; padding-bottom: 0; }
+[data-theme="light"] .site-footer { border-top: 0; background: #e9edf2; }
+.footer-inner { max-width: var(--rect-ancho); }
+
+/* 6. Renglón final */
+.footer-bottom {
+  margin: 40px -24px 0;
+  padding: 16px 24px;
+  border-top: var(--rect-raya) solid var(--rubro-ambiente);
+  background: #070a10;
+  color: #c9d8ec;
+}
+[data-theme="light"] .footer-bottom { background: var(--civ-azul); border-top-color: var(--rubro-ambiente); }
+[data-theme="light"] .footer-bottom span,
+[data-theme="light"] .footer-bottom b { color: #ffffff !important; }
+
+/* Leyes y fuentes del pie: se pueden tocar */
+.pie-ref { cursor: pointer; color: inherit; text-decoration: underline; text-decoration-color: var(--border-accent); text-underline-offset: 3px; }
+.pie-ref:hover { color: var(--gold-bright); text-decoration-color: currentColor; }

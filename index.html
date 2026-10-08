@@ -68,8 +68,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261008a">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261008a">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261008b">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261008b">
 </head>
 <body data-pagina="auditor">
 
@@ -607,15 +607,22 @@
        ========================================================================== -->
   <section class="explorer-hero-section" aria-label="Explorador del Gasto Público">
     <div class="explorer-hero-box">
-    <div class="portada-civica">
-      <h1 class="portada-lema">El gasto público, <em>a la vista.</em></h1>
-      <p class="portada-intro">Sigue el dinero público federal, estatal y municipal con documentos oficiales, explicado para que cualquier persona lo pueda revisar. Cada cifra lleva su fuente.</p>
-    </div>
-      <span class="explorer-hero-tag">⚖️ FISCALIZACIÓN CIUDADANA DEL GASTO PÚBLICO</span>
-      <h2 class="explorer-hero-title">Explora el panorama de las finanzas públicas en México<button type="button" class="hero-nota-btn" onclick="window.AuditEngine.abrirNotaPortada(this)" aria-haspopup="dialog" aria-label="Qué son las finanzas públicas y qué encontrarás aquí" title="Qué son las finanzas públicas y qué encontrarás aquí"><span aria-hidden="true">📖</span></button></h2>
+      <span class="explorer-hero-tag">El gasto público, a la vista</span>
+      <h1 class="explorer-hero-title">Explora el panorama de las finanzas públicas en México<button type="button" class="hero-nota-btn" onclick="window.AuditEngine.abrirNotaPortada(this)" aria-haspopup="dialog" aria-label="Qué son las finanzas públicas y qué encontrarás aquí" title="Qué son las finanzas públicas y qué encontrarás aquí"><span aria-hidden="true">📖</span></button></h1>
       <p class="explorer-hero-desc">
-        Cómo el Estado obtiene, reparte y gasta el dinero público, y qué falta por aclarar. Cada cifra, con su fuente.
+        Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar.
       </p>
+
+      <!-- Cómo se usa: la introducción, sin cifras (las cifras viven dentro de cada módulo) -->
+      <div class="portada-guia" aria-labelledby="portadaGuiaTitulo">
+        <h2 class="portada-guia-titulo" id="portadaGuiaTitulo">Cómo se usa</h2>
+        <ol class="portada-pasos">
+          <li><span class="portada-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
+          <li><span class="portada-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+          <li><span class="portada-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> todavía no tiene documento que lo confirme.</span></li>
+        </ol>
+        <p class="portada-guia-nota">Si una palabra está subrayada, tócala y te explicamos qué significa.</p>
+      </div>
 
       <!-- Cuadrícula de 4 Módulos Operativos de Fiscalización Ciudadana -->
       <div class="explorer-cards-grid" role="region" aria-label="Módulos de Auditoría">
@@ -675,29 +682,6 @@
         </div>
       </div>
 
-      <!-- La cifra del día y la guía de lectura (lenguaje sencillo, de ux/fase-1) -->
-      <div class="portada-franja">
-        <div class="portada-cifra">
-          <span class="portada-cifra-num">$65,169.1 mdp</span>
-          <span class="portada-cifra-que">quedaron por aclarar ante la Auditoría Superior en la Cuenta Pública 2024. No es un desfalco comprobado: es lo que carecía de documentación al cierre de las auditorías. <span class="est-chip est-oficial">oficial</span></span>
-          <span class="portada-cifra-fuente">ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11.</span>
-          <button type="button" class="portada-accion" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF')">Ver qué encontró la Auditoría</button>
-        </div>
-        <div class="portada-guia">
-          <h2 class="portada-guia-titulo">Cómo se usa</h2>
-          <ol class="portada-pasos">
-            <li><b>Elige un rubro.</b> Cada color es un tema: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</li>
-            <li><b>Pulsa «Comenzar».</b> Lo más importante va arriba; lo demás se abre cuando lo pides.</li>
-            <li><b>Fíjate en la etiqueta de cada cifra.</b> Te dice qué tan segura es:</li>
-          </ol>
-          <dl class="portada-etiquetas">
-            <div><dt><span class="est-chip est-oficial">oficial</span></dt><dd>Viene tal cual de un documento del gobierno.</dd></div>
-            <div><dt><span class="est-chip est-derivado">derivado</span></dt><dd>La calculamos con datos oficiales y te decimos cómo.</dd></div>
-            <div><dt><span class="est-chip est-pendiente">pendiente</span></dt><dd>Todavía no hay un documento que la confirme.</dd></div>
-          </dl>
-          <p class="portada-guia-nota">Si una palabra está subrayada, tócala y te explicamos qué significa.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -2992,10 +2976,14 @@
       <div class="footer-col">
         <h4>Compendio Documental &amp; Fuentes Oficiales</h4>
         <p style="font-size:12px; color:var(--text-dim); margin-bottom:10px; line-height:1.5;">
-          Cada cifra muestra su fuente o su estado de verificación. Las fuentes principales son el DOF, la SHCP, la ASF, Banxico, el INEGI y el SAT. Consulta el catálogo de referencias y expedientes:
+          Cada cifra muestra su fuente o su estado de verificación. Citamos las leyes que ordenan el presupuesto, la contabilidad y la deuda del gobierno, y replicamos las fuentes oficiales del DOF, la SHCP, la ASF, Banxico, el INEGI y el SAT. Toca una ley para ver su ficha:
         </p>
         <ul style="list-style:none; line-height:2.0; font-family:var(--font-mono); font-size:11px; padding:0;">
-          <li>📜 Presupuesto de Egresos PEF 2026 (DOF Oficial)</li>
+          <li><a class="pie-ref" onclick="window.AuditEngine.goToRef('ref-pef2026')">📜 Presupuesto de Egresos de la Federación 2026 (DOF)</a></li>
+          <li><a class="pie-ref" onclick="window.AuditEngine.goToRef('ref-lfprh')">⚖️ Ley Federal de Presupuesto y Responsabilidad Hacendaria</a></li>
+          <li><a class="pie-ref" onclick="window.AuditEngine.goToRef('ref-lpcgpf')">📕 Ley de Presupuesto, Contabilidad y Gasto Público Federal (1976, abrogada; antecedente histórico)</a></li>
+          <li><a class="pie-ref" onclick="window.AuditEngine.goToRef('ref-lgcg')">📘 Ley General de Contabilidad Gubernamental</a></li>
+          <li><a class="pie-ref" onclick="window.AuditEngine.goToRef('ref-lfdp')">💳 Ley Federal de Deuda Pública (hasta 2016 se llamó Ley General de Deuda Pública)</a></li>
           <li>🔍 Informes Individuales ASF Cuenta Pública</li>
           <li>🏛️ Banxico: Sistema de Información Económica (SIE)</li>
           <li>📊 SHCP: Registro Público Único de Deuda y Disciplina Financiera</li>
@@ -3026,7 +3014,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261008a</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261008b</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3170,17 +3158,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20261008a"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20261008b"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20261008a"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261008b"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261008a"></script>
-  <script src="assets/auditor/js/municipios-rendicion.js?v=20261008a"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261008b"></script>
+  <script src="assets/auditor/js/municipios-rendicion.js?v=20261008b"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20261008a"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20261008b"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

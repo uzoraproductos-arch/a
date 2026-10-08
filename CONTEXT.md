@@ -247,6 +247,26 @@ Serenata de Amor (un color por rubro). Hecho:
 - No se trajeron de `ux/fase-1` la navegación de cuatro secciones, la capa
   `legibilidad.css/js` ni la carga diferida del padrón municipal.
 
+**Los seis rectángulos de la portada (08-10-2026, sello 20261008b).** El
+autor ordenó la portada en seis franjas de ancho completo, cada una con su
+fondo y una raya de color arriba, como los bloques de Serenata de Amor:
+1. Cabecera (logo, menús, Cuéntanos, Compartir, Inspector Meteoro, buscador).
+2. Radar (datos de referencia y cifras en perspectiva).
+3. Panorama: un solo título, «Explora el panorama de las finanzas públicas en
+   México», con «El gasto público, a la vista» como etiqueta encima y una
+   frase para cualquier persona («de dónde sale el dinero de todos, en qué se
+   gasta y quién revisa que se use bien»). «Cómo se usa» va arriba de los
+   cinco rubros y **sin cifras**: la cifra de la ASF salió de la portada,
+   porque las cifras se descubren dentro de los módulos.
+4. Auditoría en imágenes (intacta por decisión del autor).
+5. Pie: principios, cómo leer cada cifra, fuentes y glosario. Las fuentes
+   ahora citan, con liga a su ficha del catálogo: PEF 2026, LFPRH, Ley de
+   Presupuesto, Contabilidad y Gasto Público Federal (1976, **abrogada**, como
+   antecedente), Ley General de Contabilidad Gubernamental y Ley Federal de
+   Deuda Pública (que hasta 2016 se llamó Ley General de Deuda Pública).
+   Todas ya estaban en `AUDIT_DB` con su vigencia.
+6. Renglón final con la leyenda de transparencia y el sello.
+
 ## Estado actual
 
 ### Hecho
