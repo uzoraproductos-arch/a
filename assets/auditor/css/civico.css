@@ -1,0 +1,772 @@
+/* ==========================================================================
+   AUDITAVISIÓN · PIEL CÍVICA (08-10-2026)
+
+   Va después de auditavision.css y solo ajusta el aspecto:
+   - Sin fotografía de fondo, en los dos temas.
+   - Tema claro, que es el de entrada. Paleta inspirada en el dragón blanco
+     de ojos azules (concepto «corporativo» que pidió el autor, 08-10-2026):
+     azul corporativo fuerte en la cabecera y una escala de azules que baja
+     hasta el blanco en las franjas. Los colores de contenido (rubros, rojo
+     de alertas, chips) no cambian: la escala es solo el marco.
+   - Cada rubro tiene su color, como los bloques de Operação Serenata de
+     Amor: una franja arriba de la tarjeta, el icono teñido y el botón.
+   ========================================================================== */
+
+/* --- Rubros: un color por tema ------------------------------------------ */
+:root {
+  --rubro-dinero: #1f5fa8;     /* Circuito del dinero */
+  --rubro-obras: #a9541a;      /* Inversión y megaobras (5.29:1 sobre blanco) */
+  --rubro-obras-raya: #c8641b; /* tono vivo, solo para franjas decorativas */
+  --rubro-calculadora: #23855a;/* Calculadora cívica */
+  --rubro-inspector: #b3261e;  /* Modo inspector */
+  --rubro-ambiente: #0f7f7a;   /* Costo ambiental */
+}
+
+/* --- Sin fondo fotográfico ---------------------------------------------- */
+body,
+[data-theme="light"] body {
+  background-image: none;
+  background-attachment: scroll;
+}
+body { background-color: #0f1218; }
+.noise-overlay { display: none; }
+
+/* --- Tema claro: paleta cívica ------------------------------------------ */
+[data-theme="light"] {
+  --civ-azul: #0b2a63;
+  --civ-azul-medio: #1a56b8;
+  --civ-azul-claro: #e3f0fd;
+  --civ-celeste: #4f9be8;
+  --civ-hielo: #d6e9fc;
+  --civ-gris: #f1f7fe;
+  --civ-gris-borde: #c9d9ee;
+
+  --navy: #0b2a63;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f1f7fe;
+  --bg-card-hover: #e3f0fd;
+  --border-subtle: #d9e6f5;
+  --border-accent: #c9d9ee;
+  --border-gold: #c9d6e8;
+  --border-card: #d9e6f5;
+
+  /* El acento dorado pasa a azul institucional */
+  --gold: #1a56b8;
+  --gold-bright: #0b2a63;
+  --gold-glow: rgba(26, 86, 184, 0.12);
+  --gold-gradient: linear-gradient(135deg, #4f9be8 0%, #1a56b8 50%, #0b2a63 100%);
+  --text-gold: #0b2a63;
+
+  --text-main: #13203a;
+  --text-secondary: #4a5366;
+  --text-dim: #6b7385;
+}
+[data-theme="light"] body { background-color: #ffffff; }
+
+/* Barra superior azul, como USAspending */
+[data-theme="light"] .site-top-nav {
+  background: linear-gradient(90deg, #071d47 0%, var(--civ-azul) 55%, #123d8a 100%);
+  box-shadow: 0 2px 8px rgba(15, 61, 117, 0.18);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+[data-theme="light"] .nav-brand-title { color: #ffffff; }
+[data-theme="light"] .nav-brand-sub {
+  color: #c9d8ec;
+  text-transform: none;
+  letter-spacing: 0.2px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
+[data-theme="light"] .mega-menu-trigger { color: #ffffff; }
+[data-theme="light"] .mega-menu-trigger:hover,
+[data-theme="light"] .mega-menu-trigger[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+[data-theme="light"] .mega-menu-trigger .caret { color: #c9d8ec; }
+[data-theme="light"] .nav-action-btn,
+[data-theme="light"] #themeBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+[data-theme="light"] .nav-action-btn:hover,
+[data-theme="light"] #themeBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+[data-theme="light"] .nav-feedback-btn {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--civ-azul);
+}
+[data-theme="light"] .nav-feedback-btn:hover { background: var(--civ-azul-claro); color: var(--civ-azul); }
+[data-theme="light"] .nav-search-bar {
+  background: #ffffff;
+  border: 1px solid #ffffff;
+}
+[data-theme="light"] .nav-search-bar .search-input-box { color: var(--text-main); }
+
+/* Menús desplegables: blanco, columnas con su raya de color */
+[data-theme="light"] .mega-menu-dropdown {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  border-top: 4px solid var(--civ-azul-medio);
+  box-shadow: 0 12px 32px rgba(15, 30, 60, 0.16);
+}
+[data-theme="light"] .mega-col-title {
+  color: var(--civ-azul);
+  border-bottom: 2px solid var(--civ-azul-claro);
+}
+[data-theme="light"] .mega-link-item:hover { background: var(--civ-gris); }
+[data-theme="light"] .mega-link-name { color: var(--civ-azul); }
+
+/* Radar: franja gris de datos, sin brillo */
+[data-theme="light"] .radar-hacendario-hub {
+  background: var(--civ-gris);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* --- Rectángulo 3: el panorama -------------------------------------------
+   Un solo título (el lema va como etiqueta encima), la frase sencilla, la
+   guía «Cómo se usa» y los cinco rubros. */
+.explorer-hero-section { margin-top: 0; margin-bottom: 0; }
+.explorer-hero-box {
+  text-align: left;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 8px 0 0;
+  border-radius: 0;
+}
+[data-theme="light"] .explorer-hero-box {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.explorer-hero-tag {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-transform: none;
+}
+.explorer-hero-title {
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.12;
+  margin: 12px 0 10px;
+}
+.explorer-hero-desc {
+  margin: 0;
+  max-width: 860px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.explorer-hero-desc b { color: var(--text-main); }
+
+/* Tarjetas de rubro al estilo Serenata: franja de color arriba */
+.explorer-cards-grid { gap: 18px; }
+@media (min-width: 1024px) {
+  .explorer-cards-grid { grid-template-columns: repeat(5, 1fr); }
+}
+.explorer-card { --rubro: var(--rubro-dinero); border-top: 6px solid var(--rubro); border-radius: 6px; }
+#cardModPresupuesto { --rubro: var(--rubro-dinero); }
+#cardModMegaobras { --rubro: var(--rubro-obras); }
+[data-theme="light"] #cardModMegaobras { border-top-color: var(--rubro-obras-raya); }
+#cardModCalculadora { --rubro: var(--rubro-calculadora); }
+#cardModInspector { --rubro: var(--rubro-inspector); }
+#cardModAmbiente { --rubro: var(--rubro-ambiente); }
+
+[data-theme="light"] .explorer-card,
+[data-theme="light"] .explorer-card.active-explorer-card,
+[data-theme="light"] .explorer-hero-box .explorer-card.active-explorer-card {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  border-top: 6px solid var(--rubro);
+  box-shadow: 0 1px 3px rgba(15, 30, 60, 0.06);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+[data-theme="light"] .explorer-card:hover {
+  border-color: var(--civ-gris-borde);
+  border-top-color: var(--rubro);
+  box-shadow: 0 8px 22px rgba(15, 30, 60, 0.12);
+}
+[data-theme="light"] .explorer-card-icon {
+  width: 92px;
+  height: 92px;
+  font-size: 48px;
+  background: color-mix(in srgb, var(--rubro) 10%, #ffffff);
+  border: 2px solid color-mix(in srgb, var(--rubro) 35%, #ffffff);
+  box-shadow: none;
+}
+[data-theme="light"] .explorer-card-title { color: var(--rubro); }
+[data-theme="light"] .explorer-card-stat strong { color: var(--text-main); }
+[data-theme="light"] .explorer-card-btn {
+  background: var(--rubro);
+  border-color: var(--rubro);
+  color: #ffffff;
+}
+[data-theme="light"] .explorer-card-btn:hover {
+  background: color-mix(in srgb, var(--rubro) 85%, #000000);
+  border-color: color-mix(in srgb, var(--rubro) 85%, #000000);
+  color: #ffffff;
+}
+/* En oscuro, el color del rubro también marca el botón y el título */
+:root:not([data-theme="light"]) .explorer-card-title { color: color-mix(in srgb, var(--rubro) 55%, #ffffff); }
+
+/* Cómo se usa: tres pasos en fila, sin cifras */
+.portada-guia {
+  margin: 24px 0 4px;
+  padding: 18px 20px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-subtle);
+  border-left: 6px solid var(--rubro-dinero);
+  border-radius: 6px;
+}
+[data-theme="light"] .portada-guia { background: var(--civ-gris); border-color: var(--civ-gris-borde); border-left-color: var(--rubro-dinero); }
+.portada-guia-titulo {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  margin: 0 0 12px;
+  color: var(--text-main);
+}
+.portada-pasos {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-main);
+}
+@media (max-width: 860px) { .portada-pasos { grid-template-columns: minmax(0, 1fr); } }
+.portada-pasos li { display: flex; gap: 10px; align-items: flex-start; }
+.portada-paso-num {
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  background: var(--rubro-dinero);
+}
+.portada-pasos li:nth-child(2) .portada-paso-num { background: var(--rubro-obras); }
+.portada-pasos li:nth-child(3) .portada-paso-num { background: var(--rubro-calculadora); }
+.portada-pasos .est-chip { white-space: nowrap; }
+.portada-guia-nota { font-family: var(--font-sans); font-size: 13.5px; color: var(--text-secondary); margin: 0; }
+
+/* --- Carrusel e informe: superficies sólidas en claro --------------------- */
+[data-theme="light"] .civic-showcase-section { background: var(--civ-gris); padding-top: 28px; padding-bottom: 28px; }
+[data-theme="light"] .civic-showcase-box {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Pie: franja gris con la raya azul de cierre */
+[data-theme="light"] .site-footer {
+  background: var(--civ-gris);
+  border-top: 6px solid var(--civ-azul);
+}
+/* El pie trae colores en línea pensados para el fondo oscuro */
+[data-theme="light"] .site-footer h4 { color: var(--civ-azul) !important; }
+[data-theme="light"] .site-footer p:not(.leyenda-estados-tit),
+[data-theme="light"] .site-footer li,
+[data-theme="light"] .site-footer p > span:not(.est-chip),
+[data-theme="light"] .footer-bottom span { color: var(--text-secondary) !important; }
+
+/* Botón flotante: azul sólido */
+[data-theme="light"] .floating-feedback-btn {
+  background: var(--civ-azul);
+  border-color: var(--civ-azul);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   LOS SEIS RECTÁNGULOS DE LA PORTADA (orden del 08-10-2026)
+   1 cabecera · 2 los cinco módulos · 3 auditoría en imágenes ·
+   4 datos de referencia (radar) · 5 pie · 6 renglón final.
+   Cada uno es una franja de ancho completo. El fondo baja del blanco al
+   azul hielo y la raya que los separa alterna celeste y azul.
+   ========================================================================== */
+:root {
+  --rect-raya: 6px;
+  --rect-ancho: 1440px;
+  --raya-a: #4f9be8;  /* celeste */
+  --raya-b: #1a56b8;  /* azul */
+}
+
+/* 1. Cabecera: azul corporativo */
+.site-top-nav,
+[data-theme="light"] .site-top-nav { border-bottom: var(--rect-raya) solid var(--raya-a); }
+
+/* 2. Los cinco módulos: blanco */
+.explorer-hero-section {
+  max-width: none;
+  padding: 36px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px)) 40px;
+  border-bottom: var(--rect-raya) solid var(--raya-b);
+}
+[data-theme="light"] .explorer-hero-section { background: #ffffff; }
+/* El módulo que se abre queda pegado a los rubros, en su propio marco */
+.seccion-desglose-modulos.desglose-abierto { border-bottom: var(--rect-raya) solid var(--raya-b); }
+
+/* 3. Auditoría en imágenes: blanco hielo */
+.civic-showcase-section {
+  max-width: none;
+  margin: 0;
+  padding: 32px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px));
+  border-bottom: var(--rect-raya) solid var(--raya-a);
+}
+[data-theme="light"] .civic-showcase-section { background: var(--civ-gris); }
+
+/* 4. Datos de referencia: azul muy claro */
+.radar-hacendario-hub,
+[data-theme="light"] .radar-hacendario-hub {
+  border-bottom: var(--rect-raya) solid var(--raya-b);
+  padding-bottom: 8px;
+}
+[data-theme="light"] .radar-hacendario-hub { background: var(--civ-azul-claro); }
+[data-theme="light"] .radar-row-telemetry { background: rgba(11, 42, 99, 0.05); }
+/* La cinta de datos traía colores claros pensados para el fondo oscuro */
+[data-theme="light"] .tel-item { color: var(--text-secondary); }
+[data-theme="light"] .tel-item strong.gold { color: var(--civ-azul); }
+[data-theme="light"] .tel-item .red { color: #b3261e; }
+[data-theme="light"] .tel-item .green { color: #1d6f4a; }
+
+/* 5. Pie: azul hielo */
+.site-footer { border-top: 0; padding-bottom: 0; }
+[data-theme="light"] .site-footer { border-top: 0; background: var(--civ-hielo); }
+.footer-inner { max-width: var(--rect-ancho); }
+
+/* 6. Renglón final: azul corporativo, cierra como abrió la cabecera */
+.footer-bottom {
+  margin: 40px -24px 0;
+  padding: 16px 24px;
+  border-top: var(--rect-raya) solid var(--raya-a);
+  background: #070a10;
+  color: #c9d8ec;
+}
+[data-theme="light"] .footer-bottom { background: linear-gradient(90deg, #071d47 0%, var(--civ-azul) 55%, #123d8a 100%); border-top-color: var(--raya-a); }
+[data-theme="light"] .footer-bottom span,
+[data-theme="light"] .footer-bottom b { color: #ffffff !important; }
+
+/* Leyes y fuentes del pie: se pueden tocar */
+.pie-ref { cursor: pointer; color: inherit; text-decoration: underline; text-decoration-color: var(--border-accent); text-underline-offset: 3px; }
+.pie-ref:hover { color: var(--gold-bright); text-decoration-color: currentColor; }
+
+/* ==========================================================================
+   MENÚ DE TRES RAYAS (08-10-2026)
+   En pantallas angostas el índice no se amontona: queda plegado tras el
+   botón ☰ y se despliega completo, menú por menú, con el buscador y las
+   acciones. Al final, el recuadro para reportar lo que viste.
+   ========================================================================== */
+.nav-indice { display: contents; }
+.nav-hamburguesa,
+.nav-movil-ayuda { display: none; }
+
+@media (max-width: 1100px) {
+  .site-top-nav { flex-wrap: wrap; align-items: center; row-gap: 0; }
+  .nav-brand-group { flex: 1 1 auto; min-width: 0; }
+
+  .nav-hamburguesa {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 8px 14px;
+    margin-left: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: transparent;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  :root:not([data-theme="light"]) .nav-hamburguesa { border-color: var(--border-gold); color: var(--gold-bright); }
+  .nav-hamburguesa:hover,
+  .nav-hamburguesa[aria-expanded="true"] { background: rgba(255, 255, 255, 0.12); }
+  .nav-hamb-rayas { display: inline-flex; flex-direction: column; justify-content: space-between; width: 20px; height: 14px; }
+  .nav-hamb-rayas span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-hamburguesa[aria-expanded="true"] .nav-hamb-rayas span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-hamburguesa[aria-expanded="true"] .nav-hamb-rayas span:nth-child(2) { opacity: 0; }
+  .nav-hamburguesa[aria-expanded="true"] .nav-hamb-rayas span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* El índice, plegado hasta que se pulsa el botón */
+  .nav-indice {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 14px;
+    padding: 12px 0 16px;
+    max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .site-top-nav.nav-abierta .nav-indice { display: flex; }
+
+  /* Los cinco menús, uno debajo del otro */
+  .nav-center-links { flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
+  .nav-menu-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+  .mega-menu-trigger {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 12px 4px;
+    font-size: 16px;
+    border-radius: 0;
+  }
+  .mega-menu-dropdown {
+    position: static !important;
+    left: auto !important;
+    width: auto !important;
+    max-height: none !important;
+    grid-template-columns: 1fr !important;
+    margin: 0 0 12px;
+    padding: 16px;
+    box-shadow: none;
+    animation: none;
+  }
+  .mega-link-item { min-height: 44px; }
+  [data-theme="light"] .nav-menu-item.open-mega-menu .mega-menu-trigger,
+  [data-theme="light"] .nav-menu-item:hover .mega-menu-trigger {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Buscador primero, luego las acciones */
+  .nav-right-container { width: 100%; align-items: stretch; gap: 12px; margin-top: 0; }
+  .nav-search-wrap { order: -1; }
+  .search-command-bar.nav-search-bar { max-width: 100%; width: 100%; }
+  .nav-right-actions { justify-content: flex-start; gap: 8px; }
+  .nav-right-actions .nav-action-btn,
+  .nav-right-actions #themeBtn { min-height: 44px; font-size: 14px; padding: 8px 14px; }
+  /* «Cuéntanos lo que viste» pasa al recuadro de abajo */
+  .nav-right-actions .nav-feedback-btn { display: none; }
+
+  /* El recuadro final para reportar */
+  .nav-movil-ayuda {
+    display: block;
+    padding: 16px 18px;
+    border-radius: 6px;
+    border-left: 6px solid var(--rubro-inspector);
+    background: var(--bg-card-alt);
+    color: var(--text-main);
+  }
+  [data-theme="light"] .nav-movil-ayuda { background: #ffffff; }
+  .nav-movil-ayuda-tit { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin: 0 0 6px; color: var(--text-main); }
+  .nav-movil-ayuda-txt { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5; margin: 0 0 12px; color: var(--text-secondary); }
+  .nav-movil-ayuda-btn {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 6px;
+    border: 0;
+    background: var(--rubro-inspector);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .nav-movil-ayuda-btn:hover { background: color-mix(in srgb, var(--rubro-inspector) 85%, #000000); }
+
+  /* Con el menú abierto, el botón flotante estorba */
+  body.menu-movil-abierto .floating-feedback-container { display: none; }
+}
+
+/* ==========================================================================
+   HERRAMIENTAS Y DATOS DENTRO DEL ÍNDICE (08-10-2026)
+   La portada queda en cuatro franjas: 1 cabecera (con los apartados
+   «Herramientas» y «Datos de referencia»), 2 auditoría en imágenes, que es
+   la protagonista, 3 pie, más discreto, y 4 renglón final. El módulo que se
+   abre aparece debajo de las imágenes.
+   ========================================================================== */
+
+/* «Herramientas»: panel ancho con la guía y los cinco módulos */
+.mega-menu-dropdown.mega-herramientas,
+.mega-menu-dropdown.mega-datos {
+  width: min(1240px, calc(100vw - 24px));
+  grid-template-columns: minmax(0, 1fr);
+}
+.mega-menu-dropdown.mega-herramientas { padding: 24px 26px 26px; }
+.mega-herramientas .explorer-hero-box { padding: 0; }
+.mega-herramientas .explorer-hero-title { font-size: clamp(22px, 2.4vw, 30px); margin: 10px 0 6px; }
+.mega-herramientas .explorer-hero-desc { font-size: 16px; }
+.mega-herramientas .portada-guia { margin: 16px 0 4px; padding: 14px 16px; }
+.mega-herramientas .portada-pasos { font-size: 14px; gap: 12px; }
+.mega-herramientas .explorer-cards-grid { margin-top: 16px; gap: 12px; }
+.mega-herramientas .explorer-card { padding: 18px 14px 14px; }
+.mega-herramientas .explorer-card-icon { width: 72px; height: 72px; font-size: 38px; margin-bottom: 10px; }
+.mega-herramientas .explorer-card-title { font-size: 16px; }
+.mega-herramientas .explorer-card-desc { font-size: 13px; margin-bottom: 10px; }
+.mega-herramientas .explorer-card-stat { padding: 6px; margin-bottom: 10px; }
+.mega-herramientas .explorer-card-stat strong { font-size: 15px; white-space: normal; }
+.mega-herramientas .explorer-card-btn { padding: 9px 10px; }
+.mega-herramientas .explorer-card:hover { transform: none; }
+
+/* «Datos de referencia»: el radar completo dentro del panel */
+.mega-menu-dropdown.mega-datos { padding: 0; overflow-x: hidden; }
+.mega-datos .radar-hacendario-hub,
+[data-theme="light"] .mega-datos .radar-hacendario-hub {
+  border-bottom: 0;
+  box-shadow: none;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+.mega-datos .radar-telemetry-track { animation-duration: 90s; }
+
+/* El índice con siete apartados cabe en una fila desde 1100 px */
+@media (min-width: 1101px) {
+  .nav-center-links { gap: 2px; }
+  .mega-menu-trigger { padding: 8px 10px; font-size: 13.5px; }
+}
+/* Panel ancho: se alinea al borde izquierdo de la pantalla */
+@media (min-width: 1101px) {
+  .nav-menu-herramientas,
+  .nav-menu-datos { position: static; }
+  .site-top-nav { position: sticky; }
+  .mega-menu-dropdown.mega-herramientas,
+  .mega-menu-dropdown.mega-datos { left: 12px !important; right: auto; top: 100%; }
+}
+
+/* 2. Auditoría en imágenes: la protagonista */
+.civic-showcase-section { padding-top: 36px; padding-bottom: 36px; }
+.showcase-title { font-size: clamp(26px, 3vw, 38px); }
+.showcase-viewport { height: clamp(420px, 64vh, 700px); border-radius: 14px; }
+.showcase-slide-content { padding: 32px 40px; gap: 12px; }
+.showcase-slide-q { font-size: clamp(24px, 3.4vw, 44px); }
+.showcase-slide-badge { font-size: 13px; padding: 6px 14px; }
+.showcase-click-cue { font-size: 15px; padding: 10px 18px; }
+@media (max-width: 640px) {
+  .showcase-viewport { height: clamp(360px, 70vh, 520px); }
+  .showcase-title-row { flex-wrap: wrap; gap: 8px; }
+  .showcase-title { font-size: 24px; }
+  .showcase-slide-content { padding: 20px 18px; }
+}
+
+/* 3. Pie: más discreto, para que lo de arriba sea lo principal */
+.site-footer { padding-top: 28px; font-size: 12.5px; }
+.footer-inner { gap: 28px; }
+.footer-col h4 { font-size: 14.5px; margin-bottom: 8px; }
+.site-footer p { font-size: 12.5px !important; line-height: 1.55 !important; }
+.site-footer .leyenda-estados { padding: 10px 12px; }
+.site-footer .leyenda-estados li { font-size: 12px; }
+.footer-bottom { margin-top: 24px; padding: 12px 24px; }
+
+/* Elegido un destino, el panel se oculta aunque el cursor siga encima */
+.nav-menu-item.mega-suprimido:not(.open-mega-menu) .mega-menu-dropdown { display: none !important; }
+/* El apartado abierto se lee sobre el azul de la cabecera */
+[data-theme="light"] .nav-menu-item.open-mega-menu .mega-menu-trigger,
+[data-theme="light"] .nav-menu-item:hover .mega-menu-trigger {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Acciones y buscador: pegados a la derecha y con los mismos márgenes.
+   El contenedor toma el ancho de la fila de botones y el buscador lo llena,
+   así sus bordes izquierdo y derecho coinciden con los de los botones. */
+@media (min-width: 1101px) {
+  .nav-right-container { margin-left: auto; align-items: stretch; }
+  .nav-right-actions { justify-content: flex-end; flex-wrap: nowrap; }
+  .nav-search-wrap { width: auto; justify-content: stretch; }
+  .search-command-bar.nav-search-bar { max-width: none; width: 100%; }
+  [data-theme="light"] .nav-search-bar { background: transparent; border: 0; padding: 0; }
+  [data-theme="light"] .nav-search-bar .search-input-box {
+    height: 32px; border-radius: 8px; border: 1px solid #ffffff; background: #ffffff;
+  }
+}
+
+/* ==========================================================================
+   Legibilidad y sobriedad (08-10-2026, sello 20261008i)
+   Fusión de la revisión de color: medidas WCAG en CONTEXT.md.
+   ========================================================================== */
+
+/* 1-2. Chips de estado: mismo significado, más contraste.
+   oficial = verde, derivado = ámbar, pendiente = gris punteado (no cambia). */
+[data-theme="light"] .est-oficial {
+  color: #18703f;
+  background: #e8f4ec;
+  border-color: rgba(24, 112, 63, 0.38);
+}
+[data-theme="light"] .est-derivado {
+  color: #8a5a12;
+  background: #fdf3e2;
+  border-color: rgba(138, 90, 18, 0.38);
+}
+
+/* 4. Alertas y anomalías: tarjeta neutra, borde izquierdo rojo de 3 px.
+   El juicio lo dan el borde, el chip y el texto, no un fondo teñido. */
+[data-theme="light"] .asf-alert-banner,
+[data-theme="light"] .desfalcos-box,
+[data-theme="light"] .versus-box-perjudico,
+[data-theme="light"] .sim-loss-box,
+[data-theme="light"] .sim-proyeccion-box.deficit-box,
+[data-theme="light"] .sim-ver-inc,
+[data-theme="light"] .sim-linea-nota,
+[data-theme="light"] .sim-vivo-total,
+[data-theme="light"] .pjo-cambio-pie,
+[data-theme="light"] .com-destino-pie,
+[data-theme="light"] .vsx-cautelas,
+[data-theme="light"] .vbs-cierre,
+[data-theme="light"] .ce-pil-ciego,
+[data-theme="light"] .cee-res-veredicto[data-tono="malo"],
+[data-theme="light"] .aviso-huachicol,
+[data-theme="light"] .cc-vivo-tira {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  border-left: 3px solid var(--rubro-inspector);
+  box-shadow: none;
+}
+
+/* 5. Botones secundarios: borde neutro y texto sobrio.
+   El color pleno queda para la acción principal de cada pantalla. */
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarCSV"],
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarEstadoCuenta"],
+[data-theme="light"] .hero-pillar-calc[onclick*="copiarComparadorChoque"],
+[data-theme="light"] .eval-btn-secondary,
+[data-theme="light"] .factcheck-copy-btn,
+[data-theme="light"] .radar-ctrl-btn:not(.is-hidden-mode),
+[data-theme="light"] .view-btn:not(.active),
+[data-theme="light"] .treemap-view-btn:not(.active),
+[data-theme="light"] .versus-view-btn:not(.active) {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  color: #44526b;
+  box-shadow: none;
+}
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarCSV"]:hover,
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarEstadoCuenta"]:hover,
+[data-theme="light"] .hero-pillar-calc[onclick*="copiarComparadorChoque"]:hover,
+[data-theme="light"] .eval-btn-secondary:hover,
+[data-theme="light"] .factcheck-copy-btn:hover,
+[data-theme="light"] .radar-ctrl-btn:not(.is-hidden-mode):hover,
+[data-theme="light"] .view-btn:not(.active):hover,
+[data-theme="light"] .treemap-view-btn:not(.active):hover,
+[data-theme="light"] .versus-view-btn:not(.active):hover {
+  background: var(--civ-gris);
+  border-color: var(--civ-azul-medio);
+  color: var(--civ-azul);
+}
+
+/* 6. Tarjetas y paneles: línea de 1 px en vez de sombra difusa.
+   Las capas flotantes (menús, modales, cajón) conservan su sombra:
+   la necesitan para separarse de lo que tapan. */
+[data-theme="light"] .explorer-card,
+[data-theme="light"] .explorer-card:hover,
+[data-theme="light"] .explorer-card.active-explorer-card,
+[data-theme="light"] .explorer-card-icon,
+[data-theme="light"] .civic-ticket-card,
+[data-theme="light"] .civio-equiv-card,
+[data-theme="light"] .civio-equiv-card:hover,
+[data-theme="light"] .com-card-panel,
+[data-theme="light"] .debate-post-card,
+[data-theme="light"] .debate-post-card:hover,
+[data-theme="light"] .electoral-civic-hub,
+[data-theme="light"] .factcheck-card-panel,
+[data-theme="light"] .map-viewport-card,
+[data-theme="light"] .pj-concept-card,
+[data-theme="light"] .pj-node-card,
+[data-theme="light"] .portal-creator-card,
+[data-theme="light"] .red-flag-panel,
+[data-theme="light"] .scjn-calculos-card,
+[data-theme="light"] .scjn-footnotes-card,
+[data-theme="light"] .sim-controls-panel,
+[data-theme="light"] .sim-kpi-card,
+[data-theme="light"] .sim-obra-card,
+[data-theme="light"] .versus-scorecard-box,
+[data-theme="light"] .radar-desglose-card,
+[data-theme="light"] .card-destacado-familiar,
+[data-theme="light"] .civic-showcase-section {
+  box-shadow: none;
+}
+[data-theme="light"] .asesores-kpi-card:hover,
+[data-theme="light"] .civic-profile-card:hover,
+[data-theme="light"] .civic-tier-card:hover,
+[data-theme="light"] .finanzas-eje-card:hover,
+[data-theme="light"] .forensic-dossier-card:hover,
+[data-theme="light"] .globales-kpi-card:hover,
+[data-theme="light"] .news-card:hover,
+[data-theme="light"] .precepto-card:hover,
+[data-theme="light"] .prest-kpi-card:hover,
+[data-theme="light"] .radar-state-flag-card:hover,
+[data-theme="light"] .versus-exec-card:hover,
+[data-theme="light"] .versus-kpi-card:hover,
+[data-theme="light"] .pj-node-card:hover,
+[data-theme="light"] .pj-concept-card:hover,
+[data-theme="light"] .sim-obra-card:hover {
+  box-shadow: none;
+  border-color: var(--civ-azul-medio);
+}
+
+/* Textos que estaban pensados para fondo oscuro: sobre la tarjeta blanca
+   se leen en tinta. (.asf-desc ya se leía mal antes: 1.83:1.) */
+[data-theme="light"] .asf-desc,
+[data-theme="light"] .asf-banner-header + div { color: #44526b !important; } /* el segundo trae color en línea */
+[data-theme="light"] .sim-loss-amount.sim-live-card-loss { color: var(--rubro-inspector) !important; } /* trae color en línea */
+[data-theme="light"] .view-btn.active { color: #ffffff; } /* negro sobre azul: 3.07:1 */
+[data-theme="light"] .sim-loss-lbl,
+[data-theme="light"] .sim-proyeccion-box.deficit-box strong { color: var(--rubro-inspector); }
+[data-theme="light"] .sim-loss-amount,
+[data-theme="light"] .sim-vivo-total-val { color: var(--rubro-inspector); }
+[data-theme="light"] .sim-loss-box .sim-live-ticker-sub { color: #8a5a12; }
+
+/* ==========================================================================
+   Imágenes de fondo (08-10-2026, sello 20261008j)
+   Cabecera: el pasillo con dos personas, el azul al lado y el edificio que
+   sube. La imagen va a la derecha, a su tamaño natural, y el azul la funde
+   por la izquierda; un paneo lento la recorre del pasillo hacia arriba.
+   Pie: la ciudad de noche como marca de agua (pie-planos.jpg queda guardada
+   como alternativa: basta cambiar --pie-imagen).
+   AVISO: imágenes de referencia tomadas de Pinterest, autoría por acreditar;
+   sustituir o acreditar antes de pasar a main (ver CONTEXT.md).
+   ========================================================================== */
+[data-theme="light"] .site-top-nav {
+  background:
+    linear-gradient(90deg, #071d47 0%, #0b2a63 30%, rgba(11, 42, 99, 0.62) 56%, rgba(11, 42, 99, 0.46) 100%),
+    url("../img/portada/cabecera-pasillo.webp") right 0 top 82% / min(62%, 820px) auto no-repeat,
+    #123d8a;
+  animation: cabecera-pasillo 48s ease-in-out infinite alternate;
+}
+@keyframes cabecera-pasillo {
+  from { background-position: 0 0, right 0 top 82%, 0 0; }  /* el pasillo y las dos personas */
+  to   { background-position: 0 0, right 0 top 30%, 0 0; }  /* el edificio, hacia arriba */
+}
+@media (max-width: 1100px) {
+  [data-theme="light"] .site-top-nav {
+    background:
+      linear-gradient(90deg, #071d47 0%, rgba(11, 42, 99, 0.88) 40%, rgba(11, 42, 99, 0.45) 100%),
+      url("../img/portada/cabecera-pasillo.webp") right 0 top 82% / min(70%, 520px) auto no-repeat,
+      #123d8a;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="light"] .site-top-nav { animation: none; background-position: 0 0, right 0 top 82%, 0 0; }
+}
+
+/* Sobre la foto, el índice lleva una sombra leve para leerse siempre */
+[data-theme="light"] .site-top-nav .mega-menu-trigger,
+[data-theme="light"] .nav-brand-title,
+[data-theme="light"] .nav-brand-subtitle { text-shadow: 0 1px 3px rgba(4, 16, 42, 0.85); }
+
+[data-theme="light"] .site-footer {
+  --pie-imagen: url("../img/portada/pie-noche.jpg");
+  background:
+    linear-gradient(180deg, rgba(234, 243, 253, 0.90) 0%, rgba(234, 243, 253, 0.84) 100%),
+    var(--pie-imagen) center 30% / cover no-repeat,
+    var(--civ-hielo);
+}

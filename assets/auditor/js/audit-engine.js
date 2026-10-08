@@ -1695,7 +1695,7 @@
           L.aguinaldoDias + ' contra ' + L.referencia.aguinaldoDias + ' días: ' + ccPesos((L.referencia.aguinaldoDias - L.aguinaldoDias) * dia) + ' de diferencia') +
         caja('Su prima vacacional', L.primaVacacionalDias * dia, L.referencia.primaVacacionalDias * dia,
           L.primaVacacionalDias + ' contra ' + L.referencia.primaVacacionalDias + ' días: ' + ccPesos((L.referencia.primaVacacionalDias - L.primaVacacionalDias) * dia) + ' de diferencia') +
-        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Su sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
+        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Tu sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
         ') entre 30, por los días de cada regla, en bruto y antes de impuestos. ' + escHtml(L.nota) + '</p>';
     } else {
       cuenta = tuUd('<p class="shock-prest-op">Para ver la cuenta con su sueldo, escriba su ingreso bruto o saque la cuenta en el bloque 1.</p>', '<p class="shock-prest-op">Para ver la cuenta con tu sueldo, escribe tu ingreso bruto o saca la cuenta en el bloque 1.</p>');
@@ -1942,7 +1942,7 @@
     const isr = res ? res.ano.isr : 0;
     const huella =
       '<section class="pd-bloque">' +
-        '<h3 class="pd-tit">🧍 Su estado de cuenta ecológico</h3>' +
+        '<h3 class="pd-tit">🧍 Tu estado de cuenta ecológico</h3>' +
         '<p class="pd-lead">Lo que a cada persona le toca, en promedio, de la basura y del daño ambiental del país.</p>' +
         '<div class="am-datos">' +
           amTarjeta(amNum(R.perCapitaKg.valor, 3) + ' kg', 'de basura al día por persona', 'oficial', amFuente('DBGIR', R.perCapitaKg.pagina)) +
@@ -2318,7 +2318,7 @@
 
   function amTkIngresoSugerido() {
     const l = comparadorIngresoLector();
-    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de su estado de cuenta del módulo 3 (neto).' } : null;
+    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de tu estado de cuenta en la calculadora (neto).' } : null;
   }
 
   function renderAmTicket() {
@@ -2334,7 +2334,7 @@
             '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="Por ejemplo, 15000" value="' + (amTk.ingreso || '') + '" ' +
             'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
-          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que le queda después de impuestos. Si no lo sabe, sáquelo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
+          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que te queda después de impuestos. Si no lo sabes, sácalo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
         '</div>' +
         '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : tuUd('<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>', '<p class="pd-nota am-tk-vacio">Escribe tu ingreso y pulsa «Emitir». El ticket se imprime renglón por renglón.</p>')) + '</div>' +
       '</section>';
@@ -2885,7 +2885,7 @@
     /* 4. Su estado */
     const estado =
       '<section class="pd-bloque">' +
-        '<h3 class="pd-tit">🗺️ Lo que la ASF le observó a su estado</h3>' +
+        '<h3 class="pd-tit">🗺️ Lo que la ASF le observó a tu estado</h3>' +
         '<p class="pd-lead">El dinero federal que llega a cada estado lo revisa la ASF en tres niveles: el gobierno del estado, sus municipios (alcaldías en la Ciudad de México) y otros entes locales. Aparte, ' + amNum(C.cp2024.coordinadoras.auditorias) + ' auditorías se hicieron a las dependencias federales que coordinan esos fondos.</p>' +
         '<div id="cpEntidad">' + cpEntidadHtml() + '</div>' +
       '</section>';
@@ -5584,7 +5584,7 @@
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
           p.temas.map(function(t) { return Array.isArray(t) ? '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>' : '<li>' + t + '</li>'; }).join('') +
         '</ul>' +
-        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
+        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">← Volver al inicio</button>' +
       '</div>';
     var caja = el.querySelector('.mod-proemio-texto');
     var parrafos = hero ? [].slice.call(hero.children).filter(function(n) { return n.tagName === 'P' || n.classList.contains('hero-mas'); }) : [];
@@ -18991,25 +18991,14 @@
   // CONMUTADOR DE TEMA (MODO OSCURO / CLARO)
   // ==========================================================================
   function initTheme() {
-    let savedTheme = 'dark';
-    try { savedTheme = localStorage.getItem('auditavision_theme') || 'dark'; } catch (e) { /* sin almacenamiento */ }
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeButtonText(savedTheme);
+    // El auditor tiene un solo tema, el claro: el oscuro se retiró por decisión del autor (08-10-2026).
+    document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.removeItem('auditavision_tema_civico'); } catch (e) { /* sin almacenamiento */ }
   }
 
+  // Se conserva exportada por si algún enlace viejo la llama: ya no alterna, deja el tema claro.
   function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('auditavision_theme', next); } catch (e) { /* el tema vale solo para esta visita */ }
-    updateThemeButtonText(next);
-  }
-
-  function updateThemeButtonText(theme) {
-    const btn = document.getElementById('themeBtn');
-    if (btn) {
-      btn.innerHTML = theme === 'dark' ? '◐ Tema Claro' : '◐ Tema Oscuro';
-    }
+    initTheme();
   }
 
   // ==========================================================================
@@ -20780,7 +20769,7 @@
           '<p class="pe-fuente">' + peFuenteMetrica(M) + '</p>' +
         '</div>' +
         '<div class="pe-tablas">' + PE_GRUPOS.map(G => peTabla(G, E)).join('') + '</div>' +
-        '<p class="pe-ficha">¿Quiere el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
+        '<p class="pe-ficha">¿Quieres el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
           '<a href="enciclopedia.html#politicos/mandatarios" target="_blank" rel="noopener">Abrir la pestaña 5.1 de la Enciclopedia ↗</a></p>' +
       '</section>';
 
@@ -26672,14 +26661,23 @@
     var targetScroll = (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) erarioAbrirAncestros(targetScroll);
     if (targetScroll) {
-      setTimeout(function() {
-        targetScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
+      /* Se calcula la posicion a mano, descontando la cabecera fija: el
+         scrollIntoView instantaneo encima del suave dejaba el modulo
+         cientos de pixeles por debajo de su inicio. */
+      var margenCabecera = function() {
+        var nav = document.querySelector('.site-top-nav');
+        return (nav ? nav.getBoundingClientRect().height : 0) + 12;
+      };
+      var irAlModulo = function(comportamiento) {
+        var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margenCabecera();
+        window.scrollTo({ top: Math.max(0, y), behavior: comportamiento });
+      };
+      setTimeout(function() { irAlModulo('smooth'); }, 60);
       /* Las secciones largas terminan de dibujarse despues del primer salto
          y lo dejan corto: se corrige una vez, si quedo lejos. */
       setTimeout(function() {
-        var t = targetScroll.getBoundingClientRect().top;
-        if (Math.abs(t) > 200) targetScroll.scrollIntoView({ behavior: 'instant', block: 'start' });
+        var t = targetScroll.getBoundingClientRect().top - margenCabecera();
+        if (Math.abs(t) > 200) irAlModulo('instant');
       }, 900);
     }
   }
@@ -26694,13 +26692,9 @@
       c.classList.remove('active-explorer-card');
     });
     pintarProemio(null);
-    /* De vuelta a la vitrina de modulos, por debajo de la barra fija. */
-    var rejilla = document.querySelector('.explorer-cards-grid');
-    if (rejilla) {
-      window.scrollTo({ top: Math.max(0, rejilla.getBoundingClientRect().top + window.pageYOffset - 170), behavior: 'smooth' });
-    } else {
-      (document.querySelector('.explorer-hero-section') || document.body).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    /* De vuelta al inicio: los modulos viven en el menu «Herramientas»
+       desde el 08-10-2026, ya no en un bloque de la portada. */
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // =========================================================================
@@ -26739,6 +26733,7 @@
     var wasOpen = item.classList.contains('open-mega-menu');
     cerrarMegaMenus();
     if (!wasOpen) {
+      item.classList.remove('mega-suprimido');
       item.classList.add('open-mega-menu');
       var t = item.querySelector('.mega-menu-trigger');
       if (t) t.setAttribute('aria-expanded', 'true');
@@ -26753,6 +26748,25 @@
     document.querySelectorAll('.mega-menu-trigger[aria-expanded="true"]').forEach(function(t) {
       t.setAttribute('aria-expanded', 'false');
     });
+  }
+
+  /* Menú de celular: en pantallas angostas el índice entero (menús,
+     acciones, buscador y el recuadro para reportar) se pliega tras el
+     botón de tres rayas. El aspecto vive en civico.css. */
+  function toggleMenuMovil(forzar) {
+    var nav = document.querySelector('.site-top-nav');
+    if (!nav) return;
+    var abrir = typeof forzar === 'boolean' ? forzar : !nav.classList.contains('nav-abierta');
+    nav.classList.toggle('nav-abierta', abrir);
+    document.body.classList.toggle('menu-movil-abierto', abrir);
+    var btn = document.getElementById('navHamburguesa');
+    if (btn) {
+      btn.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      btn.setAttribute('aria-label', abrir ? 'Cerrar el menú' : 'Abrir el menú');
+      var txt = btn.querySelector('.nav-hamb-txt');
+      if (txt) txt.textContent = abrir ? 'Cerrar' : 'Menú';
+    }
+    if (!abrir) cerrarMegaMenus();
   }
 
   /* Que el desplegable quepa en la pantalla: los menus de la derecha se
@@ -28375,6 +28389,7 @@
     pintarProemio: pintarProemio,
     abrirDiccionarioSubtab: abrirDiccionarioSubtab,
     toggleMegaMenu: toggleMegaMenu,
+    toggleMenuMovil: toggleMenuMovil,
     cerrarMegaMenus: cerrarMegaMenus,
     showcaseNext: showcaseNext,
     showcasePrev: showcasePrev,
@@ -28522,9 +28537,24 @@
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.nav-menu-item').forEach(function (it) {
       it.addEventListener('mouseenter', function () { posicionarMegaMenu(it.querySelector('.mega-menu-dropdown')); });
+      it.addEventListener('mouseleave', function () { it.classList.remove('mega-suprimido'); });
     });
     document.addEventListener('click', function (e) {
       if (!e.target.closest || !e.target.closest('.nav-menu-item')) cerrarMegaMenus();
+      /* Al elegir un modulo en «Herramientas», el menu se cierra. */
+      else if (e.target.closest('.mega-menu-dropdown a, .mega-herramientas .explorer-card-btn')) {
+        /* Elegido un destino, el panel se va aunque el cursor siga encima:
+           sin esto, el :hover lo dejaba abierto tapando el modulo. */
+        var it = e.target.closest('.nav-menu-item');
+        if (it) it.classList.add('mega-suprimido');
+        cerrarMegaMenus();
+      }
+      /* Menú de celular: se cierra al elegir un destino o al tocar fuera. */
+      var nav = document.querySelector('.site-top-nav.nav-abierta');
+      if (nav && e.target.closest) {
+        if (!e.target.closest('.site-top-nav')) toggleMenuMovil(false);
+        else if (e.target.closest('a.mega-link-item, .explorer-card-btn, .nav-right-actions .nav-action-btn, .nav-movil-ayuda-btn, .search-results-dropdown')) toggleMenuMovil(false);
+      }
     });
     window.addEventListener('resize', function () {
       var abierto = document.querySelector('.nav-menu-item.open-mega-menu .mega-menu-dropdown');
@@ -28544,6 +28574,7 @@
       closePaseCivicoModal();
       cerrarDescubrimiento();
       cerrarMegaMenus();
+      toggleMenuMovil(false);
       cerrarRadarDesglose();
       cerrarModalReferencia();
       cerrarDescargas();

@@ -218,14 +218,147 @@ compilación. Muestra los 19 SVG con descarga y los dos temas. Si cambia
 Aplicar `DESIGN.md` al sitio es trabajo aparte y queda pendiente (lista en su
 §9 y abajo, en Pendiente).
 
-**Bigote estilo Zapata (01-10-2026, sello 20261001a).** A pedido del autor,
-el bigote pasó a estilo Zapata, lleno y con las puntas caídas a los lados de
-la boca, en todas las versiones: la ilustración del auditor
-(`assets/auditor/img/logo-auditavision.svg`, con la sonrisa un poco más
-abajo para que asome) y los 13 SVG del símbolo plano y del combinado en
-`assets/brand/logos/`, más el trazo copiado en `brand/brand-book.jsx`. La
-copia de `assets/img/logo-auditavision.svg` es de la
-Enciclopedia congelada y conserva el bigote anterior.
+**Bigote estilo Zapata, retirado (07-10-2026, sello 20261007a).** El 01-10
+se cambió el bigote del logo a estilo Zapata; el autor lo rechazó («ese no
+es el logo») y se revirtió completo: ilustración, los 13 SVG de
+`assets/brand/logos/`, `brand/brand-book.jsx` y `DESIGN.md` (vuelve a v1.0).
+El logo es el de antes. No se vuelve a tocar el bigote sin que el autor lo pida.
+
+**Piel cívica (08-10-2026, sello 20261008a).** El autor pidió volver a la
+portada anterior (las cinco herramientas con icono, «Explora el panorama»,
+el radar y el carrusel, que `ux/fase-1` había quitado) y quedarse solo con la
+redacción de `ux/fase-1`. Además pidió quitar la foto de fondo y acercar el
+aspecto a Civio y USAspending (fondo blanco, barra azul, gris) y a Operação
+Serenata de Amor (un color por rubro). Hecho:
+- `assets/auditor/css/civico.css`, cargada después de la hoja maestra: sin
+  foto de fondo en los dos temas; tema claro de entrada (llave nueva
+  `auditavision_tema_civico`), barra superior azul, franjas grises, acento
+  azul en lugar de dorado; cada tarjeta de rubro con su franja, su icono y su
+  botón del color del rubro (dinero azul, obras naranja, calculadora verde,
+  inspector rojo, ambiente verde azulado).
+- Portada: lema «El gasto público, a la vista», la cifra de la ASF con su
+  fuente y la guía «Cómo se usa» (de `ux/fase-1`), arriba de los rubros. El
+  carrusel bajó después de los módulos, para que el módulo abra pegado a los
+  rubros.
+- Redacción: menús con nombres sencillos (Busca y verifica, Sigue el dinero,
+  Descarga los datos, Aprende, Participa), «Cuéntanos lo que viste», «Cerrar y
+  volver al inicio» y los textos del motor que `ux/fase-1` pasó de usted a tú.
+  Los emojis se quedan: el autor quiere los iconos.
+- No se trajeron de `ux/fase-1` la navegación de cuatro secciones, la capa
+  `legibilidad.css/js` ni la carga diferida del padrón municipal.
+
+**Los seis rectángulos de la portada (08-10-2026, sello 20261008b).** El
+autor ordenó la portada en seis franjas de ancho completo, cada una con su
+fondo y una raya de color arriba, como los bloques de Serenata de Amor:
+1. Cabecera (logo, menús, Cuéntanos, Compartir, Inspector Meteoro, buscador).
+2. Radar (datos de referencia y cifras en perspectiva).
+3. Panorama: un solo título, «Explora el panorama de las finanzas públicas en
+   México», con «El gasto público, a la vista» como etiqueta encima y una
+   frase para cualquier persona («de dónde sale el dinero de todos, en qué se
+   gasta y quién revisa que se use bien»). «Cómo se usa» va arriba de los
+   cinco rubros y **sin cifras**: la cifra de la ASF salió de la portada,
+   porque las cifras se descubren dentro de los módulos.
+4. Auditoría en imágenes (intacta por decisión del autor).
+5. Pie: principios, cómo leer cada cifra, fuentes y glosario. Las fuentes
+   ahora citan, con liga a su ficha del catálogo: PEF 2026, LFPRH, Ley de
+   Presupuesto, Contabilidad y Gasto Público Federal (1976, **abrogada**, como
+   antecedente), Ley General de Contabilidad Gubernamental y Ley Federal de
+   Deuda Pública (que hasta 2016 se llamó Ley General de Deuda Pública).
+   Todas ya estaban en `AUDIT_DB` con su vigencia.
+6. Renglón final con la leyenda de transparencia y el sello.
+
+**Menú de tres rayas (08-10-2026, sello 20261008c).** En pantallas de 1100 px
+o menos el índice del rectángulo 1 ya no se amontona: queda plegado tras un
+botón ☰ «Menú» (`toggleMenuMovil` en el motor, aspecto en `civico.css`). Al
+desplegarse muestra los cinco menús uno debajo del otro (cada uno se abre en
+su lugar), el buscador, Compartir, Inspector Meteoro y el tema, y al final un
+recuadro rojo «¿Viste algo raro con el dinero público?» con el botón
+«Cuéntanos lo que viste». Se cierra al elegir un destino, al tocar fuera o con
+Escape. En computadora la cabecera no cambia.
+
+**Paleta azul y nuevo orden (08-10-2026, sello 20261008d).** El autor pidió
+basar los colores en el dragón blanco de ojos azules (concepto «corporativo»):
+la cabecera en azul corporativo fuerte (degradado #071d47 → #0b2a63 → #123d8a)
+y una escala de azules que baja hasta el blanco en las franjas (blanco, blanco
+hielo #f1f7fe, azul claro #e3f0fd, azul hielo #d6e9fc), con rayas que alternan
+celeste #4f9be8 y azul #1a56b8. El acento del tema claro es azul. Los colores
+de contenido no cambian: rubros, rojo de alertas y chips de estado. Es solo
+el marco; no se usa ningún nombre, logo ni imagen de la franquicia.
+Nuevo orden de los rectángulos: 1 cabecera, 2 los cinco módulos, 3 auditoría
+en imágenes, 4 datos de referencia y radar (antes iba arriba; ahora va justo
+antes de «Principio y Compromiso Ciudadano»), 5 pie, 6 renglón final.
+
+**Herramientas y Datos en el índice (08-10-2026, sello 20261008e).** El autor
+pidió que la portada la protagonicen las imágenes. Cambios:
+- El bloque del panorama (título, «Cómo se usa» y los cinco módulos) pasó al
+  índice como **primer apartado, «Herramientas»**: un panel ancho que se abre
+  desde la cabecera. Al pulsar «Comenzar», el panel se cierra (también si el
+  cursor sigue encima: clase `mega-suprimido`) y el módulo abre debajo de las
+  imágenes.
+- El radar (datos de referencia y cifras en perspectiva) pasó al índice como
+  **último apartado, «Datos de referencia»**.
+- La portada queda en cuatro franjas: 1 cabecera, 2 auditoría en imágenes,
+  más grande (alto de hasta 70 % de la pantalla, título y pregunta mayores),
+  3 pie, más discreto (letra y márgenes menores), y 4 renglón final.
+- `seleccionarModuloExplorer` ahora calcula el salto descontando la cabecera
+  fija (antes el salto de respaldo dejaba el módulo cientos de píxeles abajo),
+  y `plegarDesgloseModulos` vuelve al inicio de la página.
+
+**Un solo tema: el claro (08-10-2026, sello 20261008g).** El autor pidió
+eliminar el tema oscuro. Se quitó el botón «◐ Tema» de la cabecera;
+`initTheme` fija siempre `data-theme="light"` y borra la preferencia guardada
+(`auditavision_tema_civico`), así que quien la tenía en oscuro ve el claro.
+`toggleTheme` sigue exportada, pero ya no alterna. Las reglas oscuras de
+`auditavision.css` se dejaron en su sitio: son la base sobre la que se monta
+el claro (`:root` es oscuro y `[data-theme="light"]` lo corrige), y
+arrancarlas sería reescribir la hoja entera sin ganancia visible.
+
+**Acciones y buscador a la derecha (08-10-2026, sello 20261008h).** En
+escritorio (más de 1100 px), «Cuéntanos lo que viste», «Compartir»,
+«Inspector Meteoro» y el buscador quedan pegados al borde derecho de la
+cabecera. El buscador ocupa justo el ancho de la fila de botones: sus bordes
+izquierdo y derecho coinciden con los de «Cuéntanos» e «Inspector Meteoro».
+Se quitó el recuadro blanco que rodeaba la caja de búsqueda. En celular no
+cambia nada (todo vive en el menú ☰).
+
+**Legibilidad y sobriedad de color (08-10-2026, sello 20261008i).** Fusión de
+la revisión de color de Antigravity (puntos 1 a 6 aprobados por el autor; el 7,
+oro en la cabecera, quedó fuera). Se descartó su modo oscuro, el oro como
+identidad, el fondo pergamino y, sobre todo, su ámbar para «pendiente»: en la
+plataforma el ámbar es `derivado` y `pendiente` es gris punteado; ese
+significado no cambia. Contraste medido con WCAG (mínimo 4.5:1), en
+`civico.css`:
+1. Chip `derivado` `#B7791F` → `#8A5A12` (3.32 → 5.38:1 sobre su fondo).
+2. Chip `oficial` `#1E824C` → `#18703F` (3.89 → 5.42:1).
+3. Rubro obras `#C8641B` → `#A9541A` en textos y botones (3.97 → 5.29:1);
+   la franja de la tarjeta conserva el tono vivo (`--rubro-obras-raya`).
+4. Alertas y anomalías: tarjeta blanca, borde de 1 px y borde izquierdo rojo
+   de 3 px, sin fondo teñido. Los textos pensados para fondo oscuro pasan a
+   tinta o rojo. Se corrigió de paso un texto de la alerta ASF de la ficha
+   estatal que ya se leía mal (1.83:1, color en línea).
+5. Botones secundarios (CSV, copiar, controles del radar, cambio de vista):
+   blanco con borde neutro; el color pleno queda para la acción principal.
+6. Tarjetas y paneles sin sombra difusa; al pasar el cursor cambia el borde.
+   Menús, modales y cajón conservan su sombra porque flotan.
+Pendiente: el botón activo «Treemap» del presupuesto vive dentro de una caja
+oscura heredada (`.treemap-box`) que en tema claro se ve a contraluz; revisar
+esa caja entera en otra pasada.
+
+**Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
+autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
+- Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
+  con dos personas, el azul al lado y el edificio). Va a la derecha, a su
+  tamaño natural, con el borde izquierdo desvanecido en la propia imagen
+  (canal alfa) para que no se note el corte. Un paneo de 48 s la recorre del
+  pasillo hacia el edificio; con «reducir movimiento» queda quieta. El índice
+  y la marca llevan una sombra leve para leerse sobre la foto.
+- Pie («Principio y Compromiso»): `pie-noche.jpg` (ciudad de noche) como
+  marca de agua; `pie-planos.jpg` (ciudad en planos con grúas) se guardó como
+  alternativa: se cambia en la variable `--pie-imagen` de `civico.css`.
+- **Pendiente de derechos:** las tres vienen de Pinterest y su autoría no
+  está acreditada; la de noche lleva la firma «AFERA XV». Antes de pasar a
+  `main`, sustituirlas por imágenes propias o generadas con IA (con su
+  etiqueta), o conseguir permiso y acreditar al autor.
 
 ## Estado actual
 
