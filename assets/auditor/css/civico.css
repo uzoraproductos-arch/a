@@ -786,3 +786,106 @@ body[data-pagina="auditor"] .civic-showcase-section {
 @media (max-width: 720px) {
   body[data-pagina="auditor"] .civic-showcase-section { padding-left: 14px; padding-right: 14px; }
 }
+
+/* ==========================================================================
+   Treemap del presupuesto en tema claro (08-10-2026, sello 20261008l)
+   Venía del tema oscuro: caja casi negra con cifras en azul oscuro que no se
+   leían. Ahora: caja blanca y cada bloque con su color de categoría en el
+   borde izquierdo, la cifra y un tinte muy suave. Contraste medido >= 4.5:1.
+   ========================================================================== */
+[data-theme="light"] .treemap-view-controls {
+  background: var(--civ-gris);
+  border: 1px solid var(--civ-gris-borde);
+}
+[data-theme="light"] .treemap-view-btn.active {
+  background: var(--civ-azul-medio);
+  border-color: var(--civ-azul-medio);
+  color: #ffffff;
+  box-shadow: none;
+}
+[data-theme="light"] .treemap-box {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+[data-theme="light"] .treemap-breadcrumb-bar { border-bottom-color: var(--civ-gris-borde); }
+[data-theme="light"] .treemap-crumb-item { color: var(--civ-azul-medio); }
+[data-theme="light"] .treemap-crumb-item:hover { color: var(--civ-azul); }
+[data-theme="light"] .treemap-crumb-current { color: var(--text-main); }
+[data-theme="light"] .treemap-crumb-separator { color: #56657e; }
+[data-theme="light"] .treemap-level-badge {
+  background: var(--civ-azul-claro);
+  border-color: var(--civ-gris-borde);
+  color: var(--civ-azul);
+}
+[data-theme="light"] .treemap-back-btn {
+  background: #ffffff;
+  border-color: var(--civ-gris-borde);
+  color: var(--civ-azul);
+}
+[data-theme="light"] .treemap-back-btn:hover { background: var(--civ-gris); border-color: var(--civ-azul-medio); color: var(--civ-azul); }
+
+/* Bloques: un color por categoría */
+[data-theme="light"] .treemap-node { --tm: #4a5568; }
+[data-theme="light"] .treemap-node.theme-social    { --tm: #0f6e6a; }
+[data-theme="light"] .treemap-node.theme-econ      { --tm: #8a5a12; }
+[data-theme="light"] .treemap-node.theme-gob       { --tm: #b3261e; }
+[data-theme="light"] .treemap-node.theme-deuda     { --tm: #8b1a1a; }
+[data-theme="light"] .treemap-node.theme-fed       { --tm: #18703f; }
+[data-theme="light"] .treemap-node.theme-autonomos { --tm: #6b3fa0; }
+[data-theme="light"] .treemap-node.theme-adefas    { --tm: #4a5568; }
+[data-theme="light"] .treemap-node,
+[data-theme="light"] .treemap-node[class*="theme-"] {
+  background: color-mix(in srgb, var(--tm) 6%, #ffffff);
+  border: 1px solid color-mix(in srgb, var(--tm) 28%, #ffffff);
+  border-left: 4px solid var(--tm);
+  box-shadow: none;
+}
+[data-theme="light"] .treemap-node[class*="theme-"]:hover {
+  border-color: var(--tm);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--tm) 18%, transparent);
+}
+[data-theme="light"] .treemap-node-name { color: var(--text-main); }
+[data-theme="light"] .treemap-node-tag {
+  background: #ffffff;
+  border-color: var(--civ-gris-borde);
+  color: #44526b;
+}
+[data-theme="light"] .treemap-node-amount { color: var(--tm); }
+[data-theme="light"] .treemap-node-share,
+[data-theme="light"] .treemap-node-desc { color: #44526b; }
+[data-theme="light"] .treemap-node-bottom { border-top-color: color-mix(in srgb, var(--tm) 20%, #ffffff); }
+[data-theme="light"] .treemap-drill-cue,
+[data-theme="light"] .treemap-ref-link { color: var(--civ-azul-medio); }
+[data-theme="light"] .treemap-summary-banner {
+  background: var(--civ-gris);
+  border-color: var(--civ-gris-borde);
+  color: var(--text-main);
+}
+
+/* Barra de mandos «Contabilizar / Reiniciar» (.evaluacion-controls-bar):
+   la usan ocho gráficas (la lista de barras del presupuesto, entre otras) y
+   también venía oscura. Mismo criterio: fondo claro, sello azul, y el botón
+   principal en azul pleno (la acción principal conserva el color). */
+[data-theme="light"] .evaluacion-controls-bar {
+  background: var(--civ-gris);
+  border: 1px solid var(--civ-gris-borde);
+  box-shadow: none;
+}
+[data-theme="light"] .eval-badge {
+  background: var(--civ-azul-claro);
+  border-color: var(--civ-gris-borde);
+  color: var(--civ-azul);
+}
+[data-theme="light"] .eval-status-text { color: #44526b; }
+[data-theme="light"] .eval-btn-primary {
+  background: var(--civ-azul-medio);
+  color: #ffffff;
+  box-shadow: none;
+}
+[data-theme="light"] .eval-btn-primary:hover {
+  background: var(--civ-azul);
+  filter: none;
+  box-shadow: none;
+}
