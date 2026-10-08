@@ -26654,32 +26654,42 @@
     var cardEl = document.getElementById(mapCards[tabKey]);
     if (cardEl) cardEl.classList.add('active-explorer-card');
     
+    var targetScroll = moduloDestino(tabKey, ancla);
+    if (targetScroll) erarioAbrirAncestros(targetScroll);
+    if (targetScroll) {
+      irAlDestino(targetScroll);
+    }
+  }
+
+  /* El bloque al que aterriza un modulo: el ancla pedida o, si no hay, el
+     principio de su panel. */
+  function moduloDestino(tabKey, ancla) {
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
                          (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
                          (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
-    var targetScroll = (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
-    if (targetScroll) erarioAbrirAncestros(targetScroll);
-    if (targetScroll) {
-      /* Se calcula la posicion a mano, descontando la cabecera fija: el
-         scrollIntoView instantaneo encima del suave dejaba el modulo
-         cientos de pixeles por debajo de su inicio. */
-      var margenCabecera = function() {
-        var nav = document.querySelector('.site-top-nav');
-        return (nav ? nav.getBoundingClientRect().height : 0) + 12;
-      };
-      var irAlModulo = function(comportamiento) {
-        var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margenCabecera();
-        window.scrollTo({ top: Math.max(0, y), behavior: comportamiento });
-      };
-      setTimeout(function() { irAlModulo('smooth'); }, 60);
-      /* Las secciones largas terminan de dibujarse despues del primer salto
-         y lo dejan corto: se corrige una vez, si quedo lejos. */
-      setTimeout(function() {
-        var t = targetScroll.getBoundingClientRect().top - margenCabecera();
-        if (Math.abs(t) > 200) irAlModulo('instant');
-      }, 900);
-    }
+    return (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
+  }
+
+  function irAlDestino(targetScroll) {
+    /* Se calcula la posicion a mano, descontando la cabecera fija: el
+       scrollIntoView instantaneo encima del suave dejaba el modulo
+       cientos de pixeles por debajo de su inicio. */
+    var margenCabecera = function() {
+      var nav = document.querySelector('.site-top-nav');
+      return (nav ? nav.getBoundingClientRect().height : 0) + 12;
+    };
+    var irAlModulo = function(comportamiento) {
+      var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margenCabecera();
+      window.scrollTo({ top: Math.max(0, y), behavior: comportamiento });
+    };
+    setTimeout(function() { irAlModulo('smooth'); }, 60);
+    /* Las secciones largas terminan de dibujarse despues del primer salto
+       y lo dejan corto: se corrige una vez, si quedo lejos. */
+    setTimeout(function() {
+      var t = targetScroll.getBoundingClientRect().top - margenCabecera();
+      if (Math.abs(t) > 200) irAlModulo('instant');
+    }, 900);
   }
 
   function plegarDesgloseModulos() {
@@ -26749,6 +26759,72 @@
       t.setAttribute('aria-expanded', 'false');
     });
   }
+
+  /* Paginas de apartado (herramientas.html, busca-y-verifica.html,
+     sigue-el-dinero.html, descarga-los-datos.html, aprende.html y
+     participa.html, desde el 08-10-2026): sus tarjetas traen al lector aqui
+     con ?ir=destino y, si hace falta, &ancla=id de un bloque. Solo se
+     aceptan los destinos de esta lista, y la direccion se limpia al llegar
+     para que recargar no repita la accion. */
+  var IR_MODULOS = ['presupuesto', 'megaobras', 'calculadora', 'verificador', 'ambiente',
+                    'territorio', 'municipios', 'poderes', 'proyeccion2027', 'portal'];
+  var IR_DESTINOS = {
+    egresos: function() {
+      seleccionarModuloExplorer('presupuesto', 'eb-egresos');
+      setTimeout(function() {
+        var c = document.querySelector('#eb-egresos .erario-pleg-cab');
+        if (c && c.getAttribute('aria-expanded') === 'false') erarioPlegToggle('egresos');
+      }, 150);
+    },
+    buscador: function() {
+      seleccionarModuloExplorer('verificador', 'inspExplorador');
+      setTimeout(function() { var i = document.getElementById('inspBuscador'); if (i) i.focus({ preventScroll: true }); }, 1000);
+    },
+    efos: function() { efosAbrir(); },
+    descargas: function() { abrirDescargas(); },
+    diccionario: function() { abrirDescargas('diccionario'); },
+    'csv-municipios': function() { descargarCSV('municipios'); },
+    'faq-glosario': function() { abrirDiccionarioSubtab('faq-glosario'); },
+    'faq-marco-legal': function() { abrirDiccionarioSubtab('faq-marco-legal'); },
+    'faq-preguntas': function() { abrirDiccionarioSubtab('faq-preguntas'); },
+    fuentes: function() { abrirCatalogoFuentes(); },
+    pase: function() { openPaseCivicoModal(); },
+    reporta: function() { openAyudanosFiscalizar(); },
+    nota: function() { abrirNotaPortada(null); },
+    datos: function() {
+      if (document.documentElement.clientWidth <= 1100) toggleMenuMovil(true);
+      toggleMegaMenu('menuDropdownDatos');
+    }
+  };
+  function irDesdeApartado() {
+    var q;
+    try { q = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var destino = q.get('ir');
+    if (!destino) return;
+    var ancla = q.get('ancla');
+    if (ancla && !/^[A-Za-z0-9_-]+$/.test(ancla)) ancla = null;
+    try { history.replaceState(history.state, '', window.location.pathname + window.location.hash); } catch (e) { /* sin historial */ }
+    if (IR_MODULOS.indexOf(destino) !== -1) {
+      seleccionarModuloExplorer(destino, ancla || undefined);
+      /* Recien cargada, la pagina sigue dibujando secciones largas y el
+         salto se queda corto: se repite hasta que el bloque quede arriba. */
+      [1600, 2600].forEach(function(ms) {
+        setTimeout(function() {
+          var t = moduloDestino(destino, ancla);
+          var nav = document.querySelector('.site-top-nav');
+          var alto = (nav ? nav.getBoundingClientRect().height : 0) + 12;
+          if (t && Math.abs(t.getBoundingClientRect().top - alto) > 120) {
+            window.scrollTo({ top: Math.max(0, t.getBoundingClientRect().top + window.pageYOffset - alto), behavior: 'instant' });
+          }
+        }, ms);
+      });
+    }
+    else if (Object.prototype.hasOwnProperty.call(IR_DESTINOS, destino)) IR_DESTINOS[destino]();
+  }
+  /* Al estar listo el documento, no al terminar de cargar: las fuentes y
+     las imagenes externas pueden tardar segundos y el lector esperaria con
+     la portada enfrente. El init corre antes (setTimeout tras el suyo). */
+  document.addEventListener('DOMContentLoaded', function() { setTimeout(irDesdeApartado, 300); });
 
   /* Menú de celular: en pantallas angostas el índice entero (menús,
      acciones, buscador y el recuadro para reportar) se pliega tras el
@@ -28145,6 +28221,7 @@
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     abrirRadarConcepto: abrirRadarConcepto,
     abrirNotaPortada: abrirNotaPortada,
+    irDesdeApartado: irDesdeApartado,
     abrirPresentacion: abrirPresentacion,
     abrirNotaConteoObras: abrirNotaConteoObras,
     goToRef: goToRef,

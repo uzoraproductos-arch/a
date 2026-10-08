@@ -107,7 +107,10 @@ def main():
         open(ruta, 'wb').write(d.encode('utf-8'))
         print('sello %s -> %s en %s (%d dependencias y pie visible | CRLF intactos)' % 
               (actual or 'ninguno', nuevo, nombre, len(ARCHIVOS)))
-    return 0
+    # Las paginas de apartado (herramientas.html, aprende.html...) llevan el
+    # mismo sello: se regeneran con el nuevo.
+    import apartados
+    return apartados.generar(nuevo)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,420 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Genera las paginas de apartado del indice de Auditavision.
+
+Desde el 08-10-2026, seis apartados del indice (Herramientas, Busca y
+verifica, Sigue el dinero, Descarga los datos, Aprende y Participa) ya no se
+desglosan en un menu: cada uno abre su propia pagina, con la informacion
+ordenada por secciones. «Datos de referencia» sigue siendo desplegable.
+
+Las tarjetas de cada pagina llevan al auditor con index.html?ir=destino
+(&ancla=id). El motor (audit-engine.js, funcion irDesdeApartado) solo acepta
+los destinos de su lista y limpia la direccion al llegar.
+
+Uso:
+    python3 herramientas/apartados.py      # regenera las seis paginas
+
+Toma el sello de version de index.html, asi que hay que correrlo despues de
+herramientas/sello.py (sello.py ya lo llama solo). Las paginas se escriben con
+saltos de linea CRLF, la convencion del proyecto. Para cambiar su contenido,
+edita este archivo y vuelve a correrlo: no edites a mano los .html generados.
+"""
+import html
+import os
+import re
+import sys
+
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E")
+
+
+def ir(destino, ancla=None):
+    """Direccion de una tarjeta: el auditor con su destino."""
+    url = 'index.html?ir=' + destino
+    if ancla:
+        url += '&amp;ancla=' + ancla
+    return url
+
+
+# Cada tarjeta: (icono, nombre, descripcion, destino, nota de fuente o None,
+# rubro de color o None). Un destino que empieza con http abre afuera.
+# Las cifras son las mismas que tenia el menu, con la misma fuente.
+APARTADOS = [
+    {
+        'archivo': 'herramientas.html',
+        'menu': 'Herramientas',
+        'icono': '🧰',
+        'titulo': 'Herramientas para seguir el dinero público',
+        'lema': 'El gasto público, a la vista',
+        'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
+                    'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
+                    'Aquí están los cinco módulos del auditor; elige uno y pulsa «Comenzar».'),
+        'nota': True,
+        'guia': True,
+        'secciones': [
+            {
+                'id': 'modulos',
+                'titulo': 'Los cinco módulos',
+                'texto': 'Cada color es un tema. Adentro hay juegos y cuentas para descubrir las cifras tú mismo.',
+                'tarjetas': [
+                    ('⚖️', 'Circuito del Dinero', 'Sigue cada peso: de la Ley de Ingresos a tu municipio.', ir('presupuesto', 'moduloProemio'),
+                     None, 'dinero', ('¿Cuántos billones?', 'Descúbrelo al comenzar')),
+                    ('🏗️', 'Inversión &amp; Megaobras', 'Lo que costaron las grandes obras y lo que se pasaron.', ir('megaobras', 'moduloProemio'),
+                     'Obras del simulador de megaobras (módulo 2)', 'obras', ('13 megaobras', 'De 1988 a la fecha')),
+                    ('💳', 'Calculadora Cívica', 'Descubre a dónde va cada peso de tus impuestos.', ir('calculadora', 'moduloProemio'),
+                     None, 'calculadora', ('Saca tu estado de cuenta', 'Tu impuesto, peso por peso')),
+                    ('🔍', 'Modo Inspector', 'Lo que la ASF observó y sigue sin aclararse.', ir('verificador', 'moduloProemio'),
+                     'ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11: acciones correctivas promovidas, '
+                     '174 solicitudes de aclaración + 2,762 pliegos de observaciones + 2,203 promociones de responsabilidad administrativa + '
+                     '278 avisos al SAT = 5,417 (derivado)', 'inspector', ('5,417 acciones promovidas', 'Por la ASF, sin contar recomendaciones · CP 2024')),
+                    ('🌎', 'Costo Ambiental', 'Lo que el deterioro del ambiente nos cuesta a todos.', ir('ambiente', 'moduloProemio'),
+                     None, 'ambiente', ('¿Cuántos billones?', 'Descúbrelo al comenzar')),
+                ],
+            },
+        ],
+    },
+    {
+        'archivo': 'busca-y-verifica.html',
+        'menu': 'Busca y verifica',
+        'icono': '🔍',
+        'titulo': 'Busca y verifica',
+        'lema': 'Asignaciones, contratos y riesgos',
+        'entrada': ('Encuentra una dependencia, un estado, un municipio o un proveedor y revisa lo que dicen de él '
+                    'los documentos oficiales: la Auditoría Superior de la Federación, el SAT y las plataformas de compras del gobierno.'),
+        'secciones': [
+            {
+                'id': 'asignaciones',
+                'titulo': '🔍 Asignaciones y contratos',
+                'texto': 'Quién recibe el dinero y cómo se contrata.',
+                'tarjetas': [
+                    ('🏛️', 'Auditor de Entes Públicos', 'Busca una dependencia, un estado o un municipio y abre su expediente: autonomía, deuda y observaciones de la ASF.', ir('buscador'), None, 'inspector'),
+                    ('📝', 'Contratos federales en ComprasMX', 'La plataforma oficial que sustituyó a CompraNet en 2025. Toma de ahí el RFC del proveedor y verifícalo aquí.', 'https://comprasmx.buengobierno.gob.mx/', None, None),
+                    ('🚩', 'Radar de Banderas Rojas por Entidad', 'Qué estados dejaron más dinero federal por aclarar ante la ASF en la Cuenta Pública 2024, ordenados como tú elijas.', ir('verificador', 'radarBanderasNacional'), None, 'inspector'),
+                ],
+            },
+            {
+                'id': 'riesgos',
+                'titulo': '⚠️ Detección y riesgos ASF',
+                'texto': 'Casos documentados y listas oficiales para revisar antes de confiar.',
+                'tarjetas': [
+                    ('📂', 'Expedientes de Casos por Aclarar', 'Diez casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.', ir('verificador', 'expedientesCasos'), None, 'inspector'),
+                    ('🧾', '¿Tu proveedor está en la lista negra del SAT? (69-B)', '14,234 registros del listado oficial: presuntos, definitivos, desvirtuados y con sentencia favorable.', ir('efos'), None, 'inspector'),
+                ],
+            },
+        ],
+    },
+    {
+        'archivo': 'sigue-el-dinero.html',
+        'menu': 'Sigue el dinero',
+        'icono': '💰',
+        'titulo': 'Sigue el dinero',
+        'lema': 'Del presupuesto federal a tu municipio',
+        'entrada': ('El dinero público baja por tres pisos: la Federación, los 32 estados y los municipios. '
+                    'Empieza por el presupuesto federal o ve directo a tu entidad.'),
+        'secciones': [
+            {
+                'id': 'federal',
+                'titulo': '📊 Presupuesto federal',
+                'texto': 'Cuánto se aprobó, en qué se gasta y qué viene para 2027.',
+                'tarjetas': [
+                    ('💰', 'Explorador del PEF 2026', 'Desglose de los $10.19 billones aprobados en el Circuito del Dinero.', ir('presupuesto'),
+                     'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
+                    ('🏢', 'Ramos y Dependencias del PEF 2026', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', ir('egresos'), None, 'dinero'),
+                    ('🏗️', 'Inversión Pública &amp; Megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Fuentes por obra en verificación.', ir('megaobras'), None, 'obras'),
+                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos, y la Constitución económica que lo sustenta.', ir('proyeccion2027'), None, 'dinero'),
+                    ('🌎', 'Costo Ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.', ir('ambiente'), None, 'ambiente'),
+                ],
+            },
+            {
+                'id': 'territorio',
+                'titulo': '🗺️ Entidades y municipios',
+                'texto': 'Lo que llega a cada estado y a cada municipio, y lo que cuesta cada Poder.',
+                'tarjetas': [
+                    ('🗺️', 'Las 32 Entidades: del Peso Federal al Estatal', 'Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.', ir('territorio'), None, 'dinero'),
+                    ('🏘️', 'Los 2,479 Municipios: Predial y Transferencias', 'Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.', ir('municipios'), None, 'dinero'),
+                    ('🧮', 'Calculadora Cívica de Tu Sueldo', 'A qué rubros y fondos se van los impuestos de tu nómina.', ir('calculadora'), None, 'calculadora'),
+                    ('⚖️', 'Lo que Cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', ir('poderes'), None, 'dinero'),
+                ],
+            },
+        ],
+    },
+    {
+        'archivo': 'descarga-los-datos.html',
+        'menu': 'Descarga los datos',
+        'icono': '💾',
+        'titulo': 'Descarga los datos',
+        'lema': 'Datos abiertos con su fuente',
+        'entrada': ('Todo lo que ves en el auditor sale de documentos oficiales. Aquí te lo llevas en archivos '
+                    'que abren en Excel, con la fuente de cada base, para que hagas tus propias cuentas.'),
+        'secciones': [
+            {
+                'id': 'abiertos',
+                'titulo': '💾 Datos abiertos',
+                'texto': 'Bases en CSV, listas para revisar.',
+                'tarjetas': [
+                    ('📥', 'Descarga en CSV (abre en Excel)', 'Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.', ir('descargas'), None, 'dinero'),
+                    ('🏘️', 'Base de Datos Municipal EFIPEM (INEGI)', 'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.', ir('csv-municipios'), None, 'dinero'),
+                ],
+            },
+            {
+                'id': 'informes',
+                'titulo': '📑 Informes oficiales',
+                'texto': 'Lo que revisó la Auditoría Superior y qué contiene cada archivo.',
+                'tarjetas': [
+                    ('🔎', 'Informes de la Cuenta Pública (ASF)', 'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.', ir('verificador', 'cuentaPublicaASF'), None, 'inspector'),
+                    ('📋', 'Diccionario de Datos', 'Qué contiene cada archivo de datos de la plataforma, campo por campo.', ir('diccionario'), None, None),
+                ],
+            },
+        ],
+    },
+    {
+        'archivo': 'aprende.html',
+        'menu': 'Aprende',
+        'icono': '📖',
+        'titulo': 'Aprende',
+        'lema': 'Biblioteca y kit del auditor ciudadano',
+        'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
+                    'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista.'),
+        'secciones': [
+            {
+                'id': 'biblioteca',
+                'titulo': '🏛️ Biblioteca hacendaria',
+                'texto': 'Marco legal, glosario y preguntas frecuentes.',
+                'tarjetas': [
+                    ('📖', 'Glosario de Términos Hacendarios', 'Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador.', ir('faq-glosario'), None, None),
+                    ('⚖️', 'Marco Legal Hacendario', 'Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.', ir('faq-marco-legal'), None, None),
+                    ('💡', 'Preguntas Frecuentes en Casillas Didácticas', 'Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar.', ir('faq-preguntas'), None, None),
+                ],
+            },
+            {
+                'id': 'kit',
+                'titulo': '🧭 Kit del auditor ciudadano',
+                'texto': 'Fuentes y guías para revisar por tu cuenta.',
+                'tarjetas': [
+                    ('🗺️', 'Enciclopedia Hacendaria (9 Módulos)', 'El compendio completo: presupuesto, Poderes, personajes, marco legal y comunidad.', 'enciclopedia.html', None, None),
+                    ('📑', 'Compendio de Fuentes Oficiales', 'DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.', ir('fuentes'), None, None),
+                    ('🍺', 'Pase y Guías del Auditor Cívico', 'Herramientas independientes de fiscalización ciudadana ($79/mes · Menos que dos caguamas).', ir('pase'), None, None),
+                ],
+            },
+        ],
+    },
+    {
+        'archivo': 'participa.html',
+        'menu': 'Participa',
+        'icono': '💬',
+        'titulo': 'Participa',
+        'lema': 'Ágora cívica y canales oficiales',
+        'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
+                    'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
+        'secciones': [
+            {
+                'id': 'agora',
+                'titulo': '💬 Ágora cívica y diálogos',
+                'texto': 'Un espacio plural para argumentar con datos.',
+                'tarjetas': [
+                    ('🌐', 'Portal Público Digital', 'Un espacio plural para contrastar posturas con fuentes y responder con argumentos.', ir('portal', 'bloquePortal'), None, None),
+                    ('✍️', 'Iniciar Nuevo Diálogo o Postura', 'Publica tu argumento con seudónimo, tu postura y tus fuentes.', ir('portal', 'portalNuevoDebateForm'), None, None),
+                    ('🗣️', 'Cuaderno de argumentos (en este navegador)', 'Consulta los argumentos ciudadanos filtrados por Presupuesto, Megaobras, Deuda y SCJN.', ir('portal', 'portalFilterBar'), None, None),
+                ],
+            },
+            {
+                'id': 'garantias',
+                'titulo': '🛡️ Garantías cívicas y formación',
+                'texto': 'Qué pasa con lo que escribes y a dónde llevar un señalamiento.',
+                'tarjetas': [
+                    ('🔒', 'Tu Privacidad: a Dónde Va lo que Escribes', 'Sin correos, teléfonos ni rastreo. Qué se guarda, dónde y quién lo ve, dicho sin adornos.', ir('portal', 'comOrientacion'), None, None),
+                    ('🏛️', 'Canales Oficiales de Denuncia', 'Las seis puertas donde un señalamiento se vuelve expediente: ASF, SABG, FGR, SAT, Transparencia y contralorías internas.', ir('portal', 'bloqueCanales'), None, 'inspector'),
+                    ('📜', 'Decálogo del Ciudadano Auditor', 'Diez reglas que separan una queja de una denuncia, cada una con su fundamento legal.', ir('portal', 'decalogoWrap'), None, None),
+                    ('📢', 'Reporta lo que Viste', 'Arma tu reporte con qué, dónde, cuándo y con qué prueba, y llévalo ya redactado a un canal oficial.', ir('reporta'), None, 'inspector'),
+                ],
+            },
+        ],
+    },
+]
+
+GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
+        <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
+        <ol class="apartado-pasos">
+          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> todavía no tiene documento que lo confirme.</span></li>
+        </ol>
+      </section>'''
+
+
+def esc_attr(s):
+    return html.escape(s, quote=True)
+
+
+def cabecera(actual, sello):
+    items = []
+    for a in APARTADOS:
+        cur = ' aria-current="page"' if a['archivo'] == actual else ''
+        items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="%s"%s>%s</a></div>'
+                     % (a['archivo'], cur, a['menu']))
+    items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="index.html?ir=datos" '
+                 'title="Abre en el auditor el radar con las cifras de referencia">Datos de referencia</a></div>')
+    return '''  <nav class="site-top-nav" aria-label="Navegación principal">
+    <a class="nav-brand-group" href="index.html" title="Volver al inicio de Auditavisión">
+      <span class="brand-logo-btn" aria-hidden="true"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></span>
+      <span class="nav-brand-text">
+        <span class="nav-brand-title">Auditavisión</span>
+        <span class="nav-brand-sub">El gasto público, a la vista</span>
+      </span>
+    </a>
+
+    <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
+      <span class="nav-hamb-rayas" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-hamb-txt">Menú</span>
+    </button>
+
+    <div class="nav-indice" id="navIndiceMovil">
+    <div class="nav-center-links">
+%s
+    </div>
+
+    <div class="nav-right-container">
+      <div class="nav-right-actions">
+        <a class="nav-action-btn nav-feedback-btn" href="index.html?ir=reporta" title="Ayúdanos a fiscalizar: comparte lo que viste y reporta anomalías presupuestales">
+          <span>📢</span>
+          <span>Cuéntanos lo que viste</span>
+        </a>
+        <button type="button" class="nav-action-btn nav-share-btn" id="apartadoCompartir" title="Compartir esta página o copiar su enlace">
+          <span>🔗</span>
+          <span>Compartir</span>
+        </button>
+        <a href="enciclopedia.html#tab-panel-faq" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Enciclopedias Interactivas">
+          <span>🪐</span>
+          <span>Inspector Meteoro</span>
+        </a>
+      </div>
+      <div class="nav-movil-ayuda">
+        <p class="nav-movil-ayuda-tit">¿Viste algo raro con el dinero público?</p>
+        <p class="nav-movil-ayuda-txt">Cuéntanos qué, dónde y cuándo. Te ayudamos a ordenarlo y a llevarlo al canal oficial que corresponde.</p>
+        <a class="nav-movil-ayuda-btn" href="index.html?ir=reporta">📢 Cuéntanos lo que viste</a>
+      </div>
+    </div>
+    </div>
+  </nav>''' % '\n'.join(items)
+
+
+def tarjeta(t):
+    icono, nombre, desc, destino, fuente, rubro = t[:6]
+    dato = t[6] if len(t) > 6 else None
+    externo = destino.startswith('http')
+    clase = 'apartado-tarjeta' + (' rubro-' + rubro if rubro else '')
+    extra = ' target="_blank" rel="noopener noreferrer"' if externo else ''
+    titulo = ' title="%s"' % esc_attr(fuente) if fuente else ''
+    accion = 'Abrir en su sitio oficial ↗' if externo else ('Comenzar ➔' if 'moduloProemio' in destino else 'Abrir ➔')
+    partes = ['        <a class="%s" href="%s"%s%s>' % (clase, destino, extra, titulo),
+              '          <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>' % icono,
+              '          <span class="apartado-tarjeta-nombre">%s</span>' % nombre,
+              '          <span class="apartado-tarjeta-desc">%s</span>' % desc]
+    if dato:
+        partes.append('          <span class="apartado-tarjeta-dato"><strong>%s</strong><span>%s</span></span>' % dato)
+    partes.append('          <span class="apartado-tarjeta-accion">%s</span>' % accion)
+    partes.append('        </a>')
+    return '\n'.join(partes)
+
+
+def pagina(a, sello):
+    secciones = []
+    for s in a['secciones']:
+        secciones.append('''      <section class="apartado-seccion" id="%s" aria-labelledby="%s-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="%s-tit">%s</h2>
+          <p class="apartado-seccion-texto">%s</p>
+        </div>
+        <div class="apartado-rejilla">
+%s
+        </div>
+      </section>''' % (s['id'], s['id'], s['id'], s['titulo'], s['texto'], '\n'.join(tarjeta(t) for t in s['tarjetas'])))
+
+    if len(a['secciones']) > 1:
+        saltos = '\n'.join('          <a href="#%s">%s</a>' % (s['id'], s['titulo']) for s in a['secciones'])
+        en_pagina = '''      <nav class="apartado-saltos" aria-label="En esta página">
+          <span class="apartado-saltos-tit">En esta página:</span>
+%s
+      </nav>''' % saltos
+    else:
+        en_pagina = ''
+
+    nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
+            if a.get('nota') else '')
+    guia = GUIA if a.get('guia') else ''
+    titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
+    descripcion = re.sub('<[^>]+>', '', a['entrada'])
+
+    return '''<!DOCTYPE html>
+<!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{titulo_doc}</title>
+  <meta name="description" content="{descripcion}">
+  <meta name="theme-color" content="#0b2a63">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="{favicon}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+</head>
+<body data-pagina="apartado">
+{cabecera}
+
+  <main class="apartado" id="contenido">
+    <header class="apartado-cab">
+      <div class="apartado-ancho">
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <span>{menu}</span></nav>
+        <span class="apartado-lema">{icono} {lema}</span>
+        <h1 class="apartado-titulo">{titulo}</h1>
+        <p class="apartado-entrada">{entrada}</p>
+        {nota}
+      </div>
+    </header>
+
+    <div class="apartado-ancho apartado-cuerpo">
+{en_pagina}
+      {guia}
+{secciones}
+    </div>
+  </main>
+
+  <footer class="apartado-pie">
+    <div class="apartado-ancho">
+      <a class="apartado-volver" href="index.html">← Volver al auditor</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
+    </div>
+  </footer>
+
+  <script src="assets/auditor/js/apartados.js?v={sello}"></script>
+</body>
+</html>
+'''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
+           cabecera=cabecera(a['archivo'], sello), menu=a['menu'], icono=a['icono'], lema=a['lema'],
+           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia,
+           secciones='\n\n'.join(secciones))
+
+
+def generar(sello=None):
+    if sello is None:
+        d = open(os.path.join(RAIZ, 'index.html'), 'rb').read().decode('utf-8')
+        m = re.search(r'id="selloVersion">([0-9a-z]+)<', d)
+        if not m:
+            print('ERROR: no encontré el sello en index.html')
+            return 1
+        sello = m.group(1)
+    for a in APARTADOS:
+        texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, a['archivo']), 'wb').write(texto.encode('utf-8'))
+    print('apartados: %d páginas generadas con el sello %s' % (len(APARTADOS), sello))
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(generar())
