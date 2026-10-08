@@ -3,8 +3,11 @@
 
    Va después de auditavision.css y solo ajusta el aspecto:
    - Sin fotografía de fondo, en los dos temas.
-   - Tema claro, que es el de entrada: fondo blanco, barra superior azul y
-     franjas grises, a la manera de Civio y de USAspending.
+   - Tema claro, que es el de entrada. Paleta inspirada en el dragón blanco
+     de ojos azules (concepto «corporativo» que pidió el autor, 08-10-2026):
+     azul corporativo fuerte en la cabecera y una escala de azules que baja
+     hasta el blanco en las franjas. Los colores de contenido (rubros, rojo
+     de alertas, chips) no cambian: la escala es solo el marco.
    - Cada rubro tiene su color, como los bloques de Operação Serenata de
      Amor: una franja arriba de la tarjeta, el icono teñido y el botón.
    ========================================================================== */
@@ -29,30 +32,32 @@ body { background-color: #0f1218; }
 
 /* --- Tema claro: paleta cívica ------------------------------------------ */
 [data-theme="light"] {
-  --civ-azul: #0f3d75;
-  --civ-azul-medio: #1f5fa8;
-  --civ-azul-claro: #e8f0fa;
-  --civ-gris: #f2f4f7;
-  --civ-gris-borde: #d7dce4;
+  --civ-azul: #0b2a63;
+  --civ-azul-medio: #1a56b8;
+  --civ-azul-claro: #e3f0fd;
+  --civ-celeste: #4f9be8;
+  --civ-hielo: #d6e9fc;
+  --civ-gris: #f1f7fe;
+  --civ-gris-borde: #c9d9ee;
 
-  --navy: #0f3d75;
+  --navy: #0b2a63;
   --bg-surface: #ffffff;
   --bg-card: #ffffff;
-  --bg-card-alt: #f6f7f9;
-  --bg-card-hover: #f2f6fb;
-  --border-subtle: #e1e5ec;
-  --border-accent: #cfd5df;
+  --bg-card-alt: #f1f7fe;
+  --bg-card-hover: #e3f0fd;
+  --border-subtle: #d9e6f5;
+  --border-accent: #c9d9ee;
   --border-gold: #c9d6e8;
-  --border-card: #e1e5ec;
+  --border-card: #d9e6f5;
 
   /* El acento dorado pasa a azul institucional */
-  --gold: #1f5fa8;
-  --gold-bright: #0f3d75;
-  --gold-glow: rgba(31, 95, 168, 0.12);
-  --gold-gradient: linear-gradient(135deg, #2a6cb8 0%, #1f5fa8 50%, #0f3d75 100%);
-  --text-gold: #0f3d75;
+  --gold: #1a56b8;
+  --gold-bright: #0b2a63;
+  --gold-glow: rgba(26, 86, 184, 0.12);
+  --gold-gradient: linear-gradient(135deg, #4f9be8 0%, #1a56b8 50%, #0b2a63 100%);
+  --text-gold: #0b2a63;
 
-  --text-main: #1b2230;
+  --text-main: #13203a;
   --text-secondary: #4a5366;
   --text-dim: #6b7385;
 }
@@ -60,7 +65,7 @@ body { background-color: #0f1218; }
 
 /* Barra superior azul, como USAspending */
 [data-theme="light"] .site-top-nav {
-  background: var(--civ-azul);
+  background: linear-gradient(90deg, #071d47 0%, var(--civ-azul) 55%, #123d8a 100%);
   box-shadow: 0 2px 8px rgba(15, 61, 117, 0.18);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -289,66 +294,70 @@ body { background-color: #0f1218; }
 }
 
 /* ==========================================================================
-   LOS SEIS RECTÁNGULOS DE LA PORTADA (08-10-2026)
-   1 cabecera · 2 radar · 3 panorama · 4 auditoría en imágenes · 5 pie ·
-   6 renglón final. Cada uno es una franja de ancho completo con su fondo y
-   una raya de color arriba, como los bloques de Operação Serenata de Amor.
+   LOS SEIS RECTÁNGULOS DE LA PORTADA (orden del 08-10-2026)
+   1 cabecera · 2 los cinco módulos · 3 auditoría en imágenes ·
+   4 datos de referencia (radar) · 5 pie · 6 renglón final.
+   Cada uno es una franja de ancho completo. El fondo baja del blanco al
+   azul hielo y la raya que los separa alterna celeste y azul.
    ========================================================================== */
 :root {
   --rect-raya: 6px;
   --rect-ancho: 1440px;
+  --raya-a: #4f9be8;  /* celeste */
+  --raya-b: #1a56b8;  /* azul */
 }
 
-/* 1. Cabecera */
-.site-top-nav { border-bottom: var(--rect-raya) solid var(--rubro-dinero); }
+/* 1. Cabecera: azul corporativo */
+.site-top-nav,
+[data-theme="light"] .site-top-nav { border-bottom: var(--rect-raya) solid var(--raya-a); }
 
-/* 2. Radar: datos de referencia y cifras en perspectiva */
+/* 2. Los cinco módulos: blanco */
+.explorer-hero-section {
+  max-width: none;
+  padding: 36px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px)) 40px;
+  border-bottom: var(--rect-raya) solid var(--raya-b);
+}
+[data-theme="light"] .explorer-hero-section { background: #ffffff; }
+/* El módulo que se abre queda pegado a los rubros, en su propio marco */
+.seccion-desglose-modulos.desglose-abierto { border-bottom: var(--rect-raya) solid var(--raya-b); }
+
+/* 3. Auditoría en imágenes: blanco hielo */
+.civic-showcase-section {
+  max-width: none;
+  margin: 0;
+  padding: 32px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px));
+  border-bottom: var(--rect-raya) solid var(--raya-a);
+}
+[data-theme="light"] .civic-showcase-section { background: var(--civ-gris); }
+
+/* 4. Datos de referencia: azul muy claro */
 .radar-hacendario-hub,
 [data-theme="light"] .radar-hacendario-hub {
-  border-bottom: var(--rect-raya) solid var(--rubro-inspector);
+  border-bottom: var(--rect-raya) solid var(--raya-b);
+  padding-bottom: 8px;
 }
+[data-theme="light"] .radar-hacendario-hub { background: var(--civ-azul-claro); }
+[data-theme="light"] .radar-row-telemetry { background: rgba(11, 42, 99, 0.05); }
 /* La cinta de datos traía colores claros pensados para el fondo oscuro */
 [data-theme="light"] .tel-item { color: var(--text-secondary); }
 [data-theme="light"] .tel-item strong.gold { color: var(--civ-azul); }
 [data-theme="light"] .tel-item .red { color: #b3261e; }
 [data-theme="light"] .tel-item .green { color: #1d6f4a; }
 
-/* 3. Panorama */
-.explorer-hero-section {
-  max-width: none;
-  padding: 36px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px)) 40px;
-  border-bottom: var(--rect-raya) solid var(--rubro-obras);
-}
-[data-theme="light"] .explorer-hero-section { background: #ffffff; }
-
-/* Módulo abierto: queda dentro de su propio marco, debajo del panorama */
-.seccion-desglose-modulos.desglose-abierto {
-  border-bottom: var(--rect-raya) solid var(--rubro-obras);
-}
-
-/* 4. Auditoría en imágenes */
-.civic-showcase-section {
-  max-width: none;
-  margin: 0;
-  padding: 32px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px));
-  border-bottom: var(--rect-raya) solid var(--rubro-calculadora);
-}
-[data-theme="light"] .civic-showcase-section { background: var(--civ-gris); }
-
-/* 5. Pie */
+/* 5. Pie: azul hielo */
 .site-footer { border-top: 0; padding-bottom: 0; }
-[data-theme="light"] .site-footer { border-top: 0; background: #e9edf2; }
+[data-theme="light"] .site-footer { border-top: 0; background: var(--civ-hielo); }
 .footer-inner { max-width: var(--rect-ancho); }
 
-/* 6. Renglón final */
+/* 6. Renglón final: azul corporativo, cierra como abrió la cabecera */
 .footer-bottom {
   margin: 40px -24px 0;
   padding: 16px 24px;
-  border-top: var(--rect-raya) solid var(--rubro-ambiente);
+  border-top: var(--rect-raya) solid var(--raya-a);
   background: #070a10;
   color: #c9d8ec;
 }
-[data-theme="light"] .footer-bottom { background: var(--civ-azul); border-top-color: var(--rubro-ambiente); }
+[data-theme="light"] .footer-bottom { background: linear-gradient(90deg, #071d47 0%, var(--civ-azul) 55%, #123d8a 100%); border-top-color: var(--raya-a); }
 [data-theme="light"] .footer-bottom span,
 [data-theme="light"] .footer-bottom b { color: #ffffff !important; }
 

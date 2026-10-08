@@ -276,6 +276,18 @@ recuadro rojo «¿Viste algo raro con el dinero público?» con el botón
 «Cuéntanos lo que viste». Se cierra al elegir un destino, al tocar fuera o con
 Escape. En computadora la cabecera no cambia.
 
+**Paleta azul y nuevo orden (08-10-2026, sello 20261008d).** El autor pidió
+basar los colores en el dragón blanco de ojos azules (concepto «corporativo»):
+la cabecera en azul corporativo fuerte (degradado #071d47 → #0b2a63 → #123d8a)
+y una escala de azules que baja hasta el blanco en las franjas (blanco, blanco
+hielo #f1f7fe, azul claro #e3f0fd, azul hielo #d6e9fc), con rayas que alternan
+celeste #4f9be8 y azul #1a56b8. El acento del tema claro es azul. Los colores
+de contenido no cambian: rubros, rojo de alertas y chips de estado. Es solo
+el marco; no se usa ningún nombre, logo ni imagen de la franquicia.
+Nuevo orden de los rectángulos: 1 cabecera, 2 los cinco módulos, 3 auditoría
+en imágenes, 4 datos de referencia y radar (antes iba arriba; ahora va justo
+antes de «Principio y Compromiso Ciudadano»), 5 pie, 6 renglón final.
+
 ## Estado actual
 
 ### Hecho
