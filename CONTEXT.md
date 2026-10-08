@@ -288,6 +288,22 @@ Nuevo orden de los rectángulos: 1 cabecera, 2 los cinco módulos, 3 auditoría
 en imágenes, 4 datos de referencia y radar (antes iba arriba; ahora va justo
 antes de «Principio y Compromiso Ciudadano»), 5 pie, 6 renglón final.
 
+**Herramientas y Datos en el índice (08-10-2026, sello 20261008e).** El autor
+pidió que la portada la protagonicen las imágenes. Cambios:
+- El bloque del panorama (título, «Cómo se usa» y los cinco módulos) pasó al
+  índice como **primer apartado, «Herramientas»**: un panel ancho que se abre
+  desde la cabecera. Al pulsar «Comenzar», el panel se cierra (también si el
+  cursor sigue encima: clase `mega-suprimido`) y el módulo abre debajo de las
+  imágenes.
+- El radar (datos de referencia y cifras en perspectiva) pasó al índice como
+  **último apartado, «Datos de referencia»**.
+- La portada queda en cuatro franjas: 1 cabecera, 2 auditoría en imágenes,
+  más grande (alto de hasta 70 % de la pantalla, título y pregunta mayores),
+  3 pie, más discreto (letra y márgenes menores), y 4 renglón final.
+- `seleccionarModuloExplorer` ahora calcula el salto descontando la cabecera
+  fija (antes el salto de respaldo dejaba el módulo cientos de píxeles abajo),
+  y `plegarDesgloseModulos` vuelve al inicio de la página.
+
 ## Estado actual
 
 ### Hecho

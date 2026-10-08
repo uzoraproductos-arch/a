@@ -68,8 +68,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261008d">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261008d">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261008f">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261008f">
 </head>
 <body data-pagina="auditor">
 
@@ -122,6 +122,93 @@
     <!-- Centro / Mega-Menús Estilo USAspending con Acceso Directo y a la Enciclopedia -->
     <div class="nav-center-links" role="menubar">
       
+      <!-- Menú 0: Herramientas. Los cinco módulos y la guía «Cómo se usa»
+           viven aquí desde el 08-10-2026 (antes eran un bloque de la portada). -->
+      <div class="nav-menu-item nav-menu-herramientas" id="navItemHerramientas">
+        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownHerramientas')" aria-haspopup="true" aria-expanded="false">
+          <span>Herramientas</span> <span class="caret">▾</span>
+        </button>
+        <div class="mega-menu-dropdown mega-herramientas" id="menuDropdownHerramientas" role="menu">
+          <div class="explorer-hero-box">
+            <span class="explorer-hero-tag">El gasto público, a la vista</span>
+            <h2 class="explorer-hero-title">Explora el panorama de las finanzas públicas en México<button type="button" class="hero-nota-btn" onclick="window.AuditEngine.abrirNotaPortada(this)" aria-haspopup="dialog" aria-label="Qué son las finanzas públicas y qué encontrarás aquí" title="Qué son las finanzas públicas y qué encontrarás aquí"><span aria-hidden="true">📖</span></button></h2>
+            <p class="explorer-hero-desc">
+              Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar.
+            </p>
+
+            <!-- Cómo se usa: la introducción, sin cifras (las cifras viven dentro de cada módulo) -->
+            <div class="portada-guia" aria-labelledby="portadaGuiaTitulo">
+              <h2 class="portada-guia-titulo" id="portadaGuiaTitulo">Cómo se usa</h2>
+              <ol class="portada-pasos">
+                <li><span class="portada-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
+                <li><span class="portada-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+                <li><span class="portada-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> todavía no tiene documento que lo confirme.</span></li>
+              </ol>
+              <p class="portada-guia-nota">Si una palabra está subrayada, tócala y te explicamos qué significa.</p>
+            </div>
+
+            <!-- Cuadrícula de 4 Módulos Operativos de Fiscalización Ciudadana -->
+            <div class="explorer-cards-grid" role="region" aria-label="Módulos de Auditoría">
+              <!-- Módulo 1 -->
+              <div class="explorer-card active-explorer-card" id="cardModPresupuesto">
+                <span class="explorer-card-icon" aria-hidden="true">⚖️</span>
+                <h3 class="explorer-card-title">Circuito del Dinero</h3>
+                <p class="explorer-card-desc">Sigue cada peso: de la Ley de Ingresos a tu municipio.</p>
+                <div class="explorer-card-stat" title="La cifra del Presupuesto de Egresos 2026 se descubre dentro del módulo"><strong>¿Cuántos billones?</strong><span>Descúbrelo al comenzar</span></div>
+                <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('presupuesto', 'moduloProemio')" aria-label="Comenzar: Circuito del Dinero">
+                  <span>Comenzar</span> ➔
+                </button>
+              </div>
+
+              <!-- Módulo 2 -->
+              <div class="explorer-card" id="cardModMegaobras">
+                <span class="explorer-card-icon" aria-hidden="true">🏗️</span>
+                <h3 class="explorer-card-title">Inversión &amp; Megaobras</h3>
+                <p class="explorer-card-desc">Lo que costaron las grandes obras y lo que se pasaron.</p>
+                <div class="explorer-card-stat" title="Obras del simulador de megaobras (módulo 2)"><strong>13 megaobras</strong><span>De 1988 a la fecha</span></div>
+                <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras', 'moduloProemio')" aria-label="Comenzar: Inversión y Megaobras">
+                  <span>Comenzar</span> ➔
+                </button>
+              </div>
+
+              <!-- Módulo 3 -->
+              <div class="explorer-card" id="cardModCalculadora">
+                <span class="explorer-card-icon" aria-hidden="true">💳</span>
+                <h3 class="explorer-card-title">Calculadora Cívica</h3>
+                <p class="explorer-card-desc">Descubre a dónde va cada peso de tus impuestos.</p>
+                <div class="explorer-card-stat" title="Calcula tu impuesto 2026 y ve a dónde va cada peso"><strong>Saca tu estado de cuenta</strong><span>Tu impuesto, peso por peso</span></div>
+                <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora', 'moduloProemio')" aria-label="Comenzar: Calculadora Cívica">
+                  <span>Comenzar</span> ➔
+                </button>
+              </div>
+
+              <!-- Módulo 4 -->
+              <div class="explorer-card" id="cardModInspector">
+                <span class="explorer-card-icon" aria-hidden="true">🔍</span>
+                <h3 class="explorer-card-title">Modo Inspector</h3>
+                <p class="explorer-card-desc">Lo que la ASF observó y sigue sin aclararse.</p>
+                <div class="explorer-card-stat" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11: acciones correctivas promovidas, 174 solicitudes de aclaración + 2,762 pliegos de observaciones + 2,203 promociones de responsabilidad administrativa + 278 avisos al SAT = 5,417 (derivado)"><strong>5,417 acciones promovidas</strong><span>Por la ASF, sin contar recomendaciones · CP 2024</span></div>
+                <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador', 'moduloProemio')" aria-label="Comenzar: Modo Inspector">
+                  <span>Comenzar</span> ➔
+                </button>
+              </div>
+
+              <!-- Módulo 5 -->
+              <div class="explorer-card explorer-card-eco" id="cardModAmbiente">
+                <span class="explorer-card-icon" aria-hidden="true">🌎</span>
+                <h3 class="explorer-card-title">Costo Ambiental</h3>
+                <p class="explorer-card-desc">Lo que el deterioro del ambiente nos cuesta a todos.</p>
+                <div class="explorer-card-stat" title="La cifra del INEGI (Cuentas Económicas y Ecológicas de México 2024) se descubre dentro del módulo"><strong>¿Cuántos billones?</strong><span>Descúbrelo al comenzar</span></div>
+                <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('ambiente', 'moduloProemio')" aria-label="Comenzar: Costo Ambiental">
+                  <span>Comenzar</span> ➔
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       <!-- Menú 1: Búsqueda Forense (Award Search) -->
       <div class="nav-menu-item" id="navItemBusqueda">
         <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownBusqueda')" aria-haspopup="true" aria-expanded="false">
@@ -321,6 +408,269 @@
         </div>
       </div>
 
+      <!-- Menú 6: Datos de referencia. El radar hacendario (cinta de datos,
+           cifras en perspectiva y su desglose) vive aquí desde el 08-10-2026. -->
+      <div class="nav-menu-item nav-menu-datos" id="navItemDatos">
+        <button type="button" class="mega-menu-trigger" onclick="window.AuditEngine.toggleMegaMenu('menuDropdownDatos')" aria-haspopup="true" aria-expanded="false">
+          <span>Datos de referencia</span> <span class="caret">▾</span>
+        </button>
+        <div class="mega-menu-dropdown mega-datos" id="menuDropdownDatos" role="menu">
+          <div class="radar-hacendario-hub" id="radarAlertaBar" role="region" aria-label="Radar hacendario: cifras en perspectiva">
+            
+            <!-- Línea 1: Notificaciones y datos oficiales del erario circulando en tiempo real -->
+            <div class="radar-row-telemetry">
+              <div class="radar-tel-etiqueta" style="display:inline-flex; align-items:center; gap:6px; padding:0 14px; background:rgba(220,38,38,0.22); color:#fca5a5; font-weight:800; font-family:var(--font-mono); font-size:10.5px; border-right:1px solid rgba(220,38,38,0.3); white-space:nowrap; z-index:2;">
+                <span class="pulsing-radar-dot" style="width:7px; height:7px;"></span>
+                <span>DATOS DE REFERENCIA:</span>
+              </div>
+              <div class="radar-telemetry-track">
+                <div class="tel-item" title="Presupuesto de Egresos de la Federación 2026, art. 1">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
+                <div class="tel-item" title="PEF 2026: estimación del gasto federalizado total, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF (derivado)">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
+                <div class="tel-item" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
+                <div class="tel-item" title="Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp">ISR, IVA e IEPS estimados en la Ley de Ingresos 2026: <strong class="green">$5.42 billones</strong></div>
+                <div class="tel-item" title="PEF 2026, Ramo General 28: $1,456,045.9 mdp">Participaciones a estados y municipios (Ramo 28): <strong class="gold">$1.46 billones</strong></div>
+                <div class="tel-item" title="PEF 2026, Anexo 8: $1,572,073.3 mdp">Costo financiero de la deuda (PEF 2026, Anexo 8): <strong class="red">$1.57 billones</strong> al año</div>
+                <div class="tel-item" title="SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades">Deuda de los 32 gobiernos estatales (SHCP, Sistema de Alertas): <strong class="gold">$643,695.7 mdp</strong></div>
+
+                <!-- Repetición continua para loop infinito sin saltos -->
+                <div class="tel-item" aria-hidden="true" title="Presupuesto de Egresos de la Federación 2026, art. 1">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
+                <div class="tel-item" aria-hidden="true" title="PEF 2026: estimación del gasto federalizado total, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF (derivado)">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
+                <div class="tel-item" aria-hidden="true" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
+                <div class="tel-item" aria-hidden="true" title="Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp">ISR, IVA e IEPS estimados en la Ley de Ingresos 2026: <strong class="green">$5.42 billones</strong></div>
+                <div class="tel-item" aria-hidden="true" title="PEF 2026, Ramo General 28: $1,456,045.9 mdp">Participaciones a estados y municipios (Ramo 28): <strong class="gold">$1.46 billones</strong></div>
+                <div class="tel-item" aria-hidden="true" title="PEF 2026, Anexo 8: $1,572,073.3 mdp">Costo financiero de la deuda (PEF 2026, Anexo 8): <strong class="red">$1.57 billones</strong> al año</div>
+                <div class="tel-item" aria-hidden="true" title="SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades">Deuda de los 32 gobiernos estatales (SHCP, Sistema de Alertas): <strong class="gold">$643,695.7 mdp</strong></div>
+              </div>
+            </div>
+
+            <!-- Línea 2: Telemetría viva y radares organizados con tiempo de sesión -->
+            <div class="radar-row-live">
+              <div class="radar-brand-wrap">
+                <div class="radar-badge-pulse" title="Tiempo de tu visita: las equivalencias reparten cifras anuales por segundo">
+                  <span class="pulsing-radar-dot"></span>
+                  <span class="radar-tag">Radar hacendario · cifras en perspectiva</span>
+                  <span class="radar-timer" id="radarSessionTimer">⏱️ 00:00</span>
+                </div>
+
+                <!-- Controles para mostrar/ocultar y desglosar estadísticas -->
+                <div class="radar-controls-cluster">
+                  <button type="button" class="radar-ctrl-btn" id="radarToggleStatsBtn" onclick="window.AuditEngine.toggleRadarStats()" aria-expanded="true" aria-controls="radarLiveItems" title="Ocultar o mostrar las estadísticas para facilitar la visión de lectura">
+                    <span class="radar-btn-icon" id="radarToggleStatsIcon">👁️</span>
+                    <span class="radar-btn-text" id="radarToggleStatsText">Ocultar estadísticas</span>
+                  </button>
+                  <button type="button" class="radar-ctrl-btn radar-ctrl-desglose" id="radarToggleDesgloseBtn" onclick="window.AuditEngine.toggleRadarDesglose()" aria-expanded="false" aria-controls="radarDesgloseDrawer" title="Ver cómo se calcula cada cifra y de dónde sale">
+                    <span class="radar-btn-icon" id="radarToggleDesgloseIcon">📊</span>
+                    <span class="radar-btn-text" id="radarToggleDesgloseText">Desglosar cifras ▾</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="radar-live-items" id="radarLiveItems">
+                <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('megaobras', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('megaobras', this);}" title="Qué es esta cifra y cómo se calcula">
+                  <span class="radar-stat-lbl">🚅 Megaobras (equivalencia):</span>
+                  <strong class="radar-stat-val val-amber" id="radarMegaobrasVal">+$0.00</strong>
+                  <span class="radar-stat-rate">(+$2,062.75/seg)</span>
+                </div>
+                <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('deuda', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('deuda', this);}" title="Qué es esta cifra y cómo se calcula">
+                  <span class="radar-stat-lbl">📉 Costo de la deuda (equivalencia):</span>
+                  <strong class="radar-stat-val val-red" id="radarDeudaVal">+$0.00</strong>
+                  <span class="radar-stat-rate">(+$49,850.12/seg)</span>
+                </div>
+                <div class="radar-stat-item radar-stat-huachicol" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('huachicol', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('huachicol', this);}" title="Qué se sabe del huachicol fiscal y qué falta documentar">
+                  <span class="radar-stat-lbl">⛽ Huachicol fiscal:</span>
+                  <strong class="radar-stat-val val-red">sin cifra oficial todavía</strong>
+                  <span class="radar-stat-rate">(lo que sí está documentado ➔)</span>
+                </div>
+                <div class="radar-stat-item highlight-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('asf', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('asf', this);}" title="Qué es esta cifra y cómo se calcula">
+                <span class="radar-stat-lbl">⚖️ Por aclarar ante la ASF (CP 2024):</span>
+                <strong class="radar-stat-val val-gold">$65,169.1 mdp</strong>
+                <span class="radar-stat-rate">(cifra al corte, no por segundo)</span>
+              </div>
+              </div>
+            </div>
+
+            <!-- Panel Desplegable: Desglose Detallado de Estadísticas y Fuentes Oficiales -->
+            <div class="radar-desglose-drawer" id="radarDesgloseDrawer" style="display: none;" role="region" aria-label="Desglose analítico del radar hacendario">
+              <div class="radar-desglose-inner">
+                <!-- Encabezado del Desglose -->
+                <div class="radar-desglose-header">
+                  <div class="radar-desglose-title-group">
+                    <div class="radar-desglose-badge">
+                      <span>📊 CÓMO LEER ESTAS CIFRAS</span>
+                    </div>
+                    <h3 class="radar-desglose-title">Cifras para poner el gasto en perspectiva</h3>
+                    <p class="radar-desglose-sub">
+                      Las equivalencias reparten una cifra anual entre los 31,536,000 segundos del año (365 × 86,400). Ayudan a entender su tamaño; <strong>no registran movimientos de dinero en este instante</strong>. Cada concepto se muestra por separado y no se suman: miden cosas distintas.
+                    </p>
+                  </div>
+                  <button type="button" class="radar-desglose-close-btn" onclick="window.AuditEngine.toggleRadarDesglose()" title="Cerrar este desglose">
+                    <span>▲ Cerrar</span>
+                  </button>
+                </div>
+
+                <!-- Equivalencias temporales de una sola cifra oficial: el costo financiero de la deuda -->
+                <div class="radar-rates-strip" aria-label="Costo financiero de la deuda repartido en el tiempo">
+                  <div class="radar-rate-box highlight-rate">
+                    <span class="radar-rate-tag">Costo financiero de la deuda <span class="est-chip est-oficial">oficial</span></span>
+                    <strong class="radar-rate-num val-amber">$1,572,073.3 mdp</strong>
+                    <span class="radar-rate-unit">al año · PEF 2026, Anexo 8</span>
+                  </div>
+                  <div class="radar-rate-box">
+                    <span class="radar-rate-tag">Por segundo <span class="est-chip est-derivado">derivado</span></span>
+                    <strong class="radar-rate-num val-gold">$49,850.12</strong>
+                    <span class="radar-rate-unit">monto anual ÷ 31,536,000</span>
+                  </div>
+                  <div class="radar-rate-box">
+                    <span class="radar-rate-tag">Por minuto <span class="est-chip est-derivado">derivado</span></span>
+                    <strong class="radar-rate-num val-gold">$2,991,007</strong>
+                    <span class="radar-rate-unit">por segundo × 60</span>
+                  </div>
+                  <div class="radar-rate-box">
+                    <span class="radar-rate-tag">Por hora <span class="est-chip est-derivado">derivado</span></span>
+                    <strong class="radar-rate-num val-gold">$179,460,422</strong>
+                    <span class="radar-rate-unit">por segundo × 3,600</span>
+                  </div>
+                  <div class="radar-rate-box">
+                    <span class="radar-rate-tag">Por día <span class="est-chip est-derivado">derivado</span></span>
+                    <strong class="radar-rate-num val-gold">$4,307,050,137</strong>
+                    <span class="radar-rate-unit">monto anual ÷ 365</span>
+                  </div>
+                </div>
+
+                <!-- Tres conceptos distintos, cada uno con su propia naturaleza -->
+                <div class="radar-desglose-grid">
+
+                  <!-- Columna 1: Megaobras -->
+                  <div class="radar-desglose-card">
+                    <div class="radar-card-top">
+                      <span class="radar-card-icon">🚅</span>
+                      <div>
+                        <h4 class="radar-card-title">Pérdida anual documentada de las megaobras <span class="est-chip est-derivado">derivado</span></h4>
+                        <span class="radar-card-rate val-amber">$65,050.8 mdp al año · equivale a $2,062.75 por segundo</span>
+                      </div>
+                    </div>
+                    <p class="radar-card-body">
+                      Suma solo las obras con documento: la pérdida de operar el Tren Maya ($2,561.4 mdp) según su estado de actividades 2024, el AIFA (sin pérdida ese año: cobró más de lo que gastó) y lo que el rescate bancario le costó al presupuesto por el Ramo 34 ($62,489.4 mdp, Cuenta Pública 2024). Las otras nueve obras no tienen documento de su operación: quedan pendientes y fuera de la suma, así que la cifra es un piso.
+                    </p>
+                    <div class="radar-card-meta">
+                      <span class="radar-meta-lbl">De dónde sale:</span>
+                      <span class="radar-meta-val">Cuenta Pública 2024, Tomo VII (Tren Maya S.A. y AIFA S.A.) y Ramo 34; detalle obra por obra en el módulo 2.</span>
+                    </div>
+                    <div class="radar-card-action">
+                      <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('megaobras');">
+                        Revisar las 13 obras ➔
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Columna 2: Costo financiero de la deuda -->
+                  <div class="radar-desglose-card">
+                    <div class="radar-card-top">
+                      <span class="radar-card-icon">📉</span>
+                      <div>
+                        <h4 class="radar-card-title">Costo financiero de la deuda <span class="est-chip est-oficial">oficial</span></h4>
+                        <span class="radar-card-rate val-red">$1,572,073.3 mdp al año · equivale a $49,850.12 por segundo</span>
+                      </div>
+                    </div>
+                    <p class="radar-card-body">
+                      Intereses, comisiones y gastos de la deuda ya contratada, más el costo financiero de Pemex y CFE y el apoyo a ahorradores y deudores de la banca, tal como los agrupa el Anexo 8. Paga el precio de lo prestado; no amortiza el capital.
+                    </p>
+                    <div class="radar-card-meta">
+                      <span class="radar-meta-lbl">Fuente:</span>
+                      <span class="radar-meta-val">PEF 2026, Anexo 8 (Costo financiero de la deuda y otras erogaciones).</span>
+                    </div>
+                    <div class="radar-card-action">
+                      <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('calculadora');">
+                        Ver la deuda en la calculadora ➔
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Columna 3: Por aclarar ante la ASF (cifra estatica: no corre por segundo) -->
+                  <div class="radar-desglose-card">
+                    <div class="radar-card-top">
+                      <span class="radar-card-icon">⚠️</span>
+                      <div>
+                        <h4 class="radar-card-title">Por aclarar ante la ASF, Cuenta Pública 2024 <span class="est-chip est-oficial">oficial</span></h4>
+                        <span class="radar-card-rate val-gold">$65,169.1 mdp · corte de febrero de 2026</span>
+                      </div>
+                    </div>
+                    <p class="radar-card-body">
+                      Lo que, al cierre de las auditorías, carecía de documentación que acreditara el uso del dinero. No es un desfalco comprobado ni dinero que se pierda cada segundo: es el resultado de un procedimiento con fecha de corte, y puede solventarse después. Por eso aquí no corre un contador.
+                    </p>
+                    <div class="radar-card-meta">
+                      <span class="radar-meta-lbl">Fuente:</span>
+                      <span class="radar-meta-val">ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11.</span>
+                    </div>
+                    <div class="radar-card-action">
+                      <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF');">
+                        Ver lo que encontró la ASF ➔
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Columna 4: Huachicol fiscal (ingreso que no entra: no se suma) -->
+                  <div class="radar-desglose-card">
+                    <div class="radar-card-top">
+                      <span class="radar-card-icon">⛽</span>
+                      <div>
+                        <h4 class="radar-card-title">Huachicol fiscal: lo que se deja de cobrar <span class="est-chip est-pendiente">pendiente</span></h4>
+                        <span class="radar-card-rate val-red">En juego: $538,549.2 mdp de IEPS a combustibles en 2027 <span class="est-chip est-oficial">oficial</span></span>
+                      </div>
+                    </div>
+                    <p class="radar-card-body">
+                      El Gobierno reconoce en la Ley de Ingresos 2027 que el robo y la venta ilegal de combustibles son «una de las principales fuentes de evasión» del IEPS, pero ninguna autoridad ha publicado cuánto se pierde. Por eso no corre un contador y no se suma a la deuda ni a las obras: es dinero que no entra, no dinero que sale. Cada 1 % que se evada equivale a $5,385.5 mdp.
+                    </p>
+                    <div class="radar-card-meta">
+                      <span class="radar-meta-lbl">Fuente:</span>
+                      <span class="radar-meta-val">Iniciativa de Ley de Ingresos 2027, pp. CXXI-CXXV y art. 1o. (Gaceta Parlamentaria, 8 de septiembre de 2026).</span>
+                    </div>
+                    <div class="radar-card-action">
+                      <button type="button" class="radar-link-btn" onclick="window.AuditEngine.abrirRadarConcepto('huachicol', this)">
+                        Lo que se sabe y lo que falta ➔
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Equivalencia durante la visita: solo las dos cifras anuales -->
+                <div class="radar-session-acc-bar">
+                  <div class="radar-session-acc-left">
+                    <span class="radar-acc-icon">⏱️</span>
+                    <div>
+                      <span class="radar-acc-title">Equivalencia durante tu visita (<span id="desgloseLiveTimer">00:00</span>):</span>
+                      <span class="radar-acc-desc">Lo que representan esas cifras anuales en el tiempo que llevas aquí. No son pagos que ocurran en este instante.</span>
+                    </div>
+                  </div>
+                  <div class="radar-session-acc-metrics">
+                    <div class="radar-acc-stat">
+                      <span class="acc-lbl">Megaobras:</span>
+                      <strong class="acc-val val-amber" id="desgloseLiveMega">+$0.00</strong>
+                    </div>
+                    <div class="radar-acc-stat">
+                      <span class="acc-lbl">Costo de la deuda:</span>
+                      <strong class="acc-val val-red" id="desgloseLiveDeuda">+$0.00</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pie y controles del Desglose -->
+                <div class="radar-desglose-footer">
+                  <span class="radar-desglose-tip">
+                    💡 <em>Tip de visualización:</em> Puedes ocultar las estadísticas con el botón <strong>«Ocultar estadísticas»</strong> si prefieres una navegación más limpia y despejada.
+                  </span>
+                  <button type="button" class="radar-desglose-fold-btn" onclick="window.AuditEngine.toggleRadarDesglose()">
+                    ▲ Cerrar el desglose
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Derecha: Acciones Superiores y Buscador Global del Portal Navegador -->
@@ -362,88 +712,168 @@
   </nav>
 
   <!-- ==========================================================================
-       HERO & EXPLORADOR DEL GASTO PÚBLICO (ESTILO USASPENDING EXPLORER)
+       SHOWCASE CÍVICO INTERACTIVO: DESCUBRE EL RASTRO DEL DINERO EN IMÁGENES
        ========================================================================== -->
-  <section class="explorer-hero-section" aria-label="Explorador del Gasto Público">
-    <div class="explorer-hero-box">
-      <span class="explorer-hero-tag">El gasto público, a la vista</span>
-      <h1 class="explorer-hero-title">Explora el panorama de las finanzas públicas en México<button type="button" class="hero-nota-btn" onclick="window.AuditEngine.abrirNotaPortada(this)" aria-haspopup="dialog" aria-label="Qué son las finanzas públicas y qué encontrarás aquí" title="Qué son las finanzas públicas y qué encontrarás aquí"><span aria-hidden="true">📖</span></button></h1>
-      <p class="explorer-hero-desc">
-        Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar.
-      </p>
-
-      <!-- Cómo se usa: la introducción, sin cifras (las cifras viven dentro de cada módulo) -->
-      <div class="portada-guia" aria-labelledby="portadaGuiaTitulo">
-        <h2 class="portada-guia-titulo" id="portadaGuiaTitulo">Cómo se usa</h2>
-        <ol class="portada-pasos">
-          <li><span class="portada-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
-          <li><span class="portada-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
-          <li><span class="portada-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> todavía no tiene documento que lo confirme.</span></li>
-        </ol>
-        <p class="portada-guia-nota">Si una palabra está subrayada, tócala y te explicamos qué significa.</p>
+  <section class="civic-showcase-section" aria-label="Descubre el rastro del dinero">
+    <div class="civic-showcase-box">
+      <div class="showcase-header">
+        <div class="showcase-title-row">
+          <span class="showcase-tag">🇲🇽 AUDITORÍA EN IMÁGENES</span>
+          <h1 class="showcase-title">Descubre el rastro del gasto público<button type="button" class="hero-nota-btn showcase-nota-btn" onclick="window.AuditEngine.abrirGlosarioDrawer('Rastro del Gasto Público', null, this)" title="Qué es el rastro del gasto público" aria-label="Qué es el rastro del gasto público" aria-haspopup="dialog">📖</button></h1>
+        </div>
+        <span class="showcase-hint">Haz clic en una imagen y pulsa «Ver gasto»: las cuentas arrancan en cero y suben hasta la cifra oficial, cada una con su fuente</span>
       </div>
 
-      <!-- Cuadrícula de 4 Módulos Operativos de Fiscalización Ciudadana -->
-      <div class="explorer-cards-grid" role="region" aria-label="Módulos de Auditoría">
-        <!-- Módulo 1 -->
-        <div class="explorer-card active-explorer-card" id="cardModPresupuesto">
-          <span class="explorer-card-icon" aria-hidden="true">⚖️</span>
-          <h3 class="explorer-card-title">Circuito del Dinero</h3>
-          <p class="explorer-card-desc">Sigue cada peso: de la Ley de Ingresos a tu municipio.</p>
-          <div class="explorer-card-stat" title="La cifra del Presupuesto de Egresos 2026 se descubre dentro del módulo"><strong>¿Cuántos billones?</strong><span>Descúbrelo al comenzar</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('presupuesto', 'moduloProemio')" aria-label="Comenzar: Circuito del Dinero">
-            <span>Comenzar</span> ➔
-          </button>
+      <div class="showcase-viewport" onmouseenter="window.AuditEngine.pauseShowcaseAutoSlide()" onmouseleave="window.AuditEngine.startShowcaseAutoSlide()">
+        <div class="showcase-track">
+          
+          <!-- Slide 1: Tren Maya -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(0)" title="Clic para descubrir la auditoría del Tren Maya">
+            <img src="assets/img/showcase_tren_maya.jpg" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">🚅 Megaobra ferroviaria · FONATUR y Tren Maya</span>
+              <h3 class="showcase-slide-q">¿Cuánto dinero del Tren Maya dejó la ASF por aclarar, y en qué tramos?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Dos Bocas -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(1)" title="Clic para descubrir la auditoría de Dos Bocas">
+            <img src="assets/img/showcase_dos_bocas.jpg" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">🏭 Refinación · Pemex, Paraíso, Tabasco</span>
+              <h3 class="showcase-slide-q">¿Qué encontró la ASF al revisar la refinería paquete por paquete?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Deuda Soberana y Palacio Nacional -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(2)" title="Clic para descubrir los intereses de la deuda soberana">
+            <img src="assets/img/showcase_deuda_soberana.jpg" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">🏛️ Costo financiero de la deuda · PEF 2026</span>
+              <h3 class="showcase-slide-q">¿Cuánto cuesta al año pagar sólo los intereses de la deuda pública?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: AIFA -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(3)" title="Clic para descubrir la auditoría del AIFA">
+            <img src="assets/img/showcase_aifa.jpg" alt="Ilustración generada con IA de una terminal aérea" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">✈️ Infraestructura aeroportuaria · Defensa</span>
+              <h3 class="showcase-slide-q">¿Qué revisó la ASF en la construcción y la operación del AIFA?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Ramo 33 Municipios -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(4)" title="Clic para descubrir las aportaciones a municipios">
+            <img src="assets/img/showcase_ramo33.jpg" alt="Ilustración generada con IA de un centro de salud" loading="lazy">
+            <span class="showcase-ia">Ilustración generada con IA</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">🏥 Gasto federalizado · Ramo 33</span>
+              <h3 class="showcase-slide-q">¿Cuánto dinero del Ramo 33 llega a estados y municipios, y cuánto quedó por aclarar?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Slide 6: Expansión LEGO & Petroquímica -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(5)" title="Clic para descubrir la inversión de LEGO e insumos petroquímicos">
+            <img src="assets/img/showcase_lego_expansion.jpg" alt="Imagen ilustrativa de una planta industrial" loading="lazy">
+            <span class="showcase-ia">Imagen ilustrativa</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">🧱 Inversión privada y obra pública · Nuevo León</span>
+              <h3 class="showcase-slide-q">¿Qué dinero público rodea a la planta de LEGO en Ciénega de Flores?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 7: Tren México-Toluca 'El Insurgente' -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(6)" title="Clic para descubrir la auditoría del Tren México-Toluca">
+            <img src="assets/img/showcase_tren_toluca.jpg" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy">
+            <span class="showcase-ia">Imagen ilustrativa</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">🚄 Transporte ferroviario · SICT</span>
+              <h3 class="showcase-slide-q">¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 8: Megafarmacia del Bienestar -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(7)" title="Clic para descubrir la auditoría de la Megafarmacia de Huehuetoca">
+            <img src="assets/img/showcase_megafarmacia.jpg" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy">
+            <span class="showcase-ia">Imagen ilustrativa</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">💊 Almacén de medicamentos · Birmex, Huehuetoca</span>
+              <h3 class="showcase-slide-q">¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 9: Huachicol fiscal -->
+          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(8)" title="Clic para descubrir lo que está en juego con el huachicol fiscal">
+            <img src="assets/auditor/img/showcase_huachicol.jpg" alt="Ilustración de pipas de combustible frente a una aduana portuaria al atardecer" loading="lazy">
+            <span class="showcase-ia">Ilustración provisional</span>
+            <div class="showcase-slide-gradient"></div>
+            <div class="showcase-slide-content">
+              <span class="showcase-slide-badge">⛽ Evasión en combustibles · IEPS, aduanas y SAT</span>
+              <h3 class="showcase-slide-q">¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?</h3>
+              <div class="showcase-click-cue">
+                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Módulo 2 -->
-        <div class="explorer-card" id="cardModMegaobras">
-          <span class="explorer-card-icon" aria-hidden="true">🏗️</span>
-          <h3 class="explorer-card-title">Inversión &amp; Megaobras</h3>
-          <p class="explorer-card-desc">Lo que costaron las grandes obras y lo que se pasaron.</p>
-          <div class="explorer-card-stat" title="Obras del simulador de megaobras (módulo 2)"><strong>13 megaobras</strong><span>De 1988 a la fecha</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('megaobras', 'moduloProemio')" aria-label="Comenzar: Inversión y Megaobras">
-            <span>Comenzar</span> ➔
-          </button>
-        </div>
-
-        <!-- Módulo 3 -->
-        <div class="explorer-card" id="cardModCalculadora">
-          <span class="explorer-card-icon" aria-hidden="true">💳</span>
-          <h3 class="explorer-card-title">Calculadora Cívica</h3>
-          <p class="explorer-card-desc">Descubre a dónde va cada peso de tus impuestos.</p>
-          <div class="explorer-card-stat" title="Calcula tu impuesto 2026 y ve a dónde va cada peso"><strong>Saca tu estado de cuenta</strong><span>Tu impuesto, peso por peso</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('calculadora', 'moduloProemio')" aria-label="Comenzar: Calculadora Cívica">
-            <span>Comenzar</span> ➔
-          </button>
-        </div>
-
-        <!-- Módulo 4 -->
-        <div class="explorer-card" id="cardModInspector">
-          <span class="explorer-card-icon" aria-hidden="true">🔍</span>
-          <h3 class="explorer-card-title">Modo Inspector</h3>
-          <p class="explorer-card-desc">Lo que la ASF observó y sigue sin aclararse.</p>
-          <div class="explorer-card-stat" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11: acciones correctivas promovidas, 174 solicitudes de aclaración + 2,762 pliegos de observaciones + 2,203 promociones de responsabilidad administrativa + 278 avisos al SAT = 5,417 (derivado)"><strong>5,417 acciones promovidas</strong><span>Por la ASF, sin contar recomendaciones · CP 2024</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('verificador', 'moduloProemio')" aria-label="Comenzar: Modo Inspector">
-            <span>Comenzar</span> ➔
-          </button>
-        </div>
-
-        <!-- Módulo 5 -->
-        <div class="explorer-card explorer-card-eco" id="cardModAmbiente">
-          <span class="explorer-card-icon" aria-hidden="true">🌎</span>
-          <h3 class="explorer-card-title">Costo Ambiental</h3>
-          <p class="explorer-card-desc">Lo que el deterioro del ambiente nos cuesta a todos.</p>
-          <div class="explorer-card-stat" title="La cifra del INEGI (Cuentas Económicas y Ecológicas de México 2024) se descubre dentro del módulo"><strong>¿Cuántos billones?</strong><span>Descúbrelo al comenzar</span></div>
-          <button type="button" class="explorer-card-btn" onclick="window.AuditEngine.seleccionarModuloExplorer('ambiente', 'moduloProemio')" aria-label="Comenzar: Costo Ambiental">
-            <span>Comenzar</span> ➔
-          </button>
-        </div>
+        <!-- Flechas de navegación del carrusel -->
+        <button type="button" class="showcase-arrow-btn prev" onclick="window.AuditEngine.showcasePrev()" aria-label="Proyecto anterior">‹</button>
+        <button type="button" class="showcase-arrow-btn next" onclick="window.AuditEngine.showcaseNext()" aria-label="Proyecto siguiente">›</button>
       </div>
 
+      <!-- Puntos indicadores de slide activo -->
+      <div class="showcase-dots">
+        <button type="button" class="showcase-dot active-dot" onclick="window.AuditEngine.showcaseGoTo(0)" aria-label="Ir a Tren Maya"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(1)" aria-label="Ir a Dos Bocas"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(2)" aria-label="Ir a Deuda Soberana"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(3)" aria-label="Ir a AIFA"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(4)" aria-label="Ir a Ramo 33"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(5)" aria-label="Ir a Expansión LEGO"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(6)" aria-label="Ir a Tren Toluca"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(7)" aria-label="Ir a Megafarmacia"></button>
+        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(8)" aria-label="Ir a Huachicol fiscal"></button>
+      </div>
     </div>
   </section>
-
 
   <!-- ==========================================================================
        ESPACIO OPERATIVO: DESGLOSE DE MÓDULOS Y PESTAÑAS (ON-DEMAND TRAS CLIC EN EXPLORAR)
@@ -2505,169 +2935,6 @@
 
 
 
-  <!-- ==========================================================================
-       SHOWCASE CÍVICO INTERACTIVO: DESCUBRE EL RASTRO DEL DINERO EN IMÁGENES
-       ========================================================================== -->
-  <section class="civic-showcase-section" aria-label="Descubre el rastro del dinero">
-    <div class="civic-showcase-box">
-      <div class="showcase-header">
-        <div class="showcase-title-row">
-          <span class="showcase-tag">🇲🇽 AUDITORÍA EN IMÁGENES</span>
-          <h2 class="showcase-title">Descubre el rastro del gasto público<button type="button" class="hero-nota-btn showcase-nota-btn" onclick="window.AuditEngine.abrirGlosarioDrawer('Rastro del Gasto Público', null, this)" title="Qué es el rastro del gasto público" aria-label="Qué es el rastro del gasto público" aria-haspopup="dialog">📖</button></h2>
-        </div>
-        <span class="showcase-hint">Haz clic en una imagen y pulsa «Ver gasto»: las cuentas arrancan en cero y suben hasta la cifra oficial, cada una con su fuente</span>
-      </div>
-
-      <div class="showcase-viewport" onmouseenter="window.AuditEngine.pauseShowcaseAutoSlide()" onmouseleave="window.AuditEngine.startShowcaseAutoSlide()">
-        <div class="showcase-track">
-          
-          <!-- Slide 1: Tren Maya -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(0)" title="Clic para descubrir la auditoría del Tren Maya">
-            <img src="assets/img/showcase_tren_maya.jpg" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy">
-            <span class="showcase-ia">Ilustración generada con IA</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🚅 Megaobra ferroviaria · FONATUR y Tren Maya</span>
-              <h3 class="showcase-slide-q">¿Cuánto dinero del Tren Maya dejó la ASF por aclarar, y en qué tramos?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 2: Dos Bocas -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(1)" title="Clic para descubrir la auditoría de Dos Bocas">
-            <img src="assets/img/showcase_dos_bocas.jpg" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy">
-            <span class="showcase-ia">Ilustración generada con IA</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🏭 Refinación · Pemex, Paraíso, Tabasco</span>
-              <h3 class="showcase-slide-q">¿Qué encontró la ASF al revisar la refinería paquete por paquete?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 3: Deuda Soberana y Palacio Nacional -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(2)" title="Clic para descubrir los intereses de la deuda soberana">
-            <img src="assets/img/showcase_deuda_soberana.jpg" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy">
-            <span class="showcase-ia">Ilustración generada con IA</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🏛️ Costo financiero de la deuda · PEF 2026</span>
-              <h3 class="showcase-slide-q">¿Cuánto cuesta al año pagar sólo los intereses de la deuda pública?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 4: AIFA -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(3)" title="Clic para descubrir la auditoría del AIFA">
-            <img src="assets/img/showcase_aifa.jpg" alt="Ilustración generada con IA de una terminal aérea" loading="lazy">
-            <span class="showcase-ia">Ilustración generada con IA</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">✈️ Infraestructura aeroportuaria · Defensa</span>
-              <h3 class="showcase-slide-q">¿Qué revisó la ASF en la construcción y la operación del AIFA?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 5: Ramo 33 Municipios -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(4)" title="Clic para descubrir las aportaciones a municipios">
-            <img src="assets/img/showcase_ramo33.jpg" alt="Ilustración generada con IA de un centro de salud" loading="lazy">
-            <span class="showcase-ia">Ilustración generada con IA</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🏥 Gasto federalizado · Ramo 33</span>
-              <h3 class="showcase-slide-q">¿Cuánto dinero del Ramo 33 llega a estados y municipios, y cuánto quedó por aclarar?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Slide 6: Expansión LEGO & Petroquímica -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(5)" title="Clic para descubrir la inversión de LEGO e insumos petroquímicos">
-            <img src="assets/img/showcase_lego_expansion.jpg" alt="Imagen ilustrativa de una planta industrial" loading="lazy">
-            <span class="showcase-ia">Imagen ilustrativa</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🧱 Inversión privada y obra pública · Nuevo León</span>
-              <h3 class="showcase-slide-q">¿Qué dinero público rodea a la planta de LEGO en Ciénega de Flores?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 7: Tren México-Toluca 'El Insurgente' -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(6)" title="Clic para descubrir la auditoría del Tren México-Toluca">
-            <img src="assets/img/showcase_tren_toluca.jpg" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy">
-            <span class="showcase-ia">Imagen ilustrativa</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">🚄 Transporte ferroviario · SICT</span>
-              <h3 class="showcase-slide-q">¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 8: Megafarmacia del Bienestar -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(7)" title="Clic para descubrir la auditoría de la Megafarmacia de Huehuetoca">
-            <img src="assets/img/showcase_megafarmacia.jpg" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy">
-            <span class="showcase-ia">Imagen ilustrativa</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">💊 Almacén de medicamentos · Birmex, Huehuetoca</span>
-              <h3 class="showcase-slide-q">¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-
-          <!-- Slide 9: Huachicol fiscal -->
-          <div class="showcase-slide" role="button" tabindex="0" onclick="window.AuditEngine.abrirDescubrimiento(8)" title="Clic para descubrir lo que está en juego con el huachicol fiscal">
-            <img src="assets/auditor/img/showcase_huachicol.jpg" alt="Ilustración de pipas de combustible frente a una aduana portuaria al atardecer" loading="lazy">
-            <span class="showcase-ia">Ilustración provisional</span>
-            <div class="showcase-slide-gradient"></div>
-            <div class="showcase-slide-content">
-              <span class="showcase-slide-badge">⛽ Evasión en combustibles · IEPS, aduanas y SAT</span>
-              <h3 class="showcase-slide-q">¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?</h3>
-              <div class="showcase-click-cue">
-                <span>👁️ Clic para seguir el rastro del dinero</span> ➔
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Flechas de navegación del carrusel -->
-        <button type="button" class="showcase-arrow-btn prev" onclick="window.AuditEngine.showcasePrev()" aria-label="Proyecto anterior">‹</button>
-        <button type="button" class="showcase-arrow-btn next" onclick="window.AuditEngine.showcaseNext()" aria-label="Proyecto siguiente">›</button>
-      </div>
-
-      <!-- Puntos indicadores de slide activo -->
-      <div class="showcase-dots">
-        <button type="button" class="showcase-dot active-dot" onclick="window.AuditEngine.showcaseGoTo(0)" aria-label="Ir a Tren Maya"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(1)" aria-label="Ir a Dos Bocas"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(2)" aria-label="Ir a Deuda Soberana"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(3)" aria-label="Ir a AIFA"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(4)" aria-label="Ir a Ramo 33"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(5)" aria-label="Ir a Expansión LEGO"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(6)" aria-label="Ir a Tren Toluca"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(7)" aria-label="Ir a Megafarmacia"></button>
-        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(8)" aria-label="Ir a Huachicol fiscal"></button>
-      </div>
-    </div>
-  </section>
 
 <!-- ==========================================================================
        MODAL DE DETALLE DE NOTICIA
@@ -2705,263 +2972,6 @@
   <!-- ==========================================================================
        PIE DE PÁGINA & FUENTES OFICIALES
        ========================================================================== -->
-  <!-- ==========================================================================
-       RADAR HACENDARIO EN VIVO (2 LÍNEAS INTEGRADAS: NOTIFICACIÓN EN VIVO & TELEMETRÍA)
-       ========================================================================== -->
-  <div class="radar-hacendario-hub" id="radarAlertaBar" role="region" aria-label="Radar hacendario: cifras en perspectiva">
-    
-    <!-- Línea 1: Notificaciones y datos oficiales del erario circulando en tiempo real -->
-    <div class="radar-row-telemetry">
-      <div class="radar-tel-etiqueta" style="display:inline-flex; align-items:center; gap:6px; padding:0 14px; background:rgba(220,38,38,0.22); color:#fca5a5; font-weight:800; font-family:var(--font-mono); font-size:10.5px; border-right:1px solid rgba(220,38,38,0.3); white-space:nowrap; z-index:2;">
-        <span class="pulsing-radar-dot" style="width:7px; height:7px;"></span>
-        <span>DATOS DE REFERENCIA:</span>
-      </div>
-      <div class="radar-telemetry-track">
-        <div class="tel-item" title="Presupuesto de Egresos de la Federación 2026, art. 1">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
-        <div class="tel-item" title="PEF 2026: estimación del gasto federalizado total, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF (derivado)">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
-        <div class="tel-item" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
-        <div class="tel-item" title="Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp">ISR, IVA e IEPS estimados en la Ley de Ingresos 2026: <strong class="green">$5.42 billones</strong></div>
-        <div class="tel-item" title="PEF 2026, Ramo General 28: $1,456,045.9 mdp">Participaciones a estados y municipios (Ramo 28): <strong class="gold">$1.46 billones</strong></div>
-        <div class="tel-item" title="PEF 2026, Anexo 8: $1,572,073.3 mdp">Costo financiero de la deuda (PEF 2026, Anexo 8): <strong class="red">$1.57 billones</strong> al año</div>
-        <div class="tel-item" title="SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades">Deuda de los 32 gobiernos estatales (SHCP, Sistema de Alertas): <strong class="gold">$643,695.7 mdp</strong></div>
-
-        <!-- Repetición continua para loop infinito sin saltos -->
-        <div class="tel-item" aria-hidden="true" title="Presupuesto de Egresos de la Federación 2026, art. 1">Presupuesto Federal Aprobado (PEF 2026): <strong class="gold">$10.19 billones</strong></div>
-        <div class="tel-item" aria-hidden="true" title="PEF 2026: estimación del gasto federalizado total, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF (derivado)">Gasto Federalizado (32 Estados): <strong class="gold">$2.81 billones (27.6%)</strong></div>
-        <div class="tel-item" aria-hidden="true" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11">Por aclarar ante la ASF (Cuenta Pública 2024): <strong class="red">$65,169.1 mdp</strong> (no es daño comprobado)</div>
-        <div class="tel-item" aria-hidden="true" title="Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp">ISR, IVA e IEPS estimados en la Ley de Ingresos 2026: <strong class="green">$5.42 billones</strong></div>
-        <div class="tel-item" aria-hidden="true" title="PEF 2026, Ramo General 28: $1,456,045.9 mdp">Participaciones a estados y municipios (Ramo 28): <strong class="gold">$1.46 billones</strong></div>
-        <div class="tel-item" aria-hidden="true" title="PEF 2026, Anexo 8: $1,572,073.3 mdp">Costo financiero de la deuda (PEF 2026, Anexo 8): <strong class="red">$1.57 billones</strong> al año</div>
-        <div class="tel-item" aria-hidden="true" title="SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades">Deuda de los 32 gobiernos estatales (SHCP, Sistema de Alertas): <strong class="gold">$643,695.7 mdp</strong></div>
-      </div>
-    </div>
-
-    <!-- Línea 2: Telemetría viva y radares organizados con tiempo de sesión -->
-    <div class="radar-row-live">
-      <div class="radar-brand-wrap">
-        <div class="radar-badge-pulse" title="Tiempo de tu visita: las equivalencias reparten cifras anuales por segundo">
-          <span class="pulsing-radar-dot"></span>
-          <span class="radar-tag">Radar hacendario · cifras en perspectiva</span>
-          <span class="radar-timer" id="radarSessionTimer">⏱️ 00:00</span>
-        </div>
-
-        <!-- Controles para mostrar/ocultar y desglosar estadísticas -->
-        <div class="radar-controls-cluster">
-          <button type="button" class="radar-ctrl-btn" id="radarToggleStatsBtn" onclick="window.AuditEngine.toggleRadarStats()" aria-expanded="true" aria-controls="radarLiveItems" title="Ocultar o mostrar las estadísticas para facilitar la visión de lectura">
-            <span class="radar-btn-icon" id="radarToggleStatsIcon">👁️</span>
-            <span class="radar-btn-text" id="radarToggleStatsText">Ocultar estadísticas</span>
-          </button>
-          <button type="button" class="radar-ctrl-btn radar-ctrl-desglose" id="radarToggleDesgloseBtn" onclick="window.AuditEngine.toggleRadarDesglose()" aria-expanded="false" aria-controls="radarDesgloseDrawer" title="Ver cómo se calcula cada cifra y de dónde sale">
-            <span class="radar-btn-icon" id="radarToggleDesgloseIcon">📊</span>
-            <span class="radar-btn-text" id="radarToggleDesgloseText">Desglosar cifras ▾</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="radar-live-items" id="radarLiveItems">
-        <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('megaobras', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('megaobras', this);}" title="Qué es esta cifra y cómo se calcula">
-          <span class="radar-stat-lbl">🚅 Megaobras (equivalencia):</span>
-          <strong class="radar-stat-val val-amber" id="radarMegaobrasVal">+$0.00</strong>
-          <span class="radar-stat-rate">(+$2,062.75/seg)</span>
-        </div>
-        <div class="radar-stat-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('deuda', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('deuda', this);}" title="Qué es esta cifra y cómo se calcula">
-          <span class="radar-stat-lbl">📉 Costo de la deuda (equivalencia):</span>
-          <strong class="radar-stat-val val-red" id="radarDeudaVal">+$0.00</strong>
-          <span class="radar-stat-rate">(+$49,850.12/seg)</span>
-        </div>
-        <div class="radar-stat-item radar-stat-huachicol" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('huachicol', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('huachicol', this);}" title="Qué se sabe del huachicol fiscal y qué falta documentar">
-          <span class="radar-stat-lbl">⛽ Huachicol fiscal:</span>
-          <strong class="radar-stat-val val-red">sin cifra oficial todavía</strong>
-          <span class="radar-stat-rate">(lo que sí está documentado ➔)</span>
-        </div>
-        <div class="radar-stat-item highlight-item" style="cursor:pointer;" role="button" tabindex="0" aria-haspopup="dialog" onclick="window.AuditEngine.abrirRadarConcepto('asf', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.AuditEngine.abrirRadarConcepto('asf', this);}" title="Qué es esta cifra y cómo se calcula">
-        <span class="radar-stat-lbl">⚖️ Por aclarar ante la ASF (CP 2024):</span>
-        <strong class="radar-stat-val val-gold">$65,169.1 mdp</strong>
-        <span class="radar-stat-rate">(cifra al corte, no por segundo)</span>
-      </div>
-      </div>
-    </div>
-
-    <!-- Panel Desplegable: Desglose Detallado de Estadísticas y Fuentes Oficiales -->
-    <div class="radar-desglose-drawer" id="radarDesgloseDrawer" style="display: none;" role="region" aria-label="Desglose analítico del radar hacendario">
-      <div class="radar-desglose-inner">
-        <!-- Encabezado del Desglose -->
-        <div class="radar-desglose-header">
-          <div class="radar-desglose-title-group">
-            <div class="radar-desglose-badge">
-              <span>📊 CÓMO LEER ESTAS CIFRAS</span>
-            </div>
-            <h3 class="radar-desglose-title">Cifras para poner el gasto en perspectiva</h3>
-            <p class="radar-desglose-sub">
-              Las equivalencias reparten una cifra anual entre los 31,536,000 segundos del año (365 × 86,400). Ayudan a entender su tamaño; <strong>no registran movimientos de dinero en este instante</strong>. Cada concepto se muestra por separado y no se suman: miden cosas distintas.
-            </p>
-          </div>
-          <button type="button" class="radar-desglose-close-btn" onclick="window.AuditEngine.toggleRadarDesglose()" title="Cerrar este desglose">
-            <span>▲ Cerrar</span>
-          </button>
-        </div>
-
-        <!-- Equivalencias temporales de una sola cifra oficial: el costo financiero de la deuda -->
-        <div class="radar-rates-strip" aria-label="Costo financiero de la deuda repartido en el tiempo">
-          <div class="radar-rate-box highlight-rate">
-            <span class="radar-rate-tag">Costo financiero de la deuda <span class="est-chip est-oficial">oficial</span></span>
-            <strong class="radar-rate-num val-amber">$1,572,073.3 mdp</strong>
-            <span class="radar-rate-unit">al año · PEF 2026, Anexo 8</span>
-          </div>
-          <div class="radar-rate-box">
-            <span class="radar-rate-tag">Por segundo <span class="est-chip est-derivado">derivado</span></span>
-            <strong class="radar-rate-num val-gold">$49,850.12</strong>
-            <span class="radar-rate-unit">monto anual ÷ 31,536,000</span>
-          </div>
-          <div class="radar-rate-box">
-            <span class="radar-rate-tag">Por minuto <span class="est-chip est-derivado">derivado</span></span>
-            <strong class="radar-rate-num val-gold">$2,991,007</strong>
-            <span class="radar-rate-unit">por segundo × 60</span>
-          </div>
-          <div class="radar-rate-box">
-            <span class="radar-rate-tag">Por hora <span class="est-chip est-derivado">derivado</span></span>
-            <strong class="radar-rate-num val-gold">$179,460,422</strong>
-            <span class="radar-rate-unit">por segundo × 3,600</span>
-          </div>
-          <div class="radar-rate-box">
-            <span class="radar-rate-tag">Por día <span class="est-chip est-derivado">derivado</span></span>
-            <strong class="radar-rate-num val-gold">$4,307,050,137</strong>
-            <span class="radar-rate-unit">monto anual ÷ 365</span>
-          </div>
-        </div>
-
-        <!-- Tres conceptos distintos, cada uno con su propia naturaleza -->
-        <div class="radar-desglose-grid">
-
-          <!-- Columna 1: Megaobras -->
-          <div class="radar-desglose-card">
-            <div class="radar-card-top">
-              <span class="radar-card-icon">🚅</span>
-              <div>
-                <h4 class="radar-card-title">Pérdida anual documentada de las megaobras <span class="est-chip est-derivado">derivado</span></h4>
-                <span class="radar-card-rate val-amber">$65,050.8 mdp al año · equivale a $2,062.75 por segundo</span>
-              </div>
-            </div>
-            <p class="radar-card-body">
-              Suma solo las obras con documento: la pérdida de operar el Tren Maya ($2,561.4 mdp) según su estado de actividades 2024, el AIFA (sin pérdida ese año: cobró más de lo que gastó) y lo que el rescate bancario le costó al presupuesto por el Ramo 34 ($62,489.4 mdp, Cuenta Pública 2024). Las otras nueve obras no tienen documento de su operación: quedan pendientes y fuera de la suma, así que la cifra es un piso.
-            </p>
-            <div class="radar-card-meta">
-              <span class="radar-meta-lbl">De dónde sale:</span>
-              <span class="radar-meta-val">Cuenta Pública 2024, Tomo VII (Tren Maya S.A. y AIFA S.A.) y Ramo 34; detalle obra por obra en el módulo 2.</span>
-            </div>
-            <div class="radar-card-action">
-              <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('megaobras');">
-                Revisar las 13 obras ➔
-              </button>
-            </div>
-          </div>
-
-          <!-- Columna 2: Costo financiero de la deuda -->
-          <div class="radar-desglose-card">
-            <div class="radar-card-top">
-              <span class="radar-card-icon">📉</span>
-              <div>
-                <h4 class="radar-card-title">Costo financiero de la deuda <span class="est-chip est-oficial">oficial</span></h4>
-                <span class="radar-card-rate val-red">$1,572,073.3 mdp al año · equivale a $49,850.12 por segundo</span>
-              </div>
-            </div>
-            <p class="radar-card-body">
-              Intereses, comisiones y gastos de la deuda ya contratada, más el costo financiero de Pemex y CFE y el apoyo a ahorradores y deudores de la banca, tal como los agrupa el Anexo 8. Paga el precio de lo prestado; no amortiza el capital.
-            </p>
-            <div class="radar-card-meta">
-              <span class="radar-meta-lbl">Fuente:</span>
-              <span class="radar-meta-val">PEF 2026, Anexo 8 (Costo financiero de la deuda y otras erogaciones).</span>
-            </div>
-            <div class="radar-card-action">
-              <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('calculadora');">
-                Ver la deuda en la calculadora ➔
-              </button>
-            </div>
-          </div>
-
-          <!-- Columna 3: Por aclarar ante la ASF (cifra estatica: no corre por segundo) -->
-          <div class="radar-desglose-card">
-            <div class="radar-card-top">
-              <span class="radar-card-icon">⚠️</span>
-              <div>
-                <h4 class="radar-card-title">Por aclarar ante la ASF, Cuenta Pública 2024 <span class="est-chip est-oficial">oficial</span></h4>
-                <span class="radar-card-rate val-gold">$65,169.1 mdp · corte de febrero de 2026</span>
-              </div>
-            </div>
-            <p class="radar-card-body">
-              Lo que, al cierre de las auditorías, carecía de documentación que acreditara el uso del dinero. No es un desfalco comprobado ni dinero que se pierda cada segundo: es el resultado de un procedimiento con fecha de corte, y puede solventarse después. Por eso aquí no corre un contador.
-            </p>
-            <div class="radar-card-meta">
-              <span class="radar-meta-lbl">Fuente:</span>
-              <span class="radar-meta-val">ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11.</span>
-            </div>
-            <div class="radar-card-action">
-              <button type="button" class="radar-link-btn" onclick="window.AuditEngine.toggleRadarDesglose(); window.AuditEngine.seleccionarModuloExplorer('verificador', 'cuentaPublicaASF');">
-                Ver lo que encontró la ASF ➔
-              </button>
-            </div>
-          </div>
-
-          <!-- Columna 4: Huachicol fiscal (ingreso que no entra: no se suma) -->
-          <div class="radar-desglose-card">
-            <div class="radar-card-top">
-              <span class="radar-card-icon">⛽</span>
-              <div>
-                <h4 class="radar-card-title">Huachicol fiscal: lo que se deja de cobrar <span class="est-chip est-pendiente">pendiente</span></h4>
-                <span class="radar-card-rate val-red">En juego: $538,549.2 mdp de IEPS a combustibles en 2027 <span class="est-chip est-oficial">oficial</span></span>
-              </div>
-            </div>
-            <p class="radar-card-body">
-              El Gobierno reconoce en la Ley de Ingresos 2027 que el robo y la venta ilegal de combustibles son «una de las principales fuentes de evasión» del IEPS, pero ninguna autoridad ha publicado cuánto se pierde. Por eso no corre un contador y no se suma a la deuda ni a las obras: es dinero que no entra, no dinero que sale. Cada 1 % que se evada equivale a $5,385.5 mdp.
-            </p>
-            <div class="radar-card-meta">
-              <span class="radar-meta-lbl">Fuente:</span>
-              <span class="radar-meta-val">Iniciativa de Ley de Ingresos 2027, pp. CXXI-CXXV y art. 1o. (Gaceta Parlamentaria, 8 de septiembre de 2026).</span>
-            </div>
-            <div class="radar-card-action">
-              <button type="button" class="radar-link-btn" onclick="window.AuditEngine.abrirRadarConcepto('huachicol', this)">
-                Lo que se sabe y lo que falta ➔
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Equivalencia durante la visita: solo las dos cifras anuales -->
-        <div class="radar-session-acc-bar">
-          <div class="radar-session-acc-left">
-            <span class="radar-acc-icon">⏱️</span>
-            <div>
-              <span class="radar-acc-title">Equivalencia durante tu visita (<span id="desgloseLiveTimer">00:00</span>):</span>
-              <span class="radar-acc-desc">Lo que representan esas cifras anuales en el tiempo que llevas aquí. No son pagos que ocurran en este instante.</span>
-            </div>
-          </div>
-          <div class="radar-session-acc-metrics">
-            <div class="radar-acc-stat">
-              <span class="acc-lbl">Megaobras:</span>
-              <strong class="acc-val val-amber" id="desgloseLiveMega">+$0.00</strong>
-            </div>
-            <div class="radar-acc-stat">
-              <span class="acc-lbl">Costo de la deuda:</span>
-              <strong class="acc-val val-red" id="desgloseLiveDeuda">+$0.00</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pie y controles del Desglose -->
-        <div class="radar-desglose-footer">
-          <span class="radar-desglose-tip">
-            💡 <em>Tip de visualización:</em> Puedes ocultar las estadísticas con el botón <strong>«Ocultar estadísticas»</strong> si prefieres una navegación más limpia y despejada.
-          </span>
-          <button type="button" class="radar-desglose-fold-btn" onclick="window.AuditEngine.toggleRadarDesglose()">
-            ▲ Cerrar el desglose
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <footer id="seccionFuentes" class="site-footer">
     <div class="footer-inner">
       <div class="footer-col">
@@ -3030,7 +3040,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261008d</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261008f</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -3174,17 +3184,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20261008d"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20261008f"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20261008d"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261008f"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261008d"></script>
-  <script src="assets/auditor/js/municipios-rendicion.js?v=20261008d"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261008f"></script>
+  <script src="assets/auditor/js/municipios-rendicion.js?v=20261008f"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20261008d"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20261008f"></script>
 
   <!-- Modal Interactivo de Descubrimiento Forense (Click-to-Reveal) -->
   <div class="descubrimiento-modal" id="descubrimientoModal" role="dialog" aria-modal="true" aria-labelledby="descModalTitulo">

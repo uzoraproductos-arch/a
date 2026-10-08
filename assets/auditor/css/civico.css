@@ -486,3 +486,91 @@ body { background-color: #0f1218; }
   /* Con el menú abierto, el botón flotante estorba */
   body.menu-movil-abierto .floating-feedback-container { display: none; }
 }
+
+/* ==========================================================================
+   HERRAMIENTAS Y DATOS DENTRO DEL ÍNDICE (08-10-2026)
+   La portada queda en cuatro franjas: 1 cabecera (con los apartados
+   «Herramientas» y «Datos de referencia»), 2 auditoría en imágenes, que es
+   la protagonista, 3 pie, más discreto, y 4 renglón final. El módulo que se
+   abre aparece debajo de las imágenes.
+   ========================================================================== */
+
+/* «Herramientas»: panel ancho con la guía y los cinco módulos */
+.mega-menu-dropdown.mega-herramientas,
+.mega-menu-dropdown.mega-datos {
+  width: min(1240px, calc(100vw - 24px));
+  grid-template-columns: minmax(0, 1fr);
+}
+.mega-menu-dropdown.mega-herramientas { padding: 24px 26px 26px; }
+.mega-herramientas .explorer-hero-box { padding: 0; }
+.mega-herramientas .explorer-hero-title { font-size: clamp(22px, 2.4vw, 30px); margin: 10px 0 6px; }
+.mega-herramientas .explorer-hero-desc { font-size: 16px; }
+.mega-herramientas .portada-guia { margin: 16px 0 4px; padding: 14px 16px; }
+.mega-herramientas .portada-pasos { font-size: 14px; gap: 12px; }
+.mega-herramientas .explorer-cards-grid { margin-top: 16px; gap: 12px; }
+.mega-herramientas .explorer-card { padding: 18px 14px 14px; }
+.mega-herramientas .explorer-card-icon { width: 72px; height: 72px; font-size: 38px; margin-bottom: 10px; }
+.mega-herramientas .explorer-card-title { font-size: 16px; }
+.mega-herramientas .explorer-card-desc { font-size: 13px; margin-bottom: 10px; }
+.mega-herramientas .explorer-card-stat { padding: 6px; margin-bottom: 10px; }
+.mega-herramientas .explorer-card-stat strong { font-size: 15px; white-space: normal; }
+.mega-herramientas .explorer-card-btn { padding: 9px 10px; }
+.mega-herramientas .explorer-card:hover { transform: none; }
+
+/* «Datos de referencia»: el radar completo dentro del panel */
+.mega-menu-dropdown.mega-datos { padding: 0; overflow-x: hidden; }
+.mega-datos .radar-hacendario-hub,
+[data-theme="light"] .mega-datos .radar-hacendario-hub {
+  border-bottom: 0;
+  box-shadow: none;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+.mega-datos .radar-telemetry-track { animation-duration: 90s; }
+
+/* El índice con siete apartados cabe en una fila desde 1100 px */
+@media (min-width: 1101px) {
+  .nav-center-links { gap: 2px; }
+  .mega-menu-trigger { padding: 8px 10px; font-size: 13.5px; }
+}
+/* Panel ancho: se alinea al borde izquierdo de la pantalla */
+@media (min-width: 1101px) {
+  .nav-menu-herramientas,
+  .nav-menu-datos { position: static; }
+  .site-top-nav { position: sticky; }
+  .mega-menu-dropdown.mega-herramientas,
+  .mega-menu-dropdown.mega-datos { left: 12px !important; right: auto; top: 100%; }
+}
+
+/* 2. Auditoría en imágenes: la protagonista */
+.civic-showcase-section { padding-top: 36px; padding-bottom: 36px; }
+.showcase-title { font-size: clamp(26px, 3vw, 38px); }
+.showcase-viewport { height: clamp(420px, 64vh, 700px); border-radius: 14px; }
+.showcase-slide-content { padding: 32px 40px; gap: 12px; }
+.showcase-slide-q { font-size: clamp(24px, 3.4vw, 44px); }
+.showcase-slide-badge { font-size: 13px; padding: 6px 14px; }
+.showcase-click-cue { font-size: 15px; padding: 10px 18px; }
+@media (max-width: 640px) {
+  .showcase-viewport { height: clamp(360px, 70vh, 520px); }
+  .showcase-title-row { flex-wrap: wrap; gap: 8px; }
+  .showcase-title { font-size: 24px; }
+  .showcase-slide-content { padding: 20px 18px; }
+}
+
+/* 3. Pie: más discreto, para que lo de arriba sea lo principal */
+.site-footer { padding-top: 28px; font-size: 12.5px; }
+.footer-inner { gap: 28px; }
+.footer-col h4 { font-size: 14.5px; margin-bottom: 8px; }
+.site-footer p { font-size: 12.5px !important; line-height: 1.55 !important; }
+.site-footer .leyenda-estados { padding: 10px 12px; }
+.site-footer .leyenda-estados li { font-size: 12px; }
+.footer-bottom { margin-top: 24px; padding: 12px 24px; }
+
+/* Elegido un destino, el panel se oculta aunque el cursor siga encima */
+.nav-menu-item.mega-suprimido:not(.open-mega-menu) .mega-menu-dropdown { display: none !important; }
+/* El apartado abierto se lee sobre el azul de la cabecera */
+[data-theme="light"] .nav-menu-item.open-mega-menu .mega-menu-trigger,
+[data-theme="light"] .nav-menu-item:hover .mega-menu-trigger {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.14);
+}

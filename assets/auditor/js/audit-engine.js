@@ -26672,14 +26672,23 @@
     var targetScroll = (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
     if (targetScroll) erarioAbrirAncestros(targetScroll);
     if (targetScroll) {
-      setTimeout(function() {
-        targetScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
+      /* Se calcula la posicion a mano, descontando la cabecera fija: el
+         scrollIntoView instantaneo encima del suave dejaba el modulo
+         cientos de pixeles por debajo de su inicio. */
+      var margenCabecera = function() {
+        var nav = document.querySelector('.site-top-nav');
+        return (nav ? nav.getBoundingClientRect().height : 0) + 12;
+      };
+      var irAlModulo = function(comportamiento) {
+        var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margenCabecera();
+        window.scrollTo({ top: Math.max(0, y), behavior: comportamiento });
+      };
+      setTimeout(function() { irAlModulo('smooth'); }, 60);
       /* Las secciones largas terminan de dibujarse despues del primer salto
          y lo dejan corto: se corrige una vez, si quedo lejos. */
       setTimeout(function() {
-        var t = targetScroll.getBoundingClientRect().top;
-        if (Math.abs(t) > 200) targetScroll.scrollIntoView({ behavior: 'instant', block: 'start' });
+        var t = targetScroll.getBoundingClientRect().top - margenCabecera();
+        if (Math.abs(t) > 200) irAlModulo('instant');
       }, 900);
     }
   }
@@ -26694,13 +26703,9 @@
       c.classList.remove('active-explorer-card');
     });
     pintarProemio(null);
-    /* De vuelta a la vitrina de modulos, por debajo de la barra fija. */
-    var rejilla = document.querySelector('.explorer-cards-grid');
-    if (rejilla) {
-      window.scrollTo({ top: Math.max(0, rejilla.getBoundingClientRect().top + window.pageYOffset - 170), behavior: 'smooth' });
-    } else {
-      (document.querySelector('.explorer-hero-section') || document.body).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    /* De vuelta al inicio: los modulos viven en el menu «Herramientas»
+       desde el 08-10-2026, ya no en un bloque de la portada. */
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // =========================================================================
@@ -26739,6 +26744,7 @@
     var wasOpen = item.classList.contains('open-mega-menu');
     cerrarMegaMenus();
     if (!wasOpen) {
+      item.classList.remove('mega-suprimido');
       item.classList.add('open-mega-menu');
       var t = item.querySelector('.mega-menu-trigger');
       if (t) t.setAttribute('aria-expanded', 'true');
@@ -28542,14 +28548,23 @@
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.nav-menu-item').forEach(function (it) {
       it.addEventListener('mouseenter', function () { posicionarMegaMenu(it.querySelector('.mega-menu-dropdown')); });
+      it.addEventListener('mouseleave', function () { it.classList.remove('mega-suprimido'); });
     });
     document.addEventListener('click', function (e) {
       if (!e.target.closest || !e.target.closest('.nav-menu-item')) cerrarMegaMenus();
+      /* Al elegir un modulo en «Herramientas», el menu se cierra. */
+      else if (e.target.closest('.mega-menu-dropdown a, .mega-herramientas .explorer-card-btn')) {
+        /* Elegido un destino, el panel se va aunque el cursor siga encima:
+           sin esto, el :hover lo dejaba abierto tapando el modulo. */
+        var it = e.target.closest('.nav-menu-item');
+        if (it) it.classList.add('mega-suprimido');
+        cerrarMegaMenus();
+      }
       /* Menú de celular: se cierra al elegir un destino o al tocar fuera. */
       var nav = document.querySelector('.site-top-nav.nav-abierta');
       if (nav && e.target.closest) {
         if (!e.target.closest('.site-top-nav')) toggleMenuMovil(false);
-        else if (e.target.closest('a.mega-link-item, .nav-right-actions .nav-action-btn, .nav-movil-ayuda-btn, .search-results-dropdown')) toggleMenuMovil(false);
+        else if (e.target.closest('a.mega-link-item, .explorer-card-btn, .nav-right-actions .nav-action-btn, .nav-movil-ayuda-btn, .search-results-dropdown')) toggleMenuMovil(false);
       }
     });
     window.addEventListener('resize', function () {
