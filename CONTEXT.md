@@ -313,6 +313,14 @@ eliminar el tema oscuro. Se quitó el botón «◐ Tema» de la cabecera;
 el claro (`:root` es oscuro y `[data-theme="light"]` lo corrige), y
 arrancarlas sería reescribir la hoja entera sin ganancia visible.
 
+**Acciones y buscador a la derecha (08-10-2026, sello 20261008h).** En
+escritorio (más de 1100 px), «Cuéntanos lo que viste», «Compartir»,
+«Inspector Meteoro» y el buscador quedan pegados al borde derecho de la
+cabecera. El buscador ocupa justo el ancho de la fila de botones: sus bordes
+izquierdo y derecho coinciden con los de «Cuéntanos» e «Inspector Meteoro».
+Se quitó el recuadro blanco que rodeaba la caja de búsqueda. En celular no
+cambia nada (todo vive en el menú ☰).
+
 ## Estado actual
 
 ### Hecho
