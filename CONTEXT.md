@@ -340,9 +340,7 @@ significado no cambia. Contraste medido con WCAG (mínimo 4.5:1), en
    blanco con borde neutro; el color pleno queda para la acción principal.
 6. Tarjetas y paneles sin sombra difusa; al pasar el cursor cambia el borde.
    Menús, modales y cajón conservan su sombra porque flotan.
-Pendiente: el botón activo «Treemap» del presupuesto vive dentro de una caja
-oscura heredada (`.treemap-box`) que en tema claro se ve a contraluz; revisar
-esa caja entera en otra pasada.
+(Resuelto en 20261008l: la caja del treemap ya va en tema claro.)
 
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
 autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
@@ -367,6 +365,18 @@ la regla de ancho uniforme del 27-09 fijaba `max-width: 1560px` y la piel
 cívica le había quitado el `margin: auto`. Ahora la franja gris ocupa todo el
 ancho y el recuadro queda centrado, alineado con el espacio donde se abren
 los módulos (comprobado a 1600, 1920 y 2560 px).
+
+**Treemap del presupuesto y barra de mandos en tema claro (08-10-2026, sello
+20261008l).** La caja del treemap (módulo Presupuesto → 2.2 «En qué se va»)
+seguía con el fondo casi negro del tema oscuro y cifras ilegibles. Ahora es
+blanca; cada bloque lleva el color de su categoría en el borde izquierdo, la
+cifra y un tinte suave (social verde azulado, económico ámbar, gobierno rojo,
+deuda carmín, participaciones verde, autónomos morado, ADEFAS gris). Migas,
+insignia de nivel, botón «Volver» y banda de resumen pasan a azul cívico.
+De paso, la barra «Contabilizar / Reiniciar» (`.evaluacion-controls-bar`,
+usada por ocho gráficas) también era oscura: ahora es gris claro con sello
+azul y botón principal azul. Contraste medido: todo el texto de la caja
+pasa de 4.5:1 en nivel 1, en el subnivel y en la vista de lista.
 
 ## Estado actual
 
