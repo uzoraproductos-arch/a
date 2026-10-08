@@ -360,6 +360,14 @@ autor eligió imágenes propias de su carpeta («Gasto público → imágenes»)
   `main`, sustituirlas por imágenes propias o generadas con IA (con su
   etiqueta), o conseguir permiso y acreditar al autor.
 
+**«Auditoría en imágenes» centrada en pantallas anchas (08-10-2026, sello
+20261008k).** En monitores de más de 1560 px el recuadro quedaba pegado a la
+izquierda con un hueco blanco a la derecha (lo reportó el autor con captura):
+la regla de ancho uniforme del 27-09 fijaba `max-width: 1560px` y la piel
+cívica le había quitado el `margin: auto`. Ahora la franja gris ocupa todo el
+ancho y el recuadro queda centrado, alineado con el espacio donde se abren
+los módulos (comprobado a 1600, 1920 y 2560 px).
+
 ## Estado actual
 
 ### Hecho
