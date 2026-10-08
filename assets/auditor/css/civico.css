@@ -770,3 +770,19 @@ body { background-color: #0f1218; }
     var(--pie-imagen) center 30% / cover no-repeat,
     var(--civ-hielo);
 }
+
+/* «Auditoría en imágenes» en pantallas anchas (más de 1560 px): la franja gris
+   ocupa todo el ancho y el recuadro queda centrado, con el mismo ancho que el
+   espacio donde se abren los módulos (1560 px, decisión del 27-09-2026).
+   Antes la regla de ancho uniforme la dejaba pegada a la izquierda y quedaba
+   un hueco blanco a la derecha. */
+body[data-pagina="auditor"] .civic-showcase-section {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: max(24px, calc((100% - 1560px) / 2 + 24px));
+  padding-right: max(24px, calc((100% - 1560px) / 2 + 24px));
+}
+@media (max-width: 720px) {
+  body[data-pagina="auditor"] .civic-showcase-section { padding-left: 14px; padding-right: 14px; }
+}
