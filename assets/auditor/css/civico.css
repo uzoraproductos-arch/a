@@ -917,3 +917,23 @@ a.mega-menu-trigger { text-decoration: none; }
   .mega-datos .radar-stat-item { flex-wrap: wrap; row-gap: 2px; }
   .mega-datos .radar-stat-rate { flex-basis: 100%; }
 }
+
+/* ==========================================================================
+   CABECERA MÁS ALTA PARA QUE SE VEA LA IMAGEN (08-10-2026)
+   Arriba de la página la cabecera crece para que se aprecie el pasillo y el
+   edificio; al desplazarte vuelve a su alto de siempre (clase
+   body.cabecera-compacta, que ponen el motor y apartados.js) para no tapar
+   el contenido.
+   ========================================================================== */
+.site-top-nav { transition: min-height 0.35s ease, background 0.3s ease, box-shadow 0.3s ease; }
+@media (min-width: 1101px) {
+  .site-top-nav { min-height: 190px; }
+}
+@media (max-width: 1100px) {
+  .site-top-nav { min-height: 150px; }
+  .site-top-nav.nav-abierta { min-height: 0; }
+}
+body.cabecera-compacta .site-top-nav { min-height: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .site-top-nav { transition: none; }
+}

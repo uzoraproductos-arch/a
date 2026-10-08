@@ -399,6 +399,16 @@ celular, la cifra del radar y su ritmo por segundo ya no se enciman. Las
 cifras de las tarjetas son las mismas que tenía el menú, con su misma fuente
 en el `title`.
 
+**Cabecera más alta para que se vea la imagen (08-10-2026, sello
+20261008n).** A petición del autor, arriba de la página la cabecera mide al
+menos 190 px en escritorio y 150 px en celular, para que se aprecie la imagen
+del pasillo. Al desplazarte más de 120 px se encoge a su alto de siempre
+(clase `body.cabecera-compacta`, con holgura hasta 10 px para que no
+parpadee) y vuelve a crecer al regresar arriba; lo hacen el motor y
+`apartados.js`. Al saltar a un módulo, la cabecera se encoge *antes* del
+salto (`altoCabeceraCompacta`): si cambiaba de alto a medio camino, el
+desplazamiento suave se interrumpía.
+
 ## Estado actual
 
 ### Hecho
