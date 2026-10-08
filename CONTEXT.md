@@ -224,6 +224,29 @@ es el logo») y se revirtió completo: ilustración, los 13 SVG de
 `assets/brand/logos/`, `brand/brand-book.jsx` y `DESIGN.md` (vuelve a v1.0).
 El logo es el de antes. No se vuelve a tocar el bigote sin que el autor lo pida.
 
+**Piel cívica (08-10-2026, sello 20261008a).** El autor pidió volver a la
+portada anterior (las cinco herramientas con icono, «Explora el panorama»,
+el radar y el carrusel, que `ux/fase-1` había quitado) y quedarse solo con la
+redacción de `ux/fase-1`. Además pidió quitar la foto de fondo y acercar el
+aspecto a Civio y USAspending (fondo blanco, barra azul, gris) y a Operação
+Serenata de Amor (un color por rubro). Hecho:
+- `assets/auditor/css/civico.css`, cargada después de la hoja maestra: sin
+  foto de fondo en los dos temas; tema claro de entrada (llave nueva
+  `auditavision_tema_civico`), barra superior azul, franjas grises, acento
+  azul en lugar de dorado; cada tarjeta de rubro con su franja, su icono y su
+  botón del color del rubro (dinero azul, obras naranja, calculadora verde,
+  inspector rojo, ambiente verde azulado).
+- Portada: lema «El gasto público, a la vista», la cifra de la ASF con su
+  fuente y la guía «Cómo se usa» (de `ux/fase-1`), arriba de los rubros. El
+  carrusel bajó después de los módulos, para que el módulo abra pegado a los
+  rubros.
+- Redacción: menús con nombres sencillos (Busca y verifica, Sigue el dinero,
+  Descarga los datos, Aprende, Participa), «Cuéntanos lo que viste», «Cerrar y
+  volver al inicio» y los textos del motor que `ux/fase-1` pasó de usted a tú.
+  Los emojis se quedan: el autor quiere los iconos.
+- No se trajeron de `ux/fase-1` la navegación de cuatro secciones, la capa
+  `legibilidad.css/js` ni la carga diferida del padrón municipal.
+
 ## Estado actual
 
 ### Hecho
