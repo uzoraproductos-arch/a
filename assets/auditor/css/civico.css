@@ -15,7 +15,8 @@
 /* --- Rubros: un color por tema ------------------------------------------ */
 :root {
   --rubro-dinero: #1f5fa8;     /* Circuito del dinero */
-  --rubro-obras: #c8641b;      /* Inversión y megaobras */
+  --rubro-obras: #a9541a;      /* Inversión y megaobras (5.29:1 sobre blanco) */
+  --rubro-obras-raya: #c8641b; /* tono vivo, solo para franjas decorativas */
   --rubro-calculadora: #23855a;/* Calculadora cívica */
   --rubro-inspector: #b3261e;  /* Modo inspector */
   --rubro-ambiente: #0f7f7a;   /* Costo ambiental */
@@ -175,6 +176,7 @@ body { background-color: #0f1218; }
 .explorer-card { --rubro: var(--rubro-dinero); border-top: 6px solid var(--rubro); border-radius: 6px; }
 #cardModPresupuesto { --rubro: var(--rubro-dinero); }
 #cardModMegaobras { --rubro: var(--rubro-obras); }
+[data-theme="light"] #cardModMegaobras { border-top-color: var(--rubro-obras-raya); }
 #cardModCalculadora { --rubro: var(--rubro-calculadora); }
 #cardModInspector { --rubro: var(--rubro-inspector); }
 #cardModAmbiente { --rubro: var(--rubro-ambiente); }
@@ -588,3 +590,137 @@ body { background-color: #0f1218; }
     height: 32px; border-radius: 8px; border: 1px solid #ffffff; background: #ffffff;
   }
 }
+
+/* ==========================================================================
+   Legibilidad y sobriedad (08-10-2026, sello 20261008i)
+   Fusión de la revisión de color: medidas WCAG en CONTEXT.md.
+   ========================================================================== */
+
+/* 1-2. Chips de estado: mismo significado, más contraste.
+   oficial = verde, derivado = ámbar, pendiente = gris punteado (no cambia). */
+[data-theme="light"] .est-oficial {
+  color: #18703f;
+  background: #e8f4ec;
+  border-color: rgba(24, 112, 63, 0.38);
+}
+[data-theme="light"] .est-derivado {
+  color: #8a5a12;
+  background: #fdf3e2;
+  border-color: rgba(138, 90, 18, 0.38);
+}
+
+/* 4. Alertas y anomalías: tarjeta neutra, borde izquierdo rojo de 3 px.
+   El juicio lo dan el borde, el chip y el texto, no un fondo teñido. */
+[data-theme="light"] .asf-alert-banner,
+[data-theme="light"] .desfalcos-box,
+[data-theme="light"] .versus-box-perjudico,
+[data-theme="light"] .sim-loss-box,
+[data-theme="light"] .sim-proyeccion-box.deficit-box,
+[data-theme="light"] .sim-ver-inc,
+[data-theme="light"] .sim-linea-nota,
+[data-theme="light"] .sim-vivo-total,
+[data-theme="light"] .pjo-cambio-pie,
+[data-theme="light"] .com-destino-pie,
+[data-theme="light"] .vsx-cautelas,
+[data-theme="light"] .vbs-cierre,
+[data-theme="light"] .ce-pil-ciego,
+[data-theme="light"] .cee-res-veredicto[data-tono="malo"],
+[data-theme="light"] .aviso-huachicol,
+[data-theme="light"] .cc-vivo-tira {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  border-left: 3px solid var(--rubro-inspector);
+  box-shadow: none;
+}
+
+/* 5. Botones secundarios: borde neutro y texto sobrio.
+   El color pleno queda para la acción principal de cada pantalla. */
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarCSV"],
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarEstadoCuenta"],
+[data-theme="light"] .hero-pillar-calc[onclick*="copiarComparadorChoque"],
+[data-theme="light"] .eval-btn-secondary,
+[data-theme="light"] .factcheck-copy-btn,
+[data-theme="light"] .radar-ctrl-btn:not(.is-hidden-mode),
+[data-theme="light"] .view-btn:not(.active),
+[data-theme="light"] .treemap-view-btn:not(.active),
+[data-theme="light"] .versus-view-btn:not(.active) {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  color: #44526b;
+  box-shadow: none;
+}
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarCSV"]:hover,
+[data-theme="light"] .hero-pillar-calc[onclick*="descargarEstadoCuenta"]:hover,
+[data-theme="light"] .hero-pillar-calc[onclick*="copiarComparadorChoque"]:hover,
+[data-theme="light"] .eval-btn-secondary:hover,
+[data-theme="light"] .factcheck-copy-btn:hover,
+[data-theme="light"] .radar-ctrl-btn:not(.is-hidden-mode):hover,
+[data-theme="light"] .view-btn:not(.active):hover,
+[data-theme="light"] .treemap-view-btn:not(.active):hover,
+[data-theme="light"] .versus-view-btn:not(.active):hover {
+  background: var(--civ-gris);
+  border-color: var(--civ-azul-medio);
+  color: var(--civ-azul);
+}
+
+/* 6. Tarjetas y paneles: línea de 1 px en vez de sombra difusa.
+   Las capas flotantes (menús, modales, cajón) conservan su sombra:
+   la necesitan para separarse de lo que tapan. */
+[data-theme="light"] .explorer-card,
+[data-theme="light"] .explorer-card:hover,
+[data-theme="light"] .explorer-card.active-explorer-card,
+[data-theme="light"] .explorer-card-icon,
+[data-theme="light"] .civic-ticket-card,
+[data-theme="light"] .civio-equiv-card,
+[data-theme="light"] .civio-equiv-card:hover,
+[data-theme="light"] .com-card-panel,
+[data-theme="light"] .debate-post-card,
+[data-theme="light"] .debate-post-card:hover,
+[data-theme="light"] .electoral-civic-hub,
+[data-theme="light"] .factcheck-card-panel,
+[data-theme="light"] .map-viewport-card,
+[data-theme="light"] .pj-concept-card,
+[data-theme="light"] .pj-node-card,
+[data-theme="light"] .portal-creator-card,
+[data-theme="light"] .red-flag-panel,
+[data-theme="light"] .scjn-calculos-card,
+[data-theme="light"] .scjn-footnotes-card,
+[data-theme="light"] .sim-controls-panel,
+[data-theme="light"] .sim-kpi-card,
+[data-theme="light"] .sim-obra-card,
+[data-theme="light"] .versus-scorecard-box,
+[data-theme="light"] .radar-desglose-card,
+[data-theme="light"] .card-destacado-familiar,
+[data-theme="light"] .civic-showcase-section {
+  box-shadow: none;
+}
+[data-theme="light"] .asesores-kpi-card:hover,
+[data-theme="light"] .civic-profile-card:hover,
+[data-theme="light"] .civic-tier-card:hover,
+[data-theme="light"] .finanzas-eje-card:hover,
+[data-theme="light"] .forensic-dossier-card:hover,
+[data-theme="light"] .globales-kpi-card:hover,
+[data-theme="light"] .news-card:hover,
+[data-theme="light"] .precepto-card:hover,
+[data-theme="light"] .prest-kpi-card:hover,
+[data-theme="light"] .radar-state-flag-card:hover,
+[data-theme="light"] .versus-exec-card:hover,
+[data-theme="light"] .versus-kpi-card:hover,
+[data-theme="light"] .pj-node-card:hover,
+[data-theme="light"] .pj-concept-card:hover,
+[data-theme="light"] .sim-obra-card:hover {
+  box-shadow: none;
+  border-color: var(--civ-azul-medio);
+}
+
+/* Textos que estaban pensados para fondo oscuro: sobre la tarjeta blanca
+   se leen en tinta. (.asf-desc ya se leía mal antes: 1.83:1.) */
+[data-theme="light"] .asf-desc,
+[data-theme="light"] .asf-banner-header + div { color: #44526b !important; } /* el segundo trae color en línea */
+[data-theme="light"] .sim-loss-amount.sim-live-card-loss { color: var(--rubro-inspector) !important; } /* trae color en línea */
+[data-theme="light"] .view-btn.active { color: #ffffff; } /* negro sobre azul: 3.07:1 */
+[data-theme="light"] .sim-loss-lbl,
+[data-theme="light"] .sim-proyeccion-box.deficit-box strong { color: var(--rubro-inspector); }
+[data-theme="light"] .sim-loss-amount,
+[data-theme="light"] .sim-vivo-total-val { color: var(--rubro-inspector); }
+[data-theme="light"] .sim-loss-box .sim-live-ticker-sub { color: #8a5a12; }

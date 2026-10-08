@@ -321,6 +321,29 @@ izquierdo y derecho coinciden con los de «Cuéntanos» e «Inspector Meteoro».
 Se quitó el recuadro blanco que rodeaba la caja de búsqueda. En celular no
 cambia nada (todo vive en el menú ☰).
 
+**Legibilidad y sobriedad de color (08-10-2026, sello 20261008i).** Fusión de
+la revisión de color de Antigravity (puntos 1 a 6 aprobados por el autor; el 7,
+oro en la cabecera, quedó fuera). Se descartó su modo oscuro, el oro como
+identidad, el fondo pergamino y, sobre todo, su ámbar para «pendiente»: en la
+plataforma el ámbar es `derivado` y `pendiente` es gris punteado; ese
+significado no cambia. Contraste medido con WCAG (mínimo 4.5:1), en
+`civico.css`:
+1. Chip `derivado` `#B7791F` → `#8A5A12` (3.32 → 5.38:1 sobre su fondo).
+2. Chip `oficial` `#1E824C` → `#18703F` (3.89 → 5.42:1).
+3. Rubro obras `#C8641B` → `#A9541A` en textos y botones (3.97 → 5.29:1);
+   la franja de la tarjeta conserva el tono vivo (`--rubro-obras-raya`).
+4. Alertas y anomalías: tarjeta blanca, borde de 1 px y borde izquierdo rojo
+   de 3 px, sin fondo teñido. Los textos pensados para fondo oscuro pasan a
+   tinta o rojo. Se corrigió de paso un texto de la alerta ASF de la ficha
+   estatal que ya se leía mal (1.83:1, color en línea).
+5. Botones secundarios (CSV, copiar, controles del radar, cambio de vista):
+   blanco con borde neutro; el color pleno queda para la acción principal.
+6. Tarjetas y paneles sin sombra difusa; al pasar el cursor cambia el borde.
+   Menús, modales y cajón conservan su sombra porque flotan.
+Pendiente: el botón activo «Treemap» del presupuesto vive dentro de una caja
+oscura heredada (`.treemap-box`) que en tema claro se ve a contraluz; revisar
+esa caja entera en otra pasada.
+
 ## Estado actual
 
 ### Hecho
