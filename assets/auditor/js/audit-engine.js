@@ -26828,6 +26828,11 @@
     try { history.replaceState(history.state, '', window.location.pathname + window.location.hash); } catch (e) { /* sin historial */ }
     if (IR_MODULOS.indexOf(destino) !== -1) {
       seleccionarModuloExplorer(destino, ancla || undefined);
+      /* Si el ancla es un bloque plegable del erario, llega abierto. */
+      if (ancla && /^eb-/.test(ancla)) setTimeout(function() {
+        var c = document.querySelector('#' + ancla + ' .erario-pleg-cab');
+        if (c && c.getAttribute('aria-expanded') === 'false') erarioPlegToggle(ancla.slice(3), true);
+      }, 150);
       /* Recien cargada, la pagina sigue dibujando secciones largas y el
          salto se queda corto: se repite hasta que el bloque quede arriba. */
       [1600, 2600].forEach(function(ms) {
@@ -26841,8 +26846,46 @@
         }, ms);
       });
     }
-    else if (Object.prototype.hasOwnProperty.call(IR_DESTINOS, destino)) IR_DESTINOS[destino]();
+    else if (Object.prototype.hasOwnProperty.call(IR_DESTINOS, destino)) {
+      IR_DESTINOS[destino]();
+      if (enVisor() && VISOR_PANELES.indexOf(destino) === -1) visorAviso(destino);
+    }
   }
+
+  /* Modo visor (08-10-2026): la pagina de apartado abre el modulo en un
+     marco dentro de si misma, con index.html?ir=...&visor=1, para que el
+     lector no salga de ella. El <head> marca la clase antes de pintar y
+     civico.css esconde cabecera, portada y pie. Los destinos que son
+     ventanas (descargas, reporte, fuentes...) dejan detras un aviso para
+     volver a abrirlas o cerrar el visor. */
+  var VISOR_PANELES = ['egresos', 'buscador', 'efos', 'faq-glosario', 'faq-marco-legal', 'faq-preguntas'];
+  function enVisor() { return document.documentElement.classList.contains('modo-visor'); }
+  function visorCerrar() {
+    try { window.parent.postMessage({ auditavision: 'cerrar-visor' }, window.location.origin); } catch (e) { /* sin marco */ }
+  }
+  function visorAviso(destino) {
+    if (document.getElementById('visorAviso')) return;
+    var d = document.createElement('div');
+    d.id = 'visorAviso';
+    d.className = 'visor-aviso';
+    d.innerHTML = '<p>Lo que pediste se abre en una ventana encima de este panel, o se descarga. Si ya la cerraste, puedes abrirla de nuevo.</p>' +
+      '<div class="visor-aviso-btns"><button type="button" class="visor-aviso-b principal">\u21BA Abrirla de nuevo</button>' +
+      '<button type="button" class="visor-aviso-b">\u2715 Cerrar este panel</button></div>';
+    var bs = d.querySelectorAll('button');
+    bs[0].addEventListener('click', function() { IR_DESTINOS[destino](); });
+    bs[1].addEventListener('click', visorCerrar);
+    document.body.appendChild(d);
+  }
+  /* En el visor, un enlace a otra pagina se abre en la ventana completa,
+     no dentro del marco. */
+  document.addEventListener('click', function(e) {
+    if (!enVisor()) return;
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.target) return;
+    var h = a.getAttribute('href') || '';
+    if (h.charAt(0) === '#' || /^javascript:/i.test(h) || a.hasAttribute('download')) return;
+    a.target = '_top';
+  }, true);
   /* Al estar listo el documento, no al terminar de cargar: las fuentes y
      las imagenes externas pueden tardar segundos y el lector esperaria con
      la portada enfrente. El init corre antes (setTimeout tras el suyo). */
