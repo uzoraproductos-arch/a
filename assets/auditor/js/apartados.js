@@ -30,4 +30,17 @@
       prompt('Copia este enlace para compartirlo:', url);
     }
   });
+
+  /* Cabecera alta arriba, compacta al desplazarse (igual que en el auditor). */
+  var compacta = false;
+  function revisar() {
+    var y = window.pageYOffset || 0;
+    var nueva = compacta ? y > 10 : y > 120;
+    if (nueva !== compacta) {
+      compacta = nueva;
+      document.body.classList.toggle('cabecera-compacta', compacta);
+    }
+  }
+  window.addEventListener('scroll', revisar, { passive: true });
+  revisar();
 })();

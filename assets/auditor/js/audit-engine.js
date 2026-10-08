@@ -26671,16 +26671,38 @@
     return (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
   }
 
+  /* Alto de la cabecera una vez compacta: arriba mide mas (ver civico.css),
+     pero al bajar a un modulo se encoge, y es ese alto el que hay que
+     descontar para que el modulo no quede escondido ni con hueco. */
+  function altoCabeceraCompacta(nav) {
+    if (!nav) return 0;
+    if (!cabCompacta) {
+      /* Se encoge antes del salto: si cambiara de alto a medio camino, el
+         desplazamiento suave se interrumpe y el modulo queda lejos. */
+      nav.style.transition = 'none';
+      cabeceraFijar(true);
+      /* Mientras dura el salto no se vuelve a agrandar: el primer paso del
+         desplazamiento suave pasa por y < 10 y la deshacia. */
+      clearTimeout(cabBloqueo);
+      cabBloqueo = setTimeout(function() { cabBloqueo = null; cabeceraRevisar(); }, 1500);
+      var h = nav.getBoundingClientRect().height;
+      nav.style.transition = '';
+      return h;
+    }
+    return nav.getBoundingClientRect().height;
+  }
+
   function irAlDestino(targetScroll) {
     /* Se calcula la posicion a mano, descontando la cabecera fija: el
        scrollIntoView instantaneo encima del suave dejaba el modulo
        cientos de pixeles por debajo de su inicio. */
     var margenCabecera = function() {
       var nav = document.querySelector('.site-top-nav');
-      return (nav ? nav.getBoundingClientRect().height : 0) + 12;
+      return altoCabeceraCompacta(nav) + 12;
     };
     var irAlModulo = function(comportamiento) {
-      var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margenCabecera();
+      var margen = margenCabecera(); /* primero: puede encoger la cabecera y mover el modulo */
+      var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margen;
       window.scrollTo({ top: Math.max(0, y), behavior: comportamiento });
     };
     setTimeout(function() { irAlModulo('smooth'); }, 60);
@@ -26812,7 +26834,7 @@
         setTimeout(function() {
           var t = moduloDestino(destino, ancla);
           var nav = document.querySelector('.site-top-nav');
-          var alto = (nav ? nav.getBoundingClientRect().height : 0) + 12;
+          var alto = altoCabeceraCompacta(nav) + 12;
           if (t && Math.abs(t.getBoundingClientRect().top - alto) > 120) {
             window.scrollTo({ top: Math.max(0, t.getBoundingClientRect().top + window.pageYOffset - alto), behavior: 'instant' });
           }
@@ -26825,6 +26847,22 @@
      las imagenes externas pueden tardar segundos y el lector esperaria con
      la portada enfrente. El init corre antes (setTimeout tras el suyo). */
   document.addEventListener('DOMContentLoaded', function() { setTimeout(irDesdeApartado, 300); });
+  /* Cabecera alta arriba de la pagina, compacta al desplazarse (civico.css).
+     Con holgura entre 10 y 120 px para que no parpadee al cruzar el umbral. */
+  var cabCompacta = false;
+  function cabeceraFijar(compacta) {
+    if (compacta === cabCompacta) return;
+    cabCompacta = compacta;
+    document.body.classList.toggle('cabecera-compacta', compacta);
+  }
+  var cabBloqueo = null;
+  function cabeceraRevisar() {
+    if (cabBloqueo) return;
+    var y = window.pageYOffset || 0;
+    cabeceraFijar(cabCompacta ? y > 10 : y > 120);
+  }
+  window.addEventListener('scroll', cabeceraRevisar, { passive: true });
+  document.addEventListener('DOMContentLoaded', cabeceraRevisar);
 
   /* Menú de celular: en pantallas angostas el índice entero (menús,
      acciones, buscador y el recuadro para reportar) se pliega tras el
