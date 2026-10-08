@@ -574,3 +574,17 @@ body { background-color: #0f1218; }
   color: #ffffff !important;
   background: rgba(255, 255, 255, 0.14);
 }
+
+/* Acciones y buscador: pegados a la derecha y con los mismos márgenes.
+   El contenedor toma el ancho de la fila de botones y el buscador lo llena,
+   así sus bordes izquierdo y derecho coinciden con los de los botones. */
+@media (min-width: 1101px) {
+  .nav-right-container { margin-left: auto; align-items: stretch; }
+  .nav-right-actions { justify-content: flex-end; flex-wrap: nowrap; }
+  .nav-search-wrap { width: auto; justify-content: stretch; }
+  .search-command-bar.nav-search-bar { max-width: none; width: 100%; }
+  [data-theme="light"] .nav-search-bar { background: transparent; border: 0; padding: 0; }
+  [data-theme="light"] .nav-search-bar .search-input-box {
+    height: 32px; border-radius: 8px; border: 1px solid #ffffff; background: #ffffff;
+  }
+}
