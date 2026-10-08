@@ -304,6 +304,15 @@ pidió que la portada la protagonicen las imágenes. Cambios:
   fija (antes el salto de respaldo dejaba el módulo cientos de píxeles abajo),
   y `plegarDesgloseModulos` vuelve al inicio de la página.
 
+**Un solo tema: el claro (08-10-2026, sello 20261008g).** El autor pidió
+eliminar el tema oscuro. Se quitó el botón «◐ Tema» de la cabecera;
+`initTheme` fija siempre `data-theme="light"` y borra la preferencia guardada
+(`auditavision_tema_civico`), así que quien la tenía en oscuro ve el claro.
+`toggleTheme` sigue exportada, pero ya no alterna. Las reglas oscuras de
+`auditavision.css` se dejaron en su sitio: son la base sobre la que se monta
+el claro (`:root` es oscuro y `[data-theme="light"]` lo corrige), y
+arrancarlas sería reescribir la hoja entera sin ganancia visible.
+
 ## Estado actual
 
 ### Hecho

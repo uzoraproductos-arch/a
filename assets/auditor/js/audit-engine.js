@@ -18991,25 +18991,14 @@
   // CONMUTADOR DE TEMA (MODO OSCURO / CLARO)
   // ==========================================================================
   function initTheme() {
-    let savedTheme = 'light';
-    try { savedTheme = localStorage.getItem('auditavision_tema_civico') || 'light'; } catch (e) { /* sin almacenamiento */ }
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeButtonText(savedTheme);
+    // El auditor tiene un solo tema, el claro: el oscuro se retiró por decisión del autor (08-10-2026).
+    document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.removeItem('auditavision_tema_civico'); } catch (e) { /* sin almacenamiento */ }
   }
 
+  // Se conserva exportada por si algún enlace viejo la llama: ya no alterna, deja el tema claro.
   function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('auditavision_tema_civico', next); } catch (e) { /* el tema vale solo para esta visita */ }
-    updateThemeButtonText(next);
-  }
-
-  function updateThemeButtonText(theme) {
-    const btn = document.getElementById('themeBtn');
-    if (btn) {
-      btn.innerHTML = theme === 'dark' ? '◐ Tema Claro' : '◐ Tema Oscuro';
-    }
+    initTheme();
   }
 
   // ==========================================================================
