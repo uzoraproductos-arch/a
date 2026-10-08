@@ -355,3 +355,125 @@ body { background-color: #0f1218; }
 /* Leyes y fuentes del pie: se pueden tocar */
 .pie-ref { cursor: pointer; color: inherit; text-decoration: underline; text-decoration-color: var(--border-accent); text-underline-offset: 3px; }
 .pie-ref:hover { color: var(--gold-bright); text-decoration-color: currentColor; }
+
+/* ==========================================================================
+   MENÚ DE TRES RAYAS (08-10-2026)
+   En pantallas angostas el índice no se amontona: queda plegado tras el
+   botón ☰ y se despliega completo, menú por menú, con el buscador y las
+   acciones. Al final, el recuadro para reportar lo que viste.
+   ========================================================================== */
+.nav-indice { display: contents; }
+.nav-hamburguesa,
+.nav-movil-ayuda { display: none; }
+
+@media (max-width: 1100px) {
+  .site-top-nav { flex-wrap: wrap; align-items: center; row-gap: 0; }
+  .nav-brand-group { flex: 1 1 auto; min-width: 0; }
+
+  .nav-hamburguesa {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 8px 14px;
+    margin-left: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: transparent;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  :root:not([data-theme="light"]) .nav-hamburguesa { border-color: var(--border-gold); color: var(--gold-bright); }
+  .nav-hamburguesa:hover,
+  .nav-hamburguesa[aria-expanded="true"] { background: rgba(255, 255, 255, 0.12); }
+  .nav-hamb-rayas { display: inline-flex; flex-direction: column; justify-content: space-between; width: 20px; height: 14px; }
+  .nav-hamb-rayas span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-hamburguesa[aria-expanded="true"] .nav-hamb-rayas span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-hamburguesa[aria-expanded="true"] .nav-hamb-rayas span:nth-child(2) { opacity: 0; }
+  .nav-hamburguesa[aria-expanded="true"] .nav-hamb-rayas span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* El índice, plegado hasta que se pulsa el botón */
+  .nav-indice {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 14px;
+    padding: 12px 0 16px;
+    max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .site-top-nav.nav-abierta .nav-indice { display: flex; }
+
+  /* Los cinco menús, uno debajo del otro */
+  .nav-center-links { flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
+  .nav-menu-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+  .mega-menu-trigger {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 12px 4px;
+    font-size: 16px;
+    border-radius: 0;
+  }
+  .mega-menu-dropdown {
+    position: static !important;
+    left: auto !important;
+    width: auto !important;
+    max-height: none !important;
+    grid-template-columns: 1fr !important;
+    margin: 0 0 12px;
+    padding: 16px;
+    box-shadow: none;
+    animation: none;
+  }
+  .mega-link-item { min-height: 44px; }
+  [data-theme="light"] .nav-menu-item.open-mega-menu .mega-menu-trigger,
+  [data-theme="light"] .nav-menu-item:hover .mega-menu-trigger {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Buscador primero, luego las acciones */
+  .nav-right-container { width: 100%; align-items: stretch; gap: 12px; margin-top: 0; }
+  .nav-search-wrap { order: -1; }
+  .search-command-bar.nav-search-bar { max-width: 100%; width: 100%; }
+  .nav-right-actions { justify-content: flex-start; gap: 8px; }
+  .nav-right-actions .nav-action-btn,
+  .nav-right-actions #themeBtn { min-height: 44px; font-size: 14px; padding: 8px 14px; }
+  /* «Cuéntanos lo que viste» pasa al recuadro de abajo */
+  .nav-right-actions .nav-feedback-btn { display: none; }
+
+  /* El recuadro final para reportar */
+  .nav-movil-ayuda {
+    display: block;
+    padding: 16px 18px;
+    border-radius: 6px;
+    border-left: 6px solid var(--rubro-inspector);
+    background: var(--bg-card-alt);
+    color: var(--text-main);
+  }
+  [data-theme="light"] .nav-movil-ayuda { background: #ffffff; }
+  .nav-movil-ayuda-tit { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin: 0 0 6px; color: var(--text-main); }
+  .nav-movil-ayuda-txt { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5; margin: 0 0 12px; color: var(--text-secondary); }
+  .nav-movil-ayuda-btn {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 6px;
+    border: 0;
+    background: var(--rubro-inspector);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .nav-movil-ayuda-btn:hover { background: color-mix(in srgb, var(--rubro-inspector) 85%, #000000); }
+
+  /* Con el menú abierto, el botón flotante estorba */
+  body.menu-movil-abierto .floating-feedback-container { display: none; }
+}

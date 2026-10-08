@@ -26755,6 +26755,25 @@
     });
   }
 
+  /* Menú de celular: en pantallas angostas el índice entero (menús,
+     acciones, buscador y el recuadro para reportar) se pliega tras el
+     botón de tres rayas. El aspecto vive en civico.css. */
+  function toggleMenuMovil(forzar) {
+    var nav = document.querySelector('.site-top-nav');
+    if (!nav) return;
+    var abrir = typeof forzar === 'boolean' ? forzar : !nav.classList.contains('nav-abierta');
+    nav.classList.toggle('nav-abierta', abrir);
+    document.body.classList.toggle('menu-movil-abierto', abrir);
+    var btn = document.getElementById('navHamburguesa');
+    if (btn) {
+      btn.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      btn.setAttribute('aria-label', abrir ? 'Cerrar el menú' : 'Abrir el menú');
+      var txt = btn.querySelector('.nav-hamb-txt');
+      if (txt) txt.textContent = abrir ? 'Cerrar' : 'Menú';
+    }
+    if (!abrir) cerrarMegaMenus();
+  }
+
   /* Que el desplegable quepa en la pantalla: los menus de la derecha se
      salian por el borde y su segunda columna no se podia pulsar. En
      telefono ocupa el ancho disponible, en una sola columna, y se desplaza
@@ -28375,6 +28394,7 @@
     pintarProemio: pintarProemio,
     abrirDiccionarioSubtab: abrirDiccionarioSubtab,
     toggleMegaMenu: toggleMegaMenu,
+    toggleMenuMovil: toggleMenuMovil,
     cerrarMegaMenus: cerrarMegaMenus,
     showcaseNext: showcaseNext,
     showcasePrev: showcasePrev,
@@ -28525,6 +28545,12 @@
     });
     document.addEventListener('click', function (e) {
       if (!e.target.closest || !e.target.closest('.nav-menu-item')) cerrarMegaMenus();
+      /* Menú de celular: se cierra al elegir un destino o al tocar fuera. */
+      var nav = document.querySelector('.site-top-nav.nav-abierta');
+      if (nav && e.target.closest) {
+        if (!e.target.closest('.site-top-nav')) toggleMenuMovil(false);
+        else if (e.target.closest('a.mega-link-item, .nav-right-actions .nav-action-btn, .nav-movil-ayuda-btn, .search-results-dropdown')) toggleMenuMovil(false);
+      }
     });
     window.addEventListener('resize', function () {
       var abierto = document.querySelector('.nav-menu-item.open-mega-menu .mega-menu-dropdown');
@@ -28544,6 +28570,7 @@
       closePaseCivicoModal();
       cerrarDescubrimiento();
       cerrarMegaMenus();
+      toggleMenuMovil(false);
       cerrarRadarDesglose();
       cerrarModalReferencia();
       cerrarDescargas();

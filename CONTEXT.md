@@ -267,6 +267,15 @@ fondo y una raya de color arriba, como los bloques de Serenata de Amor:
    Todas ya estaban en `AUDIT_DB` con su vigencia.
 6. Renglón final con la leyenda de transparencia y el sello.
 
+**Menú de tres rayas (08-10-2026, sello 20261008c).** En pantallas de 1100 px
+o menos el índice del rectángulo 1 ya no se amontona: queda plegado tras un
+botón ☰ «Menú» (`toggleMenuMovil` en el motor, aspecto en `civico.css`). Al
+desplegarse muestra los cinco menús uno debajo del otro (cada uno se abre en
+su lugar), el buscador, Compartir, Inspector Meteoro y el tema, y al final un
+recuadro rojo «¿Viste algo raro con el dinero público?» con el botón
+«Cuéntanos lo que viste». Se cierra al elegir un destino, al tocar fuera o con
+Escape. En computadora la cabecera no cambia.
+
 ## Estado actual
 
 ### Hecho
