@@ -333,3 +333,58 @@ body[data-pagina="apartado"] a.nav-movil-ayuda-btn { display: block; text-align:
   .dt { padding: 12px; }
   .dt-svg { min-width: 720px; }
 }
+
+/* ==========================================================================
+   VISOR EN LA MISMA PÁGINA (08-10-2026)
+   Al pulsar una tarjeta, el módulo se despliega aquí, debajo de su fila,
+   en un marco con el auditor en modo visor. apartados.js lo arma.
+   ========================================================================== */
+.apartado-tarjeta-abierta {
+  border-color: var(--tarjeta);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tarjeta) 30%, transparent);
+}
+.apartado-tarjeta-abierta .apartado-tarjeta-accion { font-size: 0; }
+.apartado-tarjeta-abierta .apartado-tarjeta-accion::after { content: 'Abierto abajo ▾ · pulsa para cerrar'; font-size: 14px; }
+.apartado-visor {
+  grid-column: 1 / -1;
+  --tarjeta: var(--civ-azul-medio);
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  border-top: 5px solid var(--tarjeta);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(11, 42, 99, 0.12);
+  scroll-margin-top: 90px;
+  animation: visorEntra 0.25s ease;
+}
+@keyframes visorEntra { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .apartado-visor { animation: none; } }
+.apartado-visor-cab {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  padding: 10px 14px; background: color-mix(in srgb, var(--tarjeta) 8%, #ffffff);
+  border-bottom: 1px solid var(--civ-gris-borde);
+}
+.apartado-visor-tit { flex: 1 1 220px; font-weight: 800; font-size: 16px; color: #1c2a44; outline: none; }
+.apartado-visor-b {
+  font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
+  background: #ffffff; color: var(--civ-azul); border: 1px solid var(--civ-gris-borde);
+  border-radius: 999px; padding: 7px 14px; white-space: nowrap;
+}
+.apartado-visor-b:hover { border-color: var(--tarjeta); }
+.apartado-visor-cerrar { background: var(--civ-azul); color: #ffffff; border-color: var(--civ-azul); }
+.apartado-visor-cuerpo { position: relative; background: var(--civ-gris); }
+.apartado-visor-marco {
+  display: block; width: 100%; border: 0;
+  height: var(--visor-alto, calc(100vh - 120px)); min-height: 460px;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.apartado-visor.cargado .apartado-visor-marco { opacity: 1; }
+.apartado-visor-carga {
+  position: absolute; top: 40px; left: 0; right: 0; margin: 0; text-align: center;
+  font-size: 15px; color: #44526b;
+}
+.apartado-visor.cargado .apartado-visor-carga { display: none; }
+@media (max-width: 560px) {
+  .apartado-visor { margin: 0 -8px; border-radius: 10px; }
+  .apartado-visor-b { padding: 6px 11px; font-size: 13px; }
+}

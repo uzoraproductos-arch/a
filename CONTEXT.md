@@ -457,6 +457,30 @@ revisadas (37.2 y 51.9). Hay que decidir un solo criterio. También faltan el
 saldo en pesos de 2025, la serie 1995-1999 y verificar en Banxico la deuda
 externa de 1988 a 1992.
 
+**Las tarjetas se despliegan en su propia página (08-10-2026, sello
+20261008p).** El autor pidió que, al pulsar una tarjeta de un apartado, la
+información se desplegara ahí mismo y no lo regresara a la página inicial.
+Ahora `apartados.js` intercepta las tarjetas que van a `index.html?ir=...`
+y abre, debajo de la fila de la tarjeta, un **visor**: un marco con
+`index.html?ir=...&visor=1`, de alto de pantalla, con «Pantalla completa» y
+«Cerrar». La dirección no cambia. Con Ctrl, Cmd o la rueda del ratón la
+tarjeta se abre en otra pestaña, como cualquier enlace.
+
+En el auditor, `&visor=1` dentro de un marco marca `html.modo-visor` desde el
+`<head>`, antes de pintar, y `civico.css` esconde cabecera, portada, pie,
+barras de regreso y botones flotantes. En modo visor, los enlaces a otras
+páginas se abren en la ventana completa (`target=_top`). Los destinos que son
+ventanas (descargas, CSV, fuentes, reporte, Pase) dejan detrás un aviso con
+«Abrirla de nuevo» y «Cerrar este panel»; este último usa `postMessage` con
+el mismo origen. La lista de destinos que son panel y no ventana está en
+`VISOR_PANELES`. Si el ancla de una tarjeta es un bloque plegable del erario
+(`eb-*`), ahora llega abierto (antes llegaba cerrado).
+
+Verificado a 1440 y a 390 px en 15 tarjetas de los seis apartados (módulos,
+anclas y ventanas): la dirección no cambia, el módulo y su bloque quedan
+arriba del visor, «Cerrar» funciona, 0 errores y sin desborde. La entrada
+directa `index.html?ir=...` sigue funcionando igual.
+
 ## Estado actual
 
 ### Hecho
