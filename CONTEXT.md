@@ -344,6 +344,22 @@ Pendiente: el botón activo «Treemap» del presupuesto vive dentro de una caja
 oscura heredada (`.treemap-box`) que en tema claro se ve a contraluz; revisar
 esa caja entera en otra pasada.
 
+**Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
+autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
+- Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
+  con dos personas, el azul al lado y el edificio). Va a la derecha, a su
+  tamaño natural, con el borde izquierdo desvanecido en la propia imagen
+  (canal alfa) para que no se note el corte. Un paneo de 48 s la recorre del
+  pasillo hacia el edificio; con «reducir movimiento» queda quieta. El índice
+  y la marca llevan una sombra leve para leerse sobre la foto.
+- Pie («Principio y Compromiso»): `pie-noche.jpg` (ciudad de noche) como
+  marca de agua; `pie-planos.jpg` (ciudad en planos con grúas) se guardó como
+  alternativa: se cambia en la variable `--pie-imagen` de `civico.css`.
+- **Pendiente de derechos:** las tres vienen de Pinterest y su autoría no
+  está acreditada; la de noche lleva la firma «AFERA XV». Antes de pasar a
+  `main`, sustituirlas por imágenes propias o generadas con IA (con su
+  etiqueta), o conseguir permiso y acreditar al autor.
+
 ## Estado actual
 
 ### Hecho

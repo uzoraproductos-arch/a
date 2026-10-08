@@ -724,3 +724,49 @@ body { background-color: #0f1218; }
 [data-theme="light"] .sim-loss-amount,
 [data-theme="light"] .sim-vivo-total-val { color: var(--rubro-inspector); }
 [data-theme="light"] .sim-loss-box .sim-live-ticker-sub { color: #8a5a12; }
+
+/* ==========================================================================
+   Imágenes de fondo (08-10-2026, sello 20261008j)
+   Cabecera: el pasillo con dos personas, el azul al lado y el edificio que
+   sube. La imagen va a la derecha, a su tamaño natural, y el azul la funde
+   por la izquierda; un paneo lento la recorre del pasillo hacia arriba.
+   Pie: la ciudad de noche como marca de agua (pie-planos.jpg queda guardada
+   como alternativa: basta cambiar --pie-imagen).
+   AVISO: imágenes de referencia tomadas de Pinterest, autoría por acreditar;
+   sustituir o acreditar antes de pasar a main (ver CONTEXT.md).
+   ========================================================================== */
+[data-theme="light"] .site-top-nav {
+  background:
+    linear-gradient(90deg, #071d47 0%, #0b2a63 30%, rgba(11, 42, 99, 0.62) 56%, rgba(11, 42, 99, 0.46) 100%),
+    url("../img/portada/cabecera-pasillo.webp") right 0 top 82% / min(62%, 820px) auto no-repeat,
+    #123d8a;
+  animation: cabecera-pasillo 48s ease-in-out infinite alternate;
+}
+@keyframes cabecera-pasillo {
+  from { background-position: 0 0, right 0 top 82%, 0 0; }  /* el pasillo y las dos personas */
+  to   { background-position: 0 0, right 0 top 30%, 0 0; }  /* el edificio, hacia arriba */
+}
+@media (max-width: 1100px) {
+  [data-theme="light"] .site-top-nav {
+    background:
+      linear-gradient(90deg, #071d47 0%, rgba(11, 42, 99, 0.88) 40%, rgba(11, 42, 99, 0.45) 100%),
+      url("../img/portada/cabecera-pasillo.webp") right 0 top 82% / min(70%, 520px) auto no-repeat,
+      #123d8a;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="light"] .site-top-nav { animation: none; background-position: 0 0, right 0 top 82%, 0 0; }
+}
+
+/* Sobre la foto, el índice lleva una sombra leve para leerse siempre */
+[data-theme="light"] .site-top-nav .mega-menu-trigger,
+[data-theme="light"] .nav-brand-title,
+[data-theme="light"] .nav-brand-subtitle { text-shadow: 0 1px 3px rgba(4, 16, 42, 0.85); }
+
+[data-theme="light"] .site-footer {
+  --pie-imagen: url("../img/portada/pie-noche.jpg");
+  background:
+    linear-gradient(180deg, rgba(234, 243, 253, 0.90) 0%, rgba(234, 243, 253, 0.84) 100%),
+    var(--pie-imagen) center 30% / cover no-repeat,
+    var(--civ-hielo);
+}
