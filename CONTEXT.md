@@ -378,6 +378,27 @@ usada por ocho gráficas) también era oscura: ahora es gris claro con sello
 azul y botón principal azul. Contraste medido: todo el texto de la caja
 pasa de 4.5:1 en nivel 1, en el subnivel y en la vista de lista.
 
+**El índice abre páginas; «Datos de referencia» se despliega a todo lo ancho
+(08-10-2026, sello 20261008m).** Por decisión del autor, seis apartados del
+índice ya no se desglosan en un menú: cada uno abre su propia página, con la
+información ordenada por secciones, tarjetas y un «En esta página»:
+`herramientas.html` (guía «Cómo se usa» y los cinco módulos),
+`busca-y-verifica.html`, `sigue-el-dinero.html`, `descarga-los-datos.html`,
+`aprende.html` y `participa.html`. **No se editan a mano:** se generan con
+`python3 herramientas/apartados.py`, que toma el sello de `index.html`
+(`sello.py` ya lo llama solo). Llevan la misma cabecera y cargan
+`auditavision.css`, `civico.css`, `apartados.css` y el pequeño
+`apartados.js` (menú de tres rayas y «Compartir»); no cargan el motor.
+Sus tarjetas vuelven al auditor con `index.html?ir=destino&ancla=id`: el
+motor (`irDesdeApartado`) solo acepta los destinos de su lista
+(`IR_MODULOS` e `IR_DESTINOS`), limpia la dirección al llegar y repite el
+salto si la página, recién cargada, lo dejó corto. «Datos de referencia»
+sigue siendo desplegable, pero ya no mide 1240 px fijos pegados a la
+izquierda: ocupa todo el ancho (contenido centrado hasta 1560 px). En
+celular, la cifra del radar y su ritmo por segundo ya no se enciman. Las
+cifras de las tarjetas son las mismas que tenía el menú, con su misma fuente
+en el `title`.
+
 ## Estado actual
 
 ### Hecho
