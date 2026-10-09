@@ -12,9 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009d">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009d">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009d">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009e">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009e">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009e">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -34,7 +34,6 @@
     <div class="nav-indice" id="navIndiceMovil">
     <div class="nav-center-links">
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramientas.html" aria-current="page">Herramientas</a></div>
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="busca-y-verifica.html">Busca y verifica</a></div>
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="sigue-el-dinero.html">Sigue el dinero</a></div>
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="descarga-los-datos.html">Datos</a></div>
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="aprende.html">Aprende</a></div>
@@ -78,49 +77,43 @@
 
     <div class="apartado-ancho apartado-cuerpo">
 
+      
+      <section class="apartado-seccion apartado-seccion-modulos" id="modulos" aria-labelledby="modulos-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Los cuatro módulos</h2>
+          <p class="apartado-seccion-texto">Elige uno y pulsa «Comenzar»: al abrirlo te contamos qué trae. El Circuito del Dinero ya no está aquí: se repartió, bloque por bloque, en los seis capítulos de <a href="sigue-el-dinero.html">Sigue el dinero</a>.</p>
+        </div>
+        <div class="apartado-rejilla apartado-rejilla-modulos">
+        <a class="apartado-tarjeta apartado-tarjeta-modulo rubro-obras" href="index.html?ir=megaobras&amp;ancla=moduloProemio">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">🏗️</span>
+          <span class="apartado-tarjeta-nombre">Simulador de Inversión y Megaobras</span>
+          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
+        </a>
+        <a class="apartado-tarjeta apartado-tarjeta-modulo rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=moduloProemio">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">💳</span>
+          <span class="apartado-tarjeta-nombre">Calculadora Cívica</span>
+          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
+        </a>
+        <a class="apartado-tarjeta apartado-tarjeta-modulo rubro-inspector" href="index.html?ir=verificador&amp;ancla=moduloProemio">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">🔍</span>
+          <span class="apartado-tarjeta-nombre">Modo Inspector</span>
+          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
+        </a>
+        <a class="apartado-tarjeta apartado-tarjeta-modulo rubro-ambiente" href="index.html?ir=ambiente&amp;ancla=moduloProemio">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">🌎</span>
+          <span class="apartado-tarjeta-nombre">Costo Ambiental</span>
+          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
+        </a>
+        </div>
+      </section>
+
       <section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
         <ol class="apartado-pasos">
-          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
-          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Al abrirlo te contamos qué trae; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
           <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> la dependencia responsable no lo ha transparentado en un documento oficial, y te decimos cuál.</span></li>
         </ol>
-      </section>
-      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Los cuatro módulos</h2>
-          <p class="apartado-seccion-texto">Cada color es un tema. Adentro hay juegos y cuentas para descubrir las cifras tú mismo. El Circuito del Dinero ya no está aquí: se repartió, bloque por bloque, en los seis capítulos de <a href="sigue-el-dinero.html">Sigue el dinero</a>.</p>
-        </div>
-        <div class="apartado-rejilla">
-        <a class="apartado-tarjeta rubro-obras" href="index.html?ir=megaobras&amp;ancla=moduloProemio" title="Obras del simulador de megaobras (módulo 2)">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏗️</span>
-          <span class="apartado-tarjeta-nombre">Inversión &amp; Megaobras</span>
-          <span class="apartado-tarjeta-desc">Lo que costaron las grandes obras y lo que se pasaron.</span>
-          <span class="apartado-tarjeta-dato"><strong>13 megaobras</strong><span>De 1988 a la fecha</span></span>
-          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
-        </a>
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=moduloProemio">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">💳</span>
-          <span class="apartado-tarjeta-nombre">Calculadora Cívica</span>
-          <span class="apartado-tarjeta-desc">Descubre a dónde va cada peso de tus impuestos.</span>
-          <span class="apartado-tarjeta-dato"><strong>Saca tu estado de cuenta</strong><span>Tu impuesto, peso por peso</span></span>
-          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
-        </a>
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=moduloProemio" title="ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11: acciones correctivas promovidas, 174 solicitudes de aclaración + 2,762 pliegos de observaciones + 2,203 promociones de responsabilidad administrativa + 278 avisos al SAT = 5,417 (derivado)">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🔍</span>
-          <span class="apartado-tarjeta-nombre">Modo Inspector</span>
-          <span class="apartado-tarjeta-desc">Lo que la ASF observó y sigue sin aclararse.</span>
-          <span class="apartado-tarjeta-dato"><strong>5,417 acciones promovidas</strong><span>Por la ASF, sin contar recomendaciones · CP 2024</span></span>
-          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
-        </a>
-        <a class="apartado-tarjeta rubro-ambiente" href="index.html?ir=ambiente&amp;ancla=moduloProemio">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🌎</span>
-          <span class="apartado-tarjeta-nombre">Costo Ambiental</span>
-          <span class="apartado-tarjeta-desc">Lo que el deterioro del ambiente nos cuesta a todos.</span>
-          <span class="apartado-tarjeta-dato"><strong>¿Cuántos billones?</strong><span>Descúbrelo al comenzar</span></span>
-          <span class="apartado-tarjeta-accion">Comenzar ➔</span>
-        </a>
-        </div>
       </section>
     </div>
   </main>
@@ -128,10 +121,10 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009d</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009e</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261009d"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261009e"></script>
 </body>
 </html>

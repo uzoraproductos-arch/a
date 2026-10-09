@@ -57,55 +57,23 @@ APARTADOS = [
                     'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
                     'Aquí están los cuatro módulos del auditor; elige uno y pulsa «Comenzar».'),
         'nota': True,
-        'guia': True,
+        'guia': 'abajo',
         'secciones': [
             {
                 'id': 'modulos',
                 'titulo': 'Los cuatro módulos',
-                'texto': ('Cada color es un tema. Adentro hay juegos y cuentas para descubrir las cifras tú mismo. '
+                'texto': ('Elige uno y pulsa «Comenzar»: al abrirlo te contamos qué trae. '
                           'El Circuito del Dinero ya no está aquí: se repartió, bloque por bloque, en los seis capítulos de '
                           '<a href="sigue-el-dinero.html">Sigue el dinero</a>.'),
+                # Desde el 09-10-2026 la tarjeta solo lleva icono grande y
+                # titulo (decision del autor): la frase y la cifra de cada
+                # modulo se cuentan en su proemio, al pulsar «Comenzar».
+                'modulos': True,
                 'tarjetas': [
-                    ('🏗️', 'Inversión &amp; Megaobras', 'Lo que costaron las grandes obras y lo que se pasaron.', ir('megaobras', 'moduloProemio'),
-                     'Obras del simulador de megaobras (módulo 2)', 'obras', ('13 megaobras', 'De 1988 a la fecha')),
-                    ('💳', 'Calculadora Cívica', 'Descubre a dónde va cada peso de tus impuestos.', ir('calculadora', 'moduloProemio'),
-                     None, 'calculadora', ('Saca tu estado de cuenta', 'Tu impuesto, peso por peso')),
-                    ('🔍', 'Modo Inspector', 'Lo que la ASF observó y sigue sin aclararse.', ir('verificador', 'moduloProemio'),
-                     'ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11: acciones correctivas promovidas, '
-                     '174 solicitudes de aclaración + 2,762 pliegos de observaciones + 2,203 promociones de responsabilidad administrativa + '
-                     '278 avisos al SAT = 5,417 (derivado)', 'inspector', ('5,417 acciones promovidas', 'Por la ASF, sin contar recomendaciones · CP 2024')),
-                    ('🌎', 'Costo Ambiental', 'Lo que el deterioro del ambiente nos cuesta a todos.', ir('ambiente', 'moduloProemio'),
-                     None, 'ambiente', ('¿Cuántos billones?', 'Descúbrelo al comenzar')),
-                ],
-            },
-        ],
-    },
-    {
-        'archivo': 'busca-y-verifica.html',
-        'menu': 'Busca y verifica',
-        'icono': '🔍',
-        'titulo': 'Busca y verifica',
-        'lema': 'Asignaciones, contratos y riesgos',
-        'entrada': ('Encuentra una dependencia, un estado, un municipio o un proveedor y revisa lo que dicen de él '
-                    'los documentos oficiales: la Auditoría Superior de la Federación, el SAT y las plataformas de compras del gobierno.'),
-        'secciones': [
-            {
-                'id': 'asignaciones',
-                'titulo': '🔍 Asignaciones y contratos',
-                'texto': 'Quién recibe el dinero y cómo se contrata.',
-                'tarjetas': [
-                    ('🏛️', 'Auditor de Entes Públicos', 'Busca una dependencia, un estado o un municipio y abre su expediente: autonomía, deuda y observaciones de la ASF.', ir('buscador'), None, 'inspector'),
-                    ('📝', 'Contratos federales en ComprasMX', 'La plataforma oficial que sustituyó a CompraNet en 2025. Toma de ahí el RFC del proveedor y verifícalo aquí.', 'https://comprasmx.buengobierno.gob.mx/', None, None),
-                    ('🚩', 'Radar de Banderas Rojas por Entidad', 'Qué estados dejaron más dinero federal por aclarar ante la ASF en la Cuenta Pública 2024, ordenados como tú elijas.', ir('verificador', 'radarBanderasNacional'), None, 'inspector'),
-                ],
-            },
-            {
-                'id': 'riesgos',
-                'titulo': '⚠️ Detección y riesgos ASF',
-                'texto': 'Casos documentados y listas oficiales para revisar antes de confiar.',
-                'tarjetas': [
-                    ('📂', 'Expedientes de Casos por Aclarar', 'Diez casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.', 'expedientes.html', None, 'inspector'),
-                    ('🧾', '¿Tu proveedor está en la lista negra del SAT? (69-B)', '14,234 registros del listado oficial: presuntos, definitivos, desvirtuados y con sentencia favorable.', ir('efos'), None, 'inspector'),
+                    ('🏗️', 'Simulador de Inversión y Megaobras', '', ir('megaobras', 'moduloProemio'), None, 'obras'),
+                    ('💳', 'Calculadora Cívica', '', ir('calculadora', 'moduloProemio'), None, 'calculadora'),
+                    ('🔍', 'Modo Inspector', '', ir('verificador', 'moduloProemio'), None, 'inspector'),
+                    ('🌎', 'Costo Ambiental', '', ir('ambiente', 'moduloProemio'), None, 'ambiente'),
                 ],
             },
         ],
@@ -324,8 +292,8 @@ APARTADOS = [
 GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
         <ol class="apartado-pasos">
-          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: el dinero, las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
-          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Al abrirlo te contamos qué trae; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
           <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> la dependencia responsable no lo ha transparentado en un documento oficial, y te decimos cuál.</span></li>
         </ol>
       </section>'''
@@ -385,18 +353,19 @@ def cabecera(actual, sello):
   </nav>''' % '\n'.join(items)
 
 
-def tarjeta(t):
+def tarjeta(t, modulo=False):
     icono, nombre, desc, destino, fuente, rubro = t[:6]
     dato = t[6] if len(t) > 6 else None
     externo = destino.startswith('http')
-    clase = 'apartado-tarjeta' + (' rubro-' + rubro if rubro else '')
+    clase = 'apartado-tarjeta' + (' apartado-tarjeta-modulo' if modulo else '') + (' rubro-' + rubro if rubro else '')
     extra = ' target="_blank" rel="noopener noreferrer"' if externo else ''
     titulo = ' title="%s"' % esc_attr(fuente) if fuente else ''
     accion = 'Abrir en su sitio oficial ↗' if externo else ('Comenzar ➔' if 'moduloProemio' in destino else 'Abrir ➔')
     partes = ['        <a class="%s" href="%s"%s%s>' % (clase, destino, extra, titulo),
               '          <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>' % icono,
-              '          <span class="apartado-tarjeta-nombre">%s</span>' % nombre,
-              '          <span class="apartado-tarjeta-desc">%s</span>' % desc]
+              '          <span class="apartado-tarjeta-nombre">%s</span>' % nombre]
+    if desc:
+        partes.append('          <span class="apartado-tarjeta-desc">%s</span>' % desc)
     if dato:
         partes.append('          <span class="apartado-tarjeta-dato"><strong>%s</strong><span>%s</span></span>' % dato)
     partes.append('          <span class="apartado-tarjeta-accion">%s</span>' % accion)
@@ -417,13 +386,15 @@ def pagina(a, sello):
           <div><span class="apartado-ayer-tit">📍 Hoy (2026)</span>%s</div>
         </div>''' % s['ayer']
         bloque = ('\n        <div class="apartado-bloque">\n        %s\n        </div>' % s['bloque']) if s.get('bloque') else ''
-        secciones.append('''      <section class="apartado-seccion" id="%s" aria-labelledby="%s-tit">
+        secciones.append('''      <section class="apartado-seccion%s" id="%s" aria-labelledby="%s-tit">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="%s-tit">%s<span class="sr-only">%s</span>%s</h2>
           <p class="apartado-seccion-texto">%s</p>
         </div>%s%s%s
-      </section>''' % (s['id'], s['id'], s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
-                       ('\n        <div class="apartado-rejilla">\n%s\n        </div>' % '\n'.join(tarjeta(t) for t in s['tarjetas']))
+      </section>''' % (' apartado-seccion-modulos' if s.get('modulos') else '', s['id'], s['id'], s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
+                       ('\n        <div class="apartado-rejilla%s">\n%s\n        </div>' % (
+                           ' apartado-rejilla-modulos' if s.get('modulos') else '',
+                           '\n'.join(tarjeta(t, s.get('modulos')) for t in s['tarjetas'])))
                        if s['tarjetas'] else ''))
 
     if len(a['secciones']) > 1:
@@ -440,6 +411,9 @@ def pagina(a, sello):
     nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
             if a.get('nota') else '')
     guia = GUIA if a.get('guia') else ''
+    guia_abajo = ''
+    if a.get('guia') == 'abajo':
+        guia, guia_abajo = '', '\n\n      ' + GUIA
     if a.get('libro'):
         guia = (guia + '\n      ' if guia else '') + ('<aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span>'
                                                        '<p>%s</p></aside>' % a['libro'])
@@ -482,7 +456,7 @@ def pagina(a, sello):
     <div class="apartado-ancho apartado-cuerpo">
 {en_pagina}
       {guia}
-{secciones}
+{secciones}{guia_abajo}
     </div>
   </main>
 
@@ -498,8 +472,36 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            cabecera=cabecera(a['archivo'], sello), menu=a['menu'], icono=a['icono'], lema=a['lema'],
-           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, scripts=scripts,
+           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts,
            secciones='\n\n'.join(secciones))
+
+
+# Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
+# Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
+REDIRECCIONES = {
+    'busca-y-verifica.html': ('index.html?ir=verificador&amp;ancla=moduloProemio', 'Busca y verifica',
+                              'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
+}
+
+
+def redireccion(destino, nombre, texto):
+    return '''<!DOCTYPE html>
+<!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{nombre} · Auditavisión</title>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url={destino}">
+  <link rel="icon" href="{favicon}">
+  <script>window.location.replace('{url}');</script>
+</head>
+<body style="font-family:system-ui,sans-serif;background:#ffffff;color:#1c2a44;padding:24px">
+  <p><b>{nombre}</b> cambió de lugar. {texto} <a href="{destino}">Ir ahora ➔</a></p>
+</body>
+</html>
+'''.format(nombre=nombre, destino=destino, favicon=FAVICON, url=destino.replace('&amp;', '&'), texto=texto)
 
 
 def generar(sello=None):
@@ -513,6 +515,9 @@ def generar(sello=None):
     for a in APARTADOS:
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, a['archivo']), 'wb').write(texto.encode('utf-8'))
+    for archivo, datos in REDIRECCIONES.items():
+        texto = redireccion(*datos).replace('\n', '\r\n')
+        open(os.path.join(RAIZ, archivo), 'wb').write(texto.encode('utf-8'))
     print('apartados: %d páginas generadas con el sello %s' % (len(APARTADOS), sello))
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias

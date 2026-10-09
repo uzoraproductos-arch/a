@@ -511,3 +511,61 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .radar-desglose-card { scroll-margin-top: 140px; }
 .radar-card-destaca { animation: radar-destaca 1.6s ease-out; }
 @keyframes radar-destaca { 0%, 40% { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.55); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
+
+/* ==========================================================================
+   HERRAMIENTAS (09-10-2026): los cuatro módulos al centro, con su icono
+   grande y solo el título; lo que trae cada uno se cuenta al pulsar
+   «Comenzar». La guía «Cómo se usa» queda debajo.
+   ========================================================================== */
+.apartado-seccion-modulos .apartado-seccion-cab { text-align: center; max-width: 720px; margin: 0 auto 22px; }
+.apartado-seccion-modulos .apartado-seccion-titulo { font-size: 26px; }
+.apartado-rejilla.apartado-rejilla-modulos {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.apartado-tarjeta-modulo {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  min-height: 250px;
+  padding: 30px 18px 24px;
+  border-top-width: 6px;
+  border-radius: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.apartado-tarjeta-modulo:hover,
+.apartado-tarjeta-modulo:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--tarjeta) 18%, transparent);
+}
+.apartado-tarjeta-modulo .apartado-tarjeta-icono {
+  display: grid; place-items: center;
+  width: 112px; height: 112px; border-radius: 50%;
+  font-size: 64px;
+  background: color-mix(in srgb, var(--tarjeta) 10%, #ffffff);
+}
+.apartado-tarjeta-modulo .apartado-tarjeta-nombre { font-size: 20px; line-height: 1.25; }
+.apartado-tarjeta-modulo .apartado-tarjeta-accion {
+  margin-top: auto;
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: var(--tarjeta);
+  color: #ffffff;
+}
+.apartado-seccion-modulos + .apartado-guia { margin-top: 8px; }
+@media (max-width: 980px) {
+  .apartado-rejilla.apartado-rejilla-modulos { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 640px; }
+}
+@media (max-width: 420px) {
+  .apartado-rejilla.apartado-rejilla-modulos { gap: 12px; }
+  .apartado-tarjeta-modulo { min-height: 200px; padding: 22px 10px 18px; gap: 12px; }
+  .apartado-tarjeta-modulo .apartado-tarjeta-icono { width: 84px; height: 84px; font-size: 46px; }
+  .apartado-tarjeta-modulo .apartado-tarjeta-nombre { font-size: 16px; }
+  .apartado-tarjeta-modulo .apartado-tarjeta-accion { padding: 8px 14px; font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .apartado-tarjeta-modulo, .apartado-tarjeta-modulo:hover { transition: none; transform: none; }
+}

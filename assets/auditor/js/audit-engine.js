@@ -5479,7 +5479,7 @@
     },
     'verificador': {
       t: '4. Modo Inspector (Auditoría Forense & Alertas ASF)',
-      d: 'Expedientes documentados, pliegos de observaciones de la Auditoría Superior de la Federación (ASF) y radiografía de salud financiera de dependencias y entes públicos.'
+      d: 'Lo que revisó la Auditoría Superior de la Federación (ASF) y las herramientas para buscar y verificar: el expediente de cualquier ente público, el contraste de una nota y la lista 69-B del SAT.'
     },
     'faq': {
       t: 'Consultar Recursos: Diccionario, Preceptos Legales y Casillas Didácticas',
@@ -5527,7 +5527,10 @@
       n: 4, icono: '🔍', titulo: 'Modo Inspector',
       subtitulo: 'Dónde quedó el dinero que nadie ha podido explicar',
       texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
-      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'expedientes.html']]
+      /* Desde el 09-10-2026 el menu «Busca y verifica» vive aqui: los temas
+         4 a 6 son sus herramientas (ver el indice en dos grupos del modulo). */
+      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'expedientes.html'],
+              ['🏛️ 4 · Auditor de entes públicos', 'inspentes'], ['📰 5 · Contrasta una nota', 'inspnota'], ['🧾 6 · Lista negra del SAT', 'inspefos']]
     },
     ambiente: {
       n: 5, icono: '🌎', titulo: 'Costo Ambiental',
@@ -26675,7 +26678,7 @@
     });
   }
 
-  /* Paginas de apartado (herramientas.html, busca-y-verifica.html,
+  /* Paginas de apartado (herramientas.html,
      sigue-el-dinero.html, descarga-los-datos.html, aprende.html y
      participa.html, desde el 08-10-2026): sus tarjetas traen al lector aqui
      con ?ir=destino y, si hace falta, &ancla=id de un bloque. Solo se

@@ -1,4 +1,4 @@
-/* Auditavisión · páginas de apartado (herramientas.html, busca-y-verifica.html...).
+/* Auditavisión · páginas de apartado (herramientas.html, sigue-el-dinero.html...).
    Lo poco que necesitan sin cargar el motor: el menú de tres rayas en
    pantallas angostas y el botón para compartir la página. */
 (function () {
