@@ -434,10 +434,10 @@ APARTADOS = [
 # apartados.css las pone por rubro (.herr-foto.rubro-*), porque un url()
 # dentro de una variable se resolveria contra la carpeta de la hoja.
 HERR_IMG = {
-    'obras': 'assets/auditor/img/herr-megaobras.jpg',
-    'calculadora': 'assets/auditor/img/herr-calculadora.jpg',
-    'inspector': 'assets/auditor/img/herr-inspector.jpg',
-    'ambiente': 'assets/auditor/img/herr-ambiente.jpg',
+    'obras': 'assets/auditor/img/herr-megaobras-plataformas.jpg',
+    'calculadora': 'assets/auditor/img/herr-calculadora-monedas.jpg',
+    'inspector': 'assets/auditor/img/herr-inspector-foroptero.jpg',
+    'ambiente': 'assets/auditor/img/herr-ambiente-refineria.jpg',
 }
 
 # (archivo, rubro, icono, titulo, subtitulo, texto, modulo del motor, temas)
