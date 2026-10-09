@@ -557,7 +557,7 @@
         correcciones() +
         '<p class="tp-fuente">' + chip('oficial') + ' ' + chip('derivado') + ' ' + chip('pendiente') +
           ' Cada renglón trae su documento. La deuda es el saldo histórico de los requerimientos financieros del sector público (SHRFSP), la medida más amplia que publica Hacienda; los pesos son corrientes de cada año, sin ajustar por inflación. ' +
-          'La serie completa, año por año, está en <a href="sigue-el-dinero.html#deuda">Sigue el dinero › Cuánto debemos</a>.</p>' +
+          'La serie completa, año por año, está en <a href="sigue-el-dinero.html#deuda">Números › Cuánto debemos</a>.</p>' +
       '</div>';
     raiz.querySelector('.tp-otra').addEventListener('click', function () {
       pararVivo();

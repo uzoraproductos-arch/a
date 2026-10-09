@@ -3,7 +3,7 @@
 """Genera las paginas de apartado del indice de Auditavision.
 
 Desde el 08-10-2026, seis apartados del indice (Herramientas, Busca y
-verifica, Sigue el dinero, Descarga los datos, Aprende y Participa) ya no se
+verifica, Sigue el dinero (hoy «Números»), Descarga los datos, Aprende y Participa) ya no se
 desglosan en un menu: cada uno abre su propia pagina, con la informacion
 ordenada por secciones. Desde el 09-10-2026 «Datos de referencia» (el radar
 hacendario) tambien: se fusiono con Descarga los datos en una sola pagina.
@@ -64,7 +64,7 @@ APARTADOS = [
                 'titulo': 'Los cuatro módulos',
                 'texto': ('Elige uno y pulsa «Comenzar»: al abrirlo te contamos qué trae. '
                           'El Circuito del Dinero ya no está aquí: se repartió, bloque por bloque, en los seis capítulos de '
-                          '<a href="sigue-el-dinero.html">Sigue el dinero</a>.'),
+                          '<a href="sigue-el-dinero.html">Números</a>.'),
                 # Desde el 09-10-2026 la tarjeta solo lleva icono grande y
                 # titulo (decision del autor): la frase y la cifra de cada
                 # modulo se cuentan en su proemio, al pulsar «Comenzar».
@@ -80,9 +80,11 @@ APARTADOS = [
     },
     {
         'archivo': 'sigue-el-dinero.html',
-        'menu': 'Sigue el dinero',
+        # Desde el 09-10-2026 el menu se llama «Números» (decision del autor);
+        # el archivo conserva su nombre para no romper enlaces.
+        'menu': 'Números',
         'icono': '💰',
-        'titulo': 'Sigue el dinero',
+        'titulo': 'Números',
         'lema': 'Seis capítulos, del impuesto a la deuda',
         'entrada': ('El dinero público tiene un recorrido: se recauda, se aprueba, se gasta, baja a estados y municipios, '
                     'se pide prestado y, al final, te toca una parte. Aquí lo sigues capítulo por capítulo.'),
