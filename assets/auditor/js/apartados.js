@@ -465,6 +465,16 @@
       '</footer>', 'glosTermTitulo', true);
     dr.querySelector('[data-volver]').addEventListener('click', function () { pintarFinanzas(DB); });
   }
+  /* La nota de referencia del libro (Números) se abre en la ventana
+     lateral con el contenido de su plantilla. */
+  var tplLibro = document.getElementById('tplNotaLibro');
+  Array.prototype.forEach.call(document.querySelectorAll('a.apartado-nota[data-libro]'), function (a) {
+    a.addEventListener('click', function (e) {
+      if (!tplLibro || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      cajon(tplLibro.innerHTML, 'notaLibroTit', true);
+    });
+  });
   Array.prototype.forEach.call(document.querySelectorAll('a.apartado-nota[href="index.html?ir=nota"]'), function (a) {
     a.addEventListener('click', function (e) {
       if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;

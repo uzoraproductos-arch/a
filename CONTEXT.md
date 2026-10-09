@@ -602,6 +602,13 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**La nota del libro, en la ventana lateral (09-10-2026, sello 20261009s).**
+Por pedido del autor se quitó el recuadro «Nota de referencia» de Números,
+para que las pestañas queden parejas. Ahora es un enlace «📘 Nota de
+referencia» bajo la entrada que abre la ventana lateral ancha. Trae el texto
+con su llamado [119], los conceptos del glosario y la ficha del catálogo de
+fuentes (`libro_enlace()` en `apartados.py`, plantilla `#tplNotaLibro`).
+
 **Herramientas: tarjetas con imagen y una página por herramienta (09-10-2026,
 sello 20261009r).** Pedido del autor.
 - **Menú.** Los módulos ahora se llaman herramientas.
