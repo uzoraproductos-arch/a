@@ -1058,6 +1058,10 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
 /* VENTANA LATERAL MÁS ANCHA (09-10-2026). Decisión del autor: la
    presentación, el glosario y las notas se leen mejor con más ancho. */
 .glos-drawer { width: min(580px, 100vw); }
+/* La nota de finanzas públicas va un poco más ancha (09-10-2026). */
+.glos-drawer.glos-drawer-ancha { width: min(760px, 100vw); }
+.fin-cifras li { line-height: 1.5; }
+.fin-fuente { font-size: 13px; color: #5a6782; }
 
 /* PARTICIPA EN TEMA CLARO (09-10-2026). El ágora y el formulario de reporte
    traen colores en línea pensados para fondo oscuro (texto #fff sobre

@@ -26801,10 +26801,17 @@
     document.documentElement.classList.add('visor-foco');
     var pro = document.getElementById('moduloProemio');
     if (pro) pro.classList.add('visor-oculto');
+    /* Las herramientas de «Busca y verifica» (Modo Inspector) no se
+       pliegan: su ancla es un rotulo .insp-sep y la herramienta son los
+       hermanos que le siguen hasta el proximo rotulo. Esos se quedan. */
+    var suyos = [];
+    if (t.classList.contains('insp-sep')) {
+      for (var h = t.nextElementSibling; h && !h.classList.contains('insp-sep'); h = h.nextElementSibling) suyos.push(h);
+    }
     var n = t;
     while (n && n.parentElement && n !== document.body) {
       var padre = n.parentElement;
-      Array.prototype.forEach.call(padre.children, function(h) { if (h !== n) h.classList.add('visor-oculto'); });
+      Array.prototype.forEach.call(padre.children, function(h) { if (h !== n && suyos.indexOf(h) === -1) h.classList.add('visor-oculto'); });
       if (padre.classList.contains('subtab-panel') || padre.classList.contains('tab-panel')) break;
       n = padre;
     }
