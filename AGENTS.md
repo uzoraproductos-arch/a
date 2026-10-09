@@ -71,6 +71,16 @@ Esto es una plataforma de fiscalización del gasto público:
   `derivado` (calculado a partir de datos oficiales, con la operación dicha)
   y `pendiente`. La función `chipEstado(estado)` los pinta.
 - Las estructuras derogadas se marcan con su vigencia en lugar de borrarse.
+- **Un `pendiente` dice por qué y señala a quién** (decisión del autor,
+  09-10-2026). No basta con «no hay documento oficial»: casi siempre falta
+  porque la dependencia obligada no lo ha transparentado, y eso se dice con
+  su nombre. Ejemplo: «Ni el SAT ni Hacienda han publicado cuánto se evade:
+  falta de transparencia de esas dependencias». Solo se nombra a la
+  dependencia que de verdad debía publicarlo. Si la falta es de la
+  plataforma (el documento existe y aún no lo integramos) o el dato es
+  histórico sin dependencia que responda, se dice así, sin culpar a nadie:
+  atribuir una omisión que no se puede sostener también es un dato
+  inventado.
 
 Si te piden una cifra que no puedes sostener, dilo y déjala pendiente. Es la
 respuesta correcta en este proyecto.
