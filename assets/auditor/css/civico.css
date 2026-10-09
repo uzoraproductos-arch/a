@@ -1000,3 +1000,40 @@ a.erario-pleg-cab, a.erario-indice-paso { color: inherit; text-decoration: none;
 @media (max-width: 700px) {
   #eb-inspentes, #eb-inspnota, #eb-inspefos { scroll-margin-top: 12px; }
 }
+
+/* ==========================================================================
+   CABECERA (09-10-2026, decisión del autor)
+   1. El desvanecido empieza unos 3.5 cm antes (--cab-adelanto) y la imagen
+      crece lo mismo hacia la izquierda: se ve más pasillo y más edificio,
+      con el mismo fundido. En teléfono el adelanto es menor para que el
+      nombre de la plataforma siga leyéndose sobre azul.
+   2. La cabecera queda fija arriba en todos los tamaños y en todas las
+      páginas (antes, en teléfono, la de la portada se iba con el
+      desplazamiento). Al bajar se compacta, como siempre.
+   ========================================================================== */
+:root { --cab-adelanto: 3.5cm; }
+@media (max-width: 700px) { :root { --cab-adelanto: 1.5cm; } }
+[data-theme="light"] .site-top-nav {
+  background:
+    linear-gradient(90deg, #071d47 0%, #0b2a63 max(0px, calc(30% - var(--cab-adelanto))), rgba(11, 42, 99, 0.62) calc(56% - var(--cab-adelanto)), rgba(11, 42, 99, 0.46) 100%),
+    url("../img/portada/cabecera-pasillo.webp") right 0 top 82% / calc(min(62%, 820px) + var(--cab-adelanto)) auto no-repeat,
+    #123d8a;
+}
+@media (max-width: 1100px) {
+  [data-theme="light"] .site-top-nav {
+    background:
+      linear-gradient(90deg, #071d47 0%, rgba(11, 42, 99, 0.88) max(8%, calc(40% - var(--cab-adelanto))), rgba(11, 42, 99, 0.45) 100%),
+      url("../img/portada/cabecera-pasillo.webp") right 0 top 82% / calc(min(70%, 520px) + var(--cab-adelanto)) auto no-repeat,
+      #123d8a;
+  }
+}
+.site-top-nav,
+body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
+@media (max-width: 700px) {
+  .site-top-nav { position: sticky; }
+  /* Con la cabecera fija (unos 70 px ya compacta), los destinos de los
+     saltos dejan ese espacio arriba en vez de 12 px. */
+  .tab-panel, .subtab-panel, #inspExplorador, #radarBanderasNacional, #expedientesCasos, .exp-ficha, #munBloqueLista, #forensicHeaderBar, #efosVerificador, #eb-egresos, #bloquePortal, #portalNuevoDebateForm, #portalFilterBar, #comOrientacion, #bloqueCanales, #decalogoWrap, .cap-bloque, .cap-indice,
+  #cuentaPublicaASF, #cuentaPublicaASFLeg, .mod-proemio,
+  #eb-inspentes, #eb-inspnota, #eb-inspefos { scroll-margin-top: 84px; }
+}
