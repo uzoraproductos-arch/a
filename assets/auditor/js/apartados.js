@@ -145,7 +145,8 @@
     try { doc = marco.contentDocument; } catch (err) { return; }
     if (!doc || !doc.body) return;
     /* Se mide el fondo del contenido visible y no el alto del documento,
-       que nunca baja del alto del marco. Si el contenido crece al mismo
+       que nunca baja del alto del marco. Los cajones fijos (fixed) miden
+       lo que el marco y se ignoran. Si el contenido crece al mismo
        ritmo que el marco (algo medido en vh), se deja de ajustar. */
     var cambios = 0, ro = null;
     function medir() {
@@ -153,7 +154,7 @@
       var win = marco.contentWindow, fondo = 0;
       Array.prototype.forEach.call(doc.body.children, function (el) {
         var r = el.getBoundingClientRect();
-        if (r.height > 0) fondo = Math.max(fondo, r.bottom + (win ? win.pageYOffset : 0));
+        if (r.height > 0 && win && win.getComputedStyle(el).position !== 'fixed') fondo = Math.max(fondo, r.bottom + (win ? win.pageYOffset : 0));
       });
       var h = Math.ceil(fondo) + 16;
       if (h < 240 || Math.abs(h - marco.offsetHeight) < 8) return;
@@ -163,8 +164,13 @@
     }
     medir();
     if (window.ResizeObserver) {
+      /* El body nunca baja del alto del marco: se observa cada bloque para
+         notar también cuando el contenido se encoge. */
       ro = new ResizeObserver(medir);
       ro.observe(doc.body);
+      Array.prototype.forEach.call(doc.body.children, function (el) {
+        if (marco.contentWindow.getComputedStyle(el).position !== 'fixed') ro.observe(el);
+      });
     }
     [300, 1200, 2800].forEach(function (ms) { setTimeout(medir, ms); });
   }
