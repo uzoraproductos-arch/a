@@ -44,6 +44,17 @@
   window.addEventListener('scroll', revisar, { passive: true });
   revisar();
 
+  /* Al llegar con #ancla, la cabecera se encoge despues del salto y el
+     titulo queda debajo de ella: se corrige una vez ya compacta. */
+  if (location.hash.length > 1) window.addEventListener('load', function () {
+    setTimeout(function () {
+      var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!t || !nav) return;
+      var y = t.getBoundingClientRect().top + window.pageYOffset - nav.getBoundingClientRect().height - 12;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+    }, 350);
+  });
+
   /* Visor (08-10-2026): las tarjetas que llevan al auditor ya no sacan al
      lector de esta página. El módulo se despliega aquí mismo, debajo de la
      fila de la tarjeta, en un marco con el auditor en modo visor
