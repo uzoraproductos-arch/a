@@ -602,6 +602,14 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Imágenes de herramientas más limpias y más lejanas (09-10-2026, sello 20261009y).**
+Pedido del autor: menos sombreado y menos zoom. Las imágenes son ahora
+`herr-*-amplia.jpg`: la escena casi completa al centro, sobre un fondo hecho
+de la misma imagen desenfocada, en 1200×670. En las tarjetas, el degradado solo
+oscurece la franja del título (desde el 42 % del alto). En el encabezado de
+`herramienta-*.html` la imagen va entera a la derecha (`auto 100%`) y el
+degradado azul solo cubre el lado del texto.
+
 **Nuevas imágenes de las herramientas (09-10-2026, sello 20261009w).**
 El autor entregó cuatro imágenes ilustrativas que sustituyen a las de
 `assets/auditor/img/herr-*.jpg` (recortadas a 1200×670). En el sello

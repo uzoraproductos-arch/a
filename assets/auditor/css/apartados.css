@@ -648,7 +648,8 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 }
 .apartado-tarjeta-modulo.herr-foto::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(180deg, rgba(6, 18, 44, 0.10) 0%, rgba(6, 18, 44, 0.45) 45%, rgba(6, 18, 44, 0.90) 100%);
+  /* Solo se oscurece la franja del titulo: la imagen se ve limpia arriba. */
+  background: linear-gradient(180deg, rgba(6, 18, 44, 0) 0%, rgba(6, 18, 44, 0) 42%, rgba(6, 18, 44, 0.55) 72%, rgba(6, 18, 44, 0.82) 100%);
 }
 .apartado-tarjeta-modulo.herr-foto:hover,
 .apartado-tarjeta-modulo.herr-foto:focus-visible { background: #0b2a63; }
@@ -660,7 +661,7 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 .apartado-tarjeta-modulo.herr-foto .apartado-tarjeta-nombre {
-  font-size: 26px; line-height: 1.2; color: #ffffff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  font-size: 26px; line-height: 1.2; color: #ffffff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 .apartado-tarjeta-modulo.herr-foto .apartado-tarjeta-accion { margin-top: 4px; font-size: 15px; }
 @media (max-width: 640px) {
@@ -674,10 +675,10 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 }
 
 /* Las fotografías, por rubro (la ruta es relativa a esta hoja) */
-.herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras-plataformas.jpg'); }
-.herr-foto.rubro-calculadora::before { background-image: url('../img/herr-calculadora-monedas.jpg'); }
-.herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector-foroptero.jpg'); }
-.herr-foto.rubro-ambiente::before { background-image: url('../img/herr-ambiente-refineria.jpg'); }
+.herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras-plataformas-amplia.jpg'); }
+.herr-foto.rubro-calculadora::before { background-image: url('../img/herr-calculadora-monedas-amplia.jpg'); }
+.herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector-foroptero-amplia.jpg'); }
+.herr-foto.rubro-ambiente::before { background-image: url('../img/herr-ambiente-refineria-amplia.jpg'); }
 
 /* Encabezado de la página de herramienta */
 .herr-cab { --tarjeta: var(--civ-azul-medio); position: relative; isolation: isolate; color: #ffffff; border-bottom: 6px solid var(--tarjeta); padding: 24px 0 34px; }
@@ -687,11 +688,13 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .herr-cab.rubro-ambiente { --tarjeta: var(--rubro-ambiente); }
 .herr-cab::before {
   content: ""; position: absolute; inset: 0; z-index: -2;
-  background: #0b2a63 center / cover no-repeat;
+  /* La imagen entera a la derecha, a la altura del encabezado: sin
+     estirarla a lo ancho, que la acercaba demasiado. */
+  background: #0b2a63 right center / auto 100% no-repeat;
 }
 .herr-cab::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(90deg, rgba(6, 18, 44, 0.92) 0%, rgba(6, 18, 44, 0.78) 55%, rgba(6, 18, 44, 0.40) 100%);
+  background: linear-gradient(90deg, rgba(11, 42, 99, 1) 0%, rgba(11, 42, 99, 0.96) 38%, rgba(11, 42, 99, 0.35) 62%, rgba(11, 42, 99, 0) 78%);
 }
 .herr-cab .apartado-ancho { position: relative; }
 .herr-cab .apartado-migas, .herr-cab .apartado-migas span { color: rgba(255, 255, 255, 0.85); }
@@ -739,7 +742,7 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .herr-otra.rubro-inspector { --tarjeta: var(--rubro-inspector); }
 .herr-otra.rubro-ambiente { --tarjeta: var(--rubro-ambiente); }
 .herr-otra::before { content: ""; position: absolute; inset: 0; z-index: -2; background: #0b2a63 center / cover no-repeat; transition: transform 0.4s ease; }
-.herr-otra::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(6, 18, 44, 0.15), rgba(6, 18, 44, 0.85)); }
+.herr-otra::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(6, 18, 44, 0) 35%, rgba(6, 18, 44, 0.8)); }
 .herr-otra:hover::before, .herr-otra:focus-visible::before { transform: scale(1.06); }
 .herr-otra:focus-visible { outline: 3px solid var(--civ-celeste); outline-offset: 2px; }
 .herr-otra-ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); font-size: 24px; flex: none; }
