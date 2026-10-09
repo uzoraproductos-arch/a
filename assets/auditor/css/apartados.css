@@ -455,6 +455,29 @@ body[data-pagina="apartado"] a.nav-movil-ayuda-btn { display: block; text-align:
 .tp-fuente { margin: 10px 0 0; font-size: 13px; color: #44526b; line-height: 1.5; }
 .tp-sig { margin-top: 14px; text-align: right; }
 
+/* Barras o línea (09-10-2026): las preguntas con serie se pueden ver en
+   línea; la traza se dibuja al contabilizar. */
+.tp-mandos { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tp-vista { display: inline-flex; border: 1px solid var(--civ-gris-borde); border-radius: 999px; overflow: hidden; }
+.tp-vista-b { font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; background: #ffffff; color: var(--civ-azul); border: 0; padding: 8px 12px; }
+.tp-vista-b + .tp-vista-b { border-left: 1px solid var(--civ-gris-borde); }
+.tp-vista-b[aria-pressed="true"] { background: var(--civ-azul); color: #ffffff; }
+.tp-lin { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #e3e8f1; border-radius: 10px; background: #fbfcfe; }
+.tp-lin-svg { display: block; width: 100%; min-width: 520px; max-width: 820px; height: auto; margin: 0 auto; }
+.tp-lin-cero { stroke: #9aa6bc; stroke-width: 1; stroke-dasharray: 4 4; }
+.tp-lin-traza { fill: none; stroke: var(--civ-azul-medio); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s ease-out; }
+.tp-lin-pt { opacity: 0; stroke: #ffffff; stroke-width: 2; transition: opacity .3s ease-out; }
+.tp-lin-gana { stroke: #23855a; stroke-width: 3; }
+.tp-lin-v { font-family: var(--font-mono, monospace); font-size: 12px; font-weight: 700; fill: #1c2a44; opacity: 0; transition: opacity .3s ease-out .2s; }
+.tp-lin-neg { fill: #b3261e; }
+.tp-lin-x { font-size: 12px; fill: #44526b; }
+.tp-lin-x-gana { font-weight: 800; fill: #17603f; }
+.tp-lin-on .tp-lin-traza { stroke-dashoffset: 0; }
+.tp-lin-on .tp-lin-pt, .tp-lin-on .tp-lin-v { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .tp-lin-traza, .tp-lin-pt, .tp-lin-v { transition: none; }
+}
+
 .tp-cal { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 16px; border-radius: 12px; background: var(--civ-azul); color: #ffffff; }
 .tp-cal-ico { font-size: 52px; line-height: 1; }
 .tp-final-tit { margin: 0 0 4px; font-family: 'Playfair Display', serif; font-size: 26px; outline: none; }
