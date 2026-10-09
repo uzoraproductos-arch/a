@@ -12,9 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009o">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009o">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009o">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009p">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009p">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009p">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -76,23 +76,44 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-saltos" aria-label="En esta página">
-          <span class="apartado-saltos-tit">En esta página:</span>
-          <a href="#radar">📡 Radar hacendario: cifras en perspectiva</a>
-          <a href="#abiertos">💾 Datos abiertos</a>
-          <a href="#informes">📑 Informes oficiales</a>
+      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
+          <a class="apartado-pestana" role="tab" id="pestana-radar" href="#radar" aria-controls="radar" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📡</span><span class="apartado-pestana-tx"><b>Radar hacendario</b><small>Cifras en perspectiva</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-abiertos" href="#abiertos" aria-controls="abiertos" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💾</span><span class="apartado-pestana-tx"><b>Datos abiertos</b><small>Bases en CSV para Excel</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-informes" href="#informes" aria-controls="informes" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📑</span><span class="apartado-pestana-tx"><b>Informes oficiales</b><small>Cuenta Pública y diccionario</small></span></a>
       </nav>
+      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
       
-      <section class="apartado-seccion" id="radar" aria-labelledby="radar-tit">
+      <section class="apartado-seccion apartado-panel" id="radar" aria-labelledby="radar-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="radar-tit"><span class="sr-only"></span>📡 Radar hacendario: cifras en perspectiva</h2>
-          <p class="apartado-seccion-texto">Las cifras grandes del erario y lo que equivalen por segundo mientras lees. Toca una cifra para ver cómo se calcula y de dónde sale. Antes vivía en el menú «Datos de referencia».</p>
+          <p class="apartado-seccion-texto">Las cifras grandes del erario y lo que equivalen por segundo mientras lees. Pulsa «Desglosar cifras» o toca una cifra para ver cómo se calcula y de dónde sale.</p>
         </div>
         <div class="apartado-bloque">
         <!-- Radar hacendario. Vivía en el menú «Datos de referencia» de la portada;
              desde el 09-10-2026 vive aquí, junto a las descargas (AGENTS.md §5 bis).
              Lo anima assets/auditor/js/radar-datos.js. -->
         <div class="radar-hacendario-hub" id="radarAlertaBar" role="region" aria-label="Radar hacendario: cifras en perspectiva">
+        
+          <!-- Equivalencia durante la visita: va arriba (decisión del autor, 09-10-2026); el radar de referencia queda debajo -->
+              <div class="radar-session-acc-bar">
+                <div class="radar-session-acc-left">
+                  <span class="radar-acc-icon">⏱️</span>
+                  <div>
+                    <span class="radar-acc-title">Equivalencia durante tu visita (<span id="desgloseLiveTimer">00:00</span>):</span>
+                    <span class="radar-acc-desc">Lo que representan esas cifras anuales en el tiempo que llevas aquí. No son pagos que ocurran en este instante.</span>
+                  </div>
+                </div>
+                <div class="radar-session-acc-metrics">
+                  <div class="radar-acc-stat">
+                    <span class="acc-lbl">Megaobras:</span>
+                    <strong class="acc-val val-amber" id="desgloseLiveMega" data-tasa="2062.75">+$0.00</strong>
+                  </div>
+                  <div class="radar-acc-stat">
+                    <span class="acc-lbl">Costo de la deuda:</span>
+                    <strong class="acc-val val-red" id="desgloseLiveDeuda" data-tasa="49850.12">+$0.00</strong>
+                  </div>
+                </div>
+              </div>
           
           <!-- Línea 1: Notificaciones y datos oficiales del erario circulando en tiempo real -->
           <div class="radar-row-telemetry">
@@ -128,6 +149,17 @@
                 <span class="radar-tag">Radar hacendario · cifras en perspectiva</span>
                 <span class="radar-timer" id="radarSessionTimer">⏱️ 00:00</span>
               </div>
+              <!-- Controles: mostrar u ocultar las cifras y desglosar los datos duros -->
+              <div class="radar-controls-cluster">
+                <button type="button" class="radar-ctrl-btn" id="radarToggleStatsBtn" aria-expanded="true" aria-controls="radarLiveItems" title="Ocultar o mostrar las cifras para leer con calma">
+                  <span class="radar-btn-icon" id="radarToggleStatsIcon">👁️</span>
+                  <span class="radar-btn-text" id="radarToggleStatsText">Ocultar estadísticas</span>
+                </button>
+                <button type="button" class="radar-ctrl-btn radar-ctrl-desglose" id="radarToggleDesgloseBtn" aria-expanded="false" aria-controls="radarDesgloseDrawer" title="Ver cómo se calcula cada cifra y de dónde sale">
+                  <span class="radar-btn-icon" id="radarToggleDesgloseIcon">📊</span>
+                  <span class="radar-btn-text" id="radarToggleDesgloseText">Desglosar cifras ▾</span>
+                </button>
+              </div>
             </div>
         
             <div class="radar-live-items" id="radarLiveItems">
@@ -155,7 +187,7 @@
           </div>
         
           <!-- Desglose: cómo se calcula cada cifra y de dónde sale -->
-          <div class="radar-desglose-drawer" id="radarDesgloseDrawer" role="region" aria-label="Desglose analítico del radar hacendario">
+          <div class="radar-desglose-drawer" id="radarDesgloseDrawer" style="display: none;" role="region" aria-label="Desglose analítico del radar hacendario">
             <div class="radar-desglose-inner">
               <!-- Encabezado del Desglose -->
               <div class="radar-desglose-header">
@@ -168,6 +200,9 @@
                     Las equivalencias reparten una cifra anual entre los 31,536,000 segundos del año (365 × 86,400). Ayudan a entender su tamaño; <strong>no registran movimientos de dinero en este instante</strong>. Cada concepto se muestra por separado y no se suman: miden cosas distintas.
                   </p>
                 </div>
+                <button type="button" class="radar-desglose-close-btn" data-radar-cerrar title="Cerrar este desglose">
+                  <span>▲ Cerrar</span>
+                </button>
               </div>
         
               <!-- Equivalencias temporales de una sola cifra oficial: el costo financiero de la deuda -->
@@ -265,7 +300,7 @@
                     <span class="radar-meta-val">ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11.</span>
                   </div>
                   <div class="radar-card-action">
-                    <a class="radar-link-btn" href="index.html?ir=verificador&amp;ancla=cuentaPublicaASF">
+                    <a class="radar-link-btn" href="#ficha-asf">
                       Ver lo que encontró la ASF ➔
                     </a>
                   </div>
@@ -296,72 +331,60 @@
         
               </div>
         
-              <!-- Equivalencia durante la visita: solo las dos cifras anuales -->
-              <div class="radar-session-acc-bar">
-                <div class="radar-session-acc-left">
-                  <span class="radar-acc-icon">⏱️</span>
-                  <div>
-                    <span class="radar-acc-title">Equivalencia durante tu visita (<span id="desgloseLiveTimer">00:00</span>):</span>
-                    <span class="radar-acc-desc">Lo que representan esas cifras anuales en el tiempo que llevas aquí. No son pagos que ocurran en este instante.</span>
-                  </div>
-                </div>
-                <div class="radar-session-acc-metrics">
-                  <div class="radar-acc-stat">
-                    <span class="acc-lbl">Megaobras:</span>
-                    <strong class="acc-val val-amber" id="desgloseLiveMega" data-tasa="2062.75">+$0.00</strong>
-                  </div>
-                  <div class="radar-acc-stat">
-                    <span class="acc-lbl">Costo de la deuda:</span>
-                    <strong class="acc-val val-red" id="desgloseLiveDeuda" data-tasa="49850.12">+$0.00</strong>
-                  </div>
-                </div>
+              <!-- Pie del desglose -->
+              <div class="radar-desglose-footer">
+                <span class="radar-desglose-tip">💡 <em>Tip de lectura:</em> con el botón <strong>«Ocultar estadísticas»</strong> despejas la vista si prefieres leer sin las cifras en movimiento.</span>
+                <button type="button" class="radar-desglose-fold-btn" data-radar-cerrar>▲ Cerrar el desglose</button>
               </div>
-        
             </div>
           </div>
         </div>
         </div>
       </section>
 
-      <section class="apartado-seccion" id="abiertos" aria-labelledby="abiertos-tit">
+      <section class="apartado-seccion apartado-panel" id="abiertos" aria-labelledby="abiertos-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="abiertos-tit"><span class="sr-only"></span>💾 Datos abiertos</h2>
-          <p class="apartado-seccion-texto">Bases en CSV, listas para revisar.</p>
+          <p class="apartado-seccion-texto">Bases en CSV, listas para revisar. Pulsa una ficha para desplegarla.</p>
         </div>
-        <div class="apartado-rejilla">
-        <a class="apartado-tarjeta rubro-dinero" href="index.html?ir=descargas">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📥</span>
-          <span class="apartado-tarjeta-nombre">Descarga en CSV (abre en Excel)</span>
-          <span class="apartado-tarjeta-desc">Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta rubro-dinero" href="index.html?ir=csv-municipios">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏘️</span>
-          <span class="apartado-tarjeta-nombre">Base de Datos Municipal EFIPEM (INEGI)</span>
-          <span class="apartado-tarjeta-desc">Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
+        <div class="apartado-bloque">
+        <div class="apartado-rejilla dt-fichas">
+<button type="button" class="apartado-tarjeta dt-ficha rubro-dinero" data-ficha="descargas" aria-expanded="false">
+  <span class="apartado-tarjeta-icono" aria-hidden="true">📥</span>
+  <span class="apartado-tarjeta-nombre">Descarga en CSV (abre en Excel)</span>
+  <span class="apartado-tarjeta-desc">Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.</span>
+  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
+</button>
+<button type="button" class="apartado-tarjeta dt-ficha rubro-dinero" data-ficha="municipios" aria-expanded="false">
+  <span class="apartado-tarjeta-icono" aria-hidden="true">🏘️</span>
+  <span class="apartado-tarjeta-nombre">Base de Datos Municipal EFIPEM (INEGI)</span>
+  <span class="apartado-tarjeta-desc">Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.</span>
+  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
+</button>
+</div>
         </div>
       </section>
 
-      <section class="apartado-seccion" id="informes" aria-labelledby="informes-tit">
+      <section class="apartado-seccion apartado-panel" id="informes" aria-labelledby="informes-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="informes-tit"><span class="sr-only"></span>📑 Informes oficiales</h2>
-          <p class="apartado-seccion-texto">Lo que revisó la Auditoría Superior y qué contiene cada archivo.</p>
+          <p class="apartado-seccion-texto">Lo que revisó la Auditoría Superior y qué contiene cada archivo. Pulsa una ficha para desplegarla.</p>
         </div>
-        <div class="apartado-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=cuentaPublicaASF">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🔎</span>
-          <span class="apartado-tarjeta-nombre">Informes de la Cuenta Pública (ASF)</span>
-          <span class="apartado-tarjeta-desc">Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta" href="index.html?ir=diccionario">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📋</span>
-          <span class="apartado-tarjeta-nombre">Diccionario de Datos</span>
-          <span class="apartado-tarjeta-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
+        <div class="apartado-bloque">
+        <div class="apartado-rejilla dt-fichas">
+<button type="button" class="apartado-tarjeta dt-ficha rubro-inspector" data-ficha="asf" aria-expanded="false">
+  <span class="apartado-tarjeta-icono" aria-hidden="true">🔎</span>
+  <span class="apartado-tarjeta-nombre">Informes de la Cuenta Pública (ASF)</span>
+  <span class="apartado-tarjeta-desc">Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.</span>
+  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
+</button>
+<button type="button" class="apartado-tarjeta dt-ficha" data-ficha="diccionario" aria-expanded="false">
+  <span class="apartado-tarjeta-icono" aria-hidden="true">📋</span>
+  <span class="apartado-tarjeta-nombre">Diccionario de Datos</span>
+  <span class="apartado-tarjeta-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
+  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
+</button>
+</div>
         </div>
       </section>
     </div>
@@ -370,11 +393,14 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009o</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009p</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261009o"></script>
-  <script src="assets/auditor/js/radar-datos.js?v=20261009o"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261009p"></script>
+  <script src="assets/auditor/js/radar-datos.js?v=20261009p"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261009p"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261009p"></script>
+  <script src="assets/auditor/js/datos.js?v=20261009p"></script>
 </body>
 </html>

@@ -1091,3 +1091,30 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
   background: #f7f8fb;
   border-color: rgba(0, 43, 91, 0.15);
 }
+/* ==========================================================================
+   FICHAS DE LA PÁGINA DE DATOS (09-10-2026)
+   Datos abiertos e Informes oficiales se despliegan aquí, debajo de su
+   fila, con el aspecto del visor (apartados.css). datos.js las arma.
+   ========================================================================== */
+.dt-ficha { font: inherit; text-align: left; cursor: pointer; width: 100%; }
+.dt-ficha .apartado-tarjeta-accion { margin-top: auto; }
+.dt-panel .dt-cuerpo { padding: 18px 20px 22px; background: #ffffff; color: #1c2a44; }
+.dt-panel .dl-intro { margin: 0 0 14px; color: #334155; }
+.dt-panel .dl-base { border: 1px solid var(--civ-gris-borde, #d7deea); border-radius: 12px; padding: 14px 16px; margin: 0 0 12px; background: #f8fafd; }
+.dt-panel .dl-base-cab { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.dt-panel .dl-base h4 { margin: 0; color: #14213d; font-size: 16px; }
+.dt-panel .dl-base p { margin: 8px 0 0; color: #334155; }
+.dt-panel .dl-fuente { font-size: 13px; color: #5b6b85 !important; }
+.dt-panel details { margin-top: 10px; }
+.dt-panel summary { cursor: pointer; font-weight: 700; color: var(--civ-azul, #0b2a63); }
+.dt-panel .pd-tabla { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+.dt-panel .pd-tabla th, .dt-panel .pd-tabla td { padding: 6px 8px; border-bottom: 1px solid #e3e8f0; color: #1c2a44; text-align: left; }
+.dt-panel .pd-tabla th { background: #eef2f8; font-weight: 700; }
+.dt-panel .pd-tabla code { color: #0b2a63; background: #eef2f8; padding: 1px 5px; border-radius: 4px; }
+.dt-panel .pd-tabla-w { overflow-x: auto; max-height: 520px; overflow-y: auto; border: 1px solid #e3e8f0; border-radius: 10px; }
+.dt-panel .dt-sin { color: #5b6b85; font-style: italic; }
+.dt-panel .cp-ent-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 8px 0 12px; }
+.dt-panel .cp-ent-cab select { font: inherit; padding: 7px 10px; border-radius: 8px; border: 1px solid #c3cddd; background: #ffffff; color: #14213d; }
+.dt-panel .cp-sub { color: #14213d; margin: 18px 0 8px; }
+.dt-panel .pd-nota { color: #475569; font-size: 14px; }
+@media (max-width: 640px) { .dt-panel .dt-cuerpo { padding: 14px 12px 18px; } }

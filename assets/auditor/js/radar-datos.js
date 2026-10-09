@@ -39,12 +39,60 @@
   pintar();
   setInterval(pintar, 250);
 
-  /* Cada cifra del radar lleva a su tarjeta del desglose: se resalta un
-     momento para que el ojo la encuentre. */
+  /* Botones del radar, como estaban en la portada: «Ocultar
+     estadisticas» despeja la vista y «Desglosar cifras» abre los datos
+     duros (como se calcula cada cifra y de donde sale). El desglose
+     empieza cerrado. */
+  var items = document.getElementById('radarLiveItems');
+  var desglose = document.getElementById('radarDesgloseDrawer');
+  var btnStats = document.getElementById('radarToggleStatsBtn');
+  var btnDesg = document.getElementById('radarToggleDesgloseBtn');
+
+  function mostrarCifras(si) {
+    if (!items) return;
+    items.classList.toggle('radar-stats-hidden', !si);
+    if (btnStats) {
+      btnStats.setAttribute('aria-expanded', si ? 'true' : 'false');
+      btnStats.classList.toggle('is-hidden-mode', !si);
+      btnStats.title = si ? 'Ocultar las cifras para leer con calma' : 'Mostrar las cifras del radar';
+      document.getElementById('radarToggleStatsText').textContent = si ? 'Ocultar estadísticas' : 'Mostrar estadísticas';
+    }
+  }
+
+  function abrirDesglose(si) {
+    if (!desglose) return;
+    desglose.style.display = si ? 'block' : 'none';
+    if (btnDesg) {
+      btnDesg.setAttribute('aria-expanded', si ? 'true' : 'false');
+      btnDesg.classList.toggle('active', si);
+      document.getElementById('radarToggleDesgloseText').textContent = si ? 'Plegar desglose' : 'Desglosar cifras ▾';
+      document.getElementById('radarToggleDesgloseIcon').textContent = si ? '▲' : '📊';
+    }
+    if (si) mostrarCifras(true);
+  }
+
+  if (btnStats) btnStats.addEventListener('click', function () {
+    mostrarCifras(items.classList.contains('radar-stats-hidden'));
+  });
+  if (btnDesg) btnDesg.addEventListener('click', function () {
+    abrirDesglose(desglose.style.display === 'none');
+  });
+  hub.querySelectorAll('[data-radar-cerrar]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      abrirDesglose(false);
+      if (btnDesg) btnDesg.focus({ preventScroll: true });
+      var r = hub.getBoundingClientRect();
+      if (r.top < 0) btnDesg.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  });
+
+  /* Cada cifra del radar lleva a su tarjeta del desglose (lo abre si esta
+     cerrado): se resalta un momento para que el ojo la encuentre. */
   hub.querySelectorAll('a.radar-stat-item[href^="#rc-"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var c = document.getElementById(a.getAttribute('href').slice(1));
       if (!c) return;
+      abrirDesglose(true);
       /* La cabecera fija se encoge al bajar: se mide y la tarjeta queda
          debajo de ella, no tapada. */
       e.preventDefault();
@@ -58,4 +106,5 @@
       c.classList.add('radar-card-destaca');
     });
   });
+  if (/^#rc-/.test(location.hash)) abrirDesglose(true);
 })();
