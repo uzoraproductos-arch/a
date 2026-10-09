@@ -1054,3 +1054,7 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
   #cuentaPublicaASF, #cuentaPublicaASFLeg, .mod-proemio,
   #eb-inspentes, #eb-inspnota, #eb-inspefos { scroll-margin-top: 84px; }
 }
+
+/* VENTANA LATERAL MÁS ANCHA (09-10-2026). Decisión del autor: la
+   presentación, el glosario y las notas se leen mejor con más ancho. */
+.glos-drawer { width: min(580px, 100vw); }
