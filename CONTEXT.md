@@ -528,6 +528,35 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**Regla nueva: la portada ya no despliega nada (09-10-2026).** Decisión del
+autor, asentada en AGENTS.md §5 bis: la página principal queda como está y
+todo clic lleva a una página propia. Lo que aún se despliega se irá mudando.
+Siguiente: fusionar «Descarga los datos» y «Datos de referencia» (radar
+hacendario) en una sola página.
+
+**Auditoría en imágenes: una página por imagen (09-10-2026, sello
+20261009a).** Las nueve diapositivas del carrusel ya no abren el cuadro
+«Descubrimiento» sobre la portada: son enlaces a `auditoria-<id>.html`
+(tren-maya, dos-bocas, deuda-soberana, aifa, ramo-33, lego-cienega,
+tren-toluca, megafarmacia, huachicol-fiscal). Las genera
+`herramientas/auditorias.py` (lo llama `apartados.generar`, así que
+`sello.py` las regenera) y las pinta `assets/auditor/js/auditoria-imagen.js`
+con su hoja `auditoria-imagen.css`. La página carga solo `audit-database.js`
+(y el padrón del INEGI en LEGO), sin el motor. Cinco piezas: (1) el dinero
+paso a paso, un cuadro conceptual cuyas cifras suben de cero con «Ver gasto»;
+(2) una escena: el monito 🐒 que avienta 40 monedas a los botes del rastro
+(cinco mayores y «los demás»; cada moneda = total ÷ 40, chip derivado; antes
+de repartir el lector apuesta por el bote mayor), el reloj de los intereses
+de la deuda que corre desde que se abrió la página, o la fuga del huachicol
+(un escenario de regla de tres con barra de 0 a 30 %, no una estimación);
+(3) el rastro renglón por renglón con enlace al informe; (4) lo que se
+encontró, lo pendiente y la fuente; (5) a dónde seguir, con enlaces
+`index.html?ir=...`. Destinos nuevos en `IR_DESTINOS`, que ahora reciben el
+ancla: `expediente`, `flujo` (egr-costofin, fed-*), `municipio` (NL-19012),
+`radar` y `glosario`. Los constructores `sc*` y el cuadro
+`#descubrimientoModal` salieron del motor y de `index.html`: viven solo en el
+guion nuevo. Respeta «movimiento reducido».
+
 **Pendiente del examen:** ingresos, gasto, inversión física y balance de cada
 sexenio. No se encontró a nuestro alcance una serie oficial completa y
 consistente de 1989 a 2024 (la ASF publica el RFSP por año desde 2010 y sus

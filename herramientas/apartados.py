@@ -500,7 +500,9 @@ def generar(sello=None):
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, a['archivo']), 'wb').write(texto.encode('utf-8'))
     print('apartados: %d páginas generadas con el sello %s' % (len(APARTADOS), sello))
-    return 0
+    # Las paginas de Auditoria en imagenes comparten cabecera y sello.
+    import auditorias
+    return auditorias.generar(sello)
 
 
 if __name__ == '__main__':

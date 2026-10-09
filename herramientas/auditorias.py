@@ -1,0 +1,150 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Genera una pagina por cada diapositiva de «Auditoria en imagenes».
+
+Desde el 09-10-2026 la portada ya no despliega nada debajo de si misma:
+cada clic lleva a una pagina propia (decision del autor, ver AGENTS.md).
+Las nueve diapositivas del carrusel abren auditoria-<id>.html, que pinta
+assets/auditor/js/auditoria-imagen.js con las cifras de window.AUDIT_DB.
+Aqui no se escribe ni un monto: solo el marco de cada pagina.
+
+Lo llama apartados.generar(), asi que sello.py las regenera con el sello.
+"""
+import os
+import re
+
+from apartados import RAIZ, FAVICON, cabecera, esc_attr
+
+# id, imagen, nota de la imagen, texto alternativo, etiqueta, titulo, pregunta
+AUDITORIAS = [
+    ('tren-maya', 'assets/img/showcase_tren_maya.jpg', 'Ilustración generada con IA',
+     'Ilustración generada con IA de un tren sobre vías en la selva',
+     '🚅 Megaobra ferroviaria · FONATUR y Tren Maya', 'Tren Maya',
+     '¿Cuánto dinero del Tren Maya dejó la ASF por aclarar, y en qué tramos?'),
+    ('dos-bocas', 'assets/img/showcase_dos_bocas.jpg', 'Ilustración generada con IA',
+     'Ilustración generada con IA de una refinería junto al mar',
+     '🏭 Refinación · Pemex, Paraíso, Tabasco', 'Refinería Olmeca (Dos Bocas)',
+     '¿Qué encontró la ASF al revisar la refinería paquete por paquete?'),
+    ('deuda-soberana', 'assets/img/showcase_deuda_soberana.jpg', 'Ilustración generada con IA',
+     'Ilustración generada con IA de un edificio de gobierno',
+     '🏛️ Costo financiero de la deuda · PEF 2026', 'Los intereses de la deuda pública',
+     '¿Cuánto cuesta al año pagar sólo los intereses de la deuda pública?'),
+    ('aifa', 'assets/img/showcase_aifa.jpg', 'Ilustración generada con IA',
+     'Ilustración generada con IA de una terminal aérea',
+     '✈️ Infraestructura aeroportuaria · Defensa', 'Aeropuerto Internacional Felipe Ángeles (AIFA)',
+     '¿Qué revisó la ASF en la construcción y la operación del AIFA?'),
+    ('ramo-33', 'assets/img/showcase_ramo33.jpg', 'Ilustración generada con IA',
+     'Ilustración generada con IA de un centro de salud',
+     '🏥 Gasto federalizado · Ramo 33', 'Ramo 33: el dinero para estados y municipios',
+     '¿Cuánto dinero del Ramo 33 llega a estados y municipios, y cuánto quedó por aclarar?'),
+    ('lego-cienega', 'assets/img/showcase_lego_expansion.jpg', 'Imagen ilustrativa',
+     'Imagen ilustrativa de una planta industrial',
+     '🧱 Inversión privada y obra pública · Nuevo León', 'Ciénega de Flores: el dinero público alrededor de LEGO',
+     '¿Qué dinero público rodea a la planta de LEGO en Ciénega de Flores?'),
+    ('tren-toluca', 'assets/img/showcase_tren_toluca.jpg', 'Imagen ilustrativa',
+     'Imagen ilustrativa de un tren sobre un viaducto elevado',
+     '🚄 Transporte ferroviario · SICT', 'Tren Interurbano México-Toluca «El Insurgente»',
+     '¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?'),
+    ('megafarmacia', 'assets/img/showcase_megafarmacia.jpg', 'Imagen ilustrativa',
+     'Imagen ilustrativa de un almacén de medicamentos',
+     '💊 Almacén de medicamentos · Birmex, Huehuetoca', 'Megafarmacia del Bienestar (Huehuetoca)',
+     '¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?'),
+    ('huachicol-fiscal', 'assets/auditor/img/showcase_huachicol.jpg', 'Ilustración provisional',
+     'Ilustración de pipas de combustible frente a una aduana portuaria al atardecer',
+     '⛽ Evasión en combustibles · IEPS, aduanas y SAT', 'Huachicol fiscal: el impuesto que no entra',
+     '¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?'),
+]
+
+
+def archivo(id_):
+    return 'auditoria-%s.html' % id_
+
+
+def otras(actual):
+    filas = []
+    for a in AUDITORIAS:
+        if a[0] == actual:
+            continue
+        filas.append('          <a class="au-otra" href="%s"><img src="%s" alt="" loading="lazy">'
+                     '<span class="au-otra-txt"><span class="au-otra-badge">%s</span>%s</span></a>'
+                     % (archivo(a[0]), a[1], a[4], a[5]))
+    return '\n'.join(filas)
+
+
+def pagina(a, sello):
+    id_, img, nota_img, alt, badge, titulo, pregunta = a
+    # LEGO necesita el padron municipal del INEGI; las demas no lo cargan.
+    extra = ('\n  <script src="assets/auditor/js/municipios-efipem.js?v=%s"></script>' % sello
+             if id_ == 'lego-cienega' else '')
+    return '''<!DOCTYPE html>
+<!-- Página generada por herramientas/auditorias.py: no la edites a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{titulo_doc} · Auditoría en imágenes · Auditavisión</title>
+  <meta name="description" content="{pregunta_attr}">
+  <meta name="theme-color" content="#0b2a63">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="{favicon}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/auditoria-imagen.css?v={sello}">
+</head>
+<body data-pagina="apartado">
+{cabecera}
+
+  <main class="apartado au-pagina" id="contenido">
+    <header class="au-hero">
+      <img class="au-hero-img" src="{img}" alt="{alt}">
+      <span class="au-hero-ia">{nota_img}</span>
+      <div class="au-hero-velo"></div>
+      <div class="apartado-ancho au-hero-txt">
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="index.html#auditoria-en-imagenes">Auditoría en imágenes</a> <span aria-hidden="true">›</span> <span>{titulo}</span></nav>
+        <span class="au-hero-badge">{badge}</span>
+        <h1 class="au-hero-tit">{titulo}</h1>
+        <p class="au-hero-preg">{pregunta}</p>
+      </div>
+    </header>
+
+    <div class="apartado-ancho apartado-cuerpo">
+      <div id="auImg" class="au-raiz" data-id="{id}">
+        <noscript><p>Esta página arma sus cuentas con JavaScript a partir de la base de datos de la plataforma. Actívalo para verlas.</p></noscript>
+      </div>
+
+      <section class="au-otras-sec" aria-labelledby="auOtrasTit">
+        <h2 class="au-sec-tit" id="auOtrasTit">🖼️ Otras auditorías en imágenes</h2>
+        <div class="au-otras">
+{otras}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="apartado-pie">
+    <div class="apartado-ancho">
+      <a class="apartado-volver" href="index.html#auditoria-en-imagenes">← Volver a Auditoría en imágenes</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
+    </div>
+  </footer>
+
+  <script src="assets/auditor/js/audit-database.js?v={sello}"></script>{extra}
+  <script src="assets/auditor/js/apartados.js?v={sello}"></script>
+  <script src="assets/auditor/js/auditoria-imagen.js?v={sello}"></script>
+</body>
+</html>
+'''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
+           sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra)
+
+
+def generar(sello):
+    for a in AUDITORIAS:
+        texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, archivo(a[0])), 'wb').write(texto.encode('utf-8'))
+    print('auditorías en imágenes: %d páginas generadas con el sello %s' % (len(AUDITORIAS), sello))
+    return 0
