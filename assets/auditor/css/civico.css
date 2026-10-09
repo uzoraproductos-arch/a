@@ -1058,3 +1058,36 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
 /* VENTANA LATERAL MÁS ANCHA (09-10-2026). Decisión del autor: la
    presentación, el glosario y las notas se leen mejor con más ancho. */
 .glos-drawer { width: min(580px, 100vw); }
+
+/* PARTICIPA EN TEMA CLARO (09-10-2026). El ágora y el formulario de reporte
+   traen colores en línea pensados para fondo oscuro (texto #fff sobre
+   var(--bg-card)); en participa.html se leen en tinta sobre blanco. */
+[data-theme="light"] #bloquePortal input,
+[data-theme="light"] #bloquePortal select,
+[data-theme="light"] #bloquePortal textarea,
+[data-theme="light"] #bloqueAportar input,
+[data-theme="light"] #bloqueAportar select,
+[data-theme="light"] #bloqueAportar textarea {
+  background: #ffffff !important;
+  color: #14213d !important;
+  border-color: rgba(0, 43, 91, 0.25) !important;
+}
+[data-theme="light"] .debate-post-card {
+  background: #ffffff;
+  border-color: rgba(0, 43, 91, 0.18);
+}
+[data-theme="light"] .debate-title-h4 { color: var(--civ-azul, #0b2a63); }
+[data-theme="light"] .debate-content-body,
+[data-theme="light"] .reply-item-card p { color: #2b3950 !important; }
+[data-theme="light"] .debate-time-text { color: #5b6b82; }
+[data-theme="light"] .user-nick-text { color: var(--civ-azul, #0b2a63); }
+[data-theme="light"] .action-civic-btn {
+  background: #f4f6fa;
+  color: #22324d;
+  border-color: rgba(0, 43, 91, 0.2);
+}
+[data-theme="light"] .reply-item-card,
+[data-theme="light"] .reply-form-wrapper {
+  background: #f7f8fb;
+  border-color: rgba(0, 43, 91, 0.15);
+}

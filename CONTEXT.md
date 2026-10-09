@@ -602,6 +602,29 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Participa con su contenido dentro de las pestañas (09-10-2026, sello
+20261009o).** El autor pidió que cada pestaña muestre su contenido, como en
+Aprende, y no tarjetas que mandaran a la portada.
+- «Ágora cívica» tiene el portal de diálogo completo: el formulario, los
+  filtros, los hilos y las réplicas.
+- «Garantías cívicas» tiene, en este orden:
+  - las tres rutas y «a dónde va lo que escribes»;
+  - el formulario «Ayúdanos a fiscalizar», que en la portada vive en un
+    cajón lateral;
+  - los seis canales oficiales;
+  - el decálogo.
+- El marcado se tomó de `index.html` y vive en
+  `herramientas/participa_html.py`.
+- Las funciones son copia de las del motor y viven en
+  `assets/auditor/js/participa.js`, que lee `window.AUDIT_DB` y expone su
+  propio `window.AuditEngine` con los métodos de los `onclick`. **Si cambia
+  el portal en el motor, cambia aquí.** Lo guardado en el navegador usa las
+  mismas claves de `localStorage`, así que se comparte con la portada.
+- `civico.css` agrega estilos de tema claro para el formulario y los hilos.
+  Traían colores en línea para fondo oscuro, y el texto blanco no se veía.
+- Pendiente (§5 bis): retirar el portal de la portada y redirigir sus
+  `ir=portal` a `participa.html`.
+
 **Dos columnas más de García Luna (09-10-2026, sello 20261009n).** Las pidió
 el autor y se verificaron con la regla editorial. Quedan 18 columnas y 75
 afirmaciones descartadas.
