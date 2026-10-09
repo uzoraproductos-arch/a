@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Cívica · Auditavisión</title>
-  <meta name="description" content="Tu sueldo, tus impuestos y el rubro al que llegan. Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu estado y tu municipio con los 2,479 del padrón nacional.">
+  <title>Diccionario del Gasto Público · Auditavisión</title>
+  <meta name="description" content="Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.">
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E">
@@ -33,10 +33,10 @@
 
     <div class="nav-indice" id="navIndiceMovil">
     <div class="nav-center-links">
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramientas.html" aria-current="page">Herramientas</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramientas.html">Herramientas</a></div>
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="sigue-el-dinero.html">Números</a></div>
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="descarga-los-datos.html">Datos</a></div>
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="aprende.html">Aprende</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="aprende.html" aria-current="page">Aprende</a></div>
       <div class="nav-menu-item"><a class="mega-menu-trigger" href="participa.html">Participa</a></div>
     </div>
 
@@ -65,68 +65,72 @@
   </nav>
 
   <main class="apartado" id="contenido">
-    <header class="apartado-cab herr-cab herr-foto rubro-calculadora">
+    <header class="apartado-cab">
       <div class="apartado-ancho">
-        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="herramientas.html">Herramientas</a> <span aria-hidden="true">›</span> <span>Calculadora Cívica</span></nav>
-        <span class="apartado-lema">💳 Herramienta 2 de 4</span>
-        <h1 class="apartado-titulo">Calculadora Cívica</h1>
-        <p class="apartado-entrada"><b>Tu sueldo, tus impuestos y el rubro al que llegan.</b> Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu estado y tu municipio con los 2,479 del padrón nacional.</p>
-        <span class="herr-cab-credito">Imagen ilustrativa</span>
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="aprende.html">Aprende</a> <span aria-hidden="true">›</span> <span>Diccionario del Gasto Público</span></nav>
+        <span class="apartado-lema">📚 Las palabras, las leyes y las fuentes del erario</span>
+        <h1 class="apartado-titulo">Diccionario del Gasto Público</h1>
+        <p class="apartado-entrada">Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.</p>
+        
       </div>
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página" data-primera="1">
-          <a class="apartado-pestana" role="tab" id="pestana-ccticket" href="#ccticket" aria-controls="ccticket" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧾</span><span class="apartado-pestana-tx"><b>1 · Tu estado de cuenta</b><small>Lo que pagas y a dónde va</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-cccompara" href="#cccompara" aria-controls="cccompara" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">⚡</span><span class="apartado-pestana-tx"><b>2 · Tú contra ellos</b><small>Cargo por cargo</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-ccreloj" href="#ccreloj" aria-controls="ccreloj" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">⏱️</span><span class="apartado-pestana-tx"><b>3 · El reloj de la deuda</b><small>Y de lo perdido</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-preguntas" href="#preguntas" aria-controls="preguntas" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💡</span><span class="apartado-pestana-tx"><b>1 · Preguntas frecuentes</b><small>En casillas didácticas</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-glosario" href="#glosario" aria-controls="glosario" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📖</span><span class="apartado-pestana-tx"><b>2 · Glosario</b><small>Los términos del erario</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-marco-legal" href="#marco-legal" aria-controls="marco-legal" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">⚖️</span><span class="apartado-pestana-tx"><b>3 · Marco legal</b><small>Los preceptos rectores</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-fuentes" href="#fuentes" aria-controls="fuentes" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📑</span><span class="apartado-pestana-tx"><b>4 · Catálogo de fuentes</b><small>Los documentos oficiales</small></span></a>
       </nav>
       <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
       
-      <section class="apartado-seccion apartado-panel" id="ccticket" aria-labelledby="ccticket-tit" role="tabpanel">
-        <h2 class="sr-only" id="ccticket-tit">Tu estado de cuenta</h2>
+      <section class="apartado-seccion apartado-panel" id="preguntas" aria-labelledby="preguntas-tit" role="tabpanel">
+        <h2 class="sr-only" id="preguntas-tit">Preguntas frecuentes</h2>
         <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=eb-ccticket" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🧾</span>
-          <span class="apartado-tarjeta-nombre">Tu estado de cuenta</span>
-          <span class="apartado-tarjeta-desc">Escribe lo que ganas y la página saca cuatro cuentas: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y tu estado de cuenta.</span>
+        <a class="apartado-tarjeta" href="index.html?ir=faq-preguntas" data-auto="1">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">💡</span>
+          <span class="apartado-tarjeta-nombre">Preguntas frecuentes</span>
+          <span class="apartado-tarjeta-desc">Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar por tu cuenta.</span>
           <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
         </a>
         </div>
       </section>
 
-      <section class="apartado-seccion apartado-panel" id="cccompara" aria-labelledby="cccompara-tit" role="tabpanel">
-        <h2 class="sr-only" id="cccompara-tit">Tú contra ellos</h2>
+      <section class="apartado-seccion apartado-panel" id="glosario" aria-labelledby="glosario-tit" role="tabpanel">
+        <h2 class="sr-only" id="glosario-tit">Glosario</h2>
         <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=eb-cccompara" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">⚡</span>
-          <span class="apartado-tarjeta-nombre">Tú contra ellos</span>
-          <span class="apartado-tarjeta-desc">Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.</span>
+        <a class="apartado-tarjeta" href="glosario.html">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">📖</span>
+          <span class="apartado-tarjeta-nombre">Glosario</span>
+          <span class="apartado-tarjeta-desc">Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador. Tiene su propia página.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
+        </div>
+      </section>
+
+      <section class="apartado-seccion apartado-panel" id="marco-legal" aria-labelledby="marco-legal-tit" role="tabpanel">
+        <h2 class="sr-only" id="marco-legal-tit">Marco legal</h2>
+        <div class="apartado-rejilla herr-rejilla">
+        <a class="apartado-tarjeta" href="index.html?ir=faq-marco-legal" data-auto="1">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">⚖️</span>
+          <span class="apartado-tarjeta-nombre">Marco legal</span>
+          <span class="apartado-tarjeta-desc">Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.</span>
           <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
         </a>
         </div>
       </section>
 
-      <section class="apartado-seccion apartado-panel" id="ccreloj" aria-labelledby="ccreloj-tit" role="tabpanel">
-        <h2 class="sr-only" id="ccreloj-tit">El reloj de la deuda</h2>
+      <section class="apartado-seccion apartado-panel" id="fuentes" aria-labelledby="fuentes-tit" role="tabpanel">
+        <h2 class="sr-only" id="fuentes-tit">Catálogo de fuentes</h2>
         <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=eb-ccreloj" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">⏱️</span>
-          <span class="apartado-tarjeta-nombre">El reloj de la deuda</span>
-          <span class="apartado-tarjeta-desc">Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.</span>
+        <a class="apartado-tarjeta" href="index.html?ir=fuentes" data-auto="1">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">📑</span>
+          <span class="apartado-tarjeta-nombre">Catálogo de fuentes</span>
+          <span class="apartado-tarjeta-desc">DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria: cada ficha con su liga directa.</span>
           <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
         </a>
         </div>
       </section>
-
-      <nav class="herr-otras" aria-label="Las otras herramientas">
-        <span class="herr-otras-tit">Las otras herramientas</span>
-        <div class="herr-otras-fila">
-          <a class="herr-otra herr-foto rubro-obras" href="herramienta-megaobras.html"><span class="herr-otra-ico" aria-hidden="true">🏗️</span><span class="herr-otra-tx">Inversión y Megaobras</span></a>
-          <a class="herr-otra herr-foto rubro-inspector" href="herramienta-inspector.html"><span class="herr-otra-ico" aria-hidden="true">🔍</span><span class="herr-otra-tx">Modo Inspector</span></a>
-          <a class="herr-otra herr-foto rubro-ambiente" href="herramienta-ambiente.html"><span class="herr-otra-ico" aria-hidden="true">🌎</span><span class="herr-otra-tx">Costo Ambiental</span></a>
-        </div>
-      </nav>
     </div>
   </main>
 

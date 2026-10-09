@@ -602,6 +602,33 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Diccionario y glosario con página propia; nada lleva a la portada (09-10-2026, sello 20261009v).**
+Pedido del autor: los enlaces a la Enciclopedia (congelada) llegan ahora al
+Diccionario del Gasto Público, y nada saca al lector a la portada salvo el
+nombre «Auditavisión» y los botones de volver al inicio.
+- `diccionario.html` (`DICCIONARIO` en `apartados.py`, padre: Aprende):
+  la pestaña «faq» del auditor en su página, con cuatro pestañas
+  (preguntas, glosario, marco legal, catálogo de fuentes). Tres abren su
+  apartado en el visor; en el visor se esconden el título y las
+  subpestañas de la portada (`civico.css`).
+- `glosario.html` (`GLOSARIO` + `assets/auditor/js/glosario.js`): página
+  nativa, sin marco, que lee `AUDIT_DB.glosario`: buscador, categorías y
+  un ancla por término (`glosario.html#Huachicol-Fiscal`, la forma de
+  `glosario_ancla()`). Los enlaces `index.html?ir=glosario` y
+  `?ir=faq-glosario` del motor redirigen ahí.
+- Los 13 enlaces a `enciclopedia.html` (insignia «Inspector Meteoro»,
+  pie de la portada, nota de finanzas, ficha de referencia, debate,
+  Porfiriato y presidentes) van al Diccionario o a su glosario.
+- `apartados.js`: cualquier enlace `index.html?ir=...` que no sea tarjeta
+  (p. ej. «Cuéntanos lo que viste», los de Auditoría en imágenes y las
+  fichas de fuente) se abre en una ventana lateral ancha (`abrirMarco`,
+  `.glos-drawer-marco`) con el auditor en modo visor. Se quitó «Pantalla
+  completa» del visor, porque llevaba a la portada. En el visor, los
+  cajones del auditor ocupan todo el marco y cerrar el reporte cierra la
+  ventana.
+- Pendiente: los enlaces *dentro* del visor que apuntan a otra página
+  siguen abriéndose en la ventana completa (`target=_top`).
+
 **El nombre de la cabecera lleva a la portada (09-10-2026, sello 20261009t).**
 «Auditavisión · El gasto público, a la vista» es ahora un enlace a
 `index.html` en todas las páginas (`cabecera()` en `apartados.py` y la

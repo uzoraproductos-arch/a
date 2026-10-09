@@ -52,8 +52,8 @@ def ir(destino, ancla=None):
 
 
 def glosario_ancla(termino):
-    """Ancla de index.html?ir=glosario: sin acentos ni signos (el motor la
-    valida con [A-Za-z0-9_-] y busca sin distinguir acentos)."""
+    """Ancla de glosario.html#...: sin acentos ni signos. Es la forma de
+    ancla() en assets/auditor/js/glosario.js: si cambia una, cambia la otra."""
     t = unicodedata.normalize('NFD', termino.split(' (')[0])
     t = ''.join(c for c in t if unicodedata.category(c) != 'Mn')
     return re.sub(r'[^A-Za-z0-9]+', '-', t).strip('-')
@@ -71,7 +71,7 @@ def libro_html(a):
     llamado = ('<sup class="apartado-libro-llamado"><a href="%s" title="Ver la ficha [%d] en el catálogo de fuentes" '
                'aria-label="Nota de referencia %d">[%d]</a></sup>' % (url, num, num, num))
     texto = a['libro'].replace('sobre todo sus capítulos 5 y 7.', 'sobre todo sus capítulos 5 y 7.' + llamado, 1)
-    glos = ' · '.join('<a href="index.html?ir=glosario&amp;ancla=%s">%s</a>' % (glosario_ancla(t), t.split(' (')[0])
+    glos = ' · '.join('<a href="glosario.html#%s">%s</a>' % (glosario_ancla(t), t.split(' (')[0])
                       for t in a.get('libro_glosario', []))
     return ('<aside class="apartado-libro apartado-libro-nota" aria-labelledby="notaLibroTit">'
             '<span class="apartado-libro-ico" aria-hidden="true">📘</span>'
@@ -93,7 +93,7 @@ def libro_enlace(a):
     llamado = ('<sup class="apartado-libro-llamado"><a href="%s" title="Ver la ficha [%d] en el catálogo de fuentes">[%d]</a></sup>'
                % (url, num, num))
     texto = a['libro'].replace('sobre todo sus capítulos 5 y 7.', 'sobre todo sus capítulos 5 y 7.' + llamado, 1)
-    glos = ''.join('<li><a href="index.html?ir=glosario&amp;ancla=%s">%s ➔</a></li>' % (glosario_ancla(t), t.split(' (')[0])
+    glos = ''.join('<li><a href="glosario.html#%s">%s ➔</a></li>' % (glosario_ancla(t), t.split(' (')[0])
                    for t in a.get('libro_glosario', []))
     return ('<a class="apartado-nota" href="%s" data-libro="1">📘 Nota de referencia</a>'
             '<template id="tplNotaLibro">'
@@ -353,7 +353,7 @@ APARTADOS = [
                 'titulo': '🏛️ Biblioteca hacendaria',
                 'texto': 'Marco legal, glosario y preguntas frecuentes.',
                 'tarjetas': [
-                    ('📖', 'Glosario de Términos Hacendarios', 'Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador.', ir('faq-glosario'), None, None),
+                    ('📖', 'Glosario de Términos Hacendarios', 'Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador. Tiene su propia página.', 'glosario.html', None, None),
                     ('⚖️', 'Marco Legal Hacendario', 'Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.', ir('faq-marco-legal'), None, None),
                     ('💡', 'Preguntas Frecuentes en Casillas Didácticas', 'Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar.', ir('faq-preguntas'), None, None),
                 ],
@@ -364,7 +364,7 @@ APARTADOS = [
                 'titulo': '🧭 Fuentes del auditor ciudadano',
                 'texto': 'Fuentes y guías para revisar por tu cuenta.',
                 'tarjetas': [
-                    ('🗺️', 'Enciclopedia Hacendaria (9 Módulos)', 'El compendio completo: presupuesto, Poderes, personajes, marco legal y comunidad.', 'enciclopedia.html', None, None),
+                    ('📚', 'Diccionario del Gasto Público', 'Preguntas frecuentes, glosario, marco legal y catálogo de fuentes, en su propia página.', 'diccionario.html', None, None),
                     ('📑', 'Compendio de Fuentes Oficiales', 'DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.', ir('fuentes'), None, None),
                     ('🍺', 'Pase y Guías del Auditor Cívico', 'Herramientas independientes de fiscalización ciudadana ($79/mes · Menos que dos caguamas).', ir('pase'), None, None),
                 ],
@@ -544,6 +544,67 @@ def herramienta(h, n):
     }
 
 
+# Diccionario del Gasto Publico (decision del autor, 09-10-2026): los
+# enlaces que llevaban a la Enciclopedia (congelada) llegan aqui. Es la
+# pestana «faq» del auditor (preguntas, glosario, marco legal y catalogo de
+# fuentes) en su propia pagina: cada apartado es una pestana que lo abre en
+# el visor, como el glosario de Aprende, sin desglosarlo bajo la portada.
+DICCIONARIO = {
+    'archivo': 'diccionario.html',
+    'menu': 'Diccionario del Gasto Público',
+    'menu_archivo': 'aprende.html',
+    'padre': ('aprende.html', 'Aprende'),
+    'icono': '📚',
+    'titulo': 'Diccionario del Gasto Público',
+    'lema': 'Las palabras, las leyes y las fuentes del erario',
+    'entrada': ('Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los '
+                'términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) '
+                'y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.'),
+    'pestanas': True,
+    'primera': True,
+    'secciones': [
+        {'id': clave, 'pestana': (ico, '%d · %s' % (i, nombre), frase), 'titulo': nombre, 'texto': '',
+         'sin_cab': True, 'auto': not destino.endswith('.html'),
+         'tarjetas': [(ico, nombre, desc, destino if destino.endswith('.html') else ir(destino), None, None)]}
+        for i, (clave, ico, nombre, frase, desc, destino) in enumerate([
+            ('preguntas', '💡', 'Preguntas frecuentes', 'En casillas didácticas',
+             'Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar por tu cuenta.', 'faq-preguntas'),
+            ('glosario', '📖', 'Glosario', 'Los términos del erario',
+             'Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador. Tiene su propia página.', 'glosario.html'),
+            ('marco-legal', '⚖️', 'Marco legal', 'Los preceptos rectores',
+             'Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.', 'faq-marco-legal'),
+            ('fuentes', '📑', 'Catálogo de fuentes', 'Los documentos oficiales',
+             'DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria: cada ficha con su liga directa.', 'fuentes'),
+        ], 1)
+    ],
+}
+
+
+# Glosario general en su propia pagina (decision del autor, 09-10-2026):
+# lo pinta assets/auditor/js/glosario.js con los terminos de la base, sin
+# cargar la portada en un marco. Los enlaces a un termino llevan a
+# glosario.html#<glosario_ancla(termino)>.
+GLOSARIO = {
+    'archivo': 'glosario.html',
+    'menu': 'Glosario',
+    'menu_archivo': 'aprende.html',
+    'padre': ('diccionario.html', 'Diccionario del Gasto Público'),
+    'icono': '📖',
+    'titulo': 'Glosario de Términos Hacendarios',
+    'lema': 'Las palabras del erario, en lenguaje llano',
+    'entrada': ('Los términos del presupuesto, la deuda, la fiscalización y los Poderes, explicados para quien no es especialista. '
+                'Cada uno trae su fundamento: el artículo, la ley o el documento oficial que lo define. Busca una palabra o elige una categoría.'),
+    'scripts': ['audit-database.js', 'glosario.js'],
+    'secciones': [{
+        'id': 'terminos', 'titulo': 'Los términos', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+        'bloque': ('<div class="gl" id="glosarioPagina">\n'
+                   '          <p class="gl-carga" role="status">⏳ Cargando los términos…</p>\n'
+                   '          <noscript><p>El glosario necesita JavaScript.</p></noscript>\n'
+                   '        </div>'),
+    }],
+}
+
+
 GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
         <ol class="apartado-pasos">
@@ -593,7 +654,7 @@ def cabecera(actual, sello):
           <span>🔗</span>
           <span>Compartir</span>
         </button>
-        <a href="enciclopedia.html#tab-panel-faq" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Enciclopedias Interactivas">
+        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Diccionario del Gasto Público">
           <span>🪐</span>
           <span>Inspector Meteoro</span>
         </a>
@@ -810,6 +871,9 @@ def generar(sello=None):
     for n, h in enumerate(HERRAMIENTAS, 1):
         texto = pagina(herramienta(h, n), sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, h[0]), 'wb').write(texto.encode('utf-8'))
+    for extra in (DICCIONARIO, GLOSARIO):
+        texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
         texto = redireccion(*datos).replace('\n', '\r\n')
         open(os.path.join(RAIZ, archivo), 'wb').write(texto.encode('utf-8'))
