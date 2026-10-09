@@ -219,7 +219,7 @@ APARTADOS = [
         'menu': 'Aprende',
         'icono': '📖',
         'titulo': 'Aprende',
-        'lema': 'Biblioteca y kit del auditor ciudadano',
+        'lema': 'Biblioteca y fuentes del auditor ciudadano',
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
                     'Para ponerte a prueba, una trivia con el estado de cuenta de cada presidente; y para leer con calma, columnas con datos curiosos de personajes y hechos.'),
@@ -253,8 +253,8 @@ APARTADOS = [
             },
             {
                 'id': 'kit',
-                'pestana': ('🧭', 'Kit del auditor', 'Fuentes y guías'),
-                'titulo': '🧭 Kit del auditor ciudadano',
+                'pestana': ('🧭', 'Fuentes del auditor', 'Documentos oficiales y guías'),
+                'titulo': '🧭 Fuentes del auditor ciudadano',
                 'texto': 'Fuentes y guías para revisar por tu cuenta.',
                 'tarjetas': [
                     ('🗺️', 'Enciclopedia Hacendaria (9 Módulos)', 'El compendio completo: presupuesto, Poderes, personajes, marco legal y comunidad.', 'enciclopedia.html', None, None),
