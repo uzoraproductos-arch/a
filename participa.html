@@ -12,9 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009n">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009n">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009n">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009o">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009o">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009o">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -85,60 +85,252 @@
       <section class="apartado-seccion apartado-panel" id="agora" aria-labelledby="agora-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="agora-tit"><span class="sr-only"></span>💬 Ágora cívica y diálogos</h2>
-          <p class="apartado-seccion-texto">Un espacio plural para argumentar con datos.</p>
+          <p class="apartado-seccion-texto">Un espacio plural para argumentar con datos: publica tu postura con seudónimo y tus fuentes, y replica a cualquier argumento.</p>
         </div>
-        <div class="apartado-rejilla">
-        <a class="apartado-tarjeta" href="index.html?ir=portal&amp;ancla=bloquePortal">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🌐</span>
-          <span class="apartado-tarjeta-nombre">Portal Público Digital</span>
-          <span class="apartado-tarjeta-desc">Un espacio plural para contrastar posturas con fuentes y responder con argumentos.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta" href="index.html?ir=portal&amp;ancla=portalNuevoDebateForm">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">✍️</span>
-          <span class="apartado-tarjeta-nombre">Iniciar Nuevo Diálogo o Postura</span>
-          <span class="apartado-tarjeta-desc">Publica tu argumento con seudónimo, tu postura y tus fuentes.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta" href="index.html?ir=portal&amp;ancla=portalFilterBar">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🗣️</span>
-          <span class="apartado-tarjeta-nombre">Cuaderno de argumentos (en este navegador)</span>
-          <span class="apartado-tarjeta-desc">Consulta los argumentos ciudadanos filtrados por Presupuesto, Megaobras, Deuda y SCJN.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
+        <div class="apartado-bloque">
+        <div class="portal-digital-block" id="bloquePortal">
+        
+        <!-- Banner Hero del Portal & Garantía de Privacidad -->
+        <div class="portal-banner-hero">
+          <div class="portal-title-group">
+            <span class="hero-tag" style="background:rgba(201,168,76,0.15); color:var(--gold-bright); border:1px solid var(--border-gold); padding:3px 10px; border-radius:4px; font-size:11px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:1px; display:inline-block; margin-bottom:6px;">
+              🌐 Red Social Cívica &amp; Ágora Libre
+            </span>
+            <h3>
+              <span>💬</span> Portal Público Digital · ¿Quieres Dialogar o Replicar?
+            </h3>
+            <p>
+              Un espacio para ordenar posturas, plantear tesis críticas y sostenerlas con fuentes oficiales sobre cualquier contenido de la plataforma. <strong>Por ahora, lo que escribas se guarda sólo en este navegador</strong>: nadie más lo ve todavía. No se piden correos, teléfonos ni nombres reales; basta un <strong>nick o pseudónimo</strong>.
+            </p>
+          </div>
+
+          <div class="portal-privacy-badges">
+            <span class="privacy-pill green" title="El formulario no pide correo, teléfono ni nombre real">
+              <span>🔒</span> Sin correo ni teléfono
+            </span>
+            <span class="privacy-pill gold" title="Elige tu alias libremente">
+              <span>🎭</span> Acceso con Nick / Pseudónimo
+            </span>
+            <span class="privacy-pill cyan" title="Libre debate de argumentos y fuentes">
+              <span>⚖️</span> Debate de Ideas &amp; Fuentes
+            </span>
+          </div>
+        </div>
+
+        <!-- Formulario Creador de Nuevo Debate / Argumento -->
+        <div class="portal-creator-card">
+          <h4>
+            <span>✍️</span> Iniciar Nuevo Diálogo o Postura Ciudadana
+          </h4>
+
+          <form id="portalNuevoDebateForm" onsubmit="window.AuditEngine.submitNuevoDebate(event)">
+            <div class="creator-form-grid">
+              
+              <!-- Campo de Nick / Pseudónimo -->
+              <div class="com-form-row">
+                <label for="portalNick">
+                  <span>Tu Nick o Pseudónimo Cívico</span>
+                  <span style="color:var(--gold-bright); cursor:pointer;" onclick="window.AuditEngine.generarRandomNick()" title="Generar un Nick aleatorio">🎲 Aleatorio</span>
+                </label>
+                <input type="text" id="portalNick" maxlength="35" placeholder="Ej. @AuditorRegio, @CiudadanoDelSur" required style="background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; padding:10px 14px; border-radius:6px; font-family:var(--font-mono); font-size:12.5px;">
+              </div>
+
+              <!-- Selector de Tema de la Plataforma -->
+              <div class="com-form-row">
+                <label for="portalTemaSel">Tema o Pestaña Relacionada</label>
+                <select id="portalTemaSel" style="background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; padding:10px 14px; border-radius:6px; font-size:12.5px;">
+                  <option value="presupuesto">📊 Presupuesto &amp; PEF (Pestaña 1)</option>
+                  <option value="megaobras">🏗️ Megaobras &amp; Costos (Pestaña 2)</option>
+                  <option value="legislativo">🏛️ Poder Legislativo (Pestaña 3)</option>
+                  <option value="judicial">⚖️ Suprema Corte SCJN (Pestaña 4)</option>
+                  <option value="politicos">👥 Personajes &amp; Sexenios (Pestaña 5)</option>
+                  <option value="deuda">📈 Deuda, CETES &amp; Banxico (Pestaña 2)</option>
+                  <option value="general">🌐 Debate Cívico General</option>
+                </select>
+              </div>
+
+              <!-- Selector de Postura / Enfoque -->
+              <div class="com-form-row">
+                <label>Tu Postura o Enfoque</label>
+                <div class="stance-selector-group" id="portalStanceGroup">
+                  <button type="button" class="stance-btn-radio active" data-stance="matiz" onclick="window.AuditEngine.selectStance('matiz')">
+                    <span>🟡</span> Matiz
+                  </button>
+                  <button type="button" class="stance-btn-radio" data-stance="a_favor" onclick="window.AuditEngine.selectStance('a_favor')">
+                    <span>🟢</span> A Favor
+                  </button>
+                  <button type="button" class="stance-btn-radio" data-stance="en_contra" onclick="window.AuditEngine.selectStance('en_contra')">
+                    <span>🔴</span> En Contra
+                  </button>
+                  <button type="button" class="stance-btn-radio" data-stance="aporte" onclick="window.AuditEngine.selectStance('aporte')">
+                    <span>📄</span> Aporte
+                  </button>
+                </div>
+                <input type="hidden" id="portalStanceVal" value="matiz">
+              </div>
+
+            </div>
+
+            <!-- Título / Tesis del Argumento -->
+            <div class="com-form-row">
+              <label for="portalTesis">
+                <span>Tesis Central o Título del Argumento</span>
+                <span style="color:var(--text-dim);">Conciso y claro</span>
+              </label>
+              <input type="text" id="portalTesis" maxlength="160" placeholder="Ej. El subsidio operativo del Tren Maya debe compararse con la derrama hotelera regional..." required style="background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; padding:10px 14px; border-radius:6px; font-family:var(--font-serif); font-size:14px;">
+            </div>
+
+            <!-- Contenido Argumentativo Completo -->
+            <div class="com-form-row">
+              <label for="portalContenido">
+                <span>Desarrollo del Argumento, Razonamiento o Postura Cívica</span>
+                <span id="portalCharCount" style="color:var(--text-dim);">0 / 1200</span>
+              </label>
+              <textarea id="portalContenido" maxlength="1200" placeholder="Expón tus razones, datos o contrastes. Mantén un tono de debate cívico constructivo y fundamentado..." required style="background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; padding:12px 14px; border-radius:6px; font-size:13px; line-height:1.6; min-height:110px;"></textarea>
+            </div>
+
+            <!-- Fuente o Enlace de Verificación (Opcional) -->
+            <div class="com-form-row">
+              <label for="portalFuente">
+                <span>Fuente Documental o Enlace Oficial (Opcional pero Recomendado)</span>
+                <span style="color:var(--cyan);">Cita de ley, nota oficial, ASF, DOF, etc.</span>
+              </label>
+              <input type="text" id="portalFuente" maxlength="180" placeholder="Ej. Cuenta Pública ASF 2024 / Ley de Ingresos LIF 2026 Art. 1" style="background:var(--bg-card); border:1px solid var(--border-subtle); color:#fff; padding:8px 14px; border-radius:6px; font-family:var(--font-mono); font-size:12px;">
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:16px;">
+              <span style="font-size:11.5px; color:var(--text-dim); font-family:var(--font-mono);">
+                🤝 Reglas: Respeto estricto, debate de ideas, cero discursos de odio.
+              </span>
+              <button type="submit" class="calc-btn" style="padding:10px 24px; font-size:12.5px; display:inline-flex; align-items:center; gap:8px;">
+                <span>💾</span> Guardar argumento en este navegador
+              </button>
+            </div>
+            <div id="portalFormStatusMsg" style="margin-top:8px; font-family:var(--font-mono); font-size:11.5px;"></div>
+          </form>
+        </div>
+
+        <!-- Barra de Filtros Temáticos del Foro -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:20px; border-bottom:1px solid var(--border-subtle); padding-bottom:14px;">
+          <div>
+            <h4 style="font-family:var(--font-serif); font-size:18px; color:var(--gold-bright); margin:0;">
+              🗣️ Diálogos, Réplicas &amp; Hilos en Curso
+            </h4>
+            <span style="font-size:11.5px; color:var(--text-dim); font-family:var(--font-mono);">
+              Haz clic en «Replicar» para participar en cualquier discusión ciudadana
+            </span>
+          </div>
+
+          <div class="presets-bar" id="portalFilterBar" style="margin-bottom:0;">
+            <button class="chip on active" data-forum-filter="todos" onclick="window.AuditEngine.filterPortalDebates('todos')">🌐 Todos</button>
+            <button class="chip" data-forum-filter="presupuesto" onclick="window.AuditEngine.filterPortalDebates('presupuesto')">📊 Presupuesto</button>
+            <button class="chip" data-forum-filter="megaobras" onclick="window.AuditEngine.filterPortalDebates('megaobras')">🏗️ Megaobras</button>
+            <button class="chip" data-forum-filter="judicial" onclick="window.AuditEngine.filterPortalDebates('judicial')">⚖️ SCJN</button>
+            <button class="chip" data-forum-filter="politicos" onclick="window.AuditEngine.filterPortalDebates('politicos')">👥 Personajes</button>
+            <button class="chip" data-forum-filter="deuda" onclick="window.AuditEngine.filterPortalDebates('deuda')">📈 Deuda &amp; Banxico</button>
+          </div>
+        </div>
+
+        <!-- Contenedor Dinámico de Tarjetas de Debates & Réplicas -->
+        <div id="portalDebatesListContainer" class="portal-debates-container"></div>
+
+      </div>
         </div>
       </section>
 
       <section class="apartado-seccion apartado-panel" id="garantias" aria-labelledby="garantias-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="garantias-tit"><span class="sr-only"></span>🛡️ Garantías cívicas y formación</h2>
-          <p class="apartado-seccion-texto">Qué pasa con lo que escribes y a dónde llevar un señalamiento.</p>
+          <p class="apartado-seccion-texto">Qué pasa con lo que escribes, cómo armar un reporte útil y a dónde llevar un señalamiento para que se vuelva expediente.</p>
         </div>
-        <div class="apartado-rejilla">
-        <a class="apartado-tarjeta" href="index.html?ir=portal&amp;ancla=comOrientacion">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🔒</span>
-          <span class="apartado-tarjeta-nombre">Tu Privacidad: a Dónde Va lo que Escribes</span>
-          <span class="apartado-tarjeta-desc">Sin correos, teléfonos ni rastreo. Qué se guarda, dónde y quién lo ve, dicho sin adornos.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=portal&amp;ancla=bloqueCanales">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏛️</span>
-          <span class="apartado-tarjeta-nombre">Canales Oficiales de Denuncia</span>
-          <span class="apartado-tarjeta-desc">Las seis puertas donde un señalamiento se vuelve expediente: ASF, SABG, FGR, SAT, Transparencia y contralorías internas.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta" href="index.html?ir=portal&amp;ancla=decalogoWrap">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📜</span>
-          <span class="apartado-tarjeta-nombre">Decálogo del Ciudadano Auditor</span>
-          <span class="apartado-tarjeta-desc">Diez reglas que separan una queja de una denuncia, cada una con su fundamento legal.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=reporta">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📢</span>
-          <span class="apartado-tarjeta-nombre">Reporta lo que Viste</span>
-          <span class="apartado-tarjeta-desc">Arma tu reporte con qué, dónde, cuándo y con qué prueba, y llévalo ya redactado a un canal oficial.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
+        <div class="apartado-bloque">
+        <div id="comOrientacion"></div>
+        <div class="fj-bloque" id="bloqueAportar">
+        <div class="fj-bloque-head"><span class="fj-kicker">Función 1</span><h3>Ayúdanos a fiscalizar: comparte lo que viste</h3></div>
+
+      <p class="fj-bloque-sub" style="margin-top:0;">
+        No necesitas ser contador ni abogado. Necesitas haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. Lo que registres aquí queda guardado en tu navegador y podrás copiarlo con un botón para presentarlo, ya redactado, en cualquiera de los canales oficiales ante la ASF, la Secretaría Anticorrupción y Buen Gobierno o su contraloría local.
+        <strong style="display:block; margin-top:6px; color:var(--gold-bright);">No compartas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</strong>
+      </p>
+
+      <div class="com-util">
+        <div class="com-util-tit">Qué vuelve útil un reporte</div>
+        <ul class="com-util-lista">
+          <li><strong>Qué.</strong> La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</li>
+          <li><strong>Dónde.</strong> Municipio, colonia y referencia física. Una dirección vale más que un adjetivo.</li>
+          <li><strong>Cuándo.</strong> La fecha o el periodo. Los fondos se fiscalizan por ejercicio anual.</li>
+          <li><strong>Con qué dinero.</strong> Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</li>
+          <li><strong>Con qué prueba.</strong> Una foto con fecha, un número de contrato, una factura, un acta de entrega.</li>
+        </ul>
+      </div>
+
+      <div class="com-card-panel">
+        <form id="comunidadForm">
+          <div class="com-form-row">
+            <label for="comNombre">Nombre o Pseudónimo (Opcional)</label>
+            <input type="text" id="comNombre" maxlength="60" placeholder="Ej. Ciudadano de Guadalajara">
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+            <div class="com-form-row">
+              <label for="comTipo">Tipo de Participación</label>
+              <select id="comTipo">
+                <option value="Obra pública">Una obra que no cuadra</option>
+                <option value="Contrato o compra">Un contrato o una compra sospechosa</option>
+                <option value="Programa social">Uso electoral de un programa social</option>
+                <option value="Trámite o cobro">Un cobro o trámite indebido</option>
+                <option value="Corrección de dato">Corrección a un dato de esta plataforma</option>
+                <option value="Duda presupuestal">Duda sobre gasto o presupuesto</option>
+                <option value="Sugerencia">Sugerencia para la plataforma</option>
+              </select>
+            </div>
+            <div class="com-form-row">
+              <label for="comEstadoSel">Entidad Relacionada</label>
+              <select id="comEstadoSel">
+                <option value="Nacional">Nacional / Federal</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="com-form-row">
+            <label for="comMensaje">
+              <span>Tu mensaje u observación cívica</span>
+              <span id="comCharCount" style="color:var(--text-dim);">0 / 1000</span>
+            </label>
+            <textarea id="comMensaje" maxlength="1000" placeholder="Describe la obra, el fondo (Ramo 33, FORTAMUN) o el aspecto presupuestario que deseas señalar..." required></textarea>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:14px;">
+            <button type="submit" class="calc-btn" style="padding:10px 22px;">💾 Guardar en este navegador</button>
+            <span id="comStatusMsg" style="font-family:var(--font-mono); font-size:11px;"></span>
+          </div>
+        </form>
+
+        <div class="com-obs-wrap">
+          <h4 class="com-obs-h4">Observaciones que has registrado en este navegador</h4>
+          <div id="comentariosListContainer"></div>
+        </div>
+      </div>
+        </div>
+        <div class="fj-bloque" id="bloqueCanales">
+        <div class="fj-bloque-head">
+          <span class="fj-kicker">Función 2</span>
+          <h3>Las seis puertas donde un señalamiento se vuelve expediente</h3>
+        </div>
+        <p class="fj-bloque-sub">
+          Esta es la parte que sí tiene efecto jurídico, y la que casi nadie usa porque no se sabe cuál toca. Cada ficha responde lo mismo: qué investiga ese órgano, si admite denuncia anónima, qué debe tener a la mano antes de empezar y qué produce su denuncia una vez presentada. Una de las seis no es un canal de denuncia sino la herramienta para conseguir la prueba: léala primero si todavía no tiene documentos.
+        </p>
+        <div id="canalesOficialesContainer" class="canales-denuncia-list"></div>
+
+        <div class="dec-wrap" id="decalogoWrap">
+          <div class="dec-head">
+            <span class="dec-kicker">Decálogo del ciudadano auditor</span>
+            <h4>Diez reglas que hacen la diferencia entre una queja y una denuncia</h4>
+            <p>No son consignas: cada una tiene detrás una norma concreta. Están ordenadas de lo general a lo práctico, y la última es la que más se olvida.</p>
+          </div>
+          <div id="decalogoContainer" class="dec-grid"></div>
+        </div>
+      </div>
         </div>
       </section>
     </div>
@@ -147,10 +339,12 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009n</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009o</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261009n"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261009o"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261009o"></script>
+  <script src="assets/auditor/js/participa.js?v=20261009o"></script>
 </body>
 </html>

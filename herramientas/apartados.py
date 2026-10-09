@@ -25,6 +25,8 @@ import os
 import re
 import sys
 
+import participa_html
+
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E")
@@ -289,29 +291,31 @@ APARTADOS = [
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
                     'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
+        'scripts': ['audit-database.js', 'participa.js'],
         'secciones': [
             {
+                # El contenido vive aquí desde el 09-10-2026 (antes eran
+                # tarjetas que llevaban a la portada). Bloques tomados de
+                # index.html en participa_html.py; los pinta participa.js.
                 'id': 'agora',
                 'pestana': ('💬', 'Ágora cívica', 'Diálogos y argumentos con fuentes'),
                 'titulo': '💬 Ágora cívica y diálogos',
-                'texto': 'Un espacio plural para argumentar con datos.',
-                'tarjetas': [
-                    ('🌐', 'Portal Público Digital', 'Un espacio plural para contrastar posturas con fuentes y responder con argumentos.', ir('portal', 'bloquePortal'), None, None),
-                    ('✍️', 'Iniciar Nuevo Diálogo o Postura', 'Publica tu argumento con seudónimo, tu postura y tus fuentes.', ir('portal', 'portalNuevoDebateForm'), None, None),
-                    ('🗣️', 'Cuaderno de argumentos (en este navegador)', 'Consulta los argumentos ciudadanos filtrados por Presupuesto, Megaobras, Deuda y SCJN.', ir('portal', 'portalFilterBar'), None, None),
-                ],
+                'texto': 'Un espacio plural para argumentar con datos: publica tu postura con seudónimo y tus fuentes, y replica a cualquier argumento.',
+                'bloque': participa_html.PORTAL,
+                'tarjetas': [],
             },
             {
                 'id': 'garantias',
                 'pestana': ('🛡️', 'Garantías cívicas', 'Privacidad y canales de denuncia'),
                 'titulo': '🛡️ Garantías cívicas y formación',
-                'texto': 'Qué pasa con lo que escribes y a dónde llevar un señalamiento.',
-                'tarjetas': [
-                    ('🔒', 'Tu Privacidad: a Dónde Va lo que Escribes', 'Sin correos, teléfonos ni rastreo. Qué se guarda, dónde y quién lo ve, dicho sin adornos.', ir('portal', 'comOrientacion'), None, None),
-                    ('🏛️', 'Canales Oficiales de Denuncia', 'Las seis puertas donde un señalamiento se vuelve expediente: ASF, SABG, FGR, SAT, Transparencia y contralorías internas.', ir('portal', 'bloqueCanales'), None, 'inspector'),
-                    ('📜', 'Decálogo del Ciudadano Auditor', 'Diez reglas que separan una queja de una denuncia, cada una con su fundamento legal.', ir('portal', 'decalogoWrap'), None, None),
-                    ('📢', 'Reporta lo que Viste', 'Arma tu reporte con qué, dónde, cuándo y con qué prueba, y llévalo ya redactado a un canal oficial.', ir('reporta'), None, 'inspector'),
-                ],
+                'texto': 'Qué pasa con lo que escribes, cómo armar un reporte útil y a dónde llevar un señalamiento para que se vuelva expediente.',
+                'bloque': ('<div id="comOrientacion"></div>\n'
+                           '        <div class="fj-bloque" id="bloqueAportar">\n'
+                           '        <div class="fj-bloque-head"><span class="fj-kicker">Función 1</span>'
+                           '<h3>Ayúdanos a fiscalizar: comparte lo que viste</h3></div>\n'
+                           + participa_html.APORTAR + '\n        </div>\n        '
+                           + participa_html.CANALES),
+                'tarjetas': [],
             },
         ],
     },
