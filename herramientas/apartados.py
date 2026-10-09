@@ -104,7 +104,7 @@ APARTADOS = [
                 'titulo': '⚠️ Detección y riesgos ASF',
                 'texto': 'Casos documentados y listas oficiales para revisar antes de confiar.',
                 'tarjetas': [
-                    ('📂', 'Expedientes de Casos por Aclarar', 'Diez casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.', ir('verificador', 'expedientesCasos'), None, 'inspector'),
+                    ('📂', 'Expedientes de Casos por Aclarar', 'Diez casos de alto impacto: megaobras, Pemex, salud, Segalmex y deuda de los estados.', 'expedientes.html', None, 'inspector'),
                     ('🧾', '¿Tu proveedor está en la lista negra del SAT? (69-B)', '14,234 registros del listado oficial: presuntos, definitivos, desvirtuados y con sentencia favorable.', ir('efos'), None, 'inspector'),
                 ],
             },
@@ -516,7 +516,9 @@ def generar(sello=None):
     print('apartados: %d páginas generadas con el sello %s' % (len(APARTADOS), sello))
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias
-    return auditorias.generar(sello)
+    import expedientes
+    auditorias.generar(sello)
+    return expedientes.generar(sello)
 
 
 if __name__ == '__main__':

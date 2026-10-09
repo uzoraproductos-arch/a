@@ -71,8 +71,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009c">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009c">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009d">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009d">
 </head>
 <body data-pagina="auditor">
 
@@ -610,7 +610,7 @@
                 <div class="civio-equiv-val" data-no-autolink>$785.3 mdp por aclarar <span class="est-chip est-derivado">derivado</span></div>
                 <div class="civio-equiv-lbl">
                   Es lo que la <a class="glos-link" onclick="window.AuditEngine.goToGlossary('Auditoría Superior de la Federación (ASF)')">Auditoría Superior de la Federación</a> dejó sin aclarar en la construcción y el financiamiento del Tren Maya en la Cuenta Pública 2022, con 14 pliegos de observaciones. El tramo 4, Izamal-Cancún, concentra el 45 %. La cifra suma los informes individuales de ese año.
-                  <button type="button" class="pd-btn" onclick="window.AuditEngine.irAExpediente('tren-maya')">Ver el expediente y sus informes</button>
+                  <a class="pd-btn" href="expedientes.html#exp-tren-maya">Ver el expediente y sus informes</a>
                   <button type="button" class="pd-btn" onclick="window.AuditEngine.abrirFichaPericialTrenMaya()" style="margin-left: 6px; background: var(--fondo-bloque, #1e293b); color: var(--color-oro, #f59e0b); border: 1px solid var(--borde-tarjeta, #334155);"><span aria-hidden="true">&#128269;</span> Peritaje Integral 2024</button>
                 </div>
               </div>
@@ -1834,8 +1834,8 @@
            MÓDULO 4 EN TRES BLOQUES, con la mecánica de los módulos 1 a 3
            (erarioPlegToggle / erarioIr): 1 lo que encontró la ASF en el gasto
            de 2024 (renderCuentaPublica), 2 el radar por entidad
-           (renderRadarBanderasNacional) y 3 los expedientes, en lista
-           numerada de renglones que se despliegan (renderForensicDossiers).
+           (renderRadarBanderasNacional) y 3 los expedientes, que desde el
+           09-10-2026 son un enlace a su página (expedientes.html).
            Las secciones que siguen a los bloques no cambian.
            ==================================================================== -->
       <nav class="erario-indice" aria-label="Los tres bloques del Modo Inspector">
@@ -1843,7 +1843,7 @@
         <span class="erario-indice-flecha" aria-hidden="true">➜</span>
         <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('inspradar')"><span class="ei-n">2</span><span class="ei-ico" aria-hidden="true">🚩</span><span class="ei-tx"><b>Radar por entidad</b><small>Los estados con más por aclarar</small></span></button>
         <span class="erario-indice-flecha" aria-hidden="true">➜</span>
-        <button type="button" class="erario-indice-paso" onclick="window.AuditEngine.erarioIr('inspexp')"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">📂</span><span class="ei-tx"><b>Expedientes de casos</b><small>Diez casos, uno por renglón</small></span></button>
+        <a class="erario-indice-paso" href="expedientes.html" title="Abre la página de los expedientes"><span class="ei-n">3</span><span class="ei-ico" aria-hidden="true">📂</span><span class="ei-tx"><b>Expedientes de casos</b><small>Diez casos, en su página</small></span></a>
       </nav>
 
       <!-- BLOQUE 1 · QUÉ ENCONTRÓ LA ASF EN EL GASTO DE 2024 -->
@@ -1892,41 +1892,21 @@
           </div>
         </div><!-- /eb -->
 
-      <!-- BLOQUE 3 · EXPEDIENTES DE CASOS POR ACLARAR -->
+      <!-- BLOQUE 3 · EXPEDIENTES DE CASOS POR ACLARAR
+           Desde el 09-10-2026 viven en su propia página, expedientes.html
+           (herramientas/expedientes.py): la portada ya no los despliega. -->
         <div class="erario-bloque erario-pleg erario-pleg-mayor" id="eb-inspexp">
           <h3 class="erario-pleg-h">
-            <button type="button" class="erario-pleg-cab" aria-expanded="false"
-                    aria-controls="eb-cuerpo-inspexp"
-                    onclick="window.AuditEngine.erarioPlegToggle('inspexp')">
+            <a class="erario-pleg-cab" href="expedientes.html" title="Abre la página de los expedientes">
               <span class="erario-pleg-n" aria-hidden="true">3</span>
               <span class="erario-pleg-ico" aria-hidden="true">📂</span>
               <span class="erario-pleg-tx">
                 <span class="erario-pleg-tit">Expedientes de casos por aclarar</span>
-                <span class="erario-pleg-av">Diez casos de alto impacto, numerados y uno por renglón: megaobras, energía, salud, Segalmex y deuda de los estados. Filtra por tema y pulsa un caso para abrir su desglose.</span>
+                <span class="erario-pleg-av">Diez casos de alto impacto, cada uno con su expediente: megaobras, energía, salud, Segalmex y deuda de los estados. Se abren en su propia página.</span>
               </span>
-              <span class="erario-pleg-mas" aria-hidden="true">+</span>
-            </button>
+              <span class="erario-pleg-mas" aria-hidden="true">➔</span>
+            </a>
           </h3>
-          <div class="erario-pleg-cuerpo" id="eb-cuerpo-inspexp" hidden>
-            <div id="expedientesCasos">
-              <div class="forensic-header-bar" id="forensicHeaderBar">
-                <div>
-                  <span class="exp-conteo">📂 Casos en la lista: <span id="forensicCountLabel">10</span></span>
-                </div>
-                <div class="forensic-filter-chips" id="forensicFilterChips">
-                  <button type="button" class="forensic-chip-btn active" onclick="window.AuditEngine.filtrarDossiers('todos', this)">Todos</button>
-                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('megaobras', this)">Megaobras</button>
-                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('energia', this)">Energía (Pemex)</button>
-                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('salud', this)">Salud &amp; Fármacos</button>
-                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('alimentos', this)">Segalmex</button>
-                  <button type="button" class="forensic-chip-btn" onclick="window.AuditEngine.filtrarDossiers('deuda', this)">Deuda de Estados</button>
-                </div>
-              </div>
-              <ol class="exp-lista" id="forensicDossiersGrid">
-                <!-- Renderizado dinámicamente por renderForensicDossiers() -->
-              </ol>
-            </div>
-          </div>
         </div><!-- /eb -->
 
       <!-- Separador: Explorador de Entes Públicos (3 Niveles de Gobierno) -->
@@ -2517,7 +2497,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261009c</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261009d</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2661,17 +2641,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20261009c"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20261009d"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20261009c"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261009d"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261009c"></script>
-  <script src="assets/auditor/js/municipios-rendicion.js?v=20261009c"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261009d"></script>
+  <script src="assets/auditor/js/municipios-rendicion.js?v=20261009d"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20261009c"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20261009d"></script>
 
     <!-- Botón Flotante de Retroalimentación Cívica: Ayúdanos a fiscalizar -->
   <div class="floating-feedback-container">

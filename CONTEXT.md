@@ -528,6 +528,28 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**Expedientes de casos por aclarar: página propia (sello 20261009d).** Por la
+regla de AGENTS.md §5 bis, los diez expedientes dejaron de desplegarse en el
+bloque 3 del Modo Inspector y viven en `expedientes.html`, que genera
+`herramientas/expedientes.py` (lo llama `apartados.generar`, así que
+`sello.py` la regenera) y pinta `assets/auditor/js/expedientes.js` con
+`AUDIT_DB.expedientes` (estilos en `assets/auditor/css/expedientes.css`).
+La página trae:
+- un cuadro conceptual «Cómo nace un expediente» y un glosario de cuatro
+  términos, sin cifras;
+- filtro por tema e índice de tarjetas;
+- cada caso completo con ancla `#exp-<id>`: cifras con chip, barras animadas
+  de lo que quedó por aclarar en cada Cuenta Pública (derivado, suma de los
+  informes), la tabla, los informes de la ASF, «Copiar ficha con fuentes» y
+  el enlace a su página de Auditoría en imágenes cuando la hay.
+
+En la portada, el bloque 3, su paso en el índice y el tema del proemio son
+enlaces a esa página. `irAExpediente`/`expIr` y `index.html?ir=expediente&ancla=<id>`
+llevan a `expedientes.html#exp-<id>`. Del motor se quitaron `expFichaHtml`,
+`renderForensicDossiers`, `filtrarDossiers` y `expCopiar` (con sus
+exportaciones). La tarjeta de «Busca y verifica» y las páginas de Auditoría
+en imágenes ya enlazan directo.
+
 **Regla nueva: todo `pendiente` señala a la dependencia que no transparentó
 (09-10-2026, sello 20261009c).** Decisión del autor: al marcar un dato como
 pendiente no basta con decir que falta el documento oficial; hay que

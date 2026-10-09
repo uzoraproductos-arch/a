@@ -5527,7 +5527,7 @@
       n: 4, icono: '🔍', titulo: 'Modo Inspector',
       subtitulo: 'Dónde quedó el dinero que nadie ha podido explicar',
       texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
-      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'inspexp']]
+      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'expedientes.html']]
     },
     ambiente: {
       n: 5, icono: '🌎', titulo: 'Costo Ambiental',
@@ -5582,7 +5582,7 @@
         '<p class="mod-proemio-sub">' + p.subtitulo + '</p>' +
         '<div class="mod-proemio-texto"></div>' +
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
-          p.temas.map(function(t) { return Array.isArray(t) ? '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>' : '<li>' + t + '</li>'; }).join('') +
+          p.temas.map(function(t) { return !Array.isArray(t) ? '<li>' + t + '</li>' : /\.html/.test(t[1]) ? '<li class="mod-proemio-tema-ir"><a href="' + t[1] + '">' + t[0] + ' ➔</a></li>' : '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>'; }).join('') +
         '</ul>' +
         '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">← Volver al inicio</button>' +
       '</div>';
@@ -5737,7 +5737,6 @@
       renderCuentasEcologicas();
     } else if (tabKey === 'verificador') {
       renderCuentaPublica();
-      renderForensicDossiers('todos');
       renderRadarBanderasNacional();
       initInspectorExplorador();
       renderVerificadorNotas();
@@ -24818,107 +24817,10 @@
     renderInspExpediente();
   }
 
-  /* ==========================================================================
-     EXPEDIENTES FORENSES DE AUDITORIA (DOSSIERS ASF / SHCP / PEF)
-     ========================================================================== */
-  /* Las diez fichas salen de DB.expedientes (herramientas/integrar_expedientes.py):
-     cada cifra suma informes individuales de la ASF enlistados en la ficha, o
-     viene del Sistema de Alertas de la SHCP. */
-  const EXP_CATEGORIAS = { megaobras: 'Megaobras', energia: 'Energía (Pemex)', salud: 'Salud y fármacos', alimentos: 'Segalmex', deuda: 'Deuda de los estados' };
-  const EXP_ACCIONES = {
-    R: ['recomendación', 'recomendaciones'], RD: ['recomendación al desempeño', 'recomendaciones al desempeño'],
-    SA: ['solicitud de aclaración', 'solicitudes de aclaración'], PEFCF: ['aviso al SAT', 'avisos al SAT'],
-    PRAS: ['promoción de responsabilidad', 'promociones de responsabilidad'], PO: ['pliego de observaciones', 'pliegos de observaciones'],
-    DH: ['denuncia de hechos', 'denuncias de hechos']
-  };
-
-  function expAccionesTexto(a) {
-    const k = Object.keys(a || {});
-    if (!k.length) return 'sin acciones';
-    return k.map(x => a[x] + ' ' + (EXP_ACCIONES[x] ? EXP_ACCIONES[x][a[x] === 1 ? 0 : 1] : x)).join(', ');
-  }
-
-  function expFichaHtml(f, n) {
-    const cifras = '<div class="exp-cifras" data-no-autolink>' + f.cifras.map(c =>
-      '<div class="exp-cifra"><span class="exp-cifra-v num-tabular">' + pdEsc(c.valor) + '</span><span class="exp-cifra-e">' + pdEsc(c.etq) + ' ' + chipEstado(c.estado) + '</span></div>').join('') + '</div>';
-    let detalle = '';
-    if (f.anios) {
-      detalle = '<div class="pd-tabla-w" data-no-autolink><table class="pd-tabla exp-anios"><thead><tr><th>Cuenta Pública</th><th>Informes</th><th>Por aclarar</th><th>Pliegos</th><th>Promociones</th></tr></thead><tbody>' +
-        f.anios.map(a => '<tr><td>' + a.cp + '</td><td class="num-tabular">' + a.auditorias + '</td><td class="num-tabular">' + pdMdp(a.porAclarar) + '</td><td class="num-tabular">' + a.PO + '</td><td class="num-tabular">' + a.PRAS + '</td></tr>').join('') +
-        '</tbody></table></div>';
-    } else if (f.tabla) {
-      detalle = '<div class="pd-tabla-w" data-no-autolink><table class="pd-tabla exp-anios"><thead><tr><th>Estado</th><th>Deuda / ingresos libres</th><th>Deuda y obligaciones</th></tr></thead><tbody>' +
-        f.tabla.map(t => '<tr><td>' + pdEsc(t.entidad) + '</td><td class="num-tabular">' + pdPct(t.dyoIld * 100) + '</td><td class="num-tabular">' + pdMdp(t.dyo) + '</td></tr>').join('') +
-        '</tbody></table></div>';
-    }
-    const docs = f.auditorias
-      ? '<details class="exp-informes" data-no-autolink><summary>Los ' + f.auditorias.length + ' informes de la ASF, uno por uno</summary><ol>' + f.auditorias.map(a =>
-          '<li><a href="' + pdEsc(a.url) + '" target="_blank" rel="noopener noreferrer">CP ' + a.cp + ' · Auditoría ' + a.num + ' ↗</a> ' +
-          '<span>' + pdEsc(a.titulo) + ' · <i>' + pdEsc(a.ente) + '</i></span> <small>' + (a.porAclarar ? pdMdp(a.porAclarar) + ' por aclarar; ' : 'Sin monto por aclarar; ') +
-          (a.recuperado ? pdMdp(a.recuperado) + ' recuperados; ' : '') + expAccionesTexto(a.acciones) + '.</small></li>').join('') + '</ol></details>'
-      : '<ul class="exp-docs" data-no-autolink>' + f.documentos.map(d => '<li><a href="' + pdEsc(d.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(d.titulo) + ' ↗</a></li>').join('') + '</ul>';
-    const principal = f.auditorias
-      ? f.auditorias.slice().sort((x, y) => y.porAclarar - x.porAclarar)[0].url
-      : f.documentos[0].url;
-    /* Un caso por renglon: numero, tema, titulo y sus cifras en fila; el
-       desglose completo se abre al pulsarlo (details/summary). */
-    const resumen = '<span class="exp-fila-cifras" data-no-autolink>' + f.cifras.slice(0, 3).map(c =>
-      '<span class="exp-fila-cifra"><b class="num-tabular">' + pdEsc(c.valor) + '</b><small>' + pdEsc(c.etq) + '</small></span>').join('') + '</span>';
-    return '<li class="exp-fila-li"><details class="exp-fila exp-ficha" data-cat="' + f.categoria + '" id="exp-' + f.id + '">' +
-        '<summary class="exp-fila-cab" data-no-autolink>' +
-          '<span class="exp-fila-n num-tabular" aria-hidden="true">' + String(n).padStart(2, '0') + '</span>' +
-          '<span class="exp-fila-tx"><span class="forensic-id-tag">' + f.icono + ' ' + pdEsc(EXP_CATEGORIAS[f.categoria] || f.categoria) + '</span>' +
-            '<span class="exp-fila-tit">' + pdEsc(f.titulo) + '</span>' +
-            '<span class="exp-fila-ente">' + pdEsc(f.ente) + '</span></span>' +
-          resumen +
-          '<span class="exp-fila-mas" aria-hidden="true">+</span>' +
-        '</summary>' +
-        '<div class="exp-fila-cuerpo">' +
-          '<p class="exp-hallazgo">' + pdEsc(f.hallazgo) + '</p>' +
-          cifras + detalle + docs +
-          '<p class="pd-nota exp-fuente">' + chipEstado('oficial') + ' ' + pdEsc(f.fuente) + '. ' + pdEsc(f.alcance) + '</p>' +
-        '</div>' +
-        '<div class="forensic-card-actions">' +
-          '<a href="' + pdEsc(principal) + '" target="_blank" rel="noopener noreferrer" class="forensic-btn-asf" title="Abrir el documento oficial"><span>🏛️</span> ' + (f.auditorias ? 'Informe principal' : 'Documento oficial') + '</a>' +
-          '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.expCopiar(\'' + f.id + '\')"><span>📋</span> Copiar ficha con fuentes</button>' +
-        '</div>' +
-        '</div>' +
-      '</details></li>';
-  }
-
-  function expCopiar(id) {
-    const f = DB.expedientes && DB.expedientes.fichas.find(x => x.id === id);
-    if (!f) return;
-    let t = f.titulo + '\n' + f.ente + '\n\n' + f.hallazgo + '\n\n' + f.cifras.map(c => '- ' + c.valor + ': ' + c.etq + ' (' + c.estado + ')').join('\n');
-    if (f.auditorias) t += '\n\nInformes de la ASF:\n' + f.auditorias.map(a => '- CP ' + a.cp + ', auditoría ' + a.num + ' (' + a.clave + '): ' + a.titulo + '. ' + a.url).join('\n');
-    if (f.documentos) t += '\n\nDocumentos:\n' + f.documentos.map(d => '- ' + d.titulo + ': ' + d.url).join('\n');
-    t += '\n\nFuente: ' + f.fuente + '. ' + f.alcance + '\nConsultado en Auditavisión.';
-    copiarTextoPlano(t, 'Ficha copiada con sus fuentes.');
-  }
-
-  function renderForensicDossiers(cat) {
-    const container = document.getElementById("forensicDossiersGrid");
-    if (!container) return;
-    const todas = (DB.expedientes && DB.expedientes.fichas) || [];
-    if (!todas.length) {
-      container.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base no trae la colección de expedientes.</p>';
-      return;
-    }
-    const filtro = cat || "todos";
-    const lista = filtro === "todos" ? todas : todas.filter(d => d.categoria === filtro);
-    const countLabel = document.getElementById("forensicCountLabel");
-    if (countLabel) countLabel.textContent = lista.length;
-    /* El numero es el del caso en la lista completa: no cambia al filtrar. */
-    container.innerHTML = lista.map(f => expFichaHtml(f, todas.indexOf(f) + 1)).join('');
-  }
-
-  function filtrarDossiers(cat, btn) {
-    if (btn && btn.parentElement) {
-      btn.parentElement.querySelectorAll(".forensic-chip-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-    }
-    renderForensicDossiers(cat);
-  }
+  /* Los Expedientes de casos por aclarar (antes aqui: expFichaHtml,
+     renderForensicDossiers, filtrarDossiers, expCopiar) viven desde el
+     09-10-2026 en su propia pagina, expedientes.html, que pinta
+     assets/auditor/js/expedientes.js. */
 
   // ==========================================================================
   // INICIALIZACIÓN GLOBAL CON PROTECCIÓN ANTE ERRORES
@@ -24953,7 +24855,6 @@
     safeRun(() => renderJudicialAsesoresSimulator('cargos'), 'renderJudicialAsesoresSimulator');
     safeRun(() => renderJudicialGlobalesSimulator('balanza'), 'renderJudicialGlobalesSimulator');
     safeRun(() => renderReformaCosto(), 'renderReformaCosto');
-    safeRun(() => renderForensicDossiers('todos'), 'renderForensicDossiers');
     safeRun(renderCuentaPublica, 'renderCuentaPublica');
     safeRun(renderFinanzasPublicas, 'renderFinanzasPublicas');
     safeRun(renderSimuladorMegaobras, 'renderSimuladorMegaobras');
@@ -26597,21 +26498,13 @@
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   }
-  /* Abre un caso de la lista de expedientes (modulo 5, bloque 3) desde otra
-     pestaña: quita el filtro si lo ocultaba y despliega su ficha. */
+  /* Abre un caso de los Expedientes, que desde el 09-10-2026 tienen su
+     propia pagina (expedientes.html#exp-<id>). */
+  function expedienteUrl(id) {
+    return 'expedientes.html' + (id ? '#exp-' + encodeURIComponent(id) : '');
+  }
   function irAExpediente(id) {
-    seleccionarModuloExplorer('verificador');
-    setTimeout(function() {
-      let ficha = document.getElementById('exp-' + id);
-      if (!ficha) {
-        filtrarDossiers('todos', document.querySelector('.forensic-chip-btn'));
-        ficha = document.getElementById('exp-' + id);
-      }
-      erarioIr('inspexp');
-      if (!ficha) return;
-      ficha.open = true;
-      setTimeout(function() { ficha.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
-    }, 120);
+    window.location.href = expedienteUrl(id);
   }
   function compartirPlataforma() {
     if (navigator.share) {
@@ -26815,7 +26708,7 @@
     nota: function() { abrirNotaPortada(null); },
     /* Destinos de las paginas de Auditoria en imagenes: el ancla dice
        que expediente, renglon del erario, municipio o concepto abrir. */
-    expediente: function(a) { if (a) expIr(a); },
+    expediente: function(a) { window.location.replace(expedienteUrl(a)); },
     flujo: function(a) {
       if (a === 'egr-costofin') scAbrirFlujo('egresos', 'egresosChart', a);
       else if (a && /^fed-/.test(a)) scAbrirFlujo('federalizado', 'federalizadoChart', a);
@@ -27046,19 +26939,9 @@
     });
   }
 
-  /* Lleva a una ficha de Expedientes (Busqueda Forense) con el filtro en
-     «Todos», para que la ficha exista, y la resalta. */
+  /* Lleva a una ficha de Expedientes, en su pagina propia. */
   function expIr(id) {
-    var chip = document.querySelector('.forensic-chip-btn');
-    filtrarDossiers('todos', chip);
-    seleccionarModuloExplorer('verificador', 'exp-' + id);
-    var el = document.getElementById('exp-' + id);
-    if (el) {
-      if (el.tagName === 'DETAILS') el.open = true;
-      el.classList.remove('ce-destaca');
-      void el.offsetWidth;
-      el.classList.add('ce-destaca');
-    }
+    irAExpediente(id);
   }
 
   /* Abre el padron municipal en una entidad y, si se pide, la ficha de un
@@ -28169,8 +28052,6 @@
     irACalculadoraCivica: irACalculadoraCivica,
     irAAuditoriaInversiones: irAAuditoriaInversiones,
     copiarTicketCivico: copiarTicketCivico,
-    renderForensicDossiers: renderForensicDossiers,
-    filtrarDossiers: filtrarDossiers,
     updateRadarAlertaBar: updateRadarAlertaBar,
     toggleRadarStats: toggleRadarStats,
     toggleRadarDesglose: toggleRadarDesglose,
@@ -28230,7 +28111,6 @@
     renderPanelBanderasRojas: renderPanelBanderasRojas,
     abrirExpedienteEstado: abrirExpedienteEstado,
     renderRadarBanderasNacional: renderRadarBanderasNacional,
-    expCopiar: expCopiar,
     radarOrdenar: radarOrdenar,
     radarVerEstado: radarVerEstado,
   };
