@@ -200,7 +200,7 @@
       }),
       escena: { tipo: 'reparto', tit: 'El reparto de lo revisado, año por año', caja: 'La ASF', unidad: 'mdp' },
       hallazgo: f.hallazgo + ' La ampliación de la planta de LEGO que se ha anunciado no tiene todavía un documento oficial en esta plataforma: su monto queda pendiente y no se suma a ninguna cifra.',
-      pendiente: 'Inversión anunciada por LEGO en Ciénega de Flores: sin documento oficial verificado.',
+      pendiente: 'Inversión anunciada por LEGO en Ciénega de Flores: no consta en un documento oficial público. Lo tendría que transparentar el Gobierno de Nuevo León, que la anunció, junto con los apoyos que haya dado.',
       fuente: f.fuente + '. Padrón municipal: INEGI, Estadística de Finanzas Públicas Estatales y Municipales, 2024.',
       acciones: [
         { txt: '🏘️ Ver Ciénega de Flores en el padrón municipal', href: 'index.html?ir=municipio&ancla=NL-19012' },
@@ -240,7 +240,7 @@
 
   /* Huachicol fiscal: no es gasto que sale sino impuesto que no entra. Lo
      oficial es lo que el Gobierno espera cobrar; lo que otros dicen que se
-     pierde va con chip pendiente, porque ninguna autoridad ha publicado la
+     pierde va con chip pendiente, porque ni el SAT ni Hacienda han publicado la
      cifra. Por eso aqui no hay reparto sino un escenario: el lector mueve
      el porcentaje y la cuenta es una regla de tres, no una estimacion. */
   function huachicol() {
@@ -254,7 +254,7 @@
     if (cf) cont.push({ ico: '⛽', tit: 'En cada litro', v: cf.gasolina_menor_91, f: 'pesos2', etq: 'de IEPS federal por litro de gasolina menor a 91 octanos en 2026 ($' + cf.gasolina_menor_91.toFixed(4) + ' por ley, antes del estímulo fiscal)', est: 'oficial' });
     cont.push({ ico: '💰', tit: 'Lo que se espera cobrar', v: J.ieps_combustibles_2027_mdp, f: 'mdp1', etq: 'de IEPS de gasolinas y diésel en 2027 (Ley de Ingresos 2027, p. ' + J.pagina.split(' ')[0] + ')', est: J.estado });
     cont.push({ ico: '🕳️', tit: 'Cada 1 % que se evade', v: J.uno_por_ciento_mdp, f: 'mdp1', etq: 'el monto anterior entre 100', est: 'derivado' });
-    cont.push({ ico: '❓', tit: 'Cuánto se evade', txt: 'Ninguna autoridad lo ha publicado.', est: 'pendiente' });
+    cont.push({ ico: '❓', tit: 'Cuánto se evade', txt: 'El SAT y Hacienda no lo han transparentado.', est: 'pendiente' });
     var rastro = [
       { k: 'IEPS de combustibles esperado en 2027', sub: 'Lo que la Ley de Ingresos 2027 propone cobrar. Es lo que está en juego, no lo que se pierde.', v: J.ieps_combustibles_2027_mdp, url: ilif.url, est: J.estado }
     ];
@@ -269,7 +269,7 @@
       rastroTit: 'Lo que está en juego y lo que se ha dicho', rastroEst: null, rastro: rastro,
       escena: { tipo: 'fuga', tit: 'Simula la fuga: ¿y si se evadiera…?', total: J.ieps_combustibles_2027_mdp, uno: J.uno_por_ciento_mdp },
       hallazgo: 'El Gobierno lo reconoce por escrito: en la exposición de motivos de la Ley de Ingresos 2027 dice que «' + R.cita + '». Las prácticas que nombra: ' + R.practicas + '. ' + R.medida,
-      pendiente: 'Ninguna autoridad ha publicado cuánto se pierde. ' + (H.estudios ? H.estudios.texto + ' ' : '') + 'Las barras con chip pendiente son cifras que otros han dado y que aún no cotejamos en un documento oficial: se muestran para dar escala, no como dato.',
+      pendiente: 'Ni el SAT ni Hacienda han publicado cuánto se pierde: el dato sigue pendiente por falta de transparencia de esas dependencias. ' + (H.estudios ? H.estudios.texto + ' ' : '') + 'Las barras con chip pendiente son cifras que otros han dado y que aún no cotejamos en un documento oficial: se muestran para dar escala, no como dato.',
       fuente: 'Iniciativa de Ley de Ingresos de la Federación 2027 (Gaceta Parlamentaria, 8-09-2026), pp. ' + R.paginas + ' y ' + J.pagina + '; Ley del IEPS, art. 2o., fr. I, inciso D, texto vigente; Segundo Informe de Gobierno, pp. 46 y 260; estimación del Observatorio Ciudadano de Energía, pendiente de cotejo.',
       acciones: [
         { txt: '📂 Abrir el expediente completo del huachicol fiscal', href: 'index.html?ir=radar&ancla=huachicol' },
@@ -577,7 +577,7 @@
       '<div class="au-fuga-tanque" id="auFugaTanque" aria-hidden="true">' + mon + '</div>' +
       '<p class="au-fuga-res">Cada moneda es el 1 % de lo que se espera cobrar en 2027. Si se evadiera el <b id="auFugaPct2">0 %</b>, el erario dejaría de cobrar ' +
         '<b class="num-tabular" id="auFugaV">$0.0 mdp</b> al año ' + chip('derivado') + '</p>' +
-      '<p class="au-nota">🧪 Escenario hipotético: es una regla de tres (porcentaje × ' + fmt(p.escena.uno, 'mdp1') + '), no una estimación. ' + chip('pendiente') + ' Ninguna autoridad ha publicado cuánto se evade.</p>' +
+      '<p class="au-nota">🧪 Escenario hipotético: es una regla de tres (porcentaje × ' + fmt(p.escena.uno, 'mdp1') + '), no una estimación. ' + chip('pendiente') + ' El SAT y Hacienda no han publicado cuánto se evade: falta de transparencia.</p>' +
     '</div>';
   }
 

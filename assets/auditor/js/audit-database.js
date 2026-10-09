@@ -8035,7 +8035,7 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Huachicol Fiscal",
-      "definicion": "Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía, facturar menos litros de los que se venden o vender más de lo que se compró con factura. No es el robo en ductos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA. El Gobierno lo reconoce como una de las principales fuentes de evasión del IEPS en la exposición de motivos de la Ley de Ingresos 2027; ninguna autoridad ha publicado todavía cuánto se pierde.",
+      "definicion": "Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía, facturar menos litros de los que se venden o vender más de lo que se compró con factura. No es el robo en ductos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA. El Gobierno lo reconoce como una de las principales fuentes de evasión del IEPS en la exposición de motivos de la Ley de Ingresos 2027; ni el SAT ni Hacienda han publicado todavía cuánto se pierde: la cifra sigue pendiente por falta de transparencia de esas dependencias.",
       "ley": "Ley del IEPS, arts. 2o. y 2o.-A · Código Fiscal de la Federación, arts. 102 a 104 · Iniciativa de Ley de Ingresos 2027, pp. CXXI a CXXV",
       "categoria": "💰 Hacendario & Deuda"
     },
@@ -10558,7 +10558,7 @@ window.AUDIT_DB = {
         },
         {
           "q": "¿Qué es el huachicol fiscal y cómo te afecta si no tienes una gasolinera?",
-          "a": "Es vender o importar combustible sin pagar sus impuestos. No es el robo en ductos: es papel, no pico y pala. Te afecta por tres caminos, todos escritos en ley:<br>• <strong>Tú sí pagas.</strong> En 2026 cada litro de gasolina menor a 91 octanos lleva una cuota federal de IEPS de $6.7001, la de 91 octanos o más $5.6579 y el diésel $7.3634 (Ley del IEPS, art. 2o., fr. I, inciso D; el estímulo fiscal que publica Hacienda puede reducirlas).<br>• <strong>Tu estado y tu municipio reciben menos.</strong> Ese IEPS entra a la bolsa de la que sale el 20 % que se reparte a los estados (Ley de Coordinación Fiscal, art. 2o.). Además hay una cuota aparte, de 49 a 72 centavos por litro (Ley del IEPS, art. 2o.-A), de la que 9 de cada 11 pesos van a las entidades según lo que se consume en su territorio (LCF, art. 4o.-A). Litro que se vende sin impuestos, peso que no llega.<br>• <strong>El faltante se cubre con más deuda o con menos gasto.</strong><br>Cuánto se pierde: ninguna autoridad lo ha publicado. La Ley de Ingresos 2027 propone que el SAT publique sus estudios de evasión a más tardar 35 días después de cerrar 2027 (art. 30). Mientras tanto, cualquier cifra que circule es una estimación."
+          "a": "Es vender o importar combustible sin pagar sus impuestos. No es el robo en ductos: es papel, no pico y pala. Te afecta por tres caminos, todos escritos en ley:<br>• <strong>Tú sí pagas.</strong> En 2026 cada litro de gasolina menor a 91 octanos lleva una cuota federal de IEPS de $6.7001, la de 91 octanos o más $5.6579 y el diésel $7.3634 (Ley del IEPS, art. 2o., fr. I, inciso D; el estímulo fiscal que publica Hacienda puede reducirlas).<br>• <strong>Tu estado y tu municipio reciben menos.</strong> Ese IEPS entra a la bolsa de la que sale el 20 % que se reparte a los estados (Ley de Coordinación Fiscal, art. 2o.). Además hay una cuota aparte, de 49 a 72 centavos por litro (Ley del IEPS, art. 2o.-A), de la que 9 de cada 11 pesos van a las entidades según lo que se consume en su territorio (LCF, art. 4o.-A). Litro que se vende sin impuestos, peso que no llega.<br>• <strong>El faltante se cubre con más deuda o con menos gasto.</strong><br>Cuánto se pierde: ni el SAT ni Hacienda lo han publicado, y por esa falta de transparencia sigue pendiente. La Ley de Ingresos 2027 propone que el SAT publique sus estudios de evasión a más tardar 35 días después de cerrar 2027 (art. 30). Mientras tanto, cualquier cifra que circule es una estimación."
         }
       ]
     },
@@ -15350,7 +15350,7 @@ window.AUDIT_DB = {
     ]
   },
   "huachicol_fiscal": {
-    "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ninguna autoridad ha publicado todavía una cifra de lo que se pierde; lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
+    "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ni el SAT ni Hacienda han publicado todavía una cifra de lo que se pierde (falta de transparencia de las dos dependencias); lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
     "fuentes": {
       "pff25": {
         "doc": "La Jornada, «Asciende a $600 mil millones el daño por el huachicol fiscal», 3 de octubre de 2025 (comparecencia de la Procuradora Fiscal de la Federación, Grisel Galeano García, ante la Comisión de Hacienda de la Cámara de Diputados)",
@@ -15471,7 +15471,7 @@ window.AUDIT_DB = {
         "total_mdp": 123000,
         "pemex_mdp": 56000,
         "impuestos_mdp": 67000,
-        "por_que_pendiente": "Estimación de un organismo civil, no de la autoridad."
+        "por_que_pendiente": "Estimación de un organismo civil, no de la autoridad: queda pendiente porque el SAT y Hacienda no han transparentado la suya."
       },
       {
         "estado": "pendiente",
@@ -15481,7 +15481,7 @@ window.AUDIT_DB = {
         "total_mdp": 600000,
         "querellado_mdp": 16000,
         "texto": "daño al erario por huachicol fiscal que la Procuradora Fiscal de la Federación mencionó ante la Comisión de Hacienda de la Cámara de Diputados el 2 de octubre de 2025, sobre los casos en investigación; de eso, unos $16,000 mdp estaban en querellas presentadas. No es una cifra anual. El 9 de octubre, en su conferencia, la Presidenta aclaró que «no hay un dato de Secretaría de Hacienda oficial de cuánto recurso significa el contrabando de combustible» y que la cifra venía de un diputado; el secretario de Hacienda precisó que los $16,000 mdp son el saldo histórico de los casos querellados.",
-        "por_que_pendiente": "No hay documento oficial que la sostenga y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas."
+        "por_que_pendiente": "Hacienda no ha publicado un documento que la sostenga, y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas."
       }
     ]
   },
@@ -15717,7 +15717,7 @@ window.AUDIT_DB = {
       "perdida_segundo": 46.3,
       "proyeccion_tipo": "subsidio_transicion",
       "proyeccion_anios": 25,
-      "proyeccion_resumen": "El costo que el simulador consolida suma los $113,327.7 mdp que la ASF fijó como costo de cancelar el NAIM (estudio de marzo de 2021) y $88,107 mdp de construcción del AIFA, cifra esta última sin fuente oficial. La proyección de subsidio a 25 años queda pendiente de documento.",
+      "proyeccion_resumen": "El costo que el simulador consolida suma los $113,327.7 mdp que la ASF fijó como costo de cancelar el NAIM (estudio de marzo de 2021) y $88,107 mdp de construcción del AIFA, cifra esta última pendiente: no consta en un documento oficial de la Sedena, que es la dependencia obligada a transparentarla. La proyección de subsidio a 25 años sigue pendiente por la misma falta de rendición de cuentas.",
       "desglose_costos_operacion": [
         {
           "rubro": "Pago de intereses y servicio de bonos del NAIM (vía TUA AICM)",
@@ -16249,7 +16249,7 @@ window.AUDIT_DB = {
         ]
       },
       "dos-bocas": {
-        "texto": "Lo más cercano en un documento oficial: en 2024 Pemex aportó $42,696.7 mdp al capital de PTI Infraestructura de Desarrollo, la filial que construye la refinería, y la filial pagó $41,998.3 mdp sin IVA por 192 contratos (ASF, CP 2024, auditoría 247). Son pagos de construcción y arranque, no de operación. La refinería se arrienda a Pemex, que la opera: el primer tren de crudo entró en operación en febrero de 2025 y el segundo en mayo (Pemex, Cuenta Pública 2025). De septiembre de 2025 a junio de 2026 procesó en promedio 188 mil barriles diarios; su mejor mes fue diciembre de 2025, con 263 mil, el 77 % de su capacidad (Segundo Informe de Gobierno 2026, p. 378). Desde 2025 Pemex consolida a la filial sin publicar sus estados por separado, así que lo que cuesta operar la refinería y lo que deja siguen sin documento.",
+        "texto": "Lo más cercano en un documento oficial: en 2024 Pemex aportó $42,696.7 mdp al capital de PTI Infraestructura de Desarrollo, la filial que construye la refinería, y la filial pagó $41,998.3 mdp sin IVA por 192 contratos (ASF, CP 2024, auditoría 247). Son pagos de construcción y arranque, no de operación. La refinería se arrienda a Pemex, que la opera: el primer tren de crudo entró en operación en febrero de 2025 y el segundo en mayo (Pemex, Cuenta Pública 2025). De septiembre de 2025 a junio de 2026 procesó en promedio 188 mil barriles diarios; su mejor mes fue diciembre de 2025, con 263 mil, el 77 % de su capacidad (Segundo Informe de Gobierno 2026, p. 378). Desde 2025 Pemex consolida a la filial sin publicar sus estados por separado, así que lo que cuesta operar la refinería y lo que deja siguen pendientes por falta de transparencia de Pemex.",
         "desglose_titulo": "Lo que pagó en 2024 la filial que construye la refinería (ASF)",
         "desglose_estado": "oficial",
         "desglose": [
@@ -16882,7 +16882,7 @@ window.AUDIT_DB = {
           "sobrecosto_pct": "pendiente"
         },
         "definiciones": {
-          "inversion_real_mdp": "Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA que siguen sin fuente oficial."
+          "inversion_real_mdp": "Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA, pendientes porque no constan en un documento oficial de la Sedena, que debe transparentarlos."
         },
         "contradicciones": [
           "La ASF publicó en febrero de 2021 que cancelar el NAIM costó $331,996 mdp (auditoría 1394-DE, Cuenta Pública 2019) y en marzo de 2021 corrigió la cifra a $113,327.7 mdp, en un estudio que declara inconsistencias en la cuantificación original. El simulador usaba la cifra retirada.",

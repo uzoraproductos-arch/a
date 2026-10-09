@@ -2188,7 +2188,7 @@
     const reparto = ' La simulación reparte cada cifra en partes iguales entre los 365 días; el gasto real sigue su calendario.';
     if (v === 'poderes') return chipEstado('derivado') + ' Las cuatro barras son partes del mismo presupuesto 2026 y suman su gasto neto total. La del Ejecutivo se obtiene por diferencia e incluye la deuda, lo que se reparte a estados y municipios y las pensiones: no es solo el gasto de las secretarías.' + reparto;
     if (v === 'obras') return chipEstado('derivado') + ' ' + escHtml((R.obra || {}).definicion || '') + ' Los sectores son una agrupación de Auditavisión; la cifra de cada ramo es la del CSV oficial.' + reparto;
-    if (v === 'huachicol') return chipEstado('pendiente') + ' Ninguna autoridad ha publicado cuánto se evade por huachicol fiscal. La barra rayada es la cifra que se mencionó en octubre de 2025 y que la Presidencia aclaró que no es oficial: se muestra para dimensionar lo que se discutió, no entra en ninguna cuenta. La única cifra con documento es la recaudación del Segundo Informe (' + escHtml(HU.periodo || '') + ', diez meses). La Ley de Ingresos 2027 obliga al SAT a publicar su estudio de evasión (art. 30).';
+    if (v === 'huachicol') return chipEstado('pendiente') + ' Ni el SAT ni Hacienda han publicado cuánto se evade por huachicol fiscal: está pendiente por falta de transparencia de esas dependencias. La barra rayada es la cifra que se mencionó en octubre de 2025 y que la Presidencia aclaró que no es oficial: se muestra para dimensionar lo que se discutió, no entra en ninguna cuenta. La única cifra con documento es la recaudación del Segundo Informe (' + escHtml(HU.periodo || '') + ', diez meses). La Ley de Ingresos 2027 obliga al SAT a publicar su estudio de evasión (art. 30).';
     if (v === 'todos') return chipEstado('derivado') + ' Mezcla cifras de 2024 (INEGI) y 2026 (presupuesto aprobado), y una pendiente (rayada). Sirve para ver órdenes de magnitud, no para sumar.' + reparto;
     return chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.';
   }
@@ -2861,7 +2861,7 @@
         '<h3 class="pd-tit">📈 Seis años de revisiones: ' + S[0].cp + ' a ' + S[S.length - 1].cp + '</h3>' +
         '<p class="pd-lead">Cada renglón es el total de la matriz consolidada de una Cuenta Pública, con su documento y su página. En esos seis años la ASF observó ' + pdMdp(sObs) + ' y, durante las propias auditorías, se recuperaron ' + pdMdp(sRec) + ': el <b>' + pdPct(sRec / sObs * 100) + '</b>. ' + chipEstado('derivado') + '</p>' +
         '<div id="cpSerie">' + cpSerieHtml() + '</div>' +
-        '<p class="pd-nota"><b>Cómo leerla.</b> Observado = recuperado + por aclarar. Desde la Cuenta Pública 2023 la matriz ya no publica el total observado: para 2023 y 2024 se suma y se marca ' + chipEstado('derivado') + '. Los montos están en pesos de cada año, sin ajustar por inflación, y el «por aclarar» es el del corte de cada matriz: lo que se solventó después no aparece aquí. La matriz de la Cuenta Pública 2018 no está publicada en el portal de la ASF ' + chipEstado('pendiente') + '.</p>' +
+        '<p class="pd-nota"><b>Cómo leerla.</b> Observado = recuperado + por aclarar. Desde la Cuenta Pública 2023 la matriz ya no publica el total observado: para 2023 y 2024 se suma y se marca ' + chipEstado('derivado') + '. Los montos están en pesos de cada año, sin ajustar por inflación, y el «por aclarar» es el del corte de cada matriz: lo que se solventó después no aparece aquí. La matriz de la Cuenta Pública 2018 no está publicada en el portal de la ASF ' + chipEstado('pendiente') + ': queda pendiente hasta que la ASF la transparente.</p>' +
       '</section>';
 
     /* 3. Donde se concentra */
@@ -8723,7 +8723,7 @@
       filas = obras.map(function(o) {
         var p = o.perdida_anual_mdp || 0;
         return radarFila(glosEsc(o.nombre), o.perdida_pendiente ? chipEstado('pendiente') : radarMdp(p),
-          o.perdida_pendiente ? 'Sin documento oficial: pendiente, no entra en la suma.' :
+          o.perdida_pendiente ? 'Pendiente: quien la opera no ha transparentado cuánto pierde; no entra en la suma.' :
           (p ? (o.id === 'fobaproa' && esAuditor() ? 'Ramo 34 ejercido en 2024 (Cuenta Pública)' : 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0))
              : (esAuditor() && o.fuente_operacion ? 'Sin pérdida de operación en 2024: sus ingresos por servicios cubren su gasto.' : 'Sin costo de operación anual registrado en el simulador.')),
           p / mayor * 100);
@@ -8793,7 +8793,7 @@
             '</ul><p class="rc-nota"><b>Lo que no dice:</b> ' + glosEsc(A.limites) + '</p>') +
           radarSec('Lo que se ha dicho y aún no pudimos verificar', '<ul class="pd-lista">' +
             est + '</ul>') +
-          radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ninguna autoridad ha publicado todavía cuánto se pierde. ' +
+          radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ni el SAT ni Hacienda han publicado todavía cuánto se pierde: es falta de transparencia de esas dependencias. ' +
             glosEsc(S.texto) + ' ' + hf(S.fuente, S.pagina) + ' Ahí debería aparecer la primera cifra oficial, y aquí la pondremos.</p>'),
         acciones: [
           { txt: 'Ver cuánto IEPS pagas en la calculadora ➔', fn: function() { seleccionarModuloExplorer('calculadora'); } },
@@ -21288,7 +21288,7 @@
 
         (todoPend
           ? '<p class="sim-rank-cero"><strong>Sin documento todavía.</strong> ' + (sola ? 'Esta obra no tiene' : 'Ninguna de estas obras tiene') +
-            ' un estado financiero o informe oficial cotejado que diga cuánto pierde al operar, y la cifra no se estima. ' +
+            ' un estado financiero o informe oficial publicado que diga cuánto pierde al operar: es falta de transparencia de quien la opera, y la cifra no se estima. ' +
             '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.setSimuladorOrden(\'inversion\')">Mide por costo real</button>.</p>'
           : '') +
         (todoCero

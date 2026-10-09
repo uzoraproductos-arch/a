@@ -528,6 +528,23 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**Regla nueva: todo `pendiente` señala a la dependencia que no transparentó
+(09-10-2026, sello 20261009c).** Decisión del autor: al marcar un dato como
+pendiente no basta con decir que falta el documento oficial; hay que
+justificar que falta porque la dependencia responsable no lo ha
+transparentado, y nombrarla. Quedó en AGENTS.md §2. Se aplicó a la leyenda
+«Cómo leer cada cifra» (portada) y a la guía de los apartados; al huachicol
+fiscal (SAT y Hacienda) en el glosario, la pregunta frecuente, el radar, el
+expediente y su página de Auditoría en imágenes; a Dos Bocas (Pemex no
+publica los estados de la filial); al AIFA (costo de construcción y
+proyección de subsidio, Sedena); a la matriz 2018 de la ASF; a la pérdida
+de operación de las obras del simulador, y a la inversión de LEGO
+(Gobierno de Nuevo León). **No se tocó**, a propósito, lo que es falta de
+la plataforma y no de una dependencia: el simulador que «todavía no
+documenta» cada costo, los datos de entidades «sin documento citado», la
+cifra de la Ciudad de México fuera de la estadística del INEGI y las cifras
+históricas del siglo XIX. Al revisar módulos, aplica la regla caso por caso.
+
 **Regla nueva: la portada ya no despliega nada (09-10-2026).** Decisión del
 autor, asentada en AGENTS.md §5 bis: la página principal queda como está y
 todo clic lleva a una página propia. Lo que aún se despliega se irá mudando.
