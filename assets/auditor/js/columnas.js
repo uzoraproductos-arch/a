@@ -99,6 +99,170 @@
   "actualizado": "28 de agosto de 2026"
  },
  {
+  "id": "garcia-luna-testigos-y-la-ley-mexicana",
+  "seccion": "Personajes",
+  "icono": "🗣️",
+  "titulo": "García Luna y los testigos colaboradores: lo que dice la ley de cada lado",
+  "balazo": "Se repite que en Nueva York «no hubo pruebas, solo dichos de narcos» y que en México eso no valdría. Revisamos los documentos: el testimonio sí es prueba en ambos países, y la ley mexicana también premia y admite al delincuente que colabora. La diferencia real está en otra parte.",
+  "cuerpo": [
+   "Lo que consta en documento oficial: según la Fiscalía Federal del Distrito Este de Nueva York, tras un juicio de cuatro semanas en febrero de 2023, un jurado declaró a Genaro García Luna culpable de cinco cargos: empresa criminal continua, conspiración internacional para distribuir cocaína, conspiración para distribuirla y poseerla con intención de distribuirla, conspiración para importarla y declaraciones falsas. El 16 de octubre de 2024, el juez Brian M. Cogan le impuso 460 meses de prisión y una multa de 2 millones de dólares (comunicado de sentencia del Departamento de Justicia).",
+   "¿Qué pruebas se presentaron? El propio comunicado del Departamento de Justicia dice que fueron «antiguos miembros del Cártel» quienes declararon sobre dónde se entregaban los sobornos: una casa de seguridad en la Ciudad de México con dinero oculto tras una pared falsa, un autolavado en Guadalajara y un restaurante francés frente a la Embajada de Estados Unidos. Es decir, el peso central de la acusación, en la versión oficial de la fiscalía, sí recayó en testigos que fueron parte del delito. Si además se exhibieron documentos, registros o declaraciones de agentes, no lo podemos afirmar ni negar: el expediente y las transcripciones del juicio no están en un sitio oficial que hayamos podido consultar, así que ese punto queda pendiente.",
+   "Ahora bien, decir que «no hubo pruebas como tal» no se sostiene en ninguno de los dos sistemas. En Estados Unidos, la Regla 601 de las Reglas Federales de Evidencia establece que toda persona es competente para ser testigo salvo que las reglas digan otra cosa. En México, el Código Nacional de Procedimientos Penales dice que «cualquier hecho puede ser probado por cualquier medio, siempre y cuando sea lícito» (art. 259) y que todos los hechos pueden probarse «por cualquier medio pertinente» (art. 356); la «prueba testimonial» tiene su propia sección en el Código (arts. 360 y siguientes). El testimonio es prueba. La discusión honesta no es si existió, sino cuánto debe pesar.",
+   "Tampoco es exacto que en México el dicho de un delincuente que colabora no valga. La Ley Federal contra la Delincuencia Organizada lo prevé expresamente: a quien colabore eficazmente con el Ministerio Público de la Federación se le puede reducir la pena hasta en dos terceras partes, o hasta la mitad si durante el proceso aporta pruebas suficientes para sentenciar a jefes de la organización (art. 35). Y el Código Nacional permite al Ministerio Público no ejercer la acción penal contra el imputado que «aporte información esencial y eficaz para la persecución de un delito más grave» y se comprometa a declarar en juicio (art. 256, fracción V; art. 257). La figura del testigo colaborador, con beneficio a cambio, existe en ambos lados.",
+   "Donde la ley mexicana sí pone candados es en la cautela. La misma ley de delincuencia organizada ordena que el juez valore «prudentemente» la imputación que hagan los participantes en el hecho (art. 40), exige que la información del colaborador esté «sustentada en datos o medios de prueba» para que proceda el beneficio (art. 35 Bis) y, en el caso del artículo 36, que esté «corroborada por otros datos o medios de prueba». Además, el tribunal mexicano debe valorar la prueba de manera libre y lógica, explicar por escrito por qué cree o descarta cada prueba, y solo puede condenar con convicción «más allá de toda duda razonable»; la duda favorece al acusado (arts. 265, 359 y 402 del CNPP).",
+   "La conclusión justa es más modesta que la consigna. Ni el Código Nacional ni la ley de delincuencia organizada prohíben condenar con base en testigos colaboradores, ni existe en su texto una regla de «testigo único, testigo nulo»: el juez valora libremente y debe motivar. Saber si un tribunal mexicano habría condenado a García Luna con el mismo material es imposible de afirmar, entre otras cosas porque no conocemos, por documento oficial, la totalidad de lo que se presentó en Brooklyn. Lo que sí se puede decir es que el testimonio de un colaborador que busca beneficio merece examen riguroso en cualquier sistema, y que la ley mexicana lo dice con todas sus letras.",
+   "Una nota de presunción de inocencia y de rigor: esta columna no juzga la culpabilidad de nadie más mencionado en aquel juicio. Las afirmaciones que testigos hayan hecho sobre terceros no son, por sí solas, hechos probados, y aquí no se reproducen."
+  ],
+  "dato_curioso": "La Ley Federal contra la Delincuencia Organizada permite que una sentencia extranjera tenga efectos en México: la existencia de una organización delictiva se tiene por acreditada cuando la declara una sentencia judicial irrevocable de «cualquier tribunal nacional o extranjero», aunque la vinculación de cada imputado con ella se debe probar aparte (art. 41, tercer párrafo).",
+  "cifras": [
+   {
+    "valor": "460 meses",
+    "etq": "Pena de prisión impuesta a García Luna por el juez Brian M. Cogan",
+    "estado": "oficial",
+    "fuente": "Departamento de Justicia de EE.UU., Fiscalía del Distrito Este de Nueva York, comunicado de sentencia (16-10-2024)",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "valor": "≈ 38.3 años",
+    "etq": "Equivalencia en años de la pena de prisión",
+    "estado": "derivado",
+    "fuente": "Operación: 460 meses ÷ 12 = 38.33 años; dato base del comunicado de sentencia del Departamento de Justicia",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "valor": "2 millones de dólares",
+    "etq": "Multa impuesta en la sentencia",
+    "estado": "oficial",
+    "fuente": "Departamento de Justicia de EE.UU., comunicado de sentencia (16-10-2024)",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "valor": "5 cargos",
+    "etq": "Delitos por los que el jurado lo declaró culpable tras un juicio de cuatro semanas (febrero de 2023)",
+    "estado": "oficial",
+    "fuente": "Departamento de Justicia de EE.UU., comunicado de sentencia (16-10-2024)",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "valor": "Hasta 2/3",
+    "etq": "Reducción máxima de pena al colaborador investigado que aporta antecedentes contra otros miembros de la delincuencia organizada",
+    "estado": "oficial",
+    "fuente": "Ley Federal contra la Delincuencia Organizada, art. 35, fracción II (texto vigente, última reforma DOF 28-11-2025)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFCDO.pdf"
+   },
+   {
+    "valor": "Hasta 1/2",
+    "etq": "Reducción máxima de pena al imputado que, durante el proceso, aporta pruebas suficientes para sentenciar a mandos de la organización",
+    "estado": "oficial",
+    "fuente": "Ley Federal contra la Delincuencia Organizada, art. 35, fracción III",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFCDO.pdf"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Departamento de Justicia de EE.UU., Fiscalía del Distrito Este de Nueva York: «Ex-Mexican Secretary of Public Security Genaro Garcia Luna Sentenced to Over 38 Years' Imprisonment» (16-10-2024). Sitio bloqueado desde nuestro entorno; texto leído en resultados de búsqueda del dominio oficial justice.gov",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "nombre": "Código Nacional de Procedimientos Penales, arts. 256, 257, 259, 265, 356, 359, 360, 372 y 402 (Cámara de Diputados, texto vigente, última reforma DOF 28-11-2025)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf"
+   },
+   {
+    "nombre": "Ley Federal contra la Delincuencia Organizada, arts. 35, 35 Bis, 36, 40 y 41 (Cámara de Diputados, texto vigente, última reforma DOF 28-11-2025)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFCDO.pdf"
+   },
+   {
+    "nombre": "Federal Rules of Evidence, edición del 1 de diciembre de 2024, Regla 601 (Tribunales de EE.UU.). Sitio bloqueado desde nuestro entorno; texto leído en resultados de búsqueda del dominio oficial uscourts.gov",
+    "url": "https://www.uscourts.gov/sites/default/files/2025-02/federal-rules-of-evidence-dec-1-2024_0.pdf"
+   }
+  ],
+  "actualizado": "28 de noviembre de 2025"
+ },
+ {
+  "id": "garcia-luna-y-garcia-harfuch",
+  "seccion": "Personajes",
+  "icono": "🚓",
+  "titulo": "García Harfuch y la Policía Federal de García Luna: lo que dicen los documentos",
+  "balazo": "El hoy secretario de Seguridad entró a la Policía Federal Preventiva en 2008, cuando Genaro García Luna mandaba en la Secretaría de Seguridad Pública. Eso es lo que consta. Ningún documento oficial que hayamos podido revisar lo acusa de nada ni prueba una amistad.",
+  "cuerpo": [
+   "Omar García Harfuch y Genaro García Luna coincidieron en la misma institución. Eso está documentado. Que fueran amigos o que García Harfuch tenga «vínculos con el entorno García Luna» no lo está. Esta columna separa una cosa de la otra y cuenta solo lo que dicen los documentos oficiales.",
+   "Empecemos por la trayectoria. El perfil del senador Omar Hamid García Harfuch en el Sistema de Información Legislativa de la Secretaría de Gobernación (LXVI Legislatura, electo por mayoría relativa en la Ciudad de México y con licencia por tiempo indefinido desde el 30 de septiembre de 2024) registra estos cargos: en 2008, jefe de departamento de la Policía Federal Preventiva de la Secretaría de Seguridad Pública; de 2011 a 2014, coordinador de la Policía Federal en Guerrero; en 2015, titular de la División de Investigación; en 2016, director en jefe de la Agencia de Investigación Criminal de la PGR; en 2019, jefe general de la Policía de Investigación de la Procuraduría capitalina, y de 2019 a 2023, secretario de Seguridad Ciudadana de la Ciudad de México. Ten presente una advertencia que hace la propia página: la Dirección General de Información Legislativa reúne esos datos de fuentes públicas y el legislador no los ha confirmado.",
+   "Hay un detalle que conviene corregir con otro documento. El SIL ubica la División de Investigación en la PGR, pero un artículo de la Policía Federal publicado en gob.mx el 28 de noviembre de 2016 dice que esa división pertenecía a la propia Policía Federal: ahí se anuncia que el comisario general José Antonio Vega Michaca «sucede en el cargo al Licenciado Omar Hamid García Harfuch», a quien se había llamado a otro puesto de la administración pública federal. La designación la hizo el comisionado general Manelich Castilla Craviotto, por instrucción del comisionado nacional de Seguridad, Renato Sales Heredia. Es decir, García Harfuch encabezó esa división ya en el sexenio de Enrique Peña Nieto, cuando García Luna ya había dejado la Secretaría de Seguridad Pública.",
+   "Ahora, el otro lado. Según el comunicado de la Fiscalía Federal del Distrito Este de Nueva York sobre la sentencia (Departamento de Justicia de Estados Unidos, 16 de octubre de 2024), García Luna fue secretario de Seguridad Pública de 2006 a 2012 y, desde ese puesto, controlaba la Policía Federal. Un jurado lo declaró culpable en febrero de 2023 de cinco delitos: dirigir una empresa criminal continua, tres conspiraciones para traficar cocaína y falsedad de declaraciones. El juez Brian M. Cogan lo condenó a 460 meses de prisión y a una multa de 2 millones de dólares. Si cruzas esas fechas con el perfil del SIL, los periodos se traslapan: García Harfuch trabajó en la Policía Federal Preventiva desde 2008, y García Luna fue el titular de la Secretaría de la que dependía esa corporación hasta 2012. Es un dato derivado y solo dice que fue su subordinado institucional, igual que los miles de elementos que integraban esa policía. No prueba trato personal ni complicidad.",
+   "¿Quiénes sí aparecen señalados junto a García Luna? La acusación sustitutiva que presentó el Departamento de Justicia en 2020 (causa 19-576 [S-1] [BMC]) nombra como coacusados a Luis Cárdenas Palomino y a Ramón Pequeño García: los describe como altos mandos que trabajaron a sus órdenes y que habrían recibido millones de dólares en sobornos del Cártel de Sinaloa. A ellos no los han juzgado en Estados Unidos y, mientras no haya sentencia, se presumen inocentes. En el comunicado de esa acusación ni en el de la sentencia aparece el nombre de García Harfuch, y una búsqueda de «Harfuch» en justice.gov no arroja ningún documento.",
+   "En México, la Presidencia informó el 18 de octubre de 2024 que la Fiscalía General de la República tiene al menos tres investigaciones abiertas contra García Luna y que la Unidad de Inteligencia Financiera abrió otra por lavado de dinero. En ese comunicado no se menciona a García Harfuch. Te lo decimos con todas sus letras: en los documentos oficiales que pudimos abrir, ninguna autoridad de México ni de Estados Unidos lo acusa ni lo investiga por su relación con García Luna. La «amistad» y los «vínculos con su entorno» circulan en prensa y en columnas de opinión, pero no en un expediente. Mientras eso no cambie, en esta plataforma esas afirmaciones no se sostienen."
+  ],
+  "dato_curioso": "Aunque García Harfuch ganó un escaño en el Senado en 2024 y rindió protesta el 29 de agosto de ese año, según el SIL pidió licencia por tiempo indefinido el 30 de septiembre de 2024. Al día siguiente, el 1 de octubre, la Secretaría de Gobernación informó que había asumido la Secretaría de Seguridad y Protección Ciudadana.",
+  "cifras": [
+   {
+    "valor": "2008",
+    "etq": "Año en que García Harfuch ingresó como jefe de departamento a la Policía Federal Preventiva de la SSP",
+    "estado": "oficial",
+    "fuente": "Segob, Sistema de Información Legislativa, perfil del senador Omar Hamid García Harfuch (datos de fuentes públicas no confirmados por el legislador)",
+    "url": "https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910"
+   },
+   {
+    "valor": "2011–2014",
+    "etq": "Periodo como coordinador de la Policía Federal en Guerrero",
+    "estado": "oficial",
+    "fuente": "Segob, Sistema de Información Legislativa, perfil del senador Omar Hamid García Harfuch",
+    "url": "https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910"
+   },
+   {
+    "valor": "2006–2012",
+    "etq": "Años en que García Luna fue secretario de Seguridad Pública y controló la Policía Federal",
+    "estado": "oficial",
+    "fuente": "Departamento de Justicia de EE.UU., Fiscalía del Distrito Este de Nueva York, comunicado de sentencia del 16 de octubre de 2024",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "valor": "2008–2012",
+    "etq": "Años en que García Harfuch sirvió en la Policía Federal mientras García Luna encabezaba la SSP (cruce del año de ingreso según el SIL con el fin del periodo según el DOJ; precisión anual)",
+    "estado": "derivado",
+    "fuente": "Cálculo propio con el perfil del SIL (Segob) y el comunicado del DOJ del 16 de octubre de 2024",
+    "url": "https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910"
+   },
+   {
+    "valor": "460 meses",
+    "etq": "Pena de prisión impuesta a García Luna, más una multa de 2 millones de dólares",
+    "estado": "oficial",
+    "fuente": "Departamento de Justicia de EE.UU., Fiscalía del Distrito Este de Nueva York, 16 de octubre de 2024",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Segob, Sistema de Información Legislativa: perfil del senador Omar Hamid García Harfuch (LXVI Legislatura)",
+    "url": "https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910"
+   },
+   {
+    "nombre": "Policía Federal (gob.mx), «Designan nuevo Titular de la División de Investigación de la Policía Federal», 28 de noviembre de 2016",
+    "url": "https://www.gob.mx/epn%7Cpoliciafederal/articulos/designan-nuevo-titular-de-la-division-de-investigacion-de-la-policia-federal"
+   },
+   {
+    "nombre": "DOJ, Fiscalía del Distrito Este de Nueva York: sentencia de Genaro García Luna, 16 de octubre de 2024",
+    "url": "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years"
+   },
+   {
+    "nombre": "DOJ, Fiscalía del Distrito Este de Nueva York: acusación sustitutiva contra García Luna, Cárdenas Palomino y Pequeño García (comunicado)",
+    "url": "https://www.justice.gov/usao-edny/pr/former-mexican-secretary-public-security-genaro-garcia-luna-charged-engaging-continuing"
+   },
+   {
+    "nombre": "DOJ: acusación sustitutiva, causa 19-576 (S-1) (BMC) (PDF)",
+    "url": "https://www.justice.gov/usao-edny/press-release/file/1299686/dl"
+   },
+   {
+    "nombre": "Presidencia de la República, «Presidenta Claudia Sheinbaum informa investigaciones abiertas contra García Luna en UIF y FGR», 18 de octubre de 2024",
+    "url": "https://www.gob.mx/presidencia/prensa/presidenta-claudia-sheinbaum-informa-investigaciones-abiertas-contra-garcia-luna-en-uif-y-fgr"
+   },
+   {
+    "nombre": "Segob, «Asumen cargo titulares de Segob, SSPC y CJEF», 1 de octubre de 2024",
+    "url": "https://www.gob.mx/segob/prensa/asumen-cargo-titulares-de-segob-sspc-y-cjef-inicia-segundo-piso-de-la-cuarta-transformacion"
+   }
+  ],
+  "actualizado": "18 de octubre de 2024"
+ },
+ {
   "id": "abelina-lopez-lo-que-observaron-los-auditores",
   "seccion": "Personajes",
   "icono": "🔎",
@@ -1309,6 +1473,91 @@
   "tema": "Conclusión",
   "afirmacion": "Columna sobre López Beltrán, Olán y los contratos públicos.",
   "motivo": "No se escribe. No logré abrir ni un documento oficial que vincule a Olán o a su familia con contratos públicos concretos (monto, dependencia y fecha), ni ninguna investigación o resolución oficial que nombre a cualquiera de los dos. Hasta el cargo partidista de López Beltrán quedó sin confirmar en el INE, porque su portal no se pudo consultar desde este entorno. Una columna limitada a lo documentado se reduciría a un cargo sin fuente oficial abierta, y cualquier otra cosa insinuaría lo que ningún documento sostiene. Para reabrirla hacen falta: (1) el registro de integrantes del CEN de Morena ante el INE (DEPPP); (2) los contratos de Romedic en CompraNet histórico o en los portales de transparencia de los SESA de Quintana Roo y de la Secretaría de Salud de Tabasco, más el acta en SIGER; (3) la lista en PDF de Cofepris de diciembre de 2022; (4) un comunicado o expediente de FGR, SAT o UIF que nombre a las personas o a las empresas."
+ },
+ {
+  "tema": "Pruebas no testimoniales en el juicio",
+  "afirmacion": "Que en el juicio no hubo «pruebas como tal», solo dichos de delincuentes (o, en sentido contrario, que el jurado analizó bitácoras de vuelo, testimonios de agentes de la DEA y documentos patrimoniales).",
+  "motivo": "Ninguna de las dos versiones se puede sostener con documento oficial consultado. El comunicado del Departamento de Justicia solo describe testimonios de antiguos miembros del cártel; el expediente 1:19-cr-00576 (EDNY) y sus transcripciones no se pudieron abrir: justice.gov, govinfo.gov y uscourts.gov están bloqueados desde el entorno de la plataforma, y CourtListener no es fuente oficial. Falta de la plataforma, no de ninguna dependencia. Además, «no hubo pruebas» es conceptualmente falso: el testimonio es medio de prueba en ambos sistemas."
+ },
+ {
+  "tema": "Jurisprudencia de la SCJN sobre el coimputado",
+  "afirmacion": "Que la Primera Sala de la SCJN prohíbe condenar únicamente con el dicho de un coimputado sin pruebas materiales corroboratorias, y que su declaración tiene «sospecha inicial de falsedad».",
+  "motivo": "No se pudo abrir ninguna tesis en sjf2.scjn.gob.mx ni en bj.scjn.gob.mx (protección anti-bots que bloquea el acceso desde el entorno de la plataforma). Los resultados de búsqueda no mostraron una tesis específica sobre el coimputado en el sistema acusatorio. Queda pendiente por falta de la plataforma; no se atribuye omisión a la SCJN, que sí publica su Semanario."
+ },
+ {
+  "tema": "«Testis unus, testis nullus»",
+  "afirmacion": "Que en el derecho penal mexicano rige la regla de que un solo testigo no hace prueba y que el testimonio de un coimputado nunca es prueba plena por sí mismo.",
+  "motivo": "El CNPP vigente no contiene esa regla: establece valoración libre y lógica (arts. 259, 265, 359, 402). La única regla tasada que se encontró es que nadie puede ser condenado con el solo mérito de su propia declaración (art. 402), que se refiere al acusado, no a un coimputado. La exigencia de corroboración que sí existe está en la LFDO (arts. 35 Bis y 36) y se refiere a la procedencia de beneficios para el colaborador."
+ },
+ {
+  "tema": "Testimonios específicos y montos",
+  "afirmacion": "Entregas de 3 y 2 millones de dólares en el restaurante Champs-Élysées por «El Rey» Zambada; pagos mensuales de 1 a 1.5 millones vía «El Grande»; más de 10 millones aportados por «El Lobo»; observaciones de Francisco Cañedo Zavaleta.",
+  "motivo": "El comunicado de sentencia del Departamento de Justicia no nombra a los testigos ni da esos montos; solo habla de un restaurante francés frente a la Embajada de EE.UU. El comunicado de detención de 2019 menciona maletines de entre 3 y 5 millones, pero como acusación, no como hecho probado. Sin transcripción oficial accesible, no se publica (falta de la plataforma)."
+ },
+ {
+  "tema": "Dichos sobre terceros (campaña de 2006)",
+  "afirmacion": "Que «El Rey» Zambada declaró haber entregado dinero, vía Gabriel Regino, a la campaña presidencial de López Obrador en 2006.",
+  "motivo": "No se encontró en documento oficial consultado. Aun si constara en la transcripción, el dicho de un testigo sobre terceros no juzgados no es un hecho probado; publicarlo sin documento sería difamatorio y contrario a la presunción de inocencia."
+ },
+ {
+  "tema": "Frase del juez Cogan",
+  "afirmacion": "Cita textual atribuida al juez («Usted tiene una doble vida…»).",
+  "motivo": "No aparece en el comunicado oficial consultado y la transcripción de la audiencia de sentencia no estuvo accesible (falta de la plataforma). No se publica una cita textual sin documento."
+ },
+ {
+  "tema": "Instrucciones al jurado sobre testigos cooperantes",
+  "afirmacion": "Que en EE.UU. el jurado recibe instrucción de examinar con especial cautela el testimonio de cómplices cooperantes.",
+  "motivo": "Se pretendía documentar con las instrucciones modelo del Segundo Circuito y el expediente, pero uscourts.gov, ca2.uscourts.gov y govinfo.gov están bloqueados desde el entorno de la plataforma. Queda pendiente; la columna no lo afirma."
+ },
+ {
+  "tema": "Estado de la apelación",
+  "afirmacion": "Que la condena está firme o que sigue apelada ante el Segundo Circuito.",
+  "motivo": "Solo hay fuentes no oficiales (dockets de terceros y prensa) sobre la apelación 24-2949; el sitio del Segundo Circuito está bloqueado desde la plataforma. No se afirma ni se niega."
+ },
+ {
+  "tema": "Red de empresas y contratos",
+  "afirmacion": "Que empresas ligadas a García Luna obtuvieron al menos 30 contratos del CISEN y el OADPRS por 745.8 millones de dólares, y el litigio de la UIF en Miami por 600 millones.",
+  "motivo": "Fuera del tema de esta columna y sin documento oficial abierto en esta investigación; requiere consultar las resoluciones judiciales de Florida y los comunicados de la UIF/FGR antes de publicarse."
+ },
+ {
+  "tema": "Reglas de evidencia de EE.UU.",
+  "afirmacion": "Que la «doctrina probatoria dominante» en EE.UU. es la Regla 403 y el plea bargaining «transaccional».",
+  "motivo": "Caracterización sin fuente. El texto de la Regla 403 no se pudo abrir (uscourts.gov bloqueado desde el entorno de la plataforma), así que no se puede afirmar que sea la regla que rige la valoración de testigos colaboradores. Solo se verificó la Regla 601 (toda persona es competente para ser testigo)."
+ },
+ {
+  "tema": "Amistad",
+  "afirmacion": "García Harfuch y García Luna tienen o tuvieron una relación «estrecha, de amistad».",
+  "motivo": "Solo aparece en prensa y en columnas de opinión. Ningún documento oficial que revisamos (perfil del SIL, comunicados del DOJ, Presidencia, Segob y Policía Federal) habla de un trato personal entre ellos. Lo único documentado es la coincidencia institucional: uno fue elemento de la Policía Federal Preventiva y el otro, titular de la SSP. Sin documento, afirmarlo sería un dato inventado."
+ },
+ {
+  "tema": "Vínculos con el entorno de García Luna",
+  "afirmacion": "García Harfuch tiene «posibles vínculos con el entorno García Luna».",
+  "motivo": "Ningún documento oficial se lo atribuye. Los comunicados del DOJ de 2020 y 2024 nombran como coacusados solo a Luis Cárdenas Palomino y a Ramón Pequeño García, y una búsqueda de «Harfuch» en justice.gov no da resultados. Sin embargo, no pudimos abrir el PDF completo de la acusación sustitutiva porque justice.gov está bloqueado desde el entorno de la plataforma. Es una limitación nuestra, no de ninguna dependencia: lo leímos solo en los fragmentos que devuelve el buscador sobre ese dominio. Insinuar un vínculo así iría contra la presunción de inocencia."
+ },
+ {
+  "tema": "Juicio de Nueva York",
+  "afirmacion": "García Harfuch fue mencionado durante el juicio contra García Luna en Brooklyn (2023).",
+  "motivo": "No encontramos ningún documento oficial que lo diga: los comunicados del DOJ no lo nombran. Las transcripciones del juicio están en el sistema judicial de Estados Unidos y la plataforma aún no las ha consultado. Queda pendiente por falta de la plataforma, no se le atribuye a ninguna dependencia."
+ },
+ {
+  "tema": "Deslinde público",
+  "afirmacion": "García Harfuch dijo que «nunca recibió instrucciones» de García Luna y que solo lo vio «tres o cuatro veces» (enero de 2024).",
+  "motivo": "Solo lo encontramos en prensa (Expansión Política, 17 de enero de 2024), de cuando era aspirante, no funcionario. No hallamos versión estenográfica oficial en gob.mx, la SSC capitalina, el Senado ni la Cámara: varias páginas de la SSC y de presidente.gob.mx no respondieron o quedaron bloqueadas desde la plataforma. Es una limitación nuestra, no de ninguna dependencia. Queda pendiente hasta tener la transcripción oficial."
+ },
+ {
+  "tema": "Nombramiento en Guerrero",
+  "afirmacion": "García Luna nombró a García Harfuch coordinador de la Policía Federal en Guerrero en 2012.",
+  "motivo": "Solo lo dice la prensa, y las fechas no cuadran: el SIL registra el cargo de 2011 a 2014 sin decir quién lo designó, y algunos medios lo fechan en diciembre de 2012, cuando García Luna ya había dejado la SSP. No hay oficio ni comunicado oficial del nombramiento que pudiéramos revisar."
+ },
+ {
+  "tema": "Desvinculación presidencial",
+  "afirmacion": "Claudia Sheinbaum (o antes López Obrador) desvinculó públicamente a García Harfuch de García Luna.",
+  "motivo": "Solo lo encontramos en notas de prensa y columnas. No hallamos la versión estenográfica oficial: la mañanera del 25 de agosto de 2023 en presidente.gob.mx respondió 403 desde la plataforma, y en la del 9 de enero de 2026 García Harfuch no habla de García Luna. Queda pendiente por falta de la plataforma."
+ },
+ {
+  "tema": "Detención de Cárdenas Palomino en México",
+  "afirmacion": "La FGR detuvo a Luis Cárdenas Palomino en 2021 por tortura.",
+  "motivo": "El comunicado FGR 253/21 (5 de julio de 2021) informa la detención en Naucalpan de un exservidor público identificado solo como «Luis \"C\"», por probable tortura en hechos de 2012. El nombre completo sale de la prensa y la FGR lo omite, como suele hacer. Por eso no se usa en la columna para identificarlo."
  }
 ];
 
