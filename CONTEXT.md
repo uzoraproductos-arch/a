@@ -602,6 +602,14 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Nuevas imágenes de las herramientas (09-10-2026, sello 20261009w).**
+El autor entregó cuatro imágenes ilustrativas que sustituyen a las de
+`assets/auditor/img/herr-*.jpg` (mismos nombres, recortadas a 1200×670):
+plataformas petroleras para Megaobras, una pila de monedas para la
+Calculadora Cívica, un foróptero para el Modo Inspector y una refinería con
+humo para el Costo Ambiental. Se ven en las tarjetas de Herramientas, en el
+encabezado de cada `herramienta-*.html` y en la franja «Las otras herramientas».
+
 **Diccionario y glosario con página propia; nada lleva a la portada (09-10-2026, sello 20261009v).**
 Pedido del autor: los enlaces a la Enciclopedia (congelada) llegan ahora al
 Diccionario del Gasto Público, y nada saca al lector a la portada salvo el
