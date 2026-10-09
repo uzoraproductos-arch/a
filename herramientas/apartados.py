@@ -107,25 +107,24 @@ APARTADOS = [
         'lema': 'El gasto público, a la vista',
         'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
                     'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
-                    'Aquí están los cuatro módulos del auditor; elige uno y pulsa «Comenzar».'),
+                    'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.'),
         'nota': True,
         'guia': 'abajo',
         'secciones': [
             {
                 'id': 'modulos',
-                'titulo': 'Los cuatro módulos',
-                'texto': ('Elige uno y pulsa «Comenzar»: al abrirlo te contamos qué trae. '
-                          'El Circuito del Dinero ya no está aquí: se repartió, bloque por bloque, en los seis capítulos de '
-                          '<a href="sigue-el-dinero.html">Números</a>.'),
-                # Desde el 09-10-2026 la tarjeta solo lleva icono grande y
-                # titulo (decision del autor): la frase y la cifra de cada
-                # modulo se cuentan en su proemio, al pulsar «Comenzar».
+                # Desde el 09-10-2026 los modulos son «herramientas» y la
+                # seccion va sin titulo ni parrafo (decision del autor): las
+                # tarjetas, mas grandes y con su imagen, son lo principal, y
+                # cada una abre su propia pagina (HERRAMIENTAS, abajo).
+                'titulo': '',
+                'texto': '',
                 'modulos': True,
                 'tarjetas': [
-                    ('🏗️', 'Simulador de Inversión y Megaobras', '', ir('megaobras', 'moduloProemio'), None, 'obras'),
-                    ('💳', 'Calculadora Cívica', '', ir('calculadora', 'moduloProemio'), None, 'calculadora'),
-                    ('🔍', 'Modo Inspector', '', ir('verificador', 'moduloProemio'), None, 'inspector'),
-                    ('🌎', 'Costo Ambiental', '', ir('ambiente', 'moduloProemio'), None, 'ambiente'),
+                    ('🏗️', 'Simulador de Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
+                    ('💳', 'Calculadora Cívica', '', 'herramienta-calculadora.html', None, 'calculadora'),
+                    ('🔍', 'Modo Inspector', '', 'herramienta-inspector.html', None, 'inspector'),
+                    ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
                 ],
             },
         ],
@@ -397,11 +396,129 @@ APARTADOS = [
     },
 ]
 
+# Paginas de herramienta (decision del autor, 09-10-2026): cada tarjeta de
+# Herramientas abre su propia pagina. El encabezado lleva la imagen y el
+# proemio del modulo (PROEMIOS del motor: si cambia uno, cambia el otro) y
+# cada tema es una pestana que despliega su bloque en el visor, sin salir.
+# Las imagenes son ilustrativas, como en Auditoria en imagenes. La hoja
+# apartados.css las pone por rubro (.herr-foto.rubro-*), porque un url()
+# dentro de una variable se resolveria contra la carpeta de la hoja.
+HERR_IMG = {
+    'obras': 'assets/auditor/img/herr-megaobras.jpg',
+    'calculadora': 'assets/auditor/img/herr-calculadora.jpg',
+    'inspector': 'assets/auditor/img/herr-inspector.jpg',
+    'ambiente': 'assets/auditor/img/herr-ambiente.jpg',
+}
+
+# (archivo, rubro, icono, titulo, subtitulo, texto, modulo del motor, temas)
+# Cada tema: (ancla sin «eb-», icono, nombre, frase de la pestana,
+# descripcion). Un tema que es un .html es un enlace a esa pagina.
+HERRAMIENTAS = [
+    ('herramienta-megaobras.html', 'obras', '🏗️', 'Inversión y Megaobras',
+     'Lo que se prometió, lo que se pagó y la diferencia',
+     'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás '
+     'proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
+     'megaobras', [
+         ('pulso', '📊', 'El pulso del gasto', 'Costo y sobrecosto',
+          'Las cifras de referencia de las obras (costo, sobrecosto, pérdidas de operación y subsidios), por día, mes, trimestre, semestre o año.'),
+         ('sector', '🏭', 'Sector e industria', 'Obra por obra',
+          'Filtra por industria y por mandato: la comparativa de las obras, su ficha viva y contra qué se compara ese dinero.'),
+         ('sexenios', '🏛️', 'Las obras de cada sexenio', 'De 1988 a 2024',
+          'Qué megaobras le tocan a cada presidente, de 1988 a 2024, en una sola línea del tiempo.'),
+         ('cero', '🧮', 'De cero al resultado', 'Las cuentas, renglón por renglón',
+          'Las mesas de cálculo renglón por renglón, el inventario por sector y la procedencia de cada cifra, para seguir la cuenta con el dedo.'),
+     ]),
+    ('herramienta-calculadora.html', 'calculadora', '💳', 'Calculadora Cívica',
+     'Tu sueldo, tus impuestos y el rubro al que llegan',
+     'Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu '
+     'estado y tu municipio con los 2,479 del padrón nacional.',
+     'calculadora', [
+         ('ccticket', '🧾', 'Tu estado de cuenta', 'Lo que pagas y a dónde va',
+          'Escribe lo que ganas y la página saca cuatro cuentas: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y tu estado de cuenta.'),
+         ('cccompara', '⚡', 'Tú contra ellos', 'Cargo por cargo',
+          'Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.'),
+         ('ccreloj', '⏱️', 'El reloj de la deuda', 'Y de lo perdido',
+          'Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.'),
+     ]),
+    ('herramienta-inspector.html', 'inspector', '🔍', 'Modo Inspector',
+     'Dónde quedó el dinero que nadie ha podido explicar',
+     'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
+     '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
+     'verificador', [
+         ('inspasf', '🏛️', 'Qué encontró la ASF', 'El gasto de 2024',
+          'Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.'),
+         ('inspradar', '🚩', 'Radar por entidad', 'Banderas rojas',
+          'Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024, ordenados como prefieras.'),
+         ('expedientes.html', '📂', 'Expedientes de casos', 'Casos por aclarar',
+          'Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.'),
+         ('inspentes', '🏢', 'Auditor de entes públicos', 'Busca y verifica',
+          'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.'),
+         ('inspnota', '📰', 'Contrasta una nota', 'Busca y verifica',
+          '¿Leíste una cifra en una noticia, en redes o en un discurso? Ponla junto al documento oficial y ve cuánto se aleja y por qué.'),
+         ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
+          'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
+     ]),
+    ('herramienta-ambiente.html', 'ambiente', '🌎', 'Costo Ambiental',
+     'El gasto que no aparece en el recibo',
+     'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí se mide en pesos con cifras oficiales '
+     '(INEGI, SEMARNAT y Hacienda), se calcula tu parte y se compara con el presupuesto ambiental 2026-2027 y las leyes que aplican.',
+     'ambiente', [
+         ('amreloj', '⏱️', 'El reloj y el año', 'Un año en veinte segundos',
+          'El daño ambiental que corre mientras lees y una simulación que acumula, día por día, cinco comparaciones de un año entero.'),
+         ('amticket', '🧾', 'Tu ticket en negativo', 'Lo que ya te cargaron',
+          'Escribe lo que ganas y ve lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental, con tu basura en kilos.'),
+         ('ambasura', '🗑️', 'Basura y protección', 'Lo que se gasta en proteger',
+          'Un servicio municipal sin partida federal, el presupuesto ambiental 2026 y 2027, la huella de las megaobras y las leyes que aplican.'),
+         ('ampib', '📉', 'El PIB no alcanza', 'Lo que se acabó y se ensució',
+          'La cascada animada del PIB, el simulador del crecimiento real y el desglose de lo que se acabó y lo que se ensució.'),
+     ]),
+]
+
+
+def herramienta(h, n):
+    """Datos de la pagina de una herramienta, con la forma de APARTADOS."""
+    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    secciones = []
+    for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
+        pagina_propia = clave.endswith('.html')
+        secciones.append({
+            'id': clave[:-5] if pagina_propia else clave,
+            'pestana': (ico, '%d · %s' % (i, nombre), frase),
+            'titulo': nombre,
+            'texto': '',
+            'sin_cab': True,
+            'auto': not pagina_propia,
+            'tarjetas': [(ico, nombre, desc, clave if pagina_propia else ir(modulo, 'eb-' + clave), None, rubro)],
+        })
+    otras = '\n'.join(
+        '          <a class="herr-otra herr-foto rubro-%s" href="%s">'
+        '<span class="herr-otra-ico" aria-hidden="true">%s</span><span class="herr-otra-tx">%s</span></a>'
+        % (o[1], o[0], o[2], o[3]) for o in HERRAMIENTAS if o[0] != archivo)
+    return {
+        'archivo': archivo,
+        'menu': titulo,
+        'menu_archivo': 'herramientas.html',
+        'padre': ('herramientas.html', 'Herramientas'),
+        'icono': icono,
+        'titulo': titulo,
+        'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
+        'entrada': '<b>%s.</b> %s' % (sub, texto),
+        'fondo': HERR_IMG[rubro],
+        'rubro': rubro,
+        'pestanas': True,
+        'primera': True,
+        'secciones': secciones,
+        'pie_extra': ('<nav class="herr-otras" aria-label="Las otras herramientas">\n'
+                      '        <span class="herr-otras-tit">Las otras herramientas</span>\n'
+                      '        <div class="herr-otras-fila">\n%s\n        </div>\n      </nav>' % otras),
+    }
+
+
 GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
         <ol class="apartado-pasos">
-          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige un tema.</b> Cada color es uno: las obras, tus impuestos, lo que revisó la Auditoría y el ambiente.</span></li>
-          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Pulsa «Comenzar».</b> Al abrirlo te contamos qué trae; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige una herramienta y pulsa «Comenzar».</b> Cada color es un tema: las obras, tus impuestos, lo que revisó la Auditoría y el ambiente. Cada una abre su propia página y te cuenta qué trae.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Elige una pestaña.</b> Cada pestaña abre una parte de la herramienta; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
           <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> la dependencia responsable no lo ha transparentado en un documento oficial, y te decimos cuál.</span></li>
         </ol>
       </section>'''
@@ -461,14 +578,20 @@ def cabecera(actual, sello):
   </nav>''' % '\n'.join(items)
 
 
-def tarjeta(t, modulo=False):
+def tarjeta(t, modulo=False, auto=False):
     icono, nombre, desc, destino, fuente, rubro = t[:6]
     dato = t[6] if len(t) > 6 else None
     externo = destino.startswith('http')
     clase = 'apartado-tarjeta' + (' apartado-tarjeta-modulo' if modulo else '') + (' rubro-' + rubro if rubro else '')
     extra = ' target="_blank" rel="noopener noreferrer"' if externo else ''
+    if modulo and rubro in HERR_IMG:
+        clase += ' herr-foto'
+    if auto:
+        extra += ' data-auto="1"'
     titulo = ' title="%s"' % esc_attr(fuente) if fuente else ''
-    accion = 'Abrir en su sitio oficial ↗' if externo else ('Comenzar ➔' if 'moduloProemio' in destino else 'Abrir ➔')
+    accion = ('Abrir en su sitio oficial ↗' if externo else
+              'Comenzar ➔' if modulo or 'moduloProemio' in destino else
+              'Ver aquí ▾' if auto else 'Abrir ➔')
     partes = ['        <a class="%s" href="%s"%s%s>' % (clase, destino, extra, titulo),
               '          <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>' % icono,
               '          <span class="apartado-tarjeta-nombre">%s</span>' % nombre]
@@ -494,16 +617,23 @@ def pagina(a, sello):
           <div><span class="apartado-ayer-tit">📍 Hoy (2026)</span>%s</div>
         </div>''' % s['ayer']
         bloque = ('\n        <div class="apartado-bloque">\n        %s\n        </div>' % s['bloque']) if s.get('bloque') else ''
-        secciones.append('''      <section class="apartado-seccion%s" id="%s" aria-labelledby="%s-tit"%s>
+        if s.get('sin_cab'):
+            cab = '\n        <h2 class="sr-only" id="%s-tit">%s</h2>' % (s['id'], s['titulo'])
+        elif s['titulo']:
+            cab = '''
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="%s-tit">%s<span class="sr-only">%s</span>%s</h2>
           <p class="apartado-seccion-texto">%s</p>
-        </div>%s%s%s
+        </div>''' % (s['id'], num, titulo, s['titulo'], s['texto'])
+        else:
+            cab = ''
+        secciones.append('''      <section class="apartado-seccion%s" id="%s"%s%s>%s%s%s%s
       </section>''' % (' apartado-seccion-modulos' if s.get('modulos') else (' apartado-panel' if a.get('pestanas') else ''),
-                       s['id'], s['id'], ' role="tabpanel"' if a.get('pestanas') else '', s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
+                       s['id'], (' aria-labelledby="%s-tit"' % s['id']) if cab else ' aria-label="Herramientas"',
+                       ' role="tabpanel"' if a.get('pestanas') else '', cab, ayer, bloque,
                        ('\n        <div class="apartado-rejilla%s">\n%s\n        </div>' % (
-                           ' apartado-rejilla-modulos' if s.get('modulos') else '',
-                           '\n'.join(tarjeta(t, s.get('modulos')) for t in s['tarjetas'])))
+                           ' apartado-rejilla-modulos' if s.get('modulos') else (' herr-rejilla' if s.get('sin_cab') else ''),
+                           '\n'.join(tarjeta(t, s.get('modulos'), s.get('auto')) for t in s['tarjetas'])))
                        if s['tarjetas'] else ''))
 
     if a.get('pestanas'):
@@ -512,10 +642,11 @@ def pagina(a, sello):
             '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
             % ((s['id'], s['id'], s['id']) + s['pestana']) for s in a['secciones'])
-        en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
+        en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página"%s>
 %s
       </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>''' % botones
+      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>''' % (
+            ' data-primera="1"' if a.get('primera') else '', botones)
     elif len(a['secciones']) > 1:
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
             s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '', s['titulo'])
@@ -539,6 +670,12 @@ def pagina(a, sello):
     scripts = ''.join('\n  <script src="assets/auditor/js/%s?v=%s"></script>' % (js, sello) for js in a.get('scripts', []))
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
+    padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
+    cab_clase, cab_estilo = 'apartado-cab', ''
+    if a.get('fondo'):
+        cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro']
+        nota = '<span class="herr-cab-credito">Imagen ilustrativa</span>' + nota
+    pie_extra = ('\n\n      ' + a['pie_extra']) if a.get('pie_extra') else ''
 
     return '''<!DOCTYPE html>
 <!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
@@ -562,9 +699,9 @@ def pagina(a, sello):
 {cabecera}
 
   <main class="apartado" id="contenido">
-    <header class="apartado-cab">
+    <header class="{cab_clase}"{cab_estilo}>
       <div class="apartado-ancho">
-        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <span>{menu}</span></nav>
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> {padre}<span>{menu}</span></nav>
         <span class="apartado-lema">{icono} {lema}</span>
         <h1 class="apartado-titulo">{titulo}</h1>
         <p class="apartado-entrada">{entrada}</p>
@@ -575,7 +712,7 @@ def pagina(a, sello):
     <div class="apartado-ancho apartado-cuerpo">
 {en_pagina}
       {guia}
-{secciones}{guia_abajo}
+{secciones}{guia_abajo}{pie_extra}
     </div>
   </main>
 
@@ -590,7 +727,8 @@ def pagina(a, sello):
 </body>
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
-           cabecera=cabecera(a['archivo'], sello), menu=a['menu'], icono=a['icono'], lema=a['lema'],
+           cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
+           padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, icono=a['icono'], lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos,
            secciones='\n\n'.join(secciones))
 
@@ -598,7 +736,7 @@ def pagina(a, sello):
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
-    'busca-y-verifica.html': ('index.html?ir=verificador&amp;ancla=moduloProemio', 'Busca y verifica',
+    'busca-y-verifica.html': ('herramienta-inspector.html#inspentes', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
 }
 
@@ -634,10 +772,13 @@ def generar(sello=None):
     for a in APARTADOS:
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, a['archivo']), 'wb').write(texto.encode('utf-8'))
+    for n, h in enumerate(HERRAMIENTAS, 1):
+        texto = pagina(herramienta(h, n), sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, h[0]), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
         texto = redireccion(*datos).replace('\n', '\r\n')
         open(os.path.join(RAIZ, archivo), 'wb').write(texto.encode('utf-8'))
-    print('apartados: %d páginas generadas con el sello %s' % (len(APARTADOS), sello))
+    print('apartados: %d páginas y %d herramientas generadas con el sello %s' % (len(APARTADOS), len(HERRAMIENTAS), sello))
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias
     import expedientes

@@ -602,6 +602,47 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Herramientas: tarjetas con imagen y una página por herramienta (09-10-2026,
+sello 20261009r).** Pedido del autor.
+- **Menú.** Los módulos ahora se llaman herramientas.
+  - Se quitaron el título «Los cuatro módulos» y su párrafo; «elige una y
+    pulsa Comenzar» pasó al paso 1 de «Cómo se usa».
+  - Las cuatro tarjetas van en dos columnas, más grandes, con fotografía
+    ilustrativa de fondo y el icono encima (`.herr-foto.rubro-*` en
+    `apartados.css`).
+  - Imágenes: copias ligeras en `assets/auditor/img/herr-*.jpg`, tomadas de
+    `assets/img` (Tren Maya, Palacio Nacional, ciudad de noche y bosque). Van
+    marcadas «Imagen ilustrativa».
+  - Ojo: un `url()` dentro de una variable CSS se resuelve contra la carpeta
+    de la hoja; por eso la imagen se pone por clase.
+- **Páginas nuevas.** `herramienta-megaobras.html`, `-calculadora`,
+  `-inspector` y `-ambiente` (lista `HERRAMIENTAS` en `apartados.py`, que no
+  agrega pestañas al menú: siguen cinco).
+  - Encabezado con la imagen y el proemio del módulo (copia de `PROEMIOS`
+    del motor: **si cambia uno, cambia el otro**).
+  - Una pestaña por tema. La primera llega abierta y la tarjeta de cada
+    pestaña (`data-auto`) despliega su bloque en el visor sin pulsar otra
+    vez. Al pie, las otras tres herramientas.
+  - «Expedientes de casos» enlaza a `expedientes.html`.
+  - `busca-y-verifica.html` ahora redirige a `herramienta-inspector.html#inspentes`.
+- **Motor.** `visorFoco()` deja visibles las herramientas de «Busca y
+  verifica»: su ancla es un rótulo `.insp-sep` y la herramienta son los
+  hermanos que le siguen.
+- **Nota «Qué son las finanzas públicas».** Ya no lleva a la portada: se
+  abre en la ventana lateral, más ancha (`.glos-drawer-ancha`, 760 px).
+  - Cifras de la base con su chip y su fuente (PEF 2026, anexos 1 y 8; ASF,
+    Matriz de Datos Básicos CP 2024). `audit-database.js` se carga solo al
+    abrir la nota.
+  - Sus conceptos (gasto público, hacienda pública) se leen ahí mismo, con
+    regreso a la nota.
+  - El logotipo suma el botón a la nota. Copia de `abrirNotaPortada()`, con
+    la lista de lugares al día.
+- **Cabecera.** Se corrigió un bucle: al encogerse, el anclaje del
+  desplazamiento subía la página y la volvía a agrandar. Ahora solo crece
+  arriba del todo, y se mide ya compacta antes de desplazarse.
+- Pendiente (§5 bis): los temas siguen cargando los módulos de la portada
+  en el visor. Ya tienen página propia, pero el código vive en el motor.
+
 **Números en pestañas y el libro como nota de referencia (09-10-2026, sello
 20261009q).** El autor pidió para Números lo mismo que en Datos, Aprende y
 Participa.

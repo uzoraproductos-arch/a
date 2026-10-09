@@ -35,13 +35,30 @@
   var compacta = false;
   function revisar() {
     var y = window.pageYOffset || 0;
-    var nueva = compacta ? y > 10 : y > 120;
+    /* Compacta, solo vuelve a crecer arriba del todo: la cabecera va en el
+       flujo y al encogerse el navegador sube la página lo mismo que se
+       encogió (anclaje del desplazamiento); con un umbral mayor que cero
+       eso la hacía crecer y encogerse sin parar. */
+    var nueva = compacta ? y > 0 : y > 120;
     if (nueva !== compacta) {
       compacta = nueva;
       document.body.classList.toggle('cabecera-compacta', compacta);
     }
   }
   window.addEventListener('scroll', revisar, { passive: true });
+  /* Encoge la cabecera sin animación y devuelve su alto ya compacta, para
+     calcular bien a dónde desplazarse. */
+  function compactar() {
+    compacta = true;
+    if (!nav) { document.body.classList.add('cabecera-compacta'); return 0; }
+    var antes = nav.style.transition;
+    nav.style.transition = 'none';
+    document.body.classList.add('cabecera-compacta');
+    var alto = nav.getBoundingClientRect().height;
+    void nav.offsetHeight;
+    nav.style.transition = antes;
+    return alto;
+  }
   revisar();
 
   /* Al llegar con #ancla, la cabecera se encoge despues del salto y el
@@ -64,9 +81,7 @@
     var pista = document.getElementById('pestanasPista');
     if (pista) pista.hidden = !!pestanaAbierta;
     if (pestanaAbierta && desplazar) {
-      compacta = true;
-      document.body.classList.add('cabecera-compacta');
-      var alto = nav ? nav.getBoundingClientRect().height : 0;
+      var alto = compactar();
       var y = pestanas.getBoundingClientRect().top + window.pageYOffset - alto - 8;
       window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
@@ -74,7 +89,13 @@
   }
   if (pestanas) {
     var inicial = decodeURIComponent(location.hash.slice(1));
-    abrirPestana(pestanas.querySelector('[aria-controls="' + inicial + '"]') ? inicial : null, false);
+    /* En las páginas de herramienta (data-primera) la primera pestaña ya
+       llega abierta. */
+    if (!pestanas.querySelector('[aria-controls="' + inicial + '"]')) {
+      var primera = pestanas.getAttribute('data-primera') && pestanas.querySelector('.apartado-pestana');
+      inicial = primera ? primera.getAttribute('aria-controls') : null;
+    }
+    abrirPestana(inicial, false);
     pestanas.addEventListener('click', function (e) {
       var t = e.target.closest('.apartado-pestana');
       if (!t) return;
@@ -175,7 +196,7 @@
     [300, 1200, 2800].forEach(function (ms) { setTimeout(medir, ms); });
   }
 
-  function abrirVisor(t) {
+  function abrirVisor(t, quieto) {
     var href = t.getAttribute('href');
     var nombre = (t.querySelector('.apartado-tarjeta-nombre') || t).textContent.trim();
     cerrarVisor(false);
@@ -214,10 +235,9 @@
 
     /* La cabecera se encoge al bajar: se mide ya compacta para que no tape
        el visor. */
-    compacta = true;
-    document.body.classList.add('cabecera-compacta');
-    var alto = nav ? nav.getBoundingClientRect().height : 0;
+    var alto = compactar();
     visor.style.setProperty('--visor-alto', 'calc(100vh - ' + Math.round(alto + 24) + 'px)');
+    if (quieto) return;
     var y = visor.getBoundingClientRect().top + window.pageYOffset - alto - 8;
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     setTimeout(function () {
@@ -236,88 +256,219 @@
     if (tarjetaAbierta === t) cerrarVisor(true); else abrirVisor(t);
   });
 
+  /* Páginas de herramienta: la tarjeta de la pestaña (data-auto) despliega
+     su visor sola al abrir la pestaña; el lector no tiene que pulsar dos
+     veces. Cerrarlo deja la tarjeta para volver a abrirlo. */
+  function visorDePestana(id) {
+    var panel = id && document.getElementById(id);
+    var t = panel && panel.querySelector('a.apartado-tarjeta[data-auto]');
+    if (t && tarjetaAbierta !== t) abrirVisor(t, true);
+  }
+  document.addEventListener('apartado:pestana', function (e) { visorDePestana(e.detail && e.detail.id); });
+  visorDePestana(pestanaAbierta);
+
   /* El auditor, en el visor, pide cerrarlo con postMessage. */
   window.addEventListener('message', function (e) {
     if (e.origin !== window.location.origin || !e.data || e.data.auditavision !== 'cerrar-visor') return;
     cerrarVisor(true);
   });
-  /* El logotipo abre la presentación «Quiénes somos» en la ventana lateral,
-     sin salir de la página (decisión del autor, 09-10-2026). Es el mismo
-     texto que abrirPresentacion() del motor, que estas páginas no cargan:
-     si cambia uno, cambia el otro. */
+  /* Ventana lateral de estas páginas (decisión del autor, 09-10-2026): el
+     logotipo abre la presentación «Quiénes somos» y el enlace «Qué son las
+     finanzas públicas» abre su nota, más ancha, sin salir de la página.
+     Son el mismo texto que abrirPresentacion() y abrirNotaPortada() del
+     motor, que estas páginas no cargan: si cambia uno, cambia el otro. */
   var logo = document.getElementById('apartadoPresentacion');
-  var presOv = null, presDr = null, presOrigen = null;
+  var cajOv = null, cajDr = null, cajOrigen = null;
   function chip(e) { return '<span class="est-chip est-' + e + '">' + e + '</span>'; }
   function sec(tit, h) { return '<section class="glos-drawer-sec"><h4>' + tit + '</h4>' + h + '</section>'; }
-  function cerrarPresentacion() {
-    if (!presDr || !presDr.classList.contains('abierto')) return;
-    presDr.classList.remove('abierto');
-    presOv.classList.remove('abierto');
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function cerrarCajon() {
+    if (!cajDr || !cajDr.classList.contains('abierto')) return;
+    cajDr.classList.remove('abierto');
+    cajOv.classList.remove('abierto');
     document.body.classList.remove('glos-drawer-bloqueo');
-    if (presOrigen && presOrigen.focus) { try { presOrigen.focus({ preventScroll: true }); } catch (err) { /* sin foco */ } }
+    if (cajOrigen && cajOrigen.focus) { try { cajOrigen.focus({ preventScroll: true }); } catch (err) { /* sin foco */ } }
   }
-  function abrirPresentacion() {
-    if (!presDr) {
-      presOv = document.createElement('div');
-      presOv.className = 'glos-drawer-overlay';
-      presOv.addEventListener('click', cerrarPresentacion);
-      presDr = document.createElement('aside');
-      presDr.className = 'glos-drawer';
-      presDr.setAttribute('role', 'dialog');
-      presDr.setAttribute('aria-modal', 'true');
-      presDr.setAttribute('aria-labelledby', 'presTitulo');
-      var palabras = [
-        ['Audita', 'de <i>auditar</i>: revisar con método que lo que se gastó corresponda a lo que se autorizó y a lo que se comprobó.'],
-        ['visión', 'mirar el conjunto, de la Federación a los estados y municipios, y hacerlo visible para quien no lee informes técnicos.'],
-        ['Sistema', 'no son notas sueltas: ingresos, egresos, transferencias, deuda y Cuenta Pública son piezas conectadas que se leen juntas.'],
-        ['Cívico', 'lo construye y lo usa la ciudadanía. No es una autoridad ni sustituye a la Auditoría Superior de la Federación ni a las contralorías.'],
-        ['Fiscalización', 'la revisión del uso de los recursos públicos. La oficial la hacen la ASF (art. 79 constitucional) y las entidades de fiscalización de los estados (art. 116, fr. II); la ciudadana la complementa: consulta, compara, pregunta y denuncia.']
-      ];
-      var principios = [
-        ['Fuente antes que opinión', 'cada cifra se rastrea a su documento oficial: DOF, SHCP, ASF, INEGI, Banxico, Gaceta Parlamentaria.'],
-        ['Honestidad del dato', 'cada cifra dice si es ' + chip('oficial') + ', ' + chip('derivado') + ' o ' + chip('pendiente') + '.'],
-        ['Método a la vista', 'si una cifra se calcula, se dice la operación para que cualquiera la repita.'],
-        ['Claridad con rigor', 'se explica en lenguaje llano, sin simplificar lo que la ley dice.'],
-        ['Memoria', 'las normas y estructuras derogadas se marcan con su vigencia en lugar de borrarse.']
-      ];
-      var compromisos = [
-        'No inventar ni redondear a ojo: lo que no se puede verificar se queda como <b>pendiente</b>.',
-        'Poner el documento a tu alcance para que lo verifiques por tu cuenta.',
-        'Corregir a la vista cuando se encuentre un error. El sello de versión al pie de la página dice qué copia está leyendo.',
-        'Orientar hacia los canales oficiales de denuncia, sin suplantar a ninguna autoridad.'
-      ];
-      presDr.innerHTML =
-        '<header class="glos-drawer-cab">' +
-          '<span class="glos-drawer-marca"><span aria-hidden="true">👋</span> Quiénes somos</span>' +
-          '<button type="button" class="glos-drawer-x" aria-label="Cerrar la presentación">✕</button>' +
-        '</header>' +
-        '<div class="glos-drawer-cuerpo">' +
-          '<img class="pres-logo" src="assets/auditor/img/logo-auditavision.svg" alt="" width="200" height="156">' +
-          '<span class="glos-drawer-cat">Presentación</span>' +
-          '<h3 id="presTitulo" class="glos-drawer-tit">Auditavisión, Sistema Cívico de Fiscalización</h3>' +
-          '<p class="pres-lema">Una plataforma ciudadana que explica, con los documentos oficiales en la mano, de dónde sale el dinero público, en qué se gasta y qué encontró quien lo revisó.</p>' +
-          sec('El nombre, palabra por palabra', '<dl class="pres-palabras">' + palabras.map(function (w) { return '<dt>' + w[0] + '</dt><dd>' + w[1] + '</dd>'; }).join('') + '</dl>') +
-          sec('Propósito', '<p>Que cualquier persona pueda seguir el rastro de un peso público, desde que se cobra hasta que se gasta y se audita, y convertir una duda en una pregunta bien hecha: una solicitud de información, una denuncia o un voto informado.</p>') +
-          sec('Principios', '<ol class="pres-lista">' + principios.map(function (x) { return '<li><b>' + x[0] + ':</b> ' + x[1] + '</li>'; }).join('') + '</ol>') +
-          sec('Compromisos', '<ul class="rc-plazos">' + compromisos.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>') +
-          sec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 6º, apartado A (derecho de acceso a la información pública), art. 8º (derecho de petición), art. 79 (fiscalización superior de la Federación) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
-        '</div>' +
-        '<footer class="glos-drawer-pie">' +
-          '<a class="glos-drawer-todo" href="index.html" style="text-align:center; text-decoration:none;">⚡ Ir a la página principal ➔</a>' +
-        '</footer>';
-      presDr.querySelector('.glos-drawer-x').addEventListener('click', cerrarPresentacion);
-      document.body.appendChild(presOv);
-      document.body.appendChild(presDr);
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarPresentacion(); });
+  /* Pinta html en la ventana y la abre. ancha: la nota de finanzas. */
+  function cajon(html, titulo, ancha) {
+    if (!cajDr) {
+      cajOv = document.createElement('div');
+      cajOv.className = 'glos-drawer-overlay';
+      cajOv.addEventListener('click', cerrarCajon);
+      cajDr = document.createElement('aside');
+      cajDr.setAttribute('role', 'dialog');
+      cajDr.setAttribute('aria-modal', 'true');
+      document.body.appendChild(cajOv);
+      document.body.appendChild(cajDr);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarCajon(); });
     }
-    presOrigen = document.activeElement;
+    if (!cajDr.classList.contains('abierto')) cajOrigen = document.activeElement;
+    cajDr.className = 'glos-drawer' + (ancha ? ' glos-drawer-ancha' : '');
+    cajDr.setAttribute('aria-labelledby', titulo);
+    cajDr.innerHTML = html;
+    cajDr.querySelector('.glos-drawer-x').addEventListener('click', cerrarCajon);
     menu(false);
-    presOv.classList.add('abierto');
-    presDr.classList.add('abierto');
+    cajOv.classList.add('abierto');
+    /* Un cuadro antes de abrir, para que se vea deslizar. */
+    void cajDr.offsetWidth;
+    cajDr.classList.add('abierto');
     document.body.classList.add('glos-drawer-bloqueo');
-    presDr.querySelector('.glos-drawer-cuerpo').scrollTop = 0;
-    var x = presDr.querySelector('.glos-drawer-x');
+    cajDr.querySelector('.glos-drawer-cuerpo').scrollTop = 0;
+    var x = cajDr.querySelector('.glos-drawer-x');
     setTimeout(function () { x.focus(); }, 30);
+    return cajDr;
+  }
+  function cabCajon(ico, marca, cerrar) {
+    return '<header class="glos-drawer-cab">' +
+      '<span class="glos-drawer-marca"><span aria-hidden="true">' + ico + '</span> ' + marca + '</span>' +
+      '<button type="button" class="glos-drawer-x" aria-label="' + cerrar + '">✕</button>' +
+    '</header>';
+  }
+
+  function abrirPresentacion() {
+    var palabras = [
+      ['Audita', 'de <i>auditar</i>: revisar con método que lo que se gastó corresponda a lo que se autorizó y a lo que se comprobó.'],
+      ['visión', 'mirar el conjunto, de la Federación a los estados y municipios, y hacerlo visible para quien no lee informes técnicos.'],
+      ['Sistema', 'no son notas sueltas: ingresos, egresos, transferencias, deuda y Cuenta Pública son piezas conectadas que se leen juntas.'],
+      ['Cívico', 'lo construye y lo usa la ciudadanía. No es una autoridad ni sustituye a la Auditoría Superior de la Federación ni a las contralorías.'],
+      ['Fiscalización', 'la revisión del uso de los recursos públicos. La oficial la hacen la ASF (art. 79 constitucional) y las entidades de fiscalización de los estados (art. 116, fr. II); la ciudadana la complementa: consulta, compara, pregunta y denuncia.']
+    ];
+    var principios = [
+      ['Fuente antes que opinión', 'cada cifra se rastrea a su documento oficial: DOF, SHCP, ASF, INEGI, Banxico, Gaceta Parlamentaria.'],
+      ['Honestidad del dato', 'cada cifra dice si es ' + chip('oficial') + ', ' + chip('derivado') + ' o ' + chip('pendiente') + '.'],
+      ['Método a la vista', 'si una cifra se calcula, se dice la operación para que cualquiera la repita.'],
+      ['Claridad con rigor', 'se explica en lenguaje llano, sin simplificar lo que la ley dice.'],
+      ['Memoria', 'las normas y estructuras derogadas se marcan con su vigencia en lugar de borrarse.']
+    ];
+    var compromisos = [
+      'No inventar ni redondear a ojo: lo que no se puede verificar se queda como <b>pendiente</b>.',
+      'Poner el documento a tu alcance para que lo verifiques por tu cuenta.',
+      'Corregir a la vista cuando se encuentre un error. El sello de versión al pie de la página dice qué copia está leyendo.',
+      'Orientar hacia los canales oficiales de denuncia, sin suplantar a ninguna autoridad.'
+    ];
+    var dr = cajon(
+      cabCajon('👋', 'Quiénes somos', 'Cerrar la presentación') +
+      '<div class="glos-drawer-cuerpo">' +
+        '<img class="pres-logo" src="assets/auditor/img/logo-auditavision.svg" alt="" width="200" height="156">' +
+        '<span class="glos-drawer-cat">Presentación</span>' +
+        '<h3 id="presTitulo" class="glos-drawer-tit">Auditavisión, Sistema Cívico de Fiscalización</h3>' +
+        '<p class="pres-lema">Una plataforma ciudadana que explica, con los documentos oficiales en la mano, de dónde sale el dinero público, en qué se gasta y qué encontró quien lo revisó.</p>' +
+        sec('El nombre, palabra por palabra', '<dl class="pres-palabras">' + palabras.map(function (w) { return '<dt>' + w[0] + '</dt><dd>' + w[1] + '</dd>'; }).join('') + '</dl>') +
+        sec('Propósito', '<p>Que cualquier persona pueda seguir el rastro de un peso público, desde que se cobra hasta que se gasta y se audita, y convertir una duda en una pregunta bien hecha: una solicitud de información, una denuncia o un voto informado.</p>') +
+        sec('Principios', '<ol class="pres-lista">' + principios.map(function (x) { return '<li><b>' + x[0] + ':</b> ' + x[1] + '</li>'; }).join('') + '</ol>') +
+        sec('Compromisos', '<ul class="rc-plazos">' + compromisos.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>') +
+        sec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 6º, apartado A (derecho de acceso a la información pública), art. 8º (derecho de petición), art. 79 (fiscalización superior de la Federación) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        '<a class="glos-drawer-todo" href="index.html" style="text-align:center; text-decoration:none;">⚡ Ir a la página principal ➔</a>' +
+        '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-finanzas="1">📖 Qué son las finanzas públicas ➔</button>' +
+      '</footer>', 'presTitulo', false);
+    dr.querySelector('[data-finanzas]').addEventListener('click', abrirFinanzas);
   }
   if (logo) logo.addEventListener('click', abrirPresentacion);
+
+  /* «Qué son las finanzas públicas y qué encontrarás aquí». Las cifras se
+     leen de la base (audit-database.js), que se carga al pedir la nota en
+     las páginas que no la traen. */
+  var baseCargando = false;
+  function conBase(fn) {
+    if (window.AUDIT_DB) { fn(window.AUDIT_DB); return; }
+    if (baseCargando) return;
+    baseCargando = true;
+    var propio = document.querySelector('script[src*="apartados.js"]');
+    var v = propio && propio.getAttribute('src').split('?')[1];
+    var s = document.createElement('script');
+    s.src = 'assets/auditor/js/audit-database.js' + (v ? '?' + v : '');
+    s.onload = function () { baseCargando = false; if (window.AUDIT_DB) fn(window.AUDIT_DB); else s.onerror(); };
+    s.onerror = function () {
+      baseCargando = false;
+      var c = cajDr && cajDr.querySelector('.glos-drawer-cuerpo');
+      if (c) c.innerHTML = '<p>No se pudo cargar la base de datos de la plataforma. Revisa tu conexión y vuelve a intentarlo.</p>';
+    };
+    document.head.appendChild(s);
+  }
+  function billones(mdp) {
+    return '$' + (mdp / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' billones';
+  }
+  function fuente(txt) { return ' <span class="fin-fuente">(' + txt + ')</span>'; }
+  function abrirFinanzas(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    cajon(cabCajon('📖', 'Qué significa', 'Cerrar la nota') +
+      '<div class="glos-drawer-cuerpo"><h3 id="finTitulo" class="glos-drawer-tit">Las finanzas públicas</h3>' +
+      '<p role="status">⏳ Cargando las cifras con sus fuentes…</p></div>', 'finTitulo', true);
+    conBase(pintarFinanzas);
+  }
+  function pintarFinanzas(DB) {
+    var P = DB.panoramaErario || {};
+    var fed = (P.federalizado && P.federalizado.totalMdp) || 0;
+    var cf = ((P.egresos || []).filter(function (x) { return x.id === 'egr-costofin'; })[0] || {}).montoMdp || 0;
+    var cp = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024 ? DB.cuenta_publica_asf.cp2024 : null;
+    var mdp = function (v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' millones'; };
+    var lugares = [
+      ['⚖️', 'Números', 'sigue-el-dinero.html', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos), cómo llega a estados y municipios y cuánto se debe.'],
+      ['🏗️', 'Inversión y Megaobras', 'herramienta-megaobras.html', 'cuánto costaron las grandes obras y cuánto cuesta mantenerlas.'],
+      ['💳', 'Calculadora Cívica', 'herramienta-calculadora.html', 'lo que pagas de impuestos según tu ingreso y a qué rubros equivale.'],
+      ['🔍', 'Modo Inspector', 'herramienta-inspector.html', 'lo que la Auditoría Superior revisó y lo que quedó por aclarar.'],
+      ['🌎', 'Costo Ambiental', 'herramienta-ambiente.html', 'lo que el deterioro del ambiente cuesta y lo que se destina a protegerlo.'],
+      ['📊', 'Datos', 'descarga-los-datos.html', 'las bases para descargar, el radar hacendario y los informes oficiales.']
+    ];
+    var dr = cajon(cabCajon('📖', 'Qué significa', 'Cerrar la nota') +
+      '<div class="glos-drawer-cuerpo">' +
+        '<span class="glos-drawer-cat">⚖️ Fiscalización ciudadana del gasto público</span>' +
+        '<h3 id="finTitulo" class="glos-drawer-tit">Las finanzas públicas</h3>' +
+        sec('Qué son', '<p>Todo lo que hace el Estado con el dinero público: <b>cómo lo obtiene</b> (impuestos, derechos, ventas de sus empresas y deuda), <b>en qué decide gastarlo</b> (el presupuesto), <b>cómo lo reparte</b> entre la Federación, los estados y los municipios, y <b>cómo rinde cuentas</b> de lo que gastó (la Cuenta Pública y sus auditorías).</p>') +
+        sec('Por qué importan', '<p>Cada año el Congreso aprueba cuánto se cobra y en qué se gasta.</p>' +
+          '<ul class="rc-plazos fin-cifras">' +
+            '<li>' + chip('oficial') + ' En 2026 el Presupuesto de Egresos es de <b>' + billones(P.totalPEF || 0) + '</b>.' + fuente('PEF 2026, DOF') + '</li>' +
+            '<li>' + chip('oficial') + ' De ellos, <b>' + billones(fed) + '</b> viajan a los 32 estados y a sus municipios.' + fuente('PEF 2026, Anexo 1') + '</li>' +
+            '<li>' + chip('oficial') + ' Y <b>' + billones(cf) + '</b> pagan el costo de la deuda.' + fuente('PEF 2026, Anexo 8') + '</li>' +
+            (cp && cp.total ? '<li>' + chip('oficial') + ' Al revisar la Cuenta Pública 2024, la Auditoría Superior dejó <b>' + mdp(cp.total.porAclarar / 1e6) + '</b> por aclarar.' + fuente('ASF, Matriz de Datos Básicos de la Cuenta Pública 2024, p. ' + esc(cp.pagina) + ', corte ' + esc(cp.corte)) + '</li>' : '') +
+          '</ul>' +
+          '<p>Entender ese recorrido es el primer paso para pedir cuentas con datos.</p>') +
+        sec('Qué encontrarás aquí', '<ul class="rc-plazos fin-lugares">' + lugares.map(function (m) {
+          return '<li>' + m[0] + ' <a href="' + m[2] + '"><b>' + m[1] + '</b></a>: ' + m[3] + '</li>';
+        }).join('') + '</ul>' +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y el detalle de cada tema está la Enciclopedia Interactiva.</p>') +
+        sec('Cómo leer las cifras', '<ul class="rc-plazos">' +
+          '<li>' + chip('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
+          '<li>' + chip('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
+          '<li>' + chip('pendiente') + ' la dependencia responsable no la ha transparentado en un documento oficial, y te decimos cuál.</li>' +
+        '</ul>') +
+        sec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 31 fr. IV (la obligación de contribuir al gasto público), art. 74 fr. IV y VI (la Cámara de Diputados aprueba el presupuesto y revisa la Cuenta Pública) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        '<button type="button" class="glos-drawer-todo" data-g="Gasto Público">📗 Qué es el gasto público ➔</button>' +
+        '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="Hacienda Pública">📗 Qué es la hacienda pública ➔</button>' +
+        '<a class="glos-drawer-todo glos-drawer-todo-2" href="enciclopedia.html" style="text-align:center; text-decoration:none;">📚 Abrir la Enciclopedia Interactiva ➔</a>' +
+      '</footer>', 'finTitulo', true);
+    Array.prototype.forEach.call(dr.querySelectorAll('[data-g]'), function (b) {
+      b.addEventListener('click', function () { pintarTermino(DB, b.getAttribute('data-g')); });
+    });
+  }
+  /* Un término del glosario, en la misma ventana, con regreso a la nota. */
+  function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim(); }
+  function pintarTermino(DB, termino) {
+    var q = norm(termino);
+    var g = (DB.glosario || []).filter(function (x) { return norm(x.termino) === q; })[0];
+    if (!g) return;
+    var ancla = norm(g.termino.split(' (')[0]).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    var dr = cajon(cabCajon('📗', 'Glosario', 'Cerrar el glosario') +
+      '<div class="glos-drawer-cuerpo">' +
+        (g.categoria ? '<span class="glos-drawer-cat">' + esc(g.categoria) + '</span>' : '') +
+        '<h3 id="glosTermTitulo" class="glos-drawer-tit">' + esc(g.termino) + '</h3>' +
+        sec('Qué significa', '<p>' + g.definicion + '</p>') +
+        (g.ley ? sec('Fundamento', '<p class="glos-drawer-ley">' + esc(g.ley) + '</p>') : '') +
+      '</div>' +
+      '<footer class="glos-drawer-pie">' +
+        '<button type="button" class="glos-drawer-todo" data-volver="1">← Volver a la nota</button>' +
+        '<a class="glos-drawer-todo glos-drawer-todo-2" href="index.html?ir=glosario&amp;ancla=' + ancla + '" style="text-align:center; text-decoration:none;">📖 Ver todo el glosario ➔</a>' +
+      '</footer>', 'glosTermTitulo', true);
+    dr.querySelector('[data-volver]').addEventListener('click', function () { pintarFinanzas(DB); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('a.apartado-nota[href="index.html?ir=nota"]'), function (a) {
+    a.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      abrirFinanzas(e);
+    });
+  });
 })();
