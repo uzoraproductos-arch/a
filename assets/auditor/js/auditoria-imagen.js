@@ -112,7 +112,7 @@
       hallazgo: f.hallazgo,
       fuente: f.fuente + '. ' + f.alcance,
       acciones: [
-        { txt: '📂 Abrir el expediente completo en Búsqueda Forense', href: 'index.html?ir=expediente&ancla=' + id },
+        { txt: '📂 Abrir el expediente completo', href: 'expedientes.html#exp-' + id },
         { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }
       ]
     };
@@ -204,7 +204,7 @@
       fuente: f.fuente + '. Padrón municipal: INEGI, Estadística de Finanzas Públicas Estatales y Municipales, 2024.',
       acciones: [
         { txt: '🏘️ Ver Ciénega de Flores en el padrón municipal', href: 'index.html?ir=municipio&ancla=NL-19012' },
-        { txt: '📂 Abrir el expediente de El Cuchillo II en Búsqueda Forense', href: 'index.html?ir=expediente&ancla=cuchillo-ii' }
+        { txt: '📂 Abrir el expediente de El Cuchillo II', href: 'expedientes.html#exp-cuchillo-ii' }
       ]
     };
   }
@@ -232,7 +232,7 @@
       hallazgo: f.hallazgo,
       fuente: 'ASF, Informe Individual de la Cuenta Pública 2023, auditoría ' + a.num + ' (' + a.clave + '), resultado 4, pp. 79 a 84, y dictamen.',
       acciones: [
-        { txt: '📂 Abrir el expediente de Birmex en Búsqueda Forense', href: 'index.html?ir=expediente&ancla=birmex' },
+        { txt: '📂 Abrir el expediente de Birmex', href: 'expedientes.html#exp-birmex' },
         { txt: '🏛️ Leer el informe de la ASF', url: a.url }
       ]
     };

@@ -178,14 +178,18 @@ mudando a su página; no se agregan desgloses nuevos.
 
 - Las páginas se generan con Python desde `herramientas/` (no se editan a
   mano) y comparten cabecera, sello y estilos: `apartados.py` para los
-  apartados y `auditorias.py` para Auditoría en imágenes. `sello.py` las
+  apartados, `auditorias.py` para Auditoría en imágenes y `expedientes.py`
+  para los Expedientes de casos. `sello.py` las
   regenera.
 - Si una página necesita abrir un módulo que sigue en la portada, enlaza a
   `index.html?ir=destino&ancla=...` (ver `IR_MODULOS` e `IR_DESTINOS` en el
   motor).
 - Hecho así: Auditoría en imágenes (`auditoria-*.html`) y el radar
   hacendario, que dejó de ser menú de la portada y vive en
-  `descarga-los-datos.html#radar` (menú «Datos»).
+  `descarga-los-datos.html#radar` (menú «Datos»),
+  y los Expedientes de casos por aclarar, que eran el bloque 3 del Modo
+  Inspector y viven en `expedientes.html#exp-<id>`
+  (`herramientas/expedientes.py` + `assets/auditor/js/expedientes.js`).
 
 ---
 

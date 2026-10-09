@@ -972,3 +972,11 @@ html.modo-visor .visor-oculto { display: none !important; }
 /* Auditoría en imágenes (09-10-2026): cada diapositiva es un enlace a su
    propia página; se ve igual que cuando era un botón. */
 a.showcase-slide { display: block; color: inherit; text-decoration: none; }
+
+/* Expedientes de casos (09-10-2026): el bloque 3 del Modo Inspector, su paso
+   en el indice y su tema en el proemio son enlaces a expedientes.html. */
+a.erario-pleg-cab, a.erario-indice-paso { color: inherit; text-decoration: none; }
+.mod-proemio-tema-ir a {
+  display: inline-block; font-size: 12px; color: inherit; text-decoration: none;
+  padding: 5px 12px; border-radius: 999px;
+}
