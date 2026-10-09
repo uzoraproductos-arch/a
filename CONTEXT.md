@@ -529,6 +529,38 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**Aprende en pestañas y «La Columna del Erario» (09-10-2026, sellos
+20261009i y 20261009j).** Decisiones del autor:
+- Las secciones de `aprende.html` son pestañas (`'pestanas': True` en
+  `apartados.py`; la lógica genérica vive en `apartados.js`): el contenido
+  solo se despliega al pulsar la pestaña, y pulsarla otra vez la cierra.
+  Sin JavaScript se ven todas. `#trivia`, `#biblioteca`, `#kit` y
+  `#noticias` abren su pestaña.
+- Cuarta pestaña, **Noticias relevantes**: columnas editoriales con formato
+  de periódico (`assets/auditor/js/columnas.js` + `columnas.css`). Rescatan,
+  verificado contra documentos oficiales, lo que fueron la 5.2 («Personajes
+  relevantes») y la 5.3 («Datos curiosos de personajes secundarios») de la
+  Enciclopedia, retiradas el 27-09-2026 por no citar fuentes (commit
+  d36e030). **No se copió nada de aquellas fichas**: cuatro revisiones
+  independientes buscaron cada afirmación en su documento oficial (DOJ,
+  UIF, Presidencia, CJF, Senado, SIL, ASF, FGR, SFP, DOF, PEF 2026, IPAB,
+  INEHRM, SEP, Sedena, AGN, Banxico). Quedaron 14 columnas: 6 de personajes
+  (García Luna, Segalmex, Lozoya, Robles, Gordillo, Gómez Urrutia), 4 de
+  hechos (partida secreta, Fobaproa-IPAB, origen del Ramo 33, expediente de
+  la «Casa Blanca») y 4 de historia (Santa Anna, Juárez 1861, Limantour,
+  Banco de México 1925). Cada una lleva cifras con chip y sus documentos.
+- Lo que no se pudo sostener (31 afirmaciones) se publica al pie del diario
+  en «Lo que dejamos fuera y por qué». Entre ello: la columna completa de
+  Raúl Salinas de Gortari y la de Carlos Romero Deschamps (Pemexgate), las
+  multas del IFE de 2003 y los retratos de dominio público, porque el
+  entorno no pudo abrir repositoriodocumental.ine.mx, justice.gov, Wikimedia
+  ni otros sitios: **falta de la plataforma, pendiente**.
+- Ojo: la sentencia de García Luna (460 meses) se tomó del comunicado del
+  DOJ leído a través del buscador, porque justice.gov estaba bloqueado; la
+  Presidencia confirma los 38 años. Conviene abrir el comunicado del DOJ.
+- Las imágenes son ilustraciones de grabado (emoji sobre trama), no fotos:
+  no se publican fotografías de personas sin licencia verificada.
+
 **Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sellos
 20261009g y 20261009h).** Decisión del autor. En `civico.css` (bloque «CABECERA
 (09-10-2026)»). Primero se adelantó el desvanecido 3.5 cm, pero al agrandar

@@ -80,7 +80,7 @@
   border: 1px solid var(--col-filete);
 }
 .col-ilus span { font-size: 64px; filter: grayscale(1) contrast(1.2); opacity: 0.85; }
-.col-art-portada .col-ilus { aspect-ratio: 4 / 3; }
+.col-art-portada .col-ilus { aspect-ratio: 16 / 10; }
 .col-art-portada .col-ilus span { font-size: 96px; }
 .col-ilus-sepia { background-color: #eadcc2; }
 .col-ilus-oliva { background-color: #dfe0cc; }
@@ -138,3 +138,12 @@
   .col-cuerpo { columns: 1; }
   .col-cabezal-linea { justify-content: center; }
 }
+
+/* Lo que se quedó fuera, con su motivo: transparencia del método. */
+.col-fuera { margin-top: 8px; border-top: 3px double var(--col-tinta); padding-top: 12px; font-size: 14px; }
+.col-fuera summary { cursor: pointer; font: 700 14px 'Inter', system-ui, sans-serif; }
+.col-fuera summary small { color: var(--col-gris); font-weight: 500; }
+.col-fuera > p { color: var(--col-gris); margin: 10px 0; }
+.col-fuera ul { margin: 0; padding-left: 20px; columns: 2 320px; column-gap: 28px; }
+.col-fuera li { break-inside: avoid; margin-bottom: 10px; line-height: 1.45; }
+.col-fuera li span { color: var(--col-gris); font-size: 13px; }

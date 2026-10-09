@@ -222,7 +222,7 @@ APARTADOS = [
         'lema': 'Biblioteca y kit del auditor ciudadano',
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
-                    'Y para ponerte a prueba, una trivia con el estado de cuenta de cada presidente.'),
+                    'Para ponerte a prueba, una trivia con el estado de cuenta de cada presidente; y para leer con calma, columnas con datos curiosos de personajes y hechos.'),
         'scripts': ['trivia-presidentes.js', 'columnas.js'],
         'estilos': ['columnas.css'],
         # Desde el 09-10-2026 las secciones son pestanas (decision del autor):
