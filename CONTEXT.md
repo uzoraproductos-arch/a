@@ -529,12 +529,16 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
-**Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sello
-20261009g).** Decisión del autor. En `civico.css` (bloque «CABECERA
-(09-10-2026)»): el desvanecido azul empieza `--cab-adelanto` antes (3.5 cm;
-1.5 cm en teléfono, para que el nombre siga leyéndose sobre azul) y la imagen
-del pasillo crece lo mismo hacia la izquierda; el fundido y el paneo no
-cambian. La cabecera queda fija (`sticky`) en todas las páginas y anchos:
+**Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sellos
+20261009g y 20261009h).** Decisión del autor. En `civico.css` (bloque «CABECERA
+(09-10-2026)»). Primero se adelantó el desvanecido 3.5 cm, pero al agrandar
+la imagen se veía menos; el autor pidió en su lugar (sello 20261009h) que
+**la imagen ocupe la mitad derecha de la cabecera, a partir de media
+pantalla, y que desde ahí arranque el desvanecido hacia los azules**. Sobre
+la imagen el velo azul bajó de 0.46 a 0.10-0.16 para que se vea bien; el
+punto de arranque se ajusta con `--cab-inicio` (50%). Los botones con borde
+(Compartir, Inspector Meteoro, Menú) llevan un velo azul translúcido para
+leerse sobre la parte clara de la foto. El paneo no cambia. La cabecera queda fija (`sticky`) en todas las páginas y anchos:
 antes, en teléfono, la de la portada se iba con el desplazamiento. Sigue
 compactándose al bajar (unos 70 px), así que en teléfono los destinos de
 los saltos dejan 84 px arriba en lugar de 12.
