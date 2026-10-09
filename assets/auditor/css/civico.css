@@ -968,3 +968,7 @@ html.modo-visor .main-wrapper { padding-top: 12px; }
 .visor-aviso-b.principal { background: var(--civ-azul); color: #ffffff; border-color: var(--civ-azul); }
 /* Foco: una tarjeta de Sigue el dinero abre un solo bloque del modulo. */
 html.modo-visor .visor-oculto { display: none !important; }
+
+/* Auditoría en imágenes (09-10-2026): cada diapositiva es un enlace a su
+   propia página; se ve igual que cuando era un botón. */
+a.showcase-slide { display: block; color: inherit; text-decoration: none; }

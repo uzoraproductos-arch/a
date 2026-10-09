@@ -157,6 +157,27 @@ pendientes vive en CONTEXT.md y se mantiene al día: es parte del entregable.
 
 ---
 
+## 5 bis. La portada ya no despliega nada: cada clic abre una página
+
+**Decisión del autor, 09-10-2026.** La página principal (`index.html`) queda
+como está. **Ningún contenido nuevo se desglosa debajo de ella**, ni en
+cuadros que se abren encima: todo clic lleva a una página propia de la
+plataforma, bien estructurada (como los apartados `*.html` y las páginas
+`auditoria-*.html`). Lo que todavía se despliega en la portada se irá
+mudando a su página; no se agregan desgloses nuevos.
+
+- Las páginas se generan con Python desde `herramientas/` (no se editan a
+  mano) y comparten cabecera, sello y estilos: `apartados.py` para los
+  apartados y `auditorias.py` para Auditoría en imágenes. `sello.py` las
+  regenera.
+- Si una página necesita abrir un módulo que sigue en la portada, enlaza a
+  `index.html?ir=destino&ancla=...` (ver `IR_MODULOS` e `IR_DESTINOS` en el
+  motor).
+- Siguiente en la lista: fusionar «Descarga los datos» y «Datos de
+  referencia» (el radar hacendario) en una sola página.
+
+---
+
 ## 6. Tono al escribir de cara al lector
 
 Formal, cálido y llano, sin renunciar al rigor técnico. El lector no es
