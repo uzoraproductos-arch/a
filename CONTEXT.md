@@ -567,8 +567,12 @@ La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 la imagen se veía menos; el autor pidió en su lugar (sello 20261009h) que
 **la imagen ocupe la mitad derecha de la cabecera, a partir de media
 pantalla, y que desde ahí arranque el desvanecido hacia los azules**. Sobre
-la imagen el velo azul bajó de 0.46 a 0.10-0.16 para que se vea bien; el
-punto de arranque se ajusta con `--cab-inicio` (50%). Los botones con borde
+la imagen el velo azul bajó de 0.46 a 0.10-0.16 para que se vea bien.
+Después (sello 20261009k) el autor pidió la imagen **al centro de la página
+completa, con su paneo, y desvanecida por los dos lados**: va centrada con
+ancho `--cab-ancho` (62%; 74% en tableta, 92% en teléfono), el velo es de
+0.20 al centro y crece hasta el azul sólido en los bordes; el paneo usa la
+animación `cabecera-centro`. Los botones con borde
 (Compartir, Inspector Meteoro, Menú) llevan un velo azul translúcido para
 leerse sobre la parte clara de la foto. El paneo no cambia. La cabecera queda fija (`sticky`) en todas las páginas y anchos:
 antes, en teléfono, la de la portada se iba con el desplazamiento. Sigue
