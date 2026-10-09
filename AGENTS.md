@@ -192,6 +192,10 @@ mudando a su página; no se agregan desgloses nuevos.
   (`herramientas/expedientes.py` + `assets/auditor/js/expedientes.js`).
 - El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
   es su parte B, y `busca-y-verifica.html` solo redirige ahí.
+- **El menú tiene cinco pestañas, ni una más** (decisión del autor,
+  09-10-2026): Herramientas, Números, Datos, Aprende y Participa.
+  «Números» es la antigua «Sigue el dinero»; su archivo sigue siendo
+  `sigue-el-dinero.html` para no romper enlaces.
 
 ---
 

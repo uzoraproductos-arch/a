@@ -529,6 +529,15 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**Cinco pestañas; «Sigue el dinero» pasa a llamarse «Números» (09-10-2026,
+sello 20261009f).** El autor fijó el menú en cinco pestañas: Herramientas,
+Números, Datos, Aprende y Participa (regla en AGENTS.md §5 bis). Cambió el
+nombre visible de «Sigue el dinero» en el menú de la portada y de todas las
+páginas generadas, en el título, las migas y el encabezado de su página, en
+el texto de Herramientas y en el enlace de la trivia. El archivo conserva el
+nombre `sigue-el-dinero.html` y sus anclas, para no romper enlaces; los
+comentarios del código que dicen «Sigue el dinero» se dejaron como historia.
+
 **«Busca y verifica» se fusiona con el Modo Inspector; Herramientas, con
 los módulos al centro (09-10-2026, sello 20261009e).** Decisiones del autor:
 - **Busca y verifica dejó de ser menú.** Sus herramientas ya vivían dentro
