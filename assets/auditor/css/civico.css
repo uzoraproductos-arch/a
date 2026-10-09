@@ -1140,3 +1140,8 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
 .apartado-libro-ficha { font-size: 14px; border-top: 1px dashed #c3cddd; padding-top: 8px; color: #334155; }
 .apartado-libro-num { font-weight: 800; color: #0b2a63; }
 .apartado-libro-ir { display: inline-block; margin-left: 4px; font-weight: 700; color: #1d4ed8; }
+
+/* El nombre de la cabecera lleva a la página principal (09-10-2026). */
+a.nav-brand-text { text-decoration: none; color: inherit; cursor: pointer; }
+a.nav-brand-text:hover .nav-brand-title, a.nav-brand-text:focus-visible .nav-brand-title { text-decoration: underline; text-underline-offset: 4px; }
+a.nav-brand-text:focus-visible { outline: 3px solid var(--civ-celeste); outline-offset: 3px; border-radius: 6px; }
