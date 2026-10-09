@@ -602,6 +602,11 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**El nombre de la cabecera lleva a la portada (09-10-2026, sello 20261009t).**
+«Auditavisión · El gasto público, a la vista» es ahora un enlace a
+`index.html` en todas las páginas (`cabecera()` en `apartados.py` y la
+portada). El logotipo sigue abriendo la presentación «Quiénes somos».
+
 **La nota del libro, en la ventana lateral (09-10-2026, sello 20261009s).**
 Por pedido del autor se quitó el recuadro «Nota de referencia» de Números,
 para que las pestañas queden parejas. Ahora es un enlace «📘 Nota de

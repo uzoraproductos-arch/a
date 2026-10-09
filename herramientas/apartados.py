@@ -567,10 +567,10 @@ def cabecera(actual, sello):
     return '''  <nav class="site-top-nav" aria-label="Navegación principal">
     <div class="nav-brand-group">
       <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
-      <span class="nav-brand-text">
+      <a class="nav-brand-text" href="index.html" title="Ir a la página principal">
         <span class="nav-brand-title">Auditavisión</span>
         <span class="nav-brand-sub">El gasto público, a la vista</span>
-      </span>
+      </a>
     </div>
 
     <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
