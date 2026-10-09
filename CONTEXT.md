@@ -560,6 +560,32 @@ La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
   Presidencia confirma los 38 años. Conviene abrir el comunicado del DOJ.
 - Las imágenes son ilustraciones de grabado (emoji sobre trama), no fotos:
   no se publican fotografías de personas sin licencia verificada.
+- **Pedido del autor (09-10-2026, sello 20261009l):** la pestaña «Kit del
+  auditor» se llama ahora **«Fuentes del auditor»** (su id sigue siendo
+  `#kit`). Además pidió columnas sobre tres temas, y se verificaron con la
+  misma regla:
+  - **Acapulco (Abelina López Rodríguez): 2 columnas.** La primera trata de
+    lo que observaron la ASF (2022: 27.1 mdp; 2023: 3.7 mdp; 2024: 206.2 mdp;
+    suma derivada de 237.1 mdp) y la ASE de Guerrero. La segunda, de la
+    controversia constitucional 174/2025, resuelta el 6-07-2026: la Corte
+    invalidó por falta de competencia el pliego de la ASE por 898.6 mdp
+    (FAISMUN 2023), sin juzgar el manejo del dinero. **La premisa de «más de
+    600 millones de la ASF» no se sostuvo:** el monto era de la ASE y la
+    Corte no exoneró a nadie. Queda explicado en «Lo que dejamos fuera». Las
+    observaciones se dirigen al municipio, no a la persona. Pendiente:
+    integrar el engrose de la CC 174/2025 cuando la SCJN lo publique.
+  - **Hijos de Salinas de Gortari y NXIVM: sin columna.** No se pudo abrir
+    ningún documento oficial (EDNY 1:18-cr-00204, DOJ, sentencia
+    SRE-PSC-75/2021 del TEPJF), y ninguno localizado los acusa. Es falta de
+    la plataforma.
+  - **López Beltrán y Amílcar Olán: sin columna.** Ningún documento oficial
+    abierto los vincula con contratos o investigaciones. Romedic, el balasto
+    del Tren Maya, Portacelis y «El Clan» solo aparecen en prensa. Para
+    reabrirla faltan el registro del CEN de Morena ante el INE, CompraNet
+    histórico y SIGER, la lista de Cofepris de diciembre de 2022 y algún
+    expediente de FGR, SAT o UIF. Es falta de la plataforma: esos sitios no
+    abren desde el entorno.
+  - Hay 16 columnas y 58 afirmaciones descartadas.
 
 **Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sellos
 20261009g y 20261009h).** Decisión del autor. En `civico.css` (bloque «CABECERA
