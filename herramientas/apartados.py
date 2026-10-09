@@ -84,6 +84,36 @@ def libro_html(a):
             '</div></aside>' % (texto, ('<p class="apartado-libro-glos"><b>Sus conceptos, en el glosario:</b> %s</p>' % glos) if glos else '',
                                 num, num, cita, url))
 
+def libro_enlace(a):
+    """Enlace «Nota de referencia» y, en una plantilla, lo que muestra la
+    ventana lateral: el texto con su llamado, los conceptos del glosario y
+    la ficha del catálogo de fuentes."""
+    rid, num, cita = a['libro_ref']
+    url = 'index.html?ir=fuentes&amp;ancla=%s' % rid
+    llamado = ('<sup class="apartado-libro-llamado"><a href="%s" title="Ver la ficha [%d] en el catálogo de fuentes">[%d]</a></sup>'
+               % (url, num, num))
+    texto = a['libro'].replace('sobre todo sus capítulos 5 y 7.', 'sobre todo sus capítulos 5 y 7.' + llamado, 1)
+    glos = ''.join('<li><a href="index.html?ir=glosario&amp;ancla=%s">%s ➔</a></li>' % (glosario_ancla(t), t.split(' (')[0])
+                   for t in a.get('libro_glosario', []))
+    return ('<a class="apartado-nota" href="%s" data-libro="1">📘 Nota de referencia</a>'
+            '<template id="tplNotaLibro">'
+            '<header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">📘</span> Nota de referencia</span>'
+            '<button type="button" class="glos-drawer-x" aria-label="Cerrar la nota">✕</button></header>'
+            '<div class="glos-drawer-cuerpo">'
+            '<span class="glos-drawer-cat">Doctrina y bibliografía</span>'
+            '<h3 id="notaLibroTit" class="glos-drawer-tit">El libro que ordena este apartado</h3>'
+            '<section class="glos-drawer-sec"><h4>Por qué se cita</h4><p>%s</p></section>'
+            '%s'
+            '<section class="glos-drawer-sec"><h4>Referencia [%d]</h4><p class="glos-drawer-ley">%s</p></section>'
+            '</div>'
+            '<footer class="glos-drawer-pie">'
+            '<a class="glos-drawer-todo" href="%s" style="text-align:center; text-decoration:none;">📚 Ver la ficha en el catálogo de fuentes ➔</a>'
+            '</footer></template>'
+            % (url, texto,
+               ('<section class="glos-drawer-sec"><h4>Sus conceptos, en el glosario</h4><ul class="rc-plazos">%s</ul></section>' % glos) if glos else '',
+               num, cita, url))
+
+
 def fichas(lista):
     """Fichas que se despliegan en la misma página (datos.js): botones con
     el aspecto de las tarjetas, sin enlace a la portada."""
@@ -664,7 +694,12 @@ def pagina(a, sello):
     guia_abajo = ''
     if a.get('guia') == 'abajo':
         guia, guia_abajo = '', '\n\n      ' + GUIA
-    if a.get('libro'):
+    if a.get('libro_ref'):
+        # Desde el 09-10-2026 la nota del libro ya no es un recuadro en la
+        # pagina (decision del autor): es un enlace bajo la entrada que la
+        # abre en la ventana lateral (apartados.js, data-libro).
+        nota = (nota + ' ' if nota else '') + libro_enlace(a)
+    elif a.get('libro'):
         guia = (guia + '\n      ' if guia else '') + libro_html(a)
     estilos = ''.join('\n  <link rel="stylesheet" href="assets/auditor/css/%s?v=%s">' % (css, sello) for css in a.get('estilos', []))
     scripts = ''.join('\n  <script src="assets/auditor/js/%s?v=%s"></script>' % (js, sello) for js in a.get('scripts', []))
