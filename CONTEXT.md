@@ -604,7 +604,12 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 
 **Nuevas imágenes de las herramientas (09-10-2026, sello 20261009w).**
 El autor entregó cuatro imágenes ilustrativas que sustituyen a las de
-`assets/auditor/img/herr-*.jpg` (mismos nombres, recortadas a 1200×670):
+`assets/auditor/img/herr-*.jpg` (recortadas a 1200×670). En el sello
+20261009x cambiaron de nombre (`herr-megaobras-plataformas.jpg`,
+`-calculadora-monedas`, `-inspector-foroptero`, `-ambiente-refineria`):
+con el mismo nombre, los navegadores seguían mostrando la imagen vieja de su
+caché. **Para cambiar una imagen, cámbiale también el nombre** (el CSS no
+lleva sello en sus `url()`):
 plataformas petroleras para Megaobras, una pila de monedas para la
 Calculadora Cívica, un foróptero para el Modo Inspector y una refinería con
 humo para el Costo Ambiental. Se ven en las tarjetas de Herramientas, en el

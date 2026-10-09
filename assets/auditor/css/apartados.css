@@ -674,10 +674,10 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 }
 
 /* Las fotografías, por rubro (la ruta es relativa a esta hoja) */
-.herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras.jpg'); }
-.herr-foto.rubro-calculadora::before { background-image: url('../img/herr-calculadora.jpg'); }
-.herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector.jpg'); }
-.herr-foto.rubro-ambiente::before { background-image: url('../img/herr-ambiente.jpg'); }
+.herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras-plataformas.jpg'); }
+.herr-foto.rubro-calculadora::before { background-image: url('../img/herr-calculadora-monedas.jpg'); }
+.herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector-foroptero.jpg'); }
+.herr-foto.rubro-ambiente::before { background-image: url('../img/herr-ambiente-refineria.jpg'); }
 
 /* Encabezado de la página de herramienta */
 .herr-cab { --tarjeta: var(--civ-azul-medio); position: relative; isolation: isolate; color: #ffffff; border-bottom: 6px solid var(--tarjeta); padding: 24px 0 34px; }
