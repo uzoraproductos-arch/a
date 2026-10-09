@@ -1,0 +1,140 @@
+/* Auditavisión · Aprende › Noticias relevantes (09-10-2026)
+   «La Columna del Erario»: columnas editoriales con formato de periódico.
+   Tipografía de diario (Playfair Display para cabezal y titulares, Source
+   Serif 4 para el texto), filetes finos entre columnas y capitular. */
+.col-diario {
+  --col-tinta: #121212;
+  --col-gris: #5b5b5b;
+  --col-filete: #d9d4c7;
+  --col-papel: #fffdf8;
+  background: var(--col-papel);
+  border: 1px solid var(--col-filete);
+  border-radius: 6px;
+  padding: 22px 26px 30px;
+  color: var(--col-tinta);
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+.col-cabezal { text-align: center; border-bottom: 3px double var(--col-tinta); padding-bottom: 10px; margin-bottom: 14px; }
+.col-cabezal-linea {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  font-family: 'Inter', system-ui, sans-serif; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--col-gris); border-bottom: 1px solid var(--col-filete); padding-bottom: 8px;
+}
+.col-nombre {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 900;
+  font-size: clamp(30px, 5.4vw, 58px); line-height: 1.05; letter-spacing: -0.01em;
+  margin: 12px 0 4px; color: var(--col-tinta);
+}
+.col-lema { margin: 0 0 12px; font-style: italic; color: var(--col-gris); font-size: 15px; }
+.col-secciones {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 18px;
+  border-top: 1px solid var(--col-filete); padding-top: 8px;
+}
+.col-secciones button {
+  font: 600 13px 'Inter', system-ui, sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+  background: none; border: 0; border-bottom: 2px solid transparent; padding: 6px 2px; cursor: pointer; color: var(--col-tinta);
+}
+.col-secciones button small { color: var(--col-gris); font-weight: 500; }
+.col-secciones button[aria-pressed="true"] { border-bottom-color: var(--col-tinta); }
+.col-secciones button:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
+.col-aviso {
+  font-size: 13.5px; line-height: 1.55; color: var(--col-gris); margin: 0 0 18px;
+  padding: 8px 12px; border-left: 3px solid var(--col-filete); background: #faf6ec;
+}
+.col-vacio { text-align: center; color: var(--col-gris); font-style: italic; padding: 30px 0; }
+
+/* Rejilla: la primera columna es la portada (dos tercios); las demás, en
+   tres columnas con filete vertical. */
+.col-rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+}
+.col-art {
+  padding: 4px 18px 22px;
+  border-left: 1px solid var(--col-filete);
+  border-bottom: 1px solid var(--col-filete);
+  margin-bottom: 18px;
+}
+.col-art:nth-child(3n + 1) { border-left: 0; padding-left: 0; }
+.col-art-portada {
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 0 26px;
+  padding: 0 0 22px; border-left: 0;
+}
+.col-art-portada ~ .col-art:nth-child(3n + 1) { border-left: 1px solid var(--col-filete); padding-left: 18px; }
+.col-art-portada ~ .col-art:nth-child(3n + 2) { border-left: 0; padding-left: 0; }
+.col-art-portada .col-titular { font-size: clamp(24px, 3vw, 34px); }
+.col-art-portada .col-balazo { font-size: 18px; }
+
+.col-fig { margin: 0 0 12px; }
+.col-fig img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: top; filter: grayscale(0.15) contrast(1.05); }
+.col-art-portada .col-fig img { aspect-ratio: 4 / 3; }
+.col-fig figcaption { font: 11px 'Inter', system-ui, sans-serif; color: var(--col-gris); margin-top: 4px; }
+/* Ilustración de grabado cuando no hay retrato de dominio público. */
+.col-ilus {
+  display: grid; place-items: center; aspect-ratio: 3 / 2;
+  background-color: #e9e3d3;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1.4px);
+  background-size: 6px 6px;
+  border: 1px solid var(--col-filete);
+}
+.col-ilus span { font-size: 64px; filter: grayscale(1) contrast(1.2); opacity: 0.85; }
+.col-art-portada .col-ilus { aspect-ratio: 4 / 3; }
+.col-art-portada .col-ilus span { font-size: 96px; }
+.col-ilus-sepia { background-color: #eadcc2; }
+.col-ilus-oliva { background-color: #dfe0cc; }
+
+.col-kicker { font: 700 11.5px 'Inter', system-ui, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #a3231b; }
+.col-titular {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  font-size: 21px; line-height: 1.2; margin: 4px 0 8px; color: var(--col-tinta);
+}
+.col-balazo { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; color: #333333; }
+.col-firma { margin: 0 0 10px; font: 11.5px 'Inter', system-ui, sans-serif; color: var(--col-gris); text-transform: uppercase; letter-spacing: 0.05em; }
+.col-leer, .col-copiar, .col-cerrar {
+  font: 700 13px 'Inter', system-ui, sans-serif; cursor: pointer;
+  background: none; border: 1px solid var(--col-tinta); border-radius: 999px; padding: 7px 14px; color: var(--col-tinta);
+}
+.col-leer:hover, .col-copiar:hover, .col-cerrar:hover { background: var(--col-tinta); color: #ffffff; }
+.col-leer:focus-visible, .col-copiar:focus-visible, .col-cerrar:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
+
+/* Columna abierta: ocupa todo el ancho y se lee a dos columnas. */
+.col-abierta { grid-column: 1 / -1; border-left: 0 !important; padding-left: 0 !important; }
+.col-abierta:not(.col-art-portada) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 0 26px; }
+.col-cuerpo { grid-column: 1 / -1; columns: 2 300px; column-gap: 32px; column-rule: 1px solid var(--col-filete); margin-top: 8px; }
+.col-cuerpo p { margin: 0 0 12px; font-size: 16.5px; line-height: 1.65; }
+.col-capitular::first-letter {
+  float: left; font-family: 'Playfair Display', Georgia, serif; font-weight: 900;
+  font-size: 3.4em; line-height: 0.85; padding: 4px 8px 0 0; color: var(--col-tinta);
+}
+.col-dato, .col-cifras, .col-fuentes, .col-acciones { break-inside: avoid; }
+.col-dato { background: #fbf3d9; border-top: 3px solid var(--col-tinta); padding: 10px 14px; margin: 4px 0 14px; }
+.col-dato b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-dato p { margin: 6px 0 0; font-size: 15.5px; }
+.col-cifras { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; }
+.col-cifras li { display: flex; flex-direction: column; border-left: 3px solid #a3231b; padding: 2px 0 2px 10px; }
+.col-cifras strong { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; }
+.col-cifras span { font-size: 14px; color: #333333; }
+.col-cifras small { font: 12px 'Inter', system-ui, sans-serif; color: var(--col-gris); margin-top: 2px; }
+.col-fuentes { font-size: 13.5px; }
+.col-fuentes b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-fuentes ol { margin: 6px 0 6px; padding-left: 20px; }
+.col-fuentes li { margin-bottom: 4px; line-height: 1.45; }
+.col-fuentes a, .col-cifras a { color: #1f4f8a; }
+.col-act { margin: 4px 0 0; font-size: 12.5px; color: var(--col-gris); font-style: italic; }
+.col-acciones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+@media (max-width: 900px) {
+  .col-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .col-art, .col-art-portada ~ .col-art { border-left: 1px solid var(--col-filete) !important; padding-left: 16px !important; }
+  .col-art-portada ~ .col-art:nth-child(2n) { border-left: 0 !important; padding-left: 0 !important; }
+}
+@media (max-width: 640px) {
+  .col-diario { padding: 16px 14px 20px; }
+  .col-rejilla { grid-template-columns: 1fr; }
+  .col-art, .col-art-portada ~ .col-art { border-left: 0 !important; padding: 0 0 18px !important; }
+  .col-art-portada, .col-abierta:not(.col-art-portada) { display: block; }
+  .col-cuerpo { columns: 1; }
+  .col-cabezal-linea { justify-content: center; }
+}

@@ -223,10 +223,15 @@ APARTADOS = [
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
                     'Y para ponerte a prueba, una trivia con el estado de cuenta de cada presidente.'),
-        'scripts': ['trivia-presidentes.js'],
+        'scripts': ['trivia-presidentes.js', 'columnas.js'],
+        'estilos': ['columnas.css'],
+        # Desde el 09-10-2026 las secciones son pestanas (decision del autor):
+        # su contenido solo se despliega al pulsar la pestana.
+        'pestanas': True,
         'secciones': [
             {
                 'id': 'trivia',
+                'pestana': ('🎯', 'Trivia', 'El examen de los presidentes'),
                 'titulo': '🎯 Trivia: el examen de los presidentes',
                 'texto': ('Del Porfiriato a López Obrador: adivina, comprueba con la cifra oficial y, al final, mira el estado de cuenta '
                           'de cada presidente y el reloj de su deuda. Antes vivía en el módulo de Megaobras, como «Administración presidencial».'),
@@ -237,6 +242,7 @@ APARTADOS = [
             },
             {
                 'id': 'biblioteca',
+                'pestana': ('🏛️', 'Biblioteca hacendaria', 'Glosario, leyes y preguntas'),
                 'titulo': '🏛️ Biblioteca hacendaria',
                 'texto': 'Marco legal, glosario y preguntas frecuentes.',
                 'tarjetas': [
@@ -247,6 +253,7 @@ APARTADOS = [
             },
             {
                 'id': 'kit',
+                'pestana': ('🧭', 'Kit del auditor', 'Fuentes y guías'),
                 'titulo': '🧭 Kit del auditor ciudadano',
                 'texto': 'Fuentes y guías para revisar por tu cuenta.',
                 'tarjetas': [
@@ -254,6 +261,22 @@ APARTADOS = [
                     ('📑', 'Compendio de Fuentes Oficiales', 'DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.', ir('fuentes'), None, None),
                     ('🍺', 'Pase y Guías del Auditor Cívico', 'Herramientas independientes de fiscalización ciudadana ($79/mes · Menos que dos caguamas).', ir('pase'), None, None),
                 ],
+            },
+            {
+                # Columnas editoriales (09-10-2026): reune, verificado contra
+                # documentos oficiales, lo que fueron las secciones 5.2 y 5.3
+                # de la Enciclopedia (personajes relevantes y datos curiosos),
+                # retiradas el 27-09-2026 por no citar fuentes. Las pinta
+                # assets/auditor/js/columnas.js.
+                'id': 'noticias',
+                'pestana': ('📰', 'Noticias relevantes', 'Columnas de personajes y hechos'),
+                'titulo': '📰 Noticias relevantes',
+                'texto': ('Columnas con datos curiosos de personajes y hechos del dinero público. '
+                          'Cada afirmación lleva el documento oficial que la sostiene.'),
+                'bloque': ('<div class="col-diario" id="columnasDiario">\n'
+                           '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
+                           '        </div>'),
+                'tarjetas': [],
             },
         ],
     },
@@ -388,18 +411,29 @@ def pagina(a, sello):
           <div><span class="apartado-ayer-tit">📍 Hoy (2026)</span>%s</div>
         </div>''' % s['ayer']
         bloque = ('\n        <div class="apartado-bloque">\n        %s\n        </div>' % s['bloque']) if s.get('bloque') else ''
-        secciones.append('''      <section class="apartado-seccion%s" id="%s" aria-labelledby="%s-tit">
+        secciones.append('''      <section class="apartado-seccion%s" id="%s" aria-labelledby="%s-tit"%s>
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="%s-tit">%s<span class="sr-only">%s</span>%s</h2>
           <p class="apartado-seccion-texto">%s</p>
         </div>%s%s%s
-      </section>''' % (' apartado-seccion-modulos' if s.get('modulos') else '', s['id'], s['id'], s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
+      </section>''' % (' apartado-seccion-modulos' if s.get('modulos') else (' apartado-panel' if a.get('pestanas') else ''),
+                       s['id'], s['id'], ' role="tabpanel"' if a.get('pestanas') else '', s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
                        ('\n        <div class="apartado-rejilla%s">\n%s\n        </div>' % (
                            ' apartado-rejilla-modulos' if s.get('modulos') else '',
                            '\n'.join(tarjeta(t, s.get('modulos')) for t in s['tarjetas'])))
                        if s['tarjetas'] else ''))
 
-    if len(a['secciones']) > 1:
+    if a.get('pestanas'):
+        botones = '\n'.join(
+            '          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
+            '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
+            '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
+            % ((s['id'], s['id'], s['id']) + s['pestana']) for s in a['secciones'])
+        en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
+%s
+      </nav>
+      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>''' % botones
+    elif len(a['secciones']) > 1:
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
             s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '', s['titulo'])
             for s in a['secciones'])
@@ -419,6 +453,7 @@ def pagina(a, sello):
     if a.get('libro'):
         guia = (guia + '\n      ' if guia else '') + ('<aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span>'
                                                        '<p>%s</p></aside>' % a['libro'])
+    estilos = ''.join('\n  <link rel="stylesheet" href="assets/auditor/css/%s?v=%s">' % (css, sello) for css in a.get('estilos', []))
     scripts = ''.join('\n  <script src="assets/auditor/js/%s?v=%s"></script>' % (js, sello) for js in a.get('scripts', []))
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
@@ -439,7 +474,7 @@ def pagina(a, sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">{estilos}
 </head>
 <body data-pagina="apartado">
 {cabecera}
@@ -474,7 +509,7 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            cabecera=cabecera(a['archivo'], sello), menu=a['menu'], icono=a['icono'], lema=a['lema'],
-           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts,
+           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos,
            secciones='\n\n'.join(secciones))
 
 

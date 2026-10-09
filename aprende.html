@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009h">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009h">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009h">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009i">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009i">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009i">
+  <link rel="stylesheet" href="assets/auditor/css/columnas.css?v=20261009i">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -76,14 +77,15 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-saltos" aria-label="En esta página">
-          <span class="apartado-saltos-tit">En esta página:</span>
-          <a href="#trivia">🎯 Trivia: el examen de los presidentes</a>
-          <a href="#biblioteca">🏛️ Biblioteca hacendaria</a>
-          <a href="#kit">🧭 Kit del auditor ciudadano</a>
+      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
+          <a class="apartado-pestana" role="tab" id="pestana-trivia" href="#trivia" aria-controls="trivia" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🎯</span><span class="apartado-pestana-tx"><b>Trivia</b><small>El examen de los presidentes</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-biblioteca" href="#biblioteca" aria-controls="biblioteca" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏛️</span><span class="apartado-pestana-tx"><b>Biblioteca hacendaria</b><small>Glosario, leyes y preguntas</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-kit" href="#kit" aria-controls="kit" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧭</span><span class="apartado-pestana-tx"><b>Kit del auditor</b><small>Fuentes y guías</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-noticias" href="#noticias" aria-controls="noticias" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📰</span><span class="apartado-pestana-tx"><b>Noticias relevantes</b><small>Columnas de personajes y hechos</small></span></a>
       </nav>
+      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
       
-      <section class="apartado-seccion" id="trivia" aria-labelledby="trivia-tit">
+      <section class="apartado-seccion apartado-panel" id="trivia" aria-labelledby="trivia-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="trivia-tit"><span class="sr-only"></span>🎯 Trivia: el examen de los presidentes</h2>
           <p class="apartado-seccion-texto">Del Porfiriato a López Obrador: adivina, comprueba con la cifra oficial y, al final, mira el estado de cuenta de cada presidente y el reloj de su deuda. Antes vivía en el módulo de Megaobras, como «Administración presidencial».</p>
@@ -95,7 +97,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="biblioteca" aria-labelledby="biblioteca-tit">
+      <section class="apartado-seccion apartado-panel" id="biblioteca" aria-labelledby="biblioteca-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="biblioteca-tit"><span class="sr-only"></span>🏛️ Biblioteca hacendaria</h2>
           <p class="apartado-seccion-texto">Marco legal, glosario y preguntas frecuentes.</p>
@@ -122,7 +124,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="kit" aria-labelledby="kit-tit">
+      <section class="apartado-seccion apartado-panel" id="kit" aria-labelledby="kit-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="kit-tit"><span class="sr-only"></span>🧭 Kit del auditor ciudadano</h2>
           <p class="apartado-seccion-texto">Fuentes y guías para revisar por tu cuenta.</p>
@@ -148,17 +150,30 @@
         </a>
         </div>
       </section>
+
+      <section class="apartado-seccion apartado-panel" id="noticias" aria-labelledby="noticias-tit" role="tabpanel">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="noticias-tit"><span class="sr-only"></span>📰 Noticias relevantes</h2>
+          <p class="apartado-seccion-texto">Columnas con datos curiosos de personajes y hechos del dinero público. Cada afirmación lleva el documento oficial que la sostiene.</p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="col-diario" id="columnasDiario">
+          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>
+        </div>
+        </div>
+      </section>
     </div>
   </main>
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009h</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009i</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261009h"></script>
-  <script src="assets/auditor/js/trivia-presidentes.js?v=20261009h"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261009i"></script>
+  <script src="assets/auditor/js/trivia-presidentes.js?v=20261009i"></script>
+  <script src="assets/auditor/js/columnas.js?v=20261009i"></script>
 </body>
 </html>

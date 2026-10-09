@@ -569,3 +569,54 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 @media (prefers-reduced-motion: reduce) {
   .apartado-tarjeta-modulo, .apartado-tarjeta-modulo:hover { transition: none; transform: none; }
 }
+
+/* ==========================================================================
+   PESTAÑAS DE APARTADO (09-10-2026, Aprende): cada sección se despliega
+   solo al pulsar su pestaña (apartados.js). Sin JavaScript se ven todas.
+   ========================================================================== */
+.apartado-pestanas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 4px 0 10px;
+}
+.apartado-pestana {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde);
+  border-bottom: 4px solid var(--civ-gris-borde);
+  border-radius: 12px;
+  color: inherit; text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+.apartado-pestana:hover { border-color: var(--civ-azul-medio); transform: translateY(-2px); }
+.apartado-pestana:focus-visible { outline: 3px solid var(--civ-celeste); outline-offset: 2px; }
+.apartado-pestana[aria-selected="true"] {
+  background: var(--civ-azul);
+  border-color: var(--civ-azul);
+  border-bottom-color: var(--civ-celeste);
+  color: #ffffff;
+}
+.apartado-pestana-ico { font-size: 30px; line-height: 1; flex: none; }
+.apartado-pestana-tx { display: flex; flex-direction: column; min-width: 0; }
+.apartado-pestana-tx b { font-size: 16px; color: var(--civ-azul); line-height: 1.25; }
+.apartado-pestana-tx small { font-size: 13px; color: #44526b; line-height: 1.35; }
+.apartado-pestana[aria-selected="true"] .apartado-pestana-tx b,
+.apartado-pestana[aria-selected="true"] .apartado-pestana-tx small { color: #ffffff; }
+.apartado-pestanas-pista { margin: 6px 0 28px; font-size: 14px; color: #5a6782; text-align: center; }
+.apartado-panel { margin-top: 22px; animation: panel-entra 0.25s ease; }
+@keyframes panel-entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 980px) {
+  .apartado-pestanas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) {
+  .apartado-pestana { padding: 12px; gap: 10px; }
+  .apartado-pestana-ico { font-size: 24px; }
+  .apartado-pestana-tx b { font-size: 14.5px; }
+  .apartado-pestana-tx small { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .apartado-panel { animation: none; }
+  .apartado-pestana, .apartado-pestana:hover { transition: none; transform: none; }
+}
