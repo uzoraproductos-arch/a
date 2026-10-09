@@ -26705,7 +26705,7 @@
     'faq-glosario': function() { abrirDiccionarioSubtab('faq-glosario'); },
     'faq-marco-legal': function() { abrirDiccionarioSubtab('faq-marco-legal'); },
     'faq-preguntas': function() { abrirDiccionarioSubtab('faq-preguntas'); },
-    fuentes: function() { abrirCatalogoFuentes(); },
+    fuentes: function(a) { abrirCatalogoFuentes(a && /^ref-/.test(a) ? a : undefined); },
     pase: function() { openPaseCivicoModal(); },
     reporta: function() { openAyudanosFiscalizar(); },
     nota: function() { abrirNotaPortada(null); },

@@ -12,9 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009p">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009p">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009p">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009q">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009q">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009q">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -76,17 +76,17 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-saltos" aria-label="En esta página">
-          <span class="apartado-saltos-tit">En esta página:</span>
-          <a href="#origen"><span class="apartado-cap-num" aria-hidden="true">1</span>De dónde sale el dinero</a>
-          <a href="#decide"><span class="apartado-cap-num" aria-hidden="true">2</span>Quién lo decide</a>
-          <a href="#gasta"><span class="apartado-cap-num" aria-hidden="true">3</span>Quién lo gasta y en qué</a>
-          <a href="#baja"><span class="apartado-cap-num" aria-hidden="true">4</span>A dónde baja</a>
-          <a href="#deuda"><span class="apartado-cap-num" aria-hidden="true">5</span>Cuánto debemos</a>
-          <a href="#ati"><span class="apartado-cap-num" aria-hidden="true">6</span>Y a ti, ¿cuánto te toca?</a>
+      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
+          <a class="apartado-pestana" role="tab" id="pestana-origen" href="#origen" aria-controls="origen" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💵</span><span class="apartado-pestana-tx"><b>1 · De dónde sale</b><small>Ingresos y Ley de Ingresos</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-decide" href="#decide" aria-controls="decide" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏛️</span><span class="apartado-pestana-tx"><b>2 · Quién lo decide</b><small>El Congreso y los Poderes</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-gasta" href="#gasta" aria-controls="gasta" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏢</span><span class="apartado-pestana-tx"><b>3 · Quién lo gasta</b><small>Ramos, obras y ambiente</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-baja" href="#baja" aria-controls="baja" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📍</span><span class="apartado-pestana-tx"><b>4 · A dónde baja</b><small>Estados y municipios</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-deuda" href="#deuda" aria-controls="deuda" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📉</span><span class="apartado-pestana-tx"><b>5 · Cuánto debemos</b><small>La deuda, sexenio por sexenio</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-ati" href="#ati" aria-controls="ati" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧮</span><span class="apartado-pestana-tx"><b>6 · ¿Cuánto te toca?</b><small>La calculadora de tu sueldo</small></span></a>
       </nav>
-      <aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span><p>Este apartado sigue el orden de <cite>Introducción al Derecho Económico</cite>, de Moisés Gómez Granillo y Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7. Cada capítulo trae una franja <b>«Ayer y hoy»</b>: lo que explicaba el libro y cómo está hoy, con el documento oficial que lo sostiene. Las cifras no se copian del libro: se toman de su fuente oficial vigente.</p></aside>
-      <section class="apartado-seccion" id="origen" aria-labelledby="origen-tit">
+      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
+      <aside class="apartado-libro apartado-libro-nota" aria-labelledby="notaLibroTit"><span class="apartado-libro-ico" aria-hidden="true">📘</span><div class="apartado-libro-cuerpo"><p class="apartado-libro-tit" id="notaLibroTit">Nota de referencia</p><p>Este apartado sigue el orden de <cite>Introducción al Derecho Económico</cite>, de Moisés Gómez Granillo y Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7.<sup class="apartado-libro-llamado"><a href="index.html?ir=fuentes&amp;ancla=ref-gomez-granillo-1995" title="Ver la ficha [119] en el catálogo de fuentes" aria-label="Nota de referencia 119">[119]</a></sup> Cada capítulo trae una franja <b>«Ayer y hoy»</b>: lo que explicaba el libro y cómo está hoy, con el documento oficial que lo sostiene. Las cifras no se copian del libro: se toman de su fuente oficial vigente.</p><p class="apartado-libro-glos"><b>Sus conceptos, en el glosario:</b> <a href="index.html?ir=glosario&amp;ancla=Rectoria-Economica-del-Estado">Rectoría Económica del Estado</a> · <a href="index.html?ir=glosario&amp;ancla=Economia-Mixta">Economía Mixta</a> · <a href="index.html?ir=glosario&amp;ancla=Sistema-Nacional-de-Planeacion-Democratica">Sistema Nacional de Planeación Democrática</a> · <a href="index.html?ir=glosario&amp;ancla=Hacienda-Publica">Hacienda Pública</a> · <a href="index.html?ir=glosario&amp;ancla=LIF">LIF</a> · <a href="index.html?ir=glosario&amp;ancla=PEF">PEF</a> · <a href="index.html?ir=glosario&amp;ancla=Gasto-Federalizado">Gasto Federalizado</a> · <a href="index.html?ir=glosario&amp;ancla=Deuda-Publica-y-SHRFSP">Deuda Pública y SHRFSP</a></p><p class="apartado-libro-ficha" id="nota-119"><span class="apartado-libro-num">[119]</span> Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). <cite>Introducción al derecho económico</cite>. Editorial Esfinge. <a class="apartado-libro-ir" href="index.html?ir=fuentes&amp;ancla=ref-gomez-granillo-1995">Ver la ficha en el catálogo de fuentes ➔</a></p></div></aside>
+      <section class="apartado-seccion apartado-panel" id="origen" aria-labelledby="origen-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="origen-tit"><span class="apartado-cap-num" aria-hidden="true">1</span><span class="sr-only">Capítulo 1. </span>De dónde sale el dinero</h2>
           <p class="apartado-seccion-texto">Impuestos, ingresos petroleros y deuda: todo lo que autoriza la Ley de Ingresos, y su recorrido completo hasta el gasto.</p>
@@ -135,7 +135,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="decide" aria-labelledby="decide-tit">
+      <section class="apartado-seccion apartado-panel" id="decide" aria-labelledby="decide-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="decide-tit"><span class="apartado-cap-num" aria-hidden="true">2</span><span class="sr-only">Capítulo 2. </span>Quién lo decide</h2>
           <p class="apartado-seccion-texto">El Congreso autoriza los ingresos y la deuda; la Cámara de Diputados aprueba el gasto. Y los Poderes también cuestan.</p>
@@ -154,7 +154,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="gasta" aria-labelledby="gasta-tit">
+      <section class="apartado-seccion apartado-panel" id="gasta" aria-labelledby="gasta-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="gasta-tit"><span class="apartado-cap-num" aria-hidden="true">3</span><span class="sr-only">Capítulo 3. </span>Quién lo gasta y en qué</h2>
           <p class="apartado-seccion-texto">Cuánto recibe cada Secretaría, qué obras se pagan y qué le cuesta al ambiente.</p>
@@ -197,7 +197,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="baja" aria-labelledby="baja-tit">
+      <section class="apartado-seccion apartado-panel" id="baja" aria-labelledby="baja-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="baja-tit"><span class="apartado-cap-num" aria-hidden="true">4</span><span class="sr-only">Capítulo 4. </span>A dónde baja</h2>
           <p class="apartado-seccion-texto">El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno recauda.</p>
@@ -228,7 +228,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="deuda" aria-labelledby="deuda-tit">
+      <section class="apartado-seccion apartado-panel" id="deuda" aria-labelledby="deuda-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="deuda-tit"><span class="apartado-cap-num" aria-hidden="true">5</span><span class="sr-only">Capítulo 5. </span>Cuánto debemos</h2>
           <p class="apartado-seccion-texto">La deuda pública de 1994 a la proyección de 2027, sexenio por sexenio. Pulsa «Contabilizar» y mírala crecer.</p>
@@ -252,7 +252,7 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="ati" aria-labelledby="ati-tit">
+      <section class="apartado-seccion apartado-panel" id="ati" aria-labelledby="ati-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="ati-tit"><span class="apartado-cap-num" aria-hidden="true">6</span><span class="sr-only">Capítulo 6. </span>Y a ti, ¿cuánto te toca?</h2>
           <p class="apartado-seccion-texto">Escribe tu sueldo y mira a qué rubros, fondos y pago de deuda se van tus impuestos.</p>
@@ -272,11 +272,11 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009p</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009q</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261009p"></script>
-  <script src="assets/auditor/js/deuda-tiempo.js?v=20261009p"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261009q"></script>
+  <script src="assets/auditor/js/deuda-tiempo.js?v=20261009q"></script>
 </body>
 </html>

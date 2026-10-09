@@ -10491,6 +10491,15 @@ window.AUDIT_DB = {
       "cita_apa": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm",
       "descripcion": "Fideicomiso público en el Banco de México, previsto en el párrafo sexto del artículo 28 constitucional, que recibe la renta petrolera del Estado y la transfiere al presupuesto hasta un tope de 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Para 2026 se presupuestan $232,630.4 mdp de transferencias ordinarias y cero extraordinarias."
+    },
+    {
+      "num": 119,
+      "id": "ref-gomez-granillo-1995",
+      "categoria": "doctrina",
+      "categoria_nombre": "Doctrina y bibliografía",
+      "cita_apa": "Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). Introducción al derecho económico. Editorial Esfinge.",
+      "url": "",
+      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo. Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
     }
   ],
   "preguntas_casillas": [
