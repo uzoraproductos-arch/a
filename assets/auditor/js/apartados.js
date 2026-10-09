@@ -46,6 +46,58 @@
 
   /* Al llegar con #ancla, la cabecera se encoge despues del salto y el
      titulo queda debajo de ella: se corrige una vez ya compacta. */
+  /* Pestañas (09-10-2026, Aprende): el contenido de cada sección solo se
+     despliega al pulsar su pestaña; pulsarla otra vez la cierra. Sin
+     JavaScript, todas las secciones se ven una debajo de otra. El ancla
+     (#trivia, #noticias...) abre la pestaña y se puede compartir. */
+  var pestanas = document.querySelector('.apartado-pestanas');
+  var pestanaAbierta = null;
+  function abrirPestana(id, desplazar) {
+    if (!pestanas) return;
+    pestanaAbierta = id || null;
+    Array.prototype.forEach.call(pestanas.querySelectorAll('.apartado-pestana'), function (t) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = t.getAttribute('aria-controls') === pestanaAbierta;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (panel) panel.hidden = !on;
+    });
+    var pista = document.getElementById('pestanasPista');
+    if (pista) pista.hidden = !!pestanaAbierta;
+    if (pestanaAbierta && desplazar) {
+      compacta = true;
+      document.body.classList.add('cabecera-compacta');
+      var alto = nav ? nav.getBoundingClientRect().height : 0;
+      var y = pestanas.getBoundingClientRect().top + window.pageYOffset - alto - 8;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    }
+    document.dispatchEvent(new CustomEvent('apartado:pestana', { detail: { id: pestanaAbierta } }));
+  }
+  if (pestanas) {
+    var inicial = decodeURIComponent(location.hash.slice(1));
+    abrirPestana(pestanas.querySelector('[aria-controls="' + inicial + '"]') ? inicial : null, false);
+    pestanas.addEventListener('click', function (e) {
+      var t = e.target.closest('.apartado-pestana');
+      if (!t) return;
+      e.preventDefault();
+      var id = t.getAttribute('aria-controls');
+      var cerrar = id === pestanaAbierta;
+      abrirPestana(cerrar ? null : id, !cerrar);
+      history.replaceState(null, '', cerrar ? location.pathname + location.search : '#' + id);
+    });
+    pestanas.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var lista = Array.prototype.slice.call(pestanas.querySelectorAll('.apartado-pestana'));
+      var i = lista.indexOf(document.activeElement);
+      if (i < 0) return;
+      e.preventDefault();
+      lista[(i + (e.key === 'ArrowRight' ? 1 : lista.length - 1)) % lista.length].focus();
+    });
+    window.addEventListener('hashchange', function () {
+      var id = decodeURIComponent(location.hash.slice(1));
+      if (pestanas.querySelector('[aria-controls="' + id + '"]')) abrirPestana(id, true);
+    });
+  }
+
   if (location.hash.length > 1) window.addEventListener('load', function () {
     setTimeout(function () {
       var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
