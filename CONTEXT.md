@@ -529,6 +529,16 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sello
+20261009g).** Decisión del autor. En `civico.css` (bloque «CABECERA
+(09-10-2026)»): el desvanecido azul empieza `--cab-adelanto` antes (3.5 cm;
+1.5 cm en teléfono, para que el nombre siga leyéndose sobre azul) y la imagen
+del pasillo crece lo mismo hacia la izquierda; el fundido y el paneo no
+cambian. La cabecera queda fija (`sticky`) en todas las páginas y anchos:
+antes, en teléfono, la de la portada se iba con el desplazamiento. Sigue
+compactándose al bajar (unos 70 px), así que en teléfono los destinos de
+los saltos dejan 84 px arriba en lugar de 12.
+
 **Cinco pestañas; «Sigue el dinero» pasa a llamarse «Números» (09-10-2026,
 sello 20261009f).** El autor fijó el menú en cinco pestañas: Herramientas,
 Números, Datos, Aprende y Participa (regla en AGENTS.md §5 bis). Cambió el
