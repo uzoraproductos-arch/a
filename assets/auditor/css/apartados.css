@@ -503,3 +503,11 @@ body[data-pagina="apartado"] a.nav-movil-ayuda-btn { display: block; text-align:
 }
 @media (max-width: 420px) { .tp-ops { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .tp-crono.tp-urge { animation: none; } .tp-progreso span, .tp-sw, .tp-sw::after { transition: none; } }
+
+/* Radar hacendario en la página de datos (09-10-2026): las cifras son
+   enlaces a su tarjeta del desglose, que se resalta al llegar. */
+body[data-pagina="apartado"] .radar-hacendario-hub { border-radius: 14px; overflow: hidden; }
+body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.radar-link-btn { text-decoration: none; color: inherit; }
+.radar-desglose-card { scroll-margin-top: 140px; }
+.radar-card-destaca { animation: radar-destaca 1.6s ease-out; }
+@keyframes radar-destaca { 0%, 40% { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.55); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }

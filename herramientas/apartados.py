@@ -5,7 +5,8 @@
 Desde el 08-10-2026, seis apartados del indice (Herramientas, Busca y
 verifica, Sigue el dinero, Descarga los datos, Aprende y Participa) ya no se
 desglosan en un menu: cada uno abre su propia pagina, con la informacion
-ordenada por secciones. «Datos de referencia» sigue siendo desplegable.
+ordenada por secciones. Desde el 09-10-2026 «Datos de referencia» (el radar
+hacendario) tambien: se fusiono con Descarga los datos en una sola pagina.
 
 Las tarjetas de cada pagina llevan al auditor con index.html?ir=destino
 (&ancla=id). El motor (audit-engine.js, funcion irDesdeApartado) solo acepta
@@ -27,6 +28,11 @@ import sys
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E")
+
+
+# El radar hacendario, que vivia en el menu «Datos de referencia» de la
+# portada, se muda a la pagina de datos (09-10-2026).
+RADAR = open(os.path.join(RAIZ, 'herramientas', 'plantillas', 'radar.html'), encoding='utf-8').read().rstrip().replace('\n', '\n        ')
 
 
 def ir(destino, ancla=None):
@@ -201,13 +207,23 @@ APARTADOS = [
     },
     {
         'archivo': 'descarga-los-datos.html',
-        'menu': 'Descarga los datos',
+        'menu': 'Datos',
         'icono': '💾',
-        'titulo': 'Descarga los datos',
+        'titulo': 'Los datos: cifras de referencia y descargas',
         'lema': 'Datos abiertos con su fuente',
-        'entrada': ('Todo lo que ves en el auditor sale de documentos oficiales. Aquí te lo llevas en archivos '
-                    'que abren en Excel, con la fuente de cada base, para que hagas tus propias cuentas.'),
+        'entrada': ('Todo lo que ves en el auditor sale de documentos oficiales. Aquí están las cifras de referencia '
+                    'para poner el gasto en perspectiva, con su fuente, y los archivos que abren en Excel para que '
+                    'hagas tus propias cuentas.'),
+        'scripts': ['radar-datos.js'],
         'secciones': [
+            {
+                'id': 'radar',
+                'titulo': '📡 Radar hacendario: cifras en perspectiva',
+                'texto': ('Las cifras grandes del erario y lo que equivalen por segundo mientras lees. '
+                          'Toca una cifra para ver cómo se calcula y de dónde sale. Antes vivía en el menú «Datos de referencia».'),
+                'bloque': RADAR,
+                'tarjetas': [],
+            },
             {
                 'id': 'abiertos',
                 'titulo': '💾 Datos abiertos',
@@ -325,8 +341,6 @@ def cabecera(actual, sello):
         cur = ' aria-current="page"' if a['archivo'] == actual else ''
         items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="%s"%s>%s</a></div>'
                      % (a['archivo'], cur, a['menu']))
-    items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="index.html?ir=datos" '
-                 'title="Abre en el auditor el radar con las cifras de referencia">Datos de referencia</a></div>')
     return '''  <nav class="site-top-nav" aria-label="Navegación principal">
     <a class="nav-brand-group" href="index.html" title="Volver al inicio de Auditavisión">
       <span class="brand-logo-btn" aria-hidden="true"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></span>

@@ -26826,10 +26826,9 @@
     },
     radar: function(a) { if (a) abrirRadarConcepto(a); },
     glosario: function(a) { if (a) irAlGlosario(a.replace(/-/g, ' ')); },
-    datos: function() {
-      if (document.documentElement.clientWidth <= 1100) toggleMenuMovil(true);
-      toggleMegaMenu('menuDropdownDatos');
-    }
+    /* El radar hacendario ya no es un menu de la portada: vive en la
+       pagina de datos (09-10-2026). Los enlaces viejos llegan ahi. */
+    datos: function() { window.location.replace('descarga-los-datos.html#radar'); }
   };
   function irDesdeApartado() {
     var q;

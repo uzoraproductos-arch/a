@@ -173,8 +173,9 @@ mudando a su página; no se agregan desgloses nuevos.
 - Si una página necesita abrir un módulo que sigue en la portada, enlaza a
   `index.html?ir=destino&ancla=...` (ver `IR_MODULOS` e `IR_DESTINOS` en el
   motor).
-- Siguiente en la lista: fusionar «Descarga los datos» y «Datos de
-  referencia» (el radar hacendario) en una sola página.
+- Hecho así: Auditoría en imágenes (`auditoria-*.html`) y el radar
+  hacendario, que dejó de ser menú de la portada y vive en
+  `descarga-los-datos.html#radar` (menú «Datos»).
 
 ---
 

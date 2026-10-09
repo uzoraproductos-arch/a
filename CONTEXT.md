@@ -531,8 +531,28 @@ La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 **Regla nueva: la portada ya no despliega nada (09-10-2026).** Decisión del
 autor, asentada en AGENTS.md §5 bis: la página principal queda como está y
 todo clic lleva a una página propia. Lo que aún se despliega se irá mudando.
-Siguiente: fusionar «Descarga los datos» y «Datos de referencia» (radar
-hacendario) en una sola página.
+Ya se mudaron Auditoría en imágenes y el radar hacendario (abajo).
+
+**«Descarga los datos» y «Datos de referencia», fusionados (09-10-2026,
+sello 20261009b).** Una sola página, `descarga-los-datos.html`, con el
+menú «Datos» y el título «Los datos: cifras de referencia y descargas». Su
+primera sección, `#radar`, es el radar hacendario que vivía en el menú
+desplegable de la portada: la cinta de datos, las cuatro cifras y el
+desglose completo, con las mismas cifras y fuentes (se movió el HTML, no se
+reescribió; vive en `herramientas/plantillas/radar.html` y lo inserta
+`apartados.py`). El desglose ya no se pliega: está siempre a la vista, y
+cada cifra es un enlace a su tarjeta. Lo anima
+`assets/auditor/js/radar-datos.js`, sin motor: el reloj de la visita y las
+equivalencias por segundo, con la tasa en `data-tasa` (2,062.75 megaobras;
+49,850.12 deuda, las mismas que tenía el motor). Las tarjetas llevan a
+Megaobras, a la página del reloj de los intereses, a la Cuenta Pública de la
+ASF y a la página del huachicol. Salió el menú «Datos de referencia» de la
+portada y de las páginas; `index.html?ir=datos` ahora redirige a
+`descarga-los-datos.html#radar`. Las funciones del radar en el motor
+(`toggleRadarStats`, `toggleRadarDesglose`, `updateRadarAlertaBar`...)
+quedaron inertes: buscan elementos que ya no existen y salen sin error.
+Pendiente menor: si cambia la pérdida de megaobras que calcula el motor
+(`MEGAOBRAS_LOSS_RATE`), hay que actualizar a mano la tasa en la plantilla.
 
 **Auditoría en imágenes: una página por imagen (09-10-2026, sello
 20261009a).** Las nueve diapositivas del carrusel ya no abren el cuadro
