@@ -48,6 +48,21 @@ def ir(destino, ancla=None):
 # Cada tarjeta: (icono, nombre, descripcion, destino, nota de fuente o None,
 # rubro de color o None). Un destino que empieza con http abre afuera.
 # Las cifras son las mismas que tenia el menu, con la misma fuente.
+
+def fichas(lista):
+    """Fichas que se despliegan en la misma página (datos.js): botones con
+    el aspecto de las tarjetas, sin enlace a la portada."""
+    partes = []
+    for fid, icono, nombre, desc, rubro in lista:
+        clase = 'apartado-tarjeta dt-ficha' + (' rubro-' + rubro if rubro else '')
+        partes.append('<button type="button" class="%s" data-ficha="%s" aria-expanded="false">\n'
+                      '  <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>\n'
+                      '  <span class="apartado-tarjeta-nombre">%s</span>\n'
+                      '  <span class="apartado-tarjeta-desc">%s</span>\n'
+                      '  <span class="apartado-tarjeta-accion">Desplegar ▾</span>\n'
+                      '</button>' % (clase, fid, icono, nombre, desc))
+    return '<div class="apartado-rejilla dt-fichas">\n' + '\n'.join(partes) + '\n</div>'
+
 APARTADOS = [
     {
         'archivo': 'herramientas.html',
@@ -186,33 +201,42 @@ APARTADOS = [
         'entrada': ('Todo lo que ves en el auditor sale de documentos oficiales. Aquí están las cifras de referencia '
                     'para poner el gasto en perspectiva, con su fuente, y los archivos que abren en Excel para que '
                     'hagas tus propias cuentas.'),
-        'scripts': ['radar-datos.js'],
+        'scripts': ['radar-datos.js', 'audit-database.js', 'municipios-efipem.js', 'datos.js'],
+        # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
+        # despliega aqui mismo, con su contenido (decision del autor):
+        # datos.js las arma. Ya no abren la portada.
+        'pestanas': True,
         'secciones': [
             {
                 'id': 'radar',
+                'pestana': ('📡', 'Radar hacendario', 'Cifras en perspectiva'),
                 'titulo': '📡 Radar hacendario: cifras en perspectiva',
                 'texto': ('Las cifras grandes del erario y lo que equivalen por segundo mientras lees. '
-                          'Toca una cifra para ver cómo se calcula y de dónde sale. Antes vivía en el menú «Datos de referencia».'),
+                          'Pulsa «Desglosar cifras» o toca una cifra para ver cómo se calcula y de dónde sale.'),
                 'bloque': RADAR,
                 'tarjetas': [],
             },
             {
                 'id': 'abiertos',
+                'pestana': ('💾', 'Datos abiertos', 'Bases en CSV para Excel'),
                 'titulo': '💾 Datos abiertos',
-                'texto': 'Bases en CSV, listas para revisar.',
-                'tarjetas': [
-                    ('📥', 'Descarga en CSV (abre en Excel)', 'Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.', ir('descargas'), None, 'dinero'),
-                    ('🏘️', 'Base de Datos Municipal EFIPEM (INEGI)', 'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.', ir('csv-municipios'), None, 'dinero'),
-                ],
+                'texto': 'Bases en CSV, listas para revisar. Pulsa una ficha para desplegarla.',
+                'bloque': fichas([
+                    ('descargas', '📥', 'Descarga en CSV (abre en Excel)', 'Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.', 'dinero'),
+                    ('municipios', '🏘️', 'Base de Datos Municipal EFIPEM (INEGI)', 'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.', 'dinero'),
+                ]),
+                'tarjetas': [],
             },
             {
                 'id': 'informes',
+                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario'),
                 'titulo': '📑 Informes oficiales',
-                'texto': 'Lo que revisó la Auditoría Superior y qué contiene cada archivo.',
-                'tarjetas': [
-                    ('🔎', 'Informes de la Cuenta Pública (ASF)', 'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.', ir('verificador', 'cuentaPublicaASF'), None, 'inspector'),
-                    ('📋', 'Diccionario de Datos', 'Qué contiene cada archivo de datos de la plataforma, campo por campo.', ir('diccionario'), None, None),
-                ],
+                'texto': 'Lo que revisó la Auditoría Superior y qué contiene cada archivo. Pulsa una ficha para desplegarla.',
+                'bloque': fichas([
+                    ('asf', '🔎', 'Informes de la Cuenta Pública (ASF)', 'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.', 'inspector'),
+                    ('diccionario', '📋', 'Diccionario de Datos', 'Qué contiene cada archivo de datos de la plataforma, campo por campo.', None),
+                ]),
+                'tarjetas': [],
             },
         ],
     },

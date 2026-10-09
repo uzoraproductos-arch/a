@@ -602,6 +602,41 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Datos en pestañas, con fichas que se despliegan (09-10-2026, sello
+20261009p).** El autor pidió para Datos lo mismo que en Aprende y Participa.
+- `descarga-los-datos.html` tiene tres pestañas: Radar hacendario, Datos
+  abiertos e Informes oficiales.
+- **Radar.** Por pedido del autor, la barra «Equivalencia durante tu
+  visita» va arriba y el radar de referencia queda debajo (la cinta «Datos
+  de referencia» y las cifras en movimiento).
+  - Volvieron los dos botones que tenía en la portada: «Ocultar
+    estadísticas» y «Desglosar cifras».
+  - El desglose (cómo se calcula cada cifra y de dónde sale) empieza
+    cerrado. Tocar una cifra lo abre y lleva a su tarjeta.
+  - Marcado: `herramientas/plantillas/radar.html`. Lógica:
+    `radar-datos.js`.
+- **Fichas.** Las cuatro fichas de Datos abiertos e Informes oficiales son
+  botones (`fichas()` en `apartados.py`). Se despliegan debajo de su fila
+  con el aspecto del visor y no abren la portada. Hay una abierta a la vez
+  por pestaña.
+  - Descarga en CSV: las siete bases con su botón y su diccionario.
+  - EFIPEM: la descarga y una consulta por estado con la tabla de sus
+    municipios. Solo muestra cifras del INEGI que ya estaban en
+    `municipios-efipem.js`.
+  - Informes de la Cuenta Pública: el `renderCuentaPublica()` completo, con
+    sus ocho capítulos.
+  - Diccionario: las siete bases con el diccionario abierto.
+- `#ficha-<id>` abre la pestaña y la ficha. La tarjeta del radar «Ver lo que
+  encontró la ASF» ahora apunta a `#ficha-asf`.
+- El código es copia del motor (`DESCARGAS`, `descargarCSV`,
+  `renderCuentaPublica`, `capMontar` y sus ayudantes) y vive en
+  `assets/auditor/js/datos.js`. **Si cambia en el motor, cambia aquí.**
+  - El botón «Ver en el Catálogo de Fuentes» enlaza a
+    `index.html?ir=fuentes`, porque el catálogo sigue en la portada.
+  - La lista 69-B del SAT solo se baja al pedir su CSV.
+- Pendiente (§5 bis): que `ir=descargas`, `ir=diccionario` e
+  `ir=csv-municipios` de la portada lleven a esta página.
+
 **Participa con su contenido dentro de las pestañas (09-10-2026, sello
 20261009o).** El autor pidió que cada pestaña muestre su contenido, como en
 Aprende, y no tarjetas que mandaran a la portada.
