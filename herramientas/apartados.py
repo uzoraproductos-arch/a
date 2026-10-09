@@ -288,9 +288,11 @@ APARTADOS = [
         'lema': 'Ágora cívica y canales oficiales',
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
                     'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
+        'pestanas': True,
         'secciones': [
             {
                 'id': 'agora',
+                'pestana': ('💬', 'Ágora cívica', 'Diálogos y argumentos con fuentes'),
                 'titulo': '💬 Ágora cívica y diálogos',
                 'texto': 'Un espacio plural para argumentar con datos.',
                 'tarjetas': [
@@ -301,6 +303,7 @@ APARTADOS = [
             },
             {
                 'id': 'garantias',
+                'pestana': ('🛡️', 'Garantías cívicas', 'Privacidad y canales de denuncia'),
                 'titulo': '🛡️ Garantías cívicas y formación',
                 'texto': 'Qué pasa con lo que escribes y a dónde llevar un señalamiento.',
                 'tarjetas': [
@@ -335,13 +338,13 @@ def cabecera(actual, sello):
         items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="%s"%s>%s</a></div>'
                      % (a['archivo'], cur, a['menu']))
     return '''  <nav class="site-top-nav" aria-label="Navegación principal">
-    <a class="nav-brand-group" href="index.html" title="Volver al inicio de Auditavisión">
-      <span class="brand-logo-btn" aria-hidden="true"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></span>
+    <div class="nav-brand-group">
+      <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
       <span class="nav-brand-text">
         <span class="nav-brand-title">Auditavisión</span>
         <span class="nav-brand-sub">El gasto público, a la vista</span>
       </span>
-    </a>
+    </div>
 
     <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
       <span class="nav-hamb-rayas" aria-hidden="true"><span></span><span></span><span></span></span>

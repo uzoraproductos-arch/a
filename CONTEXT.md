@@ -587,6 +587,45 @@ La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
     abren desde el entorno.
   - Hay 16 columnas y 58 afirmaciones descartadas.
 
+**Participa en pestañas, el logotipo abre «Quiénes somos» y la ventana
+lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
+- `participa.html` funciona como Aprende (`'pestanas': True`): dos
+  pestañas, «Ágora cívica» (`#agora`) y «Garantías cívicas»
+  (`#garantias`), que se despliegan al pulsarlas.
+- En las páginas generadas, el logotipo ya no lleva a la portada. Ahora es
+  un botón (`#apartadoPresentacion`) que abre la presentación «Quiénes
+  somos» en la ventana lateral, sin salir de la página. Como esas páginas
+  no cargan el motor, `apartados.js` lleva una copia del texto de
+  `abrirPresentacion()`: **si cambia uno, cambia el otro**. Para volver a
+  la portada está el botón «Ir a la página principal» al pie de la
+  ventana. En `index.html` el logotipo ya hacía eso.
+- La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
+  Lo heredan la presentación, el glosario y las notas.
+
+**Dos columnas más de García Luna (09-10-2026, sello 20261009n).** Las pidió
+el autor y se verificaron con la regla editorial. Quedan 18 columnas y 75
+afirmaciones descartadas.
+- «García Luna y los testigos colaboradores: lo que dice la ley de cada
+  lado». Recupera la tesis del módulo retirado de la Enciclopedia, ya
+  verificada:
+  - el testimonio es prueba en los dos países (CNPP arts. 259 y 356;
+    FRE 601);
+  - la ley mexicana también premia al colaborador (LFDO art. 35; CNPP
+    art. 256 fr. V) y pide valorarlo con prudencia y corroborarlo (LFDO
+    arts. 35 Bis, 36 y 40);
+  - **el CNPP no recoge el «testis unus, testis nullus»** que afirmaba el
+    texto viejo, así que eso va a descartado.
+  - Pendiente por falta de la plataforma: la jurisprudencia de la SCJN
+    sobre el coimputado (sjf2 bloquea el entorno) y las transcripciones
+    del juicio.
+- «García Harfuch y la Policía Federal de García Luna». Lo que consta es la
+  coincidencia institucional entre 2008 y 2012: el SIL, cuyos datos no ha
+  confirmado el legislador, y el comunicado del DOJ. **La amistad y los
+  vínculos no constan en ningún documento oficial** y la columna lo dice.
+  Pendiente: abrir el PDF de la acusación sustitutiva del DOJ (19-576 S-1)
+  para confirmar que no lo menciona. Los datos del DOJ se leyeron por el
+  buscador porque justice.gov está bloqueado.
+
 **Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sellos
 20261009g y 20261009h).** Decisión del autor. En `civico.css` (bloque «CABECERA
 (09-10-2026)»). Primero se adelantó el desvanecido 3.5 cm, pero al agrandar

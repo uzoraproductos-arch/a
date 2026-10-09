@@ -198,4 +198,83 @@
     if (e.origin !== window.location.origin || !e.data || e.data.auditavision !== 'cerrar-visor') return;
     cerrarVisor(true);
   });
+  /* El logotipo abre la presentación «Quiénes somos» en la ventana lateral,
+     sin salir de la página (decisión del autor, 09-10-2026). Es el mismo
+     texto que abrirPresentacion() del motor, que estas páginas no cargan:
+     si cambia uno, cambia el otro. */
+  var logo = document.getElementById('apartadoPresentacion');
+  var presOv = null, presDr = null, presOrigen = null;
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + e + '</span>'; }
+  function sec(tit, h) { return '<section class="glos-drawer-sec"><h4>' + tit + '</h4>' + h + '</section>'; }
+  function cerrarPresentacion() {
+    if (!presDr || !presDr.classList.contains('abierto')) return;
+    presDr.classList.remove('abierto');
+    presOv.classList.remove('abierto');
+    document.body.classList.remove('glos-drawer-bloqueo');
+    if (presOrigen && presOrigen.focus) { try { presOrigen.focus({ preventScroll: true }); } catch (err) { /* sin foco */ } }
+  }
+  function abrirPresentacion() {
+    if (!presDr) {
+      presOv = document.createElement('div');
+      presOv.className = 'glos-drawer-overlay';
+      presOv.addEventListener('click', cerrarPresentacion);
+      presDr = document.createElement('aside');
+      presDr.className = 'glos-drawer';
+      presDr.setAttribute('role', 'dialog');
+      presDr.setAttribute('aria-modal', 'true');
+      presDr.setAttribute('aria-labelledby', 'presTitulo');
+      var palabras = [
+        ['Audita', 'de <i>auditar</i>: revisar con método que lo que se gastó corresponda a lo que se autorizó y a lo que se comprobó.'],
+        ['visión', 'mirar el conjunto, de la Federación a los estados y municipios, y hacerlo visible para quien no lee informes técnicos.'],
+        ['Sistema', 'no son notas sueltas: ingresos, egresos, transferencias, deuda y Cuenta Pública son piezas conectadas que se leen juntas.'],
+        ['Cívico', 'lo construye y lo usa la ciudadanía. No es una autoridad ni sustituye a la Auditoría Superior de la Federación ni a las contralorías.'],
+        ['Fiscalización', 'la revisión del uso de los recursos públicos. La oficial la hacen la ASF (art. 79 constitucional) y las entidades de fiscalización de los estados (art. 116, fr. II); la ciudadana la complementa: consulta, compara, pregunta y denuncia.']
+      ];
+      var principios = [
+        ['Fuente antes que opinión', 'cada cifra se rastrea a su documento oficial: DOF, SHCP, ASF, INEGI, Banxico, Gaceta Parlamentaria.'],
+        ['Honestidad del dato', 'cada cifra dice si es ' + chip('oficial') + ', ' + chip('derivado') + ' o ' + chip('pendiente') + '.'],
+        ['Método a la vista', 'si una cifra se calcula, se dice la operación para que cualquiera la repita.'],
+        ['Claridad con rigor', 'se explica en lenguaje llano, sin simplificar lo que la ley dice.'],
+        ['Memoria', 'las normas y estructuras derogadas se marcan con su vigencia en lugar de borrarse.']
+      ];
+      var compromisos = [
+        'No inventar ni redondear a ojo: lo que no se puede verificar se queda como <b>pendiente</b>.',
+        'Poner el documento a tu alcance para que lo verifiques por tu cuenta.',
+        'Corregir a la vista cuando se encuentre un error. El sello de versión al pie de la página dice qué copia está leyendo.',
+        'Orientar hacia los canales oficiales de denuncia, sin suplantar a ninguna autoridad.'
+      ];
+      presDr.innerHTML =
+        '<header class="glos-drawer-cab">' +
+          '<span class="glos-drawer-marca"><span aria-hidden="true">👋</span> Quiénes somos</span>' +
+          '<button type="button" class="glos-drawer-x" aria-label="Cerrar la presentación">✕</button>' +
+        '</header>' +
+        '<div class="glos-drawer-cuerpo">' +
+          '<img class="pres-logo" src="assets/auditor/img/logo-auditavision.svg" alt="" width="200" height="156">' +
+          '<span class="glos-drawer-cat">Presentación</span>' +
+          '<h3 id="presTitulo" class="glos-drawer-tit">Auditavisión, Sistema Cívico de Fiscalización</h3>' +
+          '<p class="pres-lema">Una plataforma ciudadana que explica, con los documentos oficiales en la mano, de dónde sale el dinero público, en qué se gasta y qué encontró quien lo revisó.</p>' +
+          sec('El nombre, palabra por palabra', '<dl class="pres-palabras">' + palabras.map(function (w) { return '<dt>' + w[0] + '</dt><dd>' + w[1] + '</dd>'; }).join('') + '</dl>') +
+          sec('Propósito', '<p>Que cualquier persona pueda seguir el rastro de un peso público, desde que se cobra hasta que se gasta y se audita, y convertir una duda en una pregunta bien hecha: una solicitud de información, una denuncia o un voto informado.</p>') +
+          sec('Principios', '<ol class="pres-lista">' + principios.map(function (x) { return '<li><b>' + x[0] + ':</b> ' + x[1] + '</li>'; }).join('') + '</ol>') +
+          sec('Compromisos', '<ul class="rc-plazos">' + compromisos.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>') +
+          sec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 6º, apartado A (derecho de acceso a la información pública), art. 8º (derecho de petición), art. 79 (fiscalización superior de la Federación) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
+        '</div>' +
+        '<footer class="glos-drawer-pie">' +
+          '<a class="glos-drawer-todo" href="index.html" style="text-align:center; text-decoration:none;">⚡ Ir a la página principal ➔</a>' +
+        '</footer>';
+      presDr.querySelector('.glos-drawer-x').addEventListener('click', cerrarPresentacion);
+      document.body.appendChild(presOv);
+      document.body.appendChild(presDr);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrarPresentacion(); });
+    }
+    presOrigen = document.activeElement;
+    menu(false);
+    presOv.classList.add('abierto');
+    presDr.classList.add('abierto');
+    document.body.classList.add('glos-drawer-bloqueo');
+    presDr.querySelector('.glos-drawer-cuerpo').scrollTop = 0;
+    var x = presDr.querySelector('.glos-drawer-x');
+    setTimeout(function () { x.focus(); }, 30);
+  }
+  if (logo) logo.addEventListener('click', abrirPresentacion);
 })();
