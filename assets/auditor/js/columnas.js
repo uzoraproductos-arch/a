@@ -99,6 +99,157 @@
   "actualizado": "28 de agosto de 2026"
  },
  {
+  "id": "abelina-lopez-lo-que-observaron-los-auditores",
+  "seccion": "Personajes",
+  "icono": "🔎",
+  "titulo": "Acapulco bajo Abelina López: lo que observaron la ASF y la Auditoría de Guerrero",
+  "balazo": "Entre 2022 y 2024, la Auditoría Superior de la Federación dejó más de 237 millones de pesos por aclarar al municipio, y la mayor parte corresponde a 2024.",
+  "cuerpo": [
+   "Abelina López Rodríguez ha encabezado el Ayuntamiento de Acapulco de Juárez. Aquí reunimos lo que dicen los informes oficiales de las dos auditorías que revisan sus cuentas. Antes de leer, ten presente algo: cada observación se dirige al municipio como ente fiscalizado y no a una persona. Un monto «por aclarar» o un pliego de observaciones es una presunción que el municipio todavía puede solventar con documentos. No prueba un desvío.",
+   "Cuenta Pública 2022. En la auditoría 1003 (2022-D-12001-19-1003-2023), la ASF revisó el 100 % de los 763,756.5 miles de pesos del Fondo de Aportaciones para la Infraestructura Social Municipal (FISMDF). Emitió dos pliegos de observaciones. Uno es por 3,890,000.00 pesos, pagados por estudios y servicios profesionales que no corresponden a los rubros de la Ley de Coordinación Fiscal. El otro es por 23,248,143.48 pesos, pagados en dos compras de cemento, arena y grava sin proyecto, bitácora, padrón de beneficiarios ni actas de entrega. Al cierre del informe quedaban 27,138,143.48 pesos pendientes de aclaración. Las otras dos auditorías de ese año, a Participaciones (1004 y 1005), no dejaron montos por aclarar.",
+   "Cuenta Pública 2023. Según los índices de informes que publicó la ASF, la única auditoría federal al municipio en ese año fue la 1103 (2023-D-12001-19-1103-2024), sobre Participaciones Federales, con un universo de 1,122,158.6 miles de pesos. Dejó una solicitud de aclaración por 3,721,419.01 pesos por falta de documentación de plazas, sueldos y prestaciones. Ese año la ASF no auditó el FAISMUN de Acapulco.",
+   "Cuenta Pública 2024. La auditoría integral 1084 (2024-D-12001-19-1084-2025) revisó 1,348,595.3 miles de pesos de Participaciones, FORTAMUN y FAISMUN, y determinó 206,217,857.91 pesos pendientes por aclarar. El monto se compone de dos pliegos de observaciones y dos solicitudes de aclaración. El primer pliego, por 127,668,501.41 pesos, es por contratos sin actas de entrega-recepción ni evidencia de que se recibieron los bienes o servicios. El segundo, por 58,532,119.10 pesos, es por obras pagadas con FAISMUN y FORTAMUN sin estimaciones, fotografías ni pruebas de laboratorio. Las dos solicitudes de aclaración suman 6,250,598.82 y 13,766,638.58 pesos, por pagos de nómina por encima del tabulador. En su dictamen, la ASF concluye que el municipio «no realizó una gestión eficiente» de esos recursos. Un dato a considerar: la sentencia de la Corte sobre la queja 4/2025-CA consigna que el Congreso local autorizó a la presidenta municipal una licencia a partir del 20 de abril de 2024. El informe abarca todo el ejercicio y no separa periodos.",
+   "Sobre 2021: la ASF revisó ese ejercicio completo. En la auditoría 968 (FISMDF) dejó 20,105,931.57 pesos pendientes de aclaración y en la 967 (contratos con gasto federalizado), 64,150,345.80 pesos por aclarar. Esos informes no distinguen entre la administración saliente y la entrante, así que no se pueden atribuir completos al periodo que aquí revisamos.",
+   "La Auditoría Superior del Estado de Guerrero (ASE) publicó su propio resumen de las cuentas 2021 a 2023. Ahí acota sus cifras de 2021 al periodo de octubre a diciembre: 82,795,367.33 pesos observados en gestión financiera y 87,623,936.85 pesos en FAISMUN. Para 2022 observa 36,371,714.06 pesos y para 2023, 58,381,460.99 pesos, ambos en gestión financiera. La cifra mayor de ese resumen son los 898,633,453.00 pesos del FAISMUN 2023, el 100 % de lo que recibió el municipio de ese fondo. La ASE los observó porque, según dice, el municipio no entregó los expedientes de 511 obras y 2 acciones. Ese informe ya no tiene validez: la Suprema Corte lo invalidó en la controversia constitucional 174/2025, y hoy la propia ASE lo publica con esa leyenda.",
+   "Todas estas cifras son las que constaban al emitirse cada informe. En la etapa de seguimiento, el municipio puede solventarlas total o parcialmente, o la ASF puede convertirlas en otras acciones."
+  ],
+  "dato_curioso": "En la auditoría de 2024, la ASF encontró que el municipio retuvo 83,420.5 miles de pesos a 3,359 trabajadores por cuotas al ISSSPEG, cuota sindical y cooperación mutualista, sin evidencia de haberlos entregado a esas instituciones.",
+  "cifras": [
+   {
+    "valor": "$27,138,143.48",
+    "etq": "Pendiente de aclaración, FISMDF 2022 (auditoría 1003)",
+    "estado": "oficial",
+    "fuente": "ASF, Informe Individual CP 2022",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_1003_a.pdf"
+   },
+   {
+    "valor": "$3,721,419.01",
+    "etq": "Por aclarar, Participaciones 2023 (auditoría 1103)",
+    "estado": "oficial",
+    "fuente": "ASF, Informe Individual CP 2023",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_1103_a.pdf"
+   },
+   {
+    "valor": "$206,217,857.91",
+    "etq": "Por aclarar, gasto federalizado 2024 (auditoría 1084)",
+    "estado": "oficial",
+    "fuente": "ASF, Informe Individual CP 2024",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1084_a.pdf"
+   },
+   {
+    "valor": "$237,077,420.40",
+    "etq": "Suma por aclarar de las cuentas 2022 a 2024 (27,138,143.48 + 3,721,419.01 + 206,217,857.91)",
+    "estado": "derivado",
+    "fuente": "ASF, auditorías 1003, 1103 y 1084",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1084_a.pdf"
+   },
+   {
+    "valor": "$898,633,453.00",
+    "etq": "Pliego de la ASE por FAISMUN 2023, invalidado por la SCJN",
+    "estado": "oficial",
+    "fuente": "ASE Guerrero, informe 2023-C-CIF-01-002-2024",
+    "url": "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/001_Acapulco_CIF_2023_C_CIF_01_002_2024.pdf"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "ASF, Informe Individual, auditoría 1003 FISMDF, Cuenta Pública 2022",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_1003_a.pdf"
+   },
+   {
+    "nombre": "ASF, Informe Individual, auditoría 1004 Participaciones, Cuenta Pública 2022",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_1004_a.pdf"
+   },
+   {
+    "nombre": "ASF, Informe Individual, auditoría 1005 Participaciones (art. 3-B LCF), Cuenta Pública 2022",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2022b/Documentos/Auditorias/2022_1005_a.pdf"
+   },
+   {
+    "nombre": "ASF, Informe Individual, auditoría 1103 Participaciones, Cuenta Pública 2023",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_1103_a.pdf"
+   },
+   {
+    "nombre": "ASF, Informe Individual, auditoría integral 1084, Cuenta Pública 2024",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1084_a.pdf"
+   },
+   {
+    "nombre": "ASF, Informe Individual, auditoría 968 FISMDF, Cuenta Pública 2021",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2021b/Documentos/Auditorias/2021_0968_a.pdf"
+   },
+   {
+    "nombre": "ASF, Informe Individual, auditoría 967 Contratos con gasto federalizado, Cuenta Pública 2021",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Auditorias/2021_0967_a.pdf"
+   },
+   {
+    "nombre": "ASE Guerrero, Resumen de auditorías practicadas al Municipio de Acapulco de Juárez, Cuentas Públicas 2021, 2022 y 2023",
+    "url": "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/ASE_resumen_de_auditorias_practicadas_al_municipio_de_acapulco_de_juarez.pdf"
+   },
+   {
+    "nombre": "ASE Guerrero, Informe Individual 2023-C-CIF-01-002-2024 (publicado con la leyenda de invalidez de la SCJN)",
+    "url": "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/001_Acapulco_CIF_2023_C_CIF_01_002_2024.pdf"
+   }
+  ],
+  "actualizado": "6 de julio de 2026"
+ },
+ {
+  "id": "abelina-lopez-corte-invalida-auditoria-estatal",
+  "seccion": "Personajes",
+  "icono": "⚖️",
+  "titulo": "La Corte anuló la auditoría estatal de 898 millones a Acapulco: qué decidió y qué no",
+  "balazo": "La Corte resolvió quién tiene facultades para auditar ese dinero; no decidió si se gastó bien o mal.",
+  "cuerpo": [
+   "En 2024, la Auditoría Superior del Estado de Guerrero (ASE) abrió la auditoría 2023-C-CIF-01-002-2024 para revisar cómo usó Acapulco el Fondo de Aportaciones para la Infraestructura Social Municipal (FAISMUN) de 2023. El municipio no entregó la información que se le pidió. La ASE emitió entonces un pliego de observaciones por 898,633,453.00 pesos, todo lo que el municipio recibió de ese fondo, y promovió responsabilidades administrativas. Además, abrió un procedimiento por «desacato» contra la presidenta municipal por no responder al requerimiento.",
+   "El 27 de mayo de 2025, el síndico del municipio presentó ante la Suprema Corte la controversia constitucional 174/2025. Su argumento fue que el FAISMUN es dinero federal y que una auditoría estatal no tiene facultades para revisarlo. El 25 de junio de 2025, el ministro instructor concedió la suspensión: la ASE debía detener la fiscalización y cualquier acto derivado de ella.",
+   "Un día después, el 26 de junio de 2025, un actuario de la ASE fijó en la puerta del Ayuntamiento la notificación del procedimiento de responsabilidad contra la presidenta municipal. El municipio presentó un recurso de queja. El 10 de marzo de 2026, el Pleno lo resolvió por unanimidad de nueve votos (queja 4/2025-CA). Declaró fundada la queja y ordenó a la ASE dejar sin efecto esa notificación y suspender lo que derivara de ella. No sancionó a la ASE ni al Congreso, porque ninguno de los dos conocía oficialmente la suspensión el día de la notificación.",
+   "El 6 de julio de 2026, el Pleno resolvió el fondo por unanimidad, con el proyecto del ministro Arístides Rodrigo Guerrero García. La controversia fue parcialmente procedente y fundada, se sobreseyó en una parte, y la Corte declaró la invalidez del informe individual de auditoría y del oficio ASE-1380-2025. La razón es de competencia: conforme a los artículos 74, fracción VI, y 79 de la Constitución, la fiscalización directa de los recursos federales que ejercen los municipios corresponde solo a la Auditoría Superior de la Federación. La Corte siguió el precedente de la controversia 248/2025.",
+   "Lo que la Corte no hizo también importa. El ponente dijo en la sesión que el fallo no exime al municipio de ninguna fiscalización ni se pronuncia sobre el manejo del dinero. Según la versión taquigráfica, el proyecto deja a salvo las facultades de los órganos de fiscalización y de los congresos, locales y federales, para pronunciarse sobre la cuenta pública 2023 del municipio. El ministro Irving Espinosa Betanzo añadió que la invalidez «no prejuzga sobre la existencia o inexistencia de irregularidades» y que las autoridades competentes conservan sus facultades mientras las posibles conductas no prescriban.",
+   "Al momento de escribir esto, la sentencia de fondo (el engrose) no aparecía publicada en el sitio de la Corte. Esta columna se apoya en la versión taquigráfica oficial de la sesión, en la sentencia de la queja y en el propio informe de la ASE, que hoy se publica con la leyenda de su invalidez."
+  ],
+  "dato_curioso": "En la Cuenta Pública 2023, la ASF auditó a Acapulco solo en Participaciones (auditoría 1103), no en el FAISMUN, que es el fondo cuya auditoría estatal anuló la Corte.",
+  "cifras": [
+   {
+    "valor": "$898,633,453.00",
+    "etq": "Pliego de observaciones de la ASE sobre el FAISMUN 2023, invalidado",
+    "estado": "oficial",
+    "fuente": "ASE Guerrero, informe 2023-C-CIF-01-002-2024",
+    "url": "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/001_Acapulco_CIF_2023_C_CIF_01_002_2024.pdf"
+   },
+   {
+    "valor": "Unanimidad",
+    "etq": "Votación del Pleno de la SCJN en la CC 174/2025, 6 de julio de 2026",
+    "estado": "oficial",
+    "fuente": "SCJN, versión taquigráfica",
+    "url": "https://www.scjn.gob.mx/sites/default/files/versiones-taquigraficas/documento/2026-07-07/6%20de%20julio%20de%202026%20-%20Versi%C3%B3n%20definitiva%202._0.pdf"
+   },
+   {
+    "valor": "9 votos",
+    "etq": "Unanimidad en la queja 4/2025-CA, 10 de marzo de 2026",
+    "estado": "oficial",
+    "fuente": "SCJN, sentencia de la queja",
+    "url": "https://www2.scjn.gob.mx/juridica/engroses/3/2025/31/2_353218_7619_firmado.pdf"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "SCJN, versión taquigráfica de la sesión pública del Pleno del 6 de julio de 2026 (CC 174/2025, pp. 88-98)",
+    "url": "https://www.scjn.gob.mx/sites/default/files/versiones-taquigraficas/documento/2026-07-07/6%20de%20julio%20de%202026%20-%20Versi%C3%B3n%20definitiva%202._0.pdf"
+   },
+   {
+    "nombre": "SCJN, sentencia del recurso de queja 4/2025-CA, derivado de la CC 174/2025, 10 de marzo de 2026",
+    "url": "https://www2.scjn.gob.mx/juridica/engroses/3/2025/31/2_353218_7619_firmado.pdf"
+   },
+   {
+    "nombre": "ASE Guerrero, Informe Individual 2023-C-CIF-01-002-2024, Cuenta Pública 2023 de Acapulco de Juárez",
+    "url": "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/001_Acapulco_CIF_2023_C_CIF_01_002_2024.pdf"
+   },
+   {
+    "nombre": "ASF, índice de informes individuales, Cuenta Pública 2023, tercera entrega",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2023c/index.html"
+   }
+  ],
+  "actualizado": "6 de julio de 2026"
+ },
+ {
   "id": "santa-anna-mesilla-y-perros",
   "seccion": "Historia",
   "icono": "🐕",
@@ -1023,6 +1174,141 @@
   "tema": "Ignacio Ovalle Fernández",
   "afirmacion": "Director general de Segalmex, Diconsa y Liconsa de 2018 a 2022",
   "motivo": "Solo se verificó su salida, el 19 de abril de 2022, en un comunicado de Segalmex. No se localizó en documento oficial la fecha de su nombramiento ni que haya encabezado también Diconsa y Liconsa."
+ },
+ {
+  "tema": "Hijos de Salinas de Gortari y NXIVM",
+  "afirmacion": "Columna completa: Emiliano y Cecilia Salinas Occelli, NXIVM y el caso contra Keith Raniere",
+  "motivo": "No se pudo abrir ningún documento oficial de EE.UU. (justice.gov, tribunales federales, PACER y govinfo están bloqueados en nuestro entorno) ni la sentencia SRE-PSC-75/2021 del TEPJF. La afirmación de que la fiscalía señaló a Emiliano Salinas como coconspirador no acusado solo aparece en prensa. Ningún documento localizado los acusa de un delito. Falta de la plataforma: pendiente hasta revisar la transcripción del juicio (EDNY 1:18-cr-00204), el comunicado del DOJ del 27-10-2020 y la sentencia del TEPJF."
+ },
+ {
+  "tema": "Hijos de Salinas de Gortari y NXIVM",
+  "afirmacion": "Cecilia Salinas Occelli codirigió ESP en México; reclutamiento de herederos; relación con DOS",
+  "motivo": "Ningún documento oficial, ni siquiera un resultado en dominio oficial, lo sostiene. Ponerlos junto a DOS insinuaría un delito que nadie les atribuye."
+ },
+ {
+  "tema": "Fallo por «más de 600 millones» que habría detectado la ASF",
+  "afirmacion": "Un tribunal (la SCJN o uno administrativo) dejó sin efecto el pago o la responsabilidad por más de 600 millones de pesos detectados por la ASF.",
+  "motivo": "No encontré ninguna resolución así. La que existe es de la SCJN (CC 174/2025, 6 de julio de 2026) y se refiere a 898,633,453.00 pesos observados por la ASE de Guerrero, no por la ASF. La Corte invalidó el informe por falta de competencia, sin juzgar el manejo del dinero. La única resolución sobre responsabilidad es la queja 4/2025-CA (10 de marzo de 2026), que ordenó dejar sin efecto la notificación de un procedimiento por desacato mientras se resolvía el fondo. No encontré resoluciones del TFJA ni del Tribunal de Justicia Administrativa de Guerrero."
+ },
+ {
+  "tema": "Comunicado de prensa SCJN 101/2026",
+  "afirmacion": "La Corte difundió el fallo en su comunicado 101/2026.",
+  "motivo": "El buscador lo muestra en internet2.scjn.gob.mx (id=8520), pero el servidor devolvió 403 y no pude abrirlo. Por eso no lo cito. El fallo se sostiene con la versión taquigráfica oficial."
+ },
+ {
+  "tema": "«No es exoneración» como frase de los ministros",
+  "afirmacion": "Los ministros aclararon que «no es una exoneración».",
+  "motivo": "Esa frase textual no aparece en la versión taquigráfica. Lo que sí consta: el ponente dijo que el fallo no exime de fiscalización ni se pronuncia sobre el manejo del dinero, y Espinosa Betanzo dijo que la invalidez no prejuzga sobre irregularidades. La columna usa esas expresiones."
+ },
+ {
+  "tema": "Fecha «julio 2026» y ministro instructor",
+  "afirmacion": "La ficha anterior no distinguía entre la resolución de la queja (10 de marzo de 2026) y la del fondo (6 de julio de 2026).",
+  "motivo": "Se corrigió con los documentos. Instruyó Javier Laynez Potisek y resolvió el fondo la ponencia de Arístides Rodrigo Guerrero García."
+ },
+ {
+  "tema": "Deudas de CAPAMA, CFE, SAT e ISSSPEG",
+  "afirmacion": "El municipio y CAPAMA arrastran una deuda de más de 2,000 mdp, con más de 800 mdp con la CFE y deudas con el SAT y el ISSSPEG.",
+  "motivo": "No encontré documento oficial que lo sostenga. Lo único verificado es la observación de la ASF de 2024 sobre 83,420.5 miles de pesos retenidos a trabajadores (ISSSPEG, SUSPEG, mutualista) sin evidencia de entero, y está en la columna como dato curioso."
+ },
+ {
+  "tema": "Presupuesto «más de 4,500 mdp anuales»",
+  "afirmacion": "El municipio maneja más de 4,500 mdp al año.",
+  "motivo": "No está verificado. La ASE reporta universos de gestión financiera de 4,014,604,066.03 (2021), 4,869,150,735.72 (2022) y 5,071,285,743.04 (2023) pesos, que no coinciden con esa cifra."
+ },
+ {
+  "tema": "Fondos de reconstrucción por Otis y John",
+  "afirmacion": "La gestión está bajo escrutinio por fondos de reconstrucción tras Otis (2023) y John (2024).",
+  "motivo": "Ningún informe de la ASF dirigido al municipio que revisé audita fondos de reconstrucción. La única mención es que la auditoría 1084 de 2024 registra avances financieros reportados durante una suspensión por huracán en el contrato MAJ/FAISMUN/299-2024/AD."
+ },
+ {
+  "tema": "Soborno de 20,000 pesos en tribuna (13 de octubre de 2020)",
+  "afirmacion": "Como diputada federal, confesó en tribuna haber pagado 20,000 pesos al Ministerio Público.",
+  "motivo": "Queda fuera del tema de fiscalización y no abrí el Diario de los Debates para verificar la cita textual. No se publica sin ese documento."
+ },
+ {
+  "tema": "Trayectoria y situación actual",
+  "afirmacion": "Fue diputada local y federal de 2018 a 2021, fue reelecta para 2024-2027 y pidió licencia para buscar la gubernatura.",
+  "motivo": "No lo verifiqué en documentos del INE, del IEPC ni del Congreso. Lo único que consta en documento oficial es la licencia del 20 de abril de 2024, que cita la sentencia de la queja 4/2025-CA. La prensa menciona una licencia reciente para buscar la candidatura a la gubernatura, sin documento oficial abierto. Por eso las columnas no afirman su cargo actual."
+ },
+ {
+  "tema": "Suma de observaciones de la ASF publicada en prensa",
+  "afirmacion": "Las observaciones de la ASF suman 282 millones 168 mil pesos en los ejercicios 2021, 2022 y 2024.",
+  "motivo": "La cifra no cuadra con los informes. Con los documentos, 2022 + 2023 + 2024 = 237,077,420.40 pesos (derivado), y las auditorías 967 y 968 de 2021 suman 84,256,277.37 pesos, que no se pueden atribuir completos a esta administración."
+ },
+ {
+  "tema": "Cargo partidista de López Beltrán",
+  "afirmacion": "Fue secretario de Organización del Comité Ejecutivo Nacional de Morena desde septiembre de 2024 (elegido en el VII Congreso Nacional Extraordinario del 22-09-2024). Renunció el 25-05-2026 para buscar la diputación federal del distrito 6 de Tabasco, y el 15-06-2026 lo sustituyó Manuel Jesús Zavala Salazar como delegado en funciones.",
+  "motivo": "Todo esto lo publicó la prensa, que coincide, pero no pude abrir ningún documento oficial que lo confirme. Los sitios del INE (ine.mx y repositoriodocumental.ine.mx) no se pudieron consultar desde este entorno (el proxy los rechaza y el DNS no los resuelve), igual que morena.org. La resolución INE/CG2363/2024, sobre los documentos básicos aprobados en ese congreso, no se pudo abrir. Las sentencias del TEPJF que sí descargué (SUP-JDC-329/2026, SUP-RAP-124/2026, SRE-PSC-261/2024) no lo mencionan. El dato es muy probablemente cierto, pero según la regla editorial queda pendiente hasta abrir el registro de integrantes del CEN de Morena ante el INE (DEPPP). Si falta, es una carencia de esta verificación, no de una dependencia."
+ },
+ {
+  "tema": "Sentencia del TEPJF de octubre de 2026",
+  "afirmacion": "La Sala Superior resolvió (según la prensa, el 7-10-2026, expediente SUP-REP-52/2026) que la queja de Movimiento Ciudadano contra López Beltrán por actos anticipados de campaña la resuelva el Consejo Distrital 6 del INE en Tabasco.",
+  "motivo": "La sentencia no está publicada en te.gob.mx: probé SUP-REP-0052-2026 y otras variantes del nombre y todas dan 404. Solo se cuenta con la prensa. Además, la resolución es de competencia: no decide el fondo."
+ },
+ {
+  "tema": "Romedic, S.A. de C.V.: contratos",
+  "afirmacion": "Romedic obtuvo más de 490 millones de pesos en contratos de los gobiernos de Tabasco (2020-2021, unos 209-216 millones) y de Quintana Roo (diciembre de 2022, cifras de 219, 274 o 304.6 millones según la fuente), con recursos del INSABI (programa E023).",
+  "motivo": "No encontré estos contratos en ningún documento oficial que haya podido abrir. Los históricos de CompraNet (compranet.hacienda.gob.mx y compranetinfo) no responden desde este entorno (error 502), y ComprasMX solo cubre de 2025 en adelante. Las cifras salen de MCCI y de la prensa, y no coinciden entre sí. Descargué el informe de la ASF de la Cuenta Pública 2022, auditoría 1614 (Quintana Roo, programa U013), y no nombra a Romedic: su muestra de contratos es otra (SESA-DA-055-2022 y siguientes) y no cubre recursos del E023. Los informes 2021-1547 (Quintana Roo) y 2023-1741 tampoco la mencionan."
+ },
+ {
+  "tema": "Romedic: vínculo con Amílcar Olán",
+  "afirmacion": "Romedic se constituyó el 23-01-2020 y sus socios fueron Jorge Amílcar Olán Aparicio y Jorge Luis Olán Rodríguez.",
+  "motivo": "La afirmación se apoya en el acta constitutiva o en el Registro Público de Comercio, según la prensa, pero no pude consultar ningún documento oficial de ese registro (SIGER). Sin ese documento no se puede afirmar que la empresa sea de Olán."
+ },
+ {
+  "tema": "Romedic en la lista de distribuidores irregulares de Cofepris",
+  "afirmacion": "Romedic estaba boletinada en la lista de distribuidores irregulares de Cofepris desde el 21-12-2022, seis días antes del contrato con Quintana Roo.",
+  "motivo": "Abrí el comunicado oficial de Cofepris 72/2022, del 21-12-2022 («Cofepris suma 11 nuevos establecimientos a lista de distribuidores irregulares de medicamentos», gob.mx/cofepris). Confirma 11 establecimientos nuevos, siete de ellos en Tabasco, pero el texto no da sus nombres. La lista está en un enlace acortado (bit.ly/3WqPEdc) que no se pudo abrir, así que no se puede confirmar que Romedic esté en ella. La versión de la lista de abril de 2024 en gob.mx da 404."
+ },
+ {
+  "tema": "ASF sobre Romedic",
+  "afirmacion": "Hay auditorías de la ASF sobre los contratos de Romedic con recursos del INSABI.",
+  "motivo": "No encontré ningún informe individual de la ASF que nombre a Romedic: la búsqueda en asf.gob.mx no da resultados. Las auditorías al gasto en salud de Quintana Roo que revisé no la mencionan. Que una diputada presentara una denuncia ante la ASF no significa que haya una auditoría ni una observación."
+ },
+ {
+  "tema": "Denuncia de la diputada Pérez-Jaén",
+  "afirmacion": "La diputada María Elena Pérez-Jaén Zermeño (PAN) presentó en diciembre de 2023 denuncias ante la FGR y la ASF por la compra de medicamentos de Quintana Roo a Romedic.",
+  "motivo": "La nota de Comunicación Social de la Cámara de Diputados existe según los buscadores, pero no se pudo abrir (HTTP 503 y certificado TLS incompleto). Según el extracto, sus cifras vienen de la prensa. Aunque se confirmara, solo acreditaría que se presentó una denuncia, no que haya una investigación ni un hecho probado."
+ },
+ {
+  "tema": "Investigaciones de la FGR",
+  "afirmacion": "Hay denuncias ante la Fiscalía Anticorrupción, y la FGR investiga u ordenó la aprehensión de Olán.",
+  "motivo": "No encontré ningún comunicado oficial de la FGR. Según la prensa, la fiscal Ernestina Godoy dijo de viva voz el 16-09-2026 que no hay orden de aprehensión contra Olán ni contra López Beltrán. Según la misma prensa, un juez sobreseyó el 28-05-2026 un amparo de Olán porque no existía la orden reclamada, pero no localicé el expediente. La prensa también reporta un amparo de Romedic de enero de 2024 contra la negativa de acceso a una carpeta. Nada de esto se pudo verificar en documentos oficiales, y en todo caso apunta a que no hay acusación formal."
+ },
+ {
+  "tema": "Hacienda/SAT y Portacelis Gas and Oil",
+  "afirmacion": "Hacienda o el SAT pidió a la FGR ejercer acción penal contra Portacelis Gas and Oil por 834 millones de pesos de presunto contrabando de combustible (el llamado «huachicol fiscal»), y la empresa estaría ligada a Olán.",
+  "motivo": "No hay ningún comunicado de SHCP, SAT, ANAM ni FGR que nombre a Portacelis. La cifra solo aparece, en un sitio oficial, en boca de una senadora del PAN durante una comparecencia (pan.senado.gob.mx), lo que es una afirmación de una legisladora y no un hallazgo de autoridad. El vínculo con Olán viene de la prensa (Reforma y Expansión) a través de un supuesto prestanombres. Según esas mismas notas, Olán no figura como acusado."
+ },
+ {
+  "tema": "UIF",
+  "afirmacion": "La UIF analiza operaciones de Romedic, Servicios de Minería Balancán y otras empresas.",
+  "motivo": "Solo lo dice TV Azteca. No hay ningún documento ni comunicado de la UIF ni de la SHCP."
+ },
+ {
+  "tema": "Balasto del Tren Maya",
+  "afirmacion": "Olán (a través de Grupo Minero El Alicante u otras empresas) vendió balasto a Sedena o a contratistas para los tramos 5, 6 y 7 con un sobreprecio de cerca del 70%, sobornó a laboratoristas y presumió en audios «en seis meses nos ganamos 250 millones».",
+  "motivo": "Los audios y la cotización vienen de Latinus y de columnas de opinión. No encontré ningún contrato en CompraNet ni ComprasMX, ni ningún informe de la ASF, que nombre a esas empresas o a Olán. Los informes de la ASF sobre el Tren Maya reportan observaciones generales (incluido balasto fuera de especificación, según la prensa) sin ligarlas a él. Según un punto de acuerdo legislativo, él habría sido subcontratista de otros proveedores, sin contrato directo con el gobierno. La «confirmación de Sedena» que menciona la prensa no la localicé en ningún comunicado oficial. La frase de los audios no es un dato de la plataforma: no se cita."
+ },
+ {
+  "tema": "«El Clan»",
+  "afirmacion": "Existe una red de contratismo llamada «El Clan» articulada por amigos de López Beltrán.",
+  "motivo": "Es una etiqueta periodística (Latinus y MCCI). Ningún documento oficial usa ese nombre ni establece esa red. Insinuarlo violaría la presunción de inocencia y la regla editorial."
+ },
+ {
+  "tema": "Malecón de Villahermosa (SEDATU)",
+  "afirmacion": "Amigos del círculo de Olán obtuvieron contratos de SEDATU por más de 3,000 millones de pesos para el Malecón de Villahermosa.",
+  "motivo": "No encontré ningún contrato ni informe de la ASF que vincule a esas empresas con Olán o con López Beltrán. La cifra viene de la ficha retirada y de la prensa."
+ },
+ {
+  "tema": "Denuncia de padres de niños con cáncer",
+  "afirmacion": "Padres de niños con cáncer denunciaron a López Beltrán y a Olán ante la FGR.",
+  "motivo": "Solo hay un anuncio en la prensa (5-10-2026). No consta que la denuncia se haya presentado, y una denuncia no es una investigación ni una resolución."
+ },
+ {
+  "tema": "Conclusión",
+  "afirmacion": "Columna sobre López Beltrán, Olán y los contratos públicos.",
+  "motivo": "No se escribe. No logré abrir ni un documento oficial que vincule a Olán o a su familia con contratos públicos concretos (monto, dependencia y fecha), ni ninguna investigación o resolución oficial que nombre a cualquiera de los dos. Hasta el cargo partidista de López Beltrán quedó sin confirmar en el INE, porque su portal no se pudo consultar desde este entorno. Una columna limitada a lo documentado se reduciría a un cargo sin fuente oficial abierta, y cualquier otra cosa insinuaría lo que ningún documento sostiene. Para reabrirla hacen falta: (1) el registro de integrantes del CEN de Morena ante el INE (DEPPP); (2) los contratos de Romedic en CompraNet histórico o en los portales de transparencia de los SESA de Quintana Roo y de la Secretaría de Salud de Tabasco, más el acta en SIGER; (3) la lista en PDF de Cofepris de diciembre de 2022; (4) un comunicado o expediente de FGR, SAT o UIF que nombre a las personas o a las empresas."
  }
 ];
 
