@@ -340,8 +340,9 @@ APARTADOS = [
                 'id': 'trivia',
                 'pestana': ('🎯', 'Trivia', 'El examen de los presidentes'),
                 'titulo': '🎯 Trivia: el examen de los presidentes',
-                'texto': ('Del Porfiriato a López Obrador: adivina, comprueba con la cifra oficial y, al final, mira el estado de cuenta '
-                          'de cada presidente y el reloj de su deuda. Antes vivía en el módulo de Megaobras, como «Administración presidencial».'),
+                'texto': ('Del siglo XIX, con Santa Anna, Juárez y Porfirio Díaz, al primer año de Claudia Sheinbaum: adivina, comprueba con la cifra oficial '
+                          'en barras o en línea y, al final, mira el estado de cuenta de cada presidente y el reloj de su deuda. '
+                          'Incluye los rubros de la gran balanza de la Enciclopedia (déficit, deuda, aduanas y rieles), verificados de nuevo contra el INEGI y Hacienda.'),
                 'bloque': ('<div class="tp" id="triviaPres">\n'
                            '          <noscript><p>La trivia necesita JavaScript.</p></noscript>\n'
                            '        </div>'),

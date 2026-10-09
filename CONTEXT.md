@@ -602,6 +602,40 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Trivia: la gran balanza de la Enciclopedia, en reactivos (09-10-2026, sello 20261009z).**
+Pedido del autor: traer a la trivia de Aprende el tablero 5.4 de la
+Enciclopedia («Versus General Don Porfirio Díaz»), con sus gráficas,
+simuladores y rubros, como preguntas en lugar de etiquetas. La trivia
+(`assets/auditor/js/trivia-presidentes.js`) pasa de 12 a 22 preguntas y
+de 4 a 7 rondas:
+- **La gran balanza** (4): primer superávit (1836-1837, no Limantour),
+  peor déficit contra ingresos (Díaz, 1888-1889: 114.8%), deuda de 1870 a
+  1911 (casi cinco veces) y dependencia de las aduanas (Santa Anna, Juárez,
+  Díaz y 2025).
+- **Los rieles** (2): pasajeros en la privatización (−95% de 1994 a 2000;
+  la red no se redujo) y kilómetros sumados de 1910 a 2012 (6,979).
+- **Hoy: el primer año de Claudia Sheinbaum** (4): balance 2025 (−3.9% del
+  PIB), de dónde sale el dinero (ISR), costo financiero contra inversión
+  física (3.7 contra 2.2) y la deuda más alta de la serie (52.6% en 2025).
+- **Gráfica lineal**: en las preguntas con serie (`serie: true`) hay un
+  selector Barras/Lineal; la traza se dibuja al contabilizar (`linea()`).
+- **Estado de cuenta**: se agregan las fichas de Sheinbaum (primer año,
+  se mide y no se califica), Juárez y Santa Anna; la del Porfiriato suma la
+  deuda de 1890 y 1911.
+- **Ninguna cifra del tablero 5.4 se copió**: la propia Enciclopedia lo
+  marca «en revisión, sin fuente». Todo se rehízo con el INEGI
+  (*Estadísticas históricas de México 2014*, cuadros 14.18, 16.3, 16.5 y
+  16.16) y con Hacienda (Criterios Generales de Política Económica 2027,
+  pp. 53 y 56). Lo que no se pudo sostener se explica en «Lo que
+  corregimos»: los % del PIB del siglo XIX, el «−19,000 km» de Zedillo, el
+  «88%» de ISR e IVA (fue 81.6%) y las cifras sexenales del tablero.
+- **Pendiente:** el kilometraje de los trenes posteriores a 2013 (Maya,
+  Interoceánico, El Insurgente). La Agencia Reguladora del Transporte
+  Ferroviario publica su anuario y la plataforma aún no lo integra: es
+  falta nuestra, no de la dependencia. Tampoco entraron los indicadores
+  sociales del tablero (esperanza de vida, salario real, tierra): falta
+  cotejarlos con CONAPO, CONASAMI y el INEGI.
+
 **Imágenes de herramientas más limpias y más lejanas (09-10-2026, sello 20261009y).**
 Pedido del autor: menos sombreado y menos zoom. Las imágenes son ahora
 `herr-*-amplia.jpg`: la escena casi completa al centro, sobre un fondo hecho

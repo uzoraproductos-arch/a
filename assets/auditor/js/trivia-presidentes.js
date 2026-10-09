@@ -15,6 +15,15 @@
    auditor (consulta 26-09-2026); las de deuda, las de la línea de tiempo de
    Sigue el dinero (deuda-tiempo.js): la publicación oficial más reciente
    de cada año. Si cambian allá, se cambian aquí.
+
+   Rondas de la balanza (09-10-2026): los rubros del tablero 5.4 de la
+   Enciclopedia («Versus General Don Porfirio Díaz»: balance, deuda,
+   aduanas, rieles y Sheinbaum) se volvieron preguntas. La Enciclopedia
+   está congelada y marca ese tablero «en revisión, sin fuente», así que
+   no se copió ninguna de sus cifras: cada una se rehízo con el INEGI
+   (Estadísticas históricas de México 2014) y con Hacienda (Criterios
+   Generales de Política Económica 2027). Lo que no se encontró se dice en
+   correcciones().
    ========================================================================== */
 (function () {
   'use strict';
@@ -39,7 +48,12 @@
     EHM_VIAS: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 14.18 (p. 45 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/14.%20Transportes%20y%20comunicaciones.pdf' },
     EHM_BAL: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 16.3 (p. 11 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/16.%20Finanzas%20publicas.pdf' },
     EHM_ING: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 16.6 (p. 15 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/16.%20Finanzas%20publicas.pdf' },
-    EHM_ALF: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 3.7 (p. 24 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/3.%20Educacion.pdf' }
+    EHM_ALF: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 3.7 (p. 24 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/3.%20Educacion.pdf' },
+    EHM_BAL_XIX: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 16.3 (pp. 10 y 11 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/16.%20Finanzas%20publicas.pdf' },
+    EHM_FUENTES: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 16.5 (p. 14 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/16.%20Finanzas%20publicas.pdf' },
+    EHM_DEUDA: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 16.16 (p. 48 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/16.%20Finanzas%20publicas.pdf' },
+    EHM_VIAS_SIGLO: { corto: 'INEGI, Estadísticas históricas de México 2014, cuadro 14.18 (pp. 45 a 47 del PDF)', url: 'https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/HyM2014/14.%20Transportes%20y%20comunicaciones.pdf' },
+    CGPE2027_IG: { corto: 'SHCP, Criterios Generales de Política Económica 2027, cuadro «Ingresos y gasto del Sector Público» (p. 56 del PDF)', url: 'https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf' }
   };
 
   /* ---------- El Porfiriato (INEGI, Estadísticas históricas de México 2014) ---------- */
@@ -59,6 +73,34 @@
     analfabetas: [[1895, 82.1], [1900, 77.7], [1910, 72.3]]
   };
   var ORO = '#b8902f';
+
+  /* ---------- La balanza: siglo XIX y hoy ---------- */
+  /* Cuadro 16.3: balance del gobierno federal, millones de pesos de cada
+     año fiscal, de 1823 a 1845 (falta 1832-1833: no hay egresos). Cuadro
+     16.16: deuda total del gobierno federal, miles de pesos, en los años
+     que tienen total. Cuadro 14.18: pasajeros por ferrocarril y kilómetros
+     de vía. CGPE 2027: ingresos y gasto del sector público, % del PIB. */
+  var SANTA = '#7a5a2e', JUAREZ = '#1f5f8b', SHEIN = '#0f7f7a', GRIS = '#7a8aa8';
+  var XIX = {
+    balance: [['1823', -1.6], ['1825', -5.2, 'ocho meses'], ['1825-26', -1.2, 'diez meses'], ['1826-27', -1.2], ['1827-28', -0.6], ['1828-29', -1.2],
+      ['1829-30', -2.2], ['1830-31', -3.1], ['1831-32', -3.9], ['1833-34', -7.1], ['1835-36', -11.1], ['1836-37', 0.9],
+      ['1837-38', -1.5, 'dieciocho meses'], ['1839', 1.8], ['1840', 0.0], ['1841', 1.0], ['1842', 0.1], ['1843', 0.1], ['1844', -9.5], ['1845', 0.8]],
+    deuda: [[1837, 128240], [1846, 138708], [1850, 126208], [1852, 98144], [1856, 109583], [1861, 75208], [1870, 120000],
+      [1890, 126951], [1893, 222132], [1900, 373420], [1903, 446992], [1911, 589686]],
+    pasajeros: [[1988, 18487000], [1991, 14901000], [1994, 7189000], [1997, 5092000], [1998, 1576000], [1999, 801000],
+      [2000, 334000], [2006, 261000], [2008, 8915000], [2012, 43830000]],
+    km: [[1876, 617], [1884, 5742], [1890, 9540], [1900, 13301], [1910, 19748], [1930, 23345], [1950, 23332], [1970, 24468], [1990, 26360], [2012, 26727]]
+  };
+  var HOY = {
+    balance: [[2020, -2.7], [2021, -2.9], [2022, -3.2], [2023, -3.4], [2024, -5.0], [2025, -3.9]],
+    ingresos2025: [['isr', 'ISR', 'Impuesto sobre la renta', 8.2], ['iva', 'IVA', 'Impuesto al valor agregado', 4.2], ['ieps', 'IEPS', 'Impuesto especial (gasolinas, tabaco, bebidas…)', 1.9],
+      ['imp', 'Importación', 'Impuestos al comercio exterior', 0.5], ['otros', 'Otros impuestos', '', 0.3], ['notrib', 'No tributarios', 'Cuotas del IMSS e ISSSTE, ventas de la CFE, derechos', 4.7], ['petro', 'Petroleros', 'Gobierno federal y Pemex', 3.5]],
+    gasto2025: [['sp', 'Servicios personales', 'Sueldos del sector público', 5.1], ['pens', 'Pensiones y jubilaciones', '', 4.6], ['part', 'Participaciones', 'Lo que se reparte a estados y municipios', 3.8],
+      ['cf', 'Costo financiero', 'Intereses y comisiones de la deuda', 3.7], ['sub', 'Subsidios', '', 2.8], ['inv', 'Inversión física', 'Obra pública y equipamiento', 2.2]],
+    deuda: [[2000, 30.7, 'zedillo'], [2006, 29.1, 'fox'], [2012, 37.2, 'calderon'], [2018, 44.9, 'epn'], [2020, 50.2, 'amlo'], [2024, 51.9, 'amlo'], [2025, 52.6, 'sheinbaum']]
+  };
+  function colorDe(id) { var p = pres(id); return id === 'sheinbaum' ? SHEIN : p ? p.col : GRIS; }
+  function opcionesLista(l, col) { return l.map(function (o) { return { id: o[0], et: o[1], sub: o[2] || '', col: o[3] || col || ORO }; }); }
 
   /* ---------- Los presidentes ---------- */
   var P = [
@@ -163,7 +205,16 @@
     if (f === 'km') return num(Math.round(v), 0) + ' km';
     if (f === 'mill') return (v < 0 ? '−' : '') + '$' + num(Math.abs(v), 1) + ' millones';
     if (f === 'miles') return '$' + num(Math.round(v), 0) + ' mil';
+    if (f === 'pib') return (v < 0 ? '−' : '') + num(Math.abs(v), 1) + '% del PIB';
     return String(v);
+  }
+  /* Rótulos cortos de la gráfica lineal: la unidad va en el título. */
+  function corto(v, f) {
+    var s = v < 0 ? '−' : '', a = Math.abs(v);
+    if (f === 'ent') return s + (a >= 1e6 ? num(a / 1e6, 1) + ' M' : a >= 1e3 ? num(a / 1e3, 0) + ' mil' : num(Math.round(a), 0));
+    if (f === 'km') return s + num(Math.round(a), 0);
+    if (f === 'pct2') return s + num(a, 2);
+    return s + num(a, 1);
   }
   /* Segundos de los seis años calendario de un sexenio. */
   function segundos(a) {
@@ -194,9 +245,12 @@
 
   var RONDAS = [
     { k: 'porf', et: 'Antes de los sexenios: el Porfiriato', ico: '🎩' },
+    { k: 'balanza', et: 'La gran balanza: Santa Anna, Juárez y Díaz', ico: '⚖️' },
+    { k: 'rieles', et: 'Los rieles, de 1876 a 2012', ico: '🛤️' },
     { k: 'eco', et: 'La economía', ico: '📈' },
     { k: 'deuda', et: 'La deuda', ico: '💳' },
-    { k: 'fisc', et: 'La fiscalización', ico: '🔎' }
+    { k: 'fisc', et: 'La fiscalización', ico: '🔎' },
+    { k: 'hoy', et: 'Hoy: el primer año de Claudia Sheinbaum', ico: '🇲🇽' }
   ];
 
   var PREGUNTAS = [
@@ -231,6 +285,60 @@
       op: 'Analfabetas entre la población del rango de edad de cada censo.',
       fs: ['EHM_ALF'],
       leccion: 'El analfabetismo bajó casi diez puntos en quince años: el régimen sí avanzó. Pero en 1910 siete de cada diez personas seguían sin saber leer. Los censos no miden igual (1895 cuenta desde los 6 años; los otros, desde los 10), así que la comparación es aproximada.' },
+    { r: 'balanza', tipo: 'lista', serie: true, q: 'Se repite que el primer superávit de México fue el de Limantour. Según el INEGI, ¿en qué año fiscal cerró con superávit el gobierno federal por primera vez?',
+      tit: 'Balance del gobierno federal, 1823 a 1845, millones de pesos de la época', fmtv: 'mill', est: 'oficial', natural: true, correcta: 'x1836-37',
+      opciones: function () { return opcionesLista([['x1836-37', '1836-1837', 'años de Santa Anna'], ['j1867-68', '1867-1868', 'Juárez'], ['p1894-95', '1894-1895', 'Díaz y Limantour'], ['p1895-96', '1895-1896', 'Díaz y Limantour']]); },
+      datos: function () { return XIX.balance.map(function (r) { return { id: 'x' + r[0], et: r[0], sub: r[2] || '', col: r[1] < 0 ? '#b3261e' : '#23855a', v: r[1] }; }); },
+      fuera: function () { return ['<b>1832-1833 y 1834-1835</b>: el cuadro no tiene los egresos de esos años, así que no se sabe cómo cerraron.']; },
+      op: 'Ingresos efectivos menos egresos ejercidos de cada año fiscal, como los publica el INEGI.',
+      fs: ['EHM_BAL_XIX'],
+      leccion: 'El primer superávit que registra el INEGI es el de 1836-1837: $0.9 millones. Hubo más en 1839, 1841, 1842, 1843 y 1845, y con Juárez cerraron con superávit cuatro de los cinco años fiscales de 1867 a 1872. Lo que sí distingue al Porfiriato es la racha: 16 años seguidos con superávit, de 1895-1896 a 1910-1911. Santa Anna entró y salió de la presidencia muchas veces en esos años: las cifras son del gobierno federal de cada año, no de un solo mandatario.' },
+    { r: 'balanza', tipo: 'lista', q: 'Midiendo el déficit contra lo que entraba a la caja, ¿en qué época fue más grande el hoyo?',
+      tit: 'Déficit del año contra los ingresos del mismo año, por ciento', fmtv: 'pct', est: 'derivado', correcta: 'di',
+      opciones: function () { return opcionesLista([['sa', 'Santa Anna', '1835-1836', SANTA], ['ju', 'Juárez', '1868-1869', JUAREZ], ['di', 'Porfirio Díaz', '1888-1889', ORO], ['am', 'López Obrador', '2024', colorDe('amlo')]]); },
+      datos: function () {
+        return [['sa', 'Santa Anna', '1835-1836', SANTA, 80.4], ['ju', 'Juárez', '1868-1869', JUAREZ, 57.3], ['di', 'Porfirio Díaz', '1888-1889', ORO, 114.8],
+          ['di2', 'Porfirio Díaz', '1889-1890', ORO, 102.6], ['am', 'López Obrador', '2024', colorDe('amlo'), 22.4], ['sh', 'Sheinbaum', '2025', SHEIN, 16.7]]
+          .map(function (r) { return { id: r[0], et: r[1], sub: r[2], col: r[3], v: r[4] }; });
+      },
+      fuera: function () { return []; },
+      op: 'Siglo XIX: déficit del gobierno federal entre sus ingresos efectivos, en pesos de la época (por ejemplo, 39.5 entre 34.4 millones en 1888-1889). 2024 y 2025: balance presupuestario del sector público entre sus ingresos presupuestarios, ambos en % del PIB; esa cobertura es más amplia, así que compara órdenes de magnitud, no décimas.',
+      fs: ['EHM_BAL_XIX', 'EHM_BAL', 'CGPE2027_IG'],
+      leccion: 'El peor hoyo fue del Porfiriato: en 1888-1889 el gobierno gastó $73.9 millones con ingresos de $34.4; por cada peso que entró, salieron $2.15. Los grandes déficits del régimen son de la década de 1880; la disciplina de Limantour llegó después, de 1895 en adelante. Que un déficit de hoy se vea menor no lo hace pequeño: se mide contra un Estado mucho más grande.' },
+    { r: 'balanza', tipo: 'lista', serie: true, q: 'En 1870, con Juárez, la deuda del gobierno federal sumaba $120 millones de pesos. En 1911, cuando Díaz dejó el poder, ¿cuánto sumaba?',
+      tit: 'Deuda total del gobierno federal, millones de pesos de la época', fmtv: 'mill', est: 'oficial', natural: true, correcta: 'o4',
+      opciones: function () { return opcionesLista([['o1', 'Unos $60 millones', 'la redujo a la mitad'], ['o2', 'Unos $120 millones', 'la dejó igual'], ['o3', 'Unos $250 millones', 'la duplicó'], ['o4', 'Casi $590 millones', 'casi cinco veces más']]); },
+      datos: function () { return XIX.deuda.map(function (r) { return { id: 'd' + r[0], et: String(r[0]), sub: '', col: r[0] >= 1876 ? ORO : r[0] >= 1858 ? JUAREZ : SANTA, v: r[1] / 1000 }; }); },
+      fuera: function () { return ['<b>1876 a 1889</b>: el cuadro solo trae la deuda externa, y de 1886 a 1888 en libras esterlinas; no se suman aquí.', '<b>Sin PIB oficial de la época</b>: se sabe cuánto se debía, no qué tanto pesaba en la economía.']; },
+      op: 'Deuda interna más externa del gobierno federal, en los años que el cuadro trae completos. «Casi cinco veces» es 589.7 entre 120.0 millones (derivado).',
+      fs: ['EHM_DEUDA'],
+      leccion: 'En pesos, Díaz entregó casi cinco veces la deuda de 1870, y la externa pasó de $52.5 millones en 1890 a $453.0 millones en 1911. El tablero de la Enciclopedia dice que la deuda porfiriana era de 30.5% del PIB: no encontramos documento oficial que lo sostenga. Ordenar las finanzas no es lo mismo que dejar de deber.' },
+    { r: 'balanza', tipo: 'pres', q: '¿En qué época dependía más el gobierno de lo que cobraba en las aduanas?',
+      tit: 'Impuestos al comercio exterior, por ciento de los ingresos', fmtv: 'pct', est: 'derivado',
+      datos: function () {
+        return [['sa', 'Santa Anna', '1833-1834', SANTA, 76.3], ['ju', 'Juárez', '1870-1871', JUAREZ, 67.9], ['di', 'Porfirio Díaz', '1894-1895', ORO, 45.2], ['sh', 'Sheinbaum', '2025', SHEIN, 2.1]]
+          .map(function (r) { return { id: r[0], et: r[1], sub: r[2], col: r[3], v: r[4] }; });
+      },
+      fuera: function () { return []; },
+      op: 'Impuestos al comercio exterior entre ingresos totales de cada año (8,786,396 entre 11,512,969 pesos en 1833-1834; 10,884,953 entre 16,033,649 en 1870-1871; 19,871 entre 43,946 miles en 1894-1895). 2025: impuestos a la importación entre ingresos presupuestarios del sector público, 0.5 entre 23.3% del PIB; con cifras redondeadas a un decimal, el resultado puede moverse unas décimas.',
+      fs: ['EHM_FUENTES', 'EHM_ING', 'CGPE2027_IG'],
+      leccion: 'Durante el siglo XIX el Estado vivió de las aduanas: tres de cada cuatro pesos en la época de Santa Anna, dos de cada tres con Juárez, casi la mitad con Díaz. Por eso el tablero marca «0% de ISR» para el Porfiriato: el impuesto sobre la renta todavía no existía. Hoy las aduanas aportan dos de cada cien pesos; el dinero sale del ingreso y del consumo de la gente.' },
+    { r: 'rieles', tipo: 'lista', serie: true, q: 'Con la privatización de los ferrocarriles, a finales de los noventa, ¿qué se desplomó?',
+      tit: 'Pasajeros transportados por ferrocarril en el año', fmtv: 'ent', est: 'oficial', natural: true, correcta: 'r2',
+      opciones: function () { return opcionesLista([['r1', 'Los kilómetros de vía', 'se levantó la red'], ['r2', 'Los pasajeros', 'el tren dejó de llevar gente'], ['r3', 'La carga', 'dejó de moverse mercancía'], ['r4', 'Nada', 'todo siguió creciendo']], GRIS); },
+      datos: function () { return XIX.pasajeros.map(function (r) { return { id: 'q' + r[0], et: String(r[0]), sub: r[0] === 2008 ? 'abre el Suburbano' : '', col: r[0] <= 2000 && r[0] >= 1995 ? colorDe('zedillo') : GRIS, v: r[1] }; }); },
+      fuera: function () { return []; },
+      op: 'Pasajeros transportados cada año. El salto de 2008 se debe a la Línea 1 del Ferrocarril Suburbano del Valle de México, según la nota del propio cuadro.',
+      fs: ['EHM_VIAS_SIGLO'],
+      leccion: 'Entre 1994 y 2000 los pasajeros cayeron de 7.2 millones a 334 mil: 95% menos. La vía no desapareció: la red pasó de 26,477 a 26,656 km, y la carga subió de 52.1 a 77.2 millones de toneladas. El tablero de la Enciclopedia anota «−19,000 km» para Zedillo; según el INEGI no se perdió ningún kilómetro: se perdió el tren de pasajeros.' },
+    { r: 'rieles', tipo: 'lista', serie: true, q: 'De 1910 a 2012, en más de un siglo, ¿cuántos kilómetros de vía férrea se sumaron a la red?',
+      tit: 'Kilómetros de vía férrea en operación', fmtv: 'km', est: 'oficial', natural: true, correcta: 'k2',
+      opciones: function () { return opcionesLista([['k1', 'Unos 2,000 km', ''], ['k2', 'Unos 7,000 km', ''], ['k3', 'Unos 15,000 km', ''], ['k4', 'Unos 19,000 km', '']]); },
+      datos: function () { return XIX.km.map(function (r) { return { id: 'm' + r[0], et: String(r[0]), sub: '', col: r[0] <= 1910 ? ORO : GRIS, v: r[1] }; }); },
+      fuera: function () { return ['<b>Después de 2013</b>: el Tren Maya, el Interoceánico y El Insurgente no están en esta serie del INEGI, que termina en 2013. La Agencia Reguladora del Transporte Ferroviario publica su anuario, pero la plataforma aún no lo integra: su kilometraje queda ' + chip('pendiente') + '.']; },
+      op: 'Vía principal, secundaria y particular. 26,727 menos 19,748 km son 6,979 km (derivado).',
+      fs: ['EHM_VIAS_SIGLO'],
+      leccion: 'De 1876 a 1910 se sumaron 19,131 km en 34 años; de 1910 a 2012, 6,979 km en 102 años. La red ferroviaria de hoy es, en lo esencial, la del Porfiriato. Ojo: el tablero de la Enciclopedia dice 19,280 km en 1910; el INEGI da 19,748.' },
     { r: 'eco', tipo: 'pres', q: '¿Con qué presidente creció más la economía?',
       tit: 'Crecimiento del PIB real, promedio anual del sexenio', fmtv: 'pct2', est: 'derivado',
       datos: function () { return datosDe('pib'); }, fuera: function () { return fuera('pib'); },
@@ -285,11 +393,46 @@
       fuera: function () { return ['<b>Antes de 2019</b>: la ASF usaba otros conceptos que no se suman con este.']; },
       op: 'Renglón Total de la Matriz de Datos Básicos de cada Cuenta Pública.',
       fs: ['ASF_MDB'],
-      leccion: 'Un monto por aclarar no es un desfalco comprobado: es dinero cuyo uso no se acreditó al cierre de la auditoría y puede solventarse después.' }
+      leccion: 'Un monto por aclarar no es un desfalco comprobado: es dinero cuyo uso no se acreditó al cierre de la auditoría y puede solventarse después.' },
+    { r: 'hoy', tipo: 'lista', serie: true, q: 'En 2025, el primer año completo de Claudia Sheinbaum, ¿cómo cerró el balance del presupuesto del sector público?',
+      tit: 'Balance presupuestario del sector público, % del PIB', fmtv: 'pib', est: 'oficial', natural: true, correcta: 'h2025',
+      opciones: function () { return opcionesLista([['hs', 'Con superávit', 'entró más de lo que salió'], ['h1', 'Déficit de 1.0% del PIB', ''], ['h2025', 'Déficit de 3.9% del PIB', ''], ['h5', 'Déficit de 5.0% del PIB', '']], SHEIN); },
+      datos: function () { return HOY.balance.map(function (r) { return { id: 'h' + r[0], et: String(r[0]), sub: r[0] === 2025 ? 'Sheinbaum' : 'López Obrador', col: r[0] === 2025 ? SHEIN : colorDe('amlo'), v: r[1] }; }); },
+      fuera: function () { return ['La medida más amplia, los requerimientos financieros del sector público (RFSP), fue de 4.3% del PIB en 2025 y de 5.8% en 2024.']; },
+      op: 'Ingresos presupuestarios menos gasto neto pagado, como proporción del PIB.',
+      fs: ['CGPE2027_IG', 'CGPE2027_HIST'],
+      leccion: 'El déficit bajó de 5.0% a 3.9% del PIB entre 2024 y 2025: se gastó menos en proporción, pero se siguió gastando más de lo que entró. El tablero de la Enciclopedia pone −3.9% como «meta»; hoy ya es la cifra observada por Hacienda. Ningún año de esta serie tuvo superávit; los del Porfiriato se midieron en pesos, no en % del PIB, así que no caben en la misma regla.' },
+    { r: 'hoy', tipo: 'lista', q: 'En 1894-1895 casi la mitad del dinero de Díaz venía de las aduanas. En 2025, ¿de dónde sacó más dinero el sector público?',
+      tit: 'Ingresos presupuestarios del sector público en 2025, % del PIB', fmtv: 'pib', est: 'oficial', correcta: 'isr',
+      opciones: function () { return opcionesLista([['isr', 'Del ISR', 'impuesto sobre la renta'], ['iva', 'Del IVA', 'impuesto al consumo'], ['petro', 'Del petróleo', 'Pemex y derechos'], ['imp', 'De las aduanas', 'impuestos a la importación']], SHEIN); },
+      datos: function () { return HOY.ingresos2025.map(function (r) { return { id: r[0], et: r[1], sub: r[2], col: SHEIN, v: r[3] }; }); },
+      fuera: function () { return ['<b>Total</b>: 23.3% del PIB. Las sumas pueden no coincidir por el redondeo, como advierte el propio cuadro.']; },
+      op: 'Renglones del cuadro de ingresos de 2025. ISR más IVA son 12.4 de 15.2 puntos de impuestos: 81.6% (derivado).',
+      fs: ['CGPE2027_IG'],
+      leccion: 'El ISR, que en el Porfiriato no existía, es hoy la mayor fuente de dinero público: 8.2% del PIB. ISR e IVA juntos son el 81.6% de los impuestos, no «más del 88%» como dice el tablero de la Enciclopedia. Y las aduanas, que sostenían al Estado del siglo XIX, aportan 0.5% del PIB.' },
+    { r: 'hoy', tipo: 'lista', q: 'En 2025, ¿qué fue mayor: lo que se pagó por la deuda o lo que se invirtió en obra física?',
+      tit: 'Algunos renglones del gasto del sector público en 2025, % del PIB', fmtv: 'pib', est: 'oficial', correcta: 'cf',
+      opciones: function () { return opcionesLista([['cf', 'Lo que se pagó por la deuda', 'costo financiero'], ['inv', 'La inversión física', 'obra pública'], ['igual', 'Fueron iguales', '']], SHEIN); },
+      datos: function () { return HOY.gasto2025.map(function (r) { return { id: r[0], et: r[1], sub: r[2], col: r[0] === 'cf' ? '#b3261e' : r[0] === 'inv' ? '#23855a' : SHEIN, v: r[3] }; }); },
+      fuera: function () { return ['<b>Gasto neto pagado total</b>: 27.2% del PIB. La gráfica muestra solo seis renglones.']; },
+      op: 'Renglones del cuadro de gasto de 2025. $1.68 por peso es 3.7 entre 2.2 (derivado).',
+      fs: ['CGPE2027_IG'],
+      leccion: 'Por cada peso de inversión física se pagaron $1.68 de costo financiero. En 2020 estaban casi parejos: 2.8 contra 2.7% del PIB. La deuda acumulada se paga con intereses, y ese dinero ya no está para escuelas, hospitales ni carreteras.' },
+    { r: 'hoy', tipo: 'lista', serie: true, q: 'De 2000 a 2025, ¿en qué cierre de año fue más alta la deuda amplia del sector público?',
+      tit: 'Deuda amplia al cierre del año (SHRFSP), % del PIB', fmtv: 'pct', est: 'oficial', natural: true, correcta: 'y2025',
+      opciones: function () {
+        return [['y2018', '2018', 'Peña Nieto', 'epn'], ['y2020', '2020', 'la pandemia', 'amlo'], ['y2024', '2024', 'López Obrador', 'amlo'], ['y2025', '2025', 'Sheinbaum', 'sheinbaum']]
+          .map(function (o) { return { id: o[0], et: o[1], sub: o[2], col: colorDe(o[3]) }; });
+      },
+      datos: function () { return HOY.deuda.map(function (r) { var p = pres(r[2]); return { id: 'y' + r[0], et: String(r[0]), sub: p ? p.c : 'Sheinbaum', col: colorDe(r[2]), v: r[1] }; }); },
+      fuera: function () { return []; },
+      op: 'Saldo histórico de los requerimientos financieros del sector público (SHRFSP), la publicación oficial más reciente de cada año, como en Números › Cuánto debemos.',
+      fs: ['ASF_IR2012', 'ASF_IGE2018', 'ASF_IGE2022', 'CGPE2027_HIST'],
+      leccion: 'El cierre de 2025, 52.6% del PIB, es el más alto de la serie: en el primer año de Sheinbaum la deuda subió 0.7 puntos. Hacienda estima 54.0% para el cierre de 2026 y proyecta 55.0% para 2027 (Criterios 2027).' }
   ];
 
   /* ---------- Estado ---------- */
-  var st = { fase: 'inicio', i: 0, resp: [], reloj: false, restante: 0, timer: null, contado: false, cuentas: false, vivo: null, t0: 0 };
+  var st = { fase: 'inicio', i: 0, resp: [], reloj: false, restante: 0, timer: null, contado: false, cuentas: false, vivo: null, t0: 0, vista: 'barras' };
   var SEG_PREGUNTA = 20;
 
   function ganador(q, datos) {
@@ -315,10 +458,10 @@
         '<div class="tp-inicio-tx">' +
           '<span class="tp-et">🎯 Trivia · ' + PREGUNTAS.length + ' preguntas</span>' +
           '<h3 class="tp-tit">El examen de los presidentes</h3>' +
-          '<p>Empieza en el Porfiriato y sigue con seis sexenios, de Carlos Salinas a Andrés Manuel López Obrador. Primero adivina; después mira la gráfica con la cifra oficial y su fuente. ' +
+          '<p>Empieza en el siglo XIX, con Santa Anna, Juárez y Porfirio Díaz; sigue con seis sexenios, de Carlos Salinas a Andrés Manuel López Obrador, y termina con el primer año de Claudia Sheinbaum. Primero adivina; después mira la gráfica, en barras o en línea, con la cifra oficial y su fuente. ' +
             'Al terminar verás tu calificación y <b>el estado de cuenta de cada presidente</b>: cuánto creció la economía, cuánta deuda recibió y entregó, y a qué velocidad, por segundo, creció la deuda en su sexenio.</p>' +
           '<ul class="tp-rondas">' + porRonda + '</ul>' +
-          '<p class="tp-nota">Claudia Sheinbaum no entra: su sexenio está en curso.</p>' +
+          '<p class="tp-nota">Las rondas de la balanza vienen del tablero «Versus General Don Porfirio Díaz» de la Enciclopedia, con cada cifra verificada de nuevo contra el INEGI y Hacienda. El sexenio de Claudia Sheinbaum sigue en curso: entra con su primer año completo, 2025, para medirlo, no para calificarlo.</p>' +
         '</div>' +
         '<div class="tp-inicio-mandos">' +
           '<button type="button" class="tp-reloj-sw" aria-pressed="' + st.reloj + '">⏱️ Contra reloj: ' + SEG_PREGUNTA + ' segundos por pregunta <span class="tp-sw" aria-hidden="true"></span></button>' +
@@ -348,6 +491,33 @@
         '<span class="tp-val" data-v="' + d.v + '">' + (contado ? fmt(d.v, q.fmtv) : fmt(0, q.fmtv)) + '</span>' +
       '</li>';
     }).join('') + '</ol>';
+  }
+
+  /* La misma serie en línea: la traza se dibuja y los puntos aparecen al
+     contabilizar. Solo en las preguntas con serie (q.serie). */
+  function linea(q, datos, gana, contado) {
+    var W = 640, H = 250, iz = 26, de = 26, ar = 30, n = datos.length, gira = n > 9;
+    var vs = datos.map(function (d) { return d.v; });
+    var mx = Math.max(0, Math.max.apply(null, vs)), mn = Math.min(0, Math.min.apply(null, vs));
+    /* Con negativos, el rótulo va bajo el punto: se deja aire antes de los años. */
+    var ex = mn < 0 ? 20 : 0, ab = (gira ? 58 : 34) + ex, yx = H - ab + ex + 14;
+    if (mx === mn) mx = 1;
+    function x(i) { return n === 1 ? W / 2 : iz + i * (W - iz - de) / (n - 1); }
+    function y(v) { return ar + (mx - v) / (mx - mn) * (H - ar - ab); }
+    var traza = datos.map(function (d, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(d.v).toFixed(1); }).join(' ');
+    var cero = y(0).toFixed(1);
+    var pts = datos.map(function (d, i) {
+      var g = d.id === gana.id || (q.correcta && d.id === q.correcta);
+      var cx = x(i).toFixed(1), cy = y(d.v), ty = d.v < 0 ? cy + 17 : cy - 9;
+      var rot = gira ? ' transform="rotate(-40 ' + cx + ' ' + yx + ')" text-anchor="end"' : ' text-anchor="middle"';
+      return '<circle class="tp-lin-pt' + (g ? ' tp-lin-gana' : '') + '" cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="' + (g ? 7 : 5) + '" fill="' + d.col + '" style="transition-delay:' + Math.round(i / Math.max(1, n - 1) * 1100) + 'ms"><title>' + esc(d.et + ': ' + fmt(d.v, q.fmtv)) + '</title></circle>' +
+        '<text class="tp-lin-v' + (d.v < 0 ? ' tp-lin-neg' : '') + '" x="' + cx + '" y="' + ty.toFixed(1) + '" text-anchor="middle" data-v="' + d.v + '" data-c="1">' + (contado ? corto(d.v, q.fmtv) : corto(0, q.fmtv)) + '</text>' +
+        '<text class="tp-lin-x' + (g ? ' tp-lin-x-gana' : '') + '" x="' + cx + '" y="' + yx + '"' + rot + '>' + esc(d.et) + '</text>';
+    }).join('');
+    return '<div class="tp-lin"><svg class="tp-lin-svg' + (contado ? ' tp-lin-on' : '') + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(q.tit) + '">' +
+      '<line class="tp-lin-cero" x1="' + iz / 2 + '" x2="' + (W - de / 2) + '" y1="' + cero + '" y2="' + cero + '"></line>' +
+      '<path class="tp-lin-traza" d="' + traza + '" pathLength="1"></path>' + pts +
+    '</svg></div>';
   }
 
   function pintarPregunta() {
@@ -388,8 +558,12 @@
       (resp ?
         '<div class="tp-res">' +
           '<div class="tp-res-cab"><h4>' + esc(q.tit) + '</h4>' +
-            '<button type="button" class="tp-btn tp-btn-sec tp-contar">' + (st.contado ? '↺ Reiniciar a ceros' : '▶️ Contabilizar') + '</button></div>' +
-          barras(q, datos, gana, st.contado) +
+            '<div class="tp-mandos">' +
+              (q.serie ? '<div class="tp-vista" role="group" aria-label="Tipo de gráfica">' +
+                '<button type="button" class="tp-vista-b" data-vista="barras" aria-pressed="' + (vistaDe(q) === 'barras') + '">📊 Barras</button>' +
+                '<button type="button" class="tp-vista-b" data-vista="linea" aria-pressed="' + (vistaDe(q) === 'linea') + '">📈 Lineal</button></div>' : '') +
+              '<button type="button" class="tp-btn tp-btn-sec tp-contar">' + (st.contado ? '↺ Reiniciar a ceros' : '▶️ Contabilizar') + '</button></div></div>' +
+          (vistaDe(q) === 'linea' ? linea(q, datos, gana, st.contado) : barras(q, datos, gana, st.contado)) +
           (fueraL.length ? '<ul class="tp-fuera">' + fueraL.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' : '') +
           '<p class="tp-leccion"><b>Para leerlo bien.</b> ' + esc(q.leccion) + '</p>' +
           '<p class="tp-fuente">' + chip(q.est) + ' ' + esc(q.op) + ' Fuentes: ' + fuentes(q.fs) + '.</p>' +
@@ -398,6 +572,14 @@
 
     Array.prototype.forEach.call(raiz.querySelectorAll('.tp-op'), function (b) {
       b.addEventListener('click', function () { responder(b.getAttribute('data-id'), false); });
+    });
+    Array.prototype.forEach.call(raiz.querySelectorAll('.tp-vista-b'), function (b) {
+      b.addEventListener('click', function () {
+        if (st.vista === b.getAttribute('data-vista')) return;
+        st.vista = b.getAttribute('data-vista');
+        st.contado = false;
+        pintar();
+      });
     });
     var c = raiz.querySelector('.tp-contar');
     if (c) c.addEventListener('click', function () {
@@ -473,11 +655,20 @@
     })(t0);
   }
 
+  function vistaDe(q) { return q.serie ? st.vista : 'barras'; }
+
   function contar() {
     st.contado = true;
     var q = PREGUNTAS[st.i];
     var b = raiz.querySelector('.tp-contar');
     if (b) b.textContent = '↺ Reiniciar a ceros';
+    var svg = raiz.querySelector('.tp-lin-svg');
+    if (svg) {
+      svg.getBoundingClientRect();
+      svg.classList.add('tp-lin-on');
+      animar(svg, function (el, v) { return corto(v, q.fmtv); }, 1400);
+      return;
+    }
     animar(raiz.querySelector('.tp-barras'), function (el, v) { return fmt(v, q.fmtv); }, 1400);
   }
 
@@ -553,7 +744,7 @@
             'En rojo, lo que suma a la deuda; en verde, lo que la bajó. Los relojes corren al ritmo al que creció la deuda en cada sexenio.</p></div>' +
           '<button type="button" class="tp-btn tp-cuentas">' + (st.cuentas ? '↺ Reiniciar a ceros' : '▶️ Contabilizar') + '</button>' +
         '</div>' +
-        '<div class="tp-ec-rejilla">' + P.map(estadoCuenta).join('') + porfiriato() + '</div>' +
+        '<div class="tp-ec-rejilla">' + P.map(estadoCuenta).join('') + sheinbaum() + porfiriato() + juarez() + santaAnna() + '</div>' +
         correcciones() +
         '<p class="tp-fuente">' + chip('oficial') + ' ' + chip('derivado') + ' ' + chip('pendiente') +
           ' Cada renglón trae su documento. La deuda es el saldo histórico de los requerimientos financieros del sector público (SHRFSP), la medida más amplia que publica Hacienda; los pesos son corrientes de cada año, sin ajustar por inflación. ' +
@@ -584,6 +775,8 @@
       renglon('⚖️', 'Balance federal ' + b1[0], b1[1], 'mill', 'oficial', 'EHM_BAL', 'Superávit cada año desde 1895-96.', 'mas'),
       renglon('📖', 'Analfabetismo en 1895', PORF.analfabetas[0][1], 'pct', 'oficial', 'EHM_ALF'),
       renglon('📖', 'Analfabetismo en 1910', PORF.analfabetas[2][1], 'pct', 'oficial', 'EHM_ALF'),
+      renglon('🏦', 'Deuda del gobierno federal en 1890', 126.951, 'mill', 'oficial', 'EHM_DEUDA'),
+      renglon('🏦', 'Deuda del gobierno federal en 1911', 589.686, 'mill', 'oficial', 'EHM_DEUDA', null, 'menos'),
       renglon('🏦', 'Deuda como % del PIB', null, '', 'pendiente', null, 'No hay PIB oficial del periodo comparable con el de hoy.')
     ].join('');
     return '<article class="tp-ec tp-ec-porf" style="--tp:' + ORO + '">' +
@@ -593,16 +786,67 @@
     '</article>';
   }
 
+  /* El primer año de Sheinbaum: se mide, no se califica. */
+  function sheinbaum() {
+    var filas = [
+      renglon('🏦', 'Deuda que recibió (cierre de 2024), % del PIB', 51.9, 'pct', 'oficial', 'CGPE2027_HIST'),
+      renglon('🏦', 'Deuda al cierre de 2025, % del PIB', 52.6, 'pct', 'oficial', 'CGPE2027_HIST'),
+      renglon('💳', 'Cambio de la deuda en su primer año', 0.7, 'pp', 'derivado', null, '52.6 menos 51.9.', 'menos'),
+      renglon('⚖️', 'Balance presupuestario de 2025', -3.9, 'pib', 'oficial', 'CGPE2027_IG', null, 'menos'),
+      renglon('💵', 'Ingresos presupuestarios de 2025', 23.3, 'pib', 'oficial', 'CGPE2027_IG'),
+      renglon('🏛️', 'Gasto neto pagado de 2025', 27.2, 'pib', 'oficial', 'CGPE2027_IG'),
+      renglon('💸', 'Costo financiero de la deuda en 2025', 3.7, 'pib', 'oficial', 'CGPE2027_IG', 'Más que la inversión física (2.2%).', 'menos')
+    ].join('');
+    return '<article class="tp-ec" style="--tp:' + SHEIN + '">' +
+      '<header class="tp-ec-cab"><b>Claudia Sheinbaum Pardo</b><span>2025– · en curso</span></header>' +
+      '<ul class="tp-ec-lista">' + filas + '</ul>' +
+      '<p class="tp-ec-saldo tp-ec-saldo-sin">Solo su primer año completo: el sexenio sigue en curso y no se califica.</p>' +
+    '</article>';
+  }
+
+  /* El siglo XIX, como el Porfiriato: pesos de la época, para comparar. */
+  function juarez() {
+    var filas = [
+      renglon('⚖️', 'Años fiscales con superávit, 1867-1872', 4, 'ent', 'derivado', 'EHM_BAL_XIX', 'De cinco.', 'mas'),
+      renglon('⚖️', 'Balance federal 1868-1869', -9.8, 'mill', 'oficial', 'EHM_BAL_XIX', null, 'menos'),
+      renglon('🚢', 'Ingresos que venían de aduanas, 1870-1871', 67.9, 'pct', 'derivado', 'EHM_FUENTES'),
+      renglon('🏦', 'Deuda del gobierno federal en 1870', 120.0, 'mill', 'oficial', 'EHM_DEUDA')
+    ].join('');
+    return '<article class="tp-ec tp-ec-porf" style="--tp:' + JUAREZ + '">' +
+      '<header class="tp-ec-cab"><b>Benito Juárez</b><span>República Restaurada, 1867–1872 · para comparar</span></header>' +
+      '<ul class="tp-ec-lista">' + filas + '</ul>' +
+      '<p class="tp-ec-saldo tp-ec-saldo-sin">Pesos de la época y años fiscales de julio a junio: no se suman con los de los sexenios.</p>' +
+    '</article>';
+  }
+  function santaAnna() {
+    var filas = [
+      renglon('⚖️', 'Balance federal 1835-1836, el peor de sus años', -11.1, 'mill', 'oficial', 'EHM_BAL_XIX', null, 'menos'),
+      renglon('📉', 'Ese déficit contra lo que ingresó', 80.4, 'pct', 'derivado', null, '11.1 entre 13.8 millones.', 'menos'),
+      renglon('🚢', 'Ingresos que venían de aduanas, 1833-1834', 76.3, 'pct', 'derivado', 'EHM_FUENTES'),
+      renglon('🏦', 'Deuda del gobierno federal en 1850', 126.208, 'mill', 'oficial', 'EHM_DEUDA')
+    ].join('');
+    return '<article class="tp-ec tp-ec-porf" style="--tp:' + SANTA + '">' +
+      '<header class="tp-ec-cab"><b>Antonio López de Santa Anna</b><span>1833–1855 · para comparar</span></header>' +
+      '<ul class="tp-ec-lista">' + filas + '</ul>' +
+      '<p class="tp-ec-saldo tp-ec-saldo-sin">Entró y salió de la presidencia muchas veces en esos años: las cifras son del gobierno federal de cada año, no solo suyas.</p>' +
+    '</article>';
+  }
+
   /* Lo que la verificación cambió respecto de las cifras que circulan
      (y que la Enciclopedia todavía muestra). */
   function correcciones() {
-    return '<details class="tp-corr"><summary>🔍 Lo que corregimos al verificar el Porfiriato</summary>' +
+    return '<details class="tp-corr"><summary>🔍 Lo que corregimos al verificar el Porfiriato y el tablero 5.4 de la Enciclopedia</summary>' +
       '<p>Cotejamos contra las <i>Estadísticas históricas de México 2014</i> del INEGI las cifras del Porfiriato que se repiten en redes, en blogs y en la propia Enciclopedia de esta plataforma, que está congelada y no se modificó:</p>' +
       '<ul>' +
         '<li><b>«El primer superávit fue el de 1894-1895, por $19,861».</b> El INEGI registra para ese año un déficit de $1.2 millones; la racha de superávits empieza en 1895-1896. No encontramos el documento que sostenga los $19,861: queda ' + chip('pendiente') + ' hasta revisar la Memoria de Hacienda de ese año.</li>' +
         '<li><b>«19,280 km de vía en 1910».</b> El INEGI da 19,748 km; y 617 en 1876, no 640.</li>' +
         '<li><b>«52% de los ingresos venía de las aduanas».</b> En 1894-1895 fue 45.2%; el máximo, 66.8%, fue en 1877-1878 (derivado del cuadro 16.6).</li>' +
         '<li><b>«Ingresos de 8.2%, gasto de 7.4%, deuda de 30.5% y superávit de 0.8% del PIB».</b> No encontramos fuente oficial para ninguna; por eso no aparecen aquí.</li>' +
+        '<li><b>«El primer superávit de México fue el de Limantour».</b> El INEGI registra superávit desde 1836-1837, y en cuatro de los cinco años fiscales de Juárez, de 1867 a 1872.</li>' +
+        '<li><b>Los porcentajes del PIB del tablero para Santa Anna y Juárez</b> (crecimiento, deuda, ingresos y gasto). No hay PIB oficial del siglo XIX que los sostenga: aquí se usan pesos de la época.</li>' +
+        '<li><b>«Zedillo: −19,000 km de vía».</b> La red no se redujo: 26,477 km en 1994 y 26,656 en 2000. Lo que cayó 95% fueron los pasajeros.</li>' +
+        '<li><b>«ISR e IVA aportan más del 88% de los impuestos».</b> En 2025 fueron 81.6% (derivado de los Criterios 2027).</li>' +
+        '<li><b>Las cifras del tablero para los sexenios de 1988 a 2026</b> (ingresos, gasto y balance en % del PIB). No traen documento que las sostenga: aquí se usan las de los Criterios 2027 para 2020 a 2025 y, para la deuda de los sexenios anteriores, las de la ASF.</li>' +
       '</ul></details>';
   }
 
