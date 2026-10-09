@@ -966,3 +966,5 @@ html.modo-visor .main-wrapper { padding-top: 12px; }
   background: #ffffff; color: var(--civ-azul); border: 1px solid var(--civ-gris-borde);
 }
 .visor-aviso-b.principal { background: var(--civ-azul); color: #ffffff; border-color: var(--civ-azul); }
+/* Foco: una tarjeta de Sigue el dinero abre un solo bloque del modulo. */
+html.modo-visor .visor-oculto { display: none !important; }

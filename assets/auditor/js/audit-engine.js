@@ -5515,7 +5515,7 @@
       subtitulo: 'Lo que se prometió, lo que se pagó y la diferencia',
       texto: 'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
       nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué a veces verás 13 obras y a veces 14' },
-      temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Administración presidencial', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
+      temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Las obras de cada sexenio', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
     },
     calculadora: {
       n: 3, icono: '💳', titulo: 'Calculadora Cívica',
@@ -20850,7 +20850,7 @@
       '<section class="sim-sel sim-sel-sex">' +
         '<div class="sim-sel-cab">' +
           '<span class="sim-sel-ico">🏛️</span>' +
-          '<div><h3 class="sim-sel-tit">Administración presidencial</h3>' +
+          '<div><h3 class="sim-sel-tit">Las obras de cada sexenio</h3>' +
           '<p class="sim-sel-sub">Treinta y seis años de obra pública en una sola línea. La altura de cada bloque es el número de obras evaluadas en ese periodo. ' +
             tuUd('Todos arrancan en cero: pulse «Evaluar» para verlos levantarse a su escala real.</p></div>', 'Todos arrancan en cero: pulsa «Evaluar» para verlos levantarse a su escala real.</p></div>') +
           '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
@@ -26830,13 +26830,18 @@
       seleccionarModuloExplorer(destino, ancla || undefined);
       /* Si el ancla es un bloque plegable del erario, llega abierto. */
       if (ancla && /^eb-/.test(ancla)) setTimeout(function() {
+        var b = document.getElementById(ancla);
+        if (b) erarioAbrirAncestros(b);
         var c = document.querySelector('#' + ancla + ' .erario-pleg-cab');
         if (c && c.getAttribute('aria-expanded') === 'false') erarioPlegToggle(ancla.slice(3), true);
+        if (enVisor()) visorFoco(ancla);
       }, 150);
       /* Recien cargada, la pagina sigue dibujando secciones largas y el
          salto se queda corto: se repite hasta que el bloque quede arriba. */
       [1600, 2600].forEach(function(ms) {
         setTimeout(function() {
+          /* En foco el bloque es lo unico que hay: va arriba del todo. */
+          if (document.documentElement.classList.contains('visor-foco')) { window.scrollTo(0, 0); return; }
           var t = moduloDestino(destino, ancla);
           var nav = document.querySelector('.site-top-nav');
           var alto = altoCabeceraCompacta(nav) + 12;
@@ -26875,6 +26880,27 @@
     bs[0].addEventListener('click', function() { IR_DESTINOS[destino](); });
     bs[1].addEventListener('click', visorCerrar);
     document.body.appendChild(d);
+  }
+  /* Foco del visor (08-10-2026): desde Sigue el dinero cada tarjeta abre un
+     solo bloque del modulo, no el modulo entero, para que el contenido se
+     reparta entre los capitulos sin repetirse. Se esconden los hermanos del
+     bloque en cada nivel hasta la subpestana (portada del modulo, indice y
+     los demas bloques) y los subbloques que trae dentro, que tienen su
+     propia tarjeta. «Pantalla completa» sigue abriendo el modulo entero. */
+  function visorFoco(id) {
+    var t = document.getElementById(id);
+    if (!t) return;
+    document.documentElement.classList.add('visor-foco');
+    var pro = document.getElementById('moduloProemio');
+    if (pro) pro.classList.add('visor-oculto');
+    var n = t;
+    while (n && n.parentElement && n !== document.body) {
+      var padre = n.parentElement;
+      Array.prototype.forEach.call(padre.children, function(h) { if (h !== n) h.classList.add('visor-oculto'); });
+      if (padre.classList.contains('subtab-panel') || padre.classList.contains('tab-panel')) break;
+      n = padre;
+    }
+    Array.prototype.forEach.call(t.querySelectorAll('.erario-pleg'), function(s) { s.classList.add('visor-oculto'); });
   }
   /* En el visor, un enlace a otra pagina se abre en la ventana completa,
      no dentro del marco. */

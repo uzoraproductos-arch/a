@@ -49,17 +49,17 @@ APARTADOS = [
         'lema': 'El gasto público, a la vista',
         'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
                     'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
-                    'Aquí están los cinco módulos del auditor; elige uno y pulsa «Comenzar».'),
+                    'Aquí están los cuatro módulos del auditor; elige uno y pulsa «Comenzar».'),
         'nota': True,
         'guia': True,
         'secciones': [
             {
                 'id': 'modulos',
-                'titulo': 'Los cinco módulos',
-                'texto': 'Cada color es un tema. Adentro hay juegos y cuentas para descubrir las cifras tú mismo.',
+                'titulo': 'Los cuatro módulos',
+                'texto': ('Cada color es un tema. Adentro hay juegos y cuentas para descubrir las cifras tú mismo. '
+                          'El Circuito del Dinero ya no está aquí: se repartió, bloque por bloque, en los seis capítulos de '
+                          '<a href="sigue-el-dinero.html">Sigue el dinero</a>.'),
                 'tarjetas': [
-                    ('⚖️', 'Circuito del Dinero', 'Sigue cada peso: de la Ley de Ingresos a tu municipio.', ir('presupuesto', 'moduloProemio'),
-                     None, 'dinero', ('¿Cuántos billones?', 'Descúbrelo al comenzar')),
                     ('🏗️', 'Inversión &amp; Megaobras', 'Lo que costaron las grandes obras y lo que se pasaron.', ir('megaobras', 'moduloProemio'),
                      'Obras del simulador de megaobras (módulo 2)', 'obras', ('13 megaobras', 'De 1988 a la fecha')),
                     ('💳', 'Calculadora Cívica', 'Descubre a dónde va cada peso de tus impuestos.', ir('calculadora', 'moduloProemio'),
@@ -126,8 +126,12 @@ APARTADOS = [
                 'ayer': ('El capítulo 7 abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda.',
                          'Cada año la <b>Ley de Ingresos de la Federación</b> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.'),
                 'tarjetas': [
-                    ('💰', 'El Circuito del Dinero 2026', 'Del ingreso al gasto: los $10.19 billones aprobados, de dónde vienen y en qué se van.', ir('presupuesto'),
+                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa y qué ley la gobierna. Pulsa «Contabilizar».', ir('presupuesto', 'eb-arquitectura'), None, 'dinero'),
+                    ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026, la cifra total antes de partirla.', ir('presupuesto', 'eb-cuanto'),
                      'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
+                    ('📥', 'De dónde sale cada peso', 'El ingreso federal de 2026, renglón por renglón, tal como lo enumera el artículo 1o. de la Ley de Ingresos.', ir('presupuesto', 'eb-ingresos'), None, 'dinero'),
+                    ('📏', '¿A qué equivale?', 'Tres comparaciones para dimensionar las cifras, con la operación a la vista.', ir('presupuesto', 'eb-equivale'), None, 'dinero'),
+                    ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', ir('presupuesto', 'eb-ciegos'), None, 'inspector'),
                     ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos.', ir('proyeccion2027'), None, 'dinero'),
                 ],
             },
@@ -150,7 +154,9 @@ APARTADOS = [
                 'ayer': ('«Presupuesto y gasto público» (p. 97) reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y la sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
                          'Esa ley fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
                 'tarjetas': [
-                    ('🏢', 'Ramos y Dependencias del PEF 2026', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', ir('egresos'), None, 'dinero'),
+                    ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', ir('presupuesto', 'eb-egresos'), None, 'dinero'),
+                    ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gasto programable, en un termostato.', ir('presupuesto', 'eb-salud'), None, 'dinero'),
+                    ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', ir('presupuesto', 'eb-cuenta-federal'), None, 'dinero'),
                     ('🏗️', 'Inversión Pública &amp; Megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Fuentes por obra en verificación.', ir('megaobras'), None, 'obras'),
                     ('🌎', 'Costo Ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.', ir('ambiente'), None, 'ambiente'),
                 ],
@@ -163,6 +169,7 @@ APARTADOS = [
                 'ayer': ('El Cuadro 1 del capítulo 7 ya separaba, dentro del Presupuesto de 1994, lo que la Federación destinaba a estados y municipios.',
                          'Hoy viaja por dos vías: las <b>participaciones</b> (Ramo 28), de libre uso, y las <b>aportaciones</b> (Ramo 33), etiquetadas por la Ley de Coordinación Fiscal para salud, educación, infraestructura y seguridad.'),
                 'tarjetas': [
+                    ('📍', 'El mapa del gasto federalizado', 'El tramo del gasto que viaja a los 32 estados, sobre el territorio y de mayor a menor.', ir('presupuesto', 'eb-mapa'), None, 'dinero'),
                     ('🗺️', 'Las 32 Entidades: del Peso Federal al Estatal', 'Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.', ir('territorio'), None, 'dinero'),
                     ('🏘️', 'Los 2,479 Municipios: Predial y Transferencias', 'Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.', ir('municipios'), None, 'dinero'),
                 ],
@@ -228,8 +235,20 @@ APARTADOS = [
         'titulo': 'Aprende',
         'lema': 'Biblioteca y kit del auditor ciudadano',
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
-                    'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista.'),
+                    'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
+                    'Y para ponerte a prueba, una trivia con el estado de cuenta de cada presidente.'),
+        'scripts': ['trivia-presidentes.js'],
         'secciones': [
+            {
+                'id': 'trivia',
+                'titulo': '🎯 Trivia: el examen de los presidentes',
+                'texto': ('Del Porfiriato a López Obrador: adivina, comprueba con la cifra oficial y, al final, mira el estado de cuenta '
+                          'de cada presidente y el reloj de su deuda. Antes vivía en el módulo de Megaobras, como «Administración presidencial».'),
+                'bloque': ('<div class="tp" id="triviaPres">\n'
+                           '          <noscript><p>La trivia necesita JavaScript.</p></noscript>\n'
+                           '        </div>'),
+                'tarjetas': [],
+            },
             {
                 'id': 'biblioteca',
                 'titulo': '🏛️ Biblioteca hacendaria',
@@ -388,12 +407,10 @@ def pagina(a, sello):
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="%s-tit">%s<span class="sr-only">%s</span>%s</h2>
           <p class="apartado-seccion-texto">%s</p>
-        </div>%s%s
-        <div class="apartado-rejilla">
-%s
-        </div>
+        </div>%s%s%s
       </section>''' % (s['id'], s['id'], s['id'], num, titulo, s['titulo'], s['texto'], ayer, bloque,
-                       '\n'.join(tarjeta(t) for t in s['tarjetas'])))
+                       ('\n        <div class="apartado-rejilla">\n%s\n        </div>' % '\n'.join(tarjeta(t) for t in s['tarjetas']))
+                       if s['tarjetas'] else ''))
 
     if len(a['secciones']) > 1:
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (

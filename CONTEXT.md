@@ -481,6 +481,60 @@ anclas y ventanas): la dirección no cambia, el módulo y su bloque quedan
 arriba del visor, «Cerrar» funciona, 0 errores y sin desborde. La entrada
 directa `index.html?ir=...` sigue funcionando igual.
 
+**El Circuito del Dinero se reparte en Sigue el dinero (09-10-2026, sello
+20261008q).** El autor pidió quitar de Herramientas el módulo «Circuito del
+Dinero», que repetía lo de Sigue el dinero, y organizar su contenido ahí sin
+duplicar. Herramientas queda con cuatro módulos y una línea que manda a Sigue
+el dinero. Los bloques del Circuito pasaron a tarjetas de los capítulos:
+1 (arquitectura, cuánto dinero es, de dónde sale, a qué equivale, lo que la
+cifra no dice), 3 (en qué se va, margen del presupuesto, estado de resultados
+CP 2024) y 4 (el mapa). La tarjeta «Ramos y dependencias» abría lo mismo que
+«En qué se va» y se fusionaron. Nuevo **foco del visor**: si el ancla es un
+bloque `eb-*`, `visorFoco()` (motor) abre sus ancestros y esconde todo lo
+demás (`.visor-oculto`): portada del módulo, índice, bloques hermanos y
+subbloques internos, que tienen su propia tarjeta. «Pantalla completa» sigue
+abriendo el módulo entero. Verificado bloque por bloque: cada tarjeta muestra
+solo su bloque, arriba, 0 errores.
+
+**El examen de los presidentes, en Aprende (09-10-2026, sello 20261008q).**
+La trivia del bloque 3 de Megaobras («Administración presidencial», 3.2) se
+mudó a `aprende.html#trivia`, en un guion propio sin motor:
+`assets/auditor/js/trivia-presidentes.js`. Son 12 preguntas en cuatro rondas
+(Porfiriato, economía, deuda, fiscalización), cada una con su gráfica que
+arranca en ceros, su lección y sus fuentes; modo «contra reloj» de 20 s por
+pregunta; y al final la calificación y **el estado de cuenta de cada
+presidente**: crecimiento, empleo, deuda que recibió y que entregó, su saldo
+en puntos del PIB, la deuda nueva en pesos y su **reloj por segundo**, que
+corre en vivo, más auditorías y recuperaciones. El bloque 3 de Megaobras se
+llama ahora «Las obras de cada sexenio» y conserva la línea de obras, con un
+aviso de la mudanza. El código `renderPresEval` del motor quedó inerte (no
+hay `#presEval`); la colección `DB.evaluacion_sexenal` sigue siendo la fuente
+de las cifras copiadas al guion: si cambia una, se cambia en ambos.
+
+Criterio de deuda decidido para la trivia: la publicación oficial más
+reciente de cada año, igual que la línea de tiempo (Calderón 37.2 y López
+Obrador 51.9, con la cifra original en la nota).
+
+**El Porfiriato, verificado contra el INEGI.** Se cotejaron contra las
+*Estadísticas históricas de México 2014* (cuadros 14.18, 16.3, 16.6 y 3.7) las
+cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
+- El «primer superávit de 1894-1895, por $19,861» no se sostiene: el INEGI da
+  déficit de $1.2 millones ese año; la racha de superávits empieza en
+  1895-1896 (+5.4). Los $19,861 quedan pendientes de la Memoria de Hacienda.
+- Vías: 617 km en 1876 y 19,748 en 1910 (no 640 y 19,280).
+- Aduanas: 45.2% del ingreso efectivo en 1894-1895, no 52% (derivado).
+- Analfabetismo: 82.1% (1895, mayores de 6), 77.7% (1900) y 72.3% (1910).
+- Ingresos 8.2%, gasto 7.4%, deuda 30.5% y superávit 0.8% del PIB: sin fuente
+  oficial; no se usan. Tampoco el desglose del timbre (28%).
+La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
+
+**Pendiente del examen:** ingresos, gasto, inversión física y balance de cada
+sexenio. No se encontró a nuestro alcance una serie oficial completa y
+consistente de 1989 a 2024 (la ASF publica el RFSP por año desde 2010 y sus
+cuadros no siempre coinciden: 2020 aparece como 3.9 y como 3.8 en el mismo
+informe). El renglón sale como pendiente. Opciones: el anexo estadístico del
+Informe de Gobierno o los informes anuales de Banxico, año por año.
+
 ## Estado actual
 
 ### Hecho

@@ -5,16 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aprende · Auditavisión</title>
-  <meta name="description" content="Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista.">
+  <meta name="description" content="Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. Y para ponerte a prueba, una trivia con el estado de cuenta de cada presidente.">
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261008p">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261008p">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261008p">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261008q">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261008q">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261008q">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -72,7 +72,7 @@
         <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <span>Aprende</span></nav>
         <span class="apartado-lema">📖 Biblioteca y kit del auditor ciudadano</span>
         <h1 class="apartado-titulo">Aprende</h1>
-        <p class="apartado-entrada">Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista.</p>
+        <p class="apartado-entrada">Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. Y para ponerte a prueba, una trivia con el estado de cuenta de cada presidente.</p>
         
       </div>
     </header>
@@ -80,10 +80,23 @@
     <div class="apartado-ancho apartado-cuerpo">
       <nav class="apartado-saltos" aria-label="En esta página">
           <span class="apartado-saltos-tit">En esta página:</span>
+          <a href="#trivia">🎯 Trivia: el examen de los presidentes</a>
           <a href="#biblioteca">🏛️ Biblioteca hacendaria</a>
           <a href="#kit">🧭 Kit del auditor ciudadano</a>
       </nav>
       
+      <section class="apartado-seccion" id="trivia" aria-labelledby="trivia-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="trivia-tit"><span class="sr-only"></span>🎯 Trivia: el examen de los presidentes</h2>
+          <p class="apartado-seccion-texto">Del Porfiriato a López Obrador: adivina, comprueba con la cifra oficial y, al final, mira el estado de cuenta de cada presidente y el reloj de su deuda. Antes vivía en el módulo de Megaobras, como «Administración presidencial».</p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="tp" id="triviaPres">
+          <noscript><p>La trivia necesita JavaScript.</p></noscript>
+        </div>
+        </div>
+      </section>
+
       <section class="apartado-seccion" id="biblioteca" aria-labelledby="biblioteca-tit">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="biblioteca-tit"><span class="sr-only"></span>🏛️ Biblioteca hacendaria</h2>
@@ -143,10 +156,11 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261008p</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261008q</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261008p"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261008q"></script>
+  <script src="assets/auditor/js/trivia-presidentes.js?v=20261008q"></script>
 </body>
 </html>
