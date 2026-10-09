@@ -135,6 +135,46 @@
     return fila;
   }
 
+  /* El marco toma la altura de su contenido (09-10-2026): la ficha se lee
+     como parte de la pagina, sin barra de desplazamiento propia ni franja
+     en blanco. Es el mismo origen, asi que se puede medir; si el contenido
+     cambia (un bloque que se abre, una grafica que se dibuja) se vuelve a
+     medir. Si no se puede medir, se queda con la altura de la ventana. */
+  function ajustarMarco(marco) {
+    var doc;
+    try { doc = marco.contentDocument; } catch (err) { return; }
+    if (!doc || !doc.body) return;
+    /* Se mide el fondo del contenido visible y no el alto del documento,
+       que nunca baja del alto del marco. Los cajones fijos (fixed) miden
+       lo que el marco y se ignoran. Si el contenido crece al mismo
+       ritmo que el marco (algo medido en vh), se deja de ajustar. */
+    var cambios = 0, ro = null;
+    function medir() {
+      if (!marco.isConnected) { if (ro) ro.disconnect(); return; }
+      var win = marco.contentWindow, fondo = 0;
+      Array.prototype.forEach.call(doc.body.children, function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.height > 0 && win && win.getComputedStyle(el).position !== 'fixed') fondo = Math.max(fondo, r.bottom + (win ? win.pageYOffset : 0));
+      });
+      var h = Math.ceil(fondo) + 16;
+      if (h < 240 || Math.abs(h - marco.offsetHeight) < 8) return;
+      if (++cambios > 40) { if (ro) ro.disconnect(); return; }
+      marco.style.minHeight = '240px';
+      marco.style.height = h + 'px';
+    }
+    medir();
+    if (window.ResizeObserver) {
+      /* El body nunca baja del alto del marco: se observa cada bloque para
+         notar también cuando el contenido se encoge. */
+      ro = new ResizeObserver(medir);
+      ro.observe(doc.body);
+      Array.prototype.forEach.call(doc.body.children, function (el) {
+        if (marco.contentWindow.getComputedStyle(el).position !== 'fixed') ro.observe(el);
+      });
+    }
+    [300, 1200, 2800].forEach(function (ms) { setTimeout(medir, ms); });
+  }
+
   function abrirVisor(t) {
     var href = t.getAttribute('href');
     var nombre = (t.querySelector('.apartado-tarjeta-nombre') || t).textContent.trim();
@@ -162,7 +202,10 @@
     visor.querySelector('.apartado-visor-tit').textContent = (t.querySelector('.apartado-tarjeta-icono') ? t.querySelector('.apartado-tarjeta-icono').textContent + ' ' : '') + nombre;
     var marco = visor.querySelector('iframe');
     marco.title = nombre;
-    marco.addEventListener('load', function () { if (visor) visor.classList.add('cargado'); });
+    marco.addEventListener('load', function () {
+      if (visor) visor.classList.add('cargado');
+      ajustarMarco(marco);
+    });
     marco.src = href.replace(/&amp;/g, '&') + '&visor=1';
     visor.querySelector('.apartado-visor-cerrar').addEventListener('click', function () { cerrarVisor(true); });
 

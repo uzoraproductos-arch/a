@@ -602,6 +602,34 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Números en pestañas y el libro como nota de referencia (09-10-2026, sello
+20261009q).** El autor pidió para Números lo mismo que en Datos, Aprende y
+Participa.
+- `sigue-el-dinero.html` tiene seis pestañas, una por apartado de «En esta
+  página»: De dónde sale, Quién lo decide, Quién lo gasta, A dónde baja,
+  Cuánto debemos y ¿Cuánto te toca? (`'pestanas': True` en `apartados.py`).
+- **Fichas.** Siguen siendo el visor (el módulo de la portada en un marco,
+  modo `visor-foco`), desplegado debajo de su fila. Ahora el marco toma el
+  alto de su contenido, sin franja en blanco (`ajustarMarco()` en
+  `apartados.js`).
+  - Se mide el fondo de los bloques del `body` del marco. Los cajones fijos
+    (`position: fixed`) se ignoran, porque miden lo que el marco y lo harían
+    crecer sin fin.
+  - Un `ResizeObserver` vigila cada bloque, también cuando se encoge. Hay un
+    tope de 40 ajustes.
+- **El libro.** El recuadro pasó a ser una «Nota de referencia»
+  (`libro_html()` en `apartados.py`).
+  - Lleva la llamada [119], que enlaza a su ficha en el catálogo de fuentes
+    (`index.html?ir=fuentes&ancla=ref-gomez-granillo-1995`).
+  - Enlaza sus conceptos al glosario (`ir=glosario&ancla=<término>`).
+  - Ficha nueva en `referencias_legales` (núm. 119, categoría nueva
+    «doctrina», sin URL: el libro no tiene edición oficial digital). El
+    filtro de categorías se deriva de los datos.
+  - El motor: `IR_DESTINOS.fuentes` acepta un ancla `ref-…` y la resalta.
+- Pendiente (§5 bis): las fichas aún cargan los módulos de la portada en el
+  visor. Llevarlos a código propio de la página es trabajo mayor (17
+  módulos del motor).
+
 **Datos en pestañas, con fichas que se despliegan (09-10-2026, sello
 20261009p).** El autor pidió para Datos lo mismo que en Aprende y Participa.
 - `descarga-los-datos.html` tiene tres pestañas: Radar hacendario, Datos

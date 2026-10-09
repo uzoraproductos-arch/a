@@ -23,6 +23,7 @@ edita este archivo y vuelve a correrlo: no edites a mano los .html generados.
 import html
 import os
 import re
+import unicodedata
 import sys
 
 import participa_html
@@ -48,6 +49,40 @@ def ir(destino, ancla=None):
 # Cada tarjeta: (icono, nombre, descripcion, destino, nota de fuente o None,
 # rubro de color o None). Un destino que empieza con http abre afuera.
 # Las cifras son las mismas que tenia el menu, con la misma fuente.
+
+
+def glosario_ancla(termino):
+    """Ancla de index.html?ir=glosario: sin acentos ni signos (el motor la
+    valida con [A-Za-z0-9_-] y busca sin distinguir acentos)."""
+    t = unicodedata.normalize('NFD', termino.split(' (')[0])
+    t = ''.join(c for c in t if unicodedata.category(c) != 'Mn')
+    return re.sub(r'[^A-Za-z0-9]+', '-', t).strip('-')
+
+
+def libro_html(a):
+    """Recuadro del libro como nota de referencia: el llamado [n] y la ficha
+    llevan al catálogo de fuentes; los conceptos, al glosario."""
+    ref = a.get('libro_ref')
+    if not ref:
+        return ('<aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span>'
+                '<p>%s</p></aside>' % a['libro'])
+    rid, num, cita = ref
+    url = 'index.html?ir=fuentes&amp;ancla=%s' % rid
+    llamado = ('<sup class="apartado-libro-llamado"><a href="%s" title="Ver la ficha [%d] en el catálogo de fuentes" '
+               'aria-label="Nota de referencia %d">[%d]</a></sup>' % (url, num, num, num))
+    texto = a['libro'].replace('sobre todo sus capítulos 5 y 7.', 'sobre todo sus capítulos 5 y 7.' + llamado, 1)
+    glos = ' · '.join('<a href="index.html?ir=glosario&amp;ancla=%s">%s</a>' % (glosario_ancla(t), t.split(' (')[0])
+                      for t in a.get('libro_glosario', []))
+    return ('<aside class="apartado-libro apartado-libro-nota" aria-labelledby="notaLibroTit">'
+            '<span class="apartado-libro-ico" aria-hidden="true">📘</span>'
+            '<div class="apartado-libro-cuerpo">'
+            '<p class="apartado-libro-tit" id="notaLibroTit">Nota de referencia</p>'
+            '<p>%s</p>'
+            '%s'
+            '<p class="apartado-libro-ficha" id="nota-%d"><span class="apartado-libro-num">[%d]</span> %s '
+            '<a class="apartado-libro-ir" href="%s">Ver la ficha en el catálogo de fuentes ➔</a></p>'
+            '</div></aside>' % (texto, ('<p class="apartado-libro-glos"><b>Sus conceptos, en el glosario:</b> %s</p>' % glos) if glos else '',
+                                num, num, cita, url))
 
 def fichas(lista):
     """Fichas que se despliegan en la misma página (datos.js): botones con
@@ -109,10 +144,22 @@ APARTADOS = [
                   'Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7. Cada capítulo trae una '
                   'franja <b>«Ayer y hoy»</b>: lo que explicaba el libro y cómo está hoy, con el documento oficial que lo sostiene. '
                   'Las cifras no se copian del libro: se toman de su fuente oficial vigente.'),
+        # Nota de referencia (decision del autor, 09-10-2026): la obra es la
+        # ficha ref-gomez-granillo-1995 del catalogo de fuentes y sus
+        # conceptos llevan al glosario del auditor.
+        'libro_ref': ('ref-gomez-granillo-1995', 119,
+                      'Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). <cite>Introducción al derecho económico</cite>. Editorial Esfinge.'),
+        'libro_glosario': ['Rectoría Económica del Estado', 'Economía Mixta', 'Sistema Nacional de Planeación Democrática',
+                           'Hacienda Pública', 'LIF (Ley de Ingresos de la Federación)', 'PEF (Presupuesto de Egresos de la Federación)',
+                           'Gasto Federalizado', 'Deuda Pública y SHRFSP'],
         'scripts': ['deuda-tiempo.js'],
+        # Desde el 09-10-2026 cada capitulo es una pestana (decision del
+        # autor): su contenido y sus fichas solo se despliegan al pulsarla.
+        'pestanas': True,
         'secciones': [
             {
                 'id': 'origen',
+                'pestana': ('💵', '1 · De dónde sale', 'Ingresos y Ley de Ingresos'),
                 'num': 1,
                 'titulo': 'De dónde sale el dinero',
                 'texto': 'Impuestos, ingresos petroleros y deuda: todo lo que autoriza la Ley de Ingresos, y su recorrido completo hasta el gasto.',
@@ -130,6 +177,7 @@ APARTADOS = [
             },
             {
                 'id': 'decide',
+                'pestana': ('🏛️', '2 · Quién lo decide', 'El Congreso y los Poderes'),
                 'num': 2,
                 'titulo': 'Quién lo decide',
                 'texto': 'El Congreso autoriza los ingresos y la deuda; la Cámara de Diputados aprueba el gasto. Y los Poderes también cuestan.',
@@ -141,6 +189,7 @@ APARTADOS = [
             },
             {
                 'id': 'gasta',
+                'pestana': ('🏢', '3 · Quién lo gasta', 'Ramos, obras y ambiente'),
                 'num': 3,
                 'titulo': 'Quién lo gasta y en qué',
                 'texto': 'Cuánto recibe cada Secretaría, qué obras se pagan y qué le cuesta al ambiente.',
@@ -156,6 +205,7 @@ APARTADOS = [
             },
             {
                 'id': 'baja',
+                'pestana': ('📍', '4 · A dónde baja', 'Estados y municipios'),
                 'num': 4,
                 'titulo': 'A dónde baja',
                 'texto': 'El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno recauda.',
@@ -169,6 +219,7 @@ APARTADOS = [
             },
             {
                 'id': 'deuda',
+                'pestana': ('📉', '5 · Cuánto debemos', 'La deuda, sexenio por sexenio'),
                 'num': 5,
                 'titulo': 'Cuánto debemos',
                 'texto': 'La deuda pública de 1994 a la proyección de 2027, sexenio por sexenio. Pulsa «Contabilizar» y mírala crecer.',
@@ -183,6 +234,7 @@ APARTADOS = [
             },
             {
                 'id': 'ati',
+                'pestana': ('🧮', '6 · ¿Cuánto te toca?', 'La calculadora de tu sueldo'),
                 'num': 6,
                 'titulo': 'Y a ti, ¿cuánto te toca?',
                 'texto': 'Escribe tu sueldo y mira a qué rubros, fondos y pago de deuda se van tus impuestos.',
@@ -482,8 +534,7 @@ def pagina(a, sello):
     if a.get('guia') == 'abajo':
         guia, guia_abajo = '', '\n\n      ' + GUIA
     if a.get('libro'):
-        guia = (guia + '\n      ' if guia else '') + ('<aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span>'
-                                                       '<p>%s</p></aside>' % a['libro'])
+        guia = (guia + '\n      ' if guia else '') + libro_html(a)
     estilos = ''.join('\n  <link rel="stylesheet" href="assets/auditor/css/%s?v=%s">' % (css, sello) for css in a.get('estilos', []))
     scripts = ''.join('\n  <script src="assets/auditor/js/%s?v=%s"></script>' % (js, sello) for js in a.get('scripts', []))
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
