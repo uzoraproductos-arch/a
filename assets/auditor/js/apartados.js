@@ -213,7 +213,6 @@
     visor.innerHTML =
       '<div class="apartado-visor-cab">' +
         '<span class="apartado-visor-tit" tabindex="-1"></span>' +
-        '<a class="apartado-visor-b" href="' + href + '" title="Abre el módulo en la vista completa del auditor">⤢ Pantalla completa</a>' +
         '<button type="button" class="apartado-visor-b apartado-visor-cerrar">✕ Cerrar</button>' +
       '</div>' +
       '<div class="apartado-visor-cuerpo">' +
@@ -428,7 +427,7 @@
         sec('Qué encontrarás aquí', '<ul class="rc-plazos fin-lugares">' + lugares.map(function (m) {
           return '<li>' + m[0] + ' <a href="' + m[2] + '"><b>' + m[1] + '</b></a>: ' + m[3] + '</li>';
         }).join('') + '</ul>' +
-          '<p class="rc-nota">Para el marco legal completo, los conceptos y el detalle de cada tema está la Enciclopedia Interactiva.</p>') +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está el Diccionario del Gasto Público.</p>') +
         sec('Cómo leer las cifras', '<ul class="rc-plazos">' +
           '<li>' + chip('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
           '<li>' + chip('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
@@ -439,7 +438,7 @@
       '<footer class="glos-drawer-pie">' +
         '<button type="button" class="glos-drawer-todo" data-g="Gasto Público">📗 Qué es el gasto público ➔</button>' +
         '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="Hacienda Pública">📗 Qué es la hacienda pública ➔</button>' +
-        '<a class="glos-drawer-todo glos-drawer-todo-2" href="enciclopedia.html" style="text-align:center; text-decoration:none;">📚 Abrir la Enciclopedia Interactiva ➔</a>' +
+        '<a class="glos-drawer-todo glos-drawer-todo-2" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir el Diccionario del Gasto Público ➔</a>' +
       '</footer>', 'finTitulo', true);
     Array.prototype.forEach.call(dr.querySelectorAll('[data-g]'), function (b) {
       b.addEventListener('click', function () { pintarTermino(DB, b.getAttribute('data-g')); });
@@ -461,7 +460,7 @@
       '</div>' +
       '<footer class="glos-drawer-pie">' +
         '<button type="button" class="glos-drawer-todo" data-volver="1">← Volver a la nota</button>' +
-        '<a class="glos-drawer-todo glos-drawer-todo-2" href="index.html?ir=glosario&amp;ancla=' + ancla + '" style="text-align:center; text-decoration:none;">📖 Ver todo el glosario ➔</a>' +
+        '<a class="glos-drawer-todo glos-drawer-todo-2" href="glosario.html#' + ancla + '" style="text-align:center; text-decoration:none;">📖 Ver todo el glosario ➔</a>' +
       '</footer>', 'glosTermTitulo', true);
     dr.querySelector('[data-volver]').addEventListener('click', function () { pintarFinanzas(DB); });
   }
@@ -480,5 +479,40 @@
       if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
       abrirFinanzas(e);
     });
+  });
+
+  /* Nada saca al lector a la portada (decisión del autor, 09-10-2026):
+     solo el nombre «Auditavisión» y los botones de volver al inicio llevan
+     a index.html. Un enlace que todavía apunta a un módulo de la portada
+     (index.html?ir=...) se abre en la ventana lateral, ancha, con el
+     auditor en modo visor; los términos del glosario van a su página. */
+  function abrirMarco(href, nombre) {
+    var url = String(href).replace(/&amp;/g, '&');
+    var g = url.match(/^index\.html\?ir=(?:faq-)?glosario(?:&ancla=([A-Za-z0-9_-]+))?/);
+    if (g) { window.location.href = 'glosario.html' + (g[1] ? '#' + g[1] : ''); return; }
+    var dr = cajon(cabCajon('🔎', esc(nombre || 'Auditavisión'), 'Cerrar la ventana') +
+      '<div class="glos-drawer-cuerpo">' +
+        '<p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>' +
+        '<iframe class="glos-drawer-iframe" title="' + esc(nombre || 'Módulo del auditor') + '"></iframe>' +
+      '</div>', '', true);
+    dr.classList.add('glos-drawer-marco');
+    dr.removeAttribute('aria-labelledby');
+    dr.setAttribute('aria-label', nombre || 'Módulo del auditor');
+    var marco = dr.querySelector('iframe');
+    marco.addEventListener('load', function () { dr.classList.add('cargado'); });
+    marco.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'visor=1';
+  }
+  window.Apartados = { abrirMarco: abrirMarco };
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="index.html?ir="]');
+    if (!a || a.classList.contains('apartado-tarjeta')) return;
+    e.preventDefault();
+    abrirMarco(a.getAttribute('href'), (a.textContent || '').replace(/[➔↗]/g, '').replace(/\s+/g, ' ').trim());
+  });
+  /* El auditor, dentro de la ventana, pide cerrarla con postMessage. */
+  window.addEventListener('message', function (e) {
+    if (e.origin !== window.location.origin || !e.data || e.data.auditavision !== 'cerrar-visor') return;
+    if (cajDr && cajDr.classList.contains('glos-drawer-marco')) cerrarCajon();
   });
 })();

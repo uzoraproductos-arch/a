@@ -745,3 +745,27 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .herr-otra-ico { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); font-size: 24px; flex: none; }
 @media (max-width: 640px) { .herr-otras-fila { grid-template-columns: 1fr; } .herr-otra { min-height: 86px; } }
 @media (prefers-reduced-motion: reduce) { .herr-otra::before { transition: none; transform: none !important; } }
+
+/* ==========================================================================
+   GLOSARIO GENERAL EN SU PAGINA (09-10-2026) · assets/auditor/js/glosario.js
+   ========================================================================== */
+.gl-carga { color: #44526b; }
+.gl-barra { position: sticky; top: var(--gl-tope, 72px); z-index: 5; background: #ffffff; padding: 12px 0 8px; border-bottom: 1px solid var(--civ-gris-borde); }
+.gl-busca input { width: 100%; font: inherit; font-size: 17px; padding: 12px 16px; border: 1px solid var(--civ-gris-borde); border-radius: 999px; background: #f6f8fc; color: #1c2a44; }
+.gl-busca input:focus { outline: 3px solid color-mix(in srgb, var(--civ-azul) 35%, transparent); border-color: var(--civ-azul); background: #ffffff; }
+.gl-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.gl-cat { font: inherit; font-size: 13.5px; cursor: pointer; border-radius: 999px; padding: 6px 12px; background: #ffffff; color: #1c2a44; border: 1px solid var(--civ-gris-borde); }
+.gl-cat:hover { border-color: var(--civ-azul); }
+.gl-cat.on { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; font-weight: 700; }
+.gl-cuenta { margin: 8px 0 0; font-size: 13.5px; color: #5a6782; }
+.gl-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-top: 18px; }
+.gl-t { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-top: 4px solid var(--civ-azul); border-radius: 12px; padding: 16px 18px; scroll-margin-top: 220px; transition: box-shadow .3s, border-color .3s; }
+.gl-t-cat { display: inline-block; font-size: 12px; color: #44526b; background: #f1f4fa; border-radius: 999px; padding: 2px 10px; }
+.gl-t-tit { margin: 8px 0 6px; font-size: 18px; color: #0b2a63; }
+.gl-t-def { margin: 0; font-size: 15.5px; line-height: 1.6; color: #1c2a44; }
+.gl-t-ley { margin: 10px 0 0; padding-top: 8px; border-top: 1px dashed var(--civ-gris-borde); font-size: 13px; color: #5a6782; }
+.gl-t-destacado { border-color: #c9a84c; box-shadow: 0 0 0 4px rgba(201, 168, 76, .35); }
+@media (max-width: 640px) {
+  .gl-barra { position: static; }
+  .gl-lista { grid-template-columns: 1fr; }
+}

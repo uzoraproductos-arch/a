@@ -274,7 +274,7 @@
       acciones: [
         { txt: '📂 Abrir el expediente completo del huachicol fiscal', href: 'index.html?ir=radar&ancla=huachicol' },
         { txt: '🧮 Ver cuánto IEPS pagas en la Calculadora Cívica', href: 'index.html?ir=calculadora' },
-        { txt: '📖 Qué es el huachicol fiscal, en el glosario', href: 'index.html?ir=glosario&ancla=Huachicol-Fiscal' },
+        { txt: '📖 Qué es el huachicol fiscal, en el glosario', href: 'glosario.html#Huachicol-Fiscal' },
         { txt: '📜 Leer la Iniciativa de Ley de Ingresos 2027', url: ilif.url }
       ]
     };

@@ -342,17 +342,19 @@
     'deuda':       { tab: 'accion-financiera', etiqueta: 'Acción Financiera' },
     'legislativo': { tab: 'legislativo',       etiqueta: 'Congreso' },
     'judicial':    { tab: 'judicial',          etiqueta: 'Poder Judicial' },
-    'politicos':   { tab: 'politicos',         etiqueta: 'Enciclopedia' }
+    'politicos':   { tab: 'politicos',         etiqueta: 'Diccionario' }
   };
 
   /* En la plataforma no hay pestanas de Congreso ni de Corte: su gasto vive
      en Accion Financiera (Poderes). Los personajes solo estan en la
      Enciclopedia. */
   function irAPestanaDesdeDebate(tab) {
-    if (tab === 'politicos') { window.location.href = 'enciclopedia.html#politicos'; return; }
+    if (tab === 'politicos') { window.location.href = 'diccionario.html'; return; }
     const destino = (tab === 'legislativo' || tab === 'judicial') ? 'poderes'
       : (tab === 'megaobras' ? 'megaobras' : 'presupuesto');
-    window.location.href = 'index.html?ir=' + destino;
+    /* Sin salir de la pagina: el modulo se abre en la ventana lateral. */
+    if (window.Apartados) window.Apartados.abrirMarco('index.html?ir=' + destino, 'Los datos del debate');
+    else window.location.href = 'index.html?ir=' + destino;
   }
 
 

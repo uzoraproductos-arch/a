@@ -968,6 +968,13 @@ html.modo-visor .main-wrapper { padding-top: 12px; }
 .visor-aviso-b.principal { background: var(--civ-azul); color: #ffffff; border-color: var(--civ-azul); }
 /* Foco: una tarjeta de Sigue el dinero abre un solo bloque del modulo. */
 html.modo-visor .visor-oculto { display: none !important; }
+/* Diccionario del Gasto Publico (09-10-2026): cada apartado ya es una
+   pestana de su pagina; en el visor sobran el titulo y las subpestanas. */
+html.modo-visor #tab-panel-faq > .section-hero,
+html.modo-visor #tab-panel-faq > .subtabs-bar { display: none !important; }
+/* En el visor la ventana del auditor (reporte ciudadano y demas cajones)
+   ocupa todo el marco: ya va dentro de una ventana lateral. */
+html.modo-visor .audit-drawer { max-width: none !important; border-left: 0; box-shadow: none; }
 
 /* Auditoría en imágenes (09-10-2026): cada diapositiva es un enlace a su
    propia página; se ve igual que cuando era un botón. */
@@ -1060,6 +1067,14 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
 .glos-drawer { width: min(580px, 100vw); }
 /* La nota de finanzas públicas va un poco más ancha (09-10-2026). */
 .glos-drawer.glos-drawer-ancha { width: min(760px, 100vw); }
+/* Ventana con un modulo del auditor (09-10-2026): los enlaces que antes
+   llevaban a la portada abren aqui, sin salir de la pagina. */
+.glos-drawer.glos-drawer-marco { width: min(1100px, 100vw); }
+.glos-drawer-marco .glos-drawer-cuerpo { position: relative; padding: 0; overflow: hidden; display: flex; flex-direction: column; flex: 1 1 auto; }
+.glos-drawer-marco .glos-drawer-iframe { flex: 1 1 auto; width: 100%; min-height: 0; border: 0; background: #ffffff; opacity: 0; transition: opacity .25s; }
+.glos-drawer-marco.cargado .glos-drawer-iframe { opacity: 1; }
+.glos-drawer-marco .apartado-visor-carga { position: absolute; inset: 24px 0 auto; text-align: center; margin: 0; }
+.glos-drawer-marco.cargado .apartado-visor-carga { display: none; }
 .fin-cifras li { line-height: 1.5; }
 .fin-fuente { font-size: 13px; color: #5a6782; }
 

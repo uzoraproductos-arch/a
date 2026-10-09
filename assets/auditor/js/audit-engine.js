@@ -5668,7 +5668,7 @@
       return;
     }
     if (tabKey === 'faq' && !document.getElementById('tab-panel-faq')) {
-      window.location.href = 'enciclopedia.html#faq';
+      window.location.href = 'diccionario.html';
       return;
     }
     if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias') && document.getElementById('refsListContainer')) {
@@ -5676,7 +5676,7 @@
       return;
     }
     if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias')) {
-      window.location.href = 'enciclopedia.html#referencias';
+      window.location.href = 'diccionario.html#fuentes';
       return;
     }
     fjDetenerPlay();
@@ -7287,7 +7287,7 @@
         encEl.onclick = function (ev) { ev.preventDefault(); cerrarModalReferencia(); abrirCatalogoFuentes(ref.id); };
         encEl.lastChild.textContent = ' Ver en el Catálogo de Fuentes';
       } else {
-        encEl.href = 'enciclopedia.html#' + (ref.id || 'tab-panel-referencias');
+        encEl.href = 'diccionario.html#fuentes';
         encEl.onclick = null;
       }
     }
@@ -8899,7 +8899,7 @@
         radarSec('Por qué importan', '<p>Cada año el Congreso aprueba cuánto se cobra y en qué se gasta. En 2026 el Presupuesto de Egresos es de ' + bill(P.totalPEF || 0) + '; de ellos, ' + bill(fed) + ' viajan a los 32 estados y a sus municipios, y ' + bill(cf) + ' pagan el costo de la deuda. ' +
           (cp ? 'Al revisar la Cuenta Pública 2024, la Auditoría Superior dejó ' + radarMdp(cp.porAclarar / 1e6) + ' por aclarar. ' : '') + 'Entender ese recorrido es el primer paso para pedir cuentas con datos.</p>') +
         radarSec('Qué encontrarás aquí', '<ul class="rc-plazos">' + mods.map(function(m) { return '<li>' + m[0] + ' <b>' + m[1] + ':</b> ' + m[2] + '</li>'; }).join('') + '</ul>' +
-          '<p class="rc-nota">Para el marco legal completo, los conceptos y el detalle de cada tema está la Enciclopedia Interactiva.</p>') +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está el Diccionario del Gasto Público.</p>') +
         radarSec('Cómo leer las cifras', '<ul class="rc-plazos">' +
           '<li>' + chipEstado('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
           '<li>' + chipEstado('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
@@ -8908,7 +8908,7 @@
         radarSec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 31 fr. IV (la obligación de contribuir al gasto público), art. 74 fr. IV y VI (la Cámara de Diputados aprueba el presupuesto y revisa la Cuenta Pública) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
       '</div>' +
       '<footer class="glos-drawer-pie">' +
-        '<a class="glos-drawer-todo" href="enciclopedia.html" style="text-align:center; text-decoration:none;">📚 Abrir la Enciclopedia Interactiva ➔</a>' +
+        '<a class="glos-drawer-todo" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir el Diccionario del Gasto Público ➔</a>' +
         (gGasto ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gGasto.termino) + '">Qué es el gasto público ➔</button>' : '') +
         (gHac ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gHac.termino) + '">Qué es la hacienda pública ➔</button>' : '') +
       '</footer>';
@@ -15879,6 +15879,8 @@
     }
     if (overlay) overlay.classList.remove('active');
     document.body.style.overflow = '';
+    /* En el visor el reporte es todo el panel: al cerrarlo se cierra el panel. */
+    if (enVisor()) visorCerrar();
   }
 
   function openGarciaLunaArgumento() {}
@@ -20771,8 +20773,8 @@
           '<p class="pe-fuente">' + peFuenteMetrica(M) + '</p>' +
         '</div>' +
         '<div class="pe-tablas">' + PE_GRUPOS.map(G => peTabla(G, E)).join('') + '</div>' +
-        '<p class="pe-ficha">¿Quieres el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
-          '<a href="enciclopedia.html#politicos/mandatarios" target="_blank" rel="noopener">Abrir la pestaña 5.1 de la Enciclopedia ↗</a></p>' +
+        '<p class="pe-ficha">¿Te topaste con un término que no conoces (déficit, deuda, costo financiero)? ' +
+          '<a href="diccionario.html#glosario">Búscalo en el Diccionario del Gasto Público ➔</a></p>' +
       '</section>';
 
     const barras = document.getElementById('peBarras');
@@ -22898,7 +22900,7 @@
     'deuda':       { tab: 'accion-financiera', etiqueta: 'Acción Financiera' },
     'legislativo': { tab: 'legislativo',       etiqueta: 'Congreso' },
     'judicial':    { tab: 'judicial',          etiqueta: 'Poder Judicial' },
-    'politicos':   { tab: 'politicos',         etiqueta: 'Enciclopedia' }
+    'politicos':   { tab: 'politicos',         etiqueta: 'Diccionario' }
   };
 
   /* En la plataforma no hay pestanas de Congreso ni de Corte: su gasto vive
@@ -22907,7 +22909,7 @@
   function irAPestanaDesdeDebate(tab) {
     const enPlataforma = !!document.getElementById('seccionDesgloseModulos');
     if (enPlataforma) {
-      if (tab === 'politicos') { window.location.href = 'enciclopedia.html#politicos'; return; }
+      if (tab === 'politicos') { window.location.href = 'diccionario.html'; return; }
       seleccionarModuloExplorer(tab === 'legislativo' || tab === 'judicial' ? 'poderes' : tab);
       return;
     }
@@ -26702,7 +26704,8 @@
     descargas: function() { abrirDescargas(); },
     diccionario: function() { abrirDescargas('diccionario'); },
     'csv-municipios': function() { descargarCSV('municipios'); },
-    'faq-glosario': function() { abrirDiccionarioSubtab('faq-glosario'); },
+    /* El glosario tiene su propia pagina desde el 09-10-2026. */
+    'faq-glosario': function() { if (enVisor()) abrirDiccionarioSubtab('faq-glosario'); else window.location.replace('glosario.html'); },
     'faq-marco-legal': function() { abrirDiccionarioSubtab('faq-marco-legal'); },
     'faq-preguntas': function() { abrirDiccionarioSubtab('faq-preguntas'); },
     fuentes: function(a) { abrirCatalogoFuentes(a && /^ref-/.test(a) ? a : undefined); },
@@ -26721,7 +26724,7 @@
       if (m) munIrA(m[1], m[2]); else munIrA(null, null);
     },
     radar: function(a) { if (a) abrirRadarConcepto(a); },
-    glosario: function(a) { if (a) irAlGlosario(a.replace(/-/g, ' ')); },
+    glosario: function(a) { window.location.replace('glosario.html' + (a ? '#' + a : '')); },
     /* El radar hacendario ya no es un menu de la portada: vive en la
        pagina de datos (09-10-2026). Los enlaces viejos llegan ahi. */
     datos: function() { window.location.replace('descarga-los-datos.html#radar'); }
