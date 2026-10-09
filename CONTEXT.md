@@ -382,8 +382,9 @@ pasa de 4.5:1 en nivel 1, en el subnivel y en la vista de lista.
 (08-10-2026, sello 20261008m).** Por decisión del autor, seis apartados del
 índice ya no se desglosan en un menú: cada uno abre su propia página, con la
 información ordenada por secciones, tarjetas y un «En esta página»:
-`herramientas.html` (guía «Cómo se usa» y los cinco módulos),
-`busca-y-verifica.html`, `sigue-el-dinero.html`, `descarga-los-datos.html`,
+`herramientas.html` (los cuatro módulos y la guía «Cómo se usa»),
+`busca-y-verifica.html` (desde el 09-10-2026, redirección al Modo Inspector),
+`sigue-el-dinero.html`, `descarga-los-datos.html`,
 `aprende.html` y `participa.html`. **No se editan a mano:** se generan con
 `python3 herramientas/apartados.py`, que toma el sello de `index.html`
 (`sello.py` ya lo llama solo). Llevan la misma cabecera y cargan
@@ -528,6 +529,29 @@ cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
   oficial; no se usan. Tampoco el desglose del timbre (28%).
 La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
 
+**«Busca y verifica» se fusiona con el Modo Inspector; Herramientas, con
+los módulos al centro (09-10-2026, sello 20261009e).** Decisiones del autor:
+- **Busca y verifica dejó de ser menú.** Sus herramientas ya vivían dentro
+  del Modo Inspector (módulo 4 de la portada), así que el módulo se reordenó
+  en dos partes con su índice: «Lo que revisó la Auditoría» (1 qué encontró
+  la ASF, 2 radar por entidad, 3 expedientes) y «Busca y verifica» (4 auditor
+  de entes públicos, 5 contrasta una nota, 6 lista negra del SAT). Los
+  separadores de la parte B llevan `id="eb-inspentes|inspnota|inspefos"`
+  para que `erarioIr` los alcance; el antiguo `#vnSeccion` (sin uso en el
+  motor) pasó a `#eb-inspnota`. El proemio trae los seis temas.
+  ComprasMX, que era tarjeta del menú, se enlaza en la cabecera de la parte B.
+  No se agregó ningún desglose nuevo: solo se reordenó lo que ya estaba.
+- `busca-y-verifica.html` ya no es apartado: `apartados.py` la genera como
+  redirección (`REDIRECCIONES`) a `index.html?ir=verificador&ancla=moduloProemio`
+  para no romper enlaces viejos. `expedientes.html` cuelga ahora de
+  Inicio › Herramientas › Modo Inspector.
+- **Herramientas:** los cuatro módulos van al centro, con icono grande y solo
+  su título (Simulador de Inversión y Megaobras, Calculadora Cívica, Modo
+  Inspector, Costo Ambiental) y el botón «Comenzar». La frase y la cifra de
+  cada tarjeta se quitaron: lo que trae cada módulo se cuenta en su proemio
+  al pulsar «Comenzar». La guía «Cómo se usa» quedó debajo (`'guia': 'abajo'`
+  en `apartados.py`).
+
 **Expedientes de casos por aclarar: página propia (sello 20261009d).** Por la
 regla de AGENTS.md §5 bis, los diez expedientes dejaron de desplegarse en el
 bloque 3 del Modo Inspector y viven en `expedientes.html`, que genera
@@ -547,8 +571,7 @@ En la portada, el bloque 3, su paso en el índice y el tema del proemio son
 enlaces a esa página. `irAExpediente`/`expIr` y `index.html?ir=expediente&ancla=<id>`
 llevan a `expedientes.html#exp-<id>`. Del motor se quitaron `expFichaHtml`,
 `renderForensicDossiers`, `filtrarDossiers` y `expCopiar` (con sus
-exportaciones). La tarjeta de «Busca y verifica» y las páginas de Auditoría
-en imágenes ya enlazan directo.
+exportaciones). Las páginas de Auditoría en imágenes ya enlazan directo.
 
 **Regla nueva: todo `pendiente` señala a la dependencia que no transparentó
 (09-10-2026, sello 20261009c).** Decisión del autor: al marcar un dato como

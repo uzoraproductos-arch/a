@@ -190,6 +190,8 @@ mudando a su página; no se agregan desgloses nuevos.
   y los Expedientes de casos por aclarar, que eran el bloque 3 del Modo
   Inspector y viven en `expedientes.html#exp-<id>`
   (`herramientas/expedientes.py` + `assets/auditor/js/expedientes.js`).
+- El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
+  es su parte B, y `busca-y-verifica.html` solo redirige ahí.
 
 ---
 

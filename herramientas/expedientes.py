@@ -69,7 +69,7 @@ def pagina(sello):
   <main class="apartado ex-pagina" id="contenido">
     <header class="apartado-cab">
       <div class="apartado-ancho">
-        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="busca-y-verifica.html">Busca y verifica</a> <span aria-hidden="true">›</span> <span>Expedientes de casos</span></nav>
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="herramientas.html">Herramientas</a> <span aria-hidden="true">›</span> <a href="index.html?ir=verificador&amp;ancla=moduloProemio">Modo Inspector</a> <span aria-hidden="true">›</span> <span>Expedientes de casos</span></nav>
         <span class="apartado-lema">📂 Lo que sigue sin explicarse</span>
         <h1 class="apartado-titulo">Expedientes de casos por aclarar</h1>
         <p class="apartado-entrada">Diez casos de alto impacto, contados con los informes de la Auditoría Superior de la Federación y el Sistema de Alertas de Hacienda: <b>cuánto dinero no se pudo comprobar, quién lo manejó y qué acciones se promovieron.</b></p>
@@ -110,7 +110,7 @@ def pagina(sello):
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <a class="apartado-volver" href="busca-y-verifica.html">← Volver a Busca y verifica</a>
+      <a class="apartado-volver" href="index.html?ir=verificador&amp;ancla=moduloProemio">← Volver al Modo Inspector</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -120,7 +120,7 @@ def pagina(sello):
   <script src="assets/auditor/js/expedientes.js?v={sello}"></script>
 </body>
 </html>
-'''.format(favicon=FAVICON, sello=sello, cabecera=cabecera('busca-y-verifica.html', sello),
+'''.format(favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
            pasos='\n'.join(pasos), glosa=glosa)
 
 
