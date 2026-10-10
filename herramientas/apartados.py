@@ -529,7 +529,7 @@ APARTADOS = [
                 'titulo': '🔎 Servicios y Pase del Auditor',
                 'texto': 'La consulta es gratuita. Si necesitas ir más a fondo, pide una investigación; si quieres sostener la plataforma, súmate con el Pase. Ambos se abren con el lanzamiento.',
                 'tarjetas': [
-                    ('🔎', 'Solicita una investigación', 'Revisión documental, expediente, seguimiento o capacitación, con la misma regla de la plataforma y su política de independencia.', 'servicios.html', None, None),
+                    ('🔎', 'Solicita una investigación', 'Revisión documental, expediente, seguimiento, capacitación o licencia, para quien sea y con la misma regla de la plataforma y su política de independencia.', 'servicios.html', None, None),
                     ('🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma independiente: plan mensual o anual.', 'pase-del-auditor.html', None, None),
                 ],
             },
@@ -835,13 +835,16 @@ SERVICIOS = [
      'Hallazgos, fuentes y límites de la revisión.', 'Periodistas, organizaciones, despachos y empresas.'),
     ('expediente', '🗂️', 'Expediente de investigación',
      'Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.',
-     'Cronología, documentos, relaciones verificadas y análisis de inconsistencias.', 'Medios, organizaciones y equipos profesionales.'),
+     'Cronología, documentos, relaciones verificadas y análisis de inconsistencias.', 'Medios, organizaciones, equipos profesionales y dependencias públicas.'),
     ('seguimiento', '📡', 'Seguimiento periódico',
      'Vigilancia de un tema que cambia: contratos, proveedores, presupuesto o auditorías.',
      'Reporte de cambios relevantes con su documento.', 'Quien necesita estar al día de un tema de forma recurrente.'),
     ('capacitacion', '🎓', 'Capacitación',
      'Talleres para leer el presupuesto y usar las herramientas de la plataforma.',
-     'Taller de interpretación presupuestaria y uso del Modo Inspector.', 'Universidades, organizaciones y equipos de trabajo.'),
+     'Taller de interpretación presupuestaria y uso del Modo Inspector.', 'Universidades públicas y privadas, organizaciones, equipos de trabajo y dependencias de gobierno.'),
+    ('licencia', '🔑', 'Licencia de las herramientas',
+     'El uso de las herramientas y los datos de la plataforma dentro de tu institución.',
+     'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.'),
 ]
 
 PROCESO = [
@@ -856,25 +859,31 @@ PROCESO = [
 
 INDEPENDENCIA = [
     ('La consulta cívica es gratuita y lo seguirá siendo.',
-     'Ningún dato publicado en la plataforma se esconde detrás de un pago. El Pase del Auditor y los Servicios sostienen el trabajo; no compran acceso a la información pública.'),
-    ('No trabajamos para partidos ni para gobiernos sobre lo que fiscalizamos.',
-     'No aceptamos encargos ni dinero de partidos políticos, candidatos o equipos de campaña, ni de gobiernos o dependencias sobre los temas que la plataforma revisa.'),
+     'Ningún dato publicado en la plataforma se esconde detrás de un pago. El Pase del Auditor, los Servicios, las licencias y las donaciones sostienen el trabajo; no compran acceso a la información pública.'),
+    ('Abierta a todos, con las mismas reglas para todos.',
+     'Pueden usarla, contratar un servicio o licenciar sus herramientas la ciudadanía, organizaciones, medios, empresas, universidades públicas y privadas y también gobiernos y dependencias. Nadie queda excluido; nadie tiene trato especial.'),
+    ('Lo que no está en venta: las conclusiones y lo que publicamos.',
+     'Ningún cliente, donante, gobierno ni partido puede pedir que se retire, se suavice o se retrase una publicación, ni decidir qué se investiga en la plataforma pública.'),
     ('Quien encarga define la pregunta, no la respuesta.',
      'Si los documentos no sostienen lo que esperabas encontrar, el entregable lo dice. Las conclusiones no se negocian.'),
-    ('Ningún hallazgo se vende para callarlo.',
-     'Lo que la plataforma publica sale de documentos públicos, y se publica o no por razones editoriales, nunca porque alguien pague.'),
     ('Los conflictos de interés se dicen antes de empezar.',
-     'Si quien solicita es parte del caso (proveedor, persona servidora pública involucrada o contraparte en un litigio), se señala en la cotización. Si compromete la independencia, el encargo se declina.'),
+     'Si quien solicita es parte del caso (proveedor, dependencia o persona servidora pública involucrada, o contraparte en un litigio), se señala en la cotización. Si compromete la independencia, el encargo se declina.'),
+    ('Las donaciones no compran contenido.',
+     'Se agradecen y se reciben de cualquiera que comparta el propósito, pero no dan derecho a decidir qué se investiga, qué se publica ni cómo se dice.'),
     ('La misma regla para todo.',
      'Cada cifra lleva su documento y una de tres etiquetas: oficial, derivado o pendiente. Lo que no se puede sostener se queda pendiente, también en un encargo.'),
     ('Es investigación documental y análisis de indicios, no un dictamen.',
      'Revisamos documentos públicos y señalamos inconsistencias. No es un peritaje, no es asesoría legal y no acusa a nadie de un delito: eso le corresponde a las autoridades. Un encargo que requiera dictamen pericial se cotiza aparte, con su alcance, su metodología y su responsable profesional.'),
+    ('De qué respondemos y de qué no.',
+     'Respondemos de que cada dato coincida con el documento oficial que citamos, y si nos equivocamos lo corregimos en público, diciendo qué cambió. No respondemos del contenido de los documentos oficiales, que es de la dependencia que los emite, ni de las decisiones que alguien tome con la información.'),
     ('Solo fuentes lícitas.',
      'Documentos públicos y solicitudes de acceso a la información. No obtenemos datos personales ni información reservada por vías indebidas.'),
+    ('Nuestro método y nuestras herramientas son nuestros.',
+     'El entregable de un encargo es de quien lo encarga. Las herramientas, el método y la base de la plataforma son de Auditavisión: se pueden licenciar, pero una licencia no da control sobre lo que la plataforma publica.'),
     ('Tus datos y tu encargo son confidenciales.',
-     'El entregable es tuyo. No publicamos quién encargó qué sin tu permiso, y lo que la plataforma publique después sale solo de fuentes públicas.'),
+     'No publicamos quién encargó qué sin su permiso, y lo que la plataforma publique después sale solo de fuentes públicas.'),
     ('Rendimos cuentas de cómo nos sostenemos.',
-     'Cada año publicaremos cuántos encargos recibimos, por tipo de cliente, y qué parte de los ingresos viene de los Servicios y del Pase.'),
+     'Cada año publicaremos cuántos encargos recibimos, por tipo de cliente (incluidos los gobiernos), y cuánto entró por cada vía: Pase, Servicios, licencias y donaciones. Si el gobierno falla en transparentar, nosotros ponemos el ejemplo.'),
 ]
 
 
@@ -920,7 +929,7 @@ def servicios():
         campo('svNombre', 'Nombre u organización <span class="sv-req">obligatorio</span>', '<input id="svNombre" name="nombre" type="text" maxlength="120" required autocomplete="name">'),
         campo('svCorreo', 'Correo para responderte <span class="sv-req">obligatorio</span>', '<input id="svCorreo" name="correo" type="email" maxlength="160" required autocomplete="email">'),
         '            </div>',
-        campo('svUso', 'Para qué lo usarás', '<select id="svUso" name="uso"><option>Periodismo</option><option>Organización civil</option><option>Empresa o despacho</option><option>Academia</option><option>Uso personal</option><option>Otro</option></select>'),
+        campo('svUso', 'Para qué lo usarás', '<select id="svUso" name="uso"><option>Periodismo</option><option>Organización civil</option><option>Empresa o despacho</option><option>Universidad o academia</option><option>Gobierno o dependencia</option><option>Uso personal</option><option>Otro</option></select>'),
         '            <div class="sv-campo" role="radiogroup" aria-labelledby="svParteEt"><span class="sv-et" id="svParteEt">¿Eres parte del caso? <span class="sv-req">obligatorio</span></span>',
         '              <label class="sv-radio"><input type="radio" name="parte" value="No"> No</label>',
         '              <label class="sv-radio"><input type="radio" name="parte" value="Sí"> Sí (proveedor, persona servidora pública involucrada o contraparte en un litigio)</label>',
@@ -941,13 +950,14 @@ def servicios():
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
                     'su documento y su etiqueta. Convive con el <a href="pase-del-auditor.html">Pase del Auditor</a>: el Pase '
-                    'sostiene la consulta gratuita y los Servicios son trabajo a la medida.'),
+                    'sostiene la consulta gratuita, los Servicios son trabajo a la medida y, cuando se abran, las donaciones '
+                    'también ayudan. Ninguna de las tres vías compra lo que publicamos.'),
         'estilos': ['servicios.css'],
         'scripts': ['servicios.js'],
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
-            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': 'Cuatro servicios, de una pregunta puntual a un seguimiento continuo.',
+            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': 'Cinco servicios, de una pregunta puntual a una licencia para tu institución.',
              'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % oferta},
             {'id': 'proceso', 'titulo': 'Cómo trabajamos', 'texto': 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
              'tarjetas': [], 'bloque': '<ol class="sv-pasos">\n%s\n        </ol>' % pasos},
@@ -959,9 +969,9 @@ def servicios():
                         '<li>el costo de las fuentes (copias certificadas, bases de datos o trámites);</li>'
                         '<li>la forma de entrega;</li><li>un margen para sostener la plataforma.</li></ul>\n'
                         '        </div>')},
-            {'id': 'independencia', 'titulo': 'Política de independencia', 'texto': 'Diez compromisos que valen para cada encargo, sin excepción.',
+            {'id': 'independencia', 'titulo': 'Política de independencia', 'texto': '%d compromisos que valen para cada cliente y cada donante, sin excepción.' % len(INDEPENDENCIA),
              'tarjetas': [], 'bloque': '<div class="sv-politica">\n          <ol class="sv-pol">\n%s\n          </ol>\n'
-                                       '          <p class="sv-version">Versión 1 · 10 de octubre de 2026.</p>\n        </div>' % politica},
+                                       '          <p class="sv-version">Versión 2 · 10 de octubre de 2026.</p>\n        </div>' % politica},
             {'id': 'solicitud', 'titulo': 'Solicita una investigación', 'texto': 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.',
              'tarjetas': [], 'bloque': formulario},
         ],
@@ -1018,7 +1028,7 @@ def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('aud
 
 
 PASE_HTML = """<div class="pase">
-          <p class="pase-badge">⚡ Independencia cívica · Sin dinero de gobiernos ni de partidos políticos</p>
+          <p class="pase-badge">⚡ Independencia cívica · Abierta a todos; nadie compra lo que publicamos</p>
           <p>El erario se financia con tu trabajo y tus impuestos. Para auditarlo sin censura y mantener esta plataforma independiente de partidos políticos, te invitamos a sumarte. Menos de lo que te gastas en dos caguamas al mes.</p>
           <div class="pase-precios">
             <div class="pase-plan">
@@ -1040,7 +1050,7 @@ PASE_HTML = """<div class="pase">
             <li>✓ <b>Expediente de tu estado y tu municipio en PDF:</b> deuda, obras y observaciones de la Auditoría Superior, listo para imprimir antes de votar.</li>
             <li>✓ <b>Ticket cívico de tu quincena:</b> el rastro de tus impuestos en alta resolución, para compartir.</li>
             <li>✓ <b>Radar de alertas de la Auditoría Superior:</b> avisos de nuevas observaciones o contratos auditados en tu localidad.</li>
-            <li>✓ <b>100 % cívico e independiente:</b> cero publicidad, cero convenios con partidos políticos.</li>
+            <li>✓ <b>100 % cívico e independiente:</b> cero publicidad, y ningún cliente, donante, gobierno ni partido decide lo que publicamos.</li>
           </ul>
           <p>¿Necesitas una investigación a la medida de un caso? Eso va aparte del Pase: mira los <a href="servicios.html">Servicios de investigación</a> y su política de independencia.</p>
         </div>"""
@@ -1064,7 +1074,7 @@ PAGINAS_BIBLIOTECA = [
         'bibFuentes', 'Cargando el catálogo…'),
     pagina_biblioteca(
         'pase-del-auditor.html', 'Pase del Auditor Cívico', 'Sostén una plataforma independiente',
-        'Herramientas independientes de fiscalización ciudadana, sin dinero de gobiernos ni de partidos.',
+        'Herramientas independientes de fiscalización ciudadana: abiertas a todos, y nadie compra lo que publicamos.',
         None, None, scripts=(), bloque=PASE_HTML),
 ]
 
@@ -1308,7 +1318,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
-    ('10-10-2026', 'Servicios de investigación, en Participa: cuatro servicios, cómo trabajamos, política de independencia y el formulario «Solicita una investigación». Se abren con el lanzamiento.'),
+    ('10-10-2026', 'Servicios de investigación, en Participa: cinco servicios (incluida la licencia de las herramientas), cómo trabajamos, política de independencia y el formulario «Solicita una investigación». Se abren con el lanzamiento.'),
     ('10-10-2026', 'Simulador «Reparte el presupuesto», desde $0: con ejemplo oficial de 2026 y 2027, comparación de escenarios y descarga. La Calculadora Cívica también arranca en cero.'),
     ('10-10-2026', 'Aprende reúne la Biblioteca hacendaria y las Fuentes del auditor en una sola tarjeta, el Diccionario del Gasto Público; cada estante abre su propia página.'),
     ('10-10-2026', 'Registro de pendientes: cada dato que falta, con su porqué, su responsable y el enlace oficial donde debería estar. Toda etiqueta «pendiente» lleva ahí.'),

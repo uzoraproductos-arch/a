@@ -669,13 +669,40 @@ Pendientes de la entrega 6:
 - **El tablero comercial del punto 10** (visitas, solicitudes, cotizaciones,
   horas). Necesita analítica y registro de encargos que el sitio estático no
   tiene.
-- **Por confirmar con el autor** dos compromisos de la política:
-  - el 2, que no acepta encargos de gobiernos sobre lo que se fiscaliza.
-    Hay que ver qué pasa con la capacitación a universidades públicas;
-  - el 10, que promete publicar cada año los encargos y el origen de los
-    ingresos.
 - **Entrega 7** (comunidad: proponer temas, señalar errores, compartir
   estados de cuenta): sin empezar.
+
+**Política de independencia, versión 2 (10-10-2026, sello 20261010l).**
+Decisiones del autor:
+- **La plataforma está abierta a todos, sin exclusión.** Pueden usarla,
+  contratarla o licenciarla la ciudadanía, las organizaciones, las
+  universidades públicas y privadas, y también los gobiernos. Se puede
+  vender o concesionar al gobierno. Lo que se protege es el propósito, la
+  información y lo que se publica: nadie compra las conclusiones.
+- **Hay un compromiso de transparencia anual:** encargos por tipo de
+  cliente, y cuánto entra por cada vía (Pase, Servicios, licencias y
+  donaciones). «Si el gobierno falla, nosotros ponemos el ejemplo.»
+- **La plataforma podría financiarse con donaciones.**
+
+Cambios:
+- `INDEPENDENCIA` pasa de diez a trece compromisos. Se agregan:
+  - abierta a todos con las mismas reglas;
+  - lo que no está en venta;
+  - las donaciones no compran contenido;
+  - de qué responde la plataforma y de qué no (corrige en público; no
+    responde del contenido de los documentos oficiales ni de las decisiones
+    de terceros);
+  - el método y las herramientas son de Auditavisión, y una licencia no da
+    control editorial.
+- **Quinto servicio:** «Licencia de las herramientas».
+- **El Pase** (su página y su copia en `index.html`) ya no dice «sin dinero
+  de gobiernos ni de partidos». Ahora dice «Abierta a todos; nadie compra lo
+  que publicamos».
+
+Pendientes de esta versión:
+- **El canal de donaciones.** Espera el dominio y la forma jurídica.
+- **La calidad de donataria autorizada ante el SAT.** Solo si el autor
+  quiere dar recibos deducibles.
 
 **Propuesta de Astra, entrega 5, parte editorial (10-10-2026, sello 20261010j).**
 Toma los puntos 3 y 8 de la propuesta: cada investigación tiene una
