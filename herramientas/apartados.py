@@ -2837,6 +2837,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'El estado de cuenta se lee como una hoja por los dos lados: al frente, el termostato de la salud financiera y las cuentas, con los negativos en rojo; atrás, la justificación por secciones (qué mide cada cifra, su operación, su fundamento y su fuente) y el sello.'),
     ('10-10-2026', 'En el Radar, «Hoy y los estados de cuenta» se abre en dos páginas: «Hoy: el presupuesto en curso» y «Expide un estado de cuenta». Cada tarjeta lleva a la suya.'),
     ('10-10-2026', 'Expide un estado de cuenta abre en su propia página: eliges de quién, presionas «Generar estado de cuenta» y luego lo descargas en PDF. El encabezado del documento es más amplio y el logo, más nítido.'),
     ('10-10-2026', 'El estado de cuenta suma a las senadoras y los senadores: su dieta, su remuneración anual bruta y neta, sus asesores, el presupuesto del Senado y su auditoría de la ASF, con el mismo folio y sello.'),
