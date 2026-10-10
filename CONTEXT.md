@@ -602,6 +602,72 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Biblioteca del auditor: cuatro páginas ligeras y contenido cotejado (09-10-2026, sello 20261009za).**
+Pedido del autor: las fichas «Biblioteca hacendaria» y «Fuentes del
+auditor» de Aprende se trababan al abrirse («se queda calculando las
+cifras») y repetían contenido (las preguntas frecuentes estaban en las dos y
+en el Diccionario). Causa: cada tarjeta abría `index.html?ir=...` en el
+visor, es decir, la portada entera (motor, mapas y padrón municipal, unos
+4 MB de JavaScript) solo para mostrar texto.
+- **Fusión**: las dos fichas son ahora una, «📚 Biblioteca del auditor»
+  (`#biblioteca` en `aprende.html`), con cinco tarjetas que salen de la
+  lista `BIBLIOTECA` de `herramientas/apartados.py`. Aprende queda con tres
+  pestañas: Trivia, Biblioteca y Noticias.
+- **Páginas propias** (generadas por `apartados.py`, pintadas por
+  `assets/auditor/js/biblioteca.js` desde `window.AUDIT_DB`, sin el motor):
+  `preguntas-frecuentes.html` (acordeón con buscador, temas y ancla por
+  pregunta `#p-<casilla>-<n>`), `marco-legal.html` (el ciclo del dinero en
+  cinco etapas que filtran, buscador por ley y fichas con el texto vigente;
+  ancla `#precepto-<id>`), `fuentes-oficiales.html` (gráfica de barras por
+  familia de fuentes, buscador y ancla `#ref-<id>` iluminada) y
+  `pase-del-auditor.html` (antes un cuadro encima de la portada; la
+  suscripción se marca «disponible en el lanzamiento»). El glosario ya
+  tenía su página. Las cinco llevan al pie la barra «La biblioteca del
+  auditor» (`bib_nav()`).
+- **El Diccionario** (`diccionario.html`) deja las pestañas con visor: es
+  la puerta de los cuatro apartados. Sus anclas viejas (`#glosario`,
+  `#fuentes`, `#marco-legal`, `#preguntas`) mandan a la página nueva
+  (`hash_a_pagina`).
+- **El motor** ya no despliega esos apartados en la portada:
+  `abrirCatalogoFuentes()`, `abrirDiccionarioSubtab()`, `goToRef('precepto-…')`,
+  `openPaseCivicoModal()` y los destinos `?ir=fuentes|faq-marco-legal|faq-preguntas|faq-glosario|pase`
+  llevan a las páginas (`irBiblioteca()`; desde el visor, a la ventana
+  completa). Las notas [n] de los apartados (`libro_html`) y de `datos.js`
+  apuntan directo a `fuentes-oficiales.html#ref-…`.
+- **Marco legal cotejado palabra por palabra** con el texto vigente de la
+  Cámara de Diputados (CPEUM, última reforma DOF 07-10-2026; LFPRH
+  09-04-2026; LCF 03-01-2024; LDF 10-05-2022; LIF 2026) y el Manual de
+  remuneraciones del PJF (DOF 27-02-2026). Se corrigieron citas que eran
+  paráfrasis presentadas como texto oficial (25, 28, 73, 74, 79, 116, 127,
+  94, 96, LFPRH 17-18, 42 y 54, LCF, LDF, LIF). Hallazgos: el 79 ya dice
+  «Auditoría Superior de la Federación»; el 127, fr. II, se reformó el
+  10-04-2026; la Corte puede funcionar en dos secciones (art. 94); la
+  extinción de fideicomisos judiciales está en el transitorio **Décimo** del
+  decreto de 2024, no en el Cuarto, y no menciona «13 fideicomisos» ni
+  «$15,434 mdp». Se retiraron dos «preceptos» de la LIF que no existen
+  (costo financiero y prohibición de condonar, que está en el art. 28
+  constitucional) y entró el art. 28 de la LIF 2026 (Renuncias
+  Recaudatorias). Quedan 27 preceptos, cada uno con `vigencia`, `etapa`,
+  `grupo` y su ficha del catálogo (`ref`). Ya no se muestra
+  `aplicacion_auditavision`, que remitía a pestañas de la Enciclopedia.
+- **Preguntas frecuentes verificadas**: se quitaron cifras sin documento
+  (predial 0.16% del PIB y 1.0% OCDE, $78,327 mdp del PJF, 80.2%, $34.2 mdp
+  por ponencia, 35 colaboradores, salarios de ministros de antes) y se
+  sustituyeron por cifras de la propia plataforma con chip: PEF 2026 Ramo 03
+  ($70,005.6 mdp aprobado), Manual PJF 2026 ($134,310 netos al mes por
+  ministro), INEGI EFIPEM 2024 (predial = 7.4 de cada 100 pesos municipales;
+  transferencias federales = 71.1). Se corrigieron el procedimiento del
+  pliego de observaciones (LFRCF arts. 39, 40, 41 y 71: la Auditoría no
+  juzga ni sanciona) y la respuesta sobre EFOS (art. 69-B del CFF, sin
+  especulación). Cada respuesta trae sus fichas del catálogo (`refs`).
+- **Pendiente:** cuántos fideicomisos judiciales se extinguieron y cuánto
+  se enteró a la Tesorería. El decreto no lo dice y la plataforma aún no
+  integra el informe oficial que lo documente: falta nuestra.
+  Tampoco se ha depurado el catálogo de fuentes, que tiene fichas dobles
+  (`ref-lamparo` y `ref-ley-amparo`; `ref-pnt` y `ref-pnt-asesores-scjn`) y
+  una ficha de la Auditoría que liga a su portada (`ref-asf-fideicomisos-pjf`).
+  No se borraron porque otras partes las citan por su id.
+
 **Trivia: la gran balanza de la Enciclopedia, en reactivos (09-10-2026, sello 20261009z).**
 Pedido del autor: traer a la trivia de Aprende el tablero 5.4 de la
 Enciclopedia («Versus General Don Porfirio Díaz»), con sus gráficas,

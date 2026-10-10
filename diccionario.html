@@ -5,16 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diccionario del Gasto Público · Auditavisión</title>
-  <meta name="description" content="Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.">
+  <meta name="description" content="Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los términos del erario, el marco legal con su texto vigente y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma. Cada uno abre su propia página.">
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009z">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009z">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009z">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261009za">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261009za">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261009za">
+  <script>(function () { var m = {"preguntas": "preguntas-frecuentes.html", "glosario": "glosario.html", "marco-legal": "marco-legal.html", "fuentes": "fuentes-oficiales.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -67,67 +68,43 @@
   <main class="apartado" id="contenido">
     <header class="apartado-cab">
       <div class="apartado-ancho">
-        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="aprende.html">Aprende</a> <span aria-hidden="true">›</span> <span>Diccionario del Gasto Público</span></nav>
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="aprende.html#biblioteca">Aprende</a> <span aria-hidden="true">›</span> <span>Diccionario del Gasto Público</span></nav>
         <span class="apartado-lema">📚 Las palabras, las leyes y las fuentes del erario</span>
         <h1 class="apartado-titulo">Diccionario del Gasto Público</h1>
-        <p class="apartado-entrada">Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.</p>
+        <p class="apartado-entrada">Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los términos del erario, el marco legal con su texto vigente y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma. Cada uno abre su propia página.</p>
         
       </div>
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página" data-primera="1">
-          <a class="apartado-pestana" role="tab" id="pestana-preguntas" href="#preguntas" aria-controls="preguntas" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💡</span><span class="apartado-pestana-tx"><b>1 · Preguntas frecuentes</b><small>En casillas didácticas</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-glosario" href="#glosario" aria-controls="glosario" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📖</span><span class="apartado-pestana-tx"><b>2 · Glosario</b><small>Los términos del erario</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-marco-legal" href="#marco-legal" aria-controls="marco-legal" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">⚖️</span><span class="apartado-pestana-tx"><b>3 · Marco legal</b><small>Los preceptos rectores</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-fuentes" href="#fuentes" aria-controls="fuentes" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📑</span><span class="apartado-pestana-tx"><b>4 · Catálogo de fuentes</b><small>Los documentos oficiales</small></span></a>
-      </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
+
       
-      <section class="apartado-seccion apartado-panel" id="preguntas" aria-labelledby="preguntas-tit" role="tabpanel">
-        <h2 class="sr-only" id="preguntas-tit">Preguntas frecuentes</h2>
+      <section class="apartado-seccion" id="apartados" aria-labelledby="apartados-tit">
+        <h2 class="sr-only" id="apartados-tit">Los apartados</h2>
         <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta" href="index.html?ir=faq-preguntas" data-auto="1">
+        <a class="apartado-tarjeta" href="preguntas-frecuentes.html">
           <span class="apartado-tarjeta-icono" aria-hidden="true">💡</span>
           <span class="apartado-tarjeta-nombre">Preguntas frecuentes</span>
-          <span class="apartado-tarjeta-desc">Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar por tu cuenta.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
+          <span class="apartado-tarjeta-desc">Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="glosario" aria-labelledby="glosario-tit" role="tabpanel">
-        <h2 class="sr-only" id="glosario-tit">Glosario</h2>
-        <div class="apartado-rejilla herr-rejilla">
         <a class="apartado-tarjeta" href="glosario.html">
           <span class="apartado-tarjeta-icono" aria-hidden="true">📖</span>
           <span class="apartado-tarjeta-nombre">Glosario</span>
-          <span class="apartado-tarjeta-desc">Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador. Tiene su propia página.</span>
+          <span class="apartado-tarjeta-desc">Los términos del presupuesto, la deuda y la fiscalización, en lenguaje llano y con buscador.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="marco-legal" aria-labelledby="marco-legal-tit" role="tabpanel">
-        <h2 class="sr-only" id="marco-legal-tit">Marco legal</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta" href="index.html?ir=faq-marco-legal" data-auto="1">
+        <a class="apartado-tarjeta" href="marco-legal.html">
           <span class="apartado-tarjeta-icono" aria-hidden="true">⚖️</span>
           <span class="apartado-tarjeta-nombre">Marco legal</span>
-          <span class="apartado-tarjeta-desc">Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
+          <span class="apartado-tarjeta-desc">El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="fuentes" aria-labelledby="fuentes-tit" role="tabpanel">
-        <h2 class="sr-only" id="fuentes-tit">Catálogo de fuentes</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta" href="index.html?ir=fuentes" data-auto="1">
+        <a class="apartado-tarjeta" href="fuentes-oficiales.html">
           <span class="apartado-tarjeta-icono" aria-hidden="true">📑</span>
           <span class="apartado-tarjeta-nombre">Catálogo de fuentes</span>
-          <span class="apartado-tarjeta-desc">DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria: cada ficha con su liga directa.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
+          <span class="apartado-tarjeta-desc">Todas las fichas que sostienen las cifras de la plataforma, numeradas y con su liga al DOF, Hacienda, la Auditoría Superior, el INEGI y demás.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
         </div>
       </section>
@@ -137,10 +114,10 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009z</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261009za</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261009z"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261009za"></script>
 </body>
 </html>

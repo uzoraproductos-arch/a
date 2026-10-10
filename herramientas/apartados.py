@@ -20,6 +20,7 @@ herramientas/sello.py (sello.py ya lo llama solo). Las paginas se escriben con
 saltos de linea CRLF, la convencion del proyecto. Para cambiar su contenido,
 edita este archivo y vuelve a correrlo: no edites a mano los .html generados.
 """
+import json
 import html
 import os
 import re
@@ -67,7 +68,7 @@ def libro_html(a):
         return ('<aside class="apartado-libro"><span class="apartado-libro-ico" aria-hidden="true">📘</span>'
                 '<p>%s</p></aside>' % a['libro'])
     rid, num, cita = ref
-    url = 'index.html?ir=fuentes&amp;ancla=%s' % rid
+    url = 'fuentes-oficiales.html#%s' % rid
     llamado = ('<sup class="apartado-libro-llamado"><a href="%s" title="Ver la ficha [%d] en el catálogo de fuentes" '
                'aria-label="Nota de referencia %d">[%d]</a></sup>' % (url, num, num, num))
     texto = a['libro'].replace('sobre todo sus capítulos 5 y 7.', 'sobre todo sus capítulos 5 y 7.' + llamado, 1)
@@ -89,7 +90,7 @@ def libro_enlace(a):
     ventana lateral: el texto con su llamado, los conceptos del glosario y
     la ficha del catálogo de fuentes."""
     rid, num, cita = a['libro_ref']
-    url = 'index.html?ir=fuentes&amp;ancla=%s' % rid
+    url = 'fuentes-oficiales.html#%s' % rid
     llamado = ('<sup class="apartado-libro-llamado"><a href="%s" title="Ver la ficha [%d] en el catálogo de fuentes">[%d]</a></sup>'
                % (url, num, num))
     texto = a['libro'].replace('sobre todo sus capítulos 5 y 7.', 'sobre todo sus capítulos 5 y 7.' + llamado, 1)
@@ -127,6 +128,32 @@ def fichas(lista):
                       '  <span class="apartado-tarjeta-accion">Desplegar ▾</span>\n'
                       '</button>' % (clase, fid, icono, nombre, desc))
     return '<div class="apartado-rejilla dt-fichas">\n' + '\n'.join(partes) + '\n</div>'
+
+# Biblioteca del auditor (09-10-2026): (archivo, icono, nombre, frase,
+# descripcion). La pestana de Aprende, el Diccionario y la barra al pie de
+# cada pagina de la biblioteca salen de esta lista.
+BIBLIOTECA = [
+    ('preguntas-frecuentes.html', '💡', 'Preguntas frecuentes', 'Respuestas con fuente',
+     'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.'),
+    ('glosario.html', '📖', 'Glosario', 'Los términos del erario',
+     'Los términos del presupuesto, la deuda y la fiscalización, en lenguaje llano y con buscador.'),
+    ('marco-legal.html', '⚖️', 'Marco legal', 'El texto vigente',
+     'El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.'),
+    ('fuentes-oficiales.html', '📑', 'Catálogo de fuentes', 'Cada documento citado',
+     'Todas las fichas que sostienen las cifras de la plataforma, numeradas y con su liga al DOF, Hacienda, la Auditoría Superior, el INEGI y demás.'),
+    ('pase-del-auditor.html', '🍺', 'Pase del auditor', 'Sostén la plataforma',
+     'Herramientas independientes de fiscalización ciudadana: $79 al mes, menos que dos caguamas.'),
+]
+
+
+def bib_nav(actual):
+    """Barra al pie de cada pagina de la biblioteca."""
+    return ('<nav class="bib-nav" aria-label="La biblioteca del auditor">\n'
+            '        <span class="bib-nav-tit">📚 La biblioteca del auditor</span>\n'
+            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
+                % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA))
+
 
 APARTADOS = [
     {
@@ -349,26 +376,17 @@ APARTADOS = [
                 'tarjetas': [],
             },
             {
+                # Biblioteca del auditor (09-10-2026): fusiona las fichas
+                # «Biblioteca hacendaria» y «Fuentes del auditor», que se
+                # repetian (las preguntas estaban en las dos) y abrian la
+                # portada entera en un marco. Cada apartado tiene ahora su
+                # pagina ligera (BIBLIOTECA, abajo).
                 'id': 'biblioteca',
-                'pestana': ('🏛️', 'Biblioteca hacendaria', 'Glosario, leyes y preguntas'),
-                'titulo': '🏛️ Biblioteca hacendaria',
-                'texto': 'Marco legal, glosario y preguntas frecuentes.',
-                'tarjetas': [
-                    ('📖', 'Glosario de Términos Hacendarios', 'Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador. Tiene su propia página.', 'glosario.html', None, None),
-                    ('⚖️', 'Marco Legal Hacendario', 'Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.', ir('faq-marco-legal'), None, None),
-                    ('💡', 'Preguntas Frecuentes en Casillas Didácticas', 'Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar.', ir('faq-preguntas'), None, None),
-                ],
-            },
-            {
-                'id': 'kit',
-                'pestana': ('🧭', 'Fuentes del auditor', 'Documentos oficiales y guías'),
-                'titulo': '🧭 Fuentes del auditor ciudadano',
-                'texto': 'Fuentes y guías para revisar por tu cuenta.',
-                'tarjetas': [
-                    ('📚', 'Diccionario del Gasto Público', 'Preguntas frecuentes, glosario, marco legal y catálogo de fuentes, en su propia página.', 'diccionario.html', None, None),
-                    ('📑', 'Compendio de Fuentes Oficiales', 'DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria, con su liga directa.', ir('fuentes'), None, None),
-                    ('🍺', 'Pase y Guías del Auditor Cívico', 'Herramientas independientes de fiscalización ciudadana ($79/mes · Menos que dos caguamas).', ir('pase'), None, None),
-                ],
+                'pestana': ('📚', 'Biblioteca del auditor', 'Preguntas, glosario, leyes y fuentes'),
+                'titulo': '📚 Biblioteca del auditor',
+                'texto': ('Todo lo que hace falta para revisar el dinero público por tu cuenta, sin repetir nada: '
+                          'cada apartado abre su propia página, con buscador y con el documento oficial que lo sostiene.'),
+                'tarjetas': [(b[1], b[2], b[4], b[0], None, None) for b in BIBLIOTECA],
             },
             {
                 # Columnas editoriales (09-10-2026): reune, verificado contra
@@ -546,38 +564,27 @@ def herramienta(h, n):
 
 
 # Diccionario del Gasto Publico (decision del autor, 09-10-2026): los
-# enlaces que llevaban a la Enciclopedia (congelada) llegan aqui. Es la
-# pestana «faq» del auditor (preguntas, glosario, marco legal y catalogo de
-# fuentes) en su propia pagina: cada apartado es una pestana que lo abre en
-# el visor, como el glosario de Aprende, sin desglosarlo bajo la portada.
+# enlaces que llevaban a la Enciclopedia (congelada) llegan aqui. Desde el
+# 09-10-2026 (tarde) cada apartado tiene su pagina ligera; ya no abre la
+# portada en un marco. Las anclas viejas (#glosario, #fuentes, #marco-legal,
+# #preguntas) mandan a la pagina nueva (ver 'hash_a_pagina').
 DICCIONARIO = {
     'archivo': 'diccionario.html',
     'menu': 'Diccionario del Gasto Público',
     'menu_archivo': 'aprende.html',
-    'padre': ('aprende.html', 'Aprende'),
+    'padre': ('aprende.html#biblioteca', 'Aprende'),
     'icono': '📚',
     'titulo': 'Diccionario del Gasto Público',
     'lema': 'Las palabras, las leyes y las fuentes del erario',
     'entrada': ('Cuatro apartados para leer el presupuesto sin ser especialista: las preguntas frecuentes, el glosario de los '
-                'términos del erario, el marco legal (Constitución, Ley de Ingresos y leyes del gasto, con su texto íntegro) '
-                'y el catálogo de fuentes oficiales que sostiene cada cifra de la plataforma.'),
-    'pestanas': True,
-    'primera': True,
-    'secciones': [
-        {'id': clave, 'pestana': (ico, '%d · %s' % (i, nombre), frase), 'titulo': nombre, 'texto': '',
-         'sin_cab': True, 'auto': not destino.endswith('.html'),
-         'tarjetas': [(ico, nombre, desc, destino if destino.endswith('.html') else ir(destino), None, None)]}
-        for i, (clave, ico, nombre, frase, desc, destino) in enumerate([
-            ('preguntas', '💡', 'Preguntas frecuentes', 'En casillas didácticas',
-             'Cómo funciona el gasto público, qué revisa la Auditoría Superior y cómo auditar por tu cuenta.', 'faq-preguntas'),
-            ('glosario', '📖', 'Glosario', 'Los términos del erario',
-             'Los términos del presupuesto, la deuda y la fiscalización, explicados en lenguaje llano y con buscador. Tiene su propia página.', 'glosario.html'),
-            ('marco-legal', '⚖️', 'Marco legal', 'Los preceptos rectores',
-             'Los artículos que rigen el ingreso y el gasto: Constitución (73, 74, 115 y 134), Ley de Ingresos, LFPRH, Ley de Disciplina Financiera y reforma judicial.', 'faq-marco-legal'),
-            ('fuentes', '📑', 'Catálogo de fuentes', 'Los documentos oficiales',
-             'DOF, SHCP, ASF, Banxico, INEGI y Transparencia Presupuestaria: cada ficha con su liga directa.', 'fuentes'),
-        ], 1)
-    ],
+                'términos del erario, el marco legal con su texto vigente y el catálogo de fuentes oficiales que sostiene cada '
+                'cifra de la plataforma. Cada uno abre su propia página.'),
+    'hash_a_pagina': {'preguntas': 'preguntas-frecuentes.html', 'glosario': 'glosario.html',
+                      'marco-legal': 'marco-legal.html', 'fuentes': 'fuentes-oficiales.html'},
+    'secciones': [{
+        'id': 'apartados', 'titulo': 'Los apartados', 'texto': '', 'sin_cab': True,
+        'tarjetas': [(b[1], b[2], b[4], b[0], None, None) for b in BIBLIOTECA[:4]],
+    }],
 }
 
 
@@ -596,6 +603,7 @@ GLOSARIO = {
     'entrada': ('Los términos del presupuesto, la deuda, la fiscalización y los Poderes, explicados para quien no es especialista. '
                 'Cada uno trae su fundamento: el artículo, la ley o el documento oficial que lo define. Busca una palabra o elige una categoría.'),
     'scripts': ['audit-database.js', 'glosario.js'],
+    'pie_extra': bib_nav('glosario.html'),
     'secciones': [{
         'id': 'terminos', 'titulo': 'Los términos', 'texto': '', 'sin_cab': True, 'tarjetas': [],
         'bloque': ('<div class="gl" id="glosarioPagina">\n'
@@ -605,6 +613,75 @@ GLOSARIO = {
     }],
 }
 
+
+
+def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('audit-database.js', 'biblioteca.js'), bloque=None):
+    b = [x for x in BIBLIOTECA if x[0] == archivo][0]
+    return {
+        'archivo': archivo, 'menu': b[2], 'menu_archivo': 'aprende.html',
+        'padre': ('diccionario.html', 'Diccionario del Gasto Público'),
+        'icono': b[1], 'titulo': titulo, 'lema': lema, 'entrada': entrada,
+        'scripts': list(scripts),
+        'secciones': [{
+            'id': 'contenido-' + archivo[:-5], 'titulo': titulo, 'texto': '', 'sin_cab': True, 'tarjetas': [],
+            'bloque': bloque or ('<div class="bib" id="%s">\n'
+                                 '          <p class="gl-carga" role="status">⏳ %s</p>\n'
+                                 '          <noscript><p>Esta página necesita JavaScript.</p></noscript>\n'
+                                 '        </div>' % (raiz, carga)),
+        }],
+        'pie_extra': bib_nav(archivo),
+    }
+
+
+PASE_HTML = """<div class="pase">
+          <p class="pase-badge">⚡ Independencia cívica · Sin dinero de gobiernos ni de partidos políticos</p>
+          <p>El erario se financia con tu trabajo y tus impuestos. Para auditarlo sin censura y mantener esta plataforma independiente de partidos políticos, te invitamos a sumarte. Menos de lo que te gastas en dos caguamas al mes.</p>
+          <div class="pase-precios">
+            <div class="pase-plan">
+              <div class="pase-plan-tit">Plan mensual</div>
+              <div class="pase-precio">$79 <small>MXN al mes</small></div>
+              <p>Cancela cuando quieras.</p>
+              <span class="pase-pronto">Disponible en el lanzamiento</span>
+            </div>
+            <div class="pase-plan pase-plan-pop">
+              <div class="pase-plan-tit">★ Plan anual cívico</div>
+              <div class="pase-precio">$699 <small>MXN al año</small></div>
+              <p>Equivale a $58.25 al mes: ahorras más de tres meses frente al plan mensual.</p>
+              <span class="pase-pronto">Disponible en el lanzamiento</span>
+            </div>
+          </div>
+          <p><b>La suscripción todavía no está activa.</b> La pasarela segura de pago se abrirá con el lanzamiento; mientras tanto, todo lo que ves en la plataforma es libre y gratuito.</p>
+          <h2 class="bib-bloque-tit">Qué obtendrás como auditor cívico</h2>
+          <ul class="pase-lista">
+            <li>✓ <b>Expediente de tu estado y tu municipio en PDF:</b> deuda, obras y observaciones de la Auditoría Superior, listo para imprimir antes de votar.</li>
+            <li>✓ <b>Ticket cívico de tu quincena:</b> el rastro de tus impuestos en alta resolución, para compartir.</li>
+            <li>✓ <b>Radar de alertas de la Auditoría Superior:</b> avisos de nuevas observaciones o contratos auditados en tu localidad.</li>
+            <li>✓ <b>100 % cívico e independiente:</b> cero publicidad, cero convenios con partidos políticos.</li>
+          </ul>
+        </div>"""
+
+
+PAGINAS_BIBLIOTECA = [
+    pagina_biblioteca(
+        'preguntas-frecuentes.html', 'Preguntas frecuentes', 'Respuestas directas, con su fuente',
+        'Cómo funciona el dinero público, qué revisa la Auditoría Superior y cómo auditar por tu cuenta. Cada respuesta trae '
+        'el documento que la sostiene y cada cifra su etiqueta: oficial, derivado o pendiente. Busca una palabra o elige un tema.',
+        'bibPreguntas', 'Cargando las preguntas…'),
+    pagina_biblioteca(
+        'marco-legal.html', 'Marco legal hacendario', 'Las reglas del dinero público, con su texto vigente',
+        'Los preceptos que rigen cómo se planea, se cobra, se aprueba, se gasta y se revisa el dinero público. El texto de cada '
+        'uno se cotejó palabra por palabra con la versión vigente que publica la Cámara de Diputados o el DOF.',
+        'bibMarco', 'Cargando los preceptos…'),
+    pagina_biblioteca(
+        'fuentes-oficiales.html', 'Catálogo de fuentes oficiales', 'Cada documento que sostiene una cifra',
+        'Las fichas numeradas que citan las cifras de la plataforma, con su liga al documento. Si llegaste desde una nota '
+        'como [11], la ficha aparece iluminada.',
+        'bibFuentes', 'Cargando el catálogo…'),
+    pagina_biblioteca(
+        'pase-del-auditor.html', 'Pase del auditor ciudadano', 'Sostén una plataforma independiente',
+        'Herramientas independientes de fiscalización ciudadana, sin dinero de gobiernos ni de partidos.',
+        None, None, scripts=(), bloque=PASE_HTML),
+]
 
 GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
@@ -773,6 +850,11 @@ def pagina(a, sello):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro']
         nota = '<span class="herr-cab-credito">Imagen ilustrativa</span>' + nota
     pie_extra = ('\n\n      ' + a['pie_extra']) if a.get('pie_extra') else ''
+    redirige = ''
+    if a.get('hash_a_pagina'):
+        # Anclas viejas que ahora son paginas: se mandan antes de pintar.
+        redirige = ('\n  <script>(function () { var m = %s, h = location.hash.slice(1); '
+                    'if (m[h]) location.replace(m[h]); })();</script>' % json.dumps(a['hash_a_pagina']))
 
     return '''<!DOCTYPE html>
 <!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
@@ -790,7 +872,7 @@ def pagina(a, sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">{estilos}
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">{estilos}{redirige}
 </head>
 <body data-pagina="apartado">
 {cabecera}
@@ -825,7 +907,7 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
-           padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, icono=a['icono'], lema=a['lema'],
+           padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono=a['icono'], lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos,
            secciones='\n\n'.join(secciones))
 
@@ -872,7 +954,7 @@ def generar(sello=None):
     for n, h in enumerate(HERRAMIENTAS, 1):
         texto = pagina(herramienta(h, n), sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, h[0]), 'wb').write(texto.encode('utf-8'))
-    for extra in (DICCIONARIO, GLOSARIO):
+    for extra in [DICCIONARIO, GLOSARIO] + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
