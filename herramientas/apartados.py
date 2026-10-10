@@ -1716,8 +1716,8 @@ def radar_nav(actual):
     return ('<nav class="bib-nav" aria-label="Radar hacendario">\n'
             '        <a class="bib-nav-tit" href="radar-hacendario.html">📡 Radar hacendario: todas sus partes</a>\n'
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
-                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
-                % (r[1], ' aria-current="page"' if r[1] == actual else '', r[2], r[3], r[4]) for r in RADAR_PARTES))
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s</span></a>'
+                % (r[1], ' aria-current="page"' if r[1] == actual else '', r[2], r[3]) for r in RADAR_PARTES))
 
 
 def _peso_base(ps):
@@ -2548,8 +2548,8 @@ def radar():
                 'y lo que dijo la Auditoría Superior. Descárgalo en PDF con su folio y su sello de verificación: cualquiera puede '
                 'comprobar que no se alteró.', [
                     {'id': 'partes', 'titulo': 'Elige por dónde empezar', 'texto': 'Cada tarjeta abre su propia página.',
-                     'tarjetas': [('📌', 'Hoy: el presupuesto en curso', HOY_TEXTO, 'radar-presupuesto-en-curso.html', '', ''),
-                                  ('🧾', 'Expide un estado de cuenta: administraciones, Congreso y la Corte', EXPIDE_TEXTO,
+                     'tarjetas': [('📌', 'Hoy: el presupuesto en curso', '', 'radar-presupuesto-en-curso.html', '', ''),
+                                  ('🧾', 'Expide un estado de cuenta: administraciones, Congreso y la Corte', '',
                                    'radar-estado-de-cuenta.html', '', '')]}]),
         'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
     }
@@ -2566,7 +2566,9 @@ def radar():
                               expide='radar-estado-de-cuenta.html'),
         'pestanas': True,
         'pista': 'Cada parte del radar abre su propia página.',
-        'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in RADAR_PARTES],
+        # Las tarjetas del Radar van sin descripcion, solo icono y titulo
+        # (decision del autor, 10-10-2026): lo descriptivo se queda en cada pagina.
+        'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], '')} for r in RADAR_PARTES],
     }]
     for (pid, archivo, ico, tit, sub) in RADAR_PARTES:
         entrada, bloque = partes[pid]
@@ -2844,7 +2846,7 @@ def pagina(a, sello):
         botones = '\n'.join(
             ('          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-%s" href="%s">'
              '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
-             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>' % ((s['id'], s['pagina']) + s['pestana']))
+             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>' % ((s['id'], s['pagina']) + s['pestana'])).replace('<small></small>', '')
             if s.get('pagina') else
             ('          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
              '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
@@ -2964,6 +2966,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Las tarjetas del Radar hacendario quedan limpias: solo el icono y el nombre de cada parte. Lo descriptivo se queda dentro de cada página.'),
     ('10-10-2026', '«Hoy: el presupuesto en curso» tiene contador: las cifras arrancan en cero y el botón «Contar» las lleva a su valor oficial; el mismo botón las regresa a cero. «Durante tu visita» se desbloquea al contar.'),
     ('10-10-2026', 'Los estados de cuenta de la diputación federal y local, el Senado y la Suprema Corte suman la institución como órgano: cuánto nos cuesta al año, al día y a cada habitante, cuánto se va en sueldos y prestaciones, y del dinero que ejerció a lo que revisó la Auditoría Superior y lo que falta aclarar.'),
     ('10-10-2026', '«Verifica un estado de cuenta» se mudó al Modo Inspector: es su módulo 7, con página propia. Escribe el folio o la huella y comprueba que el documento no se alteró; los enlaces de los PDF ya impresos llegan ahí solos.'),

@@ -671,6 +671,13 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Tarjetas del Radar sin descripción (10-10-2026, sin cambio de sello).**
+Decisión del autor: las tarjetas del Radar hacendario llevan solo icono y título. Se
+quitó el texto descriptivo de las pestañas de `radar-hacendario.html`, de la barra
+«Radar hacendario: todas sus partes» (`radar_nav`) y de las dos tarjetas de
+`radar-hoy.html`. Lo descriptivo queda en la entrada de cada página. `RADAR_PARTES`
+conserva su descripción porque el índice general la usa. No se tocó `assets/`.
+
 **El contador de «Hoy: el presupuesto en curso» (10-10-2026, sello 20261010ze).**
 Pedido del autor: en `radar-presupuesto-en-curso.html` las cifras arrancan en cero y el
 botón «▶ Contar» las anima hasta su valor (2.4 s, curva de salida; instantáneo con
