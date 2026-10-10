@@ -2413,10 +2413,8 @@ def radar():
             <p class="ex-pista">Primero genéralo; luego descárgalo. Al descargar, elige «Guardar como PDF» en la ventana de impresión.</p>
           </div>
           <article class="ex-doc" id="exDoc" aria-live="polite"></article>
-          <p class="ex-pista ex-ir-ver">🔏 ¿Te compartieron un estado de cuenta? Compruébalo con su folio en el Modo Inspector:
-            <a href="%s">Verifica un estado de cuenta</a>.</p>
           <noscript><p>La herramienta necesita JavaScript.</p></noscript>
-        </div>''' % ((' data-cabecera="%s"' % banda) if banda else '', VERIFICA_PAGINA)
+        </div>''' % ((' data-cabecera="%s"' % banda) if banda else '')
     # «Verifica un estado de cuenta» se mudo al Modo Inspector (pedido del
     # autor, 10-10-2026): es un modulo de esa herramienta con su propia pagina,
     # que carga los mismos datos y el mismo estado-administracion.js.

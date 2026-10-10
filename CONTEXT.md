@@ -686,8 +686,9 @@ el estado de cuenta y es el **módulo 7 del Modo Inspector**, con página propia
 - El sello de los documentos nuevos apunta a
   `herramienta-inspector-verifica.html?verifica=FOLIO`. Los PDF impresos antes
   llevan `radar-estado-de-cuenta.html?verifica=`: esa página los redirige.
-- Folios y huellas no cambian. En la página que expide queda una línea que
-  lleva a la verificación.
+- Folios y huellas no cambian. La página que expide termina con el documento
+  generado: no lleva ningún aviso de verificación (pedido del autor, sello
+  20261010zb).
 
 **El estado de cuenta, en una hoja por los dos lados (10-10-2026, sello 20261010z).**
 A pedido del autor (referencia: hoja oficio, 216 × 340 mm; «la medida es lo de
