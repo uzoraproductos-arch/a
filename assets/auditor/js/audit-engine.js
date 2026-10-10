@@ -4646,6 +4646,7 @@
             sub: r.monto ? `Asignación: ${formatMoneyMdp(r.monto)}` : 'Presupuesto de Egresos',
             badge: 'RAMO',
             action: () => {
+              if (!enVisor()) { irANumeros('eb-egresos'); return; }
               const desglose = abrirDesglose();
               switchTab('presupuesto');
               switchSubtab('presupuesto', 'pef-desglose');
@@ -5454,7 +5455,7 @@
       d: 'Calcula a dónde va exactamente cada peso de tus impuestos (ISR) según tu nivel de sueldo, y genera tu comprobante digital térmico para fiscalizar y compartir en redes.'
     },
     'presupuesto': {
-      t: '1. El Circuito del Dinero Público',
+      t: 'Números: el recorrido del dinero público',
       d: 'De cada peso del presupuesto federal ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). Explora de dónde sale cada peso en la Ley de Ingresos, en qué se gasta en el PEF y cómo se distribuye en el territorio entre Ramo 28 y Ramo 33.'
     },
     'accion-financiera': {
@@ -5505,7 +5506,7 @@
      titulo, frase y cifra; la explicacion vive aqui, al abrir el modulo. */
   const PROEMIOS = {
     presupuesto: {
-      n: 1, icono: '⚖️', titulo: 'Circuito del Dinero',
+      n: 1, icono: '💰', titulo: 'Números',
       subtitulo: 'Por dónde pasa cada peso antes de llegar a tu calle',
       texto: 'El dinero público recorre siempre el mismo camino: la Ley de Ingresos (LIF) autoriza cobrarlo, el Presupuesto de Egresos (PEF 2026: $10.19 billones) decide en qué se gasta, el gasto federalizado lo reparte a los 32 estados ($2.81 billones) y las participaciones y aportaciones lo llevan a los municipios. Aquí se audita cada una de esas cuatro etapas.',
       temas: [['🏛️ 1 · Arquitectura del flujo', 'arquitectura'], ['💰 2 · Cuánto dinero es', 'cuanto'], ['🔦 3 · Lo que la cifra grande no dice', 'ciegos']]
@@ -8800,7 +8801,7 @@
             glosEsc(S.texto) + ' ' + hf(S.fuente, S.pagina) + ' Ahí debería aparecer la primera cifra oficial, y aquí la pondremos.</p>'),
         acciones: [
           { txt: 'Ver cuánto IEPS pagas en la calculadora ➔', fn: function() { seleccionarModuloExplorer('calculadora'); } },
-          { txt: 'Ver el circuito del dinero público (LIF) ➔', fn: function() { seleccionarModuloExplorer('presupuesto'); } }
+          { txt: 'Ver de dónde sale el dinero, en Números (LIF) ➔', fn: function() { irANumeros('eb-ingresos'); } }
         ]
       };
     }
@@ -8880,7 +8881,7 @@
     var cp = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024 ? DB.cuenta_publica_asf.cp2024.total : null;
     var bill = function(mdp) { return '$' + (mdp / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' billones'; };
     var mods = [
-      ['⚖️', 'Circuito del Dinero', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos) y cómo llega a estados y municipios.'],
+      ['💰', 'Números', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos) y cómo llega a estados y municipios.'],
       ['🏗️', 'Inversión y Megaobras', 'cuánto costaron las grandes obras y cuánto cuesta mantenerlas.'],
       ['💳', 'Calculadora Cívica', 'lo que pagas de impuestos según tu ingreso y a qué rubros equivale.'],
       ['🔍', 'Modo Inspector', 'lo que la Auditoría Superior revisó y lo que quedó por aclarar.'],
@@ -26462,6 +26463,7 @@
     }, 80);
   }
   function irAAuditoriaInversiones() {
+    if (!enVisor()) { irANumeros('eb-arquitectura'); return; }
     switchTab('presupuesto');
     switchSubtab('presupuesto', 'panoramica');
     setTimeout(() => {
@@ -26496,7 +26498,17 @@
 
   /* ancla: id de un bloque dentro del modulo, para aterrizar ahi y no en
      el principio de la pestana. */
+  /* Numeros (10-10-2026): el modulo "Circuito del Dinero" se reparte en
+     la pestana Numeros (sigue-el-dinero.html). Fuera del visor, lo que lo
+     abria lleva ahi; ?abrir= abre la tarjeta del bloque en su visor. */
+  function irANumeros(ancla) {
+    var w = window;
+    if (enVisor()) { try { w = window.top; } catch (e) { w = window; } }
+    w.location.href = 'sigue-el-dinero.html' + (ancla && /^[A-Za-z0-9_-]+$/.test(ancla) ? '?abrir=' + ancla : '');
+  }
+
   function seleccionarModuloExplorer(tabKey, ancla) {
+    if (tabKey === 'presupuesto' && !enVisor()) { irANumeros(ancla); return; }
     var desglose = document.getElementById('seccionDesgloseModulos');
     if (desglose) {
       desglose.style.display = 'block';
