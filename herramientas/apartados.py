@@ -1813,6 +1813,13 @@ CARGOS_FUENTES = {
               'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf'},
     'LGTAIP': {'corto': 'Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025), art. 65, fr. VII',
                'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf'},
+    # La vista «como organo» (pedido del autor, 10-10-2026).
+    'CONAPO': {'corto': 'CONAPO, Proyecciones de la Población 2020-2070: población a mitad de 2026',
+               'url': 'https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv'},
+    'ASF_MDB': {'corto': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado), p. 31',
+                'url': 'https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf'},
+    'CP2024': {'corto': 'SHCP, Cuenta Pública 2024, datos abiertos',
+               'url': 'https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2024_gf_ecd_epe.csv'},
 }
 CARGOS_ENTIDADES = {
     'Aguascalientes': 'AGS', 'Baja California': 'BC', 'Baja California Sur': 'BCS', 'Campeche': 'CAM',
@@ -1868,8 +1875,10 @@ def radar_cargos(base):
                 return k
         raise SystemExit('ERROR: fuente %s sin catalogo' % k)
 
-    def fila(t, v, u, est, f, pag='', op='', nota='', v2=None, pid=''):
+    def fila(t, v, u, est, f, pag='', op='', nota='', v2=None, pid='', k=''):
         r = {'t': t, 'u': u, 'est': est}
+        if k:
+            r['k'] = k
         if v is not None:
             r['v'] = v
         if v2 is not None and v2 != v:
@@ -1888,6 +1897,56 @@ def radar_cargos(base):
 
     def pesos(x):
         return '$' + format(x, ',.2f' if x != int(x) else ',.0f')
+
+    # ----- La institucion como organo (pedido del autor, 10-10-2026) -----
+    # Lo que nos cuesta toda la institucion, y del dinero que ejercio a lo que
+    # reviso la ASF y lo que quedo por aclarar. Las dos secciones llevan
+    # 'panel': el anverso las pinta como grafica; el sello las firma igual.
+    pob = base['calculadora_civica']['parametros']['poblacion']['personas']
+    mdb = {o['id']: o for o in base['inspector_poderes']['organos']}
+
+    def pct(a, b):
+        return round(a / b * 100, 1)
+
+    def costo(inst, aprobado, sp, sp_total, sp_f, sp_pag, sp_op):
+        dia, hab, ps = round(aprobado / 365), round(aprobado / pob, 2), pct(sp, sp_total)
+        return {'tit': 'Lo que nos cuesta %s' % inst, 'panel': 'costo', 'filas': [
+            fila('Presupuesto aprobado 2026', aprobado, '$g', 'oficial', 'PEF', 'Anexo 1, DOF p. 32', k='total'),
+            fila('Cada día de 2026', dia, '$', 'derivado', 'PEF', 'Anexo 1, DOF p. 32', k='dia',
+                 op='%s ÷ 365 días.' % pesos(aprobado)),
+            fila('A cada habitante, en el año', hab, '$', 'derivado', 'CONAPO', k='hab',
+                 op='%s ÷ %s habitantes. La población es derivada: suma de las 32 entidades, las 110 edades y ambos sexos del archivo del CONAPO.' % (
+                     pesos(aprobado), format(pob, ','))),
+            fila('Lo que se fue en sueldos y prestaciones de todo su personal, 2025', ps, 'pct100', 'derivado', sp_f, sp_pag, k='pers',
+                 op='%s del capítulo 1000 (servicios personales) ÷ %s %s × 100 = %s%%.' % (pesos(sp), pesos(sp_total), sp_op, format(ps, ',.1f'))),
+        ], 'nota': 'Es toda la institución: sus integrantes, su personal, sus edificios y sus servicios. El presupuesto lo paga el erario federal, '
+                   'es decir, los impuestos y demás ingresos de la Federación.'}
+
+    def embudo_fed(oid, ejercido, ej_est, ej_f, ej_pag, ej_op, univ=None, muestra=None, res=()):
+        a = mdb[oid]['asf'][0]
+        fs = [fila('Ejerció en 2024', ejercido, '$g', ej_est, ej_f, ej_pag, op=ej_op, k='recibio')]
+        if univ:
+            fs.append(fila('Universo que seleccionó la ASF', univ['pesos'], '$g', univ['estado'], univ['fuente'], 'p. %s' % univ['pagina'], k='universo'))
+        if muestra:
+            fs.append(fila('Muestra que revisó la ASF', muestra['pesos'], '$g', muestra['estado'], muestra['fuente'], 'p. %s' % muestra['pagina'], k='muestra'))
+            pr = pct(muestra['pesos'], ejercido)
+            fs.append(fila('Parte de lo ejercido que revisó la ASF', pr, 'pct100', 'derivado', muestra['fuente'], 'p. %s' % muestra['pagina'],
+                           op='%s de la muestra ÷ %s ejercidos × 100 = %s%%.' % (pesos(muestra['pesos']), pesos(ejercido), format(pr, ',.1f'))))
+            fs.append(fila('Lo que quedó fuera de la muestra', ejercido - muestra['pesos'], '$g', 'derivado', muestra['fuente'], 'p. %s' % muestra['pagina'],
+                           op='%s − %s. Que no se revisara no quiere decir que haya irregularidad: la ASF audita por muestra.' % (
+                               pesos(ejercido), pesos(muestra['pesos']))))
+        else:
+            fs.append(fila('La muestra, como parte del universo que seleccionó la ASF', a['repr'], 'pct100', 'oficial', 'ASF_MDB', 'p. 31',
+                           nota='La Matriz publica la representatividad de la muestra, no su monto en pesos.'))
+        fs += [fila('Acciones que promovió la ASF', sum(a['acc']), 'ent', 'oficial', 'ASF_MDB', 'p. 31', k='acciones'),
+               fila('Monto por aclarar', a['porAclarar'], '$', 'oficial', 'ASF_MDB', 'p. 31', k='aclarar',
+                    nota='Lo que la ASF observó y la institución aún debe justificar o devolver.'),
+               fila('Recuperaciones', a['recuperaciones'], '$', 'oficial', 'ASF_MDB', 'p. 31', k='recup',
+                    nota='Lo que la Matriz de la ASF reporta como recuperado en esta auditoría.')]
+        fs += [texto('Resultado', x['texto'], x['estado'], x['fuente'], 'p. %s' % x['pagina']) for x in res]
+        return {'tit': 'Del dinero que ejerció a lo que falta aclarar: Cuenta Pública 2024', 'panel': 'embudo', 'filas': fs,
+                'nota': 'Auditoría de %s (%s), %s entrega del informe de la Cuenta Pública 2024. «Sin irregularidades» se refiere a la muestra revisada, no a todo el gasto.' % (
+                    a['titulo'].lower(), a['tipo'].lower(), {1: 'primera', 2: 'segunda', 3: 'tercera'}[a['entrega']])}
 
     tope = remu['presidencia']['netoAnual']
     tope_f = fila('Tope: remuneración total anual neta de la Presidenta', tope, '$', 'oficial', 'PEF', remu['presidencia']['pagina'])
@@ -1933,6 +1992,11 @@ def radar_cargos(base):
             senal_transp('verde', 'El Manual 2026 publica la dieta neta mensual y el Anexo 23 del PEF, la bruta y la neta anuales.'),
         ],
         'secciones': [
+            costo('la Cámara de Diputados', dip26['aprobado'], [c for c in caps25 if c['cap'] == '1000'][0]['ejercido'], cp25['ejercido'],
+                  'CP2025', 'capítulo 1000', 'ejercidos por la Cámara en 2025'),
+            embudo_fed('diputados', [x for x in asf24 if x['concepto'] == 'Pagado'][0]['pesos'], 'oficial', 'ASF_DIP', 'p. 4',
+                       'Lo pagado en 2024 según la auditoría de la ASF; coincide con el modificado.',
+                       [x for x in asf24 if x['concepto'].startswith('Universo')][0], [x for x in asf24 if x['concepto'].startswith('Muestra')][0], res24),
             {'tit': 'Lo que cobra una diputada o diputado', 'filas': [
                 fila('Dieta neta mensual 2026', dc['mensual']['max'], '$', dc['mensualEstado'], 'DIP', 'p. 144',
                      nota='La dieta es la remuneración por la representación política; es irrenunciable.'),
@@ -1952,7 +2016,6 @@ def radar_cargos(base):
             ], 'nota': ac['nota']},
             {'tit': 'La Cámara de Diputados: su presupuesto', 'filas': [
                 fila('Integrantes', 500, 'ent', 'oficial', 'CPEUM', 'art. 52', nota='300 de mayoría relativa y 200 de representación proporcional.'),
-                fila('Aprobado 2026', dip26['aprobado'], '$g', 'oficial', 'PEF', 'Anexo 1, DOF p. 32'),
                 fila('Pagado al ' + corte_av, av26['pagado'], '$g', 'oficial', 'AV2T2026'),
                 fila('Avance del año', pct_av, 'pct100', 'derivado', 'AV2T2026',
                      op='%s pagados ÷ %s del modificado × 100 = %s%%. A la mitad del año, el ritmo parejo sería 50%%.' % (
@@ -1965,10 +2028,6 @@ def radar_cargos(base):
             ], 'nota': 'No dividimos el presupuesto entre las 500 curules: ese reparto no es lo que cuesta cada diputado, porque la Cámara también paga personal, edificios y el Canal del Congreso.'},
             {'tit': 'En qué gastó la Cámara en 2025', 'filas': [
                 fila(c['concepto'], c['ejercido'], '$g', 'oficial', 'CP2025', 'capítulo ' + c['cap']) for c in caps25]},
-            {'tit': 'Ante la Auditoría Superior: Cuenta Pública 2024', 'filas': [
-                fila(x['concepto'], x['pesos'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina']) for x in asf24] + [
-                texto('Resultado', r['texto'], r['estado'], r['fuente'], 'p. %s' % r['pagina']) for r in res24],
-             'nota': '«Sin irregularidades» se refiere a la muestra revisada, no a todo el gasto.'},
             {'tit': 'Su nómina de 2024, partida por partida', 'filas': [
                 fila('%s · %s' % (x['partida'], x['concepto']), x['pesos'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina'])
                 for x in pd['legislativo']['personalDiputados2024']],
@@ -1996,6 +2055,12 @@ def radar_cargos(base):
             senal_transp('verde', 'El Manual 2026 publica la dieta neta mensual y el Anexo 23 del PEF, la bruta y la neta anuales.'),
         ],
         'secciones': [
+            costo('el Senado', sen26['aprobado'], [c for c in scaps25 if c['cap'] == '1000'][0]['ejercido'], scp25['ejercido'],
+                  'CP2025', 'capítulo 1000', 'ejercidos por el Senado en 2025'),
+            embudo_fed('senado', [x for x in sasf24 if x['concepto'] == 'Devengado'][0]['pesos'], 'oficial', 'ASF_SEN', 'p. 5',
+                       'Lo devengado en 2024 según la auditoría de la ASF; de eso, %s quedaron por pagar al cierre y se pagaron en 2025.' % pesos(
+                           [x for x in sasf24 if x['concepto'].startswith('Pendiente de pago')][0]['pesos']),
+                       [x for x in sasf24 if x['concepto'].startswith('Universo')][0], [x for x in sasf24 if x['concepto'].startswith('Muestra')][0], sres24),
             {'tit': 'Lo que cobra una senadora o senador', 'filas': [
                 fila('Dieta neta mensual 2026', sc['mensual']['max'], '$', sc['mensualEstado'], 'SEN', 'Anexo 1',
                      nota='El Manual la publica en miles (132.9). ' + sc['nota']),
@@ -2017,7 +2082,6 @@ def radar_cargos(base):
             {'tit': 'El Senado: su presupuesto', 'filas': [
                 fila('Integrantes', 128, 'ent', 'oficial', 'CPEUM', 'art. 56',
                      nota='Dos por estado de mayoría relativa, uno de primera minoría y 32 de representación proporcional.'),
-                fila('Aprobado 2026', sen26['aprobado'], '$g', 'oficial', 'PEF', 'Anexo 1, DOF p. 32'),
                 fila('Pagado al ' + corte_av, sav26['pagado'], '$g', 'oficial', 'AV2T2026'),
                 fila('Avance del año', spct_av, 'pct100', 'derivado', 'AV2T2026',
                      op='%s pagados ÷ %s del modificado × 100 = %s%%. A la mitad del año, el ritmo parejo sería 50%%.' % (
@@ -2030,10 +2094,6 @@ def radar_cargos(base):
             ], 'nota': 'No dividimos el presupuesto entre los 128 escaños: ese reparto no es lo que cuesta cada senador, porque el Senado también paga personal, edificios y el Canal del Congreso.'},
             {'tit': 'En qué gastó el Senado en 2025', 'filas': [
                 fila(c['concepto'], c['ejercido'], '$g', 'oficial', 'CP2025', 'capítulo ' + c['cap']) for c in scaps25]},
-            {'tit': 'Ante la Auditoría Superior: Cuenta Pública 2024', 'filas': [
-                fila(x['concepto'], x['pesos'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina']) for x in sasf24] + [
-                texto('Resultado', r['texto'], r['estado'], r['fuente'], 'p. %s' % r['pagina']) for r in sres24],
-             'nota': '«Sin irregularidades» se refiere a la muestra revisada, no a todo el gasto.'},
             {'tit': 'Lo que gastó en 2024, capítulo por capítulo', 'filas': [
                 fila('%s · %s (devengado)' % (x['cap'], x['concepto']), x['devengado'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina'])
                 for x in pd['legislativo']['senadoCapitulos2024']],
@@ -2079,21 +2139,38 @@ def radar_cargos(base):
             senales.append({'id': 'tope', 'c': None, 'r': 'tope-sin-doc', 'extra': [tope_f],
                             'x': fila('Remuneración anual neta', None, '$', 'pendiente', None, pid='poderes-legislativo-0')})
             senales.append(senal_transp(None, 'La plataforma no localizó su documento de 2026. Puede estar en la Plataforma Nacional de Transparencia.'))
-        inst = [fila('Ejercido en 2024', round(cn['ejercidoMdp'] * 1e6), '$g', cn['estado'], cn['fuente'], 'p. %s' % cn['pagina'],
-                     nota='Todo el congreso: diputados, personal, edificio y órgano de fiscalización si depende de él.')]
+        ej = round(cn['ejercidoMdp'] * 1e6)
         aud = asfc.get(nombre)
-        secs = [
+        secs = [{'tit': 'Lo que nos costó el congreso del estado', 'panel': 'costo', 'filas': [
+            fila('Lo que ejerció en 2024', ej, '$g', cn['estado'], cn['fuente'], 'p. %s' % cn['pagina'], k='total',
+                 nota='Todo el congreso: diputados, personal, edificio y órgano de fiscalización si depende de él.'),
+            fila('Cada día de 2024', round(ej / 366), '$', 'derivado', cn['fuente'], 'p. %s' % cn['pagina'], k='dia',
+                 op='%s ÷ 366 días (2024 fue bisiesto).' % pesos(ej))],
+            'nota': 'Un congreso local no recibe dinero federal directo: lo paga el presupuesto de su estado, que se financia en buena parte con '
+                    'participaciones federales (Ramo 28). Por eso la ASF puede revisar la parte que pagó con ellas. No damos el costo por habitante: '
+                    'la plataforma aún no integra la población de 2024 del CONAPO, y dividir el gasto de 2024 entre la de 2026 mezclaría años. '
+                    + ('' if aud else 'La plataforma solo tiene integradas las auditorías de la ASF a los congresos de Nuevo León y Tlaxcala en la '
+                                      'Cuenta Pública 2024; la de este congreso, si la hubo, aún no está integrada.')}]
+        if aud:
+            k_asf = {'Universo seleccionado': 'universo', 'Muestra auditada': 'muestra', 'Monto por aclarar': 'aclarar',
+                     'Recuperaciones; incluye cargas financieras': 'recup'}
+            fs = [fila('Ejerció en 2024 (todas sus fuentes)', ej, '$g', cn['estado'], cn['fuente'], 'p. %s' % cn['pagina'], k='recibio')]
+            for x in aud:
+                fs.append(fila(x['concepto'], x['pesos'], '$g' if x['pesos'] >= 1e6 else '$', x['estado'], x['fuente'], 'p. %s' % x['pagina'],
+                               k=k_asf.get(x['concepto'], '')))
+                if x['concepto'] == 'Muestra auditada':
+                    pr = pct(x['pesos'], ej)
+                    fs.append(fila('Parte de lo ejercido que revisó la ASF', pr, 'pct100', 'derivado', x['fuente'], 'p. %s' % x['pagina'],
+                                   op='%s de la muestra ÷ %s ejercidos (INEGI) × 100 = %s%%.' % (pesos(x['pesos']), pesos(ej), format(pr, ',.1f'))))
+            secs.append({'tit': 'Del dinero que ejerció a lo que falta aclarar: Cuenta Pública 2024', 'panel': 'embudo', 'filas': fs,
+                         'nota': 'Auditoría %s de la ASF. Revisó las participaciones federales que pagó este congreso, no todo su gasto. '
+                                 'Lo que no aparece aquí, la Matriz no lo reporta para esta auditoría.' % aud[0]['auditoria']})
+        secs += [
             {'tit': 'Lo que cobra una diputada o diputado local', 'filas': pago, 'nota': '' if en else '@local'},
             {'tit': 'Sus asesores', 'filas': [fila('Remuneración de asesores y personal de apoyo', None, '$', 'pendiente', None,
                                                    pid='asesores-congresos-locales',
                                                    nota='Cada congreso debe publicarla; la plataforma aún no integra esos tabuladores.')]},
-            {'tit': 'El congreso del estado: lo que gastó', 'filas': inst,
-             'nota': 'No lo dividimos entre el número de diputados: ese reparto no es lo que cuesta cada uno.'},
         ]
-        if aud:
-            secs.append({'tit': 'Ante la Auditoría Superior: Cuenta Pública 2024', 'filas': [
-                fila('%s (auditoría %s)' % (x['concepto'], x['auditoria']), x['pesos'], '$', x['estado'], x['fuente'], 'p. %s' % x['pagina'])
-                for x in aud], 'nota': 'La ASF revisó el dinero federal que recibió este congreso (participaciones), no todo su gasto.'})
         docs.append({
             'id': 'dip-loc-' + ab.lower(), 'tipo': 'dip-loc', 'ent': nombre, 'conDoc': bool(en), 'ini': 'DL' + ab,
             'col': '#0b6e4f', 'corte': CARGOS_CORTE,
@@ -2129,6 +2206,11 @@ def radar_cargos(base):
             senal_transp('verde', 'El Manual 2026 publica el sueldo neto tabulado de cada puesto de la Corte.'),
         ],
         'secciones': [
+            costo('la Suprema Corte', scjn26['aprobado'], c25['Servicios personales']['devengado'], c25['Total']['devengado'],
+                  c25['Servicios personales']['fuente'], 'p. %s' % c25['Servicios personales']['pagina'],
+                  'devengados en total por la Corte en 2025'),
+            embudo_fed('scjn', round(mdb['scjn']['cp2024']['ejercido'] * 1e6), 'derivado', 'CP2024', '',
+                       'Suma de la unidad responsable 100 del Ramo 03 en los datos abiertos de la Cuenta Pública 2024, en millones redondeados a un decimal.'),
             {'tit': 'Lo que cobra una ministra o ministro', 'filas': [
                 fila('Sueldo neto mensual del tabulador', mi['mensual']['max'], '$', mi['mensualEstado'], mi['fuente'], 'Anexo B, p. 8'),
                 fila('Aguinaldo y prima vacacional netos', mi['aguinaldoPrima']['max'], '$', 'oficial', mi['fuente'], 'Anexo B, p. 9'),
@@ -2142,15 +2224,16 @@ def radar_cargos(base):
              'nota': asr['nota']},
             {'tit': 'La Suprema Corte: su presupuesto', 'filas': [
                 fila('Proyecto 2026', scjn26['proyecto'], '$g', 'oficial', 'PEF', 'Anexo 32, DOF p. 108'),
-                fila('Aprobado 2026', scjn26['aprobado'], '$g', 'oficial', 'PEF', 'Anexo 1, DOF p. 32'),
                 fila('Recorte de la Cámara de Diputados', recorte, '$g', 'derivado', 'PEF', 'Anexo 32, DOF p. 108',
                      op='%s del proyecto − %s aprobados.' % (pesos(scjn26['proyecto']), pesos(scjn26['aprobado']))),
                 fila('Ejercido al 31 de agosto de 2026', ago['ejercido'], '$g', ago['estado'], ago['fuente'], 'p. %s' % ago['pagina'], nota=ago['nota']),
                 fila('Avance del año', pct_ago, 'pct100', 'derivado', ago['fuente'],
                      op='%s ejercidos ÷ %s del modificado × 100 = %s%%. A fines de agosto, el ritmo parejo sería 66.7%%.' % (
                          pesos(ago['ejercido']), pesos(ago['modificado']), format(pct_ago, ',.1f'))),
-            ] + [fila('Aprobado 2026 · ' + c['concepto'], c['aprobado'], '$g', c['estado'], c['fuente'], 'p. %s' % c['pagina'])
-                 for c in pd['judicial']['capitulosPorUR']['100']]},
+            ], 'nota': 'El aprobado de 2026 está arriba, en lo que nos cuesta la Corte.'},
+            {'tit': 'Lo aprobado para 2026, capítulo por capítulo', 'filas': [
+                fila(c['concepto'], c['aprobado'], '$g', c['estado'], c['fuente'], 'p. %s' % c['pagina'])
+                for c in pd['judicial']['capitulosPorUR']['100']]},
             {'tit': 'Cómo cerró 2025', 'filas': [
                 fila(k + ' (devengado)', c25[k]['devengado'], '$g', c25[k]['estado'], c25[k]['fuente'], 'p. %s' % c25[k]['pagina'])
                 for k in c25], 'nota': 'Estado analítico del ejercicio de la propia Corte, enero a diciembre de 2025.'},
@@ -2873,6 +2956,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Los estados de cuenta de la diputación federal y local, el Senado y la Suprema Corte suman la institución como órgano: cuánto nos cuesta al año, al día y a cada habitante, cuánto se va en sueldos y prestaciones, y del dinero que ejerció a lo que revisó la Auditoría Superior y lo que falta aclarar.'),
     ('10-10-2026', '«Verifica un estado de cuenta» se mudó al Modo Inspector: es su módulo 7, con página propia. Escribe el folio o la huella y comprueba que el documento no se alteró; los enlaces de los PDF ya impresos llegan ahí solos.'),
     ('10-10-2026', 'El estado de cuenta se lee como una hoja por los dos lados: al frente, el termostato de la salud financiera y las cuentas, con los negativos en rojo; atrás, la justificación por secciones (qué mide cada cifra, su operación, su fundamento y su fuente) y el sello.'),
     ('10-10-2026', 'En el Radar, «Hoy y los estados de cuenta» se abre en dos páginas: «Hoy: el presupuesto en curso» y «Expide un estado de cuenta». Cada tarjeta lleva a la suya.'),
