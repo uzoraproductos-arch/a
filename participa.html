@@ -20,11 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010o">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010o">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010o">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010o">
-  <script>(function () { var m = {"agora": "agora.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010p">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010p">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010p">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010p">
+  <script>(function () { var m = {"agora": "agora.html", "garantias": "garantias.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -102,7 +102,7 @@
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
         <div class="sv-resumen cm-resumen" hidden></div>
-          <p class="pt-nota">Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: <a href="participa.html#garantias">las seis puertas de denuncia</a> te dicen cuál toca, si admite anonimato y qué tener a la mano.</p>
+          <p class="pt-nota">Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: <a href="garantias.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato y qué tener a la mano.</p>
         </div>
       </details>
       <details class="pt-ruta" name="pt-ruta" data-ruta="error">
@@ -139,7 +139,7 @@
         <div class="sv-resumen cm-resumen" hidden></div>
         </div>
       </details>
-      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad.html#erratas">Fe de erratas</a> · <a href="participa.html#garantias">Canales oficiales de denuncia</a></p>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad.html#erratas">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
     </div>
   </aside>
 
@@ -157,47 +157,12 @@
     <div class="apartado-ancho apartado-cuerpo">
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-agora" href="agora.html"><span class="apartado-pestana-ico" aria-hidden="true">💬</span><span class="apartado-pestana-tx"><b>Ágora cívica</b><small>La red de réplica y diálogo: abre su página</small></span><span class="apartado-pestana-ir" aria-hidden="true">➔</span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-garantias" href="#garantias" aria-controls="garantias" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🛡️</span><span class="apartado-pestana-tx"><b>Garantías cívicas</b><small>Privacidad y canales de denuncia</small></span></a>
+          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-garantias" href="garantias.html"><span class="apartado-pestana-ico" aria-hidden="true">🛡️</span><span class="apartado-pestana-tx"><b>Garantías cívicas</b><small>A qué puerta tocar y qué te protege: abre su página</small></span><span class="apartado-pestana-ir" aria-hidden="true">➔</span></a>
           <a class="apartado-pestana" role="tab" id="pestana-comunidad" href="#comunidad" aria-controls="comunidad" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🤝</span><span class="apartado-pestana-tx"><b>Comunidad</b><small>Cuéntanos lo que viste, corrígenos, comparte</small></span></a>
           <a class="apartado-pestana" role="tab" id="pestana-servicios" href="#servicios" aria-controls="servicios" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🔎</span><span class="apartado-pestana-tx"><b>Servicios</b><small>Investigación a la medida y Pase del Auditor</small></span></a>
       </nav>
       <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
       
-      <section class="apartado-seccion apartado-panel" id="garantias" aria-labelledby="garantias-tit" role="tabpanel">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="garantias-tit"><span class="sr-only"></span>🛡️ Garantías cívicas y formación</h2>
-          <p class="apartado-seccion-texto">Qué pasa con lo que escribes, cómo armar un reporte útil y a dónde llevar un señalamiento para que se vuelva expediente.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div id="comOrientacion"></div>
-        <div class="fj-bloque" id="bloqueAportar">
-        <div class="fj-bloque-head"><span class="fj-kicker">Función 1</span><h3>Cuéntanos lo que viste</h3></div>
-
-        <p class="fj-bloque-sub" style="margin-top:0;">No necesitas ser contador ni abogado. Necesitas haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. El botón <b>«📢 Cuéntanos lo que viste»</b>, arriba en cada página, abre las tres rutas: algo raro con el dinero público, un dato mal en esta plataforma o un tema para investigar. El texto se arma en tu navegador, ya redactado, para que lo copies y lo presentes en el canal oficial que corresponde (abajo).</p>
-        <p class="pt-accesos"><a class="sz-btn sz-btn-of" href="comunidad.html#reporta" data-puerta="reporta">📢 Cuéntanos lo que viste</a> <a class="sz-btn" href="comunidad.html">Ver la página Comunidad ➔</a></p>
-        </div>
-        <div class="fj-bloque" id="bloqueCanales">
-        <div class="fj-bloque-head">
-          <span class="fj-kicker">Función 2</span>
-          <h3>Las seis puertas donde un señalamiento se vuelve expediente</h3>
-        </div>
-        <p class="fj-bloque-sub">
-          Esta es la parte que sí tiene efecto jurídico, y la que casi nadie usa porque no se sabe cuál toca. Cada ficha responde lo mismo: qué investiga ese órgano, si admite denuncia anónima, qué debe tener a la mano antes de empezar y qué produce su denuncia una vez presentada. Una de las seis no es un canal de denuncia sino la herramienta para conseguir la prueba: léala primero si todavía no tiene documentos.
-        </p>
-        <div id="canalesOficialesContainer" class="canales-denuncia-list"></div>
-
-        <div class="dec-wrap" id="decalogoWrap">
-          <div class="dec-head">
-            <span class="dec-kicker">Decálogo del ciudadano auditor</span>
-            <h4>Diez reglas que hacen la diferencia entre una queja y una denuncia</h4>
-            <p>No son consignas: cada una tiene detrás una norma concreta. Están ordenadas de lo general a lo práctico, y la última es la que más se olvida.</p>
-          </div>
-          <div id="decalogoContainer" class="dec-grid"></div>
-        </div>
-      </div>
-        </div>
-      </section>
-
       <section class="apartado-seccion apartado-panel" id="comunidad" aria-labelledby="comunidad-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="comunidad-tit"><span class="sr-only"></span>🤝 Comunidad: cuéntanos lo que viste</h2>
@@ -264,13 +229,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010o</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010p</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010o"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261010o"></script>
-  <script src="assets/auditor/js/audit-database.js?v=20261010o"></script>
-  <script src="assets/auditor/js/participa.js?v=20261010o"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010p"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261010p"></script>
 </body>
 </html>

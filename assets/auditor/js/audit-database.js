@@ -10718,7 +10718,7 @@ window.AUDIT_DB = {
         "herramienta": "Sistema de Denuncias Ciudadanas (SIDEC)",
         "paraQue": "Desvío, uso indebido o aplicación irregular de recursos federales: participaciones del Ramo 28, aportaciones del Ramo 33, subsidios y contratos pagados con el Presupuesto de Egresos.",
         "anonimo": "Sí. La denuncia puede presentarse sin revelar identidad.",
-        "queNecesitas": "El nombre del ente que ejerció el dinero, el año, el fondo o el número de contrato, y la descripción de lo que observó. Si tiene fotografías o documentos, adjúntelos.",
+        "queNecesitas": "El nombre del ente que ejerció el dinero, el año, el fondo o el número de contrato, y la descripción de lo que observaste. Si tienes fotografías o documentos, adjúntalos.",
         "efecto": "Puede originar una auditoría específica y, si hay presunción de delito, una denuncia de la propia ASF ante la Fiscalía.",
         "url": "https://www.asf.gob.mx/Section/262_Denuncias_Ciudadanas",
         "refId": "ref-lfrcf"
@@ -10746,7 +10746,7 @@ window.AUDIT_DB = {
         "herramienta": "Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)",
         "paraQue": "Cuando el hecho ya no es sólo una falta administrativa sino un delito: enriquecimiento ilícito, cohecho, peculado, uso ilícito de atribuciones, tráfico de influencias.",
         "anonimo": "No del todo. La denuncia penal requiere datos de quien la presenta, aunque existen medidas de protección para testigos y denunciantes.",
-        "queNecesitas": "Narración de los hechos en orden cronológico, identificación de las personas involucradas y todos los documentos o pruebas de que disponga.",
+        "queNecesitas": "Narración de los hechos en orden cronológico, identificación de las personas involucradas y todos los documentos o pruebas de que dispongas.",
         "efecto": "Abre una carpeta de investigación penal. Es la única vía que puede terminar en prisión.",
         "url": "https://fgr.org.mx/es/FGR/FEMCC",
         "refId": "ref-lgra"
@@ -10760,7 +10760,7 @@ window.AUDIT_DB = {
         "herramienta": "Buzón de denuncias contra EFOS (empresas que facturan operaciones simuladas)",
         "paraQue": "Facturación falsa: empresas fantasma que emiten comprobantes por servicios que nunca se prestaron, un mecanismo habitual para vaciar contratos de obra pública.",
         "anonimo": "Sí.",
-        "queNecesitas": "El RFC o la razón social de la empresa, el tipo de operación simulada y, si la conoce, la dependencia que pagó.",
+        "queNecesitas": "El RFC o la razón social de la empresa, el tipo de operación simulada y, si la conoces, la dependencia que pagó.",
         "efecto": "Puede derivar en la publicación de la empresa en el listado del artículo 69-B del Código Fiscal, lo que anula el efecto fiscal de sus facturas.",
         "url": "https://www.sat.gob.mx/aplicacion/operacion/50409/denuncias-sat",
         "refId": "ref-cff"
@@ -10786,12 +10786,12 @@ window.AUDIT_DB = {
         "icono": "🏢",
         "tono": "neutro",
         "herramienta": "Buzón de quejas y denuncias de cada dependencia, estado o municipio",
-        "paraQue": "La vía más cercana y la más rápida cuando el hecho es local: una obra de su colonia, un trámite condicionado, un cobro indebido en la ventanilla, una falta administrativa de personal del ayuntamiento.",
+        "paraQue": "La vía más cercana y la más rápida cuando el hecho es local: una obra de tu colonia, un trámite condicionado, un cobro indebido en la ventanilla, una falta administrativa de personal del ayuntamiento.",
         "anonimo": "Depende de cada contraloría; la mayoría admite denuncia anónima.",
-        "queNecesitas": "El nombre de la dependencia o el ayuntamiento, la fecha y el lugar del hecho, y lo que pueda documentar.",
+        "queNecesitas": "El nombre de la dependencia o el ayuntamiento, la fecha y el lugar del hecho, y lo que puedas documentar.",
         "efecto": "Procedimiento de responsabilidad administrativa contra la persona servidora pública. Es la escala más baja, pero también la que menos tarda.",
         "url": null,
-        "notaSinUrl": "No existe un portal único: cada dependencia federal tiene su propio Órgano Interno de Control y cada estado su contraloría. Búsquelo por el nombre de la institución más «Órgano Interno de Control» o «Contraloría» en el sitio oficial de la entidad.",
+        "notaSinUrl": "No existe un portal único: cada dependencia federal tiene su propio Órgano Interno de Control y cada estado su contraloría. Búscalo por el nombre de la institución más «Órgano Interno de Control» o «Contraloría» en el sitio oficial de la entidad.",
         "refId": "ref-lgra"
       }
     ],
@@ -10810,14 +10810,14 @@ window.AUDIT_DB = {
       },
       {
         "n": 3,
-        "titulo": "Pregunte por escrito",
+        "titulo": "Pregunta por escrito",
         "texto": "Una llamada telefónica no deja constancia y una respuesta verbal no se puede impugnar. Una solicitud de acceso a la información sí: genera folio, plazo y recurso.",
         "fundamento": "Art. 6º CPEUM, apartado A: toda persona tiene derecho al acceso a la información sin acreditar interés ni justificar su uso."
       },
       {
         "n": 4,
         "titulo": "Una obra sin expediente no es una obra fiscalizable",
-        "texto": "Antes de opinar sobre una obra, pida su número de contrato, su monto y su plazo de ejecución. Sin esos tres datos no hay comparación posible entre lo prometido y lo entregado.",
+        "texto": "Antes de opinar sobre una obra, pide su número de contrato, su monto y su plazo de ejecución. Sin esos tres datos no hay comparación posible entre lo prometido y lo entregado.",
         "fundamento": "Ley de Obras Públicas y Servicios Relacionados con las Mismas: bitácora y expediente único de obra."
       },
       {
@@ -10840,7 +10840,7 @@ window.AUDIT_DB = {
       },
       {
         "n": 8,
-        "titulo": "La sospecha no basta: documente",
+        "titulo": "La sospecha no basta: documenta",
         "texto": "Fecha, lugar, monto, nombre de la dependencia y el documento que lo respalde. Una denuncia sin datos verificables se desecha y desgasta la causa de quienes sí los aportan.",
         "fundamento": "Criterio operativo común de la ASF y de los órganos internos de control."
       },
@@ -10853,7 +10853,7 @@ window.AUDIT_DB = {
       {
         "n": 10,
         "titulo": "El silencio también se impugna",
-        "texto": "Si no le responden, no se acabó el camino: la falta de respuesta y la respuesta incompleta se recurren, y ese recurso obliga a una revisión por un tercero.",
+        "texto": "Si no te responden, no se acabó el camino: la falta de respuesta y la respuesta incompleta se recurren, y ese recurso obliga a una revisión por un tercero.",
         "fundamento": "Recurso de revisión previsto en la legislación de transparencia."
       }
     ],
