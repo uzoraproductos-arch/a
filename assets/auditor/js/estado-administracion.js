@@ -7,7 +7,10 @@
    El sello: la huella SHA-256 de las cifras del documento. El folio sale de
    la huella, así que el mismo contenido da siempre el mismo folio, y la
    sección «Verifica» recalcula las huellas para comprobar que un documento
-   no se alteró.
+   no se alteró. Esa sección se mudó al Modo Inspector el 10-10-2026
+   (herramienta-inspector-verifica.html, pedido del autor): el mismo archivo
+   la arranca sola cuando la página no trae el expedidor (#exDoc), y el
+   expedidor manda ahí los enlaces ?verifica= de los PDF ya impresos.
    Desde el mismo 10-10-2026 expide también el de quienes legislan y juzgan:
    la diputación federal, la de cada congreso local y la Suprema Corte con su
    ponencia y sus asesores. Esos documentos los arma apartados.py en el JSON
@@ -26,6 +29,8 @@
   var P = D.peso || {};
   var C = null, nc = document.getElementById('exCargos');
   if (nc) { try { C = JSON.parse(nc.textContent); } catch (e) { C = null; } }
+  /* La verificación tiene su página en el Modo Inspector; esta, sin #exDoc, es ella. */
+  var VERIFICA = 'herramienta-inspector-verifica.html', SOLO = !document.getElementById('exDoc');
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -225,7 +230,7 @@
     return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
   }
   function selloSitio() { var b = document.querySelector('.apartado-pie-txt b'); return b ? b.textContent : ''; }
-  function ligaVerifica(fol) { return location.origin + location.pathname + '?verifica=' + encodeURIComponent(fol); }
+  function ligaVerifica(fol) { return new URL(VERIFICA + '?verifica=' + encodeURIComponent(fol), location.href).href; }
 
   function sello(fol) {
     var id = 'exArco' + Math.random().toString(36).slice(2, 7);
@@ -540,6 +545,7 @@
     }
     eligeDoc(t, true);
   }
+  if (SOLO) { arrancaVerifica(); return; }
   document.getElementById('exTipos').addEventListener('click', function (e) {
     var b = e.target.closest('[data-tipo]');
     if (b) eligeTipo(b.getAttribute('data-tipo'));
@@ -612,34 +618,33 @@
       rs.forEach(function (r) { if (folio(r.ini, r.h) === Q || r.h.toUpperCase() === Q) hit = r; });
       if (hit) {
         out.innerHTML = '<div class="ex-ver ex-ver-si"><b>✅ Auténtico.</b> Corresponde al estado de cuenta de <b>' + esc(hit.n) + '</b>, y sus cifras coinciden con los datos vigentes.' +
-          '<br><small>Huella: <code>' + hit.h + '</code></small> <button type="button" class="sz-btn" data-ver-' + hit.q + '="' + hit.id + '">Ver el documento</button></div>';
+          '<br><small>Huella: <code>' + hit.h + '</code></small> <a class="sz-btn" href="radar-estado-de-cuenta.html?' + hit.q + '=' + hit.id + '">Ver el documento</a></div>';
       } else {
         out.innerHTML = '<div class="ex-ver ex-ver-no"><b>❌ No coincide</b> con ningún estado de cuenta de los datos vigentes. ' +
           'O el documento se alteró, o se expidió con datos anteriores: en ese caso, expídelo de nuevo y compara las cifras.</div>';
       }
     });
   }
-  document.getElementById('exVerForm').addEventListener('submit', function (e) { e.preventDefault(); verifica(document.getElementById('exVerIn').value); });
-  document.getElementById('exVerOut').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-ver-adm],[data-ver-doc]');
-    if (!b) return;
-    if (b.hasAttribute('data-ver-adm')) elige(b.getAttribute('data-ver-adm'), true);
-    else eligeDoc(b.getAttribute('data-ver-doc'), true);
-    genera();
-  });
+  function arrancaVerifica() {
+    document.getElementById('exVerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = document.getElementById('exVerIn').value.trim();
+      history.replaceState(null, '', location.pathname + (v ? '?verifica=' + encodeURIComponent(v) : ''));
+      verifica(v);
+    });
+    var v = new URLSearchParams(location.search).get('verifica');
+    if (v) { document.getElementById('exVerIn').value = v; verifica(v); }
+  }
 
   /* ================= Arranque ================= */
   /* El «Hoy» vivió en esta página hasta el 10-10-2026: su ancla lleva a la suya. */
   if (location.hash === '#hoy') { location.replace('radar-presupuesto-en-curso.html'); return; }
   var q = new URLSearchParams(location.search);
+  /* Los PDF impresos antes de la mudanza llevan esta dirección con ?verifica=. */
+  if (q.get('verifica')) { location.replace(new URL(VERIFICA + location.search, location.href).href); return; }
   var ultimo = D.admins[D.admins.length - 1].id;
   /* Un enlace compartido (?doc= o ?adm=) es un documento ya expedido: se genera al abrirlo. */
   if (docDe(q.get('doc'))) { eligeDoc(q.get('doc'), false); est.listo = true; pinta(); }
   else if (adm(q.get('adm'))) { elige(q.get('adm'), false); est.listo = true; pinta(); }
   else elige(ultimo, false);
-  if (q.get('verifica')) {
-    document.getElementById('exVerIn').value = q.get('verifica');
-    verifica(q.get('verifica'));
-    setTimeout(function () { document.getElementById('exVerifica').scrollIntoView({ block: 'start' }); }, 300);
-  }
 })();

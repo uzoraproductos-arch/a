@@ -603,6 +603,8 @@ HERRAMIENTAS = [
           '¿Leíste una cifra en una noticia, en redes o en un discurso? Ponla junto al documento oficial y ve cuánto se aleja y por qué.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
+         ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
+          '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
      ]),
     ('herramienta-ambiente.html', 'ambiente', '🌎', 'Costo Ambiental',
      'El gasto que no aparece en el recibo',
@@ -619,6 +621,12 @@ HERRAMIENTAS = [
           'La cascada animada del PIB, el simulador del crecimiento real y el desglose de lo que se acabó y lo que se ensució.'),
      ]),
 ]
+
+
+# Modulos que no abren la portada en un marco: su pagina la arma otra funcion
+# (la verificacion de estados de cuenta, en radar()).
+MODULOS_PROPIOS = {'inspverifica'}
+VERIFICA_PAGINA = 'herramienta-inspector-verifica.html'
 
 
 def modulo_archivo(archivo, clave):
@@ -1637,7 +1645,9 @@ RADAR_PARTES = [
     # autor, 10-10-2026, mas tarde): la tarjeta lleva a radar-hoy.html, con el
     # presupuesto en curso y el acceso a la herramienta, y la herramienta se
     # queda en radar-estado-de-cuenta.html porque esa direccion va impresa en
-    # el sello de los PDF (?verifica=).
+    # el sello de los PDF (?verifica=). Desde el mismo dia la verificacion es
+    # un modulo del Modo Inspector (VERIFICA_PAGINA): los sellos nuevos llevan
+    # ahi y radar-estado-de-cuenta.html?verifica= redirige.
     ('hoy', 'radar-hoy.html', '🧾', 'Hoy y los estados de cuenta',
      'El presupuesto en curso y el estado de cuenta de cada sexenio, de diputados federales y locales, del Senado y de la Suprema Corte, con semáforo y sello'),
     ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
@@ -2403,15 +2413,35 @@ def radar():
             <p class="ex-pista">Primero genéralo; luego descárgalo. Al descargar, elige «Guardar como PDF» en la ventana de impresión.</p>
           </div>
           <article class="ex-doc" id="exDoc" aria-live="polite"></article>
+          <p class="ex-pista ex-ir-ver">🔏 ¿Te compartieron un estado de cuenta? Compruébalo con su folio en el Modo Inspector:
+            <a href="%s">Verifica un estado de cuenta</a>.</p>
+          <noscript><p>La herramienta necesita JavaScript.</p></noscript>
+        </div>''' % ((' data-cabecera="%s"' % banda) if banda else '', VERIFICA_PAGINA)
+    # «Verifica un estado de cuenta» se mudo al Modo Inspector (pedido del
+    # autor, 10-10-2026): es un modulo de esa herramienta con su propia pagina,
+    # que carga los mismos datos y el mismo estado-administracion.js.
+    verifica_html = '''<div class="ex ex-solo-ver" id="exApp">
           <section class="ex-verifica" id="exVerifica" aria-labelledby="exVerTit">
-            <h3 id="exVerTit">🔎 Verifica un estado de cuenta</h3>
-            <p>¿Te compartieron uno? Escribe su folio o su huella digital y te decimos si coincide, cifra por cifra, con los datos vigentes.</p>
+            <h3 id="exVerTit">🔏 Verifica un estado de cuenta</h3>
+            <p>¿Te compartieron uno? Escribe su folio (viene arriba del documento y junto al sello) o su huella digital, y te
+              decimos si coincide, cifra por cifra, con los datos vigentes de la plataforma.</p>
             <form class="ex-ver-f" id="exVerForm"><input type="text" id="exVerIn" placeholder="AV-AMLO-1A2B3C4D" autocomplete="off" spellcheck="false" aria-label="Folio o huella digital">
               <button type="submit" class="sz-btn sz-btn-of">Verificar</button></form>
             <div id="exVerOut" aria-live="polite"></div>
           </section>
-          <noscript><p>La herramienta necesita JavaScript.</p></noscript>
-        </div>''' % ((' data-cabecera="%s"' % banda) if banda else '')
+          <section class="ex-verifica ex-ver-como" aria-labelledby="exComoTit">
+            <h3 id="exComoTit">Cómo funciona</h3>
+            <ol>
+              <li><b>La huella.</b> Cada estado de cuenta firma sus cifras con una huella digital SHA-256: si cambia una sola cifra, cambia la huella.</li>
+              <li><b>El folio.</b> Son las iniciales de quién es el documento y los primeros ocho caracteres de su huella, por ejemplo AV-AMLO-1A2B3C4D.</li>
+              <li><b>La comprobación.</b> Esta página recalcula, en tu navegador, la huella de los %d estados de cuenta vigentes y busca la tuya.
+                Si coincide, el documento no se alteró; si no, o se alteró o se expidió con datos anteriores: expídelo de nuevo en
+                <a href="radar-estado-de-cuenta.html">Expide un estado de cuenta</a> y compara.</li>
+            </ol>
+            <p class="ex-pista">El sello no hace oficial al documento: dice que sus cifras son las que publica Auditavisión, cada una con su fuente.</p>
+          </section>
+          <noscript><p>La verificación necesita JavaScript.</p></noscript>
+        </div>''' % (len(admins) + len(radar_cargos(base)['docs']))
 
     partes = {
         'tablero': ('Elige una administración y toca cada tarjeta para ver la comparativa con las demás: ingresos, inversión, '
@@ -2485,6 +2515,14 @@ def radar():
         'secciones': [{'id': 'expide', 'titulo': 'Expide un estado de cuenta', 'texto': '', 'sin_cab': True, 'tarjetas': [],
                        'bloque': datos_js + cargos_js + expide_html}],
     })
+    h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
+    i = [t[0] for t in h[7]].index('inspverifica')
+    ver = herramienta_modulo(h, HERRAMIENTAS.index(h) + 1, i)
+    assert ver['archivo'] == VERIFICA_PAGINA
+    ver['estilos'] = ['estado-administracion.css']
+    ver['scripts'] = ['estado-administracion.js']
+    ver['secciones'][0]['bloque'] = datos_js + cargos_js + verifica_html
+    paginas.append(ver)
     return paginas
 
 
@@ -2837,6 +2875,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', '«Verifica un estado de cuenta» se mudó al Modo Inspector: es su módulo 7, con página propia. Escribe el folio o la huella y comprueba que el documento no se alteró; los enlaces de los PDF ya impresos llegan ahí solos.'),
     ('10-10-2026', 'El estado de cuenta se lee como una hoja por los dos lados: al frente, el termostato de la salud financiera y las cuentas, con los negativos en rojo; atrás, la justificación por secciones (qué mide cada cifra, su operación, su fundamento y su fuente) y el sello.'),
     ('10-10-2026', 'En el Radar, «Hoy y los estados de cuenta» se abre en dos páginas: «Hoy: el presupuesto en curso» y «Expide un estado de cuenta». Cada tarjeta lleva a la suya.'),
     ('10-10-2026', 'Expide un estado de cuenta abre en su propia página: eliges de quién, presionas «Generar estado de cuenta» y luego lo descargas en PDF. El encabezado del documento es más amplio y el logo, más nítido.'),
@@ -2989,7 +3028,7 @@ def generar(sello=None):
         texto = pagina(herramienta(h, n), sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, h[0]), 'wb').write(texto.encode('utf-8'))
         for i, t in enumerate(h[7]):
-            if t[0].endswith('.html'):
+            if t[0].endswith('.html') or t[0] in MODULOS_PROPIOS:
                 continue
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
