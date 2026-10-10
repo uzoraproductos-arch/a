@@ -25904,6 +25904,1279 @@ window.AUDIT_DB = {
         ]
       }
     }
+  },
+  "finanzas_sexenales": {
+    "consulta": "10 de octubre de 2026",
+    "nota": "Series anuales del sector público presupuestario para el Radar hacendario (radar-hacendario.html). De 1995 a 2016, montos de la Cuenta Pública tomados del Anexo Estadístico del 5.º Informe de Gobierno; su porcentaje del PIB es derivado (monto entre el PIB nominal del INEGI, base 2018). De 2017 a 2025, el porcentaje del PIB que publica Hacienda en los Criterios Generales, ya con el PIB base 2018: para cada año, la publicación más reciente.",
+    "fuentes": {
+      "PRES_5IG_FP": {
+        "corto": "Presidencia, 5.º Informe de Gobierno, Anexo Estadístico, pp. 447, 453 y 463",
+        "doc": "Presidencia de la República, Quinto Informe de Gobierno 2016-2017, Anexo Estadístico, Finanzas Públicas: «Ingresos ordinarios del sector público presupuestario» (p. 447 del PDF), «Gasto neto total del sector público presupuestario», con su costo financiero de la deuda (p. 453), e «Inversión física del sector público presupuestario» (p. 463). Millones de pesos; de 1995 a 2016 provienen de la Cuenta Pública.",
+        "url": "https://framework-gb.cdn.gob.mx/quintoinforme/5IG_ANEXO_FINAL_TGM_250818.pdf",
+        "sha256": "7159e585765b0d4cf027b22ce826c5d66daa2f926e18aaceba7f65efe1178f57"
+      },
+      "INEGI_PIBN": {
+        "corto": "INEGI, PIB trimestral a precios corrientes, año base 2018",
+        "doc": "Instituto Nacional de Estadística y Geografía, Sistema de Cuentas Nacionales de México, Producto Interno Bruto Trimestral, año base 2018, series originales en millones de pesos a precios corrientes (PIBT_3.xlsx), renglón «Producto interno bruto», columna «Anual». 2023 a 2025 son cifras preliminares.",
+        "url": "https://www.inegi.org.mx/contenidos/programas/pib/2018/tabulados/ori/PIBT_3.xlsx",
+        "sha256": "99a0fe148da8b5698c22aba3e76e45c99bb2d23a899bf46e357cd9281b5522c1"
+      },
+      "CGPE2024": {
+        "corto": "SHCP, Criterios Generales de Política Económica 2024, p. 103",
+        "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2024, cuadro «Ingresos y gasto del Sector Público» 2017-2023, porcentaje del PIB con el año base 2018 (p. 103 del PDF). Gaceta Parlamentaria, 8 de septiembre de 2023.",
+        "url": "https://gaceta.diputados.gob.mx/PDF/65/2023/sep/20230908-C.pdf",
+        "sha256": "10af9f3cfbb58f2e8017caf6f6c3e62933e1aac4a9ae45c664f371582a61105f"
+      },
+      "CGPE2026": {
+        "corto": "SHCP, Criterios Generales de Política Económica 2026, p. 71",
+        "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2026, cuadro «Ingresos y gasto del Sector Público» 2019-2025, % del PIB (p. 71 del PDF). Gaceta Parlamentaria, 8 de septiembre de 2025.",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2025/sep/20250908-C.pdf",
+        "sha256": "6bfe63a30519250d9fdf181a429d9b46864e775e86e3de4db51a311d45dd13ea"
+      },
+      "CGPE2027": {
+        "corto": "SHCP, Criterios Generales de Política Económica 2027, p. 56",
+        "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2027, cuadro «Ingresos y gasto del Sector Público» 2020-2026, % del PIB (p. 56 del PDF). Gaceta Parlamentaria, 8 de septiembre de 2026.",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+        "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+      },
+      "BANXICO_IA1994": {
+        "corto": "Banxico, Informe Anual 1994, p. 80",
+        "url": "https://www.banxico.org.mx/publicaciones-y-prensa/informes-anuales/%7B0F2D589F-92A4-9C48-C456-643595B46CE5%7D.pdf"
+      },
+      "ASF_IR2012": {
+        "corto": "ASF, Informe del Resultado CP 2012, Tomo Ejecutivo, p. 67",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2012i/Documentos/InformeEjecutivo/Tomo%20Ejecutivo%20IR%202012.pdf"
+      },
+      "ASF_IGE2018": {
+        "corto": "ASF, Informe General Ejecutivo CP 2018, p. 258 del PDF",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/IGE_2018_PROTEGIDO.pdf"
+      },
+      "ASF_IGE2022": {
+        "corto": "ASF, Informe General Ejecutivo CP 2022, pp. 149-150",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/2022_IGE_a.pdf"
+      },
+      "SHCP_C4_2025": {
+        "corto": "SHCP, Comunicado 4/2025 (30 ene. 2025)",
+        "url": "https://www.gob.mx/shcp/prensa/comunicado-no-4-informes-sobre-la-situacion-economica-las-finanzas-publicas-y-la-deuda-publica-al-cuarto-trimestre-de-2024"
+      },
+      "CGPE2027_HIST": {
+        "corto": "SHCP, Criterios Generales de Política Económica 2027, cuadro de RFSP y SHRFSP 2020-2026 (p. 53 del PDF)",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf"
+      }
+    },
+    "anual": {
+      "ingresos": {
+        "1995": {
+          "mdp": 418882.6,
+          "pib": 17.16,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1996": {
+          "mdp": 580722.0,
+          "pib": 17.68,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1997": {
+          "mdp": 737180.9,
+          "pib": 17.79,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1998": {
+          "mdp": 783045.9,
+          "pib": 15.37,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1999": {
+          "mdp": 956683.1,
+          "pib": 15.85,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2000": {
+          "mdp": 1179918.9,
+          "pib": 16.82,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2001": {
+          "mdp": 1271646.3,
+          "pib": 17.1,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2002": {
+          "mdp": 1387500.4,
+          "pib": 17.73,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2003": {
+          "mdp": 1600589.8,
+          "pib": 19.38,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2004": {
+          "mdp": 1771314.2,
+          "pib": 19.15,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2005": {
+          "mdp": 1947816.3,
+          "pib": 19.48,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2006": {
+          "mdp": 2263602.5,
+          "pib": 20.36,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2007": {
+          "mdp": 2485785.1,
+          "pib": 20.63,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2008": {
+          "mdp": 2860926.4,
+          "pib": 22.13,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2009": {
+          "mdp": 2817185.5,
+          "pib": 22.1,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2010": {
+          "mdp": 2960443.0,
+          "pib": 21.19,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2011": {
+          "mdp": 3271080.0,
+          "pib": 21.42,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2012": {
+          "mdp": 3514529.5,
+          "pib": 21.26,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2013": {
+          "mdp": 3800415.6,
+          "pib": 22.42,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2014": {
+          "mdp": 3983056.1,
+          "pib": 21.96,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2015": {
+          "mdp": 4266989.5,
+          "pib": 22.19,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2016": {
+          "mdp": 4845530.3,
+          "pib": 23.34,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2017": {
+          "mdp": null,
+          "pib": 22.0,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2018": {
+          "mdp": null,
+          "pib": 21.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2019": {
+          "mdp": null,
+          "pib": 21.4,
+          "est": "oficial",
+          "f": [
+            "CGPE2026"
+          ]
+        },
+        "2020": {
+          "mdp": null,
+          "pib": 22.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2021": {
+          "mdp": null,
+          "pib": 22.3,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2022": {
+          "mdp": null,
+          "pib": 22.4,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2023": {
+          "mdp": null,
+          "pib": 22.1,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2024": {
+          "mdp": null,
+          "pib": 22.3,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2025": {
+          "mdp": null,
+          "pib": 23.3,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        }
+      },
+      "gasto": {
+        "1995": {
+          "mdp": 429724.8,
+          "pib": 17.61,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1996": {
+          "mdp": 587421.8,
+          "pib": 17.89,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1997": {
+          "mdp": 755815.9,
+          "pib": 18.23,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1998": {
+          "mdp": 830486.9,
+          "pib": 16.31,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1999": {
+          "mdp": 1022594.3,
+          "pib": 16.94,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2000": {
+          "mdp": 1243126.6,
+          "pib": 17.72,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2001": {
+          "mdp": 1327188.1,
+          "pib": 17.85,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2002": {
+          "mdp": 1484256.1,
+          "pib": 18.96,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2003": {
+          "mdp": 1670796.3,
+          "pib": 20.23,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2004": {
+          "mdp": 1802610.2,
+          "pib": 19.49,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2005": {
+          "mdp": 1979808.0,
+          "pib": 19.8,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2006": {
+          "mdp": 2270558.7,
+          "pib": 20.42,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2007": {
+          "mdp": 2498977.8,
+          "pib": 20.74,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2008": {
+          "mdp": 2894806.5,
+          "pib": 22.39,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2009": {
+          "mdp": 3114065.4,
+          "pib": 24.43,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2010": {
+          "mdp": 3355288.0,
+          "pib": 24.02,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2011": {
+          "mdp": 3655756.8,
+          "pib": 23.94,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2012": {
+          "mdp": 3942261.3,
+          "pib": 23.85,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2013": {
+          "mdp": 4206350.9,
+          "pib": 24.81,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2014": {
+          "mdp": 4566808.9,
+          "pib": 25.18,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2015": {
+          "mdp": 4917247.4,
+          "pib": 25.57,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2016": {
+          "mdp": 5377849.6,
+          "pib": 25.91,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2017": {
+          "mdp": null,
+          "pib": 23.0,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2018": {
+          "mdp": null,
+          "pib": 23.1,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2019": {
+          "mdp": null,
+          "pib": 23.1,
+          "est": "oficial",
+          "f": [
+            "CGPE2026"
+          ]
+        },
+        "2020": {
+          "mdp": null,
+          "pib": 24.9,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2021": {
+          "mdp": null,
+          "pib": 25.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2022": {
+          "mdp": null,
+          "pib": 25.6,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2023": {
+          "mdp": null,
+          "pib": 25.5,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2024": {
+          "mdp": null,
+          "pib": 27.3,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2025": {
+          "mdp": null,
+          "pib": 27.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        }
+      },
+      "inversion": {
+        "1995": {
+          "mdp": 53251.0,
+          "pib": 2.18,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1996": {
+          "mdp": 77262.1,
+          "pib": 2.35,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1997": {
+          "mdp": 102444.8,
+          "pib": 2.47,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1998": {
+          "mdp": 106870.3,
+          "pib": 2.1,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1999": {
+          "mdp": 118916.2,
+          "pib": 1.97,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2000": {
+          "mdp": 142721.0,
+          "pib": 2.03,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2001": {
+          "mdp": 144548.4,
+          "pib": 1.94,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2002": {
+          "mdp": 152616.0,
+          "pib": 1.95,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2003": {
+          "mdp": 187271.0,
+          "pib": 2.27,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2004": {
+          "mdp": 220004.4,
+          "pib": 2.38,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2005": {
+          "mdp": 246251.3,
+          "pib": 2.46,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2006": {
+          "mdp": 285884.9,
+          "pib": 2.57,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2007": {
+          "mdp": 340002.6,
+          "pib": 2.82,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2008": {
+          "mdp": 380523.8,
+          "pib": 2.94,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2009": {
+          "mdp": 554576.5,
+          "pib": 4.35,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2010": {
+          "mdp": 629701.5,
+          "pib": 4.51,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2011": {
+          "mdp": 654530.3,
+          "pib": 4.29,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2012": {
+          "mdp": 686704.5,
+          "pib": 4.15,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2013": {
+          "mdp": 740998.6,
+          "pib": 4.37,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2014": {
+          "mdp": 824110.6,
+          "pib": 4.54,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2015": {
+          "mdp": 817055.5,
+          "pib": 4.25,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2016": {
+          "mdp": 776501.7,
+          "pib": 3.74,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2017": {
+          "mdp": null,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2018": {
+          "mdp": null,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2019": {
+          "mdp": null,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "CGPE2026"
+          ]
+        },
+        "2020": {
+          "mdp": null,
+          "pib": 2.7,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2021": {
+          "mdp": null,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2022": {
+          "mdp": null,
+          "pib": 3.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2023": {
+          "mdp": null,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2024": {
+          "mdp": null,
+          "pib": 3.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2025": {
+          "mdp": null,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        }
+      },
+      "costo_financiero": {
+        "1995": {
+          "mdp": 83621.2,
+          "pib": 3.43,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1996": {
+          "mdp": 109600.1,
+          "pib": 3.34,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1997": {
+          "mdp": 123815.8,
+          "pib": 2.99,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1998": {
+          "mdp": 108911.5,
+          "pib": 2.14,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "1999": {
+          "mdp": 163711.7,
+          "pib": 2.71,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2000": {
+          "mdp": 201015.0,
+          "pib": 2.86,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2001": {
+          "mdp": 188060.6,
+          "pib": 2.53,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2002": {
+          "mdp": 178374.1,
+          "pib": 2.28,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2003": {
+          "mdp": 190753.6,
+          "pib": 2.31,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2004": {
+          "mdp": 206829.2,
+          "pib": 2.24,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2005": {
+          "mdp": 210185.5,
+          "pib": 2.1,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2006": {
+          "mdp": 250065.0,
+          "pib": 2.25,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2007": {
+          "mdp": 238956.0,
+          "pib": 1.98,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2008": {
+          "mdp": 227112.6,
+          "pib": 1.76,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2009": {
+          "mdp": 262812.5,
+          "pib": 2.06,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2010": {
+          "mdp": 255755.1,
+          "pib": 1.83,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2011": {
+          "mdp": 273931.3,
+          "pib": 1.79,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2012": {
+          "mdp": 305118.5,
+          "pib": 1.85,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2013": {
+          "mdp": 314551.4,
+          "pib": 1.86,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2014": {
+          "mdp": 345973.7,
+          "pib": 1.91,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2015": {
+          "mdp": 408287.2,
+          "pib": 2.12,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2016": {
+          "mdp": 473019.7,
+          "pib": 2.28,
+          "est": "derivado",
+          "f": [
+            "PRES_5IG_FP",
+            "INEGI_PIBN"
+          ]
+        },
+        "2017": {
+          "mdp": null,
+          "pib": 2.4,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2018": {
+          "mdp": null,
+          "pib": 2.5,
+          "est": "oficial",
+          "f": [
+            "CGPE2024"
+          ]
+        },
+        "2019": {
+          "mdp": null,
+          "pib": 2.7,
+          "est": "oficial",
+          "f": [
+            "CGPE2026"
+          ]
+        },
+        "2020": {
+          "mdp": null,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2021": {
+          "mdp": null,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2022": {
+          "mdp": null,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2023": {
+          "mdp": null,
+          "pib": 3.3,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2024": {
+          "mdp": null,
+          "pib": 3.4,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        },
+        "2025": {
+          "mdp": null,
+          "pib": 3.7,
+          "est": "oficial",
+          "f": [
+            "CGPE2027"
+          ]
+        }
+      }
+    },
+    "deuda": {
+      "salinas": {
+        "dFin": {
+          "v": 36.9,
+          "f": "BANXICO_IA1994",
+          "nota": "Deuda neta económica amplia de Banxico, no el SHRFSP: para 1994 no existe."
+        },
+        "pend": "Para 1988 no existe el saldo histórico de los requerimientos financieros (SHRFSP), que Hacienda publica desde 2000."
+      },
+      "zedillo": {
+        "dFin": {
+          "v": 30.7,
+          "f": "ASF_IR2012"
+        },
+        "mFin": {
+          "v": 2051001.7,
+          "f": "ASF_IR2012"
+        },
+        "pend": "Al recibir (1994) solo hay la deuda neta de Banxico, un indicador distinto del SHRFSP: no se restan."
+      },
+      "fox": {
+        "dIni": {
+          "v": 30.7,
+          "f": "ASF_IR2012"
+        },
+        "dFin": {
+          "v": 29.1,
+          "f": "ASF_IR2012"
+        },
+        "mIni": {
+          "v": 2051001.7,
+          "f": "ASF_IR2012"
+        },
+        "mFin": {
+          "v": 3135438.9,
+          "f": "ASF_IR2012"
+        }
+      },
+      "calderon": {
+        "dIni": {
+          "v": 29.1,
+          "f": "ASF_IR2012"
+        },
+        "dFin": {
+          "v": 37.2,
+          "f": "ASF_IGE2018",
+          "nota": "Publicada después con el PIB revisado; el informe de 2012 decía 36.8."
+        },
+        "mIni": {
+          "v": 3135438.9,
+          "f": "ASF_IR2012"
+        },
+        "mFin": {
+          "v": 5890846.1,
+          "f": "ASF_IGE2018"
+        }
+      },
+      "epn": {
+        "dIni": {
+          "v": 37.2,
+          "f": "ASF_IGE2018"
+        },
+        "dFin": {
+          "v": 44.9,
+          "f": "ASF_IGE2022"
+        },
+        "mIni": {
+          "v": 5890846.1,
+          "f": "ASF_IGE2018"
+        },
+        "mFin": {
+          "v": 10551718.5,
+          "f": "ASF_IGE2022"
+        }
+      },
+      "amlo": {
+        "dIni": {
+          "v": 44.9,
+          "f": "ASF_IGE2022"
+        },
+        "dFin": {
+          "v": 51.9,
+          "f": "CGPE2027_HIST",
+          "nota": "Con el PIB revisado; Hacienda informó 51.4 en enero de 2025."
+        },
+        "mIni": {
+          "v": 10551718.5,
+          "f": "ASF_IGE2022"
+        },
+        "mFin": {
+          "v": 17426000,
+          "f": "SHCP_C4_2025"
+        }
+      },
+      "sheinbaum": {
+        "dIni": {
+          "v": 51.9,
+          "f": "CGPE2027_HIST"
+        },
+        "dFin": {
+          "v": 52.6,
+          "f": "CGPE2027_HIST",
+          "nota": "Cierre de 2025, su primer año completo; no es el cierre del sexenio."
+        }
+      }
+    },
+    "faltantes": {
+      "pib": {
+        "pid": "radar-salinas-pib",
+        "motivo": "El PIB nominal del INEGI con año base 2018 empieza en 1993, y el Anexo da los montos desde 1995. Para los seis años de Salinas no hay todavía una serie con el mismo PIB que la de los demás sexenios."
+      },
+      "mdp": {
+        "pid": "radar-pesos-2017",
+        "motivo": "De 2017 en adelante, Hacienda publica estas cifras en % del PIB en los Criterios Generales; los montos en pesos están en la Cuenta Pública de cada año, que la plataforma aún no coteja."
+      }
+    },
+    "advertencias": [
+      "De 1995 a 2016 el porcentaje del PIB es derivado: el monto de la Cuenta Pública (Anexo Estadístico del 5.º Informe) entre el PIB nominal del INEGI, base 2018. De 2017 en adelante es el que publica Hacienda en los Criterios Generales, también con el PIB base 2018. La Cuenta Pública reporta el «gasto neto total» y los Criterios el «gasto neto pagado»: pueden diferir en décimas.",
+      "Para cada año se usa la publicación más reciente: 2017 y 2018 de los Criterios 2024, 2019 de los Criterios 2026 y de 2020 a 2025 de los Criterios 2027. Las revisiones del PIB mueven las cifras unas décimas.",
+      "El Anexo advierte cambios de registro: en 2008 se excluyen los efectos de la nueva Ley del ISSSTE; en 2009, los del reconocimiento de los pasivos de los Pidiregas de Pemex; en 2009 y 2010 la inversión física excluye las aportaciones a fideicomisos y mandatos, y desde 2011 se usa otro clasificador por objeto del gasto. Compara con cautela los años de cada lado.",
+      "Con el PIB base 2018 del INEGI, los porcentajes de los años noventa salen más bajos que los que Hacienda publicó en su momento con el PIB de entonces: el PIB revisado es más grande. Se usa una sola base para que los sexenios se comparen entre sí, no con las cifras de su época.",
+      "El costo financiero incluye los programas de apoyo a ahorradores y deudores de la banca (el rescate bancario), como lo agrupa Hacienda."
+    ]
   }
 };
 

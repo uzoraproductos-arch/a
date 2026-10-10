@@ -671,6 +671,47 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Radar hacendario: cada administración, con sus números (10-10-2026, sello 20261010q).**
+El autor pidió que el radar dejara de ser cifras sueltas de 2026 y mostrara,
+administración por administración, los ingresos, la inversión, el costo, la
+deuda y lo pendiente ante la ASF, con simuladores. Ahora es su propia página,
+`radar-hacendario.html` (pestaña de Datos con ➔; `#radar` y las anclas
+viejas `#rc-*` redirigen).
+- **Cómo se genera.** `radar()` en `apartados.py`, con `radar.css` y
+  `radar.js`. Python promedia y suma; cada cifra llega al JSON `#rdDatos`
+  con su chip, su operación y su fuente. Se borraron
+  `herramientas/plantillas/radar.html` y `assets/auditor/js/radar-datos.js`.
+- **Qué hay:**
+  - **El tablero:** siete administraciones (Salinas a Sheinbaum, esta
+    marcada «en curso: solo 2025»), cinco tarjetas (💰 ingresos, 🏗️
+    inversión, 🏛️ costo del gobierno e intereses, 📉 deuda, ⚖️ ASF) y, al
+    tocar una, la comparativa en barras que crecen desde cero, con el
+    detalle «¿De dónde sale?» de cada cifra y las megaobras del sexenio.
+  - **⏱️ El reloj de cada administración:** deuda nueva, intereses,
+    inversión, ingresos o gasto al ritmo promedio de su sexenio (suma ÷
+    segundos de sus seis años).
+  - **⚔️ Duelo:** dos administraciones cara a cara, sin ganador.
+  - **📌 Hoy:** las cifras 2026 del radar anterior, con su chip, y las
+    equivalencias durante la visita.
+- **Los datos nuevos** viven en `AUDIT_DB.finanzas_sexenales`:
+  - 1995-2016: montos de la Cuenta Pública según el Anexo Estadístico del
+    5.º Informe de Gobierno (pp. 447, 453 y 463); su % del PIB es
+    **derivado** con el PIB nominal del INEGI base 2018 (PIBT_3).
+  - 2017-2025: el % del PIB **oficial** de los Criterios Generales 2024
+    (2017-2018), 2026 (2019) y 2027 (2020-2025), todos ya en base 2018.
+    Los Criterios anteriores usaban base 2013 y no se mezclan.
+  - Deuda al recibir y al entregar: la misma serie de la trivia y de la
+    línea de tiempo de Números. **Si cambia allá, cambia aquí.**
+  - ASF: `evaluacion_sexenal` y, para 2025, la primera entrega de la CP 2025.
+- **Pendientes nuevos en el Registro:** `radar-salinas-pib` (el PIB base
+  2018 empieza en 1993: Salinas sin % del PIB) y `radar-pesos-2017` (los
+  montos en pesos de 2017 a 2025 están en la Cuenta Pública, que no se
+  pudo abrir). Por eso el reloj y las sumas en pesos solo corren para
+  Zedillo, Fox y Calderón (y la deuda, para todos los sexenios cerrados).
+- **Ojo al leer:** con el PIB base 2018 los porcentajes de los noventa
+  salen más bajos que los que Hacienda publicó entonces; está dicho en
+  «Cómo leer».
+
 **Garantías cívicas tiene su propia página (10-10-2026, sello 20261010p).**
 El autor leyó la pestaña «Garantías cívicas» de Participa y perdió su
 objetivo: juntaba cinco bloques largos y tres repetían lo que ya vive en
