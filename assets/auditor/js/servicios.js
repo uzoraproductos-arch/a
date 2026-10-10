@@ -79,7 +79,7 @@
       'Uso: ' + texto('svUso'),
       '¿Es parte del caso?: ' + parte(),
       '',
-      'Leyó la política de independencia (versión 1, 10-10-2026) y entiende que el servicio es',
+      'Leyó la política de independencia (versión 2, 10-10-2026) y entiende que el servicio es',
       'investigación documental y análisis de indicios, no un dictamen pericial ni asesoría legal.'
     ];
     return renglones.join('\n');
