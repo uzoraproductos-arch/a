@@ -27485,7 +27485,7 @@
       };
     },
     conciliarPresupuestoContable: function() {
-      return DB.cuentaFederal2024 ? DB.cuentaFederal2024.conciliacion_presupuestaria_contable : null;
+      return DB.cuentaFederal2024 ? DB.cuentaFederal2024.conciliacion : null;
     },
     calcularEquivalenciaTemporal: function(montoMdp, diasPeriodo, segundosVisita) {
       if (!diasPeriodo || diasPeriodo <= 0) return 0;
@@ -27556,90 +27556,39 @@
       return;
     }
     const v = vistaCuentaFederalActual;
-    let html = '';
-
-    if (v === 'presupuesto') {
-      const p = cf.presupuesto;
-      html = '<div class="cf-cards-grid">' +
-        '<div class="cf-card"><span class="cf-card-header">Presupuesto Aprobado 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(p.aprobado_mdp * 1e6) + '</span><span class="cf-card-sub">Licitado y decretado por la Cámara de Diputados en el PEF 2024.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Presupuesto Modificado <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(p.modificado_mdp * 1e6) + '</span><span class="cf-card-sub">Adecuaciones netas (+0.98% respecto al aprobado).</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Presupuesto Devengado <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">' + pdMdp(p.devengado_mdp * 1e6) + '</span><span class="cf-card-sub">Obligaciones de pago formalmente reconocidas (99.7% de avance).</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Presupuesto Pagado <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val cian">' + pdMdp(p.pagado_mdp * 1e6) + '</span><span class="cf-card-sub">Efectivamente liquidado vía Tesorería de la Federación.</span></div>' +
-      '</div>' +
-      '<h4 style="margin:16px 0 8px; font-size:14px; color:var(--gold-bright);">Desglose por Capítulos de Gasto (Clasificación por Objeto del Gasto LGCG)</h4>' +
-      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Capítulo</th><th>Concepto del Gasto</th><th>Aprobado (mdp)</th><th>Devengado (mdp)</th><th>% del Total</th><th>Ejecución</th></tr></thead><tbody>' +
-      p.desglose_capitulos.map(c => {
-        const av = c.aprobado > 0 ? (c.devengado / c.aprobado * 100).toFixed(1) : '100.0';
-        return '<tr><td><b>' + c.cap + '</b></td><td>' + c.nombre + '</td><td class="num-tabular">' + formatMdpFijo(c.aprobado) + '</td><td class="num-tabular">' + formatMdpFijo(c.devengado) + '</td><td class="num-tabular">' + c.pct.toFixed(1) + '%</td><td class="num-tabular">' + av + '%</td></tr>';
-      }).join('') +
-      '<tr class="cf-row-destacada"><td><b>TOTAL</b></td><td><b>Presupuesto de Egresos Gobierno Federal 2024</b></td><td class="num-tabular"><b>' + formatMdpFijo(p.aprobado_mdp) + '</b></td><td class="num-tabular"><b>' + formatMdpFijo(p.devengado_mdp) + '</b></td><td class="num-tabular"><b>100.0%</b></td><td class="num-tabular"><b>99.7%</b></td></tr>' +
-      '</tbody></table></div>' +
-      '<p class="pd-nota">Fuente: ' + cf.fuente.doc + '. Alcance: ' + cf.alcance + '. ' + chipEstado('oficial') + '</p>';
-    } else if (v === 'actividades') {
-      const act = cf.estado_actividades;
-      html = '<div class="cf-cards-grid">' +
-        '<div class="cf-card"><span class="cf-card-header">Ingresos de Gestión Totales <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val positivo">' + pdMdp(act.ingresos_totales_contables_mdp * 1e6) + '</span><span class="cf-card-sub">Impuestos ($4.51B), derechos, productos y aprovechamientos devengados.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Gastos de Funcionamiento <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(act.gastos_funcionamiento.total_mdp * 1e6) + '</span><span class="cf-card-sub">Nómina, medicinas, suministros y servicios generales operativos.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Transferencias y Subsidios <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">' + pdMdp(act.transferencias_subsidios_y_ayudas * 1e6) + '</span><span class="cf-card-sub">Programas sociales, ayudas ciudadanas y subsidios de operación.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Resultado del Ejercicio (Desahorro) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">' + pdMdp(act.resultado_ejercicio_desahorro_neto_mdp * 1e6) + '</span><span class="cf-card-sub">Déficit contable devengado antes de transferencias patrimoniales de capital.</span></div>' +
-      '</div>' +
-      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Rubro Contable (CONAC)</th><th>Clasificación</th><th>Importe (mdp)</th><th>% Ingresos/Gastos</th><th>Estado</th></tr></thead><tbody>' +
-      '<tr><td><b>Ingresos de Gestión (Tributarios y No Tributarios)</b></td><td>Ingresos y Otros Beneficios</td><td class="num-tabular positivo">$' + formatNumber(act.ingresos_gestion.total_mdp) + '</td><td class="num-tabular">97.2%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Impuestos (ISR, IVA, IEPS, Comercio Exterior)</td><td>Tributarios</td><td class="num-tabular">$' + formatNumber(act.ingresos_gestion.impuestos) + '</td><td class="num-tabular">86.5%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Derechos (Hidrocarburos, minería, uso de bienes)</td><td>No Tributarios</td><td class="num-tabular">$' + formatNumber(act.ingresos_gestion.derechos) + '</td><td class="num-tabular">5.5%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Productos y Aprovechamientos</td><td>No Tributarios</td><td class="num-tabular">$' + formatNumber(act.ingresos_gestion.productos + act.ingresos_gestion.aprovechamientos) + '</td><td class="num-tabular">5.2%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Otros Ingresos y Beneficios Varios</td><td>Extraordinarios</td><td class="num-tabular">$' + formatNumber(act.otros_ingresos_y_beneficios) + '</td><td class="num-tabular">2.8%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr class="cf-row-destacada"><td><b>TOTAL INGRESOS Y OTROS BENEFICIOS CONTABLES</b></td><td>CONAC Cuenta 4000</td><td class="num-tabular positivo"><b>$' + formatNumber(act.ingresos_totales_contables_mdp) + '</b></td><td class="num-tabular"><b>100.0%</b></td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td colspan="5" style="background:rgba(255,255,255,0.02); height:6px;"></td></tr>' +
-      '<tr><td><b>Gastos de Funcionamiento Operativo</b></td><td>Servicios Personales, Materiales, Generales</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.total_mdp) + '</td><td class="num-tabular">31.6%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Servicios Personales (Capítulo 1000)</td><td>Nómina y Prestaciones</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.servicios_personales) + '</td><td class="num-tabular">18.3%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Materiales y Suministros (Capítulo 2000)</td><td>Insumos y Medicinas</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.materiales_suministros) + '</td><td class="num-tabular">5.0%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td>· Servicios Generales (Capítulo 3000)</td><td>Mantenimiento y Contratos</td><td class="num-tabular">$' + formatNumber(act.gastos_funcionamiento.servicios_generales) + '</td><td class="num-tabular">8.3%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td><b>Transferencias, Subsidios y Ayudas Sociales</b></td><td>Programas y Apoyos</td><td class="num-tabular">$' + formatNumber(act.transferencias_subsidios_y_ayudas) + '</td><td class="num-tabular">39.0%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td><b>Participaciones y Aportaciones a Entidades</b></td><td>Ramos 28 y 33 Federalizados</td><td class="num-tabular">$' + formatNumber(act.participaciones_y_aportaciones_a_entidades) + '</td><td class="num-tabular">12.3%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td><b>Intereses, Comisiones y Gastos de la Deuda</b></td><td>Costo Financiero Soberano</td><td class="num-tabular negativo">$' + formatNumber(act.intereses_y_gastos_deuda) + '</td><td class="num-tabular">13.7%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr><td><b>Depreciación, Deterioro, Provisiones e Inv. no Cap.</b></td><td>Ajustes Contables Patrimoniales</td><td class="num-tabular">$' + formatNumber(act.otros_gastos_depreciacion_provisiones + act.inversion_publica_no_capitalizable) + '</td><td class="num-tabular">3.4%</td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr class="cf-row-destacada"><td><b>TOTAL GASTOS Y OTRAS PÉRDIDAS CONTABLES</b></td><td>CONAC Cuenta 5000</td><td class="num-tabular"><b>$' + formatNumber(act.gastos_totales_contables_mdp) + '</b></td><td class="num-tabular"><b>100.0%</b></td><td>' + chipEstado('oficial') + '</td></tr>' +
-      '<tr style="background:rgba(231,76,60,0.1); font-weight:700;"><td colspan="2"><b>RESULTADO DEL EJERCICIO (DESAHORRO NETO)</b></td><td class="num-tabular negativo"><b>-$' + formatNumber(Math.abs(act.resultado_ejercicio_desahorro_neto_mdp)) + '</b></td><td class="num-tabular">—</td><td>' + chipEstado('derivado') + '</td></tr>' +
-      '</tbody></table></div>' +
-      '<p class="pd-nota"><b>Nota de lectura ciudadana:</b> ' + act.explicacion_resultado + ' ' + chipEstado('oficial') + '</p>';
-    } else if (v === 'flujos') {
-      const fl = cf.estado_flujos_efectivo;
-      html = '<div class="cf-cards-grid">' +
-        '<div class="cf-card"><span class="cf-card-header">Flujo Neto de Operación <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val positivo">+$' + formatNumber(fl.flujo_operacion_neto_mdp) + ' MDP</span><span class="cf-card-sub">Entradas operativas menos pagos a proveedores y nómina.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Flujo Neto de Inversión <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(fl.flujo_inversion_neto_mdp)) + ' MDP</span><span class="cf-card-sub">Salidas de efectivo para adquisición y construcción de infraestructura.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Flujo Neto de Financiamiento <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(fl.flujo_financiamiento_neto_mdp)) + ' MDP</span><span class="cf-card-sub">Amortización de deuda y créditos menos colocaciones.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Disponibilidad Final en Tesorería <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(fl.saldo_efectivo_final_mdp) + ' MDP</span><span class="cf-card-sub">Saldo disponible al 31 de diciembre de 2024.</span></div>' +
-      '</div>' +
-      '<div class="cf-callout" style="margin-top:14px;"><strong>Diferencia clave con la empresa privada:</strong> El flujo de efectivo muestra la liquidez inmediata del Estado. En 2024, el Gobierno Federal generó un flujo positivo de operación de $1.42 billones, pero destinó $890,650 mdp a inversión en infraestructura física y liquidó vencimientos netos por $485,300 mdp, cerrando con una caja disponible de $274,960 mdp.</div>';
-    } else if (v === 'situacion') {
-      const b = cf.estado_situacion_financiera;
-      html = '<div class="cf-cards-grid">' +
-        '<div class="cf-card"><span class="cf-card-header">Activo Circulante (Tesorería y Cuentas) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">$' + formatNumber(b.activo_circulante_mdp) + ' MDP</span><span class="cf-card-sub">Disponibilidad en bancos y derechos de cobro a corto plazo.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Activo No Circulante (Infraestructura) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(b.activo_no_circulante_infraestructura_mdp) + ' MDP</span><span class="cf-card-sub">Carreteras, presas, hospitales, escuelas y obras en proceso.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Pasivo Total (Deuda Soberana) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">$' + formatNumber(b.pasivo_total_mdp) + ' MDP</span><span class="cf-card-sub">Deuda pública interna y externa acumulada más cuentas por pagar.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Hacienda Pública / Patrimonio Neto <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(b.hacienda_patrimonio_neto_mdp)) + ' MDP</span><span class="cf-card-sub">Patrimonio generado neto (Activo Total menos Pasivo Total).</span></div>' +
-      '</div>' +
-      '<p class="pd-nota">El patrimonio contable negativo refleja que el saldo de la deuda acumulada por décadas supera el valor en libros de la infraestructura capitalizada. ' + chipEstado('oficial') + '</p>';
-    } else if (v === 'social') {
+    /* Correccion del 10-10-2026: las cifras de este apartado entraron sin
+       cotejo y no coincidian con la Cuenta Publica. Cada cifra trae ahora
+       su estado; las pendientes dicen por que y no muestran monto. */
+    let html = '<div class="cf-callout" style="margin-bottom:12px;"><strong>Corrección del 10-10-2026.</strong> ' + cf.correccion +
+      ' <a href="estado-de-cuenta.html" target="_top">Ve el Estado de Cuenta Cívico: 2024, 2026 y 2027 comparados ➔</a></div>';
+    if (v === 'social') {
       const mir = cf.evaluacion_social_mir;
-      const eco = cf.contexto_ecologico_inegi;
+      const eco = DB.cuentas_ecologicas;
       /* Aprobado y devengado van en columnas separadas: antes se mostraba el
          aprobado de la pension rotulado como devengado. Proposito, cobertura e
          impacto son mediciones distintas y siguen pendientes de cotejo. */
       const celdaMdp = (m, x) => m.estado_montos === 'oficial' ? '$' + formatNumber(Math.round(x * 10) / 10) : '—';
-      html = '<h4 style="margin:12px 0 8px; font-size:14px; color:var(--gold-bright);">Programas sociales: presupuesto y resultados (Cuenta Pública 2024)</h4>' +
+      html += '<h4 style="margin:12px 0 8px; font-size:14px; color:var(--gold-bright);">Programas sociales: presupuesto y resultados (Cuenta Pública 2024)</h4>' +
       '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Programa presupuestario</th><th>Clave</th><th>Ramo</th><th>Aprobado (mdp)</th><th>Devengado (mdp)</th><th>Estado y fuente</th><th>Propósito, cobertura e impacto</th></tr></thead><tbody>' +
       mir.map(m => '<tr><td><b>' + m.programa + '</b></td><td>' + m.clave + '</td><td>' + m.ramo + '</td><td class="num-tabular">' + celdaMdp(m, m.aprobado_mdp) + '</td><td class="num-tabular">' + celdaMdp(m, m.devengado_mdp) + '</td><td>' + chipEstado(m.estado_montos) + ' <small>' + (m.estado_montos === 'oficial' ? m.fuente_montos : m.motivo_montos) + (m.url ? ' <a href="' + m.url + '" target="_blank" rel="noopener">Documento ↗</a>' : '') + '</small></td><td>' + chipEstado('pendiente') + ' <small>' + m.motivo_resultados + '</small></td></tr>').join('') +
       '</tbody></table></div>' +
-      '<p class="pd-nota">Las becas de educación básica (S072) y media superior (S311) se muestran por separado. Aprobado es lo que autorizó la Cámara de Diputados; devengado es lo que el gobierno reconoció como obligación de pago al cierre del año. La diferencia entre ambos no es ahorro ni desvío: es una modificación del presupuesto que la Cuenta Pública debe explicar.</p>' +
-      '<h4 style="margin:20px 0 8px; font-size:14px; color:var(--gold-bright);">Contexto Ecológico Nacional de Sustentabilidad (INEGI CEEM 2024)</h4>' +
-      '<div class="cf-cards-grid">' +
-        '<div class="cf-card"><span class="cf-card-header">Producto Interno Neto Ecológico (PINE) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(eco.pine_mdp) + ' MDP</span><span class="cf-card-sub">Renta económica neta tras descontar depreciación y daño ecológico.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Costos por Agotamiento y Deterioro (CTADA) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">$' + formatNumber(eco.ctada_mdp) + ' MDP</span><span class="cf-card-sub">4.1% del PIB en recursos agotados y emisiones ambientales.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Gasto en Protección Ambiental del Sector Público <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val cian">$' + formatNumber(eco.gpa_sector_publico_mdp) + ' MDP</span><span class="cf-card-sub">0.7% del PIB ejercido por los tres órdenes de gobierno y empresas públicas.</span></div>' +
-      '</div>' +
-      '<p class="pd-nota">' + eco.nota + ' ' + chipEstado('oficial') + '</p>';
+      '<p class="pd-nota">Las becas de educación básica (S072) y media superior (S311) se muestran por separado. Aprobado es lo que autorizó la Cámara de Diputados; devengado es lo que el gobierno reconoció como obligación de pago al cierre del año. La diferencia entre ambos no es ahorro ni desvío: es una modificación del presupuesto que la Cuenta Pública debe explicar.</p>';
+      if (eco) {
+        html += '<h4 style="margin:20px 0 8px; font-size:14px; color:var(--gold-bright);">Cuentas ecológicas 2024 (INEGI)</h4>' +
+        '<div class="cf-cards-grid">' +
+          '<div class="cf-card"><span class="cf-card-header">Costos por agotamiento y degradación ambiental ' + chipEstado(eco.ctada.estado) + '</span><span class="cf-card-val negativo">$' + formatNumber(eco.ctada.total_mdp) + ' mdp</span><span class="cf-card-sub">' + eco.ctada.pct_pib + '% del PIB de 2024.</span></div>' +
+          '<div class="cf-card"><span class="cf-card-header">Gasto en protección ambiental del sector público ' + chipEstado(eco.gasto_proteccion_ambiental.estado) + '</span><span class="cf-card-val cian">$' + formatNumber(eco.gasto_proteccion_ambiental.monto_mdp) + ' mdp</span><span class="cf-card-sub">' + eco.gasto_proteccion_ambiental.pct_pib + '% del PIB de 2024.</span></div>' +
+        '</div>' +
+        '<p class="pd-nota">INEGI, Cuentas Económicas y Ecológicas de México 2024 (1 de diciembre de 2025). Es contexto nacional: no se resta del presupuesto.</p>';
+      }
+    } else {
+      const filas = (cf.cifras || []).filter(c => c.vista === v);
+      html += '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Concepto (' + cf.ente + ', ' + cf.ejercicio + ')</th><th>Importe (mdp)</th><th>Estado y fuente</th></tr></thead><tbody>' +
+        filas.map(c => '<tr><td><b>' + c.concepto + '</b>' + (c.nota ? '<br><small>' + c.nota + '</small>' : '') + '</td>' +
+          '<td class="num-tabular">' + (c.mdp === null ? '—' : '$' + formatNumber(c.mdp)) + '</td>' +
+          '<td>' + chipEstado(c.estado) + ' <small>' + (c.estado === 'pendiente' ? c.motivo : c.fuente) + (c.url ? ' <a href="' + c.url + '" target="_blank" rel="noopener">Documento ↗</a>' : '') + '</small></td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="pd-nota">Alcance: ' + cf.alcance + '</p>';
     }
 
     cont.innerHTML = html;
@@ -27650,22 +27599,19 @@
     const body = document.getElementById('modalConcilBody');
     if (!modal || !body) return;
     const cf = DB.cuentaFederal2024;
-    if (!cf) return;
-    const c = cf.conciliacion_presupuestaria_contable;
+    if (!cf || !cf.conciliacion) return;
+    const c = cf.conciliacion;
+    /* Los importes se retiraron el 10-10-2026 (no tenian cotejo); queda el
+       metodo de la Ley General de Contabilidad Gubernamental. */
     body.innerHTML =
       '<div class="cf-callout" style="margin-bottom:16px;">' +
-        '<strong>¿Por qué el egreso del presupuesto ($9.12 B) no es igual al gasto del estado de resultados ($8.40 B)?</strong><br>' +
-        'La Ley General de Contabilidad Gubernamental exige conciliar el devengo presupuestario con el devengo contable patrimonial. El dinero invertido en obras que pasan a formar parte del activo no es una pérdida ni un gasto del periodo: es una inversión capitalizable. Del mismo modo, pagar el capital de una deuda no es gasto corriente: reduce el pasivo.' +
+        '<strong>¿Por qué el gasto del presupuesto no es igual al gasto del estado de resultados?</strong><br>' +
+        'La Ley General de Contabilidad Gubernamental exige conciliar el devengo presupuestario con el devengo contable. La obra que pasa a formar parte del activo no es gasto del periodo: es inversión. Pagar el capital de una deuda tampoco es gasto corriente: reduce el pasivo.' +
       '</div>' +
-      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Paso de la Conciliación Oficial (LGCG)</th><th>Concepto Contable</th><th>Importe (mdp)</th><th>Efecto Contable</th></tr></thead><tbody>' +
-      '<tr><td><b>1. Egresos Presupuestarios Devengados</b></td><td>Total ejercido de los Capítulos 1000 al 9000</td><td class="num-tabular"><b>$' + formatNumber(c.egresos_presupuestarios_devengados_mdp) + '</b></td><td>Punto de partida presupuestal</td></tr>' +
-      '<tr><td><b>2. Menos: Inversión Pública Capitalizable</b></td><td>Capítulo 5000 (Muebles) y Capítulo 6000 (Obras e Infraestructura)</td><td class="num-tabular negativo">-$' + formatNumber(c.menos_inversion_capitalizable_activo_mdp) + '</td><td>Pasa al Activo del Balance (no es gasto)</td></tr>' +
-      '<tr><td><b>3. Menos: Amortización de Principal de la Deuda</b></td><td>Capítulo 9000 (Abono a capital crediticio)</td><td class="num-tabular negativo">-$' + formatNumber(c.menos_amortizacion_principal_deuda_mdp) + '</td><td>Disminuye el Pasivo (no es gasto operativo)</td></tr>' +
-      '<tr><td><b>4. Más: Depreciación y Amortización del Ejercicio</b></td><td>Desgaste del activo fijo y bienes de uso público</td><td class="num-tabular positivo">+$' + formatNumber(c.mas_depreciacion_amortizacion_ejercicio_mdp) + '</td><td>Gasto contable del periodo (no presupuestario)</td></tr>' +
-      '<tr><td><b>5. Más: Provisiones y Otros Gastos Contables</b></td><td>Pasivos laborales y provisiones de contingencia</td><td class="num-tabular positivo">+$' + formatNumber(c.mas_provisiones_otros_gastos_contables_mdp) + '</td><td>Gasto devengado contable</td></tr>' +
-      '<tr class="cf-row-destacada"><td><b>6. IGUAL: GASTOS CONTABLES DEL ESTADO DE ACTIVIDADES</b></td><td>Gastos y Otras Pérdidas CONAC</td><td class="num-tabular"><b>$' + formatNumber(c.igual_gastos_contables_estado_actividades_mdp) + '</b></td><td>Cifra oficial del Estado de Actividades</td></tr>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Paso de la conciliación</th><th>Importe 2024 (mdp)</th></tr></thead><tbody>' +
+      c.pasos.map((t, i) => '<tr><td><b>' + (i + 1) + '. ' + t + '</b></td><td>— ' + chipEstado(c.estado) + '</td></tr>').join('') +
       '</tbody></table></div>' +
-      '<p class="pd-nota" style="margin-top:14px;">' + c.nota_conciliacion + ' ' + chipEstado('oficial') + '</p>';
+      '<p class="pd-nota" style="margin-top:14px;">' + c.motivo + ' <a href="' + c.url + '" target="_blank" rel="noopener">Documento ↗</a></p>';
     modal.style.display = 'flex';
   }
 
@@ -27680,25 +27626,8 @@
     if (!modal || !body) return;
     const tm = DB.tren_maya_peritaje_2024;
     if (!tm) return;
-    body.innerHTML =
-      '<div class="cf-callout" style="margin-bottom:14px;">' +
-        '<strong>Rigor Metodológico Pericial (ISSAI 100):</strong> Separación técnica entre la <em>infraestructura física acumulada</em> (ejecutada por Fonatur y Sedena) y los <em>estados financieros propios de la empresa operadora</em> Tren Maya, S.A. de C.V. constituida en 2024.' +
-      '</div>' +
-      '<div class="cf-cards-grid">' +
-        '<div class="cf-card"><span class="cf-card-header">Inversión Federal en Infraestructura <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val">$' + formatNumber(tm.infraestructura_acumulada_federal.monto_ejercido_acumulado_mdp) + ' MDP</span><span class="cf-card-sub">Costo acumulado de vías, trenes y estaciones (Fonatur/Sedena 2019-2024).</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Ingresos Propios Operación 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val positivo">$' + formatNumber(tm.estados_financieros_operadora_2024.ingresos_gestion_propios_mdp) + ' MDP</span><span class="cf-card-sub">Cobro de boletos de pasajeros ($242.1 mdp) y locales ($33.7 mdp).</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Gastos de Funcionamiento 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">$' + formatNumber(tm.estados_financieros_operadora_2024.gastos_totales_funcionamiento_mdp) + ' MDP</span><span class="cf-card-sub">Combustibles, nómina de maquinistas y mantenimiento operativo.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">Déficit Operativo Propio 2024 <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val negativo">-$' + formatNumber(Math.abs(tm.estados_financieros_operadora_2024.deficit_operativo_propio_mdp)) + ' MDP</span><span class="cf-card-sub">Cubierto con transferencias fiscales del erario federal ($13,335.4 mdp).</span></div>' +
-      '</div>' +
-      '<h4 style="margin:16px 0 8px; font-size:13.5px; color:var(--gold-bright);">Desglose del Gasto Corriente de la Empresa Operadora (Cuenta Pública 2024 Tomo VII)</h4>' +
-      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Concepto Operativo</th><th>Importe (mdp)</th><th>% del Gasto</th></tr></thead><tbody>' +
-      tm.estados_financieros_operadora_2024.desglose_gastos.map(g => '<tr><td>' + g.rubro + '</td><td class="num-tabular">$' + formatNumber(g.mdp) + '</td><td class="num-tabular">' + (g.mdp / tm.estados_financieros_operadora_2024.gastos_totales_funcionamiento_mdp * 100).toFixed(1) + '%</td></tr>').join('') +
-      '</tbody></table></div>' +
-      '<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px;">' +
-        '<div class="cf-card"><span class="cf-card-header">🚆 Movilidad y Pasajeros 2024</span><span class="cf-card-val dorado">' + formatNumber(tm.servicio_y_movilidad.pasajeros_totales_2024) + '</span><span class="cf-card-sub">312,400 pasajeros locales con tarifa subsidiada y 333,400 turistas. Cobertura de ingresos propios: ' + tm.estados_financieros_operadora_2024.cobertura_ingresos_propios_pct + '%.</span></div>' +
-        '<div class="cf-card"><span class="cf-card-header">🌿 Matriz Ecológica y Mitigación</span><span class="cf-card-val">' + formatNumber(tm.matriz_impacto_ambiental.superficie_derecho_via_desprovista_ha) + ' ha</span><span class="cf-card-sub">Superficie desprovista autorizada por SEMARNAT. 380 pasos de fauna construidos. Costo monetario de daño: <span class="est-chip est-pendiente">pendiente</span> (sin avalúo oficial).</span></div>' +
-      '</div>' +
-      '<div class="cf-callout" style="margin-top:14px;"><strong>Auditorías ASF de la Cuenta Pública 2024:</strong> ' + tm.auditoria_asf_2024.informes + '. Monto observado por solventar: $' + formatNumber(tm.auditoria_asf_2024.monto_observado_pendiente_solucion_mdp) + ' mdp por ' + tm.auditoria_asf_2024.conceptos_observados + ' ' + chipEstado('oficial') + '</div>';
+    body.innerHTML = '<div class="cf-callout"><strong>Ficha retirada el ' + tm.fecha + '.</strong> ' + tm.motivo + ' ' + chipEstado('pendiente') + '</div>' +
+      '<p class="pd-nota" style="margin-top:12px;"><a class="pd-btn" href="' + tm.alternativa + '">Ver lo que la ASF dejó por aclarar en el Tren Maya ➔</a></p>';
     modal.style.display = 'flex';
   }
 

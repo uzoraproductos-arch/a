@@ -1014,7 +1014,7 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .camino { margin: 0 0 26px; padding: 20px 22px; border-radius: 18px; background: #ffffff; border: 1px solid var(--civ-gris-borde); }
 .camino-tit { margin: 0 0 4px; font-size: 21px; color: #0b2a63; }
 .camino-txt { margin: 0 0 16px; color: #44526b; }
-.camino-pasos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: none; }
+.camino-pasos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; counter-reset: none; }
 .camino-paso { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 14px; background: var(--civ-gris); border-top: 5px solid var(--civ-azul); }
 .camino-paso:not(:last-child)::after { content: '➜'; position: absolute; right: -13px; top: 22px; font-size: 18px; color: var(--civ-azul); z-index: 1; }
 .camino-num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--civ-azul); color: #ffffff; font-weight: 900; }
@@ -1046,3 +1046,43 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .indice-metodo .indice-grupo-tit { margin-top: 18px; }
 .indice-estados { list-style: none; padding: 0; }
 .apartado-indice { margin-right: auto; }
+/* ESTADO DE CUENTA CIVICO (entrega 3, 10-10-2026) */
+.ec-lectura { margin: 0 0 16px; padding: 14px 16px; border-radius: 12px; background: #eaf1ff; border-left: 5px solid #0b2a63; line-height: 1.6; color: #1c2a44; }
+.ec-tabla-w { overflow-x: auto; margin: 0 0 14px; border-radius: 12px; border: 1px solid var(--civ-gris-borde); background: #ffffff; }
+.ec-tabla { width: 100%; border-collapse: collapse; font-size: 14.5px; background: #ffffff; }
+.ec-tabla th, .ec-tabla td { padding: 10px 12px; border-bottom: 1px solid var(--civ-gris-borde); text-align: left; vertical-align: top; }
+.ec-tabla thead th { background: #0b2a63; color: #ffffff; font-size: 13.5px; white-space: nowrap; }
+.ec-tabla thead th small { color: #c9d9ee; font-weight: 400; }
+.ec-tabla tbody th { font-weight: 700; color: #0b2a63; min-width: 220px; }
+.ec-tabla tbody th small { display: block; font-weight: 400; color: #44526b; font-size: 12.5px; margin-top: 3px; line-height: 1.4; }
+.ec-num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ec-num small { display: block; color: #44526b; font-size: 12px; }
+.ec-cambio { font-weight: 800; color: #0b2a63; }
+.ec-mini { border: 1px solid var(--civ-gris-borde); border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
+.ec-mini td small { color: #44526b; }
+.ec-fuente { font-size: 13.5px; color: #44526b; line-height: 1.55; margin: 6px 0 12px; }
+.ec-sub { margin: 22px 0 10px; font-size: 17px; color: #0b2a63; }
+.ec-lista { margin: 6px 0 12px; padding-left: 20px; line-height: 1.7; }
+.ec-pendiente { padding: 12px 14px; border-radius: 12px; background: #f4f4f5; border: 1px dashed #a1a1aa; line-height: 1.55; }
+.ec-grafica { margin: 6px 0 14px; padding: 16px 18px; border-radius: 14px; background: #ffffff; border: 1px solid var(--civ-gris-borde); }
+.ec-grafica figcaption { font-weight: 800; color: #0b2a63; margin-bottom: 10px; }
+.ec-grupo { display: grid; grid-template-columns: 150px 1fr; gap: 4px 12px; align-items: center; padding: 6px 0; border-top: 1px solid #eef2f8; }
+.ec-grupo-tit { grid-row: span 2; font-weight: 800; color: #1c2a44; }
+.ec-grupo-tit small { display: block; font-weight: 400; color: #44526b; }
+.ec-barra { position: relative; display: block; height: 24px; border-radius: 6px; background: #f1f5fb; overflow: hidden; }
+.ec-barra::before { content: ''; position: absolute; inset: 0 auto 0 0; width: var(--v); border-radius: 6px; background: var(--c, #1f5fa8); }
+.ec-barra > span { position: relative; padding-left: 8px; line-height: 24px; font-size: 13px; font-weight: 700; color: #0b1b36; }
+.ec-ing { --c: #8fb8ec; }
+.ec-gas { --c: #f0a8a0; }
+.ec-deu { --c: #f3c96b; }
+.ec-grupo:has(.ec-barra:only-of-type) .ec-grupo-tit { grid-row: auto; }
+.ec-grafica-nota { margin: 10px 0 0; font-size: 13.5px; color: #44526b; }
+.ec-renglones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ec-renglon { display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 14px; background: #ffffff; border: 1px solid var(--civ-gris-borde); border-top: 5px solid var(--c, #0b2a63); }
+.ec-renglon b { font-size: 22px; color: #0b2a63; font-variant-numeric: tabular-nums; }
+.ec-renglon > span:last-child { font-size: 13.5px; color: #44526b; line-height: 1.5; }
+.ec-r-tit { font-weight: 800; color: #1c2a44; }
+.ec-r-def { --c: #c0392b; } .ec-r-asf { --c: #1f5fa8; } .ec-r-amb { --c: #2e8b57; } .ec-r-pen { --c: #a1a1aa; }
+.ec-descarga { display: inline-block; padding: 10px 16px; border-radius: 999px; background: #0b2a63; color: #ffffff; font-weight: 800; text-decoration: none; }
+@media (max-width: 900px) { .ec-renglones { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .ec-grupo { grid-template-columns: 1fr; } .ec-grupo-tit { grid-row: auto; } }

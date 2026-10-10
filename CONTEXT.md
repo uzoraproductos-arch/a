@@ -602,6 +602,88 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Propuesta de Astra, entrega 3: Números y Estado de Cuenta (10-10-2026, sello 20261010f).**
+
+**1. Corrección grave a la base.** `cuentaFederal2024` y `tren_maya_peritaje_2024` entraron en el
+commit bd09252 (29-09-2026) sin cotejo («continúa en proceso», decía su
+CONTEXT). Aun así se pintaban con el chip `oficial`, y no coincidían con
+los documentos:
+
+| Concepto 2024 | Lo que decía la base | Lo que dice el documento |
+|---|---|---|
+| Ingresos de la gestión | 5,074,180.2 mdp | 5,341,758.1 mdp (Tomo II, Estado de Actividades) |
+| Intereses de la deuda | 1,154,230 mdp | 933,408.4 mdp (Tomo II, Estado de Actividades) |
+| Producto Interno Neto Ecológico | 29.85 billones | 25.7 billones (ficha del INEGI que cita la propia base) |
+
+Además, su sha256 era el texto `cp2024tomo2oficialshcp`.
+
+Cómo quedaron los dos bloques:
+- **`cuentaFederal2024`:** ahora es una lista `cifras` y cada cifra lleva
+  `estado`, `fuente` o `motivo`, y `url`. Solo tres son `oficial`:
+  - el aprobado PEF 2024 (9,066,045.8 mdp), que leí en el DOF;
+  - los ingresos de la gestión y los intereses de la deuda, tomados del
+    texto indexado del PDF oficial del Tomo II. **Falta abrir ese PDF y
+    confirmarlos.**
+
+  Todo lo demás es `pendiente`: modificado, devengado, pagado, capítulos,
+  flujos y balance.
+- **Conciliación:** muestra solo los pasos del método, sin importes.
+- **`tren_maya_peritaje_2024`:** quedó como `estado: retirado`, con su
+  motivo y un enlace al expediente de la ASF. En `index.html` se quitó la
+  cifra de 515,487 mdp del recuadro del peritaje.
+- **El motor:** `renderCuentaFederal`, `abrirConciliacionPresupuestoContable`
+  y `abrirFichaPericialTrenMaya` se reescribieron para estos datos.
+- **Por qué no se reemplazó con las cifras oficiales:** el portal de la
+  Cuenta Pública no abre desde este entorno. El servidor no envía el
+  certificado intermedio de Let's Encrypt (YR1) y el proxy bloquea
+  letsencrypt.org.
+
+**2. Estado de Cuenta Cívico** (`estado-de-cuenta.html` y
+`estado-de-cuenta-2024-2027.csv`). Lo genera `herramientas/estado_cuenta.py`
+con las cifras escritas en el HTML, así que los buscadores lo indexan.
+
+A pedido del autor, compara **2024 observado, 2026 aprobado, 2026 cierre
+estimado y 2027 propuesto**:
+- **La unidad común es el % del PIB.** Junto a cada porcentaje van los
+  millones de pesos de 2026 y 2027.
+- **Los pesos de 2024 quedan `pendiente`.** El cuadro histórico solo da el
+  porcentaje.
+- **De dónde salen las cifras:** de los Criterios Generales 2027 que están
+  en la raíz del repositorio (`criterios generales proyecto presupuesto.pdf`):
+  - p. 55, «Ingresos y gasto del Sector Público»;
+  - p. 52, RFSP y SHRFSP;
+  - p. 67, cuadro II.6;
+  - p. 33, programas sociales.
+- **Cómo se extraen:** `herramientas/extraer_estado_cuenta.py cgpe.txt`
+  (texto de `pdftotext -layout`) escribe
+  `investigaciones/estado-de-cuenta/cgpe2027-comparativo.json`. Se detiene
+  si un renglón no aparece.
+
+Lo que contiene la página:
+- **Las dos vistas.** «Tu aportación» enlaza a la Calculadora y al Ticket en
+  negativo. «La cuenta pública» va en cuatro dimensiones:
+  - presupuestaria;
+  - financiera, con la contabilidad 2024 corregida;
+  - social, con las becas verificadas y los programas 2027;
+  - ambiental, con las CEEM 2024 y el Ramo 16 de 2026 y 2027.
+- **Renglones que no se suman,** porque miden cosas distintas:
+  - el déficit;
+  - lo que la ASF dejó por aclarar en la Cuenta Pública 2024 (65,169.1 mdp);
+  - el daño ambiental;
+  - el subejercicio (`pendiente`).
+- **La descarga** con periodo, alcance y fecha de revisión.
+
+**3. Números.** El camino del dinero tiene ahora cinco pasos. El quinto, «Se
+hace el balance», lleva al Estado de Cuenta. El índice y las novedades lo
+incluyen.
+
+**Pendientes de la entrega 3:**
+- Cotejar el Tomo II de la Cuenta Pública 2024 para llenar los pesos de 2024
+  y los estados financieros: devengado, flujos, balance y conciliación.
+- Rehacer la ficha del Tren Maya con el Tomo VII y la ASF.
+- El selector de año, territorio y programa del punto 4 de Astra. Va con el
+  motor de Números; no se empezó.
+
 **Propuesta de Astra, entrega 2: portada e índice (10-10-2026, sello 20261010e).**
 El autor pidió seguir con la entrega 2. En la portada solo se agregaron
 enlaces: nada se despliega, cada clic abre su página (§5 bis).
