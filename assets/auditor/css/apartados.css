@@ -904,6 +904,11 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .bib-nav-a[aria-current="page"] { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; }
 .bib-nav-a small { display: block; font-weight: 400; font-size: 12px; color: #5a6782; }
 .bib-nav-a[aria-current="page"] small { color: #d6e9fc; }
+.bib-nav-tit { text-decoration: none; }
+.bib-nav-tit:hover { text-decoration: underline; }
+.bib-nav-estante { grid-column: 1 / -1; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: #5a6782; margin-top: 4px; }
+.bib-sello { margin-top: 10px; font-size: 14px; color: #5a6782; }
+.bib-sello a { font-weight: 700; color: var(--civ-azul); }
 
 /* Pase del auditor */
 .pase-precios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 14px 0; }

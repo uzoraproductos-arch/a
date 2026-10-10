@@ -602,6 +602,26 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Diccionario del Gasto Público en dos estantes (10-10-2026, sello 20261010a).**
+Al autor no le gustó la fusión en una sola «Biblioteca del auditor»: se
+perdieron los nombres «Biblioteca hacendaria» y «Fuentes del auditor», y el
+Diccionario dejó de verse en Aprende. Queda así: el **Diccionario del Gasto
+Público** (`diccionario.html`) es el nombre de la obra completa, con dos
+estantes que salen de `ESTANTES` y `BIBLIOTECA` en `herramientas/apartados.py`:
+
+- 🏛️ **Biblioteca hacendaria**, para entender: Glosario de Términos
+  Hacendarios, Marco Legal Hacendario y Preguntas Frecuentes en Casillas
+  Didácticas.
+- 🧭 **Fuentes del auditor**, para verificar: Compendio de Fuentes Oficiales
+  (el portal de referencias, `fuentes-oficiales.html`) y Pase del Auditor
+  Cívico.
+
+Aprende vuelve a tener las pestañas `#biblioteca` y `#kit`, cada una con la
+nota «Forma parte del Diccionario del Gasto Público». La portada del
+Diccionario muestra los dos estantes y la barra al pie de cada página también.
+Las páginas ligeras no cambiaron. Se agregaron las anclas viejas
+`diccionario.html#referencias` y `#pase`.
+
 **Biblioteca del auditor: cuatro páginas ligeras y contenido cotejado (09-10-2026, sello 20261009za).**
 Pedido del autor: las fichas «Biblioteca hacendaria» y «Fuentes del
 auditor» de Aprende se trababan al abrirse («se queda calculando las
