@@ -2197,8 +2197,7 @@ def pagina(a, sello):
         botones = '\n'.join(
             ('          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-%s" href="%s">'
              '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
-             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span>'
-             '<span class="apartado-pestana-ir" aria-hidden="true">➔</span></a>' % ((s['id'], s['pagina']) + s['pestana']))
+             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>' % ((s['id'], s['pagina']) + s['pestana']))
             if s.get('pagina') else
             ('          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
              '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
