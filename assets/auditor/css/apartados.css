@@ -1103,3 +1103,6 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .pe-aparece { font-size: 13.5px; color: #44526b; }
 .pe-ancla { color: #a1a1aa; text-decoration: none; }
 @media (max-width: 900px) { .pe-resumen { grid-template-columns: 1fr 1fr; } }
+/* Estantes del Diccionario como enlace (10-10-2026) */
+a.bib-nav-estante { text-decoration: none; }
+a.bib-nav-estante:hover, a.bib-nav-estante[aria-current] { color: #1f3a6e; text-decoration: underline; }

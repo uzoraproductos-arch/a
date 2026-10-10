@@ -12,10 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010g">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010g">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010g">
-  <link rel="stylesheet" href="assets/auditor/css/columnas.css?v=20261010g">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010h">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010h">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010h">
+  <link rel="stylesheet" href="assets/auditor/css/columnas.css?v=20261010h">
+  <script>(function () { var m = {"biblioteca": "biblioteca-hacendaria.html", "kit": "fuentes-del-auditor.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -79,8 +80,7 @@
     <div class="apartado-ancho apartado-cuerpo">
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
           <a class="apartado-pestana" role="tab" id="pestana-trivia" href="#trivia" aria-controls="trivia" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🎯</span><span class="apartado-pestana-tx"><b>Trivia</b><small>El examen de los presidentes</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-biblioteca" href="#biblioteca" aria-controls="biblioteca" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏛️</span><span class="apartado-pestana-tx"><b>Biblioteca hacendaria</b><small>Glosario, leyes y preguntas</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-kit" href="#kit" aria-controls="kit" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧭</span><span class="apartado-pestana-tx"><b>Fuentes del auditor</b><small>Documentos oficiales y pase</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-diccionario" href="#diccionario" aria-controls="diccionario" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📚</span><span class="apartado-pestana-tx"><b>Diccionario del Gasto Público</b><small>Biblioteca hacendaria y fuentes del auditor</small></span></a>
           <a class="apartado-pestana" role="tab" id="pestana-noticias" href="#noticias" aria-controls="noticias" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📰</span><span class="apartado-pestana-tx"><b>Noticias relevantes</b><small>Columnas de personajes y hechos</small></span></a>
       </nav>
       <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
@@ -97,49 +97,22 @@
         </div>
       </section>
 
-      <section class="apartado-seccion apartado-panel" id="biblioteca" aria-labelledby="biblioteca-tit" role="tabpanel">
+      <section class="apartado-seccion apartado-panel" id="diccionario" aria-labelledby="diccionario-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="biblioteca-tit"><span class="sr-only"></span>🏛️ Biblioteca hacendaria</h2>
-          <p class="apartado-seccion-texto">Para entender: las palabras, las leyes y las preguntas del dinero público. Cada apartado abre su propia página, con buscador y con el documento oficial que lo sostiene.<p class="bib-sello">📚 Forma parte del <a href="diccionario.html">Diccionario del Gasto Público</a>, la obra de consulta de la plataforma.</p></p>
+          <h2 class="apartado-seccion-titulo" id="diccionario-tit"><span class="sr-only"></span>📚 Diccionario del Gasto Público</h2>
+          <p class="apartado-seccion-texto">La obra de consulta de la plataforma, en dos estantes: uno para entender y otro para verificar. Cada estante abre su propia página y, dentro, cada apartado tiene la suya. <a href="diccionario.html">Ver el Diccionario completo ➔</a></p>
         </div>
         <div class="apartado-rejilla">
-        <a class="apartado-tarjeta" href="glosario.html">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📖</span>
-          <span class="apartado-tarjeta-nombre">Glosario de Términos Hacendarios</span>
-          <span class="apartado-tarjeta-desc">Los términos del presupuesto, la deuda y la fiscalización, en lenguaje llano, con su fundamento y con buscador.</span>
+        <a class="apartado-tarjeta" href="biblioteca-hacendaria.html">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">🏛️</span>
+          <span class="apartado-tarjeta-nombre">Biblioteca hacendaria</span>
+          <span class="apartado-tarjeta-desc"><b>Para entender.</b> Las palabras, las leyes y las preguntas del dinero público, explicadas en lenguaje llano. Contiene: Glosario de Términos Hacendarios, Marco Legal Hacendario, Preguntas Frecuentes en Casillas Didácticas.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
-        <a class="apartado-tarjeta" href="marco-legal.html">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">⚖️</span>
-          <span class="apartado-tarjeta-nombre">Marco Legal Hacendario</span>
-          <span class="apartado-tarjeta-desc">El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta" href="preguntas-frecuentes.html">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">💡</span>
-          <span class="apartado-tarjeta-nombre">Preguntas Frecuentes en Casillas Didácticas</span>
-          <span class="apartado-tarjeta-desc">Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="kit" aria-labelledby="kit-tit" role="tabpanel">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="kit-tit"><span class="sr-only"></span>🧭 Fuentes del auditor ciudadano</h2>
-          <p class="apartado-seccion-texto">Para verificar: los documentos oficiales que sostienen cada cifra de la plataforma, con su liga directa, para que revises por tu cuenta.<p class="bib-sello">📚 Forma parte del <a href="diccionario.html">Diccionario del Gasto Público</a>, la obra de consulta de la plataforma.</p></p>
-        </div>
-        <div class="apartado-rejilla">
-        <a class="apartado-tarjeta" href="fuentes-oficiales.html">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📑</span>
-          <span class="apartado-tarjeta-nombre">Compendio de Fuentes Oficiales</span>
-          <span class="apartado-tarjeta-desc">El portal de referencias: todas las fichas que sostienen las cifras de la plataforma, numeradas y con su liga directa al DOF, Hacienda, la Auditoría Superior, Banxico, el INEGI y Transparencia Presupuestaria.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        <a class="apartado-tarjeta" href="pase-del-auditor.html">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🍺</span>
-          <span class="apartado-tarjeta-nombre">Pase del Auditor Cívico</span>
-          <span class="apartado-tarjeta-desc">Herramientas independientes de fiscalización ciudadana: $79 al mes, menos que dos caguamas.</span>
+        <a class="apartado-tarjeta" href="fuentes-del-auditor.html">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">🧭</span>
+          <span class="apartado-tarjeta-nombre">Fuentes del auditor</span>
+          <span class="apartado-tarjeta-desc"><b>Para verificar.</b> Los documentos oficiales que sostienen cada cifra y el pase para sostener la plataforma. Contiene: Compendio de Fuentes Oficiales, Pase del Auditor Cívico.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
         </div>
@@ -163,12 +136,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010g</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010h</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010g"></script>
-  <script src="assets/auditor/js/trivia-presidentes.js?v=20261010g"></script>
-  <script src="assets/auditor/js/columnas.js?v=20261010g"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010h"></script>
+  <script src="assets/auditor/js/trivia-presidentes.js?v=20261010h"></script>
+  <script src="assets/auditor/js/columnas.js?v=20261010h"></script>
 </body>
 </html>
