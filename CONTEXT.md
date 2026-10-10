@@ -671,6 +671,14 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Hoy y los estados de cuenta» se vuelve índice de dos páginas (10-10-2026, sello 20261010y).**
+A pedido del autor, `radar-hoy.html` ya no muestra el presupuesto en curso: es un
+índice con dos tarjetas, «📌 Hoy: el presupuesto en curso»
+(`radar-presupuesto-en-curso.html`, nueva) y «🧾 Expide un estado de cuenta»
+(`radar-estado-de-cuenta.html`). Las anclas viejas `#hoy` y `#expide` de
+`radar-hoy.html`, el `#hoy` de `radar-estado-de-cuenta.html` y las `rc-*` de
+Números llevan a la página de cada una.
+
 **«Expide» abre su propia página y el documento se genera con un botón (10-10-2026, sello 20261010x).**
 A pedido del autor:
 - **Página propia.** La tarjeta «🧾 Hoy y los estados de cuenta» del Radar lleva

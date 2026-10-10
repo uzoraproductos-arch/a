@@ -387,9 +387,9 @@ APARTADOS = [
                     'hagas tus propias cuentas.'),
         'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
         # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
-        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-hoy.html#hoy',
-                          'rc-deuda': 'radar-hoy.html#hoy', 'rc-asf': 'radar-hoy.html#hoy',
-                          'rc-huachicol': 'radar-hoy.html#hoy'},
+        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-presupuesto-en-curso.html',
+                          'rc-deuda': 'radar-presupuesto-en-curso.html', 'rc-asf': 'radar-presupuesto-en-curso.html',
+                          'rc-huachicol': 'radar-presupuesto-en-curso.html'},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -1686,6 +1686,8 @@ RADAR_LEY17 = {'txt': ('La Ley Federal de Presupuesto y Responsabilidad Hacendar
                'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf', 'corto': 'LFPRH, art. 17 (Cámara de Diputados)'}
 
 
+HOY_TEXTO = ('Las cifras grandes de 2026: el presupuesto federal, el gasto que va a los estados, los impuestos que se esperan '
+             'y lo que cuesta la deuda. El punto de partida para leer cualquier estado de cuenta.')
 EXPIDE_TEXTO = ('Elige de quién: una administración presidencial, la diputación federal, la senaduría, la diputación de cualquiera '
                 'de los 32 congresos locales, o la Suprema Corte con su ponencia y sus asesores. Genera su estado de cuenta con su '
                 'semáforo y descárgalo en PDF con folio y sello de verificación.')
@@ -2426,11 +2428,10 @@ def radar():
                 'y las ministras y ministros de la Suprema Corte con su ponencia y sus asesores: lo que cobran, lo que gasta su institución '
                 'y lo que dijo la Auditoría Superior. Descárgalo en PDF con su folio y su sello de verificación: cualquiera puede '
                 'comprobar que no se alteró.', [
-                    {'id': 'hoy', 'titulo': '📌 Hoy: el presupuesto en curso', 'tarjetas': [], 'bloque': RADAR_HOY,
-                     'texto': 'Las cifras grandes de 2026: el punto de partida para leer cualquier estado de cuenta.'},
-                    {'id': 'expide', 'titulo': '🧾 Expide un estado de cuenta: administraciones, Congreso y la Corte',
-                     'texto': 'La herramienta abre en su propia página.',
-                     'tarjetas': [('🧾', 'Expide un estado de cuenta', EXPIDE_TEXTO, 'radar-estado-de-cuenta.html', '', '')]}]),
+                    {'id': 'partes', 'titulo': 'Elige por dónde empezar', 'texto': 'Cada tarjeta abre su propia página.',
+                     'tarjetas': [('📌', 'Hoy: el presupuesto en curso', HOY_TEXTO, 'radar-presupuesto-en-curso.html', '', ''),
+                                  ('🧾', 'Expide un estado de cuenta: administraciones, Congreso y la Corte', EXPIDE_TEXTO,
+                                   'radar-estado-de-cuenta.html', '', '')]}]),
         'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
     }
     paginas = [{
@@ -2451,6 +2452,10 @@ def radar():
     for (pid, archivo, ico, tit, sub) in RADAR_PARTES:
         entrada, bloque = partes[pid]
         paginas.append({
+            # «Hoy y los estados de cuenta» es un indice de dos tarjetas
+            # (decision del autor, 10-10-2026): sus anclas viejas van a la pagina de cada una.
+            **({'hash_a_pagina': {'hoy': 'radar-presupuesto-en-curso.html', 'expide': 'radar-estado-de-cuenta.html'}}
+               if pid == 'hoy' else {}),
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'descarga-los-datos.html',
             'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
             'icono': ico, 'titulo': tit, 'lema': 'Radar hacendario', 'entrada': entrada,
@@ -2458,6 +2463,16 @@ def radar():
             'secciones': bloque if isinstance(bloque, list) else
                          [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         })
+    # «Hoy: el presupuesto en curso», en su propia pagina (pedido del autor, 10-10-2026).
+    paginas.append({
+        'archivo': 'radar-presupuesto-en-curso.html', 'menu': 'Hoy: el presupuesto en curso', 'menu_archivo': 'descarga-los-datos.html',
+        'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
+        'padre3': ('radar-hoy.html', 'Hoy y los estados de cuenta'),
+        'icono': '📌', 'titulo': 'Hoy: el presupuesto en curso', 'lema': 'Radar hacendario', 'entrada': HOY_TEXTO,
+        'estilos': ['radar.css'], 'scripts': ['radar.js'], 'pie_extra': radar_nav('radar-hoy.html'),
+        'secciones': [{'id': 'hoy', 'titulo': 'Hoy: el presupuesto en curso', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                       'bloque': RADAR_HOY}],
+    })
     # «Expide un estado de cuenta», en su propia pagina (pedido del autor, 10-10-2026).
     paginas.append({
         'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Expide un estado de cuenta', 'menu_archivo': 'descarga-los-datos.html',
@@ -2822,6 +2837,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'En el Radar, «Hoy y los estados de cuenta» se abre en dos páginas: «Hoy: el presupuesto en curso» y «Expide un estado de cuenta». Cada tarjeta lleva a la suya.'),
     ('10-10-2026', 'Expide un estado de cuenta abre en su propia página: eliges de quién, presionas «Generar estado de cuenta» y luego lo descargas en PDF. El encabezado del documento es más amplio y el logo, más nítido.'),
     ('10-10-2026', 'El estado de cuenta suma a las senadoras y los senadores: su dieta, su remuneración anual bruta y neta, sus asesores, el presupuesto del Senado y su auditoría de la ASF, con el mismo folio y sello.'),
     ('10-10-2026', 'El estado de cuenta ya no es solo de las administraciones: expide también el de la diputación federal, el de cada uno de los 32 congresos locales y el de la Suprema Corte con su ponencia y sus asesores. Lo que cobran, lo que gasta su institución y lo que dijo la Auditoría Superior, con dos señales con regla de ley (el tope del art. 127 y la obligación de publicar lo que pagan), en PDF con folio y sello.'),

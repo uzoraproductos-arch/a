@@ -513,7 +513,7 @@
 
   /* ================= Arranque ================= */
   /* El «Hoy» vivió en esta página hasta el 10-10-2026: su ancla lleva a la suya. */
-  if (location.hash === '#hoy') { location.replace('radar-hoy.html#hoy'); return; }
+  if (location.hash === '#hoy') { location.replace('radar-presupuesto-en-curso.html'); return; }
   var q = new URLSearchParams(location.search);
   var ultimo = D.admins[D.admins.length - 1].id;
   /* Un enlace compartido (?doc= o ?adm=) es un documento ya expedido: se genera al abrirlo. */

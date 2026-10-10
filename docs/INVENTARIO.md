@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 61 |
+| Páginas revisadas | 62 |
 | Páginas que solo redirigen | 1 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 10 destinos |
@@ -70,8 +70,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
+| `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `servicios.html` | Servicios · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
