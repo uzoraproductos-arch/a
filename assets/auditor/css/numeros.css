@@ -1,0 +1,94 @@
+/* Números (sigue-el-dinero.html, 10-10-2026): «El peso de 2026», los tres
+   presupuestos del paso 3, el cierre y las notas al pie. */
+.np { background: #fff; border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 18px; padding: 20px 22px; margin: 0 0 22px; }
+.np-cab { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 20px; margin-bottom: 14px; }
+.np-tit { flex: 1 1 100%; margin: 0; font-size: 22px; color: #0b2a63; }
+.np-txt { flex: 1 1 420px; margin: 0; font-size: 15px; line-height: 1.55; color: #33415c; }
+.np-modo { display: inline-flex; border: 1px solid #0b2a63; border-radius: 999px; overflow: hidden; }
+.np-modo button { font: 600 13.5px/1 Inter, system-ui, sans-serif; border: 0; background: #fff; color: #0b2a63; padding: 10px 16px; cursor: pointer; min-height: 40px; }
+.np-modo button[aria-checked="true"] { background: #0b2a63; color: #fff; }
+.np-fila { display: grid; grid-template-columns: 76px 1fr; gap: 10px; align-items: stretch; margin: 8px 0; }
+.np-lado { font: 700 13px/1.2 Inter, system-ui, sans-serif; color: #33415c; align-self: center; }
+.np-barra { display: flex; gap: 3px; min-height: 64px; }
+.np-seg { flex-basis: 0; min-width: 6px; border: 0; border-radius: 10px; padding: 8px 9px; cursor: pointer; text-align: left; color: #fff; overflow: hidden; position: relative; transition: transform .15s, box-shadow .15s; }
+.np-seg:hover { transform: translateY(-2px); }
+.np-seg:focus-visible { outline: 3px solid #f3cf65; outline-offset: 2px; }
+.np-seg[aria-pressed="true"] { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #0b2a63; z-index: 1; }
+.np-seg-tx { display: block; font-size: 12.5px; line-height: 1.25; }
+.np-seg-tx b { display: block; font-size: 13px; }
+.np-seg-v { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; opacity: .92; white-space: nowrap; }
+.np-impuestos { background: #1f5fae; } .np-contribuciones { background: #3d86c6; } .np-propios { background: #5a6f8f; } .np-deuda { background: #a9541a; }
+.np-social { background: #1b7f4c; } .np-nacional { background: #0f6f8f; } .np-estado { background: #6b3fa0; } .np-fondos { background: #8a94a8; } .np-comprometido { background: #b3261e; }
+.np-det { margin-top: 16px; border-top: 1px solid #dfe5f0; padding-top: 14px; }
+.np-det-cab { display: flex; gap: 12px; align-items: center; background: none !important; }
+.np-det-ico { font-size: 34px; }
+.np-det-lado { font: 700 11.5px/1 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: #5a6782; }
+.np-det h3 { margin: 4px 0 0; font-size: 20px; color: #0b2a63; }
+.np-det-cifras { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: flex-end; margin: 10px 0 6px; }
+.np-det-cifras p { margin: 0; }
+.np-det-cifras b { font-size: 24px; color: #0b2a63; font-variant-numeric: tabular-nums; }
+.np-det-cifras small { display: block; color: #5a6782; font-size: 13px; }
+.np-det-cien { font-size: 13px; color: #5a6782; }
+.np-det-cien b { display: block; font-size: 24px; color: #1b7f4c; }
+.np-det-que { font-size: 15px; line-height: 1.55; color: #2a3a57; margin: 8px 0; }
+.np-det-filas { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 6px; }
+.np-det-filas li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 14px; border-bottom: 1px dashed #e2e8f2; padding-bottom: 5px; }
+.np-det-filas b { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; color: #0b2a63; }
+.np-det-pista { grid-column: 1 / -1; height: 5px; background: #eef2f8; border-radius: 3px; overflow: hidden; }
+.np-det-pista span { display: block; height: 100%; background: #3d86c6; border-radius: 3px; }
+.np-det-op { font-size: 13px; color: #5a6782; margin: 8px 0; }
+.np-ref { font-size: 12px; font-weight: 700; }
+.np-det-ir { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 10px 0 0; font-size: 14px; }
+.np-det-paso { font-weight: 700; }
+.np-pie { font-size: 12.5px; color: #5a6782; margin: 14px 0 0; }
+.np-seg.np-chico .np-seg-tx { visibility: hidden; }
+.np-ley { display: flex; flex-wrap: wrap; gap: 4px 8px; margin: 2px 0 10px 86px; }
+.np-ley-b { display: inline-flex; align-items: center; gap: 6px; font: 500 12.5px/1.2 Inter, system-ui, sans-serif; color: #33415c; background: none; border: 1px solid transparent; border-radius: 999px; padding: 4px 9px 4px 6px; cursor: pointer; }
+.np-ley-b:hover { border-color: #c8d3e6; }
+.np-ley-b[aria-pressed="true"] { border-color: #0b2a63; color: #0b2a63; font-weight: 700; }
+.np-ley-p { width: 12px; height: 12px; border-radius: 4px; flex: none; }
+@media (max-width: 760px) { .np-ley { margin-left: 0; } }
+/* Los seis pasos, como camino. */
+.np ~ .apartado-pestanas .apartado-pestana-ico { font-size: 22px; }
+/* Paso 3: los tres presupuestos. */
+.np3-intro { font-size: 15px; line-height: 1.6; color: #2a3a57; margin: 0 0 14px; }
+.np3-rej { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.np3-c { background: #fff; border: 1px solid #dfe5f0; border-top: 5px solid var(--np3, #0b2a63); border-radius: 14px; padding: 14px 16px; }
+.np3-estado { --np3: #6b3fa0; } .np3-nacional { --np3: #0f6f8f; } .np3-social { --np3: #1b7f4c; }
+.np3-ico { font-size: 28px; }
+.np3-c h3, .np3-fuera h3 { margin: 4px 0 6px; font-size: 18px; color: #0b2a63; }
+.np3-cifra { margin: 0; } .np3-cifra b { font-size: 20px; color: #0b2a63; font-variant-numeric: tabular-nums; }
+.np3-cien { margin: 2px 0 8px; font-size: 13.5px; color: #5a6782; } .np3-cien b { color: var(--np3, #0b2a63); font-size: 16px; }
+.np3-que { font-size: 14.5px; line-height: 1.5; color: #2a3a57; margin: 0 0 8px; }
+.np3-filas { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; }
+.np3-filas li { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; border-bottom: 1px dashed #e2e8f2; padding-bottom: 3px; }
+.np3-filas b { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
+.np3-op { font-size: 12.5px; color: #5a6782; margin: 0; }
+.np3-ojo { margin: 14px 0; background: #fff8e1; border: 1px solid #f0d58a; border-radius: 12px; padding: 12px 14px; font-size: 14px; line-height: 1.55; color: #4a3b0b; }
+.np3-fuera { display: flex; gap: 12px; background: #fff; border: 1px solid #dfe5f0; border-left: 5px solid #b3261e; border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+.np3-fuera p { font-size: 14.5px; line-height: 1.5; color: #2a3a57; margin: 0 0 8px; }
+@media (max-width: 760px) {
+  .np { padding: 16px 14px; }
+  .np-fila { grid-template-columns: 1fr; gap: 4px; }
+  .np-barra { min-height: 54px; }
+  .np-seg { padding: 6px; }
+  .np-seg-tx { display: none; }
+  .np3-rej { grid-template-columns: 1fr; }
+}
+/* Cierre del recorrido y notas al pie. */
+.np-cierre { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 24px 0 0; padding: 16px 20px; border-radius: 16px; background: #0b2a63; color: #fff; text-decoration: none; }
+.np-cierre:hover { background: #163f8c; }
+.np-cierre-ico { font-size: 34px; }
+.np-cierre b { display: block; font-size: 18px; }
+.np-cierre small { display: block; font-size: 14px; color: #d6e1f5; }
+.np-cierre > span:nth-child(2) { flex: 1 1 260px; }
+.np-cierre-ir { font-weight: 700; color: #f3cf65; }
+.apartado-ayer-plegado { margin: 0 0 16px; border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 12px; background: #fff; }
+.apartado-ayer-plegado > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; font-size: 14.5px; color: #0b2a63; }
+.apartado-ayer-plegado > .apartado-ayer { margin: 0; border: 0; border-top: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 0 0 12px 12px; }
+.apartado-notas { margin: 28px 0 0; padding: 16px 0 0; border-top: 2px solid #0b2a63; font-size: 13.5px; line-height: 1.55; color: #33415c; }
+.apartado-notas-tit { font-size: 15px; margin: 0 0 8px; color: #0b2a63; }
+.apartado-notas-lista { list-style: none; margin: 0 0 8px; padding: 0; }
+.apartado-notas-lista li:target { background: #fff8e1; border-radius: 8px; }
+.apartado-notas-por { color: #5a6782; }
+.apartado-notas-glos { margin: 0; }

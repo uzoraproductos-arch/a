@@ -671,6 +671,37 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Números reorganizado (10-10-2026, sello 20261010zf).**
+Pedido del autor: la pestaña estaba «fuera de orden» (un camino de cinco pasos arriba y
+seis capítulos con otra numeración abajo) y la «Nota de referencia» era un apartado.
+Ahora `sigue-el-dinero.html` es un solo recorrido de **seis pasos**, que son las pestañas:
+1 Se recauda (`#origen`), 2 Se aprueba (`#decide`), 3 Se gasta: los tres presupuestos
+(`#gasta`), 4 Baja al territorio (`#baja`), 5 Se paga lo que se debe (`#deuda`) y 6 Se
+revisa (`#revisa`, nuevo: ASF, Cuenta Pública, Estado de Cuenta Cívico, Expedientes).
+«¿Cuánto te toca?» dejó de ser pestaña: es el cierre del recorrido y `#ati` redirige a
+`herramienta-calculadora.html`. El simulador «Reparte el presupuesto» entró al paso 2.
+- **El peso de 2026** (arriba de los pasos): dos barras con todo lo que entra (Ley de
+  Ingresos, 4 grupos) y todo lo que sale (presupuesto social, nacional, del Estado, fondos
+  de estabilización y lo ya comprometido). Al tocar un tramo se abre su detalle: cifra,
+  «de cada $100», chip, de qué está hecho, fuente, glosario y el paso donde se explica.
+  Lo arma `numeros_datos()` en `apartados.py` con `panoramaErario` y lo pinta
+  `assets/auditor/js/numeros.js` (+ `numeros.css`). Ninguna cifra se escribe en el JS.
+- **Los tres presupuestos** (paso 3, `numeros_tres()`): la lectura doctrinal en tres
+  renglones, armada con la clasificación funcional oficial (CGPE 2027, p. 39):
+  del Estado = Gobierno $320,700.0 + poderes y autónomos $142,300.0 = $463,000.0 mdp
+  (derivado); nacional = Desarrollo económico $1,695,700.0 (oficial); social = Desarrollo
+  social $4,929,400.0 (oficial). Aparte, ya comprometido (no programable) $3,098,974.9
+  (derivado: costo financiero + Ramo 28 + ADEFAS) y fondos de estabilización $6,600.0.
+  Suman $10,193,674.9; los $8.8 mdp restantes son redondeo de la fuente (lo dice la página).
+  Advertencia escrita: agua potable y urbanización van en desarrollo social en la
+  clasificación oficial, no en el presupuesto nacional de la doctrina.
+- **La nota del libro** ya no es enlace ni ventana: es la nota [119] al pie («Notas y
+  referencias», `libro_pie()`), con la ficha del compendio, los conceptos en el glosario
+  y el Diccionario. La franja «Ayer y hoy» de cada paso va plegada y llama a esa nota.
+- Pendiente de verificación editorial: la página del libro donde aparece la lectura en
+  tres presupuestos. La plataforma la atribuye a «la doctrina del derecho económico» con
+  la nota [119] general, sin número de página.
+
 **Tarjetas del Radar sin descripción (10-10-2026, sin cambio de sello).**
 Decisión del autor: las tarjetas del Radar hacendario llevan solo icono y título. Se
 quitó el texto descriptivo de las pestañas de `radar-hacendario.html`, de la barra

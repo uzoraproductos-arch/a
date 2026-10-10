@@ -111,6 +111,23 @@ def libro_enlace(a):
                num, cita, url))
 
 
+def libro_pie(a):
+    """Notas al pie de la pagina: la obra que ordena el apartado y sus
+    conceptos en el glosario y el diccionario."""
+    rid, num, cita = a['libro_ref']
+    url = 'fuentes-oficiales.html#%s' % rid
+    glos_ = ' · '.join('<a href="glosario.html#%s">%s</a>' % (glosario_ancla(t), t.split(' (')[0])
+                       for t in a.get('libro_glosario', []))
+    return ('<aside class="apartado-notas" aria-labelledby="notasTit">'
+            '<h2 class="apartado-notas-tit" id="notasTit">Notas y referencias</h2>'
+            '<ol class="apartado-notas-lista">'
+            '<li id="nota-%d" value="%d"><span class="apartado-libro-num">[%d]</span> %s <a href="%s">Ficha en el compendio de fuentes ➔</a>'
+            '<br><span class="apartado-notas-por">%s</span></li></ol>'
+            '<p class="apartado-notas-glos"><b>Los conceptos de este apartado:</b> %s. '
+            'Búscalos también en el <a href="diccionario.html">Diccionario del gasto público</a>.</p>'
+            '</aside>' % (num, num, num, cita, url, a['libro'], glos_))
+
+
 def fichas(lista):
     """Fichas que se despliegan en la misma página (datos.js): botones con
     el aspecto de las tarjetas, sin enlace a la portada."""
@@ -265,95 +282,108 @@ APARTADOS = [
         'archivo': 'sigue-el-dinero.html',
         # Desde el 09-10-2026 el menu se llama «Números» (decision del autor);
         # el archivo conserva su nombre para no romper enlaces.
+        # Reestructura del 10-10-2026 (pedido del autor): un solo recorrido
+        # de seis pasos, que son a la vez el camino y las pestanas; arriba,
+        # «El peso de 2026» (de donde viene y a donde va, numeros.js), y en
+        # el paso 3 los tres presupuestos: del Estado, nacional y social.
+        # La nota del libro ya no es un apartado: es una nota al pie.
         'menu': 'Números',
         'icono': '💰',
         'titulo': 'Números',
-        'lema': 'Seis capítulos, del impuesto a la deuda',
+        'lema': 'Seis pasos, del impuesto a la rendición de cuentas',
         'entrada': ('El dinero público tiene un recorrido: se recauda, se aprueba, se gasta, baja a estados y municipios, '
-                    'se pide prestado y, al final, te toca una parte. Aquí lo sigues capítulo por capítulo.'),
+                    'paga lo que se debe y, al final, alguien revisa que se haya usado bien. Primero míralo completo; '
+                    'después síguelo paso a paso.'),
         'libro': ('Este apartado sigue el orden de <cite>Introducción al Derecho Económico</cite>, de Moisés Gómez Granillo y '
-                  'Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7. Cada capítulo trae una '
+                  'Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7. Cada paso trae una '
                   'franja <b>«Ayer y hoy»</b>: lo que explicaba el libro y cómo está hoy, con el documento oficial que lo sostiene. '
                   'Las cifras no se copian del libro: se toman de su fuente oficial vigente.'),
         # Nota de referencia (decision del autor, 09-10-2026): la obra es la
         # ficha ref-gomez-granillo-1995 del catalogo de fuentes y sus
-        # conceptos llevan al glosario del auditor.
+        # conceptos llevan al glosario del auditor. Desde el 10-10-2026 va
+        # al pie de la pagina (libro_pie), no como enlace bajo la entrada.
         'libro_ref': ('ref-gomez-granillo-1995', 119,
                       'Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). <cite>Introducción al derecho económico</cite>. Editorial Esfinge.'),
+        'libro_pie': True,
         'libro_glosario': ['Rectoría Económica del Estado', 'Economía Mixta', 'Sistema Nacional de Planeación Democrática',
                            'Hacienda Pública', 'LIF (Ley de Ingresos de la Federación)', 'PEF (Presupuesto de Egresos de la Federación)',
-                           'Gasto Federalizado', 'Deuda Pública y SHRFSP'],
-        'scripts': ['deuda-tiempo.js'],
-        'antes': CAMINO_NUMEROS,
-        # Desde el 09-10-2026 cada capitulo es una pestana (decision del
-        # autor): su contenido y sus fichas solo se despliegan al pulsarla.
+                           'Gasto Programable vs No Programable', 'Gasto Federalizado', 'Deuda Pública y SHRFSP', 'Cuenta Pública'],
+        'scripts': ['deuda-tiempo.js', 'numeros.js'],
+        'estilos': ['numeros.css'],
+        # 'antes' (El peso de 2026) y el bloque del paso 3 los arma
+        # numeros_preparar() con window.AUDIT_DB al generar.
+        'antes': '',
+        # «¿Cuanto te toca?» era la pestana 6: ahora es el cierre del recorrido.
+        'hash_a_pagina': {'ati': 'herramienta-calculadora.html'},
         'pestanas': True,
+        'pista': 'Elige un paso para abrir su contenido. Van en el orden en que se mueve el dinero.',
         'secciones': [
             {
                 'id': 'origen',
-                'pestana': ('💵', '1 · De dónde sale', 'Ingresos y Ley de Ingresos'),
+                'pestana': ('💵', '1 · Se recauda', 'De dónde sale el dinero'),
                 'num': 1,
-                'titulo': 'De dónde sale el dinero',
-                'texto': 'Impuestos, ingresos petroleros y deuda: todo lo que autoriza la Ley de Ingresos, y su recorrido completo hasta el gasto.',
+                'titulo': 'Se recauda: de dónde sale el dinero',
+                'texto': 'Impuestos, cuotas, ventas de las empresas del Estado y deuda: todo lo que autoriza la Ley de Ingresos.',
                 'ayer': ('El capítulo 7 abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda.',
                          'Cada año la <b>Ley de Ingresos de la Federación</b> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.'),
                 'tarjetas': [
-                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa y qué ley la gobierna. Pulsa «Contabilizar».', ir('presupuesto', 'eb-arquitectura'), None, 'dinero'),
+                    ('📥', 'De dónde sale cada peso', 'El ingreso federal de 2026, renglón por renglón, tal como lo enumera el artículo 1o. de la Ley de Ingresos.', ir('presupuesto', 'eb-ingresos'), None, 'dinero'),
                     ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026, la cifra total antes de partirla.', ir('presupuesto', 'eb-cuanto'),
                      'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
-                    ('📥', 'De dónde sale cada peso', 'El ingreso federal de 2026, renglón por renglón, tal como lo enumera el artículo 1o. de la Ley de Ingresos.', ir('presupuesto', 'eb-ingresos'), None, 'dinero'),
                     ('📏', '¿A qué equivale?', 'Tres comparaciones para dimensionar las cifras, con la operación a la vista.', ir('presupuesto', 'eb-equivale'), None, 'dinero'),
-                    ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', ir('presupuesto', 'eb-ciegos'), None, 'inspector'),
+                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa y qué ley la gobierna.', ir('presupuesto', 'eb-arquitectura'), None, 'dinero'),
                     ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos.', ir('proyeccion2027'), None, 'dinero'),
                 ],
             },
             {
                 'id': 'decide',
-                'pestana': ('🏛️', '2 · Quién lo decide', 'El Congreso y los Poderes'),
+                'pestana': ('🏛️', '2 · Se aprueba', 'Quién lo decide'),
                 'num': 2,
-                'titulo': 'Quién lo decide',
+                'titulo': 'Se aprueba: quién lo decide',
                 'texto': 'El Congreso autoriza los ingresos y la deuda; la Cámara de Diputados aprueba el gasto. Y los Poderes también cuestan.',
                 'ayer': ('El capítulo 5 explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77).',
                          'Las facultades siguen en los artículos 73 y 74 de la Constitución: la fracción IV del 74 da a los diputados la aprobación anual del Presupuesto de Egresos. El Distrito Federal es hoy la <b>Ciudad de México</b>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016.'),
                 'tarjetas': [
-                    ('⚖️', 'Lo que Cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', ir('poderes'), None, 'dinero'),
+                    ('⚖️', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', ir('poderes'), None, 'dinero'),
+                    ('🎛️', 'Reparte tú el presupuesto', 'Ponte en el lugar de la Cámara: arranca en $0, reparte los $10.19 billones y compáralo con lo aprobado.', 'simulador-presupuesto.html', None, 'calculadora'),
                 ],
             },
             {
                 'id': 'gasta',
-                'pestana': ('🏢', '3 · Quién lo gasta', 'Ramos, obras y ambiente'),
+                'pestana': ('🧩', '3 · Se gasta', 'Los tres presupuestos'),
                 'num': 3,
-                'titulo': 'Quién lo gasta y en qué',
-                'texto': 'Cuánto recibe cada Secretaría, qué obras se pagan y qué le cuesta al ambiente.',
+                'titulo': 'Se gasta: los tres presupuestos',
+                'texto': 'El Presupuesto de Egresos se lee en tres grandes renglones: lo que el Estado necesita para funcionar, lo que mueve al país y lo que se invierte en las personas. Y aparte, lo que ya está comprometido.',
                 'ayer': ('«Presupuesto y gasto público» (p. 97) reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y la sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
                          'Esa ley fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
+                'bloque': '',
                 'tarjetas': [
                     ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', ir('presupuesto', 'eb-egresos'), None, 'dinero'),
                     ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gasto programable, en un termostato.', ir('presupuesto', 'eb-salud'), None, 'dinero'),
-                    ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', ir('presupuesto', 'eb-cuenta-federal'), None, 'dinero'),
-                    ('🏗️', 'Inversión Pública &amp; Megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Fuentes por obra en verificación.', ir('megaobras'), None, 'obras'),
-                    ('🌎', 'Costo Ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.', ir('ambiente'), None, 'ambiente'),
+                    ('🏗️', 'Inversión pública y megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA.', ir('megaobras'), None, 'obras'),
+                    ('🌎', 'Costo ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.', ir('ambiente'), None, 'ambiente'),
+                    ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', ir('presupuesto', 'eb-ciegos'), None, 'inspector'),
                 ],
             },
             {
                 'id': 'baja',
-                'pestana': ('📍', '4 · A dónde baja', 'Estados y municipios'),
+                'pestana': ('📍', '4 · Baja al territorio', 'Estados y municipios'),
                 'num': 4,
-                'titulo': 'A dónde baja',
+                'titulo': 'Baja al territorio: estados y municipios',
                 'texto': 'El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno recauda.',
                 'ayer': ('El Cuadro 1 del capítulo 7 ya separaba, dentro del Presupuesto de 1994, lo que la Federación destinaba a estados y municipios.',
                          'Hoy viaja por dos vías: las <b>participaciones</b> (Ramo 28), de libre uso, y las <b>aportaciones</b> (Ramo 33), etiquetadas por la Ley de Coordinación Fiscal para salud, educación, infraestructura y seguridad.'),
                 'tarjetas': [
                     ('📍', 'El mapa del gasto federalizado', 'El tramo del gasto que viaja a los 32 estados, sobre el territorio y de mayor a menor.', ir('presupuesto', 'eb-mapa'), None, 'dinero'),
-                    ('🗺️', 'Las 32 Entidades: del Peso Federal al Estatal', 'Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.', ir('territorio'), None, 'dinero'),
-                    ('🏘️', 'Los 2,479 Municipios: Predial y Transferencias', 'Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.', ir('municipios'), None, 'dinero'),
+                    ('🗺️', 'Las 32 entidades: del peso federal al estatal', 'Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.', ir('territorio'), None, 'dinero'),
+                    ('🏘️', 'Los 2,479 municipios: predial y transferencias', 'Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.', ir('municipios'), None, 'dinero'),
                 ],
             },
             {
                 'id': 'deuda',
-                'pestana': ('📉', '5 · Cuánto debemos', 'La deuda, sexenio por sexenio'),
+                'pestana': ('📉', '5 · Se paga lo que se debe', 'La deuda, sexenio por sexenio'),
                 'num': 5,
-                'titulo': 'Cuánto debemos',
+                'titulo': 'Se paga lo que se debe: la deuda',
                 'texto': 'La deuda pública de 1994 a la proyección de 2027, sexenio por sexenio. Pulsa «Contabilizar» y mírala crecer.',
                 'ayer': ('La sección 4 del capítulo 7 (p. 104) explica la Ley General de Deuda Pública y su Gráfica 1 sigue la deuda externa de 1988 a 1994, en dólares.',
                          'La misma ley se llama hoy <b>Ley Federal de Deuda Pública</b> (decreto del DOF del 27 de abril de 2016). Y la deuda se mide con un indicador más amplio, el saldo histórico de los requerimientos financieros del sector público (SHRFSP), que Hacienda publica desde 2000.'),
@@ -361,17 +391,20 @@ APARTADOS = [
                            '          <noscript><p>La línea de tiempo necesita JavaScript. La serie, con sus fuentes, está en el auditor.</p></noscript>\n'
                            '        </div>'),
                 'tarjetas': [
-                    ('⏱️', 'El Reloj de la Deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo.', ir('calculadora', 'eb-ccreloj'), None, 'inspector'),
+                    ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo.', ir('calculadora', 'eb-ccreloj'), None, 'inspector'),
                 ],
             },
             {
-                'id': 'ati',
-                'pestana': ('🧮', '6 · ¿Cuánto te toca?', 'La calculadora de tu sueldo'),
+                'id': 'revisa',
+                'pestana': ('🔍', '6 · Se revisa', 'Quién rinde cuentas'),
                 'num': 6,
-                'titulo': 'Y a ti, ¿cuánto te toca?',
-                'texto': 'Escribe tu sueldo y mira a qué rubros, fondos y pago de deuda se van tus impuestos.',
+                'titulo': 'Se revisa: quién rinde cuentas',
+                'texto': 'Al año siguiente el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. Aquí está lo que se gastó de verdad, lo que quedó por aclarar y el balance de todo el recorrido.',
                 'tarjetas': [
-                    ('🧮', 'Calculadora Cívica de Tu Sueldo', 'A qué rubros y fondos se van los impuestos de tu nómina, con tu ticket cívico.', ir('calculadora'), None, 'calculadora'),
+                    ('🔍', 'Qué encontró la ASF', 'Auditorías, acciones y lo que quedó por aclarar en la Cuenta Pública 2024, sector por sector.', 'herramienta-inspector-asf.html', None, 'inspector'),
+                    ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', ir('presupuesto', 'eb-cuenta-federal'), None, 'dinero'),
+                    ('🧾', 'Estado de Cuenta Cívico', 'El balance de todo el recorrido: lo que entró, lo que se gastó, lo que se debe y lo que se perdió, 2024 frente a 2026 y 2027.', 'estado-de-cuenta.html', None, 'dinero'),
+                    ('🗂️', 'Expedientes de casos por aclarar', 'Los casos concretos que la Auditoría Superior dejó abiertos, con su documento.', 'expedientes.html', None, 'inspector'),
                 ],
             },
         ],
@@ -2808,6 +2841,177 @@ def tarjeta(t, modulo=False, auto=False):
     return '\n'.join(partes)
 
 
+# Numeros (reestructura del 10-10-2026, pedido del autor): «El peso de
+# 2026» arriba de los seis pasos y, en el paso 3, los tres presupuestos.
+# Todas las cifras salen de window.AUDIT_DB (panoramaErario): la Ley de
+# Ingresos renglon por renglon y la clasificacion funcional del gasto
+# programable de los Criterios 2027 (cuadro de la p. 39). La lectura en
+# tres presupuestos agrupa esas finalidades oficiales: es derivada y dice
+# su operacion.
+NUM_GRUPOS_ING = [
+    # (grupo de la base, id, icono, nombre, que es)
+    ('Impuestos', 'impuestos', '🧾', 'Impuestos',
+     'ISR, IVA, IEPS, comercio exterior y los demás impuestos federales. Contribuir es una obligación del artículo 31, fracción IV de la Constitución.'),
+    ('Otras contribuciones', 'contribuciones', '🏥', 'Cuotas y derechos',
+     'Las cuotas de seguridad social, los derechos por usar bienes de la Nación o recibir un servicio público y las contribuciones de mejoras.'),
+    ('No tributarios', 'propios', '🏭', 'Ventas y otros ingresos',
+     'Lo que venden IMSS, ISSSTE, Pemex y CFE, las transferencias del Fondo Mexicano del Petróleo, productos y aprovechamientos.'),
+    ('Financiamiento', 'deuda', '🏦', 'Deuda',
+     'Lo que se pide prestado. La Ley de Ingresos lo cuenta como ingreso: por eso el presupuesto siempre «cuadra».'),
+]
+
+
+def _mdp(v, d=1):
+    return '$' + format(v, ',.%df' % d) + ' mdp'
+
+
+def _bill(v):
+    return '$%.2f billones' % (v / 1e6)
+
+
+def numeros_datos(base):
+    """Datos de «El peso de 2026» y de los tres presupuestos."""
+    p = base['panoramaErario']
+    total = p['totalPEF']
+    refs = {r['id']: r for r in base['referencias_legales']}
+    eg = {r['id']: r for r in p['egresos']}
+
+    def fuente(rid):
+        r = refs[rid]
+        return {'n': r['num'], 'url': 'fuentes-oficiales.html#' + rid, 't': re.sub('<[^>]+>', '', r['cita_apa'])[:160]}
+
+    entra = []
+    for grupo, gid, ico, nom, que in NUM_GRUPOS_ING:
+        filas = [r for r in p['ingresos'] if r['grupo'] == grupo]
+        entra.append({
+            'id': gid, 'ico': ico, 'nom': nom, 'que': que, 'v': round(sum(r['montoMdp'] for r in filas), 1),
+            'est': 'oficial' if len(filas) == 1 else 'derivado',
+            'op': '' if len(filas) == 1 else 'Suma de %d renglones del artículo 1o. de la Ley de Ingresos 2026.' % len(filas),
+            'filas': [{'n': r['nombre'], 'v': r['montoMdp'], 'g': glosario_ancla(r['glos']) if r.get('glos') else ''} for r in filas],
+            'f': [fuente('ref-lif2026')], 'paso': 'origen', 'pnum': 1,
+        })
+    estado = eg['egr-gobierno']['montoMdp'] + eg['egr-poderes']['montoMdp']
+    noprog = [eg['egr-costofin'], eg['egr-participaciones'], eg['egr-adefas']]
+    sale = [
+        {'id': 'social', 'ico': '🫂', 'nom': 'Presupuesto social', 'v': eg['egr-social']['montoMdp'], 'est': 'oficial',
+         'que': 'Lo que se invierte en las personas: educación, salud pública, seguridad social, vivienda y esparcimiento.',
+         'op': 'Finalidad «Desarrollo social» del gasto programable, tal como la publica la fuente.',
+         'filas': [{'n': 'Protección social', 'pib': 6.2}, {'n': 'Educación', 'pib': 2.9}, {'n': 'Salud', 'pib': 2.5},
+                   {'n': 'Vivienda y servicios a la comunidad', 'pib': 1.1}, {'n': 'Protección ambiental', 'pib': 0.0}],
+         'f': [fuente('ref-cgpe2027')], 'g': glosario_ancla('Gasto Programable vs No Programable'), 'paso': 'gasta', 'pnum': 3},
+        {'id': 'nacional', 'ico': '🏗️', 'nom': 'Presupuesto nacional', 'v': eg['egr-economico']['montoMdp'], 'est': 'oficial',
+         'que': 'Lo que mueve al país: energía eléctrica, combustibles, carreteras, ferrocarriles, campo, ciencia y las empresas públicas.',
+         'op': 'Finalidad «Desarrollo económico» del gasto programable, tal como la publica la fuente. Pemex y CFE reciben $1,071,929.6 mdp en el Anexo 1 del PEF 2026.',
+         'filas': [{'n': 'Combustibles y energía', 'pib': 3.3}, {'n': 'Comunicaciones y transportes', 'pib': 0.6},
+                   {'n': 'Agropecuaria, silvicultura, pesca y caza', 'pib': 0.2}, {'n': 'Asuntos económicos y laborales', 'pib': 0.2},
+                   {'n': 'Ciencia, tecnología e innovación', 'pib': 0.2}],
+         'f': [fuente('ref-cgpe2027'), fuente('ref-pef2026')], 'g': glosario_ancla('Rectoría Económica del Estado'), 'paso': 'gasta', 'pnum': 3},
+        {'id': 'estado', 'ico': '🏛️', 'nom': 'Presupuesto del Estado', 'v': round(estado, 1), 'est': 'derivado',
+         'que': 'Lo que el poder público necesita para funcionar: gobierno, justicia, seguridad, relaciones exteriores, el Congreso, los tribunales y los órganos autónomos.',
+         'op': 'Finalidad «Gobierno» ($%s mdp) más poderes, órganos autónomos, INEGI y Tribunal Federal de Justicia Administrativa ($%s mdp).'
+               % (format(eg['egr-gobierno']['montoMdp'], ',.1f'), format(eg['egr-poderes']['montoMdp'], ',.1f')),
+         'filas': [{'n': 'Gobierno: Administración Pública Federal', 'v': eg['egr-gobierno']['montoMdp']},
+                   {'n': 'Poderes, órganos autónomos, INEGI y TFJA', 'v': eg['egr-poderes']['montoMdp']}],
+         'f': [fuente('ref-cgpe2027')], 'g': glosario_ancla('Hacienda Pública'), 'paso': 'decide', 'pnum': 2},
+        {'id': 'fondos', 'ico': '🛟', 'nom': 'Fondos de estabilización', 'v': eg['egr-fondos']['montoMdp'], 'est': 'oficial',
+         'que': 'La aportación del año a los fondos que deben amortiguar una caída de los ingresos.',
+         'op': 'Renglón de la clasificación funcional, tal como lo publica la fuente.', 'filas': [],
+         'f': [fuente('ref-cgpe2027')], 'g': glosario_ancla('Fondo Mexicano del Petróleo (FMP)'), 'paso': 'gasta', 'pnum': 3},
+        {'id': 'comprometido', 'ico': '🔒', 'nom': 'Ya comprometido', 'v': round(sum(r['montoMdp'] for r in noprog), 1), 'est': 'derivado',
+         'que': 'El gasto no programable: no compra bienes ni servicios. Paga intereses, entrega a estados y municipios lo que les toca y salda las cuentas del año anterior.',
+         'op': 'Costo financiero + participaciones (Ramo 28) + ADEFAS (Ramo 30).',
+         'filas': [{'n': r['nombre'], 'v': r['montoMdp'], 'g': glosario_ancla(r['glos'])} for r in noprog],
+         'f': [fuente('ref-pef2026')], 'g': glosario_ancla('Gasto Programable vs No Programable'), 'paso': 'deuda', 'pnum': 5},
+    ]
+    suma = round(sum(x['v'] for x in sale), 1)
+    return {'total': total, 'entra': entra, 'sale': sale, 'redondeo': round(total - suma, 1),
+            'fTotal': [fuente('ref-lif2026'), fuente('ref-pef2026')]}
+
+
+def numeros_peso(d):
+    """«El peso de 2026»: el bloque que numeros.js vuelve interactivo."""
+    def barra(lado, filas):
+        return ''.join('<button type="button" class="np-seg np-%s" data-lado="%s" data-id="%s" style="flex-grow:%s" '
+                       'aria-pressed="false"><span class="np-seg-tx"><b>%s</b> <span class="np-seg-v">%s</span></span></button>'
+                       % (x['id'], lado, x['id'], '%.4f' % (x['v'] / d['total'] * 100), x['nom'], _bill(x['v'])) for x in filas)
+    def leyenda(lado, filas):
+        return '<div class="np-ley">%s</div>' % ''.join(
+            '<button type="button" class="np-ley-b" data-lado="%s" data-id="%s" aria-pressed="false">'
+            '<span class="np-ley-p np-%s" aria-hidden="true"></span>%s</button>' % (lado, x['id'], x['id'], x['nom']) for x in filas)
+    return '''<section class="np" id="numPeso" aria-labelledby="npTit">
+        <div class="np-cab">
+          <h2 class="np-tit" id="npTit">El peso de 2026: de dónde viene y a dónde va</h2>
+          <p class="np-txt">Todo el dinero federal del año, <b>%s</b>, cabe en estas dos barras. Arriba, lo que entra según la %s; abajo, lo que sale según el %s. Toca cualquier tramo.</p>
+          <div class="np-modo" role="radiogroup" aria-label="Cómo ver las cifras">
+            <button type="button" role="radio" aria-checked="true" data-modo="pesos">En pesos</button>
+            <button type="button" role="radio" aria-checked="false" data-modo="cien">Por cada $100</button>
+          </div>
+        </div>
+        <div class="np-fila"><span class="np-lado">⬇️ Entra</span><div class="np-barra" role="group" aria-label="Lo que entra">%s</div></div>
+        %s
+        <div class="np-fila"><span class="np-lado">⬆️ Sale</span><div class="np-barra" role="group" aria-label="Lo que sale">%s</div></div>
+        %s
+        <div class="np-det" id="npDet" aria-live="polite"></div>
+        <p class="np-pie">Cifras en millones de pesos (mdp). La Ley de Ingresos y el Presupuesto de Egresos suman lo mismo por construcción: la deuda se cuenta como ingreso. %s %s</p>
+        <script type="application/json" id="npDatos">%s</script>
+        <noscript><p>Sin JavaScript se ven las dos barras; el detalle de cada tramo necesita JavaScript.</p></noscript>
+      </section>''' % (
+        _mdp(d['total']), glos('LIF (Ley de Ingresos de la Federación)', 'Ley de Ingresos'),
+        glos('PEF (Presupuesto de Egresos de la Federación)', 'Presupuesto de Egresos'),
+        barra('entra', d['entra']), leyenda('entra', d['entra']), barra('sale', d['sale']), leyenda('sale', d['sale']),
+        nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026'), nota_ref('ref-pef2026', 11, 'Presupuesto de Egresos de la Federación 2026'),
+        json.dumps(d, ensure_ascii=False).replace('</', '<\\/'))
+
+
+def numeros_tres(d):
+    """Paso 3: los tres presupuestos, con su cifra oficial o derivada."""
+    tot = d['total']
+    s = {x['id']: x for x in d['sale']}
+    def tarjeta(x):
+        filas = ''.join('<li><span>%s</span><b>%s</b></li>' % (
+            f['n'], ('%.1f pts. del PIB' % f['pib']) if 'pib' in f else _mdp(f['v'])) for f in x['filas'])
+        return ('<article class="np3-c np3-%s"><span class="np3-ico" aria-hidden="true">%s</span><h3>%s</h3>'
+                '<p class="np3-cifra"><b>%s</b> <span class="est-chip est-%s">%s</span></p>'
+                '<p class="np3-cien">De cada $100: <b>$%.2f</b></p>'
+                '<p class="np3-que">%s</p><ul class="np3-filas">%s</ul><p class="np3-op">%s %s</p></article>'
+                % (x['id'], x['ico'], x['nom'], _mdp(x['v']), x['est'], x['est'], x['v'] / tot * 100,
+                   x['que'], filas, x['op'], ' '.join(nota_ref(f['url'].split('#')[1], f['n'], f['t']) for f in x['f'])))
+    return '''<div class="np3">
+          <p class="np3-intro">La doctrina del derecho económico lee el presupuesto en tres renglones %s. Hacienda no los publica con esos nombres, pero sí su <b>clasificación funcional</b>: cada uno corresponde a una de sus finalidades. Aquí se juntan, con la operación a la vista.</p>
+          <div class="np3-rej">%s</div>
+          <div class="np3-ojo"><b>👁️ Ojo con la frontera.</b> Las dos lecturas no coinciden en todo: el agua potable y la urbanización, que la doctrina pone en el presupuesto nacional, en la clasificación oficial entran en «vivienda y servicios a la comunidad», dentro del desarrollo social. Así lo ordena el Clasificador Funcional del Gasto del CONAC, que se emite con base en la %s. Y las empresas públicas cuentan por su gasto: combustibles y energía, donde están Pemex y CFE, pesan tres cuartas partes del presupuesto nacional. Los puntos del PIB son los que publican los Criterios 2027 para 2026.</div>
+          <div class="np3-fuera"><span class="np3-ico" aria-hidden="true">%s</span><div><h3>%s: %s <span class="est-chip est-%s">%s</span></h3>
+            <p>%s De cada $100, <b>$%.2f</b>. %s</p>
+            <ul class="np3-filas">%s</ul></div></div>
+          <p class="np3-op">Además, %s (%s de cada $100) van a los %s. Las cinco partes suman %s; los %s que faltan para %s son redondeo de la fuente, que publica la clasificación funcional en miles de millones.</p>
+        </div>''' % (
+        nota_ref('ref-gomez-granillo-1995', 119, 'Gómez Granillo y Gutiérrez Rosas (1995)'),
+        ''.join(tarjeta(s[k]) for k in ('estado', 'nacional', 'social')),
+        'Ley General de Contabilidad Gubernamental ' + nota_ref('ref-lgcg', 12, 'Ley General de Contabilidad Gubernamental'),
+        s['comprometido']['ico'], s['comprometido']['nom'], _mdp(s['comprometido']['v']), s['comprometido']['est'], s['comprometido']['est'],
+        s['comprometido']['que'], s['comprometido']['v'] / tot * 100, s['comprometido']['op'],
+        ''.join('<li><a href="glosario.html#%s">%s</a><b>%s</b></li>' % (f['g'], f['n'], _mdp(f['v'])) for f in s['comprometido']['filas']),
+        _mdp(s['fondos']['v']), '$%.2f' % (s['fondos']['v'] / tot * 100), glos('Fondo Mexicano del Petróleo (FMP)', 'fondos de estabilización'),
+        _mdp(tot - d['redondeo']), _mdp(d['redondeo']), _mdp(tot))
+
+
+def numeros_cierre():
+    """Cierre del recorrido: «¿Y a ti, cuánto te toca?»."""
+    return ('<a class="np-cierre" href="herramienta-calculadora.html"><span class="np-cierre-ico" aria-hidden="true">🧮</span>'
+            '<span><b>Y a ti, ¿cuánto te toca?</b><small>Escribe tu sueldo y mira a qué rubros, fondos y pago de deuda se van tus impuestos.</small></span>'
+            '<span class="np-cierre-ir">Abrir la calculadora ➔</span></a>')
+
+
+def numeros_preparar():
+    import auditorias
+    base = auditorias.db()
+    d = numeros_datos(base)
+    a = next(x for x in APARTADOS if x['archivo'] == 'sigue-el-dinero.html')
+    a['antes'] = numeros_peso(d)
+    next(s for s in a['secciones'] if s['id'] == 'gasta')['bloque'] = numeros_tres(d)
+    a['cierre'] = numeros_cierre()
+
+
 def pagina(a, sello):
     secciones = []
     for s in a['secciones']:
@@ -2816,7 +3020,19 @@ def pagina(a, sello):
         num = ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else ''
         titulo = ('Capítulo %d. ' % s['num'] if s.get('num') else '')
         ayer = ''
-        if s.get('ayer'):
+        if s.get('ayer') and a.get('libro_pie'):
+            # Desde el 10-10-2026 (Numeros) la franja va plegada, con su
+            # llamado a la nota al pie del libro.
+            rid, rnum = a['libro_ref'][:2]
+            ayer = '''
+        <details class="apartado-ayer-plegado">
+          <summary>📘 Ayer y hoy: lo que explicaba el libro y lo que dice la ley vigente <sup class="apartado-libro-llamado"><a href="#nota-%d">[%d]</a></sup></summary>
+          <div class="apartado-ayer">
+            <div><span class="apartado-ayer-tit">📘 En el libro (1995)</span>%s</div>
+            <div><span class="apartado-ayer-tit">📍 Hoy (2026)</span>%s</div>
+          </div>
+        </details>''' % ((rnum, rnum) + s['ayer'])
+        elif s.get('ayer'):
             ayer = '''
         <div class="apartado-ayer">
           <div><span class="apartado-ayer-tit">📘 En el libro (1995)</span>%s</div>
@@ -2874,7 +3090,12 @@ def pagina(a, sello):
     guia_abajo = ''
     if a.get('guia') == 'abajo':
         guia, guia_abajo = '', '\n\n      ' + GUIA
-    if a.get('libro_ref'):
+    if a.get('libro_pie'):
+        # Desde el 10-10-2026 (Numeros) la nota del libro va al pie de la
+        # pagina, como nota con su numero, ligada al compendio de fuentes,
+        # al glosario y al diccionario (decision del autor).
+        guia_abajo += ('\n\n      ' + a['cierre'] if a.get('cierre') else '') + '\n\n      ' + libro_pie(a)
+    elif a.get('libro_ref'):
         # Desde el 09-10-2026 la nota del libro ya no es un recuadro en la
         # pagina (decision del autor): es un enlace bajo la entrada que la
         # abre en la ventana lateral (apartados.js, data-libro).
@@ -2966,6 +3187,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Números, reorganizado: un solo recorrido de seis pasos (se recauda, se aprueba, se gasta, baja al territorio, se paga la deuda y se revisa). Arriba, «El peso de 2026», dos barras interactivas con todo lo que entra y todo lo que sale, en pesos o por cada $100; en el paso 3, los tres presupuestos: del Estado, nacional y social. La nota del libro pasa al pie.'),
     ('10-10-2026', 'Las tarjetas del Radar hacendario quedan limpias: solo el icono y el nombre de cada parte. Lo descriptivo se queda dentro de cada página.'),
     ('10-10-2026', '«Hoy: el presupuesto en curso» tiene contador: las cifras arrancan en cero y el botón «Contar» las lleva a su valor oficial; el mismo botón las regresa a cero. «Durante tu visita» se desbloquea al contar.'),
     ('10-10-2026', 'Los estados de cuenta de la diputación federal y local, el Senado y la Suprema Corte suman la institución como órgano: cuánto nos cuesta al año, al día y a cada habitante, cuánto se va en sueldos y prestaciones, y del dinero que ejerció a lo que revisó la Auditoría Superior y lo que falta aclarar.'),
@@ -3064,7 +3286,7 @@ def indice():
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
         ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
-        ('numeros', '💰 Números', 'El recorrido del dinero público, capítulo por capítulo.', numeros),
+        ('numeros', '💰 Números', 'El recorrido del dinero público en seis pasos, con el peso de 2026 y los tres presupuestos.', numeros),
         ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
         ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la obra de consulta, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
@@ -3108,6 +3330,7 @@ def redireccion(destino, nombre, texto):
 
 
 def generar(sello=None):
+    numeros_preparar()
     if sello is None:
         d = open(os.path.join(RAIZ, 'index.html'), 'rb').read().decode('utf-8')
         m = re.search(r'id="selloVersion">([0-9a-z]+)<', d)
