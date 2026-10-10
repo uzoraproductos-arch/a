@@ -671,6 +671,24 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Verifica un estado de cuenta», al Modo Inspector (10-10-2026, sello 20261010za).**
+A pedido del autor, la sección de verificación salió de la página que expide
+el estado de cuenta y es el **módulo 7 del Modo Inspector**, con página propia:
+`herramienta-inspector-verifica.html` (parte «Busca y verifica»).
+- La arma `radar()` en `apartados.py` a partir de `herramienta_modulo()` (misma
+  cabecera, migas y navegación de módulos), pero en vez del marco carga
+  `#rdDatos`, `#exCargos` y `estado-administracion.js`. La clave
+  `inspverifica` está en `MODULOS_PROPIOS` para que el ciclo de herramientas no
+  le genere un marco.
+- `estado-administracion.js` arranca solo la verificación cuando la página no
+  trae `#exDoc`. «Ver el documento» es un enlace a
+  `radar-estado-de-cuenta.html?adm=` o `?doc=`, que lo genera al abrir.
+- El sello de los documentos nuevos apunta a
+  `herramienta-inspector-verifica.html?verifica=FOLIO`. Los PDF impresos antes
+  llevan `radar-estado-de-cuenta.html?verifica=`: esa página los redirige.
+- Folios y huellas no cambian. En la página que expide queda una línea que
+  lleva a la verificación.
+
 **El estado de cuenta, en una hoja por los dos lados (10-10-2026, sello 20261010z).**
 A pedido del autor (referencia: hoja oficio, 216 × 340 mm; «la medida es lo de
 menos»: lo que importa es separar lo gráfico al frente y lo informativo atrás):
