@@ -66,7 +66,8 @@ Esto es una plataforma de fiscalización del gasto público:
   Gaceta Parlamentaria.
 - Si un dato no se puede verificar, **se etiqueta como pendiente**, con el
   chip `pendiente`. Nunca se estima, nunca se rellena, nunca se redondea a
-  ojo de buen cubero.
+  ojo de buen cubero La única aproximación permitida es el rango
+  derivado de cotas oficiales (ver más abajo).
 - Los estados de un dato son tres: `oficial` (tomado de su documento),
   `derivado` (calculado a partir de datos oficiales, con la operación dicha)
   y `pendiente`. La función `chipEstado(estado)` los pinta.
@@ -92,6 +93,24 @@ Esto es una plataforma de fiscalización del gasto público:
   la base con estado `pendiente` necesita `motivo` y `url`. Si no los
   trae, `pendientes.py` detiene la generación, y `inventario.py` reporta
   como roto cualquier `data-pend` que no tenga ficha.
+
+- **Cuando solo hay aproximación, se da un rango: mínimo, máximo y punto
+  medio** (decisión del autor, 10-10-2026). Si la cifra exacta no está
+  publicada pero sí se puede acotar, no se escribe «~$380» con chip
+  `pendiente`: se escribe «entre X y Y; punto medio Z» con chip
+  `derivado`. Condiciones, sin excepción:
+  - **El mínimo y el máximo salen cada uno de un documento oficial** (o se
+    calculan a partir de cifras oficiales), y cada cota lleva su fuente.
+    Una cota que no se puede sostener no es cota: si falta una, el dato
+    sigue `pendiente`.
+  - **El punto medio es la media aritmética:** Z = (X + Y) ÷ 2. Se dice la
+    operación, como todo `derivado`.
+  - **Se dice de qué está hecho el rango**, por ejemplo «mínimo con el
+    subsidio PEF 2024 ÷ pasajeros AFAC 2024; máximo con el subsidio PEF
+    2025 ÷ pasajeros AFAC 2024».
+  - **La cifra exacta sigue debiéndose:** el rango no la sustituye, así que
+    su ficha del Registro de pendientes se queda, con la nota de que ya
+    hay un rango derivado y de quién debe la cifra exacta.
 
 Si te piden una cifra que no puedes sostener, dilo y déjala pendiente. Es la
 respuesta correcta en este proyecto.

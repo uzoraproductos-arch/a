@@ -634,6 +634,23 @@ debería estar el dato.
 - **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
   ficha. AGENTS.md §2 lleva la regla nueva.
 
+**Regla del rango derivado (10-10-2026).** Decisión del autor: cuando un
+dato solo tiene aproximación, se publica como rango (mínimo, máximo y punto
+medio = media aritmética) con chip `derivado`, no como `pendiente`. Cada
+cota debe salir de un documento oficial; si falta una, sigue `pendiente`.
+La cifra exacta conserva su ficha en el Registro. Está en AGENTS.md §2.
+
+Por aplicar (falta documentar las cotas, no se han inventado):
+- **`costo_unitario_real` de las megaobras** (`megaobras_historicas`). Hoy
+  son frases con cifras sin fuente, como «~$380 por pasajero» en el AIFA o
+  «~$1,850 por boleto» en el Tren Maya. Cada una necesita un mínimo y un
+  máximo con su fuente: subsidio en el PEF o en la Cuenta Pública entre
+  usuarios de AFAC, de la ARTF o del operador.
+- **El reloj de pérdidas de las megaobras** (`perdida_anual_consolidada_mdp`
+  80,200.1 mdp). Es la suma de `perdida_anual_mdp` obra por obra, y la
+  mayoría no tiene documento. Solo pasa a rango cuando cada sumando tenga
+  sus dos cotas oficiales.
+
 **Propuesta de Astra, entrega 3: Números y Estado de Cuenta (10-10-2026, sello 20261010f).**
 
 **1. Corrección grave a la base.** `cuentaFederal2024` y `tren_maya_peritaje_2024` entraron en el
