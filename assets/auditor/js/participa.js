@@ -68,6 +68,8 @@
 
   function irABloqueComunidad(id) {
     const el = document.getElementById(id);
+    /* El Ágora tiene su propia página desde el 10-10-2026. */
+    if (!el && id === 'bloquePortal') { window.location.href = 'agora.html'; return; }
     if (!el) return;
     abrirPestanaDe(el);
     const y = el.getBoundingClientRect().top + window.scrollY - 90;
@@ -747,7 +749,7 @@
   function copyDebateLink(debateId) {
     /* Solo se anuncia la copia cuando ocurrio; si el navegador la niega,
        se ofrece el enlace para copiarlo a mano. */
-    const url = new URL('participa.html#agora', window.location.href).href;
+    const url = new URL('agora.html', window.location.href).href;
     const manual = () => prompt(tuUd('Copie el enlace al Portal Digital:', 'Copia el enlace al Portal Digital:'), url);
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url)
