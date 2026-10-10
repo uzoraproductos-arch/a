@@ -110,7 +110,8 @@ def pagina(sello):
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <a class="apartado-volver" href="index.html?ir=verificador&amp;ancla=moduloProemio">← Volver al Modo Inspector</a>
+      <a class="apartado-volver" href="herramienta-inspector.html">← Volver al Modo Inspector</a>
+      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>

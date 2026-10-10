@@ -1160,3 +1160,27 @@ body[data-pagina="apartado"] .site-top-nav { position: sticky; top: 0; }
 a.nav-brand-text { text-decoration: none; color: inherit; cursor: pointer; }
 a.nav-brand-text:hover .nav-brand-title, a.nav-brand-text:focus-visible .nav-brand-title { text-decoration: underline; text-underline-offset: 4px; }
 a.nav-brand-text:focus-visible { outline: 3px solid var(--civ-celeste); outline-offset: 3px; border-radius: 6px; }
+/* PORTADA: RECORRIDO DE LA INVESTIGACION Y POR DONDE EMPEZAR (entrega 2, 10-10-2026) */
+.showcase-acciones { font-family: Inter, system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--civ-gris); border: 1px solid var(--civ-gris-borde); }
+.showcase-acc-tit { flex: 1 1 220px; color: #44526b; font-size: 14.5px; }
+.showcase-acc-tit b { color: var(--civ-azul); }
+.showcase-acc { display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border-radius: 999px; background: #ffffff; border: 1px solid var(--civ-gris-borde); color: var(--civ-azul); font-weight: 700; font-size: 14px; text-decoration: none; }
+.showcase-acc:hover, .showcase-acc:focus-visible { background: var(--civ-azul); color: #ffffff; border-color: var(--civ-azul); }
+.portada-guia { max-width: 1440px; margin: 0 auto 28px; padding: 0 20px; border: 0; background: none; font-family: Inter, system-ui, sans-serif; }
+.portada-guia-box { background: #ffffff; border: 1px solid rgba(0, 43, 91, 0.16); border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 43, 91, 0.08); padding: 24px; }
+.portada-guia-tit { margin: 0 0 14px; font-family: var(--font-serif, Georgia, serif); font-size: 26px; color: var(--civ-azul); }
+.portada-guia-sub { margin: 22px 0 10px; font-size: 17px; color: var(--civ-azul); }
+.portada-accesos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.portada-acceso { display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 14px; background: var(--civ-gris); border-top: 5px solid var(--civ-azul); color: #1c2a44; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+.portada-acceso:hover, .portada-acceso:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(11, 42, 99, 0.12); }
+.portada-acceso-ico { font-size: 28px; line-height: 1; }
+.portada-acceso b { font-size: 16.5px; color: var(--civ-azul); }
+.portada-acceso span:last-child { font-size: 14px; line-height: 1.45; }
+.portada-tema { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 0; border-top: 1px solid var(--civ-gris-borde); }
+.portada-tema-tit { flex: 0 0 260px; font-weight: 800; color: #1c2a44; }
+.portada-tema a { padding: 6px 12px; border-radius: 999px; background: var(--civ-gris); border: 1px solid var(--civ-gris-borde); color: var(--civ-azul); font-size: 14px; font-weight: 600; text-decoration: none; }
+.portada-tema a:hover, .portada-tema a:focus-visible { background: var(--civ-azul); color: #ffffff; }
+.portada-metodo { margin: 18px 0 0; padding: 12px 14px; border-radius: 12px; background: #fffbea; border: 1px solid #f1dfa0; font-size: 14.5px; line-height: 1.6; color: #1c2a44; }
+.portada-metodo a { color: var(--civ-azul); font-weight: 700; }
+@media (max-width: 900px) { .portada-accesos { grid-template-columns: 1fr 1fr; } .portada-tema-tit { flex-basis: 100%; } }
+@media (max-width: 520px) { .portada-accesos { grid-template-columns: 1fr; } .portada-guia { padding: 0 16px; } .portada-guia-box { padding: 16px; } .showcase-acc { flex: 1 1 100%; justify-content: center; } }
