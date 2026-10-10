@@ -17,15 +17,15 @@ La Enciclopedia queda fuera porque está congelada.
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 19 | 0 | 0 | 0 | 0 |
-| `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-deuda-soberana.html` | Los intereses de la deuda pública · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-dos-bocas.html` | Refinería Olmeca (Dos Bocas) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-huachicol-fiscal.html` | Huachicol fiscal: el impuesto que no entra · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-lego-cienega.html` | Ciénega de Flores: el dinero público alrededor de LEGO · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-megafarmacia.html` | Megafarmacia del Bienestar (Huehuetoca) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-ramo-33.html` | Ramo 33: el dinero para estados y municipios · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-tren-maya.html` | Tren Maya · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
-| `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
+| `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 3 | 0 |
+| `auditoria-deuda-soberana.html` | Los intereses de la deuda pública · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 2 | 0 |
+| `auditoria-dos-bocas.html` | Refinería Olmeca (Dos Bocas) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 3 | 0 |
+| `auditoria-huachicol-fiscal.html` | Huachicol fiscal: el impuesto que no entra · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 1 | 1 |
+| `auditoria-lego-cienega.html` | Ciénega de Flores: el dinero público alrededor de LEGO · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 2 | 0 |
+| `auditoria-megafarmacia.html` | Megafarmacia del Bienestar (Huehuetoca) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 3 | 1 | 0 |
+| `auditoria-ramo-33.html` | Ramo 33: el dinero para estados y municipios · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 3 | 0 | 0 |
+| `auditoria-tren-maya.html` | Tren Maya · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 2 | 0 |
+| `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 1 | 3 | 0 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 18 | 0 | 4 | 5 | 1 |

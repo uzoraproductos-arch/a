@@ -15,7 +15,7 @@ Lo llama apartados.generar(), asi que sello.py la regenera con el sello.
 """
 import os
 
-from apartados import RAIZ, FAVICON, cabecera
+from apartados import RAIZ, FAVICON, cabecera, sociales
 
 ARCHIVO = 'expedientes.html'
 
@@ -52,6 +52,7 @@ def pagina(sello):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expedientes de casos por aclarar · Auditavisión</title>
   <meta name="description" content="Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.">
+{sociales}
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="{favicon}">
@@ -121,7 +122,8 @@ def pagina(sello):
   <script src="assets/auditor/js/expedientes.js?v={sello}"></script>
 </body>
 </html>
-'''.format(favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
+'''.format(sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
+           favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
            pasos='\n'.join(pasos), glosa=glosa)
 
 

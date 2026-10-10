@@ -10,10 +10,12 @@ Aqui no se escribe ni un monto: solo el marco de cada pagina.
 
 Lo llama apartados.generar(), asi que sello.py las regenera con el sello.
 """
+import html
+import json
 import os
 import re
 
-from apartados import RAIZ, FAVICON, cabecera, esc_attr
+from apartados import RAIZ, FAVICON, cabecera, esc_attr, sociales
 
 # id, imagen, nota de la imagen, texto alternativo, etiqueta, titulo, pregunta
 AUDITORIAS = [
@@ -95,7 +97,7 @@ def ruta(id_):
     ancla, num_txt, insp, insp_txt = RUTAS[id_]
     pasos = [
         ('📖', 'Entiende el caso', 'Qué pasó, cuánto dinero involucra, quién interviene y qué falta saber.',
-         '#auImg', 'Leer el caso', ' aqui'),
+         '#auLectura', 'Leer el caso', ' aqui'),
         ('💰', 'Explora los números', num_txt + ', con su fuente oficial.',
          'sigue-el-dinero.html?abrir=' + ancla, 'Ir a Números', ''),
         ('🔍', 'Revisa la evidencia', insp_txt + ': los documentos que sostienen el caso.',
@@ -113,6 +115,106 @@ def ruta(id_):
 
 def archivo(id_):
     return 'auditoria-%s.html' % id_
+
+
+# --- Lectura breve (propuesta de Astra, puntos 3 y 8; entrega 5, 10-10-2026)
+# La lectura ampliada la pinta auditoria-imagen.js; esta va escrita en el
+# HTML para que un buscador la lea sin JavaScript. Responde cinco preguntas
+# con los mismos datos de window.AUDIT_DB: nada se teclea aqui.
+EXPEDIENTE = {'tren-maya': 'tren-maya', 'dos-bocas': 'dos-bocas', 'aifa': 'aifa', 'tren-toluca': 'tren-toluca',
+              'megafarmacia': 'birmex', 'lego-cienega': 'cuchillo-ii'}
+_DB = None
+
+
+def db():
+    global _DB
+    if _DB is None:
+        s = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js'), encoding='utf-8').read()
+        _DB = json.loads(s[s.index('{'):s.rindex('}') + 1])
+    return _DB
+
+
+def _mdp(v):
+    return '$%s mdp' % format(round(v, 1), ',.1f')
+
+
+def _chip(e, pend=None):
+    e = e if e in ('oficial', 'pendiente') else 'derivado'
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % pend if pend else '', e)
+
+
+def _doc(texto, url):
+    return '<a href="%s" target="_blank" rel="noopener noreferrer">%s ↗</a>' % (esc_attr(url), html.escape(texto))
+
+
+def _ref(clave):
+    return next((r['url'] for r in db().get('referencias_legales', []) if r.get('id') == clave), None)
+
+
+def _datos(id_):
+    D = db()
+    if id_ in EXPEDIENTE:
+        f = next(x for x in D['expedientes']['fichas'] if x['id'] == EXPEDIENTE[id_])
+        docs = [_doc('Cuenta Pública %s, auditoría %s: %s' % (a['cp'], a['num'], a['titulo']), a['url']) for a in f['auditorias'] if a.get('url')]
+        falta = f['alcance'] + (' Un monto «por aclarar» no es un daño probado: es dinero que el ente no comprobó al cierre de la auditoría y que sigue en proceso.'
+                                if any(a.get('porAclarar') for a in f['auditorias']) else '')
+        que = f['hallazgo']
+        if id_ == 'lego-cienega':
+            falta += (' La ampliación de la planta de LEGO que se ha anunciado no tiene todavía un documento oficial en esta plataforma: '
+                      'su monto no se suma a ninguna cifra.')
+        return {'que': que, 'cuanto': [(c['valor'], c['etq'], c['estado'], None) for c in f['cifras']],
+                'quien': f['ente'] + '. Revisó la Auditoría Superior de la Federación.',
+                'docs': [html.escape(f['fuente']) + '.'] + docs, 'falta': falta}
+    P = D['panoramaErario']
+    if id_ == 'deuda-soberana':
+        e = next(x for x in P['egresos'] if x['id'] == 'egr-costofin')
+        return {'que': e['queCubre'] + ' La Ley Federal de Presupuesto (art. 2º, fracc. XXV) deja fuera del gasto neto total las amortizaciones: este renglón paga el precio de lo prestado, no devuelve el capital.',
+                'cuanto': [(_mdp(e['montoMdp']), 'al año en el Presupuesto de Egresos 2026 (%s)' % e['clave'], e['estado'], None),
+                           (_mdp(e['montoMdp'] / 365), 'cada día: el monto anual entre 365', 'derivado', None),
+                           ('%.1f %%' % (e['montoMdp'] / P['totalPEF'] * 100), 'del Presupuesto de Egresos 2026 (%s)' % _mdp(P['totalPEF']), 'derivado', None)],
+                'quien': 'Lo aprueba la Cámara de Diputados en el Presupuesto de Egresos y lo paga el Gobierno Federal. Fundamento: ' + e['ley'] + '.',
+                'docs': [_doc('Presupuesto de Egresos de la Federación 2026, ' + e['clave'], _ref('ref-pef2026'))],
+                'falta': 'Esta es la cifra aprobada para 2026. Lo que de verdad se pague se sabrá en la Cuenta Pública 2026, que Hacienda entrega a la Cámara de Diputados al año siguiente.'}
+    if id_ == 'ramo-33':
+        r = next(x for x in P['federalizado']['componentes'] if x['id'] == 'fed-r33')
+        cp = D['cuenta_publica_asf']['cp2024']
+        mdb = D['cuenta_publica_asf']['fuentes']['MDB2024']
+        return {'que': r['queEs'],
+                'cuanto': [(_mdp(r['montoMdp']), 'Ramo 33 aprobado para 2026 (%s)' % r['clave'], r['estado'], None),
+                           (format(cp['federalizado']['auditorias'], ','), 'auditorías de la ASF al gasto federalizado de la Cuenta Pública 2024', cp['estado'], None),
+                           (_mdp(cp['federalizado']['porAclarar'] / 1e6), 'quedó por aclarar en esas auditorías (Cuenta Pública 2024)', cp['estado'], None)],
+                'quien': 'La Federación transfiere; los estados y municipios gastan; la Auditoría Superior de la Federación revisa (Ley de Coordinación Fiscal, art. 49).',
+                'docs': [_doc('Presupuesto de Egresos de la Federación 2026, ' + r['clave'], _ref('ref-pef2026')),
+                         _doc(mdb['corto'], mdb['url']), _doc('Ley de Coordinación Fiscal', _ref('ref-lcf'))],
+                'falta': 'Las cifras de la ASF son de la Cuenta Pública 2024, la última revisada completa; las del presupuesto, de 2026. Son años distintos y se muestran juntas solo para dar escala.'}
+    if id_ == 'huachicol-fiscal':
+        H = D['huachicol_fiscal']
+        J, R = H['en_juego'], H['reconocimiento']
+        il = H['fuentes']['ilif27']
+        return {'que': 'El Gobierno lo reconoce por escrito: en la exposición de motivos de la Ley de Ingresos 2027 dice que «%s». Las prácticas que nombra: %s.' % (R['cita'], R['practicas']),
+                'cuanto': [(_mdp(J['ieps_combustibles_2027_mdp']), 'de IEPS de gasolinas y diésel que se espera cobrar en 2027 (Ley de Ingresos 2027, p. %s)' % re.sub(r' \((.*)\)$', r': \1', J['pagina']), J['estado'], None),
+                           (_mdp(J['uno_por_ciento_mdp']), 'cada 1 % que se evada: el monto anterior entre 100', 'derivado', None),
+                           ('Sin cifra', 'cuánto se evade de verdad', 'pendiente', 'huachicol-evasion')],
+                'quien': 'El SAT cobra el IEPS y la Agencia Nacional de Aduanas revisa lo que entra al país; Hacienda propone la Ley de Ingresos y la Cámara de Diputados la aprueba.',
+                'docs': [_doc(il['doc'], il['url'])],
+                'falta': 'Ni el SAT ni Hacienda han publicado cuánto se pierde: el dato sigue pendiente por falta de transparencia de esas dependencias. ' + H['estudios']['texto']}
+    raise SystemExit('Sin lectura breve para %s' % id_)
+
+
+def lectura(id_):
+    d = _datos(id_)
+    cuanto = '\n'.join('            <li><b>%s</b> %s %s</li>' % (html.escape(v), html.escape(etq), _chip(e, pend)) for v, etq, e, pend in d['cuanto'])
+    docs = '\n'.join('            <li>%s</li>' % x for x in d['docs'])
+    filas = [('🔎', 'Qué pasó', '<p>%s</p>' % html.escape(d['que'])),
+             ('💰', 'Cuánto dinero', '<ul>\n%s\n          </ul>' % cuanto),
+             ('🏛️', 'Quién interviene', '<p>%s</p>' % html.escape(d['quien'])),
+             ('📄', 'Qué documento lo acredita', '<ul>\n%s\n          </ul>' % docs),
+             ('❓', 'Qué falta saber', '<p>%s</p>' % html.escape(d['falta']))]
+    return ('      <section class="au-lectura" id="auLectura" aria-labelledby="auLecTit">\n'
+            '        <h2 class="au-sec-tit" id="auLecTit">📝 Lectura breve</h2>\n'
+            '        <p class="au-sec-txt">El caso en cinco preguntas, con sus documentos. Más abajo, la lectura ampliada: las cuentas paso a paso.</p>\n'
+            '        <dl class="au-lec">\n%s\n        </dl>\n      </section>') % '\n'.join(
+        '          <div class="au-lec-fila"><dt><span aria-hidden="true">%s</span> %s</dt><dd>%s</dd></div>' % f for f in filas)
 
 
 def otras(actual):
@@ -139,6 +241,7 @@ def pagina(a, sello):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{titulo_doc} · Auditoría en imágenes · Auditavisión</title>
   <meta name="description" content="{pregunta_attr}">
+{sociales}
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="{favicon}">
@@ -169,6 +272,8 @@ def pagina(a, sello):
     <div class="apartado-ancho apartado-cuerpo">
 {ruta}
 
+{lectura}
+
       <div id="auImg" class="au-raiz" data-id="{id}">
         <noscript><p>Esta página arma sus cuentas con JavaScript a partir de la base de datos de la plataforma. Actívalo para verlas.</p></noscript>
       </div>
@@ -197,7 +302,8 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_))
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_),
+           sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
 
 def portada():

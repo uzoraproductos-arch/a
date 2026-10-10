@@ -614,6 +614,26 @@ def modulo_archivo(archivo, clave):
     return archivo[:-5] + '-' + re.sub(r'^(insp|cc|am)', '', clave) + '.html'
 
 
+# Para buscadores y para compartir (propuesta de Astra, punto 8; entrega 5,
+# 10-10-2026): cada pagina dice su direccion estable y su tarjeta social.
+SITIO = 'https://uzoraproductos-arch.github.io/a/'
+
+
+def sociales(archivo, titulo, descripcion, imagen=None):
+    d = esc_attr(re.sub('<[^>]+>', '', descripcion))
+    filas = ['<link rel="canonical" href="%s">' % (SITIO + archivo),
+             '<meta property="og:type" content="article">',
+             '<meta property="og:site_name" content="Auditavisión">',
+             '<meta property="og:locale" content="es_MX">',
+             '<meta property="og:url" content="%s">' % (SITIO + archivo),
+             '<meta property="og:title" content="%s">' % esc_attr(titulo),
+             '<meta property="og:description" content="%s">' % d]
+    if imagen:
+        filas.append('<meta property="og:image" content="%s">' % (SITIO + imagen))
+    filas.append('<meta name="twitter:card" content="%s">' % ('summary_large_image' if imagen else 'summary'))
+    return '\n'.join('  ' + f for f in filas)
+
+
 def herr_otras(archivo):
     otras = '\n'.join(
         '          <a class="herr-otra herr-foto rubro-%s" href="%s">'
@@ -1071,6 +1091,7 @@ def pagina(a, sello):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{titulo_doc}</title>
   <meta name="description" content="{descripcion}">
+{sociales}
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="{favicon}">
@@ -1114,6 +1135,7 @@ def pagina(a, sello):
 </body>
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
+           sociales=sociales(a['archivo'], titulo_doc, descripcion),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
@@ -1277,7 +1299,8 @@ def generar(sello=None):
     import pendientes
     if auditorias.generar(sello) or estado_cuenta.generar(sello) or pendientes.generar(sello):
         return 1
-    return expedientes.generar(sello)
+    import sitemap
+    return expedientes.generar(sello) or sitemap.generar(sello)
 
 
 if __name__ == '__main__':

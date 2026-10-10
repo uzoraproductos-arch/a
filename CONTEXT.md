@@ -634,6 +634,45 @@ debería estar el dato.
 - **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
   ficha. AGENTS.md §2 lleva la regla nueva.
 
+**Propuesta de Astra, entrega 5, parte editorial (10-10-2026, sello 20261010j).**
+Toma los puntos 3 y 8 de la propuesta: cada investigación tiene una
+lectura breve y otra ampliada, y se puede encontrar en buscadores sin
+depender de una pestaña interna. La parte comercial (servicio pertinente,
+«Solicita una investigación») espera la decisión del autor sobre el Pase y
+los Servicios.
+- **Lectura breve en las nueve `auditoria-*.html`.** Va escrita en el HTML,
+  así que se lee sin JavaScript. Responde cinco preguntas:
+  1. qué pasó;
+  2. cuánto dinero, con sus etiquetas;
+  3. quién interviene;
+  4. qué documento lo acredita, con el enlace a cada informe;
+  5. qué falta saber.
+
+  La arma `lectura()` en `herramientas/auditorias.py` con los mismos datos
+  de `window.AUDIT_DB` que usa el JavaScript (`expedientes.fichas`,
+  `panoramaErario`, `cuenta_publica_asf`, `huachicol_fiscal`); no se
+  teclea ni una cifra. La lectura ampliada sigue siendo la que pinta
+  `auditoria-imagen.js`, y el paso 1 del recorrido («Entiende el caso»)
+  ahora lleva a la lectura breve (`#auLectura`).
+- **Dirección estable y tarjeta para compartir.** Cada página generada lleva
+  `canonical` y etiquetas Open Graph y Twitter. Las investigaciones usan su
+  imagen; las demás, una tarjeta sin imagen. Las arma `sociales()` en
+  `apartados.py`; también la usan `auditorias.py` y `expedientes.py`.
+- **`sitemap.xml`.** Lo escribe `herramientas/sitemap.py` al final de
+  `apartados.generar()` y trae 48 páginas. Deja fuera la Enciclopedia y las
+  que solo redirigen. No se escribe `robots.txt` porque el sitio vive en
+  `/a/` y los buscadores solo leen el de la raíz del dominio: **el autor
+  tiene que registrar el mapa en Google Search Console**
+  (`https://uzoraproductos-arch.github.io/a/sitemap.xml`).
+
+Pendientes de la entrega 5:
+- **Páginas por tema** para los temas candidatos de Astra que aún no tienen
+  la suya: medicamentos falsificados, proveedores y facturación.
+  Necesitan documentos oficiales antes de escribirse.
+- **Investigación de búsquedas en Google Trends.** Requiere acceso que la
+  plataforma no tiene.
+- **Enlace a un servicio pertinente.** Espera la decisión del autor.
+
 **Propuesta de Astra, entrega 4: simuladores desde cero (10-10-2026, sello 20261010i).**
 Corresponde al punto 6 de la propuesta: los importes arrancan en $0, hay
 ejemplo oficial identificado, se pueden comparar escenarios, reiniciar en
