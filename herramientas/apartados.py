@@ -33,9 +33,6 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E")
 
 
-# El radar hacendario, que vivia en el menu «Datos de referencia» de la
-# portada, se muda a la pagina de datos (09-10-2026).
-RADAR = open(os.path.join(RAIZ, 'herramientas', 'plantillas', 'radar.html'), encoding='utf-8').read().rstrip().replace('\n', '\n        ')
 
 
 def ir(destino, ancla=None):
@@ -388,20 +385,22 @@ APARTADOS = [
         'entrada': ('Todo lo que ves en el auditor sale de documentos oficiales. Aquí están las cifras de referencia '
                     'para poner el gasto en perspectiva, con su fuente, y los archivos que abren en Excel para que '
                     'hagas tus propias cuentas.'),
-        'scripts': ['radar-datos.js', 'audit-database.js', 'municipios-efipem.js', 'datos.js'],
+        'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
+        # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
+        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-hacendario.html#hoy',
+                          'rc-deuda': 'radar-hacendario.html#hoy', 'rc-asf': 'radar-hacendario.html#hoy',
+                          'rc-huachicol': 'radar-hacendario.html#hoy'},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
         'pestanas': True,
         'secciones': [
             {
+                # Desde el 10-10-2026 es su propia pagina (radar()): el
+                # tablero de cada administracion, con su reloj y su duelo.
                 'id': 'radar',
-                'pestana': ('📡', 'Radar hacendario', 'Cifras en perspectiva'),
-                'titulo': '📡 Radar hacendario: cifras en perspectiva',
-                'texto': ('Las cifras grandes del erario y lo que equivalen por segundo mientras lees. '
-                          'Pulsa «Desglosar cifras» o toca una cifra para ver cómo se calcula y de dónde sale.'),
-                'bloque': RADAR,
-                'tarjetas': [],
+                'pagina': 'radar-hacendario.html',
+                'pestana': ('📡', 'Radar hacendario', 'Cada administración, con sus números: abre su página'),
             },
             {
                 'id': 'abiertos',
@@ -1554,6 +1553,270 @@ def garantias():
     }
 
 
+# Radar hacendario en su propia pagina (decision del autor, 10-10-2026): cada
+# administracion con sus numeros. Era la pestana «Radar hacendario» de Datos
+# (herramientas/plantillas/radar.html + radar-datos.js): cifras sueltas de
+# 2026 y equivalencias por segundo. Ahora es un tablero por sexenio con
+# ingresos, inversion, costo del gobierno, deuda y lo pendiente ante la ASF,
+# mas el reloj de cada administracion y el duelo entre dos. Las cifras del
+# ano en curso se quedan abajo, en «Hoy».
+#
+# Todo sale de window.AUDIT_DB: finanzas_sexenales (series anuales de
+# Hacienda y deuda al recibir y al entregar), evaluacion_sexenal
+# (auditorias y recuperaciones de la ASF), cuenta_publica_asf (por aclarar)
+# y simulador_megaobras (las obras de cada sexenio). Aqui solo se promedia y
+# se suma, y cada operacion se dice junto a su cifra.
+RADAR_ADMINS = [
+    # (id, nombre, corto, iniciales, anos que se le asignan, color, en curso)
+    ('salinas', 'Carlos Salinas de Gortari', 'Salinas', 'CS', (1989, 1994), '#7a8aa8', False),
+    ('zedillo', 'Ernesto Zedillo Ponce de León', 'Zedillo', 'EZ', (1995, 2000), '#4f9be8', False),
+    ('fox', 'Vicente Fox Quesada', 'Fox', 'VF', (2001, 2006), '#23855a', False),
+    ('calderon', 'Felipe Calderón Hinojosa', 'Calderón', 'FC', (2007, 2012), '#a9541a', False),
+    ('epn', 'Enrique Peña Nieto', 'Peña Nieto', 'EPN', (2013, 2018), '#7d3fa6', False),
+    ('amlo', 'Andrés Manuel López Obrador', 'López Obrador', 'AMLO', (2019, 2024), '#b3261e', False),
+    ('sheinbaum', 'Claudia Sheinbaum Pardo', 'Sheinbaum', 'CSP', (2025, 2030), '#0f7f7a', True),
+]
+# Nombre de cada presidente como lo escribe simulador_megaobras.
+RADAR_OBRAS_PRES = {'salinas': 'Carlos Salinas', 'zedillo': 'Ernesto Zedillo', 'fox': 'Vicente Fox',
+                    'calderon': 'Felipe Calderón', 'epn': 'Enrique Peña Nieto', 'amlo': 'Andrés Manuel López Obrador',
+                    'sheinbaum': 'Claudia Sheinbaum'}
+# Serie anual -> (titulo, que mide, «ojo» para la suma en pesos)
+RADAR_SERIES = {
+    'ingresos': ('Ingresos presupuestarios', 'Todo lo que entró al sector público presupuestario: impuestos, ingresos petroleros, cuotas del IMSS e ISSSTE y ventas de la CFE. Sin deuda.'),
+    'inversion': ('Inversión física', 'Obra pública y equipamiento del sector público presupuestario: carreteras, hospitales, refinerías, presas, trenes.'),
+    'gasto': ('Gasto neto total', 'Todo lo que gastó el sector público presupuestario en el año, incluidos los intereses de la deuda.'),
+    'costo_financiero': ('Costo financiero', 'Intereses, comisiones y gastos de la deuda, más los programas de apoyo a ahorradores y deudores de la banca.'),
+}
+RADAR_OJO_MDP = ('Son pesos de cada año, sin quitar la inflación: un peso de 1995 no vale lo mismo que uno de 2024. '
+                 'Para comparar sexenios usa el promedio en % del PIB.')
+
+# «Hoy»: las cifras del ano en curso que traia el radar anterior
+# (plantillas/radar.html), con las mismas fuentes y chips.
+def _hoy(ico, cifra, que, fuente, chip='oficial', pend=''):
+    return ('          <div class="rd-hoy-c"><span class="rd-hoy-que">%s %s</span><b>%s</b> <span class="est-chip est-%s"%s>%s</span><small>📄 %s</small></div>'
+            % (ico, que, cifra, chip, (' data-pend="%s"' % pend) if pend else '', chip, fuente))
+
+
+RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
+    _hoy('🏛️', '$10.19 billones', 'Presupuesto federal aprobado 2026', 'Presupuesto de Egresos de la Federación 2026, art. 1'),
+    _hoy('🗺️', '$2.81 billones (27.6 %)', 'Gasto federalizado a los 32 estados', 'PEF 2026: estimación del gasto federalizado, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF', 'derivado'),
+    _hoy('💰', '$5.42 billones', 'ISR, IVA e IEPS estimados en la Ley de Ingresos 2026', 'Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp', 'derivado'),
+    _hoy('🤝', '$1.46 billones', 'Participaciones a estados y municipios (Ramo 28)', 'PEF 2026, Ramo General 28: $1,456,045.9 mdp'),
+    _hoy('📉', '$1,572,073.3 mdp', 'Costo financiero de la deuda en 2026', 'PEF 2026, Anexo 8'),
+    _hoy('🏦', '$643,695.7 mdp', 'Deuda de los 32 gobiernos estatales', 'SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades', 'derivado'),
+    _hoy('⚖️', '$65,169.1 mdp', 'Por aclarar ante la ASF, Cuenta Pública 2024 (no es daño comprobado)', 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11'),
+    _hoy('⛽', 'sin cifra oficial', 'Huachicol fiscal: cuánto IEPS se deja de cobrar', '<a href="auditoria-huachicol-fiscal.html">Lo que se sabe y lo que falta ➔</a>', 'pendiente', 'huachicol-evasion'),
+]) + '''
+        </div>
+        <div class="rd-hoy-vivo" role="status"><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
+          <span>intereses de la deuda <b data-tasa="49850.12">+$0.00</b></span>
+          <span>pérdida documentada de las megaobras <b data-tasa="2062.75">+$0.00</b></span>
+          <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y $65,050.8 mdp, este último un piso derivado
+          con la Cuenta Pública 2024). No son pagos que ocurran en este instante. <a href="auditoria-deuda-soberana.html">El reloj de los intereses ➔</a></small>
+        </div>'''
+
+
+def radar():
+    import auditorias
+    base = auditorias.db()
+    fs = base['finanzas_sexenales']
+    ev = {f['id']: f for f in base['evaluacion_sexenal']['filas']}
+    cp = base['cuenta_publica_asf']
+    fuentes = {}
+
+    def usa(k, catalogo):
+        if k and k not in fuentes and k in catalogo:
+            c = catalogo[k]
+            fuentes[k] = {'corto': c.get('corto') or c.get('doc', k)[:90], 'url': c.get('url', '')}
+        return k
+
+    admins, valores, obras = [], {}, {}
+    for (aid, nombre, corto, ini, (a0, a1), col, curso) in RADAR_ADMINS:
+        import datetime
+        anios = list(range(a0, a1 + 1))
+        con_dato = [y for y in anios if str(y) in fs['anual']['ingresos']]
+        if curso:
+            anios = con_dato  # en curso: solo los anos cerrados
+        periodo = '%d–%d · %s' % (a0, a1, 'en curso' if curso else 'seis años calendario')
+        admins.append({'id': aid, 'n': nombre, 'c': corto, 'ini': ini, 'a': [a0, a1], 'col': col, 'curso': curso,
+                       'periodo': periodo,
+                       'aviso': ('Sexenio en curso: solo %s, el único año cerrado. No se compara como sexenio completo.' % ', '.join(map(str, anios))
+                                 if curso else '')})
+        v = {}
+        rango = '%d a %d' % (anios[0], anios[-1]) if anios and anios[0] != anios[-1] else (str(anios[0]) if anios else '')
+        for serie, (tit, _) in RADAR_SERIES.items():
+            datos = fs['anual'][serie]
+            falta = [y for y in anios if str(y) not in datos]
+            if not anios or falta:
+                fp = fs['faltantes']['pib']
+                v[serie + '_pib'] = {'pend': fp['motivo'], 'pid': fp['pid']}
+                v[serie + '_mdp'] = {'pend': fp['motivo'], 'pid': fp['pid']}
+                continue
+            filas = [datos[str(y)] for y in anios]
+            fts = []
+            for x in filas:
+                for k in x['f']:
+                    if k not in fts:
+                        fts.append(usa(k, fs['fuentes']))
+            prom = round(sum(x['pib'] for x in filas) / len(filas), 1)
+            v[serie + '_pib'] = {'v': prom, 'est': 'derivado', 'f': fts,
+                                 'op': 'Promedio de %d %s (%s): (%s) ÷ %d.' % (len(filas), 'año' if len(filas) == 1 else 'años', rango,
+                                       ' + '.join(str(x['pib']) for x in filas), len(filas)),
+                                 'nota': ('Los años hasta 2016 son derivados (monto de la Cuenta Pública entre el PIB del INEGI); '
+                                          'desde 2017, el porcentaje que publica Hacienda.') if anios[0] <= 2016 < anios[-1] else ''}
+            if all(x.get('mdp') is not None for x in filas):
+                suma = round(sum(x['mdp'] for x in filas), 1)
+                v[serie + '_mdp'] = {'v': suma, 'est': 'derivado', 'f': [usa('PRES_5IG_FP', fs['fuentes'])],
+                                     'op': 'Suma de %s, en millones de pesos de cada año.' % rango, 'nota': RADAR_OJO_MDP}
+            else:
+                fm = fs['faltantes']['mdp']
+                v[serie + '_mdp'] = {'pend': fm['motivo'], 'pid': fm['pid']}
+        # Deuda al recibir y al entregar
+        dd = fs['deuda'].get(aid, {})
+        for k, m in (('dIni', 'deuda_ini'), ('dFin', 'deuda_fin')):
+            x = dd.get(k)
+            v[m] = ({'v': x['v'], 'est': 'oficial', 'f': [usa(x['f'], fs['fuentes'])], 'nota': x.get('nota', '')}
+                    if x else {'na': dd.get('pend', 'Sin serie comparable para ese año.'), 'et': 'en curso' if curso else 'sin serie comparable'})
+        if dd.get('dIni') and dd.get('dFin'):
+            v['deuda_cambio'] = {'v': round(dd['dFin']['v'] - dd['dIni']['v'], 1), 'est': 'derivado',
+                                 'f': sorted({usa(dd['dIni']['f'], fs['fuentes']), usa(dd['dFin']['f'], fs['fuentes'])}),
+                                 'op': 'Deuda al entregar (%.1f%% del PIB) menos deuda al recibir (%.1f%%).' % (dd['dFin']['v'], dd['dIni']['v'])}
+        else:
+            v['deuda_cambio'] = {'na': dd.get('pend', 'Falta la deuda al recibir o al entregar con la misma serie.'), 'et': 'en curso' if curso else 'sin serie comparable'}
+        if dd.get('mIni') and dd.get('mFin') and not curso:
+            seg = (datetime.date(a1 + 1, 1, 1) - datetime.date(a0, 1, 1)).days * 86400
+            ps = round((dd['mFin']['v'] - dd['mIni']['v']) * 1e6 / seg, 0)
+            v['deuda_seg'] = {'v': ps, 'est': 'derivado',
+                              'f': sorted({usa(dd['mIni']['f'], fs['fuentes']), usa(dd['mFin']['f'], fs['fuentes'])}),
+                              'op': 'Saldo de la deuda (SHRFSP) al entregar, $%s mdp, menos al recibir, $%s mdp, entre los %s segundos de sus seis años.'
+                                    % (format(dd['mFin']['v'], ',.1f'), format(dd['mIni']['v'], ',.1f'), format(seg, ','))}
+        else:
+            v['deuda_seg'] = {'na': 'En curso: se calcula al cerrar el sexenio.' if curso else dd.get('pend', 'Falta el saldo en pesos al recibir o al entregar.'), 'et': 'en curso' if curso else 'sin serie comparable'}
+        # ASF
+        e = ev.get(aid)
+        if e:
+            a = e['auditorias']
+            v['asf_aud'] = ({'v': a['total'], 'est': 'derivado', 'f': [usa(k, base['evaluacion_sexenal']['fuentes']) for k in a['fuentes']],
+                             'op': a.get('operacion', ''), 'nota': a.get('nota', '')} if a.get('total') else
+                            ({'na': a['motivo']} if a['estado'] == 'no_aplica' else {'pend': a.get('motivo', ''), 'pid': 'sexenal-auditorias' if a['estado'] == 'pendiente' else ''}))
+            r = e['recuperaciones']
+            v['asf_rec'] = ({'v': r['mdp'], 'est': 'derivado', 'f': [usa(r['fuente'], base['evaluacion_sexenal']['fuentes'])],
+                             'op': r.get('operacion', ''), 'nota': r.get('nota', '')} if r.get('mdp') else
+                            ({'na': r['motivo']} if r['estado'] == 'no_aplica' else ({'na': r.get('motivo', ''), 'et': 'cifra conjunta'} if r['estado'] == 'conjunta' else {'pend': r.get('motivo', ''), 'pid': 'sexenal-recuperaciones'})))
+            p = e['porAclarar']
+            v['asf_acl'] = ({'v': p['mdp'], 'est': 'derivado', 'f': [usa(p['fuente'], base['evaluacion_sexenal']['fuentes'])],
+                             'op': p.get('operacion', ''), 'nota': p.get('nota', '')} if p.get('mdp') else
+                            ({'na': p['motivo']} if p['estado'] == 'no_aplica' else {'pend': p.get('motivo', ''), 'pid': 'sexenal-porAclarar' if p['estado'] == 'pendiente' else ''}))
+        else:
+            c25 = cp['cp2025']
+            nota = 'Solo la %s entrega de la Cuenta Pública 2025 (corte %s): faltan las otras dos.' % (c25['entrega'], c25['corte'])
+            f25 = [usa(c25['fuente'], cp['fuentes'])]
+            v['asf_aud'] = {'v': c25['auditorias'], 'est': 'oficial', 'f': f25, 'nota': nota}
+            v['asf_rec'] = {'v': round(c25['recuperaciones'] / 1e6, 1), 'est': 'oficial', 'f': f25, 'nota': nota}
+            v['asf_acl'] = {'v': round(c25['porAclarar'] / 1e6, 1), 'est': 'oficial', 'f': f25, 'nota': nota}
+        valores[aid] = v
+        pres = RADAR_OBRAS_PRES[aid]
+        obras[aid] = [{'n': o['nombre'], 'v': o.get('inversion_real_mdp'),
+                       'est': (o.get('estado_campos') or {}).get('inversion_real_mdp', 'pendiente')}
+                      for o in base['simulador_megaobras']['obras'] if pres.split()[0] in o.get('presidente', '') and pres.split()[-1] in o.get('presidente', '')]
+
+    metricas = {}
+    for serie, (tit, _) in RADAR_SERIES.items():
+        metricas[serie + '_pib'] = {'tit': tit + ' (promedio anual)', 'u': 'pib', 'kpi': 'del PIB al año, en promedio'}
+        metricas[serie + '_mdp'] = {'tit': tit + ' (suma del sexenio)', 'u': 'mdp', 'kpi': 'en el sexenio', 'kpi2': 'Suma en pesos de cada año', 'ojo': RADAR_OJO_MDP}
+    metricas.update({
+        'deuda_ini': {'tit': 'Deuda al recibir', 'u': 'pib', 'kpi': 'del PIB al recibir'},
+        'deuda_fin': {'tit': 'Deuda al entregar', 'u': 'pib', 'kpi': 'del PIB al entregar', 'kpi2': 'Al entregar'},
+        'deuda_cambio': {'tit': 'Cambio en el sexenio', 'u': 'pp', 'kpi': 'puntos del PIB en el sexenio'},
+        'deuda_seg': {'tit': 'Lo que creció por segundo', 'u': 'seg', 'kpi': 'de deuda nueva por segundo',
+                      'ojo': 'Pesos de cada año: compara el ritmo, no el poder de compra.'},
+        'asf_aud': {'tit': 'Auditorías practicadas', 'u': 'ent', 'kpi': 'auditorías de la ASF'},
+        'asf_rec': {'tit': 'Recuperaciones operadas', 'u': 'mdp', 'kpi': 'recuperados', 'kpi2': 'Recuperado',
+                    'ojo': 'Las cuentas viejas llevan más años de solventación: comparar con esta cifra favorece a los sexenios antiguos.'},
+        'asf_acl': {'tit': 'Monto por aclarar', 'u': 'mdp', 'kpi': 'por aclarar ante la ASF',
+                    'ojo': 'No es daño comprobado: es lo que, al corte, no tenía documentación que acreditara el gasto. La ASF lo mide así desde la Cuenta Pública 2019.'},
+    })
+    metricas['costo_financiero_pib']['kpi2'] = 'Intereses de la deuda'
+    dims = [
+        {'id': 'ingresos', 'ico': '💰', 'tit': 'Ingresos', 'tono': 'verde', 'kpi': 'ingresos_pib',
+         'que': RADAR_SERIES['ingresos'][1], 'metricas': ['ingresos_pib', 'ingresos_mdp']},
+        {'id': 'inversion', 'ico': '🏗️', 'tit': 'Inversión', 'tono': 'azul', 'kpi': 'inversion_pib',
+         'que': RADAR_SERIES['inversion'][1], 'metricas': ['inversion_pib', 'inversion_mdp']},
+        {'id': 'costo', 'ico': '🏛️', 'tit': 'Costo del gobierno', 'tono': 'ambar', 'kpi': 'gasto_pib', 'kpi2': 'costo_financiero_pib',
+         'que': RADAR_SERIES['gasto'][1] + ' Y, aparte, lo que se fue solo en intereses.',
+         'metricas': ['gasto_pib', 'costo_financiero_pib', 'gasto_mdp', 'costo_financiero_mdp']},
+        {'id': 'deuda', 'ico': '📉', 'tit': 'Deuda', 'tono': 'rojo', 'kpi': 'deuda_fin', 'kpi2': 'deuda_cambio',
+         'que': 'Cuánta deuda pública recibió cada administración y cuánta entregó, medida contra el tamaño de la economía (saldo histórico de los requerimientos financieros del sector público, SHRFSP).',
+         'metricas': ['deuda_fin', 'deuda_ini', 'deuda_cambio', 'deuda_seg']},
+        {'id': 'asf', 'ico': '⚖️', 'tit': 'Pendiente ante la ASF', 'tono': 'oro', 'kpi': 'asf_acl', 'kpi2': 'asf_rec',
+         'que': 'Lo que la Auditoría Superior de la Federación revisó de las Cuentas Públicas de cada sexenio, lo que se recuperó y lo que quedó por aclarar.',
+         'metricas': ['asf_acl', 'asf_aud', 'asf_rec']},
+    ]
+    metricas['deuda_cambio']['kpi2'] = 'Cambio'
+    reloj = [
+        {'met': 'deuda_seg', 'porSeg': True, 'tit': '📉 Deuda nueva', 'op': 'Lo que creció el saldo de la deuda en el sexenio, entre sus segundos.'},
+        {'met': 'costo_financiero_mdp', 'tit': '💸 Intereses de la deuda', 'op': 'Costo financiero del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
+        {'met': 'inversion_mdp', 'tit': '🏗️ Inversión física', 'op': 'Inversión física del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
+        {'met': 'ingresos_mdp', 'tit': '💰 Ingresos', 'op': 'Ingresos presupuestarios del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
+        {'met': 'gasto_mdp', 'tit': '🏛️ Gasto total', 'op': 'Gasto neto del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
+    ]
+    datos = json.dumps({'admins': admins, 'valores': valores, 'metricas': metricas, 'dims': dims, 'obras': obras,
+                        'fuentes': fuentes, 'reloj': reloj, 'inicial': 'amlo',
+                        'duelo': ['ingresos_pib', 'inversion_pib', 'gasto_pib', 'costo_financiero_pib', 'deuda_fin', 'deuda_cambio', 'asf_aud', 'asf_rec']},
+                       ensure_ascii=False).replace('</', '<\\/')
+
+    tablero = '''<script type="application/json" id="rdDatos">{datos}</script>
+        <div class="rd-tablero" id="rdTablero">
+          <div class="rd-admins" id="rdAdmins" role="tablist" aria-label="Elige una administración"></div>
+          <div class="rd-ficha" id="rdFicha" aria-live="polite"></div>
+          <div class="rd-dim" id="rdDim"></div>
+          <noscript><p>El tablero necesita JavaScript.</p></noscript>
+        </div>'''.format(datos=datos)
+    reloj_html = '''<div class="rd-reloj" id="rdReloj">
+          <div class="rd-reloj-ctl">
+            <label>Administración<select id="rdRelojAdm"></select></label>
+            <label>Qué contar<select id="rdRelojMet"></select></label>
+          </div>
+          <div class="rd-reloj-pantalla">
+            <small>Al ritmo de esa administración, en <span id="rdRelojSeg">0 s</span>:</small>
+            <span id="rdRelojCont" aria-live="off">$0</span>
+            <div class="rd-reloj-btns"><button type="button" class="sz-btn sz-btn-of" id="rdRelojPlay" aria-pressed="false">▶ Contabilizar</button>
+              <button type="button" class="sz-btn" id="rdRelojCero">↺ A ceros</button></div>
+          </div>
+          <div id="rdRelojOut"></div>
+        </div>'''
+    duelo_html = '''<div class="rd-duelo" id="rdDuelo">
+          <div class="rd-duelo-ctl"><select id="rdDuelo1" aria-label="Primera administración"></select><span>vs</span>
+            <select id="rdDuelo2" aria-label="Segunda administración"></select></div>
+          <div id="rdDueloOut"></div>
+        </div>'''
+    lectura = '<details class="rd-lectura"><summary>📏 Cómo leer estos números</summary><ul>%s</ul></details>' % ''.join(
+        '<li>%s</li>' % x for x in [base['evaluacion_sexenal']['convencion']] + fs['advertencias'] + base['evaluacion_sexenal']['advertencias'])
+
+    return {
+        'archivo': 'radar-hacendario.html', 'menu': 'Radar hacendario', 'menu_archivo': 'descarga-los-datos.html',
+        'padre': ('descarga-los-datos.html', 'Datos'),
+        'icono': '📡', 'titulo': 'Radar hacendario', 'lema': 'Cada administración, con sus números',
+        'entrada': ('Lo que entró, lo que se invirtió, lo que costó el gobierno, la deuda que recibió y entregó, y lo que quedó '
+                    'por aclarar ante la Auditoría Superior: administración por administración, desde 1989. Elige una, compárala '
+                    'con las demás y pon a correr su reloj. Cada cifra trae su documento.'),
+        'estilos': ['radar.css'],
+        'scripts': ['radar.js'],
+        'secciones': [
+            {'id': 'tablero', 'titulo': '📡 El tablero', 'texto': 'Elige una administración y toca cada tarjeta para ver la comparativa con las demás.',
+             'tarjetas': [], 'bloque': tablero},
+            {'id': 'reloj', 'titulo': '⏱️ El reloj de cada administración',
+             'texto': 'Elige una administración y qué contar: el contador corre al ritmo promedio de su sexenio. Es una equivalencia, no dinero que se mueva hoy.',
+             'tarjetas': [], 'bloque': reloj_html},
+            {'id': 'duelo', 'titulo': '⚔️ Duelo de administraciones', 'texto': 'Dos administraciones, cara a cara, en las mismas medidas.',
+             'tarjetas': [], 'bloque': duelo_html},
+            {'id': 'hoy', 'titulo': '📌 Hoy: el presupuesto en curso', 'texto': 'Las cifras grandes de 2026, para poner todo lo anterior en perspectiva.',
+             'tarjetas': [], 'bloque': RADAR_HOY},
+            {'id': 'lectura', 'titulo': '📏 Cómo leer', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': lectura},
+        ],
+    }
+
+
 # Glosario general en su propia pagina (decision del autor, 09-10-2026):
 # lo pinta assets/auditor/js/glosario.js con los terminos de la base, sin
 # cargar la portada en un marco. Los enlaces a un termino llevan a
@@ -1904,6 +2167,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Radar hacendario, en su propia página: cada administración desde 1989 con sus ingresos, inversión, costo, deuda y lo pendiente ante la ASF, más el reloj de cada sexenio y el duelo entre dos.'),
     ('10-10-2026', 'Garantías cívicas, en su propia página: una brújula que en tres clics te dice a qué puerta oficial tocar, las seis puertas, tus diez garantías y el reto «¿Mito o realidad?».'),
     ('10-10-2026', 'Ágora cívica, en su propia página: la red de réplica y diálogo, con perfil, muro, réplicas, apoyos, insignias y preguntas para empezar.'),
     ('10-10-2026', 'Una sola puerta, «📢 Cuéntanos lo que viste»: en cualquier página abre tres rutas (algo raro con el dinero público, un dato mal, un tema para investigar).'),
@@ -2049,7 +2313,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias(), radar()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
