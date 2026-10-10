@@ -387,9 +387,9 @@ APARTADOS = [
                     'hagas tus propias cuentas.'),
         'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
         # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
-        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-estado-de-cuenta.html#hoy',
-                          'rc-deuda': 'radar-estado-de-cuenta.html#hoy', 'rc-asf': 'radar-estado-de-cuenta.html#hoy',
-                          'rc-huachicol': 'radar-estado-de-cuenta.html#hoy'},
+        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-hoy.html#hoy',
+                          'rc-deuda': 'radar-hoy.html#hoy', 'rc-asf': 'radar-hoy.html#hoy',
+                          'rc-huachicol': 'radar-hoy.html#hoy'},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -1633,9 +1633,12 @@ RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
 # (id, archivo, icono, titulo, de que trata)
 RADAR_PARTES = [
     # «Hoy» y «Expide el estado de cuenta» son una sola tarjeta (decision del
-    # autor, 10-10-2026). La pagina conserva radar-estado-de-cuenta.html porque
-    # esa direccion va impresa en el sello de los PDF; radar-hoy.html redirige.
-    ('hoy', 'radar-estado-de-cuenta.html', '🧾', 'Hoy y los estados de cuenta',
+    # autor, 10-10-2026), pero «Expide» abre su propia pagina (decision del
+    # autor, 10-10-2026, mas tarde): la tarjeta lleva a radar-hoy.html, con el
+    # presupuesto en curso y el acceso a la herramienta, y la herramienta se
+    # queda en radar-estado-de-cuenta.html porque esa direccion va impresa en
+    # el sello de los PDF (?verifica=).
+    ('hoy', 'radar-hoy.html', '🧾', 'Hoy y los estados de cuenta',
      'El presupuesto en curso y el estado de cuenta de cada sexenio, de diputados federales y locales, del Senado y de la Suprema Corte, con semáforo y sello'),
     ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
     ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
@@ -1681,6 +1684,11 @@ RADAR_LEY17 = {'txt': ('La Ley Federal de Presupuesto y Responsabilidad Hacendar
                        'al equilibrio presupuestario, y permite un déficit solo de manera circunstancial, por las condiciones económicas '
                        'y sociales del país, con la justificación del Ejecutivo ante el Congreso.'),
                'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf', 'corto': 'LFPRH, art. 17 (Cámara de Diputados)'}
+
+
+EXPIDE_TEXTO = ('Elige de quién: una administración presidencial, la diputación federal, la senaduría, la diputación de cualquiera '
+                'de los 32 congresos locales, o la Suprema Corte con su ponencia y sus asesores. Genera su estado de cuenta con su '
+                'semáforo y descárgalo en PDF con folio y sello de verificación.')
 
 
 def radar_nav(actual):
@@ -2374,7 +2382,12 @@ def radar():
 
     cargos_js = '<script type="application/json" id="exCargos">%s</script>\n        ' % json.dumps(
         radar_cargos(base), ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
-    expide_html = '''<div class="ex" id="exApp">
+    # La imagen del encabezado del estado de cuenta (pedido del autor,
+    # 10-10-2026): si existe assets/auditor/img/encabezado-estado-de-cuenta.*
+    # se pinta en todos los documentos; si no, no se pide nada al servidor.
+    banda = next(('assets/auditor/img/encabezado-estado-de-cuenta.' + x for x in ('svg', 'png', 'jpg', 'jpeg', 'webp')
+                  if os.path.exists(os.path.join(RAIZ, 'assets', 'auditor', 'img', 'encabezado-estado-de-cuenta.' + x))), '')
+    expide_html = '''<div class="ex" id="exApp"%s>
           <div class="ex-ctl">
             <p class="ex-paso"><b>1.</b> ¿De quién?</p>
             <div class="ex-tipos" id="exTipos" role="radiogroup" aria-label="Elige de quién es el estado de cuenta"></div>
@@ -2382,9 +2395,10 @@ def radar():
             <div class="rd-admins" id="exAdmins" role="radiogroup" aria-label="Elige una administración"></div>
             <div class="ex-ents" id="exEnts" hidden></div>
             <p class="ex-paso"><b id="exPaso3">3.</b> Revisa su estado de cuenta y descárgalo</p>
-            <div class="ex-btns"><button type="button" class="sz-btn sz-btn-of" id="exPdf">⬇️ Descargar en PDF</button>
+            <div class="ex-btns"><button type="button" class="sz-btn sz-btn-of" id="exGenera">🧾 Generar estado de cuenta</button>
+              <button type="button" class="sz-btn" id="exPdf" disabled>⬇️ Descargar en PDF</button>
               <button type="button" class="sz-btn" id="exLiga">🔗 Copiar el enlace</button></div>
-            <p class="ex-pista">Al descargar, elige «Guardar como PDF» en la ventana de impresión.</p>
+            <p class="ex-pista">Primero genéralo; luego descárgalo. Al descargar, elige «Guardar como PDF» en la ventana de impresión.</p>
           </div>
           <article class="ex-doc" id="exDoc" aria-live="polite"></article>
           <section class="ex-verifica" id="exVerifica" aria-labelledby="exVerTit">
@@ -2395,7 +2409,7 @@ def radar():
             <div id="exVerOut" aria-live="polite"></div>
           </section>
           <noscript><p>La herramienta necesita JavaScript.</p></noscript>
-        </div>'''
+        </div>''' % ((' data-cabecera="%s"' % banda) if banda else '')
 
     partes = {
         'tablero': ('Elige una administración y toca cada tarjeta para ver la comparativa con las demás: ingresos, inversión, '
@@ -2414,11 +2428,9 @@ def radar():
                 'comprobar que no se alteró.', [
                     {'id': 'hoy', 'titulo': '📌 Hoy: el presupuesto en curso', 'tarjetas': [], 'bloque': RADAR_HOY,
                      'texto': 'Las cifras grandes de 2026: el punto de partida para leer cualquier estado de cuenta.'},
-                    {'id': 'expide', 'titulo': '🧾 Expide un estado de cuenta: administraciones, Congreso y la Corte', 'tarjetas': [],
-                     'bloque': datos_js + cargos_js + expide_html,
-                     'texto': 'Elige de quién: una administración presidencial, la diputación federal, la senaduría, la diputación de cualquiera de los 32 congresos locales, '
-                              'o la Suprema Corte con su ponencia y sus asesores. La plataforma arma su estado de cuenta con su semáforo, '
-                              'y lo descargas en PDF con folio y sello de verificación.'}]),
+                    {'id': 'expide', 'titulo': '🧾 Expide un estado de cuenta: administraciones, Congreso y la Corte',
+                     'texto': 'La herramienta abre en su propia página.',
+                     'tarjetas': [('🧾', 'Expide un estado de cuenta', EXPIDE_TEXTO, 'radar-estado-de-cuenta.html', '', '')]}]),
         'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
     }
     paginas = [{
@@ -2430,8 +2442,8 @@ def radar():
                     'cada año, en pesos de hoy, en dólares o en euros; mira cuánto ha valido el peso y hacia dónde lo proyecta Hacienda, '
                     'y pon a correr el reloj de cada sexenio. Cada cifra trae su documento.'),
         # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-        'hash_a_pagina': dict({r[0]: r[1] for r in RADAR_PARTES}, hoy='radar-estado-de-cuenta.html#hoy',
-                              expide='radar-estado-de-cuenta.html#expide'),
+        'hash_a_pagina': dict({r[0]: r[1] for r in RADAR_PARTES}, hoy='radar-hoy.html#hoy',
+                              expide='radar-estado-de-cuenta.html'),
         'pestanas': True,
         'pista': 'Cada parte del radar abre su propia página.',
         'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in RADAR_PARTES],
@@ -2442,11 +2454,22 @@ def radar():
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'descarga-los-datos.html',
             'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
             'icono': ico, 'titulo': tit, 'lema': 'Radar hacendario', 'entrada': entrada,
-            'estilos': ['radar.css'] + (['estado-administracion.css'] if pid == 'hoy' else []),
-            'scripts': ['radar.js'] + (['estado-administracion.js'] if pid == 'hoy' else []), 'pie_extra': radar_nav(archivo),
+            'estilos': ['radar.css'], 'scripts': ['radar.js'], 'pie_extra': radar_nav(archivo),
             'secciones': bloque if isinstance(bloque, list) else
                          [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         })
+    # «Expide un estado de cuenta», en su propia pagina (pedido del autor, 10-10-2026).
+    paginas.append({
+        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Expide un estado de cuenta', 'menu_archivo': 'descarga-los-datos.html',
+        'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
+        'padre3': ('radar-hoy.html', 'Hoy y los estados de cuenta'),
+        'icono': '🧾', 'titulo': 'Expide un estado de cuenta', 'lema': 'Administraciones, Congreso y la Corte',
+        'entrada': EXPIDE_TEXTO + ' Cualquiera puede comprobar que no se alteró.',
+        'estilos': ['radar.css', 'estado-administracion.css'], 'scripts': ['radar.js', 'estado-administracion.js'],
+        'pie_extra': radar_nav('radar-hoy.html'),
+        'secciones': [{'id': 'expide', 'titulo': 'Expide un estado de cuenta', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                       'bloque': datos_js + cargos_js + expide_html}],
+    })
     return paginas
 
 
@@ -2799,6 +2822,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Expide un estado de cuenta abre en su propia página: eliges de quién, presionas «Generar estado de cuenta» y luego lo descargas en PDF. El encabezado del documento es más amplio y el logo, más nítido.'),
     ('10-10-2026', 'El estado de cuenta suma a las senadoras y los senadores: su dieta, su remuneración anual bruta y neta, sus asesores, el presupuesto del Senado y su auditoría de la ASF, con el mismo folio y sello.'),
     ('10-10-2026', 'El estado de cuenta ya no es solo de las administraciones: expide también el de la diputación federal, el de cada uno de los 32 congresos locales y el de la Suprema Corte con su ponencia y sus asesores. Lo que cobran, lo que gasta su institución y lo que dijo la Auditoría Superior, con dos señales con regla de ley (el tope del art. 127 y la obligación de publicar lo que pagan), en PDF con folio y sello.'),
     ('10-10-2026', 'En el Radar, «Hoy: el presupuesto en curso» y «Expide el estado de cuenta» son ya una sola tarjeta: las cifras de 2026 y el estado de cuenta de cada administración, en la misma página.'),
@@ -2908,8 +2932,6 @@ def indice():
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
-    'radar-hoy.html': ('radar-estado-de-cuenta.html#hoy', 'Hoy: el presupuesto en curso',
-                       'Ahora comparte página con el estado de cuenta de cada administración.'),
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
 }
