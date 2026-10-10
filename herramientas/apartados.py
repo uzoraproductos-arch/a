@@ -1636,7 +1636,7 @@ RADAR_PARTES = [
     # autor, 10-10-2026). La pagina conserva radar-estado-de-cuenta.html porque
     # esa direccion va impresa en el sello de los PDF; radar-hoy.html redirige.
     ('hoy', 'radar-estado-de-cuenta.html', '🧾', 'Hoy y los estados de cuenta',
-     'El presupuesto en curso y el estado de cuenta de cada sexenio, de diputados federales y locales y de la Suprema Corte, con semáforo y sello'),
+     'El presupuesto en curso y el estado de cuenta de cada sexenio, de diputados federales y locales, del Senado y de la Suprema Corte, con semáforo y sello'),
     ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
     ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
     ('reloj', 'radar-reloj.html', '⏱️', 'El reloj de cada administración', 'El contador que corre al ritmo de cada sexenio'),
@@ -1789,7 +1789,7 @@ def _peso_json(ps):
 # Constitución y la obligación de publicar la remuneración bruta y la neta
 # (art. 65, fr. VII, de la Ley General de Transparencia).
 CARGOS_FUENTES = {
-    'CPEUM': {'corto': 'Constitución Política de los Estados Unidos Mexicanos (arts. 52, 94 y 127)',
+    'CPEUM': {'corto': 'Constitución Política de los Estados Unidos Mexicanos (arts. 52, 56, 94 y 127)',
               'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf'},
     'LGTAIP': {'corto': 'Ley General de Transparencia y Acceso a la Información Pública (DOF 20-03-2025), art. 65, fr. VII',
                'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf'},
@@ -1826,6 +1826,7 @@ CARGOS_TIPOS = [
     # (id, icono, nombre, explicacion)
     ('adm', '🏛️', 'Administración presidencial', 'Cada sexenio, de Salinas a Sheinbaum'),
     ('dip-fed', '📜', 'Diputación federal', 'Las 500 curules de la Cámara de Diputados'),
+    ('senado', '🗳️', 'Senaduría', 'Los 128 escaños de la Cámara de Senadores'),
     ('dip-loc', '🗺️', 'Diputación local', 'El congreso de cada uno de los 32 estados'),
     ('scjn', '⚖️', 'Suprema Corte', 'Ministras, ministros, su ponencia y sus asesores'),
 ]
@@ -1952,6 +1953,71 @@ def radar_cargos(base):
                 fila('%s · %s' % (x['partida'], x['concepto']), x['pesos'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina'])
                 for x in pd['legislativo']['personalDiputados2024']],
              'nota': 'Lo que la Cámara pagó en servicios personales en 2024, según la auditoría de la ASF: dietas, sueldos, honorarios, compensaciones y prestaciones de todo su personal.'},
+        ]})
+
+    # ===================== Senaduría =====================
+    sr, sc, asn = remu['senado'], cargo['senado'], cargo['asesor_senado']
+    sen26 = [u for u in leg['unidades'] if u['id'] == 'senado'][0]
+    scp25 = [u for u in pd['ejercicio']['cp2025']['unidades'] if u['ramo'] == '01' and u['ur'] == '200'][0]
+    sav26 = [u for u in pd['ejercicio']['avance2026']['unidades'] if u['ramo'] == '01' and u['ur'] == '200'][0]
+    scaps25 = pd['ejercicio']['cp2025']['capitulosLegislativo']['200']
+    sasf24 = [x for x in pd['legislativo']['ejercicio2024'] if x['institucion'] == 'Senado']
+    sres24 = [x for x in pd['legislativo']['resultadosAsf'] if x['institucion'] == 'Senado']
+    spct_av = round(sav26['pagado'] / sav26['modificado'] * 100, 1)
+    sdif25 = round((scp25['ejercido'] - scp25['original']) / scp25['original'] * 100, 1)
+    docs.append({
+        'id': 'senado', 'tipo': 'senado', 'ini': 'SEN', 'col': '#8a5a00', 'corte': CARGOS_CORTE,
+        'tipoTx': 'Estado de cuenta de la senaduría', 'n': 'Senadora o senador de la República',
+        'sub': 'Cámara de Senadores · LXVI Legislatura · cifras de 2024 a 2026',
+        'aviso': 'Es el estado de cuenta del cargo, no de una persona: los 128 escaños cobran lo mismo, según el Manual de remuneraciones del Senado.',
+        'senales': [
+            senal_tope(sr['netoAnual'], True, 'Remuneración total anual neta del Anexo 23.2.2. El propio anexo aclara que corresponde a las percepciones de 2025.',
+                       'PEF', sr['pagina'], 'oficial'),
+            senal_transp('verde', 'El Manual 2026 publica la dieta neta mensual y el Anexo 23 del PEF, la bruta y la neta anuales.'),
+        ],
+        'secciones': [
+            {'tit': 'Lo que cobra una senadora o senador', 'filas': [
+                fila('Dieta neta mensual 2026', sc['mensual']['max'], '$', sc['mensualEstado'], 'SEN', 'Anexo 1',
+                     nota='El Manual la publica en miles (132.9). ' + sc['nota']),
+                fila('Remuneración total anual bruta', sr['brutoAnual'], '$', 'oficial', 'PEF', sr['pagina']),
+                fila('ISR retenido en el año', sr['isrAnual'], '$', 'oficial', 'PEF', sr['pagina']),
+                fila('Remuneración total anual neta', sr['netoAnual'], '$', 'oficial', 'PEF', sr['pagina'], nota=sr['nota']),
+                fila('Aguinaldo (bruto)', sr['aguinaldo'], '$', 'oficial', 'PEF', sr['pagina'],
+                     nota='El Manual dice 40 días de dieta; esta cifra equivale a unos 60 días.'),
+                fila('Por qué el aguinaldo equivale a 60 días y no a 40', None, '$', 'pendiente', None, pid='prest-aguinaldo-sen',
+                     nota='$382,207 ÷ ($190,023 de dieta bruta mensual ÷ 30) = 60.3 días. Ningún documento explica la diferencia con el Manual.'),
+                fila('Prima del seguro de vida pagada con presupuesto', 96759, '$', 'oficial', 'PEF', sr['pagina'],
+                     nota='Seguro de 40 meses de dieta (Manual, Anexo 3).'),
+            ]},
+            {'tit': 'Sus asesores', 'filas': [
+                fila(x['nombre'], x['min'], '$', asn['mensualEstado'], 'SEN', asn['pagina'], v2=x['max'],
+                     nota='Percepción mensual neta del nivel.') for x in asn['subniveles']] + [
+                fila('Asesor de grupo parlamentario en el año, con el máximo del nivel', asn['anual'], '$', asn['anualEstado'], 'SEN',
+                     asn['pagina'], op=asn['anualOperacion'] + '.')], 'nota': asn['nota']},
+            {'tit': 'El Senado: su presupuesto', 'filas': [
+                fila('Integrantes', 128, 'ent', 'oficial', 'CPEUM', 'art. 56',
+                     nota='Dos por estado de mayoría relativa, uno de primera minoría y 32 de representación proporcional.'),
+                fila('Aprobado 2026', sen26['aprobado'], '$g', 'oficial', 'PEF', 'Anexo 1, DOF p. 32'),
+                fila('Pagado al ' + corte_av, sav26['pagado'], '$g', 'oficial', 'AV2T2026'),
+                fila('Avance del año', spct_av, 'pct100', 'derivado', 'AV2T2026',
+                     op='%s pagados ÷ %s del modificado × 100 = %s%%. A la mitad del año, el ritmo parejo sería 50%%.' % (
+                         pesos(sav26['pagado']), pesos(sav26['modificado']), format(spct_av, ',.1f'))),
+                fila('Aprobado 2025', scp25['original'], '$g', 'oficial', 'CP2025'),
+                fila('Ejercido 2025', scp25['ejercido'], '$g', 'oficial', 'CP2025'),
+                fila('Ejercido contra aprobado, 2025', sdif25, 'pct', 'derivado', 'CP2025',
+                     op='(%s − %s) ÷ %s × 100 = %s%%.' % (pesos(scp25['ejercido']), pesos(scp25['original']), pesos(scp25['original']),
+                                                         ('+' if sdif25 > 0 else '') + format(sdif25, ',.1f'))),
+            ], 'nota': 'No dividimos el presupuesto entre los 128 escaños: ese reparto no es lo que cuesta cada senador, porque el Senado también paga personal, edificios y el Canal del Congreso.'},
+            {'tit': 'En qué gastó el Senado en 2025', 'filas': [
+                fila(c['concepto'], c['ejercido'], '$g', 'oficial', 'CP2025', 'capítulo ' + c['cap']) for c in scaps25]},
+            {'tit': 'Ante la Auditoría Superior: Cuenta Pública 2024', 'filas': [
+                fila(x['concepto'], x['pesos'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina']) for x in sasf24] + [
+                texto('Resultado', r['texto'], r['estado'], r['fuente'], 'p. %s' % r['pagina']) for r in sres24],
+             'nota': '«Sin irregularidades» se refiere a la muestra revisada, no a todo el gasto.'},
+            {'tit': 'Lo que gastó en 2024, capítulo por capítulo', 'filas': [
+                fila('%s · %s (devengado)' % (x['cap'], x['concepto']), x['devengado'], '$g', x['estado'], x['fuente'], 'p. %s' % x['pagina'])
+                for x in pd['legislativo']['senadoCapitulos2024']],
+             'nota': 'Según la auditoría de la ASF a la Cámara de Senadores.'},
         ]})
 
     # ===================== Diputación local (las 32) =====================
@@ -2342,15 +2408,15 @@ def radar():
         'duelo': ('Dos administraciones, cara a cara, en las mismas medidas. Sin ganador: los números dicen cuánto; el juicio es tuyo.',
                   datos_js + duelo_html),
         'hoy': ('Las cifras grandes del presupuesto de 2026 y el estado de cuenta de quien maneja el dinero público: cada administración '
-                'de Salinas a Sheinbaum, con un semáforo de su salud financiera; la diputación federal y la de los 32 congresos locales, '
+                'de Salinas a Sheinbaum, con un semáforo de su salud financiera; la diputación federal, la senaduría y la diputación de los 32 congresos locales, '
                 'y las ministras y ministros de la Suprema Corte con su ponencia y sus asesores: lo que cobran, lo que gasta su institución '
                 'y lo que dijo la Auditoría Superior. Descárgalo en PDF con su folio y su sello de verificación: cualquiera puede '
                 'comprobar que no se alteró.', [
                     {'id': 'hoy', 'titulo': '📌 Hoy: el presupuesto en curso', 'tarjetas': [], 'bloque': RADAR_HOY,
                      'texto': 'Las cifras grandes de 2026: el punto de partida para leer cualquier estado de cuenta.'},
-                    {'id': 'expide', 'titulo': '🧾 Expide un estado de cuenta: administraciones, diputaciones y la Corte', 'tarjetas': [],
+                    {'id': 'expide', 'titulo': '🧾 Expide un estado de cuenta: administraciones, Congreso y la Corte', 'tarjetas': [],
                      'bloque': datos_js + cargos_js + expide_html,
-                     'texto': 'Elige de quién: una administración presidencial, la diputación federal, la de cualquiera de los 32 congresos locales, '
+                     'texto': 'Elige de quién: una administración presidencial, la diputación federal, la senaduría, la diputación de cualquiera de los 32 congresos locales, '
                               'o la Suprema Corte con su ponencia y sus asesores. La plataforma arma su estado de cuenta con su semáforo, '
                               'y lo descargas en PDF con folio y sello de verificación.'}]),
         'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
@@ -2733,6 +2799,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'El estado de cuenta suma a las senadoras y los senadores: su dieta, su remuneración anual bruta y neta, sus asesores, el presupuesto del Senado y su auditoría de la ASF, con el mismo folio y sello.'),
     ('10-10-2026', 'El estado de cuenta ya no es solo de las administraciones: expide también el de la diputación federal, el de cada uno de los 32 congresos locales y el de la Suprema Corte con su ponencia y sus asesores. Lo que cobran, lo que gasta su institución y lo que dijo la Auditoría Superior, con dos señales con regla de ley (el tope del art. 127 y la obligación de publicar lo que pagan), en PDF con folio y sello.'),
     ('10-10-2026', 'En el Radar, «Hoy: el presupuesto en curso» y «Expide el estado de cuenta» son ya una sola tarjeta: las cifras de 2026 y el estado de cuenta de cada administración, en la misma página.'),
     ('10-10-2026', 'Expide el estado de cuenta de cada administración, de Salinas a Sheinbaum: sus números en resumen, un semáforo de su salud financiera con reglas escritas y descarga en PDF con folio y sello de verificación.'),

@@ -11,7 +11,7 @@
 .ex-pista { margin: 6px 0 0; font-size: 13px; color: #5a6782; }
 
 /* Paso 1: de quién (administración, diputaciones, Suprema Corte) */
-.ex-tipos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ex-tipos { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
 .ex-tipo { display: flex; gap: 10px; align-items: flex-start; text-align: left; font: inherit; cursor: pointer; background: #f6f8fc; border: 1px solid #d5dcea; border-radius: 14px; padding: 10px 12px; color: #1c2a44; }
 .ex-tipo:hover { border-color: #0b2a63; }
 .ex-tipo[aria-checked="true"] { background: #0b2a63; border-color: #0b2a63; color: #fff; }
