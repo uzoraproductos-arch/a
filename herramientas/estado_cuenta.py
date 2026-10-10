@@ -267,6 +267,9 @@ def construir():
         'entrada': ('Dos vistas de la misma cuenta. <b>Tu aportación</b>: lo que tú pagas y a dónde va. <b>La cuenta pública</b>: lo que '
                     'entra al gobierno, lo que gasta, lo que debe, lo que entrega y lo que se pierde del ambiente, comparando lo que pasó en '
                     '2024 con lo aprobado para 2026 y lo que se propone para 2027. Cada cifra trae su documento.'),
+        # Enlace al estado de cuenta de cada administracion (10-10-2026).
+        'antes': ('      <a class="apartado-nota" href="radar-estado-de-cuenta.html">🧾 ¿Buscas el de un sexenio? Expide el estado de cuenta '
+                  'de cada administración, con su semáforo de salud financiera y sello de verificación</a>'),
         'secciones': [{'id': i, 'titulo': t_, 'texto': x, 'bloque': b, 'tarjetas': tj} for i, t_, x, b, tj in secciones],
     }, filas_csv
 
