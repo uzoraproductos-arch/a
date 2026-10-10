@@ -52,3 +52,14 @@
   .sv-servicios, .sv-dos { grid-template-columns: 1fr; }
   .sv-form, .sv-precio, .sv-politica, .sv-resumen { padding: 14px; }
 }
+/* Comunidad (comunidad.html; entrega 7, 10-10-2026). */
+.cm-erratas { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 12px; }
+.cm-errata { display: grid; gap: 4px; padding: 0 0 12px; border-bottom: 1px solid #e6eaf2; line-height: 1.55; }
+.cm-errata:last-child { border-bottom: 0; padding-bottom: 0; }
+.cm-errata b { color: #0b2a63; font-size: 16px; }
+.cm-errata-fecha { font-size: 12.5px; font-weight: 800; color: #5a6782; letter-spacing: .03em; }
+.cm-errata-et { font-weight: 700; color: #5a6782; }
+.cm-errata a { color: #1a56b8; font-weight: 600; }
+.cm-compartir { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 16px 20px; display: grid; gap: 12px; line-height: 1.6; color: #24324d; }
+.cm-compartir p { margin: 0; }
+.cm-nota { font-size: 14px; color: #44526b; }

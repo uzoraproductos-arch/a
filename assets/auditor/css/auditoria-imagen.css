@@ -438,3 +438,14 @@
 /* Servicio pertinente de cada investigacion (entrega 6, 10-10-2026). */
 .au-servicio { background: #f7f9fd; border: 1px solid #c9d3e6; border-radius: 16px; padding: 16px 20px; margin: 22px 0; display: grid; gap: 8px; }
 .au-servicio p { margin: 0; line-height: 1.6; color: #24324d; }
+/* Investigaciones por tema y como verificamos: vivian en la portada
+   («Por donde empezar») y desde el 10-10-2026 van al pie de cada una. */
+.au-temas { display: grid; gap: 8px; margin: 0 0 16px; }
+.au-tema { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; background: #fff; border: 1px solid #dfe5f0; border-radius: 12px; padding: 10px 14px; font-size: 14.5px; line-height: 1.5; }
+.au-tema-actual { border-color: #0b2a63; background: #f4f7fd; }
+.au-tema-tit { flex: 1 1 100%; font-weight: 800; color: #0b2a63; }
+.au-tema-tit small { font-weight: 600; color: #5a6782; }
+.au-tema a { color: #1a56b8; font-weight: 600; }
+.au-tema [aria-current] { font-weight: 700; color: #24324d; }
+.au-tema a + a::before, .au-tema a + span::before, .au-tema span[aria-current] + a::before { content: "·"; margin-right: 10px; color: #9aa7bf; }
+.au-metodo { margin: 16px 0 0; font-size: 14.5px; line-height: 1.7; color: #24324d; }

@@ -20,9 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010l">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010l">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010l">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010m">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010m">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010m">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -87,6 +87,7 @@
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
           <a class="apartado-pestana" role="tab" id="pestana-agora" href="#agora" aria-controls="agora" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💬</span><span class="apartado-pestana-tx"><b>Ágora cívica</b><small>Diálogos y argumentos con fuentes</small></span></a>
           <a class="apartado-pestana" role="tab" id="pestana-garantias" href="#garantias" aria-controls="garantias" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🛡️</span><span class="apartado-pestana-tx"><b>Garantías cívicas</b><small>Privacidad y canales de denuncia</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-comunidad" href="#comunidad" aria-controls="comunidad" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🤝</span><span class="apartado-pestana-tx"><b>Comunidad</b><small>Propón temas, señala errores, comparte</small></span></a>
           <a class="apartado-pestana" role="tab" id="pestana-servicios" href="#servicios" aria-controls="servicios" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🔎</span><span class="apartado-pestana-tx"><b>Servicios</b><small>Investigación a la medida y Pase del Auditor</small></span></a>
       </nav>
       <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
@@ -343,6 +344,39 @@
         </div>
       </section>
 
+      <section class="apartado-seccion apartado-panel" id="comunidad" aria-labelledby="comunidad-tit" role="tabpanel">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="comunidad-tit"><span class="sr-only"></span>🤝 Comunidad</h2>
+          <p class="apartado-seccion-texto">La plataforma mejora con quien la lee: propón qué investigar, corrígenos con un documento y comparte lo que encuentres.</p>
+        </div>
+        <div class="apartado-rejilla">
+        <a class="apartado-tarjeta" href="comunidad.html#tema">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">💡</span>
+          <span class="apartado-tarjeta-nombre">Propón un tema</span>
+          <span class="apartado-tarjeta-desc">Lo que te gustaría que investigáramos, con los documentos que conozcas.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
+        <a class="apartado-tarjeta" href="comunidad.html#error">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">✏️</span>
+          <span class="apartado-tarjeta-nombre">Señala un error</span>
+          <span class="apartado-tarjeta-desc">Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
+        <a class="apartado-tarjeta" href="comunidad.html#compartir">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">📣</span>
+          <span class="apartado-tarjeta-nombre">Comparte el Estado de Cuenta</span>
+          <span class="apartado-tarjeta-desc">Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
+        <a class="apartado-tarjeta" href="comunidad.html#erratas">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">📋</span>
+          <span class="apartado-tarjeta-nombre">Fe de erratas</span>
+          <span class="apartado-tarjeta-desc">Cada corrección que hemos hecho: qué estaba mal y qué cambió.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
+        </div>
+      </section>
+
       <section class="apartado-seccion apartado-panel" id="servicios" aria-labelledby="servicios-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="servicios-tit"><span class="sr-only"></span>🔎 Servicios y Pase del Auditor</h2>
@@ -370,12 +404,13 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010l</b></span>
+      <a class="apartado-volver apartado-error" href="comunidad.html?pagina=participa.html#error">✏️ ¿Viste un error?</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010m</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010l"></script>
-  <script src="assets/auditor/js/audit-database.js?v=20261010l"></script>
-  <script src="assets/auditor/js/participa.js?v=20261010l"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010m"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261010m"></script>
+  <script src="assets/auditor/js/participa.js?v=20261010m"></script>
 </body>
 </html>

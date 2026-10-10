@@ -15,7 +15,7 @@ import json
 import os
 import re
 
-from apartados import RAIZ, FAVICON, cabecera, esc_attr, sociales
+from apartados import RAIZ, FAVICON, cabecera, esc_attr, sociales, error_pie
 
 # id, imagen, nota de la imagen, texto alternativo, etiqueta, titulo, pregunta
 AUDITORIAS = [
@@ -59,7 +59,7 @@ AUDITORIAS = [
 
 
 # Investigaciones agrupadas por tema (entrega 2 de Astra, 10-10-2026). Las
-# usan el indice general (apartados.py) y la portada.
+# usan el indice general (apartados.py) y el pie de cada investigacion.
 TEMAS = [
     ('🏗️', 'Megaobras e infraestructura', ['tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia']),
     ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
@@ -217,9 +217,33 @@ def lectura(id_):
         '          <div class="au-lec-fila"><dt><span aria-hidden="true">%s</span> %s</dt><dd>%s</dd></div>' % f for f in filas)
 
 
+def tema_de(id_):
+    return [t for t in TEMAS if id_ in t[2]][0]
+
+
+def temas(actual):
+    """Las investigaciones por tema y la nota de como verificamos. Vivian en
+    la portada («Por donde empezar»); el 10-10-2026 el autor las saco de
+    ahi y viven al pie de cada investigacion."""
+    au = {a[0]: a for a in AUDITORIAS}
+    grupos = '\n'.join(
+        '          <div class="au-tema%s"><span class="au-tema-tit">%s %s%s</span>%s</div>' % (
+            ' au-tema-actual' if actual in ids else '', ico, tit,
+            ' <small>· el tema de esta investigación</small>' if actual in ids else '',
+            ''.join(('<span aria-current="page">%s</span>' if i == actual else '<a href="%s">%%s</a>' % archivo(i)) % au[i][5]
+                    for i in ids))
+        for ico, tit, ids in sorted(TEMAS, key=lambda t: actual not in t[2]))
+    return ('        <div class="au-temas">\n%s\n        </div>\n'
+            '        <p class="au-metodo"><span aria-hidden="true">🔎</span> <b>Cómo verificamos:</b> cada cifra lleva su fuente oficial y su estado: '
+            '<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> '
+            '<span class="est-chip est-pendiente">pendiente</span>. Las imágenes son ilustraciones, no evidencia. '
+            '<a href="indice.html#metodologia">Lee la metodología y las novedades ➔</a></p>') % grupos
+
+
 def otras(actual):
     filas = []
-    for a in AUDITORIAS:
+    mismo = tema_de(actual)[2]
+    for a in sorted(AUDITORIAS, key=lambda a: a[0] not in mismo):
         if a[0] == actual:
             continue
         filas.append('          <a class="au-otra" href="%s"><img src="%s" alt="" loading="lazy">'
@@ -282,6 +306,7 @@ def pagina(a, sello):
 
       <section class="au-otras-sec" aria-labelledby="auOtrasTit">
         <h2 class="au-sec-tit" id="auOtrasTit">🖼️ Otras auditorías en imágenes</h2>
+{temas}
         <div class="au-otras">
 {otras}
         </div>
@@ -293,6 +318,7 @@ def pagina(a, sello):
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html#auditoria-en-imagenes">← Volver a Auditoría en imágenes</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
+      {error_pie}
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -302,9 +328,9 @@ def pagina(a, sello):
   <script src="assets/auditor/js/auditoria-imagen.js?v={sello}"></script>
 </body>
 </html>
-'''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
+'''.format(error_pie=error_pie(archivo(id_)), titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=servicio(titulo),
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
 
@@ -322,8 +348,9 @@ def servicio(titulo):
 
 def portada():
     """Escribe en index.html lo que la portada toma de aqui: los enlaces de
-    las tres acciones de cada diapositiva (data-*) y la lista de
-    investigaciones por tema. index.html se edita en binario para no tocar
+    las tres acciones de cada diapositiva (data-*). La lista de
+    investigaciones por tema ya no va ahi: vive al pie de cada investigacion
+    (temas()) y en el indice general. index.html se edita en binario para no tocar
     sus CRLF ni sus CR sueltos."""
     ruta_idx = os.path.join(RAIZ, 'index.html')
     d = open(ruta_idx, 'rb').read().decode('utf-8')
@@ -336,14 +363,8 @@ def portada():
             m.group(1), esc_attr(re.sub('<[^>]+>', '', au[id_][5])), ancla, insp)
     d, n = re.subn(r'(<a class="showcase-slide" href="auditoria-([\w-]+)\.html")(?: data-nombre="[^"]*" data-numeros="[^"]*" data-evidencia="[^"]*")?',
                    attrs, d)
-    temas = '\r\n'.join(
-        '      <div class="portada-tema"><span class="portada-tema-tit">%s %s</span>%s</div>' % (
-            ico, tit, ''.join('<a href="%s">%s</a>' % (archivo(i), au[i][5]) for i in ids))
-        for ico, tit, ids in TEMAS)
-    d, t = re.subn(r'(<!-- TEMAS:inicio[^>]*-->\r\n)[\s\S]*?(      <!-- TEMAS:fin -->)',
-                   lambda m: m.group(1) + temas + '\r\n' + m.group(2), d)
-    if n != len(AUDITORIAS) or t != 1:
-        print('ERROR: la portada no tiene las %d diapositivas o el bloque de temas (%d, %d)' % (len(AUDITORIAS), n, t))
+    if n != len(AUDITORIAS):
+        print('ERROR: la portada no tiene las %d diapositivas (%d)' % (len(AUDITORIAS), n))
         return 1
     open(ruta_idx, 'wb').write(d.encode('utf-8'))
     return 0
