@@ -19,7 +19,9 @@
    Desde el mismo día, el documento es una hoja oficio por los dos lados:
    anverso con el termostato y las cuentas, reverso con las notas, el
    fundamento, las fuentes y el sello. La huella no cambió: firma las mismas
-   cifras, así que los folios ya expedidos siguen valiendo. */
+   cifras, así que los folios ya expedidos siguen valiendo.
+   El sello se titula «Dictamen técnico de Auditavisión» desde el
+   10-10-2026 (pedido del autor); antes decía «Sello de verificación». */
 (function () {
   'use strict';
   var nodo = document.getElementById('rdDatos'), app = document.getElementById('exApp');
@@ -234,11 +236,11 @@
 
   function sello(fol) {
     var id = 'exArco' + Math.random().toString(36).slice(2, 7);
-    return '<svg class="ex-sello-svg" viewBox="0 0 120 120" role="img" aria-label="Sello de verificación de Auditavisión">' +
+    return '<svg class="ex-sello-svg" viewBox="0 0 120 120" role="img" aria-label="Dictamen técnico de Auditavisión">' +
       '<defs><path id="' + id + '" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>' +
       '<circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="2.5"/>' +
       '<circle cx="60" cy="60" r="35" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
-      '<text font-size="9.4" font-weight="800" letter-spacing="1.3" fill="currentColor"><textPath href="#' + id + '">AUDITAVISIÓN · SELLO DE VERIFICACIÓN ·</textPath></text>' +
+      '<text font-size="9.4" font-weight="800" letter-spacing="3.15" fill="currentColor"><textPath href="#' + id + '">AUDITAVISIÓN · DICTAMEN TÉCNICO ·</textPath></text>' +
       '<text x="60" y="58" text-anchor="middle" font-size="22" font-weight="900" fill="currentColor">✓</text>' +
       '<text x="60" y="74" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor">' + esc(fol ? fol.split('-').slice(-1)[0] : '········') + '</text></svg>';
   }
@@ -269,7 +271,7 @@
   }
   function pie() {
     return '<footer class="ex-sello"><div class="ex-sello-img">' + sello(null) + '</div><div class="ex-sello-tx">' +
-      '<b>Sello de verificación de Auditavisión</b>' +
+      '<b>Dictamen técnico de Auditavisión</b>' +
       '<p>Folio <b class="ex-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
       '<p class="ex-huella">Huella digital (SHA-256 de las cifras): <code id="exHuella">calculando…</code></p>' +
       '<p>Compruébalo en <span class="ex-liga" id="exLigaTx"></span></p>' +
