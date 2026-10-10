@@ -2,82 +2,181 @@ window.AUDIT_DB = {
   "cuentaFederal2024": {
     "ejercicio": 2024,
     "ente": "Gobierno Federal",
-    "alcance": "Poder Ejecutivo, Poder Legislativo, Poder Judicial y Órganos Autónomos (excluye empresas productivas del Estado y organismos descentralizados con tomo propio)",
+    "alcance": "Poderes Ejecutivo, Legislativo y Judicial y órganos autónomos (el Tomo II de la Cuenta Pública). No incluye empresas productivas del Estado.",
     "fuente": {
-      "doc": "SHCP, Cuenta Pública 2024, Tomo II (Gobierno Federal): Estados Financieros Consolidados y Conciliación Presupuestaria-Contable",
+      "doc": "SHCP, Cuenta Pública 2024, Tomo II (Gobierno Federal)",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024"
+    },
+    "correccion": "El 10-10-2026 se retiraron las cifras de este apartado que no se habían cotejado con su documento: no coincidían con la Cuenta Pública oficial (por ejemplo, los ingresos de la gestión decían 5,074,180.2 mdp y el documento dice 5,341,758.1). Solo quedan las cifras con documento a la vista; el resto está pendiente, con su motivo.",
+    "cifras": [
+      {
+        "id": "aprobado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total aprobado",
+        "mdp": 9066045.8,
+        "estado": "oficial",
+        "fuente": "Decreto de Presupuesto de Egresos de la Federación 2024, art. 1 (DOF 25-11-2023): «$9,066,045,800,000»",
+        "url": "https://dof.gob.mx/2023/SHCP/PEF_2024.html",
+        "nota": "Es lo que autorizó la Cámara de Diputados. Corresponde al total de ingresos aprobados en la Ley de Ingresos 2024."
+      },
+      {
+        "id": "modificado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total modificado",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "devengado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total devengado",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "ejercido",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total ejercido",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "pagado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total pagado",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "capitulos",
+        "vista": "presupuesto",
+        "concepto": "Desglose por capítulo de gasto (1000 a 9000)",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "ingresos_gestion",
+        "vista": "actividades",
+        "concepto": "Ingresos de la gestión (impuestos, derechos, productos y aprovechamientos)",
+        "mdp": 5341758.1,
+        "estado": "oficial",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Actividades del Gobierno Federal: «Ingresos de la Gestión 5,341,758,142,949» (pesos)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf"
+      },
+      {
+        "id": "intereses_deuda",
+        "vista": "actividades",
+        "concepto": "Intereses de la deuda pública",
+        "mdp": 933408.4,
+        "estado": "oficial",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Actividades del Gobierno Federal: «Intereses de la Deuda Pública 933,408,432,163» (pesos)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+        "nota": "Son solo intereses: el pago del capital de la deuda (amortización) no es gasto del Estado de Actividades, porque reduce el pasivo."
+      },
+      {
+        "id": "gastos_totales",
+        "vista": "actividades",
+        "concepto": "Total de gastos y otras pérdidas",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "resultado",
+        "vista": "actividades",
+        "concepto": "Resultado del ejercicio (ahorro o desahorro)",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "flujo_operacion",
+        "vista": "flujos",
+        "concepto": "Flujos netos de las actividades de operación",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "flujo_inversion",
+        "vista": "flujos",
+        "concepto": "Flujos netos de las actividades de inversión",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "flujo_financiamiento",
+        "vista": "flujos",
+        "concepto": "Flujos netos de las actividades de financiamiento",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "efectivo_final",
+        "vista": "flujos",
+        "concepto": "Efectivo y equivalentes al final del ejercicio",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "activo",
+        "vista": "situacion",
+        "concepto": "Activo total",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "pasivo",
+        "vista": "situacion",
+        "concepto": "Pasivo total",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "patrimonio",
+        "vista": "situacion",
+        "concepto": "Hacienda pública / patrimonio",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      }
+    ],
+    "conciliacion": {
+      "estado": "pendiente",
+      "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda).",
       "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-      "sha256": "cp2024tomo2oficialshcp"
-    },
-    "presupuesto": {
-      "aprobado_mdp": 9066045.8,
-      "modificado_mdp": 9155200.2,
-      "devengado_mdp": 9124310.5,
-      "pagado_mdp": 8985420.0,
-      "subejercicio_mdp": 30889.7,
-      "desglose_capitulos": [
-        { "cap": "1000", "nombre": "Servicios Personales (Sueldos y Prestaciones)", "aprobado": 1520400.0, "devengado": 1535210.4, "pct": 16.8 },
-        { "cap": "2000", "nombre": "Materiales y Suministros (Medicinas, Combustibles)", "aprobado": 412500.0, "devengado": 418320.0, "pct": 4.6 },
-        { "cap": "3000", "nombre": "Servicios Generales (Mantenimiento, Servicios)", "aprobado": 685300.0, "devengado": 698660.0, "pct": 7.7 },
-        { "cap": "4000", "nombre": "Transferencias, Asignaciones, Subsidios y Ayudas", "aprobado": 3210500.0, "devengado": 3280450.1, "pct": 36.0 },
-        { "cap": "5000", "nombre": "Bienes Muebles, Inmuebles e Intangibles", "aprobado": 85200.0, "devengado": 89450.0, "pct": 1.0 },
-        { "cap": "6000", "nombre": "Inversión Pública (Infraestructura Capitalizable)", "aprobado": 810200.0, "devengado": 801200.0, "pct": 8.8 },
-        { "cap": "7000", "nombre": "Inversiones Financieras y Fideicomisos", "aprobado": 120500.0, "devengado": 115400.0, "pct": 1.3 },
-        { "cap": "8000", "nombre": "Participaciones y Aportaciones (Ramos 28 y 33)", "aprobado": 1045200.0, "devengado": 1031390.0, "pct": 11.3 },
-        { "cap": "9000", "nombre": "Deuda Pública (Amortización e Intereses)", "aprobado": 1176245.8, "devengado": 1154230.0, "pct": 12.6 }
+      "pasos": [
+        "Egresos presupuestarios devengados",
+        "Menos: inversión pública capitalizable (pasa al activo)",
+        "Menos: amortización del capital de la deuda (reduce el pasivo)",
+        "Más: depreciación y amortización del ejercicio",
+        "Más: provisiones y otros gastos contables",
+        "Igual: gastos del Estado de Actividades"
       ]
-    },
-    "estado_actividades": {
-      "definicion_conac": "Equivalente gubernamental del Estado de Resultados. Mide el devengo contable de ingresos y gastos operativos del periodo.",
-      "ingresos_gestion": {
-        "total_mdp": 5074180.2,
-        "impuestos": 4512300.0,
-        "derechos": 284500.0,
-        "productos": 31200.0,
-        "aprovechamientos": 246180.2
-      },
-      "participaciones_y_transferencias_recibidas": 0.0,
-      "otros_ingresos_y_beneficios": 145210.0,
-      "ingresos_totales_contables_mdp": 5219390.2,
-      "gastos_funcionamiento": {
-        "total_mdp": 2652190.4,
-        "servicios_personales": 1535210.4,
-        "materiales_suministros": 418320.0,
-        "servicios_generales": 698660.0
-      },
-      "transferencias_subsidios_y_ayudas": 3280450.1,
-      "participaciones_y_aportaciones_a_entidades": 1031390.0,
-      "intereses_y_gastos_deuda": 1154230.0,
-      "otros_gastos_depreciacion_provisiones": 185420.0,
-      "inversion_publica_no_capitalizable": 98400.0,
-      "gastos_totales_contables_mdp": 8402080.5,
-      "resultado_ejercicio_desahorro_neto_mdp": -3182690.3,
-      "explicacion_resultado": "El desahorro neto contable de $3.18 billones refleja que los ingresos de gestión ($5.07B) fueron inferiores a los gastos devengados consolidados ($8.40B), brecha cubierta con colocación neta de deuda pública y financiamiento."
-    },
-    "estado_flujos_efectivo": {
-      "flujo_operacion_neto_mdp": 1420500.0,
-      "flujo_inversion_neto_mdp": -890650.0,
-      "flujo_financiamiento_neto_mdp": -485300.0,
-      "incremento_neto_efectivo_mdp": 44550.0,
-      "saldo_efectivo_inicial_mdp": 230410.0,
-      "saldo_efectivo_final_mdp": 274960.0
-    },
-    "estado_situacion_financiera": {
-      "activo_circulante_mdp": 1120450.0,
-      "activo_no_circulante_infraestructura_mdp": 8450200.0,
-      "activo_total_mdp": 9570650.0,
-      "pasivo_circulante_cuentas_por_pagar_mdp": 850300.0,
-      "pasivo_no_circulante_deuda_mdp": 13420800.0,
-      "pasivo_total_mdp": 14271100.0,
-      "hacienda_patrimonio_neto_mdp": -4700450.0
-    },
-    "conciliacion_presupuestaria_contable": {
-      "egresos_presupuestarios_devengados_mdp": 9124310.5,
-      "menos_inversion_capitalizable_activo_mdp": 890650.0,
-      "menos_amortizacion_principal_deuda_mdp": 420500.0,
-      "mas_depreciacion_amortizacion_ejercicio_mdp": 185420.0,
-      "mas_provisiones_otros_gastos_contables_mdp": 403500.0,
-      "igual_gastos_contables_estado_actividades_mdp": 8402080.5,
-      "nota_conciliacion": "La inversión física en obras capitalizables (Cap. 6000) y la amortización de deuda (Cap. 9000) son egresos presupuestarios pero NO son gastos del Estado de Actividades: la primera incrementa el Activo y la segunda reduce el Pasivo."
     },
     "evaluacion_social_mir": [
       {
@@ -123,71 +222,13 @@ window.AUDIT_DB = {
         "motivo_montos": "La clave programática, el ramo y los montos de 2024 se tienen que cotejar en la Cuenta Pública 2024 antes de mostrarlos; la plataforma aún no lo ha hecho. Se cuidará no mezclar el programa con el presupuesto completo del organismo IMSS-Bienestar. La cifra que se mostraba antes (128,900 mdp) se retiró por no tener documento citado.",
         "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
       }
-    ],
-    "contexto_ecologico_inegi": {
-      "pine_mdp": 29850120.0,
-      "ctada_mdp": 1382214.0,
-      "gpa_sector_publico_mdp": 232882.0,
-      "nota": "Cuentas Económicas y Ecológicas de México 2024 (INEGI, boletín de prensa pág. 2). Se presenta como contexto macro de sustentabilidad, sin deducirlo indebidamente del presupuesto público."
-    }
+    ]
   },
   "tren_maya_peritaje_2024": {
-    "entidad_operadora": "Tren Maya, S.A. de C.V. (Sector Defensa Nacional, Clave H0M)",
-    "ejercicio": 2024,
-    "infraestructura_acumulada_federal": {
-      "monto_ejercido_acumulado_mdp": 511000.0,
-      "ejecutores": "Fonatur Infraestructura (2019-2023) y SEDENA / Agrupamiento de Ingenieros Felipe Ángeles (2022-2024)",
-      "naturaleza": "Inversión pública federal en infraestructura física de vías, puentes, estaciones y catenarias (Tramos 1 al 7)",
-      "observaciones_asf_acumuladas_mdp": 3840.5,
-      "aclaraciones_solventadas_mdp": 1120.2,
-      "dano_resarcitorio_en_proceso_mdp": 2720.3
-    },
-    "estados_financieros_operadora_2024": {
-      "fuente": "Cuenta Pública 2024, Tomo VII (Sector Defensa Nacional, Empresa H0M Tren Maya S.A. de C.V.)",
-      "ingresos_gestion_propios_mdp": 275.8,
-      "ingresos_boletos_pasajeros_mdp": 242.1,
-      "ingresos_servicios_comerciales_mdp": 33.7,
-      "subsidios_y_transferencias_erario_mdp": 13335.4,
-      "otros_ingresos_donaciones_mdp": 12890.3,
-      "gastos_totales_funcionamiento_mdp": 2837.2,
-      "desglose_gastos": [
-        { "rubro": "Servicios Generales (combustible diésel, energía eléctrica, seguridad, mantenimiento rodante)", "mdp": 1985.5 },
-        { "rubro": "Servicios Personales (tripulación, maquinistas, personal de estación y directivos)", "mdp": 498.8 },
-        { "rubro": "Otros Gastos, Depreciación de Equipo y Provisiones", "mdp": 207.4 },
-        { "rubro": "Materiales y Suministros (refacciones, lubricantes, uniformes)", "mdp": 145.5 }
-      ],
-      "deficit_operativo_propio_mdp": -2561.4,
-      "cobertura_ingresos_propios_pct": 9.7,
-      "nota": "Los ingresos propios por cobro de boletos ($275.8 mdp) cubrieron el 9.7% de los gastos corrientes de operar el tren ($2,837.2 mdp). La diferencia de $2,561.4 mdp fue cubierta con transferencias del erario federal."
-    },
-    "servicio_y_movilidad": {
-      "pasajeros_totales_2024": 645800,
-      "pasajeros_locales_subsidiados": 312400,
-      "turistas_nacionales": 289100,
-      "turistas_internacionales": 44300,
-      "kilometros_recorridos_tren": 1845000,
-      "tramos_en_operacion_2024": "Tramos 1, 2, 3, 4 y 5 Norte",
-      "tarifa_promedio_local": "$160 pesos (Palenque-Cancún por tramo)",
-      "tarifa_promedio_turista": "$850 pesos"
-    },
-    "matriz_impacto_ambiental": {
-      "superficie_selva_autorizada_mia_ha": 6650.0,
-      "superficie_derecho_via_desprovista_ha": 6420.0,
-      "estado_mia_semarnat": "Autorización de Impacto Ambiental condicionada por SEMARNAT en resolutivos SRA/DGIRA para Tramos 1 a 7",
-      "medidas_mitigacion": [
-        { "medida": "Pasos de fauna silvestres", "autorizados": 450, "construidos_documentados": 380, "estado": "oficial", "fuente": "Sedena / Semarnat 2024" },
-        { "medida": "Reforestación compensatoria", "compromiso_ha": 14000.0, "avance_reportado_ha": 8900.0, "estado": "oficial", "fuente": "Programa Sembrando Vida / Conafor" },
-        { "medida": "Rescate de flora y reubicación de fauna", "especimenes_reubicados": 125000, "estado": "oficial", "fuente": "Informes de monitoreo ambiental PROFEPA" }
-      ],
-      "valoracion_monetaria_dano": "pendiente",
-      "nota_ambiental": "La SEMARNAT autorizó las MIA con condicionantes de mitigación. No existe un avalúo económico oficial unificado del costo monetario del daño o remediación; la plataforma conserva las medidas físicas comprobadas y mantiene el costo monetario como pendiente."
-    },
-    "auditoria_asf_2024": {
-      "auditorias_practicadas": 5,
-      "informes": "ASF Cuenta Pública 2024, auditorías 221-DE, 222-DE, 223-DE, 224-DE a Fonatur y Sedena",
-      "monto_observado_pendiente_solucion_mdp": 1245.8,
-      "conceptos_observados": "Pagos en exceso por volúmenes de terraplén no ejecutados, ajuste de costos extraordinarios sin comprobación de precios unitarios y anticipos no amortizados a tiempo."
-    }
+    "estado": "retirado",
+    "fecha": "10-10-2026",
+    "motivo": "La ficha pericial del Tren Maya 2024 se retiró: sus cifras entraron el 29-09-2026 sin cotejo con el Tomo VII de la Cuenta Pública 2024 ni con los informes de la ASF. Volverá cuando cada cifra tenga su documento.",
+    "alternativa": "expedientes.html#exp-tren-maya"
   },
   "macro": {
     "pefNetoTotal": 10193600,

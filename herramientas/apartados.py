@@ -142,7 +142,7 @@ def nota_ref(ref, n, titulo):
 # mismas fuentes; cada paso lleva a su capitulo.
 CAMINO_NUMEROS = (
     '<section class="camino" aria-labelledby="caminoTit">\n'
-    '        <h2 class="camino-tit" id="caminoTit">El camino del dinero, en cuatro pasos</h2>\n'
+    '        <h2 class="camino-tit" id="caminoTit">El camino del dinero, en cinco pasos</h2>\n'
     '        <p class="camino-txt">El dinero público recorre siempre el mismo camino. Antes de auditar una cifra hay que saber por dónde pasó.</p>\n'
     '        <ol class="camino-pasos">\n%s\n        </ol>\n      </section>') % '\n'.join(
     '          <li class="camino-paso"><span class="camino-num" aria-hidden="true">%d</span><span class="camino-ico" aria-hidden="true">%s</span>'
@@ -165,6 +165,10 @@ CAMINO_NUMEROS = (
          'Al año siguiente se entrega la %s, que revisa la %s.' % (
              glos('Cuenta Pública', 'Cuenta Pública'), glos('Auditoría Superior de la Federación (ASF)', 'Auditoría Superior de la Federación')),
          'herramienta-inspector-asf.html', 'Qué encontró la ASF'),
+        (5, '🧾', 'Se hace el balance',
+         'El %s junta lo que entró, lo que se gastó, lo que se debe y lo que se perdió: 2024 frente a 2026 y 2027.' % (
+             '<a href="estado-de-cuenta.html">Estado de Cuenta Cívico</a>'),
+         'estado-de-cuenta.html', 'Ver el estado de cuenta'),
     ])
 
 
@@ -1060,6 +1064,8 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Estado de Cuenta Cívico: 2024, 2026 y 2027 comparados en % del PIB, en cuatro dimensiones y con descarga en CSV.'),
+    ('10-10-2026', 'Se retiraron las cifras del «Estado de Resultados» 2024 y la ficha pericial del Tren Maya que no tenían cotejo con su documento.'),
     ('10-10-2026', 'Índice general y portada con recorrido: cada investigación lleva a sus números y a su evidencia.'),
     ('10-10-2026', 'Becas de educación básica y media superior separadas, con aprobado y devengado verificados en la ASF.'),
     ('10-10-2026', 'El Circuito del Dinero se integró a Números, con el camino del dinero en cuatro pasos.'),
@@ -1093,7 +1099,10 @@ def indice():
     investigaciones = _rejilla([_grupo(ico, tit, [(auditorias.archivo(i), au[i][5], au[i][6]) for i in ids])
                                 for ico, tit, ids in auditorias.TEMAS])
     num = ap['sigue-el-dinero.html']
-    numeros = _rejilla([_grupo(s['pestana'][0], s['titulo'],
+    numeros = _rejilla([_grupo('🧾', 'El balance', [
+        ('estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024, 2026 y 2027 en cuatro dimensiones'),
+        ('estado-de-cuenta-2024-2027.csv', 'Descarga el estado de cuenta en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
+                       [_grupo(s['pestana'][0], s['titulo'],
                                [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for t in s['tarjetas']],
                                'sigue-el-dinero.html#' + s['id'])
                         for s in num['secciones']])
@@ -1199,7 +1208,8 @@ def generar(sello=None):
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias
     import expedientes
-    if auditorias.generar(sello):
+    import estado_cuenta
+    if auditorias.generar(sello) or estado_cuenta.generar(sello):
         return 1
     return expedientes.generar(sello)
 
