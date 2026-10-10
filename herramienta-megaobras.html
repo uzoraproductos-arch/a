@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010a">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010a">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010a">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010b">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010b">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010b">
+  <script>(function () { var m = {"pulso": "herramienta-megaobras-pulso.html", "sector": "herramienta-megaobras-sector.html", "sexenios": "herramienta-megaobras-sexenios.html", "cero": "herramienta-megaobras-cero.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -76,59 +77,40 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página" data-primera="1">
-          <a class="apartado-pestana" role="tab" id="pestana-pulso" href="#pulso" aria-controls="pulso" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📊</span><span class="apartado-pestana-tx"><b>1 · El pulso del gasto</b><small>Costo y sobrecosto</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-sector" href="#sector" aria-controls="sector" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏭</span><span class="apartado-pestana-tx"><b>2 · Sector e industria</b><small>Obra por obra</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-sexenios" href="#sexenios" aria-controls="sexenios" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏛️</span><span class="apartado-pestana-tx"><b>3 · Las obras de cada sexenio</b><small>De 1988 a 2024</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-cero" href="#cero" aria-controls="cero" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧮</span><span class="apartado-pestana-tx"><b>4 · De cero al resultado</b><small>Las cuentas, renglón por renglón</small></span></a>
-      </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
+
       
-      <section class="apartado-seccion apartado-panel" id="pulso" aria-labelledby="pulso-tit" role="tabpanel">
-        <h2 class="sr-only" id="pulso-tit">El pulso del gasto</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-obras" href="index.html?ir=megaobras&amp;ancla=eb-pulso" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📊</span>
-          <span class="apartado-tarjeta-nombre">El pulso del gasto</span>
-          <span class="apartado-tarjeta-desc">Las cifras de referencia de las obras (costo, sobrecosto, pérdidas de operación y subsidios), por día, mes, trimestre, semestre o año.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
+      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Los 4 módulos</h2>
+          <p class="apartado-seccion-texto">Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.</p>
         </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="sector" aria-labelledby="sector-tit" role="tabpanel">
-        <h2 class="sr-only" id="sector-tit">Sector e industria</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-obras" href="index.html?ir=megaobras&amp;ancla=eb-sector" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏭</span>
-          <span class="apartado-tarjeta-nombre">Sector e industria</span>
-          <span class="apartado-tarjeta-desc">Filtra por industria y por mandato: la comparativa de las obras, su ficha viva y contra qué se compara ese dinero.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="sexenios" aria-labelledby="sexenios-tit" role="tabpanel">
-        <h2 class="sr-only" id="sexenios-tit">Las obras de cada sexenio</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-obras" href="index.html?ir=megaobras&amp;ancla=eb-sexenios" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏛️</span>
-          <span class="apartado-tarjeta-nombre">Las obras de cada sexenio</span>
-          <span class="apartado-tarjeta-desc">Qué megaobras le tocan a cada presidente, de 1988 a 2024, en una sola línea del tiempo.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="cero" aria-labelledby="cero-tit" role="tabpanel">
-        <h2 class="sr-only" id="cero-tit">De cero al resultado</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-obras" href="index.html?ir=megaobras&amp;ancla=eb-cero" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🧮</span>
-          <span class="apartado-tarjeta-nombre">De cero al resultado</span>
-          <span class="apartado-tarjeta-desc">Las mesas de cálculo renglón por renglón, el inventario por sector y la procedencia de cada cifra, para seguir la cuenta con el dedo.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
+        <div class="apartado-bloque">
+        <ol class="herr-ruta">
+          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-pulso.html">
+            <span class="herr-paso-num" aria-hidden="true">1</span>
+            <span class="herr-paso-ico" aria-hidden="true">📊</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Costo y sobrecosto</span><span class="herr-paso-nombre">El pulso del gasto</span><span class="herr-paso-desc">Las cifras de referencia de las obras (costo, sobrecosto, pérdidas de operación y subsidios), por día, mes, trimestre, semestre o año.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-sector.html">
+            <span class="herr-paso-num" aria-hidden="true">2</span>
+            <span class="herr-paso-ico" aria-hidden="true">🏭</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Obra por obra</span><span class="herr-paso-nombre">Sector e industria</span><span class="herr-paso-desc">Filtra por industria y por mandato: la comparativa de las obras, su ficha viva y contra qué se compara ese dinero.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-sexenios.html">
+            <span class="herr-paso-num" aria-hidden="true">3</span>
+            <span class="herr-paso-ico" aria-hidden="true">🏛️</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">De 1988 a 2024</span><span class="herr-paso-nombre">Las obras de cada sexenio</span><span class="herr-paso-desc">Qué megaobras le tocan a cada presidente, de 1988 a 2024, en una sola línea del tiempo.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-cero.html">
+            <span class="herr-paso-num" aria-hidden="true">4</span>
+            <span class="herr-paso-ico" aria-hidden="true">🧮</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Las cuentas, renglón por renglón</span><span class="herr-paso-nombre">De cero al resultado</span><span class="herr-paso-desc">Las mesas de cálculo renglón por renglón, el inventario por sector y la procedencia de cada cifra, para seguir la cuenta con el dedo.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+        </ol>
         </div>
       </section>
 
@@ -146,10 +128,10 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010a</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010b</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010a"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010b"></script>
 </body>
 </html>

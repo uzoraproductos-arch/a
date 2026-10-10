@@ -6291,16 +6291,25 @@
     const indice = construirIndiceAutolink();
     let insertados = 0;
 
-    indice.forEach(entrada => {
-      const caminante = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
-        acceptNode(nodo) {
-          if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
-          return autolinkNodoValido(nodo) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-        }
-      });
+    /* Un solo recorrido del arbol (10-10-2026): antes se abria un
+       TreeWalker por cada alias y se revisaban los ancestros de cada nodo
+       cientos de veces; en la portada eso costaba unos 7 segundos. La
+       lista se actualiza al partir un nodo, asi que el resultado es igual. */
+    const nodos = [];
+    const caminante = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
+      acceptNode(nodo) {
+        if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+        return autolinkNodoValido(nodo) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    let n0;
+    while ((n0 = caminante.nextNode())) nodos.push(n0);
+    if (!nodos.length) return 0;
 
-      let nodo;
-      while ((nodo = caminante.nextNode())) {
+    indice.forEach(entrada => {
+      for (let i = 0; i < nodos.length; i++) {
+        const nodo = nodos[i];
+        if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) continue;
         const coincidencia = entrada.re.exec(nodo.nodeValue);
         if (!coincidencia) continue;
 
@@ -6334,6 +6343,7 @@
         padre.insertBefore(enlace, nodo);
         padre.insertBefore(despues, nodo);
         padre.removeChild(nodo);
+        nodos.splice(i, 1, antes, despues);
 
         insertados++;
         break; // una sola vez por ambito: nota al pie, no subrayado masivo

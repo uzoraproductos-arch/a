@@ -944,3 +944,65 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 @media (prefers-reduced-motion: reduce) {
   .bib-q, .bib-p, .bib-r { transition: none; }
 }
+
+/* ==========================================================================
+   HERRAMIENTAS EN MODULOS (10-10-2026)
+   La pagina de cada herramienta es la ruta de sus modulos, numerados; cada
+   modulo abre su propia pagina (herramienta-*-*.html) con el auditor en
+   modo visor, a la altura de su contenido.
+   ========================================================================== */
+.herr-ruta { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: paso; }
+.herr-ruta > li { margin: 0; }
+.herr-paso {
+  --tarjeta: var(--civ-azul-medio);
+  display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 16px;
+  padding: 18px 20px; border-radius: 16px; background: #ffffff; border: 1px solid var(--civ-gris-borde);
+  border-left: 6px solid var(--tarjeta); color: #1c2a44; text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.herr-paso.rubro-obras { --tarjeta: var(--rubro-obras); }
+.herr-paso.rubro-calculadora { --tarjeta: var(--rubro-calculadora); }
+.herr-paso.rubro-inspector { --tarjeta: var(--rubro-inspector); }
+.herr-paso.rubro-ambiente { --tarjeta: var(--rubro-ambiente); }
+.herr-paso:hover, .herr-paso:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(11, 42, 99, 0.12); border-color: var(--tarjeta); }
+.herr-paso-num {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--tarjeta); color: #ffffff; font-weight: 900; font-size: 20px;
+}
+.herr-paso-ico { font-size: 34px; line-height: 1; }
+.herr-paso-tx { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.herr-paso-frase { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--tarjeta); }
+.herr-paso-nombre { font-size: 20px; font-weight: 800; color: #0b2a63; }
+.herr-paso-desc { font-size: 15px; color: #44526b; line-height: 1.5; }
+.herr-paso-accion { font-weight: 800; color: var(--tarjeta); white-space: nowrap; }
+@media (max-width: 640px) {
+  .herr-paso { grid-template-columns: auto 1fr; gap: 10px 12px; padding: 14px 16px; }
+  .herr-paso-ico { display: none; }
+  .herr-paso-accion { grid-column: 2; }
+  .herr-paso-nombre { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .herr-paso { transition: none; } .herr-paso:hover { transform: none; } }
+
+.herr-modulo { margin: 0; border-radius: 16px; }
+.herr-modulo .apartado-visor-marco { height: calc(100vh - 140px); }
+.herr-modulo-pie { padding: 10px 16px; text-align: right; font-size: 14px; background: #ffffff; border-top: 1px solid var(--civ-gris-borde); }
+.herr-modulo-pie a { color: var(--civ-azul); font-weight: 700; }
+.herr-mod-nav { margin-top: 28px; }
+.herr-mod-pasos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+.herr-mod-paso {
+  display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border-radius: 14px;
+  background: #ffffff; border: 1px solid var(--civ-gris-borde); color: #0b2a63; text-decoration: none;
+}
+.herr-mod-paso small { font-size: 13px; color: #5a6782; font-weight: 700; }
+.herr-mod-paso b { font-size: 17px; }
+.herr-mod-paso.sig { text-align: right; background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; }
+.herr-mod-paso.sig small { color: #d6e9fc; }
+.herr-mod-paso:hover { border-color: var(--civ-azul); }
+.herr-mod-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.herr-mod-chip {
+  padding: 8px 14px; border-radius: 999px; background: #ffffff; border: 1px solid var(--civ-gris-borde);
+  color: #0b2a63; font-weight: 700; font-size: 14px; text-decoration: none;
+}
+.herr-mod-chip:hover { border-color: var(--civ-azul); }
+.herr-mod-chip.actual { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; }
+@media (max-width: 640px) { .herr-mod-pasos { grid-template-columns: 1fr; } .herr-mod-paso.sig { order: -1; } }

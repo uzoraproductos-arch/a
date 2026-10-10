@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010a">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010a">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010a">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010b">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010b">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010b">
+  <script>(function () { var m = {"inspasf": "herramienta-inspector-asf.html", "inspradar": "herramienta-inspector-radar.html", "expedientes": "expedientes.html", "inspentes": "herramienta-inspector-entes.html", "inspnota": "herramienta-inspector-nota.html", "inspefos": "herramienta-inspector-efos.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -76,85 +77,52 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página" data-primera="1">
-          <a class="apartado-pestana" role="tab" id="pestana-inspasf" href="#inspasf" aria-controls="inspasf" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏛️</span><span class="apartado-pestana-tx"><b>1 · Qué encontró la ASF</b><small>El gasto de 2024</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-inspradar" href="#inspradar" aria-controls="inspradar" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🚩</span><span class="apartado-pestana-tx"><b>2 · Radar por entidad</b><small>Banderas rojas</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-expedientes" href="#expedientes" aria-controls="expedientes" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📂</span><span class="apartado-pestana-tx"><b>3 · Expedientes de casos</b><small>Casos por aclarar</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-inspentes" href="#inspentes" aria-controls="inspentes" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🏢</span><span class="apartado-pestana-tx"><b>4 · Auditor de entes públicos</b><small>Busca y verifica</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-inspnota" href="#inspnota" aria-controls="inspnota" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📰</span><span class="apartado-pestana-tx"><b>5 · Contrasta una nota</b><small>Busca y verifica</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-inspefos" href="#inspefos" aria-controls="inspefos" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧾</span><span class="apartado-pestana-tx"><b>6 · Lista negra del SAT</b><small>Busca y verifica</small></span></a>
-      </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
+
       
-      <section class="apartado-seccion apartado-panel" id="inspasf" aria-labelledby="inspasf-tit" role="tabpanel">
-        <h2 class="sr-only" id="inspasf-tit">Qué encontró la ASF</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=eb-inspasf" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏛️</span>
-          <span class="apartado-tarjeta-nombre">Qué encontró la ASF</span>
-          <span class="apartado-tarjeta-desc">Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
+      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Los 6 módulos</h2>
+          <p class="apartado-seccion-texto">Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.</p>
         </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="inspradar" aria-labelledby="inspradar-tit" role="tabpanel">
-        <h2 class="sr-only" id="inspradar-tit">Radar por entidad</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=eb-inspradar" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🚩</span>
-          <span class="apartado-tarjeta-nombre">Radar por entidad</span>
-          <span class="apartado-tarjeta-desc">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024, ordenados como prefieras.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="expedientes" aria-labelledby="expedientes-tit" role="tabpanel">
-        <h2 class="sr-only" id="expedientes-tit">Expedientes de casos</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="expedientes.html">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📂</span>
-          <span class="apartado-tarjeta-nombre">Expedientes de casos</span>
-          <span class="apartado-tarjeta-desc">Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.</span>
-          <span class="apartado-tarjeta-accion">Abrir ➔</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="inspentes" aria-labelledby="inspentes-tit" role="tabpanel">
-        <h2 class="sr-only" id="inspentes-tit">Auditor de entes públicos</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=eb-inspentes" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🏢</span>
-          <span class="apartado-tarjeta-nombre">Auditor de entes públicos</span>
-          <span class="apartado-tarjeta-desc">Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="inspnota" aria-labelledby="inspnota-tit" role="tabpanel">
-        <h2 class="sr-only" id="inspnota-tit">Contrasta una nota</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=eb-inspnota" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">📰</span>
-          <span class="apartado-tarjeta-nombre">Contrasta una nota</span>
-          <span class="apartado-tarjeta-desc">¿Leíste una cifra en una noticia, en redes o en un discurso? Ponla junto al documento oficial y ve cuánto se aleja y por qué.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="inspefos" aria-labelledby="inspefos-tit" role="tabpanel">
-        <h2 class="sr-only" id="inspefos-tit">Lista negra del SAT</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-inspector" href="index.html?ir=verificador&amp;ancla=eb-inspefos" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🧾</span>
-          <span class="apartado-tarjeta-nombre">Lista negra del SAT</span>
-          <span class="apartado-tarjeta-desc">Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
+        <div class="apartado-bloque">
+        <ol class="herr-ruta">
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-asf.html">
+            <span class="herr-paso-num" aria-hidden="true">1</span>
+            <span class="herr-paso-ico" aria-hidden="true">🏛️</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">El gasto de 2024</span><span class="herr-paso-nombre">Qué encontró la ASF</span><span class="herr-paso-desc">Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-radar.html">
+            <span class="herr-paso-num" aria-hidden="true">2</span>
+            <span class="herr-paso-ico" aria-hidden="true">🚩</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Banderas rojas</span><span class="herr-paso-nombre">Radar por entidad</span><span class="herr-paso-desc">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024, ordenados como prefieras.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="expedientes.html">
+            <span class="herr-paso-num" aria-hidden="true">3</span>
+            <span class="herr-paso-ico" aria-hidden="true">📂</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Casos por aclarar</span><span class="herr-paso-nombre">Expedientes de casos</span><span class="herr-paso-desc">Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-entes.html">
+            <span class="herr-paso-num" aria-hidden="true">4</span>
+            <span class="herr-paso-ico" aria-hidden="true">🏢</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Auditor de entes públicos</span><span class="herr-paso-desc">Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-nota.html">
+            <span class="herr-paso-num" aria-hidden="true">5</span>
+            <span class="herr-paso-ico" aria-hidden="true">📰</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Contrasta una nota</span><span class="herr-paso-desc">¿Leíste una cifra en una noticia, en redes o en un discurso? Ponla junto al documento oficial y ve cuánto se aleja y por qué.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-efos.html">
+            <span class="herr-paso-num" aria-hidden="true">6</span>
+            <span class="herr-paso-ico" aria-hidden="true">🧾</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Lista negra del SAT</span><span class="herr-paso-desc">Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+        </ol>
         </div>
       </section>
 
@@ -172,10 +140,10 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010a</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010b</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010a"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010b"></script>
 </body>
 </html>

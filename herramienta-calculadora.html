@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010a">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010a">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010a">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010b">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010b">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010b">
+  <script>(function () { var m = {"ccticket": "herramienta-calculadora-ticket.html", "cccompara": "herramienta-calculadora-compara.html", "ccreloj": "herramienta-calculadora-reloj.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -76,46 +77,34 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página" data-primera="1">
-          <a class="apartado-pestana" role="tab" id="pestana-ccticket" href="#ccticket" aria-controls="ccticket" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🧾</span><span class="apartado-pestana-tx"><b>1 · Tu estado de cuenta</b><small>Lo que pagas y a dónde va</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-cccompara" href="#cccompara" aria-controls="cccompara" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">⚡</span><span class="apartado-pestana-tx"><b>2 · Tú contra ellos</b><small>Cargo por cargo</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-ccreloj" href="#ccreloj" aria-controls="ccreloj" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">⏱️</span><span class="apartado-pestana-tx"><b>3 · El reloj de la deuda</b><small>Y de lo perdido</small></span></a>
-      </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
+
       
-      <section class="apartado-seccion apartado-panel" id="ccticket" aria-labelledby="ccticket-tit" role="tabpanel">
-        <h2 class="sr-only" id="ccticket-tit">Tu estado de cuenta</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=eb-ccticket" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">🧾</span>
-          <span class="apartado-tarjeta-nombre">Tu estado de cuenta</span>
-          <span class="apartado-tarjeta-desc">Escribe lo que ganas y la página saca cuatro cuentas: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y tu estado de cuenta.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
+      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Los 3 módulos</h2>
+          <p class="apartado-seccion-texto">Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.</p>
         </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="cccompara" aria-labelledby="cccompara-tit" role="tabpanel">
-        <h2 class="sr-only" id="cccompara-tit">Tú contra ellos</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=eb-cccompara" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">⚡</span>
-          <span class="apartado-tarjeta-nombre">Tú contra ellos</span>
-          <span class="apartado-tarjeta-desc">Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
-        </div>
-      </section>
-
-      <section class="apartado-seccion apartado-panel" id="ccreloj" aria-labelledby="ccreloj-tit" role="tabpanel">
-        <h2 class="sr-only" id="ccreloj-tit">El reloj de la deuda</h2>
-        <div class="apartado-rejilla herr-rejilla">
-        <a class="apartado-tarjeta rubro-calculadora" href="index.html?ir=calculadora&amp;ancla=eb-ccreloj" data-auto="1">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">⏱️</span>
-          <span class="apartado-tarjeta-nombre">El reloj de la deuda</span>
-          <span class="apartado-tarjeta-desc">Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.</span>
-          <span class="apartado-tarjeta-accion">Ver aquí ▾</span>
-        </a>
+        <div class="apartado-bloque">
+        <ol class="herr-ruta">
+          <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-ticket.html">
+            <span class="herr-paso-num" aria-hidden="true">1</span>
+            <span class="herr-paso-ico" aria-hidden="true">🧾</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Lo que pagas y a dónde va</span><span class="herr-paso-nombre">Tu estado de cuenta</span><span class="herr-paso-desc">Escribe lo que ganas y la página saca cuatro cuentas: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y tu estado de cuenta.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-compara.html">
+            <span class="herr-paso-num" aria-hidden="true">2</span>
+            <span class="herr-paso-ico" aria-hidden="true">⚡</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Cargo por cargo</span><span class="herr-paso-nombre">Tú contra ellos</span><span class="herr-paso-desc">Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-reloj.html">
+            <span class="herr-paso-num" aria-hidden="true">3</span>
+            <span class="herr-paso-ico" aria-hidden="true">⏱️</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Y de lo perdido</span><span class="herr-paso-nombre">El reloj de la deuda</span><span class="herr-paso-desc">Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+        </ol>
         </div>
       </section>
 
@@ -133,10 +122,10 @@
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010a</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010b</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010a"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010b"></script>
 </body>
 </html>
