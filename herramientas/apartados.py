@@ -522,6 +522,19 @@ APARTADOS = [
                 'tarjetas': [],
             },
             {
+                # Entrega 7 de la propuesta de Astra (10-10-2026).
+                'id': 'comunidad',
+                'pestana': ('🤝', 'Comunidad', 'Propón temas, señala errores, comparte'),
+                'titulo': '🤝 Comunidad',
+                'texto': 'La plataforma mejora con quien la lee: propón qué investigar, corrígenos con un documento y comparte lo que encuentres.',
+                'tarjetas': [
+                    ('💡', 'Propón un tema', 'Lo que te gustaría que investigáramos, con los documentos que conozcas.', 'comunidad.html#tema', None, None),
+                    ('✏️', 'Señala un error', 'Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.', 'comunidad.html#error', None, None),
+                    ('📣', 'Comparte el Estado de Cuenta', 'Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.', 'comunidad.html#compartir', None, None),
+                    ('📋', 'Fe de erratas', 'Cada corrección que hemos hecho: qué estaba mal y qué cambió.', 'comunidad.html#erratas', None, None),
+                ],
+            },
+            {
                 # Entrega 6 de la propuesta de Astra (10-10-2026): el Pase
                 # convive con los Servicios (decision del autor).
                 'id': 'servicios',
@@ -978,6 +991,117 @@ def servicios():
     }
 
 
+# Comunidad, primera version (propuesta de Astra, punto 11; entrega 7,
+# 10-10-2026): proponer temas, senalar errores y compartir el estado de
+# cuenta. Sin perfiles, comentarios ni cuentas: eso necesita servidor. Los
+# formularios los arma assets/auditor/js/comunidad.js en el navegador y no
+# envian nada mientras CANAL_COMUNIDAD este vacio (se abre con el dominio,
+# igual que CANAL_SOLICITUD). Cada pagina lleva al pie «¿Viste un error?».
+CANAL_COMUNIDAD = ''
+
+# Fe de erratas: correcciones reales, documentadas en CONTEXT.md. Politica
+# de independencia, compromiso «De que respondemos»: se corrige en publico
+# diciendo que cambio. (fecha, donde, que estaba mal, que se hizo, enlace)
+ERRATAS = [
+    ('10-10-2026', 'Calculadora Cívica',
+     'El comparador «Tú contra ellos» usaba un ingreso de referencia de $15,000 que no salía de ningún documento.',
+     'Se retiró. Ahora, si no escribes tu ingreso, usa el salario mínimo general mensual de 2026 ($9,451.20, CONASAMI), rotulado como ejemplo oficial.',
+     'herramienta-calculadora.html'),
+    ('10-10-2026', 'Tren Maya',
+     'El recuadro del peritaje mostraba 515,487 mdp sin cotejo contra su documento.',
+     'Se retiró la cifra; el dato quedó como retirado, con su motivo y el enlace al expediente de la Auditoría Superior.',
+     'auditoria-tren-maya.html'),
+    ('10-10-2026', 'Programas sociales',
+     'La pensión (S176) mostraba 465,048 mdp como devengado, cuando es el aprobado; IMSS-Bienestar traía 128,900 mdp sin documento; las becas eran un solo renglón de 87,540 mdp sin documento.',
+     'Se retiraron las tres. Las becas se separaron en S072 y S311 con aprobado y devengado de la Cuenta Pública 2024; la pensión e IMSS-Bienestar quedaron pendientes.',
+     'pendientes.html'),
+    ('09-10-2026', 'Marco legal hacendario',
+     'Había dos «preceptos» de la Ley de Ingresos que no existen, y la extinción de los fideicomisos judiciales se atribuía al transitorio Cuarto, con «13 fideicomisos» y «$15,434 mdp» que el decreto no menciona.',
+     'Se retiraron los dos preceptos, se corrigió el transitorio (es el Décimo) y se quitaron las cifras. Cada precepto se cotejó palabra por palabra con su texto vigente.',
+     'marco-legal.html'),
+    ('27-09-2026', 'Personajes relevantes',
+     'Las fichas de personajes de la antigua Enciclopedia no citaban fuentes.',
+     'Se retiraron. Lo que se rescató después se verificó afirmación por afirmación contra documentos oficiales.',
+     None),
+]
+
+
+def _campo_cm(i, et, ctl, ayuda=''):
+    return ('            <div class="sv-campo"><label for="%s">%s</label>%s%s</div>'
+            % (i, et, ctl, ('<small>%s</small>' % ayuda) if ayuda else ''))
+
+
+def _form_cm(id_, asunto, campos, boton):
+    return '\n'.join([
+        '<form class="sv-form cm-form" id="%s" data-canal="%s" data-asunto="%s" novalidate>' % (id_, esc_attr(CANAL_COMUNIDAD), esc_attr(asunto)),
+        '\n'.join(campos),
+        '          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">%s</button>'
+        '<button type="reset" class="sz-btn">Empezar de nuevo</button></div>' % boton,
+        '          <p class="sv-error cm-error" role="alert" hidden></p>',
+        '        </form>',
+        '        <div class="sv-resumen cm-resumen" hidden></div>'])
+
+
+def comunidad():
+    ob = ' <span class="sv-req">obligatorio</span>'
+    privado = ('          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. '
+               'Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>')
+    firma = [_campo_cm('%sFirma', 'Firma o seudónimo', '<input id="%sFirma" type="text" maxlength="80">'),
+             _campo_cm('%sCorreo', 'Correo (opcional)', '<input id="%sCorreo" type="email" maxlength="160">')]
+    def f(pre, lista):
+        return [x.replace('%s', pre) for x in lista]
+    tema = _form_cm('cmTema', 'Propuesta de tema', [privado] + [
+        _campo_cm('cmTemaQue', 'Tema' + ob, '<input id="cmTemaQue" type="text" maxlength="160" required>',
+                  'Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.'),
+        _campo_cm('cmTemaPor', 'Por qué importa' + ob, '<textarea id="cmTemaPor" rows="3" maxlength="1200" required></textarea>'),
+        _campo_cm('cmTemaDonde', 'Entidad o municipio', '<input id="cmTemaDonde" type="text" maxlength="120">'),
+        _campo_cm('cmTemaDocs', 'Documentos oficiales que conozcas', '<textarea id="cmTemaDocs" rows="2" maxlength="800"></textarea>',
+                  'Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.'),
+        ] + f('cmTema', firma), 'Revisar mi propuesta')
+    error = _form_cm('cmError', 'Señalamiento de error', [privado] + [
+        _campo_cm('cmErrPagina', 'Página' + ob, '<input id="cmErrPagina" type="text" maxlength="200" required>',
+                  'Si llegaste desde «¿Viste un error?», ya está escrita.'),
+        _campo_cm('cmErrDato', 'Qué dato está mal' + ob, '<textarea id="cmErrDato" rows="2" maxlength="800" required></textarea>'),
+        _campo_cm('cmErrDice', 'Qué dice el documento oficial' + ob, '<textarea id="cmErrDice" rows="2" maxlength="800" required></textarea>'),
+        _campo_cm('cmErrFuente', 'Enlace al documento' + ob, '<input id="cmErrFuente" type="url" maxlength="400" required placeholder="https://">',
+                  'Sin documento no podemos corregir: es la misma regla que seguimos nosotros.'),
+        ] + f('cmErr', firma), 'Revisar mi señalamiento')
+    erratas = '\n'.join(
+        '            <li class="cm-errata"><span class="cm-errata-fecha">%s</span><b>%s</b>'
+        '<span><span class="cm-errata-et">Estaba mal:</span> %s</span><span><span class="cm-errata-et">Qué hicimos:</span> %s</span>%s</li>'
+        % (e[0], e[1], e[2], e[3], (' <a href="%s">Ver la página ➔</a>' % e[4]) if e[4] else '') for e in ERRATAS)
+    compartir = ('<div class="cm-compartir" data-url="%sestado-de-cuenta.html" '
+                 'data-texto="El Estado de Cuenta Cívico de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">\n'
+                 '          <p>El <a href="estado-de-cuenta.html">Estado de Cuenta Cívico</a> resume 2024, 2026 y 2027 en cuatro dimensiones, '
+                 'cada cifra con su fuente. Compártelo: entre más gente lo lea, más difícil es que el dinero público pase sin que nadie lo vea.</p>\n'
+                 '          <div class="sv-acciones cm-redes"></div>\n'
+                 '          <p class="cm-nota">Si sacaste tu cuenta personal en la <a href="herramienta-calculadora-ticket.html">Calculadora Cívica</a>, '
+                 'compartimos solo el enlace: tu ingreso nunca sale de tu navegador.</p>\n'
+                 '          <noscript><p>Para compartir, copia esta dirección: %sestado-de-cuenta.html</p></noscript>\n'
+                 '        </div>') % (SITIO, SITIO)
+    return {
+        'archivo': 'comunidad.html', 'menu': 'Comunidad', 'menu_archivo': 'participa.html',
+        'padre': ('participa.html#comunidad', 'Participa'),
+        'icono': '🤝', 'titulo': 'Comunidad', 'lema': 'Propón, corrige y comparte',
+        'entrada': ('La plataforma mejora con quien la lee. Propón un tema para investigar, señala un dato que esté mal (con su documento) '
+                    'y comparte el Estado de Cuenta. Aquí también está la fe de erratas: cada corrección que hemos hecho, '
+                    'qué estaba mal y qué cambió.'),
+        'estilos': ['servicios.css'],
+        'scripts': ['comunidad.js'],
+        'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> El envío de propuestas y señalamientos se activa '
+                  'con el lanzamiento. Ya puedes armarlos, copiarlos o descargarlos. Compartir y la fe de erratas ya funcionan.</p>'),
+        'secciones': [
+            {'id': 'tema', 'titulo': '💡 Propón un tema', 'texto': 'Lo que te gustaría que investigáramos. No compromete a nadie: lo revisamos y, si hay documentos, entra a la lista.',
+             'tarjetas': [], 'bloque': tema},
+            {'id': 'error', 'titulo': '✏️ Señala un error', 'texto': 'Si un dato no coincide con su documento oficial, dínoslo. Si tienes razón, se corrige y entra a la fe de erratas.',
+             'tarjetas': [], 'bloque': error},
+            {'id': 'compartir', 'titulo': '📣 Comparte el Estado de Cuenta', 'texto': 'Un enlace basta.', 'tarjetas': [], 'bloque': compartir},
+            {'id': 'erratas', 'titulo': '📋 Fe de erratas', 'texto': 'Las correcciones que hemos hecho, de la más reciente a la más antigua.',
+             'tarjetas': [], 'bloque': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas},
+        ],
+    }
+
+
 # Glosario general en su propia pagina (decision del autor, 09-10-2026):
 # lo pinta assets/auditor/js/glosario.js con los terminos de la base, sin
 # cargar la portada en un marco. Los enlaces a un termino llevan a
@@ -1090,6 +1214,14 @@ GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
 
 def esc_attr(s):
     return html.escape(s, quote=True)
+
+
+def error_pie(archivo):
+    """«¿Viste un error?» al pie de cada pagina generada (entrega 7): lleva
+    al formulario de comunidad.html con la pagina ya escrita."""
+    if archivo == 'comunidad.html':
+        return ''
+    return '<a class="apartado-volver apartado-error" href="comunidad.html?pagina=%s#error">✏️ ¿Viste un error?</a>' % archivo
 
 
 def cabecera(actual, sello):
@@ -1298,6 +1430,7 @@ def pagina(a, sello):
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
+      {error_pie}
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -1306,7 +1439,7 @@ def pagina(a, sello):
 </body>
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
-           sociales=sociales(a['archivo'], titulo_doc, descripcion),
+           sociales=sociales(a['archivo'], titulo_doc, descripcion), error_pie=error_pie(a['archivo']),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
@@ -1318,6 +1451,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Comunidad, en Participa: propón un tema, señala un error con su documento, comparte el Estado de Cuenta y consulta la fe de erratas. Cada página lleva al pie «¿Viste un error?».'),
     ('10-10-2026', 'Servicios de investigación, en Participa: cinco servicios (incluida la licencia de las herramientas), cómo trabajamos, política de independencia y el formulario «Solicita una investigación». Se abren con el lanzamiento.'),
     ('10-10-2026', 'Simulador «Reparte el presupuesto», desde $0: con ejemplo oficial de 2026 y 2027, comparación de escenarios y descarga. La Calculadora Cívica también arranca en cero.'),
     ('10-10-2026', 'Aprende reúne la Biblioteca hacendaria y las Fuentes del auditor en una sola tarjeta, el Diccionario del Gasto Público; cada estante abre su propia página.'),
@@ -1375,6 +1509,7 @@ def indice():
                 (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
+                    ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas'),
                     ('servicios.html', 'Servicios de investigación', 'Solicita una investigación y política de independencia')]
         otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
@@ -1458,7 +1593,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

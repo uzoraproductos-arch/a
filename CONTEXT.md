@@ -669,8 +669,45 @@ Pendientes de la entrega 6:
 - **El tablero comercial del punto 10** (visitas, solicitudes, cotizaciones,
   horas). Necesita analítica y registro de encargos que el sitio estático no
   tiene.
-- **Entrega 7** (comunidad: proponer temas, señalar errores, compartir
-  estados de cuenta): sin empezar.
+- **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
+
+**Portada intacta y entrega 7 de Astra: Comunidad (10-10-2026, sello 20261010m).**
+- **«Por dónde empezar» salió de la portada** por decisión del autor:
+  «la plataforma queda intacta». Su contenido se reparte así:
+  - **Investigaciones por tema y «Cómo verificamos»:** van al pie de cada
+    `auditoria-*.html`, dentro de «Otras auditorías» (`temas()` en
+    `auditorias.py`). El tema del caso va primero y marcado, y las tarjetas
+    del mismo tema van antes.
+  - **Los cuatro accesos** (Números, Calculadora, Megaobras e Índice) ya
+    estaban en el menú y en el índice general.
+  - `auditorias.portada()` ya solo escribe los `data-*` del carrusel.
+  - Las reglas `.portada-guia*` de `civico.css` quedaron sin uso.
+- **`comunidad.html`** (Participa › Comunidad, cuarta pestaña), generada por
+  `comunidad()` en `apartados.py`. Tiene cuatro partes:
+  1. **Propón un tema.**
+  2. **Señala un error.** Pide el dato, lo que dice el documento oficial y
+     su enlace, que es obligatorio.
+  3. **Comparte el Estado de Cuenta.** Ofrece el menú nativo, WhatsApp, X,
+     Facebook y copiar el enlace. Solo se comparte el enlace; el ingreso
+     del lector nunca sale de su navegador.
+  4. **Fe de erratas** (lista `ERRATAS`). Son cinco correcciones reales
+     documentadas aquí: $15,000 de la Calculadora, 515,487 mdp del Tren
+     Maya, programas sociales, marco legal y personajes.
+     **Cada corrección nueva se agrega a `ERRATAS`**, como pide la
+     política de independencia.
+- **Formularios.** Los arma `assets/auditor/js/comunidad.js`, que es genérico
+  para cada `form.cm-form`. Se firma con seudónimo y el correo es opcional.
+  No envía nada mientras `CANAL_COMUNIDAD` esté vacío; se abre con el
+  dominio, igual que `CANAL_SOLICITUD`.
+- **«✏️ ¿Viste un error?»** está al pie de toda página generada
+  (`error_pie()`): apartados, investigaciones, expedientes, estado de cuenta
+  y pendientes. Lleva a `comunidad.html?pagina=<archivo>#error` con la
+  página ya escrita.
+
+Pendientes de la entrega 7:
+- **El canal de envío** (`CANAL_COMUNIDAD`). Espera el dominio.
+- **Perfiles, comentarios, expedientes privados, suscripciones y pagos.**
+  Necesitan servidor, como dijo Astra.
 
 **Política de independencia, versión 2 (10-10-2026, sello 20261010l).**
 Decisiones del autor:

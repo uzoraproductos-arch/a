@@ -222,8 +222,11 @@ mudando a su página; no se agregan desgloses nuevos.
   (`herramientas/expedientes.py` + `assets/auditor/js/expedientes.js`).
 - Lo único que se agregó a la portada después (entrega 2 de la propuesta de
   Astra, 10-10-2026, a pedido del autor) son **enlaces**: las tres acciones
-  bajo el carrusel y el bloque «Por dónde empezar». Sus datos los escribe
-  `herramientas/auditorias.py`; no se editan a mano.
+  bajo el carrusel. Sus datos los escribe `herramientas/auditorias.py`; no
+  se editan a mano. El bloque «Por dónde empezar» se quitó el mismo día por
+  decisión del autor («la plataforma queda intacta»): sus temas y su nota de
+  verificación viven al pie de cada investigación, y sus accesos, en el
+  índice general.
 - El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
   es su parte B, y `busca-y-verifica.html` solo redirige ahí.
 - **El menú tiene cinco pestañas, ni una más** (decisión del autor,
