@@ -5671,12 +5671,8 @@
       window.location.href = 'diccionario.html';
       return;
     }
-    if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias') && document.getElementById('refsListContainer')) {
-      abrirCatalogoFuentes();
-      return;
-    }
     if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias')) {
-      window.location.href = 'diccionario.html#fuentes';
+      abrirCatalogoFuentes();
       return;
     }
     fjDetenerPlay();
@@ -7281,15 +7277,10 @@
       }
     }
     if (encEl) {
-      /* Si esta pagina trae su propio catalogo, la ficha se abre aqui. */
-      if (document.getElementById('refsListContainer')) {
-        encEl.href = '#faq/faq-referencias';
-        encEl.onclick = function (ev) { ev.preventDefault(); cerrarModalReferencia(); abrirCatalogoFuentes(ref.id); };
-        encEl.lastChild.textContent = ' Ver en el Catálogo de Fuentes';
-      } else {
-        encEl.href = 'diccionario.html#fuentes';
-        encEl.onclick = null;
-      }
+      /* El catalogo vive en su pagina (09-10-2026): la ficha abre ahi. */
+      encEl.href = 'fuentes-oficiales.html' + (ref.id ? '#' + ref.id : '');
+      encEl.onclick = null;
+      encEl.lastChild.textContent = ' Ver en el Catálogo de Fuentes';
     }
 
     modal.style.display = 'flex';
@@ -9099,33 +9090,9 @@
 
   function goToRef(refId) {
     if (refId && (refId.startsWith('ref-marcolg') || refId.startsWith('precepto-'))) {
-      navMarcarOrigen();
-      navSaltoEnCurso = true;
-      var desglose = document.getElementById('seccionDesgloseModulos');
-      if (desglose) {
-        desglose.style.display = 'block';
-        desglose.classList.add('desglose-abierto');
-      }
-      switchTab('faq');
-      switchSubtab('faq', 'faq-marco-legal');
-      navSaltoEnCurso = false;
-      navPintarBarra();
-      renderPreceptosLegales();
-      setTimeout(() => {
-        const targetPrecept = document.getElementById(refId) || document.querySelector('.precepto-card');
-        if (targetPrecept) {
-          targetPrecept.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          targetPrecept.style.borderColor = 'var(--gold-bright)';
-          targetPrecept.style.boxShadow = '0 0 22px rgba(212, 175, 55, 0.45)';
-          setTimeout(() => {
-            targetPrecept.style.borderColor = '';
-            targetPrecept.style.boxShadow = '';
-          }, 2500);
-        }
-      }, 150);
+      irBiblioteca('marco-legal.html' + (refId.startsWith('precepto-') ? '#' + refId : ''));
       return;
     }
-
     // Si la página no contiene el panel de referencias (ej. index.html), abrir la ficha flotante oficial APA 7
     const refPanel = document.getElementById('tab-panel-referencias');
     if (!refPanel) {
@@ -20774,7 +20741,7 @@
         '</div>' +
         '<div class="pe-tablas">' + PE_GRUPOS.map(G => peTabla(G, E)).join('') + '</div>' +
         '<p class="pe-ficha">¿Te topaste con un término que no conoces (déficit, deuda, costo financiero)? ' +
-          '<a href="diccionario.html#glosario">Búscalo en el Diccionario del Gasto Público ➔</a></p>' +
+          '<a href="glosario.html">Búscalo en el glosario ➔</a></p>' +
       '</section>';
 
     const barras = document.getElementById('peBarras');
@@ -22517,22 +22484,17 @@
       orden.map(k => chip(k, pdEsc(cats[k].nombre) + ' (' + cats[k].n + ')')).join('');
   }
 
+  /* La Biblioteca del auditor vive en paginas propias desde el 09-10-2026
+     (preguntas-frecuentes.html, marco-legal.html, fuentes-oficiales.html,
+     glosario.html y pase-del-auditor.html): ya no se despliega en la
+     portada. Desde el visor se abre en la ventana completa. */
+  function irBiblioteca(url, sustituir) {
+    var w = window;
+    if (enVisor()) { try { w = window.top; } catch (e) { w = window; } }
+    if (sustituir && w === window) w.location.replace(url); else w.location.href = url;
+  }
   function abrirCatalogoFuentes(refId) {
-    cerrarMegaMenus();
-    const desglose = document.getElementById('seccionDesgloseModulos');
-    if (desglose) { desglose.style.display = 'block'; desglose.classList.add('desglose-abierto'); }
-    switchTab('faq');
-    switchSubtab('faq', 'faq-referencias');
-    const panel = document.querySelector('.subtab-panel[data-parent="faq"][data-subpanel="faq-referencias"]');
-    const el = (refId && document.getElementById(refId)) || panel;
-    if (!el) return;
-    setTimeout(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: refId ? 'center' : 'start' });
-      if (refId) {
-        el.classList.add('ref-row-destacada');
-        setTimeout(() => el.classList.remove('ref-row-destacada'), 2600);
-      }
-    }, 60);
+    irBiblioteca('fuentes-oficiales.html' + (refId && /^[A-Za-z0-9_-]+$/.test(refId) ? '#' + refId : ''));
   }
 
   function renderReferencias(filter = 'todas') {
@@ -26475,12 +26437,7 @@
      hace que position:fixed se mida contra el pie y no contra la pantalla, y
      el Pase aparecia hasta abajo. Se cuelga directo del body al abrirla. */
   function openPaseCivicoModal() {
-    const m = document.getElementById('modalPaseCivico');
-    if (!m) return;
-    if (m.parentElement !== document.body) document.body.appendChild(m);
-    cerrarMegaMenus();
-    m.style.display = 'flex';
-    m.scrollTop = 0;
+    irBiblioteca('pase-del-auditor.html');
   }
   function closePaseCivicoModal() {
     const m = document.getElementById('modalPaseCivico');
@@ -26631,27 +26588,12 @@
   // MEGA-MENUS TIPO USASPENDING & CAROUSEL SHOWCASE DE DESCUBRIMIENTO
   // =========================================================================
 
+  var BIBLIOTECA_PAGINAS = {
+    'faq-preguntas': 'preguntas-frecuentes.html', 'faq-glosario': 'glosario.html',
+    'faq-marco-legal': 'marco-legal.html', 'faq-referencias': 'fuentes-oficiales.html'
+  };
   function abrirDiccionarioSubtab(subtabId) {
-    var desglose = document.getElementById('seccionDesgloseModulos');
-    if (desglose) {
-      desglose.style.display = 'block';
-      desglose.classList.add('desglose-abierto');
-    }
-    
-    switchTab('faq');
-    
-    if (subtabId) {
-      switchSubtab('faq', subtabId);
-    }
-    
-    cerrarMegaMenus();
-    
-    var targetEl = (subtabId && document.querySelector('.subtab-panel[data-parent="faq"][data-subpanel="' + subtabId + '"]')) || document.getElementById('moduloActivoArea') || document.getElementById('tabintro');
-    if (targetEl) {
-      setTimeout(function() {
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 70);
-    }
+    irBiblioteca(BIBLIOTECA_PAGINAS[subtabId] || 'diccionario.html');
   }
   /* La hoja muestra el menu cuando su contenedor (.nav-menu-item) lleva la
      clase; antes se le ponia al desplegable y en pantallas tactiles, sin
@@ -26705,11 +26647,12 @@
     diccionario: function() { abrirDescargas('diccionario'); },
     'csv-municipios': function() { descargarCSV('municipios'); },
     /* El glosario tiene su propia pagina desde el 09-10-2026. */
-    'faq-glosario': function() { if (enVisor()) abrirDiccionarioSubtab('faq-glosario'); else window.location.replace('glosario.html'); },
-    'faq-marco-legal': function() { abrirDiccionarioSubtab('faq-marco-legal'); },
-    'faq-preguntas': function() { abrirDiccionarioSubtab('faq-preguntas'); },
-    fuentes: function(a) { abrirCatalogoFuentes(a && /^ref-/.test(a) ? a : undefined); },
-    pase: function() { openPaseCivicoModal(); },
+    /* La Biblioteca del auditor tiene paginas propias desde el 09-10-2026. */
+    'faq-glosario': function() { irBiblioteca('glosario.html', true); },
+    'faq-marco-legal': function(a) { irBiblioteca('marco-legal.html' + (a && /^precepto-/.test(a) ? '#' + a : ''), true); },
+    'faq-preguntas': function() { irBiblioteca('preguntas-frecuentes.html', true); },
+    fuentes: function(a) { irBiblioteca('fuentes-oficiales.html' + (a && /^ref-/.test(a) ? '#' + a : ''), true); },
+    pase: function() { irBiblioteca('pase-del-auditor.html', true); },
     reporta: function() { openAyudanosFiscalizar(); },
     nota: function() { abrirNotaPortada(null); },
     /* Destinos de las paginas de Auditoria en imagenes: el ancla dice

@@ -795,3 +795,147 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
   .gl-barra { position: static; }
   .gl-lista { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   BIBLIOTECA DEL AUDITOR (09-10-2026) · assets/auditor/js/biblioteca.js
+   Preguntas frecuentes, Marco legal y Catalogo de fuentes en paginas propias.
+   ========================================================================== */
+.bib-barra .gl-cats { max-height: 92px; overflow-y: auto; }
+.bib-lista { margin-top: 18px; }
+.bib-destacado { border-color: #c9a84c !important; box-shadow: 0 0 0 4px rgba(201, 168, 76, .35) !important; }
+.bib-ref { display: inline-block; color: var(--civ-azul-medio); }
+.bib-b { font: inherit; font-size: 13.5px; cursor: pointer; border-radius: 999px; padding: 6px 14px; background: #f6f8fc; color: #1c2a44; border: 1px solid var(--civ-gris-borde); }
+.bib-b:hover { border-color: var(--civ-azul); }
+.bib-acciones { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+/* Preguntas */
+.bib-bloque { margin: 0 0 22px; }
+.bib-bloque-tit { font-size: 20px; color: #0b2a63; margin: 0 0 10px; padding-bottom: 6px; border-bottom: 2px solid var(--civ-hielo); }
+.bib-q { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-left: 4px solid var(--civ-azul-medio); border-radius: 12px; margin: 0 0 10px; scroll-margin-top: 220px; transition: box-shadow .3s, border-color .3s; }
+.bib-q > summary { list-style: none; display: flex; gap: 10px; align-items: flex-start; cursor: pointer; padding: 14px 16px; font-weight: 700; font-size: 16.5px; color: #0b2a63; line-height: 1.4; }
+.bib-q > summary::-webkit-details-marker { display: none; }
+.bib-q > summary::after { content: '＋'; margin-left: auto; color: var(--civ-azul-medio); font-weight: 400; }
+.bib-q[open] > summary::after { content: '－'; }
+.bib-q > summary:focus-visible { outline: 3px solid var(--civ-celeste); outline-offset: 2px; border-radius: 10px; }
+.bib-q-ico { flex: none; }
+.bib-a { padding: 0 18px 16px 44px; font-size: 15.5px; line-height: 1.65; color: #1c2a44; }
+.bib-a .est-chip { vertical-align: 1px; }
+.bib-fuentes { margin: 12px 0 0; padding-top: 8px; border-top: 1px dashed var(--civ-gris-borde); font-size: 13.5px; color: #44526b; }
+.bib-enlace { margin: 6px 0 0; font-size: 13px; }
+.bib-enlace a { color: #5a6782; }
+
+/* Marco legal: el ciclo */
+.bib-ciclo { background: linear-gradient(180deg, var(--civ-gris), #ffffff); border: 1px solid var(--civ-gris-borde); border-radius: 16px; padding: 18px 18px 14px; margin-bottom: 8px; }
+.bib-ciclo-tit { margin: 0 0 4px; font-size: 21px; color: #0b2a63; }
+.bib-ciclo-tx { margin: 0 0 14px; color: #44526b; }
+.bib-etapas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; counter-reset: none; }
+.bib-etapas li { position: relative; }
+.bib-etapas li + li::before { content: '➜'; position: absolute; left: -11px; top: 50%; transform: translate(-50%, -50%); color: var(--civ-celeste); font-size: 15px; }
+.bib-etapa { width: 100%; height: 100%; font: inherit; cursor: pointer; text-align: left; display: grid; gap: 2px; padding: 12px; border-radius: 12px; border: 1px solid var(--civ-gris-borde); background: #ffffff; color: #1c2a44; position: relative; }
+.bib-etapa:hover { border-color: var(--civ-azul); }
+.bib-etapa.on { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; }
+.bib-etapa.on small, .bib-etapa.on .bib-etapa-n { color: #d6e9fc; }
+.bib-etapa-num { position: absolute; top: 8px; right: 10px; font-size: 12px; font-weight: 800; color: var(--civ-celeste); }
+.bib-etapa-ico { font-size: 24px; }
+.bib-etapa b { font-size: 16px; }
+.bib-etapa small { font-size: 12.5px; color: #5a6782; }
+.bib-etapa-n { margin-top: 4px; font-size: 12px; font-weight: 700; color: var(--civ-azul-medio); }
+.bib-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+.bib-kpi { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-radius: 12px; padding: 10px 14px; display: flex; align-items: baseline; gap: 8px; }
+.bib-kpi b { font-size: 26px; color: #0b2a63; font-family: 'Playfair Display', serif; }
+.bib-kpi span { font-size: 13.5px; color: #44526b; }
+
+/* Marco legal: fichas */
+.bib-preceptos { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 14px; }
+.bib-p { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-top: 4px solid #c9a84c; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; scroll-margin-top: 220px; transition: box-shadow .3s, border-color .3s; }
+.bib-p-cab { display: flex; align-items: center; gap: 8px; }
+.bib-p-ico { font-size: 20px; }
+.bib-p-ley { font-size: 12px; color: #44526b; background: #f1f4fa; border-radius: 999px; padding: 2px 10px; }
+.bib-p-tit { margin: 2px 0 0; font-size: 18px; color: #0b2a63; line-height: 1.3; }
+.bib-p-art { margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #8a6d1f; }
+.bib-p-res { margin: 0; font-size: 15px; line-height: 1.55; color: #1c2a44; }
+.bib-p-cifras { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 6px; }
+.bib-p-cifras li { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; background: var(--civ-gris); border-radius: 10px; padding: 8px 10px; }
+.bib-p-cifras li span { font-size: 13px; color: #44526b; }
+.bib-p-cifras li b { font-size: 16px; color: #0b2a63; grid-column: 1; }
+.bib-p-cifras li .est-chip { grid-column: 2; grid-row: 1 / span 2; }
+.bib-p-cifras li small { grid-column: 1 / -1; font-size: 12px; color: #5a6782; }
+.bib-p-mas { border: 1px solid var(--civ-gris-borde); border-radius: 10px; padding: 0 12px; }
+.bib-p-mas > summary { cursor: pointer; padding: 9px 0; font-weight: 700; color: var(--civ-azul-medio); }
+.bib-p-texto { margin: 0 0 8px; padding: 10px 12px; border-left: 4px solid #c9a84c; background: #fbf8ef; font-family: 'Source Serif 4', serif; font-size: 15px; line-height: 1.6; color: #2b2410; max-height: 320px; overflow-y: auto; }
+.bib-p-vig { margin: 0 0 10px; font-size: 12.5px; color: #5a6782; }
+.bib-p-por { font-size: 14.5px; line-height: 1.55; color: #1c2a44; background: #eef6ff; border-radius: 10px; padding: 10px 12px; }
+.bib-p-pend { margin: 0; font-size: 13.5px; color: #44526b; }
+.bib-p-pie { margin-top: auto; display: flex; flex-wrap: wrap; gap: 14px; padding-top: 8px; border-top: 1px dashed var(--civ-gris-borde); font-size: 13.5px; }
+.bib-p-pie a { color: var(--civ-azul-medio); font-weight: 600; }
+
+/* Fuentes */
+.bib-cita, .bib-graf { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-radius: 16px; padding: 16px 18px; margin-bottom: 14px; }
+.bib-cita h2, .bib-graf h2 { margin: 0 0 6px; font-size: 20px; color: #0b2a63; }
+.bib-cita p, .bib-graf-tx { margin: 0 0 8px; color: #1c2a44; line-height: 1.55; }
+.bib-cita-est { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
+.bib-cita-est .est-chip { margin-right: 6px; }
+.bib-barras { display: grid; gap: 6px; margin-top: 8px; }
+.bib-barra-f { font: inherit; cursor: pointer; display: grid; grid-template-columns: minmax(150px, 260px) 1fr 36px; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 10px; border: 1px solid transparent; background: none; color: #1c2a44; text-align: left; }
+.bib-barra-f:hover { background: var(--civ-gris); }
+.bib-barra-f.on { border-color: var(--civ-azul); background: var(--civ-azul-claro); }
+.bib-barra-et { font-size: 14px; }
+.bib-barra-pista { height: 14px; border-radius: 999px; background: #eef2f8; overflow: hidden; }
+.bib-barra-val { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--civ-azul-medio), var(--civ-celeste)); }
+.bib-barra-n { text-align: right; color: #0b2a63; }
+.bib-refs { list-style: none; padding: 0; display: grid; gap: 8px; }
+.bib-r { display: grid; grid-template-columns: 54px 1fr; gap: 10px; background: #ffffff; border: 1px solid var(--civ-gris-borde); border-radius: 12px; padding: 12px 14px; scroll-margin-top: 220px; transition: box-shadow .3s, border-color .3s; }
+.bib-r-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #8a6d1f; }
+.bib-r-cita { margin: 0; font-size: 15px; line-height: 1.5; color: #1c2a44; overflow-wrap: anywhere; }
+.bib-r-desc { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: #44526b; }
+.bib-r-pie { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 13px; }
+.bib-r-pie a { color: var(--civ-azul-medio); font-weight: 600; overflow-wrap: anywhere; }
+.bib-r-cat { background: #f1f4fa; color: #44526b; border-radius: 999px; padding: 2px 10px; }
+.bib-r-comp { background: #fff4e0; color: #7a5300; border-radius: 999px; padding: 2px 10px; }
+.bib-r-sin { color: #5a6782; }
+.bib-r-ancla { margin-left: auto; text-decoration: none; }
+
+/* La biblioteca, en cada una de sus paginas */
+.bib-nav { margin-top: 28px; padding: 16px 18px; border-radius: 16px; background: var(--civ-gris); border: 1px solid var(--civ-gris-borde); }
+.bib-nav-tit { display: block; font-weight: 800; color: #0b2a63; margin-bottom: 10px; }
+.bib-nav-fila { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+.bib-nav-a { display: flex; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #ffffff; border: 1px solid var(--civ-gris-borde); color: #0b2a63; font-weight: 700; text-decoration: none; }
+.bib-nav-a:hover { border-color: var(--civ-azul); }
+.bib-nav-a[aria-current="page"] { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; }
+.bib-nav-a small { display: block; font-weight: 400; font-size: 12px; color: #5a6782; }
+.bib-nav-a[aria-current="page"] small { color: #d6e9fc; }
+
+/* Pase del auditor */
+.pase-precios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 14px 0; }
+.pase-plan { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-radius: 16px; padding: 18px; }
+.pase-plan-pop { border: 2px solid #c9a84c; background: #fffaf0; }
+.pase-plan-tit { font-size: 12.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #5a6782; }
+.pase-plan-pop .pase-plan-tit { color: #8a6d1f; }
+.pase-precio { font-size: 34px; font-weight: 800; color: #0b2a63; margin: 6px 0 2px; }
+.pase-precio small { font-size: 14px; font-weight: 400; color: #44526b; }
+.pase-plan p { margin: 0; color: #44526b; font-size: 14px; }
+.pase-pronto { display: inline-block; margin-top: 12px; padding: 7px 14px; border-radius: 999px; background: #eef2f8; color: #44526b; font-size: 13px; font-weight: 700; }
+.pase-badge { display: inline-block; background: #fff4e0; color: #7a5300; border-radius: 999px; padding: 6px 14px; font-weight: 700; }
+.pase-lista { margin: 10px 0 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+.pase-lista li { background: #ffffff; border: 1px solid var(--civ-gris-borde); border-radius: 12px; padding: 10px 14px; line-height: 1.5; }
+
+@media (max-width: 860px) {
+  .bib-etapas { grid-template-columns: 1fr 1fr; }
+  .bib-etapas li + li::before { display: none; }
+}
+@media (max-width: 640px) {
+  .bib-etapas { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .bib-etapas li:last-child { grid-column: 1 / -1; }
+  .bib-etapa { padding: 10px; }
+  .bib-etapa small { display: none; }
+  .bib-kpis { grid-template-columns: 1fr; }
+  .bib-preceptos { grid-template-columns: 1fr; }
+  .bib-a { padding-left: 16px; }
+  .bib-barra-f { grid-template-columns: 1fr 36px; }
+  .bib-barra-pista { grid-column: 1 / -1; grid-row: 2; }
+  .bib-r { grid-template-columns: 1fr; gap: 4px; }
+  .pase-precios { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bib-q, .bib-p, .bib-r { transition: none; }
+}

@@ -401,7 +401,7 @@
         '<div class="cp-botones">' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.descargarCSV(\'asf-cp2024\')">⬇️ CSV por estado</button>' +
           '<a class="hero-pillar-btn hero-pillar-audit no-autolink" href="' + pdEsc(C.fuentes.ASFDATOS.url) + '" target="_blank" rel="noopener noreferrer">🔎 Buscar una auditoría en ASF Datos ↗</a>' +
-          '<a class="hero-pillar-btn" href="index.html?ir=fuentes">📑 Ver en el Catálogo de Fuentes</a>' +
+          '<a class="hero-pillar-btn" href="fuentes-oficiales.html">📑 Ver en el Catálogo de Fuentes</a>' +
         '</div>' +
         '<ol class="pd-docs">' + Object.keys(C.fuentes).map(k => {
           const f = C.fuentes[k];

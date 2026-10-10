@@ -460,7 +460,7 @@
         '<h4>👑 Antes: el Porfiriato</h4>' +
         '<p>Con José Yves Limantour en Hacienda, el ejercicio 1894-1895 cerró con el primer superávit de la vida independiente del país, y en 1899 se consolidó la deuda externa en bonos colocados en Londres, Berlín y París.</p>' +
         '<p>' + chip('pendiente') + ' Las cifras de esa época vienen de reconstrucciones historiográficas y todavía no tienen su fuente primaria en el auditor, así que no las mezclamos con la serie de arriba.</p>' +
-        '<a class="dt-antes-link" href="diccionario.html#glosario">Los conceptos de la deuda, en el Diccionario del Gasto Público ➔</a>' +
+        '<a class="dt-antes-link" href="glosario.html">Los conceptos de la deuda, en el glosario ➔</a>' +
       '</article>' +
       '<article class="dt-antes-t">' +
         '<h4>📘 Lo que mostraba el libro (1995)</h4>' +

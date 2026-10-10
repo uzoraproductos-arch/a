@@ -10505,88 +10505,142 @@ window.AUDIT_DB = {
   "preguntas_casillas": [
     {
       "casilla_id": "c-finanzas-basicas",
-      "bloque": "1. Fundamentos de Finanzas Públicas",
+      "bloque": "1. Fundamentos de finanzas públicas",
       "icono": "⚖️",
       "items": [
         {
           "q": "¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?",
-          "a": "Las <strong>finanzas públicas</strong> son la disciplina y conjunto de instrumentos jurídicos, económicos y contables con los que el Estado planifica, obtiene, administra y gasta los recursos de la colectividad. Su objetivo primordial no es la acumulación de capital (como en una empresa privada), sino la <em>prestación de servicios públicos</em> (salud, educación, justicia, seguridad), la distribución justa de la riqueza y el financiamiento de sus programas de trabajo aprobados constitucionalmente en el PEF."
+          "a": "Las <strong>finanzas públicas</strong> son el conjunto de reglas jurídicas, económicas y contables con las que el Estado planea, obtiene, administra y gasta los recursos de la colectividad. A diferencia de una empresa, su fin no es acumular ganancias sino <em>prestar servicios públicos</em> (salud, educación, justicia, seguridad), procurar una distribución más justa del ingreso y financiar los programas que la Cámara de Diputados aprueba cada año en el Presupuesto de Egresos.",
+          "refs": [
+            "ref-cpeum",
+            "ref-lfprh"
+          ]
         },
         {
-          "q": "¿Cuáles son los instrumentos del sector público para fondear sus programas?",
-          "a": "El sector público emplea 4 grandes vías: <br>1. <strong>Tributos:</strong> Impuestos (ISR, IVA, IEPS), derechos (agua, concesiones) y aprovechamientos.<br>2. <strong>Aduanas y Aranceles:</strong> Gravámenes a las importaciones y exportaciones administrados por la ANAM.<br>3. <strong>Venta de Bienes y Servicios Públicos:</strong> Tarifas eléctricas de CFE, hidrocarburos de Pemex y servicios portuarios.<br>4. <strong>Crédito Público y Empréstitos:</strong> Emisión de deuda en mercado de valores (CETES, Bonos M) y préstamos soberanos."
+          "q": "¿De dónde saca el dinero el sector público?",
+          "a": "De cuatro vías principales:<br>1. <strong>Contribuciones:</strong> impuestos (ISR, IVA, IEPS), derechos (por ejemplo, concesiones y agua) y aprovechamientos.<br>2. <strong>Comercio exterior:</strong> impuestos a la importación y la exportación, que cobra la Agencia Nacional de Aduanas de México (ANAM).<br>3. <strong>Venta de bienes y servicios de las empresas del Estado:</strong> electricidad de la CFE e hidrocarburos de Pemex.<br>4. <strong>Deuda:</strong> emisión de valores (CETES, Bonos M) y créditos, dentro del techo que autoriza cada año la Ley de Ingresos.<br>Para 2026, la Ley de Ingresos estima un total de <strong>$10,193,683.7 millones</strong> <span class=\"est-chip est-oficial\">oficial</span> (LIF 2026, art. 1o.).",
+          "refs": [
+            "ref-lif2026"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-deuda-mercado",
-      "bloque": "2. Deuda Pública, CETES y el Banco de México",
+      "bloque": "2. Deuda pública, CETES y el Banco de México",
       "icono": "📈",
       "items": [
         {
-          "q": "¿Qué son los CETES y qué relación directa tienen con la Tesorería y Banxico?",
-          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda pública emitidos por la SHCP al amparo de la <em>Ley Federal de Deuda Pública</em>. El <strong>Banco de México</strong> actúa por mandato de ley como su agente financiero colocador mediante subastas primarias semanales. El gobierno los vende a descuento para captar dinero inmediato de los ahorradores y financiar su gasto corriente; al vencimiento, el Estado devuelve el valor nominal íntegro ($10 pesos), pagando la diferencia como rendimiento."
+          "q": "¿Qué son los CETES y qué tienen que ver la Tesorería y el Banco de México?",
+          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda que emite el Gobierno Federal, por conducto de Hacienda, conforme a la <em>Ley Federal de Deuda Pública</em>. El <strong>Banco de México</strong> actúa como agente financiero del gobierno y los coloca en subastas que publica cada semana. Se venden a descuento: compras por menos de su valor nominal de 10 pesos y al vencimiento recibes los 10 pesos completos; la diferencia es tu rendimiento.",
+          "refs": [
+            "ref-lfdp",
+            "ref-lbm",
+            "ref-banxico-sie"
+          ]
         },
         {
           "q": "¿Cuál es la diferencia entre CETES, Bonos M, Udibonos y Bondes F?",
-          "a": "• <strong>CETES:</strong> Corto plazo (hasta 1 o 2 años), cupón cero, tasa a descuento.<br>• <strong>Bonos M:</strong> Mediano y largo plazo (3 a 30 años), pagan cupón de interés fijo semestral.<br>• <strong>Udibonos:</strong> Largo plazo, indexados al valor de la UDI (INPC), protegen contra la inflación.<br>• <strong>Bondes F:</strong> Tasa flotante referenciada a la TIIE de fondeo calculada por Banxico.<br>Todos son emitidos por la federación para solventar programas públicos plurianuales."
+          "a": "• <strong>CETES:</strong> corto plazo, sin pago de intereses periódicos; ganas por el descuento.<br>• <strong>Bonos M:</strong> mediano y largo plazo, con tasa de interés fija que se paga cada seis meses.<br>• <strong>Udibonos:</strong> largo plazo, denominados en UDI, una unidad que sigue a la inflación; protegen tu poder de compra.<br>• <strong>Bondes F:</strong> tasa flotante, ligada a la tasa de fondeo que calcula el Banco de México.<br>Todos son deuda del Gobierno Federal y cuentan dentro del techo de endeudamiento que aprueba el Congreso.",
+          "refs": [
+            "ref-banxico-sie",
+            "ref-lif2026"
+          ]
         },
         {
-          "q": "¿Por qué el Banco de México no puede simplemente prestarle dinero ilimitado al gobierno?",
-          "a": "El Artículo 28 de la Constitución Política establece la <strong>autonomía del Banco de México</strong>. Su mandato prioritario es garantizar la estabilidad del poder adquisitivo. Si Banxico emitiera dinero sin respaldo para financiar el déficit gubernamental, provocaría una espiral de hiperinflación que destruiría los sueldos y el ahorro de la población, como ocurrió en las crisis mexicanas de los años 70 y 80."
+          "q": "¿Por qué el Banco de México no le presta dinero sin límite al gobierno?",
+          "a": "Porque la Constitución lo prohíbe. El <strong>artículo 28</strong> da autonomía al banco central, le fija como objetivo prioritario procurar la estabilidad del poder adquisitivo de la moneda y termina con una frase tajante: «Ninguna autoridad podrá ordenar al banco conceder financiamiento». Si el banco imprimiera dinero para cubrir el déficit, la inflación se comería sueldos y ahorros.",
+          "refs": [
+            "ref-cpeum",
+            "ref-lbm"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-federalismo-gasto",
-      "bloque": "3. Ruta del Dinero hacia Estados y Municipios",
+      "bloque": "3. La ruta del dinero a estados y municipios",
       "icono": "🗺️",
       "items": [
         {
-          "q": "¿Por qué existe una gran diferencia entre el Ramo 28 y el Ramo 33?",
-          "a": "• <strong>Ramo 28 (Participaciones):</strong> Es dinero <em>sin etiquetar</em> de libre disposición. Los gobernadores y alcaldes pueden gastarlo libremente en sueldos, alumbrado, eventos o pago de deudas bancarias.<br>• <strong>Ramo 33 (Aportaciones):</strong> Es dinero <em>blindado por la Ley de Coordinación Fiscal</em>. Solo puede gastarse en los destinos fijados por ley: educación (FONE), salud (FASSA), seguridad municipal (FORTAMUN) e infraestructura contra la pobreza (FAIS). Desviar el Ramo 33 a gasto corriente es un delito federal perseguido por la ASF."
+          "q": "¿Cuál es la diferencia entre el Ramo 28 y el Ramo 33?",
+          "a": "• <strong>Ramo 28 (participaciones):</strong> dinero de <em>libre disposición</em>. Los gobiernos estatales y municipales deciden en qué usarlo, dentro de sus propios presupuestos. El Fondo General de Participaciones se forma con el 20% de la recaudación federal participable (Ley de Coordinación Fiscal, art. 2o.).<br>• <strong>Ramo 33 (aportaciones):</strong> dinero <em>etiquetado</em>. La misma ley condiciona su gasto a los fines de cada uno de sus ocho fondos: nómina educativa (FONE), salud (FASSA), infraestructura social (FAIS), fortalecimiento municipal (FORTAMUN), entre otros (art. 25).<br>Si el Ramo 33 se usa en otra cosa, la Auditoría Superior lo observa: puede emitir un pliego de observaciones, promover responsabilidades administrativas ante el Tribunal Federal de Justicia Administrativa o presentar denuncias ante la Fiscalía. La Auditoría no juzga ni sanciona por sí misma.",
+          "refs": [
+            "ref-lcf",
+            "ref-lfrcf"
+          ]
         },
         {
-          "q": "¿Qué es la \"inanición fiscal\" y por qué los municipios casi no cobran predial?",
-          "a": "A pesar de que el Artículo 115 constitucional faculta exclusivamente a los municipios para cobrar el impuesto predial, México recauda apenas el <strong>0.16% del PIB</strong> en este gravamen (frente al 1.0% promedio de la OCDE). Los alcaldes prefieren no cobrar predial ni actualizar los valores catastrales para no pagar costo político con sus votantes, conformándose con estirar la mano a las transferencias federales."
+          "q": "¿Cuánto pesa el predial en las cuentas de los municipios?",
+          "a": "El <strong>artículo 115</strong> de la Constitución da a los municipios las contribuciones sobre la propiedad inmobiliaria: el predial es su impuesto propio más importante. En 2024, los 2,380 municipios que rindieron cuentas al INEGI reportaron <strong>$52,543 millones</strong> <span class=\"est-chip est-oficial\">oficial</span> de predial y contribuciones sobre la propiedad, de un ingreso total de <strong>$708,301 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>. Es decir, <strong>7.4 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">derivado</span> (predial ÷ ingreso total). En cambio, <strong>71.1 de cada 100</strong> <span class=\"est-chip est-derivado\">derivado</span> llegaron de la Federación: participaciones ($268,861 millones) más aportaciones ($234,722 millones), entre el mismo ingreso total.",
+          "refs": [
+            "ref-cpeum",
+            "ref-inegi-efipem"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-fiscalizacion-asf",
-      "bloque": "4. Auditoría Social y Combate a la Corrupción",
+      "bloque": "4. Auditoría social y combate a la corrupción",
       "icono": "🔍",
       "items": [
         {
-          "q": "¿Qué es un Pliego de Observaciones de la ASF y qué ocurre si no se solventa?",
-          "a": "Es la notificación jurídica formal de presunto daño patrimonial emitida por la Auditoría Superior de la Federación. Si en el plazo legal de 30 días el gobernador, alcalde o funcionario no demuestra documentalmente el ejercicio lícito de los fondos o reintegra el dinero con intereses a la TESOFE, la ASF formula una <strong>Denuncia Penal ante la Fiscalía General de la República (FGR)</strong> e inicia el procedimiento de responsabilidad administrativa resarcitoria."
+          "q": "¿Qué es un pliego de observaciones de la Auditoría Superior y qué pasa si no se solventa?",
+          "a": "Es la acción con la que la Auditoría Superior de la Federación <strong>determina en cantidad líquida un daño o perjuicio a la Hacienda Pública</strong> (Ley de Fiscalización y Rendición de Cuentas de la Federación, art. 40, fr. II). La entidad auditada tiene <strong>30 días hábiles</strong> para responder (art. 39) y la Auditoría, <strong>120 días hábiles</strong> para pronunciarse (art. 41). Si el pliego no se solventa, la Auditoría promueve un informe de presunta responsabilidad administrativa (art. 71), que resuelve el Tribunal Federal de Justicia Administrativa; si además hay un posible delito, presenta una denuncia de hechos ante la Fiscalía.",
+          "refs": [
+            "ref-lfrcf",
+            "ref-lgra"
+          ]
         },
         {
-          "q": "¿Cómo operan las redes de factureras (EFOS) para drenar el presupuesto?",
-          "a": "Conforme al Artículo 69-B del Código Fiscal de la Federación, las <strong>EFOS</strong> simulan operaciones: emiten facturas electrónicas (CFDI) por servicios intangibles (asesorías, estudios, cursos de capacitación ficticios). La entidad pública les paga millones del presupuesto; luego el dinero se retira en efectivo o se triangula a paraísos fiscales para repartirse entre contratistas coludidos y funcionarios corruptos."
+          "q": "¿Qué son las empresas que facturan operaciones simuladas (EFOS)?",
+          "a": "Son contribuyentes que, según el <strong>artículo 69-B del Código Fiscal de la Federación</strong>, emiten comprobantes fiscales sin tener los activos, el personal o la infraestructura para prestar los servicios que facturan, o que no están localizados. El SAT publica la lista: primero como <em>presuntos</em> y, si no desvirtúan la presunción, como <em>definitivos</em>. Si un ente público le pagó a una empresa definitiva, esa compra merece una pregunta formal: puedes buscarla en la lista y presentar una solicitud de información.",
+          "refs": [
+            "ref-cff",
+            "ref-sat-69b"
+          ]
         },
         {
           "q": "¿Qué es el huachicol fiscal y cómo te afecta si no tienes una gasolinera?",
-          "a": "Es vender o importar combustible sin pagar sus impuestos. No es el robo en ductos: es papel, no pico y pala. Te afecta por tres caminos, todos escritos en ley:<br>• <strong>Tú sí pagas.</strong> En 2026 cada litro de gasolina menor a 91 octanos lleva una cuota federal de IEPS de $6.7001, la de 91 octanos o más $5.6579 y el diésel $7.3634 (Ley del IEPS, art. 2o., fr. I, inciso D; el estímulo fiscal que publica Hacienda puede reducirlas).<br>• <strong>Tu estado y tu municipio reciben menos.</strong> Ese IEPS entra a la bolsa de la que sale el 20 % que se reparte a los estados (Ley de Coordinación Fiscal, art. 2o.). Además hay una cuota aparte, de 49 a 72 centavos por litro (Ley del IEPS, art. 2o.-A), de la que 9 de cada 11 pesos van a las entidades según lo que se consume en su territorio (LCF, art. 4o.-A). Litro que se vende sin impuestos, peso que no llega.<br>• <strong>El faltante se cubre con más deuda o con menos gasto.</strong><br>Cuánto se pierde: ni el SAT ni Hacienda lo han publicado, y por esa falta de transparencia sigue pendiente. La Ley de Ingresos 2027 propone que el SAT publique sus estudios de evasión a más tardar 35 días después de cerrar 2027 (art. 30). Mientras tanto, cualquier cifra que circule es una estimación."
+          "a": "Es vender o importar combustible sin pagar sus impuestos. No es el robo en ductos: es papel, no pico y pala. Te afecta por tres caminos, todos escritos en ley:<br>• <strong>Tú sí pagas.</strong> En 2026 cada litro de gasolina menor a 91 octanos lleva una cuota federal de IEPS de $6.7001, la de 91 octanos o más $5.6579 y el diésel $7.3634 <span class=\"est-chip est-oficial\">oficial</span> (Ley del IEPS, art. 2o., fr. I, inciso D; el estímulo fiscal que publica Hacienda puede reducirlas).<br>• <strong>Tu estado y tu municipio reciben menos.</strong> Ese IEPS entra a la bolsa de la que sale el 20 % que se reparte a los estados (Ley de Coordinación Fiscal, art. 2o.). Además hay una cuota aparte, de 49 a 72 centavos por litro (Ley del IEPS, art. 2o.-A), de la que 9 de cada 11 pesos van a las entidades según lo que se consume en su territorio (LCF, art. 4o.-A). Litro que se vende sin impuestos, peso que no llega.<br>• <strong>El faltante se cubre con más deuda o con menos gasto.</strong><br>Cuánto se pierde <span class=\"est-chip est-pendiente\">pendiente</span>: ni el SAT ni Hacienda lo han publicado, y por esa falta de transparencia sigue pendiente. La Ley de Ingresos 2027 propone que el SAT publique sus estudios de evasión a más tardar 35 días después de cerrar 2027 (art. 30). Mientras tanto, cualquier cifra que circule es una estimación.",
+          "refs": [
+            "ref-lieps",
+            "ref-lcf",
+            "ref-ilif2027"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-scjn-reforma-fiscalizacion",
-      "bloque": "5. Fiscalización de la Suprema Corte, Presupuesto Judicial & Fideicomisos",
+      "bloque": "5. El dinero del Poder Judicial",
       "icono": "⚖️",
       "items": [
         {
-          "q": "¿Cuánto cuesta el Poder Judicial de la Federación y cómo se distribuye el presupuesto de la Suprema Corte (SCJN)?",
-          "a": "El <strong>Poder Judicial de la Federación (PJF)</strong> ejerce un presupuesto histórico anual consolidado de <strong>$78,327 millones de pesos</strong> (Ramo 03 del PEF), de los cuales la <strong>Suprema Corte de Justicia de la Nación (SCJN)</strong> absorbe de manera directa cerca de <strong>$5,900 millones</strong>. El <strong>80.2%</strong> de este gasto se concentra en el Capítulo 1000 (Servicios Personales). Cada una de las 11 ponencias de ministros tiene un costo de nómina anual promedio de <strong>$34.2 millones de pesos</strong> ($376.2 mdp anuales consolidados para las 11 ponencias), operando con equipos técnicos nucleares de 35 colaboradores directos (proyectistas de estudio y cuenta) que históricamente rebasaron las 70 personas mediante comisiones y honorarios asimilados del Capítulo 3000."
+          "q": "¿Cuánto le aprobaron al Poder Judicial de la Federación para 2026 y cómo se reparte?",
+          "a": "La Cámara de Diputados aprobó para el <strong>Ramo 03, Poder Judicial de la Federación</strong>, <strong>$70,005.6 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>, frente a los $85,960.2 millones <span class=\"est-chip est-oficial\">oficial</span> que pidió en su proyecto. Se reparte así: Órgano de Administración Judicial, $59,190.8 millones; Suprema Corte de Justicia, $5,208.7 millones; Tribunal Electoral, $3,749.5 millones, y Tribunal de Disciplina Judicial, $1,856.6 millones <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 1, DOF p. 32; el proyecto, en el Anexo 32, p. 108). El Órgano de Administración Judicial se lleva <strong>84.6 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">derivado</span> (su asignación ÷ el total del ramo).",
+          "refs": [
+            "ref-pef2026",
+            "ref-pef-ramo03"
+          ]
         },
         {
-          "q": "¿Cuál es la situación jurídica y financiera de los 13 fideicomisos de más de $15,400 mdp del PJF?",
-          "a": "La Auditoría Superior de la Federación (ASF) dictaminó que el PJF acumuló <strong>$15,434 millones de pesos</strong> en 13 fideicomisos fiduciarios en Nacional Financiera (Nafin) originados por <em>subejercicios presupuestales anuales</em> (recursos autorizados no devengados que legalmente debieron reintegrarse a la TESOFE según el Artículo 54 de la LFPRH). Estos fondos se destinaban a pensiones complementarias de mandos superiores, gastos médicos privados extraordinarios y remodelación de inmuebles. Tras la reforma constitucional al Poder Judicial de septiembre de 2024, sus artículos transitorios ordenaron la <strong>extinción definitiva de estos fondos</strong> y el reintegro de sus remanentes a la Tesorería de la Federación para financiar programas sociales y prioridades nacionales."
+          "q": "¿Qué pasó con los fideicomisos del Poder Judicial?",
+          "a": "La reforma constitucional publicada en el DOF el 15 de septiembre de 2024 ordenó, en su <strong>transitorio Décimo</strong>, extinguir los fondos, fideicomisos, mandatos o contratos análogos del Poder Judicial que no estén previstos en una ley secundaria, y enterar sus recursos a la Tesorería de la Federación en un plazo máximo de noventa días naturales. Hoy el artículo 100 de la Constitución también prohíbe crearlos o mantenerlos en el Poder Judicial de la Federación si la ley no los prevé.<br>Cuántos fideicomisos se extinguieron y cuánto dinero se enteró <span class=\"est-chip est-pendiente\">pendiente</span>: el decreto no lo dice y la plataforma aún no integra el informe oficial que lo documente.",
+          "refs": [
+            "ref-reforma-judicial",
+            "ref-cpeum"
+          ]
         },
         {
-          "q": "¿Cómo impacta el tope salarial del Artículo 127 y la Reforma Constitucional 2024–2025 en la SCJN?",
-          "a": "Conforme al <strong>Artículo 127 Constitucional</strong> (fracción II), ninguna persona servidora pública puede percibir una remuneración mayor a la del Presidente de la República (<strong>$134,310 pesos netos / $191,657 brutos al mes</strong>). Históricamente, las y los ministros devengaban <strong>$206,948 netos ($297,404 brutos)</strong> más un paquete de compensaciones complementarias superior a <strong>$1.7 millones de pesos anuales</strong> (Seguro de Separación Individualizado de hasta 10% y Seguro de Gastos Médicos Mayores privado). Con el decreto constitucional del 15 de septiembre de 2024, el Pleno se reduce de 11 a 9 integrantes, se extinguen las dos Salas colegiadas para sesionar únicamente en Pleno, se suprimen los seguros privados con cargo al erario, se sustituye al CJF por el Tribunal de Disciplina Judicial y el Órgano de Administración, y las personas juzgadoras son electas mediante voto popular directo."
+          "q": "¿Cuánto gana una ministra o un ministro de la Suprema Corte y cuál es el tope?",
+          "a": "El <strong>artículo 127</strong> de la Constitución prohíbe que cualquier persona servidora pública gane más que la persona titular del Ejecutivo Federal, contando sueldo, bonos, estímulos y compensaciones. Para 2026, el Manual de remuneraciones del Poder Judicial fija a cada ministra o ministro un sueldo neto tabulado de <strong>$134,310 al mes</strong> <span class=\"est-chip est-oficial\">oficial</span> (Manual, pp. 8 y 9); con el aguinaldo y la prima vacacional suma <strong>$1,901,993 netos al año</strong> <span class=\"est-chip est-derivado\">derivado</span> (12 × $134,310 + $290,273). La remuneración total neta de la Presidenta de la República es de <strong>$2,073,878 al año</strong> <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 23.1.3, p. 59). La cifra de la Corte es parcial: el Manual no incluye seguros ni aportaciones de seguridad social.<br>La reforma de 2024 también hizo electivos los cargos judiciales y dejó la Corte en nueve integrantes.",
+          "refs": [
+            "ref-cpeum-art127",
+            "ref-manual-remun-pjf",
+            "ref-pef2026"
+          ]
         }
       ]
     }
@@ -13631,338 +13685,456 @@ window.AUDIT_DB = {
       "id": "cpeum_art_25",
       "icono": "🏛️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 25 Constitucional",
-      "denominacion": "Rectoría Económica del Estado & Economía Mixta",
-      "precepto_resumen": "Atribuye al Estado la rectoría del desarrollo nacional y ordena que éste sea integral y sustentable. Reconoce la concurrencia de tres sectores —público, social y privado— y manda una más justa distribución del ingreso y la riqueza.",
-      "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales... Al desarrollo económico nacional concurrirán, con responsabilidad social, el sector público, el sector social y el sector privado, sin menoscabo de otras formas de actividad económica que contribuyan al desarrollo de la Nación.",
-      "analisis_civico": "Es el artículo que responde a la pregunta anterior a todas las demás: ¿con qué facultad interviene el Estado en la economía? Aquí están las dos palabras que esta plataforma audita renglón por renglón. «Sustentable» significa que el crecimiento que agota el capital natural no cumple el mandato, y por eso importan las cuentas ecológicas del INEGI. «Más justa distribución» significa que crecer concentrando no basta, y por eso importan el coeficiente de Gini y la medición de pobreza, que desde la reforma de julio de 2025 hace el INEGI (Ley General de Desarrollo Social, arts. 36 y 81). Un gobierno puede reportar crecimiento y estar incumpliendo este artículo por ambos flancos a la vez.",
-      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica y Circuito del Dinero), Pestaña 2 (Acción Financiera y Cuentas Ecológicas) y Pestaña 5 (Radiografía Sexenal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "planea",
+      "precepto": "Artículo 25",
+      "denominacion": "Rectoría económica del Estado y economía mixta",
+      "precepto_resumen": "Da al Estado la rectoría del desarrollo nacional, que debe ser integral y sustentable; le pide velar por la estabilidad de las finanzas públicas y reconoce que al desarrollo concurren el sector público, el social y el privado.",
+      "analisis_civico": "Responde a la pregunta previa a todas: ¿con qué facultad interviene el Estado en la economía? Dos palabras guían la revisión del gasto: «sustentable», porque un crecimiento que agota el capital natural no cumple el mandato, y «estabilidad de las finanzas públicas», que obliga también a los planes estatales y municipales.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante la competitividad, el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales, cuya seguridad protege esta Constitución. […] El Estado velará por la estabilidad de las finanzas públicas y del sistema financiero para coadyuvar a generar condiciones favorables para el crecimiento económico y el empleo. El Plan Nacional de Desarrollo y los planes estatales y municipales deberán observar dicho principio.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
+    },
+    {
+      "id": "cpeum_art_26",
+      "icono": "🧭",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "grupo": "Constitucion",
+      "etapa": "planea",
+      "precepto": "Artículo 26, apartado A",
+      "denominacion": "Sistema de planeación democrática del desarrollo",
+      "precepto_resumen": "Ordena un sistema de planeación democrática y deliberativa; de él sale el Plan Nacional de Desarrollo, al que deben sujetarse los programas de la Administración Pública Federal.",
+      "analisis_civico": "Un programa federal no debería nacer de la ocurrencia: tiene que poder rastrearse a un objetivo del Plan Nacional de Desarrollo. Por eso, al revisar un programa, la primera pregunta es a qué objetivo del Plan responde y con qué indicador se mide.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "A. El Estado organizará un sistema de planeación democrática del desarrollo nacional que imprima solidez, dinamismo, competitividad, permanencia y equidad al crecimiento de la economía para la independencia y la democratización política, social y cultural de la nación. Los fines del proyecto nacional contenidos en esta Constitución determinarán los objetivos de la planeación.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_27",
       "icono": "🌎",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 27 Constitucional",
-      "denominacion": "Propiedad Originaria de la Nación & Modalidades al Dominio Privado",
-      "precepto_resumen": "Declara que las tierras y aguas del territorio nacional corresponden originariamente a la Nación y reserva a ésta el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, cuidando la conservación de los recursos.",
-      "texto_oficial": "La propiedad de las tierras y aguas comprendidas dentro de los límites del territorio nacional, corresponde originariamente a la Nación, la cual ha tenido y tiene el derecho de transmitir el dominio de ellas a los particulares, constituyendo la propiedad privada... La Nación tendrá en todo tiempo el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, así como el de regular, en beneficio social, el aprovechamiento de los elementos naturales susceptibles de apropiación, con objeto de hacer una distribución equitativa de la riqueza pública, cuidar de su conservación, lograr el desarrollo equilibrado del país y el mejoramiento de las condiciones de vida de la población rural y urbana.",
-      "analisis_civico": "Aquí está el fundamento jurídico de que una concesión de agua pueda negarse y de que una Manifestación de Impacto Ambiental pueda rechazarse. La propiedad privada no es absoluta frente al interés público, y la conservación de los recursos no es una aspiración retórica sino un fin expreso del texto constitucional. Cuando el INEGI documenta que el agotamiento de agua subterránea tuvo un costo medible, este artículo convierte ese dato estadístico en una obligación exigible a la autoridad.",
-      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica) y Pestaña 2 (Cuentas Económicas y Ecológicas).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "planea",
+      "precepto": "Artículo 27, párrafos primero y tercero",
+      "denominacion": "Propiedad originaria de la Nación y modalidades a la propiedad privada",
+      "precepto_resumen": "Las tierras y aguas del territorio corresponden originariamente a la Nación, que puede imponer a la propiedad privada las modalidades que dicte el interés público y regular el aprovechamiento de los recursos naturales.",
+      "analisis_civico": "Es el fundamento de que una concesión de agua pueda negarse o una manifestación de impacto ambiental rechazarse: la propiedad privada no es absoluta frente al interés público, y cuidar la conservación de los recursos es un fin expreso del texto. Por eso el costo ambiental también se audita.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "La propiedad de las tierras y aguas comprendidas dentro de los límites del territorio nacional, corresponde originariamente a la Nación, la cual ha tenido y tiene el derecho de transmitir el dominio de ellas a los particulares, constituyendo la propiedad privada. […] La nación tendrá en todo tiempo el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, así como el de regular, en beneficio social, el aprovechamiento de los elementos naturales susceptibles de apropiación, con objeto de hacer una distribución equitativa de la riqueza pública, cuidar de su conservación",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_28",
       "icono": "⚖️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 28 Constitucional",
-      "denominacion": "Prohibición de Monopolios, Áreas Estratégicas & Autonomía del Banco Central",
-      "precepto_resumen": "Prohíbe los monopolios, las prácticas monopólicas y las condonaciones de impuestos; reserva al Estado ciertas áreas estratégicas sin que ello constituya monopolio; y ordena que el banco central sea autónomo con el objetivo prioritario de procurar la estabilidad del poder adquisitivo de la moneda.",
-      "texto_oficial": "En los Estados Unidos Mexicanos quedan prohibidos los monopolios, las prácticas monopólicas, los estancos, las condonaciones de impuestos y las exenciones de impuestos en los términos y condiciones que fijan las leyes... No constituirán monopolios las funciones que el Estado ejerza de manera exclusiva en las áreas estratégicas a que se refiere este precepto... El Estado tendrá un banco central que será autónomo en el ejercicio de sus funciones y en su administración. Su objetivo prioritario será procurar la estabilidad del poder adquisitivo de la moneda nacional, fortaleciendo con ello la rectoría del desarrollo nacional que corresponde al Estado. Ninguna autoridad podrá ordenar al banco conceder financiamiento.",
-      "analisis_civico": "Tres mandatos que suelen leerse por separado y que este artículo une a propósito. La prohibición de condonar impuestos explica por qué una condonación masiva es un asunto constitucional y no sólo de política fiscal. Las áreas estratégicas explican por qué ciertas empresas del Estado no se juzgan con la vara de la rentabilidad privada. Y la última línea —ninguna autoridad podrá ordenar al banco conceder financiamiento— es el candado que impide pagar el déficit imprimiendo dinero: la razón por la que la deuda soberana se coloca en subasta y no se decreta.",
-      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica), Pestaña 2 (Maquinaria Financiera y Banxico) y Pestaña 7 (Marco Legal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
-    },
-    {
-      "id": "cpeum_art_26",
-      "icono": "📜",
-      "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 26 Constitucional",
-      "denominacion": "Rectoría del Desarrollo Nacional & Sistema de Planeación Democrática",
-      "precepto_resumen": "Establece que el Estado organizará un sistema de planeación democrática que imprima solidez, dinamismo, competitividad y equidad al crecimiento de la economía.",
-      "texto_oficial": "El Estado organizará un sistema de planeación democrática del desarrollo nacional que imprima solidez, dinamismo, competitividad, permanencia y equidad al crecimiento de la economía para la independencia y la democratización política, social y cultural de la nación... Habrá un Plan Nacional de Desarrollo al que se sujetarán obligatoriamente los programas de la Administración Pública Federal.",
-      "analisis_civico": "Ningún gasto público o programa federal puede ser improvisado ni responder a caprichos personales; todo peso del erario debe estar alineado con las metas del Plan Nacional de Desarrollo (PND).",
-      "aplicacion_auditavision": "Pestaña 1 (Presupuesto), Pestaña 2 (Acción Financiera) y Pestaña 5 (Radiografía Sexenal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 28",
+      "denominacion": "Prohibición de condonar impuestos y autonomía del Banco de México",
+      "precepto_resumen": "Prohíbe los monopolios, las condonaciones y las exenciones de impuestos en los términos que fijen las leyes, y da al banco central autonomía, con el objetivo prioritario de procurar la estabilidad del poder adquisitivo de la moneda.",
+      "analisis_civico": "Une dos candados del dinero público. Desde la reforma publicada en el DOF el 6 de marzo de 2020, la prohibición de condonar impuestos está en la Constitución, no solo en la ley. Y la última línea, «ninguna autoridad podrá ordenar al banco conceder financiamiento», impide que el gobierno cubra su déficit imprimiendo dinero.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 28. En los Estados Unidos Mexicanos quedan prohibidos los monopolios, las prácticas monopólicas, los estancos, las condonaciones de impuestos y las exenciones de impuestos en los términos y condiciones que fijan las leyes. […] El Estado tendrá un banco central que será autónomo en el ejercicio de sus funciones y en su administración. Su objetivo prioritario será procurar la estabilidad del poder adquisitivo de la moneda nacional, fortaleciendo con ello la rectoría del desarrollo nacional que corresponde al Estado. Ninguna autoridad podrá ordenar al banco conceder financiamiento.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_31_iv",
-      "icono": "💼",
+      "icono": "🧾",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 31, Fracción IV Constitucional",
-      "denominacion": "Obligación de Contribuir al Gasto Público Proporcional y Equitativamente",
-      "precepto_resumen": "Mandato supremo que obliga a la ciudadanía a tributar para los gastos públicos de la Federación, estados y municipios de manera proporcional y equitativa.",
-      "texto_oficial": "Son obligaciones de los mexicanos: ... IV. Contribuir para los gastos públicos, así de la Federación, como de los Estados, de la Ciudad de México y del Municipio en que residan, de la manera proporcional y equitativa que dispongan las leyes.",
-      "analisis_civico": "Es el pacto social hacendario: la ciudadanía aporta impuestos (ISR, IVA, IEPS, predial) con la garantía constitucional de que el gobierno los destinará a bienes públicos sin privilegios fiscales ni abusos.",
-      "aplicacion_auditavision": "Pestaña 1 (Impuestos), Pestaña 2 (Calculadora del Contribuyente) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 31, fracción IV",
+      "denominacion": "Obligación de contribuir al gasto público",
+      "precepto_resumen": "Obliga a contribuir a los gastos públicos de la Federación, de los estados, de la Ciudad de México y del municipio en que se resida, de la manera proporcional y equitativa que dispongan las leyes.",
+      "analisis_civico": "Es el pacto hacendario: pagas impuestos para cubrir gastos públicos, no gastos privados de quien gobierna. De la palabra «gastos públicos» sale el derecho a preguntar en qué se usó lo que se recaudó.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "IV. Contribuir para los gastos públicos, así de la Federación, como de los Estados, de la Ciudad de México y del Municipio en que residan, de la manera proporcional y equitativa que dispongan las leyes.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_73",
       "icono": "🏛️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 73, Fracciones VII, VIII y XXIV",
-      "denominacion": "Facultades Tributarias y Financieras del Congreso de la Unión",
-      "precepto_resumen": "Faculta al Congreso para imponer contribuciones, aprobar las bases para la contratación de deuda sobre el crédito de la nación y legislar sobre la contabilidad gubernamental.",
-      "texto_oficial": "El Congreso tiene facultad: ... VII. Para imponer las contribuciones necesarias a cubrir el Presupuesto; VIII. Para dar bases sobre las cuales el Ejecutivo pueda celebrar empréstitos sobre el crédito de la Nación, para aprobar esos mismos empréstitos y para reconocer y mandar pagar la deuda nacional... XXIV. Para expedir las leyes que regulen la organización de la entidad de fiscalización superior de la Federación.",
-      "analisis_civico": "Garantiza que el Presidente no puede crear impuestos ni endeudar a la nación unilateralmente; cualquier crédito soberano o impuesto debe ser discutido y aprobado por los representantes en el Congreso.",
-      "aplicacion_auditavision": "Pestaña 2 (Subastas de Deuda Banxico) y Pestaña 3 (Cámaras Federales).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 73, fracciones VII, VIII y XXIV",
+      "denominacion": "Facultades del Congreso: contribuciones, deuda y fiscalización",
+      "precepto_resumen": "El Congreso impone las contribuciones para cubrir el presupuesto, da las bases para que el Ejecutivo contrate deuda y expide la ley que organiza a la Auditoría Superior de la Federación.",
+      "analisis_civico": "El Ejecutivo no puede crear impuestos ni endeudar al país por su cuenta: ambas cosas pasan por el Congreso. Cada año ese permiso queda escrito en la Ley de Ingresos, con el monto de deuda autorizado.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "VII. Para imponer las contribuciones necesarias a cubrir el Presupuesto. […] 1o. Dar bases sobre las cuales el Ejecutivo pueda celebrar empréstitos y otorgar garantías sobre el crédito de la Nación, para aprobar esos mismos empréstitos y para reconocer y mandar pagar la deuda nacional. […] XXIV. Para expedir las leyes que regulen la organización y facultades de la Auditoría Superior de la Federación y las demás que normen la gestión, control y evaluación de los Poderes de la Unión y de los entes públicos federales;",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_74_iv",
-      "icono": "⚖️",
+      "icono": "🗳️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 74, Fracción IV Constitucional",
-      "denominacion": "Facultad Exclusiva para Aprobar el PEF y Revisar la Cuenta Pública",
-      "precepto_resumen": "Facultad soberana de la Cámara de Diputados para aprobar anualmente el Presupuesto de Egresos de la Federación a más tardar el 15 de noviembre y revisar la Cuenta Pública.",
-      "texto_oficial": "Son facultades exclusivas de la Cámara de Diputados: ... IV. Aprobar anualmente el Presupuesto de Egresos de la Federación, previo examen, discusión y, en su caso, modificación del Proyecto enviado por el Ejecutivo Federal... Asimismo, revisar la Cuenta Pública del año anterior, con el objeto de evaluar los resultados de la gestión financiera y comprobar si se ha ajustado a los criterios señalados por el Presupuesto.",
-      "analisis_civico": "San Lázaro es el único poder con potestad para decidir en qué se gastan los más de $10 billones del país. La ciudadanía debe exigir que los diputados auditen exhaustivamente la Cuenta Pública.",
-      "aplicacion_auditavision": "Pestaña 1 (Presupuesto Federal), Pestaña 3 (Cámara de Diputados) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "aprueba",
+      "precepto": "Artículo 74, fracción IV",
+      "denominacion": "La Cámara de Diputados aprueba el Presupuesto de Egresos",
+      "precepto_resumen": "Es facultad exclusiva de la Cámara de Diputados aprobar cada año el Presupuesto de Egresos. El Ejecutivo lo envía a más tardar el 8 de septiembre y la Cámara lo aprueba a más tardar el 15 de noviembre. No puede haber partidas secretas.",
+      "analisis_civico": "Las fechas de este artículo son el calendario cívico del dinero: del 8 de septiembre al 15 de noviembre se decide en qué se gastará el año siguiente. Es el momento de pedirle cuentas a tu diputada o diputado.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "IV. Aprobar anualmente el Presupuesto de Egresos de la Federación, previo examen, discusión y, en su caso, modificación del Proyecto enviado por el Ejecutivo Federal, una vez aprobadas las contribuciones que, a su juicio, deben decretarse para cubrirlo. […] El Ejecutivo Federal hará llegar a la Cámara la Iniciativa de Ley de Ingresos y el Proyecto de Presupuesto de Egresos de la Federación a más tardar el día 8 del mes de septiembre, debiendo comparecer el secretario de despacho correspondiente a dar cuenta de los mismos. La Cámara de Diputados deberá aprobar el Presupuesto de Egresos de la Federación a más tardar el día 15 del mes de noviembre. […] No podrá haber partidas secretas en el Presupuesto de Egresos de la Federación.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_79",
       "icono": "🔍",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 79 Constitucional",
-      "denominacion": "Auditoría Superior de la Federación (ASF) & Fiscalización Superior",
-      "precepto_resumen": "Consagra la autonomía técnica y de gestión de la ASF para fiscalizar de manera posterior y en tiempo real el uso de los recursos federales en los tres poderes, órganos autónomos y estados.",
-      "texto_oficial": "La entidad de fiscalización superior de la Federación de la Cámara de Diputados, tendrá autonomía técnica y de gestión en el ejercicio de sus atribuciones y para decidir sobre su organización interna, funcionamiento y resoluciones... Fiscalizará en forma posterior los ingresos, egresos y deuda; las garantías que, en su caso, otorgue el Gobierno Federal respecto a empréstitos de los Estados y Municipios... así como el destino y ejercicio de los recursos federales que dichos entes locales hayan percibido.",
-      "analisis_civico": "Es el brazo técnico del pueblo mexicano para descubrir desvíos, contratos inflados y empresas fantasma. Sus Pliegos de Observaciones son la base legal para denunciar penalmente la corrupción.",
-      "aplicacion_auditavision": "Pestaña 1 (Alertas ASF), Pestaña 3 (Bloque ASF) y Pestaña 8 (Buzón Contraloría).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "revisa",
+      "precepto": "Artículo 79",
+      "denominacion": "Auditoría Superior de la Federación",
+      "precepto_resumen": "La Auditoría Superior de la Federación tiene autonomía técnica y de gestión, y fiscaliza en forma posterior los ingresos, egresos y deuda, además de los recursos federales que ejercen estados y municipios.",
+      "analisis_civico": "La Auditoría revisa después: primero se gasta y luego se audita la Cuenta Pública. Sus informes no son sentencias; de ellos salen acciones (recomendaciones, pliegos de observaciones, promociones de responsabilidad o denuncias) que siguen su propio cauce legal.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 79. La Auditoría Superior de la Federación de la Cámara de Diputados, tendrá autonomía técnica y de gestión en el ejercicio de sus atribuciones y para decidir sobre su organización interna, funcionamiento y resoluciones, en los términos que disponga la ley. […] La función de fiscalización será ejercida conforme a los principios de legalidad, definitividad, imparcialidad y confiabilidad. […] I. Fiscalizar en forma posterior los ingresos, egresos y deuda;",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_115_iv",
-      "icono": "🏙️",
+      "icono": "🏘️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 115, Fracción IV Constitucional",
-      "denominacion": "Hacienda Pública Municipal, Autonomía y Recaudación del Predial",
-      "precepto_resumen": "Establece que los municipios administrarán libremente su hacienda y percibirán las contribuciones sobre la propiedad inmobiliaria (impuesto predial) y participaciones federales.",
-      "texto_oficial": "Los municipios administrarán libremente su hacienda, la cual se formará de los rendimientos de los bienes que les pertenezcan, así como de las contribuciones y otros ingresos que las legislaturas establezcan a su favor, y en todo caso: a) Percibirán las contribuciones, incluyendo tasas adicionales, que establezcan los Estados sobre la propiedad inmobiliaria, de su fraccionamiento, división, consolidación, traslación y mejora... b) Las participaciones federales, que serán cubiertas por la Federación a los Municipios con arreglo a las bases, montos y plazos que anualmente se determinen por las Legislaturas de los Estados.",
-      "analisis_civico": "El predial es el corazón fiscal del municipio. El rezago catastral en México (0.16% del PIB vs 1.0% OCDE) mantiene a los municipios dependiendo en un 84% de las transferencias federales.",
-      "aplicacion_auditavision": "Pestaña 1 (Lente Dependencia Federal), Pestaña 3 (Columna Congresos) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 115, fracción IV",
+      "denominacion": "Hacienda municipal y predial",
+      "precepto_resumen": "Los municipios administran libremente su hacienda y perciben las contribuciones sobre la propiedad inmobiliaria (el predial) y las participaciones federales.",
+      "analisis_civico": "El predial es el impuesto propio más importante del municipio. Cuánto depende cada municipio del dinero federal lo puedes ver en la plataforma con las cifras del INEGI (finanzas públicas estatales y municipales).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "IV. Los municipios administrarán libremente su hacienda, la cual se formará de los rendimientos de los bienes que les pertenezcan, así como de las contribuciones y otros ingresos que las legislaturas establezcan a su favor, y en todo caso: a) Percibirán las contribuciones, incluyendo tasas adicionales, que establezcan los Estados sobre la propiedad inmobiliaria, de su fraccionamiento, división, consolidación, traslación y mejora así como las que tengan por base el cambio de valor de los inmuebles. […] b) Las participaciones federales, que serán cubiertas por la Federación a los Municipios con arreglo a las bases, montos y plazos que anualmente se determinen por las Legislaturas de los Estados.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_116_ii",
-      "icono": "🏢",
+      "icono": "🗺️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 116, Fracción II Constitucional",
-      "denominacion": "Congresos Estatales, Representación Proporcional y Fiscalización Local",
-      "precepto_resumen": "Regula la integración de las 32 legislaturas estatales por mayoría relativa y representación proporcional, y su mandato de fiscalizar las cuentas públicas locales.",
-      "texto_oficial": "El número de representantes en las legislaturas de los Estados será proporcional al de habitantes de cada uno... Los diputados a las legislaturas de los Estados serán electos según los principios de mayoría relativa y de representación proporcional... Las legislaturas de los Estados contarán con entidades estatales de fiscalización, las cuales gozarán de autonomía técnica y de gestión para fiscalizar las acciones de Estados y Municipios.",
-      "analisis_civico": "Los 1,098 diputados locales deben vigilar los presupuestos estatales y auditar a los alcaldes a través de los Órganos de Fiscalización Superior (OFS), impidiendo partidas opacas de 'gestión social'.",
-      "aplicacion_auditavision": "Pestaña 3 (32 Congresos Estatales y Distritos Electorales).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "revisa",
+      "precepto": "Artículo 116, fracción II",
+      "denominacion": "Congresos estatales y sus entidades de fiscalización",
+      "precepto_resumen": "Cada legislatura estatal aprueba el presupuesto de su estado, y cuenta con una entidad de fiscalización con autonomía técnica y de gestión, cuyos informes de auditoría son públicos.",
+      "analisis_civico": "El dinero que tu estado y tu municipio gastan con recursos propios lo revisa la entidad de fiscalización de tu estado, no la federal. Sus informes son públicos por mandato constitucional: puedes pedirlos.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Corresponde a las legislaturas de los Estados la aprobación anual del presupuesto de egresos correspondiente. […] Las legislaturas de los estados contarán con entidades estatales de fiscalización, las cuales serán órganos con autonomía técnica y de gestión en el ejercicio de sus atribuciones y para decidir sobre su organización interna, funcionamiento y resoluciones, en los términos que dispongan sus leyes. […] Los informes de auditoría de las entidades estatales de fiscalización tendrán carácter público.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_126",
-      "icono": "🛑",
+      "icono": "🚫",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 126 Constitucional",
-      "denominacion": "Principio de Legalidad del Pago: Ningún Pago sin Partida Presupuestal",
-      "precepto_resumen": "Mandato taxativo: no puede hacerse ningún pago del erario que no esté expresamente autorizado en el Presupuesto de Egresos o por ley posterior.",
-      "texto_oficial": "No podrá hacerse pago alguno que no esté comprendido en el Presupuesto o determinado por la ley posterior.",
-      "analisis_civico": "Es la muralla contra la arbitrariedad. Ningún presidente, gobernador, juez o funcionario puede gastar un solo peso del pueblo en ocurrencias, bonos discrecionales o compras no presupuestadas.",
-      "aplicacion_auditavision": "Pestaña 2 (Flujo del Gasto), Pestaña 4 (Fideicomisos Judiciales) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 126",
+      "denominacion": "Ningún pago sin partida en el presupuesto",
+      "precepto_resumen": "No puede hacerse ningún pago que no esté en el Presupuesto o que no determine una ley posterior.",
+      "analisis_civico": "Es el artículo más corto del capítulo y uno de los más útiles: ante cualquier pago puedes preguntar en qué partida del presupuesto está. Si no está en ninguna, no debió hacerse.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 126. No podrá hacerse pago alguno que no esté comprendido en el Presupuesto o determinado por la ley posterior.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_127",
-      "icono": "⚖️",
+      "icono": "💼",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 127 Constitucional",
-      "denominacion": "Tope Salarial Máximo: Ningún Servidor Puede Ganar Más que el Presidente",
-      "precepto_resumen": "Fija que ningún servidor público de la Federación, estados o municipios podrá percibir una remuneración mayor a la establecida para el Presidente de la República.",
-      "texto_oficial": "Los servidores públicos de la Federación, de las entidades federativas, de los Municipios y de las demarcaciones territoriales de la Ciudad de México... recibirán una remuneración adecuada e irrenunciable por el desempeño de su función, empleo, cargo o comisión, que deberá ser proporcional a sus responsabilidades. Ningún servidor público podrá recibir una remuneración, en términos de la fracción anterior, por el desempeño de su función, empleo, cargo o comisión, mayor a la establecida para el Presidente de la República en el presupuesto correspondiente.",
-      "analisis_civico": "Puso fin a las remuneraciones doradas de ministros, consejeros y altos funcionarios que superaban los $500,000 mensuales. La reforma constitucional de 2024 confirmó su aplicación obligatoria e irrestricta a todo el Poder Judicial.",
-      "aplicacion_auditavision": "Pestaña 3 (Jerarquía Salarial) y Pestaña 4 (Remuneraciones de la SCJN).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 127, fracciones I y II",
+      "denominacion": "Nadie gana más que la persona titular del Ejecutivo",
+      "precepto_resumen": "La remuneración de toda persona servidora pública, incluidas dietas, bonos y compensaciones, no puede ser mayor a la establecida para la persona titular del Ejecutivo Federal en el presupuesto.",
+      "analisis_civico": "El tope cuenta todo: sueldo, bonos, estímulos y compensaciones, no solo el sueldo base. La fracción II se reformó por última vez en el DOF del 10 de abril de 2026. Para comparar un sueldo con el tope, busca el tabulador en el presupuesto del año.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum-art127",
+      "texto_oficial": "I. Se considera remuneración o retribución toda percepción en efectivo o en especie, incluyendo dietas, aguinaldos, gratificaciones, premios, recompensas, bonos, estímulos, comisiones, compensaciones y cualquier otra, con excepción de los apoyos y los gastos sujetos a comprobación que sean propios del desarrollo del trabajo y los gastos de viaje en actividades oficiales. […] II. Ninguna persona servidora pública podrá recibir remuneración, en términos de la fracción anterior, por el desempeño de su función, empleo, cargo o comisión, mayor a la establecida para la persona titular del Ejecutivo Federal en el presupuesto correspondiente.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_134",
-      "icono": "🛡️",
+      "icono": "🏗️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 134 Constitucional",
-      "denominacion": "Principios Rectores del Gasto Público y Licitaciones Abiertas",
-      "precepto_resumen": "Exige que los recursos económicos se administren con eficiencia, eficacia, economía, transparencia y honradez, y que las compras públicas se hagan por licitación abierta.",
-      "texto_oficial": "Los recursos económicos de que dispongan la Federación, las entidades federativas, los Municipios y las demarcaciones territoriales de la Ciudad de México, se administrarán con eficiencia, eficacia, economía, transparencia y honradez para satisfacer los objetivos a los que estén destinados... Las adquisiciones, arrendamientos y enajenaciones de todo tipo de bienes, prestación de servicios de cualquier naturaleza y la contratación de obra que realicen, se adjudicarán o llevarán a cabo a través de licitaciones públicas mediante convocatoria pública.",
-      "analisis_civico": "Es el estándar de oro anticorrupción. Prohíbe las asignaciones directas arbitrarias y sanciona el sobreprecio en contratos gubernamentales. Es la norma más invocada en los informes de la ASF.",
-      "aplicacion_auditavision": "Pestaña 1 (Alertas ASF), Pestaña 5 (Casos de Corrupción) y Pestaña 8 (Contraloría Cívica).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 134, párrafos primero y tercero",
+      "denominacion": "Principios del gasto y licitación pública",
+      "precepto_resumen": "Los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez; las compras y obras se adjudican, por regla general, mediante licitación pública.",
+      "analisis_civico": "La licitación pública es la regla y la adjudicación directa, la excepción que la ley debe justificar. Cuando una obra se asigna sin licitar, este es el artículo que permite preguntar por qué.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 134. Los recursos económicos de que dispongan la Federación, las entidades federativas, los Municipios y las demarcaciones territoriales de la Ciudad de México, se administrarán con eficiencia, eficacia, economía, transparencia y honradez para satisfacer los objetivos a los que estén destinados. […] Las adquisiciones, arrendamientos y enajenaciones de todo tipo de bienes, prestación de servicios de cualquier naturaleza y la contratación de obra que realicen, se adjudicarán o llevarán a cabo a través de licitaciones públicas mediante convocatoria pública para que libremente se presenten proposiciones solventes en sobre cerrado, que será abierto públicamente, a fin de asegurar al Estado las mejores condiciones disponibles en cuanto a precio, calidad, financiamiento, oportunidad y demás circunstancias pertinentes.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lif_estimacion_ingresos",
-      "icono": "💵",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición General: Estimación y Proyección Anual de Ingresos",
-      "precepto_resumen": "Detalla el monto global de ingresos que la Federación prevé recaudar en el ejercicio fiscal por impuestos (ISR, IVA, IEPS), derechos, productos y aprovechamientos.",
-      "texto_oficial": "En el ejercicio fiscal correspondiente, la Federación percibirá los ingresos provenientes de los conceptos y en las cantidades estimadas en millones de pesos... Los ingresos que se recauden por concepto de contribuciones, así como sus accesorios, se concentrarán en la Tesorería de la Federación y deberán reflejarse en la contabilidad y en la Cuenta Pública.",
-      "analisis_civico": "La LIF es el espejo del PEF: no puede haber gasto sin ingreso previo. Si la recaudación tributaria queda por debajo de la estimación, el gobierno se ve obligado a recortar el gasto o a emitir más deuda soberana.",
-      "aplicacion_auditavision": "Pestaña 1 (Ingresos Tributarios) y Pestaña 2 (Acción Financiera).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
+      "icono": "📜",
+      "ley": "Ley de Ingresos de la Federación para 2026 (LIF 2026)",
+      "grupo": "Ingresos",
+      "etapa": "ingreso",
+      "precepto": "Artículo 1o.",
+      "denominacion": "Lo que la Federación estima recaudar en 2026",
+      "precepto_resumen": "Enumera cada concepto de ingreso y su monto estimado. Para 2026 el total es de 10,193,683.7 millones de pesos.",
+      "analisis_civico": "Es el espejo del Presupuesto de Egresos: lo que se piensa gastar tiene que salir de algún lado. Si la recaudación queda por debajo de lo estimado, el hueco se cubre con recortes o con más deuda.",
+      "cifras": [
+        {
+          "etiqueta": "Ingresos estimados 2026",
+          "valor": "$10,193,683.7 millones",
+          "estado": "oficial",
+          "fuente": "LIF 2026, art. 1o., renglón TOTAL"
+        }
+      ],
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "ref": "ref-lif2026",
+      "texto_oficial": "Artículo 1o. En el ejercicio fiscal de 2026, la Federación percibirá los ingresos provenientes de los conceptos y en las cantidades estimadas en millones de pesos que a continuación se enumeran:",
+      "aplicacion_auditavision": "",
+      "vigencia": "Ley publicada en el DOF el 07-11-2025; rige en 2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lif_techo_endeudamiento",
-      "icono": "📊",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición sobre Techo de Endeudamiento Neto Soberano",
-      "precepto_resumen": "Fija la autorización legal del Congreso al Ejecutivo Federal para contratar endeudamiento neto interno y externo para el financiamiento del Presupuesto de Egresos.",
-      "texto_oficial": "Se autoriza al Ejecutivo Federal, por conducto de la Secretaría de Hacienda y Crédito Público, para contratar y ejercer créditos, empréstitos y otras formas del ejercicio del crédito público, incluso mediante la emisión de valores... que constituyan deuda pública interna neta del Gobierno Federal hasta por el monto fijado en miles de millones de pesos, y deuda pública externa neta hasta por el monto en millones de dólares.",
-      "analisis_civico": "Es el límite legal para emitir CETES, Bonos M y contratar créditos con organismos internacionales. Si el gobierno rebasa este techo sin autorización previa del Congreso, comete un delito financiero grave.",
-      "aplicacion_auditavision": "Pestaña 1 (Semáforo Deuda), Pestaña 2 (Subastas Banxico) y Pestaña 5 (Deuda Sexenal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
+      "icono": "🏦",
+      "ley": "Ley de Ingresos de la Federación para 2026 (LIF 2026)",
+      "grupo": "Ingresos",
+      "etapa": "ingreso",
+      "precepto": "Artículo 2o.",
+      "denominacion": "Techo de endeudamiento neto de 2026",
+      "precepto_resumen": "Autoriza al Ejecutivo, por conducto de Hacienda, a contratar deuda para financiar el presupuesto de 2026, con un endeudamiento neto interno de hasta 1 billón 780 mil millones de pesos y uno externo de hasta 15 mil 500 millones de dólares.",
+      "analisis_civico": "Es el permiso anual de deuda que exige el artículo 73 de la Constitución. Compara el techo con la deuda que Hacienda reporta en sus informes trimestrales para ver si se respetó.",
+      "cifras": [
+        {
+          "etiqueta": "Endeudamiento neto interno autorizado",
+          "valor": "hasta $1,780,000 millones",
+          "estado": "oficial",
+          "fuente": "LIF 2026, art. 2o."
+        },
+        {
+          "etiqueta": "Endeudamiento neto externo autorizado",
+          "valor": "hasta 15,500 millones de dólares",
+          "estado": "oficial",
+          "fuente": "LIF 2026, art. 2o."
+        }
+      ],
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "ref": "ref-lif2026",
+      "texto_oficial": "Artículo 2o. Se autoriza al Ejecutivo Federal, por conducto de la Secretaría de Hacienda y Crédito Público, para contratar y ejercer créditos, empréstitos y otras formas del ejercicio del crédito público, incluso mediante la emisión de valores, en los términos de la Ley Federal de Deuda Pública y para el financiamiento del Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026, por un monto de endeudamiento neto interno hasta por 1 billón 780 mil millones de pesos. […] a efecto de obtener un monto de endeudamiento neto externo de hasta 15 mil 500 millones de dólares",
+      "aplicacion_auditavision": "",
+      "vigencia": "Ley publicada en el DOF el 07-11-2025; rige en 2026. Cotejado el 09-10-2026."
     },
     {
-      "id": "lif_costo_financiero",
-      "icono": "📈",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición sobre Costo Financiero de la Deuda y Tasa de Interés",
-      "precepto_resumen": "Establece las previsiones sobre las tasas de interés de referencia para calcular el servicio de la deuda soberana del sector público.",
-      "texto_oficial": "Para los efectos de las operaciones de financiamiento, la Secretaría de Hacienda y Crédito Público calculará el costo financiero considerando las condiciones macroeconómicas, la tasa de interés interbancaria de equilibrio y los rendimientos de los valores gubernamentales colocados a través del Banco de México.",
-      "analisis_civico": "Cuando Banxico sube su tasa de interés para frenar la inflación, el costo financiero de la deuda en la LIF se dispara, devorando más de un billón de pesos que de otro modo irían a escuelas u hospitales.",
-      "aplicacion_auditavision": "Pestaña 2 (Subastas Banxico / CETES) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
-    },
-    {
-      "id": "lif_prohibicion_condonacion",
-      "icono": "🚫",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición de Prohibición Estricta de Condonaciones y Exenciones Fiscales",
-      "precepto_resumen": "Prohíbe a las autoridades hacendarias otorgar condonaciones o exenciones de impuestos de manera discrecional a grandes contribuyentes.",
-      "texto_oficial": "Queda prohibida la condonación de impuestos y las exenciones de contribuciones en los términos y condiciones que fijan las leyes. Las autoridades fiscales no podrán celebrar convenios o emitir resoluciones que impliquen la renuncia a la potestad tributaria del Estado en perjuicio del erario.",
-      "analisis_civico": "Pone fin a la práctica de sexenios anteriores donde se perdonaban cientos de miles de millones de pesos en impuestos a corporaciones y bancos mientras el ciudadano común pagaba su ISR puntual.",
-      "aplicacion_auditavision": "Pestaña 1 (Grandes Contribuyentes) y Pestaña 5 (Datos Curiosos y Sexenios).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
+      "id": "lif_renuncias_recaudatorias",
+      "icono": "🔎",
+      "ley": "Ley de Ingresos de la Federación para 2026 (LIF 2026)",
+      "grupo": "Ingresos",
+      "etapa": "ingreso",
+      "precepto": "Artículo 28, apartado A",
+      "denominacion": "Lo que el erario deja de cobrar: Renuncias Recaudatorias",
+      "precepto_resumen": "Obliga a Hacienda a publicar, a más tardar el 30 de junio de 2026, cuánto deja de recaudar por tasas diferenciadas, exenciones, condonaciones, estímulos, deducciones y regímenes especiales.",
+      "analisis_civico": "Un peso que no se cobra también es una decisión de gasto, aunque no aparezca en el presupuesto. Este informe permite ver quién se beneficia de cada exención y cuánto cuesta.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "ref": "ref-lif2026",
+      "texto_oficial": "A. El documento denominado Renuncias Recaudatorias, a más tardar el 30 de junio de 2026, que comprenderá los montos que deja de recaudar el erario federal por conceptos de tasas diferenciadas en los distintos impuestos, exenciones, subsidios y créditos fiscales, condonaciones, facilidades administrativas, estímulos fiscales, deducciones autorizadas, tratamientos y regímenes especiales establecidos en las distintas leyes que en materia tributaria aplican a nivel federal.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Ley publicada en el DOF el 07-11-2025; rige en 2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lfprh_art_17_18",
-      "icono": "💡",
+      "icono": "⚖️",
       "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria (LFPRH)",
-      "precepto": "Artículos 17 y 18 de la LFPRH",
-      "denominacion": "Regla de Balance Fiscal Cero e Impacto Presupuestario Obligatorio",
-      "precepto_resumen": "Obliga a mantener el equilibrio presupuestal y exige que toda propuesta o promesa de ley detalle su impacto presupuestario y su fuente de pago.",
-      "texto_oficial": "La administración de los recursos públicos federales se realizará con base en criterios de legalidad, honestidad, eficacia, eficiencia, economía, racionalidad, austeridad, transparencia, control, rendición de cuentas y equidad de género... A toda iniciativa de ley o decreto que se presente a la consideración del Congreso que implique un gasto, deberá acompañarse la estimación sobre el impacto presupuestario del proyecto.",
-      "analisis_civico": "Ningún candidato o legislador puede prometer obras o subsidios sin decir de dónde saldrá el dinero. Es el mejor filtro ciudadano contra la demagogia electoral.",
-      "aplicacion_auditavision": "Pestaña 3 (Monitor Cívico Electoral) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+      "grupo": "Presupuesto",
+      "etapa": "aprueba",
+      "precepto": "Artículos 17 y 18",
+      "denominacion": "Equilibrio presupuestario e impacto de cada nuevo gasto",
+      "precepto_resumen": "El gasto debe contribuir al equilibrio presupuestario, y toda propuesta de aumento o creación de gasto debe traer su fuente de ingreso o compensarse con reducciones en otros gastos.",
+      "analisis_civico": "Sirve de filtro ante cualquier promesa: si alguien propone un gasto nuevo, la ley le exige decir de dónde saldrá el dinero o qué otro gasto se reduce.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "ref": "ref-lfprh",
+      "texto_oficial": "Asimismo, el gasto neto total propuesto por el Ejecutivo Federal en el proyecto de Presupuesto de Egresos, aquél que apruebe la Cámara de Diputados y el que se ejerza en el año fiscal, deberá contribuir al equilibrio presupuestario. […] Artículo 18.- A toda propuesta de aumento o creación de gasto del proyecto de Presupuesto de Egresos, deberá agregarse la correspondiente iniciativa de ingreso distinta al financiamiento o compensarse con reducciones en otras previsiones de gasto.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 09-04-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lfprh_art_42",
-      "icono": "🗓️",
+      "icono": "📅",
       "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria (LFPRH)",
-      "precepto": "Artículo 42 de la LFPRH",
-      "denominacion": "Calendario Constitucional y Plazos del Paquete Económico",
-      "precepto_resumen": "Fija los plazos inexcusables para que el Ejecutivo envíe al Congreso los Criterios Generales, la Ley de Ingresos y el Presupuesto de Egresos a más tardar el 8 de septiembre.",
-      "texto_oficial": "La aprobación de la Ley de Ingresos y del Presupuesto de Egresos se sujetará al siguiente procedimiento: El Ejecutivo Federal remitirá al Congreso de la Unión, a más tardar el 8 de septiembre de cada año: Los Criterios Generales de Política Económica, la iniciativa de Ley de Ingresos y el proyecto de Presupuesto de Egresos de la Federación.",
-      "analisis_civico": "Establece el reloj democrático anual. A partir del 8 de septiembre, el país entra en el periodo más importante del Congreso: la discusión del destino de todos los recursos públicos.",
-      "aplicacion_auditavision": "Pestaña 3 (Periodos de Sesiones del Congreso) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+      "grupo": "Presupuesto",
+      "etapa": "aprueba",
+      "precepto": "Artículo 42, fracciones III y IV",
+      "denominacion": "El calendario del Paquete Económico",
+      "precepto_resumen": "El Ejecutivo envía los Criterios Generales de Política Económica, la iniciativa de Ley de Ingresos y el proyecto de Presupuesto a más tardar el 8 de septiembre; la Cámara de Diputados aprueba la Ley de Ingresos a más tardar el 20 de octubre.",
+      "analisis_civico": "Junto con el artículo 74 de la Constitución arma el reloj del presupuesto: 8 de septiembre, entrega; 20 de octubre, Ley de Ingresos en la Cámara de Diputados; 15 de noviembre, Presupuesto de Egresos.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "ref": "ref-lfprh",
+      "texto_oficial": "III. El Ejecutivo Federal remitirá al Congreso de la Unión, a más tardar el 8 de septiembre de cada año: […] IV. La Ley de Ingresos será aprobada por la Cámara de Diputados a más tardar el 20 de octubre",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 09-04-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lfprh_art_54",
       "icono": "↩️",
       "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria (LFPRH)",
-      "precepto": "Artículo 54 de la LFPRH",
-      "denominacion": "Subejercicio Presupuestal y Devolución Obligatoria a la TESOFE",
-      "precepto_resumen": "Dispone que los recursos autorizados no devengados ni comprometidos al cierre del año deben ser devueltos inmediatamente a la Tesorería de la Federación.",
-      "texto_oficial": "Las dependencias y entidades que por cualquier motivo al cierre del ejercicio fiscal conserven recursos del Presupuesto de Egresos no devengados ni comprometidos, deberán reintegrarlos a la Tesorería de la Federación dentro de los primeros quince días naturales siguientes al cierre del ejercicio fiscal.",
-      "analisis_civico": "Prohíbe guardar 'guardaditos' o 'fideicomisos privados'. El dinero presupuestado que no se ejerció en beneficio de la gente debe regresar a la TESOFE y no quedarse en cuentas de dependencias.",
-      "aplicacion_auditavision": "Pestaña 1 (Presupuesto Subnacional) y Pestaña 4 (Fideicomisos del PJF).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+      "grupo": "Presupuesto",
+      "etapa": "ejerce",
+      "precepto": "Artículo 54",
+      "denominacion": "Lo que no se gastó se devuelve a la Tesorería",
+      "precepto_resumen": "Lo no devengado al 31 de diciembre ya no puede ejercerse, y quien conserve recursos debe reintegrarlos a la Tesorería de la Federación dentro de los 15 días naturales siguientes al cierre del ejercicio.",
+      "analisis_civico": "Impide los «guardaditos»: el dinero que no se usó en lo que se aprobó regresa a la Tesorería, y gastarlo de prisa en diciembre solo para no devolverlo está prohibido.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "ref": "ref-lfprh",
+      "texto_oficial": "Las erogaciones previstas en el Presupuesto de Egresos que no se encuentren devengadas al 31 de diciembre, no podrán ejercerse. […] Los Poderes Legislativo y Judicial, los entes autónomos, las dependencias, así como las entidades respecto de los subsidios o transferencias que reciban, que por cualquier motivo al 31 de diciembre conserven recursos, incluyendo los rendimientos obtenidos, deberán reintegrar el importe disponible a la Tesorería de la Federación dentro de los 15 días naturales siguientes al cierre del ejercicio. […] Queda prohibido realizar erogaciones al final del ejercicio con cargo a ahorros y economías del Presupuesto de Egresos que tengan por objeto evitar el reintegro de recursos a que se refiere este artículo.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 09-04-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lcf_art_2",
-      "icono": "💰",
+      "icono": "🤝",
       "ley": "Ley de Coordinación Fiscal (LCF)",
-      "precepto": "Artículo 2° de la LCF",
-      "denominacion": "Recaudación Federal Participable (RFP) y Ramo 28",
-      "precepto_resumen": "Fórmula matemática legal que integra la bolsa común de impuestos federales (RFP) sobre la cual se calcula el 20% que se transfiere en libre disposición a estados y municipios.",
-      "texto_oficial": "El Fondo General de Participaciones se constituirá con el 20% de la recaudación federal participable que obtenga la Federación en un ejercicio... La recaudación federal participable será la que obtenga la Federación por todos sus impuestos, así como por los derechos sobre la minería, disminuidos con el total de las devoluciones por los mismos conceptos.",
-      "analisis_civico": "Es el pilar del Pacto Fiscal: los estados cedieron el cobro del IVA y del ISR a la Federación a cambio de recibir puntualmente su porcentaje de la RFP sin condiciones (Ramo 28).",
-      "aplicacion_auditavision": "Pestaña 1 (Ramo 28 vs Ramo 33) y Pestaña 2 (Acción Financiera).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/31_300118.pdf"
+      "grupo": "Coordinacion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 2o.",
+      "denominacion": "Fondo General de Participaciones (Ramo 28)",
+      "precepto_resumen": "El Fondo General de Participaciones se forma con el 20% de la recaudación federal participable: los impuestos federales y los derechos de minería, menos devoluciones y algunas exclusiones.",
+      "analisis_civico": "Las participaciones (Ramo 28) son de libre disposición: estados y municipios deciden en qué usarlas, dentro de sus propios presupuestos. Por eso se revisan sobre todo ante los congresos locales.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
+      "ref": "ref-lcf",
+      "texto_oficial": "Artículo 2o.- El Fondo General de Participaciones se constituirá con el 20% de la recaudación federal participable que obtenga la federación en un ejercicio. La recaudación federal participable será la que obtenga la Federación por todos sus impuestos, así como por los derechos de minería, disminuidos con el total de las devoluciones por dichas contribuciones y excluyendo los conceptos que a continuación se relacionan:",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 03-01-2024. Cotejado el 09-10-2026."
     },
     {
       "id": "lcf_ramo_33",
-      "icono": "📦",
+      "icono": "🎯",
       "ley": "Ley de Coordinación Fiscal (LCF)",
-      "precepto": "Artículos 25 al 51 de la LCF",
-      "denominacion": "Fondos de Aportaciones Federales Etiquetadas (Ramo 33)",
-      "precepto_resumen": "Regula los ocho fondos federales condicionados a educación (FONE), salud (FASSA), seguridad (FORTAMUN) y combate a la pobreza (FAIS).",
-      "texto_oficial": "Se establecen las aportaciones federales, como recursos que la Federación transfiere a las haciendas públicas de los Estados, Ciudad de México, y en su caso, de los Municipios, condicionando su gasto a la consecución y cumplimiento de los objetivos que para cada tipo de aportación establece esta Ley... Los recursos del Fondo de Aportaciones para la Nómina Educativa y Gasto Operativo se destinarán exclusivamente al pago de servicios personales.",
-      "analisis_civico": "A diferencia del Ramo 28, los estados no pueden usar el Ramo 33 para gasto corriente ni fiestas; si desvían estos fondos, la ASF emite pliegos sancionatorios por delito de desvío de recursos.",
-      "aplicacion_auditavision": "Pestaña 1 (Lente Ramo 33), Pestaña 3 (Congresos) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/31_300118.pdf"
+      "grupo": "Coordinacion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 25",
+      "denominacion": "Los ocho fondos de aportaciones (Ramo 33)",
+      "precepto_resumen": "Las aportaciones federales condicionan su gasto a los objetivos que la ley fija para cada uno de sus ocho fondos: nómina educativa, salud, infraestructura social, fortalecimiento municipal, múltiples, educación tecnológica y de adultos, seguridad pública y fortalecimiento de las entidades.",
+      "analisis_civico": "A diferencia del Ramo 28, el dinero del Ramo 33 viene etiquetado: si se usa en otra cosa, la Auditoría Superior lo observa y puede promover responsabilidades. Es de lo que más revisa en estados y municipios.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
+      "ref": "ref-lcf",
+      "texto_oficial": "se establecen las aportaciones federales, como recursos que la Federación transfiere a las haciendas públicas de los Estados, Distrito Federal, y en su caso, de los Municipios, condicionando su gasto a la consecución y cumplimiento de los objetivos que para cada tipo de aportación establece esta Ley,",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 03-01-2024. Cotejado el 09-10-2026."
     },
     {
       "id": "ldf_alertas",
       "icono": "🚦",
-      "ley": "Ley de Disciplina Financiera (LDF)",
-      "precepto": "Artículos 22 al 26 de la LDF",
-      "denominacion": "Sistema de Alertas de la SHCP y Límites al Endeudamiento Subnacional",
-      "precepto_resumen": "Crea el semáforo fiscal (Verde, Amarillo y Rojo) para clasificar la deuda pública de los estados y municipios y topar la contratación de nuevos créditos.",
-      "texto_oficial": "La Secretaría realizará la medición del Sistema de Alertas con base en los siguientes indicadores: I. Deuda Pública y Obligaciones sobre Ingresos de Libre Disposición; II. Servicio de la Deuda y de Obligaciones sobre Ingresos de Libre Disposición; y III. Obligaciones a Corto Plazo y Proveedores y Contratistas sobre Ingresos Totales... El Sistema de Alertas clasificará a los Entes Públicos en endeudamiento sostenible, en observación o elevado.",
-      "analisis_civico": "Evita el sobreendeudamiento estatal que quebró a entidades como Coahuila o Veracruz. Los estados en semáforo rojo no pueden contratar más deuda bancaria.",
-      "aplicacion_auditavision": "Pestaña 1 (Semáforo Deuda SHCP) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf"
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (LDF)",
+      "grupo": "Disciplina",
+      "etapa": "revisa",
+      "precepto": "Artículos 44 a 46",
+      "denominacion": "Sistema de Alertas de la deuda estatal y municipal",
+      "precepto_resumen": "Hacienda mide la deuda de estados y municipios con tres indicadores y los clasifica en endeudamiento sostenible, en observación o elevado. Con endeudamiento elevado, su techo de financiamiento neto es cero.",
+      "analisis_civico": "El semáforo de la deuda de tu estado o municipio es público: si está en endeudamiento elevado, la ley no le permite aumentar su financiamiento neto.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf",
+      "ref": "ref-ldf",
+      "texto_oficial": "Artículo 45.- Los resultados obtenidos de acuerdo con la medición de los indicadores a que hace referencia el artículo anterior, serán publicados en el Sistema de Alertas, el cual clasificará a cada uno de los Entes Públicos de acuerdo con los siguientes niveles: I. Endeudamiento sostenible; II. Endeudamiento en observación, y III. Endeudamiento elevado. […] III. Un nivel de endeudamiento elevado tendrá un Techo de Financiamiento Neto igual a cero.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 10-05-2022. Cotejado el 09-10-2026."
     },
     {
       "id": "dof_reforma_judicial",
       "icono": "⚖️",
-      "ley": "Decreto Constitucional del Poder Judicial (DOF 15/09/2024)",
-      "precepto": "Decreto de Reforma Constitucional en Materia del Poder Judicial",
-      "denominacion": "Reforma Constitucional al PJF: Elección Popular, Extinción de Fideicomisos y Tope Salarial",
-      "categoria": "Judicial",
-      "precepto_resumen": "Reforma estructural a los artículos 94, 96, 97, 98, 99, 100 y 127 de la CPEUM para elegir juzgadores por voto ciudadano, reducir la SCJN a 9 ministros y eliminar fideicomisos.",
-      "texto_oficial": "Se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de reforma del Poder Judicial: Las ministras y ministros de la Suprema Corte de Justicia de la Nación, magistradas y magistrados de Circuito y juezas y jueces de Distrito serán electos de manera libre, directa y secreta por la ciudadanía... En ningún caso la remuneración de las y los servidores públicos del Poder Judicial podrá ser mayor a la establecida para el Presidente en el Presupuesto de Egresos correspondiente... Los fondos y fideicomisos deberán extinguirse y enterarse a la Tesorería de la Federación.",
-      "analisis_civico": "Es la mayor reconfiguración del sistema judicial mexicano en un siglo: somete a los juzgadores al voto popular, extingue 13 fideicomisos millonarios y elimina los privilegios salariales que violaban el Art. 127.",
-      "aplicacion_auditavision": "Pestaña 4 (Poder Judicial de la Federación) y Pestaña 6 (Marco Legal).",
-      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024"
+      "ley": "Decreto de reforma constitucional del Poder Judicial (DOF 15-09-2024)",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Artículo Único y transitorios Segundo y Séptimo",
+      "denominacion": "Reforma judicial de 2024: elección por voto y tope de remuneraciones",
+      "precepto_resumen": "Reformó, entre otros, los artículos 94, 96 y 100 de la Constitución: las personas juzgadoras se eligen por voto popular y sus remuneraciones se ajustan al tope del artículo 127.",
+      "analisis_civico": "Es la mayor reconfiguración del Poder Judicial en décadas. En lo que toca al dinero, sujetó todas las remuneraciones judiciales al tope del artículo 127 y ordenó extinguir los fondos y fideicomisos no previstos en ley (ver el transitorio Décimo).",
+      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "ref": "ref-reforma-judicial",
+      "texto_oficial": "Segundo.- El Proceso Electoral Extraordinario 2024-2025 dará inicio el día de la entrada en vigor del presente Decreto. […] Séptimo.- Las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación y de los Poderes Judiciales de las entidades federativas y de la Ciudad de México que estén en funciones al momento de la entrada en vigor del presente Decreto no podrán ser mayores a la establecida para el Presidente de la República en el presupuesto correspondiente, por lo que deberán ajustarse a los parámetros establecidos en el artículo 127 de esta Constitución en los casos que corresponda, sin responsabilidad para los Poderes Judiciales.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Decreto publicado en el DOF el 15-09-2024; sus transitorios se leen en el texto vigente de la Constitución. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_94_autonomia",
-      "icono": "⚖️",
-      "ley": "Constitución Política (Poder Judicial de la Federación)",
-      "precepto": "Artículo 94 Constitucional",
-      "denominacion": "Administración de la SCJN, Autonomía Presupuestal y Armonización Salarial",
-      "categoria": "Judicial",
-      "precepto_resumen": "Establece el ejercicio del Poder Judicial de la Federación en una Suprema Corte de 9 integrantes, su autonomía de gestión y la sujeción de sus percepciones al tabulador del Art. 127.",
-      "texto_oficial": "Se deposita el ejercicio del Poder Judicial de la Federación en una Suprema Corte de Justicia de la Nación, en un Tribunal de Disciplina Judicial, en Tribunales Colegiados de Circuito, en Tribunales Colegiados de Apelación y en Juzgados de Distrito... La Suprema Corte de Justicia de la Nación se compondrá de nueve integrantes, Ministras y Ministros, y funcionará en Pleno. Su presidencia se renovará cada dos años de manera rotatoria... La remuneración que perciban por su servicio los Ministros de la Suprema Corte, los Magistrados de Circuito, los Jueces de Distrito... no podrá ser mayor a la establecida para el Presidente de la República en el presupuesto correspondiente.",
-      "analisis_civico": "Armoniza la autonomía judicial con el principio republicano de austeridad, eliminando la interpretación histórica que permitía a los ministros ganar más de $206,000 pesos netos mediante amparos contra la LFPRH.",
-      "aplicacion_auditavision": "Pestaña 4 (SCJN) y Pestaña 6 (Glosario y Marco Legal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "icono": "🏛️",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Artículo 94",
+      "denominacion": "Integración de la Suprema Corte y remuneración judicial",
+      "precepto_resumen": "La Suprema Corte se compone de nueve integrantes y funciona en Pleno, y con aprobación del Pleno puede funcionar en dos secciones; la administración del Poder Judicial está a cargo de un órgano de administración judicial, y ninguna remuneración judicial puede superar la de la persona titular de la Presidencia.",
+      "analisis_civico": "Quien administra el dinero de la Corte y de los tribunales ya no es el Consejo de la Judicatura sino el Órgano de Administración Judicial; su presupuesto ejercido se publica cada trimestre.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum-control-constitucional",
+      "texto_oficial": "La administración del Poder Judicial de la Federación estará a cargo de un órgano de administración judicial, mientras que la disciplina de su personal estará a cargo del Tribunal de Disciplina Judicial, […] La Suprema Corte de Justicia de la Nación se compondrá de nueve integrantes, Ministras y Ministros, y funcionará en Pleno; también, con aprobación del Pleno, podrá funcionar en dos secciones. […] La remuneración que perciban por sus servicios las Ministras y los Ministros de la Suprema Corte, las Magistradas y los Magistrados de Circuito, las Juezas y los Jueces de Distrito, las Magistradas y los Magistrados del Tribunal de Disciplina Judicial, las Magistradas y los Magistrados Electorales y demás personal del Poder Judicial de la Federación, no podrá ser mayor a la establecida para la persona titular de la Presidencia de la República en el presupuesto correspondiente y no será disminuida durante su encargo.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_96_eleccion_scjn",
       "icono": "🗳️",
-      "ley": "Constitución Política (Poder Judicial de la Federación)",
-      "precepto": "Artículo 96 Constitucional",
-      "denominacion": "Elección Popular Extraordinaria y Democrática de Ministras y Ministros",
-      "categoria": "Judicial",
-      "precepto_resumen": "Regula el procedimiento inédito de elección ciudadana por voto directo, libre y secreto de las ministras y ministros de la Suprema Corte el primer domingo de junio de 2025.",
-      "texto_oficial": "Las y los Ministros de la Suprema Corte de Justicia de la Nación... serán electos de manera directa y secreta por la ciudadanía a nivel nacional en las elecciones ordinarias del año que corresponda... El Senado de la República publicará la convocatoria y los tres Poderes de la Unión integrarán Comités de Evaluación para conformar las listas definitivas de candidaturas.",
-      "analisis_civico": "Transición de un modelo de designación por cuotas partidistas en el Senado a la legitimación democrática en urnas, marcando la renovación total del Pleno de la SCJN a partir de septiembre de 2025.",
-      "aplicacion_auditavision": "Pestaña 4 (SCJN y Pleno) y Pestaña 6 (Glosario y Marco Legal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Artículo 96, párrafo primero",
+      "denominacion": "Elección popular de ministras, ministros, magistraturas y juzgados",
+      "precepto_resumen": "Las ministras y los ministros, las magistraturas y las personas juzgadoras de distrito se eligen por voto libre, directo y secreto el día de las elecciones federales ordinarias que corresponda.",
+      "analisis_civico": "La primera elección fue extraordinaria (proceso 2024-2025, por el transitorio Segundo del decreto); las siguientes coinciden con las elecciones federales ordinarias.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum-control-constitucional",
+      "texto_oficial": "Las Ministras y Ministros de la Suprema Corte de Justicia de la Nación, Magistradas y Magistrados de la Sala Superior y las salas regionales del Tribunal Electoral del Poder Judicial de la Federación, Magistradas y Magistrados del Tribunal de Disciplina Judicial, Magistradas y Magistrados de Circuito y Juezas y Jueces de Distrito, serán elegidos de manera libre, directa y secreta por la ciudadanía el día que se realicen las elecciones federales ordinarias del año que corresponda conforme al siguiente procedimiento:",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "dof_reforma_transitorio_fideicomisos",
-      "icono": "🏛️",
-      "ley": "Decreto Constitucional del Poder Judicial (DOF 15/09/2024)",
-      "precepto": "Artículo Cuarto Transitorio del Decreto de Reforma Judicial",
-      "denominacion": "Extinción de los 13 Fideicomisos Judiciales y Reintegro de $15,434 mdp a TESOFE",
-      "categoria": "Judicial",
-      "precepto_resumen": "Mandata la extinción perentoria de todos los fondos y fideicomisos fiduciarios del PJF y el reintegro de sus remanentes de más de $15,400 mdp a la Tesorería de la Federación.",
-      "texto_oficial": "Los órganos del Poder Judicial de la Federación que administren fondos o fideicomisos a que se refieren los artículos transitorios de las leyes que resulten aplicables, deberán realizar los actos jurídicos y administrativos conducentes para su extinción... Los recursos remanentes, así como los productos y rendimientos de dichos fondos y fideicomisos, deberán reintegrarse a la Tesorería de la Federación.",
-      "analisis_civico": "Pone fin a la retención de miles de millones de pesos de subejercicios presupuestales en fideicomisos de Nacional Financiera para pensiones complementarias y gastos médicos privados, reorientándolos al gasto social federal.",
-      "aplicacion_auditavision": "Pestaña 4 (SCJN Fideicomisos) y Pestaña 1 (Alertas ASF).",
-      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024"
+      "icono": "🔒",
+      "ley": "Decreto de reforma constitucional del Poder Judicial (DOF 15-09-2024)",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Transitorio Décimo, párrafos segundo y tercero",
+      "denominacion": "Extinción de fondos y fideicomisos judiciales no previstos en ley",
+      "precepto_resumen": "Ordena extinguir los fondos, fideicomisos, mandatos o contratos análogos del Poder Judicial no previstos en ley y enterar sus recursos a la Tesorería en un plazo máximo de noventa días naturales.",
+      "analisis_civico": "El mandato es del transitorio Décimo (no del Cuarto, como se decía antes). El decreto no dice cuántos fideicomisos ni cuánto dinero había: ese monto debe salir de los informes de Hacienda o de la Auditoría Superior y por ahora lo dejamos pendiente.",
+      "pendiente": "Cuántos fideicomisos se extinguieron y cuánto se enteró a la Tesorería: falta integrar a la plataforma el informe oficial que lo documente.",
+      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "ref": "ref-reforma-judicial",
+      "texto_oficial": "Los órganos del Poder Judicial de la Federación y, en su caso, de las entidades federativas, llevarán a cabo los actos y procesos necesarios para extinguir los fondos, fideicomisos, mandatos o contratos análogos que no se encuentren previstos en una ley secundaria, por lo que tendrán un plazo máximo de noventa días naturales posteriores a la entrada en vigor del presente Decreto para enterar la totalidad de los recursos remanentes en dichos instrumentos, así como los productos y aprovechamientos derivados de los mismos, a la Tesorería de la Federación o de las entidades federativas, según corresponda. […] Los recursos federales a que se refiere el párrafo anterior deberán ser concentrados por concepto de aprovechamientos en la Tesorería de la Federación y se destinarán por la Secretaría de Hacienda y Crédito Público a la implementación del presente Decreto y a los demás fines que esta determine.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Decreto publicado en el DOF el 15-09-2024; sus transitorios se leen en el texto vigente de la Constitución. Cotejado el 09-10-2026."
     },
     {
       "id": "manual_remuneraciones_pjf_norma",
       "icono": "📋",
-      "ley": "Manual de Remuneraciones del Poder Judicial de la Federación",
-      "precepto": "Disposiciones Generales del Tabulador Salarial y Compensaciones del PJF",
-      "denominacion": "Tabuladores Salariales, Gastos Médicos (SGMM) y Seguro de Separación (SSI)",
-      "categoria": "Judicial",
-      "precepto_resumen": "Establece los límites y conceptos del paquete de remuneraciones, separando el sueldo base de las prestaciones institucionales y seguros privados.",
-      "texto_oficial": "El presente Manual regula las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación... Ninguna persona servidora pública podrá percibir una remuneración mayor a la establecida en el tabulador respectivo ni a la del Presidente de la República. Las asignaciones por concepto de seguros institucionales y prestaciones extraordinarias se ajustarán a los techos presupuestales autorizados en el PEF.",
-      "analisis_civico": "Es el documento normativo donde se desglosan los más de $1.7 mdp anuales por ministro en prestaciones complementarias y se fijan los salarios de los 35 colaboradores de cada ponencia.",
-      "aplicacion_auditavision": "Pestaña 4 (Prestaciones y Asesores) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.dof.gob.mx/"
+      "ley": "Manual de remuneraciones del Poder Judicial de la Federación 2026 (DOF 27-02-2026)",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Considerando Cuarto y numeral 8.1",
+      "denominacion": "Remuneraciones y seguros del Poder Judicial en 2026",
+      "precepto_resumen": "Regula las remuneraciones del Poder Judicial para 2026, conforme al tope constitucional. El seguro de gastos médicos mayores y el de separación individualizado quedan para el personal de mando medio y operativo.",
+      "analisis_civico": "Aquí se ve, renglón por renglón, qué prestaciones conserva cada nivel del Poder Judicial. Los seguros privados de gastos médicos y de separación ya no figuran para quienes encabezan los órganos, solo para mandos medios y personal operativo.",
+      "url_oficial": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF",
+      "ref": "ref-manual-remun-pjf",
+      "texto_oficial": "la remuneración que perciban por sus servicios las Ministras y los Ministros de la Suprema Corte de Justicia de la Nación, las Magistradas y los Magistrados de Circuito, las Juezas y los Jueces de Distrito, las Magistradas y los Magistrados del Tribunal de Disciplina Judicial, las Magistradas y los Magistrados Electorales y demás personal del Poder Judicial de la Federación, no podrá ser mayor a la establecida para la persona titular de la Presidencia de la República en el presupuesto correspondiente y no será disminuida durante su encargo; […] Estos seguros los protegen en materia de vida, retiro, incapacidad e invalidez total y permanente, gastos médicos mayores (personal de mando medio y operativo) y de separación individualizado (personal de mando medio).",
+      "aplicacion_auditavision": "",
+      "vigencia": "Publicado en el DOF el 27-02-2026; rige en 2026. Cotejado el 09-10-2026."
     }
   ]
 ,
