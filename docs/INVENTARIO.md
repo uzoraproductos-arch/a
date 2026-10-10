@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 48 |
+| Páginas revisadas | 49 |
 | Páginas que solo redirigen | 1 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 11 destinos |
@@ -40,10 +40,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-ticket.html` | Tu ticket en negativo · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente.html` | Costo Ambiental · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
-| `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 28 | 1 | 0 | 0 | 0 |
-| `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 28 | 1 | 0 | 0 | 0 |
-| `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 28 | 1 | 0 | 0 | 0 |
-| `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
+| `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
+| `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
+| `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf.html` | Qué encontró la ASF · Auditavisión | apartados.py | 31 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 31 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 31 | 1 | 0 | 0 | 0 |
@@ -57,13 +57,14 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 20 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 45 | 0 | 4 | 7 | 2 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 93 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 94 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 15 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 57 | 0 | 0 | 0 | 38 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 55 | 0 | 0 | 0 | 0 |
+| `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 20 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
 
@@ -83,7 +84,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 | Destino | Veces enlazado |
 |---|---:|
-| `reporta` | 93 |
+| `reporta` | 95 |
 | `verificador` | 16 |
 | `megaobras` | 15 |
 | `ambiente` | 14 |

@@ -83,7 +83,7 @@
        eligio; el resultado nace vacio y solo se llena cuando lo pide, con
        los mismos dos mandos del resto de la plataforma. */
     cc: {
-      monto: 15000,
+      monto: 0,                 // arranca en $0 (propuesta de Astra, punto 6)
       periodicidad: 'mes',      // 'mes' o 'ano'
       naturaleza: 'bruto',      // 'bruto' o 'neto': que cifra escribio el lector
       regimen: 'sueldos',
@@ -1255,10 +1255,30 @@
         '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.ccCalcular()">' +
           '<span>' + (listo ? '🔄' : '🧮') + '</span> ' +
           (listo ? 'Rehacer la cuenta' : 'Sacar la cuenta') + '</button>' +
+        '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.ccEjemploOficial()" ' +
+          'title="Salario m\u00ednimo general 2026: CONASAMI, DOF 9 de diciembre de 2025">' +
+          '<span>📄</span> Cargar ejemplo oficial</button>' +
         '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.ccReiniciar()">' +
           '<span>↺</span> Reiniciar a ceros</button>' +
       '</div>' +
-    '</div>';
+    '</div>' +
+    '<p class="cc-campo-pista cc-sim-nota"><span class="cc-sim-et">Simulaci\u00f3n</span> Lo que escribes es tuyo, no un dato oficial, ' +
+      'y un $0 tuyo no quiere decir que el dato oficial sea cero. El ejemplo oficial carga el salario m\u00ednimo general mensual de 2026 ' +
+      '(' + ccPesosExacto(ccPar().salario_minimo.mensual_general) + ', CONASAMI).</p>';
+  }
+
+  /* Ejemplo oficial identificado (propuesta de Astra, punto 6): el salario
+     minimo general mensual de 2026, bruto, en sueldos y salarios. */
+  function ccEjemploOficial() {
+    const sm = ccPar().salario_minimo.mensual_general;
+    state.cc.monto = sm;
+    state.cc.periodicidad = 'mes';
+    state.cc.naturaleza = 'bruto';
+    state.cc.regimen = 'sueldos';
+    ccPintarFormulario();
+    const el = document.getElementById('ccMonto');
+    if (el) el.value = ccPesosExacto(sm).slice(1);
+    ccCalcular();
   }
 
   /* --- bloque 2: lo que le retienen ---------------------------------- */
@@ -1595,7 +1615,14 @@
     if (res && res.ano && res.ano.neto > 0) {
       return { anual: res.ano.neto, tipo: 'neto', calculado: true, brutoMes: res.mes.bruto };
     }
-    const monto = cc.monto > 0 ? cc.monto : 15000;
+    /* Sin ingreso escrito no se inventa uno: la referencia es el salario
+       minimo general mensual de 2026 (CONASAMI, DOF 09-12-2025), marcado
+       como ejemplo oficial. */
+    if (!(cc.monto > 0)) {
+      const sm = ccPar().salario_minimo.mensual_general;
+      return { anual: sm * 12, tipo: 'bruto', calculado: false, brutoMes: sm, ejemplo: true };
+    }
+    const monto = cc.monto;
     const anual = cc.periodicidad === 'ano' ? monto : monto * 12;
     const tipo = cc.naturaleza === 'neto' ? 'neto' : 'bruto';
     return { anual: anual, tipo: tipo, calculado: false, brutoMes: tipo === 'bruto' ? anual / 12 : 0 };
@@ -1731,7 +1758,10 @@
     const enBloques = ccEnBloques();
 
     if (badge) {
-      badge.innerHTML = tuUd('Su ingreso de referencia: <strong>', 'Tu ingreso de referencia: <strong>') + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
+      badge.innerHTML = lector.ejemplo
+        ? 'Referencia mientras no escribas tu ingreso: <strong>' + ccPesos(lector.anual / 12) + ' al mes</strong>, el salario m\u00ednimo general 2026 ' +
+          chipEstado('oficial') + ' <em>(ejemplo oficial; escribe el tuyo en el ' + (enBloques ? 'bloque 1' : 'Apartado A') + ')</em>'
+        : tuUd('Su ingreso de referencia: <strong>', 'Tu ingreso de referencia: <strong>') + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
         (lector.calculado ? ' (calculado en el ' + (enBloques ? 'bloque 1' : 'Apartado A') + ')' :
           (lector.tipo === 'bruto' ? tuUd('. <em>Es bruto: saque la cuenta en el ', '. <em>Es bruto: saca la cuenta en el ') + (enBloques ? 'bloque 1' : 'Apartado A') +
             ' para comparar neto contra neto.</em>' : ''));
@@ -2325,15 +2355,19 @@
     const cont = document.getElementById('amTicket');
     if (!cont) return;
     const sug = amTkIngresoSugerido();
-    if (!amTk.ingreso && sug) amTk.ingreso = sug.mes;
+    if (!amTk.ingreso && sug && !amTk.cero) amTk.ingreso = sug.mes;
     cont.innerHTML =
       '<section class="pd-bloque am-tk-b">' +
         tuUd('<p class="pd-lead">El estado de cuenta del módulo 3 le dice a dónde va lo que usted paga. Este ticket le dice lo contrario: lo que ya le cargaron a su nombre sin preguntarle. Su parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que usted gana.</p>', '<p class="pd-lead">El estado de cuenta del módulo 3 te dice a dónde va lo que pagas. Este ticket te dice lo contrario: lo que ya te cargaron a tu nombre sin preguntarte. Tu parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que ganas.</p>') +
         '<div class="am-tk-form" data-no-autolink>' +
           tuUd('<label class="am-tk-campo" for="amTkIngreso"><span>Su ingreso neto al mes</span>', '<label class="am-tk-campo" for="amTkIngreso"><span>Tu ingreso neto al mes</span>') +
-            '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="Por ejemplo, 15000" value="' + (amTk.ingreso || '') + '" ' +
+            '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="0" value="' + (amTk.ingreso || '') + '" ' +
             'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
+          '<span class="am-tk-acciones">' +
+            '<button type="button" class="pd-btn" onclick="window.AuditEngine.amTicketEjemplo()" title="Salario m\u00ednimo general 2026: CONASAMI, DOF 9 de diciembre de 2025">📄 Cargar ejemplo oficial</button>' +
+            '<button type="button" class="pd-btn" onclick="window.AuditEngine.amTicketReiniciar()">↺ Reiniciar en cero</button>' +
+          '</span>' +
           '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que te queda después de impuestos. Si no lo sabes, sácalo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
         '</div>' +
         '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : tuUd('<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>', '<p class="pd-nota am-tk-vacio">Escribe tu ingreso y pulsa «Emitir». El ticket se imprime renglón por renglón.</p>')) + '</div>' +
@@ -2435,13 +2469,28 @@
     g.restore();
   }
 
+  /* Ejemplo oficial identificado y reinicio (propuesta de Astra, punto 6). */
+  function amTicketEjemplo() {
+    const campo = document.getElementById('amTkIngreso');
+    if (campo) campo.value = ccPar().salario_minimo.mensual_general;
+    amTicketEmitir();
+    const o = document.querySelector('#amTicket .am-tk-origen');
+    if (o) o.innerHTML = 'Ejemplo oficial: el salario m\u00ednimo general mensual de 2026 ' + chipEstado('oficial') + ' (CONASAMI, DOF 9 de diciembre de 2025). Escribe el tuyo para ver tu parte.';
+  }
+
+  function amTicketReiniciar() {
+    amTk.ingreso = 0; amTk.emitido = false; amTk.cero = true;
+    renderAmTicket();
+  }
+
   function amTicketEmitir(sinAnimar) {
     const campo = document.getElementById('amTkIngreso');
     const salida = document.getElementById('amTkSalida');
     if (!salida) return;
     const v = campo ? parseFloat(String(campo.value).replace(/[^0-9.]/g, '')) : amTk.ingreso;
     if (!(v > 0)) {
-      salida.innerHTML = '<p class="pd-nota am-tk-vacio">' + chipEstado('pendiente') + tuUd(' Escriba un ingreso mensual mayor que cero.</p>', ' Escribe un ingreso mensual mayor que cero.</p>');
+      /* Un cero del lector no es un dato pendiente: es que aun no escribe. */
+      salida.innerHTML = '<p class="pd-nota am-tk-vacio"><span class="cc-sim-et">Simulaci\u00f3n</span> ' + tuUd('Escriba un ingreso mensual mayor que cero: con $0 no hay parte que calcular.</p>', 'Escribe un ingreso mensual mayor que cero: con $0 no hay parte que calcular.</p>');
       return;
     }
     amTk.ingreso = v; amTk.emitido = true;
@@ -4073,6 +4122,14 @@
 
   function ccReiniciar() {
     state.cc.calculado = false;
+    state.cc.monto = 0;
+    state.cc.deducciones = 0;
+    const elMonto = document.getElementById('ccMonto');
+    if (elMonto) elMonto.value = '';
+    const elDed = document.getElementById('ccDeducciones');
+    if (elDed) elDed.value = '0';
+    renderComparadorSalarial();
+    ccPintarReloj();
     ccPintarTicketCivico();
     ccPintarMandos();
     simPonerEnCeros(document.getElementById('ccRetencion'), 'cc-ret');
@@ -27699,6 +27756,9 @@
     renderCalculadora: renderCalculadora,
     ccCalcular: ccCalcular,
     ccReiniciar: ccReiniciar,
+    ccEjemploOficial: ccEjemploOficial,
+    amTicketEjemplo: amTicketEjemplo,
+    amTicketReiniciar: amTicketReiniciar,
     ccFijarPeriodicidad: ccFijarPeriodicidad,
     ccFijarNaturaleza: ccFijarNaturaleza,
     ccFijarRegimen: ccFijarRegimen,
@@ -28072,7 +28132,7 @@
      lo que escribio.
      ========================================================================== */
   const botonUnicoEstado = {};
-  const BOTON_UNICO_EXCLUIR = /ccReiniciar/;
+  const BOTON_UNICO_EXCLUIR = /ccReiniciar|amTicketReiniciar/;
   const BOTON_UNICO_REINICIO = '<span>\u21BA</span> Reiniciar a ceros';
 
   function botonUnicoRotular(prim) {
