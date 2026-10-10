@@ -64,7 +64,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 64 | 0 | 0 | 0 | 40 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 63 | 0 | 0 | 0 | 39 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 24 | 0 | 4 | 3 | 1 |
 | `servicios.html` | Servicios · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
@@ -102,4 +102,4 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-39 fichas, cada una con su porqué, su responsable y su enlace oficial.
+38 fichas, cada una con su porqué, su responsable y su enlace oficial.

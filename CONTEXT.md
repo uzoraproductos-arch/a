@@ -671,6 +671,49 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El peso en el tiempo y una sola fuente para el Radar (10-10-2026, sello 20261010r).**
+El autor pidió cerrar los pendientes del radar y tomar en cuenta, en las
+comparativas, gráficas y simuladores, la inflación del peso a través del
+tiempo, su proyección, su valor actual y su comparativa con el dólar y el
+euro.
+- **Una sola fuente para las series anuales.** Las cuatro series (ingresos,
+  gasto neto, inversión física y costo financiero) salen ahora, de 1990 a
+  2025, de las **Estadísticas Oportunas de Finanzas Públicas de Hacienda**
+  (`presto.hacienda.gob.mx`, cuadro «Pesos corrientes multianual», anual):
+  pesos y % del PIB, ambos **oficiales**. Sustituyen al Anexo del 5.º
+  Informe (1995-2016) y a los Criterios (2017-2025), y quitan el salto de
+  definición entre gasto neto total y pagado. La inversión física
+  presupuestaria es unas décimas menor que la del Anexo en algunos años.
+  - El portal pide sesión: se consulta con un navegador automatizado que
+    abre el menú y reescribe la consulta (formatos 3, 5, 11 y 12;
+    presentación 1 = millones de pesos y 6 = % del PIB).
+  - **Resuelto:** `radar-salinas-pib` y `radar-pesos-2017` salen del
+    Registro. **Queda** `radar-1989`: Hacienda empieza en 1990, así que
+    Salinas se mide con cinco de sus seis años (promedio en % del PIB, con
+    aviso) y sus sumas en pesos siguen pendientes.
+- **`finanzas_sexenales.peso`**, de Banxico (SIE): INPC mensual (SP1,
+  1988-sep. 2026), pesos por dólar promedio mensual (SF329, 1988-2026),
+  pesos por euro (SF57923, desde 2000: antes no hay serie), el FIX y el euro
+  del 9 de octubre de 2026 (SF43718 y SF46410) y la **proyección oficial**
+  de los Criterios 2027, Anexo III.1 (p. 69 del PDF): inflación dic/dic y
+  dólar promedio 2026-2032. El euro no tiene proyección oficial y se dice.
+- **En la página:**
+  - selector de moneda en las sumas del tablero, el reloj y dos renglones
+    del duelo: pesos de cada año, **pesos de hoy** (× INPC sep. 2026 ÷ INPC
+    promedio del año), dólares y euros (÷ tipo de cambio promedio del año);
+  - **💱 El peso en el tiempo:** tarjetas de hoy (dólar, euro, inflación de
+    12 meses y proyección), tres gráficas SVG con las bandas de cada
+    sexenio y la proyección punteada (lo que cuesta lo mismo, inflación año
+    por año, dólar y euro), el peso en cada sexenio (inflación acumulada y
+    tipo de cambio al recibir y al entregar) y la máquina del tiempo del
+    peso.
+- **Para actualizar:** cada mes cambian el INPC y el tipo de cambio; cada
+  septiembre, la proyección (Criterios). Se reemplaza el bloque en la base
+  y se sube el sello.
+- Posible siguiente paso: con la misma fuente se pueden llenar los pesos
+  de 2024 del Estado de Cuenta (`estado-cuenta-pesos-2024`); el
+  subejercicio sigue necesitando el Tomo II de la Cuenta Pública.
+
 **Radar hacendario: cada administración, con sus números (10-10-2026, sello 20261010q).**
 El autor pidió que el radar dejara de ser cifras sueltas de 2026 y mostrara,
 administración por administración, los ingresos, la inversión, el costo, la
@@ -703,7 +746,7 @@ viejas `#rc-*` redirigen).
   - Deuda al recibir y al entregar: la misma serie de la trivia y de la
     línea de tiempo de Números. **Si cambia allá, cambia aquí.**
   - ASF: `evaluacion_sexenal` y, para 2025, la primera entrega de la CP 2025.
-- **Pendientes nuevos en el Registro:** `radar-salinas-pib` (el PIB base
+- **Pendientes nuevos en el Registro (resueltos con el sello 20261010r):** `radar-salinas-pib` (el PIB base
   2018 empieza en 1993: Salinas sin % del PIB) y `radar-pesos-2017` (los
   montos en pesos de 2017 a 2025 están en la Cuenta Pública, que no se
   pudo abrir). Por eso el reloj y las sumas en pesos solo corren para

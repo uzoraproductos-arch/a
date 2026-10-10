@@ -25907,37 +25907,27 @@ window.AUDIT_DB = {
   },
   "finanzas_sexenales": {
     "consulta": "10 de octubre de 2026",
-    "nota": "Series anuales del sector público presupuestario para el Radar hacendario (radar-hacendario.html). De 1995 a 2016, montos de la Cuenta Pública tomados del Anexo Estadístico del 5.º Informe de Gobierno; su porcentaje del PIB es derivado (monto entre el PIB nominal del INEGI, base 2018). De 2017 a 2025, el porcentaje del PIB que publica Hacienda en los Criterios Generales, ya con el PIB base 2018: para cada año, la publicación más reciente.",
+    "nota": "Series anuales del sector público presupuestario para el Radar hacendario (radar-hacendario.html), de 1990 a 2025: montos en millones de pesos y su porcentaje del PIB, ambos como los publica Hacienda en sus Estadísticas Oportunas de Finanzas Públicas. Una sola fuente y una sola definición para todos los años.",
     "fuentes": {
-      "PRES_5IG_FP": {
-        "corto": "Presidencia, 5.º Informe de Gobierno, Anexo Estadístico, pp. 447, 453 y 463",
-        "doc": "Presidencia de la República, Quinto Informe de Gobierno 2016-2017, Anexo Estadístico, Finanzas Públicas: «Ingresos ordinarios del sector público presupuestario» (p. 447 del PDF), «Gasto neto total del sector público presupuestario», con su costo financiero de la deuda (p. 453), e «Inversión física del sector público presupuestario» (p. 463). Millones de pesos; de 1995 a 2016 provienen de la Cuenta Pública.",
-        "url": "https://framework-gb.cdn.gob.mx/quintoinforme/5IG_ANEXO_FINAL_TGM_250818.pdf",
-        "sha256": "7159e585765b0d4cf027b22ce826c5d66daa2f926e18aaceba7f65efe1178f57"
+      "EOFP_ING": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Ingresos Presupuestarios del Sector Público",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Ingresos Presupuestarios › «Ingresos Presupuestarios del Sector Público», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
       },
-      "INEGI_PIBN": {
-        "corto": "INEGI, PIB trimestral a precios corrientes, año base 2018",
-        "doc": "Instituto Nacional de Estadística y Geografía, Sistema de Cuentas Nacionales de México, Producto Interno Bruto Trimestral, año base 2018, series originales en millones de pesos a precios corrientes (PIBT_3.xlsx), renglón «Producto interno bruto», columna «Anual». 2023 a 2025 son cifras preliminares.",
-        "url": "https://www.inegi.org.mx/contenidos/programas/pib/2018/tabulados/ori/PIBT_3.xlsx",
-        "sha256": "99a0fe148da8b5698c22aba3e76e45c99bb2d23a899bf46e357cd9281b5522c1"
+      "EOFP_GASTO": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Gasto Neto del Sector Público Presupuestario",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Gastos Presupuestarios › «Gasto Neto del Sector Público Presupuestario», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
       },
-      "CGPE2024": {
-        "corto": "SHCP, Criterios Generales de Política Económica 2024, p. 103",
-        "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2024, cuadro «Ingresos y gasto del Sector Público» 2017-2023, porcentaje del PIB con el año base 2018 (p. 103 del PDF). Gaceta Parlamentaria, 8 de septiembre de 2023.",
-        "url": "https://gaceta.diputados.gob.mx/PDF/65/2023/sep/20230908-C.pdf",
-        "sha256": "10af9f3cfbb58f2e8017caf6f6c3e62933e1aac4a9ae45c664f371582a61105f"
+      "EOFP_INV": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Inversión física presupuestaria",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Gastos Presupuestarios › «Inversión física presupuestaria», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
       },
-      "CGPE2026": {
-        "corto": "SHCP, Criterios Generales de Política Económica 2026, p. 71",
-        "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2026, cuadro «Ingresos y gasto del Sector Público» 2019-2025, % del PIB (p. 71 del PDF). Gaceta Parlamentaria, 8 de septiembre de 2025.",
-        "url": "https://gaceta.diputados.gob.mx/PDF/66/2025/sep/20250908-C.pdf",
-        "sha256": "6bfe63a30519250d9fdf181a429d9b46864e775e86e3de4db51a311d45dd13ea"
-      },
-      "CGPE2027": {
-        "corto": "SHCP, Criterios Generales de Política Económica 2027, p. 56",
-        "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2027, cuadro «Ingresos y gasto del Sector Público» 2020-2026, % del PIB (p. 56 del PDF). Gaceta Parlamentaria, 8 de septiembre de 2026.",
-        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
-        "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+      "EOFP_CF": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Costo Financiero del Sector Público Presupuestario",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Gastos Presupuestarios › «Costo Financiero del Sector Público Presupuestario», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
       },
       "BANXICO_IA1994": {
         "corto": "Banxico, Informe Anual 1994, p. 80",
@@ -25966,1090 +25956,1162 @@ window.AUDIT_DB = {
     },
     "anual": {
       "ingresos": {
-        "1995": {
-          "mdp": 418882.6,
-          "pib": 17.16,
-          "est": "derivado",
+        "1990": {
+          "mdp": 187701.6,
+          "pib": 19.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
+          ]
+        },
+        "1991": {
+          "mdp": 254383.0,
+          "pib": 20.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1992": {
+          "mdp": 295478.2,
+          "pib": 20.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1993": {
+          "mdp": 290612.5,
+          "pib": 17.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1994": {
+          "mdp": 326858.4,
+          "pib": 17.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1995": {
+          "mdp": 418375.5,
+          "pib": 17.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
           ]
         },
         "1996": {
-          "mdp": 580722.0,
-          "pib": 17.68,
-          "est": "derivado",
+          "mdp": 578981.4,
+          "pib": 17.6,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "1997": {
-          "mdp": 737180.9,
-          "pib": 17.79,
-          "est": "derivado",
+          "mdp": 734664.7,
+          "pib": 17.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "1998": {
-          "mdp": 783045.9,
-          "pib": 15.37,
-          "est": "derivado",
+          "mdp": 781947.6,
+          "pib": 15.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "1999": {
-          "mdp": 956683.1,
-          "pib": 15.85,
-          "est": "derivado",
+          "mdp": 954816.5,
+          "pib": 15.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2000": {
-          "mdp": 1179918.9,
-          "pib": 16.82,
-          "est": "derivado",
+          "mdp": 1178813.1,
+          "pib": 16.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2001": {
-          "mdp": 1271646.3,
+          "mdp": 1271376.6,
           "pib": 17.1,
-          "est": "derivado",
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2002": {
-          "mdp": 1387500.4,
-          "pib": 17.73,
-          "est": "derivado",
+          "mdp": 1387235.5,
+          "pib": 17.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2003": {
-          "mdp": 1600589.8,
-          "pib": 19.38,
-          "est": "derivado",
+          "mdp": 1600286.3,
+          "pib": 19.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2004": {
           "mdp": 1771314.2,
-          "pib": 19.15,
-          "est": "derivado",
+          "pib": 19.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2005": {
-          "mdp": 1947816.3,
-          "pib": 19.48,
-          "est": "derivado",
+          "mdp": 1947816.2,
+          "pib": 19.5,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2006": {
-          "mdp": 2263602.5,
-          "pib": 20.36,
-          "est": "derivado",
+          "mdp": 2263602.6,
+          "pib": 20.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2007": {
-          "mdp": 2485785.1,
-          "pib": 20.63,
-          "est": "derivado",
+          "mdp": 2485785.0,
+          "pib": 20.6,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2008": {
           "mdp": 2860926.4,
-          "pib": 22.13,
-          "est": "derivado",
+          "pib": 22.1,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2009": {
           "mdp": 2817185.5,
           "pib": 22.1,
-          "est": "derivado",
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2010": {
           "mdp": 2960443.0,
-          "pib": 21.19,
-          "est": "derivado",
+          "pib": 21.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2011": {
-          "mdp": 3271080.0,
-          "pib": 21.42,
-          "est": "derivado",
+          "mdp": 3271080.1,
+          "pib": 21.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2012": {
           "mdp": 3514529.5,
-          "pib": 21.26,
-          "est": "derivado",
+          "pib": 21.3,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2013": {
           "mdp": 3800415.6,
-          "pib": 22.42,
-          "est": "derivado",
+          "pib": 22.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2014": {
           "mdp": 3983056.1,
-          "pib": 21.96,
-          "est": "derivado",
+          "pib": 22.0,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2015": {
           "mdp": 4266989.5,
-          "pib": 22.19,
-          "est": "derivado",
+          "pib": 22.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_ING"
           ]
         },
         "2016": {
           "mdp": 4845530.3,
-          "pib": 23.34,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2017": {
-          "mdp": null,
-          "pib": 22.0,
-          "est": "oficial",
-          "f": [
-            "CGPE2024"
-          ]
-        },
-        "2018": {
-          "mdp": null,
-          "pib": 21.2,
-          "est": "oficial",
-          "f": [
-            "CGPE2024"
-          ]
-        },
-        "2019": {
-          "mdp": null,
-          "pib": 21.4,
-          "est": "oficial",
-          "f": [
-            "CGPE2026"
-          ]
-        },
-        "2020": {
-          "mdp": null,
-          "pib": 22.2,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2021": {
-          "mdp": null,
-          "pib": 22.3,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2022": {
-          "mdp": null,
-          "pib": 22.4,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2023": {
-          "mdp": null,
-          "pib": 22.1,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2024": {
-          "mdp": null,
-          "pib": 22.3,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2025": {
-          "mdp": null,
           "pib": 23.3,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_ING"
+          ]
+        },
+        "2017": {
+          "mdp": 4947608.3,
+          "pib": 22.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2018": {
+          "mdp": 5115111.1,
+          "pib": 21.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2019": {
+          "mdp": 5384984.3,
+          "pib": 21.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2020": {
+          "mdp": 5339990.5,
+          "pib": 22.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2021": {
+          "mdp": 5960944.6,
+          "pib": 22.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2022": {
+          "mdp": 6602829.7,
+          "pib": 22.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2023": {
+          "mdp": 7039359.8,
+          "pib": 22.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2024": {
+          "mdp": 7492928.9,
+          "pib": 22.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2025": {
+          "mdp": 8228666.3,
+          "pib": 23.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
           ]
         }
       },
       "gasto": {
-        "1995": {
-          "mdp": 429724.8,
-          "pib": 17.61,
-          "est": "derivado",
+        "1990": {
+          "mdp": 204215.3,
+          "pib": 21.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
+          ]
+        },
+        "1991": {
+          "mdp": 227933.1,
+          "pib": 18.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1992": {
+          "mdp": 249287.3,
+          "pib": 17.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1993": {
+          "mdp": 282066.4,
+          "pib": 17.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1994": {
+          "mdp": 326250.7,
+          "pib": 17.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1995": {
+          "mdp": 421549.9,
+          "pib": 17.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
           ]
         },
         "1996": {
-          "mdp": 587421.8,
-          "pib": 17.89,
-          "est": "derivado",
+          "mdp": 582241.6,
+          "pib": 17.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "1997": {
-          "mdp": 755815.9,
-          "pib": 18.23,
-          "est": "derivado",
+          "mdp": 754199.2,
+          "pib": 18.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "1998": {
-          "mdp": 830486.9,
-          "pib": 16.31,
-          "est": "derivado",
+          "mdp": 829511.3,
+          "pib": 16.3,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "1999": {
-          "mdp": 1022594.3,
-          "pib": 16.94,
-          "est": "derivado",
+          "mdp": 1007667.3,
+          "pib": 16.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2000": {
-          "mdp": 1243126.6,
-          "pib": 17.72,
-          "est": "derivado",
+          "mdp": 1239266.3,
+          "pib": 17.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2001": {
-          "mdp": 1327188.1,
-          "pib": 17.85,
-          "est": "derivado",
+          "mdp": 1311669.8,
+          "pib": 17.6,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2002": {
-          "mdp": 1484256.1,
-          "pib": 18.96,
-          "est": "derivado",
+          "mdp": 1459951.1,
+          "pib": 18.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2003": {
-          "mdp": 1670796.3,
-          "pib": 20.23,
-          "est": "derivado",
+          "mdp": 1648243.1,
+          "pib": 20.0,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2004": {
-          "mdp": 1802610.2,
-          "pib": 19.49,
-          "est": "derivado",
+          "mdp": 1792296.7,
+          "pib": 19.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2005": {
-          "mdp": 1979808.0,
-          "pib": 19.8,
-          "est": "derivado",
+          "mdp": 1958012.1,
+          "pib": 19.6,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2006": {
-          "mdp": 2270558.7,
-          "pib": 20.42,
-          "est": "derivado",
+          "mdp": 2255221.3,
+          "pib": 20.3,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2007": {
-          "mdp": 2498977.8,
-          "pib": 20.74,
-          "est": "derivado",
+          "mdp": 2482503.5,
+          "pib": 20.6,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2008": {
-          "mdp": 2894806.5,
-          "pib": 22.39,
-          "est": "derivado",
+          "mdp": 2872608.4,
+          "pib": 22.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2009": {
-          "mdp": 3114065.4,
-          "pib": 24.43,
-          "est": "derivado",
+          "mdp": 3088876.8,
+          "pib": 24.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2010": {
-          "mdp": 3355288.0,
-          "pib": 24.02,
-          "est": "derivado",
+          "mdp": 3333948.4,
+          "pib": 23.9,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2011": {
-          "mdp": 3655756.8,
-          "pib": 23.94,
-          "est": "derivado",
+          "mdp": 3631315.9,
+          "pib": 23.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2012": {
-          "mdp": 3942261.3,
-          "pib": 23.85,
-          "est": "derivado",
+          "mdp": 3920305.0,
+          "pib": 23.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2013": {
-          "mdp": 4206350.9,
-          "pib": 24.81,
-          "est": "derivado",
+          "mdp": 4178321.9,
+          "pib": 24.6,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2014": {
-          "mdp": 4566808.9,
-          "pib": 25.18,
-          "est": "derivado",
+          "mdp": 4528045.2,
+          "pib": 25.0,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2015": {
-          "mdp": 4917247.4,
-          "pib": 25.57,
-          "est": "derivado",
+          "mdp": 4892875.9,
+          "pib": 25.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2016": {
-          "mdp": 5377849.6,
-          "pib": 25.91,
-          "est": "derivado",
+          "mdp": 5347754.6,
+          "pib": 25.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_GASTO"
           ]
         },
         "2017": {
-          "mdp": null,
+          "mdp": 5182638.4,
           "pib": 23.0,
           "est": "oficial",
           "f": [
-            "CGPE2024"
+            "EOFP_GASTO"
           ]
         },
         "2018": {
-          "mdp": null,
+          "mdp": 5589351.3,
           "pib": 23.1,
           "est": "oficial",
           "f": [
-            "CGPE2024"
+            "EOFP_GASTO"
           ]
         },
         "2019": {
-          "mdp": null,
+          "mdp": 5792623.9,
           "pib": 23.1,
           "est": "oficial",
           "f": [
-            "CGPE2026"
+            "EOFP_GASTO"
           ]
         },
         "2020": {
-          "mdp": null,
+          "mdp": 5995025.8,
           "pib": 24.9,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_GASTO"
           ]
         },
         "2021": {
-          "mdp": null,
+          "mdp": 6735819.6,
           "pib": 25.2,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_GASTO"
           ]
         },
         "2022": {
-          "mdp": null,
+          "mdp": 7554133.3,
           "pib": 25.6,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_GASTO"
           ]
         },
         "2023": {
-          "mdp": null,
+          "mdp": 8121948.3,
           "pib": 25.5,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_GASTO"
           ]
         },
         "2024": {
-          "mdp": null,
+          "mdp": 9164185.6,
           "pib": 27.3,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_GASTO"
           ]
         },
         "2025": {
-          "mdp": null,
+          "mdp": 9596555.7,
           "pib": 27.2,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_GASTO"
           ]
         }
       },
       "inversion": {
-        "1995": {
-          "mdp": 53251.0,
-          "pib": 2.18,
-          "est": "derivado",
+        "1990": {
+          "mdp": 22843.1,
+          "pib": 2.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_INV"
           ]
         },
-        "1996": {
-          "mdp": 77262.1,
-          "pib": 2.35,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "1997": {
-          "mdp": 102444.8,
-          "pib": 2.47,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "1998": {
-          "mdp": 106870.3,
-          "pib": 2.1,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "1999": {
-          "mdp": 118916.2,
-          "pib": 1.97,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2000": {
-          "mdp": 142721.0,
-          "pib": 2.03,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2001": {
-          "mdp": 144548.4,
-          "pib": 1.94,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2002": {
-          "mdp": 152616.0,
-          "pib": 1.95,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2003": {
-          "mdp": 187271.0,
-          "pib": 2.27,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2004": {
-          "mdp": 220004.4,
-          "pib": 2.38,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2005": {
-          "mdp": 246251.3,
-          "pib": 2.46,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2006": {
-          "mdp": 285884.9,
-          "pib": 2.57,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2007": {
-          "mdp": 340002.6,
-          "pib": 2.82,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2008": {
-          "mdp": 380523.8,
-          "pib": 2.94,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2009": {
-          "mdp": 554576.5,
-          "pib": 4.35,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2010": {
-          "mdp": 629701.5,
-          "pib": 4.51,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2011": {
-          "mdp": 654530.3,
-          "pib": 4.29,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2012": {
-          "mdp": 686704.5,
-          "pib": 4.15,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2013": {
-          "mdp": 740998.6,
-          "pib": 4.37,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2014": {
-          "mdp": 824110.6,
-          "pib": 4.54,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2015": {
-          "mdp": 817055.5,
-          "pib": 4.25,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2016": {
-          "mdp": 776501.7,
-          "pib": 3.74,
-          "est": "derivado",
-          "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
-          ]
-        },
-        "2017": {
-          "mdp": null,
+        "1991": {
+          "mdp": 31836.4,
           "pib": 2.6,
           "est": "oficial",
           "f": [
-            "CGPE2024"
+            "EOFP_INV"
           ]
         },
-        "2018": {
-          "mdp": null,
+        "1992": {
+          "mdp": 37832.9,
           "pib": 2.6,
           "est": "oficial",
           "f": [
-            "CGPE2024"
+            "EOFP_INV"
           ]
         },
-        "2019": {
-          "mdp": null,
-          "pib": 2.3,
-          "est": "oficial",
-          "f": [
-            "CGPE2026"
-          ]
-        },
-        "2020": {
-          "mdp": null,
-          "pib": 2.7,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2021": {
-          "mdp": null,
-          "pib": 2.6,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2022": {
-          "mdp": null,
-          "pib": 3.2,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2023": {
-          "mdp": null,
-          "pib": 2.8,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2024": {
-          "mdp": null,
-          "pib": 3.2,
-          "est": "oficial",
-          "f": [
-            "CGPE2027"
-          ]
-        },
-        "2025": {
-          "mdp": null,
+        "1993": {
+          "mdp": 36080.1,
           "pib": 2.2,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_INV"
+          ]
+        },
+        "1994": {
+          "mdp": 47771.3,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1995": {
+          "mdp": 51891.0,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1996": {
+          "mdp": 75883.8,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1997": {
+          "mdp": 101054.9,
+          "pib": 2.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1998": {
+          "mdp": 112216.8,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1999": {
+          "mdp": 117366.9,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2000": {
+          "mdp": 139356.2,
+          "pib": 2.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2001": {
+          "mdp": 141276.4,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2002": {
+          "mdp": 146276.1,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2003": {
+          "mdp": 176985.8,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2004": {
+          "mdp": 212280.2,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2005": {
+          "mdp": 220110.5,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2006": {
+          "mdp": 256308.6,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2007": {
+          "mdp": 317157.9,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2008": {
+          "mdp": 373961.1,
+          "pib": 2.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2009": {
+          "mdp": 549325.0,
+          "pib": 4.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2010": {
+          "mdp": 622501.0,
+          "pib": 4.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2011": {
+          "mdp": 650134.9,
+          "pib": 4.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2012": {
+          "mdp": 680975.6,
+          "pib": 4.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2013": {
+          "mdp": 735500.5,
+          "pib": 4.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2014": {
+          "mdp": 819940.9,
+          "pib": 4.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2015": {
+          "mdp": 772549.1,
+          "pib": 4.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2016": {
+          "mdp": 728417.5,
+          "pib": 3.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2017": {
+          "mdp": 569551.2,
+          "pib": 2.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2018": {
+          "mdp": 617675.8,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2019": {
+          "mdp": 564482.9,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2020": {
+          "mdp": 653181.5,
+          "pib": 2.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2021": {
+          "mdp": 692030.6,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2022": {
+          "mdp": 935664.3,
+          "pib": 3.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2023": {
+          "mdp": 887119.6,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2024": {
+          "mdp": 1035297.4,
+          "pib": 3.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2025": {
+          "mdp": 770199.0,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
           ]
         }
       },
       "costo_financiero": {
-        "1995": {
-          "mdp": 83621.2,
-          "pib": 3.43,
-          "est": "derivado",
+        "1990": {
+          "mdp": 67118.0,
+          "pib": 7.0,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
+          ]
+        },
+        "1991": {
+          "mdp": 48226.6,
+          "pib": 3.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1992": {
+          "mdp": 40847.0,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1993": {
+          "mdp": 33333.3,
+          "pib": 2.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1994": {
+          "mdp": 32919.9,
+          "pib": 1.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1995": {
+          "mdp": 84769.0,
+          "pib": 3.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
           ]
         },
         "1996": {
-          "mdp": 109600.1,
-          "pib": 3.34,
-          "est": "derivado",
+          "mdp": 110462.5,
+          "pib": 3.4,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "1997": {
-          "mdp": 123815.8,
-          "pib": 2.99,
-          "est": "derivado",
+          "mdp": 130187.2,
+          "pib": 3.1,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "1998": {
-          "mdp": 108911.5,
-          "pib": 2.14,
-          "est": "derivado",
+          "mdp": 111264.3,
+          "pib": 2.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "1999": {
-          "mdp": 163711.7,
-          "pib": 2.71,
-          "est": "derivado",
+          "mdp": 164346.1,
+          "pib": 2.7,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2000": {
-          "mdp": 201015.0,
-          "pib": 2.86,
-          "est": "derivado",
+          "mdp": 201017.1,
+          "pib": 2.9,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2001": {
-          "mdp": 188060.6,
-          "pib": 2.53,
-          "est": "derivado",
+          "mdp": 188062.1,
+          "pib": 2.5,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2002": {
-          "mdp": 178374.1,
-          "pib": 2.28,
-          "est": "derivado",
+          "mdp": 178374.9,
+          "pib": 2.3,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2003": {
-          "mdp": 190753.6,
-          "pib": 2.31,
-          "est": "derivado",
+          "mdp": 190863.1,
+          "pib": 2.3,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2004": {
-          "mdp": 206829.2,
-          "pib": 2.24,
-          "est": "derivado",
+          "mdp": 206830.3,
+          "pib": 2.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2005": {
-          "mdp": 210185.5,
+          "mdp": 210186.3,
           "pib": 2.1,
-          "est": "derivado",
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2006": {
           "mdp": 250065.0,
-          "pib": 2.25,
-          "est": "derivado",
+          "pib": 2.2,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2007": {
           "mdp": 238956.0,
-          "pib": 1.98,
-          "est": "derivado",
+          "pib": 2.0,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2008": {
           "mdp": 227112.6,
-          "pib": 1.76,
-          "est": "derivado",
+          "pib": 1.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2009": {
           "mdp": 262812.5,
-          "pib": 2.06,
-          "est": "derivado",
+          "pib": 2.1,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2010": {
           "mdp": 255755.1,
-          "pib": 1.83,
-          "est": "derivado",
+          "pib": 1.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2011": {
           "mdp": 273931.3,
-          "pib": 1.79,
-          "est": "derivado",
+          "pib": 1.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2012": {
           "mdp": 305118.5,
-          "pib": 1.85,
-          "est": "derivado",
+          "pib": 1.8,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2013": {
           "mdp": 314551.4,
-          "pib": 1.86,
-          "est": "derivado",
+          "pib": 1.9,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2014": {
           "mdp": 345973.7,
-          "pib": 1.91,
-          "est": "derivado",
+          "pib": 1.9,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2015": {
           "mdp": 408287.2,
-          "pib": 2.12,
-          "est": "derivado",
+          "pib": 2.1,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2016": {
           "mdp": 473019.7,
-          "pib": 2.28,
-          "est": "derivado",
+          "pib": 2.3,
+          "est": "oficial",
           "f": [
-            "PRES_5IG_FP",
-            "INEGI_PIBN"
+            "EOFP_CF"
           ]
         },
         "2017": {
-          "mdp": null,
+          "mdp": 533115.2,
           "pib": 2.4,
           "est": "oficial",
           "f": [
-            "CGPE2024"
+            "EOFP_CF"
           ]
         },
         "2018": {
-          "mdp": null,
+          "mdp": 615040.6,
           "pib": 2.5,
           "est": "oficial",
           "f": [
-            "CGPE2024"
+            "EOFP_CF"
           ]
         },
         "2019": {
-          "mdp": null,
+          "mdp": 666486.9,
           "pib": 2.7,
           "est": "oficial",
           "f": [
-            "CGPE2026"
+            "EOFP_CF"
           ]
         },
         "2020": {
-          "mdp": null,
+          "mdp": 686085.0,
           "pib": 2.8,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_CF"
           ]
         },
         "2021": {
-          "mdp": null,
+          "mdp": 686689.4,
           "pib": 2.6,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_CF"
           ]
         },
         "2022": {
-          "mdp": null,
+          "mdp": 815221.0,
           "pib": 2.8,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_CF"
           ]
         },
         "2023": {
-          "mdp": null,
+          "mdp": 1045085.9,
           "pib": 3.3,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_CF"
           ]
         },
         "2024": {
-          "mdp": null,
+          "mdp": 1150427.1,
           "pib": 3.4,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_CF"
           ]
         },
         "2025": {
-          "mdp": null,
+          "mdp": 1309957.9,
           "pib": 3.7,
           "est": "oficial",
           "f": [
-            "CGPE2027"
+            "EOFP_CF"
           ]
         }
       }
@@ -27161,22 +27223,1587 @@ window.AUDIT_DB = {
       }
     },
     "faltantes": {
-      "pib": {
-        "pid": "radar-salinas-pib",
-        "motivo": "El PIB nominal del INEGI con año base 2018 empieza en 1993, y el Anexo da los montos desde 1995. Para los seis años de Salinas no hay todavía una serie con el mismo PIB que la de los demás sexenios."
-      },
-      "mdp": {
-        "pid": "radar-pesos-2017",
-        "motivo": "De 2017 en adelante, Hacienda publica estas cifras en % del PIB en los Criterios Generales; los montos en pesos están en la Cuenta Pública de cada año, que la plataforma aún no coteja."
+      "anio": {
+        "pid": "radar-1989",
+        "anio": 1989,
+        "motivo": "Falta 1989, el primer año de Salinas: las Estadísticas Oportunas de Hacienda empiezan en 1990 y el Anexo del 5.º Informe en 1995. La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra."
       }
     },
     "advertencias": [
-      "De 1995 a 2016 el porcentaje del PIB es derivado: el monto de la Cuenta Pública (Anexo Estadístico del 5.º Informe) entre el PIB nominal del INEGI, base 2018. De 2017 en adelante es el que publica Hacienda en los Criterios Generales, también con el PIB base 2018. La Cuenta Pública reporta el «gasto neto total» y los Criterios el «gasto neto pagado»: pueden diferir en décimas.",
-      "Para cada año se usa la publicación más reciente: 2017 y 2018 de los Criterios 2024, 2019 de los Criterios 2026 y de 2020 a 2025 de los Criterios 2027. Las revisiones del PIB mueven las cifras unas décimas.",
-      "El Anexo advierte cambios de registro: en 2008 se excluyen los efectos de la nueva Ley del ISSSTE; en 2009, los del reconocimiento de los pasivos de los Pidiregas de Pemex; en 2009 y 2010 la inversión física excluye las aportaciones a fideicomisos y mandatos, y desde 2011 se usa otro clasificador por objeto del gasto. Compara con cautela los años de cada lado.",
-      "Con el PIB base 2018 del INEGI, los porcentajes de los años noventa salen más bajos que los que Hacienda publicó en su momento con el PIB de entonces: el PIB revisado es más grande. Se usa una sola base para que los sexenios se comparen entre sí, no con las cifras de su época.",
-      "El costo financiero incluye los programas de apoyo a ahorradores y deudores de la banca (el rescate bancario), como lo agrupa Hacienda."
-    ]
+      "Todas las cifras anuales, de 1990 a 2025, salen de las Estadísticas Oportunas de Finanzas Públicas de Hacienda: los pesos y el porcentaje del PIB, tal como Hacienda los publica. Antes el Radar combinaba el Anexo del 5.º Informe (1995-2016) con los Criterios Generales (2017-2025); al unificar la fuente desaparece el salto entre el «gasto neto total» de la Cuenta Pública y el «gasto neto pagado».",
+      "El gasto es el gasto neto pagado y la inversión, la inversión física presupuestaria, que en algunos años es menor que la del Anexo del 5.º Informe (que sumaba otros conceptos de capital). Por eso los promedios de inversión de Fox y Calderón bajan unas décimas frente a la versión anterior del Radar.",
+      "Hacienda advierte cambios de registro: en 2008 se excluyen los efectos de la nueva Ley del ISSSTE; en 2009, los del reconocimiento de los pasivos de los Pidiregas de Pemex. Compara con cautela los años de cada lado.",
+      "Salinas se mide con 1990 a 1994, cinco de sus seis años: falta 1989. Sus promedios en % del PIB se dan con esos cinco años y lo dicen; sus sumas en pesos quedan pendientes, porque les faltaría un año.",
+      "El costo financiero incluye los programas de apoyo a ahorradores y deudores de la banca (el rescate bancario), como lo agrupa Hacienda.",
+      "Pesos de hoy: cada año se multiplica por el INPC de septiembre de 2026 entre el INPC promedio de ese año. Dólares y euros: cada año se divide entre el tipo de cambio promedio de ese año. Son conversiones derivadas, con datos de Banxico, y se dicen junto a su cifra."
+    ],
+    "peso": {
+      "consulta": "10 de octubre de 2026",
+      "nota": "Lo que vale el peso a lo largo del tiempo: el Índice Nacional de Precios al Consumidor (INPC) y el tipo de cambio frente al dólar y al euro, mes por mes, como los publica el Banco de México; el valor de hoy, y la proyección oficial de Hacienda hasta 2032. Con esto el Radar pasa las cifras de cada año a pesos de hoy, a dólares y a euros.",
+      "fuentes": {
+        "BX_INPC": {
+          "corto": "Banxico, SIE, serie SP1: INPC general (elaborado por el INEGI)",
+          "doc": "Banco de México, Sistema de Información Económica, cuadro CP154 «Principales índices mensuales», serie SP1 «Índice Nacional de Precios al Consumidor, índice general», base segunda quincena de julio de 2018 = 100. Desde julio de 2011 lo elabora el INEGI. Mensual, enero de 1988 a septiembre de 2026.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=8&accion=consultarCuadro&idCuadro=CP154&locale=es"
+        },
+        "BX_USD": {
+          "corto": "Banxico, SIE, serie SF329: pesos por dólar, promedio mensual",
+          "doc": "Banco de México, Sistema de Información Económica, cuadro CF86 «Tipo de cambio promedio del periodo», serie SF329 «Tipo de cambio pesos por dólar E.U.A. para solventar obligaciones denominadas en moneda extranjera, fecha de liquidación, cotizaciones promedio». Mensual, enero de 1988 a septiembre de 2026. Hasta 1992, en viejos pesos: la serie ya los expresa en pesos actuales.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF86&locale=es"
+        },
+        "BX_EUR": {
+          "corto": "Banxico, SIE, serie SF57923: pesos por euro, promedio mensual",
+          "doc": "Banco de México, Sistema de Información Económica, cuadro CF336 «Tipos de cambio de otras divisas», serie SF57923 «EUR Unión Monetaria Europea (euro)», en pesos. Mensual, enero de 2000 a septiembre de 2026: Banxico no la publica antes de 2000.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF336&locale=es"
+        },
+        "BX_DIARIO": {
+          "corto": "Banxico, SIE, cuadros CF102 y CF307: FIX y euro del 9 de octubre de 2026",
+          "doc": "Banco de México, Sistema de Información Económica: serie SF43718, tipo de cambio FIX, pesos por dólar, fecha de determinación (cuadro CF102 «Tipos de cambio diarios»), y serie SF46410, cotización del euro respecto al peso (cuadro CF307, divisas de la canasta del DEG). Dato del 9 de octubre de 2026, el último publicado al consultar.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF102&locale=es"
+        },
+        "CGPE2027_MACRO": {
+          "corto": "SHCP, Criterios Generales de Política Económica 2027, Anexo III.1, p. 69 del PDF",
+          "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2027, Anexo III.1 «Marco macroeconómico, 2025-2032 (cifras estimadas)»: inflación diciembre/diciembre y promedio, y tipo de cambio nominal promedio. 2025 son datos observados; de 2026 a 2032, estimaciones de Hacienda (p. 69 del PDF, 68 impresa). Gaceta Parlamentaria, 8 de septiembre de 2026.",
+          "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+          "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+        }
+      },
+      "inpc": {
+        "base": "segunda quincena de julio de 2018 = 100",
+        "f": "BX_INPC",
+        "mensual": {
+          "1988": [
+            4.718246,
+            5.111783,
+            5.373547,
+            5.538941,
+            5.646109,
+            5.761292,
+            5.857457,
+            5.911343,
+            5.945139,
+            5.990486,
+            6.070654,
+            6.197316
+          ],
+          "1989": [
+            6.349024,
+            6.435184,
+            6.504945,
+            6.602224,
+            6.693099,
+            6.774385,
+            6.842148,
+            6.907333,
+            6.973393,
+            7.076525,
+            7.175855,
+            7.41803
+          ],
+          "1990": [
+            7.776037,
+            7.95212,
+            8.09231,
+            8.215472,
+            8.358838,
+            8.542939,
+            8.698735,
+            8.84695,
+            8.973061,
+            9.10206,
+            9.343723,
+            9.638214
+          ],
+          "1991": [
+            9.88388,
+            10.056425,
+            10.19984,
+            10.306688,
+            10.407442,
+            10.516648,
+            10.609584,
+            10.683423,
+            10.78985,
+            10.915343,
+            11.186374,
+            11.44968
+          ],
+          "1992": [
+            11.657778,
+            11.7959,
+            11.915948,
+            12.022171,
+            12.101438,
+            12.183345,
+            12.260272,
+            12.335592,
+            12.442897,
+            12.532494,
+            12.63662,
+            12.816553
+          ],
+          "1993": [
+            12.97732,
+            13.083345,
+            13.159594,
+            13.23548,
+            13.311137,
+            13.385797,
+            13.450123,
+            13.522112,
+            13.622261,
+            13.677973,
+            13.738302,
+            13.843055
+          ],
+          "1994": [
+            13.950375,
+            14.022124,
+            14.094225,
+            14.163251,
+            14.231682,
+            14.302895,
+            14.366327,
+            14.433287,
+            14.535937,
+            14.612245,
+            14.690361,
+            14.819204
+          ],
+          "1995": [
+            15.376991,
+            16.028707,
+            16.973617,
+            18.326133,
+            19.09209,
+            19.698024,
+            20.099588,
+            20.432981,
+            20.855643,
+            21.284762,
+            21.809608,
+            22.520167
+          ],
+          "1996": [
+            23.329754,
+            23.874262,
+            24.399826,
+            25.09345,
+            25.550842,
+            25.966902,
+            26.336031,
+            26.686072,
+            27.112751,
+            27.451168,
+            27.867083,
+            28.759336
+          ],
+          "1997": [
+            29.498886,
+            29.994598,
+            30.367889,
+            30.695972,
+            30.976119,
+            31.250957,
+            31.523211,
+            31.803502,
+            32.199613,
+            32.456941,
+            32.820042,
+            33.279875
+          ],
+          "1998": [
+            34.003924,
+            34.599238,
+            35.004533,
+            35.332042,
+            35.613481,
+            36.03442,
+            36.381878,
+            36.731632,
+            37.327376,
+            37.862269,
+            38.532786,
+            39.472974
+          ],
+          "1999": [
+            40.46977,
+            41.013643,
+            41.394684,
+            41.774577,
+            42.025877,
+            42.302006,
+            42.58158,
+            42.821255,
+            43.235018,
+            43.508851,
+            43.895776,
+            44.335516
+          ],
+          "2000": [
+            44.93083,
+            45.32938,
+            45.580681,
+            45.840018,
+            46.011379,
+            46.28392,
+            46.464466,
+            46.719785,
+            47.061072,
+            47.385136,
+            47.790288,
+            48.307671
+          ],
+          "2001": [
+            48.575476,
+            48.543328,
+            48.850888,
+            49.097309,
+            49.20997,
+            49.326364,
+            49.198202,
+            49.489688,
+            49.950381,
+            50.176135,
+            50.365149,
+            50.434899
+          ],
+          "2002": [
+            50.900472,
+            50.86775,
+            51.127948,
+            51.407235,
+            51.511429,
+            51.762586,
+            51.911181,
+            52.10856,
+            52.421984,
+            52.653036,
+            53.078877,
+            53.30993
+          ],
+          "2003": [
+            53.525441,
+            53.674122,
+            54.01293,
+            54.105144,
+            53.93056,
+            53.975112,
+            54.053339,
+            54.21549,
+            54.538238,
+            54.738207,
+            55.192542,
+            55.429811
+          ],
+          "2004": [
+            55.774317,
+            56.107945,
+            56.298071,
+            56.383032,
+            56.241603,
+            56.331745,
+            56.47939,
+            56.828041,
+            57.297917,
+            57.694747,
+            58.186899,
+            58.307088
+          ],
+          "2005": [
+            58.30916,
+            58.503431,
+            58.767121,
+            58.976415,
+            58.828251,
+            58.771783,
+            59.0018,
+            59.072255,
+            59.309006,
+            59.45458,
+            59.882493,
+            60.250312
+          ],
+          "2006": [
+            60.603626,
+            60.696358,
+            60.772512,
+            60.861617,
+            60.590675,
+            60.642998,
+            60.809294,
+            61.119609,
+            61.736612,
+            62.006519,
+            62.331857,
+            62.692424
+          ],
+          "2007": [
+            63.016208,
+            63.192347,
+            63.329113,
+            63.291295,
+            62.982534,
+            63.05817,
+            63.326005,
+            63.583996,
+            64.077703,
+            64.327405,
+            64.781221,
+            65.049056
+          ],
+          "2008": [
+            65.350564,
+            65.544834,
+            66.019891,
+            66.170127,
+            66.098635,
+            66.372168,
+            66.742059,
+            67.127492,
+            67.584935,
+            68.045486,
+            68.818942,
+            69.295552
+          ],
+          "2009": [
+            69.456149,
+            69.609494,
+            70.00995,
+            70.25499,
+            70.050358,
+            70.179354,
+            70.370516,
+            70.538884,
+            70.892716,
+            71.107191,
+            71.476046,
+            71.771855
+          ],
+          "2010": [
+            72.552046,
+            72.971671,
+            73.489725,
+            73.255565,
+            72.793978,
+            72.771183,
+            72.92919,
+            73.13175,
+            73.51511,
+            73.968926,
+            74.561581,
+            74.930954
+          ],
+          "2011": [
+            75.295991,
+            75.57846,
+            75.723451,
+            75.717441,
+            75.159264,
+            75.155508,
+            75.516107,
+            75.635555,
+            75.821113,
+            76.332712,
+            77.158333,
+            77.792385
+          ],
+          "2012": [
+            78.343049,
+            78.502314,
+            78.547389,
+            78.30098,
+            78.053819,
+            78.413667,
+            78.853897,
+            79.09054,
+            79.439119,
+            79.841036,
+            80.383437,
+            80.568243
+          ],
+          "2013": [
+            80.892782,
+            81.290943,
+            81.887433,
+            81.941523,
+            81.66882,
+            81.619238,
+            81.592193,
+            81.824328,
+            82.13234,
+            82.522988,
+            83.292265,
+            83.770058
+          ],
+          "2014": [
+            84.519052,
+            84.733157,
+            84.965292,
+            84.806779,
+            84.535579,
+            84.682072,
+            84.914959,
+            85.219965,
+            85.59634,
+            86.069626,
+            86.763778,
+            87.188984
+          ],
+          "2015": [
+            87.110103,
+            87.275377,
+            87.630717,
+            87.40384,
+            86.967366,
+            87.113108,
+            87.24082,
+            87.424875,
+            87.752419,
+            88.203919,
+            88.685468,
+            89.046818
+          ],
+          "2016": [
+            89.386381,
+            89.777781,
+            89.910001,
+            89.625278,
+            89.225615,
+            89.324028,
+            89.556914,
+            89.809333,
+            90.357744,
+            90.906154,
+            91.616834,
+            92.039035
+          ],
+          "2017": [
+            93.603882,
+            94.14478,
+            94.722489,
+            94.838933,
+            94.725494,
+            94.96364,
+            95.322736,
+            95.793768,
+            96.093515,
+            96.698269,
+            97.695174,
+            98.272883
+          ],
+          "2018": [
+            98.795,
+            99.171374,
+            99.492157,
+            99.154847,
+            98.99408,
+            99.376465,
+            99.909099,
+            100.492,
+            100.917,
+            101.44,
+            102.303,
+            103.02
+          ],
+          "2019": [
+            103.108,
+            103.079,
+            103.476,
+            103.531,
+            103.233,
+            103.299,
+            103.687,
+            103.67,
+            103.942,
+            104.503,
+            105.346,
+            105.934
+          ],
+          "2020": [
+            106.447,
+            106.889,
+            106.838,
+            105.755,
+            106.162,
+            106.743,
+            107.444,
+            107.867,
+            108.114,
+            108.774,
+            108.856,
+            109.271
+          ],
+          "2021": [
+            110.21,
+            110.907,
+            111.824,
+            112.19,
+            112.419,
+            113.018,
+            113.682,
+            113.899,
+            114.601,
+            115.561,
+            116.884,
+            117.308
+          ],
+          "2022": [
+            118.002,
+            118.981,
+            120.159,
+            120.809,
+            121.022,
+            122.044,
+            122.948,
+            123.803,
+            124.571,
+            125.276,
+            125.997,
+            126.478
+          ],
+          "2023": [
+            127.336,
+            128.046,
+            128.389,
+            128.363,
+            128.084,
+            128.214,
+            128.832,
+            129.545,
+            130.12,
+            130.609,
+            131.445,
+            132.373
+          ],
+          "2024": [
+            133.555,
+            133.681,
+            134.065,
+            134.336,
+            134.087,
+            134.594,
+            136.003,
+            136.013,
+            136.08,
+            136.828,
+            137.424,
+            137.949
+          ],
+          "2025": [
+            138.343,
+            138.726,
+            139.161,
+            139.62,
+            140.012,
+            140.405,
+            140.78,
+            140.867,
+            141.197,
+            141.708,
+            142.645,
+            143.042
+          ],
+          "2026": [
+            143.588,
+            144.307,
+            145.544,
+            145.831,
+            145.527,
+            145.131,
+            145.169,
+            145.462,
+            146.075
+          ]
+        }
+      },
+      "usd": {
+        "unidad": "pesos por dólar",
+        "f": "BX_USD",
+        "mensual": {
+          "1988": [
+            2.2124,
+            2.2479,
+            2.2809,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281
+          ],
+          "1989": [
+            2.2954,
+            2.3249,
+            2.3547,
+            2.3851,
+            2.4155,
+            2.4459,
+            2.4765,
+            2.5074,
+            2.538,
+            2.5685,
+            2.5991,
+            2.6298
+          ],
+          "1990": [
+            2.6604,
+            2.69,
+            2.7195,
+            2.7502,
+            2.7804,
+            2.8074,
+            2.8317,
+            2.8565,
+            2.881,
+            2.9054,
+            2.9278,
+            2.9409
+          ],
+          "1991": [
+            2.9532,
+            2.965,
+            2.9769,
+            2.989,
+            3.0012,
+            3.0134,
+            3.0256,
+            3.038,
+            3.0502,
+            3.0624,
+            3.0698,
+            3.07
+          ],
+          "1992": [
+            3.0685,
+            3.0636,
+            3.0664,
+            3.068,
+            3.098,
+            3.1185,
+            3.1165,
+            3.0913,
+            3.0862,
+            3.1185,
+            3.1198,
+            3.1182
+          ],
+          "1993": [
+            3.11,
+            3.0989,
+            3.1083,
+            3.0955,
+            3.1227,
+            3.1213,
+            3.1236,
+            3.1126,
+            3.1127,
+            3.1142,
+            3.1553,
+            3.1077
+          ],
+          "1994": [
+            3.1075,
+            3.1115,
+            3.2841,
+            3.3536,
+            3.312,
+            3.3607,
+            3.4009,
+            3.3821,
+            3.3998,
+            3.4158,
+            3.4426,
+            3.9308
+          ],
+          "1995": [
+            5.5133,
+            5.6854,
+            6.7019,
+            6.2996,
+            5.9627,
+            6.2232,
+            6.1394,
+            6.1909,
+            6.3025,
+            6.6911,
+            7.6584,
+            7.6597
+          ],
+          "1996": [
+            7.5048,
+            7.5042,
+            7.5736,
+            7.4713,
+            7.4345,
+            7.5425,
+            7.6229,
+            7.5141,
+            7.5447,
+            7.6851,
+            7.9189,
+            7.8767
+          ],
+          "1997": [
+            7.8299,
+            7.7926,
+            7.9628,
+            7.9037,
+            7.9057,
+            7.9465,
+            7.8857,
+            7.7843,
+            7.7792,
+            7.8114,
+            8.2837,
+            8.136
+          ],
+          "1998": [
+            8.1798,
+            8.4932,
+            8.5689,
+            8.4996,
+            8.5612,
+            8.8948,
+            8.904,
+            9.2596,
+            10.2154,
+            10.1523,
+            9.9874,
+            9.9117
+          ],
+          "1999": [
+            10.1104,
+            10.015,
+            9.7694,
+            9.4461,
+            9.3623,
+            9.5418,
+            9.3671,
+            9.3981,
+            9.3403,
+            9.5403,
+            9.4205,
+            9.4151
+          ],
+          "2000": [
+            9.4793,
+            9.4456,
+            9.2959,
+            9.3748,
+            9.5081,
+            9.7978,
+            9.4688,
+            9.2846,
+            9.3319,
+            9.5182,
+            9.5179,
+            9.4439
+          ],
+          "2001": [
+            9.7701,
+            9.7027,
+            9.6182,
+            9.3508,
+            9.1467,
+            9.0957,
+            9.156,
+            9.1272,
+            9.3841,
+            9.3685,
+            9.2223,
+            9.1672
+          ],
+          "2002": [
+            9.1614,
+            9.1062,
+            9.0809,
+            9.1317,
+            9.4899,
+            9.7378,
+            9.7978,
+            9.8258,
+            10.0425,
+            10.0961,
+            10.2032,
+            10.1982
+          ],
+          "2003": [
+            10.5762,
+            10.9216,
+            10.9427,
+            10.6324,
+            10.2506,
+            10.4953,
+            10.4434,
+            10.7327,
+            10.9255,
+            11.1704,
+            11.1145,
+            11.2629
+          ],
+          "2004": [
+            10.9308,
+            11.0128,
+            10.9984,
+            11.2535,
+            11.5119,
+            11.379,
+            11.4735,
+            11.3957,
+            11.4858,
+            11.3864,
+            11.3938,
+            11.21
+          ],
+          "2005": [
+            11.2556,
+            11.1502,
+            11.1326,
+            11.1262,
+            10.992,
+            10.834,
+            10.6931,
+            10.6703,
+            10.7791,
+            10.8312,
+            10.6903,
+            10.6201
+          ],
+          "2006": [
+            10.5679,
+            10.4813,
+            10.7061,
+            11.0206,
+            11.0758,
+            11.3864,
+            11.0268,
+            10.8739,
+            10.9722,
+            10.9201,
+            10.8948,
+            10.865
+          ],
+          "2007": [
+            10.9344,
+            10.988,
+            11.125,
+            10.9924,
+            10.8301,
+            10.8338,
+            10.7963,
+            11.0363,
+            11.045,
+            10.8418,
+            10.8658,
+            10.8494
+          ],
+          "2008": [
+            10.9171,
+            10.7794,
+            10.7346,
+            10.5295,
+            10.4542,
+            10.3305,
+            10.239,
+            10.0906,
+            10.5744,
+            12.4738,
+            13.0609,
+            13.3726
+          ],
+          "2009": [
+            13.8492,
+            14.518,
+            14.7393,
+            13.489,
+            13.2167,
+            13.3439,
+            13.3619,
+            13.0015,
+            13.3987,
+            13.2626,
+            13.1305,
+            12.8504
+          ],
+          "2010": [
+            12.807,
+            12.9624,
+            12.6138,
+            12.242,
+            12.6826,
+            12.7234,
+            12.8341,
+            12.7261,
+            12.861,
+            12.4535,
+            12.3251,
+            12.4011
+          ],
+          "2011": [
+            12.1477,
+            12.0726,
+            12.0173,
+            11.7584,
+            11.6479,
+            11.792,
+            11.676,
+            12.1707,
+            12.9291,
+            13.4808,
+            13.6358,
+            13.7516
+          ],
+          "2012": [
+            13.5047,
+            12.8014,
+            12.7561,
+            13.0512,
+            13.5556,
+            13.982,
+            13.3894,
+            13.179,
+            12.9871,
+            12.8728,
+            13.0872,
+            12.867
+          ],
+          "2013": [
+            12.7219,
+            12.7144,
+            12.5745,
+            12.2249,
+            12.2522,
+            12.9361,
+            12.7851,
+            12.8704,
+            13.0925,
+            13.0187,
+            13.0634,
+            13.0098
+          ],
+          "2014": [
+            13.1981,
+            13.2888,
+            13.2154,
+            13.0681,
+            12.9479,
+            12.9832,
+            12.9734,
+            13.149,
+            13.2002,
+            13.4768,
+            13.5819,
+            14.4266
+          ],
+          "2015": [
+            14.6757,
+            14.9167,
+            15.2003,
+            15.2228,
+            15.2555,
+            15.4562,
+            15.8881,
+            16.488,
+            16.8372,
+            16.602,
+            16.6348,
+            17.0019
+          ],
+          "2016": [
+            17.978,
+            18.4837,
+            17.7383,
+            17.4924,
+            18.0405,
+            18.6471,
+            18.5699,
+            18.476,
+            19.1386,
+            18.948,
+            19.9425,
+            20.5137
+          ],
+          "2017": [
+            21.3732,
+            20.3812,
+            19.4067,
+            18.7584,
+            18.7862,
+            18.1901,
+            17.8513,
+            17.8078,
+            17.7991,
+            18.7247,
+            18.977,
+            19.0625
+          ],
+          "2018": [
+            19.0025,
+            18.6282,
+            18.6839,
+            18.3464,
+            19.4894,
+            20.3105,
+            19.1171,
+            18.8089,
+            19.0539,
+            19.0638,
+            20.25,
+            20.1775
+          ],
+          "2019": [
+            19.2154,
+            19.1902,
+            19.2339,
+            19.0231,
+            19.0883,
+            19.2912,
+            19.0669,
+            19.5896,
+            19.6242,
+            19.3701,
+            19.2931,
+            19.1776
+          ],
+          "2020": [
+            18.806,
+            18.7664,
+            21.969,
+            24.2579,
+            23.6004,
+            22.2153,
+            22.4836,
+            22.237,
+            21.645,
+            21.3558,
+            20.5088,
+            19.9821
+          ],
+          "2021": [
+            19.8889,
+            20.2415,
+            20.7895,
+            20.0534,
+            19.9829,
+            20.0366,
+            19.9715,
+            20.0529,
+            20.0078,
+            20.4723,
+            20.7843,
+            20.9873
+          ],
+          "2022": [
+            20.4734,
+            20.4823,
+            20.6061,
+            20.0475,
+            20.1101,
+            19.9743,
+            20.5254,
+            20.142,
+            20.073,
+            20.0146,
+            19.497,
+            19.5825
+          ],
+          "2023": [
+            19.0436,
+            18.6418,
+            18.403,
+            18.0891,
+            17.768,
+            17.293,
+            16.9447,
+            16.966,
+            17.2426,
+            18.0338,
+            17.4537,
+            17.2253
+          ],
+          "2024": [
+            17.0626,
+            17.0996,
+            16.8445,
+            16.7691,
+            16.8011,
+            18.0839,
+            18.0786,
+            19.0568,
+            19.6395,
+            19.6659,
+            20.3185,
+            20.2382
+          ],
+          "2025": [
+            20.5599,
+            20.4612,
+            20.2488,
+            20.1385,
+            19.4585,
+            19.0791,
+            18.6948,
+            18.7204,
+            18.5281,
+            18.4111,
+            18.4425,
+            18.1072
+          ],
+          "2026": [
+            17.7101,
+            17.2285,
+            17.6915,
+            17.4737,
+            17.3201,
+            17.3682,
+            17.4733,
+            17.0963,
+            17.1648
+          ]
+        }
+      },
+      "eur": {
+        "unidad": "pesos por euro",
+        "f": "BX_EUR",
+        "desde": 2000,
+        "antes": "El euro empezó a circular como moneda de cuenta en 1999 y Banxico publica su cotización desde enero de 2000.",
+        "mensual": {
+          "2000": [
+            9.44531,
+            9.12362,
+            8.8537,
+            8.52979,
+            8.84999,
+            9.40775,
+            8.65764,
+            8.22251,
+            8.30672,
+            8.03871,
+            8.17265,
+            8.93904
+          ],
+          "2001": [
+            9.00791,
+            8.97287,
+            8.36739,
+            8.20896,
+            7.78761,
+            7.69476,
+            8.00917,
+            8.43456,
+            8.71763,
+            8.37598,
+            8.24768,
+            8.11501
+          ],
+          "2002": [
+            7.896,
+            7.90136,
+            7.8908,
+            8.44511,
+            9.06331,
+            9.9329,
+            9.57472,
+            9.76818,
+            10.07441,
+            10.01506,
+            10.07243,
+            10.64469
+          ],
+          "2003": [
+            11.91168,
+            11.91168,
+            11.7599,
+            11.46287,
+            12.23053,
+            11.92219,
+            11.89562,
+            12.13016,
+            12.80847,
+            12.84743,
+            13.65426,
+            14.16449
+          ],
+          "2004": [
+            13.68197,
+            13.74058,
+            13.73606,
+            13.67747,
+            13.96823,
+            14.01768,
+            13.73169,
+            13.83097,
+            14.13984,
+            14.69376,
+            14.93212,
+            15.16332
+          ],
+          "2005": [
+            14.61085,
+            14.72173,
+            14.4949,
+            14.32393,
+            13.48126,
+            13.02291,
+            12.86896,
+            13.27043,
+            13.02977,
+            12.91695,
+            12.46876,
+            12.53902
+          ],
+          "2006": [
+            12.67608,
+            12.45623,
+            13.19748,
+            13.96823,
+            14.5003,
+            14.39811,
+            13.9315,
+            13.95783,
+            13.92217,
+            13.7424,
+            14.57389,
+            14.23347
+          ],
+          "2007": [
+            14.34745,
+            14.74984,
+            14.75446,
+            14.91426,
+            14.4535,
+            14.58351,
+            14.96275,
+            15.04673,
+            15.55553,
+            15.47981,
+            15.99759,
+            15.94893
+          ],
+          "2008": [
+            16.03902,
+            16.27734,
+            16.82416,
+            16.36119,
+            16.05065,
+            16.24574,
+            15.65306,
+            15.12468,
+            15.42667,
+            16.16267,
+            16.8956,
+            19.55916
+          ],
+          "2009": [
+            18.33788,
+            19.14467,
+            18.76657,
+            18.35754,
+            18.60586,
+            18.47796,
+            18.72872,
+            19.10426,
+            19.72512,
+            19.39447,
+            19.36451,
+            18.74565
+          ],
+          "2010": [
+            18.08362,
+            17.43536,
+            16.6759,
+            16.30313,
+            15.83976,
+            15.7276,
+            16.48088,
+            16.73865,
+            17.19369,
+            17.15079,
+            16.22751,
+            16.56328
+          ],
+          "2011": [
+            16.66876,
+            16.72229,
+            16.88849,
+            17.10495,
+            16.68158,
+            16.96084,
+            16.89394,
+            17.83175,
+            18.53535,
+            18.44042,
+            18.34628,
+            18.10399
+          ],
+          "2012": [
+            17.09342,
+            17.20773,
+            17.09273,
+            17.19003,
+            17.71494,
+            16.98844,
+            16.32916,
+            16.70262,
+            16.59522,
+            17.00534,
+            16.79967,
+            17.13819
+          ],
+          "2013": [
+            17.25174,
+            16.70664,
+            15.78525,
+            16.01397,
+            16.59334,
+            16.93627,
+            17.05873,
+            17.59077,
+            17.83196,
+            17.71252,
+            17.8494,
+            18.03017
+          ],
+          "2014": [
+            18.03741,
+            18.28286,
+            17.99357,
+            18.14811,
+            17.54998,
+            17.75887,
+            17.69891,
+            17.2241,
+            16.96991,
+            16.85606,
+            17.32338,
+            17.83857
+          ],
+          "2015": [
+            16.91302,
+            16.77386,
+            16.39734,
+            17.21751,
+            16.8612,
+            17.4751,
+            17.76048,
+            18.8086,
+            18.87477,
+            18.26277,
+            17.52103,
+            18.74934
+          ],
+          "2016": [
+            19.69446,
+            19.67144,
+            19.64156,
+            19.66904,
+            20.50522,
+            20.5234,
+            20.99454,
+            21.00183,
+            21.7688,
+            20.6699,
+            21.76284,
+            21.75347
+          ],
+          "2017": [
+            22.46342,
+            21.24343,
+            20.09709,
+            20.64584,
+            21.01324,
+            20.59678,
+            21.057,
+            21.17342,
+            21.46666,
+            22.28612,
+            22.19943,
+            23.60629
+          ],
+          "2018": [
+            23.18234,
+            22.97356,
+            22.56456,
+            22.6966,
+            23.31887,
+            22.98849,
+            21.81827,
+            22.31788,
+            21.74314,
+            22.9976,
+            23.03823,
+            22.46918
+          ],
+          "2019": [
+            21.84893,
+            21.92927,
+            21.7546,
+            21.30725,
+            21.89364,
+            21.87199,
+            21.14859,
+            22.10767,
+            21.51554,
+            21.38397,
+            21.53853,
+            21.17506
+          ],
+          "2020": [
+            20.9465,
+            21.72097,
+            25.76741,
+            26.1967,
+            24.67502,
+            25.92582,
+            26.26069,
+            26.17914,
+            25.96914,
+            24.81775,
+            24.09425,
+            24.3563
+          ],
+          "2021": [
+            24.56504,
+            25.41262,
+            24.0262,
+            24.30038,
+            24.35279,
+            23.60079,
+            23.52982,
+            23.68042,
+            23.82862,
+            23.758,
+            24.1517,
+            23.27632
+          ],
+          "2022": [
+            23.13103,
+            22.935,
+            22.14424,
+            21.49127,
+            21.09523,
+            21.04756,
+            20.73919,
+            20.20874,
+            19.68663,
+            19.60346,
+            19.97743,
+            20.76928
+          ],
+          "2023": [
+            20.40902,
+            19.45558,
+            19.60029,
+            19.86294,
+            18.91365,
+            18.69773,
+            18.44683,
+            18.35833,
+            18.43134,
+            19.12081,
+            18.95221,
+            18.69296
+          ],
+          "2024": [
+            18.64106,
+            18.4659,
+            17.88134,
+            18.27541,
+            18.47697,
+            19.55799,
+            20.12195,
+            21.76036,
+            21.92663,
+            21.77808,
+            21.46732,
+            21.52307
+          ],
+          "2025": [
+            21.42077,
+            21.33037,
+            22.07304,
+            22.28129,
+            22.00288,
+            22.09888,
+            21.51424,
+            21.81162,
+            21.54269,
+            21.42338,
+            21.24036,
+            21.13791
+          ],
+          "2026": [
+            20.62042,
+            20.33083,
+            20.7344,
+            20.54134,
+            20.24977,
+            19.96741,
+            19.93159,
+            19.76206,
+            20.5174
+          ]
+        }
+      },
+      "hoy": {
+        "fecha": "9 de octubre de 2026",
+        "iso": "2026-10-09",
+        "usd": 18.4163,
+        "eur": 20.6419,
+        "f": "BX_DIARIO",
+        "inpc_mes": "septiembre de 2026"
+      },
+      "proyeccion": {
+        "f": "CGPE2027_MACRO",
+        "observado": 2025,
+        "inflacion_dic": {
+          "2025": 3.7,
+          "2026": 3.5,
+          "2027": 3.0,
+          "2028": 3.0,
+          "2029": 3.0,
+          "2030": 3.0,
+          "2031": 3.0,
+          "2032": 3.0
+        },
+        "inflacion_prom": {
+          "2025": 3.8,
+          "2026": 3.8,
+          "2027": 3.2,
+          "2028": 3.0,
+          "2029": 3.0,
+          "2030": 3.0,
+          "2031": 3.0,
+          "2032": 3.0
+        },
+        "usd_prom": {
+          "2025": 19.2,
+          "2026": 17.6,
+          "2027": 17.9,
+          "2028": 18.1,
+          "2029": 18.2,
+          "2030": 18.4,
+          "2031": 18.6,
+          "2032": 18.6
+        },
+        "usd_fin": {
+          "2025": 18.0,
+          "2026": 17.8,
+          "2027": 18.0,
+          "2028": 18.1,
+          "2029": 18.3,
+          "2030": 18.5,
+          "2031": 18.6,
+          "2032": 18.8
+        },
+        "eur": "Ni Hacienda ni Banxico publican una proyección del peso frente al euro: los Criterios solo proyectan el tipo de cambio con el dólar. Ninguna ley los obliga a proyectar el euro, así que aquí no se proyecta.",
+        "aviso": "Es una proyección, no un dato: Hacienda la usa para estimar ingresos y gasto, y la revisa cada año. Hacienda ya la revisó para 2026: aprobó 3.0 % de inflación de diciembre a diciembre en el Paquete Económico 2026 y ahora estima 3.5 % (Criterios 2027, p. 67 del PDF)."
+      }
+    }
   }
 };
 
