@@ -20,9 +20,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010m">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010m">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010m">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010n">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010n">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010n">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010n">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -50,7 +51,7 @@
 
     <div class="nav-right-container">
       <div class="nav-right-actions">
-        <a class="nav-action-btn nav-feedback-btn" href="index.html?ir=reporta" title="Ayúdanos a fiscalizar: comparte lo que viste y reporta anomalías presupuestales">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal o un tema para investigar">
           <span>📢</span>
           <span>Cuéntanos lo que viste</span>
         </a>
@@ -66,11 +67,80 @@
       <div class="nav-movil-ayuda">
         <p class="nav-movil-ayuda-tit">¿Viste algo raro con el dinero público?</p>
         <p class="nav-movil-ayuda-txt">Cuéntanos qué, dónde y cuándo. Te ayudamos a ordenarlo y a llevarlo al canal oficial que corresponde.</p>
-        <a class="nav-movil-ayuda-btn" href="index.html?ir=reporta">📢 Cuéntanos lo que viste</a>
+        <a class="nav-movil-ayuda-btn" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a>
       </div>
     </div>
     </div>
   </nav>
+  <div class="pt-velo" id="ptVelo" hidden></div>
+  <aside class="pt-cajon" id="ptCajon" role="dialog" aria-modal="true" aria-labelledby="ptTit" hidden>
+    <div class="pt-cab">
+      <div>
+        <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
+        <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
+        <p class="pt-sub">Elige una ruta. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+      </div>
+      <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div class="pt-cuerpo">
+      <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
+        <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
+            <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
+            <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
+            <div class="sv-campo"><label for="ptRepCuando">Cuándo</label><input id="ptRepCuando" type="text" maxlength="80"><small>La fecha o el periodo: los fondos se fiscalizan por ejercicio anual.</small></div>
+            <div class="sv-campo"><label for="ptRepVio">Qué viste <span class="sv-req">obligatorio</span></label><textarea id="ptRepVio" rows="4" maxlength="1500" required></textarea><small>La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</small></div>
+            <div class="sv-campo"><label for="ptRepDinero">Con qué dinero</label><input id="ptRepDinero" type="text" maxlength="160"><small>Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</small></div>
+            <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
+            <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+          <p class="pt-nota">Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: <a href="participa.html#garantias">las seis puertas de denuncia</a> te dicen cuál toca, si admite anonimato y qué tener a la mano.</p>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="error">
+        <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+            <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
+            <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
+            <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
+        <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+            <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
+            <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
+            <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
+            <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
+            <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad.html#erratas">Fe de erratas</a> · <a href="participa.html#garantias">Canales oficiales de denuncia</a></p>
+    </div>
+  </aside>
 
   <main class="apartado" id="contenido">
     <header class="apartado-cab">
@@ -87,7 +157,7 @@
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
           <a class="apartado-pestana" role="tab" id="pestana-agora" href="#agora" aria-controls="agora" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💬</span><span class="apartado-pestana-tx"><b>Ágora cívica</b><small>Diálogos y argumentos con fuentes</small></span></a>
           <a class="apartado-pestana" role="tab" id="pestana-garantias" href="#garantias" aria-controls="garantias" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🛡️</span><span class="apartado-pestana-tx"><b>Garantías cívicas</b><small>Privacidad y canales de denuncia</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-comunidad" href="#comunidad" aria-controls="comunidad" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🤝</span><span class="apartado-pestana-tx"><b>Comunidad</b><small>Propón temas, señala errores, comparte</small></span></a>
+          <a class="apartado-pestana" role="tab" id="pestana-comunidad" href="#comunidad" aria-controls="comunidad" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🤝</span><span class="apartado-pestana-tx"><b>Comunidad</b><small>Cuéntanos lo que viste, corrígenos, comparte</small></span></a>
           <a class="apartado-pestana" role="tab" id="pestana-servicios" href="#servicios" aria-controls="servicios" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">🔎</span><span class="apartado-pestana-tx"><b>Servicios</b><small>Investigación a la medida y Pase del Auditor</small></span></a>
       </nav>
       <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
@@ -256,71 +326,10 @@
         <div class="apartado-bloque">
         <div id="comOrientacion"></div>
         <div class="fj-bloque" id="bloqueAportar">
-        <div class="fj-bloque-head"><span class="fj-kicker">Función 1</span><h3>Ayúdanos a fiscalizar: comparte lo que viste</h3></div>
+        <div class="fj-bloque-head"><span class="fj-kicker">Función 1</span><h3>Cuéntanos lo que viste</h3></div>
 
-      <p class="fj-bloque-sub" style="margin-top:0;">
-        No necesitas ser contador ni abogado. Necesitas haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. Lo que registres aquí queda guardado en tu navegador y podrás copiarlo con un botón para presentarlo, ya redactado, en cualquiera de los canales oficiales ante la ASF, la Secretaría Anticorrupción y Buen Gobierno o su contraloría local.
-        <strong style="display:block; margin-top:6px; color:var(--gold-bright);">No compartas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</strong>
-      </p>
-
-      <div class="com-util">
-        <div class="com-util-tit">Qué vuelve útil un reporte</div>
-        <ul class="com-util-lista">
-          <li><strong>Qué.</strong> La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</li>
-          <li><strong>Dónde.</strong> Municipio, colonia y referencia física. Una dirección vale más que un adjetivo.</li>
-          <li><strong>Cuándo.</strong> La fecha o el periodo. Los fondos se fiscalizan por ejercicio anual.</li>
-          <li><strong>Con qué dinero.</strong> Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</li>
-          <li><strong>Con qué prueba.</strong> Una foto con fecha, un número de contrato, una factura, un acta de entrega.</li>
-        </ul>
-      </div>
-
-      <div class="com-card-panel">
-        <form id="comunidadForm">
-          <div class="com-form-row">
-            <label for="comNombre">Nombre o Pseudónimo (Opcional)</label>
-            <input type="text" id="comNombre" maxlength="60" placeholder="Ej. Ciudadano de Guadalajara">
-          </div>
-
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
-            <div class="com-form-row">
-              <label for="comTipo">Tipo de Participación</label>
-              <select id="comTipo">
-                <option value="Obra pública">Una obra que no cuadra</option>
-                <option value="Contrato o compra">Un contrato o una compra sospechosa</option>
-                <option value="Programa social">Uso electoral de un programa social</option>
-                <option value="Trámite o cobro">Un cobro o trámite indebido</option>
-                <option value="Corrección de dato">Corrección a un dato de esta plataforma</option>
-                <option value="Duda presupuestal">Duda sobre gasto o presupuesto</option>
-                <option value="Sugerencia">Sugerencia para la plataforma</option>
-              </select>
-            </div>
-            <div class="com-form-row">
-              <label for="comEstadoSel">Entidad Relacionada</label>
-              <select id="comEstadoSel">
-                <option value="Nacional">Nacional / Federal</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="com-form-row">
-            <label for="comMensaje">
-              <span>Tu mensaje u observación cívica</span>
-              <span id="comCharCount" style="color:var(--text-dim);">0 / 1000</span>
-            </label>
-            <textarea id="comMensaje" maxlength="1000" placeholder="Describe la obra, el fondo (Ramo 33, FORTAMUN) o el aspecto presupuestario que deseas señalar..." required></textarea>
-          </div>
-
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:14px;">
-            <button type="submit" class="calc-btn" style="padding:10px 22px;">💾 Guardar en este navegador</button>
-            <span id="comStatusMsg" style="font-family:var(--font-mono); font-size:11px;"></span>
-          </div>
-        </form>
-
-        <div class="com-obs-wrap">
-          <h4 class="com-obs-h4">Observaciones que has registrado en este navegador</h4>
-          <div id="comentariosListContainer"></div>
-        </div>
-      </div>
+        <p class="fj-bloque-sub" style="margin-top:0;">No necesitas ser contador ni abogado. Necesitas haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. El botón <b>«📢 Cuéntanos lo que viste»</b>, arriba en cada página, abre las tres rutas: algo raro con el dinero público, un dato mal en esta plataforma o un tema para investigar. El texto se arma en tu navegador, ya redactado, para que lo copies y lo presentes en el canal oficial que corresponde (abajo).</p>
+        <p class="pt-accesos"><a class="sz-btn sz-btn-of" href="comunidad.html#reporta" data-puerta="reporta">📢 Cuéntanos lo que viste</a> <a class="sz-btn" href="comunidad.html">Ver la página Comunidad ➔</a></p>
         </div>
         <div class="fj-bloque" id="bloqueCanales">
         <div class="fj-bloque-head">
@@ -346,20 +355,26 @@
 
       <section class="apartado-seccion apartado-panel" id="comunidad" aria-labelledby="comunidad-tit" role="tabpanel">
         <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="comunidad-tit"><span class="sr-only"></span>🤝 Comunidad</h2>
-          <p class="apartado-seccion-texto">La plataforma mejora con quien la lee: propón qué investigar, corrígenos con un documento y comparte lo que encuentres.</p>
+          <h2 class="apartado-seccion-titulo" id="comunidad-tit"><span class="sr-only"></span>🤝 Comunidad: cuéntanos lo que viste</h2>
+          <p class="apartado-seccion-texto">La plataforma mejora con quien la lee. Son las mismas tres rutas del botón «📢 Cuéntanos lo que viste» de la cabecera, más la fe de erratas y el botón para compartir.</p>
         </div>
         <div class="apartado-rejilla">
-        <a class="apartado-tarjeta" href="comunidad.html#tema">
-          <span class="apartado-tarjeta-icono" aria-hidden="true">💡</span>
-          <span class="apartado-tarjeta-nombre">Propón un tema</span>
-          <span class="apartado-tarjeta-desc">Lo que te gustaría que investigáramos, con los documentos que conozcas.</span>
+        <a class="apartado-tarjeta" href="comunidad.html#reporta">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">🏗️</span>
+          <span class="apartado-tarjeta-nombre">Algo raro con el dinero público</span>
+          <span class="apartado-tarjeta-desc">Una obra que no cuadra, un contrato, un programa usado en campaña, un cobro indebido.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
         <a class="apartado-tarjeta" href="comunidad.html#error">
           <span class="apartado-tarjeta-icono" aria-hidden="true">✏️</span>
-          <span class="apartado-tarjeta-nombre">Señala un error</span>
+          <span class="apartado-tarjeta-nombre">Un dato mal en esta plataforma</span>
           <span class="apartado-tarjeta-desc">Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
+        <a class="apartado-tarjeta" href="comunidad.html#tema">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">💡</span>
+          <span class="apartado-tarjeta-nombre">Un tema para investigar</span>
+          <span class="apartado-tarjeta-desc">Lo que te gustaría que investigáramos, con los documentos que conozcas.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
         <a class="apartado-tarjeta" href="comunidad.html#compartir">
@@ -404,13 +419,13 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <a class="apartado-volver apartado-error" href="comunidad.html?pagina=participa.html#error">✏️ ¿Viste un error?</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010m</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010n</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010m"></script>
-  <script src="assets/auditor/js/audit-database.js?v=20261010m"></script>
-  <script src="assets/auditor/js/participa.js?v=20261010m"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010n"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261010n"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261010n"></script>
+  <script src="assets/auditor/js/participa.js?v=20261010n"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@ import json
 import os
 import re
 
-from apartados import RAIZ, FAVICON, cabecera, esc_attr, sociales, error_pie
+from apartados import RAIZ, FAVICON, cabecera, esc_attr, sociales
 
 # id, imagen, nota de la imagen, texto alternativo, etiqueta, titulo, pregunta
 AUDITORIAS = [
@@ -275,6 +275,7 @@ def pagina(a, sello):
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/auditoria-imagen.css?v={sello}">
 </head>
 <body data-pagina="apartado">
@@ -318,17 +319,17 @@ def pagina(a, sello):
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html#auditoria-en-imagenes">← Volver a Auditoría en imágenes</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      {error_pie}
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
 
   <script src="assets/auditor/js/audit-database.js?v={sello}"></script>{extra}
   <script src="assets/auditor/js/apartados.js?v={sello}"></script>
+  <script src="assets/auditor/js/comunidad.js?v={sello}"></script>
   <script src="assets/auditor/js/auditoria-imagen.js?v={sello}"></script>
 </body>
 </html>
-'''.format(error_pie=error_pie(archivo(id_)), titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
+'''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
            titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))

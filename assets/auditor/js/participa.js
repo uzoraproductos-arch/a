@@ -50,8 +50,8 @@
 
   const COM_RUTAS = [
     { id: 'aportar', n: '1', ico: '🔍', ancla: 'bloqueAportar',
-      tit: 'Ayúdanos a fiscalizar',
-      txt: tuUd('Comparta un dato, una obra de su municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.', 'Comparte un dato, una obra de tu municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.'),
+      tit: 'Cuéntanos lo que viste',
+      txt: 'Algo raro con el dinero público, un dato mal en esta plataforma o un tema que valga la pena investigar: el botón de la cabecera abre las tres rutas.',
       efecto: 'Alimenta el trabajo de esta plataforma',
       aviso: 'No es una denuncia legal', tono: 'gold' },
     { id: 'denunciar', n: '2', ico: '🏛️', ancla: 'bloqueCanales',
@@ -105,8 +105,8 @@
           tuUd('<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si su esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>', '<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si tu esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>') +
           '<div class="com-destino-cols">' +
             '<div class="com-destino-col" data-tono="gold">' +
-              '<div class="com-destino-k">El formulario «Ayúdanos a fiscalizar»</div>' +
-              tuUd('<p>Se guarda <strong>únicamente en su propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borra los datos del sitio se pierde. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial con el botón de copiar.</p>', '<p>Se guarda <strong>únicamente en tu propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borras los datos del sitio se pierde. Sirve para ordenar lo que quieres reportar y para llevártelo a un canal oficial con el botón de copiar.</p>') +
+              '<div class="com-destino-k">«Cuéntanos lo que viste»</div>' +
+              tuUd('<p><strong>No se guarda en ningún lado</strong>: el texto se arma en su navegador, ya redactado, para que lo copie o lo descargue; el envío se activa con el lanzamiento. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial.</p>', '<p><strong>No se guarda en ningún lado</strong>: el texto se arma en tu navegador, ya redactado, para que lo copies o lo descargues; el envío se activa con el lanzamiento. Sirve para ordenar lo que quieres reportar y para llevártelo a un canal oficial.</p>') +
             '</div>' +
             '<div class="com-destino-col" data-tono="emerald">' +
               '<div class="com-destino-k">Un canal oficial</div>' +

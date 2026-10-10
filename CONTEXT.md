@@ -671,6 +671,49 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Una sola puerta: «Cuéntanos lo que viste» (10-10-2026, sello 20261010n).**
+El autor notó que «📢 Cuéntanos lo que viste» (cabecera) y «✏️ ¿Viste un
+error?» (pie) hacían casi lo mismo. Le gustaba el cajón que se despliega del
+primero y la página Comunidad del segundo. Se fusionaron:
+- **Hay un solo botón: «📢 Cuéntanos lo que viste».** Está en la cabecera
+  de todas las páginas, en el menú de celular y en el botón flotante de la
+  portada. Abre el mismo cajón lateral en todas, incluida `index.html`.
+  Antes, en las páginas generadas, mandaba a la portada.
+- **El cajón tiene tres rutas que se despliegan** (`<details>`; abrir una
+  cierra las otras):
+  1. **Algo raro con el dinero público.** Pide qué fue, dónde, cuándo, qué
+     viste, con qué dinero y con qué prueba. Aclara que no es denuncia y
+     enlaza las seis puertas oficiales (`participa.html#garantias`).
+  2. **Un dato mal en esta plataforma.** La página ya va escrita.
+  3. **Un tema que deberíamos investigar.**
+- **Fuente única.** `formas(pre)` en `apartados.py` arma los tres
+  formularios. Los usan el cajón (`puerta()`, con id `pt…`) y
+  `comunidad.html` (id `cm…`), que es la versión en página: `#reporta`,
+  `#error`, `#tema`, `#compartir` y `#erratas`.
+  - `cabecera()` incluye el cajón en cada página generada.
+  - `poner_puerta()` lo copia en `index.html` entre
+    `<!-- puerta:inicio -->` y `<!-- puerta:fin -->`.
+- **JavaScript.** `comunidad.js` abre y cierra el cajón (`window.Puerta`) y
+  ahora se carga en todas las páginas. Todo `[data-puerta]` lo abre, y su
+  valor (`reporta`, `error`, `tema`) despliega esa ruta. Sin JavaScript, el
+  enlace lleva a `comunidad.html`. En la portada,
+  `openAyudanosFiscalizar()` del motor llama a `window.Puerta`.
+- **CSS.** Los estilos están en `assets/auditor/css/puerta.css`, cargada en
+  todas las páginas. Los formularios cívicos (`.sv-form`, `.sv-campo`…)
+  pasaron ahí desde `servicios.css`. `sello.py` ya sube el `?v=` de
+  `puerta.css` y `comunidad.js` en `index.html`.
+- **Lo que se retiró:**
+  - el «¿Viste un error?» del pie (`error_pie()`);
+  - el buzón viejo del cajón de la portada, que se guardaba en el
+    navegador y tenía las opciones «Corrección de dato» y «Sugerencia»,
+    duplicadas con Comunidad;
+  - su copia en Participa › Garantías cívicas (Función 1), que ahora es un
+    acceso a la puerta. `participa_html.APORTAR` quedó sin uso.
+  - Los textos de orientación (motor y `participa.js`) dicen ahora que nada
+    se guarda.
+- **Lo que sigue igual:** el envío espera `CANAL_COMUNIDAD`. Los enlaces
+  viejos `comunidad.html?pagina=…#error` siguen funcionando.
+
 **Portada intacta y entrega 7 de Astra: Comunidad (10-10-2026, sello 20261010m).**
 - **«Por dónde empezar» salió de la portada** por decisión del autor:
   «la plataforma queda intacta». Su contenido se reparte así:

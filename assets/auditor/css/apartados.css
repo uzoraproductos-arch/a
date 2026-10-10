@@ -1163,6 +1163,3 @@ a.bib-nav-estante:hover, a.bib-nav-estante[aria-current] { color: #1f3a6e; text-
   .sz-fila .sz-chip { grid-column: 1 / 3; }
   .sz-fila .sz-quitar { grid-row: 1; grid-column: 3; }
 }
-/* «¿Viste un error?» al pie (entrega 7, 10-10-2026): va junto al indice. */
-.apartado-pie .apartado-indice:has(+ .apartado-error) { margin-right: 0; }
-.apartado-error { margin-right: auto; }

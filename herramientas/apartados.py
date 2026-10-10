@@ -234,6 +234,14 @@ def bib_nav(actual):
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(filas))
 
 
+# Funcion 1 de Participa > Garantias civicas. Hasta el 10-10-2026 era una
+# copia del buzon del cajon de la portada (participa_html.APORTAR, que se
+# guardaba en el navegador); con la fusion es un acceso a la puerta unica.
+APORTAR = '''
+        <p class="fj-bloque-sub" style="margin-top:0;">No necesitas ser contador ni abogado. Necesitas haber visto algo y poder decir <em>qué</em>, <em>dónde</em> y <em>cuándo</em>. El botón <b>«📢 Cuéntanos lo que viste»</b>, arriba en cada página, abre las tres rutas: algo raro con el dinero público, un dato mal en esta plataforma o un tema para investigar. El texto se arma en tu navegador, ya redactado, para que lo copies y lo presentes en el canal oficial que corresponde (abajo).</p>
+        <p class="pt-accesos"><a class="sz-btn sz-btn-of" href="comunidad.html#reporta" data-puerta="reporta">📢 Cuéntanos lo que viste</a> <a class="sz-btn" href="comunidad.html">Ver la página Comunidad ➔</a></p>'''
+
+
 APARTADOS = [
     {
         'archivo': 'herramientas.html',
@@ -516,20 +524,21 @@ APARTADOS = [
                 'bloque': ('<div id="comOrientacion"></div>\n'
                            '        <div class="fj-bloque" id="bloqueAportar">\n'
                            '        <div class="fj-bloque-head"><span class="fj-kicker">Función 1</span>'
-                           '<h3>Ayúdanos a fiscalizar: comparte lo que viste</h3></div>\n'
-                           + participa_html.APORTAR + '\n        </div>\n        '
+                           '<h3>Cuéntanos lo que viste</h3></div>\n'
+                           + APORTAR + '\n        </div>\n        '
                            + participa_html.CANALES),
                 'tarjetas': [],
             },
             {
                 # Entrega 7 de la propuesta de Astra (10-10-2026).
                 'id': 'comunidad',
-                'pestana': ('🤝', 'Comunidad', 'Propón temas, señala errores, comparte'),
-                'titulo': '🤝 Comunidad',
-                'texto': 'La plataforma mejora con quien la lee: propón qué investigar, corrígenos con un documento y comparte lo que encuentres.',
+                'pestana': ('🤝', 'Comunidad', 'Cuéntanos lo que viste, corrígenos, comparte'),
+                'titulo': '🤝 Comunidad: cuéntanos lo que viste',
+                'texto': 'La plataforma mejora con quien la lee. Son las mismas tres rutas del botón «📢 Cuéntanos lo que viste» de la cabecera, más la fe de erratas y el botón para compartir.',
                 'tarjetas': [
-                    ('💡', 'Propón un tema', 'Lo que te gustaría que investigáramos, con los documentos que conozcas.', 'comunidad.html#tema', None, None),
-                    ('✏️', 'Señala un error', 'Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.', 'comunidad.html#error', None, None),
+                    ('🏗️', 'Algo raro con el dinero público', 'Una obra que no cuadra, un contrato, un programa usado en campaña, un cobro indebido.', 'comunidad.html#reporta', None, None),
+                    ('✏️', 'Un dato mal en esta plataforma', 'Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.', 'comunidad.html#error', None, None),
+                    ('💡', 'Un tema para investigar', 'Lo que te gustaría que investigáramos, con los documentos que conozcas.', 'comunidad.html#tema', None, None),
                     ('📣', 'Comparte el Estado de Cuenta', 'Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.', 'comunidad.html#compartir', None, None),
                     ('📋', 'Fe de erratas', 'Cada corrección que hemos hecho: qué estaba mal y qué cambió.', 'comunidad.html#erratas', None, None),
                 ],
@@ -1042,30 +1051,126 @@ def _form_cm(id_, asunto, campos, boton):
         '        <div class="sv-resumen cm-resumen" hidden></div>'])
 
 
-def comunidad():
+def formas(pre):
+    """Los tres formularios de «Cuéntanos lo que viste» (fusion del 10-10-2026:
+    el cajon de la cabecera y la pagina comunidad.html usan los mismos). pre
+    distingue los id: 'cm' en la pagina, 'pt' en el cajon de cada pagina."""
     ob = ' <span class="sv-req">obligatorio</span>'
     privado = ('          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. '
                'Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>')
-    firma = [_campo_cm('%sFirma', 'Firma o seudónimo', '<input id="%sFirma" type="text" maxlength="80">'),
-             _campo_cm('%sCorreo', 'Correo (opcional)', '<input id="%sCorreo" type="email" maxlength="160">')]
-    def f(pre, lista):
-        return [x.replace('%s', pre) for x in lista]
-    tema = _form_cm('cmTema', 'Propuesta de tema', [privado] + [
-        _campo_cm('cmTemaQue', 'Tema' + ob, '<input id="cmTemaQue" type="text" maxlength="160" required>',
-                  'Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.'),
-        _campo_cm('cmTemaPor', 'Por qué importa' + ob, '<textarea id="cmTemaPor" rows="3" maxlength="1200" required></textarea>'),
-        _campo_cm('cmTemaDonde', 'Entidad o municipio', '<input id="cmTemaDonde" type="text" maxlength="120">'),
-        _campo_cm('cmTemaDocs', 'Documentos oficiales que conozcas', '<textarea id="cmTemaDocs" rows="2" maxlength="800"></textarea>',
-                  'Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.'),
-        ] + f('cmTema', firma), 'Revisar mi propuesta')
-    error = _form_cm('cmError', 'Señalamiento de error', [privado] + [
-        _campo_cm('cmErrPagina', 'Página' + ob, '<input id="cmErrPagina" type="text" maxlength="200" required>',
-                  'Si llegaste desde «¿Viste un error?», ya está escrita.'),
-        _campo_cm('cmErrDato', 'Qué dato está mal' + ob, '<textarea id="cmErrDato" rows="2" maxlength="800" required></textarea>'),
-        _campo_cm('cmErrDice', 'Qué dice el documento oficial' + ob, '<textarea id="cmErrDice" rows="2" maxlength="800" required></textarea>'),
-        _campo_cm('cmErrFuente', 'Enlace al documento' + ob, '<input id="cmErrFuente" type="url" maxlength="400" required placeholder="https://">',
-                  'Sin documento no podemos corregir: es la misma regla que seguimos nosotros.'),
-        ] + f('cmErr', firma), 'Revisar mi señalamiento')
+
+    def c(sufijo, et, ctl, ayuda=''):
+        i = pre + sufijo
+        return _campo_cm(i, et, ctl.replace('{id}', i), ayuda)
+
+    def firma(p):
+        return [c(p + 'Firma', 'Firma o seudónimo', '<input id="{id}" type="text" maxlength="80">'),
+                c(p + 'Correo', 'Correo (opcional)', '<input id="{id}" type="email" maxlength="160">')]
+    reporte = _form_cm(pre + 'Reporte', 'Reporte ciudadano', [privado,
+        '          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>',
+        c('RepQue', 'Qué fue' + ob, '<select id="{id}" required><option value="">Elige una opción</option>'
+          '<option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option>'
+          '<option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option>'
+          '<option>Una duda sobre gasto o presupuesto</option></select>'),
+        c('RepDonde', 'Dónde' + ob, '<input id="{id}" type="text" maxlength="200" required>',
+          'Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.'),
+        c('RepCuando', 'Cuándo', '<input id="{id}" type="text" maxlength="80">',
+          'La fecha o el periodo: los fondos se fiscalizan por ejercicio anual.'),
+        c('RepVio', 'Qué viste' + ob, '<textarea id="{id}" rows="4" maxlength="1500" required></textarea>',
+          'La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.'),
+        c('RepDinero', 'Con qué dinero', '<input id="{id}" type="text" maxlength="160">',
+          'Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.'),
+        c('RepPrueba', 'Con qué prueba', '<input id="{id}" type="text" maxlength="300">',
+          'Una foto con fecha, un número de contrato, una factura, un acta de entrega.'),
+        ] + firma('Rep'), 'Revisar mi reporte')
+    tema = _form_cm(pre + 'Tema', 'Propuesta de tema', [privado,
+        c('TemaQue', 'Tema' + ob, '<input id="{id}" type="text" maxlength="160" required>',
+          'Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.'),
+        c('TemaPor', 'Por qué importa' + ob, '<textarea id="{id}" rows="3" maxlength="1200" required></textarea>'),
+        c('TemaDonde', 'Entidad o municipio', '<input id="{id}" type="text" maxlength="120">'),
+        c('TemaDocs', 'Documentos oficiales que conozcas', '<textarea id="{id}" rows="2" maxlength="800"></textarea>',
+          'Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.'),
+        ] + firma('Tema'), 'Revisar mi propuesta')
+    error = _form_cm(pre + 'Error', 'Señalamiento de error', [privado,
+        c('ErrPagina', 'Página' + ob, '<input id="{id}" class="cm-pagina" type="text" maxlength="200" required>',
+          'Si abriste esto desde una página, ya está escrita.'),
+        c('ErrDato', 'Qué dato está mal' + ob, '<textarea id="{id}" rows="2" maxlength="800" required></textarea>'),
+        c('ErrDice', 'Qué dice el documento oficial' + ob, '<textarea id="{id}" rows="2" maxlength="800" required></textarea>'),
+        c('ErrFuente', 'Enlace al documento' + ob, '<input id="{id}" type="url" maxlength="400" required placeholder="https://">',
+          'Sin documento no podemos corregir: es la misma regla que seguimos nosotros.'),
+        ] + firma('Err'), 'Revisar mi señalamiento')
+    return {'reporta': reporte, 'tema': tema, 'error': error}
+
+
+# Las tres rutas de «Cuéntanos lo que viste» (id, icono, titulo, para que).
+RUTAS = [
+    ('reporta', '🏗️', 'Algo raro con el dinero público',
+     'Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.'),
+    ('error', '✏️', 'Un dato mal en esta plataforma',
+     'Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.'),
+    ('tema', '💡', 'Un tema que deberíamos investigar',
+     'Lo que te gustaría que revisáramos, con los documentos que conozcas.'),
+]
+DENUNCIA = ('Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: '
+            '<a href="participa.html#garantias">las seis puertas de denuncia</a> te dicen cuál toca, si admite anonimato '
+            'y qué tener a la mano.')
+
+RUTA_HTML = '''      <details class="pt-ruta" name="pt-ruta" data-ruta="{id}">
+        <summary><span class="pt-ico" aria-hidden="true">{ico}</span><span class="pt-sum"><b>{tit}</b><span>{que}</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        {form}{extra}
+        </div>
+      </details>'''
+
+PUERTA_HTML = '''  <div class="pt-velo" id="ptVelo" hidden></div>
+  <aside class="pt-cajon" id="ptCajon" role="dialog" aria-modal="true" aria-labelledby="ptTit" hidden>
+    <div class="pt-cab">
+      <div>
+        <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
+        <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
+        <p class="pt-sub">Elige una ruta. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+      </div>
+      <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div class="pt-cuerpo">
+{rutas}
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad.html#erratas">Fe de erratas</a> · <a href="participa.html#garantias">Canales oficiales de denuncia</a></p>
+    </div>
+  </aside>'''
+
+
+def puerta():
+    """«Cuéntanos lo que viste»: la unica puerta para escribirnos (fusion del
+    10-10-2026 con «¿Viste un error?», que estaba al pie). El boton de la
+    cabecera abre este cajon en cada pagina; sin JavaScript lleva a
+    comunidad.html. Lo abre y lo cierra comunidad.js. index.html recibe la
+    misma copia entre marcas (poner_puerta)."""
+    f = formas('pt')
+    rutas = [RUTA_HTML.format(id=id_, ico=ico, tit=tit, que=que, form=f[id_],
+                              extra=('\n          <p class="pt-nota">%s</p>' % DENUNCIA) if id_ == 'reporta' else '')
+             for id_, ico, tit, que in RUTAS]
+    return PUERTA_HTML.format(rutas='\n'.join(rutas))
+
+
+def poner_puerta():
+    """Copia el cajon de «Cuéntanos lo que viste» en index.html, entre
+    <!-- puerta:inicio --> y <!-- puerta:fin -->. index.html se edita en
+    binario para no tocar sus CRLF ni sus CR sueltos."""
+    ruta = os.path.join(RAIZ, 'index.html')
+    d = open(ruta, 'rb').read().decode('utf-8')
+    m = re.search(r'(  <!-- puerta:inicio -->)(.*?)(  <!-- puerta:fin -->)', d, re.S)
+    if not m:
+        print('ERROR: index.html no tiene las marcas de la puerta')
+        return 1
+    bloque = puerta().replace('\r\n', '\n').replace('\n', '\r\n')
+    d = d[:m.start()] + m.group(1) + '\r\n' + bloque + '\r\n' + m.group(3) + d[m.end():]
+    open(ruta, 'wb').write(d.encode('utf-8'))
+    return 0
+
+
+def comunidad():
+    f = formas('cm')
+    reporte, tema, error = f['reporta'], f['tema'], f['error']
     erratas = '\n'.join(
         '            <li class="cm-errata"><span class="cm-errata-fecha">%s</span><b>%s</b>'
         '<span><span class="cm-errata-et">Estaba mal:</span> %s</span><span><span class="cm-errata-et">Qué hicimos:</span> %s</span>%s</li>'
@@ -1082,19 +1187,20 @@ def comunidad():
     return {
         'archivo': 'comunidad.html', 'menu': 'Comunidad', 'menu_archivo': 'participa.html',
         'padre': ('participa.html#comunidad', 'Participa'),
-        'icono': '🤝', 'titulo': 'Comunidad', 'lema': 'Propón, corrige y comparte',
-        'entrada': ('La plataforma mejora con quien la lee. Propón un tema para investigar, señala un dato que esté mal (con su documento) '
-                    'y comparte el Estado de Cuenta. Aquí también está la fe de erratas: cada corrección que hemos hecho, '
-                    'qué estaba mal y qué cambió.'),
+        'icono': '🤝', 'titulo': 'Comunidad', 'lema': 'Cuéntanos lo que viste',
+        'entrada': ('La plataforma mejora con quien la lee. Repórtanos algo raro con el dinero público, señala un dato que esté mal '
+                    '(con su documento) o propón un tema para investigar. Es lo mismo que abre el botón «📢 Cuéntanos lo que viste» '
+                    'de la cabecera, aquí en su página, junto con la fe de erratas: cada corrección que hemos hecho, qué estaba mal y qué cambió.'),
         'estilos': ['servicios.css'],
-        'scripts': ['comunidad.js'],
-        'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> El envío de propuestas y señalamientos se activa '
-                  'con el lanzamiento. Ya puedes armarlos, copiarlos o descargarlos. Compartir y la fe de erratas ya funcionan.</p>'),
+        'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> El envío se activa '
+                  'con el lanzamiento. Ya puedes armar tu reporte, copiarlo o descargarlo. Compartir y la fe de erratas ya funcionan.</p>'),
         'secciones': [
-            {'id': 'tema', 'titulo': '💡 Propón un tema', 'texto': 'Lo que te gustaría que investigáramos. No compromete a nadie: lo revisamos y, si hay documentos, entra a la lista.',
-             'tarjetas': [], 'bloque': tema},
-            {'id': 'error', 'titulo': '✏️ Señala un error', 'texto': 'Si un dato no coincide con su documento oficial, dínoslo. Si tienes razón, se corrige y entra a la fe de erratas.',
+            {'id': 'reporta', 'titulo': '🏗️ Algo raro con el dinero público', 'texto': RUTAS[0][3] + ' Dinos qué, dónde y cuándo.',
+             'tarjetas': [], 'bloque': reporte + '\n        <p class="pt-nota">%s</p>' % DENUNCIA},
+            {'id': 'error', 'titulo': '✏️ Un dato mal en esta plataforma', 'texto': 'Si un dato no coincide con su documento oficial, dínoslo. Si tienes razón, se corrige y entra a la fe de erratas.',
              'tarjetas': [], 'bloque': error},
+            {'id': 'tema', 'titulo': '💡 Un tema que deberíamos investigar', 'texto': 'Lo que te gustaría que investigáramos. No compromete a nadie: lo revisamos y, si hay documentos, entra a la lista.',
+             'tarjetas': [], 'bloque': tema},
             {'id': 'compartir', 'titulo': '📣 Comparte el Estado de Cuenta', 'texto': 'Un enlace basta.', 'tarjetas': [], 'bloque': compartir},
             {'id': 'erratas', 'titulo': '📋 Fe de erratas', 'texto': 'Las correcciones que hemos hecho, de la más reciente a la más antigua.',
              'tarjetas': [], 'bloque': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas},
@@ -1216,14 +1322,6 @@ def esc_attr(s):
     return html.escape(s, quote=True)
 
 
-def error_pie(archivo):
-    """«¿Viste un error?» al pie de cada pagina generada (entrega 7): lleva
-    al formulario de comunidad.html con la pagina ya escrita."""
-    if archivo == 'comunidad.html':
-        return ''
-    return '<a class="apartado-volver apartado-error" href="comunidad.html?pagina=%s#error">✏️ ¿Viste un error?</a>' % archivo
-
-
 def cabecera(actual, sello):
     items = []
     for a in APARTADOS:
@@ -1251,7 +1349,7 @@ def cabecera(actual, sello):
 
     <div class="nav-right-container">
       <div class="nav-right-actions">
-        <a class="nav-action-btn nav-feedback-btn" href="index.html?ir=reporta" title="Ayúdanos a fiscalizar: comparte lo que viste y reporta anomalías presupuestales">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal o un tema para investigar">
           <span>📢</span>
           <span>Cuéntanos lo que viste</span>
         </a>
@@ -1267,11 +1365,12 @@ def cabecera(actual, sello):
       <div class="nav-movil-ayuda">
         <p class="nav-movil-ayuda-tit">¿Viste algo raro con el dinero público?</p>
         <p class="nav-movil-ayuda-txt">Cuéntanos qué, dónde y cuándo. Te ayudamos a ordenarlo y a llevarlo al canal oficial que corresponde.</p>
-        <a class="nav-movil-ayuda-btn" href="index.html?ir=reporta">📢 Cuéntanos lo que viste</a>
+        <a class="nav-movil-ayuda-btn" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a>
       </div>
     </div>
     </div>
-  </nav>''' % '\n'.join(items)
+  </nav>
+%s''' % ('\n'.join(items), puerta())
 
 
 def tarjeta(t, modulo=False, auto=False):
@@ -1403,7 +1502,8 @@ def pagina(a, sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">{estilos}{redirige}
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">{estilos}{redirige}
 </head>
 <body data-pagina="apartado">
 {cabecera}
@@ -1430,16 +1530,16 @@ def pagina(a, sello):
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      {error_pie}
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v={sello}"></script>{scripts}
+  <script src="assets/auditor/js/apartados.js?v={sello}"></script>
+  <script src="assets/auditor/js/comunidad.js?v={sello}"></script>{scripts}
 </body>
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
-           sociales=sociales(a['archivo'], titulo_doc, descripcion), error_pie=error_pie(a['archivo']),
+           sociales=sociales(a['archivo'], titulo_doc, descripcion),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
@@ -1600,6 +1700,8 @@ def generar(sello=None):
         texto = redireccion(*datos).replace('\n', '\r\n')
         open(os.path.join(RAIZ, archivo), 'wb').write(texto.encode('utf-8'))
     print('apartados: %d páginas y %d herramientas generadas con el sello %s' % (len(APARTADOS), len(HERRAMIENTAS), sello))
+    if poner_puerta():
+        return 1
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias
     import expedientes

@@ -15,7 +15,7 @@ Lo llama apartados.generar(), asi que sello.py la regenera con el sello.
 """
 import os
 
-from apartados import RAIZ, FAVICON, cabecera, sociales, error_pie
+from apartados import RAIZ, FAVICON, cabecera, sociales
 
 ARCHIVO = 'expedientes.html'
 
@@ -62,6 +62,7 @@ def pagina(sello):
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/expedientes.css?v={sello}">
 </head>
 <body data-pagina="apartado">
@@ -113,17 +114,17 @@ def pagina(sello):
     <div class="apartado-ancho">
       <a class="apartado-volver" href="herramienta-inspector.html">← Volver al Modo Inspector</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      {error_pie}
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
 
   <script src="assets/auditor/js/audit-database.js?v={sello}"></script>
   <script src="assets/auditor/js/apartados.js?v={sello}"></script>
+  <script src="assets/auditor/js/comunidad.js?v={sello}"></script>
   <script src="assets/auditor/js/expedientes.js?v={sello}"></script>
 </body>
 </html>
-'''.format(error_pie=error_pie(ARCHIVO), sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
+'''.format(sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
            favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
            pasos='\n'.join(pasos), glosa=glosa)
 
