@@ -521,6 +521,18 @@ APARTADOS = [
                            + participa_html.CANALES),
                 'tarjetas': [],
             },
+            {
+                # Entrega 6 de la propuesta de Astra (10-10-2026): el Pase
+                # convive con los Servicios (decision del autor).
+                'id': 'servicios',
+                'pestana': ('🔎', 'Servicios', 'Investigación a la medida y Pase del Auditor'),
+                'titulo': '🔎 Servicios y Pase del Auditor',
+                'texto': 'La consulta es gratuita. Si necesitas ir más a fondo, pide una investigación; si quieres sostener la plataforma, súmate con el Pase. Ambos se abren con el lanzamiento.',
+                'tarjetas': [
+                    ('🔎', 'Solicita una investigación', 'Revisión documental, expediente, seguimiento o capacitación, con la misma regla de la plataforma y su política de independencia.', 'servicios.html', None, None),
+                    ('🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma independiente: plan mensual o anual.', 'pase-del-auditor.html', None, None),
+                ],
+            },
         ],
     },
 ]
@@ -808,6 +820,154 @@ def simulador():
     }
 
 
+# Servicios de investigacion (propuesta de Astra, puntos 9 a 11; entrega 6,
+# 10-10-2026). Decision del autor: el Pase del Auditor convive con los
+# Servicios. El Pase sostiene la consulta gratuita; los Servicios son trabajo
+# a la medida que se cotiza. La pagina queda lista para el lanzamiento: el
+# formulario arma la solicitud en el navegador (servicios.js) y no envia ni
+# guarda nada mientras no haya canal. Para abrirlo, pon aqui la direccion
+# (por ejemplo 'mailto:investigaciones@tu-dominio.mx') y corre sello.py.
+CANAL_SOLICITUD = ''
+
+SERVICIOS = [
+    ('revision', '📄', 'Revisión documental puntual',
+     'Una pregunta delimitada, revisada contra los documentos públicos que la responden.',
+     'Hallazgos, fuentes y límites de la revisión.', 'Periodistas, organizaciones, despachos y empresas.'),
+    ('expediente', '🗂️', 'Expediente de investigación',
+     'Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.',
+     'Cronología, documentos, relaciones verificadas y análisis de inconsistencias.', 'Medios, organizaciones y equipos profesionales.'),
+    ('seguimiento', '📡', 'Seguimiento periódico',
+     'Vigilancia de un tema que cambia: contratos, proveedores, presupuesto o auditorías.',
+     'Reporte de cambios relevantes con su documento.', 'Quien necesita estar al día de un tema de forma recurrente.'),
+    ('capacitacion', '🎓', 'Capacitación',
+     'Talleres para leer el presupuesto y usar las herramientas de la plataforma.',
+     'Taller de interpretación presupuestaria y uso del Modo Inspector.', 'Universidades, organizaciones y equipos de trabajo.'),
+]
+
+PROCESO = [
+    ('📝', 'Solicitud', 'Nos cuentas qué quieres saber con el formulario de abajo.'),
+    ('🎯', 'Alcance', 'Acordamos la pregunta, el periodo, el territorio y lo que queda fuera.'),
+    ('💬', 'Cotización', 'Recibes por escrito el costo y el plazo antes de empezar. Si no te conviene, ahí termina.'),
+    ('🔍', 'Investigación', 'Revisamos documentos públicos con la misma regla de la plataforma.'),
+    ('✅', 'Revisión', 'Una segunda persona coteja cada cifra contra su documento.'),
+    ('📦', 'Entrega', 'Recibes el entregable con sus fuentes, sus etiquetas y sus límites.'),
+    ('🔁', 'Seguimiento', 'Resolvemos dudas y, si lo pediste, seguimos el tema.'),
+]
+
+INDEPENDENCIA = [
+    ('La consulta cívica es gratuita y lo seguirá siendo.',
+     'Ningún dato publicado en la plataforma se esconde detrás de un pago. El Pase del Auditor y los Servicios sostienen el trabajo; no compran acceso a la información pública.'),
+    ('No trabajamos para partidos ni para gobiernos sobre lo que fiscalizamos.',
+     'No aceptamos encargos ni dinero de partidos políticos, candidatos o equipos de campaña, ni de gobiernos o dependencias sobre los temas que la plataforma revisa.'),
+    ('Quien encarga define la pregunta, no la respuesta.',
+     'Si los documentos no sostienen lo que esperabas encontrar, el entregable lo dice. Las conclusiones no se negocian.'),
+    ('Ningún hallazgo se vende para callarlo.',
+     'Lo que la plataforma publica sale de documentos públicos, y se publica o no por razones editoriales, nunca porque alguien pague.'),
+    ('Los conflictos de interés se dicen antes de empezar.',
+     'Si quien solicita es parte del caso (proveedor, persona servidora pública involucrada o contraparte en un litigio), se señala en la cotización. Si compromete la independencia, el encargo se declina.'),
+    ('La misma regla para todo.',
+     'Cada cifra lleva su documento y una de tres etiquetas: oficial, derivado o pendiente. Lo que no se puede sostener se queda pendiente, también en un encargo.'),
+    ('Es investigación documental y análisis de indicios, no un dictamen.',
+     'Revisamos documentos públicos y señalamos inconsistencias. No es un peritaje, no es asesoría legal y no acusa a nadie de un delito: eso le corresponde a las autoridades. Un encargo que requiera dictamen pericial se cotiza aparte, con su alcance, su metodología y su responsable profesional.'),
+    ('Solo fuentes lícitas.',
+     'Documentos públicos y solicitudes de acceso a la información. No obtenemos datos personales ni información reservada por vías indebidas.'),
+    ('Tus datos y tu encargo son confidenciales.',
+     'El entregable es tuyo. No publicamos quién encargó qué sin tu permiso, y lo que la plataforma publique después sale solo de fuentes públicas.'),
+    ('Rendimos cuentas de cómo nos sostenemos.',
+     'Cada año publicaremos cuántos encargos recibimos, por tipo de cliente, y qué parte de los ingresos viene de los Servicios y del Pase.'),
+]
+
+
+def servicios():
+    oferta = '\n'.join(
+        '          <article class="sv-servicio" id="sv-%s">\n'
+        '            <span class="sv-ico" aria-hidden="true">%s</span>\n'
+        '            <h3 class="sv-tit">%s</h3>\n'
+        '            <p class="sv-que">%s</p>\n'
+        '            <dl class="sv-dl"><dt>Entregable</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
+        '          </article>' % s for s in SERVICIOS)
+    pasos = '\n'.join(
+        '          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">%d</span>'
+        '<span class="sv-paso-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % ((n,) + p)
+        for n, p in enumerate(PROCESO, 1))
+    politica = '\n'.join('            <li><b>%s</b> %s</li>' % p for p in INDEPENDENCIA)
+    opciones = '\n'.join('                <option value="%s">%s</option>' % (s[0], s[2]) for s in SERVICIOS)
+    campo = lambda i, et, ctl, ayuda='': (
+        '            <div class="sv-campo"><label for="%s">%s</label>%s%s</div>'
+        % (i, et, ctl, ('<small id="%s-ay">%s</small>' % (i, ayuda)) if ayuda else ''))
+    formulario = '\n'.join([
+        '<form class="sv-form" id="svForm" data-canal="%s" novalidate>' % esc_attr(CANAL_SOLICITUD),
+        '          <p class="sv-privado">🔒 Esta página no guarda ni envía nada por su cuenta: tu solicitud se arma en tu navegador y tú decides cuándo mandarla.</p>',
+        '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
+        campo('svServicio', 'Servicio', '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
+        campo('svTema', 'Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
+              'Por ejemplo: la compra de medicamentos de un hospital, un contrato de obra, el Ramo 33 de tu municipio.'),
+        campo('svPregunta', 'Tu pregunta <span class="sv-req">obligatorio</span>', '<textarea id="svPregunta" name="pregunta" rows="4" maxlength="1500" required aria-describedby="svPregunta-ay"></textarea>',
+              'Entre más concreta, mejor: «¿A quién se le pagó y cuánto?» rinde más que «investiguen todo».'),
+        '            <div class="sv-dos">',
+        campo('svAmbito', 'Ámbito', '<select id="svAmbito" name="ambito"><option>Federal</option><option>Estatal</option><option>Municipal</option><option>Varios</option></select>'),
+        campo('svLugar', 'Entidad o municipio', '<input id="svLugar" name="lugar" type="text" maxlength="120">'),
+        '            </div>',
+        '            <div class="sv-dos">',
+        campo('svPeriodo', 'Periodo', '<input id="svPeriodo" name="periodo" type="text" maxlength="60" placeholder="2019 a 2024">'),
+        campo('svPlazo', 'Para cuándo lo necesitas', '<input id="svPlazo" name="plazo" type="text" maxlength="60">'),
+        '            </div>',
+        campo('svDocs', 'Documentos que ya tienes', '<textarea id="svDocs" name="documentos" rows="2" maxlength="800"></textarea>',
+              'Ligas, números de contrato o de auditoría. Es opcional.'),
+        '          </fieldset>',
+        '          <fieldset class="sv-grupo"><legend>Quién lo solicita</legend>',
+        '            <div class="sv-dos">',
+        campo('svNombre', 'Nombre u organización <span class="sv-req">obligatorio</span>', '<input id="svNombre" name="nombre" type="text" maxlength="120" required autocomplete="name">'),
+        campo('svCorreo', 'Correo para responderte <span class="sv-req">obligatorio</span>', '<input id="svCorreo" name="correo" type="email" maxlength="160" required autocomplete="email">'),
+        '            </div>',
+        campo('svUso', 'Para qué lo usarás', '<select id="svUso" name="uso"><option>Periodismo</option><option>Organización civil</option><option>Empresa o despacho</option><option>Academia</option><option>Uso personal</option><option>Otro</option></select>'),
+        '            <div class="sv-campo" role="radiogroup" aria-labelledby="svParteEt"><span class="sv-et" id="svParteEt">¿Eres parte del caso? <span class="sv-req">obligatorio</span></span>',
+        '              <label class="sv-radio"><input type="radio" name="parte" value="No"> No</label>',
+        '              <label class="sv-radio"><input type="radio" name="parte" value="Sí"> Sí (proveedor, persona servidora pública involucrada o contraparte en un litigio)</label>',
+        '            </div>',
+        '          </fieldset>',
+        '          <label class="sv-check"><input type="checkbox" id="svPolitica" required> Leí la <a href="#independencia">política de independencia</a>.</label>',
+        '          <label class="sv-check"><input type="checkbox" id="svAlcance" required> Entiendo que es investigación documental y análisis de indicios, no un dictamen pericial ni asesoría legal.</label>',
+        '          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi solicitud</button>'
+        '<button type="reset" class="sz-btn">Empezar de nuevo</button></div>',
+        '          <p class="sv-error" id="svError" role="alert" hidden></p>',
+        '        </form>',
+        '        <div class="sv-resumen" id="svResumen" hidden></div>',
+        '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
+    return {
+        'archivo': 'servicios.html', 'menu': 'Servicios', 'menu_archivo': 'participa.html',
+        'padre': ('participa.html#servicios', 'Participa'),
+        'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
+        'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
+                    'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
+                    'su documento y su etiqueta. Convive con el <a href="pase-del-auditor.html">Pase del Auditor</a>: el Pase '
+                    'sostiene la consulta gratuita y los Servicios son trabajo a la medida.'),
+        'estilos': ['servicios.css'],
+        'scripts': ['servicios.js'],
+        'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
+                  'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
+        'secciones': [
+            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': 'Cuatro servicios, de una pregunta puntual a un seguimiento continuo.',
+             'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % oferta},
+            {'id': 'proceso', 'titulo': 'Cómo trabajamos', 'texto': 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
+             'tarjetas': [], 'bloque': '<ol class="sv-pasos">\n%s\n        </ol>' % pasos},
+            {'id': 'precio', 'titulo': 'Cuánto cuesta', 'texto': 'Cada encargo se cotiza por escrito antes de empezar.', 'tarjetas': [],
+             'bloque': ('<div class="sv-precio">\n'
+                        '          <p>Todavía no hay tarifa publicada, y no vamos a inventarla: las primeras saldrán de encargos piloto. '
+                        'Cuando las haya, se publicarán aquí. La cotización se arma con cuatro cosas:</p>\n'
+                        '          <ul class="sv-lista"><li>las horas de investigación y de revisión;</li>'
+                        '<li>el costo de las fuentes (copias certificadas, bases de datos o trámites);</li>'
+                        '<li>la forma de entrega;</li><li>un margen para sostener la plataforma.</li></ul>\n'
+                        '        </div>')},
+            {'id': 'independencia', 'titulo': 'Política de independencia', 'texto': 'Diez compromisos que valen para cada encargo, sin excepción.',
+             'tarjetas': [], 'bloque': '<div class="sv-politica">\n          <ol class="sv-pol">\n%s\n          </ol>\n'
+                                       '          <p class="sv-version">Versión 1 · 10 de octubre de 2026.</p>\n        </div>' % politica},
+            {'id': 'solicitud', 'titulo': 'Solicita una investigación', 'texto': 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.',
+             'tarjetas': [], 'bloque': formulario},
+        ],
+    }
+
+
 # Glosario general en su propia pagina (decision del autor, 09-10-2026):
 # lo pinta assets/auditor/js/glosario.js con los terminos de la base, sin
 # cargar la portada en un marco. Los enlaces a un termino llevan a
@@ -882,6 +1042,7 @@ PASE_HTML = """<div class="pase">
             <li>✓ <b>Radar de alertas de la Auditoría Superior:</b> avisos de nuevas observaciones o contratos auditados en tu localidad.</li>
             <li>✓ <b>100 % cívico e independiente:</b> cero publicidad, cero convenios con partidos políticos.</li>
           </ul>
+          <p>¿Necesitas una investigación a la medida de un caso? Eso va aparte del Pase: mira los <a href="servicios.html">Servicios de investigación</a> y su política de independencia.</p>
         </div>"""
 
 
@@ -1147,6 +1308,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Servicios de investigación, en Participa: cuatro servicios, cómo trabajamos, política de independencia y el formulario «Solicita una investigación». Se abren con el lanzamiento.'),
     ('10-10-2026', 'Simulador «Reparte el presupuesto», desde $0: con ejemplo oficial de 2026 y 2027, comparación de escenarios y descarga. La Calculadora Cívica también arranca en cero.'),
     ('10-10-2026', 'Aprende reúne la Biblioteca hacendaria y las Fuentes del auditor en una sola tarjeta, el Diccionario del Gasto Público; cada estante abre su propia página.'),
     ('10-10-2026', 'Registro de pendientes: cada dato que falta, con su porqué, su responsable y el enlace oficial donde debería estar. Toda etiqueta «pendiente» lleva ahí.'),
@@ -1202,7 +1364,8 @@ def indice():
             enl += [('diccionario.html', 'Diccionario del Gasto Público', 'La obra completa')] + [
                 (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
         if archivo == 'participa.html':
-            enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar')]
+            enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
+                    ('servicios.html', 'Servicios de investigación', 'Solicita una investigación y política de independencia')]
         otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
         ('index.html?ir=poderes', 'Lo que cuestan el Congreso y el Poder Judicial', 'Presupuesto 2026 y Cuenta Pública 2024')]))
@@ -1285,7 +1448,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
