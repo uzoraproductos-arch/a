@@ -79,6 +79,11 @@ PROPIOS = [
      'La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra. Mientras tanto, Salinas se mide con cinco de sus seis años '
      '(1990 a 1994) en % del PIB, y sus sumas en pesos quedan pendientes.',
      PLATAFORMA, 'https://www.cuentapublica.hacienda.gob.mx/', 'Cuenta Pública (Hacienda)', [('radar-tablero.html', 'Radar · El tablero'), ('radar-reloj.html', 'Radar · El reloj'), ('radar-duelo.html', 'Radar · Duelo de administraciones')]),
+    ('asesores-congresos-locales', 'Remuneraciones', 'Remuneración de los asesores y del personal de apoyo de los 32 congresos locales',
+     'Cada congreso debe publicar la remuneración bruta y la neta de todo su personal (Ley General de Transparencia, art. 65, fr. VII). '
+     'La plataforma aún no integra esos tabuladores, así que el estado de cuenta de la diputación local no dice cuánto cobran sus asesores.',
+     PLATAFORMA, 'https://www.plataformadetransparencia.org.mx/', 'Plataforma Nacional de Transparencia',
+     [('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta de la diputación local')]),
     ('tren-maya-ficha', 'Megaobras', 'Ficha pericial del Tren Maya 2024',
      'Se retiró el 10-10-2026 porque sus cifras no se habían cotejado con el Tomo VII de la Cuenta Pública 2024 ni con la ASF. Volverá cuando cada cifra tenga su documento.',
      PLATAFORMA, CP2024, 'Cuenta Pública 2024, Tomo VII (Hacienda)', [('expedientes.html#exp-tren-maya', 'Expediente del Tren Maya')]),
@@ -209,6 +214,11 @@ def recolectar():
                      [('sigue-el-dinero.html#baja', 'Números · A dónde baja')]))
     for p in PROPIOS:
         out.append(e(*p))
+    # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
+    ec = ('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta')
+    for x in out:
+        if x['id'].startswith('neto-diputado_local-') or x['id'] in ('poderes-legislativo-0', 'poderes-judicial-1'):
+            x['aparece'] = x['aparece'] + [ec]
     # Ninguno sin su porque, su responsable y su enlace oficial.
     faltan = [x['id'] for x in out if not (x['porque'] and x['responsable'] and x['enlace'])]
     if faltan:

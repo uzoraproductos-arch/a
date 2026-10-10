@@ -671,6 +671,46 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El estado de cuenta de diputaciones y de la Suprema Corte (10-10-2026, sello 20261010v).**
+A pedido del autor, la herramienta «Expide» de `radar-estado-de-cuenta.html#expide`
+ya no es solo de las administraciones. El paso 1 pregunta «¿De quién?»:
+administración presidencial, diputación federal, diputación local (selector de
+los 32 congresos) o Suprema Corte (ministra o ministro, su ponencia y sus
+asesores). La tarjeta del Radar se llama ahora «🧾 Hoy y los estados de cuenta».
+- **Datos.** `radar_cargos()` en `apartados.py` arma el JSON `#exCargos` (34
+  documentos) solo con `comparador_salarial` y `poderes` de la base: lo que
+  cobra cada cargo (Manual de la Cámara, Anexo 23 del PEF, Manual del PJF y los
+  documentos de 12 congresos), el presupuesto, el ejercicio y la auditoría de
+  su institución (PEF 2026, Cuenta Pública 2025, avance al 2.º trimestre de
+  2026, SCJN al 31 de agosto, CNPLE 2025 y ASF CP 2024). El JS no escribe
+  cifras: solo pinta y firma. Integrantes con su artículo: 500 (CPEUM art. 52)
+  y 9 (art. 94).
+- **Es el estado de cuenta del cargo, no de una persona:** cada cargo cobra
+  con un solo tabulador; no se nombra a nadie.
+- **No se reparte el presupuesto entre el número de personas** (ni entre las
+  500 curules ni entre diputados locales): ese reparto no es un dato.
+- **Dos señales con regla de ley, en vez del semáforo de tercios:** el tope del
+  art. 127, fr. II (neto contra neto con la Presidenta: verde si la cifra
+  completa queda abajo, rojo si lo rebasa, sin color si es parcial y queda
+  abajo) y la obligación de publicar la remuneración bruta y la neta (LGTAIP
+  DOF 20-03-2025, art. 65, fr. VII: verde con las dos, ámbar solo bruta, sin
+  color si no localizamos el documento de 2026). Ambos artículos se cotejaron
+  con el texto vigente de diputados.gob.mx. Resultado: diputación federal 2
+  verdes; Corte 1 verde y 1 sin color (cifra parcial); 7 congresos verdes en
+  transparencia, 5 ámbar (Sinaloa, Tlaxcala, Nayarit, Campeche, Yucatán) y 20
+  sin color.
+- **Ponencia de la Corte:** secretario de estudio y cuenta y asesor (rangos
+  del Manual del PJF). Cuántas plazas tiene cada ponencia sigue pendiente
+  (`poderes-judicial-1`); las cifras de «35 colaboradores» y «$34.2 millones»
+  siguen fuera por no tener documento.
+- **Pendientes:** nuevo `asesores-congresos-locales` (falta de la plataforma).
+  Los `neto-diputado_local-*`, `poderes-legislativo-0` y `poderes-judicial-1`
+  ahora también dicen que aparecen en el estado de cuenta.
+- **Folio y sello:** `AV-DIPFED-…`, `AV-DL<estado>-…` (`AV-DLGTO-…`) y
+  `AV-SCJN-…`; el enlace es `?doc=<id>` (`dip-fed`, `dip-loc-gto`, `scjn`). La
+  verificación recorre las 7 administraciones y los 34 documentos. Los folios
+  de las administraciones no cambiaron.
+
 **«Hoy» y «Expide el estado de cuenta», una sola tarjeta (10-10-2026, sello 20261010u).**
 Por decisión del autor, las dos partes del Radar se fusionaron en la tarjeta
 «🧾 Hoy y el estado de cuenta de cada administración». Es una sola página con

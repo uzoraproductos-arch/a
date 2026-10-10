@@ -2,12 +2,33 @@
    10-10-2026). Lo anima assets/auditor/js/estado-administracion.js. Al
    descargar, el documento se copia en #exPrint y solo eso se imprime. */
 .ex { display: grid; gap: 18px; }
+.ex [hidden] { display: none !important; }
 .ex-ctl { background: #fff; border: 1px solid #dfe5f0; border-radius: 20px; padding: 16px; box-shadow: 0 8px 26px rgba(11, 42, 99, .07); }
 .ex-paso { margin: 0 0 8px; font-weight: 700; color: #0b2a63; }
 .ex-paso:not(:first-child) { margin-top: 16px; }
 .ex-paso b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #0b2a63; color: #fff; font-size: 13px; margin-right: 4px; }
 .ex-btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .ex-pista { margin: 6px 0 0; font-size: 13px; color: #5a6782; }
+
+/* Paso 1: de quién (administración, diputaciones, Suprema Corte) */
+.ex-tipos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ex-tipo { display: flex; gap: 10px; align-items: flex-start; text-align: left; font: inherit; cursor: pointer; background: #f6f8fc; border: 1px solid #d5dcea; border-radius: 14px; padding: 10px 12px; color: #1c2a44; }
+.ex-tipo:hover { border-color: #0b2a63; }
+.ex-tipo[aria-checked="true"] { background: #0b2a63; border-color: #0b2a63; color: #fff; }
+.ex-tipo[aria-checked="true"] small { color: #d6def0; }
+.ex-tipo-ico { font-size: 22px; line-height: 1; }
+.ex-tipo b { display: block; font-size: 14.5px; }
+.ex-tipo small { display: block; font-size: 12px; color: #5a6782; line-height: 1.35; margin-top: 2px; }
+.ex-ents { display: grid; gap: 6px; }
+.ex-ents-l { font-size: 13px; color: #5a6782; }
+.ex-ents select { font: inherit; font-size: 15px; padding: 8px 10px; border: 1px solid #c9d3e6; border-radius: 10px; background: #fff; color: #1c2a44; max-width: 420px; width: 100%; }
+.ex-fte { display: block; margin-top: 2px; font-size: 12px; color: #5a6782; }
+.ex-fte a { color: #1a56b8; }
+.ex-v-tx { font-weight: 600; color: #1c2a44; }
+.ex-sem-v .ex-v-tx { font-size: 14.5px; }
+.ex-t .ex-v-tx { font-weight: 400; font-size: 13.5px; line-height: 1.45; }
+.ex-sem-x { margin: 6px 0 0; font-size: 13px; }
+.ex-cuenta.ex-gris { background: #eef1f7; color: #33415c; }
 
 /* El documento */
 .ex-doc { --c: #0b2a63; background: #fff; border: 1px solid #d5dcea; border-top: 8px solid var(--c); border-radius: 6px; padding: 26px 28px; box-shadow: 0 14px 40px rgba(11, 42, 99, .12); color: #1c2a44; font-size: 14.5px; line-height: 1.5; }
@@ -90,6 +111,7 @@
   .ex-doc-cab { grid-template-columns: 1fr; }
   .ex-meta { text-align: left; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ex-sem { grid-template-columns: 1fr; }
+  .ex-tipos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ex-sello { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   .ex-t tbody th { width: 40%; }
 }
