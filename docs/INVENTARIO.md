@@ -8,7 +8,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Concepto | Cantidad |
 |---|---|
 | Páginas revisadas | 61 |
-| Páginas que solo redirigen | 1 |
+| Páginas que solo redirigen | 2 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 10 destinos |
 
@@ -60,20 +60,20 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 110 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 109 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 65 | 0 | 0 | 0 | 39 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-estado-de-cuenta.html` | Expide el estado de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
-| `radar-hoy.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
-| `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-estado-de-cuenta.html` | Hoy y el estado de cuenta de cada administración · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
+| `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
+| `radar-hoy.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `servicios.html` | Servicios · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 60 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
@@ -85,6 +85,7 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 | Página | Lleva a |
 |---|---|
 | `busca-y-verifica.html` | `herramienta-inspector-entes.html` |
+| `radar-hoy.html` | `radar-estado-de-cuenta.html#hoy` |
 
 ## Enlaces rotos
 

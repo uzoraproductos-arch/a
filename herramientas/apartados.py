@@ -387,9 +387,9 @@ APARTADOS = [
                     'hagas tus propias cuentas.'),
         'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
         # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
-        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-hoy.html',
-                          'rc-deuda': 'radar-hoy.html', 'rc-asf': 'radar-hoy.html',
-                          'rc-huachicol': 'radar-hoy.html'},
+        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-estado-de-cuenta.html#hoy',
+                          'rc-deuda': 'radar-estado-de-cuenta.html#hoy', 'rc-asf': 'radar-estado-de-cuenta.html#hoy',
+                          'rc-huachicol': 'radar-estado-de-cuenta.html#hoy'},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -1632,12 +1632,15 @@ RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
 # es la portada con una tarjeta por parte, y cada parte vive en su pagina.
 # (id, archivo, icono, titulo, de que trata)
 RADAR_PARTES = [
-    ('expide', 'radar-estado-de-cuenta.html', '🧾', 'Expide el estado de cuenta', 'El documento de cada administración, con su semáforo y sello de verificación'),
+    # «Hoy» y «Expide el estado de cuenta» son una sola tarjeta (decision del
+    # autor, 10-10-2026). La pagina conserva radar-estado-de-cuenta.html porque
+    # esa direccion va impresa en el sello de los PDF; radar-hoy.html redirige.
+    ('hoy', 'radar-estado-de-cuenta.html', '🧾', 'Hoy y el estado de cuenta de cada administración',
+     'El presupuesto en curso y el estado de cuenta de cada sexenio, con semáforo y sello de verificación'),
     ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
     ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
     ('reloj', 'radar-reloj.html', '⏱️', 'El reloj de cada administración', 'El contador que corre al ritmo de cada sexenio'),
     ('duelo', 'radar-duelo.html', '⚔️', 'Duelo de administraciones', 'Dos administraciones, cara a cara'),
-    ('hoy', 'radar-hoy.html', '📌', 'Hoy: el presupuesto en curso', 'Las cifras grandes de 2026'),
     ('lectura', 'radar-como-leer.html', '📏', 'Cómo leer estos números', 'Convenciones y advertencias de cada cifra'),
 ]
 
@@ -2024,10 +2027,6 @@ def radar():
         </div>'''
 
     partes = {
-        'expide': ('Elige una administración, de Salinas a Sheinbaum, y la plataforma te expide su estado de cuenta: lo que entró, '
-                   'lo que gastó, la deuda que recibió y dejó, el valor del peso y lo pendiente ante la Auditoría Superior, con un '
-                   'semáforo de su salud financiera. Descárgalo en PDF con su folio y su sello de verificación: cualquiera puede '
-                   'comprobar que no se alteró.', datos_js + expide_html),
         'tablero': ('Elige una administración y toca cada tarjeta para ver la comparativa con las demás: ingresos, inversión, '
                     'costo del gobierno, deuda y lo pendiente ante la Auditoría Superior, desde 1989. Las sumas en pesos se ven '
                     'en pesos de cada año, en pesos de hoy, en dólares o en euros. Cada cifra trae su documento.', tablero),
@@ -2037,7 +2036,15 @@ def radar():
                   'Es una equivalencia, no dinero que se mueva hoy.', datos_js + reloj_html),
         'duelo': ('Dos administraciones, cara a cara, en las mismas medidas. Sin ganador: los números dicen cuánto; el juicio es tuyo.',
                   datos_js + duelo_html),
-        'hoy': ('Las cifras grandes del presupuesto de 2026, para poner todo lo anterior en perspectiva.', RADAR_HOY),
+        'hoy': ('Las cifras grandes del presupuesto de 2026 y, para cada administración de Salinas a Sheinbaum, su estado de cuenta: '
+                'lo que entró, lo que gastó, la deuda que recibió y dejó, el valor del peso y lo pendiente ante la Auditoría Superior, '
+                'con un semáforo de su salud financiera. Descárgalo en PDF con su folio y su sello de verificación: cualquiera puede '
+                'comprobar que no se alteró.', [
+                    {'id': 'hoy', 'titulo': '📌 Hoy: el presupuesto en curso', 'tarjetas': [], 'bloque': RADAR_HOY,
+                     'texto': 'Las cifras grandes de 2026: el punto de partida para leer cualquier estado de cuenta.'},
+                    {'id': 'expide', 'titulo': '🧾 Expide el estado de cuenta de cada administración', 'tarjetas': [],
+                     'bloque': datos_js + expide_html,
+                     'texto': 'Elige una administración: la plataforma arma su estado de cuenta con semáforo de salud financiera, y lo descargas en PDF con folio y sello de verificación.'}]),
         'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
     }
     paginas = [{
@@ -2049,7 +2056,8 @@ def radar():
                     'cada año, en pesos de hoy, en dólares o en euros; mira cuánto ha valido el peso y hacia dónde lo proyecta Hacienda, '
                     'y pon a correr el reloj de cada sexenio. Cada cifra trae su documento.'),
         # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-        'hash_a_pagina': {r[0]: r[1] for r in RADAR_PARTES},
+        'hash_a_pagina': dict({r[0]: r[1] for r in RADAR_PARTES}, hoy='radar-estado-de-cuenta.html#hoy',
+                              expide='radar-estado-de-cuenta.html#expide'),
         'pestanas': True,
         'pista': 'Cada parte del radar abre su propia página.',
         'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in RADAR_PARTES],
@@ -2060,9 +2068,10 @@ def radar():
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'descarga-los-datos.html',
             'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
             'icono': ico, 'titulo': tit, 'lema': 'Radar hacendario', 'entrada': entrada,
-            'estilos': ['radar.css'] + (['estado-administracion.css'] if pid == 'expide' else []),
-            'scripts': ['estado-administracion.js'] if pid == 'expide' else ['radar.js'], 'pie_extra': radar_nav(archivo),
-            'secciones': [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+            'estilos': ['radar.css'] + (['estado-administracion.css'] if pid == 'hoy' else []),
+            'scripts': ['radar.js'] + (['estado-administracion.js'] if pid == 'hoy' else []), 'pie_extra': radar_nav(archivo),
+            'secciones': bloque if isinstance(bloque, list) else
+                         [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         })
     return paginas
 
@@ -2416,6 +2425,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'En el Radar, «Hoy: el presupuesto en curso» y «Expide el estado de cuenta» son ya una sola tarjeta: las cifras de 2026 y el estado de cuenta de cada administración, en la misma página.'),
     ('10-10-2026', 'Expide el estado de cuenta de cada administración, de Salinas a Sheinbaum: sus números en resumen, un semáforo de su salud financiera con reglas escritas y descarga en PDF con folio y sello de verificación.'),
     ('10-10-2026', 'El Radar hacendario se abre en seis páginas: el tablero, el peso en el tiempo, el reloj de cada administración, el duelo, el presupuesto en curso y cómo leer los números. Cada una con su propia dirección para compartirla.'),
     ('10-10-2026', 'El peso en el tiempo, en el Radar hacendario: las sumas de cada sexenio en pesos de hoy, dólares o euros; inflación y tipo de cambio desde 1988 con la proyección de Hacienda a 2032, el dólar y el euro de hoy, y la máquina del tiempo del peso. Las series vienen ahora de una sola fuente de Hacienda, de 1990 a 2025.'),
@@ -2522,6 +2532,8 @@ def indice():
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    'radar-hoy.html': ('radar-estado-de-cuenta.html#hoy', 'Hoy: el presupuesto en curso',
+                       'Ahora comparte página con el estado de cuenta de cada administración.'),
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
 }
