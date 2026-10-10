@@ -77,7 +77,7 @@ RUTAS = {
     'dos-bocas': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
                   'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
     'deuda-soberana': ('eb-ccreloj', 'El reloj del costo de la deuda',
-                       'radar-hacendario.html', 'El radar hacendario: la deuda de cada administración'),
+                       'radar-tablero.html', 'El radar hacendario: la deuda de cada administración'),
     'aifa': ('eb-egresos', 'Cuánto recibe cada ramo, Defensa incluida',
              'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
     'ramo-33': ('eb-mapa', 'El mapa de lo que baja a cada estado',
