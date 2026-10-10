@@ -602,6 +602,44 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Propuesta de Astra, entrega 2: portada e índice (10-10-2026, sello 20261010e).**
+El autor pidió seguir con la entrega 2. En la portada solo se agregaron
+enlaces: nada se despliega, cada clic abre su página (§5 bis).
+- **Tres acciones bajo el carrusel.** «Entiende el caso · Explora los
+  números · Revisa la evidencia» cambian con la imagen visible:
+  `updateShowcaseDisplay()` del motor lee `data-nombre`, `data-numeros` y
+  `data-evidencia` de cada `.showcase-slide`.
+- **«Por dónde empezar».** Una sección nueva después del carrusel con cuatro
+  accesos: Números, Tu estado de cuenta (`herramienta-calculadora-ticket.html`),
+  Simula las megaobras e Índice general. Debajo vienen las investigaciones por
+  tema y la franja «Cómo verificamos».
+- **Una sola fuente.** Los `data-*` de las diapositivas y la lista de temas
+  (entre `<!-- TEMAS:inicio -->` y `<!-- TEMAS:fin -->`) los escribe
+  `auditorias.portada()` desde `RUTAS` y `TEMAS`, en binario y sin tocar los
+  CR. **No se editan a mano en `index.html`**: se cambian en `auditorias.py`
+  y se corre `sello.py` o `apartados.py`. Correrlo dos veces no cambia nada.
+- **Índice general (`indice.html`).** Lo arma `indice()` de `apartados.py`
+  con las listas que ya existen, así que una página nueva aparece sola:
+  - investigaciones por tema;
+  - los capítulos de Números, cuyas tarjetas abren con `?abrir=`;
+  - las cuatro herramientas con sus módulos;
+  - Datos, Aprende, Participa y los Poderes;
+  - «Cómo verificamos», con los tres estados y la advertencia de que una
+    imagen no es evidencia;
+  - las novedades, de la lista `NOVEDADES`, **que se actualiza a mano en
+    cada entrega**.
+
+  El pie de cada página generada enlaza al índice.
+- El «Volver al Modo Inspector» de Expedientes ahora va a
+  `herramienta-inspector.html`.
+- **Queda fuera de la entrega 2:**
+  - El acceso «Servicios / Solicita una investigación»: falta que el autor
+    decida si el Pase convive con los Servicios, y hacen falta una política
+    de independencia y la revisión legal.
+  - La fecha y el territorio de cada investigación destacada: no hay un dato
+    sostenido por caso en la base.
+  - Los personajes políticos: se retiraron el 27-09-2026 y no se enlazan.
+
 **Propuesta de Astra, entrega 1 (10-10-2026, sello 20261010d).**
 El autor pidió ejecutar las consideraciones de Astra. Su propio plan pone
 primero la entrega 1: inventario, corrección de datos y conexión de

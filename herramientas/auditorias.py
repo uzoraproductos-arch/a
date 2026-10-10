@@ -56,6 +56,15 @@ AUDITORIAS = [
 ]
 
 
+# Investigaciones agrupadas por tema (entrega 2 de Astra, 10-10-2026). Las
+# usan el indice general (apartados.py) y la portada.
+TEMAS = [
+    ('🏗️', 'Megaobras e infraestructura', ['tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia']),
+    ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
+    ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal']),
+]
+
+
 # Recorrido de cada investigacion (propuesta de Astra, entrega 1, 10-10-2026):
 # entender el caso aqui, explorar sus numeros en «Numeros» y revisar la
 # evidencia en el Inspector. id: (tarjeta de Numeros, que la abre, modulo del
@@ -176,6 +185,7 @@ def pagina(a, sello):
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html#auditoria-en-imagenes">← Volver a Auditoría en imágenes</a>
+      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -190,9 +200,38 @@ def pagina(a, sello):
            titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_))
 
 
+def portada():
+    """Escribe en index.html lo que la portada toma de aqui: los enlaces de
+    las tres acciones de cada diapositiva (data-*) y la lista de
+    investigaciones por tema. index.html se edita en binario para no tocar
+    sus CRLF ni sus CR sueltos."""
+    ruta_idx = os.path.join(RAIZ, 'index.html')
+    d = open(ruta_idx, 'rb').read().decode('utf-8')
+    au = {a[0]: a for a in AUDITORIAS}
+
+    def attrs(m):
+        id_ = m.group(2)
+        ancla, _, insp, _ = RUTAS[id_]
+        return '%s data-nombre="%s" data-numeros="sigue-el-dinero.html?abrir=%s" data-evidencia="%s"' % (
+            m.group(1), esc_attr(re.sub('<[^>]+>', '', au[id_][5])), ancla, insp)
+    d, n = re.subn(r'(<a class="showcase-slide" href="auditoria-([\w-]+)\.html")(?: data-nombre="[^"]*" data-numeros="[^"]*" data-evidencia="[^"]*")?',
+                   attrs, d)
+    temas = '\r\n'.join(
+        '      <div class="portada-tema"><span class="portada-tema-tit">%s %s</span>%s</div>' % (
+            ico, tit, ''.join('<a href="%s">%s</a>' % (archivo(i), au[i][5]) for i in ids))
+        for ico, tit, ids in TEMAS)
+    d, t = re.subn(r'(<!-- TEMAS:inicio[^>]*-->\r\n)[\s\S]*?(      <!-- TEMAS:fin -->)',
+                   lambda m: m.group(1) + temas + '\r\n' + m.group(2), d)
+    if n != len(AUDITORIAS) or t != 1:
+        print('ERROR: la portada no tiene las %d diapositivas o el bloque de temas (%d, %d)' % (len(AUDITORIAS), n, t))
+        return 1
+    open(ruta_idx, 'wb').write(d.encode('utf-8'))
+    return 0
+
+
 def generar(sello):
     for a in AUDITORIAS:
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, archivo(a[0])), 'wb').write(texto.encode('utf-8'))
     print('auditorías en imágenes: %d páginas generadas con el sello %s' % (len(AUDITORIAS), sello))
-    return 0
+    return portada()

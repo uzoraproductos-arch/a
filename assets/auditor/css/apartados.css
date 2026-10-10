@@ -1032,3 +1032,17 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .camino-paso.aqui { background: #eaf1ff; border-top-color: #0b2a63; }
 .camino-paso.aqui .camino-num { background: #0b2a63; }
 @media (max-width: 900px) { .camino-pasos.camino-tres { grid-template-columns: 1fr; } }
+/* INDICE GENERAL (entrega 2, 10-10-2026) */
+.indice-grupos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.indice-grupo { padding: 16px 18px; border-radius: 14px; background: #ffffff; border: 1px solid var(--civ-gris-borde); border-top: 5px solid var(--civ-azul); }
+.indice-grupo-tit { margin: 0 0 8px; font-size: 17px; color: #0b2a63; }
+.indice-grupo-tit a { color: inherit; text-decoration: none; }
+.indice-grupo-tit a:hover { text-decoration: underline; }
+.indice-lista { margin: 0; padding: 0 0 0 18px; display: grid; gap: 7px; }
+.indice-lista li { line-height: 1.45; }
+.indice-lista a { color: var(--civ-azul); font-weight: 700; }
+.indice-lista li > span:not(.est-chip) { display: block; font-size: 13.5px; color: #44526b; }
+.indice-metodo { padding: 18px 20px; border-radius: 14px; background: #ffffff; border: 1px solid var(--civ-gris-borde); }
+.indice-metodo .indice-grupo-tit { margin-top: 18px; }
+.indice-estados { list-style: none; padding: 0; }
+.apartado-indice { margin-right: auto; }

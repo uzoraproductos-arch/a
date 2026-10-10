@@ -26915,6 +26915,19 @@
         d.classList.remove('active-dot');
       }
     });
+    /* Las tres acciones bajo el carrusel siguen a la imagen visible
+       (entrega 2, 10-10-2026). */
+    var slide = showcaseData[currentShowcaseIdx];
+    var barra = document.getElementById('showcaseAcciones');
+    if (slide && barra && slide.dataset) {
+      var nombre = document.getElementById('showcaseAccNombre');
+      if (nombre && slide.dataset.nombre) nombre.textContent = slide.dataset.nombre;
+      var destinos = { caso: slide.getAttribute('href'), numeros: slide.dataset.numeros, evidencia: slide.dataset.evidencia };
+      barra.querySelectorAll('[data-acc]').forEach(function(a) {
+        var h = destinos[a.getAttribute('data-acc')];
+        if (h) a.setAttribute('href', h);
+      });
+    }
   }
 
   /* Lleva a una ficha de Expedientes, en su pagina propia. */

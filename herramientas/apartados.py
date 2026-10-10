@@ -1040,6 +1040,7 @@ def pagina(a, sello):
   <footer class="apartado-pie">
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
+      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -1052,6 +1053,92 @@ def pagina(a, sello):
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
            secciones='\n\n'.join(secciones))
+
+
+# Indice general (entrega 2 de la propuesta de Astra, 10-10-2026): todo lo
+# que tiene la plataforma en una sola pagina, por pestana y por tema, con la
+# metodologia y las novedades. Se arma solo con las listas de este archivo y
+# de auditorias.py: al agregar una pagina ahi, aparece aqui.
+NOVEDADES = [
+    ('10-10-2026', 'Índice general y portada con recorrido: cada investigación lleva a sus números y a su evidencia.'),
+    ('10-10-2026', 'Becas de educación básica y media superior separadas, con aprobado y devengado verificados en la ASF.'),
+    ('10-10-2026', 'El Circuito del Dinero se integró a Números, con el camino del dinero en cuatro pasos.'),
+    ('10-10-2026', 'Cada herramienta se divide en módulos con página propia.'),
+    ('10-10-2026', 'El Diccionario del Gasto Público, en dos estantes: Biblioteca hacendaria y Fuentes del auditor.'),
+    ('09-10-2026', 'Los Expedientes de casos y el radar hacendario estrenan página; el menú queda en cinco pestañas.'),
+]
+
+
+def _grupo(icono, titulo, enlaces, href=None):
+    cab = ('<a href="%s">%s %s</a>' % (href, icono, titulo)) if href else '%s %s' % (icono, titulo)
+    filas = '\n'.join('              <li><a href="%s">%s</a>%s</li>' % (h, t, ('<span>%s</span>' % d) if d else '')
+                      for h, t, d in enlaces)
+    return ('          <div class="indice-grupo">\n            <h3 class="indice-grupo-tit">%s</h3>\n'
+            '            <ul class="indice-lista">\n%s\n            </ul>\n          </div>' % (cab, filas))
+
+
+def _rejilla(grupos):
+    return '<div class="indice-grupos">\n%s\n        </div>' % '\n'.join(grupos)
+
+
+def _a_numeros(destino):
+    m = re.search(r'ir=presupuesto&(?:amp;)?ancla=(eb-[\w-]+)', destino)
+    return 'sigue-el-dinero.html?abrir=' + m.group(1) if m else destino
+
+
+def indice():
+    import auditorias
+    au = {a[0]: a for a in auditorias.AUDITORIAS}
+    ap = {a['archivo']: a for a in APARTADOS}
+    investigaciones = _rejilla([_grupo(ico, tit, [(auditorias.archivo(i), au[i][5], au[i][6]) for i in ids])
+                                for ico, tit, ids in auditorias.TEMAS])
+    num = ap['sigue-el-dinero.html']
+    numeros = _rejilla([_grupo(s['pestana'][0], s['titulo'],
+                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for t in s['tarjetas']],
+                               'sigue-el-dinero.html#' + s['id'])
+                        for s in num['secciones']])
+    herr = _rejilla([_grupo(h[2], h[3], [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]], h[0])
+                     for h in HERRAMIENTAS])
+    otros = []
+    for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
+        a = ap[archivo]
+        enl = [(archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
+        if archivo == 'aprende.html':
+            enl += [('diccionario.html', 'Diccionario del Gasto Público', 'La obra completa')] + [
+                (b[0], b[2], '') for b in BIBLIOTECA]
+        if archivo == 'participa.html':
+            enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar')]
+        otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
+    otros.append(_grupo('🏛️', 'Los Poderes', [
+        ('index.html?ir=poderes', 'Lo que cuestan el Congreso y el Poder Judicial', 'Presupuesto 2026 y Cuenta Pública 2024')]))
+    metodologia = (
+        '<div class="indice-metodo">\n'
+        '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
+        '          <ul class="indice-lista indice-estados">\n'
+        '            <li><span class="est-chip est-oficial">oficial</span> La tomamos tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico), con la liga para que la revises.</li>\n'
+        '            <li><span class="est-chip est-derivado">derivado</span> La calculamos a partir de cifras oficiales y te decimos la operación.</li>\n'
+        '            <li><span class="est-chip est-pendiente">pendiente</span> El dato no está en un documento que podamos citar. Decimos por qué y, si la dependencia obligada no lo ha publicado, la nombramos. Nunca lo estimamos.</li>\n'
+        '          </ul>\n'
+        '          <p>Las imágenes de las investigaciones son ilustraciones y lo dicen en una etiqueta: no son evidencia de ningún hecho. '
+        'La evidencia está en los documentos del <a href="fuentes-oficiales.html">Compendio de Fuentes Oficiales</a>.</p>\n'
+        '          <h3 class="indice-grupo-tit">🆕 Novedades</h3>\n'
+        '          <ul class="indice-lista indice-novedades">\n%s\n          </ul>\n'
+        '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
+    secc = [
+        ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
+        ('numeros', '💰 Números', 'El recorrido del dinero público, capítulo por capítulo.', numeros),
+        ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
+        ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la obra de consulta, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
+        ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
+    ]
+    return {
+        'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html',
+        'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que hay en Auditavisión, en una página',
+        'entrada': ('Aquí está el mapa completo de la plataforma: las investigaciones por tema, los capítulos de Números, '
+                    'cada herramienta con sus módulos, los datos, la obra de consulta y cómo verificamos cada cifra. '
+                    'Cada enlace abre su propia página.'),
+        'secciones': [{'id': i, 'titulo': t, 'texto': x, 'tarjetas': [], 'bloque': b} for i, t, x, b in secc],
+    }
 
 
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
@@ -1102,7 +1189,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO] + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice()] + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
@@ -1112,7 +1199,8 @@ def generar(sello=None):
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias
     import expedientes
-    auditorias.generar(sello)
+    if auditorias.generar(sello):
+        return 1
     return expedientes.generar(sello)
 
 
