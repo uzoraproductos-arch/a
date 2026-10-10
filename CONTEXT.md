@@ -647,7 +647,8 @@ Las dos páginas las genera `pagina_estante()` en `apartados.py`, a partir
 de `ESTANTES`, que ahora trae el archivo de cada estante. `diccionario.html`
 muestra solo las dos tarjetas de estante. Las anclas viejas
 `aprende.html#biblioteca` y `#kit`, y las del Diccionario, llevan a su
-estante. Las migas de cada apartado pasan por su estante, y en la barra al
+estante. Las migas de cada apartado dicen Aprende › Diccionario › Estante (campo
+`padre3`), y en la barra al
 pie el nombre de cada estante es un enlace. El índice general las incluye.
 
 **Regla del rango derivado (10-10-2026).** Decisión del autor: cuando un
