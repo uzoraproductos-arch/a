@@ -117,6 +117,19 @@
 .rd-hoy-vivo b { font-family: 'JetBrains Mono', ui-monospace, monospace; color: #f3cf65; }
 .rd-hoy-vivo small { color: #b9c8e8; flex-basis: 100%; }
 .rd-hoy-vivo a { color: #f3cf65; }
+/* El contador de «Hoy» (10-10-2026): botón Contar / Reiniciar en ceros y el candado de «Durante tu visita». */
+.rd-cuenta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 12px; }
+.rd-cuenta[hidden] { display: none; }
+.rd-cuenta-btn { font: 700 15px/1 Inter, system-ui, sans-serif; background: #0b2a63; color: #fff; border: 0; border-radius: 999px; padding: 11px 22px; cursor: pointer; min-height: 44px; }
+.rd-cuenta-btn:hover { background: #163f8c; }
+.rd-cuenta-btn:focus-visible { outline: 3px solid #f3cf65; outline-offset: 2px; }
+.rd-cuenta-btn[aria-pressed="true"] { background: #fff; color: #0b2a63; box-shadow: inset 0 0 0 2px #0b2a63; }
+.rd-cuenta-txt { font-size: 14px; color: #33415c; flex: 1 1 220px; }
+.rd-num { font-variant-numeric: tabular-nums; }
+.rd-hoy-vivo { position: relative; }
+.rd-hoy-vivo.rd-bloq > :not(.rd-hoy-candado) { filter: blur(3px); opacity: .45; pointer-events: none; user-select: none; }
+.rd-hoy-candado { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px; font-weight: 700; font-size: 15px; color: #fff; border-radius: 14px; background: rgba(11, 42, 99, .55); z-index: 1; }
+.rd-hoy-candado[hidden] { display: none; }
 .rd-lectura { background: #fff; border: 1px solid #dfe5f0; border-radius: 14px; padding: 10px 14px; }
 .rd-lectura > summary { cursor: pointer; font-weight: 800; color: #0b2a63; }
 .rd-lectura li { margin: 6px 0; font-size: 14.5px; line-height: 1.55; color: #33415c; }

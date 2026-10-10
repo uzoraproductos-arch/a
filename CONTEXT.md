@@ -671,6 +671,17 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El contador de «Hoy: el presupuesto en curso» (10-10-2026, sello 20261010ze).**
+Pedido del autor: en `radar-presupuesto-en-curso.html` las cifras arrancan en cero y el
+botón «▶ Contar» las anima hasta su valor (2.4 s, curva de salida; instantáneo con
+`prefers-reduced-motion`). El mismo botón pasa a «↺ Reiniciar en ceros». El recuadro
+«Durante tu visita» queda borroso y con candado, y su reloj no corre, hasta que se
+presiona «Contar»; al reiniciar vuelve a bloquearse y a cero. El HTML lo arma
+`RADAR_HOY` en `apartados.py` (`#rdCuenta`, `#rdContar`, `#rdHoyVivo`, `#rdCandado`) y la
+animación vive en `assets/auditor/js/radar.js`: las cifras siguen escritas completas en el
+HTML (sin JavaScript se ven tal cual y el botón no aparece); el script parte cada número
+en tramos `.rd-num` con sus mismos decimales y separadores. No se agregó ni cambió cifra.
+
 **La institución como órgano en los estados de cuenta de cargos (10-10-2026, sello 20261010zd).**
 A pedido del autor, los 35 documentos de cargos (diputación federal, Senado,
 32 congresos locales y Suprema Corte) suman, al frente y después del
