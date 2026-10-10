@@ -22510,3 +22510,8 @@ body:has(.descubrimiento-modal.show-modal) .nav-regreso { display: none; }
   cursor: pointer;
 }
 .cf-modal-close:hover { color: #fff; }
+/* Etiqueta visible de simulacion (propuesta de Astra, punto 6, 10-10-2026) */
+.cc-sim-et { display: inline-block; margin-right: 6px; padding: 1px 8px; border-radius: 999px; background: #fff3d6; color: #7a4b00; border: 1px solid #e8c77a; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+[data-theme="dark"] .cc-sim-et { background: #3a2c10; color: #f3d38a; border-color: #6b5222; }
+.cc-sim-nota { margin-top: 10px; }
+.am-tk-acciones { display: flex; flex-wrap: wrap; gap: 8px; }

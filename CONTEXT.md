@@ -634,6 +634,60 @@ debería estar el dato.
 - **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
   ficha. AGENTS.md §2 lleva la regla nueva.
 
+**Propuesta de Astra, entrega 4: simuladores desde cero (10-10-2026, sello 20261010i).**
+Corresponde al punto 6 de la propuesta: los importes arrancan en $0, hay
+ejemplo oficial identificado, se pueden comparar escenarios, reiniciar en
+cero y descargar la cuenta, y el lector siempre ve que es una simulación.
+- **Simulador nuevo, `simulador-presupuesto.html`.** «Reparte el
+  presupuesto, desde cero» es el cuarto tema de la Calculadora Cívica.
+  - **Dónde vive.** La página la genera `simulador()` en `apartados.py` y
+    la pinta `assets/auditor/js/simulador-cero.js`.
+  - **Botones:** agregar entrada, agregar destino, repartir en partes
+    iguales, cargar el ejemplo oficial (2026 aprobado o 2027 estimado),
+    reiniciar en cero, guardar los escenarios A y B (la tabla los compara
+    por concepto) y descargar el CSV con el origen de cada renglón.
+  - **Reglas a la vista:**
+    - el $0 tuyo no es un cero oficial;
+    - la etiqueta «tuyo» o «cambiado por ti» frente a «oficial»;
+    - dividir entre cero se explica en vez de calcularse;
+    - no se comparan pesos contra millones;
+    - una nota dice que no predice resultados sociales.
+- **El ejemplo oficial.** Sale del cuadro II.6 de los CGPE 2027 (p. 67):
+  - entradas: tributarios, no tributarios, petroleros, y organismos y
+    empresas;
+  - destinos: programable pagado, costo financiero, participaciones y
+    Adefas.
+
+  `herramientas/extraer_simulador.py` lo lee del PDF y escribe
+  `investigaciones/simulador/cgpe2027-cuadro-ii6.json`. Se detiene si las
+  partes no suman los totales del cuadro (ingresos, gasto neto pagado y
+  balance), con 0.2 mdp de tolerancia. Con el ejemplo intacto, la página
+  coteja su balance con el oficial y explica la diferencia de 0.1 por
+  redondeo, que el propio cuadro advierte.
+- **La Calculadora Cívica arranca en $0.**
+  - **Cifra inventada retirada.** Ya no trae «15,000» escrito, y el
+    comparador «Tú contra ellos» ya no usa $15,000 como referencia: esa
+    cifra era inventada.
+  - **Referencia sin ingreso escrito.** Mientras no escribes tu ingreso, el
+    comparador usa el salario mínimo general mensual de 2026 ($9,451.20,
+    CONASAMI), rotulado como ejemplo oficial.
+  - **Botones nuevos.** «Cargar ejemplo oficial» carga ese salario y saca
+    la cuenta. «Reiniciar a ceros» ahora también vacía el campo.
+- **Ticket en negativo (Costo Ambiental).**
+  - **Botones nuevos:** «Cargar ejemplo oficial» (el mismo salario mínimo)
+    y «Reiniciar en cero». Este último está excluido del botón único,
+    junto con `ccReiniciar`.
+  - **Campo vacío.** El ingreso en $0 ya no se pinta con la etiqueta
+    `pendiente`, porque un cero del lector no es un dato pendiente.
+  - **Ejemplo retirado.** Se quitó el texto de ayuda «Por ejemplo, 15000».
+
+Pendientes de la entrega 4:
+- **Simuladores que faltan revisar.** El paquete económico (palancas), el
+  PIB ecológico y las mesas de megaobras arrancan en la base oficial y ya
+  traen «Reiniciar a ceros» o «Contabilizar». Falta revisar si alguno
+  necesita también «Cargar ejemplo oficial» y descarga.
+- **Juegos.** La trivia no tiene importes que editar; no se tocó.
+
 **Aprende: el Diccionario en una sola pestaña (10-10-2026, sello 20261010h).**
 Decisión del autor: las pestañas «Biblioteca hacendaria» y «Fuentes del
 auditor» se juntan en una, «Diccionario del Gasto Público», con dos

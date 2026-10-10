@@ -568,6 +568,8 @@ HERRAMIENTAS = [
           'Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.'),
          ('ccreloj', '⏱️', 'El reloj de la deuda', 'Y de lo perdido',
           'Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.'),
+         ('simulador-presupuesto.html', '🧮', 'Reparte el presupuesto', 'Desde cero',
+          'Empieza en $0: agrega lo que entra, reparte a dónde va, carga el ejemplo oficial de 2026 o 2027, compara dos escenarios y descarga la cuenta. Tiene su propia página.'),
      ]),
     ('herramienta-inspector.html', 'inspector', '🔍', 'Modo Inspector',
      'Dónde quedó el dinero que nadie ha podido explicar',
@@ -757,6 +759,33 @@ def pagina_estante(e):
 
 
 PAGINAS_ESTANTE = [pagina_estante(e) for e in ESTANTES]
+
+
+def simulador():
+    """Reparte el presupuesto, desde cero (propuesta de Astra, punto 6;
+    entrega 4, 10-10-2026). Lo pinta assets/auditor/js/simulador-cero.js; el
+    ejemplo oficial sale de investigaciones/simulador/cgpe2027-cuadro-ii6.json,
+    que escribe herramientas/extraer_simulador.py desde el PDF."""
+    ej = json.load(open(os.path.join(RAIZ, 'investigaciones', 'simulador', 'cgpe2027-cuadro-ii6.json'), encoding='utf-8'))
+    datos = json.dumps(ej, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    return {
+        'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', 'menu_archivo': 'herramientas.html',
+        'padre': ('herramientas.html', 'Herramientas'),
+        'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
+        'icono': '🧮', 'titulo': 'Reparte el presupuesto, desde cero', 'lema': 'Tú pones las cifras; el ejemplo oficial, Hacienda',
+        'entrada': ('Un simulador que empieza en $0. Agrega lo que entra y a dónde va, reparte, compara dos escenarios y descarga la cuenta. '
+                    'Si quieres partir de cifras reales, carga el ejemplo oficial: el presupuesto aprobado de 2026 o el estimado de 2027, '
+                    'renglón por renglón, del cuadro II.6 de los Criterios Generales de Política Económica 2027.'),
+        'scripts': ['simulador-cero.js'],
+        'secciones': [{
+            'id': 'simulador', 'titulo': 'El simulador', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+            'bloque': ('<div class="sz" id="simCero">\n'
+                       '          <noscript><p>El simulador necesita JavaScript.</p></noscript>\n'
+                       '        </div>\n'
+                       '        <script type="application/json" id="simEjemplo">%s</script>' % datos),
+        }],
+        'pie_extra': herr_otras('herramienta-calculadora.html'),
+    }
 
 
 # Glosario general en su propia pagina (decision del autor, 09-10-2026):
@@ -1096,6 +1125,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Simulador «Reparte el presupuesto», desde $0: con ejemplo oficial de 2026 y 2027, comparación de escenarios y descarga. La Calculadora Cívica también arranca en cero.'),
     ('10-10-2026', 'Aprende reúne la Biblioteca hacendaria y las Fuentes del auditor en una sola tarjeta, el Diccionario del Gasto Público; cada estante abre su propia página.'),
     ('10-10-2026', 'Registro de pendientes: cada dato que falta, con su porqué, su responsable y el enlace oficial donde debería estar. Toda etiqueta «pendiente» lleva ahí.'),
     ('10-10-2026', 'Estado de Cuenta Cívico: 2024, 2026 y 2027 comparados en % del PIB, en cuatro dimensiones y con descarga en CSV.'),
@@ -1233,7 +1263,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
