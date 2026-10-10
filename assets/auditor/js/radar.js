@@ -13,23 +13,96 @@
    cada bloque arranca solo si su página lo trae. */
 (function () {
   'use strict';
-  /* ================= Hoy: equivalencias durante la visita ================= */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ================= Hoy: el contador y las equivalencias ================= */
+  /* Desde el 10-10-2026 (pedido del autor) las cifras de «Hoy» arrancan en
+     cero y el botón «Contar» las lleva a su valor; el mismo botón las
+     regresa a cero. «Durante tu visita» no corre hasta que se presiona.
+     Las cifras siguen escritas completas en el HTML: aquí solo se animan. */
   var hoy = document.querySelectorAll('[data-tasa]');
-  if (hoy.length) {
-    var h0 = Date.now(), fmt = new Intl.NumberFormat('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    setInterval(function () {
+  var vivo = document.getElementById('rdHoyVivo'), boton = document.getElementById('rdContar');
+  var hTimer = null, h0 = 0, fmtH = new Intl.NumberFormat('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function visita(si) {
+    if (hTimer) { clearInterval(hTimer); hTimer = null; }
+    hoy.forEach(function (el) { el.textContent = '+$0.00'; });
+    var t = document.getElementById('rdHoyT');
+    if (t) t.textContent = '0:00';
+    if (!si) return;
+    h0 = Date.now();
+    hTimer = setInterval(function () {
       var s = (Date.now() - h0) / 1000;
-      hoy.forEach(function (el) { el.textContent = '+$' + fmt.format(s * parseFloat(el.getAttribute('data-tasa'))); });
-      var t = document.getElementById('rdHoyT');
+      hoy.forEach(function (el) { el.textContent = '+$' + fmtH.format(s * parseFloat(el.getAttribute('data-tasa'))); });
       if (t) t.textContent = Math.floor(s / 60) + ':' + ('0' + Math.floor(s % 60)).slice(-2);
     }, 250);
+  }
+  if (boton && vivo) {
+    /* Cada número de la cifra se vuelve un tramo que se anima por separado,
+       con sus mismos decimales y separadores: «$1,572,073.3 mdp» cuenta de
+       $0.0 a $1,572,073.3 y el texto de alrededor no cambia. */
+    var tramos = [];
+    document.querySelectorAll('.rd-hoy-c > b').forEach(function (b) {
+      var txt = b.textContent, re = /\d[\d,]*(?:\.\d+)?/g, m, ult = 0, partes = [];
+      while ((m = re.exec(txt))) {
+        partes.push(document.createTextNode(txt.slice(ult, m.index)));
+        var n = m[0], dec = n.indexOf('.') < 0 ? 0 : n.length - n.indexOf('.') - 1;
+        var sp = document.createElement('span');
+        sp.className = 'rd-num';
+        tramos.push({ el: sp, v: parseFloat(n.replace(/,/g, '')), d: dec, miles: n.indexOf(',') >= 0 || n.replace(/\..*/, '').length > 4 });
+        partes.push(sp);
+        ult = m.index + n.length;
+      }
+      if (!partes.length) return;
+      partes.push(document.createTextNode(txt.slice(ult)));
+      b.textContent = '';
+      partes.forEach(function (p) { b.appendChild(p); });
+      b.setAttribute('aria-live', 'off');
+    });
+    function pon(tr, f) {
+      tr.el.textContent = (tr.v * f).toLocaleString('en-US', { minimumFractionDigits: tr.d, maximumFractionDigits: tr.d, useGrouping: tr.miles });
+    }
+    var anim = null, contado = false, txt = document.getElementById('rdCuentaTxt'), candado = document.getElementById('rdCandado');
+    function ceros() {
+      if (anim) { cancelAnimationFrame(anim); anim = null; }
+      contado = false;
+      tramos.forEach(function (tr) { pon(tr, 0); });
+      vivo.classList.add('rd-bloq');
+      vivo.setAttribute('aria-disabled', 'true');
+      candado.hidden = false;
+      visita(false);
+      boton.textContent = '▶ Contar';
+      boton.setAttribute('aria-pressed', 'false');
+      txt.textContent = 'Las cifras están en cero. Presiona «Contar» para verlas llegar a su valor oficial.';
+    }
+    function contar() {
+      contado = true;
+      boton.textContent = '↺ Reiniciar en ceros';
+      boton.setAttribute('aria-pressed', 'true');
+      txt.textContent = 'Contando… Cada cifra llega a su valor oficial; su fuente está debajo.';
+      vivo.classList.remove('rd-bloq');
+      vivo.removeAttribute('aria-disabled');
+      candado.hidden = true;
+      visita(true);
+      var dur = reduce ? 0 : 2400, t0 = performance.now();
+      function paso(ahora) {
+        var x = dur ? Math.min(1, (ahora - t0) / dur) : 1, f = 1 - Math.pow(1 - x, 3);
+        tramos.forEach(function (tr) { pon(tr, f); });
+        if (x < 1) { anim = requestAnimationFrame(paso); return; }
+        anim = null;
+        txt.textContent = 'Listo: estas son las cifras de 2026, cada una con su fuente. «Reiniciar en ceros» las regresa al inicio.';
+      }
+      anim = requestAnimationFrame(paso);
+    }
+    boton.addEventListener('click', function () { if (contado) ceros(); else contar(); });
+    document.getElementById('rdCuenta').hidden = false;
+    ceros();
+  } else if (hoy.length) {
+    visita(true);
   }
 
   var nodo = document.getElementById('rdDatos');
   if (!nodo) return;
   var D;
   try { D = JSON.parse(nodo.textContent); } catch (e) { return; }
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {

@@ -20,11 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010zd">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010zd">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010zd">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010zd">
-  <link rel="stylesheet" href="assets/auditor/css/radar.css?v=20261010zd">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010ze">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010ze">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010ze">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010ze">
+  <link rel="stylesheet" href="assets/auditor/css/radar.css?v=20261010ze">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -160,6 +160,10 @@
       <section class="apartado-seccion" id="hoy" aria-labelledby="hoy-tit">
         <h2 class="sr-only" id="hoy-tit">Hoy: el presupuesto en curso</h2>
         <div class="apartado-bloque">
+        <div class="rd-cuenta" id="rdCuenta" hidden>
+          <button type="button" class="rd-cuenta-btn" id="rdContar" aria-pressed="false">▶ Contar</button>
+          <span class="rd-cuenta-txt" id="rdCuentaTxt">Las cifras están en cero. Presiona «Contar» para verlas llegar a su valor oficial.</span>
+        </div>
         <div class="rd-hoy">
           <div class="rd-hoy-c"><span class="rd-hoy-que">🏛️ Presupuesto federal aprobado 2026</span><b>$10.19 billones</b> <span class="est-chip est-oficial">oficial</span><small>📄 Presupuesto de Egresos de la Federación 2026, art. 1</small></div>
           <div class="rd-hoy-c"><span class="rd-hoy-que">🗺️ Gasto federalizado a los 32 estados</span><b>$2.81 billones (27.6 %)</b> <span class="est-chip est-derivado">derivado</span><small>📄 PEF 2026: estimación del gasto federalizado, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF</small></div>
@@ -170,7 +174,7 @@
           <div class="rd-hoy-c"><span class="rd-hoy-que">⚖️ Por aclarar ante la ASF, Cuenta Pública 2024 (no es daño comprobado)</span><b>$65,169.1 mdp</b> <span class="est-chip est-oficial">oficial</span><small>📄 ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11</small></div>
           <div class="rd-hoy-c"><span class="rd-hoy-que">⛽ Huachicol fiscal: cuánto IEPS se deja de cobrar</span><b>sin cifra oficial</b> <span class="est-chip est-pendiente" data-pend="huachicol-evasion">pendiente</span><small>📄 <a href="auditoria-huachicol-fiscal.html">Lo que se sabe y lo que falta ➔</a></small></div>
         </div>
-        <div class="rd-hoy-vivo" role="status"><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
+        <div class="rd-hoy-vivo" id="rdHoyVivo" role="status"><div class="rd-hoy-candado" id="rdCandado" hidden>🔒 Se desbloquea al presionar «Contar»</div><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
           <span>intereses de la deuda <b data-tasa="49850.12">+$0.00</b></span>
           <span>pérdida documentada de las megaobras <b data-tasa="2062.75">+$0.00</b></span>
           <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y $65,050.8 mdp, este último un piso derivado
@@ -197,12 +201,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010zd</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010ze</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010zd"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261010zd"></script>
-  <script src="assets/auditor/js/radar.js?v=20261010zd"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010ze"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261010ze"></script>
+  <script src="assets/auditor/js/radar.js?v=20261010ze"></script>
 </body>
 </html>

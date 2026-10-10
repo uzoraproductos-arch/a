@@ -1617,7 +1617,15 @@ def _hoy(ico, cifra, que, fuente, chip='oficial', pend=''):
             % (ico, que, cifra, chip, (' data-pend="%s"' % pend) if pend else '', chip, fuente))
 
 
-RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
+# El contador (pedido del autor, 10-10-2026): las cifras arrancan en cero y
+# el boton «Contar» las lleva a su valor; el mismo boton las regresa a cero.
+# El recuadro «Durante tu visita» queda bloqueado hasta que se presiona.
+# radar.js hace la animacion; sin JavaScript se ven las cifras completas.
+RADAR_HOY = ('''<div class="rd-cuenta" id="rdCuenta" hidden>
+          <button type="button" class="rd-cuenta-btn" id="rdContar" aria-pressed="false">▶ Contar</button>
+          <span class="rd-cuenta-txt" id="rdCuentaTxt">Las cifras están en cero. Presiona «Contar» para verlas llegar a su valor oficial.</span>
+        </div>
+        ''' + '<div class="rd-hoy">\n' + '\n'.join([
     _hoy('🏛️', '$10.19 billones', 'Presupuesto federal aprobado 2026', 'Presupuesto de Egresos de la Federación 2026, art. 1'),
     _hoy('🗺️', '$2.81 billones (27.6 %)', 'Gasto federalizado a los 32 estados', 'PEF 2026: estimación del gasto federalizado, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF', 'derivado'),
     _hoy('💰', '$5.42 billones', 'ISR, IVA e IEPS estimados en la Ley de Ingresos 2026', 'Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp', 'derivado'),
@@ -1628,12 +1636,12 @@ RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
     _hoy('⛽', 'sin cifra oficial', 'Huachicol fiscal: cuánto IEPS se deja de cobrar', '<a href="auditoria-huachicol-fiscal.html">Lo que se sabe y lo que falta ➔</a>', 'pendiente', 'huachicol-evasion'),
 ]) + '''
         </div>
-        <div class="rd-hoy-vivo" role="status"><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
+        <div class="rd-hoy-vivo" id="rdHoyVivo" role="status"><div class="rd-hoy-candado" id="rdCandado" hidden>🔒 Se desbloquea al presionar «Contar»</div><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
           <span>intereses de la deuda <b data-tasa="49850.12">+$0.00</b></span>
           <span>pérdida documentada de las megaobras <b data-tasa="2062.75">+$0.00</b></span>
           <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y $65,050.8 mdp, este último un piso derivado
           con la Cuenta Pública 2024). No son pagos que ocurran en este instante. <a href="auditoria-deuda-soberana.html">El reloj de los intereses ➔</a></small>
-        </div>'''
+        </div>''')
 
 
 # El Radar en paginas (decision del autor, 10-10-2026): radar-hacendario.html
@@ -2956,6 +2964,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', '«Hoy: el presupuesto en curso» tiene contador: las cifras arrancan en cero y el botón «Contar» las lleva a su valor oficial; el mismo botón las regresa a cero. «Durante tu visita» se desbloquea al contar.'),
     ('10-10-2026', 'Los estados de cuenta de la diputación federal y local, el Senado y la Suprema Corte suman la institución como órgano: cuánto nos cuesta al año, al día y a cada habitante, cuánto se va en sueldos y prestaciones, y del dinero que ejerció a lo que revisó la Auditoría Superior y lo que falta aclarar.'),
     ('10-10-2026', '«Verifica un estado de cuenta» se mudó al Modo Inspector: es su módulo 7, con página propia. Escribe el folio o la huella y comprueba que el documento no se alteró; los enlaces de los PDF ya impresos llegan ahí solos.'),
     ('10-10-2026', 'El estado de cuenta se lee como una hoja por los dos lados: al frente, el termostato de la salud financiera y las cuentas, con los negativos en rojo; atrás, la justificación por secciones (qué mide cada cifra, su operación, su fundamento y su fuente) y el sello.'),
