@@ -12,7 +12,11 @@
    la diputación federal, la de cada congreso local y la Suprema Corte con su
    ponencia y sus asesores. Esos documentos los arma apartados.py en el JSON
    #exCargos (radar_cargos), cifra por cifra con su fuente y su página; aquí
-   solo se pintan y se firman con el mismo sello. */
+   solo se pintan y se firman con el mismo sello.
+   Desde el mismo día, el documento es una hoja oficio por los dos lados:
+   anverso con el termostato y las cuentas, reverso con las notas, el
+   fundamento, las fuentes y el sello. La huella no cambió: firma las mismas
+   cifras, así que los folios ya expedidos siguen valiendo. */
 (function () {
   'use strict';
   var nodo = document.getElementById('rdDatos'), app = document.getElementById('exApp');
@@ -158,20 +162,63 @@
   function folio(ini, h) { return 'AV-' + ini.replace(/[^A-Z]/gi, '').toUpperCase() + '-' + h.slice(0, 8).toUpperCase(); }
 
   /* ================= Pintar ================= */
-  function valor(x, u) {
-    if (tieneV(x)) {
-      var t = u === 'cien' ? '$' + num(x.v, 2) : fmt(x.v, u);
-      return '<b class="ex-v">' + t + '</b> ' + chip(x.est);
-    }
-    if (x && x.na) return '<span class="ex-na">' + esc(x.et || 'no aplica') + '</span>';
-    return chip('pendiente', x && x.pid);
+  /* La hoja (pedido del autor, 10-10-2026): tamaño oficio, por los dos lados.
+     El anverso da lo importante de un vistazo: el termostato de la salud
+     financiera y las cuentas, cifra por cifra, con los negativos en rojo.
+     El reverso lo justifica por secciones: qué mide cada cifra, cómo se
+     calculó, su fundamento y su fuente, y al final el sello. Cada cifra del
+     anverso lleva un número que remite a su nota en el reverso. */
+  function Notas(fuentes) { this.secs = []; this.n = 0; this.fs = fuentes; }
+  Notas.prototype.sec = function (tit, nota) { this.cur = { tit: tit, nota: nota || '', l: [] }; this.secs.push(this.cur); };
+  Notas.prototype.add = function (html) {
+    if (!html) return '';
+    this.n++;
+    this.cur.l.push('<li value="' + this.n + '">' + html + '</li>');
+    return '<sup class="ex-ref">' + this.n + '</sup>';
+  };
+  Notas.prototype.f = function (ks) {
+    var fs = this.fs, r = [];
+    (typeof ks === 'string' ? [ks] : ks || []).forEach(function (k) { var i = fs.indexOf(k); if (i >= 0 && r.indexOf('F' + (i + 1)) < 0) r.push('F' + (i + 1)); });
+    return r.length ? '<span class="ex-nf">Fuente: ' + r.join(', ') + '</span>' : '';
+  };
+  Notas.prototype.html = function (n0) {
+    return this.secs.map(function (s, i) {
+      return '<section class="ex-rsec"><h4><span>' + (n0 + i) + '</span> ' + esc(s.tit) + '</h4>' +
+        (s.l.length ? '<ol class="ex-notas">' + s.l.join('') + '</ol>' : '') + (s.nota ? '<p class="ex-nota">' + s.nota + '</p>' : '') + '</section>';
+    }).join('');
+  };
+  function neg(v) { return typeof v === 'number' && v < 0; }
+  function cifraV(t, v, e, pid, ref) {
+    return '<b class="ex-v' + (neg(v) ? ' ex-neg' : '') + '">' + t + '</b>' + chip(e, pid) + (ref || '');
   }
-  function porque(x) {
-    if (tieneV(x)) return (x.op ? '<small class="ex-op">' + esc(x.op) + '</small>' : '') + (x.nota ? '<small class="ex-op">' + esc(x.nota) + '</small>' : '');
-    return '<small class="ex-op">' + esc((x && (x.pend || x.na)) || '') + '</small>';
+  function valor(x, u, ref) {
+    if (tieneV(x)) return cifraV(u === 'cien' ? '$' + num(x.v, 2) : fmt(x.v, u), x.v, x.est, null, ref);
+    if (x && x.na) return '<span class="ex-na">' + esc(x.et || 'no aplica') + '</span>' + (ref || '');
+    return chip('pendiente', x && x.pid) + (ref || '');
+  }
+  function notaA(N, x, extra) {
+    var p = extra ? [extra] : [];
+    if (tieneV(x)) { if (x.op) p.push(esc(x.op)); if (x.nota) p.push(esc(x.nota)); }
+    else if (x && (x.pend || x.na)) p.push(esc(x.pend || x.na));
+    var f = N.f(x && x.f);
+    if (f) p.push(f);
+    return p.join(' ');
   }
   function tabla(filas, cab) {
     return '<table class="ex-t"><thead><tr>' + cab.map(function (c) { return '<th scope="col">' + c + '</th>'; }).join('') + '</tr></thead><tbody>' + filas + '</tbody></table>';
+  }
+  function caja(tit, cuerpo, ancho) { return '<section class="ex-caja' + (ancho ? ' ex-caja-ancha' : '') + '"><h4>' + tit + '</h4>' + cuerpo + '</section>'; }
+  /* Las cajas del anverso, repartidas en dos columnas: cada una va a la
+     columna con menos renglones, en orden, para que no queden huecos. */
+  function columnas(ancha, cs) {
+    var col = [[], []], peso = [0, 0], largas = [];
+    cs.forEach(function (c, k) {
+      if (c.larga) { largas.push(c.h); return; }
+      var i = peso.indexOf(Math.min.apply(null, peso));
+      col[i].push(c.h.replace('<section class="ex-caja', '<section data-i="' + k + '" style="order:' + k + '" class="ex-caja'));
+      peso[i] += c.n + 2;
+    });
+    return (ancha || '') + '<div class="ex-cajas">' + col.map(function (x) { return '<div class="ex-col">' + x.join('') + '</div>'; }).join('') + '</div>' + largas.join('');
   }
   function hoyFecha() {
     var d = new Date();
@@ -202,11 +249,18 @@
       '<dl class="ex-meta"><div><dt>Folio</dt><dd class="ex-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoyFecha()) + '</dd></div>' +
       '<div><dt>' + esc(corteEt) + '</dt><dd>' + esc(corte) + '</dd></div></dl></header>';
   }
+  /* Las dos caras de la hoja. */
+  function hoja(anverso, titulo, reverso) {
+    return '<div class="ex-cara ex-anverso">' + anverso +
+      '<p class="ex-pag"><span>Hoja 1 de 2 · Anverso</span><span>Los números <sup class="ex-ref">1</sup> remiten a su nota en el reverso ↻</span></p></div>' +
+      '<div class="ex-cara ex-reverso"><p class="ex-rev-cab"><span>Reverso · ' + esc(titulo) + '</span><span>Folio <b class="ex-folio">calculando…</b></span></p>' +
+      reverso + pie() + '<p class="ex-pag"><span>Hoja 2 de 2 · Reverso</span><span>Auditavisión</span></p></div>';
+  }
   function listaFuentes(ks, cat, n) {
-    return '<section class="ex-sec"><h4><span>' + n + '</span> Fuentes oficiales</h4><ol class="ex-fuentes">' + ks.map(function (k) {
+    return '<section class="ex-rsec ex-rsec-fuentes"><h4><span>' + n + '</span> Fuentes oficiales</h4><ol class="ex-fuentes">' + ks.map(function (k, i) {
       var x = cat[k];
-      return x ? '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.corto) + '</a> <small>' + esc(x.url) + '</small></li>' : '';
-    }).join('') + '</ol><p class="ex-nota">Estados de cada cifra: <b>oficial</b>, tomada tal cual de su documento; <b>derivado</b>, calculada con cifras oficiales, con la operación dicha; <b>pendiente</b>, falta el documento y queda en el <a href="pendientes.html">Registro de pendientes</a>.</p></section>';
+      return x ? '<li><b>F' + (i + 1) + '.</b> <a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.corto) + '</a> <small>' + esc(x.url) + '</small></li>' : '';
+    }).join('') + '</ol><p class="ex-nota">Estados de cada cifra: <b>oficial</b>, tomada tal cual de su documento; <b>derivado</b>, calculada con cifras oficiales, con la operación dicha; <b>pendiente</b>, falta el documento y queda en el <a href="pendientes.html">Registro de pendientes</a>. Las cifras negativas van en <b class="ex-neg">rojo</b>.</p></section>';
   }
   function pie() {
     return '<footer class="ex-sello"><div class="ex-sello-img">' + sello(null) + '</div><div class="ex-sello-tx">' +
@@ -228,9 +282,37 @@
     });
   }
 
+  /* ================= El termostato de la salud financiera ================= */
+  var TONO = { verde: '#1f9d55', ambar: '#e0a800', rojo: '#d93025' };
+  /* La rueda: un gajo por indicador, con su color. No suma ni promedia: no hay calificación global. */
+  function rueda(cs, ics) {
+    var n = cs.length, R = 42, L = 2 * Math.PI * R, g = n > 1 ? 3 : 0, cuenta = { verde: 0, ambar: 0, rojo: 0, gris: 0 };
+    cs.forEach(function (c) { cuenta[c || 'gris']++; });
+    var arcos = cs.map(function (c, i) {
+      return '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke="' + (TONO[c] || '#c9d3e6') + '" stroke-width="16" stroke-dasharray="' +
+        (L / n - g).toFixed(2) + ' ' + (L - L / n + g).toFixed(2) + '" stroke-dashoffset="' + (-L * i / n).toFixed(2) + '" transform="rotate(-90 60 60)"/>';
+    }).join('');
+    var iconos = ics.map(function (ic, i) {
+      var a = (i + 0.5) / n * 2 * Math.PI - Math.PI / 2;
+      return '<text x="' + (60 + R * Math.cos(a)).toFixed(1) + '" y="' + (60 + R * Math.sin(a) + 4).toFixed(1) + '" text-anchor="middle" font-size="11">' + ic + '</text>';
+    }).join('');
+    return '<div class="ex-rueda"><svg viewBox="0 0 120 120" role="img" aria-label="' + cuenta.verde + ' en verde, ' + cuenta.ambar + ' en ámbar, ' + cuenta.rojo + ' en rojo y ' + cuenta.gris + ' sin color, de ' + n + '">' +
+      arcos + iconos + '<text x="60" y="60" text-anchor="middle" font-size="22" font-weight="900" fill="#1f9d55">' + cuenta.verde + '/' + n + '</text>' +
+      '<text x="60" y="74" text-anchor="middle" font-size="8.5" font-weight="700" fill="#5a6782">en verde</text></svg>' +
+      '<p class="ex-rueda-l">' + ['verde', 'ambar', 'rojo'].map(function (c) { return '<span><i style="background:' + TONO[c] + '"></i>' + cuenta[c] + ' ' + COLOR[c][1].toLowerCase() + '</span>'; }).join('') +
+      (cuenta.gris ? '<span><i style="background:#c9d3e6"></i>' + cuenta.gris + ' sin color</span>' : '') + '</p></div>';
+  }
+  /* El medidor: una barra de peor a mejor, en tres tercios, con la marca donde cae la cifra. */
+  function medidor(pos, c, zonas) {
+    var z = zonas || [['rojo', 33.34], ['ambar', 33.33], ['verde', 33.33]];
+    var fuera = pos !== null && (pos < 0 || pos > 1), p = pos === null ? null : Math.max(0, Math.min(1, pos)) * 100;
+    return '<span class="ex-med' + (c ? '' : ' ex-med-gris') + '">' + z.map(function (x) { return '<i style="width:' + x[1] + '%;background:' + TONO[x[0]] + '"></i>'; }).join('') +
+      (p === null ? '' : '<b class="ex-med-m' + (fuera ? ' ex-med-fuera' : '') + '" style="left:' + p.toFixed(1) + '%"></b>') + '</span>';
+  }
+
+  var est = { tipo: 'adm', adm: null, doc: null, folio: null, listo: false };
   /* El documento se arma solo al presionar «Generar estado de cuenta»
      (pedido del autor, 10-10-2026); elegir otro lo vuelve a dejar en espera. */
-  var est = { tipo: 'adm', adm: null, doc: null, folio: null, listo: false };
   function pinta() {
     var doc = document.getElementById('exDoc');
     document.getElementById('exPdf').disabled = !est.listo;
@@ -249,78 +331,78 @@
     pinta();
     document.getElementById('exDoc').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
   function pintaAdm() {
-    var a = adm(est.adm), m = modelo(a);
+    var a = adm(est.adm), m = modelo(a), N = new Notas(m.fuentes);
     var doc = document.getElementById('exDoc');
     var h = cabecera(a.col, 'Estado de cuenta de la administración', a.n,
       a.periodo + (a.ys ? ' · cifras de ' + a.ys[0] + (a.ys[1] !== a.ys[0] ? ' a ' + a.ys[1] : '') : ''), 'Datos con corte al', D.corte);
     if (a.aviso) h += '<p class="ex-aviso">⚠️ ' + esc(a.aviso) + (a.curso ? ' El semáforo es <b>preliminar</b>: se compara un año contra sexenios completos.' : '') + '</p>';
 
-    /* 1. Semáforo */
-    var cuenta = { verde: 0, ambar: 0, rojo: 0 };
-    m.sem.forEach(function (r) { if (r.c) cuenta[r.c]++; });
-    h += '<section class="ex-sec"><h4><span>1</span> Salud financiera: el semáforo' + (a.curso ? ' <em class="ex-prelim">preliminar</em>' : '') + '</h4>' +
-      '<p class="ex-resumen">' + ['verde', 'ambar', 'rojo'].map(function (c) { return '<span class="ex-cuenta ex-' + c + '">' + COLOR[c][0] + ' ' + cuenta[c] + ' en ' + COLOR[c][1].toLowerCase() + '</span>'; }).join('') + '</p>' +
-      '<div class="ex-sem">' + m.sem.map(function (r) {
+    /* El termostato */
+    N.sec('El termostato: qué mide cada indicador y cómo se le pone color',
+      'El termostato compara con reglas escritas; no es una calificación oficial ni un juicio sobre la persona, y no suma los colores en una nota global. ' +
+      'Más ingreso o más inversión no son por sí solos mejores, ni menos deuda peor: dependen de cómo estaba la economía.');
+    h += '<section class="ex-termo"><h4>🌡️ Termostato de la salud financiera' + (a.curso ? ' <em class="ex-prelim">preliminar</em>' : '') + '</h4><div class="ex-termo-in">' +
+      rueda(m.sem.map(function (r) { return r.c; }), m.sem.map(function (r) { return r.s.ico; })) +
+      '<div class="ex-meds"><p class="ex-meds-esc"><span>peor</span><span>mejor</span></p>' + m.sem.map(function (r) {
+        var k = CORTES[r.s.id], pos = null;
+        if (k && r.c && tieneV(r.x)) pos = (r.x.v - k.peor.x.v) / (k.mejor.x.v - k.peor.x.v);
         var c = r.c ? COLOR[r.c] : null;
-        return '<div class="ex-sem-i ' + (r.c ? 'ex-' + r.c : 'ex-gris') + '"><div class="ex-sem-cab"><span class="ex-luz" aria-hidden="true">' + (c ? c[0] : '⚪') + '</span>' +
-          '<b>' + r.s.ico + ' ' + esc(r.s.tit) + '</b><span class="ex-sem-c">' + (c ? c[1] + ', ' + c[2] : 'Sin color') + '</span></div>' +
-          '<p class="ex-sem-v">' + valor(r.x, r.s.u) + '</p><p class="ex-sem-que">' + esc(r.s.que) + '</p>' + porque(r.x) +
-          '<small class="ex-regla">' + esc(regla(r.s)) + '</small></div>';
-      }).join('') + '</div>' +
-      '<p class="ex-nota">El semáforo compara con reglas escritas; no es una calificación oficial ni un juicio sobre la persona. ' +
-      'Más ingreso o más inversión no son por sí solos mejores, ni menos deuda peor: dependen de cómo estaba la economía. ' +
-      esc(D.ley17.txt) + ' <a href="' + esc(D.ley17.url) + '" target="_blank" rel="noopener noreferrer">' + esc(D.ley17.corto) + ' ↗</a></p></section>';
+        var ref = N.add('<b>' + esc(r.s.tit) + '.</b> ' + notaA(N, r.x, esc(r.s.que)) + (regla(r.s) ? ' <i>' + esc(regla(r.s)) + '</i>' : ''));
+        return '<div class="ex-med-f"><span class="ex-med-t">' + r.s.ico + ' ' + esc(r.s.tit) + '</span>' + medidor(pos, r.c) +
+          '<span class="ex-med-v">' + valor(r.x, r.s.u, ref) + ' <small>' + (c ? c[0] + ' ' + c[1] : '⚪ Sin color') + '</small></span></div>';
+      }).join('') + '</div></div></section>';
 
-    /* 2. Estado de cuenta */
-    h += '<section class="ex-sec"><h4><span>2</span> Lo que entró y lo que salió</h4>' + tabla(m.cuenta.map(function (r) {
-      return '<tr><th scope="row">' + r.ico + ' ' + esc(r.tit) + '</th><td>' + valor(r.pib, 'pib') + porque(r.pib) + '</td><td>' + valor(r.hoy, 'hoy') + '</td></tr>';
-    }).join(''), ['Concepto', 'Promedio al año', 'Suma del periodo, en pesos de ' + esc((P.ref && P.ref.mes) || 'hoy')]) +
-      '<p class="ex-nota">El % del PIB compara el tamaño contra la economía de cada año. La suma en pesos de hoy ya no tiene inflación: cada año se lleva a pesos de ' + esc((P.ref && P.ref.mes) || 'hoy') + ' con el INPC.</p></section>';
+    /* Las cuentas */
+    N.sec('Lo que entró y lo que salió', 'El % del PIB compara el tamaño contra la economía de cada año. La suma en pesos de hoy ya no tiene inflación: cada año se lleva a pesos de ' +
+      esc((P.ref && P.ref.mes) || 'hoy') + ' con el INPC.');
+    var cuentas = caja('💵 Lo que entró y lo que salió', tabla(m.cuenta.map(function (r) {
+      return '<tr><th scope="row">' + r.ico + ' ' + esc(r.tit) + '</th><td>' + valor(r.pib, 'pib', N.add('<b>' + esc(r.tit) + ', promedio al año.</b> ' + notaA(N, r.pib))) +
+        '</td><td>' + valor(r.hoy, 'hoy', N.add('<b>' + esc(r.tit) + ', suma del periodo.</b> ' + notaA(N, r.hoy))) + '</td></tr>';
+    }).join(''), ['Concepto', 'Promedio al año', 'Suma del periodo, en pesos de ' + esc((P.ref && P.ref.mes) || 'hoy')]), true);
+    function simple(ico, tit, filas, nota) {
+      N.sec(tit, nota ? esc(nota) : '');
+      return { n: filas.length, h: caja(ico + ' ' + esc(tit), tabla(filas.map(function (r) {
+        return '<tr><th scope="row">' + esc(r.tit) + '</th><td>' + valor(r.x, r.u, N.add('<b>' + esc(r.tit) + '.</b> ' + notaA(N, r.x))) + '</td></tr>';
+      }).join(''), ['Concepto', 'Cifra'])) };
+    }
+    h += columnas(cuentas, [simple('🏦', 'La deuda pública', m.deuda)].concat(
+      m.peso.length ? [simple('💱', 'El peso durante su gobierno', m.peso, 'Dólar y euro: pesos por cada uno. Un porcentaje positivo es que el peso se depreció; negativo, que se apreció.')] : [],
+      [simple('🔎', 'Ante la Auditoría Superior de la Federación', m.asf,
+        'Sin color en el termostato: la ASF mide el monto por aclarar con esta definición solo desde la Cuenta Pública 2019, y las cuentas viejas llevan más años de solventación. No es daño comprobado.')]));
 
-    /* 3. Deuda */
-    h += '<section class="ex-sec"><h4><span>3</span> La deuda pública</h4>' + tabla(m.deuda.map(function (r) {
-      return '<tr><th scope="row">' + esc(r.tit) + '</th><td>' + valor(r.x, r.u) + porque(r.x) + '</td></tr>';
-    }).join(''), ['Concepto', 'Cifra']) + '</section>';
-
-    /* 4. El peso */
-    if (m.peso.length) h += '<section class="ex-sec"><h4><span>4</span> El peso durante su gobierno</h4>' + tabla(m.peso.map(function (r) {
-      return '<tr><th scope="row">' + esc(r.tit) + '</th><td>' + valor(r.x, r.u) + porque(r.x) + '</td></tr>';
-    }).join(''), ['Concepto', 'Cifra']) + '<p class="ex-nota">Dólar y euro: pesos por cada uno. Un porcentaje positivo es que el peso se depreció; negativo, que se apreció.</p></section>';
-
-    /* 5. ASF */
-    h += '<section class="ex-sec"><h4><span>5</span> Ante la Auditoría Superior de la Federación</h4>' + tabla(m.asf.map(function (r) {
-      return '<tr><th scope="row">' + esc(r.tit) + '</th><td>' + valor(r.x, r.u) + porque(r.x) + '</td></tr>';
-    }).join(''), ['Concepto', 'Cifra']) +
-      '<p class="ex-nota">Sin color en el semáforo: la ASF mide el monto por aclarar con esta definición solo desde la Cuenta Pública 2019, y las cuentas viejas llevan más años de solventación. No es daño comprobado.</p></section>';
-
-    /* 6. Fuentes */
-    h += listaFuentes(m.fuentes, D.fuentes, 6);
-    h += pie();
-    doc.innerHTML = h;
+    var rev = '<div class="ex-rev-cols">' + N.html(1) +
+      '<section class="ex-rsec"><h4><span>' + (N.secs.length + 1) + '</span> Fundamento legal</h4><p class="ex-nota">' + esc(D.ley17.txt) +
+      ' <a href="' + esc(D.ley17.url) + '" target="_blank" rel="noopener noreferrer">' + esc(D.ley17.corto) + ' ↗</a></p></section>' +
+      listaFuentes(m.fuentes, D.fuentes, N.secs.length + 2) + '</div>';
+    doc.innerHTML = hoja(h, 'Estado de cuenta de ' + a.n, rev);
     doc.style.setProperty('--c', a.col);
     firma(doc, cifras(m), a.ini);
   }
 
   /* ================= Diputaciones y Suprema Corte ================= */
   function docDe(id) { if (!C) return null; for (var i = 0; i < C.docs.length; i++) if (C.docs[i].id === id) return C.docs[i]; return null; }
-  function pesos(v) { return '$' + num(v, v % 1 ? 2 : 0); }
+  function pesos(v) { return (v < 0 ? '−' : '') + '$' + num(Math.abs(v), v % 1 ? 2 : 0); }
   function cifraC(r) {
     if (r.u === 'txt') return esc(r.txt);
-    var f = r.u === '$g' ? function (v) { return '$' + num(v / 1e6, 1) + ' millones'; } :
+    var f = r.u === '$g' ? function (v) { return (v < 0 ? '−' : '') + '$' + num(Math.abs(v) / 1e6, 1) + ' millones'; } :
       r.u === 'ent' ? function (v) { return num(v, 0); } :
       r.u === 'pct100' ? function (v) { return num(v, 1) + '%'; } :
       r.u === 'pct' ? function (v) { return signo(v, 1) + '%'; } : pesos;
     return typeof r.v2 === 'number' ? 'de ' + f(r.v) + ' a ' + f(r.v2) : f(r.v);
   }
-  function valorC(r) {
+  function valorC(r, ref) {
     var tiene = typeof r.v === 'number' || r.u === 'txt' && r.txt;
-    return (tiene ? '<b class="ex-v' + (r.u === 'txt' ? ' ex-v-tx' : '') + '">' + cifraC(r) + '</b> ' : '') + chip(r.est, r.pid);
+    if (!tiene) return chip(r.est, r.pid) + (ref || '');
+    return '<b class="ex-v' + (r.u === 'txt' ? ' ex-v-tx' : '') + (neg(r.v) || neg(r.v2) ? ' ex-neg' : '') + '">' + cifraC(r) + '</b>' + chip(r.est, r.pid) + (ref || '');
   }
-  function fuenteC(r) {
-    var x = r.f && C.fuentes[r.f];
-    return (x ? '<small class="ex-fte">Fuente: <a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.corto) + '</a>' + (r.pag ? ', ' + esc(r.pag) : '') + '</small>' : '') +
-      (r.op ? '<small class="ex-op">' + esc(r.op) + '</small>' : '') + (r.nota ? '<small class="ex-op">' + esc(r.nota) + '</small>' : '');
+  function notaC(N, r, extra) {
+    var p = extra ? [extra] : [], x = r.f && C.fuentes[r.f];
+    if (r.op) p.push(esc(r.op));
+    if (r.nota) p.push(esc(r.nota));
+    if (x) p.push(N.f(r.f).replace('</span>', (r.pag ? ', ' + esc(r.pag) : '') + '.</span>'));
+    return p.join(' ');
   }
   function fuentesDe(d) {
     var ks = [];
@@ -339,36 +421,51 @@
     };
   }
   function pintaCargo(d) {
-    var doc = document.getElementById('exDoc');
+    var doc = document.getElementById('exDoc'), ks = fuentesDe(d), N = new Notas(ks);
     var h = cabecera(d.col, d.tipoTx, d.n, d.sub, 'Fuentes consultadas en', d.corte);
     if (d.aviso) h += '<p class="ex-aviso">ℹ️ ' + esc(d.aviso) + '</p>';
-    var cuenta = { verde: 0, ambar: 0, rojo: 0, gris: 0 };
-    d.senales.forEach(function (s) { cuenta[s.c || 'gris']++; });
-    h += '<section class="ex-sec"><h4><span>1</span> Dos señales con regla de ley</h4>' +
-      '<p class="ex-resumen">' + ['verde', 'ambar', 'rojo'].filter(function (c) { return cuenta[c]; }).map(function (c) {
-        return '<span class="ex-cuenta ex-' + c + '">' + COLOR[c][0] + ' ' + cuenta[c] + ' en ' + COLOR[c][1].toLowerCase() + '</span>';
-      }).join('') + (cuenta.gris ? '<span class="ex-cuenta ex-gris">⚪ ' + cuenta.gris + ' sin color</span>' : '') + '</p>' +
-      '<div class="ex-sem">' + d.senales.map(function (s) {
+    N.sec('Las dos señales con regla de ley', 'Las señales comparan con reglas escritas en la ley; no son una calificación oficial ni un juicio sobre ninguna persona. ' +
+      'Donde la cifra es parcial o falta, la señal se queda sin color en lugar de suponer.');
+    h += '<section class="ex-termo"><h4>🌡️ Termostato: dos señales con regla de ley</h4><div class="ex-termo-in">' +
+      rueda(d.senales.map(function (s) { return s.c; }), d.senales.map(function (s) { return C.senales[s.id].ico; })) +
+      '<div class="ex-meds ex-meds-c">' + d.senales.map(function (s) {
         var def = C.senales[s.id], ley = C.fuentes[def.ley];
-        var et = { verde: ['🟢', 'Verde'], ambar: ['🟡', 'Ámbar'], rojo: ['🔴', 'Rojo'] }[s.c];
-        return '<div class="ex-sem-i ' + (s.c ? 'ex-' + s.c : 'ex-gris') + '"><div class="ex-sem-cab"><span class="ex-luz" aria-hidden="true">' + (et ? et[0] : '⚪') + '</span>' +
-          '<b>' + def.ico + ' ' + esc(def.tit) + '</b><span class="ex-sem-c">' + (et ? et[1] : 'Sin color') + '</span></div>' +
-          '<p class="ex-sem-v">' + valorC(s.x) + '</p>' + fuenteC(s.x) +
-          s.extra.map(function (r) { return '<p class="ex-sem-x">' + esc(r.t) + ': ' + valorC(r) + '</p>' + fuenteC(r); }).join('') +
-          '<p class="ex-sem-que">' + esc(def.que) + '</p>' +
-          '<small class="ex-regla">' + esc(def.reglas[s.r]) + (ley ? ' <a href="' + esc(ley.url) + '" target="_blank" rel="noopener noreferrer">Ver la ley ↗</a>' : '') + '</small></div>';
-      }).join('') + '</div>' +
-      '<p class="ex-nota">Las señales comparan con reglas escritas en la ley; no son una calificación oficial ni un juicio sobre ninguna persona. ' +
-      'Donde la cifra es parcial o falta, la señal se queda sin color en lugar de suponer.</p></section>';
-    d.secciones.forEach(function (s, i) {
-      var nota = s.nota === '@local' ? C.notaLocal : s.nota;
-      h += '<section class="ex-sec"><h4><span>' + (i + 2) + '</span> ' + esc(s.tit) + '</h4>' + tabla(s.filas.map(function (r) {
-        return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r) + fuenteC(r) + '</td></tr>';
-      }).join(''), ['Concepto', 'Cifra']) + (nota ? '<p class="ex-nota">' + esc(nota) + '</p>' : '') + '</section>';
-    });
-    h += listaFuentes(fuentesDe(d), C.fuentes, d.secciones.length + 2);
-    h += pie();
-    doc.innerHTML = h;
+        var et = { verde: '🟢 Verde', ambar: '🟡 Ámbar', rojo: '🔴 Rojo' }[s.c] || '⚪ Sin color';
+        var ref = N.add('<b>' + esc(def.tit) + '.</b> ' + esc(def.que) + ' <i>' + esc(def.reglas[s.r]) + '</i>' +
+          (ley ? ' <span class="ex-nf">Fundamento: ' + esc(ley.corto) + '.</span>' : '') + ' ' + notaC(N, s.x));
+        var graf = '';
+        if (s.id === 'tope') {
+          var pr = s.extra.filter(function (r) { return r.u === 'pct100' && typeof r.v === 'number'; })[0];
+          /* Escala de 0 a 120% del tope: verde hasta el 100%, rojo después. */
+          if (pr) graf = medidor(pr.v / 120, s.c, [['verde', 83.33], ['rojo', 16.67]]) + '<p class="ex-meds-esc"><span>0</span><span>tope (100%)</span><span>120%</span></p>';
+        } else if (s.id === 'transparencia') {
+          var t = { verde: ['✓', '✓'], ambar: ['✓', '✗'] }[s.c];
+          graf = '<p class="ex-checks">' + (t ? '<span class="ex-ck-' + (t[0] === '✓' ? 'si' : 'no') + '">' + t[0] + ' Bruta</span><span class="ex-ck-' + (t[1] === '✓' ? 'si' : 'no') + '">' + t[1] + ' Neta</span>'
+            : '<span class="ex-ck-na">Sin documento de 2026 localizado</span>') + '</p>';
+        }
+        return '<div class="ex-med-f ex-med-c"><span class="ex-med-t">' + def.ico + ' ' + esc(def.tit) + ' <small>' + et + '</small></span>' + graf +
+          '<span class="ex-med-v">' + valorC(s.x, ref) + '</span>' +
+          s.extra.map(function (r) { return '<span class="ex-med-x">' + esc(r.t) + ': ' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + notaC(N, r))) + '</span>'; }).join('') + '</div>';
+      }).join('') + '</div></div></section>';
+    h += columnas('', d.secciones.map(function (s) {
+      N.sec(s.tit, esc(s.nota === '@local' ? C.notaLocal : s.nota || ''));
+      var filas = s.filas.map(function (r) {
+        return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + notaC(N, r))) + '</td></tr>';
+      });
+      if (filas.length <= 8) return { n: filas.length, h: caja(esc(s.tit), tabla(filas.join(''), ['Concepto', 'Cifra'])) };
+      /* Una tabla larga va a lo ancho de la hoja, partida en dos. */
+      var mitad = Math.ceil(filas.length / 2);
+      return { larga: true, h: caja(esc(s.tit), '<div class="ex-t2">' + tabla(filas.slice(0, mitad).join(''), ['Concepto', 'Cifra']) +
+        tabla(filas.slice(mitad).join(''), ['Concepto', 'Cifra']) + '</div>', true) };
+    }));
+    var leyes = [];
+    d.senales.forEach(function (s) { var l = C.fuentes[C.senales[s.id].ley]; if (l && leyes.indexOf(l) < 0) leyes.push(l); });
+    var rev = '<div class="ex-rev-cols">' + N.html(1) +
+      '<section class="ex-rsec"><h4><span>' + (N.secs.length + 1) + '</span> Fundamento legal</h4><ul class="ex-leyes">' + leyes.map(function (l) {
+        return '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.corto) + ' ↗</a></li>';
+      }).join('') + '</ul></section>' +
+      listaFuentes(ks, C.fuentes, N.secs.length + 2) + '</div>';
+    doc.innerHTML = hoja(h, d.tipoTx + ': ' + d.n, rev);
     doc.style.setProperty('--c', d.col);
     firma(doc, cifrasC(d), d.ini);
   }
@@ -455,6 +552,24 @@
     if (e.target.id === 'exEnt') eligeDoc(e.target.value, true);
   });
 
+  /* Con el ancho de la hoja ya puesto, reparte las cajas del anverso por su
+     altura real, en orden de lectura (columna por columna): de todos los
+     cortes posibles, el que deja la columna más alta lo más baja posible. */
+  function emparejar(c) {
+    var cols = c.querySelectorAll('.ex-anverso .ex-col');
+    if (cols.length < 2) return;
+    var cajas = [];
+    Array.prototype.forEach.call(cols, function (col) { Array.prototype.forEach.call(col.children, function (x) { cajas.push(x); }); });
+    cajas.sort(function (p, q) { return p.getAttribute('data-i') - q.getAttribute('data-i'); });
+    var hs = cajas.map(function (x) { return x.getBoundingClientRect().height; });
+    function suma(i, j) { var t = 0; for (var k = i; k < j; k++) t += hs[k] + 7; return t; }
+    var n = cajas.length, mejor = null;
+    for (var i = 0; i <= n; i++) {
+      var m = Math.max(suma(0, i), suma(i, n));
+      if (!mejor || m < mejor[0]) mejor = [m, i];
+    }
+    cajas.forEach(function (x, k) { cols[k < mejor[1] ? 0 : 1].appendChild(x); });
+  }
   document.getElementById('exGenera').addEventListener('click', genera);
 
   /* ================= Descargar en PDF ================= */
@@ -464,10 +579,12 @@
     if (viejo) viejo.remove();
     var c = document.createElement('div'), x = actual();
     c.id = 'exPrint';
-    c.className = 'ex-print';
+    c.className = 'ex-print ex-medir';
     c.innerHTML = '<article class="ex-doc">' + document.getElementById('exDoc').innerHTML + '</article>';
     c.firstChild.style.setProperty('--c', x.col);
     document.body.appendChild(c);
+    emparejar(c);
+    c.classList.remove('ex-medir');
     var t = document.title;
     document.title = 'Estado de cuenta ' + x.corto + (est.folio ? ' ' + est.folio : '') + ' · Auditavisión';
     window.print();

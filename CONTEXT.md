@@ -671,6 +671,33 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El estado de cuenta, en una hoja por los dos lados (10-10-2026, sello 20261010z).**
+A pedido del autor (referencia: hoja oficio, 216 × 340 mm; «la medida es lo de
+menos»: lo que importa es separar lo gráfico al frente y lo informativo atrás):
+- **Imagen del encabezado:** la que mandó el autor (ilustración de una mesa de
+  sesiones), recortada a una franja que deja ver la mesa y su gráfica circular
+  y fuera la marca de agua de la esquina:
+  `assets/auditor/img/encabezado-estado-de-cuenta.jpg` (736 × 240). Va en los
+  42 documentos.
+- **Anverso, lo gráfico:** encabezado, el **termostato** (una rueda con un gajo
+  por indicador o señal y su color, sin sumar en nota global, y un medidor por
+  indicador de peor a mejor en tres tercios con la marca donde cae la cifra; en
+  los cargos, el tope del art. 127 en escala de 0 a 120% y las palomitas de
+  bruta y neta) y las cuentas en cajas: concepto, cifra, chip de estado y un
+  número de nota. **Los negativos van en rojo** (`.ex-neg`).
+- **Reverso, lo informativo:** la justificación por secciones, en dos
+  columnas: cada nota numerada dice qué mide la cifra, su operación, su regla
+  y su fuente (F1, F2… con página); luego el fundamento legal, las fuentes
+  oficiales y al final el sello con la leyenda de que no es documento oficial.
+- **La huella no cambió:** firma las mismas cifras, así que los folios ya
+  expedidos siguen valiendo.
+- **Al descargar:** `@page` de 216 × 340 mm; el reverso empieza en hoja nueva.
+  Antes de imprimir, `emparejar()` mide cada caja con el ancho de la hoja
+  (`.ex-medir`) y las reparte en dos columnas parejas en orden de lectura. Las
+  tablas de más de 8 renglones van a lo ancho, partidas en dos. Caben en una
+  hoja por los dos lados 40 de los 42 documentos; la diputación federal y la
+  senaduría ocupan un poco más en el anverso (hoja 3).
+
 **«Hoy y los estados de cuenta» se vuelve índice de dos páginas (10-10-2026, sello 20261010y).**
 A pedido del autor, `radar-hoy.html` ya no muestra el presupuesto en curso: es un
 índice con dos tarjetas, «📌 Hoy: el presupuesto en curso»
