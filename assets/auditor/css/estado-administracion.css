@@ -149,7 +149,6 @@
 .ex-ver-como ol { margin: 6px 0 0; padding-left: 22px; color: #33415c; font-size: 14.5px; line-height: 1.5; }
 .ex-ver-como li + li { margin-top: 6px; }
 .ex-ver .sz-btn { display: inline-block; text-decoration: none; }
-.ex-ir-ver { margin: 0; padding: 10px 14px; background: #f3f6fb; border: 1px dashed #c9d3e6; border-radius: 14px; }
 
 @media (max-width: 720px) {
   .ex-cara { padding: 18px 14px 12px; }

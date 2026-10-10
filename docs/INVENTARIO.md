@@ -69,7 +69,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
+| `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
