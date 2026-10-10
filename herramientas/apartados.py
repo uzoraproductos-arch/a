@@ -551,25 +551,41 @@ HERRAMIENTAS = [
 ]
 
 
-def herramienta(h, n):
-    """Datos de la pagina de una herramienta, con la forma de APARTADOS."""
-    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
-    secciones = []
-    for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
-        pagina_propia = clave.endswith('.html')
-        secciones.append({
-            'id': clave[:-5] if pagina_propia else clave,
-            'pestana': (ico, '%d · %s' % (i, nombre), frase),
-            'titulo': nombre,
-            'texto': '',
-            'sin_cab': True,
-            'auto': not pagina_propia,
-            'tarjetas': [(ico, nombre, desc, clave if pagina_propia else ir(modulo, 'eb-' + clave), None, rubro)],
-        })
+def modulo_archivo(archivo, clave):
+    """Pagina propia de un modulo: herramienta-megaobras.html + pulso ->
+    herramienta-megaobras-pulso.html (sin el prefijo insp, cc o am)."""
+    if clave.endswith('.html'):
+        return clave
+    return archivo[:-5] + '-' + re.sub(r'^(insp|cc|am)', '', clave) + '.html'
+
+
+def herr_otras(archivo):
     otras = '\n'.join(
         '          <a class="herr-otra herr-foto rubro-%s" href="%s">'
         '<span class="herr-otra-ico" aria-hidden="true">%s</span><span class="herr-otra-tx">%s</span></a>'
         % (o[1], o[0], o[2], o[3]) for o in HERRAMIENTAS if o[0] != archivo)
+    return ('<nav class="herr-otras" aria-label="Las otras herramientas">\n'
+            '        <span class="herr-otras-tit">Las otras herramientas</span>\n'
+            '        <div class="herr-otras-fila">\n%s\n        </div>\n      </nav>' % otras)
+
+
+def herramienta(h, n):
+    """Pagina de una herramienta (10-10-2026): ya no despliega nada. Es la
+    ruta de sus modulos, numerados, y cada uno abre su propia pagina
+    (herramienta_modulo). Antes cada pestana abria la portada entera en un
+    marco debajo de la tarjeta."""
+    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    pasos = []
+    for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
+        pasos.append(
+            '          <li><a class="herr-paso rubro-%s" href="%s">\n'
+            '            <span class="herr-paso-num" aria-hidden="true">%d</span>\n'
+            '            <span class="herr-paso-ico" aria-hidden="true">%s</span>\n'
+            '            <span class="herr-paso-tx"><span class="herr-paso-frase">%s</span>'
+            '<span class="herr-paso-nombre">%s</span><span class="herr-paso-desc">%s</span></span>\n'
+            '            <span class="herr-paso-accion">Abrir ➔</span>\n'
+            '          </a></li>' % (rubro, modulo_archivo(archivo, clave), i, ico, frase, nombre, desc))
+    ruta = ('<ol class="herr-ruta">\n%s\n        </ol>' % '\n'.join(pasos))
     return {
         'archivo': archivo,
         'menu': titulo,
@@ -581,12 +597,67 @@ def herramienta(h, n):
         'entrada': '<b>%s.</b> %s' % (sub, texto),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
-        'pestanas': True,
-        'primera': True,
-        'secciones': secciones,
-        'pie_extra': ('<nav class="herr-otras" aria-label="Las otras herramientas">\n'
-                      '        <span class="herr-otras-tit">Las otras herramientas</span>\n'
-                      '        <div class="herr-otras-fila">\n%s\n        </div>\n      </nav>' % otras),
+        # Las pestanas viejas (#pulso, #inspentes...) llevan a su pagina.
+        'hash_a_pagina': dict((t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas),
+        'secciones': [{
+            'id': 'modulos', 'titulo': 'Los %d módulos' % len(temas), 'sin_cab': False,
+            'texto': 'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.',
+            'tarjetas': [], 'bloque': ruta,
+        }],
+        'pie_extra': herr_otras(archivo),
+    }
+
+
+def herramienta_modulo(h, n, i):
+    """Pagina propia de un modulo de herramienta (10-10-2026)."""
+    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    clave, ico, nombre, frase, desc = temas[i]
+    url = ir(modulo, 'eb-' + clave)
+    hermanos = []
+    for k, t in enumerate(temas):
+        hermanos.append('          <a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %d · %s</a>' % (
+            ' actual' if k == i else '', modulo_archivo(archivo, t[0]), ' aria-current="page"' if k == i else '', t[1], k + 1, t[2]))
+    ant = temas[i - 1] if i > 0 else None
+    sig = temas[i + 1] if i + 1 < len(temas) else None
+    def paso(t, k, rotulo, clase):
+        if not t:
+            return ('          <a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>'
+                    % (clase, archivo, rotulo, icono, titulo))
+        return ('          <a class="herr-mod-paso %s" href="%s"><small>%s · módulo %d</small><b>%s %s</b></a>'
+                % (clase, modulo_archivo(archivo, t[0]), rotulo, k + 1, t[1], t[2]))
+    navegacion = ('<nav class="herr-mod-nav" aria-label="Los módulos de %s">\n'
+                  '        <div class="herr-mod-pasos">\n%s\n%s\n        </div>\n'
+                  '        <span class="herr-otras-tit">Todos los módulos de %s</span>\n'
+                  '        <div class="herr-mod-chips">\n%s\n        </div>\n      </nav>' % (
+                      titulo,
+                      paso(ant, i - 1, '← Anterior', 'ant') if ant else paso(None, 0, '← Volver al índice de', 'ant'),
+                      paso(sig, i + 1, 'Siguiente →', 'sig') if sig else paso(None, 0, 'Terminaste · volver a', 'sig'),
+                      titulo, '\n'.join(hermanos)))
+    marco = ('<div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-%s)">\n'
+             '          <div class="apartado-visor-cuerpo">\n'
+             '            <p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>\n'
+             '            <iframe class="apartado-visor-marco" title="%s" data-modulo="%s&amp;visor=1"></iframe>\n'
+             '            <noscript><p>Este módulo necesita JavaScript. <a href="%s">Ábrelo en el auditor</a>.</p></noscript>\n'
+             '          </div>\n'
+             '          <div class="herr-modulo-pie"><a href="%s">⤢ Abrir en el auditor completo</a></div>\n'
+             '        </div>' % (rubro, esc_attr(nombre), url, url, url))
+    return {
+        'archivo': modulo_archivo(archivo, clave),
+        'menu': nombre,
+        'menu_archivo': 'herramientas.html',
+        'padre': ('herramientas.html', 'Herramientas'),
+        'padre2': (archivo, titulo),
+        'icono': ico,
+        'titulo': nombre,
+        'lema': '%s %s · módulo %d de %d' % (icono, titulo, i + 1, len(temas)),
+        'sin_icono_lema': True,
+        'entrada': '<b>%s.</b> %s' % (frase, desc),
+        'fondo': HERR_IMG[rubro],
+        'rubro': rubro,
+        'secciones': [{
+            'id': 'modulo', 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco,
+        }],
+        'pie_extra': navegacion + '\n\n      ' + herr_otras(archivo),
     }
 
 
@@ -716,7 +787,7 @@ GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
         <ol class="apartado-pasos">
           <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige una herramienta y pulsa «Comenzar».</b> Cada color es un tema: las obras, tus impuestos, lo que revisó la Auditoría y el ambiente. Cada una abre su propia página y te cuenta qué trae.</span></li>
-          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Elige una pestaña.</b> Cada pestaña abre una parte de la herramienta; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Elige un módulo.</b> Cada herramienta se recorre en módulos numerados y cada uno abre su propia página; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
           <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">derivado</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> la dependencia responsable no lo ha transparentado en un documento oficial, y te decimos cuál.</span></li>
         </ol>
       </section>'''
@@ -874,6 +945,8 @@ def pagina(a, sello):
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
     padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
+    if a.get('padre2'):
+        padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre2']
     cab_clase, cab_estilo = 'apartado-cab', ''
     if a.get('fondo'):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro']
@@ -910,7 +983,7 @@ def pagina(a, sello):
     <header class="{cab_clase}"{cab_estilo}>
       <div class="apartado-ancho">
         <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> {padre}<span>{menu}</span></nav>
-        <span class="apartado-lema">{icono} {lema}</span>
+        <span class="apartado-lema">{icono}{lema}</span>
         <h1 class="apartado-titulo">{titulo}</h1>
         <p class="apartado-entrada">{entrada}</p>
         {nota}
@@ -936,7 +1009,7 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
-           padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono=a['icono'], lema=a['lema'],
+           padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos,
            secciones='\n\n'.join(secciones))
 
@@ -944,7 +1017,7 @@ def pagina(a, sello):
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
-    'busca-y-verifica.html': ('herramienta-inspector.html#inspentes', 'Busca y verifica',
+    'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
 }
 
@@ -983,6 +1056,12 @@ def generar(sello=None):
     for n, h in enumerate(HERRAMIENTAS, 1):
         texto = pagina(herramienta(h, n), sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, h[0]), 'wb').write(texto.encode('utf-8'))
+        for i, t in enumerate(h[7]):
+            if t[0].endswith('.html'):
+                continue
+            m = herramienta_modulo(h, n, i)
+            texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+            open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
     for extra in [DICCIONARIO, GLOSARIO] + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))

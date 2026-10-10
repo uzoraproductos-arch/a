@@ -602,6 +602,35 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Herramientas en módulos con página propia y motor 8 veces más rápido (10-10-2026, sello 20261010b).**
+Pedido del autor: al entrar a cualquiera de las cuatro herramientas, la
+pestaña «se quedaba actualizando cifras». Diagnóstico con el perfilador de
+Chromium: cada pestaña abría `index.html?ir=...&visor=1` en un marco, y al
+cargar la portada el motor pasaba unos 7 segundos en `autolinkAmbito`, que
+enlaza los términos del glosario. Con los ámbitos que se enlazan después
+sumaba unos 15 segundos. La causa: abría un `TreeWalker` por cada alias
+(cientos) y revisaba los ancestros de cada nodo de texto en cada vuelta.
+
+- **Motor:** `autolinkAmbito` recorre el árbol una sola vez, guarda los nodos
+  válidos y actualiza la lista al partir un nodo. Se comparó contra la versión
+  anterior: los mismos 116 enlaces, en el mismo lugar y con el mismo texto.
+  La portada pasó de ~8 s a ~1 s. Los visores de Números y de los demás
+  apartados se benefician igual (~0.7 s).
+- **Reestructura (§5 bis):** `herramienta-*.html` ya no tiene pestañas ni
+  despliega nada. Es la ruta de sus módulos numerados (`.herr-ruta`) y cada
+  módulo abre su página `herramienta-<h>-<módulo>.html`, que hace
+  `herramienta_modulo()` en `apartados.py`. Son 16 páginas, que cargan en
+  0.4 a 1.5 s. Cada página lleva:
+  - migas de dos niveles;
+  - el módulo en el visor, a la altura de su contenido (`iframe[data-modulo]`
+    en `apartados.js`);
+  - «Abrir en el auditor completo»;
+  - anterior y siguiente, los chips de todos los módulos y las otras
+    herramientas.
+- **Anclas viejas:** `#pulso`, `#inspentes` y las demás redirigen a la página
+  del módulo (`hash_a_pagina`). `busca-y-verifica.html` va a
+  `herramienta-inspector-entes.html`.
+
 **Diccionario del Gasto Público en dos estantes (10-10-2026, sello 20261010a).**
 Al autor no le gustó la fusión en una sola «Biblioteca del auditor»: se
 perdieron los nombres «Biblioteca hacendaria» y «Fuentes del auditor», y el

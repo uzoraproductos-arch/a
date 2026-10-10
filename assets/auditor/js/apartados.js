@@ -271,6 +271,24 @@
     if (e.origin !== window.location.origin || !e.data || e.data.auditavision !== 'cerrar-visor') return;
     cerrarVisor(true);
   });
+
+  /* Páginas de módulo (10-10-2026): cada módulo de una herramienta tiene su
+     página (herramienta-*-*.html) y el auditor se carga aquí en modo visor,
+     con la altura de su contenido. Cerrarlo desde dentro vuelve al índice
+     de la herramienta (el segundo enlace de las migas). */
+  Array.prototype.forEach.call(document.querySelectorAll('iframe[data-modulo]'), function (marco) {
+    var caja = marco.closest('.apartado-visor');
+    marco.addEventListener('load', function () {
+      if (caja) caja.classList.add('cargado');
+      ajustarMarco(marco);
+    });
+    marco.src = marco.getAttribute('data-modulo');
+    window.addEventListener('message', function (e) {
+      if (e.origin !== window.location.origin || !e.data || e.data.auditavision !== 'cerrar-visor') return;
+      var migas = document.querySelectorAll('.apartado-migas a');
+      window.location.href = migas.length ? migas[migas.length - 1].getAttribute('href') : 'herramientas.html';
+    });
+  });
   /* Ventana lateral de estas páginas (decisión del autor, 09-10-2026): el
      logotipo abre la presentación «Quiénes somos» y el enlace «Qué son las
      finanzas públicas» abre su nota, más ancha, sin salir de la página.
