@@ -671,6 +671,52 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El Ágora cívica tiene su propia página (10-10-2026, sello 20261010o).**
+La pestaña «Ágora cívica» de Participa ya no despliega su contenido: abre
+`agora.html`, la red de réplica y diálogo. Es decisión del autor: «que
+funcione como red social».
+- **Cómo se genera.** La página sale de `agora()` en `apartados.py`, con
+  `agora.css` y `agora.js`.
+  - Las listas `AGORA_TEMAS`, `AGORA_POSTURAS`, `AGORA_PREGUNTAS` y
+    `AGORA_REGLAS` viven ahí.
+  - Temas, posturas y colores le llegan a la página en `#agDatos`.
+- **Qué hay en la página:**
+  - **Perfil cívico:** seudónimo con 🎲, lugar, una línea y color de
+    avatar, más contadores de hilos, réplicas, apoyos dados y hilos con
+    fuente.
+  - **Cinco insignias** locales: 🗣️ Primera voz, 📄 Cita su fuente,
+    🏛️ Fuente oficial, 🔁 Replicador y 🤝 Escucha activa.
+  - **El muro:**
+    - compositor con postura (incluye ❓ Pregunta), tema y enlace a la
+      fuente;
+    - orden por recientes, más apoyados, más replicados, con fuente o mis
+      hilos;
+    - filtros por #tema y búsqueda.
+  - **Cada hilo:**
+    - Apoyar, Replicar (el hilo se despliega con su formulario), Compartir
+      (`agora.html#<id>`), Ver los datos (la página de su tema) y Borrar si
+      es tuyo;
+    - 🔍 Pedir fuente, cuando el hilo no la trae;
+    - la fuente lleva una etiqueta: «dominio oficial» (gob.mx, ASF,
+      INEGI, Banxico…), «otra fuente» o «sin enlace».
+  - **Columna derecha:** temas en conversación, preguntas para empezar
+    (las propone la plataforma, sin cifras), cómo se replica bien y lo que
+    llega con el servidor.
+  - **Descargar mis hilos** en JSON.
+- **Honestidad.** El aviso «Versión de prueba» dice que todo vive solo en
+  el navegador. No hay hilos sembrados con usuarios inventados. Los hilos
+  usan la llave del foro anterior (`auditavision_foro_debates`), así que no
+  se pierde nada.
+- **En Participa:**
+  - la pestaña lleva ➔, y una sección con `'pagina'` se pinta como enlace,
+    sin panel;
+  - `apartados.js` deja pasar el clic de una pestaña sin `aria-controls`;
+  - `participa.html#agora` redirige a la página nueva (`hash_a_pagina`);
+  - la ruta 3 de la orientación lleva a `agora.html`.
+- **Pendiente:** el muro público, seguir temas o personas, los avisos de
+  réplica, la moderación y la verificación entre pares necesitan
+  servidor.
+
 **Una sola puerta: «Cuéntanos lo que viste» (10-10-2026, sello 20261010n).**
 El autor notó que «📢 Cuéntanos lo que viste» (cabecera) y «✏️ ¿Viste un
 error?» (pie) hacían casi lo mismo. Le gustaba el cajón que se despliega del

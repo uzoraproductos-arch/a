@@ -503,18 +503,18 @@ APARTADOS = [
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
                     'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
+        'hash_a_pagina': {'agora': 'agora.html'},
         'scripts': ['audit-database.js', 'participa.js'],
         'secciones': [
             {
                 # El contenido vive aquí desde el 09-10-2026 (antes eran
                 # tarjetas que llevaban a la portada). Bloques tomados de
                 # index.html en participa_html.py; los pinta participa.js.
+                # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
+                # la pestana ya no despliega, abre agora.html.
                 'id': 'agora',
-                'pestana': ('💬', 'Ágora cívica', 'Diálogos y argumentos con fuentes'),
-                'titulo': '💬 Ágora cívica y diálogos',
-                'texto': 'Un espacio plural para argumentar con datos: publica tu postura con seudónimo y tus fuentes, y replica a cualquier argumento.',
-                'bloque': participa_html.PORTAL,
-                'tarjetas': [],
+                'pagina': 'agora.html',
+                'pestana': ('💬', 'Ágora cívica', 'La red de réplica y diálogo: abre su página'),
             },
             {
                 'id': 'garantias',
@@ -1152,6 +1152,194 @@ def puerta():
     return PUERTA_HTML.format(rutas='\n'.join(rutas))
 
 
+# Ágora cívica en su propia pagina (decision del autor, 10-10-2026): antes
+# era la primera pestana de Participa y se desplegaba ahi. Ahora es una red
+# de replica y dialogo: perfil, muro, replicas, apoyos e insignias. Todo vive
+# en el navegador del lector hasta que haya servidor, y la pagina lo dice.
+# Lo pinta assets/auditor/js/agora.js; los hilos usan la misma llave que el
+# foro anterior (auditavision_foro_debates), asi que no se pierde nada.
+# Temas: (id, icono, nombre, pagina de la plataforma con sus datos).
+AGORA_TEMAS = [
+    ('presupuesto', '📊', 'Presupuesto', 'sigue-el-dinero.html'),
+    ('megaobras', '🏗️', 'Megaobras', 'herramienta-megaobras.html'),
+    ('deuda', '📈', 'Deuda', 'auditoria-deuda-soberana.html'),
+    ('municipios', '📍', 'Estados y municipios', 'auditoria-ramo-33.html'),
+    ('salud', '💊', 'Salud y medicinas', 'auditoria-megafarmacia.html'),
+    ('ambiente', '🌳', 'Ambiente', 'herramienta-ambiente.html'),
+    ('legislativo', '🏛️', 'Congreso', 'herramienta-inspector-entes.html'),
+    ('judicial', '⚖️', 'Poder Judicial', 'herramienta-inspector-entes.html'),
+    ('politicos', '👥', 'Personajes', 'diccionario.html'),
+    ('general', '🌐', 'Debate general', 'indice.html'),
+]
+# Posturas: (id, icono, nombre).
+AGORA_POSTURAS = [
+    ('a_favor', '🟢', 'A favor'),
+    ('en_contra', '🔴', 'En contra'),
+    ('matiz', '🟡', 'Matiz'),
+    ('aporte', '📄', 'Aporte documental'),
+    ('pregunta', '❓', 'Pregunta'),
+]
+# Preguntas de la plataforma para abrir conversacion (tema, pregunta,
+# pagina donde estan los datos). Son preguntas, no cifras ni opiniones.
+AGORA_PREGUNTAS = [
+    ('megaobras', '¿Con qué indicador medirías si una megaobra valió lo que costó?', 'herramienta-megaobras.html'),
+    ('presupuesto', 'Si repartieras el presupuesto desde cero, ¿qué subirías y qué bajarías?', 'simulador-presupuesto.html'),
+    ('municipios', '¿Tu municipio publica en qué gastó su Ramo 33? ¿Lo encontraste?', 'auditoria-ramo-33.html'),
+    ('deuda', '¿Qué debería explicar el gobierno antes de contratar más deuda?', 'auditoria-deuda-soberana.html'),
+    ('salud', '¿Qué tendría que transparentar una compra consolidada de medicinas?', 'auditoria-megafarmacia.html'),
+]
+AGORA_REGLAS = [
+    ('Argumentos, no personas.', 'Se discute lo que alguien dijo, nunca quién es.'),
+    ('Cifra sin fuente es opinión.', 'Si das un número, enlaza el documento oficial de donde sale.'),
+    ('Seudónimo sí, suplantación no.', 'Firma como quieras, pero no te hagas pasar por otra persona ni por una institución.'),
+    ('Nada de datos de terceros.', 'Ni domicilios, ni teléfonos, ni documentos de nadie.'),
+    ('Cero odio y cero amenazas.', 'Lo que ataque a un grupo o a una persona no tiene lugar aquí.'),
+    ('El desacuerdo se replica.', 'Si no estás de acuerdo, responde con tu argumento y tu fuente.'),
+]
+AGORA_SERVIDOR = [
+    'Muro público: lo que publiques lo leerá cualquiera.',
+    'Seguir temas y personas, y avisos cuando alguien te replique.',
+    'Moderación con estas mismas reglas, publicadas y con apelación.',
+    'Verificación de fuentes entre pares: quien revisa un enlace lo marca.',
+]
+AGORA_COLORES = ['#1a56b8', '#0f7b4f', '#b45309', '#b3261e', '#6d28d9', '#be185d', '#0e7490', '#334155']
+
+
+def agora():
+    temas_json = json.dumps({'temas': AGORA_TEMAS, 'posturas': AGORA_POSTURAS, 'colores': AGORA_COLORES}, ensure_ascii=False)
+    opciones = ''.join('<option value="%s">%s %s</option>' % (t[0], t[1], t[2]) for t in AGORA_TEMAS)
+    posturas = ''.join(
+        '<label class="ag-postura"><input type="radio" name="agPostura" value="%s"%s><span>%s %s</span></label>'
+        % (p[0], ' checked' if p[0] == 'matiz' else '', p[1], p[2]) for p in AGORA_POSTURAS)
+    colores = ''.join(
+        '<label class="ag-color" style="--c:%s"><input type="radio" name="agColor" value="%s"%s><span class="sr-only">Color %d</span></label>'
+        % (c, c, ' checked' if i == 0 else '', i + 1) for i, c in enumerate(AGORA_COLORES))
+    temas = {t[0]: t for t in AGORA_TEMAS}
+    preguntas = '\n'.join(
+        '              <li><button type="button" class="ag-preg" data-tema="%s" data-texto="%s"><span class="ag-preg-tema">%s %s</span>%s</button>'
+        '<a class="ag-preg-datos" href="%s">Ver los datos ➔</a></li>'
+        % (p[0], esc_attr(p[1]), temas[p[0]][1], temas[p[0]][2], p[1], p[2]) for p in AGORA_PREGUNTAS)
+    reglas = '\n'.join('              <li><b>%s</b> %s</li>' % r for r in AGORA_REGLAS)
+    servidor = '\n'.join('              <li>%s</li>' % s for s in AGORA_SERVIDOR)
+    bloque = '''<script type="application/json" id="agDatos">{datos}</script>
+        <div class="ag" id="agora">
+          <aside class="ag-izq" aria-label="Tu perfil y las reglas">
+            <section class="ag-card ag-perfil" aria-labelledby="agPerfilTit">
+              <h2 class="ag-card-tit" id="agPerfilTit">Tu perfil cívico</h2>
+              <div class="ag-perfil-cab"><span class="ag-avatar ag-avatar-xl" id="agAvatar" aria-hidden="true">?</span>
+                <div class="ag-perfil-id"><b id="agPerfilNick">Sin seudónimo</b><span id="agPerfilLugar">Elige cómo firmar</span></div></div>
+              <p class="ag-perfil-bio" id="agPerfilBio" hidden></p>
+              <dl class="ag-stats" id="agStats"></dl>
+              <div class="ag-insignias" id="agInsignias" aria-label="Insignias"></div>
+              <details class="ag-editar" id="agEditar">
+                <summary>✏️ Editar perfil</summary>
+                <form id="agPerfilForm" class="ag-form">
+                  <div class="ag-campo"><label for="agNick">Seudónimo</label>
+                    <div class="ag-fila"><input id="agNick" type="text" maxlength="30" placeholder="@CiudadanaDelSur" autocomplete="off">
+                    <button type="button" class="ag-btn" id="agNickAzar" title="Sugerir un seudónimo">🎲</button></div></div>
+                  <div class="ag-campo"><label for="agLugar">Desde dónde escribes (opcional)</label>
+                    <input id="agLugar" type="text" maxlength="60" placeholder="Municipio o estado"></div>
+                  <div class="ag-campo"><label for="agBio">Una línea sobre ti (opcional)</label>
+                    <input id="agBio" type="text" maxlength="140" placeholder="Qué te interesa fiscalizar"></div>
+                  <fieldset class="ag-colores"><legend>Color de tu avatar</legend>{colores}</fieldset>
+                  <button type="submit" class="ag-btn ag-btn-of">Guardar perfil</button>
+                </form>
+              </details>
+              <div class="ag-perfil-acc">
+                <button type="button" class="ag-btn" id="agDescargar">⬇️ Descargar mis hilos</button>
+              </div>
+            </section>
+            <section class="ag-card" aria-labelledby="agReglasTit">
+              <h2 class="ag-card-tit" id="agReglasTit">📜 Reglas del Ágora</h2>
+              <ol class="ag-reglas">
+{reglas}
+              </ol>
+            </section>
+          </aside>
+
+          <div class="ag-centro">
+            <form class="ag-card ag-composer" id="agComposer" novalidate>
+              <div class="ag-comp-cab"><span class="ag-avatar" id="agAvatarMini" aria-hidden="true">?</span>
+                <label class="sr-only" for="agTesis">Tu tesis</label>
+                <input id="agTesis" type="text" maxlength="160" placeholder="¿Qué quieres poner a debate?" autocomplete="off" required></div>
+              <div class="ag-comp-mas" id="agCompMas">
+                <label class="sr-only" for="agTexto">Tu argumento</label>
+                <textarea id="agTexto" rows="4" maxlength="1200" placeholder="Desarrolla tu argumento: qué afirmas, por qué y con qué datos." required></textarea>
+                <fieldset class="ag-posturas"><legend>Tu postura</legend>{posturas}</fieldset>
+                <div class="ag-comp-fila">
+                  <div class="ag-campo"><label for="agTema">Tema</label><select id="agTema">{opciones}</select></div>
+                  <div class="ag-campo ag-campo-ancho"><label for="agFuente">Fuente oficial (enlace)</label>
+                    <input id="agFuente" type="url" maxlength="400" placeholder="https://… (ASF, DOF, Hacienda, INEGI)"></div>
+                </div>
+                <div class="ag-comp-pie"><span class="ag-cuenta" id="agCuenta">0 / 1200</span>
+                  <span class="ag-estado" id="agEstado" role="status"></span>
+                  <button type="submit" class="ag-btn ag-btn-of">Publicar</button></div>
+              </div>
+            </form>
+
+            <div class="ag-barra">
+              <div class="ag-orden" role="group" aria-label="Ordenar el muro">
+                <button type="button" class="ag-orden-btn" data-orden="recientes" aria-pressed="true">🕒 Recientes</button>
+                <button type="button" class="ag-orden-btn" data-orden="apoyados" aria-pressed="false">👍 Más apoyados</button>
+                <button type="button" class="ag-orden-btn" data-orden="replicados" aria-pressed="false">💬 Más replicados</button>
+                <button type="button" class="ag-orden-btn" data-orden="fuente" aria-pressed="false">📄 Con fuente</button>
+                <button type="button" class="ag-orden-btn" data-orden="mios" aria-pressed="false">🙋 Mis hilos</button>
+              </div>
+              <label class="sr-only" for="agBuscar">Buscar en el muro</label>
+              <input id="agBuscar" class="ag-buscar" type="search" placeholder="🔍 Buscar en el muro" autocomplete="off">
+            </div>
+            <div class="ag-chips" id="agTemas" role="group" aria-label="Filtrar por tema"></div>
+            <div class="ag-feed" id="agFeed" aria-live="polite"></div>
+          </div>
+
+          <aside class="ag-der" aria-label="Temas y preguntas">
+            <section class="ag-card" aria-labelledby="agTendTit">
+              <h2 class="ag-card-tit" id="agTendTit">🔥 Temas en conversación</h2>
+              <ol class="ag-tend" id="agTendencias"></ol>
+            </section>
+            <section class="ag-card" aria-labelledby="agPregTit">
+              <h2 class="ag-card-tit" id="agPregTit">💡 Preguntas para empezar</h2>
+              <p class="ag-card-sub">Las propone la plataforma. Elige una y escribe tu respuesta.</p>
+              <ul class="ag-pregs">
+{preguntas}
+              </ul>
+            </section>
+            <section class="ag-card" aria-labelledby="agComoTit">
+              <h2 class="ag-card-tit" id="agComoTit">🧭 Cómo se replica bien</h2>
+              <ol class="ag-como">
+                <li><b>Cita.</b> Di con qué parte del argumento no estás de acuerdo.</li>
+                <li><b>Prueba.</b> Enlaza el documento oficial que sostiene tu dato.</li>
+                <li><b>Propón.</b> Termina con lo que harías tú o con la pregunta que falta responder.</li>
+              </ol>
+            </section>
+            <section class="ag-card ag-pronto" aria-labelledby="agProntoTit">
+              <h2 class="ag-card-tit" id="agProntoTit">🚧 Lo que llega con el servidor</h2>
+              <ul>
+{servidor}
+              </ul>
+            </section>
+          </aside>
+        </div>
+        <noscript><p class="sv-aviso">El Ágora necesita JavaScript para funcionar.</p></noscript>'''.format(
+        datos=temas_json.replace('</', '<\\/'), colores=colores, reglas=reglas, posturas=posturas,
+        opciones=opciones, preguntas=preguntas, servidor=servidor)
+    return {
+        'archivo': 'agora.html', 'menu': 'Ágora cívica', 'menu_archivo': 'participa.html',
+        'padre': ('participa.html', 'Participa'),
+        'icono': '💬', 'titulo': 'Ágora cívica', 'lema': 'La red de réplica y diálogo',
+        'entrada': ('Pon a debate lo que viste en los números, sostenlo con su fuente y replica a quien piense distinto. '
+                    'Firmas con seudónimo: sin correo, sin teléfono y sin rastreo.'),
+        'estilos': ['servicios.css', 'agora.css'],
+        'scripts': ['agora.js'],
+        'antes': ('      <p class="sv-aviso ag-aviso"><span class="sz-et">Versión de prueba</span> Por ahora el Ágora vive '
+                  '<b>solo en tu navegador</b>: lo que publiques, tus apoyos y tu perfil se guardan en este equipo y nadie más '
+                  'los ve todavía. El muro público se abre cuando la plataforma tenga servidor; mientras, puedes descargar tus hilos.</p>'),
+        'secciones': [
+            {'id': 'muro', 'titulo': '💬 El muro', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque},
+        ],
+    }
+
+
 def poner_puerta():
     """Copia el cajon de «Cuéntanos lo que viste» en index.html, entre
     <!-- puerta:inicio --> y <!-- puerta:fin -->. index.html se edita en
@@ -1402,6 +1590,8 @@ def tarjeta(t, modulo=False, auto=False):
 def pagina(a, sello):
     secciones = []
     for s in a['secciones']:
+        if s.get('pagina'):
+            continue  # pestana que abre su propia pagina (Agora, 10-10-2026)
         num = ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else ''
         titulo = ('Capítulo %d. ' % s['num'] if s.get('num') else '')
         ayer = ''
@@ -1433,10 +1623,15 @@ def pagina(a, sello):
 
     if a.get('pestanas'):
         botones = '\n'.join(
-            '          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
-            '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
-            '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
-            % ((s['id'], s['id'], s['id']) + s['pestana']) for s in a['secciones'])
+            ('          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-%s" href="%s">'
+             '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
+             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span>'
+             '<span class="apartado-pestana-ir" aria-hidden="true">➔</span></a>' % ((s['id'], s['pagina']) + s['pestana']))
+            if s.get('pagina') else
+            ('          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
+             '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
+             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
+             % ((s['id'], s['id'], s['id']) + s['pestana'])) for s in a['secciones'])
         en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página"%s>
 %s
       </nav>
@@ -1551,7 +1746,9 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
-    ('10-10-2026', 'Comunidad, en Participa: propón un tema, señala un error con su documento, comparte el Estado de Cuenta y consulta la fe de erratas. Cada página lleva al pie «¿Viste un error?».'),
+    ('10-10-2026', 'Ágora cívica, en su propia página: la red de réplica y diálogo, con perfil, muro, réplicas, apoyos, insignias y preguntas para empezar.'),
+    ('10-10-2026', 'Una sola puerta, «📢 Cuéntanos lo que viste»: en cualquier página abre tres rutas (algo raro con el dinero público, un dato mal, un tema para investigar).'),
+    ('10-10-2026', 'Comunidad, en Participa: propón un tema, señala un error con su documento, comparte el Estado de Cuenta y consulta la fe de erratas.'),
     ('10-10-2026', 'Servicios de investigación, en Participa: cinco servicios (incluida la licencia de las herramientas), cómo trabajamos, política de independencia y el formulario «Solicita una investigación». Se abren con el lanzamiento.'),
     ('10-10-2026', 'Simulador «Reparte el presupuesto», desde $0: con ejemplo oficial de 2026 y 2027, comparación de escenarios y descarga. La Calculadora Cívica también arranca en cero.'),
     ('10-10-2026', 'Aprende reúne la Biblioteca hacendaria y las Fuentes del auditor en una sola tarjeta, el Diccionario del Gasto Público; cada estante abre su propia página.'),
@@ -1609,6 +1806,7 @@ def indice():
                 (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
+                    ('agora.html', 'Ágora cívica', 'La red de réplica y diálogo con seudónimo'),
                     ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas'),
                     ('servicios.html', 'Servicios de investigación', 'Solicita una investigación y política de independencia')]
         otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
@@ -1693,7 +1891,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

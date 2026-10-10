@@ -72,7 +72,7 @@
   function abrirPestana(id, desplazar) {
     if (!pestanas) return;
     pestanaAbierta = id || null;
-    Array.prototype.forEach.call(pestanas.querySelectorAll('.apartado-pestana'), function (t) {
+    Array.prototype.forEach.call(pestanas.querySelectorAll('.apartado-pestana[aria-controls]'), function (t) {
       var panel = document.getElementById(t.getAttribute('aria-controls'));
       var on = t.getAttribute('aria-controls') === pestanaAbierta;
       t.setAttribute('aria-selected', on ? 'true' : 'false');
@@ -98,7 +98,8 @@
     abrirPestana(inicial, false);
     pestanas.addEventListener('click', function (e) {
       var t = e.target.closest('.apartado-pestana');
-      if (!t) return;
+      /* Las pestañas sin panel (el Ágora) son enlaces a su página. */
+      if (!t || !t.hasAttribute('aria-controls')) return;
       e.preventDefault();
       var id = t.getAttribute('aria-controls');
       var cerrar = id === pestanaAbierta;
