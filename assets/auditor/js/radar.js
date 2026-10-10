@@ -8,7 +8,8 @@
    Las cifras llegan en el JSON #rdDatos, que arma herramientas/apartados.py
    (radar()) con window.AUDIT_DB: aquí no se escribe ninguna cifra.
    Desde el 10-10-2026 cada parte vive en su página (radar-tablero.html,
-   radar-peso.html, radar-reloj.html, radar-duelo.html, radar-hoy.html):
+   radar-peso.html, radar-reloj.html, radar-duelo.html y el «Hoy» de
+   radar-estado-de-cuenta.html):
    cada bloque arranca solo si su página lo trae. */
 (function () {
   'use strict';

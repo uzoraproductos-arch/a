@@ -671,6 +671,17 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Hoy» y «Expide el estado de cuenta», una sola tarjeta (10-10-2026, sello 20261010u).**
+Por decisión del autor, las dos partes del Radar se fusionaron en la tarjeta
+«🧾 Hoy y el estado de cuenta de cada administración». Es una sola página con
+dos secciones: `#hoy` (el presupuesto en curso) y `#expide` (la herramienta).
+La página conserva `radar-estado-de-cuenta.html`, porque esa dirección va
+impresa en el sello de los PDF (`?verifica=`). `radar-hoy.html` es ahora una
+redirección (`REDIRECCIONES`) a `radar-estado-de-cuenta.html#hoy`, y las
+anclas viejas (`radar-hacendario.html#hoy`, `#expide` y los `#rc-*` de Datos)
+llevan a su sección. La página carga `radar.js` (contador de «Hoy») y
+`estado-administracion.js`. El Radar queda en seis partes.
+
 **Expide el estado de cuenta de cada administración (10-10-2026, sello 20261010t).**
 El autor pidió una herramienta que «expida» el estado de cuenta de cada
 administración, de la última presidenta hasta la fecha, con su salud
