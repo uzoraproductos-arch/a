@@ -10,7 +10,9 @@
    .cm-compartir[data-url][data-texto] pinta los botones de compartir: el
    menu nativo del telefono si existe, WhatsApp, X, Facebook y copiar.
 
-   Pagina: comunidad.html (herramientas/apartados.py, comunidad()). */
+   Pagina: comunidad.html (herramientas/apartados.py, comunidad()). Desde el
+   10-10-2026 se carga en todas las paginas: tambien abre el cajon de
+   «Cuéntanos lo que viste» (ver abajo). */
 (function () {
   'use strict';
 
@@ -166,12 +168,71 @@
 
   Array.prototype.forEach.call(document.querySelectorAll('form.cm-form'), preparar);
 
-  // «¿Viste un error?» llega con la pagina: comunidad.html?pagina=...#error
+  // Enlaces viejos de «¿Viste un error?» (comunidad.html?pagina=...#error).
   try {
     var pag = new URLSearchParams(location.search).get('pagina');
     var campo = document.getElementById('cmErrPagina');
     if (pag && campo && !campo.value) campo.value = pag.slice(0, 200);
   } catch (e) { /* el lector la escribe */ }
+
+  /* «Cuéntanos lo que viste», la puerta unica (fusion del 10-10-2026 con
+     «¿Viste un error?», que estaba al pie). Todo [data-puerta] abre el cajon
+     #ptCajon (lo escribe herramientas/apartados.py, puerta()); su valor
+     (reporta, error, tema) despliega esa ruta. Sin JavaScript, el enlace
+     lleva a comunidad.html. En index.html lo abre tambien el motor
+     (openAyudanosFiscalizar llama a window.Puerta). */
+  var cajon = document.getElementById('ptCajon');
+  var velo = document.getElementById('ptVelo');
+  var previo = null;
+
+  function abrirPuerta(ruta) {
+    if (!cajon) return false;
+    previo = document.activeElement;
+    var pagina = document.getElementById('ptErrPagina');
+    if (pagina && !pagina.value) {
+      pagina.value = ((location.pathname.split('/').pop() || 'index.html') + ' · ' + document.title).slice(0, 200);
+    }
+    cajon.hidden = false;
+    if (velo) velo.hidden = false;
+    document.body.classList.add('pt-abierta');
+    var d = ruta ? cajon.querySelector('.pt-ruta[data-ruta="' + ruta + '"]') : null;
+    if (d) d.open = true;
+    void cajon.offsetWidth;
+    cajon.classList.add('pt-visible');
+    if (velo) velo.classList.add('pt-visible');
+    (d ? d.querySelector('summary') : cajon.querySelector('.pt-cerrar')).focus();
+    return true;
+  }
+
+  function cerrarPuerta() {
+    if (!cajon || cajon.hidden) return;
+    cajon.classList.remove('pt-visible');
+    cajon.hidden = true;
+    if (velo) { velo.classList.remove('pt-visible'); velo.hidden = true; }
+    document.body.classList.remove('pt-abierta');
+    if (previo && previo.focus) previo.focus();
+  }
+
+  document.addEventListener('click', function (ev) {
+    var t = ev.target;
+    if (!t.closest) return;
+    var a = t.closest('[data-puerta]');
+    if (a && cajon && !ev.ctrlKey && !ev.metaKey && !ev.shiftKey) {
+      ev.preventDefault();
+      abrirPuerta(a.getAttribute('data-puerta'));
+    } else if (t.closest('[data-pt-cerrar]') || (velo && t === velo)) {
+      cerrarPuerta();
+    }
+  });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') cerrarPuerta(); });
+  if (cajon) {
+    Array.prototype.forEach.call(cajon.querySelectorAll('.pt-ruta'), function (d) {
+      d.addEventListener('toggle', function () {
+        if (d.open && d.scrollIntoView) d.scrollIntoView({ block: 'nearest' });
+      });
+    });
+  }
+  window.Puerta = { abrir: abrirPuerta, cerrar: cerrarPuerta };
 
   Array.prototype.forEach.call(document.querySelectorAll('.cm-compartir'), function (caja) {
     var url = caja.getAttribute('data-url');

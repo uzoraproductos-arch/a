@@ -243,7 +243,7 @@ def construir():
            '        </div>\n'
            '        <p class="pe-regla">Un dato pendiente no se estima ni se rellena: se dice que falta, por qué falta y dónde debería estar. '
            'Si la falta es de una dependencia obligada, la nombramos. Si el documento existe y aún no lo integramos, lo decimos: la falta es nuestra. '
-           '¿Tienes el documento? <a href="index.html?ir=reporta">Cuéntanos y lo integramos</a>.</p>') % (
+           '¿Tienes el documento? <a href="comunidad.html#error" data-puerta="error">Cuéntanos y lo integramos</a>.</p>') % (
         len(items), resumen['d'], resumen['p'], resumen['h'])
     secciones = [{'id': 'resumen', 'titulo': 'Lo que falta, en números', 'texto': '', 'sin_cab': True, 'bloque': cab, 'tarjetas': []}]
     for t in temas:
