@@ -217,7 +217,7 @@ def recolectar():
     # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
     ec = ('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta')
     for x in out:
-        if x['id'].startswith('neto-diputado_local-') or x['id'] in ('poderes-legislativo-0', 'poderes-judicial-1'):
+        if x['id'].startswith('neto-diputado_local-') or x['id'] in ('poderes-legislativo-0', 'poderes-judicial-1', 'prest-aguinaldo-sen'):
             x['aparece'] = x['aparece'] + [ec]
     # Ninguno sin su porque, su responsable y su enlace oficial.
     faltan = [x['id'] for x in out if not (x['porque'] and x['responsable'] and x['enlace'])]

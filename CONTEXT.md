@@ -671,6 +671,16 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Se suma la senaduría al estado de cuenta (10-10-2026, sello 20261010w).**
+El autor notó que faltaban los senadores. Quinto tipo en «¿De quién?»: la
+senaduría (`?doc=senado`, folio `AV-SEN-…`). Lo que cobra (dieta neta del
+Manual del Senado; bruta, ISR, neta, aguinaldo y prima del seguro de vida del
+Anexo 23.2.2), sus asesores (niveles 34, 30 y 29 del tabulador), 128
+integrantes (CPEUM art. 56, cotejado), presupuesto 2026, avance a junio,
+cierre 2025 por capítulo y la auditoría 32 de la ASF (CP 2024) con sus
+capítulos. Las dos señales quedan en verde. El aguinaldo que equivale a 60 días
+y no a 40 enlaza a su pendiente (`prest-aguinaldo-sen`). Son 35 documentos.
+
 **El estado de cuenta de diputaciones y de la Suprema Corte (10-10-2026, sello 20261010v).**
 A pedido del autor, la herramienta «Expide» de `radar-estado-de-cuenta.html#expide`
 ya no es solo de las administraciones. El paso 1 pregunta «¿De quién?»:
