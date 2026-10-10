@@ -7,7 +7,12 @@
    El sello: la huella SHA-256 de las cifras del documento. El folio sale de
    la huella, así que el mismo contenido da siempre el mismo folio, y la
    sección «Verifica» recalcula las huellas para comprobar que un documento
-   no se alteró. */
+   no se alteró.
+   Desde el mismo 10-10-2026 expide también el de quienes legislan y juzgan:
+   la diputación federal, la de cada congreso local y la Suprema Corte con su
+   ponencia y sus asesores. Esos documentos los arma apartados.py en el JSON
+   #exCargos (radar_cargos), cifra por cifra con su fuente y su página; aquí
+   solo se pintan y se firman con el mismo sello. */
 (function () {
   'use strict';
   var nodo = document.getElementById('rdDatos'), app = document.getElementById('exApp');
@@ -15,6 +20,8 @@
   var D;
   try { D = JSON.parse(nodo.textContent); } catch (e) { return; }
   var P = D.peso || {};
+  var C = null, nc = document.getElementById('exCargos');
+  if (nc) { try { C = JSON.parse(nc.textContent); } catch (e) { C = null; } }
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -140,14 +147,15 @@
       semaforo: m.sem.map(function (r) { return [r.s.id, v(r.x), r.c || 'sin color']; })
     };
   }
-  function huella(m) {
+  function huella(m) { return huellaDe(cifras(m)); }
+  function huellaDe(obj) {
     if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.resolve(null);
-    var txt = JSON.stringify(cifras(m));
+    var txt = JSON.stringify(obj);
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt)).then(function (b) {
       return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
     });
   }
-  function folio(a, h) { return 'AV-' + a.ini.replace(/[^A-Z]/gi, '').toUpperCase() + '-' + h.slice(0, 8).toUpperCase(); }
+  function folio(ini, h) { return 'AV-' + ini.replace(/[^A-Z]/gi, '').toUpperCase() + '-' + h.slice(0, 8).toUpperCase(); }
 
   /* ================= Pintar ================= */
   function valor(x, u) {
@@ -183,16 +191,47 @@
       '<text x="60" y="74" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor">' + esc(fol ? fol.split('-').slice(-1)[0] : '········') + '</text></svg>';
   }
 
-  var est = { adm: null };
-  function pinta() {
+  function cabecera(col, tipo, titulo, sub, corteEt, corte) {
+    return '<header class="ex-doc-cab" style="--c:' + col + '">' +
+      '<div class="ex-marca"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="54" height="42"><div><b>Auditavisión</b><small>El gasto público, a la vista</small></div></div>' +
+      '<div class="ex-doc-tit"><span class="ex-doc-tipo">' + esc(tipo) + '</span><h3>' + esc(titulo) + '</h3>' +
+      '<span>' + esc(sub) + '</span></div>' +
+      '<dl class="ex-meta"><div><dt>Folio</dt><dd class="ex-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoyFecha()) + '</dd></div>' +
+      '<div><dt>' + esc(corteEt) + '</dt><dd>' + esc(corte) + '</dd></div></dl></header>';
+  }
+  function listaFuentes(ks, cat, n) {
+    return '<section class="ex-sec"><h4><span>' + n + '</span> Fuentes oficiales</h4><ol class="ex-fuentes">' + ks.map(function (k) {
+      var x = cat[k];
+      return x ? '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.corto) + '</a> <small>' + esc(x.url) + '</small></li>' : '';
+    }).join('') + '</ol><p class="ex-nota">Estados de cada cifra: <b>oficial</b>, tomada tal cual de su documento; <b>derivado</b>, calculada con cifras oficiales, con la operación dicha; <b>pendiente</b>, falta el documento y queda en el <a href="pendientes.html">Registro de pendientes</a>.</p></section>';
+  }
+  function pie() {
+    return '<footer class="ex-sello"><div class="ex-sello-img">' + sello(null) + '</div><div class="ex-sello-tx">' +
+      '<b>Sello de verificación de Auditavisión</b>' +
+      '<p>Folio <b class="ex-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
+      '<p class="ex-huella">Huella digital (SHA-256 de las cifras): <code id="exHuella">calculando…</code></p>' +
+      '<p>Compruébalo en <span class="ex-liga" id="exLigaTx"></span></p>' +
+      '<p class="ex-leyenda">Lo expide Auditavisión, plataforma ciudadana de fiscalización del gasto público. <b>No es un documento oficial</b> del gobierno, del Congreso, de la Corte ni de la Auditoría Superior. El sello certifica dos cosas: que cada cifra proviene de la fuente oficial citada, y que el contenido no se ha alterado desde que se expidió. Si cambia una sola cifra, la huella ya no coincide.</p>' +
+      '</div></footer>';
+  }
+  function firma(doc, obj, ini) {
+    huellaDe(obj).then(function (hx) {
+      var fol = hx ? folio(ini, hx) : null;
+      est.folio = fol;
+      Array.prototype.forEach.call(doc.querySelectorAll('.ex-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
+      document.getElementById('exHuella').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
+      document.getElementById('exLigaTx').textContent = fol ? ligaVerifica(fol) : location.origin + location.pathname;
+      doc.querySelector('.ex-sello-img').innerHTML = sello(fol);
+    });
+  }
+
+  var est = { tipo: 'adm', adm: null, doc: null, folio: null };
+  function pinta() { if (est.tipo === 'adm') pintaAdm(); else pintaCargo(docDe(est.doc)); }
+  function pintaAdm() {
     var a = adm(est.adm), m = modelo(a);
     var doc = document.getElementById('exDoc');
-    var h = '<header class="ex-doc-cab" style="--c:' + a.col + '">' +
-      '<div class="ex-marca"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="54" height="42"><div><b>Auditavisión</b><small>El gasto público, a la vista</small></div></div>' +
-      '<div class="ex-doc-tit"><span class="ex-doc-tipo">Estado de cuenta de la administración</span><h3>' + esc(a.n) + '</h3>' +
-      '<span>' + esc(a.periodo) + (a.ys ? ' · cifras de ' + a.ys[0] + (a.ys[1] !== a.ys[0] ? ' a ' + a.ys[1] : '') : '') + '</span></div>' +
-      '<dl class="ex-meta"><div><dt>Folio</dt><dd class="ex-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoyFecha()) + '</dd></div>' +
-      '<div><dt>Datos con corte al</dt><dd>' + esc(D.corte) + '</dd></div></dl></header>';
+    var h = cabecera(a.col, 'Estado de cuenta de la administración', a.n,
+      a.periodo + (a.ys ? ' · cifras de ' + a.ys[0] + (a.ys[1] !== a.ys[0] ? ' a ' + a.ys[1] : '') : ''), 'Datos con corte al', D.corte);
     if (a.aviso) h += '<p class="ex-aviso">⚠️ ' + esc(a.aviso) + (a.curso ? ' El semáforo es <b>preliminar</b>: se compara un año contra sexenios completos.' : '') + '</p>';
 
     /* 1. Semáforo */
@@ -234,31 +273,104 @@
       '<p class="ex-nota">Sin color en el semáforo: la ASF mide el monto por aclarar con esta definición solo desde la Cuenta Pública 2019, y las cuentas viejas llevan más años de solventación. No es daño comprobado.</p></section>';
 
     /* 6. Fuentes */
-    h += '<section class="ex-sec"><h4><span>6</span> Fuentes oficiales</h4><ol class="ex-fuentes">' + m.fuentes.map(function (k) {
-      var x = D.fuentes[k];
-      return x ? '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.corto) + '</a> <small>' + esc(x.url) + '</small></li>' : '';
-    }).join('') + '</ol><p class="ex-nota">Estados de cada cifra: <b>oficial</b>, tomada tal cual de su documento; <b>derivado</b>, calculada con cifras oficiales, con la operación dicha; <b>pendiente</b>, falta el documento y queda en el <a href="pendientes.html">Registro de pendientes</a>.</p></section>';
-
-    /* Sello */
-    h += '<footer class="ex-sello"><div class="ex-sello-img">' + sello(null) + '</div><div class="ex-sello-tx">' +
-      '<b>Sello de verificación de Auditavisión</b>' +
-      '<p>Folio <b class="ex-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
-      '<p class="ex-huella">Huella digital (SHA-256 de las cifras): <code id="exHuella">calculando…</code></p>' +
-      '<p>Compruébalo en <span class="ex-liga" id="exLigaTx"></span></p>' +
-      '<p class="ex-leyenda">Lo expide Auditavisión, plataforma ciudadana de fiscalización del gasto público. <b>No es un documento oficial</b> del gobierno ni de la Auditoría Superior. El sello certifica dos cosas: que cada cifra proviene de la fuente oficial citada, y que el contenido no se ha alterado desde que se expidió. Si cambia una sola cifra, la huella ya no coincide.</p>' +
-      '</div></footer>';
+    h += listaFuentes(m.fuentes, D.fuentes, 6);
+    h += pie();
     doc.innerHTML = h;
     doc.style.setProperty('--c', a.col);
-    huella(m).then(function (hx) {
-      var fol = hx ? folio(a, hx) : null;
-      est.folio = fol;
-      Array.prototype.forEach.call(doc.querySelectorAll('.ex-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
-      document.getElementById('exHuella').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
-      document.getElementById('exLigaTx').textContent = fol ? ligaVerifica(fol) : location.origin + location.pathname;
-      doc.querySelector('.ex-sello-img').innerHTML = sello(fol);
-    });
+    firma(doc, cifras(m), a.ini);
   }
 
+  /* ================= Diputaciones y Suprema Corte ================= */
+  function docDe(id) { if (!C) return null; for (var i = 0; i < C.docs.length; i++) if (C.docs[i].id === id) return C.docs[i]; return null; }
+  function pesos(v) { return '$' + num(v, v % 1 ? 2 : 0); }
+  function cifraC(r) {
+    if (r.u === 'txt') return esc(r.txt);
+    var f = r.u === '$g' ? function (v) { return '$' + num(v / 1e6, 1) + ' millones'; } :
+      r.u === 'ent' ? function (v) { return num(v, 0); } :
+      r.u === 'pct100' ? function (v) { return num(v, 1) + '%'; } :
+      r.u === 'pct' ? function (v) { return signo(v, 1) + '%'; } : pesos;
+    return typeof r.v2 === 'number' ? 'de ' + f(r.v) + ' a ' + f(r.v2) : f(r.v);
+  }
+  function valorC(r) {
+    var tiene = typeof r.v === 'number' || r.u === 'txt' && r.txt;
+    return (tiene ? '<b class="ex-v' + (r.u === 'txt' ? ' ex-v-tx' : '') + '">' + cifraC(r) + '</b> ' : '') + chip(r.est, r.pid);
+  }
+  function fuenteC(r) {
+    var x = r.f && C.fuentes[r.f];
+    return (x ? '<small class="ex-fte">Fuente: <a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.corto) + '</a>' + (r.pag ? ', ' + esc(r.pag) : '') + '</small>' : '') +
+      (r.op ? '<small class="ex-op">' + esc(r.op) + '</small>' : '') + (r.nota ? '<small class="ex-op">' + esc(r.nota) + '</small>' : '');
+  }
+  function fuentesDe(d) {
+    var ks = [];
+    function f(r) { if (r.f && ks.indexOf(r.f) < 0) ks.push(r.f); }
+    d.senales.forEach(function (s) { f(s.x); s.extra.forEach(f); f({ f: C.senales[s.id].ley }); });
+    d.secciones.forEach(function (s) { s.filas.forEach(f); });
+    return ks;
+  }
+  /* Las cifras que firma el sello, en un orden fijo. */
+  function cifrasC(d) {
+    function v(r) { return typeof r.v === 'number' ? (typeof r.v2 === 'number' ? [r.v, r.v2] : r.v) : r.u === 'txt' ? r.txt || 'sin dato' : 'sin dato'; }
+    return {
+      doc: 'Auditavisión · ' + d.tipoTx, id: d.id, corte: d.corte,
+      senales: d.senales.map(function (s) { return [s.id, v(s.x), s.c || 'sin color']; }),
+      secciones: d.secciones.map(function (s) { return [s.tit, s.filas.map(function (r) { return [r.t, v(r), r.est]; })]; })
+    };
+  }
+  function pintaCargo(d) {
+    var doc = document.getElementById('exDoc');
+    var h = cabecera(d.col, d.tipoTx, d.n, d.sub, 'Fuentes consultadas en', d.corte);
+    if (d.aviso) h += '<p class="ex-aviso">ℹ️ ' + esc(d.aviso) + '</p>';
+    var cuenta = { verde: 0, ambar: 0, rojo: 0, gris: 0 };
+    d.senales.forEach(function (s) { cuenta[s.c || 'gris']++; });
+    h += '<section class="ex-sec"><h4><span>1</span> Dos señales con regla de ley</h4>' +
+      '<p class="ex-resumen">' + ['verde', 'ambar', 'rojo'].filter(function (c) { return cuenta[c]; }).map(function (c) {
+        return '<span class="ex-cuenta ex-' + c + '">' + COLOR[c][0] + ' ' + cuenta[c] + ' en ' + COLOR[c][1].toLowerCase() + '</span>';
+      }).join('') + (cuenta.gris ? '<span class="ex-cuenta ex-gris">⚪ ' + cuenta.gris + ' sin color</span>' : '') + '</p>' +
+      '<div class="ex-sem">' + d.senales.map(function (s) {
+        var def = C.senales[s.id], ley = C.fuentes[def.ley];
+        var et = { verde: ['🟢', 'Verde'], ambar: ['🟡', 'Ámbar'], rojo: ['🔴', 'Rojo'] }[s.c];
+        return '<div class="ex-sem-i ' + (s.c ? 'ex-' + s.c : 'ex-gris') + '"><div class="ex-sem-cab"><span class="ex-luz" aria-hidden="true">' + (et ? et[0] : '⚪') + '</span>' +
+          '<b>' + def.ico + ' ' + esc(def.tit) + '</b><span class="ex-sem-c">' + (et ? et[1] : 'Sin color') + '</span></div>' +
+          '<p class="ex-sem-v">' + valorC(s.x) + '</p>' + fuenteC(s.x) +
+          s.extra.map(function (r) { return '<p class="ex-sem-x">' + esc(r.t) + ': ' + valorC(r) + '</p>' + fuenteC(r); }).join('') +
+          '<p class="ex-sem-que">' + esc(def.que) + '</p>' +
+          '<small class="ex-regla">' + esc(def.reglas[s.r]) + (ley ? ' <a href="' + esc(ley.url) + '" target="_blank" rel="noopener noreferrer">Ver la ley ↗</a>' : '') + '</small></div>';
+      }).join('') + '</div>' +
+      '<p class="ex-nota">Las señales comparan con reglas escritas en la ley; no son una calificación oficial ni un juicio sobre ninguna persona. ' +
+      'Donde la cifra es parcial o falta, la señal se queda sin color en lugar de suponer.</p></section>';
+    d.secciones.forEach(function (s, i) {
+      var nota = s.nota === '@local' ? C.notaLocal : s.nota;
+      h += '<section class="ex-sec"><h4><span>' + (i + 2) + '</span> ' + esc(s.tit) + '</h4>' + tabla(s.filas.map(function (r) {
+        return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r) + fuenteC(r) + '</td></tr>';
+      }).join(''), ['Concepto', 'Cifra']) + (nota ? '<p class="ex-nota">' + esc(nota) + '</p>' : '') + '</section>';
+    });
+    h += listaFuentes(fuentesDe(d), C.fuentes, d.secciones.length + 2);
+    h += pie();
+    doc.innerHTML = h;
+    doc.style.setProperty('--c', d.col);
+    firma(doc, cifrasC(d), d.ini);
+  }
+
+  /* ================= El selector: de quién ================= */
+  function actual() {
+    if (est.tipo === 'adm') { var a = adm(est.adm); return { col: a.col, corto: a.c, q: 'adm=' + a.id }; }
+    var d = docDe(est.doc); return { col: d.col, corto: d.n, q: 'doc=' + d.id };
+  }
+  function pintaTipos() {
+    var cont = document.getElementById('exTipos');
+    if (!C) { cont.hidden = true; document.getElementById('exPaso2').querySelector('b').textContent = '1.'; document.getElementById('exPaso3').textContent = '2.'; return; }
+    cont.innerHTML = C.tipos.map(function (t) {
+      var on = t.id === est.tipo;
+      return '<button type="button" class="ex-tipo" role="radio" aria-checked="' + on + '" data-tipo="' + t.id + '">' +
+        '<span class="ex-tipo-ico" aria-hidden="true">' + t.ico + '</span><span><b>' + esc(t.n) + '</b><small>' + esc(t.sub) + '</small></span></button>';
+    }).join('');
+    var dos = est.tipo === 'adm' || est.tipo === 'dip-loc';
+    document.getElementById('exPaso2').hidden = !dos;
+    document.getElementById('exPaso2Tx').textContent = est.tipo === 'dip-loc' ? 'Elige el estado' : 'Elige la administración';
+    document.getElementById('exAdmins').hidden = est.tipo !== 'adm';
+    document.getElementById('exEnts').hidden = est.tipo !== 'dip-loc';
+    document.getElementById('exPaso3').textContent = dos ? '3.' : '2.';
+  }
   function pintaAdmins() {
     document.getElementById('exAdmins').innerHTML = D.admins.map(function (a) {
       return '<button type="button" class="rd-admin" role="radio" aria-checked="' + (a.id === est.adm) + '" aria-selected="' + (a.id === est.adm) + '" data-adm="' + a.id + '" style="--c:' + a.col + '">' +
@@ -266,36 +378,77 @@
         '<span class="rd-admin-tx"><b>' + esc(a.c) + '</b><small>' + a.a[0] + '–' + a.a[1] + (a.curso ? ' · en curso' : '') + '</small></span></button>';
     }).join('');
   }
+  function pintaEnts() {
+    if (!C) return;
+    var locs = C.docs.filter(function (d) { return d.tipo === 'dip-loc'; });
+    function ops(con) {
+      return locs.filter(function (d) { return d.conDoc === con; }).map(function (d) {
+        return '<option value="' + d.id + '"' + (d.id === est.doc ? ' selected' : '') + '>' + esc(d.ent) + '</option>';
+      }).join('');
+    }
+    var n = locs.filter(function (d) { return d.conDoc; }).length;
+    document.getElementById('exEnts').innerHTML = '<label class="ex-ents-l" for="exEnt">Congreso del estado</label>' +
+      '<select id="exEnt"><optgroup label="Con lo que pagan en 2026 documentado (' + n + ')">' + ops(true) + '</optgroup>' +
+      '<optgroup label="Aún sin ese documento (' + (locs.length - n) + ')">' + ops(false) + '</optgroup></select>' +
+      '<p class="ex-pista">De ' + (locs.length - n) + ' congresos aún no localizamos el documento oficial de 2026 con lo que pagan: su estado de cuenta muestra lo que sí está documentado y dice qué falta.</p>';
+  }
   function elige(id, empujar) {
     if (!adm(id)) return;
+    est.tipo = 'adm';
     est.adm = id;
+    pintaTipos();
     pintaAdmins();
     pinta();
     if (empujar) history.replaceState(null, '', location.pathname + '?adm=' + id);
   }
+  function eligeDoc(id, empujar) {
+    var d = docDe(id);
+    if (!d) return;
+    est.tipo = d.tipo;
+    est.doc = id;
+    pintaTipos();
+    if (d.tipo === 'dip-loc') pintaEnts();
+    pinta();
+    if (empujar) history.replaceState(null, '', location.pathname + '?doc=' + id);
+  }
+  function eligeTipo(t) {
+    if (t === 'adm') return elige(est.adm || ultimo, true);
+    if (t === 'dip-loc') {
+      var d = docDe(est.doc);
+      return eligeDoc(d && d.tipo === 'dip-loc' ? d.id : C.docs.filter(function (x) { return x.tipo === 'dip-loc' && x.conDoc; })[0].id, true);
+    }
+    eligeDoc(t, true);
+  }
+  document.getElementById('exTipos').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tipo]');
+    if (b) eligeTipo(b.getAttribute('data-tipo'));
+  });
   document.getElementById('exAdmins').addEventListener('click', function (e) {
     var b = e.target.closest('[data-adm]');
     if (b) elige(b.getAttribute('data-adm'), true);
+  });
+  document.getElementById('exEnts').addEventListener('change', function (e) {
+    if (e.target.id === 'exEnt') eligeDoc(e.target.value, true);
   });
 
   /* ================= Descargar en PDF ================= */
   document.getElementById('exPdf').addEventListener('click', function () {
     var viejo = document.getElementById('exPrint');
     if (viejo) viejo.remove();
-    var c = document.createElement('div');
+    var c = document.createElement('div'), x = actual();
     c.id = 'exPrint';
     c.className = 'ex-print';
     c.innerHTML = '<article class="ex-doc">' + document.getElementById('exDoc').innerHTML + '</article>';
-    c.firstChild.style.setProperty('--c', adm(est.adm).col);
+    c.firstChild.style.setProperty('--c', x.col);
     document.body.appendChild(c);
     var t = document.title;
-    document.title = 'Estado de cuenta ' + adm(est.adm).c + (est.folio ? ' ' + est.folio : '') + ' · Auditavisión';
+    document.title = 'Estado de cuenta ' + x.corto + (est.folio ? ' ' + est.folio : '') + ' · Auditavisión';
     window.print();
     setTimeout(function () { document.title = t; }, 500);
   });
   window.addEventListener('afterprint', function () { var c = document.getElementById('exPrint'); if (c) c.remove(); });
   document.getElementById('exLiga').addEventListener('click', function () {
-    var url = location.origin + location.pathname + '?adm=' + est.adm, b = this;
+    var url = location.origin + location.pathname + '?' + actual().q, b = this;
     (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () {
       b.textContent = '✓ Enlace copiado';
     }, function () { b.textContent = url; }).then(function () { setTimeout(function () { b.textContent = '🔗 Copiar el enlace'; }, 2500); });
@@ -307,31 +460,35 @@
     q = String(q || '').trim().replace(/\s+/g, '');
     if (!q) { out.innerHTML = ''; return; }
     out.innerHTML = '<p class="ex-ver ex-ver-esp">⏳ Comprobando…</p>';
-    Promise.all(D.admins.map(function (a) { return huella(modelo(a)).then(function (h) { return { a: a, h: h }; }); })).then(function (rs) {
+    var todos = D.admins.map(function (a) { return { ini: a.ini, n: a.n, q: 'adm', id: a.id, obj: cifras(modelo(a)) }; });
+    if (C) C.docs.forEach(function (d) { todos.push({ ini: d.ini, n: d.n, q: 'doc', id: d.id, obj: cifrasC(d) }); });
+    Promise.all(todos.map(function (t) { return huellaDe(t.obj).then(function (h) { t.h = h; return t; }); })).then(function (rs) {
       if (!rs[0].h) { out.innerHTML = '<p class="ex-ver ex-ver-no">Este navegador no puede calcular huellas SHA-256. Ábrelo en uno actualizado.</p>'; return; }
       var Q = q.toUpperCase(), hit = null;
-      rs.forEach(function (r) { if (folio(r.a, r.h) === Q || r.h.toUpperCase() === Q) hit = r; });
+      rs.forEach(function (r) { if (folio(r.ini, r.h) === Q || r.h.toUpperCase() === Q) hit = r; });
       if (hit) {
-        out.innerHTML = '<div class="ex-ver ex-ver-si"><b>✅ Auténtico.</b> Corresponde al estado de cuenta de <b>' + esc(hit.a.n) + '</b>, y sus cifras coinciden con los datos vigentes (corte al ' + esc(D.corte) + ').' +
-          '<br><small>Huella: <code>' + hit.h + '</code></small> <button type="button" class="sz-btn" data-ver-adm="' + hit.a.id + '">Ver el documento</button></div>';
+        out.innerHTML = '<div class="ex-ver ex-ver-si"><b>✅ Auténtico.</b> Corresponde al estado de cuenta de <b>' + esc(hit.n) + '</b>, y sus cifras coinciden con los datos vigentes.' +
+          '<br><small>Huella: <code>' + hit.h + '</code></small> <button type="button" class="sz-btn" data-ver-' + hit.q + '="' + hit.id + '">Ver el documento</button></div>';
       } else {
-        out.innerHTML = '<div class="ex-ver ex-ver-no"><b>❌ No coincide</b> con ningún estado de cuenta de los datos vigentes (corte al ' + esc(D.corte) + '). ' +
+        out.innerHTML = '<div class="ex-ver ex-ver-no"><b>❌ No coincide</b> con ningún estado de cuenta de los datos vigentes. ' +
           'O el documento se alteró, o se expidió con datos anteriores: en ese caso, expídelo de nuevo y compara las cifras.</div>';
       }
     });
   }
   document.getElementById('exVerForm').addEventListener('submit', function (e) { e.preventDefault(); verifica(document.getElementById('exVerIn').value); });
   document.getElementById('exVerOut').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-ver-adm]');
+    var b = e.target.closest('[data-ver-adm],[data-ver-doc]');
     if (!b) return;
-    elige(b.getAttribute('data-ver-adm'), true);
+    if (b.hasAttribute('data-ver-adm')) elige(b.getAttribute('data-ver-adm'), true);
+    else eligeDoc(b.getAttribute('data-ver-doc'), true);
     document.getElementById('exDoc').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   /* ================= Arranque ================= */
   var q = new URLSearchParams(location.search);
   var ultimo = D.admins[D.admins.length - 1].id;
-  elige(adm(q.get('adm')) ? q.get('adm') : ultimo, false);
+  if (docDe(q.get('doc'))) eligeDoc(q.get('doc'), false);
+  else elige(adm(q.get('adm')) ? q.get('adm') : ultimo, false);
   if (q.get('verifica')) {
     document.getElementById('exVerIn').value = q.get('verifica');
     verifica(q.get('verifica'));

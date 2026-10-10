@@ -64,11 +64,11 @@ La Enciclopedia queda fuera porque está congelada.
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 65 | 0 | 0 | 0 | 39 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 73 | 0 | 0 | 0 | 40 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `radar-estado-de-cuenta.html` | Hoy y el estado de cuenta de cada administración · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
+| `radar-estado-de-cuenta.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
 | `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `radar-hoy.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
@@ -110,4 +110,4 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-38 fichas, cada una con su porqué, su responsable y su enlace oficial.
+39 fichas, cada una con su porqué, su responsable y su enlace oficial.
