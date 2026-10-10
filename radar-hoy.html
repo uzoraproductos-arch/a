@@ -20,11 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010x">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010x">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010x">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010x">
-  <link rel="stylesheet" href="assets/auditor/css/radar.css?v=20261010x">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261010y">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261010y">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261010y">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261010y">
+  <link rel="stylesheet" href="assets/auditor/css/radar.css?v=20261010y">
+  <script>(function () { var m = {"hoy": "radar-presupuesto-en-curso.html", "expide": "radar-estado-de-cuenta.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -155,46 +156,23 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-saltos" aria-label="En esta página">
-          <span class="apartado-saltos-tit">En esta página:</span>
-          <a href="#hoy">📌 Hoy: el presupuesto en curso</a>
-          <a href="#expide">🧾 Expide un estado de cuenta: administraciones, Congreso y la Corte</a>
-      </nav>
-      
-      <section class="apartado-seccion" id="hoy" aria-labelledby="hoy-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="hoy-tit"><span class="sr-only"></span>📌 Hoy: el presupuesto en curso</h2>
-          <p class="apartado-seccion-texto">Las cifras grandes de 2026: el punto de partida para leer cualquier estado de cuenta.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="rd-hoy">
-          <div class="rd-hoy-c"><span class="rd-hoy-que">🏛️ Presupuesto federal aprobado 2026</span><b>$10.19 billones</b> <span class="est-chip est-oficial">oficial</span><small>📄 Presupuesto de Egresos de la Federación 2026, art. 1</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">🗺️ Gasto federalizado a los 32 estados</span><b>$2.81 billones (27.6 %)</b> <span class="est-chip est-derivado">derivado</span><small>📄 PEF 2026: estimación del gasto federalizado, $2,810,800 mdp; 27.6 % = ese monto ÷ $10,193,683.7 mdp del PEF</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">💰 ISR, IVA e IEPS estimados en la Ley de Ingresos 2026</span><b>$5.42 billones</b> <span class="est-chip est-derivado">derivado</span><small>📄 Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">🤝 Participaciones a estados y municipios (Ramo 28)</span><b>$1.46 billones</b> <span class="est-chip est-oficial">oficial</span><small>📄 PEF 2026, Ramo General 28: $1,456,045.9 mdp</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">📉 Costo financiero de la deuda en 2026</span><b>$1,572,073.3 mdp</b> <span class="est-chip est-oficial">oficial</span><small>📄 PEF 2026, Anexo 8</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">🏦 Deuda de los 32 gobiernos estatales</span><b>$643,695.7 mdp</b> <span class="est-chip est-derivado">derivado</span><small>📄 SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">⚖️ Por aclarar ante la ASF, Cuenta Pública 2024 (no es daño comprobado)</span><b>$65,169.1 mdp</b> <span class="est-chip est-oficial">oficial</span><small>📄 ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11</small></div>
-          <div class="rd-hoy-c"><span class="rd-hoy-que">⛽ Huachicol fiscal: cuánto IEPS se deja de cobrar</span><b>sin cifra oficial</b> <span class="est-chip est-pendiente" data-pend="huachicol-evasion">pendiente</span><small>📄 <a href="auditoria-huachicol-fiscal.html">Lo que se sabe y lo que falta ➔</a></small></div>
-        </div>
-        <div class="rd-hoy-vivo" role="status"><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
-          <span>intereses de la deuda <b data-tasa="49850.12">+$0.00</b></span>
-          <span>pérdida documentada de las megaobras <b data-tasa="2062.75">+$0.00</b></span>
-          <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y $65,050.8 mdp, este último un piso derivado
-          con la Cuenta Pública 2024). No son pagos que ocurran en este instante. <a href="auditoria-deuda-soberana.html">El reloj de los intereses ➔</a></small>
-        </div>
-        </div>
-      </section>
 
-      <section class="apartado-seccion" id="expide" aria-labelledby="expide-tit">
+      
+      <section class="apartado-seccion" id="partes" aria-labelledby="partes-tit">
         <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="expide-tit"><span class="sr-only"></span>🧾 Expide un estado de cuenta: administraciones, Congreso y la Corte</h2>
-          <p class="apartado-seccion-texto">La herramienta abre en su propia página.</p>
+          <h2 class="apartado-seccion-titulo" id="partes-tit"><span class="sr-only"></span>Elige por dónde empezar</h2>
+          <p class="apartado-seccion-texto">Cada tarjeta abre su propia página.</p>
         </div>
         <div class="apartado-rejilla">
+        <a class="apartado-tarjeta" href="radar-presupuesto-en-curso.html">
+          <span class="apartado-tarjeta-icono" aria-hidden="true">📌</span>
+          <span class="apartado-tarjeta-nombre">Hoy: el presupuesto en curso</span>
+          <span class="apartado-tarjeta-desc">Las cifras grandes de 2026: el presupuesto federal, el gasto que va a los estados, los impuestos que se esperan y lo que cuesta la deuda. El punto de partida para leer cualquier estado de cuenta.</span>
+          <span class="apartado-tarjeta-accion">Abrir ➔</span>
+        </a>
         <a class="apartado-tarjeta" href="radar-estado-de-cuenta.html">
           <span class="apartado-tarjeta-icono" aria-hidden="true">🧾</span>
-          <span class="apartado-tarjeta-nombre">Expide un estado de cuenta</span>
+          <span class="apartado-tarjeta-nombre">Expide un estado de cuenta: administraciones, Congreso y la Corte</span>
           <span class="apartado-tarjeta-desc">Elige de quién: una administración presidencial, la diputación federal, la senaduría, la diputación de cualquiera de los 32 congresos locales, o la Suprema Corte con su ponencia y sus asesores. Genera su estado de cuenta con su semáforo y descárgalo en PDF con folio y sello de verificación.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
@@ -219,12 +197,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010x</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261010y</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261010x"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261010x"></script>
-  <script src="assets/auditor/js/radar.js?v=20261010x"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261010y"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261010y"></script>
+  <script src="assets/auditor/js/radar.js?v=20261010y"></script>
 </body>
 </html>
