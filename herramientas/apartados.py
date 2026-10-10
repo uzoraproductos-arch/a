@@ -1587,8 +1587,20 @@ RADAR_SERIES = {
     'gasto': ('Gasto neto total', 'Todo lo que gastó el sector público presupuestario en el año, incluidos los intereses de la deuda.'),
     'costo_financiero': ('Costo financiero', 'Intereses, comisiones y gastos de la deuda, más los programas de apoyo a ahorradores y deudores de la banca.'),
 }
-RADAR_OJO_MDP = ('Son pesos de cada año, sin quitar la inflación: un peso de 1995 no vale lo mismo que uno de 2024. '
-                 'Para comparar sexenios usa el promedio en % del PIB.')
+RADAR_MONEDAS = [
+    # (id, etiqueta del selector, como se lee la suma)
+    ('nom', 'Pesos de cada año', 'en pesos de cada año, sin quitar la inflación'),
+    ('hoy', 'Pesos de hoy', 'en pesos de septiembre de 2026: ya sin inflación'),
+    ('usd', 'Dólares', 'en dólares, al tipo de cambio promedio de cada año'),
+    ('eur', 'Euros', 'en euros, al tipo de cambio promedio de cada año'),
+]
+RADAR_OJO_MON = {
+    'nom': 'Son pesos de cada año, sin quitar la inflación: un peso de 1995 no vale lo mismo que uno de 2024. Para comparar sexenios, cambia a «Pesos de hoy» o usa el promedio en % del PIB.',
+    'hoy': 'Pesos de septiembre de 2026: a cada año se le quita la inflación con el INPC, así que los sexenios ya se comparan entre sí. No mide el tamaño de la economía: para eso, el % del PIB.',
+    'usd': 'Dólares de cada año: cada año entre su tipo de cambio promedio. Mide lo que valían esos pesos frente al dólar en su momento, no su poder de compra; las devaluaciones de 1994-1995 y 2008 se notan aquí.',
+    'eur': 'Euros de cada año: cada año entre su tipo de cambio promedio. Banxico publica el euro desde 2000, así que Salinas y Zedillo no tienen esta medida.',
+}
+RADAR_OJO_MDP = RADAR_OJO_MON['nom']
 
 # «Hoy»: las cifras del ano en curso que traia el radar anterior
 # (plantillas/radar.html), con las mismas fuentes y chips.
@@ -1616,61 +1628,169 @@ RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
         </div>'''
 
 
+def _peso_base(ps):
+    """INPC y tipos de cambio de Banxico, en promedios anuales y mensuales."""
+    def prom(serie, y):
+        v = serie['mensual'].get(str(y)) or []
+        return sum(v) / 12 if len(v) == 12 and None not in v else None
+    def mes(serie, y, m):
+        v = serie['mensual'].get(str(y)) or []
+        return v[m - 1] if len(v) >= m else None
+    ult = max(int(y) for y in ps['inpc']['mensual'])
+    ult_m = len(ps['inpc']['mensual'][str(ult)])
+    ref = mes(ps['inpc'], ult, ult_m)
+    return prom, mes, ref, (ult, ult_m)
+
+
+MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+
+
+def _peso_admins(ps, admins_def):
+    """La inflacion y el tipo de cambio de cada sexenio: al recibir (diciembre
+    del ano anterior) y al entregar (diciembre del ultimo ano; en curso, el
+    ultimo mes publicado)."""
+    prom, mes, ref, (uy, um) = _peso_base(ps)
+    filas = []
+    for (aid, nombre, corto, ini, (a0, a1), col, curso) in admins_def:
+        r = (a0 - 1, 12)
+        e = (uy, um) if curso else (a1, 12)
+        et_r = 'dic. %d' % r[0]
+        et_e = ('%s %d' % (MESES[e[1] - 1][:3] + '.', e[0])) if curso else 'dic. %d' % e[0]
+        f = {'id': aid, 'rec': et_r, 'ent': et_e, 'curso': curso}
+        i0, i1 = mes(ps['inpc'], *r), mes(ps['inpc'], *e)
+        f['infl'] = {'v': round((i1 / i0 - 1) * 100, 1), 'est': 'derivado', 'f': [ps['inpc']['f']],
+                     'op': 'INPC de %s (%s) ÷ INPC de %s (%s) − 1.' % (et_e, format(i1, '.3f'), et_r, format(i0, '.3f'))}
+        f['cien'] = {'v': round(100 * i0 / i1, 2), 'est': 'derivado', 'f': [ps['inpc']['f']],
+                     'op': '$100 × INPC de %s ÷ INPC de %s.' % (et_r, et_e)}
+        for k in ('usd', 'eur'):
+            s = ps[k]
+            t0, t1 = mes(s, *r), mes(s, *e)
+            if t0 is None or t1 is None:
+                f[k] = {'na': s.get('antes', 'Sin serie.'), 'et': 'sin serie'}
+                continue
+            f[k] = {'rec': t0, 'ent': t1, 'v': round((t1 / t0 - 1) * 100, 1), 'est': 'derivado', 'f': [s['f']],
+                    'op': 'Promedio de %s (%s) ÷ promedio de %s (%s) − 1, en %s.' % (et_e, format(t1, '.4f'), et_r, format(t0, '.4f'), s['unidad'])}
+        filas.append(f)
+    return filas
+
+
+def _peso_json(ps):
+    """Lo que necesita la seccion «El peso en el tiempo»: series anuales,
+    valor de hoy y proyeccion. Las operaciones de las graficas se dicen en
+    la pagina."""
+    prom, mes, ref, (uy, um) = _peso_base(ps)
+    anios = list(range(1988, uy))
+    inpc = {y: prom(ps['inpc'], y) for y in anios}
+    usd = {y: prom(ps['usd'], y) for y in anios}
+    eur = {y: prom(ps['eur'], y) for y in anios if y >= ps['eur']['desde']}
+    dic = {y: mes(ps['inpc'], y, 12) for y in anios}
+    pr = ps['proyeccion']
+    # Precios de diciembre proyectados: diciembre del ultimo ano observado por
+    # la inflacion diciembre/diciembre que estima Hacienda para cada ano.
+    y0 = pr['observado']
+    p = dic[y0]
+    proy = []
+    for y in sorted(int(x) for x in pr['inflacion_dic'] if int(x) > y0):
+        p = p * (1 + pr['inflacion_dic'][str(y)] / 100)
+        proy.append({'y': y, 'inpc': round(p, 4), 'infl': pr['inflacion_dic'][str(y)], 'usd': pr['usd_prom'][str(y)]})
+    return {
+        'anios': anios,
+        'inpc': {y: round(v, 4) for y, v in inpc.items()},
+        'dic': {y: v for y, v in dic.items()},
+        'infl': {y: round((dic[y] / dic[y - 1] - 1) * 100, 1) for y in anios if y - 1 in dic},
+        'usd': {y: round(v, 4) for y, v in usd.items()},
+        'eur': {y: round(v, 4) for y, v in eur.items()},
+        'ref': {'inpc': ref, 'mes': '%s de %d' % (MESES[um - 1], uy), 'y': uy, 'm': um,
+                'infl12': round((ref / mes(ps['inpc'], uy - 1, um) - 1) * 100, 1),
+                'inpc12': mes(ps['inpc'], uy - 1, um),
+                'ytd_usd': round(sum(ps['usd']['mensual'][str(uy)]) / len(ps['usd']['mensual'][str(uy)]), 4)},
+        'hoy': ps['hoy'],
+        'eur_desde': ps['eur']['desde'], 'eur_antes': ps['eur']['antes'],
+        'proy': proy, 'proy_obs': y0, 'proy_eur': pr['eur'], 'proy_aviso': pr['aviso'],
+        'f': {'inpc': ps['inpc']['f'], 'usd': ps['usd']['f'], 'eur': ps['eur']['f'], 'hoy': ps['hoy']['f'], 'proy': pr['f']},
+    }
+
+
 def radar():
     import auditorias
+    import datetime
     base = auditorias.db()
     fs = base['finanzas_sexenales']
+    ps = fs['peso']
     ev = {f['id']: f for f in base['evaluacion_sexenal']['filas']}
     cp = base['cuenta_publica_asf']
     fuentes = {}
+    falta = fs['faltantes']['anio']
+    prom, mes, ref, (uy, um) = _peso_base(ps)
+    ref_mes = '%s de %d' % (MESES[um - 1], uy)
 
     def usa(k, catalogo):
         if k and k not in fuentes and k in catalogo:
             c = catalogo[k]
             fuentes[k] = {'corto': c.get('corto') or c.get('doc', k)[:90], 'url': c.get('url', '')}
         return k
+    for k in ps['fuentes']:
+        usa(k, ps['fuentes'])
+
+    def mdp(v):
+        return format(round(v, 1), ',.1f')
+
+    def conversiones(datos, anios, fts):
+        """La suma del sexenio en pesos de hoy, en dolares y en euros."""
+        filas = [(y, datos[str(y)]['mdp']) for y in anios]
+        alt = {}
+        alt['hoy'] = {'v': round(sum(m * ref / prom(ps['inpc'], y) for y, m in filas), 1), 'est': 'derivado',
+                      'f': fts + [ps['inpc']['f']],
+                      'op': 'Cada año pasado a pesos de %s: monto × INPC de %s (%s) ÷ INPC promedio de ese año; luego se suman los %d años. %s'
+                            % (ref_mes, ref_mes, format(ref, '.3f'), len(filas),
+                               ' · '.join('%d: %s × %s ÷ %s' % (y, mdp(m), format(ref, '.3f'), format(prom(ps['inpc'], y), '.3f')) for y, m in filas))}
+        alt['usd'] = {'v': round(sum(m / prom(ps['usd'], y) for y, m in filas), 1), 'est': 'derivado',
+                      'f': fts + [ps['usd']['f']],
+                      'op': 'Cada año entre su tipo de cambio promedio (pesos por dólar), en millones de dólares; luego se suman. %s'
+                            % ' · '.join('%d: %s ÷ %s' % (y, mdp(m), format(prom(ps['usd'], y), '.4f')) for y, m in filas)}
+        if anios[0] >= ps['eur']['desde']:
+            alt['eur'] = {'v': round(sum(m / prom(ps['eur'], y) for y, m in filas), 1), 'est': 'derivado',
+                          'f': fts + [ps['eur']['f']],
+                          'op': 'Cada año entre su tipo de cambio promedio (pesos por euro), en millones de euros; luego se suman. %s'
+                                % ' · '.join('%d: %s ÷ %s' % (y, mdp(m), format(prom(ps['eur'], y), '.4f')) for y, m in filas)}
+        else:
+            alt['eur'] = {'na': ps['eur']['antes'], 'et': 'sin euro'}
+        return alt
 
     admins, valores, obras = [], {}, {}
     for (aid, nombre, corto, ini, (a0, a1), col, curso) in RADAR_ADMINS:
-        import datetime
-        anios = list(range(a0, a1 + 1))
-        con_dato = [y for y in anios if str(y) in fs['anual']['ingresos']]
-        if curso:
-            anios = con_dato  # en curso: solo los anos cerrados
+        todos = list(range(a0, a1 + 1))
+        anios = [y for y in todos if str(y) in fs['anual']['ingresos']]
+        faltan = [] if curso else [y for y in todos if y not in anios]
         periodo = '%d–%d · %s' % (a0, a1, 'en curso' if curso else 'seis años calendario')
+        aviso = ''
+        if curso:
+            aviso = 'Sexenio en curso: solo %s, el único año cerrado. No se compara como sexenio completo.' % ', '.join(map(str, anios))
+        elif faltan:
+            aviso = 'Se mide con %d a %d: falta %s, que no está en la serie de Hacienda.' % (anios[0], anios[-1], ', '.join(map(str, faltan)))
         admins.append({'id': aid, 'n': nombre, 'c': corto, 'ini': ini, 'a': [a0, a1], 'col': col, 'curso': curso,
-                       'periodo': periodo,
-                       'aviso': ('Sexenio en curso: solo %s, el único año cerrado. No se compara como sexenio completo.' % ', '.join(map(str, anios))
-                                 if curso else '')})
+                       'periodo': periodo, 'aviso': aviso, 'ys': [anios[0], anios[-1]] if anios else None})
         v = {}
         rango = '%d a %d' % (anios[0], anios[-1]) if anios and anios[0] != anios[-1] else (str(anios[0]) if anios else '')
-        for serie, (tit, _) in RADAR_SERIES.items():
+        for serie in RADAR_SERIES:
             datos = fs['anual'][serie]
-            falta = [y for y in anios if str(y) not in datos]
-            if not anios or falta:
-                fp = fs['faltantes']['pib']
-                v[serie + '_pib'] = {'pend': fp['motivo'], 'pid': fp['pid']}
-                v[serie + '_mdp'] = {'pend': fp['motivo'], 'pid': fp['pid']}
-                continue
             filas = [datos[str(y)] for y in anios]
             fts = []
             for x in filas:
                 for k in x['f']:
                     if k not in fts:
                         fts.append(usa(k, fs['fuentes']))
-            prom = round(sum(x['pib'] for x in filas) / len(filas), 1)
-            v[serie + '_pib'] = {'v': prom, 'est': 'derivado', 'f': fts,
+            prom_pib = round(sum(x['pib'] for x in filas) / len(filas), 1)
+            v[serie + '_pib'] = {'v': prom_pib, 'est': 'derivado', 'f': fts,
                                  'op': 'Promedio de %d %s (%s): (%s) ÷ %d.' % (len(filas), 'año' if len(filas) == 1 else 'años', rango,
                                        ' + '.join(str(x['pib']) for x in filas), len(filas)),
-                                 'nota': ('Los años hasta 2016 son derivados (monto de la Cuenta Pública entre el PIB del INEGI); '
-                                          'desde 2017, el porcentaje que publica Hacienda.') if anios[0] <= 2016 < anios[-1] else ''}
-            if all(x.get('mdp') is not None for x in filas):
-                suma = round(sum(x['mdp'] for x in filas), 1)
-                v[serie + '_mdp'] = {'v': suma, 'est': 'derivado', 'f': [usa('PRES_5IG_FP', fs['fuentes'])],
-                                     'op': 'Suma de %s, en millones de pesos de cada año.' % rango, 'nota': RADAR_OJO_MDP}
-            else:
-                fm = fs['faltantes']['mdp']
-                v[serie + '_mdp'] = {'pend': fm['motivo'], 'pid': fm['pid']}
+                                 'nota': (falta['motivo'] if faltan else ''), 'pid': falta['pid'] if faltan else ''}
+            if faltan:
+                v[serie + '_mdp'] = {'pend': falta['motivo'] + ' Una suma con cinco años no se compara con las de seis.', 'pid': falta['pid']}
+                continue
+            v[serie + '_mdp'] = {'v': round(sum(x['mdp'] for x in filas), 1), 'est': 'derivado', 'f': fts,
+                                 'op': 'Suma de %s, en millones de pesos de cada año: %s.' % (rango, ' + '.join(mdp(x['mdp']) for x in filas)),
+                                 'alt': conversiones(datos, anios, fts)}
         # Deuda al recibir y al entregar
         dd = fs['deuda'].get(aid, {})
         for k, m in (('dIni', 'deuda_ini'), ('dFin', 'deuda_fin')):
@@ -1685,8 +1805,8 @@ def radar():
             v['deuda_cambio'] = {'na': dd.get('pend', 'Falta la deuda al recibir o al entregar con la misma serie.'), 'et': 'en curso' if curso else 'sin serie comparable'}
         if dd.get('mIni') and dd.get('mFin') and not curso:
             seg = (datetime.date(a1 + 1, 1, 1) - datetime.date(a0, 1, 1)).days * 86400
-            ps = round((dd['mFin']['v'] - dd['mIni']['v']) * 1e6 / seg, 0)
-            v['deuda_seg'] = {'v': ps, 'est': 'derivado',
+            ps_ = round((dd['mFin']['v'] - dd['mIni']['v']) * 1e6 / seg, 0)
+            v['deuda_seg'] = {'v': ps_, 'est': 'derivado',
                               'f': sorted({usa(dd['mIni']['f'], fs['fuentes']), usa(dd['mFin']['f'], fs['fuentes'])}),
                               'op': 'Saldo de la deuda (SHRFSP) al entregar, $%s mdp, menos al recibir, $%s mdp, entre los %s segundos de sus seis años.'
                                     % (format(dd['mFin']['v'], ',.1f'), format(dd['mIni']['v'], ',.1f'), format(seg, ','))}
@@ -1723,7 +1843,7 @@ def radar():
     metricas = {}
     for serie, (tit, _) in RADAR_SERIES.items():
         metricas[serie + '_pib'] = {'tit': tit + ' (promedio anual)', 'u': 'pib', 'kpi': 'del PIB al año, en promedio'}
-        metricas[serie + '_mdp'] = {'tit': tit + ' (suma del sexenio)', 'u': 'mdp', 'kpi': 'en el sexenio', 'kpi2': 'Suma en pesos de cada año', 'ojo': RADAR_OJO_MDP}
+        metricas[serie + '_mdp'] = {'tit': tit + ' (suma del sexenio)', 'u': 'mdp', 'kpi': 'en el sexenio', 'kpi2': 'Suma en pesos de cada año', 'mon': True}
     metricas.update({
         'deuda_ini': {'tit': 'Deuda al recibir', 'u': 'pib', 'kpi': 'del PIB al recibir'},
         'deuda_fin': {'tit': 'Deuda al entregar', 'u': 'pib', 'kpi': 'del PIB al entregar', 'kpi2': 'Al entregar'},
@@ -1732,9 +1852,9 @@ def radar():
                       'ojo': 'Pesos de cada año: compara el ritmo, no el poder de compra.'},
         'asf_aud': {'tit': 'Auditorías practicadas', 'u': 'ent', 'kpi': 'auditorías de la ASF'},
         'asf_rec': {'tit': 'Recuperaciones operadas', 'u': 'mdp', 'kpi': 'recuperados', 'kpi2': 'Recuperado',
-                    'ojo': 'Las cuentas viejas llevan más años de solventación: comparar con esta cifra favorece a los sexenios antiguos.'},
+                    'ojo': 'Pesos de cada año. Las cuentas viejas llevan más años de solventación: comparar con esta cifra favorece a los sexenios antiguos.'},
         'asf_acl': {'tit': 'Monto por aclarar', 'u': 'mdp', 'kpi': 'por aclarar ante la ASF',
-                    'ojo': 'No es daño comprobado: es lo que, al corte, no tenía documentación que acreditara el gasto. La ASF lo mide así desde la Cuenta Pública 2019.'},
+                    'ojo': 'Pesos de cada año. No es daño comprobado: es lo que, al corte, no tenía documentación que acreditara el gasto. La ASF lo mide así desde la Cuenta Pública 2019.'},
     })
     metricas['costo_financiero_pib']['kpi2'] = 'Intereses de la deuda'
     dims = [
@@ -1755,14 +1875,20 @@ def radar():
     metricas['deuda_cambio']['kpi2'] = 'Cambio'
     reloj = [
         {'met': 'deuda_seg', 'porSeg': True, 'tit': '📉 Deuda nueva', 'op': 'Lo que creció el saldo de la deuda en el sexenio, entre sus segundos.'},
-        {'met': 'costo_financiero_mdp', 'tit': '💸 Intereses de la deuda', 'op': 'Costo financiero del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
-        {'met': 'inversion_mdp', 'tit': '🏗️ Inversión física', 'op': 'Inversión física del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
-        {'met': 'ingresos_mdp', 'tit': '💰 Ingresos', 'op': 'Ingresos presupuestarios del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
-        {'met': 'gasto_mdp', 'tit': '🏛️ Gasto total', 'op': 'Gasto neto del sexenio (suma en pesos de cada año) entre los segundos de sus seis años.'},
+        {'met': 'costo_financiero_mdp', 'tit': '💸 Intereses de la deuda', 'op': 'Costo financiero del sexenio (su suma) entre los segundos de sus seis años.'},
+        {'met': 'inversion_mdp', 'tit': '🏗️ Inversión física', 'op': 'Inversión física del sexenio (su suma) entre los segundos de sus seis años.'},
+        {'met': 'ingresos_mdp', 'tit': '💰 Ingresos', 'op': 'Ingresos presupuestarios del sexenio (su suma) entre los segundos de sus seis años.'},
+        {'met': 'gasto_mdp', 'tit': '🏛️ Gasto total', 'op': 'Gasto neto del sexenio (su suma) entre los segundos de sus seis años.'},
     ]
+    monedas = [{'id': i, 'et': et, 'lee': lee, 'ojo': RADAR_OJO_MON[i]} for (i, et, lee) in RADAR_MONEDAS]
+    monedas[1]['lee'] = 'en pesos de %s: ya sin inflación' % ref_mes
+    monedas[1]['ojo'] = RADAR_OJO_MON['hoy'].replace('septiembre de 2026', ref_mes)
+    peso = _peso_json(ps)
+    peso['admins'] = _peso_admins(ps, RADAR_ADMINS)
     datos = json.dumps({'admins': admins, 'valores': valores, 'metricas': metricas, 'dims': dims, 'obras': obras,
-                        'fuentes': fuentes, 'reloj': reloj, 'inicial': 'amlo',
-                        'duelo': ['ingresos_pib', 'inversion_pib', 'gasto_pib', 'costo_financiero_pib', 'deuda_fin', 'deuda_cambio', 'asf_aud', 'asf_rec']},
+                        'fuentes': fuentes, 'reloj': reloj, 'inicial': 'amlo', 'monedas': monedas, 'peso': peso,
+                        'duelo': ['ingresos_pib', 'inversion_pib', 'gasto_pib', 'costo_financiero_pib',
+                                  'inversion_mdp:hoy', 'costo_financiero_mdp:hoy', 'deuda_fin', 'deuda_cambio', 'asf_aud', 'asf_rec']},
                        ensure_ascii=False).replace('</', '<\\/')
 
     tablero = '''<script type="application/json" id="rdDatos">{datos}</script>
@@ -1772,10 +1898,31 @@ def radar():
           <div class="rd-dim" id="rdDim"></div>
           <noscript><p>El tablero necesita JavaScript.</p></noscript>
         </div>'''.format(datos=datos)
+    peso_html = '''<div class="rd-peso" id="rdPeso">
+          <div class="rd-peso-hoy" id="rdPesoHoy"></div>
+          <div class="rd-graf" id="rdGraf">
+            <div class="rd-mets" role="tablist" aria-label="Qué gráfica ver" id="rdGrafTabs"></div>
+            <div class="rd-graf-lienzo" id="rdGrafSvg"></div>
+            <p class="rd-graf-lee" id="rdGrafLee" aria-live="polite"></p>
+            <div class="rd-graf-pie" id="rdGrafPie"></div>
+          </div>
+          <h3 class="rd-peso-sub">🧾 El peso en cada sexenio</h3>
+          <div class="rd-peso-tabla" id="rdPesoTabla"></div>
+          <h3 class="rd-peso-sub">🕰️ La máquina del tiempo del peso</h3>
+          <div class="rd-maq" id="rdMaq">
+            <div class="rd-maq-ctl">
+              <label>Cantidad<span class="rd-maq-monto">$<input type="number" id="rdMaqMonto" min="0" step="any" value="1000" inputmode="decimal"></span></label>
+              <label>Pesos del año<select id="rdMaqAnio"></select></label>
+              <label>Proyectar hasta<select id="rdMaqHasta"></select></label>
+            </div>
+            <div id="rdMaqOut" aria-live="polite"></div>
+          </div>
+        </div>'''
     reloj_html = '''<div class="rd-reloj" id="rdReloj">
           <div class="rd-reloj-ctl">
             <label>Administración<select id="rdRelojAdm"></select></label>
             <label>Qué contar<select id="rdRelojMet"></select></label>
+            <label>En qué moneda<select id="rdRelojMon"></select></label>
           </div>
           <div class="rd-reloj-pantalla">
             <small>Al ritmo de esa administración, en <span id="rdRelojSeg">0 s</span>:</small>
@@ -1791,22 +1938,26 @@ def radar():
           <div id="rdDueloOut"></div>
         </div>'''
     lectura = '<details class="rd-lectura"><summary>📏 Cómo leer estos números</summary><ul>%s</ul></details>' % ''.join(
-        '<li>%s</li>' % x for x in [base['evaluacion_sexenal']['convencion']] + fs['advertencias'] + base['evaluacion_sexenal']['advertencias'])
+        '<li>%s</li>' % x for x in [base['evaluacion_sexenal']['convencion']] + fs['advertencias'] + [ps['proyeccion']['aviso']] + base['evaluacion_sexenal']['advertencias'])
 
     return {
         'archivo': 'radar-hacendario.html', 'menu': 'Radar hacendario', 'menu_archivo': 'descarga-los-datos.html',
         'padre': ('descarga-los-datos.html', 'Datos'),
         'icono': '📡', 'titulo': 'Radar hacendario', 'lema': 'Cada administración, con sus números',
         'entrada': ('Lo que entró, lo que se invirtió, lo que costó el gobierno, la deuda que recibió y entregó, y lo que quedó '
-                    'por aclarar ante la Auditoría Superior: administración por administración, desde 1989. Elige una, compárala '
-                    'con las demás y pon a correr su reloj. Cada cifra trae su documento.'),
+                    'por aclarar ante la Auditoría Superior: administración por administración, desde 1989. Compáralas en pesos de '
+                    'cada año, en pesos de hoy, en dólares o en euros; mira cuánto ha valido el peso y hacia dónde lo proyecta Hacienda, '
+                    'y pon a correr el reloj de cada sexenio. Cada cifra trae su documento.'),
         'estilos': ['radar.css'],
         'scripts': ['radar.js'],
         'secciones': [
             {'id': 'tablero', 'titulo': '📡 El tablero', 'texto': 'Elige una administración y toca cada tarjeta para ver la comparativa con las demás.',
              'tarjetas': [], 'bloque': tablero},
+            {'id': 'peso', 'titulo': '💱 El peso en el tiempo',
+             'texto': 'Cuánto vale hoy el peso, cuánto valía en cada sexenio frente al dólar y al euro, y hacia dónde lo proyecta Hacienda hasta 2032.',
+             'tarjetas': [], 'bloque': peso_html},
             {'id': 'reloj', 'titulo': '⏱️ El reloj de cada administración',
-             'texto': 'Elige una administración y qué contar: el contador corre al ritmo promedio de su sexenio. Es una equivalencia, no dinero que se mueva hoy.',
+             'texto': 'Elige una administración, qué contar y en qué moneda: el contador corre al ritmo promedio de su sexenio. Es una equivalencia, no dinero que se mueva hoy.',
              'tarjetas': [], 'bloque': reloj_html},
             {'id': 'duelo', 'titulo': '⚔️ Duelo de administraciones', 'texto': 'Dos administraciones, cara a cara, en las mismas medidas.',
              'tarjetas': [], 'bloque': duelo_html},
@@ -2167,6 +2318,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'El peso en el tiempo, en el Radar hacendario: las sumas de cada sexenio en pesos de hoy, dólares o euros; inflación y tipo de cambio desde 1988 con la proyección de Hacienda a 2032, el dólar y el euro de hoy, y la máquina del tiempo del peso. Las series vienen ahora de una sola fuente de Hacienda, de 1990 a 2025.'),
     ('10-10-2026', 'Radar hacendario, en su propia página: cada administración desde 1989 con sus ingresos, inversión, costo, deuda y lo pendiente ante la ASF, más el reloj de cada sexenio y el duelo entre dos.'),
     ('10-10-2026', 'Garantías cívicas, en su propia página: una brújula que en tres clics te dice a qué puerta oficial tocar, las seis puertas, tus diez garantías y el reto «¿Mito o realidad?».'),
     ('10-10-2026', 'Ágora cívica, en su propia página: la red de réplica y diálogo, con perfil, muro, réplicas, apoyos, insignias y preguntas para empezar.'),
