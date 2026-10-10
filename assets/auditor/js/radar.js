@@ -115,7 +115,8 @@
   function pintaFicha() {
     var a = adm(est.adm);
     var h = '<div class="rd-ficha-cab" style="--c:' + a.col + '"><span class="rd-admin-ini rd-ini-xl" aria-hidden="true">' + esc(a.ini) + '</span>' +
-      '<div><h3>' + esc(a.n) + '</h3><span>' + esc(a.periodo) + '</span>' + (a.aviso ? '<p class="rd-aviso-adm">' + esc(a.aviso) + '</p>' : '') + '</div></div>';
+      '<div><h3>' + esc(a.n) + '</h3><span>' + esc(a.periodo) + '</span>' + (a.aviso ? '<p class="rd-aviso-adm">' + esc(a.aviso) + '</p>' : '') + '</div>' +
+      '<a class="rd-expide" href="radar-estado-de-cuenta.html?adm=' + a.id + '">🧾 Expide su estado de cuenta</a></div>';
     h += '<div class="rd-kpis">' + D.dims.map(function (d) {
       var m = d.kpi, x = val(a.id, m), mm = D.metricas[m];
       var sub = d.kpi2 ? val(a.id, d.kpi2) : null;

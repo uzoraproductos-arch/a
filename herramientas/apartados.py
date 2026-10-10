@@ -1632,6 +1632,7 @@ RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
 # es la portada con una tarjeta por parte, y cada parte vive en su pagina.
 # (id, archivo, icono, titulo, de que trata)
 RADAR_PARTES = [
+    ('expide', 'radar-estado-de-cuenta.html', '🧾', 'Expide el estado de cuenta', 'El documento de cada administración, con su semáforo y sello de verificación'),
     ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
     ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
     ('reloj', 'radar-reloj.html', '⏱️', 'El reloj de cada administración', 'El contador que corre al ritmo de cada sexenio'),
@@ -1639,6 +1640,44 @@ RADAR_PARTES = [
     ('hoy', 'radar-hoy.html', '📌', 'Hoy: el presupuesto en curso', 'Las cifras grandes de 2026'),
     ('lectura', 'radar-como-leer.html', '📏', 'Cómo leer estos números', 'Convenciones y advertencias de cada cifra'),
 ]
+
+
+# El semaforo de la salud financiera (decision del autor, 10-10-2026): un
+# color por indicador, sin calificacion global. Cada color sale de una regla
+# escrita: el rango que van de la mejor a la peor de las administraciones
+# cerradas se parte en tres tercios iguales (estado-administracion.js hace
+# la cuenta y la escribe en el documento). Todo en % del PIB, para que los
+# sexenios se comparen sin la inflacion de por medio.
+RADAR_SEMAFORO = [
+    {'id': 'balance', 'ico': '⚖️', 'tit': 'Balance presupuestario', 'u': 'pib', 'mejor': 'alto',
+     'calc': ['resta', 'ingresos_pib', 'gasto_pib'],
+     'que': 'Lo que entró menos lo que se gastó, en promedio al año. Negativo es déficit: se gastó más de lo que entró y la diferencia se cubrió con deuda.',
+     'op': 'Ingresos presupuestarios (promedio anual, % del PIB) menos gasto neto total (promedio anual, % del PIB).'},
+    {'id': 'deuda_anual', 'ico': '📉', 'tit': 'Cómo cambió la deuda, por año', 'u': 'ppa', 'mejor': 'bajo',
+     'calc': ['por_anio', 'deuda_cambio'],
+     'que': 'Cuánto subió (o bajó) la deuda pública, medida contra el tamaño de la economía, en promedio por cada año de gobierno.',
+     'op': 'Cambio de la deuda en el periodo (puntos del PIB) entre los años que abarca.'},
+    {'id': 'deuda_fin', 'ico': '🏦', 'tit': 'Deuda al cierre', 'u': 'pib', 'mejor': 'bajo',
+     'calc': ['directo', 'deuda_fin'], 'excluye': {'salinas': 'Para 1994 solo existe la deuda neta de Banxico, un indicador distinto del SHRFSP: no se compara con los demás.'},
+     'que': 'La deuda pública que dejó al cerrar su periodo (saldo histórico de los requerimientos financieros, SHRFSP), como parte del PIB.',
+     'op': 'Tal como la publica su fuente.'},
+    {'id': 'intereses', 'ico': '💸', 'tit': 'Peso de los intereses', 'u': 'pib', 'mejor': 'bajo',
+     'calc': ['directo', 'costo_financiero_pib'],
+     'que': 'Cuánto se fue, en promedio al año, solo en intereses y gastos de la deuda: dinero que no llega a escuelas, hospitales ni obras.',
+     'op': 'Promedio anual del costo financiero, en % del PIB.'},
+    {'id': 'inversion', 'ico': '🏗️', 'tit': 'Inversión física', 'u': 'pib', 'mejor': 'alto',
+     'calc': ['directo', 'inversion_pib'],
+     'que': 'Lo que se destinó a obra pública y equipamiento, en promedio al año: lo que deja infraestructura para los años siguientes.',
+     'op': 'Promedio anual de la inversión física, en % del PIB.'},
+    {'id': 'ingresos', 'ico': '💰', 'tit': 'Ingresos', 'u': 'pib', 'mejor': 'alto',
+     'calc': ['directo', 'ingresos_pib'],
+     'que': 'Todo lo que entró al sector público, sin deuda, en promedio al año. Más ingreso propio da más margen para gastar sin endeudarse.',
+     'op': 'Promedio anual de los ingresos presupuestarios, en % del PIB.'},
+]
+RADAR_LEY17 = {'txt': ('La Ley Federal de Presupuesto y Responsabilidad Hacendaria (art. 17, vigente desde 2006) pide que el gasto contribuya '
+                       'al equilibrio presupuestario, y permite un déficit solo de manera circunstancial, por las condiciones económicas '
+                       'y sociales del país, con la justificación del Ejecutivo ante el Congreso.'),
+               'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf', 'corto': 'LFPRH, art. 17 (Cámara de Diputados)'}
 
 
 def radar_nav(actual):
@@ -1909,6 +1948,7 @@ def radar():
     peso['admins'] = _peso_admins(ps, RADAR_ADMINS)
     datos = json.dumps({'admins': admins, 'valores': valores, 'metricas': metricas, 'dims': dims, 'obras': obras,
                         'fuentes': fuentes, 'reloj': reloj, 'inicial': 'amlo', 'monedas': monedas, 'peso': peso,
+                        'corte': fs['consulta'], 'semaforo': RADAR_SEMAFORO, 'ley17': RADAR_LEY17,
                         'duelo': ['ingresos_pib', 'inversion_pib', 'gasto_pib', 'costo_financiero_pib',
                                   'inversion_mdp:hoy', 'costo_financiero_mdp:hoy', 'deuda_fin', 'deuda_cambio', 'asf_aud', 'asf_rec']},
                        ensure_ascii=False).replace('</', '<\\/')
@@ -1963,7 +2003,31 @@ def radar():
         '<li>%s</li>' % x for x in [base['evaluacion_sexenal']['convencion']] + fs['advertencias'] + [ps['proyeccion']['aviso']] + base['evaluacion_sexenal']['advertencias'])
     datos_js = '<script type="application/json" id="rdDatos">%s</script>\n        ' % datos
 
+    expide_html = '''<div class="ex" id="exApp">
+          <div class="ex-ctl">
+            <p class="ex-paso"><b>1.</b> Elige la administración</p>
+            <div class="rd-admins" id="exAdmins" role="radiogroup" aria-label="Elige una administración"></div>
+            <p class="ex-paso"><b>2.</b> Revisa su estado de cuenta y descárgalo</p>
+            <div class="ex-btns"><button type="button" class="sz-btn sz-btn-of" id="exPdf">⬇️ Descargar en PDF</button>
+              <button type="button" class="sz-btn" id="exLiga">🔗 Copiar el enlace</button></div>
+            <p class="ex-pista">Al descargar, elige «Guardar como PDF» en la ventana de impresión.</p>
+          </div>
+          <article class="ex-doc" id="exDoc" aria-live="polite"></article>
+          <section class="ex-verifica" id="exVerifica" aria-labelledby="exVerTit">
+            <h3 id="exVerTit">🔎 Verifica un estado de cuenta</h3>
+            <p>¿Te compartieron uno? Escribe su folio o su huella digital y te decimos si coincide, cifra por cifra, con los datos vigentes.</p>
+            <form class="ex-ver-f" id="exVerForm"><input type="text" id="exVerIn" placeholder="AV-AMLO-1A2B3C4D" autocomplete="off" spellcheck="false" aria-label="Folio o huella digital">
+              <button type="submit" class="sz-btn sz-btn-of">Verificar</button></form>
+            <div id="exVerOut" aria-live="polite"></div>
+          </section>
+          <noscript><p>La herramienta necesita JavaScript.</p></noscript>
+        </div>'''
+
     partes = {
+        'expide': ('Elige una administración, de Salinas a Sheinbaum, y la plataforma te expide su estado de cuenta: lo que entró, '
+                   'lo que gastó, la deuda que recibió y dejó, el valor del peso y lo pendiente ante la Auditoría Superior, con un '
+                   'semáforo de su salud financiera. Descárgalo en PDF con su folio y su sello de verificación: cualquiera puede '
+                   'comprobar que no se alteró.', datos_js + expide_html),
         'tablero': ('Elige una administración y toca cada tarjeta para ver la comparativa con las demás: ingresos, inversión, '
                     'costo del gobierno, deuda y lo pendiente ante la Auditoría Superior, desde 1989. Las sumas en pesos se ven '
                     'en pesos de cada año, en pesos de hoy, en dólares o en euros. Cada cifra trae su documento.', tablero),
@@ -1996,7 +2060,8 @@ def radar():
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'descarga-los-datos.html',
             'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
             'icono': ico, 'titulo': tit, 'lema': 'Radar hacendario', 'entrada': entrada,
-            'estilos': ['radar.css'], 'scripts': ['radar.js'], 'pie_extra': radar_nav(archivo),
+            'estilos': ['radar.css'] + (['estado-administracion.css'] if pid == 'expide' else []),
+            'scripts': ['estado-administracion.js'] if pid == 'expide' else ['radar.js'], 'pie_extra': radar_nav(archivo),
             'secciones': [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         })
     return paginas
@@ -2351,6 +2416,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Expide el estado de cuenta de cada administración, de Salinas a Sheinbaum: sus números en resumen, un semáforo de su salud financiera con reglas escritas y descarga en PDF con folio y sello de verificación.'),
     ('10-10-2026', 'El Radar hacendario se abre en seis páginas: el tablero, el peso en el tiempo, el reloj de cada administración, el duelo, el presupuesto en curso y cómo leer los números. Cada una con su propia dirección para compartirla.'),
     ('10-10-2026', 'El peso en el tiempo, en el Radar hacendario: las sumas de cada sexenio en pesos de hoy, dólares o euros; inflación y tipo de cambio desde 1988 con la proyección de Hacienda a 2032, el dólar y el euro de hoy, y la máquina del tiempo del peso. Las series vienen ahora de una sola fuente de Hacienda, de 1990 a 2025.'),
     ('10-10-2026', 'Radar hacendario, en su propia página: cada administración desde 1989 con sus ingresos, inversión, costo, deuda y lo pendiente ante la ASF, más el reloj de cada sexenio y el duelo entre dos.'),

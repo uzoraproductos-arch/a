@@ -671,6 +671,33 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Expide el estado de cuenta de cada administración (10-10-2026, sello 20261010t).**
+El autor pidió una herramienta que «expida» el estado de cuenta de cada
+administración, de la última presidenta hasta la fecha, con su salud
+financiera evaluada y descarga con sello de Auditavisión. Vive en
+`radar-estado-de-cuenta.html`, la primera parte del Radar (`RADAR_PARTES`),
+y la anima `assets/auditor/js/estado-administracion.js` (+ su `.css`) con el
+mismo JSON `#rdDatos` del Radar. Decisiones del autor:
+- **Semáforo por indicador, sin calificación global.** Seis indicadores en %
+  del PIB (`RADAR_SEMAFORO`): balance presupuestario (ingresos − gasto), cambio
+  de la deuda por año, deuda al cierre, peso de los intereses, inversión física
+  e ingresos. Regla escrita en el documento: el rango entre la mejor y la peor
+  de las administraciones cerradas con dato se parte en tres tercios iguales
+  (verde, ámbar, rojo). La deuda de Salinas queda fuera (Banxico, no SHRFSP).
+  Lo de la ASF va sin color (la definición del monto por aclarar es de 2019).
+  Sheinbaum se evalúa con los mismos cortes, marcada «preliminar» (un año).
+  Cita la LFPRH art. 17 (equilibrio presupuestario) como contexto, no como corte.
+- **Sello de verificación.** Huella SHA-256 de las cifras del documento (el
+  mismo modelo que se pinta), folio `AV-<iniciales>-<8 hex>` que sale de la
+  huella, versión de la plataforma y liga `?verifica=<folio>`. La sección
+  «Verifica» recalcula las huellas con los datos vigentes. La leyenda dice
+  que no es un documento oficial. Si cambian los datos, los folios cambian y
+  los documentos viejos ya no verifican: así se dice en el resultado.
+- **PDF imprimible.** «Descargar en PDF» copia el documento a `#exPrint` y
+  abre la impresión; en `@media print` solo se imprime eso (≈5 hojas carta).
+El tablero lleva «🧾 Expide su estado de cuenta» en cada ficha, y el Estado
+de Cuenta Cívico enlaza a la herramienta.
+
 **El Radar hacendario, en seis páginas (10-10-2026, sello 20261010s).**
 El autor pidió que cada parte del radar tuviera su propia página en lugar
 de desplegarse en una sola. `radar-hacendario.html` queda como portada con
