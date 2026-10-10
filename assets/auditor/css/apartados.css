@@ -1026,3 +1026,9 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .camino-ir:hover { text-decoration: underline; }
 @media (max-width: 900px) { .camino-pasos { grid-template-columns: 1fr 1fr; } .camino-paso::after { display: none; } }
 @media (max-width: 520px) { .camino-pasos { grid-template-columns: 1fr; } .camino { padding: 16px; } }
+/* RECORRIDO DE CADA AUDITORIA EN IMAGENES (10-10-2026): entender, numeros, evidencia */
+.camino-pasos.camino-tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.au-ruta { margin: 6px 0 26px; }
+.camino-paso.aqui { background: #eaf1ff; border-top-color: #0b2a63; }
+.camino-paso.aqui .camino-num { background: #0b2a63; }
+@media (max-width: 900px) { .camino-pasos.camino-tres { grid-template-columns: 1fr; } }

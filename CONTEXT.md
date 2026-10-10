@@ -602,6 +602,64 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Propuesta de Astra, entrega 1 (10-10-2026, sello 20261010d).**
+El autor pidió ejecutar las consideraciones de Astra. Su propio plan pone
+primero la entrega 1: inventario, corrección de datos y conexión de
+Auditoría en imágenes con Números e Inspector. Las pestañas no cambian
+(siguen siendo cinco), Auditoría en imágenes sigue siendo el bloque de la
+portada y el Inspector vive en Herramientas.
+- **Recorrido de cada investigación.** Las nueve `auditoria-*.html` abren con
+  tres pasos: 📖 Entiende el caso (la lectura de la misma página),
+  💰 Explora los números (`sigue-el-dinero.html?abrir=eb-…`, la tarjeta
+  pertinente) y 🔍 Revisa la evidencia (el módulo del Inspector que toca).
+  El mapa está en `RUTAS` de `herramientas/auditorias.py`; reutiliza el
+  estilo `.camino` de Números con el modificador `.camino-tres`.
+- **Programas sociales corregidos** (`cuentaFederal2024.evaluacion_social_mir`
+  y la vista «Resultados sociales» del motor). Ahora hay columnas separadas
+  de aprobado y devengado, con chip y fuente:
+  - **Becas, separadas y verificadas.** S072 (básica): aprobado 49,869.8 y
+    devengado 42,571.6 mdp. S311 (media superior): aprobado 39,366.6 y
+    devengado 33,301.2 mdp. Fuente: el Estado Analítico de la SEP de la
+    Cuenta Pública 2024, tal como lo reproduce la ASF (Auditoría
+    2024-5-11O00-19-0113-2025, p. 8). Antes había un solo renglón de
+    87,540 mdp sin documento.
+  - **Pensión (S176): `pendiente`.** La cifra de 465,048 mdp estaba rotulada
+    como devengado y es el aprobado; se retiró. El tomo III de la Cuenta
+    Pública (Ramo 20) no se pudo abrir con conexión verificada, porque
+    el servidor de Hacienda no envía su certificado intermedio (Let's
+    Encrypt YR1) y el proxy bloquea letsencrypt.org. Falta de la
+    plataforma, no de Hacienda.
+  - **IMSS-Bienestar: `pendiente`** (clave, ramo y montos). Se retiraron los
+    128,900 mdp, que no tenían documento. Al cotejar no hay que mezclar el
+    programa con el presupuesto completo del organismo.
+  - **Resultados, todos `pendiente`.** Se retiraron los porcentajes de
+    cumplimiento, cobertura e impacto (101.4 %, 14.2 %, 8.5 pp, 707
+    hospitales…), que no tenían documento citado. Propósito, cobertura e
+    impacto se mostrarán por separado cuando se coteje la MIR y las
+    evaluaciones del CONEVAL.
+- **Ramo 28 y CDMX: ya cumplían.** El Ramo 28 por entidad dice «Estimación de
+  participaciones 2026, Anexo 15» y la CDMX lleva `sinFuente` con motivo en
+  los campos del INEGI.
+- **Inventario automático.** `herramientas/inventario.py` escribe
+  `docs/INVENTARIO.md`: 43 páginas, 0 enlaces rotos, 1 redirección, y los
+  destinos `?ir=` que siguen en la portada (reporta 82, verificador 17,
+  megaobras 14, ambiente 13, calculadora 11…). Se corre a mano; devuelve
+  1 si hay enlaces rotos.
+- **«Los tres presupuestos».** La frase no aparece en ningún archivo del
+  repositorio. Ese recorrido no existe todavía con ese nombre.
+
+Pendientes de la propuesta de Astra:
+- **Entrega 1:** cotejar la pensión S176 e IMSS-Bienestar en el tomo III,
+  bajando los PDF desde otra conexión, y la MIR o CONEVAL de los cuatro
+  programas. También el cuadro 3 del libro, con edición y página.
+- **Entregas 2 a 4** (portada con tres acciones, Estado de Cuenta en cuatro
+  dimensiones y simuladores en $0 con «Cargar ejemplo oficial»): sin
+  empezar.
+- **Entregas 5 a 7** (páginas temáticas, servicios de pago, comunidad): antes
+  el autor tiene que decidir si el Pase convive con los Servicios. Además
+  falta una política escrita de independencia frente a clientes y una
+  revisión legal del «análisis de indicios».
+
 **El Circuito del Dinero ya no existe: es la pestaña Números (10-10-2026, sello 20261010c).**
 Precisiones del autor:
 - Las pestañas se quedan como están.
