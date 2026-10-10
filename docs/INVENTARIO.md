@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 46 |
+| Páginas revisadas | 48 |
 | Páginas que solo redirigen | 1 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 11 destinos |
@@ -16,7 +16,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
-| `aprende.html` | Aprende · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
+| `aprende.html` | Aprende · Auditavisión | apartados.py | 19 | 0 | 0 | 0 | 0 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
 | `auditoria-deuda-soberana.html` | Los intereses de la deuda pública · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
 | `auditoria-dos-bocas.html` | Refinería Olmeca (Dos Bocas) · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
@@ -26,13 +26,15 @@ La Enciclopedia queda fuera porque está congelada.
 | `auditoria-ramo-33.html` | Ramo 33: el dinero para estados y municipios · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
 | `auditoria-tren-maya.html` | Tren Maya · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
 | `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 27 | 0 | 0 | 0 | 0 |
+| `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 18 | 0 | 4 | 5 | 1 |
-| `diccionario.html` | Diccionario del Gasto Público · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
+| `diccionario.html` | Diccionario del Gasto Público · Auditavisión | apartados.py | 18 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 19 | 0 | 18 | 3 | 6 |
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 18 | 0 | 0 | 0 | 0 |
-| `fuentes-oficiales.html` | Compendio de Fuentes Oficiales · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
-| `glosario.html` | Glosario · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
+| `fuentes-oficiales.html` | Compendio de Fuentes Oficiales · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
+| `glosario.html` | Glosario · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-pib.html` | El PIB no alcanza · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
@@ -55,12 +57,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 20 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 45 | 0 | 4 | 7 | 2 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 92 | 0 | 1 | 1 | 1 |
-| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 93 | 0 | 1 | 1 | 1 |
+| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 15 | 0 | 0 | 0 | 0 |
-| `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 57 | 0 | 0 | 0 | 38 |
-| `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 55 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
@@ -81,7 +83,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 | Destino | Veces enlazado |
 |---|---:|
-| `reporta` | 89 |
+| `reporta` | 93 |
 | `verificador` | 16 |
 | `megaobras` | 15 |
 | `ambiente` | 14 |

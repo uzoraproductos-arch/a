@@ -634,6 +634,22 @@ debería estar el dato.
 - **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
   ficha. AGENTS.md §2 lleva la regla nueva.
 
+**Aprende: el Diccionario en una sola pestaña (10-10-2026, sello 20261010h).**
+Decisión del autor: las pestañas «Biblioteca hacendaria» y «Fuentes del
+auditor» se juntan en una, «Diccionario del Gasto Público», con dos
+tarjetas. Aprende queda con tres pestañas: Trivia, Diccionario y Noticias.
+El orden es Aprende › Diccionario › Estante › Apartado:
+- `biblioteca-hacendaria.html` lleva al glosario, al marco legal y a las
+  preguntas frecuentes;
+- `fuentes-del-auditor.html` lleva al compendio de fuentes y al pase.
+
+Las dos páginas las genera `pagina_estante()` en `apartados.py`, a partir
+de `ESTANTES`, que ahora trae el archivo de cada estante. `diccionario.html`
+muestra solo las dos tarjetas de estante. Las anclas viejas
+`aprende.html#biblioteca` y `#kit`, y las del Diccionario, llevan a su
+estante. Las migas de cada apartado pasan por su estante, y en la barra al
+pie el nombre de cada estante es un enlace. El índice general las incluye.
+
 **Regla del rango derivado (10-10-2026).** Decisión del autor: cuando un
 dato solo tiene aproximación, se publica como rango (mínimo, máximo y punto
 medio = media aritmética) con chip `derivado`, no como `pendiente`. Cada
