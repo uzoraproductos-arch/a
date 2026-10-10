@@ -634,6 +634,49 @@ debería estar el dato.
 - **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
   ficha. AGENTS.md §2 lleva la regla nueva.
 
+**Propuesta de Astra, entrega 6: Servicios de investigación (10-10-2026, sello 20261010k).**
+Decisión del autor: **el Pase del Auditor convive con los Servicios.** El Pase
+sostiene la consulta gratuita; los Servicios son trabajo a la medida que se
+cotiza. Aún no hay dominio, así que todo queda listo para el lanzamiento. El
+autor hace la revisión legal y dio por buena la redacción.
+- **`servicios.html`** (Participa › Servicios), generada por `servicios()` en
+  `apartados.py`. Tiene cinco secciones:
+  1. los cuatro servicios de Astra, con su entregable y para quién son;
+  2. el proceso en siete pasos;
+  3. el precio, sin tarifa: las primeras saldrán de pilotos pagados y no se
+     inventan;
+  4. la política de independencia, versión 1, con diez compromisos (lista
+     `INDEPENDENCIA`);
+  5. el formulario «Solicita una investigación».
+- **El formulario** (`assets/auditor/js/servicios.js`) arma la solicitud en el
+  navegador y no envía ni guarda nada. Pide los campos obligatorios, si quien
+  solicita es parte del caso y que acepte la política y el alcance. Deja
+  revisar, copiar y descargar (.txt). El botón «Enviar» queda desactivado
+  mientras `CANAL_SOLICITUD` (en `apartados.py`) esté vacío. **Para abrirlo
+  en el lanzamiento:** se pone la dirección, por ejemplo
+  `'mailto:investigaciones@dominio.mx'`, y se corre `sello.py`. El botón
+  entonces abre el correo con asunto y cuerpo ya escritos.
+- **Servicio pertinente** (punto 8): cada `auditoria-*.html` cierra con
+  «¿Necesitas ir más a fondo en este caso?», que lleva a
+  `servicios.html?tema=<título>#solicitud` con el tema escrito.
+- Participa tiene una tercera pestaña, «Servicios», con tarjetas a Servicios
+  y al Pase. El Pase enlaza a Servicios, y el índice y las novedades los
+  incluyen.
+
+Pendientes de la entrega 6:
+- **El canal de envío** (`CANAL_SOLICITUD`): espera el dominio.
+- **Las tarifas**: salen de los pilotos pagados.
+- **El tablero comercial del punto 10** (visitas, solicitudes, cotizaciones,
+  horas). Necesita analítica y registro de encargos que el sitio estático no
+  tiene.
+- **Por confirmar con el autor** dos compromisos de la política:
+  - el 2, que no acepta encargos de gobiernos sobre lo que se fiscaliza.
+    Hay que ver qué pasa con la capacitación a universidades públicas;
+  - el 10, que promete publicar cada año los encargos y el origen de los
+    ingresos.
+- **Entrega 7** (comunidad: proponer temas, señalar errores, compartir
+  estados de cuenta): sin empezar.
+
 **Propuesta de Astra, entrega 5, parte editorial (10-10-2026, sello 20261010j).**
 Toma los puntos 3 y 8 de la propuesta: cada investigación tiene una
 lectura breve y otra ampliada, y se puede encontrar en buscadores sin

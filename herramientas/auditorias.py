@@ -278,6 +278,8 @@ def pagina(a, sello):
         <noscript><p>Esta página arma sus cuentas con JavaScript a partir de la base de datos de la plataforma. Actívalo para verlas.</p></noscript>
       </div>
 
+{servicio}
+
       <section class="au-otras-sec" aria-labelledby="auOtrasTit">
         <h2 class="au-sec-tit" id="auOtrasTit">🖼️ Otras auditorías en imágenes</h2>
         <div class="au-otras">
@@ -302,9 +304,21 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_),
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
+
+
+def servicio(titulo):
+    """El servicio pertinente de cada investigacion (propuesta de Astra,
+    punto 8): lleva al formulario de servicios.html con el tema escrito."""
+    from urllib.parse import quote
+    tema = re.sub('<[^>]+>', '', titulo)
+    return ('      <aside class="au-servicio" aria-label="Servicio de investigación">\n'
+            '        <p><b>🔎 ¿Necesitas ir más a fondo en este caso?</b> Podemos hacer por encargo una investigación documental '
+            'con la misma regla de esta página: cada cifra con su documento. La consulta sigue siendo gratuita.</p>\n'
+            '        <a class="camino-ir" href="servicios.html?tema=%s#solicitud">Solicita una investigación ➔</a>\n'
+            '      </aside>') % quote(tema)
 
 def portada():
     """Escribe en index.html lo que la portada toma de aqui: los enlaces de
