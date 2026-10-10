@@ -78,7 +78,7 @@ PROPIOS = [
      'Las Estadísticas Oportunas de Hacienda, que usa el Radar, empiezan en 1990, y el Anexo Estadístico del 5.º Informe en 1995. '
      'La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra. Mientras tanto, Salinas se mide con cinco de sus seis años '
      '(1990 a 1994) en % del PIB, y sus sumas en pesos quedan pendientes.',
-     PLATAFORMA, 'https://www.cuentapublica.hacienda.gob.mx/', 'Cuenta Pública (Hacienda)', [('radar-hacendario.html', 'Radar hacendario')]),
+     PLATAFORMA, 'https://www.cuentapublica.hacienda.gob.mx/', 'Cuenta Pública (Hacienda)', [('radar-tablero.html', 'Radar · El tablero'), ('radar-reloj.html', 'Radar · El reloj'), ('radar-duelo.html', 'Radar · Duelo de administraciones')]),
     ('tren-maya-ficha', 'Megaobras', 'Ficha pericial del Tren Maya 2024',
      'Se retiró el 10-10-2026 porque sus cifras no se habían cotejado con el Tomo VII de la Cuenta Pública 2024 ni con la ASF. Volverá cuando cada cifra tenga su documento.',
      PLATAFORMA, CP2024, 'Cuenta Pública 2024, Tomo VII (Hacienda)', [('expedientes.html#exp-tren-maya', 'Expediente del Tren Maya')]),

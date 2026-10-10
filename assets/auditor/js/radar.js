@@ -1,4 +1,4 @@
-/* Radar hacendario (radar-hacendario.html, 10-10-2026): cada administración
+/* Radar hacendario (radar-*.html, 10-10-2026): cada administración
    con sus números. Ingresos, inversión, costo del gobierno, deuda y lo que
    quedó por aclarar ante la ASF, con su comparativa, el reloj de cada
    sexenio y el duelo entre dos administraciones. Las sumas en pesos se ven
@@ -6,9 +6,24 @@
    en el tiempo» grafica la inflación y el tipo de cambio con la proyección
    de Hacienda.
    Las cifras llegan en el JSON #rdDatos, que arma herramientas/apartados.py
-   (radar()) con window.AUDIT_DB: aquí no se escribe ninguna cifra. */
+   (radar()) con window.AUDIT_DB: aquí no se escribe ninguna cifra.
+   Desde el 10-10-2026 cada parte vive en su página (radar-tablero.html,
+   radar-peso.html, radar-reloj.html, radar-duelo.html, radar-hoy.html):
+   cada bloque arranca solo si su página lo trae. */
 (function () {
   'use strict';
+  /* ================= Hoy: equivalencias durante la visita ================= */
+  var hoy = document.querySelectorAll('[data-tasa]');
+  if (hoy.length) {
+    var h0 = Date.now(), fmt = new Intl.NumberFormat('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    setInterval(function () {
+      var s = (Date.now() - h0) / 1000;
+      hoy.forEach(function (el) { el.textContent = '+$' + fmt.format(s * parseFloat(el.getAttribute('data-tasa'))); });
+      var t = document.getElementById('rdHoyT');
+      if (t) t.textContent = Math.floor(s / 60) + ':' + ('0' + Math.floor(s % 60)).slice(-2);
+    }, 250);
+  }
+
   var nodo = document.getElementById('rdDatos');
   if (!nodo) return;
   var D;
@@ -273,7 +288,7 @@
       }).join('');
       document.getElementById('rdDueloOut').innerHTML =
         '<div class="rd-du-cab"><span style="--c:' + a.col + '">' + esc(a.c) + '</span><span class="rd-du-vs">vs</span><span style="--c:' + b.col + '">' + esc(b.c) + '</span></div>' + filas +
-        '<p class="rd-nota">Sin ganador: más ingreso o más inversión no es por sí solo mejor, ni menos deuda peor. Los números dicen cuánto; el juicio es tuyo. Toca una administración arriba, en el tablero, para ver de dónde sale cada cifra.</p>';
+        '<p class="rd-nota">Sin ganador: más ingreso o más inversión no es por sí solo mejor, ni menos deuda peor. Los números dicen cuánto; el juicio es tuyo. En <a href="radar-tablero.html">el tablero</a>, toca una administración para ver de dónde sale cada cifra.</p>';
       crecer(document.getElementById('rdDueloOut'));
     }
     s1.addEventListener('change', pintaDuelo); s2.addEventListener('change', pintaDuelo);
@@ -485,17 +500,5 @@
     [mA, mH].forEach(function (el) { el.addEventListener('change', maq); });
     mM.addEventListener('input', maq);
     maq();
-  }
-
-  /* ================= Hoy: equivalencias durante la visita ================= */
-  var hoy = document.querySelectorAll('[data-tasa]');
-  if (hoy.length) {
-    var h0 = Date.now();
-    setInterval(function () {
-      var s = (Date.now() - h0) / 1000;
-      hoy.forEach(function (el) { el.textContent = '+$' + num(s * parseFloat(el.getAttribute('data-tasa')), 2); });
-      var t = document.getElementById('rdHoyT');
-      if (t) t.textContent = Math.floor(s / 60) + ':' + ('0' + Math.floor(s % 60)).slice(-2);
-    }, 250);
   }
 })();

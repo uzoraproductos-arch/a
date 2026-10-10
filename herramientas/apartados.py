@@ -387,9 +387,9 @@ APARTADOS = [
                     'hagas tus propias cuentas.'),
         'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
         # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
-        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-hacendario.html#hoy',
-                          'rc-deuda': 'radar-hacendario.html#hoy', 'rc-asf': 'radar-hacendario.html#hoy',
-                          'rc-huachicol': 'radar-hacendario.html#hoy'},
+        'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-hoy.html',
+                          'rc-deuda': 'radar-hoy.html', 'rc-asf': 'radar-hoy.html',
+                          'rc-huachicol': 'radar-hoy.html'},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -1628,6 +1628,28 @@ RADAR_HOY = '<div class="rd-hoy">\n' + '\n'.join([
         </div>'''
 
 
+# El Radar en paginas (decision del autor, 10-10-2026): radar-hacendario.html
+# es la portada con una tarjeta por parte, y cada parte vive en su pagina.
+# (id, archivo, icono, titulo, de que trata)
+RADAR_PARTES = [
+    ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
+    ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
+    ('reloj', 'radar-reloj.html', '⏱️', 'El reloj de cada administración', 'El contador que corre al ritmo de cada sexenio'),
+    ('duelo', 'radar-duelo.html', '⚔️', 'Duelo de administraciones', 'Dos administraciones, cara a cara'),
+    ('hoy', 'radar-hoy.html', '📌', 'Hoy: el presupuesto en curso', 'Las cifras grandes de 2026'),
+    ('lectura', 'radar-como-leer.html', '📏', 'Cómo leer estos números', 'Convenciones y advertencias de cada cifra'),
+]
+
+
+def radar_nav(actual):
+    """Barra al pie de cada pagina del Radar, con sus seis partes."""
+    return ('<nav class="bib-nav" aria-label="Radar hacendario">\n'
+            '        <a class="bib-nav-tit" href="radar-hacendario.html">📡 Radar hacendario: todas sus partes</a>\n'
+            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
+                % (r[1], ' aria-current="page"' if r[1] == actual else '', r[2], r[3], r[4]) for r in RADAR_PARTES))
+
+
 def _peso_base(ps):
     """INPC y tipos de cambio de Banxico, en promedios anuales y mensuales."""
     def prom(serie, y):
@@ -1937,10 +1959,24 @@ def radar():
             <select id="rdDuelo2" aria-label="Segunda administración"></select></div>
           <div id="rdDueloOut"></div>
         </div>'''
-    lectura = '<details class="rd-lectura"><summary>📏 Cómo leer estos números</summary><ul>%s</ul></details>' % ''.join(
+    lectura = '<div class="rd-lectura"><ul>%s</ul></div>' % ''.join(
         '<li>%s</li>' % x for x in [base['evaluacion_sexenal']['convencion']] + fs['advertencias'] + [ps['proyeccion']['aviso']] + base['evaluacion_sexenal']['advertencias'])
+    datos_js = '<script type="application/json" id="rdDatos">%s</script>\n        ' % datos
 
-    return {
+    partes = {
+        'tablero': ('Elige una administración y toca cada tarjeta para ver la comparativa con las demás: ingresos, inversión, '
+                    'costo del gobierno, deuda y lo pendiente ante la Auditoría Superior, desde 1989. Las sumas en pesos se ven '
+                    'en pesos de cada año, en pesos de hoy, en dólares o en euros. Cada cifra trae su documento.', tablero),
+        'peso': ('Cuánto vale hoy el peso, cuánto valía en cada sexenio frente al dólar y al euro, y hacia dónde lo proyecta '
+                 'Hacienda hasta 2032. Con la máquina del tiempo, lleva cualquier cantidad de un año a otro.', datos_js + peso_html),
+        'reloj': ('Elige una administración, qué contar y en qué moneda: el contador corre al ritmo promedio de su sexenio. '
+                  'Es una equivalencia, no dinero que se mueva hoy.', datos_js + reloj_html),
+        'duelo': ('Dos administraciones, cara a cara, en las mismas medidas. Sin ganador: los números dicen cuánto; el juicio es tuyo.',
+                  datos_js + duelo_html),
+        'hoy': ('Las cifras grandes del presupuesto de 2026, para poner todo lo anterior en perspectiva.', RADAR_HOY),
+        'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
+    }
+    paginas = [{
         'archivo': 'radar-hacendario.html', 'menu': 'Radar hacendario', 'menu_archivo': 'descarga-los-datos.html',
         'padre': ('descarga-los-datos.html', 'Datos'),
         'icono': '📡', 'titulo': 'Radar hacendario', 'lema': 'Cada administración, con sus números',
@@ -1948,24 +1984,22 @@ def radar():
                     'por aclarar ante la Auditoría Superior: administración por administración, desde 1989. Compáralas en pesos de '
                     'cada año, en pesos de hoy, en dólares o en euros; mira cuánto ha valido el peso y hacia dónde lo proyecta Hacienda, '
                     'y pon a correr el reloj de cada sexenio. Cada cifra trae su documento.'),
-        'estilos': ['radar.css'],
-        'scripts': ['radar.js'],
-        'secciones': [
-            {'id': 'tablero', 'titulo': '📡 El tablero', 'texto': 'Elige una administración y toca cada tarjeta para ver la comparativa con las demás.',
-             'tarjetas': [], 'bloque': tablero},
-            {'id': 'peso', 'titulo': '💱 El peso en el tiempo',
-             'texto': 'Cuánto vale hoy el peso, cuánto valía en cada sexenio frente al dólar y al euro, y hacia dónde lo proyecta Hacienda hasta 2032.',
-             'tarjetas': [], 'bloque': peso_html},
-            {'id': 'reloj', 'titulo': '⏱️ El reloj de cada administración',
-             'texto': 'Elige una administración, qué contar y en qué moneda: el contador corre al ritmo promedio de su sexenio. Es una equivalencia, no dinero que se mueva hoy.',
-             'tarjetas': [], 'bloque': reloj_html},
-            {'id': 'duelo', 'titulo': '⚔️ Duelo de administraciones', 'texto': 'Dos administraciones, cara a cara, en las mismas medidas.',
-             'tarjetas': [], 'bloque': duelo_html},
-            {'id': 'hoy', 'titulo': '📌 Hoy: el presupuesto en curso', 'texto': 'Las cifras grandes de 2026, para poner todo lo anterior en perspectiva.',
-             'tarjetas': [], 'bloque': RADAR_HOY},
-            {'id': 'lectura', 'titulo': '📏 Cómo leer', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': lectura},
-        ],
-    }
+        # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
+        'hash_a_pagina': {r[0]: r[1] for r in RADAR_PARTES},
+        'pestanas': True,
+        'pista': 'Cada parte del radar abre su propia página.',
+        'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in RADAR_PARTES],
+    }]
+    for (pid, archivo, ico, tit, sub) in RADAR_PARTES:
+        entrada, bloque = partes[pid]
+        paginas.append({
+            'archivo': archivo, 'menu': tit, 'menu_archivo': 'descarga-los-datos.html',
+            'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
+            'icono': ico, 'titulo': tit, 'lema': 'Radar hacendario', 'entrada': entrada,
+            'estilos': ['radar.css'], 'scripts': ['radar.js'], 'pie_extra': radar_nav(archivo),
+            'secciones': [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        })
+    return paginas
 
 
 # Glosario general en su propia pagina (decision del autor, 09-10-2026):
@@ -2206,8 +2240,8 @@ def pagina(a, sello):
         en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página"%s>
 %s
       </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>''' % (
-            ' data-primera="1"' if a.get('primera') else '', botones)
+      <p class="apartado-pestanas-pista" id="pestanasPista">%s</p>''' % (
+            ' data-primera="1"' if a.get('primera') else '', botones, a.get('pista', 'Elige una pestaña para abrir su contenido.'))
     elif len(a['secciones']) > 1:
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
             s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '', s['titulo'])
@@ -2317,6 +2351,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'El Radar hacendario se abre en seis páginas: el tablero, el peso en el tiempo, el reloj de cada administración, el duelo, el presupuesto en curso y cómo leer los números. Cada una con su propia dirección para compartirla.'),
     ('10-10-2026', 'El peso en el tiempo, en el Radar hacendario: las sumas de cada sexenio en pesos de hoy, dólares o euros; inflación y tipo de cambio desde 1988 con la proyección de Hacienda a 2032, el dólar y el euro de hoy, y la máquina del tiempo del peso. Las series vienen ahora de una sola fuente de Hacienda, de 1990 a 2025.'),
     ('10-10-2026', 'Radar hacendario, en su propia página: cada administración desde 1989 con sus ingresos, inversión, costo, deuda y lo pendiente ante la ASF, más el reloj de cada sexenio y el duelo entre dos.'),
     ('10-10-2026', 'Garantías cívicas, en su propia página: una brújula que en tres clics te dice a qué puerta oficial tocar, las seis puertas, tus diez garantías y el reto «¿Mito o realidad?».'),
@@ -2375,6 +2410,8 @@ def indice():
     for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
         a = ap[archivo]
         enl = [(x.get('pagina') or archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
+        if archivo == 'descarga-los-datos.html':
+            enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES]
         if archivo == 'aprende.html':
             enl += [('diccionario.html', 'Diccionario del Gasto Público', 'La obra completa')] + [
                 (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
@@ -2464,7 +2501,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias(), radar()] + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

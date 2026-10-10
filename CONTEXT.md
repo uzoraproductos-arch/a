@@ -671,6 +671,21 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El Radar hacendario, en seis páginas (10-10-2026, sello 20261010s).**
+El autor pidió que cada parte del radar tuviera su propia página en lugar
+de desplegarse en una sola. `radar-hacendario.html` queda como portada con
+seis tarjetas (`RADAR_PARTES` en `apartados.py`), y cada parte vive en la
+suya: `radar-tablero.html`, `radar-peso.html`, `radar-reloj.html`,
+`radar-duelo.html`, `radar-hoy.html` y `radar-como-leer.html`. Mismo
+contenido, mismas cifras y misma interactividad. `radar()` devuelve ahora
+la lista de las siete páginas. Cada subpágina lleva al pie la barra
+`radar_nav()` con las seis partes y las migas Datos › Radar hacendario.
+Las anclas viejas (`radar-hacendario.html#peso`, `#duelo`, etc., y los
+`#rc-*` de Datos) redirigen a su página. `radar.js` arranca cada bloque solo
+si su página lo trae; el contador de «Hoy» ya no depende de `#rdDatos`. El
+pendiente `radar-1989` apunta ahora al tablero, al reloj y al duelo. El
+índice general lista las seis partes bajo Datos.
+
 **El peso en el tiempo y una sola fuente para el Radar (10-10-2026, sello 20261010r).**
 El autor pidió cerrar los pendientes del radar y tomar en cuenta, en las
 comparativas, gráficas y simuladores, la inflación del peso a través del
