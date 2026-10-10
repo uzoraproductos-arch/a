@@ -767,8 +767,9 @@ GLOSARIO = {
     'archivo': 'glosario.html',
     'menu': 'Glosario',
     'menu_archivo': 'aprende.html',
-    'padre': ('diccionario.html', 'Diccionario del Gasto Público'),
-    'padre2': ('biblioteca-hacendaria.html', 'Biblioteca hacendaria'),
+    'padre': ('aprende.html#diccionario', 'Aprende'),
+    'padre2': ('diccionario.html', 'Diccionario del Gasto Público'),
+    'padre3': ('biblioteca-hacendaria.html', 'Biblioteca hacendaria'),
     'icono': '📖',
     'titulo': 'Glosario de Términos Hacendarios',
     'lema': 'Las palabras del erario, en lenguaje llano',
@@ -791,8 +792,9 @@ def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('aud
     b = [x for x in BIBLIOTECA if x[0] == archivo][0]
     return {
         'archivo': archivo, 'menu': b[2], 'menu_archivo': 'aprende.html',
-        'padre': ('diccionario.html', 'Diccionario del Gasto Público'),
-        'padre2': (estante_de(archivo)[5], estante_de(archivo)[2]),
+        'padre': ('aprende.html#diccionario', 'Aprende'),
+        'padre2': ('diccionario.html', 'Diccionario del Gasto Público'),
+        'padre3': (estante_de(archivo)[5], estante_de(archivo)[2]),
         'icono': b[1], 'titulo': titulo, 'lema': lema, 'entrada': entrada,
         'scripts': list(scripts),
         'secciones': [{
@@ -1018,8 +1020,9 @@ def pagina(a, sello):
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
     padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
-    if a.get('padre2'):
-        padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre2']
+    for nivel in ('padre2', 'padre3'):
+        if a.get(nivel):
+            padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
     cab_clase, cab_estilo = 'apartado-cab', ''
     if a.get('fondo'):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro']

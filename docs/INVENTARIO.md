@@ -33,8 +33,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 19 | 0 | 18 | 3 | 6 |
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 18 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `fuentes-oficiales.html` | Compendio de Fuentes Oficiales · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
-| `glosario.html` | Glosario · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
+| `fuentes-oficiales.html` | Compendio de Fuentes Oficiales · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
+| `glosario.html` | Glosario · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-pib.html` | El PIB no alcanza · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 29 | 1 | 0 | 0 | 0 |
@@ -58,11 +58,11 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 20 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 45 | 0 | 4 | 7 | 2 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 93 | 0 | 1 | 1 | 1 |
-| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
+| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 15 | 0 | 0 | 0 | 0 |
-| `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
+| `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 57 | 0 | 0 | 0 | 38 |
-| `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
+| `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 55 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
