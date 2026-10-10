@@ -56,6 +56,52 @@ AUDITORIAS = [
 ]
 
 
+# Recorrido de cada investigacion (propuesta de Astra, entrega 1, 10-10-2026):
+# entender el caso aqui, explorar sus numeros en «Numeros» y revisar la
+# evidencia en el Inspector. id: (tarjeta de Numeros, que la abre, modulo del
+# Inspector, que revisa).
+RUTAS = {
+    'tren-maya': ('eb-cuenta-federal', 'La Cuenta Pública federal y el peritaje del Tren Maya',
+                  'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
+    'dos-bocas': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                  'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
+    'deuda-soberana': ('eb-ccreloj', 'El reloj del costo de la deuda',
+                       'herramienta-inspector-radar.html', 'El radar hacendario: deuda e ingresos'),
+    'aifa': ('eb-egresos', 'Cuánto recibe cada ramo, Defensa incluida',
+             'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
+    'ramo-33': ('eb-mapa', 'El mapa de lo que baja a cada estado',
+                'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
+    'lego-cienega': ('eb-mapa', 'El mapa de lo que baja a cada estado',
+                     'herramienta-inspector-entes.html', 'El auditor de entes públicos'),
+    'tren-toluca': ('eb-egresos', 'Cuánto recibe cada ramo, la SICT incluida',
+                    'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
+    'megafarmacia': ('eb-salud', 'El gasto en salud, institución por institución',
+                     'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
+    'huachicol-fiscal': ('eb-ingresos', 'De dónde sale el dinero: el IEPS en la Ley de Ingresos',
+                         'herramienta-inspector-efos.html', 'La lista negra del SAT'),
+}
+
+
+def ruta(id_):
+    ancla, num_txt, insp, insp_txt = RUTAS[id_]
+    pasos = [
+        ('📖', 'Entiende el caso', 'Qué pasó, cuánto dinero involucra, quién interviene y qué falta saber.',
+         '#auImg', 'Leer el caso', ' aqui'),
+        ('💰', 'Explora los números', num_txt + ', con su fuente oficial.',
+         'sigue-el-dinero.html?abrir=' + ancla, 'Ir a Números', ''),
+        ('🔍', 'Revisa la evidencia', insp_txt + ': los documentos que sostienen el caso.',
+         insp, 'Abrir el Inspector', ''),
+    ]
+    return ('      <section class="camino au-ruta" aria-labelledby="auRutaTit">\n'
+            '        <h2 class="camino-tit" id="auRutaTit">El recorrido de esta investigación</h2>\n'
+            '        <p class="camino-txt">Tres pasos: entender el caso, comprobar sus números y revisar los documentos que lo sostienen.</p>\n'
+            '        <ol class="camino-pasos camino-tres">\n%s\n        </ol>\n      </section>') % '\n'.join(
+        '          <li class="camino-paso%s"><span class="camino-num" aria-hidden="true">%d</span>'
+        '<span class="camino-ico" aria-hidden="true">%s</span><b class="camino-que">%s</b>'
+        '<span class="camino-det">%s</span><a class="camino-ir" href="%s">%s ➔</a></li>'
+        % (aqui, n, ico, que, det, href, ir) for n, (ico, que, det, href, ir, aqui) in enumerate(pasos, 1))
+
+
 def archivo(id_):
     return 'auditoria-%s.html' % id_
 
@@ -112,6 +158,8 @@ def pagina(a, sello):
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
+{ruta}
+
       <div id="auImg" class="au-raiz" data-id="{id}">
         <noscript><p>Esta página arma sus cuentas con JavaScript a partir de la base de datos de la plataforma. Actívalo para verlas.</p></noscript>
       </div>
@@ -139,7 +187,7 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra)
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), extra=extra, ruta=ruta(id_))
 
 
 def generar(sello):

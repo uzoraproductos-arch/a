@@ -82,30 +82,46 @@ window.AUDIT_DB = {
     "evaluacion_social_mir": [
       {
         "programa": "Pensión para el Bienestar de las Personas Adultas Mayores",
+        "clave": "S176",
         "ramo": "Bienestar (20)",
-        "presupuesto_devengado_mdp": 465048.0,
-        "meta_poblacion_beneficiaria": "12.2 millones de personas de 65 años o más",
-        "cumplimiento_meta_pct": 101.4,
-        "tipo_evaluacion": "Evaluación Específica de Desempeño (CONEVAL)",
-        "resultado_clave": "Cubre al 98.2% de la población objetivo nacional con transferencias directas bimestrales."
+        "aprobado_mdp": null,
+        "devengado_mdp": null,
+        "estado_montos": "pendiente",
+        "motivo_montos": "El aprobado y el devengado de 2024 están en el Estado Analítico del Ramo 20 de la Cuenta Pública 2024 (Tomo III), pero la plataforma aún no los ha cotejado: el portal de la Cuenta Pública no se pudo abrir con conexión verificada. La cifra que se mostraba antes (465,048 mdp) se retiró porque estaba rotulada como devengado y corresponde al aprobado.",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/III/Print.20R20.03.EAEPCFPGF.pdf",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
       },
       {
-        "programa": "Becas de Educación Básica y Media Superior Benito Juárez",
+        "programa": "Programa de Becas de Educación Básica para el Bienestar Benito Juárez",
+        "clave": "S072",
         "ramo": "Educación Pública (11)",
-        "presupuesto_devengado_mdp": 87540.0,
-        "meta_poblacion_beneficiaria": "9.8 millones de estudiantes en situación de vulnerabilidad",
-        "cumplimiento_meta_pct": 99.8,
-        "tipo_evaluacion": "Evaluación de Impacto (evaluador externo independiente / SHCP)",
-        "resultado_clave": "Asociación estadísticamente significativa con reducción del 14.2% en abandono escolar en EMS; evaluación causal controlada confirma permanencia atribuible de 8.5 puntos porcentuales."
+        "aprobado_mdp": 49869.7586,
+        "devengado_mdp": 42571.5982,
+        "estado_montos": "oficial",
+        "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación Administrativa de la SEP, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-5-11O00-19-0113-2025, p. 8 (miles de pesos, convertidos a millones)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0113_a.pdf",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
       },
       {
-        "programa": "Atención a la Salud y Medicamentos Gratuitos (IMSS-Bienestar)",
-        "ramo": "Salud (12)",
-        "presupuesto_devengado_mdp": 128900.0,
-        "meta_poblacion_beneficiaria": "53.2 millones de personas sin seguridad social en 23 estados",
-        "cumplimiento_meta_pct": 92.1,
-        "tipo_evaluacion": "Auditoría de Desempeño ASF (CP 2024)",
-        "resultado_clave": "Avance del 89.4% en basificación médica y transferencia de 707 hospitales; observaciones por solventar en abasto de farmacia."
+        "programa": "Beca Universal para Estudiantes de Educación Media Superior Benito Juárez",
+        "clave": "S311",
+        "ramo": "Educación Pública (11)",
+        "aprobado_mdp": 39366.5867,
+        "devengado_mdp": 33301.2359,
+        "estado_montos": "oficial",
+        "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación Administrativa de la SEP, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-5-11O00-19-0113-2025, p. 8 (miles de pesos, convertidos a millones)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0113_a.pdf",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
+      },
+      {
+        "programa": "Atención a la Salud y Medicamentos Gratuitos para la Población sin Seguridad Social Laboral (IMSS-Bienestar)",
+        "clave": "pendiente",
+        "ramo": "pendiente",
+        "aprobado_mdp": null,
+        "devengado_mdp": null,
+        "estado_montos": "pendiente",
+        "motivo_montos": "La clave programática, el ramo y los montos de 2024 se tienen que cotejar en la Cuenta Pública 2024 antes de mostrarlos; la plataforma aún no lo ha hecho. Se cuidará no mezclar el programa con el presupuesto completo del organismo IMSS-Bienestar. La cifra que se mostraba antes (128,900 mdp) se retiró por no tener documento citado.",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
       }
     ],
     "contexto_ecologico_inegi": {

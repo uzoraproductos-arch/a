@@ -27611,10 +27611,15 @@
     } else if (v === 'social') {
       const mir = cf.evaluacion_social_mir;
       const eco = cf.contexto_ecologico_inegi;
-      html = '<h4 style="margin:12px 0 8px; font-size:14px; color:var(--gold-bright);">Matriz de Indicadores para Resultados (MIR / SHCP & CONEVAL)</h4>' +
-      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Programa Presupuestario</th><th>Ramo</th><th>Presupuesto (mdp)</th><th>Meta de Población</th><th>Cumplimiento</th><th>Resultado Oficial Evaluado</th></tr></thead><tbody>' +
-      mir.map(m => '<tr><td><b>' + m.programa + '</b></td><td>' + m.ramo + '</td><td class="num-tabular">$' + formatNumber(m.presupuesto_devengado_mdp) + '</td><td>' + m.meta_poblacion_beneficiaria + '</td><td class="num-tabular">' + m.cumplimiento_meta_pct + '%</td><td><small>' + m.resultado_clave + ' (' + m.tipo_evaluacion + ')</small></td></tr>').join('') +
+      /* Aprobado y devengado van en columnas separadas: antes se mostraba el
+         aprobado de la pension rotulado como devengado. Proposito, cobertura e
+         impacto son mediciones distintas y siguen pendientes de cotejo. */
+      const celdaMdp = (m, x) => m.estado_montos === 'oficial' ? '$' + formatNumber(Math.round(x * 10) / 10) : '—';
+      html = '<h4 style="margin:12px 0 8px; font-size:14px; color:var(--gold-bright);">Programas sociales: presupuesto y resultados (Cuenta Pública 2024)</h4>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Programa presupuestario</th><th>Clave</th><th>Ramo</th><th>Aprobado (mdp)</th><th>Devengado (mdp)</th><th>Estado y fuente</th><th>Propósito, cobertura e impacto</th></tr></thead><tbody>' +
+      mir.map(m => '<tr><td><b>' + m.programa + '</b></td><td>' + m.clave + '</td><td>' + m.ramo + '</td><td class="num-tabular">' + celdaMdp(m, m.aprobado_mdp) + '</td><td class="num-tabular">' + celdaMdp(m, m.devengado_mdp) + '</td><td>' + chipEstado(m.estado_montos) + ' <small>' + (m.estado_montos === 'oficial' ? m.fuente_montos : m.motivo_montos) + (m.url ? ' <a href="' + m.url + '" target="_blank" rel="noopener">Documento ↗</a>' : '') + '</small></td><td>' + chipEstado('pendiente') + ' <small>' + m.motivo_resultados + '</small></td></tr>').join('') +
       '</tbody></table></div>' +
+      '<p class="pd-nota">Las becas de educación básica (S072) y media superior (S311) se muestran por separado. Aprobado es lo que autorizó la Cámara de Diputados; devengado es lo que el gobierno reconoció como obligación de pago al cierre del año. La diferencia entre ambos no es ahorro ni desvío: es una modificación del presupuesto que la Cuenta Pública debe explicar.</p>' +
       '<h4 style="margin:20px 0 8px; font-size:14px; color:var(--gold-bright);">Contexto Ecológico Nacional de Sustentabilidad (INEGI CEEM 2024)</h4>' +
       '<div class="cf-cards-grid">' +
         '<div class="cf-card"><span class="cf-card-header">Producto Interno Neto Ecológico (PINE) <span class="est-chip est-oficial">oficial</span></span><span class="cf-card-val dorado">$' + formatNumber(eco.pine_mdp) + ' MDP</span><span class="cf-card-sub">Renta económica neta tras descontar depreciación y daño ecológico.</span></div>' +
