@@ -8954,7 +8954,7 @@
       '<footer class="glos-drawer-pie">' +
         (enPortal
           ? '<button type="button" class="glos-drawer-todo" data-pres="decalogo">📜 Decálogo del ciudadano auditor ➔</button>' +
-            '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="fuentes">📚 Catálogo de fuentes oficiales ➔</button>'
+            '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="fuentes">📚 Compendio de Fuentes Oficiales ➔</button>'
           : '<a class="glos-drawer-todo" href="index.html" style="text-align:center; text-decoration:none;">⚡ Ir a la plataforma ➔</a>') +
         '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="finanzas">📖 Qué son las finanzas públicas ➔</button>' +
       '</footer>';
