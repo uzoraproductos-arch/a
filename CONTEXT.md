@@ -671,6 +671,12 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**El sello se titula «Dictamen técnico de Auditavisión» (10-10-2026, sello 20261010zc).**
+A pedido del autor, el pie del estado de cuenta ya no dice «Sello de
+verificación de Auditavisión»: el título, el anillo del sello y su texto
+alternativo dicen «Dictamen técnico de Auditavisión». La leyenda, la huella
+y los folios no cambian.
+
 **«Verifica un estado de cuenta», al Modo Inspector (10-10-2026, sello 20261010za).**
 A pedido del autor, la sección de verificación salió de la página que expide
 el estado de cuenta y es el **módulo 7 del Modo Inspector**, con página propia:
