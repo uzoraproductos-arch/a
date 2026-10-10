@@ -671,6 +671,25 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Expide» abre su propia página y el documento se genera con un botón (10-10-2026, sello 20261010x).**
+A pedido del autor:
+- **Página propia.** La tarjeta «🧾 Hoy y los estados de cuenta» del Radar lleva
+  ahora a `radar-hoy.html` (que dejó de ser redirección): el presupuesto en
+  curso y una tarjeta que abre la herramienta en `radar-estado-de-cuenta.html`.
+  La herramienta se queda en esa dirección porque va impresa en el sello de los
+  PDF (`?verifica=`, `?doc=`, `?adm=`). El ancla vieja `#hoy` de esa página
+  lleva a `radar-hoy.html#hoy`.
+- **Botón «🧾 Generar estado de cuenta»**, junto a «Descargar en PDF». Elegir
+  de quién ya no arma el documento: queda en espera hasta que se presiona el
+  botón, y «Descargar en PDF» se habilita solo después. Un enlace compartido
+  (`?doc=` o `?adm=`) y el «Ver el documento» de la verificación lo generan
+  directamente, porque son documentos ya expedidos.
+- **Encabezado más amplio**, con el logo a 104 px (antes 54) y espacio para una
+  imagen que se repite en todos los estados de cuenta. La imagen se guarda como
+  `assets/auditor/img/encabezado-estado-de-cuenta.(svg|png|jpg|jpeg|webp)`:
+  `apartados.py` la detecta y la pone en `data-cabecera` de `#exApp`; si no
+  existe, no se pide nada al servidor. **Pendiente: el autor enviará la imagen.**
+
 **Se suma la senaduría al estado de cuenta (10-10-2026, sello 20261010w).**
 El autor notó que faltaban los senadores. Quinto tipo en «¿De quién?»: la
 senaduría (`?doc=senado`, folio `AV-SEN-…`). Lo que cobra (dieta neta del

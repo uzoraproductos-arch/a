@@ -191,9 +191,12 @@
       '<text x="60" y="74" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor">' + esc(fol ? fol.split('-').slice(-1)[0] : '········') + '</text></svg>';
   }
 
+  /* La imagen del encabezado (data-cabecera de #exApp) va en todos los documentos. */
+  var BANDA = document.getElementById('exApp').getAttribute('data-cabecera');
   function cabecera(col, tipo, titulo, sub, corteEt, corte) {
-    return '<header class="ex-doc-cab" style="--c:' + col + '">' +
-      '<div class="ex-marca"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="54" height="42"><div><b>Auditavisión</b><small>El gasto público, a la vista</small></div></div>' +
+    return (BANDA ? '<div class="ex-banda"><img src="' + esc(BANDA) + '" alt=""></div>' : '') +
+      '<header class="ex-doc-cab" style="--c:' + col + '">' +
+      '<div class="ex-marca"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="104" height="81" decoding="sync"><div><b>Auditavisión</b><small>El gasto público, a la vista</small></div></div>' +
       '<div class="ex-doc-tit"><span class="ex-doc-tipo">' + esc(tipo) + '</span><h3>' + esc(titulo) + '</h3>' +
       '<span>' + esc(sub) + '</span></div>' +
       '<dl class="ex-meta"><div><dt>Folio</dt><dd class="ex-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoyFecha()) + '</dd></div>' +
@@ -225,8 +228,27 @@
     });
   }
 
-  var est = { tipo: 'adm', adm: null, doc: null, folio: null };
-  function pinta() { if (est.tipo === 'adm') pintaAdm(); else pintaCargo(docDe(est.doc)); }
+  /* El documento se arma solo al presionar «Generar estado de cuenta»
+     (pedido del autor, 10-10-2026); elegir otro lo vuelve a dejar en espera. */
+  var est = { tipo: 'adm', adm: null, doc: null, folio: null, listo: false };
+  function pinta() {
+    var doc = document.getElementById('exDoc');
+    document.getElementById('exPdf').disabled = !est.listo;
+    doc.classList.toggle('ex-doc-espera', !est.listo);
+    if (!est.listo) {
+      est.folio = null;
+      doc.style.removeProperty('--c');
+      doc.innerHTML = '<p class="ex-espera"><span aria-hidden="true">🧾</span>Elegiste el estado de cuenta de <b>' + esc(actual().corto) +
+        '</b>.<br>Presiona «Generar estado de cuenta» para expedirlo.</p>';
+      return;
+    }
+    if (est.tipo === 'adm') pintaAdm(); else pintaCargo(docDe(est.doc));
+  }
+  function genera() {
+    est.listo = true;
+    pinta();
+    document.getElementById('exDoc').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   function pintaAdm() {
     var a = adm(est.adm), m = modelo(a);
     var doc = document.getElementById('exDoc');
@@ -396,6 +418,7 @@
     if (!adm(id)) return;
     est.tipo = 'adm';
     est.adm = id;
+    est.listo = false;
     pintaTipos();
     pintaAdmins();
     pinta();
@@ -406,6 +429,7 @@
     if (!d) return;
     est.tipo = d.tipo;
     est.doc = id;
+    est.listo = false;
     pintaTipos();
     if (d.tipo === 'dip-loc') pintaEnts();
     pinta();
@@ -431,8 +455,11 @@
     if (e.target.id === 'exEnt') eligeDoc(e.target.value, true);
   });
 
+  document.getElementById('exGenera').addEventListener('click', genera);
+
   /* ================= Descargar en PDF ================= */
   document.getElementById('exPdf').addEventListener('click', function () {
+    if (!est.listo) return;
     var viejo = document.getElementById('exPrint');
     if (viejo) viejo.remove();
     var c = document.createElement('div'), x = actual();
@@ -481,14 +508,18 @@
     if (!b) return;
     if (b.hasAttribute('data-ver-adm')) elige(b.getAttribute('data-ver-adm'), true);
     else eligeDoc(b.getAttribute('data-ver-doc'), true);
-    document.getElementById('exDoc').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    genera();
   });
 
   /* ================= Arranque ================= */
+  /* El «Hoy» vivió en esta página hasta el 10-10-2026: su ancla lleva a la suya. */
+  if (location.hash === '#hoy') { location.replace('radar-hoy.html#hoy'); return; }
   var q = new URLSearchParams(location.search);
   var ultimo = D.admins[D.admins.length - 1].id;
-  if (docDe(q.get('doc'))) eligeDoc(q.get('doc'), false);
-  else elige(adm(q.get('adm')) ? q.get('adm') : ultimo, false);
+  /* Un enlace compartido (?doc= o ?adm=) es un documento ya expedido: se genera al abrirlo. */
+  if (docDe(q.get('doc'))) { eligeDoc(q.get('doc'), false); est.listo = true; pinta(); }
+  else if (adm(q.get('adm'))) { elige(q.get('adm'), false); est.listo = true; pinta(); }
+  else elige(ultimo, false);
   if (q.get('verifica')) {
     document.getElementById('exVerIn').value = q.get('verifica');
     verifica(q.get('verifica'));

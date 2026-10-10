@@ -2,6 +2,7 @@
    10-10-2026). Lo anima assets/auditor/js/estado-administracion.js. Al
    descargar, el documento se copia en #exPrint y solo eso se imprime. */
 .ex { display: grid; gap: 18px; }
+.ex .sz-btn:disabled { opacity: .5; cursor: not-allowed; }
 .ex [hidden] { display: none !important; }
 .ex-ctl { background: #fff; border: 1px solid #dfe5f0; border-radius: 20px; padding: 16px; box-shadow: 0 8px 26px rgba(11, 42, 99, .07); }
 .ex-paso { margin: 0 0 8px; font-weight: 700; color: #0b2a63; }
@@ -32,12 +33,18 @@
 
 /* El documento */
 .ex-doc { --c: #0b2a63; background: #fff; border: 1px solid #d5dcea; border-top: 8px solid var(--c); border-radius: 6px; padding: 26px 28px; box-shadow: 0 14px 40px rgba(11, 42, 99, .12); color: #1c2a44; font-size: 14.5px; line-height: 1.5; }
-.ex-doc-cab { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: start; padding-bottom: 14px; border-bottom: 2px solid #0b2a63; }
-.ex-marca { display: flex; gap: 8px; align-items: center; }
-.ex-marca b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 18px; color: #0b2a63; }
-.ex-marca small { font-size: 11.5px; color: #5a6782; }
+.ex-banda { margin: -26px -28px 18px; border-radius: 0; overflow: hidden; background: #0b2a63; }
+.ex-banda img { display: block; width: 100%; height: auto; max-height: 220px; object-fit: cover; }
+.ex-doc-cab { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; padding: 6px 0 20px; border-bottom: 3px solid #0b2a63; }
+.ex-marca { display: flex; gap: 12px; align-items: center; }
+.ex-marca img { width: 104px; height: auto; flex: none; image-rendering: auto; }
+.ex-marca b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #0b2a63; line-height: 1.1; }
+.ex-marca small { font-size: 12.5px; color: #5a6782; }
+.ex-doc-espera { display: grid; place-items: center; min-height: 220px; border-top-color: #c9d3e6; border-style: dashed; box-shadow: none; background: #f7f9fc; }
+.ex-espera { margin: 0; text-align: center; color: #33415c; font-size: 15px; line-height: 1.6; }
+.ex-espera span { display: block; font-size: 40px; margin-bottom: 6px; }
 .ex-doc-tipo { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--c); font-weight: 800; }
-.ex-doc-tit h3 { margin: 2px 0; font-family: 'Playfair Display', Georgia, serif; font-size: 25px; color: #0b2a63; line-height: 1.15; }
+.ex-doc-tit h3 { margin: 2px 0; font-family: 'Playfair Display', Georgia, serif; font-size: 27px; color: #0b2a63; line-height: 1.15; }
 .ex-doc-tit span { color: #5a6782; font-size: 13.5px; }
 .ex-meta { margin: 0; display: grid; gap: 4px; text-align: right; font-size: 12.5px; }
 .ex-meta div { display: grid; }
@@ -108,7 +115,9 @@
 
 @media (max-width: 720px) {
   .ex-doc { padding: 18px 14px; }
+  .ex-banda { margin: -18px -14px 14px; }
   .ex-doc-cab { grid-template-columns: 1fr; }
+  .ex-marca img { width: 84px; }
   .ex-meta { text-align: left; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ex-sem { grid-template-columns: 1fr; }
   .ex-tipos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -125,6 +134,9 @@
   .ex-print { display: block; }
   .ex-print .ex-doc { box-shadow: none; border-left: 0; border-right: 0; border-bottom: 0; border-radius: 0; padding: 0 0 0; font-size: 12px; }
   .ex-print .ex-doc-cab { grid-template-columns: auto 1fr auto; }
+  .ex-print .ex-banda { margin: 0 0 12px; }
+  .ex-print .ex-banda img { max-height: 46mm; }
+  .ex-print .ex-marca img { width: 96px; }
   .ex-print .ex-sem { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ex-print .ex-sello { grid-template-columns: 120px 1fr; text-align: left; justify-items: start; }
   .ex-print a { color: #1a56b8; text-decoration: none; }
