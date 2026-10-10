@@ -129,6 +129,45 @@ def fichas(lista):
                       '</button>' % (clase, fid, icono, nombre, desc))
     return '<div class="apartado-rejilla dt-fichas">\n' + '\n'.join(partes) + '\n</div>'
 
+def glos(termino, texto):
+    return '<a class="glos-pagina" href="glosario.html#%s">%s</a>' % (glosario_ancla(termino), texto)
+
+
+def nota_ref(ref, n, titulo):
+    return '<sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#%s" title="%s">[%02d]</a></sup>' % (ref, titulo, n)
+
+
+# El camino del dinero en cuatro pasos (10-10-2026): era la entrada del
+# modulo «Circuito del Dinero», que se reparte en Numeros. Mismo texto y
+# mismas fuentes; cada paso lleva a su capitulo.
+CAMINO_NUMEROS = (
+    '<section class="camino" aria-labelledby="caminoTit">\n'
+    '        <h2 class="camino-tit" id="caminoTit">El camino del dinero, en cuatro pasos</h2>\n'
+    '        <p class="camino-txt">El dinero público recorre siempre el mismo camino. Antes de auditar una cifra hay que saber por dónde pasó.</p>\n'
+    '        <ol class="camino-pasos">\n%s\n        </ol>\n      </section>') % '\n'.join(
+    '          <li class="camino-paso"><span class="camino-num" aria-hidden="true">%d</span><span class="camino-ico" aria-hidden="true">%s</span>'
+    '<b class="camino-que">%s</b><span class="camino-det">%s</span><a class="camino-ir" href="%s">%s ➔</a></li>' % x for x in [
+        (1, '📜', 'Se autoriza cobrarlo',
+         'El Congreso lo aprueba en la %s %s.' % (glos('LIF (Ley de Ingresos de la Federación)', 'Ley de Ingresos de la Federación'),
+                                                 nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026')),
+         '#origen', 'Capítulo 1'),
+        (2, '🏛️', 'Se decide en qué gastarlo',
+         'La Cámara de Diputados aprueba el %s %s.' % (glos('PEF (Presupuesto de Egresos de la Federación)', 'Presupuesto de Egresos'),
+                                                      nota_ref('ref-pef2026', 11, 'Presupuesto de Egresos de la Federación 2026')),
+         '#decide', 'Capítulo 2'),
+        (3, '🗺️', 'Se ejerce y se reparte',
+         'El gobierno lo gasta y lo baja al territorio por dos ramos: el %s, de participaciones que los estados gastan con libertad, '
+         'y el %s, de aportaciones etiquetadas para educación, salud, agua o seguridad %s.' % (
+             glos('Ramo 28 (Participaciones Federales)', 'Ramo 28'), glos('Ramo 33 (Aportaciones Federales)', 'Ramo 33'),
+             nota_ref('ref-lcf', 5, 'Ley de Coordinación Fiscal')),
+         '#baja', 'Capítulo 4'),
+        (4, '🔍', 'Se rinden cuentas',
+         'Al año siguiente se entrega la %s, que revisa la %s.' % (
+             glos('Cuenta Pública', 'Cuenta Pública'), glos('Auditoría Superior de la Federación (ASF)', 'Auditoría Superior de la Federación')),
+         'herramienta-inspector-asf.html', 'Qué encontró la ASF'),
+    ])
+
+
 # Diccionario del Gasto Publico (10-10-2026): la obra entera, en dos
 # estantes. «Biblioteca hacendaria» es para entender (glosario, marco legal,
 # preguntas); «Fuentes del auditor» es para verificar (compendio de fuentes y
@@ -229,6 +268,7 @@ APARTADOS = [
                            'Hacienda Pública', 'LIF (Ley de Ingresos de la Federación)', 'PEF (Presupuesto de Egresos de la Federación)',
                            'Gasto Federalizado', 'Deuda Pública y SHRFSP'],
         'scripts': ['deuda-tiempo.js'],
+        'antes': CAMINO_NUMEROS,
         # Desde el 09-10-2026 cada capitulo es una pestana (decision del
         # autor): su contenido y sus fichas solo se despliegan al pulsarla.
         'pestanas': True,
@@ -991,7 +1031,7 @@ def pagina(a, sello):
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-{en_pagina}
+{antes}{en_pagina}
       {guia}
 {secciones}{guia_abajo}{pie_extra}
     </div>
@@ -1010,7 +1050,7 @@ def pagina(a, sello):
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
-           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos,
+           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
            secciones='\n\n'.join(secciones))
 
 

@@ -602,6 +602,39 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**El Circuito del Dinero ya no existe: es la pestaña Números (10-10-2026, sello 20261010c).**
+Precisiones del autor:
+- Las pestañas se quedan como están.
+- **Auditoría en imágenes no es pestaña**: es el bloque de imágenes al
+  inicio de la portada, y cada imagen lleva a su investigación.
+- **El Modo Inspector vive en Herramientas.**
+- **El Circuito del Dinero se convirtió en Números** (`sigue-el-dinero.html`).
+  Nada debe llevar ya a él.
+
+Inventario: los 10 bloques del módulo `presupuesto` (`eb-arquitectura`,
+`cuanto`, `ingresos`, `equivale`, `ciegos`, `egresos`, `salud`,
+`cuenta-federal` y `mapa`) ya tenían su tarjeta en Números. Faltaba la
+entrada «El camino del dinero, en cuatro pasos», que ahora es el bloque
+`CAMINO_NUMEROS` arriba de las pestañas. Conserva el mismo texto y las mismas
+fuentes ([10] LIF, [11] PEF, [05] LCF), lleva sus términos al glosario y cada
+paso manda a su capítulo; el cuarto va a «Qué encontró la ASF».
+
+Accesos que todavía abrían el módulo viejo y ahora llevan a Números:
+- `?ir=presupuesto` e `?ir=egresos`, con un script en el `<head>` de
+  `index.html` que redirige antes de pintar la portada;
+- `seleccionarModuloExplorer('presupuesto')`;
+- el resultado «Ramo» del buscador;
+- `irAAuditoriaInversiones`;
+- el botón del radar «Ver de dónde sale el dinero, en Números (LIF)».
+
+Todos usan `irANumeros(ancla)` del motor, que manda a
+`sigue-el-dinero.html?abrir=eb-…`. `apartados.js` abre ahí la pestaña y el
+visor de la tarjeta de ese bloque. El visor de Números sigue usando
+`index.html?ir=presupuesto&ancla=…&visor=1`, que no se redirige.
+
+Los rótulos «Circuito del Dinero» en `PROEMIOS`, `TAB`, la nota de la portada
+y el `<h2>` del módulo dicen ahora «Números».
+
 **Herramientas en módulos con página propia y motor 8 veces más rápido (10-10-2026, sello 20261010b).**
 Pedido del autor: al entrar a cualquiera de las cuatro herramientas, la
 pestaña «se quedaba actualizando cifras». Diagnóstico con el perfilador de

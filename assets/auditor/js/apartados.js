@@ -266,6 +266,21 @@
   document.addEventListener('apartado:pestana', function (e) { visorDePestana(e.detail && e.detail.id); });
   visorDePestana(pestanaAbierta);
 
+  /* ?abrir=eb-bloque (10-10-2026): el auditor manda aquí lo que antes abría
+     en el módulo «Circuito del Dinero», que ahora es la pestaña Números. Se
+     abre la pestaña de la tarjeta que lleva ese bloque y su visor. */
+  (function () {
+    var abrir = new URLSearchParams(location.search).get('abrir');
+    if (!abrir || !/^[A-Za-z0-9_-]+$/.test(abrir)) return;
+    var re = new RegExp('[?&]ancla=' + abrir + '(&|$)');
+    var t = Array.prototype.filter.call(document.querySelectorAll('a.apartado-tarjeta'), function (x) { return re.test(x.getAttribute('href') || ''); })[0];
+    if (!t) return;
+    var panel = t.closest('.apartado-panel');
+    if (panel) abrirPestana(panel.id, false);
+    history.replaceState(null, '', location.pathname + (panel ? '#' + panel.id : ''));
+    if (tarjetaAbierta !== t) abrirVisor(t);
+  })();
+
   /* El auditor, en el visor, pide cerrarlo con postMessage. */
   window.addEventListener('message', function (e) {
     if (e.origin !== window.location.origin || !e.data || e.data.auditavision !== 'cerrar-visor') return;
