@@ -188,7 +188,8 @@ window.AUDIT_DB = {
         "estado_montos": "pendiente",
         "motivo_montos": "El aprobado y el devengado de 2024 están en el Estado Analítico del Ramo 20 de la Cuenta Pública 2024 (Tomo III), pero la plataforma aún no los ha cotejado: el portal de la Cuenta Pública no se pudo abrir con conexión verificada. La cifra que se mostraba antes (465,048 mdp) se retiró porque estaba rotulada como devengado y corresponde al aprobado.",
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/III/Print.20R20.03.EAEPCFPGF.pdf",
-        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
       },
       {
         "programa": "Programa de Becas de Educación Básica para el Bienestar Benito Juárez",
@@ -199,7 +200,8 @@ window.AUDIT_DB = {
         "estado_montos": "oficial",
         "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación Administrativa de la SEP, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-5-11O00-19-0113-2025, p. 8 (miles de pesos, convertidos a millones)",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0113_a.pdf",
-        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
       },
       {
         "programa": "Beca Universal para Estudiantes de Educación Media Superior Benito Juárez",
@@ -210,7 +212,8 @@ window.AUDIT_DB = {
         "estado_montos": "oficial",
         "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación Administrativa de la SEP, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-5-11O00-19-0113-2025, p. 8 (miles de pesos, convertidos a millones)",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0113_a.pdf",
-        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
       },
       {
         "programa": "Atención a la Salud y Medicamentos Gratuitos para la Población sin Seguridad Social Laboral (IMSS-Bienestar)",
@@ -220,7 +223,9 @@ window.AUDIT_DB = {
         "devengado_mdp": null,
         "estado_montos": "pendiente",
         "motivo_montos": "La clave programática, el ramo y los montos de 2024 se tienen que cotejar en la Cuenta Pública 2024 antes de mostrarlos; la plataforma aún no lo ha hecho. Se cuidará no mezclar el programa con el presupuesto completo del organismo IMSS-Bienestar. La cifra que se mostraba antes (128,900 mdp) se retiró por no tener documento citado.",
-        "motivo_resultados": "La Matriz de Indicadores para Resultados y las evaluaciones del CONEVAL de este programa existen, pero la plataforma aún no las ha cotejado. Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado cuando se coteje cada una."
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
       }
     ]
   },
@@ -17966,6 +17971,8 @@ window.AUDIT_DB = {
         "anual_mdp": 80200.1,
         "estado": "pendiente",
         "fuente": "Suma de las obras evaluadas en la subpesta\u00f1a 2.2; sus fuentes obra por obra est\u00e1n pendientes de verificaci\u00f3n",
+        "motivo": "Es la suma de la pérdida de operación que registra el simulador de megaobras. Varias obras no tienen un documento oficial de su costo de operación e ingresos: las dependencias que las operan (Sedena, Pemex, Fonatur) no los han transparentado obra por obra.",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta",
         "que": "Lo que cuesta cada a\u00f1o mantener andando obras cuya operaci\u00f3n ingresa menos de lo que gasta. No es el sobrecosto de construirlas: es el d\u00e9ficit de tenerlas abiertas.",
         "culpa": true
       },

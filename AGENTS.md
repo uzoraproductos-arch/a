@@ -82,6 +82,17 @@ Esto es una plataforma de fiscalización del gasto público:
   atribuir una omisión que no se puede sostener también es un dato
   inventado.
 
+- **Todo pendiente da la cara** (decisión del autor, 10-10-2026). Además de
+  su chip y su porqué, lleva el **enlace oficial donde debería estar** el
+  dato y queda en el **Registro de pendientes** (`pendientes.html`, lo
+  genera `herramientas/pendientes.py`). Ahí se anota qué falta, por qué
+  falta, a quién le toca publicarlo y en qué páginas aparece. Toda
+  etiqueta «pendiente» de la plataforma lleva a ese registro al hacerle
+  clic, y con `data-pend="<id>"` lleva directo a su ficha. Un registro de
+  la base con estado `pendiente` necesita `motivo` y `url`. Si no los
+  trae, `pendientes.py` detiene la generación, y `inventario.py` reporta
+  como roto cualquier `data-pend` que no tenga ficha.
+
 Si te piden una cifra que no puedes sostener, dilo y déjala pendiente. Es la
 respuesta correcta en este proyecto.
 

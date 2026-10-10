@@ -1064,6 +1064,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('10-10-2026', 'Registro de pendientes: cada dato que falta, con su porqué, su responsable y el enlace oficial donde debería estar. Toda etiqueta «pendiente» lleva ahí.'),
     ('10-10-2026', 'Estado de Cuenta Cívico: 2024, 2026 y 2027 comparados en % del PIB, en cuatro dimensiones y con descarga en CSV.'),
     ('10-10-2026', 'Se retiraron las cifras del «Estado de Resultados» 2024 y la ficha pericial del Tren Maya que no tenían cotejo con su documento.'),
     ('10-10-2026', 'Índice general y portada con recorrido: cada investigación lleva a sus números y a su evidencia.'),
@@ -1130,6 +1131,7 @@ def indice():
         '          </ul>\n'
         '          <p>Las imágenes de las investigaciones son ilustraciones y lo dicen en una etiqueta: no son evidencia de ningún hecho. '
         'La evidencia está en los documentos del <a href="fuentes-oficiales.html">Compendio de Fuentes Oficiales</a>.</p>\n'
+        '          <p><a href="pendientes.html"><b>⏳ Registro de pendientes</b></a>: cada dato que falta, por qué falta, quién debe publicarlo y el enlace oficial donde debería estar.</p>\n'
         '          <h3 class="indice-grupo-tit">🆕 Novedades</h3>\n'
         '          <ul class="indice-lista indice-novedades">\n%s\n          </ul>\n'
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
@@ -1209,7 +1211,8 @@ def generar(sello=None):
     import auditorias
     import expedientes
     import estado_cuenta
-    if auditorias.generar(sello) or estado_cuenta.generar(sello):
+    import pendientes
+    if auditorias.generar(sello) or estado_cuenta.generar(sello) or pendientes.generar(sello):
         return 1
     return expedientes.generar(sello)
 

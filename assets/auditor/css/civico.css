@@ -1184,3 +1184,6 @@ a.nav-brand-text:focus-visible { outline: 3px solid var(--civ-celeste); outline-
 .portada-metodo a { color: var(--civ-azul); font-weight: 700; }
 @media (max-width: 900px) { .portada-accesos { grid-template-columns: 1fr 1fr; } .portada-tema-tit { flex-basis: 100%; } }
 @media (max-width: 520px) { .portada-accesos { grid-template-columns: 1fr; } .portada-guia { padding: 0 16px; } .portada-guia-box { padding: 16px; } .showcase-acc { flex: 1 1 100%; justify-content: center; } }
+/* Toda etiqueta «pendiente» abre el Registro de pendientes (10-10-2026) */
+.est-chip.est-pendiente { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
+.est-chip.est-pendiente:hover { filter: brightness(0.95); outline: 1px solid currentColor; }

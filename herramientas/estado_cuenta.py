@@ -43,9 +43,11 @@ def comparativo():
                           encoding='utf-8'))
 
 
-def chip(e):
+def chip(e, pend='estado-cuenta-pesos-2024'):
+    """Las etiquetas «pendiente» llevan a su ficha del Registro de pendientes."""
     e = e if e in ('oficial', 'pendiente') else 'derivado'
-    return '<span class="est-chip est-%s">%s</span>' % (e, e)
+    extra = ' data-pend="%s"' % pend if e == 'pendiente' and pend else ''
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, extra, e)
 
 
 def pct(x):
@@ -153,11 +155,12 @@ def construir():
         ''.join('<tr><th scope="row">%s <small>%s · %s</small></th><td class="ec-num">%s</td><td class="ec-num">%s</td><td>%s</td></tr>' % (
             m['programa'], m['clave'], m['ramo'], mdp(m['aprobado_mdp']), mdp(m['devengado_mdp']), chip('oficial')) for m in becas),
         ''.join('<tr><th scope="row">%s</th><td>—</td><td>—</td><td>%s <small>%s</small></td></tr>' % (
-            m['programa'], chip('pendiente'), m['motivo_montos']) for m in cf['evaluacion_social_mir'] if m['estado_montos'] != 'oficial'),
+            m['programa'], chip('pendiente', 'prog-montos-' + ('imss-bienestar' if 'IMSS' in m['programa'] else m['clave'].lower())),
+            m['motivo_montos']) for m in cf['evaluacion_social_mir'] if m['estado_montos'] != 'oficial'),
         '%s %s' % (becas[0]['fuente_montos'], doc(becas[0]['url'])) if becas else '',
         mdp(soc['total']), pct(soc['pibPct']), chip('oficial'),
         ''.join('<li>%s: <b>%s mdp</b></li>' % (x['n'], mdp(x['m'])) for x in sorted(soc['filas'], key=lambda x: -x['m'])[:5]),
-        fuente_cgpe('33'), chip('pendiente'))
+        fuente_cgpe('33'), chip('pendiente', 'prog-resultados'))
 
     p16 = amb['presupuesto']
     ceem = refs.get('ref-ceem-2024', {})
@@ -235,7 +238,7 @@ def construir():
                                   'p. 67', CGPE_URL, REVISION])
             else:
                 filas_csv.append([f['dimension'], f['concepto'], 'millones de pesos', anio, etapa, '', 'pendiente',
-                                  'Cuenta Pública 2024 aún no cotejada por la plataforma', '', '', REVISION])
+                                  'Pendiente: está en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja', '', 'https://www.cuentapublica.hacienda.gob.mx/es/CP/2024', REVISION])
     for c in cf['cifras']:
         filas_csv.append(['contable 2024 (Gobierno Federal)', c['concepto'], 'millones de pesos', '2024',
                           'aprobado' if c['id'] == 'aprobado' else 'cuenta pública', '' if c['mdp'] is None else c['mdp'],
