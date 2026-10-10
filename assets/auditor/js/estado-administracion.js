@@ -427,6 +427,38 @@
       secciones: d.secciones.map(function (s) { return [s.tit, s.filas.map(function (r) { return [r.t, v(r), r.est]; })]; })
     };
   }
+  /* La institución como órgano (10-10-2026): lo que nos cuesta, en tres
+     cifras grandes, y del dinero que ejerció a lo que falta aclarar, en barras
+     a la misma escala. Las secciones con 'panel' van aquí y no en las cajas. */
+  function organo(d, N) {
+    var ps = d.secciones.filter(function (s) { return s.panel; });
+    if (!ps.length) return '';
+    function ref(r) { return N.add('<b>' + esc(r.t) + '.</b> ' + notaC(N, r)); }
+    var cuerpo = ps.map(function (s) {
+      N.sec(s.tit, esc(s.nota || ''));
+      if (s.panel === 'costo') {
+        var gr = s.filas.filter(function (r) { return r.k !== 'pers'; }), pe = s.filas.filter(function (r) { return r.k === 'pers'; })[0];
+        return '<div class="ex-org-costo"><h5>' + esc(s.tit) + '</h5><div class="ex-org-cifras">' + gr.map(function (r) {
+          return '<div class="ex-org-c' + (r.k === 'total' ? ' ex-org-tot' : '') + '"><small>' + esc(r.t) + '</small><span class="ex-org-vv">' + valorC(r, ref(r)) + '</span></div>';
+        }).join('') + '</div>' + (pe && typeof pe.v === 'number' ? '<div class="ex-org-pers"><small>' + esc(pe.t) + '</small>' +
+          '<span class="ex-org-pbar" role="img" aria-label="' + esc(cifraC(pe)) + '"><i style="width:' + Math.min(100, pe.v) + '%"></i></span><span class="ex-org-vv">' + valorC(pe, ref(pe)) + '</span></div>' : '') + '</div>';
+      }
+      var base = s.filas.filter(function (r) { return r.k === 'recibio'; })[0], tope = base && base.v || 0;
+      var barras = s.filas.filter(function (r) { return r.k && r.k !== 'acciones' && typeof r.v === 'number'; });
+      var resto = s.filas.filter(function (r) { return barras.indexOf(r) < 0; });
+      return '<div class="ex-org-emb"><h5>' + esc(s.tit) + '</h5>' + barras.map(function (r) {
+        var w = tope ? r.v / tope * 100 : 0;
+        return '<div class="ex-emb-f ex-emb-' + r.k + '"><span class="ex-emb-t">' + esc(r.t) + '</span>' +
+          '<span class="ex-emb-b"><i style="width:' + (r.v > 0 ? Math.max(0.6, Math.min(100, w)) : 0) + '%"></i></span>' +
+          '<span class="ex-emb-v">' + valorC(r, ref(r)) + '</span></div>';
+      }).join('') + (resto.length ? '<ul class="ex-emb-x">' + resto.map(function (r) {
+        return '<li>' + esc(r.t) + ': ' + valorC(r, ref(r)) + '</li>';
+      }).join('') + '</ul>' : '') + '</div>';
+    }).join('');
+    if (d.tipo === 'dip-loc' && !ps.some(function (s) { return s.panel === 'embudo'; }))
+      cuerpo += '<p class="ex-org-sin">🔎 <b>Ante la Auditoría Superior:</b> la plataforma solo tiene integradas las auditorías de la ASF a los congresos de Nuevo León y Tlaxcala en la Cuenta Pública 2024. La de este congreso, si la hubo, aún no está integrada.</p>';
+    return '<section class="ex-organo"><h4>🏛️ Como órgano: cuánto nos cuesta y qué revisó la Auditoría Superior</h4><div class="ex-org-in">' + cuerpo + '</div></section>';
+  }
   function pintaCargo(d) {
     var doc = document.getElementById('exDoc'), ks = fuentesDe(d), N = new Notas(ks);
     var h = cabecera(d.col, d.tipoTx, d.n, d.sub, 'Fuentes consultadas en', d.corte);
@@ -454,7 +486,8 @@
           '<span class="ex-med-v">' + valorC(s.x, ref) + '</span>' +
           s.extra.map(function (r) { return '<span class="ex-med-x">' + esc(r.t) + ': ' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + notaC(N, r))) + '</span>'; }).join('') + '</div>';
       }).join('') + '</div></div></section>';
-    h += columnas('', d.secciones.map(function (s) {
+    h += organo(d, N);
+    h += columnas('', d.secciones.filter(function (s) { return !s.panel; }).map(function (s) {
       N.sec(s.tit, esc(s.nota === '@local' ? C.notaLocal : s.nota || ''));
       var filas = s.filas.map(function (r) {
         return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + notaC(N, r))) + '</td></tr>';

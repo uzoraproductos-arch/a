@@ -671,6 +671,44 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**La institución como órgano en los estados de cuenta de cargos (10-10-2026, sello 20261010zd).**
+A pedido del autor, los 35 documentos de cargos (diputación federal, Senado,
+32 congresos locales y Suprema Corte) suman, al frente y después del
+termostato, un panel «Como órgano: cuánto nos cuesta y qué revisó la Auditoría
+Superior». Lo arma `radar_cargos()` con dos secciones marcadas `panel`. El
+sello las firma como cualquier otra sección.
+- **Lo que nos cuesta** (`panel: costo`):
+  - Federales: el aprobado 2026 (PEF, Anexo 1). Cada día = aprobado ÷ 365.
+    Por habitante = aprobado ÷ 134,407,258 (CONAPO, mitad de 2026, derivado).
+  - La parte del gasto 2025 que se fue en servicios personales: capítulo 1000
+    ÷ total ejercido. Diputados 57.1% y Senado 59.1% (CP 2025). Corte 84.7%,
+    con su estado analítico y el renglón «Total».
+  - Congresos locales: lo ejercido en 2024 (INEGI, CNPLE). Cada día = ÷ 366,
+    porque 2024 fue bisiesto.
+  - **Sin costo por habitante en los congresos locales**: falta integrar la
+    población de 2024 del CONAPO (el proxy de esta sesión no dejó bajar el
+    CSV), y dividir entre la de 2026 mezclaría años.
+- **Del dinero que ejerció a lo que falta aclarar** (`panel: embudo`):
+  - Lo ejercido en 2024. Diputados: pagado según ASF_DIP p. 4. Senado:
+    devengado según ASF_SEN p. 5. Corte: CP 2024 por UR, en mdp, derivado.
+  - El universo y la muestra de la ASF; la parte revisada = muestra ÷
+    ejercido; lo que quedó fuera de la muestra.
+  - Acciones, monto por aclarar y recuperaciones de la Matriz de Datos Básicos
+    (ASF_MDB, p. 31), con el resultado.
+  - Corte: la Matriz no da la muestra en pesos, solo su representatividad
+    (92.81% del universo). Recuperaciones: $8,133,300.
+  - Congresos locales: solo NL (auditoría 1402: $4.5 millones por aclarar) y
+    Tlaxcala (1940: $5.0 millones recuperados). En los demás, el frente dice
+    que la auditoría no está integrada en la plataforma, sin culpar a nadie.
+- Se quitaron las secciones viejas «Ante la Auditoría Superior» y «El congreso
+  del estado: lo que gastó», que quedaron dentro del panel, y el «Aprobado
+  2026» repetido en el presupuesto. Los capítulos 2026 de la Corte pasan a su
+  propia caja.
+- **Cambian los folios de los 35 documentos de cargos**: su contenido cambió.
+  Los de las administraciones siguen iguales.
+- Hojas: 39 de 42 caben en dos. Los de Diputados, Senado y la Corte ocupan tres
+  porque el frente se extiende.
+
 **El sello se titula «Dictamen técnico de Auditavisión» (10-10-2026, sello 20261010zc).**
 A pedido del autor, el pie del estado de cuenta ya no dice «Sello de
 verificación de Auditavisión»: el título, el anillo del sello y su texto
