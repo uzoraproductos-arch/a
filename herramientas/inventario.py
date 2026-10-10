@@ -79,6 +79,14 @@ def main():
             'Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia página (AGENTS.md §5 bis).', '',
             '| Destino | Veces enlazado |', '|---|---:|']
     out += ['| `%s` | %d |' % (k, v) for k, v in sorted(irs.items(), key=lambda x: -x[1])]
+    # Toda etiqueta que lleva a una ficha del Registro de pendientes debe
+    # encontrarla (10-10-2026).
+    fichas = set(re.findall(r'<article class="pe-item[^"]*" id="([^"]+)"', leer('pendientes.html'))) if 'pendientes.html' in existentes else set()
+    for p in paginas:
+        for ancla in set(re.findall(r'data-pend="([^"]+)"', leer(p))):
+            if ancla not in fichas:
+                rotos.append((p, 'pendientes.html#' + ancla))
+    out += ['', '## Registro de pendientes', '', '%d fichas, cada una con su porqué, su responsable y su enlace oficial.' % len(fichas)]
     os.makedirs(os.path.join(RAIZ, 'docs'), exist_ok=True)
     open(os.path.join(RAIZ, 'docs', 'INVENTARIO.md'), 'w', encoding='utf-8').write('\n'.join(out) + '\n')
     print('inventario: %d páginas, %d enlaces rotos, %d redirecciones' % (len(paginas), len(rotos), len(redirige)))

@@ -27636,6 +27636,23 @@
     if (modal) modal.style.display = 'none';
   }
 
+  /* Toda etiqueta «pendiente» lleva al Registro de pendientes (10-10-2026):
+     ahi esta por que falta el dato, quien debe publicarlo y el enlace
+     oficial donde deberia estar. Se escucha en la fase de captura para que
+     ninguna tarjeta que la contenga se la lleve. */
+  document.addEventListener('click', function (ev) {
+    var c = ev.target && ev.target.closest ? ev.target.closest('.est-chip.est-pendiente') : null;
+    if (!c || /pendientes\.html$/.test(window.location.pathname)) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    var destino = 'pendientes.html' + (c.getAttribute('data-pend') ? '#' + c.getAttribute('data-pend') : '');
+    try { (window.top || window).location.href = destino; } catch (e) { window.location.href = destino; }
+  }, true);
+  document.addEventListener('mouseover', function (ev) {
+    var c = ev.target && ev.target.closest ? ev.target.closest('.est-chip.est-pendiente') : null;
+    if (c && !c.title) c.title = 'Por qué falta este dato, quién debe publicarlo y dónde debería estar: abre el Registro de pendientes';
+  });
+
   window.AuditEngine = {
     init: init,
     core: AUDIT_CORE,

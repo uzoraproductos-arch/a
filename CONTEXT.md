@@ -602,6 +602,38 @@ lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
 - La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
   Lo heredan la presentación, el glosario y las notas.
 
+**Registro de pendientes (10-10-2026, sello 20261010g).** Decisión del
+autor: cada pendiente lleva su etiqueta, su porqué y el enlace oficial donde
+debería estar el dato.
+- **`pendientes.html`.** Lo genera `herramientas/pendientes.py` y hoy trae
+  37 fichas:
+
+  | Quién debe resolverlo | Fichas |
+  |---|---|
+  | Una dependencia que debe publicarlo | 19 |
+  | La plataforma, que aún no integra el documento | 12 |
+  | Nadie: es un dato histórico | 6 |
+
+  Las fichas salen de dos lados: los registros `pendiente` de la base,
+  leídos con un adaptador por bloque, y la lista `PROPIOS`, para lo que el
+  motor escribe en su código (matriz ASF 2018, municipios sin cuenta,
+  INAFED, huachicol, costo por usuario, pesos de 2024 y la ficha del Tren
+  Maya). La generación se detiene si una ficha no trae porqué, responsable
+  o enlace.
+- **Toda etiqueta «pendiente» abre el registro.** Un escucha en la fase de
+  captura, en `audit-engine.js` y en `apartados.js`, lleva al registro al
+  hacer clic. Con `data-pend` lleva a la ficha exacta: el Estado de Cuenta
+  ya lo usa. Desde el visor abre en la ventana principal.
+- **Base de datos.** Se completaron:
+  - `url_resultados` en los cuatro programas sociales;
+  - el `url` de IMSS-Bienestar;
+  - el `motivo` y el `url` del reloj de pérdidas de las megaobras.
+
+  El motivo de los resultados dice ahora que el CONEVAL se extinguió y que
+  sus funciones de evaluación pasaron al INEGI en 2025.
+- **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
+  ficha. AGENTS.md §2 lleva la regla nueva.
+
 **Propuesta de Astra, entrega 3: Números y Estado de Cuenta (10-10-2026, sello 20261010f).**
 
 **1. Corrección grave a la base.** `cuentaFederal2024` y `tren_maya_peritaje_2024` entraron en el

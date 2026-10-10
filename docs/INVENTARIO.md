@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 45 |
+| Páginas revisadas | 46 |
 | Páginas que solo redirigen | 1 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 11 destinos |
@@ -55,10 +55,11 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 20 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 45 | 0 | 4 | 7 | 2 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 91 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 92 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 15 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 57 | 0 | 0 | 0 | 38 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 55 | 0 | 0 | 0 | 0 |
 
@@ -80,14 +81,18 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 | Destino | Veces enlazado |
 |---|---:|
-| `reporta` | 86 |
+| `reporta` | 89 |
 | `verificador` | 16 |
 | `megaobras` | 15 |
 | `ambiente` | 14 |
 | `calculadora` | 13 |
 | `presupuesto` | 9 |
-| `poderes` | 3 |
+| `poderes` | 7 |
 | `proyeccion2027` | 2 |
 | `territorio` | 2 |
 | `municipios` | 2 |
 | `nota` | 1 |
+
+## Registro de pendientes
+
+37 fichas, cada una con su porqué, su responsable y su enlace oficial.
