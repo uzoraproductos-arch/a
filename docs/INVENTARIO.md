@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 52 |
+| Páginas revisadas | 53 |
 | Páginas que solo redirigen | 1 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 10 destinos |
@@ -36,6 +36,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 23 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Compendio de Fuentes Oficiales · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `garantias.html` | Garantías cívicas · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `glosario.html` | Glosario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-pib.html` | El PIB no alcanza · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
@@ -59,9 +60,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 104 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 103 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `participa.html` | Participa · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `participa.html` | Participa · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 62 | 0 | 0 | 0 | 38 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |

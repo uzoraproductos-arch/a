@@ -671,6 +671,42 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Garantías cívicas tiene su propia página (10-10-2026, sello 20261010p).**
+El autor leyó la pestaña «Garantías cívicas» de Participa y perdió su
+objetivo: juntaba cinco bloques largos y tres repetían lo que ya vive en
+otro lado. Se depuró y se mudó a `garantias.html`.
+- **Qué se quitó y a dónde fue:**
+  - la orientación de «las tres funciones» y «a dónde va lo que escribes»:
+    lo dicen ya Comunidad, el cajón «Cuéntanos lo que viste» y el aviso del
+    Ágora; en la página nueva queda en una sola línea («Importante»);
+  - la «Función 1», copia de «Cuéntanos lo que viste»: vive en la cabecera
+    y en `comunidad.html`;
+  - `herramientas/participa_html.py` y `assets/auditor/js/participa.js`
+    quedaron sin uso y se borraron (la portada conserva su propia copia en
+    el motor). `participa.html` ya no carga scripts.
+- **Qué se quedó, con un objetivo claro:** a qué puerta oficial tocar, qué
+  te protege y qué llevar. La página sale de `garantias()` en
+  `apartados.py`, con `garantias.css` y `garantias.js`:
+  - **🧭 La brújula:** tres preguntas (qué viste, si tienes prueba, si
+    necesitas no dar tu nombre) y la ruta en pasos. Sin prueba, el paso 1
+    es la PNT; si es delito y no quieres dar tu nombre, agrega la
+    plataforma de alertadores de la SABG. La lista `BRUJULA_QUE` resume el
+    «para qué» de cada canal.
+  - **🚪 Las seis puertas:** fichas cortas con «¿Sin dar tu nombre?» y un
+    `<details>` con qué llevar, qué produce y el fundamento.
+  - **🛡️ Las diez garantías:** el decálogo en cartas que se voltean (sin
+    JavaScript se leen las dos caras).
+  - **🎯 ¿Mito o realidad?:** siete afirmaciones (`GARANTIAS_RETO`); la
+    explicación y el fundamento de cada una se leen del decálogo o del
+    canal en la base.
+  - Todo el texto legal sale de `window.AUDIT_DB` (`comunidad.*` y
+    `referencias_legales`); no se teclea en el generador.
+- **En la base:** los textos de los canales y del decálogo pasaron al tú
+  («adjúntalos», «Pregunta por escrito», «documenta»…).
+- **Enlaces:** la pestaña lleva ➔ y `participa.html#garantias` redirige a
+  la página; el cajón y su nota de denuncia enlazan a `garantias.html`; el
+  índice general toma la página de la pestaña.
+
 **El Ágora cívica tiene su propia página (10-10-2026, sello 20261010o).**
 La pestaña «Ágora cívica» de Participa ya no despliega su contenido: abre
 `agora.html`, la red de réplica y diálogo. Es decisión del autor: «que
