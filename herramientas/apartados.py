@@ -470,12 +470,14 @@ APARTADOS = [
         'titulo': 'Aprende',
         'lema': 'Biblioteca y fuentes del auditor ciudadano',
         # Las pestanas viejas de los estantes (10-10-2026) llevan a la Biblioteca.
-        'hash_a_pagina': {'biblioteca': 'diccionario.html', 'kit': 'diccionario.html'},
+        # Noticias relevantes es su propia pagina desde el 11-10-2026; los
+        # enlaces a una columna (#col-<id>) llegan a ella con su ancla.
+        'hash_a_pagina': {'biblioteca': 'diccionario.html', 'kit': 'diccionario.html',
+                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-relevantes.html'},
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
                     'Para ponerte a prueba, una trivia con el estado de cuenta de cada presidente; y para leer con calma, columnas con datos curiosos de personajes y hechos.'),
-        'scripts': ['trivia-presidentes.js', 'columnas.js'],
-        'estilos': ['columnas.css'],
+        'scripts': ['trivia-presidentes.js'],
         # Desde el 09-10-2026 las secciones son pestanas (decision del autor):
         # su contenido solo se despliega al pulsar la pestana.
         'pestanas': True,
@@ -501,20 +503,11 @@ APARTADOS = [
                 'pestana': ('📚', BIB_NOMBRE, 'Diccionario, referencias, marco legal y preguntas: abre su página'),
             },
             {
-                # Columnas editoriales (09-10-2026): reune, verificado contra
-                # documentos oficiales, lo que fueron las secciones 5.2 y 5.3
-                # de la Enciclopedia (personajes relevantes y datos curiosos),
-                # retiradas el 27-09-2026 por no citar fuentes. Las pinta
-                # assets/auditor/js/columnas.js.
+                # Columnas editoriales (09-10-2026). Desde el 11-10-2026 (pedido
+                # del autor) son su propia pagina: NOTICIAS.
                 'id': 'noticias',
-                'pestana': ('📰', 'Noticias relevantes', 'Columnas de personajes y hechos'),
-                'titulo': '📰 Noticias relevantes',
-                'texto': ('Columnas con datos curiosos de personajes y hechos del dinero público. '
-                          'Cada afirmación lleva el documento oficial que la sostiene.'),
-                'bloque': ('<div class="col-diario" id="columnasDiario">\n'
-                           '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
-                           '        </div>'),
-                'tarjetas': [],
+                'pagina': 'noticias-relevantes.html',
+                'pestana': ('📰', 'Noticias relevantes', 'La Columna del Erario: abre su página'),
             },
         ],
     },
@@ -941,6 +934,33 @@ def herramienta_asistente(bloque):
 # 09-10-2026 (tarde) cada apartado tiene su pagina ligera; ya no abre la
 # portada en un marco. Las anclas viejas (#glosario, #fuentes, #marco-legal,
 # #preguntas) mandan a la pagina nueva (ver 'hash_a_pagina').
+# Noticias relevantes (pedido del autor, 11-10-2026): la pestana de Aprende
+# abre esta pagina. Columnas editoriales que reunen, verificado contra
+# documentos oficiales, lo que fueron las secciones 5.2 y 5.3 de la
+# Enciclopedia (personajes relevantes y datos curiosos), retiradas el
+# 27-09-2026 por no citar fuentes. Las pinta assets/auditor/js/columnas.js,
+# en formato de periodico: «La Columna del Erario».
+NOTICIAS = {
+    'archivo': 'noticias-relevantes.html',
+    'menu': 'Noticias relevantes',
+    'menu_archivo': 'aprende.html',
+    'padre': ('aprende.html', 'Aprende'),
+    'icono': '📰',
+    'titulo': 'Noticias relevantes',
+    'lema': 'La Columna del Erario',
+    'entrada': ('Columnas con datos curiosos de personajes y hechos del dinero público, en formato de periódico. '
+                'Cada afirmación lleva el documento oficial que la sostiene.'),
+    'scripts': ['columnas.js'],
+    'estilos': ['columnas.css'],
+    'secciones': [{
+        'id': 'columnas', 'titulo': 'La Columna del Erario', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+        'bloque': ('<div class="col-diario" id="columnasDiario">\n'
+                   '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
+                   '        </div>'),
+    }],
+}
+
+
 DICCIONARIO = {
     'archivo': 'diccionario.html',
     'menu': BIB_NOMBRE,
@@ -3866,8 +3886,12 @@ def pagina(a, sello):
     redirige = ''
     if a.get('hash_a_pagina'):
         # Anclas viejas que ahora son paginas: se mandan antes de pintar.
+        # Una clave 'prefijo-*' lleva cualquier ancla con ese prefijo a su
+        # pagina, conservando el ancla (las columnas, #col-<id>).
         redirige = ('\n  <script>(function () { var m = %s, h = location.hash.slice(1); '
-                    'if (m[h]) location.replace(m[h]); })();</script>' % json.dumps(a['hash_a_pagina']))
+                    'if (m[h]) { location.replace(m[h]); return; } '
+                    'for (var k in m) if (k.slice(-1) === \'*\' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + \'#\' + h); return; } '
+                    '})();</script>' % json.dumps(a['hash_a_pagina']))
     if a.get('abrir_a_pagina'):
         # ?abrir=eb-bloque (Numeros, 11-10-2026): la tarjeta de ese bloque ya
         # vive en otra pagina; se manda alla con el mismo ?abrir.
@@ -4146,7 +4170,7 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

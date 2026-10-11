@@ -1,4 +1,5 @@
-/* Auditavisión · Aprende › Noticias relevantes (09-10-2026).
+/* Auditavisión · Aprende › Noticias relevantes (09-10-2026; página propia,
+   noticias-relevantes.html, desde el 11-10-2026).
    Columnas editoriales con datos curiosos de personajes y hechos del dinero
    público, en formato de periódico. Reúnen lo que fueron las secciones 5.2
    («Personajes relevantes») y 5.3 («Datos curiosos») de la Enciclopedia,
