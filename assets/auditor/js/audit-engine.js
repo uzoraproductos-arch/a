@@ -8958,7 +8958,7 @@
         radarSec('Por qué importan', '<p>Cada año el Congreso aprueba cuánto se cobra y en qué se gasta. En 2026 el Presupuesto de Egresos es de ' + bill(P.totalPEF || 0) + '; de ellos, ' + bill(fed) + ' viajan a los 32 estados y a sus municipios, y ' + bill(cf) + ' pagan el costo de la deuda. ' +
           (cp ? 'Al revisar la Cuenta Pública 2024, la Auditoría Superior dejó ' + radarMdp(cp.porAclarar / 1e6) + ' por aclarar. ' : '') + 'Entender ese recorrido es el primer paso para pedir cuentas con datos.</p>') +
         radarSec('Qué encontrarás aquí', '<ul class="rc-plazos">' + mods.map(function(m) { return '<li>' + m[0] + ' <b>' + m[1] + ':</b> ' + m[2] + '</li>'; }).join('') + '</ul>' +
-          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está el Diccionario del Erario Público.</p>') +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está la Biblioteca del Erario Público.</p>') +
         radarSec('Cómo leer las cifras', '<ul class="rc-plazos">' +
           '<li>' + chipEstado('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
           '<li>' + chipEstado('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
@@ -8967,7 +8967,7 @@
         radarSec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 31 fr. IV (la obligación de contribuir al gasto público), art. 74 fr. IV y VI (la Cámara de Diputados aprueba el presupuesto y revisa la Cuenta Pública) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
       '</div>' +
       '<footer class="glos-drawer-pie">' +
-        '<a class="glos-drawer-todo" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir el Diccionario del Erario Público ➔</a>' +
+        '<a class="glos-drawer-todo" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir la Biblioteca del Erario Público ➔</a>' +
         (gGasto ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gGasto.termino) + '">Qué es el gasto público ➔</button>' : '') +
         (gHac ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gHac.termino) + '">Qué es la hacienda pública ➔</button>' : '') +
       '</footer>';

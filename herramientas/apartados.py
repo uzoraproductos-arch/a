@@ -121,10 +121,10 @@ def libro_pie(a):
     return ('<aside class="apartado-notas" aria-labelledby="notasTit">'
             '<h2 class="apartado-notas-tit" id="notasTit">Notas y referencias</h2>'
             '<ol class="apartado-notas-lista">'
-            '<li id="nota-%d" value="%d"><span class="apartado-libro-num">[%d]</span> %s <a href="%s">Ficha en el compendio de fuentes ➔</a>'
+            '<li id="nota-%d" value="%d"><span class="apartado-libro-num">[%d]</span> %s <a href="%s">Ficha en las Referencias ➔</a>'
             '<br><span class="apartado-notas-por">%s</span></li></ol>'
             '<p class="apartado-notas-glos"><b>Los conceptos de este apartado:</b> %s. '
-            'Búscalos también en el <a href="diccionario.html">Diccionario del Erario Público</a>.</p>'
+            'Búscalos también en el <a href="glosario.html">Diccionario</a> de la Biblioteca del Erario Público.</p>'
             '</aside>' % (num, num, num, cita, url, a['libro'], glos_))
 
 
@@ -185,66 +185,44 @@ CAMINO_NUMEROS = (
     ])
 
 
-# Diccionario del Gasto Publico (10-10-2026): la obra entera, en dos
-# estantes. «Biblioteca hacendaria» es para entender (glosario, marco legal,
-# preguntas); «Fuentes del auditor» es para verificar (compendio de fuentes y
-# pase). Cada entrada: (archivo, icono, nombre, frase, descripcion, estante).
-# Desde el 10-10-2026 (decision del autor) Aprende tiene una sola pestana,
-# «Diccionario del Gasto Publico», con dos tarjetas; cada estante abre su
-# pagina (ESTANTES[i][5]) y cada apartado del estante, la suya:
-#   Aprende › Diccionario › Estante › Apartado.
-# Las pestanas de Aprende, la portada del Diccionario y la barra al pie de
-# cada pagina salen de esta lista.
-ESTANTES = [
-    ('biblioteca', '🏛️', 'Biblioteca hacendaria', 'Para entender',
-     'Las palabras, las leyes y las preguntas del dinero público, explicadas en lenguaje llano.',
-     'biblioteca-hacendaria.html'),
-    ('kit', '🧭', 'Fuentes del auditor', 'Para verificar',
-     'Los documentos oficiales que sostienen cada cifra y el pase para sostener la plataforma.',
-     'fuentes-del-auditor.html'),
-]
-
+# Biblioteca del Erario Publico (decision del autor, 11-10-2026). Antes
+# «Diccionario del Erario Publico», en dos estantes (Biblioteca hacendaria y
+# Fuentes del auditor) con sus paginas intermedias. Ahora es una sola pagina
+# (diccionario.html, el archivo no cambia para no romper enlaces) con cuatro
+# tarjetas y cada una abre su pagina:
+#   Aprende › Biblioteca del Erario Publico › Apartado.
+# Las paginas de los estantes redirigen aqui (REDIRECCIONES) y el Pase del
+# Auditor Civico se mudo a Participa (PASE). Cada entrada:
+# (archivo, icono, nombre, frase, descripcion).
+BIB_NOMBRE = 'Biblioteca del Erario Público'
 BIBLIOTECA = [
-    ('glosario.html', '📖', 'Glosario de Términos Hacendarios', 'Las palabras del erario',
-     'Los términos del presupuesto, la deuda y la fiscalización, en lenguaje llano, con su fundamento y con buscador.', 'biblioteca'),
+    ('glosario.html', '📖', 'Diccionario', 'Glosario de términos hacendarios',
+     'Los términos del presupuesto, la deuda y la fiscalización, en lenguaje llano, con su fundamento y con buscador.'),
+    ('fuentes-oficiales.html', '📑', 'Referencias', 'Compendio de fuentes oficiales',
+     'El catálogo de referencias: todas las fichas que sostienen las cifras de la plataforma, numeradas y con su liga directa al DOF, Hacienda, la Auditoría Superior, Banxico, el INEGI y Transparencia Presupuestaria. Cada nota [n] de la plataforma lleva a su ficha.'),
     ('marco-legal.html', '⚖️', 'Marco Legal Hacendario', 'El texto vigente',
-     'El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.', 'biblioteca'),
-    ('preguntas-frecuentes.html', '💡', 'Preguntas Frecuentes en Casillas Didácticas', 'Respuestas con fuente',
-     'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.', 'biblioteca'),
-    ('fuentes-oficiales.html', '📑', 'Compendio de Fuentes Oficiales', 'Cada documento citado',
-     'El portal de referencias: todas las fichas que sostienen las cifras de la plataforma, numeradas y con su liga directa al DOF, Hacienda, la Auditoría Superior, Banxico, el INEGI y Transparencia Presupuestaria.', 'kit'),
-    ('pase-del-auditor.html', '🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma',
-     'Herramientas independientes de fiscalización ciudadana: $79 al mes, menos que dos caguamas.', 'kit'),
+     'El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.'),
+    ('preguntas-frecuentes.html', '💡', 'Preguntas Frecuentes', 'En casillas didácticas',
+     'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.'),
 ]
+PASE = ('pase-del-auditor.html', '🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma',
+        'Herramientas independientes de fiscalización ciudadana: $79 al mes, menos que dos caguamas.')
 
-DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte del <a href="diccionario.html">Diccionario del Erario Público</a>, '
-              'la obra de consulta de la plataforma.</p>')
-
-
-def bib_estante(clave):
-    return [(b[1], b[2], b[4], b[0], None, None) for b in BIBLIOTECA if b[5] == clave]
+DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte de la <a href="diccionario.html">%s</a>, '
+              'la obra de consulta de la plataforma.</p>' % BIB_NOMBRE)
 
 
-def estante_de(archivo):
-    return [e for e in ESTANTES if e[0] == [b for b in BIBLIOTECA if b[0] == archivo][0][5]][0]
-
-
-def tarjetas_estantes():
-    return [(e[1], e[2], '<b>%s.</b> %s Contiene: %s.' % (e[3], e[4], ', '.join(b[2] for b in BIBLIOTECA if b[5] == e[0])),
-             e[5], None, None) for e in ESTANTES]
+def tarjetas_biblioteca():
+    return [(b[1], b[2], '<b>%s.</b> %s' % (b[3], b[4]), b[0], None, None) for b in BIBLIOTECA]
 
 
 def bib_nav(actual):
-    """Barra al pie de cada pagina del Diccionario, con sus dos estantes."""
-    filas = []
-    for e in ESTANTES:
-        filas.append('          <a class="bib-nav-estante" href="%s"%s>%s %s</a>\n' % (
-            e[5], ' aria-current="page"' if e[5] == actual else '', e[1], e[2]) + '\n'.join(
-            '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
-            % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA if b[5] == e[0]))
-    return ('<nav class="bib-nav" aria-label="Diccionario del Erario Público">\n'
-            '        <a class="bib-nav-tit" href="diccionario.html">📚 Diccionario del Erario Público</a>\n'
-            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(filas))
+    """Barra al pie de cada pagina de la Biblioteca, con sus cuatro apartados."""
+    return ('<nav class="bib-nav" aria-label="%s">\n'
+            '        <a class="bib-nav-tit" href="diccionario.html">📚 %s</a>\n'
+            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % (BIB_NOMBRE, BIB_NOMBRE, '\n'.join(
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
+                % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA)))
 
 
 APARTADOS = [
@@ -491,8 +469,8 @@ APARTADOS = [
         'icono': '📖',
         'titulo': 'Aprende',
         'lema': 'Biblioteca y fuentes del auditor ciudadano',
-        # Las pestanas viejas del Diccionario (10-10-2026) llevan a su estante.
-        'hash_a_pagina': {'biblioteca': 'biblioteca-hacendaria.html', 'kit': 'fuentes-del-auditor.html'},
+        # Las pestanas viejas de los estantes (10-10-2026) llevan a la Biblioteca.
+        'hash_a_pagina': {'biblioteca': 'diccionario.html', 'kit': 'diccionario.html'},
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
                     'Para ponerte a prueba, una trivia con el estado de cuenta de cada presidente; y para leer con calma, columnas con datos curiosos de personajes y hechos.'),
@@ -515,15 +493,12 @@ APARTADOS = [
                 'tarjetas': [],
             },
             {
-                # Diccionario del Gasto Publico (decision del autor, 10-10-2026):
-                # una sola pestana con sus dos estantes; cada uno abre su pagina.
+                # Biblioteca del Erario Publico (decision del autor, 11-10-2026):
+                # la pestana ya no despliega, abre la Biblioteca, con sus cuatro
+                # apartados. El id sigue siendo 'diccionario' para no romper enlaces.
                 'id': 'diccionario',
-                'pestana': ('📚', 'Diccionario del Erario Público', 'Biblioteca hacendaria y fuentes del auditor'),
-                'titulo': '📚 Diccionario del Erario Público',
-                'texto': ('La obra de consulta de la plataforma, en dos estantes: uno para entender y otro para verificar. '
-                          'Cada estante abre su propia página y, dentro, cada apartado tiene la suya. '
-                          '<a href="diccionario.html">Ver el Diccionario completo ➔</a>'),
-                'tarjetas': tarjetas_estantes(),
+                'pagina': 'diccionario.html',
+                'pestana': ('📚', BIB_NOMBRE, 'Diccionario, referencias, marco legal y preguntas: abre su página'),
             },
             {
                 # Columnas editoriales (09-10-2026): reune, verificado contra
@@ -553,7 +528,8 @@ APARTADOS = [
                     'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
-        'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html'},
+        'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
+                          'pase': PASE[0]},
         'secciones': [
             {
                 # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
@@ -569,6 +545,13 @@ APARTADOS = [
                 'id': 'garantias',
                 'pagina': 'garantias.html',
                 'pestana': ('🛡️', 'Garantías cívicas', 'A qué puerta tocar y qué te protege: abre su página'),
+            },
+            {
+                # El Pase del Auditor Civico vivia en «Fuentes del auditor»;
+                # desde el 11-10-2026 es parte de Participa (decision del autor).
+                'id': 'pase',
+                'pagina': PASE[0],
+                'pestana': (PASE[1], PASE[2], 'Sostén la plataforma: abre su página'),
             },
             {
                 # Entrega 7 de la propuesta de Astra (10-10-2026).
@@ -951,50 +934,36 @@ def herramienta_asistente(bloque):
     }
 
 
-# Diccionario del Gasto Publico (decision del autor, 09-10-2026; desde el
-# 11-10-2026 se llama «Diccionario del Erario Publico», pedido del autor): los
+# Diccionario del Gasto Publico (decision del autor, 09-10-2026; el 11-10-2026
+# se llamo «Diccionario del Erario Publico» y despues «Biblioteca del Erario
+# Publico», pedidos del autor): los
 # enlaces que llevaban a la Enciclopedia (congelada) llegan aqui. Desde el
 # 09-10-2026 (tarde) cada apartado tiene su pagina ligera; ya no abre la
 # portada en un marco. Las anclas viejas (#glosario, #fuentes, #marco-legal,
 # #preguntas) mandan a la pagina nueva (ver 'hash_a_pagina').
 DICCIONARIO = {
     'archivo': 'diccionario.html',
-    'menu': 'Diccionario del Erario Público',
+    'menu': BIB_NOMBRE,
     'menu_archivo': 'aprende.html',
-    'padre': ('aprende.html#diccionario', 'Aprende'),
+    'padre': ('aprende.html', 'Aprende'),
     'icono': '📚',
-    'titulo': 'Diccionario del Erario Público',
-    'lema': 'Las palabras, las leyes y las fuentes del erario',
-    'entrada': ('La obra de consulta de la plataforma, en dos estantes. La <b>Biblioteca hacendaria</b> es para entender: '
-                'el glosario, el marco legal con su texto vigente y las preguntas frecuentes. Las <b>Fuentes del auditor</b> son '
-                'para verificar: el compendio de fuentes oficiales que sostiene cada cifra y el pase del auditor cívico. '
-                'Cada estante abre su propia página y, dentro, cada apartado tiene la suya.'),
+    'titulo': BIB_NOMBRE,
+    'lema': 'Las palabras, las referencias, las leyes y las preguntas del erario',
+    'entrada': ('La obra de consulta de la plataforma, en cuatro apartados: el <b>Diccionario</b> con los términos hacendarios, '
+                'las <b>Referencias</b> con cada documento oficial que sostiene una cifra, el <b>Marco Legal Hacendario</b> con su '
+                'texto vigente y las <b>Preguntas Frecuentes</b> en casillas didácticas. Cada tarjeta abre su propia página.'),
     'hash_a_pagina': {'preguntas': 'preguntas-frecuentes.html', 'glosario': 'glosario.html',
-                      'biblioteca': 'biblioteca-hacendaria.html', 'kit': 'fuentes-del-auditor.html',
                       'marco-legal': 'marco-legal.html', 'fuentes': 'fuentes-oficiales.html',
-                      'referencias': 'fuentes-oficiales.html', 'pase': 'pase-del-auditor.html'},
+                      'referencias': 'fuentes-oficiales.html', 'pase': PASE[0]},
     'secciones': [{
-        'id': 'estantes', 'titulo': 'Los dos estantes',
-        'texto': 'Elige un estante: cada uno abre su página con sus apartados.',
-        'tarjetas': tarjetas_estantes(),
+        'id': 'apartados', 'titulo': 'Los cuatro apartados',
+        'texto': 'Elige uno: cada tarjeta abre su página.',
+        'tarjetas': tarjetas_biblioteca(),
     }],
 }
 
 
-def pagina_estante(e):
-    """Pagina de un estante del Diccionario (10-10-2026): sus apartados en tarjetas."""
-    return {
-        'archivo': e[5], 'menu': e[2], 'menu_archivo': 'aprende.html',
-        'padre': ('aprende.html#diccionario', 'Aprende'),
-        'padre2': ('diccionario.html', 'Diccionario del Erario Público'),
-        'icono': e[1], 'titulo': e[2], 'lema': e[3], 'entrada': e[4] + ' Cada apartado abre su propia página.',
-        'secciones': [{'id': 'apartados', 'titulo': 'Los apartados', 'texto': '', 'sin_cab': True,
-                       'tarjetas': bib_estante(e[0])}],
-        'pie_extra': bib_nav(e[5]),
-    }
 
-
-PAGINAS_ESTANTE = [pagina_estante(e) for e in ESTANTES]
 
 
 def simulador():
@@ -2823,14 +2792,13 @@ def radar():
 # glosario.html#<glosario_ancla(termino)>.
 GLOSARIO = {
     'archivo': 'glosario.html',
-    'menu': 'Glosario',
+    'menu': 'Diccionario',
     'menu_archivo': 'aprende.html',
-    'padre': ('aprende.html#diccionario', 'Aprende'),
-    'padre2': ('diccionario.html', 'Diccionario del Erario Público'),
-    'padre3': ('biblioteca-hacendaria.html', 'Biblioteca hacendaria'),
+    'padre': ('aprende.html', 'Aprende'),
+    'padre2': ('diccionario.html', BIB_NOMBRE),
     'icono': '📖',
-    'titulo': 'Glosario de Términos Hacendarios',
-    'lema': 'Las palabras del erario, en lenguaje llano',
+    'titulo': 'Diccionario',
+    'lema': 'Glosario de términos hacendarios, en lenguaje llano',
     'entrada': ('Los términos del presupuesto, la deuda, la fiscalización y los Poderes, explicados para quien no es especialista. '
                 'Cada uno trae su fundamento: el artículo, la ley o el documento oficial que lo define. Busca una palabra o elige una categoría.'),
     'scripts': ['audit-database.js', 'glosario.js'],
@@ -2847,12 +2815,17 @@ GLOSARIO = {
 
 
 def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('audit-database.js', 'biblioteca.js'), bloque=None):
-    b = [x for x in BIBLIOTECA if x[0] == archivo][0]
-    return {
-        'archivo': archivo, 'menu': b[2], 'menu_archivo': 'aprende.html',
-        'padre': ('aprende.html#diccionario', 'Aprende'),
-        'padre2': ('diccionario.html', 'Diccionario del Erario Público'),
-        'padre3': (estante_de(archivo)[5], estante_de(archivo)[2]),
+    b = [x for x in BIBLIOTECA + [PASE] if x[0] == archivo][0]
+    if b is PASE:
+        # El Pase vive en Participa desde el 11-10-2026.
+        migas = {'menu_archivo': 'participa.html', 'padre': ('participa.html', 'Participa'),
+                 'pie_extra': '<p class="bib-sello">¿Necesitas una investigación a la medida? Mira los '
+                              '<a href="servicios.html">Servicios de investigación</a> del Modo Inspector.</p>'}
+    else:
+        migas = {'menu_archivo': 'aprende.html', 'padre': ('aprende.html', 'Aprende'),
+                 'padre2': ('diccionario.html', BIB_NOMBRE), 'pie_extra': bib_nav(archivo)}
+    return dict(migas, **{
+        'archivo': archivo, 'menu': b[2],
         'icono': b[1], 'titulo': titulo, 'lema': lema, 'entrada': entrada,
         'scripts': list(scripts),
         'secciones': [{
@@ -2862,8 +2835,7 @@ def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('aud
                                  '          <noscript><p>Esta página necesita JavaScript.</p></noscript>\n'
                                  '        </div>' % (raiz, carga)),
         }],
-        'pie_extra': bib_nav(archivo),
-    }
+    })
 
 
 PASE_HTML = """<div class="pase">
@@ -2907,7 +2879,7 @@ PAGINAS_BIBLIOTECA = [
         'uno se cotejó palabra por palabra con la versión vigente que publica la Cámara de Diputados o el DOF.',
         'bibMarco', 'Cargando los preceptos…'),
     pagina_biblioteca(
-        'fuentes-oficiales.html', 'Compendio de fuentes oficiales', 'Cada documento que sostiene una cifra',
+        'fuentes-oficiales.html', 'Referencias', 'Compendio de fuentes oficiales: cada documento que sostiene una cifra',
         'Las fichas numeradas que citan las cifras de la plataforma, con su liga al documento. Si llegaste desde una nota '
         'como [11], la ficha aparece iluminada.',
         'bibFuentes', 'Cargando el catálogo…'),
@@ -2966,7 +2938,7 @@ def cabecera(actual, sello):
           <span>🔗</span>
           <span>Compartir</span>
         </button>
-        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Diccionario del Erario Público">
+        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Biblioteca del Erario Público">
           <span>🪐</span>
           <span>Inspector Meteoro</span>
         </a>
@@ -3972,6 +3944,7 @@ def pagina(a, sello):
 NOVEDADES = [
     ('11-10-2026', 'Costo Ambiental estrena encabezado verde gris con su icono y sus módulos pasan a ser cinco aplicaciones. La quinta es nueva: Crisis ambientales. Compara lo que puede costar un desastre con lo que hay para pagarlo (el fondo, el seguro y los bonos), trae una calculadora de lo que cuesta esperar si el hueco se cubre con deuda, y abre tres fichas: el huracán Otis, el huracán Simón y el agua de Guadalajara, cada cifra con su documento y lo que falta con el nombre de quien debe publicarlo.'),
     ('11-10-2026', 'Baja al territorio queda en tres tarjetas, y cada una abre su página: el mapa del gasto federalizado, con cinco lentes y las 32 entidades de mayor a menor; las 32 entidades, con los tres pisos de la hacienda, lo que baja y con qué libertad, y el circuito de cada estado; y los 2,479 municipios, con sus fondos, su predial, el punto ciego del artículo 115 y el padrón completo del INEGI. La franja «Ayer y hoy» pasa a la pregunta frecuente del Ramo 28 y el Ramo 33.'),
+    ('11-10-2026', 'El Diccionario del Erario Público se llama ahora Biblioteca del Erario Público: una página con cuatro tarjetas, Diccionario, Referencias, Marco Legal Hacendario y Preguntas Frecuentes. El Pase del Auditor Cívico pasa a Participa.'),
     ('11-10-2026', 'El Diccionario del Gasto Público se llama ahora Diccionario del Erario Público.'),
     ('11-10-2026', 'Los Servicios de investigación salen de Participa y pasan a ser un módulo del Modo Inspector, en Herramientas, con todo su contenido: los cinco servicios, cómo trabajamos, el precio, la política de independencia, el formulario y el Pase del Auditor Cívico. El enlace viejo de Participa lleva ahí.'),
     ('11-10-2026', 'La página de Presupuesto queda solo con sus cinco tarjetas: sin botones de salto al pie.'),
@@ -4063,8 +4036,7 @@ def indice():
         if archivo == 'descarga-los-datos.html':
             enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES]
         if archivo == 'aprende.html':
-            enl += [('diccionario.html', 'Diccionario del Erario Público', 'La obra completa')] + [
-                (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
+            enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], b[2], b[3]) for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
                     ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')]
@@ -4107,6 +4079,12 @@ def indice():
 REDIRECCIONES = {
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
+    # Los dos estantes del Diccionario se fundieron en la Biblioteca del
+    # Erario Publico el 11-10-2026 (decision del autor).
+    'biblioteca-hacendaria.html': ('diccionario.html', 'Biblioteca hacendaria',
+                                   'Sus apartados (Diccionario, Marco Legal y Preguntas Frecuentes) viven ahora en la Biblioteca del Erario Público.'),
+    'fuentes-del-auditor.html': ('diccionario.html', 'Fuentes del auditor',
+                                 'Las Referencias viven ahora en la Biblioteca del Erario Público; el Pase del Auditor Cívico, en Participa.'),
 }
 
 
@@ -4168,7 +4146,7 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
