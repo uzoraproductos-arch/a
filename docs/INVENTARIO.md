@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 112 |
+| Páginas revisadas | 113 |
 | Páginas que solo redirigen | 7 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -48,14 +48,15 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf.html` | Qué encontró la ASF · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-asf.html` | Qué encontró la ASF · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 1 |
-| `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-cero.html` | De cero al resultado · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso.html` | El pulso del gasto · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-megaobras-sector.html` | Sector e industria · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
@@ -125,7 +126,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 

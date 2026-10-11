@@ -693,6 +693,10 @@ HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las ocho aplicaciones
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado. Está en mejora continua: crece con la plataforma.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
+# Desde el 11-10-2026 (pedido del autor) las dos divisiones del Modo Inspector
+# son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
+# una abre su propia pagina.
+INVESTIGACIONES = 'herramienta-inspector-investigaciones.html'
 HERR_ICONO_CAB = {'ambiente', 'obras', 'calculadora', 'inspector'}
 
 
@@ -764,6 +768,8 @@ def herramienta(h, n):
             '          </a></li>' % (rubro, modulo_archivo(archivo, clave), i, ico, frase, nombre, desc))
     ruta = ('<ol class="herr-ruta">\n%s\n        </ol>' % '\n'.join(pasos))
     division = HERR_DIVISION.get(rubro)
+    if rubro == 'inspector':
+        return herramienta_divisiones(h, n, ruta)
     return {
         'archivo': archivo,
         'menu': titulo,
@@ -786,19 +792,77 @@ def herramienta(h, n):
                      ('Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.' if pal[2] == 'Las' else
                       'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.'),
             'tarjetas': [], 'bloque': ruta,
-        }] + ([{
-            'id': 'pregunta', 'titulo': 'Pregúntale al Auditor · el bot interno', 'sin_cab': False,
-            'texto': 'Una herramienta aparte: en lugar de recorrer una investigación, le preguntas lo que quieras y te contesta con una nota técnica sellada.',
-            'tarjetas': [], 'bloque': (
-                '<a class="herr-bot" href="%s">\n'
-                '          <span class="herr-bot-logo" aria-hidden="true">%s</span>\n'
-                '          <span class="herr-bot-tx"><span class="herr-paso-frase">%s</span><span class="herr-paso-nombre">%s</span>'
-                '<span class="herr-paso-desc">%s</span></span>\n'
-                '          <span class="herr-paso-accion">Preguntar ➔</span>\n'
-                '        </a>' % (ASISTENTE[0], LOGO_IMG, ASISTENTE[2], ASISTENTE[1], ASISTENTE[3])),
-        }] if rubro == 'inspector' else []),
+        }],
         'pie_extra': herr_otras(archivo),
     }
+
+
+def herramienta_divisiones(h, n, ruta):
+    """Modo Inspector (11-10-2026, pedido del autor): la pagina de la
+    herramienta ya no despliega las ocho aplicaciones ni el bot. Presenta dos
+    tarjetas autonomas y cada una abre su pagina: «Grandes investigaciones»
+    (INVESTIGACIONES, con las ocho aplicaciones) y «Pregúntale al Auditor»
+    (ASISTENTE). Devuelve la pagina de la herramienta y la de las
+    investigaciones."""
+    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    division = HERR_DIVISION[rubro]
+    nombres = ' · '.join(t[2] for t in temas)
+    tarjeta_div = ('<li><a class="herr-bot herr-div" href="%s">\n'
+                   '          <span class="herr-bot-logo herr-div-ico" aria-hidden="true">%s</span>\n'
+                   '          <span class="herr-bot-tx"><span class="herr-paso-frase">%s</span><span class="herr-paso-nombre">%s</span>'
+                   '<span class="herr-paso-desc">%s</span>%s</span>\n'
+                   '          <span class="herr-paso-accion">%s ➔</span>\n'
+                   '        </a></li>')
+    dos = ('<ul class="herr-dos">\n        %s\n        %s\n        </ul>' % (
+        tarjeta_div % (INVESTIGACIONES, icono, 'Recorre una investigación', division[0],
+                       'Las %d aplicaciones del Modo Inspector: de lo que encontró la ASF a las empresas que facturan operaciones simuladas, con cada cifra y su documento.' % len(temas),
+                       '<span class="herr-div-lista">%s</span>' % nombres, 'Ver las %d aplicaciones' % len(temas)),
+        tarjeta_div % (ASISTENTE[0], LOGO_IMG, ASISTENTE[2], ASISTENTE[1],
+                       'El bot interno: le preguntas lo que quieras y te contesta con una nota técnica sellada, armada solo con datos verificados.',
+                       '', 'Preguntar')))
+    base = {
+        'menu_archivo': 'herramientas.html',
+        'padre': ('herramientas.html', 'Herramientas'),
+        'fondo': HERR_IMG[rubro],
+        'rubro': rubro,
+        'sin_icono_lema': True,
+    }
+    principal = dict(base, **{
+        'archivo': archivo, 'menu': titulo, 'icono': icono, 'titulo': titulo,
+        'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
+        'icono_cab': icono,
+        'entrada': '<b>%s.</b> %s' % (sub, texto),
+        # Las pestanas viejas (#pulso, #inspentes...) y las secciones que
+        # vivian aqui (#modulos, #pregunta) llevan a su pagina.
+        'hash_a_pagina': dict([(t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas] +
+                              [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0])]),
+        'secciones': [{
+            'id': 'divisiones', 'titulo': 'Dos maneras de entrarle', 'sin_cab': False,
+            'texto': 'Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.',
+            'tarjetas': [], 'bloque': dos,
+        }],
+        'pie_extra': herr_otras(archivo),
+    })
+    nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
+           '        <div class="herr-mod-pasos">\n'
+           '          <a class="herr-mod-paso ant" href="%s"><small>← Volver a</small><b>%s %s</b></a>\n'
+           '          <a class="herr-mod-paso sig" href="%s"><small>La otra división</small><b>💬 %s</b></a>\n'
+           '        </div>\n      </nav>' % (archivo, icono, titulo, ASISTENTE[0], ASISTENTE[1]))
+    investigaciones = dict(base, **{
+        'archivo': INVESTIGACIONES, 'menu': division[0], 'icono': icono, 'titulo': division[0],
+        'padre2': (archivo, titulo),
+        'lema': '%s · %d aplicaciones' % (titulo, len(temas)),
+        'icono_cab': icono,
+        'entrada': '<b>Recorre una investigación.</b> ' + division[1],
+        'secciones': [{
+            'id': 'modulos', 'titulo': 'Las %d aplicaciones' % len(temas), 'sin_cab': False,
+            'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.',
+            'tarjetas': [], 'bloque': ruta,
+        }],
+        'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
+    })
+    principal['_extra'] = [investigaciones]
+    return principal
 
 
 def herramienta_modulo(h, n, i, bloque=None):
@@ -816,6 +880,9 @@ def herramienta_modulo(h, n, i, bloque=None):
     ant = temas[i - 1] if i > 0 else None
     sig = temas[i + 1] if i + 1 < len(temas) else None
     def paso(t, k, rotulo, clase):
+        if not t and rubro == 'inspector':
+            return ('          <a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>'
+                    % (clase, INVESTIGACIONES, rotulo, icono, HERR_DIVISION[rubro][0]))
         if not t:
             return ('          <a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>'
                     % (clase, archivo, rotulo, icono, titulo))
@@ -844,6 +911,7 @@ def herramienta_modulo(h, n, i, bloque=None):
         'menu_archivo': 'herramientas.html',
         'padre': ('herramientas.html', 'Herramientas'),
         'padre2': (archivo, titulo),
+        'padre3': (INVESTIGACIONES, HERR_DIVISION[rubro][0]) if rubro == 'inspector' else None,
         'icono': ico,
         'titulo': nombre,
         'lema': ('%s · %s %d de %d' % (titulo, pal[0], i + 1, len(temas)) if rubro in HERR_ICONO_CAB else
@@ -868,8 +936,8 @@ def herramienta_asistente(bloque):
     nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
            '        <div class="herr-mod-pasos">\n'
            '          <a class="herr-mod-paso ant" href="%s"><small>← Volver al índice de</small><b>%s %s</b></a>\n'
-           '          <a class="herr-mod-paso sig" href="%s"><small>Grandes investigaciones · aplicación 1</small><b>%s %s</b></a>\n'
-           '        </div>\n      </nav>' % (archivo, icono, titulo, modulo_archivo(archivo, h[7][0][0]), h[7][0][1], h[7][0][2]))
+           '          <a class="herr-mod-paso sig" href="%s"><small>La otra división</small><b>%s %s</b></a>\n'
+           '        </div>\n      </nav>' % (archivo, icono, titulo, INVESTIGACIONES, icono, HERR_DIVISION[rubro][0]))
     return {
         'archivo': ASISTENTE[0], 'menu': ASISTENTE[1], 'menu_archivo': 'herramientas.html',
         'padre': ('herramientas.html', 'Herramientas'), 'padre2': (archivo, titulo),
@@ -1084,6 +1152,7 @@ def servicios():
         # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
         'padre': ('herramientas.html', 'Herramientas'),
         'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
+        'padre3': (INVESTIGACIONES, 'Grandes investigaciones'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -4074,8 +4143,10 @@ def generar(sello=None):
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, a['archivo']), 'wb').write(texto.encode('utf-8'))
     for n, h in enumerate(HERRAMIENTAS, 1):
-        texto = pagina(herramienta(h, n), sello).replace('\r\n', '\n').replace('\n', '\r\n')
-        open(os.path.join(RAIZ, h[0]), 'wb').write(texto.encode('utf-8'))
+        hp = herramienta(h, n)
+        for pg in [hp] + hp.pop('_extra', []):
+            texto = pagina(pg, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+            open(os.path.join(RAIZ, pg['archivo']), 'wb').write(texto.encode('utf-8'))
         for i, t in enumerate(h[7]):
             if t[0].endswith('.html') or t[0] in MODULOS_PROPIOS:
                 continue
