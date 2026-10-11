@@ -10561,7 +10561,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Doctrina y bibliografía",
       "cita_apa": "Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). Introducción al derecho económico. Editorial Esfinge.",
       "url": "",
-      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo; la del Presupuesto (capítulo 7, p. 96: la acción financiera del Estado) vive en las Preguntas frecuentes, en «¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?». Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
+      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo; las de Presupuesto y de Baja al territorio viven en las Preguntas frecuentes: la primera (capítulo 7, p. 96: la acción financiera del Estado), en «¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?», y la segunda (Cuadro 1 del capítulo 7), en «¿Cuál es la diferencia entre el Ramo 28 y el Ramo 33?». Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
     }
   ],
   "preguntas_casillas": [
@@ -10628,10 +10628,11 @@ window.AUDIT_DB = {
       "items": [
         {
           "q": "¿Cuál es la diferencia entre el Ramo 28 y el Ramo 33?",
-          "a": "• <strong>Ramo 28 (participaciones):</strong> dinero de <em>libre disposición</em>. Los gobiernos estatales y municipales deciden en qué usarlo, dentro de sus propios presupuestos. El Fondo General de Participaciones se forma con el 20% de la recaudación federal participable (Ley de Coordinación Fiscal, art. 2o.).<br>• <strong>Ramo 33 (aportaciones):</strong> dinero <em>etiquetado</em>. La misma ley condiciona su gasto a los fines de cada uno de sus ocho fondos: nómina educativa (FONE), salud (FASSA), infraestructura social (FAIS), fortalecimiento municipal (FORTAMUN), entre otros (art. 25).<br>Si el Ramo 33 se usa en otra cosa, la Auditoría Superior lo observa: puede emitir un pliego de observaciones, promover responsabilidades administrativas ante el Tribunal Federal de Justicia Administrativa o presentar denuncias ante la Fiscalía. La Auditoría no juzga ni sanciona por sí misma.",
+          "a": "• <strong>Ramo 28 (participaciones):</strong> dinero de <em>libre disposición</em>. Los gobiernos estatales y municipales deciden en qué usarlo, dentro de sus propios presupuestos. El Fondo General de Participaciones se forma con el 20% de la recaudación federal participable (Ley de Coordinación Fiscal, art. 2o.).<br>• <strong>Ramo 33 (aportaciones):</strong> dinero <em>etiquetado</em>. La misma ley condiciona su gasto a los fines de cada uno de sus ocho fondos: nómina educativa (FONE), salud (FASSA), infraestructura social (FAIS), fortalecimiento municipal (FORTAMUN), entre otros (art. 25).<br>Si el Ramo 33 se usa en otra cosa, la Auditoría Superior lo observa: puede emitir un pliego de observaciones, promover responsabilidades administrativas ante el Tribunal Federal de Justicia Administrativa o presentar denuncias ante la Fiscalía. La Auditoría no juzga ni sanciona por sí misma.<p><b>📘 Ayer y hoy.</b> <em>En el libro (1995):</em> el Cuadro 1 del capítulo 7 de <cite>Introducción al derecho económico</cite>, de Gómez Granillo y Gutiérrez Rosas, ya separaba, dentro del Presupuesto de 1994, lo que la Federación destinaba a estados y municipios. <em>Hoy (2026):</em> ese dinero viaja por dos vías principales: las <strong>participaciones</strong> (Ramo 28), de libre uso, y las <strong>aportaciones</strong> (Ramo 33), etiquetadas por la Ley de Coordinación Fiscal para salud, educación, infraestructura y seguridad. Estado por estado y municipio por municipio, está en Números › Baja al territorio.</p>",
           "refs": [
             "ref-lcf",
-            "ref-lfrcf"
+            "ref-lfrcf",
+            "ref-gomez-granillo-1995"
           ]
         },
         {

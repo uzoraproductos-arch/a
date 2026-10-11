@@ -7,10 +7,10 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 107 |
+| Páginas revisadas | 110 |
 | Páginas que solo redirigen | 7 |
 | Enlaces internos a archivos que no existen | 0 |
-| Módulos del motor que se abren desde páginas (`?ir=`) | 9 destinos |
+| Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
 
 ## Páginas
 
@@ -31,7 +31,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `comunidad.html` | Comunidad · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
-| `diccionario.html` | Diccionario del Gasto Público · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
+| `diccionario.html` | Diccionario del Erario Público · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 25 | 0 | 18 | 3 | 6 |
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 23 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
@@ -64,7 +64,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `indice.html` | Índice general · Auditavisión | apartados.py | 134 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 40 | 0 | 0 | 5 | 1 |
-| `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
+| `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 37 | 0 | 4 | 0 | 0 |
 | `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 37 | 0 | 5 | 5 | 0 |
 | `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
@@ -96,9 +96,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-ingreso-productos.html` | Productos · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-venta-de-bienes-y-servicios.html` | Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE) · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 0 |
 | `numeros-la-deuda.html` | Se paga lo que se debe · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `numeros-las-32-entidades.html` | Las 32 entidades: del peso federal al estatal · Auditavisión | apartados.py | 40 | 0 | 3 | 2 | 0 |
 | `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-los-16-origenes.html` | Los 16 orígenes del ingreso · Auditavisión | apartados.py | 44 | 0 | 2 | 3 | 0 |
+| `numeros-los-municipios.html` | Los 2,479 municipios: predial y transferencias · Auditavisión | apartados.py | 38 | 0 | 3 | 4 | 1 |
+| `numeros-mapa-del-gasto-federalizado.html` | El mapa del gasto federalizado · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 0 |
 | `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 61 | 0 | 2 | 1 | 0 |
 | `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
@@ -109,7 +112,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 75 | 0 | 0 | 0 | 40 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 76 | 0 | 0 | 0 | 40 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
@@ -152,10 +155,8 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 | `ambiente` | 12 |
 | `megaobras` | 12 |
 | `calculadora` | 9 |
-| `presupuesto` | 9 |
+| `presupuesto` | 8 |
 | `poderes` | 7 |
-| `territorio` | 2 |
-| `municipios` | 2 |
 | `nota` | 1 |
 
 ## Registro de pendientes
