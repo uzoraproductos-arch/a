@@ -320,16 +320,22 @@ APARTADOS = [
                 'pestana': ('💵', '1 · Se recauda', 'De dónde sale el dinero'),
                 'num': 1,
                 'titulo': 'Se recauda: de dónde sale el dinero',
-                'texto': 'Impuestos, cuotas, ventas de las empresas del Estado y deuda: todo lo que autoriza la Ley de Ingresos.',
+                'texto': ('Todo el dinero federal de 2026 en dos barras: arriba lo que entra, abajo lo que sale. Después, los 16 '
+                          'orígenes que autoriza la Ley de Ingresos, renglón por renglón: impuestos, cuotas, ventas de las '
+                          'empresas del Estado y deuda. Cada uno tiene su propia página.'),
                 'ayer': ('El capítulo 7 abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda.',
                          'Cada año la <b>Ley de Ingresos de la Federación</b> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.'),
+                # Desde el 11-10-2026 (fusion con «Presupuesto», pedido del
+                # autor) «De donde sale cada peso» vive en la pagina, nativo
+                # (numeros_renglones), y cada renglon abre su pagina; las
+                # demas tarjetas abren su pagina de modulo (NUMEROS_MODULOS).
+                'bloque': '',
                 'tarjetas': [
-                    ('📥', 'De dónde sale cada peso', 'El ingreso federal de 2026, renglón por renglón, tal como lo enumera el artículo 1o. de la Ley de Ingresos.', ir('presupuesto', 'eb-ingresos'), None, 'dinero'),
-                    ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026, la cifra total antes de partirla.', ir('presupuesto', 'eb-cuanto'),
+                    ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026, la cifra total antes de partirla, con su contador.', 'numeros-cuanto-dinero-es.html',
                      'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
-                    ('📏', '¿A qué equivale?', 'Tres comparaciones para dimensionar las cifras, con la operación a la vista.', ir('presupuesto', 'eb-equivale'), None, 'dinero'),
-                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa y qué ley la gobierna.', ir('presupuesto', 'eb-arquitectura'), None, 'dinero'),
-                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos.', ir('proyeccion2027'), None, 'dinero'),
+                    ('📏', '¿A qué equivale?', 'Tres comparaciones para dimensionar las cifras, con la operación a la vista.', 'numeros-a-que-equivale.html', None, 'dinero'),
+                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa y qué ley la gobierna, con su simulador.', 'numeros-camino-del-dinero.html', None, 'dinero'),
+                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos.', 'numeros-paquete-2027.html', None, 'dinero'),
                 ],
             },
             {
@@ -2999,13 +3005,12 @@ def numeros_cierre():
             '<span class="np-cierre-ir">Abrir la calculadora ➔</span></a>')
 
 
-# Numeros en siete paginas (pedido del autor, 11-10-2026): la portada es
-# como la del Radar hacendario, siete tarjetas sin numero y sin descripcion,
-# y cada una abre su propia pagina. La primera es el presupuesto completo
-# («El peso de 2026»); las otras seis son los pasos del recorrido.
+# Numeros en paginas (pedido del autor, 11-10-2026): la portada es como la
+# del Radar hacendario, tarjetas sin numero y sin descripcion, y cada una
+# abre su propia pagina. Eran siete; el mismo dia «Presupuesto» (El peso de
+# 2026) se fundio con «Se recauda» (pedido del autor) y quedan seis.
 NUMEROS_PARTES = [
     # (id de la seccion, archivo, icono, nombre de la tarjeta)
-    ('presupuesto', 'numeros-presupuesto.html', '📊', 'Presupuesto'),
     ('origen', 'numeros-se-recauda.html', '💵', 'Se recauda'),
     ('decide', 'numeros-se-aprueba.html', '🏛️', 'Se aprueba'),
     ('gasta', 'numeros-se-gasta.html', '🧩', 'Se gasta: los tres presupuestos'),
@@ -3014,8 +3019,183 @@ NUMEROS_PARTES = [
     ('revisa', 'numeros-se-revisa.html', '🔍', 'Se revisa'),
 ]
 NUMEROS_PAGINAS = []
-# ?abrir=eb-bloque: en que pagina de Numeros esta la tarjeta de cada bloque.
+# ?abrir=eb-bloque: a que direccion de Numeros lleva cada bloque del motor.
 NUMEROS_ABRIR = {}
+# Los bloques del motor que eran tarjetas de «Se recauda» y ahora tienen su
+# pagina de modulo (11-10-2026): (ancla, archivo, icono, nombre, destino).
+NUMEROS_MODULOS = [
+    ('eb-cuanto', 'numeros-cuanto-dinero-es.html', '💰', 'Cuánto dinero es', ir('presupuesto', 'eb-cuanto')),
+    ('eb-equivale', 'numeros-a-que-equivale.html', '📏', '¿A qué equivale?', ir('presupuesto', 'eb-equivale')),
+    ('eb-arquitectura', 'numeros-camino-del-dinero.html', '🏛️', 'El camino del dinero, en cuatro etapas', ir('presupuesto', 'eb-arquitectura')),
+    ('proyeccion2027', 'numeros-paquete-2027.html', '📈', 'Paquete Económico 2027', ir('proyeccion2027')),
+]
+# Las tres categorias de impuesto que el art. 1o. de la Ley de Ingresos 2026
+# enumera en $0.0 (el mismo texto que ERARIO_RUBROS_CERO del motor).
+NUM_INGRESO_CERO = [
+    ('1.12', 'Impuestos sobre el patrimonio',
+     'La Federación no grava la riqueza acumulada. No existe hoy un impuesto federal al patrimonio neto, a la herencia ni a las donaciones.'),
+    ('1.15', 'Impuestos sobre nóminas y asimilables',
+     'El impuesto sobre nóminas existe, pero es estatal: lo cobran las 32 entidades, no la Federación. Por eso aparece en el catálogo federal con cero.'),
+    ('1.16', 'Impuestos ecológicos',
+     'El catálogo federal los contempla y los presupuesta en cero. Los gravámenes ambientales que sí recauda la Federación viven dentro del IEPS (combustibles fósiles y plaguicidas), no en este rubro.'),
+]
+
+
+def ingreso_archivo(x):
+    """Pagina de un renglon de la Ley de Ingresos: ing-isr -> numeros-ingreso-isr.html."""
+    corto = {'comext': 'comercio-exterior', 'hidro': 'hidrocarburos', 'rezagos': 'ejercicios-anteriores',
+             'aprovech': 'aprovechamientos', 'ventas': 'venta-de-bienes-y-servicios',
+             'transf': 'fondo-mexicano-del-petroleo'}.get(x['id'][4:], x['id'][4:])
+    return 'numeros-ingreso-%s.html' % corto
+
+
+def _mdp0(v):
+    return ('-' if v < 0 else '') + '$' + format(abs(v), ',.1f') + ' mdp'
+
+
+def numeros_renglones(base, d):
+    """Los 16 origenes del ingreso, con contador (numeros.js): arrancan en
+    cero y cada renglon lleva a su pagina."""
+    p = base['panoramaErario']
+    total = p['totalLIF']
+    mayor = max(x['montoMdp'] for x in p['ingresos'])
+    grupos = []
+    for x in p['ingresos']:
+        if x['grupo'] not in [g[0] for g in grupos]:
+            grupos.append((x['grupo'], []))
+        grupos[[g[0] for g in grupos].index(x['grupo'])][1].append(x)
+    bloques = []
+    for nombre, filas in grupos:
+        suma = sum(x['montoMdp'] for x in filas)
+        bloques.append(
+            '<div class="nr-grupo"><h3 class="nr-grupo-tit"><span>%s</span><span class="nr-grupo-v">%s · %s%% %s</span></h3><ol class="nr-filas">%s</ol></div>' % (
+                nombre, _mdp0(suma), format(suma / total * 100, '.1f'),
+                '<span class="est-chip est-derivado" title="Suma de sus renglones">derivado</span>' if len(filas) > 1 else '<span class="est-chip est-oficial">oficial</span>',
+                ''.join('<li><a class="nr-fila" href="%s" data-v="%.1f" data-w="%.2f" data-pct="%.1f">'
+                        '<span class="nr-ico" aria-hidden="true">%s</span><span class="nr-nom">%s</span>'
+                        '<span class="nr-barra" aria-hidden="true"><span class="nr-relleno"></span></span>'
+                        '<span class="nr-v">%s</span><span class="nr-pct">%s%%</span><span class="nr-ir" aria-hidden="true">➔</span></a></li>' % (
+                            ingreso_archivo(x), x['montoMdp'], x['montoMdp'] / mayor * 100, x['montoMdp'] / total * 100,
+                            x['icono'], x['nombre'], _mdp0(x['montoMdp']), format(x['montoMdp'] / total * 100, '.1f'))
+                        for x in filas)))
+    ceros = ''.join('<li><span class="nr-cero-clave">LIF %s</span><b>%s</b><span class="nr-cero-v">$0.0 mdp</span><p>%s</p></li>' % c
+                    for c in NUM_INGRESO_CERO)
+    return '''<section class="nr" id="nrRenglones" aria-labelledby="nrTit">
+          <div class="nr-cab">
+            <h2 class="np-tit" id="nrTit">Los 16 orígenes del ingreso, renglón por renglón</h2>
+            <p class="np-txt">Tal como los enumera el artículo 1o. de la %s %s, en cuatro familias. Arrancan en cero: presiona «Contabilizar» y mira crecer cada barra. Toca un renglón para abrir su página: qué grava, qué ley lo sustenta, qué efecto jurídico produce y qué trae por dentro.</p>
+            <div class="nr-mandos"><button type="button" class="rd-cuenta-btn nr-btn" id="nrContar" aria-pressed="false">▶ Contabilizar</button>
+            <span class="nr-estado" id="nrEstado" role="status">Los 16 renglones están en ceros.</span></div>
+          </div>
+          <div class="nr-lista nr-ceros" id="nrLista">%s</div>
+          <p class="np-pie">Cifras en millones de pesos (mdp), tal como las publica la ley. Cada barra se mide contra el renglón mayor (el ISR); el porcentaje es su parte del ingreso total, %s.</p>
+          <details class="nr-cero">
+            <summary>Y los que la ley enumera, pero deja en cero</summary>
+            <p>El artículo 1o. lista tres categorías más de impuesto, presupuestadas en <b>$0.0 mdp</b> para 2026 <span class="est-chip est-oficial">oficial</span>. No se grafican porque una barra de cero no se ve; se dicen porque su ausencia explica tanto como las cifras de arriba.</p>
+            <ul>%s</ul>
+          </details>
+        </section>''' % (glos('LIF (Ley de Ingresos de la Federación)', 'Ley de Ingresos de la Federación 2026'),
+                         nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026'),
+                         ''.join(bloques), _mdp0(total), ceros)
+
+
+def ingreso_pagina(x, n, lista, total, refs, glosario):
+    """Pagina propia de un renglon del ingreso (11-10-2026): la ficha que
+    antes abria en una ventana lateral dentro del visor."""
+    archivo = ingreso_archivo(x)
+    r = refs[x['refKey']]
+    comps = x.get('componentes') or []
+    if comps:
+        mayor = max(abs(c['m']) for c in comps)
+        desglose = ('<ol class="ni-comps">%s</ol>' % ''.join(
+            '<li class="%s"><span class="ni-comp-n">%s%s</span><span class="nr-barra"><span class="nr-relleno" style="width:%.2f%%"></span></span>'
+            '<b>%s</b><span class="nr-pct">%s%%</span></li>' % (
+                'ni-neg' if c['m'] < 0 else ('ni-cero' if c['m'] == 0 else ''), c['n'],
+                ('<small>%s</small>' % c['d']) if c['d'] else '', abs(c['m']) / mayor * 100 if mayor else 0,
+                _mdp0(c['m']), format(c['m'] / x['montoMdp'] * 100, '.1f') if x['montoMdp'] else '0.0') for c in comps)
+            + '<p class="np-pie">El desglose lo trae la propia Ley de Ingresos dentro de su clave %s. El porcentaje es la parte de cada componente en el total del renglón.%s</p>' % (
+                x['claveLIF'], ' Las barras rayadas en rojo <b>restan</b>: reducen el total.' if any(c['m'] < 0 for c in comps) else ''))
+    else:
+        desglose = ('<p class="ni-sin">La Ley de Ingresos 2026 lo autoriza en <b>un solo renglón</b> (su clave es %s): no lo parte por dentro, '
+                    'ni por tipo de contribuyente ni por actividad. Por eso aquí no hay desglose: no lo inventamos.</p>' % x['claveLIF'])
+    term = x['glos'] if x['glos'] in glosario else None
+    ant, sig = (lista[n - 1] if n > 0 else None), (lista[n + 1] if n + 1 < len(lista) else None)
+    def paso(y, rot, cls):
+        if not y:
+            return '<a class="herr-mod-paso %s" href="numeros-se-recauda.html#nrRenglones"><small>%s</small><b>💵 Los 16 orígenes</b></a>' % (
+                cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
+        return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, ingreso_archivo(y), rot, y['icono'], y['nombre'])
+    chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
+        ' actual' if y is x else '', ingreso_archivo(y), ' aria-current="page"' if y is x else '', y['icono'], y['nombre']) for y in lista)
+    nav = ('<nav class="herr-mod-nav" aria-label="Los 16 orígenes del ingreso">\n'
+           '        <div class="herr-mod-pasos">\n          %s\n          %s\n        </div>\n'
+           '        <span class="herr-otras-tit">Los 16 orígenes del ingreso</span>\n'
+           '        <div class="herr-mod-chips">%s</div>\n      </nav>' % (
+               paso(ant, '← Anterior', 'ant'), paso(sig, 'Siguiente →', 'sig'), chips))
+    bloque = '''<div class="ni">
+          <div class="ni-cifra">
+            <p class="ni-monto"><b>%s</b> <span class="est-chip est-%s">%s</span></p>
+            <p class="ni-datos"><span>De cada $100 que entran: <b>$%.2f</b> <span class="est-chip est-derivado">derivado</span></span>
+            <span>Familia: <b>%s</b></span><span>Clave en el art. 1o. de la ley: <b>%s</b></span></p>
+            <p class="np-pie">Monto autorizado por la %s %s. «De cada $100» = %s ÷ %s × 100.</p>
+          </div>
+          <div class="ni-rej">
+            <section class="ni-c"><h2>¿Qué %s?</h2><p>%s</p></section>
+            <section class="ni-c"><h2>Qué efecto jurídico produce</h2><p>%s</p></section>
+            <section class="ni-c"><h2>Qué ley lo sustenta</h2><p>%s %s</p>%s</section>
+          </div>
+          <section class="ni-desg"><h2>Qué trae por dentro</h2>%s</section>
+        </div>''' % (
+        _mdp0(x['montoMdp']), x['estado'], x['estado'], x['montoMdp'] / total * 100, x['grupo'], x['claveLIF'],
+        glos('LIF (Ley de Ingresos de la Federación)', 'Ley de Ingresos de la Federación 2026, art. 1o.'),
+        nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026'), _mdp0(x['montoMdp']), _mdp0(total),
+        'grava' if x['grupo'] == 'Impuestos' else 'es', x['quePaga'], x['efecto'], x['ley'],
+        nota_ref(x['refKey'], r['num'], re.sub('<[^>]+>', '', r.get('cita_apa', ''))[:160].replace('"', '&quot;')),
+        ('<p><a href="glosario.html#%s">📖 El concepto, en el glosario</a></p>' % glosario_ancla(term)) if term else '',
+        desglose)
+    return {
+        'archivo': archivo, 'menu': x['nombre'], 'menu_archivo': 'sigue-el-dinero.html',
+        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-se-recauda.html', 'Se recauda'),
+        'icono': x['icono'], 'lema': 'Se recauda · Ley de Ingresos 2026',
+        'titulo': x['nombreLargo'] if x['nombre'] in x['nombreLargo'] else '%s (%s)' % (x['nombreLargo'], x['nombre']),
+        'entrada': re.sub('<[^>]+>', '', x['quePaga']),
+        'estilos': ['numeros.css'], 'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-se-recauda.html'),
+        'secciones': [{'id': 'ficha', 'titulo': x['nombre'], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+    }
+
+
+def numeros_modulo(i, tarjetas):
+    """Pagina de modulo de «Se recauda» (11-10-2026): el bloque del motor
+    a lo alto de su contenido, como los modulos de las herramientas."""
+    ancla, archivo, ico, nombre, url = NUMEROS_MODULOS[i]
+    ant = NUMEROS_MODULOS[i - 1] if i > 0 else None
+    sig = NUMEROS_MODULOS[i + 1] if i + 1 < len(NUMEROS_MODULOS) else None
+    def paso(m, rot, cls):
+        if not m:
+            return '<a class="herr-mod-paso %s" href="numeros-se-recauda.html"><small>%s</small><b>💵 Se recauda</b></a>' % (
+                cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
+        return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, m[1], rot, m[2], m[3])
+    chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
+        ' actual' if m[1] == archivo else '', m[1], ' aria-current="page"' if m[1] == archivo else '', m[2], m[3]) for m in NUMEROS_MODULOS)
+    nav = ('<nav class="herr-mod-nav" aria-label="Más de Se recauda">\n'
+           '        <div class="herr-mod-pasos">\n          %s\n          %s\n        </div>\n'
+           '        <span class="herr-otras-tit">Más de «Se recauda»</span>\n'
+           '        <div class="herr-mod-chips">%s</div>\n      </nav>' % (paso(ant, '← Anterior', 'ant'), paso(sig, 'Siguiente →', 'sig'), chips))
+    marco = ('<div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-dinero)">\n'
+             '          <div class="apartado-visor-cuerpo">\n'
+             '            <p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>\n'
+             '            <iframe class="apartado-visor-marco" title="%s" data-modulo="%s&amp;visor=1"></iframe>\n'
+             '            <noscript><p>Este módulo necesita JavaScript. <a href="%s">Ábrelo en el auditor</a>.</p></noscript>\n'
+             '          </div>\n'
+             '        </div>' % (esc_attr(nombre), url, url))
+    tarjeta = next((t for t in tarjetas if t[3] == archivo), None)
+    return {
+        'archivo': archivo, 'menu': nombre, 'menu_archivo': 'sigue-el-dinero.html',
+        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-se-recauda.html', 'Se recauda'),
+        'icono': ico, 'lema': 'Se recauda', 'titulo': nombre, 'entrada': tarjeta[2] if tarjeta else nombre,
+        'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-se-recauda.html'),
+        'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco}],
+    }
 
 
 def numeros_nav(actual):
@@ -3035,45 +3215,66 @@ def numeros_preparar():
     d = numeros_datos(base)
     pag = {r[0]: r for r in NUMEROS_PARTES}
     for x in d['entra'] + d['sale']:
-        # «Ver el paso» de cada tramo lleva a su pagina.
-        x['ptit'] = pag[x['paso']][3]
-        x['paso'] = pag[x['paso']][1]
+        # «Ver ...» de cada tramo lleva a su pagina; los de lo que entra,
+        # a sus renglones, en la misma pagina.
+        if x['paso'] == 'origen':
+            x['ptit'], x['paso'] = 'Los 16 orígenes, renglón por renglón', '#nrRenglones'
+        else:
+            x['ptit'] = pag[x['paso']][3]
+            x['paso'] = pag[x['paso']][1]
         x.pop('pnum', None)
+    ingresos = base['panoramaErario']['ingresos']
+    por_nombre = {r['nombre']: r for r in ingresos}
+    for x in d['entra']:
+        for f in x['filas']:
+            # Cada renglon de lo que entra abre su pagina (11-10-2026).
+            f['p'] = ingreso_archivo(por_nombre[f['n']])
     a = next(x for x in APARTADOS if x['archivo'] == 'sigue-el-dinero.html')
     pasos = {sec['id']: sec for sec in a['secciones']}
     pasos['gasta']['bloque'] = numeros_tres(d)
+    pasos['origen']['bloque'] = numeros_renglones(base, d)
     # La nota del libro va al pie de cada paso, no en la portada.
     comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
     for pid, archivo, ico, nombre in NUMEROS_PARTES:
         p = {'archivo': archivo, 'menu': nombre, 'menu_archivo': 'sigue-el-dinero.html',
              'padre': ('sigue-el-dinero.html', 'Números'), 'icono': ico, 'lema': 'Números',
              'estilos': ['numeros.css'], 'pie_extra': numeros_nav(archivo)}
-        if pid == 'presupuesto':
-            p.update({'titulo': 'Presupuesto 2026: de dónde viene y a dónde va',
-                      'entrada': ('Todo el dinero federal del año en dos barras: arriba, lo que entra; abajo, lo que sale. '
-                                  'Toca cualquier tramo para ver su cifra, su fuente y la página donde se explica.'),
-                      'scripts': ['numeros.js'], 'antes': numeros_peso(d), 'secciones': []})
-        else:
-            sec = dict(pasos[pid], sin_cab=True)
-            sec.pop('num', None)
-            p.update(comun)
-            p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': True, 'secciones': [sec]})
-            if pid == 'deuda':
-                p['scripts'] = ['deuda-tiempo.js']
-            if pid == 'revisa':
-                # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
-                p['cierre'] = numeros_cierre()
-            for t in sec['tarjetas']:
-                m = re.search(r'ancla=(eb-[\w-]+)', t[3])
-                if m:
-                    NUMEROS_ABRIR.setdefault(m.group(1), archivo)
+        sec = dict(pasos[pid], sin_cab=True)
+        sec.pop('num', None)
+        p.update(comun)
+        p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': True, 'secciones': [sec]})
+        if pid == 'origen':
+            # «Presupuesto» (El peso de 2026) se fundio aqui (11-10-2026).
+            p['antes'] = numeros_peso(d)
+            p['scripts'] = ['numeros.js']
+        if pid == 'deuda':
+            p['scripts'] = ['deuda-tiempo.js']
+        if pid == 'revisa':
+            # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
+            p['cierre'] = numeros_cierre()
+        for t in sec['tarjetas']:
+            m = re.search(r'ancla=(eb-[\w-]+)', t[3])
+            if m:
+                NUMEROS_ABRIR.setdefault(m.group(1), archivo + '?abrir=' + m.group(1))
         NUMEROS_PAGINAS.append(p)
-    # La portada: solo las siete tarjetas, cada una a su pagina.
+    # Lo que era «Presupuesto» y las tarjetas de «Se recauda», a su pagina.
+    NUMEROS_ABRIR['eb-ingresos'] = 'numeros-se-recauda.html#nrRenglones'
+    for i, m in enumerate(NUMEROS_MODULOS):
+        NUMEROS_ABRIR[m[0]] = m[1]
+        NUMEROS_PAGINAS.append(numeros_modulo(i, pasos['origen']['tarjetas']))
+    refs = {r['id']: r for r in base['referencias_legales']}
+    glosario = set(t['termino'] for t in base['glosario'])
+    total = base['panoramaErario']['totalLIF']
+    for n, x in enumerate(ingresos):
+        NUMEROS_PAGINAS.append(ingreso_pagina(x, n, ingresos, total, refs, glosario))
+    # La portada: solo las tarjetas, cada una a su pagina.
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], '')} for r in NUMEROS_PARTES]
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, numPeso='numeros-presupuesto.html',
-                              ati='herramienta-calculadora.html')
+    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, numPeso='numeros-se-recauda.html#numPeso',
+                              presupuesto='numeros-se-recauda.html', ati='herramienta-calculadora.html')
     a['abrir_a_pagina'] = NUMEROS_ABRIR
+    REDIRECCIONES['numeros-presupuesto.html'] = ('numeros-se-recauda.html', 'Presupuesto',
+                                                 'Se fundió con «Se recauda»: las dos barras están arriba de esa página.')
 
 
 def pagina(a, sello):
@@ -3188,7 +3389,7 @@ def pagina(a, sello):
         # ?abrir=eb-bloque (Numeros, 11-10-2026): la tarjeta de ese bloque ya
         # vive en otra pagina; se manda alla con el mismo ?abrir.
         redirige += ('\n  <script>(function () { var m = %s, b = new URLSearchParams(location.search).get(\'abrir\'); '
-                     'if (b && m[b]) location.replace(m[b] + \'?abrir=\' + b); })();</script>' % json.dumps(a['abrir_a_pagina']))
+                     'if (b && m[b]) location.replace(m[b]); })();</script>' % json.dumps(a['abrir_a_pagina']))
 
     return '''<!DOCTYPE html>
 <!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
@@ -3256,6 +3457,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'En Números, «Presupuesto» y «Se recauda» son una sola página: arriba, las dos barras de lo que entra y lo que sale; abajo, los 16 orígenes del ingreso con su contador. Cada renglón (ISR, IVA, IEPS, cuotas, deuda...) tiene su propia página con qué grava, su ley, su efecto jurídico y su desglose; y Cuánto dinero es, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027 abren en la suya.'),
     ('11-10-2026', 'Números se abre en siete páginas, como el Radar hacendario: el presupuesto completo (de dónde viene y a dónde va cada peso), se recauda, se aprueba, se gasta con los tres presupuestos, baja al territorio, se paga lo que se debe y se revisa. Cada tarjeta lleva a la suya.'),
     ('10-10-2026', 'Números, reorganizado: un solo recorrido de seis pasos (se recauda, se aprueba, se gasta, baja al territorio, se paga la deuda y se revisa). Arriba, «El peso de 2026», dos barras interactivas con todo lo que entra y todo lo que sale, en pesos o por cada $100; en el paso 3, los tres presupuestos: del Estado, nacional y social. La nota del libro pasa al pie.'),
     ('10-10-2026', 'Las tarjetas del Radar hacendario quedan limpias: solo el icono y el nombre de cada parte. Lo descriptivo se queda dentro de cada página.'),
@@ -3305,7 +3507,7 @@ def _rejilla(grupos):
 
 def _a_numeros(destino):
     m = re.search(r'ir=presupuesto&(?:amp;)?ancla=(eb-[\w-]+)', destino)
-    return (NUMEROS_ABRIR.get(m.group(1), 'sigue-el-dinero.html') + '?abrir=' + m.group(1)) if m else destino
+    return NUMEROS_ABRIR.get(m.group(1), 'sigue-el-dinero.html?abrir=' + m.group(1)) if m else destino
 
 
 def indice():
@@ -3318,10 +3520,13 @@ def indice():
         ('estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024, 2026 y 2027 en cuatro dimensiones'),
         ('estado-de-cuenta-2024-2027.csv', 'Descarga el estado de cuenta en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
                        [_grupo(p['icono'], p['titulo'],
-                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']]
-                               or [(p['archivo'], 'Las dos barras: lo que entra y lo que sale', '')],
+                               ([(p['archivo'] + '#numPeso', 'El peso de 2026: lo que entra y lo que sale', ''),
+                                 (p['archivo'] + '#nrRenglones', 'Los 16 orígenes del ingreso', '')] +
+                                [(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
+                                if p['archivo'] == 'numeros-se-recauda.html' else []) +
+                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']],
                                p['archivo'])
-                        for p in NUMEROS_PAGINAS])
+                        for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])
     herr = _rejilla([_grupo(h[2], h[3], [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]], h[0])
                      for h in HERRAMIENTAS])
     otros = []
@@ -3356,7 +3561,7 @@ def indice():
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
         ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
-        ('numeros', '💰 Números', 'El presupuesto de 2026 y el recorrido del dinero público, cada parte en su propia página.', numeros),
+        ('numeros', '💰 Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
         ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
         ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la obra de consulta, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),

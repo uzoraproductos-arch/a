@@ -1,4 +1,4 @@
-/* Números › Presupuesto (numeros-presupuesto.html; 10-10-2026, en su página desde el 11-10-2026): «El peso de 2026».
+/* Números › Se recauda (numeros-se-recauda.html; 10-10-2026, fundido con «Presupuesto» el 11-10-2026): «El peso de 2026».
    Dos barras con todo el dinero federal del año: arriba lo que entra
    (Ley de Ingresos) y abajo lo que sale (Presupuesto de Egresos, en los
    tres presupuestos más lo ya comprometido). Al tocar un tramo se abre su
@@ -55,7 +55,9 @@
     var x = busca(sel.lado, sel.id), det = document.getElementById('npDet');
     if (!x || !det) return;
     var filas = (x.filas || []).map(function (f) {
-      var n = f.g ? '<a href="glosario.html#' + esc(f.g) + '">' + esc(f.n) + '</a>' : esc(f.n);
+      /* Cada renglon de lo que entra abre su pagina (11-10-2026). */
+      var n = f.p ? '<a href="' + esc(f.p) + '">' + esc(f.n) + ' ➔</a>' :
+        f.g ? '<a href="glosario.html#' + esc(f.g) + '">' + esc(f.n) + '</a>' : esc(f.n);
       var v = f.pib != null ? num(f.pib, 1) + ' pts. del PIB' : (modo === 'cien' ? cien(f.v) : mdp(f.v));
       var w = f.pib != null ? null : Math.max(0.8, f.v / x.v * 100);
       return '<li><span class="np-det-n">' + n + '</span><b>' + v + '</b>' +
@@ -90,4 +92,50 @@
   });
   pinta();
   window.addEventListener('resize', pintaBarras);
+})();
+
+/* Los 16 orígenes del ingreso (numeros-se-recauda.html, 11-10-2026): el
+   contador. Los renglones arrancan en cero; «Contabilizar» los lleva a su
+   cifra de la Ley de Ingresos y el mismo botón los regresa a cero. Las
+   cifras vienen en data-v, data-w y data-pct, escritas por
+   herramientas/apartados.py (numeros_renglones()). */
+(function () {
+  'use strict';
+  var lista = document.getElementById('nrLista'), btn = document.getElementById('nrContar');
+  var estado = document.getElementById('nrEstado');
+  if (!lista || !btn) return;
+  var filas = Array.prototype.slice.call(lista.querySelectorAll('.nr-fila'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lleno = false, anim = null;
+  function num(v, d) { return v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function pinta(t) {
+    filas.forEach(function (f) {
+      var v = parseFloat(f.getAttribute('data-v')), w = parseFloat(f.getAttribute('data-w')), p = parseFloat(f.getAttribute('data-pct'));
+      f.querySelector('.nr-relleno').style.width = (w * t).toFixed(2) + '%';
+      f.querySelector('.nr-v').textContent = '$' + num(v * t, 1) + ' mdp';
+      f.querySelector('.nr-pct').textContent = num(p * t, 1) + '%';
+    });
+  }
+  function ceros() {
+    if (anim) cancelAnimationFrame(anim);
+    lleno = false; pinta(0); lista.classList.add('nr-ceros');
+    btn.textContent = '▶ Contabilizar'; btn.setAttribute('aria-pressed', 'false');
+    if (estado) estado.textContent = 'Los 16 renglones están en ceros.';
+  }
+  function contar() {
+    lleno = true; lista.classList.remove('nr-ceros');
+    btn.textContent = '↺ Reiniciar en ceros'; btn.setAttribute('aria-pressed', 'true');
+    if (estado) estado.textContent = 'Contabilizado: cada renglón con su cifra de la Ley de Ingresos 2026.';
+    if (reduce) { pinta(1); return; }
+    var t0 = null, dur = 1800;
+    function paso(ts) {
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / dur);
+      pinta(1 - Math.pow(1 - t, 3));
+      if (t < 1) anim = requestAnimationFrame(paso);
+    }
+    anim = requestAnimationFrame(paso);
+  }
+  btn.addEventListener('click', function () { if (lleno) ceros(); else contar(); });
+  ceros();
 })();
