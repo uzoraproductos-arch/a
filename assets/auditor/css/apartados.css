@@ -1006,6 +1006,26 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
   .herr-paso-nombre { font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { .herr-paso { transition: none; } .herr-paso:hover { transform: none; } }
+/* El bot interno del Modo Inspector, aparte de sus ocho aplicaciones (11-10-2026). */
+.herr-bot {
+  --tarjeta: #4a515c; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px;
+  padding: 20px 22px; border-radius: 16px; color: #1c2a44; text-decoration: none;
+  background: linear-gradient(100deg, #eef0f3 0%, #ffffff 60%); border: 1px solid var(--civ-gris-borde); border-left: 6px solid var(--tarjeta);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.herr-bot:hover, .herr-bot:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(11, 42, 99, 0.12); }
+.herr-bot-logo { display: grid; place-items: center; width: 76px; height: 76px; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14); }
+.herr-bot-logo img { width: 62px; height: auto; }
+.herr-bot-tx { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.herr-bot .herr-paso-frase, .herr-bot .herr-paso-accion { color: var(--tarjeta); }
+.herr-cab-ico img { width: 78%; height: auto; display: block; }
+@media (max-width: 640px) {
+  .herr-bot { grid-template-columns: auto 1fr; gap: 10px 14px; padding: 16px; }
+  .herr-bot-logo { width: 56px; height: 56px; }
+  .herr-bot-logo img { width: 46px; }
+  .herr-bot .herr-paso-accion { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .herr-bot { transition: none; } .herr-bot:hover { transform: none; } }
 
 .herr-modulo { margin: 0; border-radius: 16px; }
 .herr-modulo .apartado-visor-marco { height: calc(100vh - 140px); }

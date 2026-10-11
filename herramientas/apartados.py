@@ -638,7 +638,7 @@ HERRAMIENTAS = [
      'Dónde quedó el dinero que nadie ha podido explicar',
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
-     ' Y si un caso necesita ir más a fondo, en el módulo de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.',
+     ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.',
      'verificador', [
          ('inspasf', '🏛️', 'Qué encontró la ASF', 'El gasto de 2024',
           'Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.'),
@@ -684,7 +684,15 @@ HERRAMIENTAS = [
 # Megaobras, dorado para la Calculadora y gris para el Modo Inspector, y las
 # tarjetas de la pestana Herramientas se quedan sin icono).
 # (singular, plural, articulo del plural)
-HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las')}
+HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las')}
+# Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
+# 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus ocho
+# aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
+# (herramientas/asistente.py).
+HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las ocho aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
+             'El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado.')
+LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
 HERR_ICONO_CAB = {'ambiente', 'obras', 'calculadora', 'inspector'}
 
 
@@ -755,6 +763,7 @@ def herramienta(h, n):
             '            <span class="herr-paso-accion">Abrir ➔</span>\n'
             '          </a></li>' % (rubro, modulo_archivo(archivo, clave), i, ico, frase, nombre, desc))
     ruta = ('<ol class="herr-ruta">\n%s\n        </ol>' % '\n'.join(pasos))
+    division = HERR_DIVISION.get(rubro)
     return {
         'archivo': archivo,
         'menu': titulo,
@@ -771,11 +780,23 @@ def herramienta(h, n):
         # Las pestanas viejas (#pulso, #inspentes...) llevan a su pagina.
         'hash_a_pagina': dict((t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas),
         'secciones': [{
-            'id': 'modulos', 'titulo': '%s %d %s' % (pal[2], len(temas), pal[1]), 'sin_cab': False,
-            'texto': ('Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.' if pal[2] == 'Las' else
+            'id': 'modulos', 'titulo': ('%s · %s %d %s' % (division[0], pal[2].lower(), len(temas), pal[1])) if division else
+                                       '%s %d %s' % (pal[2], len(temas), pal[1]), 'sin_cab': False,
+            'texto': division[1] if division else
+                     ('Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.' if pal[2] == 'Las' else
                       'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.'),
             'tarjetas': [], 'bloque': ruta,
-        }],
+        }] + ([{
+            'id': 'pregunta', 'titulo': 'Pregúntale al Auditor · el bot interno', 'sin_cab': False,
+            'texto': 'Una herramienta aparte: en lugar de recorrer una investigación, le preguntas lo que quieras y te contesta con una nota técnica sellada.',
+            'tarjetas': [], 'bloque': (
+                '<a class="herr-bot" href="%s">\n'
+                '          <span class="herr-bot-logo" aria-hidden="true">%s</span>\n'
+                '          <span class="herr-bot-tx"><span class="herr-paso-frase">%s</span><span class="herr-paso-nombre">%s</span>'
+                '<span class="herr-paso-desc">%s</span></span>\n'
+                '          <span class="herr-paso-accion">Preguntar ➔</span>\n'
+                '        </a>' % (ASISTENTE[0], LOGO_IMG, ASISTENTE[2], ASISTENTE[1], ASISTENTE[3])),
+        }] if rubro == 'inspector' else []),
         'pie_extra': herr_otras(archivo),
     }
 
@@ -813,10 +834,10 @@ def herramienta_modulo(h, n, i, bloque=None):
              '          <div class="apartado-visor-cuerpo">\n'
              '            <p class="apartado-visor-carga" role="status">⏳ Cargando %s con sus cifras y fuentes…</p>\n'
              '            <iframe class="apartado-visor-marco" title="%s" data-modulo="%s&amp;visor=1"></iframe>\n'
-             '            <noscript><p>Este módulo necesita JavaScript. <a href="%s">Ábrelo en el auditor</a>.</p></noscript>\n'
+             '            <noscript><p>%s necesita JavaScript. <a href="%s">Ábrelo en el auditor</a>.</p></noscript>\n'
              '          </div>\n'
              '          <div class="herr-modulo-pie"><a href="%s">⤢ Abrir en el auditor completo</a></div>\n'
-             '        </div>' % (rubro, carga, esc_attr(nombre), url, url, url))
+             '        </div>' % (rubro, carga, esc_attr(nombre), url, 'Esta aplicación' if pal[2] == 'Las' else 'Este módulo', url, url))
     return {
         'archivo': modulo_archivo(archivo, clave),
         'menu': nombre,
@@ -836,6 +857,29 @@ def herramienta_modulo(h, n, i, bloque=None):
             'id': 'modulo', 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco,
         }],
         'pie_extra': navegacion + '\n\n      ' + herr_otras(archivo),
+    }
+
+
+def herramienta_asistente(bloque):
+    """Pagina del bot interno del Modo Inspector (11-10-2026): no es una de
+    las ocho aplicaciones, es la segunda division de la herramienta."""
+    h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
+    archivo, rubro, icono, titulo = h[:4]
+    nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
+           '        <div class="herr-mod-pasos">\n'
+           '          <a class="herr-mod-paso ant" href="%s"><small>← Volver al índice de</small><b>%s %s</b></a>\n'
+           '          <a class="herr-mod-paso sig" href="%s"><small>Grandes investigaciones · aplicación 1</small><b>%s %s</b></a>\n'
+           '        </div>\n      </nav>' % (archivo, icono, titulo, modulo_archivo(archivo, h[7][0][0]), h[7][0][1], h[7][0][2]))
+    return {
+        'archivo': ASISTENTE[0], 'menu': ASISTENTE[1], 'menu_archivo': 'herramientas.html',
+        'padre': ('herramientas.html', 'Herramientas'), 'padre2': (archivo, titulo),
+        'icono': '💬', 'titulo': ASISTENTE[1],
+        'lema': '%s · el bot interno' % titulo, 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
+        'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
+        'fondo': HERR_IMG[rubro], 'rubro': rubro,
+        'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        'estilos': ['asistente.css'], 'scripts': ['asistente-base.js', 'asistente.js'],
+        'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
     }
 
 
@@ -4069,6 +4113,13 @@ def generar(sello=None):
     import pendientes
     if auditorias.generar(sello) or estado_cuenta.generar(sello) or pendientes.generar(sello):
         return 1
+    # El bot interno del Modo Inspector: su base se arma con las paginas ya
+    # escritas (herramientas/asistente.py, 11-10-2026).
+    import asistente
+    cuenta = asistente.escribir_base()
+    texto = pagina(herramienta_asistente(asistente.pagina(cuenta)), sello).replace('\r\n', '\n').replace('\n', '\r\n')
+    open(os.path.join(RAIZ, asistente.ARCHIVO), 'wb').write(texto.encode('utf-8'))
+    print('asistente: %s con %d fichas %s' % (asistente.ARCHIVO, sum(cuenta.values()), cuenta))
     import sitemap
     return expedientes.generar(sello) or sitemap.generar(sello)
 
