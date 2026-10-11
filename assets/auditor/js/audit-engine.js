@@ -5584,7 +5584,7 @@
     verificador: {
       n: 4, icono: '🔍', titulo: 'Modo Inspector',
       subtitulo: 'Dónde quedó el dinero que nadie ha podido explicar',
-      texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
+      texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos. Y si un caso necesita ir más a fondo, en el módulo de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.',
       /* Desde el 09-10-2026 el menu «Busca y verifica» vive aqui: los temas
          4 a 6 son sus herramientas (ver el indice en dos grupos del modulo). */
       temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'expedientes.html'],

@@ -623,7 +623,8 @@ HERRAMIENTAS = [
     ('herramienta-inspector.html', 'inspector', '🔍', 'Modo Inspector',
      'Dónde quedó el dinero que nadie ha podido explicar',
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
-     '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
+     '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
+     ' Y si un caso necesita ir más a fondo, en el módulo de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.',
      'verificador', [
          ('inspasf', '🏛️', 'Qué encontró la ASF', 'El gasto de 2024',
           'Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.'),

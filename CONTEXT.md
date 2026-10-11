@@ -671,6 +671,8 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Modo Inspector: su presentación menciona Servicios (11-10-2026, sello 20261011g).** A pedido del autor, la presentación del Modo Inspector suma una frase: «Y si un caso necesita ir más a fondo, en el módulo de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.». Va en `HERRAMIENTAS` (apartados.py) y en `PROEMIOS` de `assets/auditor/js/audit-engine.js`, que deben decir lo mismo. La copia congelada de `assets/js` no se tocó.
+
 **«Servicios» pasa de Participa al Modo Inspector (11-10-2026, sin sello: no toca `assets/`).** A pedido del autor, la pestaña «Servicios» de Participa se quitó y su contenido es el módulo 8 del Modo Inspector (`HERRAMIENTAS`, tema `servicios.html`). La página `servicios.html` conserva su nombre para no romper enlaces y cuelga de Herramientas › Modo Inspector. Trae todo lo que tenía: los cinco servicios, cómo trabajamos, precio, política de independencia y formulario. También suma la otra tarjeta de la pestaña, el Pase del Auditor Cívico, y al pie lleva «Las otras herramientas». `participa.html#servicios` redirige a `servicios.html`. Participa queda con Ágora, Garantías y Comunidad, y el índice general ya no lista Servicios bajo Participa: aparece entre los módulos del Modo Inspector.
 
 **«Presupuesto», solo tarjetas, sin saltos al pie (11-10-2026, sin sello: no toca `assets/`).** A pedido del autor, la portada `numeros-presupuesto.html` ya no lleva «← Volver a Números» ni «Siguiente parte → Gasto público»: quedan sus cinco tarjetas y el pie general. Las páginas de cada tarjeta y de los 16 renglones conservan su anterior y siguiente.
