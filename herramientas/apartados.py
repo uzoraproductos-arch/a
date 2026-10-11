@@ -317,9 +317,9 @@ APARTADOS = [
         'secciones': [
             {
                 'id': 'origen',
-                'pestana': ('💵', '1 · Se recauda', 'De dónde sale el dinero'),
+                'pestana': ('💵', '1 · Presupuesto', 'Cuánto es y de dónde sale'),
                 'num': 1,
-                'titulo': 'Se recauda: de dónde sale el dinero',
+                'titulo': 'Presupuesto: cuánto dinero es y de dónde sale',
                 'texto': ('Todo el dinero federal de 2026 en dos barras: arriba lo que entra, abajo lo que sale. Después, los 16 '
                           'orígenes que autoriza la Ley de Ingresos, renglón por renglón: impuestos, cuotas, ventas de las '
                           'empresas del Estado y deuda. Cada uno tiene su propia página.'),
@@ -339,39 +339,37 @@ APARTADOS = [
                 ],
             },
             {
-                'id': 'decide',
-                'pestana': ('🏛️', '2 · Se aprueba', 'Quién lo decide'),
-                'num': 2,
-                'titulo': 'Se aprueba: quién lo decide',
-                'texto': 'El Congreso autoriza los ingresos y la deuda; la Cámara de Diputados aprueba el gasto. Y los Poderes también cuestan.',
-                'ayer': ('El capítulo 5 explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77).',
-                         'Las facultades siguen en los artículos 73 y 74 de la Constitución: la fracción IV del 74 da a los diputados la aprobación anual del Presupuesto de Egresos. El Distrito Federal es hoy la <b>Ciudad de México</b>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016.'),
-                'tarjetas': [
-                    ('⚖️', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', ir('poderes'), None, 'dinero'),
-                    ('🎛️', 'Reparte tú el presupuesto', 'Ponte en el lugar de la Cámara: arranca en $0, reparte los $10.19 billones y compáralo con lo aprobado.', 'simulador-presupuesto.html', None, 'calculadora'),
-                ],
-            },
-            {
+                # «Se aprueba» y «Se gasta: los tres presupuestos» se fundieron
+                # en «Gasto público» (pedido del autor, 11-10-2026): primero
+                # quien lo aprueba, luego en que se va.
                 'id': 'gasta',
-                'pestana': ('🧩', '3 · Se gasta', 'Los tres presupuestos'),
-                'num': 3,
-                'titulo': 'Se gasta: los tres presupuestos',
-                'texto': 'El Presupuesto de Egresos se lee en tres grandes renglones: lo que el Estado necesita para funcionar, lo que mueve al país y lo que se invierte en las personas. Y aparte, lo que ya está comprometido.',
-                'ayer': ('«Presupuesto y gasto público» (p. 97) reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y la sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
-                         'Esa ley fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
+                'pestana': ('🏛️', '2 · Gasto público', 'Quién lo aprueba y en qué se va'),
+                'num': 2,
+                'titulo': 'Gasto público: quién lo aprueba y en qué se va',
+                'texto': ('La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
+                          'Aquí se lee en sus tres grandes renglones: lo que el Estado necesita para funcionar, lo que mueve al país '
+                          'y lo que se invierte en las personas; y aparte, lo que ya está comprometido antes de empezar. Abajo, '
+                          'el simulador para repartirlo tú y cada vista del gasto en su propia página.'),
+                'ayer': ('El capítulo 5 explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77). El capítulo 7, en «Presupuesto y gasto público» (p. 97), reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y su sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
+                         'Las facultades siguen en los artículos 73 y 74 de la Constitución: la fracción IV del 74 da a los diputados la aprobación anual del Presupuesto de Egresos. El Distrito Federal es hoy la <b>Ciudad de México</b>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016. La ley de 1976 fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
                 'bloque': '',
+                # Las vistas del motor abren su pagina de modulo
+                # (NUMEROS_MODULOS); las que son herramientas van a su
+                # pagina en Herramientas, sin duplicarlas aqui.
                 'tarjetas': [
-                    ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', ir('presupuesto', 'eb-egresos'), None, 'dinero'),
-                    ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gasto programable, en un termostato.', ir('presupuesto', 'eb-salud'), None, 'dinero'),
-                    ('🏗️', 'Inversión pública y megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA.', ir('megaobras'), None, 'obras'),
-                    ('🌎', 'Costo ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027.', ir('ambiente'), None, 'ambiente'),
-                    ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', ir('presupuesto', 'eb-ciegos'), None, 'inspector'),
+                    ('🎛️', 'Reparte tú el presupuesto', 'Ponte en el lugar de la Cámara: arranca en $0, reparte los $10.19 billones y compáralo con lo aprobado.', 'simulador-presupuesto.html', None, 'calculadora'),
+                    ('⚖️', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', 'numeros-lo-que-cuestan-los-poderes.html', None, 'dinero'),
+                    ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', 'numeros-ramos-y-dependencias.html', None, 'dinero'),
+                    ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gasto programable, en un termostato.', 'numeros-margen-del-presupuesto.html', None, 'dinero'),
+                    ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', 'numeros-lo-que-la-cifra-no-dice.html', None, 'inspector'),
+                    ('🏗️', 'Inversión pública y megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Es una herramienta: abre en Herramientas.', 'herramienta-megaobras.html', None, 'obras'),
+                    ('🌎', 'Costo ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027. Es una herramienta: abre en Herramientas.', 'herramienta-ambiente.html', None, 'ambiente'),
                 ],
             },
             {
                 'id': 'baja',
-                'pestana': ('📍', '4 · Baja al territorio', 'Estados y municipios'),
-                'num': 4,
+                'pestana': ('📍', '3 · Baja al territorio', 'Estados y municipios'),
+                'num': 3,
                 'titulo': 'Baja al territorio: estados y municipios',
                 'texto': 'El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno recauda.',
                 'ayer': ('El Cuadro 1 del capítulo 7 ya separaba, dentro del Presupuesto de 1994, lo que la Federación destinaba a estados y municipios.',
@@ -384,8 +382,8 @@ APARTADOS = [
             },
             {
                 'id': 'deuda',
-                'pestana': ('📉', '5 · Se paga lo que se debe', 'La deuda, sexenio por sexenio'),
-                'num': 5,
+                'pestana': ('📉', '4 · Se paga lo que se debe', 'La deuda, sexenio por sexenio'),
+                'num': 4,
                 'titulo': 'Se paga lo que se debe: la deuda',
                 'texto': 'La deuda pública de 1994 a la proyección de 2027, sexenio por sexenio. Pulsa «Contabilizar» y mírala crecer.',
                 'ayer': ('La sección 4 del capítulo 7 (p. 104) explica la Ley General de Deuda Pública y su Gráfica 1 sigue la deuda externa de 1988 a 1994, en dólares.',
@@ -399,8 +397,8 @@ APARTADOS = [
             },
             {
                 'id': 'revisa',
-                'pestana': ('🔍', '6 · Se revisa', 'Quién rinde cuentas'),
-                'num': 6,
+                'pestana': ('🔍', '5 · Se revisa', 'Quién rinde cuentas'),
+                'num': 5,
                 'titulo': 'Se revisa: quién rinde cuentas',
                 'texto': 'Al año siguiente el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. Aquí está lo que se gastó de verdad, lo que quedó por aclarar y el balance de todo el recorrido.',
                 'tarjetas': [
@@ -3006,28 +3004,43 @@ def numeros_cierre():
 
 
 # Numeros en paginas (pedido del autor, 11-10-2026): la portada es como la
-# del Radar hacendario, tarjetas sin numero y sin descripcion, y cada una
+# del Radar hacendario, tarjetas sin numero, y cada una
 # abre su propia pagina. Eran siete; el mismo dia «Presupuesto» (El peso de
-# 2026) se fundio con «Se recauda» (pedido del autor) y quedan seis.
+# 2026) se fundio con «Se recauda» (pedido del autor), y despues «Se
+# aprueba» y «Se gasta» en «Gasto publico»: quedan cinco, cada una con su
+# descripcion breve, como las de Participa.
 NUMEROS_PARTES = [
-    # (id de la seccion, archivo, icono, nombre de la tarjeta)
-    ('origen', 'numeros-se-recauda.html', '💵', 'Se recauda'),
-    ('decide', 'numeros-se-aprueba.html', '🏛️', 'Se aprueba'),
-    ('gasta', 'numeros-se-gasta.html', '🧩', 'Se gasta: los tres presupuestos'),
-    ('baja', 'numeros-baja-al-territorio.html', '📍', 'Baja al territorio'),
-    ('deuda', 'numeros-la-deuda.html', '📉', 'Se paga lo que se debe'),
-    ('revisa', 'numeros-se-revisa.html', '🔍', 'Se revisa'),
+    # (id de la seccion, archivo, icono, nombre de la tarjeta, descripcion)
+    ('origen', 'numeros-presupuesto.html', '💵', 'Presupuesto', 'Cuánto dinero hay en 2026 y de dónde sale cada peso'),
+    ('gasta', 'numeros-gasto-publico.html', '🏛️', 'Gasto público', 'Quién lo aprueba y en qué se va: los tres presupuestos'),
+    ('baja', 'numeros-baja-al-territorio.html', '📍', 'Baja al territorio', 'Lo que llega a los 32 estados y a los 2,479 municipios'),
+    ('deuda', 'numeros-la-deuda.html', '📉', 'Se paga lo que se debe', 'La deuda pública, sexenio por sexenio'),
+    ('revisa', 'numeros-se-revisa.html', '🔍', 'Se revisa', 'La Cuenta Pública y lo que encontró la Auditoría Superior'),
+]
+# Paginas de Numeros que cambiaron de nombre o se fundieron (11-10-2026).
+NUMEROS_ANTES = [
+    ('numeros-se-recauda.html', 'numeros-presupuesto.html', 'Se recauda',
+     'Ahora se llama «Presupuesto»: las dos barras y los 16 orígenes del ingreso siguen ahí.'),
+    ('numeros-se-aprueba.html', 'numeros-gasto-publico.html', 'Se aprueba',
+     'Se fundió con «Se gasta» en «Gasto público».'),
+    ('numeros-se-gasta.html', 'numeros-gasto-publico.html', 'Se gasta: los tres presupuestos',
+     'Se fundió con «Se aprueba» en «Gasto público».'),
 ]
 NUMEROS_PAGINAS = []
 # ?abrir=eb-bloque: a que direccion de Numeros lleva cada bloque del motor.
 NUMEROS_ABRIR = {}
-# Los bloques del motor que eran tarjetas de «Se recauda» y ahora tienen su
-# pagina de modulo (11-10-2026): (ancla, archivo, icono, nombre, destino).
+# Los bloques del motor que eran tarjetas de «Presupuesto» y de «Gasto
+# publico» y ahora tienen su pagina de modulo (11-10-2026):
+# (ancla, archivo, icono, nombre, destino, parte).
 NUMEROS_MODULOS = [
-    ('eb-cuanto', 'numeros-cuanto-dinero-es.html', '💰', 'Cuánto dinero es', ir('presupuesto', 'eb-cuanto')),
-    ('eb-equivale', 'numeros-a-que-equivale.html', '📏', '¿A qué equivale?', ir('presupuesto', 'eb-equivale')),
-    ('eb-arquitectura', 'numeros-camino-del-dinero.html', '🏛️', 'El camino del dinero, en cuatro etapas', ir('presupuesto', 'eb-arquitectura')),
-    ('proyeccion2027', 'numeros-paquete-2027.html', '📈', 'Paquete Económico 2027', ir('proyeccion2027')),
+    ('eb-cuanto', 'numeros-cuanto-dinero-es.html', '💰', 'Cuánto dinero es', ir('presupuesto', 'eb-cuanto'), 'origen'),
+    ('eb-equivale', 'numeros-a-que-equivale.html', '📏', '¿A qué equivale?', ir('presupuesto', 'eb-equivale'), 'origen'),
+    ('eb-arquitectura', 'numeros-camino-del-dinero.html', '🏛️', 'El camino del dinero, en cuatro etapas', ir('presupuesto', 'eb-arquitectura'), 'origen'),
+    ('proyeccion2027', 'numeros-paquete-2027.html', '📈', 'Paquete Económico 2027', ir('proyeccion2027'), 'origen'),
+    ('poderes', 'numeros-lo-que-cuestan-los-poderes.html', '⚖️', 'Lo que cuestan el Congreso y la Judicatura', ir('poderes'), 'gasta'),
+    ('eb-egresos', 'numeros-ramos-y-dependencias.html', '🏢', 'En qué se va: ramos y dependencias', ir('presupuesto', 'eb-egresos'), 'gasta'),
+    ('eb-salud', 'numeros-margen-del-presupuesto.html', '🌡️', '¿Cuánto margen tiene el presupuesto?', ir('presupuesto', 'eb-salud'), 'gasta'),
+    ('eb-ciegos', 'numeros-lo-que-la-cifra-no-dice.html', '🔦', 'Lo que la cifra grande no dice', ir('presupuesto', 'eb-ciegos'), 'gasta'),
 ]
 # Las tres categorias de impuesto que el art. 1o. de la Ley de Ingresos 2026
 # enumera en $0.0 (el mismo texto que ERARIO_RUBROS_CERO del motor).
@@ -3122,7 +3135,7 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
     ant, sig = (lista[n - 1] if n > 0 else None), (lista[n + 1] if n + 1 < len(lista) else None)
     def paso(y, rot, cls):
         if not y:
-            return '<a class="herr-mod-paso %s" href="numeros-se-recauda.html#nrRenglones"><small>%s</small><b>💵 Los 16 orígenes</b></a>' % (
+            return '<a class="herr-mod-paso %s" href="numeros-presupuesto.html#nrRenglones"><small>%s</small><b>💵 Los 16 orígenes</b></a>' % (
                 cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
         return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, ingreso_archivo(y), rot, y['icono'], y['nombre'])
     chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
@@ -3155,32 +3168,35 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
         desglose)
     return {
         'archivo': archivo, 'menu': x['nombre'], 'menu_archivo': 'sigue-el-dinero.html',
-        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-se-recauda.html', 'Se recauda'),
-        'icono': x['icono'], 'lema': 'Se recauda · Ley de Ingresos 2026',
+        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-presupuesto.html', 'Presupuesto'),
+        'icono': x['icono'], 'lema': 'Presupuesto · Ley de Ingresos 2026',
         'titulo': x['nombreLargo'] if x['nombre'] in x['nombreLargo'] else '%s (%s)' % (x['nombreLargo'], x['nombre']),
         'entrada': re.sub('<[^>]+>', '', x['quePaga']),
-        'estilos': ['numeros.css'], 'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-se-recauda.html'),
+        'estilos': ['numeros.css'], 'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-presupuesto.html'),
         'secciones': [{'id': 'ficha', 'titulo': x['nombre'], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
     }
 
 
-def numeros_modulo(i, tarjetas):
-    """Pagina de modulo de «Se recauda» (11-10-2026): el bloque del motor
-    a lo alto de su contenido, como los modulos de las herramientas."""
-    ancla, archivo, ico, nombre, url = NUMEROS_MODULOS[i]
-    ant = NUMEROS_MODULOS[i - 1] if i > 0 else None
-    sig = NUMEROS_MODULOS[i + 1] if i + 1 < len(NUMEROS_MODULOS) else None
+def numeros_modulo(m, tarjetas):
+    """Pagina de modulo de una parte de Numeros (11-10-2026): el bloque del
+    motor a lo alto de su contenido, como los modulos de las herramientas."""
+    ancla, archivo, ico, nombre, url, parte = m
+    _, parch, pico, pnom = next(r for r in NUMEROS_PARTES if r[0] == parte)[:4]
+    hermanos = [x for x in NUMEROS_MODULOS if x[5] == parte]
+    i = hermanos.index(m)
+    ant = hermanos[i - 1] if i > 0 else None
+    sig = hermanos[i + 1] if i + 1 < len(hermanos) else None
     def paso(m, rot, cls):
         if not m:
-            return '<a class="herr-mod-paso %s" href="numeros-se-recauda.html"><small>%s</small><b>💵 Se recauda</b></a>' % (
-                cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
+            return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (
+                cls, parch, '← Volver a' if cls == 'ant' else 'Terminaste · volver a', pico, pnom)
         return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, m[1], rot, m[2], m[3])
     chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
-        ' actual' if m[1] == archivo else '', m[1], ' aria-current="page"' if m[1] == archivo else '', m[2], m[3]) for m in NUMEROS_MODULOS)
-    nav = ('<nav class="herr-mod-nav" aria-label="Más de Se recauda">\n'
+        ' actual' if m[1] == archivo else '', m[1], ' aria-current="page"' if m[1] == archivo else '', m[2], m[3]) for m in hermanos)
+    nav = ('<nav class="herr-mod-nav" aria-label="Más de %s">\n'
            '        <div class="herr-mod-pasos">\n          %s\n          %s\n        </div>\n'
-           '        <span class="herr-otras-tit">Más de «Se recauda»</span>\n'
-           '        <div class="herr-mod-chips">%s</div>\n      </nav>' % (paso(ant, '← Anterior', 'ant'), paso(sig, 'Siguiente →', 'sig'), chips))
+           '        <span class="herr-otras-tit">Más de «%s»</span>\n'
+           '        <div class="herr-mod-chips">%s</div>\n      </nav>' % (pnom, paso(ant, '← Anterior', 'ant'), paso(sig, 'Siguiente →', 'sig'), pnom, chips))
     marco = ('<div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-dinero)">\n'
              '          <div class="apartado-visor-cuerpo">\n'
              '            <p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>\n'
@@ -3191,9 +3207,9 @@ def numeros_modulo(i, tarjetas):
     tarjeta = next((t for t in tarjetas if t[3] == archivo), None)
     return {
         'archivo': archivo, 'menu': nombre, 'menu_archivo': 'sigue-el-dinero.html',
-        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-se-recauda.html', 'Se recauda'),
-        'icono': ico, 'lema': 'Se recauda', 'titulo': nombre, 'entrada': tarjeta[2] if tarjeta else nombre,
-        'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-se-recauda.html'),
+        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': (parch, pnom),
+        'icono': ico, 'lema': pnom, 'titulo': nombre, 'entrada': tarjeta[2] if tarjeta else nombre,
+        'pie_extra': nav + '\n\n      ' + numeros_nav(parch),
         'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco}],
     }
 
@@ -3214,6 +3230,7 @@ def numeros_preparar():
     base = auditorias.db()
     d = numeros_datos(base)
     pag = {r[0]: r for r in NUMEROS_PARTES}
+    pag['decide'] = pag['gasta']  # «Se aprueba» vive en «Gasto publico»
     for x in d['entra'] + d['sale']:
         # «Ver ...» de cada tramo lleva a su pagina; los de lo que entra,
         # a sus renglones, en la misma pagina.
@@ -3235,7 +3252,7 @@ def numeros_preparar():
     pasos['origen']['bloque'] = numeros_renglones(base, d)
     # La nota del libro va al pie de cada paso, no en la portada.
     comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
-    for pid, archivo, ico, nombre in NUMEROS_PARTES:
+    for pid, archivo, ico, nombre, desc in NUMEROS_PARTES:
         p = {'archivo': archivo, 'menu': nombre, 'menu_archivo': 'sigue-el-dinero.html',
              'padre': ('sigue-el-dinero.html', 'Números'), 'icono': ico, 'lema': 'Números',
              'estilos': ['numeros.css'], 'pie_extra': numeros_nav(archivo)}
@@ -3243,6 +3260,8 @@ def numeros_preparar():
         sec.pop('num', None)
         p.update(comun)
         p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': True, 'secciones': [sec]})
+        # ?abrir=eb-bloque que llegue aqui (de una pagina vieja) va a su pagina.
+        p['abrir_a_pagina'] = NUMEROS_ABRIR
         if pid == 'origen':
             # «Presupuesto» (El peso de 2026) se fundio aqui (11-10-2026).
             p['antes'] = numeros_peso(d)
@@ -3257,24 +3276,24 @@ def numeros_preparar():
             if m:
                 NUMEROS_ABRIR.setdefault(m.group(1), archivo + '?abrir=' + m.group(1))
         NUMEROS_PAGINAS.append(p)
-    # Lo que era «Presupuesto» y las tarjetas de «Se recauda», a su pagina.
-    NUMEROS_ABRIR['eb-ingresos'] = 'numeros-se-recauda.html#nrRenglones'
-    for i, m in enumerate(NUMEROS_MODULOS):
+    # El desglose del ingreso y las vistas del motor, a su pagina.
+    NUMEROS_ABRIR['eb-ingresos'] = 'numeros-presupuesto.html#nrRenglones'
+    for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
-        NUMEROS_PAGINAS.append(numeros_modulo(i, pasos['origen']['tarjetas']))
+        NUMEROS_PAGINAS.append(numeros_modulo(m, pasos[m[5]]['tarjetas']))
     refs = {r['id']: r for r in base['referencias_legales']}
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
         NUMEROS_PAGINAS.append(ingreso_pagina(x, n, ingresos, total, refs, glosario))
     # La portada: solo las tarjetas, cada una a su pagina.
-    a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], '')} for r in NUMEROS_PARTES]
+    a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, numPeso='numeros-se-recauda.html#numPeso',
-                              presupuesto='numeros-se-recauda.html', ati='herramienta-calculadora.html')
+    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', numPeso='numeros-presupuesto.html#numPeso',
+                              presupuesto='numeros-presupuesto.html', ati='herramienta-calculadora.html')
     a['abrir_a_pagina'] = NUMEROS_ABRIR
-    REDIRECCIONES['numeros-presupuesto.html'] = ('numeros-se-recauda.html', 'Presupuesto',
-                                                 'Se fundió con «Se recauda»: las dos barras están arriba de esa página.')
+    for viejo, nuevo, nombre, texto in NUMEROS_ANTES:
+        REDIRECCIONES[viejo] = (nuevo, nombre, texto)
 
 
 def pagina(a, sello):
@@ -3389,7 +3408,8 @@ def pagina(a, sello):
         # ?abrir=eb-bloque (Numeros, 11-10-2026): la tarjeta de ese bloque ya
         # vive en otra pagina; se manda alla con el mismo ?abrir.
         redirige += ('\n  <script>(function () { var m = %s, b = new URLSearchParams(location.search).get(\'abrir\'); '
-                     'if (b && m[b]) location.replace(m[b]); })();</script>' % json.dumps(a['abrir_a_pagina']))
+                     'if (b && m[b]) location.replace(m[b]); })();</script>' % json.dumps(
+                         {k: v for k, v in a['abrir_a_pagina'].items() if not v.startswith(a['archivo'] + '?')}))
 
     return '''<!DOCTYPE html>
 <!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
@@ -3457,6 +3477,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'En Números, «Se aprueba» y «Se gasta» son una sola página, «Gasto público»: quién aprueba el presupuesto, los tres presupuestos (del Estado, nacional y social) y lo ya comprometido, con el simulador para repartirlo tú. Lo que cuestan los Poderes, los ramos y dependencias, el margen del presupuesto y lo que la cifra grande no dice abren cada uno en su página; megaobras y costo ambiental llevan a Herramientas. «Se recauda» ahora se llama «Presupuesto», y cada tarjeta de Números trae su descripción breve.'),
     ('11-10-2026', 'En Números, «Presupuesto» y «Se recauda» son una sola página: arriba, las dos barras de lo que entra y lo que sale; abajo, los 16 orígenes del ingreso con su contador. Cada renglón (ISR, IVA, IEPS, cuotas, deuda...) tiene su propia página con qué grava, su ley, su efecto jurídico y su desglose; y Cuánto dinero es, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027 abren en la suya.'),
     ('11-10-2026', 'Números se abre en siete páginas, como el Radar hacendario: el presupuesto completo (de dónde viene y a dónde va cada peso), se recauda, se aprueba, se gasta con los tres presupuestos, baja al territorio, se paga lo que se debe y se revisa. Cada tarjeta lleva a la suya.'),
     ('10-10-2026', 'Números, reorganizado: un solo recorrido de seis pasos (se recauda, se aprueba, se gasta, baja al territorio, se paga la deuda y se revisa). Arriba, «El peso de 2026», dos barras interactivas con todo lo que entra y todo lo que sale, en pesos o por cada $100; en el paso 3, los tres presupuestos: del Estado, nacional y social. La nota del libro pasa al pie.'),
@@ -3523,7 +3544,7 @@ def indice():
                                ([(p['archivo'] + '#numPeso', 'El peso de 2026: lo que entra y lo que sale', ''),
                                  (p['archivo'] + '#nrRenglones', 'Los 16 orígenes del ingreso', '')] +
                                 [(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
-                                if p['archivo'] == 'numeros-se-recauda.html' else []) +
+                                if p['archivo'] == 'numeros-presupuesto.html' else []) +
                                [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']],
                                p['archivo'])
                         for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])
@@ -3595,7 +3616,7 @@ def redireccion(destino, nombre, texto):
   <meta name="robots" content="noindex">
   <meta http-equiv="refresh" content="0; url={destino}">
   <link rel="icon" href="{favicon}">
-  <script>window.location.replace('{url}');</script>
+  <script>(function () {{ var u = '{url}'; if (!/[?#]/.test(u)) u += location.search + location.hash; window.location.replace(u); }})();</script>
 </head>
 <body style="font-family:system-ui,sans-serif;background:#ffffff;color:#1c2a44;padding:24px">
   <p><b>{nombre}</b> cambió de lugar. {texto} <a href="{destino}">Ir ahora ➔</a></p>
