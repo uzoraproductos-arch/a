@@ -74,6 +74,19 @@
 .pa-huella code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; word-break: break-all; background: #eef1f7; border-radius: 4px; padding: 1px 4px; }
 .pa-copiar { font: 700 13px/1 Inter, system-ui, sans-serif; cursor: pointer; border: 1px solid #c9d2e3; background: #ffffff; color: #1c2a44; border-radius: 999px; padding: 8px 14px; min-height: 36px; }
 
+
+/* Clasificación, pendientes y aviso de mejora continua */
+.pa-op { display: block; margin-top: 6px; font-size: 12px; line-height: 1.4; color: #5a4a12; }
+.pa-cifras .pa-op b { display: inline; margin: 0; font: 800 12px/1.4 Inter, system-ui, sans-serif; color: #5a4a12; }
+.pa-pend { margin: 0 0 12px; padding: 12px 14px; border-radius: 10px; background: #fff7ec; border: 1px solid #f0d9b5; font-size: 14px; line-height: 1.5; color: #4a3a12; }
+.pa-pend p { margin: 0 0 6px; }
+.pa-pend p:last-child { margin: 0; }
+.pa-pend a { color: #1a56b8; overflow-wrap: anywhere; }
+.pa-clas { margin: 0 0 12px; padding: 10px 14px; border-radius: 10px; background: #f6f8fc; border: 1px solid #dfe5f0; font-size: 13px; line-height: 1.5; color: #33415c; }
+.pa-clas ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 6px; }
+.pa-clas .est-chip { margin-right: 4px; }
+.pa-beta { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #eef3fb; border: 1px solid #cfdcf2; font-size: 13.5px; color: #1c2a44; }
+.pa-beta a { color: #1a56b8; }
 @media (max-width: 900px) {
   .pa { grid-template-columns: 1fr; }
 }

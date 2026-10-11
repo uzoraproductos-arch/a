@@ -691,7 +691,7 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # (herramientas/asistente.py).
 HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las ocho aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
-             'El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado.')
+             'El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado. Está en mejora continua: crece con la plataforma.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
 HERR_ICONO_CAB = {'ambiente', 'obras', 'calculadora', 'inspector'}
 

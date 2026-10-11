@@ -16,7 +16,8 @@
   var LOGO = 'assets/auditor/img/logo-auditavision.svg';
   var TIPO = {
     glosario: ['📘', 'Término del glosario'], expediente: ['📂', 'Expediente de caso'], entidad: ['🗺️', 'Ficha de entidad'],
-    fuente: ['📜', 'Fuente oficial'], pendiente: ['⏳', 'Dato pendiente'], pagina: ['🧭', 'Página de la plataforma']
+    fuente: ['📜', 'Fuente oficial'], pendiente: ['⏳', 'Dato pendiente'], pagina: ['🧭', 'Página de la plataforma'],
+    cargo: ['💼', 'Remuneración de un cargo'], seccion: ['📍', 'Sección de la plataforma']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -46,8 +47,8 @@
   var F = B.fichas, df = {};
   F.forEach(function (f) {
     f._tit = {}; f._cue = {};
-    fichas(f.tit).forEach(function (w) { f._tit[w] = 1; });
-    fichas(f.txt + ' ' + (f.k || '') + ' ' + (f.nota || '')).forEach(function (w) { f._cue[w] = 1; });
+    fichas(f.tit.replace(/^Cuánto gana: /, '')).forEach(function (w) { f._tit[w] = 1; });
+    fichas(f.txt + ' ' + (f.k || '') + ' ' + (f.nota || '') + ' ' + (f.pend ? f.pend.pq + ' ' + f.pend.quien : '')).forEach(function (w) { f._cue[w] = 1; });
     f._plano = plano(f.tit.split(' (')[0]);
     var abr = /\(([^)]{2,12})\)\s*$/.exec(f.tit);
     f._abr = abr ? plano(abr[1]) : '';
@@ -64,6 +65,7 @@
     if (/\b(donde|en que pagina|como llego)\b/.test(n)) return 'pagina';
     if (/\b(falta|faltan|pendiente|no hay|por que no|no han publicado|no se sabe)\b/.test(n)) return 'pendiente';
     if (/\b(cuanto debe|deuda de|debe )\b/.test(n)) return 'entidad';
+    if (/\b(gana|ganan|sueldo|salario|cobra|cobran|percibe)\b/.test(n)) return 'cargo';
     if (/\b(ley|articulo|decreto|codigo|reglamento)\b/.test(n)) return 'fuente';
     return '';
   }
@@ -87,9 +89,16 @@
       /* El título completo dentro de la pregunta («ramo 33», «Jalisco») pesa mucho. */
       if (f._plano.trim().length > 2 && pq.indexOf(f._plano) >= 0) s += 12;
       else if (f._abr && pq.indexOf(f._abr) >= 0) s += f._sigla ? 14 : 8;
-      s *= 0.6 + 0.4 * tocadas / ws.length;
+      s *= 0.4 + 0.6 * tocadas / ws.length;
+      /* Entre dos títulos que tocan lo mismo, gana el que no trae palabras de más («diputado» antes que «asesor de diputados»). */
+      var nt = Object.keys(f._tit).length, enTit = ws.filter(function (w) { return f._tit[w]; }).length;
+      if (nt) s *= 0.8 + 0.2 * enTit / nt;
       if (quiere && f.t === quiere) s *= 1.5;
+      /* Un cargo de apoyo (asesor, secretario de estudio, proyectista) solo si se pregunta por él. */
+      if (f.t === 'cargo' && /asesor|estudio y cuenta|proyectista|subsecretari/i.test(f.tit) && !/asesor|estudio|proyectista|subsecretari/.test(norm(q))) s *= 0.6;
       if (f.t === 'pagina' && quiere !== 'pagina') s *= 0.7;
+      /* Si la ficha contiene todas las palabras de la pregunta, responde mejor que una que solo nombra una. */
+      if (ws.length >= 2 && tocadas === ws.length) s *= 1.25;
       /* El título de una fuente es su cita completa (autor, fecha, editorial): pesa menos si no se pidió una ley. */
       if (f.t === 'fuente' && quiere !== 'fuente') s *= 0.5;
       res.push({ f: f, s: s });
@@ -118,7 +127,7 @@
   }
   /* La huella es de la ficha, no de la pregunta: la misma ficha da el mismo folio. */
   function huella(f) {
-    var obj = { t: f.t, tit: f.tit, txt: f.txt, ci: f.ci || [], fu: f.fu || [], ir: f.ir, v: selloSitio() };
+    var obj = { t: f.t, tit: f.tit, txt: f.txt, ci: f.ci || [], pend: f.pend || null, fu: f.fu || [], ir: f.ir, v: selloSitio() };
     if (!window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve(null);
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(obj))).then(function (b) {
       return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
@@ -132,11 +141,24 @@
   function nota(q, f, otras) {
     var t = TIPO[f.t] || ['📄', 'Ficha'];
     var ci = (f.ci || []).map(function (c) {
-      return '<li><b>' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) + '</li>';
+      return '<li><b>' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) +
+        (c.op ? '<small class="pa-op"><b>Operación:</b> ' + esc(c.op) + '</small>' : '') + '</li>';
     }).join('');
     var fu = (f.fu || []).map(function (x, i) {
       return '<li><b>F' + (i + 1) + '.</b> ' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.tx) + ' ↗</a>' : esc(x.tx)) + '</li>';
     }).join('');
+    /* La clasificación de la información: por qué cada cifra está como está. */
+    var est = {};
+    (f.ci || []).forEach(function (c) { est[c.e] = 1; });
+    if (f.pend) est.pendiente = 1;
+    var clas = [];
+    if (est.oficial) clas.push('<li>' + chip({ e: 'oficial' }) + ' Tomada tal cual de su documento: la fuente va abajo, con su enlace directo.</li>');
+    if (est.derivado) clas.push('<li>' + chip({ e: 'derivado' }) + ' Calculada con cifras oficiales; la operación va junto a la cifra. Cuando solo hay aproximación, la plataforma da un rango: mínimo y máximo, cada uno de un documento oficial, y su punto medio.</li>');
+    if (est.pendiente) clas.push('<li>' + chip({ e: 'pendiente', p: f.pend && f.pend.id }) + ' No hay documento oficial que lo sostenga: no se estima ni se rellena. Se dice por qué falta, a quién le toca publicarlo y dónde debería estar.</li>');
+    var pend = f.pend ? '<div class="pa-pend">' +
+      '<p><b>Por qué falta:</b> ' + esc(f.pend.pq) + '</p>' +
+      '<p><b>A quién le toca:</b> ' + esc(f.pend.quien) + '</p>' +
+      '<p><b>Dónde debería estar:</b> <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener noreferrer">' + esc(f.pend.donde_tx) + ' ↗</a></p></div>' : '';
     var mas = otras.length ? '<div class="pa-mas"><span>También te puede servir:</span>' + otras.map(function (o) {
       return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(o.tit.split(' (')[0]) + '"><span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ' + esc(o.tit.length > 70 ? o.tit.slice(0, 68) + '…' : o.tit) + '</button>';
     }).join('') + '</div>' : '';
@@ -147,7 +169,8 @@
       '<p class="pa-nota-q"><span>Tu pregunta</span> «' + esc(q) + '»</p>' +
       '<h4><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h4>' +
       (f.txt ? '<p class="pa-nota-tx">' + esc(f.txt) + '</p>' : '') +
-      (ci ? '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (ci ? '<ul class="pa-cifras">' + ci + '</ul>' : '') + pend +
+      (clas.length ? '<div class="pa-clas"><b>Cómo leer estas cifras</b><ul>' + clas.join('') + '</ul></div>' : '') +
       (f.nota ? '<p class="pa-nota-al"><b>Alcance:</b> ' + esc(f.nota) + '</p>' : '') +
       (fu ? '<div class="pa-fuentes"><b>Fuentes</b><ol>' + fu + '</ol></div>' : '') +
       '<p class="pa-ir"><a href="' + esc(f.ir[0]) + '">Ver completo en ' + esc(f.ir[1]) + ' ➔</a></p>' +
@@ -166,7 +189,7 @@
       (cerca.length ? '<div class="pa-mas"><span>Lo más cercano que tengo:</span>' + cerca.map(function (o) {
         return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(o.tit.split(' (')[0]) + '"><span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ' + esc(o.tit.length > 70 ? o.tit.slice(0, 68) + '…' : o.tit) + '</button>';
       }).join('') + '</div>' : '') +
-      '<p class="pa-chico">Prueba con otras palabras, busca en el <a href="indice.html">índice general</a> o en el <a href="glosario.html">glosario</a>. ' +
+      '<p class="pa-chico">Prueba con otras palabras, busca en el <a href="indice.html">índice general</a> o en el <a href="glosario.html">glosario</a>, o revisa el <a href="pendientes.html">Registro de pendientes</a>: ahí está lo que aún no tiene documento oficial y dónde debería estar. ' +
       '¿Crees que la plataforma debería tenerlo? <a href="comunidad.html">Cuéntanos</a>.</p>';
   }
 
