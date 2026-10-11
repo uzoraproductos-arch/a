@@ -124,7 +124,7 @@ def libro_pie(a):
             '<li id="nota-%d" value="%d"><span class="apartado-libro-num">[%d]</span> %s <a href="%s">Ficha en el compendio de fuentes ➔</a>'
             '<br><span class="apartado-notas-por">%s</span></li></ol>'
             '<p class="apartado-notas-glos"><b>Los conceptos de este apartado:</b> %s. '
-            'Búscalos también en el <a href="diccionario.html">Diccionario del gasto público</a>.</p>'
+            'Búscalos también en el <a href="diccionario.html">Diccionario del Erario Público</a>.</p>'
             '</aside>' % (num, num, num, cita, url, a['libro'], glos_))
 
 
@@ -217,7 +217,7 @@ BIBLIOTECA = [
      'Herramientas independientes de fiscalización ciudadana: $79 al mes, menos que dos caguamas.', 'kit'),
 ]
 
-DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte del <a href="diccionario.html">Diccionario del Gasto Público</a>, '
+DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte del <a href="diccionario.html">Diccionario del Erario Público</a>, '
               'la obra de consulta de la plataforma.</p>')
 
 
@@ -242,8 +242,8 @@ def bib_nav(actual):
             e[5], ' aria-current="page"' if e[5] == actual else '', e[1], e[2]) + '\n'.join(
             '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
             % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA if b[5] == e[0]))
-    return ('<nav class="bib-nav" aria-label="Diccionario del Gasto Público">\n'
-            '        <a class="bib-nav-tit" href="diccionario.html">📚 Diccionario del Gasto Público</a>\n'
+    return ('<nav class="bib-nav" aria-label="Diccionario del Erario Público">\n'
+            '        <a class="bib-nav-tit" href="diccionario.html">📚 Diccionario del Erario Público</a>\n'
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(filas))
 
 
@@ -382,13 +382,27 @@ APARTADOS = [
                 'pestana': ('📍', '3 · Baja al territorio', 'Estados y municipios'),
                 'num': 3,
                 'titulo': 'Baja al territorio: estados y municipios',
-                'texto': 'El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno recauda.',
-                'ayer': ('El Cuadro 1 del capítulo 7 ya separaba, dentro del Presupuesto de 1994, lo que la Federación destinaba a estados y municipios.',
-                         'Hoy viaja por dos vías: las <b>participaciones</b> (Ramo 28), de libre uso, y las <b>aportaciones</b> (Ramo 33), etiquetadas por la Ley de Coordinación Fiscal para salud, educación, infraestructura y seguridad.'),
+                'texto': ('El dinero federal llega a los 32 estados y a los 2,479 municipios, y ahí se suma a lo que cada uno '
+                          'recauda. En tres tarjetas: el mapa de lo que recibe cada estado, el circuito de cada uno y el padrón '
+                          'de sus municipios. Cada tarjeta abre su propia página.'),
+                # Desde el 11-10-2026 (pedido del autor) la pagina es solo
+                # tarjetas, como «Presupuesto», y cada una abre su pagina de
+                # modulo (territorio_modulos.py): antes desplegaban el auditor
+                # debajo. La franja «Ayer y hoy» y la nota del libro viven en
+                # el Diccionario, en la pregunta frecuente del Ramo 28 y el
+                # Ramo 33.
+                'mosaico': 'np-mosaico',
+                'bloque': '',
                 'tarjetas': [
-                    ('📍', 'El mapa del gasto federalizado', 'El tramo del gasto que viaja a los 32 estados, sobre el territorio y de mayor a menor.', ir('presupuesto', 'eb-mapa'), None, 'dinero'),
-                    ('🗺️', 'Las 32 entidades: del peso federal al estatal', 'Los tres pisos de la hacienda, participaciones (Ramo 28), aportaciones (Ramo 33) y el circuito de cada estado.', ir('territorio'), None, 'dinero'),
-                    ('🏘️', 'Los 2,479 municipios: predial y transferencias', 'Padrón INEGI EFIPEM con la ficha financiera de cada municipio: predial, participaciones, FORTAMUN y FISMDF.', ir('municipios'), None, 'dinero'),
+                    ('📍', 'El mapa del gasto federalizado', 'Las 32 entidades sobre el mapa, con cinco lentes: lo que reciben por los Ramos 28 y 33, por habitante, su dependencia federal, su deuda y lo que dejó por aclarar la ASF.',
+                     'numeros-mapa-del-gasto-federalizado.html', 'Acuerdo de distribución de los Ramos 28 y 33 (DOF)', 'dinero',
+                     'Cinco lentes y las 32, de mayor a menor'),
+                    ('🗺️', 'Las 32 entidades: del peso federal al estatal', 'Los tres pisos de la hacienda, lo que baja y con qué libertad (Ramos 28, 33 y 25 y convenios) y el circuito de cada estado.',
+                     'numeros-las-32-entidades.html', 'Presupuesto de Egresos 2026 e INEGI', 'dinero',
+                     'Tres pisos, cuatro ramos y el circuito de cada estado'),
+                    ('🏘️', 'Los 2,479 municipios: predial y transferencias', 'FORTAMUN y FISMDF, lo que la ley les garantiza sin cifra, lo que cobran por su cuenta, el punto ciego del artículo 115 y el padrón completo del INEGI, municipio por municipio.',
+                     'numeros-los-municipios.html', 'INEGI, finanzas públicas municipales 2024', 'dinero',
+                     'Sus fondos, su predial y el padrón completo'),
                 ],
             },
             {
@@ -504,8 +518,8 @@ APARTADOS = [
                 # Diccionario del Gasto Publico (decision del autor, 10-10-2026):
                 # una sola pestana con sus dos estantes; cada uno abre su pagina.
                 'id': 'diccionario',
-                'pestana': ('📚', 'Diccionario del Gasto Público', 'Biblioteca hacendaria y fuentes del auditor'),
-                'titulo': '📚 Diccionario del Gasto Público',
+                'pestana': ('📚', 'Diccionario del Erario Público', 'Biblioteca hacendaria y fuentes del auditor'),
+                'titulo': '📚 Diccionario del Erario Público',
                 'texto': ('La obra de consulta de la plataforma, en dos estantes: uno para entender y otro para verificar. '
                           'Cada estante abre su propia página y, dentro, cada apartado tiene la suya. '
                           '<a href="diccionario.html">Ver el Diccionario completo ➔</a>'),
@@ -797,18 +811,19 @@ def herramienta_modulo(h, n, i):
     }
 
 
-# Diccionario del Gasto Publico (decision del autor, 09-10-2026): los
+# Diccionario del Gasto Publico (decision del autor, 09-10-2026; desde el
+# 11-10-2026 se llama «Diccionario del Erario Publico», pedido del autor): los
 # enlaces que llevaban a la Enciclopedia (congelada) llegan aqui. Desde el
 # 09-10-2026 (tarde) cada apartado tiene su pagina ligera; ya no abre la
 # portada en un marco. Las anclas viejas (#glosario, #fuentes, #marco-legal,
 # #preguntas) mandan a la pagina nueva (ver 'hash_a_pagina').
 DICCIONARIO = {
     'archivo': 'diccionario.html',
-    'menu': 'Diccionario del Gasto Público',
+    'menu': 'Diccionario del Erario Público',
     'menu_archivo': 'aprende.html',
     'padre': ('aprende.html#diccionario', 'Aprende'),
     'icono': '📚',
-    'titulo': 'Diccionario del Gasto Público',
+    'titulo': 'Diccionario del Erario Público',
     'lema': 'Las palabras, las leyes y las fuentes del erario',
     'entrada': ('La obra de consulta de la plataforma, en dos estantes. La <b>Biblioteca hacendaria</b> es para entender: '
                 'el glosario, el marco legal con su texto vigente y las preguntas frecuentes. Las <b>Fuentes del auditor</b> son '
@@ -831,7 +846,7 @@ def pagina_estante(e):
     return {
         'archivo': e[5], 'menu': e[2], 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html#diccionario', 'Aprende'),
-        'padre2': ('diccionario.html', 'Diccionario del Gasto Público'),
+        'padre2': ('diccionario.html', 'Diccionario del Erario Público'),
         'icono': e[1], 'titulo': e[2], 'lema': e[3], 'entrada': e[4] + ' Cada apartado abre su propia página.',
         'secciones': [{'id': 'apartados', 'titulo': 'Los apartados', 'texto': '', 'sin_cab': True,
                        'tarjetas': bib_estante(e[0])}],
@@ -2670,7 +2685,7 @@ GLOSARIO = {
     'menu': 'Glosario',
     'menu_archivo': 'aprende.html',
     'padre': ('aprende.html#diccionario', 'Aprende'),
-    'padre2': ('diccionario.html', 'Diccionario del Gasto Público'),
+    'padre2': ('diccionario.html', 'Diccionario del Erario Público'),
     'padre3': ('biblioteca-hacendaria.html', 'Biblioteca hacendaria'),
     'icono': '📖',
     'titulo': 'Glosario de Términos Hacendarios',
@@ -2695,7 +2710,7 @@ def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('aud
     return {
         'archivo': archivo, 'menu': b[2], 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html#diccionario', 'Aprende'),
-        'padre2': ('diccionario.html', 'Diccionario del Gasto Público'),
+        'padre2': ('diccionario.html', 'Diccionario del Erario Público'),
         'padre3': (estante_de(archivo)[5], estante_de(archivo)[2]),
         'icono': b[1], 'titulo': titulo, 'lema': lema, 'entrada': entrada,
         'scripts': list(scripts),
@@ -2810,7 +2825,7 @@ def cabecera(actual, sello):
           <span>🔗</span>
           <span>Compartir</span>
         </button>
-        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Diccionario del Gasto Público">
+        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Diccionario del Erario Público">
           <span>🪐</span>
           <span>Inspector Meteoro</span>
         </a>
@@ -3059,6 +3074,11 @@ NUMEROS_MODULOS = [
     ('eb-salud', 'numeros-margen-del-presupuesto.html', '🌡️', '¿Cuánto margen tiene el presupuesto?', ir('presupuesto', 'eb-salud'), 'gasta'),
     ('eb-ciegos', 'numeros-lo-que-la-cifra-no-dice.html', '🔦', 'Lo que la cifra grande no dice', ir('presupuesto', 'eb-ciegos'), 'gasta'),
     ('eb-cuenta-federal', 'numeros-estado-de-resultados.html', '📒', 'El estado de resultados del Gobierno', ir('presupuesto', 'eb-cuenta-federal'), 'cuentas'),
+    # Los tres de «Baja al territorio», en pagina propia (11-10-2026):
+    # territorio_modulos.py.
+    ('eb-mapa', 'numeros-mapa-del-gasto-federalizado.html', '📍', 'El mapa del gasto federalizado', None, 'baja'),
+    ('territorio', 'numeros-las-32-entidades.html', '🗺️', 'Las 32 entidades: del peso federal al estatal', None, 'baja'),
+    ('municipios', 'numeros-los-municipios.html', '🏘️', 'Los 2,479 municipios: predial y transferencias', None, 'baja'),
 ]
 # Las tres categorias de impuesto que el art. 1o. de la Ley de Ingresos 2026
 # enumera en $0.0 (el mismo texto que ERARIO_RUBROS_CERO del motor).
@@ -3226,14 +3246,15 @@ def numeros_modulo(m, tarjetas, bloque=None, script='presupuesto.js'):
         'pie_extra': nav + '\n\n      ' + numeros_nav(parch),
         'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque or marco}],
     }
-    if parte == 'origen':
+    if parte in ('origen', 'baja'):
+        cuantas = {3: 'tres', 4: 'cuatro', 5: 'cinco'}.get(len(hermanos), str(len(hermanos)))
         p['pie_extra'] = presupuesto_pie(
             (ant[1], '← Anterior', ant[2], ant[3]) if ant else (parch, '← Volver a', pico, pnom),
-            (sig[1], 'Siguiente →', sig[2], sig[3]) if sig else presupuesto_siguiente_parte(),
-            (parch, '%s %s: sus cinco tarjetas' % (pico, pnom)) if ant else None)
+            (sig[1], 'Siguiente →', sig[2], sig[3]) if sig else presupuesto_siguiente_parte(parte),
+            (parch, '%s %s: sus %s tarjetas' % (pico, pnom, cuantas)) if ant else None)
     if bloque:
         p['estilos'] = ['numeros.css']
-        p['scripts'] = [script]
+        p['scripts'] = list(script) if isinstance(script, (list, tuple)) else [script]
     return p
 
 
@@ -3253,8 +3274,10 @@ def presupuesto_pie(ant, sig, arriba=None):
                 paso(ant, 'ant'), paso(sig, 'sig'), sube))
 
 
-def presupuesto_siguiente_parte():
-    _, arch, ico, nom = next(r for r in NUMEROS_PARTES if r[0] == 'gasta')[:4]
+def presupuesto_siguiente_parte(parte='origen'):
+    """La parte de Numeros que sigue a `parte`."""
+    ids = [r[0] for r in NUMEROS_PARTES]
+    _, arch, ico, nom = NUMEROS_PARTES[ids.index(parte) + 1][:4]
     return (arch, 'Siguiente parte →', ico, nom)
 
 
@@ -3532,9 +3555,12 @@ def numeros_preparar():
              'estilos': ['numeros.css'], 'pie_extra': numeros_nav(archivo)}
         sec = dict(pasos[pid], sin_cab=True)
         sec.pop('num', None)
-        if pid != 'origen':
+        # «Presupuesto» y «Baja al territorio» ya no llevan la nota del
+        # libro: vive en el Diccionario (pedidos del autor, 11-10-2026).
+        con_libro = pid not in ('origen', 'baja')
+        if con_libro:
             p.update(comun)
-        p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': pid != 'origen', 'secciones': [sec]})
+        p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': con_libro, 'secciones': [sec]})
         # ?abrir=eb-bloque que llegue aqui (de una pagina vieja) va a su pagina.
         p['abrir_a_pagina'] = NUMEROS_ABRIR
         if pid == 'origen':
@@ -3542,6 +3568,9 @@ def numeros_preparar():
             # 11-10-2026 tienen su pagina y sus anclas viejas llevan alla.
             p['hash_a_pagina'] = {'numPeso': 'numeros-cuanto-dinero-es.html#numPeso', 'nrRenglones': 'numeros-los-16-origenes.html'}
             # Solo las tarjetas, sin saltos al pie (pedido del autor, 11-10-2026).
+            p['pie_extra'] = ''
+        if pid == 'baja':
+            # Igual que «Presupuesto»: solo sus tres tarjetas (11-10-2026).
             p['pie_extra'] = ''
         if pid == 'gasta':
             p['scripts'] = ['gasto-publico.js']
@@ -3571,12 +3600,19 @@ def numeros_preparar():
                'eb-arquitectura': lambda: pm.camino(base, ref),
                'proyeccion2027': lambda: pm.paquete(base, ref),
                # El titulo del bloque ya es el de la pagina: queda solo para lectores de pantalla.
-               'nr-origenes': lambda: numeros_renglones(base, d).replace('class="np-tit" id="nrTit"', 'class="np-tit sr-only" id="nrTit"')}
+               'nr-origenes': lambda: numeros_renglones(base, d).replace('class="np-tit" id="nrTit"', 'class="np-tit sr-only" id="nrTit"'),
+               # Los tres de «Baja al territorio» (11-10-2026).
+               'eb-mapa': lambda: tm.mapa(base, ref, RAIZ),
+               'territorio': lambda: tm.entidades(base, ref, glos),
+               'municipios': lambda: tm.municipios(base, ref, glos, RAIZ)}
+    import territorio_modulos as tm
+    guion = {'eb-cuanto': 'numeros.js', 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
+             'municipios': ['municipios-efipem.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
         hecho = propios.get(m[0])
         NUMEROS_PAGINAS.append(numeros_modulo(m, pasos[m[5]]['tarjetas'], hecho() if hecho else None,
-                                              'numeros.js' if m[0] in ('eb-cuanto', 'nr-origenes') else 'presupuesto.js'))
+                                              guion.get(m[0], 'presupuesto.js')))
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
@@ -3789,6 +3825,8 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Baja al territorio queda en tres tarjetas, y cada una abre su página: el mapa del gasto federalizado, con cinco lentes y las 32 entidades de mayor a menor; las 32 entidades, con los tres pisos de la hacienda, lo que baja y con qué libertad, y el circuito de cada estado; y los 2,479 municipios, con sus fondos, su predial, el punto ciego del artículo 115 y el padrón completo del INEGI. La franja «Ayer y hoy» pasa a la pregunta frecuente del Ramo 28 y el Ramo 33.'),
+    ('11-10-2026', 'El Diccionario del Gasto Público se llama ahora Diccionario del Erario Público.'),
     ('11-10-2026', 'Los Servicios de investigación salen de Participa y pasan a ser un módulo del Modo Inspector, en Herramientas, con todo su contenido: los cinco servicios, cómo trabajamos, el precio, la política de independencia, el formulario y el Pase del Auditor Cívico. El enlace viejo de Participa lleva ahí.'),
     ('11-10-2026', 'La página de Presupuesto queda solo con sus cinco tarjetas: sin botones de salto al pie.'),
     ('11-10-2026', 'Presupuesto se aligera: la franja «Ayer y hoy» y las notas del libro pasan al Diccionario del Gasto Público, en la pregunta frecuente sobre la acción financiera del Estado y en la ficha del libro en el Compendio de fuentes. Al pie de cada página de Presupuesto quedan solo dos botones, anterior y siguiente, sin listas que repitan los mismos destinos.'),
@@ -3879,7 +3917,7 @@ def indice():
         if archivo == 'descarga-los-datos.html':
             enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES]
         if archivo == 'aprende.html':
-            enl += [('diccionario.html', 'Diccionario del Gasto Público', 'La obra completa')] + [
+            enl += [('diccionario.html', 'Diccionario del Erario Público', 'La obra completa')] + [
                 (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),

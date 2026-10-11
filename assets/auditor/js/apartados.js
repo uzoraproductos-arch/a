@@ -461,7 +461,7 @@
         sec('Qué encontrarás aquí', '<ul class="rc-plazos fin-lugares">' + lugares.map(function (m) {
           return '<li>' + m[0] + ' <a href="' + m[2] + '"><b>' + m[1] + '</b></a>: ' + m[3] + '</li>';
         }).join('') + '</ul>' +
-          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está el Diccionario del Gasto Público.</p>') +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está el Diccionario del Erario Público.</p>') +
         sec('Cómo leer las cifras', '<ul class="rc-plazos">' +
           '<li>' + chip('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
           '<li>' + chip('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
@@ -472,7 +472,7 @@
       '<footer class="glos-drawer-pie">' +
         '<button type="button" class="glos-drawer-todo" data-g="Gasto Público">📗 Qué es el gasto público ➔</button>' +
         '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="Hacienda Pública">📗 Qué es la hacienda pública ➔</button>' +
-        '<a class="glos-drawer-todo glos-drawer-todo-2" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir el Diccionario del Gasto Público ➔</a>' +
+        '<a class="glos-drawer-todo glos-drawer-todo-2" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir el Diccionario del Erario Público ➔</a>' +
       '</footer>', 'finTitulo', true);
     Array.prototype.forEach.call(dr.querySelectorAll('[data-g]'), function (b) {
       b.addEventListener('click', function () { pintarTermino(DB, b.getAttribute('data-g')); });

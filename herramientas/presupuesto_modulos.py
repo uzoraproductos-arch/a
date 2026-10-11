@@ -110,7 +110,7 @@ def cuanto(base, ref, peso):
           <p class="pm-txt"><b>%s</b> no se quedan en la Federación: viajan a los 32 estados y a sus municipios. Son el <b>%s</b> del gasto aprobado %s (%s ÷ %s).</p>
           <div class="pm-barra" role="img" aria-label="Gasto federalizado: %s del gasto aprobado">%s</div>
           <ul class="pm-ley pm-ley-fila">%s</ul>
-          <p class="pm-pie">%s %s <a href="numeros-baja-al-territorio.html">Míralo sobre el mapa, estado por estado ➔</a></p>
+          <p class="pm-pie">%s %s <a href="numeros-mapa-del-gasto-federalizado.html">Míralo sobre el mapa, estado por estado ➔</a></p>
         </section>
         <p class="pm-sigue">¿Y a dónde va, renglón por renglón? <a href="numeros-gasto-publico.html#gpReparte">🏛️ Los ocho renglones del gasto ➔</a></p>''' % (
         bill(tpef), P['notaCuadre'], tarjetas, ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'), peso,
@@ -154,7 +154,7 @@ def equivale(base, ref):
               <span class="pm-hab-res"><b class="num-tabular">$%s</b><small>por persona</small></span></div>
           </figure>
           <p class="pm-op"><b>De dónde sale la población:</b> %s. %s <a href="%s" rel="noopener" target="_blank">Archivo oficial ↗</a></p>
-          <p class="pm-mas"><a href="numeros-baja-al-territorio.html">El reparto, estado por estado ➔</a></p>
+          <p class="pm-mas"><a href="numeros-mapa-del-gasto-federalizado.html">El reparto, estado por estado ➔</a></p>
         </section>
         <section class="pm" aria-labelledby="pmEq3">
           <p class="pm-eq-n">3 de 3</p>

@@ -58,7 +58,7 @@ PROPIOS = [
      'De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.',
      'Los ayuntamientos que no reportaron', 'https://www.inegi.org.mx/programas/finanzas/',
      'Estadística de finanzas públicas estatales y municipales (INEGI)',
-     [('numeros-baja-al-territorio.html', 'Números · Baja al territorio')]),
+     [('numeros-los-municipios.html', 'Números · Los 2,479 municipios')]),
     ('alcaldes-inafed', 'Estados y municipios', 'Alcaldes sin registro en el padrón del INAFED',
      'Algunos municipios no tienen a su presidente municipal registrado en el padrón del Instituto Nacional para el Federalismo y el Desarrollo Municipal, o lo tienen sin partido.',
      'Instituto Nacional para el Federalismo y el Desarrollo Municipal (INAFED)', 'https://www.gob.mx/inafed',
@@ -212,7 +212,8 @@ def recolectar():
                      'Convenios, recaudación propia y dependencia federal de 2024: ' + ', '.join(ents), motivo + '.',
                      'Gobierno de la Ciudad de México' if 'CDMX' in ents else PLATAFORMA,
                      'https://www.inegi.org.mx/programas/finanzas/', 'Finanzas públicas estatales (INEGI)',
-                     [('numeros-baja-al-territorio.html', 'Números · Baja al territorio')]))
+                     [('numeros-las-32-entidades.html', 'Números · Las 32 entidades'),
+                      ('numeros-mapa-del-gasto-federalizado.html', 'Números · El mapa del gasto federalizado')]))
     for p in PROPIOS:
         out.append(e(*p))
     # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
