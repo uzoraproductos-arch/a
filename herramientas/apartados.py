@@ -680,9 +680,12 @@ HERRAMIENTAS = [
 
 # Herramientas cuyos modulos son «aplicaciones» y llevan su icono grande en
 # el encabezado, sobre el tono de su imagen (pedido del autor, 11-10-2026:
-# Costo Ambiental, verde gris). (singular, plural, articulo del plural)
+# Costo Ambiental, verde gris; el mismo dia, las otras tres: naranja para
+# Megaobras, dorado para la Calculadora y gris para el Modo Inspector, y las
+# tarjetas de la pestana Herramientas se quedan sin icono).
+# (singular, plural, articulo del plural)
 HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las')}
-HERR_ICONO_CAB = {'ambiente'}
+HERR_ICONO_CAB = {'ambiente', 'obras', 'calculadora', 'inspector'}
 
 
 def herr_palabra(rubro):
@@ -726,8 +729,9 @@ def sociales(archivo, titulo, descripcion, imagen=None):
 def herr_otras(archivo):
     otras = '\n'.join(
         '          <a class="herr-otra herr-foto rubro-%s" href="%s">'
-        '<span class="herr-otra-ico" aria-hidden="true">%s</span><span class="herr-otra-tx">%s</span></a>'
-        % (o[1], o[0], o[2], o[3]) for o in HERRAMIENTAS if o[0] != archivo)
+        '%s<span class="herr-otra-tx">%s</span></a>'
+        % (o[1], o[0], '' if o[1] in HERR_ICONO_CAB else '<span class="herr-otra-ico" aria-hidden="true">%s</span>' % o[2], o[3])
+        for o in HERRAMIENTAS if o[0] != archivo)
     return ('<nav class="herr-otras" aria-label="Las otras herramientas">\n'
             '        <span class="herr-otras-tit">Las otras herramientas</span>\n'
             '        <div class="herr-otras-fila">\n%s\n        </div>\n      </nav>' % otras)
@@ -2880,8 +2884,11 @@ def tarjeta(t, modulo=False, auto=False):
               'Comenzar ➔' if modulo or 'moduloProemio' in destino else
               'Ver aquí ▾' if auto else 'Abrir ➔')
     partes = ['        <a class="%s" href="%s"%s%s>' % (clase, destino, extra, titulo),
-              '          <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>' % icono,
               '          <span class="apartado-tarjeta-nombre">%s</span>' % nombre]
+    # Las tarjetas con foto de las herramientas ya no llevan icono: vive en
+    # el encabezado de su pagina (pedido del autor, 11-10-2026).
+    if not (modulo and rubro in HERR_ICONO_CAB):
+        partes.insert(1, '          <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>' % icono)
     if desc:
         partes.append('          <span class="apartado-tarjeta-desc">%s</span>' % desc)
     if dato:

@@ -671,6 +671,8 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Las cuatro herramientas, con su icono en el encabezado y su propio tono (11-10-2026, sello 20261011j).** A pedido del autor, el trato de Costo Ambiental pasa a las otras tres: el icono de la herramienta (y el de cada módulo) va grande en el título de su página, y el encabezado toma su color: naranja para Inversión y Megaobras, dorado para la Calculadora Cívica y gris para el Modo Inspector (`.herr-cab.rubro-*` en `assets/auditor/css/apartados.css`). Las cuatro tarjetas con foto de la pestaña Herramientas y la fila «Las otras herramientas» ya no llevan icono: solo el nombre. Se controla con `HERR_ICONO_CAB` en `herramientas/apartados.py`. Sin cifras nuevas.
+
 **Costo Ambiental: encabezado verde gris, cinco aplicaciones y «Crisis ambientales» (11-10-2026, sello 20261011i).** A pedido del autor:
 
 - **Encabezado.** En las páginas de Costo Ambiental el encabezado toma el verde gris de su imagen (#4c5f45, `.herr-cab.rubro-ambiente` en `apartados.css`) y el icono de la tarjeta sube junto al título, grande (`icono_cab` en `pagina()`; `HERR_ICONO_CAB`). Las otras tres herramientas siguen en azul: si el autor lo quiere igual, basta sumar su rubro a `HERR_ICONO_CAB` y darle su tono.
