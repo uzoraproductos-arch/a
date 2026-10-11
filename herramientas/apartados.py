@@ -4117,7 +4117,7 @@ def generar(sello=None):
     # escritas (herramientas/asistente.py, 11-10-2026).
     import asistente
     cuenta = asistente.escribir_base()
-    texto = pagina(herramienta_asistente(asistente.pagina(cuenta)), sello).replace('\r\n', '\n').replace('\n', '\r\n')
+    texto = pagina(herramienta_asistente(asistente.pagina(cuenta, CANAL_COMUNIDAD)), sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, asistente.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     print('asistente: %s con %d fichas %s' % (asistente.ARCHIVO, sum(cuenta.values()), cuenta))
     import sitemap
