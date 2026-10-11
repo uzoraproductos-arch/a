@@ -112,7 +112,7 @@ def cuanto(base, ref, peso):
           <ul class="pm-ley pm-ley-fila">%s</ul>
           <p class="pm-pie">%s %s <a href="numeros-baja-al-territorio.html">Míralo sobre el mapa, estado por estado ➔</a></p>
         </section>
-        <p class="pm-sigue">Renglón por renglón: <a href="numeros-los-16-origenes.html">🧾 los 16 orígenes del ingreso ➔</a> · <a href="numeros-gasto-publico.html#gpReparte">🏛️ los ocho renglones del gasto ➔</a></p>''' % (
+        <p class="pm-sigue">¿Y a dónde va, renglón por renglón? <a href="numeros-gasto-publico.html#gpReparte">🏛️ Los ocho renglones del gasto ➔</a></p>''' % (
         bill(tpef), P['notaCuadre'], tarjetas, ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'), peso,
         bill(F['totalMdp']), pct(pfed), chip('derivado'), mdp(F['totalMdp']), mdp(tpef), pct(pfed), barra_fed, ley_fed,
         F['nota'], ref('ref-pef2026'))
