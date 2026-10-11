@@ -20,11 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011m">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011m">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011m">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011m">
-  <script>(function () { var m = {"inspasf": "herramienta-inspector-asf.html", "inspradar": "herramienta-inspector-radar.html", "expedientes": "expedientes.html", "inspentes": "herramienta-inspector-entes.html", "inspnota": "herramienta-inspector-nota.html", "inspefos": "herramienta-inspector-efos.html", "inspverifica": "herramienta-inspector-verifica.html", "servicios": "servicios.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011n">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011n">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011n">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011n">
+  <script>(function () { var m = {"inspasf": "herramienta-inspector-asf.html", "inspradar": "herramienta-inspector-radar.html", "expedientes": "expedientes.html", "inspentes": "herramienta-inspector-entes.html", "inspnota": "herramienta-inspector-nota.html", "inspefos": "herramienta-inspector-efos.html", "inspverifica": "herramienta-inspector-verifica.html", "servicios": "servicios.html", "modulos": "herramienta-inspector-investigaciones.html", "pregunta": "herramienta-inspector-pregunta.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -155,82 +155,26 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-      <nav class="apartado-saltos" aria-label="En esta página">
-          <span class="apartado-saltos-tit">En esta página:</span>
-          <a href="#modulos">Grandes investigaciones · las 8 aplicaciones</a>
-          <a href="#pregunta">Pregúntale al Auditor · el bot interno</a>
-      </nav>
-      
-      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Grandes investigaciones · las 8 aplicaciones</h2>
-          <p class="apartado-seccion-texto">Las ocho aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.</p>
-        </div>
-        <div class="apartado-bloque">
-        <ol class="herr-ruta">
-          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-asf.html">
-            <span class="herr-paso-num" aria-hidden="true">1</span>
-            <span class="herr-paso-ico" aria-hidden="true">🏛️</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">El gasto de 2024</span><span class="herr-paso-nombre">Qué encontró la ASF</span><span class="herr-paso-desc">Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-radar.html">
-            <span class="herr-paso-num" aria-hidden="true">2</span>
-            <span class="herr-paso-ico" aria-hidden="true">🚩</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Banderas rojas</span><span class="herr-paso-nombre">Radar por entidad</span><span class="herr-paso-desc">Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024, ordenados como prefieras.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="expedientes.html">
-            <span class="herr-paso-num" aria-hidden="true">3</span>
-            <span class="herr-paso-ico" aria-hidden="true">📂</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Casos por aclarar</span><span class="herr-paso-nombre">Expedientes de casos</span><span class="herr-paso-desc">Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-entes.html">
-            <span class="herr-paso-num" aria-hidden="true">4</span>
-            <span class="herr-paso-ico" aria-hidden="true">🏢</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Auditor de entes públicos</span><span class="herr-paso-desc">Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-nota.html">
-            <span class="herr-paso-num" aria-hidden="true">5</span>
-            <span class="herr-paso-ico" aria-hidden="true">📰</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Contrasta una nota</span><span class="herr-paso-desc">¿Leíste una cifra en una noticia, en redes o en un discurso? Ponla junto al documento oficial y ve cuánto se aleja y por qué.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-efos.html">
-            <span class="herr-paso-num" aria-hidden="true">6</span>
-            <span class="herr-paso-ico" aria-hidden="true">🧾</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Lista negra del SAT</span><span class="herr-paso-desc">Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-verifica.html">
-            <span class="herr-paso-num" aria-hidden="true">7</span>
-            <span class="herr-paso-ico" aria-hidden="true">🔏</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Verifica un estado de cuenta</span><span class="herr-paso-desc">¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-inspector" href="servicios.html">
-            <span class="herr-paso-num" aria-hidden="true">8</span>
-            <span class="herr-paso-ico" aria-hidden="true">🔎</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Investigación a la medida</span><span class="herr-paso-nombre">Servicios de investigación</span><span class="herr-paso-desc">Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Incluye el Pase del Auditor Cívico. Tiene su propia página.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-        </ol>
-        </div>
-      </section>
 
-      <section class="apartado-seccion" id="pregunta" aria-labelledby="pregunta-tit">
+      
+      <section class="apartado-seccion" id="divisiones" aria-labelledby="divisiones-tit">
         <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="pregunta-tit"><span class="sr-only"></span>Pregúntale al Auditor · el bot interno</h2>
-          <p class="apartado-seccion-texto">Una herramienta aparte: en lugar de recorrer una investigación, le preguntas lo que quieras y te contesta con una nota técnica sellada.</p>
+          <h2 class="apartado-seccion-titulo" id="divisiones-tit"><span class="sr-only"></span>Dos maneras de entrarle</h2>
+          <p class="apartado-seccion-texto">Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.</p>
         </div>
         <div class="apartado-bloque">
-        <a class="herr-bot" href="herramienta-inspector-pregunta.html">
-          <span class="herr-bot-logo" aria-hidden="true"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48"></span>
-          <span class="herr-bot-tx"><span class="herr-paso-frase">Pregunta fácil, respuesta fácil</span><span class="herr-paso-nombre">Pregúntale al Auditor</span><span class="herr-paso-desc">El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado. Está en mejora continua: crece con la plataforma.</span></span>
+        <ul class="herr-dos">
+        <li><a class="herr-bot herr-div" href="herramienta-inspector-investigaciones.html">
+          <span class="herr-bot-logo herr-div-ico" aria-hidden="true">🔍</span>
+          <span class="herr-bot-tx"><span class="herr-paso-frase">Recorre una investigación</span><span class="herr-paso-nombre">Grandes investigaciones</span><span class="herr-paso-desc">Las 8 aplicaciones del Modo Inspector: de lo que encontró la ASF a las empresas que facturan operaciones simuladas, con cada cifra y su documento.</span><span class="herr-div-lista">Qué encontró la ASF · Radar por entidad · Expedientes de casos · Auditor de entes públicos · Contrasta una nota · Lista negra del SAT · Verifica un estado de cuenta · Servicios de investigación</span></span>
+          <span class="herr-paso-accion">Ver las 8 aplicaciones ➔</span>
+        </a></li>
+        <li><a class="herr-bot herr-div" href="herramienta-inspector-pregunta.html">
+          <span class="herr-bot-logo herr-div-ico" aria-hidden="true"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48"></span>
+          <span class="herr-bot-tx"><span class="herr-paso-frase">Pregunta fácil, respuesta fácil</span><span class="herr-paso-nombre">Pregúntale al Auditor</span><span class="herr-paso-desc">El bot interno: le preguntas lo que quieras y te contesta con una nota técnica sellada, armada solo con datos verificados.</span></span>
           <span class="herr-paso-accion">Preguntar ➔</span>
-        </a>
+        </a></li>
+        </ul>
         </div>
       </section>
 
@@ -249,11 +193,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011m</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011n</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261011m"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261011m"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261011n"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261011n"></script>
 </body>
 </html>

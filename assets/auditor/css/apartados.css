@@ -1027,6 +1027,22 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 }
 @media (prefers-reduced-motion: reduce) { .herr-bot { transition: none; } .herr-bot:hover { transform: none; } }
 
+/* Modo Inspector: sus dos divisiones como tarjetas autónomas, cada una abre su página (11-10-2026). */
+.herr-dos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.herr-dos > li { display: flex; }
+.herr-div { flex: 1; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; justify-items: start; align-items: start; gap: 14px; padding: 24px; }
+.herr-div .herr-paso-nombre { font-size: 22px; }
+.herr-div-ico { font-size: 40px; line-height: 1; }
+.herr-div-lista { display: block; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--civ-gris-borde); font-size: 13px; line-height: 1.5; color: #44526b; }
+.herr-div .herr-paso-accion { align-self: end; font-weight: 800; }
+@media (max-width: 760px) {
+  .herr-dos { grid-template-columns: 1fr; }
+  .herr-div { grid-template-columns: auto 1fr; grid-template-rows: none; padding: 18px; }
+  .herr-div .herr-paso-accion { grid-column: 2; }
+  .herr-div .herr-paso-nombre { font-size: 19px; }
+  .herr-div-ico { font-size: 30px; }
+}
+
 .herr-modulo { margin: 0; border-radius: 16px; }
 .herr-modulo .apartado-visor-marco { height: calc(100vh - 140px); }
 .herr-modulo-pie { padding: 10px 16px; text-align: right; font-size: 14px; background: #ffffff; border-top: 1px solid var(--civ-gris-borde); }
