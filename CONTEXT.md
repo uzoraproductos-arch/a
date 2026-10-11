@@ -671,6 +671,30 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Presupuesto» y «Se recauda», fundidas (11-10-2026, sello 20261011b).**
+Pedido del autor: fusionar las dos tarjetas, conservar lo mejor de ambas y derivar
+páginas nuevas. Números queda en **seis** tarjetas. `numeros-se-recauda.html` lleva:
+arriba «El peso de 2026» (las dos barras, `numeros.js`); después «Los 16 orígenes del
+ingreso» (`numeros_renglones()`), nativo y con contador («▶ Contabilizar» / «↺ Reiniciar
+en ceros», que arranca en ceros) en el mismo `numeros.js`, más los tres rubros que la LIF deja en $0.0.
+- **Cada renglón tiene su página** (`ingreso_pagina()`, `numeros-ingreso-*.html`, 16):
+  cifra oficial, «de cada $100» (derivado, con su operación), qué grava, efecto jurídico,
+  ley con su referencia, glosario y su desglose (`componentes` de `panoramaErario`,
+  negativos rayados en rojo). El ISR y los demás sin componentes dicen que la LIF los
+  autoriza en un solo renglón: no se inventa desglose. Era la ficha que el motor abría en
+  una ventana lateral **dentro** del visor, donde quedaba fuera de la vista (el error del
+  desglose que señaló el autor).
+- **Las otras tarjetas tienen su página de módulo** (`NUMEROS_MODULOS`, `numeros_modulo()`,
+  con el bloque del motor en un marco, como los módulos de herramientas):
+  `numeros-cuanto-dinero-es.html`, `numeros-a-que-equivale.html`,
+  `numeros-camino-del-dinero.html` y `numeros-paquete-2027.html`.
+- `numeros-presupuesto.html` es ya una redirección (REDIRECCIONES) a «Se recauda».
+  `?abrir=eb-*` y las anclas viejas llevan a la dirección nueva (`NUMEROS_ABRIR` guarda
+  ya la URL completa).
+- Herramientas: nada de estas dos tarjetas era herramienta ni estaba duplicado en ellas.
+  Para la siguiente tarjeta queda una duplicada: «El reloj de la deuda» (Se paga lo que se debe) abre el módulo
+  de la Calculadora Cívica, que ya tiene página propia en `herramienta-calculadora-reloj.html`.
+
 **Números en siete páginas (11-10-2026, sello 20261011a).**
 Pedido del autor: replicar la estructura del Radar hacendario. `sigue-el-dinero.html`
 es ahora una portada de **siete tarjetas** sin número y sin descripción, y cada una abre

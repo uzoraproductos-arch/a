@@ -92,3 +92,62 @@
 .apartado-notas-lista li:target { background: #fff8e1; border-radius: 8px; }
 .apartado-notas-por { color: #5a6782; }
 .apartado-notas-glos { margin: 0; }
+
+/* Se recauda (11-10-2026): los 16 orígenes con su contador y la página
+   propia de cada renglón de la Ley de Ingresos. */
+.nr { background: #fff; border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 18px; padding: 20px 22px; margin: 0 0 22px; scroll-margin-top: 90px; }
+.nr-cab { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-bottom: 10px; }
+.nr-mandos { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; flex: 1 1 100%; }
+.nr-btn { font: 700 15px/1 Inter, system-ui, sans-serif; background: #0b2a63; color: #fff; border: 0; border-radius: 999px; padding: 11px 22px; cursor: pointer; min-height: 44px; }
+.nr-btn:hover { background: #163f8c; }
+.nr-btn:focus-visible { outline: 3px solid #f3cf65; outline-offset: 2px; }
+.nr-btn[aria-pressed="true"] { background: #fff; color: #0b2a63; box-shadow: inset 0 0 0 2px #0b2a63; }
+.nr-estado { font-size: 14px; color: #33415c; }
+.nr-grupo { margin-top: 14px; }
+.nr-grupo-tit { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; margin: 0 0 4px; padding-bottom: 6px; border-bottom: 1px solid #dfe5f0;
+  font: 700 12.5px/1.3 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .06em; text-transform: uppercase; color: #1f5fae; }
+.nr-grupo-v { color: #5a6782; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.nr-filas { list-style: none; margin: 0; padding: 0; }
+.nr-fila { display: grid; grid-template-columns: 28px minmax(140px, 230px) 1fr 150px 54px 18px; align-items: center; gap: 10px; padding: 8px 8px; border-radius: 10px; text-decoration: none; color: #1c2a44; }
+.nr-fila:hover, .nr-fila:focus-visible { background: #eef4fd; }
+.nr-fila:focus-visible { outline: 3px solid #f3cf65; outline-offset: 1px; }
+.nr-ico { font-size: 18px; text-align: center; }
+.nr-nom { font-weight: 600; font-size: 14.5px; line-height: 1.3; }
+.nr-barra { height: 12px; background: #eef2f8; border-radius: 6px; overflow: hidden; }
+.nr-relleno { display: block; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg, #1b7f4c, #2fbf71); }
+.nr-v, .nr-pct { font: 500 13px/1.2 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.nr-pct { color: #5a6782; }
+.nr-ir { color: #1f5fae; font-weight: 700; }
+.nr-ceros .nr-v, .nr-ceros .nr-pct { color: #8a94a8; }
+.nr-cero { margin-top: 14px; border: 1px dashed #c9d3e3; border-radius: 12px; padding: 10px 14px; }
+.nr-cero > summary { cursor: pointer; font-weight: 800; color: #0b2a63; }
+.nr-cero p { font-size: 14px; line-height: 1.55; color: #33415c; }
+.nr-cero ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.nr-cero li { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 10px; align-items: baseline; border-top: 1px dashed #e2e8f2; padding-top: 8px; }
+.nr-cero li p { grid-column: 1 / -1; margin: 0; }
+.nr-cero-clave, .nr-cero-v { font: 500 12.5px/1 'JetBrains Mono', ui-monospace, monospace; color: #5a6782; }
+.ni-cifra { background: #fff; border: 1px solid #dfe5f0; border-radius: 18px; padding: 18px 22px; margin-bottom: 18px; }
+.ni-monto { margin: 0; }
+.ni-monto b { font-size: 32px; color: #0b2a63; font-variant-numeric: tabular-nums; }
+.ni-datos { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 10px 0 0; font-size: 14.5px; color: #33415c; }
+.ni-rej { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.ni-c, .ni-desg { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 16px 18px; }
+.ni-c h2, .ni-desg h2 { margin: 0 0 8px; font-size: 18px; color: #0b2a63; }
+.ni-c p { margin: 0 0 8px; font-size: 15px; line-height: 1.6; color: #2a3a57; }
+.ni-comps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ni-comps li { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(90px, 1fr) 150px 64px; gap: 6px 12px; align-items: center; border-bottom: 1px dashed #e2e8f2; padding-bottom: 8px; }
+.ni-comp-n { font-size: 14.5px; font-weight: 600; color: #1c2a44; line-height: 1.35; }
+.ni-comp-n small { display: block; font-weight: 400; font-size: 13px; color: #5a6782; }
+.ni-comps b { font: 600 13.5px/1.2 'JetBrains Mono', ui-monospace, monospace; text-align: right; color: #0b2a63; white-space: nowrap; }
+.ni-neg .nr-relleno { background: repeating-linear-gradient(45deg, #f4c7c3 0 6px, #fff 6px 10px); box-shadow: inset 0 0 0 1px #b3261e; }
+.ni-neg b { color: #b3261e; }
+.ni-cero b, .ni-cero .nr-pct { color: #8a94a8; }
+.ni-sin { font-size: 15px; line-height: 1.6; color: #2a3a57; margin: 0; }
+@media (max-width: 720px) {
+  .nr { padding: 16px 14px; }
+  .nr-fila { grid-template-columns: 24px 1fr auto; grid-template-areas: "ico nom v" "bar bar pct"; gap: 4px 8px; }
+  .nr-ico { grid-area: ico; } .nr-nom { grid-area: nom; } .nr-v { grid-area: v; } .nr-barra { grid-area: bar; } .nr-pct { grid-area: pct; }
+  .nr-ir { display: none; }
+  .ni-comps li { grid-template-columns: 1fr auto; }
+  .ni-comps .nr-barra { grid-column: 1 / -1; }
+}

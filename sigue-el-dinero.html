@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011a">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011a">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011a">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011a">
-  <script>(function () { var m = {"presupuesto": "numeros-presupuesto.html", "origen": "numeros-se-recauda.html", "decide": "numeros-se-aprueba.html", "gasta": "numeros-se-gasta.html", "baja": "numeros-baja-al-territorio.html", "deuda": "numeros-la-deuda.html", "revisa": "numeros-se-revisa.html", "numPeso": "numeros-presupuesto.html", "ati": "herramienta-calculadora.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
-  <script>(function () { var m = {"eb-ingresos": "numeros-se-recauda.html", "eb-cuanto": "numeros-se-recauda.html", "eb-equivale": "numeros-se-recauda.html", "eb-arquitectura": "numeros-se-recauda.html", "eb-egresos": "numeros-se-gasta.html", "eb-salud": "numeros-se-gasta.html", "eb-ciegos": "numeros-se-gasta.html", "eb-mapa": "numeros-baja-al-territorio.html", "eb-ccreloj": "numeros-la-deuda.html", "eb-cuenta-federal": "numeros-se-revisa.html"}, b = new URLSearchParams(location.search).get('abrir'); if (b && m[b]) location.replace(m[b] + '?abrir=' + b); })();</script>
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011b">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011b">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011b">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011b">
+  <script>(function () { var m = {"origen": "numeros-se-recauda.html", "decide": "numeros-se-aprueba.html", "gasta": "numeros-se-gasta.html", "baja": "numeros-baja-al-territorio.html", "deuda": "numeros-la-deuda.html", "revisa": "numeros-se-revisa.html", "numPeso": "numeros-se-recauda.html#numPeso", "presupuesto": "numeros-se-recauda.html", "ati": "herramienta-calculadora.html"}, h = location.hash.slice(1); if (m[h]) location.replace(m[h]); })();</script>
+  <script>(function () { var m = {"eb-egresos": "numeros-se-gasta.html?abrir=eb-egresos", "eb-salud": "numeros-se-gasta.html?abrir=eb-salud", "eb-ciegos": "numeros-se-gasta.html?abrir=eb-ciegos", "eb-mapa": "numeros-baja-al-territorio.html?abrir=eb-mapa", "eb-ccreloj": "numeros-la-deuda.html?abrir=eb-ccreloj", "eb-cuenta-federal": "numeros-se-revisa.html?abrir=eb-cuenta-federal", "eb-ingresos": "numeros-se-recauda.html#nrRenglones", "eb-cuanto": "numeros-cuanto-dinero-es.html", "eb-equivale": "numeros-a-que-equivale.html", "eb-arquitectura": "numeros-camino-del-dinero.html", "proyeccion2027": "numeros-paquete-2027.html"}, b = new URLSearchParams(location.search).get('abrir'); if (b && m[b]) location.replace(m[b]); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -157,7 +157,6 @@
 
     <div class="apartado-ancho apartado-cuerpo">
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-presupuesto" href="numeros-presupuesto.html"><span class="apartado-pestana-ico" aria-hidden="true">📊</span><span class="apartado-pestana-tx"><b>Presupuesto</b></span></a>
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-origen" href="numeros-se-recauda.html"><span class="apartado-pestana-ico" aria-hidden="true">💵</span><span class="apartado-pestana-tx"><b>Se recauda</b></span></a>
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-decide" href="numeros-se-aprueba.html"><span class="apartado-pestana-ico" aria-hidden="true">🏛️</span><span class="apartado-pestana-tx"><b>Se aprueba</b></span></a>
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-gasta" href="numeros-se-gasta.html"><span class="apartado-pestana-ico" aria-hidden="true">🧩</span><span class="apartado-pestana-tx"><b>Se gasta: los tres presupuestos</b></span></a>
@@ -175,11 +174,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011a</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011b</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261011a"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261011a"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261011b"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261011b"></script>
 </body>
 </html>
