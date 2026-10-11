@@ -671,8 +671,22 @@ HERRAMIENTAS = [
           'Un servicio municipal sin partida federal, el presupuesto ambiental 2026 y 2027, la huella de las megaobras y las leyes que aplican.'),
          ('ampib', '📉', 'El PIB no alcanza', 'Lo que se acabó y se ensució',
           'La cascada animada del PIB, el simulador del crecimiento real y el desglose de lo que se acabó y lo que se ensució.'),
+         # Quinta aplicacion (pedido del autor, 11-10-2026): la arma
+         # herramientas/crisis_ambientales.py.
+         ('herramienta-ambiente-crisis.html', '🌀', 'Crisis ambientales', 'Desastres y crisis que cuestan',
+          'Huracanes, inundaciones y crisis del agua: cuánto cubre el fondo, cuánto se anunció, cuánto se comprobó y lo que cuesta esperar. Con Otis, Simón y el agua de Guadalajara.'),
      ]),
 ]
+
+# Herramientas cuyos modulos son «aplicaciones» y llevan su icono grande en
+# el encabezado, sobre el tono de su imagen (pedido del autor, 11-10-2026:
+# Costo Ambiental, verde gris). (singular, plural, articulo del plural)
+HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las')}
+HERR_ICONO_CAB = {'ambiente'}
+
+
+def herr_palabra(rubro):
+    return HERR_PALABRA.get(rubro, ('módulo', 'módulos', 'Los'))
 
 
 # Modulos que no abren la portada en un marco: su pagina la arma otra funcion
@@ -725,6 +739,7 @@ def herramienta(h, n):
     (herramienta_modulo). Antes cada pestana abria la portada entera en un
     marco debajo de la tarjeta."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    pal = herr_palabra(rubro)
     pasos = []
     for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
         pasos.append(
@@ -744,24 +759,30 @@ def herramienta(h, n):
         'icono': icono,
         'titulo': titulo,
         'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
+        'sin_icono_lema': rubro in HERR_ICONO_CAB,
+        'icono_cab': icono if rubro in HERR_ICONO_CAB else '',
         'entrada': '<b>%s.</b> %s' % (sub, texto),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
         # Las pestanas viejas (#pulso, #inspentes...) llevan a su pagina.
         'hash_a_pagina': dict((t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas),
         'secciones': [{
-            'id': 'modulos', 'titulo': 'Los %d módulos' % len(temas), 'sin_cab': False,
-            'texto': 'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.',
+            'id': 'modulos', 'titulo': '%s %d %s' % (pal[2], len(temas), pal[1]), 'sin_cab': False,
+            'texto': ('Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.' if pal[2] == 'Las' else
+                      'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.'),
             'tarjetas': [], 'bloque': ruta,
         }],
         'pie_extra': herr_otras(archivo),
     }
 
 
-def herramienta_modulo(h, n, i):
-    """Pagina propia de un modulo de herramienta (10-10-2026)."""
+def herramienta_modulo(h, n, i, bloque=None):
+    """Pagina propia de un modulo de herramienta (10-10-2026). Con bloque, la
+    pagina trae su propio contenido en lugar del marco con la portada (la
+    quinta aplicacion de Costo Ambiental, 11-10-2026)."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     clave, ico, nombre, frase, desc = temas[i]
+    pal = herr_palabra(rubro)
     url = ir(modulo, 'eb-' + clave)
     hermanos = []
     for k, t in enumerate(temas):
@@ -773,19 +794,19 @@ def herramienta_modulo(h, n, i):
         if not t:
             return ('          <a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>'
                     % (clase, archivo, rotulo, icono, titulo))
-        return ('          <a class="herr-mod-paso %s" href="%s"><small>%s · módulo %d</small><b>%s %s</b></a>'
-                % (clase, modulo_archivo(archivo, t[0]), rotulo, k + 1, t[1], t[2]))
-    navegacion = ('<nav class="herr-mod-nav" aria-label="Los módulos de %s">\n'
+        return ('          <a class="herr-mod-paso %s" href="%s"><small>%s · %s %d</small><b>%s %s</b></a>'
+                % (clase, modulo_archivo(archivo, t[0]), rotulo, pal[0], k + 1, t[1], t[2]))
+    navegacion = ('<nav class="herr-mod-nav" aria-label="%s %s de %s">\n'
                   '        <div class="herr-mod-pasos">\n%s\n%s\n        </div>\n'
-                  '        <span class="herr-otras-tit">Todos los módulos de %s</span>\n'
+                  '        <span class="herr-otras-tit">%s %s de %s</span>\n'
                   '        <div class="herr-mod-chips">\n%s\n        </div>\n      </nav>' % (
-                      titulo,
+                      pal[2], pal[1], titulo,
                       paso(ant, i - 1, '← Anterior', 'ant') if ant else paso(None, 0, '← Volver al índice de', 'ant'),
                       paso(sig, i + 1, 'Siguiente →', 'sig') if sig else paso(None, 0, 'Terminaste · volver a', 'sig'),
-                      titulo, '\n'.join(hermanos)))
-    marco = ('<div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-%s)">\n'
+                      'Todas las' if pal[2] == 'Las' else 'Todos los', pal[1], titulo, '\n'.join(hermanos)))
+    marco = bloque or ('<div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-%s)">\n'
              '          <div class="apartado-visor-cuerpo">\n'
-             '            <p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>\n'
+             '            <p class="apartado-visor-carga" role="status">⏳ Cargando ' + ('la ' if pal[2] == 'Las' else 'el ') + pal[0] + ' con sus cifras y fuentes…</p>\n'
              '            <iframe class="apartado-visor-marco" title="%s" data-modulo="%s&amp;visor=1"></iframe>\n'
              '            <noscript><p>Este módulo necesita JavaScript. <a href="%s">Ábrelo en el auditor</a>.</p></noscript>\n'
              '          </div>\n'
@@ -799,8 +820,10 @@ def herramienta_modulo(h, n, i):
         'padre2': (archivo, titulo),
         'icono': ico,
         'titulo': nombre,
-        'lema': '%s %s · módulo %d de %d' % (icono, titulo, i + 1, len(temas)),
+        'lema': ('%s · %s %d de %d' % (titulo, pal[0], i + 1, len(temas)) if rubro in HERR_ICONO_CAB else
+                 '%s %s · %s %d de %d' % (icono, titulo, pal[0], i + 1, len(temas))),
         'sin_icono_lema': True,
+        'icono_cab': ico if rubro in HERR_ICONO_CAB else '',
         'entrada': '<b>%s.</b> %s' % (frase, desc),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
@@ -3816,7 +3839,8 @@ def pagina(a, sello):
            sociales=sociales(a['archivo'], titulo_doc, descripcion),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
-           titulo=a['titulo'], entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
+           titulo=(('<span class="herr-cab-ico" aria-hidden="true">%s</span><span class="herr-cab-tit">%s</span>' % (a['icono_cab'], a['titulo']))
+                   if a.get('icono_cab') else a['titulo']), entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
            secciones='\n\n'.join(secciones))
 
 
