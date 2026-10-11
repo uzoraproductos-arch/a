@@ -57,7 +57,11 @@ def _seg(w, color, titulo, cuerpo, href=None, extra=''):
 # ---------------------------------------------------------------------------
 # 1 · Cuanto dinero es
 # ---------------------------------------------------------------------------
-def cuanto(base, ref, ingreso_archivo, egreso_archivo):
+def cuanto(base, ref, peso):
+    """La cifra de 2026, las dos barras de «El peso de 2026» (`peso`, que
+    arma apartados.numeros_peso y vuelve interactivo numeros.js) y lo que
+    baja al territorio. Desde el 11-10-2026 aqui vive «El peso de 2026»:
+    las dos paginas repetian el total y el reparto (pedido del autor)."""
     P = base['panoramaErario']
     tlif, tpef = P['totalLIF'], P['totalPEF']
     ing, eg = P['ingresos'], P['egresos']
@@ -78,30 +82,10 @@ def cuanto(base, ref, ingreso_archivo, egreso_archivo):
     tarjetas = ''.join(
         '<div class="pm-kpi pm-%s"><span class="pm-kpi-k">%s %s</span><b class="pm-kpi-v num-tabular">%s</b><small>%s</small></div>'
         % (c, k, chip(e), v, s) for k, v, c, s, e in kpis)
-
-    # Las dos columnas: lo que entra y lo que sale, a la misma altura.
-    grupos = []
-    for x in ing:
-        if not grupos or grupos[-1][0] != x['grupo']:
-            grupos.append([x['grupo'], 0.0, []])
-        grupos[-1][1] += x['montoMdp']
-        grupos[-1][2].append(x)
-    col_e = ''.join(_seg(v / tlif * 100, COLOR_ING[g], '%s: %s' % (g, mdp(v)),
-                         '%s<small>%s</small>' % (g, pct(v / tlif * 100)),
-                         '#pmEntra-%d' % i) for i, (g, v, _) in enumerate(grupos))
-    col_s = ''.join(_seg(x['montoMdp'] / tpef * 100, COLOR_EGR[x['id']], '%s: %s' % (x['nombre'], mdp(x['montoMdp'])),
-                         '%s<small>%s</small>' % (x['nombre'], pct(x['montoMdp'] / tpef * 100)), egreso_archivo(x))
-                    for x in eg)
-    ley_e = ''.join(
-        '<li id="pmEntra-%d"><span class="pm-punto" style="--c:%s"></span><b>%s</b> <span class="num-tabular">%s</span> %s'
-        '<small>%s</small></li>'
-        % (i, COLOR_ING[g], g, mdp(v), chip('derivado'),
-           ' · '.join('<a href="%s">%s</a>' % (ingreso_archivo(x), x['nombre']) for x in xs))
-        for i, (g, v, xs) in enumerate(grupos))
-    ley_s = ''.join(
-        '<li><span class="pm-punto" style="--c:%s"></span><a href="%s"><b>%s</b></a> <span class="num-tabular">%s</span> %s<small>%s</small></li>'
-        % (COLOR_EGR[x['id']], egreso_archivo(x), x['nombre'], mdp(x['montoMdp']), chip(x.get('estado', 'oficial')), x['grupo'])
-        for x in eg)
+    # Las barras ya no repiten el porque del cuadre: lo dice la cifra de arriba.
+    peso = peso.replace('La Ley de Ingresos y el Presupuesto de Egresos suman lo mismo por construcción: la deuda se cuenta como ingreso. ', '')
+    peso = peso.replace('El peso de 2026: de dónde viene y a dónde va', 'De dónde viene y a dónde va')
+    peso = peso.replace('Todo el dinero federal del año, <b>', 'Los mismos <b>')
 
     # Lo que baja al territorio, sobre el total del gasto.
     F = P['federalizado']
@@ -118,31 +102,18 @@ def cuanto(base, ref, ingreso_archivo, egreso_archivo):
           <h2 class="pm-tit" id="pmCifraTit">La cifra de 2026, de un vistazo</h2>
           <p class="pm-txt"><b>%s de pesos</b>: ese es el total de 2026, antes de partirlo. %s</p>
           <div class="pm-kpis">%s</div>
+          <p class="pm-pie">Los cinco renglones programables son la clasificación funcional que Hacienda publica en miles de millones %s; por eso suman %s y no los $7,094,708.8 mdp del cuadro de finanzas públicas: la diferencia de %s millones es redondeo de la fuente, no un faltante.</p>
         </section>
-        <section class="pm" aria-labelledby="pmCuadreTit">
-          <h2 class="pm-tit" id="pmCuadreTit">Lo que entra y lo que sale, columna contra columna</h2>
-          <p class="pm-txt">Las dos columnas miden lo mismo porque el presupuesto se construye para cuadrar: lo que falta para pagar el gasto se pide prestado y la deuda se cuenta como ingreso. Cada tramo es proporcional a su monto; toca uno para abrir su página.</p>
-          <div class="pm-cols">
-            <figure class="pm-col"><figcaption>💵 Entra <small>Ley de Ingresos %s</small></figcaption><div class="pm-pila">%s</div></figure>
-            <span class="pm-igual" aria-hidden="true">=</span>
-            <figure class="pm-col"><figcaption>🏛️ Sale <small>Presupuesto de Egresos %s</small></figcaption><div class="pm-pila">%s</div></figure>
-          </div>
-          <div class="pm-leyendas">
-            <div><h3 class="pm-sub">De dónde sale, por familia</h3><ul class="pm-ley">%s</ul></div>
-            <div><h3 class="pm-sub">En qué se va, renglón por renglón</h3><ul class="pm-ley">%s</ul></div>
-          </div>
-          <p class="pm-pie">Las familias del ingreso suman los renglones del artículo 1o. de la Ley de Ingresos 2026 %s. Los cinco renglones programables son la clasificación funcional que Hacienda publica en miles de millones %s; por eso suman %s y no los $7,094,708.8 mdp del cuadro de finanzas públicas: la diferencia de %s millones es redondeo de la fuente, no un faltante.</p>
-        </section>
+        %s
         <section class="pm" aria-labelledby="pmBajaTit">
           <h2 class="pm-tit" id="pmBajaTit">Y de ese gasto, lo que baja al territorio</h2>
           <p class="pm-txt"><b>%s</b> no se quedan en la Federación: viajan a los 32 estados y a sus municipios. Son el <b>%s</b> del gasto aprobado %s (%s ÷ %s).</p>
           <div class="pm-barra" role="img" aria-label="Gasto federalizado: %s del gasto aprobado">%s</div>
           <ul class="pm-ley pm-ley-fila">%s</ul>
           <p class="pm-pie">%s %s <a href="numeros-baja-al-territorio.html">Míralo sobre el mapa, estado por estado ➔</a></p>
-        </section>''' % (
-        bill(tpef), P['notaCuadre'], tarjetas,
-        ref('ref-lif2026'), col_e, ref('ref-pef2026'), col_s, ley_e, ley_s,
-        ref('ref-lif2026'), ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'),
+        </section>
+        <p class="pm-sigue">Renglón por renglón: <a href="numeros-los-16-origenes.html">🧾 los 16 orígenes del ingreso ➔</a> · <a href="numeros-gasto-publico.html#gpReparte">🏛️ los ocho renglones del gasto ➔</a></p>''' % (
+        bill(tpef), P['notaCuadre'], tarjetas, ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'), peso,
         bill(F['totalMdp']), pct(pfed), chip('derivado'), mdp(F['totalMdp']), mdp(tpef), pct(pfed), barra_fed, ley_fed,
         F['nota'], ref('ref-pef2026'))
 
@@ -217,26 +188,19 @@ def equivale(base, ref):
 def camino(base, ref):
     P = base['panoramaErario']
     tlif, tpef = P['totalLIF'], P['totalPEF']
-    ing = {x['id']: x for x in P['ingresos']}
-    eg = P['egresos']
-    sp = round(sum(x['montoMdp'] for x in eg if x['grupo'] == 'Programable'), 1)
-    sn = round(sum(x['montoMdp'] for x in eg if x['grupo'] == 'No programable'), 1)
     F = P['federalizado']
-    comp = {c['id']: c for c in F['componentes']}
     asf = base['cuenta_publica_asf']['cp2024']['total']['porAclarar'] / 1e6
-    def m(i):
-        return '%s %s' % (mdp(ing[i]['montoMdp']), ref({'ing-isr': 'ref-lisr', 'ing-iva': 'ref-liva', 'ing-ieps': 'ref-lieps', 'ing-deuda': 'ref-lfdp'}[i]))
     etapas = {
         'cir-1': (bill(tlif), 'oficial', ref('ref-lif2026'),
-                  'Impuestos (ISR %s, IVA %s, IEPS %s), ingresos petroleros y <b>endeudamiento neto aprobado: %s</b>.'
-                  % (m('ing-isr'), m('ing-iva'), m('ing-ieps'), m('ing-deuda')), tlif),
+                  'Impuestos, cuotas, lo que venden las empresas del Estado y <b>lo que se pide prestado</b>. '
+                  'Cada renglón, con su cifra, está en <a href="numeros-los-16-origenes.html">los 16 orígenes</a>.', tlif),
         'cir-2': (bill(tpef), 'oficial', ref('ref-pef2026'),
-                  '<b>Gasto programable %s (%s)</b> para salud, educación, pensiones e inversión; y <b>no programable %s (%s)</b>: intereses, participaciones y adeudos. Ambas sumas son %s.'
-                  % (mdp(sp), pct(sp / tpef * 100), mdp(sn), pct(sn / tpef * 100), chip('derivado')), tpef),
+                  'La misma cifra que se recauda, porque el presupuesto se construye para cuadrar. Se parte en lo que se decide cada año '
+                  '(salud, educación, pensiones, inversión) y lo que ya está comprometido (intereses, participaciones y adeudos): '
+                  'sus montos están en <a href="numeros-cuanto-dinero-es.html">Cuánto dinero es</a>.', tpef),
         'cir-3': (bill(F['totalMdp']), 'oficial', ref('ref-pef2026'),
-                  '%s del gasto %s viaja a los 32 estados y sus municipios: <b>Ramo 28, participaciones %s</b> y <b>Ramo 33, aportaciones %s</b> %s.'
-                  % (pct(F['totalMdp'] / tpef * 100), chip('derivado'), mdp(comp['fed-r28']['montoMdp']), mdp(comp['fed-r33']['montoMdp']), ref('ref-lcf')),
-                  F['totalMdp']),
+                  'Es lo que viaja a los 32 estados y sus municipios, sobre todo como participaciones (Ramo 28) y aportaciones (Ramo 33), '
+                  'con las reglas de la Ley de Coordinación Fiscal %s.' % ref('ref-lcf'), F['totalMdp']),
         'cir-4': (mdp(asf), 'oficial', ref('ref-asf-mdb2024'),
                   'Quedó <b>por aclarar</b> al revisar la Cuenta Pública 2024, la más reciente ya fiscalizada: dinero observado que las instituciones auditadas aún deben justificar o reintegrar. Esta etapa ocurre al año siguiente; por eso su cifra es de 2024 y no de 2026.',
                   None),
@@ -263,21 +227,11 @@ def camino(base, ref):
             <a class="pm-etapa-sigue" href="%s">%s ➔</a>
           </li>''' % (e['orden'], e['icono'], e['titulo'], e['instrumento'], r, v, chip(est), desc, e['quien'], e['cuando'],
                      ' '.join('<span class="pm-ley-chip">%s</span>' % l for l in e['leyes']), e['que'], sigue[e['id']][0], sigue[e['id']][1]))
-    barras = ''.join(
-        '<div class="pm-emb-fila"><span class="pm-emb-n">%s %s</span><span class="pm-emb-barra"><span class="pm-seg" style="--w:%.3f%%;--c:%s"></span></span><b class="num-tabular">%s</b></div>'
-        % (e['icono'], e['titulo'], etapas[e['id']][4] / tlif * 100, c, etapas[e['id']][0])
-        for e, c in zip(P['circuito'][:3], ('#0b2a63', '#2f5fa8', '#d0632a')))
     return '''<section class="pm" aria-labelledby="pmCamTit">
           <h2 class="pm-tit" id="pmCamTit">Las cuatro etapas, con su ley</h2>
           <p class="pm-txt">Cada peso público pasa por cuatro manos: se recauda, se aprueba, se ejerce y se revisa. Cada etapa tiene quién responde, un plazo que fija la ley y su fundamento. Las cifras son las de 2026, salvo la revisión, que llega un año después.</p>
           <ol class="pm-etapas">%s</ol>
-        </section>
-        <section class="pm" aria-labelledby="pmEmbTit">
-          <h2 class="pm-tit" id="pmEmbTit">Cuánto mueve cada etapa</h2>
-          <p class="pm-txt">Lo que se recauda y lo que se aprueba es la misma cifra, porque el presupuesto se construye para cuadrar. De ahí, poco más de una cuarta parte baja al territorio. La cuarta etapa no entra en la gráfica: revisa otro año, 2024, y medirla junto a 2026 sería comparar cuentas distintas.</p>
-          <div class="pm-emb">%s</div>
-          <p class="pm-pie">Escala: el ingreso autorizado de 2026 es la barra completa.</p>
-        </section>''' % ('\n          '.join(pasos), barras)
+        </section>''' % '\n          '.join(pasos)
 
 
 # ---------------------------------------------------------------------------

@@ -492,3 +492,9 @@
   .pm-hbar-b { grid-column: 1 / -1; }
   .pm-res-rej { grid-template-columns: 1fr; }
 }
+
+/* Presupuesto (11-10-2026): las cinco tarjetas en mosaico, del tamano de las
+   pestanas de Datos, Aprende y Participa; tres por fila para que no quede una sola. */
+.apartado-pestanas.np-mosaico { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 22px; }
+@media (max-width: 980px) { .apartado-pestanas.np-mosaico { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pm-sigue { margin: 18px 0 0; text-align: center; font-weight: 600; }
