@@ -347,23 +347,22 @@ APARTADOS = [
                 'num': 2,
                 'titulo': 'Gasto público: quién lo aprueba y en qué se va',
                 'texto': ('La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
-                          'Aquí se lee en sus tres grandes renglones: lo que el Estado necesita para funcionar, lo que mueve al país '
-                          'y lo que se invierte en las personas; y aparte, lo que ya está comprometido antes de empezar. Abajo, '
-                          'el simulador para repartirlo tú y cada vista del gasto en su propia página.'),
+                          'Aquí está quién tiene la facultad de aprobarlo, parada por parada, y cómo se reparte el dinero que sostiene '
+                          'al país: un simulador contable que lo parte del total a sus ocho renglones, los tres grandes presupuestos '
+                          'y, al final, cada desglose en su propia página.'),
                 'ayer': ('El capítulo 5 explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77). El capítulo 7, en «Presupuesto y gasto público» (p. 97), reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y su sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
                          'Las facultades siguen en los artículos 73 y 74 de la Constitución: la fracción IV del 74 da a los diputados la aprobación anual del Presupuesto de Egresos. El Distrito Federal es hoy la <b>Ciudad de México</b>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016. La ley de 1976 fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
                 'bloque': '',
                 # Las vistas del motor abren su pagina de modulo
-                # (NUMEROS_MODULOS); las que son herramientas van a su
-                # pagina en Herramientas, sin duplicarlas aqui.
+                # (NUMEROS_MODULOS). Megaobras y costo ambiental se quitaron
+                # (11-10-2026): son herramientas y ya viven en Herramientas;
+                # el pie de la pagina (gasto_pie) lleva alla.
                 'tarjetas': [
                     ('🎛️', 'Reparte tú el presupuesto', 'Ponte en el lugar de la Cámara: arranca en $0, reparte los $10.19 billones y compáralo con lo aprobado.', 'simulador-presupuesto.html', None, 'calculadora'),
                     ('⚖️', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', 'numeros-lo-que-cuestan-los-poderes.html', None, 'dinero'),
                     ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', 'numeros-ramos-y-dependencias.html', None, 'dinero'),
                     ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gasto programable, en un termostato.', 'numeros-margen-del-presupuesto.html', None, 'dinero'),
                     ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', 'numeros-lo-que-la-cifra-no-dice.html', None, 'inspector'),
-                    ('🏗️', 'Inversión pública y megaobras', 'Presupuesto, costo y pérdidas de las grandes obras, de Tren Maya y Dos Bocas al AIFA. Es una herramienta: abre en Herramientas.', 'herramienta-megaobras.html', None, 'obras'),
-                    ('🌎', 'Costo ambiental', 'El daño ambiental en pesos, su promedio por habitante, el servicio municipal de basura y el presupuesto ambiental 2026-2027. Es una herramienta: abre en Herramientas.', 'herramienta-ambiente.html', None, 'ambiente'),
                 ],
             },
             {
@@ -3228,6 +3227,229 @@ def numeros_nav(actual):
                 % (r[1], ' aria-current="page"' if r[1] == actual else '', r[2], r[3]) for r in NUMEROS_PARTES))
 
 
+# «Gasto publico», dinamico (pedido del autor, 11-10-2026): quien lo aprueba
+# (el ciclo, con los preceptos cotejados de preceptos_legales) y como se
+# reparte (el simulador contable). Lo vuelve interactivo gasto-publico.js.
+GP_CICLO = [
+    # (id, icono, verbo, cuando, quien, que hace, preceptos, en los hechos)
+    ('propone', '📨', 'Propone', 'A más tardar el 8 de septiembre', 'El Ejecutivo Federal, por la Secretaría de Hacienda',
+     'Elabora y envía a la Cámara de Diputados el Paquete Económico: los Criterios Generales de Política Económica, la iniciativa de Ley de Ingresos y el proyecto de Presupuesto de Egresos. El secretario de Hacienda comparece a dar cuenta de ellos.',
+     ['cpeum_art_74_iv', 'lfprh_art_42'],
+     'La Gaceta Parlamentaria del 8 de septiembre de 2026 publica los Criterios Generales de Política Económica 2027, la pieza con que abre el paquete del año que viene. %s'),
+    ('ingresos', '💵', 'Aprueba los ingresos', 'Diputados: a más tardar el 20 de octubre', 'El Congreso de la Unión: las dos Cámaras',
+     'Decreta las contribuciones que cubrirán el gasto y da las bases para que el Ejecutivo pida prestado. La Ley de Ingresos fija cuánto se puede recaudar y el techo de la deuda del año.',
+     ['cpeum_art_73', 'lfprh_art_42', 'lif_techo_endeudamiento'],
+     'La Ley de Ingresos 2026 se publicó en el DOF el 7 de noviembre de 2025: autoriza %s de ingresos, deuda incluida, y un endeudamiento neto interno de hasta 1 billón 780 mil millones de pesos. %s'),
+    ('gasto', '🗳️', 'Aprueba el gasto', 'A más tardar el 15 de noviembre', 'La Cámara de Diputados, sola',
+     'Examina, discute y, en su caso, modifica el proyecto, y lo aprueba. Es su facultad exclusiva: el Senado no vota el Presupuesto de Egresos. No puede haber partidas secretas, y todo gasto que se agregue debe traer de dónde pagarse.',
+     ['cpeum_art_74_iv', 'lfprh_art_17_18'],
+     'El Presupuesto de Egresos 2026 se publicó en el DOF el 28 de noviembre de 2025, por %s. %s'),
+    ('ejerce', '⚙️', 'Lo ejerce', 'Del 1 de enero al 31 de diciembre', 'El Ejecutivo, los Poderes Legislativo y Judicial y los órganos autónomos',
+     'Gastan lo aprobado y nada más: ningún pago puede salir del presupuesto. El dinero se administra con eficiencia, eficacia, economía, transparencia y honradez, y las compras y obras se licitan por regla general.',
+     ['cpeum_art_126', 'cpeum_art_134'],
+     '2026 está en curso: lo que va del año, mes con mes, se sigue en <a href="radar-presupuesto-en-curso.html">el Radar hacendario</a>.'),
+    ('cierra', '↩️', 'Cierra el año', '31 de diciembre, y 15 días después', 'Quien conserve dinero sin gastar',
+     'Lo que no se devengó al 31 de diciembre ya no se puede gastar y se devuelve a la Tesorería de la Federación dentro de los 15 días naturales siguientes. Está prohibido gastar a última hora para no devolverlo.',
+     ['lfprh_art_54'], ''),
+    ('revisa', '🔍', 'Lo revisa', 'Al año siguiente', 'La Auditoría Superior de la Federación, de la Cámara de Diputados',
+     'Fiscaliza después del gasto los ingresos, los egresos y la deuda, con autonomía técnica y de gestión.',
+     ['cpeum_art_79'],
+     'La revisión de la Cuenta Pública 2024, lo que se gastó de verdad y lo que quedó por aclarar, está en <a href="numeros-cuentas-claras.html">Cuentas claras</a>.'),
+]
+
+# Quien puede que (cada celda, con su articulo).
+GP_QUIEN = [
+    ('Ejecutivo Federal', ['Propone la iniciativa <small>(art. 74, fr. IV)</small>', 'Propone el proyecto y lo ejerce <small>(arts. 74, fr. IV, y 126)</small>',
+                           'La contrata, por Hacienda, dentro del techo <small>(LIF 2026, art. 2o.)</small>', '—']),
+    ('Cámara de Diputados', ['La aprueba, a más tardar el 20 de octubre <small>(LFPRH, art. 42, fr. IV)</small>', '<b>La aprueba sola</b>, a más tardar el 15 de noviembre <small>(art. 74, fr. IV)</small>',
+                             'Da las bases y aprueba los empréstitos, como Congreso <small>(art. 73, fr. VIII)</small>', 'Por su Auditoría Superior <small>(art. 79)</small>']),
+    ('Senado', ['La aprueba, como Congreso <small>(art. 73, fr. VII)</small>', '<b>No interviene</b>: es facultad exclusiva de Diputados <small>(art. 74, fr. IV)</small>',
+                'Da las bases y aprueba los empréstitos, como Congreso <small>(art. 73, fr. VIII)</small>', '—']),
+    ('Auditoría Superior', ['—', '—', '—', '<b>Fiscaliza</b> ingresos, egresos y deuda, en forma posterior <small>(art. 79)</small>']),
+]
+
+GP_COLOR = {'egr-social': '#1b7f4c', 'egr-economico': '#0f6f8f', 'egr-gobierno': '#6b3fa0', 'egr-poderes': '#9468c9',
+            'egr-fondos': '#8a94a8', 'egr-costofin': '#b3261e', 'egr-participaciones': '#d0632a', 'egr-adefas': '#7a2a24'}
+
+
+def egreso_archivo(x):
+    """Pagina de un renglon del gasto: egr-social -> numeros-egreso-desarrollo-social.html."""
+    return 'numeros-egreso-%s.html' % {
+        'social': 'desarrollo-social', 'economico': 'desarrollo-economico', 'poderes': 'poderes-y-organos-autonomos',
+        'fondos': 'fondos-de-estabilizacion', 'costofin': 'costo-financiero'}.get(x['id'][4:], x['id'][4:])
+
+
+def gasto_ciclo(base):
+    """«¿Quien lo aprueba?»: el ciclo del presupuesto, parada por parada."""
+    pre = {x['id']: x for x in base['preceptos_legales']}
+    refs = {r['id']: r for r in base['referencias_legales']}
+    total = base['panoramaErario']['totalPEF']
+    def ref(rid):
+        r = refs[rid]
+        return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
+    hechos = {'propone': ('%s', [ref('ref-cgpe2027')]), 'ingresos': ('%s %s', [_mdp(total), ref('ref-lif2026')]),
+              'gasto': ('%s %s', [_mdp(total), ref('ref-pef2026')])}
+    pasos, paneles = [], []
+    for n, (cid, ico, verbo, cuando, quien, hace, ids, hecho) in enumerate(GP_CICLO):
+        if cid in hechos:
+            hecho = hecho % tuple(hechos[cid][1])
+        citas = ''.join(
+            '<blockquote class="gp-cita"><p class="gp-cita-cab"><b>%s</b> · %s %s</p><p>%s</p>'
+            '<p class="gp-cita-pie">%s <a href="%s" rel="noopener" target="_blank">Texto oficial ↗</a> <span class="est-chip est-oficial">oficial</span></p></blockquote>'
+            % (pre[i]['precepto'], pre[i]['ley'], ref(pre[i]['ref']), pre[i]['texto_oficial'], pre[i]['vigencia'], pre[i]['url_oficial'])
+            for i in ids)
+        pasos.append('<button type="button" class="gp-paso" role="tab" id="gpPaso-%s" aria-controls="gpPanel-%s" aria-selected="%s" data-i="%d">'
+                     '<span class="gp-paso-n" aria-hidden="true">%s</span><b>%s</b><small>%s</small></button>'
+                     % (cid, cid, 'true' if n == 0 else 'false', n, ico, verbo, cuando))
+        paneles.append('<div class="gp-panel" role="tabpanel" id="gpPanel-%s" aria-labelledby="gpPaso-%s"%s>'
+                       '<p class="gp-panel-cuando">%d de %d · %s</p><h3>%s %s: %s</h3><p class="gp-panel-hace">%s</p>%s%s</div>'
+                       % (cid, cid, '' if n == 0 else ' data-oculto="1"', n + 1, len(GP_CICLO), cuando, ico, verbo, quien, hace,
+                          ('<p class="gp-hecho"><b>En los hechos.</b> %s</p>' % hecho) if hecho else '', citas))
+    filas = ''.join('<tr><th scope="row">%s</th>%s</tr>' % (q, ''.join('<td>%s</td>' % c for c in celdas)) for q, celdas in GP_QUIEN)
+    return '''<section class="gp gp-ciclo" id="gpAprueba" aria-labelledby="gpApruebaTit">
+          <h2 class="gp-tit" id="gpApruebaTit">¿Quién lo aprueba? El ciclo del presupuesto</h2>
+          <p class="gp-txt">Cada peso del presupuesto recorre estas seis paradas, del proyecto a la revisión. Cada una tiene a su autoridad, su fecha límite y el artículo que le da la facultad, citado tal como lo dice la ley. Toca una parada o avanza con las flechas.</p>
+          <div class="gp-ruta" role="tablist" aria-label="Las seis paradas del presupuesto">%s</div>
+          <div class="gp-mando"><button type="button" class="gp-flecha" data-dir="-1" aria-label="Parada anterior">←</button>
+            <span class="gp-prog" aria-hidden="true"><span></span></span>
+            <button type="button" class="gp-flecha" data-dir="1" aria-label="Parada siguiente">→</button></div>
+          %s
+          <h3 class="gp-sub">Quién puede qué</h3>
+          <div class="gp-tabla-caja"><table class="gp-tabla">
+            <thead><tr><th scope="col">Autoridad</th><th scope="col">Ley de Ingresos</th><th scope="col">Presupuesto de Egresos</th><th scope="col">Deuda</th><th scope="col">Revisión</th></tr></thead>
+            <tbody>%s</tbody></table></div>
+          <p class="np-pie">Los artículos sin ley son de la Constitución Política %s; LFPRH es la Ley Federal de Presupuesto y Responsabilidad Hacendaria %s. Textos cotejados con su fuente oficial.</p>
+        </section>''' % ('\n'.join(pasos), '\n'.join(paneles), filas, ref('ref-cpeum'), ref('ref-lfprh'))
+
+
+def gasto_reparte(base, d):
+    """«¿Como se reparte?»: el simulador contable. Del total a lo
+    programable y lo no programable, y de ahi a sus ocho renglones; y una
+    cantidad cualquiera repartida en la misma proporcion."""
+    p = base['panoramaErario']
+    total = p['totalPEF']
+    refs = {r['id']: r for r in base['referencias_legales']}
+    def ref(rid):
+        r = refs[rid]
+        return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
+    eg = p['egresos']
+    prog = [x for x in eg if x['grupo'] == 'Programable']
+    nopr = [x for x in eg if x['grupo'] == 'No programable']
+    sp, sn = round(sum(x['montoMdp'] for x in prog), 1), round(sum(x['montoMdp'] for x in nopr), 1)
+    redondeo = round(total - sp - sn, 1)
+    datos = {'total': total, 'redondeo': redondeo, 'grupos': [
+        {'id': 'prog', 'nom': 'Gasto programable', 'v': sp, 'est': 'derivado', 'color': '#0b2a63',
+         'que': 'Lo que compra bienes y presta servicios a la población: escuelas, hospitales, pensiones, carreteras, seguridad, el funcionamiento de los Poderes.',
+         'op': 'Suma de las %d finalidades del gasto programable de los Criterios 2027.' % len(prog)},
+        {'id': 'nopr', 'nom': 'Gasto no programable', 'v': sn, 'est': 'derivado', 'color': '#8f1d17',
+         'que': 'Lo que ya está comprometido antes de empezar: intereses de la deuda, lo que les toca a estados y municipios y las cuentas del año anterior.',
+         'op': 'Costo financiero + participaciones (Ramo 28) + ADEFAS (Ramo 30) del PEF 2026.'}],
+        'renglones': [{'id': x['id'], 'g': 'prog' if x['grupo'] == 'Programable' else 'nopr', 'nom': x['nombre'], 'ico': x['icono'],
+                       'v': x['montoMdp'], 'est': x['estado'], 'que': x['queCubre'], 'color': GP_COLOR[x['id']], 'p': egreso_archivo(x)}
+                      for x in prog + nopr]}
+    def seg(x, nivel):
+        return ('<button type="button" class="gp-seg" data-id="%s" data-nivel="%d" style="--w:%.4f;--c:%s" aria-pressed="false">'
+                '<span class="gp-seg-tx"><b>%s</b><span>%s</span></span></button>'
+                % (x['id'], nivel, x['v'] / total * 100, x['color'], x['nom'], _bill(x['v'])))
+    filas_rep = ''.join(
+        '<li class="gp-rep-f" data-v="%s" style="--c:%s"><a href="%s"><span aria-hidden="true">%s</span> %s</a>'
+        '<span class="gp-rep-barra"><span></span></span><b class="gp-rep-m">$0.00</b></li>'
+        % (x['v'], x['color'], x['p'], x['ico'], x['nom']) for x in datos['renglones'])
+    return '''<section class="gp gp-reparte" id="gpReparte" aria-labelledby="gpReparteTit">
+          <h2 class="gp-tit" id="gpReparteTit">¿Cómo se reparte? El simulador contable</h2>
+          <p class="gp-txt">El gasto neto total de 2026 es de <b>%s</b> %s. Pulsa «Contabilizar» y míralo partirse: primero en lo que se programa y lo que ya está comprometido; después, en sus ocho renglones. Toca cualquier tramo para ver qué es; cada renglón tiene su propia página.</p>
+          <div class="gp-cont">
+            <button type="button" class="gp-boton" id="gpContar" aria-pressed="false">▶ Contabilizar</button>
+            <p class="gp-cifra" aria-live="polite"><b id="gpTotal">$0.0 mdp</b><small id="gpEstado">El presupuesto está en ceros.</small></p>
+          </div>
+          <div class="gp-ici" id="gpIci">
+            <div class="gp-nivel" data-nivel="0"><span class="gp-nivel-tit">Total</span><div class="gp-barra">%s</div></div>
+            <div class="gp-nivel" data-nivel="1"><span class="gp-nivel-tit">Tipo de gasto</span><div class="gp-barra">%s</div></div>
+            <div class="gp-nivel" data-nivel="2"><span class="gp-nivel-tit">Renglones</span><div class="gp-barra">%s</div></div>
+          </div>
+          <div class="gp-det" id="gpDet" aria-live="polite"><p class="gp-det-vacio">👆 Toca un tramo de las barras.</p></div>
+          <h3 class="gp-sub">Si el presupuesto fuera de…</h3>
+          <p class="gp-txt">Escribe una cantidad y mira cómo se repartiría en la misma proporción que el presupuesto aprobado. No es lo que pagas tú de impuestos (para eso está la <a href="herramienta-calculadora.html">Calculadora Cívica</a>): es la forma del gasto, en pequeño.</p>
+          <div class="gp-rep-mando">
+            <label for="gpMonto">Cantidad en pesos</label>
+            <input type="number" id="gpMonto" min="0" step="1" value="100" inputmode="numeric">
+            <span class="gp-rep-atajos">%s</span>
+          </div>
+          <ol class="gp-rep" id="gpRep">%s</ol>
+          <p class="np-pie" id="gpRepPie">Operación: cantidad × (renglón ÷ %s) <span class="est-chip est-derivado">derivado</span>. Los ocho renglones suman %s; los %s que faltan para el total son redondeo de la fuente, que publica la clasificación funcional en miles de millones. Cifras de la clasificación funcional de los Criterios 2027 %s y del PEF 2026 %s.</p>
+          <script type="application/json" id="gpDatos">%s</script>
+          <noscript><p>El simulador necesita JavaScript. Los ocho renglones, con su cifra y su fuente, están en sus páginas.</p></noscript>
+        </section>''' % (
+        _mdp(total), ref('ref-pef2026'),
+        seg({'id': 'total', 'nom': 'Gasto neto total', 'v': total, 'color': '#33415c'}, 0),
+        ''.join(seg(g, 1) for g in datos['grupos']), ''.join(seg(x, 2) for x in datos['renglones']),
+        ''.join('<button type="button" data-monto="%d">$%s</button>' % (m, format(m, ',')) for m in (100, 1000, 10000, 1000000)),
+        filas_rep, _mdp(total), _mdp(sp + sn), _mdp(redondeo), ref('ref-cgpe2027'), ref('ref-pef2026'),
+        json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'))
+
+
+def egreso_pagina(x, n, lista, total, refs, glosario):
+    """Pagina propia de un renglon del gasto (11-10-2026), como las del ingreso."""
+    archivo = egreso_archivo(x)
+    r = refs[x['refKey']]
+    comps = x.get('componentes') or []
+    if comps:
+        mayor = max(abs(c['m']) for c in comps)
+        desglose = ('<ol class="ni-comps">%s</ol>' % ''.join(
+            '<li class="%s"><span class="ni-comp-n">%s%s</span><span class="nr-barra"><span class="nr-relleno" style="width:%.2f%%"></span></span>'
+            '<b>%s</b><span class="nr-pct">%s%%</span></li>' % (
+                'ni-cero' if c['m'] == 0 else '', c['n'], ('<small>%s</small>' % c['d']) if c['d'] else '',
+                abs(c['m']) / mayor * 100 if mayor else 0, _mdp0(c['m']), format(c['m'] / x['montoMdp'] * 100, '.1f')) for c in comps)
+            + '<p class="np-pie">El desglose lo trae el propio decreto (%s). El porcentaje es la parte de cada componente en el total del renglón.</p>' % x['clave'])
+    else:
+        desglose = ''
+    term = x['glos'] if x['glos'] in glosario else None
+    ant, sig = (lista[n - 1] if n > 0 else None), (lista[n + 1] if n + 1 < len(lista) else None)
+    def paso(y, rot, cls):
+        if not y:
+            return '<a class="herr-mod-paso %s" href="numeros-gasto-publico.html#gpReparte"><small>%s</small><b>🏛️ El simulador contable</b></a>' % (
+                cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
+        return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, egreso_archivo(y), rot, y['icono'], y['nombre'])
+    chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
+        ' actual' if y is x else '', egreso_archivo(y), ' aria-current="page"' if y is x else '', y['icono'], y['nombre']) for y in lista)
+    nav = ('<nav class="herr-mod-nav" aria-label="Los ocho renglones del gasto">\n'
+           '        <div class="herr-mod-pasos">\n          %s\n          %s\n        </div>\n'
+           '        <span class="herr-otras-tit">Los ocho renglones del gasto</span>\n'
+           '        <div class="herr-mod-chips">%s</div>\n      </nav>' % (
+               paso(ant, '← Anterior', 'ant'), paso(sig, 'Siguiente →', 'sig'), chips))
+    extra = ''
+    if x.get('comoSeObtuvo'):
+        extra += '<section class="ni-desg"><h2>Cómo se obtuvo la cifra</h2><p>%s</p></section>' % x['comoSeObtuvo']
+    if x.get('pendiente'):
+        extra += '<section class="ni-desg"><h2>Lo que el decreto no dice</h2><p>%s</p></section>' % x['pendiente']
+    bloque = '''<div class="ni" style="--c:%s">
+          <div class="ni-cifra">
+            <p class="ni-monto"><b>%s</b> <span class="est-chip est-%s">%s</span></p>
+            <p class="ni-datos"><span>De cada $100 que se gastan: <b>$%.2f</b> <span class="est-chip est-derivado">derivado</span></span>
+            <span>Tipo: <b>gasto %s</b></span><span>Dónde está: <b>%s</b></span></p>
+            <p class="np-pie">«De cada $100» = %s ÷ %s × 100.</p>
+          </div>
+          <div class="ni-rej">
+            <section class="ni-c"><h2>¿Qué cubre?</h2><p>%s</p></section>
+            <section class="ni-c"><h2>Qué ley lo sustenta</h2><p>%s %s</p>%s</section>
+          </div>
+          <section class="ni-desg"><h2>Por qué importa</h2><p>%s</p></section>
+          %s%s
+        </div>''' % (
+        GP_COLOR[x['id']], _mdp0(x['montoMdp']), x['estado'], x['estado'], x['montoMdp'] / total * 100, x['grupo'].lower(), x['clave'],
+        _mdp0(x['montoMdp']), _mdp0(total), x['queCubre'], x['ley'],
+        nota_ref(x['refKey'], r['num'], re.sub('<[^>]+>', '', r.get('cita_apa', ''))[:160].replace('"', '&quot;')),
+        ('<p><a href="glosario.html#%s">📖 El concepto, en el glosario</a></p>' % glosario_ancla(term)) if term else '',
+        x['efecto'], ('<section class="ni-desg"><h2>Qué trae por dentro</h2>%s</section>' % desglose) if desglose else '', extra)
+    return {
+        'archivo': archivo, 'menu': x['nombre'], 'menu_archivo': 'sigue-el-dinero.html',
+        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-gasto-publico.html', 'Gasto público'),
+        'icono': x['icono'], 'lema': 'Gasto público · Presupuesto de Egresos 2026',
+        'titulo': x['nombreLargo'], 'entrada': re.sub('<[^>]+>', '', x['queCubre']),
+        'estilos': ['numeros.css'], 'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-gasto-publico.html'),
+        'secciones': [{'id': 'ficha', 'titulo': x['nombre'], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+    }
+
 def numeros_preparar():
     if NUMEROS_PAGINAS:
         return
@@ -3252,9 +3474,16 @@ def numeros_preparar():
         for f in x['filas']:
             # Cada renglon de lo que entra abre su pagina (11-10-2026).
             f['p'] = ingreso_archivo(por_nombre[f['n']])
+    eg_nombre = {r['nombre']: r for r in base['panoramaErario']['egresos']}
+    for x in d['sale']:
+        for f in x['filas']:
+            if f['n'] in eg_nombre:
+                f['p'] = egreso_archivo(eg_nombre[f['n']])
     a = next(x for x in APARTADOS if x['archivo'] == 'sigue-el-dinero.html')
     pasos = {sec['id']: sec for sec in a['secciones']}
-    pasos['gasta']['bloque'] = numeros_tres(d)
+    pasos['gasta']['bloque'] = (gasto_ciclo(base) + '\n        ' + gasto_reparte(base, d) +
+                                '\n        <section class="gp gp-tres" aria-labelledby="gpTresTit"><h2 class="gp-tit" id="gpTresTit">¿Hacia dónde va? Los tres presupuestos</h2>\n        '
+                                + numeros_tres(d) + '</section>\n        <h2 class="gp-tit gp-tit-desg">Los desgloses, cada uno en su página</h2>')
     pasos['origen']['bloque'] = numeros_renglones(base, d)
     # La nota del libro va al pie de cada paso, no en la portada.
     comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
@@ -3272,6 +3501,10 @@ def numeros_preparar():
             # «Presupuesto» (El peso de 2026) se fundio aqui (11-10-2026).
             p['antes'] = numeros_peso(d)
             p['scripts'] = ['numeros.js']
+        if pid == 'gasta':
+            p['scripts'] = ['gasto-publico.js']
+            p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
+                           '<a href="herramienta-megaobras.html">Herramientas · Megaobras</a> y <a href="herramienta-ambiente.html">Herramientas · Costo ambiental</a>.</p>')
         if pid == 'cuentas':
             p['scripts'] = ['deuda-tiempo.js']
             # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
@@ -3291,6 +3524,10 @@ def numeros_preparar():
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
         NUMEROS_PAGINAS.append(ingreso_pagina(x, n, ingresos, total, refs, glosario))
+    # Y cada renglon del gasto, la suya (11-10-2026).
+    egresos = base['panoramaErario']['egresos']
+    for n, x in enumerate(egresos):
+        NUMEROS_PAGINAS.append(egreso_pagina(x, n, egresos, base['panoramaErario']['totalPEF'], refs, glosario))
     # La portada: solo las tarjetas, cada una a su pagina.
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
@@ -3482,6 +3719,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'La página de Gasto público se vuelve dinámica. «¿Quién lo aprueba?» recorre las seis paradas del presupuesto, de la propuesta de Hacienda a la revisión de la Auditoría Superior, con su fecha límite y el artículo que da cada facultad, y una tabla de quién puede qué. «¿Cómo se reparte?» es un simulador contable que parte los $10.19 billones en programable y no programable y en sus ocho renglones, y reparte cualquier cantidad en la misma proporción. Cada renglón del gasto tiene ya su propia página. Megaobras y costo ambiental quedan solo en Herramientas.'),
     ('11-10-2026', 'En Números, «Se paga lo que se debe» y «Se revisa» son una sola página, «Cuentas claras»: la línea de tiempo de la deuda, sexenio por sexenio, y lo que pasa al año siguiente, cuando la Auditoría Superior revisa la Cuenta Pública. El estado de resultados del Gobierno abre en su propia página; el reloj de la deuda y el inspector de la ASF llevan a Herramientas. Números queda en cuatro tarjetas.'),
     ('11-10-2026', 'En Números, «Se aprueba» y «Se gasta» son una sola página, «Gasto público»: quién aprueba el presupuesto, los tres presupuestos (del Estado, nacional y social) y lo ya comprometido, con el simulador para repartirlo tú. Lo que cuestan los Poderes, los ramos y dependencias, el margen del presupuesto y lo que la cifra grande no dice abren cada uno en su página; megaobras y costo ambiental llevan a Herramientas. «Se recauda» ahora se llama «Presupuesto», y cada tarjeta de Números trae su descripción breve.'),
     ('11-10-2026', 'En Números, «Presupuesto» y «Se recauda» son una sola página: arriba, las dos barras de lo que entra y lo que sale; abajo, los 16 orígenes del ingreso con su contador. Cada renglón (ISR, IVA, IEPS, cuotas, deuda...) tiene su propia página con qué grava, su ley, su efecto jurídico y su desglose; y Cuánto dinero es, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027 abren en la suya.'),
@@ -3551,6 +3789,10 @@ def indice():
                                  (p['archivo'] + '#nrRenglones', 'Los 16 orígenes del ingreso', '')] +
                                 [(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
                                 if p['archivo'] == 'numeros-presupuesto.html' else []) +
+                               ([('numeros-gasto-publico.html#gpAprueba', '¿Quién lo aprueba? El ciclo del presupuesto', ''),
+                                 ('numeros-gasto-publico.html#gpReparte', '¿Cómo se reparte? El simulador contable', '')] +
+                                [(egreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['egresos']]
+                                if p['archivo'] == 'numeros-gasto-publico.html' else []) +
                                [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']],
                                p['archivo'])
                         for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])
