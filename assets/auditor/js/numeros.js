@@ -1,4 +1,4 @@
-/* Números (sigue-el-dinero.html, 10-10-2026): «El peso de 2026».
+/* Números › Presupuesto (numeros-presupuesto.html; 10-10-2026, en su página desde el 11-10-2026): «El peso de 2026».
    Dos barras con todo el dinero federal del año: arriba lo que entra
    (Ley de Ingresos) y abajo lo que sale (Presupuesto de Egresos, en los
    tres presupuestos más lo ya comprometido). Al tocar un tramo se abre su
@@ -71,7 +71,7 @@
       (filas ? '<ul class="np-det-filas">' + filas + '</ul>' : '') +
       '<p class="np-det-op">' + (x.op ? esc(x.op) + ' ' : '') + 'Fuente: ' + refs(x.f) + '</p>' +
       '<p class="np-det-ir">' + (x.g ? '<a href="glosario.html#' + esc(x.g) + '">📖 El concepto, en el glosario</a>' : '') +
-      '<a class="np-det-paso" href="#' + esc(x.paso) + '">Ver el paso ' + x.pnum + ' del recorrido ➔</a></p>';
+      '<a class="np-det-paso" href="' + esc(x.paso) + '">Ver «' + esc(x.ptit) + '» ➔</a></p>';
   }
 
   function pinta() { pintaBarras(); pintaDetalle(); }

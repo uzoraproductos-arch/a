@@ -671,6 +671,19 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**Números en siete páginas (11-10-2026, sello 20261011a).**
+Pedido del autor: replicar la estructura del Radar hacendario. `sigue-el-dinero.html`
+es ahora una portada de **siete tarjetas** sin número y sin descripción, y cada una abre
+su página (`NUMEROS_PARTES` y `numeros_preparar()` en `apartados.py`):
+`numeros-presupuesto.html` (El peso de 2026, `numeros.js`), `numeros-se-recauda.html`,
+`numeros-se-aprueba.html`, `numeros-se-gasta.html` (los tres presupuestos),
+`numeros-baja-al-territorio.html`, `numeros-la-deuda.html` (línea de tiempo) y
+`numeros-se-revisa.html` (con el cierre «¿Cuánto te toca?»). Cada paso conserva su
+franja «Ayer y hoy» y la nota [119] al pie; todas llevan la barra `numeros_nav()`.
+Las anclas viejas (`#origen`, `#gasta`, `#numPeso`, `#ati`...) y `?abrir=eb-*` se
+redirigen solas a la página que corresponde (`hash_a_pagina` y `abrir_a_pagina`).
+En `numeros.js`, «Ver el paso N» pasó a «Ver «nombre de la página»».
+
 **Números reorganizado (10-10-2026, sello 20261010zf).**
 Pedido del autor: la pestaña estaba «fuera de orden» (un camino de cinco pasos arriba y
 seis capítulos con otra numeración abajo) y la «Nota de referencia» era un apartado.

@@ -287,13 +287,16 @@ APARTADOS = [
         # «El peso de 2026» (de donde viene y a donde va, numeros.js), y en
         # el paso 3 los tres presupuestos: del Estado, nacional y social.
         # La nota del libro ya no es un apartado: es una nota al pie.
+        # Desde el 11-10-2026 (pedido del autor) la portada son siete
+        # tarjetas, como el Radar hacendario, y cada una abre su pagina:
+        # las arma numeros_preparar() con estas secciones (NUMEROS_PARTES).
         'menu': 'Números',
         'icono': '💰',
         'titulo': 'Números',
-        'lema': 'Seis pasos, del impuesto a la rendición de cuentas',
+        'lema': 'Del impuesto a la rendición de cuentas',
         'entrada': ('El dinero público tiene un recorrido: se recauda, se aprueba, se gasta, baja a estados y municipios, '
-                    'paga lo que se debe y, al final, alguien revisa que se haya usado bien. Primero míralo completo; '
-                    'después síguelo paso a paso.'),
+                    'paga lo que se debe y, al final, alguien revisa que se haya usado bien. Empieza por el presupuesto '
+                    'completo y después síguelo: cada tarjeta abre su propia página.'),
         'libro': ('Este apartado sigue el orden de <cite>Introducción al Derecho Económico</cite>, de Moisés Gómez Granillo y '
                   'Rosa María Gutiérrez Rosas (Editorial Esfinge, 1995), sobre todo sus capítulos 5 y 7. Cada paso trae una '
                   'franja <b>«Ayer y hoy»</b>: lo que explicaba el libro y cómo está hoy, con el documento oficial que lo sostiene. '
@@ -304,19 +307,13 @@ APARTADOS = [
         # al pie de la pagina (libro_pie), no como enlace bajo la entrada.
         'libro_ref': ('ref-gomez-granillo-1995', 119,
                       'Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). <cite>Introducción al derecho económico</cite>. Editorial Esfinge.'),
-        'libro_pie': True,
         'libro_glosario': ['Rectoría Económica del Estado', 'Economía Mixta', 'Sistema Nacional de Planeación Democrática',
                            'Hacienda Pública', 'LIF (Ley de Ingresos de la Federación)', 'PEF (Presupuesto de Egresos de la Federación)',
                            'Gasto Programable vs No Programable', 'Gasto Federalizado', 'Deuda Pública y SHRFSP', 'Cuenta Pública'],
-        'scripts': ['deuda-tiempo.js', 'numeros.js'],
-        'estilos': ['numeros.css'],
-        # 'antes' (El peso de 2026) y el bloque del paso 3 los arma
-        # numeros_preparar() con window.AUDIT_DB al generar.
-        'antes': '',
-        # «¿Cuanto te toca?» era la pestana 6: ahora es el cierre del recorrido.
-        'hash_a_pagina': {'ati': 'herramienta-calculadora.html'},
+        # El bloque del paso 3 lo arma numeros_preparar() con window.AUDIT_DB
+        # al generar, y tambien 'hash_a_pagina' y 'abrir_a_pagina'.
         'pestanas': True,
-        'pista': 'Elige un paso para abrir su contenido. Van en el orden en que se mueve el dinero.',
+        'pista': 'Cada parte de Números abre su propia página. Van en el orden en que se mueve el dinero.',
         'secciones': [
             {
                 'id': 'origen',
@@ -3002,14 +2999,81 @@ def numeros_cierre():
             '<span class="np-cierre-ir">Abrir la calculadora ➔</span></a>')
 
 
+# Numeros en siete paginas (pedido del autor, 11-10-2026): la portada es
+# como la del Radar hacendario, siete tarjetas sin numero y sin descripcion,
+# y cada una abre su propia pagina. La primera es el presupuesto completo
+# («El peso de 2026»); las otras seis son los pasos del recorrido.
+NUMEROS_PARTES = [
+    # (id de la seccion, archivo, icono, nombre de la tarjeta)
+    ('presupuesto', 'numeros-presupuesto.html', '📊', 'Presupuesto'),
+    ('origen', 'numeros-se-recauda.html', '💵', 'Se recauda'),
+    ('decide', 'numeros-se-aprueba.html', '🏛️', 'Se aprueba'),
+    ('gasta', 'numeros-se-gasta.html', '🧩', 'Se gasta: los tres presupuestos'),
+    ('baja', 'numeros-baja-al-territorio.html', '📍', 'Baja al territorio'),
+    ('deuda', 'numeros-la-deuda.html', '📉', 'Se paga lo que se debe'),
+    ('revisa', 'numeros-se-revisa.html', '🔍', 'Se revisa'),
+]
+NUMEROS_PAGINAS = []
+# ?abrir=eb-bloque: en que pagina de Numeros esta la tarjeta de cada bloque.
+NUMEROS_ABRIR = {}
+
+
+def numeros_nav(actual):
+    """Barra al pie de cada pagina de Numeros, con sus siete partes."""
+    return ('<nav class="bib-nav" aria-label="Números">\n'
+            '        <a class="bib-nav-tit" href="sigue-el-dinero.html">💰 Números: todas sus partes</a>\n'
+            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s</span></a>'
+                % (r[1], ' aria-current="page"' if r[1] == actual else '', r[2], r[3]) for r in NUMEROS_PARTES))
+
+
 def numeros_preparar():
+    if NUMEROS_PAGINAS:
+        return
     import auditorias
     base = auditorias.db()
     d = numeros_datos(base)
+    pag = {r[0]: r for r in NUMEROS_PARTES}
+    for x in d['entra'] + d['sale']:
+        # «Ver el paso» de cada tramo lleva a su pagina.
+        x['ptit'] = pag[x['paso']][3]
+        x['paso'] = pag[x['paso']][1]
+        x.pop('pnum', None)
     a = next(x for x in APARTADOS if x['archivo'] == 'sigue-el-dinero.html')
-    a['antes'] = numeros_peso(d)
-    next(s for s in a['secciones'] if s['id'] == 'gasta')['bloque'] = numeros_tres(d)
-    a['cierre'] = numeros_cierre()
+    pasos = {sec['id']: sec for sec in a['secciones']}
+    pasos['gasta']['bloque'] = numeros_tres(d)
+    # La nota del libro va al pie de cada paso, no en la portada.
+    comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
+    for pid, archivo, ico, nombre in NUMEROS_PARTES:
+        p = {'archivo': archivo, 'menu': nombre, 'menu_archivo': 'sigue-el-dinero.html',
+             'padre': ('sigue-el-dinero.html', 'Números'), 'icono': ico, 'lema': 'Números',
+             'estilos': ['numeros.css'], 'pie_extra': numeros_nav(archivo)}
+        if pid == 'presupuesto':
+            p.update({'titulo': 'Presupuesto 2026: de dónde viene y a dónde va',
+                      'entrada': ('Todo el dinero federal del año en dos barras: arriba, lo que entra; abajo, lo que sale. '
+                                  'Toca cualquier tramo para ver su cifra, su fuente y la página donde se explica.'),
+                      'scripts': ['numeros.js'], 'antes': numeros_peso(d), 'secciones': []})
+        else:
+            sec = dict(pasos[pid], sin_cab=True)
+            sec.pop('num', None)
+            p.update(comun)
+            p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': True, 'secciones': [sec]})
+            if pid == 'deuda':
+                p['scripts'] = ['deuda-tiempo.js']
+            if pid == 'revisa':
+                # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
+                p['cierre'] = numeros_cierre()
+            for t in sec['tarjetas']:
+                m = re.search(r'ancla=(eb-[\w-]+)', t[3])
+                if m:
+                    NUMEROS_ABRIR.setdefault(m.group(1), archivo)
+        NUMEROS_PAGINAS.append(p)
+    # La portada: solo las siete tarjetas, cada una a su pagina.
+    a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], '')} for r in NUMEROS_PARTES]
+    # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
+    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, numPeso='numeros-presupuesto.html',
+                              ati='herramienta-calculadora.html')
+    a['abrir_a_pagina'] = NUMEROS_ABRIR
 
 
 def pagina(a, sello):
@@ -3120,6 +3184,11 @@ def pagina(a, sello):
         # Anclas viejas que ahora son paginas: se mandan antes de pintar.
         redirige = ('\n  <script>(function () { var m = %s, h = location.hash.slice(1); '
                     'if (m[h]) location.replace(m[h]); })();</script>' % json.dumps(a['hash_a_pagina']))
+    if a.get('abrir_a_pagina'):
+        # ?abrir=eb-bloque (Numeros, 11-10-2026): la tarjeta de ese bloque ya
+        # vive en otra pagina; se manda alla con el mismo ?abrir.
+        redirige += ('\n  <script>(function () { var m = %s, b = new URLSearchParams(location.search).get(\'abrir\'); '
+                     'if (b && m[b]) location.replace(m[b] + \'?abrir=\' + b); })();</script>' % json.dumps(a['abrir_a_pagina']))
 
     return '''<!DOCTYPE html>
 <!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
@@ -3187,6 +3256,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Números se abre en siete páginas, como el Radar hacendario: el presupuesto completo (de dónde viene y a dónde va cada peso), se recauda, se aprueba, se gasta con los tres presupuestos, baja al territorio, se paga lo que se debe y se revisa. Cada tarjeta lleva a la suya.'),
     ('10-10-2026', 'Números, reorganizado: un solo recorrido de seis pasos (se recauda, se aprueba, se gasta, baja al territorio, se paga la deuda y se revisa). Arriba, «El peso de 2026», dos barras interactivas con todo lo que entra y todo lo que sale, en pesos o por cada $100; en el paso 3, los tres presupuestos: del Estado, nacional y social. La nota del libro pasa al pie.'),
     ('10-10-2026', 'Las tarjetas del Radar hacendario quedan limpias: solo el icono y el nombre de cada parte. Lo descriptivo se queda dentro de cada página.'),
     ('10-10-2026', '«Hoy: el presupuesto en curso» tiene contador: las cifras arrancan en cero y el botón «Contar» las lleva a su valor oficial; el mismo botón las regresa a cero. «Durante tu visita» se desbloquea al contar.'),
@@ -3235,7 +3305,7 @@ def _rejilla(grupos):
 
 def _a_numeros(destino):
     m = re.search(r'ir=presupuesto&(?:amp;)?ancla=(eb-[\w-]+)', destino)
-    return 'sigue-el-dinero.html?abrir=' + m.group(1) if m else destino
+    return (NUMEROS_ABRIR.get(m.group(1), 'sigue-el-dinero.html') + '?abrir=' + m.group(1)) if m else destino
 
 
 def indice():
@@ -3244,14 +3314,14 @@ def indice():
     ap = {a['archivo']: a for a in APARTADOS}
     investigaciones = _rejilla([_grupo(ico, tit, [(auditorias.archivo(i), au[i][5], au[i][6]) for i in ids])
                                 for ico, tit, ids in auditorias.TEMAS])
-    num = ap['sigue-el-dinero.html']
     numeros = _rejilla([_grupo('🧾', 'El balance', [
         ('estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024, 2026 y 2027 en cuatro dimensiones'),
         ('estado-de-cuenta-2024-2027.csv', 'Descarga el estado de cuenta en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
-                       [_grupo(s['pestana'][0], s['titulo'],
-                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for t in s['tarjetas']],
-                               'sigue-el-dinero.html#' + s['id'])
-                        for s in num['secciones']])
+                       [_grupo(p['icono'], p['titulo'],
+                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']]
+                               or [(p['archivo'], 'Las dos barras: lo que entra y lo que sale', '')],
+                               p['archivo'])
+                        for p in NUMEROS_PAGINAS])
     herr = _rejilla([_grupo(h[2], h[3], [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]], h[0])
                      for h in HERRAMIENTAS])
     otros = []
@@ -3286,7 +3356,7 @@ def indice():
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
         ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
-        ('numeros', '💰 Números', 'El recorrido del dinero público en seis pasos, con el peso de 2026 y los tres presupuestos.', numeros),
+        ('numeros', '💰 Números', 'El presupuesto de 2026 y el recorrido del dinero público, cada parte en su propia página.', numeros),
         ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
         ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la obra de consulta, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
@@ -3350,7 +3420,7 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

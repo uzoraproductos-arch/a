@@ -58,7 +58,7 @@ PROPIOS = [
      'De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.',
      'Los ayuntamientos que no reportaron', 'https://www.inegi.org.mx/programas/finanzas/',
      'Estadística de finanzas públicas estatales y municipales (INEGI)',
-     [('sigue-el-dinero.html#baja', 'Números · A dónde baja')]),
+     [('numeros-baja-al-territorio.html', 'Números · Baja al territorio')]),
     ('alcaldes-inafed', 'Estados y municipios', 'Alcaldes sin registro en el padrón del INAFED',
      'Algunos municipios no tienen a su presidente municipal registrado en el padrón del Instituto Nacional para el Federalismo y el Desarrollo Municipal, o lo tienen sin partido.',
      'Instituto Nacional para el Federalismo y el Desarrollo Municipal (INAFED)', 'https://www.gob.mx/inafed',
@@ -103,14 +103,14 @@ def recolectar():
         out.append(e('cp2024-tomo2', 'Cuenta Pública 2024', 'Estados financieros del Gobierno Federal 2024: ' +
                      ', '.join(c['concepto'].lower() for c in pend) + ' y la conciliación presupuestaria-contable',
                      pend[0]['motivo'], PLATAFORMA, pend[0]['url'], 'Cuenta Pública 2024, Tomo II (Hacienda)',
-                     [('sigue-el-dinero.html?abrir=eb-cuenta-federal', 'Números · Estado de resultados'),
+                     [('numeros-se-revisa.html?abrir=eb-cuenta-federal', 'Números · Estado de resultados'),
                       ('estado-de-cuenta.html', 'Estado de Cuenta Cívico')]))
     # 2. Programas sociales.
     for m in cf['evaluacion_social_mir']:
         if m['estado_montos'] == 'pendiente':
             out.append(e('prog-montos-' + ('imss-bienestar' if 'IMSS' in m['programa'] else m['clave'].lower()), 'Programas sociales', 'Aprobado y devengado 2024: ' + m['programa'],
                          m['motivo_montos'], PLATAFORMA, m.get('url'), 'Cuenta Pública 2024 (Hacienda)',
-                         [('sigue-el-dinero.html?abrir=eb-cuenta-federal', 'Números · Resultados sociales'),
+                         [('numeros-se-revisa.html?abrir=eb-cuenta-federal', 'Números · Resultados sociales'),
                           ('estado-de-cuenta.html#social', 'Estado de Cuenta · Social')]))
     out.append(e('prog-resultados', 'Programas sociales', 'Propósito, cobertura e impacto de los programas sociales: ' +
                  '; '.join(m['programa'] for m in cf['evaluacion_social_mir']),
@@ -211,7 +211,7 @@ def recolectar():
                      'Convenios, recaudación propia y dependencia federal de 2024: ' + ', '.join(ents), motivo + '.',
                      'Gobierno de la Ciudad de México' if 'CDMX' in ents else PLATAFORMA,
                      'https://www.inegi.org.mx/programas/finanzas/', 'Finanzas públicas estatales (INEGI)',
-                     [('sigue-el-dinero.html#baja', 'Números · A dónde baja')]))
+                     [('numeros-baja-al-territorio.html', 'Números · Baja al territorio')]))
     for p in PROPIOS:
         out.append(e(*p))
     # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
