@@ -183,11 +183,11 @@ EJEMPLOS = [
 ]
 
 
-def pagina(cuenta):
+def pagina(cuenta, canal=''):
     total = sum(cuenta.values())
     ej = '\n'.join('            <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                    % (html.escape(q, quote=True), i, html.escape(q)) for q, i in EJEMPLOS)
-    return '''<div class="pa" id="paApp">
+    return '''<div class="pa" id="paApp" data-canal="%s">
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
@@ -220,8 +220,20 @@ def pagina(cuenta):
             <li><b>Justifica cada cifra</b> por su clasificación: si es <b>oficial</b>, de qué documento sale; si es <b>derivada</b>, con qué operación (y, cuando solo hay aproximación, el rango: mínimo, máximo y punto medio, cada cota con su fuente); si está <b>pendiente</b>, por qué falta, a quién le toca publicarla y el enlace donde debería estar.</li>
             <li><b>La sella</b> con un folio y una huella digital (SHA-256), como el Estado de Cuenta: si alguien cambia una letra, la huella ya no coincide.</li>
           </ol>
+          <section class="pa-pendq" id="paSinResp" aria-labelledby="paSinRespT">
+            <h3 id="paSinRespT">Lo que aún no sé</h3>
+            <p>Cuando no encuentro respuesta, o me dices que la nota no era lo que buscabas, anoto tu pregunta aquí. Esa lista nos dice qué fichas agregar primero.</p>
+            <p class="pa-chico" id="paSinRespVacio">Todavía no hay preguntas anotadas en este navegador.</p>
+            <ol id="paSinRespLista" hidden></ol>
+            <p class="pa-pendq-acc" id="paSinRespAcc" hidden>
+              <a class="pa-copiar" id="paSinRespEnviar" hidden>✉️ Enviarlas a Auditavisión</a>
+              <button type="button" class="pa-copiar" id="paSinRespCopiar">📋 Copiar la lista</button>
+              <button type="button" class="pa-copiar" id="paSinRespBorrar">🗑️ Borrar</button>
+            </p>
+            <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad.html#tema">Comunidad › Un tema que deberíamos investigar</a>.</p>
+          </section>
           <p class="pa-aviso"><b>Es un bot interno, no una inteligencia artificial generativa.</b> No escribe cifras por su cuenta ni consulta servicios de fuera: tu pregunta no sale de tu navegador. Solo encuentra y ordena lo que la plataforma ya publicó con su documento.</p>
         </aside>
-      </div>''' % (format(total, ','), ej, format(total, ','), cuenta.get('glosario', 0), cuenta.get('expediente', 0),
+      </div>''' % (html.escape(canal, quote=True), format(total, ','), ej, format(total, ','), cuenta.get('glosario', 0), cuenta.get('expediente', 0),
                    cuenta.get('entidad', 0), cuenta.get('cargo', 0), cuenta.get('fuente', 0), cuenta.get('pendiente', 0),
                    cuenta.get('pagina', 0), cuenta.get('seccion', 0))

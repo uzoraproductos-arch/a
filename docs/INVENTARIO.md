@@ -52,7 +52,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 29 | 0 | 1 | 1 | 1 |
+| `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |

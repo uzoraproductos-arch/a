@@ -87,6 +87,16 @@
 .pa-clas .est-chip { margin-right: 4px; }
 .pa-beta { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #eef3fb; border: 1px solid #cfdcf2; font-size: 13.5px; color: #1c2a44; }
 .pa-beta a { color: #1a56b8; }
+/* «Lo que aún no sé»: preguntas sin respuesta anotadas en el navegador */
+.pa-pendq { margin: 0 0 12px; padding: 12px 14px; border-radius: 10px; background: #f6f8fc; border: 1px solid #dfe5f0; }
+.pa-pendq h3 { font-size: 15.5px; }
+.pa-pendq p { margin: 0 0 8px; font-size: 13.5px; }
+.pa-pendq ol { margin: 0 0 10px; padding-left: 20px; display: grid; gap: 6px; font-size: 13.5px; }
+.pa-pendq small { color: #5a6782; }
+.pa-reintenta { font: 600 13.5px/1.4 Inter, system-ui, sans-serif; text-align: left; cursor: pointer; border: 0; background: none; padding: 0; color: #1a56b8; text-decoration: underline; }
+.pa-pendq-acc { display: flex; flex-wrap: wrap; gap: 6px; }
+.pa-pendq-acc a { text-decoration: none; }
+.pa-noera { margin-left: 4px; }
 @media (max-width: 900px) {
   .pa { grid-template-columns: 1fr; }
 }

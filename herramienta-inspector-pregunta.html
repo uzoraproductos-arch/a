@@ -20,11 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011l">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011l">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011l">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011l">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261011l">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011m">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011m">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011m">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011m">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261011m">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -160,7 +160,7 @@
       <section class="apartado-seccion" id="chat" aria-labelledby="chat-tit">
         <h2 class="sr-only" id="chat-tit">Pregúntale al Auditor</h2>
         <div class="apartado-bloque">
-        <div class="pa" id="paApp">
+        <div class="pa" id="paApp" data-canal="">
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
@@ -198,6 +198,18 @@
             <li><b>Justifica cada cifra</b> por su clasificación: si es <b>oficial</b>, de qué documento sale; si es <b>derivada</b>, con qué operación (y, cuando solo hay aproximación, el rango: mínimo, máximo y punto medio, cada cota con su fuente); si está <b>pendiente</b>, por qué falta, a quién le toca publicarla y el enlace donde debería estar.</li>
             <li><b>La sella</b> con un folio y una huella digital (SHA-256), como el Estado de Cuenta: si alguien cambia una letra, la huella ya no coincide.</li>
           </ol>
+          <section class="pa-pendq" id="paSinResp" aria-labelledby="paSinRespT">
+            <h3 id="paSinRespT">Lo que aún no sé</h3>
+            <p>Cuando no encuentro respuesta, o me dices que la nota no era lo que buscabas, anoto tu pregunta aquí. Esa lista nos dice qué fichas agregar primero.</p>
+            <p class="pa-chico" id="paSinRespVacio">Todavía no hay preguntas anotadas en este navegador.</p>
+            <ol id="paSinRespLista" hidden></ol>
+            <p class="pa-pendq-acc" id="paSinRespAcc" hidden>
+              <a class="pa-copiar" id="paSinRespEnviar" hidden>✉️ Enviarlas a Auditavisión</a>
+              <button type="button" class="pa-copiar" id="paSinRespCopiar">📋 Copiar la lista</button>
+              <button type="button" class="pa-copiar" id="paSinRespBorrar">🗑️ Borrar</button>
+            </p>
+            <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad.html#tema">Comunidad › Un tema que deberíamos investigar</a>.</p>
+          </section>
           <p class="pa-aviso"><b>Es un bot interno, no una inteligencia artificial generativa.</b> No escribe cifras por su cuenta ni consulta servicios de fuera: tu pregunta no sale de tu navegador. Solo encuentra y ordena lo que la plataforma ya publicó con su documento.</p>
         </aside>
       </div>
@@ -226,13 +238,13 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011l</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011m</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261011l"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261011l"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261011l"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261011l"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261011m"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261011m"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261011m"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261011m"></script>
 </body>
 </html>

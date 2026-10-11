@@ -180,7 +180,8 @@
       '<p class="pa-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
       '<p class="pa-leyenda">La arma el bot interno con una ficha ya publicada en la plataforma; no la redacta una inteligencia artificial. ' +
       '<b>No es un documento oficial.</b> El sello certifica que el contenido viene de la ficha citada y que no se ha alterado: si cambia una letra, la huella ya no coincide.</p>' +
-      '<p class="pa-acciones"><button type="button" class="pa-copiar">📋 Copiar la nota</button></p>' +
+      '<p class="pa-acciones"><button type="button" class="pa-copiar">📋 Copiar la nota</button> ' +
+      '<button type="button" class="pa-copiar pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(f.tit) + '">🤔 No era lo que buscaba</button></p>' +
       '</div></footer></article>' + mas;
   }
 
@@ -190,7 +191,50 @@
         return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(o.tit.split(' (')[0]) + '"><span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ' + esc(o.tit.length > 70 ? o.tit.slice(0, 68) + '…' : o.tit) + '</button>';
       }).join('') + '</div>' : '') +
       '<p class="pa-chico">Prueba con otras palabras, busca en el <a href="indice.html">índice general</a> o en el <a href="glosario.html">glosario</a>, o revisa el <a href="pendientes.html">Registro de pendientes</a>: ahí está lo que aún no tiene documento oficial y dónde debería estar. ' +
-      '¿Crees que la plataforma debería tenerlo? <a href="comunidad.html">Cuéntanos</a>.</p>';
+      'Anoté tu pregunta en <a href="#paSinResp">Lo que aún no sé</a>: nos dice qué fichas agregar primero. ¿Crees que la plataforma debería tenerlo? <a href="comunidad.html#tema">Cuéntanos</a>.</p>';
+  }
+
+  /* «Lo que aún no sé» (11-10-2026): las preguntas sin respuesta, y las que
+     el lector marca con «No era lo que buscaba», se anotan en su navegador
+     para saber qué fichas agregar primero. No se envían solas: el lector las
+     copia o, cuando la página traiga canal (CANAL_COMUNIDAD), las manda. */
+  var CLAVE = 'auditavision.bot.sinRespuesta', MAX = 50;
+  var app = document.getElementById('paApp');
+  var canal = app.getAttribute('data-canal') || '';
+  function leeLista() {
+    try { var v = JSON.parse(localStorage.getItem(CLAVE) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  function guardaLista(l) {
+    try { localStorage.setItem(CLAVE, JSON.stringify(l)); return true; } catch (e) { return false; }
+  }
+  function anota(q, motivo, tit) {
+    var l = leeLista(), k = plano(q), hoy = new Date().toISOString().slice(0, 10), x = null;
+    l.forEach(function (o) { if (plano(o.q) === k && o.m === motivo) x = o; });
+    if (x) { x.n = (x.n || 1) + 1; x.f = hoy; if (tit) x.t = tit; }
+    else l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 });
+    guardaLista(l.slice(0, MAX));
+    pintaLista();
+  }
+  function textoLista(l) {
+    return 'Preguntas que el bot de Auditavisión no supo contestar\n' + l.map(function (o, i) {
+      return (i + 1) + '. «' + o.q + '» · ' + (o.m === 'noera' ? 'la nota no respondía' + (o.t ? ' (dio: ' + o.t + ')' : '') : 'sin respuesta') +
+        ' · ' + o.f + (o.n > 1 ? ' · ' + o.n + ' veces' : '');
+    }).join('\n') + '\n' + location.href.split('?')[0];
+  }
+  function pintaLista() {
+    var l = leeLista(), ol = document.getElementById('paSinRespLista');
+    if (!ol) return;
+    document.getElementById('paSinRespVacio').hidden = l.length > 0;
+    ol.hidden = document.getElementById('paSinRespAcc').hidden = !l.length;
+    ol.innerHTML = l.map(function (o) {
+      return '<li><button type="button" class="pa-reintenta" data-pa-pregunta="' + esc(o.q) + '" data-pa-ya="1">' + esc(o.q) + '</button> <small>' +
+        (o.m === 'noera' ? 'no era lo que buscabas' : 'sin respuesta') + (o.n > 1 ? ' · ' + o.n + ' veces' : '') + '</small></li>';
+    }).join('');
+    var env = document.getElementById('paSinRespEnviar');
+    if (canal && l.length) {
+      env.href = canal + (canal.indexOf('?') < 0 ? '?' : '&') + 'subject=' + encodeURIComponent('Preguntas sin respuesta del bot') + '&body=' + encodeURIComponent(textoLista(l));
+      env.hidden = false;
+    } else env.hidden = true;
   }
 
   function agrega(clase, html, quieto) {
@@ -202,13 +246,14 @@
     return li;
   }
 
-  function responde(q, quieto) {
+  function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 200);
     if (!q) return;
     agrega('pa-yo', '<p>' + esc(q) + '</p>', quieto);
     var r = buscar(q);
     if (!r.length || r[0].s < 3) {
       agrega('pa-bot', sinRespuesta(q, r.slice(0, 3).map(function (x) { return x.f; })), quieto);
+      if (!ya) anota(q, 'sin');
       return;
     }
     var f = r[0].f, vistos = {}, otras = [];
@@ -230,8 +275,27 @@
   });
   document.getElementById('paApp').addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
-    if (b) { responde(b.getAttribute('data-pa-pregunta')); return; }
+    if (b) { responde(b.getAttribute('data-pa-pregunta'), false, b.hasAttribute('data-pa-ya')); return; }
+    var ne = ev.target.closest ? ev.target.closest('.pa-noera') : null;
+    if (ne) {
+      if (!ne.disabled) anota(ne.getAttribute('data-pa-q'), 'noera', ne.getAttribute('data-pa-tit'));
+      ne.disabled = true;
+      ne.textContent = '✅ Anotada en «Lo que aún no sé»';
+      return;
+    }
+    if (ev.target.id === 'paSinRespCopiar') {
+      var bc = ev.target;
+      (navigator.clipboard ? navigator.clipboard.writeText(textoLista(leeLista())) : Promise.reject()).then(function () {
+        bc.textContent = '✅ Copiada';
+      }, function () { bc.textContent = 'No se pudo copiar'; });
+      return;
+    }
+    if (ev.target.id === 'paSinRespBorrar') {
+      if (window.confirm('¿Borrar las preguntas anotadas en este navegador?')) { guardaLista([]); pintaLista(); }
+      return;
+    }
     var c = ev.target.closest ? ev.target.closest('.pa-copiar') : null;
+    if (c && c.id) return;
     if (c) {
       var art = c.closest('.pa-nota');
       var tx = art.innerText.replace(/📋 Copiar la nota|✅ Copiada/g, '').trim() + '\n' + location.href.split('?')[0];
@@ -242,6 +306,8 @@
   });
   /* Para revisar cómo puntúa una pregunta desde la consola. */
   window.AuditorBot = { buscar: buscar };
+  pintaLista();
+  if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var pre = new URLSearchParams(location.search).get('q');
   if (pre) responde(pre, true);
 })();
