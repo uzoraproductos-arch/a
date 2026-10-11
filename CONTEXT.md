@@ -671,6 +671,29 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Gasto público»: «Se aprueba» y «Se gasta», fundidas; «Se recauda» se llama «Presupuesto» (11-10-2026, sin sello nuevo: no se tocó `assets/`).**
+Pedido del autor. Números queda en **cinco** tarjetas y cada una lleva ya su descripción
+breve (quinto campo de `NUMEROS_PARTES`, en `<small>`, como en Participa):
+Presupuesto, Gasto público, Baja al territorio, Se paga lo que se debe y Se revisa.
+- `numeros-presupuesto.html` vuelve a ser la página real (la de «Se recauda», con el
+  título «Presupuesto: cuánto dinero es y de dónde sale»); `numeros-se-recauda.html`
+  redirige a ella.
+- `numeros-gasto-publico.html` junta a los dos: un solo texto, un «Ayer y hoy» con los
+  capítulos 5 y 7 del libro, el bloque de los tres presupuestos (`numeros_tres()`) y siete
+  tarjetas: el simulador «Reparte tú el presupuesto», cuatro páginas de módulo nuevas
+  (`numeros-lo-que-cuestan-los-poderes.html`, `numeros-ramos-y-dependencias.html`,
+  `numeros-margen-del-presupuesto.html`, `numeros-lo-que-la-cifra-no-dice.html`) y, por
+  ser herramientas, megaobras y costo ambiental, que ahora llevan a
+  `herramienta-megaobras.html` y `herramienta-ambiente.html` en vez de duplicarlas.
+  `numeros-se-aprueba.html` y `numeros-se-gasta.html` redirigen ahí (`NUMEROS_ANTES`).
+- `NUMEROS_MODULOS` lleva un sexto campo, la parte a la que pertenece cada módulo, y
+  `numeros_modulo()` arma su navegación «Más de …» con sus hermanos.
+- Las redirecciones (`redireccion()`) conservan ya la consulta (`?…`) y el `#ancla` cuando el
+  destino no trae los suyos, y las páginas de cada parte mandan un `?abrir=eb-*` viejo a
+  la página de su módulo (sin bucle: se omite el que apunta a sí misma).
+- Queda en los comentarios de `numeros.js` el nombre viejo `numeros-se-recauda.html`; no
+  se cambió para no tocar `assets/` (y subir el sello) solo por un comentario.
+
 **«Presupuesto» y «Se recauda», fundidas (11-10-2026, sello 20261011b).**
 Pedido del autor: fusionar las dos tarjetas, conservar lo mejor de ambas y derivar
 páginas nuevas. Números queda en **seis** tarjetas. `numeros-se-recauda.html` lleva:
@@ -688,7 +711,7 @@ en ceros», que arranca en ceros) en el mismo `numeros.js`, más los tres rubros
   con el bloque del motor en un marco, como los módulos de herramientas):
   `numeros-cuanto-dinero-es.html`, `numeros-a-que-equivale.html`,
   `numeros-camino-del-dinero.html` y `numeros-paquete-2027.html`.
-- `numeros-presupuesto.html` es ya una redirección (REDIRECCIONES) a «Se recauda».
+- `numeros-presupuesto.html` fue una redirección a «Se recauda» hasta que esa página tomó el nombre «Presupuesto» (ver arriba).
   `?abrir=eb-*` y las anclas viejas llevan a la dirección nueva (`NUMEROS_ABRIR` guarda
   ya la URL completa).
 - Herramientas: nada de estas dos tarjetas era herramienta ni estaba duplicado en ellas.

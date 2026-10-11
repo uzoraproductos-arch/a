@@ -7,8 +7,8 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 90 |
-| Páginas que solo redirigen | 2 |
+| Páginas revisadas | 95 |
+| Páginas que solo redirigen | 4 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 10 destinos |
 
@@ -61,35 +61,40 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 130 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 129 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 37 | 1 | 0 | 0 | 0 |
-| `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
-| `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 37 | 1 | 0 | 0 | 0 |
-| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 37 | 1 | 0 | 0 | 0 |
-| `numeros-ingreso-accesorios.html` | Accesorios de impuestos · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-aprovechamientos.html` | Aprovechamientos · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-comercio-exterior.html` | Comercio exterior · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-cuotas.html` | Cuotas de seguridad social · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-derechos.html` | Derechos · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-deuda.html` | Deuda · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-ejercicios-anteriores.html` | Impuestos de ejercicios anteriores · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-fondo-mexicano-del-petroleo.html` | Transferencias del Fondo Mexicano del Petróleo · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-hidrocarburos.html` | Exploración y extracción de hidrocarburos · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-ieps.html` | IEPS · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-isan.html` | ISAN · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-isr.html` | ISR · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-iva.html` | IVA · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-mejoras.html` | Contribuciones de mejoras · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-productos.html` | Productos · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-ingreso-venta-de-bienes-y-servicios.html` | Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE) · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 0 |
-| `numeros-la-deuda.html` | Se paga lo que se debe · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
-| `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 37 | 1 | 0 | 0 | 0 |
-| `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
-| `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 56 | 0 | 2 | 2 | 0 |
-| `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 67 | 0 | 2 | 3 | 0 |
-| `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
+| `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 57 | 0 | 2 | 2 | 0 |
+| `numeros-ingreso-accesorios.html` | Accesorios de impuestos · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-aprovechamientos.html` | Aprovechamientos · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-comercio-exterior.html` | Comercio exterior · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-cuotas.html` | Cuotas de seguridad social · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-derechos.html` | Derechos · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-deuda.html` | Deuda · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-ejercicios-anteriores.html` | Impuestos de ejercicios anteriores · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-fondo-mexicano-del-petroleo.html` | Transferencias del Fondo Mexicano del Petróleo · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-hidrocarburos.html` | Exploración y extracción de hidrocarburos · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-ieps.html` | IEPS · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-isan.html` | ISAN · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-isr.html` | ISR · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-iva.html` | IVA · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-mejoras.html` | Contribuciones de mejoras · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-productos.html` | Productos · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-ingreso-venta-de-bienes-y-servicios.html` | Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE) · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 0 |
+| `numeros-la-deuda.html` | Se paga lo que se debe · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
+| `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 66 | 0 | 2 | 3 | 0 |
+| `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 36 | 1 | 0 | 0 | 0 |
+| `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 74 | 0 | 0 | 0 | 40 |
@@ -104,7 +109,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `servicios.html` | Servicios · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
-| `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
+| `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
@@ -114,7 +119,9 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 | Página | Lleva a |
 |---|---|
 | `busca-y-verifica.html` | `herramienta-inspector-entes.html` |
-| `numeros-presupuesto.html` | `numeros-se-recauda.html` |
+| `numeros-se-aprueba.html` | `numeros-gasto-publico.html` |
+| `numeros-se-gasta.html` | `numeros-gasto-publico.html` |
+| `numeros-se-recauda.html` | `numeros-presupuesto.html` |
 
 ## Enlaces rotos
 
@@ -127,10 +134,10 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 | Destino | Veces enlazado |
 |---|---:|
 | `verificador` | 16 |
-| `ambiente` | 14 |
-| `megaobras` | 14 |
+| `presupuesto` | 14 |
+| `ambiente` | 12 |
+| `megaobras` | 12 |
 | `calculadora` | 11 |
-| `presupuesto` | 11 |
 | `poderes` | 7 |
 | `territorio` | 2 |
 | `municipios` | 2 |
