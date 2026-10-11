@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 110 |
+| Páginas revisadas | 111 |
 | Páginas que solo redirigen | 7 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -38,11 +38,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `fuentes-oficiales.html` | Compendio de Fuentes Oficiales · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `garantias.html` | Garantías cívicas · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `glosario.html` | Glosario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
-| `herramienta-ambiente-pib.html` | El PIB no alcanza · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
-| `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
-| `herramienta-ambiente-ticket.html` | Tu ticket en negativo · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
-| `herramienta-ambiente.html` | Costo Ambiental · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 51 | 0 | 17 | 8 | 19 |
+| `herramienta-ambiente-pib.html` | El PIB no alcanza · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `herramienta-ambiente-ticket.html` | Tu ticket en negativo · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `herramienta-ambiente.html` | Costo Ambiental · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
@@ -61,7 +62,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 134 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 135 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 40 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
@@ -112,7 +113,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 76 | 0 | 0 | 0 | 40 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 49 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
@@ -161,4 +162,4 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-39 fichas, cada una con su porqué, su responsable y su enlace oficial.
+48 fichas, cada una con su porqué, su responsable y su enlace oficial.

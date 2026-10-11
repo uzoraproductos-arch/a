@@ -61,7 +61,7 @@
       '</div>' +
       '<ul class="cr-barras" aria-label="Intereses acumulados, año por año">' + filas.join('') + '</ul>' +
       '<p class="cr-leyenda"><span class="cr-l-base"></span> El hueco que se cubrió con deuda <span class="cr-l-int"></span> Los intereses acumulados</p>' +
-      '<p class="cr-aviso">Es un <b>cálculo con tus datos</b>: el monto lo pones tú y la tasa es ' + esc(t.nom) + ' (' + esc(t.est) + '). ' + esc(t.op) + ' No es una cifra publicada por el gobierno.</p>';
+      '<p class="cr-aviso">Es un <b>cálculo con tus datos</b>: el monto lo pones tú y se usa ' + esc(t.nom) + ' (' + esc(t.est) + '). ' + esc(t.op) + ' No es una cifra publicada por el gobierno.</p>';
   }
 
   document.querySelectorAll('[data-cr-monto]').forEach(function (b) {

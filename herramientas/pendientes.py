@@ -88,6 +88,43 @@ PROPIOS = [
     ('tren-maya-ficha', 'Megaobras', 'Ficha pericial del Tren Maya 2024',
      'Se retiró el 10-10-2026 porque sus cifras no se habían cotejado con el Tomo VII de la Cuenta Pública 2024 ni con la ASF. Volverá cuando cada cifra tenga su documento.',
      PLATAFORMA, CP2024, 'Cuenta Pública 2024, Tomo VII (Hacienda)', [('expedientes.html#exp-tren-maya', 'Expediente del Tren Maya')]),
+    # Crisis ambientales, quinta aplicacion de Costo Ambiental (11-10-2026).
+    ('otis-diferencia', 'Desastres', 'Qué pasó con los $26,296 mdp anunciados para Otis que no aparecen como gastados',
+     'Hacienda anunció el 1 de noviembre de 2023 un plan de $61,313 mdp para Acapulco y Coyuca de Benítez; la secretaria de Bienestar informó el 13 de septiembre de 2024 '
+     'que se gastaron $35,017 mdp. Ni Hacienda ni Bienestar han publicado un cierre del plan que explique la diferencia: falta de transparencia de esas dependencias.',
+     'Secretaría de Hacienda y Crédito Público y Secretaría de Bienestar', TP, 'Transparencia Presupuestaria (Hacienda)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('otis-financiamiento', 'Desastres', 'De qué ramo salió cada peso de la atención al huracán Otis',
+     'Hacienda no ha publicado cuánto se pagó con el Fondo de Desastres Naturales del Ramo 23 y cuánto con el presupuesto de cada dependencia. '
+     'La Auditoría Superior solo deja ver que las compras de enseres de la Defensa salieron de su propio ramo: falta de transparencia de Hacienda.',
+     'Secretaría de Hacienda y Crédito Público', CP2024, 'Cuenta Pública 2024 (Hacienda)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('simon-danos', 'Desastres', 'Declaratorias y daños del huracán Simón (octubre de 2026)',
+     'Aún es pronto: al 11 de octubre de 2026 no hay declaratoria en el Diario Oficial. La Coordinación Nacional de Protección Civil las emite cuando el estado la solicita, '
+     'y CENAPRED publica su estimación de daños alrededor de un año después. Esta ficha se revisará cuando se publiquen.',
+     'Coordinación Nacional de Protección Civil y CENAPRED', 'https://www.dof.gob.mx/', 'Diario Oficial de la Federación', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('gdl-plan-costos', 'Agua', 'Costo de cada acción del Plan Hídrico de Jalisco',
+     'El plan se entregó al Congreso el 14 de julio de 2026 sin decir cómo se financiaría. La prensa citó un total de $42,101 mdp tomado de anexos que el Gobierno de Jalisco '
+     'no ha publicado en su portal: falta de transparencia del Gobierno de Jalisco.',
+     'Gobierno del Estado de Jalisco', 'https://www.jalisco.gob.mx/prensa/noticias/entrega-gobierno-de-jalisco-al-congreso-del-estad-47313',
+     'Comunicado del Plan Hídrico (Gobierno de Jalisco)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('gdl-zapotillo', 'Agua', 'Cuánto cuesta terminar El Zapotillo y cuánto pondrá la Federación',
+     'El gobernador dijo que la obra será «ejecutada y pagada por la Federación», pero sus comunicados dan montos distintos (alrededor de 5 mil y de 7 mil millones de pesos) '
+     'y la Federación no ha publicado su parte: falta de transparencia de la Comisión Nacional del Agua y del Gobierno de Jalisco.',
+     'Comisión Nacional del Agua (Conagua) y Gobierno del Estado de Jalisco', 'https://www.gob.mx/conagua', 'Conagua (gob.mx)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('gdl-colonias', 'Agua', 'Número de colonias de Guadalajara con agua de mala calidad y en la rotación del servicio',
+     'Las cifras que circulan (342, más de 400) vienen de la prensa. El SIAPA, que opera el servicio, no ha publicado la lista ni el número: falta de transparencia del SIAPA.',
+     'Sistema Intermunicipal de los Servicios de Agua Potable y Alcantarillado (SIAPA)', 'https://www.siapa.gob.mx/', 'SIAPA', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('gdl-calidad', 'Agua', 'Resultados de laboratorio de la calidad del agua en Guadalajara',
+     'Salud Jalisco explicó cómo muestrea la Comisión para la Protección contra Riesgos Sanitarios de Jalisco (normas 127, 179 y 230), pero no ha publicado los resultados: '
+     'falta de transparencia de la Secretaría de Salud de Jalisco.',
+     'Secretaría de Salud de Jalisco (COPRISJAL)', 'https://www.jalisco.gob.mx/prensa/noticias/47232', 'Comunicado de Salud Jalisco', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('cenapred-serie', 'Desastres', 'Serie anual 2000-2024 de daños y pérdidas por desastres, en cuadro',
+     'CENAPRED publica la serie solo como gráfica (figura 1.1 de su resumen de 2024), sin el cuadro con la cifra de cada año: la plataforma no puede leerla sin estimar. '
+     'Falta de transparencia de CENAPRED.',
+     'Centro Nacional de Prevención de Desastres (CENAPRED)', 'https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF',
+     'Impacto socioeconómico 2024 (CENAPRED)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('fonden-2021-2025', 'Desastres', 'Fondo de Desastres Naturales aprobado en los Presupuestos 2021 a 2025',
+     'Los Presupuestos de esos años están publicados; la plataforma aún no integra el renglón del Ramo 23.',
+     PLATAFORMA, 'https://www.diputados.gob.mx/LeyesBiblio/', 'Leyes federales (Cámara de Diputados)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
 ]
 
 

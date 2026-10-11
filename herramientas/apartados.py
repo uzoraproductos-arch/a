@@ -804,14 +804,15 @@ def herramienta_modulo(h, n, i, bloque=None):
                       paso(ant, i - 1, '← Anterior', 'ant') if ant else paso(None, 0, '← Volver al índice de', 'ant'),
                       paso(sig, i + 1, 'Siguiente →', 'sig') if sig else paso(None, 0, 'Terminaste · volver a', 'sig'),
                       'Todas las' if pal[2] == 'Las' else 'Todos los', pal[1], titulo, '\n'.join(hermanos)))
+    carga = ('la ' if pal[2] == 'Las' else 'el ') + pal[0]
     marco = bloque or ('<div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-%s)">\n'
              '          <div class="apartado-visor-cuerpo">\n'
-             '            <p class="apartado-visor-carga" role="status">⏳ Cargando ' + ('la ' if pal[2] == 'Las' else 'el ') + pal[0] + ' con sus cifras y fuentes…</p>\n'
+             '            <p class="apartado-visor-carga" role="status">⏳ Cargando %s con sus cifras y fuentes…</p>\n'
              '            <iframe class="apartado-visor-marco" title="%s" data-modulo="%s&amp;visor=1"></iframe>\n'
              '            <noscript><p>Este módulo necesita JavaScript. <a href="%s">Ábrelo en el auditor</a>.</p></noscript>\n'
              '          </div>\n'
              '          <div class="herr-modulo-pie"><a href="%s">⤢ Abrir en el auditor completo</a></div>\n'
-             '        </div>' % (rubro, esc_attr(nombre), url, url, url))
+             '        </div>' % (rubro, carga, esc_attr(nombre), url, url, url))
     return {
         'archivo': modulo_archivo(archivo, clave),
         'menu': nombre,
@@ -3849,6 +3850,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Costo Ambiental estrena encabezado verde gris con su icono y sus módulos pasan a ser cinco aplicaciones. La quinta es nueva: Crisis ambientales. Compara lo que puede costar un desastre con lo que hay para pagarlo (el fondo, el seguro y los bonos), trae una calculadora de lo que cuesta esperar si el hueco se cubre con deuda, y abre tres fichas: el huracán Otis, el huracán Simón y el agua de Guadalajara, cada cifra con su documento y lo que falta con el nombre de quien debe publicarlo.'),
     ('11-10-2026', 'Baja al territorio queda en tres tarjetas, y cada una abre su página: el mapa del gasto federalizado, con cinco lentes y las 32 entidades de mayor a menor; las 32 entidades, con los tres pisos de la hacienda, lo que baja y con qué libertad, y el circuito de cada estado; y los 2,479 municipios, con sus fondos, su predial, el punto ciego del artículo 115 y el padrón completo del INEGI. La franja «Ayer y hoy» pasa a la pregunta frecuente del Ramo 28 y el Ramo 33.'),
     ('11-10-2026', 'El Diccionario del Gasto Público se llama ahora Diccionario del Erario Público.'),
     ('11-10-2026', 'Los Servicios de investigación salen de Participa y pasan a ser un módulo del Modo Inspector, en Herramientas, con todo su contenido: los cinco servicios, cómo trabajamos, el precio, la política de independencia, el formulario y el Pase del Auditor Cívico. El enlace viejo de Participa lleva ahí.'),
@@ -4029,6 +4031,21 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
+    # La quinta aplicacion de Costo Ambiental trae su propio contenido
+    # (herramientas/crisis_ambientales.py, 11-10-2026).
+    import auditorias
+    import crisis_ambientales as ca
+    base = auditorias.db()
+    refs = {r['id']: r for r in base['referencias_legales']}
+    def ref(rid):
+        r = refs[rid]
+        return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
+    n, h = next((k, x) for k, x in enumerate(HERRAMIENTAS, 1) if x[1] == 'ambiente')
+    i = next(k for k, t in enumerate(h[7]) if t[0] == ca.ARCHIVO)
+    m = herramienta_modulo(h, n, i, bloque=ca.pagina(base, ref))
+    m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
+    texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+    open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     for extra in [DICCIONARIO, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_ESTANTE + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
