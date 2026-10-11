@@ -66,11 +66,51 @@ Esto es una plataforma de fiscalización del gasto público:
   Gaceta Parlamentaria.
 - Si un dato no se puede verificar, **se etiqueta como pendiente**, con el
   chip `pendiente`. Nunca se estima, nunca se rellena, nunca se redondea a
-  ojo de buen cubero.
+  ojo de buen cubero La única aproximación permitida es el rango
+  derivado de cotas oficiales (ver más abajo).
 - Los estados de un dato son tres: `oficial` (tomado de su documento),
   `derivado` (calculado a partir de datos oficiales, con la operación dicha)
   y `pendiente`. La función `chipEstado(estado)` los pinta.
 - Las estructuras derogadas se marcan con su vigencia en lugar de borrarse.
+- **Un `pendiente` dice por qué y señala a quién** (decisión del autor,
+  09-10-2026). No basta con «no hay documento oficial»: casi siempre falta
+  porque la dependencia obligada no lo ha transparentado, y eso se dice con
+  su nombre. Ejemplo: «Ni el SAT ni Hacienda han publicado cuánto se evade:
+  falta de transparencia de esas dependencias». Solo se nombra a la
+  dependencia que de verdad debía publicarlo. Si la falta es de la
+  plataforma (el documento existe y aún no lo integramos) o el dato es
+  histórico sin dependencia que responda, se dice así, sin culpar a nadie:
+  atribuir una omisión que no se puede sostener también es un dato
+  inventado.
+
+- **Todo pendiente da la cara** (decisión del autor, 10-10-2026). Además de
+  su chip y su porqué, lleva el **enlace oficial donde debería estar** el
+  dato y queda en el **Registro de pendientes** (`pendientes.html`, lo
+  genera `herramientas/pendientes.py`). Ahí se anota qué falta, por qué
+  falta, a quién le toca publicarlo y en qué páginas aparece. Toda
+  etiqueta «pendiente» de la plataforma lleva a ese registro al hacerle
+  clic, y con `data-pend="<id>"` lleva directo a su ficha. Un registro de
+  la base con estado `pendiente` necesita `motivo` y `url`. Si no los
+  trae, `pendientes.py` detiene la generación, y `inventario.py` reporta
+  como roto cualquier `data-pend` que no tenga ficha.
+
+- **Cuando solo hay aproximación, se da un rango: mínimo, máximo y punto
+  medio** (decisión del autor, 10-10-2026). Si la cifra exacta no está
+  publicada pero sí se puede acotar, no se escribe «~$380» con chip
+  `pendiente`: se escribe «entre X y Y; punto medio Z» con chip
+  `derivado`. Condiciones, sin excepción:
+  - **El mínimo y el máximo salen cada uno de un documento oficial** (o se
+    calculan a partir de cifras oficiales), y cada cota lleva su fuente.
+    Una cota que no se puede sostener no es cota: si falta una, el dato
+    sigue `pendiente`.
+  - **El punto medio es la media aritmética:** Z = (X + Y) ÷ 2. Se dice la
+    operación, como todo `derivado`.
+  - **Se dice de qué está hecho el rango**, por ejemplo «mínimo con el
+    subsidio PEF 2024 ÷ pasajeros AFAC 2024; máximo con el subsidio PEF
+    2025 ÷ pasajeros AFAC 2024».
+  - **La cifra exacta sigue debiéndose:** el rango no la sustituye, así que
+    su ficha del Registro de pendientes se queda, con la nota de que ya
+    hay un rango derivado y de quién debe la cifra exacta.
 
 Si te piden una cifra que no puedes sostener, dilo y déjala pendiente. Es la
 respuesta correcta en este proyecto.
@@ -154,6 +194,45 @@ Un cambio **no está hecho** hasta que las cinco líneas se cumplen:
 
 Al terminar, di explícitamente qué quedó pendiente y por qué. La lista de
 pendientes vive en CONTEXT.md y se mantiene al día: es parte del entregable.
+
+---
+
+## 5 bis. La portada ya no despliega nada: cada clic abre una página
+
+**Decisión del autor, 09-10-2026.** La página principal (`index.html`) queda
+como está. **Ningún contenido nuevo se desglosa debajo de ella**, ni en
+cuadros que se abren encima: todo clic lleva a una página propia de la
+plataforma, bien estructurada (como los apartados `*.html` y las páginas
+`auditoria-*.html`). Lo que todavía se despliega en la portada se irá
+mudando a su página; no se agregan desgloses nuevos.
+
+- Las páginas se generan con Python desde `herramientas/` (no se editan a
+  mano) y comparten cabecera, sello y estilos: `apartados.py` para los
+  apartados, `auditorias.py` para Auditoría en imágenes y `expedientes.py`
+  para los Expedientes de casos. `sello.py` las
+  regenera.
+- Si una página necesita abrir un módulo que sigue en la portada, enlaza a
+  `index.html?ir=destino&ancla=...` (ver `IR_MODULOS` e `IR_DESTINOS` en el
+  motor).
+- Hecho así: Auditoría en imágenes (`auditoria-*.html`) y el radar
+  hacendario, que dejó de ser menú de la portada y vive en
+  `descarga-los-datos.html#radar` (menú «Datos»),
+  y los Expedientes de casos por aclarar, que eran el bloque 3 del Modo
+  Inspector y viven en `expedientes.html#exp-<id>`
+  (`herramientas/expedientes.py` + `assets/auditor/js/expedientes.js`).
+- Lo único que se agregó a la portada después (entrega 2 de la propuesta de
+  Astra, 10-10-2026, a pedido del autor) son **enlaces**: las tres acciones
+  bajo el carrusel. Sus datos los escribe `herramientas/auditorias.py`; no
+  se editan a mano. El bloque «Por dónde empezar» se quitó el mismo día por
+  decisión del autor («la plataforma queda intacta»): sus temas y su nota de
+  verificación viven al pie de cada investigación, y sus accesos, en el
+  índice general.
+- El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
+  es su parte B, y `busca-y-verifica.html` solo redirige ahí.
+- **El menú tiene cinco pestañas, ni una más** (decisión del autor,
+  09-10-2026): Herramientas, Números, Datos, Aprende y Participa.
+  «Números» es la antigua «Sigue el dinero»; su archivo sigue siendo
+  `sigue-el-dinero.html` para no romper enlaces.
 
 ---
 

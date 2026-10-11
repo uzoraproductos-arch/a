@@ -22322,3 +22322,196 @@ body:has(.descubrimiento-modal.show-modal) .nav-regreso { display: none; }
 .sim-vivo-total-val { font-family: var(--font-mono); font-size: clamp(22px, 5vw, 34px); font-weight: 800; color: #ffd166; margin: 6px 0 2px; overflow-wrap: anywhere; }
 .sim-vivo-falta a { color: var(--gold-bright); text-decoration: underline; overflow-wrap: anywhere; }
 .sim-vivo-falta .sim-ver-fuentes { padding-left: 14px; margin: 4px 0 0; list-style: none; }
+
+
+/* ====================================================================
+   AUDITAVISIÓN · CUENTA CIUDADANA Y ESTADO DE RESULTADOS GUBERNAMENTAL (CONAC)
+   Estilos para el Estado de Actividades, Presupuesto, Flujos, Balance y Peritaje
+   ==================================================================== */
+.cf-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+.cf-nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px;
+  align-items: center;
+}
+.cf-nav-btn {
+  background: transparent;
+  color: var(--text-muted, #94a3b8);
+  border: 1px solid transparent;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cf-nav-btn:hover {
+  color: var(--text-bright, #fff);
+  background: rgba(255, 255, 255, 0.06);
+}
+.cf-nav-btn.activa {
+  background: var(--gold-bg, rgba(212, 175, 55, 0.15));
+  color: var(--gold-bright, #ffd700);
+  border-color: var(--gold, #d4af37);
+}
+.cf-concil-btn {
+  margin-left: auto;
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cf-concil-btn:hover {
+  background: rgba(0, 229, 255, 0.2);
+  border-color: #00e5ff;
+}
+.cf-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.cf-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cf-card-header {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted, #94a3b8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cf-card-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-bright, #fff);
+}
+.cf-card-val.positivo { color: var(--emerald-bright, #2ecc71); }
+.cf-card-val.negativo { color: var(--crimson-bright, #e74c3c); }
+.cf-card-val.dorado { color: var(--gold-bright, #ffd700); }
+.cf-card-val.cian { color: #00e5ff; }
+.cf-card-sub {
+  font-size: 11.5px;
+  color: var(--text-muted, #94a3b8);
+  line-height: 1.4;
+}
+.cf-table-w {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-top: 8px;
+}
+.cf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  text-align: left;
+}
+.cf-table th {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold-bright, #ffd700);
+  padding: 10px 14px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cf-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.cf-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+.cf-table td.num-tabular {
+  font-family: var(--font-mono, monospace);
+  text-align: right;
+  font-weight: 600;
+}
+.cf-table tr.cf-row-destacada td {
+  background: rgba(212, 175, 55, 0.08);
+  font-weight: 700;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+.cf-callout {
+  background: rgba(212, 175, 55, 0.05);
+  border-left: 3px solid var(--gold, #d4af37);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-normal, #cbd5e1);
+}
+.cf-callout strong {
+  color: var(--gold-bright, #ffd700);
+}
+.cf-modal-box {
+  background: #0f172a;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  max-width: 850px;
+  width: 92%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  padding: 24px;
+  color: #e2e8f0;
+}
+.cf-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.cf-modal-tit {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--gold-bright, #ffd700);
+  margin: 0 0 4px 0;
+}
+.cf-modal-sub {
+  font-size: 12.5px;
+  color: #94a3b8;
+  margin: 0;
+}
+.cf-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #94a3b8;
+  cursor: pointer;
+}
+.cf-modal-close:hover { color: #fff; }
+/* Etiqueta visible de simulacion (propuesta de Astra, punto 6, 10-10-2026) */
+.cc-sim-et { display: inline-block; margin-right: 6px; padding: 1px 8px; border-radius: 999px; background: #fff3d6; color: #7a4b00; border: 1px solid #e8c77a; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+[data-theme="dark"] .cc-sim-et { background: #3a2c10; color: #f3d38a; border-color: #6b5222; }
+.cc-sim-nota { margin-top: 10px; }
+.am-tk-acciones { display: flex; flex-wrap: wrap; gap: 8px; }

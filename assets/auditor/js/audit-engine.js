@@ -83,7 +83,7 @@
        eligio; el resultado nace vacio y solo se llena cuando lo pide, con
        los mismos dos mandos del resto de la plataforma. */
     cc: {
-      monto: 15000,
+      monto: 0,                 // arranca en $0 (propuesta de Astra, punto 6)
       periodicidad: 'mes',      // 'mes' o 'ano'
       naturaleza: 'bruto',      // 'bruto' o 'neto': que cifra escribio el lector
       regimen: 'sueldos',
@@ -1255,10 +1255,30 @@
         '<button type="button" class="eval-btn-primary" onclick="window.AuditEngine.ccCalcular()">' +
           '<span>' + (listo ? '🔄' : '🧮') + '</span> ' +
           (listo ? 'Rehacer la cuenta' : 'Sacar la cuenta') + '</button>' +
+        '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.ccEjemploOficial()" ' +
+          'title="Salario m\u00ednimo general 2026: CONASAMI, DOF 9 de diciembre de 2025">' +
+          '<span>📄</span> Cargar ejemplo oficial</button>' +
         '<button type="button" class="eval-btn-secondary" onclick="window.AuditEngine.ccReiniciar()">' +
           '<span>↺</span> Reiniciar a ceros</button>' +
       '</div>' +
-    '</div>';
+    '</div>' +
+    '<p class="cc-campo-pista cc-sim-nota"><span class="cc-sim-et">Simulaci\u00f3n</span> Lo que escribes es tuyo, no un dato oficial, ' +
+      'y un $0 tuyo no quiere decir que el dato oficial sea cero. El ejemplo oficial carga el salario m\u00ednimo general mensual de 2026 ' +
+      '(' + ccPesosExacto(ccPar().salario_minimo.mensual_general) + ', CONASAMI).</p>';
+  }
+
+  /* Ejemplo oficial identificado (propuesta de Astra, punto 6): el salario
+     minimo general mensual de 2026, bruto, en sueldos y salarios. */
+  function ccEjemploOficial() {
+    const sm = ccPar().salario_minimo.mensual_general;
+    state.cc.monto = sm;
+    state.cc.periodicidad = 'mes';
+    state.cc.naturaleza = 'bruto';
+    state.cc.regimen = 'sueldos';
+    ccPintarFormulario();
+    const el = document.getElementById('ccMonto');
+    if (el) el.value = ccPesosExacto(sm).slice(1);
+    ccCalcular();
   }
 
   /* --- bloque 2: lo que le retienen ---------------------------------- */
@@ -1595,7 +1615,14 @@
     if (res && res.ano && res.ano.neto > 0) {
       return { anual: res.ano.neto, tipo: 'neto', calculado: true, brutoMes: res.mes.bruto };
     }
-    const monto = cc.monto > 0 ? cc.monto : 15000;
+    /* Sin ingreso escrito no se inventa uno: la referencia es el salario
+       minimo general mensual de 2026 (CONASAMI, DOF 09-12-2025), marcado
+       como ejemplo oficial. */
+    if (!(cc.monto > 0)) {
+      const sm = ccPar().salario_minimo.mensual_general;
+      return { anual: sm * 12, tipo: 'bruto', calculado: false, brutoMes: sm, ejemplo: true };
+    }
+    const monto = cc.monto;
     const anual = cc.periodicidad === 'ano' ? monto : monto * 12;
     const tipo = cc.naturaleza === 'neto' ? 'neto' : 'bruto';
     return { anual: anual, tipo: tipo, calculado: false, brutoMes: tipo === 'bruto' ? anual / 12 : 0 };
@@ -1695,7 +1722,7 @@
           L.aguinaldoDias + ' contra ' + L.referencia.aguinaldoDias + ' días: ' + ccPesos((L.referencia.aguinaldoDias - L.aguinaldoDias) * dia) + ' de diferencia') +
         caja('Su prima vacacional', L.primaVacacionalDias * dia, L.referencia.primaVacacionalDias * dia,
           L.primaVacacionalDias + ' contra ' + L.referencia.primaVacacionalDias + ' días: ' + ccPesos((L.referencia.primaVacacionalDias - L.primaVacacionalDias) * dia) + ' de diferencia') +
-        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Su sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
+        '</div><p class="shock-prest-op">' + chipEstado('derivado') + ' Tu sueldo bruto mensual (' + ccPesos(lector.brutoMes) +
         ') entre 30, por los días de cada regla, en bruto y antes de impuestos. ' + escHtml(L.nota) + '</p>';
     } else {
       cuenta = tuUd('<p class="shock-prest-op">Para ver la cuenta con su sueldo, escriba su ingreso bruto o saque la cuenta en el bloque 1.</p>', '<p class="shock-prest-op">Para ver la cuenta con tu sueldo, escribe tu ingreso bruto o saca la cuenta en el bloque 1.</p>');
@@ -1731,7 +1758,10 @@
     const enBloques = ccEnBloques();
 
     if (badge) {
-      badge.innerHTML = tuUd('Su ingreso de referencia: <strong>', 'Tu ingreso de referencia: <strong>') + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
+      badge.innerHTML = lector.ejemplo
+        ? 'Referencia mientras no escribas tu ingreso: <strong>' + ccPesos(lector.anual / 12) + ' al mes</strong>, el salario m\u00ednimo general 2026 ' +
+          chipEstado('oficial') + ' <em>(ejemplo oficial; escribe el tuyo en el ' + (enBloques ? 'bloque 1' : 'Apartado A') + ')</em>'
+        : tuUd('Su ingreso de referencia: <strong>', 'Tu ingreso de referencia: <strong>') + ccPesos(lector.anual / 12) + ' al mes</strong>, ' + lector.tipo +
         (lector.calculado ? ' (calculado en el ' + (enBloques ? 'bloque 1' : 'Apartado A') + ')' :
           (lector.tipo === 'bruto' ? tuUd('. <em>Es bruto: saque la cuenta en el ', '. <em>Es bruto: saca la cuenta en el ') + (enBloques ? 'bloque 1' : 'Apartado A') +
             ' para comparar neto contra neto.</em>' : ''));
@@ -1942,7 +1972,7 @@
     const isr = res ? res.ano.isr : 0;
     const huella =
       '<section class="pd-bloque">' +
-        '<h3 class="pd-tit">🧍 Su estado de cuenta ecológico</h3>' +
+        '<h3 class="pd-tit">🧍 Tu estado de cuenta ecológico</h3>' +
         '<p class="pd-lead">Lo que a cada persona le toca, en promedio, de la basura y del daño ambiental del país.</p>' +
         '<div class="am-datos">' +
           amTarjeta(amNum(R.perCapitaKg.valor, 3) + ' kg', 'de basura al día por persona', 'oficial', amFuente('DBGIR', R.perCapitaKg.pagina)) +
@@ -2163,7 +2193,7 @@
     it.dano = { id: 'dano', nom: 'Daño ambiental del país', anio: '2024', mdp: C.ctada.total_mdp, estado: C.ctada.estado, c: 3,
       fuente: ceem, que: 'Lo que costó agotar los recursos y ensuciar aire, agua y suelo.' };
     it.gpa = { id: 'gpa', nom: 'Gasto en protección ambiental, todo el país', anio: '2024', mdp: C.gasto_proteccion_ambiental.monto_mdp, estado: 'oficial', c: 3,
-      fuente: ceem, que: 'Lo que gobiernos, empresas y hogares destinaron a proteger el ambiente.' };
+      fuente: ceem, que: 'Gasto en protección ambiental ejercido exclusivamente por el sector público consolidado (INEGI CEEM 2024, pág. 2).' };
     it.ramo16 = { id: 'ramo16', nom: 'Presupuesto federal de Medio Ambiente (Ramo 16)', anio: '2026', mdp: A.presupuesto.aprobado2026.valor / 1e6, estado: A.presupuesto.aprobado2026.estado, c: 2,
       fuente: amFuente('PEF', A.presupuesto.aprobado2026.pagina), que: 'Lo aprobado a la SEMARNAT, la Conagua y sus órganos.' };
     const ids = {
@@ -2188,7 +2218,7 @@
     const reparto = ' La simulación reparte cada cifra en partes iguales entre los 365 días; el gasto real sigue su calendario.';
     if (v === 'poderes') return chipEstado('derivado') + ' Las cuatro barras son partes del mismo presupuesto 2026 y suman su gasto neto total. La del Ejecutivo se obtiene por diferencia e incluye la deuda, lo que se reparte a estados y municipios y las pensiones: no es solo el gasto de las secretarías.' + reparto;
     if (v === 'obras') return chipEstado('derivado') + ' ' + escHtml((R.obra || {}).definicion || '') + ' Los sectores son una agrupación de Auditavisión; la cifra de cada ramo es la del CSV oficial.' + reparto;
-    if (v === 'huachicol') return chipEstado('pendiente') + ' Ninguna autoridad ha publicado cuánto se evade por huachicol fiscal. La barra rayada es la cifra que se mencionó en octubre de 2025 y que la Presidencia aclaró que no es oficial: se muestra para dimensionar lo que se discutió, no entra en ninguna cuenta. La única cifra con documento es la recaudación del Segundo Informe (' + escHtml(HU.periodo || '') + ', diez meses). La Ley de Ingresos 2027 obliga al SAT a publicar su estudio de evasión (art. 30).';
+    if (v === 'huachicol') return chipEstado('pendiente') + ' Ni el SAT ni Hacienda han publicado cuánto se evade por huachicol fiscal: está pendiente por falta de transparencia de esas dependencias. La barra rayada es la cifra que se mencionó en octubre de 2025 y que la Presidencia aclaró que no es oficial: se muestra para dimensionar lo que se discutió, no entra en ninguna cuenta. La única cifra con documento es la recaudación del Segundo Informe (' + escHtml(HU.periodo || '') + ', diez meses). La Ley de Ingresos 2027 obliga al SAT a publicar su estudio de evasión (art. 30).';
     if (v === 'todos') return chipEstado('derivado') + ' Mezcla cifras de 2024 (INEGI) y 2026 (presupuesto aprobado), y una pendiente (rayada). Sirve para ver órdenes de magnitud, no para sumar.' + reparto;
     return chipEstado('derivado') + ' La simulación reparte cada cifra anual en partes iguales entre los 365 días; en la realidad los intereses se pagan en fechas fijas y el daño no es parejo. Dos cifras son de 2026 (presupuesto aprobado) y dos de 2024 (lo último que publicó el INEGI): se comparan por su orden de magnitud, no como si fueran del mismo año.';
   }
@@ -2261,9 +2291,9 @@
       }
       if (v === 'huachicol') {
         const rec = por('recaudacion'), dec = por('declarado'), ener = por('obra_energia');
-        rem.innerHTML = 'Lo único documentado: <b>' + formatMdpFijo(rec) + '</b> recaudados en diez meses al detectar 109.4 millones de litros no declarados ' + chipEstado('oficial') +
-          '; equivalen al ' + amNum(rec / ener * 100, 1) + ' % de la obra pública de Pemex y CFE de un año. La cifra de ' + formatMdpFijo(dec) + ' que se mencionó en 2025 sería ' + amNum(dec / ener, 1) +
-          ' veces esa obra, pero no tiene documento y la Presidencia aclaró que no es oficial. ' + chipEstado('pendiente');
+        rem.innerHTML = 'Lo único documentado oficialmente: <b>' + formatMdpFijo(rec) + '</b> cobrados en 10 meses (1-sep-2025 al 30-jun-2026; 304 días · tasa de $175.13/s) al detectar 109.4 millones de litros no declarados ' + chipEstado('oficial') +
+          '; equivalen al ' + amNum(rec / ener * 100, 1) + ' % de la obra anual de Pemex y CFE. Su equivalencia anualizada proyectada es de ' + formatMdpFijo(5523) + ' ' + chipEstado('derivado') +
+          '. La cifra aislada de ' + formatMdpFijo(dec) + ' que se mencionó en tribuna en 2025 carece de estudio metodológico oficial publicado por Hacienda. ' + chipEstado('pendiente');
         return;
       }
       if (v === 'todos') {
@@ -2318,23 +2348,27 @@
 
   function amTkIngresoSugerido() {
     const l = comparadorIngresoLector();
-    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de su estado de cuenta del módulo 3 (neto).' } : null;
+    return l.calculado ? { mes: Math.round(l.anual / 12), origen: 'Tomado de tu estado de cuenta en la calculadora (neto).' } : null;
   }
 
   function renderAmTicket() {
     const cont = document.getElementById('amTicket');
     if (!cont) return;
     const sug = amTkIngresoSugerido();
-    if (!amTk.ingreso && sug) amTk.ingreso = sug.mes;
+    if (!amTk.ingreso && sug && !amTk.cero) amTk.ingreso = sug.mes;
     cont.innerHTML =
       '<section class="pd-bloque am-tk-b">' +
         tuUd('<p class="pd-lead">El estado de cuenta del módulo 3 le dice a dónde va lo que usted paga. Este ticket le dice lo contrario: lo que ya le cargaron a su nombre sin preguntarle. Su parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que usted gana.</p>', '<p class="pd-lead">El estado de cuenta del módulo 3 te dice a dónde va lo que pagas. Este ticket te dice lo contrario: lo que ya te cargaron a tu nombre sin preguntarte. Tu parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que ganas.</p>') +
         '<div class="am-tk-form" data-no-autolink>' +
           tuUd('<label class="am-tk-campo" for="amTkIngreso"><span>Su ingreso neto al mes</span>', '<label class="am-tk-campo" for="amTkIngreso"><span>Tu ingreso neto al mes</span>') +
-            '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="Por ejemplo, 15000" value="' + (amTk.ingreso || '') + '" ' +
+            '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="0" value="' + (amTk.ingreso || '') + '" ' +
             'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
           '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
-          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que le queda después de impuestos. Si no lo sabe, sáquelo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
+          '<span class="am-tk-acciones">' +
+            '<button type="button" class="pd-btn" onclick="window.AuditEngine.amTicketEjemplo()" title="Salario m\u00ednimo general 2026: CONASAMI, DOF 9 de diciembre de 2025">📄 Cargar ejemplo oficial</button>' +
+            '<button type="button" class="pd-btn" onclick="window.AuditEngine.amTicketReiniciar()">↺ Reiniciar en cero</button>' +
+          '</span>' +
+          '<small class="am-tk-origen">' + (sug ? sug.origen : 'Lo que te queda después de impuestos. Si no lo sabes, sácalo en el <button type="button" class="pd-btn" onclick="window.AuditEngine.seleccionarModuloExplorer(\'calculadora\', \'eb-ccticket\')">estado de cuenta del módulo 3</button>.') + '</small>' +
         '</div>' +
         '<div id="amTkSalida" aria-live="polite">' + (amTk.emitido ? '' : tuUd('<p class="pd-nota am-tk-vacio">Escriba su ingreso y pulse «Emitir». El ticket se imprime renglón por renglón.</p>', '<p class="pd-nota am-tk-vacio">Escribe tu ingreso y pulsa «Emitir». El ticket se imprime renglón por renglón.</p>')) + '</div>' +
       '</section>';
@@ -2435,13 +2469,28 @@
     g.restore();
   }
 
+  /* Ejemplo oficial identificado y reinicio (propuesta de Astra, punto 6). */
+  function amTicketEjemplo() {
+    const campo = document.getElementById('amTkIngreso');
+    if (campo) campo.value = ccPar().salario_minimo.mensual_general;
+    amTicketEmitir();
+    const o = document.querySelector('#amTicket .am-tk-origen');
+    if (o) o.innerHTML = 'Ejemplo oficial: el salario m\u00ednimo general mensual de 2026 ' + chipEstado('oficial') + ' (CONASAMI, DOF 9 de diciembre de 2025). Escribe el tuyo para ver tu parte.';
+  }
+
+  function amTicketReiniciar() {
+    amTk.ingreso = 0; amTk.emitido = false; amTk.cero = true;
+    renderAmTicket();
+  }
+
   function amTicketEmitir(sinAnimar) {
     const campo = document.getElementById('amTkIngreso');
     const salida = document.getElementById('amTkSalida');
     if (!salida) return;
     const v = campo ? parseFloat(String(campo.value).replace(/[^0-9.]/g, '')) : amTk.ingreso;
     if (!(v > 0)) {
-      salida.innerHTML = '<p class="pd-nota am-tk-vacio">' + chipEstado('pendiente') + tuUd(' Escriba un ingreso mensual mayor que cero.</p>', ' Escribe un ingreso mensual mayor que cero.</p>');
+      /* Un cero del lector no es un dato pendiente: es que aun no escribe. */
+      salida.innerHTML = '<p class="pd-nota am-tk-vacio"><span class="cc-sim-et">Simulaci\u00f3n</span> ' + tuUd('Escriba un ingreso mensual mayor que cero: con $0 no hay parte que calcular.</p>', 'Escribe un ingreso mensual mayor que cero: con $0 no hay parte que calcular.</p>');
       return;
     }
     amTk.ingreso = v; amTk.emitido = true;
@@ -2476,7 +2525,7 @@
         lin('Deuda pública total (SHRFSP)', -c.deuda, 'neg', 'cierre estimado 2026 · ' + amNum(c.deuda / v, 1) + tuUd(' meses de su ingreso', ' meses de tu ingreso'), 'am-tk-total') +
         sec('Lo que se abona para reparar') +
         lin('Presupuesto federal de Medio Ambiente', c.ramo16, 'pos', 'Ramo 16, aprobado 2026') +
-        lin('Gasto en protección ambiental del país', c.gpa, 'pos', '2024 · gobiernos, empresas y hogares') +
+        lin('Gasto en protección ambiental del sector público', c.gpa, 'pos', '2024 · sector público consolidado (INEGI CEEM pág. 2)') +
         sec('Su huella física') +
         lin(tuUd('Basura que usted genera al año', 'Basura que generas al año'), -c.kg, 'negkg', amNum(A.residuos.perCapitaKg.valor, 3) + ' kg al día × 365') +
         '<div class="am-tk-bal" style="--i:' + (n++) + tuUd('">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a su nombre, se le cargan <b>$', '">Por cada <b>$1</b> que el presupuesto federal de Medio Ambiente abona a tu nombre, se te cargan <b>$') + amNum(c.intereses / c.ramo16, 0) + '</b> de intereses y <b>$' + amNum(c.dano / c.ramo16, 0) + '</b> de daño ambiental.</div>' +
@@ -2861,7 +2910,7 @@
         '<h3 class="pd-tit">📈 Seis años de revisiones: ' + S[0].cp + ' a ' + S[S.length - 1].cp + '</h3>' +
         '<p class="pd-lead">Cada renglón es el total de la matriz consolidada de una Cuenta Pública, con su documento y su página. En esos seis años la ASF observó ' + pdMdp(sObs) + ' y, durante las propias auditorías, se recuperaron ' + pdMdp(sRec) + ': el <b>' + pdPct(sRec / sObs * 100) + '</b>. ' + chipEstado('derivado') + '</p>' +
         '<div id="cpSerie">' + cpSerieHtml() + '</div>' +
-        '<p class="pd-nota"><b>Cómo leerla.</b> Observado = recuperado + por aclarar. Desde la Cuenta Pública 2023 la matriz ya no publica el total observado: para 2023 y 2024 se suma y se marca ' + chipEstado('derivado') + '. Los montos están en pesos de cada año, sin ajustar por inflación, y el «por aclarar» es el del corte de cada matriz: lo que se solventó después no aparece aquí. La matriz de la Cuenta Pública 2018 no está publicada en el portal de la ASF ' + chipEstado('pendiente') + '.</p>' +
+        '<p class="pd-nota"><b>Cómo leerla.</b> Observado = recuperado + por aclarar. Desde la Cuenta Pública 2023 la matriz ya no publica el total observado: para 2023 y 2024 se suma y se marca ' + chipEstado('derivado') + '. Los montos están en pesos de cada año, sin ajustar por inflación, y el «por aclarar» es el del corte de cada matriz: lo que se solventó después no aparece aquí. La matriz de la Cuenta Pública 2018 no está publicada en el portal de la ASF ' + chipEstado('pendiente') + ': queda pendiente hasta que la ASF la transparente.</p>' +
       '</section>';
 
     /* 3. Donde se concentra */
@@ -2885,7 +2934,7 @@
     /* 4. Su estado */
     const estado =
       '<section class="pd-bloque">' +
-        '<h3 class="pd-tit">🗺️ Lo que la ASF le observó a su estado</h3>' +
+        '<h3 class="pd-tit">🗺️ Lo que la ASF le observó a tu estado</h3>' +
         '<p class="pd-lead">El dinero federal que llega a cada estado lo revisa la ASF en tres niveles: el gobierno del estado, sus municipios (alcaldías en la Ciudad de México) y otros entes locales. Aparte, ' + amNum(C.cp2024.coordinadoras.auditorias) + ' auditorías se hicieron a las dependencias federales que coordinan esos fondos.</p>' +
         '<div id="cpEntidad">' + cpEntidadHtml() + '</div>' +
       '</section>';
@@ -4073,6 +4122,14 @@
 
   function ccReiniciar() {
     state.cc.calculado = false;
+    state.cc.monto = 0;
+    state.cc.deducciones = 0;
+    const elMonto = document.getElementById('ccMonto');
+    if (elMonto) elMonto.value = '';
+    const elDed = document.getElementById('ccDeducciones');
+    if (elDed) elDed.value = '0';
+    renderComparadorSalarial();
+    ccPintarReloj();
     ccPintarTicketCivico();
     ccPintarMandos();
     simPonerEnCeros(document.getElementById('ccRetencion'), 'cc-ret');
@@ -4646,6 +4703,7 @@
             sub: r.monto ? `Asignación: ${formatMoneyMdp(r.monto)}` : 'Presupuesto de Egresos',
             badge: 'RAMO',
             action: () => {
+              if (!enVisor()) { irANumeros('eb-egresos'); return; }
               const desglose = abrirDesglose();
               switchTab('presupuesto');
               switchSubtab('presupuesto', 'pef-desglose');
@@ -5454,7 +5512,7 @@
       d: 'Calcula a dónde va exactamente cada peso de tus impuestos (ISR) según tu nivel de sueldo, y genera tu comprobante digital térmico para fiscalizar y compartir en redes.'
     },
     'presupuesto': {
-      t: '1. El Circuito del Dinero Público',
+      t: 'Números: el recorrido del dinero público',
       d: 'De cada peso del presupuesto federal ($10.19 billones), una parte viaja a los 32 estados y a los 2,479 municipios ($2.81 billones). Explora de dónde sale cada peso en la Ley de Ingresos, en qué se gasta en el PEF y cómo se distribuye en el territorio entre Ramo 28 y Ramo 33.'
     },
     'accion-financiera': {
@@ -5479,7 +5537,7 @@
     },
     'verificador': {
       t: '4. Modo Inspector (Auditoría Forense & Alertas ASF)',
-      d: 'Expedientes documentados, pliegos de observaciones de la Auditoría Superior de la Federación (ASF) y radiografía de salud financiera de dependencias y entes públicos.'
+      d: 'Lo que revisó la Auditoría Superior de la Federación (ASF) y las herramientas para buscar y verificar: el expediente de cualquier ente público, el contraste de una nota y la lista 69-B del SAT.'
     },
     'faq': {
       t: 'Consultar Recursos: Diccionario, Preceptos Legales y Casillas Didácticas',
@@ -5505,7 +5563,7 @@
      titulo, frase y cifra; la explicacion vive aqui, al abrir el modulo. */
   const PROEMIOS = {
     presupuesto: {
-      n: 1, icono: '⚖️', titulo: 'Circuito del Dinero',
+      n: 1, icono: '💰', titulo: 'Números',
       subtitulo: 'Por dónde pasa cada peso antes de llegar a tu calle',
       texto: 'El dinero público recorre siempre el mismo camino: la Ley de Ingresos (LIF) autoriza cobrarlo, el Presupuesto de Egresos (PEF 2026: $10.19 billones) decide en qué se gasta, el gasto federalizado lo reparte a los 32 estados ($2.81 billones) y las participaciones y aportaciones lo llevan a los municipios. Aquí se audita cada una de esas cuatro etapas.',
       temas: [['🏛️ 1 · Arquitectura del flujo', 'arquitectura'], ['💰 2 · Cuánto dinero es', 'cuanto'], ['🔦 3 · Lo que la cifra grande no dice', 'ciegos']]
@@ -5515,7 +5573,7 @@
       subtitulo: 'Lo que se prometió, lo que se pagó y la diferencia',
       texto: 'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
       nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué a veces verás 13 obras y a veces 14' },
-      temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Administración presidencial', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
+      temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Las obras de cada sexenio', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
     },
     calculadora: {
       n: 3, icono: '💳', titulo: 'Calculadora Cívica',
@@ -5527,7 +5585,10 @@
       n: 4, icono: '🔍', titulo: 'Modo Inspector',
       subtitulo: 'Dónde quedó el dinero que nadie ha podido explicar',
       texto: 'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas (EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.',
-      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'inspexp']]
+      /* Desde el 09-10-2026 el menu «Busca y verifica» vive aqui: los temas
+         4 a 6 son sus herramientas (ver el indice en dos grupos del modulo). */
+      temas: [['🏛️ 1 · Qué encontró la ASF', 'inspasf'], ['🚩 2 · Radar por entidad', 'inspradar'], ['📂 3 · Expedientes de casos', 'expedientes.html'],
+              ['🏛️ 4 · Auditor de entes públicos', 'inspentes'], ['📰 5 · Contrasta una nota', 'inspnota'], ['🧾 6 · Lista negra del SAT', 'inspefos']]
     },
     ambiente: {
       n: 5, icono: '🌎', titulo: 'Costo Ambiental',
@@ -5582,9 +5643,9 @@
         '<p class="mod-proemio-sub">' + p.subtitulo + '</p>' +
         '<div class="mod-proemio-texto"></div>' +
         '<ul class="mod-proemio-temas" aria-label="En este módulo">' +
-          p.temas.map(function(t) { return Array.isArray(t) ? '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>' : '<li>' + t + '</li>'; }).join('') +
+          p.temas.map(function(t) { return !Array.isArray(t) ? '<li>' + t + '</li>' : /\.html/.test(t[1]) ? '<li class="mod-proemio-tema-ir"><a href="' + t[1] + '">' + t[0] + ' ➔</a></li>' : '<li class="mod-proemio-tema-ir"><button type="button" onclick="window.AuditEngine.erarioIr(\'' + t[1] + '\')">' + t[0] + '</button></li>'; }).join('') +
         '</ul>' +
-        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">↑ Ver todos los módulos</button>' +
+        '<button type="button" class="mod-proemio-volver" onclick="window.AuditEngine.plegarDesgloseModulos()">← Volver al inicio</button>' +
       '</div>';
     var caja = el.querySelector('.mod-proemio-texto');
     var parrafos = hero ? [].slice.call(hero.children).filter(function(n) { return n.tagName === 'P' || n.classList.contains('hero-mas'); }) : [];
@@ -5665,15 +5726,11 @@
       return;
     }
     if (tabKey === 'faq' && !document.getElementById('tab-panel-faq')) {
-      window.location.href = 'enciclopedia.html#faq';
-      return;
-    }
-    if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias') && document.getElementById('refsListContainer')) {
-      abrirCatalogoFuentes();
+      window.location.href = 'diccionario.html';
       return;
     }
     if (tabKey === 'referencias' && !document.getElementById('tab-panel-referencias')) {
-      window.location.href = 'enciclopedia.html#referencias';
+      abrirCatalogoFuentes();
       return;
     }
     fjDetenerPlay();
@@ -5737,7 +5794,6 @@
       renderCuentasEcologicas();
     } else if (tabKey === 'verificador') {
       renderCuentaPublica();
-      renderForensicDossiers('todos');
       renderRadarBanderasNacional();
       initInspectorExplorador();
       renderVerificadorNotas();
@@ -6293,16 +6349,25 @@
     const indice = construirIndiceAutolink();
     let insertados = 0;
 
-    indice.forEach(entrada => {
-      const caminante = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
-        acceptNode(nodo) {
-          if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
-          return autolinkNodoValido(nodo) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-        }
-      });
+    /* Un solo recorrido del arbol (10-10-2026): antes se abria un
+       TreeWalker por cada alias y se revisaban los ancestros de cada nodo
+       cientos de veces; en la portada eso costaba unos 7 segundos. La
+       lista se actualiza al partir un nodo, asi que el resultado es igual. */
+    const nodos = [];
+    const caminante = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, {
+      acceptNode(nodo) {
+        if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+        return autolinkNodoValido(nodo) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    let n0;
+    while ((n0 = caminante.nextNode())) nodos.push(n0);
+    if (!nodos.length) return 0;
 
-      let nodo;
-      while ((nodo = caminante.nextNode())) {
+    indice.forEach(entrada => {
+      for (let i = 0; i < nodos.length; i++) {
+        const nodo = nodos[i];
+        if (!nodo.nodeValue || nodo.nodeValue.trim().length < 3) continue;
         const coincidencia = entrada.re.exec(nodo.nodeValue);
         if (!coincidencia) continue;
 
@@ -6336,6 +6401,7 @@
         padre.insertBefore(enlace, nodo);
         padre.insertBefore(despues, nodo);
         padre.removeChild(nodo);
+        nodos.splice(i, 1, antes, despues);
 
         insertados++;
         break; // una sola vez por ambito: nota al pie, no subrayado masivo
@@ -7081,13 +7147,13 @@
     const cont = document.getElementById('saludErarioMandos');
     if (!cont) return;
     cont.innerHTML = erarioBarraMandos({
-      sello: 'TERMOSTATO HACENDARIO & PROPORCIONES',
+      sello: 'FLEXIBILIDAD & RIGIDEZ DEL GASTO',
       contado: state.saludErarioContado,
       contar: 'saludErarioContar()',
       reiniciar: 'saludErarioReiniciar()',
       estado: state.saludErarioContado
-        ? '✅ Termostato calibrado. Salud financiera: 54/100 (Margen Frágil). Rigidez del 30.4% por deuda y obligaciones no programables.'
-        : tuUd('⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulse «Contabilizar» para evaluar la salud presupuestal 2026.', '⚪ Termostato y proporciones en ceros ($0 / 0.0%). Pulsa «Contabilizar» para evaluar la salud presupuestal 2026.')
+        ? '✅ Calibración oficial con PEF 2026 Anexo 1: Margen de Flexibilidad Programable del 69.6% ($7.09 B) vs Rigidez Ineludible del 30.4% ($3.10 B por deuda, participaciones y ADEFAS).'
+        : tuUd('⚪ Indicadores en ceros ($0 / 0.0%). Pulse «Contabilizar» para evaluar la flexibilidad del presupuesto 2026.', '⚪ Indicadores en ceros ($0 / 0.0%). Pulsa «Contabilizar» para evaluar la flexibilidad del presupuesto 2026.')
     });
   }
 
@@ -7139,7 +7205,7 @@
       if (txt) txt.textContent = factor > 0.5 ? '0.7%' : '';
     }
 
-    // 2. Termostato circular
+    // 2. Termostato circular dinámico (69.6% Programable vs 30.4% Rigidez)
     const arc = document.getElementById('termostatoArc');
     const num = document.getElementById('termostatoScoreNum');
     const badge = document.getElementById('termostatoBadge');
@@ -7149,21 +7215,23 @@
     const tmProg = document.getElementById('tminiProg');
     const tmFed = document.getElementById('tminiFed');
 
-    const score = Math.round(54 * factor);
+    const pctFlex = 69.6 * factor;
+    const pctRig = 30.4 * factor;
+    const score = Math.round(pctFlex);
     const C = 314.16;
     if (arc) {
-      arc.setAttribute('stroke-dashoffset', (C * (1 - (54 / 100) * factor)).toFixed(2));
+      arc.setAttribute('stroke-dashoffset', (C * (1 - (69.6 / 100) * factor)).toFixed(2));
       if (factor === 0) {
         arc.setAttribute('stroke', 'rgba(255,255,255,0.15)');
       } else {
-        arc.setAttribute('stroke', score >= 70 ? 'var(--emerald-bright)' : score >= 50 ? 'var(--amber)' : 'var(--crimson-bright)');
+        arc.setAttribute('stroke', 'var(--gold-bright)');
       }
     }
 
     if (num) {
       num.textContent = score;
       if (factor === 0) num.style.fill = '#94a3b8';
-      else num.style.fill = score >= 70 ? 'var(--emerald-bright)' : score >= 50 ? 'var(--amber)' : 'var(--crimson-bright)';
+      else num.style.fill = 'var(--gold-bright)';
     }
 
     if (badge) {
@@ -7172,17 +7240,17 @@
         badge.textContent = '⚪ En espera';
       } else {
         badge.className = 'termostato-badge termostato-badge-fragil';
-        badge.textContent = '🟡 Margen Frágil (54/100)';
+        badge.textContent = '🟡 Flexibilidad: ' + pctFlex.toFixed(1) + '% (Margen Condicionado)';
       }
     }
 
-    if (rigTxt) rigTxt.textContent = (30.4 * factor).toFixed(1) + '%';
+    if (rigTxt) rigTxt.textContent = pctRig.toFixed(1) + '%';
 
     if (diag) {
       if (factor === 0) {
         diag.textContent = tuUd('Pulse «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.', 'Pulsa «Contabilizar» para simular la capacidad de maniobra del erario frente a la deuda y compromisos obligatorios.');
       } else {
-        diag.textContent = 'Salud presupuestal frágil (54/100). El 30.4% del erario ($3.10 B) está atado a obligaciones no programables, reduciendo la flexibilidad ante choques económicos.';
+        diag.textContent = 'De cada $100 del erario federal 2026, $69.60 corresponden a gasto programable y $30.40 a compromisos ineludibles por ley (deuda pública 15.4%, participaciones Ramo 28 14.3% y ADEFAS 0.7%). Fuente: PEF 2026, Anexo 1 del DOF [02].';
       }
     }
 
@@ -7277,15 +7345,10 @@
       }
     }
     if (encEl) {
-      /* Si esta pagina trae su propio catalogo, la ficha se abre aqui. */
-      if (document.getElementById('refsListContainer')) {
-        encEl.href = '#faq/faq-referencias';
-        encEl.onclick = function (ev) { ev.preventDefault(); cerrarModalReferencia(); abrirCatalogoFuentes(ref.id); };
-        encEl.lastChild.textContent = ' Ver en el Catálogo de Fuentes';
-      } else {
-        encEl.href = 'enciclopedia.html#' + (ref.id || 'tab-panel-referencias');
-        encEl.onclick = null;
-      }
+      /* El catalogo vive en su pagina (09-10-2026): la ficha abre ahi. */
+      encEl.href = 'fuentes-oficiales.html' + (ref.id ? '#' + ref.id : '');
+      encEl.onclick = null;
+      encEl.lastChild.textContent = ' Ver en el Catálogo de Fuentes';
     }
 
     modal.style.display = 'flex';
@@ -8152,6 +8215,9 @@
         setTimeout(() => state.leafletMap.invalidateSize(), 60);
       }
     }
+    if (abrir && clave === 'cuenta-federal') {
+      renderCuentaFederal();
+    }
   }
 
   /* Abre los bloques plegados que envuelven a un elemento, del mas externo
@@ -8571,21 +8637,26 @@
       });
     }
     const t = sm.totales_consolidados;
-    const anual = sm.obras.reduce((a, o) => a + (o.perdida_anual_mdp || 0), 0);
+    const obrasOp = sm.obras.filter(o => !o.perdida_pendiente);
+    const perdidaEmpresas = obrasOp.reduce((a, o) => a + (o.id !== 'fobaproa' ? (o.perdida_anual_mdp || 0) : 0), 0);
+    const ramo34Apoyo = (sm.obras.find(o => o.id === 'fobaproa') || {}).perdida_anual_mdp || 62489.4;
+    t.perdida_operativa_empresas_mdp = Math.round(perdidaEmpresas * 10) / 10;
+    t.apoyo_presupuestal_fobaproa_ramo34_mdp = Math.round(ramo34Apoyo * 10) / 10;
+    t.cobertura_obras = { documentadas: obrasOp.length, total: sm.obras.length, pct: Math.round(obrasOp.length / sm.obras.length * 1000) / 10 };
+    t.obras_con_operacion_documentada = obrasOp.length;
+    const anual = perdidaEmpresas + ramo34Apoyo;
     t.perdida_anual_consolidada_mdp = Math.round(anual * 10) / 10;
     t.perdida_diaria_consolidada_mdp = Math.round(anual / 365 * 100) / 100;
     t.perdida_segundo_consolidada = Math.round(anual * 1e6 / 31536000 * 100) / 100;
-    t.obras_con_operacion_documentada = sm.obras.filter(o => !o.perdida_pendiente).length;
     MEGAOBRAS_LOSS_RATE = t.perdida_segundo_consolidada;
     const reloj = ((DB.calculadora_civica || {}).relojes || {}).fuentes || [];
     const rm = reloj.find(f => f.id === 'megaobras');
     if (rm) {
       rm.anual_mdp = t.perdida_anual_consolidada_mdp;
       rm.estado = 'derivado';
-      rm.nombre = 'Pérdida anual documentada de las megaobras';
-      rm.fuente = 'Suma de las ' + t.obras_con_operacion_documentada + ' obras de la 2.2 con documento: Tren Maya y AIFA (estados de actividades, Cuenta Pública 2024) y el IPAB (Ramo 34, Cuenta Pública 2024). Las otras ' +
-        (sm.obras.length - t.obras_con_operacion_documentada) + ' quedan pendientes y no entran';
-      rm.que = 'Lo que cuesta cada año tener abiertas las obras que ya tienen documento, más lo que el rescate bancario le cuesta al presupuesto. No es el sobrecosto de construirlas: es el costo de mantenerlas o de pagarlas.';
+      rm.nombre = 'Pérdida anual documentada de las megaobras y apoyo Ramo 34';
+      rm.fuente = 'Suma de ' + t.obras_con_operacion_documentada + ' de 13 obras con documento oficial (cobertura 23.1%): pérdidas operativas de Tren Maya y AIFA ($2,194.4 mdp, estados de actividades Cuenta Pública 2024) y apoyo presupuestal Ramo 34 al IPAB ($62,489.4 mdp). 10 obras pendientes declaradas explícitamente.';
+      rm.que = 'Desglose oficial: $2,194.4 mdp de déficit operativo de empresas públicas más $62,489.4 mdp de transferencias presupuestarias del Ramo 34 al rescate bancario. Las 10 obras sin estados de actividades se mantienen en estado pendiente y no se asumen como cero.';
     }
   }
 
@@ -8713,7 +8784,7 @@
       filas = obras.map(function(o) {
         var p = o.perdida_anual_mdp || 0;
         return radarFila(glosEsc(o.nombre), o.perdida_pendiente ? chipEstado('pendiente') : radarMdp(p),
-          o.perdida_pendiente ? 'Sin documento oficial: pendiente, no entra en la suma.' :
+          o.perdida_pendiente ? 'Pendiente: quien la opera no ha transparentado cuánto pierde; no entra en la suma.' :
           (p ? (o.id === 'fobaproa' && esAuditor() ? 'Ramo 34 ejercido en 2024 (Cuenta Pública)' : 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0))
              : (esAuditor() && o.fuente_operacion ? 'Sin pérdida de operación en 2024: sus ingresos por servicios cubren su gasto.' : 'Sin costo de operación anual registrado en el simulador.')),
           p / mayor * 100);
@@ -8783,11 +8854,11 @@
             '</ul><p class="rc-nota"><b>Lo que no dice:</b> ' + glosEsc(A.limites) + '</p>') +
           radarSec('Lo que se ha dicho y aún no pudimos verificar', '<ul class="pd-lista">' +
             est + '</ul>') +
-          radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ninguna autoridad ha publicado todavía cuánto se pierde. ' +
+          radarSec('Por qué no se suma a la deuda ni a las obras', '<p>Es dinero que <b>no entra</b>, no dinero que sale: se mide en otra cuenta y sumarlo al gasto sería contar peras con manzanas. Pero su efecto llega a las dos: lo que no se cobra se cubre con más deuda o con menos gasto. Ni el SAT ni Hacienda han publicado todavía cuánto se pierde: es falta de transparencia de esas dependencias. ' +
             glosEsc(S.texto) + ' ' + hf(S.fuente, S.pagina) + ' Ahí debería aparecer la primera cifra oficial, y aquí la pondremos.</p>'),
         acciones: [
           { txt: 'Ver cuánto IEPS pagas en la calculadora ➔', fn: function() { seleccionarModuloExplorer('calculadora'); } },
-          { txt: 'Ver el circuito del dinero público (LIF) ➔', fn: function() { seleccionarModuloExplorer('presupuesto'); } }
+          { txt: 'Ver de dónde sale el dinero, en Números (LIF) ➔', fn: function() { irANumeros('eb-ingresos'); } }
         ]
       };
     }
@@ -8867,7 +8938,7 @@
     var cp = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024 ? DB.cuenta_publica_asf.cp2024.total : null;
     var bill = function(mdp) { return '$' + (mdp / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' billones'; };
     var mods = [
-      ['⚖️', 'Circuito del Dinero', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos) y cómo llega a estados y municipios.'],
+      ['💰', 'Números', 'de dónde sale cada peso (Ley de Ingresos), en qué se gasta (Presupuesto de Egresos) y cómo llega a estados y municipios.'],
       ['🏗️', 'Inversión y Megaobras', 'cuánto costaron las grandes obras y cuánto cuesta mantenerlas.'],
       ['💳', 'Calculadora Cívica', 'lo que pagas de impuestos según tu ingreso y a qué rubros equivale.'],
       ['🔍', 'Modo Inspector', 'lo que la Auditoría Superior revisó y lo que quedó por aclarar.'],
@@ -8887,7 +8958,7 @@
         radarSec('Por qué importan', '<p>Cada año el Congreso aprueba cuánto se cobra y en qué se gasta. En 2026 el Presupuesto de Egresos es de ' + bill(P.totalPEF || 0) + '; de ellos, ' + bill(fed) + ' viajan a los 32 estados y a sus municipios, y ' + bill(cf) + ' pagan el costo de la deuda. ' +
           (cp ? 'Al revisar la Cuenta Pública 2024, la Auditoría Superior dejó ' + radarMdp(cp.porAclarar / 1e6) + ' por aclarar. ' : '') + 'Entender ese recorrido es el primer paso para pedir cuentas con datos.</p>') +
         radarSec('Qué encontrarás aquí', '<ul class="rc-plazos">' + mods.map(function(m) { return '<li>' + m[0] + ' <b>' + m[1] + ':</b> ' + m[2] + '</li>'; }).join('') + '</ul>' +
-          '<p class="rc-nota">Para el marco legal completo, los conceptos y el detalle de cada tema está la Enciclopedia Interactiva.</p>') +
+          '<p class="rc-nota">Para el marco legal completo, los conceptos y las fuentes de cada tema está el Diccionario del Gasto Público.</p>') +
         radarSec('Cómo leer las cifras', '<ul class="rc-plazos">' +
           '<li>' + chipEstado('oficial') + ' tomada tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico…).</li>' +
           '<li>' + chipEstado('derivado') + ' calculada a partir de datos oficiales; la operación se dice.</li>' +
@@ -8896,7 +8967,7 @@
         radarSec('Fundamento', '<p class="glos-drawer-ley">Constitución Política, art. 31 fr. IV (la obligación de contribuir al gasto público), art. 74 fr. IV y VI (la Cámara de Diputados aprueba el presupuesto y revisa la Cuenta Pública) y art. 134 (los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez).</p>') +
       '</div>' +
       '<footer class="glos-drawer-pie">' +
-        '<a class="glos-drawer-todo" href="enciclopedia.html" style="text-align:center; text-decoration:none;">📚 Abrir la Enciclopedia Interactiva ➔</a>' +
+        '<a class="glos-drawer-todo" href="diccionario.html" style="text-align:center; text-decoration:none;">📚 Abrir el Diccionario del Gasto Público ➔</a>' +
         (gGasto ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gGasto.termino) + '">Qué es el gasto público ➔</button>' : '') +
         (gHac ? '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-g="' + glosEsc(gHac.termino) + '">Qué es la hacienda pública ➔</button>' : '') +
       '</footer>';
@@ -8951,7 +9022,7 @@
       '<footer class="glos-drawer-pie">' +
         (enPortal
           ? '<button type="button" class="glos-drawer-todo" data-pres="decalogo">📜 Decálogo del ciudadano auditor ➔</button>' +
-            '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="fuentes">📚 Catálogo de fuentes oficiales ➔</button>'
+            '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="fuentes">📚 Compendio de Fuentes Oficiales ➔</button>'
           : '<a class="glos-drawer-todo" href="index.html" style="text-align:center; text-decoration:none;">⚡ Ir a la plataforma ➔</a>') +
         '<button type="button" class="glos-drawer-todo glos-drawer-todo-2" data-pres="finanzas">📖 Qué son las finanzas públicas ➔</button>' +
       '</footer>';
@@ -9087,33 +9158,9 @@
 
   function goToRef(refId) {
     if (refId && (refId.startsWith('ref-marcolg') || refId.startsWith('precepto-'))) {
-      navMarcarOrigen();
-      navSaltoEnCurso = true;
-      var desglose = document.getElementById('seccionDesgloseModulos');
-      if (desglose) {
-        desglose.style.display = 'block';
-        desglose.classList.add('desglose-abierto');
-      }
-      switchTab('faq');
-      switchSubtab('faq', 'faq-marco-legal');
-      navSaltoEnCurso = false;
-      navPintarBarra();
-      renderPreceptosLegales();
-      setTimeout(() => {
-        const targetPrecept = document.getElementById(refId) || document.querySelector('.precepto-card');
-        if (targetPrecept) {
-          targetPrecept.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          targetPrecept.style.borderColor = 'var(--gold-bright)';
-          targetPrecept.style.boxShadow = '0 0 22px rgba(212, 175, 55, 0.45)';
-          setTimeout(() => {
-            targetPrecept.style.borderColor = '';
-            targetPrecept.style.boxShadow = '';
-          }, 2500);
-        }
-      }, 150);
+      irBiblioteca('marco-legal.html' + (refId.startsWith('precepto-') ? '#' + refId : ''));
       return;
     }
-
     // Si la página no contiene el panel de referencias (ej. index.html), abrir la ficha flotante oficial APA 7
     const refPanel = document.getElementById('tab-panel-referencias');
     if (!refPanel) {
@@ -15847,6 +15894,9 @@
   function toggleGarciaLunaDossier() {}
 
   function openAyudanosFiscalizar() {
+    /* Desde el 10-10-2026 es la puerta unica «Cuentanos lo que viste»
+       (comunidad.js, cajon #ptCajon que escribe herramientas/apartados.py). */
+    if (window.Puerta && window.Puerta.abrir()) return;
     const drawer = document.getElementById('ayudanosFiscalizarDrawer');
     const overlay = document.getElementById('ayudanosFiscalizarOverlay');
     if (!drawer || !overlay) return;
@@ -15859,6 +15909,7 @@
   }
 
   function closeAyudanosFiscalizar() {
+    if (window.Puerta) window.Puerta.cerrar();
     const drawer = document.getElementById('ayudanosFiscalizarDrawer');
     const overlay = document.getElementById('ayudanosFiscalizarOverlay');
     if (drawer) {
@@ -15867,6 +15918,8 @@
     }
     if (overlay) overlay.classList.remove('active');
     document.body.style.overflow = '';
+    /* En el visor el reporte es todo el panel: al cerrarlo se cierra el panel. */
+    if (enVisor()) visorCerrar();
   }
 
   function openGarciaLunaArgumento() {}
@@ -16488,7 +16541,9 @@
           estado = d === 0 ? 'neutro' : (mejor ? 'mejor' : 'peor');
         }
         return '<span class="vdg-dist" data-estado="' + estado + '">' + flecha + ' ' + txt + '</span>';
-      })();
+        window.AUDIT_CORE = window.AuditEngine.core;
+  window.AuditavisionVisita = window.AuditEngine.visita;
+})();
 
       const clic = f.esDiaz ? '' :
         ' onclick="window.AuditEngine.selectVersusPresident(\'' + f.id + '\')" title="Abrir el marcador cara a cara contra Don Porfirio Díaz"';
@@ -18979,25 +19034,14 @@
   // CONMUTADOR DE TEMA (MODO OSCURO / CLARO)
   // ==========================================================================
   function initTheme() {
-    let savedTheme = 'dark';
-    try { savedTheme = localStorage.getItem('auditavision_theme') || 'dark'; } catch (e) { /* sin almacenamiento */ }
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeButtonText(savedTheme);
+    // El auditor tiene un solo tema, el claro: el oscuro se retiró por decisión del autor (08-10-2026).
+    document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.removeItem('auditavision_tema_civico'); } catch (e) { /* sin almacenamiento */ }
   }
 
+  // Se conserva exportada por si algún enlace viejo la llama: ya no alterna, deja el tema claro.
   function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem('auditavision_theme', next); } catch (e) { /* el tema vale solo para esta visita */ }
-    updateThemeButtonText(next);
-  }
-
-  function updateThemeButtonText(theme) {
-    const btn = document.getElementById('themeBtn');
-    if (btn) {
-      btn.innerHTML = theme === 'dark' ? '◐ Tema Claro' : '◐ Tema Oscuro';
-    }
+    initTheme();
   }
 
   // ==========================================================================
@@ -20768,8 +20812,8 @@
           '<p class="pe-fuente">' + peFuenteMetrica(M) + '</p>' +
         '</div>' +
         '<div class="pe-tablas">' + PE_GRUPOS.map(G => peTabla(G, E)).join('') + '</div>' +
-        '<p class="pe-ficha">¿Quiere el expediente de cada presidente (modelo económico, funcionarios clave y casos documentados)? ' +
-          '<a href="enciclopedia.html#politicos/mandatarios" target="_blank" rel="noopener">Abrir la pestaña 5.1 de la Enciclopedia ↗</a></p>' +
+        '<p class="pe-ficha">¿Te topaste con un término que no conoces (déficit, deuda, costo financiero)? ' +
+          '<a href="glosario.html">Búscalo en el glosario ➔</a></p>' +
       '</section>';
 
     const barras = document.getElementById('peBarras');
@@ -20849,7 +20893,7 @@
       '<section class="sim-sel sim-sel-sex">' +
         '<div class="sim-sel-cab">' +
           '<span class="sim-sel-ico">🏛️</span>' +
-          '<div><h3 class="sim-sel-tit">Administración presidencial</h3>' +
+          '<div><h3 class="sim-sel-tit">Las obras de cada sexenio</h3>' +
           '<p class="sim-sel-sub">Treinta y seis años de obra pública en una sola línea. La altura de cada bloque es el número de obras evaluadas en ese periodo. ' +
             tuUd('Todos arrancan en cero: pulse «Evaluar» para verlos levantarse a su escala real.</p></div>', 'Todos arrancan en cero: pulsa «Evaluar» para verlos levantarse a su escala real.</p></div>') +
           '<button type="button" class="sim-vertodas' + (activo === 'todos' ? ' on' : '') + '" ' +
@@ -21287,7 +21331,7 @@
 
         (todoPend
           ? '<p class="sim-rank-cero"><strong>Sin documento todavía.</strong> ' + (sola ? 'Esta obra no tiene' : 'Ninguna de estas obras tiene') +
-            ' un estado financiero o informe oficial cotejado que diga cuánto pierde al operar, y la cifra no se estima. ' +
+            ' un estado financiero o informe oficial publicado que diga cuánto pierde al operar: es falta de transparencia de quien la opera, y la cifra no se estima. ' +
             '<button type="button" class="sim-rank-enlace" onclick="window.AuditEngine.setSimuladorOrden(\'inversion\')">Mide por costo real</button>.</p>'
           : '') +
         (todoCero
@@ -21677,26 +21721,22 @@
         '<div class="sim-pr-card">' +
           '<span class="sim-pr-lbl">Sobrecosto histórico por contribuyente</span>' +
           '<span class="sim-pr-val">$' + formatNumber(Math.round(brechaContrib)) + '</span>' +
-          '<span class="sim-pr-sub">acumulado de 1988 a 2024, una sola vez</span>' +
+          '<span class="sim-pr-sub">acumulado de 1988 a 2024 (inversión de capital en exceso)</span>' +
         '</div>' +
         '<div class="sim-pr-card sim-pr-alta">' +
-          '<span class="sim-pr-lbl">Aportación total por contribuyente</span>' +
-          '<span class="sim-pr-val">$' + formatNumber(Math.round(porContrib)) + '</span>' +
-          '<span class="sim-pr-sub">las dos mesas anteriores, divididas entre el padrón</span>' +
+          '<span class="sim-pr-lbl">Conciliación temporal de cuentas</span>' +
+          '<span class="sim-pr-val">No se suman</span>' +
+          '<span class="sim-pr-sub">un sobrecosto multianual no debe sumarse aritméticamente a un flujo anual</span>' +
         '</div>' +
         '<div class="sim-pr-card">' +
-          '<span class="sim-pr-lbl">Pérdida operativa por contribuyente</span>' +
+          '<span class="sim-pr-lbl">Pérdida operativa anual por contribuyente</span>' +
           '<span class="sim-pr-val">$' + formatNumber(Math.round(perdidaContrib)) + '</span>' +
-          '<span class="sim-pr-sub">cada año, mientras las obras sigan operando así</span>' +
+          '<span class="sim-pr-sub">cada año (gasto corriente anual documentado en 2024)</span>' +
         '</div>' +
       '</div>' +
       '<button type="button" class="sim-puente-b" onclick="window.AuditEngine.simLlevarACalculadora()">' +
-        '🧮 Ver qué significan estos $' + formatNumber(Math.round(porContrib)) +
-        ' en la Calculadora Cívica (2.4)</button>' +
-      '<p class="sim-mesa-aviso"><strong>Cómo leer esta mesa, y qué no dice.</strong> La división reparte el agregado entre el padrón de contribuyentes activos ' +
-        'para darle escala humana a una cifra que de otro modo es abstracta. No afirma que cada persona haya pagado esa cantidad: el erario se nutre de manera desigual, ' +
-        'y una parte del sobrecosto se cubrió con deuda que aún se está amortizando. Además, el sobrecosto suma pesos nominales de años distintos, entre 1988 y 2024, ' +
-        'sin deflactar a un año común. <strong>Pendiente declarado:</strong> la cifra del padrón todavía no lleva en nuestro catálogo la referencia oficial que la sustenta.</p>' +
+        '🧮 Ver estas dos magnitudes separadas en la Calculadora Cívica (2.4)</button>' +
+      '<p class="sim-mesa-aviso"><strong>Rigor contable de esta mesa:</strong> Se presentan ambas magnitudes de manera diferenciada. El sobrecosto es una variable de saldo acumulada a lo largo de décadas (1988–2024) en obras de infraestructura; la pérdida operativa es un flujo anual de gasto corriente (Cuenta Pública 2024). Sumarlos en un solo importe distorsionaría la temporalidad del dinero público.</p>' +
     '</article>';
   }
 
@@ -22516,22 +22556,17 @@
       orden.map(k => chip(k, pdEsc(cats[k].nombre) + ' (' + cats[k].n + ')')).join('');
   }
 
+  /* La Biblioteca del auditor vive en paginas propias desde el 09-10-2026
+     (preguntas-frecuentes.html, marco-legal.html, fuentes-oficiales.html,
+     glosario.html y pase-del-auditor.html): ya no se despliega en la
+     portada. Desde el visor se abre en la ventana completa. */
+  function irBiblioteca(url, sustituir) {
+    var w = window;
+    if (enVisor()) { try { w = window.top; } catch (e) { w = window; } }
+    if (sustituir && w === window) w.location.replace(url); else w.location.href = url;
+  }
   function abrirCatalogoFuentes(refId) {
-    cerrarMegaMenus();
-    const desglose = document.getElementById('seccionDesgloseModulos');
-    if (desglose) { desglose.style.display = 'block'; desglose.classList.add('desglose-abierto'); }
-    switchTab('faq');
-    switchSubtab('faq', 'faq-referencias');
-    const panel = document.querySelector('.subtab-panel[data-parent="faq"][data-subpanel="faq-referencias"]');
-    const el = (refId && document.getElementById(refId)) || panel;
-    if (!el) return;
-    setTimeout(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: refId ? 'center' : 'start' });
-      if (refId) {
-        el.classList.add('ref-row-destacada');
-        setTimeout(() => el.classList.remove('ref-row-destacada'), 2600);
-      }
-    }, 60);
+    irBiblioteca('fuentes-oficiales.html' + (refId && /^[A-Za-z0-9_-]+$/.test(refId) ? '#' + refId : ''));
   }
 
   function renderReferencias(filter = 'todas') {
@@ -22606,8 +22641,8 @@
 
   const COM_RUTAS = [
     { id: 'aportar', n: '1', ico: '🔍', ancla: 'bloqueAportar',
-      tit: 'Ayúdanos a fiscalizar',
-      txt: tuUd('Comparta un dato, una obra de su municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.', 'Comparte un dato, una obra de tu municipio que no cuadra, una corrección a lo que publicamos o una pista que valga la pena seguir.'),
+      tit: 'Cuéntanos lo que viste',
+      txt: 'Algo raro con el dinero público, un dato mal en esta plataforma o un tema que valga la pena investigar: el botón de la cabecera abre las tres rutas.',
       efecto: 'Alimenta el trabajo de esta plataforma',
       aviso: 'No es una denuncia legal', tono: 'gold' },
     { id: 'denunciar', n: '2', ico: '🏛️', ancla: 'bloqueCanales',
@@ -22662,8 +22697,8 @@
           tuUd('<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si su esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>', '<p class="com-destino-sub">Es la pregunta que casi ningún portal ciudadano responde, y la que decide si tu esfuerzo sirve de algo. Las tres funciones de esta pestaña terminan en lugares distintos.</p>') +
           '<div class="com-destino-cols">' +
             '<div class="com-destino-col" data-tono="gold">' +
-              '<div class="com-destino-k">El formulario «Ayúdanos a fiscalizar»</div>' +
-              tuUd('<p>Se guarda <strong>únicamente en su propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borra los datos del sitio se pierde. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial con el botón de copiar.</p>', '<p>Se guarda <strong>únicamente en tu propio navegador</strong>. Todavía no hay servidor: nadie más lo ve, y si borras los datos del sitio se pierde. Sirve para ordenar lo que quieres reportar y para llevártelo a un canal oficial con el botón de copiar.</p>') +
+              '<div class="com-destino-k">«Cuéntanos lo que viste»</div>' +
+              tuUd('<p><strong>No se guarda en ningún lado</strong>: el texto se arma en su navegador, ya redactado, para que lo copie o lo descargue; el envío se activa con el lanzamiento. Sirve para ordenar lo que quiere reportar y para llevárselo a un canal oficial.</p>', '<p><strong>No se guarda en ningún lado</strong>: el texto se arma en tu navegador, ya redactado, para que lo copies o lo descargues; el envío se activa con el lanzamiento. Sirve para ordenar lo que quieres reportar y para llevártelo a un canal oficial.</p>') +
             '</div>' +
             '<div class="com-destino-col" data-tono="emerald">' +
               '<div class="com-destino-k">Un canal oficial</div>' +
@@ -22899,7 +22934,7 @@
     'deuda':       { tab: 'accion-financiera', etiqueta: 'Acción Financiera' },
     'legislativo': { tab: 'legislativo',       etiqueta: 'Congreso' },
     'judicial':    { tab: 'judicial',          etiqueta: 'Poder Judicial' },
-    'politicos':   { tab: 'politicos',         etiqueta: 'Enciclopedia' }
+    'politicos':   { tab: 'politicos',         etiqueta: 'Diccionario' }
   };
 
   /* En la plataforma no hay pestanas de Congreso ni de Corte: su gasto vive
@@ -22908,7 +22943,7 @@
   function irAPestanaDesdeDebate(tab) {
     const enPlataforma = !!document.getElementById('seccionDesgloseModulos');
     if (enPlataforma) {
-      if (tab === 'politicos') { window.location.href = 'enciclopedia.html#politicos'; return; }
+      if (tab === 'politicos') { window.location.href = 'diccionario.html'; return; }
       seleccionarModuloExplorer(tab === 'legislativo' || tab === 'judicial' ? 'poderes' : tab);
       return;
     }
@@ -24821,107 +24856,10 @@
     renderInspExpediente();
   }
 
-  /* ==========================================================================
-     EXPEDIENTES FORENSES DE AUDITORIA (DOSSIERS ASF / SHCP / PEF)
-     ========================================================================== */
-  /* Las diez fichas salen de DB.expedientes (herramientas/integrar_expedientes.py):
-     cada cifra suma informes individuales de la ASF enlistados en la ficha, o
-     viene del Sistema de Alertas de la SHCP. */
-  const EXP_CATEGORIAS = { megaobras: 'Megaobras', energia: 'Energía (Pemex)', salud: 'Salud y fármacos', alimentos: 'Segalmex', deuda: 'Deuda de los estados' };
-  const EXP_ACCIONES = {
-    R: ['recomendación', 'recomendaciones'], RD: ['recomendación al desempeño', 'recomendaciones al desempeño'],
-    SA: ['solicitud de aclaración', 'solicitudes de aclaración'], PEFCF: ['aviso al SAT', 'avisos al SAT'],
-    PRAS: ['promoción de responsabilidad', 'promociones de responsabilidad'], PO: ['pliego de observaciones', 'pliegos de observaciones'],
-    DH: ['denuncia de hechos', 'denuncias de hechos']
-  };
-
-  function expAccionesTexto(a) {
-    const k = Object.keys(a || {});
-    if (!k.length) return 'sin acciones';
-    return k.map(x => a[x] + ' ' + (EXP_ACCIONES[x] ? EXP_ACCIONES[x][a[x] === 1 ? 0 : 1] : x)).join(', ');
-  }
-
-  function expFichaHtml(f, n) {
-    const cifras = '<div class="exp-cifras" data-no-autolink>' + f.cifras.map(c =>
-      '<div class="exp-cifra"><span class="exp-cifra-v num-tabular">' + pdEsc(c.valor) + '</span><span class="exp-cifra-e">' + pdEsc(c.etq) + ' ' + chipEstado(c.estado) + '</span></div>').join('') + '</div>';
-    let detalle = '';
-    if (f.anios) {
-      detalle = '<div class="pd-tabla-w" data-no-autolink><table class="pd-tabla exp-anios"><thead><tr><th>Cuenta Pública</th><th>Informes</th><th>Por aclarar</th><th>Pliegos</th><th>Promociones</th></tr></thead><tbody>' +
-        f.anios.map(a => '<tr><td>' + a.cp + '</td><td class="num-tabular">' + a.auditorias + '</td><td class="num-tabular">' + pdMdp(a.porAclarar) + '</td><td class="num-tabular">' + a.PO + '</td><td class="num-tabular">' + a.PRAS + '</td></tr>').join('') +
-        '</tbody></table></div>';
-    } else if (f.tabla) {
-      detalle = '<div class="pd-tabla-w" data-no-autolink><table class="pd-tabla exp-anios"><thead><tr><th>Estado</th><th>Deuda / ingresos libres</th><th>Deuda y obligaciones</th></tr></thead><tbody>' +
-        f.tabla.map(t => '<tr><td>' + pdEsc(t.entidad) + '</td><td class="num-tabular">' + pdPct(t.dyoIld * 100) + '</td><td class="num-tabular">' + pdMdp(t.dyo) + '</td></tr>').join('') +
-        '</tbody></table></div>';
-    }
-    const docs = f.auditorias
-      ? '<details class="exp-informes" data-no-autolink><summary>Los ' + f.auditorias.length + ' informes de la ASF, uno por uno</summary><ol>' + f.auditorias.map(a =>
-          '<li><a href="' + pdEsc(a.url) + '" target="_blank" rel="noopener noreferrer">CP ' + a.cp + ' · Auditoría ' + a.num + ' ↗</a> ' +
-          '<span>' + pdEsc(a.titulo) + ' · <i>' + pdEsc(a.ente) + '</i></span> <small>' + (a.porAclarar ? pdMdp(a.porAclarar) + ' por aclarar; ' : 'Sin monto por aclarar; ') +
-          (a.recuperado ? pdMdp(a.recuperado) + ' recuperados; ' : '') + expAccionesTexto(a.acciones) + '.</small></li>').join('') + '</ol></details>'
-      : '<ul class="exp-docs" data-no-autolink>' + f.documentos.map(d => '<li><a href="' + pdEsc(d.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(d.titulo) + ' ↗</a></li>').join('') + '</ul>';
-    const principal = f.auditorias
-      ? f.auditorias.slice().sort((x, y) => y.porAclarar - x.porAclarar)[0].url
-      : f.documentos[0].url;
-    /* Un caso por renglon: numero, tema, titulo y sus cifras en fila; el
-       desglose completo se abre al pulsarlo (details/summary). */
-    const resumen = '<span class="exp-fila-cifras" data-no-autolink>' + f.cifras.slice(0, 3).map(c =>
-      '<span class="exp-fila-cifra"><b class="num-tabular">' + pdEsc(c.valor) + '</b><small>' + pdEsc(c.etq) + '</small></span>').join('') + '</span>';
-    return '<li class="exp-fila-li"><details class="exp-fila exp-ficha" data-cat="' + f.categoria + '" id="exp-' + f.id + '">' +
-        '<summary class="exp-fila-cab" data-no-autolink>' +
-          '<span class="exp-fila-n num-tabular" aria-hidden="true">' + String(n).padStart(2, '0') + '</span>' +
-          '<span class="exp-fila-tx"><span class="forensic-id-tag">' + f.icono + ' ' + pdEsc(EXP_CATEGORIAS[f.categoria] || f.categoria) + '</span>' +
-            '<span class="exp-fila-tit">' + pdEsc(f.titulo) + '</span>' +
-            '<span class="exp-fila-ente">' + pdEsc(f.ente) + '</span></span>' +
-          resumen +
-          '<span class="exp-fila-mas" aria-hidden="true">+</span>' +
-        '</summary>' +
-        '<div class="exp-fila-cuerpo">' +
-          '<p class="exp-hallazgo">' + pdEsc(f.hallazgo) + '</p>' +
-          cifras + detalle + docs +
-          '<p class="pd-nota exp-fuente">' + chipEstado('oficial') + ' ' + pdEsc(f.fuente) + '. ' + pdEsc(f.alcance) + '</p>' +
-        '</div>' +
-        '<div class="forensic-card-actions">' +
-          '<a href="' + pdEsc(principal) + '" target="_blank" rel="noopener noreferrer" class="forensic-btn-asf" title="Abrir el documento oficial"><span>🏛️</span> ' + (f.auditorias ? 'Informe principal' : 'Documento oficial') + '</a>' +
-          '<button type="button" class="forensic-btn-dossier" onclick="window.AuditEngine.expCopiar(\'' + f.id + '\')"><span>📋</span> Copiar ficha con fuentes</button>' +
-        '</div>' +
-        '</div>' +
-      '</details></li>';
-  }
-
-  function expCopiar(id) {
-    const f = DB.expedientes && DB.expedientes.fichas.find(x => x.id === id);
-    if (!f) return;
-    let t = f.titulo + '\n' + f.ente + '\n\n' + f.hallazgo + '\n\n' + f.cifras.map(c => '- ' + c.valor + ': ' + c.etq + ' (' + c.estado + ')').join('\n');
-    if (f.auditorias) t += '\n\nInformes de la ASF:\n' + f.auditorias.map(a => '- CP ' + a.cp + ', auditoría ' + a.num + ' (' + a.clave + '): ' + a.titulo + '. ' + a.url).join('\n');
-    if (f.documentos) t += '\n\nDocumentos:\n' + f.documentos.map(d => '- ' + d.titulo + ': ' + d.url).join('\n');
-    t += '\n\nFuente: ' + f.fuente + '. ' + f.alcance + '\nConsultado en Auditavisión.';
-    copiarTextoPlano(t, 'Ficha copiada con sus fuentes.');
-  }
-
-  function renderForensicDossiers(cat) {
-    const container = document.getElementById("forensicDossiersGrid");
-    if (!container) return;
-    const todas = (DB.expedientes && DB.expedientes.fichas) || [];
-    if (!todas.length) {
-      container.innerHTML = '<p class="pd-nota">' + chipEstado('pendiente') + ' La base no trae la colección de expedientes.</p>';
-      return;
-    }
-    const filtro = cat || "todos";
-    const lista = filtro === "todos" ? todas : todas.filter(d => d.categoria === filtro);
-    const countLabel = document.getElementById("forensicCountLabel");
-    if (countLabel) countLabel.textContent = lista.length;
-    /* El numero es el del caso en la lista completa: no cambia al filtrar. */
-    container.innerHTML = lista.map(f => expFichaHtml(f, todas.indexOf(f) + 1)).join('');
-  }
-
-  function filtrarDossiers(cat, btn) {
-    if (btn && btn.parentElement) {
-      btn.parentElement.querySelectorAll(".forensic-chip-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-    }
-    renderForensicDossiers(cat);
-  }
+  /* Los Expedientes de casos por aclarar (antes aqui: expFichaHtml,
+     renderForensicDossiers, filtrarDossiers, expCopiar) viven desde el
+     09-10-2026 en su propia pagina, expedientes.html, que pinta
+     assets/auditor/js/expedientes.js. */
 
   // ==========================================================================
   // INICIALIZACIÓN GLOBAL CON PROTECCIÓN ANTE ERRORES
@@ -24956,7 +24894,6 @@
     safeRun(() => renderJudicialAsesoresSimulator('cargos'), 'renderJudicialAsesoresSimulator');
     safeRun(() => renderJudicialGlobalesSimulator('balanza'), 'renderJudicialGlobalesSimulator');
     safeRun(() => renderReformaCosto(), 'renderReformaCosto');
-    safeRun(() => renderForensicDossiers('todos'), 'renderForensicDossiers');
     safeRun(renderCuentaPublica, 'renderCuentaPublica');
     safeRun(renderFinanzasPublicas, 'renderFinanzasPublicas');
     safeRun(renderSimuladorMegaobras, 'renderSimuladorMegaobras');
@@ -24992,6 +24929,8 @@
     safeRun(updateCongresosSimulator, 'updateCongresosSimulator');
     safeRun(updateJerarquiaSimulator, 'updateJerarquiaSimulator');
     safeRun(renderPanoramaErario, 'renderPanoramaErario');
+    safeRun(renderCuentaFederal, 'renderCuentaFederal');
+    safeRun(() => AuditavisionVisita.iniciar(), 'AuditavisionVisita.iniciar');
     safeRun(renderFuncionJurisdiccional, 'renderFuncionJurisdiccional');
     safeRun(renderPjOrientacion, 'renderPjOrientacion');
     safeRun(renderPlenoOrientacion, 'renderPlenoOrientacion');
@@ -26570,12 +26509,7 @@
      hace que position:fixed se mida contra el pie y no contra la pantalla, y
      el Pase aparecia hasta abajo. Se cuelga directo del body al abrirla. */
   function openPaseCivicoModal() {
-    const m = document.getElementById('modalPaseCivico');
-    if (!m) return;
-    if (m.parentElement !== document.body) document.body.appendChild(m);
-    cerrarMegaMenus();
-    m.style.display = 'flex';
-    m.scrollTop = 0;
+    irBiblioteca('pase-del-auditor.html');
   }
   function closePaseCivicoModal() {
     const m = document.getElementById('modalPaseCivico');
@@ -26590,6 +26524,7 @@
     }, 80);
   }
   function irAAuditoriaInversiones() {
+    if (!enVisor()) { irANumeros('eb-arquitectura'); return; }
     switchTab('presupuesto');
     switchSubtab('presupuesto', 'panoramica');
     setTimeout(() => {
@@ -26598,21 +26533,13 @@
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   }
-  /* Abre un caso de la lista de expedientes (modulo 5, bloque 3) desde otra
-     pestaña: quita el filtro si lo ocultaba y despliega su ficha. */
+  /* Abre un caso de los Expedientes, que desde el 09-10-2026 tienen su
+     propia pagina (expedientes.html#exp-<id>). */
+  function expedienteUrl(id) {
+    return 'expedientes.html' + (id ? '#exp-' + encodeURIComponent(id) : '');
+  }
   function irAExpediente(id) {
-    seleccionarModuloExplorer('verificador');
-    setTimeout(function() {
-      let ficha = document.getElementById('exp-' + id);
-      if (!ficha) {
-        filtrarDossiers('todos', document.querySelector('.forensic-chip-btn'));
-        ficha = document.getElementById('exp-' + id);
-      }
-      erarioIr('inspexp');
-      if (!ficha) return;
-      ficha.open = true;
-      setTimeout(function() { ficha.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
-    }, 120);
+    window.location.href = expedienteUrl(id);
   }
   function compartirPlataforma() {
     if (navigator.share) {
@@ -26632,7 +26559,17 @@
 
   /* ancla: id de un bloque dentro del modulo, para aterrizar ahi y no en
      el principio de la pestana. */
+  /* Numeros (10-10-2026): el modulo "Circuito del Dinero" se reparte en
+     la pestana Numeros (sigue-el-dinero.html). Fuera del visor, lo que lo
+     abria lleva ahi; ?abrir= abre la tarjeta del bloque en su visor. */
+  function irANumeros(ancla) {
+    var w = window;
+    if (enVisor()) { try { w = window.top; } catch (e) { w = window; } }
+    w.location.href = 'sigue-el-dinero.html' + (ancla && /^[A-Za-z0-9_-]+$/.test(ancla) ? '?abrir=' + ancla : '');
+  }
+
   function seleccionarModuloExplorer(tabKey, ancla) {
+    if (tabKey === 'presupuesto' && !enVisor()) { irANumeros(ancla); return; }
     var desglose = document.getElementById('seccionDesgloseModulos');
     if (desglose) {
       desglose.style.display = 'block';
@@ -26655,23 +26592,64 @@
     var cardEl = document.getElementById(mapCards[tabKey]);
     if (cardEl) cardEl.classList.add('active-explorer-card');
     
+    var targetScroll = moduloDestino(tabKey, ancla);
+    if (targetScroll) erarioAbrirAncestros(targetScroll);
+    if (targetScroll) {
+      irAlDestino(targetScroll);
+    }
+  }
+
+  /* El bloque al que aterriza un modulo: el ancla pedida o, si no hay, el
+     principio de su panel. */
+  function moduloDestino(tabKey, ancla) {
     var targetSubpanel = (tabKey === 'megaobras') ? document.querySelector('.subtab-panel[data-subpanel="simulador-megaobras"]') :
                          (tabKey === 'poderes') ? document.querySelector('.subtab-panel[data-subpanel="poderes"]') :
                          (tabKey === 'territorio' || tabKey === 'municipios' || tabKey === 'proyeccion2027') ? document.querySelector('.subtab-panel[data-parent="accion-financiera"][data-subpanel="' + tabKey + '"]') :
                          (tabKey === 'calculadora') ? document.querySelector('.subtab-panel[data-subpanel="calculadora"]') : null;
-    var targetScroll = (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
-    if (targetScroll) erarioAbrirAncestros(targetScroll);
-    if (targetScroll) {
-      setTimeout(function() {
-        targetScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
-      /* Las secciones largas terminan de dibujarse despues del primer salto
-         y lo dejan corto: se corrige una vez, si quedo lejos. */
-      setTimeout(function() {
-        var t = targetScroll.getBoundingClientRect().top;
-        if (Math.abs(t) > 200) targetScroll.scrollIntoView({ behavior: 'instant', block: 'start' });
-      }, 900);
+    return (ancla && document.getElementById(ancla)) || targetSubpanel || document.getElementById('tab-panel-' + tabKey) || document.getElementById('seccionDesgloseModulos');
+  }
+
+  /* Alto de la cabecera una vez compacta: arriba mide mas (ver civico.css),
+     pero al bajar a un modulo se encoge, y es ese alto el que hay que
+     descontar para que el modulo no quede escondido ni con hueco. */
+  function altoCabeceraCompacta(nav) {
+    if (!nav) return 0;
+    if (!cabCompacta) {
+      /* Se encoge antes del salto: si cambiara de alto a medio camino, el
+         desplazamiento suave se interrumpe y el modulo queda lejos. */
+      nav.style.transition = 'none';
+      cabeceraFijar(true);
+      /* Mientras dura el salto no se vuelve a agrandar: el primer paso del
+         desplazamiento suave pasa por y < 10 y la deshacia. */
+      clearTimeout(cabBloqueo);
+      cabBloqueo = setTimeout(function() { cabBloqueo = null; cabeceraRevisar(); }, 1500);
+      var h = nav.getBoundingClientRect().height;
+      nav.style.transition = '';
+      return h;
     }
+    return nav.getBoundingClientRect().height;
+  }
+
+  function irAlDestino(targetScroll) {
+    /* Se calcula la posicion a mano, descontando la cabecera fija: el
+       scrollIntoView instantaneo encima del suave dejaba el modulo
+       cientos de pixeles por debajo de su inicio. */
+    var margenCabecera = function() {
+      var nav = document.querySelector('.site-top-nav');
+      return altoCabeceraCompacta(nav) + 12;
+    };
+    var irAlModulo = function(comportamiento) {
+      var margen = margenCabecera(); /* primero: puede encoger la cabecera y mover el modulo */
+      var y = targetScroll.getBoundingClientRect().top + window.pageYOffset - margen;
+      window.scrollTo({ top: Math.max(0, y), behavior: comportamiento });
+    };
+    setTimeout(function() { irAlModulo('smooth'); }, 60);
+    /* Las secciones largas terminan de dibujarse despues del primer salto
+       y lo dejan corto: se corrige una vez, si quedo lejos. */
+    setTimeout(function() {
+      var t = targetScroll.getBoundingClientRect().top - margenCabecera();
+      if (Math.abs(t) > 200) irAlModulo('instant');
+    }, 900);
   }
 
   function plegarDesgloseModulos() {
@@ -26684,40 +26662,21 @@
       c.classList.remove('active-explorer-card');
     });
     pintarProemio(null);
-    /* De vuelta a la vitrina de modulos, por debajo de la barra fija. */
-    var rejilla = document.querySelector('.explorer-cards-grid');
-    if (rejilla) {
-      window.scrollTo({ top: Math.max(0, rejilla.getBoundingClientRect().top + window.pageYOffset - 170), behavior: 'smooth' });
-    } else {
-      (document.querySelector('.explorer-hero-section') || document.body).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    /* De vuelta al inicio: los modulos viven en el menu «Herramientas»
+       desde el 08-10-2026, ya no en un bloque de la portada. */
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   // =========================================================================
   // MEGA-MENUS TIPO USASPENDING & CAROUSEL SHOWCASE DE DESCUBRIMIENTO
   // =========================================================================
 
+  var BIBLIOTECA_PAGINAS = {
+    'faq-preguntas': 'preguntas-frecuentes.html', 'faq-glosario': 'glosario.html',
+    'faq-marco-legal': 'marco-legal.html', 'faq-referencias': 'fuentes-oficiales.html'
+  };
   function abrirDiccionarioSubtab(subtabId) {
-    var desglose = document.getElementById('seccionDesgloseModulos');
-    if (desglose) {
-      desglose.style.display = 'block';
-      desglose.classList.add('desglose-abierto');
-    }
-    
-    switchTab('faq');
-    
-    if (subtabId) {
-      switchSubtab('faq', subtabId);
-    }
-    
-    cerrarMegaMenus();
-    
-    var targetEl = (subtabId && document.querySelector('.subtab-panel[data-parent="faq"][data-subpanel="' + subtabId + '"]')) || document.getElementById('moduloActivoArea') || document.getElementById('tabintro');
-    if (targetEl) {
-      setTimeout(function() {
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 70);
-    }
+    irBiblioteca(BIBLIOTECA_PAGINAS[subtabId] || 'diccionario.html');
   }
   /* La hoja muestra el menu cuando su contenedor (.nav-menu-item) lleva la
      clase; antes se le ponia al desplegable y en pantallas tactiles, sin
@@ -26729,6 +26688,7 @@
     var wasOpen = item.classList.contains('open-mega-menu');
     cerrarMegaMenus();
     if (!wasOpen) {
+      item.classList.remove('mega-suprimido');
       item.classList.add('open-mega-menu');
       var t = item.querySelector('.mega-menu-trigger');
       if (t) t.setAttribute('aria-expanded', 'true');
@@ -26743,6 +26703,197 @@
     document.querySelectorAll('.mega-menu-trigger[aria-expanded="true"]').forEach(function(t) {
       t.setAttribute('aria-expanded', 'false');
     });
+  }
+
+  /* Paginas de apartado (herramientas.html,
+     sigue-el-dinero.html, descarga-los-datos.html, aprende.html y
+     participa.html, desde el 08-10-2026): sus tarjetas traen al lector aqui
+     con ?ir=destino y, si hace falta, &ancla=id de un bloque. Solo se
+     aceptan los destinos de esta lista, y la direccion se limpia al llegar
+     para que recargar no repita la accion. */
+  var IR_MODULOS = ['presupuesto', 'megaobras', 'calculadora', 'verificador', 'ambiente',
+                    'territorio', 'municipios', 'poderes', 'proyeccion2027', 'portal'];
+  var IR_DESTINOS = {
+    egresos: function() {
+      seleccionarModuloExplorer('presupuesto', 'eb-egresos');
+      setTimeout(function() {
+        var c = document.querySelector('#eb-egresos .erario-pleg-cab');
+        if (c && c.getAttribute('aria-expanded') === 'false') erarioPlegToggle('egresos');
+      }, 150);
+    },
+    buscador: function() {
+      seleccionarModuloExplorer('verificador', 'inspExplorador');
+      setTimeout(function() { var i = document.getElementById('inspBuscador'); if (i) i.focus({ preventScroll: true }); }, 1000);
+    },
+    efos: function() { efosAbrir(); },
+    descargas: function() { abrirDescargas(); },
+    diccionario: function() { abrirDescargas('diccionario'); },
+    'csv-municipios': function() { descargarCSV('municipios'); },
+    /* El glosario tiene su propia pagina desde el 09-10-2026. */
+    /* La Biblioteca del auditor tiene paginas propias desde el 09-10-2026. */
+    'faq-glosario': function() { irBiblioteca('glosario.html', true); },
+    'faq-marco-legal': function(a) { irBiblioteca('marco-legal.html' + (a && /^precepto-/.test(a) ? '#' + a : ''), true); },
+    'faq-preguntas': function() { irBiblioteca('preguntas-frecuentes.html', true); },
+    fuentes: function(a) { irBiblioteca('fuentes-oficiales.html' + (a && /^ref-/.test(a) ? '#' + a : ''), true); },
+    pase: function() { irBiblioteca('pase-del-auditor.html', true); },
+    reporta: function() { openAyudanosFiscalizar(); },
+    nota: function() { abrirNotaPortada(null); },
+    /* Destinos de las paginas de Auditoria en imagenes: el ancla dice
+       que expediente, renglon del erario, municipio o concepto abrir. */
+    expediente: function(a) { window.location.replace(expedienteUrl(a)); },
+    flujo: function(a) {
+      if (a === 'egr-costofin') scAbrirFlujo('egresos', 'egresosChart', a);
+      else if (a && /^fed-/.test(a)) scAbrirFlujo('federalizado', 'federalizadoChart', a);
+    },
+    municipio: function(a) {
+      var m = a && a.match(/^([A-Z]{2,4})-(\d{5})$/);
+      if (m) munIrA(m[1], m[2]); else munIrA(null, null);
+    },
+    radar: function(a) { if (a) abrirRadarConcepto(a); },
+    glosario: function(a) { window.location.replace('glosario.html' + (a ? '#' + a : '')); },
+    /* El radar hacendario ya no es un menu de la portada: vive en la
+       pagina de datos (09-10-2026). Los enlaces viejos llegan ahi. */
+    datos: function() { window.location.replace('descarga-los-datos.html#radar'); }
+  };
+  function irDesdeApartado() {
+    var q;
+    try { q = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var destino = q.get('ir');
+    if (!destino) return;
+    var ancla = q.get('ancla');
+    if (ancla && !/^[A-Za-z0-9_-]+$/.test(ancla)) ancla = null;
+    try { history.replaceState(history.state, '', window.location.pathname + window.location.hash); } catch (e) { /* sin historial */ }
+    if (IR_MODULOS.indexOf(destino) !== -1) {
+      seleccionarModuloExplorer(destino, ancla || undefined);
+      /* Si el ancla es un bloque plegable del erario, llega abierto. */
+      if (ancla && /^eb-/.test(ancla)) setTimeout(function() {
+        var b = document.getElementById(ancla);
+        if (b) erarioAbrirAncestros(b);
+        var c = document.querySelector('#' + ancla + ' .erario-pleg-cab');
+        if (c && c.getAttribute('aria-expanded') === 'false') erarioPlegToggle(ancla.slice(3), true);
+        if (enVisor()) visorFoco(ancla);
+      }, 150);
+      /* Recien cargada, la pagina sigue dibujando secciones largas y el
+         salto se queda corto: se repite hasta que el bloque quede arriba. */
+      [1600, 2600].forEach(function(ms) {
+        setTimeout(function() {
+          /* En foco el bloque es lo unico que hay: va arriba del todo. */
+          if (document.documentElement.classList.contains('visor-foco')) { window.scrollTo(0, 0); return; }
+          var t = moduloDestino(destino, ancla);
+          var nav = document.querySelector('.site-top-nav');
+          var alto = altoCabeceraCompacta(nav) + 12;
+          if (t && Math.abs(t.getBoundingClientRect().top - alto) > 120) {
+            window.scrollTo({ top: Math.max(0, t.getBoundingClientRect().top + window.pageYOffset - alto), behavior: 'instant' });
+          }
+        }, ms);
+      });
+    }
+    else if (Object.prototype.hasOwnProperty.call(IR_DESTINOS, destino)) {
+      IR_DESTINOS[destino](ancla);
+      if (enVisor() && VISOR_PANELES.indexOf(destino) === -1) visorAviso(destino);
+    }
+  }
+
+  /* Modo visor (08-10-2026): la pagina de apartado abre el modulo en un
+     marco dentro de si misma, con index.html?ir=...&visor=1, para que el
+     lector no salga de ella. El <head> marca la clase antes de pintar y
+     civico.css esconde cabecera, portada y pie. Los destinos que son
+     ventanas (descargas, reporte, fuentes...) dejan detras un aviso para
+     volver a abrirlas o cerrar el visor. */
+  var VISOR_PANELES = ['egresos', 'buscador', 'efos', 'faq-glosario', 'faq-marco-legal', 'faq-preguntas'];
+  function enVisor() { return document.documentElement.classList.contains('modo-visor'); }
+  function visorCerrar() {
+    try { window.parent.postMessage({ auditavision: 'cerrar-visor' }, window.location.origin); } catch (e) { /* sin marco */ }
+  }
+  function visorAviso(destino) {
+    if (document.getElementById('visorAviso')) return;
+    var d = document.createElement('div');
+    d.id = 'visorAviso';
+    d.className = 'visor-aviso';
+    d.innerHTML = '<p>Lo que pediste se abre en una ventana encima de este panel, o se descarga. Si ya la cerraste, puedes abrirla de nuevo.</p>' +
+      '<div class="visor-aviso-btns"><button type="button" class="visor-aviso-b principal">\u21BA Abrirla de nuevo</button>' +
+      '<button type="button" class="visor-aviso-b">\u2715 Cerrar este panel</button></div>';
+    var bs = d.querySelectorAll('button');
+    bs[0].addEventListener('click', function() { IR_DESTINOS[destino](); });
+    bs[1].addEventListener('click', visorCerrar);
+    document.body.appendChild(d);
+  }
+  /* Foco del visor (08-10-2026): desde Sigue el dinero cada tarjeta abre un
+     solo bloque del modulo, no el modulo entero, para que el contenido se
+     reparta entre los capitulos sin repetirse. Se esconden los hermanos del
+     bloque en cada nivel hasta la subpestana (portada del modulo, indice y
+     los demas bloques) y los subbloques que trae dentro, que tienen su
+     propia tarjeta. «Pantalla completa» sigue abriendo el modulo entero. */
+  function visorFoco(id) {
+    var t = document.getElementById(id);
+    if (!t) return;
+    document.documentElement.classList.add('visor-foco');
+    var pro = document.getElementById('moduloProemio');
+    if (pro) pro.classList.add('visor-oculto');
+    /* Las herramientas de «Busca y verifica» (Modo Inspector) no se
+       pliegan: su ancla es un rotulo .insp-sep y la herramienta son los
+       hermanos que le siguen hasta el proximo rotulo. Esos se quedan. */
+    var suyos = [];
+    if (t.classList.contains('insp-sep')) {
+      for (var h = t.nextElementSibling; h && !h.classList.contains('insp-sep'); h = h.nextElementSibling) suyos.push(h);
+    }
+    var n = t;
+    while (n && n.parentElement && n !== document.body) {
+      var padre = n.parentElement;
+      Array.prototype.forEach.call(padre.children, function(h) { if (h !== n && suyos.indexOf(h) === -1) h.classList.add('visor-oculto'); });
+      if (padre.classList.contains('subtab-panel') || padre.classList.contains('tab-panel')) break;
+      n = padre;
+    }
+    Array.prototype.forEach.call(t.querySelectorAll('.erario-pleg'), function(s) { s.classList.add('visor-oculto'); });
+  }
+  /* En el visor, un enlace a otra pagina se abre en la ventana completa,
+     no dentro del marco. */
+  document.addEventListener('click', function(e) {
+    if (!enVisor()) return;
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.target) return;
+    var h = a.getAttribute('href') || '';
+    if (h.charAt(0) === '#' || /^javascript:/i.test(h) || a.hasAttribute('download')) return;
+    a.target = '_top';
+  }, true);
+  /* Al estar listo el documento, no al terminar de cargar: las fuentes y
+     las imagenes externas pueden tardar segundos y el lector esperaria con
+     la portada enfrente. El init corre antes (setTimeout tras el suyo). */
+  document.addEventListener('DOMContentLoaded', function() { setTimeout(irDesdeApartado, 300); });
+  /* Cabecera alta arriba de la pagina, compacta al desplazarse (civico.css).
+     Con holgura entre 10 y 120 px para que no parpadee al cruzar el umbral. */
+  var cabCompacta = false;
+  function cabeceraFijar(compacta) {
+    if (compacta === cabCompacta) return;
+    cabCompacta = compacta;
+    document.body.classList.toggle('cabecera-compacta', compacta);
+  }
+  var cabBloqueo = null;
+  function cabeceraRevisar() {
+    if (cabBloqueo) return;
+    var y = window.pageYOffset || 0;
+    cabeceraFijar(cabCompacta ? y > 10 : y > 120);
+  }
+  window.addEventListener('scroll', cabeceraRevisar, { passive: true });
+  document.addEventListener('DOMContentLoaded', cabeceraRevisar);
+
+  /* Menú de celular: en pantallas angostas el índice entero (menús,
+     acciones, buscador y el recuadro para reportar) se pliega tras el
+     botón de tres rayas. El aspecto vive en civico.css. */
+  function toggleMenuMovil(forzar) {
+    var nav = document.querySelector('.site-top-nav');
+    if (!nav) return;
+    var abrir = typeof forzar === 'boolean' ? forzar : !nav.classList.contains('nav-abierta');
+    nav.classList.toggle('nav-abierta', abrir);
+    document.body.classList.toggle('menu-movil-abierto', abrir);
+    var btn = document.getElementById('navHamburguesa');
+    if (btn) {
+      btn.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      btn.setAttribute('aria-label', abrir ? 'Cerrar el menú' : 'Abrir el menú');
+      var txt = btn.querySelector('.nav-hamb-txt');
+      if (txt) txt.textContent = abrir ? 'Cerrar' : 'Menú';
+    }
+    if (!abrir) cerrarMegaMenus();
   }
 
   /* Que el desplegable quepa en la pantalla: los menus de la derecha se
@@ -26769,275 +26920,17 @@
     if (alto > 160) dd.style.maxHeight = alto + 'px';
   }
 
-  /* Auditoria en imagenes. Cada diapositiva abre un simulador «Ver gasto»
-     que arma sus cifras en el momento desde la base: las fichas de
-     Expedientes (informes individuales de la ASF), el Panorama del Erario
-     (PEF 2026), la matriz de la Cuenta Publica 2024 y el padron municipal
-     del INEGI. Aqui no se escribe ni un monto: si la base cambia, el
-     carrusel cambia con ella. Las cuentas arrancan en cero y solo suben
-     cuando el lector pulsa «Ver gasto». */
+  /* Auditoria en imagenes (09-10-2026). Cada diapositiva es un enlace a
+     su propia pagina, auditoria-<id>.html, que arma auditoria-imagen.js
+     con las cifras de la base. Aqui solo queda el carrusel. */
   var currentShowcaseIdx = 0;
   var showcaseTimer = null;
-  var scActual = null;
-  var scEstado = 'cero';
-
-  function scFicha(id) {
-    return (DB.expedientes && DB.expedientes.fichas || []).find(function (f) { return f.id === id; }) || null;
-  }
-
-  function scSuma(lista, campo) {
-    return lista.reduce(function (a, x) { return a + (x[campo] || 0); }, 0);
-  }
-
-  function scAcc(lista, clave) {
-    return lista.reduce(function (a, x) { return a + ((x.acciones && x.acciones[clave]) || 0); }, 0);
-  }
-
-  /* Un titulo de la ASF puede pasar de las veinte palabras; en la barra
-     se deja lo que distingue a cada informe. */
-  function scCorto(t) {
-    var m = String(t).match(/Paquetes? [\d, y]*\d|Tramo \d+[^,]*, [^,]+/);
-    if (m) return m[0];
-    var c = String(t).split(/ del Tren Interurbano| y (?:las )?Adecuaciones| de la Construcci[oó]n| del Proyecto| de la Nueva Refiner| del Aeropuerto| de Circulaci[oó]n|, de la Superestructura|, y del Viaducto| km \d|, en (?:el|la|los) /)[0];
-    return c.length > 80 ? c.slice(0, 78) + '…' : c;
-  }
-
-  /* Las obras que tienen expediente comparten la misma forma: cuantos
-     informes, cuanto quedo por aclarar, que acciones se promovieron y un
-     renglon por informe. Si ninguno dejo monto por aclarar, el rastro
-     muestra lo que la ASF reviso en cada uno (universo seleccionado). */
-  function scDesdeExpediente(id, etqExp) {
-    var f = scFicha(id);
-    if (!f || !f.auditorias) return null;
-    var au = f.auditorias;
-    var por = scSuma(au, 'porAclarar') / 1e6;
-    var rec = scSuma(au, 'recuperado') / 1e6;
-    var multi = au.length > 1;
-    var cont = [
-      { v: au.length, f: 'entero', etq: 'informes de la ASF revisados', est: 'oficial' },
-      { v: por, f: 'mdp1', etq: multi ? 'por aclarar, suma de los informes' : 'por aclarar en el informe', est: multi ? 'derivado' : 'oficial' },
-      { v: scAcc(au, 'PO'), f: 'entero', etq: 'pliegos de observaciones', est: multi ? 'derivado' : 'oficial' },
-      { v: scAcc(au, 'PRAS'), f: 'entero', etq: 'promociones de responsabilidad administrativa', est: multi ? 'derivado' : 'oficial' }
-    ];
-    if (rec > 0) cont.push({ v: rec, f: 'mdp1', etq: 'recuperados durante las auditorías', est: multi ? 'derivado' : 'oficial' });
-    var conMonto = au.filter(function (a) { return a.porAclarar > 0; });
-    var rastro, tit;
-    if (conMonto.length >= 2) {
-      tit = 'Dónde quedó el dinero por aclarar, informe por informe';
-      rastro = conMonto.slice().sort(function (a, b) { return b.porAclarar - a.porAclarar; }).map(function (a) {
-        return { k: scCorto(a.titulo), sub: 'CP ' + a.cp + ' · auditoría ' + a.num, v: a.porAclarar / 1e6, url: a.url };
-      });
-    } else {
-      tit = 'Lo que la ASF revisó en cada auditoría (universo seleccionado)';
-      rastro = au.filter(function (a) { return a.universo; }).sort(function (a, b) { return b.universo - a.universo; }).map(function (a) {
-        return { k: scCorto(a.titulo), sub: 'CP ' + a.cp + ' · auditoría ' + a.num + (a.porAclarar ? ' · ' + pdMdp(a.porAclarar) + ' por aclarar' : ' · sin monto por aclarar'), v: a.universo / 1e6, url: a.url };
-      });
-    }
-    var principal = au.slice().sort(function (a, b) { return (b.porAclarar - a.porAclarar) || ((b.universo || 0) - (a.universo || 0)); })[0];
-    return {
-      contadores: cont, rastroTit: tit, rastro: rastro,
-      rastroEst: rastro.length > 0 ? 'oficial' : null,
-      hallazgo: f.hallazgo,
-      fuente: f.fuente + '. ' + f.alcance,
-      acciones: [
-        { txt: '📂 Abrir el expediente ' + etqExp + ' en Búsqueda Forense', fn: function () { expIr(id); } },
-        { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }
-      ]
-    };
-  }
-
-  var SHOWCASE = [
-    { id: 'tren-maya', titulo: 'Tren Maya', pregunta: '¿Cuánto dinero del Tren Maya dejó la ASF por aclarar, y en qué tramos?',
-      arma: function () { return scDesdeExpediente('tren-maya', 'del Tren Maya'); } },
-    { id: 'dos-bocas', titulo: 'Refinería Olmeca (Dos Bocas) · Paraíso, Tabasco', pregunta: '¿Qué encontró la ASF al revisar la refinería paquete por paquete?',
-      arma: function () { return scDesdeExpediente('dos-bocas', 'de Dos Bocas'); } },
-    { id: 'deuda-soberana', titulo: 'Costo financiero de la deuda pública', pregunta: '¿Cuánto cuesta al año pagar sólo los intereses de la deuda pública?',
-      arma: scDeuda },
-    { id: 'aifa', titulo: 'Aeropuerto Internacional Felipe Ángeles (AIFA)', pregunta: '¿Qué revisó la ASF en la construcción y la operación del AIFA?',
-      arma: function () { return scDesdeExpediente('aifa', 'del AIFA'); } },
-    { id: 'ramo-33', titulo: 'Ramo 33: el dinero etiquetado para estados y municipios', pregunta: '¿Cuánto dinero del Ramo 33 llega a estados y municipios, y cuánto quedó por aclarar?',
-      arma: scRamo33 },
-    { id: 'lego-cienega', titulo: 'Ciénega de Flores, Nuevo León: el dinero público alrededor de LEGO', pregunta: '¿Qué dinero público rodea a la planta de LEGO en Ciénega de Flores?',
-      arma: scLego },
-    { id: 'tren-toluca', titulo: 'Tren Interurbano México-Toluca «El Insurgente»', pregunta: '¿Qué dejó por aclarar la ASF en la obra que faltaba para terminar el Tren Interurbano?',
-      arma: function () { return scDesdeExpediente('tren-toluca', 'del Tren Interurbano'); } },
-    { id: 'megafarmacia', titulo: 'Megafarmacia del Bienestar (Huehuetoca) · Birmex', pregunta: '¿Cuánto costó el almacén de Huehuetoca y qué encontró la ASF en Birmex?',
-      arma: scMegafarmacia },
-    { id: 'huachicol-fiscal', titulo: 'Huachicol fiscal: el impuesto que no entra', pregunta: '¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?',
-      arma: scHuachicol }
-  ];
-  /* Los controles del carrusel cuentan diapositivas con este nombre. */
-  var showcaseData = SHOWCASE;
-
-  function scEgreso(id) {
-    var P = DB.panoramaErario;
-    return P && P.egresos ? P.egresos.find(function (e) { return e.id === id; }) : null;
-  }
-
-  function scDeuda() {
-    var e = scEgreso('egr-costofin');
-    var P = DB.panoramaErario;
-    if (!e || !P) return null;
-    var anual = e.montoMdp;
-    return {
-      contadores: [
-        { v: anual, f: 'mdp1', etq: 'al año en intereses y comisiones (PEF 2026, Anexo 8)', est: e.estado },
-        { v: anual / 365, f: 'mdp1', etq: 'cada día: el monto anual entre 365', est: 'derivado' },
-        { v: anual * 1e6 / 31536000, f: 'pesos2', etq: 'cada segundo: el monto anual entre los 31,536,000 segundos del año', est: 'derivado' },
-        { v: anual / P.totalPEF * 100, f: 'pct', etq: 'del Presupuesto de Egresos 2026 ($' + munMiles(P.totalPEF.toFixed(1)) + ' mdp)', est: 'derivado' }
-      ],
-      rastroTit: 'De qué se compone',
-      rastroEst: 'oficial',
-      rastro: e.componentes.filter(function (c) { return c.m > 0; }).map(function (c) { return { k: c.n, sub: c.d, v: c.m }; }),
-      hallazgo: e.queCubre + ' La Ley Federal de Presupuesto (art. 2º, fracc. XXV) deja fuera del gasto neto total las amortizaciones: este renglón paga el precio de lo prestado, no devuelve el capital.',
-      fuente: 'Presupuesto de Egresos de la Federación 2026, ' + e.clave + '. ' + e.ley + '.',
-      acciones: [
-        { txt: '📉 Ver el costo financiero en el Panorama del Erario', fn: function () { scAbrirFlujo('egresos', 'egresosChart', 'egr-costofin'); } },
-        { txt: '🧮 Calcular tu parte de los intereses en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora', 'cc-b4'); } }
-      ]
-    };
-  }
-
-  function scRamo33() {
-    var P = DB.panoramaErario;
-    var r = P && P.federalizado && P.federalizado.componentes.find(function (c) { return c.id === 'fed-r33'; });
-    var cp = DB.cuenta_publica_asf && DB.cuenta_publica_asf.cp2024;
-    if (!r || !cp) return null;
-    var mun = (P.municipal && P.municipal.fuentes) || [];
-    var fed = cp.federalizado;
-    return {
-      contadores: [
-        { v: r.montoMdp, f: 'mdp1', etq: 'Ramo 33 aprobado para 2026 (' + r.clave + ' del PEF)', est: r.estado },
-        { v: scSuma(mun, 'montoMdp'), f: 'mdp1', etq: 'de ese ramo llegan directo a los municipios: FORTAMUN más FISMDF', est: 'derivado' },
-        { v: fed.auditorias, f: 'entero', etq: 'auditorías de la ASF al gasto federalizado de la Cuenta Pública 2024', est: cp.estado },
-        { v: fed.porAclarar / 1e6, f: 'mdp1', etq: 'por aclarar en esas auditorías (CP 2024)', est: cp.estado }
-      ],
-      rastroTit: 'Los ocho fondos del Ramo 33 en 2026',
-      rastroEst: 'oficial',
-      rastro: r.componentes.map(function (c) { return { k: c.n, sub: c.d, v: c.m }; }),
-      hallazgo: r.queEs + ' Las cifras de la ASF son de la Cuenta Pública 2024, la última revisada completa; las del presupuesto, de 2026. Son años distintos y se muestran juntas sólo para dar escala.',
-      fuente: 'PEF 2026, ' + r.clave + ' (' + r.ley + '); ' + (DB.cuenta_publica_asf.fuentes.MDB2024 ? DB.cuenta_publica_asf.fuentes.MDB2024.doc : 'ASF, Matriz de Datos Básicos CP 2024') + ', p. ' + cp.pagina + '.',
-      acciones: [
-        { txt: '🏘️ Comparar lo que recibe su municipio en el padrón municipal', fn: function () { munIrA(null, null); } },
-        { txt: '🎯 Ver los ocho fondos en el Panorama del Erario', fn: function () { scAbrirFlujo('federalizado', 'federalizadoChart', 'fed-r33'); } }
-      ]
-    };
-  }
-
-  function scLego() {
-    var f = scFicha('cuchillo-ii');
-    if (!f) return null;
-    var m = munDatos('NL').find(function (x) { return x.cve === '19012'; });
-    var au = f.auditorias;
-    var cont = [
-      { v: scSuma(au, 'universo') / 1e6, f: 'mdp1', etq: 'de El Cuchillo II revisados por la ASF en tres Cuentas Públicas (suma del universo seleccionado)', est: 'derivado' },
-      { v: scSuma(au, 'porAclarar') / 1e6, f: 'mdp1', etq: 'del acueducto por aclarar, suma de los tres informes', est: 'derivado' }
-    ];
-    if (m && m.hay) {
-      cont.push({ v: m.ing, f: 'mdp1', etq: 'ingresos del municipio de Ciénega de Flores en 2024 (INEGI, EFIPEM)', est: 'oficial' });
-      cont.push({ v: m.fortamun + m.fismdf, f: 'mdp1', etq: 'de ellos, FORTAMUN más FISMDF del Ramo 33', est: 'derivado' });
-    }
-    return {
-      contadores: cont,
-      rastroTit: 'El Cuchillo II, año por año: lo que la ASF revisó',
-      rastroEst: 'oficial',
-      rastro: au.map(function (a) {
-        return { k: 'Cuenta Pública ' + a.cp, sub: 'Auditoría ' + a.num + ' · ' + (a.porAclarar ? pdMdp(a.porAclarar) + ' por aclarar' : 'sin monto por aclarar'), v: (a.universo || 0) / 1e6, url: a.url };
-      }),
-      hallazgo: f.hallazgo + ' La ampliación de la planta de LEGO que se ha anunciado no tiene todavía un documento oficial en esta plataforma: su monto queda pendiente y no se suma a ninguna cifra.',
-      pendiente: 'Inversión anunciada por LEGO en Ciénega de Flores: sin documento oficial verificado.',
-      fuente: f.fuente + '. Padrón municipal: INEGI, Estadística de Finanzas Públicas Estatales y Municipales, 2024.',
-      acciones: [
-        { txt: '🏘️ Ver Ciénega de Flores en el padrón municipal', fn: function () { munIrA('NL', '19012'); } },
-        { txt: '📂 Abrir el expediente de El Cuchillo II en Búsqueda Forense', fn: function () { expIr('cuchillo-ii'); } }
-      ]
-    };
-  }
-
-  /* Huachicol fiscal: no es gasto que sale sino impuesto que no entra, así
-     que las barras no son un rastro de pagos sino la escala de lo que está
-     en juego. Lo oficial es lo que el Gobierno espera cobrar; lo que otros
-     dicen que se pierde va con chip pendiente, porque ninguna autoridad ha
-     publicado la cifra. Todo sale de DB.huachicol_fiscal. */
-  function scHuachicol() {
-    var H = DB.huachicol_fiscal;
-    if (!H || !H.en_juego) return null;
-    var J = H.en_juego, R = H.reconocimiento, A = H.anam, M = H.marco_legal;
-    var ilif = H.fuentes.ilif27 || {};
-    var oce = (H.estimaciones || []).find(function(e) { return e.fuente === 'oce'; });
-    var cf = M && M.cuotas_federales_2026;
-    var cont = [
-      { v: J.ieps_combustibles_2027_mdp, f: 'mdp1', etq: 'de IEPS de gasolinas y diésel que el Gobierno espera cobrar en 2027 (Ley de Ingresos 2027, p. ' + J.pagina.split(' ')[0] + ')', est: J.estado },
-      { v: J.uno_por_ciento_mdp, f: 'mdp1', etq: 'por cada 1 % de ese impuesto que se evada: el monto entre 100', est: 'derivado' },
-      { v: J.uno_por_ciento_mdp / 365, f: 'mdp1', etq: 'cada día, por ese mismo 1 %: el monto anterior entre 365', est: 'derivado' }
-    ];
-    if (cf) cont.push({ v: cf.gasolina_menor_91, f: 'pesos2', etq: 'de IEPS federal en cada litro de gasolina menor a 91 octanos en 2026 ($' + cf.gasolina_menor_91.toFixed(4) + ' por ley, antes del estímulo fiscal)', est: 'oficial' });
-    var rastro = [
-      { k: 'IEPS de combustibles esperado en 2027', sub: 'Lo que la Ley de Ingresos 2027 propone cobrar. Es lo que está en juego, no lo que se pierde.', v: J.ieps_combustibles_2027_mdp, url: ilif.url, est: J.estado }
-    ];
-    if (oce) {
-      rastro.push({ k: 'Costo total estimado por el Observatorio Ciudadano de Energía, ' + oce.anio, sub: 'Organismo civil, no autoridad: ' + munMiles(oce.pemex_mdp.toFixed(0)) + ' mdp de afectación a Pemex más ' + munMiles(oce.impuestos_mdp.toFixed(0)) + ' mdp de impuestos no cobrados.', v: oce.total_mdp, url: (H.fuentes[oce.fuente] || {}).url, est: oce.estado });
-      rastro.push({ k: 'De esa estimación, impuestos no cobrados', sub: 'La parte de la estimación civil que toca al erario.', v: oce.impuestos_mdp, url: (H.fuentes[oce.fuente] || {}).url, est: oce.estado });
-    }
-    rastro.push({ k: 'Cada 1 % del IEPS de combustibles', sub: 'Regla de tres para dar tamaño: ' + munMiles(J.ieps_combustibles_2027_mdp.toFixed(1)) + ' ÷ 100.', v: J.uno_por_ciento_mdp, est: 'derivado' });
-    if (A) rastro.push({ k: 'Recaudación asociada a lo que detectaron las aduanas', sub: 'Del ' + A.periodo + ': ' + A.litros_millones + ' millones de litros de hidrocarburos no declarados (Segundo Informe de Gobierno, p. ' + A.pagina + '). Es lo que se cobró, no lo que se evade.', v: A.recaudacion_mdp, url: (H.fuentes[A.fuente] || {}).url, est: A.estado });
-    return {
-      contadores: cont,
-      rastroTit: 'Lo que está en juego y lo que se ha dicho',
-      rastroEst: null,
-      rastro: rastro,
-      hallazgo: 'El Gobierno lo reconoce por escrito: en la exposición de motivos de la Ley de Ingresos 2027 dice que «' + R.cita + '». Las prácticas que nombra: ' + R.practicas + '. ' + R.medida,
-      pendiente: 'Ninguna autoridad ha publicado cuánto se pierde. ' + (H.estudios ? H.estudios.texto + ' ' : '') + 'Las barras con chip pendiente son cifras que otros han dado y que aún no cotejamos en un documento oficial: se muestran para dar escala, no como dato.',
-      fuente: 'Iniciativa de Ley de Ingresos de la Federación 2027 (Gaceta Parlamentaria, 8-09-2026), pp. ' + R.paginas + ' y ' + J.pagina + '; Ley del IEPS, art. 2o., fr. I, inciso D, texto vigente; Segundo Informe de Gobierno, pp. 46 y 260; estimación del Observatorio Ciudadano de Energía, pendiente de cotejo.',
-      acciones: [
-        { txt: '📂 Abrir el expediente completo del huachicol fiscal', fn: function () { abrirRadarConcepto('huachicol'); } },
-        { txt: '🧮 Ver cuánto IEPS pagas en la Calculadora Cívica', fn: function () { seleccionarModuloExplorer('calculadora'); } },
-        { txt: '📖 Qué es el huachicol fiscal, en el glosario', fn: function () { irAlGlosario('Huachicol Fiscal'); } },
-        { txt: '📜 Leer la Iniciativa de Ley de Ingresos 2027', url: ilif.url }
-      ]
-    };
-  }
-
-  function scMegafarmacia() {
-    var f = scFicha('birmex');
-    if (!f) return null;
-    var a = f.auditorias[0], x = a.extractos || {};
-    var otros = a.porAclarar - x.almacenAvior - x.almacenMaypo;
-    return {
-      contadores: [
-        { v: x.cefedisInversion / 1e6, f: 'mdp1', etq: 'inversión estimada para comprar y adecuar el almacén, sin IVA', est: 'oficial' },
-        { v: x.cefedisInmuebleConIva / 1e6, f: 'mdp1', etq: 'precio del inmueble de Huehuetoca, con IVA', est: 'oficial' },
-        { v: x.cefedisEquipamiento / 1e6, f: 'mdp1', etq: 'equipamiento adjudicado en forma directa, con IVA', est: 'oficial' },
-        { v: (x.cefedisInmueblePagado + x.cefedisEquipamientoPagado) / 1e6, f: 'mdp1', etq: 'pagados en 2023: primer abono del inmueble y anticipo del equipamiento', est: 'derivado' },
-        { v: a.porAclarar / 1e6, f: 'mdp1', etq: 'por aclarar en toda la auditoría a Birmex (CP 2023)', est: 'oficial' }
-      ],
-      rastroTit: 'Lo que Birmex dejó por aclarar en 2023',
-      rastroEst: 'oficial',
-      rastro: [
-        { k: 'Almacenaje y Distribución Avior', sub: 'Almacenaje sin evidencia de que se recibió el servicio', v: x.almacenAvior / 1e6, url: a.url },
-        { k: 'Farmacéuticos Maypo', sub: 'Almacenaje y distribución sin evidencia de recepción', v: x.almacenMaypo / 1e6, url: a.url },
-        { k: 'Otros hallazgos de la misma auditoría', sub: 'El resto del monto por aclarar (resta del total menos los dos anteriores)', v: otros / 1e6, url: a.url, est: 'derivado' }
-      ],
-      hallazgo: f.hallazgo,
-      fuente: 'ASF, Informe Individual de la Cuenta Pública 2023, auditoría ' + a.num + ' (' + a.clave + '), resultado 4, pp. 79 a 84, y dictamen.',
-      acciones: [
-        { txt: '📂 Abrir el expediente de Birmex en Búsqueda Forense', fn: function () { expIr('birmex'); } },
-        { txt: '🏛️ Leer el informe de la ASF', url: a.url }
-      ]
-    };
-  }
+  var showcaseData = { length: 0 };
 
   function initShowcase() {
     var container = document.querySelector('.showcase-track');
     if (!container) return;
-    /* Las diapositivas son botones: tambien se abren con el teclado. */
-    document.querySelectorAll('.showcase-slide').forEach(function (s, i) {
-      s.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirDescubrimiento(i); }
-      });
-    });
-    var modal = document.getElementById('descubrimientoModal');
-    if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) cerrarDescubrimiento(); });
+    showcaseData = document.querySelectorAll('.showcase-slide');
     updateShowcaseDisplay();
     startShowcaseAutoSlide();
   }
@@ -27083,165 +26976,24 @@
         d.classList.remove('active-dot');
       }
     });
-  }
-
-  function scSimHtml(p) {
-    var cont = p.contadores.map(function (c) {
-      return '<div class="sc-cont"><span class="sc-cont-v num-tabular" data-anim-v="' + c.v + '" data-anim-f="' + c.f + '">' + simFmt(0, c.f) + '</span>' +
-        '<span class="sc-cont-e">' + pdEsc(c.etq) + ' ' + chipEstado(c.est) + '</span></div>';
-    }).join('');
-    var mayor = Math.max.apply(null, p.rastro.map(function (r) { return r.v; }).concat([0])) || 1;
-    var filas = p.rastro.length ? p.rastro.map(function (r) {
-      var k = r.url ? '<a href="' + pdEsc(r.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(r.k) + ' ↗</a>' : pdEsc(r.k);
-      return '<li class="sc-fila">' +
-        '<div class="sc-fila-cab"><span class="sc-fila-k">' + k + (r.est ? ' ' + chipEstado(r.est) : '') + '</span>' +
-        '<span class="sc-fila-v num-tabular" data-anim-v="' + r.v + '" data-anim-f="mdp1">' + simFmt(0, 'mdp1') + '</span></div>' +
-        '<span class="sc-riel"><span class="sc-barra" data-anim-w="' + (r.v / mayor * 100).toFixed(2) + '" style="width:0%"></span></span>' +
-        (r.sub ? '<span class="sc-fila-sub">' + pdEsc(r.sub) + '</span>' : '') +
-      '</li>';
-    }).join('') : '<li class="sc-fila sc-fila-sub">Ninguno de estos informes trae el dato.</li>';
-    return '<div class="sc-sim" data-no-autolink>' +
-        '<div class="sc-mandos">' +
-          '<button type="button" class="sc-btn" id="scBtn" onclick="window.AuditEngine.scVerGasto()">▶ Ver gasto</button>' +
-          tuUd('<span class="sc-estado" id="scEstado" role="status">Las cuentas están en cero. Pulse «Ver gasto» para seguir el rastro del dinero.</span>', '<span class="sc-estado" id="scEstado" role="status">Las cuentas están en cero. Pulsa «Ver gasto» para seguir el rastro del dinero.</span>') +
-        '</div>' +
-        '<div class="sc-conts">' + cont + '</div>' +
-        '<h4 class="sc-rastro-tit">' + pdEsc(p.rastroTit) + (p.rastroEst ? ' ' + chipEstado(p.rastroEst) : '') + '</h4>' +
-        '<ul class="sc-rastro">' + filas + '</ul>' +
-        '<p class="sc-hallazgo">' + pdEsc(p.hallazgo) + '</p>' +
-        (p.pendiente ? '<p class="sc-pendiente">' + chipEstado('pendiente') + ' ' + pdEsc(p.pendiente) + '</p>' : '') +
-        '<p class="sc-fuente"><b>Fuente:</b> ' + pdEsc(p.fuente) + '</p>' +
-      '</div>';
-  }
-
-  function abrirDescubrimiento(idxOrId) {
-    pauseShowcaseAutoSlide();
-    var spec = typeof idxOrId === 'number' ? SHOWCASE[idxOrId]
-      : SHOWCASE.find(function (s) { return s.id === idxOrId; });
-    if (!spec) spec = SHOWCASE[0];
-    var modal = document.getElementById('descubrimientoModal');
-    if (!modal) return;
-    var p = null;
-    try { p = spec.arma(); } catch (err) { p = null; }
-    var elTit = document.getElementById('descModalTitulo');
-    var elPreg = document.getElementById('descModalPregunta');
-    var elSim = document.getElementById('descModalSim');
-    var elAcc = document.getElementById('descModalAcciones');
-    if (elTit) elTit.textContent = spec.titulo;
-    if (elPreg) elPreg.textContent = spec.pregunta;
-    scActual = p;
-    scEstado = 'cero';
-    if (elSim) {
-      elSim.innerHTML = p ? scSimHtml(p)
-        : '<p class="sc-pendiente">' + chipEstado('pendiente') + ' La base no trae todavía los datos de esta obra.</p>';
-    }
-    if (elAcc) {
-      elAcc.innerHTML = p ? p.acciones.map(function (a, i) {
-        return a.url
-          ? '<a class="desc-modal-btn desc-modal-btn-2" href="' + pdEsc(a.url) + '" target="_blank" rel="noopener noreferrer">' + pdEsc(a.txt) + ' ↗</a>'
-          : '<button type="button" class="desc-modal-btn' + (i ? ' desc-modal-btn-2' : '') + '" data-sc-acc="' + i + '">' + pdEsc(a.txt) + ' ➔</button>';
-      }).join('') : '';
-      elAcc.querySelectorAll('[data-sc-acc]').forEach(function (b) {
-        b.addEventListener('click', function () {
-          var a = p.acciones[+b.dataset.scAcc];
-          /* Se anota de donde sale el lector (esta obra, con sus cuentas
-             hechas o en cero) para que la barra de regreso lo devuelva
-             aqui mismo desde el expediente, el padron o la ficha. */
-          var previo = scEstado, y = window.scrollY || 0, sid = spec.id;
-          cerrarDescubrimiento(true);
-          a.fn();
-          navOrigen = {
-            etiqueta: 'Auditoría en imágenes · ' + spec.titulo,
-            y: y,
-            retorno: function () {
-              /* La ficha lateral que abrio el boton (deuda, Ramo 33,
-                 municipio) se cierra antes de volver a la obra. */
-              closeFlujoFicha(false);
-              closeMunFicha(false);
-              window.scrollTo({ top: y, behavior: 'instant' });
-              abrirDescubrimiento(sid);
-              if (previo === 'listo') scMostrarCuentas();
-            }
-          };
-          navPintarBarra();
-        });
+    /* Las tres acciones bajo el carrusel siguen a la imagen visible
+       (entrega 2, 10-10-2026). */
+    var slide = showcaseData[currentShowcaseIdx];
+    var barra = document.getElementById('showcaseAcciones');
+    if (slide && barra && slide.dataset) {
+      var nombre = document.getElementById('showcaseAccNombre');
+      if (nombre && slide.dataset.nombre) nombre.textContent = slide.dataset.nombre;
+      var destinos = { caso: slide.getAttribute('href'), numeros: slide.dataset.numeros, evidencia: slide.dataset.evidencia };
+      barra.querySelectorAll('[data-acc]').forEach(function(a) {
+        var h = destinos[a.getAttribute('data-acc')];
+        if (h) a.setAttribute('href', h);
       });
     }
-    modal.classList.add('show-modal');
-    var card = modal.querySelector('.desc-modal-card');
-    if (card) card.scrollTop = 0;
-    var btn = document.getElementById('scBtn');
-    if (btn) setTimeout(function () { try { btn.focus(); } catch (err) {} }, 60);
   }
 
-  /* Primer toque: las cuentas suben de cero a la cifra oficial. Segundo
-     toque: vuelven a cero, para poder contar otra vez. */
-  function scVerGasto() {
-    var raiz = document.querySelector('#descModalSim .sc-sim');
-    var btn = document.getElementById('scBtn');
-    var est = document.getElementById('scEstado');
-    if (!raiz || !btn) return;
-    if (scEstado === 'contando') return;
-    if (scEstado === 'listo') {
-      if (simAnimFrames.showcase) { cancelAnimationFrame(simAnimFrames.showcase); delete simAnimFrames.showcase; }
-      raiz.querySelectorAll('[data-anim-v]').forEach(function (el) { el.textContent = simFmt(0, el.dataset.animF); });
-      raiz.querySelectorAll('[data-anim-w]').forEach(function (el) { el.style.width = '0%'; });
-      raiz.classList.remove('sc-listo');
-      scEstado = 'cero';
-      btn.textContent = '▶ Ver gasto';
-      if (est) est.textContent = tuUd('Las cuentas volvieron a cero. Pulse «Ver gasto» para contar de nuevo.', 'Las cuentas volvieron a cero. Pulsa «Ver gasto» para contar de nuevo.');
-      return;
-    }
-    scEstado = 'contando';
-    btn.disabled = true;
-    btn.textContent = '⏳ Contando…';
-    if (est) est.textContent = 'Siguiendo el rastro del dinero…';
-    simAnimarZona(raiz, 'showcase', 2400, function () {
-      scEstado = 'listo';
-      raiz.classList.add('sc-listo');
-      btn.disabled = false;
-      btn.textContent = '↺ Reiniciar a ceros';
-      if (est) est.textContent = 'Cuenta terminada: cada cifra lleva su fuente y su estado.';
-    });
-  }
-
-  /* Pinta las cuentas ya terminadas, sin animacion: es el regreso de un
-     lector que ya las habia visto contar. */
-  function scMostrarCuentas() {
-    var raiz = document.querySelector('#descModalSim .sc-sim');
-    var btn = document.getElementById('scBtn');
-    var est = document.getElementById('scEstado');
-    if (!raiz) return;
-    raiz.querySelectorAll('[data-anim-v]').forEach(function (el) { el.textContent = simFmt(parseFloat(el.dataset.animV) || 0, el.dataset.animF); });
-    raiz.querySelectorAll('[data-anim-w]').forEach(function (el) { el.style.width = (parseFloat(el.dataset.animW) || 0).toFixed(2) + '%'; });
-    raiz.classList.add('sc-listo');
-    scEstado = 'listo';
-    if (btn) { btn.disabled = false; btn.textContent = '↺ Reiniciar a ceros'; }
-    if (est) est.textContent = 'Así lo dejó: cada cifra lleva su fuente y su estado.';
-  }
-
-  function cerrarDescubrimiento(sinReanudar) {
-    var modal = document.getElementById('descubrimientoModal');
-    if (!modal || !modal.classList.contains('show-modal')) return;
-    if (simAnimFrames.showcase) { cancelAnimationFrame(simAnimFrames.showcase); delete simAnimFrames.showcase; }
-    modal.classList.remove('show-modal');
-    scEstado = 'cero';
-    if (sinReanudar !== true) startShowcaseAutoSlide();
-  }
-
-  /* Lleva a una ficha de Expedientes (Busqueda Forense) con el filtro en
-     «Todos», para que la ficha exista, y la resalta. */
+  /* Lleva a una ficha de Expedientes, en su pagina propia. */
   function expIr(id) {
-    var chip = document.querySelector('.forensic-chip-btn');
-    filtrarDossiers('todos', chip);
-    seleccionarModuloExplorer('verificador', 'exp-' + id);
-    var el = document.getElementById('exp-' + id);
-    if (el) {
-      if (el.tagName === 'DETAILS') el.open = true;
-      el.classList.remove('ce-destaca');
-      void el.offsetWidth;
-      el.classList.add('ce-destaca');
-    }
+    irAExpediente(id);
   }
 
   /* Abre el padron municipal en una entidad y, si se pide, la ficha de un
@@ -27757,8 +27509,225 @@
     }, 4500);
   }
 
+
+  /* ====================================================================
+     NÚCLEO DE CUENTAS CIUDADANAS (AUDIT_CORE)
+     Operaciones estandarizadas de comparabilidad, agregación y conciliación
+     ==================================================================== */
+  const AUDIT_CORE = {
+    comprobarComparabilidad: function(ctaA, ctaB) {
+      if (!ctaA || !ctaB) return { comparable: false, motivo: 'Una de las cuentas no está definida' };
+      if (ctaA.base !== ctaB.base) {
+        return { comparable: false, motivo: 'Bases contables distintas (' + ctaA.base + ' vs ' + ctaB.base + ')' };
+      }
+      if (ctaA.periodo && ctaB.periodo && ctaA.periodo.dias !== ctaB.periodo.dias) {
+        return { comparable: false, motivo: 'Duraciones temporales distintas (' + ctaA.periodo.dias + ' días vs ' + ctaB.periodo.dias + ' días)' };
+      }
+      return { comparable: true };
+    },
+    agregarCuentas: function(cuentas, opciones) {
+      let suma = 0;
+      let pendientes = 0;
+      let total = cuentas.length;
+      cuentas.forEach(c => {
+        if (c.importeMdp === null || c.estado === 'pendiente') {
+          pendientes++;
+        } else {
+          suma += c.importeMdp;
+        }
+      });
+      const cobertura = total > 0 ? ((total - pendientes) / total) * 100 : 0;
+      return {
+        sumaMdp: Math.round(suma * 10) / 10,
+        totalCuentas: total,
+        pendientes: pendientes,
+        coberturaPct: Math.round(cobertura * 10) / 10,
+        esCompleto: pendientes === 0
+      };
+    },
+    conciliarPresupuestoContable: function() {
+      return DB.cuentaFederal2024 ? DB.cuentaFederal2024.conciliacion : null;
+    },
+    calcularEquivalenciaTemporal: function(montoMdp, diasPeriodo, segundosVisita) {
+      if (!diasPeriodo || diasPeriodo <= 0) return 0;
+      const totalSegundos = diasPeriodo * 86400;
+      const tasaSegundo = (montoMdp * 1e6) / totalSegundos;
+      return tasaSegundo * (segundosVisita || 0);
+    }
+  };
+
+  /* ====================================================================
+     CONTADOR COMPARTIDO DE VISITA CON DETECCIÓN DE VISIBILIDAD
+     Se pausa automáticamente al ocultar la pestaña.
+     ==================================================================== */
+  const AuditavisionVisita = {
+    segundos: 0,
+    pausado: false,
+    intervaloId: null,
+    iniciar: function() {
+      if (this.intervaloId) return;
+      this.intervaloId = setInterval(() => {
+        if (!document.hidden && !this.pausado) {
+          this.segundos++;
+          this.notificarTick();
+        }
+      }, 1000);
+      document.addEventListener('visibilitychange', () => {
+        this.pausado = document.hidden;
+      });
+    },
+    obtenerSegundos: function() {
+      return this.segundos;
+    },
+    obtenerSegundosActivos: function() {
+      return this.segundos;
+    },
+    estaPausado: function() {
+      return this.pausado;
+    },
+    notificarTick: function() {
+      const els = document.querySelectorAll('[data-visita-rate]');
+      els.forEach(el => {
+        const rate = parseFloat(el.getAttribute('data-visita-rate')) || 0;
+        const total = rate * this.segundos;
+        el.textContent = '$' + formatNumber(Math.round(total * 100) / 100);
+      });
+    }
+  };
+
+  /* ====================================================================
+     VISTAS DE LA CUENTA FEDERAL 2024 (EL ESTADO DE RESULTADOS DEL GOBIERNO)
+     ==================================================================== */
+  let vistaCuentaFederalActual = 'presupuesto';
+
+  function switchVistaCuentaFederal(vistaId) {
+    vistaCuentaFederalActual = vistaId;
+    document.querySelectorAll('.cf-nav-btn').forEach(btn => btn.classList.remove('activa'));
+    const btnActivo = document.getElementById('cfBtn-' + vistaId);
+    if (btnActivo) btnActivo.classList.add('activa');
+    renderCuentaFederal();
+  }
+
+  function renderCuentaFederal() {
+    const cont = document.getElementById('cuentaFederalContent');
+    if (!cont) return;
+    const cf = DB.cuentaFederal2024;
+    if (!cf) {
+      cont.innerHTML = '<p class="pd-nota">Datos de la Cuenta Federal 2024 en preparación.</p>';
+      return;
+    }
+    const v = vistaCuentaFederalActual;
+    /* Correccion del 10-10-2026: las cifras de este apartado entraron sin
+       cotejo y no coincidian con la Cuenta Publica. Cada cifra trae ahora
+       su estado; las pendientes dicen por que y no muestran monto. */
+    let html = '<div class="cf-callout" style="margin-bottom:12px;"><strong>Corrección del 10-10-2026.</strong> ' + cf.correccion +
+      ' <a href="estado-de-cuenta.html" target="_top">Ve el Estado de Cuenta Cívico: 2024, 2026 y 2027 comparados ➔</a></div>';
+    if (v === 'social') {
+      const mir = cf.evaluacion_social_mir;
+      const eco = DB.cuentas_ecologicas;
+      /* Aprobado y devengado van en columnas separadas: antes se mostraba el
+         aprobado de la pension rotulado como devengado. Proposito, cobertura e
+         impacto son mediciones distintas y siguen pendientes de cotejo. */
+      const celdaMdp = (m, x) => m.estado_montos === 'oficial' ? '$' + formatNumber(Math.round(x * 10) / 10) : '—';
+      html += '<h4 style="margin:12px 0 8px; font-size:14px; color:var(--gold-bright);">Programas sociales: presupuesto y resultados (Cuenta Pública 2024)</h4>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Programa presupuestario</th><th>Clave</th><th>Ramo</th><th>Aprobado (mdp)</th><th>Devengado (mdp)</th><th>Estado y fuente</th><th>Propósito, cobertura e impacto</th></tr></thead><tbody>' +
+      mir.map(m => '<tr><td><b>' + m.programa + '</b></td><td>' + m.clave + '</td><td>' + m.ramo + '</td><td class="num-tabular">' + celdaMdp(m, m.aprobado_mdp) + '</td><td class="num-tabular">' + celdaMdp(m, m.devengado_mdp) + '</td><td>' + chipEstado(m.estado_montos) + ' <small>' + (m.estado_montos === 'oficial' ? m.fuente_montos : m.motivo_montos) + (m.url ? ' <a href="' + m.url + '" target="_blank" rel="noopener">Documento ↗</a>' : '') + '</small></td><td>' + chipEstado('pendiente') + ' <small>' + m.motivo_resultados + '</small></td></tr>').join('') +
+      '</tbody></table></div>' +
+      '<p class="pd-nota">Las becas de educación básica (S072) y media superior (S311) se muestran por separado. Aprobado es lo que autorizó la Cámara de Diputados; devengado es lo que el gobierno reconoció como obligación de pago al cierre del año. La diferencia entre ambos no es ahorro ni desvío: es una modificación del presupuesto que la Cuenta Pública debe explicar.</p>';
+      if (eco) {
+        html += '<h4 style="margin:20px 0 8px; font-size:14px; color:var(--gold-bright);">Cuentas ecológicas 2024 (INEGI)</h4>' +
+        '<div class="cf-cards-grid">' +
+          '<div class="cf-card"><span class="cf-card-header">Costos por agotamiento y degradación ambiental ' + chipEstado(eco.ctada.estado) + '</span><span class="cf-card-val negativo">$' + formatNumber(eco.ctada.total_mdp) + ' mdp</span><span class="cf-card-sub">' + eco.ctada.pct_pib + '% del PIB de 2024.</span></div>' +
+          '<div class="cf-card"><span class="cf-card-header">Gasto en protección ambiental del sector público ' + chipEstado(eco.gasto_proteccion_ambiental.estado) + '</span><span class="cf-card-val cian">$' + formatNumber(eco.gasto_proteccion_ambiental.monto_mdp) + ' mdp</span><span class="cf-card-sub">' + eco.gasto_proteccion_ambiental.pct_pib + '% del PIB de 2024.</span></div>' +
+        '</div>' +
+        '<p class="pd-nota">INEGI, Cuentas Económicas y Ecológicas de México 2024 (1 de diciembre de 2025). Es contexto nacional: no se resta del presupuesto.</p>';
+      }
+    } else {
+      const filas = (cf.cifras || []).filter(c => c.vista === v);
+      html += '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Concepto (' + cf.ente + ', ' + cf.ejercicio + ')</th><th>Importe (mdp)</th><th>Estado y fuente</th></tr></thead><tbody>' +
+        filas.map(c => '<tr><td><b>' + c.concepto + '</b>' + (c.nota ? '<br><small>' + c.nota + '</small>' : '') + '</td>' +
+          '<td class="num-tabular">' + (c.mdp === null ? '—' : '$' + formatNumber(c.mdp)) + '</td>' +
+          '<td>' + chipEstado(c.estado) + ' <small>' + (c.estado === 'pendiente' ? c.motivo : c.fuente) + (c.url ? ' <a href="' + c.url + '" target="_blank" rel="noopener">Documento ↗</a>' : '') + '</small></td></tr>').join('') +
+        '</tbody></table></div>' +
+        '<p class="pd-nota">Alcance: ' + cf.alcance + '</p>';
+    }
+
+    cont.innerHTML = html;
+  }
+
+  function abrirConciliacionPresupuestoContable() {
+    const modal = document.getElementById('modalConciliacionContable');
+    const body = document.getElementById('modalConcilBody');
+    if (!modal || !body) return;
+    const cf = DB.cuentaFederal2024;
+    if (!cf || !cf.conciliacion) return;
+    const c = cf.conciliacion;
+    /* Los importes se retiraron el 10-10-2026 (no tenian cotejo); queda el
+       metodo de la Ley General de Contabilidad Gubernamental. */
+    body.innerHTML =
+      '<div class="cf-callout" style="margin-bottom:16px;">' +
+        '<strong>¿Por qué el gasto del presupuesto no es igual al gasto del estado de resultados?</strong><br>' +
+        'La Ley General de Contabilidad Gubernamental exige conciliar el devengo presupuestario con el devengo contable. La obra que pasa a formar parte del activo no es gasto del periodo: es inversión. Pagar el capital de una deuda tampoco es gasto corriente: reduce el pasivo.' +
+      '</div>' +
+      '<div class="cf-table-w"><table class="cf-table"><thead><tr><th>Paso de la conciliación</th><th>Importe 2024 (mdp)</th></tr></thead><tbody>' +
+      c.pasos.map((t, i) => '<tr><td><b>' + (i + 1) + '. ' + t + '</b></td><td>— ' + chipEstado(c.estado) + '</td></tr>').join('') +
+      '</tbody></table></div>' +
+      '<p class="pd-nota" style="margin-top:14px;">' + c.motivo + ' <a href="' + c.url + '" target="_blank" rel="noopener">Documento ↗</a></p>';
+    modal.style.display = 'flex';
+  }
+
+  function cerrarModalConciliacion() {
+    const modal = document.getElementById('modalConciliacionContable');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function abrirFichaPericialTrenMaya() {
+    const modal = document.getElementById('modalPeritajeTrenMaya');
+    const body = document.getElementById('modalPeritajeBody');
+    if (!modal || !body) return;
+    const tm = DB.tren_maya_peritaje_2024;
+    if (!tm) return;
+    body.innerHTML = '<div class="cf-callout"><strong>Ficha retirada el ' + tm.fecha + '.</strong> ' + tm.motivo + ' ' + chipEstado('pendiente') + '</div>' +
+      '<p class="pd-nota" style="margin-top:12px;"><a class="pd-btn" href="' + tm.alternativa + '">Ver lo que la ASF dejó por aclarar en el Tren Maya ➔</a></p>';
+    modal.style.display = 'flex';
+  }
+
+  function cerrarModalPeritajeTrenMaya() {
+    const modal = document.getElementById('modalPeritajeTrenMaya');
+    if (modal) modal.style.display = 'none';
+  }
+
+  /* Toda etiqueta «pendiente» lleva al Registro de pendientes (10-10-2026):
+     ahi esta por que falta el dato, quien debe publicarlo y el enlace
+     oficial donde deberia estar. Se escucha en la fase de captura para que
+     ninguna tarjeta que la contenga se la lleve. */
+  document.addEventListener('click', function (ev) {
+    var c = ev.target && ev.target.closest ? ev.target.closest('.est-chip.est-pendiente') : null;
+    if (!c || /pendientes\.html$/.test(window.location.pathname)) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    var destino = 'pendientes.html' + (c.getAttribute('data-pend') ? '#' + c.getAttribute('data-pend') : '');
+    try { (window.top || window).location.href = destino; } catch (e) { window.location.href = destino; }
+  }, true);
+  document.addEventListener('mouseover', function (ev) {
+    var c = ev.target && ev.target.closest ? ev.target.closest('.est-chip.est-pendiente') : null;
+    if (c && !c.title) c.title = 'Por qué falta este dato, quién debe publicarlo y dónde debería estar: abre el Registro de pendientes';
+  });
+
   window.AuditEngine = {
     init: init,
+    core: AUDIT_CORE,
+    AUDIT_CORE: AUDIT_CORE,
+    switchVistaCuentaFederal: switchVistaCuentaFederal,
+    renderCuentaFederal: renderCuentaFederal,
+    abrirConciliacionPresupuestoContable: abrirConciliacionPresupuestoContable,
+    cerrarModalConciliacion: cerrarModalConciliacion,
+    cerrarModalConciliacionContable: cerrarModalConciliacion,
+    cerrarConciliacionPresupuestoContable: cerrarModalConciliacion,
+    abrirFichaPericialTrenMaya: abrirFichaPericialTrenMaya,
+    cerrarModalPeritajeTrenMaya: cerrarModalPeritajeTrenMaya,
+    visita: AuditavisionVisita,
+    AuditavisionVisita: AuditavisionVisita,
     setSimuladorOrden: setSimuladorOrden,
     simIrAObra: simIrAObra,
     simVerSector: simVerSector,
@@ -27791,6 +27760,9 @@
     renderCalculadora: renderCalculadora,
     ccCalcular: ccCalcular,
     ccReiniciar: ccReiniciar,
+    ccEjemploOficial: ccEjemploOficial,
+    amTicketEjemplo: amTicketEjemplo,
+    amTicketReiniciar: amTicketReiniciar,
     ccFijarPeriodicidad: ccFijarPeriodicidad,
     ccFijarNaturaleza: ccFijarNaturaleza,
     ccFijarRegimen: ccFijarRegimen,
@@ -27855,6 +27827,7 @@
     cerrarGlosarioDrawer: cerrarGlosarioDrawer,
     abrirRadarConcepto: abrirRadarConcepto,
     abrirNotaPortada: abrirNotaPortada,
+    irDesdeApartado: irDesdeApartado,
     abrirPresentacion: abrirPresentacion,
     abrirNotaConteoObras: abrirNotaConteoObras,
     goToRef: goToRef,
@@ -28085,8 +28058,6 @@
     irACalculadoraCivica: irACalculadoraCivica,
     irAAuditoriaInversiones: irAAuditoriaInversiones,
     copiarTicketCivico: copiarTicketCivico,
-    renderForensicDossiers: renderForensicDossiers,
-    filtrarDossiers: filtrarDossiers,
     updateRadarAlertaBar: updateRadarAlertaBar,
     toggleRadarStats: toggleRadarStats,
     toggleRadarDesglose: toggleRadarDesglose,
@@ -28099,15 +28070,13 @@
     pintarProemio: pintarProemio,
     abrirDiccionarioSubtab: abrirDiccionarioSubtab,
     toggleMegaMenu: toggleMegaMenu,
+    toggleMenuMovil: toggleMenuMovil,
     cerrarMegaMenus: cerrarMegaMenus,
     showcaseNext: showcaseNext,
     showcasePrev: showcasePrev,
     showcaseGoTo: showcaseGoTo,
     pauseShowcaseAutoSlide: pauseShowcaseAutoSlide,
     startShowcaseAutoSlide: startShowcaseAutoSlide,
-    abrirDescubrimiento: abrirDescubrimiento,
-    cerrarDescubrimiento: cerrarDescubrimiento,
-    scVerGasto: scVerGasto,
     expIr: expIr,
     munIrA: munIrA,
     initShowcase: initShowcase,
@@ -28148,7 +28117,6 @@
     renderPanelBanderasRojas: renderPanelBanderasRojas,
     abrirExpedienteEstado: abrirExpedienteEstado,
     renderRadarBanderasNacional: renderRadarBanderasNacional,
-    expCopiar: expCopiar,
     radarOrdenar: radarOrdenar,
     radarVerEstado: radarVerEstado,
   };
@@ -28168,7 +28136,7 @@
      lo que escribio.
      ========================================================================== */
   const botonUnicoEstado = {};
-  const BOTON_UNICO_EXCLUIR = /ccReiniciar/;
+  const BOTON_UNICO_EXCLUIR = /ccReiniciar|amTicketReiniciar/;
   const BOTON_UNICO_REINICIO = '<span>\u21BA</span> Reiniciar a ceros';
 
   function botonUnicoRotular(prim) {
@@ -28246,9 +28214,24 @@
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.nav-menu-item').forEach(function (it) {
       it.addEventListener('mouseenter', function () { posicionarMegaMenu(it.querySelector('.mega-menu-dropdown')); });
+      it.addEventListener('mouseleave', function () { it.classList.remove('mega-suprimido'); });
     });
     document.addEventListener('click', function (e) {
       if (!e.target.closest || !e.target.closest('.nav-menu-item')) cerrarMegaMenus();
+      /* Al elegir un modulo en «Herramientas», el menu se cierra. */
+      else if (e.target.closest('.mega-menu-dropdown a, .mega-herramientas .explorer-card-btn')) {
+        /* Elegido un destino, el panel se va aunque el cursor siga encima:
+           sin esto, el :hover lo dejaba abierto tapando el modulo. */
+        var it = e.target.closest('.nav-menu-item');
+        if (it) it.classList.add('mega-suprimido');
+        cerrarMegaMenus();
+      }
+      /* Menú de celular: se cierra al elegir un destino o al tocar fuera. */
+      var nav = document.querySelector('.site-top-nav.nav-abierta');
+      if (nav && e.target.closest) {
+        if (!e.target.closest('.site-top-nav')) toggleMenuMovil(false);
+        else if (e.target.closest('a.mega-link-item, .explorer-card-btn, .nav-right-actions .nav-action-btn, .nav-movil-ayuda-btn, .search-results-dropdown')) toggleMenuMovil(false);
+      }
     });
     window.addEventListener('resize', function () {
       var abierto = document.querySelector('.nav-menu-item.open-mega-menu .mega-menu-dropdown');
@@ -28266,8 +28249,8 @@
       closeMunFicha();
       closeStateDrawer();
       closePaseCivicoModal();
-      cerrarDescubrimiento();
       cerrarMegaMenus();
+      toggleMenuMovil(false);
       cerrarRadarDesglose();
       cerrarModalReferencia();
       cerrarDescargas();

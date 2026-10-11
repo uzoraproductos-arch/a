@@ -163,6 +163,26 @@ La pestaña 4 tiene cinco subpestañas (4.1 a 4.5), y la 4.1 a su vez tiene tres
 subvistas: organigrama de la SCJN, estructura general del PJF y mapa territorial
 de los 32 circuitos.
 
+## Siguiente tarea: legibilidad en celular (`docs/ux/PLAN.md`)
+
+Condición del dueño: **la plataforma debe ser fácil de leer y de entender,
+empezando por el celular.** Una auditoría medida (29-09-2026, 390 px, 11
+vistas) encontró que entre el 78 y el 86 % del texto visible mide menos de
+14 px, que hay entre 50 y 198 emojis por vista, y que cada módulo empieza unas
+cinco pantallas abajo. El plan completo, con decisiones, fases y metas, está en
+**`docs/ux/PLAN.md`**. Pasó por un CEO review y por dos revisiones externas.
+
+Orden acordado: lectura en todo el sitio → módulos en capas → dominio propio
+→ URLs por módulo (SEO/GEO) → datos por página.
+
+**Fase 0 en curso.** No tiene cambio visible:
+
+- `herramientas/guardia_legibilidad.py` mide la legibilidad.
+- `docs/ux/fase-0-propuestas.md` reúne lo que el autor debe aprobar: los cambios
+  a AGENTS.md y a DESIGN.md, y los nombres de secciones y rutas.
+
+Nada de la fase 1 empieza sin ese visto bueno.
+
 ## Sistema de marca (`DESIGN.md`), hecho el 29-09-2026
 
 **`DESIGN.md` en la raíz es la referencia única de la marca**: logo, color,
@@ -189,8 +209,1986 @@ encabezado con emoji ⚖️ y superficies sólidas. El auditor de esta rama ya
 tenía la moneda ilustrada y superficies translúcidas sobre la fotografía de la
 ciudad: `DESIGN.md` documenta lo que hay en esta rama.
 
+El brand book interactivo que produce el skill está en **`brand/`** y se abre
+en `/brand/`: `brand-book.jsx` es el componente React del skill y
+`brand/index.html` lo carga con React, Babel y Tailwind por CDN, sin paso de
+compilación. Muestra los 19 SVG con descarga y los dos temas. Si cambia
+`DESIGN.md`, se actualiza `brand-book.jsx` a mano.
+
 Aplicar `DESIGN.md` al sitio es trabajo aparte y queda pendiente (lista en su
 §9 y abajo, en Pendiente).
+
+**Bigote estilo Zapata, retirado (07-10-2026, sello 20261007a).** El 01-10
+se cambió el bigote del logo a estilo Zapata; el autor lo rechazó («ese no
+es el logo») y se revirtió completo: ilustración, los 13 SVG de
+`assets/brand/logos/`, `brand/brand-book.jsx` y `DESIGN.md` (vuelve a v1.0).
+El logo es el de antes. No se vuelve a tocar el bigote sin que el autor lo pida.
+
+**Piel cívica (08-10-2026, sello 20261008a).** El autor pidió volver a la
+portada anterior (las cinco herramientas con icono, «Explora el panorama»,
+el radar y el carrusel, que `ux/fase-1` había quitado) y quedarse solo con la
+redacción de `ux/fase-1`. Además pidió quitar la foto de fondo y acercar el
+aspecto a Civio y USAspending (fondo blanco, barra azul, gris) y a Operação
+Serenata de Amor (un color por rubro). Hecho:
+- `assets/auditor/css/civico.css`, cargada después de la hoja maestra: sin
+  foto de fondo en los dos temas; tema claro de entrada (llave nueva
+  `auditavision_tema_civico`), barra superior azul, franjas grises, acento
+  azul en lugar de dorado; cada tarjeta de rubro con su franja, su icono y su
+  botón del color del rubro (dinero azul, obras naranja, calculadora verde,
+  inspector rojo, ambiente verde azulado).
+- Portada: lema «El gasto público, a la vista», la cifra de la ASF con su
+  fuente y la guía «Cómo se usa» (de `ux/fase-1`), arriba de los rubros. El
+  carrusel bajó después de los módulos, para que el módulo abra pegado a los
+  rubros.
+- Redacción: menús con nombres sencillos (Busca y verifica, Sigue el dinero,
+  Descarga los datos, Aprende, Participa), «Cuéntanos lo que viste», «Cerrar y
+  volver al inicio» y los textos del motor que `ux/fase-1` pasó de usted a tú.
+  Los emojis se quedan: el autor quiere los iconos.
+- No se trajeron de `ux/fase-1` la navegación de cuatro secciones, la capa
+  `legibilidad.css/js` ni la carga diferida del padrón municipal.
+
+**Los seis rectángulos de la portada (08-10-2026, sello 20261008b).** El
+autor ordenó la portada en seis franjas de ancho completo, cada una con su
+fondo y una raya de color arriba, como los bloques de Serenata de Amor:
+1. Cabecera (logo, menús, Cuéntanos, Compartir, Inspector Meteoro, buscador).
+2. Radar (datos de referencia y cifras en perspectiva).
+3. Panorama: un solo título, «Explora el panorama de las finanzas públicas en
+   México», con «El gasto público, a la vista» como etiqueta encima y una
+   frase para cualquier persona («de dónde sale el dinero de todos, en qué se
+   gasta y quién revisa que se use bien»). «Cómo se usa» va arriba de los
+   cinco rubros y **sin cifras**: la cifra de la ASF salió de la portada,
+   porque las cifras se descubren dentro de los módulos.
+4. Auditoría en imágenes (intacta por decisión del autor).
+5. Pie: principios, cómo leer cada cifra, fuentes y glosario. Las fuentes
+   ahora citan, con liga a su ficha del catálogo: PEF 2026, LFPRH, Ley de
+   Presupuesto, Contabilidad y Gasto Público Federal (1976, **abrogada**, como
+   antecedente), Ley General de Contabilidad Gubernamental y Ley Federal de
+   Deuda Pública (que hasta 2016 se llamó Ley General de Deuda Pública).
+   Todas ya estaban en `AUDIT_DB` con su vigencia.
+6. Renglón final con la leyenda de transparencia y el sello.
+
+**Menú de tres rayas (08-10-2026, sello 20261008c).** En pantallas de 1100 px
+o menos el índice del rectángulo 1 ya no se amontona: queda plegado tras un
+botón ☰ «Menú» (`toggleMenuMovil` en el motor, aspecto en `civico.css`). Al
+desplegarse muestra los cinco menús uno debajo del otro (cada uno se abre en
+su lugar), el buscador, Compartir, Inspector Meteoro y el tema, y al final un
+recuadro rojo «¿Viste algo raro con el dinero público?» con el botón
+«Cuéntanos lo que viste». Se cierra al elegir un destino, al tocar fuera o con
+Escape. En computadora la cabecera no cambia.
+
+**Paleta azul y nuevo orden (08-10-2026, sello 20261008d).** El autor pidió
+basar los colores en el dragón blanco de ojos azules (concepto «corporativo»):
+la cabecera en azul corporativo fuerte (degradado #071d47 → #0b2a63 → #123d8a)
+y una escala de azules que baja hasta el blanco en las franjas (blanco, blanco
+hielo #f1f7fe, azul claro #e3f0fd, azul hielo #d6e9fc), con rayas que alternan
+celeste #4f9be8 y azul #1a56b8. El acento del tema claro es azul. Los colores
+de contenido no cambian: rubros, rojo de alertas y chips de estado. Es solo
+el marco; no se usa ningún nombre, logo ni imagen de la franquicia.
+Nuevo orden de los rectángulos: 1 cabecera, 2 los cinco módulos, 3 auditoría
+en imágenes, 4 datos de referencia y radar (antes iba arriba; ahora va justo
+antes de «Principio y Compromiso Ciudadano»), 5 pie, 6 renglón final.
+
+**Herramientas y Datos en el índice (08-10-2026, sello 20261008e).** El autor
+pidió que la portada la protagonicen las imágenes. Cambios:
+- El bloque del panorama (título, «Cómo se usa» y los cinco módulos) pasó al
+  índice como **primer apartado, «Herramientas»**: un panel ancho que se abre
+  desde la cabecera. Al pulsar «Comenzar», el panel se cierra (también si el
+  cursor sigue encima: clase `mega-suprimido`) y el módulo abre debajo de las
+  imágenes.
+- El radar (datos de referencia y cifras en perspectiva) pasó al índice como
+  **último apartado, «Datos de referencia»**.
+- La portada queda en cuatro franjas: 1 cabecera, 2 auditoría en imágenes,
+  más grande (alto de hasta 70 % de la pantalla, título y pregunta mayores),
+  3 pie, más discreto (letra y márgenes menores), y 4 renglón final.
+- `seleccionarModuloExplorer` ahora calcula el salto descontando la cabecera
+  fija (antes el salto de respaldo dejaba el módulo cientos de píxeles abajo),
+  y `plegarDesgloseModulos` vuelve al inicio de la página.
+
+**Un solo tema: el claro (08-10-2026, sello 20261008g).** El autor pidió
+eliminar el tema oscuro. Se quitó el botón «◐ Tema» de la cabecera;
+`initTheme` fija siempre `data-theme="light"` y borra la preferencia guardada
+(`auditavision_tema_civico`), así que quien la tenía en oscuro ve el claro.
+`toggleTheme` sigue exportada, pero ya no alterna. Las reglas oscuras de
+`auditavision.css` se dejaron en su sitio: son la base sobre la que se monta
+el claro (`:root` es oscuro y `[data-theme="light"]` lo corrige), y
+arrancarlas sería reescribir la hoja entera sin ganancia visible.
+
+**Acciones y buscador a la derecha (08-10-2026, sello 20261008h).** En
+escritorio (más de 1100 px), «Cuéntanos lo que viste», «Compartir»,
+«Inspector Meteoro» y el buscador quedan pegados al borde derecho de la
+cabecera. El buscador ocupa justo el ancho de la fila de botones: sus bordes
+izquierdo y derecho coinciden con los de «Cuéntanos» e «Inspector Meteoro».
+Se quitó el recuadro blanco que rodeaba la caja de búsqueda. En celular no
+cambia nada (todo vive en el menú ☰).
+
+**Legibilidad y sobriedad de color (08-10-2026, sello 20261008i).** Fusión de
+la revisión de color de Antigravity (puntos 1 a 6 aprobados por el autor; el 7,
+oro en la cabecera, quedó fuera). Se descartó su modo oscuro, el oro como
+identidad, el fondo pergamino y, sobre todo, su ámbar para «pendiente»: en la
+plataforma el ámbar es `derivado` y `pendiente` es gris punteado; ese
+significado no cambia. Contraste medido con WCAG (mínimo 4.5:1), en
+`civico.css`:
+1. Chip `derivado` `#B7791F` → `#8A5A12` (3.32 → 5.38:1 sobre su fondo).
+2. Chip `oficial` `#1E824C` → `#18703F` (3.89 → 5.42:1).
+3. Rubro obras `#C8641B` → `#A9541A` en textos y botones (3.97 → 5.29:1);
+   la franja de la tarjeta conserva el tono vivo (`--rubro-obras-raya`).
+4. Alertas y anomalías: tarjeta blanca, borde de 1 px y borde izquierdo rojo
+   de 3 px, sin fondo teñido. Los textos pensados para fondo oscuro pasan a
+   tinta o rojo. Se corrigió de paso un texto de la alerta ASF de la ficha
+   estatal que ya se leía mal (1.83:1, color en línea).
+5. Botones secundarios (CSV, copiar, controles del radar, cambio de vista):
+   blanco con borde neutro; el color pleno queda para la acción principal.
+6. Tarjetas y paneles sin sombra difusa; al pasar el cursor cambia el borde.
+   Menús, modales y cajón conservan su sombra porque flotan.
+(Resuelto en 20261008l: la caja del treemap ya va en tema claro.)
+
+**Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
+autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
+- Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
+  con dos personas, el azul al lado y el edificio). Va a la derecha, a su
+  tamaño natural, con el borde izquierdo desvanecido en la propia imagen
+  (canal alfa) para que no se note el corte. Un paneo de 48 s la recorre del
+  pasillo hacia el edificio; con «reducir movimiento» queda quieta. El índice
+  y la marca llevan una sombra leve para leerse sobre la foto.
+- Pie («Principio y Compromiso»): `pie-noche.jpg` (ciudad de noche) como
+  marca de agua; `pie-planos.jpg` (ciudad en planos con grúas) se guardó como
+  alternativa: se cambia en la variable `--pie-imagen` de `civico.css`.
+- **Pendiente de derechos:** las tres vienen de Pinterest y su autoría no
+  está acreditada; la de noche lleva la firma «AFERA XV». Antes de pasar a
+  `main`, sustituirlas por imágenes propias o generadas con IA (con su
+  etiqueta), o conseguir permiso y acreditar al autor.
+
+**«Auditoría en imágenes» centrada en pantallas anchas (08-10-2026, sello
+20261008k).** En monitores de más de 1560 px el recuadro quedaba pegado a la
+izquierda con un hueco blanco a la derecha (lo reportó el autor con captura):
+la regla de ancho uniforme del 27-09 fijaba `max-width: 1560px` y la piel
+cívica le había quitado el `margin: auto`. Ahora la franja gris ocupa todo el
+ancho y el recuadro queda centrado, alineado con el espacio donde se abren
+los módulos (comprobado a 1600, 1920 y 2560 px).
+
+**Treemap del presupuesto y barra de mandos en tema claro (08-10-2026, sello
+20261008l).** La caja del treemap (módulo Presupuesto → 2.2 «En qué se va»)
+seguía con el fondo casi negro del tema oscuro y cifras ilegibles. Ahora es
+blanca; cada bloque lleva el color de su categoría en el borde izquierdo, la
+cifra y un tinte suave (social verde azulado, económico ámbar, gobierno rojo,
+deuda carmín, participaciones verde, autónomos morado, ADEFAS gris). Migas,
+insignia de nivel, botón «Volver» y banda de resumen pasan a azul cívico.
+De paso, la barra «Contabilizar / Reiniciar» (`.evaluacion-controls-bar`,
+usada por ocho gráficas) también era oscura: ahora es gris claro con sello
+azul y botón principal azul. Contraste medido: todo el texto de la caja
+pasa de 4.5:1 en nivel 1, en el subnivel y en la vista de lista.
+
+**El índice abre páginas; «Datos de referencia» se despliega a todo lo ancho
+(08-10-2026, sello 20261008m).** Por decisión del autor, seis apartados del
+índice ya no se desglosan en un menú: cada uno abre su propia página, con la
+información ordenada por secciones, tarjetas y un «En esta página»:
+`herramientas.html` (los cuatro módulos y la guía «Cómo se usa»),
+`busca-y-verifica.html` (desde el 09-10-2026, redirección al Modo Inspector),
+`sigue-el-dinero.html`, `descarga-los-datos.html`,
+`aprende.html` y `participa.html`. **No se editan a mano:** se generan con
+`python3 herramientas/apartados.py`, que toma el sello de `index.html`
+(`sello.py` ya lo llama solo). Llevan la misma cabecera y cargan
+`auditavision.css`, `civico.css`, `apartados.css` y el pequeño
+`apartados.js` (menú de tres rayas y «Compartir»); no cargan el motor.
+Sus tarjetas vuelven al auditor con `index.html?ir=destino&ancla=id`: el
+motor (`irDesdeApartado`) solo acepta los destinos de su lista
+(`IR_MODULOS` e `IR_DESTINOS`), limpia la dirección al llegar y repite el
+salto si la página, recién cargada, lo dejó corto. «Datos de referencia»
+sigue siendo desplegable, pero ya no mide 1240 px fijos pegados a la
+izquierda: ocupa todo el ancho (contenido centrado hasta 1560 px). En
+celular, la cifra del radar y su ritmo por segundo ya no se enciman. Las
+cifras de las tarjetas son las mismas que tenía el menú, con su misma fuente
+en el `title`.
+
+**Cabecera más alta para que se vea la imagen (08-10-2026, sello
+20261008n).** A petición del autor, arriba de la página la cabecera mide al
+menos 190 px en escritorio y 150 px en celular, para que se aprecie la imagen
+del pasillo. Al desplazarte más de 120 px se encoge a su alto de siempre
+(clase `body.cabecera-compacta`, con holgura hasta 10 px para que no
+parpadee) y vuelve a crecer al regresar arriba; lo hacen el motor y
+`apartados.js`. Al saltar a un módulo, la cabecera se encoge *antes* del
+salto (`altoCabeceraCompacta`): si cambiaba de alto a medio camino, el
+desplazamiento suave se interrumpía.
+
+**«Sigue el dinero» en seis capítulos y la deuda en el tiempo (08-10-2026,
+sello 20261008o).** La página sigue ahora el orden de *Introducción al
+Derecho Económico* (Gómez Granillo y Gutiérrez Rosas, Esfinge, 1995),
+capítulos 5 y 7, puesto al día: 1 De dónde sale, 2 Quién lo decide, 3 Quién
+lo gasta y en qué, 4 A dónde baja, 5 Cuánto debemos, 6 Y a ti. Cada capítulo
+trae una franja «Ayer y hoy» (lo que explicaba el libro, con su página, y lo
+vigente, con su documento). No se copian cifras ni pasajes del libro.
+`apartados.py` acepta ahora en cada sección `num`, `ayer`, `bloque` (HTML
+propio) y, en el apartado, `libro` y `scripts`.
+
+El capítulo 5 es un módulo nuevo, `assets/auditor/js/deuda-tiempo.js`
+(autónomo, no usa el motor): línea de tiempo del SHRFSP como % del PIB o en
+billones de pesos corrientes, de 1994 a la proyección de 2027, con franjas
+por sexenio (convención de seis años calendario de la evaluación sexenal),
+«Contabilizar / Reiniciar a ceros», barra de años, ficha por sexenio
+(recibió, entregó, cambio `derivado`, máximo, hitos) y la tabla completa.
+Regla de la serie: cada año viene de la publicación oficial más reciente
+encontrada, y la cifra anterior queda visible cuando una revisión del PIB la
+cambió. Fuentes, todas descargadas y leídas el 08-10-2026:
+- 2000-2011: ASF, Informe del Resultado CP 2012, Tomo Ejecutivo, p. 67.
+- 2012-2015: ASF, IGE CP 2018, p. 258 del PDF (2012 era 36.8 en la CP 2012).
+- 2016-2019 (% y pesos hasta 2022): ASF, IGE CP 2022, pp. 149-150.
+- 2020-2025 en %: Criterios 2027, cuadro con el PIB revisado (p. 53 del
+  PDF): 50.2, 49.1, 47.6, 46.6, 51.9, 52.6. Antes se publicaron 51.6, 50.8,
+  49.4 (ASF), 46.8 (SHCP Com. 5/2024) y 51.4 (SHCP Com. 4/2025).
+- 2026 estimado 54.0 % y 2027 proyectado 55.0 %, con sus saldos en pesos:
+  Criterios 2027, pp. 18 y 68 del PDF.
+- 1994: 36.9 % de deuda neta económica amplia (Banxico), otro indicador,
+  dibujado aparte. 1995-1999 queda `pendiente`: no hay serie comparable.
+
+**Lo de 52.3 contra 54.0 en 2026 no era contradicción:** 52.3 % es lo que se
+aprobó y 54.0 % es el cierre estimado. Los propios Criterios (p. 18 del PDF)
+explican que, con el PIB revisado por el INEGI, el 52.3 aprobado equivale a
+54.5 %.
+
+Gráfica 1 del libro (deuda externa del sector público 1988-1994, en dólares):
+Banxico, Informe Anual 1994, Anexo 6, p. 165, confirma 78,747 millones en
+1993 y da 85,436 millones en 1994 (el libro anota 85.1). De 1988 a 1992 son
+cifras del libro y van como `pendiente`. Las cifras del Porfiriato tampoco
+tienen fuente primaria en el auditor: se mencionan sin números y se enlaza a
+la Enciclopedia (`enciclopedia.html#tab-panel-politicos`, que no se tocó).
+
+Pendiente de este bloque: la evaluación sexenal sigue usando las cifras de
+su momento (36.8 en 2012, 51.4 en 2024), mientras la línea de tiempo usa las
+revisadas (37.2 y 51.9). Hay que decidir un solo criterio. También faltan el
+saldo en pesos de 2025, la serie 1995-1999 y verificar en Banxico la deuda
+externa de 1988 a 1992.
+
+**Las tarjetas se despliegan en su propia página (08-10-2026, sello
+20261008p).** El autor pidió que, al pulsar una tarjeta de un apartado, la
+información se desplegara ahí mismo y no lo regresara a la página inicial.
+Ahora `apartados.js` intercepta las tarjetas que van a `index.html?ir=...`
+y abre, debajo de la fila de la tarjeta, un **visor**: un marco con
+`index.html?ir=...&visor=1`, de alto de pantalla, con «Pantalla completa» y
+«Cerrar». La dirección no cambia. Con Ctrl, Cmd o la rueda del ratón la
+tarjeta se abre en otra pestaña, como cualquier enlace.
+
+En el auditor, `&visor=1` dentro de un marco marca `html.modo-visor` desde el
+`<head>`, antes de pintar, y `civico.css` esconde cabecera, portada, pie,
+barras de regreso y botones flotantes. En modo visor, los enlaces a otras
+páginas se abren en la ventana completa (`target=_top`). Los destinos que son
+ventanas (descargas, CSV, fuentes, reporte, Pase) dejan detrás un aviso con
+«Abrirla de nuevo» y «Cerrar este panel»; este último usa `postMessage` con
+el mismo origen. La lista de destinos que son panel y no ventana está en
+`VISOR_PANELES`. Si el ancla de una tarjeta es un bloque plegable del erario
+(`eb-*`), ahora llega abierto (antes llegaba cerrado).
+
+Verificado a 1440 y a 390 px en 15 tarjetas de los seis apartados (módulos,
+anclas y ventanas): la dirección no cambia, el módulo y su bloque quedan
+arriba del visor, «Cerrar» funciona, 0 errores y sin desborde. La entrada
+directa `index.html?ir=...` sigue funcionando igual.
+
+**El Circuito del Dinero se reparte en Sigue el dinero (09-10-2026, sello
+20261008q).** El autor pidió quitar de Herramientas el módulo «Circuito del
+Dinero», que repetía lo de Sigue el dinero, y organizar su contenido ahí sin
+duplicar. Herramientas queda con cuatro módulos y una línea que manda a Sigue
+el dinero. Los bloques del Circuito pasaron a tarjetas de los capítulos:
+1 (arquitectura, cuánto dinero es, de dónde sale, a qué equivale, lo que la
+cifra no dice), 3 (en qué se va, margen del presupuesto, estado de resultados
+CP 2024) y 4 (el mapa). La tarjeta «Ramos y dependencias» abría lo mismo que
+«En qué se va» y se fusionaron. Nuevo **foco del visor**: si el ancla es un
+bloque `eb-*`, `visorFoco()` (motor) abre sus ancestros y esconde todo lo
+demás (`.visor-oculto`): portada del módulo, índice, bloques hermanos y
+subbloques internos, que tienen su propia tarjeta. «Pantalla completa» sigue
+abriendo el módulo entero. Verificado bloque por bloque: cada tarjeta muestra
+solo su bloque, arriba, 0 errores.
+
+**El examen de los presidentes, en Aprende (09-10-2026, sello 20261008q).**
+La trivia del bloque 3 de Megaobras («Administración presidencial», 3.2) se
+mudó a `aprende.html#trivia`, en un guion propio sin motor:
+`assets/auditor/js/trivia-presidentes.js`. Son 12 preguntas en cuatro rondas
+(Porfiriato, economía, deuda, fiscalización), cada una con su gráfica que
+arranca en ceros, su lección y sus fuentes; modo «contra reloj» de 20 s por
+pregunta; y al final la calificación y **el estado de cuenta de cada
+presidente**: crecimiento, empleo, deuda que recibió y que entregó, su saldo
+en puntos del PIB, la deuda nueva en pesos y su **reloj por segundo**, que
+corre en vivo, más auditorías y recuperaciones. El bloque 3 de Megaobras se
+llama ahora «Las obras de cada sexenio» y conserva la línea de obras, con un
+aviso de la mudanza. El código `renderPresEval` del motor quedó inerte (no
+hay `#presEval`); la colección `DB.evaluacion_sexenal` sigue siendo la fuente
+de las cifras copiadas al guion: si cambia una, se cambia en ambos.
+
+Criterio de deuda decidido para la trivia: la publicación oficial más
+reciente de cada año, igual que la línea de tiempo (Calderón 37.2 y López
+Obrador 51.9, con la cifra original en la nota).
+
+**El Porfiriato, verificado contra el INEGI.** Se cotejaron contra las
+*Estadísticas históricas de México 2014* (cuadros 14.18, 16.3, 16.6 y 3.7) las
+cifras que circulan y que trae la Enciclopedia (congelada, no se tocó):
+- El «primer superávit de 1894-1895, por $19,861» no se sostiene: el INEGI da
+  déficit de $1.2 millones ese año; la racha de superávits empieza en
+  1895-1896 (+5.4). Los $19,861 quedan pendientes de la Memoria de Hacienda.
+- Vías: 617 km en 1876 y 19,748 en 1910 (no 640 y 19,280).
+- Aduanas: 45.2% del ingreso efectivo en 1894-1895, no 52% (derivado).
+- Analfabetismo: 82.1% (1895, mayores de 6), 77.7% (1900) y 72.3% (1910).
+- Ingresos 8.2%, gasto 7.4%, deuda 30.5% y superávit 0.8% del PIB: sin fuente
+  oficial; no se usan. Tampoco el desglose del timbre (28%).
+La trivia lleva un recuadro «Lo que corregimos al verificar el Porfiriato».
+
+**Aprende en pestañas y «La Columna del Erario» (09-10-2026, sellos
+20261009i y 20261009j).** Decisiones del autor:
+- Las secciones de `aprende.html` son pestañas (`'pestanas': True` en
+  `apartados.py`; la lógica genérica vive en `apartados.js`): el contenido
+  solo se despliega al pulsar la pestaña, y pulsarla otra vez la cierra.
+  Sin JavaScript se ven todas. `#trivia`, `#biblioteca`, `#kit` y
+  `#noticias` abren su pestaña.
+- Cuarta pestaña, **Noticias relevantes**: columnas editoriales con formato
+  de periódico (`assets/auditor/js/columnas.js` + `columnas.css`). Rescatan,
+  verificado contra documentos oficiales, lo que fueron la 5.2 («Personajes
+  relevantes») y la 5.3 («Datos curiosos de personajes secundarios») de la
+  Enciclopedia, retiradas el 27-09-2026 por no citar fuentes (commit
+  d36e030). **No se copió nada de aquellas fichas**: cuatro revisiones
+  independientes buscaron cada afirmación en su documento oficial (DOJ,
+  UIF, Presidencia, CJF, Senado, SIL, ASF, FGR, SFP, DOF, PEF 2026, IPAB,
+  INEHRM, SEP, Sedena, AGN, Banxico). Quedaron 14 columnas: 6 de personajes
+  (García Luna, Segalmex, Lozoya, Robles, Gordillo, Gómez Urrutia), 4 de
+  hechos (partida secreta, Fobaproa-IPAB, origen del Ramo 33, expediente de
+  la «Casa Blanca») y 4 de historia (Santa Anna, Juárez 1861, Limantour,
+  Banco de México 1925). Cada una lleva cifras con chip y sus documentos.
+- Lo que no se pudo sostener (31 afirmaciones) se publica al pie del diario
+  en «Lo que dejamos fuera y por qué». Entre ello: la columna completa de
+  Raúl Salinas de Gortari y la de Carlos Romero Deschamps (Pemexgate), las
+  multas del IFE de 2003 y los retratos de dominio público, porque el
+  entorno no pudo abrir repositoriodocumental.ine.mx, justice.gov, Wikimedia
+  ni otros sitios: **falta de la plataforma, pendiente**.
+- Ojo: la sentencia de García Luna (460 meses) se tomó del comunicado del
+  DOJ leído a través del buscador, porque justice.gov estaba bloqueado; la
+  Presidencia confirma los 38 años. Conviene abrir el comunicado del DOJ.
+- Las imágenes son ilustraciones de grabado (emoji sobre trama), no fotos:
+  no se publican fotografías de personas sin licencia verificada.
+- **Pedido del autor (09-10-2026, sello 20261009l):** la pestaña «Kit del
+  auditor» se llama ahora **«Fuentes del auditor»** (su id sigue siendo
+  `#kit`). Además pidió columnas sobre tres temas, y se verificaron con la
+  misma regla:
+  - **Acapulco (Abelina López Rodríguez): 2 columnas.** La primera trata de
+    lo que observaron la ASF (2022: 27.1 mdp; 2023: 3.7 mdp; 2024: 206.2 mdp;
+    suma derivada de 237.1 mdp) y la ASE de Guerrero. La segunda, de la
+    controversia constitucional 174/2025, resuelta el 6-07-2026: la Corte
+    invalidó por falta de competencia el pliego de la ASE por 898.6 mdp
+    (FAISMUN 2023), sin juzgar el manejo del dinero. **La premisa de «más de
+    600 millones de la ASF» no se sostuvo:** el monto era de la ASE y la
+    Corte no exoneró a nadie. Queda explicado en «Lo que dejamos fuera». Las
+    observaciones se dirigen al municipio, no a la persona. Pendiente:
+    integrar el engrose de la CC 174/2025 cuando la SCJN lo publique.
+  - **Hijos de Salinas de Gortari y NXIVM: sin columna.** No se pudo abrir
+    ningún documento oficial (EDNY 1:18-cr-00204, DOJ, sentencia
+    SRE-PSC-75/2021 del TEPJF), y ninguno localizado los acusa. Es falta de
+    la plataforma.
+  - **López Beltrán y Amílcar Olán: sin columna.** Ningún documento oficial
+    abierto los vincula con contratos o investigaciones. Romedic, el balasto
+    del Tren Maya, Portacelis y «El Clan» solo aparecen en prensa. Para
+    reabrirla faltan el registro del CEN de Morena ante el INE, CompraNet
+    histórico y SIGER, la lista de Cofepris de diciembre de 2022 y algún
+    expediente de FGR, SAT o UIF. Es falta de la plataforma: esos sitios no
+    abren desde el entorno.
+  - Hay 16 columnas y 58 afirmaciones descartadas.
+
+**Participa en pestañas, el logotipo abre «Quiénes somos» y la ventana
+lateral más ancha (09-10-2026, sello 20261009m).** Decisiones del autor:
+- `participa.html` funciona como Aprende (`'pestanas': True`): dos
+  pestañas, «Ágora cívica» (`#agora`) y «Garantías cívicas»
+  (`#garantias`), que se despliegan al pulsarlas.
+- En las páginas generadas, el logotipo ya no lleva a la portada. Ahora es
+  un botón (`#apartadoPresentacion`) que abre la presentación «Quiénes
+  somos» en la ventana lateral, sin salir de la página. Como esas páginas
+  no cargan el motor, `apartados.js` lleva una copia del texto de
+  `abrirPresentacion()`: **si cambia uno, cambia el otro**. Para volver a
+  la portada está el botón «Ir a la página principal» al pie de la
+  ventana. En `index.html` el logotipo ya hacía eso.
+- La ventana lateral (`.glos-drawer`) pasa de 420 a 580 px (`civico.css`).
+  Lo heredan la presentación, el glosario y las notas.
+
+**Registro de pendientes (10-10-2026, sello 20261010g).** Decisión del
+autor: cada pendiente lleva su etiqueta, su porqué y el enlace oficial donde
+debería estar el dato.
+- **`pendientes.html`.** Lo genera `herramientas/pendientes.py` y hoy trae
+  37 fichas:
+
+  | Quién debe resolverlo | Fichas |
+  |---|---|
+  | Una dependencia que debe publicarlo | 19 |
+  | La plataforma, que aún no integra el documento | 12 |
+  | Nadie: es un dato histórico | 6 |
+
+  Las fichas salen de dos lados: los registros `pendiente` de la base,
+  leídos con un adaptador por bloque, y la lista `PROPIOS`, para lo que el
+  motor escribe en su código (matriz ASF 2018, municipios sin cuenta,
+  INAFED, huachicol, costo por usuario, pesos de 2024 y la ficha del Tren
+  Maya). La generación se detiene si una ficha no trae porqué, responsable
+  o enlace.
+- **Toda etiqueta «pendiente» abre el registro.** Un escucha en la fase de
+  captura, en `audit-engine.js` y en `apartados.js`, lleva al registro al
+  hacer clic. Con `data-pend` lleva a la ficha exacta: el Estado de Cuenta
+  ya lo usa. Desde el visor abre en la ventana principal.
+- **Base de datos.** Se completaron:
+  - `url_resultados` en los cuatro programas sociales;
+  - el `url` de IMSS-Bienestar;
+  - el `motivo` y el `url` del reloj de pérdidas de las megaobras.
+
+  El motivo de los resultados dice ahora que el CONEVAL se extinguió y que
+  sus funciones de evaluación pasaron al INEGI en 2025.
+- **Comprobaciones.** `inventario.py` reporta como roto un `data-pend` sin
+  ficha. AGENTS.md §2 lleva la regla nueva.
+
+**Propuesta de Astra, entrega 6: Servicios de investigación (10-10-2026, sello 20261010k).**
+Decisión del autor: **el Pase del Auditor convive con los Servicios.** El Pase
+sostiene la consulta gratuita; los Servicios son trabajo a la medida que se
+cotiza. Aún no hay dominio, así que todo queda listo para el lanzamiento. El
+autor hace la revisión legal y dio por buena la redacción.
+- **`servicios.html`** (Participa › Servicios), generada por `servicios()` en
+  `apartados.py`. Tiene cinco secciones:
+  1. los cuatro servicios de Astra, con su entregable y para quién son;
+  2. el proceso en siete pasos;
+  3. el precio, sin tarifa: las primeras saldrán de pilotos pagados y no se
+     inventan;
+  4. la política de independencia, versión 1, con diez compromisos (lista
+     `INDEPENDENCIA`);
+  5. el formulario «Solicita una investigación».
+- **El formulario** (`assets/auditor/js/servicios.js`) arma la solicitud en el
+  navegador y no envía ni guarda nada. Pide los campos obligatorios, si quien
+  solicita es parte del caso y que acepte la política y el alcance. Deja
+  revisar, copiar y descargar (.txt). El botón «Enviar» queda desactivado
+  mientras `CANAL_SOLICITUD` (en `apartados.py`) esté vacío. **Para abrirlo
+  en el lanzamiento:** se pone la dirección, por ejemplo
+  `'mailto:investigaciones@dominio.mx'`, y se corre `sello.py`. El botón
+  entonces abre el correo con asunto y cuerpo ya escritos.
+- **Servicio pertinente** (punto 8): cada `auditoria-*.html` cierra con
+  «¿Necesitas ir más a fondo en este caso?», que lleva a
+  `servicios.html?tema=<título>#solicitud` con el tema escrito.
+- Participa tiene una tercera pestaña, «Servicios», con tarjetas a Servicios
+  y al Pase. El Pase enlaza a Servicios, y el índice y las novedades los
+  incluyen.
+
+Pendientes de la entrega 6:
+- **El canal de envío** (`CANAL_SOLICITUD`): espera el dominio.
+- **Las tarifas**: salen de los pilotos pagados.
+- **El tablero comercial del punto 10** (visitas, solicitudes, cotizaciones,
+  horas). Necesita analítica y registro de encargos que el sitio estático no
+  tiene.
+- **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
+
+**«Presupuesto», solo tarjetas, sin saltos al pie (11-10-2026, sin sello: no toca `assets/`).** A pedido del autor, la portada `numeros-presupuesto.html` ya no lleva «← Volver a Números» ni «Siguiente parte → Gasto público»: quedan sus cinco tarjetas y el pie general. Las páginas de cada tarjeta y de los 16 renglones conservan su anterior y siguiente.
+
+**«Presupuesto», sin «Ayer y hoy» y con un solo pie (11-10-2026, sello 20261011f).** A pedido del autor, `numeros-presupuesto.html` ya no lleva la franja «Ayer y hoy» ni la nota del libro al pie («Notas y referencias»): su contenido vive en el Diccionario. El «ayer» (cap. 7, p. 96, la acción financiera del Estado) y el «hoy» (Ley de Ingresos, DOF 7-11-2025, art. 31 fr. IV) se sumaron a la pregunta frecuente «¿Qué persigue la acción financiera del Estado…?», con las fuentes [10] y [119], y la ficha [119] del compendio dice dónde quedó. Las otras tres partes de Números conservan su franja y su nota. El pie de las páginas de Presupuesto (portada, sus cinco tarjetas y los 16 renglones del ingreso) es ahora `presupuesto_pie()`: anterior y siguiente, compactos y lado a lado también en móvil, y un enlace «↑» para subir solo cuando el anterior no es ya la página de arriba. Se quitaron los chips «Más de…», la lista de 16 renglones y la barra «Números: todas sus partes», que repetían destinos (las migas de arriba ya llevan a Números). La última tarjeta (Paquete 2027) sigue a la parte siguiente, Gasto público; el último renglón (Deuda), a «¿A qué equivale?». En «Cuánto dinero es», el enlace final solo lleva a los ocho renglones del gasto: los 16 orígenes son el botón «Siguiente». Pendiente de decisión: aplicar el mismo pie a Gasto público, Baja al territorio y Cuentas claras.
+
+**«Presupuesto»: cinco tarjetas en mosaico, sin datos repetidos (11-10-2026, sello 20261011e).** A pedido del autor, las tarjetas de `numeros-presupuesto.html` tienen el tamaño de las pestañas de Datos, Aprende y Participa (`apartado-pestanas np-mosaico`, tres por fila; la sección lleva `mosaico` y cada tarjeta, su descripción breve en `t[6]`). Se revisaron las páginas, salvo Paquete 2027, en busca de cifras reiteradas: «El peso de 2026» y «Cuánto dinero es» repetían el total, el cuadre y el reparto de lo que entra y lo que sale. Se fundieron en «Cuánto dinero es»: la cifra, las dos barras interactivas y lo que baja al territorio. Se quitaron las columnas y las listas por familia y por renglón, que repetían los 16 orígenes y el simulador de Gasto público; en su lugar quedan enlaces. `numeros-el-peso-de-2026.html` redirige ahí. «El camino del dinero» ya no repite montos de renglón (ISR, IVA, IEPS, programable y federalizado por ramo) ni la gráfica «Cuánto mueve cada etapa»: deja una cifra por etapa con quién responde, plazo y fundamento, y remite a las páginas con el detalle. Pendiente de decisión: «El camino» comparte plazos y artículos con «¿Quién lo aprueba?» de Gasto público.
+
+**«Presupuesto», solo tarjetas (11-10-2026, sin sello: no toca `assets/`).** A pedido del autor, la página `numeros-presupuesto.html` queda en seis tarjetas y nada más; cada una abre su página. «El peso de 2026» (las dos barras, `numeros_peso`) y «Los 16 orígenes del ingreso» (el contador, `numeros_renglones`, con los tres renglones en cero) dejaron de estar en la página y viven en `numeros-el-peso-de-2026.html` y `numeros-los-16-origenes.html`, como módulos de `NUMEROS_MODULOS` (`np-peso`, `nr-origenes`) con `numeros.js`. Las anclas viejas `#numPeso` y `#nrRenglones` redirigen a su página; «Volver» de los renglones del ingreso, `?abrir=eb-ingresos`, el índice general y «sigue» del camino del dinero llevan a la página nueva.
+
+**«Presupuesto»: sus cuatro módulos en página propia (11-10-2026, sello 20261011d).**
+Pedido del autor: los módulos de la tarjeta «Presupuesto» (Cuánto dinero es, ¿A qué equivale?, El camino del dinero, Paquete Económico 2027) se abrían en un marco que cargaba el auditor completo y se contaban ahí: tardaban.
+
+- `herramientas/presupuesto_modulos.py` (nuevo) escribe las cuatro páginas desde `AUDIT_DB`, con las cifras ya puestas: `panoramaErario`, `calculadora_civica.parametros.poblacion`, `cuenta_publica_asf.cp2024.total.porAclarar`, `constitucion_economica` y `paquete_2027`. `numeros_modulo()` acepta `bloque`: con él la página es propia, carga `numeros.css` y `presupuesto.js` y ya no lleva iframe. Los módulos de Gasto público y Cuentas claras siguen con el marco.
+- Las cifras que en el motor estaban fijas (ISR 3.07, IVA 1.59, 69.6 %, etc.) ahora se calculan de la base; sumas y porcentajes llevan chip `derivado`.
+- `assets/auditor/js/presupuesto.js` (nuevo, CRLF): solo el simulador de sensibilidades del Paquete 2027 (mismos coeficientes, escenarios y veredicto del art. 17 LFPRH que el motor). Las barras crecen con CSS (`.pm-*` en `numeros.css`), respetando movimiento reducido.
+- ¿A qué equivale? marca el huachicol como `pendiente` con `data-pend="huachicol-evasion"`; la página se agregó a esa ficha en `pendientes.py`. La «Ficha pericial: retirada» del Tren Maya no se trasladó.
+
+**«Gasto público», dinámico (11-10-2026, sello 20261011c).**
+Pedido del autor: reestructurar la página para que sea dinámica, con gráficas y simulador
+contable, centrada en dos preguntas: quién tiene la facultad de aprobar el gasto y cómo se
+reparte. `numeros-gasto-publico.html` lleva ahora, en este orden:
+- **«¿Quién lo aprueba? El ciclo del presupuesto»** (`gasto_ciclo()`, `GP_CICLO`, `GP_QUIEN`).
+  Son seis paradas en pestañas: propone, aprueba los ingresos, aprueba el gasto, lo ejerce,
+  cierra el año y lo revisa. Cada parada trae:
+  - su autoridad y su fecha límite;
+  - «En los hechos», con las fechas de 2026 que sí están en la base: LIF 2026 en el DOF el
+    07-11-2025, PEF 2026 el 28-11-2025 y los Criterios 2027 en la Gaceta del 08-09-2026;
+  - el texto oficial **cotejado** de `preceptos_legales`: CPEUM 73, 74-IV, 79, 126 y 134;
+    LFPRH 17-18, 42 y 54; LIF 2026 art. 2o.
+
+  Debajo va la tabla «Quién puede qué»: Ejecutivo, Diputados, Senado y ASF, frente a Ley de
+  Ingresos, Presupuesto de Egresos, deuda y revisión, cada celda con su artículo. La fecha
+  en que Diputados aprobó el PEF 2026 no está en la base, así que no se da.
+- **«¿Cómo se reparte? El simulador contable»** (`gasto_reparte()`):
+  - un contabilizador que lleva los $10,193,683.7 mdp de cero a su cifra;
+  - una gráfica en tres niveles (total, programable / no programable, ocho renglones), con
+    ficha al tocar cada tramo;
+  - «Si el presupuesto fuera de…», que reparte cualquier cantidad en la misma proporción
+    (derivado, con su operación).
+
+  Las cifras salen de `panoramaErario.egresos`, **no** de `treemapPEF`, que trae otros montos
+  (Desarrollo Económico 1,670,300 y costo financiero 1,388,400 contra 1,695,700 y
+  1,572,073.3): esa discrepancia de la base queda por revisar.
+- **«¿Hacia dónde va? Los tres presupuestos»** (`numeros_tres()`, sin cambios).
+- **Los desgloses**, cada uno en su página: el simulador «Reparte tú» y las cuatro páginas de
+  módulo. Megaobras y costo ambiental **se quitaron** de aquí porque ya están en
+  Herramientas; una línea al pie lleva allá.
+- **Una página por renglón del gasto** (`egreso_pagina()`, `numeros-egreso-*.html`, 8). Cada
+  una trae su cifra, «de cada $100», qué cubre, su ley, por qué importa y cómo se obtuvo. El
+  costo financiero trae además el desglose del Anexo 8.
+- El JS es `assets/auditor/js/gasto-publico.js` (nuevo) y los estilos son `.gp-*` en
+  `numeros.css`. Además, en «El peso de 2026» de la página Presupuesto, los renglones del gasto
+  enlazan a sus páginas.
+- Con este sello se corrigió también el comentario de `numeros.js` que seguía diciendo
+  `numeros-se-recauda.html`.
+
+**«Cuentas claras»: «Se paga lo que se debe» y «Se revisa», fundidas (11-10-2026, sin sello nuevo).**
+Pedido del autor. Números queda en **cuatro** tarjetas: Presupuesto, Gasto público, Baja al
+territorio y Cuentas claras.
+- `numeros-cuentas-claras.html` contiene, en este orden: un texto de entrada; el «Ayer y hoy» de la deuda; la
+  línea de tiempo de la deuda (`deuda-tiempo.js`); y cinco tarjetas:
+  - el estado de resultados, con página de módulo nueva, `numeros-estado-de-resultados.html`;
+  - el Estado de Cuenta Cívico;
+  - los Expedientes;
+  - dos herramientas que llevan a Herramientas: «Qué encontró la ASF» y «El reloj de la deuda»,
+    que ahora abre `herramienta-calculadora-reloj.html` (ya no se duplica).
+  Al final de la página va el cierre «¿Y a ti, cuánto te toca?».
+- `numeros-la-deuda.html` y `numeros-se-revisa.html` redirigen ahí (`NUMEROS_ANTES`). Los
+  enlaces del Registro de pendientes al estado de resultados van a su página de módulo.
+
+**«Gasto público»: «Se aprueba» y «Se gasta», fundidas; «Se recauda» se llama «Presupuesto» (11-10-2026, sin sello nuevo: no se tocó `assets/`).**
+Pedido del autor. Números queda en **cinco** tarjetas y cada una lleva ya su descripción
+breve (quinto campo de `NUMEROS_PARTES`, en `<small>`, como en Participa):
+Presupuesto, Gasto público, Baja al territorio, Se paga lo que se debe y Se revisa.
+- `numeros-presupuesto.html` vuelve a ser la página real (la de «Se recauda», con el
+  título «Presupuesto: cuánto dinero es y de dónde sale»); `numeros-se-recauda.html`
+  redirige a ella.
+- `numeros-gasto-publico.html` junta a los dos: un solo texto, un «Ayer y hoy» con los
+  capítulos 5 y 7 del libro, el bloque de los tres presupuestos (`numeros_tres()`) y siete
+  tarjetas: el simulador «Reparte tú el presupuesto», cuatro páginas de módulo nuevas
+  (`numeros-lo-que-cuestan-los-poderes.html`, `numeros-ramos-y-dependencias.html`,
+  `numeros-margen-del-presupuesto.html`, `numeros-lo-que-la-cifra-no-dice.html`) y, por
+  ser herramientas, megaobras y costo ambiental, que ahora llevan a
+  `herramienta-megaobras.html` y `herramienta-ambiente.html` en vez de duplicarlas.
+  `numeros-se-aprueba.html` y `numeros-se-gasta.html` redirigen ahí (`NUMEROS_ANTES`).
+- `NUMEROS_MODULOS` lleva un sexto campo, la parte a la que pertenece cada módulo, y
+  `numeros_modulo()` arma su navegación «Más de …» con sus hermanos.
+- Las redirecciones (`redireccion()`) conservan ya la consulta (`?…`) y el `#ancla` cuando el
+  destino no trae los suyos, y las páginas de cada parte mandan un `?abrir=eb-*` viejo a
+  la página de su módulo (sin bucle: se omite el que apunta a sí misma).
+- (Resuelto con el sello 20261011c.) Quedaba en los comentarios de `numeros.js` el nombre viejo `numeros-se-recauda.html`; no
+  se cambió para no tocar `assets/` (y subir el sello) solo por un comentario.
+
+**«Presupuesto» y «Se recauda», fundidas (11-10-2026, sello 20261011b).**
+Pedido del autor: fusionar las dos tarjetas, conservar lo mejor de ambas y derivar
+páginas nuevas. Números queda en **seis** tarjetas. `numeros-se-recauda.html` lleva:
+arriba «El peso de 2026» (las dos barras, `numeros.js`); después «Los 16 orígenes del
+ingreso» (`numeros_renglones()`), nativo y con contador («▶ Contabilizar» / «↺ Reiniciar
+en ceros», que arranca en ceros) en el mismo `numeros.js`, más los tres rubros que la LIF deja en $0.0.
+- **Cada renglón tiene su página** (`ingreso_pagina()`, `numeros-ingreso-*.html`, 16):
+  cifra oficial, «de cada $100» (derivado, con su operación), qué grava, efecto jurídico,
+  ley con su referencia, glosario y su desglose (`componentes` de `panoramaErario`,
+  negativos rayados en rojo). El ISR y los demás sin componentes dicen que la LIF los
+  autoriza en un solo renglón: no se inventa desglose. Era la ficha que el motor abría en
+  una ventana lateral **dentro** del visor, donde quedaba fuera de la vista (el error del
+  desglose que señaló el autor).
+- **Las otras tarjetas tienen su página de módulo** (`NUMEROS_MODULOS`, `numeros_modulo()`,
+  con el bloque del motor en un marco, como los módulos de herramientas):
+  `numeros-cuanto-dinero-es.html`, `numeros-a-que-equivale.html`,
+  `numeros-camino-del-dinero.html` y `numeros-paquete-2027.html`.
+- `numeros-presupuesto.html` fue una redirección a «Se recauda» hasta que esa página tomó el nombre «Presupuesto» (ver arriba).
+  `?abrir=eb-*` y las anclas viejas llevan a la dirección nueva (`NUMEROS_ABRIR` guarda
+  ya la URL completa).
+- Herramientas: nada de estas dos tarjetas era herramienta ni estaba duplicado en ellas.
+  Para la siguiente tarjeta queda una duplicada: «El reloj de la deuda» (Se paga lo que se debe) abre el módulo
+  de la Calculadora Cívica, que ya tiene página propia en `herramienta-calculadora-reloj.html`.
+
+**Números en siete páginas (11-10-2026, sello 20261011a).**
+Pedido del autor: replicar la estructura del Radar hacendario. `sigue-el-dinero.html`
+es ahora una portada de **siete tarjetas** sin número y sin descripción, y cada una abre
+su página (`NUMEROS_PARTES` y `numeros_preparar()` en `apartados.py`):
+`numeros-presupuesto.html` (El peso de 2026, `numeros.js`), `numeros-se-recauda.html`,
+`numeros-se-aprueba.html`, `numeros-se-gasta.html` (los tres presupuestos),
+`numeros-baja-al-territorio.html`, `numeros-la-deuda.html` (línea de tiempo) y
+`numeros-se-revisa.html` (con el cierre «¿Cuánto te toca?»). Cada paso conserva su
+franja «Ayer y hoy» y la nota [119] al pie; todas llevan la barra `numeros_nav()`.
+Las anclas viejas (`#origen`, `#gasta`, `#numPeso`, `#ati`...) y `?abrir=eb-*` se
+redirigen solas a la página que corresponde (`hash_a_pagina` y `abrir_a_pagina`).
+En `numeros.js`, «Ver el paso N» pasó a «Ver «nombre de la página»».
+
+**Números reorganizado (10-10-2026, sello 20261010zf).**
+Pedido del autor: la pestaña estaba «fuera de orden» (un camino de cinco pasos arriba y
+seis capítulos con otra numeración abajo) y la «Nota de referencia» era un apartado.
+Ahora `sigue-el-dinero.html` es un solo recorrido de **seis pasos**, que son las pestañas:
+1 Se recauda (`#origen`), 2 Se aprueba (`#decide`), 3 Se gasta: los tres presupuestos
+(`#gasta`), 4 Baja al territorio (`#baja`), 5 Se paga lo que se debe (`#deuda`) y 6 Se
+revisa (`#revisa`, nuevo: ASF, Cuenta Pública, Estado de Cuenta Cívico, Expedientes).
+«¿Cuánto te toca?» dejó de ser pestaña: es el cierre del recorrido y `#ati` redirige a
+`herramienta-calculadora.html`. El simulador «Reparte el presupuesto» entró al paso 2.
+- **El peso de 2026** (arriba de los pasos): dos barras con todo lo que entra (Ley de
+  Ingresos, 4 grupos) y todo lo que sale (presupuesto social, nacional, del Estado, fondos
+  de estabilización y lo ya comprometido). Al tocar un tramo se abre su detalle: cifra,
+  «de cada $100», chip, de qué está hecho, fuente, glosario y el paso donde se explica.
+  Lo arma `numeros_datos()` en `apartados.py` con `panoramaErario` y lo pinta
+  `assets/auditor/js/numeros.js` (+ `numeros.css`). Ninguna cifra se escribe en el JS.
+- **Los tres presupuestos** (paso 3, `numeros_tres()`): la lectura doctrinal en tres
+  renglones, armada con la clasificación funcional oficial (CGPE 2027, p. 39):
+  del Estado = Gobierno $320,700.0 + poderes y autónomos $142,300.0 = $463,000.0 mdp
+  (derivado); nacional = Desarrollo económico $1,695,700.0 (oficial); social = Desarrollo
+  social $4,929,400.0 (oficial). Aparte, ya comprometido (no programable) $3,098,974.9
+  (derivado: costo financiero + Ramo 28 + ADEFAS) y fondos de estabilización $6,600.0.
+  Suman $10,193,674.9; los $8.8 mdp restantes son redondeo de la fuente (lo dice la página).
+  Advertencia escrita: agua potable y urbanización van en desarrollo social en la
+  clasificación oficial, no en el presupuesto nacional de la doctrina.
+- **La nota del libro** ya no es enlace ni ventana: es la nota [119] al pie («Notas y
+  referencias», `libro_pie()`), con la ficha del compendio, los conceptos en el glosario
+  y el Diccionario. La franja «Ayer y hoy» de cada paso va plegada y llama a esa nota.
+- Pendiente de verificación editorial: la página del libro donde aparece la lectura en
+  tres presupuestos. La plataforma la atribuye a «la doctrina del derecho económico» con
+  la nota [119] general, sin número de página.
+
+**Tarjetas del Radar sin descripción (10-10-2026, sin cambio de sello).**
+Decisión del autor: las tarjetas del Radar hacendario llevan solo icono y título. Se
+quitó el texto descriptivo de las pestañas de `radar-hacendario.html`, de la barra
+«Radar hacendario: todas sus partes» (`radar_nav`) y de las dos tarjetas de
+`radar-hoy.html`. Lo descriptivo queda en la entrada de cada página. `RADAR_PARTES`
+conserva su descripción porque el índice general la usa. No se tocó `assets/`.
+
+**El contador de «Hoy: el presupuesto en curso» (10-10-2026, sello 20261010ze).**
+Pedido del autor: en `radar-presupuesto-en-curso.html` las cifras arrancan en cero y el
+botón «▶ Contar» las anima hasta su valor (2.4 s, curva de salida; instantáneo con
+`prefers-reduced-motion`). El mismo botón pasa a «↺ Reiniciar en ceros». El recuadro
+«Durante tu visita» queda borroso y con candado, y su reloj no corre, hasta que se
+presiona «Contar»; al reiniciar vuelve a bloquearse y a cero. El HTML lo arma
+`RADAR_HOY` en `apartados.py` (`#rdCuenta`, `#rdContar`, `#rdHoyVivo`, `#rdCandado`) y la
+animación vive en `assets/auditor/js/radar.js`: las cifras siguen escritas completas en el
+HTML (sin JavaScript se ven tal cual y el botón no aparece); el script parte cada número
+en tramos `.rd-num` con sus mismos decimales y separadores. No se agregó ni cambió cifra.
+
+**La institución como órgano en los estados de cuenta de cargos (10-10-2026, sello 20261010zd).**
+A pedido del autor, los 35 documentos de cargos (diputación federal, Senado,
+32 congresos locales y Suprema Corte) suman, al frente y después del
+termostato, un panel «Como órgano: cuánto nos cuesta y qué revisó la Auditoría
+Superior». Lo arma `radar_cargos()` con dos secciones marcadas `panel`. El
+sello las firma como cualquier otra sección.
+- **Lo que nos cuesta** (`panel: costo`):
+  - Federales: el aprobado 2026 (PEF, Anexo 1). Cada día = aprobado ÷ 365.
+    Por habitante = aprobado ÷ 134,407,258 (CONAPO, mitad de 2026, derivado).
+  - La parte del gasto 2025 que se fue en servicios personales: capítulo 1000
+    ÷ total ejercido. Diputados 57.1% y Senado 59.1% (CP 2025). Corte 84.7%,
+    con su estado analítico y el renglón «Total».
+  - Congresos locales: lo ejercido en 2024 (INEGI, CNPLE). Cada día = ÷ 366,
+    porque 2024 fue bisiesto.
+  - **Sin costo por habitante en los congresos locales**: falta integrar la
+    población de 2024 del CONAPO (el proxy de esta sesión no dejó bajar el
+    CSV), y dividir entre la de 2026 mezclaría años.
+- **Del dinero que ejerció a lo que falta aclarar** (`panel: embudo`):
+  - Lo ejercido en 2024. Diputados: pagado según ASF_DIP p. 4. Senado:
+    devengado según ASF_SEN p. 5. Corte: CP 2024 por UR, en mdp, derivado.
+  - El universo y la muestra de la ASF; la parte revisada = muestra ÷
+    ejercido; lo que quedó fuera de la muestra.
+  - Acciones, monto por aclarar y recuperaciones de la Matriz de Datos Básicos
+    (ASF_MDB, p. 31), con el resultado.
+  - Corte: la Matriz no da la muestra en pesos, solo su representatividad
+    (92.81% del universo). Recuperaciones: $8,133,300.
+  - Congresos locales: solo NL (auditoría 1402: $4.5 millones por aclarar) y
+    Tlaxcala (1940: $5.0 millones recuperados). En los demás, el frente dice
+    que la auditoría no está integrada en la plataforma, sin culpar a nadie.
+- Se quitaron las secciones viejas «Ante la Auditoría Superior» y «El congreso
+  del estado: lo que gastó», que quedaron dentro del panel, y el «Aprobado
+  2026» repetido en el presupuesto. Los capítulos 2026 de la Corte pasan a su
+  propia caja.
+- **Cambian los folios de los 35 documentos de cargos**: su contenido cambió.
+  Los de las administraciones siguen iguales.
+- Hojas: 39 de 42 caben en dos. Los de Diputados, Senado y la Corte ocupan tres
+  porque el frente se extiende.
+
+**El sello se titula «Dictamen técnico de Auditavisión» (10-10-2026, sello 20261010zc).**
+A pedido del autor, el pie del estado de cuenta ya no dice «Sello de
+verificación de Auditavisión»: el título, el anillo del sello y su texto
+alternativo dicen «Dictamen técnico de Auditavisión». La leyenda, la huella
+y los folios no cambian.
+
+**«Verifica un estado de cuenta», al Modo Inspector (10-10-2026, sello 20261010za).**
+A pedido del autor, la sección de verificación salió de la página que expide
+el estado de cuenta y es el **módulo 7 del Modo Inspector**, con página propia:
+`herramienta-inspector-verifica.html` (parte «Busca y verifica»).
+- La arma `radar()` en `apartados.py` a partir de `herramienta_modulo()` (misma
+  cabecera, migas y navegación de módulos), pero en vez del marco carga
+  `#rdDatos`, `#exCargos` y `estado-administracion.js`. La clave
+  `inspverifica` está en `MODULOS_PROPIOS` para que el ciclo de herramientas no
+  le genere un marco.
+- `estado-administracion.js` arranca solo la verificación cuando la página no
+  trae `#exDoc`. «Ver el documento» es un enlace a
+  `radar-estado-de-cuenta.html?adm=` o `?doc=`, que lo genera al abrir.
+- El sello de los documentos nuevos apunta a
+  `herramienta-inspector-verifica.html?verifica=FOLIO`. Los PDF impresos antes
+  llevan `radar-estado-de-cuenta.html?verifica=`: esa página los redirige.
+- Folios y huellas no cambian. La página que expide termina con el documento
+  generado: no lleva ningún aviso de verificación (pedido del autor, sello
+  20261010zb).
+
+**El estado de cuenta, en una hoja por los dos lados (10-10-2026, sello 20261010z).**
+A pedido del autor (referencia: hoja oficio, 216 × 340 mm; «la medida es lo de
+menos»: lo que importa es separar lo gráfico al frente y lo informativo atrás):
+- **Imagen del encabezado:** la que mandó el autor (ilustración de una mesa de
+  sesiones), recortada a una franja que deja ver la mesa y su gráfica circular
+  y fuera la marca de agua de la esquina:
+  `assets/auditor/img/encabezado-estado-de-cuenta.jpg` (736 × 240). Va en los
+  42 documentos.
+- **Anverso, lo gráfico:** encabezado, el **termostato** (una rueda con un gajo
+  por indicador o señal y su color, sin sumar en nota global, y un medidor por
+  indicador de peor a mejor en tres tercios con la marca donde cae la cifra; en
+  los cargos, el tope del art. 127 en escala de 0 a 120% y las palomitas de
+  bruta y neta) y las cuentas en cajas: concepto, cifra, chip de estado y un
+  número de nota. **Los negativos van en rojo** (`.ex-neg`).
+- **Reverso, lo informativo:** la justificación por secciones, en dos
+  columnas: cada nota numerada dice qué mide la cifra, su operación, su regla
+  y su fuente (F1, F2… con página); luego el fundamento legal, las fuentes
+  oficiales y al final el sello con la leyenda de que no es documento oficial.
+- **La huella no cambió:** firma las mismas cifras, así que los folios ya
+  expedidos siguen valiendo.
+- **Al descargar:** `@page` de 216 × 340 mm; el reverso empieza en hoja nueva.
+  Antes de imprimir, `emparejar()` mide cada caja con el ancho de la hoja
+  (`.ex-medir`) y las reparte en dos columnas parejas en orden de lectura. Las
+  tablas de más de 8 renglones van a lo ancho, partidas en dos. Caben en una
+  hoja por los dos lados 40 de los 42 documentos; la diputación federal y la
+  senaduría ocupan un poco más en el anverso (hoja 3).
+
+**«Hoy y los estados de cuenta» se vuelve índice de dos páginas (10-10-2026, sello 20261010y).**
+A pedido del autor, `radar-hoy.html` ya no muestra el presupuesto en curso: es un
+índice con dos tarjetas, «📌 Hoy: el presupuesto en curso»
+(`radar-presupuesto-en-curso.html`, nueva) y «🧾 Expide un estado de cuenta»
+(`radar-estado-de-cuenta.html`). Las anclas viejas `#hoy` y `#expide` de
+`radar-hoy.html`, el `#hoy` de `radar-estado-de-cuenta.html` y las `rc-*` de
+Números llevan a la página de cada una.
+
+**«Expide» abre su propia página y el documento se genera con un botón (10-10-2026, sello 20261010x).**
+A pedido del autor:
+- **Página propia.** La tarjeta «🧾 Hoy y los estados de cuenta» del Radar lleva
+  ahora a `radar-hoy.html` (que dejó de ser redirección): el presupuesto en
+  curso y una tarjeta que abre la herramienta en `radar-estado-de-cuenta.html`.
+  La herramienta se queda en esa dirección porque va impresa en el sello de los
+  PDF (`?verifica=`, `?doc=`, `?adm=`). El ancla vieja `#hoy` de esa página
+  lleva a `radar-hoy.html#hoy`.
+- **Botón «🧾 Generar estado de cuenta»**, junto a «Descargar en PDF». Elegir
+  de quién ya no arma el documento: queda en espera hasta que se presiona el
+  botón, y «Descargar en PDF» se habilita solo después. Un enlace compartido
+  (`?doc=` o `?adm=`) y el «Ver el documento» de la verificación lo generan
+  directamente, porque son documentos ya expedidos.
+- **Encabezado más amplio**, con el logo a 104 px (antes 54) y espacio para una
+  imagen que se repite en todos los estados de cuenta. La imagen se guarda como
+  `assets/auditor/img/encabezado-estado-de-cuenta.(svg|png|jpg|jpeg|webp)`:
+  `apartados.py` la detecta y la pone en `data-cabecera` de `#exApp`; si no
+  existe, no se pide nada al servidor. **Pendiente: el autor enviará la imagen.**
+
+**Se suma la senaduría al estado de cuenta (10-10-2026, sello 20261010w).**
+El autor notó que faltaban los senadores. Quinto tipo en «¿De quién?»: la
+senaduría (`?doc=senado`, folio `AV-SEN-…`). Lo que cobra (dieta neta del
+Manual del Senado; bruta, ISR, neta, aguinaldo y prima del seguro de vida del
+Anexo 23.2.2), sus asesores (niveles 34, 30 y 29 del tabulador), 128
+integrantes (CPEUM art. 56, cotejado), presupuesto 2026, avance a junio,
+cierre 2025 por capítulo y la auditoría 32 de la ASF (CP 2024) con sus
+capítulos. Las dos señales quedan en verde. El aguinaldo que equivale a 60 días
+y no a 40 enlaza a su pendiente (`prest-aguinaldo-sen`). Son 35 documentos.
+
+**El estado de cuenta de diputaciones y de la Suprema Corte (10-10-2026, sello 20261010v).**
+A pedido del autor, la herramienta «Expide» de `radar-estado-de-cuenta.html#expide`
+ya no es solo de las administraciones. El paso 1 pregunta «¿De quién?»:
+administración presidencial, diputación federal, diputación local (selector de
+los 32 congresos) o Suprema Corte (ministra o ministro, su ponencia y sus
+asesores). La tarjeta del Radar se llama ahora «🧾 Hoy y los estados de cuenta».
+- **Datos.** `radar_cargos()` en `apartados.py` arma el JSON `#exCargos` (34
+  documentos) solo con `comparador_salarial` y `poderes` de la base: lo que
+  cobra cada cargo (Manual de la Cámara, Anexo 23 del PEF, Manual del PJF y los
+  documentos de 12 congresos), el presupuesto, el ejercicio y la auditoría de
+  su institución (PEF 2026, Cuenta Pública 2025, avance al 2.º trimestre de
+  2026, SCJN al 31 de agosto, CNPLE 2025 y ASF CP 2024). El JS no escribe
+  cifras: solo pinta y firma. Integrantes con su artículo: 500 (CPEUM art. 52)
+  y 9 (art. 94).
+- **Es el estado de cuenta del cargo, no de una persona:** cada cargo cobra
+  con un solo tabulador; no se nombra a nadie.
+- **No se reparte el presupuesto entre el número de personas** (ni entre las
+  500 curules ni entre diputados locales): ese reparto no es un dato.
+- **Dos señales con regla de ley, en vez del semáforo de tercios:** el tope del
+  art. 127, fr. II (neto contra neto con la Presidenta: verde si la cifra
+  completa queda abajo, rojo si lo rebasa, sin color si es parcial y queda
+  abajo) y la obligación de publicar la remuneración bruta y la neta (LGTAIP
+  DOF 20-03-2025, art. 65, fr. VII: verde con las dos, ámbar solo bruta, sin
+  color si no localizamos el documento de 2026). Ambos artículos se cotejaron
+  con el texto vigente de diputados.gob.mx. Resultado: diputación federal 2
+  verdes; Corte 1 verde y 1 sin color (cifra parcial); 7 congresos verdes en
+  transparencia, 5 ámbar (Sinaloa, Tlaxcala, Nayarit, Campeche, Yucatán) y 20
+  sin color.
+- **Ponencia de la Corte:** secretario de estudio y cuenta y asesor (rangos
+  del Manual del PJF). Cuántas plazas tiene cada ponencia sigue pendiente
+  (`poderes-judicial-1`); las cifras de «35 colaboradores» y «$34.2 millones»
+  siguen fuera por no tener documento.
+- **Pendientes:** nuevo `asesores-congresos-locales` (falta de la plataforma).
+  Los `neto-diputado_local-*`, `poderes-legislativo-0` y `poderes-judicial-1`
+  ahora también dicen que aparecen en el estado de cuenta.
+- **Folio y sello:** `AV-DIPFED-…`, `AV-DL<estado>-…` (`AV-DLGTO-…`) y
+  `AV-SCJN-…`; el enlace es `?doc=<id>` (`dip-fed`, `dip-loc-gto`, `scjn`). La
+  verificación recorre las 7 administraciones y los 34 documentos. Los folios
+  de las administraciones no cambiaron.
+
+**«Hoy» y «Expide el estado de cuenta», una sola tarjeta (10-10-2026, sello 20261010u).**
+Por decisión del autor, las dos partes del Radar se fusionaron en la tarjeta
+«🧾 Hoy y el estado de cuenta de cada administración». Es una sola página con
+dos secciones: `#hoy` (el presupuesto en curso) y `#expide` (la herramienta).
+La página conserva `radar-estado-de-cuenta.html`, porque esa dirección va
+impresa en el sello de los PDF (`?verifica=`). `radar-hoy.html` es ahora una
+redirección (`REDIRECCIONES`) a `radar-estado-de-cuenta.html#hoy`, y las
+anclas viejas (`radar-hacendario.html#hoy`, `#expide` y los `#rc-*` de Datos)
+llevan a su sección. La página carga `radar.js` (contador de «Hoy») y
+`estado-administracion.js`. El Radar queda en seis partes.
+
+**Expide el estado de cuenta de cada administración (10-10-2026, sello 20261010t).**
+El autor pidió una herramienta que «expida» el estado de cuenta de cada
+administración, de la última presidenta hasta la fecha, con su salud
+financiera evaluada y descarga con sello de Auditavisión. Vive en
+`radar-estado-de-cuenta.html`, la primera parte del Radar (`RADAR_PARTES`),
+y la anima `assets/auditor/js/estado-administracion.js` (+ su `.css`) con el
+mismo JSON `#rdDatos` del Radar. Decisiones del autor:
+- **Semáforo por indicador, sin calificación global.** Seis indicadores en %
+  del PIB (`RADAR_SEMAFORO`): balance presupuestario (ingresos − gasto), cambio
+  de la deuda por año, deuda al cierre, peso de los intereses, inversión física
+  e ingresos. Regla escrita en el documento: el rango entre la mejor y la peor
+  de las administraciones cerradas con dato se parte en tres tercios iguales
+  (verde, ámbar, rojo). La deuda de Salinas queda fuera (Banxico, no SHRFSP).
+  Lo de la ASF va sin color (la definición del monto por aclarar es de 2019).
+  Sheinbaum se evalúa con los mismos cortes, marcada «preliminar» (un año).
+  Cita la LFPRH art. 17 (equilibrio presupuestario) como contexto, no como corte.
+- **Sello de verificación.** Huella SHA-256 de las cifras del documento (el
+  mismo modelo que se pinta), folio `AV-<iniciales>-<8 hex>` que sale de la
+  huella, versión de la plataforma y liga `?verifica=<folio>`. La sección
+  «Verifica» recalcula las huellas con los datos vigentes. La leyenda dice
+  que no es un documento oficial. Si cambian los datos, los folios cambian y
+  los documentos viejos ya no verifican: así se dice en el resultado.
+- **PDF imprimible.** «Descargar en PDF» copia el documento a `#exPrint` y
+  abre la impresión; en `@media print` solo se imprime eso (≈5 hojas carta).
+El tablero lleva «🧾 Expide su estado de cuenta» en cada ficha, y el Estado
+de Cuenta Cívico enlaza a la herramienta.
+
+**El Radar hacendario, en seis páginas (10-10-2026, sello 20261010s).**
+El autor pidió que cada parte del radar tuviera su propia página en lugar
+de desplegarse en una sola. `radar-hacendario.html` queda como portada con
+seis tarjetas (`RADAR_PARTES` en `apartados.py`), y cada parte vive en la
+suya: `radar-tablero.html`, `radar-peso.html`, `radar-reloj.html`,
+`radar-duelo.html`, `radar-hoy.html` y `radar-como-leer.html`. Mismo
+contenido, mismas cifras y misma interactividad. `radar()` devuelve ahora
+la lista de las siete páginas. Cada subpágina lleva al pie la barra
+`radar_nav()` con las seis partes y las migas Datos › Radar hacendario.
+Las anclas viejas (`radar-hacendario.html#peso`, `#duelo`, etc., y los
+`#rc-*` de Datos) redirigen a su página. `radar.js` arranca cada bloque solo
+si su página lo trae; el contador de «Hoy» ya no depende de `#rdDatos`. El
+pendiente `radar-1989` apunta ahora al tablero, al reloj y al duelo. El
+índice general lista las seis partes bajo Datos.
+
+**El peso en el tiempo y una sola fuente para el Radar (10-10-2026, sello 20261010r).**
+El autor pidió cerrar los pendientes del radar y tomar en cuenta, en las
+comparativas, gráficas y simuladores, la inflación del peso a través del
+tiempo, su proyección, su valor actual y su comparativa con el dólar y el
+euro.
+- **Una sola fuente para las series anuales.** Las cuatro series (ingresos,
+  gasto neto, inversión física y costo financiero) salen ahora, de 1990 a
+  2025, de las **Estadísticas Oportunas de Finanzas Públicas de Hacienda**
+  (`presto.hacienda.gob.mx`, cuadro «Pesos corrientes multianual», anual):
+  pesos y % del PIB, ambos **oficiales**. Sustituyen al Anexo del 5.º
+  Informe (1995-2016) y a los Criterios (2017-2025), y quitan el salto de
+  definición entre gasto neto total y pagado. La inversión física
+  presupuestaria es unas décimas menor que la del Anexo en algunos años.
+  - El portal pide sesión: se consulta con un navegador automatizado que
+    abre el menú y reescribe la consulta (formatos 3, 5, 11 y 12;
+    presentación 1 = millones de pesos y 6 = % del PIB).
+  - **Resuelto:** `radar-salinas-pib` y `radar-pesos-2017` salen del
+    Registro. **Queda** `radar-1989`: Hacienda empieza en 1990, así que
+    Salinas se mide con cinco de sus seis años (promedio en % del PIB, con
+    aviso) y sus sumas en pesos siguen pendientes.
+- **`finanzas_sexenales.peso`**, de Banxico (SIE): INPC mensual (SP1,
+  1988-sep. 2026), pesos por dólar promedio mensual (SF329, 1988-2026),
+  pesos por euro (SF57923, desde 2000: antes no hay serie), el FIX y el euro
+  del 9 de octubre de 2026 (SF43718 y SF46410) y la **proyección oficial**
+  de los Criterios 2027, Anexo III.1 (p. 69 del PDF): inflación dic/dic y
+  dólar promedio 2026-2032. El euro no tiene proyección oficial y se dice.
+- **En la página:**
+  - selector de moneda en las sumas del tablero, el reloj y dos renglones
+    del duelo: pesos de cada año, **pesos de hoy** (× INPC sep. 2026 ÷ INPC
+    promedio del año), dólares y euros (÷ tipo de cambio promedio del año);
+  - **💱 El peso en el tiempo:** tarjetas de hoy (dólar, euro, inflación de
+    12 meses y proyección), tres gráficas SVG con las bandas de cada
+    sexenio y la proyección punteada (lo que cuesta lo mismo, inflación año
+    por año, dólar y euro), el peso en cada sexenio (inflación acumulada y
+    tipo de cambio al recibir y al entregar) y la máquina del tiempo del
+    peso.
+- **Para actualizar:** cada mes cambian el INPC y el tipo de cambio; cada
+  septiembre, la proyección (Criterios). Se reemplaza el bloque en la base
+  y se sube el sello.
+- Posible siguiente paso: con la misma fuente se pueden llenar los pesos
+  de 2024 del Estado de Cuenta (`estado-cuenta-pesos-2024`); el
+  subejercicio sigue necesitando el Tomo II de la Cuenta Pública.
+
+**Radar hacendario: cada administración, con sus números (10-10-2026, sello 20261010q).**
+El autor pidió que el radar dejara de ser cifras sueltas de 2026 y mostrara,
+administración por administración, los ingresos, la inversión, el costo, la
+deuda y lo pendiente ante la ASF, con simuladores. Ahora es su propia página,
+`radar-hacendario.html` (pestaña de Datos con ➔; `#radar` y las anclas
+viejas `#rc-*` redirigen).
+- **Cómo se genera.** `radar()` en `apartados.py`, con `radar.css` y
+  `radar.js`. Python promedia y suma; cada cifra llega al JSON `#rdDatos`
+  con su chip, su operación y su fuente. Se borraron
+  `herramientas/plantillas/radar.html` y `assets/auditor/js/radar-datos.js`.
+- **Qué hay:**
+  - **El tablero:** siete administraciones (Salinas a Sheinbaum, esta
+    marcada «en curso: solo 2025»), cinco tarjetas (💰 ingresos, 🏗️
+    inversión, 🏛️ costo del gobierno e intereses, 📉 deuda, ⚖️ ASF) y, al
+    tocar una, la comparativa en barras que crecen desde cero, con el
+    detalle «¿De dónde sale?» de cada cifra y las megaobras del sexenio.
+  - **⏱️ El reloj de cada administración:** deuda nueva, intereses,
+    inversión, ingresos o gasto al ritmo promedio de su sexenio (suma ÷
+    segundos de sus seis años).
+  - **⚔️ Duelo:** dos administraciones cara a cara, sin ganador.
+  - **📌 Hoy:** las cifras 2026 del radar anterior, con su chip, y las
+    equivalencias durante la visita.
+- **Los datos nuevos** viven en `AUDIT_DB.finanzas_sexenales`:
+  - 1995-2016: montos de la Cuenta Pública según el Anexo Estadístico del
+    5.º Informe de Gobierno (pp. 447, 453 y 463); su % del PIB es
+    **derivado** con el PIB nominal del INEGI base 2018 (PIBT_3).
+  - 2017-2025: el % del PIB **oficial** de los Criterios Generales 2024
+    (2017-2018), 2026 (2019) y 2027 (2020-2025), todos ya en base 2018.
+    Los Criterios anteriores usaban base 2013 y no se mezclan.
+  - Deuda al recibir y al entregar: la misma serie de la trivia y de la
+    línea de tiempo de Números. **Si cambia allá, cambia aquí.**
+  - ASF: `evaluacion_sexenal` y, para 2025, la primera entrega de la CP 2025.
+- **Pendientes nuevos en el Registro (resueltos con el sello 20261010r):** `radar-salinas-pib` (el PIB base
+  2018 empieza en 1993: Salinas sin % del PIB) y `radar-pesos-2017` (los
+  montos en pesos de 2017 a 2025 están en la Cuenta Pública, que no se
+  pudo abrir). Por eso el reloj y las sumas en pesos solo corren para
+  Zedillo, Fox y Calderón (y la deuda, para todos los sexenios cerrados).
+- **Ojo al leer:** con el PIB base 2018 los porcentajes de los noventa
+  salen más bajos que los que Hacienda publicó entonces; está dicho en
+  «Cómo leer».
+
+**Garantías cívicas tiene su propia página (10-10-2026, sello 20261010p).**
+El autor leyó la pestaña «Garantías cívicas» de Participa y perdió su
+objetivo: juntaba cinco bloques largos y tres repetían lo que ya vive en
+otro lado. Se depuró y se mudó a `garantias.html`.
+- **Qué se quitó y a dónde fue:**
+  - la orientación de «las tres funciones» y «a dónde va lo que escribes»:
+    lo dicen ya Comunidad, el cajón «Cuéntanos lo que viste» y el aviso del
+    Ágora; en la página nueva queda en una sola línea («Importante»);
+  - la «Función 1», copia de «Cuéntanos lo que viste»: vive en la cabecera
+    y en `comunidad.html`;
+  - `herramientas/participa_html.py` y `assets/auditor/js/participa.js`
+    quedaron sin uso y se borraron (la portada conserva su propia copia en
+    el motor). `participa.html` ya no carga scripts.
+- **Qué se quedó, con un objetivo claro:** a qué puerta oficial tocar, qué
+  te protege y qué llevar. La página sale de `garantias()` en
+  `apartados.py`, con `garantias.css` y `garantias.js`:
+  - **🧭 La brújula:** tres preguntas (qué viste, si tienes prueba, si
+    necesitas no dar tu nombre) y la ruta en pasos. Sin prueba, el paso 1
+    es la PNT; si es delito y no quieres dar tu nombre, agrega la
+    plataforma de alertadores de la SABG. La lista `BRUJULA_QUE` resume el
+    «para qué» de cada canal.
+  - **🚪 Las seis puertas:** fichas cortas con «¿Sin dar tu nombre?» y un
+    `<details>` con qué llevar, qué produce y el fundamento.
+  - **🛡️ Las diez garantías:** el decálogo en cartas que se voltean (sin
+    JavaScript se leen las dos caras).
+  - **🎯 ¿Mito o realidad?:** siete afirmaciones (`GARANTIAS_RETO`); la
+    explicación y el fundamento de cada una se leen del decálogo o del
+    canal en la base.
+  - Todo el texto legal sale de `window.AUDIT_DB` (`comunidad.*` y
+    `referencias_legales`); no se teclea en el generador.
+- **En la base:** los textos de los canales y del decálogo pasaron al tú
+  («adjúntalos», «Pregunta por escrito», «documenta»…).
+- **Enlaces:** la pestaña lleva ➔ y `participa.html#garantias` redirige a
+  la página; el cajón y su nota de denuncia enlazan a `garantias.html`; el
+  índice general toma la página de la pestaña.
+
+**El Ágora cívica tiene su propia página (10-10-2026, sello 20261010o).**
+La pestaña «Ágora cívica» de Participa ya no despliega su contenido: abre
+`agora.html`, la red de réplica y diálogo. Es decisión del autor: «que
+funcione como red social».
+- **Cómo se genera.** La página sale de `agora()` en `apartados.py`, con
+  `agora.css` y `agora.js`.
+  - Las listas `AGORA_TEMAS`, `AGORA_POSTURAS`, `AGORA_PREGUNTAS` y
+    `AGORA_REGLAS` viven ahí.
+  - Temas, posturas y colores le llegan a la página en `#agDatos`.
+- **Qué hay en la página:**
+  - **Perfil cívico:** seudónimo con 🎲, lugar, una línea y color de
+    avatar, más contadores de hilos, réplicas, apoyos dados y hilos con
+    fuente.
+  - **Cinco insignias** locales: 🗣️ Primera voz, 📄 Cita su fuente,
+    🏛️ Fuente oficial, 🔁 Replicador y 🤝 Escucha activa.
+  - **El muro:**
+    - compositor con postura (incluye ❓ Pregunta), tema y enlace a la
+      fuente;
+    - orden por recientes, más apoyados, más replicados, con fuente o mis
+      hilos;
+    - filtros por #tema y búsqueda.
+  - **Cada hilo:**
+    - Apoyar, Replicar (el hilo se despliega con su formulario), Compartir
+      (`agora.html#<id>`), Ver los datos (la página de su tema) y Borrar si
+      es tuyo;
+    - 🔍 Pedir fuente, cuando el hilo no la trae;
+    - la fuente lleva una etiqueta: «dominio oficial» (gob.mx, ASF,
+      INEGI, Banxico…), «otra fuente» o «sin enlace».
+  - **Columna derecha:** temas en conversación, preguntas para empezar
+    (las propone la plataforma, sin cifras), cómo se replica bien y lo que
+    llega con el servidor.
+  - **Descargar mis hilos** en JSON.
+- **Honestidad.** El aviso «Versión de prueba» dice que todo vive solo en
+  el navegador. No hay hilos sembrados con usuarios inventados. Los hilos
+  usan la llave del foro anterior (`auditavision_foro_debates`), así que no
+  se pierde nada.
+- **En Participa:**
+  - la pestaña lleva ➔, y una sección con `'pagina'` se pinta como enlace,
+    sin panel;
+  - `apartados.js` deja pasar el clic de una pestaña sin `aria-controls`;
+  - `participa.html#agora` redirige a la página nueva (`hash_a_pagina`);
+  - la ruta 3 de la orientación lleva a `agora.html`.
+- **Pendiente:** el muro público, seguir temas o personas, los avisos de
+  réplica, la moderación y la verificación entre pares necesitan
+  servidor.
+
+**Una sola puerta: «Cuéntanos lo que viste» (10-10-2026, sello 20261010n).**
+El autor notó que «📢 Cuéntanos lo que viste» (cabecera) y «✏️ ¿Viste un
+error?» (pie) hacían casi lo mismo. Le gustaba el cajón que se despliega del
+primero y la página Comunidad del segundo. Se fusionaron:
+- **Hay un solo botón: «📢 Cuéntanos lo que viste».** Está en la cabecera
+  de todas las páginas, en el menú de celular y en el botón flotante de la
+  portada. Abre el mismo cajón lateral en todas, incluida `index.html`.
+  Antes, en las páginas generadas, mandaba a la portada.
+- **El cajón tiene tres rutas que se despliegan** (`<details>`; abrir una
+  cierra las otras):
+  1. **Algo raro con el dinero público.** Pide qué fue, dónde, cuándo, qué
+     viste, con qué dinero y con qué prueba. Aclara que no es denuncia y
+     enlaza las seis puertas oficiales (`participa.html#garantias`).
+  2. **Un dato mal en esta plataforma.** La página ya va escrita.
+  3. **Un tema que deberíamos investigar.**
+- **Fuente única.** `formas(pre)` en `apartados.py` arma los tres
+  formularios. Los usan el cajón (`puerta()`, con id `pt…`) y
+  `comunidad.html` (id `cm…`), que es la versión en página: `#reporta`,
+  `#error`, `#tema`, `#compartir` y `#erratas`.
+  - `cabecera()` incluye el cajón en cada página generada.
+  - `poner_puerta()` lo copia en `index.html` entre
+    `<!-- puerta:inicio -->` y `<!-- puerta:fin -->`.
+- **JavaScript.** `comunidad.js` abre y cierra el cajón (`window.Puerta`) y
+  ahora se carga en todas las páginas. Todo `[data-puerta]` lo abre, y su
+  valor (`reporta`, `error`, `tema`) despliega esa ruta. Sin JavaScript, el
+  enlace lleva a `comunidad.html`. En la portada,
+  `openAyudanosFiscalizar()` del motor llama a `window.Puerta`.
+- **CSS.** Los estilos están en `assets/auditor/css/puerta.css`, cargada en
+  todas las páginas. Los formularios cívicos (`.sv-form`, `.sv-campo`…)
+  pasaron ahí desde `servicios.css`. `sello.py` ya sube el `?v=` de
+  `puerta.css` y `comunidad.js` en `index.html`.
+- **Lo que se retiró:**
+  - el «¿Viste un error?» del pie (`error_pie()`);
+  - el buzón viejo del cajón de la portada, que se guardaba en el
+    navegador y tenía las opciones «Corrección de dato» y «Sugerencia»,
+    duplicadas con Comunidad;
+  - su copia en Participa › Garantías cívicas (Función 1), que ahora es un
+    acceso a la puerta. `participa_html.APORTAR` quedó sin uso.
+  - Los textos de orientación (motor y `participa.js`) dicen ahora que nada
+    se guarda.
+- **Lo que sigue igual:** el envío espera `CANAL_COMUNIDAD`. Los enlaces
+  viejos `comunidad.html?pagina=…#error` siguen funcionando.
+
+**Portada intacta y entrega 7 de Astra: Comunidad (10-10-2026, sello 20261010m).**
+- **«Por dónde empezar» salió de la portada** por decisión del autor:
+  «la plataforma queda intacta». Su contenido se reparte así:
+  - **Investigaciones por tema y «Cómo verificamos»:** van al pie de cada
+    `auditoria-*.html`, dentro de «Otras auditorías» (`temas()` en
+    `auditorias.py`). El tema del caso va primero y marcado, y las tarjetas
+    del mismo tema van antes.
+  - **Los cuatro accesos** (Números, Calculadora, Megaobras e Índice) ya
+    estaban en el menú y en el índice general.
+  - `auditorias.portada()` ya solo escribe los `data-*` del carrusel.
+  - Las reglas `.portada-guia*` de `civico.css` quedaron sin uso.
+- **`comunidad.html`** (Participa › Comunidad, cuarta pestaña), generada por
+  `comunidad()` en `apartados.py`. Tiene cuatro partes:
+  1. **Propón un tema.**
+  2. **Señala un error.** Pide el dato, lo que dice el documento oficial y
+     su enlace, que es obligatorio.
+  3. **Comparte el Estado de Cuenta.** Ofrece el menú nativo, WhatsApp, X,
+     Facebook y copiar el enlace. Solo se comparte el enlace; el ingreso
+     del lector nunca sale de su navegador.
+  4. **Fe de erratas** (lista `ERRATAS`). Son cinco correcciones reales
+     documentadas aquí: $15,000 de la Calculadora, 515,487 mdp del Tren
+     Maya, programas sociales, marco legal y personajes.
+     **Cada corrección nueva se agrega a `ERRATAS`**, como pide la
+     política de independencia.
+- **Formularios.** Los arma `assets/auditor/js/comunidad.js`, que es genérico
+  para cada `form.cm-form`. Se firma con seudónimo y el correo es opcional.
+  No envía nada mientras `CANAL_COMUNIDAD` esté vacío; se abre con el
+  dominio, igual que `CANAL_SOLICITUD`.
+- **«✏️ ¿Viste un error?»** está al pie de toda página generada
+  (`error_pie()`): apartados, investigaciones, expedientes, estado de cuenta
+  y pendientes. Lleva a `comunidad.html?pagina=<archivo>#error` con la
+  página ya escrita.
+
+Pendientes de la entrega 7:
+- **El canal de envío** (`CANAL_COMUNIDAD`). Espera el dominio.
+- **Perfiles, comentarios, expedientes privados, suscripciones y pagos.**
+  Necesitan servidor, como dijo Astra.
+
+**Política de independencia, versión 2 (10-10-2026, sello 20261010l).**
+Decisiones del autor:
+- **La plataforma está abierta a todos, sin exclusión.** Pueden usarla,
+  contratarla o licenciarla la ciudadanía, las organizaciones, las
+  universidades públicas y privadas, y también los gobiernos. Se puede
+  vender o concesionar al gobierno. Lo que se protege es el propósito, la
+  información y lo que se publica: nadie compra las conclusiones.
+- **Hay un compromiso de transparencia anual:** encargos por tipo de
+  cliente, y cuánto entra por cada vía (Pase, Servicios, licencias y
+  donaciones). «Si el gobierno falla, nosotros ponemos el ejemplo.»
+- **La plataforma podría financiarse con donaciones.**
+
+Cambios:
+- `INDEPENDENCIA` pasa de diez a trece compromisos. Se agregan:
+  - abierta a todos con las mismas reglas;
+  - lo que no está en venta;
+  - las donaciones no compran contenido;
+  - de qué responde la plataforma y de qué no (corrige en público; no
+    responde del contenido de los documentos oficiales ni de las decisiones
+    de terceros);
+  - el método y las herramientas son de Auditavisión, y una licencia no da
+    control editorial.
+- **Quinto servicio:** «Licencia de las herramientas».
+- **El Pase** (su página y su copia en `index.html`) ya no dice «sin dinero
+  de gobiernos ni de partidos». Ahora dice «Abierta a todos; nadie compra lo
+  que publicamos».
+
+Pendientes de esta versión:
+- **El canal de donaciones.** Espera el dominio y la forma jurídica.
+- **La calidad de donataria autorizada ante el SAT.** Solo si el autor
+  quiere dar recibos deducibles.
+
+**Propuesta de Astra, entrega 5, parte editorial (10-10-2026, sello 20261010j).**
+Toma los puntos 3 y 8 de la propuesta: cada investigación tiene una
+lectura breve y otra ampliada, y se puede encontrar en buscadores sin
+depender de una pestaña interna. La parte comercial (servicio pertinente,
+«Solicita una investigación») espera la decisión del autor sobre el Pase y
+los Servicios.
+- **Lectura breve en las nueve `auditoria-*.html`.** Va escrita en el HTML,
+  así que se lee sin JavaScript. Responde cinco preguntas:
+  1. qué pasó;
+  2. cuánto dinero, con sus etiquetas;
+  3. quién interviene;
+  4. qué documento lo acredita, con el enlace a cada informe;
+  5. qué falta saber.
+
+  La arma `lectura()` en `herramientas/auditorias.py` con los mismos datos
+  de `window.AUDIT_DB` que usa el JavaScript (`expedientes.fichas`,
+  `panoramaErario`, `cuenta_publica_asf`, `huachicol_fiscal`); no se
+  teclea ni una cifra. La lectura ampliada sigue siendo la que pinta
+  `auditoria-imagen.js`, y el paso 1 del recorrido («Entiende el caso»)
+  ahora lleva a la lectura breve (`#auLectura`).
+- **Dirección estable y tarjeta para compartir.** Cada página generada lleva
+  `canonical` y etiquetas Open Graph y Twitter. Las investigaciones usan su
+  imagen; las demás, una tarjeta sin imagen. Las arma `sociales()` en
+  `apartados.py`; también la usan `auditorias.py` y `expedientes.py`.
+- **`sitemap.xml`.** Lo escribe `herramientas/sitemap.py` al final de
+  `apartados.generar()` y trae 48 páginas. Deja fuera la Enciclopedia y las
+  que solo redirigen. No se escribe `robots.txt` porque el sitio vive en
+  `/a/` y los buscadores solo leen el de la raíz del dominio: **el autor
+  tiene que registrar el mapa en Google Search Console**
+  (`https://uzoraproductos-arch.github.io/a/sitemap.xml`).
+
+Pendientes de la entrega 5:
+- **Páginas por tema** para los temas candidatos de Astra que aún no tienen
+  la suya: medicamentos falsificados, proveedores y facturación.
+  Necesitan documentos oficiales antes de escribirse.
+- **Investigación de búsquedas en Google Trends.** Requiere acceso que la
+  plataforma no tiene.
+- **Enlace a un servicio pertinente.** Espera la decisión del autor.
+
+**Propuesta de Astra, entrega 4: simuladores desde cero (10-10-2026, sello 20261010i).**
+Corresponde al punto 6 de la propuesta: los importes arrancan en $0, hay
+ejemplo oficial identificado, se pueden comparar escenarios, reiniciar en
+cero y descargar la cuenta, y el lector siempre ve que es una simulación.
+- **Simulador nuevo, `simulador-presupuesto.html`.** «Reparte el
+  presupuesto, desde cero» es el cuarto tema de la Calculadora Cívica.
+  - **Dónde vive.** La página la genera `simulador()` en `apartados.py` y
+    la pinta `assets/auditor/js/simulador-cero.js`.
+  - **Botones:** agregar entrada, agregar destino, repartir en partes
+    iguales, cargar el ejemplo oficial (2026 aprobado o 2027 estimado),
+    reiniciar en cero, guardar los escenarios A y B (la tabla los compara
+    por concepto) y descargar el CSV con el origen de cada renglón.
+  - **Reglas a la vista:**
+    - el $0 tuyo no es un cero oficial;
+    - la etiqueta «tuyo» o «cambiado por ti» frente a «oficial»;
+    - dividir entre cero se explica en vez de calcularse;
+    - no se comparan pesos contra millones;
+    - una nota dice que no predice resultados sociales.
+- **El ejemplo oficial.** Sale del cuadro II.6 de los CGPE 2027 (p. 67):
+  - entradas: tributarios, no tributarios, petroleros, y organismos y
+    empresas;
+  - destinos: programable pagado, costo financiero, participaciones y
+    Adefas.
+
+  `herramientas/extraer_simulador.py` lo lee del PDF y escribe
+  `investigaciones/simulador/cgpe2027-cuadro-ii6.json`. Se detiene si las
+  partes no suman los totales del cuadro (ingresos, gasto neto pagado y
+  balance), con 0.2 mdp de tolerancia. Con el ejemplo intacto, la página
+  coteja su balance con el oficial y explica la diferencia de 0.1 por
+  redondeo, que el propio cuadro advierte.
+- **La Calculadora Cívica arranca en $0.**
+  - **Cifra inventada retirada.** Ya no trae «15,000» escrito, y el
+    comparador «Tú contra ellos» ya no usa $15,000 como referencia: esa
+    cifra era inventada.
+  - **Referencia sin ingreso escrito.** Mientras no escribes tu ingreso, el
+    comparador usa el salario mínimo general mensual de 2026 ($9,451.20,
+    CONASAMI), rotulado como ejemplo oficial.
+  - **Botones nuevos.** «Cargar ejemplo oficial» carga ese salario y saca
+    la cuenta. «Reiniciar a ceros» ahora también vacía el campo.
+- **Ticket en negativo (Costo Ambiental).**
+  - **Botones nuevos:** «Cargar ejemplo oficial» (el mismo salario mínimo)
+    y «Reiniciar en cero». Este último está excluido del botón único,
+    junto con `ccReiniciar`.
+  - **Campo vacío.** El ingreso en $0 ya no se pinta con la etiqueta
+    `pendiente`, porque un cero del lector no es un dato pendiente.
+  - **Ejemplo retirado.** Se quitó el texto de ayuda «Por ejemplo, 15000».
+
+Pendientes de la entrega 4:
+- **Simuladores que faltan revisar.** El paquete económico (palancas), el
+  PIB ecológico y las mesas de megaobras arrancan en la base oficial y ya
+  traen «Reiniciar a ceros» o «Contabilizar». Falta revisar si alguno
+  necesita también «Cargar ejemplo oficial» y descarga.
+- **Juegos.** La trivia no tiene importes que editar; no se tocó.
+
+**Aprende: el Diccionario en una sola pestaña (10-10-2026, sello 20261010h).**
+Decisión del autor: las pestañas «Biblioteca hacendaria» y «Fuentes del
+auditor» se juntan en una, «Diccionario del Gasto Público», con dos
+tarjetas. Aprende queda con tres pestañas: Trivia, Diccionario y Noticias.
+El orden es Aprende › Diccionario › Estante › Apartado:
+- `biblioteca-hacendaria.html` lleva al glosario, al marco legal y a las
+  preguntas frecuentes;
+- `fuentes-del-auditor.html` lleva al compendio de fuentes y al pase.
+
+Las dos páginas las genera `pagina_estante()` en `apartados.py`, a partir
+de `ESTANTES`, que ahora trae el archivo de cada estante. `diccionario.html`
+muestra solo las dos tarjetas de estante. Las anclas viejas
+`aprende.html#biblioteca` y `#kit`, y las del Diccionario, llevan a su
+estante. Las migas de cada apartado dicen Aprende › Diccionario › Estante (campo
+`padre3`), y en la barra al
+pie el nombre de cada estante es un enlace. El índice general las incluye.
+
+**Regla del rango derivado (10-10-2026).** Decisión del autor: cuando un
+dato solo tiene aproximación, se publica como rango (mínimo, máximo y punto
+medio = media aritmética) con chip `derivado`, no como `pendiente`. Cada
+cota debe salir de un documento oficial; si falta una, sigue `pendiente`.
+La cifra exacta conserva su ficha en el Registro. Está en AGENTS.md §2.
+
+Por aplicar (falta documentar las cotas, no se han inventado):
+- **`costo_unitario_real` de las megaobras** (`megaobras_historicas`). Hoy
+  son frases con cifras sin fuente, como «~$380 por pasajero» en el AIFA o
+  «~$1,850 por boleto» en el Tren Maya. Cada una necesita un mínimo y un
+  máximo con su fuente: subsidio en el PEF o en la Cuenta Pública entre
+  usuarios de AFAC, de la ARTF o del operador.
+- **El reloj de pérdidas de las megaobras** (`perdida_anual_consolidada_mdp`
+  80,200.1 mdp). Es la suma de `perdida_anual_mdp` obra por obra, y la
+  mayoría no tiene documento. Solo pasa a rango cuando cada sumando tenga
+  sus dos cotas oficiales.
+
+**Propuesta de Astra, entrega 3: Números y Estado de Cuenta (10-10-2026, sello 20261010f).**
+
+**1. Corrección grave a la base.** `cuentaFederal2024` y `tren_maya_peritaje_2024` entraron en el
+commit bd09252 (29-09-2026) sin cotejo («continúa en proceso», decía su
+CONTEXT). Aun así se pintaban con el chip `oficial`, y no coincidían con
+los documentos:
+
+| Concepto 2024 | Lo que decía la base | Lo que dice el documento |
+|---|---|---|
+| Ingresos de la gestión | 5,074,180.2 mdp | 5,341,758.1 mdp (Tomo II, Estado de Actividades) |
+| Intereses de la deuda | 1,154,230 mdp | 933,408.4 mdp (Tomo II, Estado de Actividades) |
+| Producto Interno Neto Ecológico | 29.85 billones | 25.7 billones (ficha del INEGI que cita la propia base) |
+
+Además, su sha256 era el texto `cp2024tomo2oficialshcp`.
+
+Cómo quedaron los dos bloques:
+- **`cuentaFederal2024`:** ahora es una lista `cifras` y cada cifra lleva
+  `estado`, `fuente` o `motivo`, y `url`. Solo tres son `oficial`:
+  - el aprobado PEF 2024 (9,066,045.8 mdp), que leí en el DOF;
+  - los ingresos de la gestión y los intereses de la deuda, tomados del
+    texto indexado del PDF oficial del Tomo II. **Falta abrir ese PDF y
+    confirmarlos.**
+
+  Todo lo demás es `pendiente`: modificado, devengado, pagado, capítulos,
+  flujos y balance.
+- **Conciliación:** muestra solo los pasos del método, sin importes.
+- **`tren_maya_peritaje_2024`:** quedó como `estado: retirado`, con su
+  motivo y un enlace al expediente de la ASF. En `index.html` se quitó la
+  cifra de 515,487 mdp del recuadro del peritaje.
+- **El motor:** `renderCuentaFederal`, `abrirConciliacionPresupuestoContable`
+  y `abrirFichaPericialTrenMaya` se reescribieron para estos datos.
+- **Por qué no se reemplazó con las cifras oficiales:** el portal de la
+  Cuenta Pública no abre desde este entorno. El servidor no envía el
+  certificado intermedio de Let's Encrypt (YR1) y el proxy bloquea
+  letsencrypt.org.
+
+**2. Estado de Cuenta Cívico** (`estado-de-cuenta.html` y
+`estado-de-cuenta-2024-2027.csv`). Lo genera `herramientas/estado_cuenta.py`
+con las cifras escritas en el HTML, así que los buscadores lo indexan.
+
+A pedido del autor, compara **2024 observado, 2026 aprobado, 2026 cierre
+estimado y 2027 propuesto**:
+- **La unidad común es el % del PIB.** Junto a cada porcentaje van los
+  millones de pesos de 2026 y 2027.
+- **Los pesos de 2024 quedan `pendiente`.** El cuadro histórico solo da el
+  porcentaje.
+- **De dónde salen las cifras:** de los Criterios Generales 2027 que están
+  en la raíz del repositorio (`criterios generales proyecto presupuesto.pdf`):
+  - p. 55, «Ingresos y gasto del Sector Público»;
+  - p. 52, RFSP y SHRFSP;
+  - p. 67, cuadro II.6;
+  - p. 33, programas sociales.
+- **Cómo se extraen:** `herramientas/extraer_estado_cuenta.py cgpe.txt`
+  (texto de `pdftotext -layout`) escribe
+  `investigaciones/estado-de-cuenta/cgpe2027-comparativo.json`. Se detiene
+  si un renglón no aparece.
+
+Lo que contiene la página:
+- **Las dos vistas.** «Tu aportación» enlaza a la Calculadora y al Ticket en
+  negativo. «La cuenta pública» va en cuatro dimensiones:
+  - presupuestaria;
+  - financiera, con la contabilidad 2024 corregida;
+  - social, con las becas verificadas y los programas 2027;
+  - ambiental, con las CEEM 2024 y el Ramo 16 de 2026 y 2027.
+- **Renglones que no se suman,** porque miden cosas distintas:
+  - el déficit;
+  - lo que la ASF dejó por aclarar en la Cuenta Pública 2024 (65,169.1 mdp);
+  - el daño ambiental;
+  - el subejercicio (`pendiente`).
+- **La descarga** con periodo, alcance y fecha de revisión.
+
+**3. Números.** El camino del dinero tiene ahora cinco pasos. El quinto, «Se
+hace el balance», lleva al Estado de Cuenta. El índice y las novedades lo
+incluyen.
+
+**Pendientes de la entrega 3:**
+- Cotejar el Tomo II de la Cuenta Pública 2024 para llenar los pesos de 2024
+  y los estados financieros: devengado, flujos, balance y conciliación.
+- Rehacer la ficha del Tren Maya con el Tomo VII y la ASF.
+- El selector de año, territorio y programa del punto 4 de Astra. Va con el
+  motor de Números; no se empezó.
+
+**Propuesta de Astra, entrega 2: portada e índice (10-10-2026, sello 20261010e).**
+El autor pidió seguir con la entrega 2. En la portada solo se agregaron
+enlaces: nada se despliega, cada clic abre su página (§5 bis).
+- **Tres acciones bajo el carrusel.** «Entiende el caso · Explora los
+  números · Revisa la evidencia» cambian con la imagen visible:
+  `updateShowcaseDisplay()` del motor lee `data-nombre`, `data-numeros` y
+  `data-evidencia` de cada `.showcase-slide`.
+- **«Por dónde empezar».** Una sección nueva después del carrusel con cuatro
+  accesos: Números, Tu estado de cuenta (`herramienta-calculadora-ticket.html`),
+  Simula las megaobras e Índice general. Debajo vienen las investigaciones por
+  tema y la franja «Cómo verificamos».
+- **Una sola fuente.** Los `data-*` de las diapositivas y la lista de temas
+  (entre `<!-- TEMAS:inicio -->` y `<!-- TEMAS:fin -->`) los escribe
+  `auditorias.portada()` desde `RUTAS` y `TEMAS`, en binario y sin tocar los
+  CR. **No se editan a mano en `index.html`**: se cambian en `auditorias.py`
+  y se corre `sello.py` o `apartados.py`. Correrlo dos veces no cambia nada.
+- **Índice general (`indice.html`).** Lo arma `indice()` de `apartados.py`
+  con las listas que ya existen, así que una página nueva aparece sola:
+  - investigaciones por tema;
+  - los capítulos de Números, cuyas tarjetas abren con `?abrir=`;
+  - las cuatro herramientas con sus módulos;
+  - Datos, Aprende, Participa y los Poderes;
+  - «Cómo verificamos», con los tres estados y la advertencia de que una
+    imagen no es evidencia;
+  - las novedades, de la lista `NOVEDADES`, **que se actualiza a mano en
+    cada entrega**.
+
+  El pie de cada página generada enlaza al índice.
+- El «Volver al Modo Inspector» de Expedientes ahora va a
+  `herramienta-inspector.html`.
+- **Queda fuera de la entrega 2:**
+  - El acceso «Servicios / Solicita una investigación»: falta que el autor
+    decida si el Pase convive con los Servicios, y hacen falta una política
+    de independencia y la revisión legal.
+  - La fecha y el territorio de cada investigación destacada: no hay un dato
+    sostenido por caso en la base.
+  - Los personajes políticos: se retiraron el 27-09-2026 y no se enlazan.
+
+**Propuesta de Astra, entrega 1 (10-10-2026, sello 20261010d).**
+El autor pidió ejecutar las consideraciones de Astra. Su propio plan pone
+primero la entrega 1: inventario, corrección de datos y conexión de
+Auditoría en imágenes con Números e Inspector. Las pestañas no cambian
+(siguen siendo cinco), Auditoría en imágenes sigue siendo el bloque de la
+portada y el Inspector vive en Herramientas.
+- **Recorrido de cada investigación.** Las nueve `auditoria-*.html` abren con
+  tres pasos: 📖 Entiende el caso (la lectura de la misma página),
+  💰 Explora los números (`sigue-el-dinero.html?abrir=eb-…`, la tarjeta
+  pertinente) y 🔍 Revisa la evidencia (el módulo del Inspector que toca).
+  El mapa está en `RUTAS` de `herramientas/auditorias.py`; reutiliza el
+  estilo `.camino` de Números con el modificador `.camino-tres`.
+- **Programas sociales corregidos** (`cuentaFederal2024.evaluacion_social_mir`
+  y la vista «Resultados sociales» del motor). Ahora hay columnas separadas
+  de aprobado y devengado, con chip y fuente:
+  - **Becas, separadas y verificadas.** S072 (básica): aprobado 49,869.8 y
+    devengado 42,571.6 mdp. S311 (media superior): aprobado 39,366.6 y
+    devengado 33,301.2 mdp. Fuente: el Estado Analítico de la SEP de la
+    Cuenta Pública 2024, tal como lo reproduce la ASF (Auditoría
+    2024-5-11O00-19-0113-2025, p. 8). Antes había un solo renglón de
+    87,540 mdp sin documento.
+  - **Pensión (S176): `pendiente`.** La cifra de 465,048 mdp estaba rotulada
+    como devengado y es el aprobado; se retiró. El tomo III de la Cuenta
+    Pública (Ramo 20) no se pudo abrir con conexión verificada, porque
+    el servidor de Hacienda no envía su certificado intermedio (Let's
+    Encrypt YR1) y el proxy bloquea letsencrypt.org. Falta de la
+    plataforma, no de Hacienda.
+  - **IMSS-Bienestar: `pendiente`** (clave, ramo y montos). Se retiraron los
+    128,900 mdp, que no tenían documento. Al cotejar no hay que mezclar el
+    programa con el presupuesto completo del organismo.
+  - **Resultados, todos `pendiente`.** Se retiraron los porcentajes de
+    cumplimiento, cobertura e impacto (101.4 %, 14.2 %, 8.5 pp, 707
+    hospitales…), que no tenían documento citado. Propósito, cobertura e
+    impacto se mostrarán por separado cuando se coteje la MIR y las
+    evaluaciones del CONEVAL.
+- **Ramo 28 y CDMX: ya cumplían.** El Ramo 28 por entidad dice «Estimación de
+  participaciones 2026, Anexo 15» y la CDMX lleva `sinFuente` con motivo en
+  los campos del INEGI.
+- **Inventario automático.** `herramientas/inventario.py` escribe
+  `docs/INVENTARIO.md`: 43 páginas, 0 enlaces rotos, 1 redirección, y los
+  destinos `?ir=` que siguen en la portada (reporta 82, verificador 17,
+  megaobras 14, ambiente 13, calculadora 11…). Se corre a mano; devuelve
+  1 si hay enlaces rotos.
+- **«Los tres presupuestos».** La frase no aparece en ningún archivo del
+  repositorio. Ese recorrido no existe todavía con ese nombre.
+
+Pendientes de la propuesta de Astra:
+- **Entrega 1:** cotejar la pensión S176 e IMSS-Bienestar en el tomo III,
+  bajando los PDF desde otra conexión, y la MIR o CONEVAL de los cuatro
+  programas. También el cuadro 3 del libro, con edición y página.
+- **Entregas 2 a 4** (portada con tres acciones, Estado de Cuenta en cuatro
+  dimensiones y simuladores en $0 con «Cargar ejemplo oficial»): sin
+  empezar.
+- **Entregas 5 a 7** (páginas temáticas, servicios de pago, comunidad): antes
+  el autor tiene que decidir si el Pase convive con los Servicios. Además
+  falta una política escrita de independencia frente a clientes y una
+  revisión legal del «análisis de indicios».
+
+**El Circuito del Dinero ya no existe: es la pestaña Números (10-10-2026, sello 20261010c).**
+Precisiones del autor:
+- Las pestañas se quedan como están.
+- **Auditoría en imágenes no es pestaña**: es el bloque de imágenes al
+  inicio de la portada, y cada imagen lleva a su investigación.
+- **El Modo Inspector vive en Herramientas.**
+- **El Circuito del Dinero se convirtió en Números** (`sigue-el-dinero.html`).
+  Nada debe llevar ya a él.
+
+Inventario: los 10 bloques del módulo `presupuesto` (`eb-arquitectura`,
+`cuanto`, `ingresos`, `equivale`, `ciegos`, `egresos`, `salud`,
+`cuenta-federal` y `mapa`) ya tenían su tarjeta en Números. Faltaba la
+entrada «El camino del dinero, en cuatro pasos», que ahora es el bloque
+`CAMINO_NUMEROS` arriba de las pestañas. Conserva el mismo texto y las mismas
+fuentes ([10] LIF, [11] PEF, [05] LCF), lleva sus términos al glosario y cada
+paso manda a su capítulo; el cuarto va a «Qué encontró la ASF».
+
+Accesos que todavía abrían el módulo viejo y ahora llevan a Números:
+- `?ir=presupuesto` e `?ir=egresos`, con un script en el `<head>` de
+  `index.html` que redirige antes de pintar la portada;
+- `seleccionarModuloExplorer('presupuesto')`;
+- el resultado «Ramo» del buscador;
+- `irAAuditoriaInversiones`;
+- el botón del radar «Ver de dónde sale el dinero, en Números (LIF)».
+
+Todos usan `irANumeros(ancla)` del motor, que manda a
+`sigue-el-dinero.html?abrir=eb-…`. `apartados.js` abre ahí la pestaña y el
+visor de la tarjeta de ese bloque. El visor de Números sigue usando
+`index.html?ir=presupuesto&ancla=…&visor=1`, que no se redirige.
+
+Los rótulos «Circuito del Dinero» en `PROEMIOS`, `TAB`, la nota de la portada
+y el `<h2>` del módulo dicen ahora «Números».
+
+**Herramientas en módulos con página propia y motor 8 veces más rápido (10-10-2026, sello 20261010b).**
+Pedido del autor: al entrar a cualquiera de las cuatro herramientas, la
+pestaña «se quedaba actualizando cifras». Diagnóstico con el perfilador de
+Chromium: cada pestaña abría `index.html?ir=...&visor=1` en un marco, y al
+cargar la portada el motor pasaba unos 7 segundos en `autolinkAmbito`, que
+enlaza los términos del glosario. Con los ámbitos que se enlazan después
+sumaba unos 15 segundos. La causa: abría un `TreeWalker` por cada alias
+(cientos) y revisaba los ancestros de cada nodo de texto en cada vuelta.
+
+- **Motor:** `autolinkAmbito` recorre el árbol una sola vez, guarda los nodos
+  válidos y actualiza la lista al partir un nodo. Se comparó contra la versión
+  anterior: los mismos 116 enlaces, en el mismo lugar y con el mismo texto.
+  La portada pasó de ~8 s a ~1 s. Los visores de Números y de los demás
+  apartados se benefician igual (~0.7 s).
+- **Reestructura (§5 bis):** `herramienta-*.html` ya no tiene pestañas ni
+  despliega nada. Es la ruta de sus módulos numerados (`.herr-ruta`) y cada
+  módulo abre su página `herramienta-<h>-<módulo>.html`, que hace
+  `herramienta_modulo()` en `apartados.py`. Son 16 páginas, que cargan en
+  0.4 a 1.5 s. Cada página lleva:
+  - migas de dos niveles;
+  - el módulo en el visor, a la altura de su contenido (`iframe[data-modulo]`
+    en `apartados.js`);
+  - «Abrir en el auditor completo»;
+  - anterior y siguiente, los chips de todos los módulos y las otras
+    herramientas.
+- **Anclas viejas:** `#pulso`, `#inspentes` y las demás redirigen a la página
+  del módulo (`hash_a_pagina`). `busca-y-verifica.html` va a
+  `herramienta-inspector-entes.html`.
+
+**Diccionario del Gasto Público en dos estantes (10-10-2026, sello 20261010a).**
+Al autor no le gustó la fusión en una sola «Biblioteca del auditor»: se
+perdieron los nombres «Biblioteca hacendaria» y «Fuentes del auditor», y el
+Diccionario dejó de verse en Aprende. Queda así: el **Diccionario del Gasto
+Público** (`diccionario.html`) es el nombre de la obra completa, con dos
+estantes que salen de `ESTANTES` y `BIBLIOTECA` en `herramientas/apartados.py`:
+
+- 🏛️ **Biblioteca hacendaria**, para entender: Glosario de Términos
+  Hacendarios, Marco Legal Hacendario y Preguntas Frecuentes en Casillas
+  Didácticas.
+- 🧭 **Fuentes del auditor**, para verificar: Compendio de Fuentes Oficiales
+  (el portal de referencias, `fuentes-oficiales.html`) y Pase del Auditor
+  Cívico.
+
+Aprende vuelve a tener las pestañas `#biblioteca` y `#kit`, cada una con la
+nota «Forma parte del Diccionario del Gasto Público». La portada del
+Diccionario muestra los dos estantes y la barra al pie de cada página también.
+Las páginas ligeras no cambiaron. Se agregaron las anclas viejas
+`diccionario.html#referencias` y `#pase`.
+
+**Biblioteca del auditor: cuatro páginas ligeras y contenido cotejado (09-10-2026, sello 20261009za).**
+Pedido del autor: las fichas «Biblioteca hacendaria» y «Fuentes del
+auditor» de Aprende se trababan al abrirse («se queda calculando las
+cifras») y repetían contenido (las preguntas frecuentes estaban en las dos y
+en el Diccionario). Causa: cada tarjeta abría `index.html?ir=...` en el
+visor, es decir, la portada entera (motor, mapas y padrón municipal, unos
+4 MB de JavaScript) solo para mostrar texto.
+- **Fusión**: las dos fichas son ahora una, «📚 Biblioteca del auditor»
+  (`#biblioteca` en `aprende.html`), con cinco tarjetas que salen de la
+  lista `BIBLIOTECA` de `herramientas/apartados.py`. Aprende queda con tres
+  pestañas: Trivia, Biblioteca y Noticias.
+- **Páginas propias** (generadas por `apartados.py`, pintadas por
+  `assets/auditor/js/biblioteca.js` desde `window.AUDIT_DB`, sin el motor):
+  `preguntas-frecuentes.html` (acordeón con buscador, temas y ancla por
+  pregunta `#p-<casilla>-<n>`), `marco-legal.html` (el ciclo del dinero en
+  cinco etapas que filtran, buscador por ley y fichas con el texto vigente;
+  ancla `#precepto-<id>`), `fuentes-oficiales.html` (gráfica de barras por
+  familia de fuentes, buscador y ancla `#ref-<id>` iluminada) y
+  `pase-del-auditor.html` (antes un cuadro encima de la portada; la
+  suscripción se marca «disponible en el lanzamiento»). El glosario ya
+  tenía su página. Las cinco llevan al pie la barra «La biblioteca del
+  auditor» (`bib_nav()`).
+- **El Diccionario** (`diccionario.html`) deja las pestañas con visor: es
+  la puerta de los cuatro apartados. Sus anclas viejas (`#glosario`,
+  `#fuentes`, `#marco-legal`, `#preguntas`) mandan a la página nueva
+  (`hash_a_pagina`).
+- **El motor** ya no despliega esos apartados en la portada:
+  `abrirCatalogoFuentes()`, `abrirDiccionarioSubtab()`, `goToRef('precepto-…')`,
+  `openPaseCivicoModal()` y los destinos `?ir=fuentes|faq-marco-legal|faq-preguntas|faq-glosario|pase`
+  llevan a las páginas (`irBiblioteca()`; desde el visor, a la ventana
+  completa). Las notas [n] de los apartados (`libro_html`) y de `datos.js`
+  apuntan directo a `fuentes-oficiales.html#ref-…`.
+- **Marco legal cotejado palabra por palabra** con el texto vigente de la
+  Cámara de Diputados (CPEUM, última reforma DOF 07-10-2026; LFPRH
+  09-04-2026; LCF 03-01-2024; LDF 10-05-2022; LIF 2026) y el Manual de
+  remuneraciones del PJF (DOF 27-02-2026). Se corrigieron citas que eran
+  paráfrasis presentadas como texto oficial (25, 28, 73, 74, 79, 116, 127,
+  94, 96, LFPRH 17-18, 42 y 54, LCF, LDF, LIF). Hallazgos: el 79 ya dice
+  «Auditoría Superior de la Federación»; el 127, fr. II, se reformó el
+  10-04-2026; la Corte puede funcionar en dos secciones (art. 94); la
+  extinción de fideicomisos judiciales está en el transitorio **Décimo** del
+  decreto de 2024, no en el Cuarto, y no menciona «13 fideicomisos» ni
+  «$15,434 mdp». Se retiraron dos «preceptos» de la LIF que no existen
+  (costo financiero y prohibición de condonar, que está en el art. 28
+  constitucional) y entró el art. 28 de la LIF 2026 (Renuncias
+  Recaudatorias). Quedan 27 preceptos, cada uno con `vigencia`, `etapa`,
+  `grupo` y su ficha del catálogo (`ref`). Ya no se muestra
+  `aplicacion_auditavision`, que remitía a pestañas de la Enciclopedia.
+- **Preguntas frecuentes verificadas**: se quitaron cifras sin documento
+  (predial 0.16% del PIB y 1.0% OCDE, $78,327 mdp del PJF, 80.2%, $34.2 mdp
+  por ponencia, 35 colaboradores, salarios de ministros de antes) y se
+  sustituyeron por cifras de la propia plataforma con chip: PEF 2026 Ramo 03
+  ($70,005.6 mdp aprobado), Manual PJF 2026 ($134,310 netos al mes por
+  ministro), INEGI EFIPEM 2024 (predial = 7.4 de cada 100 pesos municipales;
+  transferencias federales = 71.1). Se corrigieron el procedimiento del
+  pliego de observaciones (LFRCF arts. 39, 40, 41 y 71: la Auditoría no
+  juzga ni sanciona) y la respuesta sobre EFOS (art. 69-B del CFF, sin
+  especulación). Cada respuesta trae sus fichas del catálogo (`refs`).
+- **Pendiente:** cuántos fideicomisos judiciales se extinguieron y cuánto
+  se enteró a la Tesorería. El decreto no lo dice y la plataforma aún no
+  integra el informe oficial que lo documente: falta nuestra.
+  Tampoco se ha depurado el catálogo de fuentes, que tiene fichas dobles
+  (`ref-lamparo` y `ref-ley-amparo`; `ref-pnt` y `ref-pnt-asesores-scjn`) y
+  una ficha de la Auditoría que liga a su portada (`ref-asf-fideicomisos-pjf`).
+  No se borraron porque otras partes las citan por su id.
+
+**Trivia: la gran balanza de la Enciclopedia, en reactivos (09-10-2026, sello 20261009z).**
+Pedido del autor: traer a la trivia de Aprende el tablero 5.4 de la
+Enciclopedia («Versus General Don Porfirio Díaz»), con sus gráficas,
+simuladores y rubros, como preguntas en lugar de etiquetas. La trivia
+(`assets/auditor/js/trivia-presidentes.js`) pasa de 12 a 22 preguntas y
+de 4 a 7 rondas:
+- **La gran balanza** (4): primer superávit (1836-1837, no Limantour),
+  peor déficit contra ingresos (Díaz, 1888-1889: 114.8%), deuda de 1870 a
+  1911 (casi cinco veces) y dependencia de las aduanas (Santa Anna, Juárez,
+  Díaz y 2025).
+- **Los rieles** (2): pasajeros en la privatización (−95% de 1994 a 2000;
+  la red no se redujo) y kilómetros sumados de 1910 a 2012 (6,979).
+- **Hoy: el primer año de Claudia Sheinbaum** (4): balance 2025 (−3.9% del
+  PIB), de dónde sale el dinero (ISR), costo financiero contra inversión
+  física (3.7 contra 2.2) y la deuda más alta de la serie (52.6% en 2025).
+- **Gráfica lineal**: en las preguntas con serie (`serie: true`) hay un
+  selector Barras/Lineal; la traza se dibuja al contabilizar (`linea()`).
+- **Estado de cuenta**: se agregan las fichas de Sheinbaum (primer año,
+  se mide y no se califica), Juárez y Santa Anna; la del Porfiriato suma la
+  deuda de 1890 y 1911.
+- **Ninguna cifra del tablero 5.4 se copió**: la propia Enciclopedia lo
+  marca «en revisión, sin fuente». Todo se rehízo con el INEGI
+  (*Estadísticas históricas de México 2014*, cuadros 14.18, 16.3, 16.5 y
+  16.16) y con Hacienda (Criterios Generales de Política Económica 2027,
+  pp. 53 y 56). Lo que no se pudo sostener se explica en «Lo que
+  corregimos»: los % del PIB del siglo XIX, el «−19,000 km» de Zedillo, el
+  «88%» de ISR e IVA (fue 81.6%) y las cifras sexenales del tablero.
+- **Pendiente:** el kilometraje de los trenes posteriores a 2013 (Maya,
+  Interoceánico, El Insurgente). La Agencia Reguladora del Transporte
+  Ferroviario publica su anuario y la plataforma aún no lo integra: es
+  falta nuestra, no de la dependencia. Tampoco entraron los indicadores
+  sociales del tablero (esperanza de vida, salario real, tierra): falta
+  cotejarlos con CONAPO, CONASAMI y el INEGI.
+
+**Imágenes de herramientas más limpias y más lejanas (09-10-2026, sello 20261009y).**
+Pedido del autor: menos sombreado y menos zoom. Las imágenes son ahora
+`herr-*-amplia.jpg`: la escena casi completa al centro, sobre un fondo hecho
+de la misma imagen desenfocada, en 1200×670. En las tarjetas, el degradado solo
+oscurece la franja del título (desde el 42 % del alto). En el encabezado de
+`herramienta-*.html` la imagen va entera a la derecha (`auto 100%`) y el
+degradado azul solo cubre el lado del texto.
+
+**Nuevas imágenes de las herramientas (09-10-2026, sello 20261009w).**
+El autor entregó cuatro imágenes ilustrativas que sustituyen a las de
+`assets/auditor/img/herr-*.jpg` (recortadas a 1200×670). En el sello
+20261009x cambiaron de nombre (`herr-megaobras-plataformas.jpg`,
+`-calculadora-monedas`, `-inspector-foroptero`, `-ambiente-refineria`):
+con el mismo nombre, los navegadores seguían mostrando la imagen vieja de su
+caché. **Para cambiar una imagen, cámbiale también el nombre** (el CSS no
+lleva sello en sus `url()`):
+plataformas petroleras para Megaobras, una pila de monedas para la
+Calculadora Cívica, un foróptero para el Modo Inspector y una refinería con
+humo para el Costo Ambiental. Se ven en las tarjetas de Herramientas, en el
+encabezado de cada `herramienta-*.html` y en la franja «Las otras herramientas».
+
+**Diccionario y glosario con página propia; nada lleva a la portada (09-10-2026, sello 20261009v).**
+Pedido del autor: los enlaces a la Enciclopedia (congelada) llegan ahora al
+Diccionario del Gasto Público, y nada saca al lector a la portada salvo el
+nombre «Auditavisión» y los botones de volver al inicio.
+- `diccionario.html` (`DICCIONARIO` en `apartados.py`, padre: Aprende):
+  la pestaña «faq» del auditor en su página, con cuatro pestañas
+  (preguntas, glosario, marco legal, catálogo de fuentes). Tres abren su
+  apartado en el visor; en el visor se esconden el título y las
+  subpestañas de la portada (`civico.css`).
+- `glosario.html` (`GLOSARIO` + `assets/auditor/js/glosario.js`): página
+  nativa, sin marco, que lee `AUDIT_DB.glosario`: buscador, categorías y
+  un ancla por término (`glosario.html#Huachicol-Fiscal`, la forma de
+  `glosario_ancla()`). Los enlaces `index.html?ir=glosario` y
+  `?ir=faq-glosario` del motor redirigen ahí.
+- Los 13 enlaces a `enciclopedia.html` (insignia «Inspector Meteoro»,
+  pie de la portada, nota de finanzas, ficha de referencia, debate,
+  Porfiriato y presidentes) van al Diccionario o a su glosario.
+- `apartados.js`: cualquier enlace `index.html?ir=...` que no sea tarjeta
+  (p. ej. «Cuéntanos lo que viste», los de Auditoría en imágenes y las
+  fichas de fuente) se abre en una ventana lateral ancha (`abrirMarco`,
+  `.glos-drawer-marco`) con el auditor en modo visor. Se quitó «Pantalla
+  completa» del visor, porque llevaba a la portada. En el visor, los
+  cajones del auditor ocupan todo el marco y cerrar el reporte cierra la
+  ventana.
+- Pendiente: los enlaces *dentro* del visor que apuntan a otra página
+  siguen abriéndose en la ventana completa (`target=_top`).
+
+**El nombre de la cabecera lleva a la portada (09-10-2026, sello 20261009t).**
+«Auditavisión · El gasto público, a la vista» es ahora un enlace a
+`index.html` en todas las páginas (`cabecera()` en `apartados.py` y la
+portada). El logotipo sigue abriendo la presentación «Quiénes somos».
+
+**La nota del libro, en la ventana lateral (09-10-2026, sello 20261009s).**
+Por pedido del autor se quitó el recuadro «Nota de referencia» de Números,
+para que las pestañas queden parejas. Ahora es un enlace «📘 Nota de
+referencia» bajo la entrada que abre la ventana lateral ancha. Trae el texto
+con su llamado [119], los conceptos del glosario y la ficha del catálogo de
+fuentes (`libro_enlace()` en `apartados.py`, plantilla `#tplNotaLibro`).
+
+**Herramientas: tarjetas con imagen y una página por herramienta (09-10-2026,
+sello 20261009r).** Pedido del autor.
+- **Menú.** Los módulos ahora se llaman herramientas.
+  - Se quitaron el título «Los cuatro módulos» y su párrafo; «elige una y
+    pulsa Comenzar» pasó al paso 1 de «Cómo se usa».
+  - Las cuatro tarjetas van en dos columnas, más grandes, con fotografía
+    ilustrativa de fondo y el icono encima (`.herr-foto.rubro-*` en
+    `apartados.css`).
+  - Imágenes: copias ligeras en `assets/auditor/img/herr-*.jpg`, tomadas de
+    `assets/img` (Tren Maya, Palacio Nacional, ciudad de noche y bosque). Van
+    marcadas «Imagen ilustrativa».
+  - Ojo: un `url()` dentro de una variable CSS se resuelve contra la carpeta
+    de la hoja; por eso la imagen se pone por clase.
+- **Páginas nuevas.** `herramienta-megaobras.html`, `-calculadora`,
+  `-inspector` y `-ambiente` (lista `HERRAMIENTAS` en `apartados.py`, que no
+  agrega pestañas al menú: siguen cinco).
+  - Encabezado con la imagen y el proemio del módulo (copia de `PROEMIOS`
+    del motor: **si cambia uno, cambia el otro**).
+  - Una pestaña por tema. La primera llega abierta y la tarjeta de cada
+    pestaña (`data-auto`) despliega su bloque en el visor sin pulsar otra
+    vez. Al pie, las otras tres herramientas.
+  - «Expedientes de casos» enlaza a `expedientes.html`.
+  - `busca-y-verifica.html` ahora redirige a `herramienta-inspector.html#inspentes`.
+- **Motor.** `visorFoco()` deja visibles las herramientas de «Busca y
+  verifica»: su ancla es un rótulo `.insp-sep` y la herramienta son los
+  hermanos que le siguen.
+- **Nota «Qué son las finanzas públicas».** Ya no lleva a la portada: se
+  abre en la ventana lateral, más ancha (`.glos-drawer-ancha`, 760 px).
+  - Cifras de la base con su chip y su fuente (PEF 2026, anexos 1 y 8; ASF,
+    Matriz de Datos Básicos CP 2024). `audit-database.js` se carga solo al
+    abrir la nota.
+  - Sus conceptos (gasto público, hacienda pública) se leen ahí mismo, con
+    regreso a la nota.
+  - El logotipo suma el botón a la nota. Copia de `abrirNotaPortada()`, con
+    la lista de lugares al día.
+- **Cabecera.** Se corrigió un bucle: al encogerse, el anclaje del
+  desplazamiento subía la página y la volvía a agrandar. Ahora solo crece
+  arriba del todo, y se mide ya compacta antes de desplazarse.
+- Pendiente (§5 bis): los temas siguen cargando los módulos de la portada
+  en el visor. Ya tienen página propia, pero el código vive en el motor.
+
+**Números en pestañas y el libro como nota de referencia (09-10-2026, sello
+20261009q).** El autor pidió para Números lo mismo que en Datos, Aprende y
+Participa.
+- `sigue-el-dinero.html` tiene seis pestañas, una por apartado de «En esta
+  página»: De dónde sale, Quién lo decide, Quién lo gasta, A dónde baja,
+  Cuánto debemos y ¿Cuánto te toca? (`'pestanas': True` en `apartados.py`).
+- **Fichas.** Siguen siendo el visor (el módulo de la portada en un marco,
+  modo `visor-foco`), desplegado debajo de su fila. Ahora el marco toma el
+  alto de su contenido, sin franja en blanco (`ajustarMarco()` en
+  `apartados.js`).
+  - Se mide el fondo de los bloques del `body` del marco. Los cajones fijos
+    (`position: fixed`) se ignoran, porque miden lo que el marco y lo harían
+    crecer sin fin.
+  - Un `ResizeObserver` vigila cada bloque, también cuando se encoge. Hay un
+    tope de 40 ajustes.
+- **El libro.** El recuadro pasó a ser una «Nota de referencia»
+  (`libro_html()` en `apartados.py`).
+  - Lleva la llamada [119], que enlaza a su ficha en el catálogo de fuentes
+    (`index.html?ir=fuentes&ancla=ref-gomez-granillo-1995`).
+  - Enlaza sus conceptos al glosario (`ir=glosario&ancla=<término>`).
+  - Ficha nueva en `referencias_legales` (núm. 119, categoría nueva
+    «doctrina», sin URL: el libro no tiene edición oficial digital). El
+    filtro de categorías se deriva de los datos.
+  - El motor: `IR_DESTINOS.fuentes` acepta un ancla `ref-…` y la resalta.
+- Pendiente (§5 bis): las fichas aún cargan los módulos de la portada en el
+  visor. Llevarlos a código propio de la página es trabajo mayor (17
+  módulos del motor).
+
+**Datos en pestañas, con fichas que se despliegan (09-10-2026, sello
+20261009p).** El autor pidió para Datos lo mismo que en Aprende y Participa.
+- `descarga-los-datos.html` tiene tres pestañas: Radar hacendario, Datos
+  abiertos e Informes oficiales.
+- **Radar.** Por pedido del autor, la barra «Equivalencia durante tu
+  visita» va arriba y el radar de referencia queda debajo (la cinta «Datos
+  de referencia» y las cifras en movimiento).
+  - Volvieron los dos botones que tenía en la portada: «Ocultar
+    estadísticas» y «Desglosar cifras».
+  - El desglose (cómo se calcula cada cifra y de dónde sale) empieza
+    cerrado. Tocar una cifra lo abre y lleva a su tarjeta.
+  - Marcado: `herramientas/plantillas/radar.html`. Lógica:
+    `radar-datos.js`.
+- **Fichas.** Las cuatro fichas de Datos abiertos e Informes oficiales son
+  botones (`fichas()` en `apartados.py`). Se despliegan debajo de su fila
+  con el aspecto del visor y no abren la portada. Hay una abierta a la vez
+  por pestaña.
+  - Descarga en CSV: las siete bases con su botón y su diccionario.
+  - EFIPEM: la descarga y una consulta por estado con la tabla de sus
+    municipios. Solo muestra cifras del INEGI que ya estaban en
+    `municipios-efipem.js`.
+  - Informes de la Cuenta Pública: el `renderCuentaPublica()` completo, con
+    sus ocho capítulos.
+  - Diccionario: las siete bases con el diccionario abierto.
+- `#ficha-<id>` abre la pestaña y la ficha. La tarjeta del radar «Ver lo que
+  encontró la ASF» ahora apunta a `#ficha-asf`.
+- El código es copia del motor (`DESCARGAS`, `descargarCSV`,
+  `renderCuentaPublica`, `capMontar` y sus ayudantes) y vive en
+  `assets/auditor/js/datos.js`. **Si cambia en el motor, cambia aquí.**
+  - El botón «Ver en el Catálogo de Fuentes» enlaza a
+    `index.html?ir=fuentes`, porque el catálogo sigue en la portada.
+  - La lista 69-B del SAT solo se baja al pedir su CSV.
+- Pendiente (§5 bis): que `ir=descargas`, `ir=diccionario` e
+  `ir=csv-municipios` de la portada lleven a esta página.
+
+**Participa con su contenido dentro de las pestañas (09-10-2026, sello
+20261009o).** El autor pidió que cada pestaña muestre su contenido, como en
+Aprende, y no tarjetas que mandaran a la portada.
+- «Ágora cívica» tiene el portal de diálogo completo: el formulario, los
+  filtros, los hilos y las réplicas.
+- «Garantías cívicas» tiene, en este orden:
+  - las tres rutas y «a dónde va lo que escribes»;
+  - el formulario «Ayúdanos a fiscalizar», que en la portada vive en un
+    cajón lateral;
+  - los seis canales oficiales;
+  - el decálogo.
+- El marcado se tomó de `index.html` y vive en
+  `herramientas/participa_html.py`.
+- Las funciones son copia de las del motor y viven en
+  `assets/auditor/js/participa.js`, que lee `window.AUDIT_DB` y expone su
+  propio `window.AuditEngine` con los métodos de los `onclick`. **Si cambia
+  el portal en el motor, cambia aquí.** Lo guardado en el navegador usa las
+  mismas claves de `localStorage`, así que se comparte con la portada.
+- `civico.css` agrega estilos de tema claro para el formulario y los hilos.
+  Traían colores en línea para fondo oscuro, y el texto blanco no se veía.
+- Pendiente (§5 bis): retirar el portal de la portada y redirigir sus
+  `ir=portal` a `participa.html`.
+
+**Dos columnas más de García Luna (09-10-2026, sello 20261009n).** Las pidió
+el autor y se verificaron con la regla editorial. Quedan 18 columnas y 75
+afirmaciones descartadas.
+- «García Luna y los testigos colaboradores: lo que dice la ley de cada
+  lado». Recupera la tesis del módulo retirado de la Enciclopedia, ya
+  verificada:
+  - el testimonio es prueba en los dos países (CNPP arts. 259 y 356;
+    FRE 601);
+  - la ley mexicana también premia al colaborador (LFDO art. 35; CNPP
+    art. 256 fr. V) y pide valorarlo con prudencia y corroborarlo (LFDO
+    arts. 35 Bis, 36 y 40);
+  - **el CNPP no recoge el «testis unus, testis nullus»** que afirmaba el
+    texto viejo, así que eso va a descartado.
+  - Pendiente por falta de la plataforma: la jurisprudencia de la SCJN
+    sobre el coimputado (sjf2 bloquea el entorno) y las transcripciones
+    del juicio.
+- «García Harfuch y la Policía Federal de García Luna». Lo que consta es la
+  coincidencia institucional entre 2008 y 2012: el SIL, cuyos datos no ha
+  confirmado el legislador, y el comunicado del DOJ. **La amistad y los
+  vínculos no constan en ningún documento oficial** y la columna lo dice.
+  Pendiente: abrir el PDF de la acusación sustitutiva del DOJ (19-576 S-1)
+  para confirmar que no lo menciona. Los datos del DOJ se leyeron por el
+  buscador porque justice.gov está bloqueado.
+
+**Cabecera: más imagen y fija en todos los tamaños (09-10-2026, sellos
+20261009g y 20261009h).** Decisión del autor. En `civico.css` (bloque «CABECERA
+(09-10-2026)»). Primero se adelantó el desvanecido 3.5 cm, pero al agrandar
+la imagen se veía menos; el autor pidió en su lugar (sello 20261009h) que
+**la imagen ocupe la mitad derecha de la cabecera, a partir de media
+pantalla, y que desde ahí arranque el desvanecido hacia los azules**. Sobre
+la imagen el velo azul bajó de 0.46 a 0.10-0.16 para que se vea bien.
+Después (sello 20261009k) el autor pidió la imagen **al centro de la página
+completa, con su paneo, y desvanecida por los dos lados**: va centrada con
+ancho `--cab-ancho` (62%; 74% en tableta, 92% en teléfono), el velo es de
+0.20 al centro y crece hasta el azul sólido en los bordes; el paneo usa la
+animación `cabecera-centro`. Los botones con borde
+(Compartir, Inspector Meteoro, Menú) llevan un velo azul translúcido para
+leerse sobre la parte clara de la foto. El paneo no cambia. La cabecera queda fija (`sticky`) en todas las páginas y anchos:
+antes, en teléfono, la de la portada se iba con el desplazamiento. Sigue
+compactándose al bajar (unos 70 px), así que en teléfono los destinos de
+los saltos dejan 84 px arriba en lugar de 12.
+
+**Cinco pestañas; «Sigue el dinero» pasa a llamarse «Números» (09-10-2026,
+sello 20261009f).** El autor fijó el menú en cinco pestañas: Herramientas,
+Números, Datos, Aprende y Participa (regla en AGENTS.md §5 bis). Cambió el
+nombre visible de «Sigue el dinero» en el menú de la portada y de todas las
+páginas generadas, en el título, las migas y el encabezado de su página, en
+el texto de Herramientas y en el enlace de la trivia. El archivo conserva el
+nombre `sigue-el-dinero.html` y sus anclas, para no romper enlaces; los
+comentarios del código que dicen «Sigue el dinero» se dejaron como historia.
+
+**«Busca y verifica» se fusiona con el Modo Inspector; Herramientas, con
+los módulos al centro (09-10-2026, sello 20261009e).** Decisiones del autor:
+- **Busca y verifica dejó de ser menú.** Sus herramientas ya vivían dentro
+  del Modo Inspector (módulo 4 de la portada), así que el módulo se reordenó
+  en dos partes con su índice: «Lo que revisó la Auditoría» (1 qué encontró
+  la ASF, 2 radar por entidad, 3 expedientes) y «Busca y verifica» (4 auditor
+  de entes públicos, 5 contrasta una nota, 6 lista negra del SAT). Los
+  separadores de la parte B llevan `id="eb-inspentes|inspnota|inspefos"`
+  para que `erarioIr` los alcance; el antiguo `#vnSeccion` (sin uso en el
+  motor) pasó a `#eb-inspnota`. El proemio trae los seis temas.
+  ComprasMX, que era tarjeta del menú, se enlaza en la cabecera de la parte B.
+  No se agregó ningún desglose nuevo: solo se reordenó lo que ya estaba.
+- `busca-y-verifica.html` ya no es apartado: `apartados.py` la genera como
+  redirección (`REDIRECCIONES`) a `index.html?ir=verificador&ancla=moduloProemio`
+  para no romper enlaces viejos. `expedientes.html` cuelga ahora de
+  Inicio › Herramientas › Modo Inspector.
+- **Herramientas:** los cuatro módulos van al centro, con icono grande y solo
+  su título (Simulador de Inversión y Megaobras, Calculadora Cívica, Modo
+  Inspector, Costo Ambiental) y el botón «Comenzar». La frase y la cifra de
+  cada tarjeta se quitaron: lo que trae cada módulo se cuenta en su proemio
+  al pulsar «Comenzar». La guía «Cómo se usa» quedó debajo (`'guia': 'abajo'`
+  en `apartados.py`).
+
+**Expedientes de casos por aclarar: página propia (sello 20261009d).** Por la
+regla de AGENTS.md §5 bis, los diez expedientes dejaron de desplegarse en el
+bloque 3 del Modo Inspector y viven en `expedientes.html`, que genera
+`herramientas/expedientes.py` (lo llama `apartados.generar`, así que
+`sello.py` la regenera) y pinta `assets/auditor/js/expedientes.js` con
+`AUDIT_DB.expedientes` (estilos en `assets/auditor/css/expedientes.css`).
+La página trae:
+- un cuadro conceptual «Cómo nace un expediente» y un glosario de cuatro
+  términos, sin cifras;
+- filtro por tema e índice de tarjetas;
+- cada caso completo con ancla `#exp-<id>`: cifras con chip, barras animadas
+  de lo que quedó por aclarar en cada Cuenta Pública (derivado, suma de los
+  informes), la tabla, los informes de la ASF, «Copiar ficha con fuentes» y
+  el enlace a su página de Auditoría en imágenes cuando la hay.
+
+En la portada, el bloque 3, su paso en el índice y el tema del proemio son
+enlaces a esa página. `irAExpediente`/`expIr` y `index.html?ir=expediente&ancla=<id>`
+llevan a `expedientes.html#exp-<id>`. Del motor se quitaron `expFichaHtml`,
+`renderForensicDossiers`, `filtrarDossiers` y `expCopiar` (con sus
+exportaciones). Las páginas de Auditoría en imágenes ya enlazan directo.
+
+**Regla nueva: todo `pendiente` señala a la dependencia que no transparentó
+(09-10-2026, sello 20261009c).** Decisión del autor: al marcar un dato como
+pendiente no basta con decir que falta el documento oficial; hay que
+justificar que falta porque la dependencia responsable no lo ha
+transparentado, y nombrarla. Quedó en AGENTS.md §2. Se aplicó a la leyenda
+«Cómo leer cada cifra» (portada) y a la guía de los apartados; al huachicol
+fiscal (SAT y Hacienda) en el glosario, la pregunta frecuente, el radar, el
+expediente y su página de Auditoría en imágenes; a Dos Bocas (Pemex no
+publica los estados de la filial); al AIFA (costo de construcción y
+proyección de subsidio, Sedena); a la matriz 2018 de la ASF; a la pérdida
+de operación de las obras del simulador, y a la inversión de LEGO
+(Gobierno de Nuevo León). **No se tocó**, a propósito, lo que es falta de
+la plataforma y no de una dependencia: el simulador que «todavía no
+documenta» cada costo, los datos de entidades «sin documento citado», la
+cifra de la Ciudad de México fuera de la estadística del INEGI y las cifras
+históricas del siglo XIX. Al revisar módulos, aplica la regla caso por caso.
+
+**Regla nueva: la portada ya no despliega nada (09-10-2026).** Decisión del
+autor, asentada en AGENTS.md §5 bis: la página principal queda como está y
+todo clic lleva a una página propia. Lo que aún se despliega se irá mudando.
+Ya se mudaron Auditoría en imágenes y el radar hacendario (abajo).
+
+**«Descarga los datos» y «Datos de referencia», fusionados (09-10-2026,
+sello 20261009b).** Una sola página, `descarga-los-datos.html`, con el
+menú «Datos» y el título «Los datos: cifras de referencia y descargas». Su
+primera sección, `#radar`, es el radar hacendario que vivía en el menú
+desplegable de la portada: la cinta de datos, las cuatro cifras y el
+desglose completo, con las mismas cifras y fuentes (se movió el HTML, no se
+reescribió; vive en `herramientas/plantillas/radar.html` y lo inserta
+`apartados.py`). El desglose ya no se pliega: está siempre a la vista, y
+cada cifra es un enlace a su tarjeta. Lo anima
+`assets/auditor/js/radar-datos.js`, sin motor: el reloj de la visita y las
+equivalencias por segundo, con la tasa en `data-tasa` (2,062.75 megaobras;
+49,850.12 deuda, las mismas que tenía el motor). Las tarjetas llevan a
+Megaobras, a la página del reloj de los intereses, a la Cuenta Pública de la
+ASF y a la página del huachicol. Salió el menú «Datos de referencia» de la
+portada y de las páginas; `index.html?ir=datos` ahora redirige a
+`descarga-los-datos.html#radar`. Las funciones del radar en el motor
+(`toggleRadarStats`, `toggleRadarDesglose`, `updateRadarAlertaBar`...)
+quedaron inertes: buscan elementos que ya no existen y salen sin error.
+Pendiente menor: si cambia la pérdida de megaobras que calcula el motor
+(`MEGAOBRAS_LOSS_RATE`), hay que actualizar a mano la tasa en la plantilla.
+
+**Auditoría en imágenes: una página por imagen (09-10-2026, sello
+20261009a).** Las nueve diapositivas del carrusel ya no abren el cuadro
+«Descubrimiento» sobre la portada: son enlaces a `auditoria-<id>.html`
+(tren-maya, dos-bocas, deuda-soberana, aifa, ramo-33, lego-cienega,
+tren-toluca, megafarmacia, huachicol-fiscal). Las genera
+`herramientas/auditorias.py` (lo llama `apartados.generar`, así que
+`sello.py` las regenera) y las pinta `assets/auditor/js/auditoria-imagen.js`
+con su hoja `auditoria-imagen.css`. La página carga solo `audit-database.js`
+(y el padrón del INEGI en LEGO), sin el motor. Cinco piezas: (1) el dinero
+paso a paso, un cuadro conceptual cuyas cifras suben de cero con «Ver gasto»;
+(2) una escena: el monito 🐒 que avienta 40 monedas a los botes del rastro
+(cinco mayores y «los demás»; cada moneda = total ÷ 40, chip derivado; antes
+de repartir el lector apuesta por el bote mayor), el reloj de los intereses
+de la deuda que corre desde que se abrió la página, o la fuga del huachicol
+(un escenario de regla de tres con barra de 0 a 30 %, no una estimación);
+(3) el rastro renglón por renglón con enlace al informe; (4) lo que se
+encontró, lo pendiente y la fuente; (5) a dónde seguir, con enlaces
+`index.html?ir=...`. Destinos nuevos en `IR_DESTINOS`, que ahora reciben el
+ancla: `expediente`, `flujo` (egr-costofin, fed-*), `municipio` (NL-19012),
+`radar` y `glosario`. Los constructores `sc*` y el cuadro
+`#descubrimientoModal` salieron del motor y de `index.html`: viven solo en el
+guion nuevo. Respeta «movimiento reducido».
+
+**Pendiente del examen:** ingresos, gasto, inversión física y balance de cada
+sexenio. No se encontró a nuestro alcance una serie oficial completa y
+consistente de 1989 a 2024 (la ASF publica el RFSP por año desde 2010 y sus
+cuadros no siempre coinciden: 2020 aparece como 3.9 y como 3.8 en el mismo
+informe). El renglón sale como pendiente. Opciones: el anexo estadístico del
+Informe de Gobierno o los informes anuales de Banxico, año por año.
 
 ## Estado actual
 
@@ -4804,3 +6802,43 @@ acumulado del rescate. Las pérdidas corporativas no prueban pérdidas de una
 instalación. Birmex 2024 es dictamen con abstención; Pemex TRI 2025 es aviso de
 extinción, no estados financieros separados. Banxico 1994 distingue saldos
 promedio y de cierre. No convertir ningún pendiente en oficial sin ese cotejo.
+
+## Hito: Versión 20260929a — Implementación de la Columna Vertebral Metodológica de Auditavisión: Cuenta Federal 2024, Estado de Actividades CONAC, Conciliación Presupuestaria-Contable, Peritaje Multidimensional Tren Maya y Correcciones Diagnósticas
+
+1. **Marco Conceptual y Metodología:**
+   - Síntesis e integración formal de cinco pilares académicos y normativos: currícula de Finanzas Públicas y Evaluación de Políticas Públicas del CUCEA (Universidad de Guadalajara), marco contable armonizado del CONAC (Ley General de Contabilidad Gubernamental), Matriz de Indicadores para Resultados (MIR / MML de SHCP y CONEVAL), Cuentas Económicas y Ecológicas de México (CEEM de INEGI / ONU SEEA) y normas internacionales de auditoría del sector público (ISSAI 100 de INTOSAI / ASF).
+   - Documento metodológico exhaustivo entregado en `docs/metodologia/METODOLOGIA_FINANZAS_PUBLICAS.md`, estableciendo la taxonomía de cuentas, fórmulas de conciliación y la regla de los cuatro elementos del hallazgo de auditoría (Criterio, Condición, Causa, Efecto).
+
+2. **Resolución de los 8 Hallazgos Prioritarios en Datos y UI:**
+   - **Cuentas Ecológicas:** Se eliminó la falacia de restar porcentajes de PIB (`puntos_ciegos[0]`), explicando con rigor analítico el Producto Interno Neto Ecológico (PINE) en términos reales y constantes.
+   - **Gasto en Protección Ambiental (GPA):** Se precisó la cifra a $232,882 mdp (INEGI CEEM 2024, pág. 2) acotándola formalmente a «sector público consolidado» (federación, estados, municipios y empresas públicas).
+   - **Huachicol Fiscal:** Se documentó el marco temporal oficial de 10 meses (304 días, 26,265,600 segundos, $175.13/segundo) derivado de los $4,600 mdp recuperados según el Segundo Informe de Gobierno 2026. La cifra parlamentaria preliminar de $600,000 mdp se mantiene en estado `pendiente`, destacando que no cuenta con aval de Hacienda ni Presidencia.
+   - **Simulador de Megaobras (Financiamiento):** La tasa de interés del 11.25% se categorizó como «escenario hipotético simulado» (contrafactual), desacoplándola de los costos devengados oficiales.
+   - **Simulador de Megaobras (Pérdidas Operativas vs Ramo 34):** Se desincorporó el Ramo 34 (rescate bancario IPAB) del cálculo de balance operativo de empresas públicas, y se transparentó el nivel de cobertura de la muestra (3 de 13 obras con datos públicos, 23.1% de cobertura; 10 pendientes).
+   - **Termostato Presupuestario:** Se sustituyó el ratio fijo (54/100) por el indicador dinámico de flexibilidad vs rigidez presupuestaria del PEF 2026 Anexo 1 (69.6% gasto programable / flexible vs 30.4% gasto no programable / irreductible).
+
+3. **Módulo de Cuenta Federal 2024 (Sección 1.3 en Módulo 1):**
+   - Implementación interactiva del «Estado de Resultados» del Gobierno Federal (Tomo II de la Cuenta Pública 2024 de la SHCP) con 5 vistas navegables:
+     - *Presupuesto*: Aprobado ($9.07B), Modificado ($9.16B), Devengado ($9.12B) y Pagado ($8.99B), con tabla analítica de 9 capítulos de gasto LGCG.
+     - *Estado de Actividades*: Ingresos de Gestión ($5.07B), Gastos de Funcionamiento ($2.65B), Transferencias y Subsidios ($3.28B), Costo Financiero de la Deuda ($1.15B) y Desahorro Neto Contable (-$3.18B).
+     - *Flujos de Efectivo*: Flujo Operativo (+$1.42B), Flujo de Inversión (-$890,650 mdp), Financiamiento Neto (-$485,300 mdp) y Saldo Final de Caja ($274,960 mdp).
+     - *Situación Financiera*: Activo Circulante ($512,400 mdp), Activo Fijo e Infraestructura ($3.84B), Pasivo Total ($16.45B) y Patrimonio Neto Contable (-$12.10B).
+     - *Desempeño Social y Ambiental*: Evaluación oficial MIR de 5 programas prioritarios y contexto macroecológico PINE/CTADA/GPA.
+   - Modal interactivo de Conciliación Presupuestaria-Contable explicando paso a paso por qué el devengo presupuestario ($9.12B) no es igual al gasto contable ($8.40B), aislando la capitalización de obra (Cap. 6000) y la amortización de principal de deuda (Cap. 9000).
+
+4. **Peritaje Multidimensional de Inversión Pública (Caso Tren Maya 2024):**
+   - Modal pericial que desglosa con estándar ISSAI 100 / CONAC la infraestructura acumulada ($515,487 mdp al cierre de 2024) frente al ejercicio financiero de la empresa operadora militar *Tren Maya, S.A. de C.V.* (Tomo VII de la Cuenta Pública 2024): ingresos por boletos ($389.2 mdp), subsidios gubernamentales ($2,050 mdp), gasto operativo ($2,382.7 mdp), pérdida contable neta (-$1,993.5 mdp), movilidad (401,980 pasajeros), balance de impacto ambiental físico (3,284 ha deforestadas compensadas con 1,250 ha reforestadas) y estatus de 14 pliegos de observaciones de la ASF.
+   - Acceso dual desde el Módulo 2 (Sección de Megaobras) y el Módulo 1 (Showcase del Erario).
+
+5. **Núcleo de Cálculo Común (`AUDIT_CORE`) y Simulador Temporal Visita:**
+   - Motor `window.AuditEngine.AUDIT_CORE` con validación estricta de comparabilidad (`comprobarComparabilidad`), agregación de cuentas (`agregarCuentas`), conciliación presupuestario-contable (`conciliarPresupuestoContable`) y equivalencia temporal (`calcularEquivalenciaTemporal`).
+   - Motor `window.AuditEngine.AuditavisionVisita` integrado con la Page Visibility API para pausar la acumulación de contadores por segundo cuando el usuario cambia de pestaña en el navegador, preservando la veracidad del tiempo de exposición.
+
+6. **Aseguramiento de Calidad, Sello e Invariantes:**
+   - Validación integral en Microsoft Edge Headless vía CDP (`scratch/test_complete_audit.py`): 11 pruebas de runtime exitosas, 0 errores en consola del navegador.
+   - Sello de versión incrementado a **20260929a** con `herramientas/sello.py`.
+   - Invariantes de saltos de línea CRLF y cuentas de lone CR verificadas al 100%: `index.html` (56 lone CRs), `assets/auditor/css/auditavision.css` (1 lone CR), `assets/auditor/js/audit-engine.js` (2 lone CRs), `assets/auditor/js/audit-database.js` (2 lone CRs).
+
+7. **Estado de Pendientes y Justificación:**
+   - *Pérdidas operativas de 10 megaobras*: Se mantienen etiquetadas como `pendiente` (con chip `pendiente`) porque no existen estados financieros dictaminados desagregados por instalación o unidad de negocio publicados por el gobierno (solo 3 obras cuentan con entes públicos o empresas con cuenta pública individualizada en el Tomo VII: Tren Maya, AIFA y CIIT).
+   - *Cotejo documental de 25 fuentes (28-09-2026)*: Continúa en proceso conforme al catálogo de trazabilidad de `investigaciones/entregas/README.md`.

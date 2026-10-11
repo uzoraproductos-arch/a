@@ -1,4 +1,240 @@
 window.AUDIT_DB = {
+  "cuentaFederal2024": {
+    "ejercicio": 2024,
+    "ente": "Gobierno Federal",
+    "alcance": "Poderes Ejecutivo, Legislativo y Judicial y órganos autónomos (el Tomo II de la Cuenta Pública). No incluye empresas productivas del Estado.",
+    "fuente": {
+      "doc": "SHCP, Cuenta Pública 2024, Tomo II (Gobierno Federal)",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024"
+    },
+    "correccion": "El 10-10-2026 se retiraron las cifras de este apartado que no se habían cotejado con su documento: no coincidían con la Cuenta Pública oficial (por ejemplo, los ingresos de la gestión decían 5,074,180.2 mdp y el documento dice 5,341,758.1). Solo quedan las cifras con documento a la vista; el resto está pendiente, con su motivo.",
+    "cifras": [
+      {
+        "id": "aprobado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total aprobado",
+        "mdp": 9066045.8,
+        "estado": "oficial",
+        "fuente": "Decreto de Presupuesto de Egresos de la Federación 2024, art. 1 (DOF 25-11-2023): «$9,066,045,800,000»",
+        "url": "https://dof.gob.mx/2023/SHCP/PEF_2024.html",
+        "nota": "Es lo que autorizó la Cámara de Diputados. Corresponde al total de ingresos aprobados en la Ley de Ingresos 2024."
+      },
+      {
+        "id": "modificado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total modificado",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "devengado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total devengado",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "ejercido",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total ejercido",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "pagado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total pagado",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "capitulos",
+        "vista": "presupuesto",
+        "concepto": "Desglose por capítulo de gasto (1000 a 9000)",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "ingresos_gestion",
+        "vista": "actividades",
+        "concepto": "Ingresos de la gestión (impuestos, derechos, productos y aprovechamientos)",
+        "mdp": 5341758.1,
+        "estado": "oficial",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Actividades del Gobierno Federal: «Ingresos de la Gestión 5,341,758,142,949» (pesos)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf"
+      },
+      {
+        "id": "intereses_deuda",
+        "vista": "actividades",
+        "concepto": "Intereses de la deuda pública",
+        "mdp": 933408.4,
+        "estado": "oficial",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Actividades del Gobierno Federal: «Intereses de la Deuda Pública 933,408,432,163» (pesos)",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+        "nota": "Son solo intereses: el pago del capital de la deuda (amortización) no es gasto del Estado de Actividades, porque reduce el pasivo."
+      },
+      {
+        "id": "gastos_totales",
+        "vista": "actividades",
+        "concepto": "Total de gastos y otras pérdidas",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "resultado",
+        "vista": "actividades",
+        "concepto": "Resultado del ejercicio (ahorro o desahorro)",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "flujo_operacion",
+        "vista": "flujos",
+        "concepto": "Flujos netos de las actividades de operación",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "flujo_inversion",
+        "vista": "flujos",
+        "concepto": "Flujos netos de las actividades de inversión",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "flujo_financiamiento",
+        "vista": "flujos",
+        "concepto": "Flujos netos de las actividades de financiamiento",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "efectivo_final",
+        "vista": "flujos",
+        "concepto": "Efectivo y equivalentes al final del ejercicio",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "activo",
+        "vista": "situacion",
+        "concepto": "Activo total",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "pasivo",
+        "vista": "situacion",
+        "concepto": "Pasivo total",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      },
+      {
+        "id": "patrimonio",
+        "vista": "situacion",
+        "concepto": "Hacienda pública / patrimonio",
+        "mdp": null,
+        "estado": "pendiente",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+      }
+    ],
+    "conciliacion": {
+      "estado": "pendiente",
+      "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda).",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+      "pasos": [
+        "Egresos presupuestarios devengados",
+        "Menos: inversión pública capitalizable (pasa al activo)",
+        "Menos: amortización del capital de la deuda (reduce el pasivo)",
+        "Más: depreciación y amortización del ejercicio",
+        "Más: provisiones y otros gastos contables",
+        "Igual: gastos del Estado de Actividades"
+      ]
+    },
+    "evaluacion_social_mir": [
+      {
+        "programa": "Pensión para el Bienestar de las Personas Adultas Mayores",
+        "clave": "S176",
+        "ramo": "Bienestar (20)",
+        "aprobado_mdp": null,
+        "devengado_mdp": null,
+        "estado_montos": "pendiente",
+        "motivo_montos": "El aprobado y el devengado de 2024 están en el Estado Analítico del Ramo 20 de la Cuenta Pública 2024 (Tomo III), pero la plataforma aún no los ha cotejado: el portal de la Cuenta Pública no se pudo abrir con conexión verificada. La cifra que se mostraba antes (465,048 mdp) se retiró porque estaba rotulada como devengado y corresponde al aprobado.",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/III/Print.20R20.03.EAEPCFPGF.pdf",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
+      },
+      {
+        "programa": "Programa de Becas de Educación Básica para el Bienestar Benito Juárez",
+        "clave": "S072",
+        "ramo": "Educación Pública (11)",
+        "aprobado_mdp": 49869.7586,
+        "devengado_mdp": 42571.5982,
+        "estado_montos": "oficial",
+        "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación Administrativa de la SEP, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-5-11O00-19-0113-2025, p. 8 (miles de pesos, convertidos a millones)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0113_a.pdf",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
+      },
+      {
+        "programa": "Beca Universal para Estudiantes de Educación Media Superior Benito Juárez",
+        "clave": "S311",
+        "ramo": "Educación Pública (11)",
+        "aprobado_mdp": 39366.5867,
+        "devengado_mdp": 33301.2359,
+        "estado_montos": "oficial",
+        "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación Administrativa de la SEP, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-5-11O00-19-0113-2025, p. 8 (miles de pesos, convertidos a millones)",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0113_a.pdf",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
+      },
+      {
+        "programa": "Atención a la Salud y Medicamentos Gratuitos para la Población sin Seguridad Social Laboral (IMSS-Bienestar)",
+        "clave": "pendiente",
+        "ramo": "pendiente",
+        "aprobado_mdp": null,
+        "devengado_mdp": null,
+        "estado_montos": "pendiente",
+        "motivo_montos": "La clave programática, el ramo y los montos de 2024 se tienen que cotejar en la Cuenta Pública 2024 antes de mostrarlos; la plataforma aún no lo ha hecho. Se cuidará no mezclar el programa con el presupuesto completo del organismo IMSS-Bienestar. La cifra que se mostraba antes (128,900 mdp) se retiró por no tener documento citado.",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
+        "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
+      }
+    ]
+  },
+  "tren_maya_peritaje_2024": {
+    "estado": "retirado",
+    "fecha": "10-10-2026",
+    "motivo": "La ficha pericial del Tren Maya 2024 se retiró: sus cifras entraron el 29-09-2026 sin cotejo con el Tomo VII de la Cuenta Pública 2024 ni con los informes de la ASF. Volverá cuando cada cifra tenga su documento.",
+    "alternativa": "expedientes.html#exp-tren-maya"
+  },
   "macro": {
     "pefNetoTotal": 10193600,
     "gastoFederalizadoTotal": 2811400,
@@ -7861,7 +8097,7 @@ window.AUDIT_DB = {
     },
     {
       "termino": "Huachicol Fiscal",
-      "definicion": "Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía, facturar menos litros de los que se venden o vender más de lo que se compró con factura. No es el robo en ductos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA. El Gobierno lo reconoce como una de las principales fuentes de evasión del IEPS en la exposición de motivos de la Ley de Ingresos 2027; ninguna autoridad ha publicado todavía cuánto se pierde.",
+      "definicion": "Meter o vender combustible sin pagar sus impuestos: importarlo declarado como otra mercancía, facturar menos litros de los que se venden o vender más de lo que se compró con factura. No es el robo en ductos. Lo que se evade es sobre todo el IEPS de gasolinas y diésel, y con él el IVA. El Gobierno lo reconoce como una de las principales fuentes de evasión del IEPS en la exposición de motivos de la Ley de Ingresos 2027; ni el SAT ni Hacienda han publicado todavía cuánto se pierde: la cifra sigue pendiente por falta de transparencia de esas dependencias.",
       "ley": "Ley del IEPS, arts. 2o. y 2o.-A · Código Fiscal de la Federación, arts. 102 a 104 · Iniciativa de Ley de Ingresos 2027, pp. CXXI a CXXV",
       "categoria": "💰 Hacendario & Deuda"
     },
@@ -10317,93 +10553,158 @@ window.AUDIT_DB = {
       "cita_apa": "Ley del Fondo Mexicano del Petróleo para la Estabilización y el Desarrollo. Diario Oficial de la Federación, 11 de agosto de 2014, última reforma vigente (México). Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm",
       "descripcion": "Fideicomiso público en el Banco de México, previsto en el párrafo sexto del artículo 28 constitucional, que recibe la renta petrolera del Estado y la transfiere al presupuesto hasta un tope de 4.7 % del PIB; el excedente debe destinarse al ahorro de largo plazo. Para 2026 se presupuestan $232,630.4 mdp de transferencias ordinarias y cero extraordinarias."
+    },
+    {
+      "num": 119,
+      "id": "ref-gomez-granillo-1995",
+      "categoria": "doctrina",
+      "categoria_nombre": "Doctrina y bibliografía",
+      "cita_apa": "Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). Introducción al derecho económico. Editorial Esfinge.",
+      "url": "",
+      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo; la del Presupuesto (capítulo 7, p. 96: la acción financiera del Estado) vive en las Preguntas frecuentes, en «¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?». Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
     }
   ],
   "preguntas_casillas": [
     {
       "casilla_id": "c-finanzas-basicas",
-      "bloque": "1. Fundamentos de Finanzas Públicas",
+      "bloque": "1. Fundamentos de finanzas públicas",
       "icono": "⚖️",
       "items": [
         {
           "q": "¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?",
-          "a": "Las <strong>finanzas públicas</strong> son la disciplina y conjunto de instrumentos jurídicos, económicos y contables con los que el Estado planifica, obtiene, administra y gasta los recursos de la colectividad. Su objetivo primordial no es la acumulación de capital (como en una empresa privada), sino la <em>prestación de servicios públicos</em> (salud, educación, justicia, seguridad), la distribución justa de la riqueza y el financiamiento de sus programas de trabajo aprobados constitucionalmente en el PEF."
+          "a": "Las <strong>finanzas públicas</strong> son el conjunto de reglas jurídicas, económicas y contables con las que el Estado planea, obtiene, administra y gasta los recursos de la colectividad. A diferencia de una empresa, su fin no es acumular ganancias sino <em>prestar servicios públicos</em> (salud, educación, justicia, seguridad), procurar una distribución más justa del ingreso y financiar los programas que la Cámara de Diputados aprueba cada año en el Presupuesto de Egresos.<p><b>📘 Ayer y hoy.</b> <em>En el libro (1995):</em> el capítulo 7 de <cite>Introducción al derecho económico</cite>, de Gómez Granillo y Gutiérrez Rosas, abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda. <em>Hoy (2026):</em> cada año la <strong>Ley de Ingresos de la Federación</strong> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.</p>",
+          "refs": [
+            "ref-cpeum",
+            "ref-lfprh",
+            "ref-lif2026",
+            "ref-gomez-granillo-1995"
+          ]
         },
         {
-          "q": "¿Cuáles son los instrumentos del sector público para fondear sus programas?",
-          "a": "El sector público emplea 4 grandes vías: <br>1. <strong>Tributos:</strong> Impuestos (ISR, IVA, IEPS), derechos (agua, concesiones) y aprovechamientos.<br>2. <strong>Aduanas y Aranceles:</strong> Gravámenes a las importaciones y exportaciones administrados por la ANAM.<br>3. <strong>Venta de Bienes y Servicios Públicos:</strong> Tarifas eléctricas de CFE, hidrocarburos de Pemex y servicios portuarios.<br>4. <strong>Crédito Público y Empréstitos:</strong> Emisión de deuda en mercado de valores (CETES, Bonos M) y préstamos soberanos."
+          "q": "¿De dónde saca el dinero el sector público?",
+          "a": "De cuatro vías principales:<br>1. <strong>Contribuciones:</strong> impuestos (ISR, IVA, IEPS), derechos (por ejemplo, concesiones y agua) y aprovechamientos.<br>2. <strong>Comercio exterior:</strong> impuestos a la importación y la exportación, que cobra la Agencia Nacional de Aduanas de México (ANAM).<br>3. <strong>Venta de bienes y servicios de las empresas del Estado:</strong> electricidad de la CFE e hidrocarburos de Pemex.<br>4. <strong>Deuda:</strong> emisión de valores (CETES, Bonos M) y créditos, dentro del techo que autoriza cada año la Ley de Ingresos.<br>Para 2026, la Ley de Ingresos estima un total de <strong>$10,193,683.7 millones</strong> <span class=\"est-chip est-oficial\">oficial</span> (LIF 2026, art. 1o.).",
+          "refs": [
+            "ref-lif2026"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-deuda-mercado",
-      "bloque": "2. Deuda Pública, CETES y el Banco de México",
+      "bloque": "2. Deuda pública, CETES y el Banco de México",
       "icono": "📈",
       "items": [
         {
-          "q": "¿Qué son los CETES y qué relación directa tienen con la Tesorería y Banxico?",
-          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda pública emitidos por la SHCP al amparo de la <em>Ley Federal de Deuda Pública</em>. El <strong>Banco de México</strong> actúa por mandato de ley como su agente financiero colocador mediante subastas primarias semanales. El gobierno los vende a descuento para captar dinero inmediato de los ahorradores y financiar su gasto corriente; al vencimiento, el Estado devuelve el valor nominal íntegro ($10 pesos), pagando la diferencia como rendimiento."
+          "q": "¿Qué son los CETES y qué tienen que ver la Tesorería y el Banco de México?",
+          "a": "Los <strong>CETES (Certificados de la Tesorería de la Federación)</strong> son títulos de deuda que emite el Gobierno Federal, por conducto de Hacienda, conforme a la <em>Ley Federal de Deuda Pública</em>. El <strong>Banco de México</strong> actúa como agente financiero del gobierno y los coloca en subastas que publica cada semana. Se venden a descuento: compras por menos de su valor nominal de 10 pesos y al vencimiento recibes los 10 pesos completos; la diferencia es tu rendimiento.",
+          "refs": [
+            "ref-lfdp",
+            "ref-lbm",
+            "ref-banxico-sie"
+          ]
         },
         {
           "q": "¿Cuál es la diferencia entre CETES, Bonos M, Udibonos y Bondes F?",
-          "a": "• <strong>CETES:</strong> Corto plazo (hasta 1 o 2 años), cupón cero, tasa a descuento.<br>• <strong>Bonos M:</strong> Mediano y largo plazo (3 a 30 años), pagan cupón de interés fijo semestral.<br>• <strong>Udibonos:</strong> Largo plazo, indexados al valor de la UDI (INPC), protegen contra la inflación.<br>• <strong>Bondes F:</strong> Tasa flotante referenciada a la TIIE de fondeo calculada por Banxico.<br>Todos son emitidos por la federación para solventar programas públicos plurianuales."
+          "a": "• <strong>CETES:</strong> corto plazo, sin pago de intereses periódicos; ganas por el descuento.<br>• <strong>Bonos M:</strong> mediano y largo plazo, con tasa de interés fija que se paga cada seis meses.<br>• <strong>Udibonos:</strong> largo plazo, denominados en UDI, una unidad que sigue a la inflación; protegen tu poder de compra.<br>• <strong>Bondes F:</strong> tasa flotante, ligada a la tasa de fondeo que calcula el Banco de México.<br>Todos son deuda del Gobierno Federal y cuentan dentro del techo de endeudamiento que aprueba el Congreso.",
+          "refs": [
+            "ref-banxico-sie",
+            "ref-lif2026"
+          ]
         },
         {
-          "q": "¿Por qué el Banco de México no puede simplemente prestarle dinero ilimitado al gobierno?",
-          "a": "El Artículo 28 de la Constitución Política establece la <strong>autonomía del Banco de México</strong>. Su mandato prioritario es garantizar la estabilidad del poder adquisitivo. Si Banxico emitiera dinero sin respaldo para financiar el déficit gubernamental, provocaría una espiral de hiperinflación que destruiría los sueldos y el ahorro de la población, como ocurrió en las crisis mexicanas de los años 70 y 80."
+          "q": "¿Por qué el Banco de México no le presta dinero sin límite al gobierno?",
+          "a": "Porque la Constitución lo prohíbe. El <strong>artículo 28</strong> da autonomía al banco central, le fija como objetivo prioritario procurar la estabilidad del poder adquisitivo de la moneda y termina con una frase tajante: «Ninguna autoridad podrá ordenar al banco conceder financiamiento». Si el banco imprimiera dinero para cubrir el déficit, la inflación se comería sueldos y ahorros.",
+          "refs": [
+            "ref-cpeum",
+            "ref-lbm"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-federalismo-gasto",
-      "bloque": "3. Ruta del Dinero hacia Estados y Municipios",
+      "bloque": "3. La ruta del dinero a estados y municipios",
       "icono": "🗺️",
       "items": [
         {
-          "q": "¿Por qué existe una gran diferencia entre el Ramo 28 y el Ramo 33?",
-          "a": "• <strong>Ramo 28 (Participaciones):</strong> Es dinero <em>sin etiquetar</em> de libre disposición. Los gobernadores y alcaldes pueden gastarlo libremente en sueldos, alumbrado, eventos o pago de deudas bancarias.<br>• <strong>Ramo 33 (Aportaciones):</strong> Es dinero <em>blindado por la Ley de Coordinación Fiscal</em>. Solo puede gastarse en los destinos fijados por ley: educación (FONE), salud (FASSA), seguridad municipal (FORTAMUN) e infraestructura contra la pobreza (FAIS). Desviar el Ramo 33 a gasto corriente es un delito federal perseguido por la ASF."
+          "q": "¿Cuál es la diferencia entre el Ramo 28 y el Ramo 33?",
+          "a": "• <strong>Ramo 28 (participaciones):</strong> dinero de <em>libre disposición</em>. Los gobiernos estatales y municipales deciden en qué usarlo, dentro de sus propios presupuestos. El Fondo General de Participaciones se forma con el 20% de la recaudación federal participable (Ley de Coordinación Fiscal, art. 2o.).<br>• <strong>Ramo 33 (aportaciones):</strong> dinero <em>etiquetado</em>. La misma ley condiciona su gasto a los fines de cada uno de sus ocho fondos: nómina educativa (FONE), salud (FASSA), infraestructura social (FAIS), fortalecimiento municipal (FORTAMUN), entre otros (art. 25).<br>Si el Ramo 33 se usa en otra cosa, la Auditoría Superior lo observa: puede emitir un pliego de observaciones, promover responsabilidades administrativas ante el Tribunal Federal de Justicia Administrativa o presentar denuncias ante la Fiscalía. La Auditoría no juzga ni sanciona por sí misma.",
+          "refs": [
+            "ref-lcf",
+            "ref-lfrcf"
+          ]
         },
         {
-          "q": "¿Qué es la \"inanición fiscal\" y por qué los municipios casi no cobran predial?",
-          "a": "A pesar de que el Artículo 115 constitucional faculta exclusivamente a los municipios para cobrar el impuesto predial, México recauda apenas el <strong>0.16% del PIB</strong> en este gravamen (frente al 1.0% promedio de la OCDE). Los alcaldes prefieren no cobrar predial ni actualizar los valores catastrales para no pagar costo político con sus votantes, conformándose con estirar la mano a las transferencias federales."
+          "q": "¿Cuánto pesa el predial en las cuentas de los municipios?",
+          "a": "El <strong>artículo 115</strong> de la Constitución da a los municipios las contribuciones sobre la propiedad inmobiliaria: el predial es su impuesto propio más importante. En 2024, los 2,380 municipios que rindieron cuentas al INEGI reportaron <strong>$52,543 millones</strong> <span class=\"est-chip est-oficial\">oficial</span> de predial y contribuciones sobre la propiedad, de un ingreso total de <strong>$708,301 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>. Es decir, <strong>7.4 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">derivado</span> (predial ÷ ingreso total). En cambio, <strong>71.1 de cada 100</strong> <span class=\"est-chip est-derivado\">derivado</span> llegaron de la Federación: participaciones ($268,861 millones) más aportaciones ($234,722 millones), entre el mismo ingreso total.",
+          "refs": [
+            "ref-cpeum",
+            "ref-inegi-efipem"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-fiscalizacion-asf",
-      "bloque": "4. Auditoría Social y Combate a la Corrupción",
+      "bloque": "4. Auditoría social y combate a la corrupción",
       "icono": "🔍",
       "items": [
         {
-          "q": "¿Qué es un Pliego de Observaciones de la ASF y qué ocurre si no se solventa?",
-          "a": "Es la notificación jurídica formal de presunto daño patrimonial emitida por la Auditoría Superior de la Federación. Si en el plazo legal de 30 días el gobernador, alcalde o funcionario no demuestra documentalmente el ejercicio lícito de los fondos o reintegra el dinero con intereses a la TESOFE, la ASF formula una <strong>Denuncia Penal ante la Fiscalía General de la República (FGR)</strong> e inicia el procedimiento de responsabilidad administrativa resarcitoria."
+          "q": "¿Qué es un pliego de observaciones de la Auditoría Superior y qué pasa si no se solventa?",
+          "a": "Es la acción con la que la Auditoría Superior de la Federación <strong>determina en cantidad líquida un daño o perjuicio a la Hacienda Pública</strong> (Ley de Fiscalización y Rendición de Cuentas de la Federación, art. 40, fr. II). La entidad auditada tiene <strong>30 días hábiles</strong> para responder (art. 39) y la Auditoría, <strong>120 días hábiles</strong> para pronunciarse (art. 41). Si el pliego no se solventa, la Auditoría promueve un informe de presunta responsabilidad administrativa (art. 71), que resuelve el Tribunal Federal de Justicia Administrativa; si además hay un posible delito, presenta una denuncia de hechos ante la Fiscalía.",
+          "refs": [
+            "ref-lfrcf",
+            "ref-lgra"
+          ]
         },
         {
-          "q": "¿Cómo operan las redes de factureras (EFOS) para drenar el presupuesto?",
-          "a": "Conforme al Artículo 69-B del Código Fiscal de la Federación, las <strong>EFOS</strong> simulan operaciones: emiten facturas electrónicas (CFDI) por servicios intangibles (asesorías, estudios, cursos de capacitación ficticios). La entidad pública les paga millones del presupuesto; luego el dinero se retira en efectivo o se triangula a paraísos fiscales para repartirse entre contratistas coludidos y funcionarios corruptos."
+          "q": "¿Qué son las empresas que facturan operaciones simuladas (EFOS)?",
+          "a": "Son contribuyentes que, según el <strong>artículo 69-B del Código Fiscal de la Federación</strong>, emiten comprobantes fiscales sin tener los activos, el personal o la infraestructura para prestar los servicios que facturan, o que no están localizados. El SAT publica la lista: primero como <em>presuntos</em> y, si no desvirtúan la presunción, como <em>definitivos</em>. Si un ente público le pagó a una empresa definitiva, esa compra merece una pregunta formal: puedes buscarla en la lista y presentar una solicitud de información.",
+          "refs": [
+            "ref-cff",
+            "ref-sat-69b"
+          ]
         },
         {
           "q": "¿Qué es el huachicol fiscal y cómo te afecta si no tienes una gasolinera?",
-          "a": "Es vender o importar combustible sin pagar sus impuestos. No es el robo en ductos: es papel, no pico y pala. Te afecta por tres caminos, todos escritos en ley:<br>• <strong>Tú sí pagas.</strong> En 2026 cada litro de gasolina menor a 91 octanos lleva una cuota federal de IEPS de $6.7001, la de 91 octanos o más $5.6579 y el diésel $7.3634 (Ley del IEPS, art. 2o., fr. I, inciso D; el estímulo fiscal que publica Hacienda puede reducirlas).<br>• <strong>Tu estado y tu municipio reciben menos.</strong> Ese IEPS entra a la bolsa de la que sale el 20 % que se reparte a los estados (Ley de Coordinación Fiscal, art. 2o.). Además hay una cuota aparte, de 49 a 72 centavos por litro (Ley del IEPS, art. 2o.-A), de la que 9 de cada 11 pesos van a las entidades según lo que se consume en su territorio (LCF, art. 4o.-A). Litro que se vende sin impuestos, peso que no llega.<br>• <strong>El faltante se cubre con más deuda o con menos gasto.</strong><br>Cuánto se pierde: ninguna autoridad lo ha publicado. La Ley de Ingresos 2027 propone que el SAT publique sus estudios de evasión a más tardar 35 días después de cerrar 2027 (art. 30). Mientras tanto, cualquier cifra que circule es una estimación."
+          "a": "Es vender o importar combustible sin pagar sus impuestos. No es el robo en ductos: es papel, no pico y pala. Te afecta por tres caminos, todos escritos en ley:<br>• <strong>Tú sí pagas.</strong> En 2026 cada litro de gasolina menor a 91 octanos lleva una cuota federal de IEPS de $6.7001, la de 91 octanos o más $5.6579 y el diésel $7.3634 <span class=\"est-chip est-oficial\">oficial</span> (Ley del IEPS, art. 2o., fr. I, inciso D; el estímulo fiscal que publica Hacienda puede reducirlas).<br>• <strong>Tu estado y tu municipio reciben menos.</strong> Ese IEPS entra a la bolsa de la que sale el 20 % que se reparte a los estados (Ley de Coordinación Fiscal, art. 2o.). Además hay una cuota aparte, de 49 a 72 centavos por litro (Ley del IEPS, art. 2o.-A), de la que 9 de cada 11 pesos van a las entidades según lo que se consume en su territorio (LCF, art. 4o.-A). Litro que se vende sin impuestos, peso que no llega.<br>• <strong>El faltante se cubre con más deuda o con menos gasto.</strong><br>Cuánto se pierde <span class=\"est-chip est-pendiente\">pendiente</span>: ni el SAT ni Hacienda lo han publicado, y por esa falta de transparencia sigue pendiente. La Ley de Ingresos 2027 propone que el SAT publique sus estudios de evasión a más tardar 35 días después de cerrar 2027 (art. 30). Mientras tanto, cualquier cifra que circule es una estimación.",
+          "refs": [
+            "ref-lieps",
+            "ref-lcf",
+            "ref-ilif2027"
+          ]
         }
       ]
     },
     {
       "casilla_id": "c-scjn-reforma-fiscalizacion",
-      "bloque": "5. Fiscalización de la Suprema Corte, Presupuesto Judicial & Fideicomisos",
+      "bloque": "5. El dinero del Poder Judicial",
       "icono": "⚖️",
       "items": [
         {
-          "q": "¿Cuánto cuesta el Poder Judicial de la Federación y cómo se distribuye el presupuesto de la Suprema Corte (SCJN)?",
-          "a": "El <strong>Poder Judicial de la Federación (PJF)</strong> ejerce un presupuesto histórico anual consolidado de <strong>$78,327 millones de pesos</strong> (Ramo 03 del PEF), de los cuales la <strong>Suprema Corte de Justicia de la Nación (SCJN)</strong> absorbe de manera directa cerca de <strong>$5,900 millones</strong>. El <strong>80.2%</strong> de este gasto se concentra en el Capítulo 1000 (Servicios Personales). Cada una de las 11 ponencias de ministros tiene un costo de nómina anual promedio de <strong>$34.2 millones de pesos</strong> ($376.2 mdp anuales consolidados para las 11 ponencias), operando con equipos técnicos nucleares de 35 colaboradores directos (proyectistas de estudio y cuenta) que históricamente rebasaron las 70 personas mediante comisiones y honorarios asimilados del Capítulo 3000."
+          "q": "¿Cuánto le aprobaron al Poder Judicial de la Federación para 2026 y cómo se reparte?",
+          "a": "La Cámara de Diputados aprobó para el <strong>Ramo 03, Poder Judicial de la Federación</strong>, <strong>$70,005.6 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>, frente a los $85,960.2 millones <span class=\"est-chip est-oficial\">oficial</span> que pidió en su proyecto. Se reparte así: Órgano de Administración Judicial, $59,190.8 millones; Suprema Corte de Justicia, $5,208.7 millones; Tribunal Electoral, $3,749.5 millones, y Tribunal de Disciplina Judicial, $1,856.6 millones <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 1, DOF p. 32; el proyecto, en el Anexo 32, p. 108). El Órgano de Administración Judicial se lleva <strong>84.6 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">derivado</span> (su asignación ÷ el total del ramo).",
+          "refs": [
+            "ref-pef2026",
+            "ref-pef-ramo03"
+          ]
         },
         {
-          "q": "¿Cuál es la situación jurídica y financiera de los 13 fideicomisos de más de $15,400 mdp del PJF?",
-          "a": "La Auditoría Superior de la Federación (ASF) dictaminó que el PJF acumuló <strong>$15,434 millones de pesos</strong> en 13 fideicomisos fiduciarios en Nacional Financiera (Nafin) originados por <em>subejercicios presupuestales anuales</em> (recursos autorizados no devengados que legalmente debieron reintegrarse a la TESOFE según el Artículo 54 de la LFPRH). Estos fondos se destinaban a pensiones complementarias de mandos superiores, gastos médicos privados extraordinarios y remodelación de inmuebles. Tras la reforma constitucional al Poder Judicial de septiembre de 2024, sus artículos transitorios ordenaron la <strong>extinción definitiva de estos fondos</strong> y el reintegro de sus remanentes a la Tesorería de la Federación para financiar programas sociales y prioridades nacionales."
+          "q": "¿Qué pasó con los fideicomisos del Poder Judicial?",
+          "a": "La reforma constitucional publicada en el DOF el 15 de septiembre de 2024 ordenó, en su <strong>transitorio Décimo</strong>, extinguir los fondos, fideicomisos, mandatos o contratos análogos del Poder Judicial que no estén previstos en una ley secundaria, y enterar sus recursos a la Tesorería de la Federación en un plazo máximo de noventa días naturales. Hoy el artículo 100 de la Constitución también prohíbe crearlos o mantenerlos en el Poder Judicial de la Federación si la ley no los prevé.<br>Cuántos fideicomisos se extinguieron y cuánto dinero se enteró <span class=\"est-chip est-pendiente\">pendiente</span>: el decreto no lo dice y la plataforma aún no integra el informe oficial que lo documente.",
+          "refs": [
+            "ref-reforma-judicial",
+            "ref-cpeum"
+          ]
         },
         {
-          "q": "¿Cómo impacta el tope salarial del Artículo 127 y la Reforma Constitucional 2024–2025 en la SCJN?",
-          "a": "Conforme al <strong>Artículo 127 Constitucional</strong> (fracción II), ninguna persona servidora pública puede percibir una remuneración mayor a la del Presidente de la República (<strong>$134,310 pesos netos / $191,657 brutos al mes</strong>). Históricamente, las y los ministros devengaban <strong>$206,948 netos ($297,404 brutos)</strong> más un paquete de compensaciones complementarias superior a <strong>$1.7 millones de pesos anuales</strong> (Seguro de Separación Individualizado de hasta 10% y Seguro de Gastos Médicos Mayores privado). Con el decreto constitucional del 15 de septiembre de 2024, el Pleno se reduce de 11 a 9 integrantes, se extinguen las dos Salas colegiadas para sesionar únicamente en Pleno, se suprimen los seguros privados con cargo al erario, se sustituye al CJF por el Tribunal de Disciplina Judicial y el Órgano de Administración, y las personas juzgadoras son electas mediante voto popular directo."
+          "q": "¿Cuánto gana una ministra o un ministro de la Suprema Corte y cuál es el tope?",
+          "a": "El <strong>artículo 127</strong> de la Constitución prohíbe que cualquier persona servidora pública gane más que la persona titular del Ejecutivo Federal, contando sueldo, bonos, estímulos y compensaciones. Para 2026, el Manual de remuneraciones del Poder Judicial fija a cada ministra o ministro un sueldo neto tabulado de <strong>$134,310 al mes</strong> <span class=\"est-chip est-oficial\">oficial</span> (Manual, pp. 8 y 9); con el aguinaldo y la prima vacacional suma <strong>$1,901,993 netos al año</strong> <span class=\"est-chip est-derivado\">derivado</span> (12 × $134,310 + $290,273). La remuneración total neta de la Presidenta de la República es de <strong>$2,073,878 al año</strong> <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 23.1.3, p. 59). La cifra de la Corte es parcial: el Manual no incluye seguros ni aportaciones de seguridad social.<br>La reforma de 2024 también hizo electivos los cargos judiciales y dejó la Corte en nueve integrantes.",
+          "refs": [
+            "ref-cpeum-art127",
+            "ref-manual-remun-pjf",
+            "ref-pef2026"
+          ]
         }
       ]
     }
@@ -10419,7 +10720,7 @@ window.AUDIT_DB = {
         "herramienta": "Sistema de Denuncias Ciudadanas (SIDEC)",
         "paraQue": "Desvío, uso indebido o aplicación irregular de recursos federales: participaciones del Ramo 28, aportaciones del Ramo 33, subsidios y contratos pagados con el Presupuesto de Egresos.",
         "anonimo": "Sí. La denuncia puede presentarse sin revelar identidad.",
-        "queNecesitas": "El nombre del ente que ejerció el dinero, el año, el fondo o el número de contrato, y la descripción de lo que observó. Si tiene fotografías o documentos, adjúntelos.",
+        "queNecesitas": "El nombre del ente que ejerció el dinero, el año, el fondo o el número de contrato, y la descripción de lo que observaste. Si tienes fotografías o documentos, adjúntalos.",
         "efecto": "Puede originar una auditoría específica y, si hay presunción de delito, una denuncia de la propia ASF ante la Fiscalía.",
         "url": "https://www.asf.gob.mx/Section/262_Denuncias_Ciudadanas",
         "refId": "ref-lfrcf"
@@ -10447,7 +10748,7 @@ window.AUDIT_DB = {
         "herramienta": "Fiscalía Especializada en Materia de Combate a la Corrupción (FEMCC)",
         "paraQue": "Cuando el hecho ya no es sólo una falta administrativa sino un delito: enriquecimiento ilícito, cohecho, peculado, uso ilícito de atribuciones, tráfico de influencias.",
         "anonimo": "No del todo. La denuncia penal requiere datos de quien la presenta, aunque existen medidas de protección para testigos y denunciantes.",
-        "queNecesitas": "Narración de los hechos en orden cronológico, identificación de las personas involucradas y todos los documentos o pruebas de que disponga.",
+        "queNecesitas": "Narración de los hechos en orden cronológico, identificación de las personas involucradas y todos los documentos o pruebas de que dispongas.",
         "efecto": "Abre una carpeta de investigación penal. Es la única vía que puede terminar en prisión.",
         "url": "https://fgr.org.mx/es/FGR/FEMCC",
         "refId": "ref-lgra"
@@ -10461,7 +10762,7 @@ window.AUDIT_DB = {
         "herramienta": "Buzón de denuncias contra EFOS (empresas que facturan operaciones simuladas)",
         "paraQue": "Facturación falsa: empresas fantasma que emiten comprobantes por servicios que nunca se prestaron, un mecanismo habitual para vaciar contratos de obra pública.",
         "anonimo": "Sí.",
-        "queNecesitas": "El RFC o la razón social de la empresa, el tipo de operación simulada y, si la conoce, la dependencia que pagó.",
+        "queNecesitas": "El RFC o la razón social de la empresa, el tipo de operación simulada y, si la conoces, la dependencia que pagó.",
         "efecto": "Puede derivar en la publicación de la empresa en el listado del artículo 69-B del Código Fiscal, lo que anula el efecto fiscal de sus facturas.",
         "url": "https://www.sat.gob.mx/aplicacion/operacion/50409/denuncias-sat",
         "refId": "ref-cff"
@@ -10487,12 +10788,12 @@ window.AUDIT_DB = {
         "icono": "🏢",
         "tono": "neutro",
         "herramienta": "Buzón de quejas y denuncias de cada dependencia, estado o municipio",
-        "paraQue": "La vía más cercana y la más rápida cuando el hecho es local: una obra de su colonia, un trámite condicionado, un cobro indebido en la ventanilla, una falta administrativa de personal del ayuntamiento.",
+        "paraQue": "La vía más cercana y la más rápida cuando el hecho es local: una obra de tu colonia, un trámite condicionado, un cobro indebido en la ventanilla, una falta administrativa de personal del ayuntamiento.",
         "anonimo": "Depende de cada contraloría; la mayoría admite denuncia anónima.",
-        "queNecesitas": "El nombre de la dependencia o el ayuntamiento, la fecha y el lugar del hecho, y lo que pueda documentar.",
+        "queNecesitas": "El nombre de la dependencia o el ayuntamiento, la fecha y el lugar del hecho, y lo que puedas documentar.",
         "efecto": "Procedimiento de responsabilidad administrativa contra la persona servidora pública. Es la escala más baja, pero también la que menos tarda.",
         "url": null,
-        "notaSinUrl": "No existe un portal único: cada dependencia federal tiene su propio Órgano Interno de Control y cada estado su contraloría. Búsquelo por el nombre de la institución más «Órgano Interno de Control» o «Contraloría» en el sitio oficial de la entidad.",
+        "notaSinUrl": "No existe un portal único: cada dependencia federal tiene su propio Órgano Interno de Control y cada estado su contraloría. Búscalo por el nombre de la institución más «Órgano Interno de Control» o «Contraloría» en el sitio oficial de la entidad.",
         "refId": "ref-lgra"
       }
     ],
@@ -10511,14 +10812,14 @@ window.AUDIT_DB = {
       },
       {
         "n": 3,
-        "titulo": "Pregunte por escrito",
+        "titulo": "Pregunta por escrito",
         "texto": "Una llamada telefónica no deja constancia y una respuesta verbal no se puede impugnar. Una solicitud de acceso a la información sí: genera folio, plazo y recurso.",
         "fundamento": "Art. 6º CPEUM, apartado A: toda persona tiene derecho al acceso a la información sin acreditar interés ni justificar su uso."
       },
       {
         "n": 4,
         "titulo": "Una obra sin expediente no es una obra fiscalizable",
-        "texto": "Antes de opinar sobre una obra, pida su número de contrato, su monto y su plazo de ejecución. Sin esos tres datos no hay comparación posible entre lo prometido y lo entregado.",
+        "texto": "Antes de opinar sobre una obra, pide su número de contrato, su monto y su plazo de ejecución. Sin esos tres datos no hay comparación posible entre lo prometido y lo entregado.",
         "fundamento": "Ley de Obras Públicas y Servicios Relacionados con las Mismas: bitácora y expediente único de obra."
       },
       {
@@ -10541,7 +10842,7 @@ window.AUDIT_DB = {
       },
       {
         "n": 8,
-        "titulo": "La sospecha no basta: documente",
+        "titulo": "La sospecha no basta: documenta",
         "texto": "Fecha, lugar, monto, nombre de la dependencia y el documento que lo respalde. Una denuncia sin datos verificables se desecha y desgasta la causa de quienes sí los aportan.",
         "fundamento": "Criterio operativo común de la ASF y de los órganos internos de control."
       },
@@ -10554,7 +10855,7 @@ window.AUDIT_DB = {
       {
         "n": 10,
         "titulo": "El silencio también se impugna",
-        "texto": "Si no le responden, no se acabó el camino: la falta de respuesta y la respuesta incompleta se recurren, y ese recurso obliga a una revisión por un tercero.",
+        "texto": "Si no te responden, no se acabó el camino: la falta de respuesta y la respuesta incompleta se recurren, y ese recurso obliga a una revisión por un tercero.",
         "fundamento": "Recurso de revisión previsto en la legislación de transparencia."
       }
     ],
@@ -13448,338 +13749,456 @@ window.AUDIT_DB = {
       "id": "cpeum_art_25",
       "icono": "🏛️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 25 Constitucional",
-      "denominacion": "Rectoría Económica del Estado & Economía Mixta",
-      "precepto_resumen": "Atribuye al Estado la rectoría del desarrollo nacional y ordena que éste sea integral y sustentable. Reconoce la concurrencia de tres sectores —público, social y privado— y manda una más justa distribución del ingreso y la riqueza.",
-      "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales... Al desarrollo económico nacional concurrirán, con responsabilidad social, el sector público, el sector social y el sector privado, sin menoscabo de otras formas de actividad económica que contribuyan al desarrollo de la Nación.",
-      "analisis_civico": "Es el artículo que responde a la pregunta anterior a todas las demás: ¿con qué facultad interviene el Estado en la economía? Aquí están las dos palabras que esta plataforma audita renglón por renglón. «Sustentable» significa que el crecimiento que agota el capital natural no cumple el mandato, y por eso importan las cuentas ecológicas del INEGI. «Más justa distribución» significa que crecer concentrando no basta, y por eso importan el coeficiente de Gini y la medición de pobreza, que desde la reforma de julio de 2025 hace el INEGI (Ley General de Desarrollo Social, arts. 36 y 81). Un gobierno puede reportar crecimiento y estar incumpliendo este artículo por ambos flancos a la vez.",
-      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica y Circuito del Dinero), Pestaña 2 (Acción Financiera y Cuentas Ecológicas) y Pestaña 5 (Radiografía Sexenal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "planea",
+      "precepto": "Artículo 25",
+      "denominacion": "Rectoría económica del Estado y economía mixta",
+      "precepto_resumen": "Da al Estado la rectoría del desarrollo nacional, que debe ser integral y sustentable; le pide velar por la estabilidad de las finanzas públicas y reconoce que al desarrollo concurren el sector público, el social y el privado.",
+      "analisis_civico": "Responde a la pregunta previa a todas: ¿con qué facultad interviene el Estado en la economía? Dos palabras guían la revisión del gasto: «sustentable», porque un crecimiento que agota el capital natural no cumple el mandato, y «estabilidad de las finanzas públicas», que obliga también a los planes estatales y municipales.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Corresponde al Estado la rectoría del desarrollo nacional para garantizar que éste sea integral y sustentable, que fortalezca la Soberanía de la Nación y su régimen democrático y que, mediante la competitividad, el fomento del crecimiento económico y el empleo y una más justa distribución del ingreso y la riqueza, permita el pleno ejercicio de la libertad y la dignidad de los individuos, grupos y clases sociales, cuya seguridad protege esta Constitución. […] El Estado velará por la estabilidad de las finanzas públicas y del sistema financiero para coadyuvar a generar condiciones favorables para el crecimiento económico y el empleo. El Plan Nacional de Desarrollo y los planes estatales y municipales deberán observar dicho principio.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
+    },
+    {
+      "id": "cpeum_art_26",
+      "icono": "🧭",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "grupo": "Constitucion",
+      "etapa": "planea",
+      "precepto": "Artículo 26, apartado A",
+      "denominacion": "Sistema de planeación democrática del desarrollo",
+      "precepto_resumen": "Ordena un sistema de planeación democrática y deliberativa; de él sale el Plan Nacional de Desarrollo, al que deben sujetarse los programas de la Administración Pública Federal.",
+      "analisis_civico": "Un programa federal no debería nacer de la ocurrencia: tiene que poder rastrearse a un objetivo del Plan Nacional de Desarrollo. Por eso, al revisar un programa, la primera pregunta es a qué objetivo del Plan responde y con qué indicador se mide.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "A. El Estado organizará un sistema de planeación democrática del desarrollo nacional que imprima solidez, dinamismo, competitividad, permanencia y equidad al crecimiento de la economía para la independencia y la democratización política, social y cultural de la nación. Los fines del proyecto nacional contenidos en esta Constitución determinarán los objetivos de la planeación.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_27",
       "icono": "🌎",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 27 Constitucional",
-      "denominacion": "Propiedad Originaria de la Nación & Modalidades al Dominio Privado",
-      "precepto_resumen": "Declara que las tierras y aguas del territorio nacional corresponden originariamente a la Nación y reserva a ésta el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, cuidando la conservación de los recursos.",
-      "texto_oficial": "La propiedad de las tierras y aguas comprendidas dentro de los límites del territorio nacional, corresponde originariamente a la Nación, la cual ha tenido y tiene el derecho de transmitir el dominio de ellas a los particulares, constituyendo la propiedad privada... La Nación tendrá en todo tiempo el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, así como el de regular, en beneficio social, el aprovechamiento de los elementos naturales susceptibles de apropiación, con objeto de hacer una distribución equitativa de la riqueza pública, cuidar de su conservación, lograr el desarrollo equilibrado del país y el mejoramiento de las condiciones de vida de la población rural y urbana.",
-      "analisis_civico": "Aquí está el fundamento jurídico de que una concesión de agua pueda negarse y de que una Manifestación de Impacto Ambiental pueda rechazarse. La propiedad privada no es absoluta frente al interés público, y la conservación de los recursos no es una aspiración retórica sino un fin expreso del texto constitucional. Cuando el INEGI documenta que el agotamiento de agua subterránea tuvo un costo medible, este artículo convierte ese dato estadístico en una obligación exigible a la autoridad.",
-      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica) y Pestaña 2 (Cuentas Económicas y Ecológicas).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "planea",
+      "precepto": "Artículo 27, párrafos primero y tercero",
+      "denominacion": "Propiedad originaria de la Nación y modalidades a la propiedad privada",
+      "precepto_resumen": "Las tierras y aguas del territorio corresponden originariamente a la Nación, que puede imponer a la propiedad privada las modalidades que dicte el interés público y regular el aprovechamiento de los recursos naturales.",
+      "analisis_civico": "Es el fundamento de que una concesión de agua pueda negarse o una manifestación de impacto ambiental rechazarse: la propiedad privada no es absoluta frente al interés público, y cuidar la conservación de los recursos es un fin expreso del texto. Por eso el costo ambiental también se audita.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "La propiedad de las tierras y aguas comprendidas dentro de los límites del territorio nacional, corresponde originariamente a la Nación, la cual ha tenido y tiene el derecho de transmitir el dominio de ellas a los particulares, constituyendo la propiedad privada. […] La nación tendrá en todo tiempo el derecho de imponer a la propiedad privada las modalidades que dicte el interés público, así como el de regular, en beneficio social, el aprovechamiento de los elementos naturales susceptibles de apropiación, con objeto de hacer una distribución equitativa de la riqueza pública, cuidar de su conservación",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_28",
       "icono": "⚖️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 28 Constitucional",
-      "denominacion": "Prohibición de Monopolios, Áreas Estratégicas & Autonomía del Banco Central",
-      "precepto_resumen": "Prohíbe los monopolios, las prácticas monopólicas y las condonaciones de impuestos; reserva al Estado ciertas áreas estratégicas sin que ello constituya monopolio; y ordena que el banco central sea autónomo con el objetivo prioritario de procurar la estabilidad del poder adquisitivo de la moneda.",
-      "texto_oficial": "En los Estados Unidos Mexicanos quedan prohibidos los monopolios, las prácticas monopólicas, los estancos, las condonaciones de impuestos y las exenciones de impuestos en los términos y condiciones que fijan las leyes... No constituirán monopolios las funciones que el Estado ejerza de manera exclusiva en las áreas estratégicas a que se refiere este precepto... El Estado tendrá un banco central que será autónomo en el ejercicio de sus funciones y en su administración. Su objetivo prioritario será procurar la estabilidad del poder adquisitivo de la moneda nacional, fortaleciendo con ello la rectoría del desarrollo nacional que corresponde al Estado. Ninguna autoridad podrá ordenar al banco conceder financiamiento.",
-      "analisis_civico": "Tres mandatos que suelen leerse por separado y que este artículo une a propósito. La prohibición de condonar impuestos explica por qué una condonación masiva es un asunto constitucional y no sólo de política fiscal. Las áreas estratégicas explican por qué ciertas empresas del Estado no se juzgan con la vara de la rentabilidad privada. Y la última línea —ninguna autoridad podrá ordenar al banco conceder financiamiento— es el candado que impide pagar el déficit imprimiendo dinero: la razón por la que la deuda soberana se coloca en subasta y no se decreta.",
-      "aplicacion_auditavision": "Pestaña 1 (Constitución Económica), Pestaña 2 (Maquinaria Financiera y Banxico) y Pestaña 7 (Marco Legal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
-    },
-    {
-      "id": "cpeum_art_26",
-      "icono": "📜",
-      "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 26 Constitucional",
-      "denominacion": "Rectoría del Desarrollo Nacional & Sistema de Planeación Democrática",
-      "precepto_resumen": "Establece que el Estado organizará un sistema de planeación democrática que imprima solidez, dinamismo, competitividad y equidad al crecimiento de la economía.",
-      "texto_oficial": "El Estado organizará un sistema de planeación democrática del desarrollo nacional que imprima solidez, dinamismo, competitividad, permanencia y equidad al crecimiento de la economía para la independencia y la democratización política, social y cultural de la nación... Habrá un Plan Nacional de Desarrollo al que se sujetarán obligatoriamente los programas de la Administración Pública Federal.",
-      "analisis_civico": "Ningún gasto público o programa federal puede ser improvisado ni responder a caprichos personales; todo peso del erario debe estar alineado con las metas del Plan Nacional de Desarrollo (PND).",
-      "aplicacion_auditavision": "Pestaña 1 (Presupuesto), Pestaña 2 (Acción Financiera) y Pestaña 5 (Radiografía Sexenal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 28",
+      "denominacion": "Prohibición de condonar impuestos y autonomía del Banco de México",
+      "precepto_resumen": "Prohíbe los monopolios, las condonaciones y las exenciones de impuestos en los términos que fijen las leyes, y da al banco central autonomía, con el objetivo prioritario de procurar la estabilidad del poder adquisitivo de la moneda.",
+      "analisis_civico": "Une dos candados del dinero público. Desde la reforma publicada en el DOF el 6 de marzo de 2020, la prohibición de condonar impuestos está en la Constitución, no solo en la ley. Y la última línea, «ninguna autoridad podrá ordenar al banco conceder financiamiento», impide que el gobierno cubra su déficit imprimiendo dinero.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 28. En los Estados Unidos Mexicanos quedan prohibidos los monopolios, las prácticas monopólicas, los estancos, las condonaciones de impuestos y las exenciones de impuestos en los términos y condiciones que fijan las leyes. […] El Estado tendrá un banco central que será autónomo en el ejercicio de sus funciones y en su administración. Su objetivo prioritario será procurar la estabilidad del poder adquisitivo de la moneda nacional, fortaleciendo con ello la rectoría del desarrollo nacional que corresponde al Estado. Ninguna autoridad podrá ordenar al banco conceder financiamiento.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_31_iv",
-      "icono": "💼",
+      "icono": "🧾",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 31, Fracción IV Constitucional",
-      "denominacion": "Obligación de Contribuir al Gasto Público Proporcional y Equitativamente",
-      "precepto_resumen": "Mandato supremo que obliga a la ciudadanía a tributar para los gastos públicos de la Federación, estados y municipios de manera proporcional y equitativa.",
-      "texto_oficial": "Son obligaciones de los mexicanos: ... IV. Contribuir para los gastos públicos, así de la Federación, como de los Estados, de la Ciudad de México y del Municipio en que residan, de la manera proporcional y equitativa que dispongan las leyes.",
-      "analisis_civico": "Es el pacto social hacendario: la ciudadanía aporta impuestos (ISR, IVA, IEPS, predial) con la garantía constitucional de que el gobierno los destinará a bienes públicos sin privilegios fiscales ni abusos.",
-      "aplicacion_auditavision": "Pestaña 1 (Impuestos), Pestaña 2 (Calculadora del Contribuyente) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 31, fracción IV",
+      "denominacion": "Obligación de contribuir al gasto público",
+      "precepto_resumen": "Obliga a contribuir a los gastos públicos de la Federación, de los estados, de la Ciudad de México y del municipio en que se resida, de la manera proporcional y equitativa que dispongan las leyes.",
+      "analisis_civico": "Es el pacto hacendario: pagas impuestos para cubrir gastos públicos, no gastos privados de quien gobierna. De la palabra «gastos públicos» sale el derecho a preguntar en qué se usó lo que se recaudó.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "IV. Contribuir para los gastos públicos, así de la Federación, como de los Estados, de la Ciudad de México y del Municipio en que residan, de la manera proporcional y equitativa que dispongan las leyes.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_73",
       "icono": "🏛️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 73, Fracciones VII, VIII y XXIV",
-      "denominacion": "Facultades Tributarias y Financieras del Congreso de la Unión",
-      "precepto_resumen": "Faculta al Congreso para imponer contribuciones, aprobar las bases para la contratación de deuda sobre el crédito de la nación y legislar sobre la contabilidad gubernamental.",
-      "texto_oficial": "El Congreso tiene facultad: ... VII. Para imponer las contribuciones necesarias a cubrir el Presupuesto; VIII. Para dar bases sobre las cuales el Ejecutivo pueda celebrar empréstitos sobre el crédito de la Nación, para aprobar esos mismos empréstitos y para reconocer y mandar pagar la deuda nacional... XXIV. Para expedir las leyes que regulen la organización de la entidad de fiscalización superior de la Federación.",
-      "analisis_civico": "Garantiza que el Presidente no puede crear impuestos ni endeudar a la nación unilateralmente; cualquier crédito soberano o impuesto debe ser discutido y aprobado por los representantes en el Congreso.",
-      "aplicacion_auditavision": "Pestaña 2 (Subastas de Deuda Banxico) y Pestaña 3 (Cámaras Federales).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 73, fracciones VII, VIII y XXIV",
+      "denominacion": "Facultades del Congreso: contribuciones, deuda y fiscalización",
+      "precepto_resumen": "El Congreso impone las contribuciones para cubrir el presupuesto, da las bases para que el Ejecutivo contrate deuda y expide la ley que organiza a la Auditoría Superior de la Federación.",
+      "analisis_civico": "El Ejecutivo no puede crear impuestos ni endeudar al país por su cuenta: ambas cosas pasan por el Congreso. Cada año ese permiso queda escrito en la Ley de Ingresos, con el monto de deuda autorizado.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "VII. Para imponer las contribuciones necesarias a cubrir el Presupuesto. […] 1o. Dar bases sobre las cuales el Ejecutivo pueda celebrar empréstitos y otorgar garantías sobre el crédito de la Nación, para aprobar esos mismos empréstitos y para reconocer y mandar pagar la deuda nacional. […] XXIV. Para expedir las leyes que regulen la organización y facultades de la Auditoría Superior de la Federación y las demás que normen la gestión, control y evaluación de los Poderes de la Unión y de los entes públicos federales;",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_74_iv",
-      "icono": "⚖️",
+      "icono": "🗳️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 74, Fracción IV Constitucional",
-      "denominacion": "Facultad Exclusiva para Aprobar el PEF y Revisar la Cuenta Pública",
-      "precepto_resumen": "Facultad soberana de la Cámara de Diputados para aprobar anualmente el Presupuesto de Egresos de la Federación a más tardar el 15 de noviembre y revisar la Cuenta Pública.",
-      "texto_oficial": "Son facultades exclusivas de la Cámara de Diputados: ... IV. Aprobar anualmente el Presupuesto de Egresos de la Federación, previo examen, discusión y, en su caso, modificación del Proyecto enviado por el Ejecutivo Federal... Asimismo, revisar la Cuenta Pública del año anterior, con el objeto de evaluar los resultados de la gestión financiera y comprobar si se ha ajustado a los criterios señalados por el Presupuesto.",
-      "analisis_civico": "San Lázaro es el único poder con potestad para decidir en qué se gastan los más de $10 billones del país. La ciudadanía debe exigir que los diputados auditen exhaustivamente la Cuenta Pública.",
-      "aplicacion_auditavision": "Pestaña 1 (Presupuesto Federal), Pestaña 3 (Cámara de Diputados) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "aprueba",
+      "precepto": "Artículo 74, fracción IV",
+      "denominacion": "La Cámara de Diputados aprueba el Presupuesto de Egresos",
+      "precepto_resumen": "Es facultad exclusiva de la Cámara de Diputados aprobar cada año el Presupuesto de Egresos. El Ejecutivo lo envía a más tardar el 8 de septiembre y la Cámara lo aprueba a más tardar el 15 de noviembre. No puede haber partidas secretas.",
+      "analisis_civico": "Las fechas de este artículo son el calendario cívico del dinero: del 8 de septiembre al 15 de noviembre se decide en qué se gastará el año siguiente. Es el momento de pedirle cuentas a tu diputada o diputado.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "IV. Aprobar anualmente el Presupuesto de Egresos de la Federación, previo examen, discusión y, en su caso, modificación del Proyecto enviado por el Ejecutivo Federal, una vez aprobadas las contribuciones que, a su juicio, deben decretarse para cubrirlo. […] El Ejecutivo Federal hará llegar a la Cámara la Iniciativa de Ley de Ingresos y el Proyecto de Presupuesto de Egresos de la Federación a más tardar el día 8 del mes de septiembre, debiendo comparecer el secretario de despacho correspondiente a dar cuenta de los mismos. La Cámara de Diputados deberá aprobar el Presupuesto de Egresos de la Federación a más tardar el día 15 del mes de noviembre. […] No podrá haber partidas secretas en el Presupuesto de Egresos de la Federación.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_79",
       "icono": "🔍",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 79 Constitucional",
-      "denominacion": "Auditoría Superior de la Federación (ASF) & Fiscalización Superior",
-      "precepto_resumen": "Consagra la autonomía técnica y de gestión de la ASF para fiscalizar de manera posterior y en tiempo real el uso de los recursos federales en los tres poderes, órganos autónomos y estados.",
-      "texto_oficial": "La entidad de fiscalización superior de la Federación de la Cámara de Diputados, tendrá autonomía técnica y de gestión en el ejercicio de sus atribuciones y para decidir sobre su organización interna, funcionamiento y resoluciones... Fiscalizará en forma posterior los ingresos, egresos y deuda; las garantías que, en su caso, otorgue el Gobierno Federal respecto a empréstitos de los Estados y Municipios... así como el destino y ejercicio de los recursos federales que dichos entes locales hayan percibido.",
-      "analisis_civico": "Es el brazo técnico del pueblo mexicano para descubrir desvíos, contratos inflados y empresas fantasma. Sus Pliegos de Observaciones son la base legal para denunciar penalmente la corrupción.",
-      "aplicacion_auditavision": "Pestaña 1 (Alertas ASF), Pestaña 3 (Bloque ASF) y Pestaña 8 (Buzón Contraloría).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "revisa",
+      "precepto": "Artículo 79",
+      "denominacion": "Auditoría Superior de la Federación",
+      "precepto_resumen": "La Auditoría Superior de la Federación tiene autonomía técnica y de gestión, y fiscaliza en forma posterior los ingresos, egresos y deuda, además de los recursos federales que ejercen estados y municipios.",
+      "analisis_civico": "La Auditoría revisa después: primero se gasta y luego se audita la Cuenta Pública. Sus informes no son sentencias; de ellos salen acciones (recomendaciones, pliegos de observaciones, promociones de responsabilidad o denuncias) que siguen su propio cauce legal.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 79. La Auditoría Superior de la Federación de la Cámara de Diputados, tendrá autonomía técnica y de gestión en el ejercicio de sus atribuciones y para decidir sobre su organización interna, funcionamiento y resoluciones, en los términos que disponga la ley. […] La función de fiscalización será ejercida conforme a los principios de legalidad, definitividad, imparcialidad y confiabilidad. […] I. Fiscalizar en forma posterior los ingresos, egresos y deuda;",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_115_iv",
-      "icono": "🏙️",
+      "icono": "🏘️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 115, Fracción IV Constitucional",
-      "denominacion": "Hacienda Pública Municipal, Autonomía y Recaudación del Predial",
-      "precepto_resumen": "Establece que los municipios administrarán libremente su hacienda y percibirán las contribuciones sobre la propiedad inmobiliaria (impuesto predial) y participaciones federales.",
-      "texto_oficial": "Los municipios administrarán libremente su hacienda, la cual se formará de los rendimientos de los bienes que les pertenezcan, así como de las contribuciones y otros ingresos que las legislaturas establezcan a su favor, y en todo caso: a) Percibirán las contribuciones, incluyendo tasas adicionales, que establezcan los Estados sobre la propiedad inmobiliaria, de su fraccionamiento, división, consolidación, traslación y mejora... b) Las participaciones federales, que serán cubiertas por la Federación a los Municipios con arreglo a las bases, montos y plazos que anualmente se determinen por las Legislaturas de los Estados.",
-      "analisis_civico": "El predial es el corazón fiscal del municipio. El rezago catastral en México (0.16% del PIB vs 1.0% OCDE) mantiene a los municipios dependiendo en un 84% de las transferencias federales.",
-      "aplicacion_auditavision": "Pestaña 1 (Lente Dependencia Federal), Pestaña 3 (Columna Congresos) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ingreso",
+      "precepto": "Artículo 115, fracción IV",
+      "denominacion": "Hacienda municipal y predial",
+      "precepto_resumen": "Los municipios administran libremente su hacienda y perciben las contribuciones sobre la propiedad inmobiliaria (el predial) y las participaciones federales.",
+      "analisis_civico": "El predial es el impuesto propio más importante del municipio. Cuánto depende cada municipio del dinero federal lo puedes ver en la plataforma con las cifras del INEGI (finanzas públicas estatales y municipales).",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "IV. Los municipios administrarán libremente su hacienda, la cual se formará de los rendimientos de los bienes que les pertenezcan, así como de las contribuciones y otros ingresos que las legislaturas establezcan a su favor, y en todo caso: a) Percibirán las contribuciones, incluyendo tasas adicionales, que establezcan los Estados sobre la propiedad inmobiliaria, de su fraccionamiento, división, consolidación, traslación y mejora así como las que tengan por base el cambio de valor de los inmuebles. […] b) Las participaciones federales, que serán cubiertas por la Federación a los Municipios con arreglo a las bases, montos y plazos que anualmente se determinen por las Legislaturas de los Estados.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_116_ii",
-      "icono": "🏢",
+      "icono": "🗺️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 116, Fracción II Constitucional",
-      "denominacion": "Congresos Estatales, Representación Proporcional y Fiscalización Local",
-      "precepto_resumen": "Regula la integración de las 32 legislaturas estatales por mayoría relativa y representación proporcional, y su mandato de fiscalizar las cuentas públicas locales.",
-      "texto_oficial": "El número de representantes en las legislaturas de los Estados será proporcional al de habitantes de cada uno... Los diputados a las legislaturas de los Estados serán electos según los principios de mayoría relativa y de representación proporcional... Las legislaturas de los Estados contarán con entidades estatales de fiscalización, las cuales gozarán de autonomía técnica y de gestión para fiscalizar las acciones de Estados y Municipios.",
-      "analisis_civico": "Los 1,098 diputados locales deben vigilar los presupuestos estatales y auditar a los alcaldes a través de los Órganos de Fiscalización Superior (OFS), impidiendo partidas opacas de 'gestión social'.",
-      "aplicacion_auditavision": "Pestaña 3 (32 Congresos Estatales y Distritos Electorales).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "revisa",
+      "precepto": "Artículo 116, fracción II",
+      "denominacion": "Congresos estatales y sus entidades de fiscalización",
+      "precepto_resumen": "Cada legislatura estatal aprueba el presupuesto de su estado, y cuenta con una entidad de fiscalización con autonomía técnica y de gestión, cuyos informes de auditoría son públicos.",
+      "analisis_civico": "El dinero que tu estado y tu municipio gastan con recursos propios lo revisa la entidad de fiscalización de tu estado, no la federal. Sus informes son públicos por mandato constitucional: puedes pedirlos.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Corresponde a las legislaturas de los Estados la aprobación anual del presupuesto de egresos correspondiente. […] Las legislaturas de los estados contarán con entidades estatales de fiscalización, las cuales serán órganos con autonomía técnica y de gestión en el ejercicio de sus atribuciones y para decidir sobre su organización interna, funcionamiento y resoluciones, en los términos que dispongan sus leyes. […] Los informes de auditoría de las entidades estatales de fiscalización tendrán carácter público.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_126",
-      "icono": "🛑",
+      "icono": "🚫",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 126 Constitucional",
-      "denominacion": "Principio de Legalidad del Pago: Ningún Pago sin Partida Presupuestal",
-      "precepto_resumen": "Mandato taxativo: no puede hacerse ningún pago del erario que no esté expresamente autorizado en el Presupuesto de Egresos o por ley posterior.",
-      "texto_oficial": "No podrá hacerse pago alguno que no esté comprendido en el Presupuesto o determinado por la ley posterior.",
-      "analisis_civico": "Es la muralla contra la arbitrariedad. Ningún presidente, gobernador, juez o funcionario puede gastar un solo peso del pueblo en ocurrencias, bonos discrecionales o compras no presupuestadas.",
-      "aplicacion_auditavision": "Pestaña 2 (Flujo del Gasto), Pestaña 4 (Fideicomisos Judiciales) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 126",
+      "denominacion": "Ningún pago sin partida en el presupuesto",
+      "precepto_resumen": "No puede hacerse ningún pago que no esté en el Presupuesto o que no determine una ley posterior.",
+      "analisis_civico": "Es el artículo más corto del capítulo y uno de los más útiles: ante cualquier pago puedes preguntar en qué partida del presupuesto está. Si no está en ninguna, no debió hacerse.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 126. No podrá hacerse pago alguno que no esté comprendido en el Presupuesto o determinado por la ley posterior.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_127",
-      "icono": "⚖️",
+      "icono": "💼",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 127 Constitucional",
-      "denominacion": "Tope Salarial Máximo: Ningún Servidor Puede Ganar Más que el Presidente",
-      "precepto_resumen": "Fija que ningún servidor público de la Federación, estados o municipios podrá percibir una remuneración mayor a la establecida para el Presidente de la República.",
-      "texto_oficial": "Los servidores públicos de la Federación, de las entidades federativas, de los Municipios y de las demarcaciones territoriales de la Ciudad de México... recibirán una remuneración adecuada e irrenunciable por el desempeño de su función, empleo, cargo o comisión, que deberá ser proporcional a sus responsabilidades. Ningún servidor público podrá recibir una remuneración, en términos de la fracción anterior, por el desempeño de su función, empleo, cargo o comisión, mayor a la establecida para el Presidente de la República en el presupuesto correspondiente.",
-      "analisis_civico": "Puso fin a las remuneraciones doradas de ministros, consejeros y altos funcionarios que superaban los $500,000 mensuales. La reforma constitucional de 2024 confirmó su aplicación obligatoria e irrestricta a todo el Poder Judicial.",
-      "aplicacion_auditavision": "Pestaña 3 (Jerarquía Salarial) y Pestaña 4 (Remuneraciones de la SCJN).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 127, fracciones I y II",
+      "denominacion": "Nadie gana más que la persona titular del Ejecutivo",
+      "precepto_resumen": "La remuneración de toda persona servidora pública, incluidas dietas, bonos y compensaciones, no puede ser mayor a la establecida para la persona titular del Ejecutivo Federal en el presupuesto.",
+      "analisis_civico": "El tope cuenta todo: sueldo, bonos, estímulos y compensaciones, no solo el sueldo base. La fracción II se reformó por última vez en el DOF del 10 de abril de 2026. Para comparar un sueldo con el tope, busca el tabulador en el presupuesto del año.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum-art127",
+      "texto_oficial": "I. Se considera remuneración o retribución toda percepción en efectivo o en especie, incluyendo dietas, aguinaldos, gratificaciones, premios, recompensas, bonos, estímulos, comisiones, compensaciones y cualquier otra, con excepción de los apoyos y los gastos sujetos a comprobación que sean propios del desarrollo del trabajo y los gastos de viaje en actividades oficiales. […] II. Ninguna persona servidora pública podrá recibir remuneración, en términos de la fracción anterior, por el desempeño de su función, empleo, cargo o comisión, mayor a la establecida para la persona titular del Ejecutivo Federal en el presupuesto correspondiente.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_134",
-      "icono": "🛡️",
+      "icono": "🏗️",
       "ley": "Constitución Política de los Estados Unidos Mexicanos",
-      "precepto": "Artículo 134 Constitucional",
-      "denominacion": "Principios Rectores del Gasto Público y Licitaciones Abiertas",
-      "precepto_resumen": "Exige que los recursos económicos se administren con eficiencia, eficacia, economía, transparencia y honradez, y que las compras públicas se hagan por licitación abierta.",
-      "texto_oficial": "Los recursos económicos de que dispongan la Federación, las entidades federativas, los Municipios y las demarcaciones territoriales de la Ciudad de México, se administrarán con eficiencia, eficacia, economía, transparencia y honradez para satisfacer los objetivos a los que estén destinados... Las adquisiciones, arrendamientos y enajenaciones de todo tipo de bienes, prestación de servicios de cualquier naturaleza y la contratación de obra que realicen, se adjudicarán o llevarán a cabo a través de licitaciones públicas mediante convocatoria pública.",
-      "analisis_civico": "Es el estándar de oro anticorrupción. Prohíbe las asignaciones directas arbitrarias y sanciona el sobreprecio en contratos gubernamentales. Es la norma más invocada en los informes de la ASF.",
-      "aplicacion_auditavision": "Pestaña 1 (Alertas ASF), Pestaña 5 (Casos de Corrupción) y Pestaña 8 (Contraloría Cívica).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "grupo": "Constitucion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 134, párrafos primero y tercero",
+      "denominacion": "Principios del gasto y licitación pública",
+      "precepto_resumen": "Los recursos públicos se administran con eficiencia, eficacia, economía, transparencia y honradez; las compras y obras se adjudican, por regla general, mediante licitación pública.",
+      "analisis_civico": "La licitación pública es la regla y la adjudicación directa, la excepción que la ley debe justificar. Cuando una obra se asigna sin licitar, este es el artículo que permite preguntar por qué.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum",
+      "texto_oficial": "Artículo 134. Los recursos económicos de que dispongan la Federación, las entidades federativas, los Municipios y las demarcaciones territoriales de la Ciudad de México, se administrarán con eficiencia, eficacia, economía, transparencia y honradez para satisfacer los objetivos a los que estén destinados. […] Las adquisiciones, arrendamientos y enajenaciones de todo tipo de bienes, prestación de servicios de cualquier naturaleza y la contratación de obra que realicen, se adjudicarán o llevarán a cabo a través de licitaciones públicas mediante convocatoria pública para que libremente se presenten proposiciones solventes en sobre cerrado, que será abierto públicamente, a fin de asegurar al Estado las mejores condiciones disponibles en cuanto a precio, calidad, financiamiento, oportunidad y demás circunstancias pertinentes.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lif_estimacion_ingresos",
-      "icono": "💵",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición General: Estimación y Proyección Anual de Ingresos",
-      "precepto_resumen": "Detalla el monto global de ingresos que la Federación prevé recaudar en el ejercicio fiscal por impuestos (ISR, IVA, IEPS), derechos, productos y aprovechamientos.",
-      "texto_oficial": "En el ejercicio fiscal correspondiente, la Federación percibirá los ingresos provenientes de los conceptos y en las cantidades estimadas en millones de pesos... Los ingresos que se recauden por concepto de contribuciones, así como sus accesorios, se concentrarán en la Tesorería de la Federación y deberán reflejarse en la contabilidad y en la Cuenta Pública.",
-      "analisis_civico": "La LIF es el espejo del PEF: no puede haber gasto sin ingreso previo. Si la recaudación tributaria queda por debajo de la estimación, el gobierno se ve obligado a recortar el gasto o a emitir más deuda soberana.",
-      "aplicacion_auditavision": "Pestaña 1 (Ingresos Tributarios) y Pestaña 2 (Acción Financiera).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
+      "icono": "📜",
+      "ley": "Ley de Ingresos de la Federación para 2026 (LIF 2026)",
+      "grupo": "Ingresos",
+      "etapa": "ingreso",
+      "precepto": "Artículo 1o.",
+      "denominacion": "Lo que la Federación estima recaudar en 2026",
+      "precepto_resumen": "Enumera cada concepto de ingreso y su monto estimado. Para 2026 el total es de 10,193,683.7 millones de pesos.",
+      "analisis_civico": "Es el espejo del Presupuesto de Egresos: lo que se piensa gastar tiene que salir de algún lado. Si la recaudación queda por debajo de lo estimado, el hueco se cubre con recortes o con más deuda.",
+      "cifras": [
+        {
+          "etiqueta": "Ingresos estimados 2026",
+          "valor": "$10,193,683.7 millones",
+          "estado": "oficial",
+          "fuente": "LIF 2026, art. 1o., renglón TOTAL"
+        }
+      ],
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "ref": "ref-lif2026",
+      "texto_oficial": "Artículo 1o. En el ejercicio fiscal de 2026, la Federación percibirá los ingresos provenientes de los conceptos y en las cantidades estimadas en millones de pesos que a continuación se enumeran:",
+      "aplicacion_auditavision": "",
+      "vigencia": "Ley publicada en el DOF el 07-11-2025; rige en 2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lif_techo_endeudamiento",
-      "icono": "📊",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición sobre Techo de Endeudamiento Neto Soberano",
-      "precepto_resumen": "Fija la autorización legal del Congreso al Ejecutivo Federal para contratar endeudamiento neto interno y externo para el financiamiento del Presupuesto de Egresos.",
-      "texto_oficial": "Se autoriza al Ejecutivo Federal, por conducto de la Secretaría de Hacienda y Crédito Público, para contratar y ejercer créditos, empréstitos y otras formas del ejercicio del crédito público, incluso mediante la emisión de valores... que constituyan deuda pública interna neta del Gobierno Federal hasta por el monto fijado en miles de millones de pesos, y deuda pública externa neta hasta por el monto en millones de dólares.",
-      "analisis_civico": "Es el límite legal para emitir CETES, Bonos M y contratar créditos con organismos internacionales. Si el gobierno rebasa este techo sin autorización previa del Congreso, comete un delito financiero grave.",
-      "aplicacion_auditavision": "Pestaña 1 (Semáforo Deuda), Pestaña 2 (Subastas Banxico) y Pestaña 5 (Deuda Sexenal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
+      "icono": "🏦",
+      "ley": "Ley de Ingresos de la Federación para 2026 (LIF 2026)",
+      "grupo": "Ingresos",
+      "etapa": "ingreso",
+      "precepto": "Artículo 2o.",
+      "denominacion": "Techo de endeudamiento neto de 2026",
+      "precepto_resumen": "Autoriza al Ejecutivo, por conducto de Hacienda, a contratar deuda para financiar el presupuesto de 2026, con un endeudamiento neto interno de hasta 1 billón 780 mil millones de pesos y uno externo de hasta 15 mil 500 millones de dólares.",
+      "analisis_civico": "Es el permiso anual de deuda que exige el artículo 73 de la Constitución. Compara el techo con la deuda que Hacienda reporta en sus informes trimestrales para ver si se respetó.",
+      "cifras": [
+        {
+          "etiqueta": "Endeudamiento neto interno autorizado",
+          "valor": "hasta $1,780,000 millones",
+          "estado": "oficial",
+          "fuente": "LIF 2026, art. 2o."
+        },
+        {
+          "etiqueta": "Endeudamiento neto externo autorizado",
+          "valor": "hasta 15,500 millones de dólares",
+          "estado": "oficial",
+          "fuente": "LIF 2026, art. 2o."
+        }
+      ],
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "ref": "ref-lif2026",
+      "texto_oficial": "Artículo 2o. Se autoriza al Ejecutivo Federal, por conducto de la Secretaría de Hacienda y Crédito Público, para contratar y ejercer créditos, empréstitos y otras formas del ejercicio del crédito público, incluso mediante la emisión de valores, en los términos de la Ley Federal de Deuda Pública y para el financiamiento del Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026, por un monto de endeudamiento neto interno hasta por 1 billón 780 mil millones de pesos. […] a efecto de obtener un monto de endeudamiento neto externo de hasta 15 mil 500 millones de dólares",
+      "aplicacion_auditavision": "",
+      "vigencia": "Ley publicada en el DOF el 07-11-2025; rige en 2026. Cotejado el 09-10-2026."
     },
     {
-      "id": "lif_costo_financiero",
-      "icono": "📈",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición sobre Costo Financiero de la Deuda y Tasa de Interés",
-      "precepto_resumen": "Establece las previsiones sobre las tasas de interés de referencia para calcular el servicio de la deuda soberana del sector público.",
-      "texto_oficial": "Para los efectos de las operaciones de financiamiento, la Secretaría de Hacienda y Crédito Público calculará el costo financiero considerando las condiciones macroeconómicas, la tasa de interés interbancaria de equilibrio y los rendimientos de los valores gubernamentales colocados a través del Banco de México.",
-      "analisis_civico": "Cuando Banxico sube su tasa de interés para frenar la inflación, el costo financiero de la deuda en la LIF se dispara, devorando más de un billón de pesos que de otro modo irían a escuelas u hospitales.",
-      "aplicacion_auditavision": "Pestaña 2 (Subastas Banxico / CETES) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
-    },
-    {
-      "id": "lif_prohibicion_condonacion",
-      "icono": "🚫",
-      "ley": "Ley de Ingresos de la Federación (LIF)",
-      "precepto": "Disposición de Prohibición Estricta de Condonaciones y Exenciones Fiscales",
-      "precepto_resumen": "Prohíbe a las autoridades hacendarias otorgar condonaciones o exenciones de impuestos de manera discrecional a grandes contribuyentes.",
-      "texto_oficial": "Queda prohibida la condonación de impuestos y las exenciones de contribuciones en los términos y condiciones que fijan las leyes. Las autoridades fiscales no podrán celebrar convenios o emitir resoluciones que impliquen la renuncia a la potestad tributaria del Estado en perjuicio del erario.",
-      "analisis_civico": "Pone fin a la práctica de sexenios anteriores donde se perdonaban cientos de miles de millones de pesos en impuestos a corporaciones y bancos mientras el ciudadano común pagaba su ISR puntual.",
-      "aplicacion_auditavision": "Pestaña 1 (Grandes Contribuyentes) y Pestaña 5 (Datos Curiosos y Sexenios).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2024.pdf"
+      "id": "lif_renuncias_recaudatorias",
+      "icono": "🔎",
+      "ley": "Ley de Ingresos de la Federación para 2026 (LIF 2026)",
+      "grupo": "Ingresos",
+      "etapa": "ingreso",
+      "precepto": "Artículo 28, apartado A",
+      "denominacion": "Lo que el erario deja de cobrar: Renuncias Recaudatorias",
+      "precepto_resumen": "Obliga a Hacienda a publicar, a más tardar el 30 de junio de 2026, cuánto deja de recaudar por tasas diferenciadas, exenciones, condonaciones, estímulos, deducciones y regímenes especiales.",
+      "analisis_civico": "Un peso que no se cobra también es una decisión de gasto, aunque no aparezca en el presupuesto. Este informe permite ver quién se beneficia de cada exención y cuánto cuesta.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+      "ref": "ref-lif2026",
+      "texto_oficial": "A. El documento denominado Renuncias Recaudatorias, a más tardar el 30 de junio de 2026, que comprenderá los montos que deja de recaudar el erario federal por conceptos de tasas diferenciadas en los distintos impuestos, exenciones, subsidios y créditos fiscales, condonaciones, facilidades administrativas, estímulos fiscales, deducciones autorizadas, tratamientos y regímenes especiales establecidos en las distintas leyes que en materia tributaria aplican a nivel federal.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Ley publicada en el DOF el 07-11-2025; rige en 2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lfprh_art_17_18",
-      "icono": "💡",
+      "icono": "⚖️",
       "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria (LFPRH)",
-      "precepto": "Artículos 17 y 18 de la LFPRH",
-      "denominacion": "Regla de Balance Fiscal Cero e Impacto Presupuestario Obligatorio",
-      "precepto_resumen": "Obliga a mantener el equilibrio presupuestal y exige que toda propuesta o promesa de ley detalle su impacto presupuestario y su fuente de pago.",
-      "texto_oficial": "La administración de los recursos públicos federales se realizará con base en criterios de legalidad, honestidad, eficacia, eficiencia, economía, racionalidad, austeridad, transparencia, control, rendición de cuentas y equidad de género... A toda iniciativa de ley o decreto que se presente a la consideración del Congreso que implique un gasto, deberá acompañarse la estimación sobre el impacto presupuestario del proyecto.",
-      "analisis_civico": "Ningún candidato o legislador puede prometer obras o subsidios sin decir de dónde saldrá el dinero. Es el mejor filtro ciudadano contra la demagogia electoral.",
-      "aplicacion_auditavision": "Pestaña 3 (Monitor Cívico Electoral) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+      "grupo": "Presupuesto",
+      "etapa": "aprueba",
+      "precepto": "Artículos 17 y 18",
+      "denominacion": "Equilibrio presupuestario e impacto de cada nuevo gasto",
+      "precepto_resumen": "El gasto debe contribuir al equilibrio presupuestario, y toda propuesta de aumento o creación de gasto debe traer su fuente de ingreso o compensarse con reducciones en otros gastos.",
+      "analisis_civico": "Sirve de filtro ante cualquier promesa: si alguien propone un gasto nuevo, la ley le exige decir de dónde saldrá el dinero o qué otro gasto se reduce.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "ref": "ref-lfprh",
+      "texto_oficial": "Asimismo, el gasto neto total propuesto por el Ejecutivo Federal en el proyecto de Presupuesto de Egresos, aquél que apruebe la Cámara de Diputados y el que se ejerza en el año fiscal, deberá contribuir al equilibrio presupuestario. […] Artículo 18.- A toda propuesta de aumento o creación de gasto del proyecto de Presupuesto de Egresos, deberá agregarse la correspondiente iniciativa de ingreso distinta al financiamiento o compensarse con reducciones en otras previsiones de gasto.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 09-04-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lfprh_art_42",
-      "icono": "🗓️",
+      "icono": "📅",
       "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria (LFPRH)",
-      "precepto": "Artículo 42 de la LFPRH",
-      "denominacion": "Calendario Constitucional y Plazos del Paquete Económico",
-      "precepto_resumen": "Fija los plazos inexcusables para que el Ejecutivo envíe al Congreso los Criterios Generales, la Ley de Ingresos y el Presupuesto de Egresos a más tardar el 8 de septiembre.",
-      "texto_oficial": "La aprobación de la Ley de Ingresos y del Presupuesto de Egresos se sujetará al siguiente procedimiento: El Ejecutivo Federal remitirá al Congreso de la Unión, a más tardar el 8 de septiembre de cada año: Los Criterios Generales de Política Económica, la iniciativa de Ley de Ingresos y el proyecto de Presupuesto de Egresos de la Federación.",
-      "analisis_civico": "Establece el reloj democrático anual. A partir del 8 de septiembre, el país entra en el periodo más importante del Congreso: la discusión del destino de todos los recursos públicos.",
-      "aplicacion_auditavision": "Pestaña 3 (Periodos de Sesiones del Congreso) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+      "grupo": "Presupuesto",
+      "etapa": "aprueba",
+      "precepto": "Artículo 42, fracciones III y IV",
+      "denominacion": "El calendario del Paquete Económico",
+      "precepto_resumen": "El Ejecutivo envía los Criterios Generales de Política Económica, la iniciativa de Ley de Ingresos y el proyecto de Presupuesto a más tardar el 8 de septiembre; la Cámara de Diputados aprueba la Ley de Ingresos a más tardar el 20 de octubre.",
+      "analisis_civico": "Junto con el artículo 74 de la Constitución arma el reloj del presupuesto: 8 de septiembre, entrega; 20 de octubre, Ley de Ingresos en la Cámara de Diputados; 15 de noviembre, Presupuesto de Egresos.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "ref": "ref-lfprh",
+      "texto_oficial": "III. El Ejecutivo Federal remitirá al Congreso de la Unión, a más tardar el 8 de septiembre de cada año: […] IV. La Ley de Ingresos será aprobada por la Cámara de Diputados a más tardar el 20 de octubre",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 09-04-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lfprh_art_54",
       "icono": "↩️",
       "ley": "Ley Federal de Presupuesto y Responsabilidad Hacendaria (LFPRH)",
-      "precepto": "Artículo 54 de la LFPRH",
-      "denominacion": "Subejercicio Presupuestal y Devolución Obligatoria a la TESOFE",
-      "precepto_resumen": "Dispone que los recursos autorizados no devengados ni comprometidos al cierre del año deben ser devueltos inmediatamente a la Tesorería de la Federación.",
-      "texto_oficial": "Las dependencias y entidades que por cualquier motivo al cierre del ejercicio fiscal conserven recursos del Presupuesto de Egresos no devengados ni comprometidos, deberán reintegrarlos a la Tesorería de la Federación dentro de los primeros quince días naturales siguientes al cierre del ejercicio fiscal.",
-      "analisis_civico": "Prohíbe guardar 'guardaditos' o 'fideicomisos privados'. El dinero presupuestado que no se ejerció en beneficio de la gente debe regresar a la TESOFE y no quedarse en cuentas de dependencias.",
-      "aplicacion_auditavision": "Pestaña 1 (Presupuesto Subnacional) y Pestaña 4 (Fideicomisos del PJF).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+      "grupo": "Presupuesto",
+      "etapa": "ejerce",
+      "precepto": "Artículo 54",
+      "denominacion": "Lo que no se gastó se devuelve a la Tesorería",
+      "precepto_resumen": "Lo no devengado al 31 de diciembre ya no puede ejercerse, y quien conserve recursos debe reintegrarlos a la Tesorería de la Federación dentro de los 15 días naturales siguientes al cierre del ejercicio.",
+      "analisis_civico": "Impide los «guardaditos»: el dinero que no se usó en lo que se aprobó regresa a la Tesorería, y gastarlo de prisa en diciembre solo para no devolverlo está prohibido.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf",
+      "ref": "ref-lfprh",
+      "texto_oficial": "Las erogaciones previstas en el Presupuesto de Egresos que no se encuentren devengadas al 31 de diciembre, no podrán ejercerse. […] Los Poderes Legislativo y Judicial, los entes autónomos, las dependencias, así como las entidades respecto de los subsidios o transferencias que reciban, que por cualquier motivo al 31 de diciembre conserven recursos, incluyendo los rendimientos obtenidos, deberán reintegrar el importe disponible a la Tesorería de la Federación dentro de los 15 días naturales siguientes al cierre del ejercicio. […] Queda prohibido realizar erogaciones al final del ejercicio con cargo a ahorros y economías del Presupuesto de Egresos que tengan por objeto evitar el reintegro de recursos a que se refiere este artículo.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 09-04-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "lcf_art_2",
-      "icono": "💰",
+      "icono": "🤝",
       "ley": "Ley de Coordinación Fiscal (LCF)",
-      "precepto": "Artículo 2° de la LCF",
-      "denominacion": "Recaudación Federal Participable (RFP) y Ramo 28",
-      "precepto_resumen": "Fórmula matemática legal que integra la bolsa común de impuestos federales (RFP) sobre la cual se calcula el 20% que se transfiere en libre disposición a estados y municipios.",
-      "texto_oficial": "El Fondo General de Participaciones se constituirá con el 20% de la recaudación federal participable que obtenga la Federación en un ejercicio... La recaudación federal participable será la que obtenga la Federación por todos sus impuestos, así como por los derechos sobre la minería, disminuidos con el total de las devoluciones por los mismos conceptos.",
-      "analisis_civico": "Es el pilar del Pacto Fiscal: los estados cedieron el cobro del IVA y del ISR a la Federación a cambio de recibir puntualmente su porcentaje de la RFP sin condiciones (Ramo 28).",
-      "aplicacion_auditavision": "Pestaña 1 (Ramo 28 vs Ramo 33) y Pestaña 2 (Acción Financiera).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/31_300118.pdf"
+      "grupo": "Coordinacion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 2o.",
+      "denominacion": "Fondo General de Participaciones (Ramo 28)",
+      "precepto_resumen": "El Fondo General de Participaciones se forma con el 20% de la recaudación federal participable: los impuestos federales y los derechos de minería, menos devoluciones y algunas exclusiones.",
+      "analisis_civico": "Las participaciones (Ramo 28) son de libre disposición: estados y municipios deciden en qué usarlas, dentro de sus propios presupuestos. Por eso se revisan sobre todo ante los congresos locales.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
+      "ref": "ref-lcf",
+      "texto_oficial": "Artículo 2o.- El Fondo General de Participaciones se constituirá con el 20% de la recaudación federal participable que obtenga la federación en un ejercicio. La recaudación federal participable será la que obtenga la Federación por todos sus impuestos, así como por los derechos de minería, disminuidos con el total de las devoluciones por dichas contribuciones y excluyendo los conceptos que a continuación se relacionan:",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 03-01-2024. Cotejado el 09-10-2026."
     },
     {
       "id": "lcf_ramo_33",
-      "icono": "📦",
+      "icono": "🎯",
       "ley": "Ley de Coordinación Fiscal (LCF)",
-      "precepto": "Artículos 25 al 51 de la LCF",
-      "denominacion": "Fondos de Aportaciones Federales Etiquetadas (Ramo 33)",
-      "precepto_resumen": "Regula los ocho fondos federales condicionados a educación (FONE), salud (FASSA), seguridad (FORTAMUN) y combate a la pobreza (FAIS).",
-      "texto_oficial": "Se establecen las aportaciones federales, como recursos que la Federación transfiere a las haciendas públicas de los Estados, Ciudad de México, y en su caso, de los Municipios, condicionando su gasto a la consecución y cumplimiento de los objetivos que para cada tipo de aportación establece esta Ley... Los recursos del Fondo de Aportaciones para la Nómina Educativa y Gasto Operativo se destinarán exclusivamente al pago de servicios personales.",
-      "analisis_civico": "A diferencia del Ramo 28, los estados no pueden usar el Ramo 33 para gasto corriente ni fiestas; si desvían estos fondos, la ASF emite pliegos sancionatorios por delito de desvío de recursos.",
-      "aplicacion_auditavision": "Pestaña 1 (Lente Ramo 33), Pestaña 3 (Congresos) y Pestaña 6 (Glosario).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/31_300118.pdf"
+      "grupo": "Coordinacion",
+      "etapa": "ejerce",
+      "precepto": "Artículo 25",
+      "denominacion": "Los ocho fondos de aportaciones (Ramo 33)",
+      "precepto_resumen": "Las aportaciones federales condicionan su gasto a los objetivos que la ley fija para cada uno de sus ocho fondos: nómina educativa, salud, infraestructura social, fortalecimiento municipal, múltiples, educación tecnológica y de adultos, seguridad pública y fortalecimiento de las entidades.",
+      "analisis_civico": "A diferencia del Ramo 28, el dinero del Ramo 33 viene etiquetado: si se usa en otra cosa, la Auditoría Superior lo observa y puede promover responsabilidades. Es de lo que más revisa en estados y municipios.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
+      "ref": "ref-lcf",
+      "texto_oficial": "se establecen las aportaciones federales, como recursos que la Federación transfiere a las haciendas públicas de los Estados, Distrito Federal, y en su caso, de los Municipios, condicionando su gasto a la consecución y cumplimiento de los objetivos que para cada tipo de aportación establece esta Ley,",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 03-01-2024. Cotejado el 09-10-2026."
     },
     {
       "id": "ldf_alertas",
       "icono": "🚦",
-      "ley": "Ley de Disciplina Financiera (LDF)",
-      "precepto": "Artículos 22 al 26 de la LDF",
-      "denominacion": "Sistema de Alertas de la SHCP y Límites al Endeudamiento Subnacional",
-      "precepto_resumen": "Crea el semáforo fiscal (Verde, Amarillo y Rojo) para clasificar la deuda pública de los estados y municipios y topar la contratación de nuevos créditos.",
-      "texto_oficial": "La Secretaría realizará la medición del Sistema de Alertas con base en los siguientes indicadores: I. Deuda Pública y Obligaciones sobre Ingresos de Libre Disposición; II. Servicio de la Deuda y de Obligaciones sobre Ingresos de Libre Disposición; y III. Obligaciones a Corto Plazo y Proveedores y Contratistas sobre Ingresos Totales... El Sistema de Alertas clasificará a los Entes Públicos en endeudamiento sostenible, en observación o elevado.",
-      "analisis_civico": "Evita el sobreendeudamiento estatal que quebró a entidades como Coahuila o Veracruz. Los estados en semáforo rojo no pueden contratar más deuda bancaria.",
-      "aplicacion_auditavision": "Pestaña 1 (Semáforo Deuda SHCP) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf"
+      "ley": "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (LDF)",
+      "grupo": "Disciplina",
+      "etapa": "revisa",
+      "precepto": "Artículos 44 a 46",
+      "denominacion": "Sistema de Alertas de la deuda estatal y municipal",
+      "precepto_resumen": "Hacienda mide la deuda de estados y municipios con tres indicadores y los clasifica en endeudamiento sostenible, en observación o elevado. Con endeudamiento elevado, su techo de financiamiento neto es cero.",
+      "analisis_civico": "El semáforo de la deuda de tu estado o municipio es público: si está en endeudamiento elevado, la ley no le permite aumentar su financiamiento neto.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf",
+      "ref": "ref-ldf",
+      "texto_oficial": "Artículo 45.- Los resultados obtenidos de acuerdo con la medición de los indicadores a que hace referencia el artículo anterior, serán publicados en el Sistema de Alertas, el cual clasificará a cada uno de los Entes Públicos de acuerdo con los siguientes niveles: I. Endeudamiento sostenible; II. Endeudamiento en observación, y III. Endeudamiento elevado. […] III. Un nivel de endeudamiento elevado tendrá un Techo de Financiamiento Neto igual a cero.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 10-05-2022. Cotejado el 09-10-2026."
     },
     {
       "id": "dof_reforma_judicial",
       "icono": "⚖️",
-      "ley": "Decreto Constitucional del Poder Judicial (DOF 15/09/2024)",
-      "precepto": "Decreto de Reforma Constitucional en Materia del Poder Judicial",
-      "denominacion": "Reforma Constitucional al PJF: Elección Popular, Extinción de Fideicomisos y Tope Salarial",
-      "categoria": "Judicial",
-      "precepto_resumen": "Reforma estructural a los artículos 94, 96, 97, 98, 99, 100 y 127 de la CPEUM para elegir juzgadores por voto ciudadano, reducir la SCJN a 9 ministros y eliminar fideicomisos.",
-      "texto_oficial": "Se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de reforma del Poder Judicial: Las ministras y ministros de la Suprema Corte de Justicia de la Nación, magistradas y magistrados de Circuito y juezas y jueces de Distrito serán electos de manera libre, directa y secreta por la ciudadanía... En ningún caso la remuneración de las y los servidores públicos del Poder Judicial podrá ser mayor a la establecida para el Presidente en el Presupuesto de Egresos correspondiente... Los fondos y fideicomisos deberán extinguirse y enterarse a la Tesorería de la Federación.",
-      "analisis_civico": "Es la mayor reconfiguración del sistema judicial mexicano en un siglo: somete a los juzgadores al voto popular, extingue 13 fideicomisos millonarios y elimina los privilegios salariales que violaban el Art. 127.",
-      "aplicacion_auditavision": "Pestaña 4 (Poder Judicial de la Federación) y Pestaña 6 (Marco Legal).",
-      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024"
+      "ley": "Decreto de reforma constitucional del Poder Judicial (DOF 15-09-2024)",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Artículo Único y transitorios Segundo y Séptimo",
+      "denominacion": "Reforma judicial de 2024: elección por voto y tope de remuneraciones",
+      "precepto_resumen": "Reformó, entre otros, los artículos 94, 96 y 100 de la Constitución: las personas juzgadoras se eligen por voto popular y sus remuneraciones se ajustan al tope del artículo 127.",
+      "analisis_civico": "Es la mayor reconfiguración del Poder Judicial en décadas. En lo que toca al dinero, sujetó todas las remuneraciones judiciales al tope del artículo 127 y ordenó extinguir los fondos y fideicomisos no previstos en ley (ver el transitorio Décimo).",
+      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "ref": "ref-reforma-judicial",
+      "texto_oficial": "Segundo.- El Proceso Electoral Extraordinario 2024-2025 dará inicio el día de la entrada en vigor del presente Decreto. […] Séptimo.- Las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación y de los Poderes Judiciales de las entidades federativas y de la Ciudad de México que estén en funciones al momento de la entrada en vigor del presente Decreto no podrán ser mayores a la establecida para el Presidente de la República en el presupuesto correspondiente, por lo que deberán ajustarse a los parámetros establecidos en el artículo 127 de esta Constitución en los casos que corresponda, sin responsabilidad para los Poderes Judiciales.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Decreto publicado en el DOF el 15-09-2024; sus transitorios se leen en el texto vigente de la Constitución. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_94_autonomia",
-      "icono": "⚖️",
-      "ley": "Constitución Política (Poder Judicial de la Federación)",
-      "precepto": "Artículo 94 Constitucional",
-      "denominacion": "Administración de la SCJN, Autonomía Presupuestal y Armonización Salarial",
-      "categoria": "Judicial",
-      "precepto_resumen": "Establece el ejercicio del Poder Judicial de la Federación en una Suprema Corte de 9 integrantes, su autonomía de gestión y la sujeción de sus percepciones al tabulador del Art. 127.",
-      "texto_oficial": "Se deposita el ejercicio del Poder Judicial de la Federación en una Suprema Corte de Justicia de la Nación, en un Tribunal de Disciplina Judicial, en Tribunales Colegiados de Circuito, en Tribunales Colegiados de Apelación y en Juzgados de Distrito... La Suprema Corte de Justicia de la Nación se compondrá de nueve integrantes, Ministras y Ministros, y funcionará en Pleno. Su presidencia se renovará cada dos años de manera rotatoria... La remuneración que perciban por su servicio los Ministros de la Suprema Corte, los Magistrados de Circuito, los Jueces de Distrito... no podrá ser mayor a la establecida para el Presidente de la República en el presupuesto correspondiente.",
-      "analisis_civico": "Armoniza la autonomía judicial con el principio republicano de austeridad, eliminando la interpretación histórica que permitía a los ministros ganar más de $206,000 pesos netos mediante amparos contra la LFPRH.",
-      "aplicacion_auditavision": "Pestaña 4 (SCJN) y Pestaña 6 (Glosario y Marco Legal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "icono": "🏛️",
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Artículo 94",
+      "denominacion": "Integración de la Suprema Corte y remuneración judicial",
+      "precepto_resumen": "La Suprema Corte se compone de nueve integrantes y funciona en Pleno, y con aprobación del Pleno puede funcionar en dos secciones; la administración del Poder Judicial está a cargo de un órgano de administración judicial, y ninguna remuneración judicial puede superar la de la persona titular de la Presidencia.",
+      "analisis_civico": "Quien administra el dinero de la Corte y de los tribunales ya no es el Consejo de la Judicatura sino el Órgano de Administración Judicial; su presupuesto ejercido se publica cada trimestre.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum-control-constitucional",
+      "texto_oficial": "La administración del Poder Judicial de la Federación estará a cargo de un órgano de administración judicial, mientras que la disciplina de su personal estará a cargo del Tribunal de Disciplina Judicial, […] La Suprema Corte de Justicia de la Nación se compondrá de nueve integrantes, Ministras y Ministros, y funcionará en Pleno; también, con aprobación del Pleno, podrá funcionar en dos secciones. […] La remuneración que perciban por sus servicios las Ministras y los Ministros de la Suprema Corte, las Magistradas y los Magistrados de Circuito, las Juezas y los Jueces de Distrito, las Magistradas y los Magistrados del Tribunal de Disciplina Judicial, las Magistradas y los Magistrados Electorales y demás personal del Poder Judicial de la Federación, no podrá ser mayor a la establecida para la persona titular de la Presidencia de la República en el presupuesto correspondiente y no será disminuida durante su encargo.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "cpeum_art_96_eleccion_scjn",
       "icono": "🗳️",
-      "ley": "Constitución Política (Poder Judicial de la Federación)",
-      "precepto": "Artículo 96 Constitucional",
-      "denominacion": "Elección Popular Extraordinaria y Democrática de Ministras y Ministros",
-      "categoria": "Judicial",
-      "precepto_resumen": "Regula el procedimiento inédito de elección ciudadana por voto directo, libre y secreto de las ministras y ministros de la Suprema Corte el primer domingo de junio de 2025.",
-      "texto_oficial": "Las y los Ministros de la Suprema Corte de Justicia de la Nación... serán electos de manera directa y secreta por la ciudadanía a nivel nacional en las elecciones ordinarias del año que corresponda... El Senado de la República publicará la convocatoria y los tres Poderes de la Unión integrarán Comités de Evaluación para conformar las listas definitivas de candidaturas.",
-      "analisis_civico": "Transición de un modelo de designación por cuotas partidistas en el Senado a la legitimación democrática en urnas, marcando la renovación total del Pleno de la SCJN a partir de septiembre de 2025.",
-      "aplicacion_auditavision": "Pestaña 4 (SCJN y Pleno) y Pestaña 6 (Glosario y Marco Legal).",
-      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+      "ley": "Constitución Política de los Estados Unidos Mexicanos",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Artículo 96, párrafo primero",
+      "denominacion": "Elección popular de ministras, ministros, magistraturas y juzgados",
+      "precepto_resumen": "Las ministras y los ministros, las magistraturas y las personas juzgadoras de distrito se eligen por voto libre, directo y secreto el día de las elecciones federales ordinarias que corresponda.",
+      "analisis_civico": "La primera elección fue extraordinaria (proceso 2024-2025, por el transitorio Segundo del decreto); las siguientes coinciden con las elecciones federales ordinarias.",
+      "url_oficial": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+      "ref": "ref-cpeum-control-constitucional",
+      "texto_oficial": "Las Ministras y Ministros de la Suprema Corte de Justicia de la Nación, Magistradas y Magistrados de la Sala Superior y las salas regionales del Tribunal Electoral del Poder Judicial de la Federación, Magistradas y Magistrados del Tribunal de Disciplina Judicial, Magistradas y Magistrados de Circuito y Juezas y Jueces de Distrito, serán elegidos de manera libre, directa y secreta por la ciudadanía el día que se realicen las elecciones federales ordinarias del año que corresponda conforme al siguiente procedimiento:",
+      "aplicacion_auditavision": "",
+      "vigencia": "Texto vigente; última reforma DOF 07-10-2026. Cotejado el 09-10-2026."
     },
     {
       "id": "dof_reforma_transitorio_fideicomisos",
-      "icono": "🏛️",
-      "ley": "Decreto Constitucional del Poder Judicial (DOF 15/09/2024)",
-      "precepto": "Artículo Cuarto Transitorio del Decreto de Reforma Judicial",
-      "denominacion": "Extinción de los 13 Fideicomisos Judiciales y Reintegro de $15,434 mdp a TESOFE",
-      "categoria": "Judicial",
-      "precepto_resumen": "Mandata la extinción perentoria de todos los fondos y fideicomisos fiduciarios del PJF y el reintegro de sus remanentes de más de $15,400 mdp a la Tesorería de la Federación.",
-      "texto_oficial": "Los órganos del Poder Judicial de la Federación que administren fondos o fideicomisos a que se refieren los artículos transitorios de las leyes que resulten aplicables, deberán realizar los actos jurídicos y administrativos conducentes para su extinción... Los recursos remanentes, así como los productos y rendimientos de dichos fondos y fideicomisos, deberán reintegrarse a la Tesorería de la Federación.",
-      "analisis_civico": "Pone fin a la retención de miles de millones de pesos de subejercicios presupuestales en fideicomisos de Nacional Financiera para pensiones complementarias y gastos médicos privados, reorientándolos al gasto social federal.",
-      "aplicacion_auditavision": "Pestaña 4 (SCJN Fideicomisos) y Pestaña 1 (Alertas ASF).",
-      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024"
+      "icono": "🔒",
+      "ley": "Decreto de reforma constitucional del Poder Judicial (DOF 15-09-2024)",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Transitorio Décimo, párrafos segundo y tercero",
+      "denominacion": "Extinción de fondos y fideicomisos judiciales no previstos en ley",
+      "precepto_resumen": "Ordena extinguir los fondos, fideicomisos, mandatos o contratos análogos del Poder Judicial no previstos en ley y enterar sus recursos a la Tesorería en un plazo máximo de noventa días naturales.",
+      "analisis_civico": "El mandato es del transitorio Décimo (no del Cuarto, como se decía antes). El decreto no dice cuántos fideicomisos ni cuánto dinero había: ese monto debe salir de los informes de Hacienda o de la Auditoría Superior y por ahora lo dejamos pendiente.",
+      "pendiente": "Cuántos fideicomisos se extinguieron y cuánto se enteró a la Tesorería: falta integrar a la plataforma el informe oficial que lo documente.",
+      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "ref": "ref-reforma-judicial",
+      "texto_oficial": "Los órganos del Poder Judicial de la Federación y, en su caso, de las entidades federativas, llevarán a cabo los actos y procesos necesarios para extinguir los fondos, fideicomisos, mandatos o contratos análogos que no se encuentren previstos en una ley secundaria, por lo que tendrán un plazo máximo de noventa días naturales posteriores a la entrada en vigor del presente Decreto para enterar la totalidad de los recursos remanentes en dichos instrumentos, así como los productos y aprovechamientos derivados de los mismos, a la Tesorería de la Federación o de las entidades federativas, según corresponda. […] Los recursos federales a que se refiere el párrafo anterior deberán ser concentrados por concepto de aprovechamientos en la Tesorería de la Federación y se destinarán por la Secretaría de Hacienda y Crédito Público a la implementación del presente Decreto y a los demás fines que esta determine.",
+      "aplicacion_auditavision": "",
+      "vigencia": "Decreto publicado en el DOF el 15-09-2024; sus transitorios se leen en el texto vigente de la Constitución. Cotejado el 09-10-2026."
     },
     {
       "id": "manual_remuneraciones_pjf_norma",
       "icono": "📋",
-      "ley": "Manual de Remuneraciones del Poder Judicial de la Federación",
-      "precepto": "Disposiciones Generales del Tabulador Salarial y Compensaciones del PJF",
-      "denominacion": "Tabuladores Salariales, Gastos Médicos (SGMM) y Seguro de Separación (SSI)",
-      "categoria": "Judicial",
-      "precepto_resumen": "Establece los límites y conceptos del paquete de remuneraciones, separando el sueldo base de las prestaciones institucionales y seguros privados.",
-      "texto_oficial": "El presente Manual regula las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación... Ninguna persona servidora pública podrá percibir una remuneración mayor a la establecida en el tabulador respectivo ni a la del Presidente de la República. Las asignaciones por concepto de seguros institucionales y prestaciones extraordinarias se ajustarán a los techos presupuestales autorizados en el PEF.",
-      "analisis_civico": "Es el documento normativo donde se desglosan los más de $1.7 mdp anuales por ministro en prestaciones complementarias y se fijan los salarios de los 35 colaboradores de cada ponencia.",
-      "aplicacion_auditavision": "Pestaña 4 (Prestaciones y Asesores) y Pestaña 7 (Referencias).",
-      "url_oficial": "https://www.dof.gob.mx/"
+      "ley": "Manual de remuneraciones del Poder Judicial de la Federación 2026 (DOF 27-02-2026)",
+      "grupo": "Judicial",
+      "etapa": "ejerce",
+      "precepto": "Considerando Cuarto y numeral 8.1",
+      "denominacion": "Remuneraciones y seguros del Poder Judicial en 2026",
+      "precepto_resumen": "Regula las remuneraciones del Poder Judicial para 2026, conforme al tope constitucional. El seguro de gastos médicos mayores y el de separación individualizado quedan para el personal de mando medio y operativo.",
+      "analisis_civico": "Aquí se ve, renglón por renglón, qué prestaciones conserva cada nivel del Poder Judicial. Los seguros privados de gastos médicos y de separación ya no figuran para quienes encabezan los órganos, solo para mandos medios y personal operativo.",
+      "url_oficial": "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF",
+      "ref": "ref-manual-remun-pjf",
+      "texto_oficial": "la remuneración que perciban por sus servicios las Ministras y los Ministros de la Suprema Corte de Justicia de la Nación, las Magistradas y los Magistrados de Circuito, las Juezas y los Jueces de Distrito, las Magistradas y los Magistrados del Tribunal de Disciplina Judicial, las Magistradas y los Magistrados Electorales y demás personal del Poder Judicial de la Federación, no podrá ser mayor a la establecida para la persona titular de la Presidencia de la República en el presupuesto correspondiente y no será disminuida durante su encargo; […] Estos seguros los protegen en materia de vida, retiro, incapacidad e invalidez total y permanente, gastos médicos mayores (personal de mando medio y operativo) y de separación individualizado (personal de mando medio).",
+      "aplicacion_auditavision": "",
+      "vigencia": "Publicado en el DOF el 27-02-2026; rige en 2026. Cotejado el 09-10-2026."
     }
   ]
 ,
@@ -15120,14 +15539,16 @@ window.AUDIT_DB = {
       "monto_mdp": 232882,
       "pct_pib": 0.7,
       "estado": "oficial",
-      "lectura": "México gastó $232,882 millones de pesos en proteger el ambiente y causó un daño de $1,382,214 millones. Por cada peso destinado a proteger, se deterioraron cerca de seis.",
+      "lectura": "El sector público consolidado de México (gobierno federal, entidades, municipios y empresas públicas) ejerció $232,882 millones de pesos en protección ambiental (INEGI CEEM 2024, pág. 2), frente a un costo por agotamiento y degradación ambiental del país (CTADA) de $1,382,214 millones (4.1% del PIB). Por cada peso del erario destinado a proteger, el capital natural resintió $5.94 pesos de deterioro.",
+      "cobertura": "Sector público consolidado exclusivamente (excluye sector privado y hogares)",
+      "fuente_boletin": "INEGI, Boletín de Prensa Cuentas Económicas y Ecológicas 2024, página 2",
       "ratio_dano_sobre_gasto": 5.94,
       "ratio_estado": "derivado"
     },
     "puntos_ciegos": [
       {
-        "titulo": "Un crecimiento que en términos ecológicos puede ser negativo",
-        "texto": "Si en un año la economía crece 3% y el costo ambiental es de 4.1% del PIB, el país produjo más de lo que su capital natural repuso. El indicador que se anuncia no permite ver esa resta, porque el PIB no la hace."
+        "titulo": "El PIB no descuenta el consumo ni el deterioro del capital natural",
+        "texto": "El PIB tradicional mide el valor bruto de la producción generada, pero omite el desgaste ecológico necesario para obtenerla. Para conocer la verdadera renta económica neta disponible sin agotar el patrimonio natural, el INEGI calcula el Producto Interno Neto Ecológico (PINE), deduciendo del PIB tanto el consumo de capital fijo como los Costos Totales por Agotamiento y Degradación Ambiental (CTADA, equivalentes al 4.1% del PIB en 2024). Sin esta corrección contable, un país puede reportar crecimiento económico mientras agota sus reservas de agua subterránea, deforesta selvas y contamina cuencas."
       },
       {
         "titulo": "La cuenta ambiental no aparece en el Presupuesto de Egresos",
@@ -15174,7 +15595,7 @@ window.AUDIT_DB = {
     ]
   },
   "huachicol_fiscal": {
-    "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ninguna autoridad ha publicado todavía una cifra de lo que se pierde; lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
+    "nota": "Solo lo lee el auditor. Ingreso que no entra, no gasto: no se suma a la deuda ni a las obras. Ni el SAT ni Hacienda han publicado todavía una cifra de lo que se pierde (falta de transparencia de las dos dependencias); lo que existe son hechos oficiales y estimaciones no oficiales, cada uno con su estado.",
     "fuentes": {
       "pff25": {
         "doc": "La Jornada, «Asciende a $600 mil millones el daño por el huachicol fiscal», 3 de octubre de 2025 (comparecencia de la Procuradora Fiscal de la Federación, Grisel Galeano García, ante la Comisión de Hacienda de la Cámara de Diputados)",
@@ -15295,7 +15716,7 @@ window.AUDIT_DB = {
         "total_mdp": 123000,
         "pemex_mdp": 56000,
         "impuestos_mdp": 67000,
-        "por_que_pendiente": "Estimación de un organismo civil, no de la autoridad."
+        "por_que_pendiente": "Estimación de un organismo civil, no de la autoridad: queda pendiente porque el SAT y Hacienda no han transparentado la suya."
       },
       {
         "estado": "pendiente",
@@ -15305,7 +15726,7 @@ window.AUDIT_DB = {
         "total_mdp": 600000,
         "querellado_mdp": 16000,
         "texto": "daño al erario por huachicol fiscal que la Procuradora Fiscal de la Federación mencionó ante la Comisión de Hacienda de la Cámara de Diputados el 2 de octubre de 2025, sobre los casos en investigación; de eso, unos $16,000 mdp estaban en querellas presentadas. No es una cifra anual. El 9 de octubre, en su conferencia, la Presidenta aclaró que «no hay un dato de Secretaría de Hacienda oficial de cuánto recurso significa el contrabando de combustible» y que la cifra venía de un diputado; el secretario de Hacienda precisó que los $16,000 mdp son el saldo histórico de los casos querellados.",
-        "por_que_pendiente": "No hay documento oficial que la sostenga y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas."
+        "por_que_pendiente": "Hacienda no ha publicado un documento que la sostenga, y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas."
       }
     ]
   },
@@ -15541,7 +15962,7 @@ window.AUDIT_DB = {
       "perdida_segundo": 46.3,
       "proyeccion_tipo": "subsidio_transicion",
       "proyeccion_anios": 25,
-      "proyeccion_resumen": "El costo que el simulador consolida suma los $113,327.7 mdp que la ASF fijó como costo de cancelar el NAIM (estudio de marzo de 2021) y $88,107 mdp de construcción del AIFA, cifra esta última sin fuente oficial. La proyección de subsidio a 25 años queda pendiente de documento.",
+      "proyeccion_resumen": "El costo que el simulador consolida suma los $113,327.7 mdp que la ASF fijó como costo de cancelar el NAIM (estudio de marzo de 2021) y $88,107 mdp de construcción del AIFA, cifra esta última pendiente: no consta en un documento oficial de la Sedena, que es la dependencia obligada a transparentarla. La proyección de subsidio a 25 años sigue pendiente por la misma falta de rendición de cuentas.",
       "desglose_costos_operacion": [
         {
           "rubro": "Pago de intereses y servicio de bonos del NAIM (vía TUA AICM)",
@@ -16002,7 +16423,15 @@ window.AUDIT_DB = {
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 13,
     "sobrecosto_conjunto_pct": 242.5,
-    "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas; ninguno se escribe a mano. El sobrecosto del conjunto compara la inversión real total contra la presupuestada total, de modo que cada obra pesa según su tamaño y no todas por igual."
+    "cobertura_obras": {
+      "total_obras": 13,
+      "con_operacion_documentada": 3,
+      "pendientes_operacion": 10,
+      "pct_cobertura": 23.1
+    },
+    "perdida_operativa_empresas_mdp": 2194.4,
+    "apoyo_presupuestal_fobaproa_ramo34_mdp": 62489.4,
+    "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas. Cobertura: 3 obras con estados financieros oficiales de operación (Tren Maya S.A. de C.V., AIFA S.A. de C.V. y el Ramo 34 del IPAB; cobertura 23.1%); las otras 10 obras se mantienen transparentemente en estado pendiente y no se asumen como costo cero."
   },
   "operacion_oficial": {
     "nota": "Resultado de operar de las obras que publican estados financieros propios. Solo el auditor lo lee: sustituye, en memoria, la pérdida, los costos y la proyección que el simulador traía sin documento. Cifras en millones de pesos; la resta sin transferencias es un cálculo de Auditavisión (derivado).",
@@ -16065,7 +16494,7 @@ window.AUDIT_DB = {
         ]
       },
       "dos-bocas": {
-        "texto": "Lo más cercano en un documento oficial: en 2024 Pemex aportó $42,696.7 mdp al capital de PTI Infraestructura de Desarrollo, la filial que construye la refinería, y la filial pagó $41,998.3 mdp sin IVA por 192 contratos (ASF, CP 2024, auditoría 247). Son pagos de construcción y arranque, no de operación. La refinería se arrienda a Pemex, que la opera: el primer tren de crudo entró en operación en febrero de 2025 y el segundo en mayo (Pemex, Cuenta Pública 2025). De septiembre de 2025 a junio de 2026 procesó en promedio 188 mil barriles diarios; su mejor mes fue diciembre de 2025, con 263 mil, el 77 % de su capacidad (Segundo Informe de Gobierno 2026, p. 378). Desde 2025 Pemex consolida a la filial sin publicar sus estados por separado, así que lo que cuesta operar la refinería y lo que deja siguen sin documento.",
+        "texto": "Lo más cercano en un documento oficial: en 2024 Pemex aportó $42,696.7 mdp al capital de PTI Infraestructura de Desarrollo, la filial que construye la refinería, y la filial pagó $41,998.3 mdp sin IVA por 192 contratos (ASF, CP 2024, auditoría 247). Son pagos de construcción y arranque, no de operación. La refinería se arrienda a Pemex, que la opera: el primer tren de crudo entró en operación en febrero de 2025 y el segundo en mayo (Pemex, Cuenta Pública 2025). De septiembre de 2025 a junio de 2026 procesó en promedio 188 mil barriles diarios; su mejor mes fue diciembre de 2025, con 263 mil, el 77 % de su capacidad (Segundo Informe de Gobierno 2026, p. 378). Desde 2025 Pemex consolida a la filial sin publicar sus estados por separado, así que lo que cuesta operar la refinería y lo que deja siguen pendientes por falta de transparencia de Pemex.",
         "desglose_titulo": "Lo que pagó en 2024 la filial que construye la refinería (ASF)",
         "desglose_estado": "oficial",
         "desglose": [
@@ -16698,7 +17127,7 @@ window.AUDIT_DB = {
           "sobrecosto_pct": "pendiente"
         },
         "definiciones": {
-          "inversion_real_mdp": "Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA que siguen sin fuente oficial."
+          "inversion_real_mdp": "Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA, pendientes porque no constan en un documento oficial de la Sedena, que debe transparentarlos."
         },
         "contradicciones": [
           "La ASF publicó en febrero de 2021 que cancelar el NAIM costó $331,996 mdp (auditoría 1394-DE, Cuenta Pública 2019) y en marzo de 2021 corrigió la cifra a $113,327.7 mdp, en un estudio que declara inconsistencias en la cuantificación original. El simulador usaba la cifra retirada.",
@@ -17544,6 +17973,8 @@ window.AUDIT_DB = {
         "anual_mdp": 80200.1,
         "estado": "pendiente",
         "fuente": "Suma de las obras evaluadas en la subpesta\u00f1a 2.2; sus fuentes obra por obra est\u00e1n pendientes de verificaci\u00f3n",
+        "motivo": "Es la suma de la pérdida de operación que registra el simulador de megaobras. Varias obras no tienen un documento oficial de su costo de operación e ingresos: las dependencias que las operan (Sedena, Pemex, Fonatur) no los han transparentado obra por obra.",
+        "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta",
         "que": "Lo que cuesta cada a\u00f1o mantener andando obras cuya operaci\u00f3n ingresa menos de lo que gasta. No es el sobrecosto de construirlas: es el d\u00e9ficit de tenerlas abiertas.",
         "culpa": true
       },
@@ -25099,7 +25530,12 @@ window.AUDIT_DB = {
       "litros_millones": 109.4,
       "periodo": "1-09-2025 a 30-06-2026",
       "fuente": "ig2",
-      "texto": "Con sistemas de revisión no intrusiva en las 50 aduanas se detectaron 109.4 millones de litros de hidrocarburos no declarados, con una recaudación asociada de $4,600 mdp de IVA e IEPS. Son diez meses, no un año, y es lo que se cobró, no lo que se evade.",
+      "texto": "Con sistemas de revisión no intrusiva en las 50 aduanas se detectaron 109.4 millones de litros de hidrocarburos no declarados, con una recaudación asociada de $4,600 mdp de IVA e IEPS. El periodo oficial documentado comprende del 1 de septiembre de 2025 al 30 de junio de 2026 (10 meses exactos · 304 días · 26,265,600 segundos; tasa observada de $175.13/segundo). Su equivalencia anualizada proyectada es de $5,523.0 mdp con chip derivado. Es recaudación efectivamente cobrada por producto asegurado, no estimación de evasión total.",
+      "dias_documentados": 304,
+      "segundos_documentados": 26265600,
+      "tasa_segundo_documentada": 175.13,
+      "anualizado_proyectado_mdp": 5523.0,
+      "anualizado_estado": "derivado",
       "declarado_mdp": 600000,
       "declarado_texto": "La cifra que la Procuradora Fiscal mencionó ante diputados el 2-10-2025. El 9-10-2025 la Presidenta aclaró en su conferencia que «no hay un dato de Secretaría de Hacienda oficial de cuánto recurso significa el contrabando de combustible» y que la cifra venía de un diputado. No es oficial ni anual.",
       "declarado_fuentes": [
@@ -25109,7 +25545,9 @@ window.AUDIT_DB = {
     }
   },
   "costo_vivo_megaobras": {
-    "nota": "Interpretación de Auditavisión para la «Simulación en vivo» del módulo 2. La escribe herramientas/integrar_costo_vivo_megaobras.py; el motor calcula los intereses con la tasa.",
+    "nota": "Escenario financiero simulado (hipotético) para el módulo 2. Aplica una tasa de interés sobre montos históricos para estimar el costo de oportunidad crediticio. IMPORTANTE: Los intereses no corresponden a pagos devengados comprobados de las obras; se presentan como simulación financiera independiente y no deben sumarse a costos devengados oficiales.",
+    "tipo_analisis": "escenario_hipotetico_simulado",
+    "excluido_de_costos_devengados": true,
     "tasa": {
       "pct": 7.84,
       "costo_financiero_mdp": 1572073.3,
@@ -25466,6 +25904,2906 @@ window.AUDIT_DB = {
             "fuente": "asf_pm08"
           }
         ]
+      }
+    }
+  },
+  "finanzas_sexenales": {
+    "consulta": "10 de octubre de 2026",
+    "nota": "Series anuales del sector público presupuestario para el Radar hacendario (radar-hacendario.html), de 1990 a 2025: montos en millones de pesos y su porcentaje del PIB, ambos como los publica Hacienda en sus Estadísticas Oportunas de Finanzas Públicas. Una sola fuente y una sola definición para todos los años.",
+    "fuentes": {
+      "EOFP_ING": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Ingresos Presupuestarios del Sector Público",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Ingresos Presupuestarios › «Ingresos Presupuestarios del Sector Público», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
+      },
+      "EOFP_GASTO": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Gasto Neto del Sector Público Presupuestario",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Gastos Presupuestarios › «Gasto Neto del Sector Público Presupuestario», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
+      },
+      "EOFP_INV": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Inversión física presupuestaria",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Gastos Presupuestarios › «Inversión física presupuestaria», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
+      },
+      "EOFP_CF": {
+        "corto": "SHCP, Estadísticas Oportunas de Finanzas Públicas: Costo Financiero del Sector Público Presupuestario",
+        "doc": "Secretaría de Hacienda y Crédito Público, Estadísticas Oportunas de Finanzas Públicas. Reportes › Ingreso, gasto y financiamiento del sector público › Gastos Presupuestarios › «Costo Financiero del Sector Público Presupuestario», cuadro «Pesos corrientes multianual», periodicidad anual, renglón «Total»; en millones de pesos y en porcentajes del PIB. Información a agosto de 2026, actualizada el 30 de septiembre de 2026.",
+        "url": "http://presto.hacienda.gob.mx/EstoporLayout/estadisticas.jsp"
+      },
+      "BANXICO_IA1994": {
+        "corto": "Banxico, Informe Anual 1994, p. 80",
+        "url": "https://www.banxico.org.mx/publicaciones-y-prensa/informes-anuales/%7B0F2D589F-92A4-9C48-C456-643595B46CE5%7D.pdf"
+      },
+      "ASF_IR2012": {
+        "corto": "ASF, Informe del Resultado CP 2012, Tomo Ejecutivo, p. 67",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2012i/Documentos/InformeEjecutivo/Tomo%20Ejecutivo%20IR%202012.pdf"
+      },
+      "ASF_IGE2018": {
+        "corto": "ASF, Informe General Ejecutivo CP 2018, p. 258 del PDF",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/IGE_2018_PROTEGIDO.pdf"
+      },
+      "ASF_IGE2022": {
+        "corto": "ASF, Informe General Ejecutivo CP 2022, pp. 149-150",
+        "url": "https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/2022_IGE_a.pdf"
+      },
+      "SHCP_C4_2025": {
+        "corto": "SHCP, Comunicado 4/2025 (30 ene. 2025)",
+        "url": "https://www.gob.mx/shcp/prensa/comunicado-no-4-informes-sobre-la-situacion-economica-las-finanzas-publicas-y-la-deuda-publica-al-cuarto-trimestre-de-2024"
+      },
+      "CGPE2027_HIST": {
+        "corto": "SHCP, Criterios Generales de Política Económica 2027, cuadro de RFSP y SHRFSP 2020-2026 (p. 53 del PDF)",
+        "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf"
+      }
+    },
+    "anual": {
+      "ingresos": {
+        "1990": {
+          "mdp": 187701.6,
+          "pib": 19.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1991": {
+          "mdp": 254383.0,
+          "pib": 20.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1992": {
+          "mdp": 295478.2,
+          "pib": 20.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1993": {
+          "mdp": 290612.5,
+          "pib": 17.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1994": {
+          "mdp": 326858.4,
+          "pib": 17.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1995": {
+          "mdp": 418375.5,
+          "pib": 17.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1996": {
+          "mdp": 578981.4,
+          "pib": 17.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1997": {
+          "mdp": 734664.7,
+          "pib": 17.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1998": {
+          "mdp": 781947.6,
+          "pib": 15.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "1999": {
+          "mdp": 954816.5,
+          "pib": 15.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2000": {
+          "mdp": 1178813.1,
+          "pib": 16.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2001": {
+          "mdp": 1271376.6,
+          "pib": 17.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2002": {
+          "mdp": 1387235.5,
+          "pib": 17.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2003": {
+          "mdp": 1600286.3,
+          "pib": 19.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2004": {
+          "mdp": 1771314.2,
+          "pib": 19.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2005": {
+          "mdp": 1947816.2,
+          "pib": 19.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2006": {
+          "mdp": 2263602.6,
+          "pib": 20.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2007": {
+          "mdp": 2485785.0,
+          "pib": 20.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2008": {
+          "mdp": 2860926.4,
+          "pib": 22.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2009": {
+          "mdp": 2817185.5,
+          "pib": 22.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2010": {
+          "mdp": 2960443.0,
+          "pib": 21.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2011": {
+          "mdp": 3271080.1,
+          "pib": 21.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2012": {
+          "mdp": 3514529.5,
+          "pib": 21.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2013": {
+          "mdp": 3800415.6,
+          "pib": 22.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2014": {
+          "mdp": 3983056.1,
+          "pib": 22.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2015": {
+          "mdp": 4266989.5,
+          "pib": 22.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2016": {
+          "mdp": 4845530.3,
+          "pib": 23.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2017": {
+          "mdp": 4947608.3,
+          "pib": 22.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2018": {
+          "mdp": 5115111.1,
+          "pib": 21.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2019": {
+          "mdp": 5384984.3,
+          "pib": 21.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2020": {
+          "mdp": 5339990.5,
+          "pib": 22.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2021": {
+          "mdp": 5960944.6,
+          "pib": 22.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2022": {
+          "mdp": 6602829.7,
+          "pib": 22.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2023": {
+          "mdp": 7039359.8,
+          "pib": 22.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2024": {
+          "mdp": 7492928.9,
+          "pib": 22.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        },
+        "2025": {
+          "mdp": 8228666.3,
+          "pib": 23.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_ING"
+          ]
+        }
+      },
+      "gasto": {
+        "1990": {
+          "mdp": 204215.3,
+          "pib": 21.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1991": {
+          "mdp": 227933.1,
+          "pib": 18.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1992": {
+          "mdp": 249287.3,
+          "pib": 17.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1993": {
+          "mdp": 282066.4,
+          "pib": 17.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1994": {
+          "mdp": 326250.7,
+          "pib": 17.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1995": {
+          "mdp": 421549.9,
+          "pib": 17.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1996": {
+          "mdp": 582241.6,
+          "pib": 17.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1997": {
+          "mdp": 754199.2,
+          "pib": 18.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1998": {
+          "mdp": 829511.3,
+          "pib": 16.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "1999": {
+          "mdp": 1007667.3,
+          "pib": 16.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2000": {
+          "mdp": 1239266.3,
+          "pib": 17.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2001": {
+          "mdp": 1311669.8,
+          "pib": 17.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2002": {
+          "mdp": 1459951.1,
+          "pib": 18.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2003": {
+          "mdp": 1648243.1,
+          "pib": 20.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2004": {
+          "mdp": 1792296.7,
+          "pib": 19.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2005": {
+          "mdp": 1958012.1,
+          "pib": 19.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2006": {
+          "mdp": 2255221.3,
+          "pib": 20.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2007": {
+          "mdp": 2482503.5,
+          "pib": 20.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2008": {
+          "mdp": 2872608.4,
+          "pib": 22.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2009": {
+          "mdp": 3088876.8,
+          "pib": 24.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2010": {
+          "mdp": 3333948.4,
+          "pib": 23.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2011": {
+          "mdp": 3631315.9,
+          "pib": 23.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2012": {
+          "mdp": 3920305.0,
+          "pib": 23.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2013": {
+          "mdp": 4178321.9,
+          "pib": 24.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2014": {
+          "mdp": 4528045.2,
+          "pib": 25.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2015": {
+          "mdp": 4892875.9,
+          "pib": 25.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2016": {
+          "mdp": 5347754.6,
+          "pib": 25.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2017": {
+          "mdp": 5182638.4,
+          "pib": 23.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2018": {
+          "mdp": 5589351.3,
+          "pib": 23.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2019": {
+          "mdp": 5792623.9,
+          "pib": 23.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2020": {
+          "mdp": 5995025.8,
+          "pib": 24.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2021": {
+          "mdp": 6735819.6,
+          "pib": 25.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2022": {
+          "mdp": 7554133.3,
+          "pib": 25.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2023": {
+          "mdp": 8121948.3,
+          "pib": 25.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2024": {
+          "mdp": 9164185.6,
+          "pib": 27.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        },
+        "2025": {
+          "mdp": 9596555.7,
+          "pib": 27.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_GASTO"
+          ]
+        }
+      },
+      "inversion": {
+        "1990": {
+          "mdp": 22843.1,
+          "pib": 2.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1991": {
+          "mdp": 31836.4,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1992": {
+          "mdp": 37832.9,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1993": {
+          "mdp": 36080.1,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1994": {
+          "mdp": 47771.3,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1995": {
+          "mdp": 51891.0,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1996": {
+          "mdp": 75883.8,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1997": {
+          "mdp": 101054.9,
+          "pib": 2.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1998": {
+          "mdp": 112216.8,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "1999": {
+          "mdp": 117366.9,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2000": {
+          "mdp": 139356.2,
+          "pib": 2.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2001": {
+          "mdp": 141276.4,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2002": {
+          "mdp": 146276.1,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2003": {
+          "mdp": 176985.8,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2004": {
+          "mdp": 212280.2,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2005": {
+          "mdp": 220110.5,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2006": {
+          "mdp": 256308.6,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2007": {
+          "mdp": 317157.9,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2008": {
+          "mdp": 373961.1,
+          "pib": 2.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2009": {
+          "mdp": 549325.0,
+          "pib": 4.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2010": {
+          "mdp": 622501.0,
+          "pib": 4.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2011": {
+          "mdp": 650134.9,
+          "pib": 4.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2012": {
+          "mdp": 680975.6,
+          "pib": 4.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2013": {
+          "mdp": 735500.5,
+          "pib": 4.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2014": {
+          "mdp": 819940.9,
+          "pib": 4.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2015": {
+          "mdp": 772549.1,
+          "pib": 4.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2016": {
+          "mdp": 728417.5,
+          "pib": 3.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2017": {
+          "mdp": 569551.2,
+          "pib": 2.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2018": {
+          "mdp": 617675.8,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2019": {
+          "mdp": 564482.9,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2020": {
+          "mdp": 653181.5,
+          "pib": 2.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2021": {
+          "mdp": 692030.6,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2022": {
+          "mdp": 935664.3,
+          "pib": 3.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2023": {
+          "mdp": 887119.6,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2024": {
+          "mdp": 1035297.4,
+          "pib": 3.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        },
+        "2025": {
+          "mdp": 770199.0,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_INV"
+          ]
+        }
+      },
+      "costo_financiero": {
+        "1990": {
+          "mdp": 67118.0,
+          "pib": 7.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1991": {
+          "mdp": 48226.6,
+          "pib": 3.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1992": {
+          "mdp": 40847.0,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1993": {
+          "mdp": 33333.3,
+          "pib": 2.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1994": {
+          "mdp": 32919.9,
+          "pib": 1.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1995": {
+          "mdp": 84769.0,
+          "pib": 3.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1996": {
+          "mdp": 110462.5,
+          "pib": 3.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1997": {
+          "mdp": 130187.2,
+          "pib": 3.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1998": {
+          "mdp": 111264.3,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "1999": {
+          "mdp": 164346.1,
+          "pib": 2.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2000": {
+          "mdp": 201017.1,
+          "pib": 2.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2001": {
+          "mdp": 188062.1,
+          "pib": 2.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2002": {
+          "mdp": 178374.9,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2003": {
+          "mdp": 190863.1,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2004": {
+          "mdp": 206830.3,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2005": {
+          "mdp": 210186.3,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2006": {
+          "mdp": 250065.0,
+          "pib": 2.2,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2007": {
+          "mdp": 238956.0,
+          "pib": 2.0,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2008": {
+          "mdp": 227112.6,
+          "pib": 1.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2009": {
+          "mdp": 262812.5,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2010": {
+          "mdp": 255755.1,
+          "pib": 1.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2011": {
+          "mdp": 273931.3,
+          "pib": 1.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2012": {
+          "mdp": 305118.5,
+          "pib": 1.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2013": {
+          "mdp": 314551.4,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2014": {
+          "mdp": 345973.7,
+          "pib": 1.9,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2015": {
+          "mdp": 408287.2,
+          "pib": 2.1,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2016": {
+          "mdp": 473019.7,
+          "pib": 2.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2017": {
+          "mdp": 533115.2,
+          "pib": 2.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2018": {
+          "mdp": 615040.6,
+          "pib": 2.5,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2019": {
+          "mdp": 666486.9,
+          "pib": 2.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2020": {
+          "mdp": 686085.0,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2021": {
+          "mdp": 686689.4,
+          "pib": 2.6,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2022": {
+          "mdp": 815221.0,
+          "pib": 2.8,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2023": {
+          "mdp": 1045085.9,
+          "pib": 3.3,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2024": {
+          "mdp": 1150427.1,
+          "pib": 3.4,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        },
+        "2025": {
+          "mdp": 1309957.9,
+          "pib": 3.7,
+          "est": "oficial",
+          "f": [
+            "EOFP_CF"
+          ]
+        }
+      }
+    },
+    "deuda": {
+      "salinas": {
+        "dFin": {
+          "v": 36.9,
+          "f": "BANXICO_IA1994",
+          "nota": "Deuda neta económica amplia de Banxico, no el SHRFSP: para 1994 no existe."
+        },
+        "pend": "Para 1988 no existe el saldo histórico de los requerimientos financieros (SHRFSP), que Hacienda publica desde 2000."
+      },
+      "zedillo": {
+        "dFin": {
+          "v": 30.7,
+          "f": "ASF_IR2012"
+        },
+        "mFin": {
+          "v": 2051001.7,
+          "f": "ASF_IR2012"
+        },
+        "pend": "Al recibir (1994) solo hay la deuda neta de Banxico, un indicador distinto del SHRFSP: no se restan."
+      },
+      "fox": {
+        "dIni": {
+          "v": 30.7,
+          "f": "ASF_IR2012"
+        },
+        "dFin": {
+          "v": 29.1,
+          "f": "ASF_IR2012"
+        },
+        "mIni": {
+          "v": 2051001.7,
+          "f": "ASF_IR2012"
+        },
+        "mFin": {
+          "v": 3135438.9,
+          "f": "ASF_IR2012"
+        }
+      },
+      "calderon": {
+        "dIni": {
+          "v": 29.1,
+          "f": "ASF_IR2012"
+        },
+        "dFin": {
+          "v": 37.2,
+          "f": "ASF_IGE2018",
+          "nota": "Publicada después con el PIB revisado; el informe de 2012 decía 36.8."
+        },
+        "mIni": {
+          "v": 3135438.9,
+          "f": "ASF_IR2012"
+        },
+        "mFin": {
+          "v": 5890846.1,
+          "f": "ASF_IGE2018"
+        }
+      },
+      "epn": {
+        "dIni": {
+          "v": 37.2,
+          "f": "ASF_IGE2018"
+        },
+        "dFin": {
+          "v": 44.9,
+          "f": "ASF_IGE2022"
+        },
+        "mIni": {
+          "v": 5890846.1,
+          "f": "ASF_IGE2018"
+        },
+        "mFin": {
+          "v": 10551718.5,
+          "f": "ASF_IGE2022"
+        }
+      },
+      "amlo": {
+        "dIni": {
+          "v": 44.9,
+          "f": "ASF_IGE2022"
+        },
+        "dFin": {
+          "v": 51.9,
+          "f": "CGPE2027_HIST",
+          "nota": "Con el PIB revisado; Hacienda informó 51.4 en enero de 2025."
+        },
+        "mIni": {
+          "v": 10551718.5,
+          "f": "ASF_IGE2022"
+        },
+        "mFin": {
+          "v": 17426000,
+          "f": "SHCP_C4_2025"
+        }
+      },
+      "sheinbaum": {
+        "dIni": {
+          "v": 51.9,
+          "f": "CGPE2027_HIST"
+        },
+        "dFin": {
+          "v": 52.6,
+          "f": "CGPE2027_HIST",
+          "nota": "Cierre de 2025, su primer año completo; no es el cierre del sexenio."
+        }
+      }
+    },
+    "faltantes": {
+      "anio": {
+        "pid": "radar-1989",
+        "anio": 1989,
+        "motivo": "Falta 1989, el primer año de Salinas: las Estadísticas Oportunas de Hacienda empiezan en 1990 y el Anexo del 5.º Informe en 1995. La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra."
+      }
+    },
+    "advertencias": [
+      "Todas las cifras anuales, de 1990 a 2025, salen de las Estadísticas Oportunas de Finanzas Públicas de Hacienda: los pesos y el porcentaje del PIB, tal como Hacienda los publica. Antes el Radar combinaba el Anexo del 5.º Informe (1995-2016) con los Criterios Generales (2017-2025); al unificar la fuente desaparece el salto entre el «gasto neto total» de la Cuenta Pública y el «gasto neto pagado».",
+      "El gasto es el gasto neto pagado y la inversión, la inversión física presupuestaria, que en algunos años es menor que la del Anexo del 5.º Informe (que sumaba otros conceptos de capital). Por eso los promedios de inversión de Fox y Calderón bajan unas décimas frente a la versión anterior del Radar.",
+      "Hacienda advierte cambios de registro: en 2008 se excluyen los efectos de la nueva Ley del ISSSTE; en 2009, los del reconocimiento de los pasivos de los Pidiregas de Pemex. Compara con cautela los años de cada lado.",
+      "Salinas se mide con 1990 a 1994, cinco de sus seis años: falta 1989. Sus promedios en % del PIB se dan con esos cinco años y lo dicen; sus sumas en pesos quedan pendientes, porque les faltaría un año.",
+      "El costo financiero incluye los programas de apoyo a ahorradores y deudores de la banca (el rescate bancario), como lo agrupa Hacienda.",
+      "Pesos de hoy: cada año se multiplica por el INPC de septiembre de 2026 entre el INPC promedio de ese año. Dólares y euros: cada año se divide entre el tipo de cambio promedio de ese año. Son conversiones derivadas, con datos de Banxico, y se dicen junto a su cifra."
+    ],
+    "peso": {
+      "consulta": "10 de octubre de 2026",
+      "nota": "Lo que vale el peso a lo largo del tiempo: el Índice Nacional de Precios al Consumidor (INPC) y el tipo de cambio frente al dólar y al euro, mes por mes, como los publica el Banco de México; el valor de hoy, y la proyección oficial de Hacienda hasta 2032. Con esto el Radar pasa las cifras de cada año a pesos de hoy, a dólares y a euros.",
+      "fuentes": {
+        "BX_INPC": {
+          "corto": "Banxico, SIE, serie SP1: INPC general (elaborado por el INEGI)",
+          "doc": "Banco de México, Sistema de Información Económica, cuadro CP154 «Principales índices mensuales», serie SP1 «Índice Nacional de Precios al Consumidor, índice general», base segunda quincena de julio de 2018 = 100. Desde julio de 2011 lo elabora el INEGI. Mensual, enero de 1988 a septiembre de 2026.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=8&accion=consultarCuadro&idCuadro=CP154&locale=es"
+        },
+        "BX_USD": {
+          "corto": "Banxico, SIE, serie SF329: pesos por dólar, promedio mensual",
+          "doc": "Banco de México, Sistema de Información Económica, cuadro CF86 «Tipo de cambio promedio del periodo», serie SF329 «Tipo de cambio pesos por dólar E.U.A. para solventar obligaciones denominadas en moneda extranjera, fecha de liquidación, cotizaciones promedio». Mensual, enero de 1988 a septiembre de 2026. Hasta 1992, en viejos pesos: la serie ya los expresa en pesos actuales.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF86&locale=es"
+        },
+        "BX_EUR": {
+          "corto": "Banxico, SIE, serie SF57923: pesos por euro, promedio mensual",
+          "doc": "Banco de México, Sistema de Información Económica, cuadro CF336 «Tipos de cambio de otras divisas», serie SF57923 «EUR Unión Monetaria Europea (euro)», en pesos. Mensual, enero de 2000 a septiembre de 2026: Banxico no la publica antes de 2000.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF336&locale=es"
+        },
+        "BX_DIARIO": {
+          "corto": "Banxico, SIE, cuadros CF102 y CF307: FIX y euro del 9 de octubre de 2026",
+          "doc": "Banco de México, Sistema de Información Económica: serie SF43718, tipo de cambio FIX, pesos por dólar, fecha de determinación (cuadro CF102 «Tipos de cambio diarios»), y serie SF46410, cotización del euro respecto al peso (cuadro CF307, divisas de la canasta del DEG). Dato del 9 de octubre de 2026, el último publicado al consultar.",
+          "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF102&locale=es"
+        },
+        "CGPE2027_MACRO": {
+          "corto": "SHCP, Criterios Generales de Política Económica 2027, Anexo III.1, p. 69 del PDF",
+          "doc": "Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica 2027, Anexo III.1 «Marco macroeconómico, 2025-2032 (cifras estimadas)»: inflación diciembre/diciembre y promedio, y tipo de cambio nominal promedio. 2025 son datos observados; de 2026 a 2032, estimaciones de Hacienda (p. 69 del PDF, 68 impresa). Gaceta Parlamentaria, 8 de septiembre de 2026.",
+          "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+          "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a"
+        }
+      },
+      "inpc": {
+        "base": "segunda quincena de julio de 2018 = 100",
+        "f": "BX_INPC",
+        "mensual": {
+          "1988": [
+            4.718246,
+            5.111783,
+            5.373547,
+            5.538941,
+            5.646109,
+            5.761292,
+            5.857457,
+            5.911343,
+            5.945139,
+            5.990486,
+            6.070654,
+            6.197316
+          ],
+          "1989": [
+            6.349024,
+            6.435184,
+            6.504945,
+            6.602224,
+            6.693099,
+            6.774385,
+            6.842148,
+            6.907333,
+            6.973393,
+            7.076525,
+            7.175855,
+            7.41803
+          ],
+          "1990": [
+            7.776037,
+            7.95212,
+            8.09231,
+            8.215472,
+            8.358838,
+            8.542939,
+            8.698735,
+            8.84695,
+            8.973061,
+            9.10206,
+            9.343723,
+            9.638214
+          ],
+          "1991": [
+            9.88388,
+            10.056425,
+            10.19984,
+            10.306688,
+            10.407442,
+            10.516648,
+            10.609584,
+            10.683423,
+            10.78985,
+            10.915343,
+            11.186374,
+            11.44968
+          ],
+          "1992": [
+            11.657778,
+            11.7959,
+            11.915948,
+            12.022171,
+            12.101438,
+            12.183345,
+            12.260272,
+            12.335592,
+            12.442897,
+            12.532494,
+            12.63662,
+            12.816553
+          ],
+          "1993": [
+            12.97732,
+            13.083345,
+            13.159594,
+            13.23548,
+            13.311137,
+            13.385797,
+            13.450123,
+            13.522112,
+            13.622261,
+            13.677973,
+            13.738302,
+            13.843055
+          ],
+          "1994": [
+            13.950375,
+            14.022124,
+            14.094225,
+            14.163251,
+            14.231682,
+            14.302895,
+            14.366327,
+            14.433287,
+            14.535937,
+            14.612245,
+            14.690361,
+            14.819204
+          ],
+          "1995": [
+            15.376991,
+            16.028707,
+            16.973617,
+            18.326133,
+            19.09209,
+            19.698024,
+            20.099588,
+            20.432981,
+            20.855643,
+            21.284762,
+            21.809608,
+            22.520167
+          ],
+          "1996": [
+            23.329754,
+            23.874262,
+            24.399826,
+            25.09345,
+            25.550842,
+            25.966902,
+            26.336031,
+            26.686072,
+            27.112751,
+            27.451168,
+            27.867083,
+            28.759336
+          ],
+          "1997": [
+            29.498886,
+            29.994598,
+            30.367889,
+            30.695972,
+            30.976119,
+            31.250957,
+            31.523211,
+            31.803502,
+            32.199613,
+            32.456941,
+            32.820042,
+            33.279875
+          ],
+          "1998": [
+            34.003924,
+            34.599238,
+            35.004533,
+            35.332042,
+            35.613481,
+            36.03442,
+            36.381878,
+            36.731632,
+            37.327376,
+            37.862269,
+            38.532786,
+            39.472974
+          ],
+          "1999": [
+            40.46977,
+            41.013643,
+            41.394684,
+            41.774577,
+            42.025877,
+            42.302006,
+            42.58158,
+            42.821255,
+            43.235018,
+            43.508851,
+            43.895776,
+            44.335516
+          ],
+          "2000": [
+            44.93083,
+            45.32938,
+            45.580681,
+            45.840018,
+            46.011379,
+            46.28392,
+            46.464466,
+            46.719785,
+            47.061072,
+            47.385136,
+            47.790288,
+            48.307671
+          ],
+          "2001": [
+            48.575476,
+            48.543328,
+            48.850888,
+            49.097309,
+            49.20997,
+            49.326364,
+            49.198202,
+            49.489688,
+            49.950381,
+            50.176135,
+            50.365149,
+            50.434899
+          ],
+          "2002": [
+            50.900472,
+            50.86775,
+            51.127948,
+            51.407235,
+            51.511429,
+            51.762586,
+            51.911181,
+            52.10856,
+            52.421984,
+            52.653036,
+            53.078877,
+            53.30993
+          ],
+          "2003": [
+            53.525441,
+            53.674122,
+            54.01293,
+            54.105144,
+            53.93056,
+            53.975112,
+            54.053339,
+            54.21549,
+            54.538238,
+            54.738207,
+            55.192542,
+            55.429811
+          ],
+          "2004": [
+            55.774317,
+            56.107945,
+            56.298071,
+            56.383032,
+            56.241603,
+            56.331745,
+            56.47939,
+            56.828041,
+            57.297917,
+            57.694747,
+            58.186899,
+            58.307088
+          ],
+          "2005": [
+            58.30916,
+            58.503431,
+            58.767121,
+            58.976415,
+            58.828251,
+            58.771783,
+            59.0018,
+            59.072255,
+            59.309006,
+            59.45458,
+            59.882493,
+            60.250312
+          ],
+          "2006": [
+            60.603626,
+            60.696358,
+            60.772512,
+            60.861617,
+            60.590675,
+            60.642998,
+            60.809294,
+            61.119609,
+            61.736612,
+            62.006519,
+            62.331857,
+            62.692424
+          ],
+          "2007": [
+            63.016208,
+            63.192347,
+            63.329113,
+            63.291295,
+            62.982534,
+            63.05817,
+            63.326005,
+            63.583996,
+            64.077703,
+            64.327405,
+            64.781221,
+            65.049056
+          ],
+          "2008": [
+            65.350564,
+            65.544834,
+            66.019891,
+            66.170127,
+            66.098635,
+            66.372168,
+            66.742059,
+            67.127492,
+            67.584935,
+            68.045486,
+            68.818942,
+            69.295552
+          ],
+          "2009": [
+            69.456149,
+            69.609494,
+            70.00995,
+            70.25499,
+            70.050358,
+            70.179354,
+            70.370516,
+            70.538884,
+            70.892716,
+            71.107191,
+            71.476046,
+            71.771855
+          ],
+          "2010": [
+            72.552046,
+            72.971671,
+            73.489725,
+            73.255565,
+            72.793978,
+            72.771183,
+            72.92919,
+            73.13175,
+            73.51511,
+            73.968926,
+            74.561581,
+            74.930954
+          ],
+          "2011": [
+            75.295991,
+            75.57846,
+            75.723451,
+            75.717441,
+            75.159264,
+            75.155508,
+            75.516107,
+            75.635555,
+            75.821113,
+            76.332712,
+            77.158333,
+            77.792385
+          ],
+          "2012": [
+            78.343049,
+            78.502314,
+            78.547389,
+            78.30098,
+            78.053819,
+            78.413667,
+            78.853897,
+            79.09054,
+            79.439119,
+            79.841036,
+            80.383437,
+            80.568243
+          ],
+          "2013": [
+            80.892782,
+            81.290943,
+            81.887433,
+            81.941523,
+            81.66882,
+            81.619238,
+            81.592193,
+            81.824328,
+            82.13234,
+            82.522988,
+            83.292265,
+            83.770058
+          ],
+          "2014": [
+            84.519052,
+            84.733157,
+            84.965292,
+            84.806779,
+            84.535579,
+            84.682072,
+            84.914959,
+            85.219965,
+            85.59634,
+            86.069626,
+            86.763778,
+            87.188984
+          ],
+          "2015": [
+            87.110103,
+            87.275377,
+            87.630717,
+            87.40384,
+            86.967366,
+            87.113108,
+            87.24082,
+            87.424875,
+            87.752419,
+            88.203919,
+            88.685468,
+            89.046818
+          ],
+          "2016": [
+            89.386381,
+            89.777781,
+            89.910001,
+            89.625278,
+            89.225615,
+            89.324028,
+            89.556914,
+            89.809333,
+            90.357744,
+            90.906154,
+            91.616834,
+            92.039035
+          ],
+          "2017": [
+            93.603882,
+            94.14478,
+            94.722489,
+            94.838933,
+            94.725494,
+            94.96364,
+            95.322736,
+            95.793768,
+            96.093515,
+            96.698269,
+            97.695174,
+            98.272883
+          ],
+          "2018": [
+            98.795,
+            99.171374,
+            99.492157,
+            99.154847,
+            98.99408,
+            99.376465,
+            99.909099,
+            100.492,
+            100.917,
+            101.44,
+            102.303,
+            103.02
+          ],
+          "2019": [
+            103.108,
+            103.079,
+            103.476,
+            103.531,
+            103.233,
+            103.299,
+            103.687,
+            103.67,
+            103.942,
+            104.503,
+            105.346,
+            105.934
+          ],
+          "2020": [
+            106.447,
+            106.889,
+            106.838,
+            105.755,
+            106.162,
+            106.743,
+            107.444,
+            107.867,
+            108.114,
+            108.774,
+            108.856,
+            109.271
+          ],
+          "2021": [
+            110.21,
+            110.907,
+            111.824,
+            112.19,
+            112.419,
+            113.018,
+            113.682,
+            113.899,
+            114.601,
+            115.561,
+            116.884,
+            117.308
+          ],
+          "2022": [
+            118.002,
+            118.981,
+            120.159,
+            120.809,
+            121.022,
+            122.044,
+            122.948,
+            123.803,
+            124.571,
+            125.276,
+            125.997,
+            126.478
+          ],
+          "2023": [
+            127.336,
+            128.046,
+            128.389,
+            128.363,
+            128.084,
+            128.214,
+            128.832,
+            129.545,
+            130.12,
+            130.609,
+            131.445,
+            132.373
+          ],
+          "2024": [
+            133.555,
+            133.681,
+            134.065,
+            134.336,
+            134.087,
+            134.594,
+            136.003,
+            136.013,
+            136.08,
+            136.828,
+            137.424,
+            137.949
+          ],
+          "2025": [
+            138.343,
+            138.726,
+            139.161,
+            139.62,
+            140.012,
+            140.405,
+            140.78,
+            140.867,
+            141.197,
+            141.708,
+            142.645,
+            143.042
+          ],
+          "2026": [
+            143.588,
+            144.307,
+            145.544,
+            145.831,
+            145.527,
+            145.131,
+            145.169,
+            145.462,
+            146.075
+          ]
+        }
+      },
+      "usd": {
+        "unidad": "pesos por dólar",
+        "f": "BX_USD",
+        "mensual": {
+          "1988": [
+            2.2124,
+            2.2479,
+            2.2809,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281,
+            2.281
+          ],
+          "1989": [
+            2.2954,
+            2.3249,
+            2.3547,
+            2.3851,
+            2.4155,
+            2.4459,
+            2.4765,
+            2.5074,
+            2.538,
+            2.5685,
+            2.5991,
+            2.6298
+          ],
+          "1990": [
+            2.6604,
+            2.69,
+            2.7195,
+            2.7502,
+            2.7804,
+            2.8074,
+            2.8317,
+            2.8565,
+            2.881,
+            2.9054,
+            2.9278,
+            2.9409
+          ],
+          "1991": [
+            2.9532,
+            2.965,
+            2.9769,
+            2.989,
+            3.0012,
+            3.0134,
+            3.0256,
+            3.038,
+            3.0502,
+            3.0624,
+            3.0698,
+            3.07
+          ],
+          "1992": [
+            3.0685,
+            3.0636,
+            3.0664,
+            3.068,
+            3.098,
+            3.1185,
+            3.1165,
+            3.0913,
+            3.0862,
+            3.1185,
+            3.1198,
+            3.1182
+          ],
+          "1993": [
+            3.11,
+            3.0989,
+            3.1083,
+            3.0955,
+            3.1227,
+            3.1213,
+            3.1236,
+            3.1126,
+            3.1127,
+            3.1142,
+            3.1553,
+            3.1077
+          ],
+          "1994": [
+            3.1075,
+            3.1115,
+            3.2841,
+            3.3536,
+            3.312,
+            3.3607,
+            3.4009,
+            3.3821,
+            3.3998,
+            3.4158,
+            3.4426,
+            3.9308
+          ],
+          "1995": [
+            5.5133,
+            5.6854,
+            6.7019,
+            6.2996,
+            5.9627,
+            6.2232,
+            6.1394,
+            6.1909,
+            6.3025,
+            6.6911,
+            7.6584,
+            7.6597
+          ],
+          "1996": [
+            7.5048,
+            7.5042,
+            7.5736,
+            7.4713,
+            7.4345,
+            7.5425,
+            7.6229,
+            7.5141,
+            7.5447,
+            7.6851,
+            7.9189,
+            7.8767
+          ],
+          "1997": [
+            7.8299,
+            7.7926,
+            7.9628,
+            7.9037,
+            7.9057,
+            7.9465,
+            7.8857,
+            7.7843,
+            7.7792,
+            7.8114,
+            8.2837,
+            8.136
+          ],
+          "1998": [
+            8.1798,
+            8.4932,
+            8.5689,
+            8.4996,
+            8.5612,
+            8.8948,
+            8.904,
+            9.2596,
+            10.2154,
+            10.1523,
+            9.9874,
+            9.9117
+          ],
+          "1999": [
+            10.1104,
+            10.015,
+            9.7694,
+            9.4461,
+            9.3623,
+            9.5418,
+            9.3671,
+            9.3981,
+            9.3403,
+            9.5403,
+            9.4205,
+            9.4151
+          ],
+          "2000": [
+            9.4793,
+            9.4456,
+            9.2959,
+            9.3748,
+            9.5081,
+            9.7978,
+            9.4688,
+            9.2846,
+            9.3319,
+            9.5182,
+            9.5179,
+            9.4439
+          ],
+          "2001": [
+            9.7701,
+            9.7027,
+            9.6182,
+            9.3508,
+            9.1467,
+            9.0957,
+            9.156,
+            9.1272,
+            9.3841,
+            9.3685,
+            9.2223,
+            9.1672
+          ],
+          "2002": [
+            9.1614,
+            9.1062,
+            9.0809,
+            9.1317,
+            9.4899,
+            9.7378,
+            9.7978,
+            9.8258,
+            10.0425,
+            10.0961,
+            10.2032,
+            10.1982
+          ],
+          "2003": [
+            10.5762,
+            10.9216,
+            10.9427,
+            10.6324,
+            10.2506,
+            10.4953,
+            10.4434,
+            10.7327,
+            10.9255,
+            11.1704,
+            11.1145,
+            11.2629
+          ],
+          "2004": [
+            10.9308,
+            11.0128,
+            10.9984,
+            11.2535,
+            11.5119,
+            11.379,
+            11.4735,
+            11.3957,
+            11.4858,
+            11.3864,
+            11.3938,
+            11.21
+          ],
+          "2005": [
+            11.2556,
+            11.1502,
+            11.1326,
+            11.1262,
+            10.992,
+            10.834,
+            10.6931,
+            10.6703,
+            10.7791,
+            10.8312,
+            10.6903,
+            10.6201
+          ],
+          "2006": [
+            10.5679,
+            10.4813,
+            10.7061,
+            11.0206,
+            11.0758,
+            11.3864,
+            11.0268,
+            10.8739,
+            10.9722,
+            10.9201,
+            10.8948,
+            10.865
+          ],
+          "2007": [
+            10.9344,
+            10.988,
+            11.125,
+            10.9924,
+            10.8301,
+            10.8338,
+            10.7963,
+            11.0363,
+            11.045,
+            10.8418,
+            10.8658,
+            10.8494
+          ],
+          "2008": [
+            10.9171,
+            10.7794,
+            10.7346,
+            10.5295,
+            10.4542,
+            10.3305,
+            10.239,
+            10.0906,
+            10.5744,
+            12.4738,
+            13.0609,
+            13.3726
+          ],
+          "2009": [
+            13.8492,
+            14.518,
+            14.7393,
+            13.489,
+            13.2167,
+            13.3439,
+            13.3619,
+            13.0015,
+            13.3987,
+            13.2626,
+            13.1305,
+            12.8504
+          ],
+          "2010": [
+            12.807,
+            12.9624,
+            12.6138,
+            12.242,
+            12.6826,
+            12.7234,
+            12.8341,
+            12.7261,
+            12.861,
+            12.4535,
+            12.3251,
+            12.4011
+          ],
+          "2011": [
+            12.1477,
+            12.0726,
+            12.0173,
+            11.7584,
+            11.6479,
+            11.792,
+            11.676,
+            12.1707,
+            12.9291,
+            13.4808,
+            13.6358,
+            13.7516
+          ],
+          "2012": [
+            13.5047,
+            12.8014,
+            12.7561,
+            13.0512,
+            13.5556,
+            13.982,
+            13.3894,
+            13.179,
+            12.9871,
+            12.8728,
+            13.0872,
+            12.867
+          ],
+          "2013": [
+            12.7219,
+            12.7144,
+            12.5745,
+            12.2249,
+            12.2522,
+            12.9361,
+            12.7851,
+            12.8704,
+            13.0925,
+            13.0187,
+            13.0634,
+            13.0098
+          ],
+          "2014": [
+            13.1981,
+            13.2888,
+            13.2154,
+            13.0681,
+            12.9479,
+            12.9832,
+            12.9734,
+            13.149,
+            13.2002,
+            13.4768,
+            13.5819,
+            14.4266
+          ],
+          "2015": [
+            14.6757,
+            14.9167,
+            15.2003,
+            15.2228,
+            15.2555,
+            15.4562,
+            15.8881,
+            16.488,
+            16.8372,
+            16.602,
+            16.6348,
+            17.0019
+          ],
+          "2016": [
+            17.978,
+            18.4837,
+            17.7383,
+            17.4924,
+            18.0405,
+            18.6471,
+            18.5699,
+            18.476,
+            19.1386,
+            18.948,
+            19.9425,
+            20.5137
+          ],
+          "2017": [
+            21.3732,
+            20.3812,
+            19.4067,
+            18.7584,
+            18.7862,
+            18.1901,
+            17.8513,
+            17.8078,
+            17.7991,
+            18.7247,
+            18.977,
+            19.0625
+          ],
+          "2018": [
+            19.0025,
+            18.6282,
+            18.6839,
+            18.3464,
+            19.4894,
+            20.3105,
+            19.1171,
+            18.8089,
+            19.0539,
+            19.0638,
+            20.25,
+            20.1775
+          ],
+          "2019": [
+            19.2154,
+            19.1902,
+            19.2339,
+            19.0231,
+            19.0883,
+            19.2912,
+            19.0669,
+            19.5896,
+            19.6242,
+            19.3701,
+            19.2931,
+            19.1776
+          ],
+          "2020": [
+            18.806,
+            18.7664,
+            21.969,
+            24.2579,
+            23.6004,
+            22.2153,
+            22.4836,
+            22.237,
+            21.645,
+            21.3558,
+            20.5088,
+            19.9821
+          ],
+          "2021": [
+            19.8889,
+            20.2415,
+            20.7895,
+            20.0534,
+            19.9829,
+            20.0366,
+            19.9715,
+            20.0529,
+            20.0078,
+            20.4723,
+            20.7843,
+            20.9873
+          ],
+          "2022": [
+            20.4734,
+            20.4823,
+            20.6061,
+            20.0475,
+            20.1101,
+            19.9743,
+            20.5254,
+            20.142,
+            20.073,
+            20.0146,
+            19.497,
+            19.5825
+          ],
+          "2023": [
+            19.0436,
+            18.6418,
+            18.403,
+            18.0891,
+            17.768,
+            17.293,
+            16.9447,
+            16.966,
+            17.2426,
+            18.0338,
+            17.4537,
+            17.2253
+          ],
+          "2024": [
+            17.0626,
+            17.0996,
+            16.8445,
+            16.7691,
+            16.8011,
+            18.0839,
+            18.0786,
+            19.0568,
+            19.6395,
+            19.6659,
+            20.3185,
+            20.2382
+          ],
+          "2025": [
+            20.5599,
+            20.4612,
+            20.2488,
+            20.1385,
+            19.4585,
+            19.0791,
+            18.6948,
+            18.7204,
+            18.5281,
+            18.4111,
+            18.4425,
+            18.1072
+          ],
+          "2026": [
+            17.7101,
+            17.2285,
+            17.6915,
+            17.4737,
+            17.3201,
+            17.3682,
+            17.4733,
+            17.0963,
+            17.1648
+          ]
+        }
+      },
+      "eur": {
+        "unidad": "pesos por euro",
+        "f": "BX_EUR",
+        "desde": 2000,
+        "antes": "El euro empezó a circular como moneda de cuenta en 1999 y Banxico publica su cotización desde enero de 2000.",
+        "mensual": {
+          "2000": [
+            9.44531,
+            9.12362,
+            8.8537,
+            8.52979,
+            8.84999,
+            9.40775,
+            8.65764,
+            8.22251,
+            8.30672,
+            8.03871,
+            8.17265,
+            8.93904
+          ],
+          "2001": [
+            9.00791,
+            8.97287,
+            8.36739,
+            8.20896,
+            7.78761,
+            7.69476,
+            8.00917,
+            8.43456,
+            8.71763,
+            8.37598,
+            8.24768,
+            8.11501
+          ],
+          "2002": [
+            7.896,
+            7.90136,
+            7.8908,
+            8.44511,
+            9.06331,
+            9.9329,
+            9.57472,
+            9.76818,
+            10.07441,
+            10.01506,
+            10.07243,
+            10.64469
+          ],
+          "2003": [
+            11.91168,
+            11.91168,
+            11.7599,
+            11.46287,
+            12.23053,
+            11.92219,
+            11.89562,
+            12.13016,
+            12.80847,
+            12.84743,
+            13.65426,
+            14.16449
+          ],
+          "2004": [
+            13.68197,
+            13.74058,
+            13.73606,
+            13.67747,
+            13.96823,
+            14.01768,
+            13.73169,
+            13.83097,
+            14.13984,
+            14.69376,
+            14.93212,
+            15.16332
+          ],
+          "2005": [
+            14.61085,
+            14.72173,
+            14.4949,
+            14.32393,
+            13.48126,
+            13.02291,
+            12.86896,
+            13.27043,
+            13.02977,
+            12.91695,
+            12.46876,
+            12.53902
+          ],
+          "2006": [
+            12.67608,
+            12.45623,
+            13.19748,
+            13.96823,
+            14.5003,
+            14.39811,
+            13.9315,
+            13.95783,
+            13.92217,
+            13.7424,
+            14.57389,
+            14.23347
+          ],
+          "2007": [
+            14.34745,
+            14.74984,
+            14.75446,
+            14.91426,
+            14.4535,
+            14.58351,
+            14.96275,
+            15.04673,
+            15.55553,
+            15.47981,
+            15.99759,
+            15.94893
+          ],
+          "2008": [
+            16.03902,
+            16.27734,
+            16.82416,
+            16.36119,
+            16.05065,
+            16.24574,
+            15.65306,
+            15.12468,
+            15.42667,
+            16.16267,
+            16.8956,
+            19.55916
+          ],
+          "2009": [
+            18.33788,
+            19.14467,
+            18.76657,
+            18.35754,
+            18.60586,
+            18.47796,
+            18.72872,
+            19.10426,
+            19.72512,
+            19.39447,
+            19.36451,
+            18.74565
+          ],
+          "2010": [
+            18.08362,
+            17.43536,
+            16.6759,
+            16.30313,
+            15.83976,
+            15.7276,
+            16.48088,
+            16.73865,
+            17.19369,
+            17.15079,
+            16.22751,
+            16.56328
+          ],
+          "2011": [
+            16.66876,
+            16.72229,
+            16.88849,
+            17.10495,
+            16.68158,
+            16.96084,
+            16.89394,
+            17.83175,
+            18.53535,
+            18.44042,
+            18.34628,
+            18.10399
+          ],
+          "2012": [
+            17.09342,
+            17.20773,
+            17.09273,
+            17.19003,
+            17.71494,
+            16.98844,
+            16.32916,
+            16.70262,
+            16.59522,
+            17.00534,
+            16.79967,
+            17.13819
+          ],
+          "2013": [
+            17.25174,
+            16.70664,
+            15.78525,
+            16.01397,
+            16.59334,
+            16.93627,
+            17.05873,
+            17.59077,
+            17.83196,
+            17.71252,
+            17.8494,
+            18.03017
+          ],
+          "2014": [
+            18.03741,
+            18.28286,
+            17.99357,
+            18.14811,
+            17.54998,
+            17.75887,
+            17.69891,
+            17.2241,
+            16.96991,
+            16.85606,
+            17.32338,
+            17.83857
+          ],
+          "2015": [
+            16.91302,
+            16.77386,
+            16.39734,
+            17.21751,
+            16.8612,
+            17.4751,
+            17.76048,
+            18.8086,
+            18.87477,
+            18.26277,
+            17.52103,
+            18.74934
+          ],
+          "2016": [
+            19.69446,
+            19.67144,
+            19.64156,
+            19.66904,
+            20.50522,
+            20.5234,
+            20.99454,
+            21.00183,
+            21.7688,
+            20.6699,
+            21.76284,
+            21.75347
+          ],
+          "2017": [
+            22.46342,
+            21.24343,
+            20.09709,
+            20.64584,
+            21.01324,
+            20.59678,
+            21.057,
+            21.17342,
+            21.46666,
+            22.28612,
+            22.19943,
+            23.60629
+          ],
+          "2018": [
+            23.18234,
+            22.97356,
+            22.56456,
+            22.6966,
+            23.31887,
+            22.98849,
+            21.81827,
+            22.31788,
+            21.74314,
+            22.9976,
+            23.03823,
+            22.46918
+          ],
+          "2019": [
+            21.84893,
+            21.92927,
+            21.7546,
+            21.30725,
+            21.89364,
+            21.87199,
+            21.14859,
+            22.10767,
+            21.51554,
+            21.38397,
+            21.53853,
+            21.17506
+          ],
+          "2020": [
+            20.9465,
+            21.72097,
+            25.76741,
+            26.1967,
+            24.67502,
+            25.92582,
+            26.26069,
+            26.17914,
+            25.96914,
+            24.81775,
+            24.09425,
+            24.3563
+          ],
+          "2021": [
+            24.56504,
+            25.41262,
+            24.0262,
+            24.30038,
+            24.35279,
+            23.60079,
+            23.52982,
+            23.68042,
+            23.82862,
+            23.758,
+            24.1517,
+            23.27632
+          ],
+          "2022": [
+            23.13103,
+            22.935,
+            22.14424,
+            21.49127,
+            21.09523,
+            21.04756,
+            20.73919,
+            20.20874,
+            19.68663,
+            19.60346,
+            19.97743,
+            20.76928
+          ],
+          "2023": [
+            20.40902,
+            19.45558,
+            19.60029,
+            19.86294,
+            18.91365,
+            18.69773,
+            18.44683,
+            18.35833,
+            18.43134,
+            19.12081,
+            18.95221,
+            18.69296
+          ],
+          "2024": [
+            18.64106,
+            18.4659,
+            17.88134,
+            18.27541,
+            18.47697,
+            19.55799,
+            20.12195,
+            21.76036,
+            21.92663,
+            21.77808,
+            21.46732,
+            21.52307
+          ],
+          "2025": [
+            21.42077,
+            21.33037,
+            22.07304,
+            22.28129,
+            22.00288,
+            22.09888,
+            21.51424,
+            21.81162,
+            21.54269,
+            21.42338,
+            21.24036,
+            21.13791
+          ],
+          "2026": [
+            20.62042,
+            20.33083,
+            20.7344,
+            20.54134,
+            20.24977,
+            19.96741,
+            19.93159,
+            19.76206,
+            20.5174
+          ]
+        }
+      },
+      "hoy": {
+        "fecha": "9 de octubre de 2026",
+        "iso": "2026-10-09",
+        "usd": 18.4163,
+        "eur": 20.6419,
+        "f": "BX_DIARIO",
+        "inpc_mes": "septiembre de 2026"
+      },
+      "proyeccion": {
+        "f": "CGPE2027_MACRO",
+        "observado": 2025,
+        "inflacion_dic": {
+          "2025": 3.7,
+          "2026": 3.5,
+          "2027": 3.0,
+          "2028": 3.0,
+          "2029": 3.0,
+          "2030": 3.0,
+          "2031": 3.0,
+          "2032": 3.0
+        },
+        "inflacion_prom": {
+          "2025": 3.8,
+          "2026": 3.8,
+          "2027": 3.2,
+          "2028": 3.0,
+          "2029": 3.0,
+          "2030": 3.0,
+          "2031": 3.0,
+          "2032": 3.0
+        },
+        "usd_prom": {
+          "2025": 19.2,
+          "2026": 17.6,
+          "2027": 17.9,
+          "2028": 18.1,
+          "2029": 18.2,
+          "2030": 18.4,
+          "2031": 18.6,
+          "2032": 18.6
+        },
+        "usd_fin": {
+          "2025": 18.0,
+          "2026": 17.8,
+          "2027": 18.0,
+          "2028": 18.1,
+          "2029": 18.3,
+          "2030": 18.5,
+          "2031": 18.6,
+          "2032": 18.8
+        },
+        "eur": "Ni Hacienda ni Banxico publican una proyección del peso frente al euro: los Criterios solo proyectan el tipo de cambio con el dólar. Ninguna ley los obliga a proyectar el euro, así que aquí no se proyecta.",
+        "aviso": "Es una proyección, no un dato: Hacienda la usa para estimar ingresos y gasto, y la revisa cada año. Hacienda ya la revisó para 2026: aprobó 3.0 % de inflación de diciembre a diciembre en el Paquete Económico 2026 y ahora estima 3.5 % (Criterios 2027, p. 67 del PDF)."
       }
     }
   }

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de pendientes · Auditavisión</title>
+  <meta name="description" content="Cada dato que la plataforma marca como pendiente está aquí, con su explicación: qué falta, por qué falta, a quién le toca publicarlo y el enlace oficial donde debería estar. Es nuestra rendición de cuentas: así puedes ir tú mismo a la fuente y exigirla.">
+  <link rel="canonical" href="https://uzoraproductos-arch.github.io/a/pendientes.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Auditavisión">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:url" content="https://uzoraproductos-arch.github.io/a/pendientes.html">
+  <meta property="og:title" content="Registro de pendientes · Auditavisión">
+  <meta property="og:description" content="Cada dato que la plataforma marca como pendiente está aquí, con su explicación: qué falta, por qué falta, a quién le toca publicarlo y el enlace oficial donde debería estar. Es nuestra rendición de cuentas: así puedes ir tú mismo a la fuente y exigirla.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0b2a63">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011f">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011f">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011f">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011f">
+</head>
+<body data-pagina="apartado">
+  <nav class="site-top-nav" aria-label="Navegación principal">
+    <div class="nav-brand-group">
+      <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
+      <a class="nav-brand-text" href="index.html" title="Ir a la página principal">
+        <span class="nav-brand-title">Auditavisión</span>
+        <span class="nav-brand-sub">El gasto público, a la vista</span>
+      </a>
+    </div>
+
+    <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
+      <span class="nav-hamb-rayas" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-hamb-txt">Menú</span>
+    </button>
+
+    <div class="nav-indice" id="navIndiceMovil">
+    <div class="nav-center-links">
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramientas.html">Herramientas</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="sigue-el-dinero.html">Números</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="descarga-los-datos.html">Datos</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="aprende.html">Aprende</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="participa.html">Participa</a></div>
+    </div>
+
+    <div class="nav-right-container">
+      <div class="nav-right-actions">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal o un tema para investigar">
+          <span>📢</span>
+          <span>Cuéntanos lo que viste</span>
+        </a>
+        <button type="button" class="nav-action-btn nav-share-btn" id="apartadoCompartir" title="Compartir esta página o copiar su enlace">
+          <span>🔗</span>
+          <span>Compartir</span>
+        </button>
+        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Diccionario del Gasto Público">
+          <span>🪐</span>
+          <span>Inspector Meteoro</span>
+        </a>
+      </div>
+      <div class="nav-movil-ayuda">
+        <p class="nav-movil-ayuda-tit">¿Viste algo raro con el dinero público?</p>
+        <p class="nav-movil-ayuda-txt">Cuéntanos qué, dónde y cuándo. Te ayudamos a ordenarlo y a llevarlo al canal oficial que corresponde.</p>
+        <a class="nav-movil-ayuda-btn" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <div class="pt-velo" id="ptVelo" hidden></div>
+  <aside class="pt-cajon" id="ptCajon" role="dialog" aria-modal="true" aria-labelledby="ptTit" hidden>
+    <div class="pt-cab">
+      <div>
+        <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
+        <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
+        <p class="pt-sub">Elige una ruta. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+      </div>
+      <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div class="pt-cuerpo">
+      <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
+        <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
+            <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
+            <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
+            <div class="sv-campo"><label for="ptRepCuando">Cuándo</label><input id="ptRepCuando" type="text" maxlength="80"><small>La fecha o el periodo: los fondos se fiscalizan por ejercicio anual.</small></div>
+            <div class="sv-campo"><label for="ptRepVio">Qué viste <span class="sv-req">obligatorio</span></label><textarea id="ptRepVio" rows="4" maxlength="1500" required></textarea><small>La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</small></div>
+            <div class="sv-campo"><label for="ptRepDinero">Con qué dinero</label><input id="ptRepDinero" type="text" maxlength="160"><small>Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</small></div>
+            <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
+            <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+          <p class="pt-nota">Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: <a href="garantias.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato y qué tener a la mano.</p>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="error">
+        <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+            <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
+            <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
+            <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
+        <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+            <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
+            <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
+            <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
+            <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
+            <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad.html#erratas">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+    </div>
+  </aside>
+
+  <main class="apartado" id="contenido">
+    <header class="apartado-cab">
+      <div class="apartado-ancho">
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="indice.html">Índice general</a> <span aria-hidden="true">›</span> <span>Registro de pendientes</span></nav>
+        <span class="apartado-lema">⏳ Lo que no sabemos también se dice</span>
+        <h1 class="apartado-titulo">Registro de pendientes</h1>
+        <p class="apartado-entrada">Cada dato que la plataforma marca como <span class="est-chip est-pendiente">pendiente</span> está aquí, con su explicación: qué falta, por qué falta, a quién le toca publicarlo y el enlace oficial donde debería estar. Es nuestra rendición de cuentas: así puedes ir tú mismo a la fuente y exigirla.</p>
+        
+      </div>
+    </header>
+
+    <div class="apartado-ancho apartado-cuerpo">
+      <nav class="apartado-saltos" aria-label="En esta página">
+          <span class="apartado-saltos-tit">En esta página:</span>
+          <a href="#resumen">Lo que falta, en números</a>
+          <a href="#tema-cuenta-publica-2024">Cuenta Pública 2024</a>
+          <a href="#tema-programas-sociales">Programas sociales</a>
+          <a href="#tema-ingresos">Ingresos</a>
+          <a href="#tema-megaobras">Megaobras</a>
+          <a href="#tema-historia">Historia</a>
+          <a href="#tema-remuneraciones">Remuneraciones</a>
+          <a href="#tema-poderes">Poderes</a>
+          <a href="#tema-ambiente">Ambiente</a>
+          <a href="#tema-estados-y-municipios">Estados y municipios</a>
+          <a href="#tema-fiscalizacion">Fiscalización</a>
+      </nav>
+      
+      <section class="apartado-seccion" id="resumen" aria-labelledby="resumen-tit">
+        <h2 class="sr-only" id="resumen-tit">Lo que falta, en números</h2>
+        <div class="apartado-bloque">
+        <div class="pe-resumen">
+          <div><b>39</b><span>pendientes registrados</span></div>
+          <div class="pe-r-d"><b>19</b><span>🏛️ los debe publicar una dependencia</span></div>
+          <div class="pe-r-p"><b>14</b><span>🧰 los debemos integrar nosotros</span></div>
+          <div class="pe-r-h"><b>6</b><span>📜 son históricos, sin quien responda hoy</span></div>
+        </div>
+        <p class="pe-regla">Un dato pendiente no se estima ni se rellena: se dice que falta, por qué falta y dónde debería estar. Si la falta es de una dependencia obligada, la nombramos. Si el documento existe y aún no lo integramos, lo decimos: la falta es nuestra. ¿Tienes el documento? <a href="comunidad.html#error" data-puerta="error">Cuéntanos y lo integramos</a>.</p>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-cuenta-publica-2024" aria-labelledby="tema-cuenta-publica-2024-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-cuenta-publica-2024-tit"><span class="sr-only"></span>Cuenta Pública 2024</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-plataforma" id="cp2024-tomo2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Estados financieros del Gobierno Federal 2024: gasto neto total modificado, gasto neto total devengado, gasto neto total ejercido, gasto neto total pagado, desglose por capítulo de gasto (1000 a 9000), total de gastos y otras pérdidas, resultado del ejercicio (ahorro o desahorro), flujos netos de las actividades de operación, flujos netos de las actividades de inversión, flujos netos de las actividades de financiamiento, efectivo y equivalentes al final del ejercicio, activo total, pasivo total, hacienda pública / patrimonio y la conciliación presupuestaria-contable</h3>
+            <p class="pe-porque"><b>Por qué:</b> Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda).</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/es/CP/2024" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública 2024, Tomo II (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="numeros-estado-de-resultados.html">Números · Estado de resultados</a> · <a href="estado-de-cuenta.html">Estado de Cuenta Cívico</a> · <a class="pe-ancla" href="#cp2024-tomo2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="estado-cuenta-pesos-2024">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Pesos de 2024 en el Estado de Cuenta y el subejercicio de 2024</h3>
+            <p class="pe-porque"><b>Por qué:</b> Los Criterios Generales 2027 dan 2024 solo en por ciento del PIB. Los pesos y el subejercicio (modificado menos devengado) están en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja: el portal de Hacienda no se pudo abrir con conexión verificada.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/es/CP/2024" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública 2024 (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="estado-de-cuenta.html">Estado de Cuenta Cívico</a> · <a class="pe-ancla" href="#estado-cuenta-pesos-2024" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-programas-sociales" aria-labelledby="tema-programas-sociales-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-programas-sociales-tit"><span class="sr-only"></span>Programas sociales</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-plataforma" id="prog-montos-s176">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Aprobado y devengado 2024: Pensión para el Bienestar de las Personas Adultas Mayores</h3>
+            <p class="pe-porque"><b>Por qué:</b> El aprobado y el devengado de 2024 están en el Estado Analítico del Ramo 20 de la Cuenta Pública 2024 (Tomo III), pero la plataforma aún no los ha cotejado: el portal de la Cuenta Pública no se pudo abrir con conexión verificada. La cifra que se mostraba antes (465,048 mdp) se retiró porque estaba rotulada como devengado y corresponde al aprobado.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/III/Print.20R20.03.EAEPCFPGF.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública 2024 (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="numeros-estado-de-resultados.html">Números · Resultados sociales</a> · <a href="estado-de-cuenta.html#social">Estado de Cuenta · Social</a> · <a class="pe-ancla" href="#prog-montos-s176" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="prog-montos-imss-bienestar">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Aprobado y devengado 2024: Atención a la Salud y Medicamentos Gratuitos para la Población sin Seguridad Social Laboral (IMSS-Bienestar)</h3>
+            <p class="pe-porque"><b>Por qué:</b> La clave programática, el ramo y los montos de 2024 se tienen que cotejar en la Cuenta Pública 2024 antes de mostrarlos; la plataforma aún no lo ha hecho. Se cuidará no mezclar el programa con el presupuesto completo del organismo IMSS-Bienestar. La cifra que se mostraba antes (128,900 mdp) se retiró por no tener documento citado.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/es/CP/2024" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública 2024 (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="numeros-estado-de-resultados.html">Números · Resultados sociales</a> · <a href="estado-de-cuenta.html#social">Estado de Cuenta · Social</a> · <a class="pe-ancla" href="#prog-montos-imss-bienestar" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="prog-resultados">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Propósito, cobertura e impacto de los programas sociales: Pensión para el Bienestar de las Personas Adultas Mayores; Programa de Becas de Educación Básica para el Bienestar Benito Juárez; Beca Universal para Estudiantes de Educación Media Superior Benito Juárez; Atención a la Salud y Medicamentos Gratuitos para la Población sin Seguridad Social Laboral (IMSS-Bienestar)</h3>
+            <p class="pe-porque"><b>Por qué:</b> La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Transparencia Presupuestaria (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="estado-de-cuenta.html#social">Estado de Cuenta · Social</a> · <a class="pe-ancla" href="#prog-resultados" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-ingresos" aria-labelledby="tema-ingresos-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-ingresos-tit"><span class="sr-only"></span>Ingresos</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="huachicol-est-0">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cifra de 123,000 mdp que circula sobre el huachicol fiscal: Observatorio Ciudadano de Energía</h3>
+            <p class="pe-porque"><b>Por qué:</b> Estimación de un organismo civil, no de la autoridad: queda pendiente porque el SAT y Hacienda no han transparentado la suya.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Servicio de Administración Tributaria (SAT) y Secretaría de Hacienda</p>
+            <p class="pe-donde"><a href="https://www.sat.gob.mx/minisitio/DatosAbiertos/index.html" target="_blank" rel="noopener">🔗 Dónde debería estar: Datos abiertos del SAT ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="auditoria-huachicol-fiscal.html">Huachicol fiscal</a> · <a class="pe-ancla" href="#huachicol-est-0" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="huachicol-est-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cifra de 600,000 mdp que circula sobre el huachicol fiscal: La Jornada</h3>
+            <p class="pe-porque"><b>Por qué:</b> Hacienda no ha publicado un documento que la sostenga, y el propio Gobierno la rechazó; la tomamos de la prensa que cubrió la comparecencia. Lo que sí queda es la cifra de querellas.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Servicio de Administración Tributaria (SAT) y Secretaría de Hacienda</p>
+            <p class="pe-donde"><a href="https://www.sat.gob.mx/minisitio/DatosAbiertos/index.html" target="_blank" rel="noopener">🔗 Dónde debería estar: Datos abiertos del SAT ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="auditoria-huachicol-fiscal.html">Huachicol fiscal</a> · <a class="pe-ancla" href="#huachicol-est-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="huachicol-evasion">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cuánto se evade por huachicol fiscal</h3>
+            <p class="pe-porque"><b>Por qué:</b> Ni el SAT ni Hacienda han publicado una estimación oficial, con metodología, de cuánto IEPS y IVA se deja de cobrar por el contrabando de combustibles. Las cifras que circulan son de organismos civiles o se dijeron en tribuna sin documento.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Servicio de Administración Tributaria (SAT) y Secretaría de Hacienda</p>
+            <p class="pe-donde"><a href="https://www.sat.gob.mx/minisitio/DatosAbiertos/index.html" target="_blank" rel="noopener">🔗 Dónde debería estar: Datos abiertos del SAT ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="auditoria-huachicol-fiscal.html">Huachicol fiscal</a> · <a href="numeros-a-que-equivale.html">Números · ¿A qué equivale?</a> · <a class="pe-ancla" href="#huachicol-evasion" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-megaobras" aria-labelledby="tema-megaobras-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-megaobras-tit"><span class="sr-only"></span>Megaobras</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="obra-aifa-texcoco">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> AIFA + Cancelación del NAIM Texcoco: presupuesto original, costo total, sobrecosto</h3>
+            <p class="pe-porque"><b>Por qué:</b> Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA, pendientes porque no constan en un documento oficial de la Sedena, que debe transparentarlos.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Secretaría de la Defensa Nacional (Sedena)</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta" target="_blank" rel="noopener">🔗 Dónde debería estar: SHCP, Cartera de programas y proyectos de inversión («Obra Pública Abierta»), Tr ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sector.html">Megaobras · Sector e industria</a> · <a class="pe-ancla" href="#obra-aifa-texcoco" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="obra-dos-bocas">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Refinería Olmeca en Dos Bocas (Paraíso, Tabasco): presupuesto original, sobrecosto</h3>
+            <p class="pe-porque"><b>Por qué:</b> Pendiente: los $160,000 mdp que trae la ficha no tienen documento en mano. La refinería no está en la cartera de Hacienda y su presupuesto original no aparece en la Cuenta Pública. No se puede afirmar: compara la obra en proceso documentada contra un presupuesto original que no tiene documento.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Pemex y su filial PTI Infraestructura de Desarrollo</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta" target="_blank" rel="noopener">🔗 Dónde debería estar: SHCP, Cartera de programas y proyectos de inversión («Obra Pública Abierta»), Tr ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sector.html">Megaobras · Sector e industria</a> · <a class="pe-ancla" href="#obra-dos-bocas" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-historico" id="obra-fobaproa">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> FOBAPROA / IPAB (Rescate Bancario de 1998): presupuesto original, costo total, sobrecosto</h3>
+            <p class="pe-porque"><b>Por qué:</b> Ningún documento oficial publica el presupuesto original ni el costo total de la obra. Lo que el rescate bancario le cuesta al presupuesto cada año sí es oficial: el Ramo 34 (programas de apoyo a ahorradores y deudores de la banca) ejerció $52,451.9 mdp en 2025 según la Cuenta Pública, y el PEF 2026 le asigna $35,553.4 mdp.</p>
+            <p class="pe-quien"><b>📜 Responsable:</b> Dato histórico: no hay dependencia que deba publicarlo hoy</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/Datos-Abiertos" target="_blank" rel="noopener">🔗 Dónde debería estar: SHCP, Cuenta Pública 2014-2025, datos abiertos (gasto por clave de cartera) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sector.html">Megaobras · Sector e industria</a> · <a class="pe-ancla" href="#obra-fobaproa" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-historico" id="obra-farac-carretero">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> FARAC (Rescate Carretero de 1997): presupuesto original, costo total, sobrecosto</h3>
+            <p class="pe-porque"><b>Por qué:</b> El rescate no tuvo un presupuesto de obra: sustituyó deuda bancaria de los concesionarios por deuda en bonos con aval federal. Lo que la ASF documenta es esa deuda (ver el panel). Pendiente: falta un documento que diga cuánto costó en total indemnizar a los concesionarios de las 23 autopistas. No aplica mientras no haya un costo original y uno final comparables.</p>
+            <p class="pe-quien"><b>📜 Responsable:</b> Dato histórico: no hay dependencia que deba publicarlo hoy</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, Cuenta Pública 2017, auditoría 96, Banobras: Fideicomiso Fondo Nacional de  ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sector.html">Megaobras · Sector e industria</a> · <a class="pe-ancla" href="#obra-farac-carretero" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-historico" id="obra-bunker-garcia-luna">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> El Búnker de Seguridad de García Luna (SSPC): presupuesto original, costo total, sobrecosto</h3>
+            <p class="pe-porque"><b>Por qué:</b> Pendiente: los $1,200 mdp que trae la ficha no tienen documento. Lo único documentado es el contrato de obra civil del edificio, adjudicado por $347,369.0 miles de pesos con IVA (ASF, CP 2009, auditoría 1053, p. 1). Pendiente: los $3,346 mdp que trae la ficha no tienen documento. Del contrato de obra civil se habían erogado $206,027.9 miles de pesos más IVA en agosto de 2010 (ASF, CP 2009, p. 2). Lo más cercano a un costo total: la ASF estimó $432,678.8 miles para construir y equipar las instalaciones de Plataforma México de 2007 a 2009 (CP 2008, auditoría 957, pp. 89-90), con el presupuesto aprobado de 2009 y no con lo ejercido, y sin decir qué parte es este edificio. No se puede calcular sin el costo total. El contrato se redujo de $347.4 a $289.1 mdp con IVA (p. 2): no hubo sobrecosto en ese contrato.</p>
+            <p class="pe-quien"><b>📜 Responsable:</b> Dato histórico: no hay dependencia que deba publicarlo hoy</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, Cuenta Pública 2009, auditoría de inversiones físicas 1053, Secretaría de S ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sector.html">Megaobras · Sector e industria</a> · <a class="pe-ancla" href="#obra-bunker-garcia-luna" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="reloj-megaobras">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Pérdida operativa de las megaobras</h3>
+            <p class="pe-porque"><b>Por qué:</b> Es la suma de la pérdida de operación que registra el simulador de megaobras. Varias obras no tienen un documento oficial de su costo de operación e ingresos: las dependencias que las operan (Sedena, Pemex, Fonatur) no los han transparentado obra por obra.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Las dependencias que operan cada obra (Sedena, Pemex, Fonatur)</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta" target="_blank" rel="noopener">🔗 Dónde debería estar: Obra Pública Abierta (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-reloj.html">El reloj de la deuda</a> · <a class="pe-ancla" href="#reloj-megaobras" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="costo-unitario-megaobras">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Costo por usuario de cada megaobra (por pasajero, por barril, por usuario)</h3>
+            <p class="pe-porque"><b>Por qué:</b> Ningún documento oficial publica el subsidio por usuario de las obras. La plataforma lo marca como pendiente hasta que la dependencia que opera cada obra publique su costo de operación y su número de usuarios.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Las dependencias que operan cada obra (Sedena, Pemex, Fonatur, SICT)</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta" target="_blank" rel="noopener">🔗 Dónde debería estar: Obra Pública Abierta (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sector.html">Megaobras · Sector e industria</a> · <a class="pe-ancla" href="#costo-unitario-megaobras" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="tren-maya-ficha">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Ficha pericial del Tren Maya 2024</h3>
+            <p class="pe-porque"><b>Por qué:</b> Se retiró el 10-10-2026 porque sus cifras no se habían cotejado con el Tomo VII de la Cuenta Pública 2024 ni con la ASF. Volverá cuando cada cifra tenga su documento.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/es/CP/2024" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública 2024, Tomo VII (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="expedientes.html#exp-tren-maya">Expediente del Tren Maya</a> · <a class="pe-ancla" href="#tren-maya-ficha" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-historia" aria-labelledby="tema-historia-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-historia-tit"><span class="sr-only"></span>Historia</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-historico" id="sexenal-empleo">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Empleo formal (asegurados al IMSS) en los sexenios de Salinas, Zedillo</h3>
+            <p class="pe-porque"><b>Por qué:</b> La serie de asegurados del anexo estadístico empieza en 1997.</p>
+            <p class="pe-quien"><b>📜 Responsable:</b> Dato histórico: no hay dependencia que deba publicarlo hoy</p>
+            <p class="pe-donde"><a href="https://framework-gb.cdn.gob.mx/quintoinforme/5IG_ANEXO_FINAL_TGM_250818.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento de la serie ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sexenios.html">Las obras de cada sexenio</a> · <a class="pe-ancla" href="#sexenal-empleo" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-historico" id="sexenal-recuperaciones">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Recuperaciones de la ASF en los sexenios de Zedillo</h3>
+            <p class="pe-porque"><b>Por qué:</b> La serie de recuperaciones de la ASF empieza en la Cuenta Pública 2001.</p>
+            <p class="pe-quien"><b>📜 Responsable:</b> Dato histórico: no hay dependencia que deba publicarlo hoy</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/uploads/55_Informes_de_auditoria/2022_IGE_a.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento de la serie ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sexenios.html">Las obras de cada sexenio</a> · <a class="pe-ancla" href="#sexenal-recuperaciones" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-historico" id="sexenal-porAclarar">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Monto por aclarar ante la ASF en los sexenios de Zedillo, Fox, Calderón, Peña Nieto</h3>
+            <p class="pe-porque"><b>Por qué:</b> La ASF publica el monto por aclarar con esta definición desde la Cuenta Pública 2019; antes usaba otros conceptos que no se suman con este.</p>
+            <p class="pe-quien"><b>📜 Responsable:</b> Dato histórico: no hay dependencia que deba publicarlo hoy</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento de la serie ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-megaobras-sexenios.html">Las obras de cada sexenio</a> · <a class="pe-ancla" href="#sexenal-porAclarar" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="radar-1989">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Ingresos, gasto, inversión y costo financiero de 1989, el primer año de Salinas</h3>
+            <p class="pe-porque"><b>Por qué:</b> Las Estadísticas Oportunas de Hacienda, que usa el Radar, empiezan en 1990, y el Anexo Estadístico del 5.º Informe en 1995. La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra. Mientras tanto, Salinas se mide con cinco de sus seis años (1990 a 1994) en % del PIB, y sus sumas en pesos quedan pendientes.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="radar-tablero.html">Radar · El tablero</a> · <a href="radar-reloj.html">Radar · El reloj</a> · <a href="radar-duelo.html">Radar · Duelo de administraciones</a> · <a class="pe-ancla" href="#radar-1989" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-remuneraciones" aria-labelledby="tema-remuneraciones-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-remuneraciones-tit"><span class="sr-only"></span>Remuneraciones</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="neto-diputado_local-sinaloa">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneración neta de los diputados locales de Sinaloa</h3>
+            <p class="pe-porque"><b>Por qué:</b> El documento oficial publica la remuneración bruta (Sueldo de $28,234.20 más «compensación a legisladores» de $112,707.14: total de percepciones ordinarias mensuales. El manual no publica el neto.) pero no la neta. La ley general de transparencia obliga a cada sujeto obligado a publicar la remuneración bruta y la neta.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Congreso del estado de Sinaloa</p>
+            <p class="pe-donde"><a href="https://www.congresosinaloa.gob.mx/images/estructura-y-normatividad/MANUAL_DE_REMUNERACIONES_DEL_PODER_LEGISLATIVO_DEL_2026-2027_.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Congreso de Sinaloa, manual de remuneraciones 2026-2027 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#neto-diputado_local-sinaloa" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="neto-diputado_local-tlaxcala">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneración neta de los diputados locales de Tlaxcala</h3>
+            <p class="pe-porque"><b>Por qué:</b> El documento oficial publica la remuneración bruta (Los 25 diputados, remuneración «de $111,243 hasta $135,923» en el analítico de plazas. El decreto no dice la periodicidad: es mensual porque la partida de dietas ($33,669,060 al año, Anexo 8) entre 25 diputados y 12 mese) pero no la neta. La ley general de transparencia obliga a cada sujeto obligado a publicar la remuneración bruta y la neta.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Congreso del estado de Tlaxcala</p>
+            <p class="pe-donde"><a href="https://sefintlax.gob.mx/DocsSF/2026/admin/enero/PRESUPUESTO_EGRESOS_TLAXCALA_2026.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Presupuesto de Egresos de Tlaxcala 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#neto-diputado_local-tlaxcala" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="neto-diputado_local-nayarit">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneración neta de los diputados locales de Nayarit</h3>
+            <p class="pe-porque"><b>Por qué:</b> El documento oficial publica la remuneración bruta (Los 30 diputados: sueldo de $32,651 brutos ($26,397.46 netos) más dieta de $78,406.64 brutos al mes, cuyo neto el formato no reporta. Bruto: la suma de ambos.) pero no la neta. La ley general de transparencia obliga a cada sujeto obligado a publicar la remuneración bruta y la neta.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Congreso del estado de Nayarit</p>
+            <p class="pe-donde"><a href="https://congresonayarit.gob.mx/wp-content/uploads/TRANSPARENCIA/art_33/08/2026/08_a_remuneracion_bruta_y_neta_primer_trimestre_2026.xlsx" target="_blank" rel="noopener">🔗 Dónde debería estar: Congreso de Nayarit, remuneraciones 1.er trim. 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#neto-diputado_local-nayarit" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="neto-diputado_local-campeche">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneración neta de los diputados locales de Campeche</h3>
+            <p class="pe-porque"><b>Por qué:</b> El documento oficial publica la remuneración bruta (Dieta de los 35 diputados; el analítico de plazas la registra como sueldo bruto mensual. No publica el neto.) pero no la neta. La ley general de transparencia obliga a cada sujeto obligado a publicar la remuneración bruta y la neta.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Congreso del estado de Campeche</p>
+            <p class="pe-donde"><a href="https://legislacion.congresocam.gob.mx/index.php/leyes-focalizadas/paquete-fiscal/2026/649-anexos-de-la-ley-de-presupuesto-de-egresos-del-estado-de-campeche-para-el-ejercicio-fiscal-2026/file" target="_blank" rel="noopener">🔗 Dónde debería estar: Presupuesto de Egresos de Campeche 2026, Anexo 19 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#neto-diputado_local-campeche" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="neto-diputado_local-yucatán">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneración neta de los diputados locales de Yucatán</h3>
+            <p class="pe-porque"><b>Por qué:</b> El documento oficial publica la remuneración bruta (Los 35 diputados: sueldo base de $44,880 más despensa de $6,000 al mes; aparte, aguinaldo de $59,840 al año. No publica el neto.) pero no la neta. La ley general de transparencia obliga a cada sujeto obligado a publicar la remuneración bruta y la neta.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Congreso del estado de Yucatán</p>
+            <p class="pe-donde"><a href="https://www.yucatan.gob.mx/docs/diario_oficial/diarios/2025/2025-12-29_5.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Diario Oficial de Yucatán, 29-12-2025 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#neto-diputado_local-yucatán" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="prest-aguinaldo-sen">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Aguinaldo de la Senaduría (Manual, Anexo 3; Anexo 23.2.2)</h3>
+            <p class="pe-porque"><b>Por qué:</b> $382,207 ÷ ($190,023 de dieta bruta mensual ÷ 30) = 60.3 días. El documento no explica la diferencia con los 40 días del Manual: queda por aclarar.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Senado de la República</p>
+            <p class="pe-donde"><a href="https://dof.gob.mx/nota_detalle.php?codigo=5781138&fecha=27/02/2026" target="_blank" rel="noopener">🔗 Dónde debería estar: Manual de remuneraciones del Senado 2026 (DOF 27-02-2026) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#prest-aguinaldo-sen" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="prest-vacaciones-pr">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Vacaciones de la Presidencia (Anexo 23.1.3)</h3>
+            <p class="pe-porque"><b>Por qué:</b> El anexo registra la prima, no los días</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Presidencia de la República</p>
+            <p class="pe-donde"><a href="https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: PEF 2026, Anexo 23 (DOF 21-11-2025) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-calculadora-compara.html">Tú contra ellos</a> · <a class="pe-ancla" href="#prest-vacaciones-pr" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="asesores-congresos-locales">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneración de los asesores y del personal de apoyo de los 32 congresos locales</h3>
+            <p class="pe-porque"><b>Por qué:</b> Cada congreso debe publicar la remuneración bruta y la neta de todo su personal (Ley General de Transparencia, art. 65, fr. VII). La plataforma aún no integra esos tabuladores, así que el estado de cuenta de la diputación local no dice cuánto cobran sus asesores.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.plataformadetransparencia.org.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Plataforma Nacional de Transparencia ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta de la diputación local</a> · <a class="pe-ancla" href="#asesores-congresos-locales" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-poderes" aria-labelledby="tema-poderes-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-poderes-tit"><span class="sr-only"></span>Poderes</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-plataforma" id="poderes-judicial-0">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Costo completo por circuito</h3>
+            <p class="pe-porque"><b>Por qué:</b> No se calcula dividiendo el presupuesto entre el número de órganos o de personas: ese reparto no es un dato. Hace falta que el poder publique el costo desglosado, o integrar el documento que lo trae.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento oficial del poder ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="index.html?ir=poderes">Lo que cuestan los Poderes</a> · <a class="pe-ancla" href="#poderes-judicial-0" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="poderes-judicial-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Costo completo por ponencia de la SCJN</h3>
+            <p class="pe-porque"><b>Por qué:</b> No se calcula dividiendo el presupuesto entre el número de órganos o de personas: ese reparto no es un dato. Hace falta que el poder publique el costo desglosado, o integrar el documento que lo trae.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento oficial del poder ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="index.html?ir=poderes">Lo que cuestan los Poderes</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#poderes-judicial-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="poderes-legislativo-0">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Remuneraciones individuales de los 32 congresos locales</h3>
+            <p class="pe-porque"><b>Por qué:</b> No se calcula dividiendo el presupuesto entre el número de órganos o de personas: ese reparto no es un dato. Hace falta que el poder publique el costo desglosado, o integrar el documento que lo trae.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento oficial del poder ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="index.html?ir=poderes">Lo que cuestan los Poderes</a> · <a href="radar-estado-de-cuenta.html#expide">Radar · Estado de cuenta</a> · <a class="pe-ancla" href="#poderes-legislativo-0" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="poderes-legislativo-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Número de legisladores de cada congreso con su fuente, para el costo por legislador</h3>
+            <p class="pe-porque"><b>Por qué:</b> No se calcula dividiendo el presupuesto entre el número de órganos o de personas: ese reparto no es un dato. Hace falta que el poder publique el costo desglosado, o integrar el documento que lo trae.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Documento oficial del poder ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="index.html?ir=poderes">Lo que cuestan los Poderes</a> · <a class="pe-ancla" href="#poderes-legislativo-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-ambiente" aria-labelledby="tema-ambiente-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-ambiente-tit"><span class="sr-only"></span>Ambiente</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-plataforma" id="ambiente-0">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Huella ambiental de las megaobras</h3>
+            <p class="pe-porque"><b>Por qué:</b> Huella ambiental de las megaobras: las Manifestaciones de Impacto Ambiental están en el portal de la SEMARNAT (dgiraDocs), que no fue accesible al integrar. Ninguna cifra de hectáreas se muestra hasta tener el documento oficial.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/semarnat" target="_blank" rel="noopener">🔗 Dónde debería estar: Fuente oficial ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-ambiente-basura.html">Basura y protección</a> · <a class="pe-ancla" href="#ambiente-0" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="ambiente-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Concesión y costo del servicio de basura, municipio por municipio</h3>
+            <p class="pe-porque"><b>Por qué:</b> Concesión y costo del servicio de basura, municipio por municipio: vienen en los microdatos del módulo de residuos del Censo de Gobiernos Municipales 2023 del INEGI; falta descargarlos.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/contenidos/programas/cngmd/2023/doc/cngmd2023_resultados_geogr_amb.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: Fuente oficial ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-ambiente-basura.html">Basura y protección</a> · <a class="pe-ancla" href="#ambiente-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="ambiente-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Costo del daño ambiental 2025</h3>
+            <p class="pe-porque"><b>Por qué:</b> Costo del daño ambiental 2025: el INEGI publica las Cuentas Económicas y Ecológicas cada diciembre; la de 2025 se espera en diciembre de 2026.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> INEGI (publica cada diciembre)</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/temas/ee/" target="_blank" rel="noopener">🔗 Dónde debería estar: Fuente oficial ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-ambiente-basura.html">Basura y protección</a> · <a class="pe-ancla" href="#ambiente-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-estados-y-municipios" aria-labelledby="tema-estados-y-municipios-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-estados-y-municipios-tit"><span class="sr-only"></span>Estados y municipios</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="entidades-cdmx">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Convenios, recaudación propia y dependencia federal de 2024: CDMX</h3>
+            <p class="pe-porque"><b>Por qué:</b> La Ciudad de México no figura en la estadística estatal del INEGI; su cifra sigue sin documento citado.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Gobierno de la Ciudad de México</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/programas/finanzas/" target="_blank" rel="noopener">🔗 Dónde debería estar: Finanzas públicas estatales (INEGI) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="numeros-baja-al-territorio.html">Números · Baja al territorio</a> · <a class="pe-ancla" href="#entidades-cdmx" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="municipios-sin-cuenta">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cuenta pública 2024 de los municipios que no la entregaron al INEGI</h3>
+            <p class="pe-porque"><b>Por qué:</b> De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Los ayuntamientos que no reportaron</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/programas/finanzas/" target="_blank" rel="noopener">🔗 Dónde debería estar: Estadística de finanzas públicas estatales y municipales (INEGI) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="numeros-baja-al-territorio.html">Números · Baja al territorio</a> · <a class="pe-ancla" href="#municipios-sin-cuenta" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="alcaldes-inafed">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Alcaldes sin registro en el padrón del INAFED</h3>
+            <p class="pe-porque"><b>Por qué:</b> Algunos municipios no tienen a su presidente municipal registrado en el padrón del Instituto Nacional para el Federalismo y el Desarrollo Municipal, o lo tienen sin partido.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Instituto Nacional para el Federalismo y el Desarrollo Municipal (INAFED)</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/inafed" target="_blank" rel="noopener">🔗 Dónde debería estar: INAFED ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-entes.html">Auditor de entes públicos</a> · <a class="pe-ancla" href="#alcaldes-inafed" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="tema-fiscalizacion" aria-labelledby="tema-fiscalizacion-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-fiscalizacion-tit"><span class="sr-only"></span>Fiscalización</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="asf-matriz-2018">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Matriz de Datos Básicos de la Cuenta Pública 2018</h3>
+            <p class="pe-porque"><b>Por qué:</b> La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Auditoría Superior de la Federación (ASF)</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Section/58_Informes_de_auditoria" target="_blank" rel="noopener">🔗 Dónde debería estar: Informes de auditoría de la ASF ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-asf.html">Qué encontró la ASF</a> · <a class="pe-ancla" href="#asf-matriz-2018" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="apartado-pie">
+    <div class="apartado-ancho">
+      <a class="apartado-volver" href="index.html">← Volver al auditor</a>
+      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011f</b></span>
+    </div>
+  </footer>
+
+  <script src="assets/auditor/js/apartados.js?v=20261011f"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261011f"></script>
+</body>
+</html>
