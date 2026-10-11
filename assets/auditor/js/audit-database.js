@@ -10561,7 +10561,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Doctrina y bibliografía",
       "cita_apa": "Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). Introducción al derecho económico. Editorial Esfinge.",
       "url": "",
-      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo. Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
+      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo; la del Presupuesto (capítulo 7, p. 96: la acción financiera del Estado) vive en las Preguntas frecuentes, en «¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?». Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
     }
   ],
   "preguntas_casillas": [
@@ -10572,10 +10572,12 @@ window.AUDIT_DB = {
       "items": [
         {
           "q": "¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?",
-          "a": "Las <strong>finanzas públicas</strong> son el conjunto de reglas jurídicas, económicas y contables con las que el Estado planea, obtiene, administra y gasta los recursos de la colectividad. A diferencia de una empresa, su fin no es acumular ganancias sino <em>prestar servicios públicos</em> (salud, educación, justicia, seguridad), procurar una distribución más justa del ingreso y financiar los programas que la Cámara de Diputados aprueba cada año en el Presupuesto de Egresos.",
+          "a": "Las <strong>finanzas públicas</strong> son el conjunto de reglas jurídicas, económicas y contables con las que el Estado planea, obtiene, administra y gasta los recursos de la colectividad. A diferencia de una empresa, su fin no es acumular ganancias sino <em>prestar servicios públicos</em> (salud, educación, justicia, seguridad), procurar una distribución más justa del ingreso y financiar los programas que la Cámara de Diputados aprueba cada año en el Presupuesto de Egresos.<p><b>📘 Ayer y hoy.</b> <em>En el libro (1995):</em> el capítulo 7 de <cite>Introducción al derecho económico</cite>, de Gómez Granillo y Gutiérrez Rosas, abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda. <em>Hoy (2026):</em> cada año la <strong>Ley de Ingresos de la Federación</strong> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.</p>",
           "refs": [
             "ref-cpeum",
-            "ref-lfprh"
+            "ref-lfprh",
+            "ref-lif2026",
+            "ref-gomez-granillo-1995"
           ]
         },
         {

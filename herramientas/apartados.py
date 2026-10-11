@@ -323,8 +323,10 @@ APARTADOS = [
                 'texto': ('Todo el dinero federal de 2026, en cinco tarjetas: cuánto es, de dónde viene y a dónde va; los 16 '
                           'orígenes que autoriza la Ley de Ingresos; a qué equivale; el camino que recorre, y lo que propone el '
                           'Paquete Económico 2027. Cada tarjeta abre su propia página.'),
-                'ayer': ('El capítulo 7 abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda.',
-                         'Cada año la <b>Ley de Ingresos de la Federación</b> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.'),
+                # Sin franja «Ayer y hoy» ni nota del libro desde el
+                # 11-10-2026 (pedido del autor): viven en el Diccionario,
+                # en la pregunta frecuente de la accion financiera del
+                # Estado y en la ficha [119] del compendio de fuentes.
                 # Desde el 11-10-2026 (pedidos del autor) la pagina es solo
                 # tarjetas, en mosaico, y cada una abre su pagina de modulo
                 # (NUMEROS_MODULOS). «El peso de 2026» se fundio el mismo dia
@@ -3150,18 +3152,12 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
                     'ni por tipo de contribuyente ni por actividad. Por eso aquí no hay desglose: no lo inventamos.</p>' % x['claveLIF'])
     term = x['glos'] if x['glos'] in glosario else None
     ant, sig = (lista[n - 1] if n > 0 else None), (lista[n + 1] if n + 1 < len(lista) else None)
-    def paso(y, rot, cls):
-        if not y:
-            return '<a class="herr-mod-paso %s" href="numeros-los-16-origenes.html"><small>%s</small><b>💵 Los 16 orígenes</b></a>' % (
-                cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
-        return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, ingreso_archivo(y), rot, y['icono'], y['nombre'])
-    chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
-        ' actual' if y is x else '', ingreso_archivo(y), ' aria-current="page"' if y is x else '', y['icono'], y['nombre']) for y in lista)
-    nav = ('<nav class="herr-mod-nav" aria-label="Los 16 orígenes del ingreso">\n'
-           '        <div class="herr-mod-pasos">\n          %s\n          %s\n        </div>\n'
-           '        <span class="herr-otras-tit">Los 16 orígenes del ingreso</span>\n'
-           '        <div class="herr-mod-chips">%s</div>\n      </nav>' % (
-               paso(ant, '← Anterior', 'ant'), paso(sig, 'Siguiente →', 'sig'), chips))
+    # El ultimo renglon sigue con el modulo que va despues de los 16 origenes.
+    tras = NUMEROS_MODULOS[[m[0] for m in NUMEROS_MODULOS].index('nr-origenes') + 1]
+    nav = presupuesto_pie(
+        (ingreso_archivo(ant), '← Anterior', ant['icono'], ant['nombre']) if ant else ('numeros-los-16-origenes.html', '← Volver a', '🧾', 'Los 16 orígenes'),
+        (ingreso_archivo(sig), 'Siguiente →', sig['icono'], sig['nombre']) if sig else (tras[1], 'Siguiente →', tras[2], tras[3]),
+        ('numeros-los-16-origenes.html', '🧾 Los 16 orígenes: todos los renglones') if ant else None)
     bloque = '''<div class="ni">
           <div class="ni-cifra">
             <p class="ni-monto"><b>%s</b> <span class="est-chip est-%s">%s</span></p>
@@ -3189,7 +3185,7 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
         'icono': x['icono'], 'lema': 'Presupuesto · Ley de Ingresos 2026',
         'titulo': x['nombreLargo'] if x['nombre'] in x['nombreLargo'] else '%s (%s)' % (x['nombreLargo'], x['nombre']),
         'entrada': re.sub('<[^>]+>', '', x['quePaga']),
-        'estilos': ['numeros.css'], 'pie_extra': nav + '\n\n      ' + numeros_nav('numeros-presupuesto.html'),
+        'estilos': ['numeros.css'], 'pie_extra': nav,
         'secciones': [{'id': 'ficha', 'titulo': x['nombre'], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
     }
 
@@ -3231,10 +3227,36 @@ def numeros_modulo(m, tarjetas, bloque=None, script='presupuesto.js'):
         'pie_extra': nav + '\n\n      ' + numeros_nav(parch),
         'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque or marco}],
     }
+    if parte == 'origen':
+        p['pie_extra'] = presupuesto_pie(
+            (ant[1], '← Anterior', ant[2], ant[3]) if ant else (parch, '← Volver a', pico, pnom),
+            (sig[1], 'Siguiente →', sig[2], sig[3]) if sig else presupuesto_siguiente_parte(),
+            (parch, '%s %s: sus cinco tarjetas' % (pico, pnom)) if ant else None)
     if bloque:
         p['estilos'] = ['numeros.css']
         p['scripts'] = [script]
     return p
+
+
+def presupuesto_pie(ant, sig, arriba=None):
+    """Pie de las paginas de «Presupuesto» (pedido del autor, 11-10-2026):
+    solo anterior y siguiente, y un enlace para subir cuando el anterior no
+    es ya la pagina de arriba. Sustituye a los chips «Mas de...» y a la
+    barra de Numeros, que repetian los mismos destinos. Cada paso es
+    (archivo, rotulo, icono, nombre)."""
+    def paso(x, cls):
+        if not x:
+            return '<span></span>'
+        return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % ((cls,) + x)
+    sube = ('\n        <a class="np-saltos-arriba" href="%s">↑ %s</a>' % arriba) if arriba else ''
+    return ('<nav class="herr-mod-nav np-saltos" aria-label="Anterior y siguiente">\n'
+            '        <div class="herr-mod-pasos">\n          %s\n          %s\n        </div>%s\n      </nav>' % (
+                paso(ant, 'ant'), paso(sig, 'sig'), sube))
+
+
+def presupuesto_siguiente_parte():
+    _, arch, ico, nom = next(r for r in NUMEROS_PARTES if r[0] == 'gasta')[:4]
+    return (arch, 'Siguiente parte →', ico, nom)
 
 
 def numeros_nav(actual):
@@ -3511,14 +3533,16 @@ def numeros_preparar():
              'estilos': ['numeros.css'], 'pie_extra': numeros_nav(archivo)}
         sec = dict(pasos[pid], sin_cab=True)
         sec.pop('num', None)
-        p.update(comun)
-        p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': True, 'secciones': [sec]})
+        if pid != 'origen':
+            p.update(comun)
+        p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': pid != 'origen', 'secciones': [sec]})
         # ?abrir=eb-bloque que llegue aqui (de una pagina vieja) va a su pagina.
         p['abrir_a_pagina'] = NUMEROS_ABRIR
         if pid == 'origen':
             # «El peso de 2026» y «Los 16 origenes» vivian aqui; desde el
             # 11-10-2026 tienen su pagina y sus anclas viejas llevan alla.
             p['hash_a_pagina'] = {'numPeso': 'numeros-cuanto-dinero-es.html#numPeso', 'nrRenglones': 'numeros-los-16-origenes.html'}
+            p['pie_extra'] = presupuesto_pie(('sigue-el-dinero.html', '← Volver a', '💰', 'Números'), presupuesto_siguiente_parte())
         if pid == 'gasta':
             p['scripts'] = ['gasto-publico.js']
             p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
@@ -3765,6 +3789,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Presupuesto se aligera: la franja «Ayer y hoy» y las notas del libro pasan al Diccionario del Gasto Público, en la pregunta frecuente sobre la acción financiera del Estado y en la ficha del libro en el Compendio de fuentes. Al pie de cada página de Presupuesto quedan solo dos botones, anterior y siguiente, sin listas que repitan los mismos destinos.', 'numeros-presupuesto.html'),
     ('11-10-2026', 'Presupuesto queda en cinco tarjetas compactas. El peso de 2026 se fundió con Cuánto dinero es, que ahora reúne la cifra del año, las dos barras de lo que entra y lo que sale, y lo que baja al territorio, sin repetir el reparto en columnas. El camino del dinero se concentra en quién responde, en qué plazo y con qué ley, y remite a las cifras en lugar de repetirlas.'),
     ('11-10-2026', 'La página de Presupuesto queda en seis tarjetas, y cada una abre su propia página: El peso de 2026, con las dos barras de lo que entra y lo que sale; Los 16 orígenes del ingreso, renglón por renglón y con su contador; Cuánto dinero es; ¿A qué equivale?; El camino del dinero, en cuatro etapas, y el Paquete Económico 2027.'),
     ('11-10-2026', 'Los cuatro módulos de Presupuesto ya no se despliegan dentro del auditor: cada uno es una página propia que abre al instante, con sus cifras ya puestas. Cuánto dinero es pone lo que entra y lo que sale columna contra columna; ¿A qué equivale? dibuja cada comparación con su operación; El camino del dinero muestra las cuatro etapas con quién responde, su plazo y su ley; y el Paquete Económico 2027 reúne la constitución económica, el itinerario, las cifras, el simulador de sensibilidades con los coeficientes oficiales y los puntos ciegos.'),
