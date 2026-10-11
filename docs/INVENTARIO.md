@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 119 |
+| Páginas revisadas | 123 |
 | Páginas que solo redirigen | 9 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -41,7 +41,11 @@ La Enciclopedia queda fuera porque está congelada.
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 23 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `garantias.html` | Garantías cívicas · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
+| `garantias-brujula.html` | La brújula: ¿a qué puerta toco? · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `garantias-derechos.html` | Tus diez garantías · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `garantias-puertas.html` | Las seis puertas oficiales · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `garantias-reto.html` | ¿Mito o realidad? · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `garantias.html` | Garantías cívicas · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `glosario.html` | Diccionario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 51 | 0 | 17 | 8 | 19 |
@@ -69,7 +73,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 141 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 145 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 40 | 0 | 0 | 5 | 1 |

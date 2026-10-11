@@ -1,13 +1,14 @@
-/* Garantías cívicas (garantias.html, 10-10-2026): la brújula de denuncia,
-   las cartas de las diez garantías y el reto «¿Mito o realidad?».
+/* Garantías cívicas (10-10-2026): la brújula de denuncia, las cartas de las
+   diez garantías y el reto «¿Mito o realidad?». Desde el 11-10-2026 cada
+   parte vive en su página (garantias-brujula.html, -puertas, -derechos y
+   -reto), así que cada bloque arranca solo si está en la página.
    Los textos vienen de window.AUDIT_DB por herramientas/apartados.py
    (garantias()), en el JSON #grDatos: aquí no se escribe ningún texto legal. */
 (function () {
   'use strict';
   var nodo = document.getElementById('grDatos');
-  if (!nodo) return;
-  var D;
-  try { D = JSON.parse(nodo.textContent); } catch (e) { return; }
+  var D = { canales: {}, que: [], reto: [] };
+  if (nodo) { try { D = JSON.parse(nodo.textContent); } catch (e) { return; } }
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -54,7 +55,7 @@
         '<div><dt>Qué llevar</dt><dd>' + esc(c.queNecesitas) + '</dd></div>' +
         '<div><dt>Qué produce</dt><dd>' + esc(c.efecto) + '</dd></div>' +
       '</dl>' +
-      '<p class="gr-res-acc">' + acceso + ' <a class="gr-ficha" href="#puerta-' + esc(id) + '">Ver su ficha ↓</a></p>' +
+      '<p class="gr-res-acc">' + acceso + ' <a class="gr-ficha" href="garantias-puertas.html#puerta-' + esc(id) + '">Ver su ficha ➔</a></p>' +
     '</article>';
   }
 
@@ -92,20 +93,22 @@
     });
   }
 
-  /* Al saltar a la ficha de una puerta, se resalta un momento. */
-  document.addEventListener('click', function (ev) {
-    var a = ev.target.closest('a.gr-ficha');
-    if (!a) return;
-    var dest = document.querySelector(a.getAttribute('href'));
+  /* Al llegar a la ficha de una puerta (garantias-puertas.html#puerta-…),
+     se abre su detalle y se resalta un momento. */
+  function destaca() {
+    var h = location.hash.slice(1);
+    if (!/^puerta-[\w-]+$/.test(h)) return;
+    var dest = document.getElementById(h);
     if (!dest) return;
-    ev.preventDefault();
-    var y = dest.getBoundingClientRect().top + window.scrollY - 90;
-    window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
     var det = dest.querySelector('details');
     if (det) det.open = true;
+    var y = dest.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
     dest.classList.add('gr-destacada');
     setTimeout(function () { dest.classList.remove('gr-destacada'); }, 1600);
-  });
+  }
+  destaca();
+  window.addEventListener('hashchange', destaca);
 
   /* ---------------- Las cartas ---------------- */
   var cartas = document.querySelector('.gr-cartas');
@@ -138,7 +141,7 @@
   function final() {
     var msg = aciertos === R.length ? '🏆 Perfecto: conoces tus garantías.'
       : aciertos >= R.length - 2 ? '👏 Muy bien: ya sabes defenderte.'
-      : '📚 Vale la pena repasar las diez garantías de arriba.';
+      : '📚 Vale la pena repasar las diez garantías.';
     document.getElementById('grRetoBarra').style.width = '100%';
     document.getElementById('grRetoAvance').textContent = 'Terminaste';
     document.getElementById('grRetoPuntos').textContent = 'Aciertos: ' + aciertos + ' de ' + R.length;
@@ -147,7 +150,7 @@
     var exp = document.getElementById('grRetoExp');
     exp.hidden = false;
     exp.innerHTML = '<p class="gr-reto-acc"><button type="button" class="sz-btn sz-btn-of" id="grRetoOtra">🔄 Jugar otra vez</button> ' +
-      '<a class="sz-btn" href="#derechos">Repasar las diez garantías</a></p>';
+      '<a class="sz-btn" href="garantias-derechos.html">Repasar las diez garantías</a></p>';
   }
   if (reto && R.length) {
     reto.addEventListener('click', function (ev) {
