@@ -20,11 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011s">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011s">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011s">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011s">
-  <script>(function () { var m = {"radar": "radar-hacendario.html", "rc-megaobras": "radar-presupuesto-en-curso.html", "rc-deuda": "radar-presupuesto-en-curso.html", "rc-asf": "radar-presupuesto-en-curso.html", "rc-huachicol": "radar-presupuesto-en-curso.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011t">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011t">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011t">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011t">
+  <script>(function () { var m = {"radar": "radar-hacendario.html", "rc-megaobras": "radar-presupuesto-en-curso.html", "rc-deuda": "radar-presupuesto-en-curso.html", "rc-asf": "radar-presupuesto-en-curso.html", "rc-huachicol": "radar-presupuesto-en-curso.html", "abiertos": "datos-abiertos.html", "informes": "informes-oficiales.html", "ficha-descargas": "datos-descargas.html", "ficha-municipios": "datos-municipios.html", "ficha-asf": "informes-cuenta-publica.html", "ficha-diccionario": "informes-diccionario.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -157,56 +157,12 @@
     <div class="apartado-ancho apartado-cuerpo">
       <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página">
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-radar" href="radar-hacendario.html"><span class="apartado-pestana-ico" aria-hidden="true">📡</span><span class="apartado-pestana-tx"><b>Radar hacendario</b><small>Cada administración, con sus números: abre su página</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-abiertos" href="#abiertos" aria-controls="abiertos" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">💾</span><span class="apartado-pestana-tx"><b>Datos abiertos</b><small>Bases en CSV para Excel</small></span></a>
-          <a class="apartado-pestana" role="tab" id="pestana-informes" href="#informes" aria-controls="informes" aria-selected="false"><span class="apartado-pestana-ico" aria-hidden="true">📑</span><span class="apartado-pestana-tx"><b>Informes oficiales</b><small>Cuenta Pública y diccionario</small></span></a>
+          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-abiertos" href="datos-abiertos.html"><span class="apartado-pestana-ico" aria-hidden="true">💾</span><span class="apartado-pestana-tx"><b>Datos abiertos</b><small>Bases en CSV para Excel: abre su página</small></span></a>
+          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-informes" href="informes-oficiales.html"><span class="apartado-pestana-ico" aria-hidden="true">📑</span><span class="apartado-pestana-tx"><b>Informes oficiales</b><small>Cuenta Pública y diccionario: abre su página</small></span></a>
       </nav>
       <p class="apartado-pestanas-pista" id="pestanasPista">Elige una pestaña para abrir su contenido.</p>
       
-      <section class="apartado-seccion apartado-panel" id="abiertos" aria-labelledby="abiertos-tit" role="tabpanel">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="abiertos-tit"><span class="sr-only"></span>💾 Datos abiertos</h2>
-          <p class="apartado-seccion-texto">Bases en CSV, listas para revisar. Pulsa una ficha para desplegarla.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="apartado-rejilla dt-fichas">
-<button type="button" class="apartado-tarjeta dt-ficha rubro-dinero" data-ficha="descargas" aria-expanded="false">
-  <span class="apartado-tarjeta-icono" aria-hidden="true">📥</span>
-  <span class="apartado-tarjeta-nombre">Descarga en CSV (abre en Excel)</span>
-  <span class="apartado-tarjeta-desc">Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.</span>
-  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
-</button>
-<button type="button" class="apartado-tarjeta dt-ficha rubro-dinero" data-ficha="municipios" aria-expanded="false">
-  <span class="apartado-tarjeta-icono" aria-hidden="true">🏘️</span>
-  <span class="apartado-tarjeta-nombre">Base de Datos Municipal EFIPEM (INEGI)</span>
-  <span class="apartado-tarjeta-desc">Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.</span>
-  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
-</button>
-</div>
-        </div>
-      </section>
 
-      <section class="apartado-seccion apartado-panel" id="informes" aria-labelledby="informes-tit" role="tabpanel">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="informes-tit"><span class="sr-only"></span>📑 Informes oficiales</h2>
-          <p class="apartado-seccion-texto">Lo que revisó la Auditoría Superior y qué contiene cada archivo. Pulsa una ficha para desplegarla.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="apartado-rejilla dt-fichas">
-<button type="button" class="apartado-tarjeta dt-ficha rubro-inspector" data-ficha="asf" aria-expanded="false">
-  <span class="apartado-tarjeta-icono" aria-hidden="true">🔎</span>
-  <span class="apartado-tarjeta-nombre">Informes de la Cuenta Pública (ASF)</span>
-  <span class="apartado-tarjeta-desc">Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.</span>
-  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
-</button>
-<button type="button" class="apartado-tarjeta dt-ficha" data-ficha="diccionario" aria-expanded="false">
-  <span class="apartado-tarjeta-icono" aria-hidden="true">📋</span>
-  <span class="apartado-tarjeta-nombre">Diccionario de Datos</span>
-  <span class="apartado-tarjeta-desc">Qué contiene cada archivo de datos de la plataforma, campo por campo.</span>
-  <span class="apartado-tarjeta-accion">Desplegar ▾</span>
-</button>
-</div>
-        </div>
-      </section>
     </div>
   </main>
 
@@ -214,14 +170,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011s</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011t</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261011s"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261011s"></script>
-  <script src="assets/auditor/js/audit-database.js?v=20261011s"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261011s"></script>
-  <script src="assets/auditor/js/datos.js?v=20261011s"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261011t"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261011t"></script>
 </body>
 </html>
