@@ -671,6 +671,45 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Gasto público», dinámico (11-10-2026, sello 20261011c).**
+Pedido del autor: reestructurar la página para que sea dinámica, con gráficas y simulador
+contable, centrada en dos preguntas: quién tiene la facultad de aprobar el gasto y cómo se
+reparte. `numeros-gasto-publico.html` lleva ahora, en este orden:
+- **«¿Quién lo aprueba? El ciclo del presupuesto»** (`gasto_ciclo()`, `GP_CICLO`, `GP_QUIEN`).
+  Son seis paradas en pestañas: propone, aprueba los ingresos, aprueba el gasto, lo ejerce,
+  cierra el año y lo revisa. Cada parada trae:
+  - su autoridad y su fecha límite;
+  - «En los hechos», con las fechas de 2026 que sí están en la base: LIF 2026 en el DOF el
+    07-11-2025, PEF 2026 el 28-11-2025 y los Criterios 2027 en la Gaceta del 08-09-2026;
+  - el texto oficial **cotejado** de `preceptos_legales`: CPEUM 73, 74-IV, 79, 126 y 134;
+    LFPRH 17-18, 42 y 54; LIF 2026 art. 2o.
+
+  Debajo va la tabla «Quién puede qué»: Ejecutivo, Diputados, Senado y ASF, frente a Ley de
+  Ingresos, Presupuesto de Egresos, deuda y revisión, cada celda con su artículo. La fecha
+  en que Diputados aprobó el PEF 2026 no está en la base, así que no se da.
+- **«¿Cómo se reparte? El simulador contable»** (`gasto_reparte()`):
+  - un contabilizador que lleva los $10,193,683.7 mdp de cero a su cifra;
+  - una gráfica en tres niveles (total, programable / no programable, ocho renglones), con
+    ficha al tocar cada tramo;
+  - «Si el presupuesto fuera de…», que reparte cualquier cantidad en la misma proporción
+    (derivado, con su operación).
+
+  Las cifras salen de `panoramaErario.egresos`, **no** de `treemapPEF`, que trae otros montos
+  (Desarrollo Económico 1,670,300 y costo financiero 1,388,400 contra 1,695,700 y
+  1,572,073.3): esa discrepancia de la base queda por revisar.
+- **«¿Hacia dónde va? Los tres presupuestos»** (`numeros_tres()`, sin cambios).
+- **Los desgloses**, cada uno en su página: el simulador «Reparte tú» y las cuatro páginas de
+  módulo. Megaobras y costo ambiental **se quitaron** de aquí porque ya están en
+  Herramientas; una línea al pie lleva allá.
+- **Una página por renglón del gasto** (`egreso_pagina()`, `numeros-egreso-*.html`, 8). Cada
+  una trae su cifra, «de cada $100», qué cubre, su ley, por qué importa y cómo se obtuvo. El
+  costo financiero trae además el desglose del Anexo 8.
+- El JS es `assets/auditor/js/gasto-publico.js` (nuevo) y los estilos son `.gp-*` en
+  `numeros.css`. Además, en «El peso de 2026» de la página Presupuesto, los renglones del gasto
+  enlazan a sus páginas.
+- Con este sello se corrigió también el comentario de `numeros.js` que seguía diciendo
+  `numeros-se-recauda.html`.
+
 **«Cuentas claras»: «Se paga lo que se debe» y «Se revisa», fundidas (11-10-2026, sin sello nuevo).**
 Pedido del autor. Números queda en **cuatro** tarjetas: Presupuesto, Gasto público, Baja al
 territorio y Cuentas claras.
@@ -705,7 +744,7 @@ Presupuesto, Gasto público, Baja al territorio, Se paga lo que se debe y Se rev
 - Las redirecciones (`redireccion()`) conservan ya la consulta (`?…`) y el `#ancla` cuando el
   destino no trae los suyos, y las páginas de cada parte mandan un `?abrir=eb-*` viejo a
   la página de su módulo (sin bucle: se omite el que apunta a sí misma).
-- Queda en los comentarios de `numeros.js` el nombre viejo `numeros-se-recauda.html`; no
+- (Resuelto con el sello 20261011c.) Quedaba en los comentarios de `numeros.js` el nombre viejo `numeros-se-recauda.html`; no
   se cambió para no tocar `assets/` (y subir el sello) solo por un comentario.
 
 **«Presupuesto» y «Se recauda», fundidas (11-10-2026, sello 20261011b).**

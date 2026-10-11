@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 97 |
+| Páginas revisadas | 105 |
 | Páginas que solo redirigen | 6 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 10 destinos |
@@ -61,15 +61,23 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 128 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 136 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
+| `numeros-egreso-adefas.html` | ADEFAS · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-costo-financiero.html` | Costo financiero de la deuda · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-desarrollo-economico.html` | Desarrollo Económico · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-desarrollo-social.html` | Desarrollo Social · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-fondos-de-estabilizacion.html` | Fondos de estabilización · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-gobierno.html` | Gobierno · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-participaciones.html` | Participaciones (Ramo 28) · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
+| `numeros-egreso-poderes-y-organos-autonomos.html` | Poderes y órganos autónomos · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 32 | 1 | 0 | 0 | 0 |
-| `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 56 | 0 | 2 | 2 | 0 |
+| `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 86 | 0 | 13 | 3 | 0 |
 | `numeros-ingreso-accesorios.html` | Accesorios de impuestos · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-aprovechamientos.html` | Aprovechamientos · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-comercio-exterior.html` | Comercio exterior · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 0 |

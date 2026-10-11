@@ -1,4 +1,4 @@
-/* Números › Se recauda (numeros-se-recauda.html; 10-10-2026, fundido con «Presupuesto» el 11-10-2026): «El peso de 2026».
+/* Números › Se recauda (numeros-presupuesto.html; 10-10-2026, fundido con «Presupuesto» el 11-10-2026): «El peso de 2026».
    Dos barras con todo el dinero federal del año: arriba lo que entra
    (Ley de Ingresos) y abajo lo que sale (Presupuesto de Egresos, en los
    tres presupuestos más lo ya comprometido). Al tocar un tramo se abre su
@@ -94,7 +94,7 @@
   window.addEventListener('resize', pintaBarras);
 })();
 
-/* Los 16 orígenes del ingreso (numeros-se-recauda.html, 11-10-2026): el
+/* Los 16 orígenes del ingreso (numeros-presupuesto.html, 11-10-2026): el
    contador. Los renglones arrancan en cero; «Contabilizar» los lleva a su
    cifra de la Ley de Ingresos y el mismo botón los regresa a cero. Las
    cifras vienen en data-v, data-w y data-pct, escritas por
