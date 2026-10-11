@@ -320,17 +320,24 @@ APARTADOS = [
                 'pestana': ('💵', '1 · Presupuesto', 'Cuánto es y de dónde sale'),
                 'num': 1,
                 'titulo': 'Presupuesto: cuánto dinero es y de dónde sale',
-                'texto': ('Todo el dinero federal de 2026 en dos barras: arriba lo que entra, abajo lo que sale. Después, los 16 '
-                          'orígenes que autoriza la Ley de Ingresos, renglón por renglón: impuestos, cuotas, ventas de las '
-                          'empresas del Estado y deuda. Cada uno tiene su propia página.'),
+                'texto': ('Todo el dinero federal de 2026, en seis tarjetas: de dónde viene y a dónde va cada peso, los 16 '
+                          'orígenes que autoriza la Ley de Ingresos, cuánto es, a qué equivale, el camino que recorre y lo que '
+                          'propone el Paquete Económico 2027. Cada tarjeta abre su propia página.'),
                 'ayer': ('El capítulo 7 abre con la «Acción financiera del Estado para el equilibrio de la economía» (p. 96), antes de pasar al presupuesto, a la ley de gasto y a la de deuda.',
                          'Cada año la <b>Ley de Ingresos de la Federación</b> dice cuánto puede recaudar y cuánto puede pedir prestado la Federación (la de 2026 se publicó en el DOF el 7 de noviembre de 2025). Contribuir al gasto público es una obligación del artículo 31, fracción IV de la Constitución.'),
                 # Desde el 11-10-2026 (fusion con «Presupuesto», pedido del
                 # autor) «De donde sale cada peso» vive en la pagina, nativo
                 # (numeros_renglones), y cada renglon abre su pagina; las
                 # demas tarjetas abren su pagina de modulo (NUMEROS_MODULOS).
+                # Desde el mismo dia (pedido del autor) la pagina es solo
+                # tarjetas: «El peso de 2026» y «Los 16 origenes» tambien
+                # abren la suya.
                 'bloque': '',
                 'tarjetas': [
+                    ('🪙', 'El peso de 2026: de dónde viene y a dónde va', 'Todo el dinero federal del año en dos barras: arriba lo que entra según la Ley de Ingresos, abajo lo que sale según el Presupuesto de Egresos. Toca cualquier tramo.',
+                     'numeros-el-peso-de-2026.html', 'Ley de Ingresos y Presupuesto de Egresos de la Federación 2026', 'dinero'),
+                    ('🧾', 'Los 16 orígenes del ingreso, renglón por renglón', 'Impuestos, cuotas, ventas de las empresas del Estado y deuda, tal como los enumera el artículo 1o. de la Ley de Ingresos 2026. Cada renglón abre su página.',
+                     'numeros-los-16-origenes.html', 'Ley de Ingresos de la Federación 2026, art. 1o.', 'dinero'),
                     ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026: lo que entra y lo que sale, columna contra columna, y lo que baja al territorio.', 'numeros-cuanto-dinero-es.html',
                      'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
                     ('📏', '¿A qué equivale?', 'Tres comparaciones para dimensionar las cifras, con la operación a la vista.', 'numeros-a-que-equivale.html', None, 'dinero'),
@@ -3019,7 +3026,7 @@ NUMEROS_PARTES = [
 # Paginas de Numeros que cambiaron de nombre o se fundieron (11-10-2026).
 NUMEROS_ANTES = [
     ('numeros-se-recauda.html', 'numeros-presupuesto.html', 'Se recauda',
-     'Ahora se llama «Presupuesto»: las dos barras y los 16 orígenes del ingreso siguen ahí.'),
+     'Ahora se llama «Presupuesto»: las dos barras y los 16 orígenes del ingreso tienen cada uno su tarjeta y su página.'),
     ('numeros-se-aprueba.html', 'numeros-gasto-publico.html', 'Se aprueba',
      'Se fundió con «Se gasta» en «Gasto público».'),
     ('numeros-se-gasta.html', 'numeros-gasto-publico.html', 'Se gasta: los tres presupuestos',
@@ -3036,6 +3043,8 @@ NUMEROS_ABRIR = {}
 # publico» y ahora tienen su pagina de modulo (11-10-2026):
 # (ancla, archivo, icono, nombre, destino, parte).
 NUMEROS_MODULOS = [
+    ('np-peso', 'numeros-el-peso-de-2026.html', '🪙', 'El peso de 2026: de dónde viene y a dónde va', None, 'origen'),
+    ('nr-origenes', 'numeros-los-16-origenes.html', '🧾', 'Los 16 orígenes del ingreso', None, 'origen'),
     ('eb-cuanto', 'numeros-cuanto-dinero-es.html', '💰', 'Cuánto dinero es', ir('presupuesto', 'eb-cuanto'), 'origen'),
     ('eb-equivale', 'numeros-a-que-equivale.html', '📏', '¿A qué equivale?', ir('presupuesto', 'eb-equivale'), 'origen'),
     ('eb-arquitectura', 'numeros-camino-del-dinero.html', '🏛️', 'El camino del dinero, en cuatro etapas', ir('presupuesto', 'eb-arquitectura'), 'origen'),
@@ -3139,7 +3148,7 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
     ant, sig = (lista[n - 1] if n > 0 else None), (lista[n + 1] if n + 1 < len(lista) else None)
     def paso(y, rot, cls):
         if not y:
-            return '<a class="herr-mod-paso %s" href="numeros-presupuesto.html#nrRenglones"><small>%s</small><b>💵 Los 16 orígenes</b></a>' % (
+            return '<a class="herr-mod-paso %s" href="numeros-los-16-origenes.html"><small>%s</small><b>💵 Los 16 orígenes</b></a>' % (
                 cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
         return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, ingreso_archivo(y), rot, y['icono'], y['nombre'])
     chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
@@ -3181,7 +3190,7 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
     }
 
 
-def numeros_modulo(m, tarjetas, bloque=None):
+def numeros_modulo(m, tarjetas, bloque=None, script='presupuesto.js'):
     """Pagina de modulo de una parte de Numeros (11-10-2026): el bloque del
     motor a lo alto de su contenido, como los modulos de las herramientas.
     Con `bloque`, la pagina es propia y no carga el motor (los de
@@ -3220,7 +3229,7 @@ def numeros_modulo(m, tarjetas, bloque=None):
     }
     if bloque:
         p['estilos'] = ['numeros.css']
-        p['scripts'] = ['presupuesto.js']
+        p['scripts'] = [script]
     return p
 
 
@@ -3469,7 +3478,7 @@ def numeros_preparar():
         # «Ver ...» de cada tramo lleva a su pagina; los de lo que entra,
         # a sus renglones, en la misma pagina.
         if x['paso'] == 'origen':
-            x['ptit'], x['paso'] = 'Los 16 orígenes, renglón por renglón', '#nrRenglones'
+            x['ptit'], x['paso'] = 'Los 16 orígenes, renglón por renglón', 'numeros-los-16-origenes.html'
         else:
             x['ptit'] = pag[x['paso']][3]
             x['paso'] = pag[x['paso']][1]
@@ -3490,7 +3499,6 @@ def numeros_preparar():
     pasos['gasta']['bloque'] = (gasto_ciclo(base) + '\n        ' + gasto_reparte(base, d) +
                                 '\n        <section class="gp gp-tres" aria-labelledby="gpTresTit"><h2 class="gp-tit" id="gpTresTit">¿Hacia dónde va? Los tres presupuestos</h2>\n        '
                                 + numeros_tres(d) + '</section>\n        <h2 class="gp-tit gp-tit-desg">Los desgloses, cada uno en su página</h2>')
-    pasos['origen']['bloque'] = numeros_renglones(base, d)
     # La nota del libro va al pie de cada paso, no en la portada.
     comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
     for pid, archivo, ico, nombre, desc in NUMEROS_PARTES:
@@ -3504,9 +3512,9 @@ def numeros_preparar():
         # ?abrir=eb-bloque que llegue aqui (de una pagina vieja) va a su pagina.
         p['abrir_a_pagina'] = NUMEROS_ABRIR
         if pid == 'origen':
-            # «Presupuesto» (El peso de 2026) se fundio aqui (11-10-2026).
-            p['antes'] = numeros_peso(d)
-            p['scripts'] = ['numeros.js']
+            # «El peso de 2026» y «Los 16 origenes» vivian aqui; desde el
+            # 11-10-2026 tienen su pagina y sus anclas viejas llevan alla.
+            p['hash_a_pagina'] = {'numPeso': 'numeros-el-peso-de-2026.html', 'nrRenglones': 'numeros-los-16-origenes.html'}
         if pid == 'gasta':
             p['scripts'] = ['gasto-publico.js']
             p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
@@ -3521,7 +3529,7 @@ def numeros_preparar():
                 NUMEROS_ABRIR.setdefault(m.group(1), archivo + '?abrir=' + m.group(1))
         NUMEROS_PAGINAS.append(p)
     # El desglose del ingreso y las vistas del motor, a su pagina.
-    NUMEROS_ABRIR['eb-ingresos'] = 'numeros-presupuesto.html#nrRenglones'
+    NUMEROS_ABRIR['eb-ingresos'] = 'numeros-los-16-origenes.html'
     refs = {r['id']: r for r in base['referencias_legales']}
     # Los cuatro modulos de «Presupuesto», en pagina propia y sin el motor
     # (pedido del autor, 11-10-2026): se abrian en un marco y tardaban.
@@ -3532,11 +3540,15 @@ def numeros_preparar():
     propios = {'eb-cuanto': lambda: pm.cuanto(base, ref, ingreso_archivo, egreso_archivo),
                'eb-equivale': lambda: pm.equivale(base, ref),
                'eb-arquitectura': lambda: pm.camino(base, ref),
-               'proyeccion2027': lambda: pm.paquete(base, ref)}
+               'proyeccion2027': lambda: pm.paquete(base, ref),
+               # El titulo del bloque ya es el de la pagina: queda solo para lectores de pantalla.
+               'np-peso': lambda: numeros_peso(d).replace('class="np-tit" id="npTit"', 'class="np-tit sr-only" id="npTit"'),
+               'nr-origenes': lambda: numeros_renglones(base, d).replace('class="np-tit" id="nrTit"', 'class="np-tit sr-only" id="nrTit"')}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
         hecho = propios.get(m[0])
-        NUMEROS_PAGINAS.append(numeros_modulo(m, pasos[m[5]]['tarjetas'], hecho() if hecho else None))
+        NUMEROS_PAGINAS.append(numeros_modulo(m, pasos[m[5]]['tarjetas'], hecho() if hecho else None,
+                                              'numeros.js' if m[0] in ('np-peso', 'nr-origenes') else 'presupuesto.js'))
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
@@ -3548,7 +3560,7 @@ def numeros_preparar():
     # La portada: solo las tarjetas, cada una a su pagina.
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', deuda='numeros-cuentas-claras.html', revisa='numeros-cuentas-claras.html', numPeso='numeros-presupuesto.html#numPeso',
+    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', deuda='numeros-cuentas-claras.html', revisa='numeros-cuentas-claras.html', numPeso='numeros-el-peso-de-2026.html',
                               presupuesto='numeros-presupuesto.html', ati='herramienta-calculadora.html')
     a['abrir_a_pagina'] = NUMEROS_ABRIR
     for viejo, nuevo, nombre, texto in NUMEROS_ANTES:
@@ -3736,6 +3748,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'La página de Presupuesto queda en seis tarjetas, y cada una abre su propia página: El peso de 2026, con las dos barras de lo que entra y lo que sale; Los 16 orígenes del ingreso, renglón por renglón y con su contador; Cuánto dinero es; ¿A qué equivale?; El camino del dinero, en cuatro etapas, y el Paquete Económico 2027.'),
     ('11-10-2026', 'Los cuatro módulos de Presupuesto ya no se despliegan dentro del auditor: cada uno es una página propia que abre al instante, con sus cifras ya puestas. Cuánto dinero es pone lo que entra y lo que sale columna contra columna; ¿A qué equivale? dibuja cada comparación con su operación; El camino del dinero muestra las cuatro etapas con quién responde, su plazo y su ley; y el Paquete Económico 2027 reúne la constitución económica, el itinerario, las cifras, el simulador de sensibilidades con los coeficientes oficiales y los puntos ciegos.'),
     ('11-10-2026', 'La página de Gasto público se vuelve dinámica. «¿Quién lo aprueba?» recorre las seis paradas del presupuesto, de la propuesta de Hacienda a la revisión de la Auditoría Superior, con su fecha límite y el artículo que da cada facultad, y una tabla de quién puede qué. «¿Cómo se reparte?» es un simulador contable que parte los $10.19 billones en programable y no programable y en sus ocho renglones, y reparte cualquier cantidad en la misma proporción. Cada renglón del gasto tiene ya su propia página. Megaobras y costo ambiental quedan solo en Herramientas.'),
     ('11-10-2026', 'En Números, «Se paga lo que se debe» y «Se revisa» son una sola página, «Cuentas claras»: la línea de tiempo de la deuda, sexenio por sexenio, y lo que pasa al año siguiente, cuando la Auditoría Superior revisa la Cuenta Pública. El estado de resultados del Gobierno abre en su propia página; el reloj de la deuda y el inspector de la ASF llevan a Herramientas. Números queda en cuatro tarjetas.'),
@@ -3803,9 +3816,7 @@ def indice():
         ('estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024, 2026 y 2027 en cuatro dimensiones'),
         ('estado-de-cuenta-2024-2027.csv', 'Descarga el estado de cuenta en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
                        [_grupo(p['icono'], p['titulo'],
-                               ([(p['archivo'] + '#numPeso', 'El peso de 2026: lo que entra y lo que sale', ''),
-                                 (p['archivo'] + '#nrRenglones', 'Los 16 orígenes del ingreso', '')] +
-                                [(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
+                               ([(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
                                 if p['archivo'] == 'numeros-presupuesto.html' else []) +
                                ([('numeros-gasto-publico.html#gpAprueba', '¿Quién lo aprueba? El ciclo del presupuesto', ''),
                                  ('numeros-gasto-publico.html#gpReparte', '¿Cómo se reparte? El simulador contable', '')] +

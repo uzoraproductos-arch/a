@@ -671,6 +671,8 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Presupuesto», solo tarjetas (11-10-2026, sin sello: no toca `assets/`).** A pedido del autor, la página `numeros-presupuesto.html` queda en seis tarjetas y nada más; cada una abre su página. «El peso de 2026» (las dos barras, `numeros_peso`) y «Los 16 orígenes del ingreso» (el contador, `numeros_renglones`, con los tres renglones en cero) dejaron de estar en la página y viven en `numeros-el-peso-de-2026.html` y `numeros-los-16-origenes.html`, como módulos de `NUMEROS_MODULOS` (`np-peso`, `nr-origenes`) con `numeros.js`. Las anclas viejas `#numPeso` y `#nrRenglones` redirigen a su página; «Volver» de los renglones del ingreso, `?abrir=eb-ingresos`, el índice general y «sigue» del camino del dinero llevan a la página nueva.
+
 **«Presupuesto»: sus cuatro módulos en página propia (11-10-2026, sello 20261011d).**
 Pedido del autor: los módulos de la tarjeta «Presupuesto» (Cuánto dinero es, ¿A qué equivale?, El camino del dinero, Paquete Económico 2027) se abrían en un marco que cargaba el auditor completo y se contaban ahí: tardaban.
 

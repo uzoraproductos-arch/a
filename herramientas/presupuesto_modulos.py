@@ -241,7 +241,7 @@ def camino(base, ref):
                   'Quedó <b>por aclarar</b> al revisar la Cuenta Pública 2024, la más reciente ya fiscalizada: dinero observado que las instituciones auditadas aún deben justificar o reintegrar. Esta etapa ocurre al año siguiente; por eso su cifra es de 2024 y no de 2026.',
                   None),
     }
-    sigue = {'cir-1': ('numeros-presupuesto.html#nrRenglones', 'Los 16 orígenes del ingreso'),
+    sigue = {'cir-1': ('numeros-los-16-origenes.html', 'Los 16 orígenes del ingreso'),
              'cir-2': ('numeros-gasto-publico.html', 'Gasto público: quién lo aprueba'),
              'cir-3': ('numeros-baja-al-territorio.html', 'Baja al territorio'),
              'cir-4': ('numeros-cuentas-claras.html', 'Cuentas claras')}
