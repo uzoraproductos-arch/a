@@ -30,7 +30,7 @@ import sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230c0e15'/%3E%3Cg stroke='%23c9a84c' stroke-width='3.2' stroke-linecap='round' fill='none'%3E%3Cpath d='M32 12v38'/%3E%3Cpath d='M20 50h24'/%3E%3Cpath d='M14 22h36'/%3E%3Cpath d='M14 22l-6 13a7 7 0 0 0 12 0z'/%3E%3Cpath d='M50 22l-6 13a7 7 0 0 0 12 0z'/%3E%3C/g%3E%3Ccircle cx='32' cy='12' r='3.4' fill='%23f3cf65'/%3E%3C/svg%3E")
+FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='%23ffffff' stroke='%231d5fd6' stroke-width='4'/%3E%3Cg fill='%23ffffff' stroke='%234f6286' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M20 37 C14 28 9 23 3 22 C6 30 9 34 13 37 C9 36 6 37 4 39 C9 41 14 41 19 41 Z'/%3E%3Cpath d='M44 37 C50 28 55 23 61 22 C58 30 55 34 51 37 C55 36 58 37 60 39 C55 41 50 41 45 41 Z'/%3E%3C/g%3E%3Ccircle cx='32' cy='39' r='15' fill='%23d9a21a' stroke='%237a5206' stroke-width='2'/%3E%3Ccircle cx='32' cy='39' r='11' fill='%23f7cf45' stroke='%23a8740c' stroke-width='1.2'/%3E%3Cpath d='M27 44 Q32 47 37 44' fill='none' stroke='%235a3a02' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='28' cy='38' r='1.9' fill='%2310202e'/%3E%3Ccircle cx='36' cy='38' r='1.9' fill='%2310202e'/%3E%3Cg transform='rotate(-8 32 22)'%3E%3Cellipse cx='32' cy='24.5' rx='14' ry='3' fill='%231b2433'/%3E%3Cpath d='M23 24.5 C23 14 25 11 32 11 C39 11 41 14 41 24.5 Z' fill='%231b2433'/%3E%3Crect x='23.2' y='19.5' width='17.6' height='3.4' fill='%23d4a826'/%3E%3C/g%3E%3C/svg%3E")
 
 
 
