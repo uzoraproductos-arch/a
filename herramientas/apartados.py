@@ -3966,6 +3966,11 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'La portada se simplifica: el carrusel de investigaciones habla en palabras llanas y sin siglas, y la cabecera ya no trae buscador. Para encontrar algo, pregúntale al Auditor.'),
+    ('11-10-2026', 'Noticias relevantes abre en su propia página, con «La Columna del Erario» en su formato de periódico.'),
+    ('11-10-2026', 'El Modo Inspector se abre en dos tarjetas, cada una con su página: Grandes investigaciones, con las ocho aplicaciones, y Pregúntale al Auditor, el bot interno.'),
+    ('11-10-2026', 'Pregúntale al Auditor anota lo que todavía no sabe contestar, y lo que marcas con «No era lo que buscaba», en el recuadro «Lo que aún no sé». Lo copias y nos lo mandas desde Comunidad.'),
+    ('11-10-2026', 'Nace Pregúntale al Auditor, el bot interno del Modo Inspector: responde con una nota técnica sellada, armada solo con datos verificados, cada cifra con su fuente y su estado.'),
     ('11-10-2026', 'Costo Ambiental estrena encabezado verde gris con su icono y sus módulos pasan a ser cinco aplicaciones. La quinta es nueva: Crisis ambientales. Compara lo que puede costar un desastre con lo que hay para pagarlo (el fondo, el seguro y los bonos), trae una calculadora de lo que cuesta esperar si el hueco se cubre con deuda, y abre tres fichas: el huracán Otis, el huracán Simón y el agua de Guadalajara, cada cifra con su documento y lo que falta con el nombre de quien debe publicarlo.'),
     ('11-10-2026', 'Baja al territorio queda en tres tarjetas, y cada una abre su página: el mapa del gasto federalizado, con cinco lentes y las 32 entidades de mayor a menor; las 32 entidades, con los tres pisos de la hacienda, lo que baja y con qué libertad, y el circuito de cada estado; y los 2,479 municipios, con sus fondos, su predial, el punto ciego del artículo 115 y el padrón completo del INEGI. La franja «Ayer y hoy» pasa a la pregunta frecuente del Ramo 28 y el Ramo 33.'),
     ('11-10-2026', 'El Diccionario del Erario Público se llama ahora Biblioteca del Erario Público: una página con cuatro tarjetas, Diccionario, Referencias, Marco Legal Hacendario y Preguntas Frecuentes. El Pase del Auditor Cívico pasa a Participa.'),
@@ -4051,16 +4056,26 @@ def indice():
                                [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']],
                                p['archivo'])
                         for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])
-    herr = _rejilla([_grupo(h[2], h[3], [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]], h[0])
+    # El Modo Inspector se abre en dos tarjetas (11-10-2026): sus ocho
+    # aplicaciones cuelgan de «Grandes investigaciones», y el bot va aparte.
+    herr = _rejilla([_grupo(h[2], h[3],
+                            ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las ocho aplicaciones del inspector')]
+                             if h[1] == 'inspector' else []) +
+                            [(modulo_archivo(h[0], t[0]), ('· ' if h[1] == 'inspector' else '') + t[2], t[3]) for t in h[7]] +
+                            ([(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])] if h[1] == 'inspector' else []),
+                            h[0])
                      for h in HERRAMIENTAS])
     otros = []
     for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
         a = ap[archivo]
         enl = [(x.get('pagina') or archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
         if archivo == 'descarga-los-datos.html':
-            enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES]
+            enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES[:1]] + [
+                ('radar-presupuesto-en-curso.html', '· Hoy: el presupuesto en curso', ''),
+                ('radar-estado-de-cuenta.html', '· Expide un estado de cuenta', '')] + [
+                (r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES[1:]]
         if archivo == 'aprende.html':
-            enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], b[2], b[3]) for b in BIBLIOTECA]
+            enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], '· ' + b[2], b[3]) for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
                     ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')]
@@ -4076,7 +4091,7 @@ def indice():
         '            <li><span class="est-chip est-pendiente">pendiente</span> El dato no está en un documento que podamos citar. Decimos por qué y, si la dependencia obligada no lo ha publicado, la nombramos. Nunca lo estimamos.</li>\n'
         '          </ul>\n'
         '          <p>Las imágenes de las investigaciones son ilustraciones y lo dicen en una etiqueta: no son evidencia de ningún hecho. '
-        'La evidencia está en los documentos del <a href="fuentes-oficiales.html">Compendio de Fuentes Oficiales</a>.</p>\n'
+        'La evidencia está en los documentos de las <a href="fuentes-oficiales.html">Referencias</a> de la Biblioteca del Erario Público.</p>\n'
         '          <p><a href="pendientes.html"><b>⏳ Registro de pendientes</b></a>: cada dato que falta, por qué falta, quién debe publicarlo y el enlace oficial donde debería estar.</p>\n'
         '          <h3 class="indice-grupo-tit">🆕 Novedades</h3>\n'
         '          <ul class="indice-lista indice-novedades">\n%s\n          </ul>\n'
@@ -4085,7 +4100,7 @@ def indice():
         ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('numeros', '💰 Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
         ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
-        ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la obra de consulta, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
+        ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {
