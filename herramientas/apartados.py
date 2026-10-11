@@ -1284,7 +1284,7 @@ RUTAS = [
      'Lo que te gustaría que revisáramos, con los documentos que conozcas.'),
 ]
 DENUNCIA = ('Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: '
-            '<a href="garantias.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato '
+            '<a href="garantias-brujula.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato '
             'y qué tener a la mano.')
 
 RUTA_HTML = '''      <details class="pt-ruta" name="pt-ruta" data-ruta="{id}">
@@ -1555,13 +1555,19 @@ AVISO_ENVIO = ('      <p class="sv-aviso"><span class="sz-et">Próximamente</spa
                'con el lanzamiento. Ya puedes armar tu texto, copiarlo o descargarlo.</p>')
 
 
+def partes_nav(nombre, portada, icono, partes, actual):
+    """Barra al pie de una pagina partida: su portada y sus partes
+    (cada parte es una tupla (id, archivo, icono, titulo, ...))."""
+    return ('<nav class="bib-nav" aria-label="%s">\n'
+            '        <a class="bib-nav-tit" href="%s">%s %s</a>\n'
+            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % (nombre, portada, icono, nombre, '\n'.join(
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s</span></a>'
+                % (c[1], ' aria-current="page"' if c[1] == actual else '', c[2], c[3]) for c in partes)))
+
+
 def comunidad_nav(actual):
     """Barra al pie de cada pagina de Comunidad, con sus cinco partes."""
-    return ('<nav class="bib-nav" aria-label="Comunidad">\n'
-            '        <a class="bib-nav-tit" href="comunidad.html">🤝 Comunidad</a>\n'
-            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
-                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s</span></a>'
-                % (c[1], ' aria-current="page"' if c[1] == actual else '', c[2], c[3]) for c in COMUNIDAD_PARTES))
+    return partes_nav('Comunidad', 'comunidad.html', '🤝', COMUNIDAD_PARTES, actual)
 
 
 def comunidad():
@@ -1644,12 +1650,40 @@ GARANTIAS_RETO = [
 ]
 
 
+# Garantias civicas, en cuatro paginas (pedido del autor, 11-10-2026), como
+# Comunidad: garantias.html queda como portada con cuatro tarjetas y cada una
+# abre la suya. Las anclas viejas (garantias.html#brujula...) llevan a su
+# pagina. (id, archivo, icono, titulo, frase de la tarjeta, entrada)
+GARANTIAS_PARTES = [
+    ('brujula', 'garantias-brujula.html', '🧭', 'La brújula: ¿a qué puerta toco?',
+     'Tres preguntas y te decimos qué canal oficial te toca, qué llevar y si puedes hacerlo sin dar tu nombre.',
+     'Viste algo raro con el dinero público. Contesta tres preguntas (qué viste, si ya tienes con qué probarlo y si '
+     'necesitas cuidar tu nombre) y la brújula te dice a cuál de las seis puertas oficiales tocar, qué llevar y qué pasa después.'),
+    ('puertas', 'garantias-puertas.html', '🚪', 'Las seis puertas oficiales',
+     'Quién investiga qué, si admite anonimato, qué llevar y qué produce tu denuncia.',
+     'Cada puerta investiga cosas distintas. Una no es para denunciar sino para conseguir la prueba: la Plataforma '
+     'Nacional de Transparencia. Abre «Qué llevar y qué pasa después» en cada una para ver el detalle y su fundamento legal.'),
+    ('derechos', 'garantias-derechos.html', '🛡️', 'Tus diez garantías',
+     'Lo que la ley te asegura cuando vigilas el dinero público, cada una con su norma.',
+     'Lo que la ley te asegura cuando vigilas el dinero público. Toca cada carta para ver la explicación y la norma que la sostiene.'),
+    ('reto', 'garantias-reto.html', '🎯', '¿Mito o realidad?',
+     'Afirmaciones que se oyen seguido. Adivina y comprueba con la ley.',
+     'Afirmaciones que se oyen seguido sobre denunciar y pedir información. Adivina si son mito o realidad y comprueba '
+     'la respuesta con la ley que la sostiene.'),
+]
+GARANTIAS_ARCHIVO = dict((g[0], g[1]) for g in GARANTIAS_PARTES)
+AVISO_GARANTIAS = ('      <p class="sv-aviso gr-aviso"><span class="sz-et">Importante</span> Auditavisión <b>no recibe denuncias</b>. '
+                   '«📢 Cuéntanos lo que viste» te ayuda a redactar tu reporte y el <a href="agora.html">Ágora</a> es para debatir; '
+                   'la denuncia con efecto jurídico (folio, plazos y obligación de responder) solo la abre una de las puertas oficiales.</p>')
+
+
 def _anonimo_corto(t):
     """«Sí, y con protección...» -> «Sí»; «No del todo. La...» -> «No del todo»."""
     return re.split(r'[.,;:]', t, 1)[0].strip()
 
 
 def garantias():
+    """La portada de Garantias civicas y sus cuatro paginas: [portada, parte, ...]."""
     import auditorias
     base = auditorias.db()
     com = base['comunidad']
@@ -1747,7 +1781,7 @@ def garantias():
             <p class="gr-res-pie"><button type="button" class="sz-btn" id="grOtra">🔄 Empezar otra vez</button>
               <a class="sz-btn" href="comunidad-reporta.html" data-puerta="reporta">📢 Ordena tu texto antes de presentarlo</a></p>
           </div>
-          <noscript><p>La brújula necesita JavaScript. Abajo están las seis puertas con todo lo que necesitas saber.</p></noscript>
+          <noscript><p>La brújula necesita JavaScript. En <a href="garantias-puertas.html">las seis puertas oficiales</a> está todo lo que necesitas saber.</p></noscript>
         </div>'''.format(datos=datos, opciones=opciones)
 
     reto_html = '''<div class="gr-reto" id="grReto">
@@ -1756,36 +1790,45 @@ def garantias():
           <p class="gr-reto-af" id="grRetoAf">…</p>
           <div class="gr-reto-ops"><button type="button" class="gr-reto-btn" data-r="1">✅ Realidad</button><button type="button" class="gr-reto-btn" data-r="0">❌ Mito</button></div>
           <div class="gr-reto-exp" id="grRetoExp" hidden aria-live="polite"></div>
-          <noscript><p>El reto necesita JavaScript. Las respuestas están en las diez garantías de arriba.</p></noscript>
+          <noscript><p>El reto necesita JavaScript. Las respuestas están en <a href="garantias-derechos.html">tus diez garantías</a>.</p></noscript>
         </div>'''.format(n=len(GARANTIAS_RETO))
 
-    return {
+    bloques = {
+        'brujula': brujula,
+        'puertas': '<div class="gr-puertas">\n%s\n        </div>' % puertas,
+        'derechos': '<ol class="gr-cartas">\n%s\n        </ol>' % cartas,
+        # El reto lee sus afirmaciones del mismo JSON que la brujula.
+        'reto': '<script type="application/json" id="grDatos">%s</script>\n        %s' % (datos, reto_html),
+    }
+    # Las fichas de cada puerta (garantias.html#puerta-ch-asf) tambien llevan a su pagina.
+    anclas = dict(GARANTIAS_ARCHIVO)
+    anclas.update(('puerta-' + c['id'], 'garantias-puertas.html#puerta-' + c['id']) for c in canales)
+    portada = {
         'archivo': 'garantias.html', 'menu': 'Garantías cívicas', 'menu_archivo': 'participa.html',
         'padre': ('participa.html', 'Participa'),
         'icono': '🛡️', 'titulo': 'Garantías cívicas', 'lema': 'A qué puerta tocar y qué te protege',
-        'entrada': ('Viste algo raro con el dinero público. Esta página responde tres preguntas: <b>a qué puerta oficial tocar</b>, '
+        'entrada': ('Viste algo raro con el dinero público. Estas páginas responden tres preguntas: <b>a qué puerta oficial tocar</b>, '
                     '<b>qué derechos te protegen</b> y <b>qué llevar</b>. Empieza por la brújula: en tres clics te dice cuál de las '
-                    '%d puertas te toca.' % len(canales)),
-        'estilos': ['servicios.css', 'garantias.css'],
-        'scripts': ['garantias.js'],
-        'antes': ('      <p class="sv-aviso gr-aviso"><span class="sz-et">Importante</span> Auditavisión <b>no recibe denuncias</b>. '
-                  '«📢 Cuéntanos lo que viste» te ayuda a redactar tu reporte y el <a href="agora.html">Ágora</a> es para debatir; '
-                  'la denuncia con efecto jurídico (folio, plazos y obligación de responder) solo la abre una de estas puertas oficiales.</p>'),
-        'secciones': [
-            {'id': 'brujula', 'titulo': '🧭 La brújula: ¿a qué puerta toco?',
-             'texto': 'Tres preguntas y te decimos qué canal oficial te toca, qué llevar y si puedes hacerlo sin dar tu nombre.',
-             'tarjetas': [], 'bloque': brujula},
-            {'id': 'puertas', 'titulo': '🚪 Las seis puertas oficiales',
-             'texto': 'Cada una investiga cosas distintas. Una no es para denunciar sino para conseguir la prueba: la Plataforma Nacional de Transparencia.',
-             'tarjetas': [], 'bloque': '<div class="gr-puertas">\n%s\n        </div>' % puertas},
-            {'id': 'derechos', 'titulo': '🛡️ Tus diez garantías',
-             'texto': 'Lo que la ley te asegura cuando vigilas el dinero público. Toca cada carta para ver la explicación y la norma que la sostiene.',
-             'tarjetas': [], 'bloque': '<ol class="gr-cartas">\n%s\n        </ol>' % cartas},
-            {'id': 'reto', 'titulo': '🎯 ¿Mito o realidad?',
-             'texto': '%d afirmaciones que se oyen seguido. Adivina y comprueba con la ley.' % len(GARANTIAS_RETO),
-             'tarjetas': [], 'bloque': reto_html},
-        ],
+                    '%d puertas te toca. Cada tarjeta abre su propia página.' % len(canales)),
+        'estilos': ['servicios.css'],
+        'antes': AVISO_GARANTIAS,
+        'hash_a_pagina': anclas,
+        'secciones': [{'id': 'partes', 'titulo': 'Las cuatro partes de Garantías cívicas', 'texto': '', 'sin_cab': True,
+                       'tarjetas': [(g[2], g[3], g[4], g[1], None, None) for g in GARANTIAS_PARTES]}],
     }
+    partes = []
+    for id_, archivo, ico, tit, frase, texto in GARANTIAS_PARTES:
+        partes.append({
+            'archivo': archivo, 'menu': tit, 'menu_archivo': 'participa.html',
+            'padre': ('participa.html', 'Participa'), 'padre2': ('garantias.html', 'Garantías cívicas'),
+            'icono': ico, 'titulo': tit, 'lema': 'Garantías cívicas', 'entrada': texto,
+            'estilos': ['servicios.css', 'garantias.css'],
+            'scripts': ['garantias.js'],
+            'antes': AVISO_GARANTIAS if id_ in ('brujula', 'puertas') else '',
+            'pie_extra': partes_nav('Garantías cívicas', 'garantias.html', '🛡️', GARANTIAS_PARTES, archivo),
+            'secciones': [{'id': id_, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloques[id_]}],
+        })
+    return [portada] + partes
 
 
 # Radar hacendario en su propia pagina (decision del autor, 10-10-2026): cada
@@ -4004,6 +4047,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Garantías cívicas se parte en cuatro páginas, como Comunidad: la brújula que te dice a qué puerta tocar, las seis puertas oficiales, tus diez garantías y el reto ¿Mito o realidad?'),
     ('11-10-2026', 'Comunidad ya no se despliega en Participa: abre su página, con cinco tarjetas, y cada una abre la suya: algo raro con el dinero público, un dato mal, un tema para investigar, comparte el Estado de Cuenta y la fe de erratas.'),
     ('11-10-2026', 'La portada se simplifica: el carrusel de investigaciones habla en palabras llanas y sin siglas, y la cabecera ya no trae buscador. Para encontrar algo, pregúntale al Auditor.'),
     ('11-10-2026', 'Noticias relevantes abre en su propia página, con «La Columna del Erario» en su formato de periódico.'),
@@ -4117,6 +4161,8 @@ def indice():
             enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], '· ' + b[2], b[3]) for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl = [e for e in enl if e[0] != 'comunidad.html']
+            k = [e[0] for e in enl].index('garantias.html') + 1
+            enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
                     ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')] + [
                     (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
@@ -4226,7 +4272,7 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), garantias()] + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora()] + garantias() + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
