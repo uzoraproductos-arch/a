@@ -522,7 +522,7 @@ APARTADOS = [
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
         'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
-                          'pase': PASE[0], 'comunidad': 'comunidad.html'},
+                          'pase': PASE[0], 'comunidad': 'comunidad.html', 'donaciones': 'donaciones.html'},
         'secciones': [
             {
                 # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
@@ -545,6 +545,13 @@ APARTADOS = [
                 'id': 'pase',
                 'pagina': PASE[0],
                 'pestana': (PASE[1], PASE[2], 'Sostén la plataforma: abre su página'),
+            },
+            {
+                # Pedido del autor, 11-10-2026: una via mas para sostener la
+                # plataforma, con su alcancia a la vista (donaciones()).
+                'id': 'donaciones',
+                'pagina': 'donaciones.html',
+                'pestana': ('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos: abre su página'),
             },
             {
                 # Entrega 7 de la propuesta de Astra (10-10-2026). Desde el
@@ -1616,6 +1623,162 @@ def comunidad():
             'secciones': [{'id': id_, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloques[id_]}],
         })
     return [portada] + partes
+
+# Donaciones (pedido del autor, 11-10-2026): una pagina para recibir
+# donativos que sostengan la plataforma, con una alcancia que se llena a la
+# vista de todos. Regla de la casa: la alcancia solo muestra dinero que de
+# verdad entro. Mientras CANAL_DONACION este vacio no se recibe nada y la
+# alcancia marca $0. Para anotar un movimiento real se agrega aqui y se
+# regenera: la cifra sale de estas listas, nunca se teclea en la pagina.
+CANAL_DONACION = ''      # direccion de la pasarela de pago, cuando exista
+DONACIONES_CORTE = '11-10-2026'
+# Meta: (monto en pesos, que cubre). None hasta que el autor publique
+# cuanto cuesta sostener la plataforma; sin meta la alcancia no se inventa una.
+DONACIONES_META = None
+# Entradas recibidas: (fecha, monto en pesos, nota sin datos personales).
+DONACIONES_ENTRADAS = []
+# Salidas pagadas con donativos: (fecha, monto, concepto, enlace al comprobante).
+DONACIONES_SALIDAS = []
+
+DN_CERDITO = '''<svg class="dn-svg" viewBox="0 0 320 250" role="img" aria-labelledby="dnSvgTit">
+              <title id="dnSvgTit">Alcancía en forma de cochinito. Su nivel muestra lo recaudado: {nivel}.</title>
+              <defs>
+                <clipPath id="dnCuerpo"><ellipse cx="160" cy="148" rx="112" ry="78"/></clipPath>
+              </defs>
+              <ellipse class="dn-sombra" cx="160" cy="236" rx="96" ry="9"/>
+              <rect class="dn-pata" x="92" y="196" width="26" height="38" rx="9"/>
+              <rect class="dn-pata" x="200" y="196" width="26" height="38" rx="9"/>
+              <path class="dn-cola" d="M50 138 q-24 -4 -20 -22 q4 -14 16 -6"/>
+              <ellipse class="dn-cuerpo" cx="160" cy="148" rx="112" ry="78"/>
+              <g clip-path="url(#dnCuerpo)">
+                <g class="dn-nivel" id="dnNivel" style="transform: translateY(160px)">
+                  <path class="dn-ola" d="M-40 70 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 V260 H-40 Z"/>
+                </g>
+              </g>
+              <ellipse class="dn-brillo" cx="118" cy="110" rx="34" ry="13"/>
+              <path class="dn-oreja" d="M204 84 l22 -36 l16 40 z"/>
+              <ellipse class="dn-hocico" cx="268" cy="152" rx="22" ry="27"/>
+              <ellipse class="dn-nariz" cx="262" cy="148" rx="4" ry="6"/><ellipse class="dn-nariz" cx="275" cy="148" rx="4" ry="6"/>
+              <circle class="dn-ojo" cx="232" cy="120" r="7"/>
+              <g class="dn-monedas" aria-hidden="true">
+                <g class="dn-moneda dn-m1"><circle cx="160" cy="-20" r="13"/><text x="160" y="-15">$</text></g>
+                <g class="dn-moneda dn-m2"><circle cx="160" cy="-20" r="13"/><text x="160" y="-15">$</text></g>
+                <g class="dn-moneda dn-m3"><circle cx="160" cy="-20" r="13"/><text x="160" y="-15">$</text></g>
+              </g>
+              <rect class="dn-ranura" x="136" y="66" width="48" height="9" rx="4.5"/>
+            </svg>'''
+
+
+def _pesos(n):
+    t = format(n, ',.2f')
+    return '$' + (t[:-3] if t.endswith('.00') else t)
+
+
+def donaciones():
+    recaudado = sum(e[1] for e in DONACIONES_ENTRADAS)
+    gastado = sum(g[1] for g in DONACIONES_SALIDAS)
+    meta = DONACIONES_META[0] if DONACIONES_META else None
+    datos = json.dumps({'recaudado': recaudado, 'meta': meta, 'n': len(DONACIONES_ENTRADAS)})
+
+    if DONACIONES_META:
+        meta_txt = '<b>%s MXN</b><small>%s</small>' % (_pesos(meta), DONACIONES_META[1])
+    else:
+        meta_txt = ('<b>Por definir</b><small>La fijaremos cuando publiquemos cuánto cuesta sostener la plataforma, '
+                    'para que sepas qué se paga con tu donativo.</small>')
+    alcancia = '''<script type="application/json" id="dnDatos">{datos}</script>
+        <div class="dn-alcancia">
+          <div class="dn-figura">
+            {cerdito}
+            <button type="button" class="sz-btn dn-prueba" id="dnPrueba">🪙 Echa una moneda de prueba</button>
+            <p class="dn-prueba-nota" id="dnPruebaNota" aria-live="polite">Es solo la animación: no es un donativo y no suma a la cuenta.</p>
+          </div>
+          <dl class="dn-cifras">
+            <div class="dn-cifra dn-cifra-grande"><dt>Recaudado</dt><dd><b id="dnRecaudado">{rec} MXN</b><small>{n} · corte al {corte}</small></dd></div>
+            <div class="dn-cifra"><dt>Meta</dt><dd>{meta}</dd></div>
+            <div class="dn-cifra"><dt>Avance</dt><dd><b id="dnAvance">{avance}</b><small>{avance_nota}</small></dd></div>
+          </dl>
+        </div>'''.format(
+        datos=datos, cerdito=DN_CERDITO.format(nivel=_pesos(recaudado) + ' MXN'), rec=_pesos(recaudado),
+        corte=DONACIONES_CORTE, meta=meta_txt,
+        n=('%d donativos' % len(DONACIONES_ENTRADAS)) if DONACIONES_ENTRADAS else 'Todavía ningún donativo: el canal aún no se abre',
+        avance=('%.0f %%' % (recaudado * 100.0 / meta)) if meta else '—',
+        avance_nota='Lo recaudado entre la meta, por cien.' if meta else 'Se calcula cuando haya meta.')
+
+    def tabla(cab, filas, vacio):
+        if filas:
+            cuerpo = '\n'.join('              <tr>%s</tr>' % ''.join('<td>%s</td>' % c for c in f) for f in filas)
+        else:
+            cuerpo = '              <tr><td colspan="%d" class="dn-vacio">%s</td></tr>' % (len(cab), vacio)
+        return ('<div class="dn-tabla-caja"><table class="dn-tabla">\n            <thead><tr>%s</tr></thead>\n'
+                '            <tbody>\n%s\n            </tbody>\n          </table></div>'
+                % (''.join('<th scope="col">%s</th>' % c for c in cab), cuerpo))
+    entradas = tabla(('Fecha', 'Monto', 'Nota'), [(e[0], _pesos(e[1]), e[2]) for e in DONACIONES_ENTRADAS],
+                     'Aún no hay entradas: el canal de donativos todavía no se abre.')
+    salidas = tabla(('Fecha', 'Monto', 'En qué se gastó', 'Comprobante'),
+                    [(g[0], _pesos(g[1]), g[2],
+                      '<a href="%s" target="_blank" rel="noopener noreferrer">Ver ↗</a>' % g[3] if g[3] else '—')
+                     for g in DONACIONES_SALIDAS],
+                    'Aún no hay salidas: no se ha gastado ningún donativo.')
+    cuentas = '''<div class="dn-cuentas">
+          <div class="dn-saldo"><span>Entró <b>{rec}</b></span><span>Salió <b>{gas}</b></span><span>Queda <b>{saldo}</b></span></div>
+          <h3 class="dn-sub">⬇️ Lo que entró</h3>
+          {entradas}
+          <h3 class="dn-sub">⬆️ En qué se gastó</h3>
+          {salidas}
+          <p class="dn-nota">Nunca publicamos quién donó: solo la fecha y el monto. Cada gasto lleva su comprobante.</p>
+        </div>'''.format(rec=_pesos(recaudado), gas=_pesos(gastado), saldo=_pesos(recaudado - gastado),
+                         entradas=entradas, salidas=salidas)
+
+    # Tres compromisos de la politica de independencia, citados de INDEPENDENCIA.
+    pol = dict(INDEPENDENCIA)
+    reglas_items = [
+        ('🔓', 'La consulta cívica es gratuita y lo seguirá siendo.'),
+        ('🚫', 'Las donaciones no compran contenido.'),
+        ('🧾', 'Rendimos cuentas de cómo nos sostenemos.'),
+    ]
+    reglas = '''<ul class="dn-reglas">
+{items}
+          <li><span class="dn-regla-ico" aria-hidden="true">🏛️</span><div><b>Tu donativo no es deducible de impuestos.</b> Auditavisión no es
+            donataria autorizada por el SAT, y la Ley del Impuesto sobre la Renta solo deja deducir los donativos hechos a donatarias
+            autorizadas (<a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf" target="_blank" rel="noopener noreferrer">artículo 151, fracción III ↗</a>).
+            Donas como apoyo cívico, sin beneficio fiscal.</div></li>
+        </ul>
+        <p class="dn-nota">Estas reglas vienen de la <a href="servicios.html#independencia">política de independencia</a> de la plataforma, que vale igual para cada donante.
+          ¿Prefieres un apoyo fijo cada mes? Mira el <a href="{pase}">{pase_nombre}</a>.</p>'''.format(
+        items='\n'.join('          <li><span class="dn-regla-ico" aria-hidden="true">%s</span><div><b>%s</b> %s</div></li>' % (i, t, pol[t])
+                        for i, t in reglas_items),
+        pase=PASE[0], pase_nombre=PASE[2])
+
+    if CANAL_DONACION:
+        boton = '<a class="sz-btn sz-btn-of dn-donar" href="%s" target="_blank" rel="noopener noreferrer">🐷 Donar ahora ↗</a>' % CANAL_DONACION
+        aviso = ''
+    else:
+        boton = '<button type="button" class="sz-btn sz-btn-of dn-donar" disabled>🐷 Donar · se abre con el lanzamiento</button>'
+        aviso = ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> El canal para donar se abre con el lanzamiento '
+                 'de la plataforma. Mientras tanto la alcancía está en $0: aquí solo se muestra dinero que de verdad entró.</p>')
+
+    return {
+        'archivo': 'donaciones.html', 'menu': 'Donaciones', 'menu_archivo': 'participa.html',
+        'padre': ('participa.html', 'Participa'),
+        'icono': '🐷', 'titulo': 'Donaciones', 'lema': 'Exigimos transparencia, y empezamos por casa',
+        'entrada': ('Auditavisión no tiene publicidad y su consulta es gratuita. Si quieres ayudar a sostenerla, puedes donar lo que quieras. '
+                    'Te ofrecemos lo mismo que le pedimos al gobierno: <b>cuentas claras</b>. Cada peso que entre se ve en la alcancía, '
+                    'y cada peso que salga se anota con su comprobante.'),
+        'estilos': ['servicios.css', 'donaciones.css'],
+        'scripts': ['donaciones.js'],
+        'antes': aviso,
+        'secciones': [
+            {'id': 'alcancia', 'titulo': '🐷 La alcancía de la transparencia',
+             'texto': 'Se llena con cada donativo que llegue, a la vista de todos. Solo cuenta dinero que de verdad entró.',
+             'tarjetas': [], 'bloque': alcancia + '\n        <p class="dn-accion">%s</p>' % boton},
+            {'id': 'cuentas', 'titulo': '📒 Cuentas claras',
+             'texto': 'Lo que entra y lo que sale, con fecha y monto. Si exigimos que el gobierno transparente su gasto, nosotros también.',
+             'tarjetas': [], 'bloque': cuentas},
+            {'id': 'reglas', 'titulo': '🤝 Las reglas de tu donativo',
+             'texto': 'Lo que tu donativo sí hace y lo que no.',
+             'tarjetas': [], 'bloque': reglas},
+        ],
+    }
 
 
 # Garantias civicas en su propia pagina (decision del autor, 10-10-2026).
@@ -4047,6 +4210,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Nueva página de Donaciones en Participa: una alcancía que se llena a la vista de todos con cada donativo, y unas cuentas claras de lo que entra y lo que sale. El canal para donar se abre con el lanzamiento.'),
     ('11-10-2026', 'Garantías cívicas se parte en cuatro páginas, como Comunidad: la brújula que te dice a qué puerta tocar, las seis puertas oficiales, tus diez garantías y el reto ¿Mito o realidad?'),
     ('11-10-2026', 'Comunidad ya no se despliega en Participa: abre su página, con cinco tarjetas, y cada una abre la suya: algo raro con el dinero público, un dato mal, un tema para investigar, comparte el Estado de Cuenta y la fe de erratas.'),
     ('11-10-2026', 'La portada se simplifica: el carrusel de investigaciones habla en palabras llanas y sin siglas, y la cabecera ya no trae buscador. Para encontrar algo, pregúntale al Auditor.'),
@@ -4272,7 +4436,7 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora()] + garantias() + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + garantias() + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
