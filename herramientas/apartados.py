@@ -331,11 +331,11 @@ APARTADOS = [
                 # demas tarjetas abren su pagina de modulo (NUMEROS_MODULOS).
                 'bloque': '',
                 'tarjetas': [
-                    ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026, la cifra total antes de partirla, con su contador.', 'numeros-cuanto-dinero-es.html',
+                    ('💰', 'Cuánto dinero es', 'Los $10.19 billones aprobados para 2026: lo que entra y lo que sale, columna contra columna, y lo que baja al territorio.', 'numeros-cuanto-dinero-es.html',
                      'Presupuesto de Egresos de la Federación 2026, art. 1', 'dinero'),
                     ('📏', '¿A qué equivale?', 'Tres comparaciones para dimensionar las cifras, con la operación a la vista.', 'numeros-a-que-equivale.html', None, 'dinero'),
-                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa y qué ley la gobierna, con su simulador.', 'numeros-camino-del-dinero.html', None, 'dinero'),
-                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, riesgos y puntos ciegos.', 'numeros-paquete-2027.html', None, 'dinero'),
+                    ('🏛️', 'El camino del dinero, en cuatro etapas', 'Se recauda, se aprueba, se ejerce y se revisa: cuánto mueve cada etapa, quién responde y qué ley la gobierna.', 'numeros-camino-del-dinero.html', None, 'dinero'),
+                    ('📈', 'Paquete Económico 2027', 'La proyección de ingresos y gasto para 2027, sus supuestos, un simulador con los coeficientes oficiales y sus puntos ciegos.', 'numeros-paquete-2027.html', None, 'dinero'),
                 ],
             },
             {
@@ -3181,9 +3181,11 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
     }
 
 
-def numeros_modulo(m, tarjetas):
+def numeros_modulo(m, tarjetas, bloque=None):
     """Pagina de modulo de una parte de Numeros (11-10-2026): el bloque del
-    motor a lo alto de su contenido, como los modulos de las herramientas."""
+    motor a lo alto de su contenido, como los modulos de las herramientas.
+    Con `bloque`, la pagina es propia y no carga el motor (los de
+    «Presupuesto», presupuesto_modulos.py)."""
     ancla, archivo, ico, nombre, url, parte = m
     _, parch, pico, pnom = next(r for r in NUMEROS_PARTES if r[0] == parte)[:4]
     hermanos = [x for x in NUMEROS_MODULOS if x[5] == parte]
@@ -3209,13 +3211,17 @@ def numeros_modulo(m, tarjetas):
              '          </div>\n'
              '        </div>' % (esc_attr(nombre), url, url))
     tarjeta = next((t for t in tarjetas if t[3] == archivo), None)
-    return {
+    p = {
         'archivo': archivo, 'menu': nombre, 'menu_archivo': 'sigue-el-dinero.html',
         'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': (parch, pnom),
         'icono': ico, 'lema': pnom, 'titulo': nombre, 'entrada': tarjeta[2] if tarjeta else nombre,
         'pie_extra': nav + '\n\n      ' + numeros_nav(parch),
-        'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco}],
+        'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque or marco}],
     }
+    if bloque:
+        p['estilos'] = ['numeros.css']
+        p['scripts'] = ['presupuesto.js']
+    return p
 
 
 def numeros_nav(actual):
@@ -3516,10 +3522,21 @@ def numeros_preparar():
         NUMEROS_PAGINAS.append(p)
     # El desglose del ingreso y las vistas del motor, a su pagina.
     NUMEROS_ABRIR['eb-ingresos'] = 'numeros-presupuesto.html#nrRenglones'
+    refs = {r['id']: r for r in base['referencias_legales']}
+    # Los cuatro modulos de «Presupuesto», en pagina propia y sin el motor
+    # (pedido del autor, 11-10-2026): se abrian en un marco y tardaban.
+    import presupuesto_modulos as pm
+    def ref(rid):
+        r = refs[rid]
+        return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
+    propios = {'eb-cuanto': lambda: pm.cuanto(base, ref, ingreso_archivo, egreso_archivo),
+               'eb-equivale': lambda: pm.equivale(base, ref),
+               'eb-arquitectura': lambda: pm.camino(base, ref),
+               'proyeccion2027': lambda: pm.paquete(base, ref)}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
-        NUMEROS_PAGINAS.append(numeros_modulo(m, pasos[m[5]]['tarjetas']))
-    refs = {r['id']: r for r in base['referencias_legales']}
+        hecho = propios.get(m[0])
+        NUMEROS_PAGINAS.append(numeros_modulo(m, pasos[m[5]]['tarjetas'], hecho() if hecho else None))
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
@@ -3719,6 +3736,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Los cuatro módulos de Presupuesto ya no se despliegan dentro del auditor: cada uno es una página propia que abre al instante, con sus cifras ya puestas. Cuánto dinero es pone lo que entra y lo que sale columna contra columna; ¿A qué equivale? dibuja cada comparación con su operación; El camino del dinero muestra las cuatro etapas con quién responde, su plazo y su ley; y el Paquete Económico 2027 reúne la constitución económica, el itinerario, las cifras, el simulador de sensibilidades con los coeficientes oficiales y los puntos ciegos.'),
     ('11-10-2026', 'La página de Gasto público se vuelve dinámica. «¿Quién lo aprueba?» recorre las seis paradas del presupuesto, de la propuesta de Hacienda a la revisión de la Auditoría Superior, con su fecha límite y el artículo que da cada facultad, y una tabla de quién puede qué. «¿Cómo se reparte?» es un simulador contable que parte los $10.19 billones en programable y no programable y en sus ocho renglones, y reparte cualquier cantidad en la misma proporción. Cada renglón del gasto tiene ya su propia página. Megaobras y costo ambiental quedan solo en Herramientas.'),
     ('11-10-2026', 'En Números, «Se paga lo que se debe» y «Se revisa» son una sola página, «Cuentas claras»: la línea de tiempo de la deuda, sexenio por sexenio, y lo que pasa al año siguiente, cuando la Auditoría Superior revisa la Cuenta Pública. El estado de resultados del Gobierno abre en su propia página; el reloj de la deuda y el inspector de la ASF llevan a Herramientas. Números queda en cuatro tarjetas.'),
     ('11-10-2026', 'En Números, «Se aprueba» y «Se gasta» son una sola página, «Gasto público»: quién aprueba el presupuesto, los tres presupuestos (del Estado, nacional y social) y lo ya comprometido, con el simulador para repartirlo tú. Lo que cuestan los Poderes, los ramos y dependencias, el margen del presupuesto y lo que la cifra grande no dice abren cada uno en su página; megaobras y costo ambiental llevan a Herramientas. «Se recauda» ahora se llama «Presupuesto», y cada tarjeta de Números trae su descripción breve.'),

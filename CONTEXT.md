@@ -671,6 +671,14 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Presupuesto»: sus cuatro módulos en página propia (11-10-2026, sello 20261011d).**
+Pedido del autor: los módulos de la tarjeta «Presupuesto» (Cuánto dinero es, ¿A qué equivale?, El camino del dinero, Paquete Económico 2027) se abrían en un marco que cargaba el auditor completo y se contaban ahí: tardaban.
+
+- `herramientas/presupuesto_modulos.py` (nuevo) escribe las cuatro páginas desde `AUDIT_DB`, con las cifras ya puestas: `panoramaErario`, `calculadora_civica.parametros.poblacion`, `cuenta_publica_asf.cp2024.total.porAclarar`, `constitucion_economica` y `paquete_2027`. `numeros_modulo()` acepta `bloque`: con él la página es propia, carga `numeros.css` y `presupuesto.js` y ya no lleva iframe. Los módulos de Gasto público y Cuentas claras siguen con el marco.
+- Las cifras que en el motor estaban fijas (ISR 3.07, IVA 1.59, 69.6 %, etc.) ahora se calculan de la base; sumas y porcentajes llevan chip `derivado`.
+- `assets/auditor/js/presupuesto.js` (nuevo, CRLF): solo el simulador de sensibilidades del Paquete 2027 (mismos coeficientes, escenarios y veredicto del art. 17 LFPRH que el motor). Las barras crecen con CSS (`.pm-*` en `numeros.css`), respetando movimiento reducido.
+- ¿A qué equivale? marca el huachicol como `pendiente` con `data-pend="huachicol-evasion"`; la página se agregó a esa ficha en `pendientes.py`. La «Ficha pericial: retirada» del Tren Maya no se trasladó.
+
 **«Gasto público», dinámico (11-10-2026, sello 20261011c).**
 Pedido del autor: reestructurar la página para que sea dinámica, con gráficas y simulador
 contable, centrada en dos preguntas: quién tiene la facultad de aprobar el gasto y cómo se

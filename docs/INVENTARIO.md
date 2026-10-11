@@ -10,7 +10,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Páginas revisadas | 105 |
 | Páginas que solo redirigen | 6 |
 | Enlaces internos a archivos que no existen | 0 |
-| Módulos del motor que se abren desde páginas (`?ir=`) | 10 destinos |
+| Módulos del motor que se abren desde páginas (`?ir=`) | 9 destinos |
 
 ## Páginas
 
@@ -63,10 +63,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 136 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 48 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
-| `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
-| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 47 | 0 | 4 | 2 | 0 |
+| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 76 | 0 | 13 | 9 | 0 |
 | `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `numeros-egreso-adefas.html` | ADEFAS · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-egreso-costo-financiero.html` | Costo financiero de la deuda · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
@@ -98,7 +98,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
-| `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
+| `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 69 | 0 | 2 | 1 | 0 |
 | `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 65 | 0 | 2 | 3 | 0 |
 | `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -107,7 +107,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 74 | 0 | 0 | 0 | 40 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 75 | 0 | 0 | 0 | 40 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes en Casillas Didácticas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
@@ -146,14 +146,13 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 | Destino | Veces enlazado |
 |---|---:|
 | `verificador` | 16 |
-| `presupuesto` | 15 |
 | `ambiente` | 12 |
 | `megaobras` | 12 |
 | `calculadora` | 9 |
+| `presupuesto` | 9 |
 | `poderes` | 7 |
 | `territorio` | 2 |
 | `municipios` | 2 |
-| `proyeccion2027` | 2 |
 | `nota` | 1 |
 
 ## Registro de pendientes
