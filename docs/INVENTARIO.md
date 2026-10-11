@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 111 |
+| Páginas revisadas | 112 |
 | Páginas que solo redirigen | 7 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -52,9 +52,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 28 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 38 | 1 | 0 | 0 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-cero.html` | De cero al resultado · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso.html` | El pulso del gasto · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-megaobras-sector.html` | Sector e industria · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
