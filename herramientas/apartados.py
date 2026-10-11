@@ -3542,7 +3542,8 @@ def numeros_preparar():
             # «El peso de 2026» y «Los 16 origenes» vivian aqui; desde el
             # 11-10-2026 tienen su pagina y sus anclas viejas llevan alla.
             p['hash_a_pagina'] = {'numPeso': 'numeros-cuanto-dinero-es.html#numPeso', 'nrRenglones': 'numeros-los-16-origenes.html'}
-            p['pie_extra'] = presupuesto_pie(('sigue-el-dinero.html', '← Volver a', '💰', 'Números'), presupuesto_siguiente_parte())
+            # Solo las tarjetas, sin saltos al pie (pedido del autor, 11-10-2026).
+            p['pie_extra'] = ''
         if pid == 'gasta':
             p['scripts'] = ['gasto-publico.js']
             p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
@@ -3789,7 +3790,8 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
-    ('11-10-2026', 'Presupuesto se aligera: la franja «Ayer y hoy» y las notas del libro pasan al Diccionario del Gasto Público, en la pregunta frecuente sobre la acción financiera del Estado y en la ficha del libro en el Compendio de fuentes. Al pie de cada página de Presupuesto quedan solo dos botones, anterior y siguiente, sin listas que repitan los mismos destinos.', 'numeros-presupuesto.html'),
+    ('11-10-2026', 'La página de Presupuesto queda solo con sus cinco tarjetas: sin botones de salto al pie.'),
+    ('11-10-2026', 'Presupuesto se aligera: la franja «Ayer y hoy» y las notas del libro pasan al Diccionario del Gasto Público, en la pregunta frecuente sobre la acción financiera del Estado y en la ficha del libro en el Compendio de fuentes. Al pie de cada página de Presupuesto quedan solo dos botones, anterior y siguiente, sin listas que repitan los mismos destinos.'),
     ('11-10-2026', 'Presupuesto queda en cinco tarjetas compactas. El peso de 2026 se fundió con Cuánto dinero es, que ahora reúne la cifra del año, las dos barras de lo que entra y lo que sale, y lo que baja al territorio, sin repetir el reparto en columnas. El camino del dinero se concentra en quién responde, en qué plazo y con qué ley, y remite a las cifras en lugar de repetirlas.'),
     ('11-10-2026', 'La página de Presupuesto queda en seis tarjetas, y cada una abre su propia página: El peso de 2026, con las dos barras de lo que entra y lo que sale; Los 16 orígenes del ingreso, renglón por renglón y con su contador; Cuánto dinero es; ¿A qué equivale?; El camino del dinero, en cuatro etapas, y el Paquete Económico 2027.'),
     ('11-10-2026', 'Los cuatro módulos de Presupuesto ya no se despliegan dentro del auditor: cada uno es una página propia que abre al instante, con sus cifras ya puestas. Cuánto dinero es pone lo que entra y lo que sale columna contra columna; ¿A qué equivale? dibuja cada comparación con su operación; El camino del dinero muestra las cuatro etapas con quién responde, su plazo y su ley; y el Paquete Económico 2027 reúne la constitución económica, el itinerario, las cifras, el simulador de sensibilidades con los coeficientes oficiales y los puntos ciegos.'),

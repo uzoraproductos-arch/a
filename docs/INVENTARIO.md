@@ -101,7 +101,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-los-16-origenes.html` | Los 16 orígenes del ingreso · Auditavisión | apartados.py | 44 | 0 | 2 | 3 | 0 |
 | `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 61 | 0 | 2 | 1 | 0 |
-| `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
