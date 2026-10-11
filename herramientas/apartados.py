@@ -381,31 +381,31 @@ APARTADOS = [
                 ],
             },
             {
-                'id': 'deuda',
-                'pestana': ('📉', '4 · Se paga lo que se debe', 'La deuda, sexenio por sexenio'),
+                # «Se paga lo que se debe» y «Se revisa» se fundieron en
+                # «Cuentas claras» (pedido del autor, 11-10-2026): lo que se
+                # debe, lo que se gasto de verdad y quien lo revisa.
+                'id': 'cuentas',
+                'pestana': ('⚖️', '4 · Cuentas claras', 'Lo que se debe y quién lo revisa'),
                 'num': 4,
-                'titulo': 'Se paga lo que se debe: la deuda',
-                'texto': 'La deuda pública de 1994 a la proyección de 2027, sexenio por sexenio. Pulsa «Contabilizar» y mírala crecer.',
+                'titulo': 'Cuentas claras: lo que se debe y quién lo revisa',
+                'texto': ('El recorrido se cierra con dos cuentas. La primera, la deuda: lo que el país pidió prestado de 1994 a la '
+                          'proyección de 2027, sexenio por sexenio; pulsa «Contabilizar» y mírala crecer. La segunda, la rendición: al '
+                          'año siguiente el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. '
+                          'Abajo, lo que se gastó de verdad, lo que quedó por aclarar y el balance de todo el recorrido.'),
                 'ayer': ('La sección 4 del capítulo 7 (p. 104) explica la Ley General de Deuda Pública y su Gráfica 1 sigue la deuda externa de 1988 a 1994, en dólares.',
                          'La misma ley se llama hoy <b>Ley Federal de Deuda Pública</b> (decreto del DOF del 27 de abril de 2016). Y la deuda se mide con un indicador más amplio, el saldo histórico de los requerimientos financieros del sector público (SHRFSP), que Hacienda publica desde 2000.'),
                 'bloque': ('<div class="dt" id="deudaTiempo">\n'
                            '          <noscript><p>La línea de tiempo necesita JavaScript. La serie, con sus fuentes, está en el auditor.</p></noscript>\n'
                            '        </div>'),
+                # La vista del motor abre su pagina de modulo; las que son
+                # herramientas (el reloj, el inspector de la ASF) van a su
+                # pagina en Herramientas, sin duplicarlas aqui.
                 'tarjetas': [
-                    ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo.', ir('calculadora', 'eb-ccreloj'), None, 'inspector'),
-                ],
-            },
-            {
-                'id': 'revisa',
-                'pestana': ('🔍', '5 · Se revisa', 'Quién rinde cuentas'),
-                'num': 5,
-                'titulo': 'Se revisa: quién rinde cuentas',
-                'texto': 'Al año siguiente el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. Aquí está lo que se gastó de verdad, lo que quedó por aclarar y el balance de todo el recorrido.',
-                'tarjetas': [
-                    ('🔍', 'Qué encontró la ASF', 'Auditorías, acciones y lo que quedó por aclarar en la Cuenta Pública 2024, sector por sector.', 'herramienta-inspector-asf.html', None, 'inspector'),
-                    ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', ir('presupuesto', 'eb-cuenta-federal'), None, 'dinero'),
+                    ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', 'numeros-estado-de-resultados.html', None, 'dinero'),
                     ('🧾', 'Estado de Cuenta Cívico', 'El balance de todo el recorrido: lo que entró, lo que se gastó, lo que se debe y lo que se perdió, 2024 frente a 2026 y 2027.', 'estado-de-cuenta.html', None, 'dinero'),
                     ('🗂️', 'Expedientes de casos por aclarar', 'Los casos concretos que la Auditoría Superior dejó abiertos, con su documento.', 'expedientes.html', None, 'inspector'),
+                    ('🔍', 'Qué encontró la ASF', 'Auditorías, acciones y lo que quedó por aclarar en la Cuenta Pública 2024, sector por sector. Es una herramienta: abre en Herramientas.', 'herramienta-inspector-asf.html', None, 'inspector'),
+                    ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo. Es una herramienta: abre en Herramientas.', 'herramienta-calculadora-reloj.html', None, 'inspector'),
                 ],
             },
         ],
@@ -3007,15 +3007,15 @@ def numeros_cierre():
 # del Radar hacendario, tarjetas sin numero, y cada una
 # abre su propia pagina. Eran siete; el mismo dia «Presupuesto» (El peso de
 # 2026) se fundio con «Se recauda» (pedido del autor), y despues «Se
-# aprueba» y «Se gasta» en «Gasto publico»: quedan cinco, cada una con su
+# aprueba» y «Se gasta» en «Gasto publico», y «Se paga lo que se debe» y
+# «Se revisa» en «Cuentas claras»: quedan cuatro, cada una con su
 # descripcion breve, como las de Participa.
 NUMEROS_PARTES = [
     # (id de la seccion, archivo, icono, nombre de la tarjeta, descripcion)
     ('origen', 'numeros-presupuesto.html', '💵', 'Presupuesto', 'Cuánto dinero hay en 2026 y de dónde sale cada peso'),
     ('gasta', 'numeros-gasto-publico.html', '🏛️', 'Gasto público', 'Quién lo aprueba y en qué se va: los tres presupuestos'),
     ('baja', 'numeros-baja-al-territorio.html', '📍', 'Baja al territorio', 'Lo que llega a los 32 estados y a los 2,479 municipios'),
-    ('deuda', 'numeros-la-deuda.html', '📉', 'Se paga lo que se debe', 'La deuda pública, sexenio por sexenio'),
-    ('revisa', 'numeros-se-revisa.html', '🔍', 'Se revisa', 'La Cuenta Pública y lo que encontró la Auditoría Superior'),
+    ('cuentas', 'numeros-cuentas-claras.html', '⚖️', 'Cuentas claras', 'Lo que se debe, sexenio por sexenio, y quién revisa cómo se gastó'),
 ]
 # Paginas de Numeros que cambiaron de nombre o se fundieron (11-10-2026).
 NUMEROS_ANTES = [
@@ -3025,6 +3025,10 @@ NUMEROS_ANTES = [
      'Se fundió con «Se gasta» en «Gasto público».'),
     ('numeros-se-gasta.html', 'numeros-gasto-publico.html', 'Se gasta: los tres presupuestos',
      'Se fundió con «Se aprueba» en «Gasto público».'),
+    ('numeros-la-deuda.html', 'numeros-cuentas-claras.html', 'Se paga lo que se debe',
+     'Se fundió con «Se revisa» en «Cuentas claras».'),
+    ('numeros-se-revisa.html', 'numeros-cuentas-claras.html', 'Se revisa',
+     'Se fundió con «Se paga lo que se debe» en «Cuentas claras».'),
 ]
 NUMEROS_PAGINAS = []
 # ?abrir=eb-bloque: a que direccion de Numeros lleva cada bloque del motor.
@@ -3041,6 +3045,7 @@ NUMEROS_MODULOS = [
     ('eb-egresos', 'numeros-ramos-y-dependencias.html', '🏢', 'En qué se va: ramos y dependencias', ir('presupuesto', 'eb-egresos'), 'gasta'),
     ('eb-salud', 'numeros-margen-del-presupuesto.html', '🌡️', '¿Cuánto margen tiene el presupuesto?', ir('presupuesto', 'eb-salud'), 'gasta'),
     ('eb-ciegos', 'numeros-lo-que-la-cifra-no-dice.html', '🔦', 'Lo que la cifra grande no dice', ir('presupuesto', 'eb-ciegos'), 'gasta'),
+    ('eb-cuenta-federal', 'numeros-estado-de-resultados.html', '📒', 'El estado de resultados del Gobierno', ir('presupuesto', 'eb-cuenta-federal'), 'cuentas'),
 ]
 # Las tres categorias de impuesto que el art. 1o. de la Ley de Ingresos 2026
 # enumera en $0.0 (el mismo texto que ERARIO_RUBROS_CERO del motor).
@@ -3231,6 +3236,7 @@ def numeros_preparar():
     d = numeros_datos(base)
     pag = {r[0]: r for r in NUMEROS_PARTES}
     pag['decide'] = pag['gasta']  # «Se aprueba» vive en «Gasto publico»
+    pag['deuda'] = pag['revisa'] = pag['cuentas']  # y la deuda, en «Cuentas claras»
     for x in d['entra'] + d['sale']:
         # «Ver ...» de cada tramo lleva a su pagina; los de lo que entra,
         # a sus renglones, en la misma pagina.
@@ -3266,9 +3272,8 @@ def numeros_preparar():
             # «Presupuesto» (El peso de 2026) se fundio aqui (11-10-2026).
             p['antes'] = numeros_peso(d)
             p['scripts'] = ['numeros.js']
-        if pid == 'deuda':
+        if pid == 'cuentas':
             p['scripts'] = ['deuda-tiempo.js']
-        if pid == 'revisa':
             # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
             p['cierre'] = numeros_cierre()
         for t in sec['tarjetas']:
@@ -3289,7 +3294,7 @@ def numeros_preparar():
     # La portada: solo las tarjetas, cada una a su pagina.
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', numPeso='numeros-presupuesto.html#numPeso',
+    a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', deuda='numeros-cuentas-claras.html', revisa='numeros-cuentas-claras.html', numPeso='numeros-presupuesto.html#numPeso',
                               presupuesto='numeros-presupuesto.html', ati='herramienta-calculadora.html')
     a['abrir_a_pagina'] = NUMEROS_ABRIR
     for viejo, nuevo, nombre, texto in NUMEROS_ANTES:
@@ -3477,6 +3482,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'En Números, «Se paga lo que se debe» y «Se revisa» son una sola página, «Cuentas claras»: la línea de tiempo de la deuda, sexenio por sexenio, y lo que pasa al año siguiente, cuando la Auditoría Superior revisa la Cuenta Pública. El estado de resultados del Gobierno abre en su propia página; el reloj de la deuda y el inspector de la ASF llevan a Herramientas. Números queda en cuatro tarjetas.'),
     ('11-10-2026', 'En Números, «Se aprueba» y «Se gasta» son una sola página, «Gasto público»: quién aprueba el presupuesto, los tres presupuestos (del Estado, nacional y social) y lo ya comprometido, con el simulador para repartirlo tú. Lo que cuestan los Poderes, los ramos y dependencias, el margen del presupuesto y lo que la cifra grande no dice abren cada uno en su página; megaobras y costo ambiental llevan a Herramientas. «Se recauda» ahora se llama «Presupuesto», y cada tarjeta de Números trae su descripción breve.'),
     ('11-10-2026', 'En Números, «Presupuesto» y «Se recauda» son una sola página: arriba, las dos barras de lo que entra y lo que sale; abajo, los 16 orígenes del ingreso con su contador. Cada renglón (ISR, IVA, IEPS, cuotas, deuda...) tiene su propia página con qué grava, su ley, su efecto jurídico y su desglose; y Cuánto dinero es, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027 abren en la suya.'),
     ('11-10-2026', 'Números se abre en siete páginas, como el Radar hacendario: el presupuesto completo (de dónde viene y a dónde va cada peso), se recauda, se aprueba, se gasta con los tres presupuestos, baja al territorio, se paga lo que se debe y se revisa. Cada tarjeta lleva a la suya.'),
