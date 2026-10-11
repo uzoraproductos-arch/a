@@ -671,6 +671,20 @@ Pendientes de la entrega 6:
   tiene.
 - **Entrega 7** (comunidad): hecha el mismo día; ver arriba.
 
+**«Cuentas claras»: «Se paga lo que se debe» y «Se revisa», fundidas (11-10-2026, sin sello nuevo).**
+Pedido del autor. Números queda en **cuatro** tarjetas: Presupuesto, Gasto público, Baja al
+territorio y Cuentas claras.
+- `numeros-cuentas-claras.html` contiene, en este orden: un texto de entrada; el «Ayer y hoy» de la deuda; la
+  línea de tiempo de la deuda (`deuda-tiempo.js`); y cinco tarjetas:
+  - el estado de resultados, con página de módulo nueva, `numeros-estado-de-resultados.html`;
+  - el Estado de Cuenta Cívico;
+  - los Expedientes;
+  - dos herramientas que llevan a Herramientas: «Qué encontró la ASF» y «El reloj de la deuda»,
+    que ahora abre `herramienta-calculadora-reloj.html` (ya no se duplica).
+  Al final de la página va el cierre «¿Y a ti, cuánto te toca?».
+- `numeros-la-deuda.html` y `numeros-se-revisa.html` redirigen ahí (`NUMEROS_ANTES`). Los
+  enlaces del Registro de pendientes al estado de resultados van a su página de módulo.
+
 **«Gasto público»: «Se aprueba» y «Se gasta», fundidas; «Se recauda» se llama «Presupuesto» (11-10-2026, sin sello nuevo: no se tocó `assets/`).**
 Pedido del autor. Números queda en **cinco** tarjetas y cada una lleva ya su descripción
 breve (quinto campo de `NUMEROS_PARTES`, en `<small>`, como en Participa):
