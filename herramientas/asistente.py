@@ -26,6 +26,8 @@ import re
 from apartados import RAIZ, glosario_ancla
 
 ARCHIVO = 'herramienta-inspector-pregunta.html'
+ASF_INFORMES = 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria'
+ALERTAS = 'https://www.disciplinafinanciera.hacienda.gob.mx/'
 BASE_JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'asistente-base.js')
 
 
@@ -47,7 +49,7 @@ def _fichas(d):
     for f in d['expedientes']['fichas']:
         out.append({'t': 'expediente', 'tit': limpio(f['titulo']), 'txt': limpio(f['hallazgo']),
                     'ci': [{'v': c['valor'], 'etq': c['etq'], 'e': c['estado']} for c in f.get('cifras', [])],
-                    'fu': [{'tx': limpio(f['fuente'])}], 'nota': limpio(f.get('alcance')),
+                    'fu': [{'tx': limpio(f['fuente']), 'url': ASF_INFORMES}], 'nota': limpio(f.get('alcance')),
                     'ir': ['expedientes.html#exp-' + f['id'], 'Expedientes de casos'],
                     'k': limpio(f.get('ente')) + ' ' + f['id'].replace('-', ' ')})
 
@@ -60,12 +62,12 @@ def _fichas(d):
                 ci.append({'v': format(e['deudaIld'], '.1f') + '%', 'etq': 'deuda entre ingresos de libre disposición', 'e': 'oficial'})
             if e.get('semaforoDeuda'):
                 ci.append({'v': e['semaforoDeuda'], 'etq': 'semáforo del Sistema de Alertas', 'e': 'oficial'})
-            fu.append({'tx': limpio(e['deudaFuente'])})
+            fu.append({'tx': limpio(e['deudaFuente']), 'url': ALERTAS})
         if e.get('asfMontoObservado') is not None and e.get('asfFuente'):
             ci.append({'v': '$' + format(e['asfMontoObservado'], ',.1f') + ' mdp', 'etq': 'por aclarar ante la ASF (Cuenta Pública 2024)', 'e': 'oficial'})
             if e.get('asfAuditorias') is not None:
                 ci.append({'v': str(e['asfAuditorias']), 'etq': 'auditorías de la ASF', 'e': 'oficial'})
-            fu.append({'tx': limpio(e['asfFuente'])})
+            fu.append({'tx': limpio(e['asfFuente']), 'url': d['cuenta_publica_asf']['fuentes']['MDB2024']['url']})
         if not ci:
             continue
         out.append({'t': 'entidad', 'tit': e['name'],
@@ -75,7 +77,23 @@ def _fichas(d):
                     'ci': ci, 'fu': fu, 'ir': ['herramienta-inspector-radar.html', 'Radar por entidad'],
                     'k': '%s %s estado entidad deuda asf' % (e['abbr'], e.get('capital', ''))})
 
-    # 4. Las fuentes oficiales (leyes, informes, decretos).
+    # 4. Lo que gana cada cargo (Tu contra ellos): neto mensual y anual, con
+    #    su estado; el derivado dice su operacion.
+    cs = d['comparador_salarial']
+    for c in cs['cargos']:
+        m = c['mensual']
+        mens = ('$' + format(m['max'], ',.2f').replace('.00', '') if m.get('min') in (None, m['max']) else
+                'de $%s a $%s' % (format(m['min'], ',.2f').replace('.00', ''), format(m['max'], ',.2f').replace('.00', '')))
+        ci = [{'v': mens, 'etq': 'al mes · ' + limpio(c['mensualConcepto']), 'e': c['mensualEstado']},
+              {'v': '$' + format(c['anual'], ',.2f').replace('.00', ''), 'etq': 'al año · ' + limpio(c.get('anualConcepto') or 'remuneración neta anual'),
+               'e': c['anualEstado'], 'op': limpio(c.get('anualOperacion'))}]
+        fx = cs['fuentes'].get(c['fuente'], {})
+        out.append({'t': 'cargo', 'tit': 'Cuánto gana: ' + c['cargo'], 'txt': limpio(c.get('detalle')) + '. ' + limpio(c.get('nota')),
+                    'ci': ci, 'fu': [{'tx': limpio(fx.get('corto', c['fuente'])) + ' · ' + limpio(c.get('pagina')), 'url': fx.get('url')}],
+                    'ir': ['herramienta-calculadora-compara.html', 'Tú contra ellos'],
+                    'k': 'sueldo salario gana remuneracion ' + c['id'].replace('_', ' ') + ' ' + c['grupo']})
+
+    # 5. Las fuentes oficiales (leyes, informes, decretos).
     for r in d['referencias_legales']:
         out.append({'t': 'fuente', 'tit': limpio(r['cita_apa'])[:180], 'txt': limpio(r.get('descripcion')),
                     'fu': [{'tx': limpio(r['cita_apa']), 'url': r.get('url')}],
@@ -88,9 +106,8 @@ def _pendientes():
     import pendientes
     out = []
     for x in pendientes.recolectar():
-        out.append({'t': 'pendiente', 'tit': limpio(x['que']), 'txt': limpio(x['porque']),
-                    'ci': [{'v': 'Sin dato', 'etq': x['responsable'], 'e': 'pendiente', 'p': x['id']}],
-                    'fu': [{'tx': x['enlace_txt'], 'url': x['enlace']}],
+        out.append({'t': 'pendiente', 'tit': limpio(x['que']), 'txt': '',
+                    'pend': {'pq': limpio(x['porque']), 'quien': x['responsable'], 'donde': x['enlace'], 'donde_tx': x['enlace_txt'], 'id': x['id']},
                     'ir': ['pendientes.html#' + x['id'], 'Registro de pendientes'],
                     'k': limpio(x['tema']) + ' falta pendiente'})
     return out
@@ -113,6 +130,31 @@ def _paginas():
             continue
         tit = limpio(t.group(1)).split(' · ')[0].split(' | ')[0]
         out.append({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit], 'k': n[:-5].replace('-', ' ')})
+        # Cada seccion con titulo propio: lleva al lugar exacto de la pagina.
+        vistos = set()
+        for h in re.finditer(r'<h([23])[^>]*\bid="([^"]+)"[^>]*>(.*?)</h\1>', s, re.S):
+            # La ventana de «Cuéntanos lo que viste» (ids pt*) se repite en todas las paginas.
+            if 'sr-only' in h.group(3) or h.group(2).startswith('pt'):
+                continue
+            ht = limpio(h.group(3))
+            if len(ht) < 4 or ht in vistos or ht == tit:
+                continue
+            vistos.add(ht)
+            resto = s[h.end():h.end() + 60000]
+            sig = re.search(r'<h2[^>]*\bid="|<footer|class="herr-mod-nav|class="herr-otras', resto)
+            cuerpo = limpio(re.sub(r'<(script|style|svg)[^>]*>.*?</\1>', ' ', resto[:sig.start()] if sig else resto, flags=re.S))[:6000]
+            # Solo las palabras distintas: la busqueda no necesita el orden y la base pesa menos.
+            unicas = []
+            for w in re.findall(r'[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]{3,}', cuerpo):
+                if w.lower() not in unicas:
+                    unicas.append(w.lower())
+            cuerpo = ' '.join(unicas)
+            pm = re.search(r'<p[^>]*>(.*?)</p>', resto, re.S)
+            tx = limpio(pm.group(1)) if pm else ''
+            if len(tx) > 420:
+                tx = tx[:420].rsplit(' ', 1)[0] + '…'
+            # k lleva el texto de toda la seccion: se busca en el, se muestra el primer parrafo.
+            out.append({'t': 'seccion', 'tit': ht, 'txt': tx, 'ir': ['%s#%s' % (n, h.group(2)), tit], 'k': tit + ' ' + cuerpo})
     return out
 
 
@@ -135,7 +177,7 @@ EJEMPLOS = [
     ('¿Qué es un pliego de observaciones?', '📘'),
     ('¿Cuánto debe Jalisco?', '🗺️'),
     ('Tren Maya', '🚅'),
-    ('¿Qué es el ramo 33?', '💰'),
+    ('¿Cuánto gana la presidenta?', '💰'),
     ('¿Qué falta saber del huracán Otis?', '⏳'),
     ('¿Dónde veo la lista negra del SAT?', '🧾'),
 ]
@@ -170,13 +212,16 @@ def pagina(cuenta):
           </form>
         </div>
         <aside class="pa-como">
+          <p class="pa-beta"><b>🛠️ En mejora continua.</b> El bot crece con la plataforma: cada ficha, cifra y página que integramos la vuelve más precisa. Si algo no lo encuentra, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>
           <h3>Cómo responde</h3>
           <ol>
-            <li><b>Busca</b> tu pregunta entre %s fichas de la plataforma: %d términos del glosario, %d expedientes, %d entidades, %d fuentes oficiales, %d pendientes y %d páginas.</li>
+            <li><b>Busca</b> tu pregunta entre %s fichas de la plataforma: %d términos del glosario, %d expedientes, %d entidades, %d sueldos de cargos públicos, %d fuentes oficiales, %d pendientes, %d páginas y %d secciones.</li>
             <li><b>Arma la nota técnica</b> con la ficha que mejor responde: el texto, las cifras con su estado (<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>) y sus fuentes.</li>
+            <li><b>Justifica cada cifra</b> por su clasificación: si es <b>oficial</b>, de qué documento sale; si es <b>derivada</b>, con qué operación (y, cuando solo hay aproximación, el rango: mínimo, máximo y punto medio, cada cota con su fuente); si está <b>pendiente</b>, por qué falta, a quién le toca publicarla y el enlace donde debería estar.</li>
             <li><b>La sella</b> con un folio y una huella digital (SHA-256), como el Estado de Cuenta: si alguien cambia una letra, la huella ya no coincide.</li>
           </ol>
           <p class="pa-aviso"><b>Es un bot interno, no una inteligencia artificial generativa.</b> No escribe cifras por su cuenta ni consulta servicios de fuera: tu pregunta no sale de tu navegador. Solo encuentra y ordena lo que la plataforma ya publicó con su documento.</p>
         </aside>
       </div>''' % (format(total, ','), ej, format(total, ','), cuenta.get('glosario', 0), cuenta.get('expediente', 0),
-                   cuenta.get('entidad', 0), cuenta.get('fuente', 0), cuenta.get('pendiente', 0), cuenta.get('pagina', 0))
+                   cuenta.get('entidad', 0), cuenta.get('cargo', 0), cuenta.get('fuente', 0), cuenta.get('pendiente', 0),
+                   cuenta.get('pagina', 0), cuenta.get('seccion', 0))
