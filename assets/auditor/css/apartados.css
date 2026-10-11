@@ -725,6 +725,18 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .herr-cab.rubro-ambiente::before { background-color: #4c5f45; }
 .herr-cab.rubro-ambiente::after { background: linear-gradient(90deg, rgba(70, 89, 64, 1) 0%, rgba(70, 89, 64, 0.95) 38%, rgba(70, 89, 64, 0.35) 62%, rgba(70, 89, 64, 0) 78%); }
 .herr-cab.rubro-ambiente .apartado-lema { background: rgba(255, 255, 255, 0.16); border: 1px solid rgba(255, 255, 255, 0.45); }
+/* Las otras tres, mismo trato (pedido del autor, 11-10-2026): naranja para
+   Megaobras, dorado para la Calculadora, gris para el Modo Inspector. */
+.herr-cab.rubro-obras { --tarjeta: #c2611d; }
+.herr-cab.rubro-obras::before { background-color: #9a4a14; }
+.herr-cab.rubro-obras::after { background: linear-gradient(90deg, rgba(154, 74, 20, 1) 0%, rgba(154, 74, 20, 0.95) 38%, rgba(154, 74, 20, 0.35) 62%, rgba(154, 74, 20, 0) 78%); }
+.herr-cab.rubro-calculadora { --tarjeta: #c9a227; }
+.herr-cab.rubro-calculadora::before { background-color: #85640f; }
+.herr-cab.rubro-calculadora::after { background: linear-gradient(90deg, rgba(133, 100, 15, 1) 0%, rgba(133, 100, 15, 0.95) 38%, rgba(133, 100, 15, 0.35) 62%, rgba(133, 100, 15, 0) 78%); }
+.herr-cab.rubro-inspector { --tarjeta: #8a929e; }
+.herr-cab.rubro-inspector::before { background-color: #4a515c; }
+.herr-cab.rubro-inspector::after { background: linear-gradient(90deg, rgba(74, 81, 92, 1) 0%, rgba(74, 81, 92, 0.95) 38%, rgba(74, 81, 92, 0.35) 62%, rgba(74, 81, 92, 0) 78%); }
+.herr-cab.rubro-obras .apartado-lema, .herr-cab.rubro-calculadora .apartado-lema, .herr-cab.rubro-inspector .apartado-lema { background: rgba(255, 255, 255, 0.16); border: 1px solid rgba(255, 255, 255, 0.45); }
 .herr-cab-ico {
   display: inline-grid; place-items: center; vertical-align: middle; flex: none;
   width: 1.55em; height: 1.55em; margin-right: 0.32em; border-radius: 50%;
