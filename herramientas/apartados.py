@@ -538,7 +538,8 @@ APARTADOS = [
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
                     'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
-        'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html'},
+        # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
+        'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html'},
         'secciones': [
             {
                 # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
@@ -567,18 +568,6 @@ APARTADOS = [
                     ('💡', 'Un tema para investigar', 'Lo que te gustaría que investigáramos, con los documentos que conozcas.', 'comunidad.html#tema', None, None),
                     ('📣', 'Comparte el Estado de Cuenta', 'Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.', 'comunidad.html#compartir', None, None),
                     ('📋', 'Fe de erratas', 'Cada corrección que hemos hecho: qué estaba mal y qué cambió.', 'comunidad.html#erratas', None, None),
-                ],
-            },
-            {
-                # Entrega 6 de la propuesta de Astra (10-10-2026): el Pase
-                # convive con los Servicios (decision del autor).
-                'id': 'servicios',
-                'pestana': ('🔎', 'Servicios', 'Investigación a la medida y Pase del Auditor'),
-                'titulo': '🔎 Servicios y Pase del Auditor',
-                'texto': 'La consulta es gratuita. Si necesitas ir más a fondo, pide una investigación; si quieres sostener la plataforma, súmate con el Pase. Ambos se abren con el lanzamiento.',
-                'tarjetas': [
-                    ('🔎', 'Solicita una investigación', 'Revisión documental, expediente, seguimiento, capacitación o licencia, para quien sea y con la misma regla de la plataforma y su política de independencia.', 'servicios.html', None, None),
-                    ('🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma independiente: plan mensual o anual.', 'pase-del-auditor.html', None, None),
                 ],
             },
         ],
@@ -650,6 +639,9 @@ HERRAMIENTAS = [
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
+         # Venia de la pestana «Servicios» de Participa (pedido del autor, 11-10-2026).
+         ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
+          'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Incluye el Pase del Auditor Cívico. Tiene su propia página.'),
      ]),
     ('herramienta-ambiente.html', 'ambiente', '🌎', 'Costo Ambiental',
      'El gasto que no aparece en el recibo',
@@ -1000,8 +992,10 @@ def servicios():
         '        <div class="sv-resumen" id="svResumen" hidden></div>',
         '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
     return {
-        'archivo': 'servicios.html', 'menu': 'Servicios', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html#servicios', 'Participa'),
+        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'herramientas.html',
+        # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
+        'padre': ('herramientas.html', 'Herramientas'),
+        'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -1030,7 +1024,11 @@ def servicios():
                                        '          <p class="sv-version">Versión 2 · 10 de octubre de 2026.</p>\n        </div>' % politica},
             {'id': 'solicitud', 'titulo': 'Solicita una investigación', 'texto': 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.',
              'tarjetas': [], 'bloque': formulario},
+            # La otra tarjeta de la antigua pestana de Participa.
+            {'id': 'pase', 'titulo': 'Pase del Auditor Cívico', 'texto': 'Si lo que quieres es sostener la consulta gratuita, súmate con el Pase. Se abre con el lanzamiento.',
+             'tarjetas': [('🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma independiente: plan mensual o anual.', 'pase-del-auditor.html', None, None)]},
         ],
+        'pie_extra': herr_otras('herramienta-inspector.html'),
     }
 
 
@@ -3790,6 +3788,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Los Servicios de investigación salen de Participa y pasan a ser un módulo del Modo Inspector, en Herramientas, con todo su contenido: los cinco servicios, cómo trabajamos, el precio, la política de independencia, el formulario y el Pase del Auditor Cívico. El enlace viejo de Participa lleva ahí.'),
     ('11-10-2026', 'La página de Presupuesto queda solo con sus cinco tarjetas: sin botones de salto al pie.'),
     ('11-10-2026', 'Presupuesto se aligera: la franja «Ayer y hoy» y las notas del libro pasan al Diccionario del Gasto Público, en la pregunta frecuente sobre la acción financiera del Estado y en la ficha del libro en el Compendio de fuentes. Al pie de cada página de Presupuesto quedan solo dos botones, anterior y siguiente, sin listas que repitan los mismos destinos.'),
     ('11-10-2026', 'Presupuesto queda en cinco tarjetas compactas. El peso de 2026 se fundió con Cuánto dinero es, que ahora reúne la cifra del año, las dos barras de lo que entra y lo que sale, y lo que baja al territorio, sin repetir el reparto en columnas. El camino del dinero se concentra en quién responde, en qué plazo y con qué ley, y remite a las cifras en lugar de repetirlas.'),
@@ -3883,8 +3882,7 @@ def indice():
                 (e[5], e[2], e[3]) for e in ESTANTES] + [(b[0], b[2], '') for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
-                    ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas'),
-                    ('servicios.html', 'Servicios de investigación', 'Solicita una investigación y política de independencia')]
+                    ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')]
         otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
         ('index.html?ir=poderes', 'Lo que cuestan el Congreso y el Poder Judicial', 'Presupuesto 2026 y Cuenta Pública 2024')]))
