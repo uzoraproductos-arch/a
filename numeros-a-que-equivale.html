@@ -20,10 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011c">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011c">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011c">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011c">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261011d">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261011d">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261011d">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261011d">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261011d">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -159,13 +160,46 @@
       <section class="apartado-seccion" id="eb-equivale" aria-labelledby="eb-equivale-tit">
         <h2 class="sr-only" id="eb-equivale-tit">¿A qué equivale?</h2>
         <div class="apartado-bloque">
-        <div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-dinero)">
-          <div class="apartado-visor-cuerpo">
-            <p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>
-            <iframe class="apartado-visor-marco" title="¿A qué equivale?" data-modulo="index.html?ir=presupuesto&amp;ancla=eb-equivale&amp;visor=1"></iframe>
-            <noscript><p>Este módulo necesita JavaScript. <a href="index.html?ir=presupuesto&amp;ancla=eb-equivale">Ábrelo en el auditor</a>.</p></noscript>
-          </div>
-        </div>
+        <section class="pm" aria-labelledby="pmEq1">
+          <p class="pm-eq-n">1 de 3</p>
+          <h2 class="pm-tit" id="pmEq1">📉 La deuda cuesta 11 veces lo que cuestan los Poderes <span class="est-chip est-derivado">derivado</span></h2>
+          <p class="pm-txt">El <a class="glos-pagina" href="glosario.html#Costo-Financiero-de-la-Deuda">costo financiero de la deuda</a> previsto para 2026 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup> equivale a 11 veces lo que el mismo presupuesto asigna al Congreso, al Poder Judicial, a los órganos autónomos, al INEGI y al Tribunal Federal de Justicia Administrativa juntos <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-cgpe2027" title="Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto d">[64]</a></sup>.</p>
+          <figure class="pm-fig">
+            <div class="pm-barra pm-barra-alta" role="img" aria-label="Costo financiero de la deuda: $1,572,073.3 mdp"><span class="pm-seg" style="--w:100%;--c:#b3261e"><span class="pm-seg-tx">Costo financiero de la deuda<small>$1,572,073.3 mdp</small></span></span></div>
+            <div class="pm-bloques" role="img" aria-label="11 veces el presupuesto de los Poderes y órganos autónomos"><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span><span class="pm-bloque" style="--w:9.052%" title="Poderes y órganos autónomos: $142,300.0 mdp"></span></div>
+            <figcaption>Cada cuadro morado es todo lo que reciben los Poderes y órganos autónomos en el año: <b>$142,300.0 mdp</b>. Caben 11 completos dentro de lo que se paga de intereses.</figcaption>
+          </figure>
+          <p class="pm-op"><b>La operación:</b> $1,572,073.3 mdp ÷ $142,300.0 mdp = 11.05.</p>
+          <p class="pm-mas"><a href="numeros-egreso-costo-financiero.html">El costo financiero, en su página ➔</a> <a href="numeros-lo-que-cuestan-los-poderes.html">Lo que cuestan el Congreso y la Judicatura ➔</a></p>
+        </section>
+        <section class="pm" aria-labelledby="pmEq2">
+          <p class="pm-eq-n">2 de 3</p>
+          <h2 class="pm-tit" id="pmEq2">🗺️ $20,913 por habitante <span class="est-chip est-derivado">derivado</span></h2>
+          <p class="pm-txt">Es lo que el <a class="glos-pagina" href="glosario.html#Gasto-Federalizado">gasto federalizado</a> de 2026 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup> reparte, en promedio, por cada persona que vive en México. El promedio esconde diferencias grandes entre estados; el mapa las muestra una por una.</p>
+          <figure class="pm-fig pm-hab">
+            <div class="pm-hab-op"><span><b class="num-tabular">$2,810,800 mdp</b><small>gasto federalizado <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup></small></span><span class="pm-hab-signo" aria-hidden="true">÷</span>
+              <span><b class="num-tabular">134,407,258</b><small>personas a mitad de 2026 <span class="est-chip est-derivado">derivado</span></small></span><span class="pm-hab-signo" aria-hidden="true">=</span>
+              <span class="pm-hab-res"><b class="num-tabular">$20,913</b><small>por persona</small></span></div>
+          </figure>
+          <p class="pm-op"><b>De dónde sale la población:</b> CONAPO · Proyecciones de la Población de México y de las Entidades Federativas 2020-2070, población a mitad de 2026. Suma de las 32 entidades, las 110 edades y ambos sexos del año 2026 en el archivo de datos abiertos del CONAPO: 134,407,258 personas. El archivo no trae una fila nacional; por eso la cifra es derivada. <a href="https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv" rel="noopener" target="_blank">Archivo oficial ↗</a></p>
+          <p class="pm-mas"><a href="numeros-baja-al-territorio.html">El reparto, estado por estado ➔</a></p>
+        </section>
+        <section class="pm" aria-labelledby="pmEq3">
+          <p class="pm-eq-n">3 de 3</p>
+          <h2 class="pm-tit" id="pmEq3">🚆 $785.3 mdp por aclarar en el Tren Maya <span class="est-chip est-derivado">derivado</span></h2>
+          <p class="pm-txt">Es lo que la <a class="glos-pagina" href="glosario.html#Auditoria-Superior-de-la-Federacion">Auditoría Superior de la Federación</a> dejó sin aclarar en la construcción y el financiamiento del Tren Maya en la Cuenta Pública 2022, con 14 pliegos de observaciones. El tramo 4, Izamal-Cancún, concentra el 45 %. La cifra suma los informes individuales de ese año.</p>
+          <p class="pm-mas"><a href="expedientes.html#exp-tren-maya">Ver el expediente y sus informes ➔</a> <a href="auditoria-tren-maya.html">El Tren Maya en imágenes ➔</a></p>
+        </section>
+        <aside class="pm pm-aviso" aria-labelledby="pmHuach">
+          <h2 class="pm-sub" id="pmHuach">⛽ Y lo que no entra <span class="est-chip est-pendiente" data-pend="huachicol-evasion">pendiente</span></h2>
+          <p class="pm-txt">La deuda crece también por lo que el erario deja de cobrar. El Gobierno reconoce que el robo y la venta ilegal de combustibles son «una de las principales fuentes de evasión» del IEPS, el impuesto que va en cada litro. Ni el SAT ni Hacienda han publicado cuánto se pierde: falta de transparencia de esas dependencias.</p>
+          <p class="pm-mas"><a href="auditoria-huachicol-fiscal.html">Huachicol fiscal: lo que se sabe y lo que falta ➔</a> <a href="pendientes.html#huachicol-evasion">En el Registro de pendientes ➔</a></p>
+        </aside>
+        <section class="pm pm-nota" aria-labelledby="pmNota">
+          <h2 class="pm-sub" id="pmNota">📌 Cómo se hicieron estas comparaciones</h2>
+          <p class="pm-txt">Las tres usan solo cifras que esta plataforma ya cita de su documento oficial, y por eso llevan el chip <span class="est-chip est-derivado">derivado</span>: el resultado es una operación, y la operación está a la vista. La primera divide dos renglones del mismo Presupuesto 2026. La segunda reparte una cifra nacional entre la población proyectada por el Consejo Nacional de Población. La tercera suma los informes de la ASF que se enlistan, uno por uno, en el expediente del caso.</p>
+          <p class="pm-txt">No comparamos contra el costo de un hospital, de una beca o de una obra «tipo» mientras ese costo no tenga su propio documento oficial: un costo supuesto convierte la comparación en opinión.</p>
+        </section>
         </div>
       </section>
 
@@ -194,11 +228,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011c</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261011d</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261011c"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261011c"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261011d"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261011d"></script>
+  <script src="assets/auditor/js/presupuesto.js?v=20261011d"></script>
 </body>
 </html>
