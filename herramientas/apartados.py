@@ -522,7 +522,7 @@ APARTADOS = [
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
         'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
-                          'pase': PASE[0]},
+                          'pase': PASE[0], 'comunidad': 'comunidad.html'},
         'secciones': [
             {
                 # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
@@ -547,18 +547,12 @@ APARTADOS = [
                 'pestana': (PASE[1], PASE[2], 'Sostén la plataforma: abre su página'),
             },
             {
-                # Entrega 7 de la propuesta de Astra (10-10-2026).
+                # Entrega 7 de la propuesta de Astra (10-10-2026). Desde el
+                # 11-10-2026 (pedido del autor) no se despliega: abre
+                # comunidad.html, y cada una de sus cinco tarjetas, su pagina.
                 'id': 'comunidad',
-                'pestana': ('🤝', 'Comunidad', 'Cuéntanos lo que viste, corrígenos, comparte'),
-                'titulo': '🤝 Comunidad: cuéntanos lo que viste',
-                'texto': 'La plataforma mejora con quien la lee. Son las mismas tres rutas del botón «📢 Cuéntanos lo que viste» de la cabecera, más la fe de erratas y el botón para compartir.',
-                'tarjetas': [
-                    ('🏗️', 'Algo raro con el dinero público', 'Una obra que no cuadra, un contrato, un programa usado en campaña, un cobro indebido.', 'comunidad.html#reporta', None, None),
-                    ('✏️', 'Un dato mal en esta plataforma', 'Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.', 'comunidad.html#error', None, None),
-                    ('💡', 'Un tema para investigar', 'Lo que te gustaría que investigáramos, con los documentos que conozcas.', 'comunidad.html#tema', None, None),
-                    ('📣', 'Comparte el Estado de Cuenta', 'Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.', 'comunidad.html#compartir', None, None),
-                    ('📋', 'Fe de erratas', 'Cada corrección que hemos hecho: qué estaba mal y qué cambió.', 'comunidad.html#erratas', None, None),
-                ],
+                'pagina': 'comunidad.html',
+                'pestana': ('🤝', 'Comunidad', 'Cuéntanos lo que viste, corrígenos, comparte: abre su página'),
             },
         ],
     },
@@ -1312,7 +1306,7 @@ PUERTA_HTML = '''  <div class="pt-velo" id="ptVelo" hidden></div>
     </div>
     <div class="pt-cuerpo">
 {rutas}
-      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad.html#erratas">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
     </div>
   </aside>'''
 
@@ -1534,9 +1528,45 @@ def poner_puerta():
     return 0
 
 
+# Comunidad, en cinco paginas (pedido del autor, 11-10-2026): comunidad.html
+# queda como portada con cinco tarjetas y cada una abre la suya. Las anclas
+# viejas (comunidad.html#reporta...) llevan a su pagina. Los formularios los
+# sigue armando comunidad.js, que se carga en todas las paginas.
+# (id, archivo, icono, titulo, frase de la tarjeta, texto de la pagina)
+COMUNIDAD_PARTES = [
+    ('reporta', 'comunidad-reporta.html', '🏗️', 'Algo raro con el dinero público',
+     'Una obra que no cuadra, un contrato, un programa usado en campaña, un cobro indebido.',
+     RUTAS[0][3] + ' Dinos qué, dónde y cuándo.'),
+    ('error', 'comunidad-error.html', '✏️', 'Un dato mal en esta plataforma',
+     'Un dato que no coincide con su documento oficial. Si tienes razón, se corrige en público.',
+     'Si un dato no coincide con su documento oficial, dínoslo. Si tienes razón, se corrige y entra a la fe de erratas.'),
+    ('tema', 'comunidad-tema.html', '💡', 'Un tema que deberíamos investigar',
+     'Lo que te gustaría que investigáramos, con los documentos que conozcas.',
+     'Lo que te gustaría que investigáramos. No compromete a nadie: lo revisamos y, si hay documentos, entra a la lista.'),
+    ('compartir', 'comunidad-compartir.html', '📣', 'Comparte el Estado de Cuenta',
+     'Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.',
+     'Un enlace basta.'),
+    ('erratas', 'comunidad-erratas.html', '📋', 'Fe de erratas',
+     'Cada corrección que hemos hecho: qué estaba mal y qué cambió.',
+     'Las correcciones que hemos hecho, de la más reciente a la más antigua.'),
+]
+COMUNIDAD_ARCHIVO = dict((c[0], c[1]) for c in COMUNIDAD_PARTES)
+AVISO_ENVIO = ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> El envío se activa '
+               'con el lanzamiento. Ya puedes armar tu texto, copiarlo o descargarlo.</p>')
+
+
+def comunidad_nav(actual):
+    """Barra al pie de cada pagina de Comunidad, con sus cinco partes."""
+    return ('<nav class="bib-nav" aria-label="Comunidad">\n'
+            '        <a class="bib-nav-tit" href="comunidad.html">🤝 Comunidad</a>\n'
+            '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
+                '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s</span></a>'
+                % (c[1], ' aria-current="page"' if c[1] == actual else '', c[2], c[3]) for c in COMUNIDAD_PARTES))
+
+
 def comunidad():
+    """La portada de Comunidad y sus cinco paginas: [portada, parte, ...]."""
     f = formas('cm')
-    reporte, tema, error = f['reporta'], f['tema'], f['error']
     erratas = '\n'.join(
         '            <li class="cm-errata"><span class="cm-errata-fecha">%s</span><b>%s</b>'
         '<span><span class="cm-errata-et">Estaba mal:</span> %s</span><span><span class="cm-errata-et">Qué hicimos:</span> %s</span>%s</li>'
@@ -1550,28 +1580,36 @@ def comunidad():
                  'compartimos solo el enlace: tu ingreso nunca sale de tu navegador.</p>\n'
                  '          <noscript><p>Para compartir, copia esta dirección: %sestado-de-cuenta.html</p></noscript>\n'
                  '        </div>') % (SITIO, SITIO)
-    return {
+    bloques = {
+        'reporta': f['reporta'] + '\n        <p class="pt-nota">%s</p>' % DENUNCIA,
+        'error': f['error'],
+        'tema': f['tema'],
+        'compartir': compartir,
+        'erratas': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas,
+    }
+    portada = {
         'archivo': 'comunidad.html', 'menu': 'Comunidad', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html#comunidad', 'Participa'),
+        'padre': ('participa.html', 'Participa'),
         'icono': '🤝', 'titulo': 'Comunidad', 'lema': 'Cuéntanos lo que viste',
         'entrada': ('La plataforma mejora con quien la lee. Repórtanos algo raro con el dinero público, señala un dato que esté mal '
-                    '(con su documento) o propón un tema para investigar. Es lo mismo que abre el botón «📢 Cuéntanos lo que viste» '
-                    'de la cabecera, aquí en su página, junto con la fe de erratas: cada corrección que hemos hecho, qué estaba mal y qué cambió.'),
-        'estilos': ['servicios.css'],
-        'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> El envío se activa '
-                  'con el lanzamiento. Ya puedes armar tu reporte, copiarlo o descargarlo. Compartir y la fe de erratas ya funcionan.</p>'),
-        'secciones': [
-            {'id': 'reporta', 'titulo': '🏗️ Algo raro con el dinero público', 'texto': RUTAS[0][3] + ' Dinos qué, dónde y cuándo.',
-             'tarjetas': [], 'bloque': reporte + '\n        <p class="pt-nota">%s</p>' % DENUNCIA},
-            {'id': 'error', 'titulo': '✏️ Un dato mal en esta plataforma', 'texto': 'Si un dato no coincide con su documento oficial, dínoslo. Si tienes razón, se corrige y entra a la fe de erratas.',
-             'tarjetas': [], 'bloque': error},
-            {'id': 'tema', 'titulo': '💡 Un tema que deberíamos investigar', 'texto': 'Lo que te gustaría que investigáramos. No compromete a nadie: lo revisamos y, si hay documentos, entra a la lista.',
-             'tarjetas': [], 'bloque': tema},
-            {'id': 'compartir', 'titulo': '📣 Comparte el Estado de Cuenta', 'texto': 'Un enlace basta.', 'tarjetas': [], 'bloque': compartir},
-            {'id': 'erratas', 'titulo': '📋 Fe de erratas', 'texto': 'Las correcciones que hemos hecho, de la más reciente a la más antigua.',
-             'tarjetas': [], 'bloque': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas},
-        ],
+                    '(con su documento) o propón un tema para investigar. Son las mismas tres rutas del botón «📢 Cuéntanos lo que viste» '
+                    'de la cabecera, más el botón para compartir y la fe de erratas. Cada tarjeta abre su propia página.'),
+        'hash_a_pagina': COMUNIDAD_ARCHIVO,
+        'secciones': [{'id': 'partes', 'titulo': 'Las cinco puertas de la Comunidad', 'texto': '', 'sin_cab': True,
+                       'tarjetas': [(c[2], c[3], c[4], c[1], None, None) for c in COMUNIDAD_PARTES]}],
     }
+    partes = []
+    for id_, archivo, ico, tit, frase, texto in COMUNIDAD_PARTES:
+        partes.append({
+            'archivo': archivo, 'menu': tit, 'menu_archivo': 'participa.html',
+            'padre': ('participa.html', 'Participa'), 'padre2': ('comunidad.html', 'Comunidad'),
+            'icono': ico, 'titulo': tit, 'lema': 'Comunidad', 'entrada': texto,
+            'estilos': ['servicios.css'],
+            'antes': AVISO_ENVIO if id_ in ('reporta', 'error', 'tema') else '',
+            'pie_extra': comunidad_nav(archivo),
+            'secciones': [{'id': id_, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloques[id_]}],
+        })
+    return [portada] + partes
 
 
 # Garantias civicas en su propia pagina (decision del autor, 10-10-2026).
@@ -1707,7 +1745,7 @@ def garantias():
           <div class="gr-etapa gr-resultado" data-etapa="4" hidden aria-live="polite">
             <div id="grRuta"></div>
             <p class="gr-res-pie"><button type="button" class="sz-btn" id="grOtra">🔄 Empezar otra vez</button>
-              <a class="sz-btn" href="comunidad.html#reporta" data-puerta="reporta">📢 Ordena tu texto antes de presentarlo</a></p>
+              <a class="sz-btn" href="comunidad-reporta.html" data-puerta="reporta">📢 Ordena tu texto antes de presentarlo</a></p>
           </div>
           <noscript><p>La brújula necesita JavaScript. Abajo están las seis puertas con todo lo que necesitas saber.</p></noscript>
         </div>'''.format(datos=datos, opciones=opciones)
@@ -3889,7 +3927,7 @@ def pagina(a, sello):
         # Una clave 'prefijo-*' lleva cualquier ancla con ese prefijo a su
         # pagina, conservando el ancla (las columnas, #col-<id>).
         redirige = ('\n  <script>(function () { var m = %s, h = location.hash.slice(1); '
-                    'if (m[h]) { location.replace(m[h]); return; } '
+                    'if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? \'\' : location.search)); return; } '
                     'for (var k in m) if (k.slice(-1) === \'*\' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + \'#\' + h); return; } '
                     '})();</script>' % json.dumps(a['hash_a_pagina']))
     if a.get('abrir_a_pagina'):
@@ -3966,6 +4004,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Comunidad ya no se despliega en Participa: abre su página, con cinco tarjetas, y cada una abre la suya: algo raro con el dinero público, un dato mal, un tema para investigar, comparte el Estado de Cuenta y la fe de erratas.'),
     ('11-10-2026', 'La portada se simplifica: el carrusel de investigaciones habla en palabras llanas y sin siglas, y la cabecera ya no trae buscador. Para encontrar algo, pregúntale al Auditor.'),
     ('11-10-2026', 'Noticias relevantes abre en su propia página, con «La Columna del Erario» en su formato de periódico.'),
     ('11-10-2026', 'El Modo Inspector se abre en dos tarjetas, cada una con su página: Grandes investigaciones, con las ocho aplicaciones, y Pregúntale al Auditor, el bot interno.'),
@@ -4077,8 +4116,10 @@ def indice():
         if archivo == 'aprende.html':
             enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], '· ' + b[2], b[3]) for b in BIBLIOTECA]
         if archivo == 'participa.html':
+            enl = [e for e in enl if e[0] != 'comunidad.html']
             enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
-                    ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')]
+                    ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')] + [
+                    (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
         otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
         ('index.html?ir=poderes', 'Lo que cuestan el Congreso y el Poder Judicial', 'Presupuesto 2026 y Cuenta Pública 2024')]))
@@ -4185,7 +4226,7 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), comunidad(), agora(), garantias()] + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), garantias()] + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

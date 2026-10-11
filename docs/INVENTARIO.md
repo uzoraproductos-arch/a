@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 114 |
+| Páginas revisadas | 119 |
 | Páginas que solo redirigen | 9 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -29,7 +29,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 42 | 0 | 2 | 4 | 1 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `comunidad.html` | Comunidad · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `comunidad-compartir.html` | Comparte el Estado de Cuenta · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `comunidad-erratas.html` | Fe de erratas · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
+| `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `comunidad-reporta.html` | Algo raro con el dinero público · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `comunidad-tema.html` | Un tema que deberíamos investigar · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `comunidad.html` | Comunidad · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 25 | 0 | 18 | 3 | 6 |
@@ -64,7 +69,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 137 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 141 | 0 | 1 | 1 | 1 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 40 | 0 | 0 | 5 | 1 |
@@ -114,7 +119,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `participa.html` | Participa · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `participa.html` | Participa · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 49 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |

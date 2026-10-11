@@ -230,7 +230,7 @@ def pagina(cuenta, canal=''):
               <button type="button" class="pa-copiar" id="paSinRespCopiar">📋 Copiar la lista</button>
               <button type="button" class="pa-copiar" id="paSinRespBorrar">🗑️ Borrar</button>
             </p>
-            <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad.html#tema">Comunidad › Un tema que deberíamos investigar</a>.</p>
+            <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html">Comunidad › Un tema que deberíamos investigar</a>.</p>
           </section>
           <p class="pa-aviso"><b>Es un bot interno, no una inteligencia artificial generativa.</b> No escribe cifras por su cuenta ni consulta servicios de fuera: tu pregunta no sale de tu navegador. Solo encuentra y ordena lo que la plataforma ya publicó con su documento.</p>
         </aside>
