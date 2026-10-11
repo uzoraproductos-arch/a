@@ -1,9 +1,9 @@
 /* ===================================================================
-   AUDITAVISION - Fichas de la página de datos (descarga-los-datos.html)
+   AUDITAVISION - Fichas de Datos abiertos e Informes oficiales
    -------------------------------------------------------------------
-   Desde el 09-10-2026 las fichas de «Datos abiertos» e «Informes
-   oficiales» se despliegan aquí mismo, debajo de su fila, con su
-   contenido completo: ya no abren la portada (AGENTS.md §5 bis).
+   Desde el 11-10-2026 cada ficha de «Datos abiertos» e «Informes
+   oficiales» es su propia página (datos_paginas() en apartados.py) y
+   aquí se llena su contenido completo (AGENTS.md §5 bis).
    Las descargas en CSV y los Informes de la Cuenta Pública son copia
    del motor (audit-engine.js, DESCARGAS y renderCuentaPublica): si
    cambia uno, cambia el otro. Lee window.AUDIT_DB y
@@ -606,81 +606,16 @@
   };
 
   /* ---------------------------------------------------------------
-     Despliegue: como el visor de las otras páginas, debajo de la fila
-     de la ficha. Una ficha abierta a la vez por pestaña.
+     Desde el 11-10-2026 cada ficha vive en su página (datos-descargas,
+     datos-municipios, informes-cuenta-publica e informes-diccionario):
+     se llena el <div data-ficha-fija> que trae cada una.
      --------------------------------------------------------------- */
-  function ultimaDeSuFila(t) {
-    let fila = t;
-    t.parentNode.querySelectorAll('.dt-ficha').forEach(o => { if (o.offsetTop === t.offsetTop) fila = o; });
-    return fila;
-  }
-
-  function cerrarFicha(t, devolverFoco) {
-    const panel = document.getElementById('dtp-' + t.dataset.ficha);
-    if (panel) panel.remove();
-    t.setAttribute('aria-expanded', 'false');
-    t.classList.remove('apartado-tarjeta-abierta');
-    if (devolverFoco) t.focus({ preventScroll: true });
-  }
-
-  function abrirFicha(t, desplazar) {
-    const rejilla = t.parentNode;
-    rejilla.querySelectorAll('.dt-ficha[aria-expanded="true"]').forEach(o => cerrarFicha(o, false));
-    const id = t.dataset.ficha, f = FICHAS[id];
+  document.querySelectorAll('[data-ficha-fija]').forEach(caja => {
+    const f = FICHAS[caja.dataset.fichaFija];
     if (!f) return;
-    t.setAttribute('aria-expanded', 'true');
-    t.classList.add('apartado-tarjeta-abierta');
-    const panel = document.createElement('div');
-    panel.className = 'apartado-visor dt-panel';
-    panel.id = 'dtp-' + id;
-    panel.setAttribute('role', 'region');
-    const nombre = t.querySelector('.apartado-tarjeta-nombre').textContent.trim();
-    panel.setAttribute('aria-label', nombre);
-    const c = getComputedStyle(t).getPropertyValue('--tarjeta');
-    if (c) panel.style.setProperty('--tarjeta', c.trim());
-    panel.innerHTML =
-      '<div class="apartado-visor-cab">' +
-        '<span class="apartado-visor-tit" tabindex="-1">' + pdEsc(t.querySelector('.apartado-tarjeta-icono').textContent + ' ' + nombre) + '</span>' +
-        '<button type="button" class="apartado-visor-b apartado-visor-cerrar">✕ Cerrar</button>' +
-      '</div>' +
-      '<div class="dt-cuerpo">' + f.html() + '</div>';
-    panel.querySelector('.apartado-visor-cerrar').addEventListener('click', () => cerrarFicha(t, true));
-    const tras = ultimaDeSuFila(t);
-    tras.parentNode.insertBefore(panel, tras.nextSibling);
+    caja.innerHTML = f.html();
     if (f.luego) f.luego();
-    if (desplazar) {
-      document.body.classList.add('cabecera-compacta');
-      const nav = document.querySelector('.site-top-nav');
-      const alto = nav ? nav.getBoundingClientRect().height : 0;
-      setTimeout(() => {
-        window.scrollTo({ top: Math.max(0, panel.getBoundingClientRect().top + window.pageYOffset - alto - 8), behavior: 'smooth' });
-        const tit = panel.querySelector('.apartado-visor-tit');
-        if (tit) tit.focus({ preventScroll: true });
-      }, 30);
-    }
-  }
-
-  document.addEventListener('click', e => {
-    const t = e.target.closest && e.target.closest('.dt-ficha');
-    if (!t) return;
-    e.preventDefault();
-    if (t.getAttribute('aria-expanded') === 'true') cerrarFicha(t, false); else abrirFicha(t, true);
   });
-
-  /* #ficha-asf (o cualquier #ficha-<id>) abre su pestaña y su ficha: así
-     enlaza el radar a los Informes de la Cuenta Pública. */
-  function abrirDesdeAncla() {
-    const m = location.hash.match(/^#ficha-([\w-]+)$/);
-    if (!m) return;
-    const t = document.querySelector('.dt-ficha[data-ficha="' + m[1] + '"]');
-    if (!t) return;
-    const panel = t.closest('[role="tabpanel"]');
-    const pest = panel && document.getElementById('pestana-' + panel.id);
-    if (pest && panel.hidden) pest.click();
-    if (t.getAttribute('aria-expanded') !== 'true') abrirFicha(t, true);
-  }
-  window.addEventListener('hashchange', abrirDesdeAncla);
-  window.addEventListener('load', () => setTimeout(abrirDesdeAncla, 400));
 
   window.AuditEngine = Object.assign(window.AuditEngine || {}, {
     descargarCSV: descargarCSV,

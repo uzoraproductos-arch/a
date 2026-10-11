@@ -128,19 +128,67 @@ def libro_pie(a):
             '</aside>' % (num, num, num, cita, url, a['libro'], glos_))
 
 
-def fichas(lista):
-    """Fichas que se despliegan en la misma página (datos.js): botones con
-    el aspecto de las tarjetas, sin enlace a la portada."""
-    partes = []
-    for fid, icono, nombre, desc, rubro in lista:
-        clase = 'apartado-tarjeta dt-ficha' + (' rubro-' + rubro if rubro else '')
-        partes.append('<button type="button" class="%s" data-ficha="%s" aria-expanded="false">\n'
-                      '  <span class="apartado-tarjeta-icono" aria-hidden="true">%s</span>\n'
-                      '  <span class="apartado-tarjeta-nombre">%s</span>\n'
-                      '  <span class="apartado-tarjeta-desc">%s</span>\n'
-                      '  <span class="apartado-tarjeta-accion">Desplegar ▾</span>\n'
-                      '</button>' % (clase, fid, icono, nombre, desc))
-    return '<div class="apartado-rejilla dt-fichas">\n' + '\n'.join(partes) + '\n</div>'
+# Datos abiertos e Informes oficiales, en sus paginas (pedido del autor,
+# 11-10-2026), como Comunidad y Garantias: cada pestana de Datos abre su
+# portada y cada ficha, su pagina. El contenido lo sigue armando datos.js
+# (FICHAS), que ahora llena el <div data-ficha-fija> de cada pagina. Las
+# anclas viejas (descarga-los-datos.html#abiertos, #ficha-asf...) redirigen.
+# (id, portada, icono, nombre, frase de la pestana, entrada,
+#  [(ficha, archivo, icono, nombre, frase de la tarjeta, entrada)])
+DATOS_PARTES = [
+    ('abiertos', 'datos-abiertos.html', '💾', 'Datos abiertos', 'Bases en CSV para Excel',
+     'Las bases de la plataforma, listas para que hagas tus propias cuentas. Cada una se descarga en CSV, abre directo en Excel '
+     'y lleva su fuente oficial al final del archivo. Cada tarjeta abre su propia página.',
+     [('descargas', 'datos-descargas.html', '📥', 'Descarga en CSV (abre en Excel)',
+       'Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.',
+       'Siete bases con fuente oficial, cada una con su botón de descarga y su diccionario de columnas.'),
+      ('municipios', 'datos-municipios.html', '🏘️', 'Base de Datos Municipal EFIPEM (INEGI)',
+       'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.',
+       'Los municipios del país con sus ingresos, predial, participaciones y aportaciones, según las Estadísticas de Finanzas '
+       'Públicas Estatales y Municipales del INEGI. Descárgala completa o consulta un estado aquí mismo.')]),
+    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública y diccionario',
+     'Lo que revisó la Auditoría Superior de la Federación en la Cuenta Pública y qué contiene cada archivo de datos de la '
+     'plataforma. Cada tarjeta abre su propia página.',
+     [('asf', 'informes-cuenta-publica.html', '🔎', 'Informes de la Cuenta Pública (ASF)',
+       'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.',
+       'Qué revisó la Auditoría Superior de la Federación en la Cuenta Pública 2024, cuánto quedó por aclarar en tu estado '
+       'y cuándo sale la siguiente entrega. Cada cifra, con su informe.'),
+      ('diccionario', 'informes-diccionario.html', '📋', 'Diccionario de Datos',
+       'Qué contiene cada archivo de datos de la plataforma, campo por campo.',
+       'Qué contiene cada archivo de datos de la plataforma, columna por columna. Cada base se descarga con el botón de su renglón.')]),
+]
+# Anclas viejas de descarga-los-datos.html: la pestana y cada #ficha-<id>.
+DATOS_ANCLAS = dict([(d[0], d[1]) for d in DATOS_PARTES] +
+                    [('ficha-' + f[0], f[1]) for d in DATOS_PARTES for f in d[6]])
+
+
+def datos_paginas():
+    """Portadas de Datos abiertos e Informes oficiales y una pagina por ficha."""
+    paginas = []
+    for id_, portada, ico, nombre, frase, entrada, fichas_ in DATOS_PARTES:
+        partes = [(f[0], f[1], f[2], f[3]) for f in fichas_]
+        paginas.append({
+            'archivo': portada, 'menu': nombre, 'menu_archivo': 'descarga-los-datos.html',
+            'padre': ('descarga-los-datos.html', 'Datos'),
+            'icono': ico, 'titulo': nombre, 'lema': frase, 'entrada': entrada,
+            'hash_a_pagina': dict((f[0], f[1]) for f in fichas_),
+            'secciones': [{'id': 'partes', 'titulo': nombre, 'texto': '', 'sin_cab': True,
+                           'tarjetas': [(f[2], f[3], f[4], f[1], None, None) for f in fichas_]}],
+        })
+        for fid, archivo, fico, fnombre, ffrase, fentrada in fichas_:
+            paginas.append({
+                'archivo': archivo, 'menu': fnombre, 'menu_archivo': 'descarga-los-datos.html',
+                'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (portada, nombre),
+                'icono': fico, 'titulo': fnombre, 'lema': nombre, 'entrada': fentrada,
+                'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
+                'pie_extra': partes_nav(nombre, portada, ico, partes, archivo),
+                'secciones': [{'id': fid, 'titulo': fnombre, 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                               'bloque': ('<div class="dt-cuerpo dt-fija" data-ficha-fija="%s">\n'
+                                          '          <noscript><p>Esta página necesita JavaScript.</p></noscript>\n'
+                                          '        </div>' % fid)}],
+            })
+    return paginas
+
 
 def glos(termino, texto):
     return '<a class="glos-pagina" href="glosario.html#%s">%s</a>' % (glosario_ancla(termino), texto)
@@ -422,11 +470,10 @@ APARTADOS = [
         'entrada': ('Todo lo que ves en el auditor sale de documentos oficiales. Aquí están las cifras de referencia '
                     'para poner el gasto en perspectiva, con su fuente, y los archivos que abren en Excel para que '
                     'hagas tus propias cuentas.'),
-        'scripts': ['audit-database.js', 'municipios-efipem.js', 'datos.js'],
         # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
         'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'radar-presupuesto-en-curso.html',
                           'rc-deuda': 'radar-presupuesto-en-curso.html', 'rc-asf': 'radar-presupuesto-en-curso.html',
-                          'rc-huachicol': 'radar-presupuesto-en-curso.html'},
+                          'rc-huachicol': 'radar-presupuesto-en-curso.html', **DATOS_ANCLAS},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -440,26 +487,16 @@ APARTADOS = [
                 'pestana': ('📡', 'Radar hacendario', 'Cada administración, con sus números: abre su página'),
             },
             {
+                # Desde el 11-10-2026 (pedido del autor) Datos abiertos e
+                # Informes oficiales abren su pagina (datos_paginas()).
                 'id': 'abiertos',
-                'pestana': ('💾', 'Datos abiertos', 'Bases en CSV para Excel'),
-                'titulo': '💾 Datos abiertos',
-                'texto': 'Bases en CSV, listas para revisar. Pulsa una ficha para desplegarla.',
-                'bloque': fichas([
-                    ('descargas', '📥', 'Descarga en CSV (abre en Excel)', 'Siete bases con fuente oficial: municipios, sueldos netos, gasto de los Poderes, presupuesto ambiental, auditorías de la ASF por estado, lista 69-B y documentos.', 'dinero'),
-                    ('municipios', '🏘️', 'Base de Datos Municipal EFIPEM (INEGI)', 'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.', 'dinero'),
-                ]),
-                'tarjetas': [],
+                'pagina': 'datos-abiertos.html',
+                'pestana': ('💾', 'Datos abiertos', 'Bases en CSV para Excel: abre su página'),
             },
             {
                 'id': 'informes',
-                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario'),
-                'titulo': '📑 Informes oficiales',
-                'texto': 'Lo que revisó la Auditoría Superior y qué contiene cada archivo. Pulsa una ficha para desplegarla.',
-                'bloque': fichas([
-                    ('asf', '🔎', 'Informes de la Cuenta Pública (ASF)', 'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.', 'inspector'),
-                    ('diccionario', '📋', 'Diccionario de Datos', 'Qué contiene cada archivo de datos de la plataforma, campo por campo.', None),
-                ]),
-                'tarjetas': [],
+                'pagina': 'informes-oficiales.html',
+                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario: abre su página'),
             },
         ],
     },
@@ -4210,6 +4247,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('11-10-2026', 'Datos abiertos e Informes oficiales abren su propia página, y cada tarjeta, la suya: las descargas en CSV, la base municipal del INEGI, los informes de la Cuenta Pública y el diccionario de datos.'),
     ('11-10-2026', 'Nueva página de Donaciones en Participa: una alcancía que se llena a la vista de todos con cada donativo, y unas cuentas claras de lo que entra y lo que sale. El canal para donar se abre con el lanzamiento.'),
     ('11-10-2026', 'Garantías cívicas se parte en cuatro páginas, como Comunidad: la brújula que te dice a qué puerta tocar, las seis puertas oficiales, tus diez garantías y el reto ¿Mito o realidad?'),
     ('11-10-2026', 'Comunidad ya no se despliega en Participa: abre su página, con cinco tarjetas, y cada una abre la suya: algo raro con el dinero público, un dato mal, un tema para investigar, comparte el Estado de Cuenta y la fe de erratas.'),
@@ -4321,6 +4359,9 @@ def indice():
                 ('radar-presupuesto-en-curso.html', '· Hoy: el presupuesto en curso', ''),
                 ('radar-estado-de-cuenta.html', '· Expide un estado de cuenta', '')] + [
                 (r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES[1:]]
+            for d in DATOS_PARTES:
+                k = [e[0] for e in enl].index(d[1]) + 1
+                enl[k:k] = [(f[1], '· ' + f[3], '') for f in d[6]]
         if archivo == 'aprende.html':
             enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], '· ' + b[2], b[3]) for b in BIBLIOTECA]
         if archivo == 'participa.html':
@@ -4436,7 +4477,7 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + garantias() + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + garantias() + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

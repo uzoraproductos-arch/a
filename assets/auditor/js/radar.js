@@ -227,7 +227,7 @@
       }).join('') + '</ul><p class="rd-nota">Inversión real de cada obra según su ficha en el módulo de Megaobras, en pesos de su momento.</p>';
     }
     if (d.id === 'asf') {
-      h += '<p class="rd-obras-tit"><a href="descarga-los-datos.html#ficha-asf">⚖️ Lo que encontró la ASF en la Cuenta Pública 2024, estado por estado ➔</a></p>';
+      h += '<p class="rd-obras-tit"><a href="informes-cuenta-publica.html">⚖️ Lo que encontró la ASF en la Cuenta Pública 2024, estado por estado ➔</a></p>';
     }
     h += '</div>';
 
