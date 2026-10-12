@@ -2733,6 +2733,10 @@ def radar_cargos(base):
             'senales': CARGOS_SENALES, 'notaLocal': loc['nota'], 'docs': docs, 'fuentes': fuentes}
 
 
+def _rango_txt(a, b):
+    return str(a) if a == b else '%d a %d' % (a, b)
+
+
 def radar():
     import auditorias
     import datetime
@@ -2770,13 +2774,25 @@ def radar():
                       'f': fts + [ps['usd']['f']],
                       'op': 'Cada año entre su tipo de cambio promedio (pesos por dólar), en millones de dólares; luego se suman. %s'
                             % ' · '.join('%d: %s ÷ %s' % (y, mdp(m), format(prom(ps['usd'], y), '.4f')) for y, m in filas)}
+        def en_euros(fe):
+            return {'v': round(sum(m / prom(ps['eur'], y) for y, m in fe), 1), 'est': 'derivado',
+                    'f': fts + [ps['eur']['f']],
+                    'op': 'Cada año entre su tipo de cambio promedio (pesos por euro), en millones de euros; luego se suman. %s'
+                          % ' · '.join('%d: %s ÷ %s' % (y, mdp(m), format(prom(ps['eur'], y), '.4f')) for y, m in fe)}
         if anios[0] >= ps['eur']['desde']:
-            alt['eur'] = {'v': round(sum(m / prom(ps['eur'], y) for y, m in filas), 1), 'est': 'derivado',
-                          'f': fts + [ps['eur']['f']],
-                          'op': 'Cada año entre su tipo de cambio promedio (pesos por euro), en millones de euros; luego se suman. %s'
-                                % ' · '.join('%d: %s ÷ %s' % (y, mdp(m), format(prom(ps['eur'], y), '.4f')) for y, m in filas)}
+            alt['eur'] = en_euros(filas)
         else:
             alt['eur'] = {'na': ps['eur']['antes'], 'et': 'sin euro'}
+            # El reloj (pedido del autor, 12-10-2026) corre con los años del
+            # sexenio que si tienen cotizacion del euro, si los hay.
+            con = [(y, m) for y, m in filas if y >= ps['eur']['desde']]
+            if con:
+                par = en_euros(con)
+                par['ys'] = [con[0][0], con[-1][0]]
+                par['just'] = ('En euros, el reloj corre al ritmo de %s, %s del sexenio con cotización del euro en Banxico. %s'
+                               % (_rango_txt(con[0][0], con[-1][0]), 'el único año' if len(con) == 1 else 'los años',
+                                  ps['eur']['antes']))
+                alt['eur']['parcial'] = par
         return alt
 
     admins, valores, obras = [], {}, {}
@@ -2809,6 +2825,14 @@ def radar():
                                  'nota': (falta['motivo'] if faltan else ''), 'pid': falta['pid'] if faltan else ''}
             if faltan:
                 v[serie + '_mdp'] = {'pend': falta['motivo'] + ' Una suma con cinco años no se compara con las de seis.', 'pid': falta['pid']}
+                # La suma no se compara, pero el ritmo si se puede medir con
+                # los años que hay: el reloj lo usa (pedido del autor, 12-10-2026).
+                v[serie + '_mdp']['parcial'] = {
+                    'v': round(sum(x['mdp'] for x in filas), 1), 'est': 'derivado', 'f': fts, 'ys': [anios[0], anios[-1]],
+                    'op': 'Suma de %s, los años con dato, en millones de pesos de cada año: %s.' % (rango, ' + '.join(mdp(x['mdp']) for x in filas)),
+                    'just': 'El reloj corre al ritmo de %s, los %d años del sexenio con dato, entre los segundos de esos %d años. %s'
+                            % (rango, len(anios), len(anios), falta['motivo']),
+                    'alt': conversiones(datos, anios, fts)}
                 continue
             v[serie + '_mdp'] = {'v': round(sum(x['mdp'] for x in filas), 1), 'est': 'derivado', 'f': fts,
                                  'op': 'Suma de %s, en millones de pesos de cada año: %s.' % (rango, ' + '.join(mdp(x['mdp']) for x in filas)),

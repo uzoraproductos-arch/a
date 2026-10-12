@@ -292,15 +292,27 @@
     selA.value = D.admins.filter(function (a) { return !a.curso; }).slice(-1)[0].id;
     selM.innerHTML = D.reloj.map(function (r) { return '<option value="' + r.met + '">' + esc(r.tit) + '</option>'; }).join('');
     var t0 = null, acum = 0, timer = null;
+    /* Desde el 12-10-2026 (pedido del autor) el reloj también corre cuando
+       al sexenio le falta un año o una moneda: usa el ritmo de los años que
+       sí tienen dato («parcial», que arma apartados.py) y dice por qué. */
+    function usable(y) { return tieneV(y) || !!(y && y.parcial); }
+    function segAnios(ys) { return (Date.UTC(ys[1] + 1, 0, 1) - Date.UTC(ys[0], 0, 1)) / 1000; }
     function tasa() {
       var a = adm(selA.value), r = D.reloj.filter(function (x) { return x.met === selM.value; })[0];
-      var x0 = val(a.id, r.met);
-      selMo.disabled = !x0.alt;
-      var mon = x0.alt ? selMo.value : 'nom';
-      var x = enMon(x0, mon);
+      var x0 = val(a.id, r.met), base = !tieneV(x0) && x0.parcial ? x0.parcial : x0;
+      var sinMon = [];
+      Array.prototype.forEach.call(selMo.options, function (o) {
+        o.disabled = !!base.alt && !usable(enMon(base, o.value));
+        if (o.disabled) sinMon.push({ et: o.textContent, por: enMon(base, o.value).na || 'Sin dato.' });
+      });
+      if (selMo.options[selMo.selectedIndex].disabled) selMo.value = 'hoy';
+      selMo.disabled = !base.alt;
+      var mon = base.alt ? selMo.value : 'nom';
+      var x = enMon(base, mon), just = base !== x0 ? base : null;
+      if (!tieneV(x) && x && x.parcial) { x = x.parcial; just = x; }
       if (!tieneV(x)) return { pend: x, r: r, a: a };
-      var porSeg = r.porSeg ? x.v : x.v * 1e6 / segundos(a);
-      return { s: porSeg, r: r, a: a, x: x, mon: mon, solo: !x0.alt && tieneV(x0) };
+      var porSeg = r.porSeg ? x.v : x.v * 1e6 / (just ? segAnios(just.ys) : segundos(a));
+      return { s: porSeg, r: r, a: a, x: x, mon: mon, solo: !base.alt && tieneV(x0), just: just, pid: base !== x0 ? x0.pid : null, sinMon: sinMon };
     }
     function pinta() {
       var t = tasa();
@@ -318,9 +330,11 @@
         '<div><span>Por segundo</span><b>' + p + num(t.s, 0) + '</b></div>' +
         '<div><span>Por hora</span><b>' + p + num(t.s * 3600 / 1e6, 1) + mi + '</b></div>' +
         '<div><span>Por día</span><b>' + p + num(t.s * 86400 / 1e6, 1) + mi + '</b></div></div>' +
-        '<p class="rd-reloj-op">' + esc(t.r.op) + ' Moneda: ' + esc(t.solo ? 'pesos de cada año (esta medida no se convierte: es un saldo de deuda)' : moneda(t.mon).lee) + '. ' + chip('derivado') + '</p>' +
+        (t.just ? '<p class="rd-reloj-just">' + esc(t.just.just) + (t.pid ? ' ' + chip('pendiente', t.pid) : '') + '</p>' : '') +
+        '<p class="rd-reloj-op">' + esc(t.just ? 'Suma de ' + (t.just.ys[0] === t.just.ys[1] ? t.just.ys[0] : t.just.ys[0] + ' a ' + t.just.ys[1]) + ' entre los segundos de ese periodo.' : t.r.op) + ' Moneda: ' + esc(t.solo ? 'pesos de cada año (esta medida no se convierte: es un saldo de deuda)' : moneda(t.mon).lee) + '. ' + chip('derivado') + '</p>' +
         (t.x.op ? '<details class="rd-de"><summary>¿De dónde sale la suma?</summary><p>' + esc(t.x.op) + '</p></details>' : '') +
-        '<p class="rd-fte">📄 ' + fuentes(t.x.f) + '</p>';
+        '<p class="rd-fte">📄 ' + fuentes(t.x.f) + '</p>' +
+        t.sinMon.map(function (m) { return '<p class="rd-reloj-sinmon">' + esc(m.et) + ': no disponible para esta administración. ' + esc(m.por) + '</p>'; }).join('');
     }
     function corre(si) {
       var b = document.getElementById('rdRelojPlay');
