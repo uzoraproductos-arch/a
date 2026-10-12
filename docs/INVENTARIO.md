@@ -38,7 +38,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `datos-descargas.html` | Descarga en CSV (abre en Excel) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
-| `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
+| `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 25 | 0 | 18 | 3 | 6 |
@@ -136,7 +136,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
-| `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-peso-maquina.html` | La máquina del tiempo del peso · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |

@@ -498,6 +498,13 @@ APARTADOS = [
                 'pagina': 'informes-oficiales.html',
                 'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario: abre su página'),
             },
+            {
+                # Cuarta tarjeta de Datos desde el 12-10-2026 (pedido del
+                # autor). La direccion no cambia: va impresa en los sellos.
+                'id': 'estado-de-cuenta',
+                'pagina': 'radar-estado-de-cuenta.html',
+                'pestana': ('🧾', 'Estado de cuenta', 'Gobiernos, Congreso y Corte, con folio y sello: abre su página'),
+            },
         ],
     },
     {
@@ -3165,13 +3172,12 @@ def radar():
     # «Expide un estado de cuenta», en su propia pagina (pedido del autor, 10-10-2026).
     paginas.append({
         'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Expide un estado de cuenta', 'menu_archivo': 'descarga-los-datos.html',
-        'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
-        # Se llega desde el tablero (pedido del autor, 12-10-2026).
-        'padre3': ('radar-tablero.html', 'El tablero'),
+        # Desde el 12-10-2026 (pedido del autor) es la cuarta tarjeta de
+        # Datos; el tablero del radar sigue llevando aqui con sus botones.
+        'padre': ('descarga-los-datos.html', 'Datos'),
         'icono': '🧾', 'titulo': 'Expide un estado de cuenta', 'lema': 'Administraciones, Congreso y la Corte',
         'entrada': EXPIDE_TEXTO + ' Cualquiera puede comprobar que no se alteró.',
         'estilos': ['radar.css', 'estado-administracion.css'], 'scripts': ['radar.js', 'estado-administracion.js'],
-        'pie_extra': radar_nav('radar-tablero.html'),
         'secciones': [{'id': 'expide', 'titulo': 'Expide un estado de cuenta', 'texto': '', 'sin_cab': True, 'tarjetas': [],
                        'bloque': datos_js + cargos_js + expide_html}],
     })
@@ -4467,9 +4473,7 @@ def indice():
         a = ap[archivo]
         enl = [(x.get('pagina') or archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
         if archivo == 'descarga-los-datos.html':
-            enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES[:1]] + [
-                ('radar-estado-de-cuenta.html', '· Expide un estado de cuenta', '')] + [
-                (r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES[1:]]
+            enl[1:1] = [(r[1], 'Radar · ' + r[3], r[4]) for r in RADAR_PARTES]
             for d in DATOS_PARTES:
                 k = [e[0] for e in enl].index(d[1]) + 1
                 enl[k:k] = [(f[1], '· ' + f[3], '') for f in d[6]]
