@@ -2136,6 +2136,25 @@ RADAR_PARTES = [
 ]
 
 
+# «El peso en el tiempo», en tres tarjetas con su propia pagina (pedido del
+# autor, 12-10-2026): (icono, pagina, titulo, descripcion, entrada, id).
+RADAR_PESO_PARTES = [
+    ('💱', 'radar-peso-monedas.html', 'El peso frente al dólar, el euro y la inflación',
+     'Un simulador que recorre los sexenios año por año, desde cero.',
+     'Cuánto vale hoy el peso y cómo ha cambiado desde 1988 frente al dólar, frente al euro y frente a los precios, '
+     'con la proyección de Hacienda hasta 2032. Presiona «Recorrer los sexenios» y mira, año por año y presidente por '
+     'presidente, cómo se mueve cada cifra; o elige un año, o toca a un presidente para ir a su sexenio.', 'monedas'),
+    ('🧾', 'radar-peso-sexenios.html', 'El peso en cada sexenio',
+     'Cuánto subieron los precios, el dólar y el euro con cada presidente.',
+     'Cada administración, de lo que recibió a lo que entregó: cuánto subieron los precios, cuánto pasó a costar el dólar '
+     'y cuánto el euro. Cada cifra trae su operación y su fuente.', 'sexenios'),
+    ('🕰️', 'radar-peso-maquina.html', 'La máquina del tiempo del peso',
+     'Lleva cualquier cantidad de un año a otro.',
+     'Escribe una cantidad y elige un año: te decimos cuánto vale en pesos de hoy, en dólares y en euros de ese año, '
+     'y cuánto haría falta para comprar lo mismo hasta 2032, según la proyección de Hacienda.', 'maquina'),
+]
+
+
 # La descripcion narrativa de cada tarjeta en la portada del Radar
 # (pedido del autor, 12-10-2026): una frase corta, de unas dos lineas, sin cifras.
 RADAR_NARRATIVA = {
@@ -2945,17 +2964,34 @@ def radar():
           <div class="rd-dim" id="rdDim"></div>
           <noscript><p>El tablero necesita JavaScript.</p></noscript>
         </div>'''.format(datos=datos)
-    peso_html = '''<div class="rd-peso" id="rdPeso">
+    # «El peso en el tiempo» se parte en tres paginas (pedido del autor,
+    # 12-10-2026): las monedas y la inflacion, con un simulador que recorre
+    # los sexenios año por año y arranca en ceros; el peso en cada sexenio,
+    # y la maquina del tiempo. radar-peso.html queda como indice de las tres.
+    peso_monedas_html = '''<div class="rd-peso" id="rdPeso">
           <div class="rd-peso-hoy" id="rdPesoHoy"></div>
           <div class="rd-graf" id="rdGraf">
             <div class="rd-mets" role="tablist" aria-label="Qué gráfica ver" id="rdGrafTabs"></div>
+            <div class="rd-cuenta rd-sim-cuenta" id="rdSimCuenta" hidden>
+              <button type="button" class="rd-cuenta-btn" id="rdSimPlay" aria-pressed="false">▶ Recorrer los sexenios</button>
+              <button type="button" class="rd-cuenta-btn rd-cuenta-sec" id="rdSimCero">↺ Reiniciar en ceros</button>
+              <span class="rd-cuenta-txt" id="rdSimTxt"></span>
+            </div>
+            <div class="rd-sim-marca" id="rdSimMarca" aria-live="polite"></div>
             <div class="rd-graf-lienzo" id="rdGrafSvg"></div>
+            <label class="rd-sim-reg" id="rdSimReg" hidden><span>Elige un año: <b id="rdSimAnioTxt">—</b></span>
+              <input type="range" id="rdSimAnio" step="1"></label>
+            <div class="rd-sim-adms" id="rdSimAdms" aria-label="Ir al sexenio de"></div>
             <p class="rd-graf-lee" id="rdGrafLee" aria-live="polite"></p>
             <div class="rd-graf-pie" id="rdGrafPie"></div>
           </div>
-          <h3 class="rd-peso-sub">🧾 El peso en cada sexenio</h3>
+          <noscript><p>El simulador necesita JavaScript.</p></noscript>
+        </div>'''
+    peso_sexenios_html = '''<div class="rd-peso" id="rdPeso">
           <div class="rd-peso-tabla" id="rdPesoTabla"></div>
-          <h3 class="rd-peso-sub">🕰️ La máquina del tiempo del peso</h3>
+          <noscript><p>Esta sección necesita JavaScript.</p></noscript>
+        </div>'''
+    peso_html = '''<div class="rd-peso" id="rdPeso">
           <div class="rd-maq" id="rdMaq">
             <div class="rd-maq-ctl">
               <label>Cantidad<span class="rd-maq-monto">$<input type="number" id="rdMaqMonto" min="0" step="any" value="1000" inputmode="decimal"></span></label>
@@ -2964,6 +3000,7 @@ def radar():
             </div>
             <div id="rdMaqOut" aria-live="polite"></div>
           </div>
+          <noscript><p>La máquina del tiempo necesita JavaScript.</p></noscript>
         </div>'''
     reloj_html = '''<div class="rd-reloj" id="rdReloj">
           <div class="rd-reloj-ctl">
@@ -3049,7 +3086,9 @@ def radar():
                     'costo del gobierno, deuda y lo pendiente ante la Auditoría Superior, desde 1989. Las sumas en pesos se ven '
                     'en pesos de cada año, en pesos de hoy, en dólares o en euros. Cada cifra trae su documento.', tablero),
         'peso': ('Cuánto vale hoy el peso, cuánto valía en cada sexenio frente al dólar y al euro, y hacia dónde lo proyecta '
-                 'Hacienda hasta 2032. Con la máquina del tiempo, lleva cualquier cantidad de un año a otro.', datos_js + peso_html),
+                 'Hacienda hasta 2032. Con la máquina del tiempo, lleva cualquier cantidad de un año a otro.', [
+                    {'id': 'partes', 'titulo': 'Elige por dónde empezar', 'texto': 'Cada tarjeta abre su propia página.',
+                     'tarjetas': [(r[0], r[2], r[3], r[1], '', '') for r in RADAR_PESO_PARTES]}]),
         'reloj': ('Elige una administración, qué contar y en qué moneda: el contador corre al ritmo promedio de su sexenio. '
                   'Es una equivalencia, no dinero que se mueva hoy.', datos_js + reloj_html),
         'duelo': ('Dos administraciones, cara a cara, en las mismas medidas. Sin ganador: los números dicen cuánto; el juicio es tuyo.',
@@ -3096,6 +3135,18 @@ def radar():
             'estilos': ['radar.css'], 'scripts': ['radar.js'], 'pie_extra': radar_nav(archivo),
             'secciones': bloque if isinstance(bloque, list) else
                          [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        })
+    # Las tres partes de «El peso en el tiempo» (pedido del autor, 12-10-2026).
+    peso_bloques = {'monedas': peso_monedas_html, 'sexenios': peso_sexenios_html, 'maquina': peso_html}
+    for (ico, archivo, tit, sub, entrada, pid) in RADAR_PESO_PARTES:
+        paginas.append({
+            'archivo': archivo, 'menu': tit, 'menu_archivo': 'descarga-los-datos.html',
+            'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': ('radar-hacendario.html', 'Radar hacendario'),
+            'padre3': ('radar-peso.html', 'El peso en el tiempo'),
+            'icono': ico, 'titulo': tit, 'lema': 'Radar hacendario', 'entrada': entrada,
+            'estilos': ['radar.css'], 'scripts': ['radar.js'], 'pie_extra': radar_nav('radar-peso.html'),
+            'secciones': [{'id': pid, 'titulo': tit, 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                           'bloque': datos_js + peso_bloques[pid]}],
         })
     # «Hoy: el presupuesto en curso», en su propia pagina (pedido del autor, 10-10-2026).
     paginas.append({

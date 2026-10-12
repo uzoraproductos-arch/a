@@ -902,6 +902,12 @@ quitó el texto descriptivo de las pestañas de `radar-hacendario.html`, de la b
 `radar-hoy.html`. Lo descriptivo queda en la entrada de cada página. `RADAR_PARTES`
 conserva su descripción porque el índice general la usa. No se tocó `assets/`.
 
+**«El peso en el tiempo», en tres páginas y con simulador (12-10-2026, sello 20261012f).** Pedido del autor: `radar-peso.html` queda como índice de tres tarjetas, cada una con su página (`RADAR_PESO_PARTES` en `apartados.py`, con `padre3` hacia el índice):
+- `radar-peso-monedas.html`, **El peso frente al dólar, el euro y la inflación**: las tarjetas de hoy y las tres gráficas, ahora con un simulador. «▶ Recorrer los sexenios» avanza año por año de 1988 a la proyección de 2032; la gráfica se descubre hasta ese año, la franja del presidente se resalta y un marcador dice el año, quién gobernaba (nombre completo y periodo) y cuenta hasta las cifras de ese año. Arranca en ceros y «↺ Reiniciar en ceros» lo regresa ahí. También hay una barra para elegir el año, botones con cada presidente y la gráfica se puede tocar. En celular el lienzo es más angosto (430 en vez de 720 unidades) para que sus letras se lean.
+- `radar-peso-sexenios.html`, **El peso en cada sexenio** (la tabla de antes).
+- `radar-peso-maquina.html`, **La máquina del tiempo del peso** (la de antes).
+Las cifras del marcador son las mismas de las gráficas (Banxico, y la proyección de los Criterios Generales de Política Económica de Hacienda); donde no hay dato lo dice: el euro antes de 2000, el euro proyectado, los años sin administración del radar. `radar.js` arranca cada bloque solo si su página lo trae. No se agregó ni cambió ninguna cifra.
+
 **El reloj corre con los años que sí tienen dato (12-10-2026, sello 20261012e).** Pedido del autor: que en `radar-reloj.html` ninguna combinación se quede sin contador, con los datos que ya tenemos y con su porqué a la vista. Antes, 28 de las 120 combinaciones (administración × qué contar × moneda) mostraban solo «pendiente». Ahora corren 112:
 - **Salinas** (ingresos, gasto, inversión e intereses): el ritmo es la suma de 1990 a 1994, los cinco años con dato, entre los segundos de esos cinco años. La suma del sexenio sigue `pendiente` en el tablero y en el duelo (no se compara con sumas de seis años); el reloj solo usa el ritmo, con chip `derivado` y el `pendiente` de `radar-1989` al lado.
 - **Zedillo en euros:** el ritmo es el de 2000, el único año del sexenio con cotización del euro en Banxico.

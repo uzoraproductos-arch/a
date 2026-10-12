@@ -448,9 +448,12 @@
     function pesos(v, d) { return '$' + num(v, d == null ? 2 : d); }
     function admDe(y) { for (var i = 0; i < D.admins.length; i++) if (y >= D.admins[i].a[0] && y <= D.admins[i].a[1]) return D.admins[i]; return null; }
 
+    /* Desde el 12-10-2026 (pedido del autor) cada parte vive en su página
+       (radar-peso-monedas.html, radar-peso-sexenios.html y
+       radar-peso-maquina.html): cada bloque arranca solo si su página lo trae. */
     /* Lo de hoy, en tarjetas */
-    var u = P.proy[0], uN = P.proy[P.proy.length - 1];
-    document.getElementById('rdPesoHoy').innerHTML = [
+    var u = P.proy[0], uN = P.proy[P.proy.length - 1], phHoy = document.getElementById('rdPesoHoy');
+    if (phHoy) phHoy.innerHTML = [
       ['💵', 'El dólar hoy', pesos(HOY.usd, 4), 'FIX del ' + HOY.fecha + ': pesos por un dólar.', 'oficial', [P.f.hoy]],
       ['💶', 'El euro hoy', pesos(HOY.eur, 4), 'Cotización del ' + HOY.fecha + ': pesos por un euro.', 'oficial', [P.f.hoy]],
       ['🛒', 'Inflación de los últimos 12 meses', num(P.ref.infl12, 1) + '%', 'INPC de ' + P.ref.mes + ' (' + num(REF, 3) + ') ÷ INPC de un año antes (' + num(P.ref.inpc12, 3) + ') − 1.', 'derivado', [P.f.inpc]],
@@ -461,14 +464,16 @@
     }).join('');
 
     /* ---- Gráficas en SVG, sin bibliotecas ---- */
-    var W = 720, H = 300, ML = 48, MR = 14, MT = 30, MB = 26, X0 = 1988, X1 = 2033;
+    if (document.getElementById('rdGraf')) {
+    /* En pantallas angostas el lienzo es más estrecho, para que sus letras se lean en el celular. */
+    var W = document.getElementById('rdGraf').clientWidth < 560 ? 430 : 720, H = 300, ML = 48, MR = 14, MT = 30, MB = 26, X0 = 1988, X1 = 2033;
     function sx(x) { return ML + (x - X0) / (X1 - X0) * (W - ML - MR); }
     function lienzo(y1, paso, yfmt, cuerpo) {
       function sy(y) { return MT + (1 - y / y1) * (H - MT - MB); }
       var g = '';
       D.admins.forEach(function (a, i) {
         var x0 = sx(a.a[0]), x1 = sx(Math.min(a.a[1] + 1, X1));
-        g += '<rect x="' + x0 + '" y="' + MT + '" width="' + (x1 - x0) + '" height="' + (H - MT - MB) + '" fill="' + a.col + '" opacity="' + (i % 2 ? .07 : .12) + '"/>' +
+        g += '<rect class="rd-g-banda" data-adm="' + a.id + '" x="' + x0 + '" y="' + MT + '" width="' + (x1 - x0) + '" height="' + (H - MT - MB) + '" fill="' + a.col + '" opacity="' + (i % 2 ? .07 : .12) + '"/>' +
           '<text x="' + ((x0 + x1) / 2) + '" y="' + (MT - 9) + '" text-anchor="middle" class="rd-g-adm" fill="' + a.col + '">' + esc(a.ini) + '</text>';
       });
       for (var y = 0; y <= y1 + 1e-9; y += paso) {
@@ -478,7 +483,10 @@
       for (var x = 1990; x <= 2030; x += 5) g += '<text x="' + sx(x) + '" y="' + (H - 8) + '" text-anchor="middle" class="rd-g-eje">' + x + '</text>';
       g += '<line x1="' + sx(2026.77) + '" x2="' + sx(2026.77) + '" y1="' + MT + '" y2="' + (H - MB) + '" class="rd-g-hoy"/>' +
         '<text x="' + (sx(2026.77) + 4) + '" y="' + (MT + 12) + '" class="rd-g-hoyt">hoy</text>';
-      return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="rd-g" role="img">' + g + cuerpo(sy) +
+      /* El simulador descubre las líneas hasta el año elegido (rdClipR). */
+      return '<svg viewBox="0 0 ' + W + ' ' + H + '" class="rd-g" role="img">' + g +
+        '<defs><clipPath id="rdClip"><rect id="rdClipR" x="0" y="0" width="' + ML + '" height="' + H + '"/></clipPath></defs>' +
+        '<g clip-path="url(#rdClip)">' + cuerpo(sy) + '</g>' +
         '<line class="rd-g-guia" x1="0" x2="0" y1="' + MT + '" y2="' + (H - MB) + '" visibility="hidden"/></svg>';
     }
     function linea(pts, sy, cls, col) {
@@ -509,6 +517,14 @@
             pesos(100 * REF / P.inpc[y]) + ' de hoy (INPC de ' + P.ref.mes + ' ÷ INPC promedio de ' + y + ').';
           return '';
         },
+        cas: ['Lo que hoy cuesta $100, ese año', '$100 de ese año, en pesos de hoy'],
+        val: function (y) {
+          if (y === P.ref.y) return { v: [100, 100], hoy: 1 };
+          if (proyDe[y]) return { v: [100 * proyDe[y].inpc / REF, null], sin: [null, 'Es proyección: no hay pesos de ese año todavía.'], proy: 1 };
+          if (P.inpc[y]) return { v: [100 * P.inpc[y] / REF, 100 * REF / P.inpc[y]] };
+          return { v: [null, null] };
+        },
+        fmt: function (v) { return pesos(v); },
         pie: [['#0b2a63', 'Observado: INPC promedio de cada año ÷ INPC de ' + P.ref.mes + ' × 100'], ['#c98a12', 'Proyección de Hacienda (diciembre de cada año)', 1]],
         f: [P.f.inpc, P.f.proy] },
       { id: 'inflacion', et: '📈 Inflación año por año',
@@ -535,6 +551,12 @@
             (admDe(y) ? ', con ' + admDe(y).c + '.' : '.');
           return '';
         },
+        cas: ['Inflación del año, de diciembre a diciembre'],
+        val: function (y) {
+          if (proyDe[y]) return { v: [proyDe[y].infl], proy: 1 };
+          return { v: [P.infl[y] != null ? P.infl[y] : null], sin: ['Sin dato para ese año en la serie.'] };
+        },
+        fmt: function (v) { return num(v, 1) + '%'; },
         pie: [['#7d3fa6', 'Observado, del color de cada administración'], ['#c98a12', 'Proyección de Hacienda', 1]],
         f: [P.f.inpc, P.f.proy] },
       { id: 'cambio', et: '💱 Frente al dólar y al euro',
@@ -545,7 +567,8 @@
           var fut = [[last + 0.5, P.usd[last]]].concat(P.proy.map(function (p) { return [p.y + 0.5, p.usd]; }));
           return lienzo(25, 5, function (y) { return '$' + y; }, function (sy) {
             return linea(us, sy, 'rd-g-l', '#23855a') + linea(eu, sy, 'rd-g-l', '#1a56b8') + linea(fut, sy, 'rd-g-l rd-g-proy', '#c98a12') +
-              punto(2026.77, HOY.eur, sy, '#1a56b8', 6, '€ ' + pesos(HOY.eur), 1) + punto(2026.77, HOY.usd, sy, '#23855a', 6, 'US$ ' + pesos(HOY.usd), 1);
+              /* En el lienzo angosto la etiqueta no cabe a la derecha: la cifra está en el marcador. */
+              punto(2026.77, HOY.eur, sy, '#1a56b8', 6, W < 560 ? '' : '€ ' + pesos(HOY.eur), 1) + punto(2026.77, HOY.usd, sy, '#23855a', 6, W < 560 ? '' : 'US$ ' + pesos(HOY.usd), 1);
           });
         },
         lee: function (y) {
@@ -554,52 +577,165 @@
           if (P.usd[y]) return y + ': el dólar promedió ' + pesos(P.usd[y], 2) + (P.eur[y] ? ' y el euro ' + pesos(P.eur[y], 2) : ' (el euro, sin serie de Banxico antes de ' + P.eur_desde + ')') + ' (promedio de los 12 meses).';
           return '';
         },
+        cas: ['Pesos por un dólar', 'Pesos por un euro'],
+        val: function (y) {
+          if (y === P.ref.y) return { v: [HOY.usd, HOY.eur], hoy: 1 };
+          if (proyDe[y]) return { v: [proyDe[y].usd, null], sin: [null, 'Hacienda no proyecta el euro.'], proy: 1 };
+          return { v: [P.usd[y] || null, P.eur[y] || null], sin: [null, 'Banxico publica el euro desde ' + P.eur_desde + '.'] };
+        },
+        fmt: function (v) { return pesos(v); },
         pie: [['#23855a', 'Pesos por dólar, promedio anual'], ['#1a56b8', 'Pesos por euro, promedio anual (desde ' + P.eur_desde + ')'], ['#c98a12', 'Dólar proyectado por Hacienda', 1]],
         f: [P.f.usd, P.f.eur, P.f.hoy, P.f.proy] }
     ];
     var gAct = 'precios';
+    function graf() { return GRAF.filter(function (x) { return x.id === gAct; })[0]; }
     function pintaGraf() {
-      var g = GRAF.filter(function (x) { return x.id === gAct; })[0];
+      var g = graf();
       document.getElementById('rdGrafTabs').innerHTML = GRAF.map(function (x) {
         return '<button type="button" class="rd-met" role="tab" aria-selected="' + (x.id === gAct) + '" data-graf="' + x.id + '">' + esc(x.et) + '</button>';
       }).join('');
       var cont = document.getElementById('rdGrafSvg');
       cont.innerHTML = g.svg();
-      cont.querySelector('svg').setAttribute('aria-label', g.et + ': desliza o toca la gráfica para leer cada año.');
-      document.getElementById('rdGrafLee').textContent = g.lee(P.ref.y);
+      cont.querySelector('svg').setAttribute('aria-label', g.et + ': toca la gráfica o mueve la barra para leer cada año.');
       document.getElementById('rdGrafPie').innerHTML = '<ul class="rd-g-ley">' + g.pie.map(function (p) {
         return '<li><span class="' + (p[2] ? 'rd-g-sw rd-g-sw-p' : 'rd-g-sw') + '" style="--c:' + p[0] + '"></span>' + esc(p[1]) + '</li>';
       }).join('') + '</ul><p class="rd-nota">' + chip('oficial') + ' los datos de Banxico y de Hacienda; ' + chip('derivado') + ' cada cuenta hecha con ellos. ' +
         esc(P.proy_aviso) + (gAct === 'cambio' ? ' ' + esc(P.proy_eur) : '') + '</p><p class="rd-fte">📄 ' + fuentes(g.f) + '</p>';
+      vistos = [];
+      aplica();
     }
-    function leeEn(ev) {
+
+    /* ---- El simulador (pedido del autor, 12-10-2026) ----
+       Recorre los años de 1988 a la proyección de 2032, uno por uno: la
+       gráfica se descubre hasta el año, el marcador dice quién gobernaba y
+       cuenta hasta las cifras de ese año. Arranca en ceros; «↺ Reiniciar en
+       ceros» lo regresa ahí. Las cifras son las mismas de la gráfica. */
+    var ANIOS = P.anios.concat(P.proy.map(function (p) { return p.y; }))
+      .filter(function (y, i, l) { return l.indexOf(y) === i; }).sort(function (a, b) { return a - b; });
+    var simY = null, simT = null, vistos = [], tween = null;
+    var sPlay = document.getElementById('rdSimPlay'), sCero = document.getElementById('rdSimCero'), sTxt = document.getElementById('rdSimTxt');
+    var sReg = document.getElementById('rdSimAnio'), sRegTxt = document.getElementById('rdSimAnioTxt');
+    sReg.min = ANIOS[0]; sReg.max = ANIOS[ANIOS.length - 1]; sReg.value = ANIOS[0];
+    document.getElementById('rdSimAdms').innerHTML = D.admins.map(function (a) {
+      return '<button type="button" class="rd-sim-adm" style="--c:' + a.col + '" data-ir="' + a.a[0] + '"><span class="rd-admin-ini" aria-hidden="true">' + esc(a.ini) + '</span>' +
+        '<span><b>' + esc(a.c) + '</b><small>' + a.a[0] + '–' + a.a[1] + '</small></span></button>';
+    }).join('');
+    function quien(y) {
+      var a = admDe(y);
+      if (a) return '<span class="rd-sim-pres" style="--c:' + a.col + '"><span class="rd-admin-ini" aria-hidden="true">' + esc(a.ini) + '</span><span><b>' + esc(a.n) + '</b><small>' +
+        a.a[0] + '–' + a.a[1] + (a.curso ? ', en curso' : '') + '</small></span></span>';
+      return '<span class="rd-sim-pres rd-sim-pres-sin"><span><b>' + (y < D.admins[0].a[0] ? 'Antes de las administraciones del radar' : 'La administración siguiente') +
+        '</b><small>' + (y < D.admins[0].a[0] ? 'El radar empieza en ' + D.admins[0].a[0] + '.' : 'Solo hay proyección de Hacienda.') + '</small></span></span>';
+    }
+    function marca() {
+      var g = graf(), r = simY == null ? { v: g.cas.map(function () { return 0; }) } : g.val(simY);
+      var cab = '<div class="rd-sim-cab"><span class="rd-sim-anio">' + (simY == null ? '0000' : simY) + '</span>' +
+        (simY == null ? '<span class="rd-sim-pres rd-sim-pres-sin"><span><b>Las cifras están en cero</b><small>Presiona «Recorrer los sexenios».</small></span></span>' : quien(simY)) +
+        (r.proy ? '<span class="rd-sim-tag rd-sim-tag-p">Proyección de Hacienda</span>' : r.hoy ? '<span class="rd-sim-tag">Hoy, ' + esc(P.ref.mes) + '</span>' : '') + '</div>';
+      document.getElementById('rdSimMarca').innerHTML = cab + '<div class="rd-sim-vals">' + g.cas.map(function (c, i) {
+        var v = r.v[i];
+        return '<div class="rd-sim-v"><span>' + esc(c) + '</span>' + (v == null
+          ? '<b class="rd-sim-sin">—</b><small>' + esc((r.sin && r.sin[i]) || 'Sin dato.') + '</small>'
+          : '<b class="rd-num" data-i="' + i + '">' + g.fmt(vistos[i] || 0) + '</b>') + '</div>';
+      }).join('') + '</div>';
+      /* Cada cifra cuenta desde la que se veía hasta la del año. */
+      if (tween) cancelAnimationFrame(tween);
+      var de = g.cas.map(function (c, i) { return vistos[i] || 0; }), a = r.v, t0 = performance.now(), dur = reduce ? 0 : 320;
+      function paso(ahora) {
+        var x = dur ? Math.min(1, (ahora - t0) / dur) : 1, f = 1 - Math.pow(1 - x, 3);
+        document.querySelectorAll('#rdSimMarca b[data-i]').forEach(function (el) {
+          var i = +el.getAttribute('data-i');
+          el.textContent = g.fmt(de[i] + (a[i] - de[i]) * f);
+        });
+        if (x < 1) { tween = requestAnimationFrame(paso); return; }
+        tween = null;
+      }
+      vistos = a.map(function (v) { return v == null ? 0 : v; });
+      tween = requestAnimationFrame(paso);
+    }
+    function aplica() {
+      var svg = document.querySelector('#rdGrafSvg svg');
+      document.getElementById('rdClipR').setAttribute('width', simY == null ? ML : sx(Math.min(simY + 1, X1)));
+      var a = simY == null ? null : admDe(simY);
+      svg.querySelectorAll('.rd-g-banda').forEach(function (bd) { bd.classList.toggle('rd-g-banda-on', !!a && bd.getAttribute('data-adm') === a.id); });
+      var gu = svg.querySelector('.rd-g-guia');
+      if (simY == null) gu.setAttribute('visibility', 'hidden');
+      else { gu.setAttribute('x1', sx(simY + 0.5)); gu.setAttribute('x2', sx(simY + 0.5)); gu.setAttribute('visibility', 'visible'); }
+      document.querySelectorAll('#rdSimAdms .rd-sim-adm').forEach(function (bt) {
+        var on = !!a && +bt.getAttribute('data-ir') === a.a[0];
+        if (on) bt.setAttribute('aria-current', 'true'); else bt.removeAttribute('aria-current');
+      });
+      sReg.value = simY == null ? ANIOS[0] : simY;
+      sRegTxt.textContent = simY == null ? '—' : simY;
+      document.getElementById('rdGrafLee').textContent = simY == null
+        ? 'Presiona «Recorrer los sexenios» para ver, año por año, cómo se mueve cada cifra. También puedes mover la barra, tocar la gráfica o tocar a un presidente.'
+        : graf().lee(simY);
+      marca();
+    }
+    function irA(y) { simY = y; aplica(); }
+    function pausa(fin) {
+      if (simT) { clearInterval(simT); simT = null; }
+      sPlay.textContent = fin ? '▶ Recorrer de nuevo' : '▶ Seguir recorriendo';
+      sPlay.setAttribute('aria-pressed', 'false');
+      sTxt.textContent = fin ? 'Listo: llegaste a la proyección de ' + ANIOS[ANIOS.length - 1] + '. Toca un año o a un presidente para volver.' : 'En pausa en ' + simY + '.';
+    }
+    function corre() {
+      if (simY == null || simY === ANIOS[ANIOS.length - 1]) irA(ANIOS[0]);
+      sPlay.textContent = '⏸ Pausar';
+      sPlay.setAttribute('aria-pressed', 'true');
+      sTxt.textContent = 'Recorriendo los sexenios…';
+      simT = setInterval(function () {
+        var i = ANIOS.indexOf(simY);
+        if (i >= ANIOS.length - 1) { pausa(true); return; }
+        irA(ANIOS[i + 1]);
+        if (i + 1 === ANIOS.length - 1) pausa(true);
+      }, 450);
+    }
+    function ceros() {
+      if (simT) { clearInterval(simT); simT = null; }
+      simY = null;
+      sPlay.textContent = '▶ Recorrer los sexenios';
+      sPlay.setAttribute('aria-pressed', 'false');
+      sTxt.textContent = 'Las cifras están en cero.';
+      aplica();
+    }
+    function elige(y) {
+      if (ANIOS.indexOf(y) < 0) return;
+      if (simT) pausa(false);
+      irA(y);
+      sTxt.textContent = 'Viendo ' + y + '.';
+      if (sPlay.textContent === '▶ Recorrer los sexenios') sPlay.textContent = '▶ Seguir recorriendo';
+    }
+    sPlay.addEventListener('click', function () { if (simT) pausa(false); else corre(); });
+    sCero.addEventListener('click', ceros);
+    sReg.addEventListener('input', function () { elige(+sReg.value); });
+    document.getElementById('rdSimAdms').addEventListener('click', function (ev) {
+      var bt = ev.target.closest('button[data-ir]');
+      if (bt) elige(+bt.getAttribute('data-ir'));
+    });
+    document.getElementById('rdGrafSvg').addEventListener('pointerdown', function (ev) {
       var svg = ev.currentTarget.querySelector('svg');
       if (!svg) return;
-      var r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * W;
-      var y = Math.floor(X0 + (x - ML) / (W - ML - MR) * (X1 - X0));
-      var g = GRAF.filter(function (z) { return z.id === gAct; })[0];
-      var t = g.lee(y);
-      if (!t) return;
-      document.getElementById('rdGrafLee').textContent = t;
-      var gu = svg.querySelector('.rd-g-guia');
-      gu.setAttribute('x1', sx(y + 0.5)); gu.setAttribute('x2', sx(y + 0.5)); gu.setAttribute('visibility', 'visible');
-    }
-    var lz = document.getElementById('rdGrafSvg');
-    lz.addEventListener('pointermove', leeEn);
-    lz.addEventListener('pointerdown', leeEn);
-    document.getElementById('rdGrafTabs').addEventListener('click', function (ev) {
-      var b = ev.target.closest('button[data-graf]');
-      if (b) { gAct = b.getAttribute('data-graf'); pintaGraf(); }
+      var rc = svg.getBoundingClientRect(), x = (ev.clientX - rc.left) / rc.width * W;
+      elige(Math.floor(X0 + (x - ML) / (W - ML - MR) * (X1 - X0)));
     });
+    document.getElementById('rdGrafTabs').addEventListener('click', function (ev) {
+      var bt = ev.target.closest('button[data-graf]');
+      if (bt) { gAct = bt.getAttribute('data-graf'); pintaGraf(); }
+    });
+    document.getElementById('rdSimCuenta').hidden = false;
+    document.getElementById('rdSimReg').hidden = false;
     pintaGraf();
+    ceros();
+    }
 
     /* ---- El peso en cada sexenio ---- */
     function tc(x, s) {
       if (!x || !tieneV(x)) return '<span class="rd-pt-v">' + sinDato(x) + '</span>' + (x && x.na ? '<small class="rd-motivo">' + esc(x.na) + '</small>' : '');
       return '<span class="rd-pt-v">' + pesos(x.rec, 2) + ' → ' + pesos(x.ent, 2) + '</span> <span class="rd-pt-d">' + (x.v > 0 ? '+' : '') + num(x.v, 1) + '%</span> ' + chip(x.est);
     }
-    var ops = [];
-    document.getElementById('rdPesoTabla').innerHTML = '<div class="rd-pt">' + P.admins.map(function (f) {
+    var ops = [], rdTabla = document.getElementById('rdPesoTabla');
+    if (rdTabla) rdTabla.innerHTML = '<div class="rd-pt">' + P.admins.map(function (f) {
       var a = adm(f.id);
       ops.push('<li><b>' + esc(a.c) + ':</b> ' + esc(f.infl.op) + ' ' + esc(f.cien.op) + (f.usd.op ? ' Dólar: ' + esc(f.usd.op) : '') + (f.eur.op ? ' Euro: ' + esc(f.eur.op) : '') + '</li>');
       return '<div class="rd-pt-c" style="--c:' + a.col + '"><p class="rd-pt-cab"><span class="rd-admin-ini" aria-hidden="true">' + esc(a.ini) + '</span><span><b>' + esc(a.c) + '</b><small>' +
@@ -613,6 +749,7 @@
       '<p class="rd-fte">📄 ' + fuentes([P.f.inpc, P.f.usd, P.f.eur]) + '</p></details>';
 
     /* ---- La máquina del tiempo ---- */
+    if (document.getElementById('rdMaq')) {
     var mA = document.getElementById('rdMaqAnio'), mH = document.getElementById('rdMaqHasta'), mM = document.getElementById('rdMaqMonto');
     mA.innerHTML = '<option value="hoy">Hoy (' + esc(P.ref.mes) + ')</option>' + P.anios.slice().reverse().map(function (y) {
       return '<option value="' + y + '">' + y + '</option>';
@@ -644,5 +781,6 @@
     [mA, mH].forEach(function (el) { el.addEventListener('change', maq); });
     mM.addEventListener('input', maq);
     maq();
+    }
   }
 })();

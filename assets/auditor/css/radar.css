@@ -213,6 +213,36 @@
 .rd-maq-monto input { font: inherit; border: 0; outline: 0; min-width: 0; width: 100%; background: transparent; color: inherit; }
 .rd-maq-monto:focus-within { outline: 3px solid #c9a84c; outline-offset: 1px; }
 .rd-maq .rd-ph { background: #fff; }
+/* Simulador de «El peso frente al dólar, el euro y la inflación» (12-10-2026). */
+.rd-sim-cuenta { margin: 4px 0 10px; }
+.rd-cuenta-sec { background: #fff; color: #0b2a63; box-shadow: inset 0 0 0 2px #0b2a63; }
+.rd-cuenta-sec:hover { background: #eef3fc; }
+.rd-sim-marca { background: linear-gradient(160deg, #0b2a63, #163f8c); color: #fff; border-radius: 16px; padding: 14px 16px; margin-bottom: 10px; }
+.rd-sim-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.rd-sim-anio { font: 800 34px/1 Inter, system-ui, sans-serif; color: #f3cf65; font-variant-numeric: tabular-nums; }
+.rd-sim-pres { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.rd-sim-pres .rd-admin-ini { background: var(--c); width: 36px; height: 36px; flex: none; box-shadow: 0 0 0 2px #fff; }
+.rd-sim-pres b { display: block; font-size: 17px; color: #fff; }
+.rd-sim-pres small { display: block; font-size: 13px; color: #b9c8e8; }
+.rd-sim-tag { font-size: 12px; font-weight: 800; background: #fff; color: #0b2a63; border-radius: 99px; padding: 3px 10px; }
+.rd-sim-tag-p { background: #f3cf65; color: #4a3500; }
+.rd-sim-vals { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; margin-top: 12px; }
+.rd-sim-v { background: rgba(255, 255, 255, .1); border-radius: 12px; padding: 8px 12px; }
+.rd-sim-v span { display: block; font-size: 13px; color: #d6e0f5; }
+.rd-sim-v b { display: block; font: 800 28px/1.2 Inter, system-ui, sans-serif; color: #fff; }
+.rd-sim-v small { display: block; font-size: 12.5px; color: #b9c8e8; }
+.rd-sim-reg { display: grid; gap: 4px; margin: 8px 0; font-size: 14px; font-weight: 700; color: #24324d; }
+.rd-sim-reg[hidden] { display: none; }
+.rd-sim-reg input { width: 100%; min-height: 44px; accent-color: #0b2a63; }
+.rd-sim-adms { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin: 6px 0 4px; }
+.rd-sim-adm { display: flex; align-items: center; gap: 8px; min-height: 44px; font: inherit; text-align: left; cursor: pointer; background: #fff; border: 1px solid #dfe5f0; border-left: 5px solid var(--c); border-radius: 12px; padding: 6px 10px; color: #142033; }
+.rd-sim-adm .rd-admin-ini { background: var(--c); width: 32px; height: 32px; flex: none; font-size: 10px; }
+.rd-sim-adm b { display: block; font-size: 14px; }
+.rd-sim-adm small { display: block; font-size: 12px; color: #5a6782; }
+.rd-sim-adm[aria-current="true"] { background: #fff6dc; border-color: var(--c); box-shadow: 0 0 0 2px var(--c); }
+.rd-sim-adm:focus-visible { outline: 3px solid #f3cf65; outline-offset: 2px; }
+.rd-g-banda { transition: opacity .25s; }
+.rd-g-banda.rd-g-banda-on { opacity: .3; }
 @media (max-width: 600px) {
   .rd-peso { padding: 12px; }
   .rd-ph b { font-size: 20px; }
