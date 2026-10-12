@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 133 |
+| Páginas revisadas | 143 |
 | Páginas que solo redirigen | 12 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -123,7 +123,17 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-los-municipios.html` | Los 2,479 municipios: predial y transferencias · Auditavisión | apartados.py | 38 | 0 | 3 | 4 | 1 |
 | `numeros-mapa-del-gasto-federalizado.html` | El mapa del gasto federalizado · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 0 |
 | `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
-| `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 61 | 0 | 2 | 1 | 0 |
+| `numeros-paquete-2027-cifras.html` | Cómo se ve 2027 · Auditavisión | apartados.py | 29 | 0 | 1 | 0 | 0 |
+| `numeros-paquete-2027-colchon.html` | Colchón y pasivos · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-facultad.html` | Con qué facultad · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-fuentes.html` | Fuentes · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-gasto.html` | En qué se irá · Auditavisión | apartados.py | 30 | 0 | 1 | 0 | 0 |
+| `numeros-paquete-2027-impuestos.html` | Impuestos · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-itinerario.html` | El itinerario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-puntos-ciegos.html` | Puntos ciegos · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-ruta-2032.html` | Ruta a 2032 · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-simulador.html` | Simulador · Auditavisión | apartados.py | 28 | 0 | 0 | 1 | 0 |
+| `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 35 | 1 | 0 | 0 | 0 |
 | `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |

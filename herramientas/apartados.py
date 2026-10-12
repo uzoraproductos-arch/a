@@ -3779,6 +3779,36 @@ def numeros_modulo(m, tarjetas, bloque=None, script='presupuesto.js'):
     return p
 
 
+def paquete_paginas(p, partes, lista):
+    """El Paquete Economico 2027 en diez paginas (pedido del autor,
+    12-10-2026): su pagina queda con una tarjeta por seccion y cada seccion
+    vive en la suya, con anterior y siguiente. Las anclas viejas
+    (#peSim, #peSimTit...) llevan a su pagina."""
+    p['pestanas'] = True
+    p['pista'] = 'Cada tarjeta abre su propia página.'
+    p['secciones'] = [{'id': x[0], 'pagina': x[2], 'pestana': (x[1], x[3], x[5])} for x in lista]
+    p['hash_a_pagina'] = dict([(x[0], x[2]) for x in lista] + [(x[0] + 'Tit', x[2]) for x in lista] +
+                              [('pe-ciego-*', next(x[2] for x in lista if x[0] == 'peCiegos'))])
+    p['scripts'] = []
+    out = []
+    for i, (pid, ico, archivo, corto, desc, _) in enumerate(lista):
+        titulo, html = partes[pid]
+        ant = lista[i - 1] if i else None
+        sig = lista[i + 1] if i + 1 < len(lista) else None
+        out.append({
+            'archivo': archivo, 'menu': corto, 'menu_archivo': 'sigue-el-dinero.html',
+            'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': p['padre2'], 'padre3': (p['archivo'], p['titulo']),
+            'icono': ico, 'lema': p['titulo'], 'titulo': titulo, 'entrada': desc,
+            'estilos': ['numeros.css'], 'scripts': ['presupuesto.js'] if pid == 'peSim' else [],
+            'pie_extra': presupuesto_pie(
+                (ant[2], '← Anterior', ant[1], ant[3]) if ant else (p['archivo'], '← Volver a', p['icono'], p['titulo']),
+                (sig[2], 'Siguiente →', sig[1], sig[3]) if sig else (p['archivo'], 'Terminaste · volver a', p['icono'], p['titulo']),
+                (p['archivo'], '%s %s: sus diez tarjetas' % (p['icono'], p['titulo'])) if ant else None),
+            'secciones': [{'id': pid, 'titulo': titulo, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': html}],
+        })
+    return out
+
+
 def presupuesto_pie(ant, sig, arriba=None):
     """Pie de las paginas de «Presupuesto» (pedido del autor, 11-10-2026):
     solo anterior y siguiente, y un enlace para subir cuando el anterior no
@@ -4120,7 +4150,6 @@ def numeros_preparar():
                                               (RADAR_HOY_CUENTA, RADAR_HOY_FILAS[2:], RADAR_HOY_VIVO)),
                'eb-equivale': lambda: pm.equivale(base, ref),
                'eb-arquitectura': lambda: pm.camino(base, ref),
-               'proyeccion2027': lambda: pm.paquete(base, ref),
                # El titulo del bloque ya es el de la pagina: queda solo para lectores de pantalla.
                'nr-origenes': lambda: numeros_renglones(base, d).replace('class="np-tit" id="nrTit"', 'class="np-tit sr-only" id="nrTit"'),
                # Los tres de «Baja al territorio» (11-10-2026).
@@ -4138,6 +4167,8 @@ def numeros_preparar():
         # Las cifras de «Hoy» del Radar, con su contador (12-10-2026), traen sus estilos.
         if m[0] == 'eb-cuanto':
             NUMEROS_PAGINAS[-1]['estilos'] = NUMEROS_PAGINAS[-1]['estilos'] + ['radar.css']
+        if m[0] == 'proyeccion2027':
+            NUMEROS_PAGINAS.extend(paquete_paginas(NUMEROS_PAGINAS[-1], pm.paquete_partes(base, ref), pm.PE_PARTES))
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):

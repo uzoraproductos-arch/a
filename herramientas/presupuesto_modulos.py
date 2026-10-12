@@ -13,6 +13,7 @@ Lo usa apartados.numeros_preparar(); recibe `ref(id)`, que pinta la
 llamada [nn] a fuentes-oficiales.html.
 """
 import json
+import re
 
 
 def chip(e, pend=None):
@@ -470,7 +471,7 @@ def paquete(base, ref):
           %s
         </section>
         <section class="pm pm-nota" id="peFuentes" aria-labelledby="peFuentesTit">
-          <h2 class="pm-sub" id="peFuentesTit">De dónde sale cada cifra de esta página</h2>
+          <h2 class="pm-sub" id="peFuentesTit">De dónde sale cada cifra del Paquete Económico 2027</h2>
           <ol class="pm-fuentes">
             <li><b>Criterios Generales de Política Económica 2027</b> %s — Anexo C de la Gaceta Parlamentaria número 7121. Marco macroeconómico, finanzas públicas, clasificación funcional, sensibilidades, amortiguadores, pasivos contingentes y proyecciones a 2032.</li>
             <li><b>Proyecto de Presupuesto de Egresos de la Federación 2027</b> %s — Anexo B. Su artículo 2o. fija el gasto neto total y el déficit presupuestario.</li>
@@ -493,3 +494,46 @@ def paquete(base, ref):
         senda, Sd['nota'], pr('cgpe'),
         {10: 'Diez', 11: 'Once', 12: 'Doce'}.get(len(P['ciegos']), str(len(P['ciegos']))), ciegos,
         pr('cgpe'), pr('ppef'), pr('ilif'), pr('com'), pr('lfprh'), P['entregado'], P['gaceta'])
+
+# Cada seccion del Paquete Economico 2027 en su propia pagina (pedido del
+# autor, 12-10-2026): la pagina del paquete queda con diez tarjetas.
+# (id de la seccion, icono, archivo, titulo de la tarjeta, entrada de su
+# pagina, texto corto de la tarjeta).
+PE_PARTES = [
+    ('peFacultad', '🏛️', 'numeros-paquete-2027-facultad.html', 'Con qué facultad',
+     'Los artículos 25, 26, 27 y 28 de la Constitución: con qué facultad interviene el Estado en la economía.', 'Los artículos 25 a 28 de la Constitución.'),
+    ('peItin', '🗓️', 'numeros-paquete-2027-itinerario.html', 'El itinerario',
+     'Las fechas que fija la ley para entregar, discutir y aprobar el paquete, y quién hace cada paso.', 'Quién entrega, quién revisa y quién aprueba.'),
+    ('peCifras', '📊', 'numeros-paquete-2027-cifras.html', 'Cómo se ve 2027',
+     'Los supuestos de crecimiento, dólar y petróleo, y lo que sale de ellos: ingreso, gasto y deuda.', 'Los supuestos y lo que sale de ellos.'),
+    ('peGasto', '🧭', 'numeros-paquete-2027-gasto.html', 'En qué se irá',
+     'El gasto por finalidad, los veinte programas sociales prioritarios y las prioridades de inversión.', 'Por finalidad, programa social y obra.'),
+    ('peSim', '🎛️', 'numeros-paquete-2027-simulador.html', 'Simulador',
+     'Mueve las seis palancas oficiales de Hacienda y mira a dónde va el déficit si los supuestos fallan.', 'Mueve las palancas oficiales y mira el déficit.'),
+    ('peFiscal', '🧾', 'numeros-paquete-2027-impuestos.html', 'Impuestos',
+     'Lo que cambia en los impuestos sin llamarse reforma: lo que recauda más, lo que recauda menos y lo de fondo.', 'Lo que cambia sin llamarse reforma.'),
+    ('peColchon', '🛟', 'numeros-paquete-2027-colchon.html', 'Colchón y pasivos',
+     'Con qué se amortigua un golpe y los compromisos que existen sin contar como deuda.', 'Con qué se amortigua un golpe.'),
+    ('peSenda', '🛣️', 'numeros-paquete-2027-ruta-2032.html', 'Ruta a 2032',
+     'La proyección a cinco años que manda la ley: el déficit y la deuda, año por año.', 'El déficit y la deuda, año por año.'),
+    ('peCiegos', '🔦', 'numeros-paquete-2027-puntos-ciegos.html', 'Puntos ciegos',
+     'Lo que se dijo, lo que dice el documento y por qué la diferencia importa.', 'Lo que se dijo frente al documento.'),
+    ('peFuentes', '📚', 'numeros-paquete-2027-fuentes.html', 'Fuentes',
+     'Los cinco documentos oficiales de donde sale cada cifra del paquete.', 'Los cinco documentos oficiales.'),
+]
+
+
+def paquete_partes(base, ref):
+    """Las secciones de paquete(), una por pagina: {id: (titulo, html)}.
+    El titulo de la seccion pasa a ser el de la pagina, asi que su h2 queda
+    solo para lectores de pantalla."""
+    partes = {}
+    for sec in re.split(r'\n\s*(?=<section class="pm)', paquete(base, ref))[1:]:
+        pid = re.search(r'id="(pe\w+)"', sec).group(1)
+        h2 = re.search(r'<h2 class="(pm-\w+)" id="%sTit">(.*?)</h2>' % pid, sec)
+        titulo = re.sub(r'^[^\wÁÉÍÓÚÑ¿]+', '', re.sub('<[^>]+>', '', h2.group(2))).strip()
+        sec = sec.replace(h2.group(0), '<h2 class="%s sr-only" id="%sTit">%s</h2>' % (h2.group(1), pid, h2.group(2)), 1)
+        partes[pid] = (titulo, sec)
+    assert [x[0] for x in PE_PARTES] == list(partes), list(partes)
+    return partes
+
