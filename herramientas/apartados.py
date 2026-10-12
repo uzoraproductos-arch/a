@@ -2962,8 +2962,8 @@ def radar():
           <div class="rd-duelo-ctl"><select id="rdDuelo1" aria-label="Primera administración"></select><span>vs</span>
             <select id="rdDuelo2" aria-label="Segunda administración"></select></div>
           <div class="rd-cuenta rd-duelo-cuenta" id="rdDueloCuenta" hidden>
-            <button type="button" class="rd-cuenta-btn" id="rdDueloBtn" aria-pressed="false">▶ Empezar duelo</button>
             <span class="rd-cuenta-txt" id="rdDueloTxt">Las cifras están en cero. Elige dos administraciones y presiona «Empezar duelo».</span>
+            <button type="button" class="rd-cuenta-btn" id="rdDueloBtn" aria-pressed="false">▶ Empezar duelo</button>
           </div>
           <div id="rdDueloOut"></div>
         </div>'''
