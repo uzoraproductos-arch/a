@@ -503,7 +503,7 @@ APARTADOS = [
                 # autor). La direccion no cambia: va impresa en los sellos.
                 'id': 'estado-de-cuenta',
                 'pagina': 'radar-estado-de-cuenta.html',
-                'pestana': ('🧾', 'Estado de cuenta', 'Gobiernos, Congreso y Corte, con folio y sello: abre su página'),
+                'pestana': ('🧾', 'Estado de cuenta administrativo', 'Gobiernos, Congreso y Corte, con folio y sello: abre su página'),
             },
         ],
     },
