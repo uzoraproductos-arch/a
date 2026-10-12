@@ -206,13 +206,6 @@ def construir():
         mdp(t['porAclarar'] / 1e6), format(t['auditorias'], ','), mdb['corto'], doc(mdb['url']), asf['cp2024']['pagina'], chip('oficial'),
         mdp(eco['ctada']['total_mdp']), pct(eco['ctada']['pct_pib']), chip('oficial'), chip('pendiente'))
 
-    aportacion = [
-        ('🧾', 'Tu estado de cuenta', 'Escribe lo que ganas y ve lo que pagas de ISR, IVA y predial, y a qué rubro del presupuesto llega cada peso.',
-         'herramienta-calculadora-ticket.html', None, 'calculadora'),
-        ('🌎', 'Tu ticket en negativo', 'Lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental.',
-         'herramienta-ambiente-ticket.html', None, 'ambiente'),
-    ]
-
     descarga = (
         '<p>El estado de cuenta completo, renglón por renglón, con su periodo, alcance, estado, fuente y página. Se abre en Excel.</p>'
         '<p><a class="ec-descarga" href="%s" download>⬇️ Descargar %s</a></p>'
@@ -221,7 +214,6 @@ def construir():
         '<li><b>Fecha de revisión:</b> %s.</li></ul>') % (CSV_ARCHIVO, CSV_ARCHIVO, REVISION)
 
     secciones = [
-        ('aportacion', '👤 Tu aportación', 'Lo que tú pagas y a dónde va. Lo calcula la Calculadora Cívica con lo que ganas.', '', aportacion),
         ('presupuestaria', '📊 Dimensión presupuestaria', 'Lo que entra, lo que se gasta y lo que falta: 2024, 2026 y 2027.', presupuestaria, []),
         ('financiera', '🏦 Dimensión financiera', 'Lo que cuesta la deuda y cuánto se debe.', financiera, []),
         ('social', '🫂 Dimensión social', 'A dónde llegan los programas y qué se sabe de sus resultados.', social, []),
@@ -268,7 +260,9 @@ def construir():
         'padre2': ap.CUENTAS_PORTADA[0::2],
         'pie_extra': ap.partes_pie(ap.CUENTAS_PARTES, ARCHIVO, ap.CUENTAS_PORTADA, ap.CUENTAS_FIN),
         'lema': '2024, 2026 y 2027, en las mismas unidades',
-        'entrada': ('Dos vistas de la misma cuenta. <b>Tu aportación</b>: lo que tú pagas y a dónde va. <b>La cuenta pública</b>: lo que '
+        # «Tu aportacion» (tu estado de cuenta y tu ticket en negativo) vive
+        # solo en Herramientas (pedido del autor, 12-10-2026).
+        'entrada': ('La cuenta pública del país: lo que '
                     'entra al gobierno, lo que gasta, lo que debe, lo que entrega y lo que se pierde del ambiente, comparando lo que pasó en '
                     '2024 con lo aprobado para 2026 y lo que se propone para 2027. Cada cifra trae su documento.'),
         # Enlace al estado de cuenta de cada administracion (10-10-2026).

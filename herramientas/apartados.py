@@ -3540,13 +3540,6 @@ def numeros_tres(d):
         _mdp(tot - d['redondeo']), _mdp(d['redondeo']), _mdp(tot))
 
 
-def numeros_cierre():
-    """Cierre del recorrido: «¿Y a ti, cuánto te toca?»."""
-    return ('<a class="np-cierre" href="herramienta-calculadora.html"><span class="np-cierre-ico" aria-hidden="true">🧮</span>'
-            '<span><b>Y a ti, ¿cuánto te toca?</b><small>Escribe tu sueldo y mira a qué rubros, fondos y pago de deuda se van tus impuestos.</small></span>'
-            '<span class="np-cierre-ir">Abrir la calculadora ➔</span></a>')
-
-
 # Numeros en paginas (pedido del autor, 11-10-2026): la portada es como la
 # del Radar hacendario, tarjetas sin numero, y cada una
 # abre su propia pagina. Eran siete; el mismo dia «Presupuesto» (El peso de
@@ -4038,10 +4031,10 @@ GASTO_PARTES = [
 # «Cuentas claras» en tarjetas (pedido del autor, 12-10-2026), como «Gasto
 # publico»: la grafica de la deuda se parte en tres paginas; el estado de
 # resultados y el Estado de Cuenta Civico se quedan (no hay otro igual en la
-# plataforma); y las tres que ya son herramientas van en su grupo, a su
-# pagina en Herramientas, sin copiarlas aqui.
-CUENTAS_GRUPOS = {'debe': '📉 Lo que se debe', 'revisa': '🔍 Lo que se gastó y el balance',
-                  'herr': '🧰 Viven en Herramientas: abren allá'}
+# plataforma). Las tres que ya son herramientas (la ASF, los Expedientes y el
+# reloj de la deuda) tuvieron su grupo de enlaces y se quitaron el mismo dia:
+# viven solo en Herramientas (pedido del autor).
+CUENTAS_GRUPOS = {'debe': '📉 Lo que se debe', 'revisa': '🔍 Lo que se gastó y el balance'}
 CUENTAS_PARTES = [
     ('dtTiempo', '📈', 'numeros-cuentas-deuda-en-el-tiempo.html', 'La deuda en el tiempo', 'De 1994 a 2027, sexenio por sexenio, con su contador',
      'La deuda a través del tiempo',
@@ -4055,9 +4048,6 @@ CUENTAS_PARTES = [
     ('eb-cuenta-federal', '📒', 'numeros-estado-de-resultados.html', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio',
      None, None, 'revisa'),
     ('estado-de-cuenta', '🧾', 'estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024 frente a 2026 y 2027, en las mismas unidades', None, None, 'revisa'),
-    ('asf', '🔍', 'herramienta-inspector-asf.html', 'Qué encontró la ASF', 'Auditorías y lo que quedó por aclarar en 2024', None, None, 'herr'),
-    ('expedientes', '🗂️', 'expedientes.html', 'Expedientes de casos por aclarar', 'Los casos que la Auditoría Superior dejó abiertos', None, None, 'herr'),
-    ('reloj', '⏱️', 'herramienta-calculadora-reloj.html', 'El reloj de la deuda', 'Lo que se debe y se paga por segundo, en vivo', None, None, 'herr'),
 ]
 # Paginas que una tarjeta abre pero que no entran en la fila de anterior y
 # siguiente: son de Herramientas y tienen su propio pie.
@@ -4102,7 +4092,7 @@ def partes_pie(partes, archivo, portada, fin):
     return presupuesto_pie(
         (ant[2], '← Anterior', ant[1], ant[3]) if ant else (portada[0], '← Volver a', portada[1], portada[2]),
         (sig[2], 'Siguiente →', sig[1], sig[3]) if sig else fin,
-        (portada[0], '%s %s: sus %s tarjetas' % (portada[1], portada[2], {8: 'ocho', 9: 'nueve'}.get(len(partes), len(partes)))) if ant else None)
+        (portada[0], '%s %s: sus %s tarjetas' % (portada[1], portada[2], {5: 'cinco', 8: 'ocho', 9: 'nueve'}.get(len(partes), len(partes)))) if ant else None)
 
 
 def partes_pies(partes, portada, fin):
@@ -4256,10 +4246,11 @@ def numeros_preparar():
             partes_portada(p, CUENTAS_PARTES, CUENTAS_GRUPOS,
                            'El recorrido se cierra con dos cuentas: lo que el país debe, sexenio por sexenio, y la rendición, '
                            'cuando el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. '
-                           'Cada tarjeta abre su propia página; las de abajo son herramientas y abren en Herramientas.',
+                           'Cada tarjeta abre su propia página.',
                            [('deudaTiempo', CUENTAS_PARTES[0][2])])
-            # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
-            p['cierre'] = numeros_cierre()
+            # Sin cierre: «¿Y a ti, cuanto te toca?» y las tarjetas de la ASF,
+            # los Expedientes y el reloj viven solo en Herramientas (pedido
+            # del autor, 12-10-2026).
         for t in sec['tarjetas']:
             m = re.search(r'ancla=(eb-[\w-]+)', t[3])
             if m:

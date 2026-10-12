@@ -41,7 +41,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
-| `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 29 | 0 | 18 | 3 | 6 |
+| `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 27 | 0 | 18 | 3 | 6 |
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 23 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
@@ -77,7 +77,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 152 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 149 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
@@ -88,7 +88,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 37 | 0 | 4 | 0 | 0 |
 | `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 40 | 0 | 8 | 7 | 1 |
 | `numeros-cuentas-antes-de-1994.html` | Antes de 1994 · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
-| `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `numeros-cuentas-deuda-en-el-tiempo.html` | La deuda en el tiempo · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `numeros-cuentas-quien-autoriza-la-deuda.html` | ¿Quién autoriza la deuda? · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `numeros-egreso-adefas.html` | ADEFAS · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
