@@ -1,0 +1,127 @@
+/* Auditavisión · Modo Inspector › Lista negra del SAT (12-10-2026).
+   La página la escribe herramientas/insp_efos.py; la búsqueda,
+   assets/auditor/js/insp-efos.js. Prefijo ef- (no confundir con las
+   clases efos- del motor de la portada). */
+.ef { padding-top: 22px; --ef: var(--rubro-inspector, #1d5fd6); --ef-def: #b3261e; --ef-pre: #a9541a; --ef-des: #2e7d4f; --ef-sen: #1f6f8b; --ef-tinta: #1c2a44; --ef-tenue: #44526b; }
+.ef *, .ef *::before, .ef *::after { box-sizing: border-box; }
+.ef-sec { margin: 0 0 40px; }
+.ef-tit { margin: 0 0 8px; font-size: 24px; line-height: 1.25; color: #0b2a63; }
+.ef-txt { margin: 0 0 18px; max-width: 820px; font-size: 16px; line-height: 1.6; color: #33415c; }
+.ef-nota { margin: 14px 0 0; font-size: 14px; line-height: 1.55; color: var(--ef-tenue); }
+.ef a { color: #1a56b8; }
+
+/* El buscador, arriba y grande */
+.ef-hero { background: #ffffff; border: 1px solid #dfe5f0; border-top: 6px solid var(--ef); border-radius: 16px; padding: 22px 22px 18px; margin: 0 0 40px; }
+.ef-hero-tit { margin: 0 0 8px; font-size: 28px; line-height: 1.2; color: #0b2a63; }
+.ef-hero-txt { margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #33415c; max-width: 820px; }
+.ef-modos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.ef-modo, .ef-filtro { font: 600 15px/1.2 Inter, system-ui, sans-serif; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #c9d2e3; background: #f6f8fc; color: var(--ef-tinta); cursor: pointer; }
+.ef-modo[aria-pressed="true"], .ef-filtro[aria-pressed="true"] { background: var(--ef); border-color: var(--ef); color: #ffffff; }
+.ef-modo:focus-visible, .ef-filtro:focus-visible, .ef-btn:focus-visible, .ef-sit-btn:focus-visible, .ef-input:focus-visible, .ef-area:focus-visible { outline: 3px solid color-mix(in srgb, var(--ef) 45%, transparent); outline-offset: 2px; }
+.ef-lbl { display: block; margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--ef-tinta); }
+.ef-busca-fila { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+.ef-input { flex: 1 1 260px; min-width: 0; min-height: 52px; font: 600 18px/1.2 'JetBrains Mono', ui-monospace, monospace; padding: 12px 14px; border: 2px solid #c9d2e3; border-radius: 12px; color: var(--ef-tinta); background: #ffffff; }
+.ef-input:focus, .ef-area:focus { border-color: var(--ef); }
+.ef-area { display: block; width: 100%; min-height: 150px; font: 500 16px/1.5 'JetBrains Mono', ui-monospace, monospace; padding: 12px 14px; border: 2px solid #c9d2e3; border-radius: 12px; color: var(--ef-tinta); background: #ffffff; margin: 0 0 10px; resize: vertical; }
+.ef-btn { font: 700 16px/1.2 Inter, system-ui, sans-serif; min-height: 52px; min-width: 44px; padding: 12px 20px; border-radius: 12px; border: 0; background: var(--ef); color: #ffffff; cursor: pointer; }
+.ef-btn:hover { filter: brightness(1.08); }
+.ef-btn-sec { background: #eef2f8; color: var(--ef-tinta); border: 1px solid #c9d2e3; min-height: 44px; margin-top: 10px; }
+.ef-aviso { margin: 4px 0 8px; font-size: 15px; line-height: 1.5; color: #7a4a0c; }
+.ef-aviso:empty { display: none; }
+.ef-estado { margin: 14px 0 0; font-size: 15px; line-height: 1.55; color: var(--ef-tenue); }
+.ef-reintentar { font: inherit; font-weight: 700; color: #1a56b8; background: none; border: 0; padding: 10px 4px; min-height: 44px; text-decoration: underline; cursor: pointer; }
+.ef-filtros { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
+.ef-filtros[hidden] { display: none; }
+.ef-filtro { font-size: 14.5px; padding: 8px 14px; }
+.ef-cuenta { margin: 4px 0 12px; font-size: 16px; line-height: 1.5; color: var(--ef-tinta); }
+.ef-vacio { margin: 6px 0; padding: 16px 18px; border-radius: 12px; background: #f3f6fb; color: #33415c; font-size: 16px; line-height: 1.55; }
+.ef-vacio p { margin: 0 0 6px; }
+.ef-vacio p:last-child { margin: 0; }
+.ef-vacio-no { border-left: 5px solid #8a97ad; }
+
+/* Fichas de resultado */
+.ef-fichas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+.ef-ficha { --c: #8a97ad; background: #ffffff; border: 1px solid #dfe5f0; border-left: 6px solid var(--c); border-radius: 12px; padding: 14px 16px; font-size: 16px; line-height: 1.5; color: #33415c; min-width: 0; }
+.ef-ficha.ef-def { --c: var(--ef-def); background: #fdf6f5; }
+.ef-ficha.ef-pre { --c: var(--ef-pre); background: #fdf8f1; }
+.ef-ficha.ef-des { --c: var(--ef-des); }
+.ef-ficha.ef-sen { --c: var(--ef-sen); }
+.ef-ficha-cab { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 10px; margin: 0 0 6px; }
+.ef-ficha-sit { font: 800 14px/1.2 Inter, system-ui, sans-serif; text-transform: uppercase; letter-spacing: .04em; color: var(--c); }
+.ef-ficha code { font: 700 15px/1.2 'JetBrains Mono', ui-monospace, monospace; color: var(--ef-tinta); overflow-wrap: anywhere; }
+.ef-ficha h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.35; color: var(--ef-tinta); overflow-wrap: anywhere; }
+.ef-ficha p { margin: 0 0 6px; }
+.ef-ficha-corto { font-weight: 700; color: var(--c); }
+.ef-ficha-oficio { font-size: 14px; color: var(--ef-tenue); margin: 8px 0 0 !important; }
+
+/* Varios RFC: resumen */
+.ef-resumen { background: #f3f6fb; border-radius: 12px; padding: 14px 16px; margin: 10px 0 12px; }
+.ef-resumen-tit { margin: 0 0 8px; font-size: 16px; color: var(--ef-tinta); }
+.ef-resumen ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 6px 14px; font-size: 16px; color: #33415c; }
+.ef-resumen b { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ef-resumen .ef-def b { color: var(--ef-def); }
+.ef-resumen .ef-pre b { color: var(--ef-pre); }
+.ef-resumen .ef-des b { color: var(--ef-des); }
+.ef-resumen .ef-sen b { color: var(--ef-sen); }
+.ef-alerta { margin: 0 0 12px; padding: 12px 16px; border-radius: 12px; background: #fdf3f2; border: 1px solid #f1c9c5; color: #5c1a15; font-size: 16px; line-height: 1.55; }
+.ef-nota-lote { margin: 12px 0 0; font-size: 15px; line-height: 1.55; color: var(--ef-tenue); overflow-wrap: anywhere; }
+
+/* Qué hay en la lista */
+.ef-grandes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0 0 16px; }
+.ef-grande { border-radius: 14px; padding: 16px 18px; background: #fdf6f5; border: 1px solid #f1c9c5; }
+.ef-g-salio { background: #f1f8f3; border-color: #c4e2cf; }
+.ef-g-num { display: block; font: 800 34px/1.1 'JetBrains Mono', ui-monospace, monospace; color: var(--ef-def); }
+.ef-g-salio .ef-g-num { color: var(--ef-des); }
+.ef-g-tx { display: block; margin-top: 6px; font-size: 15px; line-height: 1.45; color: #33415c; }
+.ef-barra { display: flex; height: 26px; border-radius: 999px; overflow: hidden; background: #eef2f8; margin: 0 0 16px; }
+.ef-seg { display: block; height: 100%; width: var(--w); animation: ef-crece .7s ease-out both; }
+.ef-seg + .ef-seg { border-left: 2px solid #ffffff; }
+.ef-seg.ef-def { background: var(--ef-def); }
+.ef-seg.ef-pre { background: var(--ef-pre); }
+.ef-seg.ef-des { background: var(--ef-des); }
+.ef-seg.ef-sen { background: var(--ef-sen); }
+@keyframes ef-crece { from { width: 0; } }
+.ef-sits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ef-sit { --c: #8a97ad; background: #ffffff; border: 1px solid #dfe5f0; border-top: 5px solid var(--c); border-radius: 12px; overflow: hidden; }
+.ef-sit.ef-def { --c: var(--ef-def); }
+.ef-sit.ef-pre { --c: var(--ef-pre); }
+.ef-sit.ef-des { --c: var(--ef-des); }
+.ef-sit.ef-sen { --c: var(--ef-sen); }
+.ef-sit-btn { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 14px 16px 8px; cursor: pointer; color: var(--ef-tinta); font: inherit; min-height: 44px; }
+.ef-sit-btn:hover, .ef-sit-btn[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 9%, #ffffff); }
+.ef-sit-cab { display: block; font-size: 16px; line-height: 1.3; }
+.ef-sit-cab small { display: block; margin-top: 2px; font-size: 14px; font-weight: 600; color: var(--c); }
+.ef-sit-num { display: block; margin: 8px 0 2px; font: 800 26px/1.1 'JetBrains Mono', ui-monospace, monospace; color: var(--c); }
+.ef-sit-pc { display: block; font-size: 14px; color: var(--ef-tenue); }
+.ef-sit p { margin: 0; padding: 0 16px 14px; font-size: 15px; line-height: 1.5; color: #33415c; }
+
+/* La guía en pasos */
+.ef-pasos { list-style: none; margin: 0 0 16px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ef-pasos li { display: flex; gap: 12px; background: #ffffff; border: 1px solid #dfe5f0; border-radius: 12px; padding: 16px; }
+.ef-paso-n { flex: 0 0 40px; height: 40px; border-radius: 50%; background: var(--ef); color: #ffffff; font: 800 18px/40px Inter, system-ui, sans-serif; text-align: center; }
+.ef-pasos h3 { margin: 6px 0 6px; font-size: 18px; color: #0b2a63; }
+.ef-pasos p { margin: 0; font-size: 16px; line-height: 1.55; color: #33415c; }
+.ef-legal { margin: 0; padding: 14px 18px; border-radius: 12px; background: #f3f6fb; border-left: 5px solid var(--ef); font-size: 16px; line-height: 1.6; color: #1c2a44; }
+
+/* Páginas hermanas */
+.ef-hermanas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.ef-hermanas a { display: block; height: 100%; min-height: 44px; padding: 14px 16px; border: 1px solid #dfe5f0; border-radius: 12px; background: #ffffff; text-decoration: none; color: var(--ef-tinta); }
+.ef-hermanas a:hover { border-color: var(--ef); }
+.ef-hermanas b { display: block; margin: 4px 0 2px; font-size: 16px; color: #0b2a63; }
+.ef-hermanas small { display: block; font-size: 14px; line-height: 1.45; color: var(--ef-tenue); }
+
+@media (max-width: 900px) {
+  .ef-sits, .ef-hermanas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ef-pasos { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .ef-hero { padding: 18px 14px 14px; }
+  .ef-hero-tit { font-size: 24px; }
+  .ef-tit { font-size: 22px; }
+  .ef-grandes, .ef-sits, .ef-hermanas { grid-template-columns: 1fr; }
+  .ef-btn { flex: 1 1 auto; }
+  .ef-g-num { font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ef-seg { animation: none; }
+}
