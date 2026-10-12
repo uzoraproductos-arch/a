@@ -515,6 +515,16 @@
       cajon(tplLibro.innerHTML, 'notaLibroTit', true);
     });
   });
+  /* Boton 📖 de la entrada que abre una plantilla en la ventana lateral
+     (Radar hacendario: «Como leer estos numeros», 12-10-2026). Si la
+     direccion trae su ancla (#lectura), se abre al cargar. */
+  Array.prototype.forEach.call(document.querySelectorAll('button[data-cajon]'), function (b) {
+    var tpl = document.getElementById(b.getAttribute('data-cajon'));
+    if (!tpl) return;
+    function abrir() { cajon(tpl.innerHTML, b.getAttribute('data-cajon-tit'), true); }
+    b.addEventListener('click', abrir);
+    if (location.hash === '#' + b.getAttribute('data-cajon-hash')) abrir();
+  });
   Array.prototype.forEach.call(document.querySelectorAll('a.apartado-nota[href="index.html?ir=nota"]'), function (a) {
     a.addEventListener('click', function (e) {
       if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;

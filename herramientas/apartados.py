@@ -2139,7 +2139,9 @@ RADAR_PARTES = [
     ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
     ('reloj', 'radar-reloj.html', '⏱️', 'El reloj de cada administración', 'El contador que corre al ritmo de cada sexenio'),
     ('duelo', 'radar-duelo.html', '⚔️', 'Duelo de administraciones', 'Dos administraciones, cara a cara'),
-    ('lectura', 'radar-como-leer.html', '📏', 'Cómo leer estos números', 'Convenciones y advertencias de cada cifra'),
+    # «Como leer estos numeros» dejo de ser tarjeta el 12-10-2026 (pedido del
+    # autor): se abre en la ventana lateral desde el boton 📖 de la entrada
+    # del radar ('cajon' de la pagina). radar-como-leer.html redirige ahi.
 ]
 
 
@@ -2169,7 +2171,6 @@ RADAR_NARRATIVA = {
     'peso': 'Cuánto ha valido tu dinero frente al dólar y el euro.',
     'reloj': 'Mira correr, segundo a segundo, el dinero de cada sexenio.',
     'duelo': 'Dos gobiernos frente a frente; el juicio es tuyo.',
-    'lectura': 'Qué mide cada cifra y de dónde sale.',
 }
 
 # El semaforo de la salud financiera (decision del autor, 10-10-2026): un
@@ -2218,7 +2219,7 @@ EXPIDE_TEXTO = ('Elige de quién: una administración presidencial, la diputaci�
 
 
 def radar_nav(actual):
-    """Barra al pie de cada pagina del Radar, con sus seis partes."""
+    """Barra al pie de cada pagina del Radar, con sus partes."""
     return ('<nav class="bib-nav" aria-label="Radar hacendario">\n'
             '        <a class="bib-nav-tit" href="radar-hacendario.html">📡 Radar hacendario: todas sus partes</a>\n'
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % '\n'.join(
@@ -3103,7 +3104,6 @@ def radar():
                   'Es una equivalencia, no dinero que se mueva hoy.', datos_js + reloj_html),
         'duelo': ('Dos administraciones, cara a cara, en las mismas medidas. Sin ganador: los números dicen cuánto; el juicio es tuyo.',
                   datos_js + duelo_html),
-        'lectura': ('Antes de comparar sexenios: qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.', lectura),
     }
     paginas = [{
         'archivo': 'radar-hacendario.html', 'menu': 'Radar hacendario', 'menu_archivo': 'descarga-los-datos.html',
@@ -3113,6 +3113,18 @@ def radar():
                     'por aclarar ante la Auditoría Superior: administración por administración, desde 1989. Compáralas en pesos de '
                     'cada año, en pesos de hoy, en dólares o en euros; mira cuánto ha valido el peso y hacia dónde lo proyecta Hacienda, '
                     'y pon a correr el reloj de cada sexenio. Cada cifra trae su documento.'),
+        # El boton 📖 al final de la entrada abre «Como leer estos numeros»
+        # en la ventana lateral (apartados.js, data-cajon).
+        'cajon': {'id': 'tplRadarLectura', 'hash': 'lectura', 'titulo_id': 'rdLecturaTit',
+                  'boton': 'Cómo leer estos números: qué mide cada cifra y de dónde sale',
+                  'html': '<header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">📏</span> Cómo leer estos números</span>'
+                          '<button type="button" class="glos-drawer-x" aria-label="Cerrar">✕</button></header>'
+                          '<div class="glos-drawer-cuerpo"><span class="glos-drawer-cat">Radar hacendario · Punto de referencia</span>'
+                          '<h3 id="rdLecturaTit" class="glos-drawer-tit">Cómo leer estos números</h3>'
+                          '<section class="glos-drawer-sec"><h4>Antes de comparar sexenios</h4>'
+                          '<p>Qué mide cada cifra, de qué serie sale y qué no se puede concluir con ella.</p>%s</section></div>'
+                          '<footer class="glos-drawer-pie"><a class="glos-drawer-todo" href="fuentes-oficiales.html" style="text-align:center; text-decoration:none;">📚 Ver las fuentes oficiales ➔</a></footer>'
+                          % lectura.replace('class="rd-lectura"', 'class="rd-lectura glos-drawer-lista"')},
         # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
         'hash_a_pagina': dict({r[0]: r[1] for r in RADAR_PARTES}, hoy='numeros-cuanto-dinero-es.html',
                               expide='radar-estado-de-cuenta.html'),
@@ -4250,6 +4262,15 @@ def pagina(a, sello):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro']
         nota = '<span class="herr-cab-credito">Imagen ilustrativa</span>' + nota
     pie_extra = ('\n\n      ' + a['pie_extra']) if a.get('pie_extra') else ''
+    entrada = a['entrada']
+    if a.get('cajon'):
+        # Boton 📖 al final de la entrada: abre su plantilla en la ventana
+        # lateral (como el de «Auditoria en imagenes» en la portada).
+        c = a['cajon']
+        cabeza, ultima = entrada.rsplit(' ', 1)
+        entrada = cabeza + ' <span class="apartado-cajon-ancla">' + ultima + (' <button type="button" class="hero-nota-btn apartado-cajon-btn" data-cajon="%s" data-cajon-hash="%s" data-cajon-tit="%s" '
+                    'title="%s" aria-label="%s" aria-haspopup="dialog">📖</button></span>' % (c['id'], c['hash'], c['titulo_id'], c['boton'], c['boton']))
+        nota += '<template id="%s">%s</template>' % (c['id'], c['html'])
     redirige = ''
     if a.get('hash_a_pagina'):
         # Anclas viejas que ahora son paginas: se mandan antes de pintar.
@@ -4324,7 +4345,7 @@ def pagina(a, sello):
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=(('<span class="herr-cab-ico" aria-hidden="true">%s</span><span class="herr-cab-tit">%s</span>' % (a['icono_cab'], a['titulo']))
-                   if a.get('icono_cab') else a['titulo']), entrada=a['entrada'], nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
+                   if a.get('icono_cab') else a['titulo']), entrada=entrada, nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
            secciones='\n\n'.join(secciones))
 
 
@@ -4496,6 +4517,8 @@ REDIRECCIONES = {
     # «Hoy y los estados de cuenta» se repartio el 12-10-2026 (pedido del
     # autor): el presupuesto en curso, a «Cuanto dinero es»; el estado de
     # cuenta, al tablero (radar-estado-de-cuenta.html no cambia de direccion).
+    'radar-como-leer.html': ('radar-hacendario.html#lectura', 'Cómo leer estos números',
+                             'Ahora se abre desde el botón 📖 de la entrada del Radar hacendario.'),
     'radar-hoy.html': ('numeros-cuanto-dinero-es.html', 'Hoy y los estados de cuenta',
                        'Las cifras de 2026 viven ahora en Números → Presupuesto → Cuánto dinero es; el estado de cuenta se expide desde el tablero del Radar hacendario.'),
     'radar-presupuesto-en-curso.html': ('numeros-cuanto-dinero-es.html', 'Hoy: el presupuesto en curso',
