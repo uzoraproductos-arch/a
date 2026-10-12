@@ -226,10 +226,10 @@ CAMINO_NUMEROS = (
          'Al año siguiente se entrega la %s, que revisa la %s.' % (
              glos('Cuenta Pública', 'Cuenta Pública'), glos('Auditoría Superior de la Federación (ASF)', 'Auditoría Superior de la Federación')),
          'herramienta-inspector-asf.html', 'Qué encontró la ASF'),
-        (5, '🧾', 'Se hace el balance',
+        (5, '🧭', 'Se hace el balance',
          'El %s junta lo que entró, lo que se gastó, lo que se debe y lo que se perdió: 2024 frente a 2026 y 2027.' % (
-             '<a href="estado-de-cuenta.html">Estado de Cuenta Cívico</a>'),
-         'estado-de-cuenta.html', 'Ver el estado de cuenta'),
+             '<a href="estado-de-cuenta.html">Contexto dimensional</a>'),
+         'estado-de-cuenta.html', 'Ver el contexto dimensional'),
     ])
 
 
@@ -451,7 +451,7 @@ APARTADOS = [
                 # pagina en Herramientas, sin duplicarlas aqui.
                 'tarjetas': [
                     ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', 'numeros-estado-de-resultados.html', None, 'dinero'),
-                    ('🧾', 'Estado de Cuenta Cívico', 'El balance de todo el recorrido: lo que entró, lo que se gastó, lo que se debe y lo que se perdió, 2024 frente a 2026 y 2027.', 'estado-de-cuenta.html', None, 'dinero'),
+                    ('🧭', 'Contexto dimensional', 'El balance de todo el recorrido: lo que entró, lo que se gastó, lo que se debe y lo que se perdió, 2024 frente a 2026 y 2027.', 'estado-de-cuenta.html', None, 'dinero'),
                     ('🗂️', 'Expedientes de casos por aclarar', 'Los casos concretos que la Auditoría Superior dejó abiertos, con su documento.', 'expedientes.html', None, 'inspector'),
                     ('🔍', 'Qué encontró la ASF', 'Auditorías, acciones y lo que quedó por aclarar en la Cuenta Pública 2024, sector por sector. Es una herramienta: abre en Herramientas.', 'herramienta-inspector-asf.html', None, 'inspector'),
                     ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo. Es una herramienta: abre en Herramientas.', 'herramienta-calculadora-reloj.html', None, 'inspector'),
@@ -1627,8 +1627,8 @@ def comunidad():
         '<span><span class="cm-errata-et">Estaba mal:</span> %s</span><span><span class="cm-errata-et">Qué hicimos:</span> %s</span>%s</li>'
         % (e[0], e[1], e[2], e[3], (' <a href="%s">Ver la página ➔</a>' % e[4]) if e[4] else '') for e in ERRATAS)
     compartir = ('<div class="cm-compartir" data-url="%sestado-de-cuenta.html" '
-                 'data-texto="El Estado de Cuenta Cívico de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">\n'
-                 '          <p>El <a href="estado-de-cuenta.html">Estado de Cuenta Cívico</a> resume 2024, 2026 y 2027 en cuatro dimensiones, '
+                 'data-texto="El contexto dimensional de las cuentas de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">\n'
+                 '          <p>El <a href="estado-de-cuenta.html">Contexto dimensional</a> resume 2024, 2026 y 2027 en cuatro dimensiones, '
                  'cada cifra con su fuente. Compártelo: entre más gente lo lea, más difícil es que el dinero público pase sin que nadie lo vea.</p>\n'
                  '          <div class="sv-acciones cm-redes"></div>\n'
                  '          <p class="cm-nota">Si sacaste tu cuenta personal en la <a href="herramienta-calculadora-ticket.html">Calculadora Cívica</a>, '
@@ -4047,7 +4047,7 @@ CUENTAS_PARTES = [
      'Lo que hay antes de la serie comparable: el primer superávit del Porfiriato y la deuda externa que seguía el libro de 1995, cotejada con Banxico.', 'debe'),
     ('eb-cuenta-federal', '📒', 'numeros-estado-de-resultados.html', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio',
      None, None, 'revisa'),
-    ('estado-de-cuenta', '🧾', 'estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024 frente a 2026 y 2027, en las mismas unidades', None, None, 'revisa'),
+    ('estado-de-cuenta', '🧭', 'estado-de-cuenta.html', 'Contexto dimensional', 'Seis dimensiones: 2024 frente a 2026 y 2027', None, None, 'revisa'),
 ]
 # Paginas que una tarjeta abre pero que no entran en la fila de anterior y
 # siguiente: son de Herramientas y tienen su propio pie.
@@ -4624,8 +4624,8 @@ def indice():
     investigaciones = _rejilla([_grupo(ico, tit, [(auditorias.archivo(i), au[i][5], au[i][6]) for i in ids])
                                 for ico, tit, ids in auditorias.TEMAS])
     numeros = _rejilla([_grupo('🧾', 'El balance', [
-        ('estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024, 2026 y 2027 en cuatro dimensiones'),
-        ('estado-de-cuenta-2024-2027.csv', 'Descarga el estado de cuenta en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
+        ('estado-de-cuenta.html', 'Contexto dimensional', '2024, 2026 y 2027 en cuatro dimensiones'),
+        ('estado-de-cuenta-2024-2027.csv', 'Descarga el contexto dimensional en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
                        [_grupo(p['icono'], p['titulo'],
                                ([(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
                                 if p['archivo'] == 'numeros-presupuesto.html' else []) +

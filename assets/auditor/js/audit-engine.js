@@ -27637,7 +27637,7 @@
        cotejo y no coincidian con la Cuenta Publica. Cada cifra trae ahora
        su estado; las pendientes dicen por que y no muestran monto. */
     let html = '<div class="cf-callout" style="margin-bottom:12px;"><strong>Corrección del 10-10-2026.</strong> ' + cf.correccion +
-      ' <a href="estado-de-cuenta.html" target="_top">Ve el Estado de Cuenta Cívico: 2024, 2026 y 2027 comparados ➔</a></div>';
+      ' <a href="estado-de-cuenta.html" target="_top">Ve el Contexto dimensional: 2024, 2026 y 2027 comparados ➔</a></div>';
     if (v === 'social') {
       const mir = cf.evaluacion_social_mir;
       const eco = DB.cuentas_ecologicas;

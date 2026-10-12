@@ -29,6 +29,8 @@ CGPE_URL = 'https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf'
 CGPE = 'SHCP, Criterios Generales de Política Económica 2027 (Gaceta Parlamentaria 7121, 8-09-2026)'
 REVISION = '10-10-2026'
 ARCHIVO = 'estado-de-cuenta.html'
+TITULO = 'Contexto dimensional'
+ICONO = '🧭'
 CSV_ARCHIVO = 'estado-de-cuenta-2024-2027.csv'
 COLUMNAS = [('2024', '2024', 'observado'), ('2026a', '2026', 'aprobado'),
             ('2026e', '2026', 'cierre estimado'), ('2027', '2027', 'propuesto')]
@@ -107,7 +109,7 @@ def construir():
     pres = [comp[i] for i in ('ingresos', 'tributarios', 'petroleros', 'gasto', 'programable', 'participaciones', 'balance')]
     fin = [comp[i] for i in ('costofin', 'primario', 'shrfsp')]
 
-    lectura = ('<div class="ec-lectura"><b>Cómo leer este estado de cuenta.</b> Los años se comparan en <b>por ciento del PIB</b>: '
+    lectura = ('<div class="ec-lectura"><b>Cómo leer estas cifras.</b> Los años se comparan en <b>por ciento del PIB</b>: '
                'un peso de 2024 no vale lo mismo que uno de 2027, y la economía también crece. Junto a cada porcentaje van los '
                'millones de pesos que publica Hacienda. Las columnas no son de la misma etapa: <b>2024 es lo observado</b>, '
                '<b>2026 trae lo aprobado y el cierre que Hacienda estima</b>, y <b>2027 es la propuesta</b> que la Cámara de '
@@ -253,33 +255,54 @@ def construir():
         ['fiscalización', 'Monto por aclarar ante la ASF', 'millones de pesos', '2024', 'cuenta pública', round(t['porAclarar'] / 1e6, 1), 'oficial',
          mdb['corto'], 'p. %s' % asf['cp2024']['pagina'], mdb['url'], REVISION],
     ]
-    return {
-        'archivo': ARCHIVO, 'menu': 'Estado de Cuenta Cívico', 'menu_archivo': 'sigue-el-dinero.html',
-        'padre': ('sigue-el-dinero.html', 'Números'), 'icono': '🧾', 'titulo': 'Estado de Cuenta Cívico',
+    # Contexto dimensional (pedido del autor, 12-10-2026): antes «Estado de
+    # Cuenta Civico», en una sola pagina larga. Ahora su pagina queda con seis
+    # tarjetas y cada dimension vive en la suya, con anterior y siguiente.
+    # Las anclas viejas (#social, #financiera...) llevan a su pagina.
+    lista = [(i, t_.split(' ', 1)[0], t_.split(' ', 1)[1], x, b, 'contexto-dimensional-%s.html' % i) for i, t_, x, b, _ in secciones]
+    portada = {
+        'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'sigue-el-dinero.html',
+        'padre': ('sigue-el-dinero.html', 'Números'), 'icono': ICONO, 'titulo': TITULO,
         # Vive en «Cuentas claras», con su anterior y siguiente (12-10-2026).
         'padre2': ap.CUENTAS_PORTADA[0::2],
         'pie_extra': ap.partes_pie(ap.CUENTAS_PARTES, ARCHIVO, ap.CUENTAS_PORTADA, ap.CUENTAS_FIN),
         'lema': '2024, 2026 y 2027, en las mismas unidades',
-        # «Tu aportacion» (tu estado de cuenta y tu ticket en negativo) vive
-        # solo en Herramientas (pedido del autor, 12-10-2026).
-        'entrada': ('La cuenta pública del país: lo que '
-                    'entra al gobierno, lo que gasta, lo que debe, lo que entrega y lo que se pierde del ambiente, comparando lo que pasó en '
-                    '2024 con lo aprobado para 2026 y lo que se propone para 2027. Cada cifra trae su documento.'),
+        'entrada': ('La cuenta pública del país vista en sus dimensiones: lo que entra al gobierno, lo que gasta, lo que debe, '
+                    'lo que entrega y lo que se pierde del ambiente. Compara lo que pasó en 2024 con lo aprobado para 2026 y lo que '
+                    'se propone para 2027, en las mismas unidades. Cada tarjeta abre su propia página, y cada cifra trae su documento.'),
         # Enlace al estado de cuenta de cada administracion (10-10-2026).
         'antes': ('      <a class="apartado-nota" href="radar-estado-de-cuenta.html">🧾 ¿Buscas el de un sexenio? Expide el estado de cuenta '
                   'de cada administración, con su semáforo de salud financiera y sello de verificación</a>'),
-        'secciones': [{'id': i, 'titulo': t_, 'texto': x, 'bloque': b, 'tarjetas': tj} for i, t_, x, b, tj in secciones],
-    }, filas_csv
+        'pestanas': True, 'pista': 'Cada tarjeta abre su propia página.',
+        'secciones': [{'id': i, 'pagina': arch, 'pestana': (ico, nom, x)} for i, ico, nom, x, b, arch in lista],
+        'hash_a_pagina': dict([(i, arch) for i, _, _, _, _, arch in lista] + [(i + 'Tit', arch) for i, _, _, _, _, arch in lista]),
+    }
+    paginas = [portada]
+    for n, (i, ico, nom, x, b, arch) in enumerate(lista):
+        ant = lista[n - 1] if n else None
+        sig = lista[n + 1] if n + 1 < len(lista) else None
+        paginas.append({
+            'archivo': arch, 'menu': nom, 'menu_archivo': 'sigue-el-dinero.html',
+            'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ap.CUENTAS_PORTADA[0::2], 'padre3': (ARCHIVO, TITULO),
+            'icono': ico, 'lema': TITULO, 'titulo': nom, 'entrada': x,
+            'pie_extra': ap.presupuesto_pie(
+                (ant[5], '← Anterior', ant[1], ant[2]) if ant else (ARCHIVO, '← Volver a', ICONO, TITULO),
+                (sig[5], 'Siguiente →', sig[1], sig[2]) if sig else (ARCHIVO, 'Terminaste · volver a', ICONO, TITULO),
+                (ARCHIVO, '%s %s: sus seis tarjetas' % (ICONO, TITULO)) if ant else None),
+            'secciones': [{'id': i, 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': b}],
+        })
+    return paginas, filas_csv
 
 
 def generar(sello):
-    pag, filas = construir()
-    texto = pagina(pag, sello).replace('\r\n', '\n').replace('\n', '\r\n')
-    open(os.path.join(RAIZ, ARCHIVO), 'wb').write(texto.encode('utf-8'))
+    pags, filas = construir()
+    for pag in pags:
+        texto = pagina(pag, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, pag['archivo']), 'wb').write(texto.encode('utf-8'))
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator='\r\n')
     w.writerow(['dimension', 'concepto', 'unidad', 'año', 'etapa', 'valor', 'estado', 'fuente', 'página', 'url', 'fecha_revision'])
     w.writerows(filas)
     open(os.path.join(RAIZ, CSV_ARCHIVO), 'wb').write(('﻿' + buf.getvalue()).encode('utf-8'))
-    print('estado de cuenta: %s y %s (%d renglones)' % (ARCHIVO, CSV_ARCHIVO, len(filas)))
+    print('contexto dimensional: %s, %d páginas y %s (%d renglones)' % (ARCHIVO, len(pags), CSV_ARCHIVO, len(filas)))
     return 0

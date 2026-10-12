@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 150 |
+| Páginas revisadas | 156 |
 | Páginas que solo redirigen | 12 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
@@ -35,13 +35,19 @@ La Enciclopedia queda fuera porque está congelada.
 | `comunidad-reporta.html` | Algo raro con el dinero público · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `comunidad-tema.html` | Un tema que deberíamos investigar · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `comunidad.html` | Comunidad · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
+| `contexto-dimensional-ambiental.html` | Dimensión ambiental · Auditavisión | apartados.py | 26 | 0 | 4 | 1 | 0 |
+| `contexto-dimensional-descarga.html` | Descarga y metodología · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
+| `contexto-dimensional-financiera.html` | Dimensión financiera · Auditavisión | apartados.py | 26 | 0 | 4 | 1 | 2 |
+| `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 25 | 0 | 3 | 1 | 0 |
+| `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 26 | 0 | 3 | 0 | 1 |
+| `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 26 | 0 | 4 | 0 | 3 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `datos-descargas.html` | Descarga en CSV (abre en Excel) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
-| `estado-de-cuenta.html` | Estado de Cuenta Cívico · Auditavisión | apartados.py | 27 | 0 | 18 | 3 | 6 |
+| `estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Expedientes de casos por aclarar · Auditavisión | expedientes.py | 23 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |

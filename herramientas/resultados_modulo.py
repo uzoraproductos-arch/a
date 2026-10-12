@@ -217,8 +217,8 @@ def construir(base, ref, glos):
 
     correccion = ('<details class="er-correccion"><summary>📝 Corrección del 10-10-2026: por qué hay tantos pendientes</summary>'
                   '<p>%s</p><p>Alcance: %s</p></details>' % (cf['correccion'], cf['alcance']))
-    otra = ('<p class="er-otra">🧾 ¿Quieres ver 2024 junto a 2026 y 2027, en las mismas unidades? '
-            '<a href="estado-de-cuenta.html">Abre el Estado de Cuenta Cívico ➔</a></p>')
+    otra = ('<p class="er-otra">🧭 ¿Quieres ver 2024 junto a 2026 y 2027, en las mismas unidades? '
+            '<a href="estado-de-cuenta.html">Abre el Contexto dimensional ➔</a></p>')
 
     return '''<div class="er" id="erRaiz">
         %s

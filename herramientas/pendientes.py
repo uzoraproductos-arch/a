@@ -74,7 +74,7 @@ PROPIOS = [
      'Obra Pública Abierta (Hacienda)', [('herramienta-megaobras-sector.html', 'Megaobras · Sector e industria')]),
     ('estado-cuenta-pesos-2024', 'Cuenta Pública 2024', 'Pesos de 2024 en el Estado de Cuenta y el subejercicio de 2024',
      'Los Criterios Generales 2027 dan 2024 solo en por ciento del PIB. Los pesos y el subejercicio (modificado menos devengado) están en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja: el portal de Hacienda no se pudo abrir con conexión verificada.',
-     PLATAFORMA, CP2024, 'Cuenta Pública 2024 (Hacienda)', [('estado-de-cuenta.html', 'Estado de Cuenta Cívico')]),
+     PLATAFORMA, CP2024, 'Cuenta Pública 2024 (Hacienda)', [('estado-de-cuenta.html', 'Contexto dimensional')]),
     ('radar-1989', 'Historia', 'Ingresos, gasto, inversión y costo financiero de 1989, el primer año de Salinas',
      'Las Estadísticas Oportunas de Hacienda, que usa el Radar, empiezan en 1990, y el Anexo Estadístico del 5.º Informe en 1995. '
      'La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra. Mientras tanto, Salinas se mide con cinco de sus seis años '
@@ -142,19 +142,19 @@ def recolectar():
                      ', '.join(c['concepto'].lower() for c in pend) + ' y la conciliación presupuestaria-contable',
                      pend[0]['motivo'], PLATAFORMA, pend[0]['url'], 'Cuenta Pública 2024, Tomo II (Hacienda)',
                      [('numeros-estado-de-resultados.html', 'Números · Estado de resultados'),
-                      ('estado-de-cuenta.html', 'Estado de Cuenta Cívico')]))
+                      ('estado-de-cuenta.html', 'Contexto dimensional')]))
     # 2. Programas sociales.
     for m in cf['evaluacion_social_mir']:
         if m['estado_montos'] == 'pendiente':
             out.append(e('prog-montos-' + ('imss-bienestar' if 'IMSS' in m['programa'] else m['clave'].lower()), 'Programas sociales', 'Aprobado y devengado 2024: ' + m['programa'],
                          m['motivo_montos'], PLATAFORMA, m.get('url'), 'Cuenta Pública 2024 (Hacienda)',
                          [('numeros-estado-de-resultados.html', 'Números · Resultados sociales'),
-                          ('estado-de-cuenta.html#social', 'Estado de Cuenta · Social')]))
+                          ('contexto-dimensional-social.html', 'Contexto dimensional · Social')]))
     out.append(e('prog-resultados', 'Programas sociales', 'Propósito, cobertura e impacto de los programas sociales: ' +
                  '; '.join(m['programa'] for m in cf['evaluacion_social_mir']),
                  cf['evaluacion_social_mir'][0]['motivo_resultados'], PLATAFORMA,
                  cf['evaluacion_social_mir'][0].get('url_resultados'), 'Transparencia Presupuestaria (Hacienda)',
-                 [('estado-de-cuenta.html#social', 'Estado de Cuenta · Social')]))
+                 [('contexto-dimensional-social.html', 'Contexto dimensional · Social')]))
     # 3. Huachicol fiscal: estimaciones sin documento de la autoridad.
     hf = d['huachicol_fiscal']
     for i, x in enumerate(hf.get('estimaciones', [])):

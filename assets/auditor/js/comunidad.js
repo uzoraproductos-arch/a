@@ -253,7 +253,7 @@
     }
     if (navigator.share) {
       redes.appendChild(boton('📤 Compartir', 'sz-btn-of', function () {
-        navigator.share({ title: 'Estado de Cuenta Cívico · Auditavisión', text: texto, url: url }).catch(function () {});
+        navigator.share({ title: 'Contexto dimensional · Auditavisión', text: texto, url: url }).catch(function () {});
       }));
     }
     enlace('WhatsApp', 'https://wa.me/?text=' + encodeURIComponent(texto + ' ' + url));
