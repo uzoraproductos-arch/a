@@ -86,6 +86,17 @@ ordena el contenido en capas, no solo la tipografía.
 
 ## 3. Arquitectura de información
 
+> **Sustituido (decisión del autor, 12-10-2026).** Las «tres puertas» (Lee,
+> Explora, Consulta) y sus rutas `/lee/…`, `/explora/…`, `/consulta/…` ya no
+> aplican. El menú es el de cinco pestañas que fijó el autor el 09-10-2026
+> (AGENTS.md §5 bis): **Herramientas, Números, Datos, Aprende y Participa**,
+> con páginas propias que ya existen (`herramienta-*.html`,
+> `sigue-el-dinero.html`, `descarga-los-datos.html`, `aprende.html`…). Donde
+> este plan dice Lee, Explora o Consulta (fase 1b, la portada, la `404.html`,
+> el criterio 11), se lee como esas cinco pestañas. Las tres plantillas de
+> página quedan por revisar contra lo ya construido. Lo de abajo se conserva
+> como registro.
+
 ```
                            PORTADA (tres puertas)
                                   │

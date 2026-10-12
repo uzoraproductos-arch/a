@@ -83,6 +83,12 @@ guardada en `herramientas/guardia_linea_base.json`. En un celular de 390 px:
 
 ## 3. Nombres de secciones y rutas
 
+> **Resuelto el 12-10-2026: se retiran las tres puertas.** El autor aprobó
+> que el menú de cinco pestañas del 09-10-2026 (Herramientas, Números, Datos,
+> Aprende y Participa) sustituya a Lee / Explora / Consulta y a sus rutas.
+> Las dos casillas de abajo quedan sin efecto. Las propuestas 1, 2 y 4 siguen
+> esperando aprobación.
+
 - [ ] **Las tres puertas y Participa:**
   - **Lee:** reportajes para leer.
   - **Explora:** herramientas que se usan.
