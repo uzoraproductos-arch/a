@@ -2137,21 +2137,14 @@ RADAR_PARTES = [
 
 
 # La descripcion narrativa de cada tarjeta en la portada del Radar
-# (pedido del autor, 12-10-2026). Resume lo que hay en su pagina, sin cifras.
+# (pedido del autor, 12-10-2026): una frase corta, de unas dos lineas, sin cifras.
 RADAR_NARRATIVA = {
-    'hoy': ('Empieza por el año que corre: cuánto se aprobó gastar y en qué. Después, expide el estado de cuenta '
-            'de un sexenio, una diputación, el Senado o la Suprema Corte, con su semáforo y su sello.'),
-    'tablero': ('Escoge un gobierno y ponlo frente a los demás, desde 1989: cuánto entró, cuánto invirtió, cuánto costó '
-                'y qué deuda recibió y entregó. Tú decides si lo ves en pesos de entonces, de hoy, en dólares o en euros.'),
-    'peso': ('¿Cuánto valía tu dinero en otro sexenio? Sigue al peso frente a la inflación, el dólar y el euro, '
-             'y usa la máquina del tiempo para llevar cualquier cantidad de un año a otro.'),
-    'reloj': ('Pon a correr el contador de una administración y mira, segundo a segundo y al ritmo promedio de su sexenio, '
-              'lo que entró, lo que gastó, lo que invirtió, lo que pagó de intereses y lo que creció la deuda. '
-              'Es una equivalencia para dimensionar, no dinero moviéndose hoy.'),
-    'duelo': ('Dos administraciones frente a frente, medidas con la misma vara y los mismos documentos. '
-              'Aquí no hay ganador: los números dicen cuánto y el juicio es tuyo.'),
-    'lectura': ('Antes de sacar conclusiones, conoce las reglas del juego: qué mide cada cifra, de qué serie oficial '
-                'sale y qué no se puede concluir con ella.'),
+    'hoy': 'El presupuesto de este año y el estado de cuenta de cada cargo.',
+    'tablero': 'Cada gobierno desde 1989, comparado con los demás.',
+    'peso': 'Cuánto ha valido tu dinero frente al dólar y el euro.',
+    'reloj': 'Mira correr, segundo a segundo, el dinero de cada sexenio.',
+    'duelo': 'Dos gobiernos frente a frente; el juicio es tuyo.',
+    'lectura': 'Qué mide cada cifra y de dónde sale.',
 }
 
 # El semaforo de la salud financiera (decision del autor, 10-10-2026): un
