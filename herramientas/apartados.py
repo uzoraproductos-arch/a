@@ -442,8 +442,7 @@ APARTADOS = [
                           'proyección de 2027, sexenio por sexenio; pulsa «Contabilizar» y mírala crecer. La segunda, la rendición: al '
                           'año siguiente el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. '
                           'Abajo, lo que se gastó de verdad, lo que quedó por aclarar y el balance de todo el recorrido.'),
-                'ayer': ('La sección 4 del capítulo 7 (p. 104) explica la Ley General de Deuda Pública y su Gráfica 1 sigue la deuda externa de 1988 a 1994, en dólares.',
-                         'La misma ley se llama hoy <b>Ley Federal de Deuda Pública</b> (decreto del DOF del 27 de abril de 2016). Y la deuda se mide con un indicador más amplio, el saldo histórico de los requerimientos financieros del sector público (SHRFSP), que Hacienda publica desde 2000.'),
+                # Su «Ayer y hoy» lo cuentan sus paginas de la deuda (12-10-2026).
                 'bloque': ('<div class="dt" id="deudaTiempo">\n'
                            '          <noscript><p>La línea de tiempo necesita JavaScript. La serie, con sus fuentes, está en el auditor.</p></noscript>\n'
                            '        </div>'),
@@ -4036,46 +4035,85 @@ GASTO_PARTES = [
 ]
 
 
-def gasto_portada(p, tarjetas):
-    """La pagina de «Gasto publico», solo con sus nueve tarjetas."""
-    p.update({'pestanas': True, 'pista': 'Cada tarjeta abre su propia página.', 'scripts': [], 'pie_extra': '',
-              'entrada': ('La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
-                          'Arriba, cómo se aprueba y cómo se reparte; abajo, cada desglose. Cada tarjeta abre su propia página.')})
+# «Cuentas claras» en tarjetas (pedido del autor, 12-10-2026), como «Gasto
+# publico»: la grafica de la deuda se parte en tres paginas; el estado de
+# resultados y el Estado de Cuenta Civico se quedan (no hay otro igual en la
+# plataforma); y las tres que ya son herramientas van en su grupo, a su
+# pagina en Herramientas, sin copiarlas aqui.
+CUENTAS_GRUPOS = {'debe': '📉 Lo que se debe', 'revisa': '🔍 Lo que se gastó y el balance',
+                  'herr': '🧰 Viven en Herramientas: abren allá'}
+CUENTAS_PARTES = [
+    ('dtTiempo', '📈', 'numeros-cuentas-deuda-en-el-tiempo.html', 'La deuda en el tiempo', 'De 1994 a 2027, sexenio por sexenio, con su contador',
+     'La deuda a través del tiempo',
+     'Lo que el país debe, de 1994 a la proyección de 2027, como parte del PIB o en billones de pesos. Pulsa «Contabilizar» y mírala crecer, recorre los años o toca un sexenio.', 'debe'),
+    ('dtReglas', '⚖️', 'numeros-cuentas-quien-autoriza-la-deuda.html', '¿Quién autoriza la deuda?', 'El Congreso da las bases y la Ley de Ingresos pone el tope',
+     '¿Quién autoriza la deuda?',
+     'Tres reglas sostienen cada peso que se pide prestado: las bases que da el Congreso, el tope de cada año en la Ley de Ingresos y la ley con que Hacienda la contrata.', 'debe'),
+    ('dtAntes', '👑', 'numeros-cuentas-antes-de-1994.html', 'Antes de 1994', 'El Porfiriato y la deuda externa de 1988 a 1994',
+     'Antes de la serie: el Porfiriato y la deuda externa de 1988 a 1994',
+     'Lo que hay antes de la serie comparable: el primer superávit del Porfiriato y la deuda externa que seguía el libro de 1995, cotejada con Banxico.', 'debe'),
+    ('eb-cuenta-federal', '📒', 'numeros-estado-de-resultados.html', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio',
+     None, None, 'revisa'),
+    ('estado-de-cuenta', '🧾', 'estado-de-cuenta.html', 'Estado de Cuenta Cívico', '2024 frente a 2026 y 2027, en las mismas unidades', None, None, 'revisa'),
+    ('asf', '🔍', 'herramienta-inspector-asf.html', 'Qué encontró la ASF', 'Auditorías y lo que quedó por aclarar en 2024', None, None, 'herr'),
+    ('expedientes', '🗂️', 'expedientes.html', 'Expedientes de casos por aclarar', 'Los casos que la Auditoría Superior dejó abiertos', None, None, 'herr'),
+    ('reloj', '⏱️', 'herramienta-calculadora-reloj.html', 'El reloj de la deuda', 'Lo que se debe y se paga por segundo, en vivo', None, None, 'herr'),
+]
+# Paginas que una tarjeta abre pero que no entran en la fila de anterior y
+# siguiente: son de Herramientas y tienen su propio pie.
+FUERA_DE_FILA = {'simulador-presupuesto.html'}
+
+
+def partes_portada(p, partes, grupos, entrada, extra_hash=()):
+    """Una parte de Numeros queda solo con tarjetas, en grupos con su titulo
+    (Gasto publico y Cuentas claras, 12-10-2026); cada una abre su pagina."""
+    p.update({'pestanas': True, 'pista': 'Cada tarjeta abre su propia página.', 'scripts': [], 'pie_extra': '', 'entrada': entrada})
     p['secciones'] = [dict({'id': x[0], 'pagina': x[2], 'pestana': (x[1], x[3], x[4])},
-                           **({'grupo': GASTO_GRUPOS[x[7]]} if i == 0 or GASTO_PARTES[i - 1][7] != x[7] else {}))
-                      for i, x in enumerate(GASTO_PARTES)]
+                           **({'grupo': grupos[x[7]]} if i == 0 or partes[i - 1][7] != x[7] else {}))
+                      for i, x in enumerate(partes)]
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
-    p['hash_a_pagina'] = dict([(x[0], x[2]) for x in GASTO_PARTES[:4]] + [(x[0] + 'Tit', x[2]) for x in GASTO_PARTES[:4]] +
-                              [('gpContar', GASTO_PARTES[1][2]), ('gpMonto', GASTO_PARTES[2][2]), ('gpRep', GASTO_PARTES[2][2])])
+    nuevas = [x for x in partes if x[5]]
+    p['hash_a_pagina'] = dict([(x[0], x[2]) for x in nuevas] + [(x[0] + 'Tit', x[2]) for x in nuevas] + list(extra_hash))
 
 
-def gasto_paginas(html):
-    """Las cuatro paginas nuevas de «Gasto publico»."""
-    out = []
-    for pid, ico, archivo, corto, _, titulo, entrada, _ in GASTO_PARTES[:4]:
-        out.append({
-            'archivo': archivo, 'menu': corto, 'menu_archivo': 'sigue-el-dinero.html',
-            'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-gasto-publico.html', 'Gasto público'),
-            'icono': ico, 'lema': 'Gasto público', 'titulo': titulo, 'entrada': entrada,
-            'estilos': ['numeros.css'], 'scripts': ['gasto-publico.js'] if pid != 'gpTres' else [],
-            'secciones': [{'id': pid + '-pag', 'titulo': titulo, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': html[pid]}],
-        })
-    return out
+def partes_paginas(partes, html, padre2, lema, scripts):
+    """Las paginas nuevas de una parte (las que traen titulo y entrada)."""
+    return [{
+        'archivo': archivo, 'menu': corto, 'menu_archivo': 'sigue-el-dinero.html',
+        'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': padre2,
+        'icono': ico, 'lema': lema, 'titulo': titulo, 'entrada': entrada,
+        'estilos': ['numeros.css'], 'scripts': scripts.get(pid, []),
+        'secciones': [{'id': pid + '-pag', 'titulo': titulo, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': html[pid]}],
+    } for pid, ico, archivo, corto, _, titulo, entrada, _ in partes if titulo]
 
 
-def gasto_pies():
-    """Anterior y siguiente por las ocho paginas de «Gasto publico» (el
-    simulador de Herramientas no entra en la fila: tiene su propio pie)."""
-    fila = [x for x in GASTO_PARTES if x[2] != 'simulador-presupuesto.html']
+def partes_fila(partes):
+    return [x for x in partes if x[7] != 'herr' and x[2] not in FUERA_DE_FILA]
+
+
+def partes_pie(partes, archivo, portada, fin):
+    """Anterior y siguiente de `archivo` en la fila de su parte. `portada` es
+    (archivo, icono, nombre) de la pagina de tarjetas; `fin`, el paso que
+    sigue a la ultima."""
+    fila = partes_fila(partes)
+    i = [x[2] for x in fila].index(archivo)
+    ant = fila[i - 1] if i else None
+    sig = fila[i + 1] if i + 1 < len(fila) else None
+    return presupuesto_pie(
+        (ant[2], '← Anterior', ant[1], ant[3]) if ant else (portada[0], '← Volver a', portada[1], portada[2]),
+        (sig[2], 'Siguiente →', sig[1], sig[3]) if sig else fin,
+        (portada[0], '%s %s: sus %s tarjetas' % (portada[1], portada[2], {8: 'ocho', 9: 'nueve'}.get(len(partes), len(partes)))) if ant else None)
+
+
+def partes_pies(partes, portada, fin):
     por = {q['archivo']: q for q in NUMEROS_PAGINAS}
-    arriba = ('numeros-gasto-publico.html', '🏛️ Gasto público: sus nueve tarjetas')
-    for i, x in enumerate(fila):
-        ant = fila[i - 1] if i else None
-        sig = fila[i + 1] if i + 1 < len(fila) else None
-        por[x[2]]['pie_extra'] = presupuesto_pie(
-            (ant[2], '← Anterior', ant[1], ant[3]) if ant else ('numeros-gasto-publico.html', '← Volver a', '🏛️', 'Gasto público'),
-            (sig[2], 'Siguiente →', sig[1], sig[3]) if sig else presupuesto_siguiente_parte('gasta'),
-            arriba if ant else None)
+    for x in partes_fila(partes):
+        if x[2] in por:  # estado-de-cuenta.html lo pone su propio generador
+            por[x[2]]['pie_extra'] = partes_pie(partes, x[2], portada, fin)
+
+
+CUENTAS_PORTADA = ('numeros-cuentas-claras.html', '⚖️', 'Cuentas claras')
+CUENTAS_FIN = ('sigue-el-dinero.html', 'Terminaste · volver a', '💰', 'Números')
 
 
 def egreso_pagina(x, n, lista, total, refs, glosario):
@@ -4185,9 +4223,10 @@ def numeros_preparar():
         sec.pop('num', None)
         # «Presupuesto» y «Baja al territorio» ya no llevan la nota del
         # libro: vive en el Diccionario (pedidos del autor, 11-10-2026).
-        # Ni «Gasto publico» (12-10-2026): su «Ayer y hoy» paso a las
-        # Preguntas frecuentes.
-        con_libro = pid not in ('origen', 'baja', 'gasta')
+        # Ni «Gasto publico» ni «Cuentas claras» (12-10-2026): el «Ayer y hoy»
+        # del primero paso a las Preguntas frecuentes; el del segundo ya lo
+        # cuentan sus paginas «Antes de 1994» y «¿Quien autoriza la deuda?».
+        con_libro = False
         if con_libro:
             p.update(comun)
         p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': con_libro, 'secciones': [sec]})
@@ -4204,13 +4243,21 @@ def numeros_preparar():
             p['pie_extra'] = ''
         if pid == 'gasta':
             # Solo sus tarjetas, en dos grupos; cada una abre su pagina
-            # (pedido del autor, 12-10-2026). gasto_paginas() arma las cuatro
+            # (pedido del autor, 12-10-2026). partes_paginas() arma las cuatro
             # nuevas; las cinco de desglose ya la tenian.
-            gasto_portada(p, sec['tarjetas'])
+            partes_portada(p, GASTO_PARTES, GASTO_GRUPOS,
+                           'La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
+                           'Arriba, cómo se aprueba y cómo se reparte; abajo, cada desglose. Cada tarjeta abre su propia página.',
+                           [('gpContar', GASTO_PARTES[1][2]), ('gpMonto', GASTO_PARTES[2][2]), ('gpRep', GASTO_PARTES[2][2])])
             p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
                            '<a href="herramienta-megaobras.html">Herramientas · Megaobras</a> y <a href="herramienta-ambiente.html">Herramientas · Costo ambiental</a>.</p>')
         if pid == 'cuentas':
-            p['scripts'] = ['deuda-tiempo.js']
+            # Solo sus tarjetas, en tres grupos (pedido del autor, 12-10-2026).
+            partes_portada(p, CUENTAS_PARTES, CUENTAS_GRUPOS,
+                           'El recorrido se cierra con dos cuentas: lo que el país debe, sexenio por sexenio, y la rendición, '
+                           'cuando el gobierno entrega la Cuenta Pública y la Auditoría Superior de la Federación la revisa. '
+                           'Cada tarjeta abre su propia página; las de abajo son herramientas y abren en Herramientas.',
+                           [('deudaTiempo', CUENTAS_PARTES[0][2])])
             # El cierre del recorrido: «¿Y a ti, cuanto te toca?».
             p['cierre'] = numeros_cierre()
         for t in sec['tarjetas']:
@@ -4251,8 +4298,14 @@ def numeros_preparar():
             NUMEROS_PAGINAS[-1]['estilos'] = NUMEROS_PAGINAS[-1]['estilos'] + ['radar.css']
         if m[0] == 'proyeccion2027':
             NUMEROS_PAGINAS.extend(paquete_paginas(NUMEROS_PAGINAS[-1], pm.paquete_partes(base, ref), pm.PE_PARTES))
-    NUMEROS_PAGINAS.extend(gasto_paginas(gasto_html))
-    gasto_pies()
+    NUMEROS_PAGINAS.extend(partes_paginas(GASTO_PARTES, gasto_html, ('numeros-gasto-publico.html', 'Gasto público'), 'Gasto público',
+                                          {'gpAprueba': ['gasto-publico.js'], 'gpReparte': ['gasto-publico.js'], 'gpFuera': ['gasto-publico.js']}))
+    partes_pies(GASTO_PARTES, ('numeros-gasto-publico.html', '🏛️', 'Gasto público'), presupuesto_siguiente_parte('gasta'))
+    deuda = {pid: '<div class="dt" id="deudaTiempo" data-parte="%s">\n          <noscript><p>%s necesita JavaScript.</p></noscript>\n        </div>' % (dp, q)
+             for pid, dp, q in (('dtTiempo', 'tiempo', 'La línea de tiempo'), ('dtReglas', 'reglas', 'Esta página'), ('dtAntes', 'antes', 'Esta página'))}
+    NUMEROS_PAGINAS.extend(partes_paginas(CUENTAS_PARTES, deuda, CUENTAS_PORTADA[0::2], 'Cuentas claras',
+                                          {k: ['deuda-tiempo.js'] for k in deuda}))
+    partes_pies(CUENTAS_PARTES, CUENTAS_PORTADA, CUENTAS_FIN)
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
@@ -4586,6 +4639,7 @@ def indice():
                                 [(egreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['egresos']] +
                                 [(x[2], x[3], '') for x in GASTO_PARTES[4:]]
                                 if p['archivo'] == 'numeros-gasto-publico.html' else []) +
+                               ([(x[2], x[3], '') for x in CUENTAS_PARTES] if p['archivo'] == 'numeros-cuentas-claras.html' else []) +
                                [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s.get('tarjetas', [])],
                                p['archivo'])
                         for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])

@@ -23,6 +23,7 @@ import json
 import os
 
 from apartados import RAIZ, pagina
+import apartados as ap
 
 CGPE_URL = 'https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf'
 CGPE = 'SHCP, Criterios Generales de Política Económica 2027 (Gaceta Parlamentaria 7121, 8-09-2026)'
@@ -263,6 +264,9 @@ def construir():
     return {
         'archivo': ARCHIVO, 'menu': 'Estado de Cuenta Cívico', 'menu_archivo': 'sigue-el-dinero.html',
         'padre': ('sigue-el-dinero.html', 'Números'), 'icono': '🧾', 'titulo': 'Estado de Cuenta Cívico',
+        # Vive en «Cuentas claras», con su anterior y siguiente (12-10-2026).
+        'padre2': ap.CUENTAS_PORTADA[0::2],
+        'pie_extra': ap.partes_pie(ap.CUENTAS_PARTES, ARCHIVO, ap.CUENTAS_PORTADA, ap.CUENTAS_FIN),
         'lema': '2024, 2026 y 2027, en las mismas unidades',
         'entrada': ('Dos vistas de la misma cuenta. <b>Tu aportación</b>: lo que tú pagas y a dónde va. <b>La cuenta pública</b>: lo que '
                     'entra al gobierno, lo que gasta, lo que debe, lo que entrega y lo que se pierde del ambiente, comparando lo que pasó en '

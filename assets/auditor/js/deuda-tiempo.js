@@ -14,6 +14,10 @@
 
   var raiz = document.getElementById('deudaTiempo');
   if (!raiz) return;
+  /* Cuentas claras en tarjetas (12-10-2026): cada pagina pide su parte con
+     data-parte: «tiempo» (la grafica), «antes» (Porfiriato y el libro) o
+     «reglas» (quien autoriza la deuda). Sin el atributo, todo junto. */
+  var parte = raiz.getAttribute('data-parte') || 'todo';
 
   /* ---------- Fuentes ---------- */
   var F = {
@@ -432,6 +436,32 @@
       '<p class="dt-leyenda"><span class="dt-lb-muestra ok"></span> Verificado en Banxico ' + chip('oficial') + ' <span class="dt-lb-muestra"></span> Cifra del libro, por cotejar ' + chip('pendiente') + '</p>';
   }
 
+  var porfiriato = '<article class="dt-antes-t">' +
+        '<h4>👑 Antes: el Porfiriato</h4>' +
+        '<p>Con José Yves Limantour en Hacienda, el ejercicio 1894-1895 cerró con el primer superávit de la vida independiente del país, y en 1899 se consolidó la deuda externa en bonos colocados en Londres, Berlín y París.</p>' +
+        '<p>' + chip('pendiente') + ' Las cifras de esa época vienen de reconstrucciones historiográficas y todavía no tienen su fuente primaria en el auditor, así que no las mezclamos con la serie de 1994 a 2027.</p>' +
+        '<a class="dt-antes-link" href="glosario.html">Los conceptos de la deuda, en el glosario ➔</a>' +
+      '</article>';
+  var delLibro = '<article class="dt-antes-t">' +
+        '<h4>📘 Lo que mostraba el libro (1995)</h4>' +
+        '<p>La Gráfica 1 del capítulo 7 seguía la deuda externa del sector público, en miles de millones de dólares, de 1988 a 1994.</p>' +
+        libro() +
+        '<p class="dt-nota">Banxico reporta 78,747 millones de dólares al cierre de 1993 y 85,436 millones al cierre de 1994 (' + fuente('BANXICO_IA1994_EXT') + '). El libro anota 85.1 para 1994, y donde dice «4.1 millones» de aumento se refiere a miles de millones de dólares.</p>' +
+      '</article>';
+  var lasReglas = '<article class="dt-antes-t">' +
+        '<h4>⚖️ Las reglas: quién autoriza la deuda</h4>' +
+        '<ul class="dt-reglas">' +
+          '<li><b>El Congreso da las bases.</b> Artículo 73, fracción VIII de la Constitución: ningún empréstito puede celebrarse sino para obras que directamente produzcan un incremento en los ingresos públicos, salvo regulación monetaria, refinanciamiento o emergencia.</li>' +
+          '<li><b>Cada año pone un tope.</b> La Ley de Ingresos fija el monto de endeudamiento neto que se autoriza (art. 2o. en la de 2026).</li>' +
+          '<li><b>Hacienda la contrata.</b> Lo regula la Ley Federal de Deuda Pública. El libro la llama <em>Ley General de Deuda Pública</em>: así se llamó desde 1976 hasta que un decreto del 27 de abril de 2016 cambió su nombre.</li>' +
+        '</ul>' +
+        '<a class="dt-antes-link" href="https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_de_Deuda_Publica.pdf" target="_blank" rel="noopener noreferrer">Ley Federal de Deuda Pública (Cámara de Diputados) ↗</a>' +
+      '</article>';
+  if (parte === 'antes' || parte === 'reglas') {
+    raiz.innerHTML = '<div class="dt-antes dt-antes-sola">' + (parte === 'antes' ? porfiriato + delLibro : lasReglas) + '</div>';
+    return;
+  }
+
   /* ---------- Armado ---------- */
   raiz.innerHTML =
     '<div class="dt-mandos">' +
@@ -454,30 +484,8 @@
     }).join('') + '</div>' +
     '<div class="dt-ficha" hidden aria-live="polite"></div>' +
     '<details class="dt-detalle"><summary>📋 Ver la serie completa, año por año, con su documento</summary>' + tabla() +
-      '<p class="dt-nota">Cada año viene de la publicación oficial más reciente que encontramos. Cuando el INEGI revisa el PIB, el porcentaje cambia aunque la deuda en pesos sea la misma: por eso algunos años muestran la cifra que se publicó antes. Los pesos son de cada año, sin ajustar por inflación.</p></details>' +
-    '<div class="dt-antes">' +
-      '<article class="dt-antes-t">' +
-        '<h4>👑 Antes: el Porfiriato</h4>' +
-        '<p>Con José Yves Limantour en Hacienda, el ejercicio 1894-1895 cerró con el primer superávit de la vida independiente del país, y en 1899 se consolidó la deuda externa en bonos colocados en Londres, Berlín y París.</p>' +
-        '<p>' + chip('pendiente') + ' Las cifras de esa época vienen de reconstrucciones historiográficas y todavía no tienen su fuente primaria en el auditor, así que no las mezclamos con la serie de arriba.</p>' +
-        '<a class="dt-antes-link" href="glosario.html">Los conceptos de la deuda, en el glosario ➔</a>' +
-      '</article>' +
-      '<article class="dt-antes-t">' +
-        '<h4>📘 Lo que mostraba el libro (1995)</h4>' +
-        '<p>La Gráfica 1 del capítulo 7 seguía la deuda externa del sector público, en miles de millones de dólares, de 1988 a 1994.</p>' +
-        libro() +
-        '<p class="dt-nota">Banxico reporta 78,747 millones de dólares al cierre de 1993 y 85,436 millones al cierre de 1994 (' + fuente('BANXICO_IA1994_EXT') + '). El libro anota 85.1 para 1994, y donde dice «4.1 millones» de aumento se refiere a miles de millones de dólares.</p>' +
-      '</article>' +
-      '<article class="dt-antes-t">' +
-        '<h4>⚖️ Las reglas: quién autoriza la deuda</h4>' +
-        '<ul class="dt-reglas">' +
-          '<li><b>El Congreso da las bases.</b> Artículo 73, fracción VIII de la Constitución: ningún empréstito puede celebrarse sino para obras que directamente produzcan un incremento en los ingresos públicos, salvo regulación monetaria, refinanciamiento o emergencia.</li>' +
-          '<li><b>Cada año pone un tope.</b> La Ley de Ingresos fija el monto de endeudamiento neto que se autoriza (art. 2o. en la de 2026).</li>' +
-          '<li><b>Hacienda la contrata.</b> Lo regula la Ley Federal de Deuda Pública. El libro la llama <em>Ley General de Deuda Pública</em>: así se llamó desde 1976 hasta que un decreto del 27 de abril de 2016 cambió su nombre.</li>' +
-        '</ul>' +
-        '<a class="dt-antes-link" href="https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_de_Deuda_Publica.pdf" target="_blank" rel="noopener noreferrer">Ley Federal de Deuda Pública (Cámara de Diputados) ↗</a>' +
-      '</article>' +
-    '</div>';
+      '<p class="dt-nota">Cada año viene de la publicación oficial más reciente que encontramos. Cuando el INEGI revisa el PIB, el porcentaje cambia aunque la deuda en pesos sea la misma: por eso algunos años muestran la cifra que se publicó antes. Los pesos son de cada año, sin ajustar por inflación.</p></details>'
+    + (parte === 'todo' ? '<div class="dt-antes">' + porfiriato + delLibro + lasReglas + '</div>' : '');
 
   raiz.querySelector('.dt-btn-contar').addEventListener('click', contabilizar);
   raiz.querySelector('.dt-rango').addEventListener('input', function (e) { irAnio(parseInt(e.target.value, 10)); });
