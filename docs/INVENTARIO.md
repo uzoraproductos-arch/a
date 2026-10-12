@@ -10,7 +10,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Páginas revisadas | 156 |
 | Páginas que solo redirigen | 12 |
 | Enlaces internos a archivos que no existen | 0 |
-| Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
+| Módulos del motor que se abren desde páginas (`?ir=`) | 6 destinos |
 
 ## Páginas
 
@@ -130,12 +130,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-ingreso-venta-de-bienes-y-servicios.html` | Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE) · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 0 |
 | `numeros-la-deuda.html` | Se paga lo que se debe · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-las-32-entidades.html` | Las 32 entidades: del peso federal al estatal · Auditavisión | apartados.py | 40 | 0 | 3 | 2 | 0 |
-| `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 27 | 1 | 0 | 0 | 0 |
-| `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 27 | 1 | 0 | 0 | 0 |
+| `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 48 | 0 | 32 | 17 | 4 |
+| `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 35 | 0 | 0 | 4 | 1 |
 | `numeros-los-16-origenes.html` | Los 16 orígenes del ingreso · Auditavisión | apartados.py | 44 | 0 | 2 | 3 | 0 |
 | `numeros-los-municipios.html` | Los 2,479 municipios: predial y transferencias · Auditavisión | apartados.py | 38 | 0 | 3 | 4 | 1 |
 | `numeros-mapa-del-gasto-federalizado.html` | El mapa del gasto federalizado · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 0 |
-| `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 27 | 1 | 0 | 0 | 0 |
+| `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 35 | 0 | 3 | 10 | 0 |
 | `numeros-paquete-2027-cifras.html` | Cómo se ve 2027 · Auditavisión | apartados.py | 29 | 0 | 1 | 0 | 0 |
 | `numeros-paquete-2027-colchon.html` | Colchón y pasivos · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `numeros-paquete-2027-facultad.html` | Con qué facultad · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
@@ -148,14 +148,14 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-paquete-2027-simulador.html` | Simulador · Auditavisión | apartados.py | 28 | 0 | 0 | 1 | 0 |
 | `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 27 | 1 | 0 | 0 | 0 |
+| `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 40 | 0 | 3 | 3 | 0 |
 | `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 81 | 0 | 0 | 0 | 47 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 82 | 0 | 0 | 0 | 48 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
@@ -206,10 +206,9 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 | `ambiente` | 12 |
 | `megaobras` | 12 |
 | `calculadora` | 9 |
-| `poderes` | 7 |
-| `presupuesto` | 6 |
 | `nota` | 1 |
+| `poderes` | 1 |
 
 ## Registro de pendientes
 
-46 fichas, cada una con su porqué, su responsable y su enlace oficial.
+47 fichas, cada una con su porqué, su responsable y su enlace oficial.

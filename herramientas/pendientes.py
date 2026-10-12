@@ -125,6 +125,11 @@ PROPIOS = [
     ('fonden-2021-2025', 'Desastres', 'Fondo de Desastres Naturales aprobado en los Presupuestos 2021 a 2025',
      'Los Presupuestos de esos años están publicados; la plataforma aún no integra el renglón del Ramo 23.',
      PLATAFORMA, 'https://www.diputados.gob.mx/LeyesBiblio/', 'Leyes federales (Cámara de Diputados)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
+     'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
+     'Quedan como pendientes hasta integrar el documento.',
+     PLATAFORMA, 'https://www.oecd.org/en/topics/tax-revenues.html', 'Estadísticas tributarias (OCDE)',
+     [('numeros-lo-que-la-cifra-no-dice.html', 'Números · Lo que la cifra grande no dice')]),
 ]
 
 
@@ -233,7 +238,7 @@ def recolectar():
             out.append(e('poderes-%s-%d' % (k, i), 'Poderes', t,
                          'No se calcula dividiendo el presupuesto entre el número de órganos o de personas: ese reparto no es un dato. '
                          'Hace falta que el poder publique el costo desglosado, o integrar el documento que lo trae.',
-                         PLATAFORMA, url, 'Documento oficial del poder', [('index.html?ir=poderes', 'Lo que cuestan los Poderes')]))
+                         PLATAFORMA, url, 'Documento oficial del poder', [('numeros-lo-que-cuestan-los-poderes.html#' + ('pd-judicial' if k == 'judicial' else 'pd-congreso'), 'Lo que cuestan los Poderes')]))
     amb = d['ambiente']
     for i, t in enumerate(amb.get('pendientes', [])):
         quien = 'INEGI (publica cada diciembre)' if 'diciembre' in t else PLATAFORMA

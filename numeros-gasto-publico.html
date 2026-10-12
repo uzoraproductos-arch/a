@@ -20,11 +20,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261012t">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261012t">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261012t">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261012t">
-  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261012t">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261012u">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261012u">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261012u">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261012u">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261012u">
   <script>(function () { var m = {"gpAprueba": "numeros-gasto-quien-lo-aprueba.html", "gpReparte": "numeros-gasto-simulador-contable.html", "gpFuera": "numeros-gasto-si-fuera-de.html", "gpTres": "numeros-gasto-tres-presupuestos.html", "gpApruebaTit": "numeros-gasto-quien-lo-aprueba.html", "gpReparteTit": "numeros-gasto-simulador-contable.html", "gpFueraTit": "numeros-gasto-si-fuera-de.html", "gpTresTit": "numeros-gasto-tres-presupuestos.html", "gpContar": "numeros-gasto-simulador-contable.html", "gpMonto": "numeros-gasto-si-fuera-de.html", "gpRep": "numeros-gasto-si-fuera-de.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
   <script>(function () { var m = {"eb-ingresos": "numeros-los-16-origenes.html", "eb-cuanto": "numeros-cuanto-dinero-es.html", "nr-origenes": "numeros-los-16-origenes.html", "eb-equivale": "numeros-a-que-equivale.html", "eb-arquitectura": "numeros-camino-del-dinero.html", "proyeccion2027": "numeros-paquete-2027.html", "poderes": "numeros-lo-que-cuestan-los-poderes.html", "eb-egresos": "numeros-ramos-y-dependencias.html", "eb-salud": "numeros-margen-del-presupuesto.html", "eb-ciegos": "numeros-lo-que-la-cifra-no-dice.html", "eb-cuenta-federal": "numeros-estado-de-resultados.html", "eb-mapa": "numeros-mapa-del-gasto-federalizado.html", "territorio": "numeros-las-32-entidades.html", "municipios": "numeros-los-municipios.html"}, b = new URLSearchParams(location.search).get('abrir'); if (b && m[b]) location.replace(m[b]); })();</script>
 </head>
@@ -168,7 +168,7 @@
       <nav class="apartado-pestanas" aria-label="Los desgloses">
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-reparte" href="simulador-presupuesto.html"><span class="apartado-pestana-ico" aria-hidden="true">🎛️</span><span class="apartado-pestana-tx"><b>Reparte tú el presupuesto</b><small>Arranca en $0, reparte los $10.19 billones y compáralo</small></span></a>
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-poderes" href="numeros-lo-que-cuestan-los-poderes.html"><span class="apartado-pestana-ico" aria-hidden="true">⚖️</span><span class="apartado-pestana-tx"><b>Lo que cuestan el Congreso y la Judicatura</b><small>Presupuesto 2026, gasto auditado 2024 y sueldos netos</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-eb-egresos" href="numeros-ramos-y-dependencias.html"><span class="apartado-pestana-ico" aria-hidden="true">🏢</span><span class="apartado-pestana-tx"><b>En qué se va: ramos y dependencias</b><small>Cuánto recibe cada Secretaría, de la función al programa</small></span></a>
+          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-eb-egresos" href="numeros-ramos-y-dependencias.html"><span class="apartado-pestana-ico" aria-hidden="true">🏢</span><span class="apartado-pestana-tx"><b>En qué se va: ramos y dependencias</b><small>Cuánto recibe cada Secretaría, ramo por ramo</small></span></a>
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-eb-salud" href="numeros-margen-del-presupuesto.html"><span class="apartado-pestana-ico" aria-hidden="true">🌡️</span><span class="apartado-pestana-tx"><b>¿Cuánto margen tiene el presupuesto?</b><small>Lo ya comprometido antes de empezar, en un termostato</small></span></a>
           <a class="apartado-pestana apartado-pestana-pagina" id="pestana-eb-ciegos" href="numeros-lo-que-la-cifra-no-dice.html"><span class="apartado-pestana-ico" aria-hidden="true">🔦</span><span class="apartado-pestana-tx"><b>Lo que la cifra grande no dice</b><small>Cinco lecturas que cambian el sentido del total</small></span></a>
       </nav>
@@ -184,11 +184,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261012t</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261012u</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261012t"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261012t"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261012u"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261012u"></script>
 </body>
 </html>

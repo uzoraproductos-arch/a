@@ -1160,20 +1160,410 @@ window.AUDIT_DB = {
     "puntosCiegos": [
       { "id": "pc-deuda", "titulo": "El presupuesto cuadra porque la deuda cuenta como ingreso",
         "texto": "De los $10.19 billones que la Federaci\u00f3n espera percibir en 2026, $1.47 billones son dinero prestado: el 14.4 por ciento. En el lenguaje contable eso es un ingreso, y por eso ingresos y egresos suman exactamente lo mismo. En el lenguaje corriente es un faltante que se cubre pidiendo, y que alguien pagar\u00e1 despu\u00e9s.",
-        "dato": "14.4% del ingreso total" },
-      { "id": "pc-costofin", "titulo": "Pagar intereses cuesta m\u00e1s que todo el desarrollo econ\u00f3mico",
-        "texto": "El costo financiero de la deuda \u2014solo los intereses, sin amortizar capital\u2014 se lleva alrededor de $1.57 billones. Es m\u00e1s de tres veces lo que el presupuesto entero destina a energ\u00eda, transporte, agricultura, ciencia y tecnolog\u00eda juntos.",
-        "dato": "3.3 veces el gasto en Desarrollo Econ\u00f3mico" },
-      { "id": "pc-margen", "titulo": "Casi la mitad del presupuesto est\u00e1 comprometida antes de empezar",
-        "texto": "Participaciones, costo financiero y adeudos del a\u00f1o anterior suman $3.10 billones que no se deciden cada a\u00f1o: se deben. A eso hay que sumarle pensiones y n\u00f3mina dentro del gasto programable. El margen real de decisi\u00f3n anual es mucho menor que la cifra total que se anuncia.",
-        "dato": "$3.10 billones de gasto no programable" },
+        "dato": "14.4% del ingreso total", "estado": "derivado", "ref": "ref-lif2026" },
+      { "id": "pc-costofin", "titulo": "Los intereses de la deuda cuestan casi lo mismo que todo el desarrollo econ\u00f3mico",
+        "texto": "El costo financiero de la deuda \u2014intereses, comisiones y gastos de la deuda del Gobierno Federal, de Pemex y de la CFE, m\u00e1s el apoyo a ahorradores y deudores de la banca, sin pagar capital\u2014 suma $1,572,073.3 mdp. Es el 92.7 por ciento de lo que el presupuesto entero destina a desarrollo econ\u00f3mico, $1,695,700.0 mdp: energ\u00eda, transporte, agricultura, ciencia y tecnolog\u00eda juntos ($1,572,073.3 \u00f7 $1,695,700.0 = 0.927).",
+        "dato": "92.7% del gasto en Desarrollo Econ\u00f3mico", "estado": "derivado", "ref": "ref-pef2026" },
+      { "id": "pc-margen", "titulo": "Casi un tercio del presupuesto ya est\u00e1 comprometido antes de empezar",
+        "texto": "Participaciones, costo financiero y adeudos del a\u00f1o anterior suman $3,098,974.9 mdp que no se deciden cada a\u00f1o: se deben. Son el 30.4 por ciento del gasto ($3,098,974.9 \u00f7 $10,193,683.7). Y la rigidez no termina ah\u00ed: el propio decreto, en su Anexo 3, prev\u00e9 $8,406,440.2 mdp de gastos obligatorios contando pensiones y jubilaciones, el 82.5 por ciento del total ($8,406,440.2 \u00f7 $10,193,683.7). El margen real de decisi\u00f3n anual es mucho menor que la cifra que se anuncia.",
+        "dato": "30.4% no programable; 82.5% obligatorio con pensiones", "estado": "derivado", "ref": "ref-pef2026" },
       { "id": "pc-dependencia", "titulo": "Los estados administran mucho y recaudan poco",
         "texto": "En 2024, de cada 100 pesos que ingresaron los 31 gobiernos estatales que registra el INEGI, sin contar la deuda, 84.6 llegaron de la Federaci\u00f3n y apenas 14.1 los cobraron ellos mismos. Eso explica por qu\u00e9 la discusi\u00f3n presupuestal local casi siempre trata de c\u00f3mo repartir lo que lleg\u00f3, y casi nunca de cu\u00e1nto se cobra en casa. La Ciudad de M\u00e9xico no figura en esa estad\u00edstica.",
         "dato": "84.6% de dependencia en conjunto (2024)", "estado": "derivado", "ref": "ref-inegi-efipem-estatal" },
       { "id": "pc-predial", "titulo": "El predial mexicano recauda seis veces menos que el promedio de la OCDE",
         "texto": "El impuesto predial es la principal fuente propia del municipio y en M\u00e9xico apenas llega al 0.16 por ciento del PIB, frente al 1.0 por ciento de la OCDE. El eslab\u00f3n que est\u00e1 m\u00e1s cerca del ciudadano es el que menos capacidad tiene de sostenerse solo.",
-        "dato": "0.16% del PIB contra 1.0% de la OCDE" }
+        "dato": "0.16% del PIB contra 1.0% de la OCDE", "estado": "pendiente", "pend": "predial-ocde" }
     ],
+
+    "anexo1PEF2026": {
+        "ejercicio": 2026,
+        "fuente": "Decreto de Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026, Anexo 1. Gasto Neto Total (pesos)",
+        "paginas": "33-34",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf",
+        "refKey": "ref-pef2026",
+        "consultado": "2026-10-12",
+        "gastoNetoTotal": 10193683700000,
+        "neteo": 1553113096246,
+        "notaNeteo": "El decreto resta las aportaciones al ISSSTE y los subsidios, transferencias y apoyos fiscales que el Gobierno Federal da al IMSS, al ISSSTE, a Pemex y a la CFE: sin esa resta, el mismo peso se contaría dos veces, una al salir del ramo y otra al gastarlo la entidad.",
+        "notaSubtotal": "El subtotal de los ramos autónomos que imprime el decreto no incluye al INEGI (Ramo 40) ni al Tribunal Federal de Justicia Administrativa (Ramo 32), que el Anexo 1 lista aparte; sí entran en el gasto neto total.",
+        "grupos": [
+            {
+                "clave": "A",
+                "nombre": "RAMOS AUTÓNOMOS",
+                "ramos": [
+                    {
+                        "ramo": "01",
+                        "nombre": "Poder Legislativo",
+                        "pesos": 17529076499,
+                        "tipo": "Programable",
+                        "unidades": [
+                            {
+                                "nombre": "Cámara de Senadores",
+                                "pesos": 5103817038
+                            },
+                            {
+                                "nombre": "Cámara de Diputados",
+                                "pesos": 9602671330
+                            },
+                            {
+                                "nombre": "Auditoría Superior de la Federación",
+                                "pesos": 2822588131
+                            }
+                        ]
+                    },
+                    {
+                        "ramo": "03",
+                        "nombre": "Poder Judicial",
+                        "pesos": 70005628646,
+                        "tipo": "Programable",
+                        "unidades": [
+                            {
+                                "nombre": "Suprema Corte de Justicia de la Nación",
+                                "pesos": 5208743404
+                            },
+                            {
+                                "nombre": "Órgano de Administración Judicial",
+                                "pesos": 59190814696
+                            },
+                            {
+                                "nombre": "Tribunal de Disciplina Judicial",
+                                "pesos": 1856577669
+                            },
+                            {
+                                "nombre": "Tribunal Electoral del Poder Judicial de la Federación",
+                                "pesos": 3749492877
+                            }
+                        ]
+                    },
+                    {
+                        "ramo": "22",
+                        "nombre": "Instituto Nacional Electoral",
+                        "pesos": 21837221581,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "35",
+                        "nombre": "Comisión Nacional de los Derechos Humanos",
+                        "pesos": 1819769907,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "49",
+                        "nombre": "Fiscalía General de la República",
+                        "pesos": 20240442089,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "40",
+                        "nombre": "Instituto Nacional de Estadística y Geografía",
+                        "pesos": 11807500000,
+                        "tipo": "Programable",
+                        "fueraDeSubtotal": true
+                    },
+                    {
+                        "ramo": "32",
+                        "nombre": "Tribunal Federal de Justicia Administrativa",
+                        "pesos": 3400000000,
+                        "tipo": "Programable",
+                        "fueraDeSubtotal": true
+                    }
+                ],
+                "subtotal": 131432138722
+            },
+            {
+                "clave": "B",
+                "nombre": "RAMOS ADMINISTRATIVOS",
+                "ramos": [
+                    {
+                        "ramo": "02",
+                        "nombre": "Oficina de la Presidencia de la República",
+                        "pesos": 800455608,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "04",
+                        "nombre": "Gobernación",
+                        "pesos": 9959699324,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "05",
+                        "nombre": "Relaciones Exteriores",
+                        "pesos": 9294170690,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "06",
+                        "nombre": "Hacienda y Crédito Público",
+                        "pesos": 26792115351,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "07",
+                        "nombre": "Defensa Nacional",
+                        "pesos": 170753142093,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "08",
+                        "nombre": "Agricultura y Desarrollo Rural",
+                        "pesos": 75836497826,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "09",
+                        "nombre": "Infraestructura, Comunicaciones y Transportes",
+                        "pesos": 153539261639,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "10",
+                        "nombre": "Economía",
+                        "pesos": 3535460234,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "11",
+                        "nombre": "Educación Pública",
+                        "pesos": 523858227933,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "12",
+                        "nombre": "Salud",
+                        "pesos": 66825756831,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "13",
+                        "nombre": "Marina",
+                        "pesos": 65926797533,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "14",
+                        "nombre": "Trabajo y Previsión Social",
+                        "pesos": 28760904563,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "15",
+                        "nombre": "Desarrollo Agrario, Territorial y Urbano",
+                        "pesos": 36290113966,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "16",
+                        "nombre": "Medio Ambiente y Recursos Naturales",
+                        "pesos": 45564073902,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "18",
+                        "nombre": "Energía",
+                        "pesos": 267439114491,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "20",
+                        "nombre": "Bienestar",
+                        "pesos": 674510024515,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "21",
+                        "nombre": "Turismo",
+                        "pesos": 1793473210,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "27",
+                        "nombre": "Anticorrupción y Buen Gobierno",
+                        "pesos": 1743051816,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "31",
+                        "nombre": "Tribunales Agrarios",
+                        "pesos": 895339171,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "36",
+                        "nombre": "Seguridad y Protección Ciudadana",
+                        "pesos": 60110883499,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "37",
+                        "nombre": "Consejería Jurídica del Ejecutivo Federal",
+                        "pesos": 153145398,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "38",
+                        "nombre": "Ciencia, Humanidades, Tecnología e Innovación",
+                        "pesos": 37360832784,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "47",
+                        "nombre": "Entidades no Sectorizadas",
+                        "pesos": 8365533924,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "48",
+                        "nombre": "Cultura",
+                        "pesos": 15082889146,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "54",
+                        "nombre": "Mujeres",
+                        "pesos": 2140988180,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "55",
+                        "nombre": "Agencia de Transformación Digital y Telecomunicaciones",
+                        "pesos": 3852669660,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "56",
+                        "nombre": "Servicios de Salud del Instituto Mexicano del Seguro Social para el Bienestar",
+                        "pesos": 172492400589,
+                        "tipo": "Programable"
+                    }
+                ],
+                "subtotal": 2463677023876
+            },
+            {
+                "clave": "C",
+                "nombre": "RAMOS GENERALES",
+                "ramos": [
+                    {
+                        "ramo": "19",
+                        "nombre": "Aportaciones a Seguridad Social",
+                        "pesos": 1541518693444,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "23",
+                        "nombre": "Provisiones Salariales y Económicas",
+                        "pesos": 167652225093,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "25",
+                        "nombre": "Previsiones y Aportaciones para los Sistemas de Educación Básica, Normal, Tecnológica y de Adultos",
+                        "pesos": 85182409042,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "33",
+                        "nombre": "Aportaciones Federales para Entidades Federativas y Municipios",
+                        "pesos": 1041892906925,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "24",
+                        "nombre": "Deuda Pública",
+                        "pesos": 1297681062923,
+                        "tipo": "No programable"
+                    },
+                    {
+                        "ramo": "28",
+                        "nombre": "Participaciones a Entidades Federativas y Municipios",
+                        "pesos": 1456045894280,
+                        "tipo": "No programable"
+                    },
+                    {
+                        "ramo": "29",
+                        "nombre": "Erogaciones para las Operaciones y Programas de Saneamiento Financiero",
+                        "pesos": 0,
+                        "tipo": "No programable"
+                    },
+                    {
+                        "ramo": "30",
+                        "nombre": "Adeudos de Ejercicios Fiscales Anteriores",
+                        "pesos": 70855700000,
+                        "tipo": "No programable"
+                    },
+                    {
+                        "ramo": "34",
+                        "nombre": "Erogaciones para los Programas de Apoyo a Ahorradores y Deudores de la Banca",
+                        "pesos": 35553400900,
+                        "tipo": "No programable"
+                    }
+                ],
+                "subtotal": 5696382292607
+            },
+            {
+                "clave": "D",
+                "nombre": "ENTIDADES SUJETAS A CONTROL PRESUPUESTARIO DIRECTO",
+                "ramos": [
+                    {
+                        "ramo": "GYN",
+                        "nombre": "Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado",
+                        "pesos": 539020762386,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "GYR",
+                        "nombre": "Instituto Mexicano del Seguro Social",
+                        "pesos": 1590308696623,
+                        "tipo": "Programable"
+                    }
+                ],
+                "subtotal": 2129329459009
+            },
+            {
+                "clave": "E",
+                "nombre": "EMPRESAS PÚBLICAS DEL ESTADO",
+                "ramos": [
+                    {
+                        "ramo": "TYY",
+                        "nombre": "Petróleos Mexicanos",
+                        "pesos": 517362081940,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "TVV",
+                        "nombre": "Comisión Federal de Electricidad",
+                        "pesos": 554567503089,
+                        "tipo": "Programable"
+                    },
+                    {
+                        "ramo": "TYY",
+                        "nombre": "Petróleos Mexicanos · costo financiero",
+                        "pesos": 190838797003,
+                        "tipo": "No programable"
+                    },
+                    {
+                        "ramo": "TVV",
+                        "nombre": "Comisión Federal de Electricidad · costo financiero",
+                        "pesos": 48000000000,
+                        "tipo": "No programable"
+                    }
+                ],
+                "subtotal": 1310768382032
+            }
+        ]
+    },
+
+    "gastosObligatoriosPEF2026": {
+        "ejercicio": 2026,
+        "fuente": "Decreto de Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026, Anexo 3. Gastos obligatorios (millones de pesos)",
+        "paginas": "34-35",
+        "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf",
+        "refKey": "ref-pef2026",
+        "consultado": "2026-10-12",
+        "obligatoriosMdp": 6702281.0,
+        "conPensionesMdp": 8406440.2,
+        "nota": "El artículo 3, fracción III, del decreto remite a este anexo como «el capítulo específico que incorpora las erogaciones correspondientes a los gastos obligatorios». El anexo da solo los dos totales, sin desglose."
+    },
 
     "treemapPEF":     {
         "ejercicio": 2026,

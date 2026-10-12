@@ -397,8 +397,8 @@ APARTADOS = [
                 'tarjetas': [
                     ('🎛️', 'Reparte tú el presupuesto', 'Ponte en el lugar de la Cámara: arranca en $0, reparte los $10.19 billones y compáralo con lo aprobado.', 'simulador-presupuesto.html', None, 'calculadora'),
                     ('⚖️', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos oficiales.', 'numeros-lo-que-cuestan-los-poderes.html', None, 'dinero'),
-                    ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, en bloques proporcionales: de la función al ramo y al programa.', 'numeros-ramos-y-dependencias.html', None, 'dinero'),
-                    ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gasto programable, en un termostato.', 'numeros-margen-del-presupuesto.html', None, 'dinero'),
+                    ('🏢', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría: de los ocho renglones del gasto a los 46 ramos y entidades del decreto, en pesos.', 'numeros-ramos-y-dependencias.html', None, 'dinero'),
+                    ('🌡️', '¿Cuánto margen tiene el presupuesto?', 'Lo que ya está comprometido antes de empezar: deuda, participaciones y gastos obligatorios, en un termostato.', 'numeros-margen-del-presupuesto.html', None, 'dinero'),
                     ('🔦', 'Lo que la cifra grande no dice', 'Cinco lecturas que no aparecen en el anuncio presupuestal y que cambian el sentido del total.', 'numeros-lo-que-la-cifra-no-dice.html', None, 'inspector'),
                 ],
             },
@@ -4022,7 +4022,7 @@ GASTO_PARTES = [
      'El gasto leído en tres renglones, del Estado, nacional y social, más lo que ya está comprometido antes de empezar, con la operación a la vista.', 'como'),
     ('reparte', '🎛️', 'simulador-presupuesto.html', 'Reparte tú el presupuesto', 'Arranca en $0, reparte los $10.19 billones y compáralo', None, None, 'desg'),
     ('poderes', '⚖️', 'numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos', None, None, 'desg'),
-    ('eb-egresos', '🏢', 'numeros-ramos-y-dependencias.html', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, de la función al programa', None, None, 'desg'),
+    ('eb-egresos', '🏢', 'numeros-ramos-y-dependencias.html', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, ramo por ramo', None, None, 'desg'),
     ('eb-salud', '🌡️', 'numeros-margen-del-presupuesto.html', '¿Cuánto margen tiene el presupuesto?', 'Lo ya comprometido antes de empezar, en un termostato', None, None, 'desg'),
     ('eb-ciegos', '🔦', 'numeros-lo-que-la-cifra-no-dice.html', 'Lo que la cifra grande no dice', 'Cinco lecturas que cambian el sentido del total', None, None, 'desg'),
 ]
@@ -4277,10 +4277,17 @@ def numeros_preparar():
                'territorio': lambda: tm.entidades(base, ref, glos),
                'municipios': lambda: tm.municipios(base, ref, glos, RAIZ),
                # El estado de resultados, en pagina propia y sin el motor (12-10-2026).
-               'eb-cuenta-federal': lambda: rm.construir(base, ref, glos)}
+               'eb-cuenta-federal': lambda: rm.construir(base, ref, glos),
+               # Tres desgloses de «Gasto publico», igual (12-10-2026): gasto_modulos.py.
+               'eb-salud': lambda: gm.margen(base, ref, glos),
+               'eb-egresos': lambda: gm.egresos(base, ref, glos),
+               'eb-ciegos': lambda: gm.ciegos(base, ref, glos),
+               'poderes': lambda: pdm.construir(base, ref, glos)}
     import territorio_modulos as tm
     import resultados_modulo as rm
-    guion = {'eb-cuenta-federal': 'resultados.js', 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
+    import gasto_modulos as gm
+    import poderes_modulo as pdm
+    guion = {'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
              'municipios': ['municipios-efipem.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
@@ -4290,6 +4297,8 @@ def numeros_preparar():
         # Las cifras de «Hoy» del Radar, con su contador (12-10-2026), traen sus estilos.
         if m[0] == 'eb-cuanto':
             NUMEROS_PAGINAS[-1]['estilos'] = NUMEROS_PAGINAS[-1]['estilos'] + ['radar.css']
+        if m[0] == 'poderes':
+            NUMEROS_PAGINAS[-1]['estilos'] = NUMEROS_PAGINAS[-1]['estilos'] + ['poderes.css']
         if m[0] == 'proyeccion2027':
             NUMEROS_PAGINAS.extend(paquete_paginas(NUMEROS_PAGINAS[-1], pm.paquete_partes(base, ref), pm.PE_PARTES))
     NUMEROS_PAGINAS.extend(partes_paginas(GASTO_PARTES, gasto_html, ('numeros-gasto-publico.html', 'Gasto público'), 'Gasto público',
