@@ -87,8 +87,15 @@
     }
     document.dispatchEvent(new CustomEvent('apartado:pestana', { detail: { id: pestanaAbierta } }));
   }
+  /* El #ancla de la direccion solo se usa si es un id limpio (letras,
+     numeros, - y _): uno mal formado no debe romper la pagina. */
+  function hashId() {
+    var h;
+    try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; }
+    return /^[A-Za-z0-9_-]+$/.test(h) ? h : '';
+  }
   if (pestanas) {
-    var inicial = decodeURIComponent(location.hash.slice(1));
+    var inicial = hashId();
     /* En las páginas de herramienta (data-primera) la primera pestaña ya
        llega abierta. */
     if (!pestanas.querySelector('[aria-controls="' + inicial + '"]')) {
@@ -115,14 +122,14 @@
       lista[(i + (e.key === 'ArrowRight' ? 1 : lista.length - 1)) % lista.length].focus();
     });
     window.addEventListener('hashchange', function () {
-      var id = decodeURIComponent(location.hash.slice(1));
-      if (pestanas.querySelector('[aria-controls="' + id + '"]')) abrirPestana(id, true);
+      var id = hashId();
+      if (id && pestanas.querySelector('[aria-controls="' + id + '"]')) abrirPestana(id, true);
     });
   }
 
   if (location.hash.length > 1) window.addEventListener('load', function () {
     setTimeout(function () {
-      var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var t = hashId() && document.getElementById(hashId());
       if (!t || !nav) return;
       var y = t.getBoundingClientRect().top + window.pageYOffset - nav.getBoundingClientRect().height - 12;
       window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });

@@ -22980,6 +22980,21 @@
   const DEBATES_SEMBRADOS = ['deb-tren-maya-subsidios', 'deb-scjn-fideicomisos-art127',
     'deb-deuda-cetes-banxico', 'deb-garcia-luna-cnpp'];
 
+  /* Lo que se lee de localStorage se valida antes de pintarse: los campos
+     que van sin escapar (id, postura, color, enlace) solo pasan si tienen
+     la forma que la propia plataforma les da al guardarlos. */
+  function debateValido(d) {
+    const color = c => c === undefined || /^#[0-9a-fA-F]{3,8}$/.test(c);
+    const num = n => n === undefined || typeof n === 'number';
+    /* Un enlace de fuente mal formado se quita; el debate se conserva. */
+    if (d && d.fuente_url && !/^https?:\/\/[^\s"'<>`]+$/.test(d.fuente_url)) d.fuente_url = null;
+    return !!d && /^deb-[0-9]+$/.test(d.id) &&
+      (d.postura === undefined || /^[a-z_-]+$/.test(d.postura)) &&
+      color(d.autor_avatar_color) && num(d.apoyos) && num(d.dias_atras) &&
+      (d.replicas === undefined || (Array.isArray(d.replicas) && d.replicas.every(r =>
+        !!r && /^rep-[0-9]+$/.test(r.id) && color(r.autor_avatar_color) && num(r.dias_atras))));
+  }
+
   function getPortalDebates() {
     let raw = null;
     try { raw = localStorage.getItem('auditavision_foro_debates'); } catch (e) { raw = null; }
@@ -22987,7 +23002,7 @@
       try {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
-          const propios = parsed.filter(d => d && DEBATES_SEMBRADOS.indexOf(d.id) === -1);
+          const propios = parsed.filter(d => debateValido(d) && DEBATES_SEMBRADOS.indexOf(d.id) === -1);
           if (propios.length !== parsed.length) savePortalDebates(propios);
           if (propios.length > 0) return propios;
         }
@@ -24980,7 +24995,8 @@
     /* Se admite #pestana y #pestana/subpestana, para enlazar desde el
        menu de la portada a una subpestana concreta de la Enciclopedia. */
     const initialHash = window.location.hash.replace('#', '');
-    const hashTab = initialHash.split('/')[0], hashSub = initialHash.split('/')[1];
+    const hashTab = initialHash.split('/')[0];
+    const hashSub = /^[A-Za-z0-9_-]+$/.test(initialHash.split('/')[1] || '') ? initialHash.split('/')[1] : '';
     if (hashTab && TAB_METADATA[hashTab]) {
       switchTab(hashTab, true);
       if (hashSub && document.querySelector('.subtab-panel[data-parent="' + hashTab + '"][data-subpanel="' + hashSub + '"]')) {
@@ -25004,7 +25020,7 @@
     window.addEventListener('popstate', function() {
       const partes = window.location.hash.replace('#', '').split('/');
       const tab = TAB_METADATA[partes[0]] ? partes[0] : 'presupuesto';
-      const sub = partes[1];
+      const sub = /^[A-Za-z0-9_-]+$/.test(partes[1] || '') ? partes[1] : '';
       if (tab !== activeTabKey) switchTab(tab, true);
       if (sub && document.querySelector('.subtab-panel[data-parent="' + tab + '"][data-subpanel="' + sub + '"]')) {
         switchSubtab(tab, sub);
