@@ -226,7 +226,8 @@ cualquiera, para verla con `python3 -m http.server`.
 1. **AGENTS.md**, antes de empezar a trabajar:
    - enmendar §1: ramas cortas por fase (D5);
    - en §4, sumar «Reglas de lectura» que se puedan verificar:
-     - nada de emojis en títulos, botones, menús ni rótulos;
+     - ~~nada de emojis en títulos, botones, menús ni rótulos~~ (descartado:
+       el autor decidió conservar los emojis, 12-10-2026);
      - nada de `font-size` en línea;
      - el texto se da formato solo con clases;
      - se le habla al lector de tú;
@@ -247,7 +248,8 @@ cualquiera, para verla con `python3 -m http.server`.
        pantalla, después de abrir el módulo;
      - el tiempo hasta poder usar la página en el Android simulado.
    - Metas **absolutas y escalonadas**:
-     - en la fase 1: texto menor de 12 px ≤ 10 % y 0 emojis en rótulos;
+     - en la fase 1: texto menor de 12 px ≤ 10 % (los emojis ya no tienen
+       meta: se quedan por decisión del autor, 12-10-2026);
      - en la fase 2: las metas completas de §1.
    - Correcciones urgentes de cifras: pueden saltarse la guardia con
      `GUARDIA_OMITIR=motivo`, que queda registrado en el commit.
@@ -274,7 +276,7 @@ desarrollador.
   - sin cinta, y el radar pasa a Explora.
 - **1d · Barrido del motor, la base de datos y el HTML**, un commit por módulo
   (X3):
-  - los emojis salen de los rótulos, donde el dato se genera;
+  - ~~los emojis salen de los rótulos~~ (descartado el 12-10-2026: los emojis se quedan);
   - los `font-size` en línea pasan a clases de la escala;
   - las frases de usted pasan a tú;
   - un solo índice por módulo;

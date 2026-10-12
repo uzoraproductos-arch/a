@@ -183,7 +183,7 @@ Orden acordado: lectura en todo el sitio → módulos en capas → dominio propi
 
 Nada de la fase 1 empieza sin ese visto bueno.
 
-**Estado al 12-10-2026:** el autor aprobó solo la propuesta 3: se retiran las «tres puertas» (Lee / Explora / Consulta) y sus rutas, y manda el menú de cinco pestañas del 09-10. Siguen sin aprobar la 1 (reglas en AGENTS.md, incluida la corrección de §5, que revisa `assets/js` en vez de `assets/auditor/js`), la 2 (escala de letra y fondo sin fotografía) y la 4 (dominio: el autor lo comprará). La línea base de la guardia es del 29-09 y hay que volver a medirla antes de la fase 1.
+**Estado al 12-10-2026:** el autor aprobó la propuesta 3: se retiran las «tres puertas» (Lee / Explora / Consulta) y sus rutas, y manda el menú de cinco pestañas del 09-10. También aprobó la 1, ya aplicada en AGENTS.md: ramas cortas `ux/fase-…` (§1), reglas de lectura (§4, sin la de emojis: el autor decidió conservarlos y la guardia ya no los exige), §5 línea 1 corregida a `assets/auditor/js` y línea 6 con la guardia de legibilidad. Siguen sin aprobar la 2 (escala de letra y fondo sin fotografía) y la 4 (dominio: el autor lo comprará). La línea base de la guardia es del 29-09 y hay que volver a medirla antes de la fase 1.
 
 ## Sistema de marca (`DESIGN.md`), hecho el 29-09-2026
 

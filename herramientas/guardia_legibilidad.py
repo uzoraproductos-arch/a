@@ -4,7 +4,7 @@
 Mide, en un celular simulado (390 x 844), lo mismo que midió la auditoría del
 29-09-2026 (docs/ux/PLAN.md §1) y falla si la plataforma no cumple las metas de
 la fase indicada. Sirve para que ningún cambio, de una persona o de una IA,
-vuelva a achicar la letra o a llenar de emojis los rótulos.
+vuelva a achicar la letra.
 
 Uso:
     python3 herramientas/guardia_legibilidad.py            # fase 0: solo reporta
@@ -50,10 +50,11 @@ VISTAS = [
 ]
 
 # Metas escalonadas (docs/ux/PLAN.md §5, fase 0). None = no se exige en esa fase.
+# Los emojis en rótulos se miden pero no se exigen: el autor decidió
+# conservarlos (12-10-2026).
 METAS = {
     1: {
         "pct_menor_12px": 10,
-        "emojis_en_rotulos": 0,
         "errores_consola": 0,
         "desborde_px": 0,
     },
@@ -61,7 +62,6 @@ METAS = {
         "pct_menor_12px": 2,
         "pct_menor_14px": 10,
         "tamanos_distintos": 8,
-        "emojis_en_rotulos": 0,
         "tocables_menores_44px": 0,
         "titulo_visible_al_abrir": True,
         "errores_consola": 0,

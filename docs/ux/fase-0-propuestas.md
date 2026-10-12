@@ -19,7 +19,12 @@ guardada en `herramientas/guardia_linea_base.json`. En un celular de 390 px:
 
 ## 1. Cambios a AGENTS.md
 
-- [ ] **§1, ramas por fase.** Agregar al final de §1:
+> **Aprobada y aplicada el 12-10-2026, con un cambio del autor: los emojis
+> se quedan.** La regla «sin emojis» no entró a AGENTS.md y la guardia ya no
+> exige 0 emojis en rótulos (solo los cuenta). Lo demás ya está en AGENTS.md
+> (§1, §4 y §5).
+
+- [x] **§1, ramas por fase.** Agregar al final de §1:
 
   > **Excepción: rediseño de legibilidad (`docs/ux/PLAN.md`).** Las fases con
   > cambio visible se trabajan en ramas cortas (`ux/fase-1a`, `ux/fase-1b`…).
@@ -27,7 +32,7 @@ guardada en `herramientas/guardia_linea_base.json`. En un celular de 390 px:
   > vista previa y se integran solo con visto bueno del autor. GitHub Pages
   > publica desde `claude/funny-turing-imtm54`: lo que llega ahí es público.
 
-- [ ] **§4, reglas de lectura.** Agregar como viñeta nueva de §4:
+- [x] **§4, reglas de lectura.** Agregar como viñeta nueva de §4:
 
   > **Reglas de lectura** (condición del dueño: fácil de leer en celular):
   > - Sin emojis en títulos, botones, enlaces, pestañas, menús ni rótulos, ni
@@ -38,7 +43,7 @@ guardada en `herramientas/guardia_linea_base.json`. En un celular de 390 px:
   > - Todo lo que se toca mide al menos 44 × 44 px.
   > - Al lector se le habla de tú, también en los textos del motor.
 
-- [ ] **§5, criterios de terminado.** Hacer dos cambios:
+- [x] **§5, criterios de terminado.** Hacer dos cambios:
   - Corregir la línea 1. Hoy revisa la copia de la Enciclopedia:
 
     ```diff
@@ -86,8 +91,8 @@ guardada en `herramientas/guardia_linea_base.json`. En un celular de 390 px:
 > **Resuelto el 12-10-2026: se retiran las tres puertas.** El autor aprobó
 > que el menú de cinco pestañas del 09-10-2026 (Herramientas, Números, Datos,
 > Aprende y Participa) sustituya a Lee / Explora / Consulta y a sus rutas.
-> Las dos casillas de abajo quedan sin efecto. Las propuestas 1, 2 y 4 siguen
-> esperando aprobación.
+> Las dos casillas de abajo quedan sin efecto. La 1 se aprobó el mismo día;
+> la 2 y la 4 siguen esperando.
 
 - [ ] **Las tres puertas y Participa:**
   - **Lee:** reportajes para leer.

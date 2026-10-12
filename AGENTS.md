@@ -54,6 +54,12 @@ git fetch origin && git status
 # "up to date with 'origin/claude/funny-turing-imtm54'" = esta copia es la buena
 ```
 
+**Excepción: rediseño de legibilidad (`docs/ux/PLAN.md`).** Las fases con
+cambio visible se trabajan en ramas cortas (`ux/fase-1a`, `ux/fase-1b`…).
+Se rebasan cada día sobre `claude/funny-turing-imtm54`, se revisan en una
+vista previa y se integran solo con visto bueno del autor. GitHub Pages
+publica desde `claude/funny-turing-imtm54`: lo que llega ahí es público.
+
 ---
 
 ## 2. Regla editorial, por encima de cualquier otra
@@ -176,14 +182,22 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
   `assets/`, no lo subas.
 - La navegación usa `data-tab` en las pestañas y `data-sub` en las
   subpestañas; los paneles, `data-subpanel`.
+- **Reglas de lectura** (condición del dueño: fácil de leer en celular):
+  - Sin `font-size` en línea (`style="font-size:…"` ni en cadenas del
+    motor). El tamaño se da solo con clases de la escala de DESIGN.md §4.1.
+  - El texto corrido nunca baja de 16 px en celular.
+  - Todo lo que se toca mide al menos 44 × 44 px.
+  - Al lector se le habla de tú, también en los textos del motor.
+  - Los emojis se quedan (decisión del autor, 12-10-2026): no se quitan de
+    títulos, botones ni rótulos. La guardia los cuenta, pero no los exige.
 
 ---
 
 ## 5. Criterios de terminado
 
-Un cambio **no está hecho** hasta que las cinco líneas se cumplen:
+Un cambio **no está hecho** hasta que las seis líneas se cumplen:
 
-1. `node --check assets/js/audit-engine.js` pasa sin error.
+1. `node --check assets/auditor/js/audit-engine.js` pasa sin error.
 2. La página levanta en `http://localhost:8000` y **la consola del navegador
    no arroja ni un error**.
 3. La pestaña tocada renderiza, y las demás siguen renderizando: cambiar de
@@ -191,6 +205,9 @@ Un cambio **no está hecho** hasta que las cinco líneas se cumplen:
 4. Toda cifra nueva lleva su fuente y su chip de estado (§2).
 5. Está commiteado y **empujado a `claude/funny-turing-imtm54`** (§1). Si
    tocaste `assets/`, con el sello subido (§4).
+6. `python3 herramientas/guardia_legibilidad.py --fase N` pasa, con N la
+   fase vigente de `docs/ux/PLAN.md`. Para corregir una cifra con urgencia:
+   `GUARDIA_OMITIR="motivo"`, y el motivo se anota en el commit.
 
 Al terminar, di explícitamente qué quedó pendiente y por qué. La lista de
 pendientes vive en CONTEXT.md y se mantiene al día: es parte del entregable.
