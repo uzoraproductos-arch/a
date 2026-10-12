@@ -7,8 +7,10 @@
    del Sistema de Alertas de la SHCP. Aqui no se escribe ningun monto. */
 (function () {
   'use strict';
+  /* Desde el 12-10-2026 la pagina trae solo los expedientes, embebidos
+     (window.EXPEDIENTES_DB): ya no descarga la base entera. */
   var DB = window.AUDIT_DB || {};
-  var E = DB.expedientes || {};
+  var E = window.EXPEDIENTES_DB || DB.expedientes || {};
   var FICHAS = E.fichas || [];
   var QUIETO = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

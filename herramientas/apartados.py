@@ -23,6 +23,7 @@ edita este archivo y vuelve a correrlo: no edites a mano los .html generados.
 import json
 import html
 import os
+import importlib
 import re
 import unicodedata
 import sys
@@ -726,6 +727,22 @@ def herr_palabra(rubro):
 # Modulos que no abren la portada en un marco: su pagina la arma otra funcion
 # (la verificacion de estados de cuenta, en radar()).
 MODULOS_PROPIOS = {'inspverifica'}
+# Aplicaciones del Modo Inspector que ya no abren la portada en un marco
+# (pedido del autor, 12-10-2026: «se traba y se pone a calcular»). Cada
+# modulo de herramientas/ arma su pagina con construir(base, ref) y dice
+# sus ESTILOS y SCRIPTS (assets/auditor/css y js).
+INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspradar': 'insp_radar', 'inspentes': 'insp_entes',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos'}
+
+
+def insp_nativa(m, clave, base, ref):
+    """Pone en la pagina m (de herramienta_modulo) el contenido propio de la
+    aplicacion en lugar del marco con la portada."""
+    nat = importlib.import_module(INSP_NATIVAS[clave])
+    m['secciones'][0]['bloque'] = nat.construir(base, ref)
+    m['estilos'] = list(getattr(nat, 'ESTILOS', []))
+    m['scripts'] = list(getattr(nat, 'SCRIPTS', []))
+    return m
 VERIFICA_PAGINA = 'herramienta-inspector-verifica.html'
 
 
@@ -4762,6 +4779,12 @@ def generar(sello=None):
     for a in APARTADOS:
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, a['archivo']), 'wb').write(texto.encode('utf-8'))
+    import auditorias
+    base_nat = auditorias.db()
+    refs_nat = {r['id']: r for r in base_nat['referencias_legales']}
+    def ref_nat(rid):
+        r = refs_nat[rid]
+        return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
     for n, h in enumerate(HERRAMIENTAS, 1):
         hp = herramienta(h, n)
         for pg in [hp] + hp.pop('_extra', []):
@@ -4771,6 +4794,8 @@ def generar(sello=None):
             if t[0].endswith('.html') or t[0] in MODULOS_PROPIOS:
                 continue
             m = herramienta_modulo(h, n, i)
+            if t[0] in INSP_NATIVAS and os.path.exists(os.path.join(RAIZ, 'herramientas', INSP_NATIVAS[t[0]] + '.py')):
+                insp_nativa(m, t[0], base_nat, ref_nat)
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
     # La quinta aplicacion de Costo Ambiental trae su propio contenido

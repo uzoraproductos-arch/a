@@ -13,6 +13,7 @@ enlaces viejos (index.html?ir=expediente&ancla=<id>).
 
 Lo llama apartados.generar(), asi que sello.py la regenera con el sello.
 """
+import json
 import os
 
 from apartados import RAIZ, FAVICON, cabecera, sociales
@@ -118,7 +119,7 @@ def pagina(sello):
     </div>
   </footer>
 
-  <script src="assets/auditor/js/audit-database.js?v={sello}"></script>
+  <script>window.EXPEDIENTES_DB = {exp_json};</script>
   <script src="assets/auditor/js/apartados.js?v={sello}"></script>
   <script src="assets/auditor/js/comunidad.js?v={sello}"></script>
   <script src="assets/auditor/js/expedientes.js?v={sello}"></script>
@@ -126,7 +127,15 @@ def pagina(sello):
 </html>
 '''.format(sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
            favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
-           pasos='\n'.join(pasos), glosa=glosa)
+           pasos='\n'.join(pasos), glosa=glosa, exp_json=_exp_json())
+
+
+
+def _exp_json():
+    """Solo la coleccion de expedientes, para no descargar la base entera."""
+    import auditorias
+    return json.dumps(auditorias.db()['expedientes'], ensure_ascii=False,
+                      separators=(',', ':')).replace('</', '<\\/')
 
 
 def generar(sello):
