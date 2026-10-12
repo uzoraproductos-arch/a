@@ -2136,6 +2136,24 @@ RADAR_PARTES = [
 ]
 
 
+# La descripcion narrativa de cada tarjeta en la portada del Radar
+# (pedido del autor, 12-10-2026). Resume lo que hay en su pagina, sin cifras.
+RADAR_NARRATIVA = {
+    'hoy': ('Empieza por el año que corre: cuánto se aprobó gastar y en qué. Después, expide el estado de cuenta '
+            'de un sexenio, una diputación, el Senado o la Suprema Corte, con su semáforo y su sello.'),
+    'tablero': ('Escoge un gobierno y ponlo frente a los demás, desde 1989: cuánto entró, cuánto invirtió, cuánto costó '
+                'y qué deuda recibió y entregó. Tú decides si lo ves en pesos de entonces, de hoy, en dólares o en euros.'),
+    'peso': ('¿Cuánto valía tu dinero en otro sexenio? Sigue al peso frente a la inflación, el dólar y el euro, '
+             'y usa la máquina del tiempo para llevar cualquier cantidad de un año a otro.'),
+    'reloj': ('Pon a correr el contador de una administración y mira, segundo a segundo y al ritmo promedio de su sexenio, '
+              'lo que entró, lo que gastó, lo que invirtió, lo que pagó de intereses y lo que creció la deuda. '
+              'Es una equivalencia para dimensionar, no dinero moviéndose hoy.'),
+    'duelo': ('Dos administraciones frente a frente, medidas con la misma vara y los mismos documentos. '
+              'Aquí no hay ganador: los números dicen cuánto y el juicio es tuyo.'),
+    'lectura': ('Antes de sacar conclusiones, conoce las reglas del juego: qué mide cada cifra, de qué serie oficial '
+                'sale y qué no se puede concluir con ella.'),
+}
+
 # El semaforo de la salud financiera (decision del autor, 10-10-2026): un
 # color por indicador, sin calificacion global. Cada color sale de una regla
 # escrita: el rango que van de la mejor a la peor de las administraciones
@@ -3036,9 +3054,10 @@ def radar():
                               expide='radar-estado-de-cuenta.html'),
         'pestanas': True,
         'pista': 'Cada parte del radar abre su propia página.',
-        # Las tarjetas del Radar van sin descripcion, solo icono y titulo
-        # (decision del autor, 10-10-2026): lo descriptivo se queda en cada pagina.
-        'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], '')} for r in RADAR_PARTES],
+        # Cada tarjeta lleva una descripcion narrativa breve (pedido del autor,
+        # 12-10-2026; antes iban solo con icono y titulo). Sin cifras: lo
+        # numerico, con su fuente, se queda en cada pagina.
+        'secciones': [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], RADAR_NARRATIVA[r[0]])} for r in RADAR_PARTES],
     }]
     for (pid, archivo, ico, tit, sub) in RADAR_PARTES:
         entrada, bloque = partes[pid]
