@@ -2139,10 +2139,10 @@ RADAR_PARTES = [
     # ahi y radar-estado-de-cuenta.html?verifica= redirige.
     # Desde el 12-10-2026 (pedido del autor) ya no hay tarjeta «Hoy y los
     # estados de cuenta»: el presupuesto en curso se fundio en Numeros →
-    # «Cuanto dinero es», y el estado de cuenta se expide desde el tablero
-    # (su boton «Expide su estado de cuenta»). radar-hoy.html y
+    # «Cuanto dinero es», y el estado de cuenta es la cuarta tarjeta de Datos
+    # (desde el 12-10-2026 el tablero ya no lleva sus botones). radar-hoy.html y
     # radar-presupuesto-en-curso.html redirigen (REDIRECCIONES).
-    ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás, y el estado de cuenta de cada cargo'),
+    ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
     ('peso', 'radar-peso.html', '💱', 'El peso en el tiempo', 'Inflación, dólar y euro desde 1988, con la proyección a 2032'),
     ('reloj', 'radar-reloj.html', '⏱️', 'El reloj de cada administración', 'El contador que corre al ritmo de cada sexenio'),
     ('duelo', 'radar-duelo.html', '⚔️', 'Duelo de administraciones', 'Dos administraciones, cara a cara'),
@@ -2174,7 +2174,7 @@ RADAR_PESO_PARTES = [
 # La descripcion narrativa de cada tarjeta en la portada del Radar
 # (pedido del autor, 12-10-2026): una frase corta, de unas dos lineas, sin cifras.
 RADAR_NARRATIVA = {
-    'tablero': 'Cada gobierno desde 1989, comparado con los demás, y el estado de cuenta de cada cargo.',
+    'tablero': 'Cada gobierno desde 1989, tarjeta por tarjeta, comparado con los demás.',
     'peso': 'Cuánto ha valido tu dinero frente al dólar y el euro.',
     'reloj': 'Mira correr, segundo a segundo, el dinero de cada sexenio.',
     'duelo': 'Dos gobiernos frente a frente; el juicio es tuyo.',
@@ -2980,7 +2980,6 @@ def radar():
           <div class="rd-dim" id="rdDim"></div>
           <noscript><p>El tablero necesita JavaScript.</p></noscript>
         </div>
-        <p class="rd-expide-pie"><a class="rd-expide" href="radar-estado-de-cuenta.html">🧾 Expide un estado de cuenta: cada administración, la diputación federal y local, la senaduría y la Suprema Corte ➔</a></p>
         <section class="rd-comp-sec" aria-labelledby="rdCompH">
           <h2 class="rd-comp-h" id="rdCompH">📊 Las administraciones, lado a lado</h2>
           <p class="rd-comp-intro">Elige qué comparar: las barras se mueven dentro de la misma gráfica y las cifras se cuentan solas.</p>
@@ -3104,10 +3103,10 @@ def radar():
         </div>''' % (len(admins) + len(radar_cargos(base)['docs']))
 
     partes = {
-        'tablero': ('Elige una administración y toca cada tarjeta para ver la comparativa con las demás: ingresos, inversión, '
-                    'costo del gobierno, deuda y lo pendiente ante la Auditoría Superior, desde 1989. Las sumas en pesos se ven '
-                    'en pesos de cada año, en pesos de hoy, en dólares o en euros. Cada cifra trae su documento. Desde aquí '
-                    'expides el estado de cuenta de cada administración, del Congreso y de la Corte, con semáforo, folio y sello.', tablero),
+        'tablero': ('Elige una administración y toca cada tarjeta para ver sus cifras: ingresos, inversión, '
+                    'costo del gobierno, deuda y lo pendiente ante la Auditoría Superior, desde 1989. Abajo, una gráfica las pone '
+                    'lado a lado. Las sumas en pesos se ven en pesos de cada año, en pesos de hoy, en dólares o en euros. '
+                    'Cada cifra trae su documento.', tablero),
         'peso': ('Cuánto vale hoy el peso, cuánto valía en cada sexenio frente al dólar y al euro, y hacia dónde lo proyecta '
                  'Hacienda hasta 2032. Con la máquina del tiempo, lleva cualquier cantidad de un año a otro.', [
                     {'id': 'partes', 'titulo': 'Elige por dónde empezar', 'texto': 'Cada tarjeta abre su propia página.',
