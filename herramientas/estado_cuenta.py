@@ -24,6 +24,7 @@ import os
 
 from apartados import RAIZ, pagina
 import apartados as ap
+import resultados_modulo as rm
 
 CGPE_URL = 'https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf'
 CGPE = 'SHCP, Criterios Generales de Política Económica 2027 (Gaceta Parlamentaria 7121, 8-09-2026)'
@@ -146,7 +147,7 @@ def construir():
 
     becas = [m for m in cf['evaluacion_social_mir'] if m['estado_montos'] == 'oficial']
     social = (
-        '<table class="ec-tabla ec-mini"><thead><tr><th>Programa</th><th>2024 aprobado</th><th>2024 devengado</th><th>Estado</th></tr></thead><tbody>%s%s</tbody></table>'
+        '<table class="ec-tabla ec-mini"><thead><tr><th>Programa</th><th>2024 aprobado</th><th>2024 devengado o ejercido</th><th>Estado</th></tr></thead><tbody>%s%s</tbody></table>'
         '<p class="ec-fuente">%s</p>'
         '<h3 class="ec-sub">La propuesta de 2027</h3>'
         '<p>El proyecto de Presupuesto 2027 destina <b>%s mdp</b> a los programas sociales prioritarios, %s del PIB %s. Los cinco mayores:</p>'
@@ -155,12 +156,12 @@ def construir():
         'programas cambiaron de nombre y de diseño; esa comparación se hará cuando cada uno tenga su clave programática cotejada.</p>'
         '<div class="ec-pendiente">%s <b>Resultados de los programas:</b> propósito, cobertura e impacto son mediciones distintas. La Matriz '
         'de Indicadores para Resultados y las evaluaciones del CONEVAL existen; la plataforma aún no las coteja.</div>') % (
-        ''.join('<tr><th scope="row">%s <small>%s · %s</small></th><td class="ec-num">%s</td><td class="ec-num">%s</td><td>%s</td></tr>' % (
-            m['programa'], m['clave'], m['ramo'], mdp(m['aprobado_mdp']), mdp(m['devengado_mdp']), chip('oficial')) for m in becas),
+        ''.join('<tr><th scope="row">%s <small>%s · %s</small></th><td class="ec-num">%s</td><td class="ec-num">%s<small>%s</small></td><td>%s</td></tr>' % (
+            m['programa'], m['clave'], m['ramo'], mdp(m['aprobado_mdp']), mdp(rm.segundo(m)[1]), rm.segundo(m)[0], chip('oficial')) for m in becas),
         ''.join('<tr><th scope="row">%s</th><td>—</td><td>—</td><td>%s <small>%s</small></td></tr>' % (
             m['programa'], chip('pendiente', 'prog-montos-' + ('imss-bienestar' if 'IMSS' in m['programa'] else m['clave'].lower())),
             m['motivo_montos']) for m in cf['evaluacion_social_mir'] if m['estado_montos'] != 'oficial'),
-        '%s %s' % (becas[0]['fuente_montos'], doc(becas[0]['url'])) if becas else '',
+        ' '.join('<b>%s:</b> %s %s' % (m['clave'], m['fuente_montos'], doc(m['url'])) for m in becas),
         mdp(soc['total']), pct(soc['pibPct']), chip('oficial'),
         ''.join('<li>%s: <b>%s mdp</b></li>' % (x['n'], mdp(x['m'])) for x in sorted(soc['filas'], key=lambda x: -x['m'])[:5]),
         fuente_cgpe('33'), chip('pendiente', 'prog-resultados'))
@@ -239,8 +240,9 @@ def construir():
                           'aprobado' if c['id'] == 'aprobado' else 'cuenta pública', '' if c['mdp'] is None else c['mdp'],
                           c['estado'], c.get('fuente', c.get('motivo', '')), '', c.get('url', ''), REVISION])
     for m in cf['evaluacion_social_mir']:
-        filas_csv.append(['social', m['programa'], 'millones de pesos', '2024', 'devengado',
-                          '' if m['devengado_mdp'] is None else m['devengado_mdp'], m['estado_montos'],
+        mom, v2 = rm.segundo(m) if m['estado_montos'] == 'oficial' else ('devengado', None)
+        filas_csv.append(['social', m['programa'], 'millones de pesos', '2024', mom,
+                          '' if v2 is None else v2, m['estado_montos'],
                           m.get('fuente_montos', m.get('motivo_montos', '')), '', m.get('url', ''), REVISION])
     filas_csv += [
         ['social', 'Programas sociales prioritarios (total)', 'millones de pesos', '2027', 'propuesto', soc['total'], 'oficial', CGPE, 'p. 33', CGPE_URL, REVISION],

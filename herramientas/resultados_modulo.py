@@ -33,6 +33,13 @@ def doc(url, texto='Documento ↗'):
 
 PEND_CP = 'cp2024-tomo2'
 
+
+def segundo(m):
+    """El segundo monto de un programa: devengado si lo hay; si no, ejercido."""
+    if m.get('devengado_mdp') is not None:
+        return 'devengado', m['devengado_mdp']
+    return 'ejercido', m['ejercido_mdp']
+
 # Lo que cada estado financiero es, dicho como en una empresa. La Ley General
 # de Contabilidad Gubernamental (art. 46) le pide al Gobierno Federal estos
 # estados, con las normas del CONAC.
@@ -142,8 +149,8 @@ def construir(base, ref, glos):
             'er-ok' if por[m]['mdp'] is not None else 'er-falta', i + 1, m.capitalize(),
             mdp(por[m]['mdp']) if por[m]['mdp'] is not None else chip('pendiente', PEND_CP))
         for i, m in enumerate(momentos))
-    p_pres = panel('presupuesto', escalera + '<p class="er-pie">Los cinco %s del gasto neto total 2024. Solo el aprobado tiene ya su cifra cotejada.</p>' % glos(
-        'Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)', 'momentos') + lista('presupuesto'))
+    p_pres = panel('presupuesto', escalera + '<p class="er-pie">Los cinco %s del gasto neto total 2024, del sector público presupuestario. El ejercido y el pagado los reproduce la Auditoría Superior de la Federación de la Cuenta Pública %s; el modificado y el devengado siguen pendientes.</p>' % (glos(
+        'Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)', 'momentos'), ref('ref-asf-cp')) + lista('presupuesto'))
 
     # Estado de actividades: el «¿Cuanto crees?» de los intereses.
     ing, inte = por['ingresos_gestion'], por['intereses_deuda']
@@ -174,15 +181,19 @@ def construir(base, ref, glos):
     tarjetas = []
     for m in mir:
         if m['estado_montos'] == 'oficial':
-            pct = m['devengado_mdp'] / m['aprobado_mdp'] * 100
+            # Las becas traen el devengado; la pension y el U013, el ejercido
+            # (es lo que reproduce la ASF): cada uno con su nombre.
+            mom, v2 = segundo(m)
+            pct = v2 / m['aprobado_mdp'] * 100
             tarjetas.append(
                 '<li class="er-prog er-ok"><p class="er-prog-n"><b>%s</b> <small>%s · Ramo %s</small></p>'
-                '<div class="er-prog-b"><span class="er-prog-ap" title="Aprobado"></span><span class="er-prog-dev" style="width:%.1f%%" title="Devengado"></span></div>'
-                '<p class="er-prog-v"><span>Aprobado <b>%s</b></span><span>Devengado <b>%s</b></span>%s</p>'
-                '<p class="er-prog-pct">Se devengó el <b>%.1f%%</b> de lo aprobado %s <small>(%s ÷ %s × 100)</small></p>'
-                '<p class="er-cifra-f">%s %s</p></li>' % (
-                    m['programa'], m['clave'], m['ramo'], pct, mdp(m['aprobado_mdp']), mdp(m['devengado_mdp']), chip('oficial'),
-                    pct, chip('derivado'), mdp(m['devengado_mdp']), mdp(m['aprobado_mdp']), m['fuente_montos'], doc(m['url'])))
+                '<div class="er-prog-b"><span class="er-prog-ap" title="Aprobado"></span><span class="er-prog-dev" style="width:%.1f%%" title="%s"></span></div>'
+                '<p class="er-prog-v"><span>Aprobado <b>%s</b></span><span>%s <b>%s</b></span>%s</p>'
+                '<p class="er-prog-pct">Se %s el <b>%.1f%%</b> de lo aprobado %s <small>(%s ÷ %s × 100)</small></p>'
+                '<p class="er-cifra-f">%s %s</p>%s</li>' % (
+                    m['programa'], m['clave'], m['ramo'], pct, mom.capitalize(), mdp(m['aprobado_mdp']), mom.capitalize(), mdp(v2), chip('oficial'),
+                    'devengó' if mom == 'devengado' else 'ejerció', pct, chip('derivado'), mdp(v2), mdp(m['aprobado_mdp']), m['fuente_montos'], doc(m['url']),
+                    ('<p class="er-cifra-nota">%s</p>' % m['nota_montos']) if m.get('nota_montos') else ''))
         else:
             clave = 'imss-bienestar' if 'IMSS' in m['programa'] else m['clave'].lower()
             tarjetas.append(
@@ -191,7 +202,7 @@ def construir(base, ref, glos):
                     m['programa'], (' <small>%s · Ramo %s</small>' % (m['clave'], m['ramo'])) if m['clave'] != 'pendiente' else '',
                     chip('pendiente', 'prog-montos-' + clave), m['motivo_montos'], doc(m['url'], 'Dónde está ↗')))
     social = ('<ul class="er-progs">%s</ul>'
-              '<p class="er-pie">Aprobado es lo que autorizó la Cámara de Diputados; devengado, lo que el gobierno reconoció como obligación de pago al cierre del año. '
+              '<p class="er-pie">Aprobado es lo que autorizó la Cámara de Diputados; devengado, lo que el gobierno reconoció como obligación de pago al cierre del año; ejercido, lo que ya tiene su orden de pago. '
               'La diferencia no es ahorro ni desvío: es una modificación del presupuesto que la Cuenta Pública debe explicar.</p>'
               '<p class="er-falta-res">%s <b>¿Y qué lograron?</b> %s %s</p>') % (
         ''.join(tarjetas), chip('pendiente', 'prog-resultados'), mir[0]['motivo_resultados'], doc(mir[0]['url_resultados'], 'Transparencia Presupuestaria ↗'))

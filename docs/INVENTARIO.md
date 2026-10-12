@@ -40,7 +40,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-financiera.html` | Dimensión financiera · Auditavisión | apartados.py | 26 | 0 | 4 | 1 | 2 |
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 25 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 26 | 0 | 3 | 0 | 1 |
-| `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 26 | 0 | 4 | 0 | 3 |
+| `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 26 | 0 | 6 | 0 | 1 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `datos-descargas.html` | Descarga en CSV (abre en Excel) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
@@ -106,7 +106,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-egreso-participaciones.html` | Participaciones (Ramo 28) · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-egreso-poderes-y-organos-autonomos.html` | Poderes y órganos autónomos · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-el-peso-de-2026.html` | El peso de 2026 · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 37 | 0 | 7 | 5 | 28 |
+| `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 40 | 0 | 11 | 7 | 22 |
 | `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `numeros-gasto-quien-lo-aprueba.html` | ¿Quién lo aprueba? · Auditavisión | apartados.py | 43 | 0 | 11 | 0 | 0 |
 | `numeros-gasto-si-fuera-de.html` | Si el presupuesto fuera de… · Auditavisión | apartados.py | 37 | 0 | 0 | 1 | 0 |
@@ -155,7 +155,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Participa · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 49 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 81 | 0 | 0 | 0 | 47 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
@@ -212,4 +212,4 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-48 fichas, cada una con su porqué, su responsable y su enlace oficial.
+46 fichas, cada una con su porqué, su responsable y su enlace oficial.

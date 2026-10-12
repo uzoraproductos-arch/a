@@ -26,7 +26,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "devengado",
@@ -35,26 +35,12 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
-        "id": "ejercido",
-        "vista": "presupuesto",
-        "concepto": "Gasto neto total ejercido",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
-      },
+        "id": "ejercido", "vista": "presupuesto", "concepto": "Gasto neto total ejercido", "mdp": 9205438.2, "estado": "oficial", "fuente": "Cuenta Pública 2024, reproducida por la ASF en su Informe General Ejecutivo de la Cuenta Pública 2024 (febrero de 2026), p. 183: «el Gasto Neto Total (GNT) del SPP ascendió a 9,205,438.2 mdp, cifra superior en 1.5 % al proyecto de presupuesto (9,066,045.8 mdp)». Es pagado más diferimiento de pagos.", "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/InformeGeneral/2024_IGE_a.pdf", "nota": "Igual que el aprobado, es el gasto neto total del sector público presupuestario (Gobierno Federal, organismos de control directo y empresas productivas del Estado), la medida con que la Cámara aprueba el presupuesto."},
       {
-        "id": "pagado",
-        "vista": "presupuesto",
-        "concepto": "Gasto neto total pagado",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
-      },
+        "id": "pagado", "vista": "presupuesto", "concepto": "Gasto neto total pagado", "mdp": 9161561.0, "estado": "oficial", "fuente": "Cuenta Pública 2024 y Estadísticas Oportunas de Finanzas Públicas de la SHCP, reproducidas por la ASF en su Informe General Ejecutivo de la Cuenta Pública 2024 (febrero de 2026), p. 178: «Gasto neto presupuestario pagado … 9,161,561.0». Sumando el diferimiento de pagos (43,877.2 mdp, gasto devengado que quedó por pagar) da el gasto neto total de 9,205,438.2.", "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/InformeGeneral/2024_IGE_a.pdf", "nota": "Igual que el aprobado, es el gasto neto total del sector público presupuestario (Gobierno Federal, organismos de control directo y empresas productivas del Estado), la medida con que la Cámara aprueba el presupuesto."},
       {
         "id": "capitulos",
         "vista": "presupuesto",
@@ -62,7 +48,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "ingresos_gestion",
@@ -90,7 +76,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "resultado",
@@ -99,7 +85,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "flujo_operacion",
@@ -108,7 +94,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "flujo_inversion",
@@ -117,7 +103,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "flujo_financiamiento",
@@ -126,7 +112,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "efectivo_final",
@@ -135,7 +121,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "activo",
@@ -144,7 +130,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "pasivo",
@@ -153,7 +139,7 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       },
       {
         "id": "patrimonio",
@@ -162,12 +148,12 @@ window.AUDIT_DB = {
         "mdp": null,
         "estado": "pendiente",
         "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda)."
+        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
       }
     ],
     "conciliacion": {
       "estado": "pendiente",
-      "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda).",
+      "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación.",
       "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
       "pasos": [
         "Egresos presupuestarios devengados",
@@ -183,11 +169,13 @@ window.AUDIT_DB = {
         "programa": "Pensión para el Bienestar de las Personas Adultas Mayores",
         "clave": "S176",
         "ramo": "Bienestar (20)",
-        "aprobado_mdp": null,
+        "aprobado_mdp": 465048.652,
         "devengado_mdp": null,
-        "estado_montos": "pendiente",
-        "motivo_montos": "El aprobado y el devengado de 2024 están en el Estado Analítico del Ramo 20 de la Cuenta Pública 2024 (Tomo III), pero la plataforma aún no los ha cotejado: el portal de la Cuenta Pública no se pudo abrir con conexión verificada. La cifra que se mostraba antes (465,048 mdp) se retiró porque estaba rotulada como devengado y corresponde al aprobado.",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/III/Print.20R20.03.EAEPCFPGF.pdf",
+        "ejercido_mdp": 442727.4267,
+        "estado_montos": "oficial",
+        "fuente_montos": "Estado Analítico del Ejercicio del Presupuesto de Egresos en la Clasificación Funcional-Programática, Cuenta Pública 2024, reproducido por la ASF en la Auditoría de Cumplimiento 2024-0-20100-19-0292-2025, p. 7: «S176 … 465,048,652.0 442,727,426.7» (miles de pesos, convertidos a millones). La ASF da el ejercido, no el devengado; el ejercido incluye 11,281.8 mdp de los capítulos 1000 a 3000 (gasto de operación del programa).",
+        "nota_montos": "Corregido el 12-10-2026: el 10-10-2026 se retiró la cifra de 465,048 mdp porque estaba rotulada como devengado; la ASF confirma que es el aprobado, y aquí vuelve con ese nombre.",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0292_a.pdf",
         "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
         "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
       },
@@ -217,13 +205,15 @@ window.AUDIT_DB = {
       },
       {
         "programa": "Atención a la Salud y Medicamentos Gratuitos para la Población sin Seguridad Social Laboral (IMSS-Bienestar)",
-        "clave": "pendiente",
-        "ramo": "pendiente",
-        "aprobado_mdp": null,
+        "clave": "U013",
+        "ramo": "IMSS-Bienestar (47)",
+        "aprobado_mdp": 85845.6542,
         "devengado_mdp": null,
-        "estado_montos": "pendiente",
-        "motivo_montos": "La clave programática, el ramo y los montos de 2024 se tienen que cotejar en la Cuenta Pública 2024 antes de mostrarlos; la plataforma aún no lo ha hecho. Se cuidará no mezclar el programa con el presupuesto completo del organismo IMSS-Bienestar. La cifra que se mostraba antes (128,900 mdp) se retiró por no tener documento citado.",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+        "ejercido_mdp": 72623.1168,
+        "estado_montos": "oficial",
+        "fuente_montos": "PEF 2024, adecuaciones presupuestarias y Cuenta Pública 2024, reproducidos por la ASF en la Auditoría de Cumplimiento 2024-1-47AYO-19-0420-2025, pp. 3 y 12: aprobado 85,845,654.2 y ejercido 72,623,116.8 (84.6%) miles de pesos, convertidos a millones; 13,222,537.4 se reasignaron al Ramo 23. Es el programa U013, no el presupuesto completo del organismo IMSS-Bienestar.",
+        "nota_montos": "La cifra que se mostraba antes del 10-10-2026 (128,900 mdp) no tenía documento y no vuelve.",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0420_a.pdf",
         "motivo_resultados": "La Matriz de Indicadores para Resultados de este programa se publica en Transparencia Presupuestaria, y sus evaluaciones las coordinaba el CONEVAL, cuyas funciones pasaron al INEGI en 2025. La plataforma aún no las coteja (falta de la plataforma). Propósito, cobertura e impacto son mediciones distintas y se mostrarán por separado.",
         "url_resultados": "https://www.transparenciapresupuestaria.gob.mx/"
       }
