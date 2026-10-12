@@ -86,7 +86,7 @@
 
   /* glosario.html#Termino: el término queda a la vista y resaltado. */
   function irAlTermino() {
-    var h = decodeURIComponent(location.hash.slice(1)).toLowerCase();
+    var h = (function () { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; } })().toLowerCase();
     if (!h) return;
     var f = fichas.filter(function (x) { return x.id.toLowerCase() === h; })[0];
     if (!f) return;

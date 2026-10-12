@@ -479,7 +479,7 @@
 
   pintar();
   if (location.hash.length > 1) {
-    var h0 = decodeURIComponent(location.hash.slice(1));
+    var h0 = (function () { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; } })();
     if (document.getElementById(h0) && document.getElementById(h0).classList.contains('ag-post')) setTimeout(function () { destacar(h0); }, 400);
   }
 })();

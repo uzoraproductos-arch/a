@@ -245,7 +245,7 @@
     /* Al llegar con #exp-<id>: apartados.js corrige el salto a los 350 ms
        de cargar; este va despues, sin animacion, y resalta el caso. */
     if (location.hash.length > 1) {
-      var llegar = function () { setTimeout(function () { irA(decodeURIComponent(location.hash.slice(1)), false); }, 420); };
+      var llegar = function () { setTimeout(function () { irA((function () { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; } })(), false); }, 420); };
       if (document.readyState === 'complete') llegar(); else window.addEventListener('load', llegar);
     }
   }

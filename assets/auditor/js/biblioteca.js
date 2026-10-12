@@ -108,7 +108,7 @@
      del salto de apartados.js (load + 350 ms), que no cuenta la barra. */
   function irAlAncla(raiz, f) {
     function ir(conLoad) {
-      var id = decodeURIComponent(location.hash.slice(1));
+      var id = (function () { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; } })();
       if (!id) return;
       var el = document.getElementById(id);
       if (!el || !raiz.contains(el)) return;

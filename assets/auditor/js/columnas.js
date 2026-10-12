@@ -1682,7 +1682,7 @@
 
   /* Enlace directo a una columna (#col-<id>): abre la pestaña y la columna. */
   function irAColumna() {
-    var h = decodeURIComponent(location.hash.slice(1));
+    var h = (function () { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; } })();
     if (h.indexOf('col-') !== 0) return;
     var art = document.getElementById(h);
     if (!art) return;
