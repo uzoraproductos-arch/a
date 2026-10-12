@@ -704,7 +704,8 @@ HERRAMIENTAS = [
 # Megaobras, dorado para la Calculadora y gris para el Modo Inspector, y las
 # tarjetas de la pestana Herramientas se quedan sin icono).
 # (singular, plural, articulo del plural)
-HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las')}
+HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las'),
+                'calculadora': ('aplicación', 'aplicaciones', 'Las')}
 # Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
 # 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus ocho
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
@@ -732,7 +733,10 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspradar': 'insp_radar', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos'}
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos',
+                # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
+                # aplicaciones que abrian el motor en un marco.
+                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj'}
 
 
 def insp_nativa(m, clave, base, ref):

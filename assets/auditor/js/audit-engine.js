@@ -5765,7 +5765,10 @@
     // Actualizar hash de la URL e historial del navegador
     if (!skipPush) {
       if (window.location.hash !== `#${tabKey}`) {
-        history.pushState({ tab: tabKey }, '', `#${tabKey}`);
+        /* En el visor (una pagina con el modulo en un marco) no se apila
+           historial: la flecha Atras del navegador volveria dentro del
+           marco, a otra pestana, en lugar de salir de la pagina. */
+        history[enVisor() ? 'replaceState' : 'pushState']({ tab: tabKey }, '', `#${tabKey}`);
       }
     }
 
@@ -24964,7 +24967,7 @@
            #pestana/subpestana: Atras y Adelante la restauran. */
         const destino = '#' + parent + '/' + sub;
         if (TAB_METADATA[parent] && window.location.hash !== destino) {
-          history.pushState({ tab: parent, sub: sub }, '', destino);
+          history[enVisor() ? 'replaceState' : 'pushState']({ tab: parent, sub: sub }, '', destino);
         }
       });
     });

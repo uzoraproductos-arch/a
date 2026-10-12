@@ -25,7 +25,8 @@ def main(clave):
     def ref(rid):
         r = refs[rid]
         return ap.nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
-    n, h = next((k, x) for k, x in enumerate(ap.HERRAMIENTAS, 1) if x[1] == 'inspector')
+    rubro = 'calculadora' if clave.startswith('cc') else 'inspector'
+    n, h = next((k, x) for k, x in enumerate(ap.HERRAMIENTAS, 1) if x[1] == rubro)
     i = [t[0] for t in h[7]].index(clave)
     m = ap.insp_nativa(ap.herramienta_modulo(h, n, i), clave, base, ref)
     texto = ap.pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
