@@ -155,21 +155,9 @@
   function tieneV(x) { return x && typeof x.v === 'number'; }
   function segundos(a) { return (Date.UTC(a.a[1] + 1, 0, 1) - Date.UTC(a.a[0], 0, 1)) / 1000; }
 
-  /* Un valor con su chip y su procedencia (se abre al tocar). */
-  function celda(x, u, cls, mon) {
-    if (!tieneV(x)) {
-      return '<span class="rd-v rd-v-pend ' + (cls || '') + '">' + sinDato(x) + '</span>' +
-        '<span class="rd-motivo">' + esc((x && (x.pend || x.na)) || 'Sin dato.') + '</span>';
-    }
-    return '<span class="rd-v ' + (cls || '') + '">' + fmt(x.v, u, mon) + '</span> ' + chip(x.est) +
-      (x.pid ? ' ' + chip('pendiente', x.pid) : '') +
-      '<details class="rd-de"><summary>¿De dónde sale?</summary>' +
-        (x.op ? '<p>' + esc(x.op) + '</p>' : '') + (x.nota ? '<p class="rd-nota">' + esc(x.nota) + '</p>' : '') +
-        '<p class="rd-fte">📄 ' + fuentes(x.f) + '</p></details>';
-  }
 
   /* ================= Tablero ================= */
-  var est = { adm: D.inicial || D.admins[D.admins.length - 1].id, dim: null, met: null, mon: 'hoy', base: 'anio' };
+  var est = { adm: D.inicial || D.admins[D.admins.length - 1].id, dim: null, mon: 'hoy' };
   /* Selector de moneda para las sumas en pesos. */
   function selMon(actual, attr) {
     return '<div class="rd-mon" role="radiogroup" aria-label="En qué moneda ver las sumas">' + D.monedas.map(function (m) {
@@ -207,24 +195,20 @@
   function pintaDim() {
     /* El desglose solo se abre cuando se toca una tarjeta (pedido del autor, 12-10-2026). */
     if (!est.dim) {
-      document.getElementById('rdDim').innerHTML = '<p class="rd-dim-pista">👆 Toca una tarjeta para ver su desglose y comparar las administraciones.</p>';
+      document.getElementById('rdDim').innerHTML = '<p class="rd-dim-pista">👆 Toca una tarjeta para ver su desglose.</p>';
       return;
     }
+    /* Desde el 12-10-2026 (pedido del autor) el desglose solo trae las
+       cifras de la administración elegida, una por recuadro, y se cuentan
+       solas desde cero. La comparación con las demás vive en la gráfica
+       «Las administraciones, lado a lado» (#rdComp). */
     var d = D.dims.filter(function (x) { return x.id === est.dim; })[0];
-    if (!est.met || d.metricas.indexOf(est.met) < 0) est.met = d.metricas[0];
     var a = adm(est.adm);
-    var h = '<div class="rd-dim-cab"><h3><span aria-hidden="true">' + d.ico + '</span> ' + esc(d.tit) + '</h3><p>' + esc(d.que) + '</p></div>';
-    h += '<div class="rd-mets" role="tablist" aria-label="Qué medir">' + d.metricas.map(function (m) {
-      return '<button type="button" class="rd-met" role="tab" aria-selected="' + (m === est.met) + '" data-met="' + m + '">' + (D.metricas[m].mon ? '💵 ' : '') + esc(D.metricas[m].tit) + '</button>';
-    }).join('') + '</div>';
-
-    /* Lo de la administración elegida en esta dimensión, con su procedencia. */
-    h += '<div class="rd-detalle" style="--c:' + a.col + '"><p class="rd-detalle-tit">' + esc(a.c) + ', ' + a.a[0] + '–' + a.a[1] + '</p><dl>' +
-      d.metricas.map(function (m) {
-        var mon = D.metricas[m].mon ? est.mon : null;
-        return '<div><dt>' + esc(D.metricas[m].tit) + (mon ? ' <small>' + esc(moneda(mon).lee) + '</small>' : '') + '</dt><dd>' +
-          celda(enMon(val(a.id, m), mon), D.metricas[m].u, '', mon) + '</dd></div>';
-      }).join('') + '</dl>';
+    var conMon = d.metricas.some(function (m) { return D.metricas[m].mon; });
+    var h = '<div class="rd-dim-cab"><h3><span aria-hidden="true">' + d.ico + '</span> ' + esc(d.tit) + ': ' + esc(a.c) + ', ' + a.a[0] + '–' + a.a[1] + '</h3>' +
+      '<p>' + esc(d.que) + '</p></div>';
+    if (conMon) h += selMon(est.mon, 'data-mon') + '<p class="rd-cifras-lee">Sumas ' + esc(moneda(est.mon).lee) + '.</p>';
+    h += '<div class="rd-cifras" style="--c:' + a.col + '">' + d.metricas.map(function (m) { return recuadro(a, m); }).join('') + '</div>';
     if (d.id === 'inversion' && D.obras[a.id] && D.obras[a.id].length) {
       h += '<p class="rd-obras-tit">🏗️ Megaobras de esta administración</p><ul class="rd-obras">' + D.obras[a.id].map(function (o) {
         return '<li><a href="herramienta-megaobras-sector.html">' + esc(o.n) + '</a>' +
@@ -234,51 +218,66 @@
     if (d.id === 'asf') {
       h += '<p class="rd-obras-tit"><a href="informes-cuenta-publica.html">⚖️ Lo que encontró la ASF en la Cuenta Pública 2024, estado por estado ➔</a></p>';
     }
-    h += '</div>';
-
-    /* La comparativa de todas las administraciones. */
-    var mm = D.metricas[est.met];
-    var mon = mm.mon ? est.mon : null;
-    if (mm.mon) {
-      document.getElementById('rdDim').innerHTML = h + dinero(est.met, mon);
-      crecer(document.getElementById('rdDim'));
-      contarDin(document.getElementById('rdDim'));
-      return;
+    var cm = COMP.filter(function (c) { return c.dim === d.id; })[0];
+    if (cm && document.getElementById('rdComp')) {
+      h += '<p class="rd-dim-ir"><button type="button" class="rd-ir-comp" data-ir-comp="' + cm.met + '">📊 Compara ' + esc(cm.et.toLowerCase()) + ' con las demás administraciones ↓</button></p>';
     }
-    var vals = D.admins.map(function (x) { return { a: x, x: enMon(val(x.id, est.met), mon) }; });
-    var max = 0;
-    vals.forEach(function (o) { if (tieneV(o.x)) max = Math.max(max, Math.abs(o.x.v)); });
-    var ojo = mon ? moneda(mon).ojo : mm.ojo;
-    h += '<div class="rd-comp"><p class="rd-comp-tit">Las administraciones, lado a lado: ' + esc(mm.tit) + (mon ? ', ' + esc(moneda(mon).lee) : '') + '</p>' +
-      (mon ? selMon(mon, 'data-mon') : '') +
-      (ojo ? '<p class="rd-ojo">⚠️ ' + esc(ojo) + '</p>' : '') + '<ol class="rd-barras">' +
-      vals.map(function (o) {
-        var w = tieneV(o.x) && max ? Math.max(2, Math.abs(o.x.v) / max * 100) : 0;
-        return '<li class="' + (o.a.id === est.adm ? 'rd-bar-on' : '') + '" style="--c:' + o.a.col + '">' +
-          '<button type="button" class="rd-bar-nom" data-adm="' + o.a.id + '">' + esc(o.a.c) + ' <small>' + (o.a.curso ? o.a.a[0] + ', en curso' : o.a.a[0] + '–' + String(o.a.a[1]).slice(2)) + '</small></button>' +
-          '<span class="rd-bar-pista">' + (tieneV(o.x) ? '<span class="rd-bar" data-w="' + w + '"' + (o.x.v < 0 ? ' data-neg' : '') + '></span>' : '<span class="rd-bar-pend">' + sinDato(o.x) + '</span>') + '</span>' +
-          '<span class="rd-bar-v">' + (tieneV(o.x) ? corto(o.x.v, mm.u, mon) + ' ' + chip(o.x.est) : '') + '</span></li>';
-      }).join('') + '</ol></div>';
-    document.getElementById('rdDim').innerHTML = h;
-    crecer(document.getElementById('rdDim'));
+    var dim = document.getElementById('rdDim');
+    dim.innerHTML = h;
+    contarDin(dim, 1200);
   }
 
-  /* ---- Lo que cuesta, en dinero (pedido del autor, 12-10-2026) ----
-     En las dimensiones con suma en pesos, la comparativa pone primero el
-     dinero: cuánto por año, en promedio, y cuánto en todo el sexenio. El
-     % del PIB queda de contexto en cada renglón. El promedio por año es
-     la suma entre los años con dato, para que un sexenio con cinco años
-     (Salinas) o uno en curso (Sheinbaum) se comparen con los demás. */
+  /* Una cifra lista para contarse desde cero: prefijo, número y sufijo. */
+  function partes(v, u, mon) {
+    var a = Math.abs(v), s = v < 0 ? '−' : '';
+    if (u === 'mdp') return fmtDin(v, mon || 'nom');
+    if (u === 'pib') return { pre: s, n: a, d: 1, suf: '%' };
+    if (u === 'pp') return { pre: v > 0 ? '+' : s, n: a, d: 1, suf: ' puntos' };
+    if (u === 'seg') return { pre: s + '$', n: a, d: 0, suf: '' };
+    return { pre: s, n: a, d: 0, suf: '' };
+  }
+  function cifra(v, u, mon) {
+    var f = partes(v, u, mon);
+    return '<b class="rd-din-v" data-n="' + f.n + '" data-d="' + f.d + '" data-pre="' + esc(f.pre) + '" data-suf="' + esc(f.suf) + '">' +
+      esc(f.pre) + num(f.n, f.d) + esc(f.suf) + '</b>';
+  }
+  function deDonde(ops, fs) {
+    return '<details class="rd-de"><summary>¿De dónde sale?</summary>' + ops.join('') + '<p class="rd-fte">📄 ' + fuentes(fs) + '</p></details>';
+  }
+  /* El recuadro de una medida: qué es, la cifra que se cuenta, su chip y
+     de dónde sale. Las sumas en pesos dicen también cuánto es por año. */
+  function recuadro(a, m) {
+    var mm = D.metricas[m], x = val(a.id, m), tit = mm.tit.replace(/ \((suma del sexenio|promedio anual)\)$/, '');
+    var h = '<div class="rd-cifra"><p class="rd-cifra-t">' + esc(tit) + '</p>';
+    if (mm.mon) {
+      var r = sumaMon(x, est.mon, a), n = r.ys ? r.ys[1] - r.ys[0] + 1 : 0;
+      var rango = r.ys ? (r.ys[0] === r.ys[1] ? String(r.ys[0]) : r.ys[0] + ' a ' + r.ys[1]) : '';
+      if (!r.base) return h + '<p class="rd-cifra-pend">' + sinDato(r.s) + '</p><p class="rd-motivo">' + esc((r.s && (r.s.pend || r.s.na)) || (x.pend || x.na) || 'Sin dato.') + '</p></div>';
+      var anio = r.base.v / n, completa = tieneV(r.s);
+      h += '<p class="rd-cifra-n">' + cifra(r.base.v, 'mdp', est.mon) + '</p>' +
+        '<p class="rd-cifra-u">' + (completa ? (a.curso ? 'en lo que va (' + rango + ')' : 'en todo el sexenio') : 'en ' + (n === 1 ? 'el año' : 'los ' + n + ' años') + ' con dato (' + rango + ')') + ' ' +
+        chip(completa ? r.s.est : 'derivado') + (completa ? '' : ' ' + chip('pendiente', x.pid)) + '</p>' +
+        '<p class="rd-cifra-sub">Por año, en promedio: <b>' + txtDin(anio, est.mon) + '</b> ' + chip('derivado') + '</p>' +
+        (completa ? '' : '<p class="rd-motivo">El sexenio completo: ' + esc(r.por || 'sin dato.') + '</p>') +
+        deDonde(['<p><b>Por año:</b> ' + txtDin(r.base.v, est.mon) + ' ÷ ' + n + (n === 1 ? ' año' : ' años') + ' con dato = ' + txtDin(anio, est.mon) + '.</p>',
+          r.base.op ? '<p><b>Suma:</b> ' + esc(r.base.op) + '</p>' : ''], r.base.f);
+      return h + '</div>';
+    }
+    if (!tieneV(x)) return h + '<p class="rd-cifra-pend">' + sinDato(x) + '</p><p class="rd-motivo">' + esc(x.pend || x.na || 'Sin dato.') + '</p></div>';
+    return h + '<p class="rd-cifra-n">' + cifra(x.v, mm.u) + '</p>' +
+      '<p class="rd-cifra-u">' + esc(mm.kpi) + ' ' + chip(x.est) + (x.pid ? ' ' + chip('pendiente', x.pid) : '') + '</p>' +
+      deDonde([x.op ? '<p>' + esc(x.op) + '</p>' : '', x.nota ? '<p class="rd-nota">' + esc(x.nota) + '</p>' : ''], x.f) + '</div>';
+  }
+
+  /* ---- Cuánto dinero (pedido del autor, 12-10-2026) ----
+     El promedio por año es la suma entre los años con dato, para que un
+     sexenio con cinco años (Salinas) o uno en curso (Sheinbaum) se
+     comparen con los demás. */
   function fmtDin(v, mon) {
     var a = Math.abs(v), p = PRE[mon] || '$', s = v < 0 ? '−' : '';
     if (a >= 1e6) return { pre: s + p, n: a / 1e6, d: 2, suf: ' billones' };
     if (a >= 1e3) return { pre: s + p, n: a / 1e3, d: 1, suf: ' mil millones' };
     return { pre: s + p, n: a, d: 1, suf: ' millones' };
-  }
-  function din(v, mon, cls) {
-    var f = fmtDin(v, mon);
-    return '<b class="rd-din-v ' + (cls || '') + '" data-n="' + f.n + '" data-d="' + f.d + '" data-pre="' + esc(f.pre) + '" data-suf="' + esc(f.suf) + '">' +
-      esc(f.pre) + num(f.n, f.d) + esc(f.suf) + '</b>';
   }
   function txtDin(v, mon) { var f = fmtDin(v, mon); return f.pre + num(f.n, f.d) + f.suf; }
   /* La suma en la moneda elegida y, si no se puede sumar el sexenio
@@ -295,60 +294,113 @@
     }
     return { s: s, base: tieneV(p) ? p : null, ys: ys, por: por };
   }
-  function dinero(met, mon) {
-    var mm = D.metricas[met], pib = met.replace(/_mdp$/, '_pib'), mp = D.metricas[pib];
-    var filas = D.admins.map(function (a) {
-      var r = sumaMon(val(a.id, met), mon, a), n = r.ys ? r.ys[1] - r.ys[0] + 1 : 0;
-      r.a = a; r.n = n;
+
+  /* ================= Las administraciones, lado a lado =================
+     Una sola gráfica de barras (pedido del autor, 12-10-2026): cada
+     pestaña cambia la medida, las barras se mueven dentro de la misma
+     gráfica y las cifras se cuentan de la anterior a la nueva. */
+  var COMP = [
+    { met: 'ingresos_mdp', dim: 'ingresos', ico: '💰', et: 'Ingresos' },
+    { met: 'inversion_mdp', dim: 'inversion', ico: '🏗️', et: 'Inversión física' },
+    { met: 'gasto_mdp', dim: 'costo', ico: '🏛️', et: 'Gasto del gobierno' },
+    { met: 'costo_financiero_mdp', dim: 'deuda', ico: '💳', et: 'Intereses de la deuda' }
+  ].filter(function (c) { return D.metricas[c.met]; });
+  var comp = document.getElementById('rdComp');
+  var cEst = { met: COMP.length ? COMP[0].met : null, base: 'anio', mon: 'hoy' }, cAnim = null;
+  function filasComp() {
+    return D.admins.map(function (a) {
+      var x = val(a.id, cEst.met), r = sumaMon(x, cEst.mon, a), n = r.ys ? r.ys[1] - r.ys[0] + 1 : 0;
+      r.a = a; r.x = x; r.n = n;
+      r.rango = r.ys ? (r.ys[0] === r.ys[1] ? String(r.ys[0]) : r.ys[0] + ' a ' + r.ys[1]) : '';
       r.anio = r.base && n ? r.base.v / n : null;
-      r.pib = mp ? val(a.id, pib) : null;
-      r.cmp = est.base === 'anio' ? r.anio : (tieneV(r.s) ? r.s.v : null);
+      r.v = cEst.base === 'anio' ? r.anio : (tieneV(r.s) ? r.s.v : null);
       return r;
     });
-    var max = 0;
-    filas.forEach(function (r) { if (r.cmp != null) max = Math.max(max, Math.abs(r.cmp)); });
-    var tit = mm.tit.replace(/ \(suma del sexenio\)$/, '');
-    var h = '<div class="rd-comp rd-din"><p class="rd-comp-tit">💵 Cuánto dinero, administración por administración: ' + esc(tit) + ', ' + esc(moneda(mon).lee) + '</p>' +
-      '<div class="rd-din-ctl"><div class="rd-mon rd-din-base" role="radiogroup" aria-label="Qué comparar">' +
+  }
+  function armaComp() {
+    comp.innerHTML = '<div class="rd-mets" role="tablist" aria-label="Qué comparar">' + COMP.map(function (c) {
+        return '<button type="button" class="rd-met" role="tab" data-cmet="' + c.met + '"><span aria-hidden="true">' + c.ico + '</span> ' + esc(c.et) + '</button>';
+      }).join('') + '</div>' +
+      '<div class="rd-din-ctl"><div class="rd-mon rd-din-base" role="radiogroup" aria-label="Por año o el sexenio">' +
         [['anio', 'Por año, en promedio'], ['sex', 'Todo el sexenio']].map(function (b) {
-          return '<button type="button" role="radio" aria-checked="' + (b[0] === est.base) + '" data-base="' + b[0] + '">' + b[1] + '</button>';
-        }).join('') + '</div>' + selMon(mon, 'data-mon') + '</div>' +
-      (moneda(mon).ojo ? '<p class="rd-ojo">⚠️ ' + esc(moneda(mon).ojo) + '</p>' : '') +
-      '<ol class="rd-din-lista">' + filas.map(function (r) {
-        var a = r.a, w = r.cmp != null && max ? Math.max(2, Math.abs(r.cmp) / max * 100) : 0;
-        var rango = r.ys ? (r.ys[0] === r.ys[1] ? String(r.ys[0]) : r.ys[0] + ' a ' + r.ys[1]) : '';
-        var vAnio = r.anio != null ? din(r.anio, mon) : null;
-        var vSex = tieneV(r.s) ? din(r.s.v, mon) : null;
-        var grande, chica;
-        /* Si el promedio sale de una parte del sexenio, se dice de cuál. */
-        var solo = r.anio != null && !tieneV(r.s) ? ' <span class="rd-din-nota">Promedio de ' + r.n + (r.n === 1 ? ' año con dato: ' : ' años con dato: ') + rango + '.</span>' : '';
-        if (est.base === 'anio') {
-          grande = vAnio ? vAnio + ' <span class="rd-din-u">al año</span> ' + chip('derivado') + solo : sinDato(r.s);
-          chica = vSex ? (a.curso ? 'En lo que va (' + rango + '): ' : 'En todo el sexenio: ') + vSex + ' ' + chip(r.s.est) :
-            'Todo el sexenio: ' + sinDato(r.s) + (r.base ? ' <span class="rd-din-nota">' + (r.n === 1 ? 'El año' : 'Los ' + r.n + ' años') + ' con dato (' + rango + ') ' + (r.n === 1 ? 'suma ' : 'suman ') + txtDin(r.base.v, mon) + '.</span>' : '');
-        } else {
-          grande = vSex ? vSex + ' <span class="rd-din-u">' + (a.curso ? 'en lo que va (' + rango + ')' : 'en el sexenio') + '</span> ' + chip(r.s.est) : sinDato(r.s);
-          chica = vAnio ? 'Por año, en promedio: ' + vAnio + ' ' + chip('derivado') + solo : '';
-        }
-        var pibTx = r.pib && tieneV(r.pib) ? '<span class="rd-din-pib">Para dar escala: ' + fmt(r.pib.v, 'pib') + ' al año, en promedio</span>' : '';
-        var de = '<details class="rd-de"><summary>¿De dónde sale?</summary>' +
-          (r.anio != null ? '<p><b>Por año:</b> suma de ' + rango + ' (' + txtDin(r.base.v, mon) + ') ÷ ' + r.n + (r.n === 1 ? ' año' : ' años') + ' con dato = ' + txtDin(r.anio, mon) + '.</p>' : '') +
-          (r.base && r.base.op ? '<p><b>Suma:</b> ' + esc(r.base.op) + '</p>' : '') +
-          (!tieneV(r.s) && r.por ? '<p class="rd-nota">' + esc(r.por) + '</p>' : '') +
-          (r.pib && tieneV(r.pib) && r.pib.op ? '<p><b>% del PIB:</b> ' + esc(r.pib.op) + '</p>' : '') +
-          (r.base ? '<p class="rd-fte">📄 ' + fuentes(r.base.f) + '</p>' : '') + '</details>';
-        return '<li class="rd-din-fila' + (a.id === est.adm ? ' rd-bar-on' : '') + '" style="--c:' + a.col + '">' +
-          '<button type="button" class="rd-bar-nom" data-adm="' + a.id + '">' + esc(a.c) + ' <small>' + (a.curso ? a.a[0] + ', en curso' : a.a[0] + '–' + String(a.a[1]).slice(2)) + '</small></button>' +
-          '<p class="rd-din-grande">' + grande + '</p>' +
-          '<span class="rd-bar-pista">' + (w ? '<span class="rd-bar" data-w="' + w + '"></span>' : '') + '</span>' +
-          '<p class="rd-din-chica">' + chica + '</p>' + pibTx + (r.base || (r.pib && tieneV(r.pib)) ? de : '') + '</li>';
+          return '<button type="button" role="radio" data-cbase="' + b[0] + '">' + b[1] + '</button>';
+        }).join('') + '</div>' + selMon(cEst.mon, 'data-cmon') + '</div>' +
+      '<p class="rd-graf-tit" id="rdCompTit" aria-live="polite"></p>' +
+      '<ol class="rd-graf">' + D.admins.map(function (a) {
+        return '<li style="--c:' + a.col + '" data-fila="' + a.id + '">' +
+          '<button type="button" class="rd-bar-nom" data-cadm="' + a.id + '">' + esc(a.c) + ' <small>' + (a.curso ? a.a[0] + ', en curso' : a.a[0] + '–' + String(a.a[1]).slice(2)) + '</small></button>' +
+          '<span class="rd-graf-v"><b class="rd-graf-n">—</b> <span class="rd-graf-chip"></span></span>' +
+          '<span class="rd-bar-pista"><span class="rd-bar"></span></span>' +
+          '<span class="rd-graf-nota"></span></li>';
       }).join('') + '</ol>' +
+      '<p class="rd-ojo" id="rdCompOjo"></p>' +
+      '<details class="rd-de"><summary>¿De dónde sale cada barra?</summary><div id="rdCompDe"></div></details>' +
       '<p class="rd-nota">«Por año» es la suma entre los años con dato: así un sexenio al que le falta un año, o uno en curso, se compara con los demás. ' +
-      'El % del PIB dice qué tan grande fue ese dinero para la economía de su momento; está en la pestaña «' + esc(mp ? mp.tit : '') + '».</p></div>';
-    return h;
+      'El % del PIB de cada administración, que dice qué tan grande fue ese dinero para la economía de su momento, está en su tarjeta del tablero.</p>';
+    pintaComp();
+  }
+  function pintaComp() {
+    var c = COMP.filter(function (x) { return x.met === cEst.met; })[0], filas = filasComp(), max = 0;
+    filas.forEach(function (r) { if (r.v != null) max = Math.max(max, Math.abs(r.v)); });
+    comp.querySelectorAll('[data-cmet]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-cmet') === cEst.met)); });
+    comp.querySelectorAll('[data-cbase]').forEach(function (b) { b.setAttribute('aria-checked', String(b.getAttribute('data-cbase') === cEst.base)); });
+    comp.querySelectorAll('[data-cmon]').forEach(function (b) { b.setAttribute('aria-checked', String(b.getAttribute('data-cmon') === cEst.mon)); });
+    document.getElementById('rdCompTit').textContent = c.ico + ' ' + c.et + (cEst.base === 'anio' ? ', por año en promedio, ' : ', en todo el sexenio, ') + moneda(cEst.mon).lee;
+    document.getElementById('rdCompOjo').textContent = '⚠️ ' + (moneda(cEst.mon).ojo || '');
+    var tw = [];
+    filas.forEach(function (r) {
+      var li = comp.querySelector('[data-fila="' + r.a.id + '"]'), b = li.querySelector('.rd-graf-n');
+      li.classList.toggle('rd-bar-on', r.a.id === est.adm);
+      li.querySelector('.rd-bar').style.width = (r.v != null && max ? Math.max(2, Math.abs(r.v) / max * 100) : 0) + '%';
+      var nota = '';
+      if (r.v == null) {
+        b.textContent = ''; b._v = 0;
+        li.querySelector('.rd-graf-chip').innerHTML = sinDato(r.s);
+        if (r.base) nota = (r.n === 1 ? 'El año' : 'Los ' + r.n + ' años') + ' con dato (' + r.rango + ') ' + (r.n === 1 ? 'suma ' : 'suman ') + txtDin(r.base.v, cEst.mon) + '.';
+        else nota = 'Por qué falta: en «¿De dónde sale cada barra?».';
+      } else {
+        li.querySelector('.rd-graf-chip').innerHTML = chip(cEst.base === 'anio' ? 'derivado' : r.s.est);
+        tw.push({ el: b, de: b._v || 0, a: r.v });
+        if (cEst.base === 'anio' && !tieneV(r.s)) nota = 'Promedio de ' + r.n + (r.n === 1 ? ' año con dato: ' : ' años con dato: ') + r.rango + '.';
+        else if (r.a.curso) nota = cEst.base === 'anio' ? 'Solo ' + r.rango + ': la administración sigue en curso.' : 'En lo que va (' + r.rango + ').';
+      }
+      li.querySelector('.rd-graf-nota').textContent = nota;
+    });
+    document.getElementById('rdCompDe').innerHTML = filas.map(function (r) {
+      if (!r.base) return '<p><b>' + esc(r.a.c) + ':</b> ' + esc((r.s && (r.s.pend || r.s.na)) || r.x.pend || r.x.na || 'Sin dato.') + '</p>';
+      return '<p><b>' + esc(r.a.c) + ':</b> ' + (r.anio != null ? 'por año, ' + txtDin(r.base.v, cEst.mon) + ' ÷ ' + r.n + (r.n === 1 ? ' año' : ' años') + ' con dato = ' + txtDin(r.anio, cEst.mon) + '. ' : '') +
+        (r.base.op ? esc(r.base.op) : '') + ' 📄 ' + fuentes(r.base.f) + '</p>';
+    }).join('');
+    /* Cada cifra va de la que tenía a la nueva mientras la barra se mueve. */
+    if (cAnim) cancelAnimationFrame(cAnim);
+    var t0 = performance.now(), dur = reduce ? 0 : 900, mon = cEst.mon;
+    (function paso(ahora) {
+      var x = dur ? Math.min(1, (ahora - t0) / dur) : 1, f = 1 - Math.pow(1 - x, 3);
+      tw.forEach(function (t) { t.el._v = t.de + (t.a - t.de) * f; t.el.textContent = txtDin(t.el._v, mon); });
+      cAnim = x < 1 ? requestAnimationFrame(paso) : null;
+    })(t0);
+  }
+  if (comp && COMP.length) {
+    comp.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b || !comp.contains(b)) return;
+      if (b.hasAttribute('data-cmet')) cEst.met = b.getAttribute('data-cmet');
+      else if (b.hasAttribute('data-cbase')) cEst.base = b.getAttribute('data-cbase');
+      else if (b.hasAttribute('data-cmon')) cEst.mon = b.getAttribute('data-cmon');
+      else if (b.hasAttribute('data-cadm')) { est.adm = b.getAttribute('data-cadm'); if (raiz) pintaTodo(); }
+      else return;
+      pintaComp();
+    });
+    /* Las barras arrancan en cero y crecen cuando la gráfica entra a la vista. */
+    if ('IntersectionObserver' in window && !reduce) {
+      var io = new IntersectionObserver(function (es) {
+        if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); armaComp(); }
+      }, { threshold: 0.15 });
+      io.observe(comp);
+    } else armaComp();
   }
   /* Las cifras de dinero cuentan desde cero mientras crecen las barras. */
-  function contarDin(cont) {
+  function contarDin(cont, dur) {
     var els = [].slice.call(cont.querySelectorAll('.rd-din-v'));
     function pon(f) {
       els.forEach(function (el) {
@@ -359,7 +411,7 @@
     var t0 = performance.now();
     pon(0);
     (function paso(ahora) {
-      var x = Math.min(1, (ahora - t0) / 900);
+      var x = Math.min(1, (ahora - t0) / (dur || 900));
       pon(1 - Math.pow(1 - x, 3));
       if (x < 1) requestAnimationFrame(paso);
     })(t0);
@@ -375,7 +427,10 @@
     }); });
   }
 
-  function pintaTodo() { pintaAdmins(); pintaFicha(); pintaDim(); }
+  function pintaTodo() {
+    pintaAdmins(); pintaFicha(); pintaDim();
+    if (comp) comp.querySelectorAll('[data-fila]').forEach(function (li) { li.classList.toggle('rd-bar-on', li.getAttribute('data-fila') === est.adm); });
+  }
 
   if (raiz) {
     raiz.addEventListener('click', function (ev) {
@@ -384,15 +439,18 @@
       if (b.hasAttribute('data-adm')) { est.adm = b.getAttribute('data-adm'); pintaTodo(); }
       else if (b.hasAttribute('data-dim')) {
         var nueva = b.getAttribute('data-dim');
-        est.dim = est.dim === nueva ? null : nueva; est.met = null; pintaFicha(); pintaDim();
+        est.dim = est.dim === nueva ? null : nueva; pintaFicha(); pintaDim();
         if (!est.dim) return;
         var dim = document.getElementById('rdDim');
         var y = dim.getBoundingClientRect().top + window.scrollY - 110;
         if (dim.getBoundingClientRect().top > window.innerHeight * 0.6) window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
       }
-      else if (b.hasAttribute('data-met')) { est.met = b.getAttribute('data-met'); pintaDim(); }
       else if (b.hasAttribute('data-mon')) { est.mon = b.getAttribute('data-mon'); pintaDim(); }
-      else if (b.hasAttribute('data-base')) { est.base = b.getAttribute('data-base'); pintaDim(); }
+      else if (b.hasAttribute('data-ir-comp')) {
+        cEst.met = b.getAttribute('data-ir-comp');
+        if (!comp.querySelector('.rd-graf')) armaComp(); else pintaComp();
+        comp.closest('.rd-comp-sec').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }
     });
     pintaTodo();
   }

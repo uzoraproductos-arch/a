@@ -2969,11 +2969,16 @@ def radar():
     tablero = '''<script type="application/json" id="rdDatos">{datos}</script>
         <div class="rd-tablero" id="rdTablero">
           <div class="rd-admins" id="rdAdmins" role="tablist" aria-label="Elige una administración"></div>
-          <div class="rd-ficha" id="rdFicha" aria-live="polite"></div>
+          <div class="rd-ficha" id="rdFicha"></div>
           <div class="rd-dim" id="rdDim"></div>
           <noscript><p>El tablero necesita JavaScript.</p></noscript>
         </div>
-        <p class="rd-expide-pie"><a class="rd-expide" href="radar-estado-de-cuenta.html">🧾 Expide un estado de cuenta: cada administración, la diputación federal y local, la senaduría y la Suprema Corte ➔</a></p>'''.format(datos=datos)
+        <p class="rd-expide-pie"><a class="rd-expide" href="radar-estado-de-cuenta.html">🧾 Expide un estado de cuenta: cada administración, la diputación federal y local, la senaduría y la Suprema Corte ➔</a></p>
+        <section class="rd-comp-sec" aria-labelledby="rdCompH">
+          <h2 class="rd-comp-h" id="rdCompH">📊 Las administraciones, lado a lado</h2>
+          <p class="rd-comp-intro">Elige qué comparar: las barras se mueven dentro de la misma gráfica y las cifras se cuentan solas.</p>
+          <div id="rdComp"></div>
+        </section>'''.format(datos=datos)
     # «El peso en el tiempo» se parte en tres paginas (pedido del autor,
     # 12-10-2026): las monedas y la inflacion, con un simulador que recorre
     # los sexenios año por año y arranca en ceros; el peso en cada sexenio,
