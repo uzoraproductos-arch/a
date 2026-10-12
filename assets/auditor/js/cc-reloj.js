@@ -135,7 +135,8 @@
     if (!forzar && (est.pausa || document.hidden)) return;
     var s = segundos(), lista = dentro(), rs = porSeg(lista), acum = s * rs;
     nodos.total.textContent = vivo(acum);
-    nodos.tuyo.textContent = vivo(acum / personas());
+    var tu = acum / personas();
+    nodos.tuyo.textContent = '+$' + n(tu, tu < 1 ? 4 : 2);
     nodos.tiempo.textContent = lapso(s);
     D.relojes.forEach(function (r, i) {
       if (nodos.cards[i]) nodos.cards[i].textContent = vivo(s * r.anual * 1e6 / D.segAno);
