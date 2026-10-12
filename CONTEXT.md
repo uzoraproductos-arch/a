@@ -885,6 +885,8 @@ revisa (`#revisa`, nuevo: ASF, Cuenta Pública, Estado de Cuenta Cívico, Expedi
   tres presupuestos. La plataforma la atribuye a «la doctrina del derecho económico» con
   la nota [119] general, sin número de página.
 
+**Tarjetas del Radar con descripción narrativa (12-10-2026, sin cambio de sello).** A pedido del autor, las seis tarjetas de `radar-hacendario.html` vuelven a llevar texto: una descripción narrativa breve, sin cifras, que resume lo que hay en su página. Viven en `RADAR_NARRATIVA` (`herramientas/apartados.py`). Esto revierte, solo en esas seis tarjetas, la decisión siguiente; la barra `radar_nav` y las tarjetas de `radar-hoy.html` siguen sin texto.
+
 **Tarjetas del Radar sin descripción (10-10-2026, sin cambio de sello).**
 Decisión del autor: las tarjetas del Radar hacendario llevan solo icono y título. Se
 quitó el texto descriptivo de las pestañas de `radar-hacendario.html`, de la barra
