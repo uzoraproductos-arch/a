@@ -169,7 +169,7 @@
   }
 
   /* ================= Tablero ================= */
-  var est = { adm: D.inicial || D.admins[D.admins.length - 1].id, dim: D.dims[0].id, met: null, mon: 'hoy', base: 'anio' };
+  var est = { adm: D.inicial || D.admins[D.admins.length - 1].id, dim: null, met: null, mon: 'hoy', base: 'anio' };
   /* Selector de moneda para las sumas en pesos. */
   function selMon(actual, attr) {
     return '<div class="rd-mon" role="radiogroup" aria-label="En qué moneda ver las sumas">' + D.monedas.map(function (m) {
@@ -194,7 +194,7 @@
     h += '<div class="rd-kpis">' + D.dims.map(function (d) {
       var m = d.kpi, x = val(a.id, m), mm = D.metricas[m];
       var sub = d.kpi2 ? val(a.id, d.kpi2) : null;
-      return '<button type="button" class="rd-kpi' + (d.id === est.dim ? ' rd-kpi-on' : '') + '" data-dim="' + d.id + '" data-tono="' + d.tono + '">' +
+      return '<button type="button" class="rd-kpi' + (d.id === est.dim ? ' rd-kpi-on' : '') + '" data-dim="' + d.id + '" data-tono="' + d.tono + '" aria-expanded="' + (d.id === est.dim) + '" aria-controls="rdDim">' +
         '<span class="rd-kpi-cab"><span aria-hidden="true">' + d.ico + '</span> ' + esc(d.tit) + '</span>' +
         '<span class="rd-kpi-v">' + (tieneV(x) ? corto(x.v, mm.u) : '—') + '</span>' +
         '<span class="rd-kpi-u">' + (tieneV(x) ? esc(mm.kpi) : (x.na ? esc(x.et || 'no aplica') : 'pendiente') + ': toca para ver por qué') + '</span>' +
@@ -205,6 +205,11 @@
   }
 
   function pintaDim() {
+    /* El desglose solo se abre cuando se toca una tarjeta (pedido del autor, 12-10-2026). */
+    if (!est.dim) {
+      document.getElementById('rdDim').innerHTML = '<p class="rd-dim-pista">👆 Toca una tarjeta para ver su desglose y comparar las administraciones.</p>';
+      return;
+    }
     var d = D.dims.filter(function (x) { return x.id === est.dim; })[0];
     if (!est.met || d.metricas.indexOf(est.met) < 0) est.met = d.metricas[0];
     var a = adm(est.adm);
@@ -378,7 +383,9 @@
       if (!b || !raiz.contains(b)) return;
       if (b.hasAttribute('data-adm')) { est.adm = b.getAttribute('data-adm'); pintaTodo(); }
       else if (b.hasAttribute('data-dim')) {
-        est.dim = b.getAttribute('data-dim'); est.met = null; pintaFicha(); pintaDim();
+        var nueva = b.getAttribute('data-dim');
+        est.dim = est.dim === nueva ? null : nueva; est.met = null; pintaFicha(); pintaDim();
+        if (!est.dim) return;
         var dim = document.getElementById('rdDim');
         var y = dim.getBoundingClientRect().top + window.scrollY - 110;
         if (dim.getBoundingClientRect().top > window.innerHeight * 0.6) window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });

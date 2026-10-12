@@ -48,6 +48,7 @@
 
 /* Dimensión */
 .rd-dim { margin-top: 18px; }
+.rd-dim-pista { margin: 0; padding: 14px 16px; border: 2px dashed #c9d3e6; border-radius: 14px; background: #f6f8fc; color: #33415c; font-size: 16px; text-align: center; }
 .rd-dim-cab h3 { margin: 0; font-size: 19px; color: #0b2a63; }
 .rd-dim-cab p { margin: 4px 0 10px; color: #33415c; font-size: 15px; }
 .rd-mets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
