@@ -67,13 +67,13 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
 | `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf.html` | Qué encontró la ASF · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
-| `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-asf.html` | Qué encontró la ASF · Auditavisión | apartados.py | 45 | 0 | 28 | 19 | 1 |
+| `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 45 | 0 | 2 | 7 | 0 |
+| `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 53 | 0 | 48 | 0 | 0 |
 | `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 49 | 0 | 245 | 2 | 0 |
 | `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 1 |
-| `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 39 | 1 | 0 | 0 | 0 |
+| `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 138 | 0 | 195 | 135 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-cero.html` | De cero al resultado · Auditavisión | apartados.py | 34 | 1 | 0 | 0 | 0 |
@@ -202,10 +202,10 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 | Destino | Veces enlazado |
 |---|---:|
-| `verificador` | 16 |
 | `ambiente` | 12 |
 | `megaobras` | 12 |
 | `calculadora` | 9 |
+| `verificador` | 1 |
 | `nota` | 1 |
 | `poderes` | 1 |
 
