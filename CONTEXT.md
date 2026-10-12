@@ -902,6 +902,8 @@ quitó el texto descriptivo de las pestañas de `radar-hacendario.html`, de la b
 `radar-hoy.html`. Lo descriptivo queda en la entrada de cada página. `RADAR_PARTES`
 conserva su descripción porque el índice general la usa. No se tocó `assets/`.
 
+**El duelo arranca en ceros (12-10-2026, sello 20261012c).** Pedido del autor: en `radar-duelo.html` (Datos → Radar hacendario → Duelo de administraciones) las cifras y las barras nacen en cero y el botón «▶ Empezar duelo» las lleva a su valor (1.8 s; instantáneo con `prefers-reduced-motion`). El mismo botón pasa a «↺ Reiniciar en ceros», y cambiar cualquiera de las dos administraciones también regresa todo a cero. El HTML lo arma `duelo_html` en `apartados.py` (`#rdDueloCuenta`, `#rdDueloBtn`, `#rdDueloTxt`) y la animación vive en `radar.js` con el mismo método de tramos `.rd-num` que «Contar». No se agregó ni cambió cifra.
+
 **El contador de «Hoy: el presupuesto en curso» (10-10-2026, sello 20261010ze).**
 Pedido del autor: en `radar-presupuesto-en-curso.html` las cifras arrancan en cero y el
 botón «▶ Contar» las anima hasta su valor (2.4 s, curva de salida; instantáneo con

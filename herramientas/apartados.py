@@ -2955,9 +2955,16 @@ def radar():
           </div>
           <div id="rdRelojOut"></div>
         </div>'''
+    # El duelo arranca en ceros (pedido del autor, 12-10-2026): el boton
+    # «Empezar duelo» lleva cada cifra y cada barra a su valor; el mismo
+    # boton las regresa a cero. Sin JavaScript no hay duelo que mostrar.
     duelo_html = '''<div class="rd-duelo" id="rdDuelo">
           <div class="rd-duelo-ctl"><select id="rdDuelo1" aria-label="Primera administración"></select><span>vs</span>
             <select id="rdDuelo2" aria-label="Segunda administración"></select></div>
+          <div class="rd-cuenta rd-duelo-cuenta" id="rdDueloCuenta" hidden>
+            <button type="button" class="rd-cuenta-btn" id="rdDueloBtn" aria-pressed="false">▶ Empezar duelo</button>
+            <span class="rd-cuenta-txt" id="rdDueloTxt">Las cifras están en cero. Elige dos administraciones y presiona «Empezar duelo».</span>
+          </div>
           <div id="rdDueloOut"></div>
         </div>'''
     lectura = '<div class="rd-lectura"><ul>%s</ul></div>' % ''.join(

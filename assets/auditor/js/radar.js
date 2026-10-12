@@ -361,11 +361,66 @@
         }
         return '<div class="rd-du-fila"><p class="rd-du-tit">' + esc(mm.tit) + (mon ? ', ' + esc(moneda(mon).et.toLowerCase()) : '') + '</p>' + lado(x, a.col, 'rd-du-izq') + lado(y, b.col, 'rd-du-der') + '</div>';
       }).join('');
-      document.getElementById('rdDueloOut').innerHTML =
+      var out = document.getElementById('rdDueloOut');
+      out.innerHTML =
         '<div class="rd-du-cab"><span style="--c:' + a.col + '">' + esc(a.c) + '</span><span class="rd-du-vs">vs</span><span style="--c:' + b.col + '">' + esc(b.c) + '</span></div>' + filas +
         '<p class="rd-nota">Sin ganador: más ingreso o más inversión no es por sí solo mejor, ni menos deuda peor. Los números dicen cuánto; el juicio es tuyo. En <a href="radar-tablero.html">el tablero</a>, toca una administración para ver de dónde sale cada cifra.</p>';
-      crecer(document.getElementById('rdDueloOut'));
+      /* Cada número de cada cifra se vuelve un tramo que cuenta desde
+         cero, con sus mismos decimales: «$1,234.5 mil mdp» va de $0.0 a
+         $1,234.5 y el texto de alrededor no cambia. */
+      dTramos = [];
+      out.querySelectorAll('.rd-du-v').forEach(function (el) {
+        var txt = el.textContent, re = /\d[\d,]*(?:\.\d+)?/g, m, ult = 0;
+        el.textContent = '';
+        while ((m = re.exec(txt))) {
+          el.appendChild(document.createTextNode(txt.slice(ult, m.index)));
+          var n = m[0], sp = document.createElement('span');
+          sp.className = 'rd-num';
+          dTramos.push({ el: sp, v: parseFloat(n.replace(/,/g, '')), d: n.indexOf('.') < 0 ? 0 : n.length - n.indexOf('.') - 1, miles: n.indexOf(',') >= 0 });
+          el.appendChild(sp);
+          ult = m.index + n.length;
+        }
+        el.appendChild(document.createTextNode(txt.slice(ult)));
+      });
+      dCeros();
     }
+    /* El duelo arranca en ceros (pedido del autor, 12-10-2026): «Empezar
+       duelo» lleva cifras y barras a su valor; el mismo botón las regresa
+       a cero, y cambiar de administración también. */
+    var dTramos = [], dAnim = null, dListo = false;
+    var dBtn = document.getElementById('rdDueloBtn'), dTxt = document.getElementById('rdDueloTxt');
+    function dPon(f) {
+      dTramos.forEach(function (tr) {
+        tr.el.textContent = (tr.v * f).toLocaleString('en-US', { minimumFractionDigits: tr.d, maximumFractionDigits: tr.d, useGrouping: tr.miles });
+      });
+    }
+    function dCeros() {
+      if (dAnim) { cancelAnimationFrame(dAnim); dAnim = null; }
+      dListo = false;
+      dPon(0);
+      document.querySelectorAll('#rdDueloOut .rd-bar').forEach(function (b) { b.style.width = '0'; });
+      dBtn.textContent = '▶ Empezar duelo';
+      dBtn.setAttribute('aria-pressed', 'false');
+      dTxt.textContent = 'Las cifras están en cero. Elige dos administraciones y presiona «Empezar duelo».';
+    }
+    function dEmpezar() {
+      dListo = true;
+      dBtn.textContent = '↺ Reiniciar en ceros';
+      dBtn.setAttribute('aria-pressed', 'true');
+      dTxt.textContent = 'Calculando… Cada cifra llega a su valor oficial.';
+      crecer(document.getElementById('rdDueloOut'));
+      var dur = reduce ? 0 : 1800, t0 = performance.now();
+      function paso(ahora) {
+        var x = dur ? Math.min(1, (ahora - t0) / dur) : 1;
+        dPon(1 - Math.pow(1 - x, 3));
+        if (x < 1) { dAnim = requestAnimationFrame(paso); return; }
+        dAnim = null;
+        dTxt.textContent = 'Listo: estas son las cifras de las dos administraciones. «Reiniciar en ceros» las regresa al inicio.';
+      }
+      dAnim = requestAnimationFrame(paso);
+    }
+    dBtn.addEventListener('click', function () { if (dListo) dCeros(); else dEmpezar(); });
+    document.getElementById('rdDueloCuenta').hidden = false;
     s1.addEventListener('change', pintaDuelo); s2.addEventListener('change', pintaDuelo);
     pintaDuelo();
   }
