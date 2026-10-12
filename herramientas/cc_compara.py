@@ -159,7 +159,7 @@ def tarjeta(c):
     if c.get('pendiente'):
         v = 'sin cifra ' + chip('pendiente')
     else:
-        v = '<b>%s</b> <small>netos al mes%s</small>' % (rango(c['mensual']), ' (máx.)' if c['mensual'].get('min') and c['mensual']['min'] != c['mensual']['max'] else '')
+        v = '<b>%s</b> <small>netos al mes</small>' % rango(c['mensual'])
     return ('<button type="button" class="cv-carta" data-id="%s" data-g="%s" aria-pressed="false">'
             '<span class="cv-carta-ico" aria-hidden="true">%s</span><span class="cv-carta-cargo">%s</span>'
             '<span class="cv-carta-v">%s</span><span class="cv-carta-veces" data-veces></span></button>'
@@ -255,12 +255,12 @@ def construir(base, ref):
       <label class="cv-campo" for="cvMonto"><span>¿Cuánto ganas? Sin separadores o con ellos, como quieras.</span>
         <input type="text" id="cvMonto" class="cv-input cv-input-num" inputmode="decimal" autocomplete="off" placeholder="{sm_txt}"></label>
       <div class="cv-seg" role="group" aria-label="Periodo">
-        <button type="button" class="cv-op" data-periodo="mes" aria-pressed="true">Al mes</button>
-        <button type="button" class="cv-op" data-periodo="ano" aria-pressed="false">Al año</button>
+        <button type="button" class="cv-opc" data-periodo="mes" aria-pressed="true">Al mes</button>
+        <button type="button" class="cv-opc" data-periodo="ano" aria-pressed="false">Al año</button>
       </div>
       <div class="cv-seg" role="group" aria-label="Bruto o neto">
-        <button type="button" class="cv-op" data-tipo="bruto" aria-pressed="true">Bruto <small>(antes de descuentos)</small></button>
-        <button type="button" class="cv-op" data-tipo="neto" aria-pressed="false">Neto <small>(lo que te depositan)</small></button>
+        <button type="button" class="cv-opc" data-tipo="bruto" aria-pressed="true">Bruto <small>(antes de descuentos)</small></button>
+        <button type="button" class="cv-opc" data-tipo="neto" aria-pressed="false">Neto <small>(lo que te depositan)</small></button>
       </div>
     </div>
     <div class="cv-atajos" role="group" aria-label="Atajos con cifras oficiales">

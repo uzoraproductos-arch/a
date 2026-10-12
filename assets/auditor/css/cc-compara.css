@@ -31,11 +31,11 @@
 .cv-input { width: 100%; box-sizing: border-box; min-height: 52px; padding: 10px 14px; border: 1px solid #cfc4a8; border-radius: 10px; background: #ffffff; color: #22211d; font: 700 22px/1.2 'JetBrains Mono', ui-monospace, monospace; }
 .cv-input:focus { outline: 3px solid color-mix(in srgb, var(--cv) 35%, transparent); border-color: var(--cv); }
 .cv-seg { display: inline-flex; border: 1px solid #cfc4a8; border-radius: 12px; overflow: hidden; }
-.cv-op { min-height: 52px; padding: 8px 14px; border: 0; background: #ffffff; color: #22211d; cursor: pointer; font: 600 16px/1.2 Inter, system-ui, sans-serif; }
-.cv-op + .cv-op { border-left: 1px solid #cfc4a8; }
-.cv-op small { display: block; font-size: 13px; font-weight: 500; color: var(--cv-gris); }
-.cv-op[aria-pressed="true"] { background: var(--cv); color: #ffffff; }
-.cv-op[aria-pressed="true"] small { color: #f6e9c6; }
+.cv-opc { min-height: 52px; padding: 8px 14px; border: 0; background: #ffffff; color: #22211d; cursor: pointer; font: 600 16px/1.2 Inter, system-ui, sans-serif; }
+.cv-opc + .cv-opcc { border-left: 1px solid #cfc4a8; }
+.cv-opc small { display: block; font-size: 13px; font-weight: 500; color: var(--cv-gris); }
+.cv-opc[aria-pressed="true"] { background: var(--cv); color: #ffffff; }
+.cv-opc[aria-pressed="true"] small { color: #f6e9c6; }
 .cv-atajos { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 0; font-size: 16px; color: #3b3a36; }
 .cv-atajo { min-height: 44px; padding: 8px 14px; border: 1px solid #cfc4a8; border-radius: 999px; background: var(--cv-claro); color: #22211d; cursor: pointer; font: 600 15px/1.25 Inter, system-ui, sans-serif; text-align: left; }
 .cv-atajo:hover, .cv-atajo:focus-visible { border-color: var(--cv); }
@@ -194,7 +194,8 @@
   .cv-form { grid-template-columns: minmax(0, 1fr); }
   .cv-seg { display: grid; grid-template-columns: 1fr 1fr; }
   .cv-cartas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cv-carta { padding: 12px; }
+  .cv-carta { padding: 12px 10px; font-size: 16px; }
+  .cv-carta-v b { font-size: 15px; }
   .cv-cara { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px; }
   .cv-vs { width: 40px; height: 40px; font-size: 15px; }
   .cv-lado b { font-size: 16px; }
@@ -208,7 +209,6 @@
   .cv-boton { width: 100%; }
 }
 @media (max-width: 400px) {
-  .cv-cartas { grid-template-columns: minmax(0, 1fr); }
   .cv-pr-par { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
