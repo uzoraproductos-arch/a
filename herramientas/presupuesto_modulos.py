@@ -124,7 +124,7 @@ def cuanto(base, ref, peso, hoy):
           <ul class="pm-ley pm-ley-fila">%s</ul>
           <p class="pm-pie">%s %s <a href="numeros-mapa-del-gasto-federalizado.html">Míralo sobre el mapa, estado por estado ➔</a></p>
         </section>
-        <p class="pm-sigue">¿Y a dónde va, renglón por renglón? <a href="numeros-gasto-publico.html#gpReparte">🏛️ Los ocho renglones del gasto ➔</a></p>''' % (
+        <p class="pm-sigue">¿Y a dónde va, renglón por renglón? <a href="numeros-gasto-simulador-contable.html">🧮 Los ocho renglones del gasto ➔</a></p>''' % (
         bill(tpef), P['notaCuadre'], cuenta, tarjetas, ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'), vivo, peso,
         bill(F['totalMdp']), pct(pfed), chip('derivado'), mdp(F['totalMdp']), mdp(tpef), pct(pfed), barra_fed, ley_fed,
         F['nota'], ref('ref-pef2026'))

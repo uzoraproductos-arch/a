@@ -632,6 +632,9 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .apartado-pestana[aria-selected="true"] .apartado-pestana-tx b,
 .apartado-pestana[aria-selected="true"] .apartado-pestana-tx small { color: #ffffff; }
 .apartado-pestanas-pista { margin: 6px 0 28px; font-size: 14px; color: #5a6782; text-align: center; }
+/* Tarjetas en grupos con su titulo (Gasto publico, 12-10-2026). */
+.apartado-pestanas-grupo { margin: 22px 0 10px; font-size: 18px; line-height: 1.3; color: var(--civ-azul); }
+.apartado-pestanas-grupo:first-of-type { margin-top: 6px; }
 .apartado-panel { margin-top: 22px; animation: panel-entra 0.25s ease; }
 @keyframes panel-entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (max-width: 980px) {

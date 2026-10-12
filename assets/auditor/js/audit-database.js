@@ -10561,7 +10561,7 @@ window.AUDIT_DB = {
       "categoria_nombre": "Doctrina y bibliografía",
       "cita_apa": "Gómez Granillo, M., y Gutiérrez Rosas, R. M. (1995). Introducción al derecho económico. Editorial Esfinge.",
       "url": "",
-      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo; las de Presupuesto y de Baja al territorio viven en las Preguntas frecuentes: la primera (capítulo 7, p. 96: la acción financiera del Estado), en «¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?», y la segunda (Cuadro 1 del capítulo 7), en «¿Cuál es la diferencia entre el Ramo 28 y el Ramo 33?». Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
+      "descripcion": "Libro de texto que da el orden del apartado «Números» de la plataforma, sobre todo sus capítulos 5 y 7: de dónde sale el dinero público, quién lo decide, quién lo gasta, a dónde baja y cuánto se debe. Se usa como guía de lectura y para la franja «Ayer y hoy» de cada capítulo; las de Presupuesto, Gasto público y Baja al territorio viven en las Preguntas frecuentes: la primera (capítulo 7, p. 96: la acción financiera del Estado), en «¿Qué persigue la acción financiera del Estado y qué son las finanzas públicas?»; la segunda (capítulo 5, pp. 74-77, y capítulo 7, pp. 97 y 103), en «¿Quién aprueba el Presupuesto de Egresos y quién revisa cómo se gastó?», y la tercera (Cuadro 1 del capítulo 7), en «¿Cuál es la diferencia entre el Ramo 28 y el Ramo 33?». Sus cifras no se copian: cada dato se toma de su fuente oficial vigente. No tiene edición digital oficial que enlazar."
     },
     {
       "num": 120,
@@ -10631,6 +10631,16 @@ window.AUDIT_DB = {
             "ref-cpeum",
             "ref-lfprh",
             "ref-lif2026",
+            "ref-gomez-granillo-1995"
+          ]
+        },
+        {
+          "q": "¿Quién aprueba el Presupuesto de Egresos y quién revisa cómo se gastó?",
+          "a": "Lo propone el Ejecutivo Federal, por la Secretaría de Hacienda, a más tardar el 8 de septiembre. Los ingresos los aprueba el Congreso de la Unión, con sus dos Cámaras; el gasto, la <strong>Cámara de Diputados sola</strong>, a más tardar el 15 de noviembre: es su facultad exclusiva por el artículo 74, fracción IV de la Constitución, y el Senado no vota el Presupuesto de Egresos. Al año siguiente, la <strong>Auditoría Superior de la Federación</strong>, de la Cámara de Diputados, revisa cómo se gastó (artículo 79). Las seis paradas del ciclo, con su fecha límite y su artículo, están en Números › Gasto público › ¿Quién lo aprueba?.<p><b>📘 Ayer y hoy.</b> <em>En el libro (1995):</em> el capítulo 5 de <cite>Introducción al derecho económico</cite>, de Gómez Granillo y Gutiérrez Rosas, explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77). El capítulo 7, en «Presupuesto y gasto público» (p. 97), reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y su sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976. <em>Hoy (2026):</em> las facultades siguen en los artículos 73 y 74 de la Constitución. El Distrito Federal es hoy la <strong>Ciudad de México</strong>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016. La ley de 1976 fue abrogada: desde 2006 rige la <strong>Ley Federal de Presupuesto y Responsabilidad Hacendaria</strong> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).</p>",
+          "refs": [
+            "ref-cpeum",
+            "ref-lfprh",
+            "ref-cgpe2027",
             "ref-gomez-granillo-1995"
           ]
         },

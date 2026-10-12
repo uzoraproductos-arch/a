@@ -388,8 +388,7 @@ APARTADOS = [
                           'Aquí está quién tiene la facultad de aprobarlo, parada por parada, y cómo se reparte el dinero que sostiene '
                           'al país: un simulador contable que lo parte del total a sus ocho renglones, los tres grandes presupuestos '
                           'y, al final, cada desglose en su propia página.'),
-                'ayer': ('El capítulo 5 explica las facultades económicas del Congreso de la Unión, del Senado y de la Cámara de Diputados (pp. 74-76), y las de la Asamblea de Representantes del Distrito Federal (p. 77). El capítulo 7, en «Presupuesto y gasto público» (p. 97), reparte el Presupuesto de 1994 en sus Cuadros 1 y 2, y su sección 3 (p. 103) explica la Ley de Presupuesto, Contabilidad y Gasto Público Federal de 1976.',
-                         'Las facultades siguen en los artículos 73 y 74 de la Constitución: la fracción IV del 74 da a los diputados la aprobación anual del Presupuesto de Egresos. El Distrito Federal es hoy la <b>Ciudad de México</b>, con su propio Congreso, desde la reforma constitucional publicada en el DOF el 29 de enero de 2016. La ley de 1976 fue abrogada: desde 2006 rige la <b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> (DOF 30 de marzo de 2006). La clasificación funcional del gasto de 2026 la publican los Criterios Generales de Política Económica 2027 (cuadro de la p. 39).'),
+                # Su «Ayer y hoy» vive en las Preguntas frecuentes (12-10-2026).
                 'bloque': '',
                 # Las vistas del motor abren su pagina de modulo
                 # (NUMEROS_MODULOS). Megaobras y costo ambiental se quitaron
@@ -3921,7 +3920,7 @@ def gasto_ciclo(base):
                           ('<p class="gp-hecho"><b>En los hechos.</b> %s</p>' % hecho) if hecho else '', citas))
     filas = ''.join('<tr><th scope="row">%s</th>%s</tr>' % (q, ''.join('<td>%s</td>' % c for c in celdas)) for q, celdas in GP_QUIEN)
     return '''<section class="gp gp-ciclo" id="gpAprueba" aria-labelledby="gpApruebaTit">
-          <h2 class="gp-tit" id="gpApruebaTit">¿Quién lo aprueba? El ciclo del presupuesto</h2>
+          <h2 class="gp-tit sr-only" id="gpApruebaTit">¿Quién lo aprueba? El ciclo del presupuesto</h2>
           <p class="gp-txt">Cada peso del presupuesto recorre estas seis paradas, del proyecto a la revisión. Cada una tiene a su autoridad, su fecha límite y el artículo que le da la facultad, citado tal como lo dice la ley. Toca una parada o avanza con las flechas.</p>
           <div class="gp-ruta" role="tablist" aria-label="Las seis paradas del presupuesto">%s</div>
           <div class="gp-mando"><button type="button" class="gp-flecha" data-dir="-1" aria-label="Parada anterior">←</button>
@@ -3969,8 +3968,11 @@ def gasto_reparte(base, d):
         '<li class="gp-rep-f" data-v="%s" style="--c:%s"><a href="%s"><span aria-hidden="true">%s</span> %s</a>'
         '<span class="gp-rep-barra"><span></span></span><b class="gp-rep-m">$0.00</b></li>'
         % (x['v'], x['color'], x['p'], x['ico'], x['nom']) for x in datos['renglones'])
-    return '''<section class="gp gp-reparte" id="gpReparte" aria-labelledby="gpReparteTit">
-          <h2 class="gp-tit" id="gpReparteTit">¿Cómo se reparte? El simulador contable</h2>
+    # Desde el 12-10-2026 el simulador y «Si el presupuesto fuera de…»
+    # viven en paginas distintas: cada una lleva su copia de #gpDatos.
+    jdatos = json.dumps(datos, ensure_ascii=False).replace('</', '<\\/')
+    return ('''<section class="gp gp-reparte" id="gpReparte" aria-labelledby="gpReparteTit">
+          <h2 class="gp-tit sr-only" id="gpReparteTit">¿Cómo se reparte? El simulador contable</h2>
           <p class="gp-txt">El gasto neto total de 2026 es de <b>%s</b> %s. Pulsa «Contabilizar» y míralo partirse: primero en lo que se programa y lo que ya está comprometido; después, en sus ocho renglones. Toca cualquier tramo para ver qué es; cada renglón tiene su propia página.</p>
           <div class="gp-cont">
             <button type="button" class="gp-boton" id="gpContar" aria-pressed="false">▶ Contabilizar</button>
@@ -3982,8 +3984,17 @@ def gasto_reparte(base, d):
             <div class="gp-nivel" data-nivel="2"><span class="gp-nivel-tit">Renglones</span><div class="gp-barra">%s</div></div>
           </div>
           <div class="gp-det" id="gpDet" aria-live="polite"><p class="gp-det-vacio">👆 Toca un tramo de las barras.</p></div>
-          <h3 class="gp-sub">Si el presupuesto fuera de…</h3>
-          <p class="gp-txt">Escribe una cantidad y mira cómo se repartiría en la misma proporción que el presupuesto aprobado. No es lo que pagas tú de impuestos (para eso está la <a href="herramienta-calculadora.html">Calculadora Cívica</a>): es la forma del gasto, en pequeño.</p>
+          <p class="np-pie">Los ocho renglones suman %s; los %s que faltan para el total son redondeo de la fuente, que publica la clasificación funcional en miles de millones. Cifras de la clasificación funcional de los Criterios 2027 %s y del PEF 2026 %s.</p>
+          <script type="application/json" id="gpDatos">%s</script>
+          <noscript><p>El simulador necesita JavaScript. Los ocho renglones, con su cifra y su fuente, están en sus páginas.</p></noscript>
+        </section>''' % (
+        _mdp(total), ref('ref-pef2026'),
+        seg({'id': 'total', 'nom': 'Gasto neto total', 'v': total, 'color': '#33415c'}, 0),
+        ''.join(seg(g, 1) for g in datos['grupos']), ''.join(seg(x, 2) for x in datos['renglones']),
+        _mdp(sp + sn), _mdp(redondeo), ref('ref-cgpe2027'), ref('ref-pef2026'), jdatos),
+        '''<section class="gp gp-reparte gp-fuera" id="gpFuera" aria-labelledby="gpFueraTit">
+          <h2 class="gp-tit sr-only" id="gpFueraTit">Si el presupuesto fuera de…</h2>
+          <p class="gp-txt">Escribe una cantidad y mira cómo se repartiría en la misma proporción que el presupuesto aprobado para 2026, de <b>%s</b>. No es lo que pagas tú de impuestos (para eso está la <a href="herramienta-calculadora.html">Calculadora Cívica</a>): es la forma del gasto, en pequeño.</p>
           <div class="gp-rep-mando">
             <label for="gpMonto">Cantidad en pesos</label>
             <input type="number" id="gpMonto" min="0" step="1" value="100" inputmode="numeric">
@@ -3992,14 +4003,79 @@ def gasto_reparte(base, d):
           <ol class="gp-rep" id="gpRep">%s</ol>
           <p class="np-pie" id="gpRepPie">Operación: cantidad × (renglón ÷ %s) <span class="est-chip est-derivado">derivado</span>. Los ocho renglones suman %s; los %s que faltan para el total son redondeo de la fuente, que publica la clasificación funcional en miles de millones. Cifras de la clasificación funcional de los Criterios 2027 %s y del PEF 2026 %s.</p>
           <script type="application/json" id="gpDatos">%s</script>
-          <noscript><p>El simulador necesita JavaScript. Los ocho renglones, con su cifra y su fuente, están en sus páginas.</p></noscript>
+          <noscript><p>La cuenta necesita JavaScript. Los ocho renglones, con su cifra y su fuente, están en sus páginas.</p></noscript>
         </section>''' % (
-        _mdp(total), ref('ref-pef2026'),
-        seg({'id': 'total', 'nom': 'Gasto neto total', 'v': total, 'color': '#33415c'}, 0),
-        ''.join(seg(g, 1) for g in datos['grupos']), ''.join(seg(x, 2) for x in datos['renglones']),
-        ''.join('<button type="button" data-monto="%d">$%s</button>' % (m, format(m, ',')) for m in (100, 1000, 10000, 1000000)),
-        filas_rep, _mdp(total), _mdp(sp + sn), _mdp(redondeo), ref('ref-cgpe2027'), ref('ref-pef2026'),
-        json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'))
+        _mdp(total), ''.join('<button type="button" data-monto="%d">$%s</button>' % (m, format(m, ',')) for m in (100, 1000, 10000, 1000000)),
+        filas_rep, _mdp(total), _mdp(sp + sn), _mdp(redondeo), ref('ref-cgpe2027'), ref('ref-pef2026'), jdatos))
+
+
+# «Gasto publico» en tarjetas (pedido del autor, 12-10-2026): su pagina
+# queda solo con tarjetas, en dos grupos, y cada una abre la suya. Las cuatro
+# primeras eran secciones de la misma pagina; las cinco de desglose ya
+# tenian pagina (NUMEROS_MODULOS y el simulador de Herramientas).
+# (id, icono, archivo, nombre de la tarjeta, descripcion breve, titulo, entrada, grupo)
+GASTO_GRUPOS = {'como': '🗺️ Cómo se aprueba y cómo se reparte', 'desg': '🔎 Los desgloses'}
+GASTO_PARTES = [
+    ('gpAprueba', '🗳️', 'numeros-gasto-quien-lo-aprueba.html', '¿Quién lo aprueba?', 'Las seis paradas del presupuesto y quién puede qué',
+     '¿Quién lo aprueba? El ciclo del presupuesto',
+     'Del proyecto de Hacienda a la revisión de la Auditoría Superior: cada parada del presupuesto, con su autoridad, su fecha límite y el artículo que le da la facultad.', 'como'),
+    ('gpReparte', '🧮', 'numeros-gasto-simulador-contable.html', 'El simulador contable', 'Mira partirse los $10.19 billones, del total a sus ocho renglones',
+     '¿Cómo se reparte? El simulador contable',
+     'El gasto de 2026, contabilizado desde cero: primero en lo que se programa y lo ya comprometido, después en sus ocho renglones, cada uno con su página.', 'como'),
+    ('gpFuera', '🪙', 'numeros-gasto-si-fuera-de.html', 'Si el presupuesto fuera de…', 'Escribe una cantidad y mírala repartirse igual',
+     'Si el presupuesto fuera de…',
+     'Una cantidad cualquiera, repartida en la misma proporción que el presupuesto aprobado: la forma del gasto, en pequeño.', 'como'),
+    ('gpTres', '🧭', 'numeros-gasto-tres-presupuestos.html', 'Los tres presupuestos', 'Del Estado, nacional y social: hacia dónde va',
+     '¿Hacia dónde va? Los tres presupuestos',
+     'El gasto leído en tres renglones, del Estado, nacional y social, más lo que ya está comprometido antes de empezar, con la operación a la vista.', 'como'),
+    ('reparte', '🎛️', 'simulador-presupuesto.html', 'Reparte tú el presupuesto', 'Arranca en $0, reparte los $10.19 billones y compáralo', None, None, 'desg'),
+    ('poderes', '⚖️', 'numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos', None, None, 'desg'),
+    ('eb-egresos', '🏢', 'numeros-ramos-y-dependencias.html', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, de la función al programa', None, None, 'desg'),
+    ('eb-salud', '🌡️', 'numeros-margen-del-presupuesto.html', '¿Cuánto margen tiene el presupuesto?', 'Lo ya comprometido antes de empezar, en un termostato', None, None, 'desg'),
+    ('eb-ciegos', '🔦', 'numeros-lo-que-la-cifra-no-dice.html', 'Lo que la cifra grande no dice', 'Cinco lecturas que cambian el sentido del total', None, None, 'desg'),
+]
+
+
+def gasto_portada(p, tarjetas):
+    """La pagina de «Gasto publico», solo con sus nueve tarjetas."""
+    p.update({'pestanas': True, 'pista': 'Cada tarjeta abre su propia página.', 'scripts': [], 'pie_extra': '',
+              'entrada': ('La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
+                          'Arriba, cómo se aprueba y cómo se reparte; abajo, cada desglose. Cada tarjeta abre su propia página.')})
+    p['secciones'] = [dict({'id': x[0], 'pagina': x[2], 'pestana': (x[1], x[3], x[4])},
+                           **({'grupo': GASTO_GRUPOS[x[7]]} if i == 0 or GASTO_PARTES[i - 1][7] != x[7] else {}))
+                      for i, x in enumerate(GASTO_PARTES)]
+    # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
+    p['hash_a_pagina'] = dict([(x[0], x[2]) for x in GASTO_PARTES[:4]] + [(x[0] + 'Tit', x[2]) for x in GASTO_PARTES[:4]] +
+                              [('gpContar', GASTO_PARTES[1][2]), ('gpMonto', GASTO_PARTES[2][2]), ('gpRep', GASTO_PARTES[2][2])])
+
+
+def gasto_paginas(html):
+    """Las cuatro paginas nuevas de «Gasto publico»."""
+    out = []
+    for pid, ico, archivo, corto, _, titulo, entrada, _ in GASTO_PARTES[:4]:
+        out.append({
+            'archivo': archivo, 'menu': corto, 'menu_archivo': 'sigue-el-dinero.html',
+            'padre': ('sigue-el-dinero.html', 'Números'), 'padre2': ('numeros-gasto-publico.html', 'Gasto público'),
+            'icono': ico, 'lema': 'Gasto público', 'titulo': titulo, 'entrada': entrada,
+            'estilos': ['numeros.css'], 'scripts': ['gasto-publico.js'] if pid != 'gpTres' else [],
+            'secciones': [{'id': pid + '-pag', 'titulo': titulo, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': html[pid]}],
+        })
+    return out
+
+
+def gasto_pies():
+    """Anterior y siguiente por las ocho paginas de «Gasto publico» (el
+    simulador de Herramientas no entra en la fila: tiene su propio pie)."""
+    fila = [x for x in GASTO_PARTES if x[2] != 'simulador-presupuesto.html']
+    por = {q['archivo']: q for q in NUMEROS_PAGINAS}
+    arriba = ('numeros-gasto-publico.html', '🏛️ Gasto público: sus nueve tarjetas')
+    for i, x in enumerate(fila):
+        ant = fila[i - 1] if i else None
+        sig = fila[i + 1] if i + 1 < len(fila) else None
+        por[x[2]]['pie_extra'] = presupuesto_pie(
+            (ant[2], '← Anterior', ant[1], ant[3]) if ant else ('numeros-gasto-publico.html', '← Volver a', '🏛️', 'Gasto público'),
+            (sig[2], 'Siguiente →', sig[1], sig[3]) if sig else presupuesto_siguiente_parte('gasta'),
+            arriba if ant else None)
 
 
 def egreso_pagina(x, n, lista, total, refs, glosario):
@@ -4021,7 +4097,7 @@ def egreso_pagina(x, n, lista, total, refs, glosario):
     ant, sig = (lista[n - 1] if n > 0 else None), (lista[n + 1] if n + 1 < len(lista) else None)
     def paso(y, rot, cls):
         if not y:
-            return '<a class="herr-mod-paso %s" href="numeros-gasto-publico.html#gpReparte"><small>%s</small><b>🏛️ El simulador contable</b></a>' % (
+            return '<a class="herr-mod-paso %s" href="numeros-gasto-simulador-contable.html"><small>%s</small><b>🧮 El simulador contable</b></a>' % (
                 cls, '← Volver a' if cls == 'ant' else 'Terminaste · volver a')
         return '<a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>' % (cls, egreso_archivo(y), rot, y['icono'], y['nombre'])
     chips = ''.join('<a class="herr-mod-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %s</a>' % (
@@ -4095,9 +4171,10 @@ def numeros_preparar():
                 f['p'] = egreso_archivo(eg_nombre[f['n']])
     a = next(x for x in APARTADOS if x['archivo'] == 'sigue-el-dinero.html')
     pasos = {sec['id']: sec for sec in a['secciones']}
-    pasos['gasta']['bloque'] = (gasto_ciclo(base) + '\n        ' + gasto_reparte(base, d) +
-                                '\n        <section class="gp gp-tres" aria-labelledby="gpTresTit"><h2 class="gp-tit" id="gpTresTit">¿Hacia dónde va? Los tres presupuestos</h2>\n        '
-                                + numeros_tres(d) + '</section>\n        <h2 class="gp-tit gp-tit-desg">Los desgloses, cada uno en su página</h2>')
+    contable, fuera = gasto_reparte(base, d)
+    gasto_html = {'gpAprueba': gasto_ciclo(base), 'gpReparte': contable, 'gpFuera': fuera,
+                  'gpTres': '<section class="gp gp-tres" id="gpTres" aria-labelledby="gpTresTit"><h2 class="gp-tit sr-only" id="gpTresTit">¿Hacia dónde va? Los tres presupuestos</h2>\n        '
+                            + numeros_tres(d) + '</section>'}
     # La nota del libro va al pie de cada paso, no en la portada.
     comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
     for pid, archivo, ico, nombre, desc in NUMEROS_PARTES:
@@ -4108,7 +4185,9 @@ def numeros_preparar():
         sec.pop('num', None)
         # «Presupuesto» y «Baja al territorio» ya no llevan la nota del
         # libro: vive en el Diccionario (pedidos del autor, 11-10-2026).
-        con_libro = pid not in ('origen', 'baja')
+        # Ni «Gasto publico» (12-10-2026): su «Ayer y hoy» paso a las
+        # Preguntas frecuentes.
+        con_libro = pid not in ('origen', 'baja', 'gasta')
         if con_libro:
             p.update(comun)
         p.update({'titulo': sec['titulo'], 'entrada': sec['texto'], 'libro_pie': con_libro, 'secciones': [sec]})
@@ -4124,7 +4203,10 @@ def numeros_preparar():
             # Igual que «Presupuesto»: solo sus tres tarjetas (11-10-2026).
             p['pie_extra'] = ''
         if pid == 'gasta':
-            p['scripts'] = ['gasto-publico.js']
+            # Solo sus tarjetas, en dos grupos; cada una abre su pagina
+            # (pedido del autor, 12-10-2026). gasto_paginas() arma las cuatro
+            # nuevas; las cinco de desglose ya la tenian.
+            gasto_portada(p, sec['tarjetas'])
             p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
                            '<a href="herramienta-megaobras.html">Herramientas · Megaobras</a> y <a href="herramienta-ambiente.html">Herramientas · Costo ambiental</a>.</p>')
         if pid == 'cuentas':
@@ -4169,6 +4251,8 @@ def numeros_preparar():
             NUMEROS_PAGINAS[-1]['estilos'] = NUMEROS_PAGINAS[-1]['estilos'] + ['radar.css']
         if m[0] == 'proyeccion2027':
             NUMEROS_PAGINAS.extend(paquete_paginas(NUMEROS_PAGINAS[-1], pm.paquete_partes(base, ref), pm.PE_PARTES))
+    NUMEROS_PAGINAS.extend(gasto_paginas(gasto_html))
+    gasto_pies()
     glosario = set(t['termino'] for t in base['glosario'])
     total = base['panoramaErario']['totalLIF']
     for n, x in enumerate(ingresos):
@@ -4247,20 +4331,34 @@ def pagina(a, sello):
                        if s['tarjetas'] else ''))
 
     if a.get('pestanas'):
-        botones = '\n'.join(
-            ('          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-%s" href="%s">'
-             '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
-             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>' % ((s['id'], s['pagina']) + s['pestana'])).replace('<small></small>', '')
-            if s.get('pagina') else
-            ('          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
-             '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
-             '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
-             % ((s['id'], s['id'], s['id']) + s['pestana'])) for s in a['secciones'])
-        en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página"%s>
+        def boton(s):
+            if s.get('pagina'):
+                return ('          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-%s" href="%s">'
+                        '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
+                        '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
+                        % ((s['id'], s['pagina']) + s['pestana'])).replace('<small></small>', '')
+            return ('          <a class="apartado-pestana" role="tab" id="pestana-%s" href="#%s" aria-controls="%s" aria-selected="false">'
+                    '<span class="apartado-pestana-ico" aria-hidden="true">%s</span>'
+                    '<span class="apartado-pestana-tx"><b>%s</b><small>%s</small></span></a>'
+                    % ((s['id'], s['id'], s['id']) + s['pestana']))
+        pista = '\n      <p class="apartado-pestanas-pista" id="pestanasPista">%s</p>' % a.get('pista', 'Elige una pestaña para abrir su contenido.')
+        if any(s.get('grupo') for s in a['secciones']):
+            # Tarjetas en grupos con su titulo (Gasto publico, 12-10-2026);
+            # todas abren su pagina.
+            grupos = []
+            for s in a['secciones']:
+                if s.get('grupo') or not grupos:
+                    grupos.append((s.get('grupo', ''), []))
+                grupos[-1][1].append(boton(s))
+            en_pagina = ''.join('''
+      <h2 class="apartado-pestanas-grupo">%s</h2>
+      <nav class="apartado-pestanas" aria-label="%s">
 %s
-      </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">%s</p>''' % (
-            ' data-primera="1"' if a.get('primera') else '', botones, a.get('pista', 'Elige una pestaña para abrir su contenido.'))
+      </nav>''' % (g, esc_attr(re.sub(r'^\W+', '', g)), '\n'.join(b)) for g, b in grupos).lstrip('\n') + pista
+        else:
+            en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página"%s>
+%s
+      </nav>%s''' % (' data-primera="1"' if a.get('primera') else '', '\n'.join(boton(s) for s in a['secciones']), pista)
     elif len(a['secciones']) > 1:
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
             s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '', s['titulo'])
@@ -4283,6 +4381,8 @@ def pagina(a, sello):
         # pagina, como nota con su numero, ligada al compendio de fuentes,
         # al glosario y al diccionario (decision del autor).
         guia_abajo += ('\n\n      ' + a['cierre'] if a.get('cierre') else '') + '\n\n      ' + libro_pie(a)
+    elif a.get('cierre'):
+        guia_abajo += '\n\n      ' + a['cierre']
     elif a.get('libro_ref'):
         # Desde el 09-10-2026 la nota del libro ya no es un recuadro en la
         # pagina (decision del autor): es un enlace bajo la entrada que la
@@ -4482,11 +4582,11 @@ def indice():
                        [_grupo(p['icono'], p['titulo'],
                                ([(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
                                 if p['archivo'] == 'numeros-presupuesto.html' else []) +
-                               ([('numeros-gasto-publico.html#gpAprueba', '¿Quién lo aprueba? El ciclo del presupuesto', ''),
-                                 ('numeros-gasto-publico.html#gpReparte', '¿Cómo se reparte? El simulador contable', '')] +
-                                [(egreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['egresos']]
+                               ([(x[2], x[3], '') for x in GASTO_PARTES[:4]] +
+                                [(egreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['egresos']] +
+                                [(x[2], x[3], '') for x in GASTO_PARTES[4:]]
                                 if p['archivo'] == 'numeros-gasto-publico.html' else []) +
-                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s['tarjetas']],
+                               [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s.get('tarjetas', [])],
                                p['archivo'])
                         for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])
     # El Modo Inspector se abre en dos tarjetas (11-10-2026): sus ocho

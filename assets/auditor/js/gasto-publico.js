@@ -59,72 +59,77 @@
   D.grupos.forEach(function (g) { porId[g.id] = g; });
   D.renglones.forEach(function (r) { porId[r.id] = r; });
 
-  var ici = document.getElementById('gpIci'), det = document.getElementById('gpDet');
-  var btn = document.getElementById('gpContar'), tot = document.getElementById('gpTotal'), est = document.getElementById('gpEstado');
-  var niveles = Array.prototype.slice.call(ici.querySelectorAll('.gp-nivel'));
-  var segs = Array.prototype.slice.call(ici.querySelectorAll('.gp-seg'));
-  var lleno = false, anim = null;
+  /* El simulador y «Si el presupuesto fuera de…» viven en paginas distintas
+     (12-10-2026): cada uno corre si su pagina lo trae. */
+  var ici = document.getElementById('gpIci');
+  if (ici) (function () {
+    var det = document.getElementById('gpDet');
+    var btn = document.getElementById('gpContar'), tot = document.getElementById('gpTotal'), est = document.getElementById('gpEstado');
+    var niveles = Array.prototype.slice.call(ici.querySelectorAll('.gp-nivel'));
+    var segs = Array.prototype.slice.call(ici.querySelectorAll('.gp-seg'));
+    var lleno = false, anim = null;
 
-  function pinta(t) {
-    // Cada nivel arranca un poco después del anterior: el total se parte.
-    niveles.forEach(function (n, k) {
-      var a = Math.max(0, Math.min(1, (t - k * 0.25) / 0.5));
-      n.style.setProperty('--t', (1 - Math.pow(1 - a, 3)).toFixed(4));
-    });
-    tot.textContent = '$' + num(total * Math.min(1, t / 0.5), 1) + ' mdp';
-  }
-  function ceros() {
-    if (anim) cancelAnimationFrame(anim);
-    lleno = false; pinta(0); ici.classList.add('gp-ceros');
-    btn.textContent = '▶ Contabilizar'; btn.setAttribute('aria-pressed', 'false');
-    est.textContent = 'El presupuesto está en ceros.';
-  }
-  function contar() {
-    lleno = true; ici.classList.remove('gp-ceros');
-    btn.textContent = '↺ Reiniciar en ceros'; btn.setAttribute('aria-pressed', 'true');
-    est.textContent = 'Contabilizado: el Presupuesto de Egresos 2026, del total a sus ocho renglones.';
-    if (reduce) { pinta(1); return; }
-    var t0 = null, dur = 2600;
-    function paso(ts) {
-      if (t0 === null) t0 = ts;
-      var t = Math.min(1, (ts - t0) / dur);
-      pinta(t);
-      if (t < 1) anim = requestAnimationFrame(paso);
+    function pinta(t) {
+      // Cada nivel arranca un poco después del anterior: el total se parte.
+      niveles.forEach(function (n, k) {
+        var a = Math.max(0, Math.min(1, (t - k * 0.25) / 0.5));
+        n.style.setProperty('--t', (1 - Math.pow(1 - a, 3)).toFixed(4));
+      });
+      tot.textContent = '$' + num(total * Math.min(1, t / 0.5), 1) + ' mdp';
     }
-    anim = requestAnimationFrame(paso);
-  }
-  btn.addEventListener('click', function () { if (lleno) ceros(); else contar(); });
+    function ceros() {
+      if (anim) cancelAnimationFrame(anim);
+      lleno = false; pinta(0); ici.classList.add('gp-ceros');
+      btn.textContent = '▶ Contabilizar'; btn.setAttribute('aria-pressed', 'false');
+      est.textContent = 'El presupuesto está en ceros.';
+    }
+    function contar() {
+      lleno = true; ici.classList.remove('gp-ceros');
+      btn.textContent = '↺ Reiniciar en ceros'; btn.setAttribute('aria-pressed', 'true');
+      est.textContent = 'Contabilizado: el Presupuesto de Egresos 2026, del total a sus ocho renglones.';
+      if (reduce) { pinta(1); return; }
+      var t0 = null, dur = 2600;
+      function paso(ts) {
+        if (t0 === null) t0 = ts;
+        var t = Math.min(1, (ts - t0) / dur);
+        pinta(t);
+        if (t < 1) anim = requestAnimationFrame(paso);
+      }
+      anim = requestAnimationFrame(paso);
+    }
+    btn.addEventListener('click', function () { if (lleno) ceros(); else contar(); });
 
-  function ficha(id) {
-    var x = porId[id];
-    if (!x) return;
-    if (!lleno) { pinta(1); lleno = true; ici.classList.remove('gp-ceros'); btn.textContent = '↺ Reiniciar en ceros'; btn.setAttribute('aria-pressed', 'true');
-      est.textContent = 'Contabilizado: el Presupuesto de Egresos 2026, del total a sus ocho renglones.'; }
-    segs.forEach(function (s) {
-      var sid = s.getAttribute('data-id'), y = porId[sid];
-      var rel = sid === id || id === 'total' || (y && y.g === id) || (x.g && x.g === sid) || sid === 'total';
-      s.setAttribute('aria-pressed', sid === id ? 'true' : 'false');
-      s.classList.toggle('gp-apagado', !rel);
-    });
-    var hijos = id === 'total' ? D.grupos : D.renglones.filter(function (r) { return r.g === id; });
-    var lista = hijos.length ? '<ul class="gp-det-hijos">' + hijos.map(function (h) {
-      return '<li><span class="gp-det-p" style="background:' + h.color + '"></span>' +
-        (h.p ? '<a href="' + h.p + '">' + esc(h.nom) + '</a>' : '<button type="button" class="gp-det-ir" data-id="' + h.id + '">' + esc(h.nom) + '</button>') +
-        '<b>$' + num(h.v, 1) + ' mdp</b><span>' + num(h.v / x.v * 100, 1) + '%</span></li>';
-    }).join('') + '</ul>' : '';
-    det.innerHTML = '<div class="gp-det-cab" style="--c:' + x.color + '">' + (x.ico ? '<span class="gp-det-ico" aria-hidden="true">' + x.ico + '</span>' : '') +
-      '<h3>' + esc(x.nom) + '</h3></div>' +
-      '<div class="gp-det-cifras"><p><b>$' + num(x.v, 1) + ' mdp</b> <span class="est-chip est-' + x.est + '">' + x.est + '</span></p>' +
-      (id === 'total' ? '' : '<p class="gp-det-cien">De cada $100 que se gastan<b>$' + num(x.v / total * 100, 2) + '</b> <span class="est-chip est-derivado">derivado</span></p>') + '</div>' +
-      '<p class="gp-det-que">' + esc(x.que) + '</p>' +
-      (x.op ? '<p class="gp-det-op">Operación: ' + esc(x.op) + '</p>' : '') + lista +
-      (x.p ? '<p class="gp-det-irp"><a href="' + x.p + '">Abrir la página de «' + esc(x.nom) + '» ➔</a></p>' : '');
-    Array.prototype.forEach.call(det.querySelectorAll('.gp-det-ir'), function (b) {
-      b.addEventListener('click', function () { ficha(b.getAttribute('data-id')); });
-    });
-  }
-  segs.forEach(function (s) { s.addEventListener('click', function () { ficha(s.getAttribute('data-id')); }); });
-  ceros();
+    function ficha(id) {
+      var x = porId[id];
+      if (!x) return;
+      if (!lleno) { pinta(1); lleno = true; ici.classList.remove('gp-ceros'); btn.textContent = '↺ Reiniciar en ceros'; btn.setAttribute('aria-pressed', 'true');
+        est.textContent = 'Contabilizado: el Presupuesto de Egresos 2026, del total a sus ocho renglones.'; }
+      segs.forEach(function (s) {
+        var sid = s.getAttribute('data-id'), y = porId[sid];
+        var rel = sid === id || id === 'total' || (y && y.g === id) || (x.g && x.g === sid) || sid === 'total';
+        s.setAttribute('aria-pressed', sid === id ? 'true' : 'false');
+        s.classList.toggle('gp-apagado', !rel);
+      });
+      var hijos = id === 'total' ? D.grupos : D.renglones.filter(function (r) { return r.g === id; });
+      var lista = hijos.length ? '<ul class="gp-det-hijos">' + hijos.map(function (h) {
+        return '<li><span class="gp-det-p" style="background:' + h.color + '"></span>' +
+          (h.p ? '<a href="' + h.p + '">' + esc(h.nom) + '</a>' : '<button type="button" class="gp-det-ir" data-id="' + h.id + '">' + esc(h.nom) + '</button>') +
+          '<b>$' + num(h.v, 1) + ' mdp</b><span>' + num(h.v / x.v * 100, 1) + '%</span></li>';
+      }).join('') + '</ul>' : '';
+      det.innerHTML = '<div class="gp-det-cab" style="--c:' + x.color + '">' + (x.ico ? '<span class="gp-det-ico" aria-hidden="true">' + x.ico + '</span>' : '') +
+        '<h3>' + esc(x.nom) + '</h3></div>' +
+        '<div class="gp-det-cifras"><p><b>$' + num(x.v, 1) + ' mdp</b> <span class="est-chip est-' + x.est + '">' + x.est + '</span></p>' +
+        (id === 'total' ? '' : '<p class="gp-det-cien">De cada $100 que se gastan<b>$' + num(x.v / total * 100, 2) + '</b> <span class="est-chip est-derivado">derivado</span></p>') + '</div>' +
+        '<p class="gp-det-que">' + esc(x.que) + '</p>' +
+        (x.op ? '<p class="gp-det-op">Operación: ' + esc(x.op) + '</p>' : '') + lista +
+        (x.p ? '<p class="gp-det-irp"><a href="' + x.p + '">Abrir la página de «' + esc(x.nom) + '» ➔</a></p>' : '');
+      Array.prototype.forEach.call(det.querySelectorAll('.gp-det-ir'), function (b) {
+        b.addEventListener('click', function () { ficha(b.getAttribute('data-id')); });
+      });
+    }
+    segs.forEach(function (s) { s.addEventListener('click', function () { ficha(s.getAttribute('data-id')); }); });
+    ceros();
+  })();
 
   /* «Si el presupuesto fuera de…». */
   var monto = document.getElementById('gpMonto'), rep = document.getElementById('gpRep');
