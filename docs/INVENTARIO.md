@@ -8,7 +8,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Concepto | Cantidad |
 |---|---|
 | Páginas revisadas | 133 |
-| Páginas que solo redirigen | 9 |
+| Páginas que solo redirigen | 11 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 7 destinos |
 
@@ -77,7 +77,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 150 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 148 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
@@ -86,7 +86,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 40 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 37 | 0 | 4 | 0 | 0 |
-| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 37 | 0 | 5 | 5 | 0 |
+| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 40 | 0 | 8 | 7 | 1 |
 | `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `numeros-egreso-adefas.html` | ADEFAS · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-egreso-costo-financiero.html` | Costo financiero de la deuda · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
@@ -134,17 +134,17 @@ La Enciclopedia queda fuera porque está congelada.
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 49 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `radar-peso-maquina.html` | La máquina del tiempo del peso · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-peso-monedas.html` | El peso frente al dólar, el euro y la inflación · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-peso-sexenios.html` | El peso en cada sexenio · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
-| `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 33 | 0 | 4 | 3 | 1 |
-| `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `radar-estado-de-cuenta.html` | Expide un estado de cuenta · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
+| `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `radar-peso-maquina.html` | La máquina del tiempo del peso · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-peso-monedas.html` | El peso frente al dólar, el euro y la inflación · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-peso-sexenios.html` | El peso en cada sexenio · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `radar-peso.html` | El peso en el tiempo · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
@@ -165,6 +165,8 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 | `numeros-se-gasta.html` | `numeros-gasto-publico.html` |
 | `numeros-se-recauda.html` | `numeros-presupuesto.html` |
 | `numeros-se-revisa.html` | `numeros-cuentas-claras.html` |
+| `radar-hoy.html` | `numeros-cuanto-dinero-es.html` |
+| `radar-presupuesto-en-curso.html` | `numeros-cuanto-dinero-es.html` |
 
 ## Enlaces rotos
 

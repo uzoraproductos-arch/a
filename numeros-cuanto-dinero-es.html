@@ -20,11 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261012g">
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261012g">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261012g">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261012g">
-  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261012g">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261012h">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261012h">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261012h">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261012h">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261012h">
+  <link rel="stylesheet" href="assets/auditor/css/radar.css?v=20261012h">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -163,8 +164,30 @@
         <section class="pm" aria-labelledby="pmCifraTit">
           <h2 class="pm-tit" id="pmCifraTit">La cifra de 2026, de un vistazo</h2>
           <p class="pm-txt"><b>$10.19 billones de pesos</b>: ese es el total de 2026, antes de partirlo. La Ley de Ingresos y el Presupuesto de Egresos suman la misma cifra por construcción: el presupuesto cuadra porque la deuda se cuenta como ingreso.</p>
-          <div class="pm-kpis"><div class="pm-kpi pm-gold"><span class="pm-kpi-k">Ingreso autorizado <span class="est-chip est-oficial">oficial</span></span><b class="pm-kpi-v num-tabular">$10.19 billones</b><small>Ley de Ingresos 2026 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-lif2026" title="Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026 [LIF 2026]. Diario Oficial de la Federación, 7 de noviembre de 2025 (México). Cámara de Diputa">[10]</a></sup></small></div><div class="pm-kpi pm-gold"><span class="pm-kpi-k">Gasto aprobado <span class="est-chip est-oficial">oficial</span></span><b class="pm-kpi-v num-tabular">$10.19 billones</b><small>Presupuesto de Egresos 2026 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup></small></div><div class="pm-kpi pm-red"><span class="pm-kpi-k">De eso, prestado <span class="est-chip est-derivado">derivado</span></span><b class="pm-kpi-v num-tabular">$1.47 billones</b><small>14.4% del ingreso: $1,472,626.4 mdp ÷ $10,193,683.7 mdp</small></div><div class="pm-kpi pm-green"><span class="pm-kpi-k">Se decide cada año <span class="est-chip est-derivado">derivado</span></span><b class="pm-kpi-v num-tabular">$7.09 billones</b><small>Gasto programable: suma de sus 5 finalidades <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-cgpe2027" title="Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto d">[64]</a></sup></small></div><div class="pm-kpi pm-red"><span class="pm-kpi-k">Ya está comprometido <span class="est-chip est-derivado">derivado</span></span><b class="pm-kpi-v num-tabular">$3.10 billones</b><small>Gasto no programable: suma de sus 3 renglones <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup></small></div></div>
+          <div class="rd-cuenta" id="rdCuenta" hidden>
+          <button type="button" class="rd-cuenta-btn" id="rdContar" aria-pressed="false">▶ Contar</button>
+          <span class="rd-cuenta-txt" id="rdCuentaTxt">Las cifras están en cero. Presiona «Contar» para verlas llegar a su valor oficial.</span>
+        </div>
+          <div class="rd-hoy">
+          <div class="rd-hoy-c"><span class="rd-hoy-que">📥 Ingreso autorizado</span><b>$10.19 billones</b> <span class="est-chip est-oficial">oficial</span><small>📄 Ley de Ingresos 2026 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-lif2026" title="Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026 [LIF 2026]. Diario Oficial de la Federación, 7 de noviembre de 2025 (México). Cámara de Diputa">[10]</a></sup></small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">🏛️ Gasto aprobado</span><b>$10.19 billones</b> <span class="est-chip est-oficial">oficial</span><small>📄 Presupuesto de Egresos 2026 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup></small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">💳 De eso, prestado</span><b>$1.47 billones</b> <span class="est-chip est-derivado">derivado</span><small>📄 14.4% del ingreso: $1,472,626.4 mdp ÷ $10,193,683.7 mdp</small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">🗳️ Se decide cada año</span><b>$7.09 billones</b> <span class="est-chip est-derivado">derivado</span><small>📄 Gasto programable: suma de sus 5 finalidades <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-cgpe2027" title="Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto d">[64]</a></sup></small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">🔒 Ya está comprometido</span><b>$3.10 billones</b> <span class="est-chip est-derivado">derivado</span><small>📄 Gasto no programable: suma de sus 3 renglones <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup></small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">💰 ISR, IVA e IEPS estimados en la Ley de Ingresos 2026</span><b>$5.42 billones</b> <span class="est-chip est-derivado">derivado</span><small>📄 Ley de Ingresos de la Federación 2026, art. 1: ISR $3,070,149.1 + IVA $1,589,069.0 + IEPS $761,501.9 mdp</small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">🤝 Participaciones a estados y municipios (Ramo 28)</span><b>$1.46 billones</b> <span class="est-chip est-oficial">oficial</span><small>📄 PEF 2026, Ramo General 28: $1,456,045.9 mdp</small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">📉 Costo financiero de la deuda en 2026</span><b>$1,572,073.3 mdp</b> <span class="est-chip est-oficial">oficial</span><small>📄 PEF 2026, Anexo 8</small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">🏦 Deuda de los 32 gobiernos estatales</span><b>$643,695.7 mdp</b> <span class="est-chip est-derivado">derivado</span><small>📄 SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (29 de junio de 2026); suma de las 32 entidades</small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">⚖️ Por aclarar ante la ASF, Cuenta Pública 2024 (no es daño comprobado)</span><b>$65,169.1 mdp</b> <span class="est-chip est-oficial">oficial</span><small>📄 ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (consolidado, feb. 2026), p. 11</small></div>
+          <div class="rd-hoy-c"><span class="rd-hoy-que">⛽ Huachicol fiscal: cuánto IEPS se deja de cobrar</span><b>sin cifra oficial</b> <span class="est-chip est-pendiente" data-pend="huachicol-evasion">pendiente</span><small>📄 <a href="auditoria-huachicol-fiscal.html">Lo que se sabe y lo que falta ➔</a></small></div>
+          </div>
           <p class="pm-pie">Los cinco renglones programables son la clasificación funcional que Hacienda publica en miles de millones <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-cgpe2027" title="Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto d">[64]</a></sup>; por eso suman $7,094,700.0 mdp y no los $7,094,708.8 mdp del cuadro de finanzas públicas: la diferencia de 8.8 millones es redondeo de la fuente, no un faltante.</p>
+          <div class="rd-hoy-vivo" id="rdHoyVivo" role="status"><div class="rd-hoy-candado" id="rdCandado" hidden>🔒 Se desbloquea al presionar «Contar»</div><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
+          <span>intereses de la deuda <b data-tasa="49850.12">+$0.00</b></span>
+          <span>pérdida documentada de las megaobras <b data-tasa="2062.75">+$0.00</b></span>
+          <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y $65,050.8 mdp, este último un piso derivado
+          con la Cuenta Pública 2024). No son pagos que ocurran en este instante. <a href="auditoria-deuda-soberana.html">El reloj de los intereses ➔</a></small>
+        </div>
         </section>
         <section class="np" id="numPeso" aria-labelledby="npTit">
         <div class="np-cab">
@@ -208,12 +231,13 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261012g</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261012h</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261012g"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261012g"></script>
-  <script src="assets/auditor/js/numeros.js?v=20261012g"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261012h"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261012h"></script>
+  <script src="assets/auditor/js/numeros.js?v=20261012h"></script>
+  <script src="assets/auditor/js/radar.js?v=20261012h"></script>
 </body>
 </html>

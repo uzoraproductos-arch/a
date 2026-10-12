@@ -274,3 +274,5 @@
   .rd-din-grande .rd-din-v { font-size: 22px; }
   .rd-din-base button { border-bottom: 0; }
 }
+.rd-expide-pie { margin: 16px 0 0; text-align: center; }
+.rd-expide-pie .rd-expide { display: inline-block; margin: 0; font-size: 16px; padding: 12px 16px; min-height: 44px; }

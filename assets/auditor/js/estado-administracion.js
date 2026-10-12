@@ -672,8 +672,8 @@
   }
 
   /* ================= Arranque ================= */
-  /* El «Hoy» vivió en esta página hasta el 10-10-2026: su ancla lleva a la suya. */
-  if (location.hash === '#hoy') { location.replace('radar-presupuesto-en-curso.html'); return; }
+  /* El «Hoy» vivió en esta página hasta el 10-10-2026; desde el 12-10-2026 vive en «Cuánto dinero es». */
+  if (location.hash === '#hoy') { location.replace('numeros-cuanto-dinero-es.html'); return; }
   var q = new URLSearchParams(location.search);
   /* Los PDF impresos antes de la mudanza llevan esta dirección con ?verifica=. */
   if (q.get('verifica')) { location.replace(new URL(VERIFICA + location.search, location.href).href); return; }

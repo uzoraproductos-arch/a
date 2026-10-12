@@ -57,11 +57,14 @@ def _seg(w, color, titulo, cuerpo, href=None, extra=''):
 # ---------------------------------------------------------------------------
 # 1 · Cuanto dinero es
 # ---------------------------------------------------------------------------
-def cuanto(base, ref, peso):
+def cuanto(base, ref, peso, hoy):
     """La cifra de 2026, las dos barras de «El peso de 2026» (`peso`, que
     arma apartados.numeros_peso y vuelve interactivo numeros.js) y lo que
     baja al territorio. Desde el 11-10-2026 aqui vive «El peso de 2026»:
-    las dos paginas repetian el total y el reparto (pedido del autor)."""
+    las dos paginas repetian el total y el reparto (pedido del autor).
+    Desde el 12-10-2026 tambien las cifras de «Hoy» del Radar hacendario,
+    con su contador: `hoy` = (boton, tarjetas, «Durante tu visita»), de
+    apartados.RADAR_HOY_*; radar.js las anima (pedido del autor)."""
     P = base['panoramaErario']
     tlif, tpef = P['totalLIF'], P['totalPEF']
     ing, eg = P['ingresos'], P['egresos']
@@ -79,9 +82,13 @@ def cuanto(base, ref, peso):
         ('Se decide cada año', bill(sp), 'green', 'Gasto programable: suma de sus %d finalidades %s' % (len(prog), ref('ref-cgpe2027')), 'derivado'),
         ('Ya está comprometido', bill(sn), 'red', 'Gasto no programable: suma de sus %d renglones %s' % (len(nopr), ref('ref-pef2026')), 'derivado'),
     ]
-    tarjetas = ''.join(
-        '<div class="pm-kpi pm-%s"><span class="pm-kpi-k">%s %s</span><b class="pm-kpi-v num-tabular">%s</b><small>%s</small></div>'
-        % (c, k, chip(e), v, s) for k, v, c, s, e in kpis)
+    # Con el formato de las de «Hoy», para que el contador las anime todas.
+    ico = {'Ingreso autorizado': '📥', 'Gasto aprobado': '🏛️', 'De eso, prestado': '💳',
+           'Se decide cada año': '🗳️', 'Ya está comprometido': '🔒'}
+    cuenta, filas_hoy, vivo = hoy
+    tarjetas = '\n'.join(
+        '          <div class="rd-hoy-c"><span class="rd-hoy-que">%s %s</span><b>%s</b> %s<small>📄 %s</small></div>'
+        % (ico[k], k, v, chip(e), s) for k, v, c, s, e in kpis) + '\n' + '\n'.join(filas_hoy)
     # Las barras ya no repiten el porque del cuadre: lo dice la cifra de arriba.
     peso = peso.replace('La Ley de Ingresos y el Presupuesto de Egresos suman lo mismo por construcción: la deuda se cuenta como ingreso. ', '')
     peso = peso.replace('El peso de 2026: de dónde viene y a dónde va', 'De dónde viene y a dónde va')
@@ -101,8 +108,12 @@ def cuanto(base, ref, peso):
     return '''<section class="pm" aria-labelledby="pmCifraTit">
           <h2 class="pm-tit" id="pmCifraTit">La cifra de 2026, de un vistazo</h2>
           <p class="pm-txt"><b>%s de pesos</b>: ese es el total de 2026, antes de partirlo. %s</p>
-          <div class="pm-kpis">%s</div>
+          %s
+          <div class="rd-hoy">
+%s
+          </div>
           <p class="pm-pie">Los cinco renglones programables son la clasificación funcional que Hacienda publica en miles de millones %s; por eso suman %s y no los $7,094,708.8 mdp del cuadro de finanzas públicas: la diferencia de %s millones es redondeo de la fuente, no un faltante.</p>
+          %s
         </section>
         %s
         <section class="pm" aria-labelledby="pmBajaTit">
@@ -113,7 +124,7 @@ def cuanto(base, ref, peso):
           <p class="pm-pie">%s %s <a href="numeros-mapa-del-gasto-federalizado.html">Míralo sobre el mapa, estado por estado ➔</a></p>
         </section>
         <p class="pm-sigue">¿Y a dónde va, renglón por renglón? <a href="numeros-gasto-publico.html#gpReparte">🏛️ Los ocho renglones del gasto ➔</a></p>''' % (
-        bill(tpef), P['notaCuadre'], tarjetas, ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'), peso,
+        bill(tpef), P['notaCuadre'], cuenta, tarjetas, ref('ref-cgpe2027'), mdp(sp), format(redondeo, '.1f'), vivo, peso,
         bill(F['totalMdp']), pct(pfed), chip('derivado'), mdp(F['totalMdp']), mdp(tpef), pct(pfed), barra_fed, ley_fed,
         F['nota'], ref('ref-pef2026'))
 
