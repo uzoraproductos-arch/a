@@ -169,7 +169,7 @@
   }
 
   /* ================= Tablero ================= */
-  var est = { adm: D.inicial || D.admins[D.admins.length - 1].id, dim: D.dims[0].id, met: null, mon: 'nom' };
+  var est = { adm: D.inicial || D.admins[D.admins.length - 1].id, dim: D.dims[0].id, met: null, mon: 'hoy', base: 'anio' };
   /* Selector de moneda para las sumas en pesos. */
   function selMon(actual, attr) {
     return '<div class="rd-mon" role="radiogroup" aria-label="En qué moneda ver las sumas">' + D.monedas.map(function (m) {
@@ -210,7 +210,7 @@
     var a = adm(est.adm);
     var h = '<div class="rd-dim-cab"><h3><span aria-hidden="true">' + d.ico + '</span> ' + esc(d.tit) + '</h3><p>' + esc(d.que) + '</p></div>';
     h += '<div class="rd-mets" role="tablist" aria-label="Qué medir">' + d.metricas.map(function (m) {
-      return '<button type="button" class="rd-met" role="tab" aria-selected="' + (m === est.met) + '" data-met="' + m + '">' + esc(D.metricas[m].tit) + '</button>';
+      return '<button type="button" class="rd-met" role="tab" aria-selected="' + (m === est.met) + '" data-met="' + m + '">' + (D.metricas[m].mon ? '💵 ' : '') + esc(D.metricas[m].tit) + '</button>';
     }).join('') + '</div>';
 
     /* Lo de la administración elegida en esta dimensión, con su procedencia. */
@@ -234,6 +234,12 @@
     /* La comparativa de todas las administraciones. */
     var mm = D.metricas[est.met];
     var mon = mm.mon ? est.mon : null;
+    if (mm.mon) {
+      document.getElementById('rdDim').innerHTML = h + dinero(est.met, mon);
+      crecer(document.getElementById('rdDim'));
+      contarDin(document.getElementById('rdDim'));
+      return;
+    }
     var vals = D.admins.map(function (x) { return { a: x, x: enMon(val(x.id, est.met), mon) }; });
     var max = 0;
     vals.forEach(function (o) { if (tieneV(o.x)) max = Math.max(max, Math.abs(o.x.v)); });
@@ -250,6 +256,108 @@
       }).join('') + '</ol></div>';
     document.getElementById('rdDim').innerHTML = h;
     crecer(document.getElementById('rdDim'));
+  }
+
+  /* ---- Lo que cuesta, en dinero (pedido del autor, 12-10-2026) ----
+     En las dimensiones con suma en pesos, la comparativa pone primero el
+     dinero: cuánto por año, en promedio, y cuánto en todo el sexenio. El
+     % del PIB queda de contexto en cada renglón. El promedio por año es
+     la suma entre los años con dato, para que un sexenio con cinco años
+     (Salinas) o uno en curso (Sheinbaum) se comparen con los demás. */
+  function fmtDin(v, mon) {
+    var a = Math.abs(v), p = PRE[mon] || '$', s = v < 0 ? '−' : '';
+    if (a >= 1e6) return { pre: s + p, n: a / 1e6, d: 2, suf: ' billones' };
+    if (a >= 1e3) return { pre: s + p, n: a / 1e3, d: 1, suf: ' mil millones' };
+    return { pre: s + p, n: a, d: 1, suf: ' millones' };
+  }
+  function din(v, mon, cls) {
+    var f = fmtDin(v, mon);
+    return '<b class="rd-din-v ' + (cls || '') + '" data-n="' + f.n + '" data-d="' + f.d + '" data-pre="' + esc(f.pre) + '" data-suf="' + esc(f.suf) + '">' +
+      esc(f.pre) + num(f.n, f.d) + esc(f.suf) + '</b>';
+  }
+  function txtDin(v, mon) { var f = fmtDin(v, mon); return f.pre + num(f.n, f.d) + f.suf; }
+  /* La suma en la moneda elegida y, si no se puede sumar el sexenio
+     completo, la de los años que sí tienen dato («parcial»). */
+  function sumaMon(x, mon, a) {
+    var s = enMon(x, mon);
+    if (tieneV(s)) return { s: s, base: s, ys: a.ys };
+    var p = null, ys = null, por = '';
+    if (x && x.parcial) {
+      p = (mon && mon !== 'nom') ? (x.parcial.alt || {})[mon] : x.parcial;
+      ys = x.parcial.ys; por = x.pend;
+    } else if (s && s.parcial) {
+      p = s.parcial; ys = s.parcial.ys; por = s.na;
+    }
+    return { s: s, base: tieneV(p) ? p : null, ys: ys, por: por };
+  }
+  function dinero(met, mon) {
+    var mm = D.metricas[met], pib = met.replace(/_mdp$/, '_pib'), mp = D.metricas[pib];
+    var filas = D.admins.map(function (a) {
+      var r = sumaMon(val(a.id, met), mon, a), n = r.ys ? r.ys[1] - r.ys[0] + 1 : 0;
+      r.a = a; r.n = n;
+      r.anio = r.base && n ? r.base.v / n : null;
+      r.pib = mp ? val(a.id, pib) : null;
+      r.cmp = est.base === 'anio' ? r.anio : (tieneV(r.s) ? r.s.v : null);
+      return r;
+    });
+    var max = 0;
+    filas.forEach(function (r) { if (r.cmp != null) max = Math.max(max, Math.abs(r.cmp)); });
+    var tit = mm.tit.replace(/ \(suma del sexenio\)$/, '');
+    var h = '<div class="rd-comp rd-din"><p class="rd-comp-tit">💵 Cuánto dinero, administración por administración: ' + esc(tit) + ', ' + esc(moneda(mon).lee) + '</p>' +
+      '<div class="rd-din-ctl"><div class="rd-mon rd-din-base" role="radiogroup" aria-label="Qué comparar">' +
+        [['anio', 'Por año, en promedio'], ['sex', 'Todo el sexenio']].map(function (b) {
+          return '<button type="button" role="radio" aria-checked="' + (b[0] === est.base) + '" data-base="' + b[0] + '">' + b[1] + '</button>';
+        }).join('') + '</div>' + selMon(mon, 'data-mon') + '</div>' +
+      (moneda(mon).ojo ? '<p class="rd-ojo">⚠️ ' + esc(moneda(mon).ojo) + '</p>' : '') +
+      '<ol class="rd-din-lista">' + filas.map(function (r) {
+        var a = r.a, w = r.cmp != null && max ? Math.max(2, Math.abs(r.cmp) / max * 100) : 0;
+        var rango = r.ys ? (r.ys[0] === r.ys[1] ? String(r.ys[0]) : r.ys[0] + ' a ' + r.ys[1]) : '';
+        var vAnio = r.anio != null ? din(r.anio, mon) : null;
+        var vSex = tieneV(r.s) ? din(r.s.v, mon) : null;
+        var grande, chica;
+        /* Si el promedio sale de una parte del sexenio, se dice de cuál. */
+        var solo = r.anio != null && !tieneV(r.s) ? ' <span class="rd-din-nota">Promedio de ' + r.n + (r.n === 1 ? ' año con dato: ' : ' años con dato: ') + rango + '.</span>' : '';
+        if (est.base === 'anio') {
+          grande = vAnio ? vAnio + ' <span class="rd-din-u">al año</span> ' + chip('derivado') + solo : sinDato(r.s);
+          chica = vSex ? (a.curso ? 'En lo que va (' + rango + '): ' : 'En todo el sexenio: ') + vSex + ' ' + chip(r.s.est) :
+            'Todo el sexenio: ' + sinDato(r.s) + (r.base ? ' <span class="rd-din-nota">' + (r.n === 1 ? 'El año' : 'Los ' + r.n + ' años') + ' con dato (' + rango + ') ' + (r.n === 1 ? 'suma ' : 'suman ') + txtDin(r.base.v, mon) + '.</span>' : '');
+        } else {
+          grande = vSex ? vSex + ' <span class="rd-din-u">' + (a.curso ? 'en lo que va (' + rango + ')' : 'en el sexenio') + '</span> ' + chip(r.s.est) : sinDato(r.s);
+          chica = vAnio ? 'Por año, en promedio: ' + vAnio + ' ' + chip('derivado') + solo : '';
+        }
+        var pibTx = r.pib && tieneV(r.pib) ? '<span class="rd-din-pib">Para dar escala: ' + fmt(r.pib.v, 'pib') + ' al año, en promedio</span>' : '';
+        var de = '<details class="rd-de"><summary>¿De dónde sale?</summary>' +
+          (r.anio != null ? '<p><b>Por año:</b> suma de ' + rango + ' (' + txtDin(r.base.v, mon) + ') ÷ ' + r.n + (r.n === 1 ? ' año' : ' años') + ' con dato = ' + txtDin(r.anio, mon) + '.</p>' : '') +
+          (r.base && r.base.op ? '<p><b>Suma:</b> ' + esc(r.base.op) + '</p>' : '') +
+          (!tieneV(r.s) && r.por ? '<p class="rd-nota">' + esc(r.por) + '</p>' : '') +
+          (r.pib && tieneV(r.pib) && r.pib.op ? '<p><b>% del PIB:</b> ' + esc(r.pib.op) + '</p>' : '') +
+          (r.base ? '<p class="rd-fte">📄 ' + fuentes(r.base.f) + '</p>' : '') + '</details>';
+        return '<li class="rd-din-fila' + (a.id === est.adm ? ' rd-bar-on' : '') + '" style="--c:' + a.col + '">' +
+          '<button type="button" class="rd-bar-nom" data-adm="' + a.id + '">' + esc(a.c) + ' <small>' + (a.curso ? a.a[0] + ', en curso' : a.a[0] + '–' + String(a.a[1]).slice(2)) + '</small></button>' +
+          '<p class="rd-din-grande">' + grande + '</p>' +
+          '<span class="rd-bar-pista">' + (w ? '<span class="rd-bar" data-w="' + w + '"></span>' : '') + '</span>' +
+          '<p class="rd-din-chica">' + chica + '</p>' + pibTx + (r.base || (r.pib && tieneV(r.pib)) ? de : '') + '</li>';
+      }).join('') + '</ol>' +
+      '<p class="rd-nota">«Por año» es la suma entre los años con dato: así un sexenio al que le falta un año, o uno en curso, se compara con los demás. ' +
+      'El % del PIB dice qué tan grande fue ese dinero para la economía de su momento; está en la pestaña «' + esc(mp ? mp.tit : '') + '».</p></div>';
+    return h;
+  }
+  /* Las cifras de dinero cuentan desde cero mientras crecen las barras. */
+  function contarDin(cont) {
+    var els = [].slice.call(cont.querySelectorAll('.rd-din-v'));
+    function pon(f) {
+      els.forEach(function (el) {
+        el.textContent = el.getAttribute('data-pre') + num(parseFloat(el.getAttribute('data-n')) * f, +el.getAttribute('data-d')) + el.getAttribute('data-suf');
+      });
+    }
+    if (reduce || !els.length) return;
+    var t0 = performance.now();
+    pon(0);
+    (function paso(ahora) {
+      var x = Math.min(1, (ahora - t0) / 900);
+      pon(1 - Math.pow(1 - x, 3));
+      if (x < 1) requestAnimationFrame(paso);
+    })(t0);
   }
 
   /* Las barras arrancan en cero y crecen. */
@@ -277,6 +385,7 @@
       }
       else if (b.hasAttribute('data-met')) { est.met = b.getAttribute('data-met'); pintaDim(); }
       else if (b.hasAttribute('data-mon')) { est.mon = b.getAttribute('data-mon'); pintaDim(); }
+      else if (b.hasAttribute('data-base')) { est.base = b.getAttribute('data-base'); pintaDim(); }
     });
     pintaTodo();
   }

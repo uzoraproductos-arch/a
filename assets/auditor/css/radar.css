@@ -251,3 +251,26 @@
   .rd-mon button:nth-child(2n) { border-right: 0; }
   .rd-mon button:nth-child(n+3) { border-bottom: 0; }
 }
+/* El dinero primero (pedido del autor, 12-10-2026). */
+.rd-din-ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.rd-din-base button[aria-checked="true"] { background: #0b2a63; }
+.rd-din-lista { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
+.rd-din-fila { border: 1px solid #e3e8f1; border-left: 6px solid var(--c); border-radius: 12px; padding: 10px 12px; background: #fff; display: grid; grid-template-columns: 170px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; align-items: center; }
+.rd-din-fila.rd-bar-on { background: #fff6dc; }
+.rd-din-fila .rd-bar-nom { grid-row: 1 / span 3; min-height: 44px; }
+.rd-din-fila > :not(.rd-bar-nom) { grid-column: 2; }
+.rd-din-grande { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }
+.rd-din-grande .rd-din-v { font-size: 24px; font-weight: 800; color: #0b2a63; font-variant-numeric: tabular-nums; }
+.rd-din-u { font-size: 15px; font-weight: 700; color: #33415c; }
+.rd-din-chica { margin: 0; font-size: 15px; color: #33415c; }
+.rd-din-chica .rd-din-v { color: #0b2a63; }
+.rd-din-nota { display: block; font-size: 14px; color: #5a6782; }
+.rd-din-pib { font-size: 13.5px; color: #5a6782; }
+@media (max-width: 600px) {
+  .rd-din-fila { grid-template-columns: minmax(0, 1fr); }
+  .rd-din-fila .rd-bar-nom { grid-row: auto; min-height: 0; }
+  .rd-din-fila > :not(.rd-bar-nom) { grid-column: 1; }
+  .rd-din-fila .rd-bar-pista { grid-row: auto; }
+  .rd-din-grande .rd-din-v { font-size: 22px; }
+  .rd-din-base button { border-bottom: 0; }
+}

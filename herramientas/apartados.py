@@ -2922,14 +2922,16 @@ def radar():
                     'ojo': 'Pesos de cada año. No es daño comprobado: es lo que, al corte, no tenía documentación que acreditara el gasto. La ASF lo mide así desde la Cuenta Pública 2019.'},
     })
     metricas['costo_financiero_pib']['kpi2'] = 'Intereses de la deuda'
+    # El dinero va primero en cada dimension (pedido del autor, 12-10-2026):
+    # la suma en pesos abre la comparativa y el % del PIB queda de contexto.
     dims = [
         {'id': 'ingresos', 'ico': '💰', 'tit': 'Ingresos', 'tono': 'verde', 'kpi': 'ingresos_pib',
-         'que': RADAR_SERIES['ingresos'][1], 'metricas': ['ingresos_pib', 'ingresos_mdp']},
+         'que': RADAR_SERIES['ingresos'][1], 'metricas': ['ingresos_mdp', 'ingresos_pib']},
         {'id': 'inversion', 'ico': '🏗️', 'tit': 'Inversión', 'tono': 'azul', 'kpi': 'inversion_pib',
-         'que': RADAR_SERIES['inversion'][1], 'metricas': ['inversion_pib', 'inversion_mdp']},
+         'que': RADAR_SERIES['inversion'][1], 'metricas': ['inversion_mdp', 'inversion_pib']},
         {'id': 'costo', 'ico': '🏛️', 'tit': 'Costo del gobierno', 'tono': 'ambar', 'kpi': 'gasto_pib', 'kpi2': 'costo_financiero_pib',
          'que': RADAR_SERIES['gasto'][1] + ' Y, aparte, lo que se fue solo en intereses.',
-         'metricas': ['gasto_pib', 'costo_financiero_pib', 'gasto_mdp', 'costo_financiero_mdp']},
+         'metricas': ['gasto_mdp', 'costo_financiero_mdp', 'gasto_pib', 'costo_financiero_pib']},
         {'id': 'deuda', 'ico': '📉', 'tit': 'Deuda', 'tono': 'rojo', 'kpi': 'deuda_fin', 'kpi2': 'deuda_cambio',
          'que': 'Cuánta deuda pública recibió cada administración y cuánta entregó, medida contra el tamaño de la economía (saldo histórico de los requerimientos financieros del sector público, SHRFSP).',
          'metricas': ['deuda_fin', 'deuda_ini', 'deuda_cambio', 'deuda_seg']},
