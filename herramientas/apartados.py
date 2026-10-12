@@ -4284,9 +4284,12 @@ def numeros_preparar():
                # Los tres de «Baja al territorio» (11-10-2026).
                'eb-mapa': lambda: tm.mapa(base, ref, RAIZ),
                'territorio': lambda: tm.entidades(base, ref, glos),
-               'municipios': lambda: tm.municipios(base, ref, glos, RAIZ)}
+               'municipios': lambda: tm.municipios(base, ref, glos, RAIZ),
+               # El estado de resultados, en pagina propia y sin el motor (12-10-2026).
+               'eb-cuenta-federal': lambda: rm.construir(base, ref, glos)}
     import territorio_modulos as tm
-    guion = {'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
+    import resultados_modulo as rm
+    guion = {'eb-cuenta-federal': 'resultados.js', 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
              'municipios': ['municipios-efipem.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]

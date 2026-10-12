@@ -100,7 +100,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-egreso-participaciones.html` | Participaciones (Ramo 28) · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-egreso-poderes-y-organos-autonomos.html` | Poderes y órganos autónomos · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 0 |
 | `numeros-el-peso-de-2026.html` | El peso de 2026 · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 27 | 1 | 0 | 0 | 0 |
+| `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 37 | 0 | 7 | 5 | 28 |
 | `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `numeros-gasto-quien-lo-aprueba.html` | ¿Quién lo aprueba? · Auditavisión | apartados.py | 43 | 0 | 11 | 0 | 0 |
 | `numeros-gasto-si-fuera-de.html` | Si el presupuesto fuera de… · Auditavisión | apartados.py | 37 | 0 | 0 | 1 | 0 |
@@ -200,8 +200,8 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 | `ambiente` | 12 |
 | `megaobras` | 12 |
 | `calculadora` | 9 |
-| `presupuesto` | 8 |
 | `poderes` | 7 |
+| `presupuesto` | 6 |
 | `nota` | 1 |
 
 ## Registro de pendientes
