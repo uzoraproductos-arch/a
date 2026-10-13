@@ -219,17 +219,31 @@
     inMonto.value = est.m > 0 ? est.m.toLocaleString('es-MX', { maximumFractionDigits: 2 }) : '';
   }
 
+  /* El sueldo se comparte con «Tú contra ellos» (herramienta-calculadora-
+     compara.html) bajo una sola clave: {monto, periodo: 'mes'|'anio',
+     tipo: 'bruto'|'neto'}. Lo propio de esta página (régimen, plataforma,
+     deducción y escenario del IVA) va en su clave aparte. */
+  var COMPARTIDA = 'auditavision_cc_sueldo';
   function guardar() {
+    if (est.verifica) return;   /* una liga ajena no pisa lo que este equipo recuerda */
     try {
-      if (est.m > 0) localStorage.setItem(CLAVE, JSON.stringify({ m: est.m, per: est.per, nat: est.nat, reg: est.reg, plat: est.plat, ded: est.ded, iva: est.iva }));
-      else localStorage.removeItem(CLAVE);
+      if (est.m > 0) {
+        localStorage.setItem(COMPARTIDA, JSON.stringify({ monto: est.m, periodo: est.per === 'ano' ? 'anio' : 'mes', tipo: est.nat }));
+        localStorage.setItem(CLAVE, JSON.stringify({ reg: est.reg, plat: est.plat, ded: est.ded, iva: est.iva }));
+      } else {
+        localStorage.removeItem(COMPARTIDA);
+        localStorage.removeItem(CLAVE);
+      }
     } catch (e) { /* sin almacenamiento: no pasa nada */ }
   }
   function recuperar() {
     try {
-      var g = JSON.parse(localStorage.getItem(CLAVE) || 'null');
-      if (g && g.m > 0) aplicar(g);
-      return !!(g && g.m > 0);
+      var s = JSON.parse(localStorage.getItem(COMPARTIDA) || 'null');
+      var g = JSON.parse(localStorage.getItem(CLAVE) || 'null') || {};
+      if (!s || !(leer(s.monto) > 0)) return false;
+      g.m = s.monto; g.per = s.periodo === 'anio' ? 'ano' : 'mes'; g.nat = s.tipo;
+      aplicar(g);
+      return true;
     } catch (e) { return false; }
   }
   function aplicar(g) {
@@ -250,7 +264,15 @@
     tCalc = setTimeout(function () { if (est.m > 0) calcular(false); else ceros(false); }, ms == null ? 160 : ms);
   }
 
+  /* En cuanto el lector toca algo, la liga de verificacion deja de mandar. */
+  function usuario() {
+    if (!est.verifica) return;
+    est.verifica = null; $('ctVerif').hidden = true;
+    history.replaceState(null, '', location.pathname);
+  }
+
   inMonto.addEventListener('input', function () {
+    usuario();
     est.m = leer(inMonto.value);
     rango.value = montoARango(est.m);
     if (est.calculado || est.m > 0) programar(); else pintarControles();
@@ -258,17 +280,19 @@
   inMonto.addEventListener('keydown', function (e) { if (e.key === 'Enter') calcular(true); });
   inMonto.addEventListener('blur', escribirMonto);
   rango.addEventListener('input', function () {
+    usuario();
     est.m = rangoAMonto(parseInt(rango.value, 10));
     escribirMonto();
     programar(40);
   });
-  inDed.addEventListener('input', function () { est.ded = leer(inDed.value); if (est.calculado) programar(); });
+  inDed.addEventListener('input', function () { usuario(); est.ded = leer(inDed.value); if (est.calculado) programar(); });
   inDed.addEventListener('keydown', function (e) { if (e.key === 'Enter') calcular(true); });
 
   $('ctRaiz').addEventListener('click', function (ev) {
     var b = ev.target.closest('button');
     if (!b) return;
     var d = b.dataset;
+    if (d.per || d.nat || d.reg || d.plat || d.monto) usuario();
     if (d.per) { est.per = d.per; rango.value = montoARango(est.m); }
     else if (d.nat) est.nat = d.nat;
     else if (d.reg) est.reg = d.reg;
@@ -284,13 +308,15 @@
     if (est.calculado) calcular(false);
   });
 
-  $('ctCalcular').addEventListener('click', function () { est.m = leer(inMonto.value); calcular(true); });
+  $('ctCalcular').addEventListener('click', function () { usuario(); est.m = leer(inMonto.value); calcular(true); });
   $('ctEjemplo').addEventListener('click', function () {
+    usuario();
     est.m = par.sm.mensual_general; est.per = 'mes'; est.nat = 'bruto'; est.reg = 'sueldos';
     escribirMonto(); rango.value = montoARango(est.m);
     calcular(true);
   });
   $('ctReiniciar').addEventListener('click', function () {
+    usuario();
     est.m = 0; est.ded = 0; inDed.value = '0'; escribirMonto(); rango.value = 0;
     ceros(true);
   });
@@ -629,7 +655,6 @@
       ? '<b>✅ Auténtico.</b> El folio <b>' + esc(est.folio) + '</b> corresponde a estos datos y sus cifras coinciden con las tarifas y el presupuesto vigentes en la plataforma. Abajo está el documento, recalculado en tu navegador.'
       : '<b>❌ No coincide.</b> Con los datos de la liga, el folio sería <b>' + esc(est.folio) + '</b>, no ' + esc(v) +
         '. O el documento se alteró, o se emitió con datos anteriores de la plataforma: compara las cifras con las de abajo.';
-    v = null;
   }
 
   /* ---------------- copiar, imprimir, imagen ---------------- */
