@@ -705,7 +705,7 @@ HERRAMIENTAS = [
 # tarjetas de la pestana Herramientas se quedan sin icono).
 # (singular, plural, articulo del plural)
 HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las'),
-                'calculadora': ('aplicación', 'aplicaciones', 'Las')}
+                'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('aplicación', 'aplicaciones', 'Las')}
 # Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
 # 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus ocho
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
@@ -736,7 +736,9 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspradar': 'insp_radar', 'inspentes': '
                 'inspnota': 'insp_nota', 'inspefos': 'insp_efos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
-                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj'}
+                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
+                # Inversion y Megaobras (pedido del autor, 13-10-2026).
+                'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero'}
 
 
 def insp_nativa(m, clave, base, ref):

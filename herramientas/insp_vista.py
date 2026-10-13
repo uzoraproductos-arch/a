@@ -25,7 +25,7 @@ def main(clave):
     def ref(rid):
         r = refs[rid]
         return ap.nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
-    rubro = 'calculadora' if clave.startswith('cc') else 'inspector'
+    rubro = next(x[1] for x in ap.HERRAMIENTAS if clave in [t[0] for t in x[7]])
     n, h = next((k, x) for k, x in enumerate(ap.HERRAMIENTAS, 1) if x[1] == rubro)
     i = [t[0] for t in h[7]].index(clave)
     m = ap.insp_nativa(ap.herramienta_modulo(h, n, i), clave, base, ref)
