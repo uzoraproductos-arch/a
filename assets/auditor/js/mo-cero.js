@@ -356,7 +356,7 @@
         '<span class="mc-exp-meta">' + esc(sec.ico || '') + ' ' + esc(sec.n || '') + ' · ' + esc(o.p) + ' · ' + esc(o.per) + (o.clave ? ' · clave de cartera ' + esc(o.clave) : '') + '</span>' +
         '<span class="mc-exp-op">Diferencia: ' + fnum(o.real) + ' − ' + fnum(o.presu) + ' = <b>' + sg(dif) + fnum(dif) + ' mdp</b>; sobrecosto registrado: <b>' + sg(o.sob) + fnum(o.sob) + '%</b>.</span>' +
         '<ul class="mc-exp-defs">' + defsHtml(o, ['inversion_presupuestada_mdp', 'inversion_real_mdp', 'sobrecosto_pct']) + '</ul>' + fuentesHtml(o) +
-        '<span class="mc-exp-acc"><a href="herramienta-megaobras-sector.html">Ver su ficha completa en Sector e industria →</a>' +
+        '<span class="mc-exp-acc"><a href="herramienta-megaobras-sector.html#obra-' + encodeURIComponent(id) + '">Ver su ficha completa en Sector e industria →</a>' +
         '<button type="button" class="mc-b mc-b-mini" data-cerrar="inv">Cerrar</button></span>';
       box.classList.add('mc-exp-on');
       return;

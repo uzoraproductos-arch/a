@@ -470,7 +470,7 @@ def construir(base, ref):
         return ('<button type="button" class="ms-mdt" data-mandato="%s" aria-pressed="false" style="--ms-mdt:%s">'
                 '<span class="ms-mdt-nom">%s</span><span class="ms-mdt-per">%s</span><span class="ms-mdt-n">%d %s</span></button>'
                 % (esc(k), color, esc(nom), periodo, cuantas, 'obra' if cuantas == 1 else 'obras'))
-    mandatos = [tarjeta('todos', 'Todos los mandatos', '1988–2024', n, 'var(--gold, #c9a227)')]
+    mandatos = [tarjeta('todos', 'Todos los mandatos', '1988–2024', n, '#c9a227')]
     for x in SEXENIOS:
         cuantas = sum(1 for o in obras if x['k'].lower() in o['presidente'].lower())
         mandatos.append(tarjeta(x['k'], x['nom'], '%d–%d' % (x['ini'], x['fin']), cuantas, x['color']))

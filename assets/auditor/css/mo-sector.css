@@ -212,8 +212,9 @@
   .ms-grande { font-size: 26px; }
   .ms-cifras, .ms-inv { grid-template-columns: minmax(0, 1fr); }
   .ms-paso, .ms-bloque, .ms-filtro { padding: 16px 14px; }
-  .ms-fila-b { grid-template-columns: 24px 26px minmax(0, 1fr) auto; }
-  .ms-fila-riel { grid-column: 3 / -1; grid-row: 2; }
+  .ms-fila-b { grid-template-columns: 24px 26px minmax(0, 1fr); }
+  .ms-fila-val { grid-column: 3; grid-row: 2; text-align: left; }
+  .ms-fila-riel { grid-column: 3; grid-row: 3; }
   .ms-esc-fila { grid-template-columns: 72px minmax(0, 1fr); grid-template-areas: "veces k" "veces v" "riel riel"; }
   .ms-esc-v { text-align: left; }
   .ms-vivo-der { justify-items: start; text-align: left; }

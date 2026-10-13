@@ -357,7 +357,7 @@
     }
     var el = $('obra-' + id);
     if (!el) return;
-    el.scrollIntoView({ behavior: suave && !reducido ? 'smooth' : 'auto', block: 'start' });
+    el.scrollIntoView({ behavior: suave && !reducido ? 'smooth' : 'instant', block: 'start' });
     el.classList.remove('ms-destaca');
     void el.offsetWidth;
     el.classList.add('ms-destaca');
@@ -406,7 +406,7 @@
     new IntersectionObserver(function (es) {
       enVista = es[0].isIntersecting;
       if (enVista && est.auto && !est.evaluado && !marcos.rank) evaluar();
-    }, { threshold: 0.25 }).observe($('msFilas'));
+    }, { rootMargin: '0px 0px -20% 0px' }).observe($('msFilas'));
   } else enVista = true;
   $('msFilas').addEventListener('mouseenter', function () { if (est.auto && !est.evaluado && !marcos.rank) evaluar(); });
 
@@ -427,12 +427,8 @@
     if (m) irAObra(decodeURIComponent(m[1]), false);
   }
   desdeAncla(anclaInicial);
-  // Las fuentes y la foto de la cabecera mueven la página al terminar de
-  // cargar: se vuelve a poner la obra del ancla a la vista.
-  if (/^#obra-/.test(anclaInicial)) {
-    window.addEventListener('load', function () { if (location.hash === anclaInicial) desdeAncla(anclaInicial); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (location.hash === anclaInicial) desdeAncla(anclaInicial); });
-  }
+  // Al terminar de cargar, apartados.js vuelve a poner el ancla bajo la
+  // barra de navegación: aquí solo se ajusta el filtro y se resalta la ficha.
   window.addEventListener('hashchange', desdeAncla);
   setInterval(tic, 1000);
 })();
