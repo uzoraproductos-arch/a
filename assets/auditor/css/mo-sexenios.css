@@ -37,7 +37,7 @@
 /* La línea del tiempo */
 .mx-linea { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
 .mx-t-li { min-width: 0; }
-.mx-torre { display: grid; grid-template-rows: auto 220px auto auto auto; justify-items: center; gap: 4px; width: 100%; height: 100%; padding: 10px 6px 12px; border: 1px solid #dfe5f0; border-radius: 14px; background: #ffffff; cursor: pointer; color: #1c2a44; font: 500 15px/1.3 Inter, system-ui, sans-serif; transition: border-color .2s, box-shadow .2s; }
+.mx-torre { display: grid; grid-template-rows: auto 220px auto auto auto auto; align-content: start; justify-items: center; gap: 4px; width: 100%; height: 100%; padding: 10px 6px 12px; border: 1px solid #dfe5f0; border-radius: 14px; background: #ffffff; cursor: pointer; color: #1c2a44; font: 500 15px/1.3 Inter, system-ui, sans-serif; transition: border-color .2s, box-shadow .2s; }
 .mx-torre:hover, .mx-torre:focus-visible { border-color: var(--mx); }
 .mx-torre[aria-pressed="true"] { border-color: var(--mx-osc); box-shadow: 0 0 0 3px color-mix(in srgb, var(--mx) 30%, transparent); }
 .mx-torre:disabled { cursor: default; opacity: .55; }
@@ -47,6 +47,8 @@
 .mx-t-nom { font-size: 15px; font-weight: 700; text-align: center; line-height: 1.25; }
 .mx-t-an { font-size: 14px; color: var(--mx-gris); }
 .mx-t-cif { font: 700 14px/1.3 'JetBrains Mono', ui-monospace, monospace; text-align: center; color: #33415c; overflow-wrap: anywhere; }
+.mx-t-pen { padding: 2px 8px; border-radius: 999px; background: #fdf3f2; border: 1px solid #f0d2cf; font-size: 13px; font-weight: 700; color: var(--mx-rojo); }
+.mx-t-pen[hidden] { display: none; }
 .mx-eje { display: flex; align-items: center; gap: 10px; margin: 8px 0 12px; font: 700 14px/1 'JetBrains Mono', ui-monospace, monospace; color: var(--mx-gris); }
 .mx-eje-riel { flex: 1; height: 4px; border-radius: 2px; background: linear-gradient(90deg, #8e6cb0, #4a90d9, #3fa373, #c9a227, #d98032, #c0504d); }
 .mx-pie-cif, .mx-ciego { margin: 0 0 10px; max-width: 900px; font-size: 16px; line-height: 1.55; color: #33415c; }
@@ -138,13 +140,14 @@
   /* En celular la línea del tiempo corre hacia abajo: un renglón por
      sexenio, con la barra acostada. */
   .mx-linea { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .mx-torre { grid-template-columns: minmax(0, 7.5em) minmax(0, 1fr) auto; grid-template-rows: auto auto; grid-template-areas: "nom riel n" "an cif cif"; justify-items: start; align-items: center; gap: 2px 10px; padding: 10px 12px; text-align: left; }
+  .mx-torre { grid-template-columns: minmax(0, 7.5em) minmax(0, 1fr) auto; grid-template-rows: auto; grid-template-areas: "nom riel n" "an cif cif" "pen pen pen"; justify-items: start; align-items: center; gap: 2px 10px; padding: 10px 12px; text-align: left; }
   .mx-t-n { grid-area: n; font-size: 22px; }
   .mx-t-riel { grid-area: riel; height: 22px; align-items: stretch; justify-content: flex-start; border-bottom: 0; border-left: 2px solid #c9d2e3; }
   .mx-t-barra { width: calc(var(--mx-v, 0) * 100%); height: 100%; border-radius: 0 6px 6px 0; }
   .mx-t-nom { grid-area: nom; text-align: left; }
   .mx-t-an { grid-area: an; }
   .mx-t-cif { grid-area: cif; justify-self: end; text-align: right; }
+  .mx-t-pen { grid-area: pen; justify-self: end; }
   .mx-eje { display: none; }
   .mx-r, .mx-cifras { grid-template-columns: minmax(0, 1fr); }
   .mx-co { padding: 12px; }

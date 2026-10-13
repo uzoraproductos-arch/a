@@ -210,10 +210,12 @@ def construir(base, ref):
             '<span class="mx-t-n" data-n="%d">%d</span>'
             '<span class="mx-t-riel"><span class="mx-t-barra" style="--mx-c:%s;--mx-h:%.4f;--mx-hc:%.4f"></span></span>'
             '<span class="mx-t-nom">%s</span><span class="mx-t-an">%d–%d</span>'
-            '<span class="mx-t-cif" data-real="%s">%s</span></button></li>'
+            '<span class="mx-t-cif" data-real="%s">%s</span>'
+            '<span class="mx-t-pen"%s>con pendiente</span></button></li>'
             % (' mx-vacia' if n == 0 else '', k, 'disabled ' if n == 0 else '', esc(nom_l), ini, fin, n,
                'obra' if n == 1 else 'obras', n, n, color, n / tope, r['real'] / tope_real,
-               esc(nom), ini, fin, r['real'], 'sin obras aquí' if n == 0 else sim_mdp(r['real'])))
+               esc(nom), ini, fin, r['real'], 'sin obras aquí' if n == 0 else sim_mdp(r['real']),
+               '' if r['npen'] else ' hidden'))
 
     filtros = ['<button type="button" class="mx-filtro" data-sec="todos" aria-pressed="true">🌐 Todas las industrias</button>']
     for sid, s in sectores.items():
@@ -297,7 +299,7 @@ def construir(base, ref):
       {torres}
     </ol>
     <div class="mx-eje" aria-hidden="true"><span>1988</span><span class="mx-eje-riel"></span><span>2024</span></div>
-    <p class="mx-pie-cif">Costo de cada periodo: suma del costo registrado de sus obras {chip_d}, en pesos de cada año, sin quitar la inflación. Cuando alguna obra tiene su costo pendiente, la ficha del sexenio te dice qué parte tiene documento y cuál no.</p>
+    <p class="mx-pie-cif">Costo de cada periodo: suma del costo registrado de sus obras, en pesos de cada año, sin quitar la inflación. Es {chip_d} cuando todas sus obras tienen su costo en un documento oficial; si alguna lo tiene pendiente, el bloque dice «con pendiente» {chip_p} y la ficha del sexenio separa la parte con documento de la que falta.</p>
     <p class="mx-ciego"><b>Punto ciego declarado.</b> El rescate carretero FARAC se contrató bajo Salinas y se asumió como deuda pública bajo Zedillo, así que aparece en ambos bloques. Por eso la suma de los seis periodos da {s} obras y no {n}: una misma obra tiene dos responsables, no medio responsable cada uno. <a href="#mxNota">Lee la nota de método</a>.</p>
   </section>
 
@@ -338,4 +340,4 @@ def construir(base, ref):
         n=total_n, s=suma_reparto, filtros='\n      '.join(filtros), torres='\n      '.join(torres),
         chips='\n      '.join('<a class="mx-chip" href="#sexenio-%s" data-sx="%s" style="--mx-c:%s">%s</a>' % (k, k, c, esc(nom))
                                for k, _, nom, _, _, _, c in SEXENIOS),
-        paneles='\n    '.join(paneles), res_todos=res_html(_resumen(obras), nombres), opts=opts, nota=nota_farac, chip_d=chip('derivado'), datos=_json(datos))
+        paneles='\n    '.join(paneles), res_todos=res_html(_resumen(obras), nombres), opts=opts, nota=nota_farac, chip_d=chip('derivado'), chip_p=chip('pendiente'), datos=_json(datos))

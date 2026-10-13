@@ -108,6 +108,7 @@
       barra.style.setProperty('--mx-v', (x.v * e).toFixed(4));
       nEl.textContent = Math.round(r.n * e);
       cEl.textContent = r.n === 0 ? 'sin obras aquí' : simMdp(r.real * e);
+      b.querySelector('.mx-t-pen').hidden = !r.npen;
       var sx = D.sx[i];
       b.setAttribute('aria-label', sx.noml + ', ' + sx.ini + ' a ' + sx.fin + ': ' + r.n + ' ' + plural(r.n, 'obra', 'obras') +
         (r.n ? ', ' + simMdp(r.real) : ''));
