@@ -339,6 +339,10 @@
     pintaComparativa(obras);
     pintaFichas(obras);
     pintaEscala(obras);
+    var h = /^#obra-(.+)$/.exec(location.hash);
+    if (h && !obras.some(function (o) { return o.id === h[1]; })) {
+      try { history.replaceState(history.state, '', location.pathname + location.search); } catch (e) { /* nada */ }
+    }
     direccion();
   }
 
@@ -416,12 +420,13 @@
   var per = lee('per');
   if (per && D.periodos[per]) est.per = per;
   if (lee('auto') === '0') { est.auto = false; $('msAuto').checked = false; }
+  var anclaInicial = location.hash;
   pinta(true);
-  function desdeAncla() {
-    var m = /^#obra-(.+)$/.exec(location.hash);
+  function desdeAncla(h) {
+    var m = /^#obra-(.+)$/.exec(typeof h === 'string' ? h : location.hash);
     if (m) irAObra(decodeURIComponent(m[1]), false);
   }
-  desdeAncla();
+  desdeAncla(anclaInicial);
   window.addEventListener('hashchange', desdeAncla);
   setInterval(tic, 1000);
 })();
