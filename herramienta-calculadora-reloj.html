@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261012v">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261012v">
   <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261012v">
+  <link rel="stylesheet" href="assets/auditor/css/cc-reloj.css?v=20261012v">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -146,7 +147,7 @@
     <header class="apartado-cab herr-cab herr-foto rubro-calculadora">
       <div class="apartado-ancho">
         <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="herramientas.html">Herramientas</a> <span aria-hidden="true">›</span> <a href="herramienta-calculadora.html">Calculadora Cívica</a> <span aria-hidden="true">›</span> <span>El reloj de la deuda</span></nav>
-        <span class="apartado-lema">Calculadora Cívica · módulo 3 de 4</span>
+        <span class="apartado-lema">Calculadora Cívica · aplicación 3 de 4</span>
         <h1 class="apartado-titulo"><span class="herr-cab-ico" aria-hidden="true">⏱️</span><span class="herr-cab-tit">El reloj de la deuda</span></h1>
         <p class="apartado-entrada"><b>Y de lo perdido.</b> Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.</p>
         <span class="herr-cab-credito">Imagen ilustrativa</span>
@@ -159,23 +160,166 @@
       <section class="apartado-seccion" id="modulo" aria-labelledby="modulo-tit">
         <h2 class="sr-only" id="modulo-tit">El reloj de la deuda</h2>
         <div class="apartado-bloque">
-        <div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-calculadora)">
-          <div class="apartado-visor-cuerpo">
-            <p class="apartado-visor-carga" role="status">⏳ Cargando el módulo con sus cifras y fuentes…</p>
-            <iframe class="apartado-visor-marco" title="El reloj de la deuda" data-modulo="index.html?ir=calculadora&amp;ancla=eb-ccreloj&amp;visor=1"></iframe>
-            <noscript><p>Este módulo necesita JavaScript. <a href="index.html?ir=calculadora&amp;ancla=eb-ccreloj">Ábrelo en el auditor</a>.</p></noscript>
-          </div>
-          <div class="herr-modulo-pie"><a href="index.html?ir=calculadora&amp;ancla=eb-ccreloj">⤢ Abrir en el auditor completo</a></div>
-        </div>
+        <div class="cr" id="crRaiz">
+  <section class="cr-arranque" aria-labelledby="crTit">
+    <p class="cr-kicker">Calculadora Cívica · aplicación 3</p>
+    <h2 class="cr-grande" id="crTit">⏱️ El reloj de la deuda y de lo perdido</h2>
+    <p class="cr-lead">Cuatro cuentas que no aparecen en ningún recibo y que, sin embargo, alguien paga: lo que el país pide prestado este año, lo que cuestan los intereses de lo ya prestado, lo que pierden al año las megaobras que ingresan menos de lo que gastan y lo que la Auditoría Superior dejó por aclarar.</p>
+    <div class="cr-pantalla" role="group" aria-labelledby="crVivoEt">
+      <p class="cr-vivo-et" id="crVivoEt">Desde que abriste esta página, el país lleva</p>
+      <p class="cr-vivo-num"><b class="cr-num" id="crVivoTotal">+$0.00</b></p>
+      <p class="cr-vivo-sub">en <b id="crTiempo">0 s</b> · <b id="crPorSeg">$100,492</b> por segundo · tu parte: <b class="cr-num" id="crVivoTuyo">+$0.00</b></p>
+      <div class="cr-ctl">
+        <button type="button" class="cr-boton" id="crPausa" aria-pressed="false"><span aria-hidden="true">⏸️</span> <span>Pausa</span></button>
+        <button type="button" class="cr-boton cr-sec" id="crCero"><span aria-hidden="true">🔄</span> Volver a cero</button>
+      </div>
+      <p class="cr-quieto" id="crQuieto" aria-live="polite"></p>
+    </div>
+    <ul class="cr-indice" aria-label="En esta página">
+      <li><a href="#crMandos">🎛️ Ajusta el reloj</a></li>
+      <li><a href="#crRelojes">⏱️ Los cuatro relojes</a></li>
+      <li><a href="#crPerdido">💸 Lo que se fue</a></li>
+      <li><a href="#crTuyo">🙋 Junto a lo tuyo</a></li>
+      <li><a href="#crComo">🔍 Cómo se calcula</a></li>
+    </ul>
+  </section>
+
+  <section class="cr-panel" id="crMandos" aria-labelledby="crMandTit">
+    <h2 class="cr-tit" id="crMandTit"><span aria-hidden="true">🎛️</span> Ajusta el reloj</h2>
+    <div class="cr-mandos">
+      <div class="cr-campo"><span class="cr-campo-et" id="crCadEt">¿Cada cuándo?</span>
+        <div class="cr-seg" role="group" aria-labelledby="crCadEt">
+        <button type="button" class="cr-seg-b" data-cad="dia" aria-pressed="true"><span aria-hidden="true">🕐</span> Al día</button>
+        <button type="button" class="cr-seg-b" data-cad="mes" aria-pressed="false"><span aria-hidden="true">📅</span> Al mes</button>
+        <button type="button" class="cr-seg-b" data-cad="trimestre" aria-pressed="false"><span aria-hidden="true">📆</span> Al trimestre</button>
+        <button type="button" class="cr-seg-b" data-cad="semestre" aria-pressed="false"><span aria-hidden="true">⏳</span> Al semestre</button>
+        <button type="button" class="cr-seg-b" data-cad="ano" aria-pressed="false"><span aria-hidden="true">🗓️</span> Al año</button>
+        </div></div>
+      <div class="cr-campo"><span class="cr-campo-et" id="crDenEt">¿Repartido entre quiénes?</span>
+        <div class="cr-seg" role="group" aria-labelledby="crDenEt">
+        <button type="button" class="cr-seg-b" data-den="habitante" aria-pressed="true"><span aria-hidden="true">👥</span> Entre los 134.4 millones de habitantes</button>
+        <button type="button" class="cr-seg-b" data-den="padron" aria-pressed="false"><span aria-hidden="true">🧾</span> Entre los 88.1 millones inscritos en el SAT</button>
+        </div></div>
+    </div>
+    <p class="cr-txt cr-den-nota" id="crDenNota">Entre habitantes cuenta a todos, de recién nacidos a personas mayores. Entre inscritos en el SAT cuenta solo a quienes tienen RFC activo: tocan a más cada uno.</p>
+  </section>
+
+  <section class="cr-panel" id="crRelojes" aria-labelledby="crRelTit">
+    <h2 class="cr-tit" id="crRelTit"><span aria-hidden="true">⏱️</span> Lo que se endeuda y lo que se pierde, por segundo</h2>
+    <p class="cr-txt">Cada tarjeta dice cuánto te toca <span data-cadtx>al día</span> <span data-rotden>por habitante</span>, cuánto al año y cuánto en todo el país, con su documento y su chip. Con la casilla de cada tarjeta decides cuáles cuentan en el total.</p>
+    <ul class="cr-relojes">
+<li class="cr-card" data-id="deuda-nueva">
+  <div class="cr-card-cab"><span class="cr-card-ico" aria-hidden="true">🏦</span><h3 class="cr-card-nom">Deuda nueva autorizada para 2026</h3><span class="est-chip est-oficial">oficial</span></div>
+  <p class="cr-card-vivo"><span>Mientras lees, en todo el país</span> <b class="cr-num" data-vivo="deuda-nueva">+$0.00</b></p>
+  <p class="cr-card-cif"><b class="cr-num" data-cad="deuda-nueva">$30.02</b> <span class="cr-card-rot" data-rot>al día, por habitante</span></p>
+  <span class="cr-riel" aria-hidden="true"><span class="cr-barra" data-barra="deuda-nueva" style="width:93.7%"></span></span>
+  <p class="cr-card-ano"><span data-anual="deuda-nueva">$10,957</span> al año <span data-rotden>por habitante</span> · $1.47 billones en todo el país</p>
+  <p class="cr-card-que">No es lo que el país debe: es lo que se agrega este año a lo que ya debía. Entra al presupuesto como ingreso y sale como obligación de los años siguientes.</p>
+  <p class="cr-card-fte"><b>Fuente:</b> <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf" target="_blank" rel="noopener">Ley de Ingresos de la Federación 2026 · ingresos derivados de financiamientos ↗</a> <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-lif2026" title="Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026 [LIF 2026]. Diario Oficial de la Federación, 7 de noviembre de 2025 (México). Cámara de Diputa">[10]</a></sup></p>
+  <label class="cr-quita"><input type="checkbox" data-incluye="deuda-nueva" checked> Contarla en el total</label>
+</li>
+<li class="cr-card cr-culpa" data-id="intereses">
+  <div class="cr-card-cab"><span class="cr-card-ico" aria-hidden="true">📉</span><h3 class="cr-card-nom">Intereses de la deuda ya contratada</h3><span class="est-chip est-oficial">oficial</span></div>
+  <p class="cr-card-vivo"><span>Mientras lees, en todo el país</span> <b class="cr-num" data-vivo="intereses">+$0.00</b></p>
+  <p class="cr-card-cif"><b class="cr-num" data-cad="intereses">$32.05</b> <span class="cr-card-rot" data-rot>al día, por habitante</span></p>
+  <span class="cr-riel" aria-hidden="true"><span class="cr-barra" data-barra="intereses" style="width:100.0%"></span></span>
+  <p class="cr-card-ano"><span data-anual="intereses">$11,697</span> al año <span data-rotden>por habitante</span> · $1.57 billones en todo el país</p>
+  <p class="cr-card-que">El precio de lo prestado en ejercicios anteriores. No compra nada y no amortiza capital: sólo paga intereses. Es la factura de las decisiones de gobiernos pasados, y la paga el presupuesto de hoy.</p>
+  <p class="cr-card-fte"><b>Fuente:</b> <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf" target="_blank" rel="noopener">Presupuesto de Egresos de la Federación 2026 · Anexo 8, costo financiero de la deuda ↗</a> <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup></p>
+  <label class="cr-quita"><input type="checkbox" data-incluye="intereses" checked> Contarla en el total</label>
+</li>
+<li class="cr-card cr-culpa" data-id="megaobras">
+  <div class="cr-card-cab"><span class="cr-card-ico" aria-hidden="true">🏗️</span><h3 class="cr-card-nom">Pérdida anual documentada de las megaobras y apoyo del Ramo 34</h3><span class="est-chip est-derivado">derivado</span></div>
+  <p class="cr-card-vivo"><span>Mientras lees, en todo el país</span> <b class="cr-num" data-vivo="megaobras">+$0.00</b></p>
+  <p class="cr-card-cif"><b class="cr-num" data-cad="megaobras">$1.33</b> <span class="cr-card-rot" data-rot>al día, por habitante</span></p>
+  <span class="cr-riel" aria-hidden="true"><span class="cr-barra" data-barra="megaobras" style="width:4.1%"></span></span>
+  <p class="cr-card-ano"><span data-anual="megaobras">$484</span> al año <span data-rotden>por habitante</span> · $65.1 mil millones en todo el país</p>
+  <p class="cr-card-que">Lo que cuesta cada año mantener andando obras que ingresan menos de lo que gastan, más lo que el presupuesto sigue pagando por el rescate bancario. No es el sobrecosto de construirlas: es el déficit de tenerlas abiertas.</p>
+<p class="cr-op"><b>Operación:</b> Déficit antes de transferencias de las empresas con estado de actividades oficial (Tren Maya (1,554 km) $2,561.4 mdp; AIFA + Cancelación del NAIM Texcoco sin déficit; suma $2,561.4 mdp) más el Ramo 34 ejercido para el rescate bancario del IPAB ($62,489.4 mdp).</p><p class="cr-motivo"><b>Lo que falta:</b> Las otras 10 obras no entran en este reloj: no hay un estado de actividades oficial de su operación, y las dependencias que las operan (Sedena, Pemex, Fonatur) no han transparentado obra por obra su costo de operación ni sus ingresos. No se suponen en cero: siguen pendientes. <span class="est-chip est-pendiente" data-pend="reloj-megaobras">pendiente</span> <a href="pendientes.html#reloj-megaobras">Ver su ficha en el Registro de pendientes</a>.</p>  <p class="cr-card-fte"><b>Fuente:</b> <a href="https://www.transparenciapresupuestaria.gob.mx/Datos-Abiertos" target="_blank" rel="noopener">Estados de actividades de 2024 en la Cuenta Pública (Tomo VII) y Ramo 34 ejercido en 2024 (Cuenta Pública 2024). Cubre 3 de las 13 obras. ↗</a></p>
+  <label class="cr-quita"><input type="checkbox" data-incluye="megaobras" checked> Contarla en el total</label>
+</li>
+<li class="cr-card cr-culpa" data-id="asf">
+  <div class="cr-card-cab"><span class="cr-card-ico" aria-hidden="true">🔍</span><h3 class="cr-card-nom">Monto por aclarar ante la ASF en las 32 entidades</h3><span class="est-chip est-derivado">derivado</span></div>
+  <p class="cr-card-vivo"><span>Mientras lees, en todo el país</span> <b class="cr-num" data-vivo="asf">+$0.00</b></p>
+  <p class="cr-card-cif"><b class="cr-num" data-cad="asf">$1.21</b> <span class="cr-card-rot" data-rot>al día, por habitante</span></p>
+  <span class="cr-riel" aria-hidden="true"><span class="cr-barra" data-barra="asf" style="width:3.8%"></span></span>
+  <p class="cr-card-ano"><span data-anual="asf">$442</span> al año <span data-rotden>por habitante</span> · $59.4 mil millones en todo el país</p>
+  <p class="cr-card-que">Lo que la Auditoría Superior de la Federación no pudo dar por justificado en el gasto federal que recibieron las entidades en la Cuenta Pública 2024. Por aclarar no es lo mismo que perdido: parte se aclara y parte se recupera.</p>
+<p class="cr-op"><b>Operación:</b> Suma de los 32 montos por aclarar, entidad por entidad, de la Cuenta Pública 2024.</p>  <p class="cr-card-fte"><b>Fuente:</b> <a href="https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf" target="_blank" rel="noopener">Suma de lo que quedó por aclarar en cada una de las 32 entidades. ASF, Matriz de Datos Básicos de la Cuenta Pública 2024 (corte febrero de 2026), pp. 19 a 23 ↗</a></p>
+  <label class="cr-quita"><input type="checkbox" data-incluye="asf" checked> Contarla en el total</label>
+</li>
+    </ul>
+    <div class="cr-total">
+      <span class="cr-total-k">Las <span id="crCuantas">cuatro</span> juntas, <span data-cadtx>al día</span> y <span data-rotden>por habitante</span> <span class="est-chip est-derivado">derivado</span></span>
+      <b class="cr-total-v cr-num" id="crTotCad">$64.60</b>
+      <span class="cr-total-s"><span id="crTotAno">$23,580</span> al año <span data-rotden>por habitante</span> · <span id="crTotPais">$3.17 billones</span> en todo el país</span>
+      <span class="cr-total-op">Operación: suma de las tarjetas que cuentas en el total.</span>
+    </div>
+  </section>
+
+  <section class="cr-panel" id="crPerdido" aria-labelledby="crPerTit">
+    <h2 class="cr-tit" id="crPerTit"><span aria-hidden="true">💸</span> Lo que se fue mientras lees</h2>
+    <p class="cr-txt">Lo que el reloj lleva desde que abriste la página, puesto en medidas que se entienden. Todo es <span class="est-chip est-derivado">derivado</span>: el acumulado entre el salario mínimo o la UMA del día, que sí son oficiales.</p>
+    <ul class="cr-equiv">
+      <li><span class="cr-eq-ico" aria-hidden="true">👷</span><span><b class="cr-num" id="crEqSm">0</b> jornadas de salario mínimo: lo que ganan en un día ese número de personas con el mínimo general de $315.04 diarios <span class="est-chip est-oficial">oficial</span>.</span></li>
+      <li><span class="cr-eq-ico" aria-hidden="true">📏</span><span><b class="cr-num" id="crEqUma">0</b> veces la UMA diaria de $117.31 <span class="est-chip est-oficial">oficial</span>, la medida de multas y cuotas.</span></li>
+      <li><span class="cr-eq-ico" aria-hidden="true">🙋</span><span>Tu parte al año, <b id="crEqTuAno">$23,580</b>, equivale a <b id="crEqTuSm">74.8</b> días de salario mínimo.</span></li>
+      <li><span class="cr-eq-ico" aria-hidden="true">🗓️</span><span>En lo que va de 2026, al ritmo anual de estas cifras: <b class="cr-num" id="crEqAnio">$0</b> en todo el país. <small>Operación: cifra anual × segundos transcurridos del año ÷ 31,536,000 segundos.</small></span></li>
+    </ul>
+  </section>
+
+  <section class="cr-panel" id="crTuyo" aria-labelledby="crTuyoTit">
+    <h2 class="cr-tit" id="crTuyoTit"><span aria-hidden="true">🙋</span> Puesto junto a lo tuyo</h2>
+    <p class="cr-txt">Escribe lo que recibes al mes, ya con descuentos, y te decimos a cuántos días de tu ingreso equivale tu parte de estas cuentas. Si no lo sabes, sácalo en <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a>: ahí también sale el ISR que pagas al año. No guardamos ni enviamos nada.</p>
+    <div class="cr-form">
+      <label class="cr-campo" for="crNeto"><span class="cr-campo-et">Tu ingreso neto al mes</span>
+        <input type="text" id="crNeto" class="cr-input" inputmode="decimal" placeholder="Ej.: 12,000" autocomplete="off"></label>
+      <label class="cr-campo" for="crIsr"><span class="cr-campo-et">El ISR que pagas al año (opcional)</span>
+        <input type="text" id="crIsr" class="cr-input" inputmode="decimal" placeholder="Ej.: 9,500" autocomplete="off"></label>
+    </div>
+    <p class="cr-personal" id="crPersonal" aria-live="polite">Cuando escribas tu ingreso, esta línea dirá a cuántos días de lo que ganas equivale tu parte.</p>
+  </section>
+
+  <section class="cr-panel cr-sobre" aria-labelledby="crSobTit">
+    <h2 class="cr-tit" id="crSobTit"><span aria-hidden="true">🧱</span> Y aparte, lo ya gastado de más</h2>
+    <p class="cr-txt">Construir las 13 obras costó <b>$2.77 billones</b> más de lo presupuestado, o <b id="crSobPers">$20,604</b> <span data-rotden>por habitante</span>. No entra en los relojes porque no es un ritmo anual sino una suma de pesos de años distintos, entre 1988 y 2024, sin deflactar a un año común. Se muestra aparte, como lo que es: una cuenta acumulada. <span class="est-chip est-derivado">derivado</span></p>
+    <p class="cr-txt cr-op"><b>Operación:</b> inversión real menos inversión presupuestada de las 13 obras del <a href="herramienta-megaobras.html">simulador de megaobras</a>, repartida entre las personas que elijas arriba.</p>
+    <p class="cr-txt">Ojo: 5 de las 13 obras tienen pendiente su presupuesto original o su costo total, y la suma usa lo que la base registra para ellas: AIFA + Cancelación del NAIM Texcoco <span class="est-chip est-pendiente" data-pend="obra-aifa-texcoco">pendiente</span>, Refinería Olmeca en Dos Bocas (Paraíso, Tabasco) <span class="est-chip est-pendiente" data-pend="obra-dos-bocas">pendiente</span>, FOBAPROA / IPAB (Rescate Bancario de 1998) <span class="est-chip est-pendiente" data-pend="obra-fobaproa">pendiente</span>, FARAC (Rescate Carretero de 1997) <span class="est-chip est-pendiente" data-pend="obra-farac-carretero">pendiente</span>, El Búnker de Seguridad de García Luna (SSPC) <span class="est-chip est-pendiente" data-pend="obra-bunker-garcia-luna">pendiente</span>.</p>
+  </section>
+
+  <aside class="cr-huachicol" role="note">
+    <span class="cr-eq-ico" aria-hidden="true">⛽</span>
+    <div><p><b>Lo que no entra también te cuesta.</b> Estos relojes miden lo que sale. El huachicol fiscal es lo que <b>no entra</b>: combustible vendido sin pagar el IEPS que tú sí pagas en cada litro. Ese faltante se cubre con más deuda o con menos gasto, pero ninguna autoridad ha publicado cuánto es, así que no se suma a ningún reloj.</p>
+    <a class="cr-boton cr-sec" href="auditoria-huachicol-fiscal.html"><span aria-hidden="true">⛽</span> Huachicol fiscal: lo que se sabe ›</a></div>
+  </aside>
+
+  <section class="cr-panel" id="crComo" aria-labelledby="crComoTit">
+    <h2 class="cr-tit" id="crComoTit"><span aria-hidden="true">🔍</span> Cómo se calcula</h2>
+    <ul class="cr-proc">
+      <li><b>Los relojes.</b> Cada uno toma una cifra anual de su documento y la divide entre los 31,536,000 segundos de un año de 365 días. <b>No miden un gasto que ocurra en el instante en que miras</b>: proyectan un ritmo anual sobre el tiempo que llevas en esta página. <span class="est-chip est-derivado">derivado</span></li>
+      <li><b>Por persona.</b> La cifra anual del país entre los habitantes o entre los inscritos en el SAT; la cadencia la toma en proporción a sus días (un mes son 30.4167 días; un trimestre, 91.25; un semestre, 182.5). <span class="est-chip est-derivado">derivado</span></li>
+      <li><b>Los habitantes.</b> 134.4 millones. CONAPO · Proyecciones de la Población de México y de las Entidades Federativas 2020-2070, población a mitad de 2026. Suma de las 32 entidades, las 110 edades y ambos sexos del año 2026 en el archivo de datos abiertos del CONAPO: 134,407,258 personas. El archivo no trae una fila nacional; por eso la cifra es derivada. <span class="est-chip est-derivado">derivado</span> <a href="https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv" target="_blank" rel="noopener">Ver el archivo original ↗</a></li>
+      <li><b>El padrón de contribuyentes.</b> 88.1 millones. SAT · Padrón de contribuyentes por situación del RFC, datos abiertos, corte de abril de 2026. 88,085,311 contribuyentes con RFC activo en abril de 2026, el último mes publicado en el archivo. 52,932,127 son asalariados: su impuesto lo retiene el patrón. Es el número de inscritos con RFC activo, no el de quienes pagaron impuestos ese mes. Se usa para repartir entre quienes tienen obligaciones con el SAT, no entre todos los habitantes. <span class="est-chip est-oficial">oficial</span> <a href="https://repodatos.atdt.gob.mx/api_update/sat/padron/porsitrfc21.csv" target="_blank" rel="noopener">Ver el archivo original ↗</a></li>
+      <li><b>El salario mínimo y la UMA.</b> $315.04 diarios: CONASAMI · Resolución publicada en el DOF el 9 de diciembre de 2025, vigente desde el 1 de enero de 2026. $117.31 diarios: INEGI · Valor de la Unidad de Medida y Actualización, DOF 9 de enero de 2026. <span class="est-chip est-oficial">oficial</span></li>
+    </ul>
+    <p class="cr-txt">Ninguno de estos relojes mide un gasto que ocurra en el instante en que lo miras. Cada uno toma una cifra anual (de un documento oficial, salvo la de las megaobras, que lleva el chip pendiente) y la proyecta sobre el tiempo que llevas en esta página. Es una regla de tres con el reloj del sistema, no una lectura en tiempo real del erario.</p>
+    <p class="cr-txt">Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>.</p>
+  </section>
+
+  <aside class="cr-hermanas">
+    <p>Sigue la cuenta: <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a> · <a href="herramienta-calculadora-compara.html">⚡ Tú contra ellos</a> · <a href="simulador-presupuesto.html">🧮 Reparte el presupuesto</a> · <a href="auditoria-deuda-soberana.html">📉 Los intereses de la deuda</a> · <a href="numeros-la-deuda.html">🏦 La deuda</a> · <a href="radar-reloj.html">⏱️ El reloj de cada administración</a></p>
+  </aside>
+  <script type="application/json" id="crDatos">{"relojes":[{"id":"deuda-nueva","nombre":"Deuda nueva autorizada para 2026","anual":1472626.4,"estado":"oficial"},{"id":"intereses","nombre":"Intereses de la deuda ya contratada","anual":1572073.3,"estado":"oficial"},{"id":"megaobras","nombre":"Pérdida anual documentada de las megaobras y apoyo del Ramo 34","anual":65050.8,"estado":"derivado"},{"id":"asf","nombre":"Monto por aclarar ante la ASF en las 32 entidades","anual":59362.8,"estado":"derivado"}],"cadencias":[{"id":"dia","nombre":"Al día","dias":1},{"id":"mes","nombre":"Al mes","dias":30.4167},{"id":"trimestre","nombre":"Al trimestre","dias":91.25},{"id":"semestre","nombre":"Al semestre","dias":182.5},{"id":"ano","nombre":"Al año","dias":365}],"den":{"habitante":{"millones":134.4,"rot":"por habitante"},"padron":{"millones":88.1,"rot":"por contribuyente"}},"segAno":31536000,"sobrecosto":2769204.6,"smDia":315.04,"umaDia":117.31,"anioRitmo":2026}</script>
+</div>
         </div>
       </section>
 
-      <nav class="herr-mod-nav" aria-label="Los módulos de Calculadora Cívica">
+      <nav class="herr-mod-nav" aria-label="Las aplicaciones de Calculadora Cívica">
         <div class="herr-mod-pasos">
-          <a class="herr-mod-paso ant" href="herramienta-calculadora-compara.html"><small>← Anterior · módulo 2</small><b>⚡ Tú contra ellos</b></a>
-          <a class="herr-mod-paso sig" href="simulador-presupuesto.html"><small>Siguiente → · módulo 4</small><b>🧮 Reparte el presupuesto</b></a>
+          <a class="herr-mod-paso ant" href="herramienta-calculadora-compara.html"><small>← Anterior · aplicación 2</small><b>⚡ Tú contra ellos</b></a>
+          <a class="herr-mod-paso sig" href="simulador-presupuesto.html"><small>Siguiente → · aplicación 4</small><b>🧮 Reparte el presupuesto</b></a>
         </div>
-        <span class="herr-otras-tit">Todos los módulos de Calculadora Cívica</span>
+        <span class="herr-otras-tit">Todas las aplicaciones de Calculadora Cívica</span>
         <div class="herr-mod-chips">
           <a class="herr-mod-chip" href="herramienta-calculadora-ticket.html"><span aria-hidden="true">🧾</span> 1 · Tu estado de cuenta</a>
           <a class="herr-mod-chip" href="herramienta-calculadora-compara.html"><span aria-hidden="true">⚡</span> 2 · Tú contra ellos</a>
@@ -205,5 +349,6 @@
 
   <script src="assets/auditor/js/apartados.js?v=20261012v"></script>
   <script src="assets/auditor/js/comunidad.js?v=20261012v"></script>
+  <script src="assets/auditor/js/cc-reloj.js?v=20261012v"></script>
 </body>
 </html>
