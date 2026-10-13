@@ -182,7 +182,7 @@
     var n = A.n;
     $('mcCuenta').textContent = n === 0 ? 'Ninguna obra cumple esa combinación: cambia la industria o el mandato.'
       : (n === D.obras.length ? 'Entran las ' + n + ' obras.' : 'Entran ' + n + ' de ' + D.obras.length + (n === 1 ? ' obra.' : ' obras.')) +
-        (est.solo ? ' Solo las que tienen documento en su presupuesto y su costo.' : '');
+        (est.solo ? ' Solo las que tienen documento en su presupuesto y en su costo; por eso también salen de la mesa 2 las obras cuyo costo de construcción no lo tiene, aunque su operación sí.' : '');
     if (n === 0) {
       [t1, t2, t3].forEach(function (t) { vacio(t, t === t3 ? 4 : 6, 'Sin obras en el filtro no hay cuenta que hacer. Elige otra combinación de industria y mandato.'); });
       pasos = { 1: [{ acum: 0 }], 2: [{ acum: 0 }], 3: [{ v: '$0' }] };
@@ -209,7 +209,7 @@
       return '<li class="mc-cad-p"><span class="mc-cad-et">' + x[0] + '</span><span class="mc-cad-op">' + x[2] + '</span><span class="mc-cad-v">' +
         (v >= 1 ? smdp(v) : '$' + fnum(Math.round(v * 1000000)) + ' pesos') + '</span></li>';
     }).join('');
-    $('mcSeg').textContent = '$' + A.seg.toFixed(2);
+    $('mcSeg').textContent = '$' + A.seg.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     t3.tBodies[0].innerHTML = c[2] + '\n' + filas3(A);
     var pad = D.padron.n;
     $('mcBolsillo').innerHTML =
@@ -252,7 +252,8 @@
     $('mcPaso' + m).textContent = n === 0 ? 'Sin renglones' : (fin ? 'Cuenta completa · ' + n + ' de ' + n : 'Renglón ' + i + ' de ' + n);
     $('mcRiel' + m).style.width = (n ? (i / n) * 100 : 0) + '%';
     var bSig = raiz.querySelector('.mc-b[data-acc="sig"][data-mesa="' + m + '"]');
-    if (bSig) bSig.disabled = fin;
+    if (bSig) bSig.innerHTML = fin && n ? '<span aria-hidden="true">↺</span> Recórrela desde cero' : '<span aria-hidden="true">▶</span> Siguiente renglón';
+    if (bSig) bSig.disabled = n === 0;
     if (fin && auto[m]) para(m);
     if (i > 0 && !fin) {
       var fila = t.tBodies[0].querySelector('tr[data-i="' + i + '"]');
@@ -489,7 +490,7 @@
     var acc = b.getAttribute('data-acc');
     if (!acc || !m) return;
     m = Number(m);
-    if (acc === 'sig') { para(m); st[m] = Math.min(total(m), st[m] + 1); pintar(m); }
+    if (acc === 'sig') { para(m); st[m] = st[m] >= total(m) ? 0 : st[m] + 1; pintar(m); }
     else if (acc === 'cero') { para(m); st[m] = 0; pintar(m); }
     else if (acc === 'todo') { para(m); st[m] = total(m); pintar(m); }
     else if (acc === 'auto') reproduce(m);

@@ -11,7 +11,7 @@ megaobrasOficialBase() en el auditor: la perdida, los ingresos y el costo
 de operacion salen de los estados financieros oficiales (operacion_oficial);
 donde no hay documento la obra entra con cero y dice «pendiente».
 
-Correcciones frente al motor (anotadas en CONTEXT.md):
+Correcciones frente al motor (para anotarlas en CONTEXT.md al integrar):
 - La mesa 3 ya no suma el sobrecosto acumulado (saldo de 1988 a 2024) y la
   perdida de un año (flujo) en un solo «acumulado» para dividirlo: el
   propio motor decia debajo que no se suman. Ahora son dos divisiones.
@@ -163,12 +163,12 @@ def mesa1_filas(lista):
     for i, o in enumerate(lista, 1):
         dif = o['real'] - o['presu']
         acum += dif
-        dch = chip('pendiente', 'obra-' + o['id']) if _pend_doc(o) else ''
+        dch = ' ' + chip('pendiente', 'obra-' + o['id']) if _pend_doc(o) else ''
         filas.append(
             '<tr class="mc-fila" data-i="%d" data-id="%s"><td class="mc-n" data-et="#">%d</td><td class="mc-nom">%s</td>'
             '<td class="mc-num" data-et="Aprobado (mdp)" data-k="presu">%s %s</td>'
             '<td class="mc-num" data-et="Erogado (mdp)" data-k="real">%s %s</td>'
-            '<td class="mc-num mc-dif" data-et="Diferencia" data-k="dif">%s%s %s</td>'
+            '<td class="mc-num mc-dif" data-et="Diferencia" data-k="dif">%s%s%s</td>'
             '<td class="mc-num mc-acum" data-et="Acumulado" data-k="acum">%s</td></tr>'
             % (i, esc(o['id']), i, _nom(o, 1), fnum(o['presu']), _ch(o, 'inversion_presupuestada_mdp'),
                fnum(o['real']), _ch(o, 'inversion_real_mdp'), '+' if dif > 0 else '', fnum(dif), dch, fnum(_rnd(acum))))
@@ -455,7 +455,7 @@ def construir(base, ref):
         ctrl1=ctrl(1), ctrl2=ctrl(2), ctrl3=ctrl(3), cero1=cero1, cero2=cero2,
         f1=mesa1_filas(vista), f2=mesa2_filas(vista), f3=mesa3_filas(a, pad),
         sg='+' if a['brecha'] > 0 else '', presu=fnum(a['presu']), real=fnum(a['real']), brecha=fnum(a['brecha']), c1=mesa1_cierre(vista),
-        anual=fnum(_rnd(a['anual'] * 10) / 10), cad=cadena(a['anual']), seg=format(a['seg'], '.2f'),
+        anual=fnum(_rnd(a['anual'] * 10) / 10), cad=cadena(a['anual']), seg=format(_rnd(a['seg'], 2), ',.2f'),
         padn=fnum(pad), corte=esc(padron['corte']), ofi=chip(padron.get('estado', 'oficial')), padu=esc(padron['url']), padd=esc(padron['fuente']),
         bolsillo=bolsillo(a, pad), sector=sector_tabla(base, ref, lista), verif=proc_verificadas(base),
         nota=esc(t.get('nota_totales', '')), pend=chip('pendiente', 'reloj-megaobras'), datos=_json(datos))

@@ -81,7 +81,7 @@
 .mc-n { width: 2.2em; color: var(--mc-gris); font-family: 'JetBrains Mono', ui-monospace, monospace; }
 .mc-dif { color: #8f2d0f; }
 .mc-acum { font-weight: 800; color: var(--mc-osc); }
-.mc-op { color: #44526b; font-size: 15px; }
+.mc-op { color: #44526b; font-size: 16px; }
 .mc-cero td { background: #f6f8fc; color: var(--mc-gris); }
 .mc-nula td { color: #6b7590; }
 .mc-t tfoot td { padding: 10px 8px; border-top: 2px solid var(--mc-osc); border-bottom: 0; font-weight: 800; background: var(--mc-claro); }
