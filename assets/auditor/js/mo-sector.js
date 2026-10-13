@@ -365,7 +365,7 @@
     var t = ev.target.closest ? ev.target : null;
     if (!t) return;
     var b;
-    if ((b = t.closest('[data-sector]'))) { est.sector = b.dataset.sector; guarda('orden', est.orden); pinta(true); return; }
+    if ((b = t.closest('[data-sector]'))) { est.sector = b.dataset.sector; pinta(true); return; }
     if ((b = t.closest('.ms-mdt'))) { est.mandato = b.dataset.mandato; pinta(true); return; }
     if ((b = t.closest('.ms-orden'))) { est.orden = b.dataset.orden; pinta(false); if (!est.auto) evaluar(600); return; }
     if ((b = t.closest('.ms-cad'))) { est.per = b.dataset.per; guarda('per', est.per); pintaCadencia(); return; }
