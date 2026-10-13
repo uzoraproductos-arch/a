@@ -427,6 +427,12 @@
     if (m) irAObra(decodeURIComponent(m[1]), false);
   }
   desdeAncla(anclaInicial);
+  // Las fuentes y la foto de la cabecera mueven la página al terminar de
+  // cargar: se vuelve a poner la obra del ancla a la vista.
+  if (/^#obra-/.test(anclaInicial)) {
+    window.addEventListener('load', function () { if (location.hash === anclaInicial) desdeAncla(anclaInicial); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (location.hash === anclaInicial) desdeAncla(anclaInicial); });
+  }
   window.addEventListener('hashchange', desdeAncla);
   setInterval(tic, 1000);
 })();

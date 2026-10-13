@@ -70,7 +70,7 @@
 .ms-filtro-mandos { display: flex; flex-wrap: wrap; gap: 8px; }
 .ms-cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .ms-cifra { display: grid; gap: 6px; align-content: start; padding: 14px; border-radius: 12px; background: var(--ms-suave); border: 1px solid var(--ms-borde); }
-.ms-cifra-l { font-size: 15px; font-weight: 700; color: var(--ms-gris); }
+.ms-cifra-l { font-size: 16px; font-weight: 700; color: var(--ms-gris); }
 .ms-cifra-v { font-size: 26px; font-weight: 800; line-height: 1.15; color: var(--ms-osc); }
 .ms-cifra-roja .ms-cifra-v { color: var(--ms-rojo); }
 .ms-cifra-s { font-size: 16px; line-height: 1.45; color: var(--ms-tinta); }
@@ -141,7 +141,7 @@
 .ms-ficha-ico { font-size: 32px; line-height: 1; }
 .ms-ficha-nom { margin: 0; font-size: 20px; line-height: 1.25; color: var(--ms-osc); }
 .ms-ficha-meta { margin: 4px 0 0; font-size: 16px; line-height: 1.4; color: var(--ms-gris); }
-.ms-badge { grid-column: 1 / -1; justify-self: start; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--ms-badge); color: var(--ms-tinta); font-size: 15px; font-weight: 700; }
+.ms-badge { grid-column: 1 / -1; justify-self: start; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--ms-badge); color: var(--ms-tinta); font-size: 16px; font-weight: 700; }
 .ms-vivo-caja { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 12px; background: #2a0906; color: #fbe9e6; }
 .ms-parado { background: var(--ms-suave); color: var(--ms-tinta); border: 1px dashed var(--ms-borde); display: block; }
 .ms-vivo-izq { display: grid; gap: 4px; min-width: 0; flex: 1 1 220px; }
@@ -150,26 +150,26 @@
 .ms-vivo-monto { font-size: 22px; font-weight: 800; color: #ffffff; }
 .ms-parado .ms-vivo-monto { color: var(--ms-osc); }
 .ms-vivo-nota { margin: 0; font-size: 16px; line-height: 1.45; }
-.ms-vivo-der small { font-size: 14px; color: #f3c9c2; }
+.ms-vivo-der small { font-size: 16px; color: #f3c9c2; }
 .ms-tic { font-size: 20px; font-weight: 800; color: #ffd36b; }
 .ms-tag { display: inline-block; padding: 1px 8px; border-radius: 999px; background: #fff3c4; color: #5a4100; font-size: 13px; font-weight: 700; }
 .ms-vivo-comps, .ms-vivo-falta { margin: 6px 0; padding-left: 20px; display: grid; gap: 8px; }
 .ms-vivo-comps small { font-size: 16px; color: var(--ms-gris); }
 .ms-inv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .ms-inv-c { display: grid; gap: 4px; align-content: start; padding: 10px; border-radius: 10px; background: var(--ms-suave); }
-.ms-inv-l { font-size: 14px; font-weight: 700; color: var(--ms-gris); }
+.ms-inv-l { font-size: 16px; font-weight: 700; color: var(--ms-gris); }
 .ms-inv-v { font-size: 17px; font-weight: 800; color: var(--ms-osc); }
 .ms-inv-oro { color: var(--ms); }
 .ms-inv-rojo { color: var(--ms-rojo); }
 .ms-defs { margin: 0; display: grid; gap: 4px; }
 .ms-defs dt { font-weight: 700; color: var(--ms-osc); }
 .ms-defs dd { margin: 0 0 6px; }
-.ms-desg-tit { margin: 0 0 6px; font-size: 15px; font-weight: 700; color: var(--ms-gris); }
+.ms-desg-tit { margin: 0 0 6px; font-size: 16px; font-weight: 700; color: var(--ms-gris); }
 .ms-desg-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .ms-desg-lista li { padding: 6px 10px; border-radius: 10px; background: var(--ms-suave); border: 1px solid var(--ms-borde); font-size: 16px; line-height: 1.4; color: var(--ms-tinta); }
 .ms-proy { padding: 12px 14px; border-radius: 12px; background: var(--ms-suave); border-left: 4px solid var(--ms-acero); }
 .ms-proy-deficit { border-left-color: var(--ms-rojo); background: color-mix(in srgb, var(--ms-rojo) 7%, var(--ms-fondo)); }
-.ms-proy-tit { margin: 0 0 4px; font-size: 15px; font-weight: 800; color: var(--ms-osc); }
+.ms-proy-tit { margin: 0 0 4px; font-size: 16px; font-weight: 800; color: var(--ms-osc); }
 .ms-proy-tx { margin: 0; font-size: 16px; line-height: 1.55; color: var(--ms-tinta); }
 .ms-asf p { margin: 0 0 6px; font-size: 16px; line-height: 1.55; color: var(--ms-tinta); }
 .ms-unit { color: var(--ms-gris); }
