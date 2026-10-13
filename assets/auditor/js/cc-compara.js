@@ -338,6 +338,7 @@
   var h = /cargo=([^&]+)/.exec(location.hash);
   if (h && porId[decodeURIComponent(h[1])]) est.sel = decodeURIComponent(h[1]);
   pintar();
+  if (h) { var dd = $('cvDuelo'); if (dd && dd.scrollIntoView) dd.scrollIntoView({ block: 'start' }); }
   window.addEventListener('hashchange', function () {
     var m = /cargo=([^&]+)/.exec(location.hash);
     if (m && porId[decodeURIComponent(m[1])] && decodeURIComponent(m[1]) !== est.sel) elegir(decodeURIComponent(m[1]), false);

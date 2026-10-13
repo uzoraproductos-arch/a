@@ -192,8 +192,9 @@ def prestaciones(d):
     tabla = ('<div class="cv-tabla-caja" tabindex="0" role="region" aria-label="Cuadro de prestaciones">'
              '<table class="cv-tabla"><thead><tr><th scope="col">Prestación</th>%s</tr></thead><tbody>%s</tbody></table></div>'
              % (cab, ''.join(filas)))
-    fu = ' · '.join([fuente(d, 'LFT'), fuente(d, 'DIP', 'Anexo 1, p. 145'), fuente(d, 'SEN', 'Anexo 3'),
+    fu = ''.join('<li>%s</li>' % x for x in [fuente(d, 'LFT'), fuente(d, 'DIP', 'Anexo 1, p. 145'), fuente(d, 'SEN', 'Anexo 3'),
                      fuente(d, 'PEF', 'Anexos 23.1.3, 23.2.2 y 23.3.4'), fuente(d, 'PJF', 'numerales 8.1 y 8.2')])
+    fu = '<ul class="cv-fuentes">%s</ul>' % fu
     return '''<section class="cv-sec" id="cvPrest" aria-labelledby="cvPrestTit">
     <h2 class="cv-tit" id="cvPrestTit"><span class="cv-n">4</span> Tus prestaciones de ley contra las de ellos</h2>
     <p class="cv-txt">La Ley Federal del Trabajo fija lo mínimo que un patrón debe darte. Los manuales de cada Poder fijan lo que reciben sus integrantes. Estas son las dos reglas, lado a lado.</p>
@@ -202,7 +203,7 @@ def prestaciones(d):
     <div class="cv-pcs">{tarjetas}</div>
     {tabla}
     <p class="cv-leyenda"><span class="cv-marca cv-marca-si">✓</span> lo tiene · <span class="cv-marca cv-marca-no">✗</span> no lo tiene, según el propio documento. Donde el documento no registra algo, no se marca: que no lo registre no prueba que no exista.</p>
-    <p class="cv-ficha-fuente">Fuentes: {fu}</p>
+    <div class="cv-ficha-fuente">Fuentes: {fu}</div>
   </section>'''.format(nota_ley=esc(L['nota']), tarjetas=''.join(tarjetas), tabla=tabla, fu=fu)
 
 

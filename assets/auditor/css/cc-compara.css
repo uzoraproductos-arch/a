@@ -126,6 +126,7 @@
 .cv-lista .cv-ficha-fuente { padding: 0 14px 12px; }
 .cv-ficha-fuente { margin: 10px 0 0; font-size: 15px; line-height: 1.45; color: var(--cv-gris); overflow-wrap: anywhere; }
 .cv-fuente { display: inline-flex; align-items: center; min-height: 44px; color: #1a56b8; overflow-wrap: anywhere; }
+.cv-fuentes { list-style: none; margin: 4px 0 0; padding: 0; }
 .cv-hon small { font-size: 15px; color: var(--cv-gris); }
 
 .cv-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; }
