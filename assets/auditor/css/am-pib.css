@@ -193,6 +193,7 @@
   .ap-graf-esc { grid-template-columns: 70px 1fr 1fr 1fr 66px; gap: 8px; }
   .ap-tar-v { font-size: 19px; }
   .ap-casc-mando .ap-btn { flex: 1 1 calc(50% - 8px); justify-content: center; }
+  .ap-casc-glosa, .ap-rango, .ap-op, .ap-comp-glosa, .ap-rub-nota, .ap-bal-op, .ap-bal-cob, .ap-bal-p, .ap-tar-sub, .ap-casc-pct, .ap-trio-s, .ap-trio-k, .ap-mon-lado small { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ap-casc-fila, .ap-casc-barra, .ap-graf-b { transition: none; }
