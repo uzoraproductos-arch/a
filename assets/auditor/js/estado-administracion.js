@@ -644,6 +644,18 @@
     var out = document.getElementById('exVerOut');
     q = String(q || '').trim().replace(/\s+/g, '');
     if (!q) { out.innerHTML = ''; return; }
+    /* Folios AV-EC-…: estados de cuenta personales de la Calculadora Cívica
+       (13-10-2026). Su huella sale de lo que escribió quien lo expidió, así
+       que solo se comprueban con su liga completa, en su propia página. */
+    if (/AV-EC-/i.test(q)) {
+      var TK = 'herramienta-calculadora-ticket.html';
+      var sp = new URLSearchParams(location.search);
+      if (q.indexOf(TK + '?') !== -1) { location.href = TK + q.slice(q.indexOf('?')); return; }
+      if (sp.get('m') && sp.get('p')) { location.href = TK + location.search; return; }
+      out.innerHTML = '<div class="ex-ver ex-ver-esp"><b>🧾 Es un estado de cuenta personal</b> de la Calculadora Cívica. Su huella sale de los datos que escribió quien lo expidió, así que se comprueba con su <b>liga de verificación completa</b> (viene impresa en el documento y lleva esos datos). Pégala aquí o ábrela directamente.' +
+        ' <a class="sz-btn" href="' + TK + '">Ir a Tu estado de cuenta</a></div>';
+      return;
+    }
     out.innerHTML = '<p class="ex-ver ex-ver-esp">⏳ Comprobando…</p>';
     var todos = D.admins.map(function (a) { return { ini: a.ini, n: a.n, q: 'adm', id: a.id, obj: cifras(modelo(a)) }; });
     if (C) C.docs.forEach(function (d) { todos.push({ ini: d.ini, n: d.n, q: 'doc', id: d.id, obj: cifrasC(d) }); });
