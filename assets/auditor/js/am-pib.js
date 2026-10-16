@@ -106,6 +106,8 @@
     var ver, tono;
     if (gPine < 0 && g > 0) {
       ver = 'El PIB crece y la riqueza real se encoge. Es el caso que el indicador tradicional no deja ver: se anuncia expansión mientras el capital natural se consume más rápido de lo que la economía avanza.'; tono = 'malo';
+    } else if (g < 0 && brecha > 0.15) {
+      ver = 'El PIB cae y la riqueza real cae todavía más: al retroceso de la producción se suma el capital natural que se sigue consumiendo.'; tono = 'malo';
     } else if (brecha > 0.15) {
       ver = 'El PIB crece más rápido que la riqueza real. Parte de lo que se anuncia como crecimiento se está pagando con capital natural que no se repone.'; tono = 'alerta';
     } else if (brecha < -0.15) {

@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261013b">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261013b">
   <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261013b">
+  <link rel="stylesheet" href="assets/auditor/css/am-ticket.css?v=20261013b">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -159,14 +160,105 @@
       <section class="apartado-seccion" id="modulo" aria-labelledby="modulo-tit">
         <h2 class="sr-only" id="modulo-tit">Tu ticket en negativo</h2>
         <div class="apartado-bloque">
-        <div class="apartado-visor herr-modulo" style="--tarjeta: var(--rubro-ambiente)">
-          <div class="apartado-visor-cuerpo">
-            <p class="apartado-visor-carga" role="status">⏳ Cargando la aplicación con sus cifras y fuentes…</p>
-            <iframe class="apartado-visor-marco" title="Tu ticket en negativo" data-modulo="index.html?ir=ambiente&amp;ancla=eb-amticket&amp;visor=1"></iframe>
-            <noscript><p>Esta aplicación necesita JavaScript. <a href="index.html?ir=ambiente&amp;ancla=eb-amticket">Ábrelo en el auditor</a>.</p></noscript>
-          </div>
-          <div class="herr-modulo-pie"><a href="index.html?ir=ambiente&amp;ancla=eb-amticket">⤢ Abrir en el auditor completo</a></div>
-        </div>
+        <div class="at" id="atRaiz">
+  <section class="at-arranque" aria-labelledby="atArrTit">
+    <p class="at-kicker">Costo Ambiental · aplicación 2</p>
+    <h2 class="at-grande" id="atArrTit"><span aria-hidden="true">🧾</span> Tu ticket en negativo</h2>
+    <p class="at-txt">Tu estado de cuenta de la Calculadora te dice a dónde va lo que pagas. Este ticket te dice lo contrario: <b>lo que ya te cargaron a tu nombre sin preguntarte</b>. Tu parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que ganas.</p>
+    <p class="at-privado"><span aria-hidden="true">🔒</span> Lo que escribes se queda en tu navegador: no se envía a ningún lado.</p>
+    <ol class="at-indice" aria-label="Lo que hay en esta página">
+      <li><a href="#atPaso1"><span class="at-n">1</span> Lo que ganas</a></li>
+      <li><a href="#atTicketSec"><span class="at-n">2</span> Tu ticket</a></li>
+      <li><a href="#atCalendario"><span class="at-n">3</span> Tu año en días</a></li>
+      <li><a href="#atBasura"><span class="at-n">4</span> Tu basura</a></li>
+      <li><a href="#atOrigen"><span class="at-n">5</span> De dónde sale</a></li>
+    </ol>
+  </section>
+
+  <section class="at-paso" id="atPaso1" aria-labelledby="atP1Tit">
+    <h2 class="at-tit" id="atP1Tit"><span class="at-n">1</span> ¿Cuánto ganas?</h2>
+    <div class="at-mandos">
+      <div class="at-seg" role="group" aria-label="Periodo">
+        <button type="button" class="at-seg-b" data-per="mes" aria-pressed="true">Al mes</button>
+        <button type="button" class="at-seg-b" data-per="anio" aria-pressed="false">Al año</button>
+      </div>
+      <div class="at-seg" role="group" aria-label="Neto o bruto">
+        <button type="button" class="at-seg-b" data-tipo="neto" aria-pressed="true">Neto (lo que te llega)</button>
+        <button type="button" class="at-seg-b" data-tipo="bruto" aria-pressed="false">Bruto (antes de impuestos)</button>
+      </div>
+    </div>
+    <label class="at-campo" for="atIngreso"><span id="atIngresoEt">Tu ingreso neto al mes</span>
+      <span class="at-caja"><b class="at-caja-sig" aria-hidden="true">$</b><input type="text" id="atIngreso" class="at-input" inputmode="decimal" autocomplete="off" placeholder="Ej.: 9,451.20"></span></label>
+    <input type="range" id="atRango" class="at-rango" min="0" max="200000" step="500" value="0" aria-label="Ajusta tu ingreso mensual">
+    <p class="at-neto" id="atNeto" aria-live="polite"></p>
+    <div class="at-acciones">
+      <button type="button" class="at-boton" id="atEmitir"><span aria-hidden="true">🧾</span> Emitir mi ticket en negativo</button>
+      <button type="button" class="at-btn" data-ej="general" title="Salario mínimo general 2026: CONASAMI, DOF 9 de diciembre de 2025"><span aria-hidden="true">📄</span> Ejemplo oficial: salario mínimo ($9,451)</button>
+      <button type="button" class="at-btn" data-ej="frontera" title="Salario mínimo de la Zona Libre de la Frontera Norte 2026: CONASAMI, DOF 9 de diciembre de 2025"><span aria-hidden="true">🌵</span> Mínimo de la frontera norte ($13,226)</button>
+      <button type="button" class="at-btn" id="atReiniciar"><span aria-hidden="true">↺</span> Reiniciar en cero</button>
+    </div>
+    <p class="at-origen" id="atOrigenTx">Lo que te queda después de impuestos. Si no lo sabes, escríbelo en bruto y lo calculamos, o sácalo completo en <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a>.</p>
+  </section>
+
+  <section class="at-sec" id="atTicketSec" aria-labelledby="atTkTit">
+    <h2 class="at-tit" id="atTkTit"><span class="at-n">2</span> Tu ticket</h2>
+    <div id="atSalida" aria-live="polite"><p class="at-vacio">Escribe tu ingreso y pulsa «Emitir». El ticket se imprime renglón por renglón.</p></div>
+    <div class="at-tk-acc" id="atTkAcc" hidden>
+      <button type="button" class="at-btn" id="atCopiar"><span aria-hidden="true">📋</span> Copiar mi ticket</button>
+      <button type="button" class="at-btn" id="atLiga"><span aria-hidden="true">🔗</span> Compartir</button>
+      <button type="button" class="at-btn" id="atImprimir"><span aria-hidden="true">🖨️</span> Imprimir</button>
+      <span class="at-aviso-c" id="atAvisoC" role="status"></span>
+    </div>
+  </section>
+
+  <section class="at-sec" id="atCalendario" aria-labelledby="atCalTit">
+    <h2 class="at-tit" id="atCalTit"><span class="at-n">3</span> Tu año en días</h2>
+    <p class="at-txt">Imagina que, desde el 1 de enero, todo lo que ganas se fuera a pagar tu parte. ¿Hasta qué día trabajarías? La regla mide cada cargo en días de tu ingreso <span class="est-chip est-derivado">derivado</span>.</p>
+    <div id="atCal"><p class="at-vacio">Aparece cuando escribas tu ingreso.</p></div>
+    <h3 class="at-sub">Y la deuda acumulada, en meses de tu ingreso</h3>
+    <p class="at-txt">Cada cuadro es un mes de lo que ganas. La deuda no se paga en un año: es lo que el sector público debe, acumulado.</p>
+    <div id="atMeses"><p class="at-vacio">Aparece cuando escribas tu ingreso.</p></div>
+  </section>
+
+  <section class="at-sec" id="atBasura" aria-labelledby="atBasTit">
+    <h2 class="at-tit" id="atBasTit"><span class="at-n">4</span> <span aria-hidden="true">🗑️</span> Tu huella física: la basura</h2>
+    <p class="at-txt">Según SEMARNAT, cada persona genera en promedio <b>1.076 kg de basura al día</b> <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf" target="_blank" rel="noopener noreferrer" title="SEMARNAT-INECC, Diagnóstico Básico para la Gestión Integral de los Residuos, abril de 2026">SEMARNAT, Diagnóstico de residuos, abril 2026, p. 34 ↗</a>. No depende de lo que ganas: es el promedio nacional. Lo demás es multiplicar <span class="est-chip est-derivado">derivado</span>.</p>
+    <div class="at-kg" id="atKg">
+      <div class="at-kg-c"><b>1.076 kg</b><span>al día</span></div>
+      <div class="at-kg-c"><b>7.5 kg</b><span>a la semana (× 7)</span></div>
+      <div class="at-kg-c"><b>32.3 kg</b><span>al mes (× 30)</span></div>
+      <div class="at-kg-c at-kg-anio"><b>393 kg</b><span>al año (× 365)</span></div>
+    </div>
+    <p class="at-txt" id="atKgHoy"></p>
+    <p class="at-txt">Ese servicio lo pagan los municipios, que son el orden de gobierno con menos ingreso propio. La basura mal gestionada le costó al país <b>$124,438 mdp</b> en 2024 <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf" target="_blank" rel="noopener noreferrer" title="Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.">INEGI, CEEM 2024 ↗</a>: <b>$926</b> por persona <span class="est-chip est-derivado">derivado</span>. Más en <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a>.</p>
+  </section>
+
+  <section class="at-sec" id="atOrigen" aria-labelledby="atOrTit">
+    <h2 class="at-tit" id="atOrTit"><span class="at-n">5</span> De dónde sale cada renglón</h2>
+    <p class="at-txt">Cada renglón del ticket divide una cifra oficial entre los habitantes del país <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-pef2026" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de D">[11]</a></sup> <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-ceem-2024" title="Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.">[48]</a></sup>. Aquí está cada cifra con su documento.</p>
+    <ul class="at-origenes">
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">📉</span><div><p class="at-or-t">Intereses de la deuda pública, 2026</p><p class="at-or-d">$1,572,073 mdp de costo financiero de la deuda <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf" target="_blank" rel="noopener noreferrer" title="Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de Diputados.">PEF 2026, Anexo 8 ↗</a></p><p class="at-or-op">Entre 134.4 millones de habitantes: <b>$11,697</b> por persona <span class="est-chip est-derivado">derivado</span>.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">🏭</span><div><p class="at-or-t">Daño ambiental del país, 2024</p><p class="at-or-d">$1,382,214 mdp de costos totales por agotamiento y degradación ambiental (4.1 % del PIB) <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf" target="_blank" rel="noopener noreferrer" title="Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.">INEGI, CEEM 2024 ↗</a></p><p class="at-or-op">Entre los habitantes: <b>$10,284</b> por persona <span class="est-chip est-derivado">derivado</span>.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">🗑️</span><div><p class="at-or-t">De él, basura mal gestionada, 2024</p><p class="at-or-d">$124,438 mdp del renglón «Residuos sólidos urbanos» de la degradación <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf" target="_blank" rel="noopener noreferrer" title="Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.">INEGI, CEEM 2024 ↗</a></p><p class="at-or-op">Entre los habitantes: <b>$926</b> por persona <span class="est-chip est-derivado">derivado</span>. Ya va incluido en el daño ambiental: no se suma dos veces.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">🏦</span><div><p class="at-or-t">Deuda pública total (SHRFSP), cierre estimado 2026</p><p class="at-or-d">$20,062,322 mdp, 54.0 % del PIB <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf" target="_blank" rel="noopener noreferrer" title="Secretaría de Hacienda y Crédito Público, Criterios Generales de Política Económica para 2027, Gaceta Parlamentaria, año XXIX, núm. 7121-C, 8 de septiembre de 2026">SHCP, Criterios Generales de Política Económica 2027, p. 67, cuadro «Estimación de las finanzas públicas, 2026-2027», columna 2026 estimado ↗</a>. La medida más amplia de la deuda pública: deuda del Gobierno Federal, de Pemex y CFE, de la banca de desarrollo, pasivos del IPAB y de los proyectos de inversión diferida. Es lo que el sector público debe, acumulado a lo largo de los años.</p><p class="at-or-op">Entre los habitantes: <b>$149,273</b> por persona <span class="est-chip est-derivado">derivado</span>.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">🌳</span><div><p class="at-or-t">Presupuesto federal de Medio Ambiente (Ramo 16), aprobado 2026</p><p class="at-or-d">$45,564,073,902 pesos <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.diputados.gob.mx/LeyesBiblio/ref/pef_2026/PEF_2026_orig_21nov25.pdf" target="_blank" rel="noopener noreferrer" title="Decreto de Presupuesto de Egresos de la Federación 2026, DOF 21-11-2025 (edición vespertina)">PEF 2026, DOF 21-11-2025, Anexo 1, DOF p. 32 ↗</a></p><p class="at-or-op">Entre los habitantes: <b>+$339</b> por persona <span class="est-chip est-derivado">derivado</span>.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">🛡️</span><div><p class="at-or-t">Gasto en protección ambiental del sector público, 2024</p><p class="at-or-d">$232,882 mdp del sector público consolidado (federación, entidades, municipios y empresas públicas; sin hogares ni empresas privadas) <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf" target="_blank" rel="noopener noreferrer" title="Instituto Nacional de Estadística y Geografía. (1 de diciembre de 2025). Cuentas Económicas y Ecológicas de México (CEEM) 2024. Comunicado de prensa. INEGI.">INEGI, CEEM 2024 ↗</a>, p. 2</p><p class="at-or-op">Entre los habitantes: <b>+$1,733</b> por persona <span class="est-chip est-derivado">derivado</span>.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">⚖️</span><div><p class="at-or-t">Basura por persona</p><p class="at-or-d">1.076 kg por persona al día <span class="est-chip est-oficial">oficial</span> <a class="at-fuente" href="https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf" target="_blank" rel="noopener noreferrer" title="SEMARNAT-INECC, Diagnóstico Básico para la Gestión Integral de los Residuos, abril de 2026">SEMARNAT, Diagnóstico de residuos, abril 2026, p. 34 ↗</a></p><p class="at-or-op">Por 365 días: <b>393 kg</b> al año <span class="est-chip est-derivado">derivado</span>.</p></div></li>
+<li class="at-or"><span class="at-or-ico" aria-hidden="true">👥</span><div><p class="at-or-t">Población entre la que se reparte</p><p class="at-or-d">134.4 millones de personas <span class="est-chip est-derivado">derivado</span> <a class="at-fuente" href="https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv" target="_blank" rel="noopener noreferrer" title="CONAPO · Proyecciones de la Población de México y de las Entidades Federativas 2020-2070, población a mitad de 2026">CONAPO, población a mitad de 2026 ↗</a>. Suma de las 32 entidades, las 110 edades y ambos sexos del año 2026 en el archivo de datos abiertos del CONAPO: 134,407,258 personas. El archivo no trae una fila nacional; por eso la cifra es derivada.</p><p class="at-or-op">Como en el motor, el reparto usa la cifra en millones (134.4 × 1,000,000).</p></div></li>
+    </ul>
+  </section>
+
+  <aside class="at-aviso" aria-labelledby="atLeeTit">
+    <h2 class="at-tit" id="atLeeTit"><span aria-hidden="true">🔍</span> ¿Cómo se lee este ticket?</h2>
+    <p>Cada renglón del ticket reparte una cifra oficial entre los habitantes del país. Es un promedio: nadie firma la deuda pública ni causa el daño ambiental a partes iguales, pero todos lo pagamos con impuestos, servicios y salud. Los días y los meses dividen cada cargo entre tu ingreso <span class="est-chip est-derivado">derivado</span>.</p>
+    <p>Los cargos del año juntan cifras de años distintos: los intereses son los aprobados para 2026 y el daño ambiental es el último que publicó el INEGI, el de 2024. Se suman para darte un orden de magnitud, y cada renglón dice su año.</p>
+    <p>Si escribes un bruto, tu neto se calcula como el de quien trabaja en nómina (sueldos y salarios): la tarifa mensual del ISR (Art. 96 de la Ley del ISR · Anexo 8 de la RMF 2026, apartado B fracción V, Diario Oficial de la Federación, 28 de diciembre de 2025) menos el subsidio para el empleo (Decreto por el que se modifica el diverso que otorga el subsidio para el empleo · DOF 31 de diciembre de 2025) y las cuotas obreras del IMSS (Ley del Seguro Social, última reforma publicada en el DOF el 15 de enero de 2026). El salario mínimo no paga ISR ni cuota obrera: su neto es igual a su bruto. Si cobras por honorarios, RESICO u otro régimen, escribe tu neto.</p>
+    <p>Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
+    <p class="at-hermanas">Sigue con Costo Ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a> · <a href="herramienta-ambiente-pib.html">📉 El PIB no alcanza</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
+    <p class="at-hermanas">Y con la Calculadora: <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a> · <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a></p>
+  </aside>
+  <script type="application/json" id="atDatos">{"pob":134.4,"intereses":11696.973958333334,"dano":10284.330357142857,"basuraPesos":925.8779761904761,"deuda":149273.22619047618,"ramo16":339.0184070089286,"gpa":1732.7529761904761,"kgDia":1.076,"kg":392.74,"nota":"Cada renglón del ticket reparte una cifra oficial entre los habitantes del país. Es un promedio: nadie firma la deuda pública ni causa el daño ambiental a partes iguales, pero todos lo pagamos con impuestos, servicios y salud.","sm":{"general":9451.2,"frontera":13226.1,"diario":315.04},"isr":{"renglones":[{"li":0.01,"ls":844.59,"cf":0.0,"pct":1.92},{"li":844.6,"ls":7168.51,"cf":16.22,"pct":6.4},{"li":7168.52,"ls":12598.02,"cf":420.95,"pct":10.88},{"li":12598.03,"ls":14644.64,"cf":1011.68,"pct":16.0},{"li":14644.65,"ls":17533.64,"cf":1339.14,"pct":17.92},{"li":17533.65,"ls":35362.83,"cf":1856.84,"pct":21.36},{"li":35362.84,"ls":55736.68,"cf":5665.16,"pct":23.52},{"li":55736.69,"ls":106410.5,"cf":10457.09,"pct":30.0},{"li":106410.51,"ls":141880.66,"cf":25659.23,"pct":32.0},{"li":141880.67,"ls":425641.99,"cf":37009.69,"pct":34.0},{"li":425642.0,"ls":null,"cf":133488.54,"pct":35.0}],"tope_uma":25,"ramos":[{"pct":0.25,"base":"sbc"},{"pct":0.375,"base":"sbc"},{"pct":0.625,"base":"sbc"},{"pct":1.125,"base":"sbc"},{"pct":0.4,"base":"excedente_3_uma"}],"uma_diaria":117.31,"uma_mensual":3566.22,"sub_pct":15.02,"sub_tope":11492.66}}</script>
+</div>
         </div>
       </section>
 
@@ -206,5 +298,6 @@
 
   <script src="assets/auditor/js/apartados.js?v=20261013b"></script>
   <script src="assets/auditor/js/comunidad.js?v=20261013b"></script>
+  <script src="assets/auditor/js/am-ticket.js?v=20261013b"></script>
 </body>
 </html>
