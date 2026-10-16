@@ -738,7 +738,9 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspradar': 'insp_radar', 'inspentes': '
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
                 # Inversion y Megaobras (pedido del autor, 13-10-2026).
-                'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero'}
+                'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
+                # Costo Ambiental (pedido del autor, 16-10-2026).
+                'amreloj': 'am_reloj', 'amticket': 'am_ticket', 'ambasura': 'am_basura', 'ampib': 'am_pib'}
 
 
 def insp_nativa(m, clave, base, ref):
