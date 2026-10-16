@@ -18425,11 +18425,11 @@ window.AUDIT_DB = {
       },
       {
         "id": "asf",
-        "nombre": "Monto observado por la ASF a las 32 entidades",
+        "nombre": "Monto por aclarar ante la ASF en las 32 entidades",
         "icono": "\ud83d\udd0d",
-        "anual_mdp": 46122.0,
+        "anual_mdp": 59362.8,
         "estado": "derivado",
-        "fuente": "Suma de los montos observados a las 32 entidades en el cat\u00e1logo de la pesta\u00f1a 1",
+        "fuente": "Suma de estados[].asfMontoObservado de las 32 entidades (Matriz de Datos B\u00e1sicos de la ASF, Cuenta P\u00fablica 2024); el motor la recalcula al cargar",
         "que": "Lo que la Auditor\u00eda Superior de la Federaci\u00f3n se\u00f1al\u00f3 como no justificado en el gasto de las entidades. Observado no es lo mismo que perdido: parte se aclara y parte se recupera.",
         "culpa": true
       }

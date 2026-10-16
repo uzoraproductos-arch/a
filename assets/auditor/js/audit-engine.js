@@ -8658,8 +8658,24 @@
       rm.anual_mdp = t.perdida_anual_consolidada_mdp;
       rm.estado = 'derivado';
       rm.nombre = 'Pérdida anual documentada de las megaobras y apoyo Ramo 34';
-      rm.fuente = 'Suma de ' + t.obras_con_operacion_documentada + ' de 13 obras con documento oficial (cobertura 23.1%): pérdidas operativas de Tren Maya y AIFA ($2,194.4 mdp, estados de actividades Cuenta Pública 2024) y apoyo presupuestal Ramo 34 al IPAB ($62,489.4 mdp). 10 obras pendientes declaradas explícitamente.';
-      rm.que = 'Desglose oficial: $2,194.4 mdp de déficit operativo de empresas públicas más $62,489.4 mdp de transferencias presupuestarias del Ramo 34 al rescate bancario. Las 10 obras sin estados de actividades se mantienen en estado pendiente y no se asumen como cero.';
+      /* Las cifras salen del calculo de arriba, no de un texto fijo (13-10-2026):
+         el texto decia $2,194.4 mdp y la suma con los datos vigentes da otra. */
+      const f1 = n => n.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+      const pend = sm.obras.length - obrasOp.length;
+      rm.fuente = 'Suma de ' + t.obras_con_operacion_documentada + ' de ' + sm.obras.length + ' obras con documento oficial (cobertura ' + t.cobertura_obras.pct + '%): pérdida de operación de las empresas públicas con estado de actividades ($' + f1(t.perdida_operativa_empresas_mdp) + ' mdp, Cuenta Pública 2024; el AIFA no registra déficit) y apoyo presupuestal del Ramo 34 al IPAB ($' + f1(t.apoyo_presupuestal_fobaproa_ramo34_mdp) + ' mdp). ' + pend + ' obras pendientes declaradas explícitamente.';
+      rm.que = 'Desglose: $' + f1(t.perdida_operativa_empresas_mdp) + ' mdp de pérdida de operación de empresas públicas más $' + f1(t.apoyo_presupuestal_fobaproa_ramo34_mdp) + ' mdp de apoyo presupuestal del Ramo 34 al rescate bancario (es apoyo, no déficit de una obra). Las ' + pend + ' obras sin estados de actividades se mantienen en estado pendiente y no se asumen como cero.';
+    }
+    /* Reloj de la ASF (13-10-2026): la base traia 46,122.0 mdp como suma de
+       las 32 entidades, pero la suma de estados[].asfMontoObservado da otra.
+       Se calcula aqui, igual que en herramienta-calculadora-reloj.html. */
+    const ra = reloj.find(f => f.id === 'asf');
+    const conAsf = (DB.estados || []).filter(e => typeof e.asfMontoObservado === 'number');
+    if (ra && conAsf.length) {
+      ra.anual_mdp = Math.round(conAsf.reduce((a, e) => a + e.asfMontoObservado, 0) * 10) / 10;
+      ra.estado = 'derivado';
+      ra.nombre = 'Monto por aclarar ante la ASF en las 32 entidades';
+      ra.fuente = 'Suma de lo que quedó por aclarar en cada una de las ' + conAsf.length + ' entidades. ' + (conAsf[0].asfFuente || '');
+      ra.que = 'Lo que la Auditoría Superior de la Federación no pudo dar por justificado en el gasto federal que recibieron las entidades en la Cuenta Pública 2024. Por aclarar no es lo mismo que perdido: parte se aclara y parte se recupera.';
     }
   }
 
@@ -21669,7 +21685,7 @@
         }).join('<span class="sim-cad-fl">→</span>') +
       '</div>' +
       '<p class="sim-mesa-cierre">Ese último eslabón, <strong>$' + ag.perdidaSegundo.toFixed(2) +
-        tuUd(' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>', ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que llevas mirando. Los ingresos y costos de operación se toman de los informes de la Auditoría Superior de la Federación.</p>') +
+        tuUd(' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que usted lleva mirando. Los ingresos y costos de operación se toman de los estados de actividades de la Cuenta Pública 2024 (tomo VII) y del Ramo 34.</p>', ' por segundo</strong>, es el que mueve el contador en vivo de la tira de indicadores. No es un gasto que ocurra en ese instante: es el ritmo anual proyectado sobre el tiempo que llevas mirando. Los ingresos y costos de operación se toman de los estados de actividades de la Cuenta Pública 2024 (tomo VII) y del Ramo 34.</p>') +
     '</article>';
   }
 
@@ -21686,38 +21702,36 @@
 
   function simMesaTres(obras) {
     const ag = simAgregados(obras);
-    const padron = (DB.macro && DB.macro.padronContribuyentes) || 0;
-    if (!padron) return '';
-    const pasos = [];
-    let total = 0;
-    total += ag.brecha;
-    pasos.push({ et: 'Pesos pagados de más sobre lo aprobado', op: 'resultado de la mesa 1', v: simMdp(ag.brecha), acum: total });
-    total += ag.perdidaAnual;
-    pasos.push({ et: 'Pérdida operativa de un año', op: '+ resultado de la mesa 2', v: simMdp(ag.perdidaAnual), acum: total });
-
-    const porContrib = (total * 1000000) / (padron * 1000000);
-    const brechaContrib = (ag.brecha * 1000000) / (padron * 1000000);
-    const perdidaContrib = (ag.perdidaAnual * 1000000) / (padron * 1000000);
+    /* Padron con documento (SAT, RFC activos) en lugar del 88.1 sin fuente de
+       DB.macro; y sin sumar el sobrecosto (saldo 1988-2024) con la perdida de
+       un ano (flujo): son dos divisiones separadas (13-10-2026). */
+    const pad = ((DB.calculadora_civica || {}).parametros || {}).padron || {};
+    const personas = pad.personas || ((DB.macro && DB.macro.padronContribuyentes) || 0) * 1000000;
+    if (!personas) return '';
+    const padron = formatNumber(personas);
+    const brechaContrib = ag.brecha * 1000000 / personas;
+    const perdidaContrib = ag.perdidaAnual * 1000000 / personas;
+    const pasos = [
+      { et: 'Pesos pagados de más sobre lo aprobado (1988 a 2024)', op: 'resultado de la mesa 1 ÷ ' + padron, v: simMdp(ag.brecha), r: brechaContrib },
+      { et: 'Pérdida operativa de un año', op: 'resultado de la mesa 2 ÷ ' + padron, v: simMdp(ag.perdidaAnual), r: perdidaContrib }
+    ];
 
     return '<article class="sim-mesa sim-mesa-puente">' +
       '<h4 class="sim-mesa-tit"><span class="sim-mesa-num">3</span> De la cifra agregada a su bolsillo</h4>' +
       '<p class="sim-mesa-pie">Un billón de pesos no se siente. Dividido entre quienes sostienen el erario, sí. Esta mesa es el puente hacia la calculadora cívica de la 2.4.</p>' +
       '<div class="sim-t-marco"><table class="sim-t sim-t-puente">' +
-        '<thead><tr><th>Paso</th><th>Concepto</th><th>Operación</th><th>Importe</th><th>Acumulado</th></tr></thead>' +
+        '<thead><tr><th>Paso</th><th>Concepto</th><th>Operación</th><th>Importe</th><th>Por contribuyente</th></tr></thead>' +
         '<tbody>' +
-          '<tr class="sim-t-cero"><td class="sim-t-n">0</td><td class="sim-t-nom">Punto de partida</td>' +
-            '<td class="sim-t-op">—</td><td class="sim-t-num">$0</td><td class="sim-t-num sim-t-acum">$0</td></tr>' +
           pasos.map((p, i) =>
             '<tr><td class="sim-t-n">' + (i + 1) + '</td>' +
               '<td class="sim-t-nom">' + p.et + '</td>' +
               '<td class="sim-t-op">' + p.op + '</td>' +
               '<td class="sim-t-num">' + p.v + '</td>' +
-              '<td class="sim-t-num sim-t-acum">' + simMdp(p.acum) + '</td></tr>').join('') +
-          '<tr class="sim-t-div"><td class="sim-t-n">3</td>' +
-            '<td class="sim-t-nom">Padrón de contribuyentes activos (SAT, abril de 2026) ' + chipEstado('oficial') + '</td>' +
-            '<td class="sim-t-op">÷ ' + padron + ' millones</td>' +
-            '<td class="sim-t-num">—</td>' +
-            '<td class="sim-t-num sim-t-acum">$' + formatNumber(Math.round(porContrib)) + '</td></tr>' +
+              '<td class="sim-t-num sim-t-acum">$' + formatNumber(Math.round(p.r)) + ' ' + chipEstado('derivado') + '</td></tr>').join('') +
+          '<tr class="sim-t-div"><td class="sim-t-n">÷</td>' +
+            '<td class="sim-t-nom">Padrón de contribuyentes con RFC activo (SAT, ' + (pad.corte || 'abril de 2026') + ') ' + chipEstado('oficial') + '</td>' +
+            '<td class="sim-t-op">' + padron + ' personas</td>' +
+            '<td class="sim-t-num">—</td><td class="sim-t-num">—</td></tr>' +
         '</tbody>' +
       '</table></div>' +
       '<div class="sim-puente-res">' +
@@ -27444,7 +27458,8 @@
   let radarCriterio = 'intensidad';
 
   function radarMunicipal(e) {
-    const m = e.desglose.find(d => /^Municipios/.test(d.ente));
+    /* La CDMX no tiene municipios sino Alcaldías: cuentan igual (13-10-2026). */
+    const m = e.desglose.find(d => /^(Municipios|Alcald)/.test(d.ente));
     return m && e.total.porAclarar ? m.porAclarar / e.total.porAclarar * 100 : 0;
   }
 
