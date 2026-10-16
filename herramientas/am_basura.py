@@ -130,9 +130,10 @@ def construir(base, ref):
             '<div><p class="ab-paso-tit">%s</p><p class="ab-paso-t"><b class="ab-num">%s t</b> al día %s</p></div></div>'
             '<div class="ab-riel" aria-hidden="true"><span class="ab-riel-b" style="--ab-w:%.4f"></span></div>'
             '<p class="ab-paso-tx">%s <span class="ab-paso-fu">%s</span></p>'
-            '<p class="ab-paso-pct">%s del total generado %s</p></li>'
+            '%s</li>'
             % (i, ico, esc(tit), num(t, 1 if t != int(t) else 0), chip(e), t / gen, txt, fu,
-               pct(t / gen * 100), chip('derivado') if i else chip('oficial')))
+               ('<p class="ab-paso-pct">%s del total generado %s</p>' % (pct(t / gen * 100), chip('derivado'))) if i else
+               '<p class="ab-paso-pct">El punto de partida: todo lo que se genera.</p>'))
 
     serie = R['recolectadaSerie']
     smax = max(serie['tdia'])
@@ -435,7 +436,7 @@ def construir(base, ref):
   <section class="ab-arranque" aria-labelledby="abArrTit">
     <p class="ab-kicker">Costo Ambiental · aplicación 3</p>
     <h2 class="ab-grande" id="abArrTit">La basura y lo que se gasta en proteger</h2>
-    <p class="ab-txt">Cada día el país genera <b>%(gen)s toneladas</b> de basura y solo el <b>%(rel)s</b> de lo que llega a un tiradero termina en un relleno sanitario. Por cada peso que el sector público gastó en proteger el ambiente en 2024, el daño costó <b>%(ratio)s</b>. Aquí ves cómo, con qué dinero y con qué leyes.</p>
+    <p class="ab-txt">Cada día el país genera <b>%(gen)s toneladas</b> de basura y solo el <b>%(rel)s</b> de lo que llega a un sitio de disposición final termina en un relleno sanitario. Por cada peso que el sector público gastó en proteger el ambiente en 2024, el daño costó <b>%(ratio)s</b>. Aquí ves cómo, con qué dinero y con qué leyes.</p>
     <ol class="ab-indice" aria-label="Lo que hay en esta página">
       <li><a href="#abBasura"><span aria-hidden="true">🗑️</span> La basura</a></li>
       <li><a href="#abProteger"><span aria-hidden="true">💸</span> Proteger contra dañar</a></li>
