@@ -342,7 +342,7 @@ def construir(base, ref):
 def _mando(id_, etiqueta, mn, mx, valor, unidad, ico):
     return ('<div class="ap-mando"><label class="ap-mando-et" for="%s"><span aria-hidden="true">%s</span> %s</label>'
             '<div class="ap-mando-fila"><button type="button" class="ap-paso" data-para="%s" data-d="-0.5" aria-label="Bajar medio punto">−</button>'
-            '<input type="range" class="ap-rango" id="%s" min="%s" max="%s" step="0.1" value="%.1f" data-u="%s">'
+            '<input type="range" class="ap-rango" id="%s" min="%s" max="%s" step="0.1" value="%.1f">'
             '<button type="button" class="ap-paso" data-para="%s" data-d="0.5" aria-label="Subir medio punto">+</button></div>'
             '<output class="ap-mando-val" id="%sVal" for="%s">%.1f %s</output></div>'
-            % (id_, ico, etiqueta, id_, id_, mn, mx, valor, esc(unidad), id_, id_, id_, valor, esc(unidad)))
+            % (id_, ico, etiqueta, id_, id_, mn, mx, valor, id_, id_, id_, valor, esc(unidad)))
