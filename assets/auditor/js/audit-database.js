@@ -15911,8 +15911,8 @@ window.AUDIT_DB = {
           "nombre": "Agotamiento de hidrocarburos",
           "icono": "🛢️",
           "pct_del_rubro": 46,
-          "monto_mdp": 66249,
-          "estado": "derivado",
+          "monto_mdp": 66319,
+          "estado": "oficial",
           "glosa": "El renglón más caro del agotamiento. Cada barril extraído es una reserva que deja de existir."
         },
         {
@@ -15920,8 +15920,8 @@ window.AUDIT_DB = {
           "nombre": "Agotamiento de recursos forestales",
           "icono": "🌲",
           "pct_del_rubro": 28,
-          "monto_mdp": 40326,
-          "estado": "derivado",
+          "monto_mdp": 40848,
+          "estado": "oficial",
           "glosa": "Bosque perdido por encima de lo que se regenera. Casi nunca aparece en el debate público sobre recursos."
         },
         {
@@ -15929,12 +15929,12 @@ window.AUDIT_DB = {
           "nombre": "Agotamiento de agua subterránea",
           "icono": "💧",
           "pct_del_rubro": 26,
-          "monto_mdp": 37445,
-          "estado": "derivado",
+          "monto_mdp": 36853,
+          "estado": "oficial",
           "glosa": "Agua extraída de acuíferos por encima de su recarga. Es el dato que debería condicionar cualquier polo industrial nuevo."
         }
       ],
-      "nota": "Los porcentajes de reparto (46%, 28% y 26%) son oficiales; los montos en pesos se derivan aplicándolos al total del rubro."
+      "nota": "Los montos en pesos son oficiales: INEGI, Cuentas Económicas y Ecológicas de México 2024, comunicado 150/25, tabla 1. Los porcentajes de reparto (46%, 28% y 26%, redondeados) se derivan dividiendo cada monto entre el total del rubro."
     },
     "degradacion": {
       "total_mdp": 1238194,
@@ -16000,12 +16000,12 @@ window.AUDIT_DB = {
         "texto": "El daño de $1,382,214 millones de pesos no tiene una partida ni un responsable con nombre. No es una deuda que alguien vaya a pagar: es un costo que se traslada a quien viene después."
       },
       {
-        "titulo": "Seis pesos de daño por cada peso de protección",
+        "titulo": "Casi seis pesos de daño por cada peso de protección",
         "texto": "El gasto en protección ambiental equivale a 0.7% del PIB frente a un deterioro de 4.1%. La proporción, y no el monto absoluto, es lo que mide la seriedad del compromiso."
       },
       {
         "titulo": "El aire concentra el problema y el debate mira a otro lado",
-        "texto": "Las emisiones al aire cuestan 2.5% del PIB, casi dos terceras partes de toda la cuenta ambiental. La discusión pública sobre recursos naturales suele centrarse en petróleo y litio, que juntos pesan mucho menos."
+        "texto": "Las emisiones al aire cuestan 2.5% del PIB, seis de cada diez pesos (60.3%) de toda la cuenta ambiental. La discusión pública sobre recursos naturales suele centrarse en petróleo y litio, que juntos pesan mucho menos."
       }
     ],
     "implicaciones_juridicas": [
