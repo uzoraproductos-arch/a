@@ -46,6 +46,13 @@ def e(id_, tema, que, porque, responsable, enlace, enlace_txt, aparece):
             'enlace': enlace, 'enlace_txt': enlace_txt, 'aparece': aparece}
 
 
+# Las otras aplicaciones de Megaobras que muestran los pendientes de cada obra
+# y del reloj (13-10-2026: cada una en pagina propia).
+MEGAOBRAS_PAGS = [('herramienta-megaobras-pulso.html', 'Megaobras · El pulso del gasto'),
+                  ('herramienta-megaobras-sexenios.html', 'Megaobras · Las obras de cada sexenio'),
+                  ('herramienta-megaobras-cero.html', 'Megaobras · De cero al resultado')]
+
+
 # Pendientes que el motor escribe en su codigo (no viven como registro en la
 # base). Cada uno: id, tema, que falta, por que, responsable, enlace oficial,
 # texto del enlace, donde aparece.
@@ -188,13 +195,14 @@ def recolectar():
             {'inversion_presupuestada_mdp': 'presupuesto original', 'inversion_real_mdp': 'costo total',
              'sobrecosto_pct': 'sobrecosto'}[k] for k in campos)),
             porque, quien, ver['fuentes'].get(fu, {}).get('url'), ver['fuentes'].get(fu, {}).get('doc', 'Documento')[:80],
-            [('herramienta-megaobras-sector.html', 'Megaobras · Sector e industria')]))
+            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Sector e industria')] + MEGAOBRAS_PAGS))
     # 5. Reloj de perdidas de las megaobras.
     for r in d['calculadora_civica']['relojes']['fuentes']:
         if r.get('estado') == 'pendiente':
             out.append(e('reloj-' + r['id'], 'Megaobras', r['nombre'], r.get('motivo', r.get('fuente')),
                          'Las dependencias que operan cada obra (Sedena, Pemex, Fonatur)', r.get('url'),
-                         'Obra Pública Abierta (Hacienda)', [('herramienta-calculadora-reloj.html', 'El reloj de la deuda')]))
+                         'Obra Pública Abierta (Hacienda)', [('herramienta-calculadora-reloj.html', 'El reloj de la deuda')]
+                         + ([('herramienta-megaobras-sector.html', 'Megaobras · Sector e industria')] + MEGAOBRAS_PAGS if r['id'] == 'megaobras' else [])))
     # 6. Evaluacion sexenal: series historicas que no llegan tan atras.
     ev = d['evaluacion_sexenal']
     vistos = {}
