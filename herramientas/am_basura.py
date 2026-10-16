@@ -116,7 +116,7 @@ def construir(base, ref):
          'A alguno de los %s sitios de disposición final del país.' % num(sit['valor']),
          fuente('DBGIR', sit['pagina'])),
         ('✅', 'Llega a un relleno sanitario', rel['tdia'], 'oficial',
-         'A uno de los %d rellenos sanitarios: el %s de lo que llega a disposición final. Los otros %s t al día van a %s sitios '
+         'A uno de los %d rellenos sanitarios: el %s de lo que llega a disposición final. Las otras %s t al día van a %s sitios '
          'clasificados como no controlados (%s − %s t y %s − %d sitios, %s).'
          % (rel['valor'], pct(rel['pct']), num(no_ctrl_t, 1), num(no_ctrl_n), num(sit['tdia']), num(rel['tdia'], 1),
             num(sit['valor']), rel['valor'], chip('derivado')),

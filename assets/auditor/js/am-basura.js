@@ -118,7 +118,7 @@
       var d = t[i] - t[i - 1];
       h += ' Contra ' + a[i - 1] + ': ' + (d >= 0 ? '+' : '−') + n(Math.abs(d)) + ' t (' + (d >= 0 ? '+' : '−') + pct(Math.abs(d / t[i - 1] * 100)) + ') ' + chip('derivado') + '.';
       var d0 = t[i] - t[0];
-      h += ' Contra ' + a[0] + ': ' + (d0 >= 0 ? '+' : '−') + pct(Math.abs(d0 / t[0] * 100)) + ' ' + chip('derivado') + '.';
+      if (i > 1) h += ' Contra ' + a[0] + ': ' + (d0 >= 0 ? '+' : '−') + pct(Math.abs(d0 / t[0] * 100)) + ' ' + chip('derivado') + '.';
     } else {
       h += ' Es el primer año de la serie.';
     }
