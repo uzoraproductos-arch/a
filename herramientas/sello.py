@@ -14,7 +14,7 @@ Uso:
     python3 herramientas/sello.py            # dice cual es el sello de hoy
     python3 herramientas/sello.py 20260923a  # lo sube a ese
 
-Toca las seis dependencias de index.html y el renglon del pie. Ejecutalo en
+Toca las siete dependencias de index.html y el renglon del pie. Ejecutalo en
 todo cambio que toque assets/; si no tocaste assets/, no hace falta.
 Preserva los saltos de linea CRLF del archivo, que es la convencion del
 proyecto.
@@ -32,11 +32,14 @@ RUTAS = [os.path.join(RAIZ, 'index.html')]
 
 ARCHIVOS = [
     ('href', 'assets/auditor/css/auditavision.css'),
+    ('href', 'assets/auditor/css/civico.css'),
+    ('href', 'assets/auditor/css/puerta.css'),
     ('src', 'assets/auditor/js/mexico-states-geo.js'),
     ('src', 'assets/auditor/js/audit-database.js'),
     ('src', 'assets/auditor/js/municipios-efipem.js'),
     ('src', 'assets/auditor/js/municipios-rendicion.js'),
     ('src', 'assets/auditor/js/audit-engine.js'),
+    ('src', 'assets/auditor/js/comunidad.js'),
 ]
 
 VISIBLE = re.compile(r'<span class="footer-sello">[\s\S]*?</span>')
@@ -106,7 +109,10 @@ def main():
         open(ruta, 'wb').write(d.encode('utf-8'))
         print('sello %s -> %s en %s (%d dependencias y pie visible | CRLF intactos)' % 
               (actual or 'ninguno', nuevo, nombre, len(ARCHIVOS)))
-    return 0
+    # Las paginas de apartado (herramientas.html, aprende.html...) llevan el
+    # mismo sello: se regeneran con el nuevo.
+    import apartados
+    return apartados.generar(nuevo)
 
 
 if __name__ == '__main__':

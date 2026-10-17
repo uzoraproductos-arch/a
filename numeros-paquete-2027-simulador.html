@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador · Auditavisión</title>
+  <meta name="description" content="Mueve las seis palancas oficiales de Hacienda y mira a dónde va el déficit si los supuestos fallan.">
+  <link rel="canonical" href="https://uzoraproductos-arch.github.io/a/numeros-paquete-2027-simulador.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Auditavisión">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:url" content="https://uzoraproductos-arch.github.io/a/numeros-paquete-2027-simulador.html">
+  <meta property="og:title" content="Simulador · Auditavisión">
+  <meta property="og:description" content="Mueve las seis palancas oficiales de Hacienda y mira a dónde va el déficit si los supuestos fallan.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0b2a63">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='%23ffffff' stroke='%231d5fd6' stroke-width='4'/%3E%3Cg fill='%23ffffff' stroke='%234f6286' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M20 37 C14 28 9 23 3 22 C6 30 9 34 13 37 C9 36 6 37 4 39 C9 41 14 41 19 41 Z'/%3E%3Cpath d='M44 37 C50 28 55 23 61 22 C58 30 55 34 51 37 C55 36 58 37 60 39 C55 41 50 41 45 41 Z'/%3E%3C/g%3E%3Ccircle cx='32' cy='39' r='15' fill='%23d9a21a' stroke='%237a5206' stroke-width='2'/%3E%3Ccircle cx='32' cy='39' r='11' fill='%23f7cf45' stroke='%23a8740c' stroke-width='1.2'/%3E%3Cpath d='M27 44 Q32 47 37 44' fill='none' stroke='%235a3a02' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='28' cy='38' r='1.9' fill='%2310202e'/%3E%3Ccircle cx='36' cy='38' r='1.9' fill='%2310202e'/%3E%3Cg transform='rotate(-8 32 22)'%3E%3Cellipse cx='32' cy='24.5' rx='14' ry='3' fill='%231b2433'/%3E%3Cpath d='M23 24.5 C23 14 25 11 32 11 C39 11 41 14 41 24.5 Z' fill='%231b2433'/%3E%3Crect x='23.2' y='19.5' width='17.6' height='3.4' fill='%23d4a826'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261017c">
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261017c">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261017c">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261017c">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261017c">
+</head>
+<body data-pagina="apartado">
+  <nav class="site-top-nav" aria-label="Navegación principal">
+    <div class="nav-brand-group">
+      <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
+      <a class="nav-brand-text" href="index.html" title="Ir a la página principal">
+        <span class="nav-brand-title">Auditavisión</span>
+        <span class="nav-brand-sub">El gasto público, a la vista</span>
+      </a>
+    </div>
+
+    <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
+      <span class="nav-hamb-rayas" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-hamb-txt">Menú</span>
+    </button>
+
+    <div class="nav-indice" id="navIndiceMovil">
+    <div class="nav-center-links">
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramientas.html">Herramientas</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="sigue-el-dinero.html" aria-current="page">Números</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="descarga-los-datos.html">Datos</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="aprende.html">Aprende</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="participa.html">Participa</a></div>
+    </div>
+
+    <div class="nav-right-container">
+      <div class="nav-right-actions">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal o un tema para investigar">
+          <span>📢</span>
+          <span>Cuéntanos lo que viste</span>
+        </a>
+        <button type="button" class="nav-action-btn nav-share-btn" id="apartadoCompartir" title="Compartir esta página o copiar su enlace">
+          <span>🔗</span>
+          <span>Compartir</span>
+        </button>
+        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Biblioteca del Erario Público">
+          <span>🪐</span>
+          <span>Inspector Meteoro</span>
+        </a>
+      </div>
+      <div class="nav-movil-ayuda">
+        <p class="nav-movil-ayuda-tit">¿Viste algo raro con el dinero público?</p>
+        <p class="nav-movil-ayuda-txt">Cuéntanos qué, dónde y cuándo. Te ayudamos a ordenarlo y a llevarlo al canal oficial que corresponde.</p>
+        <a class="nav-movil-ayuda-btn" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <div class="pt-velo" id="ptVelo" hidden></div>
+  <aside class="pt-cajon" id="ptCajon" role="dialog" aria-modal="true" aria-labelledby="ptTit" hidden>
+    <div class="pt-cab">
+      <div>
+        <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
+        <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
+        <p class="pt-sub">Elige una ruta. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+      </div>
+      <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div class="pt-cuerpo">
+      <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
+        <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
+            <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
+            <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
+            <div class="sv-campo"><label for="ptRepCuando">Cuándo</label><input id="ptRepCuando" type="text" maxlength="80"><small>La fecha o el periodo: los fondos se fiscalizan por ejercicio anual.</small></div>
+            <div class="sv-campo"><label for="ptRepVio">Qué viste <span class="sv-req">obligatorio</span></label><textarea id="ptRepVio" rows="4" maxlength="1500" required></textarea><small>La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</small></div>
+            <div class="sv-campo"><label for="ptRepDinero">Con qué dinero</label><input id="ptRepDinero" type="text" maxlength="160"><small>Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</small></div>
+            <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
+            <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+          <p class="pt-nota">Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: <a href="garantias-brujula.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato y qué tener a la mano.</p>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="error">
+        <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+            <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
+            <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
+            <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
+        <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" novalidate>
+          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+            <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
+            <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
+            <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
+            <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
+            <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+    </div>
+  </aside>
+
+  <main class="apartado" id="contenido">
+    <header class="apartado-cab">
+      <div class="apartado-ancho">
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="sigue-el-dinero.html">Números</a> <span aria-hidden="true">›</span> <a href="numeros-presupuesto.html">Presupuesto</a> <span aria-hidden="true">›</span> <a href="numeros-paquete-2027.html">Paquete Económico 2027</a> <span aria-hidden="true">›</span> <span>Simulador</span></nav>
+        <span class="apartado-lema">🎛️ Paquete Económico 2027</span>
+        <h1 class="apartado-titulo">Qué pasa si los supuestos fallan</h1>
+        <p class="apartado-entrada">Mueve las seis palancas oficiales de Hacienda y mira a dónde va el déficit si los supuestos fallan.</p>
+        
+      </div>
+    </header>
+
+    <div class="apartado-ancho apartado-cuerpo">
+
+      
+      <section class="apartado-seccion" id="peSim" aria-labelledby="peSim-tit">
+        <h2 class="sr-only" id="peSim-tit">Qué pasa si los supuestos fallan</h2>
+        <div class="apartado-bloque">
+        <section class="pm pm-sim" id="peSim" aria-labelledby="peSimTit">
+          <h2 class="pm-tit sr-only" id="peSimTit">🎛️ Qué pasa si los supuestos fallan</h2>
+          <p class="pm-txt">La propia Secretaría de Hacienda publica cuánto cuesta cada equivocación. Las seis palancas <b>no las inventó esta plataforma</b>: son los seis coeficientes del cuadro de sensibilidades de los Criterios <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-cgpe2027" title="Secretaría de Hacienda y Crédito Público. (2026). Criterios Generales de Política Económica para la iniciativa de Ley de Ingresos y el proyecto de Presupuesto d">[64]</a></sup>, con su cita textual. Elige un escenario o mueve las palancas y mira a dónde va el déficit.</p>
+          <div class="pm-escs" role="group" aria-label="Escenarios"><button type="button" class="pm-esc activo" data-esc="pe-base" title="Las seis variables en el valor que los Criterios suponen para 2027."><span aria-hidden="true">📋</span> Como lo proyecta Hacienda</button><button type="button" class="pm-esc" data-esc="pe-tasas" title="La tasa de referencia sube 250 puntos base y no baja en todo el año."><span aria-hidden="true">📈</span> Choque de tasas</button><button type="button" class="pm-esc" data-esc="pe-crudo" title="La mezcla cae a 45 dólares y la plataforma se queda cien mil barriles por debajo de la meta."><span aria-hidden="true">🛢️</span> Petróleo a 45 dólares</button><button type="button" class="pm-esc" data-esc="pe-frenon" title="El PIB crece medio punto, el peso se deprecia a 19.50 y la tasa sube cien puntos base."><span aria-hidden="true">🔻</span> Frenón económico</button><button type="button" class="pm-esc" data-esc="pe-cola" title="Crecimiento de 3%, petróleo en 78 dólares y cien puntos base menos de tasa."><span aria-hidden="true">🌞</span> Viento de cola</button></div>
+          <p class="pm-esc-d" id="peEscDesc">Las seis variables en el valor que los Criterios suponen para 2027.</p>
+          <div class="pm-sim-rej">
+            <div class="pm-pals"><div class="pm-pal" id="pepal-s-crec">
+            <div class="pm-pal-cab"><span aria-hidden="true">📈</span><label for="perng-s-crec">Crecimiento económico</label><output id="peval-s-crec">2.0</output></div>
+            <input type="range" id="perng-s-crec" data-id="s-crec" min="0.0" max="4.0" step="0.1" value="2.0" aria-describedby="pedesc-s-crec">
+            <div class="pm-pal-esc"><span>0.0</span><span class="pm-pal-base">Criterios: 2.0</span><span>4.0</span></div>
+            <p class="pm-pal-u" id="pedesc-s-crec">% real anual</p>
+            <p class="pm-pal-cita"><span class="pm-et">Coeficiente oficial</span>Efecto de un incremento de medio punto real de crecimiento económico sobre los ingresos tributarios: 30.2 mmp.</p>
+            <p class="pm-pal-porque">Más actividad económica significa más IVA y más ISR sin cambiar una sola tasa.</p>
+          </div><div class="pm-pal" id="pepal-s-precio">
+            <div class="pm-pal-cab"><span aria-hidden="true">🛢️</span><label for="perng-s-precio">Precio de la mezcla mexicana</label><output id="peval-s-precio">61.8</output></div>
+            <input type="range" id="perng-s-precio" data-id="s-precio" min="25.0" max="110.0" step="1.0" value="61.8" aria-describedby="pedesc-s-precio">
+            <div class="pm-pal-esc"><span>25.0</span><span class="pm-pal-base">Criterios: 61.8</span><span>110.0</span></div>
+            <p class="pm-pal-u" id="pedesc-s-precio">dólares por barril</p>
+            <p class="pm-pal-cita"><span class="pm-et">Coeficiente oficial</span>Efecto de un dólar adicional en promedio anual del precio del petróleo sobre los ingresos petroleros: 9.6 mmp.</p>
+            <p class="pm-pal-porque">Sube lo que se cobra por exportar crudo más de lo que sube el costo de importar hidrocarburos.</p>
+          </div><div class="pm-pal" id="pepal-s-plataforma">
+            <div class="pm-pal-cab"><span aria-hidden="true">⛽</span><label for="perng-s-plataforma">Plataforma de producción</label><output id="peval-s-plataforma">1800</output></div>
+            <input type="range" id="perng-s-plataforma" data-id="s-plataforma" min="1400.0" max="2200.0" step="25.0" value="1800.0" aria-describedby="pedesc-s-plataforma">
+            <div class="pm-pal-esc"><span>1400</span><span class="pm-pal-base">Criterios: 1800</span><span>2200</span></div>
+            <p class="pm-pal-u" id="pedesc-s-plataforma">miles de barriles diarios</p>
+            <p class="pm-pal-cita"><span class="pm-et">Coeficiente oficial</span>Efecto de un aumento de 50 mil barriles diarios de extracción de crudo sobre los ingresos petroleros: 21.8 mmp.</p>
+            <p class="pm-pal-porque">Más barriles extraídos, más ventas. La meta de 1.8 millones se repite sin cambio de 2026 a 2032.</p>
+          </div><div class="pm-pal" id="pepal-s-tipocambio">
+            <div class="pm-pal-cab"><span aria-hidden="true">💱</span><label for="perng-s-tipocambio">Tipo de cambio promedio</label><output id="peval-s-tipocambio">17.90</output></div>
+            <input type="range" id="perng-s-tipocambio" data-id="s-tipocambio" min="14.0" max="26.0" step="0.1" value="17.9" aria-describedby="pedesc-s-tipocambio">
+            <div class="pm-pal-esc"><span>14.00</span><span class="pm-pal-base">Criterios: 17.90</span><span>26.00</span></div>
+            <p class="pm-pal-u" id="pedesc-s-tipocambio">pesos por dólar</p>
+            <p class="pm-pal-cita"><span class="pm-et">Coeficiente oficial</span>Efecto de una apreciación de 20 centavos en el tipo de cambio promedio: −6.0 mmp netos. Ingresos petroleros −8.1; costo financiero +2.1.</p>
+            <p class="pm-pal-porque">Un peso más fuerte vale menos crudo exportado, pero también abarata en pesos la deuda contratada en dólares. Gana el primer efecto.</p>
+          </div><div class="pm-pal" id="pepal-s-tasa">
+            <div class="pm-pal-cab"><span aria-hidden="true">🏦</span><label for="perng-s-tasa">Tasa de interés</label><output id="peval-s-tasa">6.10</output></div>
+            <input type="range" id="perng-s-tasa" data-id="s-tasa" min="2.0" max="14.0" step="0.25" value="6.1" aria-describedby="pedesc-s-tasa">
+            <div class="pm-pal-esc"><span>2.00</span><span class="pm-pal-base">Criterios: 6.10</span><span>14.00</span></div>
+            <p class="pm-pal-u" id="pedesc-s-tasa">% Cetes 28 días, promedio</p>
+            <p class="pm-pal-cita"><span class="pm-et">Coeficiente oficial</span>Efecto de un aumento de 100 puntos base en la tasa de interés sobre el costo financiero: 37.9 mmp.</p>
+            <p class="pm-pal-porque">Encarece la deuda a tasa variable y el refinanciamiento de la que va venciendo. Es la palanca más cara del cuadro.</p>
+          </div><div class="pm-pal" id="pepal-s-inflacion">
+            <div class="pm-pal-cab"><span aria-hidden="true">🌡️</span><label for="perng-s-inflacion">Inflación</label><output id="peval-s-inflacion">3.2</output></div>
+            <input type="range" id="perng-s-inflacion" data-id="s-inflacion" min="0.0" max="12.0" step="0.1" value="3.2" aria-describedby="pedesc-s-inflacion">
+            <div class="pm-pal-esc"><span>0.0</span><span class="pm-pal-base">Criterios: 3.2</span><span>12.0</span></div>
+            <p class="pm-pal-u" id="pedesc-s-inflacion">% promedio anual</p>
+            <p class="pm-pal-cita"><span class="pm-et">Coeficiente oficial</span>Efecto de un aumento de 100 puntos base en la tasa de inflación sobre el costo financiero: 1.3 mmp.</p>
+            <p class="pm-pal-porque">Encarece los Udibonos y la deuda indexada a la unidad de inversión.</p>
+          </div></div>
+            <div class="pm-res" id="peSimResultado" aria-live="polite"><noscript><p>El simulador necesita JavaScript; los coeficientes están a la izquierda, con su cita.</p></noscript></div>
+          </div>
+          <p class="pm-pie"><b>El límite de este simulador, dicho por la fuente.</b> Los Criterios advierten que sus sensibilidades «son indicativas, dentro de un rango de variación acotado, y consideran el efecto <b>aislado</b> de cada variable, sin incorporar sus posibles interacciones». Esta calculadora hereda esa limitación a propósito: añadir interacciones exigiría inventar coeficientes que nadie publicó. El PIB nominal también se mantiene fijo por la misma razón. Los resultados son <span class="est-chip est-derivado">derivado</span>: aplican los coeficientes oficiales a la diferencia contra el supuesto de los Criterios.</p>
+          <script type="application/json" id="peDatos">{"s": [{"id": "s-crec", "n": "Crecimiento económico", "icono": "📈", "base": 2.0, "min": 0.0, "max": 4.0, "paso": 0.1, "unidad": "% real anual", "dec": 1, "tramo": 0.5, "coef": 30200.0, "destino": "ingresos", "cita": "Efecto de un incremento de medio punto real de crecimiento económico sobre los ingresos tributarios: 30.2 mmp.", "porque": "Más actividad económica significa más IVA y más ISR sin cambiar una sola tasa."}, {"id": "s-precio", "n": "Precio de la mezcla mexicana", "icono": "🛢️", "base": 61.8, "min": 25.0, "max": 110.0, "paso": 1.0, "unidad": "dólares por barril", "dec": 1, "tramo": 1.0, "coef": 9600.0, "destino": "ingresos", "cita": "Efecto de un dólar adicional en promedio anual del precio del petróleo sobre los ingresos petroleros: 9.6 mmp.", "porque": "Sube lo que se cobra por exportar crudo más de lo que sube el costo de importar hidrocarburos."}, {"id": "s-plataforma", "n": "Plataforma de producción", "icono": "⛽", "base": 1800.0, "min": 1400.0, "max": 2200.0, "paso": 25.0, "unidad": "miles de barriles diarios", "dec": 0, "tramo": 50.0, "coef": 21800.0, "destino": "ingresos", "cita": "Efecto de un aumento de 50 mil barriles diarios de extracción de crudo sobre los ingresos petroleros: 21.8 mmp.", "porque": "Más barriles extraídos, más ventas. La meta de 1.8 millones se repite sin cambio de 2026 a 2032."}, {"id": "s-tipocambio", "n": "Tipo de cambio promedio", "icono": "💱", "base": 17.9, "min": 14.0, "max": 26.0, "paso": 0.1, "unidad": "pesos por dólar", "dec": 2, "tramo": 0.2, "coef": 8100.0, "coef2": 2100.0, "destino": "ambos", "cita": "Efecto de una apreciación de 20 centavos en el tipo de cambio promedio: −6.0 mmp netos. Ingresos petroleros −8.1; costo financiero +2.1.", "porque": "Un peso más fuerte vale menos crudo exportado, pero también abarata en pesos la deuda contratada en dólares. Gana el primer efecto."}, {"id": "s-tasa", "n": "Tasa de interés", "icono": "🏦", "base": 6.1, "min": 2.0, "max": 14.0, "paso": 0.25, "unidad": "% Cetes 28 días, promedio", "dec": 2, "tramo": 1.0, "coef": 37900.0, "destino": "costofin", "cita": "Efecto de un aumento de 100 puntos base en la tasa de interés sobre el costo financiero: 37.9 mmp.", "porque": "Encarece la deuda a tasa variable y el refinanciamiento de la que va venciendo. Es la palanca más cara del cuadro."}, {"id": "s-inflacion", "n": "Inflación", "icono": "🌡️", "base": 3.2, "min": 0.0, "max": 12.0, "paso": 0.1, "unidad": "% promedio anual", "dec": 1, "tramo": 1.0, "coef": 1300.0, "destino": "costofin", "cita": "Efecto de un aumento de 100 puntos base en la tasa de inflación sobre el costo financiero: 1.3 mmp.", "porque": "Encarece los Udibonos y la deuda indexada a la unidad de inversión."}], "b": {"ingresos": 9156528.9, "costofin": 1574950.2, "balance": -1358558.8, "extrapres": -197097.0, "rfsp": -1555655.8, "pib": 39419400.0, "gastoNeto": 10636488.1, "tolerancia": 212729.762, "meta": -3.9, "metaBalance": -3.4}, "e": [{"id": "pe-base", "n": "Como lo proyecta Hacienda", "icono": "📋", "v": {}, "d": "Las seis variables en el valor que los Criterios suponen para 2027."}, {"id": "pe-tasas", "n": "Choque de tasas", "icono": "📈", "v": {"s-tasa": 8.6}, "d": "La tasa de referencia sube 250 puntos base y no baja en todo el año."}, {"id": "pe-crudo", "n": "Petróleo a 45 dólares", "icono": "🛢️", "v": {"s-precio": 45, "s-plataforma": 1700}, "d": "La mezcla cae a 45 dólares y la plataforma se queda cien mil barriles por debajo de la meta."}, {"id": "pe-frenon", "n": "Frenón económico", "icono": "🔻", "v": {"s-crec": 0.5, "s-tasa": 7.1, "s-tipocambio": 19.5}, "d": "El PIB crece medio punto, el peso se deprecia a 19.50 y la tasa sube cien puntos base."}, {"id": "pe-cola", "n": "Viento de cola", "icono": "🌞", "v": {"s-crec": 3.0, "s-precio": 78, "s-tasa": 5.1}, "d": "Crecimiento de 3%, petróleo en 78 dólares y cien puntos base menos de tasa."}]}</script>
+        </section>
+        </div>
+      </section>
+
+      <nav class="herr-mod-nav np-saltos" aria-label="Anterior y siguiente">
+        <div class="herr-mod-pasos">
+          <a class="herr-mod-paso ant" href="numeros-paquete-2027-gasto.html"><small>← Anterior</small><b>🧭 En qué se irá</b></a>
+          <a class="herr-mod-paso sig" href="numeros-paquete-2027-impuestos.html"><small>Siguiente →</small><b>🧾 Impuestos</b></a>
+        </div>
+        <a class="np-saltos-arriba" href="numeros-paquete-2027.html">↑ 📈 Paquete Económico 2027: sus diez tarjetas</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="apartado-pie">
+    <div class="apartado-ancho">
+      <a class="apartado-volver" href="index.html">← Volver al auditor</a>
+      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261017c</b></span>
+    </div>
+  </footer>
+
+  <script src="assets/auditor/js/apartados.js?v=20261017c"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261017c"></script>
+  <script src="assets/auditor/js/presupuesto.js?v=20261017c"></script>
+</body>
+</html>

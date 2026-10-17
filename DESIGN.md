@@ -11,6 +11,7 @@ Hay tres fuentes de verdad, y cada una manda sobre lo suyo:
 | Valores de color y fuentes | `assets/auditor/css/auditavision.css` (en `:root` y `[data-theme="light"]`) |
 | Reglas editoriales | `AGENTS.md` §2 y §6, y «Criterio editorial» en `CONTEXT.md` |
 | Esta guía | `DESIGN.md` |
+| Brand book interactivo | `brand/` (se abre en `/brand/`; su contenido sale de esta guía) |
 
 La Enciclopedia (`enciclopedia.html` y `assets/css`) está congelada y **no se
 migra** a esta guía.

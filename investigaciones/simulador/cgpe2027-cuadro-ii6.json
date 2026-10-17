@@ -1,0 +1,107 @@
+{
+ "fuente": "SHCP, Criterios Generales de Política Económica 2027, cuadro II.6 «Estimación de las finanzas públicas, 2026-2027», p. 67",
+ "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf",
+ "unidad": "millones de pesos",
+ "escenarios": {
+  "2026a": "Presupuesto aprobado 2026",
+  "2027": "Paquete Económico 2027 (estimado)"
+ },
+ "entradas": [
+  {
+   "id": "tributarios",
+   "renglon": "Tributarios",
+   "nombre": "Impuestos (ISR, IVA, IEPS y otros)",
+   "que": "Ingresos tributarios del Gobierno Federal.",
+   "mdp": {
+    "2026a": 5838571.0,
+    "2027": 6263886.8
+   }
+  },
+  {
+   "id": "no_tributarios",
+   "renglon": "No tributarios",
+   "nombre": "Derechos, productos y aprovechamientos",
+   "que": "Ingresos no tributarios del Gobierno Federal.",
+   "mdp": {
+    "2026a": 377130.1,
+    "2027": 521763.5
+   }
+  },
+  {
+   "id": "petroleros",
+   "renglon": "Petroleros",
+   "nombre": "Ingresos petroleros",
+   "que": "Lo que aportan el petróleo y Pemex.",
+   "mdp": {
+    "2026a": 1204277.7,
+    "2027": 984539.7
+   }
+  },
+  {
+   "id": "organismos",
+   "renglon": "Organismos y empresas",
+   "nombre": "Organismos y empresas (IMSS, ISSSTE, CFE)",
+   "que": "Ingresos propios de organismos y empresas del Estado.",
+   "mdp": {
+    "2026a": 1301078.5,
+    "2027": 1386338.9
+   }
+  }
+ ],
+ "salidas": [
+  {
+   "id": "programable",
+   "renglon": "Programable pagado",
+   "nombre": "Gasto programable (programas, servicios, nómina e inversión)",
+   "que": "El gasto que se decide cada año, ya pagado.",
+   "mdp": {
+    "2026a": 7015853.1,
+    "2027": 7311129.3
+   }
+  },
+  {
+   "id": "costofin",
+   "renglon": "Costo financiero",
+   "nombre": "Intereses y costo de la deuda",
+   "que": "Costo financiero de la deuda y apoyos a ahorradores y deudores.",
+   "mdp": {
+    "2026a": 1572073.3,
+    "2027": 1574950.2
+   }
+  },
+  {
+   "id": "participaciones",
+   "renglon": "Participaciones",
+   "nombre": "Participaciones a estados y municipios (Ramo 28)",
+   "que": "Lo que la Federación transfiere y los estados gastan con libertad.",
+   "mdp": {
+    "2026a": 1456045.9,
+    "2027": 1547607.9
+   }
+  },
+  {
+   "id": "adefas",
+   "renglon": "Adefas",
+   "nombre": "Adeudos de ejercicios fiscales anteriores (Adefas)",
+   "que": "Pagos de compromisos del año anterior.",
+   "mdp": {
+    "2026a": 70855.7,
+    "2027": 81400.4
+   }
+  }
+ ],
+ "totales": {
+  "ingresos": {
+   "2026a": 8721057.3,
+   "2027": 9156528.9
+  },
+  "gasto": {
+   "2026a": 10114827.9,
+   "2027": 10515087.7
+  },
+  "balance": {
+   "2026a": -1393770.6,
+   "2027": -1358558.8
+  }
+ }
+}

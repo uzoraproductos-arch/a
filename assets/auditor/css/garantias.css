@@ -1,0 +1,122 @@
+/* Garantías cívicas (garantias.html, 10-10-2026): la brújula de denuncia,
+   las seis puertas, las diez garantías en cartas y el reto «¿Mito o
+   realidad?». Lo anima assets/auditor/js/garantias.js. */
+.gr-aviso { margin-bottom: 18px; }
+.gr-siglas { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .04em; color: #0b2a63; background: #e8eefb; border-radius: 6px; padding: 1px 6px; vertical-align: middle; }
+.gr-herr { display: block; font-size: 13.5px; color: #5a6782; }
+@keyframes grEntra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.gr-entra { animation: grEntra .35s ease-out; }
+
+/* La brújula */
+.gr-brujula { background: linear-gradient(160deg, #0b2a63 0%, #163f8c 100%); color: #fff; border-radius: 20px; padding: 18px 20px 22px; box-shadow: 0 10px 30px rgba(11, 42, 99, .18); }
+.gr-pasos { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 16px; padding: 0; font-size: 13.5px; color: #b9c8e8; }
+.gr-pasos li { display: inline-flex; align-items: center; gap: 6px; }
+.gr-pasos li span { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid #5b77b3; font-weight: 800; font-size: 12px; transition: background .25s, border-color .25s; }
+.gr-pasos li.gr-paso-on { color: #fff; font-weight: 700; }
+.gr-pasos li.gr-paso-on span { background: #f3cf65; border-color: #f3cf65; color: #0b2a63; }
+.gr-pasos li.gr-paso-hecho span { background: #2e9e6a; border-color: #2e9e6a; color: #fff; }
+.gr-preg { margin: 0 0 6px; font-size: 22px; font-family: 'Playfair Display', Georgia, serif; color: #fff; outline: none; }
+.gr-ayuda { margin: 0 0 12px; color: #d6e0f5; font-size: 15px; }
+.gr-ops { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 10px; }
+.gr-ops-2 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.gr-op { display: grid; gap: 4px; text-align: left; font: inherit; cursor: pointer; background: rgba(255, 255, 255, .08); color: #fff; border: 1px solid rgba(255, 255, 255, .22); border-radius: 14px; padding: 12px 14px; transition: transform .15s, background .15s, border-color .15s; }
+.gr-op:hover, .gr-op:focus-visible { background: rgba(255, 255, 255, .16); border-color: #f3cf65; transform: translateY(-2px); }
+.gr-op:focus-visible { outline: 3px solid #f3cf65; outline-offset: 2px; }
+.gr-op-ico { font-size: 26px; line-height: 1; }
+.gr-op b { font-size: 15.5px; }
+.gr-op small { font-size: 13.5px; color: #d6e0f5; line-height: 1.4; }
+.gr-atras { margin-top: 14px; background: none; border: 0; color: #f3cf65; font: inherit; font-size: 14px; cursor: pointer; padding: 4px 0; text-decoration: underline; }
+.gr-resultado .gr-preg { margin-bottom: 12px; }
+.gr-res-pasos { display: grid; gap: 12px; }
+.gr-res-paso { background: #fff; color: #142033; border-radius: 16px; padding: 14px 16px; border-left: 6px solid #f3cf65; }
+.gr-res-paso + .gr-res-paso { border-left-color: #2e9e6a; }
+.gr-res-num { display: inline-block; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #8a6d12; }
+.gr-res-tit { margin: 2px 0 10px; font-size: 18px; font-weight: 800; color: #0b2a63; }
+.gr-res-canal { display: flex; gap: 12px; align-items: center; }
+.gr-res-canal h4 { margin: 0; font-size: 17px; color: #0b2a63; }
+.gr-res-ico { font-size: 32px; }
+.gr-res-nota { margin: 10px 0 0; background: #fff3d1; border-radius: 10px; padding: 8px 10px; font-size: 14.5px; color: #4a3a12; }
+.gr-res-acc { margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.gr-ficha { font-weight: 700; color: #1a56b8; }
+.gr-res-pie { margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.gr-brujula .gr-res-pie .sz-btn { background: #fff; }
+.gr-datos { display: grid; gap: 8px; margin: 12px 0 0; }
+.gr-datos div { background: #f4f6fb; border-radius: 10px; padding: 8px 10px; }
+.gr-datos dt { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: #5a6782; }
+.gr-datos dd { margin: 2px 0 0; font-size: 14.5px; line-height: 1.5; color: #24324d; }
+.gr-sin-url { font-size: 14px; color: #5a6782; }
+
+/* Las seis puertas */
+.gr-puertas { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+.gr-puerta { display: flex; flex-direction: column; background: #fff; border: 1px solid #dfe5f0; border-top: 5px solid #94a3b8; border-radius: 16px; padding: 14px 16px; transition: box-shadow .3s; scroll-margin-top: 100px; }
+.gr-puerta[data-tono="gold"] { border-top-color: #c9a84c; }
+.gr-puerta[data-tono="emerald"] { border-top-color: #2e9e6a; }
+.gr-puerta[data-tono="crimson"] { border-top-color: #b3261e; }
+.gr-puerta[data-tono="cyan"] { border-top-color: #0e7490; }
+.gr-puerta.gr-destacada { box-shadow: 0 0 0 4px #f3cf65; }
+.gr-puerta-cab { display: flex; gap: 10px; align-items: flex-start; }
+.gr-puerta-ico { font-size: 30px; line-height: 1; }
+.gr-puerta-num { font-size: 12px; font-weight: 700; color: #8a94a8; text-transform: uppercase; letter-spacing: .04em; }
+.gr-puerta h3 { margin: 2px 0; font-size: 17px; color: #0b2a63; line-height: 1.3; }
+.gr-paraque { margin: 10px 0 8px; font-size: 15px; line-height: 1.55; color: #24324d; }
+.gr-anon { margin: 0 0 8px; font-size: 14.5px; }
+.gr-anon-et { color: #5a6782; }
+.gr-mas { margin-bottom: 10px; }
+.gr-mas > summary { cursor: pointer; font-weight: 700; color: #1a56b8; font-size: 14.5px; }
+.gr-fuente { display: inline-block; margin-top: 8px; font-size: 13.5px; }
+.gr-puerta-pie { margin-top: auto; padding-top: 6px; }
+
+/* Las diez garantías: cartas que se voltean */
+.gr-cartas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.gr-cartas > li { display: grid; }
+.gr-carta { display: grid; width: 100%; height: 100%; padding: 0; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; perspective: 900px; }
+.gr-carta-cara { grid-area: 1 / 1; display: flex; flex-direction: column; gap: 8px; border-radius: 16px; padding: 14px 16px; min-height: 170px; box-sizing: border-box; }
+.gr-carta-frente { background: #fff; border: 1px solid #dfe5f0; color: #0b2a63; }
+.gr-carta-frente b { font-size: 17px; line-height: 1.3; }
+.gr-carta-frente small { margin-top: auto; color: #1a56b8; font-weight: 700; font-size: 13px; }
+.gr-carta-n { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #0b2a63; color: #f3cf65; font-weight: 800; }
+.gr-carta-dorso { background: #0b2a63; color: #fff; font-size: 14.5px; line-height: 1.5; }
+.gr-carta-dorso small { margin-top: auto; color: #f3cf65; font-size: 13px; line-height: 1.4; }
+/* Sin JavaScript se leen las dos caras, una debajo de otra. */
+.gr-cartas:not(.gr-js) .gr-carta-cara { grid-area: auto; min-height: 0; }
+.gr-cartas:not(.gr-js) .gr-carta-frente small { display: none; }
+.gr-cartas.gr-js .gr-carta-cara { backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: transform .5s ease; }
+.gr-cartas.gr-js .gr-carta-dorso { transform: rotateY(180deg); }
+.gr-cartas.gr-js .gr-carta[aria-pressed="true"] .gr-carta-frente { transform: rotateY(-180deg); }
+.gr-cartas.gr-js .gr-carta[aria-pressed="true"] .gr-carta-dorso { transform: rotateY(0); }
+.gr-carta:hover .gr-carta-frente, .gr-carta:focus-visible .gr-carta-frente { border-color: #c9a84c; box-shadow: 0 6px 18px rgba(11, 42, 99, .1); }
+.gr-carta:focus-visible { outline: 3px solid #c9a84c; outline-offset: 3px; border-radius: 16px; }
+
+/* ¿Mito o realidad? */
+.gr-reto { background: #fff; border: 1px solid #dfe5f0; border-radius: 20px; padding: 18px 20px; max-width: 760px; }
+.gr-reto-cab { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; font-weight: 700; color: #5a6782; }
+.gr-reto-barra { height: 8px; background: #eef1f6; border-radius: 99px; overflow: hidden; margin: 8px 0 14px; }
+.gr-reto-barra span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #c9a84c, #2e9e6a); transition: width .4s ease; }
+.gr-reto-af { margin: 0 0 14px; font-size: 21px; line-height: 1.4; font-family: 'Playfair Display', Georgia, serif; color: #0b2a63; }
+.gr-reto-ops { display: flex; flex-wrap: wrap; gap: 10px; }
+.gr-reto-btn { flex: 1 1 160px; font: inherit; font-size: 16px; font-weight: 800; padding: 12px 16px; border-radius: 14px; border: 2px solid #c9d3e6; background: #f8fafd; color: #0b2a63; cursor: pointer; transition: transform .15s, border-color .15s; }
+.gr-reto-btn:hover:not(:disabled) { border-color: #0b2a63; transform: translateY(-2px); }
+.gr-reto-btn:disabled { cursor: default; opacity: .55; }
+.gr-reto-btn.gr-bien { opacity: 1; border-color: #2e9e6a; background: #e6f5ee; color: #0f5132; }
+.gr-reto-btn.gr-mal { opacity: 1; border-color: #b3261e; background: #fdecea; color: #7a1a14; }
+.gr-reto-exp { margin-top: 14px; font-size: 15px; line-height: 1.55; color: #24324d; }
+.gr-reto-exp p { margin: 0 0 8px; }
+.gr-reto-ver { font-size: 17px; }
+.gr-reto-ok { color: #0f5132; }
+.gr-reto-no { color: #7a1a14; }
+.gr-reto-fund { font-size: 14px; color: #5a6782; }
+.gr-reto-de { font-size: 13px; color: #8a94a8; }
+.gr-reto-acc { display: flex; flex-wrap: wrap; gap: 8px; }
+
+@media (max-width: 560px) {
+  .gr-brujula { padding: 16px 14px 18px; border-radius: 16px; }
+  .gr-preg { font-size: 20px; }
+  .gr-pasos { gap: 6px 10px; font-size: 12.5px; }
+  .gr-reto { padding: 16px 14px; }
+  .gr-reto-af { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gr-entra { animation: none; }
+  .gr-op, .gr-reto-btn, .gr-reto-barra span { transition: none; }
+  .gr-cartas.gr-js .gr-carta-cara { transition: none; }
+}

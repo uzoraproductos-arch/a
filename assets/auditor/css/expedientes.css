@@ -1,0 +1,177 @@
+/* Expedientes de casos por aclarar (expedientes.html).
+   Pagina propia desde el 09-10-2026: antes era el bloque 3 del Modo
+   Inspector. Las fichas reusan .exp-cifras, .exp-anios y .exp-informes de
+   auditavision.css; aqui va el marco de la pagina. */
+
+/* Como nace un expediente: cuadro conceptual */
+.ex-mapa { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.ex-paso {
+  flex: 1 1 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(180deg, #f7f9fd 0%, #eef3fb 100%);
+  border: 1px solid var(--civ-gris-borde, #d9e0ec);
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #44526b;
+  animation: ex-entra 0.5s ease-out both;
+}
+.ex-paso:nth-child(3) { animation-delay: 0.12s; }
+.ex-paso:nth-child(5) { animation-delay: 0.24s; }
+.ex-paso:nth-child(7) { animation-delay: 0.36s; }
+.ex-paso b { font-size: 15px; color: var(--civ-azul, #0b2a63); }
+.ex-paso-ico { font-size: 30px; line-height: 1; }
+.ex-flecha { align-self: center; font-size: 22px; color: #94a3b8; flex: none; }
+@keyframes ex-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.ex-glosa {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.ex-glosa div { background: #fff8e6; border-radius: 10px; padding: 10px 14px; }
+.ex-glosa dt { font-weight: 800; color: #7a4b00; font-size: 14px; }
+.ex-glosa dd { margin: 3px 0 0; font-size: 13.5px; line-height: 1.45; color: #44526b; }
+
+/* Filtro e indice */
+.ex-filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 14px; }
+.ex-conteo { font-size: 14px; color: #44526b; }
+.ex-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ex-chips button {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  border: 1px solid var(--civ-gris-borde, #d9e0ec);
+  background: #ffffff;
+  color: var(--civ-azul, #0b2a63);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+.ex-chips button:hover { border-color: var(--civ-azul-medio, #1d4ed8); }
+.ex-chips button.activo { background: var(--civ-azul, #0b2a63); border-color: var(--civ-azul, #0b2a63); color: #ffffff; }
+.ex-chips button:focus-visible { outline: 3px solid var(--civ-azul-medio, #1d4ed8); outline-offset: 2px; }
+
+.ex-indice { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+.ex-tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde, #d9e0ec);
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.ex-tarjeta:hover { transform: translateY(-2px); border-color: #f5c451; box-shadow: 0 6px 18px rgba(12, 30, 66, 0.1); }
+.ex-tarjeta:focus-visible { outline: 3px solid var(--civ-azul-medio, #1d4ed8); outline-offset: 2px; }
+.ex-tarjeta-n { position: absolute; top: 12px; right: 14px; font-size: 13px; font-weight: 800; color: #94a3b8; }
+.ex-tarjeta-ico { font-size: 28px; line-height: 1; }
+.ex-tarjeta-cat { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--civ-azul-medio, #1d4ed8); }
+.ex-tarjeta-tit { font-weight: 800; font-size: 15px; line-height: 1.3; color: var(--civ-azul, #0b2a63); }
+.ex-tarjeta-dato { font-size: 12.5px; color: #44526b; line-height: 1.35; }
+.ex-tarjeta-dato b { color: var(--civ-azul, #0b2a63); }
+.ex-tarjeta-ir { margin-top: auto; padding-top: 4px; font-size: 13px; font-weight: 800; color: #b45309; }
+
+/* Cada caso */
+.ex-casos { display: flex; flex-direction: column; gap: 22px; margin-top: 8px; }
+.ex-caso {
+  background: #ffffff;
+  border: 1px solid var(--civ-gris-borde, #d9e0ec);
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 10px rgba(12, 30, 66, 0.05);
+  scroll-margin-top: 90px;
+}
+.ex-caso[hidden] { display: none; }
+.ex-caso.ex-destaca { animation: ex-destaca 1.6s ease-out; }
+@keyframes ex-destaca { 0% { box-shadow: 0 0 0 0 rgba(245, 196, 81, 0.9); } 40% { box-shadow: 0 0 0 8px rgba(245, 196, 81, 0.35); } 100% { box-shadow: 0 2px 10px rgba(12, 30, 66, 0.05); } }
+.ex-caso-cab { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px; }
+.ex-caso-n {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--civ-azul, #0b2a63);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+}
+.ex-caso-ico { font-size: 34px; line-height: 1; flex: none; }
+.ex-caso-cat { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--civ-azul-medio, #1d4ed8); }
+.ex-caso-tit { margin: 2px 0 4px; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.25; color: var(--civ-azul, #0b2a63); }
+.ex-caso-ente { margin: 0; font-size: 14px; color: #5b6880; font-style: italic; }
+.ex-pagina .ex-hallazgo {
+  background: #f4f7fc;
+  border-left: 5px solid var(--civ-azul-medio, #1d4ed8);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #1f2a3d;
+}
+.ex-pagina .exp-cifra-v { color: var(--civ-azul, #0b2a63); }
+.ex-pagina .exp-informes summary { cursor: pointer; font-weight: 700; color: var(--civ-azul, #0b2a63); }
+.ex-pagina .exp-informes a, .ex-pagina .exp-docs a { color: #b45309; }
+.ex-pagina .exp-informes li, .ex-pagina .exp-docs li { color: #44526b; }
+
+/* Barras por Cuenta Publica */
+.ex-barras { margin: 14px 0; }
+.ex-sub { margin: 0 0 8px; font-weight: 800; font-size: 14px; color: var(--civ-azul, #0b2a63); }
+.ex-barra { display: grid; grid-template-columns: 70px 1fr 140px; gap: 10px; align-items: center; margin-bottom: 6px; font-size: 13.5px; }
+.ex-barra-k { font-weight: 700; color: #44526b; }
+.ex-barra-pista { height: 16px; background: #eef2f8; border-radius: 999px; overflow: hidden; }
+.ex-barra-llena { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f59e0b, #dc2626); border-radius: 999px; transition: width 1s ease-out; }
+.ex-barras.visto .ex-barra-llena { width: var(--w); }
+.ex-barra-v { text-align: right; font-weight: 700; color: var(--civ-azul, #0b2a63); }
+
+.ex-nota { font-size: 13px; color: #5b6880; margin: 10px 0 0; line-height: 1.45; }
+.ex-consulta { text-align: center; }
+
+.ex-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.ex-btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--civ-gris-borde, #d9e0ec);
+  background: #eef2f8;
+  color: var(--civ-azul, #0b2a63);
+  border-radius: 999px;
+  padding: 9px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ex-btn:hover { border-color: var(--civ-azul-medio, #1d4ed8); }
+.ex-btn:focus-visible { outline: 3px solid var(--civ-azul-medio, #1d4ed8); outline-offset: 2px; }
+.ex-btn-oro { background: linear-gradient(180deg, #fbbf24, #f59e0b); border-color: #f59e0b; color: #3b2300; }
+.ex-btn-sutil { background: transparent; }
+
+@media (max-width: 760px) {
+  .ex-mapa { flex-direction: column; }
+  .ex-paso { flex: none; }
+  .ex-flecha { transform: rotate(90deg); width: 100%; text-align: center; }
+  .ex-caso { padding: 18px 16px; }
+  .ex-caso-ico { display: none; }
+  .ex-barra { grid-template-columns: 58px 1fr; }
+  .ex-barra-v { grid-column: 2; text-align: left; }
+  .ex-indice { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 420px) {
+  .ex-indice { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ex-paso, .ex-caso.ex-destaca { animation: none; }
+  .ex-barra-llena, .ex-tarjeta { transition: none; }
+}

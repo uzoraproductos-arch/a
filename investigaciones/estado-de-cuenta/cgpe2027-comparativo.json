@@ -1,0 +1,202 @@
+[
+ {
+  "id": "ingresos",
+  "dimension": "presupuestaria",
+  "concepto": "Ingresos presupuestarios",
+  "que": "Todo lo que entra al sector público presupuestario en el año: impuestos, derechos, ingresos petroleros y de organismos y empresas. No incluye deuda.",
+  "pib": {
+   "2024": 22.3,
+   "2026a": 22.5,
+   "2026e": 23.0,
+   "2027": 23.2
+  },
+  "pib_hist_2026a": 22.5,
+  "mdp": {
+   "2026a": 8721057.3,
+   "2026e": 8537298.7,
+   "2027": 9156528.9
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "tributarios",
+  "dimension": "presupuestaria",
+  "concepto": "Ingresos tributarios",
+  "que": "Los impuestos: ISR, IVA, IEPS, importación y otros.",
+  "pib": {
+   "2024": 14.7,
+   "2026a": 15.1,
+   "2026e": 15.4,
+   "2027": 15.9
+  },
+  "pib_hist_2026a": 15.1,
+  "mdp": {
+   "2026a": 5838571.0,
+   "2026e": 5730891.9,
+   "2027": 6263886.8
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "petroleros",
+  "dimension": "presupuestaria",
+  "concepto": "Ingresos petroleros",
+  "que": "Lo que aportan el petróleo y Pemex.",
+  "pib": {
+   "2024": 2.9,
+   "2026a": 3.1,
+   "2026e": 3.0,
+   "2027": 2.5
+  },
+  "pib_hist_2026a": 3.1,
+  "mdp": {
+   "2026a": 1204277.7,
+   "2026e": 1113958.1,
+   "2027": 984539.7
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "gasto",
+  "dimension": "presupuestaria",
+  "concepto": "Gasto neto pagado",
+  "que": "Todo lo que el sector público pagó o prevé pagar en el año.",
+  "pib": {
+   "2024": 27.3,
+   "2026a": 26.1,
+   "2026e": 26.6,
+   "2027": 26.7
+  },
+  "pib_hist_2026a": 26.1,
+  "mdp": {
+   "2026a": 10114827.9,
+   "2026e": 9874777.8,
+   "2027": 10515087.7
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "programable",
+  "dimension": "presupuestaria",
+  "concepto": "Gasto programable devengado",
+  "que": "El gasto en programas, servicios, nómina e inversión: lo que se decide cada año.",
+  "pib": {
+   "2024": 20.2,
+   "2026a": 18.3,
+   "2026e": 19.1,
+   "2027": 18.9
+  },
+  "pib_hist_2026a": 18.3,
+  "mdp": {
+   "2026a": 7094708.8,
+   "2026e": 7084505.4,
+   "2027": 7432529.7
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "participaciones",
+  "dimension": "presupuestaria",
+  "concepto": "Participaciones a estados y municipios",
+  "que": "El Ramo 28: dinero que la Federación transfiere y que los estados gastan con libertad.",
+  "pib": {
+   "2024": 3.7,
+   "2026a": 3.8,
+   "2026e": 3.9,
+   "2027": 3.9
+  },
+  "pib_hist_2026a": 3.8,
+  "mdp": {
+   "2026a": 1456045.9,
+   "2026e": 1435643.7,
+   "2027": 1547607.9
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "balance",
+  "dimension": "presupuestaria",
+  "concepto": "Balance presupuestario (déficit si es negativo)",
+  "que": "Ingresos menos gasto. Si es negativo, es el déficit que se cubre con deuda.",
+  "pib": {
+   "2024": -5.0,
+   "2026a": -3.6,
+   "2026e": -3.6,
+   "2027": -3.4
+  },
+  "pib_hist_2026a": -3.6,
+  "mdp": {
+   "2026a": -1393770.6,
+   "2026e": -1337479.1,
+   "2027": -1358558.8
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "costofin",
+  "dimension": "financiera",
+  "concepto": "Costo financiero de la deuda",
+  "que": "Intereses, comisiones y gastos de la deuda, más los programas de apoyo a ahorradores y deudores.",
+  "pib": {
+   "2024": 3.4,
+   "2026a": 4.1,
+   "2026e": 3.7,
+   "2027": 4.0
+  },
+  "pib_hist_2026a": 4.1,
+  "mdp": {
+   "2026a": 1572073.3,
+   "2026e": 1364484.4,
+   "2027": 1574950.2
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "primario",
+  "dimension": "financiera",
+  "concepto": "Balance primario",
+  "que": "El balance sin contar los intereses de la deuda: dice si el gobierno gasta más de lo que ingresa antes de pagar a sus acreedores.",
+  "pib": {
+   "2024": -1.6,
+   "2026a": 0.5,
+   "2026e": 0.1,
+   "2027": 0.6
+  },
+  "pib_hist_2026a": 0.5,
+  "mdp": {
+   "2026a": 178802.6,
+   "2026e": 27505.3,
+   "2027": 216891.3
+  },
+  "pagina_hist": 55,
+  "pagina_ii6": 67
+ },
+ {
+  "id": "shrfsp",
+  "dimension": "financiera",
+  "concepto": "Deuda amplia (SHRFSP)",
+  "que": "El Saldo Histórico de los Requerimientos Financieros del Sector Público: la medida más amplia de la deuda.",
+  "pib": {
+   "2024": 51.9,
+   "2026a": 52.3,
+   "2026e": 54.0,
+   "2027": 55.0
+  },
+  "pib_hist_2026a": 52.3,
+  "mdp": {
+   "2026a": 20259590.7,
+   "2026e": 20062321.6,
+   "2027": 21665995.8
+  },
+  "pagina_hist": 52,
+  "pagina_ii6": 67
+ }
+]

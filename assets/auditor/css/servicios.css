@@ -1,0 +1,46 @@
+/* Servicios de investigacion (servicios.html; entrega 6 de la propuesta de
+   Astra, 10-10-2026). Reutiliza .sz-btn y .sz-et de apartados.css y los
+   formularios (.sv-form, .sv-campo...) de puerta.css. */
+.sv-aviso { background: #fff8e6; border: 1px solid #ecd18c; border-radius: 12px; padding: 12px 14px; font-size: 15px; line-height: 1.55; color: #4a3a12; margin: 0 0 18px; }
+.sv-servicios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.sv-servicio { background: #fff; border: 1px solid var(--civ-gris-borde, #c9d9ee); border-radius: 16px; padding: 16px 18px; min-width: 0; }
+.sv-ico { font-size: 26px; }
+.sv-tit { margin: 6px 0 4px; font-size: 18px; color: #0b2a63; }
+.sv-que { margin: 0 0 10px; color: #33415c; line-height: 1.55; }
+.sv-dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; font-size: 14.5px; }
+.sv-dl dt { font-weight: 800; color: #5a6782; }
+.sv-dl dd { margin: 0; color: #24324d; }
+.sv-pasos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; counter-reset: none; }
+.sv-paso { position: relative; background: #fff; border: 1px solid #dfe5f0; border-radius: 14px; padding: 14px 12px 12px; display: grid; gap: 4px; font-size: 14px; line-height: 1.45; color: #33415c; }
+.sv-paso b { color: #0b2a63; font-size: 15.5px; }
+.sv-paso-num { position: absolute; top: 10px; right: 12px; font-weight: 800; color: #9aa7bf; font-size: 13px; }
+.sv-paso-ico { font-size: 22px; }
+.sv-precio, .sv-politica { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 16px 20px; line-height: 1.6; color: #24324d; }
+.sv-precio p { margin: 0 0 8px; }
+.sv-lista { margin: 0; padding-left: 20px; }
+.sv-pol { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+.sv-pol li { line-height: 1.6; }
+.sv-pol b { color: #0b2a63; }
+.sv-version { margin: 12px 0 0; font-size: 13px; color: #5a6782; }
+.sv-grupo { border: 0; margin: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }
+.sv-grupo legend { font-weight: 800; color: #0b2a63; font-size: 16.5px; margin-bottom: 8px; padding: 0; }
+.sv-dos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sv-radio { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; font-size: 14.5px; line-height: 1.45; }
+.sv-radio input { margin-top: 3px; }
+.sv-check { display: flex; gap: 8px; align-items: flex-start; font-size: 14.5px; line-height: 1.45; color: #24324d; }
+.sv-check input { margin-top: 3px; flex: none; }
+@media (max-width: 720px) {
+  .sv-servicios, .sv-dos { grid-template-columns: 1fr; }
+  .sv-precio, .sv-politica { padding: 14px; }
+}
+/* Comunidad (comunidad.html; entrega 7, 10-10-2026). */
+.cm-erratas { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 12px; }
+.cm-errata { display: grid; gap: 4px; padding: 0 0 12px; border-bottom: 1px solid #e6eaf2; line-height: 1.55; }
+.cm-errata:last-child { border-bottom: 0; padding-bottom: 0; }
+.cm-errata b { color: #0b2a63; font-size: 16px; }
+.cm-errata-fecha { font-size: 12.5px; font-weight: 800; color: #5a6782; letter-spacing: .03em; }
+.cm-errata-et { font-weight: 700; color: #5a6782; }
+.cm-errata a { color: #1a56b8; font-weight: 600; }
+.cm-compartir { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 16px 20px; display: grid; gap: 12px; line-height: 1.6; color: #24324d; }
+.cm-compartir p { margin: 0; }
+.cm-nota { font-size: 14px; color: #44526b; }
