@@ -51,6 +51,7 @@ def e(id_, tema, que, porque, responsable, enlace, enlace_txt, aparece):
 MEGAOBRAS_PAGS = [('herramienta-megaobras-pulso-cifras.html', 'Megaobras · El pulso del gasto › Las cuatro cifras'),
                   ('herramienta-megaobras-pulso-ritmo.html', 'Megaobras · El pulso del gasto › El ritmo'),
                   ('herramienta-megaobras-pulso-composicion.html', 'Megaobras · El pulso del gasto › De qué está hecho el total'),
+                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · El pulso del gasto › La cuenta de cada obra'),
                   ('herramienta-megaobras-pulso-calculo.html', 'Megaobras · El pulso del gasto › Cómo se calcula'),
                   ('herramienta-megaobras-sexenios.html', 'Megaobras · Las obras de cada sexenio'),
                   ('herramienta-megaobras-cero.html', 'Megaobras · De cero al resultado')]
@@ -184,21 +185,38 @@ def recolectar():
     sim = d['simulador_megaobras']
     ver = sim['verificacion']
     nombres = {o['id']: o['nombre'] for o in sim['obras']}
+    # Un campo con rango (AGENTS.md, §2) sigue debiendo la cifra exacta: su
+    # ficha se queda, con la nota de que ya hay rango (17-10-2026).
+    rangos = {o['id']: o.get('rangos_campos') or {} for o in sim['obras']}
     for oid, o in ver['obras'].items():
-        campos = [k for k, v in (o.get('campos') or {}).items() if v == 'pendiente']
+        campos = [k for k, v in (o.get('campos') or {}).items() if v == 'pendiente' or k in rangos.get(oid, {})]
         if not campos:
             continue
         defs = o.get('definiciones') or {}
-        porque = ' '.join(defs.get(k, '') for k in campos if defs.get(k)) or (
+        porque = ' '.join(('Ya hay un rango derivado; la cifra exacta se sigue debiendo. ' if k in rangos.get(oid, {}) else '')
+                          + defs.get(k, '') for k in campos if defs.get(k)) or (
             'Ningún documento oficial publica el presupuesto original ni el costo total de la obra. ' + limpio(o.get('hallazgo', ''))[:300])
-        quien = {'aifa-texcoco': 'Secretaría de la Defensa Nacional (Sedena)',
-                 'dos-bocas': 'Pemex y su filial PTI Infraestructura de Desarrollo'}.get(oid, HISTORICO)
+        quien = {'aifa-texcoco': 'Grupo Aeroportuario de la Ciudad de México (GACM) y Secretaría de Hacienda, por el costo exacto de cancelar el NAIM',
+                 'dos-bocas': 'Pemex y su filial PTI Infraestructura de Desarrollo',
+                 'bunker-garcia-luna': 'Secretaría de Seguridad y Protección Ciudadana (SSPC), heredera de la SSP'}.get(oid, HISTORICO)
         fu = (o.get('fuentes') or ['opa'])[0]
         out.append(e('obra-' + oid, 'Megaobras', '%s: %s' % (nombres.get(oid, oid), ', '.join(
             {'inversion_presupuestada_mdp': 'presupuesto original', 'inversion_real_mdp': 'costo total',
              'sobrecosto_pct': 'sobrecosto'}[k] for k in campos)),
             porque, quien, ver['fuentes'].get(fu, {}).get('url'), ver['fuentes'].get(fu, {}).get('doc', 'Documento')[:80],
             [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Sector e industria')] + MEGAOBRAS_PAGS))
+    # 4 bis. La cuenta de cada obra (17-10-2026): los renglones que siguen
+    # sin cifra, una ficha por obra.
+    for oid, filas in ((sim.get('cuenta') or {}).get('obras') or {}).items():
+        pend = [f for f in filas if f['e'] == 'pendiente']
+        if not pend:
+            continue
+        url = next((x['url'] for f in pend for x in f.get('f') or []), None) or next(
+            (x['url'] for f in filas for x in f.get('f') or []), None)
+        out.append(e('cuenta-' + oid, 'Megaobras', '%s: %s' % (nombres.get(oid, oid), ', '.join(f['et'].lower() for f in pend)),
+                     ' '.join('%s: %s' % (f['et'], f['resp']) for f in pend),
+                     '; '.join(sorted({f['resp'].split(':')[0] for f in pend})), url, 'Documento oficial más cercano',
+                     [('herramienta-megaobras-pulso-cuenta.html#cuenta-' + oid, 'Megaobras · La cuenta de cada obra')]))
     # 5. Reloj de perdidas de las megaobras.
     for r in d['calculadora_civica']['relojes']['fuentes']:
         if r.get('estado') == 'pendiente':

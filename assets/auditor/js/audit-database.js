@@ -16346,9 +16346,9 @@ window.AUDIT_DB = {
       "icono": "🛢️",
       "estatus": "Fase de integración & pruebas",
       "badge_color": "var(--gold-bright)",
-      "inversion_presupuestada_mdp": 160000,
+      "inversion_presupuestada_mdp": 157049.2,
       "inversion_real_mdp": 357887.3,
-      "sobrecosto_pct": 123.7,
+      "sobrecosto_pct": 128.0,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 16425,
       "perdida_anual_mdp": 16425,
@@ -16383,9 +16383,23 @@ window.AUDIT_DB = {
       "unidad_metrica": "Barril procesado",
       "costo_unitario_real": "Costo de capital de $55,600 USD por barril de capacidad instalada (duplica el estándar global de refinación moderna).",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
+        "inversion_presupuestada_mdp": "derivado",
         "inversion_real_mdp": "oficial",
-        "sobrecosto_pct": "pendiente"
+        "sobrecosto_pct": "derivado"
+      },
+      "rangos_campos": {
+        "inversion_presupuestada_mdp": {
+          "min": 154098.4,
+          "max": 160000.0,
+          "medio": 157049.2,
+          "op": "Mínimo: los 8,000 millones de dólares de «inversión máxima» que anunció la Sener el 9-05-2019, al tipo de cambio FIX de ese día (19.2623, Banxico): 8,000 × 19.2623 = 154,098.4. Máximo: los «160 mil millones de pesos en tres años, no más» que dijo el presidente el mismo día. Punto medio (154,098.4 + 160,000.0) ÷ 2 = 157,049.2."
+        },
+        "sobrecosto_pct": {
+          "min": 123.7,
+          "max": 132.2,
+          "medio": 128.0,
+          "op": "(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.3 %; punto medio (123.7 + 132.3) ÷ 2 = 128.0 %. Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, así que es una cota inferior del sobrecosto final."
+        }
       }
     },
     {
@@ -16397,9 +16411,9 @@ window.AUDIT_DB = {
       "icono": "🛫",
       "estatus": "Subsidio operativo federal en curso",
       "badge_color": "var(--cyan)",
-      "inversion_presupuestada_mdp": 75000,
-      "inversion_real_mdp": 201434.7,
-      "sobrecosto_pct": 168.6,
+      "inversion_presupuestada_mdp": 79305.0,
+      "inversion_real_mdp": 101935.3,
+      "sobrecosto_pct": 28.5,
       "ingresos_anuales_mdp": 980,
       "costo_operativo_anual_mdp": 2440,
       "perdida_anual_mdp": 1460,
@@ -16407,7 +16421,7 @@ window.AUDIT_DB = {
       "perdida_segundo": 46.3,
       "proyeccion_tipo": "subsidio_transicion",
       "proyeccion_anios": 25,
-      "proyeccion_resumen": "El costo que el simulador consolida suma los $113,327.7 mdp que la ASF fijó como costo de cancelar el NAIM (estudio de marzo de 2021) y $88,107 mdp de construcción del AIFA, cifra esta última pendiente: no consta en un documento oficial de la Sedena, que es la dependencia obligada a transparentarla. La proyección de subsidio a 25 años sigue pendiente por la misma falta de rendición de cuentas.",
+      "proyeccion_resumen": "El simulador cuenta el costo del AIFA ($74,480.2 mdp, derivado de la ASF) más lo atribuible a cancelar el NAIM (entre $21,734.3 y $33,175.8 mdp, estudio de la ASF de marzo de 2021). La obra del NAIM ejercida de 2014 a 2018 ($79,907.7 mdp) ya no se carga a este sexenio. Los ingresos que el AIFA esperaba siguen sin publicarse: la Sedena reservó su análisis costo-beneficio por seguridad nacional.",
       "desglose_costos_operacion": [
         {
           "rubro": "Pago de intereses y servicio de bonos del NAIM (vía TUA AICM)",
@@ -16434,9 +16448,23 @@ window.AUDIT_DB = {
       "unidad_metrica": "Pasajero aéreo nacional/int.",
       "costo_unitario_real": "Cada pasajero en el AIFA requirió un subsidio fiscal promedio de ~$380 pesos del erario federal para mantener operable la terminal.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
+      },
+      "rangos_campos": {
+        "inversion_real_mdp": {
+          "min": 96214.5,
+          "max": 107656.0,
+          "medio": 101935.3,
+          "op": "Costo del AIFA (74,480.2, derivado de la ASF) más lo atribuible a cancelar el NAIM: mínimo 21,734.3 (solo lo que la ASF liga a la terminación), máximo 33,175.8 (el costo total de la ASF, 113,327.7, menos la obra del NAIM ejercida antes de 2019, 79,907.7 + 244.2). Mínimo 74,480.2 + 21,734.3 = 96,214.5; máximo 74,480.2 + 33,175.8 = 107,656.0; punto medio (96,214.5 + 107,656.0) ÷ 2 = 101,935.3."
+        },
+        "sobrecosto_pct": {
+          "min": 21.3,
+          "max": 35.7,
+          "medio": 28.5,
+          "op": "(costo ÷ 79,305.0 − 1) × 100 con cada cota del costo: (96,214.5 ÷ 79,305.0 − 1) × 100 = 21.3 % y (107,656.0 ÷ 79,305.0 − 1) × 100 = 35.7 %; punto medio (21.3 + 35.7) ÷ 2 = 28.5 %."
+        }
       }
     },
     {
@@ -16550,9 +16578,9 @@ window.AUDIT_DB = {
       "icono": "🧪",
       "estatus": "Filial de Pemex",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 13121.6,
+      "inversion_presupuestada_mdp": 12532.0,
       "inversion_real_mdp": 13121.6,
-      "sobrecosto_pct": 0.0,
+      "sobrecosto_pct": 4.7,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 0,
       "perdida_anual_mdp": 0,
@@ -16626,9 +16654,9 @@ window.AUDIT_DB = {
       "icono": "🏢",
       "estatus": "Operando como centro de datos SSPC",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 1200,
-      "inversion_real_mdp": 3346,
-      "sobrecosto_pct": 178.8,
+      "inversion_presupuestada_mdp": 347.4,
+      "inversion_real_mdp": 263.0,
+      "sobrecosto_pct": -24.3,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 255.5,
       "perdida_anual_mdp": 255.5,
@@ -16663,9 +16691,23 @@ window.AUDIT_DB = {
       "unidad_metrica": "Día de monitoreo táctico",
       "costo_unitario_real": "Costo diario de $700,000 pesos para mantener encendida la infraestructura tecnológica subterránea.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
+      },
+      "rangos_campos": {
+        "inversion_real_mdp": {
+          "min": 236.9,
+          "max": 289.1,
+          "medio": 263.0,
+          "op": "Solo el contrato de obra civil del edificio. Mínimo: lo pagado a agosto de 2010, 206,027.9 miles más 15 % de IVA = 236.9. Máximo: el contrato ya reducido, 251,361.3 miles más 15 % de IVA (37,704.2) = 289.1; la ASF no registra ampliación de monto. Punto medio (236.9 + 289.1) ÷ 2 = 263.0."
+        },
+        "sobrecosto_pct": {
+          "min": -31.8,
+          "max": -16.8,
+          "medio": -24.3,
+          "op": "(236.9 ÷ 347.4 − 1) × 100 = −31.8 % y (289.1 ÷ 347.4 − 1) × 100 = −16.8 %; punto medio (−31.8 − 16.8) ÷ 2 = −24.3 %: el contrato costó menos de lo pactado."
+        }
       }
     },
     {
@@ -16749,9 +16791,9 @@ window.AUDIT_DB = {
       "icono": "🏦",
       "estatus": "Deuda viva pagada en el PEF anual",
       "badge_color": "var(--crimson-bright)",
-      "inversion_presupuestada_mdp": 552000,
-      "inversion_real_mdp": 2470000,
-      "sobrecosto_pct": 347.5,
+      "inversion_presupuestada_mdp": 552300.0,
+      "inversion_real_mdp": 1734494.3,
+      "sobrecosto_pct": 214.0,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 49275,
       "perdida_anual_mdp": 49275,
@@ -16781,9 +16823,9 @@ window.AUDIT_DB = {
       "unidad_metrica": "Día fiscal de deuda",
       "costo_unitario_real": "Cada ciudadano mexicano aporta indirectamente más de $1,050 pesos al año únicamente para solventar los intereses bancarios del Fobaproa.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
       }
     },
     {
@@ -16795,9 +16837,9 @@ window.AUDIT_DB = {
       "icono": "🛣️",
       "estatus": "Absorbido por Fonadin",
       "badge_color": "var(--gold-bright)",
-      "inversion_presupuestada_mdp": 60000,
-      "inversion_real_mdp": 162000,
-      "sobrecosto_pct": 170.0,
+      "inversion_presupuestada_mdp": 57756.6,
+      "inversion_real_mdp": 153851.5,
+      "sobrecosto_pct": 166.4,
       "ingresos_anuales_mdp": 28500,
       "costo_operativo_anual_mdp": 34500,
       "perdida_anual_mdp": 6000,
@@ -16827,9 +16869,9 @@ window.AUDIT_DB = {
       "unidad_metrica": "Kilómetro carretero rescatado",
       "costo_unitario_real": "Costo fiscal de $18.5 millones de pesos por kilómetro rescatado transferido a pagarés gubernamentales de Banobras.",
       "estado_campos": {
-        "inversion_presupuestada_mdp": "pendiente",
-        "inversion_real_mdp": "pendiente",
-        "sobrecosto_pct": "pendiente"
+        "inversion_presupuestada_mdp": "oficial",
+        "inversion_real_mdp": "derivado",
+        "sobrecosto_pct": "derivado"
       }
     }
   ],
@@ -16861,13 +16903,13 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3911229.2,
-    "inversion_presupuestada_total_mdp": 1142024.6,
+    "inversion_total_mdp": 3064992.6,
+    "inversion_presupuestada_total_mdp": 1139993.2,
     "perdida_anual_consolidada_mdp": 80200.1,
     "perdida_diaria_consolidada_mdp": 219.73,
     "perdida_segundo_consolidada": 2543.13,
     "obras_evaluadas": 13,
-    "sobrecosto_conjunto_pct": 242.5,
+    "sobrecosto_conjunto_pct": 168.9,
     "cobertura_obras": {
       "total_obras": 13,
       "con_operacion_documentada": 3,
@@ -17567,12 +17609,14 @@ window.AUDIT_DB = {
           "acciones": 0
         },
         "campos": {
-          "inversion_presupuestada_mdp": "pendiente",
-          "inversion_real_mdp": "pendiente",
-          "sobrecosto_pct": "pendiente"
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
         },
         "definiciones": {
-          "inversion_real_mdp": "Suma los $113,327.7 mdp que la ASF determinó como costo de cancelar el NAIM (estudio de marzo de 2021, p. 46) y $88,107 mdp de construcción del AIFA, pendientes porque no constan en un documento oficial de la Sedena, que debe transparentarlos."
+          "inversion_real_mdp": "Entre $96,214.5 y $107,656.0 mdp; punto medio $101,935.3 mdp. Es el costo del AIFA, $74,480.2 mdp (16,656.4 ejercidos directo por la Sedena + 57,990.6 aportados al fideicomiso FPAPEM − 166.8 sin gastar al 31-12-2022; ASF CP 2021 aud. 325 y CP 2022 aud. 342), más lo atribuible a cancelar el NAIM. Ya no suma los $79,907.7 mdp de obra del NAIM ejercida de 2014 a 2018, que son del sexenio anterior, ni los $88,107 mdp del AIFA que no tenían documento. La cifra exacta de la cancelación la deben GACM y Hacienda.",
+          "inversion_presupuestada_mdp": "Presupuesto total que la Sedena previó para construir el AIFA de 2019 a 2022: 73,109.0 de la obra registrada en cartera + 1,350.0 de obras complementarias + 360.0 de SENEAM + 4,009.0 de predios + 477.0 de estudios = $79,305.0 mdp (ASF, CP 2019, auditoría 66-GB, pp. 4-5). La cancelación del NAIM no tuvo presupuesto: es un costo, no una obra aprobada.",
+          "sobrecosto_pct": "Entre 21.3 % y 35.7 %; punto medio 28.5 %, contra los $79,305.0 mdp previstos para el AIFA. Solo el AIFA quedó por debajo de lo previsto (−6.1 %): el sobrecosto es la cancelación del NAIM."
         },
         "contradicciones": [
           "La ASF publicó en febrero de 2021 que cancelar el NAIM costó $331,996 mdp (auditoría 1394-DE, Cuenta Pública 2019) y en marzo de 2021 corrigió la cifra a $113,327.7 mdp, en un estudio que declara inconsistencias en la cuantificación original. El simulador usaba la cifra retirada.",
@@ -17610,9 +17654,9 @@ window.AUDIT_DB = {
           "acciones": 3
         },
         "campos": {
-          "inversion_presupuestada_mdp": "pendiente",
+          "inversion_presupuestada_mdp": "derivado",
           "inversion_real_mdp": "oficial",
-          "sobrecosto_pct": "pendiente"
+          "sobrecosto_pct": "derivado"
         },
         "contradicciones": [
           "La refinería no aparece en la cartera pública de proyectos de inversión de Hacienda en ninguno de los cortes de 2019 a 2026: la construyó una filial de Pemex, fuera del presupuesto que se publica por clave de cartera. Su costo total no se puede cotejar con esa fuente."
@@ -17626,9 +17670,9 @@ window.AUDIT_DB = {
           "informe26"
         ],
         "definiciones": {
-          "inversion_presupuestada_mdp": "Pendiente: los $160,000 mdp que trae la ficha no tienen documento en mano. La refinería no está en la cartera de Hacienda y su presupuesto original no aparece en la Cuenta Pública.",
+          "inversion_presupuestada_mdp": "Entre $154,098.4 y $160,000.0 mdp; punto medio $157,049.2 mdp. El 9-05-2019, en la presentación de la obra (versión estenográfica de Presidencia), la Sener habló de una «inversión máxima de ocho mil millones de dólares» y el presidente de «160 mil millones de pesos en tres años, no más». El mínimo convierte los dólares al FIX de ese día (19.2623). El presupuesto que aprobó el consejo de Pemex sigue sin publicarse: falta de transparencia de Pemex.",
           "inversion_real_mdp": "Obra en proceso que PTI Infraestructura de Desarrollo, la filial de Pemex que construye la refinería, registró al 31-12-2024: $357,887,290.0 miles de pesos, que según la ASF «corresponde a lo registrado para construcción» de la refinería, en 6 paquetes y 17 plantas (CP 2024, auditoría 247, p. 8). Es lo acumulado en libros, sin IVA, hasta ese día: no incluye lo gastado desde 2025.",
-          "sobrecosto_pct": "No se puede afirmar: compara la obra en proceso documentada contra un presupuesto original que no tiene documento."
+          "sobrecosto_pct": "Entre 123.7 % y 132.3 %; punto medio 128.0 %, con el costo registrado al 31-12-2024 ($357,887.3 mdp, ASF CP 2024, aud. 247, p. 8). La obra seguía en proceso: es una cota inferior."
         },
         "asfHist": [
           {
@@ -17686,15 +17730,20 @@ window.AUDIT_DB = {
         },
         "pef2026Ramo34": 35553.4,
         "campos": {
-          "inversion_presupuestada_mdp": "pendiente",
-          "inversion_real_mdp": "pendiente",
-          "sobrecosto_pct": "pendiente"
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
         },
         "hallazgo": "Lo que el rescate bancario le cuesta al presupuesto cada año sí es oficial: el Ramo 34 (programas de apoyo a ahorradores y deudores de la banca) ejerció $52,451.9 mdp en 2025 según la Cuenta Pública, y el PEF 2026 le asigna $35,553.4 mdp.",
         "fuentes": [
           "cp",
           "pef26dof"
-        ]
+        ],
+        "definiciones": {
+          "inversion_presupuestada_mdp": "El pasivo del Fobaproa que el Ejecutivo presentó al Congreso: «su estimación, al 28 de febrero de 1998, es de MN $552,300 millones» (informe Mackey, Gaceta Parlamentaria del 23-09-1999). No es un presupuesto: es la deuda que se pidió convertir en deuda pública.",
+          "inversion_real_mdp": "Lo que el rescate ya le costó al presupuesto más lo que todavía se debe: transferencias del Ramo 34 al IPAB para ahorradores de 1999 a 2025 (710,923.3; IPAB, Plan Anual de Financiamiento 2026) + pasivos netos del IPAB al 31-12-2025 (1,023,571; Hacienda, informe de deuda pública 4T 2025) = $1,734,494.3 mdp. Suma pesos de 27 años sin deflactar. No cuenta lo que pagaron los bancos con sus cuotas ni el apoyo a deudores (con él serían $2,009,825.7 mdp). Los $2,470,000 mdp que traía la ficha no tenían documento.",
+          "sobrecosto_pct": "(1,734,494.3 ÷ 552,300 − 1) × 100 = 214.1 %: cuántas veces más que el pasivo presentado en 1998 lleva pagado y debido el rescate. No es un sobrecosto de obra: mezcla pagos de 27 años con un saldo de 2025, en pesos sin deflactar. En pesos de 1999 la deuda neta bajó 46.7 % de 1999 a 2020 (IPAB, Informe 2020)."
+        }
       },
       "agronitrogenados": {
         "campos": {
@@ -17921,14 +17970,14 @@ window.AUDIT_DB = {
       },
       "farac-carretero": {
         "campos": {
-          "inversion_presupuestada_mdp": "pendiente",
-          "inversion_real_mdp": "pendiente",
-          "sobrecosto_pct": "pendiente"
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
         },
         "definiciones": {
-          "inversion_presupuestada_mdp": "El rescate no tuvo un presupuesto de obra: sustituyó deuda bancaria de los concesionarios por deuda en bonos con aval federal. Lo que la ASF documenta es esa deuda (ver el panel).",
-          "inversion_real_mdp": "Pendiente: falta un documento que diga cuánto costó en total indemnizar a los concesionarios de las 23 autopistas.",
-          "sobrecosto_pct": "No aplica mientras no haya un costo original y uno final comparables."
+          "inversion_presupuestada_mdp": "Las indemnizaciones a los 23 exconcesionarios que asumió el FARAC en 1997: deuda bancaria subrogada 30,265.4 + Pagarés de Indemnización Carretera 27,491.2 = $57,756.6 mdp (ASF, CP 2015, auditoría 99). Fueron 23 autopistas y puentes, no 52. Los $60,000 mdp que traía la ficha no tenían documento.",
+          "inversion_real_mdp": "Lo documentado hasta 2017, como cota mínima: indemnizaciones de 1997 (57,756.6) + pérdida acumulada del fondo de 1997 a 2017 (déficit de ejercicios anteriores 85,530.6 + déficit de 2017 10,564.3 = 96,094.9; ASF, CP 2017, auditoría 91) = $153,851.5 mdp. Lo de 2018 en adelante sigue pendiente: Banobras, fiduciario del FONADIN, y Hacienda, que preside su Comité Técnico, no han publicado los intereses pagados ni el costo acumulado. Los $162,000 mdp que traía la ficha no tenían documento.",
+          "sobrecosto_pct": "(153,851.5 ÷ 57,756.6 − 1) × 100 = 166.4 %: la pérdida acumulada hasta 2017 frente a la indemnización de 1997. No es un sobrecosto de obra y crecerá cuando se publique lo posterior a 2017."
         },
         "hallazgo": "La ASF (Cuenta Pública 2017) documentó que la deuda en bonos del rescate carretero pasó de $27,491.2 mdp en 1997 a $225,500.2 mdp en 2017, por nuevas emisiones, el aumento de la UDI y la capitalización de intereses; ese año se pagaron $10,368.6 mdp de intereses y lo que faltaba pagar de 2018 a 2033 se estimaba en $351,969.6 mdp.",
         "asfHist": [
@@ -18037,9 +18086,9 @@ window.AUDIT_DB = {
           "sobrecosto_pct": "derivado"
         },
         "definiciones": {
-          "inversion_presupuestada_mdp": "Lo que Pemex contrató para comprar Fertinal: 635 millones de dólares en créditos, $13,121.6 mdp (ASF, CP 2016, p. 11). No localizamos un presupuesto previo distinto del precio pactado.",
+          "inversion_presupuestada_mdp": "El monto máximo que el Consejo de Administración de Pemex aprobó para financiar y concretar la compra: «hasta 12,531,979.0 miles de pesos» (acuerdo CA-209/2015, 26-10-2015; ASF, CP 2017, auditoría 492-DE, p. 3). Antes la ficha repetía en las dos puntas los $13,121.6 mdp del financiamiento.",
           "inversion_real_mdp": "Los mismos $13,121.6 mdp. Tras un ajuste de precio se pagaron 629.3 millones de dólares (p. 2); la ASF no da ese monto en pesos.",
-          "sobrecosto_pct": "Sin sobrecosto de compra documentado. Lo que Fertinal le cuesta a Pemex está en lo que perdió después, no en haber pagado más de lo pactado."
+          "sobrecosto_pct": "(13,121.6 ÷ 12,532.0 − 1) × 100 = 4.7 %: el financiamiento contratado (635 millones de dólares, que incluyó refinanciar deudas de Fertinal) frente a lo que aprobó el consejo."
         },
         "hallazgo": "Pemex Fertilizantes compró Grupo Fertinal el 28-01-2016 con 635 millones de dólares de créditos ($13,121.6 mdp): 209.2 millones por las acciones y 425.8 millones para refinanciar sus deudas (ASF, CP 2016, pp. 2 y 11). La ASF dictaminó que la compra «no es un negocio rentable» (p. 38) y que en 2016 Fertinal registró una pérdida integral de 565.7 millones de dólares, $11,690.6 mdp (p. 31). En 2017 Pemex reconoció como perdidos $4,007.0 mdp del precio pagado (deterioro del crédito mercantil, CP 2017, p. 37).",
         "asfHist": [
@@ -18075,14 +18124,14 @@ window.AUDIT_DB = {
       },
       "bunker-garcia-luna": {
         "campos": {
-          "inversion_presupuestada_mdp": "pendiente",
-          "inversion_real_mdp": "pendiente",
-          "sobrecosto_pct": "pendiente"
+          "inversion_presupuestada_mdp": "oficial",
+          "inversion_real_mdp": "derivado",
+          "sobrecosto_pct": "derivado"
         },
         "definiciones": {
-          "inversion_presupuestada_mdp": "Pendiente: los $1,200 mdp que trae la ficha no tienen documento. Lo único documentado es el contrato de obra civil del edificio, adjudicado por $347,369.0 miles de pesos con IVA (ASF, CP 2009, auditoría 1053, p. 1).",
-          "inversion_real_mdp": "Pendiente: los $3,346 mdp que trae la ficha no tienen documento. Del contrato de obra civil se habían erogado $206,027.9 miles de pesos más IVA en agosto de 2010 (ASF, CP 2009, p. 2). Lo más cercano a un costo total: la ASF estimó $432,678.8 miles para construir y equipar las instalaciones de Plataforma México de 2007 a 2009 (CP 2008, auditoría 957, pp. 89-90), con el presupuesto aprobado de 2009 y no con lo ejercido, y sin decir qué parte es este edificio.",
-          "sobrecosto_pct": "No se puede calcular sin el costo total. El contrato se redujo de $347.4 a $289.1 mdp con IVA (p. 2): no hubo sobrecosto en ese contrato."
+          "inversion_presupuestada_mdp": "El contrato de obra civil del «Edificio de Plataforma México», adjudicado sin licitación a TRADECO por $347,369.0 miles con IVA (ASF, CP 2009, auditoría 1053, p. 1). Los $1,200 mdp que traía la ficha no tenían documento.",
+          "inversion_real_mdp": "Entre $236.9 y $289.1 mdp; punto medio $263.0 mdp: lo pagado y lo contratado de la obra civil (ASF, CP 2009, p. 2). Los $3,346 mdp que traía la ficha no tenían documento. El costo total con equipamiento sigue pendiente: la SSPC, heredera de la SSP, no lo ha publicado. Lo más cercano es la estimación de la ASF de $432.7 mdp para todas las instalaciones de Plataforma México (CP 2008, aud. 957).",
+          "sobrecosto_pct": "Entre −31.8 % y −16.8 %; punto medio −24.3 %: el contrato costó menos de lo pactado. No mide el costo del equipamiento, que sigue pendiente."
         },
         "hallazgo": "La ASF auditó en la Cuenta Pública 2009 el contrato de obra del «Edificio de Plataforma México» de la Secretaría de Seguridad Pública: se adjudicó sin licitación a TRADECO Infraestructura por $347.4 mdp con IVA, se redujo a $289.1 mdp y en agosto de 2010, con la obra ya en operación pero sin finiquitar, se habían pagado $206.0 mdp más IVA. Observó que la licencia de construcción y el resolutivo de impacto ambiental se obtuvieron después de iniciar la obra, y $23.4 mdp pagados de más o sin soporte (pp. 1-5).",
         "asfHist": [
@@ -18147,6 +18196,1585 @@ window.AUDIT_DB = {
           "asf_pm11"
         ]
       }
+    }
+  },
+  "cuenta": {
+    "nota": "La cuenta de cada obra: lo que se esperaba de ella y lo que dio, renglón por renglón. Montos en millones de pesos corrientes del año que dice cada renglón (anio). Estados: oficial (del documento), derivado (con la operación dicha; si trae min y max es un rango y medio = (min + max) ÷ 2), pendiente (dice por qué y a quién le toca publicarlo) y no_aplica (la obra no tiene ese concepto, con su porqué). Fuentes cotejadas el 17-10-2026.",
+    "obras": {
+      "tren-maya": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2020,
+          "op": "Monto de inversión del primer Análisis Costo-Beneficio (enero de 2020), citado por la ASF.",
+          "nota": "Es anterior al primer corte de cartera publicado (4T 2020: 161,356.0) y al que usa la plataforma (4T 2021: 167,341.6). La ASF registra después 156,000.4 mdp (ACB modificado, junio de 2020). Sobrecosto contra ese presupuesto: 497,350.2 ÷ 139,072.4 − 1 = +257.6 % (derivado). Advertencia: el ACB cubre el proyecto entero (1,440 km, 7 tramos) y la CP 2020-2025 suma solo la clave 2021W3N0001; la ASF dice que hubo ocho claves de cartera ligadas al proyecto.",
+          "f": [
+            {
+              "doc": "ASF, CP 2021, auditoría de desempeño 2021-3-21W3N-07-0123-2022, Avances en el desarrollo del Proyecto Tren Maya",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Auditorias/2021_0123_a.pdf",
+              "pag": "3 (PDF)"
+            }
+          ],
+          "v": 139072.4
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "Ingresos esperados al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "La prensa cita beneficios de 352,600 mdp y O&M de 33,800 mdp a 30 años atribuidos a Fonatur; no se usan porque no se tiene el documento.",
+          "f": [
+            {
+              "doc": "ASF, CP 2021, auditoría de desempeño 2021-3-21W3N-07-0123-2022, Avances en el desarrollo del Proyecto Tren Maya",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Auditorias/2021_0123_a.pdf",
+              "pag": "3, 18-21"
+            }
+          ],
+          "resp": "Fonatur / Tren Maya S.A. de C.V. y SHCP (Unidad de Inversiones): el ACB con la demanda y los ingresos proyectados no se ha publicado; la ASF lo cita sin dar las cifras."
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Ingresos de gestión 2024 del estado de actividades.",
+          "nota": "Pasajeros sep-2025 a jun-2026: 1,055,791 (Segundo Informe, p. PDF 481).",
+          "f": [
+            {
+              "doc": "SHCP, CP 2024, tomo VII, Tren Maya S.A. de C.V. (H0M), estado de actividades",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls",
+              "pag": "estado de actividades 2024"
+            }
+          ],
+          "v": 275.8
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Gastos totales 2024.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "SHCP, CP 2024, tomo VII, Tren Maya S.A. de C.V. (H0M), estado de actividades",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls",
+              "pag": "estado de actividades 2024"
+            }
+          ],
+          "v": 2837.2
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica como interés pagado: no se documenta deuda contratada para la obra; se pagó con recursos fiscales (PEF, transferencias).",
+          "nota": "El costo financiero del costo vivo es una simulación propia (tasa media de la deuda), no un interés pagado.",
+          "f": []
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2024,
+          "op": "275.8 − 2,837.2 = −2,561.4 (resultado antes de transferencias y otros ingresos).",
+          "nota": "",
+          "f": [
+            {
+              "doc": "SHCP, CP 2024, tomo VII, Tren Maya S.A. de C.V. (H0M), estado de actividades",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls",
+              "pag": "estado de actividades 2024"
+            }
+          ],
+          "v": -2561.4
+        }
+      ],
+      "megafarmacia": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2023,
+          "op": "Primer corte de cartera tras su registro (30-10-2023) y autorización (06-11-2023).",
+          "nota": "No hay registro anterior.",
+          "f": [
+            {
+              "doc": "Cartera de inversión SHCP (Obra Pública Abierta)",
+              "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta",
+              "pag": "corte 4T 2023, clave 2312NEF0001"
+            },
+            {
+              "doc": "Birmex, notas a los estados financieros al 30-09-2024, nota 14 «Negocio en marcha. Megafarmacia»",
+              "url": "https://datos.birmex.gob.mx/wp-content/uploads/2024/12/notas_estados_financieros.pdf",
+              "pag": "pp. 41 y 44 de 46"
+            }
+          ],
+          "v": 3614.6
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "Ingresos esperados al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "",
+          "f": [],
+          "resp": "Birmex y SHCP (Unidad de Inversiones): el ACB de la clave 2312NEF0001 no se ha publicado; la nota 14 de Birmex solo describe objetivos."
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "",
+          "f": [],
+          "resp": "Birmex: su estado de actividades 2024 no separa la Megafarmacia y el auditor externo se abstuvo de opinar en 2024 y 2025."
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2025,
+          "op": "Operación y mantenimiento previstos en la cartera, 10,806.4 mdp en 32 años ÷ 32 = 337.7 mdp por año (promedio; costo previsto, no ejercido).",
+          "nota": "Es lo que Birmex prevé gastar, no lo gastado.",
+          "f": [
+            {
+              "doc": "Cartera de inversión SHCP (Obra Pública Abierta)",
+              "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta",
+              "pag": "corte 4T 2025, clave 2312NEF0001"
+            }
+          ],
+          "v": 337.7
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica: no se documenta deuda; la obra se hizo con recursos fiscales y aumento de capital (Birmex, nota 14).",
+          "nota": "",
+          "f": [
+            {
+              "doc": "Birmex, notas a los estados financieros al 30-09-2024, nota 14 «Negocio en marcha. Megafarmacia»",
+              "url": "https://datos.birmex.gob.mx/wp-content/uploads/2024/12/notas_estados_financieros.pdf",
+              "pag": "p. 42 de 46"
+            }
+          ]
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "El −717.3 es de toda la empresa y no se puede atribuir a la Megafarmacia.",
+          "f": [
+            {
+              "doc": "SHCP, CP 2024, tomo VII, Birmex (NEF), estado de actividades",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.02.01.xls",
+              "pag": "estado de actividades 2024"
+            }
+          ],
+          "resp": "Birmex: no publica el resultado de la Megafarmacia por separado."
+        }
+      ],
+      "dos-bocas": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Ni la ASF (CP 2024, auditoría 247) ni los estados financieros de Pemex 2025 y de Pemex Transformación Industrial 2024 dan un monto original aprobado.",
+          "f": [],
+          "resp": "Pemex (y su filial PTI Infraestructura de Desarrollo): la refinería nunca entró a la cartera de Hacienda y Pemex no ha publicado el caso de negocio aprobado por su Consejo con el monto original."
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "Ingresos esperados al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "La TIR de 13.46 % y el VPN de 2,571 MUSD que se citan salen de una presentación de la Sener en julio de 2019 que solo se encontró en prensa; no se localizó el documento.",
+          "f": [],
+          "resp": "Pemex y Sener: no han publicado el análisis costo-beneficio ni la evaluación económica de la refinería; no está en la cartera de Hacienda."
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "",
+          "f": [
+            {
+              "doc": "Petróleos Mexicanos, estados financieros consolidados 2025 y notas presupuestarias (Cuenta Pública 2025, tomo VIII)",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+              "pag": "36 y 55"
+            }
+          ],
+          "resp": "Pemex: no publica ventas, costos ni resultado de la refinería ni de PTI ID por separado desde 2025."
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Los 9,800 de «costo financiero de deuda asignada» de la ficha no tienen documento.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2024, auditoría 247, Pemex: Ingresos y egresos del proyecto de la Refinería Olmeca en Dos Bocas",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
+              "pag": "1 y 7"
+            },
+            {
+              "doc": "Petróleos Mexicanos, estados financieros consolidados 2025 y notas presupuestarias (Cuenta Pública 2025, tomo VIII)",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+              "pag": "123-124"
+            }
+          ],
+          "resp": "Pemex: no asigna costo financiero al proyecto; la obra se fondeó con aportaciones de capital (del Gobierno Federal a Pemex y de Pemex a PTI ID), no con deuda propia del proyecto."
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Pérdida neta 2024 de PTI Infraestructura de Desarrollo (filial constructora y arrendadora de la refinería); ventas 7,116.8; costo de ventas 7,019.0.",
+          "nota": "Es la filial en etapa de construcción y arranque, no la operación de la refinería, que desde 2025 consolida Pemex. Sirve como contexto, no como pérdida de operar la refinería.",
+          "f": [
+            {
+              "doc": "Pemex Transformación Industrial, estados financieros separados dictaminados 2024 (CP 2024, tomo VIII)",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf",
+              "pag": "50 (PDF), nota 12"
+            }
+          ],
+          "v": -1473.7
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Con lo publicado no se puede sostener ni una cota del resultado de operación: falta el costo del crudo, el valor de los productos y la renta que Pemex paga por la refinería. El costo operativo de 16,425 y su desglose en la ficha no tienen documento.",
+          "f": [
+            {
+              "doc": "Petróleos Mexicanos, estados financieros consolidados 2025 y notas presupuestarias (Cuenta Pública 2025, tomo VIII)",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+              "pag": "36"
+            }
+          ],
+          "resp": "Pemex: falta de transparencia; los estados de 2025 consolidan a PTI ID y no dan segmento de la refinería."
+        },
+        {
+          "c": "inversion_real_musd_equivalente",
+          "et": "Costo real convertido a dólares",
+          "u": "musd",
+          "e": "derivado",
+          "anio": 2024,
+          "op": "357,887.3 mdp ÷ FIX del 31-12-2024 (20.7862) = 17,217.5 millones de dólares. Contra los 8,000 anunciados: +115.2 %.",
+          "nota": "Equivalencia al tipo de cambio de cierre, no lo que costó en dólares: los pagos se hicieron de 2019 a 2024 con tipos de cambio distintos. Las cifras en dólares que circulan (16,816; 20,089; 20,959 MUSD) vienen de prensa o de reportes de Pemex que esta plataforma todavía no ha cotejado.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2024, auditoría 247, Pemex: Ingresos y egresos del proyecto de la Refinería Olmeca en Dos Bocas",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0247_a.pdf",
+              "pag": "8"
+            },
+            {
+              "doc": "Banxico, FIX diario 2024, columna Determinación",
+              "url": "https://www.banxico.org.mx/tipcamb/tipCamIHAction.do (POST idioma=sp&fechaInicial=01/01/2024&fechaFinal=31/12/2024&salida=HTML)",
+              "pag": "31/12/2024"
+            }
+          ],
+          "v": 17217.5
+        },
+        {
+          "c": "inversion_presupuestada_musd",
+          "et": "Presupuesto anunciado en dólares",
+          "u": "musd",
+          "e": "oficial",
+          "anio": 2019,
+          "op": "Inversión máxima anunciada.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "Presidencia de la República, Conferencia de prensa del presidente Andrés Manuel López Obrador, 9 de mayo de 2019 (versión estenográfica)",
+              "url": "https://www.gob.mx/amlo/prensa/conferencia-de-prensa-del-presidente-andres-manuel-lopez-obrador-del-9-de-mayo-de-2019",
+              "pag": "versión estenográfica"
+            }
+          ],
+          "v": 8000.0
+        },
+        {
+          "c": "produccion_real_mbd",
+          "et": "Producción real (miles de barriles diarios)",
+          "u": "mbd",
+          "e": "oficial",
+          "anio": 2026,
+          "op": "Promedio de crudo procesado de septiembre de 2025 a junio de 2026: 188 mil barriles diarios. Ocupación derivada: 188 ÷ 340 = 55.3 % de la capacidad de diseño; mejor mes (diciembre de 2025) 263 ÷ 340 = 77.4 %; pico diario 313.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "Presidencia de la República, Segundo Informe de Gobierno 2025-2026",
+              "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+              "pag": "378"
+            },
+            {
+              "doc": "Petróleos Mexicanos, estados financieros consolidados 2025 y notas presupuestarias (Cuenta Pública 2025, tomo VIII)",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+              "pag": "55-56 (notas presupuestarias)"
+            },
+            {
+              "doc": "ASF, Cuenta Pública 2021, auditoría 202, Pemex: Desarrollo del Paquete 1 y Contratos Relacionados con el Proyecto de la Nueva Refinería en Dos Bocas",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Auditorias/2021_0202_a.pdf",
+              "pag": "2"
+            }
+          ],
+          "v": 188
+        }
+      ],
+      "tren-toluca": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2013,
+          "op": "Monto con que el proyecto se inscribió en cartera en diciembre de 2013 (clave 13093110008).",
+          "nota": "Sobrecosto contra ese presupuesto: con el MTI 2T 2026, 153,694.3 ÷ 34,114.9 − 1 = +350.5 %; con lo pagado según la CP 2014-2025, 65,506.4 ÷ 34,114.9 − 1 = +92.0 % (ambos derivados). La ficha original de cartera de 2013 sigue sin estar en mano (SHCP/SICT), pero el Libro Blanco es documento oficial de la SCT.",
+          "f": [
+            {
+              "doc": "SCT, Libro Blanco «Tren Interurbano México-Toluca. Primera Etapa» (2018)",
+              "url": "https://www.gob.mx/sct (copia en el repo: investigaciones/entregas/SCT_TrenInterurbano_LibroBlanco2018.pdf)",
+              "pag": "39 y 76 (impresas)"
+            }
+          ],
+          "v": 34114.9
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "Ingresos esperados al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Capacidad de diseño: 15,660 pasajeros por hora pico (LB, pp. 5-6). Uso real: 1.63 millones de pasajeros en junio de 2026 (Segundo Informe, p. PDF 356).",
+          "f": [
+            {
+              "doc": "SCT, Libro Blanco «Tren Interurbano México-Toluca. Primera Etapa» (2018)",
+              "url": "https://www.gob.mx/sct (copia en el repo: investigaciones/entregas/SCT_TrenInterurbano_LibroBlanco2018.pdf)",
+              "pag": "75-76 (impresas)"
+            }
+          ],
+          "resp": "SICT (antes SCT, DGDFM) y SHCP (Unidad de Inversiones): el ACB de 2013 y su actualización de 2018 no se han publicado; el Libro Blanco solo da la conclusión."
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "",
+          "f": [
+            {
+              "doc": "Presidencia, Segundo Informe de Gobierno 2025-2026",
+              "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+              "pag": "PDF 356"
+            }
+          ],
+          "resp": "SICT / Agencia Reguladora del Transporte Ferroviario (a cargo del tren según el PEF 2026): no publica estados financieros ni ingresos por tarifa del servicio."
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "",
+          "f": [],
+          "resp": "SICT / ARTF: no se publica por separado el gasto de operación del tren; los 7,408.0 del PEF 2026 bajo la clave 13093110008 son de inversión."
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica: se financió con recursos fiscales (CP por clave de cartera); no se documenta deuda propia de la obra.",
+          "nota": "",
+          "f": []
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "",
+          "f": [],
+          "resp": "SICT / ARTF (ingresos y gastos de operación no publicados)."
+        }
+      ],
+      "agronitrogenados": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2013,
+          "op": "Costo total estimado que aprobó el consejo de PMI Holdings el 19-07-2013.",
+          "nota": "Siguientes aprobaciones: 9,374.3 (01-11-2013) y 14,998.9 (26-08-2015), misma página 4-5. En dólares: 475 → 760 MUSD (ASF CP 2015, p. 25).",
+          "f": [
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "4"
+            }
+          ],
+          "v": 7894.2
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "Ingresos esperados al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Lo oficial es el valor presente total: 9,157.2 mdp contra 8,723.0 de inversión; diferencia 434.2 mdp (derivado: 9,157.2 − 8,723.0), pesos de 2014. No hay cifra anual.",
+          "f": [
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "4"
+            }
+          ],
+          "resp": "Pemex / Pro-Agroindustria: el modelo de Booz & Co. no se ha publicado con los flujos anuales."
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2017,
+          "op": "Las plantas no produjeron: «ninguna opera desde 2013» y al cierre de la auditoría no habían iniciado operaciones.",
+          "nota": "Desde 2025 hay producción: el Segundo Informe reporta la puesta en operación de Urea II y que la urea de Pemex pasó de 3.4 a 55 mil toneladas mensuales (sep-2025 a jun-2026, pp. PDF 403-404); sin ingresos publicados.",
+          "f": [
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "42-43"
+            }
+          ],
+          "v": 0.0
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Lo de 2017 (2,814.3) es inversión en rehabilitación, no costo de operación.",
+          "f": [
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "43-44"
+            }
+          ],
+          "resp": "Pemex: Pro-Agroindustria no publica estados financieros propios; tampoco aparecen en la CP ni en los EF de PTRI."
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2015,
+          "op": "Intereses y comisiones pagados en 2015 por los créditos con PMI NASA (480 MUSD) y Nafin (390 MUSD): 9,123.5 miles de dólares = 148,145.2 miles de pesos al tipo de cambio de cada pago.",
+          "nota": "Solo 2015. El crédito de Nafin (7,696.8 mdp) pasó a Pemex Fertilizantes en 2017; en 2024 PTRI pagó «deuda de filiales de fertilizantes a Nacional Financiera» sin monto separado.",
+          "f": [
+            {
+              "doc": "ASF, CP 2015, auditoría 498-DE, Pemex: adquisición de Agro Nitrogenados",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0498_a.pdf",
+              "pag": "2 y 24"
+            }
+          ],
+          "v": 148.1
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "El −12,822.8 de 2017 es de toda la empresa (Cosoleacaque, Fertinal y ProAgro): no se atribuye a esta obra. Lo atribuible es el deterioro de 4,206.0.",
+          "f": [
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "22-23"
+            }
+          ],
+          "resp": "Pemex: no publica el resultado de Pro-Agroindustria por separado."
+        }
+      ],
+      "fertinal": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2015,
+          "op": "Monto máximo aprobado por el Consejo de Administración de Pemex (acuerdo CA-209/2015, 26-10-2015) para financiar y concretar la compra.",
+          "nota": "La ficha usaba 13,121.6 para las dos puntas (sobrecosto tautológico). Con ese presupuesto: 13,121.6 ÷ 12,532.0 − 1 = +4.7 % (derivado). Ojo: 13,121.6 es el financiamiento (635 MUSD), incluido el refinanciamiento de deudas, no el precio.",
+          "f": [
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "3"
+            }
+          ],
+          "v": 12532.0
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "Ingresos esperados al año",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2016,
+          "op": "Ventas netas proyectadas para 2016 en el «Caso de negocio Adquisición Fertinal»: 515,599.0 miles de dólares × 18.6886 = 9,635.8 mdp. Tipo de cambio: FIX promedio de 2016 = 18.6886 pesos por dólar (promedio aritmético de los 252 días hábiles con FIX publicado por Banxico; cálculo de Auditavisión).",
+          "nota": "Proyección 2015-2020 de ventas: 464,993 a 566,070 miles de dólares por año. Utilidad de operación esperada 2016: 32,629 miles de dólares (609.8 mdp).",
+          "f": [
+            {
+              "doc": "ASF, CP 2016, auditoría 468-DE, Pemex Fertilizantes: compra de Grupo Fertinal",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+              "pag": "20"
+            },
+            {
+              "doc": "Banxico, tipo de cambio FIX (determinación), serie diaria 01-01-2013 a 16-10-2026; promedio anual calculado por Auditavisión",
+              "url": "https://www.banxico.org.mx/tipcamb/tipCamIHAction.do?idioma=sp&fechaInicial=01/01/2013&fechaFinal=16/10/2026&salida=HTML",
+              "pag": "serie 2016"
+            }
+          ],
+          "v": 9635.8
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2016,
+          "op": "315,323.0 miles de dólares × 18.6886 = 5,892.9 mdp. Tipo de cambio: FIX promedio de 2016 = 18.6886 pesos por dólar (promedio aritmético de los 252 días hábiles con FIX publicado por Banxico; cálculo de Auditavisión).",
+          "nota": "2017: la unidad de negocio Fertinal tuvo ingresos por 6,588.8 mdp (oficial, ASF CP 2017 aud. 492, p. 50-51).",
+          "f": [
+            {
+              "doc": "ASF, CP 2016, auditoría 468-DE, Pemex Fertilizantes: compra de Grupo Fertinal",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+              "pag": "20 y 23"
+            },
+            {
+              "doc": "Banxico, tipo de cambio FIX (determinación), serie diaria 01-01-2013 a 16-10-2026; promedio anual calculado por Auditavisión",
+              "url": "https://www.banxico.org.mx/tipcamb/tipCamIHAction.do?idioma=sp&fechaInicial=01/01/2013&fechaFinal=16/10/2026&salida=HTML",
+              "pag": "serie 2016"
+            }
+          ],
+          "v": 5892.9
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2016,
+          "op": "Costo de ventas 341,375.0 + gastos de administración, ventas y otros 28,040.0 = 369,415.0 miles de dólares × 18.6886 = 6,903.8 mdp. Tipo de cambio: FIX promedio de 2016 = 18.6886 pesos por dólar (promedio aritmético de los 252 días hábiles con FIX publicado por Banxico; cálculo de Auditavisión).",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, CP 2016, auditoría 468-DE, Pemex Fertilizantes: compra de Grupo Fertinal",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+              "pag": "20"
+            }
+          ],
+          "v": 6903.8
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2016,
+          "op": "Costo financiero real 2016: 18,943.0 miles de dólares × 18.6886 = 354.0 mdp. Tipo de cambio: FIX promedio de 2016 = 18.6886 pesos por dólar (promedio aritmético de los 252 días hábiles con FIX publicado por Banxico; cálculo de Auditavisión).",
+          "nota": "El caso de negocio esperaba 58,672.0 miles de dólares (1,096.5 mdp) de costo financiero en 2016. Créditos: 209.2 MUSD de adquisición (Nafin/Bancomext) y 425.8 MUSD de refinanciamiento (pp. 9-12).",
+          "f": [
+            {
+              "doc": "ASF, CP 2016, auditoría 468-DE, Pemex Fertilizantes: compra de Grupo Fertinal",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+              "pag": "20 y 23"
+            }
+          ],
+          "v": 354.0
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2016,
+          "op": "Pérdida neta real 2016: −42,232.0 miles de dólares × 18.6886 = −789.3 mdp (antes del deterioro). Con el deterioro de 524,025.0 miles de dólares, la pérdida integral fue de 565,748.0 miles de dólares = 11,690.6 mdp según la ASF. Tipo de cambio: FIX promedio de 2016 = 18.6886 pesos por dólar (promedio aritmético de los 252 días hábiles con FIX publicado por Banxico; cálculo de Auditavisión).",
+          "nota": "El caso de negocio ya proyectaba pérdida neta en 2016: −26,043.0 miles de dólares (−486.7 mdp).",
+          "f": [
+            {
+              "doc": "ASF, CP 2016, auditoría 468-DE, Pemex Fertilizantes: compra de Grupo Fertinal",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+              "pag": "20 y 23"
+            },
+            {
+              "doc": "Banxico, tipo de cambio FIX (determinación), serie diaria 01-01-2013 a 16-10-2026; promedio anual calculado por Auditavisión",
+              "url": "https://www.banxico.org.mx/tipcamb/tipCamIHAction.do?idioma=sp&fechaInicial=01/01/2013&fechaFinal=16/10/2026&salida=HTML",
+              "pag": "serie 2016"
+            }
+          ],
+          "v": -789.3
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Pérdida neta 2024 de PMX Fertilizantes Pacífico, S.A. de C.V., la sociedad que compró y posee Grupo Fertinal (2023: −5,099.1).",
+          "nota": "Es una tenedora sin ventas: su pérdida refleja el resultado de Fertinal y el costo de la deuda de compra. No sumar la de PMX Fertilizantes Holding (−2,784.3), que es dueña de ~75.7 % de Pacífico y ya incluye esa pérdida. Lo que PTRI reconoce de ambas: 2,784.3 + 875.2 = −3,659.5 (derivado).",
+          "f": [
+            {
+              "doc": "Pemex Transformación Industrial, estados financieros separados dictaminados 2024 (CP 2024, tomo VIII)",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf",
+              "pag": "51 (PDF), nota 12"
+            },
+            {
+              "doc": "ASF, CP 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+              "pag": "3"
+            }
+          ],
+          "v": -3600.1
+        }
+      ],
+      "estela-luz": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2009,
+          "op": "Contrato de construcción del 18-12-2009 (393,490.0 miles, IVA incluido): primer monto autorizado para ejecutar la obra.",
+          "nota": "El primer monto documentado es 219.0 (presupuesto aproximado de la ficha técnica), pero no es autorización: con la regla propuesta se toma 393.5. Sobrecosto contra 393.5: 1,304.9 ÷ 393.5 − 1 = +231.6 % (derivado); la ASF publica 192.0 % solo para la construcción (393.5 → 1,146.4).",
+          "f": [
+            {
+              "doc": "ASF, Informe especial sobre la fiscalización del monumento Estela de Luz 2009-2011",
+              "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+              "pag": "3 y 5"
+            }
+          ],
+          "v": 393.5
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica: monumento sin ingresos.",
+          "nota": "",
+          "f": []
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "Mantenimiento anual del monumento.",
+          "nota": "Los 14.6 mdp/año que traía la ficha no tienen fuente.",
+          "f": [],
+          "resp": "Dependencia que tiene el inmueble a su cargo (no confirmada con documento; debe precisarse: la Secretaría de Cultura opera el Centro de Cultura Digital bajo la Estela). Falta el gasto anual de mantenimiento publicado."
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica como resultado de operación; lo que aplica es el costo hundido.",
+          "nota": "",
+          "f": []
+        },
+        {
+          "c": "costo_hundido_mdp",
+          "et": "Costo hundido: lo gastado que ya no regresa",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2011,
+          "op": "Costo final del proyecto (pesos corrientes 2009-2011).",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, Informe especial sobre la fiscalización del monumento Estela de Luz 2009-2011",
+              "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+              "pag": "13"
+            }
+          ],
+          "v": 1304.9
+        }
+      ],
+      "bunker-garcia-luna": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2008,
+          "op": "Contrato de obra civil del edificio de Plataforma México, adjudicado el 01-09-2008, con IVA.",
+          "nota": "Es el contrato de obra civil, no un presupuesto del proyecto completo. La propia ASF lo reduce a 289.1. No hay registro de cartera localizado.",
+          "f": [
+            {
+              "doc": "ASF, CP 2009, auditoría 1053, SSP: Edificio de Plataforma México",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
+              "pag": "1"
+            }
+          ],
+          "v": 347.4
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "El 255.5 de la ficha y su desglose no tienen documento. La única cifra oficial de operación es la estimación de la ASF para todo el sistema Plataforma México (605.7 mdp/año 2010-2012), no para el edificio.",
+          "f": [
+            {
+              "doc": "ASF, Informe del Resultado CP 2008, tomo IX, vol. 2, auditoría de desempeño 957: Plataforma México",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf",
+              "pag": "89"
+            }
+          ],
+          "resp": "SSPC: no publica el gasto de operación del edificio por separado."
+        },
+        {
+          "c": "costo_instalaciones_equipamiento_estimado_asf_mdp",
+          "et": "Estimación de la ASF para todas las instalaciones de Plataforma México",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2009,
+          "op": "23,505.2 (2007, ejercido) + 224,745.9 (2008, ejercido) + 184,427.7 (2009, presupuesto aprobado) = 432,678.8 miles.",
+          "nota": "Estimación de la ASF, no costo final. Engloba todas las instalaciones de Plataforma México, no solo el edificio de Constituyentes.",
+          "f": [
+            {
+              "doc": "ASF, Informe del Resultado CP 2008, tomo IX, vol. 2, auditoría de desempeño 957: Plataforma México",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf",
+              "pag": "88-90 (cuadro «Costo para la implementación de Plataforma México, 2007-2012»)"
+            }
+          ],
+          "v": 432.7
+        }
+      ],
+      "refineria-tula": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2009,
+          "op": "7,484.0 (clave 0818T4M0023, registrada en enero de 2009, estudio de justificación económica, a ejercer 2009-2012) + 129.3 (clave 0918T4M0048, cerca y barda, agosto de 2009) = 7,613.3.",
+          "nota": "Son las mismas dos claves de la ficha (3,714.0 autorizados según ASF CP 2014). Con ese presupuesto: 1,127.6 ÷ 7,613.3 − 1 = −85.2 % (subejercicio, no sobrecosto). La refinería completa nunca tuvo un monto total de inversión registrado que esté en mano: no aplica sobrecosto.",
+          "f": [
+            {
+              "doc": "ASF, CP 2010, auditoría 1115, Pemex Refinación: nueva refinería en Tula",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2010i/ (copia en el repo: investigaciones/entregas/ASF_RefineriaTula_CP2010_1115.pdf)",
+              "pag": "8 (PDF)"
+            }
+          ],
+          "v": 7613.3
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica: proyecto cancelado, nunca operó.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, CP 2014, auditoría 315, Pemex Refinación (cancelación de la Refinería Bicentenario)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+              "pag": "10-11"
+            }
+          ]
+        },
+        {
+          "c": "costo_hundido_mdp",
+          "et": "Costo hundido: lo gastado que ya no regresa",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2014,
+          "op": "659.3 (estudios) + 468.3 (terreno) = 1,127.6 mdp ejercidos sin activo productivo.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, CP 2014, auditoría 315, Pemex Refinación (cancelación de la Refinería Bicentenario)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+              "pag": "10-11"
+            }
+          ],
+          "v": 1127.6
+        }
+      ],
+      "enciclomedia": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2005,
+          "op": "Autorización de la SHCP (oficio OM-402) para el servicio multianual 2005-2010, 125,562 aulas.",
+          "nota": "Primer monto total autorizado localizado. El PEF 2006 fijó después un costo total de 17,572.6 (CP 2006, p. 585). Lo ejercido 2001-2004 (piloto) es anterior y no tiene autorización total localizada.",
+          "f": [
+            {
+              "doc": "ASF, Informe del Resultado CP 2005, tomo VI, vol. 2, auditoría 584 (Enciclomedia)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/ir2005i/Tomos/T6V2.pdf",
+              "pag": "262-263 (PDF)"
+            }
+          ],
+          "v": 21398.3
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica: programa extinto (los 14 contratos de las aulas terminaron en 2011).",
+          "nota": "Último costo anual: 4,720.6 mdp ejercidos en 2011 (ASF CP 2011, p. 1).",
+          "f": []
+        },
+        {
+          "c": "costo_hundido_mdp",
+          "et": "Costo hundido: lo gastado que ya no regresa",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": null,
+          "op": "Suma de lo ejercido 2001-2011. Pesos corrientes de cada año.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, Informe del Resultado CP 2006, tomo V, vol. 1, auditoría 99 (Enciclomedia)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2006i/Tomos/T5V1.pdf",
+              "pag": "585-586"
+            }
+          ],
+          "v": 32315.7
+        }
+      ],
+      "fobaproa": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica una base de obra: es un rescate financiero.",
+          "nota": "La regla de presupuesto original no se aplica a pasivos asumidos.",
+          "f": []
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2025,
+          "op": "Ingresos propios del Fondo FOBAPROA en 2025 = cuotas de los bancos (75 %) 28,701.7 + ingresos financieros 7,349.5 + otros 2,130.0 = 38,181.2 (sin las transferencias del Ramo 34, 52,451.9). Total con transferencias: 90,633.1.",
+          "nota": "El rescate no tiene «ingresos esperados» de obra. Lo más cercano son las cuotas que pagan los bancos y las recuperaciones de activos: 111,027.85 acumuladas a 2018 de un valor bruto de 352,699, es decir 31.5 % (IPAB, Informe 2018, PDF p. 35).",
+          "f": [
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+              "pag": "PDF p. 33"
+            }
+          ],
+          "v": 38181.2
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "Gasto de operación al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2025,
+          "op": "Otros gastos del Fondo FOBAPROA en 2025, tomados tal cual: estimaciones y depreciaciones 296.2 + otros 1.0 = 297.1. El total de gastos (98,153.0) es casi todo intereses (97,855.8).",
+          "nota": "El desglose que traía la ficha (38,200 / 9,150 / 1,925) no tenía fuente. El gasto de operación del IPAB va en el Fondo IPAB, que se paga con cuotas: 359 en 2024 (EF 2024).",
+          "f": [
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+              "pag": "PDF p. 33"
+            }
+          ],
+          "v": 297.1
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2025,
+          "op": "Intereses de la deuda devengados por el Fondo FOBAPROA en 2025, tomados tal cual. Serie 2007-2025 tomada de los estados dictaminados; suma derivada 2007-2025 = 1,216,842.8.",
+          "nota": "Criterio por año: 2016-2025 «intereses de la deuda» del Fondo FOBAPROA; 2012-2015, del IPAB entero (el Fondo IPAB no tiene deuda); 2007-2011, «gastos financieros» del IPAB (incluye comisiones). Los estados de 2025, 2022, 2020, 2015, 2013, 2011, 2009 y 2007 son escaneados: sus cifras se leyeron del escaneo y se cotejaron con las sumas internas de cada estado. Son intereses devengados, no flujo de caja. Los intereses los paga el IPAB con transferencias, cuotas y deuda nueva: no se suman a las transferencias.",
+          "f": [
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+              "pag": "PDF p. 33"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2022",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/812783/Estados-Financieros_diciembre-2022.pdf",
+              "pag": "PDF p. 32"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2020",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/625150/Estados-Financieros_diciembre-2020.pdf",
+              "pag": "PDF p. 40"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2019",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/543180/Estados-Financieros_diciembre-2019.pdf",
+              "pag": "p. del Fondo FOBAPROA"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2017",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/311756/Estados-Financieros_diciembre-2017.pdf",
+              "pag": "p. del Fondo FOBAPROA"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2015",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/101485/Estados-Financieros_diciembre-2015.pdf",
+              "pag": "PDF p. 8"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2013",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/101483/Estados-Financieros_diciembre-2013.pdf",
+              "pag": "PDF p. 6"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2011",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/101480/Estados-Financieros_diciembre-2011.pdf",
+              "pag": "PDF p. 6"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2009",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/101467/Estados-Financieros_diciembre-2009.pdf",
+              "pag": "PDF p. 4"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2007",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/101422/Estados-Financieros_diciembre-2007.pdf",
+              "pag": "PDF p. 4"
+            }
+          ],
+          "v": 97855.8
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2025,
+          "op": "Déficit del ejercicio 2025 del Fondo FOBAPROA, tomado tal cual: 90,633.1 − 98,153.0 = −7,519.9. Con 2024: −22,411.1.",
+          "nota": "2018 = 63,019 − 77,295 (resta de Auditavisión: el renglón no se lee en el escaneo). El IPAB traspasa este déficit a una «cuenta por cobrar» contra presupuestos futuros, así que también lo pagará el erario.",
+          "f": [
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+              "pag": "PDF p. 33"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2024",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/985844/Estados-Financieros_diciembre-2024.pdf",
+              "pag": "Nota 15"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2022",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/812783/Estados-Financieros_diciembre-2022.pdf",
+              "pag": "PDF p. 32"
+            }
+          ],
+          "v": -7519.9
+        },
+        {
+          "c": "costo_fiscal_con_deudores_mdp",
+          "et": "Costo comprometido sumando el apoyo a deudores",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": "mezcla: flujos nominales hasta 2025 + saldo al 31-12-2025",
+          "op": "Todo el Ramo 34 recibido por el IPAB hasta 2020 (767,001 = 515,101 para ahorradores + 251,900 para deudores) + Ramo 34 ejercido 2021-2025 según la Cuenta Pública (11,245.9 + 38,850.0 + 54,216.5 + 62,489.4 + 52,451.9 = 219,253.7) + pasivos netos del IPAB al 31-12-2025 (1,023,571) = 2,009,825.7.",
+          "nota": "Los montos 2021-2025 vienen de la serie Ramo 34 de los datos abiertos de la Cuenta Pública. 2021, 2023, 2024 y 2025 coinciden con lo que el IPAB registra como recibido. En 2022 el Ramo 34 (38,850.0) es mayor que lo recibido por el IPAB (15,415): se supone que la diferencia de 23,435 es apoyo a deudores, pero ningún documento descargado la desglosa. Los deudores son parte del rescate de 1995 aunque no del Fobaproa estricto.",
+          "f": [
+            {
+              "doc": "IPAB, Informe Anual 2020",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/650158/Informe-Anual_2020.pdf",
+              "pag": "p. 83 impresa (PDF p. 85), nota 43"
+            },
+            {
+              "doc": "SHCP, Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública, 4.º trimestre de 2025, Anexos de deuda pública: SHRFSP (pp. C2-C5 y % del PIB C6-C11) y apartado III del IPAB (pp. C24-C29)",
+              "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf (copia en investigaciones/entregas/SHCP_IPAB_DeudaPublica_4T2025.pdf)",
+              "pag": "PDF p. 24"
+            }
+          ],
+          "v": 2009825.7
+        },
+        {
+          "c": "costo_fiscal_estimado_1998_mdp",
+          "et": "Costo fiscal que se estimaba en 1998",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 1998,
+          "op": "Cifra tomada tal cual: estimación de Mackey del costo fiscal al 30-06-1998 = 493,600 (programas de apoyo bancario) + 139,700 (carreteras de cuota y programas de apoyo a deudores). El Fobaproa la estimaba en 545,800 al 28-02-1998 y 576,600 al 30-06-1998.",
+          "nota": "Estimación de un auditor contratado por la Cámara, publicada en la Gaceta Parlamentaria. Incluye el rescate carretero (unos 20,000), así que no se suma al FARAC.",
+          "f": [
+            {
+              "doc": "Gaceta Parlamentaria (Cámara de Diputados), 23-09-1999, núm. I: Informe de Michael W. Mackey sobre el Fobaproa (julio de 1999), apartados «VI Costo fiscal» y «Costo fiscal - Suplemento»",
+              "url": "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html",
+              "pag": "apartado «VI Costo fiscal», «Estimación del Costo Fiscal de Fobaproa al 28 de febrero de 1998 y al 30 de junio de 1998»"
+            }
+          ],
+          "v": 633300
+        },
+        {
+          "c": "pasivo_neto_ipab_1999_mdp",
+          "et": "Deuda neta del IPAB al cierre de 1999",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 1999,
+          "op": "Cifra tomada tal cual: deuda neta del IPAB al 31-12-1999 = 10.78 % del PIB de ese año.",
+          "nota": "Neto = pasivos menos recursos líquidos. Es el punto de partida que el propio IPAB usa para medir su deuda.",
+          "f": [
+            {
+              "doc": "IPAB, Plan Anual de Financiamiento 2026",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf",
+              "pag": "p. 1, apartado II"
+            }
+          ],
+          "v": 687844.0
+        },
+        {
+          "c": "saldo_pasivos_ipab_shrfsp_mdp",
+          "et": "Lo que todavía se debe (pasivos del IPAB)",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2025,
+          "op": "Saldo «Pasivos del IPAB» en el SHRFSP al cierre de cada año, tomado tal cual (2025 preliminar). % del PIB anual: 9.2 (2000), 6.3 (2006), 5.0 (2012), 3.9 (2018), 3.4 (2024), 3.3 (2025).",
+          "nota": "Es un saldo (stock). Es otro concepto que los «pasivos netos» del IPAB (1,023,571): Hacienda mide los requerimientos financieros del sector público. No se suma con flujos de otro año. La serie anual completa 2000-2025 está en el documento.",
+          "f": [
+            {
+              "doc": "SHCP, Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública, 4.º trimestre de 2025, Anexos de deuda pública: SHRFSP (pp. C2-C5 y % del PIB C6-C11) y apartado III del IPAB (pp. C24-C29)",
+              "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf (copia en investigaciones/entregas/SHCP_IPAB_DeudaPublica_4T2025.pdf)",
+              "pag": "PDF pp. 2-5 (C2-C5) y % del PIB pp. 6-11"
+            }
+          ],
+          "v": 1164541.0
+        },
+        {
+          "c": "pasivo_asumido_ipab_1999_mdp",
+          "et": "Obligaciones del IPAB al cierre de 1999",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 1999,
+          "op": "Cifra tomada tal cual: obligaciones del IPAB al 31-12-1999 sin el crédito del Banco de México, 14.34 % del PIB.",
+          "nota": "Composición, mismo informe pp. 43-44: pagarés del programa de capitalización y compra de cartera 150,446; pasivos de la banca intervenida 164,138; programas de apoyo a deudores 16,501; daciones en pago 14,008; crédito de Banxico (excluido) 63,922.",
+          "f": [
+            {
+              "doc": "IPAB, Informe Anual 1999 (abril de 2000)",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/101165/Informe-Anual_1999.pdf",
+              "pag": "p. 45 impresa (PDF p. 46)"
+            }
+          ],
+          "v": 722465
+        },
+        {
+          "c": "transferencias_ramo34_paab_anuales_mdp",
+          "et": "Ramo 34 que el presupuesto le pasó en el año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2025,
+          "op": "Serie tomada tal cual de las etiquetas de la gráfica del IPAB (28 barras, 1999-2026; 2026 es el PEF). Se cotejó contra los estados financieros en 2009-2025 y coincide (±1 de redondeo). Sumas por sexenio (derivadas, año presupuestal): Zedillo (1999-2000) 52,600.0; Fox (2001-2006) 156,628.0; Calderón (2007-2012) 110,487.0; Peña Nieto (2013-2018) 106,628.0; López Obrador (2019-2024) 232,128.4; Sheinbaum (2025) 52,451.9. Total 1999-2025: 710,923.3.",
+          "nota": "Es lo que el IPAB recibe del Programa de Apoyo a Ahorradores. El Ramo 34 completo (por ejemplo 11,730.6 en 2014) incluye además el apoyo a deudores. 2026 (PEF): 35,553.4. En 2007 el estado financiero da 27,827 − 4,577 de deudores (ADE) = 23,250, contra 22,600 de la gráfica: el estado de 2007 está en pesos de dic. 2007 (NIF B-10).",
+          "f": [
+            {
+              "doc": "IPAB, Plan Anual de Financiamiento 2026",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf",
+              "pag": "p. 4, gráfica «Transferencias fiscales como porcentaje del PIB»"
+            },
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+              "pag": "PDF p. 33"
+            }
+          ],
+          "v": 52451.9
+        },
+        {
+          "c": "resultado_sin_transferencias_anual_mdp",
+          "et": "Resultado del año sin el Ramo 34",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2025,
+          "op": "Resultado sin el Ramo 34 = déficit 2025 (−7,519.9) − transferencias 2025 (52,451.9) = −59,971.8. En 2024: −22,411.1 − 62,489.4 = −84,900.5. Es la «pérdida» comparable a la del Tren Maya sin transferencias: lo que el presupuesto pone o deberá poner cada año.",
+          "nota": "Para el reloj de la pérdida anual conviene usar −84,900.5 (2024, para que coincida con el año del Tren Maya) en lugar de los 62,489.4 del Ramo 34, que es el apoyo y no la pérdida. Si se prefiere el último año: −59,971.8.",
+          "f": [
+            {
+              "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+              "pag": "PDF p. 33"
+            }
+          ],
+          "v": -59971.8
+        }
+      ],
+      "farac-carretero": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "no_aplica",
+          "anio": null,
+          "op": "No aplica una base de obra: es un rescate financiero.",
+          "nota": "Lo documentado es la deuda de 1997 (27,491.2, ASF CP 2017 aud. 96, p. 6), que no es presupuesto.",
+          "f": []
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "Ingresos reales al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2015,
+          "op": "Tomada tal cual: cuotas de peaje de 43 tramos del FONADIN en 2015.",
+          "nota": "Es la red completa del FONADIN, no solo las 23 autopistas rescatadas. En 2017 la ASF revisó una muestra de 4,243.7 de peajes (aud. 96). Los 28,500 que traía la ficha no tienen fuente.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2015, auditoría 99 (FONADIN)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0099_a.pdf",
+              "pag": "PDF p. 4"
+            }
+          ],
+          "v": 23045.5
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "Intereses al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2017,
+          "op": "Tomada tal cual: intereses pagados en 2017 (se devengaron 10,548.0).",
+          "nota": "Por pagar de 2018 a 2033: 59,308,551.5 miles de UDIS (capital 38,492,598.5 + intereses 20,815,953.0), valuados a 2017 en 351,969.6 (ASF aud. 96, p. 6-7). La UDI sube cada año, así que en pesos será más.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2017, auditoría 96-GB, Banobras: Inversiones en Concesiones y su Financiamiento (FONADIN)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf",
+              "pag": "PDF p. 6"
+            }
+          ],
+          "v": 10368.6
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2017,
+          "op": "Tomada tal cual: déficit del ejercicio 2017 del FONADIN. 2016: −3,696.0; 2015: −3,180.4.",
+          "nota": "Sustituye la pérdida de 6,000, los costos de 34,500 y su desglose, que no tienen fuente. Es el FONADIN entero.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2017, auditoría 91-GB, Análisis del entorno general, financiero y operativo del FONADIN",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0091_a.pdf",
+              "pag": "PDF p. 7"
+            },
+            {
+              "doc": "ASF, Cuenta Pública 2016, auditoría 92: Apoyos recuperables del Fideicomiso 1936 FONADIN",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016b/Documentos/Auditorias/2016_0092_a.pdf",
+              "pag": "PDF p. 9"
+            }
+          ],
+          "v": -10564.3
+        },
+        {
+          "c": "costo_fiscal_estimado_1998_mdp",
+          "et": "Costo fiscal que se estimaba en 1998",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 1998,
+          "op": "Cifra tomada tal cual: costo fiscal del programa de carreteras de cuota que dio la SHCP, 18,800 al 28-02-1998, actualizado con Cetes a 20,000 al 30-06-1998.",
+          "nota": "Valor presente neto de lo que se esperaba cobrar en peajes. La realidad lo desmintió: la deuda creció a 225,500.2 en 2017.",
+          "f": [
+            {
+              "doc": "Gaceta Parlamentaria (Cámara de Diputados), 23-09-1999, núm. I: Informe de Michael W. Mackey sobre el Fobaproa (julio de 1999), apartados «VI Costo fiscal» y «Costo fiscal - Suplemento»",
+              "url": "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html",
+              "pag": "apartado «Estimación del Costo Fiscal del Programa de Carreteras de Cuota»"
+            }
+          ],
+          "v": 20000
+        },
+        {
+          "c": "deuda_bursatil_mdp",
+          "et": "Deuda en bonos del rescate",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2017,
+          "op": "Tomada tal cual: deuda bursátil neta del rescate al 31-12-2017. Pasó de 27,491.2 en 1997 a 225,500.2 por emisiones nuevas, la UDI (de 1.9162 a 5.9346) y la capitalización de intereses del P001U.",
+          "nota": "Emisiones: P991U (16-12-1999) y P001U (31-05-2000), sexenio de Zedillo; P011U y P012U (2001) y CBIC 002-009 (2002-2003), sexenio de Fox. De 2000 a 2004 el fideicomiso pagó al Gobierno Federal 32,804.7 por 14 autopistas más y contrató deuda adicional por 48,563.1 (ASF CP 2015 aud. 99, PDF p. 3). Esa parte no es indemnización del rescate.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2017, auditoría 96-GB, Banobras: Inversiones en Concesiones y su Financiamiento (FONADIN)",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf",
+              "pag": "PDF pp. 5-6"
+            }
+          ],
+          "v": 225500.2
+        },
+        {
+          "c": "saldo_deuda_farac_shrfsp_mdp",
+          "et": "Lo que todavía se debe (pasivos del FONADIN)",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2025,
+          "op": "«FARAC» en el SHRFSP («corresponde a los pasivos del FONADIN»), saldo a fin de año, tomado tal cual (2025 preliminar). Cambio por sexenio, derivado del saldo final menos el inicial: Fox +58,007.0 (2000→2006); Calderón −19,310.6; Peña Nieto +114,728.0; López Obrador −79,634.8 (2018→2024). % del PIB: 1.5 (2000), 1.4 (2006), 0.9 (2012), 1.1 (2018), 0.5 (2024), 0.4 (2025).",
+          "nota": "Saldo (stock): no se suma con flujos y no se reparte por sexenios como costo. Los cambios incluyen la revaluación de la UDI, la deuda nueva del FONADIN y la línea de Banobras. Para no contar dos veces, el rescate (57,756.6) se asigna a Zedillo y cada saldo solo se usa como foto del año. La serie anual completa 2000-2025 está en el documento.",
+          "f": [
+            {
+              "doc": "SHCP, Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública, 4.º trimestre de 2025, Anexos de deuda pública: SHRFSP (pp. C2-C5 y % del PIB C6-C11) y apartado III del IPAB (pp. C24-C29)",
+              "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf (copia en investigaciones/entregas/SHCP_IPAB_DeudaPublica_4T2025.pdf)",
+              "pag": "PDF pp. 2-5 (C2-C5); % del PIB pp. 6-11"
+            }
+          ],
+          "v": 153035.5
+        },
+        {
+          "c": "pasivos_no_revelados_2002_mdp",
+          "et": "Pasivos que Hacienda no reveló en la Cuenta Pública 2002",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2002,
+          "op": "Tomada tal cual: pasivos del FARAC que la SHCP no reveló en la Cuenta Pública 2002.",
+          "nota": "Sexenio de Fox. Es un saldo, no un costo adicional.",
+          "f": [
+            {
+              "doc": "Cámara de Diputados, dictamen de la Comisión de Presupuesto y Cuenta Pública sobre la Cuenta Pública 2002 (SIL, 15-04-2009), que transcribe el hallazgo de la ASF",
+              "url": "http://sil.gobernacion.gob.mx/Archivos/Documentos/2009/04/asun_2559262_20090415_1239832471.pdf",
+              "pag": "PDF p. 50"
+            }
+          ],
+          "v": 143442.2
+        },
+        {
+          "c": "resultado_acumulado_1997_2017_mdp",
+          "et": "Pérdida acumulada de 1997 a 2017",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": "nominal acumulado",
+          "op": "Déficit de ejercicios anteriores al 31-12-2017 (85,530.6) + déficit del ejercicio 2017 (10,564.3) = 96,094.9. Comprobación: 81,834.6 (acumulado a 2016) + 3,696.0 (2016) = 85,530.6 ✔.",
+          "nota": "Desde 2008 es el FONADIN entero: incluye tramos que no fueron rescatados y otras operaciones. Lo de 1997 a 2000 es del sexenio de Zedillo, pero los documentos no separan el déficit por año.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2017, auditoría 91-GB, Análisis del entorno general, financiero y operativo del FONADIN",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0091_a.pdf",
+              "pag": "PDF p. 7, «Movimientos de patrimonio»"
+            },
+            {
+              "doc": "ASF, Cuenta Pública 2016, auditoría 92: Apoyos recuperables del Fideicomiso 1936 FONADIN",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2016b/Documentos/Auditorias/2016_0092_a.pdf",
+              "pag": "PDF p. 9"
+            }
+          ],
+          "v": 96094.9
+        }
+      ],
+      "aifa-texcoco": [
+        {
+          "c": "presupuesto_original_mdp",
+          "et": "AIFA · Primer presupuesto documentado",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2019,
+          "op": "Monto con que la Sedena registró el proyecto en la cartera de Hacienda (clave 19071170003). Después subió a 82,136.1 (corte 4T 2019) y a 95,260.4 al registrarse en el PEF 2020.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2019, auditoría 66-GB, Sedena: Control Interno y Gobernanza del Proyecto del Nuevo Aeropuerto Internacional Felipe Ángeles",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2019a/Documentos/Auditorias/2019_0066_a.pdf",
+              "pag": "5"
+            }
+          ],
+          "v": 73109.0
+        },
+        {
+          "c": "ingresos_esperados_anuales_mdp",
+          "et": "AIFA · Ingresos esperados al año",
+          "u": "mdp",
+          "e": "pendiente",
+          "anio": null,
+          "op": "",
+          "nota": "Lo único público del ACB son sus totales socioeconómicos a valor presente (beneficios 770,716.0 contra costos 435,822.6; VPN 26,792.0; TIR 13.8 %), que la ASF reproduce. Son beneficios para la sociedad (tiempo, demoras, etc.), no ingresos de caja del aeropuerto, así que no se pueden comparar con los ingresos de gestión. Ingresos esperados por año: pendiente.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2019, auditoría 66-GB, Sedena: Control Interno y Gobernanza del Proyecto del Nuevo Aeropuerto Internacional Felipe Ángeles",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2019a/Documentos/Auditorias/2019_0066_a.pdf",
+              "pag": "60"
+            },
+            {
+              "doc": "ASF, Cuenta Pública 2019, auditoría de desempeño 69-GB, Sedena: Proyecto del Aeropuerto Internacional General Felipe Ángeles",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2019a/Documentos/Auditorias/2019_0069_a.pdf",
+              "pag": "4, nota 7"
+            }
+          ],
+          "resp": "Sedena: reservó el análisis costo-beneficio (y con él los ingresos aeroportuarios proyectados) como información de seguridad nacional; la SHCP (Unidad de Inversiones) tiene la ficha de cartera pero no la publica con ese detalle."
+        },
+        {
+          "c": "ingresos_reales_anuales_mdp",
+          "et": "AIFA · Ingresos reales al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Ingresos por venta de bienes y prestación de servicios 2024: servicios aeroportuarios 1,332.5 + TUA 784.2 + comerciales 223.8 + otros 195.4 + complementarios 42.4 = 2,578.2. Además 157.8 de ingresos financieros y 1,510.2 de transferencias del Gobierno Federal.",
+          "nota": "",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2024, auditoría 9, Gestión financiera del Aeropuerto Internacional Felipe Ángeles, S.A. de C.V.",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0009_a.pdf",
+              "pag": "8 (cuadro de antecedentes)"
+            },
+            {
+              "doc": "SHCP, Cuenta Pública 2024, Tomo VII, AIFA S.A. de C.V. (HZI): Estado de Actividades 2024",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls",
+              "pag": "Estado de Actividades 2024"
+            }
+          ],
+          "v": 2578.2
+        },
+        {
+          "c": "costo_operativo_anual_mdp",
+          "et": "AIFA · Gasto de operación al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Gastos totales del Estado de Actividades 2024.",
+          "nota": "No incluye depreciación de la obra de la Sedena. El presupuesto pagado 2024 fue 2,347.0 con 434.9 de inversión pública (ASF CP 2024 aud. 9, p. 10).",
+          "f": [
+            {
+              "doc": "SHCP, Cuenta Pública 2024, Tomo VII, AIFA S.A. de C.V. (HZI): Estado de Actividades 2024",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls",
+              "pag": "Estado de Actividades 2024"
+            }
+          ],
+          "v": 2288.1
+        },
+        {
+          "c": "intereses_anuales_mdp",
+          "et": "NAIM · Intereses al año",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2019,
+          "op": "Intereses pagados en 2019 por los bonos MEXCAT que quedaron vivos tras la recompra (700 MUSD de cada bono 2026, 2028 y 2046 y 2,100 MUSD del 2047), según el cuadro de la ASF.",
+          "nota": "Es el último año documentado. En dólares el cupón anual de los 4,200 MUSD vivos suma 211.0 MUSD (2 × (14.9 + 19.3 + 13.5 + 57.8), cuadro p. 40); convertirlo a un año posterior supondría que el saldo no cambió, y eso no consta.",
+          "f": [
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "39-40"
+            }
+          ],
+          "v": 4029.6
+        },
+        {
+          "c": "resultado_anual_mdp",
+          "et": "AIFA · Resultado del año (ganancia o pérdida)",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2024,
+          "op": "Ingresos de gestión 2,578.2 − gastos totales 2,288.1 = +290.1 (con las cifras en miles da +290.2). Con transferencias y otros ingresos el resultado del ejercicio fue +1,958.2.",
+          "nota": "Positivo sin contar la obra: la empresa operadora cubre su gasto corriente. No se descuenta nada por la inversión de 74,480.2 de la Sedena, porque no hay documento que la deprecie ni que diga quién la amortiza.",
+          "f": [
+            {
+              "doc": "SHCP, Cuenta Pública 2024, Tomo VII, AIFA S.A. de C.V. (HZI): Estado de Actividades 2024",
+              "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls",
+              "pag": "Estado de Actividades 2024"
+            }
+          ],
+          "v": 290.2
+        },
+        {
+          "c": "pasajeros_capacidad_inicial_acb",
+          "et": "AIFA · Capacidad prevista en su análisis costo-beneficio",
+          "u": "personas",
+          "e": "oficial",
+          "anio": 2019,
+          "op": "Capacidad inicial prevista en el análisis costo-beneficio (ACB) de marzo de 2019: 18.0 millones de pasajeros al año. Ocupación derivada: 6,348,051 ÷ 18,000,000 = 35.3 % en 2024; 7,079,040 ÷ 18,000,000 = 39.3 % en 2025.",
+          "nota": "No es la «meta de 20 millones» de la prensa: el documento oficial dice 18.0 millones de capacidad inicial (ACB marzo de 2019) y 84.9 millones en su máxima etapa. La demanda año por año del ACB de diciembre está reservada por la Sedena.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2019, auditoría de desempeño 69-GB, Sedena: Proyecto del Aeropuerto Internacional General Felipe Ángeles",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2019a/Documentos/Auditorias/2019_0069_a.pdf",
+              "pag": "4"
+            },
+            {
+              "doc": "ASF, Cuenta Pública 2019, auditoría 66-GB, Sedena: Control Interno y Gobernanza del Proyecto del Nuevo Aeropuerto Internacional Felipe Ángeles",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2019a/Documentos/Auditorias/2019_0066_a.pdf",
+              "pag": "60"
+            },
+            {
+              "doc": "AFAC, Estadística Operativa de Aeropuertos 2006-2026 (agosto de 2026), libro Excel; datos de la caché de la tabla dinámica, grupo AIFA, aeropuerto SANTA LUCÍA, opción PASAJEROS",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1105543/producto-aeropuertos-2006-2026-ago-28092026.xlsx",
+              "pag": "—"
+            }
+          ],
+          "v": 18000000
+        },
+        {
+          "c": "pasajeros_anuales",
+          "et": "AIFA · Pasajeros al año",
+          "u": "personas",
+          "e": "oficial",
+          "anio": 2024,
+          "op": "Nacionales 5,924,472 + internacionales 423,579 = 6,348,051 (2024). En 2025: 6,674,343 + 404,697 = 7,079,040.",
+          "nota": "El libro se obtuvo de gob.mx a través de la herramienta de consulta web (curl topa con un desafío JavaScript); el SHA-256 es el del archivo .xlsx recibido. Conviene volver a bajarlo desde un navegador y cotejar el hash.",
+          "f": [
+            {
+              "doc": "AFAC, Estadística Operativa de Aeropuertos 2006-2026 (agosto de 2026), libro Excel; datos de la caché de la tabla dinámica, grupo AIFA, aeropuerto SANTA LUCÍA, opción PASAJEROS",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1105543/producto-aeropuertos-2006-2026-ago-28092026.xlsx",
+              "pag": "caché de la tabla dinámica, columna TOTAL/TOTAL, grupo AIFA, SANTA LUCÍA"
+            }
+          ],
+          "v": 6348051
+        },
+        {
+          "c": "transferencia_por_pasajero_pesos",
+          "et": "AIFA · Transferencias federales por pasajero",
+          "u": "pesos",
+          "e": "derivado",
+          "anio": 2024,
+          "op": "Transferencias del Gobierno Federal 2024 1,510.2 mdp ÷ 6,348,051 pasajeros = $237.9 por pasajero. Para comparar: ingreso de gestión por pasajero 2,578.2 mdp ÷ 6,348,051 = $406.1; gasto por pasajero 2,288.1 mdp ÷ 6,348,051 = $360.4.",
+          "nota": "Sustituye al «~$380 por pasajero» sin documento de la ficha. Ojo: la transferencia pagó nómina y servicios del AIFA aunque sus ingresos propios superaron su gasto; no es déficit.",
+          "f": [
+            {
+              "doc": "ASF, Cuenta Pública 2024, auditoría 9, Gestión financiera del Aeropuerto Internacional Felipe Ángeles, S.A. de C.V.",
+              "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0009_a.pdf",
+              "pag": "8 y 10"
+            },
+            {
+              "doc": "AFAC, Estadística Operativa de Aeropuertos 2006-2026 (agosto de 2026), libro Excel; datos de la caché de la tabla dinámica, grupo AIFA, aeropuerto SANTA LUCÍA, opción PASAJEROS",
+              "url": "https://www.gob.mx/cms/uploads/attachment/file/1105543/producto-aeropuertos-2006-2026-ago-28092026.xlsx",
+              "pag": "—"
+            }
+          ],
+          "v": 237.9
+        },
+        {
+          "c": "costo_atribuible_cancelacion_mdp",
+          "et": "NAIM · Costo atribuible a la cancelación",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2019,
+          "op": "Mínimo: solo los conceptos que la ASF liga expresamente a la terminación o a la liquidación anticipada: gastos no recuperables a 16 contratistas 13,784.1 + cancelación de los CBFE de la Fibra E (rendimiento esperado) 4,027.2 + gastos de liquidación anticipada de la Fibra E 26.4 + pérdida cambiaria por la recompra de bonos MEXCAT 2,930.6 + gastos asociados a la recompra 964.7 + gastos de recompra 1.3 = 21,734.3. Máximo: todo lo del costo de la ASF que no es obra ejercida antes de 2019: 113,327.7 − 79,907.7 − 244.2 = 33,175.8. Medio = (21,734.3 + 33,175.8) ÷ 2 = 27,455.05 ≈ 27,455.1.",
+          "nota": "El máximo arrastra intereses, colocación de bonos y gasto de operación de GACM de 2015-2018, que se habrían pagado aun sin cancelar: por eso es cota superior. El mínimo no descuenta los 8,934.7 de inventario recuperado ni los anticipos compensados (5,172.3), que la ASF ya cuenta como obra. La deuda MEXCAT que sigue viva (4,200 MUSD al 31-12-2019) se paga después con la TUA del AICM y queda fuera de los dos extremos.",
+          "f": [
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "30-31"
+            },
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "39 (cuadro Bonos MEXCAT)"
+            },
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "41 (cuadro CBFE)"
+            },
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "46-48"
+            }
+          ],
+          "min": 21734.3,
+          "max": 33175.8,
+          "medio": 27455.1
+        },
+        {
+          "c": "costo_total_esquema_2019_mdp",
+          "et": "NAIM · Costo total que fijó la ASF al 31-12-2019",
+          "u": "mdp",
+          "e": "oficial",
+          "anio": 2019,
+          "op": "93,204.0 (inversión y terminación anticipada) + 33,885.3 (costos de financiamiento, liquidación, recompra, operación de GACM y pérdidas cambiarias) − 15,006.4 (ingresos financieros) + 1,244.8 (intereses devengados por pagar) = 113,327.7.",
+          "nota": "No es «el costo de cancelar»: incluye 79,907.7 de obra hecha de 2014 a 2018.",
+          "f": [
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "46-48"
+            }
+          ],
+          "v": 113327.7
+        },
+        {
+          "c": "inversion_construccion_2014_2018_mdp",
+          "et": "NAIM · Obra ejercida de 2014 a 2018 (sexenio anterior)",
+          "u": "mdp",
+          "e": "derivado",
+          "anio": 2018,
+          "op": "CONAGUA y SEDATU 10,323.3 + recursos de GACM cedidos a SCT, CONAGUA, ASA y Edomex 956.7 + FONADIN vía ASA y CONAGUA 2014-2018 (491.7 + 64.7 + 314.7 + 225.5 + 44.2 = 1,140.8) + GACM con fideicomisos 2015-2018 (3,263.5 + 8,314.7 + 26,449.4 + 29,459.3 = 67,486.9) = 79,907.7. Comprobación: 79,907.7 + 244.2 (FONADIN 2011-2013) − 732.0 (anticipos devueltos en 2019) + 13,784.1 (terminación anticipada 2019) = 93,204.0, el subtotal de la ASF.",
+          "nota": "Es lo que se invirtió en obra antes de la cancelación (pesos corrientes 2014-2018). Se ejerció con EPN; no es costo del sexenio 2018-2024.",
+          "f": [
+            {
+              "doc": "ASF, Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019 (marzo de 2021)",
+              "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+              "pag": "25-29 (cuadros de recursos de dependencias, de GACM, del FONADIN y de GACM por fideicomiso)"
+            }
+          ],
+          "v": 79907.7
+        }
+      ]
     }
   }
 },

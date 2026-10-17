@@ -81,7 +81,7 @@
 .mp-tabla tbody th { font-weight: 600; }
 .mp-tabla td.mp-num { white-space: nowrap; font-weight: 700; }
 .mp-tabla tfoot th, .mp-tabla tfoot td { border-bottom: 0; border-top: 2px solid var(--mp-osc); font-weight: 800; }
-.mp-op { display: block; margin-top: 4px; font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--mp-gris); overflow-wrap: anywhere; }
+.mp-op { display: block; margin-top: 4px; font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--mp-gris); overflow-wrap: anywhere; }
 .mp-pend-fila { background: var(--mp-suave); }
 .mp-equiv { margin: 0; font-size: 17px; line-height: 1.6; color: var(--mp-tinta); }
 
@@ -112,7 +112,7 @@
 .mp-riel { display: block; height: 10px; border-radius: 99px; background: var(--mp-borde); overflow: hidden; }
 .mp-barra { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #5d8fd6, var(--mp)); transition: width .5s ease; }
 .mp-obra-pendiente .mp-barra { background: repeating-linear-gradient(45deg, var(--mp-pen), var(--mp-pen) 6px, #d98a3f 6px, #d98a3f 12px); }
-.mp-obra-pie { margin: 0; font-size: 15px; line-height: 1.5; color: var(--mp-gris); overflow-wrap: anywhere; }
+.mp-obra-pie { margin: 0; font-size: 16px; line-height: 1.5; color: var(--mp-gris); overflow-wrap: anywhere; }
 .mp-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; }
 .mp-unidades { margin: 0; font-size: 16px; line-height: 1.55; color: var(--mp-gris); }
 
@@ -143,6 +143,24 @@
 .mp-subnav-chip.actual { background: var(--mp); border-color: var(--mp); color: #ffffff !important; }
 .mp .est-chip { font-size: 12px; }
 
+/* La cuenta de cada obra (17-10-2026) */
+.mp-neg { color: var(--mp-rojo); }
+.mp-tabla td.mp-neg { color: var(--mp-rojo); }
+.mp-na { display: inline-block; padding: 2px 8px; border: 1px dashed var(--mp-borde); border-radius: 999px; font-size: 14px; color: var(--mp-gris); white-space: nowrap; }
+.mp-cta-indice ol { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.mp-cta-indice a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; box-sizing: border-box; padding: 6px 12px; border: 1px solid var(--mp-borde); border-radius: 999px; background: var(--mp-suave); font-size: 16px; text-decoration: none; }
+.mp-cta { margin: 0 0 18px; padding: 16px; border: 1px solid var(--mp-borde); border-left: 5px solid var(--mp); border-radius: 12px; background: var(--mp-suave); scroll-margin-top: 90px; }
+.mp-cta:target { box-shadow: 0 0 0 3px var(--mp); }
+.mp-cta-tit { margin: 0 0 10px; font-size: 20px; line-height: 1.3; color: var(--mp-osc); }
+.mp-cta-tit small { display: block; font-size: 16px; font-weight: 500; color: var(--mp-gris); }
+.mp-cta-base { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 12px; }
+.mp-cta-base div { padding: 10px 12px; border-radius: 10px; background: var(--mp-fondo); border: 1px solid var(--mp-borde); }
+.mp-cta-base dt { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--mp-gris); }
+.mp-cta-base dd { margin: 4px 0 0; font-size: 17px; font-weight: 700; color: var(--mp-tinta); }
+.mp-cta .mp-tabla { background: var(--mp-fondo); }
+.mp-cta-pie { margin: 10px 0 0; font-size: 16px; }
+.mp-cta-pie a { display: inline-flex; align-items: center; min-height: 44px; }
+
 /* Pastilla flotante del contador */
 .mp-flota { position: fixed; z-index: 40; right: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; max-width: calc(100vw - 32px); box-sizing: border-box; padding: 8px 14px; border-radius: 999px; background: #07162c; color: #ffffff !important; font-size: 16px; text-decoration: none; box-shadow: 0 8px 22px rgba(0, 0, 0, .3); }
 .mp-flota[hidden] { display: none; }
@@ -159,6 +177,7 @@
   .mp-sec { padding: 16px 14px; }
   .mp-kpis { grid-template-columns: minmax(0, 1fr); }
   .mp-tarjetas { grid-template-columns: minmax(0, 1fr); }
+  .mp-cta-base { grid-template-columns: minmax(0, 1fr); }
   .mp-kpi-v { font-size: 26px; }
   .mp-dial { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mp-dial-b:last-child { grid-column: 1 / -1; }

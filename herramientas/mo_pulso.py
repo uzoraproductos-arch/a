@@ -35,6 +35,7 @@ Lo llama apartados.insp_nativa() (INSP_NATIVAS['pulso']).
 """
 import html
 import json
+import re
 from decimal import Decimal, ROUND_HALF_UP
 
 from presupuesto_modulos import chip
@@ -128,7 +129,7 @@ def _chip_obra(o, campo):
 
 
 def _contexto(base, ref):
-    """Las cifras ya formadas que comparten la pagina y sus cuatro partes."""
+    """Las cifras ya formadas que comparten la pagina y sus partes."""
     sm = base['simulador_megaobras']
     obras = sm['obras']
     perd = perdidas(sm)
@@ -228,6 +229,30 @@ def _contexto(base, ref):
 
     sobre_txt = ('+' if ag['sobre'] > 0 else '') + format(ag['sobre'], '.1f') + '%'
 
+    # Ya no quedan costos pendientes (17-10-2026): el aviso dice entonces lo
+    # que mas mueve el total, los rescates y las obras con rango.
+    rescates = [o for o in obras if o['sector_id'] == 'rescates']
+    ag_sin = agregados([o for o in obras if o['sector_id'] != 'rescates'], perd)
+    con_rango = [o for o in obras if 'inversion_real_mdp' in (o.get('rangos_campos') or {})]
+    res_real = sum(o['inversion_real_mdp'] for o in rescates)
+    if comp['pendiente'] > 0:
+        aviso = ('<b>Ojo:</b> %s%% del costo real del conjunto (%s) son cifras que siguen <b>pendientes</b> de documento %s. '
+                 'La suma se puede hacer, pero no se puede afirmar como dato auditado: <a href="%s">mira de qué está hecha</a> '
+                 'o pulsa «Solo con documento».' % (format(comp['pendiente'] / ag['real'] * 100, '.1f'), sim_mdp(comp['pendiente']),
+                                                     chip('pendiente'), parte_archivo('composicion')))
+        compo_cif = '%s%% del costo sigue pendiente de documento' % format(comp['pendiente'] / ag['real'] * 100, '.1f')
+    else:
+        aviso = ('<b>Ojo:</b> las %d obras ya tienen su costo con documento, oficial o derivado de cifras oficiales. Dos cosas '
+                 'mueven el total. Los rescates bancario y carretero (%s) son el %s%% del costo real (%s): sin ellos, las %d obras '
+                 'costaron %s frente a %s aprobados, un sobrecosto de %s%% %s. Y %s %s su costo como rango: en la suma entra su '
+                 'punto medio. <a href="%s">Mira la cuenta de cada obra</a>.'
+                 % (ag['n'], esc(' y '.join(o['nombre'].split(' (')[0] for o in rescates)),
+                    format(res_real / ag['real'] * 100, '.1f'), sim_mdp(res_real), ag_sin['n'], sim_mdp(ag_sin['real']),
+                    sim_mdp(ag_sin['presu']), ('+' if ag_sin['sobre'] > 0 else '') + format(ag_sin['sobre'], '.1f'), chip('derivado'),
+                    esc(', '.join(o['nombre'].split(' (')[0] for o in con_rango)), 'tiene' if len(con_rango) == 1 else 'tienen',
+                    parte_archivo('cuenta')))
+        compo_cif = '%d de %d obras con costo documentado' % (ag['n'] - comp_n['pendiente'], ag['n'])
+
     return dict(
         n=ag['n'], n_doc=ag_doc_real['n'],
         seg_txt=format(_r(ag['seg'], 2), ',.2f'), anual=mdp(ag['anual']),
@@ -239,20 +264,23 @@ def _contexto(base, ref):
         factor_tx='1/365', n_op=len(documentadas), n_pend=len(pendientes_op),
         sobre=sobre_txt, presu=sim_mdp(ag['presu']),
         brecha=sim_mdp(ag['brecha']), brecha_mdp=mdp(ag['brecha']),
-        pend_pct=format(comp['pendiente'] / ag['real'] * 100, '.1f'), pend_v=sim_mdp(comp['pendiente']),
         dial=dial, comp_filas=comp_filas, pend_lista=pend_lista, seg=seg, leyenda=leyenda,
         anio_op=next((perd[o['id']]['anio'] for o in documentadas), ''),
         n_ver=len(verificadas), verificadas=esc(', '.join(verificadas)), con_cifra=con_cifra,
         f_cp=_fuente(vfu.get('cp')), f_opa=_fuente(vfu.get('opa')),
         f_tm=_fuente((sm['operacion_oficial']['fuentes']).get('ef_h0m')),
         f_ai=_fuente((sm['operacion_oficial']['fuentes']).get('ef_hzi')),
-        r_asf=ref('ref-asf-cp'), datos=_json(datos))
+        r_asf=ref('ref-asf-cp'), datos=_json(datos), aviso=aviso, compo_cif=compo_cif,
+        rangos_lista=esc('; '.join('%s (%s)' % (o['nombre'].split(' (')[0], ', '.join(
+            {'inversion_presupuestada_mdp': 'presupuesto', 'inversion_real_mdp': 'costo', 'sobrecosto_pct': 'sobrecosto'}[k]
+            for k in o['rangos_campos'])) for o in obras if o.get('rangos_campos'))),
+        cuenta_html=_cuenta_html(sm), res_txt=mdp(sum(f['v'] for _o, f in _resultados(sm))))
 
 
 ARRANQUE = '''  <section class="mp-arranque" aria-labelledby="mpArrTit">
     <p class="mp-kicker">Inversión y Megaobras · aplicación 1</p>
     <h2 class="mp-grande" id="mpArrTit">📊 El pulso del gasto</h2>
-    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 1988 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Abajo están las cuatro partes del pulso: cada tarjeta abre su propia página con el desglose completo.</p>
+    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 1988 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Abajo están las cinco partes del pulso: cada tarjeta abre su propia página con el desglose completo.</p>
     <div class="mp-pantalla" id="mpPantalla">
       <p class="mp-vivo-et"><span class="mp-punto" aria-hidden="true"></span> Desde que abriste esta página, al ritmo documentado</p>
       <p class="mp-vivo-num mp-num"><b id="mpVivo" aria-live="off">+$0.00</b></p>
@@ -300,7 +328,7 @@ SECCIONES = {
         <p class="mp-kpi-mdp mp-num" id="mpKBrechaMdp">{brecha_mdp}</p>
       </article>
     </div>
-    <p class="mp-aviso" id="mpAvisoPend"><b>Ojo:</b> {pend_pct}% del costo real del conjunto ({pend_v}) son cifras que siguen <b>pendientes</b> de documento {chip_pend_obra}. La suma se puede hacer, pero no se puede afirmar como dato auditado: <a href="herramienta-megaobras-pulso-composicion.html">mira de qué está hecha</a> o pulsa «Solo con documento».</p>
+    <p class="mp-aviso" id="mpAvisoPend">{aviso}</p>
   </section>''',
     'ritmo': '''  <section class="mp-sec" id="mpRitmo" aria-labelledby="mpRitTit">
     <h2 class="mp-tit" id="mpRitTit"><span aria-hidden="true">⏱️</span> Temporalidad de pérdidas y subsidios</h2>
@@ -338,6 +366,7 @@ SECCIONES = {
     </p>
     <p class="mp-unidades"><b>Unidades.</b> 1 mdp es un millón de pesos; 1,000 mdp son mil millones; 1,000,000 mdp, un billón. Las cifras son nominales del año de cada erogación, sin deflactar: un peso de 1997 no compra lo mismo que uno de 2026.</p>
   </section>''',
+    'cuenta': '{cuenta_html}',
     'calculo': '''  <section class="mp-sec mp-como" id="mpComo" aria-labelledby="mpComoTit">
     <h2 class="mp-tit" id="mpComoTit"><span aria-hidden="true">🔎</span> Cómo se calcula lo que ves</h2>
     <ul class="mp-lista">
@@ -347,6 +376,8 @@ SECCIONES = {
       <li><b>La pérdida por segundo.</b> La cifra anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</li>
       <li><b>El sobrecosto del conjunto.</b> Compara la inversión real total contra la aprobada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>
       <li><b>Cifras con documento.</b> De las {n} obras, {n_ver} ya tienen documentos oficiales cotejados ({verificadas}) y {con_cifra} tienen su costo anclado a un documento oficial (la cartera de Hacienda, la Cuenta Pública o un informe de la ASF). La pérdida anual ya tiene documento en {n_op} obras; en las demás, la pérdida, los costos de operación y el costo unitario siguen pendientes y no se estiman {chip_unit}.</li>
+      <li><b>Los rangos.</b> Cuando la cifra exacta no está publicada pero documentos oficiales la acotan por arriba y por abajo, la suma usa su punto medio, (mínimo + máximo) ÷ 2, y la obra dice sus dos cotas y de dónde sale cada una {chip_der}. Hoy entran así: {rangos_lista}. La cifra exacta se sigue debiendo y queda en el Registro de pendientes.</li>
+      <li><b>La cuenta de cada obra.</b> Ingresos esperados y reales, gasto de operación, intereses y ganancia o pérdida del año, renglón por renglón, con su operación y su documento: <a href="herramienta-megaobras-pulso-cuenta.html">La cuenta de cada obra</a>.</li>
       <li><b>Pendiente declarado.</b> Las cifras marcadas como pendientes no tienen todavía el documento oficial que las sustenta; se muestran como consolidación documental y no como dato auditado. Qué falta y a quién le toca publicarlo está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</li>
     </ul>
     <p class="mp-fuentes">Fuentes: {f_cp}; {f_tm}; {f_ai}; {f_opa}; y la ASF {r_asf}.</p>
@@ -367,8 +398,139 @@ SIGUE = '''  <aside class="mp-sigue">
 DATOS = '''  <script type="application/json" id="mpDatos">{datos}</script>'''
 
 
-# Las cuatro partes del pulso, cada una en su pagina (pedido del autor,
-# 17-10-2026): la pagina de la aplicacion queda con el contador y cuatro
+# ---- La cuenta de cada obra (17-10-2026) ----
+# simulador_megaobras.cuenta: renglones con estado oficial, derivado (si trae
+# min y max es un rango), pendiente (con responsable) o no_aplica.
+UNIDAD = {'mdp': lambda v: mdp(v), 'pesos': lambda v: '$' + format(v, ',.2f'),
+          'personas': lambda v: format(int(round(v)), ','), 'mbd': lambda v: format(v, ',.0f') + ' mil barriles diarios',
+          'musd': lambda v: format(v, ',.1f') + ' millones de dólares'}
+
+
+def _v(f):
+    fmt = UNIDAD.get(f.get('u'), UNIDAD['mdp'])
+    if 'min' in f:
+        return 'entre %s y %s; punto medio %s' % (fmt(f['min']), fmt(f['max']), fmt(f['medio']))
+    return fmt(f['v'])
+
+
+def _rango_txt(o, campo, fmt):
+    r = (o.get('rangos_campos') or {}).get(campo)
+    return ('entre %s y %s; punto medio' % (fmt(r['min']), fmt(r['max']))) if r else ''
+
+
+def _resultados(sm):
+    """El resultado documentado mas reciente de cada obra (sin el resultado
+    sin transferencias ni los acumulados)."""
+    out = []
+    obras = {o['id']: o for o in sm['obras']}
+    for oid, filas in ((sm.get('cuenta') or {}).get('obras') or {}).items():
+        r = [f for f in filas if f['c'] == 'resultado_anual_mdp' and 'v' in f]
+        if r:
+            out.append((obras[oid], max(r, key=lambda x: x.get('anio') or 0)))
+    return out
+
+
+def _intereses(sm):
+    obras = {o['id']: o for o in sm['obras']}
+    return [(obras[oid], f) for oid, filas in ((sm.get('cuenta') or {}).get('obras') or {}).items()
+            for f in filas if f['c'] == 'intereses_anuales_mdp' and 'v' in f]
+
+
+def _fuentes_fila(f):
+    return ' · '.join('<a href="%s" target="_blank" rel="noopener">%s%s ↗</a>'
+                      % (esc(x['url']), esc(x['doc'] if len(x['doc']) < 110 else x['doc'][:108] + '…'),
+                         (', ' + ('' if re.match(r'pp?\. ', x['pag']) else 'p. ') + esc(x['pag'])) if x.get('pag') else '')
+                      for x in f.get('f') or [])
+
+
+def _estado(f, oid):
+    if f['e'] == 'no_aplica':
+        return '<span class="mp-na">no aplica</span>'
+    return chip(f['e'], ('cuenta-' + oid) if f['e'] == 'pendiente' else None)
+
+
+def _signo(v):
+    return ' mp-neg' if v < 0 else ''
+
+
+CUENTA_INTRO = '''  <section class="mp-sec" id="mpCuenta" aria-labelledby="mpCuentaTit">
+    <h2 class="mp-tit" id="mpCuentaTit"><span aria-hidden="true">📒</span> La cuenta de cada obra</h2>
+    <p class="mp-txt">Para cada obra, lo que se esperaba de ella y lo que dio: su presupuesto, cuánto costó, cuánto esperaba ingresar y cuánto ingresa, cuánto gasta en operar, cuánto paga de intereses y si gana o pierde en el año. Donde no hay cifra exacta pero sí documentos que la acotan, va un <b>rango</b> con su mínimo, su máximo y su punto medio. Donde ni eso se puede, el renglón dice <b>por qué falta y a quién le toca publicarlo</b>. Y si una obra no tiene ese concepto (un monumento no vende boletos; una obra pagada con impuestos no paga intereses), dice «no aplica».</p>
+    <p class="mp-unidades"><b>Unidades.</b> Millones de pesos (mdp) del año que dice cada renglón, sin deflactar. Una pérdida va con signo menos.</p>
+'''
+
+
+def _cuenta_html(sm):
+    cu = (sm.get('cuenta') or {}).get('obras') or {}
+    res, intr = _resultados(sm), _intereses(sm)
+    tot = sum(f['v'] for _o, f in res)
+    filas_res = ''.join(
+        '<tr><th scope="row"><span aria-hidden="true">%s</span> %s <small class="mp-op">%s (%s)</small></th>'
+        '<td class="mp-num%s">%s</td><td>%s</td></tr>'
+        % (o['icono'], esc(o['nombre'].split(' (')[0]), esc(f['et']), f.get('anio') or '', _signo(f['v']),
+           mdp(f['v']), chip(f['e'])) for o, f in sorted(res, key=lambda x: x[1]['v']))
+    filas_int = ''.join(
+        '<tr><th scope="row"><span aria-hidden="true">%s</span> %s <small class="mp-op">%s (%s)</small></th>'
+        '<td class="mp-num">%s</td><td>%s</td></tr>'
+        % (o['icono'], esc(o['nombre'].split(' (')[0]), esc(f['et']), f.get('anio') or '', mdp(f['v']), chip(f['e']))
+        for o, f in sorted(intr, key=lambda x: -x[1]['v']))
+    anios = sorted({f.get('anio') for _o, f in res if f.get('anio')})
+    resumen = (
+        '<div class="mp-marco"><table class="mp-tabla">'
+        '<caption>Ganancia o pérdida del año, donde hay documento</caption>'
+        '<thead><tr><th scope="col">Obra</th><th scope="col">Resultado</th><th scope="col">Estado</th></tr></thead>'
+        '<tbody>%s</tbody><tfoot><tr><th scope="row">Suma de los resultados documentados <small class="mp-op">Suma de los %d '
+        'renglones de arriba, cada obra con su año más reciente publicado (%s). Las demás no publican su resultado o no operan: '
+        'su ficha dice por qué.</small></th><td class="mp-num%s">%s</td><td>%s</td></tr></tfoot></table></div>'
+        '<div class="mp-marco"><table class="mp-tabla">'
+        '<caption>Intereses que pagan al año, donde hay documento</caption>'
+        '<thead><tr><th scope="col">Obra</th><th scope="col">Intereses</th><th scope="col">Estado</th></tr></thead>'
+        '<tbody>%s</tbody></table></div>'
+        % (filas_res, len(res), ', '.join(str(a) for a in anios), _signo(tot), mdp(tot), chip('derivado'), filas_int))
+
+    def pct(v):
+        return ('+' if v > 0 else '') + format(v, '.1f') + ' %'
+
+    fichas = []
+    for o in sm['obras']:
+        ec = o.get('estado_campos') or {}
+        base = []
+        for campo, et, fmt in (('inversion_presupuestada_mdp', 'Presupuesto con el que se mide', mdp),
+                               ('inversion_real_mdp', 'Costo real', mdp), ('sobrecosto_pct', 'Sobrecosto', pct)):
+            e = ec.get(campo) or 'pendiente'
+            base.append('<div><dt>%s</dt><dd><span class="mp-num">%s %s</span> %s</dd></div>'
+                        % (et, _rango_txt(o, campo, fmt), fmt(o[campo]), chip(e, ('obra-' + o['id']) if e == 'pendiente' else None)))
+        cuerpo = []
+        for f in cu.get(o['id']) or []:
+            et = esc(f['et']) + (' (%s)' % f['anio'] if f.get('anio') and f['e'] in ('oficial', 'derivado') else '')
+            txt = ''
+            if f['e'] == 'pendiente':
+                txt += '<b>Por qué falta:</b> ' + esc(f['resp']) + ' '
+            elif f.get('op'):
+                txt += esc(f['op']) + ' '
+            if f.get('nota'):
+                txt += esc(f['nota']) + ' '
+            monto = _v(f) if f['e'] in ('oficial', 'derivado') else ('sin cifra' if f['e'] == 'pendiente' else '—')
+            cuerpo.append('<tr><th scope="row">%s<small class="mp-op">%s%s</small></th><td class="mp-num%s">%s</td><td>%s</td></tr>'
+                          % (et, txt, _fuentes_fila(f), _signo(f.get('v', 0)), monto, _estado(f, o['id'])))
+        fichas.append(
+            '<article class="mp-cta" id="cuenta-%s" aria-labelledby="cuenta-%s-t">'
+            '<h3 class="mp-cta-tit" id="cuenta-%s-t"><span aria-hidden="true">%s</span> %s <small>%s · %s</small></h3>'
+            '<dl class="mp-cta-base">%s</dl>'
+            '<div class="mp-marco"><table class="mp-tabla"><caption class="sr-only">La cuenta de %s</caption>'
+            '<thead><tr><th scope="col">Concepto</th><th scope="col">Monto</th><th scope="col">Estado</th></tr></thead>'
+            '<tbody>%s</tbody></table></div>'
+            '<p class="mp-cta-pie"><a href="herramienta-megaobras-sector.html#obra-%s">Ficha completa de la obra, por sector</a></p></article>'
+            % (o['id'], o['id'], o['id'], o['icono'], esc(o['nombre']), esc(o['presidente']), esc(o['periodo_sexenal']),
+               ''.join(base), esc(o['nombre']), ''.join(cuerpo) or '<tr><td colspan="3">Sin renglones.</td></tr>', o['id']))
+
+    indice = ''.join('<li><a href="#cuenta-%s"><span aria-hidden="true">%s</span> %s</a></li>'
+                     % (o['id'], o['icono'], esc(o['nombre'].split(' (')[0])) for o in sm['obras'])
+    return (CUENTA_INTRO + '    ' + resumen + '\n    <nav class="mp-cta-indice" aria-label="Ir a una obra"><ol>' + indice +
+            '</ol></nav>\n    ' + '\n    '.join(fichas) + '\n  </section>')
+
+# Las partes del pulso, cada una en su pagina (pedido del autor,
+# 17-10-2026; la quinta, la cuenta de cada obra, el mismo dia): la pagina de la aplicacion queda con el contador y cuatro
 # tarjetas; cada tarjeta abre herramienta-megaobras-pulso-<slug>.html.
 PAGINA = 'herramienta-megaobras-pulso.html'
 PARTES = [
@@ -380,7 +542,10 @@ PARTES = [
      '{per_v} de pérdida y apoyo documentados'),
     ('composicion', '🧩', 'De qué está hecho el total', 'De qué está hecho el costo real',
      'Cuánto del costo real tiene documento oficial y cuánto sigue pendiente, y las {n} obras ordenadas por costo, sobrecosto, pesos de más o pérdida.',
-     '{pend_pct}% del costo sigue pendiente de documento'),
+     '{compo_cif}'),
+    ('cuenta', '📒', 'La cuenta de cada obra', 'La cuenta de cada obra',
+     'Lo que se esperaba de cada obra y lo que dio: presupuesto, ingresos esperados y reales, gasto de operación, intereses y ganancia o pérdida del año.',
+     '{res_txt} de resultado documentado al año'),
     ('calculo', '🔎', 'Cómo se calcula', 'Cómo se calcula lo que ves',
      'Las reglas de cada suma, división y cadencia, qué cifras tienen documento y las fuentes oficiales de donde salen.',
      'Las operaciones y sus fuentes, paso a paso'),
@@ -404,7 +569,7 @@ def _tarjetas(c):
             % (parte_archivo(slug), k, len(PARTES), ico, esc(nombre), esc(desc.format(**c)),
                ' mp-num' if '{' in cifra else '', cifra.format(**c)))
     return ('  <nav class="mp-partes" aria-labelledby="mpPartesTit">\n'
-            '    <h2 class="mp-tit" id="mpPartesTit"><span aria-hidden="true">🗂️</span> Las cuatro partes del pulso</h2>\n'
+            '    <h2 class="mp-tit" id="mpPartesTit"><span aria-hidden="true">🗂️</span> Las partes del pulso</h2>\n'
             '    <ol class="mp-tarjetas">\n%s\n    </ol>\n  </nav>' % '\n'.join(filas))
 
 
@@ -414,7 +579,7 @@ def _subnav(actual):
         % (' actual' if slug == actual else '', parte_archivo(slug), ' aria-current="page"' if slug == actual else '',
            ico, k, esc(nombre))
         for k, (slug, ico, nombre, *_r) in enumerate(PARTES, 1))
-    return ('  <nav class="mp-subnav" aria-label="Las cuatro partes del pulso">\n'
+    return ('  <nav class="mp-subnav" aria-label="Las partes del pulso">\n'
             '    <a class="mp-subnav-volver" href="%s"><span aria-hidden="true">←</span> Volver al pulso y su contador</a>\n'
             '    <div class="mp-subnav-chips">%s</div>\n  </nav>' % (PAGINA, chips))
 
@@ -426,13 +591,13 @@ def construir(base, ref):
 
 
 def subpaginas(base, ref):
-    """Las cuatro partes, para apartados.insp_subpaginas(): cada una con su
+    """Las partes, para apartados.insp_subpaginas(): cada una con su
     seccion, la navegacion entre partes y los datos que usa mo-pulso.js."""
     c = _contexto(base, ref)
     out = []
     for slug, ico, nombre, tit, desc, _cif in PARTES:
         bloque = '\n\n'.join(['<div class="mp mp-parte" id="mpRaiz">', _subnav(slug),
-                               SECCIONES[slug].format(**c), _subnav(slug).replace('class="mp-subnav" aria-label="Las cuatro partes del pulso"', 'class="mp-subnav mp-subnav-pie" aria-label="Sigue con otra parte del pulso"', 1),
+                               SECCIONES[slug].format(**c), _subnav(slug).replace('class="mp-subnav" aria-label="Las partes del pulso"', 'class="mp-subnav mp-subnav-pie" aria-label="Sigue con otra parte del pulso"', 1),
                                DATOS.format(**c)]) + '\n</div>'
         out.append({'archivo': parte_archivo(slug), 'icono': ico, 'menu': nombre, 'titulo': tit,
                     'entrada': '<b>%s.</b> %s' % (esc(nombre), esc(desc.format(**c))), 'bloque': bloque})
