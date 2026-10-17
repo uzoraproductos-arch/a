@@ -16582,7 +16582,7 @@ window.AUDIT_DB = {
       "badge_color": "var(--gold-bright)",
       "inversion_presupuestada_mdp": 393.5,
       "inversion_real_mdp": 1304.9,
-      "sobrecosto_pct": 192.0,
+      "sobrecosto_pct": 231.6,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 14.6,
       "perdida_anual_mdp": 14.6,
@@ -16614,7 +16614,7 @@ window.AUDIT_DB = {
       "estado_campos": {
         "inversion_presupuestada_mdp": "oficial",
         "inversion_real_mdp": "oficial",
-        "sobrecosto_pct": "oficial"
+        "sobrecosto_pct": "derivado"
       }
     },
     {
@@ -16679,7 +16679,7 @@ window.AUDIT_DB = {
       "badge_color": "var(--crimson-bright)",
       "inversion_presupuestada_mdp": 3714.0,
       "inversion_real_mdp": 1127.6,
-      "sobrecosto_pct": 0,
+      "sobrecosto_pct": -69.6,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 0,
       "perdida_anual_mdp": 0,
