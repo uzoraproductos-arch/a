@@ -39,6 +39,7 @@ import re
 from decimal import Decimal, ROUND_HALF_UP
 
 from presupuesto_modulos import chip
+from mo_base import nota_base
 
 ESTILOS = ['mo-pulso.css']
 SCRIPTS = ['mo-pulso.js']
@@ -98,8 +99,11 @@ def perdidas(sm):
     for o in sm['obras']:
         d = ob.get(o['id'])
         if d and o['id'] == 'fobaproa':
-            out[o['id']] = {'v': d['ramo34_ejercido'], 'e': 'oficial', 'anio': d['anio'], 'tipo': 'ramo34',
-                            'f': vfu.get(d['fuente']) or vfu.get('cp')}
+            # Decision del autor (17-10-2026): lo que el rescate pierde antes
+            # del apoyo del presupuesto, no el Ramo 34 solo.
+            out[o['id']] = {'v': -d['resultado_sin_transferencias'], 'e': 'derivado', 'anio': d['anio'], 'tipo': 'rescate',
+                            'def': -d['deficit_ejercicio'], 'r34': d['ramo34_ejercido'],
+                            'f': fu.get(d['fuente_resultado'])}
         elif d:
             res = d['resultado_sin_transferencias']
             out[o['id']] = {'v': -res if res < 0 else 0, 'e': 'derivado', 'anio': d['anio'], 'tipo': 'empresa',
@@ -131,9 +135,17 @@ def _chip_obra(o, campo):
 def _contexto(base, ref):
     """Las cifras ya formadas que comparten la pagina y sus partes."""
     sm = base['simulador_megaobras']
-    obras = sm['obras']
+    # Decision del autor (17-10-2026): las cifras de conjunto miden las
+    # obras; los rescates (FOBAPROA y FARAC) son deudas asumidas y van
+    # aparte. La perdida anual si suma los expedientes con documento,
+    # rescate bancario incluido, y lo dice componente por componente.
+    todas = sm['obras']
+    obras = [o for o in todas if o.get('tipo') != 'rescate']
+    rescates = [o for o in todas if o.get('tipo') == 'rescate']
     perd = perdidas(sm)
     ag = agregados(obras, perd)
+    ag['anual'] = sum(perd[o['id']]['v'] for o in todas)
+    ag['seg'] = ag['anual'] * 1e6 / SEG_ANO
     per = sm['periodos']
     ver = sm.get('verificacion') or {}
     vfu = ver.get('fuentes') or {}
@@ -150,8 +162,8 @@ def _contexto(base, ref):
     comp = {e: sum(o['inversion_real_mdp'] for o in obras if _est(o, 'inversion_real_mdp') == e) for e in ESTADOS}
     comp_n = {e: sum(1 for o in obras if _est(o, 'inversion_real_mdp') == e) for e in ESTADOS}
 
-    documentadas = [o for o in obras if perd[o['id']]['e'] != 'pendiente']
-    pendientes_op = [o for o in obras if perd[o['id']]['e'] == 'pendiente']
+    documentadas = [o for o in todas if perd[o['id']]['e'] != 'pendiente']
+    pendientes_op = [o for o in todas if perd[o['id']]['e'] == 'pendiente']
     verificadas = [o['nombre'].split(' (')[0] for o in obras if o['id'] in vob]
     con_cifra = sum(1 for o in obras if _est(o, 'inversion_real_mdp') != 'pendiente')
 
@@ -160,9 +172,10 @@ def _contexto(base, ref):
     for o in documentadas:
         p = perd[o['id']]
         nombre = o['nombre'].split(' (')[0]
-        if p['tipo'] == 'ramo34':
-            et = 'Rescate bancario (FOBAPROA / IPAB): Ramo 34 ejercido en %d' % p['anio']
-            op = 'Apoyo presupuestal a ahorradores y deudores de la banca, tal como lo publica la Cuenta Pública. No es déficit de operación: es lo que el rescate le sigue costando al presupuesto cada año.'
+        if p['tipo'] == 'rescate':
+            et = 'Rescate bancario (FOBAPROA / IPAB): pérdida de %d antes del apoyo del presupuesto' % p['anio']
+            op = ('Déficit del Fondo FOBAPROA (%s) más las transferencias del Ramo 34 que recibió ese año (%s): lo que el '
+                  'rescate pierde antes de que el presupuesto lo cubra. Se cuenta aparte de las obras.' % (mdp(p['def']), mdp(p['r34'])))
         elif p['v'] > 0:
             et = '%s: déficit de operación %d' % (nombre, p['anio'])
             op = 'Ingresos por sus servicios (%s) menos gasto total (%s), de su estado de actividades: %s antes de transferencias.' % (
@@ -230,11 +243,8 @@ def _contexto(base, ref):
     sobre_txt = ('+' if ag['sobre'] > 0 else '') + format(ag['sobre'], '.1f') + '%'
 
     # Ya no quedan costos pendientes (17-10-2026): el aviso dice entonces lo
-    # que mas mueve el total, los rescates y las obras con rango.
-    rescates = [o for o in obras if o['sector_id'] == 'rescates']
-    ag_sin = agregados([o for o in obras if o['sector_id'] != 'rescates'], perd)
+    # que mas mueve el total: las obras con rango.
     con_rango = [o for o in obras if 'inversion_real_mdp' in (o.get('rangos_campos') or {})]
-    res_real = sum(o['inversion_real_mdp'] for o in rescates)
     if comp['pendiente'] > 0:
         aviso = ('<b>Ojo:</b> %s%% del costo real del conjunto (%s) son cifras que siguen <b>pendientes</b> de documento %s. '
                  'La suma se puede hacer, pero no se puede afirmar como dato auditado: <a href="%s">mira de qué está hecha</a> '
@@ -242,16 +252,36 @@ def _contexto(base, ref):
                                                      chip('pendiente'), parte_archivo('composicion')))
         compo_cif = '%s%% del costo sigue pendiente de documento' % format(comp['pendiente'] / ag['real'] * 100, '.1f')
     else:
-        aviso = ('<b>Ojo:</b> las %d obras ya tienen su costo con documento, oficial o derivado de cifras oficiales. Dos cosas '
-                 'mueven el total. Los rescates bancario y carretero (%s) son el %s%% del costo real (%s): sin ellos, las %d obras '
-                 'costaron %s frente a %s aprobados, un sobrecosto de %s%% %s. Y %s %s su costo como rango: en la suma entra su '
-                 'punto medio. <a href="%s">Mira la cuenta de cada obra</a>.'
-                 % (ag['n'], esc(' y '.join(o['nombre'].split(' (')[0] for o in rescates)),
-                    format(res_real / ag['real'] * 100, '.1f'), sim_mdp(res_real), ag_sin['n'], sim_mdp(ag_sin['real']),
-                    sim_mdp(ag_sin['presu']), ('+' if ag_sin['sobre'] > 0 else '') + format(ag_sin['sobre'], '.1f'), chip('derivado'),
-                    esc(', '.join(o['nombre'].split(' (')[0] for o in con_rango)), 'tiene' if len(con_rango) == 1 else 'tienen',
-                    parte_archivo('cuenta')))
+        aviso = ('<b>Ojo:</b> las %d obras ya tienen su costo con documento, oficial o derivado de cifras oficiales. %s %s su '
+                 'costo como rango: en la suma entra su punto medio. <a href="%s">Mira la cuenta de cada obra</a>.'
+                 % (ag['n'], esc(', '.join(o['nombre'].split(' (')[0] for o in con_rango)),
+                    'tiene' if len(con_rango) == 1 else 'tienen', parte_archivo('cuenta')))
         compo_cif = '%d de %d obras con costo documentado' % (ag['n'] - comp_n['pendiente'], ag['n'])
+
+    # ---- Los rescates, aparte ----
+    ag_r = agregados(rescates, perd)
+    resc_filas = ''.join(
+        '<tr><th scope="row"><span aria-hidden="true">%s</span> %s <small class="mp-op">%s: %s frente a %s. %s</small></th>'
+        '<td class="mp-num">%s</td><td>%s</td></tr>'
+        % (o['icono'], esc(o['nombre']), esc(o.get('sobrecosto_etiqueta') or 'Crecimiento'),
+           ('+' if o['sobrecosto_pct'] > 0 else '') + format(o['sobrecosto_pct'], '.1f') + ' %', sim_mdp(o['inversion_presupuestada_mdp']),
+           esc(o['presidente'] + ', ' + o['periodo_sexenal']), mdp(o['inversion_real_mdp']), _chip_obra(o, 'inversion_real_mdp'))
+        for o in rescates)
+    rescates_html = (
+        '<div class="mp-rescates">'
+        '<h3 class="mp-sub"><span aria-hidden="true">🏦</span> Aparte: los %d rescates</h3>'
+        '<p class="mp-txt">%s no son obras: son deudas que el Estado asumió para salvar a bancos y a concesionarios de '
+        'autopistas. Lo que han costado mezcla pagos de décadas con lo que todavía se debe, en pesos de años distintos, así '
+        'que su crecimiento no se compara con el sobrecosto de una obra y no entra en las cuatro cifras de arriba. Juntos '
+        'comprometen <b class="mp-num">%s</b> %s frente a %s que se presentaron en su momento. Lo que el rescate bancario '
+        'pierde cada año sí entra en el contador, porque se sigue pagando hoy.</p>'
+        '<div class="mp-marco"><table class="mp-tabla"><caption class="sr-only">Los rescates, aparte de las obras</caption>'
+        '<thead><tr><th scope="col">Rescate</th><th scope="col">Pagado y debido</th><th scope="col">Estado</th></tr></thead>'
+        '<tbody>%s</tbody></table></div>'
+        '<p class="mp-unidades">Las %d obras y los %d rescates juntos sumarían %s. <a href="%s">La cuenta de cada rescate</a> '
+        'dice de qué está hecha cada cifra.</p></div>'
+        % (len(rescates), esc(' y '.join(o['nombre'].split(' (')[0] for o in rescates)), sim_mdp(ag_r['real']), chip('derivado'),
+           sim_mdp(ag_r['presu']), resc_filas, ag['n'], len(rescates), sim_mdp(ag['real'] + ag_r['real']), parte_archivo('cuenta')))
 
     return dict(
         n=ag['n'], n_doc=ag_doc_real['n'],
@@ -270,7 +300,9 @@ def _contexto(base, ref):
         f_cp=_fuente(vfu.get('cp')), f_opa=_fuente(vfu.get('opa')),
         f_tm=_fuente((sm['operacion_oficial']['fuentes']).get('ef_h0m')),
         f_ai=_fuente((sm['operacion_oficial']['fuentes']).get('ef_hzi')),
+        f_ipab=_fuente((sm['operacion_oficial']['fuentes']).get('ipab_ef25')),
         r_asf=ref('ref-asf-cp'), datos=_json(datos), aviso=aviso, compo_cif=compo_cif,
+        rescates_html=rescates_html, n_resc=len(rescates), n_tot=len(todas), resc_real=sim_mdp(ag_r['real']),
         rangos_lista=esc('; '.join('%s (%s)' % (o['nombre'].split(' (')[0], ', '.join(
             {'inversion_presupuestada_mdp': 'presupuesto', 'inversion_real_mdp': 'costo', 'sobrecosto_pct': 'sobrecosto'}[k]
             for k in o['rangos_campos'])) for o in obras if o.get('rangos_campos'))),
@@ -280,11 +312,11 @@ def _contexto(base, ref):
 ARRANQUE = '''  <section class="mp-arranque" aria-labelledby="mpArrTit">
     <p class="mp-kicker">Inversión y Megaobras · aplicación 1</p>
     <h2 class="mp-grande" id="mpArrTit">📊 El pulso del gasto</h2>
-    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 1988 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Abajo están las cinco partes del pulso: cada tarjeta abre su propia página con el desglose completo.</p>
+    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 2000 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Los {n_resc} rescates (bancario y carretero) se cuentan aparte, porque son deudas asumidas y no obras. Abajo están las cinco partes del pulso: cada tarjeta abre su propia página con el desglose completo.</p>
     <div class="mp-pantalla" id="mpPantalla">
       <p class="mp-vivo-et"><span class="mp-punto" aria-hidden="true"></span> Desde que abriste esta página, al ritmo documentado</p>
       <p class="mp-vivo-num mp-num"><b id="mpVivo" aria-live="off">+$0.00</b></p>
-      <p class="mp-vivo-sub">A <b class="mp-num">${seg_txt}</b> por segundo: la pérdida y el apoyo anual documentados ({anual}) entre los 31,536,000 segundos de un año de 365 días {chip_der}. No mide un gasto que ocurra en este instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</p>
+      <p class="mp-vivo-sub">A <b class="mp-num">${seg_txt}</b> por segundo: la pérdida anual documentada de las obras y del rescate bancario ({anual}) entre los 31,536,000 segundos de un año de 365 días {chip_der}. No mide un gasto que ocurra en este instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</p>
       <div class="mp-ctl">
         <button type="button" class="mp-boton mp-claro" id="mpPausa" aria-pressed="false"><span aria-hidden="true">⏸️</span> <span>Pausar</span></button>
         <button type="button" class="mp-boton mp-claro" id="mpCero"><span aria-hidden="true">↺</span> Volver a cero</button>
@@ -306,13 +338,13 @@ SECCIONES = {
       <article class="mp-kpi">
         <p class="mp-kpi-et"><span aria-hidden="true">🏗️</span> Costo real erogado</p>
         <p class="mp-kpi-v mp-num" id="mpKReal">{real}</p>
-        <p class="mp-kpi-sub"><span id="mpKRealSub">Suma de las {n} inversiones evaluadas entre 1988 y 2024</span> {chip_der} {r_asf}</p>
+        <p class="mp-kpi-sub"><span id="mpKRealSub">Suma de las {n} obras evaluadas entre 2000 y 2024, sin los rescates</span> {chip_der} {r_asf}</p>
         <p class="mp-kpi-mdp mp-num" id="mpKRealMdp">{real_mdp}</p>
       </article>
       <article class="mp-kpi mp-kpi-alerta">
-        <p class="mp-kpi-et"><span class="mp-punto" aria-hidden="true"></span> Pérdida y apoyo anual <span id="mpKPerEt">({per_label})</span></p>
+        <p class="mp-kpi-et"><span class="mp-punto" aria-hidden="true"></span> Pérdida anual <span id="mpKPerEt">({per_label})</span></p>
         <p class="mp-kpi-v mp-num" id="mpKPer">{per_v}</p>
-        <p class="mp-kpi-sub">Déficit de operación documentado y Ramo 34 del rescate bancario: {n_op} de {n} obras con documento {chip_der}. Las otras {n_pend} no tienen documento de su operación {chip_pend}</p>
+        <p class="mp-kpi-sub">Déficit de operación documentado de las obras y pérdida del rescate bancario antes del apoyo del presupuesto: {n_op} de {n_tot} expedientes con documento {chip_der}. Los otros {n_pend} no tienen documento de su operación {chip_pend}</p>
         <p class="mp-kpi-mdp mp-num" id="mpKPerMdp">{per_mdp}</p>
       </article>
       <article class="mp-kpi">
@@ -329,6 +361,7 @@ SECCIONES = {
       </article>
     </div>
     <p class="mp-aviso" id="mpAvisoPend">{aviso}</p>
+    {rescates_html}
   </section>''',
     'ritmo': '''  <section class="mp-sec" id="mpRitmo" aria-labelledby="mpRitTit">
     <h2 class="mp-tit" id="mpRitTit"><span aria-hidden="true">⏱️</span> Temporalidad de pérdidas y subsidios</h2>
@@ -339,7 +372,7 @@ SECCIONES = {
         <caption>De qué está hecha la cifra <span id="mpCompsEt">{per_suf}</span></caption>
         <thead><tr><th scope="col">Componente</th><th scope="col">Monto</th><th scope="col">Estado</th></tr></thead>
         <tbody>{comp_filas}
-          <tr class="mp-pend-fila"><th scope="row"><span aria-hidden="true">❔</span> Las otras {n_pend} obras <small class="mp-op">{pend_lista}. Ningún documento oficial cotejado dice cuánto cuesta operarlas ni cuánto ingresan: no se estiman y quedan fuera de la suma, lo que no quiere decir que cuesten cero. Qué falta y a quién le toca publicarlo está en el Registro de pendientes.</small></th>
+          <tr class="mp-pend-fila"><th scope="row"><span aria-hidden="true">❔</span> Los otros {n_pend} expedientes <small class="mp-op">{pend_lista}. Ningún documento oficial cotejado dice cuánto cuesta operarlas ni cuánto ingresan: no se estiman y quedan fuera de la suma, lo que no quiere decir que cuesten cero. Qué falta y a quién le toca publicarlo está en el Registro de pendientes.</small></th>
             <td class="mp-num">sin cifra</td><td>{chip_pend}</td></tr>
         </tbody>
         <tfoot><tr><th scope="row">Total documentado <small class="mp-op">Suma de los componentes de arriba × <span id="mpFactorTx">{factor_tx}</span></small></th><td class="mp-num" id="mpCompsTot">{per_v}</td><td>{chip_der}</td></tr></tfoot>
@@ -349,7 +382,7 @@ SECCIONES = {
   </section>''',
     'composicion': '''  <section class="mp-sec" id="mpCompo" aria-labelledby="mpCompTit">
     <h2 class="mp-tit" id="mpCompTit"><span aria-hidden="true">🧩</span> De qué está hecho el costo real</h2>
-    <p class="mp-txt">Los {real} del conjunto, según el estado de la cifra de cada obra. Una sola obra puede mover el total entero: compara la barra antes de concluir.</p>
+    <p class="mp-txt">Los {real} de las {n} obras, según el estado de la cifra de cada una. Los {n_resc} rescates ({resc_real}) van aparte: están en <a href="herramienta-megaobras-pulso-cifras.html">las cuatro cifras</a> y en <a href="herramienta-megaobras-pulso-cuenta.html">la cuenta de cada obra</a>. Una sola obra puede mover el total entero: compara la barra antes de concluir.</p>
     <div class="mp-comp" role="img" aria-label="Composición del costo real por estado de la cifra">{seg}</div>
     <ul class="mp-leyenda">{leyenda}</ul>
     <div class="mp-orden" role="group" aria-label="Ordenar las obras">
@@ -370,8 +403,9 @@ SECCIONES = {
     'calculo': '''  <section class="mp-sec mp-como" id="mpComo" aria-labelledby="mpComoTit">
     <h2 class="mp-tit" id="mpComoTit"><span aria-hidden="true">🔎</span> Cómo se calcula lo que ves</h2>
     <ul class="mp-lista">
-      <li><b>Los agregados se suman, no se escriben.</b> El costo real, lo aprobado, la brecha y la pérdida anual son la suma obra por obra de las {n} evaluadas {chip_der}.</li>
-      <li><b>La pérdida y el apoyo anual.</b> Tren Maya y AIFA, por sus estados de actividades de la Cuenta Pública {anio_op}: ingresos por sus servicios menos gasto total, antes de transferencias {chip_der}; si el resultado queda a favor, cuenta cero. El rescate bancario, por el Ramo 34 ejercido ese año {chip_of}. {n_pend} obras no tienen documento de su operación y no se estiman {chip_pend}.</li>
+      <li><b>Los agregados se suman, no se escriben.</b> El costo real, lo aprobado y la brecha son la suma obra por obra de las {n} obras evaluadas {chip_der}; la pérdida anual suma además el rescate bancario.</li>
+      <li><b>Los rescates, aparte.</b> El FOBAPROA y el FARAC son deudas que el Estado asumió, no obras: lo que han costado mezcla pagos de décadas con saldos de hoy, en pesos sin deflactar. Por eso no entran en el costo ni en el sobrecosto del conjunto; tienen su propio bloque, y su «sobrecosto» se llama crecimiento frente a lo que se presentó en su momento.</li>
+      <li><b>La pérdida anual.</b> Tren Maya y AIFA, por sus estados de actividades de la Cuenta Pública {anio_op}: ingresos por sus servicios menos gasto total, antes de transferencias {chip_der}; si el resultado queda a favor, cuenta cero. El rescate bancario, por lo que el Fondo FOBAPROA pierde antes del apoyo del presupuesto: su déficit de {anio_op} más las transferencias del Ramo 34 que recibió ese año, según los estados financieros dictaminados del IPAB {chip_der}. El Ramo 34 solo es el apoyo, no la pérdida. {n_pend} expedientes no tienen documento de su operación y no se estiman {chip_pend}.</li>
       <li><b>Las cadencias.</b> La cifra anual multiplicada por 1/365 (día), 1/12 (mes), 1/4 (trimestre) o 1/2 (semestre).</li>
       <li><b>La pérdida por segundo.</b> La cifra anual entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</li>
       <li><b>El sobrecosto del conjunto.</b> Compara la inversión real total contra la aprobada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>
@@ -380,7 +414,7 @@ SECCIONES = {
       <li><b>La cuenta de cada obra.</b> Ingresos esperados y reales, gasto de operación, intereses y ganancia o pérdida del año, renglón por renglón, con su operación y su documento: <a href="herramienta-megaobras-pulso-cuenta.html">La cuenta de cada obra</a>.</li>
       <li><b>Pendiente declarado.</b> Las cifras marcadas como pendientes no tienen todavía el documento oficial que las sustenta; se muestran como consolidación documental y no como dato auditado. Qué falta y a quién le toca publicarlo está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</li>
     </ul>
-    <p class="mp-fuentes">Fuentes: {f_cp}; {f_tm}; {f_ai}; {f_opa}; y la ASF {r_asf}.</p>
+    <p class="mp-fuentes">Fuentes: {f_cp}; {f_tm}; {f_ai}; {f_ipab}; {f_opa}; y la ASF {r_asf}.</p>
   </section>''',
 }
 
@@ -496,7 +530,8 @@ def _cuenta_html(sm):
         ec = o.get('estado_campos') or {}
         base = []
         for campo, et, fmt in (('inversion_presupuestada_mdp', 'Presupuesto con el que se mide', mdp),
-                               ('inversion_real_mdp', 'Costo real', mdp), ('sobrecosto_pct', 'Sobrecosto', pct)):
+                               ('inversion_real_mdp', 'Costo real', mdp),
+                               ('sobrecosto_pct', o.get('sobrecosto_etiqueta') or 'Sobrecosto', pct)):
             e = ec.get(campo) or 'pendiente'
             base.append('<div><dt>%s</dt><dd><span class="mp-num">%s %s</span> %s</dd></div>'
                         % (et, _rango_txt(o, campo, fmt), fmt(o[campo]), chip(e, ('obra-' + o['id']) if e == 'pendiente' else None)))
@@ -516,13 +551,13 @@ def _cuenta_html(sm):
         fichas.append(
             '<article class="mp-cta" id="cuenta-%s" aria-labelledby="cuenta-%s-t">'
             '<h3 class="mp-cta-tit" id="cuenta-%s-t"><span aria-hidden="true">%s</span> %s <small>%s · %s</small></h3>'
-            '<dl class="mp-cta-base">%s</dl>'
+            '<dl class="mp-cta-base">%s</dl>%s'
             '<div class="mp-marco"><table class="mp-tabla"><caption class="sr-only">La cuenta de %s</caption>'
             '<thead><tr><th scope="col">Concepto</th><th scope="col">Monto</th><th scope="col">Estado</th></tr></thead>'
             '<tbody>%s</tbody></table></div>'
             '<p class="mp-cta-pie"><a href="herramienta-megaobras-sector.html#obra-%s">Ficha completa de la obra, por sector</a></p></article>'
             % (o['id'], o['id'], o['id'], o['icono'], esc(o['nombre']), esc(o['presidente']), esc(o['periodo_sexenal']),
-               ''.join(base), esc(o['nombre']), ''.join(cuerpo) or '<tr><td colspan="3">Sin renglones.</td></tr>', o['id']))
+               ''.join(base), nota_base(o, cu.get(o['id']), 'mp-base'), esc(o['nombre']), ''.join(cuerpo) or '<tr><td colspan="3">Sin renglones.</td></tr>', o['id']))
 
     indice = ''.join('<li><a href="#cuenta-%s"><span aria-hidden="true">%s</span> %s</a></li>'
                      % (o['id'], o['icono'], esc(o['nombre'].split(' (')[0])) for o in sm['obras'])

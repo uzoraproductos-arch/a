@@ -88,7 +88,7 @@
     $('mpKBrecha').textContent = simMdp(m.brecha);
     $('mpKBrechaMdp').textContent = mdp(m.brecha);
     if (modo === 'todo') {
-      $('mpKRealSub').textContent = 'Suma de las ' + m.n + ' inversiones evaluadas entre 1988 y 2024';
+      $('mpKRealSub').textContent = 'Suma de las ' + m.n + ' obras evaluadas entre 2000 y 2024, sin los rescates';
       $('mpKSobreSub').textContent = simMdp(m.presu) + ' aprobados frente a ' + simMdp(m.real) + ' erogados';
       $('mpKBrechaSub').textContent = 'Erogado menos aprobado, sumando las ' + m.n + ' obras';
       $('mpModoTx').innerHTML = 'Miden <b>siempre el universo completo</b> de las obras evaluadas: es la cifra contra la que se lee todo lo demás. Con «Solo con documento» dejas fuera las cifras que siguen pendientes.';

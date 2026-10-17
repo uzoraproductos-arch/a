@@ -74,7 +74,9 @@ def megaobras(base):
     """Replica de megaobrasOficialBase() del motor: en el auditor el reloj
     de las megaobras deja de ser la suma sin documento (pendiente) y pasa a
     ser lo documentado: el deficit antes de transferencias de las empresas
-    con estado de actividades oficial mas el Ramo 34 ejercido para el IPAB.
+    con estado de actividades oficial mas lo que el Fondo FOBAPROA pierde
+    antes del apoyo del presupuesto (deficit + Ramo 34 que recibio; decision
+    del autor, 17-10-2026: el Ramo 34 solo es el apoyo, no la perdida).
     Las obras sin documento no entran, no se suponen cero en el texto y
     conservan su ficha del Registro (reloj-megaobras)."""
     sm = base.get('simulador_megaobras') or {}
@@ -86,10 +88,11 @@ def megaobras(base):
     total = len(sm.get('obras') or [])
     vfu = ((sm.get('verificacion') or {}).get('fuentes') or {})
     empresas, partes, urls = 0.0, [], []
-    ramo34 = 0.0
+    fobaproa, fb = 0.0, {}
     for oid, d in ob.items():
         if oid == 'fobaproa':
-            ramo34 = d.get('ramo34_ejercido') or 0
+            fb = d
+            fobaproa = -d['resultado_sin_transferencias']
             continue
         res = d.get('resultado_sin_transferencias')
         perd = -res if isinstance(res, (int, float)) and res < 0 else 0
@@ -98,20 +101,22 @@ def megaobras(base):
         f = (of.get('fuentes') or {}).get(d.get('fuente')) or {}
         if f.get('url'):
             urls.append(f['url'])
-    anual = round(empresas + ramo34, 1)
+    anual = round(empresas + fobaproa, 1)
     doc = len(ob)
     cp = vfu.get('cp') or {}
     return {
-        'nombre': 'Pérdida anual documentada de las megaobras y apoyo del Ramo 34',
+        'nombre': 'Pérdida anual documentada de las megaobras y del rescate bancario',
         'anual': anual, 'estado': 'derivado',
-        'fuente': ('Estados de actividades de 2024 en la Cuenta Pública (Tomo VII) y Ramo 34 ejercido en 2024 (Cuenta Pública 2024). '
-                   'Cubre %d de las %d obras.' % (doc, total)),
+        'fuente': ('Estados de actividades de 2024 en la Cuenta Pública (Tomo VII) y estados financieros dictaminados del IPAB '
+                   '(Fondo FOBAPROA, 2024). Cubre %d de los %d expedientes.' % (doc, total)),
         'url': cp.get('url') or (urls[0] if urls else ''),
         'op': ('Déficit antes de transferencias de las empresas con estado de actividades oficial (%s; suma $%s mdp) '
-               'más el Ramo 34 ejercido para el rescate bancario del IPAB ($%s mdp).'
-               % ('; '.join(partes), format(empresas, ',.1f'), format(ramo34, ',.1f'))),
-        'que': ('Lo que cuesta cada año mantener andando obras que ingresan menos de lo que gastan, más lo que el presupuesto '
-                'sigue pagando por el rescate bancario. No es el sobrecosto de construirlas: es el déficit de tenerlas abiertas.'),
+               'más lo que el Fondo FOBAPROA pierde antes del apoyo del presupuesto: déficit de 2024 ($%s mdp) más el Ramo 34 '
+               'que recibió ese año ($%s mdp) = $%s mdp.'
+               % ('; '.join(partes), format(empresas, ',.1f'), format(-fb.get('deficit_ejercicio', 0), ',.1f'),
+                  format(fb.get('ramo34_ejercido', 0), ',.1f'), format(fobaproa, ',.1f'))),
+        'que': ('Lo que cuesta cada año mantener andando obras que ingresan menos de lo que gastan, más lo que el rescate '
+                'bancario pierde cada año antes de que el presupuesto lo cubra. No es el sobrecosto de construirlas: es el déficit de tenerlas abiertas.'),
         'pend': 'reloj-megaobras',
         'motivo': ('Las otras %d obras no entran en este reloj: no hay un estado de actividades oficial de su operación, '
                    'y las dependencias que las operan (Sedena, Pemex, Fonatur) no han transparentado obra por obra su costo '
@@ -165,7 +170,8 @@ def construir(base, ref):
     sob = dict(cc['relojes']['sobrecosto_acumulado'])
     if smT:
         sob['mdp'] = _r((smT['inversion_total_mdp'] - smT['inversion_presupuestada_total_mdp']) * 10) / 10
-    n_obras = len(sim.get('obras') or [])
+    # El sobrecosto mide las obras; los rescates van aparte (17-10-2026).
+    n_obras = (smT or {}).get('obras_evaluadas') or len(sim.get('obras') or [])
     nombres = {o['id']: o['nombre'] for o in sim.get('obras') or []}
     obras_pend = [(oid, nombres.get(oid, oid)) for oid, o in ((sim.get('verificacion') or {}).get('obras') or {}).items()
                   if any(v == 'pendiente' and k in ('inversion_presupuestada_mdp', 'inversion_real_mdp')

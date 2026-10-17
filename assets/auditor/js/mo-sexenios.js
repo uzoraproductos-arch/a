@@ -54,9 +54,10 @@
     });
   }
   function resumen(xs) {
-    var r = { n: xs.length, real: 0, doc: 0, ndoc: 0, pen: 0, npen: 0, pend: [], nom: [], top: null };
+    var r = { n: xs.length, real: 0, doc: 0, ndoc: 0, pen: 0, npen: 0, pend: [], nom: [], top: null, resc: 0, nresc: 0 };
     xs.forEach(function (o) {
       r.real += o.real;
+      if (o.r) { r.resc += o.real; r.nresc++; }
       if (o.e === 'pendiente') { r.pen += o.real; r.npen++; r.pend.push('obra-' + o.id); r.nom.push(o.n); }
       else { r.doc += o.real; r.ndoc++; }
       if (!r.top || o.real > r.top.real) r.top = o;
@@ -73,6 +74,10 @@
         ? '<div><span>Con documento ' + chip('derivado') + '</span><b>' + simMdp(r.doc) + '</b><small>Suma de ' + r.ndoc + ' ' +
           plural(r.ndoc, 'obra', 'obras') + ' con costo oficial o derivado.</small></div>'
         : '<div><span>Con documento</span><b>—</b><small>Ninguna obra de este periodo tiene su costo total en un documento oficial.</small></div>');
+    if (r.nresc) {
+      h += '<div><span>De ese costo, ' + (r.nresc === 1 ? 'el rescate' : 'los ' + r.nresc + ' rescates') + ' ' + chip('derivado') + '</span><b>' + simMdp(r.resc) +
+        '</b><small>Son deudas que el Estado asumió, no obras: en las cifras de conjunto de Megaobras se cuentan aparte.</small></div>';
+    }
     if (r.npen) {
       h += '<div class="mx-r-pen"><span>Sin documento ' + chip('pendiente', r.pend[0]) + '</span><b>' + simMdp(r.pen) + '</b><small>' +
         esc(r.nom.join(', ')) + ': su costo total no tiene documento oficial todavía. Toca la etiqueta para ver por qué falta y a quién le toca publicarlo.</small></div>';

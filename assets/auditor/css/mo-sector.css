@@ -224,3 +224,6 @@
   .ms-punto, .ms-destaca { animation: none; }
   .ms-barra { transition: none; }
 }
+
+/* Con que presupuesto se mide (decision del autor, 17-10-2026) */
+.ms-base > p { margin: 0; padding: 0 14px 10px; font-size: 16px; line-height: 1.55; color: var(--ms-tinta); }

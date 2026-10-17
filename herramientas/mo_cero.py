@@ -38,7 +38,8 @@ ESTILOS = ['mo-cero.css']
 SCRIPTS = ['mo-cero.js']
 
 # Los mismos de SIM_SEXENIOS del motor: el filtro compara el apellido con
-# el campo «presidente» de cada obra (FARAC aparece con Salinas y Zedillo).
+# el campo «presidente» de cada obra (desde el 17-10-2026 el FARAC va solo con
+# Zedillo, que hizo el rescate en 1997).
 SEXENIOS = [('Salinas', 'Carlos Salinas'), ('Zedillo', 'Ernesto Zedillo'), ('Fox', 'Vicente Fox'),
             ('Calderón', 'Felipe Calderón'), ('Peña Nieto', 'Enrique Peña'), ('López Obrador', 'López Obrador')]
 
@@ -97,14 +98,17 @@ def obras(base):
         ver = (vf.get('obras') or {}).get(o['id']) or {}
         x = {'id': o['id'], 'n': o['nombre'], 'ico': o['icono'], 's': o['sector_id'], 'p': o['presidente'],
              'per': o['periodo_sexenal'], 'presu': o['inversion_presupuestada_mdp'], 'real': o['inversion_real_mdp'],
-             'sob': o['sobrecosto_pct'], 'ec': dict(o.get('estado_campos') or {}),
+             'sob': o['sobrecosto_pct'], 'ec': dict(o.get('estado_campos') or {}), 'resc': o.get('tipo') == 'rescate',
              'defs': ver.get('definiciones') or {}, 'clave': ver.get('clave') or '',
              'fu': [{'d': (vfu.get(k) or cvf.get(k))['doc'], 'u': (vfu.get(k) or cvf.get(k))['url']}
                     for k in ver.get('fuentes') or [] if (vfu.get(k) or cvf.get(k))]}
         if d and o['id'] == 'fobaproa':
-            f = vfu.get('cp') or {}
-            x.update(ing=None, costo=d['ramo34_ejercido'], perd=d['ramo34_ejercido'], pe='oficial', anio=d['anio'],
-                     op={'d': f.get('doc', ''), 'u': f.get('url', '')}, r34=True)
+            # Decision del autor (17-10-2026): lo que el rescate pierde antes
+            # del apoyo del presupuesto (deficit + Ramo 34 que recibio).
+            f = (of.get('fuentes') or {}).get(d['fuente_resultado']) or {}
+            x.update(ing=None, costo=-d['resultado_sin_transferencias'], perd=-d['resultado_sin_transferencias'], pe='derivado',
+                     anio=d['anio'], deficit=-d['deficit_ejercicio'], r34=d['ramo34_ejercido'],
+                     op={'d': f.get('doc', ''), 'u': f.get('url', '')})
         elif d:
             res = d['resultado_sin_transferencias']
             f = (of.get('fuentes') or {}).get(d['fuente']) or {}
@@ -185,7 +189,7 @@ def mesa2_filas(lista):
             perd = chip('pendiente', PEND_PERDIDA)
         else:
             ing = 'no aplica' if o['ing'] is None else '%s %s' % (fnum(o['ing']), chip('oficial'))
-            costo = '%s %s' % (fnum(o['costo']), chip('oficial'))
+            costo = ('%s %s' % (fnum(o['costo']), chip('derivado'))) if o.get('r34') else '%s %s' % (fnum(o['costo']), chip('oficial'))
             perd = ('%s %s' % (fnum(o['perd']), chip(o['pe']))) if o['perd'] else ('0 <small>sin déficit</small> %s' % chip('derivado'))
         filas.append(
             '<tr class="mc-fila%s" data-i="%d" data-id="%s"><td class="mc-n" data-et="#">%d</td><td class="mc-nom">%s</td>'
@@ -214,7 +218,7 @@ def cadena(anual):
 def mesa3_filas(a, pad):
     bc = a['brecha'] * 1e6 / pad
     pc = a['anual'] * 1e6 / pad
-    return ('<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo aprobado <small>(saldo de 1988 a 2024)</small></td>'
+    return ('<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo aprobado <small>(saldo de 2000 a 2024)</small></td>'
             '<td class="mc-op" data-et="Operación">resultado de la mesa 1</td><td class="mc-num mc-acum" data-et="Resultado">%s</td></tr>\n'
             '<tr class="mc-fila mc-div" data-i="2"><td class="mc-n" data-et="Paso">2</td><td class="mc-nom">Entre cada contribuyente con RFC activo</td>'
             '<td class="mc-op" data-et="Operación">%s mdp × 1,000,000 ÷ %s</td><td class="mc-num mc-acum" data-et="Resultado">%s <small>por contribuyente</small></td></tr>\n'
@@ -256,13 +260,13 @@ def proc_verificadas(base):
     return ('De las %d obras, %d ya tienen documentos oficiales cotejados (%s) y %d tienen su costo anclado a un documento oficial '
             '(la cartera de Hacienda, la Cuenta Pública o un informe de la ASF). Cada cifra lleva su chip: oficial, derivado o pendiente. '
             'La pérdida anual ya tiene documento en %d obras (Tren Maya y AIFA por sus estados de actividades de la Cuenta Pública 2024; '
-            'el IPAB por el Ramo 34); en las demás, la pérdida, los costos de operación y el costo unitario siguen pendientes y no se estiman.'
+            'el rescate bancario por su déficit más el Ramo 34 que recibió, según el IPAB); en las demás, la pérdida, los costos de operación y el costo unitario siguen pendientes y no se estiman.'
             % (len(sm['obras']), len(nombres), esc(', '.join(nombres)), con, doc))
 
 
 def sector_tabla(base, ref, lista):
     sm = base['simulador_megaobras']
-    tot = ag(lista)
+    tot = ag([o for o in lista if not o['resc']])
     grupos = []
     for s in sm['sectores']:
         if s['id'] == 'todos':
@@ -270,19 +274,21 @@ def sector_tabla(base, ref, lista):
         ob = sorted([o for o in lista if o['s'] == s['id']], key=lambda o: -(o['real'] - o['presu']))
         if ob:
             grupos.append((s, ob, ag(ob)))
-    grupos.sort(key=lambda g: -g[2]['real'])
+    # Los rescates van al final y fuera del total (decision del autor, 17-10-2026).
+    grupos.sort(key=lambda g: (g[1][0]['resc'], -g[2]['real']))
     cuerpos = []
     for s, ob, a in grupos:
-        cuota = a['real'] / tot['real'] * 100
+        aparte = ob[0]['resc']
+        cuota = 0 if aparte else a['real'] / tot['real'] * 100
         filas = ['<tr class="mc-sec-cab"><td class="mc-sec-nom" colspan="2"><span class="mc-ico" aria-hidden="true">%s</span>'
                  '<span class="mc-sec-t">%s</span><span class="mc-sec-n">%d %s</span>'
                  '<button type="button" class="mc-sec-ver" data-sector="%s">Ver sus cuentas ↑</button></td>'
                  '<td class="mc-num" data-et="Aprobado (mdp)">%s</td><td class="mc-num" data-et="Erogado (mdp)">%s</td>'
                  '<td class="mc-num mc-dif" data-et="Diferencia">+%s</td><td class="mc-num" data-et="Sobrecosto">+%s%%</td>'
-                 '<td class="mc-num mc-cuota" data-et="%% del total"><span class="mc-barra" aria-hidden="true"><i style="width:%s%%"></i></span>%s%%</td></tr>'
+                 '<td class="mc-num mc-cuota" data-et="%% del total"><span class="mc-barra" aria-hidden="true"><i style="width:%s%%"></i></span>%s</td></tr>'
                  % (s['icono'], esc(s['nombre']), len(ob), 'obra' if len(ob) == 1 else 'obras', esc(s['id']),
                     fnum(a['presu']), fnum(a['real']), fnum(a['brecha']), format(a['sob'], '.1f'),
-                    format(cuota, '.1f'), format(cuota, '.1f'))]
+                    format(cuota, '.1f'), 'aparte, fuera del total' if aparte else format(cuota, '.1f') + '%')]
         for o in ob:
             dif = o['real'] - o['presu']
             filas.append(
@@ -290,20 +296,20 @@ def sector_tabla(base, ref, lista):
                 '<span class="mc-meta">%s · %s</span></td>'
                 '<td class="mc-num" data-et="Aprobado (mdp)">%s %s</td><td class="mc-num" data-et="Erogado (mdp)">%s %s</td>'
                 '<td class="mc-num mc-dif" data-et="Diferencia">%s%s</td><td class="mc-num" data-et="Sobrecosto">%s%s%% %s</td>'
-                '<td class="mc-num mc-cuota" data-et="%% del total">%s%%</td></tr>'
+                '<td class="mc-num mc-cuota" data-et="%% del total">%s</td></tr>'
                 % (esc(o['id']), o['ico'], _nom(o, 'inv').replace('<span class="mc-ico" aria-hidden="true">%s</span>' % o['ico'], ''),
                    esc(o['p']), esc(o['per']),
                    fnum(o['presu']), _ch(o, 'inversion_presupuestada_mdp'), fnum(o['real']), _ch(o, 'inversion_real_mdp'),
                    '+' if dif > 0 else '', fnum(dif), '+' if o['sob'] > 0 else '', fnum(o['sob']), _ch(o, 'sobrecosto_pct'),
-                   format(o['real'] / tot['real'] * 100, '.1f')))
+                   '—' if o['resc'] else format(o['real'] / tot['real'] * 100, '.1f') + '%'))
         cuerpos.append('<tbody class="mc-sec-grupo">%s</tbody>' % ''.join(filas))
     return ('<table class="mc-t mc-t-sec"><caption class="sr-only">Las %d obras por sector, en millones de pesos</caption>'
             '<thead><tr><th colspan="2" scope="col">Sector y obra %s</th><th scope="col">Aprobado (mdp)</th><th scope="col">Erogado (mdp)</th>'
             '<th scope="col">Diferencia %s</th><th scope="col">Sobrecosto</th><th scope="col">%% del total %s</th></tr></thead>%s'
-            '<tfoot><tr><td colspan="2" class="mc-nom">Total de las %d obras evaluadas</td><td class="mc-num" data-et="Aprobado (mdp)">%s</td>'
+            '<tfoot><tr><td colspan="2" class="mc-nom">Total de las %d obras evaluadas, sin los rescates</td><td class="mc-num" data-et="Aprobado (mdp)">%s</td>'
             '<td class="mc-num" data-et="Erogado (mdp)">%s</td><td class="mc-num mc-dif" data-et="Diferencia">+%s</td>'
             '<td class="mc-num" data-et="Sobrecosto">+%s%%</td><td class="mc-num" data-et="%% del total">100%%</td></tr></tfoot></table>'
-            % (tot['n'], ref('ref-asf-cp'), chip('derivado'), chip('derivado'), ''.join(cuerpos), tot['n'], fnum(tot['presu']),
+            % (len(lista), ref('ref-asf-cp'), chip('derivado'), chip('derivado'), ''.join(cuerpos), tot['n'], fnum(tot['presu']),
                fnum(tot['real']), fnum(tot['brecha']), format(tot['sob'], '.1f')))
 
 
@@ -317,7 +323,13 @@ def construir(base, ref):
     sm = base['simulador_megaobras']
     lista = obras(base)
     vista = _orden(lista, ORDENES[0][0])
+    # La mesa 1 (costo y sobrecosto) mide las obras; los rescates van aparte
+    # salvo que se elija su industria. La mesa 2 (perdida de un año) si
+    # suma el rescate bancario, como el contador del pulso.
+    vista1 = [o for o in vista if not o['resc']]
     a = ag(vista)
+    a1 = ag(vista1)
+    a3 = dict(a, brecha=a1['brecha'])
     padron = base['calculadora_civica']['parametros']['padron']
     pad = padron['personas']
     t = sm.get('totales_consolidados') or {}
@@ -351,7 +363,7 @@ def construir(base, ref):
   <section class="mc-arranque" aria-labelledby="mcArrTit">
     <p class="mc-kicker">Inversión y Megaobras · las cuentas</p>
     <h2 class="mc-grande" id="mcArrTit">Ninguna cifra se escribe a mano: síguela con el dedo, de cero al resultado.</h2>
-    <p class="mc-txt">Tres mesas de cálculo arrancan en cero y avanzan renglón por renglón: cómo se acumuló el sobrecosto de <b>{n} megaobras</b>, cómo se arma la pérdida de un año y cuánto le toca a cada contribuyente. Pulsa cualquier obra para ver de qué documento sale cada número.</p>
+    <p class="mc-txt">Tres mesas de cálculo arrancan en cero y avanzan renglón por renglón: cómo se acumuló el sobrecosto de <b>{n_obras} megaobras</b> (los {n_resc} rescates van aparte), cómo se arma la pérdida de un año y cuánto le toca a cada contribuyente. Pulsa cualquier obra para ver de qué documento sale cada número.</p>
     <div class="mc-cifras">
       <div class="mc-cifra"><span>Pesos de más sobre lo aprobado</span><b id="mcK1">{k1}</b>{d}</div>
       <div class="mc-cifra"><span>Pérdida operativa documentada de un año</span><b id="mcK2">{k2}</b>{d}</div>
@@ -377,12 +389,12 @@ def construir(base, ref):
       <button type="button" class="mc-chipb" id="mcTodas" aria-pressed="true">Todas las cifras, como el inventario</button>
       <button type="button" class="mc-chipb" id="mcSolo" aria-pressed="false">Solo lo documentado</button>
     </div>
-    <p class="mc-cuenta" id="mcCuenta" aria-live="polite">Entran las {n} obras.</p>
+    <p class="mc-cuenta" id="mcCuenta" aria-live="polite">Entran las {n} obras. Los rescates entran solo en la mesa 2, la pérdida de un año.</p>
   </section>
 
   <article class="mc-mesa" id="mcMesa1" data-mesa="1" aria-labelledby="mcM1Tit">
     <h2 class="mc-tit" id="mcM1Tit"><span class="mc-num-c">1</span> De lo aprobado a lo erogado</h2>
-    <p class="mc-txt">Cada renglón suma su diferencia (erogado menos aprobado) a la columna acumulada. La última celda de esa columna es el sobrecosto del conjunto, en millones de pesos.</p>
+    <p class="mc-txt">Cada renglón suma su diferencia (erogado menos aprobado) a la columna acumulada. La última celda de esa columna es el sobrecosto del conjunto, en millones de pesos. Los rescates (FOBAPROA y FARAC) no entran en esta mesa: son deudas asumidas, no obras, y su crecimiento no se compara con un sobrecosto. Para verlos, elige la industria «Rescates».</p>
     {ctrl1}
     <div class="mc-marco"><table class="mc-t" id="mcT1"><caption class="sr-only">Mesa 1: de lo aprobado a lo erogado, en millones de pesos</caption>
       <thead><tr><th scope="col">#</th><th scope="col">Obra</th><th scope="col">Aprobado (mdp)</th><th scope="col">Erogado (mdp)</th><th scope="col">Diferencia {d}</th><th scope="col">Acumulado {d}</th></tr></thead>
@@ -395,7 +407,7 @@ def construir(base, ref):
 
   <article class="mc-mesa" id="mcMesa2" data-mesa="2" aria-labelledby="mcM2Tit">
     <h2 class="mc-tit" id="mcM2Tit"><span class="mc-num-c">2</span> Cómo se arma la pérdida operativa de un año</h2>
-    <p class="mc-txt">La pérdida de cada obra es lo que su operación cuesta menos lo que su operación ingresa. Las que operaron sin déficit entran con cero. Las que no tienen documento dicen «pendiente» y tampoco entran: el total es solo lo documentado. Tren Maya y AIFA salen de sus estados de actividades de la Cuenta Pública 2024 (ingresos por sus servicios contra gasto total, sin transferencias federales ni otros ingresos); el IPAB, de lo que ejerció el Ramo 34 ese año.</p>
+    <p class="mc-txt">La pérdida de cada obra es lo que su operación cuesta menos lo que su operación ingresa. Las que operaron sin déficit entran con cero. Las que no tienen documento dicen «pendiente» y tampoco entran: el total es solo lo documentado. Tren Maya y AIFA salen de sus estados de actividades de la Cuenta Pública 2024 (ingresos por sus servicios contra gasto total, sin transferencias federales ni otros ingresos); el rescate bancario, de lo que el Fondo FOBAPROA pierde antes del apoyo del presupuesto: su déficit de 2024 más el Ramo 34 que recibió (IPAB, estados financieros dictaminados).</p>
     {ctrl2}
     <div class="mc-marco"><table class="mc-t" id="mcT2"><caption class="sr-only">Mesa 2: la pérdida operativa de un año, en millones de pesos</caption>
       <thead><tr><th scope="col">#</th><th scope="col">Obra</th><th scope="col">Ingresos del año (mdp)</th><th scope="col">Costo de operar (mdp)</th><th scope="col">Pérdida anual</th><th scope="col">Acumulado {d}</th></tr></thead>
@@ -410,12 +422,12 @@ def construir(base, ref):
       <b class="mc-vivo-v" id="mcVivo" aria-live="off">$0</b>
       <button type="button" class="mc-b" id="mcVivoB" aria-pressed="false"><span aria-hidden="true">⏸</span> Pausar</button>
     </div>
-    <p class="mc-cierre">No es un gasto que ocurra en este instante: es el ritmo anual proyectado sobre el tiempo que llevas mirando. Los ingresos y el costo de operación salen de los estados de actividades de Tren Maya, S.A. de C.V. y del AIFA, S.A. de C.V. (Cuenta Pública 2024, tomo VII) y del Ramo 34 ejercido en 2024 (Cuenta Pública); pulsa cada obra para ver su documento.</p>
+    <p class="mc-cierre">No es un gasto que ocurra en este instante: es el ritmo anual proyectado sobre el tiempo que llevas mirando. Los ingresos y el costo de operación salen de los estados de actividades de Tren Maya, S.A. de C.V. y del AIFA, S.A. de C.V. (Cuenta Pública 2024, tomo VII) y de los estados financieros dictaminados del IPAB (Fondo FOBAPROA, 2024); pulsa cada obra para ver su documento.</p>
   </article>
 
   <article class="mc-mesa mc-mesa-puente" id="mcMesa3" data-mesa="3" aria-labelledby="mcM3Tit">
     <h2 class="mc-tit" id="mcM3Tit"><span class="mc-num-c">3</span> De la cifra agregada a tu bolsillo</h2>
-    <p class="mc-txt">Un billón de pesos no se siente. Dividido entre quienes tienen obligaciones con el SAT, sí. Las dos magnitudes se dividen por separado: el sobrecosto es un saldo que se acumuló de 1988 a 2024 y la pérdida es un flujo de un año; sumarlas mezclaría tiempos distintos.</p>
+    <p class="mc-txt">Un billón de pesos no se siente. Dividido entre quienes tienen obligaciones con el SAT, sí. Las dos magnitudes se dividen por separado: el sobrecosto es un saldo que se acumuló de 2000 a 2024 y la pérdida es un flujo de un año; sumarlas mezclaría tiempos distintos.</p>
     {ctrl3}
     <div class="mc-marco"><table class="mc-t mc-t-puente" id="mcT3"><caption class="sr-only">Mesa 3: de la cifra agregada a cada contribuyente</caption>
       <thead><tr><th scope="col">Paso</th><th scope="col">Concepto</th><th scope="col">Operación</th><th scope="col">Resultado {d}</th></tr></thead>
@@ -429,12 +441,12 @@ def construir(base, ref):
 
   <section class="mc-inventario" id="mcInventario" aria-labelledby="mcInvTit">
     <h2 class="mc-tit" id="mcInvTit"><span aria-hidden="true">🧾</span> Todo el dinero, obra por obra y dividido por sector</h2>
-    <p class="mc-txt">Las {n} inversiones evaluadas, completas y sin recortar por ningún filtro. Pulsa una obra para ver de dónde sale cada cifra, o «Ver sus cuentas» para llevar ese sector a las tres mesas.</p>
+    <p class="mc-txt">Las {n_obras} obras evaluadas y, al final y fuera del total, los {n_resc} rescates, sin recortar por ningún filtro. Pulsa una obra para ver de dónde sale cada cifra, o «Ver sus cuentas» para llevar ese sector a las tres mesas.</p>
     <p class="mc-unidades"><strong>Unidades.</strong> Las columnas están en <strong>millones de pesos</strong> (mdp). Mil millones son 1,000 mdp; un billón de pesos son 1,000,000 mdp. Las cifras son nominales del año de cada erogación, sin deflactar.</p>
     <div class="mc-ctrl"><button type="button" class="mc-b mc-b-csv" data-csv="inv"><span aria-hidden="true">⬇</span> Descarga el inventario (CSV)</button></div>
     <p class="mc-explica" id="mcExpinv" aria-live="polite"></p>
     <div class="mc-marco">{sector}</div>
-    <p class="mc-aviso"><strong>De dónde salen estas cifras y qué falta.</strong> {verif} Mientras las demás no tengan documento, esta tabla se lee como inventario, no como dictamen. El universo son {n} obras emblemáticas de 1988 a 2024; no pretende ser el catálogo completo de la inversión pública del periodo.</p>
+    <p class="mc-aviso"><strong>De dónde salen estas cifras y qué falta.</strong> {verif} Mientras las demás no tengan documento, esta tabla se lee como inventario, no como dictamen. El universo son {n_obras} obras emblemáticas de 2000 a 2024 y {n_resc} rescates del sexenio de Ernesto Zedillo; no pretende ser el catálogo completo de la inversión pública del periodo.</p>
   </section>
 
   <section class="mc-proc" id="mcProcedencia" aria-labelledby="mcProcTit">
@@ -450,20 +462,20 @@ def construir(base, ref):
   </section>
   <script type="application/json" id="mcDatos">{datos}</script>
 </div>'''.format(
-        n=len(lista), k1=smdp(a['brecha']), k2=smdp(a['anual']), doc=sum(1 for o in lista if o['pe'] != 'pendiente'),
+        n=len(lista), n_obras=len(vista1), n_resc=len(lista) - len(vista1), k1=smdp(a1['brecha']), k2=smdp(a['anual']), doc=sum(1 for o in lista if o['pe'] != 'pendiente'),
         d=chip('derivado'), o=chip('oficial'), filtros=filtros,
         ctrl1=ctrl(1), ctrl2=ctrl(2), ctrl3=ctrl(3), cero1=cero1, cero2=cero2,
-        f1=mesa1_filas(vista), f2=mesa2_filas(vista), f3=mesa3_filas(a, pad),
-        sg='+' if a['brecha'] > 0 else '', presu=fnum(a['presu']), real=fnum(a['real']), brecha=fnum(a['brecha']), c1=mesa1_cierre(vista),
+        f1=mesa1_filas(vista1), f2=mesa2_filas(vista), f3=mesa3_filas(a3, pad),
+        sg='+' if a1['brecha'] > 0 else '', presu=fnum(a1['presu']), real=fnum(a1['real']), brecha=fnum(a1['brecha']), c1=mesa1_cierre(vista1),
         anual=fnum(_rnd(a['anual'] * 10) / 10), cad=cadena(a['anual']), seg=format(_rnd(a['seg'], 2), ',.2f'),
         padn=fnum(pad), corte=esc(padron['corte']), ofi=chip(padron.get('estado', 'oficial')), padu=esc(padron['url']), padd=esc(padron['fuente']),
-        bolsillo=bolsillo(a, pad), sector=sector_tabla(base, ref, lista), verif=proc_verificadas(base),
+        bolsillo=bolsillo(a3, pad), sector=sector_tabla(base, ref, lista), verif=proc_verificadas(base),
         nota=esc(t.get('nota_totales', '')), pend=chip('pendiente', 'reloj-megaobras'), datos=_json(datos))
 
 
 def bolsillo(a, pad):
     return ('<div class="mc-bol"><span class="mc-bol-et">Sobrecosto histórico por contribuyente</span><b class="mc-bol-v">%s</b>'
-            '<span class="mc-bol-sub">acumulado de 1988 a 2024 (inversión de capital en exceso) %s</span></div>'
+            '<span class="mc-bol-sub">acumulado de 2000 a 2024 (inversión de capital en exceso) %s</span></div>'
             '<div class="mc-bol mc-bol-alto"><span class="mc-bol-et">Conciliación temporal de cuentas</span><b class="mc-bol-v">No se suman</b>'
             '<span class="mc-bol-sub">un sobrecosto de varias décadas no se suma a un flujo de un año</span></div>'
             '<div class="mc-bol"><span class="mc-bol-et">Pérdida operativa anual por contribuyente</span><b class="mc-bol-v">%s</b>'

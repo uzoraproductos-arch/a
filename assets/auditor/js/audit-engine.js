@@ -5572,7 +5572,7 @@
       n: 2, icono: '🏗️', titulo: 'Inversión &amp; Megaobras',
       subtitulo: 'Lo que se prometió, lo que se pagó y la diferencia',
       texto: 'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
-      nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué a veces verás 13 obras y a veces 14' },
+      nota: { fn: 'abrirNotaConteoObras', txt: 'Por qué los rescates van aparte y el FARAC con Zedillo' },
       temas: [['📊 1 · El pulso del gasto', 'pulso'], ['🏭 2 · Sector e industria', 'sector'], ['🏛️ 3 · Las obras de cada sexenio', 'sexenios'], ['🧮 4 · De cero al resultado', 'cero']]
     },
     calculadora: {
@@ -8571,12 +8571,19 @@
       const ESTATUS = { 'megafarmacia': 'En operación · cifras pendientes', 'estela-luz': 'Monumento concluido', 'bunker-garcia-luna': 'Uso actual pendiente de documento' };
       if (ESTATUS[o.id]) o.estatus = ESTATUS[o.id];
       if (d && o.id === 'fobaproa') {
+        /* Decisión del autor (17-10-2026): la pérdida del rescate es lo que
+           el Fondo FOBAPROA pierde antes del apoyo del presupuesto (su
+           déficit más el Ramo 34 que recibió), no el Ramo 34 solo. */
+        const perdFb = -d.resultado_sin_transferencias;
         o.ingresos_anuales_mdp = 0;
-        o.costo_operativo_anual_mdp = d.ramo34_ejercido;
-        o.perdida_anual_mdp = d.ramo34_ejercido;
-        o.estado_campos.perdida_anual_mdp = 'oficial';
+        o.costo_operativo_anual_mdp = perdFb;
+        o.perdida_anual_mdp = perdFb;
+        o.estado_campos.perdida_anual_mdp = 'derivado';
         o.estado_campos.desglose = 'oficial';
-        o.desglose_costos_operacion = [{ rubro: 'Ramo 34, apoyo a ahorradores y deudores de la banca, ejercido en ' + d.anio, monto_anual_mdp: d.ramo34_ejercido, icono: '🏛️' }];
+        o.desglose_titulo = 'De qué está hecha su pérdida de ' + d.anio + ', antes del apoyo del presupuesto';
+        o.desglose_costos_operacion = [
+          { rubro: 'Déficit del Fondo FOBAPROA en ' + d.anio + ', después de las transferencias (IPAB, estados financieros dictaminados)', monto_anual_mdp: -d.deficit_ejercicio, icono: '📉' },
+          { rubro: 'Ramo 34 que recibió ese año, apoyo a ahorradores y deudores de la banca', monto_anual_mdp: d.ramo34_ejercido, icono: '🏛️' }];
         o.proy_titulo = 'Lo que dicen los documentos: una deuda que sigue viva';
         o.proyeccion_resumen = 'Al 31 de diciembre de 2025 el IPAB debía ' + mdp(d.saldo_bonos_2025) + ' en bonos (' + mdp(d.saldo_bonos_corto) + ' a corto plazo y ' + mdp(d.saldo_bonos_largo) +
           ' a largo), según sus estados financieros. Del Ramo 34 salieron ' + mdp(d.ramo34_ejercido) + ' en ' + d.anio + ' y ' + mdp(d.ramo34_2014_2025) +
@@ -8642,12 +8649,12 @@
     const t = sm.totales_consolidados;
     const obrasOp = sm.obras.filter(o => !o.perdida_pendiente);
     const perdidaEmpresas = obrasOp.reduce((a, o) => a + (o.id !== 'fobaproa' ? (o.perdida_anual_mdp || 0) : 0), 0);
-    const ramo34Apoyo = (sm.obras.find(o => o.id === 'fobaproa') || {}).perdida_anual_mdp || 62489.4;
+    const perdidaRescate = (sm.obras.find(o => o.id === 'fobaproa') || {}).perdida_anual_mdp || 0;
     t.perdida_operativa_empresas_mdp = Math.round(perdidaEmpresas * 10) / 10;
-    t.apoyo_presupuestal_fobaproa_ramo34_mdp = Math.round(ramo34Apoyo * 10) / 10;
+    t.perdida_fobaproa_sin_transferencias_mdp = Math.round(perdidaRescate * 10) / 10;
     t.cobertura_obras = { documentadas: obrasOp.length, total: sm.obras.length, pct: Math.round(obrasOp.length / sm.obras.length * 1000) / 10 };
     t.obras_con_operacion_documentada = obrasOp.length;
-    const anual = perdidaEmpresas + ramo34Apoyo;
+    const anual = perdidaEmpresas + perdidaRescate;
     t.perdida_anual_consolidada_mdp = Math.round(anual * 10) / 10;
     t.perdida_diaria_consolidada_mdp = Math.round(anual / 365 * 100) / 100;
     t.perdida_segundo_consolidada = Math.round(anual * 1e6 / 31536000 * 100) / 100;
@@ -8657,13 +8664,13 @@
     if (rm) {
       rm.anual_mdp = t.perdida_anual_consolidada_mdp;
       rm.estado = 'derivado';
-      rm.nombre = 'Pérdida anual documentada de las megaobras y apoyo Ramo 34';
+      rm.nombre = 'Pérdida anual documentada de las megaobras y del rescate bancario';
       /* Las cifras salen del calculo de arriba, no de un texto fijo (13-10-2026):
          el texto decia $2,194.4 mdp y la suma con los datos vigentes da otra. */
       const f1 = n => n.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
       const pend = sm.obras.length - obrasOp.length;
-      rm.fuente = 'Suma de ' + t.obras_con_operacion_documentada + ' de ' + sm.obras.length + ' obras con documento oficial (cobertura ' + t.cobertura_obras.pct + '%): pérdida de operación de las empresas públicas con estado de actividades ($' + f1(t.perdida_operativa_empresas_mdp) + ' mdp, Cuenta Pública 2024; el AIFA no registra déficit) y apoyo presupuestal del Ramo 34 al IPAB ($' + f1(t.apoyo_presupuestal_fobaproa_ramo34_mdp) + ' mdp). ' + pend + ' obras pendientes declaradas explícitamente.';
-      rm.que = 'Desglose: $' + f1(t.perdida_operativa_empresas_mdp) + ' mdp de pérdida de operación de empresas públicas más $' + f1(t.apoyo_presupuestal_fobaproa_ramo34_mdp) + ' mdp de apoyo presupuestal del Ramo 34 al rescate bancario (es apoyo, no déficit de una obra). Las ' + pend + ' obras sin estados de actividades se mantienen en estado pendiente y no se asumen como cero.';
+      rm.fuente = 'Suma de ' + t.obras_con_operacion_documentada + ' de ' + sm.obras.length + ' expedientes con documento oficial (cobertura ' + t.cobertura_obras.pct + '%): pérdida de operación de las empresas públicas con estado de actividades ($' + f1(t.perdida_operativa_empresas_mdp) + ' mdp, Cuenta Pública 2024; el AIFA no registra déficit) y lo que el Fondo FOBAPROA pierde antes del apoyo del presupuesto ($' + f1(t.perdida_fobaproa_sin_transferencias_mdp) + ' mdp: su déficit de 2024 más el Ramo 34 que recibió, según los estados financieros dictaminados del IPAB). ' + pend + ' expedientes pendientes declarados explícitamente.';
+      rm.que = 'Desglose: $' + f1(t.perdida_operativa_empresas_mdp) + ' mdp de pérdida de operación de empresas públicas más $' + f1(t.perdida_fobaproa_sin_transferencias_mdp) + ' mdp que pierde el rescate bancario antes de que el presupuesto lo cubra (el Ramo 34 solo es el apoyo, no la pérdida). Los ' + pend + ' expedientes sin estados de actividades se mantienen en estado pendiente y no se asumen como cero.';
     }
     /* Reloj de la ASF (13-10-2026): la base traia 46,122.0 mdp como suma de
        las 32 entidades, pero la suma de estados[].asfMontoObservado da otra.
@@ -8804,7 +8811,7 @@
         var p = o.perdida_anual_mdp || 0;
         return radarFila(glosEsc(o.nombre), o.perdida_pendiente ? chipEstado('pendiente') : radarMdp(p),
           o.perdida_pendiente ? 'Pendiente: quien la opera no ha transparentado cuánto pierde; no entra en la suma.' :
-          (p ? (o.id === 'fobaproa' && esAuditor() ? 'Ramo 34 ejercido en 2024 (Cuenta Pública)' : 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0))
+          (p ? (o.id === 'fobaproa' && esAuditor() ? 'Déficit del Fondo FOBAPROA 2024 más el Ramo 34 que recibió (IPAB)' : 'Operar: ' + radarMdp(o.costo_operativo_anual_mdp || 0) + ' − ingresos: ' + radarMdp(o.ingresos_anuales_mdp || 0))
              : (esAuditor() && o.fuente_operacion ? 'Sin pérdida de operación en 2024: sus ingresos por servicios cubren su gasto.' : 'Sin costo de operación anual registrado en el simulador.')),
           p / mayor * 100);
       }).join('');
@@ -9071,8 +9078,8 @@
       '</header>' +
       '<div class="glos-drawer-cuerpo">' +
         '<span class="glos-drawer-cat">🏗️ Inversión &amp; Megaobras</span>' +
-        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Por qué a veces verás 13 obras y a veces 14</h3>' +
-        '<p class="pres-lema">No es un error de suma: es una obra que pertenece a dos sexenios a la vez.</p>' +
+        '<h3 id="glosDrawerTitulo" class="glos-drawer-tit">Por qué los rescates van aparte y el FARAC con Zedillo</h3>' +
+        '<p class="pres-lema">Trece expedientes: once obras y dos rescates. Cada uno se cuenta una sola vez.</p>' +
       '</div>' +
       '<footer class="glos-drawer-pie">' +
         '<button type="button" class="glos-drawer-todo" data-ir="sexenios">🏛️ Ver el reparto por administración ➔</button>' +
@@ -20201,10 +20208,15 @@
   }
 
   function simAgregados(obras) {
-    const sum = f => obras.reduce((a, o) => a + (Number(o[f]) || 0), 0);
-    const real = sum('inversion_real_mdp');
-    const presu = sum('inversion_presupuestada_mdp');
-    const anual = sum('perdida_anual_mdp');
+    /* Costo, aprobado y sobrecosto miden las obras: los rescates (FOBAPROA y
+       FARAC) son deudas asumidas y van aparte, salvo que el filtro solo tenga
+       rescates. La perdida anual si los suma (decision del autor, 17-10-2026). */
+    const soloObras = obras.filter(o => o.tipo !== 'rescate');
+    const base = soloObras.length ? soloObras : obras;
+    const sum = (l, f) => l.reduce((a, o) => a + (Number(o[f]) || 0), 0);
+    const real = sum(base, 'inversion_real_mdp');
+    const presu = sum(base, 'inversion_presupuestada_mdp');
+    const anual = sum(obras, 'perdida_anual_mdp');
     return {
       n: obras.length,
       real: real,
@@ -21712,7 +21724,7 @@
     const brechaContrib = ag.brecha * 1000000 / personas;
     const perdidaContrib = ag.perdidaAnual * 1000000 / personas;
     const pasos = [
-      { et: 'Pesos pagados de más sobre lo aprobado (1988 a 2024)', op: 'resultado de la mesa 1 ÷ ' + padron, v: simMdp(ag.brecha), r: brechaContrib },
+      { et: 'Pesos pagados de más sobre lo aprobado (2000 a 2024, sin los rescates)', op: 'resultado de la mesa 1 ÷ ' + padron, v: simMdp(ag.brecha), r: brechaContrib },
       { et: 'Pérdida operativa de un año', op: 'resultado de la mesa 2 ÷ ' + padron, v: simMdp(ag.perdidaAnual), r: perdidaContrib }
     ];
 

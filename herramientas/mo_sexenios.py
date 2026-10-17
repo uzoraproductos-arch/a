@@ -7,7 +7,9 @@ Lo que hacia el motor (renderSimuladorSexenioLinea, simSexEvaluar y
 simSexReiniciar de audit-engine.js) se conserva entero: las seis torres de
 1988 a 2024, el numero de obras y el costo de cada periodo, el boton que
 las levanta desde cero y el que las regresa a ceros, el filtro por
-industria y la nota del FARAC (13 obras, 14 en el reparto por mandato).
+industria y la nota de metodo. Desde el 17-10-2026 (decision del autor) el
+FARAC se cuenta solo con Zedillo, que hizo el rescate en 1997, y los
+rescates se distinguen de las obras en el resumen de cada sexenio.
 Se agrega: cada sexenio con su ficha y su ancla (#sexenio-<id>), las obras
 de cada uno con sus tres cifras y su chip, la medida por costo ademas de
 por numero de obras, y la comparacion de dos sexenios (#comparar-<a>-<b>).
@@ -124,11 +126,15 @@ def _ficha_obra(base, o, sectores, sx_clave, compartida):
     filas = []
     for campo, et in CAMPOS:
         e, txt, pend, d = _cifra(o, campo, v)
+        if campo == 'sobrecosto_pct' and o.get('sobrecosto_etiqueta'):
+            et = esc(o['sobrecosto_etiqueta'])
         filas.append('<div class="mx-c"><dt>%s</dt><dd><b>%s</b> %s</dd>%s</div>'
                      % (et, esc(txt), chip(e, pend),
                         ('<dd class="mx-c-def">%s</dd>' % esc(d)) if d else ''))
     otro = ''
-    if compartida:
+    if o.get('antecedente'):
+        otro = '<p class="mx-dos"><span aria-hidden="true">🕰️</span> <b>Antecedente.</b> %s</p>' % esc(o['antecedente'])
+    elif compartida:
         otros = [s[2] for s in SEXENIOS if s[1] != sx_clave and s[1].lower() in o['presidente'].lower()]
         otro = ('<p class="mx-dos"><span aria-hidden="true">↔️</span> Esta obra también aparece en el sexenio de <b>%s</b>: '
                 'el registro la consigna como «%s». Su costo se cuenta una sola vez en el total de las 13 obras.</p>'
@@ -155,12 +161,14 @@ def _ficha_obra(base, o, sectores, sx_clave, compartida):
 def _resumen(obras):
     """Totales de un conjunto de obras. Todo es suma: derivado."""
     real = sum(o['inversion_real_mdp'] for o in obras)
+    resc = [o for o in obras if o.get('tipo') == 'rescate']
     doc = [o for o in obras if _estado(o, 'inversion_real_mdp') != 'pendiente']
     pen = [o for o in obras if _estado(o, 'inversion_real_mdp') == 'pendiente']
     return {'n': len(obras), 'real': real,
             'doc': sum(o['inversion_real_mdp'] for o in doc), 'ndoc': len(doc),
             'pen': sum(o['inversion_real_mdp'] for o in pen), 'npen': len(pen),
-            'pend': ['obra-' + o['id'] for o in pen]}
+            'pend': ['obra-' + o['id'] for o in pen],
+            'resc': sum(o['inversion_real_mdp'] for o in resc), 'nresc': len(resc)}
 
 
 def res_html(r, nombres):
@@ -178,6 +186,10 @@ def res_html(r, nombres):
               % (chip('derivado'), sim_mdp(r['doc']), r['ndoc'], 'obra' if r['ndoc'] == 1 else 'obras'))
     else:
         h += '<div><span>Con documento</span><b>—</b><small>Ninguna obra de este periodo tiene su costo total en un documento oficial.</small></div>'
+    if r['nresc']:
+        h += ('<div><span>De ese costo, %s %s</span><b>%s</b><small>Son deudas que el Estado asumió, no obras: en las cifras de '
+              'conjunto de Megaobras se cuentan aparte.</small></div>'
+              % ('el rescate' if r['nresc'] == 1 else 'los %d rescates' % r['nresc'], chip('derivado'), sim_mdp(r['resc'])))
     if r['npen']:
         h += ('<div class="mx-r-pen"><span>Sin documento %s</span><b>%s</b><small>%s: su costo total no tiene documento oficial todavía. '
               'Toca la etiqueta para ver por qué falta y a quién le toca publicarlo.</small></div>'
@@ -244,27 +256,20 @@ def construir(base, ref):
         'sx': [{'k': k, 'clave': clave, 'nom': nom, 'noml': nom_l, 'ini': ini, 'fin': fin, 'color': color}
                for k, clave, nom, nom_l, ini, fin, color in SEXENIOS],
         'obras': [{'id': o['id'], 'n': o['nombre'], 'i': o.get('icono', ''), 'sec': o['sector_id'], 'pres': o['presidente'],
-                   'real': o['inversion_real_mdp'], 'e': _estado(o, 'inversion_real_mdp')} for o in obras],
+                   'real': o['inversion_real_mdp'], 'e': _estado(o, 'inversion_real_mdp'), 'r': o.get('tipo') == 'rescate'} for o in obras],
         'sec': {sid: corto_sector(s['nombre']) for sid, s in sectores.items()},
     }
 
-    farac = compartidas[0] if compartidas else None
-    nota_farac = ''
-    if farac:
-        nota_farac = '''
+    farac = next((o for o in obras if o['id'] == 'farac-carretero'), None)
+    rescates = [o for o in obras if o.get('tipo') == 'rescate']
+    nota_farac = '''
   <details class="mx-nota" id="mxNota">
-    <summary><span aria-hidden="true">📖</span> Por qué a veces verás {n} obras y a veces {s}</summary>
-    <p class="mx-txt"><b>No es un error de suma: es una obra que pertenece a dos sexenios a la vez.</b> El universo de este módulo son <b>{n} megaobras</b>: {n} proyectos, {n} presupuestos, {n} costos. Cuando sumes dinero, siempre estarás sumando {n} veces. Pero al repartir las obras por mandato, las seis columnas suman <b>{s}</b> (suma de las seis columnas {chip_d}).</p>
-    <p class="mx-txt"><b>El caso FARAC.</b> Las concesiones carreteras se otorgaron durante el gobierno de <b>Carlos Salinas de Gortari</b>, y el rescate que las devolvió al Estado se ejecutó durante el de <b>Ernesto Zedillo</b>. El expediente no pertenece a un sexenio: <em>atraviesa</em> dos. Por eso el registro lo consigna literalmente como «{pres}», y al repartir las obras por mandato aparece en ambos.</p>
-    <p class="mx-txt"><b>Por qué lo dejamos así y no lo «arreglamos».</b> Había tres caminos, y ninguno es neutral:</p>
-    <ol class="mx-ol">
-      <li><b>Asignarlo solo a Salinas</b>, por ser quien concesionó. Borraría que el costo se reconoció y se pagó en el sexenio siguiente.</li>
-      <li><b>Asignarlo solo a Zedillo</b>, por ser quien rescató. Borraría el diseño que hizo necesario el rescate.</li>
-      <li><b>Contarlo en los dos</b>, y decirlo en voz alta. Es lo que hicimos.</li>
-    </ol>
-    <p class="mx-txt">Elegimos el tercero porque los dos primeros <em>esconden</em> la mitad de la historia para que un número quede redondo. Preferimos una cifra que necesita explicación a una cifra cómoda que miente por omisión.</p>
-    <p class="mx-regla"><b>La regla, en una línea:</b> el <b>dinero</b> se cuenta una sola vez, sobre las <b>{n}</b> obras; la <b>responsabilidad política</b> se cuenta donde ocurrió, y por eso en el reparto por mandato el FARAC aparece <b>dos veces</b>. Al comparar el costo de Salinas con el de Zedillo, recuerda que el del FARAC está en los dos.</p>
-  </details>'''.format(n=total_n, s=suma_reparto, pres=esc(farac['presidente']), chip_d=chip('derivado'))
+    <summary><span aria-hidden="true">📖</span> Por qué el FARAC se cuenta con Zedillo y los rescates van aparte</summary>
+    <p class="mx-txt"><b>Cada expediente se cuenta una sola vez.</b> El universo son <b>{n}</b> expedientes: {n_obras} obras y {n_resc} rescates. Al repartirlos por mandato, las seis columnas suman <b>{s}</b> (suma de las seis columnas {chip_d}).</p>
+    <p class="mx-txt"><b>El caso FARAC.</b> {antecedente} Hasta el 17 de octubre de 2026 aparecía con Salinas y con Zedillo, y el reparto por mandato sumaba una obra de más; desde entonces se asigna al sexenio que hizo y pagó el rescate.</p>
+    <p class="mx-txt"><b>Los rescates, aparte.</b> El FOBAPROA y el FARAC no son obras: son deudas que el Estado asumió. Lo que han costado mezcla pagos de décadas con lo que todavía se debe, así que su crecimiento no se compara con el sobrecosto de una obra. Por eso las cifras de conjunto de Megaobras (costo, aprobado y sobrecosto) miden las {n_obras} obras, y cada sexenio dice qué parte de su costo son rescates.</p>
+  </details>'''.format(n=total_n, s=suma_reparto, n_obras=total_n - len(rescates), n_resc=len(rescates),
+                         antecedente=esc(farac.get('antecedente') or '') if farac else '', chip_d=chip('derivado'))
 
     return '''<div class="mx" id="mxRaiz">
   <section class="mx-arranque" aria-labelledby="mxArrTit">
@@ -300,7 +305,7 @@ def construir(base, ref):
     </ol>
     <div class="mx-eje" aria-hidden="true"><span>1988</span><span class="mx-eje-riel"></span><span>2024</span></div>
     <p class="mx-pie-cif">Costo de cada periodo: suma del costo registrado de sus obras, en pesos de cada año, sin quitar la inflación. Es {chip_d} cuando todas sus obras tienen su costo en un documento oficial; si alguna lo tiene pendiente, el bloque dice «con pendiente» {chip_p} y la ficha del sexenio separa la parte con documento de la que falta.</p>
-    <p class="mx-ciego"><b>Punto ciego declarado.</b> El rescate carretero FARAC se contrató bajo Salinas y se asumió como deuda pública bajo Zedillo, así que aparece en ambos bloques. Por eso la suma de los seis periodos da {s} obras y no {n}: una misma obra tiene dos responsables, no medio responsable cada uno. <a href="#mxNota">Lee la nota de método</a>.</p>
+    <p class="mx-ciego"><b>Punto ciego declarado.</b> El sexenio de Zedillo carga los dos rescates, el bancario y el carretero, que son deudas asumidas y no obras: por eso su bloque es tan alto si mides por costo. Salinas queda sin obras evaluadas: las concesiones carreteras que fracasaron se otorgaron con él, pero se rescataron y se pagaron desde 1997. <a href="#mxNota">Lee la nota de método</a>.</p>
   </section>
 
   <section class="mx-bloque" id="mxFicha" aria-labelledby="mxFiTit">

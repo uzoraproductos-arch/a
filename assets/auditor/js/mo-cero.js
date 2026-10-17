@@ -139,7 +139,7 @@
   function filas3(a) {
     var pad = D.padron.n, bc = a.brecha * 1000000 / pad, pc = a.anual * 1000000 / pad;
     pasos[3] = [{ v: '$0' }, { v: smdp(a.brecha) }, { v: pesos(bc) }, { v: smdp(a.anual) }, { v: pesos(pc) }];
-    return '<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo aprobado <small>(saldo de 1988 a 2024)</small></td>' +
+    return '<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo aprobado <small>(saldo de 2000 a 2024)</small></td>' +
         '<td class="mc-op" data-et="Operación">resultado de la mesa 1</td><td class="mc-num mc-acum" data-et="Resultado">' + smdp(a.brecha) + '</td></tr>\n' +
       '<tr class="mc-fila mc-div" data-i="2"><td class="mc-n" data-et="Paso">2</td><td class="mc-nom">Entre cada contribuyente con RFC activo</td>' +
         '<td class="mc-op" data-et="Operación">' + fnum(Math.round(a.brecha * 10) / 10) + ' mdp × 1,000,000 ÷ ' + fnum(pad) + '</td><td class="mc-num mc-acum" data-et="Resultado">' + pesos(bc) + ' <small>por contribuyente</small></td></tr>\n' +
@@ -173,6 +173,12 @@
   function render() {
     vista = filtradas();
     A = ag(vista);
+    /* La mesa 1 mide las obras; los rescates van aparte salvo que se elija
+       su industria (decisión del autor, 17-10-2026). La mesa 2 sí suma el
+       rescate bancario, como el contador del pulso. */
+    var vista1 = est.sector === 'rescates' ? vista : vista.filter(function (o) { return !o.resc; });
+    var A1 = ag(vista1);
+    var A3 = { brecha: A1.brecha, anual: A.anual };
     var t1 = $('mcT1'), t2 = $('mcT2'), t3 = $('mcT3');
     var cero1 = t1.tBodies[0].rows[0] && t1.tBodies[0].rows[0].classList.contains('mc-cero') ? t1.tBodies[0].rows[0].outerHTML : '';
     var cero2 = t2.tBodies[0].rows[0] && t2.tBodies[0].rows[0].classList.contains('mc-cero') ? t2.tBodies[0].rows[0].outerHTML : '';
@@ -182,6 +188,7 @@
     var n = A.n;
     $('mcCuenta').textContent = n === 0 ? 'Ninguna obra cumple esa combinación: cambia la industria o el mandato.'
       : (n === D.obras.length ? 'Entran las ' + n + ' obras.' : 'Entran ' + n + ' de ' + D.obras.length + (n === 1 ? ' obra.' : ' obras.')) +
+        (est.sector !== 'rescates' && vista1.length < n ? ' Los rescates entran solo en la mesa 2, la pérdida de un año.' : '') +
         (est.solo ? ' Solo las que tienen documento en su presupuesto y en su costo; por eso también salen de la mesa 2 las obras cuyo costo de construcción no lo tiene, aunque su operación sí.' : '');
     if (n === 0) {
       [t1, t2, t3].forEach(function (t) { vacio(t, t === t3 ? 4 : 6, 'Sin obras en el filtro no hay cuenta que hacer. Elige otra combinación de industria y mandato.'); });
@@ -195,11 +202,12 @@
       return;
     }
     $('mcPie1').hidden = $('mcPie2').hidden = false;
-    t1.tBodies[0].innerHTML = c[0] + '\n' + filas1(vista);
-    $('mcPie1').innerHTML = '<tr><td></td><td class="mc-nom">Total del filtro</td><td class="mc-num" data-et="Aprobado (mdp)">' + fnum(A.presu) +
-      '</td><td class="mc-num" data-et="Erogado (mdp)">' + fnum(A.real) + '</td><td class="mc-num mc-dif" data-et="Diferencia">' + sg(A.brecha) + fnum(A.brecha) +
-      '</td><td class="mc-num mc-acum" data-et="Acumulado">' + fnum(A.brecha) + '</td></tr>';
-    $('mcCierre1').innerHTML = cierre1(vista, A);
+    t1.tBodies[0].innerHTML = c[0] + '\n' + filas1(vista1);
+    $('mcPie1').innerHTML = '<tr><td></td><td class="mc-nom">Total del filtro</td><td class="mc-num" data-et="Aprobado (mdp)">' + fnum(A1.presu) +
+      '</td><td class="mc-num" data-et="Erogado (mdp)">' + fnum(A1.real) + '</td><td class="mc-num mc-dif" data-et="Diferencia">' + sg(A1.brecha) + fnum(A1.brecha) +
+      '</td><td class="mc-num mc-acum" data-et="Acumulado">' + fnum(A1.brecha) + '</td></tr>';
+    $('mcCierre1').innerHTML = vista1.length ? cierre1(vista1, A1)
+      : 'En este filtro solo hay rescates, que no entran en esta mesa: son deudas asumidas, no obras. Elige la industria «Rescates» para ver su cuenta.';
     t2.tBodies[0].innerHTML = c[1] + '\n' + filas2(vista);
     var an = fnum(Math.round(A.anual * 10) / 10);
     $('mcPie2').innerHTML = '<tr><td></td><td class="mc-nom">Pérdida anual del filtro</td><td></td><td></td><td class="mc-num mc-dif" data-et="Pérdida anual">' + an +
@@ -210,11 +218,11 @@
         (v >= 1 ? smdp(v) : '$' + fnum(Math.round(v * 1000000)) + ' pesos') + '</span></li>';
     }).join('');
     $('mcSeg').textContent = '$' + A.seg.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    t3.tBodies[0].innerHTML = c[2] + '\n' + filas3(A);
+    t3.tBodies[0].innerHTML = c[2] + '\n' + filas3(A3);
     var pad = D.padron.n;
     $('mcBolsillo').innerHTML =
-      '<div class="mc-bol"><span class="mc-bol-et">Sobrecosto histórico por contribuyente</span><b class="mc-bol-v">' + pesos(A.brecha * 1000000 / pad) + '</b>' +
-        '<span class="mc-bol-sub">acumulado de 1988 a 2024 (inversión de capital en exceso) ' + chip('derivado') + '</span></div>' +
+      '<div class="mc-bol"><span class="mc-bol-et">Sobrecosto histórico por contribuyente</span><b class="mc-bol-v">' + pesos(A3.brecha * 1000000 / pad) + '</b>' +
+        '<span class="mc-bol-sub">acumulado de 2000 a 2024 (inversión de capital en exceso) ' + chip('derivado') + '</span></div>' +
       '<div class="mc-bol mc-bol-alto"><span class="mc-bol-et">Conciliación temporal de cuentas</span><b class="mc-bol-v">No se suman</b>' +
         '<span class="mc-bol-sub">un sobrecosto de varias décadas no se suma a un flujo de un año</span></div>' +
       '<div class="mc-bol"><span class="mc-bol-et">Pérdida operativa anual por contribuyente</span><b class="mc-bol-v">' + pesos(A.anual * 1000000 / pad) + '</b>' +
@@ -334,7 +342,8 @@
     var acum = ' El acumulado queda en <b>' + fnum(Math.round(p.acum * 10) / 10) + ' mdp</b>.';
     var doc = o.op && o.op.u ? ' Documento: <a href="' + esc(o.op.u) + '" target="_blank" rel="noopener noreferrer">' + esc(o.op.d) + ' ↗</a>.' : '';
     if (o.pe === 'pendiente') return chip('pendiente', 'reloj-megaobras') + ' Ningún documento oficial cotejado dice cuánto cuesta operar esta obra ni cuánto ingresa. No se estima: no entra en la suma.' + acum;
-    if (o.r34) return 'Lo que ejerció el Ramo 34 (apoyo a ahorradores y deudores de la banca) en ' + o.anio + ': <b>' + fnum(o.costo) + ' mdp</b> ' + chip('oficial') + '. No hay ingresos que restar: se toma completo.' + acum + doc;
+    if (o.r34) return 'Lo que el Fondo FOBAPROA pierde en ' + o.anio + ' antes del apoyo del presupuesto: su déficit (' + fnum(o.deficit) + ' mdp) ' + chip('oficial') +
+      ' más el Ramo 34 que recibió (' + fnum(o.r34) + ' mdp) ' + chip('oficial') + ' = <b>' + fnum(o.costo) + ' mdp</b> ' + chip('derivado') + '. El Ramo 34 solo es el apoyo, no la pérdida.' + acum + doc;
     if (!o.perd) return 'Ingresos por sus servicios ' + fnum(o.ing) + ' − gasto total ' + fnum(o.costo) + ' = ' + fnum(Math.round((o.ing - o.costo) * 10) / 10) + ' mdp a favor: <b>no tuvo déficit</b> antes de transferencias en ' + o.anio + ', así que entra con 0 ' + chip('derivado') + '.' + acum + doc;
     return 'Gasto total ' + fnum(o.costo) + ' − ingresos por sus servicios ' + fnum(o.ing) + ' = <b>' + fnum(o.perd) + ' mdp</b> de pérdida ' + chip('derivado') +
       '. No cuenta las transferencias federales (' + fnum(o.tr) + ' mdp) ni otros ingresos (' + fnum(o.otros) + ' mdp); con ellas cerró ' + o.anio + ' con un resultado contable de ' + fnum(o.resul) + ' mdp.' + acum + doc;

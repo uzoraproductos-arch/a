@@ -113,6 +113,12 @@ def catalogo(base):
             add(id='ipab-saldo', g='megaobras', n='IPAB (FOBAPROA): deuda en bonos al 31 de diciembre de 2025', a='2025', v=fb['saldo_bonos_2025'], e='oficial', f=f3['doc'], u=f3['url'])
             add(id='ipab-r34', g='megaobras', n='Rescate bancario: Ramo 34 ejercido en 2024', a='2024', v=fb['ramo34_ejercido'], e='oficial',
                 f='SHCP, Cuenta Pública 2024', u=((vf or {}).get('fuentes', {}).get('cp') or {}).get('url'))
+            f5 = fu.get(fb.get('fuente_resultado'))
+            if f5 and 'resultado_sin_transferencias' in fb:
+                add(id='ipab-perdida', g='megaobras', n='Rescate bancario: lo que el Fondo FOBAPROA pierde en 2024 antes del apoyo del presupuesto',
+                    a='2024', v=-fb['resultado_sin_transferencias'], e='derivado', f=f5['doc'], u=f5['url'],
+                    op='Déficit del Fondo FOBAPROA en 2024 (%s) + Ramo 34 que recibió ese año (%s).'
+                       % (format(-fb['deficit_ejercicio'], ',.1f'), format(fb['ramo34_ejercido'], ',.1f')))
     if vf and vf.get('obras'):
         vo, vfu = vf['obras'], vf['fuentes']
         t, to, na = vo.get('tren-maya'), vo.get('tren-toluca'), vo.get('aifa-texcoco')

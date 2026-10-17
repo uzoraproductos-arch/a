@@ -16796,9 +16796,9 @@ window.AUDIT_DB = {
       "sobrecosto_pct": 214.0,
       "ingresos_anuales_mdp": 0,
       "costo_operativo_anual_mdp": 49275,
-      "perdida_anual_mdp": 49275,
-      "perdida_diaria_mdp": 135.0,
-      "perdida_segundo": 1562.5,
+      "perdida_anual_mdp": 84900.5,
+      "perdida_diaria_mdp": 232.6,
+      "perdida_segundo": 2692.18,
       "proyeccion_tipo": "deuda_perpetua",
       "proyeccion_anios": 44,
       "proyeccion_resumen": "La Mayor Sangría Financiera del Estado Moderno. Desde 1998 el erario federal ha pagado más de $1.35 billones de pesos en puro servicio de intereses, pero el saldo insoluto en el IPAB sigue siendo de ~$1.12 billones. Se estima que los mexicanos seguirán pagando intereses hasta al menos el año 2070.",
@@ -16826,14 +16826,16 @@ window.AUDIT_DB = {
         "inversion_presupuestada_mdp": "oficial",
         "inversion_real_mdp": "derivado",
         "sobrecosto_pct": "derivado"
-      }
+      },
+      "tipo": "rescate",
+      "sobrecosto_etiqueta": "Crecimiento frente al pasivo presentado en 1998"
     },
     {
       "id": "farac-carretero",
       "nombre": "FARAC (Rescate Carretero de 1997)",
       "sector_id": "rescates",
-      "presidente": "Carlos Salinas / Ernesto Zedillo",
-      "periodo_sexenal": "1988–1994",
+      "presidente": "Ernesto Zedillo Ponce de León",
+      "periodo_sexenal": "1994–2000",
       "icono": "🛣️",
       "estatus": "Absorbido por Fonadin",
       "badge_color": "var(--gold-bright)",
@@ -16872,7 +16874,10 @@ window.AUDIT_DB = {
         "inversion_presupuestada_mdp": "oficial",
         "inversion_real_mdp": "derivado",
         "sobrecosto_pct": "derivado"
-      }
+      },
+      "tipo": "rescate",
+      "sobrecosto_etiqueta": "Crecimiento frente a las indemnizaciones de 1997",
+      "antecedente": "El rescate se hizo en 1997, con Ernesto Zedillo: el FARAC asumió ese año la deuda bancaria y emitió los pagarés con que se indemnizó a 23 concesionarios (ASF, Cuenta Pública 2015, auditoría 99; Cuenta Pública 2017, auditoría 96, p. 6). Las concesiones que fracasaron se otorgaron de 1989 a 1994, con Carlos Salinas: son el antecedente del rescate, no su costo, y por eso la obra se cuenta una sola vez, en el sexenio que la pagó."
     }
   ],
   "periodos": {
@@ -16903,22 +16908,56 @@ window.AUDIT_DB = {
     }
   },
   "totales_consolidados": {
-    "inversion_total_mdp": 3064992.6,
-    "inversion_presupuestada_total_mdp": 1139993.2,
-    "perdida_anual_consolidada_mdp": 80200.1,
-    "perdida_diaria_consolidada_mdp": 219.73,
-    "perdida_segundo_consolidada": 2543.13,
-    "obras_evaluadas": 13,
-    "sobrecosto_conjunto_pct": 168.9,
+    "inversion_total_mdp": 1176646.8,
+    "inversion_presupuestada_total_mdp": 529936.6,
+    "perdida_anual_consolidada_mdp": 87461.9,
+    "perdida_diaria_consolidada_mdp": 239.62,
+    "perdida_segundo_consolidada": 2773.4,
+    "obras_evaluadas": 11,
+    "sobrecosto_conjunto_pct": 122.0,
     "cobertura_obras": {
       "total_obras": 13,
       "con_operacion_documentada": 3,
       "pendientes_operacion": 10,
       "pct_cobertura": 23.1
     },
-    "perdida_operativa_empresas_mdp": 2194.4,
+    "perdida_operativa_empresas_mdp": 2561.4,
     "apoyo_presupuestal_fobaproa_ramo34_mdp": 62489.4,
-    "nota_totales": "Todos estos agregados se obtienen sumando las 13 obras evaluadas. Cobertura: 3 obras con estados financieros oficiales de operación (Tren Maya S.A. de C.V., AIFA S.A. de C.V. y el Ramo 34 del IPAB; cobertura 23.1%); las otras 10 obras se mantienen transparentemente en estado pendiente y no se asumen como costo cero."
+    "nota_totales": "El costo, lo aprobado y el sobrecosto de conjunto suman las 11 obras; los 2 rescates (FOBAPROA y FARAC) van aparte, en «rescates», porque son deudas asumidas y no obras. La pérdida anual suma lo que tiene documento: el déficit de operación antes de transferencias de las empresas que publican sus estados (Tren Maya; el AIFA no registra déficit) y lo que el Fondo FOBAPROA pierde antes del apoyo del Ramo 34 (déficit 2024 más las transferencias que recibió). Las otras 10 obras no publican su operación y no se asumen como cero.",
+    "rescates": {
+      "n": 2,
+      "ids": [
+        "fobaproa",
+        "farac-carretero"
+      ],
+      "inversion_total_mdp": 1888345.8,
+      "inversion_presupuestada_total_mdp": 610056.6,
+      "sobrecosto_conjunto_pct": 209.5,
+      "nota": "FOBAPROA y FARAC: deudas que el Estado asumió, no obras. Su «sobrecosto» es cuánto creció lo pagado y lo debido frente a lo presentado en su momento, en pesos de años distintos sin deflactar; no se compara con el de una obra."
+    },
+    "con_rescates": {
+      "n": 13,
+      "ids": [
+        "tren-maya",
+        "megafarmacia",
+        "dos-bocas",
+        "aifa-texcoco",
+        "tren-toluca",
+        "agronitrogenados",
+        "fertinal",
+        "estela-luz",
+        "bunker-garcia-luna",
+        "refineria-tula",
+        "enciclomedia",
+        "fobaproa",
+        "farac-carretero"
+      ],
+      "inversion_total_mdp": 3064992.6,
+      "inversion_presupuestada_total_mdp": 1139993.2,
+      "sobrecosto_conjunto_pct": 168.9,
+      "nota": "Las 11 obras y los 2 rescates juntos, solo como referencia."
+    },
+    "perdida_fobaproa_sin_transferencias_mdp": 84900.5
   },
   "operacion_oficial": {
     "nota": "Resultado de operar de las obras que publican estados financieros propios. Solo el auditor lo lee: sustituye, en memoria, la pérdida, los costos y la proyección que el simulador traía sin documento. Cifras en millones de pesos; la resta sin transferencias es un cálculo de Auditavisión (derivado).",
@@ -16942,6 +16981,11 @@ window.AUDIT_DB = {
         "doc": "IPAB, Estados financieros al 31 de marzo de 2026 y al 31 de diciembre de 2025 (Notas cortas), Estado analítico de la deuda y otros pasivos, p. 3",
         "url": "https://www.gob.mx/cms/uploads/attachment/file/1073775/IPAB_Notas-Cortas_Marzo_2026-DEF.pdf",
         "sha256": "e577ee96a65a5109ed0ce324eb5aa2a242eee5f8b14edebd9e23031486f5900e"
+      },
+      "ipab_ef25": {
+        "doc": "IPAB, Estados financieros dictaminados al 31 de diciembre de 2025, Estado de actividades del Fondo FOBAPROA (columnas 2025 y 2024), PDF p. 33",
+        "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+        "sha256": "8be61d74726f181487eec7d60290706fb73677c7825f720cfdba7b1b4ffe6808"
       }
     },
     "contexto_entidad": {
@@ -17063,7 +17107,10 @@ window.AUDIT_DB = {
         "saldo_bonos_2025": 1086952.8,
         "saldo_bonos_corto": 208920.9,
         "saldo_bonos_largo": 878031.9,
-        "fuente_saldo": "ipab_ef"
+        "fuente_saldo": "ipab_ef",
+        "deficit_ejercicio": -22411.1,
+        "resultado_sin_transferencias": -84900.5,
+        "fuente_resultado": "ipab_ef25"
       }
     }
   },
@@ -17742,7 +17789,7 @@ window.AUDIT_DB = {
         "definiciones": {
           "inversion_presupuestada_mdp": "El pasivo del Fobaproa que el Ejecutivo presentó al Congreso: «su estimación, al 28 de febrero de 1998, es de MN $552,300 millones» (informe Mackey, Gaceta Parlamentaria del 23-09-1999). No es un presupuesto: es la deuda que se pidió convertir en deuda pública.",
           "inversion_real_mdp": "Lo que el rescate ya le costó al presupuesto más lo que todavía se debe: transferencias del Ramo 34 al IPAB para ahorradores de 1999 a 2025 (710,923.3; IPAB, Plan Anual de Financiamiento 2026) + pasivos netos del IPAB al 31-12-2025 (1,023,571; Hacienda, informe de deuda pública 4T 2025) = $1,734,494.3 mdp. Suma pesos de 27 años sin deflactar. No cuenta lo que pagaron los bancos con sus cuotas ni el apoyo a deudores (con él serían $2,009,825.7 mdp). Los $2,470,000 mdp que traía la ficha no tenían documento.",
-          "sobrecosto_pct": "(1,734,494.3 ÷ 552,300 − 1) × 100 = 214.1 %: cuántas veces más que el pasivo presentado en 1998 lleva pagado y debido el rescate. No es un sobrecosto de obra: mezcla pagos de 27 años con un saldo de 2025, en pesos sin deflactar. En pesos de 1999 la deuda neta bajó 46.7 % de 1999 a 2020 (IPAB, Informe 2020)."
+          "sobrecosto_pct": "(1,734,494.3 ÷ 552,300 − 1) × 100 = 214.0 %: cuántas veces más que el pasivo presentado en 1998 lleva pagado y debido el rescate. No es un sobrecosto de obra: mezcla pagos de 27 años con un saldo de 2025, en pesos sin deflactar. En pesos de 1999 la deuda neta bajó 46.7 % de 1999 a 2020 (IPAB, Informe 2020)."
         }
       },
       "agronitrogenados": {
@@ -20066,7 +20113,7 @@ window.AUDIT_DB = {
       "mdp": 3069647.0,
       "estado": "derivado",
       "fuente": "Subpesta\u00f1a 2.2 \u00b7 inversi\u00f3n real menos inversi\u00f3n presupuestada de las obras del simulador (el motor la recalcula de sus totales)",
-      "nota": "No entra en los relojes porque no es un ritmo anual sino una suma de pesos de a\u00f1os distintos, entre 1988 y 2024, sin deflactar a un a\u00f1o com\u00fan. Se muestra aparte, como lo que es: una cuenta acumulada."
+      "nota": "No entra en los relojes porque no es un ritmo anual sino una suma de pesos de a\u00f1os distintos, entre 2000 y 2024, sin deflactar a un a\u00f1o com\u00fan. Mide las obras: los rescates bancario y carretero son deudas asumidas y se cuentan aparte. Se muestra aparte, como lo que es: una cuenta acumulada."
     }
   },
 

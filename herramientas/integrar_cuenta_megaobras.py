@@ -209,7 +209,7 @@ def valores():
                     'netos del IPAB al 31-12-2025 (1,023,571; Hacienda, informe de deuda pública 4T 2025) = $1,734,494.3 mdp. Suma '
                     'pesos de 27 años sin deflactar. No cuenta lo que pagaron los bancos con sus cuotas ni el apoyo a deudores '
                     '(con él serían $2,009,825.7 mdp). Los $2,470,000 mdp que traía la ficha no tenían documento.',
-                'sobrecosto_pct': '(1,734,494.3 ÷ 552,300 − 1) × 100 = 214.1 %: cuántas veces más que el pasivo presentado en 1998 '
+                'sobrecosto_pct': '(1,734,494.3 ÷ 552,300 − 1) × 100 = 214.0 %: cuántas veces más que el pasivo presentado en 1998 '
                     'lleva pagado y debido el rescate. No es un sobrecosto de obra: mezcla pagos de 27 años con un saldo de 2025, en '
                     'pesos sin deflactar. En pesos de 1999 la deuda neta bajó 46.7 % de 1999 a 2020 (IPAB, Informe 2020).',
             },

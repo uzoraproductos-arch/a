@@ -33,6 +33,7 @@ import json
 import math
 
 from presupuesto_modulos import chip
+from mo_base import nota_base
 
 ESTILOS = ['mo-sector.css']
 SCRIPTS = ['mo-sector.js']
@@ -125,13 +126,19 @@ def obras_oficiales(base):
             o['estatus'] = ESTATUS[o['id']]
         o['perdida_pendiente'] = False
         if d and o['id'] == 'fobaproa':
+            # Decision del autor (17-10-2026): la perdida antes del apoyo del
+            # presupuesto (deficit del Fondo FOBAPROA + Ramo 34 que recibio).
+            perd = -d['resultado_sin_transferencias']
             o['ingresos_anuales_mdp'] = 0
-            o['costo_operativo_anual_mdp'] = d['ramo34_ejercido']
-            o['perdida_anual_mdp'] = d['ramo34_ejercido']
-            ec['perdida_anual_mdp'] = 'oficial'
+            o['costo_operativo_anual_mdp'] = perd
+            o['perdida_anual_mdp'] = perd
+            ec['perdida_anual_mdp'] = 'derivado'
             ec['desglose'] = 'oficial'
-            o['desglose_costos_operacion'] = [{'rubro': 'Ramo 34, apoyo a ahorradores y deudores de la banca, ejercido en %s' % d['anio'],
-                                               'monto_anual_mdp': d['ramo34_ejercido'], 'icono': '🏛️'}]
+            o['desglose_titulo'] = 'De qué está hecha su pérdida de %s, antes del apoyo del presupuesto' % d['anio']
+            o['desglose_costos_operacion'] = [
+                {'rubro': 'Déficit del Fondo FOBAPROA en %s, después de las transferencias (IPAB, estados financieros dictaminados)' % d['anio'],
+                 'monto_anual_mdp': -d['deficit_ejercicio'], 'icono': '📉'},
+                {'rubro': 'Ramo 34 que recibió ese año, apoyo a ahorradores y deudores de la banca', 'monto_anual_mdp': d['ramo34_ejercido'], 'icono': '🏛️'}]
             o['proy_titulo'] = 'Lo que dicen los documentos: una deuda que sigue viva'
             o['proyeccion_resumen'] = (
                 'Al 31 de diciembre de 2025 el IPAB debía %s en bonos (%s a corto plazo y %s a largo), según sus estados financieros. '
@@ -361,7 +368,7 @@ def caja_vivo(o, cv, fuentes):
            ' <span class="ms-tag">incluye estimación propia</span>' if propia else '', repr(por_seg), format(por_seg, '.2f'), detalle))
 
 
-def ficha(o, ver, cv, fuentes, sectores):
+def ficha(o, ver, cv, fuentes, sectores, cuenta):
     ec = o['estado_campos']
     pend_obra = 'obra-' + o['id'] if ver and any(x == 'pendiente' for x in (ver.get('campos') or {}).values()) else None
 
@@ -389,13 +396,14 @@ def ficha(o, ver, cv, fuentes, sectores):
   <div class="ms-inv">
     <div class="ms-inv-c"><span class="ms-inv-l">Presupuesto original {c_presu}</span><span class="ms-inv-v ms-num">${presu} mdp</span></div>
     <div class="ms-inv-c"><span class="ms-inv-l">Costo real erogado {c_real}</span><span class="ms-inv-v ms-inv-oro ms-num">${real} mdp</span></div>
-    <div class="ms-inv-c"><span class="ms-inv-l">Sobrecosto {c_sob}</span><span class="ms-inv-v ms-num{rojo}">{sob}%</span></div>
+    <div class="ms-inv-c"><span class="ms-inv-l">{et_sob} {c_sob}</span><span class="ms-inv-v ms-num{rojo}">{sob}%</span></div>
   </div>
+  {antecedente}{base}
   <details class="ms-plegable"><summary><span aria-hidden="true">🔎</span> De dónde sale cada una de estas tres cifras</summary>
     <div class="ms-plegable-cuerpo"><dl class="ms-defs">
       <dt>Presupuesto original</dt><dd>{d_presu}</dd>
       <dt>Costo real erogado</dt><dd>{d_real}</dd>
-      <dt>Sobrecosto</dt><dd>{d_sob}</dd>
+      <dt>{et_sob}</dt><dd>{d_sob}</dd>
     </dl></div></details>
   <div class="ms-desg">
     <p class="ms-desg-tit">⚙️ {desg_tit}: {c_desg}</p>
@@ -421,6 +429,9 @@ def ficha(o, ver, cv, fuentes, sectores):
         estatus=esc(o['estatus']), vivo=caja_vivo(o, cv, fuentes),
         c_presu=chip_campo('inversion_presupuestada_mdp', pend_obra), presu=num(o['inversion_presupuestada_mdp']),
         c_real=chip_campo('inversion_real_mdp', pend_obra), real=num(o['inversion_real_mdp']),
+        et_sob=esc(o.get('sobrecosto_etiqueta') or 'Sobrecosto'),
+        antecedente=('<p class="ms-nota"><span aria-hidden="true">🕰️</span> <strong>Antecedente.</strong> %s</p>' % esc(o['antecedente'])) if o.get('antecedente') else '',
+        base=nota_base(o, cuenta.get(o['id']), 'ms-plegable ms-base'),
         c_sob=chip_campo('sobrecosto_pct', pend_obra), sob=('+' if sob > 0 else '') + jsnum(sob), rojo=' ms-inv-rojo' if sob > 100 else '',
         d_presu=esc(defin('inversion_presupuestada_mdp')), d_real=esc(defin('inversion_real_mdp')), d_sob=esc(defin('sobrecosto_pct')),
         desg_tit=esc(o.get('desglose_titulo') or 'Principales costos de operación anuales'),
@@ -445,9 +456,14 @@ def construir(base, ref):
     sectores = [s for s in sm['sectores'] if s['id'] != 'todos']
     sec_por = {s['id']: s for s in sectores}
     periodos = sm['periodos']
-    n = len(obras)
-    total_real = sum(o['inversion_real_mdp'] for o in obras)
-    total_presu = sum(o['inversion_presupuestada_mdp'] for o in obras)
+    # Decision del autor (17-10-2026): los rescates van aparte; «todas las
+    # industrias» suma solo las obras y la industria «rescates» se ve sola.
+    solo_obras = [o for o in obras if o.get('tipo') != 'rescate']
+    rescates = [o for o in obras if o.get('tipo') == 'rescate']
+    n = len(solo_obras)
+    total_real = sum(o['inversion_real_mdp'] for o in solo_obras)
+    total_presu = sum(o['inversion_presupuestada_mdp'] for o in solo_obras)
+    resc_real = sum(o['inversion_real_mdp'] for o in rescates)
     an = anclas(base)
 
     # Paso 1: losetas (el JS reescribe cifras y barras segun el mandato).
@@ -455,15 +471,16 @@ def construir(base, ref):
     for s in sectores:
         ob = [o for o in obras if o['sector_id'] == s['id']]
         real = sum(o['inversion_real_mdp'] for o in ob)
-        cuota = real / total_real * 100 if total_real else 0
+        cuota = real / total_real * 100 if total_real and s['id'] != 'rescates' else 0
         losetas.append(
             '<button type="button" class="ms-los" data-sector="{id}" aria-pressed="false">'
             '<span class="ms-los-fila"><span class="ms-los-ico" aria-hidden="true">{ico}</span><span class="ms-los-nom">{nom}</span>'
             '<span class="ms-los-cif ms-num">{cif}</span></span>'
             '<span class="ms-riel"><span class="ms-barra" style="width:{w}%"></span></span>'
-            '<span class="ms-los-pie"><span class="ms-los-n">{n}</span><span class="ms-los-cuota">{c}% del costo real</span></span>'
+            '<span class="ms-los-pie"><span class="ms-los-n">{n}</span><span class="ms-los-cuota">{c}</span></span>'
             '</button>'.format(id=s['id'], ico=s['icono'], nom=esc(s['nombre']), cif=sim_mdp(real), w=format(cuota, '.1f'),
-                               n='%d %s' % (len(ob), 'obra' if len(ob) == 1 else 'obras'), c=format(cuota, '.1f')))
+                               n='%d %s' % (len(ob), 'obra' if len(ob) == 1 else 'obras'),
+                               c='Se cuentan aparte de las obras' if s['id'] == 'rescates' else format(cuota, '.1f') + '% del costo real'))
 
     # Paso 2: mandatos.
     def tarjeta(k, nom, periodo, cuantas, color):
@@ -472,7 +489,7 @@ def construir(base, ref):
                 % (esc(k), color, esc(nom), periodo, cuantas, 'obra' if cuantas == 1 else 'obras'))
     mandatos = [tarjeta('todos', 'Todos los mandatos', '1988–2024', n, '#c9a227')]
     for x in SEXENIOS:
-        cuantas = sum(1 for o in obras if x['k'].lower() in o['presidente'].lower())
+        cuantas = sum(1 for o in solo_obras if x['k'].lower() in o['presidente'].lower())
         mandatos.append(tarjeta(x['k'], x['nom'], '%d–%d' % (x['ini'], x['fin']), cuantas, x['color']))
 
     ordenes = ''.join('<button type="button" class="ms-orden" data-orden="%s" aria-pressed="%s">%s</button>'
@@ -487,7 +504,8 @@ def construir(base, ref):
                          % (esc(o['id']), esc(o['nombre']), sim_mdp(o['vivo']['anual']), num(_r(o['vivo']['anual'] * 1e6 / 31536000)))
                          for o in corren)
 
-    fichas = '\n'.join(ficha(o, ver_obras.get(o['id']), cv, fuentes, sec_por) for o in obras)
+    cuenta = (sm.get('cuenta') or {}).get('obras') or {}
+    fichas = '\n'.join(ficha(o, ver_obras.get(o['id']), cv, fuentes, sec_por, cuenta) for o in obras)
 
     escala = ''.join(
         '<li class="ms-esc-fila" data-v="{v}"><span class="ms-esc-veces ms-num">—</span>'
@@ -506,7 +524,7 @@ def construir(base, ref):
                    'perd': o['perdida_anual_mdp'], 'pend': o['perdida_pendiente'], 'color': o.get('badge_color') or '',
                    'vivo': (o['vivo']['anual'] if o.get('vivo') and o['vivo']['comps'] else None),
                    'parada': bool(o.get('vivo') and not o['vivo']['comps']),
-                   'pendReal': o['id'] in pend_real} for o in obras],
+                   'pendReal': o['id'] in pend_real, 'resc': o.get('tipo') == 'rescate'} for o in obras],
         'sectores': [{'id': s['id'], 'nom': s['nombre'], 'ico': s['icono']} for s in sectores],
         'sexenios': SEXENIOS,
         'ordenes': [{'id': k, 'et': et} for k, et in ORDENES],
@@ -517,7 +535,7 @@ def construir(base, ref):
   <section class="ms-arranque" aria-labelledby="msArrTit">
     <p class="ms-kicker">Inversión y Megaobras · aplicación 2</p>
     <h2 class="ms-grande" id="msArrTit">{n} megaobras, obra por obra. Elige una industria y un mandato.</h2>
-    <p class="ms-lead">Las {n} inversiones emblemáticas de 1988 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> aprobados. Filtra por industria y por presidente, compara las que queden, mira lo que cada una nos sigue costando mientras lees y ponlo junto a cifras que conoces.</p>
+    <p class="ms-lead">Las {n} obras emblemáticas de 2000 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> aprobados. Los {n_resc} rescates, bancario y carretero, van aparte (<b class="ms-num">{rreal}</b> pagados y debidos {c_der}): son deudas que el Estado asumió, no obras, y los ves en la industria «Rescates». Filtra por industria y por presidente, compara las que queden, mira lo que cada una nos sigue costando mientras lees y ponlo junto a cifras que conoces.</p>
     <div class="ms-resumen" id="msResumen" aria-live="polite"></div>
     <ol class="ms-indice" aria-label="Lo que hay en esta página">
       <li><a href="#ms-industria"><span class="ms-n">1</span> Industria</a></li>
@@ -533,7 +551,7 @@ def construir(base, ref):
       <h2 class="ms-tit" id="msP1Tit"><span class="ms-n">1</span> Industria</h2>
       <button type="button" class="ms-btn ms-btn-sec ms-todas" data-sector="todos" aria-pressed="true">🌐 Todas las industrias</button>
     </div>
-    <p class="ms-txt">Elige un sector estratégico. Industria y mandato filtran a la vez todo lo que sigue: las cifras, la comparativa, las fichas y la escala. La barra dice qué parte del costo real le toca a cada industria <span id="msMosaicoNota">en los seis mandatos</span>.</p>
+    <p class="ms-txt">Elige un sector estratégico. Industria y mandato filtran a la vez todo lo que sigue: las cifras, la comparativa, las fichas y la escala. La barra dice qué parte del costo real de las obras le toca a cada industria <span id="msMosaicoNota">en los seis mandatos</span>. «Todas las industrias» suma las obras; los rescates se ven solo al elegir su industria.</p>
     <div class="ms-mosaico" role="group" aria-label="Industrias">
       {losetas}
     </div>
@@ -568,7 +586,7 @@ def construir(base, ref):
         <span class="ms-cifra-s">equivale a <span class="ms-num" id="msCSeg">—</span> por segundo</span></div>
     </div>
     <p class="ms-nota" id="msNotaFiltro"></p>
-    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida anual ÷ 31,536,000</span>). La pérdida solo suma lo que tiene documento: Tren Maya y AIFA por sus estados de actividades de la Cuenta Pública 2024, el rescate bancario por lo que ejerció el Ramo 34; las demás entran con cero y dicen {c_pend_perd}.</p>
+    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida anual ÷ 31,536,000</span>). La pérdida solo suma lo que tiene documento: Tren Maya y AIFA por sus estados de actividades de la Cuenta Pública 2024, el rescate bancario por lo que pierde antes del apoyo del presupuesto (su déficit de 2024 más el Ramo 34 que recibió, según el IPAB); las demás entran con cero y dicen {c_pend_perd}.</p>
   </section>
 
   <aside class="ms-aviso">
@@ -639,6 +657,7 @@ def construir(base, ref):
   <script type="application/json" id="msDatos">{datos}</script>
 </div>'''.format(
         n=n, treal=sim_mdp(total_real), tpresu=sim_mdp(total_presu), c_der=chip('derivado'),
+        n_resc=len(rescates), rreal=sim_mdp(resc_real),
         c_pend_perd=chip('pendiente', PEND_PERDIDA),
         losetas='\n      '.join(losetas), mandatos='\n      '.join(mandatos), ordenes=ordenes, cadencias=cadencias,
         tm_fecha=esc(tm.get('fecha', '10-10-2026')), tm_motivo=esc(tm.get('motivo', '')), tm_alt=esc(tm.get('alternativa', 'expedientes.html#exp-tren-maya')),

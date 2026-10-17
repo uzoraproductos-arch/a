@@ -19,7 +19,10 @@
   var qsa = function (sel, r) { return [].slice.call((r || raiz).querySelectorAll(sel)); };
 
   var OBRAS = D.obras;
-  var TOTAL = OBRAS.length;
+  /* Los rescates (FOBAPROA y FARAC) van aparte de las obras (decisión del
+     autor, 17-10-2026): «todas las industrias» suma solo las obras y los
+     rescates se ven al elegir su industria. */
+  var TOTAL = OBRAS.filter(function (o) { return !o.resc; }).length;
   var PER_ET = { dia: 'al día', mes: 'al mes', trimestre: 'por trimestre', semestre: 'por semestre', ano: 'al año' };
   var PER_NOM = { dia: 'día', mes: 'mes', trimestre: 'trimestre', semestre: 'semestre', ano: 'año' };
   var reducido = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -66,6 +69,7 @@
   function de(sector, mandato) {
     return OBRAS.filter(function (o) {
       if (sector && sector !== 'todos' && o.s !== sector) return false;
+      if ((!sector || sector === 'todos') && o.resc) return false;
       if (mandato && mandato !== 'todos' && o.p.toLowerCase().indexOf(mandato.toLowerCase()) < 0) return false;
       return true;
     });
@@ -77,7 +81,7 @@
     return { n: obras.length, real: real, presu: presu, brecha: real - presu,
       sobrecosto: presu > 0 ? (real / presu - 1) * 100 : 0, perdidaAnual: anual, perdidaSegundo: anual * 1000000 / (365 * 86400) };
   }
-  var AG_T = agregados(OBRAS);
+  var AG_T = agregados(de('todos', 'todos'));
   var porSector = {};
   D.sectores.forEach(function (s) { porSector[s.id] = s; });
   function sexenio(k) { return D.sexenios.filter(function (x) { return x.k === k; })[0] || null; }
@@ -110,11 +114,12 @@
     qsa('.ms-los').forEach(function (b) {
       var ob = de(b.dataset.sector, est.mandato);
       var real = ob.reduce(function (a, o) { return a + o.real; }, 0);
-      var cuota = real / total * 100;
+      var aparte = ob.some(function (o) { return o.resc; });
+      var cuota = aparte ? 0 : real / total * 100;
       b.querySelector('.ms-los-cif').textContent = simMdp(real);
       b.querySelector('.ms-barra').style.width = cuota.toFixed(1) + '%';
       b.querySelector('.ms-los-n').textContent = ob.length + (ob.length === 1 ? ' obra' : ' obras');
-      b.querySelector('.ms-los-cuota').textContent = cuota.toFixed(1) + '% del costo real';
+      b.querySelector('.ms-los-cuota').textContent = aparte ? 'Se cuentan aparte de las obras' : cuota.toFixed(1) + '% del costo real';
       b.classList.toggle('ms-vacia', ob.length === 0);
       b.setAttribute('aria-pressed', b.dataset.sector === est.sector ? 'true' : 'false');
     });
@@ -136,10 +141,13 @@
     var sec = porSector[est.sector], sx = sexenio(est.mandato);
     var ag = agregados(obras);
     var cuota = AG_T.real > 0 ? ag.real / AG_T.real * 100 : 0;
+    var resc = obras.length > 0 && obras.every(function (o) { return o.resc; });
+    var cuantas = resc ? '<b>' + ag.n + '</b> ' + (ag.n === 1 ? 'rescate' : 'rescates') + ', aparte de las ' + TOTAL + ' obras'
+      : '<b>' + ag.n + '</b> de ' + TOTAL + ' obras';
     $('msFa').innerHTML =
       '<span class="ms-fa-chip">' + (sec ? sec.ico + ' ' + esc(sec.nom) : '🌐 Todas las industrias') + '</span>' +
       '<span class="ms-fa-chip">' + (sx ? '🏛️ ' + esc(sx.nom) + ' · ' + sx.ini + '–' + sx.fin : '🏛️ Todos los mandatos') + '</span>' +
-      '<span class="ms-fa-n"><b>' + ag.n + '</b> de ' + TOTAL + ' obras</span>';
+      '<span class="ms-fa-n">' + cuantas + '</span>';
     $('msQuitar').hidden = !(sec || sx);
     var pares = [['msCReal', ag.real, 'mdp'], ['msCCuota', cuota, 'pct'], ['msCPresu', ag.presu, 'mdp'], ['msCBrecha', ag.brecha, 'mdp'],
       ['msCSob', ag.sobrecosto, 'pctS'], ['msCPerd', ag.perdidaAnual, 'mdp'], ['msCSeg', ag.perdidaSegundo, 'pesos']];
@@ -152,7 +160,7 @@
       (pr.length ? ' ' + (pr.length === 1 ? 'Una obra del filtro tiene' : pr.length + ' obras del filtro tienen') +
         ' su costo real ' + chip('pendiente', 'obra-' + pr[0].id) + ' de documento y entra con la cifra que registra el simulador: ' +
         pr.map(function (o) { return '<a href="pendientes.html#obra-' + esc(o.id) + '">' + esc(o.n) + '</a>'; }).join(', ') + '.' : '');
-    $('msResumen').innerHTML = 'Estás viendo <b>' + ag.n + '</b> de ' + TOTAL + ' obras' +
+    $('msResumen').innerHTML = 'Estás viendo ' + cuantas +
       (sec ? ' · ' + sec.ico + ' ' + esc(sec.nom) : '') + (sx ? ' · 🏛️ ' + esc(sx.nom) : '') +
       ' · costo real <b class="ms-num">' + simMdp(ag.real) + '</b>';
   }
