@@ -751,6 +751,25 @@ def insp_nativa(m, clave, base, ref):
     m['estilos'] = list(getattr(nat, 'ESTILOS', []))
     m['scripts'] = list(getattr(nat, 'SCRIPTS', []))
     return m
+
+
+def insp_subpaginas(m, clave, base, ref):
+    """Paginas hijas de una aplicacion nativa (17-10-2026): si su modulo
+    trae subpaginas(), cada parte sale en su propia pagina, debajo de la
+    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto."""
+    nat = importlib.import_module(INSP_NATIVAS[clave])
+    if not hasattr(nat, 'subpaginas'):
+        return []
+    out = []
+    for k, sp in enumerate(nat.subpaginas(base, ref), 1):
+        h = dict(m)
+        h.update({'archivo': sp['archivo'], 'menu': sp['menu'], 'titulo': sp['titulo'], 'icono': sp['icono'],
+                  'entrada': sp['entrada'], 'padre3': (m['archivo'], m['titulo']),
+                  'lema': '%s · parte %d' % (m['titulo'], k),
+                  'icono_cab': sp['icono'] if m.get('icono_cab') else '',
+                  'secciones': [dict(m['secciones'][0], bloque=sp['bloque'])]})
+        out.append(h)
+    return out
 VERIFICA_PAGINA = 'herramienta-inspector-verifica.html'
 
 
@@ -4804,6 +4823,9 @@ def generar(sello=None):
             m = herramienta_modulo(h, n, i)
             if t[0] in INSP_NATIVAS and os.path.exists(os.path.join(RAIZ, 'herramientas', INSP_NATIVAS[t[0]] + '.py')):
                 insp_nativa(m, t[0], base_nat, ref_nat)
+                for sp in insp_subpaginas(m, t[0], base_nat, ref_nat):
+                    texto = pagina(sp, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+                    open(os.path.join(RAIZ, sp['archivo']), 'wb').write(texto.encode('utf-8'))
             texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, m['archivo']), 'wb').write(texto.encode('utf-8'))
     # La quinta aplicacion de Costo Ambiental trae su propio contenido

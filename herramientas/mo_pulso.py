@@ -127,7 +127,8 @@ def _chip_obra(o, campo):
     return chip(e, ('obra-' + o['id']) if e == 'pendiente' else None)
 
 
-def construir(base, ref):
+def _contexto(base, ref):
+    """Las cifras ya formadas que comparten la pagina y sus cuatro partes."""
     sm = base['simulador_megaobras']
     obras = sm['obras']
     perd = perdidas(sm)
@@ -227,11 +228,31 @@ def construir(base, ref):
 
     sobre_txt = ('+' if ag['sobre'] > 0 else '') + format(ag['sobre'], '.1f') + '%'
 
-    return '''<div class="mp" id="mpRaiz">
-  <section class="mp-arranque" aria-labelledby="mpArrTit">
+    return dict(
+        n=ag['n'], n_doc=ag_doc_real['n'],
+        seg_txt=format(_r(ag['seg'], 2), ',.2f'), anual=mdp(ag['anual']),
+        chip_der=chip('derivado'), chip_of=chip('oficial'), chip_pend=chip('pendiente', 'reloj-megaobras'),
+        chip_pend_obra=chip('pendiente'), chip_unit=chip('pendiente', 'costo-unitario-megaobras'),
+        real=sim_mdp(ag['real']), real_mdp=mdp(ag['real']),
+        per_label=esc(p0['label']), per_v=sim_mdp(ag['anual'] * p0['factor']) + esc(p0['sufijo']),
+        per_mdp=mdp(ag['anual'] * p0['factor'], 2) + esc(p0['sufijo']), per_suf=esc(p0['sufijo']),
+        factor_tx='1/365', n_op=len(documentadas), n_pend=len(pendientes_op),
+        sobre=sobre_txt, presu=sim_mdp(ag['presu']),
+        brecha=sim_mdp(ag['brecha']), brecha_mdp=mdp(ag['brecha']),
+        pend_pct=format(comp['pendiente'] / ag['real'] * 100, '.1f'), pend_v=sim_mdp(comp['pendiente']),
+        dial=dial, comp_filas=comp_filas, pend_lista=pend_lista, seg=seg, leyenda=leyenda,
+        anio_op=next((perd[o['id']]['anio'] for o in documentadas), ''),
+        n_ver=len(verificadas), verificadas=esc(', '.join(verificadas)), con_cifra=con_cifra,
+        f_cp=_fuente(vfu.get('cp')), f_opa=_fuente(vfu.get('opa')),
+        f_tm=_fuente((sm['operacion_oficial']['fuentes']).get('ef_h0m')),
+        f_ai=_fuente((sm['operacion_oficial']['fuentes']).get('ef_hzi')),
+        r_asf=ref('ref-asf-cp'), datos=_json(datos))
+
+
+ARRANQUE = '''  <section class="mp-arranque" aria-labelledby="mpArrTit">
     <p class="mp-kicker">Inversión y Megaobras · aplicación 1</p>
     <h2 class="mp-grande" id="mpArrTit">📊 El pulso del gasto</h2>
-    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 1988 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Elige el ritmo con el que quieres leerlas: por día, mes, trimestre, semestre o año.</p>
+    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 1988 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Abajo están las cuatro partes del pulso: cada tarjeta abre su propia página con el desglose completo.</p>
     <div class="mp-pantalla" id="mpPantalla">
       <p class="mp-vivo-et"><span class="mp-punto" aria-hidden="true"></span> Desde que abriste esta página, al ritmo documentado</p>
       <p class="mp-vivo-num mp-num"><b id="mpVivo" aria-live="off">+$0.00</b></p>
@@ -241,15 +262,10 @@ def construir(base, ref):
         <button type="button" class="mp-boton mp-claro" id="mpCero"><span aria-hidden="true">↺</span> Volver a cero</button>
       </div>
     </div>
-    <ol class="mp-indice" aria-label="En esta página">
-      <li><a href="#mpCifras">Las cuatro cifras</a></li>
-      <li><a href="#mpRitmo">El ritmo</a></li>
-      <li><a href="#mpCompo">De qué está hecho el total</a></li>
-      <li><a href="#mpComo">Cómo se calcula</a></li>
-    </ol>
-  </section>
+  </section>'''
 
-  <section class="mp-sec" id="mpCifras" aria-labelledby="mpCifTit">
+SECCIONES = {
+    'cifras': '''  <section class="mp-sec" id="mpCifras" aria-labelledby="mpCifTit">
     <div class="mp-cab">
       <h2 class="mp-tit" id="mpCifTit"><span aria-hidden="true">🧭</span> Las cuatro cifras de referencia</h2>
       <div class="mp-modo" role="group" aria-label="Qué cifras sumar">
@@ -284,10 +300,9 @@ def construir(base, ref):
         <p class="mp-kpi-mdp mp-num" id="mpKBrechaMdp">{brecha_mdp}</p>
       </article>
     </div>
-    <p class="mp-aviso" id="mpAvisoPend"><b>Ojo:</b> {pend_pct}% del costo real del conjunto ({pend_v}) son cifras que siguen <b>pendientes</b> de documento {chip_pend_obra}. La suma se puede hacer, pero no se puede afirmar como dato auditado: <a href="#mpCompo">mira de qué está hecha</a> o pulsa «Solo con documento».</p>
-  </section>
-
-  <section class="mp-sec" id="mpRitmo" aria-labelledby="mpRitTit">
+    <p class="mp-aviso" id="mpAvisoPend"><b>Ojo:</b> {pend_pct}% del costo real del conjunto ({pend_v}) son cifras que siguen <b>pendientes</b> de documento {chip_pend_obra}. La suma se puede hacer, pero no se puede afirmar como dato auditado: <a href="herramienta-megaobras-pulso-composicion.html">mira de qué está hecha</a> o pulsa «Solo con documento».</p>
+  </section>''',
+    'ritmo': '''  <section class="mp-sec" id="mpRitmo" aria-labelledby="mpRitTit">
     <h2 class="mp-tit" id="mpRitTit"><span aria-hidden="true">⏱️</span> Temporalidad de pérdidas y subsidios</h2>
     <p class="mp-txt">La misma cifra anual, repartida en cinco cadencias. Elige el ritmo con el que quieres leerla: cada botón dice su cifra antes de pulsarlo.</p>
     <div class="mp-dial" role="group" aria-label="Cadencia">{dial}</div>
@@ -303,9 +318,8 @@ def construir(base, ref):
       </table>
     </div>
     <p class="mp-equiv" id="mpEquiv" aria-live="polite"></p>
-  </section>
-
-  <section class="mp-sec" id="mpCompo" aria-labelledby="mpCompTit">
+  </section>''',
+    'composicion': '''  <section class="mp-sec" id="mpCompo" aria-labelledby="mpCompTit">
     <h2 class="mp-tit" id="mpCompTit"><span aria-hidden="true">🧩</span> De qué está hecho el costo real</h2>
     <p class="mp-txt">Los {real} del conjunto, según el estado de la cifra de cada obra. Una sola obra puede mover el total entero: compara la barra antes de concluir.</p>
     <div class="mp-comp" role="img" aria-label="Composición del costo real por estado de la cifra">{seg}</div>
@@ -323,9 +337,8 @@ def construir(base, ref):
       <a class="mp-boton mp-sec-b" href="herramienta-megaobras-sector.html"><span aria-hidden="true">🏭</span> Ficha de cada obra, por sector</a>
     </p>
     <p class="mp-unidades"><b>Unidades.</b> 1 mdp es un millón de pesos; 1,000 mdp son mil millones; 1,000,000 mdp, un billón. Las cifras son nominales del año de cada erogación, sin deflactar: un peso de 1997 no compra lo mismo que uno de 2026.</p>
-  </section>
-
-  <section class="mp-sec mp-como" id="mpComo" aria-labelledby="mpComoTit">
+  </section>''',
+    'calculo': '''  <section class="mp-sec mp-como" id="mpComo" aria-labelledby="mpComoTit">
     <h2 class="mp-tit" id="mpComoTit"><span aria-hidden="true">🔎</span> Cómo se calcula lo que ves</h2>
     <ul class="mp-lista">
       <li><b>Los agregados se suman, no se escriben.</b> El costo real, lo aprobado, la brecha y la pérdida anual son la suma obra por obra de las {n} evaluadas {chip_der}.</li>
@@ -337,9 +350,10 @@ def construir(base, ref):
       <li><b>Pendiente declarado.</b> Las cifras marcadas como pendientes no tienen todavía el documento oficial que las sustenta; se muestran como consolidación documental y no como dato auditado. Qué falta y a quién le toca publicarlo está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</li>
     </ul>
     <p class="mp-fuentes">Fuentes: {f_cp}; {f_tm}; {f_ai}; {f_opa}; y la ASF {r_asf}.</p>
-  </section>
+  </section>''',
+}
 
-  <aside class="mp-sigue">
+SIGUE = '''  <aside class="mp-sigue">
     <p><b>Sigue con las megaobras:</b></p>
     <ul>
       <li><a href="herramienta-megaobras-sector.html"><span aria-hidden="true">🏭</span> El desglose obra por obra: sector e industria</a></li>
@@ -348,24 +362,78 @@ def construir(base, ref):
       <li><a href="herramienta-calculadora-reloj.html"><span aria-hidden="true">⏰</span> El reloj de la deuda y de lo perdido</a></li>
     </ul>
     <p class="mp-gris">¿Encontraste un error? <a href="comunidad-erratas.html">Repórtalo</a>.</p>
-  </aside>
-  <script type="application/json" id="mpDatos">{datos}</script>
-</div>'''.format(
-        n=ag['n'], n_doc=ag_doc_real['n'],
-        seg_txt=format(_r(ag['seg'], 2), ',.2f'), anual=mdp(ag['anual']),
-        chip_der=chip('derivado'), chip_of=chip('oficial'), chip_pend=chip('pendiente', 'reloj-megaobras'),
-        chip_pend_obra=chip('pendiente'), chip_unit=chip('pendiente', 'costo-unitario-megaobras'),
-        real=sim_mdp(ag['real']), real_mdp=mdp(ag['real']),
-        per_label=esc(p0['label']), per_v=sim_mdp(ag['anual'] * p0['factor']) + esc(p0['sufijo']),
-        per_mdp=mdp(ag['anual'] * p0['factor'], 2) + esc(p0['sufijo']), per_suf=esc(p0['sufijo']),
-        factor_tx='1/365', n_op=len(documentadas), n_pend=len(pendientes_op),
-        sobre=sobre_txt, presu=sim_mdp(ag['presu']),
-        brecha=sim_mdp(ag['brecha']), brecha_mdp=mdp(ag['brecha']),
-        pend_pct=format(comp['pendiente'] / ag['real'] * 100, '.1f'), pend_v=sim_mdp(comp['pendiente']),
-        dial=dial, comp_filas=comp_filas, pend_lista=pend_lista, seg=seg, leyenda=leyenda,
-        anio_op=next((perd[o['id']]['anio'] for o in documentadas), ''),
-        n_ver=len(verificadas), verificadas=esc(', '.join(verificadas)), con_cifra=con_cifra,
-        f_cp=_fuente(vfu.get('cp')), f_opa=_fuente(vfu.get('opa')),
-        f_tm=_fuente((sm['operacion_oficial']['fuentes']).get('ef_h0m')),
-        f_ai=_fuente((sm['operacion_oficial']['fuentes']).get('ef_hzi')),
-        r_asf=ref('ref-asf-cp'), datos=_json(datos))
+  </aside>'''
+
+DATOS = '''  <script type="application/json" id="mpDatos">{datos}</script>'''
+
+
+# Las cuatro partes del pulso, cada una en su pagina (pedido del autor,
+# 17-10-2026): la pagina de la aplicacion queda con el contador y cuatro
+# tarjetas; cada tarjeta abre herramienta-megaobras-pulso-<slug>.html.
+PAGINA = 'herramienta-megaobras-pulso.html'
+PARTES = [
+    ('cifras', '🧭', 'Las cuatro cifras', 'Las cuatro cifras de referencia',
+     'Costo real erogado, pérdida y apoyo anual, sobrecosto del conjunto y pesos de más, con «todo lo registrado» o «solo con documento».',
+     '{real} de costo real · {sobre} de sobrecosto'),
+    ('ritmo', '⏱️', 'El ritmo', 'Temporalidad de pérdidas y subsidios',
+     'La pérdida y el apoyo anual documentados, repartidos por día, mes, trimestre, semestre o año, componente por componente.',
+     '{per_v} de pérdida y apoyo documentados'),
+    ('composicion', '🧩', 'De qué está hecho el total', 'De qué está hecho el costo real',
+     'Cuánto del costo real tiene documento oficial y cuánto sigue pendiente, y las {n} obras ordenadas por costo, sobrecosto, pesos de más o pérdida.',
+     '{pend_pct}% del costo sigue pendiente de documento'),
+    ('calculo', '🔎', 'Cómo se calcula', 'Cómo se calcula lo que ves',
+     'Las reglas de cada suma, división y cadencia, qué cifras tienen documento y las fuentes oficiales de donde salen.',
+     'Las operaciones y sus fuentes, paso a paso'),
+]
+
+
+def parte_archivo(slug):
+    return PAGINA[:-5] + '-' + slug + '.html'
+
+
+def _tarjetas(c):
+    filas = []
+    for k, (slug, ico, nombre, _tit, desc, cifra) in enumerate(PARTES, 1):
+        filas.append(
+            '    <li><a class="mp-tarjeta" href="%s">'
+            '<span class="mp-tarjeta-num">%d de %d</span>'
+            '<span class="mp-tarjeta-tit"><span aria-hidden="true">%s</span> %s</span>'
+            '<span class="mp-tarjeta-desc">%s</span>'
+            '<span class="mp-tarjeta-cif%s">%s</span>'
+            '<span class="mp-tarjeta-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
+            % (parte_archivo(slug), k, len(PARTES), ico, esc(nombre), esc(desc.format(**c)),
+               ' mp-num' if '{' in cifra else '', cifra.format(**c)))
+    return ('  <nav class="mp-partes" aria-labelledby="mpPartesTit">\n'
+            '    <h2 class="mp-tit" id="mpPartesTit"><span aria-hidden="true">🗂️</span> Las cuatro partes del pulso</h2>\n'
+            '    <ol class="mp-tarjetas">\n%s\n    </ol>\n  </nav>' % '\n'.join(filas))
+
+
+def _subnav(actual):
+    chips = ''.join(
+        '<a class="mp-subnav-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %d · %s</a>'
+        % (' actual' if slug == actual else '', parte_archivo(slug), ' aria-current="page"' if slug == actual else '',
+           ico, k, esc(nombre))
+        for k, (slug, ico, nombre, *_r) in enumerate(PARTES, 1))
+    return ('  <nav class="mp-subnav" aria-label="Las cuatro partes del pulso">\n'
+            '    <a class="mp-subnav-volver" href="%s"><span aria-hidden="true">←</span> Volver al pulso y su contador</a>\n'
+            '    <div class="mp-subnav-chips">%s</div>\n  </nav>' % (PAGINA, chips))
+
+
+def construir(base, ref):
+    c = _contexto(base, ref)
+    return '\n\n'.join(['<div class="mp" id="mpRaiz">', ARRANQUE.format(**c), _tarjetas(c),
+                         SIGUE.format(**c), DATOS.format(**c)]) + '\n</div>'
+
+
+def subpaginas(base, ref):
+    """Las cuatro partes, para apartados.insp_subpaginas(): cada una con su
+    seccion, la navegacion entre partes y los datos que usa mo-pulso.js."""
+    c = _contexto(base, ref)
+    out = []
+    for slug, ico, nombre, tit, desc, _cif in PARTES:
+        bloque = '\n\n'.join(['<div class="mp mp-parte" id="mpRaiz">', _subnav(slug),
+                               SECCIONES[slug].format(**c), _subnav(slug).replace('class="mp-subnav" aria-label="Las cuatro partes del pulso"', 'class="mp-subnav mp-subnav-pie" aria-label="Sigue con otra parte del pulso"', 1),
+                               DATOS.format(**c)]) + '\n</div>'
+        out.append({'archivo': parte_archivo(slug), 'icono': ico, 'menu': nombre, 'titulo': tit,
+                    'entrada': '<b>%s.</b> %s' % (esc(nombre), esc(desc.format(**c))), 'bloque': bloque})
+    return out

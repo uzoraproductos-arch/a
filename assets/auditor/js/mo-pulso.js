@@ -12,6 +12,13 @@
   var $ = function (id) { return document.getElementById(id); };
   var raiz = $('mpRaiz');
   if (!raiz) return;
+  /* Desde el 17-10-2026 cada parte vive en su página: las anclas viejas
+     (#mpCifras…) llevan a ella sin dejar un paso de más en el historial. */
+  var PARTES = { mpCifras: 'cifras', mpRitmo: 'ritmo', mpCompo: 'composicion', mpComo: 'calculo' };
+  var vieja = PARTES[location.hash.slice(1)];
+  if (vieja && !$(location.hash.slice(1))) { location.replace('herramienta-megaobras-pulso-' + vieja + '.html'); return; }
+  /* Escribe solo si el elemento está en esta página. */
+  function pon(id, prop, v) { var el = $(id); if (el) el[prop] = v; }
 
   var LS = 'av-mo-pulso-';
   function lee(k, def) { try { return localStorage.getItem(LS + k) || def; } catch (e) { return def; } }
@@ -49,17 +56,17 @@
     var p = D.periodos[periodo];
     var v = D.anual * p.factor;
     dialBs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.per === periodo ? 'true' : 'false'); });
-    $('mpKPerEt').textContent = '(' + p.label + ')';
-    $('mpKPer').textContent = simMdp(v) + p.sufijo;
-    $('mpKPerMdp').textContent = mdp(v, 2) + p.sufijo;
-    $('mpCompsEt').textContent = p.sufijo;
-    $('mpFactorTx').textContent = FACTOR_TX[periodo] || String(p.factor);
-    $('mpCompsTot').textContent = simMdp(v) + p.sufijo;
+    pon('mpKPerEt', 'textContent', '(' + p.label + ')');
+    pon('mpKPer', 'textContent', simMdp(v) + p.sufijo);
+    pon('mpKPerMdp', 'textContent', mdp(v, 2) + p.sufijo);
+    pon('mpCompsEt', 'textContent', p.sufijo);
+    pon('mpFactorTx', 'textContent', FACTOR_TX[periodo] || String(p.factor));
+    pon('mpCompsTot', 'textContent', simMdp(v) + p.sufijo);
     filasComp.forEach(function (tr) {
       tr.querySelector('.mp-c-v').textContent = simMdp(Number(tr.dataset.v) * p.factor) + p.sufijo;
     });
     var hora = D.anual * 1e6 / (365 * 24), minuto = hora / 60;
-    $('mpEquiv').innerHTML = 'Lo leas como lo leas, el ritmo es el mismo: <b class="mp-num">' + esc(pesos2(Math.round(hora * 100) / 100)) +
+    if ($('mpEquiv')) $('mpEquiv').innerHTML = 'Lo leas como lo leas, el ritmo es el mismo: <b class="mp-num">' + esc(pesos2(Math.round(hora * 100) / 100)) +
       '</b> cada hora y <b class="mp-num">' + esc(pesos2(Math.round(minuto * 100) / 100)) + '</b> cada minuto ' + chip('derivado') +
       ' (cifra anual ÷ 8,760 horas o ÷ 525,600 minutos de un año de 365 días).';
   }
@@ -72,6 +79,7 @@
   var modoBs = [].slice.call(raiz.querySelectorAll('.mp-modo-b'));
   function pintaModo() {
     var m = D.modos[modo];
+    if (!$('mpKReal')) return;
     modoBs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.modo === modo ? 'true' : 'false'); });
     var realPar = m.realPar != null ? m.realPar : m.real;
     $('mpKReal').textContent = simMdp(m.real);
@@ -114,6 +122,7 @@
     return { t: mdp(o.real), e: o.er };
   }
   function pintaObras() {
+    if (!lista) return;
     ordenBs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.orden === orden ? 'true' : 'false'); });
     var f = ORDENES[orden];
     var obras = D.obras.slice().sort(function (a, b) {
@@ -142,7 +151,7 @@
   });
 
   /* ---------- 4. CSV en el navegador ---------- */
-  $('mpCsv').addEventListener('click', function () {
+  if ($('mpCsv')) $('mpCsv').addEventListener('click', function () {
     var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
     var filas = [['obra', 'presidente', 'periodo', 'aprobado_mdp', 'estado_aprobado', 'erogado_mdp', 'estado_erogado',
       'sobrecosto_pct', 'estado_sobrecosto', 'perdida_anual_documentada_mdp', 'estado_perdida', 'fuente', 'url']];
@@ -159,6 +168,7 @@
 
   /* ---------- 5. El contador en vivo ---------- */
   var vivo = $('mpVivo'), pausaB = $('mpPausa');
+  if (!vivo || !pausaB) { pintaPeriodo(); pintaModo(); pintaObras(); return; }
   var acumulado = 0, desde = Date.now(), pausado = false;
   var flota = document.createElement('a');
   flota.className = 'mp-flota';
@@ -166,6 +176,12 @@
   flota.hidden = true;
   flota.innerHTML = '<span class="mp-punto" aria-hidden="true"></span><span class="mp-flota-et">Desde que llegaste</span> <b class="mp-num" id="mpFlotaV"></b>';
   raiz.appendChild(flota);
+  /* Volver al contador sin sumar un paso al historial (botón Atrás). */
+  flota.addEventListener('click', function (ev) {
+    ev.preventDefault();
+    $('mpPantalla').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    pausaB.focus({ preventScroll: true });
+  });
   var flotaV = $('mpFlotaV');
 
   function segundos() { return acumulado + (pausado ? 0 : (Date.now() - desde) / 1000); }

@@ -48,7 +48,10 @@ def e(id_, tema, que, porque, responsable, enlace, enlace_txt, aparece):
 
 # Las otras aplicaciones de Megaobras que muestran los pendientes de cada obra
 # y del reloj (13-10-2026: cada una en pagina propia).
-MEGAOBRAS_PAGS = [('herramienta-megaobras-pulso.html', 'Megaobras · El pulso del gasto'),
+MEGAOBRAS_PAGS = [('herramienta-megaobras-pulso-cifras.html', 'Megaobras · El pulso del gasto › Las cuatro cifras'),
+                  ('herramienta-megaobras-pulso-ritmo.html', 'Megaobras · El pulso del gasto › El ritmo'),
+                  ('herramienta-megaobras-pulso-composicion.html', 'Megaobras · El pulso del gasto › De qué está hecho el total'),
+                  ('herramienta-megaobras-pulso-calculo.html', 'Megaobras · El pulso del gasto › Cómo se calcula'),
                   ('herramienta-megaobras-sexenios.html', 'Megaobras · Las obras de cada sexenio'),
                   ('herramienta-megaobras-cero.html', 'Megaobras · De cero al resultado')]
 

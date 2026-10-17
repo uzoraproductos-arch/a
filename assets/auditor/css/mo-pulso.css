@@ -124,6 +124,25 @@
 .mp-sigue ul { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
 .mp-sigue a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
 
+/* Las cuatro partes del pulso: tarjetas que abren su página (17-10-2026) */
+.mp-partes { margin: 0 0 26px; }
+.mp-tarjetas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.mp-tarjeta { display: flex; flex-direction: column; gap: 8px; height: 100%; box-sizing: border-box; padding: 18px; border: 1px solid var(--mp-borde); border-top: 5px solid var(--mp); border-radius: 14px; background: var(--mp-fondo); color: var(--mp-tinta) !important; text-decoration: none; box-shadow: 0 4px 14px rgba(11, 33, 64, .07); transition: transform .15s ease, box-shadow .15s ease; }
+.mp-tarjeta:hover, .mp-tarjeta:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(11, 33, 64, .14); border-color: var(--mp); }
+.mp-tarjeta-num { font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--mp-gris); }
+.mp-tarjeta-tit { font-size: 21px; font-weight: 800; line-height: 1.25; color: var(--mp-osc); }
+.mp-tarjeta-desc { font-size: 16px; line-height: 1.55; }
+.mp-tarjeta-cif { font-size: 17px; font-weight: 700; color: var(--mp-ambar); }
+.mp-tarjeta-ir { margin-top: auto; font-size: 16px; font-weight: 700; color: var(--mp); }
+.mp-subnav { display: grid; gap: 10px; margin: 0 0 22px; }
+.mp-subnav-pie { margin: 0 0 26px; padding-top: 14px; border-top: 1px solid var(--mp-borde); }
+.mp-subnav-volver { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 16px; font-weight: 700; }
+.mp-subnav-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.mp-subnav-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; box-sizing: border-box; padding: 6px 14px; border: 1px solid var(--mp-borde); border-radius: 999px; background: var(--mp-suave); color: var(--mp-tinta) !important; font-size: 16px; font-weight: 600; text-decoration: none; }
+.mp-subnav-chip:hover, .mp-subnav-chip:focus-visible { border-color: var(--mp); }
+.mp-subnav-chip.actual { background: var(--mp); border-color: var(--mp); color: #ffffff !important; }
+.mp .est-chip { font-size: 12px; }
+
 /* Pastilla flotante del contador */
 .mp-flota { position: fixed; z-index: 40; right: 16px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; max-width: calc(100vw - 32px); box-sizing: border-box; padding: 8px 14px; border-radius: 999px; background: #07162c; color: #ffffff !important; font-size: 16px; text-decoration: none; box-shadow: 0 8px 22px rgba(0, 0, 0, .3); }
 .mp-flota[hidden] { display: none; }
@@ -139,6 +158,7 @@
   .mp-vivo-num b { font-size: 30px; }
   .mp-sec { padding: 16px 14px; }
   .mp-kpis { grid-template-columns: minmax(0, 1fr); }
+  .mp-tarjetas { grid-template-columns: minmax(0, 1fr); }
   .mp-kpi-v { font-size: 26px; }
   .mp-dial { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mp-dial-b:last-child { grid-column: 1 / -1; }
@@ -156,4 +176,5 @@
 @media (prefers-reduced-motion: reduce) {
   .mp-punto { animation: none; }
   .mp-barra { transition: none; }
+  .mp-tarjeta { transition: none; }
 }
