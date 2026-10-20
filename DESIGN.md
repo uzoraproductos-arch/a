@@ -378,7 +378,7 @@ inmediato.
 - No inventes una cifra, ni para una maqueta.
 - No uses un acento fuera de su papel.
 - No imites la imagen de una dependencia de gobierno.
-- No uses emojis como marca ni como íconos de sección nuevos.
+- No uses emojis como marca. En la página se ven como íconos de trazo (`iconos.js`, 20-10-2026): todo emoji nuevo necesita su renglón en `herramientas/iconos.py`.
 - No quites el anillo de foco.
 - No toques la Enciclopedia para aplicar esta guía.
 

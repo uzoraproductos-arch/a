@@ -5162,11 +5162,15 @@ nav.tabbar button.active .num {
 }
 
 .versus-hero-box::before {
-  content: "👑";
+  content: "";
+  width: 120px;
+  height: 120px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z' /%3E %3Cpath d='M5 21h14' /%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z' /%3E %3Cpath d='M5 21h14' /%3E%3C/svg%3E") center / contain no-repeat;
   position: absolute;
   right: -10px;
   bottom: -20px;
-  font-size: 110px;
   opacity: 0.05;
   pointer-events: none;
 }
@@ -22515,3 +22519,22 @@ body:has(.descubrimiento-modal.show-modal) .nav-regreso { display: none; }
 [data-theme="dark"] .cc-sim-et { background: #3a2c10; color: #f3d38a; border-color: #6b5222; }
 .cc-sim-nota { margin-top: 10px; }
 .am-tk-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Íconos de trazo en lugar de emojis (decisión del autor, 20-10-2026).
+   Los pone assets/auditor/js/iconos.js; miden lo mismo que la letra de
+   alrededor y toman su color. Solo los semáforos y las alertas llevan el
+   color de su significado. */
+svg.ico { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; flex: none; stroke-width: 1.9; overflow: visible; }
+svg.ico + svg.ico { margin-left: 0.15em; }
+svg.ico.ico-r { fill: currentColor; stroke-width: 0; }
+svg.ico.ico-rot { transform: rotate(180deg); }
+svg.ico-circle.ico-r { width: 0.85em; height: 0.85em; vertical-align: -0.05em; }
+svg.ico.ico-verde { color: var(--emerald-bright, #1e824c); }
+svg.ico.ico-ambar { color: var(--amber, #b7791f); }
+svg.ico.ico-rojo { color: var(--crimson-bright, #ba2828); }
+svg.ico.ico-naranja { color: #d9731a; }
+svg.ico.ico-azul { color: #1d5fd6; }
+svg.ico.ico-gris { opacity: 0.6; }
+svg.ico.ico-oro { color: #c9a84c; }
+svg.ico.ico-plata { color: #8a96a8; }
+svg.ico.ico-bronce { color: #b2713a; }

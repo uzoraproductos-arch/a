@@ -40,6 +40,7 @@ ARCHIVOS = [
     ('src', 'assets/auditor/js/municipios-rendicion.js'),
     ('src', 'assets/auditor/js/audit-engine.js'),
     ('src', 'assets/auditor/js/comunidad.js'),
+    ('src', 'assets/auditor/js/iconos.js'),
 ]
 
 VISIBLE = re.compile(r'<span class="footer-sello">[\s\S]*?</span>')

@@ -282,9 +282,11 @@
   // ------------------------------------------------------------ acciones
   function estado(msg, mal) {
     var e = document.getElementById('agEstado');
+    var turno = e.dataset.turno = String(Date.now());
     e.textContent = msg;
     e.className = 'ag-estado' + (mal ? ' ag-mal' : ' ag-bien');
-    if (!mal) setTimeout(function () { if (e.textContent === msg) e.textContent = ''; }, 5000);
+    // Se compara el turno y no el texto: iconos.js cambia los emojis del aviso.
+    if (!mal) setTimeout(function () { if (e.dataset.turno === turno) e.textContent = ''; }, 5000);
   }
 
   function destacar(id) {

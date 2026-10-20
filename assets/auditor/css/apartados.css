@@ -688,6 +688,7 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .apartado-tarjeta-modulo.herr-foto .apartado-tarjeta-icono {
   width: 88px; height: 88px; font-size: 50px;
   background: rgba(255, 255, 255, 0.92);
+  color: #13284a;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 .apartado-tarjeta-modulo.herr-foto .apartado-tarjeta-nombre {
@@ -749,6 +750,7 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
   width: 1.55em; height: 1.55em; margin-right: 0.32em; border-radius: 50%;
   font-size: 0.95em; line-height: 1; text-shadow: none;
   background: rgba(255, 255, 255, 0.94); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  color: #13284a;
 }
 .herr-cab-tit { vertical-align: middle; }
 .herr-cab .apartado-migas, .herr-cab .apartado-migas span { color: rgba(255, 255, 255, 0.85); }

@@ -298,7 +298,7 @@
     if (c && c.id) return;
     if (c) {
       var art = c.closest('.pa-nota');
-      var tx = art.innerText.replace(/📋 Copiar la nota|✅ Copiada/g, '').trim() + '\n' + location.href.split('?')[0];
+      var tx = art.innerText.replace(/(?:📋 ?)?Copiar la nota|(?:✅ ?)?Copiada/g, '').trim() + '\n' + location.href.split('?')[0];
       (navigator.clipboard ? navigator.clipboard.writeText(tx) : Promise.reject()).then(function () {
         c.textContent = '✅ Copiada';
       }, function () { c.textContent = 'Selecciónala y cópiala a mano'; });

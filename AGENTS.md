@@ -188,8 +188,14 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
   - El texto corrido nunca baja de 16 px en celular.
   - Todo lo que se toca mide al menos 44 × 44 px.
   - Al lector se le habla de tú, también en los textos del motor.
-  - Los emojis se quedan (decisión del autor, 12-10-2026): no se quitan de
-    títulos, botones ni rótulos. La guardia los cuenta, pero no los exige.
+  - **Los emojis se ven como íconos de trazo** (decisión del autor,
+    20-10-2026, que reemplaza la del 12-10-2026). Los textos se siguen
+    escribiendo con emojis; `assets/auditor/js/iconos.js`, que se carga en el
+    `<head>` de todas las páginas, los cambia al pintar por íconos Lucide de
+    un solo color. Un emoji nuevo necesita su renglón en
+    `herramientas/iconos.py` (ícono y nombre en español), y luego se corre
+    el script; si no, se queda como emoji. No compares textos de la página
+    que lleven emoji (`textContent === '🔒 …'`): al pintarse ya no lo traen.
 
 ---
 
