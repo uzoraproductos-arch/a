@@ -175,7 +175,7 @@ def construir(base, ref):
     <h2 class="ef-tit" id="ef-sig-tit">➡️ Sigue la pista</h2>
     <ul class="ef-hermanas">
       <li><a href="herramienta-inspector-entes.html"><span aria-hidden="true">🏢</span><b>Auditor de entes públicos</b><small>Qué dependencia contrató y cuánto gastó.</small></a></li>
-      <li><a href="herramienta-inspector-asf.html"><span aria-hidden="true">🏛️</span><b>Qué encontró la ASF</b><small>Observaciones de la Auditoría Superior.</small></a></li>
+      <li><a href="herramienta-inspector-asf.html"><span aria-hidden="true">🏛️</span><b>Expedientes de casos de la ASF</b><small>Observaciones de la Auditoría Superior y de las demás autoridades.</small></a></li>
       <li><a href="expedientes.html"><span aria-hidden="true">📂</span><b>Expedientes de casos</b><small>Casos por aclarar, con sus documentos.</small></a></li>
       <li><a href="garantias.html"><span aria-hidden="true">🚪</span><b>Garantías cívicas</b><small>A qué puerta tocar para preguntar o denunciar.</small></a></li>
     </ul>

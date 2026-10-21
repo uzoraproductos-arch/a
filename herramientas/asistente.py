@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """«Pregúntale al Auditor»: el bot interno de Auditavision (pedido del autor,
-11-10-2026). Vive en el Modo Inspector, aparte de las siete aplicaciones de
+11-10-2026). Vive en el Modo Inspector, aparte de las seis aplicaciones de
 «Grandes investigaciones».
 
 Es un bot interno, no una IA generativa: no redacta cifras. Cada respuesta

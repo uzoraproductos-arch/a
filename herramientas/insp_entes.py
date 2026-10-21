@@ -379,7 +379,7 @@ def _paginas(base, ref):
       <nav class="ie-sec ie-hermanas" aria-label="Para seguir el hilo">
         <h2 class="ie-tit"><span aria-hidden="true">🧵</span> Para seguir el hilo</h2>
         <div class="ie-herm">
-          <a href="herramienta-inspector-asf.html"><span aria-hidden="true">🏛️</span><b>Qué encontró la ASF</b><small>La Cuenta Pública 2024, sector por sector</small></a>
+          <a href="herramienta-inspector-asf.html"><span aria-hidden="true">🏛️</span><b>Expedientes de casos de la ASF</b><small>Los casos y la Cuenta Pública, sector por sector</small></a>
           <a href="expedientes.html"><span aria-hidden="true">📂</span><b>Expedientes de casos</b><small>Informe por informe de la ASF</small></a>
           <a href="numeros-las-32-entidades.html"><span aria-hidden="true">🗺️</span><b>Las 32 entidades</b><small>Cuánto recibe cada estado</small></a>
           <a href="numeros-los-municipios.html"><span aria-hidden="true">🏙️</span><b>Los municipios</b><small>El padrón del INEGI con sus cifras</small></a>

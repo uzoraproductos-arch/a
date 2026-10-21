@@ -408,7 +408,7 @@ TEMAS = [
     (['aportaciones', 'ramo 33'], 'auditoria-ramo-33.html', 'Ramo 33', 'Auditoría en imágenes'),
     (['gobierno del estado', 'gobernador', 'gobernadora', 'entidad federativa', 'estatal'], 'numeros-las-32-entidades.html', 'Las 32 entidades', 'Números'),
     (['municipio', 'alcaldia', 'ayuntamiento', 'predial'], 'numeros-los-municipios.html', 'Los 2,479 municipios', 'Números'),
-    (['asf', 'auditoria superior', 'cuenta publica', 'por aclarar'], 'herramienta-inspector-asf.html', 'Qué encontró la ASF', 'Modo Inspector'),
+    (['asf', 'auditoria superior', 'cuenta publica', 'por aclarar'], 'herramienta-inspector-asf.html', 'Expedientes de casos de la ASF', 'Modo Inspector'),
     (['efos', 'facturas falsas', 'empresas fantasma', '69-b', 'factureras'], 'herramienta-inspector-efos.html', 'Lista negra del SAT', 'Modo Inspector'),
     (['congreso', 'diputados', 'senado', 'poder judicial', 'suprema corte', 'judicatura'], 'numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Números'),
     (['megaobra', 'obra publica', 'sobrecosto'], 'herramienta-megaobras.html', 'Inversión y Megaobras', 'Herramientas'),
@@ -447,7 +447,7 @@ def _aviso(ref):
          'De los documentos de la SHCP {r_pef} {r_lif} {r_cgpe}, la ASF, la Cuenta Pública y el INEGI; cada una lleva su enlace. '
          'Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el '
          '<a href="pendientes.html">Registro de pendientes</a>. ¿Prefieres elegir tú la cifra? Está el '
-         '<a href="{cat}">catálogo de cifras oficiales</a>, en Qué encontró la ASF.'),
+         '<a href="{cat}">catálogo de cifras oficiales</a>, en Expedientes de casos de la ASF.'),
         ('🔏', 'El sello',
          'El veredicto lo expide Auditavisión con su folio y su huella digital. <b>No es un documento oficial</b>: '
          'la huella solo certifica que el veredicto no se ha alterado.'),
@@ -584,10 +584,10 @@ def catalogo_pagina(base, ref):
              'pasos': {'cifra': CATALOGO + '#inPaso2', 'contraste': CATALOGO + '#inPaso3'}}
     return '''<div class="in" id="inRaiz" data-paso="manual">
   <nav class="in-subnav" aria-label="De dónde viene esta página">
-    <a class="in-subnav-volver" href="herramienta-inspector-asf.html"><span aria-hidden="true">←</span> Volver a los capítulos de Qué encontró la ASF</a>
+    <a class="in-subnav-volver" href="herramienta-inspector-asf.html"><span aria-hidden="true">←</span> Volver a los capítulos de Expedientes de casos de la ASF</a>
   </nav>
   <section class="in-arranque" aria-labelledby="inArrTit">
-    <p class="in-kicker">Qué encontró la ASF · catálogo</p>
+    <p class="in-kicker">Expedientes de casos de la ASF · catálogo</p>
     <h2 class="in-grande" id="inArrTit">{total} cifras oficiales, cada una con su documento.</h2>
     <p class="in-txt">Más los ingresos de cada municipio del INEGI. Elige una, escribe la cifra que leíste en una nota y mide cuánto se aleja. Si tienes la liga de la nota, <a href="{nota}">Contrasta una nota</a> la lee por ti y encuentra sus cifras.</p>
   </section>

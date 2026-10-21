@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Modo Inspector, aplicacion 1: «Que encontro la ASF», en pagina propia
-(pedido del autor, 12-10-2026).
+"""Modo Inspector, aplicacion 1: «Expedientes de casos de la ASF».
+
+Fue «Que encontro la ASF», en pagina propia desde el 12-10-2026. El
+21-10-2026 (pedido del autor) se fusiono con la aplicacion 2, «Expedientes
+de casos», y se amplio a todas las autoridades que fiscalizan el dinero
+publico (fiscalizadores.py), con un agente que vigila lo que publican de las
+Cuentas Publicas 2024 a 2027 (agente_fiscalizacion.py). Sus capitulos: los
+casos (expedientes.html, de expedientes.py), quien fiscaliza, el
+seguimiento, y los siete que ya tenia.
 
 Antes la pagina cargaba la portada entera en un marco y el motor pintaba
 renderCuentaPublica(). Ahora el cuerpo se escribe aqui, con las cifras ya
@@ -17,6 +24,8 @@ Lo llama apartados.insp_nativa(): construir(base, ref) -> HTML del cuerpo.
 import html
 import json
 
+import expedientes
+import fiscalizadores
 import insp_nota
 
 from presupuesto_modulos import chip
@@ -116,7 +125,7 @@ def arranque(C, ref, prox):
                   '<span id="iaRelojEst" hidden>%s</span></span></p>') % (
             prox['fecha'], esc(minus(prox['titulo'])), fecha(prox['fecha']), chip('derivado'))
     return '''<section class="ia-arranque" aria-labelledby="iaArrTit">
-        <p class="ia-arr-pre">Cuenta Pública 2024 · las tres entregas de la Auditoría Superior de la Federación</p>
+        <p class="ia-arr-pre">Los expedientes oficiales de quienes fiscalizan el dinero público · Cuenta Pública 2024, tres entregas de la Auditoría Superior</p>
         <h2 class="ia-arr-tit" id="iaArrTit"><span class="ia-arr-cifra">%s</span> quedaron por aclarar %s</h2>
         <p class="ia-arr-txt">Es el dinero público que, al cerrar cada auditoría, <b>no tenía documentos que acreditaran en qué se gastó</b>. No es lo mismo que robado: los entes todavía pueden aclararlo. Si no lo hacen, el caso pasa a investigación y puede llegar al Tribunal Federal de Justicia Administrativa o a la Fiscalía (LFRCF, art. 40). %s %s</p>
         <div class="ia-arr-datos">
@@ -127,9 +136,9 @@ def arranque(C, ref, prox):
         <p class="ia-arr-nota">%s Porcentaje: por aclarar del gasto federalizado (%s) ÷ total por aclarar (%s).</p>
         %s
         <div class="ia-arr-acc">
-          <a class="ia-boton ia-boton-pri" href="herramienta-inspector-asf-estado.html">🗺️ Ver lo de tu estado</a>
-          <a class="ia-boton" href="herramienta-inspector-asf-acciones.html">⚖️ Qué pasa después</a>
-          <a class="ia-boton" href="expedientes.html">📂 Casos por aclarar</a>
+          <a class="ia-boton ia-boton-pri" href="expedientes.html">📂 Los casos por aclarar</a>
+          <a class="ia-boton" href="herramienta-inspector-asf-autoridades.html">🏛️ Quién fiscaliza</a>
+          <a class="ia-boton" href="herramienta-inspector-asf-estado.html">🗺️ Lo de tu estado</a>
         </div>
       </section>''' % (
         mdp(T['porAclarar']), chip('oficial'), fuente(C, 'MDB2024', C['cp2024']['pagina']), ref('ref-asf-mdb2024'),
@@ -141,8 +150,9 @@ def arranque(C, ref, prox):
 
 def cap_archivo(slug):
     """Cada capitulo vive en su pagina (pedido del autor, 21-10-2026): la
-    portada de la aplicacion queda con el arranque y el indice."""
-    return insp_nota.CATALOGO if slug == 'catalogo' else 'herramienta-inspector-asf-%s.html' % slug
+    portada de la aplicacion queda con el arranque y el indice. Los casos
+    conservan su direccion de siempre, expedientes.html."""
+    return {'catalogo': insp_nota.CATALOGO, 'casos': expedientes.ARCHIVO}.get(slug) or 'herramienta-inspector-asf-%s.html' % slug
 
 
 def indice(caps):
@@ -169,11 +179,22 @@ def calendario(C, prox):
         pie = ('<small>%s · %s</small>' % (fuente(C, c['fuente']), esc(c['fundamento']))) if c.get('fundamento') else ''
         items.append('<li class="%s" data-fecha="%s"><span class="ia-l-fecha">%s</span><b>%s</b><span>%s</span>%s</li>'
                      % (cls, c['fecha'], fecha(c['fecha']), esc(c['titulo']), esc(c['texto']), pie))
-    return sec('ia-calendario', '🗓️', 'Qué es la Cuenta Pública y cuándo se revisa', '''
+    return sec('ia-calendario', '📡', 'Qué es la Cuenta Pública y el seguimiento de 2024 a 2027', '''
         <p class="ia-txt">El presupuesto dice cuánto se <b>puede</b> gastar. La <b>Cuenta Pública</b> dice cuánto se gastó de verdad: es el informe contable, presupuestario y programático de los tres Poderes, los órganos autónomos y las empresas del Estado. Hacienda la entrega a la Cámara de Diputados y la <b>Auditoría Superior de la Federación (ASF)</b> la revisa en tres entregas.</p>
         <ol class="ia-linea">%s</ol>
-        <p class="ia-nota">Los datos de la Cuenta Pública de cada año están en el %s. Las fechas son las que fija la ley; si la Cámara concede prórroga a Hacienda, la ASF recorre las suyas (CPEUM, art. 74, fr. VI). La cuenta regresiva %s la calcula tu navegador con la fecha de hoy.</p>''' % (
-        ''.join(items), fuente(C, 'CPSHCP'), chip('derivado')))
+        <p class="ia-nota">Los datos de la Cuenta Pública de cada año están en el %s. Las fechas son las que fija la ley; si la Cámara concede prórroga a Hacienda, la ASF recorre las suyas (CPEUM, art. 74, fr. VI). La cuenta regresiva %s la calcula tu navegador con la fecha de hoy.</p>
+        <h2 class="ia-sub" id="ia-seguimiento">📡 El seguimiento: 2024, 2025, 2026 y 2027</h2>
+        <p class="ia-txt">Un agente de Auditavisión recorre las direcciones donde la ASF publica cada entrega y los portales de las demás autoridades. Cuando aparece un documento nuevo, lo marca aquí; sus cifras entran a la plataforma solo después de extraerlas del documento oficial, con su huella. Nada se estima.</p>
+        %s''' % (
+        ''.join(items), fuente(C, 'CPSHCP'), chip('derivado'), fiscalizadores.seguimiento_html(chip)))
+
+
+def autoridades(ref):
+    return '''<section class="ia-sec" id="ia-autoridades" aria-label="Quién fiscaliza el dinero público">
+        <p class="ia-txt">La Auditoría Superior no está sola. Revisar el dinero público es trabajo de varias autoridades, cada una con su expediente oficial: unas auditan desde fuera, otras vigilan desde dentro, otras sancionan y otras coordinan. Aquí están todas, con el artículo que les da la facultad, el documento que publican y lo que de eso ya está en Auditavisión.</p>
+        %s
+        <p class="ia-nota">Cada fundamento se verificó contra el texto vigente de la ley en el portal de la Cámara de Diputados. El estado de cada portal (📡) lo revisa el agente de seguimiento en cada vuelta. Lo que aún no está integrado es una falta de la plataforma, no de la autoridad.</p>
+      </section>''' % fiscalizadores.autoridades_html(ref)
 
 
 def cifras(C):
@@ -368,7 +389,7 @@ def documentos(C, ref):
                    % (esc(f['url']), esc(f['doc']), ('<code title="Huella SHA-256 del PDF">%s…</code>' % f['sha256'][:16]) if f.get('sha256') else '')
                    for f in C['fuentes'].values())
     return sec('ia-docs', '📚', 'Documentos y descarga', '''
-        <p class="ia-txt">Cada cifra de los nueve capítulos sale de estos documentos. Puedes bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>
+        <p class="ia-txt">Cada cifra de la Auditoría Superior en esta aplicación sale de estos documentos. Puedes bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>
         <div class="ia-arr-acc">
           <button type="button" class="ia-boton ia-boton-pri" id="iaCSV" hidden>⬇️ Descargar CSV por estado</button>
           <a class="ia-boton" href="%s" target="_blank" rel="noopener">🔎 Buscar una auditoría en ASF Datos ↗</a>
@@ -396,7 +417,7 @@ def _datos(C):
 
 
 def capitulos(base, ref):
-    """Los nueve capitulos, en orden: slug de su pagina, ancla vieja (para
+    """Los once capitulos, en orden: slug de su pagina, ancla vieja (para
     los enlaces que aun traen #ia-...), icono, nombre corto del indice, cifra
     de la tarjeta, titulo de la pagina, entrada y cuerpo (None en el
     catalogo, que arma insp_nota)."""
@@ -409,10 +430,19 @@ def capitulos(base, ref):
     def c(slug, ancla, ico, corto, cifra, titulo, entrada, cuerpo, con_datos=False):
         return {'slug': slug, 'ancla': ancla, 'ico': ico, 'corto': corto, 'cifra': cifra, 'titulo': titulo,
                 'entrada': entrada, 'cuerpo': cuerpo, 'datos': con_datos}
+    nexp = len(base['expedientes']['fichas'])
     return [
-        c('calendario', 'ia-calendario', '🗓️', 'Qué es y cuándo se revisa', fecha(prox['fecha']) if prox else '',
-          'Qué es la Cuenta Pública y cuándo se revisa',
-          'El presupuesto dice cuánto se <b>puede</b> gastar; la Cuenta Pública, cuánto se gastó de verdad. Aquí ves quién la revisa y en qué fechas.',
+        c('casos', 'ex-casos', '📂', 'Los casos por aclarar', '%d expedientes' % nexp,
+          'Expedientes de casos por aclarar',
+          'Casos de alto impacto, contados con los informes de la Auditoría Superior de la Federación y el Sistema de Alertas de Hacienda: <b>cuánto dinero no se pudo comprobar, quién lo manejó y qué acciones se promovieron.</b>',
+          None),
+        c('autoridades', 'ia-autoridades', '🏛️', 'Quién fiscaliza', '%d autoridades' % len(fiscalizadores.AUTORIDADES),
+          'Quién fiscaliza el dinero público',
+          'La Auditoría Superior, la Secretaría Anticorrupción, los tribunales, la Fiscalía y las demás: qué revisa cada una y qué expediente oficial publica.',
+          lambda: autoridades(ref)),
+        c('calendario', 'ia-calendario', '📡', 'El seguimiento 2024–2027', ('Próxima: ' + fecha(prox['fecha'])) if prox else '',
+          'Qué es la Cuenta Pública y el seguimiento de 2024 a 2027',
+          'El presupuesto dice cuánto se <b>puede</b> gastar; la Cuenta Pública, cuánto se gastó de verdad. Aquí ves quién la revisa, en qué fechas, y lo que el agente de seguimiento encontró publicado.',
           lambda: calendario(C, prox)),
         c('cifras', 'ia-cifras', '🔎', 'La Cuenta Pública 2024 en cifras', num(T['auditorias']) + ' auditorías',
           'Lo que encontró la ASF en la Cuenta Pública 2024',
@@ -468,10 +498,12 @@ def subpaginas(base, ref):
     out = []
     for k, cp in enumerate(caps):
         p = {'archivo': cap_archivo(cp['slug']), 'icono': cp['ico'], 'menu': cp['corto'], 'titulo': cp['titulo'],
-             'lema': 'Qué encontró la ASF · capítulo %d de %d' % (k + 1, len(caps)), 'entrada': cp['entrada'],
+             'lema': 'Expedientes de casos de la ASF · capítulo %d de %d' % (k + 1, len(caps)), 'entrada': cp['entrada'],
              'cap_nav': tuple((cap_archivo(x['slug']), x['corto']) if x else None
                               for x in (caps[k - 1] if k else None, caps[k + 1] if k + 1 < len(caps) else None)) + (len(caps),)}
-        if cp['cuerpo'] is None:
+        if cp['slug'] == 'casos':
+            p.update({'bloque': expedientes.bloque(), 'estilos': list(expedientes.ESTILOS), 'scripts': list(expedientes.SCRIPTS)})
+        elif cp['cuerpo'] is None:
             p.update({'bloque': insp_nota.catalogo_pagina(base, ref), 'estilos': ['insp-nota.css'], 'scripts': ['insp-nota.js']})
         else:
             p['bloque'] = '\n      '.join(['<div class="ia ia-cap">', cp['cuerpo'](), datos if cp['datos'] else '', '</div>'])

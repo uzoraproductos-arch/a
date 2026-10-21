@@ -1,0 +1,63 @@
+{
+ "fecha": "2026-10-21",
+ "entregas": {
+  "cp2024-asf3": {
+   "http": 200,
+   "informes": 1577
+  },
+  "cp2025-asf1": {
+   "http": 200,
+   "informes": 33
+  },
+  "cp2025-asf2": {
+   "http": 404
+  },
+  "cp2025-asf3": {
+   "http": 404
+  },
+  "cp2026-asf1": {
+   "http": 404
+  },
+  "cp2026-asf2": {
+   "http": 404
+  },
+  "cp2026-asf3": {
+   "http": 404
+  },
+  "cp2027-asf1": {
+   "http": 404
+  },
+  "cp2027-asf2": {
+   "http": 404
+  },
+  "cp2027-asf3": {
+   "http": 404
+  }
+ },
+ "portales": {
+  "asf": {
+   "http": 200
+  },
+  "uec": {
+   "http": 200
+  },
+  "sabg": {
+   "http": 200
+  },
+  "tfja": {
+   "http": 200
+  },
+  "fgr": {
+   "http": 0
+  },
+  "sat": {
+   "http": 200
+  },
+  "sna": {
+   "http": 0
+  },
+  "pnt": {
+   "http": 0
+  }
+ }
+}

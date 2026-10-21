@@ -1,24 +1,22 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""Genera expedientes.html, la pagina de los Expedientes de casos por aclarar.
+"""Los Expedientes de casos por aclarar: el capitulo «Los casos» de
+«Expedientes de casos de la ASF» (expedientes.html).
 
 Hasta el 09-10-2026 los diez expedientes se desplegaban dentro del Modo
-Inspector de la portada (bloque 3). Por la regla de AGENTS.md (5 bis) se
-mudaron a su propia pagina. La pinta assets/auditor/js/expedientes.js con
-las fichas de window.AUDIT_DB.expedientes: aqui no se escribe ni un monto,
-solo el marco y los conceptos para leerlos.
+Inspector de la portada (bloque 3); luego tuvieron pagina propia, y desde el
+21-10-2026 (pedido del autor) son el primer capitulo de la aplicacion que
+fusiono «Que encontro la ASF» con los Expedientes: la arma insp_asf.py con
+bloque(), en la misma direccion. La pinta assets/auditor/js/expedientes.js
+con las fichas de window.AUDIT_DB.expedientes: aqui no se escribe ni un
+monto, solo el marco y los conceptos para leerlos.
 
 Cada caso tiene su ancla, expedientes.html#exp-<id>; el motor manda ahi los
 enlaces viejos (index.html?ir=expediente&ancla=<id>).
-
-Lo llama apartados.generar(), asi que sello.py la regenera con el sello.
 """
 import json
-import os
-
-from apartados import RAIZ, FAVICON, cabecera, sociales, nav_de_pagina
 
 ARCHIVO = 'expedientes.html'
+ESTILOS = ['expedientes.css']
+SCRIPTS = ['expedientes.js']
 
 # Los cuatro pasos de un expediente: conceptos, sin cifras.
 PASOS = [
@@ -37,7 +35,7 @@ GLOSA = [
 ]
 
 
-def pagina(sello):
+def bloque():
     pasos = []
     for i, (ico, tit, txt) in enumerate(PASOS):
         if i:
@@ -45,42 +43,7 @@ def pagina(sello):
         pasos.append('          <div class="ex-paso"><span class="ex-paso-ico" aria-hidden="true">%s</span>'
                      '<b>%s</b><span>%s</span></div>' % (ico, tit, txt))
     glosa = '\n'.join('          <div><dt>%s</dt><dd>%s</dd></div>' % g for g in GLOSA)
-    return '''<!DOCTYPE html>
-<!-- Página generada por herramientas/expedientes.py: no la edites a mano. -->
-<html lang="es" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Expedientes de casos por aclarar · Auditavisión</title>
-  <meta name="description" content="Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.">
-{sociales}
-  <meta name="theme-color" content="#0b2a63">
-  <meta name="color-scheme" content="light">
-  <link rel="icon" href="{favicon}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
-  <script src="assets/auditor/js/iconos.js?v={sello}"></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">
-  <link rel="stylesheet" href="assets/auditor/css/expedientes.css?v={sello}">
-</head>
-<body data-pagina="apartado">
-{cabecera}
-
-  <main class="apartado ex-pagina" id="contenido">
-    <header class="apartado-cab">
-      <div class="apartado-ancho">
-        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="herramientas.html">Herramientas</a> <span aria-hidden="true">›</span> <a href="index.html?ir=verificador&amp;ancla=moduloProemio">Modo Inspector</a> <span aria-hidden="true">›</span> <span>Expedientes de casos</span></nav>
-        <span class="apartado-lema">📂 Lo que sigue sin explicarse</span>
-        <h1 class="apartado-titulo">Expedientes de casos por aclarar</h1>
-        <p class="apartado-entrada">Diez casos de alto impacto, contados con los informes de la Auditoría Superior de la Federación y el Sistema de Alertas de Hacienda: <b>cuánto dinero no se pudo comprobar, quién lo manejó y qué acciones se promovieron.</b></p>
-      </div>
-    </header>
-
-    <div class="apartado-ancho apartado-cuerpo">
+    return '''<div class="ex-pagina">
       <section class="apartado-seccion" id="como-se-lee" aria-labelledby="como-se-lee-tit">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="como-se-lee-tit">🧭 Cómo nace un expediente</h2>
@@ -109,27 +72,8 @@ def pagina(sello):
       <div id="exCasos" class="ex-casos">
         <noscript><p>Esta página arma los expedientes con JavaScript a partir de la base de datos de la plataforma. Actívalo para verlos.</p></noscript>
       </div>
-
-      {nav}
-    </div>
-  </main>
-
-  <footer class="apartado-pie">
-    <div class="apartado-ancho">
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
-    </div>
-  </footer>
-
-  <script>window.EXPEDIENTES_DB = {exp_json};</script>
-  <script src="assets/auditor/js/apartados.js?v={sello}"></script>
-  <script src="assets/auditor/js/comunidad.js?v={sello}"></script>
-  <script src="assets/auditor/js/expedientes.js?v={sello}"></script>
-</body>
-</html>
-'''.format(nav=nav_de_pagina(ARCHIVO), sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
-           favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
-           pasos='\n'.join(pasos), glosa=glosa, exp_json=_exp_json())
-
+      <script>window.EXPEDIENTES_DB = {exp_json};</script>
+    </div>'''.format(pasos='\n'.join(pasos), glosa=glosa, exp_json=_exp_json())
 
 
 def _exp_json():
@@ -138,9 +82,3 @@ def _exp_json():
     return json.dumps(auditorias.db()['expedientes'], ensure_ascii=False,
                       separators=(',', ':')).replace('</', '<\\/')
 
-
-def generar(sello):
-    texto = pagina(sello).replace('\r\n', '\n').replace('\n', '\r\n')
-    open(os.path.join(RAIZ, ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    print('expedientes: %s generada con el sello %s' % (ARCHIVO, sello))
-    return 0

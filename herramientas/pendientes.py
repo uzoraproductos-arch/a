@@ -64,7 +64,7 @@ PROPIOS = [
     ('asf-matriz-2018', 'Fiscalización', 'Matriz de Datos Básicos de la Cuenta Pública 2018',
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
-     'Informes de auditoría de la ASF', [('herramienta-inspector-asf.html', 'Qué encontró la ASF')]),
+     'Informes de auditoría de la ASF', [('herramienta-inspector-asf.html', 'Expedientes de casos de la ASF')]),
     ('municipios-sin-cuenta', 'Estados y municipios', 'Cuenta pública 2024 de los municipios que no la entregaron al INEGI',
      'De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.',
      'Los ayuntamientos que no reportaron', 'https://www.inegi.org.mx/programas/finanzas/',

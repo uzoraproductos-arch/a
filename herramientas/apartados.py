@@ -227,7 +227,7 @@ CAMINO_NUMEROS = (
         (4, '🔍', 'Se rinden cuentas',
          'Al año siguiente se entrega la %s, que revisa la %s.' % (
              glos('Cuenta Pública', 'Cuenta Pública'), glos('Auditoría Superior de la Federación (ASF)', 'Auditoría Superior de la Federación')),
-         'herramienta-inspector-asf.html', 'Qué encontró la ASF'),
+         'herramienta-inspector-asf.html', 'Expedientes de casos de la ASF'),
         (5, '🧭', 'Se hace el balance',
          'El %s junta lo que entró, lo que se gastó, lo que se debe y lo que se perdió: 2024 frente a 2026 y 2027.' % (
              '<a href="estado-de-cuenta.html">Contexto dimensional</a>'),
@@ -454,8 +454,7 @@ APARTADOS = [
                 'tarjetas': [
                     ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', 'numeros-estado-de-resultados.html', None, 'dinero'),
                     ('🧭', 'Contexto dimensional', 'El balance de todo el recorrido: lo que entró, lo que se gastó, lo que se debe y lo que se perdió, 2024 frente a 2026 y 2027.', 'estado-de-cuenta.html', None, 'dinero'),
-                    ('🗂️', 'Expedientes de casos por aclarar', 'Los casos concretos que la Auditoría Superior dejó abiertos, con su documento.', 'expedientes.html', None, 'inspector'),
-                    ('🔍', 'Qué encontró la ASF', 'Auditorías, acciones y lo que quedó por aclarar en la Cuenta Pública 2024, sector por sector. Es una herramienta: abre en Herramientas.', 'herramienta-inspector-asf.html', None, 'inspector'),
+                    ('🔍', 'Expedientes de casos de la ASF', 'Los casos que la Auditoría Superior dejó abiertos, lo que encontró en la Cuenta Pública 2024 sector por sector y quién más fiscaliza. Es una herramienta: abre en Herramientas.', 'herramienta-inspector-asf.html', None, 'inspector'),
                     ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo. Es una herramienta: abre en Herramientas.', 'herramienta-calculadora-reloj.html', None, 'inspector'),
                 ],
             },
@@ -655,12 +654,13 @@ HERRAMIENTAS = [
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
      ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.',
      'verificador', [
-         ('inspasf', '🏛️', 'Qué encontró la ASF', 'El gasto de 2024',
-          'Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.'),
+         # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
+         # 21-10-2026 (pedido del autor) en una sola aplicacion, con todas las
+         # autoridades que fiscalizan y su agente de busqueda (insp_asf.py).
+         ('inspasf', '🏛️', 'Expedientes de casos de la ASF', 'Los expedientes oficiales',
+          'Los casos por aclarar, lo que la Auditoría Superior encontró en el gasto de 2024 y 2025 y lo que publicará de 2026 y 2027, y todas las autoridades que fiscalizan, cada una con su expediente oficial.'),
          # El Radar por entidad (antes la aplicacion 2) se fusiono el
          # 21-10-2026 con la ficha estatal del Auditor de entes publicos.
-         ('expedientes.html', '📂', 'Expedientes de casos', 'Casos por aclarar',
-          'Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.'),
          ('inspentes', '🏢', 'Auditor de entes públicos', 'Busca y verifica',
           'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar. Cada estado trae su radar de la Auditoría Superior: su lugar entre los 32.'),
          ('inspnota', '📰', 'Contrasta una nota', 'Busca y verifica',
@@ -702,10 +702,10 @@ HERRAMIENTAS = [
 HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las'),
                 'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('capítulo', 'capítulos', 'Los')}
 # Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
-# 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus siete
+# 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus seis
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
 # (herramientas/asistente.py).
-HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las siete aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las seis aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado. Está en mejora continua: crece con la plataforma.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -866,9 +866,9 @@ def herramienta(h, n):
 
 def herramienta_divisiones(h, n, ruta):
     """Modo Inspector (11-10-2026, pedido del autor): la pagina de la
-    herramienta ya no despliega las siete aplicaciones ni el bot. Presenta dos
+    herramienta ya no despliega las seis aplicaciones ni el bot. Presenta dos
     tarjetas autonomas y cada una abre su pagina: «Grandes investigaciones»
-    (INVESTIGACIONES, con las siete aplicaciones) y «Pregúntale al Auditor»
+    (INVESTIGACIONES, con las seis aplicaciones) y «Pregúntale al Auditor»
     (ASISTENTE). Devuelve la pagina de la herramienta y la de las
     investigaciones."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
@@ -903,7 +903,8 @@ def herramienta_divisiones(h, n, ruta):
         # vivian aqui (#modulos, #pregunta) llevan a su pagina.
         'hash_a_pagina': dict([(t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas] +
                               [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0]),
-                               ('inspradar', 'herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir')]),
+                               ('inspradar', 'herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir'),
+                               ('expedientes', 'expedientes.html')]),
         'secciones': [{
             'id': 'divisiones', 'titulo': 'Dos maneras de entrarle', 'sin_cab': False,
             'texto': 'Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.',
@@ -1100,7 +1101,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
 
 def herramienta_asistente(bloque):
     """Pagina del bot interno del Modo Inspector (11-10-2026): no es una de
-    las siete aplicaciones, es la segunda division de la herramienta."""
+    las seis aplicaciones, es la segunda division de la herramienta."""
     h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
     archivo, rubro, icono, titulo = h[:4]
     nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
@@ -4816,7 +4817,7 @@ def indice():
     # El Modo Inspector se abre en dos tarjetas (11-10-2026): sus ocho
     # aplicaciones cuelgan de «Grandes investigaciones», y el bot va aparte.
     herr = _rejilla([_grupo(h[2], h[3],
-                            ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las siete aplicaciones del inspector')]
+                            ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las seis aplicaciones del inspector')]
                              if h[1] == 'inspector' else []) +
                             [(modulo_archivo(h[0], t[0]), ('· ' if h[1] == 'inspector' else '') + t[2], t[3]) for t in h[7]] +
                             ([(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])] if h[1] == 'inspector' else []),
@@ -4837,7 +4838,7 @@ def indice():
             enl = [e for e in enl if e[0] != 'comunidad.html']
             k = [e[0] for e in enl].index('garantias.html') + 1
             enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
-            enl += [('expedientes.html', 'Expedientes de casos', 'Casos por aclarar'),
+            enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar'),
                     ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')] + [
                     (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
         otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
@@ -5004,7 +5005,6 @@ def generar(sello=None):
         return 1
     # Las paginas de Auditoria en imagenes comparten cabecera y sello.
     import auditorias
-    import expedientes
     import estado_cuenta
     import pendientes
     if auditorias.generar(sello) or estado_cuenta.generar(sello) or pendientes.generar(sello):
@@ -5017,7 +5017,7 @@ def generar(sello=None):
     open(os.path.join(RAIZ, asistente.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     print('asistente: %s con %d fichas %s' % (asistente.ARCHIVO, sum(cuenta.values()), cuenta))
     import sitemap
-    return expedientes.generar(sello) or sitemap.generar(sello)
+    return sitemap.generar(sello)
 
 
 if __name__ == '__main__':
