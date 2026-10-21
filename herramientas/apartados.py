@@ -750,15 +750,17 @@ def insp_nativa(m, clave, base, ref):
     m['secciones'][0]['bloque'] = nat.construir(base, ref)
     m['estilos'] = list(getattr(nat, 'ESTILOS', []))
     m['scripts'] = list(getattr(nat, 'SCRIPTS', []))
+    if getattr(nat, 'NAV_COMPACTA', False):
+        m['pie_extra'] = m['_nav_min']
+        m['pie_corto'] = True
     return m
 
 
 def insp_subpaginas(m, clave, base, ref):
     """Paginas hijas de una aplicacion nativa (17-10-2026): si su modulo
     trae subpaginas(), cada parte sale en su propia pagina, debajo de la
-    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto,
-    los tres pasos de Contrasta una nota y el catalogo de cifras oficiales
-    de Que encontro la ASF (con sus propios estilos y scripts)."""
+    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto y
+    el catalogo de cifras oficiales de Que encontro la ASF (con sus propios estilos y scripts)."""
     nat = importlib.import_module(INSP_NATIVAS[clave])
     if not hasattr(nat, 'subpaginas'):
         return []
@@ -993,7 +995,31 @@ def herramienta_modulo(h, n, i, bloque=None):
             'id': 'modulo', 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco,
         }],
         'pie_extra': navegacion + '\n\n      ' + herr_otras(archivo),
+        '_nav_min': nav_compacta(h, i),
     }
+
+
+def nav_compacta(h, i):
+    """Navegacion de una sola fila para el pie de una aplicacion (pedido del
+    autor, 21-10-2026, en Contrasta una nota): anterior, todas las
+    aplicaciones, siguiente e indice general, sin las tarjetas grandes ni
+    las otras herramientas. La aplicacion la pide con NAV_COMPACTA."""
+    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    pal = herr_palabra(rubro)
+    todas = INVESTIGACIONES if rubro == 'inspector' else archivo
+    ant = temas[i - 1] if i > 0 else None
+    sig = temas[i + 1] if i + 1 < len(temas) else None
+    def boton(t, clase, rotulo):
+        return ('        <a class="herr-min %s" href="%s"><span>%s</span><small>%s</small></a>'
+                % (clase, modulo_archivo(archivo, t[0]), rotulo, t[2]))
+    filas = [boton(ant, 'ant', '← Anterior') if ant else '',
+             '        <a class="herr-min" href="%s"><span>%s %s</span><small>%s</small></a>' % (
+                 todas, 'Todas las' if pal[2] == 'Las' else 'Todos los', pal[1],
+                 HERR_DIVISION[rubro][0] if rubro == 'inspector' else titulo),
+             boton(sig, 'sig', 'Siguiente →') if sig else '',
+             '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>']
+    return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n%s\n      </nav>'
+            % '\n'.join(f for f in filas if f))
 
 
 def herramienta_asistente(bloque):
@@ -4577,9 +4603,7 @@ def pagina(a, sello):
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <a class="apartado-volver" href="index.html">← Volver al auditor</a>
-      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
+{volver}      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
 
@@ -4590,6 +4614,9 @@ def pagina(a, sello):
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            sociales=sociales(a['archivo'], titulo_doc, descripcion),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
+           volver='' if a.get('pie_corto') else (
+               '      <a class="apartado-volver" href="index.html">← Volver al auditor</a>\n'
+               '      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>\n'),
            padre=padre, cab_clase=cab_clase, cab_estilo=cab_estilo, pie_extra=pie_extra, redirige=redirige, icono='' if a.get('sin_icono_lema') else a['icono'] + ' ', lema=a['lema'],
            titulo=(('<span class="herr-cab-ico" aria-hidden="true">%s</span><span class="herr-cab-tit">%s</span>' % (a['icono_cab'], a['titulo']))
                    if a.get('icono_cab') else a['titulo']), entrada=entrada, nota=nota, en_pagina=en_pagina, guia=guia, guia_abajo=guia_abajo, scripts=scripts, estilos=estilos, antes=(a['antes'] + '\n\n') if a.get('antes') else '',
@@ -4760,6 +4787,15 @@ def indice():
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # Los tres pasos de Contrasta una nota se juntaron en una sola pagina el
+    # 21-10-2026 (pedido del autor); la ?liga= de un veredicto compartido
+    # viaja con la redireccion.
+    'herramienta-inspector-nota-liga.html': ('herramienta-inspector-nota.html', 'Contrasta una nota · la nota',
+                                             'Ahora pegas la nota y ves el veredicto en una sola página.'),
+    'herramienta-inspector-nota-cifras.html': ('herramienta-inspector-nota.html', 'Contrasta una nota · las cifras',
+                                               'Ahora pegas la nota y ves el veredicto en una sola página.'),
+    'herramienta-inspector-nota-veredicto.html': ('herramienta-inspector-nota.html', 'Contrasta una nota · el veredicto',
+                                                  'Ahora pegas la nota y ves el veredicto en una sola página.'),
     # «Hoy y los estados de cuenta» se repartio el 12-10-2026 (pedido del
     # autor): el presupuesto en curso, a «Cuanto dinero es»; el estado de
     # cuenta, al tablero (radar-estado-de-cuenta.html no cambia de direccion).

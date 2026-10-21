@@ -1075,6 +1075,15 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .herr-mod-chip:hover { border-color: var(--civ-azul); }
 .herr-mod-chip.actual { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; }
 @media (max-width: 640px) { .herr-mod-pasos { grid-template-columns: 1fr; } .herr-mod-paso.sig { order: -1; } }
+/* Navegacion compacta de una aplicacion (21-10-2026): una sola fila */
+.herr-nav-min { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; padding-top: 14px; border-top: 1px solid var(--civ-gris-borde); }
+.herr-min { display: grid; flex: 1 1 0; min-width: 140px; min-height: 44px; align-content: center; padding: 8px 14px; border: 1px solid var(--civ-gris-borde); border-radius: 12px; background: #ffffff; color: #0b2a63; text-decoration: none; }
+.herr-min span { font-size: 16px; font-weight: 700; }
+.herr-min small { font-size: 14px; color: #5a6782; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.herr-min:hover, .herr-min:focus-visible { border-color: var(--civ-azul); }
+.herr-min.sig { background: var(--civ-azul); border-color: var(--civ-azul); color: #ffffff; text-align: right; }
+.herr-min.sig small { color: #d6e9fc; }
+@media (max-width: 640px) { .herr-min { flex-basis: calc(50% - 4px); min-width: 0; } }
 
 /* ==========================================================================
    EL CAMINO DEL DINERO, EN CUATRO PASOS (10-10-2026)
