@@ -551,6 +551,11 @@
   function idxOrden(x, s) { var i = idxDe(x); return i === null ? (s > 0 ? 1e9 : -1e9) : i; }
 
   var st = { nivel: 'federal', q: '', vista: 'todos', orden: 'catalogo', tope: 60, sel: null };
+  /* El directorio vive en su propia página (pedido del autor, 21-10-2026).
+     Este guion sirve a las dos: en la del auditor no hay lista que pintar, y
+     el buscador manda al directorio cuando se piden todos los resultados. */
+  var ES_DIR = !!document.getElementById('ieLista');
+  var DIRP = raiz.getAttribute('data-directorio') || 'herramienta-inspector-entes-directorio.html';
 
   /* ---------------- El directorio ---------------- */
   function tarjeta(x) {
@@ -591,6 +596,7 @@
   }
 
   function pintarNiveles() {
+    if (!ES_DIR) return;
     [].forEach.call(raiz.querySelectorAll('.ie-nivel'), function (b) {
       var k = b.getAttribute('data-nivel'), act = k === st.nivel;
       b.classList.toggle('activo', act);
@@ -624,6 +630,7 @@
   }
 
   function pintarLista() {
+    if (!ES_DIR) return;
     var lista = document.getElementById('ieLista'), conteo = document.getElementById('ieConteo'), mas = document.getElementById('ieMas');
     if (st.nivel === 'municipal' && !window.AUDIT_MUNICIPIOS) {
       document.getElementById('ieCtl').innerHTML = '';
@@ -1024,7 +1031,7 @@
     if (/^#ente=/.test(location.hash)) history.pushState(null, '', location.pathname + location.search);
     pintarLista();
     var vuelta = sel && document.querySelector('#ieLista a[href="#ente=' + sel.nivel + ':' + encodeURIComponent(sel.id) + '"]');
-    irA(vuelta || document.getElementById('ie-dir'));
+    irA(vuelta || document.getElementById('ie-dir') || raiz);
     if (vuelta) vuelta.focus({ preventScroll: true });
   }
 
@@ -1043,16 +1050,14 @@
   /* ---------------- La ficha para copiar ---------------- */
   /* El cuerpo es lo que firma la huella; la ficha copiada le suma el sello y el enlace. */
   function textoFicha() {
-    var t = cuerpoFicha();
-    if (!t) return '';
-    var ente = buscarEnte(st.sel.nivel, st.sel.id);
-    return t + '\n\nFicha técnica de Auditavisión · Folio ' + (st.folio || 'no disponible') +
+    var ente = st.sel && buscarEnte(st.sel.nivel, st.sel.id);
+    if (!ente) return '';
+    return cuerpoFicha(ente) + '\n\nFicha técnica de Auditavisión · Folio ' + (st.folio || 'no disponible') +
       (st.huella ? '\nHuella digital (SHA-256 de la ficha): ' + st.huella : '') +
       '\nNo es un documento oficial. Compruébala en: ' + enlaceEnte(ente);
   }
-  function cuerpoFicha() {
-    if (!st.sel) return '';
-    var ente = buscarEnte(st.sel.nivel, st.sel.id);
+  function cuerpoFicha(ente) {
+    ente = ente || (st.sel && buscarEnte(st.sel.nivel, st.sel.id));
     if (!ente) return '';
     var limpio = function (s) { return String(s).replace(/<br>/g, ' ').replace(/<[^>]+>/g, '').replace(/\s*\[\d+\]/g, '').replace(/\s+/g, ' ').trim(); };
     var t = 'AUDITAVISIÓN · Ficha técnica · Auditor de entes públicos\n' + ente.nombre + '\n' + ente.sub + '\n\n';
@@ -1161,6 +1166,7 @@
       var op = sug.querySelectorAll('[role="option"]')[sugSel];
       if (op) { location.hash = op.querySelector('a').getAttribute('href').slice(1); cerrarSug(); }
       else {
+        if (!ES_DIR) { location.href = DIRP + (q.value.trim() ? '?q=' + encodeURIComponent(q.value.trim()) : ''); return; }
         aplicarBusqueda(); cerrarSug();
         irA(document.getElementById('ie-dir'));
       }
@@ -1194,14 +1200,54 @@
     if (ev.target.id === 'ieOrden') { st.orden = ev.target.value; st.tope = 60; pintarLista(); }
   });
   /* Flechas entre las pestañas de nivel. */
-  raiz.querySelector('.ie-niveles').addEventListener('keydown', function (ev) {
+  if (ES_DIR) raiz.querySelector('.ie-niveles').addEventListener('keydown', function (ev) {
     var orden = ['federal', 'estatal', 'municipal'], i = orden.indexOf(st.nivel);
     if (ev.key === 'ArrowRight') { ev.preventDefault(); ponerNivel(orden[(i + 1) % 3], true); }
     else if (ev.key === 'ArrowLeft') { ev.preventDefault(); ponerNivel(orden[(i + 2) % 3], true); }
   });
   window.addEventListener('hashchange', leerHash);
 
+  /* ---------------- Verificar una ficha técnica (folio AV-FT) ---------------- */
+  /* El verificador del Modo Inspector manda aquí los folios AV-FT-…
+     (?verifica=). Se recalcula, en el navegador, la huella de la ficha de
+     cada ente con los datos vigentes: primero los federales y los estados,
+     y si no aparece, los municipios (se cargan al vuelo). */
+  function verificar(v) {
+    var out = document.getElementById('ieVer');
+    if (!out) return;
+    var Q = String(v).trim().replace(/\s+/g, '').toUpperCase();
+    out.hidden = false;
+    out.innerHTML = '<p class="ie-ver-c">⏳ Comprobando el folio <b>' + esc(Q) + '</b> contra las fichas de todos los entes…</p>';
+    function probar(l) {
+      return Promise.all(l.map(function (x) { return huellaDe(cuerpoFicha(x)).then(function (h) { return { x: x, h: h }; }); })).then(function (rs) {
+        if (rs.length && !rs[0].h) throw new Error('sin-sha');
+        return rs.filter(function (r) { return folio(r.h) === Q || r.h.toUpperCase() === Q; })[0] || null;
+      });
+    }
+    probar(entes('federal').concat(entes('estatal'))).then(function (hit) {
+      return hit || cargarMun().then(function () { return probar(entes('municipal')); });
+    }).then(function (hit) {
+      out.innerHTML = hit
+        ? '<div class="ie-ver-si"><b>✅ Auténtica.</b> El folio corresponde a la ficha técnica de <b>' + esc(hit.x.nombre) + '</b>, y sus cifras coinciden con los datos vigentes de la plataforma.' +
+          '<br><small>Huella: <code>' + hit.h + '</code></small><br><a class="ie-btn ie-btn-p" href="#ente=' + hit.x.nivel + ':' + encodeURIComponent(hit.x.id) + '">Ver la ficha</a></div>'
+        : '<div class="ie-ver-no"><b>❌ No coincide</b> con ninguna ficha técnica de los datos vigentes. O la ficha se alteró, o se expidió con datos anteriores: ábrela de nuevo desde el ' +
+          '<a href="' + esc(DIRP) + '">directorio</a> y compara las cifras.</div>';
+    }, function (e) {
+      out.innerHTML = '<div class="ie-ver-no">' + (e && e.message === 'sin-sha'
+        ? 'Este navegador no puede calcular huellas SHA-256. Ábrelo en uno actualizado.'
+        : 'No se pudo cargar el padrón municipal para terminar la comprobación. Revisa tu conexión y vuelve a intentarlo.') + '</div>';
+    });
+  }
+
+  /* El directorio llega con ?q= (lo buscado en la página del auditor) o ?nivel= (sus tres cifras). */
+  var params = new URLSearchParams(location.search);
+  if (ES_DIR) {
+    var pn = params.get('nivel'), pq = params.get('q');
+    if (pn && VISTAS.todos.niv.indexOf(pn) > -1) { st.nivel = pn; if (pn === 'municipal') cargarMun().catch(function () {}); }
+    if (pq) { q.value = pq; qx.hidden = false; st.q = pq.trim(); }
+  }
   avisoMun('');
-  pintarTodo();
+  if (ES_DIR && st.q) aplicarBusqueda(); else pintarTodo();
   if (/^#ente=/.test(location.hash)) leerHash();
+  if (params.get('verifica')) verificar(params.get('verifica'));
 })();

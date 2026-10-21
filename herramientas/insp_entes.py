@@ -57,6 +57,12 @@ CDMX_AVISO = (
 
 MUN_ARCHIVOS = ['municipios-efipem.js', 'municipios-rendicion.js']
 
+# El directorio en su propia pagina (pedido del autor, 21-10-2026): la del
+# auditor lleva un boton «Directorio» que la abre. Mismo contenido, mismos
+# niveles, filtros y orden; el expediente se abre en la pagina donde se pide.
+PAGINA = 'herramienta-inspector-entes.html'
+DIRECTORIO = 'herramienta-inspector-entes-directorio.html'
+
 
 def _banda():
     """La imagen del encabezado del Estado de Cuenta (apartados.py la busca
@@ -237,7 +243,7 @@ def _tarjeta_fed(f):
                sim_mdp(f['cp2025']['ejercido']), chip('oficial')))
 
 
-def construir(base, ref):
+def _paginas(base, ref):
     D = datos(base)
     nfed, nest, nmun = len(D['fed']), len(D['est']), D['mun']['n']
     norg = sum(1 for f in D['fed'] if f.get('padre'))
@@ -311,8 +317,14 @@ def construir(base, ref):
         fu('SHCP, Sistema de Alertas de deuda de entidades federativas', None),
     ])
 
-    return '''<div class="ie" id="ie">
+    args = dict(datos=_json(D), banda=_banda(),
+        nfed=_num(nfed), nraiz=nfed - norg, norg=norg, nest=nest, nmun=_num(nmun) if nmun else 'los',
+        pest=pest, tarjetas=tarjetas, metodo=metodo, fuentes=fuentes,
+        fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '', dirp=DIRECTORIO, pag=PAGINA)
+    return {'principal': '''<div class="ie" id="ie" data-directorio="{dirp}" data-auditor="{pag}">
       <script type="application/json" id="ieDatos">{datos}</script>
+
+      <div class="ie-ver" id="ieVer" aria-live="polite" hidden></div>
 
       <section class="ie-arranque" aria-labelledby="ieArrTit">
         <p class="ie-kicker">Busca y verifica</p>
@@ -329,14 +341,16 @@ def construir(base, ref):
           <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
         </div>
 
+        <a class="ie-dir-btn" href="{dirp}"><span class="ie-dir-btn-ico" aria-hidden="true">🗂️</span><span class="ie-dir-btn-tx"><b>Directorio</b><small>Federal, estatal y municipal: todos los entes, con sus filtros y su orden</small></span><span class="ie-dir-btn-ir" aria-hidden="true">›</span></a>
+
         <div class="ie-cifras" role="list">
-          <a class="ie-cifra" role="listitem" href="#ie-dir" data-ir-nivel="federal"><b>{nfed}</b><span>entes federales<small>{nraiz} con ramo propio y {norg} órganos de los poderes</small></span></a>
-          <a class="ie-cifra" role="listitem" href="#ie-dir" data-ir-nivel="estatal"><b>{nest}</b><span>entidades<small>gobierno del estado y sus tres poderes</small></span></a>
-          <a class="ie-cifra" role="listitem" href="#ie-dir" data-ir-nivel="municipal"><b>{nmun}</b><span>municipios y alcaldías<small>del catálogo del INEGI</small></span></a>
+          <a class="ie-cifra" role="listitem" href="{dirp}?nivel=federal"><b>{nfed}</b><span>entes federales<small>{nraiz} con ramo propio y {norg} órganos de los poderes</small></span></a>
+          <a class="ie-cifra" role="listitem" href="{dirp}?nivel=estatal"><b>{nest}</b><span>entidades<small>gobierno del estado y sus tres poderes</small></span></a>
+          <a class="ie-cifra" role="listitem" href="{dirp}?nivel=municipal"><b>{nmun}</b><span>municipios y alcaldías<small>del catálogo del INEGI</small></span></a>
         </div>
 
         <ol class="ie-pasos">
-          <li><b>1</b> Busca o elige en el directorio.</li>
+          <li><b>1</b> Búscalo aquí o ábrelo desde el directorio.</li>
           <li><b>2</b> Lee la respuesta corta y sus semáforos.</li>
           <li><b>3</b> Abre cada pregunta: cifra, explicación y documento.</li>
           <li><b>4</b> Descarga su ficha técnica en PDF, cópiala o comparte el enlace.</li>
@@ -345,21 +359,6 @@ def construir(base, ref):
       </section>
 
       <section class="ie-exp" id="ieExp" aria-label="Expediente abierto"{banda} hidden></section>
-
-      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
-        <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
-        <div class="ie-niveles" role="tablist" aria-label="Nivel de gobierno">
-{pest}
-        </div>
-        <div class="ie-dir-ctl" id="ieCtl"></div>
-        <div id="ieDir" role="tabpanel" aria-labelledby="ieTab-federal">
-          <p class="ie-conteo" id="ieConteo">{nfed} entes federales. Pulsa uno para abrir su expediente.</p>
-          <ul class="ie-tarjetas" id="ieLista">
-{tarjetas}
-          </ul>
-          <div id="ieMas"></div>
-        </div>
-      </section>
 
       {metodo}
 
@@ -383,8 +382,56 @@ def construir(base, ref):
         </div>
       </nav>
       <div class="ie-aviso" id="ieAviso" role="status" aria-live="polite"></div>
-    </div>'''.format(
-        datos=_json(D), banda=_banda(),
-        nfed=_num(nfed), nraiz=nfed - norg, norg=norg, nest=nest, nmun=_num(nmun) if nmun else 'los',
-        pest=pest, tarjetas=tarjetas, metodo=metodo, fuentes=fuentes,
-        fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '')
+    </div>'''.format(**args),
+            'directorio': '''<div class="ie" id="ie" data-directorio="{dirp}" data-auditor="{pag}">
+      <script type="application/json" id="ieDatos">{datos}</script>
+
+      <section class="ie-arranque ie-arranque-dir" aria-labelledby="ieArrTit">
+        <p class="ie-kicker">Auditor de entes públicos</p>
+        <h2 class="ie-grande" id="ieArrTit">El directorio: elige de quién quieres ver las cuentas</h2>
+        <div class="ie-busca" role="search">
+          <label class="ie-busca-et" for="ieQ">Busca por nombre: dependencia, ramo, estado, municipio o quien lo gobierna</label>
+          <div class="ie-busca-caja">
+            <span class="ie-busca-lupa" aria-hidden="true">🔎</span>
+            <input id="ieQ" class="ie-busca-in" type="search" autocomplete="off" spellcheck="false"
+              placeholder="Ej.: Salud, Pemex, Jalisco, Ecatepec…" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="ieSug">
+            <button type="button" class="ie-busca-x" id="ieQx" aria-label="Borrar la búsqueda" hidden>✕</button>
+          </div>
+          <ul class="ie-sug" id="ieSug" role="listbox" aria-label="Sugerencias" hidden></ul>
+          <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
+        </div>
+
+        <p class="ie-salva">⚖️ <b>Una señal no es una acusación</b>: es algo que la autoridad debe explicar. <a href="{pag}#ie-metodo">Cómo se lee un expediente</a>.</p>
+      </section>
+
+      <section class="ie-exp" id="ieExp" aria-label="Expediente abierto"{banda} hidden></section>
+
+      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
+        <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
+        <div class="ie-niveles" role="tablist" aria-label="Nivel de gobierno">
+{pest}
+        </div>
+        <div class="ie-dir-ctl" id="ieCtl"></div>
+        <div id="ieDir" role="tabpanel" aria-labelledby="ieTab-federal">
+          <p class="ie-conteo" id="ieConteo">{nfed} entes federales. Pulsa uno para abrir su expediente.</p>
+          <ul class="ie-tarjetas" id="ieLista">
+{tarjetas}
+          </ul>
+          <div id="ieMas"></div>
+        </div>
+      </section>
+
+      <div class="ie-aviso" id="ieAviso" role="status" aria-live="polite"></div>
+    </div>'''.format(**args)}
+
+
+def construir(base, ref):
+    return _paginas(base, ref)['principal']
+
+
+def subpaginas(base, ref):
+    """Para apartados.insp_subpaginas(): el directorio en su propia pagina."""
+    return [{'archivo': DIRECTORIO, 'icono': '🗂️', 'menu': 'Directorio', 'titulo': 'Directorio de entes públicos',
+             'lema': 'Auditor de entes públicos · el directorio',
+             'entrada': 'Los entes públicos de los tres niveles de gobierno, federal, estatal y municipal, con sus filtros y su orden. Pulsa uno para abrir su ficha técnica.',
+             'bloque': _paginas(base, ref)['directorio']}]

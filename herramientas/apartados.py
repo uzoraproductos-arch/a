@@ -3239,9 +3239,10 @@ def radar():
     # que carga los mismos datos y el mismo estado-administracion.js.
     verifica_html = '''<div class="ex ex-solo-ver" id="exApp">
           <section class="ex-verifica" id="exVerifica" aria-labelledby="exVerTit">
-            <h3 id="exVerTit">🔏 Verifica un estado de cuenta</h3>
+            <h3 id="exVerTit">🔏 Verifica un estado de cuenta o una ficha técnica</h3>
             <p>¿Te compartieron uno? Escribe su folio (viene arriba del documento y junto al sello) o su huella digital, y te
-              decimos si coincide, cifra por cifra, con los datos vigentes de la plataforma.</p>
+              decimos si coincide, cifra por cifra, con los datos vigentes de la plataforma. También sirve para las fichas
+              técnicas del <a href="herramienta-inspector-entes.html">Auditor de entes públicos</a> (folios AV-FT-…).</p>
             <form class="ex-ver-f" id="exVerForm"><input type="text" id="exVerIn" placeholder="AV-AMLO-1A2B3C4D" autocomplete="off" spellcheck="false" aria-label="Folio o huella digital">
               <button type="submit" class="sz-btn sz-btn-of">Verificar</button></form>
             <div id="exVerOut" aria-live="polite"></div>
@@ -3250,7 +3251,7 @@ def radar():
             <h3 id="exComoTit">Cómo funciona</h3>
             <ol>
               <li><b>La huella.</b> Cada estado de cuenta firma sus cifras con una huella digital SHA-256: si cambia una sola cifra, cambia la huella.</li>
-              <li><b>El folio.</b> Son las iniciales de quién es el documento y los primeros ocho caracteres de su huella, por ejemplo AV-AMLO-1A2B3C4D.</li>
+              <li><b>El folio.</b> Son las iniciales de quién es el documento y los primeros ocho caracteres de su huella, por ejemplo AV-AMLO-1A2B3C4D. Las fichas técnicas de los entes públicos llevan AV-FT y los ocho caracteres de la suya: su huella se recalcula en la página del Auditor de entes públicos, que tiene los datos de los tres niveles de gobierno, y allá te lleva esta página.</li>
               <li><b>La comprobación.</b> Esta página recalcula, en tu navegador, la huella de los %d estados de cuenta vigentes y busca la tuya.
                 Si coincide, el documento no se alteró; si no, o se alteró o se expidió con datos anteriores: expídelo de nuevo en
                 <a href="radar-estado-de-cuenta.html">Expide un estado de cuenta</a> y compara.</li>

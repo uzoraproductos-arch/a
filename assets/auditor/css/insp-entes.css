@@ -107,6 +107,25 @@
 .ie-pt { display: inline-block; flex: 0 0 14px; width: 14px; height: 14px; border-radius: 50%; background: currentColor; }
 .ie-pt.s-sin { background: transparent; border: 2px solid currentColor; }
 
+/* El botón «Directorio» (21-10-2026): abre el directorio en su propia página */
+.ie-dir-btn { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; min-height: 64px; margin: 0 0 20px; padding: 12px 18px;
+  border-radius: 14px; background: #f2c94c; color: var(--ie-azul) !important; text-decoration: none; box-shadow: 0 6px 18px rgba(0, 0, 0, .18); transition: background .15s; }
+.ie-dir-btn:hover { background: #f7d872; }
+.ie-dir-btn-ico { font-size: 30px; line-height: 1; }
+.ie-dir-btn-tx b { display: block; font-size: 21px; line-height: 1.2; }
+.ie-dir-btn-tx small { display: block; font-size: 15px; line-height: 1.35; color: #24324f; }
+.ie-dir-btn-ir { font-size: 30px; font-weight: 800; }
+.ie-salva a { color: #ffffff; }
+.ie-arranque-dir .ie-busca { margin-bottom: 16px; }
+/* El resultado de verificar un folio AV-FT */
+.ie-ver { margin: 0 0 24px; }
+.ie-ver > p, .ie-ver > div { margin: 0; padding: 14px 16px; border-radius: 14px; font-size: 16px; line-height: 1.55; }
+.ie-ver-c { background: var(--ie-fondo); color: var(--ie-suave); }
+.ie-ver-si { background: #e3f4ea; color: #145c37; }
+.ie-ver-no { background: #fde4e1; color: #8a1f17; }
+.ie-ver code { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; word-break: break-all; }
+.ie-ver .ie-btn { margin-top: 10px; text-decoration: none; }
+
 /* --- Expediente --- */
 .ie-exp, .ie-dir, #ie-metodo { scroll-margin-top: 90px; }
 .ie-exp { margin: 0 0 34px; }

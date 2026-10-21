@@ -33,6 +33,7 @@
   if (nc) { try { C = JSON.parse(nc.textContent); } catch (e) { C = null; } }
   /* La verificación tiene su página en el Modo Inspector; esta, sin #exDoc, es ella. */
   var VERIFICA = 'herramienta-inspector-verifica.html', SOLO = !document.getElementById('exDoc');
+  var ENTES = 'herramienta-inspector-entes.html';
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -647,6 +648,11 @@
     /* Folios AV-EC-…: estados de cuenta personales de la Calculadora Cívica
        (13-10-2026). Su huella sale de lo que escribió quien lo expidió, así
        que solo se comprueban con su liga completa, en su propia página. */
+    /* Folios AV-FT-…: fichas técnicas del Auditor de entes públicos
+       (21-10-2026). Su huella se recalcula en esa página, que tiene los
+       datos de los tres niveles de gobierno; un enlace a una ficha se abre tal cual. */
+    if (/herramienta-inspector-entes/i.test(q) && /^https?:/i.test(q)) { location.href = q; return; }
+    if (/AV-FT-/i.test(q)) { location.href = ENTES + '?verifica=' + encodeURIComponent(q.toUpperCase().match(/AV-FT-[0-9A-F]*/)[0]); return; }
     if (/AV-EC-/i.test(q)) {
       var TK = 'herramienta-calculadora-ticket.html';
       var sp = new URLSearchParams(location.search);
@@ -668,7 +674,8 @@
           '<br><small>Huella: <code>' + hit.h + '</code></small> <a class="sz-btn" href="radar-estado-de-cuenta.html?' + hit.q + '=' + hit.id + '">Ver el documento</a></div>';
       } else {
         out.innerHTML = '<div class="ex-ver ex-ver-no"><b>❌ No coincide</b> con ningún estado de cuenta de los datos vigentes. ' +
-          'O el documento se alteró, o se expidió con datos anteriores: en ese caso, expídelo de nuevo y compara las cifras.</div>';
+          'O el documento se alteró, o se expidió con datos anteriores: en ese caso, expídelo de nuevo y compara las cifras.' +
+          (/^[0-9A-F]{64}$/.test(Q) ? ' ¿Es la huella de una ficha técnica del Auditor de entes públicos? <a href="' + ENTES + '?verifica=' + Q + '">Compruébala ahí</a>.' : '') + '</div>';
       }
     });
   }
