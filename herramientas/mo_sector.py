@@ -33,6 +33,7 @@ import json
 import math
 
 from presupuesto_modulos import chip
+import mo_capitulos
 from mo_base import nota_base
 
 ESTILOS = ['mo-sector.css']
@@ -533,7 +534,7 @@ def construir(base, ref):
 
     return '''<div class="ms" id="msRaiz">
   <section class="ms-arranque" aria-labelledby="msArrTit">
-    <p class="ms-kicker">Inversión y Megaobras · aplicación 2</p>
+    <p class="ms-kicker">{kicker}</p>
     <h2 class="ms-grande" id="msArrTit">{n} megaobras, obra por obra. Elige una industria y un mandato.</h2>
     <p class="ms-lead">Las {n} obras emblemáticas de 2000 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> aprobados. Los {n_resc} rescates, bancario y carretero, van aparte (<b class="ms-num">{rreal}</b> pagados y debidos {c_der}): son deudas que el Estado asumió, no obras, y los ves en la industria «Rescates». Filtra por industria y por presidente, compara las que queden, mira lo que cada una nos sigue costando mientras lees y ponlo junto a cifras que conoces.</p>
     <div class="ms-resumen" id="msResumen" aria-live="polite"></div>
@@ -652,10 +653,10 @@ def construir(base, ref):
 
   <aside class="ms-pie">
     <p>Las cifras de las obras salen de la cartera de inversión de Hacienda (Obra Pública Abierta), la Cuenta Pública, el PEF 2026 {r_pef} y los informes de la ASF {r_asf}; cada ficha lleva sus documentos. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="ms-hermanas">Sigue en Inversión y Megaobras: <a href="herramienta-megaobras-pulso.html">📊 El pulso del gasto</a> · <a href="herramienta-megaobras-sexenios.html">🏛️ Las obras de cada sexenio</a> · <a href="herramienta-megaobras-cero.html">🧮 De cero al resultado</a> · <a href="expedientes.html#exp-tren-maya">📂 Expediente del Tren Maya</a></p>
   </aside>
   <script type="application/json" id="msDatos">{datos}</script>
 </div>'''.format(
+        kicker=mo_capitulos.kicker('herramienta-megaobras-sector.html'),
         n=n, treal=sim_mdp(total_real), tpresu=sim_mdp(total_presu), c_der=chip('derivado'),
         n_resc=len(rescates), rreal=sim_mdp(resc_real),
         c_pend_perd=chip('pendiente', PEND_PERDIDA),

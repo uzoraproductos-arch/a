@@ -20,12 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261021e">
-  <script src="assets/auditor/js/iconos.js?v=20261021e"></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261021e">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261021e">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261021e">
-  <script>(function () { var m = {"pulso": "herramienta-megaobras-pulso.html", "sector": "herramienta-megaobras-sector.html", "sexenios": "herramienta-megaobras-sexenios.html", "cero": "herramienta-megaobras-cero.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261021f">
+  <script src="assets/auditor/js/iconos.js?v=20261021f"></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261021f">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261021f">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261021f">
+  <link rel="stylesheet" href="assets/auditor/css/mo-tabla.css?v=20261021f">
+  <script>(function () { var m = {"sexenios": "herramienta-megaobras-sexenios.html", "tabla": "herramienta-megaobras-tabla.html", "cero": "herramienta-megaobras-cero.html", "herramienta-megaobras-pulso-cifras": "herramienta-megaobras-pulso-cifras.html", "sector": "herramienta-megaobras-sector.html", "herramienta-megaobras-pulso-composicion": "herramienta-megaobras-pulso-composicion.html", "herramienta-megaobras-pulso-cuenta": "herramienta-megaobras-pulso-cuenta.html", "herramienta-megaobras-pulso-ritmo": "herramienta-megaobras-pulso-ritmo.html", "herramienta-megaobras-pulso-calculo": "herramienta-megaobras-pulso-calculo.html", "pulso": "herramienta-megaobras-pulso-cifras.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -158,38 +159,36 @@
     <div class="apartado-ancho apartado-cuerpo">
 
       
-      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Las 4 aplicaciones</h2>
-          <p class="apartado-seccion-texto">Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.</p>
-        </div>
+      <section class="apartado-seccion" id="capitulos" aria-labelledby="capitulos-tit">
+        <h2 class="sr-only" id="capitulos-tit"></h2>
         <div class="apartado-bloque">
-        <ol class="herr-ruta">
-          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-pulso.html">
-            <span class="herr-paso-num" aria-hidden="true">1</span>
-            <span class="herr-paso-ico" aria-hidden="true">📊</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Costo y sobrecosto</span><span class="herr-paso-nombre">El pulso del gasto</span><span class="herr-paso-desc">Las cifras de referencia de las obras (costo, sobrecosto, pérdidas de operación y subsidios), por día, mes, trimestre, semestre o año.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-sector.html">
-            <span class="herr-paso-num" aria-hidden="true">2</span>
-            <span class="herr-paso-ico" aria-hidden="true">🏭</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Obra por obra</span><span class="herr-paso-nombre">Sector e industria</span><span class="herr-paso-desc">Filtra por industria y por mandato: la comparativa de las obras, su ficha viva y contra qué se compara ese dinero.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-sexenios.html">
-            <span class="herr-paso-num" aria-hidden="true">3</span>
-            <span class="herr-paso-ico" aria-hidden="true">🏛️</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">De 1988 a 2024</span><span class="herr-paso-nombre">Las obras de cada sexenio</span><span class="herr-paso-desc">Qué megaobras le tocan a cada presidente, de 1988 a 2024, en una sola línea del tiempo.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-          <li><a class="herr-paso rubro-obras" href="herramienta-megaobras-cero.html">
-            <span class="herr-paso-num" aria-hidden="true">4</span>
-            <span class="herr-paso-ico" aria-hidden="true">🧮</span>
-            <span class="herr-paso-tx"><span class="herr-paso-frase">Las cuentas, renglón por renglón</span><span class="herr-paso-nombre">De cero al resultado</span><span class="herr-paso-desc">Las mesas de cálculo renglón por renglón, el inventario por sector y la procedencia de cada cifra, para seguir la cuenta con el dedo.</span></span>
-            <span class="herr-paso-accion">Abrir ➔</span>
-          </a></li>
-        </ol>
+        <div class="mt mt-portada" id="mtRaiz">
+  <section class="mt-arranque" aria-labelledby="mtArrTit">
+    <h2 class="mt-grande" id="mtArrTit">En qué invirtió cada presidente, cuánto costó y si hoy gana o pierde</h2>
+    <div class="mt-claves">
+      <p><span>Costo real de las 11 obras</span><b class="mt-num">$1.18 billones</b> <span class="est-chip est-derivado">derivado</span></p>
+      <p><span>Pagado de más sobre lo aprobado</span><b class="mt-num">$646.7 mil millones</b> <span class="est-chip est-derivado">derivado</span></p>
+      <p><span>Ganancia o pérdida del año, donde se publica</span><b class="mt-num mt-pierde">−$25,429.2 mdp</b> <span class="est-chip est-derivado">derivado</span></p>
+    </div>
+    <div class="mt-pantalla">
+      <p class="mt-vivo-et"><span class="mt-punto" aria-hidden="true"></span> Desde que abriste esta página, las 6 obras con resultado publicado van:</p>
+      <p class="mt-vivo-total"><b class="mt-vivo mt-num mt-pierde mt-grande-num" data-mt-tasa="-806.3546423135464" aria-live="off">−$0.00</b></p>
+      <p class="mt-vivo-sub">Verde si ganan, rojo si pierden. Es el resultado de un año proyectado sobre el tiempo que llevas mirando, no dinero que se mueva en este instante. <a href="herramienta-megaobras-tabla.html">Míralo obra por obra en la tabla general</a>.</p>
+      <div class="mt-ctl">
+        <button type="button" class="mt-boton" data-mt-pausa aria-pressed="false"><span aria-hidden="true">⏸️</span> <span>Pausar</span></button>
+        <button type="button" class="mt-boton" data-mt-cero><span aria-hidden="true">↺</span> Volver a cero</button>
+      </div>
+    </div>
+  </section>
+  <nav class="mt-indice" aria-labelledby="mtIndTit">
+    <h2 class="mt-tit" id="mtIndTit">9 capítulos · cada uno abre su página</h2>
+    <p class="mt-txt">Organizados por lo que quieres saber. Recórrelos en orden o entra directo al que te interese.</p>
+    <section class="mt-bloque" aria-labelledby="mtB-que"><h3 class="mt-bloque-tit" id="mtB-que">¿En qué invirtió cada presidente?</h3><p class="mt-bloque-txt">Los seis sexenios de 1988 a 2024, sus obras y si cada una gana o pierde dinero hoy.</p><ol class="mt-caps"><li><a class="mt-cap" href="herramienta-megaobras-sexenios.html"><span class="mt-cap-num">Capítulo 1</span><span class="mt-cap-tit"><span aria-hidden="true">🏛️</span> Los seis sexenios</span><span class="mt-cap-desc">La línea del tiempo de 1988 a 2024: qué obras le tocan a cada presidente, cuánto costaron y dos sexenios frente a frente.</span><span class="mt-cap-cif mt-num">6 presidentes · 13 obras</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li><li><a class="mt-cap" href="herramienta-megaobras-tabla.html"><span class="mt-cap-num">Capítulo 2</span><span class="mt-cap-tit"><span aria-hidden="true">🚦</span> La tabla general en vivo</span><span class="mt-cap-desc">Todas las obras por sexenio en una sola tabla: en qué se invirtió, cuánto costó y si hoy gana (verde) o pierde (rojo), con su contador.</span><span class="mt-cap-cif mt-num mt-pierde">−$25,429.2 mdp al año, en vivo</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li></ol></section>
+    <section class="mt-bloque" aria-labelledby="mtB-cuanto"><h3 class="mt-bloque-tit" id="mtB-cuanto">¿Cuánto costó?</h3><p class="mt-bloque-txt">De lo que se aprobó a lo que se pagó, obra por obra y por industria, con las cuentas a la vista.</p><ol class="mt-caps"><li><a class="mt-cap" href="herramienta-megaobras-cero.html"><span class="mt-cap-num">Capítulo 3</span><span class="mt-cap-tit"><span aria-hidden="true">🧮</span> De cero al resultado</span><span class="mt-cap-desc">Las tres mesas de cálculo, renglón por renglón: de lo aprobado a lo pagado, la pérdida de un año y lo que te toca a ti.</span><span class="mt-cap-cif mt-num">$646.7 mil millones pagados de más</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li><li><a class="mt-cap" href="herramienta-megaobras-pulso-cifras.html"><span class="mt-cap-num">Capítulo 4</span><span class="mt-cap-tit"><span aria-hidden="true">🧭</span> Las cuatro cifras y los rescates</span><span class="mt-cap-desc">Costo real, pérdida anual, sobrecosto y pesos de más del conjunto, y aparte los dos rescates, que son deudas y no obras.</span><span class="mt-cap-cif mt-num">$1.18 billones de costo real · +122.0% de sobrecosto</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li><li><a class="mt-cap" href="herramienta-megaobras-sector.html"><span class="mt-cap-num">Capítulo 5</span><span class="mt-cap-tit"><span aria-hidden="true">🏭</span> Obra por obra, por industria</span><span class="mt-cap-desc">Filtra por industria y por presidente: la comparativa, la ficha viva de cada obra y contra qué se compara ese dinero.</span><span class="mt-cap-cif mt-num">11 obras y 2 rescates en 6 industrias</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li><li><a class="mt-cap" href="herramienta-megaobras-pulso-composicion.html"><span class="mt-cap-num">Capítulo 6</span><span class="mt-cap-tit"><span aria-hidden="true">🧩</span> De qué está hecho el total</span><span class="mt-cap-desc">Cuánto del costo tiene documento oficial y cuánto es cálculo, con las obras en el orden que elijas y su descarga.</span><span class="mt-cap-cif mt-num">11 de 11 obras con costo documentado</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li></ol></section>
+    <section class="mt-bloque" aria-labelledby="mtB-gana"><h3 class="mt-bloque-tit" id="mtB-gana">¿Gana o pierde?</h3><p class="mt-bloque-txt">Lo que cada obra ingresa, lo que gasta y lo que nos cuesta cada año, al ritmo que elijas.</p><ol class="mt-caps"><li><a class="mt-cap" href="herramienta-megaobras-pulso-cuenta.html"><span class="mt-cap-num">Capítulo 7</span><span class="mt-cap-tit"><span aria-hidden="true">📒</span> La cuenta de cada obra</span><span class="mt-cap-desc">Lo que se esperaba de cada obra y lo que dio: ingresos, gasto de operación, intereses y ganancia o pérdida del año.</span><span class="mt-cap-cif mt-num">6 obras publican su ganancia o pérdida</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li><li><a class="mt-cap" href="herramienta-megaobras-pulso-ritmo.html"><span class="mt-cap-num">Capítulo 8</span><span class="mt-cap-tit"><span aria-hidden="true">⏱️</span> El ritmo de la pérdida</span><span class="mt-cap-desc">La pérdida y el apoyo de un año, por día, mes, trimestre, semestre o año, componente por componente.</span><span class="mt-cap-cif mt-num">$239.62 millones/día de pérdida y apoyo documentados</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li></ol></section>
+    <section class="mt-bloque" aria-labelledby="mtB-como"><h3 class="mt-bloque-tit" id="mtB-como">¿Cómo se sabe?</h3><p class="mt-bloque-txt">Las reglas de cada suma y los documentos oficiales de donde sale cada cifra.</p><ol class="mt-caps"><li><a class="mt-cap" href="herramienta-megaobras-pulso-calculo.html"><span class="mt-cap-num">Capítulo 9</span><span class="mt-cap-tit"><span aria-hidden="true">🔎</span> Cómo se calcula</span><span class="mt-cap-desc">Las reglas de cada suma, división y cadencia, qué cifras tienen documento y las fuentes oficiales.</span><span class="mt-cap-cif mt-num">Las operaciones y sus fuentes, paso a paso</span><span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li></ol></section>
+  </nav>
+</div>
         </div>
       </section>
 
@@ -208,11 +207,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261021e</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261021f</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261021e"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261021e"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261021f"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261021f"></script>
+  <script src="assets/auditor/js/mo-tabla.js?v=20261021f"></script>
 </body>
 </html>

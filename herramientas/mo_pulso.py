@@ -31,7 +31,9 @@ Correcciones frente al motor (AGENTS.md, §2):
   AIFA + NAIM, Bunker). Se dice cuanto pesa cada estado en la suma, y el
   lector puede ver el conjunto solo con las cifras que tienen documento.
 
-Lo llama apartados.insp_nativa() (INSP_NATIVAS['pulso']).
+Desde el 21-10-2026 (pedido del autor) sus cinco partes son capitulos de
+Inversion y Megaobras y ya no hay pagina del pulso: las genera
+apartados.megaobras_pulso() con subpaginas().
 """
 import html
 import json
@@ -309,21 +311,6 @@ def _contexto(base, ref):
         cuenta_html=_cuenta_html(sm), res_txt=mdp(sum(f['v'] for _o, f in _resultados(sm))))
 
 
-ARRANQUE = '''  <section class="mp-arranque" aria-labelledby="mpArrTit">
-    <p class="mp-kicker">Inversión y Megaobras · aplicación 1</p>
-    <h2 class="mp-grande" id="mpArrTit">📊 El pulso del gasto</h2>
-    <p class="mp-lead">Las cifras de referencia de las {n} megaobras evaluadas, de 2000 a 2024: cuánto costaron, cuánto se pasaron de lo aprobado y cuánto siguen costando cada año. Los {n_resc} rescates (bancario y carretero) se cuentan aparte, porque son deudas asumidas y no obras. Abajo están las cinco partes del pulso: cada tarjeta abre su propia página con el desglose completo.</p>
-    <div class="mp-pantalla" id="mpPantalla">
-      <p class="mp-vivo-et"><span class="mp-punto" aria-hidden="true"></span> Desde que abriste esta página, al ritmo documentado</p>
-      <p class="mp-vivo-num mp-num"><b id="mpVivo" aria-live="off">+$0.00</b></p>
-      <p class="mp-vivo-sub">A <b class="mp-num">${seg_txt}</b> por segundo: la pérdida anual documentada de las obras y del rescate bancario ({anual}) entre los 31,536,000 segundos de un año de 365 días {chip_der}. No mide un gasto que ocurra en este instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</p>
-      <div class="mp-ctl">
-        <button type="button" class="mp-boton mp-claro" id="mpPausa" aria-pressed="false"><span aria-hidden="true">⏸️</span> <span>Pausar</span></button>
-        <button type="button" class="mp-boton mp-claro" id="mpCero"><span aria-hidden="true">↺</span> Volver a cero</button>
-      </div>
-    </div>
-  </section>'''
-
 SECCIONES = {
     'cifras': '''  <section class="mp-sec" id="mpCifras" aria-labelledby="mpCifTit">
     <div class="mp-cab">
@@ -417,17 +404,6 @@ SECCIONES = {
     <p class="mp-fuentes">Fuentes: {f_cp}; {f_tm}; {f_ai}; {f_ipab}; {f_opa}; y la ASF {r_asf}.</p>
   </section>''',
 }
-
-SIGUE = '''  <aside class="mp-sigue">
-    <p><b>Sigue con las megaobras:</b></p>
-    <ul>
-      <li><a href="herramienta-megaobras-sector.html"><span aria-hidden="true">🏭</span> El desglose obra por obra: sector e industria</a></li>
-      <li><a href="herramienta-megaobras-sexenios.html"><span aria-hidden="true">🏛️</span> Las obras de cada sexenio</a></li>
-      <li><a href="herramienta-megaobras-cero.html"><span aria-hidden="true">🧮</span> De cero al resultado</a></li>
-      <li><a href="herramienta-calculadora-reloj.html"><span aria-hidden="true">⏰</span> El reloj de la deuda y de lo perdido</a></li>
-    </ul>
-    <p class="mp-gris">¿Encontraste un error? <a href="comunidad-erratas.html">Repórtalo</a>.</p>
-  </aside>'''
 
 DATOS = '''  <script type="application/json" id="mpDatos">{datos}</script>'''
 
@@ -565,8 +541,10 @@ def _cuenta_html(sm):
             '</ol></nav>\n    ' + '\n    '.join(fichas) + '\n  </section>')
 
 # Las partes del pulso, cada una en su pagina (pedido del autor,
-# 17-10-2026; la quinta, la cuenta de cada obra, el mismo dia): la pagina de la aplicacion queda con el contador y cuatro
-# tarjetas; cada tarjeta abre herramienta-megaobras-pulso-<slug>.html.
+# 17-10-2026; la quinta, la cuenta de cada obra, el mismo dia). Desde el
+# 21-10-2026 son capitulos de Inversion y Megaobras (mo_capitulos.py): ya no
+# hay pagina del pulso con su contador y sus tarjetas, ni la fila de partes
+# arriba y abajo; el pie de cada una va de capitulo en capitulo.
 PAGINA = 'herramienta-megaobras-pulso.html'
 PARTES = [
     ('cifras', '🧭', 'Las cuatro cifras', 'Las cuatro cifras de referencia',
@@ -591,48 +569,13 @@ def parte_archivo(slug):
     return PAGINA[:-5] + '-' + slug + '.html'
 
 
-def _tarjetas(c):
-    filas = []
-    for k, (slug, ico, nombre, _tit, desc, cifra) in enumerate(PARTES, 1):
-        filas.append(
-            '    <li><a class="mp-tarjeta" href="%s">'
-            '<span class="mp-tarjeta-num">%d de %d</span>'
-            '<span class="mp-tarjeta-tit"><span aria-hidden="true">%s</span> %s</span>'
-            '<span class="mp-tarjeta-desc">%s</span>'
-            '<span class="mp-tarjeta-cif%s">%s</span>'
-            '<span class="mp-tarjeta-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
-            % (parte_archivo(slug), k, len(PARTES), ico, esc(nombre), esc(desc.format(**c)),
-               ' mp-num' if '{' in cifra else '', cifra.format(**c)))
-    return ('  <nav class="mp-partes" aria-labelledby="mpPartesTit">\n'
-            '    <h2 class="mp-tit" id="mpPartesTit"><span aria-hidden="true">🗂️</span> Las partes del pulso</h2>\n'
-            '    <ol class="mp-tarjetas">\n%s\n    </ol>\n  </nav>' % '\n'.join(filas))
-
-
-def _subnav(actual):
-    chips = ''.join(
-        '<a class="mp-subnav-chip%s" href="%s"%s><span aria-hidden="true">%s</span> %d · %s</a>'
-        % (' actual' if slug == actual else '', parte_archivo(slug), ' aria-current="page"' if slug == actual else '',
-           ico, k, esc(nombre))
-        for k, (slug, ico, nombre, *_r) in enumerate(PARTES, 1))
-    return ('  <nav class="mp-subnav" aria-label="Las partes del pulso">\n'
-            '    <a class="mp-subnav-volver" href="%s"><span aria-hidden="true">←</span> Volver al pulso y su contador</a>\n'
-            '    <div class="mp-subnav-chips">%s</div>\n  </nav>' % (PAGINA, chips))
-
-
-def construir(base, ref):
-    c = _contexto(base, ref)
-    return '\n\n'.join(['<div class="mp" id="mpRaiz">', ARRANQUE.format(**c), _tarjetas(c),
-                         SIGUE.format(**c), DATOS.format(**c)]) + '\n</div>'
-
-
 def subpaginas(base, ref):
     """Las partes, para apartados.insp_subpaginas(): cada una con su
     seccion, la navegacion entre partes y los datos que usa mo-pulso.js."""
     c = _contexto(base, ref)
     out = []
     for slug, ico, nombre, tit, desc, _cif in PARTES:
-        bloque = '\n\n'.join(['<div class="mp mp-parte" id="mpRaiz">', _subnav(slug),
-                               SECCIONES[slug].format(**c), _subnav(slug).replace('class="mp-subnav" aria-label="Las partes del pulso"', 'class="mp-subnav mp-subnav-pie" aria-label="Sigue con otra parte del pulso"', 1),
+        bloque = '\n\n'.join(['<div class="mp mp-parte" id="mpRaiz">', SECCIONES[slug].format(**c),
                                DATOS.format(**c)]) + '\n</div>'
         out.append({'archivo': parte_archivo(slug), 'icono': ico, 'menu': nombre, 'titulo': tit,
                     'entrada': '<b>%s.</b> %s' % (esc(nombre), esc(desc.format(**c))), 'bloque': bloque})

@@ -28,6 +28,7 @@ import re
 import unicodedata
 import sys
 
+import mo_capitulos
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -297,7 +298,7 @@ APARTADOS = [
                 'texto': '',
                 'modulos': True,
                 'tarjetas': [
-                    ('🏗️', 'Simulador de Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
+                    ('🏗️', 'Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
                     ('💳', 'Calculadora Cívica', '', 'herramienta-calculadora.html', None, 'calculadora'),
                     ('🔍', 'Modo Inspector', '', 'herramienta-inspector.html', None, 'inspector'),
                     ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
@@ -630,16 +631,10 @@ HERRAMIENTAS = [
      'Lo que se prometió, lo que se pagó y la diferencia',
      'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás '
      'proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
-     'megaobras', [
-         ('pulso', '📊', 'El pulso del gasto', 'Costo y sobrecosto',
-          'Las cifras de referencia de las obras (costo, sobrecosto, pérdidas de operación y subsidios), por día, mes, trimestre, semestre o año.'),
-         ('sector', '🏭', 'Sector e industria', 'Obra por obra',
-          'Filtra por industria y por mandato: la comparativa de las obras, su ficha viva y contra qué se compara ese dinero.'),
-         ('sexenios', '🏛️', 'Las obras de cada sexenio', 'De 1988 a 2024',
-          'Qué megaobras le tocan a cada presidente, de 1988 a 2024, en una sola línea del tiempo.'),
-         ('cero', '🧮', 'De cero al resultado', 'Las cuentas, renglón por renglón',
-          'Las mesas de cálculo renglón por renglón, el inventario por sector y la procedencia de cada cifra, para seguir la cuenta con el dedo.'),
-     ]),
+     'megaobras',
+     # Desde el 21-10-2026 (pedido del autor) las cuatro aplicaciones son una
+     # sola herramienta en capitulos: la lista vive en herramientas/mo_capitulos.py.
+     mo_capitulos.temas()),
     ('herramienta-calculadora.html', 'calculadora', '💳', 'Calculadora Cívica',
      'Tu sueldo, tus impuestos y el rubro al que llegan',
      'Escribe tu sueldo y la calculadora reparte lo que pagas (ISR, IVA y predial) entre los rubros del presupuesto. Después compara tu '
@@ -705,7 +700,7 @@ HERRAMIENTAS = [
 # tarjetas de la pestana Herramientas se quedan sin icono).
 # (singular, plural, articulo del plural)
 HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las'),
-                'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('aplicación', 'aplicaciones', 'Las')}
+                'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('capítulo', 'capítulos', 'Los')}
 # Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
 # 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus ocho
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
@@ -739,6 +734,7 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspradar': 'insp_radar', 'inspentes': '
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
                 # Inversion y Megaobras (pedido del autor, 13-10-2026).
                 'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
+                'tabla': 'mo_tabla',
                 # Costo Ambiental (pedido del autor, 16-10-2026).
                 'amreloj': 'am_reloj', 'amticket': 'am_ticket', 'ambasura': 'am_basura', 'ampib': 'am_pib'}
 
@@ -999,6 +995,38 @@ def herramienta_modulo(h, n, i, bloque=None):
     }
 
 
+def megaobras_portada(hp, base, ref):
+    """Inversion y Megaobras en capitulos (pedido del autor, 21-10-2026):
+    la portada de la herramienta lleva el contador de la balanza (gana en
+    verde, pierde en rojo) y los capitulos agrupados por pregunta, en lugar
+    de la ruta de cuatro aplicaciones (herramientas/mo_tabla.py)."""
+    import mo_tabla
+    hp['secciones'] = [{'id': 'capitulos', 'titulo': '', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                        'bloque': mo_tabla.portada(base, ref)}]
+    hp['estilos'] = list(mo_tabla.ESTILOS)
+    hp['scripts'] = list(mo_tabla.SCRIPTS)
+    # La aplicacion «El pulso del gasto» ya no tiene pagina: su pestana vieja
+    # lleva a su primera parte.
+    hp['hash_a_pagina'] = dict(hp.get('hash_a_pagina') or {}, pulso='herramienta-megaobras-pulso-cifras.html')
+    return hp
+
+
+def megaobras_pulso(h, n, base, ref):
+    """Las partes de «El pulso del gasto», que desde el 21-10-2026 son
+    capitulos de Inversion y Megaobras: se generan con mo_pulso.subpaginas()
+    sin la pagina del pulso (redirige a la portada, REDIRECCIONES), con el
+    lema y el pie de capitulo."""
+    tema = ('pulso', '📊', 'El pulso del gasto', 'Costo y sobrecosto', '')
+    m = herramienta_modulo(h[:7] + ([tema],), n, 0)
+    out = []
+    for sp in insp_subpaginas(m, 'pulso', base, ref):
+        cap = mo_capitulos.CAPITULOS[mo_capitulos.numero(sp['archivo']) - 1]
+        sp.update({'lema': mo_capitulos.kicker(sp['archivo']), 'padre3': None, 'titulo': cap[3], 'menu': cap[3],
+                   'cap_nav': mo_capitulos.vecinos(sp['archivo'])})
+        out.append(sp)
+    return out
+
+
 def nav_compacta(h, i, padre=None):
     """Navegacion de una sola fila para el pie de una aplicacion (pedido del
     autor, 21-10-2026: la grande «absorbe mucha parte de la pagina»; el
@@ -1043,6 +1071,8 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
     """La fila compacta que le toca a una pagina, o None si no es una
     aplicacion de las cuatro herramientas (ni subpagina de una, ni el bot
     del Modo Inspector)."""
+    if mo_capitulos.numero(archivo):
+        return nav_capitulos((mo_capitulos.PORTAL, mo_capitulos.TITULO), mo_capitulos.vecinos(archivo))
     apps = {}
     for h in HERRAMIENTAS:
         for i, t in enumerate(h[7]):
@@ -4831,6 +4861,11 @@ def indice():
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # Las cuatro aplicaciones de Inversion y Megaobras se fundieron en
+    # capitulos el 21-10-2026 (pedido del autor): el pulso ya no tiene
+    # pagina propia; sus cinco partes son capitulos.
+    'herramienta-megaobras-pulso.html': ('herramienta-megaobras.html', 'El pulso del gasto',
+                                         'Sus cinco partes son ahora capítulos de Inversión y Megaobras, y su contador está en la portada.'),
     # Los tres pasos de Contrasta una nota se juntaron en una sola pagina el
     # 21-10-2026 (pedido del autor); la ?liga= de un veredicto compartido
     # viaja con la redireccion.
@@ -4900,6 +4935,11 @@ def generar(sello=None):
         return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
     for n, h in enumerate(HERRAMIENTAS, 1):
         hp = herramienta(h, n)
+        if h[1] == 'obras':
+            megaobras_portada(hp, base_nat, ref_nat)
+            for sp in megaobras_pulso(h, n, base_nat, ref_nat):
+                texto = pagina(sp, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+                open(os.path.join(RAIZ, sp['archivo']), 'wb').write(texto.encode('utf-8'))
         for pg in [hp] + hp.pop('_extra', []):
             texto = pagina(pg, sello).replace('\r\n', '\n').replace('\n', '\r\n')
             open(os.path.join(RAIZ, pg['archivo']), 'wb').write(texto.encode('utf-8'))

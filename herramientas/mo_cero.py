@@ -33,6 +33,7 @@ import json
 import math
 
 from presupuesto_modulos import chip
+import mo_capitulos
 
 ESTILOS = ['mo-cero.css']
 SCRIPTS = ['mo-cero.js']
@@ -361,7 +362,7 @@ def construir(base, ref):
 
     return '''<div class="mc" id="mcRaiz">
   <section class="mc-arranque" aria-labelledby="mcArrTit">
-    <p class="mc-kicker">Inversión y Megaobras · las cuentas</p>
+    <p class="mc-kicker">{kicker}</p>
     <h2 class="mc-grande" id="mcArrTit">Ninguna cifra se escribe a mano: síguela con el dedo, de cero al resultado.</h2>
     <p class="mc-txt">Tres mesas de cálculo arrancan en cero y avanzan renglón por renglón: cómo se acumuló el sobrecosto de <b>{n_obras} megaobras</b> (los {n_resc} rescates van aparte), cómo se arma la pérdida de un año y cuánto le toca a cada contribuyente. Pulsa cualquier obra para ver de qué documento sale cada número.</p>
     <div class="mc-cifras">
@@ -458,10 +459,10 @@ def construir(base, ref):
       <li><strong>Cifras con documento.</strong> {verif}</li>
       <li><strong>Pendiente declarado.</strong> Las cifras marcadas como pendientes no tienen todavía el documento oficial que las sustenta; se muestran como consolidación documental y no como dato auditado. Pulsa cualquier etiqueta {pend} para ver por qué falta, quién debe publicarlo y dónde debería estar, en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</li>
     </ul>
-    <p class="mc-hermanas">Sigue la cuenta en las otras aplicaciones: <a href="herramienta-megaobras-pulso.html">📊 El pulso del gasto</a> · <a href="herramienta-megaobras-sector.html">🏭 Sector e industria</a> · <a href="herramienta-megaobras-sexenios.html">🏛️ Las obras de cada sexenio</a> · <a href="expedientes.html">🗂️ Expedientes</a></p>
   </section>
   <script type="application/json" id="mcDatos">{datos}</script>
 </div>'''.format(
+        kicker=mo_capitulos.kicker('herramienta-megaobras-cero.html'),
         n=len(lista), n_obras=len(vista1), n_resc=len(lista) - len(vista1), k1=smdp(a1['brecha']), k2=smdp(a['anual']), doc=sum(1 for o in lista if o['pe'] != 'pendiente'),
         d=chip('derivado'), o=chip('oficial'), filtros=filtros,
         ctrl1=ctrl(1), ctrl2=ctrl(2), ctrl3=ctrl(3), cero1=cero1, cero2=cero2,

@@ -29,6 +29,7 @@ import html
 import json
 
 from presupuesto_modulos import chip
+import mo_capitulos
 
 ESTILOS = ['mo-sexenios.css']
 SCRIPTS = ['mo-sexenios.js']
@@ -273,7 +274,7 @@ def construir(base, ref):
 
     return '''<div class="mx" id="mxRaiz">
   <section class="mx-arranque" aria-labelledby="mxArrTit">
-    <p class="mx-kicker">Inversión y Megaobras · aplicación 3</p>
+    <p class="mx-kicker">{kicker}</p>
     <h2 class="mx-grande" id="mxArrTit">Treinta y seis años de obra pública en una sola línea</h2>
     <p class="mx-txt">De 1988 a 2024, seis presidentes y <b>{n} megaobras</b> con su presupuesto, su costo y lo que la ASF encontró. Toca un sexenio para ver sus obras, mide la línea por número de obras o por costo, y pon dos sexenios frente a frente.</p>
     <ol class="mx-indice" aria-label="Lo que hay en esta página">
@@ -338,10 +339,10 @@ def construir(base, ref):
     <p><b>Cómo leer el costo.</b> El costo de las obras es una suma de pesos de años distintos, entre 1988 y 2024, que no están deflactados a un año común. Sirve para dimensionar el orden de magnitud, no para afirmar una equivalencia exacta de poder adquisitivo: un peso de 1997 no compra lo mismo que uno de 2026, y preferimos decirlo a ocultarlo.</p>
     <p><b>De dónde sale cada cifra.</b> Del registro de megaobras de la plataforma, cotejado contra la cartera de inversión de Hacienda, la Cuenta Pública, el PEF y los informes de la Auditoría Superior de la Federación; cada obra lleva sus documentos. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
     <p>🎯 ¿Y cómo le fue a cada presidente en economía, deuda y fiscalización? La trivia, con el estado de cuenta de cada uno, está en <a href="aprende.html#trivia">Aprende › El examen de los presidentes</a>.</p>
-    <p class="mx-hermanas">Sigue en Megaobras: <a href="herramienta-megaobras-pulso.html">📡 El pulso</a> · <a href="herramienta-megaobras-sector.html">🏭 Sector e industria</a> · <a href="herramienta-megaobras-cero.html">🧮 De cero al resultado</a></p>
   </aside>
   <script type="application/json" id="mxDatos">{datos}</script>
 </div>'''.format(
+        kicker=mo_capitulos.kicker('herramienta-megaobras-sexenios.html'),
         n=total_n, s=suma_reparto, filtros='\n      '.join(filtros), torres='\n      '.join(torres),
         chips='\n      '.join('<a class="mx-chip" href="#sexenio-%s" data-sx="%s" style="--mx-c:%s">%s</a>' % (k, k, c, esc(nom))
                                for k, _, nom, _, _, _, c in SEXENIOS),
