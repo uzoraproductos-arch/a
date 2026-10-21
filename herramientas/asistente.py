@@ -135,6 +135,30 @@ def _fichas(d):
                     'ir': ['herramienta-inspector-asf-calendario.html#ia-seguimiento', 'El seguimiento 2024–2027'],
                     'k': 'proxima siguiente cuando sale saldra publica entrega asf auditoria superior informe fecha'})
 
+    # 8. Los estados de cuenta que expide la plataforma (pedido del autor,
+    # 21-10-2026: «el bot debe identificar cualquier dato que obre en su
+    # contenido»): de cada administracion, de 1989 a la fecha, y de cada
+    # cargo (diputaciones, Senado, Suprema Corte). Las cifras salen del mismo
+    # JSON con que radar-estado-de-cuenta.html los expide, ya generado.
+    out += _estados_de_cuenta()
+
+    # 9. Las fichas tecnicas del Auditor de entes publicos: cada ente federal
+    # y cada municipio (los estados ya estan en el punto 3).
+    fichas, _ = _fichas_tecnicas(d)
+    out += fichas
+
+    # 10. El catalogo de cifras oficiales (Contrasta una nota): cada cifra,
+    # con su documento.
+    import insp_nota
+    for c in insp_nota.catalogo(d):
+        if c.get('v') is None:
+            continue
+        out.append({'t': 'cifra', 'tit': limpio(c['n']), 'txt': 'Cifra del catálogo de cifras oficiales de Auditavisión (%s).' % c['a'],
+                    'ci': [{'v': '$' + format(c['v'], ',.1f') + ' mdp', 'etq': limpio(c['n']), 'e': c['e']}],
+                    'fu': [{'tx': limpio(c['f']), 'url': c.get('u')}],
+                    'ir': [insp_nota.CATALOGO, 'Catálogo de cifras oficiales'],
+                    'k': '%s %s cifra dato monto' % (c['g'], c['a'])})
+
     # 5. Las fuentes oficiales (leyes, informes, decretos).
     for r in d['referencias_legales']:
         out.append({'t': 'fuente', 'tit': limpio(r['cita_apa'])[:180], 'txt': limpio(r.get('descripcion')),
@@ -142,6 +166,96 @@ def _fichas(d):
                     'ir': ['fuentes-oficiales.html#' + r['id'], 'Fuentes oficiales · [%02d]' % r['num']],
                     'k': limpio(r.get('categoria_nombre'))})
     return out
+
+
+EXPIDE = 'radar-estado-de-cuenta.html'
+
+
+def _num_ec(v, u):
+    """Una cifra de un estado de cuenta, en su unidad."""
+    if u in ('$', '$g'):
+        return '$' + (format(v, ',.0f') if abs(v) >= 1000 else format(v, ',.2f'))
+    if u == 'mdp':
+        return '$' + format(v, ',.1f') + ' mdp'
+    if u == 'pib':
+        return format(v, '.1f') + ' % del PIB'
+    if u == 'pp':
+        return ('+' if v > 0 else '') + format(v, '.1f') + ' puntos del PIB'
+    if u in ('pct100', 'pct'):
+        return format(v, '.1f') + ' %'
+    if u == 'ent':
+        return format(v, ',.0f')
+    return None
+
+
+def _estados_de_cuenta():
+    s = open(os.path.join(RAIZ, EXPIDE), encoding='utf-8').read()
+    D = json.loads(re.search(r'id="rdDatos">(.*?)</script>', s, re.S).group(1))
+    C = json.loads(re.search(r'id="exCargos">(.*?)</script>', s, re.S).group(1))
+    out = []
+    claves = ['ingresos_pib', 'gasto_pib', 'inversion_pib', 'costo_financiero_pib', 'deuda_ini', 'deuda_fin', 'deuda_cambio',
+              'asf_aud', 'asf_acl', 'asf_rec']
+    for a in D['admins']:
+        V = D['valores'].get(a['id'], {})
+        ci, fu = [], []
+        for k in claves:
+            x, m = V.get(k), D['metricas'].get(k)
+            t = x and x.get('v') is not None and _num_ec(x['v'], m.get('u'))
+            if not t:
+                continue
+            ci.append({'v': t, 'etq': m['tit'], 'e': x.get('est') or 'oficial'})
+            for f in x.get('f') or []:
+                g = D['fuentes'].get(f)
+                if g and not any(z['tx'] == g['corto'] for z in fu):
+                    fu.append({'tx': g['corto'], 'url': g.get('url')})
+        out.append({'t': 'estado', 'tit': 'Estado de cuenta de la administración de %s (%d–%d)' % (a['n'], a['a'][0], a['a'][1]),
+                    'txt': 'Las cuentas de la administración %s: lo que entró, lo que se gastó, la deuda que recibió y la que entregó, y lo que la ASF dejó por aclarar. %s%s'
+                           % (a['periodo'], a.get('aviso') or '', ' Está en curso.' if a.get('curso') else ''),
+                    'ci': ci, 'fu': fu[:6], 'ir': ['%s?adm=%s' % (EXPIDE, a['id']), 'Expide su estado de cuenta'],
+                    'k': '%s %s %s presidente presidenta sexenio administracion gobierno estado de cuenta' % (a['c'], a['n'], a['ini'])})
+    for d in C['docs']:
+        ci, fu = [], []
+        filas = [x['x'] for x in d.get('senales', [])] + [f for sec in d.get('secciones', []) for f in sec.get('filas', [])]
+        for x in filas:
+            t = x.get('v') is not None and _num_ec(x['v'], x.get('u'))
+            if not t or len(ci) >= 8:
+                continue
+            ci.append({'v': t, 'etq': limpio(x.get('t')), 'e': x.get('est') or 'oficial'})
+            g = C['fuentes'].get(x.get('f'))
+            if g and not any(z['tx'] == g['corto'] for z in fu):
+                fu.append({'tx': g['corto'], 'url': g.get('url')})
+        out.append({'t': 'estado', 'tit': '%s: %s' % (d['tipoTx'], d['n']), 'txt': '%s. %s' % (limpio(d['sub']), limpio(d.get('aviso'))),
+                    'ci': ci, 'fu': fu[:6], 'ir': ['%s?doc=%s' % (EXPIDE, d['id']), 'Expide su estado de cuenta'],
+                    'k': '%s %s cargo sueldo gana remuneracion legislador estado de cuenta' % (d['id'].replace('-', ' '), limpio(d['n']))})
+    return out
+
+
+def _fichas_tecnicas(d):
+    import insp_entes
+    E = insp_entes.datos(d)
+    F = d['inspector_federal']['fuentes']
+    out = []
+    for f in E['fed']:
+        cp = f.get('cp2025') or {}
+        ci = [{'v': '$' + format(cp[k], ',.1f') + ' mdp', 'etq': et, 'e': 'oficial'}
+              for k, et in (('original', 'aprobado 2025'), ('ejercido', 'ejercido 2025'), ('pagado', 'pagado 2025')) if cp.get(k) is not None]
+        out.append({'t': 'ficha', 'tit': limpio(f['nombre']),
+                    'txt': '%s · Ramo %s. Su ficha técnica en el Auditor de entes públicos dice si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar ante la ASF.'
+                           % (limpio(f.get('tipo')), f.get('ramo')),
+                    'ci': ci, 'fu': [{'tx': F['cp2025']['corto'], 'url': F['cp2025'].get('url')}],
+                    'ir': ['herramienta-inspector-entes.html#ente=federal:' + f['id'], 'su ficha técnica'],
+                    'k': '%s ramo %s %s ficha tecnica dependencia ente federal' % (f['id'], f.get('ramo'), f.get('poder', ''))})
+    s = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-efipem.js'), encoding='utf-8').read()
+    nombres = {e['abbr']: e['name'] for e in d['estados']}
+    # Los 2,479 municipios van compactos ([clave, nombre, estado, ingresos
+    # 2024 en mdp o None]); asistente.js arma su ficha al cargar.
+    mun = []
+    for m in re.finditer(r'"([A-ZÉ]+)": \{ cve: "(\d\d)".*?lista: \[(.*?)\] \}', s, re.S):
+        ab, cve = m.group(1), m.group(2)
+        for r in re.finditer(r'\["(\d{3})","([^"]+)"((?:,\d+)*)\]', m.group(3)):
+            ing = r.group(3).split(',')[1] if r.group(3) else None
+            mun.append([cve + r.group(1), r.group(2), nombres.get(ab, ab), round(int(ing) / 1e6, 1) if ing else None])
+    return out, mun
 
 
 def _pendientes():
@@ -204,13 +318,15 @@ def escribir_base():
     import pendientes
     d = pendientes.db()
     fichas = _fichas(d) + _pendientes() + _paginas()
+    mun = _fichas_tecnicas(d)[1]
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
+    cuenta['municipio'] = len(mun)
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
           '   pendientes y las páginas generadas: no se edita a mano. */\r\n'
-          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
+          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'mun': mun, 'munFuente': 'INEGI, Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM), ejercicio 2024', 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
     open(BASE_JS, 'wb').write(js.encode('utf-8'))
     return cuenta
 

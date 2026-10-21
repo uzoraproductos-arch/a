@@ -12,13 +12,23 @@
   var form = document.getElementById('paForm');
   var campo = document.getElementById('paPregunta');
   if (!B || !hilo || !form || !campo) return;
+  /* Los municipios llegan compactos (asistente.py, 21-10-2026): aquí se arma su ficha. */
+  (B.mun || []).forEach(function (m) {
+    B.fichas.push({ t: 'municipio', tit: m[1] + ', ' + m[2],
+      txt: 'Su ficha técnica: cuentas de 2024 ante el INEGI, FAIS y FORTAMUN ante Hacienda, quién gobernó y lo que observó la ASF.',
+      ci: m[3] === null ? [] : [{ v: '$' + m[3].toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp', etq: 'ingresos 2024 (INEGI)', e: 'oficial' }],
+      fu: m[3] === null ? [] : [{ tx: B.munFuente, url: 'https://www.inegi.org.mx/programas/finanzas/' }],
+      ir: ['herramienta-inspector-entes.html#ente=municipal:' + m[0], 'su ficha técnica'], k: 'municipio alcaldia ayuntamiento ' + m[2] });
+  });
 
   var LOGO = 'assets/auditor/img/logo-auditavision.svg';
   var TIPO = {
     glosario: ['📘', 'Término del glosario'], expediente: ['📂', 'Expediente de caso'], entidad: ['🗺️', 'Ficha de entidad'],
     fuente: ['📜', 'Fuente oficial'], pendiente: ['⏳', 'Dato pendiente'], pagina: ['🧭', 'Página de la plataforma'],
     cargo: ['💼', 'Remuneración de un cargo'], seccion: ['📍', 'Sección de la plataforma'],
-    autoridad: ['🏛️', 'Autoridad fiscalizadora'], entrega: ['📡', 'Seguimiento de la fiscalización']
+    autoridad: ['🏛️', 'Autoridad fiscalizadora'], entrega: ['📡', 'Seguimiento de la fiscalización'],
+    estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
+    cifra: ['📋', 'Cifra oficial del catálogo']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -27,7 +37,8 @@
   /* Sinónimos de uso común: la pregunta se dice como se habla, la ficha como la ley. */
   var SINON = { gana: 'sueldo remuneracion', ganan: 'sueldo remuneracion', sueldo: 'remuneracion salario', salario: 'remuneracion sueldo',
     presidente: 'presidencia ejecutivo', diputado: 'diputados camara', senador: 'senadores senado', robo: 'aclarar observaciones',
-    huachicol: 'combustible contrabando', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda' };
+    huachicol: 'combustible contrabando', amlo: 'lopez obrador estado cuenta administracion', epn: 'pena nieto estado cuenta administracion',
+    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda' };
   var vacia = {};
   VACIAS.forEach(function (w) { vacia[norm(w)] = 1; });
 
