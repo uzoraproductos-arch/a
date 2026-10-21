@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Modo Inspector, aplicacion 2: «Radar por entidad · Banderas rojas», en
-pagina propia (pedido del autor, 12-10-2026).
+"""Modo Inspector: «Radar por entidad · Banderas rojas», en pagina propia
+(pedido del autor, 12-10-2026). Desde el 21-10-2026 (pedido del autor) ya no
+es una aplicacion aparte: vive dentro del Auditor de entes publicos, que la
+abre desde su directorio, y la genera insp_entes.subpaginas().
 
 Antes la pagina cargaba el auditor completo en un marco para mostrar seis
 tarjetas (audit-engine.js, renderRadarBanderasNacional). Ahora se escribe
@@ -52,6 +54,10 @@ CASILLAS = {
     'Tabasco': ('TAB', 4, 4), 'Campeche': ('CAM', 5, 4), 'Quintana Roo': ('QROO', 6, 4),
     'Chiapas': ('CHIS', 4, 5),
 }
+
+# Clave del mismo estado en el Auditor de entes publicos, donde difiere.
+CLAVE_AUDITOR = {'MEX': 'MÉX'}
+AUDITOR = 'herramienta-inspector-entes.html'
 
 CORTO = {'México': 'Estado de México', 'Coahuila de Zaragoza': 'Coahuila',
          'Michoacán de Ocampo': 'Michoacán', 'Veracruz de Ignacio de la Llave': 'Veracruz'}
@@ -316,7 +322,8 @@ def _ficha(x, prom, C, acc, primero):
                 </dl>
                 <p class="ir-fuente">Fuente: %s</p>
                 <div class="ir-f-acc">
-                  <a class="ir-btn ir-btn-of" href="herramienta-inspector-asf.html">🏛️ Ver qué encontró la ASF</a>
+                  <a class="ir-btn ir-btn-of" href="%s#ente=estatal:%s">🏢 Su ficha técnica en el Auditor</a>
+                  <a class="ir-btn" href="herramienta-inspector-asf.html">🏛️ Ver qué encontró la ASF</a>
                   <a class="ir-btn" href="informes-cuenta-publica.html">🔎 Informes de la Cuenta Pública</a>
                   <a class="ir-btn" href="numeros-las-32-entidades.html">🧭 Cuánto recibe cada estado</a>
                 </div>
@@ -331,7 +338,7 @@ def _ficha(x, prom, C, acc, primero):
         chip('oficial'), chip('derivado'), chip('oficial'), chip('oficial'), '\n                    '.join(filas),
         _mdp(t['porAclarar']), chip('oficial'),
         _mdp(t['universo']), _mdp(t['muestra']), _num(t['PO']), _num(t['PRAS']), _mdp(t['recuperaciones']),
-        _fuente(C))
+        _fuente(C), AUDITOR, CLAVE_AUDITOR.get(x['abr'], x['abr']))
 
 
 def _glosario(C):
@@ -363,6 +370,7 @@ def construir(base, ref):
     seguir = '''<section class="ir-sec" aria-labelledby="irSigueTit">
         <h2 class="ir-tit" id="irSigueTit"><span aria-hidden="true">🧭</span> Sigue investigando</h2>
         <div class="ir-sigue">
+          <a class="ir-sig" href="herramienta-inspector-entes.html"><b>🏢 Auditor de entes públicos</b><span>De aquí vienes: la ficha técnica de cada estado, dependencia y municipio.</span></a>
           <a class="ir-sig" href="herramienta-inspector-asf.html"><b>🏛️ Qué encontró la ASF</b><span>Lo que la Auditoría observó en la Cuenta Pública, ente por ente y estado por estado.</span></a>
           <a class="ir-sig" href="expedientes.html"><b>📂 Expedientes de casos</b><span>Casos concretos por aclarar, con sus documentos.</span></a>
           <a class="ir-sig" href="numeros-las-32-entidades.html"><b>🧭 Las 32 entidades</b><span>Cuánto dinero federal recibe cada estado y por qué vía.</span></a>

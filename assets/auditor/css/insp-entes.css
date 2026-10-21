@@ -70,6 +70,9 @@
 .ie-vista b { font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--ie-suave); }
 .ie-vista.activo { background: var(--ie-azul); border-color: var(--ie-azul); color: #ffffff; }
 .ie-vista.activo b { color: #f2c94c; }
+.ie-vista-ir { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-style: dashed; border-color: #b8423a; color: #8f2d26; }
+.ie-vista-ir b { color: #8f2d26; }
+.ie-vista-ir:hover, .ie-vista-ir:focus-visible { background: #fbeceb; }
 .ie-orden { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 16px; font-weight: 600; }
 .ie-orden select { min-height: 44px; padding: 6px 10px; border-radius: 10px; border: 1px solid #c9d2e3; background: #ffffff; color: var(--ie-tinta); font: 500 16px/1.2 Inter, system-ui, sans-serif; max-width: 100%; }
 .ie-vista-d { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--ie-suave); }

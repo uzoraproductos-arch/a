@@ -616,7 +616,10 @@
       var n = k === 'todos' ? todos.length : todos.filter(VISTAS[k].f).length;
       return '<button type="button" class="ie-vista' + (k === st.vista ? ' activo' : '') + '" aria-pressed="' + (k === st.vista) + '" data-vista="' + k + '">' +
         VISTAS[k].et + ' <b>' + fmt(n) + '</b></button>';
-    }).join('');
+    }).join('') +
+      /* El Radar por entidad (antes la aplicacion 2) vive dentro del Auditor
+         desde el 21-10-2026: esta vista abre su pagina. */
+      '<a class="ie-vista ie-vista-ir" href="herramienta-inspector-radar.html">🚩 Radar por entidad <b>32</b> <span aria-hidden="true">›</span></a>';
     var ord = Object.keys(ORDENES).filter(function (k) { return !(ORDENES[k].local && st.nivel === 'federal'); }).map(function (k) {
       return '<option value="' + k + '"' + (k === st.orden ? ' selected' : '') + '>' + ORDENES[k].et + '</option>';
     }).join('');

@@ -657,12 +657,12 @@ HERRAMIENTAS = [
      'verificador', [
          ('inspasf', '🏛️', 'Qué encontró la ASF', 'El gasto de 2024',
           'Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.'),
-         ('inspradar', '🚩', 'Radar por entidad', 'Banderas rojas',
-          'Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior en la Cuenta Pública 2024, ordenados como prefieras.'),
+         # El Radar por entidad (antes la aplicacion 2) vive desde el
+         # 21-10-2026 dentro del Auditor de entes publicos (insp_entes.subpaginas).
          ('expedientes.html', '📂', 'Expedientes de casos', 'Casos por aclarar',
           'Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.'),
          ('inspentes', '🏢', 'Auditor de entes públicos', 'Busca y verifica',
-          'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.'),
+          'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar. Incluye el Radar por entidad: los 32 estados, lado a lado.'),
          ('inspnota', '📰', 'Contrasta una nota', 'Busca y verifica',
           'Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
@@ -702,10 +702,10 @@ HERRAMIENTAS = [
 HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las'),
                 'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('capítulo', 'capítulos', 'Los')}
 # Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
-# 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus ocho
+# 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus siete
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
 # (herramientas/asistente.py).
-HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las ocho aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las siete aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El bot interno de Auditavisión. Hazle cualquier pregunta sobre el dinero público y te responde con una nota técnica sellada, armada solo con datos verificados, con su fuente y su estado. Está en mejora continua: crece con la plataforma.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -727,7 +727,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # (pedido del autor, 12-10-2026: «se traba y se pone a calcular»). Cada
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
-INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspradar': 'insp_radar', 'inspentes': 'insp_entes',
+INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
                 'inspnota': 'insp_nota', 'inspefos': 'insp_efos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
@@ -866,9 +866,9 @@ def herramienta(h, n):
 
 def herramienta_divisiones(h, n, ruta):
     """Modo Inspector (11-10-2026, pedido del autor): la pagina de la
-    herramienta ya no despliega las ocho aplicaciones ni el bot. Presenta dos
+    herramienta ya no despliega las siete aplicaciones ni el bot. Presenta dos
     tarjetas autonomas y cada una abre su pagina: «Grandes investigaciones»
-    (INVESTIGACIONES, con las ocho aplicaciones) y «Pregúntale al Auditor»
+    (INVESTIGACIONES, con las siete aplicaciones) y «Pregúntale al Auditor»
     (ASISTENTE). Devuelve la pagina de la herramienta y la de las
     investigaciones."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
@@ -902,7 +902,8 @@ def herramienta_divisiones(h, n, ruta):
         # Las pestanas viejas (#pulso, #inspentes...) y las secciones que
         # vivian aqui (#modulos, #pregunta) llevan a su pagina.
         'hash_a_pagina': dict([(t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas] +
-                              [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0])]),
+                              [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0]),
+                               ('inspradar', 'herramienta-inspector-radar.html')]),
         'secciones': [{
             'id': 'divisiones', 'titulo': 'Dos maneras de entrarle', 'sin_cab': False,
             'texto': 'Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.',
@@ -1099,7 +1100,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
 
 def herramienta_asistente(bloque):
     """Pagina del bot interno del Modo Inspector (11-10-2026): no es una de
-    las ocho aplicaciones, es la segunda division de la herramienta."""
+    las siete aplicaciones, es la segunda division de la herramienta."""
     h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
     archivo, rubro, icono, titulo = h[:4]
     nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
@@ -4815,7 +4816,7 @@ def indice():
     # El Modo Inspector se abre en dos tarjetas (11-10-2026): sus ocho
     # aplicaciones cuelgan de «Grandes investigaciones», y el bot va aparte.
     herr = _rejilla([_grupo(h[2], h[3],
-                            ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las ocho aplicaciones del inspector')]
+                            ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las siete aplicaciones del inspector')]
                              if h[1] == 'inspector' else []) +
                             [(modulo_archivo(h[0], t[0]), ('· ' if h[1] == 'inspector' else '') + t[2], t[3]) for t in h[7]] +
                             ([(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])] if h[1] == 'inspector' else []),

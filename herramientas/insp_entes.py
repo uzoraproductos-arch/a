@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Modo Inspector, aplicacion 4: «Auditor de entes publicos» en pagina
+"""Modo Inspector, aplicacion 3 (la 4 hasta el 21-10-2026): «Auditor de entes publicos» en pagina
 propia (herramienta-inspector-entes.html, 12-10-2026).
 
 Antes la pagina cargaba la portada entera en un marco (index.html con
@@ -375,7 +375,6 @@ def _paginas(base, ref):
         <h2 class="ie-tit"><span aria-hidden="true">🧵</span> Para seguir el hilo</h2>
         <div class="ie-herm">
           <a href="herramienta-inspector-asf.html"><span aria-hidden="true">🏛️</span><b>Qué encontró la ASF</b><small>La Cuenta Pública 2024, sector por sector</small></a>
-          <a href="herramienta-inspector-radar.html"><span aria-hidden="true">🚩</span><b>Radar por entidad</b><small>Los 32 estados, lado a lado</small></a>
           <a href="expedientes.html"><span aria-hidden="true">📂</span><b>Expedientes de casos</b><small>Informe por informe de la ASF</small></a>
           <a href="numeros-las-32-entidades.html"><span aria-hidden="true">🗺️</span><b>Las 32 entidades</b><small>Cuánto recibe cada estado</small></a>
           <a href="numeros-los-municipios.html"><span aria-hidden="true">🏙️</span><b>Los municipios</b><small>El padrón del INEGI con sus cifras</small></a>
@@ -409,3 +408,20 @@ def _cajon(metodo, fuentes, args):
 
 def construir(base, ref):
     return _paginas(base, ref)['principal']
+
+
+# El Radar por entidad era la aplicacion 2 del Modo Inspector. Desde el
+# 21-10-2026 (pedido del autor) vive dentro de esta: el directorio lo abre
+# con su cuarta vista, «Radar por entidad», y conserva su direccion para no
+# romper enlaces. Cada ficha del radar lleva a la ficha tecnica del estado.
+RADAR = 'herramienta-inspector-radar.html'
+
+
+def subpaginas(base, ref):
+    import insp_radar
+    return [{'archivo': RADAR, 'icono': '🚩', 'menu': 'Radar por entidad', 'titulo': 'Radar por entidad',
+             'lema': 'Auditor de entes públicos · los 32 estados, lado a lado',
+             'entrada': '<b>Banderas rojas.</b> Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior '
+                        'en la Cuenta Pública 2024, ordenados como prefieras. Cada estado lleva a su ficha técnica en el Auditor de entes públicos.',
+             'bloque': insp_radar.construir(base, ref),
+             'estilos': list(insp_radar.ESTILOS), 'scripts': list(insp_radar.SCRIPTS)}]
