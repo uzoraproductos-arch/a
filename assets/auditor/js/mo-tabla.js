@@ -10,10 +10,10 @@
 
   /* La aplicación «El pulso del gasto» se repartió en capítulos el
      21-10-2026: sus anclas viejas llevan al capítulo que les toca. */
-  var PULSO = { mpCifras: 'cifras', mpRitmo: 'ritmo', mpCompo: 'composicion', mpComo: 'calculo', mpCuenta: 'cuenta' };
+  var PULSO = { mpCifras: 'herramienta-megaobras-cero.html#mpCifras', mpRitmo: 'herramienta-megaobras-pulso-cuenta.html#mpRitmo', mpCompo: 'herramienta-megaobras-sector.html#mpCompo', mpComo: 'herramienta-megaobras-cero.html#como-se-calcula', mpCuenta: 'herramienta-megaobras-pulso-cuenta.html#mpCuenta' };
   var vieja = PULSO[location.hash.slice(1)];
   if (vieja && !document.getElementById(location.hash.slice(1))) {
-    location.replace('herramienta-megaobras-pulso-' + vieja + '.html');
+    location.replace(vieja);
     return;
   }
 

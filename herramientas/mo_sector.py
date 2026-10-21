@@ -37,8 +37,8 @@ import mo_base
 import mo_capitulos
 from mo_base import nota_base
 
-ESTILOS = ['mo-sector.css']
-SCRIPTS = ['mo-sector.js']
+ESTILOS = ['mo-sector.css', 'mo-pulso.css']
+SCRIPTS = ['mo-sector.js', 'mo-pulso.js']
 
 SEXENIOS = [
     {'k': 'Salinas', 'nom': 'Carlos Salinas', 'ini': 1988, 'fin': 1994, 'color': '#8e6cb0'},
@@ -427,6 +427,14 @@ def ficha(o, ver, fuentes, sectores, cuenta):
 
 
 def construir(base, ref):
+    # Aplicacion 2 (pedido del autor, 21-10-2026): la obra por obra y, debajo,
+    # de que esta hecho el total (la composicion del pulso, mo_pulso).
+    import mo_pulso
+    c = mo_pulso._contexto(base, ref)
+    return mo_pulso.cajon_calculo(base, ref, c) + _construir(base, ref) + '\n' + mo_pulso.bloque(base, ref, ('composicion',), c)
+
+
+def _construir(base, ref):
     sm = base['simulador_megaobras']
     obras = obras_oficiales(base)
     ver_obras = (sm.get('verificacion') or {}).get('obras') or {}

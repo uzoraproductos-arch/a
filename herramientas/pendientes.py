@@ -47,14 +47,11 @@ def e(id_, tema, que, porque, responsable, enlace, enlace_txt, aparece):
 
 
 # Las otras aplicaciones de Megaobras que muestran los pendientes de cada obra
-# y del reloj (13-10-2026: cada una en pagina propia).
-MEGAOBRAS_PAGS = [('herramienta-megaobras-pulso-cifras.html', 'Megaobras · El pulso del gasto › Las cuatro cifras'),
-                  ('herramienta-megaobras-pulso-ritmo.html', 'Megaobras · El pulso del gasto › El ritmo'),
-                  ('herramienta-megaobras-pulso-composicion.html', 'Megaobras · El pulso del gasto › De qué está hecho el total'),
-                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · El pulso del gasto › La cuenta de cada obra'),
-                  ('herramienta-megaobras-pulso-calculo.html', 'Megaobras · El pulso del gasto › Cómo se calcula'),
-                  ('herramienta-megaobras-sexenios.html', 'Megaobras · Las obras de cada sexenio'),
-                  ('herramienta-megaobras-cero.html', 'Megaobras · De cero al resultado')]
+# y del reloj (13-10-2026: cada una en pagina propia; desde el 21-10-2026
+# son cuatro aplicaciones, mo_capitulos.py).
+MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué invirtió cada presidente'),
+                  ('herramienta-megaobras-cero.html', 'Megaobras · Las cuatro cifras y los rescates'),
+                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · La cuenta de cada obra y el ritmo de la pérdida')]
 
 
 # Pendientes que el motor escribe en su codigo (no viven como registro en la
@@ -82,7 +79,7 @@ PROPIOS = [
     ('costo-unitario-megaobras', 'Megaobras', 'Costo por usuario de cada megaobra (por pasajero, por barril, por usuario)',
      'Ningún documento oficial publica el subsidio por usuario de las obras. La plataforma lo marca como pendiente hasta que la dependencia que opera cada obra publique su costo de operación y su número de usuarios.',
      'Las dependencias que operan cada obra (Sedena, Pemex, Fonatur, SICT)', 'https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta',
-     'Obra Pública Abierta (Hacienda)', [('herramienta-megaobras-sector.html', 'Megaobras · Sector e industria')]),
+     'Obra Pública Abierta (Hacienda)', [('herramienta-megaobras-sector.html', 'Megaobras · Obra por obra, por industria')]),
     ('estado-cuenta-pesos-2024', 'Cuenta Pública 2024', 'Pesos de 2024 en el Estado de Cuenta y el subejercicio de 2024',
      'Los Criterios Generales 2027 dan 2024 solo en por ciento del PIB. Los pesos y el subejercicio (modificado menos devengado) están en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja: el portal de Hacienda no se pudo abrir con conexión verificada.',
      PLATAFORMA, CP2024, 'Cuenta Pública 2024 (Hacienda)', [('estado-de-cuenta.html', 'Contexto dimensional')]),
@@ -204,7 +201,7 @@ def recolectar():
             {'inversion_presupuestada_mdp': 'presupuesto original', 'inversion_real_mdp': 'costo total',
              'sobrecosto_pct': 'sobrecosto'}[k] for k in campos)),
             porque, quien, ver['fuentes'].get(fu, {}).get('url'), ver['fuentes'].get(fu, {}).get('doc', 'Documento')[:80],
-            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Sector e industria')] + MEGAOBRAS_PAGS))
+            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Obra por obra, por industria')] + MEGAOBRAS_PAGS))
     # 4 bis. La cuenta de cada obra (17-10-2026): los renglones que siguen
     # sin cifra, una ficha por obra.
     for oid, filas in ((sim.get('cuenta') or {}).get('obras') or {}).items():
@@ -223,7 +220,7 @@ def recolectar():
             out.append(e('reloj-' + r['id'], 'Megaobras', r['nombre'], r.get('motivo', r.get('fuente')),
                          'Las dependencias que operan cada obra (Sedena, Pemex, Fonatur)', r.get('url'),
                          'Obra Pública Abierta (Hacienda)', [('herramienta-calculadora-reloj.html', 'El reloj de la deuda')]
-                         + ([('herramienta-megaobras-sector.html', 'Megaobras · Sector e industria')] + MEGAOBRAS_PAGS if r['id'] == 'megaobras' else [])))
+                         + ([('herramienta-megaobras-sector.html', 'Megaobras · Obra por obra, por industria')] + MEGAOBRAS_PAGS if r['id'] == 'megaobras' else [])))
     # 6. Evaluacion sexenal: series historicas que no llegan tan atras.
     ev = d['evaluacion_sexenal']
     vistos = {}
@@ -237,7 +234,7 @@ def recolectar():
             'porAclarar': 'Monto por aclarar ante la ASF'}
     for (campo, motivo), quienes in vistos.items():
         out.append(e('sexenal-' + campo, 'Historia', '%s en los sexenios de %s' % (nomb.get(campo, campo), ', '.join(map(str, quienes))),
-                     motivo, HISTORICO, urls.get(campo), 'Documento de la serie', [('herramienta-megaobras-sexenios.html', 'Las obras de cada sexenio')]))
+                     motivo, HISTORICO, urls.get(campo), 'Documento de la serie', [('herramienta-megaobras-tabla.html#mxLinea', 'Megaobras · Los seis sexenios')]))
     # 7. Remuneraciones netas no publicadas.
     cs = d['comparador_salarial']
     COLS = {c['id']: c['nombre'] for c in cs['prestaciones'].get('columnas', [])}

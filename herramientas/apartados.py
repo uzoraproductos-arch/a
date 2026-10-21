@@ -632,7 +632,8 @@ HERRAMIENTAS = [
      'proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
      'megaobras',
      # Desde el 21-10-2026 (pedido del autor) las cuatro aplicaciones son una
-     # sola herramienta en capitulos: la lista vive en herramientas/mo_capitulos.py.
+     # sola herramienta en capitulos y, el mismo dia, cuatro aplicaciones
+     # nuevas: la lista vive en herramientas/mo_capitulos.py.
      mo_capitulos.temas()),
     ('herramienta-calculadora.html', 'calculadora', '💳', 'Calculadora Cívica',
      'Tu sueldo, tus impuestos y el rubro al que llegan',
@@ -700,7 +701,7 @@ HERRAMIENTAS = [
 # tarjetas de la pestana Herramientas se quedan sin icono).
 # (singular, plural, articulo del plural)
 HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector': ('aplicación', 'aplicaciones', 'Las'),
-                'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('capítulo', 'capítulos', 'Los')}
+                'calculadora': ('aplicación', 'aplicaciones', 'Las'), 'obras': ('aplicación', 'aplicaciones', 'Las')}
 # Herramientas que parten sus aplicaciones en divisiones (pedido del autor,
 # 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus seis
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
@@ -998,18 +999,18 @@ def herramienta_modulo(h, n, i, bloque=None):
 
 
 def megaobras_portada(hp, base, ref):
-    """Inversion y Megaobras en capitulos (pedido del autor, 21-10-2026):
-    la portada de la herramienta lleva el contador de la balanza (gana en
-    verde, pierde en rojo) y los capitulos agrupados por pregunta, en lugar
-    de la ruta de cuatro aplicaciones (herramientas/mo_tabla.py)."""
+    """Inversion y Megaobras en cuatro aplicaciones (pedidos del autor,
+    21-10-2026): la portada dice que puedes investigar con la herramienta y
+    abre sus cuatro aplicaciones; el contador de la balanza vive en la
+    primera (herramientas/mo_tabla.py)."""
     import mo_tabla
     hp['secciones'] = [{'id': 'capitulos', 'titulo': '', 'texto': '', 'sin_cab': True, 'tarjetas': [],
                         'bloque': mo_tabla.portada(base, ref)}]
     hp['estilos'] = list(mo_tabla.ESTILOS)
-    hp['scripts'] = list(mo_tabla.SCRIPTS)
+    hp['scripts'] = ['mo-tabla.js']
     # La aplicacion «El pulso del gasto» ya no tiene pagina: su pestana vieja
-    # lleva a su primera parte.
-    hp['hash_a_pagina'] = dict(hp.get('hash_a_pagina') or {}, pulso='herramienta-megaobras-pulso-cifras.html')
+    # lleva a sus cuatro cifras (aplicacion 3 desde el 21-10-2026).
+    hp['hash_a_pagina'] = dict(hp.get('hash_a_pagina') or {}, pulso='herramienta-megaobras-cero.html#mpCifras')
     return hp
 
 
@@ -1029,6 +1030,7 @@ def megaobras_pulso(h, n, base, ref):
         cap = mo_capitulos.CAPITULOS[mo_capitulos.numero(sp['archivo']) - 1]
         sp.update({'lema': mo_capitulos.kicker(sp['archivo']), 'padre3': None, 'titulo': cap[3], 'menu': cap[3],
                    'cap_nav': mo_capitulos.vecinos(sp['archivo'])})
+        sp['secciones'] = [dict(sp['secciones'][0], titulo=cap[3])]
         out.append(sp)
     return out
 
@@ -1059,18 +1061,19 @@ def nav_compacta(h, i, padre=None):
             % '\n'.join(f for f in filas if f))
 
 
-def nav_capitulos(padre, cap):
+def nav_capitulos(padre, cap, palabra=('Capítulo', 'capítulos')):
     """Pie de un capitulo con pagina propia (pedido del autor, 21-10-2026):
     capitulo anterior, todos los capitulos (la portada de la aplicacion),
     capitulo siguiente e indice general. cap = (anterior, siguiente, total),
     cada vecino (archivo, nombre) o None."""
     ant, sig, total = cap
-    filas = ['        <a class="herr-min ant" href="%s"><span>← Capítulo anterior</span><small>%s</small></a>' % ant if ant else '',
-             '        <a class="herr-min" href="%s"><span>Los %d capítulos</span><small>%s</small></a>' % (padre[0], total, padre[1]),
-             '        <a class="herr-min sig" href="%s"><span>Capítulo siguiente →</span><small>%s</small></a>' % sig if sig else '',
+    art = 'Las' if palabra[1].endswith('ones') else 'Los'
+    filas = ['        <a class="herr-min ant" href="%s"><span>← %s anterior</span><small>%s</small></a>' % (ant[0], palabra[0], ant[1]) if ant else '',
+             '        <a class="herr-min" href="%s"><span>%s %d %s</span><small>%s</small></a>' % (padre[0], art, total, palabra[1], padre[1]),
+             '        <a class="herr-min sig" href="%s"><span>%s siguiente →</span><small>%s</small></a>' % (sig[0], palabra[0], sig[1]) if sig else '',
              '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>']
-    return ('<nav class="herr-nav-min" aria-label="Moverte entre capítulos">\n%s\n      </nav>'
-            % '\n'.join(f for f in filas if f))
+    return ('<nav class="herr-nav-min" aria-label="Moverte entre %s">\n%s\n      </nav>'
+            % (palabra[1], '\n'.join(f for f in filas if f)))
 
 
 def nav_de_pagina(archivo, padre3=None, cap=None):
@@ -1078,7 +1081,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
     aplicacion de las cuatro herramientas (ni subpagina de una, ni el bot
     del Modo Inspector)."""
     if mo_capitulos.numero(archivo):
-        return nav_capitulos((mo_capitulos.PORTAL, mo_capitulos.TITULO), mo_capitulos.vecinos(archivo))
+        return nav_capitulos((mo_capitulos.PORTAL, mo_capitulos.TITULO), mo_capitulos.vecinos(archivo), ('Aplicación', 'aplicaciones'))
     apps = {}
     for h in HERRAMIENTAS:
         for i, t in enumerate(h[7]):
@@ -4882,7 +4885,21 @@ REDIRECCIONES = {
     # capitulos el 21-10-2026 (pedido del autor): el pulso ya no tiene
     # pagina propia; sus cinco partes son capitulos.
     'herramienta-megaobras-pulso.html': ('herramienta-megaobras.html', 'El pulso del gasto',
-                                         'Sus cinco partes son ahora capítulos de Inversión y Megaobras, y su contador está en la portada.'),
+                                         'Sus partes están ahora en las cuatro aplicaciones de Inversión y Megaobras.'),
+    # Los nueve capitulos se fundieron en cuatro aplicaciones el mismo dia
+    # (pedido del autor, mo_capitulos.py): los que se quedaron sin pagina
+    # llevan a la aplicacion donde vive su contenido; el ancla viaja con la
+    # redireccion cuando el destino no trae la suya.
+    'herramienta-megaobras-sexenios.html': ('herramienta-megaobras-tabla.html', 'Los seis sexenios',
+                                            'La línea del tiempo y la comparación de dos sexenios están ahora en la aplicación «En qué invirtió cada presidente».'),
+    'herramienta-megaobras-pulso-cifras.html': ('herramienta-megaobras-cero.html#mpCifras', 'Las cuatro cifras y los rescates',
+                                                'Están ahora en la aplicación «Las cuatro cifras y los rescates», junto con De cero al resultado.'),
+    'herramienta-megaobras-pulso-composicion.html': ('herramienta-megaobras-sector.html#mpCompo', 'De qué está hecho el total',
+                                                     'Está ahora al pie de la aplicación «Obra por obra, por industria».'),
+    'herramienta-megaobras-pulso-ritmo.html': ('herramienta-megaobras-pulso-cuenta.html#mpRitmo', 'El ritmo de la pérdida',
+                                               'Está ahora en la aplicación «La cuenta de cada obra y el ritmo de la pérdida».'),
+    'herramienta-megaobras-pulso-calculo.html': ('herramienta-megaobras-cero.html#como-se-calcula', 'Cómo se calcula',
+                                                 'Ahora se abre desde el botón «¿Cómo se calcula?» de cada aplicación de Inversión y Megaobras.'),
     # El directorio del Auditor de entes publicos volvio a su pagina el
     # 21-10-2026 (pedido del autor): un solo navegador con el buscador, los
     # niveles y los filtros. ?nivel=, ?q= y #ente= viajan con la redireccion.

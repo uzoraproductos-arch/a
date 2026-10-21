@@ -27,10 +27,14 @@ from presupuesto_modulos import chip
 import mo_base
 import mo_capitulos
 import mo_pulso
+import mo_sexenios
 from mo_sexenios import SEXENIOS, obras_de
 
-ESTILOS = ['mo-tabla.css']
-SCRIPTS = ['mo-tabla.js']
+# Desde el 21-10-2026 (pedido del autor) la pagina es la aplicacion 1 y
+# trae tambien los seis sexenios (mo_sexenios) y la ventana del calculo
+# (mo-pulso.css da el boton).
+ESTILOS = ['mo-tabla.css', 'mo-sexenios.css', 'mo-pulso.css']
+SCRIPTS = ['mo-tabla.js', 'mo-sexenios.js']
 
 SEG_ANO = 365 * 86400
 ARCHIVO = 'herramienta-megaobras-tabla.html'
@@ -173,7 +177,7 @@ def _grupo(g, sectores, res):
     if not g['obras']:
         cuerpo = ('<p class="mt-vacio">Sin obras evaluadas. Las concesiones carreteras que fracasaron se otorgaron con él, '
                   'pero se rescataron y se pagaron desde 1997: ese rescate (el FARAC) se cuenta con Ernesto Zedillo, que lo hizo. '
-                  '<a href="herramienta-megaobras-sexenios.html">La línea del tiempo</a> lo explica.</p>')
+                  '<a href="#mxLinea">La línea del tiempo</a>, más abajo, lo explica.</p>')
         cab = ''
     else:
         cab = ('<p class="mt-sx-cifras"><span>%d obra%s</span> · <span>costo registrado <b class="mt-num">%s</b></span>%s</p>'
@@ -202,11 +206,23 @@ def construir(base, ref):
     na = [o for o in sm['obras'] if res[o['id']]['tipo'] == 'no_aplica']
     tot = sum(r['v'] for r in todos)
     anios = sorted({r['anio'] for r in todos})
-    return '''<div class="mt" id="mtRaiz">
+    c = mo_pulso._contexto(base, ref)
+    return mo_pulso.cajon_calculo(base, ref, c) + '''<div class="mt" id="mtRaiz">
   <section class="mt-arranque" aria-labelledby="mtArrTit">
     <p class="mt-kicker">{kicker}</p>
-    <h2 class="mt-grande" id="mtArrTit">🚦 ¿Gana o pierde? Las {n_tot} obras, sexenio por sexenio</h2>
-    <p class="mt-lead">Cada renglón es una obra, en el sexenio en que se contrató: en qué se invirtió, cuánto se aprobó, cuánto costó y si hoy <b>gana dinero</b> (número verde) o <b>lo pierde</b> (número rojo). El contador corre con el resultado del año que publica cada obra. Si no lo publica, el renglón queda en gris y dice por qué falta y a quién le toca.</p>
+    <h2 class="mt-grande" id="mtArrTit">En qué invirtió cada presidente, cuánto costó y qué se gana</h2>
+    <p class="mt-lead">Las {n_tot} obras y rescates, cada una en el sexenio en que se contrató: en qué se invirtió, cuánto se aprobó, cuánto costó y si hoy <b>gana dinero</b> (número verde) o <b>lo pierde</b> (número rojo). El contador corre con el resultado del año que publica cada obra. Si no lo publica, el renglón queda en gris y dice por qué falta y a quién le toca. Más abajo, la línea del tiempo de 1988 a 2024 y dos sexenios frente a frente.</p>
+    <ol class="mx-indice" aria-label="Lo que hay en esta página">
+      <li><a href="#mtResTit"><span aria-hidden="true">📋</span> La tabla general</a></li>
+      <li><a href="#mtObTit"><span aria-hidden="true">🚦</span> Obra por obra, en verde o en rojo</a></li>
+      <li><a href="#mxLinea"><span aria-hidden="true">🕰️</span> La línea del tiempo</a></li>
+      <li><a href="#mxComparar"><span aria-hidden="true">⚖️</span> Compara dos sexenios</a></li>
+    </ol>
+    <div class="mt-claves">
+      <p><span>Costo real de las {n} obras</span><b class="mt-num">{real}</b> {chip_der}</p>
+      <p><span>Pagado de más sobre lo aprobado</span><b class="mt-num">{brecha}</b> {chip_der}</p>
+      <p><span>Ganancia o pérdida del año, donde se publica</span><b class="mt-num {sig}">{tot}</b> {chip_der}</p>
+    </div>
     <div class="mt-pantalla">
       <p class="mt-vivo-et"><span class="mt-punto" aria-hidden="true"></span> Desde que abriste esta página, las {n_dat} obras con resultado publicado van:</p>
       <p class="mt-vivo-total">{vivo_tot}</p>
@@ -238,79 +254,79 @@ def construir(base, ref):
     <p><b>Los rescates.</b> El FOBAPROA y el FARAC son deudas que el Estado asumió, no obras: su «costo» es lo pagado y lo debido, y su crecimiento no se compara con el sobrecosto de una obra. En la tabla general su costo se suma con el de las obras solo como referencia.</p>
     <p><b>Cómo se calcula.</b> Costo del sexenio = suma del costo registrado de sus obras {chip_der}; donde una obra tiene rango, entra su punto medio. Gana o pierde al año = suma de los resultados publicados {chip_der}. Por segundo = resultado anual × 1,000,000 ÷ 31,536,000. Lo que falta está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</p>
   </aside>
-</div>'''.format(
+</div>
+'''.format(
+        n=c['n'], real=c['real'], brecha=c['brecha'], sig=_signo(tot),
         kicker=mo_capitulos.kicker(ARCHIVO), n_tot=len(sm['obras']), n_dat=len(todos), vivo_tot=_vivo(tot, 'mt-grande-num'),
         n_gana=len(gana), gana=_sin_signo(sum(r['v'] for r in gana)), n_pierde=len(pierde), pierde=_sin_signo(sum(r['v'] for r in pierde)),
         n_sin=len(sin), n_na=len(na), tot=mdp(tot), chip_der=chip('derivado'), anios=', '.join(str(a) for a in anios),
         controles=CONTROLES, resumen=_resumen(grupos, todos, n_obras),
         grupos='\n    '.join(_grupo(g, sectores, res) for g in grupos), cuenta=CUENTA,
-        medida=mo_base.medida_txt(sm))
+        medida=mo_base.medida_txt(sm)) + _sexenios(base, ref)
+
+
+def _sexenios(base, ref):
+    """Los seis sexenios (mo_sexenios) debajo de la tabla, sin su
+    portadilla: el arranque de la tabla ya dice que hay en la pagina."""
+    import re
+    return re.sub(r'\s*<section class="mx-arranque".*?</section>', '', mo_sexenios.construir(base, ref), count=1, flags=re.S)
 
 
 def cifras(base, ref):
-    """La cifra de cada tarjeta de capitulo en la portada."""
+    """La cifra de cada tarjeta de aplicacion en la portada."""
     c = mo_pulso._contexto(base, ref)
     _sm, _s, _r, grupos, todos = _datos(base)
     tot = sum(r['v'] for r in todos)
     return {
-        'sexenios': '6 presidentes · %d obras' % sum(len(g['obras']) for g in grupos),
-        'tabla': '%s%s al año, en vivo' % ('−' if tot < 0 else '+', _sin_signo(tot)),
-        'cero': '%s pagados de más' % c['brecha'],
-        'cifras': '%s de costo real · %s de sobrecosto' % (c['real'], c['sobre']),
+        'tabla': '6 presidentes · %d obras · %s%s al año, en vivo' % (sum(len(g['obras']) for g in grupos), '−' if tot < 0 else '+', _sin_signo(tot)),
         'sector': '%d obras y %d rescates en 6 industrias' % (c['n'], c['n_resc']),
-        'composicion': c['compo_cif'],
+        'cifras': '%s de costo real · %s de sobrecosto' % (c['real'], c['sobre']),
         'cuenta': '%d obras publican su ganancia o pérdida' % len(todos),
-        'ritmo': '%s de pérdida y apoyo documentados' % c['per_v'],
-        'calculo': 'Las operaciones y sus fuentes, paso a paso',
     }
 
 
+# Lo que la herramienta permite investigar, para la portada (pedido del
+# autor, 21-10-2026: «que el usuario pueda llevar a cabo una investigacion
+# propia»). Cada renglon lleva a donde esta.
+INVESTIGA = [
+    ('🏛️', 'Qué invirtió cada sexenio', 'herramienta-megaobras-tabla.html#mtResTit'),
+    ('🚦', 'Si cada obra gana o pierde hoy', 'herramienta-megaobras-tabla.html#mtObTit'),
+    ('📒', 'El estado de resultados de cada obra', 'herramienta-megaobras-pulso-cuenta.html#mpCuenta'),
+    ('⏱️', 'Lo que nos sigue costando, al ritmo que elijas', 'herramienta-megaobras-pulso-cuenta.html#mpRitmo'),
+    ('🏦', 'Los rescates bancario y carretero', 'herramienta-megaobras-cero.html#mpRescates'),
+    ('🌎', 'La huella ambiental de las megaobras', 'herramienta-ambiente-basura.html#abMegaobras'),
+]
+
+
 def portada(base, ref):
-    """Bloque de la portada de la herramienta: el contador de la balanza y
-    los capitulos agrupados por pregunta. Cada tarjeta abre su pagina."""
-    sm, _s, _res, _g, todos = _datos(base)
+    """Bloque de la portada de la herramienta: para que sirve y las cuatro
+    aplicaciones, cada una con su cifra; el contador que tenia esta portada
+    vive desde el 21-10-2026 en la aplicacion 1 (pedido del autor)."""
     c = mo_pulso._contexto(base, ref)
     cif = cifras(base, ref)
+    _sm, _s, _r, _g, todos = _datos(base)
     tot = sum(r['v'] for r in todos)
-    bloques = []
-    k = 0
-    for clave, pregunta, frase in mo_capitulos.BLOQUES:
-        tarjetas = []
-        for b, archivo, ico, corto, desc, ck in mo_capitulos.CAPITULOS:
-            if b != clave:
-                continue
-            k += 1
-            neg = ' mt-pierde' if ck == 'tabla' and tot < 0 else ''
-            tarjetas.append(
-                '<li><a class="mt-cap" href="%s"><span class="mt-cap-num">Capítulo %d</span>'
-                '<span class="mt-cap-tit"><span aria-hidden="true">%s</span> %s</span>'
-                '<span class="mt-cap-desc">%s</span><span class="mt-cap-cif mt-num%s">%s</span>'
-                '<span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
-                % (archivo, k, ico, esc(corto), esc(desc), neg, esc(cif[ck])))
-        bloques.append('<section class="mt-bloque" aria-labelledby="mtB-%s"><h3 class="mt-bloque-tit" id="mtB-%s">%s</h3>'
-                       '<p class="mt-bloque-txt">%s</p><ol class="mt-caps">%s</ol></section>'
-                       % (clave, clave, esc(pregunta), esc(frase), ''.join(tarjetas)))
+    tarjetas = []
+    for k, (b, archivo, ico, corto, desc, ck) in enumerate(mo_capitulos.CAPITULOS, 1):
+        neg = ' mt-pierde' if ck == 'tabla' and tot < 0 else ''
+        tarjetas.append(
+            '<li><a class="mt-cap" href="%s"><span class="mt-cap-num">Aplicación %d</span>'
+            '<span class="mt-cap-tit"><span aria-hidden="true">%s</span> %s</span>'
+            '<span class="mt-cap-desc">%s</span><span class="mt-cap-cif mt-num%s">%s</span>'
+            '<span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
+            % (archivo, k, ico, esc(corto), esc(desc), neg, esc(cif[ck])))
+    investiga = ''.join('<li><a href="%s"><span aria-hidden="true">%s</span> %s</a></li>' % (u, ico, esc(t)) for ico, t, u in INVESTIGA)
     return '''<div class="mt mt-portada" id="mtRaiz">
   <section class="mt-arranque" aria-labelledby="mtArrTit">
-    <h2 class="mt-grande" id="mtArrTit">En qué invirtió cada presidente, cuánto costó y si hoy gana o pierde</h2>
-    <div class="mt-claves">
-      <p><span>Costo real de las {n} obras</span><b class="mt-num">{real}</b> {chip_der}</p>
-      <p><span>Pagado de más sobre lo aprobado</span><b class="mt-num">{brecha}</b> {chip_der}</p>
-      <p><span>Ganancia o pérdida del año, donde se publica</span><b class="mt-num {sig}">{tot}</b> {chip_der}</p>
-    </div>
-    <div class="mt-pantalla">
-      <p class="mt-vivo-et"><span class="mt-punto" aria-hidden="true"></span> Desde que abriste esta página, las {n_dat} obras con resultado publicado van:</p>
-      <p class="mt-vivo-total">{vivo}</p>
-      <p class="mt-vivo-sub">Verde si ganan, rojo si pierden. Es el resultado de un año proyectado sobre el tiempo que llevas mirando, no dinero que se mueva en este instante. <a href="{tabla}">Míralo obra por obra en la tabla general</a>.</p>
-      {controles}
-    </div>
+    <h2 class="mt-grande" id="mtArrTit">Haz tu propia investigación de las megaobras</h2>
+    <p class="mt-lead">Con filtros, contadores, simuladores y tablas, recorre lo que invirtió cada presidente de 1988 a 2024, cuánto costó cada obra frente a lo aprobado, si hoy gana o pierde, su estado de resultados, lo que nos sigue costando y los dos rescates. Cada cifra trae su documento oficial y su estado: {chip_of}, {chip_der} o {chip_pend}.</p>
+    <ul class="mt-investiga" aria-label="Lo que puedes investigar">{investiga}</ul>
   </section>
   <nav class="mt-indice" aria-labelledby="mtIndTit">
-    <h2 class="mt-tit" id="mtIndTit">{n_cap} capítulos · cada uno abre su página</h2>
-    <p class="mt-txt">Organizados por lo que quieres saber. Recórrelos en orden o entra directo al que te interese.</p>
-    {bloques}
+    <h2 class="mt-tit" id="mtIndTit">{n_cap} aplicaciones · cada una abre su página</h2>
+    <p class="mt-txt">Recórrelas en orden o entra directo a la que te interese.</p>
+    <ol class="mt-caps">{tarjetas}</ol>
   </nav>
 </div>'''.format(
-        n=c['n'], real=c['real'], brecha=c['brecha'], chip_der=chip('derivado'), sig=_signo(tot), tot=mdp(tot),
-        n_dat=len(todos), vivo=_vivo(tot, 'mt-grande-num'), tabla=ARCHIVO, controles=CONTROLES,
-        n_cap=len(mo_capitulos.CAPITULOS), bloques='\n    '.join(bloques))
+        chip_of=chip('oficial'), chip_der=chip('derivado'), chip_pend=chip('pendiente'), investiga=investiga,
+        n_cap=len(mo_capitulos.CAPITULOS), tarjetas=''.join(tarjetas)) + '\n' + mo_pulso.cajon_calculo(base, ref, c)

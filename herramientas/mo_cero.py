@@ -36,8 +36,8 @@ from presupuesto_modulos import chip
 import mo_base
 import mo_capitulos
 
-ESTILOS = ['mo-cero.css']
-SCRIPTS = ['mo-cero.js']
+ESTILOS = ['mo-cero.css', 'mo-pulso.css']
+SCRIPTS = ['mo-cero.js', 'mo-pulso.js']
 
 # Los mismos criterios de SIM_ORDENES; el primero es el de arranque.
 ORDENES = [('perdida', 'Gana o pierde'), ('sobrecosto', 'Sobrecosto'), ('inversion', 'Costo real'),
@@ -307,6 +307,15 @@ def _sel(id_, et, opciones, val):
 
 
 def construir(base, ref):
+    # Aplicacion 3 (pedido del autor, 21-10-2026): las cuatro cifras y los
+    # rescates (mo_pulso) arriba y, debajo, las tres mesas que llegan a ellas
+    # desde cero.
+    import mo_pulso
+    c = mo_pulso._contexto(base, ref)
+    return mo_pulso.cajon_calculo(base, ref, c) + mo_pulso.bloque(base, ref, ('cifras',), c) + '\n' + _construir(base, ref)
+
+
+def _construir(base, ref):
     sm = base['simulador_megaobras']
     lista = obras(base)
     vista = _orden(lista, ORDENES[0][0])

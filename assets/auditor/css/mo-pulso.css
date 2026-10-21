@@ -206,3 +206,14 @@
 .mp-base { margin: 8px 0 0; border-top: 1px dashed var(--mp-borde); padding-top: 6px; }
 .mp-base summary { min-height: 44px; display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--mp-osc); }
 .mp-base p { margin: 6px 0 0; font-size: 16px; line-height: 1.55; }
+/* «¿Cómo se calcula?» (21-10-2026): deja de ser capítulo y abre la ventana
+   lateral en las cuatro aplicaciones y en la portada de la herramienta. */
+.mp-calc { margin: 0 0 22px; }
+.mp-calc-btn { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 10px 16px; border: 1px solid #c9d2e3; border-radius: 12px;
+  background: #ffffff; color: #1d4f91; cursor: pointer; text-align: left; font: 700 17px/1.35 Inter, system-ui, sans-serif; }
+.mp-calc-btn > span:last-child { margin-left: auto; font-size: 22px; }
+.mp-calc-btn:hover, .mp-calc-btn:focus-visible { border-color: #1d4f91; background: #eaf1fb; }
+[data-theme="dark"] .mp-calc-btn { background: #1c1f28; border-color: #36404f; color: #8fb8f2; }
+[data-theme="dark"] .mp-calc-btn:hover, [data-theme="dark"] .mp-calc-btn:focus-visible { background: #1a2638; border-color: #8fb8f2; }
+.mp.mp-cajon { padding-top: 4px; }
+.mp-cajon .mp-sec { margin: 0; padding: 0; border: 0; background: none; }

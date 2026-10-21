@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Inversion y Megaobras en capitulos (pedido del autor, 21-10-2026).
+"""Inversion y Megaobras en capitulos y luego en cuatro aplicaciones (pedidos del autor, 21-10-2026).
 
 Las cuatro aplicaciones (el pulso, sector e industria, los sexenios y de
 cero al resultado) se repetian: cada una traia su propio contador, sus
@@ -17,54 +17,48 @@ la pueda importar.
 
 PORTAL = 'herramienta-megaobras.html'
 TITULO = 'Inversión y Megaobras'
+PALABRA = 'aplicación'
 
-# (clave, pregunta, frase)
-BLOQUES = [
-    ('que', '¿En qué invirtió cada presidente?',
-     'Los seis sexenios de 1988 a 2024, sus obras y si cada una gana o pierde dinero hoy.'),
-    ('cuanto', '¿Cuánto costó?',
-     'De lo que se aprobó a lo que se pagó, obra por obra y por industria, con las cuentas a la vista.'),
-    ('gana', '¿Gana o pierde?',
-     'Lo que cada obra ingresa, lo que gasta y lo que nos cuesta cada año, al ritmo que elijas.'),
-    ('como', '¿Cómo se sabe?',
-     'Las reglas de cada suma y los documentos oficiales de donde sale cada cifra.'),
-]
+# Desde el 21-10-2026 (segundo pedido del autor, el mismo dia) los nueve
+# capitulos se funden en cuatro aplicaciones, para que el lector haga su
+# propia investigacion con filtros, contadores, simuladores y tablas:
+#
+# 1. Los seis sexenios + la tabla general en vivo + el contador de la
+#    portada (el «simulador inicial»): en que invirtio cada presidente,
+#    cuanto costo y que se gana.
+# 2. Obra por obra, por industria + de que esta hecho el total.
+# 3. De cero al resultado + las cuatro cifras y los rescates.
+# 4. La cuenta de cada obra + el ritmo de la perdida.
+#
+# «Como se calcula» deja de ser capitulo: es un boton que abre la ventana
+# lateral (mo_pulso.cajon_calculo) en las cuatro aplicaciones y en la
+# portada. Las paginas que se quedaron sin contenido redirigen
+# (apartados.REDIRECCIONES).
 
-# (bloque, archivo, icono, nombre corto, descripcion, clave de la cifra)
+# (clave, archivo, icono, nombre corto, descripcion, clave de la cifra)
 # La cifra la llena apartados con los datos (mo_tabla.cifras()).
 CAPITULOS = [
-    ('que', 'herramienta-megaobras-sexenios.html', '🏛️', 'Los seis sexenios',
-     'La línea del tiempo de 1988 a 2024: qué obras le tocan a cada presidente, cuánto costaron y dos sexenios frente a frente.',
-     'sexenios'),
-    ('que', 'herramienta-megaobras-tabla.html', '🚦', 'La tabla general en vivo',
-     'Todas las obras por sexenio en una sola tabla: en qué se invirtió, cuánto costó y si hoy gana (verde) o pierde (rojo), con su contador.',
+    ('que', 'herramienta-megaobras-tabla.html', '🏛️', 'En qué invirtió cada presidente',
+     'El contador en vivo, la tabla general de los seis sexenios con cada obra en verde si gana o en rojo si pierde, la línea del tiempo de 1988 a 2024 y dos sexenios frente a frente.',
      'tabla'),
-    ('cuanto', 'herramienta-megaobras-cero.html', '🧮', 'De cero al resultado',
-     'Las tres mesas de cálculo, renglón por renglón: de lo aprobado a lo pagado, la pérdida de un año y lo que te toca a ti.',
-     'cero'),
-    ('cuanto', 'herramienta-megaobras-pulso-cifras.html', '🧭', 'Las cuatro cifras y los rescates',
-     'Costo real, pérdida anual, sobrecosto y pesos de más del conjunto, y aparte los dos rescates, que son deudas y no obras.',
-     'cifras'),
-    ('cuanto', 'herramienta-megaobras-sector.html', '🏭', 'Obra por obra, por industria',
-     'Filtra por industria y por presidente: la comparativa, la ficha viva de cada obra y contra qué se compara ese dinero.',
+    ('obra', 'herramienta-megaobras-sector.html', '🏭', 'Obra por obra, por industria',
+     'Filtra por industria y por presidente: la comparativa, la ficha viva de cada obra, contra qué se compara ese dinero y de qué está hecho el total, con su descarga.',
      'sector'),
-    ('cuanto', 'herramienta-megaobras-pulso-composicion.html', '🧩', 'De qué está hecho el total',
-     'Cuánto del costo tiene documento oficial y cuánto es cálculo, con las obras en el orden que elijas y su descarga.',
-     'composicion'),
-    ('gana', 'herramienta-megaobras-pulso-cuenta.html', '📒', 'La cuenta de cada obra',
-     'Lo que se esperaba de cada obra y lo que dio: ingresos, gasto de operación, intereses y ganancia o pérdida del año.',
+    ('cifras', 'herramienta-megaobras-cero.html', '🧭', 'Las cuatro cifras y los rescates',
+     'Costo real, pérdida del año, sobrecosto y pesos de más, los dos rescates aparte, y las tres mesas de cálculo que llegan a esas cifras desde cero.',
+     'cifras'),
+    ('cuenta', 'herramienta-megaobras-pulso-cuenta.html', '📒', 'La cuenta de cada obra y el ritmo de la pérdida',
+     'El estado de resultados de cada obra (ingresos, gasto de operación, intereses, ganancia o pérdida) y lo que nos sigue costando por día, mes, trimestre, semestre o año.',
      'cuenta'),
-    ('gana', 'herramienta-megaobras-pulso-ritmo.html', '⏱️', 'El ritmo de la pérdida',
-     'La pérdida y el apoyo de un año, por día, mes, trimestre, semestre o año, componente por componente.',
-     'ritmo'),
-    ('como', 'herramienta-megaobras-pulso-calculo.html', '🔎', 'Cómo se calcula',
-     'Las reglas de cada suma, división y cadencia, qué cifras tienen documento y las fuentes oficiales.',
-     'calculo'),
 ]
+
+# La ventana lateral de «Como se calcula»: con este ancla en la direccion
+# se abre al cargar (apartados.js, button[data-cajon]).
+CALCULO_HASH = 'como-se-calcula'
 
 
 def numero(archivo):
-    """Numero de capitulo (1..N) de una pagina, o None."""
+    """Numero de aplicacion (1..N) de una pagina, o None."""
     for k, c in enumerate(CAPITULOS, 1):
         if c[1] == archivo:
             return k
@@ -72,7 +66,7 @@ def numero(archivo):
 
 
 def kicker(archivo):
-    return '%s · capítulo %d de %d' % (TITULO, numero(archivo), len(CAPITULOS))
+    return '%s · %s %d de %d' % (TITULO, PALABRA, numero(archivo), len(CAPITULOS))
 
 
 def vecinos(archivo):
@@ -84,14 +78,15 @@ def vecinos(archivo):
             (sig[1], sig[2] + ' ' + sig[3]) if sig else None, len(CAPITULOS))
 
 
-FRASE = {'que': '¿En qué invirtió?', 'cuanto': '¿Cuánto costó?', 'gana': '¿Gana o pierde?', 'como': '¿Cómo se sabe?'}
+FRASE = {'que': 'Cuánto costó y qué se gana', 'obra': 'Filtros y fichas', 'cifras': 'Desde cero',
+         'cuenta': 'Estados de resultados'}
 
 
 def temas():
-    """Los capitulos como temas de apartados.HERRAMIENTAS: (clave, icono,
+    """Las aplicaciones como temas de apartados.HERRAMIENTAS: (clave, icono,
     nombre, frase, descripcion). Las paginas que arma un modulo nativo van
-    por su clave (sexenios, tabla, cero, sector); las partes del pulso, por
-    su archivo, porque las genera la subpagina del pulso."""
+    por su clave (tabla, sector, cero); la cuenta, por su archivo, porque la
+    genera la subpagina del pulso."""
     out = []
     for b, archivo, ico, corto, desc, _ck in CAPITULOS:
         clave = archivo if archivo.startswith('herramienta-megaobras-pulso-') else archivo[len('herramienta-megaobras-'):-5]

@@ -151,7 +151,7 @@ def _ficha_obra(base, o, sectores, sx_clave, compartida):
             '%s<dl class="mx-cifras">%s</dl>'
             '<details class="mx-mas"><summary>Lo que encontró la ASF y de dónde sale cada cifra</summary>'
             '<p class="mx-hall">%s</p>%s'
-            '<p class="mx-ir"><a href="herramienta-megaobras-sector.html">🏭 Ver la ficha completa en «Sector e industria» ➔</a></p>'
+            '<p class="mx-ir"><a href="herramienta-megaobras-sector.html">🏭 Ver la ficha completa en «Obra por obra, por industria» ➔</a></p>'
             '</details></li>'
             % (esc(o['sector_id']), esc(o['id']), esc(o.get('icono')), esc(o['nombre']),
                esc(sec.get('icono', '')), esc(corto_sector(sec.get('nombre', o['sector_id']))),
@@ -304,7 +304,7 @@ def construir(base, ref):
   </section>
 
   <section class="mx-bloque" id="mxFicha" aria-labelledby="mxFiTit">
-    <h2 class="mx-tit" id="mxFiTit"><span aria-hidden="true">🏛️</span> Las obras de cada sexenio</h2>
+    <h2 class="mx-tit" id="mxFiTit"><span aria-hidden="true">🏛️</span> El sexenio que elijas, en detalle</h2>
     <div class="mx-chips" role="group" aria-label="Elige un sexenio">
       <a class="mx-chip" href="#sexenio-todos" data-sx="todos">🕰️ Todo el periodo</a>
       {chips}
@@ -336,7 +336,7 @@ def construir(base, ref):
   </aside>
   <script type="application/json" id="mxDatos">{datos}</script>
 </div>'''.format(
-        kicker=mo_capitulos.kicker('herramienta-megaobras-sexenios.html'),
+        kicker='La línea del tiempo · de 1988 a 2024',
         n=total_n, s=suma_reparto, torres='\n      '.join(torres),
         chips='\n      '.join('<a class="mx-chip" href="#sexenio-%s" data-sx="%s" style="--mx-c:%s">%s</a>' % (k, k, c, esc(nom))
                                for k, _, nom, _, _, _, c in SEXENIOS),

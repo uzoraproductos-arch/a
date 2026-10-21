@@ -13,9 +13,9 @@
   if (!raiz) return;
   /* Desde el 17-10-2026 cada parte vive en su página: las anclas viejas
      (#mpCifras…) llevan a ella sin dejar un paso de más en el historial. */
-  var PARTES = { mpCifras: 'cifras', mpRitmo: 'ritmo', mpCompo: 'composicion', mpComo: 'calculo' };
+  var PARTES = { mpCifras: 'herramienta-megaobras-cero.html#mpCifras', mpRitmo: 'herramienta-megaobras-pulso-cuenta.html#mpRitmo', mpCompo: 'herramienta-megaobras-sector.html#mpCompo', mpComo: 'herramienta-megaobras-cero.html#como-se-calcula', mpCuenta: 'herramienta-megaobras-pulso-cuenta.html#mpCuenta' };
   var vieja = PARTES[location.hash.slice(1)];
-  if (vieja && !$(location.hash.slice(1))) { location.replace('herramienta-megaobras-pulso-' + vieja + '.html'); return; }
+  if (vieja && !$(location.hash.slice(1))) { location.replace(vieja); return; }
   /* Escribe solo si el elemento está en esta página. */
   function pon(id, prop, v) { var el = $(id); if (el) el[prop] = v; }
 

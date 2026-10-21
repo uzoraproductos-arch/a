@@ -225,7 +225,7 @@ def _contexto(base, ref):
         aviso = ('<b>Ojo:</b> %s%% del costo real del conjunto (%s) son cifras que siguen <b>pendientes</b> de documento %s. '
                  'La suma se puede hacer, pero no se puede afirmar como dato auditado: <a href="%s">mira de qué está hecha</a> '
                  'o pulsa «Solo con documento».' % (format(comp['pendiente'] / ag['real'] * 100, '.1f'), sim_mdp(comp['pendiente']),
-                                                     chip('pendiente'), parte_archivo('composicion')))
+                                                     chip('pendiente'), 'herramienta-megaobras-sector.html#mpCompo'))
         compo_cif = '%s%% del costo sigue pendiente de documento' % format(comp['pendiente'] / ag['real'] * 100, '.1f')
     else:
         aviso = ('<b>Ojo:</b> las %d obras ya tienen su costo con documento, oficial o derivado de cifras oficiales. %s %s su '
@@ -337,7 +337,7 @@ SECCIONES = {
   </section>''',
     'composicion': '''  <section class="mp-sec" id="mpCompo" aria-labelledby="mpCompTit">
     <h2 class="mp-tit" id="mpCompTit"><span aria-hidden="true">🧩</span> De qué está hecho el costo real</h2>
-    <p class="mp-txt">Los {real} de las {n} obras, según el estado de la cifra de cada una. Los {n_resc} rescates ({resc_real}) van aparte: están en <a href="herramienta-megaobras-pulso-cifras.html">las cuatro cifras</a> y en <a href="herramienta-megaobras-pulso-cuenta.html">la cuenta de cada obra</a>. Una sola obra puede mover el total entero: compara la barra antes de concluir.</p>
+    <p class="mp-txt">Los {real} de las {n} obras, según el estado de la cifra de cada una. Los {n_resc} rescates ({resc_real}) van aparte: están en <a href="herramienta-megaobras-cero.html#mpCifras">las cuatro cifras y los rescates</a> y en <a href="herramienta-megaobras-pulso-cuenta.html">la cuenta de cada obra</a>. Una sola obra puede mover el total entero: compara la barra antes de concluir.</p>
     <div class="mp-comp" role="img" aria-label="Composición del costo real por estado de la cifra">{seg}</div>
     <ul class="mp-leyenda">{leyenda}</ul>
     <div class="mp-orden" role="group" aria-label="Ordenar las obras">
@@ -350,7 +350,7 @@ SECCIONES = {
     <ol class="mp-obras" id="mpObras"></ol>
     <p class="mp-acciones">
       <button type="button" class="mp-boton mp-sec-b" id="mpCsv"><span aria-hidden="true">⬇️</span> Descarga las {n} obras (CSV)</button>
-      <a class="mp-boton mp-sec-b" href="herramienta-megaobras-sector.html"><span aria-hidden="true">🏭</span> Ficha de cada obra, por sector</a>
+      <a class="mp-boton mp-sec-b" href="#ms-vivo"><span aria-hidden="true">🏭</span> Ficha viva de cada obra, arriba</a>
     </p>
     <p class="mp-unidades"><b>Unidades.</b> 1 mdp es un millón de pesos; 1,000 mdp son mil millones; 1,000,000 mdp, un billón. Las cifras son nominales del año de cada erogación, sin deflactar: un peso de 1997 no compra lo mismo que uno de 2026.</p>
   </section>''',
@@ -506,27 +506,18 @@ def _cuenta_html(sm):
             '</ol></nav>\n    ' + '\n    '.join(fichas) + '\n  </section>')
 
 # Las partes del pulso, cada una en su pagina (pedido del autor,
-# 17-10-2026; la quinta, la cuenta de cada obra, el mismo dia). Desde el
-# 21-10-2026 son capitulos de Inversion y Megaobras (mo_capitulos.py): ya no
-# hay pagina del pulso con su contador y sus tarjetas, ni la fila de partes
-# arriba y abajo; el pie de cada una va de capitulo en capitulo.
+# 17-10-2026; la quinta, la cuenta de cada obra, el mismo dia). El
+# 21-10-2026 fueron capitulos de Inversion y Megaobras y, ese mismo dia, se
+# repartieron en sus cuatro aplicaciones (mo_capitulos.py): la cuenta y el
+# ritmo hacen la cuarta, la unica que sigue saliendo de aqui; las cuatro
+# cifras van con De cero al resultado (mo_cero.py), la composicion con Obra
+# por obra (mo_sector.py) y «Como se calcula» es la ventana lateral de las
+# cuatro (cajon_calculo).
 PAGINA = 'herramienta-megaobras-pulso.html'
 PARTES = [
-    ('cifras', '🧭', 'Las cuatro cifras', 'Las cuatro cifras de referencia',
-     'Costo real erogado, pérdida y apoyo anual, sobrecosto del conjunto y pesos de más, con «todo lo registrado» o «solo con documento».',
-     '{real} de costo real · {sobre} de sobrecosto'),
-    ('ritmo', '⏱️', 'El ritmo', 'Temporalidad de pérdidas y subsidios',
-     'La pérdida y el apoyo anual documentados, repartidos por día, mes, trimestre, semestre o año, componente por componente.',
-     '{per_v} de pérdida y apoyo documentados'),
-    ('composicion', '🧩', 'De qué está hecho el total', 'De qué está hecho el costo real',
-     'Cuánto del costo real tiene documento oficial y cuánto sigue pendiente, y las {n} obras ordenadas por costo, sobrecosto, pesos de más o pérdida.',
-     '{compo_cif}'),
-    ('cuenta', '📒', 'La cuenta de cada obra', 'La cuenta de cada obra',
-     'Lo que se esperaba de cada obra y lo que dio: presupuesto, ingresos esperados y reales, gasto de operación, intereses y ganancia o pérdida del año.',
-     '{res_txt} de resultado documentado al año'),
-    ('calculo', '🔎', 'Cómo se calcula', 'Cómo se calcula lo que ves',
-     'Las reglas de cada suma, división y cadencia, qué cifras tienen documento y las fuentes oficiales de donde salen.',
-     'Las operaciones y sus fuentes, paso a paso'),
+    ('cuenta', '📒', 'La cuenta de cada obra y el ritmo de la pérdida', 'La cuenta de cada obra y el ritmo de la pérdida',
+     'El estado de resultados de cada obra (lo que se esperaba, lo que ingresa, lo que gasta, lo que paga de intereses y si gana o pierde en el año) y la pérdida del conjunto por día, mes, trimestre, semestre o año.',
+     ('cuenta', 'ritmo')),
 ]
 
 
@@ -534,14 +525,40 @@ def parte_archivo(slug):
     return PAGINA[:-5] + '-' + slug + '.html'
 
 
+def bloque(base, ref, secciones, c=None):
+    """Las secciones pedidas del pulso en su raiz (#mpRaiz) con los datos
+    que usa mo-pulso.js. Una sola raiz por pagina."""
+    c = c or _contexto(base, ref)
+    return '\n\n'.join(['<div class="mp mp-parte" id="mpRaiz">'] + [SECCIONES[k].format(**c) for k in secciones] +
+                        [DATOS.format(**c)]) + '\n</div>'
+
+
+def cajon_calculo(base, ref, c=None):
+    """«Como se calcula»: un boton que abre la ventana lateral de la
+    plataforma (apartados.js, button[data-cajon]) con las reglas de cada
+    suma y sus fuentes (pedido del autor, 21-10-2026: deja de ser capitulo).
+    Con #como-se-calcula en la direccion se abre al cargar."""
+    import mo_capitulos
+    c = c or _contexto(base, ref)
+    # Sin su titulo: la ventana trae el suyo.
+    cuerpo = re.sub(r'\s*<h2 class="mp-tit" id="mpComoTit">.*?</h2>', '', SECCIONES['calculo'].format(**c), flags=re.S)
+    cuerpo = cuerpo.replace('id="mpComo" aria-labelledby="mpComoTit"', 'aria-labelledby="mpCalcTit"')
+    tpl = ('<template id="tplMoCalculo"><header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">🔎</span> Inversión y Megaobras</span>'
+           '<button type="button" class="glos-drawer-x" aria-label="Cerrar">✕</button></header><div class="glos-drawer-cuerpo">'
+           '<span class="glos-drawer-cat">Método y fuentes</span>'
+           '<h3 id="mpCalcTit" class="glos-drawer-tit">¿Cómo se calcula lo que ves?</h3><div class="mp mp-cajon">%s</div></div></template>' % cuerpo)
+    return ('<p class="mp-calc"><button type="button" class="mp-calc-btn" data-cajon="tplMoCalculo" data-cajon-hash="%s" '
+            'data-cajon-tit="mpCalcTit" aria-haspopup="dialog"><span aria-hidden="true">🔎</span> ¿Cómo se calcula? Las reglas de cada suma y sus fuentes '
+            '<span aria-hidden="true">›</span></button></p>\n' % mo_capitulos.CALCULO_HASH) + tpl
+
+
 def subpaginas(base, ref):
-    """Las partes, para apartados.insp_subpaginas(): cada una con su
-    seccion, la navegacion entre partes y los datos que usa mo-pulso.js."""
+    """La cuarta aplicacion, para apartados.insp_subpaginas(): la cuenta y
+    el ritmo con los datos que usa mo-pulso.js y la ventana del calculo."""
     c = _contexto(base, ref)
     out = []
-    for slug, ico, nombre, tit, desc, _cif in PARTES:
-        bloque = '\n\n'.join(['<div class="mp mp-parte" id="mpRaiz">', SECCIONES[slug].format(**c),
-                               DATOS.format(**c)]) + '\n</div>'
+    for slug, ico, nombre, tit, desc, secs in PARTES:
         out.append({'archivo': parte_archivo(slug), 'icono': ico, 'menu': nombre, 'titulo': tit,
-                    'entrada': '<b>%s.</b> %s' % (esc(nombre), esc(desc.format(**c))), 'bloque': bloque})
+                    'entrada': '<b>%s.</b> %s' % (esc(nombre), esc(desc)),
+                    'bloque': cajon_calculo(base, ref, c) + bloque(base, ref, secs, c)})
     return out
