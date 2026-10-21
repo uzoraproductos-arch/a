@@ -669,7 +669,7 @@ HERRAMIENTAS = [
          ('inspentes', '🏢', 'Auditor de entes públicos', 'Busca y verifica',
           'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.'),
          ('inspnota', '📰', 'Contrasta una nota', 'Busca y verifica',
-          '¿Leíste una cifra en una noticia, en redes o en un discurso? Ponla junto al documento oficial y ve cuánto se aleja y por qué.'),
+          'Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
@@ -756,8 +756,9 @@ def insp_nativa(m, clave, base, ref):
 def insp_subpaginas(m, clave, base, ref):
     """Paginas hijas de una aplicacion nativa (17-10-2026): si su modulo
     trae subpaginas(), cada parte sale en su propia pagina, debajo de la
-    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto y
-    los tres pasos de Contrasta una nota."""
+    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto,
+    los tres pasos de Contrasta una nota y el catalogo de cifras oficiales
+    de Que encontro la ASF (con sus propios estilos y scripts)."""
     nat = importlib.import_module(INSP_NATIVAS[clave])
     if not hasattr(nat, 'subpaginas'):
         return []
@@ -769,6 +770,9 @@ def insp_subpaginas(m, clave, base, ref):
                   'lema': sp.get('lema') or '%s · parte %d' % (m['titulo'], k),
                   'icono_cab': sp['icono'] if m.get('icono_cab') else '',
                   'secciones': [dict(m['secciones'][0], bloque=sp['bloque'])]})
+        for k2 in ('estilos', 'scripts'):
+            if k2 in sp:
+                h[k2] = list(sp[k2])
         out.append(h)
     return out
 VERIFICA_PAGINA = 'herramienta-inspector-verifica.html'

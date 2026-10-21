@@ -10,7 +10,12 @@
    Desde el 21-10-2026 cada paso vive en su página (data-paso en #inRaiz:
    liga, cifra o contraste; vacío en la aplicación). Lo que el lector lleva
    escrito viaja en la dirección (?liga=…&id=…&n=…&u=…) y, por si vuelve
-   por el menú, en sessionStorage. */
+   por el menú, en sessionStorage.
+   Desde la tarde del mismo día Contrasta una nota lee la liga por su cuenta
+   (insp-nota-lee.js) y este archivo maneja solo el catálogo de cifras
+   oficiales, que se mudó a Qué encontró la ASF: una sola página
+   (data-paso="manual") con el catálogo, la cifra de la nota y las frases
+   de prueba. */
 (function () {
   'use strict';
 
@@ -33,7 +38,7 @@
   var PASO = raiz.getAttribute('data-paso') || '';
 
   /* ---------- Lo que pasa de un paso a otro ---------- */
-  var CLAVE = 'auditavision-contrasta-nota', CAMPOS = ['liga', 'id', 'n', 'u'];
+  var CLAVE = PASO === 'manual' ? 'auditavision-catalogo' : 'auditavision-contrasta-nota', CAMPOS = ['liga', 'id', 'n', 'u'];
   var E = {};
   try { E = JSON.parse(sessionStorage.getItem(CLAVE)) || {}; } catch (e) { E = {}; }
   var Q = new URLSearchParams(location.search);
@@ -45,10 +50,12 @@
     var t = q.toString();
     return t ? '?' + t : '';
   }
+  /* La consulta va antes del #ancla. */
+  function ancla(dest) { var k = dest.indexOf('#'); return k < 0 ? dest + consulta() : dest.slice(0, k) + consulta() + dest.slice(k); }
   function enlaces() {
     [].forEach.call(document.querySelectorAll('a[data-paso]'), function (a) {
       var dest = D.pasos && D.pasos[a.getAttribute('data-paso')];
-      if (dest) a.setAttribute('href', dest + consulta());
+      if (dest) a.setAttribute('href', ancla(dest));
     });
   }
   function guarda() {
@@ -194,6 +201,7 @@
       '<p class="in-el-f">Fuente: ' + fuente(o) + '</p>' +
       (PASO === 'cifra'
         ? '<a class="in-cambiar" href="' + esc(D.pasos.contraste + consulta()) + '" data-paso="contraste">Seguir al paso 3 con esta cifra <span aria-hidden="true">→</span></a>'
+        : PASO === 'manual' ? '<a class="in-cambiar" href="#inPaso2">Elegir otra cifra</a>'
         : '<a class="in-cambiar" href="' + esc(D.pasos.cifra + consulta()) + '" data-paso="cifra">Elegir otra cifra</a>');
     var falta = $('inFalta');
     if (falta) falta.hidden = true;
@@ -207,6 +215,7 @@
     if (catalogo) [].forEach.call(catalogo.querySelectorAll('.in-elige'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === id)); });
     if (PASO === 'cifra' && !sinIr) { location.href = D.pasos.contraste + consulta(); return; }
     pintaElegida(o);
+    if (PASO === 'manual' && !sinIr && cifra) { cifra.focus({ preventScroll: true }); irA('inPaso3'); if (salida.innerHTML) contrastar(); }
   }
   if (catalogo) catalogo.addEventListener('click', function (ev) {
     var b = ev.target.closest && ev.target.closest('.in-elige');
@@ -390,7 +399,7 @@
   function reiniciar() {
     E = {};
     try { sessionStorage.removeItem(CLAVE); } catch (e) { /* nada */ }
-    location.href = D.pasos.liga;
+    location.href = PASO === 'manual' ? location.pathname : D.pasos.liga;
   }
 
   /* ---------- Al abrir cada página ---------- */
@@ -399,12 +408,12 @@
     if (porId[E.id]) elegir(E.id, true);
     else if (/^mun-/.test(E.id)) cargarMunicipios(function () { elegir(E.id, true); });
   }
-  if (PASO === 'contraste') {
+  if (PASO === 'contraste' || PASO === 'manual') {
     var arranca = function () {
       if (E.id && porId[E.id]) elegir(E.id, true);
       if (E.u && UNIDADES[E.u]) unidad.value = E.u;
       if (E.n) { cifra.value = E.n; lecturaActual(); }
-      if (Q.has('ver') && est.sel && E.n) contrastar(false);
+      if (Q.has('ver') && est.sel && E.n) contrastar(PASO === 'manual');
     };
     if (E.id && !porId[E.id] && /^mun-/.test(E.id)) cargarMunicipios(arranca); else arranca();
   }

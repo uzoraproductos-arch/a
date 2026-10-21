@@ -17,6 +17,8 @@ Lo llama apartados.insp_nativa(): construir(base, ref) -> HTML del cuerpo.
 import html
 import json
 
+import insp_nota
+
 from presupuesto_modulos import chip
 
 ESTILOS = ['insp-asf.css']
@@ -355,6 +357,28 @@ def nueva(C, ref, prox):
         ('Lo que viene: la %s, el %s.' % (esc(minus(prox['titulo'])), fecha(prox['fecha']))) if prox else ''))
 
 
+def catalogo_cap(base):
+    """El catalogo de cifras oficiales y las frases de prueba, que venian de
+    Contrasta una nota (pedido del autor, 21-10-2026): viven en su pagina."""
+    cat = insp_nota.catalogo(base)
+    grupos = ', '.join('%s (%d)' % (nom.lower() if g != 'nacional' else 'nacionales', sum(1 for o in cat if o['g'] == g))
+                       for g, _i, nom in insp_nota.GRUPOS if g != 'municipios')
+    return sec('ia-catalogo', '📋', 'Catálogo de cifras oficiales', '''
+        <p class="ia-txt">Las <b>%s cifras oficiales</b> con las que contrastamos las notas, cada una con su documento y su estado: %s, más los ingresos de cada municipio del INEGI. Elige una, escribe la cifra que leíste y mide cuánto se aleja; trae frases de prueba para ver cada veredicto.</p>
+        <div class="ia-arr-acc">
+          <a class="ia-boton ia-boton-pri" href="%s">Abrir el catálogo <span aria-hidden="true">→</span></a>
+          <a class="ia-boton" href="%s">📰 Contrasta una nota con su liga</a>
+        </div>''' % (format(len(cat), ','), grupos, insp_nota.CATALOGO, insp_nota.PAGINA))
+
+
+def subpaginas(base, ref):
+    """Para apartados.insp_subpaginas(): la pagina del catalogo."""
+    return [{'archivo': insp_nota.CATALOGO, 'icono': '📋', 'menu': 'Catálogo de cifras oficiales',
+             'titulo': 'Catálogo de cifras oficiales', 'lema': 'Qué encontró la ASF · catálogo',
+             'entrada': '<b>Catálogo de cifras oficiales.</b> Elige una cifra con su documento, escribe la que leíste en una nota y mide cuánto se aleja.',
+             'bloque': insp_nota.catalogo_pagina(base, ref), 'estilos': ['insp-nota.css'], 'scripts': ['insp-nota.js']}]
+
+
 def documentos(C, ref):
     docs = ''.join('<li><a href="%s" target="_blank" rel="noopener">%s ↗</a>%s</li>'
                    % (esc(f['url']), esc(f['doc']), ('<code title="Huella SHA-256 del PDF">%s…</code>' % f['sha256'][:16]) if f.get('sha256') else '')
@@ -389,6 +413,7 @@ def construir(base, ref):
         ('ia-estado', '🗺️', 'Tu estado', '32 estados comparados'),
         ('ia-acciones', '⚖️', 'Qué significa cada acción', num(T['PO']) + ' pliegos'),
         ('ia-2025', '🆕', 'La Cuenta Pública 2025', num(N['auditorias']) + ' auditorías en la 1.ª entrega'),
+        ('ia-catalogo', '📋', 'Catálogo de cifras oficiales', format(len(insp_nota.catalogo(base)), ',') + ' cifras con documento'),
         ('ia-docs', '📚', 'Documentos y descarga', 'CSV por estado'),
     ]
     datos = {
@@ -411,6 +436,7 @@ def construir(base, ref):
         estado(C),
         acciones(C),
         nueva(C, ref, prox),
+        catalogo_cap(base),
         documentos(C, ref),
         '<script type="application/json" id="iaDatos">%s</script>' % _json(datos),
         '</div>'])
