@@ -179,7 +179,9 @@
       if (a.getAttribute('data-sx') === k) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
     if (mover) {
-      var p = $('sexenio-' + k);
+      /* Sin fichas por sexenio (aplicación 1 desde el 21-10-2026), el
+         sexenio se ve en la tabla general: #mt-sx-<clave>. */
+      var p = $('sexenio-' + k) || $(k === 'todos' ? 'mtResTit' : 'mt-sx-' + k);
       if (p) {
         p.scrollIntoView({ behavior: quieto ? 'auto' : 'smooth', block: 'start' });
         try { p.focus({ preventScroll: true }); } catch (e) { /* nada */ }

@@ -186,7 +186,7 @@ def _grupo(g, sectores, res):
                    % (_signo(g['res']), '−' if g['res'] < 0 else '+', _sin_signo(g['res']), g['n_res'])) if g['n_res'] else
                   ' · <span class="mt-gris">ninguna publica su resultado</span>'))
         cuerpo = '<ol class="mt-obras">%s</ol>' % ''.join(_fila_obra(o, sectores, res[o['id']]) for o in g['obras'])
-    return ('<section class="mt-sx" id="mt-sx-%s" style="--sx:%s" aria-labelledby="mt-sx-%s-t">'
+    return ('<section class="mt-sx" id="mt-sx-%s" style="--sx:%s" tabindex="-1" aria-labelledby="mt-sx-%s-t">'
             '<h3 class="mt-sx-tit" id="mt-sx-%s-t"><small>%d–%d</small> %s</h3>%s%s</section>'
             % (g['clave'], g['color'], g['clave'], g['clave'], g['a0'], g['a1'], esc(g['nombre']), cab, cuerpo))
 
@@ -267,9 +267,14 @@ def construir(base, ref):
 
 def _sexenios(base, ref):
     """Los seis sexenios (mo_sexenios) debajo de la tabla, sin su
-    portadilla: el arranque de la tabla ya dice que hay en la pagina."""
+    portadilla (el arranque de la tabla ya dice que hay en la pagina) ni
+    sus fichas por sexenio: las obras de cada sexenio se ven una sola vez,
+    en la tabla (pedido del autor, 21-10-2026). Tocar un sexenio en la
+    linea del tiempo lleva a sus obras en la tabla (mo-sexenios.js)."""
     import re
-    return re.sub(r'\s*<section class="mx-arranque".*?</section>', '', mo_sexenios.construir(base, ref), count=1, flags=re.S)
+    h = mo_sexenios.construir(base, ref)
+    h = re.sub(r'\s*<section class="mx-arranque".*?</section>', '', h, count=1, flags=re.S)
+    return re.sub(r'\s*<section class="mx-bloque" id="mxFicha".*?\n  </section>', '', h, count=1, flags=re.S)
 
 
 def cifras(base, ref):
