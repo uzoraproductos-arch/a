@@ -750,9 +750,6 @@ def insp_nativa(m, clave, base, ref):
     m['secciones'][0]['bloque'] = nat.construir(base, ref)
     m['estilos'] = list(getattr(nat, 'ESTILOS', []))
     m['scripts'] = list(getattr(nat, 'SCRIPTS', []))
-    if getattr(nat, 'NAV_COMPACTA', False):
-        m['pie_extra'] = m['_nav_min']
-        m['pie_corto'] = True
     return m
 
 
@@ -995,24 +992,26 @@ def herramienta_modulo(h, n, i, bloque=None):
             'id': 'modulo', 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco,
         }],
         'pie_extra': navegacion + '\n\n      ' + herr_otras(archivo),
-        '_nav_min': nav_compacta(h, i),
     }
 
 
-def nav_compacta(h, i):
+def nav_compacta(h, i, padre=None):
     """Navegacion de una sola fila para el pie de una aplicacion (pedido del
-    autor, 21-10-2026, en Contrasta una nota): anterior, todas las
+    autor, 21-10-2026: la grande «absorbe mucha parte de la pagina»; el
+    mismo dia, para todas las aplicaciones): anterior, todas las
     aplicaciones, siguiente e indice general, sin las tarjetas grandes ni
-    las otras herramientas. La aplicacion la pide con NAV_COMPACTA."""
+    las otras herramientas. En una subpagina (padre), el primer boton
+    vuelve a su aplicacion y no hay anterior ni siguiente."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     pal = herr_palabra(rubro)
     todas = INVESTIGACIONES if rubro == 'inspector' else archivo
-    ant = temas[i - 1] if i > 0 else None
-    sig = temas[i + 1] if i + 1 < len(temas) else None
+    ant = temas[i - 1] if i > 0 and not padre else None
+    sig = temas[i + 1] if i + 1 < len(temas) and not padre else None
     def boton(t, clase, rotulo):
         return ('        <a class="herr-min %s" href="%s"><span>%s</span><small>%s</small></a>'
                 % (clase, modulo_archivo(archivo, t[0]), rotulo, t[2]))
-    filas = [boton(ant, 'ant', '← Anterior') if ant else '',
+    filas = ['        <a class="herr-min ant" href="%s"><span>← Volver</span><small>%s</small></a>' % padre if padre else '',
+             boton(ant, 'ant', '← Anterior') if ant else '',
              '        <a class="herr-min" href="%s"><span>%s %s</span><small>%s</small></a>' % (
                  todas, 'Todas las' if pal[2] == 'Las' else 'Todos los', pal[1],
                  HERR_DIVISION[rubro][0] if rubro == 'inspector' else titulo),
@@ -1020,6 +1019,28 @@ def nav_compacta(h, i):
              '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>']
     return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n%s\n      </nav>'
             % '\n'.join(f for f in filas if f))
+
+
+def nav_de_pagina(archivo, padre3=None):
+    """La fila compacta que le toca a una pagina, o None si no es una
+    aplicacion de las cuatro herramientas (ni subpagina de una, ni el bot
+    del Modo Inspector)."""
+    apps = {}
+    for h in HERRAMIENTAS:
+        for i, t in enumerate(h[7]):
+            apps[modulo_archivo(h[0], t[0])] = (h, i)
+    if archivo in apps:
+        return nav_compacta(*apps[archivo])
+    if padre3 and padre3[0] in apps:
+        return nav_compacta(*apps[padre3[0]], padre=padre3)
+    if archivo == ASISTENTE[0]:
+        h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
+        return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
+                '        <a class="herr-min ant" href="%s"><span>← Volver</span><small>%s</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>La otra división</span><small>%s</small></a>\n'
+                '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>\n'
+                '      </nav>' % (h[0], h[3], INVESTIGACIONES, HERR_DIVISION['inspector'][0]))
+    return None
 
 
 def herramienta_asistente(bloque):
@@ -4403,6 +4424,9 @@ def numeros_preparar():
 
 
 def pagina(a, sello):
+    nav = nav_de_pagina(a['archivo'], a.get('padre3'))
+    if nav:
+        a = dict(a, pie_extra=nav, pie_corto=True)
     secciones = []
     for s in a['secciones']:
         if s.get('pagina'):

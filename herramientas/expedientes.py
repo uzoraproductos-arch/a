@@ -16,7 +16,7 @@ Lo llama apartados.generar(), asi que sello.py la regenera con el sello.
 import json
 import os
 
-from apartados import RAIZ, FAVICON, cabecera, sociales
+from apartados import RAIZ, FAVICON, cabecera, sociales, nav_de_pagina
 
 ARCHIVO = 'expedientes.html'
 
@@ -109,13 +109,13 @@ def pagina(sello):
       <div id="exCasos" class="ex-casos">
         <noscript><p>Esta página arma los expedientes con JavaScript a partir de la base de datos de la plataforma. Actívalo para verlos.</p></noscript>
       </div>
+
+      {nav}
     </div>
   </main>
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <a class="apartado-volver" href="herramienta-inspector.html">← Volver al Modo Inspector</a>
-      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -126,7 +126,7 @@ def pagina(sello):
   <script src="assets/auditor/js/expedientes.js?v={sello}"></script>
 </body>
 </html>
-'''.format(sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
+'''.format(nav=nav_de_pagina(ARCHIVO), sociales=sociales(ARCHIVO, 'Expedientes de casos por aclarar · Auditavisión', 'Diez casos de alto impacto con lo que la Auditoría Superior de la Federación dejó por aclarar: megaobras, Pemex, salud, Segalmex y deuda de los estados.'),
            favicon=FAVICON, sello=sello, cabecera=cabecera('herramientas.html', sello),
            pasos='\n'.join(pasos), glosa=glosa, exp_json=_exp_json())
 

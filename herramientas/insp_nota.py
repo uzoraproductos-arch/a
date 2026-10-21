@@ -24,8 +24,7 @@ referencia esta pendiente, el contraste no se hace; una cifra de la nota
 sin documento con que compararla queda «sin contrastar», no se cuenta como
 falsa.
 
-Lo llama apartados.insp_nativa() (INSP_NATIVAS['inspnota']). Lleva la
-navegacion compacta (NAV_COMPACTA).
+Lo llama apartados.insp_nativa() (INSP_NATIVAS['inspnota']).
 """
 import html
 import json
@@ -35,9 +34,6 @@ from presupuesto_modulos import chip, mdp
 
 ESTILOS = ['insp-nota.css']
 SCRIPTS = ['insp-nota-lee.js']
-# Abajo, solo anterior, siguiente, las aplicaciones y el indice (pedido del
-# autor, 21-10-2026: la navegacion grande «absorbe mucha parte de la pagina»).
-NAV_COMPACTA = True
 
 GRUPOS = [
     ('nacional', '🇲🇽', 'Nacional'),
@@ -424,12 +420,47 @@ def paso_archivo(slug):
 
 
 def _aviso(ref):
-    return '''  <details class="in-aviso">
-    <summary>Cómo leemos la nota y qué califica el veredicto</summary>
-    <p><b>Cómo la leemos.</b> Un sitio sin servidor no puede abrir páginas de otros, así que la liga pasa por un lector externo gratuito: <a href="https://jina.ai/reader/" target="_blank" rel="noopener">r.jina.ai ↗</a> y, si falla, <a href="https://allorigins.win/" target="_blank" rel="noopener">allorigins ↗</a>. Ellos abren la nota y nos devuelven el texto; no guardamos la liga ni el texto en ningún servidor nuestro. Si prefieres que la liga no salga de tu navegador, pega el texto. De un video leemos el título y la descripción, no lo que se dice en él: para eso, pega su transcripción.</p>
-    <p><b>Qué califica.</b> Las cifras en pesos de la nota frente a los documentos oficiales que tenemos, no al medio ni a quien la escribió. Una cifra sin documento con qué compararla queda «sin contrastar»: no la contamos como falsa. El empate entre la nota y el documento lo hace la página por las palabras de cada oración; puedes cambiarlo en cada cifra. Si la nota no habla de dinero público, te lo decimos y no la calificamos.</p>
-    <p><b>De dónde salen las cifras.</b> De los documentos de la SHCP {r_pef} {r_lif} {r_cgpe}, la ASF, la Cuenta Pública y el INEGI; cada una lleva su enlace. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. ¿Prefieres elegir tú la cifra? Está el <a href="{cat}">catálogo de cifras oficiales</a>, en Qué encontró la ASF.</p>
-  </details>'''.format(r_pef=ref('ref-pef2026'), r_lif=ref('ref-lif2026'), r_cgpe=ref('ref-cgpe2027'), cat=CATALOGO)
+    """Como leemos la nota y que califica el veredicto: un boton que abre la
+    ventana lateral de la plataforma (pedido del autor, 21-10-2026). La
+    plantilla la abre apartados.js (button[data-cajon]); con #como-leemos
+    en la direccion se abre al cargar."""
+    secs = [
+        ('🔗', 'Cómo leemos la nota',
+         'Un sitio sin servidor no puede abrir páginas de otros, así que la liga pasa por un lector externo gratuito: '
+         '<a href="https://jina.ai/reader/" target="_blank" rel="noopener">r.jina.ai ↗</a> y, si falla, '
+         '<a href="https://allorigins.win/" target="_blank" rel="noopener">allorigins ↗</a>. Ellos abren la nota y nos devuelven el texto; '
+         'no guardamos la liga ni el texto en ningún servidor nuestro. Si prefieres que la liga no salga de tu navegador, pega el texto.'),
+        ('▶️', 'Videos y redes sociales',
+         'De un video leemos el título y la descripción, no lo que se dice en él: para eso, pega su transcripción. '
+         'X, Facebook, Instagram y TikTok no dejan que un lector externo abra sus publicaciones; copia el texto y pégalo.'),
+        ('⚖️', 'Qué califica el veredicto',
+         'Las cifras en pesos de la nota frente a los documentos oficiales que tenemos, no al medio ni a quien la escribió. '
+         'Cada cifra que coincide vale 1; la que se acerca (hasta 10 %), ½; la que no coincide, 0. El resultado es el promedio sobre 100 '
+         'y se lee en el semáforo: de 70 para arriba, verde; de 40 a 69, ámbar; abajo de 40, rojo.'),
+        ('🔎', 'Lo que no cuenta',
+         'Una cifra sin documento con qué compararla queda «sin contrastar»: no la contamos como falsa ni como cierta. '
+         'Las cifras en dólares no se comparan. Si la nota no habla de dinero público, te lo decimos y no la calificamos.'),
+        ('🧩', 'Cómo empatamos cada cifra',
+         'Por las palabras de su oración: debe nombrar de quién habla (Pemex, Jalisco, el Tren Maya…) y qué se mide (presupuesto, deuda, intereses…). '
+         'El empate puede fallar; en cada cifra puedes cambiarlo y el veredicto se recalcula.'),
+        ('📚', 'De dónde salen las cifras oficiales',
+         'De los documentos de la SHCP {r_pef} {r_lif} {r_cgpe}, la ASF, la Cuenta Pública y el INEGI; cada una lleva su enlace. '
+         'Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el '
+         '<a href="pendientes.html">Registro de pendientes</a>. ¿Prefieres elegir tú la cifra? Está el '
+         '<a href="{cat}">catálogo de cifras oficiales</a>, en Qué encontró la ASF.'),
+        ('🔏', 'El sello',
+         'El veredicto lo expide Auditavisión con su folio y su huella digital. <b>No es un documento oficial</b>: '
+         'la huella solo certifica que el veredicto no se ha alterado.'),
+    ]
+    cuerpo = ''.join('<section class="glos-drawer-sec"><h4><span aria-hidden="true">%s</span> %s</h4><p>%s</p></section>' % (i, t, x) for i, t, x in secs)
+    cuerpo = cuerpo.format(r_pef=ref('ref-pef2026'), r_lif=ref('ref-lif2026'), r_cgpe=ref('ref-cgpe2027'), cat=CATALOGO)
+    tpl = ('<template id="tplInComo"><header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">📖</span> Contrasta una nota</span>'
+           '<button type="button" class="glos-drawer-x" aria-label="Cerrar">✕</button></header><div class="glos-drawer-cuerpo">'
+           '<span class="glos-drawer-cat">Verificador de notas · Método</span>'
+           '<h3 id="inComoTit" class="glos-drawer-tit">Cómo leemos la nota y qué califica el veredicto</h3>%s</div></template>' % cuerpo)
+    return ('  <p class="in-aviso-btn"><button type="button" class="in-cajon-btn" data-cajon="tplInComo" data-cajon-hash="como-leemos" '
+            'data-cajon-tit="inComoTit" aria-haspopup="dialog"><span aria-hidden="true">📖</span> Cómo leemos la nota y qué califica el veredicto '
+            '<span aria-hidden="true">›</span></button></p>\n  ' + tpl)
 
 
 def _temas():

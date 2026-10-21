@@ -268,6 +268,10 @@
 .in-temas a:hover, .in-temas a:focus-visible { border-color: var(--in); }
 .in-temas small { font-size: 14px; font-weight: 600; color: var(--in-gris); }
 details.in-revisa, details.in-aviso { margin: 0 0 18px; }
+.in-aviso-btn { margin: 0 0 18px; }
+.in-cajon-btn { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 10px 16px; border: 1px solid #c9d2e3; border-radius: 12px; background: #ffffff; color: var(--in-osc); cursor: pointer; text-align: left; font: 700 17px/1.35 Inter, system-ui, sans-serif; }
+.in-cajon-btn > span:last-child { margin-left: auto; font-size: 22px; color: var(--in); }
+.in-cajon-btn:hover, .in-cajon-btn:focus-visible { border-color: var(--in); background: var(--in-claro); }
 details.in-revisa > summary, details.in-aviso > summary { display: flex; align-items: center; min-height: 48px; cursor: pointer; font-size: 17px; font-weight: 700; color: var(--in-osc); }
 details.in-revisa > summary { padding: 0 14px; border: 1px solid #dfe5f0; border-radius: 12px; background: #ffffff; }
 details.in-revisa[open] > summary { margin-bottom: 10px; }
