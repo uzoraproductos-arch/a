@@ -812,20 +812,81 @@
       }).join('') + '</ul></section>';
   }
 
-  function cabecera(ente, nivelTxt, sub) {
-    return '<header class="ie-exp-cab"><span class="ie-exp-ico" aria-hidden="true">' + ente.icono + '</span>' +
-      '<div class="ie-exp-tx"><p class="ie-exp-nivel">' + nivelTxt + '</p>' +
-      '<h2 class="ie-exp-nom" id="ieExpTit" tabindex="-1">' + esc(ente.nombre) + '</h2><p class="ie-exp-sub">' + esc(sub) + '</p></div>' +
-      '<div class="ie-exp-acc">' +
-      '<button type="button" class="ie-btn ie-btn-p" data-copiar="ficha"><span aria-hidden="true">📋</span> Copiar ficha</button>' +
+  /* ---------------- La ficha técnica: encabezado y sello ---------------- */
+  /* Pedido del autor (21-10-2026): el expediente se emite como ficha técnica
+     de Auditavisión, con el mismo encabezado y el mismo sello que el Estado
+     de Cuenta (estado-administracion.js) y la nota técnica del bot: arriba la
+     banda, el logo, el folio y la fecha; abajo el sello, la huella SHA-256 y
+     la leyenda. La huella firma el texto de la ficha (textoFicha sin el
+     enlace): la misma ficha con las mismas cifras da el mismo folio. */
+  var BANDA = document.getElementById('ieExp').getAttribute('data-cabecera');
+  var CORTE = { federal: 'Cuenta Pública 2025 y avance de 2026', estatal: 'Ejercicio 2024; Ramos 28 y 33 de 2026', municipal: 'Ejercicio 2024' };
+  function hoyFecha() {
+    var d = new Date();
+    return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+  }
+  function selloSitio() { var b = document.querySelector('.apartado-pie-txt b'); return b ? b.textContent : ''; }
+  function enlaceEnte(ente) { return location.href.split('#')[0] + '#ente=' + ente.nivel + ':' + encodeURIComponent(ente.id); }
+  function huellaDe(txt) {
+    if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.resolve(null);
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt)).then(function (b) {
+      return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
+    }).catch(function () { return null; });
+  }
+  function folio(h) { return 'AV-FT-' + h.slice(0, 8).toUpperCase(); }
+  function sello(fol) {
+    var id = 'ieArco' + Math.random().toString(36).slice(2, 7);
+    return '<svg class="ie-ft-sello-svg" viewBox="0 0 120 120" role="img" aria-label="Ficha técnica de Auditavisión">' +
+      '<defs><path id="' + id + '" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>' +
+      '<circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="2.5"/>' +
+      '<circle cx="60" cy="60" r="35" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
+      '<text font-size="9.4" font-weight="800" letter-spacing="3.5" fill="currentColor"><textPath href="#' + id + '">AUDITAVISIÓN · FICHA TÉCNICA ·</textPath></text>' +
+      '<text x="60" y="58" text-anchor="middle" font-size="22" font-weight="900" fill="currentColor">✓</text>' +
+      '<text x="60" y="74" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor">' + esc(fol ? fol.split('-').slice(-1)[0] : '········') + '</text></svg>';
+  }
+  /* Los botones van fuera de la hoja: no se imprimen ni entran en la huella. */
+  function acciones() {
+    return '<div class="ie-exp-acc">' +
+      '<button type="button" class="ie-btn ie-btn-p" data-pdf="1"><span aria-hidden="true">🖨️</span> Descargar en PDF</button>' +
+      '<button type="button" class="ie-btn" data-copiar="ficha"><span aria-hidden="true">📋</span> Copiar ficha</button>' +
       '<button type="button" class="ie-btn" data-copiar="enlace"><span aria-hidden="true">🔗</span> Copiar enlace</button>' +
       '<button type="button" class="ie-btn ie-cerrar" data-cerrar="1" aria-label="Cerrar el expediente y volver al directorio">✕ <span>Cerrar</span></button>' +
-      '</div></header>';
+      '</div>';
   }
 
-  function pie(fuentes) {
+  function cabecera(ente, nivelTxt, sub) {
+    return (BANDA ? '<div class="ie-ft-banda"><img src="' + esc(BANDA) + '" alt=""></div>' : '') +
+      '<header class="ie-ft-cab">' +
+      '<div class="ie-ft-marca"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="104" height="81" decoding="sync"><div><b>Auditavisión</b><small>El gasto público, a la vista</small></div></div>' +
+      '<div class="ie-ft-tit"><span class="ie-ft-tipo">Ficha técnica · ' + nivelTxt + '</span>' +
+      '<h2 class="ie-exp-nom" id="ieExpTit" tabindex="-1"><span class="ie-exp-ico" aria-hidden="true">' + ente.icono + '</span> ' + esc(ente.nombre) + '</h2>' +
+      '<p class="ie-exp-sub">' + esc(sub) + '</p></div>' +
+      '<dl class="ie-ft-meta"><div><dt>Folio</dt><dd class="ie-ft-folio">calculando…</dd></div><div><dt>Expedida</dt><dd>' + esc(hoyFecha()) + '</dd></div>' +
+      '<div><dt>Cifras de</dt><dd>' + esc(CORTE[ente.nivel]) + '</dd></div></dl></header>';
+  }
+
+  function pie(fuentes, ente) {
     return '<footer class="ie-exp-pie"><p class="ie-fu">🔗 Fuentes: ' + fuentes + '</p>' +
-      '<p class="ie-fu">Los umbrales de los semáforos y el índice son de Auditavisión y se pueden discutir; los datos son oficiales. <a href="#ie-metodo">Cómo se lee</a>.</p></footer>';
+      '<p class="ie-fu">Los umbrales de los semáforos y el índice son de Auditavisión y se pueden discutir; los datos son oficiales. <a href="#ie-metodo">Cómo se lee</a>.</p>' +
+      '<div class="ie-ft-sello"><div class="ie-ft-sello-img">' + sello(null) + '</div><div class="ie-ft-sello-tx">' +
+      '<b>Ficha técnica de Auditavisión</b>' +
+      '<p>Folio <b class="ie-ft-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
+      '<p class="ie-ft-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
+      '<p>Compruébala en <span class="ie-ft-liga">' + esc(enlaceEnte(ente)) + '</span>: al abrirla se vuelve a calcular la huella, y si coincide, las cifras no han cambiado.</p>' +
+      '<p class="ie-ft-leyenda">Lo expide Auditavisión, plataforma ciudadana de fiscalización del gasto público. <b>No es un documento oficial</b> del gobierno, del Congreso ni de la Auditoría Superior. ' +
+      'El sello certifica dos cosas: que cada cifra proviene de la fuente oficial citada, y que el contenido no se ha alterado desde que se expidió. Si cambia una sola cifra, la huella ya no coincide. ' +
+      'Los semáforos y el índice son una construcción de Auditavisión, no un dictamen: una señal no es una acusación.</p>' +
+      '</div></div></footer>';
+  }
+  function firma(doc) {
+    huellaDe(cuerpoFicha()).then(function (hx) {
+      if (!doc.isConnected) return;
+      var fol = hx ? folio(hx) : null;
+      st.folio = fol; st.huella = hx;
+      Array.prototype.forEach.call(doc.querySelectorAll('.ie-ft-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
+      doc.querySelector('.ie-ft-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
+      doc.querySelector('.ie-ft-sello-img').innerHTML = sello(fol);
+    });
   }
 
   function expFederal(ente) {
@@ -861,7 +922,7 @@
       fedAuditorias(f) +
       (exps ? '<div class="ie-nota"><b>Expedientes de la ASF sobre este ente.</b> Informe por informe, con sus claves de auditoría: <span class="ie-chipas">' + exps + '</span></div>' : '') +
       pie(esc(D.fF.cp2025.corto) + refFed('cp2025') + ' · ' + esc(D.fF.av2026.corto) + refFed('av2026') + ' · ' + esc(D.fF.asf2024.corto) + refFed('asf2024') +
-        usadas.map(function (k) { return ' · ' + esc(D.fP[k].corto) + refFed(k); }).join('') + '.');
+        usadas.map(function (k) { return ' · ' + esc(D.fP[k].corto) + refFed(k); }).join('') + '.', ente);
   }
 
   function expLocal(ente) {
@@ -900,7 +961,7 @@
       (esEstado ? estPoderes(e) : '') +
       '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
       '<h3 class="ie-h3">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado) +
-      verMas + pie(fuentes);
+      verMas + pie(fuentes, ente);
   }
 
   function animar(cont) {
@@ -931,8 +992,10 @@
     }
     st.sel = { nivel: nivel, id: id };
     if (st.nivel !== nivel) { st.nivel = nivel; st.tope = 60; }
-    cont.innerHTML = '<article class="ie-exp-marco">' + (nivel === 'federal' ? expFederal(ente) : expLocal(ente)) + '</article>';
+    st.folio = st.huella = null;
+    cont.innerHTML = acciones() + '<article class="ie-exp-marco">' + (nivel === 'federal' ? expFederal(ente) : expLocal(ente)) + '</article>';
     cont.hidden = false;
+    firma(cont.querySelector('.ie-exp-marco'));
     animar(cont);
     pintarTodo();
     document.title = ente.nombre + ' · Auditor de entes públicos · Auditavisión';
@@ -978,12 +1041,21 @@
   }
 
   /* ---------------- La ficha para copiar ---------------- */
+  /* El cuerpo es lo que firma la huella; la ficha copiada le suma el sello y el enlace. */
   function textoFicha() {
+    var t = cuerpoFicha();
+    if (!t) return '';
+    var ente = buscarEnte(st.sel.nivel, st.sel.id);
+    return t + '\n\nFicha técnica de Auditavisión · Folio ' + (st.folio || 'no disponible') +
+      (st.huella ? '\nHuella digital (SHA-256 de la ficha): ' + st.huella : '') +
+      '\nNo es un documento oficial. Compruébala en: ' + enlaceEnte(ente);
+  }
+  function cuerpoFicha() {
     if (!st.sel) return '';
     var ente = buscarEnte(st.sel.nivel, st.sel.id);
     if (!ente) return '';
     var limpio = function (s) { return String(s).replace(/<br>/g, ' ').replace(/<[^>]+>/g, '').replace(/\s*\[\d+\]/g, '').replace(/\s+/g, ' ').trim(); };
-    var t = 'AUDITAVISIÓN · Modo Inspector\n' + ente.nombre + '\n' + ente.sub + '\n\n';
+    var t = 'AUDITAVISIÓN · Ficha técnica · Auditor de entes públicos\n' + ente.nombre + '\n' + ente.sub + '\n\n';
     if (ente.nivel === 'municipal') t += 'Quién gobernó: ' + limpio(munGobierno(ente)) + '\n\n';
     var dg = diag(ente), l = incs(dg);
     if (l.length) {
@@ -1005,7 +1077,7 @@
       : ente.nivel === 'estatal'
         ? 'Fuentes: INEGI, finanzas públicas estatales 2024; SHCP, Cuenta Pública 2024 y Sistema de Alertas; ASF, Matriz de Datos Básicos CP 2024.'
         : 'Fuentes: INEGI, EFIPEM municipal 2016-2025; SHCP, Sistema de Recursos Federales Transferidos 2024; INAFED, presidencias municipales; ASF, Matriz de Datos Básicos CP 2024.';
-    return t + '\n' + location.href.split('#')[0] + '#ente=' + ente.nivel + ':' + encodeURIComponent(ente.id);
+    return t;
   }
   function avisar(t) {
     var a = document.getElementById('ieAviso');
@@ -1110,6 +1182,7 @@
     if (b.hasAttribute('data-limpiar')) { q.value = ''; st.q = ''; st.vista = 'todos'; qx.hidden = true; pintarTodo(); return; }
     if (b.hasAttribute('data-reintentar')) { pintarLista(); return; }
     if (b.hasAttribute('data-cerrar')) { cerrar(); return; }
+    if (b.hasAttribute('data-pdf')) { window.print(); return; }
     if (b.getAttribute('data-copiar') === 'ficha') { copiar(textoFicha(), '✓ Ficha del expediente copiada. Pégala donde quieras.'); return; }
     if (b.getAttribute('data-copiar') === 'enlace') { copiar(location.href, '✓ Enlace copiado: abre directo este expediente.'); return; }
     if (b.hasAttribute('data-abre-det')) {

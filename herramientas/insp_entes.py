@@ -58,6 +58,15 @@ CDMX_AVISO = (
 MUN_ARCHIVOS = ['municipios-efipem.js', 'municipios-rendicion.js']
 
 
+def _banda():
+    """La imagen del encabezado del Estado de Cuenta (apartados.py la busca
+    igual): la ficha tecnica de cada expediente la repite (21-10-2026)."""
+    for x in ('svg', 'png', 'jpg', 'jpeg', 'webp'):
+        if os.path.exists(os.path.join(RAIZ, 'assets', 'auditor', 'img', 'encabezado-estado-de-cuenta.' + x)):
+            return ' data-cabecera="assets/auditor/img/encabezado-estado-de-cuenta.%s"' % x
+    return ''
+
+
 def _json(x):
     return json.dumps(x, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
@@ -330,12 +339,12 @@ def construir(base, ref):
           <li><b>1</b> Busca o elige en el directorio.</li>
           <li><b>2</b> Lee la respuesta corta y sus semáforos.</li>
           <li><b>3</b> Abre cada pregunta: cifra, explicación y documento.</li>
-          <li><b>4</b> Copia la ficha o comparte el enlace.</li>
+          <li><b>4</b> Descarga su ficha técnica en PDF, cópiala o comparte el enlace.</li>
         </ol>
         <p class="ie-salva">⚖️ <b>Una señal no es una acusación</b>: es algo que la autoridad debe explicar. Y <b>«por aclarar» no es «robado»</b>: es dinero cuyo destino no quedó acreditado ante la Auditoría Superior.</p>
       </section>
 
-      <section class="ie-exp" id="ieExp" aria-label="Expediente abierto" hidden></section>
+      <section class="ie-exp" id="ieExp" aria-label="Expediente abierto"{banda} hidden></section>
 
       <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
         <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
@@ -375,7 +384,7 @@ def construir(base, ref):
       </nav>
       <div class="ie-aviso" id="ieAviso" role="status" aria-live="polite"></div>
     </div>'''.format(
-        datos=_json(D),
+        datos=_json(D), banda=_banda(),
         nfed=_num(nfed), nraiz=nfed - norg, norg=norg, nest=nest, nmun=_num(nmun) if nmun else 'los',
         pest=pest, tarjetas=tarjetas, metodo=metodo, fuentes=fuentes,
         fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '')
