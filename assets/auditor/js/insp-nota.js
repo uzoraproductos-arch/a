@@ -6,7 +6,11 @@
    INEGI (municipios-efipem.js) si el lector busca un municipio, lee la
    cifra de la nota («1.5 billones», «300 mil millones») y la mide contra
    el documento. Nada se estima: si la cifra oficial está pendiente, el
-   contraste no se hace. */
+   contraste no se hace.
+   Desde el 21-10-2026 cada paso vive en su página (data-paso en #inRaiz:
+   liga, cifra o contraste; vacío en la aplicación). Lo que el lector lleva
+   escrito viaja en la dirección (?liga=…&id=…&n=…&u=…) y, por si vuelve
+   por el menú, en sessionStorage. */
 (function () {
   'use strict';
 
@@ -26,6 +30,35 @@
   var porId = {};
   D.cat.forEach(function (o) { porId[o.id] = o; });
   var est = { sel: null, filtro: '', texto: '', muni: null, cargando: false };
+  var PASO = raiz.getAttribute('data-paso') || '';
+
+  /* ---------- Lo que pasa de un paso a otro ---------- */
+  var CLAVE = 'auditavision-contrasta-nota', CAMPOS = ['liga', 'id', 'n', 'u'];
+  var E = {};
+  try { E = JSON.parse(sessionStorage.getItem(CLAVE)) || {}; } catch (e) { E = {}; }
+  var Q = new URLSearchParams(location.search);
+  if (Q.has('ver') && !Q.has('liga')) delete E.liga;
+  CAMPOS.forEach(function (k) { if (Q.has(k)) E[k] = Q.get(k); });
+  function consulta() {
+    var q = new URLSearchParams();
+    CAMPOS.forEach(function (k) { if (E[k]) q.set(k, E[k]); });
+    var t = q.toString();
+    return t ? '?' + t : '';
+  }
+  function enlaces() {
+    [].forEach.call(document.querySelectorAll('a[data-paso]'), function (a) {
+      var dest = D.pasos && D.pasos[a.getAttribute('data-paso')];
+      if (dest) a.setAttribute('href', dest + consulta());
+    });
+  }
+  function guarda() {
+    CAMPOS.forEach(function (k) { if (!E[k]) delete E[k]; });
+    try { sessionStorage.setItem(CLAVE, JSON.stringify(E)); } catch (e) { /* sin almacenamiento: queda la dirección */ }
+    if (PASO && window.history && history.replaceState) {
+      try { history.replaceState(null, '', location.pathname + consulta() + location.hash); } catch (e) { /* nada */ }
+    }
+    enlaces();
+  }
 
   function plano(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
   function esc(v) {
@@ -43,26 +76,34 @@
 
   /* ---------- Paso 1: la liga ---------- */
   var url = $('inUrl'), urlOk = $('inUrlOk');
+  function ligaValida(v) { return /^https?:\/\/[^\s]+\.[^\s]+/i.test(v) ? v : ''; }
   function leerUrl() {
+    if (!url) return ligaValida(String(E.liga || ''));
     var v = String(url.value || '').trim();
-    var ok = /^https?:\/\/[^\s]+\.[^\s]+/i.test(v);
+    var ok = ligaValida(v);
     urlOk.textContent = !v ? '' : ok ? '✓ Nota de ' + v.replace(/^https?:\/\//i, '').split('/')[0] : 'Esa liga no parece completa: debe empezar con https://';
-    return ok ? v : '';
+    E.liga = ok; guarda();
+    return ok;
   }
-  url.addEventListener('input', leerUrl);
+  if (url) {
+    url.value = E.liga || '';
+    leerUrl();
+    url.addEventListener('input', leerUrl);
+  }
 
   /* ---------- Paso 2: buscar y elegir ---------- */
   var buscar = $('inBuscar'), cuenta = $('inCuenta'), catalogo = $('inCatalogo');
-  var grupos = [].slice.call(catalogo.querySelectorAll('.in-grupo'));
-  var items = [].slice.call(catalogo.querySelectorAll('.in-it'));
+  var grupos = catalogo ? [].slice.call(catalogo.querySelectorAll('.in-grupo')) : [];
+  var items = catalogo ? [].slice.call(catalogo.querySelectorAll('.in-it')) : [];
   items.forEach(function (li) { var o = porId[li.dataset.id]; li._t = plano(o.n + ' ' + D.grupos[o.g] + ' ' + (o.f || '')); });
+  function avisoMuni(t) { if (muniTx) muniTx.textContent = t; }
   var muniLista = $('inMuniLista'), muniTx = $('inMuniTx');
 
   function cargarMunicipios(listo) {
     if (est.muni) { listo(); return; }
     if (est.cargando) return;
     est.cargando = true;
-    muniTx.textContent = 'Cargando el padrón municipal del INEGI…';
+    avisoMuni('Cargando el padrón municipal del INEGI…');
     var propio = document.querySelector('script[src*="insp-nota.js"]');
     var v = propio ? (propio.getAttribute('src').split('?')[1] || '') : '';
     var s = document.createElement('script');
@@ -80,10 +121,10 @@
           }
         });
       });
-      muniTx.textContent = est.muni.length.toLocaleString('es-MX') + ' municipios con cifra en el padrón del INEGI (EFIPEM 2024, cifras definitivas). Escribe el nombre en el buscador.';
+      avisoMuni(est.muni.length.toLocaleString('es-MX') + ' municipios con cifra en el padrón del INEGI (EFIPEM 2024, cifras definitivas). Escribe el nombre en el buscador.');
       listo();
     };
-    s.onerror = function () { est.cargando = false; muniTx.textContent = 'No se pudo cargar el padrón municipal. Revisa tu conexión y vuelve a escribir.'; };
+    s.onerror = function () { est.cargando = false; avisoMuni('No se pudo cargar el padrón municipal. Revisa tu conexión y vuelve a escribir.'); };
     document.head.appendChild(s);
   }
 
@@ -121,7 +162,7 @@
   }
 
   var tBuscar;
-  buscar.addEventListener('input', function () {
+  if (buscar) buscar.addEventListener('input', function () {
     clearTimeout(tBuscar);
     tBuscar = setTimeout(function () {
       filtrar();
@@ -140,27 +181,34 @@
   });
 
   var elegida = $('inElegida');
-  function elegir(id, sinFoco) {
-    var o = porId[id];
-    if (!o) return;
-    est.sel = o;
-    [].forEach.call(catalogo.querySelectorAll('.in-elige'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === id)); });
+  function pintaElegida(o) {
+    if (!elegida) return;
     elegida.hidden = false;
     elegida.innerHTML =
-      '<p class="in-el-t">Vas a contrastar contra:</p>' +
+      '<p class="in-el-t">' + (PASO === 'cifra' ? 'Ya elegiste:' : 'Vas a contrastar contra:') + '</p>' +
       '<p class="in-el-n">' + esc(o.n) + '</p>' +
       '<p class="in-el-v"><b>' + fmt(o.v) + '</b> ' + chip(o.e) + ' <span class="in-el-a">' + esc(o.a) + '</span></p>' +
       (o.s === 'negativo' || o.v < 0 ? '<p class="in-el-nota">⚠️ El documento la publica en negativo (un déficit, un balance en contra o una pérdida): aquí se compara su valor absoluto.</p>' : '') +
       (o.op ? '<p class="in-el-nota"><b>Cómo se calcula:</b> ' + esc(o.op) + '</p>' : '') +
       (o.e === 'pendiente' ? '<p class="in-el-nota">Esta cifra está pendiente de documento: no se puede usar como regla.</p>' : '') +
       '<p class="in-el-f">Fuente: ' + fuente(o) + '</p>' +
-      '<button type="button" class="in-cambiar" id="inCambiar">Elegir otra</button>';
-    $('inCambiar').addEventListener('click', function () { buscar.focus(); buscar.select(); });
-    if (!sinFoco) { var c = $('inCifra'); c.focus({ preventScroll: true }); $('inPaso3').scrollIntoView({ behavior: suave(), block: 'start' }); }
-    if (!$('inSalida').innerHTML || sinFoco) return;
-    contrastar();
+      (PASO === 'cifra'
+        ? '<a class="in-cambiar" href="' + esc(D.pasos.contraste + consulta()) + '" data-paso="contraste">Seguir al paso 3 con esta cifra <span aria-hidden="true">→</span></a>'
+        : '<a class="in-cambiar" href="' + esc(D.pasos.cifra + consulta()) + '" data-paso="cifra">Elegir otra cifra</a>');
+    var falta = $('inFalta');
+    if (falta) falta.hidden = true;
   }
-  catalogo.addEventListener('click', function (ev) {
+  /* En el paso 2, elegir lleva al paso 3; en el 3, cambia la regla. */
+  function elegir(id, sinIr) {
+    var o = porId[id];
+    if (!o) return;
+    est.sel = o;
+    E.id = id; guarda();
+    if (catalogo) [].forEach.call(catalogo.querySelectorAll('.in-elige'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === id)); });
+    if (PASO === 'cifra' && !sinIr) { location.href = D.pasos.contraste + consulta(); return; }
+    pintaElegida(o);
+  }
+  if (catalogo) catalogo.addEventListener('click', function (ev) {
     var b = ev.target.closest && ev.target.closest('.in-elige');
     if (b) elegir(b.dataset.id);
   });
@@ -192,18 +240,22 @@
   }
 
   function lecturaActual() {
+    if (!cifra) return null;
     var r = leer(cifra.value);
     if (r && r.u && unidad.value !== r.u) unidad.value = r.u;
     var u = UNIDADES[unidad.value] || UNIDADES.millones;
     if (!r || !(r.n > 0)) { lectura.textContent = cifra.value.trim() ? 'No alcanzamos a leer una cifra mayor que cero.' : ''; return null; }
     var mdp = r.n * u.f;
+    E.n = cifra.value.trim(); E.u = unidad.value; guarda();
     lectura.innerHTML = 'Leemos: <b>' + esc(r.n.toLocaleString('es-MX', { maximumFractionDigits: 6 })) + ' ' + u.et + '</b> = <b>' + fmt(mdp) + '</b>';
     return { n: r.n, u: u, uid: unidad.value, mdp: mdp };
   }
-  cifra.addEventListener('input', lecturaActual);
-  unidad.addEventListener('change', lecturaActual);
-  cifra.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') contrastar(); });
-  $('inContrastar').addEventListener('click', function () { contrastar(true); });
+  if (cifra) {
+    cifra.addEventListener('input', lecturaActual);
+    unidad.addEventListener('change', lecturaActual);
+    cifra.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') contrastar(true); });
+    $('inContrastar').addEventListener('click', function () { contrastar(true); });
+  }
 
   /* ---------- El contraste ---------- */
   var salida = $('inSalida'), vacio = $('inVacio');
@@ -216,7 +268,7 @@
   function contrastar(mover) {
     var o = est.sel, L = lecturaActual();
     vacio.hidden = true;
-    if (!o) { salida.innerHTML = '<p class="in-ver in-v-gris">Primero elige, en el paso 2, la cifra oficial contra la que quieres contrastar.</p>'; if (mover) irA('inPaso2'); return; }
+    if (!o) { salida.innerHTML = '<p class="in-ver in-v-gris">Primero elige la cifra oficial contra la que quieres contrastar: <a href="' + esc(D.pasos.cifra + consulta()) + '" data-paso="cifra">ve al paso 2</a>.</p>'; if (mover) irA('inResultado'); return; }
     if (!L) { salida.innerHTML = '<p class="in-ver in-v-gris">Escribe en el paso 3 una cifra mayor que cero, como la da la nota (por ejemplo, «1.6 billones»).</p>'; cifra.focus(); return; }
     /* Un déficit o una pérdida se publican en negativo; la nota suele darlos
        en positivo. Se comparan en valor absoluto, y se avisa. */
@@ -336,27 +388,38 @@
   }
 
   function reiniciar() {
-    est.sel = null; url.value = ''; cifra.value = ''; buscar.value = ''; lectura.textContent = ''; urlOk.textContent = '';
-    elegida.hidden = true; elegida.innerHTML = ''; salida.innerHTML = ''; vacio.hidden = false;
-    est.filtro = '';
-    [].forEach.call(raiz.querySelectorAll('.in-filtro'), function (x) { x.setAttribute('aria-pressed', String(!x.dataset.g)); });
-    [].forEach.call(catalogo.querySelectorAll('.in-elige'), function (b) { b.setAttribute('aria-pressed', 'false'); });
-    grupos.forEach(function (g) { g.hidden = false; g.open = g.dataset.g === 'nacional'; });
-    items.forEach(function (li) { li.hidden = false; });
-    cuenta.textContent = ''; muniLista.innerHTML = '';
-    marcaTips([]);
-    irA('inPaso1'); url.focus({ preventScroll: true });
+    E = {};
+    try { sessionStorage.removeItem(CLAVE); } catch (e) { /* nada */ }
+    location.href = D.pasos.liga;
   }
 
-  /* ---------- Ejemplos de prueba ---------- */
-  [].forEach.call(raiz.querySelectorAll('.in-ej'), function (b) {
-    b.addEventListener('click', function () {
-      var e = D.ejemplos[+b.dataset.ej];
-      if (!e) return;
-      url.value = ''; leerUrl();
-      elegir(e.id, true);
-      cifra.value = e.n; unidad.value = e.u;
-      contrastar(true);
+  /* ---------- Al abrir cada página ---------- */
+  enlaces();
+  if (PASO === 'cifra' && E.id) {
+    if (porId[E.id]) elegir(E.id, true);
+    else if (/^mun-/.test(E.id)) cargarMunicipios(function () { elegir(E.id, true); });
+  }
+  if (PASO === 'contraste') {
+    var arranca = function () {
+      if (E.id && porId[E.id]) elegir(E.id, true);
+      if (E.u && UNIDADES[E.u]) unidad.value = E.u;
+      if (E.n) { cifra.value = E.n; lecturaActual(); }
+      if (Q.has('ver') && est.sel && E.n) contrastar(false);
+    };
+    if (E.id && !porId[E.id] && /^mun-/.test(E.id)) cargarMunicipios(arranca); else arranca();
+  }
+  /* En la aplicación: si dejaste un contraste a medias, te lo recuerda. */
+  var sigues = $('inSigues');
+  if (sigues && (E.id || E.liga || E.n)) {
+    var o = E.id && porId[E.id];
+    sigues.hidden = false;
+    sigues.innerHTML = '<b>Llevas un contraste a medias' + (o ? ' contra «' + esc(o.n) + '»' : '') + '.</b> ' +
+      '<a href="' + esc(D.pasos[o ? 'contraste' : (E.liga ? 'cifra' : 'liga')] + consulta()) + '" data-paso="' + (o ? 'contraste' : (E.liga ? 'cifra' : 'liga')) + '">Sigue donde te quedaste</a> ' +
+      'o <button type="button" class="in-borrar" id="inBorrar">empieza de cero</button>.';
+    $('inBorrar').addEventListener('click', function () {
+      E = {};
+      try { sessionStorage.removeItem(CLAVE); } catch (e) { /* nada */ }
+      sigues.hidden = true; enlaces();
     });
-  });
+  }
 })();

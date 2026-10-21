@@ -16,7 +16,8 @@ municipio.
 Regla de la plataforma (AGENTS.md, §2): nada se estima. Si la cifra de
 referencia esta pendiente, el contraste no se hace.
 
-Lo llama apartados.insp_nativa() (INSP_NATIVAS['inspnota']).
+Lo llama apartados.insp_nativa() (INSP_NATIVAS['inspnota']); sus tres
+pasos, apartados.insp_subpaginas(), cada uno en su pagina (21-10-2026).
 """
 import html
 import json
@@ -209,16 +210,116 @@ def _item(o):
             % (esc(o['id']), esc(o['id']), esc(o['n']), mdp(o['v']), signo, chip(o['e']), esc(o['a']), fuente))
 
 
+
+
+# Desde el 21-10-2026 (pedido del autor) cada paso es su propia pagina: la
+# aplicacion solo presenta los tres pasos en tarjetas y cada tarjeta abre el
+# suyo. Lo que el lector lleva escrito viaja de una pagina a otra en la
+# direccion (?liga=…&id=…&n=…&u=…), asi que un contraste se puede compartir.
+PAGINA = 'herramienta-inspector-nota.html'
+# (slug, icono, nombre corto, titulo de la pagina, que se hace ahi)
+PASOS = [
+    ('liga', '📰', 'La nota', 'La nota que vas a contrastar',
+     'Pega la liga de la noticia, la publicación o el discurso. Es opcional: solo sirve para que el contraste diga de dónde salió la afirmación.'),
+    ('cifra', '🏛️', 'La cifra oficial', '¿De qué cifra oficial habla la nota?',
+     'Busca en el catálogo de {total} cifras con su documento, o en los ingresos de cada municipio, la que corresponde a lo que dice la nota.'),
+    ('contraste', '⚖️', 'Lo que dice la nota', 'Lo que dice la nota, junto al documento',
+     'Escribe la cifra como la da la nota y mide cuánto se aleja del documento oficial, con su veredicto y lo que conviene revisar.'),
+]
+
+
+def paso_archivo(slug):
+    return PAGINA[:-5] + '-' + slug + '.html'
+
+
+def _subnav(actual, pie=False):
+    chips = ''.join(
+        '<a class="in-subnav-chip%s" href="%s" data-paso="%s"%s><span class="in-n">%d</span> %s</a>'
+        % (' actual' if slug == actual else '', paso_archivo(slug), slug,
+           ' aria-current="page"' if slug == actual else '', k, esc(nombre))
+        for k, (slug, _i, nombre, *_r) in enumerate(PASOS, 1))
+    return ('  <nav class="in-subnav%s" aria-label="%s">\n'
+            '    <a class="in-subnav-volver" href="%s"><span aria-hidden="true">←</span> Volver a Contrasta una nota</a>\n'
+            '    <div class="in-subnav-chips">%s</div>\n  </nav>'
+            % (' in-subnav-pie' if pie else '', 'Sigue con otro paso' if pie else 'Los tres pasos', PAGINA, chips))
+
+
+def _ejemplos(ejs):
+    from urllib.parse import urlencode
+    botones = '\n'.join(
+        '<a class="in-ej" href="%s?%s" data-paso="ejemplo"><span class="in-ej-tipo">%s</span><span class="in-ej-fr">%s</span></a>'
+        % (paso_archivo('contraste'), esc(urlencode({'id': e['id'], 'n': e['n'], 'u': e['u'], 'ver': '1'})), esc(e['tipo']), esc(e['frase']))
+        for e in ejs)
+    return '''  <section class="in-ejemplos" aria-labelledby="inEjTit">
+    <h2 class="in-tit" id="inEjTit"><span aria-hidden="true">🧪</span> Pruébala sin escribir</h2>
+    <p class="in-txt">Frases de prueba, <b>no son notas reales</b>: cada una abre el paso 3 con el contraste ya hecho, para que veas cómo se lee cada veredicto.</p>
+    <div class="in-ejs">
+{0}
+    </div>
+  </section>'''.format(botones)
+
+
+def _aviso(ref, hermanas=True):
+    return '''  <aside class="in-aviso">
+    <p><b>Lo que esta herramienta no hace:</b> no abre ni lee la nota —un sitio sin servidor no puede hacerlo—, así que compara la cifra que tú copiaste, no la que la nota dice. Tampoco califica al medio: dice si una cifra coincide con un documento oficial, y por qué podría no coincidir.</p>
+    <p>Las cifras salen de los documentos de la SHCP {r_pef} {r_lif} {r_cgpe}, la ASF, la Cuenta Pública y el INEGI; cada una lleva su enlace. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>.</p>
+{h}  </aside>'''.format(r_pef=ref('ref-pef2026'), r_lif=ref('ref-lif2026'), r_cgpe=ref('ref-cgpe2027'),
+                        h=('    <p class="in-hermanas">Sigue verificando: <a href="herramienta-inspector-asf.html">🏛️ Qué encontró la ASF</a> · <a href="numeros-las-32-entidades.html">🗺️ Las 32 entidades</a> · <a href="numeros-los-municipios.html">🏘️ Los municipios</a> · <a href="fuentes-oficiales.html">📚 Fuentes oficiales</a></p>\n') if hermanas else '')
+
+
+def _datos(base, cat, ejs):
+    datos = {'cat': cat, 'ejemplos': ejs, 'grupos': {g: nom for g, _, nom in GRUPOS},
+             'estados': {e['abbr']: e['name'] for e in base.get('estados') or []},
+             'pasos': {slug: paso_archivo(slug) for slug, *_r in PASOS}}
+    return '  <script type="application/json" id="inDatos">%s</script>' % _json(datos)
+
+
 def construir(base, ref):
+    """La aplicacion: presentacion, las tres tarjetas y los ejemplos."""
     cat = catalogo(base)
     ejs = ejemplos(cat)
-    cuenta = {g: sum(1 for o in cat if o['g'] == g) for g, _, _ in GRUPOS}
+    total = format(len(cat), ',')
+    tarjetas = '\n'.join(
+        '      <li><a class="in-tarjeta" href="%s" data-paso="%s">'
+        '<span class="in-tarjeta-cab"><span class="in-n">%d</span><span class="in-tarjeta-tit"><span aria-hidden="true">%s</span> %s</span></span>'
+        '<span class="in-tarjeta-desc">%s</span>'
+        '<span class="in-tarjeta-ir">Abrir el paso %d <span aria-hidden="true">→</span></span></a></li>'
+        % (paso_archivo(slug), slug, k, ico, esc(nombre), esc(desc.format(total=total)), k)
+        for k, (slug, ico, nombre, _t, desc) in enumerate(PASOS, 1))
+    return '\n\n'.join([
+        '<div class="in" id="inRaiz">',
+        '''  <section class="in-arranque" aria-labelledby="inArrTit">
+    <p class="in-kicker">Busca y verifica · aplicación 5</p>
+    <h2 class="in-grande" id="inArrTit">¿Esa cifra de la noticia es cierta? Ponla junto al documento.</h2>
+    <p class="in-txt">Tienes <b>{total} cifras oficiales</b> con su documento, más los ingresos de cada municipio del INEGI. Eliges de cuál habla la nota, escribes lo que afirma y te decimos si coincide, cuánto se aleja y qué revisar antes de concluir.</p>
+  </section>'''.format(total=total),
+        '''  <nav class="in-pasos" aria-labelledby="inPasosTit">
+    <h2 class="in-tit" id="inPasosTit"><span aria-hidden="true">🗂️</span> Los tres pasos</h2>
+    <p class="in-txt">Cada paso abre su propia página. Lo que vas escribiendo pasa contigo de un paso al siguiente.</p>
+    <p class="in-sigues" id="inSigues" hidden></p>
+    <ol class="in-tarjetas">
+{0}
+    </ol>
+  </nav>'''.format(tarjetas),
+        _ejemplos(ejs), _aviso(ref), _datos(base, cat, ejs)]) + '\n</div>'
 
+
+def _paso_liga(cat):
+    return '''  <section class="in-paso" id="inPaso1" aria-labelledby="inP1Tit">
+    <h2 class="in-tit" id="inP1Tit"><span class="in-n">1</span> La nota <small>(opcional)</small></h2>
+    <label class="in-campo" for="inUrl"><span>Pega la liga: sirve para que el contraste diga de dónde salió la afirmación. No la abrimos ni la leemos.</span>
+      <input type="url" id="inUrl" class="in-input" placeholder="https://…" autocomplete="off" inputmode="url"></label>
+    <p class="in-url-ok" id="inUrlOk" aria-live="polite"></p>
+    <a class="in-boton in-sigue" href="{0}" data-paso="cifra">Siguiente: elige la cifra oficial <span aria-hidden="true">→</span></a>
+  </section>'''.format(paso_archivo('cifra'))
+
+
+def _paso_cifra(cat):
+    cuenta = {g: sum(1 for o in cat if o['g'] == g) for g, _, _ in GRUPOS}
     filtros = ['<button type="button" class="in-filtro" data-g="" aria-pressed="true">Todas</button>']
     for g, ico, nom in GRUPOS:
         filtros.append('<button type="button" class="in-filtro" data-g="%s" aria-pressed="false"><span aria-hidden="true">%s</span> %s%s</button>'
                        % (g, ico, nom, (' <small>%d</small>' % cuenta[g]) if cuenta[g] else ''))
-
     grupos = []
     for g, ico, nom in GRUPOS:
         if g == 'municipios':
@@ -232,45 +333,10 @@ def construir(base, ref):
         grupos.append('<details class="in-grupo" data-g="%s"%s><summary><span aria-hidden="true">%s</span> %s <small>%d cifras</small></summary>\n'
                       '<ul class="in-items">\n%s\n</ul></details>'
                       % (g, ' open' if g == 'nacional' else '', ico, nom, len(items), '\n'.join(_item(o) for o in items)))
-
-    ej_html = '\n'.join(
-        '<button type="button" class="in-ej" data-ej="%d"><span class="in-ej-tipo">%s</span><span class="in-ej-fr">%s</span></button>'
-        % (k, esc(e['tipo']), esc(e['frase'])) for k, e in enumerate(ejs))
-
-    unidades = ''.join('<option value="%s"%s>%s</option>' % (u, ' selected' if u == 'millones' else '', et) for u, et in UNIDADES)
-
-    datos = {'cat': cat, 'ejemplos': ejs, 'grupos': {g: nom for g, _, nom in GRUPOS},
-             'estados': {e['abbr']: e['name'] for e in base.get('estados') or []}}
-
-    return '''<div class="in" id="inRaiz">
-  <section class="in-arranque" aria-labelledby="inArrTit">
-    <p class="in-kicker">Busca y verifica · aplicación 5</p>
-    <h2 class="in-grande" id="inArrTit">¿Esa cifra de la noticia es cierta? Ponla junto al documento.</h2>
-    <p class="in-txt">Tienes <b>{total} cifras oficiales</b> con su documento, más los ingresos de cada municipio del INEGI. Eliges de cuál habla la nota, escribes lo que afirma y te decimos si coincide, cuánto se aleja y qué revisar antes de concluir.</p>
-    <ol class="in-indice" aria-label="Los tres pasos">
-      <li><a href="#inPaso1"><span class="in-n">1</span> La nota</a></li>
-      <li><a href="#inPaso2"><span class="in-n">2</span> La cifra oficial</a></li>
-      <li><a href="#inPaso3"><span class="in-n">3</span> Lo que dice la nota</a></li>
-    </ol>
-  </section>
-
-  <section class="in-ejemplos" aria-labelledby="inEjTit">
-    <h2 class="in-tit" id="inEjTit"><span aria-hidden="true">🧪</span> Pruébala sin escribir</h2>
-    <p class="in-txt">Frases de prueba, <b>no son notas reales</b>: cada una lleva a un veredicto distinto para que veas cómo se lee el resultado.</p>
-    <div class="in-ejs">
-{ejs}
-    </div>
-  </section>
-
-  <section class="in-paso" id="inPaso1" aria-labelledby="inP1Tit">
-    <h2 class="in-tit" id="inP1Tit"><span class="in-n">1</span> La nota <small>(opcional)</small></h2>
-    <label class="in-campo" for="inUrl"><span>Pega la liga: sirve para que el contraste diga de dónde salió la afirmación. No la abrimos ni la leemos.</span>
-      <input type="url" id="inUrl" class="in-input" placeholder="https://…" autocomplete="off" inputmode="url"></label>
-    <p class="in-url-ok" id="inUrlOk" aria-live="polite"></p>
-  </section>
-
-  <section class="in-paso" id="inPaso2" aria-labelledby="inP2Tit">
+    return '''  <section class="in-paso" id="inPaso2" aria-labelledby="inP2Tit">
     <h2 class="in-tit" id="inP2Tit"><span class="in-n">2</span> ¿De qué cifra oficial habla?</h2>
+    <p class="in-txt">Toca la cifra que corresponde a la nota: te llevamos al paso 3 para escribir lo que la nota afirma.</p>
+    <div class="in-elegida" id="inElegida" aria-live="polite" hidden></div>
     <label class="in-campo" for="inBuscar"><span>Busca el concepto, el estado, el municipio o la dependencia</span>
       <input type="search" id="inBuscar" class="in-input" placeholder="Ej.: intereses deuda, Jalisco deuda, Tren Maya, Monterrey" autocomplete="off"></label>
     <div class="in-filtros" role="group" aria-label="Categorías">
@@ -280,11 +346,15 @@ def construir(base, ref):
     <div class="in-catalogo" id="inCatalogo">
 {grupos}
     </div>
-    <div class="in-elegida" id="inElegida" aria-live="polite" hidden></div>
-  </section>
+  </section>'''.format(filtros='\n      '.join(filtros), grupos='\n'.join(grupos))
 
-  <section class="in-paso" id="inPaso3" aria-labelledby="inP3Tit">
+
+def _paso_contraste(cat):
+    unidades = ''.join('<option value="%s"%s>%s</option>' % (u, ' selected' if u == 'millones' else '', et) for u, et in UNIDADES)
+    return '''  <section class="in-paso" id="inPaso3" aria-labelledby="inP3Tit">
     <h2 class="in-tit" id="inP3Tit"><span class="in-n">3</span> Lo que dice la nota</h2>
+    <div class="in-elegida" id="inElegida" aria-live="polite" hidden></div>
+    <p class="in-falta" id="inFalta">Todavía no eliges contra qué cifra oficial contrastar. <a href="{cifra}" data-paso="cifra">Elígela en el paso 2</a>.</p>
     <div class="in-cifra">
       <label class="in-campo" for="inCifra"><span>La cifra, como la da la nota. Puedes escribir «1.5 billones» o «300 mil millones».</span>
         <input type="text" id="inCifra" class="in-input in-input-num" placeholder="Ej.: 1.6 billones" autocomplete="off" inputmode="text"></label>
@@ -297,7 +367,7 @@ def construir(base, ref):
 
   <section class="in-resultado" id="inResultado" aria-live="polite" aria-labelledby="inResTit">
     <h2 class="in-tit" id="inResTit"><span aria-hidden="true">📏</span> El contraste</h2>
-    <p class="in-vacio" id="inVacio">Aquí aparecerá el medidor cuando elijas una cifra oficial y escribas lo que dice la nota.</p>
+    <p class="in-vacio" id="inVacio">Aquí aparecerá el medidor cuando escribas lo que dice la nota.</p>
     <div id="inSalida"></div>
   </section>
 
@@ -311,14 +381,23 @@ def construir(base, ref):
       <li data-tip="signo"><b>El signo.</b> Los balances y el déficit se publican en negativo. Aquí los comparamos en valor absoluto y te avisamos.</li>
       <li data-tip="concepto"><b>El concepto.</b> Total o una parte, bruto o neto, la empresa entera o solo un proyecto: un nombre parecido puede medir otra cosa. <a href="numeros-lo-que-la-cifra-no-dice.html">Lo que la cifra no dice</a>.</li>
     </ul>
-  </section>
+  </section>'''.format(cifra=paso_archivo('cifra'), unidades=unidades)
 
-  <aside class="in-aviso">
-    <p><b>Lo que esta herramienta no hace:</b> no abre ni lee la nota —un sitio sin servidor no puede hacerlo—, así que compara la cifra que tú copiaste, no la que la nota dice. Tampoco califica al medio: dice si una cifra coincide con un documento oficial, y por qué podría no coincidir.</p>
-    <p>Las cifras salen de los documentos de la SHCP {r_pef} {r_lif} {r_cgpe}, la ASF, la Cuenta Pública y el INEGI; cada una lleva su enlace. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>.</p>
-    <p class="in-hermanas">Sigue verificando: <a href="herramienta-inspector-asf.html">🏛️ Qué encontró la ASF</a> · <a href="numeros-las-32-entidades.html">🗺️ Las 32 entidades</a> · <a href="numeros-los-municipios.html">🏘️ Los municipios</a> · <a href="fuentes-oficiales.html">📚 Fuentes oficiales</a></p>
-  </aside>
-  <script type="application/json" id="inDatos">{datos}</script>
-</div>'''.format(total=format(len(cat), ','), ejs=ej_html, filtros='\n      '.join(filtros), grupos='\n'.join(grupos),
-                 unidades=unidades, datos=_json(datos),
-                 r_pef=ref('ref-pef2026'), r_lif=ref('ref-lif2026'), r_cgpe=ref('ref-cgpe2027'))
+
+ARMA = {'liga': _paso_liga, 'cifra': _paso_cifra, 'contraste': _paso_contraste}
+
+
+def subpaginas(base, ref):
+    """Los tres pasos, para apartados.insp_subpaginas()."""
+    cat = catalogo(base)
+    ejs = ejemplos(cat)
+    total = format(len(cat), ',')
+    out = []
+    for k, (slug, ico, nombre, tit, desc) in enumerate(PASOS, 1):
+        bloque = '\n\n'.join(['<div class="in in-pagpaso" id="inRaiz" data-paso="%s">' % slug, _subnav(slug),
+                              ARMA[slug](cat), _subnav(slug, pie=True), _aviso(ref, hermanas=False),
+                              _datos(base, cat, ejs)]) + '\n</div>'
+        out.append({'archivo': paso_archivo(slug), 'icono': ico, 'menu': '%d · %s' % (k, nombre), 'titulo': tit,
+                    'lema': 'Contrasta una nota · paso %d de %d' % (k, len(PASOS)),
+                    'entrada': '<b>Paso %d: %s.</b> %s' % (k, esc(nombre), esc(desc.format(total=total))), 'bloque': bloque})
+    return out

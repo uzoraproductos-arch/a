@@ -756,7 +756,8 @@ def insp_nativa(m, clave, base, ref):
 def insp_subpaginas(m, clave, base, ref):
     """Paginas hijas de una aplicacion nativa (17-10-2026): si su modulo
     trae subpaginas(), cada parte sale en su propia pagina, debajo de la
-    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto."""
+    aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto y
+    los tres pasos de Contrasta una nota."""
     nat = importlib.import_module(INSP_NATIVAS[clave])
     if not hasattr(nat, 'subpaginas'):
         return []
@@ -765,7 +766,7 @@ def insp_subpaginas(m, clave, base, ref):
         h = dict(m)
         h.update({'archivo': sp['archivo'], 'menu': sp['menu'], 'titulo': sp['titulo'], 'icono': sp['icono'],
                   'entrada': sp['entrada'], 'padre3': (m['archivo'], m['titulo']),
-                  'lema': '%s · parte %d' % (m['titulo'], k),
+                  'lema': sp.get('lema') or '%s · parte %d' % (m['titulo'], k),
                   'icono_cab': sp['icono'] if m.get('icono_cab') else '',
                   'secciones': [dict(m['secciones'][0], bloque=sp['bloque'])]})
         out.append(h)
