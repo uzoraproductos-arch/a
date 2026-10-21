@@ -323,7 +323,7 @@ def estado(C):
           <noscript><p class="ia-nota">Sin JavaScript se muestra Aguascalientes; el ranking de abajo trae los 32 y la descarga CSV de cada estado está en el %s.</p></noscript>
         </div>
         <div class="ia-panel" id="iaEntidad" aria-live="polite">%s</div>
-        <p class="ia-nota">%s Cada renglón: %s. %s Los totales del estado suman sus tres renglones. «Otros» agrupa organismos, universidades y demás entes locales que recibieron dinero federal. Más señales de tu estado en el <a href="herramienta-inspector-radar.html">Radar por entidad</a>.</p>
+        <p class="ia-nota">%s Cada renglón: %s. %s Los totales del estado suman sus tres renglones. «Otros» agrupa organismos, universidades y demás entes locales que recibieron dinero federal. Más señales de tu estado en su ficha técnica del <a href="herramienta-inspector-entes.html?nivel=estatal&amp;orden=radInt#ie-dir">Auditor de entes públicos</a>.</p>
         <h3 class="ia-sub" id="iaRankTit">Los 32 estados, por monto por aclarar</h3>
         <div class="ia-metricas" role="group" aria-label="Ordenar el ranking" id="iaOrden" hidden>%s</div>
         <p class="ia-nota ia-solojs" hidden>Toca un estado para ver su detalle arriba.</p>

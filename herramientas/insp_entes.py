@@ -28,6 +28,7 @@ import json
 import os
 import re
 
+import insp_radar
 from poderes_modulo import _loc, _fijo, esc
 
 ESTILOS = ['insp-entes.css']
@@ -227,6 +228,8 @@ def datos(base):
         'scjnAgo': pj.get('scjnAgosto'),
         'cdmx': CDMX_AVISO,
         'mun': {'n': _catalogo_municipal(), 'src': MUN_ARCHIVOS},
+        # El Radar por entidad, fusionado con la ficha estatal (21-10-2026).
+        'radar': insp_radar.datos(base['cuenta_publica_asf']),
     }
 
 
@@ -297,7 +300,8 @@ def _paginas(base, ref):
             <p><em>Esto es una construcción de Auditavisión para hacer comparables cifras oficiales sueltas. No es una calificación crediticia, ni una sanción, ni un dictamen de la Auditoría Superior.</em></p>
           </div>
         </details>
-      </section>'''.format(da=UF['desvioAlerta'], dg=UF['desvioGrave'], pa=UF['pagoAlerta'], rb=UF['ritmoBajo'], ra=UF['ritmoAlto'],
+        {radar}
+      </section>'''.format(radar=_metodo_radar(D['radar']), da=UF['desvioAlerta'], dg=UF['desvioGrave'], pa=UF['pagoAlerta'], rb=UF['ritmoBajo'], ra=UF['ritmoAlto'],
                            pa_=p['autonomia'], po=p['observado'], ph=p['holgura'], dep=UL['depAlerta'],
                            eca=UL['estCuadreAlerta'], ecg=UL['estCuadreGrave'], agp=UL['asfGravePct'],
                            mca=UL['munCuadreAlerta'], mcg=UL['munCuadreGrave'], mgp=UL['munAsfGravePct'])
@@ -310,6 +314,7 @@ def _paginas(base, ref):
         fu(F['cp2025']['corto'], F['cp2025']['ref'], F['cp2025'].get('url')),
         fu(F['av2026']['corto'] + ' (corte: ' + F['av2026'].get('corte', '') + ')', F['av2026']['ref'], F['av2026'].get('url')),
         fu(F['asf2024']['corto'], F['asf2024']['ref']),
+        fu(D['radar']['fuente']['corto'] + ', pp. ' + D['radar']['fuente']['pags'] + ' (el radar de los 32 estados)', 'ref-asf-mdb2024', D['radar']['fuente']['url']),
         fu(fe_['cp2024']['corto'], fe_['cp2024']['ref'], fe_['cp2024'].get('url')),
         fu(fe_['inegi2024']['corto'], fe_['inegi2024']['ref']),
         fu('INEGI, EFIPEM municipal 2016-2025; SHCP, Sistema de Recursos Federales Transferidos 2024; INAFED, presidencias municipales', 'ref-inegi-efipem'),
@@ -385,6 +390,28 @@ def _paginas(base, ref):
     </div>""".format(**args)}
 
 
+def _metodo_radar(R):
+    """El apartado del metodo que explica el radar de la ficha estatal
+    (antes, la pagina del Radar por entidad: sus criterios, su semaforo y
+    las palabras de la Matriz)."""
+    crit = ''.join('<p><b>%s %s</b> %s %s <em>Operación:</em> %s</p>' % (ico, esc(et), esc(que), chip(edo), esc(op))
+                   for _, et, ico, que, op, edo in R['crit'])
+    sem = ''.join('<li>%s <b>%s</b>: por cada $100 revisados quedó %s.</li>' % (v[0], v[1], v[2]) for v in R['sem'].values())
+    acc = ''.join('<p><b>%s (%s)</b>: %s <small>%s</small></p>' % (esc(R['acc'][k][0]), k, esc(R['acc'][k][1]), esc(R['acc'][k][2]))
+                  for k in ('SA', 'PO', 'PRAS') if k in R['acc'])
+    return '''<details class="ie-det" id="ie-metodo-radar">
+          <summary><span aria-hidden="true">🚩</span> Estados: el radar de la Auditoría Superior</summary>
+          <div class="ie-det-c">
+            <p>Cada ficha estatal pone al estado junto a los otros 31 con la Matriz de Datos Básicos de la ASF (Cuenta Pública 2024). El promedio nacional es la suma de lo que quedó por aclarar en los 32 estados (%s) ÷ la suma de lo que la Auditoría revisó en ellos (%s) × 100 = <b>$%.2f</b> por cada $100 %s.</p>
+            %s
+            <ul class="ie-sem-ley">%s</ul>
+            <p>Los tres criterios ordenan; ninguno juzga. Una bandera roja quiere decir que ahí conviene preguntar primero, no que alguien sea culpable. %s</p>
+            <p><b>Universo y muestra</b>: el universo es el dinero que la Auditoría eligió fiscalizar; la muestra, la parte que de verdad revisó. <b>Recuperaciones</b>: dinero que el ente devolvió o justificó mientras la auditoría estaba en curso.</p>
+            %s
+          </div>
+        </details>''' % (sim_mdp(R['pa'] / 1e6), sim_mdp(R['mu'] / 1e6), R['prom'], chip('derivado'), crit, sem, esc(R['nota']), acc)
+
+
 def _cajon(metodo, fuentes, args):
     """Como se lee un expediente y de donde sale cada cifra: un boton que
     abre la ventana lateral de la plataforma, como el de Contrasta una nota
@@ -408,20 +435,3 @@ def _cajon(metodo, fuentes, args):
 
 def construir(base, ref):
     return _paginas(base, ref)['principal']
-
-
-# El Radar por entidad era la aplicacion 2 del Modo Inspector. Desde el
-# 21-10-2026 (pedido del autor) vive dentro de esta: el directorio lo abre
-# con su cuarta vista, «Radar por entidad», y conserva su direccion para no
-# romper enlaces. Cada ficha del radar lleva a la ficha tecnica del estado.
-RADAR = 'herramienta-inspector-radar.html'
-
-
-def subpaginas(base, ref):
-    import insp_radar
-    return [{'archivo': RADAR, 'icono': '🚩', 'menu': 'Radar por entidad', 'titulo': 'Radar por entidad',
-             'lema': 'Auditor de entes públicos · los 32 estados, lado a lado',
-             'entrada': '<b>Banderas rojas.</b> Qué estados dejaron más dinero federal sin aclarar ante la Auditoría Superior '
-                        'en la Cuenta Pública 2024, ordenados como prefieras. Cada estado lleva a su ficha técnica en el Auditor de entes públicos.',
-             'bloque': insp_radar.construir(base, ref),
-             'estilos': list(insp_radar.ESTILOS), 'scripts': list(insp_radar.SCRIPTS)}]

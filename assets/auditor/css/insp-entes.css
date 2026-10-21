@@ -70,9 +70,6 @@
 .ie-vista b { font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--ie-suave); }
 .ie-vista.activo { background: var(--ie-azul); border-color: var(--ie-azul); color: #ffffff; }
 .ie-vista.activo b { color: #f2c94c; }
-.ie-vista-ir { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; border-style: dashed; border-color: #b8423a; color: #8f2d26; }
-.ie-vista-ir b { color: #8f2d26; }
-.ie-vista-ir:hover, .ie-vista-ir:focus-visible { background: #fbeceb; }
 .ie-orden { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 16px; font-weight: 600; }
 .ie-orden select { min-height: 44px; padding: 6px 10px; border-radius: 10px; border: 1px solid #c9d2e3; background: #ffffff; color: var(--ie-tinta); font: 500 16px/1.2 Inter, system-ui, sans-serif; max-width: 100%; }
 .ie-vista-d { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--ie-suave); }
@@ -206,6 +203,49 @@
 .ie-ident-v { display: block; margin-top: 2px; font-size: 17px; font-weight: 700; line-height: 1.4; color: var(--ie-tinta); overflow-wrap: anywhere; }
 .ie-ident-v small { font-size: 14px; font-weight: 400; color: var(--ie-suave); }
 .ie-poderes { margin: 18px 0 0; }
+/* El radar de la ASF en la ficha estatal (fusión del Radar por entidad, 21-10-2026). */
+.ie-rad { margin: 18px 0 0; padding: 14px; border-radius: 14px; border: 1px solid var(--ie-borde); border-left: 6px solid #2f8a4f; background: var(--ie-fondo); }
+.ie-rad.ie-rad-ambar { border-left-color: #d99a00; }
+.ie-rad.ie-rad-rojo { border-left-color: #b8423a; }
+.ie-rad .ie-h3 { margin-top: 0; }
+.ie-rad-sem { margin: 0 0 10px; font-size: 17px; line-height: 1.5; }
+.ie-rad-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 8px; margin: 0 0 12px; }
+.ie-rad-cifras div { padding: 10px 12px; border-radius: 12px; background: #ffffff; border: 1px solid var(--ie-borde); }
+.ie-rad-cifras small { display: block; font-size: 14px; color: var(--ie-suave); }
+.ie-rad-cifras b { display: block; margin-top: 2px; font: 800 22px/1.25 'JetBrains Mono', ui-monospace, monospace; color: var(--ie-tinta); }
+.ie-rad-comp p { margin: 0 0 8px; font-size: 16px; line-height: 1.5; }
+.ie-rad-b { display: grid; grid-template-columns: minmax(0, 9em) 1fr auto; align-items: center; gap: 10px; margin: 0 0 6px; font-size: 16px; }
+.ie-rad-barra { height: 14px; border-radius: 999px; background: #e6eaf2; overflow: hidden; }
+.ie-rad-barra span { display: block; height: 100%; border-radius: 999px; background: #2f8a4f; }
+.ie-rad-barra .ie-rad-ambar { background: #d99a00; }
+.ie-rad-barra .ie-rad-rojo { background: #b8423a; }
+.ie-rad-barra .ie-rad-prom { background: #7b8597; }
+.ie-rad-b b { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.ie-rad-op { margin: 6px 0 10px; font-size: 15px; line-height: 1.5; color: var(--ie-suave); }
+.ie-rad-lug { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
+.ie-rad-lug li { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border-radius: 12px; background: #ffffff; border: 1px solid var(--ie-borde); font-size: 16px; line-height: 1.45; }
+.ie-rad-l-n { flex: 0 0 auto; min-width: 3.4em; text-align: center; }
+.ie-rad-l-n b { display: block; font: 800 22px/1.1 'JetBrains Mono', ui-monospace, monospace; color: var(--ie-azul); }
+.ie-rad-l-n small { font-size: 14px; color: var(--ie-suave); }
+.ie-rad-l-tx small { display: block; margin-top: 2px; font-size: 15px; color: var(--ie-suave); }
+.ie-rad-pila { display: flex; height: 18px; border-radius: 999px; overflow: hidden; background: #e6eaf2; margin: 0 0 10px; }
+.ie-rad-seg { display: block; height: 100%; }
+.ie-rad-vacia { padding: 0 10px; font-size: 14px; line-height: 18px; color: var(--ie-suave); }
+.ie-rad-tabla-caja { overflow-x: auto; }
+.ie-rad-tabla { width: 100%; border-collapse: collapse; font-size: 16px; }
+.ie-rad-tabla th, .ie-rad-tabla td { padding: 8px 10px; border-bottom: 1px solid var(--ie-borde); text-align: right; white-space: nowrap; }
+.ie-rad-tabla th[scope="row"], .ie-rad-tabla thead th:first-child { text-align: left; white-space: normal; }
+.ie-rad-pto { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+@media (max-width: 560px) {
+  .ie-rad { padding: 12px 10px; }
+  .ie-rad-b { grid-template-columns: 1fr auto; }
+  .ie-rad-b .ie-rad-barra { grid-column: 1 / -1; grid-row: 2; }
+  .ie-rad-tabla thead { display: none; }
+  .ie-rad-tabla, .ie-rad-tabla tbody, .ie-rad-tabla tr, .ie-rad-tabla th, .ie-rad-tabla td { display: block; width: 100%; }
+  .ie-rad-tabla tr { padding: 6px 0; border-bottom: 1px solid var(--ie-borde); }
+  .ie-rad-tabla th, .ie-rad-tabla td { border: 0; padding: 3px 0; text-align: left; white-space: normal; }
+  .ie-rad-tabla td::before { content: attr(data-etq) ': '; color: var(--ie-suave); }
+}
 
 .ie-senales { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: q; }
 .ie-senal { border: 1px solid var(--ie-borde); border-left: 6px solid currentColor; border-radius: 12px; padding: 12px 16px; background: #ffffff; scroll-margin-top: 90px; }

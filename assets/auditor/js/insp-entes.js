@@ -507,6 +507,65 @@
     return s ? s[0] + s[1] : p ? p[0] + p[1] : -1;
   }
 
+  /* ---------------- El radar de la ASF (estados) ---------------- */
+  /* El Radar por entidad, que fue la aplicación 2 del Modo Inspector, se
+     fusionó con la ficha estatal (pedido del autor, 21-10-2026): cada estado
+     trae su radar en su ficha técnica, y los 32 se ordenan con sus tres
+     criterios en el directorio. Las cifras las calcula insp_radar.py. */
+  var RAD = D.radar;
+  var COLOR_ENTE = { gob: '#1d4f91', mun: '#c2571a', otr: '#7b8597' };
+  var SEM_CLASE = { rojo: 'ie-rad-rojo', ambar: 'ie-rad-ambar', verde: 'ie-rad-verde' };
+  function radOrden(i) {
+    return function (a, b) { var A = RAD.est[a.id], B = RAD.est[b.id]; return (B ? B.v[i] : -1) - (A ? A.v[i] : -1); };
+  }
+  function radValor(r, i) { return i === 0 ? '$' + r.v[0].toFixed(2) : i === 1 ? mdpF(r.v[1] / 1e6) : r.v[2].toFixed(1) + ' %'; }
+  function radFuente() {
+    return '<a href="' + esc(RAD.fuente.url) + '" target="_blank" rel="noopener">' + esc(RAD.fuente.corto) + ', pp. ' + esc(RAD.fuente.pags) + ' ↗</a>' + ref('ref-asf-mdb2024');
+  }
+  function radarHtml(e) {
+    var r = RAD.est[e.abbr];
+    if (!r) return '';
+    var t = r.t, x = r.v[0], prom = RAD.prom, s = RAD.sem[r.s], tope = Math.max(x, prom);
+    var comp = x >= prom
+      ? 'Es <b>' + (x / prom).toFixed(1) + ' veces</b> el promedio nacional ($' + prom.toFixed(2) + ').'
+      : 'Está <b>$' + (prom - x).toFixed(2) + ' por debajo</b> del promedio nacional ($' + prom.toFixed(2) + ').';
+    var seg = '', filas = '';
+    r.d.forEach(function (d) {
+      var w = t[7] ? d[3] / t[7] * 100 : 0;
+      if (w > 0) seg += '<span class="ie-rad-seg" style="width:' + w.toFixed(3) + '%;background:' + COLOR_ENTE[d[1]] + '" title="' + esc(d[0]) + ': ' + w.toFixed(1) + ' %"></span>';
+      filas += '<tr><th scope="row"><span class="ie-rad-pto" style="background:' + COLOR_ENTE[d[1]] + '" aria-hidden="true"></span>' + esc(d[0]) + '</th>' +
+        '<td data-etq="Por aclarar">' + mdpF(d[3] / 1e6) + '</td><td data-etq="Parte">' + w.toFixed(1) + ' %</td>' +
+        '<td data-etq="Auditorías">' + fmt(d[2]) + '</td><td data-etq="Acciones">' + fmt(d[4]) + '</td></tr>';
+    });
+    var lugares = RAD.crit.map(function (c, i) {
+      return '<li><span class="ie-rad-l-n"><b>' + r.l[i] + '.º</b><small>de 32</small></span><span class="ie-rad-l-tx"><b>' + c[2] + ' ' + esc(c[1]) + '</b> ' +
+        radValor(r, i) + ' ' + chip(c[5]) + '<small>' + esc(c[3]) + '</small></span></li>';
+    }).join('');
+    var matriz = e.name === r.ent ? '' : ' En la Matriz figura como «' + esc(r.ent) + '».';
+    return '<section class="ie-rad ' + SEM_CLASE[r.s] + '" aria-labelledby="ieRadTit">' +
+      '<h3 class="ie-h3" id="ieRadTit">🚩 Su radar de la Auditoría Superior: su lugar entre los 32 estados</h3>' +
+      '<p class="ie-rad-sem"><span aria-hidden="true">' + s[0] + '</span> <b>' + esc(s[1]) + '</b>: por cada $100 revisados quedó ' + esc(s[2]) + '. ' + chip('derivado') + '</p>' +
+      '<div class="ie-rad-cifras">' +
+        '<div><small>Por aclarar ' + chip('oficial') + '</small><b>' + mdpF(t[7] / 1e6) + '</b></div>' +
+        '<div><small>De cada $100 revisados ' + chip('derivado') + '</small><b>$' + x.toFixed(2) + '</b></div>' +
+        '<div><small>Auditorías · acciones ' + chip('oficial') + '</small><b>' + fmt(t[0]) + ' · ' + fmt(t[3]) + '</b></div></div>' +
+      '<div class="ie-rad-comp"><p>' + comp + '</p>' +
+        '<div class="ie-rad-b"><span>' + esc(e.name) + '</span><span class="ie-rad-barra"><span class="' + SEM_CLASE[r.s] + '" style="width:' + (x / tope * 100).toFixed(2) + '%"></span></span><b>$' + x.toFixed(2) + '</b></div>' +
+        '<div class="ie-rad-b"><span>Promedio nacional</span><span class="ie-rad-barra"><span class="ie-rad-prom" style="width:' + (prom / tope * 100).toFixed(2) + '%"></span></span><b>$' + prom.toFixed(2) + '</b></div>' +
+        '<p class="ie-rad-op">Operación: ' + mdpF(t[7] / 1e6) + ' por aclarar ÷ ' + mdpF(t[2] / 1e6) + ' de muestra auditada × 100.</p></div>' +
+      '<h4 class="ie-h4">Su lugar entre los 32 ' + chip('derivado') + '</h4><ol class="ie-rad-lug">' + lugares + '</ol>' +
+      '<h4 class="ie-h4">¿Quién tiene que aclararlo? ' + chip('oficial') + '</h4>' +
+      '<div class="ie-rad-pila" role="img" aria-label="Reparto de lo que quedó por aclarar entre los entes del estado">' + (seg || '<span class="ie-rad-vacia">Sin monto por aclarar</span>') + '</div>' +
+      '<div class="ie-rad-tabla-caja"><table class="ie-rad-tabla"><thead><tr><th scope="col">Ente</th><th scope="col">Por aclarar</th><th scope="col">Parte ' + chip('derivado') + '</th><th scope="col">Auditorías</th><th scope="col">Acciones</th></tr></thead>' +
+        '<tbody>' + filas + '</tbody></table></div>' +
+      '<p class="ie-rad-op">La parte de cada ente divide su monto por aclarar entre el del estado (' + mdpF(t[7] / 1e6) + ') × 100. «Otros» es como la Matriz agrupa a los entes que no son el gobierno estatal ni los municipios.' + matriz + '</p>' +
+      '<h4 class="ie-h4">Más de la Matriz ' + chip('oficial') + '</h4>' +
+      celdas([['Universo seleccionado', mdpF(t[1] / 1e6)], ['Muestra auditada', mdpF(t[2] / 1e6)], ['Pliegos de observaciones (PO)', fmt(t[4])],
+        ['Promociones de responsabilidad (PRAS)', fmt(t[5])], ['Recuperado durante la auditoría', mdpF(t[6] / 1e6)]]) +
+      '<p class="ie-rad-op">Fuente: ' + radFuente() + '. ' + esc(RAD.nota) + ' Los criterios y el semáforo son de Auditavisión: <a href="#ie-metodo-radar">cómo se calculan</a>.</p>' +
+      '</section>';
+  }
+
   /* ---------------- Filtros y orden ---------------- */
   var VISTAS = {
     todos: { et: 'Todos', niv: ['federal', 'estatal', 'municipal'] },
@@ -523,6 +582,10 @@
       d: 'Dos documentos oficiales dicen cosas distintas sobre el mismo dinero. Ordenados de mayor a menor diferencia en pesos.' },
     graves: { et: '🔴 Con señal fuerte', niv: ['federal', 'estatal', 'municipal'],
       f: function (x) { return diag(x).some(function (d) { return d.e === 'grave'; }); } },
+    bandera: { et: '🚩 Bandera roja de la ASF', niv: ['estatal'], radar: true,
+      f: function (x) { return !!(RAD.est[x.id] && RAD.est[x.id].s === 'rojo'); }, orden: radOrden(0),
+      d: 'De cada $100 que la Auditoría Superior revisó del dinero federal de los estados en la Cuenta Pública 2024, quedaron <b>$' + RAD.prom.toFixed(2) + '</b> por aclarar ' + chip('derivado') +
+        ' (promedio nacional). Bandera roja: el estado dejó 1.5 veces el promedio o más (≥ $' + (RAD.prom * 1.5).toFixed(2) + '). Ordenados por cada $100 revisados. Por aclarar no es robado.' },
     nocuentas: { et: '📒 No rindieron cuentas en 2024', niv: ['municipal'],
       f: function (x) { return x.abbr !== 'CDMX' && !(x.pad && x.pad.length > 2); },
       orden: function (a, b) { return munRecibido(b) - munRecibido(a); },
@@ -539,8 +602,16 @@
     } },
     peor: { et: 'Índice: el más bajo primero', local: true, f: function (a, b) { return idxOrden(a, 1) - idxOrden(b, 1); } },
     mejor: { et: 'Índice: el más alto primero', local: true, f: function (a, b) { return idxOrden(b, -1) - idxOrden(a, -1); } },
-    nombre: { et: 'Por nombre (A-Z)', f: function (a, b) { return a.nombre.localeCompare(b.nombre, 'es'); } }
+    nombre: { et: 'Por nombre (A-Z)', f: function (a, b) { return a.nombre.localeCompare(b.nombre, 'es'); } },
+    /* Los tres criterios del Radar por entidad, solo para los estados. */
+    radInt: { et: 'ASF: por cada $100 revisados, mayor primero', est: 0, f: radOrden(0) },
+    radMonto: { et: 'ASF: más dinero por aclarar primero', est: 1, f: radOrden(1) },
+    radMun: { et: 'ASF: mayor peso de los municipios primero', est: 2, f: radOrden(2) }
   };
+  function ordenVale(k) {
+    var o = ORDENES[k];
+    return !!o && !(o.local && st.nivel === 'federal') && !('est' in o && st.nivel !== 'estatal');
+  }
   var cacheIdx = {};
   function idxDe(x) {
     var k = x.nivel + ':' + x.id;
@@ -565,6 +636,9 @@
       extra = 'Diferencia entre documentos: ' + simMdp(magnitud(x)) + ' ' + chip('derivado');
     } else if (x.nivel === 'federal') {
       extra = 'Ejerció ' + simMdp(x.fed.cp2025.ejercido) + ' en 2025 ' + chip('oficial');
+    } else if (x.nivel === 'estatal' && RAD.est[x.id] && (st.vista === 'bandera' || 'est' in ORDENES[st.orden])) {
+      var rr = RAD.est[x.id], ci = 'est' in ORDENES[st.orden] ? ORDENES[st.orden].est : 0;
+      extra = RAD.sem[rr.s][0] + ' ' + esc(RAD.crit[ci][1]) + ': ' + radValor(rr, ci) + ' · ' + rr.l[ci] + '.º de 32 ' + chip(RAD.crit[ci][5]);
     } else if (x.nivel === 'estatal') {
       extra = 'Ramos 28 y 33 en 2026: ' + simMdp(x.est.gasto) + ' ' + chip(D.fe.gasto.estado);
     } else {
@@ -610,22 +684,21 @@
   function pintarControles(todos) {
     var cont = document.getElementById('ieCtl');
     if (VISTAS[st.vista].niv.indexOf(st.nivel) === -1) st.vista = 'todos';
-    if (ORDENES[st.orden].local && st.nivel === 'federal') st.orden = 'catalogo';
+    if (!ordenVale(st.orden)) st.orden = 'catalogo';
     var V = VISTAS[st.vista];
     var chips = Object.keys(VISTAS).filter(function (k) { return VISTAS[k].niv.indexOf(st.nivel) > -1; }).map(function (k) {
       var n = k === 'todos' ? todos.length : todos.filter(VISTAS[k].f).length;
       return '<button type="button" class="ie-vista' + (k === st.vista ? ' activo' : '') + '" aria-pressed="' + (k === st.vista) + '" data-vista="' + k + '">' +
         VISTAS[k].et + ' <b>' + fmt(n) + '</b></button>';
-    }).join('') +
-      /* El Radar por entidad (antes la aplicacion 2) vive dentro del Auditor
-         desde el 21-10-2026: esta vista abre su pagina. */
-      '<a class="ie-vista ie-vista-ir" href="herramienta-inspector-radar.html">🚩 Radar por entidad <b>32</b> <span aria-hidden="true">›</span></a>';
-    var ord = Object.keys(ORDENES).filter(function (k) { return !(ORDENES[k].local && st.nivel === 'federal'); }).map(function (k) {
+    }).join('');
+    var ord = Object.keys(ORDENES).filter(ordenVale).map(function (k) {
       return '<option value="' + k + '"' + (k === st.orden ? ' selected' : '') + '>' + ORDENES[k].et + '</option>';
     }).join('');
     cont.innerHTML = '<div class="ie-vistas" role="group" aria-label="Filtrar la lista">' + chips + '</div>' +
       '<div class="ie-orden"><label for="ieOrden">Ordenar</label><select id="ieOrden">' + ord + '</select></div>' +
-      (V.d ? '<p class="ie-vista-d">' + V.d + '</p>' : '');
+      (V.d ? '<p class="ie-vista-d">' + V.d + '</p>' : '') +
+      ('est' in ORDENES[st.orden] ? '<p class="ie-vista-d"><b>' + RAD.crit[ORDENES[st.orden].est][2] + ' ' + esc(RAD.crit[ORDENES[st.orden].est][1]) + ':</b> ' +
+        esc(RAD.crit[ORDENES[st.orden].est][3]) + ' ' + chip(RAD.crit[ORDENES[st.orden].est][5]) + ' Fuente: ' + radFuente() + '.</p>' : '');
   }
 
   function pintarLista() {
@@ -955,7 +1028,7 @@
       : 'INEGI, EFIPEM municipal 2016-2025' + refMun('inegi') + ' · SHCP, Sistema de Recursos Federales Transferidos 2024' + refMun('srft') +
         ' · INAFED, presidencias municipales' + refMun('inafed') + ' · ASF, Matriz de Datos Básicos CP 2024' + refMun('asf') + '.';
     var verMas = esEstado
-      ? '<div class="ie-nota"><b>Para seguir:</b> <span class="ie-chipas"><a class="ie-chipa" href="herramienta-inspector-radar.html">🚩 Radar por entidad</a>' +
+      ? '<div class="ie-nota"><b>Para seguir:</b> <span class="ie-chipas"><a class="ie-chipa" href="?nivel=estatal&amp;orden=radInt#ie-dir">🚩 Los 32 estados, por lo que quedó por aclarar</a>' +
         '<a class="ie-chipa" href="numeros-las-32-entidades.html">🗺️ Las 32 entidades</a></span></div>'
       : '<div class="ie-nota"><b>Para seguir:</b> <span class="ie-chipas">' + (e ? '<a class="ie-chipa" href="#ente=estatal:' + e.abbr + '">🗺️ El gobierno de ' + esc(e.name) + '</a>' : '') +
         '<a class="ie-chipa" href="numeros-los-municipios.html">🏙️ Los municipios, en Números</a></span></div>';
@@ -965,6 +1038,7 @@
       '<h3 class="ie-h3">Ficha</h3>' + celdas(ident) +
       (esEstado ? estPoderes(e) : '') +
       '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
+      (esEstado ? radarHtml(e) : '') +
       '<h3 class="ie-h3">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado) +
       verMas + pie(fuentes, ente);
   }
@@ -1246,8 +1320,10 @@
   /* ?nivel= y ?q= (los enlaces del antiguo directorio, que redirige aquí). */
   var params = new URLSearchParams(location.search);
   {
-    var pn = params.get('nivel'), pq = params.get('q');
+    var pn = params.get('nivel'), pq = params.get('q'), po = params.get('orden'), pv = params.get('vista');
     if (pn && VISTAS.todos.niv.indexOf(pn) > -1) { st.nivel = pn; if (pn === 'municipal') cargarMun().catch(function () {}); }
+    if (po && ordenVale(po)) st.orden = po;
+    if (pv && VISTAS[pv] && VISTAS[pv].niv.indexOf(st.nivel) > -1) st.vista = pv;
     if (pq) { q.value = pq; qx.hidden = false; st.q = pq.trim(); }
   }
   avisoMun('');

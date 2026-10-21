@@ -657,12 +657,12 @@ HERRAMIENTAS = [
      'verificador', [
          ('inspasf', '🏛️', 'Qué encontró la ASF', 'El gasto de 2024',
           'Cuánto revisó la Auditoría Superior en el gasto de 2024, qué acciones promovió, cuánto quedó por aclarar y cuánto le toca a tu estado.'),
-         # El Radar por entidad (antes la aplicacion 2) vive desde el
-         # 21-10-2026 dentro del Auditor de entes publicos (insp_entes.subpaginas).
+         # El Radar por entidad (antes la aplicacion 2) se fusiono el
+         # 21-10-2026 con la ficha estatal del Auditor de entes publicos.
          ('expedientes.html', '📂', 'Expedientes de casos', 'Casos por aclarar',
           'Los casos de alto impacto que siguen por aclarar, cada uno con su expediente y sus documentos. Tienen su propia página.'),
          ('inspentes', '🏢', 'Auditor de entes públicos', 'Busca y verifica',
-          'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar. Incluye el Radar por entidad: los 32 estados, lado a lado.'),
+          'Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar. Cada estado trae su radar de la Auditoría Superior: su lugar entre los 32.'),
          ('inspnota', '📰', 'Contrasta una nota', 'Busca y verifica',
           'Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
@@ -903,7 +903,7 @@ def herramienta_divisiones(h, n, ruta):
         # vivian aqui (#modulos, #pregunta) llevan a su pagina.
         'hash_a_pagina': dict([(t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas] +
                               [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0]),
-                               ('inspradar', 'herramienta-inspector-radar.html')]),
+                               ('inspradar', 'herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir')]),
         'secciones': [{
             'id': 'divisiones', 'titulo': 'Dos maneras de entrarle', 'sin_cab': False,
             'texto': 'Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.',
@@ -4885,6 +4885,9 @@ REDIRECCIONES = {
     # El directorio del Auditor de entes publicos volvio a su pagina el
     # 21-10-2026 (pedido del autor): un solo navegador con el buscador, los
     # niveles y los filtros. ?nivel=, ?q= y #ente= viajan con la redireccion.
+    # El Radar por entidad se fusiono con la ficha estatal (21-10-2026).
+    'herramienta-inspector-radar.html': ('herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir', 'Radar por entidad',
+                                         'El radar de cada estado está ahora en su ficha técnica, y los 32 estados se ordenan en el directorio del Auditor de entes públicos.'),
     'herramienta-inspector-entes-directorio.html': ('herramienta-inspector-entes.html', 'Directorio de entes públicos',
                                                     'El directorio, el buscador y los filtros están ahora juntos en el Auditor de entes públicos.'),
     # Los tres pasos de Contrasta una nota se juntaron en una sola pagina el

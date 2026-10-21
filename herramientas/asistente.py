@@ -74,7 +74,7 @@ def _fichas(d):
                     'txt': ('Lo que la plataforma tiene verificado de %s: su deuda pública según el Sistema de Alertas de Hacienda '
                             'y lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió en 2024. '
                             'Un monto por aclarar no es un desfalco comprobado: es lo que carecía de documentación al cierre de la auditoría.') % e['name'],
-                    'ci': ci, 'fu': fu, 'ir': ['herramienta-inspector-radar.html', 'Radar por entidad'],
+                    'ci': ci, 'fu': fu, 'ir': ['herramienta-inspector-entes.html#ente=estatal:' + e['abbr'], 'el Auditor de entes públicos'],
                     'k': '%s %s estado entidad deuda asf' % (e['abbr'], e.get('capital', ''))})
 
     # 4. Lo que gana cada cargo (Tu contra ellos): neto mensual y anual, con
